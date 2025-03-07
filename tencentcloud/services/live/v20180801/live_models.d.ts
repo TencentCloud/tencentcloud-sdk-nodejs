@@ -290,16 +290,11 @@ export interface DescribeLiveStreamPublishedListRequest {
      */
     DomainName: string;
     /**
-     * 结束时间。
-  UTC 格式，例如：2016-06-30T19:00:00Z。
-  不超过当前时间。
-  注意：EndTime和StartTime相差不可超过30天。
+     * 结束时间。UTC 格式，例如：2016-06-30T19:00:00Z。不超过当前时间。注意：EndTime和StartTime相差不可超过1个月。
      */
     EndTime: string;
     /**
-     * 起始时间。
-  UTC 格式，例如：2016-06-29T19:00:00Z。
-  最长支持查询60天内数据。
+     * 起始时间。 UTC 格式，例如：2016-06-29T19:00:00Z。最长支持查询2个月内数据。
      */
     StartTime: string;
     /**
@@ -1656,12 +1651,10 @@ export interface DomainCertInfo {
     /**
      * 证书本身标识的域名列表。
   比如: ["*.x.com"]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertDomains?: Array<string>;
     /**
      * 腾讯云ssl的证书Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudCertId?: string;
 }
@@ -2581,23 +2574,23 @@ export interface DescribeLiveStreamEventListResponse {
     /**
      * 推断流事件列表。
      */
-    EventList: Array<StreamEventInfo>;
+    EventList?: Array<StreamEventInfo>;
     /**
      * 分页的页码。
      */
-    PageNum: number;
+    PageNum?: number;
     /**
      * 每页大小。
      */
-    PageSize: number;
+    PageSize?: number;
     /**
      * 符合条件的总个数。
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 总页数。
      */
-    TotalPage: number;
+    TotalPage?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2884,23 +2877,23 @@ export interface PushAuthKeyInfo {
     /**
      * 域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 是否启用，0：关闭，1：启用。
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 主鉴权 Key。
      */
-    MasterAuthKey: string;
+    MasterAuthKey?: string;
     /**
      * 备鉴权 Key。
      */
-    BackupAuthKey: string;
+    BackupAuthKey?: string;
     /**
      * 有效时间，单位：秒。
      */
-    AuthDelta: number;
+    AuthDelta?: number;
 }
 /**
  * CreateCasterInputPushUrl返回参数结构体
@@ -3055,7 +3048,6 @@ export interface DomainInfo {
     /**
      * 0: 标准直播。
   1: 小程序直播。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsMiniProgramLive?: number;
 }
@@ -3335,15 +3327,11 @@ export interface AddDelayLiveStreamRequest {
  */
 export interface DescribeLiveStreamEventListRequest {
     /**
-     * 起始时间。
-  UTC 格式，例如：2018-12-29T19:00:00Z。
-  支持查询60天内的历史记录。
+     * 起始时间。 UTC 格式，例如：2018-12-29T19:00:00Z。支持查询2个月内的历史记录。
      */
     StartTime: string;
     /**
-     * 结束时间。
-  UTC 格式，例如：2018-12-29T20:00:00Z。
-  不超过当前时间，且和起始时间相差不得超过30天。
+     * 结束时间。UTC 格式，例如：2018-12-29T20:00:00Z。不超过当前时间，且和起始时间相差不得超过1个月。
      */
     EndTime: string;
     /**
@@ -3803,24 +3791,20 @@ export interface DescribeScreenshotTaskRequest {
 export interface BackupStreamGroupInfo {
     /**
      * 流名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StreamName?: string;
     /**
      * 主备流信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupList?: Array<BackupStreamDetailData>;
     /**
      * 是否对该流开启了择优调度。
   0 - 未开启。
   1 - 已开启。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OptimalEnable?: number;
     /**
      * 域名分组的分组名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostGroupName?: string;
 }
@@ -4885,15 +4869,15 @@ export interface BatchDomainOperateErrors {
     /**
      * 操作失败的域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * API3.0错误码。
      */
-    Code: string;
+    Code?: string;
     /**
      * API3.0错误信息。
      */
-    Message: string;
+    Message?: string;
 }
 /**
  * CreateLivePadTemplate请求参数结构体
@@ -5184,17 +5168,14 @@ export interface XP2PDetailInfo {
     Time?: string;
     /**
      * 类型，分live和vod两种。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 流ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StreamName?: string;
     /**
      * AppId。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
 }
@@ -7371,55 +7352,55 @@ export interface SnapshotTemplateInfo {
     /**
      * 模板 ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 模板名称。
      */
-    TemplateName: string;
+    TemplateName?: string;
     /**
      * 截图时间间隔，5-300秒。
      */
-    SnapshotInterval: number;
+    SnapshotInterval?: number;
     /**
      * 截图宽度，范围：0-3000。
   0：原始宽度并适配原始比例。
      */
-    Width: number;
+    Width?: number;
     /**
      * 截图高度，范围：0-2000。
   0：原始高度并适配原始比例。
      */
-    Height: number;
+    Height?: number;
     /**
      * 是否开启鉴黄，0：不开启，1：开启。
      */
-    PornFlag: number;
+    PornFlag?: number;
     /**
      * Cos 应用 ID。
      */
-    CosAppId: number;
+    CosAppId?: number;
     /**
      * Cos Bucket名称。
      */
-    CosBucket: string;
+    CosBucket?: string;
     /**
      * Cos 地域。
      */
-    CosRegion: string;
+    CosRegion?: string;
     /**
      * 模板描述。
      */
-    Description: string;
+    Description?: string;
     /**
      * Cos Bucket文件夹前缀。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CosPrefix: string;
+    CosPrefix?: string;
     /**
      * Cos 文件名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CosFileName: string;
+    CosFileName?: string;
 }
 /**
  * DescribeLiveTimeShiftBillInfoList返回参数结构体
@@ -9492,35 +9473,35 @@ export interface RecordTask {
     /**
      * 录制任务ID。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 推流域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 推流路径。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 任务开始时间，Unix时间戳。
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 任务结束时间，Unix时间戳。
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 录制模板ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
      */
-    Stopped: number;
+    Stopped?: number;
 }
 /**
  * ModifyCaster请求参数结构体
@@ -9792,23 +9773,23 @@ export interface RefererAuthConfig {
     /**
      * 域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 是否启用，0：关闭，1：启用。
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 名单类型，0：黑名单，1：白名单。
      */
-    Type: number;
+    Type?: number;
     /**
      * 是否允许空Referer，0：不允许，1：允许。
      */
-    AllowEmpty: number;
+    AllowEmpty?: number;
     /**
      * 名单列表，以分号(;)分隔。
      */
-    Rules: string;
+    Rules?: string;
 }
 /**
  * 转码详细信息。
@@ -10862,23 +10843,19 @@ export interface ModifyLivePadTemplateRequest {
 export interface BackupStreamDetailData {
     /**
      * 推流域名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainName?: string;
     /**
      * 推流路径。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppName?: string;
     /**
      *  UTC 格式，例如：2018-06-29T19:00:00Z。
   注意：和北京时间相差8小时。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublishTime?: string;
     /**
      * 推流唯一标识。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamSequence?: string;
     /**
@@ -10887,14 +10864,12 @@ export interface BackupStreamDetailData {
   拉流转推(1234)；
   注意：拉流转推来源括号中为拉流转推的任务
    ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceFrom?: string;
     /**
      * 主备标识。
   当前流为主流：1，
   当前流为备流: 0。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterFlag?: number;
 }

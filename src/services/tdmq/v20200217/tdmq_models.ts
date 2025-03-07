@@ -1601,6 +1601,17 @@ export interface ModifyRocketMQNamespaceResponse {
 }
 
 /**
+ * 实例维度组合数组
+ */
+export interface DimensionInstance {
+  /**
+   * 实例的维度组合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dimensions: Array<DimensionOpt>
+}
+
+/**
  * 面向运营端的虚拟集群信息
  */
 export interface InternalTenant {
@@ -4845,6 +4856,25 @@ export interface ConsumerLog {
 }
 
 /**
+ * DescribeRocketMQTopUsages返回参数结构体
+ */
+export interface DescribeRocketMQTopUsagesResponse {
+  /**
+   * 指标值列表
+   */
+  Values?: Array<number | bigint>
+  /**
+   * 指标值对应的维度组合，本接口存在以下几个维度：
+tenant，namespace，group，topic
+   */
+  Dimensions?: Array<DimensionInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateEnvironmentRole返回参数结构体
  */
 export interface CreateEnvironmentRoleResponse {
@@ -6615,24 +6645,9 @@ export interface Subscription {
 }
 
 /**
- * SendMessages返回参数结构体
+ * 指标维度对象
  */
-export interface SendMessagesResponse {
-  /**
-   * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MessageId?: string
-  /**
-   * 返回的错误消息，如果返回为 “”，说明没有错误
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DimensionOpt = null
 
 /**
  * Rocketmq消息消费track信息
@@ -7082,6 +7097,30 @@ export interface DescribeRocketMQConsumerConnectionDetailRequest {
    * 按主题类型过滤查询结果，可选择Normal, GlobalOrder, PartitionedOrder, Retry, Transaction, DeadLetter
    */
   FilterType?: Array<string>
+}
+
+/**
+ * DescribeRocketMQTopUsages请求参数结构体
+ */
+export interface DescribeRocketMQTopUsagesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 指标名称，支持以下：
+consumeLag，消费组堆积数量
+deadLetterCount，死信数量
+topicRateIn,   Topic生产速率
+topicRateOut，Topic消费速率
+topicStorageSize，Topic存储空间
+topicApiCalls，Topic API调用次数
+   */
+  MetricName: string
+  /**
+   * 排序数量，最大20
+   */
+  Limit: number
 }
 
 /**
@@ -8067,6 +8106,26 @@ export interface DescribeRocketMQConsumeStatsRequest {
    * 消费组
    */
   ConsumerGroup: string
+}
+
+/**
+ * SendMessages返回参数结构体
+ */
+export interface SendMessagesResponse {
+  /**
+   * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageId?: string
+  /**
+   * 返回的错误消息，如果返回为 “”，说明没有错误
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -165,32 +165,26 @@ export interface DeleteClusterResponse {
 export interface CosCredentials {
     /**
      * 会话Token
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionToken?: string;
     /**
      * 临时应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpAppId?: string;
     /**
      * 临时调用者身份ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpSecretId?: string;
     /**
      * 临时密钥
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpSecretKey?: string;
     /**
      * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpiredTime?: number;
     /**
      * 所在域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
 }
@@ -267,7 +261,6 @@ export interface DescribeUnitApiUseDetailRequest {
 export interface ClusterV2 {
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
@@ -447,7 +440,6 @@ export interface ClusterV2 {
     KuberneteNativeSecret?: string;
     /**
      * 是否开启cls日志功能
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableLogCollection?: boolean;
 }
@@ -616,67 +608,54 @@ export interface ForceSchedule {
 export interface SimpleApplication {
     /**
      * 应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 应用类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationType?: string;
     /**
      * 应用微服务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MicroserviceType?: string;
     /**
      * ApplicationDesc
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationDesc?: string;
     /**
      * ProgLang
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgLang?: string;
     /**
      * ApplicationResourceType
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationResourceType?: string;
     /**
      * CreateTime
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * UpdateTime
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * ApigatewayServiceId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApigatewayServiceId?: string;
     /**
      * ApplicationRuntimeType
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationRuntimeType?: string;
     /**
      * Apm业务系统id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AmpInstanceId?: string;
     /**
      * Apm业务系统Name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApmInstanceName?: string;
 }
@@ -848,12 +827,10 @@ export interface ReleaseFileConfigRequest {
 export interface Tag {
     /**
      * 标签键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey?: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue?: string;
 }
@@ -2157,47 +2134,38 @@ export interface UpdateHealthCheckSettingsRequest {
 export interface ScalableRule {
     /**
      * RuleId值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: string;
     /**
      * Name值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * ExpandVmCountLimit值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpandVmCountLimit?: number;
     /**
      * ShrinkVmCountLimit值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ShrinkVmCountLimit?: number;
     /**
      * GroupCount值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupCount?: number;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Desc?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 是否关闭指标伸缩, 默认0, 0:打开指标伸缩 1:关闭指标伸缩
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisableMetricAS?: number;
     /**
      * 开启定时伸缩规则, 默认0, 0:关闭定时伸缩 1:开启定时伸缩
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableCronAS?: number;
 }
@@ -2341,22 +2309,18 @@ export interface ShrinkGroupResponse {
 export interface CosUploadInfo {
     /**
      * 程序包ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgId?: string;
     /**
      * 桶
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
     /**
      * 目标地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 存储路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
     /**
@@ -2607,42 +2571,34 @@ export interface RepositoryInfo {
     RepositoryId?: string;
     /**
      * 仓库名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryName?: string;
     /**
      * 仓库类型（默认仓库：default，私有仓库：private）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryType?: string;
     /**
      * 仓库描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryDesc?: string;
     /**
      * 仓库是否正在被使用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUsed?: boolean;
     /**
      * 仓库创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 仓库桶名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BucketName?: string;
     /**
      * 仓库桶所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BucketRegion?: string;
     /**
      * 仓库目录
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Directory?: string;
 }
@@ -2688,27 +2644,22 @@ export interface DescribeDeliveryConfigsResponse {
 export interface TcrRepoInfo {
     /**
      * 地域（填数字）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegistryId?: string;
     /**
      * 实例名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegistryName?: string;
     /**
      * 命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Namespace?: string;
     /**
      * 仓库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoName?: string;
 }
@@ -2873,17 +2824,14 @@ export interface DescribeOverviewInvocationRequest {
 export interface TaskLastExecuteStatus {
     /**
      * 批次ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
     /**
      * 运行状态，RUNNING/SUCCESS/FAIL/HALF/TERMINATED
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: string;
     /**
      * 批次历史ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchLogId?: string;
 }
@@ -2919,97 +2867,78 @@ export interface DescribePublicConfigRequest {
 export interface ImageRepository {
     /**
      * 仓库名,含命名空间,如tsf/nginx
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reponame?: string;
     /**
      * 仓库类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Repotype?: string;
     /**
      * 镜像版本数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagCount?: number;
     /**
      * 是否公共,1:公有,0:私有
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublic?: number;
     /**
      * 是否被用户收藏。true：是，false：否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUserFavor?: boolean;
     /**
      * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsQcloudOfficial?: boolean;
     /**
      * 被所有用户收藏次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FavorCount?: number;
     /**
      * 拉取次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PullCount?: number;
     /**
      * 描述内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreationTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * TcrRepoInfo值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TcrRepoInfo?: TcrRepoInfo;
     /**
      * TcrBindingId值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TcrBindingId?: number;
     /**
      * applicationid值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * ApplicationName值（废弃）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: ScalableRule;
     /**
      * ApplicationName值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationNameReal?: string;
     /**
      * 是否公共,1:公有,0:私有
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Public?: number;
     /**
      * 创建方式：manual | automatic
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateMode?: string;
     /**
      * 仓库名，等同reponame字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoName?: string;
 }
@@ -3033,17 +2962,14 @@ export interface DescribeOverviewInvocationResponse {
 export interface CommonOption {
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelName?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operator?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelValue?: string;
 }
@@ -3080,12 +3006,10 @@ export interface LaneRules {
 export interface TsfPageVmGroup {
     /**
      * 虚拟机部署组总数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 虚拟机部署组列表信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<VmGroupSimple>;
 }
@@ -3439,12 +3363,10 @@ export interface RemoveInstancesRequest {
 export interface TsfPageInstance {
     /**
      * 机器实例总数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 机器实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<Instance>;
 }
@@ -3804,87 +3726,70 @@ export interface OperateApplicationTcrBindingRequest {
 export interface ContainGroup {
     /**
      * 部署组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 镜像server
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Server?: string;
     /**
      * 镜像名，如/tsf/nginx
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoName?: string;
     /**
      * 镜像版本名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagName?: string;
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName?: string;
     /**
      * 初始分配的 CPU 核数，对应 K8S request
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuRequest?: string;
     /**
      * 最大分配的 CPU 核数，对应 K8S limit
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuLimit?: string;
     /**
      * 初始分配的内存 MiB 数，对应 K8S request
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemRequest?: string;
     /**
      * 最大分配的内存 MiB 数，对应 K8S limit
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemLimit?: string;
     /**
      * 部署组备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Alias?: string;
     /**
      * KubeInjectEnable值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeInjectEnable?: boolean;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdatedTime?: string;
 }
@@ -3922,7 +3827,6 @@ export interface DescribeGroupBusinessLogConfigsResponse {
 export interface ContainGroupResult {
     /**
      * 部署组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<ContainGroup>;
     /**
@@ -4102,32 +4006,26 @@ export interface EnableTaskRequest {
 export interface BusinessLogV2 {
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 日志内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
     /**
      * 日志时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: number;
     /**
      * 实例IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIp?: string;
     /**
      * 日志ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogId?: string;
     /**
      * 部署组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
 }
@@ -4175,12 +4073,10 @@ export interface DescribeMicroserviceRequest {
 export interface TsfPageCluster {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 集群列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<Cluster>;
 }
@@ -4190,12 +4086,10 @@ export interface TsfPageCluster {
 export interface InstanceEnrichedInfoPage {
     /**
      * 总数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<InstanceEnrichedInfo>;
 }
@@ -4424,12 +4318,10 @@ export interface StopTaskBatchResponse {
 export interface ServiceStatisticsResult {
     /**
      * 请求模板路径:type为接口时返回，服务时不返回
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
     /**
      * 请求方法:type为接口时返回，服务时不返回
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Method?: string;
     /**
@@ -4458,112 +4350,90 @@ export interface ServiceStatisticsResult {
     MetricDataCurves?: Array<MetricDataCurve>;
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 部署组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 部署组name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 部署组类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType?: string;
     /**
      * 部署组是否存在
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupExist?: number;
     /**
      * 实例是否存在，仅限cvm
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceExist?: number;
     /**
      * 应用id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 微服务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MicroserviceType?: string;
     /**
      * cpu使用率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuPercent?: number;
     /**
      * 已用堆大小,单位KB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeapUsed?: number;
     /**
      * 数据库
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbName?: string;
     /**
      * Script值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Script?: string;
     /**
      * 数据库类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbType?: string;
     /**
      * Apdex值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Apdex?: number;
     /**
      * Qps值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Qps?: number;
     /**
      * 实例在线数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceOnlineCount?: number;
     /**
      * 实例总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceTotalCount?: number;
     /**
      * normal/error
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * normal/warn/error
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorRateLevel?: string;
     /**
      * normal/warn/error
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvgTimeConsumingLevel?: string;
     /**
      * normal/warn/error
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApdexLevel?: string;
 }
@@ -4680,12 +4550,10 @@ export interface RevocationConfigResponse {
 export interface PkgBind {
     /**
      * 应用id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 部署组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
 }
@@ -4846,77 +4714,62 @@ export interface DisableUnitRuleRequest {
 export interface Namespace {
     /**
      * 命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId?: string;
     /**
      * 命名空间编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceCode?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName?: string;
     /**
      * 命名空间描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceDesc?: string;
     /**
      * 默认命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDefault?: string;
     /**
      * 命名空间状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceStatus?: string;
     /**
      * 删除标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteFlag?: boolean;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 集群数组，仅携带集群ID，集群名称，集群类型等基础信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterList?: Array<Cluster>;
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群资源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceResourceType?: string;
     /**
      * 命名空间类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceType?: string;
     /**
      * 是否开启高可用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsHaEnable?: string;
     /**
      * KubeInjectEnable值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeInjectEnable?: boolean;
 }
@@ -4987,77 +4840,62 @@ export interface ModifyClusterRequest {
 export interface Resource {
     /**
      * 资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
      * 资源编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceCode?: string;
     /**
      * 资源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceName?: string;
     /**
      * 资源所属产品编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceCode?: string;
     /**
      * 选取资源使用的Action
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceAction?: string;
     /**
      * 资源数据查询的ID字段名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdField?: string;
     /**
      * 资源数据查询的名称字段名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NameField?: string;
     /**
      * 资源数据查询的ID过滤字段名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SelectIdsField?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreationTime?: number;
     /**
      * 最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastUpdateTime?: number;
     /**
      * 删除标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteFlag?: boolean;
     /**
      * 资源描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceDesc?: string;
     /**
      * 是否可以选择全部
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CanSelectAll?: boolean;
     /**
      * 资源数据查询的模糊查询字段名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SearchWordField?: string;
     /**
      * 排序
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Index?: number;
 }
@@ -5110,24 +4948,20 @@ export interface DeleteImageTagsResponse {
 export interface DeliveryKafkaInfo {
     /**
      * 投递kafka的topic
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Topic?: string;
     /**
      * 采集日志的path
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: Array<string>;
     /**
      * default，默认换行符分行
   time，按时间分行
   custom, 选了custom那么CustomRule就要填入具体的自定义值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LineRule?: string;
     /**
      * 自定义的分行值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRule?: string;
 }
@@ -5338,17 +5172,14 @@ export interface DescribeFlowLastBatchStateRequest {
 export interface MetricDataCurve {
     /**
      * 指标名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricName?: string;
     /**
      * 指标计算方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricFunction?: string;
     /**
      * 指标数据点集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricDataPoints?: Array<MetricDataPoint>;
 }
@@ -5370,22 +5201,18 @@ export interface GroupInfo {
     ClusterType: string;
     /**
      * 集群id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName?: string;
     /**
      * 绑定时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssociateTime?: string;
 }
@@ -5824,12 +5651,10 @@ export interface ContainerGroupDeploy {
 export interface TsfPageNamespace {
     /**
      * 命名空间总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 命名空间列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<Namespace>;
 }
@@ -5851,12 +5676,10 @@ export interface VolumeInfo {
     VolumeConfig?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigMapOptions?: Array<ConfigMapOption>;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EmptyDirOption?: EmptyDirOption;
 }
@@ -5883,12 +5706,10 @@ export interface UpdateApiTimeoutsRequest {
 export interface Metric {
     /**
      * 指标名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 指标计算方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Function?: string;
 }
@@ -6179,12 +6000,10 @@ export interface DescribeSimpleClustersRequest {
 export interface Program {
     /**
      * 数据集ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgramId?: string;
     /**
      * 数据集名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgramName?: string;
     /**
@@ -6199,17 +6018,14 @@ export interface Program {
     DeleteFlag?: boolean;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreationTime?: number;
     /**
      * 最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastUpdateTime?: number;
     /**
      * 数据项列表，无值时返回空数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgramItemList?: Array<ProgramItem>;
 }
@@ -6219,22 +6035,18 @@ export interface Program {
 export interface KafkaDeliveryConfig {
     /**
      * 配置项id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigId?: string;
     /**
      * 配置名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigName?: string;
     /**
      * 采集路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CollectPath?: Array<string>;
     /**
      * kafka vip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KafkaVIp?: string;
     /**
@@ -6244,17 +6056,14 @@ export interface KafkaDeliveryConfig {
     KafkaVPort?: string;
     /**
      * kafka topic
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Topic?: string;
     /**
      * 换行规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LineRule?: string;
     /**
      * 是否需要认证
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableAuth?: boolean;
     /**
@@ -6269,12 +6078,10 @@ export interface KafkaDeliveryConfig {
     Password?: string;
     /**
      * 投递的topic和path
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KafkaInfos?: Array<DeliveryKafkaInfo>;
     /**
      * 是否应用单行规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableGlobalLineRule?: boolean;
     /**
@@ -6354,17 +6161,14 @@ export interface DescribeImageRepositoryRequest {
 export interface IndicatorCoord {
     /**
      * 指标横坐标值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CoordX?: string;
     /**
      * 指标纵坐标值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CoordY?: string;
     /**
      * 指标标签，用于标识附加信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CoordTag?: string;
 }
@@ -6580,7 +6384,6 @@ export interface DescribeGroupsWithPluginRequest {
 export interface ImageRepositoryResult {
     /**
      * 总记录数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -6590,7 +6393,6 @@ export interface ImageRepositoryResult {
     Server?: string;
     /**
      * 列表信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<ImageRepository>;
 }
@@ -6830,12 +6632,10 @@ export interface DeleteLaneRuleRequest {
 export interface MetricDimension {
     /**
      * 指标维度名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 指标维度取值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
 }
@@ -6987,22 +6787,18 @@ export interface PkgList {
     TotalCount?: number;
     /**
      * 程序包信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<PkgInfo>;
     /**
      * 程序包仓库id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryId?: string;
     /**
      * 程序包仓库类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryType?: string;
     /**
      * 程序包仓库名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryName?: string;
 }
@@ -7025,142 +6821,114 @@ export interface CreateProgramResponse {
 export interface Cluster {
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 集群描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterDesc?: string;
     /**
      * 集群类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType?: string;
     /**
      * 集群所属私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 集群状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterStatus?: string;
     /**
      * 集群CIDR
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterCIDR?: string;
     /**
      * 集群总CPU，单位: 核
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterTotalCpu?: number;
     /**
      * 集群总内存，单位: G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterTotalMem?: number;
     /**
      * 集群已使用CPU，单位: 核
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterUsedCpu?: number;
     /**
      * 集群已使用内存，单位: G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterUsedMem?: number;
     /**
      * 集群机器实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceCount?: number;
     /**
      * 集群可用的机器实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunInstanceCount?: number;
     /**
      * 集群正常状态的机器实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NormalInstanceCount?: number;
     /**
      * 删除标记：true：可以删除；false：不可删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteFlag?: boolean;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 集群所属TSF地域ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TsfRegionId?: string;
     /**
      * 集群所属TSF地域名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TsfRegionName?: string;
     /**
      * 集群所属TSF可用区ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TsfZoneId?: string;
     /**
      * 集群所属TSF可用区名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TsfZoneName?: string;
     /**
      * 集群不可删除的原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteFlagReason?: string;
     /**
      * 集群最大CPU限制，单位：核
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterLimitCpu?: number;
     /**
      * 集群最大内存限制，单位：G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterLimitMem?: number;
     /**
      * 集群可用的服务实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunServiceInstanceCount?: number;
     /**
      * 集群所属子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 返回给前端的控制信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperationInfo?: OperationInfo;
     /**
      * 集群版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterVersion?: string;
 }
@@ -7392,7 +7160,6 @@ export interface RepositoryList {
     TotalCount?: number;
     /**
      * 仓库信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<RepositoryInfo>;
 }
@@ -7673,12 +7440,10 @@ export interface CreateApplicationRequest {
 export interface ServiceStatisticsResults {
     /**
      * 返回结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<ServiceStatisticsResult>;
     /**
      * 条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
 }
@@ -8187,22 +7952,18 @@ export interface EnableUnitRouteResponse {
 export interface GroupUseStatisticsEntity {
     /**
      * API 路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiPath?: string;
     /**
      * 服务名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceName?: string;
     /**
      * 统计值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
     /**
      * API ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiId?: string;
 }
@@ -8274,7 +8035,6 @@ export interface ImageTag {
     DockerVersion?: string;
     /**
      * 操作系统
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Os?: string;
     /**
@@ -8287,7 +8047,6 @@ export interface ImageTag {
     SizeByte?: number;
     /**
      * TcrRepoInfo值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TcrRepoInfo?: TcrRepoInfo;
 }
@@ -8773,17 +8532,14 @@ export interface DescribeInstancesResponse {
 export interface AvailableZoneScatterScheduleRule {
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScatterDimension?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxUnbalanceQuantity?: number;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsForceSchedule?: boolean;
 }
@@ -8816,7 +8572,6 @@ export interface DeleteFileConfigResponse {
 export interface ResourceTaskStatusResult {
     /**
      * 任务的执行状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskStatus?: number;
 }
@@ -8951,17 +8706,14 @@ export interface MetricDimensionValue {
 export interface MetricDataPoint {
     /**
      * 数据点键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * 数据点值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
     /**
      * 数据点标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag?: string;
 }
@@ -9474,7 +9226,6 @@ export interface BusinessLogConfigSchema {
     SchemaMultilinePattern?: string;
     /**
      * 解析规则创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SchemaCreateTime?: string;
     /**
@@ -9489,24 +9240,20 @@ export interface BusinessLogConfigSchema {
 export interface MetricDataSingleValue {
     /**
      * 指标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 统计方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricFunction: string;
+    MetricFunction?: string;
     /**
      * 指标值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricDataValue: string;
+    MetricDataValue?: string;
     /**
      * 日环比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DailyPercent: number;
+    DailyPercent?: number;
 }
 /**
  * StopTaskExecute请求参数结构体
@@ -9581,62 +9328,50 @@ export interface DescribePkgsRequest {
 export interface SchedulingStrategy {
     /**
      * NONE：不使用调度策略；CROSS_AZ：跨可用区部署
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeScheduleStrategyType?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeScheduleOptions?: Array<CommonOption>;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StrongAffinityList?: Array<CommonOption>;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WeakAffinityList?: Array<CommonOption>;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WeakAffinityWeight?: number;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvailableZoneScatterScheduleType?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvailableZoneScatterScheduleRules?: Array<AvailableZoneScatterScheduleRule>;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodScheduleStrategyType?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomPodSchedule?: CustomPodSchedule;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TolerateScheduleType?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomTolerateSchedules?: Array<CustomTolerateSchedule>;
 }
@@ -9859,67 +9594,54 @@ export interface DescribeConfigResponse {
 export interface SimpleGroup {
     /**
      * 部署组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 部署组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 应用类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationType?: string;
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 集群类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType?: string;
     /**
      * 命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName?: string;
     /**
      * 启动参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartupParameters?: string;
     /**
      * 部署组资源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupResourceType?: string;
     /**
      * 应用微服务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppMicroServiceType?: string;
 }
@@ -9980,27 +9702,22 @@ export interface DescribeTaskRecordsRequest {
 export interface CustomTolerateSchedule {
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operator?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Effect?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TolerationSeconds?: number;
 }
@@ -10026,32 +9743,26 @@ export interface ModifyContainerGroupResponse {
 export interface ExclusiveInstance {
     /**
      * 配置中心类型[Registration、Configuration]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CenterType?: string;
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例类型[Polaris]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 实例地域id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: string;
     /**
      * 实例命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceNamespaceId?: string;
 }
@@ -10119,92 +9830,74 @@ export interface HealthCheckSettings {
 export interface VmGroupSimple {
     /**
      * 部署组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 部署组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 应用类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationType?: string;
     /**
      * 部署组描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupDesc?: string;
     /**
      * 部署组更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 部署组启动参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartupParameters?: string;
     /**
      * 命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId?: string;
     /**
      * 部署组创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName?: string;
     /**
      * 应用微服务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MicroserviceType?: string;
     /**
      * 部署组资源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupResourceType?: string;
     /**
      * 部署组更新时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdatedTime?: number;
     /**
      * 部署应用描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployDesc?: string;
     /**
      * 部署组备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Alias?: string;
 }
@@ -10354,12 +10047,10 @@ export interface GatewayConfig {
 export interface DeliveryConfigBindGroups {
     /**
      * 公共条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<DeliveryConfigBindGroup>;
 }
@@ -10535,12 +10226,10 @@ export interface CreateConfigRequest {
 export interface TsfPageClusterV2 {
     /**
      * 集群总数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 集群列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<ClusterV2>;
 }
@@ -10563,27 +10252,22 @@ export interface DeleteGatewayApiResponse {
 export interface OverviewBasicResourceUsage {
     /**
      * 应用总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationCount?: number;
     /**
      * 命名空间总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceCount?: number;
     /**
      * 部署组个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupCount?: number;
     /**
      * 程序包存储空间用量，单位字节
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageSpaceUsed?: number;
     /**
      * 已注册实例数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConsulInstanceCount?: number;
 }
@@ -10737,27 +10421,22 @@ export interface DeleteUnitRuleRequest {
 export interface ApplicationAttribute {
     /**
      * 总实例个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceCount?: number;
     /**
      * 运行实例个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunInstanceCount?: number;
     /**
      * 应用下部署组个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupCount?: number;
     /**
      * 运行中部署组个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunningGroupCount?: string;
     /**
      * 异常部署组个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AbnormalCount?: string;
 }
@@ -10767,17 +10446,14 @@ export interface ApplicationAttribute {
 export interface TaskFlowLastBatchState {
     /**
      * 批次ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowBatchId?: string;
     /**
      * 批次历史ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowBatchLogId?: string;
     /**
      * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: string;
 }
@@ -11196,57 +10872,46 @@ export interface GatewayGroupApiVo {
 export interface BusinessLogConfigAssociatedGroup {
     /**
      * 部署组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId: string;
     /**
      * 部署组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName: string;
     /**
      * 部署组所属应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId: string;
     /**
      * 部署组所属应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName: string;
     /**
      * 部署组所属应用类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationType: string;
     /**
      * 部署组所属命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId: string;
     /**
      * 部署组所属命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName: string;
     /**
      * 部署组所属集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId: string;
     /**
      * 部署组所属集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName: string;
     /**
      * 部署组所属集群类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType: string;
     /**
      * 部署组关联日志配置时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssociatedTime: string;
 }
@@ -11505,22 +11170,18 @@ export interface CurvePoint {
 export interface CosDownloadInfo {
     /**
      * 桶名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
     /**
      * 鉴权信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Credentials?: CosCredentials;
 }
@@ -11862,22 +11523,18 @@ export interface DescribeTaskDetailResponse {
 export interface EmptyDirOption {
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableMemory?: boolean;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageCapacity?: number;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageUnit?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SizeLimit?: string;
 }
@@ -11923,12 +11580,10 @@ export interface ModifyLaneRuleResponse {
 export interface TsfPageSimpleGroup {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 简单部署组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<SimpleGroup>;
 }
@@ -11962,47 +11617,38 @@ export interface ModifyClusterResponse {
 export interface PkgInfo {
     /**
      * 程序包ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgId?: string;
     /**
      * 程序包名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgName?: string;
     /**
      * 程序包类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgType?: string;
     /**
      * 程序包版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgVersion?: string;
     /**
      * 程序包描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgDesc?: string;
     /**
      * 上传时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UploadTime?: string;
     /**
      * 程序包MD5
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Md5?: string;
     /**
      * 程序包状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgPubStatus?: number;
     /**
      * 程序包关联关系
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PkgBindInfo?: Array<PkgBind>;
 }
@@ -12012,77 +11658,62 @@ export interface PkgInfo {
 export interface GroupPod {
     /**
      * 实例名称(对应到kubernetes的pod名称)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodName?: string;
     /**
      * 实例ID(对应到kubernetes的pod id)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodId?: string;
     /**
      * 实例状态，请参考后面的实例以及容器的状态定义。启动中（pod 未 ready）：Starting；运行中：Running；异常：Abnormal；停止：Stopped；
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 实例处于当前状态的原因，例如容器下载镜像失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
     /**
      * 主机IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeIp?: string;
     /**
      * 实例IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
     /**
      * 实例中容器的重启次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RestartCount?: number;
     /**
      * 实例中已就绪容器的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadyCount?: number;
     /**
      * 运行时长
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Runtime?: string;
     /**
      * 实例启动时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedAt?: string;
     /**
      * 服务实例状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceInstanceStatus?: string;
     /**
      * 机器实例可使用状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceAvailableStatus?: string;
     /**
      * 机器实例状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStatus?: string;
     /**
      * 节点实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeInstanceId?: string;
     /**
      * 预期副本数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SpecTotalCount?: string;
 }
@@ -12215,12 +11846,10 @@ export interface DescribeConfigReleasesRequest {
 export interface CommonRef {
     /**
      * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * Key值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
 }
@@ -12230,22 +11859,18 @@ export interface CommonRef {
 export interface StdoutLogV2 {
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 日志内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
     /**
      * 日志时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: number;
     /**
      * 实例IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIp?: string;
 }
@@ -12376,7 +12001,6 @@ export interface ServiceConfig {
     Ports: Array<Ports>;
     /**
      * 健康检查配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HealthCheck?: HealthCheckConfig;
 }
@@ -12431,27 +12055,22 @@ export interface InvocationIndicator {
     InvocationAvgDuration?: number;
     /**
      * 成功请求数时间分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationSuccessDistribution?: Array<IndicatorCoord>;
     /**
      * 失败请求数时间分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationFailedDistribution?: Array<IndicatorCoord>;
     /**
      * 状态码分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationStatusDistribution?: Array<IndicatorCoord>;
     /**
      * 时延分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationDurationDistribution?: Array<IndicatorCoord>;
     /**
      * 并发请求次数时间分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationQuantityDistribution?: Array<IndicatorCoord>;
 }
@@ -12978,42 +12597,34 @@ export interface DescribeProgramsResponse {
 export interface ProgramItem {
     /**
      * 数据项ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgramItemId?: string;
     /**
      * 资源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resource?: Resource;
     /**
      * 数据值列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValueList?: Array<string>;
     /**
      * 全选标识，true: 全选；false: 非全选
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAll?: boolean;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreationTime?: number;
     /**
      * 最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastUpdateTime?: number;
     /**
      * 删除标识，true: 可删除；false: 不可删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteFlag?: boolean;
     /**
      * 数据集ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgramId?: string;
 }
@@ -13082,17 +12693,14 @@ export interface DeliveryConfigBindGroup {
     ConfigName: string;
     /**
      * 采集路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CollectPath: Array<string>;
     /**
      * 关联部署组信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Groups: Array<GroupInfo>;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime: string;
     /**
@@ -13112,7 +12720,6 @@ export interface DeliveryConfigBindGroup {
     KafkaVPort?: string;
     /**
      * Topic
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Topic?: string;
     /**
@@ -13132,7 +12739,6 @@ export interface DeliveryConfigBindGroup {
     EnableGlobalLineRule?: boolean;
     /**
      * EnableAuth
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableAuth?: boolean;
     /**
@@ -13264,87 +12870,70 @@ export interface DisableLaneRuleRequest {
 export interface InstanceEnrichedInfo {
     /**
      * 机器ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 机器名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 机器内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LanIp?: string;
     /**
      * 机器外网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanIp?: string;
     /**
      * 机器所在VPC
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 机器运行状态 Pending Running Stopped Rebooting Starting Stopping Abnormal Unknown
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStatus?: string;
     /**
      * 机器可用状态（表示机器上的Agent在线）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceAvailableStatus?: string;
     /**
      * 应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 应用类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationType?: string;
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 集群类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType?: string;
     /**
      * 命名空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceName?: string;
     /**
      * 机器所在部署组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 部署组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
 }
@@ -13534,12 +13123,10 @@ export interface ProtocolPort {
     TargetPort: number;
     /**
      * 主机端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodePort?: number;
     /**
      * 端口名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
 }
@@ -14074,12 +13661,10 @@ export interface DescribeInvocationMetricDataPointResponse {
 export interface ServiceGovernanceConfig {
     /**
      * 是否开启服务注册治理
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableGovernance?: boolean;
     /**
      * 服务治理类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GovernanceType?: string;
     /**
@@ -14184,17 +13769,14 @@ export interface ModifyProgramResponse {
 export interface AddInstanceResult {
     /**
      * 添加集群失败的节点列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedInstanceIds?: Array<string>;
     /**
      * 添加集群成功的节点列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SuccInstanceIds?: Array<string>;
     /**
      * 添加集群超时的节点列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeoutInstanceIds?: Array<string>;
     /**
@@ -14533,12 +14115,10 @@ export interface DescribeDownloadInfoResponse {
 export interface GroupPodResult {
     /**
      * 总记录数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 列表信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<GroupPod>;
 }
@@ -14719,7 +14299,6 @@ export interface DescribeReleasedConfigResponse {
 export interface HealthCheckConfig {
     /**
      * 健康检查路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
 }
@@ -14729,12 +14308,10 @@ export interface HealthCheckConfig {
 export interface TsfPageSimpleApplication {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 简单应用列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<SimpleApplication>;
 }
@@ -14744,17 +14321,14 @@ export interface TsfPageSimpleApplication {
 export interface Affinity {
     /**
      * 亲和性范围
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scope?: string;
     /**
      * 亲和规则的权重
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Weight?: string;
     /**
      * -
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Paths?: Array<CommonOption>;
 }
@@ -14905,17 +14479,14 @@ export interface ModifyNamespaceRequest {
 export interface OperationInfoDetail {
     /**
      * 不显示的原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisabledReason?: string;
     /**
      * 该按钮是否可点击
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
     /**
      * 是否显示该按钮
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Supported?: boolean;
 }
@@ -15154,7 +14725,6 @@ export interface DescribeImageRepositoryResponse {
 export interface TaskId {
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: string;
 }
@@ -15467,17 +15037,14 @@ export interface TaskFlowEdge {
     NodeId?: string;
     /**
      * 子节点 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChildNodeId?: string;
     /**
      * 是否核心任务,Y/N
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CoreNode?: string;
     /**
      * 边类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EdgeType?: string;
     /**
@@ -15486,37 +15053,30 @@ export interface TaskFlowEdge {
     NodeType?: string;
     /**
      * X轴坐标位置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PositionX?: string;
     /**
      * Y轴坐标位置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PositionY?: string;
     /**
      * 图 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GraphId?: string;
     /**
      * 工作流 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowId?: string;
     /**
      * 节点名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeName?: string;
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: string;
     /**
      * 任务历史ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskLogId?: string;
 }

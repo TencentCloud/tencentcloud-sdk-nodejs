@@ -558,6 +558,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQVipInstances", req, cb);
     }
     /**
+     * 用于获取RocketMQ指标排序列表，比如集群实例下占用存储空间最多的主题排序。
+     */
+    async DescribeRocketMQTopUsages(req, cb) {
+        return this.request("DescribeRocketMQTopUsages", req, cb);
+    }
+    /**
      * Rocketmq消费验证
      */
     async VerifyRocketMQConsume(req, cb) {

@@ -1,4 +1,13 @@
 /**
+ * UpdateAuthorizationPolicyPriority返回参数结构体
+ */
+export interface UpdateAuthorizationPolicyPriorityResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteUser请求参数结构体
  */
 export interface DeleteUserRequest {
@@ -786,6 +795,15 @@ export interface CreateAuthorizationPolicyRequest {
     Remark?: string;
 }
 /**
+ * PublishMessage返回参数结构体
+ */
+export interface PublishMessageResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAuthenticator返回参数结构体
  */
 export interface DescribeAuthenticatorResponse {
@@ -1115,13 +1133,37 @@ export interface DescribeTopicRequest {
     Topic: string;
 }
 /**
- * UpdateAuthorizationPolicyPriority返回参数结构体
+ * PublishMessage请求参数结构体
  */
-export interface UpdateAuthorizationPolicyPriorityResponse {
+export interface PublishMessageRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 消息 payload，需要按 encoding 指定的编码方式进行编码
+     */
+    Payload: string;
+    /**
+     * 消息目的主题，该参数与 TargetClientId 二选一
+     */
+    TargetTopic?: string;
+    /**
+     * 消息目的客户端 ID，该参数与 TargetTopic 二选一
+     */
+    TargetClientId?: string;
+    /**
+     * 消息 payload 编码，可选 plain 或 base64，默认为 plain（即不编码）
+     */
+    Encoding?: string;
+    /**
+     * 消息的服务质量等级，默认为 1
+     */
+    Qos?: number;
+    /**
+     * 是否为保留消息，默认为 false，且仅支持发布到主题的消息设置为 true
+     */
+    Retain?: boolean;
 }
 /**
  * CreateTopic返回参数结构体

@@ -96,7 +96,7 @@ export interface DescribeSampleLogsRequest {
      */
     JobId: string;
     /**
-     * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时
+     * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时，不与 Offset  参数同时使用
      */
     Context?: string;
     /**
@@ -112,7 +112,7 @@ export interface DescribeSampleLogsRequest {
      */
     SeverityText?: string;
     /**
-     * ap-shanghai, ap-guangzhou
+     * 地域
      */
     InstanceRegion?: string;
     /**
@@ -120,9 +120,13 @@ export interface DescribeSampleLogsRequest {
      */
     Instance?: string;
     /**
-     * request 代表采样日志,可为不填
+     * request 代表采样日志,engine 代表引擎日志，console 代表用户打印日志
      */
     LogType?: string;
+    /**
+     * 日志偏移量，不与Context 参数同时使用
+     */
+    Offset?: number;
     /**
      * 返回日志条数，最大100
      */
@@ -441,6 +445,11 @@ export interface ScriptInfo {
      * 文件 ID
      */
     FileId?: string;
+    /**
+     * 文件是否已上传，如果已上传，则可以不必填写 EncodedContent,EncodedHar 等内容。
+  主要用于较大长度脚本上传。
+     */
+    Uploaded?: boolean;
 }
 /**
  * 通用日志
@@ -1293,6 +1302,10 @@ export interface DescribeSampleMatrixQueryRequest {
      * 分组；取值范围参见 DescribeMetricLabelWithValues 接口返回的指标及其支持的标签名
      */
     GroupBy?: Array<string>;
+    /**
+     * 返回的最大数据点个数
+     */
+    MaxPoint?: number;
 }
 /**
  * GenerateTmpKey返回参数结构体
@@ -2660,6 +2673,10 @@ export interface DescribeSampleMatrixBatchQueryRequest {
      * 查询语句
      */
     Queries: Array<InternalMetricQuery>;
+    /**
+     * 最多返回的数据点个数
+     */
+    MaxPoint?: number;
 }
 /**
  * DescribeAlertRecords返回参数结构体

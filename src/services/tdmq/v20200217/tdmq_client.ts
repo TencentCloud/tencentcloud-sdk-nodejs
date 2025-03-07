@@ -72,6 +72,7 @@ import {
   UnbindCmqDeadLetterResponse,
   ModifyRocketMQEnvironmentRoleRequest,
   ModifyRocketMQNamespaceResponse,
+  DimensionInstance,
   InternalTenant,
   DeleteEnvironmentsRequest,
   DescribeRocketMQClustersRequest,
@@ -190,6 +191,7 @@ import {
   DescribeMsgTraceRequest,
   DescribeCmqTopicsRequest,
   ConsumerLog,
+  DescribeRocketMQTopUsagesResponse,
   CreateEnvironmentRoleResponse,
   PrometheusEndpointInfo,
   Cluster,
@@ -256,7 +258,7 @@ import {
   SendRocketMQMessageResponse,
   PulsarProClusterSpecInfo,
   Subscription,
-  SendMessagesResponse,
+  DimensionOpt,
   RocketMQMessageTrack,
   DescribeRocketMQNamespacesResponse,
   DescribeTopicsRequest,
@@ -269,6 +271,7 @@ import {
   SecurityPolicy,
   VerifyRocketMQConsumeResponse,
   DescribeRocketMQConsumerConnectionDetailRequest,
+  DescribeRocketMQTopUsagesRequest,
   DeleteRolesResponse,
   RetryRocketMQDlqMessageResponse,
   DescribeRabbitMQBindingsRequest,
@@ -309,6 +312,7 @@ import {
   DescribeMqMsgTraceResponse,
   CreateRabbitMQUserRequest,
   DescribeRocketMQConsumeStatsRequest,
+  SendMessagesResponse,
   SendCmqMsgResponse,
   ModifyPublicNetworkAccessPointResponse,
   ModifyCmqQueueAttributeRequest,
@@ -1302,6 +1306,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQVipInstancesResponse) => void
   ): Promise<DescribeRocketMQVipInstancesResponse> {
     return this.request("DescribeRocketMQVipInstances", req, cb)
+  }
+
+  /**
+   * 用于获取RocketMQ指标排序列表，比如集群实例下占用存储空间最多的主题排序。
+   */
+  async DescribeRocketMQTopUsages(
+    req: DescribeRocketMQTopUsagesRequest,
+    cb?: (error: string, rep: DescribeRocketMQTopUsagesResponse) => void
+  ): Promise<DescribeRocketMQTopUsagesResponse> {
+    return this.request("DescribeRocketMQTopUsages", req, cb)
   }
 
   /**

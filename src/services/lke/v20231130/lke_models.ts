@@ -3279,6 +3279,36 @@ export interface ListQACateResponse {
 }
 
 /**
+ * GetVarList请求参数结构体
+ */
+export interface GetVarListRequest {
+  /**
+   * 应用ID
+   */
+  AppBizId: string
+  /**
+   * 变量ID数组
+   */
+  VarIds?: Array<string>
+  /**
+   * 按变量名称关键词搜索
+   */
+  Keyword?: string
+  /**
+   * 起始偏移量（默认0）
+   */
+  Offset?: number
+  /**
+   * 限定数量（默认15）
+   */
+  Limit?: number
+  /**
+   * 按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO)
+   */
+  VarType?: string
+}
+
+/**
  * RetryDocParse返回参数结构体
  */
 export interface RetryDocParseResponse {
@@ -5581,6 +5611,31 @@ export interface DescribeConcurrencyUsageResponse {
 }
 
 /**
+ * 变量详情
+ */
+export interface TaskFLowVar {
+  /**
+   * 变量ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VarId?: string
+  /**
+   * 变量名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VarName?: string
+  /**
+   * 变量描述（默认为"-"）
+   */
+  VarDesc?: string
+  /**
+   * 变量类型 (STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO)
+
+   */
+  VarType?: string
+}
+
+/**
  * CreateRelease返回参数结构体
  */
 export interface CreateReleaseResponse {
@@ -6629,6 +6684,24 @@ export interface DeleteAppRequest {
 }
 
 /**
+ * GetVarList返回参数结构体
+ */
+export interface GetVarListResponse {
+  /**
+   * 变量总数
+   */
+  Total?: number
+  /**
+   * 变量信息列表
+   */
+  List?: Array<TaskFLowVar>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 工作流程调试信息
  */
 export interface WorkFlowSummary {
@@ -7147,6 +7220,20 @@ export interface RateMsgRecordResponse {
 }
 
 /**
+ * CreateVar返回参数结构体
+ */
+export interface CreateVarResponse {
+  /**
+   * 变量ID
+   */
+  VarId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDocAttrRange请求参数结构体
  */
 export interface ModifyDocAttrRangeRequest {
@@ -7226,6 +7313,28 @@ export interface DescribeRobotBizIDByAppKeyRequest {
    * 应用appkey
    */
   AppKey: string
+}
+
+/**
+ * CreateVar请求参数结构体
+ */
+export interface CreateVarRequest {
+  /**
+   * 应用ID
+   */
+  AppBizId: string
+  /**
+   * 变量名称，不允许重复，最大支持50个字符
+   */
+  VarName: string
+  /**
+   * 变量描述，最大支持120个字符
+   */
+  VarDesc?: string
+  /**
+   * 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用
+   */
+  VarType?: string
 }
 
 /**

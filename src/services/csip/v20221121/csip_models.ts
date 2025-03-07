@@ -2242,6 +2242,10 @@ export interface AssetViewVULRiskData {
    * 是否可以一键体检，1-可以，0-不可以
    */
   IsOneClick?: number
+  /**
+   * 是否POC扫描，0-非POC，1-POC
+   */
+  IsPOC?: number
 }
 
 /**
@@ -3537,6 +3541,10 @@ export interface AssetViewWeakPassRisk {
    * 证明
    */
   Payload?: string
+  /**
+   * 端口
+   */
+  Port?: number
 }
 
 /**
@@ -5107,7 +5115,7 @@ export interface AssetViewPortRisk {
    */
   Suggestion?: number
   /**
-   * 状态，0未处理、1已处置、2已忽略
+   * 状态，0未处理、1已处置、2已忽略、3云防已防护
    */
   Status?: number
   /**
@@ -5142,6 +5150,14 @@ export interface AssetViewPortRisk {
    * 识别来源，详细看枚举返回。
    */
   From?: string
+  /**
+   * 服务判定,high_risk_service 高危服务 web_service web服务 other_service 其他服务
+   */
+  ServiceJudge?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略、3云防已防护、4无需处理
+   */
+  XspmStatus?: number
 }
 
 /**
@@ -5297,7 +5313,7 @@ export interface ServerRisk {
    */
   Suggestion?: string
   /**
-   * 状态，0未处理、1已处置、2已忽略
+   * 状态，0未处理、1已处置、2已忽略、3云防已防护
    */
   Status?: number
   /**
@@ -5340,6 +5356,14 @@ export interface ServerRisk {
    * HTTP响应状态码
    */
   StatusCode?: string
+  /**
+   * 新风险等级,high_risk 高危 suspect 疑似 Normal 暂无风险
+   */
+  NewLevel?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略、3云防已防护、4无需处理
+   */
+  XspmStatus?: number
 }
 
 /**

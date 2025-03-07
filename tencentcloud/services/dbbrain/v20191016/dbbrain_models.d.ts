@@ -287,7 +287,6 @@ export interface DescribeAllUserContactResponse {
     TotalCount?: number;
     /**
      * 联系人的信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Contacts?: Array<ContactItem>;
     /**
@@ -512,7 +511,6 @@ export interface DescribeAllUserGroupResponse {
     TotalCount?: number;
     /**
      * 组信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Groups?: Array<GroupItem>;
     /**
@@ -771,7 +769,6 @@ export interface DescribeDBDiagEventResponse {
     Suggestions?: string;
     /**
      * 保留字段。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Metric?: string;
     /**

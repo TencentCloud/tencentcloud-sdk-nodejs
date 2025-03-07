@@ -189,7 +189,6 @@ export interface HostResource {
     GpuAvailable?: number;
     /**
      * CDH owner
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExclusiveOwner?: string;
 }
@@ -321,19 +320,19 @@ export interface PostPaidQuota {
     /**
      * 累计已使用配额
      */
-    UsedQuota: number;
+    UsedQuota?: number;
     /**
      * 剩余配额
      */
-    RemainingQuota: number;
+    RemainingQuota?: number;
     /**
      * 总配额
      */
-    TotalQuota: number;
+    TotalQuota?: number;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
 }
 /**
  * ResetInstancesType请求参数结构体
@@ -382,7 +381,6 @@ export interface ChcHost {
     InstanceState?: string;
     /**
      * 设备类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceType?: string;
     /**
@@ -391,37 +389,30 @@ export interface ChcHost {
     Placement?: Placement;
     /**
      * 带外网络。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BmcVirtualPrivateCloud?: VirtualPrivateCloud;
     /**
      * 带外网络Ip。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BmcIp?: string;
     /**
      * 带外网络安全组Id。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BmcSecurityGroupIds?: Array<string>;
     /**
      * 部署网络。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployVirtualPrivateCloud?: VirtualPrivateCloud;
     /**
      * 部署网络Ip。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployIp?: string;
     /**
      * 部署网络安全组Id。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeploySecurityGroupIds?: Array<string>;
     /**
      * 关联的云主机Id。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CvmInstanceId?: string;
     /**
@@ -430,84 +421,68 @@ export interface ChcHost {
     CreatedTime?: string;
     /**
      * 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HardwareDescription?: string;
     /**
      * CHC物理服务器的CPU核数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CPU?: number;
     /**
      * CHC物理服务器的内存大小，单位为GB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Memory?: number;
     /**
      * CHC物理服务器的磁盘信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Disk?: string;
     /**
      * 带外网络下分配的MAC地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BmcMAC?: string;
     /**
      * 部署网络下分配的MAC地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployMAC?: string;
     /**
      * 设备托管类型。
   HOSTING: 托管
   TENANT: 租赁
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TenantType?: string;
     /**
      * chc dhcp选项，用于minios调试。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployExtraConfig?: ChcDeployExtraConfig;
     /**
      * GPU型号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Gpu?: string;
     /**
      * 网卡型号。主要指RDMA网卡。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkCard?: string;
     /**
      * 是否是预定义机型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPredefinedType?: boolean;
     /**
      * CHC云主机机型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChcInstanceType?: string;
     /**
      * CHC云主机机型簇。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChcInstanceFamily?: string;
     /**
      * CHC云主机机型簇名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChcInstanceFamilyName?: string;
     /**
      * 转售客户的AppId。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResaleAppId?: string;
     /**
      * 转售客户的账号ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResaleAccountId?: string;
     /**
@@ -518,12 +493,10 @@ export interface ChcHost {
   <li>SOLD: 已售卖</li>
   </ul>
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SaleStatus?: string;
     /**
      * CHC物理服务器关联的标签列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
     /**
@@ -1045,16 +1018,15 @@ export interface InstanceTypeConfigStatus {
     /**
      * 状态描述
      */
-    Status: string;
+    Status?: string;
     /**
      * 状态描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 配置信息
      */
-    InstanceTypeConfig: InstanceTypeConfig;
+    InstanceTypeConfig?: InstanceTypeConfig;
 }
 /**
  * cdh相关价格信息
@@ -1233,32 +1205,32 @@ export interface LaunchTemplateVersionInfo {
      * 实例启动模板版本号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LaunchTemplateVersion: number;
+    LaunchTemplateVersion?: number;
     /**
      * 实例启动模板版本数据详情。
      */
-    LaunchTemplateVersionData: LaunchTemplateVersionData;
+    LaunchTemplateVersionData?: LaunchTemplateVersionData;
     /**
      * 实例启动模板版本创建时间。
      */
-    CreationTime: string;
+    CreationTime?: string;
     /**
      * 实例启动模板ID。
      */
-    LaunchTemplateId: string;
+    LaunchTemplateId?: string;
     /**
      * 是否为默认启动模板版本。
      */
-    IsDefaultVersion: boolean;
+    IsDefaultVersion?: boolean;
     /**
      * 实例启动模板版本描述信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LaunchTemplateVersionDescription: string;
+    LaunchTemplateVersionDescription?: string;
     /**
      * 创建者。
      */
-    CreatedBy: string;
+    CreatedBy?: string;
 }
 /**
  * InquiryPriceModifyInstancesChargeType返回参数结构体
@@ -1341,12 +1313,10 @@ export interface RemoveChcAssistVpcResponse {
 export interface InternetChargeTypeConfig {
     /**
      * 网络计费模式。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InternetChargeType?: string;
     /**
      * 网络计费模式描述信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
 }
@@ -1396,12 +1366,10 @@ export interface CpuTopology {
 export interface DescribeLaunchTemplatesResponse {
     /**
      * 符合条件的实例模板数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 实例详细信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LaunchTemplateSet?: Array<LaunchTemplateInfo>;
     /**
@@ -1880,7 +1848,6 @@ export interface RunSecurityServiceEnabled {
 export interface CreateHpcClusterResponse {
     /**
      * 高性能计算集群信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HpcClusterSet?: Array<HpcClusterInfo>;
     /**
@@ -2005,19 +1972,19 @@ export interface SpotPaidQuota {
     /**
      * 已使用配额，单位：vCPU核心数
      */
-    UsedQuota: number;
+    UsedQuota?: number;
     /**
      * 剩余配额，单位：vCPU核心数
      */
-    RemainingQuota: number;
+    RemainingQuota?: number;
     /**
      * 总配额，单位：vCPU核心数
      */
-    TotalQuota: number;
+    TotalQuota?: number;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
 }
 /**
  * ResetInstancesInternetMaxBandwidth返回参数结构体
@@ -2081,7 +2048,6 @@ export interface ImportKeyPairResponse {
 export interface CreateImageResponse {
     /**
      * 镜像ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageId?: string;
     /**
@@ -2398,17 +2364,14 @@ export interface Image {
     SyncPercent?: number;
     /**
      * 镜像是否支持cloud-init
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSupportCloudinit?: boolean;
     /**
      * 镜像关联的快照信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SnapshotSet?: Array<Snapshot>;
     /**
      * 镜像关联的标签列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
     /**
@@ -2417,7 +2380,6 @@ export interface Image {
     LicenseType?: string;
     /**
      * 镜像族
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageFamily?: string;
     /**
@@ -2431,22 +2393,18 @@ export interface Image {
 export interface ChcDeployExtraConfig {
     /**
      * minos类型。是使用腾讯云的minios，还是客户自己的minios。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniOsType: string;
     /**
      * 服务器的架构和启动方式。取值为x86_legacy, arm_uefi。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BootType: string;
     /**
      * PXE使用的引导文件。默认为pxelinux.0。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BootFile?: string;
     /**
      * tftp服务器的ip地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NextServerAddress?: string;
 }
@@ -2468,12 +2426,17 @@ export interface DescribeDisasterRecoverGroupQuotaResponse {
     CvmInHostGroupQuota?: number;
     /**
      * 交换机类型容灾组内实例的配额数。
+     * @deprecated
      */
     CvmInSwGroupQuota?: number;
     /**
      * 机架类型容灾组内实例的配额数。
      */
     CvmInRackGroupQuota?: number;
+    /**
+     * 交换机类型容灾组内实例的配额数。
+     */
+    CvmInSwitchGroupQuota?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2563,23 +2526,23 @@ export interface PrePaidQuota {
     /**
      * 当月已使用配额
      */
-    UsedQuota: number;
+    UsedQuota?: number;
     /**
      * 单次购买最大数量
      */
-    OnceQuota: number;
+    OnceQuota?: number;
     /**
      * 剩余配额
      */
-    RemainingQuota: number;
+    RemainingQuota?: number;
     /**
      * 总配额
      */
-    TotalQuota: number;
+    TotalQuota?: number;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
 }
 /**
  * StopInstances请求参数结构体
@@ -2735,127 +2698,107 @@ export interface RunAutomationServiceEnabled {
 export interface LaunchTemplateVersionData {
     /**
      * 实例所在的位置。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Placement?: Placement;
     /**
      * 实例机型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 实例名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
-     * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月<br><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费<br><li>`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例计费模式。取值范围：
+  <li>`PREPAID`：表示预付费，即包年包月</li>
+  <li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费</li>
+  <li>`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。</li>
+  <li>`SPOTPAID`：表示竞价实例付费。</li>
      */
     InstanceChargeType?: string;
     /**
      * 实例系统盘信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SystemDisk?: SystemDisk;
     /**
      * 实例数据盘信息。只包含随实例购买的数据盘。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataDisks?: Array<DataDisk>;
     /**
      * 实例带宽信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InternetAccessible?: InternetAccessible;
     /**
      * 实例所属虚拟私有网络信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualPrivateCloud?: VirtualPrivateCloud;
     /**
      * 生产实例所使用的镜像`ID`。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageId?: string;
     /**
      * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupIds?: Array<string>;
     /**
      * 实例登录设置。目前只返回实例所关联的密钥。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoginSettings?: LoginSettings;
     /**
      * CAM角色名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CamRoleName?: string;
     /**
      * 高性能计算集群`ID`。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HpcClusterId?: string;
     /**
      * 购买实例数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceCount?: number;
     /**
      * 增强服务。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnhancedService?: EnhancedService;
     /**
      * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserData?: string;
     /**
      * 置放群组ID，仅支持指定一个。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisasterRecoverGroupIds?: Array<string>;
     /**
      * 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionTimer?: ActionTimer;
     /**
      * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
     /**
      * 云服务器的主机名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostName?: string;
     /**
      * 用于保证请求幂等性的字符串。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientToken?: string;
     /**
      * 预付费模式，即包年包月相关参数设置。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSpecification?: Array<TagSpecification>;
     /**
      * 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：
   
-  TRUE：表示开启实例保护，不允许通过api接口删除实例
-  FALSE：表示关闭实例保护，允许通过api接口删除实例
+  true：表示开启实例保护，不允许通过api接口删除实例
+  false：表示关闭实例保护，允许通过api接口删除实例
   
-  默认取值：FALSE。
-  注意：此字段可能返回 null，表示取不到有效值。
+  默认取值：false。
      */
     DisableApiTermination?: boolean;
 }
@@ -2935,12 +2878,10 @@ export interface HostItem {
     HostResource?: HostResource;
     /**
      * 专用宿主机所属的围笼ID。该字段仅对金融专区围笼内的专用宿主机有效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CageId?: string;
     /**
      * 专用宿主机关联的标签列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
 }
@@ -2984,12 +2925,10 @@ export interface Externals {
 export interface ConvertOperatingSystemsResponse {
     /**
      * 转换的目标操系统信息，仅在入参 DryRun 为 true 时返回。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportTargetOSList?: Array<TargetOS>;
     /**
      * 操作系统转换的任务 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: string;
     /**
@@ -3191,7 +3130,6 @@ export interface Instance {
     LatestOperationRequestId?: string;
     /**
      * 分散置放群组ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisasterRecoverGroupId?: string;
     /**
@@ -3206,7 +3144,6 @@ export interface Instance {
     CamRoleName?: string;
     /**
      * 高性能计算集群`ID`。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HpcClusterId?: string;
     /**
@@ -3216,17 +3153,14 @@ export interface Instance {
     RdmaIpAddresses?: Array<string>;
     /**
      * 实例所在的专用集群`ID`。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DedicatedClusterId?: string;
     /**
      * 实例隔离类型。取值范围：<br><li>ARREAR：表示欠费隔离<br></li><li>EXPIRE：表示到期隔离<br></li><li>MANMADE：表示主动退还隔离<br></li><li>NOTISOLATED：表示未隔离<br></li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsolatedSource?: string;
     /**
      * GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GPUInfo?: GPUInfo;
     /**
@@ -3455,7 +3389,7 @@ export interface ExportImagesRequest {
      */
     BucketName: string;
     /**
-     * 镜像ID列表
+     * 镜像ID列表。调用 ExportImages 接口时，参数 ImageIds 和 SnapshotIds 为二选一必填参数，目前参数 SnapshotIds 暂未对外开放。
      */
     ImageIds?: Array<string>;
     /**
@@ -3678,7 +3612,12 @@ export interface DescribeLaunchTemplatesRequest {
      */
     LaunchTemplateIds?: Array<string>;
     /**
-     * <p style="padding-left: 30px;">按照【<strong>LaunchTemplateName</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+     * <li><strong>LaunchTemplateName</strong></li>
+  <p style="padding-left: 30px;">按照【<strong>实例启动模板名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+  <li><strong>tag-key</strong></li>
+  <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+  <li><strong>tag-value</strong></li> <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+  <li><strong>tag:tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
   每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchTemplateIds`和`Filters`。
      */
     Filters?: Array<Filter>;
@@ -4569,12 +4508,10 @@ export interface InquiryPriceTerminateInstancesRequest {
 export interface ImageOsList {
     /**
      * 支持的Windows操作系统。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Windows?: Array<string>;
     /**
      * 支持的Linux操作系统
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Linux?: Array<string>;
 }
@@ -5011,19 +4948,16 @@ export interface InquiryPriceRenewInstancesRequest {
 export interface GPUInfo {
     /**
      * 实例GPU个数。值小于1代表VGPU类型，大于1代表GPU直通类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GPUCount: number;
+    GPUCount?: number;
     /**
      * 实例GPU地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GPUId: Array<string>;
+    GPUId?: Array<string>;
     /**
      * 实例GPU类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GPUType: string;
+    GPUType?: string;
 }
 /**
  * 描述退款详情。
@@ -5031,17 +4965,14 @@ export interface GPUInfo {
 export interface InstanceRefund {
     /**
      * 实例Id。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 退款数额。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Refunds?: number;
     /**
      * 退款详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PriceDetail?: string;
 }
@@ -5066,17 +4997,14 @@ export interface DescribeInstanceTypeConfigsRequest {
 export interface RegionInfo {
     /**
      * 地域名称，例如，ap-guangzhou
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 地域描述，例如，华南地区(广州)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionName?: string;
     /**
      * 地域是否可用状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionState?: string;
 }
@@ -5352,7 +5280,6 @@ export interface KeyPair {
     CreatedTime?: string;
     /**
      * 密钥关联的标签列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
 }
@@ -5603,37 +5530,30 @@ export interface DescribeInstancesActionTimerRequest {
 export interface LaunchTemplateInfo {
     /**
      * 实例启动模版本号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestVersionNumber?: number;
     /**
      * 实例启动模板ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LaunchTemplateId?: string;
     /**
      * 实例启动模板名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LaunchTemplateName?: string;
     /**
      * 实例启动模板默认版本号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultVersionNumber?: number;
     /**
      * 实例启动模板包含的版本总数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LaunchTemplateVersionCount?: number;
     /**
      * 创建该模板的用户UIN。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedBy?: string;
     /**
      * 创建该模板的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreationTime?: string;
 }
@@ -5660,12 +5580,10 @@ export interface HpcClusterInfo {
     HpcClusterId?: string;
     /**
      * 高性能计算集群名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 高性能计算集群备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -5682,22 +5600,18 @@ export interface HpcClusterInfo {
     CurrentNum?: number;
     /**
      * 集群创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 集群内实例ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIds?: Array<string>;
     /**
      * 高性能计算集群类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HpcClusterType?: string;
     /**
      * 高性能计算集群对应的业务场景标识，当前只支持CDC。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HpcClusterBusinessId?: string;
     /**

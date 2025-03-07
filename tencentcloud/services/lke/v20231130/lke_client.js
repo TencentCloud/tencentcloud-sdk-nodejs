@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAttributeLabel", req, cb);
     }
     /**
+     * 查询自定义变量列表
+     */
+    async GetVarList(req, cb) {
+        return this.request("GetVarList", req, cb);
+    }
+    /**
      * 查询企业知识库容量饼图
      */
     async DescribeKnowledgeUsagePieGraph(req, cb) {
@@ -180,12 +186,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSearchStatsGraph", req, cb);
     }
     /**
-     * 接口已迁移到新接口了，无调用量
-
-查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
+     * Doc分类删除
      */
-    async QueryParseDocResult(req, cb) {
-        return this.request("QueryParseDocResult", req, cb);
+    async DeleteDocCate(req, cb) {
+        return this.request("DeleteDocCate", req, cb);
     }
     /**
      * 校验问答
@@ -290,10 +294,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTokenUsage", req, cb);
     }
     /**
-     * Doc分类删除
+     * 接口已迁移到新接口了，无调用量
+
+查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
      */
-    async DeleteDocCate(req, cb) {
-        return this.request("DeleteDocCate", req, cb);
+    async QueryParseDocResult(req, cb) {
+        return this.request("QueryParseDocResult", req, cb);
     }
     /**
      * 获取QA分类
@@ -366,6 +372,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListQA(req, cb) {
         return this.request("ListQA", req, cb);
+    }
+    /**
+     * 创建变量
+     */
+    async CreateVar(req, cb) {
+        return this.request("CreateVar", req, cb);
     }
     /**
      * 点赞点踩数据统计

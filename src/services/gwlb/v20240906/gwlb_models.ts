@@ -94,6 +94,10 @@ export interface ModifyGatewayLoadBalancerAttributeRequest {
    * 网关负载均衡实例名称。可支持输入1-60个字符。
    */
   LoadBalancerName?: string
+  /**
+   * 是否开启删除保护。
+   */
+  DeleteProtect?: boolean
 }
 
 /**
@@ -429,9 +433,13 @@ export interface GatewayLoadBalancer {
    */
   Isolation?: number
   /**
-   * 负载均衡实例被隔离的时间
+   * 网关负载均衡实例被隔离的时间
    */
   IsolatedTime?: string
+  /**
+   * 是否开启配置修改保护功能。
+   */
+  OperateProtect?: boolean
 }
 
 /**
@@ -455,6 +463,7 @@ export interface DescribeGatewayLoadBalancersRequest {
 Filter.Name和Filter.Values皆为必填项。详细的过滤条件如下：
 - VpcId - String - 是否必填：否 - （过滤条件）按照网关负载均衡实例所属的私有网络过滤，如“vpc-bhqk****”。
 - Vips - String  - 是否必填：否 - （过滤条件）按照网关负载均衡实例所属的私有网络过滤，如“10.1.1.1”
+- tag:tag-key - String - 是否必填：否 - （过滤条件）按照GWLB标签键值对进行过滤，tag-key使用具体的标签键进行替换。
 
    */
   Filters?: Array<Filter>

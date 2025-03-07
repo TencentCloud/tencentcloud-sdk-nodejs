@@ -621,7 +621,7 @@ export interface GetTagsResponse {
  */
 export interface ModifyResourcesTagValueRequest {
     /**
-     * 业务类型，示例 cvm 。资源所属业务名称（资源六段式中的第三段）
+     * 业务类型，示例 cvm。资源所属业务名称（资源六段式中的第三段）
      */
     ServiceType: string;
     /**

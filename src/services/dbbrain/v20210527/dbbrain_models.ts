@@ -539,7 +539,6 @@ export interface DescribeDBDiagEventResponse {
   Suggestions?: string
   /**
    * 保留字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metric?: string
   /**
@@ -1059,7 +1058,6 @@ export interface DescribeMySqlProcessListResponse {
   ProcessList?: Array<MySqlProcess>
   /**
    * sql会话统计信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: Array<StatisticInfo>
   /**
@@ -1241,7 +1239,6 @@ export interface KillMySqlThreadsResponse {
   Threads?: Array<number | bigint>
   /**
    * 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlExecId?: string
   /**
@@ -2532,12 +2529,11 @@ export interface DescribeAllUserContactResponse {
   /**
    * 联系人的总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 联系人的信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Contacts: Array<ContactItem>
+  Contacts?: Array<ContactItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3315,7 +3311,6 @@ export interface ModifyAuditServiceRequest {
 export interface DescribeIndexRecommendAggregationSlowLogsResponse {
   /**
    * 查询实例慢查询聚合结果。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Aggregation?: Aggregation
   /**
@@ -3990,12 +3985,11 @@ export interface DescribeAllUserGroupResponse {
   /**
    * 组总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 组信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Groups: Array<GroupItem>
+  Groups?: Array<GroupItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

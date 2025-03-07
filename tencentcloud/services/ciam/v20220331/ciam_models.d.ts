@@ -126,7 +126,6 @@ export interface ResetPasswordRequest {
 export interface ErrorDetails {
     /**
      * 用户信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserId?: string;
     /**
@@ -242,17 +241,14 @@ export interface UserStore {
     AppNum?: number;
     /**
      * 上次切换的用户池
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastStatus?: boolean;
     /**
      * 默认用户池
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultStatus?: boolean;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateDate?: number;
     /**
@@ -433,12 +429,10 @@ export interface UpdateUserStatusResponse {
 export interface FailedUsers {
     /**
      * 失败用户标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedUserIdentification?: string;
     /**
      * 导入的用户失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedReason?: string;
 }
@@ -472,7 +466,6 @@ export interface ListUserByPropertyRequest {
 export interface CreateUserResponse {
     /**
      * 创建的用户信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     User?: User;
     /**
@@ -582,7 +575,6 @@ export interface Salt {
 export interface ListUserByPropertyResponse {
     /**
      * 用户列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Users?: Array<User>;
     /**
@@ -690,7 +682,6 @@ export interface Job {
     Location?: string;
     /**
      * 失败详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorDetails?: Array<ErrorDetails>;
     /**
@@ -806,7 +797,6 @@ export interface User {
     LastModifiedDate?: number;
     /**
      * 自定义属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomAttributes?: Array<MemberMap>;
     /**
@@ -871,7 +861,6 @@ export interface User {
     IdentityVerificationMethod?: string;
     /**
      * 是否已经实名核验
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityVerified?: boolean;
     /**
@@ -886,7 +875,6 @@ export interface User {
     Nationality?: string;
     /**
      * 是否主账号（进行过账号融合后，主账号为true，从账号为false）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Primary?: boolean;
     /**
@@ -896,17 +884,14 @@ export interface User {
     Zone?: string;
     /**
      * 是否已经首次登录
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlreadyFirstLogin?: boolean;
     /**
      * 租户id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TenantId?: string;
     /**
      * 用户目录id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserStoreId?: string;
     /**
@@ -956,17 +941,14 @@ export interface User {
 export interface AppAssociatedUserGroupIds {
     /**
      * 用户组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserGroupId?: string;
     /**
      * 应用id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
 }
@@ -997,12 +979,10 @@ export interface QueryUserFilter {
 export interface UserGroupDeleteResp {
     /**
      * 错误详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMessage?: string;
     /**
      * 用户组关联的应用信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppAssociatedUserGroupIds?: Array<AppAssociatedUserGroupIds>;
 }
@@ -1025,7 +1005,6 @@ export interface Sort {
 export interface DeleteUserGroupsResponse {
     /**
      * 删除的用户组关联的应用信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserGroupDeletedInfo?: UserGroupDeleteResp;
     /**
@@ -1039,17 +1018,14 @@ export interface DeleteUserGroupsResponse {
 export interface ListUserGroupsResponse {
     /**
      * 用户组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<UserGroup>;
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 分页
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Pageable?: Pageable;
     /**
@@ -1063,7 +1039,6 @@ export interface ListUserGroupsResponse {
 export interface UpdateUserResponse {
     /**
      * 更新之后的用户信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     User?: User;
     /**
@@ -1145,7 +1120,6 @@ export interface UpdateUserStatusRequest {
 export interface ListJobsResponse {
     /**
      * 任务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobSet?: Array<Job>;
     /**
@@ -1406,7 +1380,6 @@ export interface MemberMap {
     Value: string;
     /**
      * 类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
 }
@@ -1452,7 +1425,6 @@ export interface ListUserStoreResponse {
 export interface DescribeUserResponse {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -1462,7 +1434,6 @@ export interface DescribeUserResponse {
     Pageable?: Pageable;
     /**
      * 用户列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<User>;
     /**
@@ -1476,7 +1447,6 @@ export interface DescribeUserResponse {
 export interface ListUserResponse {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -1486,7 +1456,6 @@ export interface ListUserResponse {
     Pageable?: Pageable;
     /**
      * 用户列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<User>;
     /**
@@ -1504,22 +1473,18 @@ export interface LogMessage {
     LogId?: string;
     /**
      * 租户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TenantId?: string;
     /**
      * 用户池ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserStoreId?: string;
     /**
      * 事件编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventCode?: string;
     /**
      * 事件发生时间戳，单位：毫秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventDate?: number;
     /**
@@ -1532,52 +1497,42 @@ export interface LogMessage {
   
   <li> **TENANT** </li>  租户
   <li> **USER** </li>  用户
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Participant?: string;
     /**
      * 应用clientId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationClientId?: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 认证源ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthSourceId?: string;
     /**
      * 认证源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthSourceName?: string;
     /**
      * 认证源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthSourceType?: string;
     /**
      * 认证源类别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthSourceCategory?: string;
     /**
      * IP地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
     /**
      * 用户代理
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserAgent?: string;
     /**
      * 用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserId?: string;
     /**
@@ -1605,7 +1560,6 @@ export interface ListLogMessageByConditionResponse {
     Pageable?: Pageable;
     /**
      * 日志列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: Array<LogMessage>;
     /**

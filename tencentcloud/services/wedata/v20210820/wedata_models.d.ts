@@ -9372,6 +9372,11 @@ export interface WorkflowScheduleDtoDs {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CalendarId?: string;
+    /**
+     * 时区配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleTimeZone?: string;
 }
 /**
  * ModifyRuleTemplate请求参数结构体
@@ -10704,6 +10709,14 @@ export interface MakePlanOpsDto {
   REVERSE： 实例数据时间逆序
      */
     MakeDataTimeOrder?: string;
+    /**
+     * 补录时间范围的时区
+     */
+    ScheduleTimeZone?: string;
+    /**
+     * 执行应用参数
+     */
+    AppParam?: string;
 }
 /**
  * DescribeBatchOperateTask返回参数结构体
@@ -14366,6 +14379,10 @@ export interface InstanceApiOpsRequest {
      * true 只过滤重跑过的实例，false 忽略此过滤条件，结果集过滤条件中不包括是否重跑
      */
     OnlyRerun?: boolean;
+    /**
+     * 时区
+     */
+    ScheduleTimeZone?: string;
 }
 /**
  * SubmitSqlTask请求参数结构体
@@ -15076,6 +15093,10 @@ export interface TriggerDsEventRequest {
      * 事件实例信息(连续时间)
      */
     EventBatchCaseList?: Array<EventBatchCaseDTO>;
+    /**
+     * 触发时区
+     */
+    ScheduleTimeZone?: string;
 }
 /**
  * ModifyDataSource请求参数结构体
@@ -16953,6 +16974,14 @@ export interface DescribeOperateOpsTasksRequest {
      * 项目ID列表
      */
     ProjectIds?: Array<string>;
+    /**
+     * 黑名单任务ID列表，传了该值在筛选的时候会将列表中的任务ID剔除
+     */
+    BlackTaskIdList?: Array<string>;
+    /**
+     * 时区
+     */
+    ScheduleTimeZone?: string;
 }
 /**
  * DescribeBatchOperateTask请求参数结构体
@@ -17527,6 +17556,13 @@ export interface TaskOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NewParentTaskInfos?: Array<AiopsSimpleTaskDto>;
+    /**
+     * 任务自依赖类型：
+  yes： 任务需满足自依赖
+  no：任务无需满足自依赖
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfWorkFlowDependType?: string;
 }
 /**
  * DescribeOfflineTaskToken请求参数结构体
@@ -20935,6 +20971,10 @@ export interface RenewWorkflowSchedulerInfoDsRequest {
      * 时区
      */
     ScheduleTimeZone?: string;
+    /**
+     * 是否自动清理不支持的任务链接
+     */
+    ClearLink?: boolean;
 }
 /**
  * 值班信息表
@@ -21128,6 +21168,10 @@ export interface CreateHiveTableRequest {
      * 数据优化针对的表
      */
     TableName?: string;
+    /**
+     * 数据优化资源组
+     */
+    ResourceGroupName?: string;
 }
 /**
  * 数据运维脚本信息
@@ -21948,6 +21992,10 @@ export interface CreateHiveTableByDDLRequest {
      * 数据优化表名
      */
     TableName?: string;
+    /**
+     * 数据优化资源组
+     */
+    ResourceGroupName?: string;
 }
 /**
  * 数据质量数据来源数据库

@@ -548,47 +548,38 @@ export interface Addon {
 export interface OpenPolicyInfo {
   /**
    * 策略分类：cluster集群策略、node节点策略、namespace命名空间策略、configuration配置相关策略、compute计算资源策略、storage存储资源策略、network网络资源策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyCategory?: string
   /**
    * 策略中文名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
   /**
    * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDesc?: string
   /**
    * 策略运行模式：dryrun空跑不生效，deny拦截生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnforcementAction?: string
   /**
    * 关联的事件数量(最近7d)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventNums?: number
   /**
    * 策略英文名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 策略模板类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Kind?: string
   /**
    * 策略开关状态：open打开，close关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnabledStatus?: string
   /**
    * 策略的实例的yaml示例base64编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConstraintYamlExample?: string
   /**
@@ -5987,7 +5978,6 @@ export interface UpdateTKEEdgeClusterRequest {
 export interface DescribeOpenPolicyListResponse {
   /**
    * 策略信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenPolicyInfoList?: Array<OpenPolicyInfo>
   /**

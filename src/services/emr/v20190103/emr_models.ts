@@ -2281,6 +2281,11 @@ TEZ-TezTaskGC:TasksGC
    * Yarn任务的部分核心配置
    */
   JobConf?: string
+  /**
+   * 洞察结构化信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Context?: string
 }
 
 /**

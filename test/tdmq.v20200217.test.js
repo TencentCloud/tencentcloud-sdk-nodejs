@@ -898,6 +898,16 @@ it("tdmq.v20200217.DescribeRocketMQVipInstances", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQTopUsages", async function () {
+    try {
+       const data = await client.DescribeRocketMQTopUsages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.VerifyRocketMQConsume", async function () {
     try {
        const data = await client.VerifyRocketMQConsume({})

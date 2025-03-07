@@ -601,7 +601,7 @@ export interface ProbeTask {
    */
   NodeIpType?: number
   /**
-   * 拨测间隔
+   * 拨测间隔，单位为分钟
    */
   Interval?: number
   /**

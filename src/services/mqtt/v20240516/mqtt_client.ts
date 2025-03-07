@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UpdateAuthorizationPolicyPriorityResponse,
   DeleteUserRequest,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
@@ -52,6 +53,7 @@ import {
   CreateInsPublicEndpointResponse,
   CreateUserResponse,
   CreateAuthorizationPolicyRequest,
+  PublishMessageResponse,
   DescribeAuthenticatorResponse,
   DeactivateCaCertificateResponse,
   DeleteCaCertificateRequest,
@@ -76,7 +78,7 @@ import {
   ActivateCaCertificateRequest,
   ActivateDeviceCertificateResponse,
   DescribeTopicRequest,
-  UpdateAuthorizationPolicyPriorityResponse,
+  PublishMessageRequest,
   CreateTopicResponse,
   DeleteInsPublicEndpointResponse,
   MQTTEndpointItem,
@@ -236,6 +238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteInstanceResponse) => void
   ): Promise<DeleteInstanceResponse> {
     return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
+   * 发布 MQTT 消息到消息主题或客户端
+   */
+  async PublishMessage(
+    req: PublishMessageRequest,
+    cb?: (error: string, rep: PublishMessageResponse) => void
+  ): Promise<PublishMessageResponse> {
+    return this.request("PublishMessage", req, cb)
   }
 
   /**

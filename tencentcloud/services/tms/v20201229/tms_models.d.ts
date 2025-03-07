@@ -79,6 +79,10 @@ export interface TextModerationRequest {
      * 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备
      */
     Device?: Device;
+    /**
+     * Content的原始语种，比如en,zh
+     */
+    SourceLanguage?: string;
 }
 /**
  * 文本审核返回的详细结果

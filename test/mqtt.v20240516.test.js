@@ -118,6 +118,16 @@ it("mqtt.v20240516.DeleteInstance", async function () {
     }
 })
 
+it("mqtt.v20240516.PublishMessage", async function () {
+    try {
+       const data = await client.PublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.ModifyJWTAuthenticator", async function () {
     try {
        const data = await client.ModifyJWTAuthenticator({})

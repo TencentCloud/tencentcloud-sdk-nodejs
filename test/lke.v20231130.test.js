@@ -38,6 +38,16 @@ it("lke.v20231130.DeleteAttributeLabel", async function () {
     }
 })
 
+it("lke.v20231130.GetVarList", async function () {
+    try {
+       const data = await client.GetVarList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.DescribeKnowledgeUsagePieGraph", async function () {
     try {
        const data = await client.DescribeKnowledgeUsagePieGraph({})
@@ -268,9 +278,9 @@ it("lke.v20231130.DescribeSearchStatsGraph", async function () {
     }
 })
 
-it("lke.v20231130.QueryParseDocResult", async function () {
+it("lke.v20231130.DeleteDocCate", async function () {
     try {
-       const data = await client.QueryParseDocResult({})
+       const data = await client.DeleteDocCate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +458,9 @@ it("lke.v20231130.DescribeTokenUsage", async function () {
     }
 })
 
-it("lke.v20231130.DeleteDocCate", async function () {
+it("lke.v20231130.QueryParseDocResult", async function () {
     try {
-       const data = await client.DeleteDocCate({})
+       const data = await client.QueryParseDocResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +581,16 @@ it("lke.v20231130.ListDoc", async function () {
 it("lke.v20231130.ListQA", async function () {
     try {
        const data = await client.ListQA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.CreateVar", async function () {
+    try {
+       const data = await client.CreateVar({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

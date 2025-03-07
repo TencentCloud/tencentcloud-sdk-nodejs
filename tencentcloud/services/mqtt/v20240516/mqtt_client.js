@@ -90,6 +90,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteInstance", req, cb);
     }
     /**
+     * 发布 MQTT 消息到消息主题或客户端
+     */
+    async PublishMessage(req, cb) {
+        return this.request("PublishMessage", req, cb);
+    }
+    /**
      * 修改MQTT JWKS 认证器
      */
     async ModifyJWTAuthenticator(req, cb) {

@@ -62,7 +62,7 @@ export interface DescribeProductCAResponse {
   /**
    * CA证书列表
    */
-  CAs: Array<CertInfo>
+  CAs?: Array<CertInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -305,43 +305,43 @@ export interface PayloadLogItem {
   /**
    * 账号id
    */
-  Uin: string
+  Uin?: string
   /**
    * 产品id
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 设备名称
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 来源类型
    */
-  SrcType: string
+  SrcType?: string
   /**
    * 来源名称
    */
-  SrcName: string
+  SrcName?: string
   /**
    * 消息topic
    */
-  Topic: string
+  Topic?: string
   /**
    * 内容格式类型
    */
-  PayloadFormatType: string
+  PayloadFormatType?: string
   /**
    * 内容信息
    */
-  Payload: string
+  Payload?: string
   /**
    * 请求ID
    */
-  RequestId: string
+  RequestId?: string
   /**
    * 日期时间
    */
-  DateTime: string
+  DateTime?: string
 }
 
 /**
@@ -499,15 +499,15 @@ export interface DescribeGatewayBindDevicesResponse {
   /**
    * 子设备总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 子设备信息
    */
-  Devices: Array<BindDeviceInfo>
+  Devices?: Array<BindDeviceInfo>
   /**
    * 子设备所属的产品名
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -521,32 +521,32 @@ export interface ProductResourceInfo {
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductID?: string
   /**
    * 产品名
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 资源名称
    */
-  Name: string
+  Name?: string
   /**
    * 资源文件md5
    */
-  Md5: string
+  Md5?: string
   /**
    * 资源文件大小
    */
-  Size: number
+  Size?: number
   /**
    * 资源文件描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 资源创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -813,42 +813,42 @@ export interface DeviceUpdateStatus {
   /**
    * 设备名
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 最后处理时间
    */
-  LastProcessTime: number
+  LastProcessTime?: number
   /**
    * 状态
    */
-  Status: number
+  Status?: number
   /**
    * 错误消息
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 返回码
    */
-  Retcode: number
+  Retcode?: number
   /**
    * 目标更新版本
    */
-  DstVersion: string
+  DstVersion?: string
   /**
    * 下载中状态时的下载进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Percent: number
+  Percent?: number
   /**
    * 原版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriVersion: string
+  OriVersion?: string
   /**
    * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
 }
 
 /**
@@ -914,12 +914,12 @@ export interface StatusStatistic {
    * 任务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 统计总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
 }
 
 /**
@@ -1001,20 +1001,20 @@ export interface BindDeviceInfo {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 设备名
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 设备Tag
    */
-  Tags: Array<DeviceTag>
+  Tags?: Array<DeviceTag>
   /**
    * 子设备绑定时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindTime: number
+  BindTime?: number
 }
 
 /**
@@ -1293,17 +1293,17 @@ export interface DescribeFirmwareTaskStatisticsResponse {
    * 升级成功的设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessTotal: number
+  SuccessTotal?: number
   /**
    * 升级失败的设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailureTotal: number
+  FailureTotal?: number
   /**
    * 正在升级的设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpgradingTotal: number
+  UpgradingTotal?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1403,15 +1403,15 @@ export interface CreateProductResponse {
   /**
    * 产品名称
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 产品 ID，腾讯云生成全局唯一 ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 产品属性
    */
-  ProductProperties: ProductProperties
+  ProductProperties?: ProductProperties
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1591,42 +1591,42 @@ export interface DescribeFirmwareTaskResponse {
    * 固件任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 固件任务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 固件任务创建时间，单位:秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 固件任务升级类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: number
+  Type?: number
   /**
    * 产品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpgradeMode: string
+  UpgradeMode?: string
   /**
    * 产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 升级前版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalVersion: string
+  OriginalVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1747,23 +1747,23 @@ export interface TopicRuleInfo {
   /**
    * 规则名称
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 规则描述
    */
-  Description: string
+  Description?: string
   /**
    * 创建时间
    */
-  CreatedAt: number
+  CreatedAt?: number
   /**
    * 不生效
    */
-  RuleDisabled: boolean
+  RuleDisabled?: boolean
   /**
    * 规则模式
    */
-  TopicPattern: string
+  TopicPattern?: string
 }
 
 /**
@@ -1773,7 +1773,7 @@ export interface GetAllVersionResponse {
   /**
    * 版本号列表
    */
-  Version: Array<string>
+  Version?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1797,7 +1797,7 @@ export interface DescribeProductTaskResponse {
   /**
    * 产品任务详细信息
    */
-  TaskInfo: ProductTaskInfo
+  TaskInfo?: ProductTaskInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2029,12 +2029,12 @@ export interface DescribeFirmwareTaskDevicesResponse {
    * 固件升级任务的设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 固件升级任务的设备列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Devices: Array<DeviceUpdateStatus>
+  Devices?: Array<DeviceUpdateStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2049,12 +2049,12 @@ export interface DescribeFirmwareTasksResponse {
    * 固件升级任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskInfos: Array<FirmwareTaskInfo>
+  TaskInfos?: Array<FirmwareTaskInfo>
   /**
    * 固件升级任务总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2078,7 +2078,7 @@ export interface GetCOSURLResponse {
   /**
    * 固件URL
    */
-  Url: string
+  Url?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2222,15 +2222,15 @@ export interface ListLogPayloadResponse {
   /**
    * 日志上下文
    */
-  Context: string
+  Context?: string
   /**
    * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 日志列表
    */
-  Results: Array<PayloadLogItem>
+  Results?: Array<PayloadLogItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2294,7 +2294,7 @@ export interface DescribeFirmwareTaskDistributionResponse {
   /**
    * 固件升级任务状态分布信息
    */
-  StatusInfos: Array<StatusStatistic>
+  StatusInfos?: Array<StatusStatistic>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2308,7 +2308,7 @@ export interface PublishBroadcastMessageResponse {
   /**
    * 广播消息任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2364,7 +2364,7 @@ export interface CreateMultiDevicesTaskResponse {
   /**
    * 任务ID
    */
-  Id: number
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2378,12 +2378,12 @@ export interface DescribeProductResourcesResponse {
   /**
    * 资源总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 资源详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: Array<ProductResourceInfo>
+  Result?: Array<ProductResourceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2451,56 +2451,56 @@ export interface ProductTaskInfo {
   /**
    * 任务ID
    */
-  Id: number
+  Id?: number
   /**
    * 任务类型 0-批量创建设备类型
    */
-  Type: number
+  Type?: number
   /**
    * 任务状态 0-创建中 1-待执行 2-执行中 3-执行失败 4-子任务部分失败 5-执行成功
    */
-  State: number
+  State?: number
   /**
    * 任务参数类型 cosfile-文件输入 random-随机生成
    */
-  ParametersType: string
+  ParametersType?: string
   /**
    * 任务参数
    */
-  Parameters: string
+  Parameters?: string
   /**
    * 任务执行结果类型 cosfile-文件输出 errmsg-错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultType: string
+  ResultType?: string
   /**
    * 任务执行结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 子任务总个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchCount: number
+  BatchCount?: number
   /**
    * 子任务已执行个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchOffset: number
+  BatchOffset?: number
   /**
    * 任务创建时间
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 任务更新时间
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 任务完成时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompleteTime: number
+  CompleteTime?: number
 }
 
 /**
@@ -2637,11 +2637,11 @@ export interface ListTopicRulesResponse {
   /**
    * 规则总数量
    */
-  TotalCnt: number
+  TotalCnt?: number
   /**
    * 规则列表
    */
-  Rules: Array<TopicRuleInfo>
+  Rules?: Array<TopicRuleInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2675,10 +2675,6 @@ export interface CancelDeviceFirmwareTaskRequest {
  */
 export interface DeleteDeviceResourceRequest {
   /**
-   * 产品ID
-   */
-  ProductID: string
-  /**
    * 资源名称
    */
   Name: string
@@ -2686,6 +2682,10 @@ export interface DeleteDeviceResourceRequest {
    * 设备名称
    */
   DeviceName: string
+  /**
+   * 产品ID
+   */
+  ProductID?: string
 }
 
 /**
@@ -2709,15 +2709,15 @@ export interface UpdateProductDynamicRegisterResponse {
   /**
    * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
    */
-  RegisterType: number
+  RegisterType?: number
   /**
    * 动态注册产品密钥
    */
-  ProductSecret: string
+  ProductSecret?: string
   /**
    * 动态注册设备上限
    */
-  RegisterLimit: number
+  RegisterLimit?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2914,7 +2914,7 @@ export interface UpdateDeviceShadowResponse {
   /**
    * 设备影子数据，JSON字符串格式
    */
-  Data: string
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3179,16 +3179,16 @@ export interface ResetDeviceResult {
   /**
    * 设备名
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 是否成功
    */
-  Success: boolean
+  Success?: boolean
   /**
    * 失败原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
 }
 
 /**
@@ -3242,7 +3242,7 @@ export interface DescribeDeviceClientKeyResponse {
   /**
    * 设备的私钥
    */
-  ClientKey: string
+  ClientKey?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3324,11 +3324,11 @@ export interface ResetDeviceStateResponse {
   /**
    * 批量重置设备成功数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 批量重置设备结果
    */
-  ResetDeviceResults: Array<ResetDeviceResult>
+  ResetDeviceResults?: Array<ResetDeviceResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3473,11 +3473,11 @@ export interface CreateTaskFileUrlResponse {
   /**
    * 任务文件上传链接
    */
-  Url: string
+  Url?: string
   /**
    * 任务文件名
    */
-  FileName: string
+  FileName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3491,11 +3491,11 @@ export interface DescribeProductTasksResponse {
   /**
    * 符合条件的任务总个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务详细信息列表
    */
-  TaskInfos: Array<ProductTaskInfo>
+  TaskInfos?: Array<ProductTaskInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

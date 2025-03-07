@@ -322,7 +322,7 @@ export interface ModifyGeneralApmApplicationConfigRequest {
     /**
      * 需要修改配置的应用列表名称
      */
-    ServiceNames?: Array<string>;
+    ServiceNames: Array<string>;
 }
 /**
  * DescribeServiceOverview返回参数结构体
@@ -519,21 +519,21 @@ export interface ApmMetricRecord {
  */
 export interface DescribeServiceOverviewRequest {
     /**
+     * 业务系统 ID
+     */
+    InstanceId: string;
+    /**
      * 指标列表
      */
     Metrics: Array<QueryMetricItem>;
     /**
-     * 业务系统 ID
+     * 聚合维度
      */
-    InstanceId?: string;
+    GroupBy: Array<string>;
     /**
      * 过滤条件
      */
     Filters?: Array<Filter>;
-    /**
-     * 聚合维度
-     */
-    GroupBy?: Array<string>;
     /**
      * 开始时间（单位：秒）
      */
@@ -576,17 +576,13 @@ export interface DescribeApmAgentResponse {
  */
 export interface DescribeTagValuesRequest {
     /**
+     * 业务系统 ID
+     */
+    InstanceId: string;
+    /**
      * 维度名
      */
     TagKey: string;
-    /**
-     * 业务系统 ID
-     */
-    InstanceId?: string;
-    /**
-     * 过滤条件
-     */
-    Filters?: Array<Filter>;
     /**
      * 开始时间（单位为秒）
      */
@@ -595,6 +591,10 @@ export interface DescribeTagValuesRequest {
      * 结束时间（单位为秒）
      */
     EndTime?: number;
+    /**
+     * 过滤条件
+     */
+    Filters?: Array<Filter>;
     /**
      * Or 过滤条件
      */
@@ -806,7 +806,11 @@ export interface DescribeGeneralOTSpanListResponse {
      */
     TotalCount?: number;
     /**
-     * 装有查询结果 Spans 的 Trace 结构体。OpenTelemetry 标准 Trace 结构体哈希后的字符串，先将 Trace 利用 ptrace.JSONMarshaler 转换成 Json 字符串，再用 gzip 压缩，最后转换成 base64 标准的字符串。
+     * Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。
+  1. 将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。
+  2. 使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。
+  3. 使用 UTF-8 字符集，将压缩前的字节数组转换为文本。
+  
      */
     Spans?: string;
     /**

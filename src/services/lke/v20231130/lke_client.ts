@@ -136,6 +136,7 @@ import {
   ModifyAttributeLabelResponse,
   KnowledgeQaSingleWorkflow,
   ListQACateResponse,
+  GetVarListRequest,
   RetryDocParseResponse,
   CreateRejectedQuestionResponse,
   ReconstructDocumentConfig,
@@ -216,6 +217,7 @@ import {
   ExportQAListRequest,
   GetDocPreviewResponse,
   DescribeConcurrencyUsageResponse,
+  TaskFLowVar,
   CreateReleaseResponse,
   QueryRewriteRequest,
   ModifyAppRequest,
@@ -263,6 +265,7 @@ import {
   IsTransferIntentRequest,
   DescribeReferRequest,
   DeleteAppRequest,
+  GetVarListResponse,
   WorkFlowSummary,
   TaskParams,
   ListAppCategoryRspOption,
@@ -287,10 +290,12 @@ import {
   GetTaskStatusRequest,
   CheckAttributeLabelReferResponse,
   RateMsgRecordResponse,
+  CreateVarResponse,
   ModifyDocAttrRangeRequest,
   ReleaseRejectedQuestion,
   CreateQACateRequest,
   DescribeRobotBizIDByAppKeyRequest,
+  CreateVarRequest,
   DocumentRecognizeInfo,
   CreateReconstructDocumentFlowResponse,
   HistorySummary,
@@ -335,6 +340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAttributeLabelResponse) => void
   ): Promise<DeleteAttributeLabelResponse> {
     return this.request("DeleteAttributeLabel", req, cb)
+  }
+
+  /**
+   * 查询自定义变量列表
+   */
+  async GetVarList(
+    req: GetVarListRequest,
+    cb?: (error: string, rep: GetVarListResponse) => void
+  ): Promise<GetVarListResponse> {
+    return this.request("GetVarList", req, cb)
   }
 
   /**
@@ -570,15 +585,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已迁移到新接口了，无调用量
-
-查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
-     */
-  async QueryParseDocResult(
-    req: QueryParseDocResultRequest,
-    cb?: (error: string, rep: QueryParseDocResultResponse) => void
-  ): Promise<QueryParseDocResultResponse> {
-    return this.request("QueryParseDocResult", req, cb)
+   * Doc分类删除
+   */
+  async DeleteDocCate(
+    req: DeleteDocCateRequest,
+    cb?: (error: string, rep: DeleteDocCateResponse) => void
+  ): Promise<DeleteDocCateResponse> {
+    return this.request("DeleteDocCate", req, cb)
   }
 
   /**
@@ -752,13 +765,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Doc分类删除
-   */
-  async DeleteDocCate(
-    req: DeleteDocCateRequest,
-    cb?: (error: string, rep: DeleteDocCateResponse) => void
-  ): Promise<DeleteDocCateResponse> {
-    return this.request("DeleteDocCate", req, cb)
+     * 接口已迁移到新接口了，无调用量
+
+查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
+     */
+  async QueryParseDocResult(
+    req: QueryParseDocResultRequest,
+    cb?: (error: string, rep: QueryParseDocResultResponse) => void
+  ): Promise<QueryParseDocResultResponse> {
+    return this.request("QueryParseDocResult", req, cb)
   }
 
   /**
@@ -879,6 +894,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListQAResponse) => void
   ): Promise<ListQAResponse> {
     return this.request("ListQA", req, cb)
+  }
+
+  /**
+   * 创建变量
+   */
+  async CreateVar(
+    req: CreateVarRequest,
+    cb?: (error: string, rep: CreateVarResponse) => void
+  ): Promise<CreateVarResponse> {
+    return this.request("CreateVar", req, cb)
   }
 
   /**

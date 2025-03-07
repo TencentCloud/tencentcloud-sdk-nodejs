@@ -158,17 +158,14 @@ export interface RedisBackupSet {
   Locked?: number
   /**
    * 内部字段，用户可忽略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupSize?: number
   /**
    * 内部字段，用户可忽略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FullBackup?: number
   /**
    * 内部字段，用户可忽略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: number
   /**
@@ -922,12 +919,10 @@ export interface DescribeInstancesResponse {
 export interface TaskInfoDetail {
   /**
    * 任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**
    * 任务开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
@@ -987,32 +982,26 @@ export interface TaskInfoDetail {
 - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。
 - FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。
 - FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
   /**
    * 实例名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 实例 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 任务进度。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number
   /**
    * 任务执行结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
@@ -1022,7 +1011,6 @@ export interface TaskInfoDetail {
 1：执行中。
 2：完成。
 4：失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: number
 }
@@ -1323,22 +1311,18 @@ export interface RenewInstanceRequest {
 export interface RedisInstanceEvent {
   /**
    * 事件 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: number
   /**
    * 实例 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 实例名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 事件类型，当前仅支持配置实例迁移、资源腾挪、机房裁撤相关的运维操作。该参数仅支持配置为 **InstanceMigration**。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
@@ -1347,27 +1331,22 @@ export interface RedisInstanceEvent {
 - High：重要
 - Middle：中等
 - Low：一般
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Grade?: string
   /**
    * 事件计划执行日期。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionDate?: string
   /**
    * 事件计划执行开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 事件计划执行结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 运维事件最迟执行的日期，即该事件必须在该日期之前完成，否则可能会对业务产生影响。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestExecutionDate?: string
   /**
@@ -1376,22 +1355,18 @@ export interface RedisInstanceEvent {
 - Running：在维护时间窗内，正在执行维护的事件。
 - Finished：已全部完成维护的事件。
 - Canceled：已取消执行的事件。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 事件执行任务完成时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskEndTime?: string
   /**
    * 事件影响信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EffectInfo?: string
   /**
    * 事件最初计划执行日期。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialExecutionDate?: string
 }
@@ -1636,17 +1611,14 @@ export interface ParameterDetail {
   NeedReboot?: number
   /**
    * 参数允许的最大值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Max?: string
   /**
    * 参数允许的最小值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Min?: string
   /**
    * 参数可选枚举值。如果为非枚举参数，则为空。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnumValue?: Array<string>
 }
@@ -2025,12 +1997,10 @@ export interface ChangeReplicaToMasterRequest {
 export interface ProxyNodes {
   /**
    * 节点 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeId?: string
   /**
    * 可用区 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
 }
@@ -3185,12 +3155,10 @@ export interface ModifyInstanceEventRequest {
 export interface SecondLevelBackupMissingTimestamps {
   /**
    * 开始时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTimeStamp?: number
   /**
    * 结束时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTimeStamp?: number
 }
@@ -4048,7 +4016,6 @@ export interface ProductConf {
    * 是否支持副本只读。
 - true：支持副本只读。
 - false：不支持。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableReplicaReadOnly?: boolean
 }

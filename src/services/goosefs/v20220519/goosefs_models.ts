@@ -152,7 +152,6 @@ export interface FSAttribute {
   CreateTime?: string
   /**
    * GooseFSx文件系统属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GooseFSxAttribute?: GooseFSxAttribute
   /**
@@ -181,7 +180,6 @@ export interface FSAttribute {
   Zone?: string
   /**
    * Tag数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: Array<Tag>
   /**
@@ -190,7 +188,6 @@ export interface FSAttribute {
   ModifyTime?: string
   /**
    * 文件系统付费信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeAttribute?: ChargeAttribute
 }
@@ -240,7 +237,6 @@ export interface ChargeAttribute {
   CurDeadline?: string
   /**
    * 付费方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
@@ -919,7 +915,6 @@ export interface MappedBucket {
 
 周期沉降(PeriodExport)
 立即沉降(ImmediateExport)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataRepositoryTaskAutoStrategy?: Array<string>
   /**

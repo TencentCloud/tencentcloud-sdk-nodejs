@@ -5107,6 +5107,10 @@ export interface ServerlessIndexSettingsField {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RefreshInterval?: string
+  /**
+   * 自定义参数
+   */
+  CustomSetting?: string
 }
 
 /**

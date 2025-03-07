@@ -46,52 +46,42 @@ export interface ModifyAutoBackupConfigResponse {
 export interface TaskInfoDetail {
     /**
      * 任务Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskType?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 实例Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 项目Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: number;
     /**
      * 任务进度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Progress?: number;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 任务状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: number;
     /**
      * 操作者用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorUin?: string;
 }
@@ -442,7 +432,6 @@ export interface ModifyAutoBackupConfigRequest {
 export interface ProxyNodeInfo {
     /**
      * 节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeId?: string;
 }
@@ -677,7 +666,6 @@ export interface InstanceIntegerParam {
     Status?: number;
     /**
      * 参数单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Unit?: string;
 }
@@ -855,16 +843,15 @@ export interface DescribeInstanceBackupsResponse {
     /**
      * 备份文件总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 废弃字段。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupSet: Array<BinlogInfo>;
+    BackupSet?: Array<BinlogInfo>;
     /**
      * 实例备份信息列表。
      */
-    BackupRecord: Array<BackupInfo>;
+    BackupRecord?: Array<BackupInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1068,12 +1055,10 @@ export interface DescribeConnectionConfigResponse {
     ClientLimit?: number;
     /**
      * 单分片连接数限制最小值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimitMin?: number;
     /**
      * 单分片连接数限制最大值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimitMax?: number;
     /**
@@ -1088,24 +1073,23 @@ export interface BinlogInfo {
     /**
      * 备份开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 备份 ID。
      */
-    BackupId: string;
+    BackupId?: string;
     /**
      * 备份文件名。
      */
-    Filename: string;
+    Filename?: string;
     /**
      * 备份文件大小，单位：Byte。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileSize: number;
+    FileSize?: number;
 }
 /**
  * ModifyNetworkConfig请求参数结构体
@@ -1668,72 +1652,58 @@ export interface InstanceInfo {
     SlaveReadWeight?: number;
     /**
      * 实例关联的标签信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceTags?: Array<InstanceTagInfo>;
     /**
      * 项目名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectName?: string;
     /**
      * 是否为免密实例；<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NoAuth?: boolean;
     /**
      * 客户端连接数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimit?: number;
     /**
      * DTS状态（内部参数，用户可忽略）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DtsStatus?: number;
     /**
      * 分片带宽上限，单位 MB。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetLimit?: number;
     /**
      * 免密实例标识（内部参数，用户可忽略）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PasswordFree?: number;
     /**
      * 实例只读标识（内部参数，用户可忽略）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadOnly?: number;
     /**
      * 内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip6?: string;
     /**
      * 内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RemainBandwidthDuration?: string;
     /**
      * 实例的磁盘容量大小。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize?: number;
     /**
      * 监控版本。<ul><li>1m：分钟粒度监控。</li><li>5s：5秒粒度监控。</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorVersion?: string;
     /**
      * 客户端最大连接数可设置的最小值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimitMin?: number;
     /**
      * 客户端最大连接数可设置的最大值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimitMax?: number;
     /**
@@ -1743,12 +1713,10 @@ export interface InstanceInfo {
     NodeSet?: Array<NodeInfo>;
     /**
      * 实例所在的地域信息，比如ap-guangzhou。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 实例内存容量，单位：GB。KeeWiDB 内存容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineMemory?: number;
     /**
@@ -1765,7 +1733,6 @@ export interface InstanceInfo {
     DiskReplicasNum?: number;
     /**
      * 数据压缩开关。<ul><li>ON：开启。</li><li>OFF：关闭。</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Compression?: string;
 }
@@ -2367,40 +2334,35 @@ export interface DescribeInstanceNodeInfoResponse {
     /**
      * Proxy 节点数量。
      */
-    ProxyCount: number;
+    ProxyCount?: number;
     /**
      * Proxy 节点信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Proxy: Array<ProxyNodeInfo>;
+    Proxy?: Array<ProxyNodeInfo>;
     /**
      * Redis 节点数量。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。
      */
-    RedisCount: number;
+    RedisCount?: number;
     /**
      * Redis 节点信息。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Redis: Array<RedisNodeInfo>;
+    Redis?: Array<RedisNodeInfo>;
     /**
      * Tendis 节点数量。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。
      */
-    TendisCount: number;
+    TendisCount?: number;
     /**
      * Tendis 节点信息。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tendis: Array<InstanceNodeInfo>;
+    Tendis?: Array<InstanceNodeInfo>;
     /**
      * KeewiDB 节点数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeeWiDBCount: number;
+    KeeWiDBCount?: number;
     /**
      * KeewiDB 节点信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeeWiDB: Array<InstanceNodeInfo>;
+    KeeWiDB?: Array<InstanceNodeInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
