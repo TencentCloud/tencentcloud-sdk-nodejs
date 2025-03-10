@@ -151,6 +151,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInsVPCEndpoints", req, cb);
     }
     /**
+     * 查询 MQTT 客户端详情
+     */
+    async DescribeClientList(req, cb) {
+        return this.request("DescribeClientList", req, cb);
+    }
+    /**
      * 获取产品售卖规格
      */
     async DescribeProductSKUList(req, cb) {
@@ -297,10 +303,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ActivateCaCertificate", req, cb);
     }
     /**
+     * 查询消息列表，如查询死信，请设置ConsumerGroup参数
+     */
+    async DescribeMessageList(req, cb) {
+        return this.request("DescribeMessageList", req, cb);
+    }
+    /**
      * 添加mqtt角色
      */
     async CreateUser(req, cb) {
         return this.request("CreateUser", req, cb);
+    }
+    /**
+     * 查询共享订阅消息堆积量
+     */
+    async DescribeSharedSubscriptionLag(req, cb) {
+        return this.request("DescribeSharedSubscriptionLag", req, cb);
     }
     /**
      * 申请ca注册码

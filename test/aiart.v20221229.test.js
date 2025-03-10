@@ -28,6 +28,16 @@ it("aiart.v20221229.SubmitMemeJob", async function () {
     }
 })
 
+it("aiart.v20221229.RefineImage", async function () {
+    try {
+       const data = await client.RefineImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.SketchToImage", async function () {
     try {
        const data = await client.SketchToImage({})

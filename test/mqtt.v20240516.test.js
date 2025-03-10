@@ -218,6 +218,16 @@ it("mqtt.v20240516.DescribeInsVPCEndpoints", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeClientList", async function () {
+    try {
+       const data = await client.DescribeClientList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeProductSKUList", async function () {
     try {
        const data = await client.DescribeProductSKUList({})
@@ -448,9 +458,29 @@ it("mqtt.v20240516.ActivateCaCertificate", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeMessageList", async function () {
+    try {
+       const data = await client.DescribeMessageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeSharedSubscriptionLag", async function () {
+    try {
+       const data = await client.DescribeSharedSubscriptionLag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

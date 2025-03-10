@@ -28,6 +28,16 @@ it("organization.v20210331.QuitOrganization", async function () {
     }
 })
 
+it("organization.v20210331.BindOrganizationPolicySubAccount", async function () {
+    try {
+       const data = await client.BindOrganizationPolicySubAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.ListGroupMembers", async function () {
     try {
        const data = await client.ListGroupMembers({})
@@ -291,6 +301,16 @@ it("organization.v20210331.CreateRoleAssignment", async function () {
 it("organization.v20210331.CreateRoleConfiguration", async function () {
     try {
        const data = await client.CreateRoleConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CancelOrganizationPolicySubAccount", async function () {
+    try {
+       const data = await client.CancelOrganizationPolicySubAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1385,6 +1385,40 @@ export interface CancelOrganizationMemberAuthAccountRequest {
 }
 
 /**
+ * UpdateUser请求参数结构体
+ */
+export interface UpdateUserRequest {
+  /**
+   * 空间 ID。
+   */
+  ZoneId: string
+  /**
+   * 用户 ID。
+   */
+  UserId: string
+  /**
+   * 用户的名。
+   */
+  NewFirstName?: string
+  /**
+   * 用户的姓。
+   */
+  NewLastName?: string
+  /**
+   * 用户的显示名称。
+   */
+  NewDisplayName?: string
+  /**
+   * 用户的描述。
+   */
+  NewDescription?: string
+  /**
+   * 用户的电子邮箱。
+   */
+  NewEmail?: string
+}
+
+/**
  * GetGroup请求参数结构体
  */
 export interface GetGroupRequest {
@@ -2322,6 +2356,20 @@ export interface ListOrganizationIdentityResponse {
 }
 
 /**
+ * CancelOrganizationPolicySubAccount请求参数结构体
+ */
+export interface CancelOrganizationPolicySubAccountRequest {
+  /**
+   * 策略ID。
+   */
+  PolicyId: number
+  /**
+   * 组织管理员子账号Uin列表。最大5个
+   */
+  OrgSubAccountUins: Array<number | bigint>
+}
+
+/**
  * 共享地域
  */
 export interface ShareArea {
@@ -2355,19 +2403,13 @@ export interface DeletePolicyRequest {
 }
 
 /**
- * 共享资源
+ * CancelOrganizationPolicySubAccount返回参数结构体
  */
-export interface ShareResource {
+export interface CancelOrganizationPolicySubAccountResponse {
   /**
-   * 共享资源ID。
-   * @deprecated
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceId?: string
-  /**
-   * 产品资源ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductResourceId?: string
+  RequestId?: string
 }
 
 /**
@@ -3202,6 +3244,16 @@ export interface TaskInfo {
 }
 
 /**
+ * BindOrganizationPolicySubAccount返回参数结构体
+ */
+export interface BindOrganizationPolicySubAccountResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteOrganizationMemberAuthIdentity请求参数结构体
  */
 export interface DeleteOrganizationMemberAuthIdentityRequest {
@@ -3216,37 +3268,85 @@ export interface DeleteOrganizationMemberAuthIdentityRequest {
 }
 
 /**
- * UpdateUser请求参数结构体
+ * 企业组织成员
  */
-export interface UpdateUserRequest {
+export interface OrgMember {
   /**
-   * 空间 ID。
+   * 成员Uin
    */
-  ZoneId: string
+  MemberUin?: number
   /**
-   * 用户 ID。
+   * 成员名
    */
-  UserId: string
+  Name?: string
   /**
-   * 用户的名。
+   * 成员类型，邀请：Invite， 创建：Create
    */
-  NewFirstName?: string
+  MemberType?: string
   /**
-   * 用户的姓。
+   * 关系策略类型
    */
-  NewLastName?: string
+  OrgPolicyType?: string
   /**
-   * 用户的显示名称。
+   * 关系策略名
    */
-  NewDisplayName?: string
+  OrgPolicyName?: string
   /**
-   * 用户的描述。
+   * 关系策略权限
    */
-  NewDescription?: string
+  OrgPermission?: Array<OrgPermission>
   /**
-   * 用户的电子邮箱。
+   * 所属节点ID
    */
-  NewEmail?: string
+  NodeId?: number
+  /**
+   * 所属节点名
+   */
+  NodeName?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 是否允许成员退出。允许：Allow，不允许：Denied。
+   */
+  IsAllowQuit?: string
+  /**
+   * 代付者Uin
+   */
+  PayUin?: string
+  /**
+   * 代付者名称
+   */
+  PayName?: string
+  /**
+   * 管理身份
+   */
+  OrgIdentity?: Array<MemberIdentity>
+  /**
+   * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+   */
+  BindStatus?: string
+  /**
+   * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
+   */
+  PermissionStatus?: string
+  /**
+   * 成员标签列表
+   */
+  Tags?: Array<Tag>
+  /**
+   * 腾讯云昵称
+   */
+  NickName?: string
 }
 
 /**
@@ -4438,85 +4538,17 @@ export interface ListPoliciesRequest {
 }
 
 /**
- * 企业组织成员
+ * BindOrganizationPolicySubAccount请求参数结构体
  */
-export interface OrgMember {
+export interface BindOrganizationPolicySubAccountRequest {
   /**
-   * 成员Uin
+   * 策略ID。
    */
-  MemberUin?: number
+  PolicyId: number
   /**
-   * 成员名
+   * 组织管理员子账号Uin列表。最大5个
    */
-  Name?: string
-  /**
-   * 成员类型，邀请：Invite， 创建：Create
-   */
-  MemberType?: string
-  /**
-   * 关系策略类型
-   */
-  OrgPolicyType?: string
-  /**
-   * 关系策略名
-   */
-  OrgPolicyName?: string
-  /**
-   * 关系策略权限
-   */
-  OrgPermission?: Array<OrgPermission>
-  /**
-   * 所属节点ID
-   */
-  NodeId?: number
-  /**
-   * 所属节点名
-   */
-  NodeName?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 是否允许成员退出。允许：Allow，不允许：Denied。
-   */
-  IsAllowQuit?: string
-  /**
-   * 代付者Uin
-   */
-  PayUin?: string
-  /**
-   * 代付者名称
-   */
-  PayName?: string
-  /**
-   * 管理身份
-   */
-  OrgIdentity?: Array<MemberIdentity>
-  /**
-   * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-   */
-  BindStatus?: string
-  /**
-   * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
-   */
-  PermissionStatus?: string
-  /**
-   * 成员标签列表
-   */
-  Tags?: Array<Tag>
-  /**
-   * 腾讯云昵称
-   */
-  NickName?: string
+  OrgSubAccountUins: Array<number | bigint>
 }
 
 /**
@@ -5666,6 +5698,22 @@ export interface GroupMembers {
 }
 
 /**
+ * 共享资源
+ */
+export interface ShareResource {
+  /**
+   * 共享资源ID。
+   * @deprecated
+   */
+  ResourceId?: string
+  /**
+   * 产品资源ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductResourceId?: string
+}
+
+/**
  * DeleteRoleAssignment请求参数结构体
  */
 export interface DeleteRoleAssignmentRequest {
@@ -6178,13 +6226,9 @@ export interface UpdateUserSyncProvisioningResponse {
 }
 
 /**
- * CreateGroup返回参数结构体
+ * DeleteSCIMCredential返回参数结构体
  */
-export interface CreateGroupResponse {
-  /**
-   * 用户组信息。
-   */
-  GroupInfo?: GroupInfo
+export interface DeleteSCIMCredentialResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6216,9 +6260,13 @@ export interface DeleteAccountResponse {
 }
 
 /**
- * DeleteSCIMCredential返回参数结构体
+ * CreateGroup返回参数结构体
  */
-export interface DeleteSCIMCredentialResponse {
+export interface CreateGroupResponse {
+  /**
+   * 用户组信息。
+   */
+  GroupInfo?: GroupInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

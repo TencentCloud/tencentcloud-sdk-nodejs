@@ -648,6 +648,10 @@ HoaiMy
    * 通话内容提取配置
    */
   ExtractConfig?: Array<AICallExtractConfigElement>
+  /**
+   * 模型温度控制
+   */
+  Temperature?: number
 }
 
 /**

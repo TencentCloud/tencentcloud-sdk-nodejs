@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SubmitDrawPortraitJobResponse,
+  RefineImageRequest,
   LogoParam,
   ImageToImageRequest,
   QueryTrainPortraitModelJobRequest,
@@ -60,6 +61,7 @@ import {
   UploadTrainPortraitImagesResponse,
   QueryTextToImageProJobRequest,
   GenerateAvatarResponse,
+  RefineImageResponse,
   TextToImageResponse,
   SubmitDrawPortraitJobRequest,
 } from "./aiart_models"
@@ -86,6 +88,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitMemeJobResponse) => void
   ): Promise<SubmitMemeJobResponse> {
     return this.request("SubmitMemeJob", req, cb)
+  }
+
+  /**
+     * 将图像变清晰，增强图像细节。变清晰后的图片将保持原图比例，长边为2048。
+默认提供1个并发，代表最多能同时处理1个已提交的任务。
+     */
+  async RefineImage(
+    req: RefineImageRequest,
+    cb?: (error: string, rep: RefineImageResponse) => void
+  ): Promise<RefineImageResponse> {
+    return this.request("RefineImage", req, cb)
   }
 
   /**

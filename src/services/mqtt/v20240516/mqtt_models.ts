@@ -26,6 +26,24 @@ export interface UpdateAuthorizationPolicyPriorityResponse {
 }
 
 /**
+ * DescribeDeviceCertificates返回参数结构体
+ */
+export interface DescribeDeviceCertificatesResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 设备证书
+   */
+  Data?: Array<DeviceCertificateItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUser请求参数结构体
  */
 export interface DeleteUserRequest {
@@ -164,6 +182,40 @@ export interface ApplyRegistrationCodeRequest {
 }
 
 /**
+ * DescribeMessageList请求参数结构体
+ */
+export interface DescribeMessageListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 请求任务id
+   */
+  TaskRequestId: string
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
+}
+
+/**
  * ModifyJWTAuthenticator请求参数结构体
  */
 export interface ModifyJWTAuthenticatorRequest {
@@ -244,6 +296,20 @@ export interface DescribeInsPublicEndpointsResponse {
     CLOSE-关闭
    */
   Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSharedSubscriptionLag返回参数结构体
+ */
+export interface DescribeSharedSubscriptionLagResponse {
+  /**
+   * 堆积值
+   */
+  Lag?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -605,6 +671,20 @@ export interface MQTTAuthenticatorItem {
 }
 
 /**
+ * DescribeClientList返回参数结构体
+ */
+export interface DescribeClientListResponse {
+  /**
+   * 客户端列表
+   */
+  Clients?: Array<MQTTClientInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 标签数据
  */
 export interface Tag {
@@ -618,6 +698,30 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
+}
+
+/**
+ * DescribeMessageList返回参数结构体
+ */
+export interface DescribeMessageListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 消息记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<MQTTMessageItem>
+  /**
+   * 请求任务id
+   */
+  TaskRequestId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -787,6 +891,57 @@ export interface ModifyInsPublicEndpointResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 消息记录
+ */
+export interface MQTTMessageItem {
+  /**
+   * 消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgId?: string
+  /**
+   * 消息tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: string
+  /**
+   * 消息key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: string
+  /**
+   * 客户端地址	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerAddr?: string
+  /**
+   * 消息发送时间	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProduceTime?: string
+  /**
+   * 死信重发次数	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendTimes?: number
+  /**
+   * 死信重发成功次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendSuccessTimes?: number
+  /**
+   * 子topic
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubTopic?: string
+  /**
+   * 消息质量等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qos?: string
 }
 
 /**
@@ -1293,6 +1448,24 @@ export interface CreateTopicResponse {
 }
 
 /**
+ * DescribeClientList请求参数结构体
+ */
+export interface DescribeClientListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 客户端名
+   */
+  ClientId?: string
+  /**
+   * 客户端数量限制,最大1024，默认1024
+   */
+  Number?: string
+}
+
+/**
  * DeleteInsPublicEndpoint返回参数结构体
  */
 export interface DeleteInsPublicEndpointResponse {
@@ -1661,21 +1834,25 @@ export interface DeactivateDeviceCertificateRequest {
 }
 
 /**
- * DescribeDeviceCertificates返回参数结构体
+ * MQTT 订阅关系
  */
-export interface DescribeDeviceCertificatesResponse {
+export interface MQTTClientSubscription {
   /**
-   * 总数
+   * topic 订阅
    */
-  TotalCount?: number
+  TopicFilter?: string
   /**
-   * 设备证书
+   * 服务质量等级
    */
-  Data?: Array<DeviceCertificateItem>
+  Qos?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 堆积数量
    */
-  RequestId?: string
+  Lag?: number
+  /**
+   * 投递未确认数量
+   */
+  Inflight?: number
 }
 
 /**
@@ -1976,6 +2153,16 @@ export interface DescribeAuthorizationPoliciesRequest {
 }
 
 /**
+ * RevokedDeviceCertificate返回参数结构体
+ */
+export interface RevokedDeviceCertificateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProductSKUList请求参数结构体
  */
 export type DescribeProductSKUListRequest = null
@@ -2226,6 +2413,57 @@ JITP 自动注册
 }
 
 /**
+ * MQTT客户端信息
+ */
+export interface MQTTClientInfo {
+  /**
+   * 客户端唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * 客户端网络地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientAddress?: string
+  /**
+   * MQTT 协议版本，4 表示 MQTT 3.1.1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtocolVersion?: number
+  /**
+   * 保持连接时间，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keepalive?: number
+  /**
+   * 连接状态，CONNECTED 已连接，DISCONNECTED 未连接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionStatus?: string
+  /**
+   * 客户端创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 上次建立连接时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectTime?: number
+  /**
+   * 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisconnectTime?: number
+  /**
+   * 客户端的订阅列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MQTTClientSubscriptions?: Array<MQTTClientSubscription>
+}
+
+/**
  * MQTT 主题详情
  */
 export interface MQTTTopicItem {
@@ -2330,13 +2568,17 @@ export interface ModifyAuthorizationPolicyRequest {
 }
 
 /**
- * RevokedDeviceCertificate返回参数结构体
+ * DescribeSharedSubscriptionLag请求参数结构体
  */
-export interface RevokedDeviceCertificateResponse {
+export interface DescribeSharedSubscriptionLagRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群id
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 共享订阅表达式
+   */
+  SharedSubscription: string
 }
 
 /**

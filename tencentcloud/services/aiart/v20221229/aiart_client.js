@@ -39,6 +39,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitMemeJob", req, cb);
     }
     /**
+     * 将图像变清晰，增强图像细节。变清晰后的图片将保持原图比例，长边为2048。
+默认提供1个并发，代表最多能同时处理1个已提交的任务。
+     */
+    async RefineImage(req, cb) {
+        return this.request("RefineImage", req, cb);
+    }
+    /**
      * 线稿生图接口支持上传一张黑白线稿图，按照指定的主体对象以及样式、颜色、材质、风格等的文本描述prompt ，对线稿图进行色彩填充与细节描绘，得到一张完整绘制的图像。生成图分辨率默认为1024:1024。
 线稿生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */

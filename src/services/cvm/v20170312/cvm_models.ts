@@ -1298,7 +1298,6 @@ export interface ModifyHpcClusterAttributeResponse {
 export interface LaunchTemplateVersionInfo {
   /**
    * 实例启动模板版本号。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LaunchTemplateVersion?: number
   /**
@@ -1319,7 +1318,6 @@ export interface LaunchTemplateVersionInfo {
   IsDefaultVersion?: boolean
   /**
    * 实例启动模板版本描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LaunchTemplateVersionDescription?: string
   /**
@@ -1717,12 +1715,10 @@ export interface ReservedInstancePrice {
   DiscountUsagePrice?: number
   /**
    * 预支费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FixedPriceDiscount?: number
   /**
    * 后续费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsagePriceDiscount?: number
 }

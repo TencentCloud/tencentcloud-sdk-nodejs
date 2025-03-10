@@ -82,6 +82,7 @@ import {
   UpdateUserSyncProvisioningRequest,
   ListRoleAssignmentsRequest,
   CancelOrganizationMemberAuthAccountRequest,
+  UpdateUserRequest,
   GetGroupRequest,
   OrganizationServiceAssign,
   DeleteOrganizationResponse,
@@ -132,9 +133,10 @@ import {
   Tag,
   AddOrganizationMemberEmailRequest,
   ListOrganizationIdentityResponse,
+  CancelOrganizationPolicySubAccountRequest,
   ShareArea,
   DeletePolicyRequest,
-  ShareResource,
+  CancelOrganizationPolicySubAccountResponse,
   GetUserSyncProvisioningResponse,
   GroupInfo,
   GetSCIMSynchronizationStatusResponse,
@@ -173,8 +175,9 @@ import {
   DeleteOrganizationMemberAuthIdentityResponse,
   UpdateOrganizationMemberEmailBindRequest,
   TaskInfo,
+  BindOrganizationPolicySubAccountResponse,
   DeleteOrganizationMemberAuthIdentityRequest,
-  UpdateUserRequest,
+  OrgMember,
   ListTargetsForPolicyNode,
   ListGroupsRequest,
   UpdateRoleConfigurationRequest,
@@ -238,7 +241,7 @@ import {
   DescribeOrganizationMemberEmailBindRequest,
   RemovePermissionPolicyFromRoleConfigurationResponse,
   ListPoliciesRequest,
-  OrgMember,
+  BindOrganizationPolicySubAccountRequest,
   OrgMemberAuthAccount,
   CreateOrganizationMemberRequest,
   AuthRelationFile,
@@ -296,6 +299,7 @@ import {
   JoinedGroups,
   CreateRoleConfigurationResponse,
   GroupMembers,
+  ShareResource,
   DeleteRoleAssignmentRequest,
   ListTargetsForPolicyRequest,
   DeleteOrganizationIdentityRequest,
@@ -317,10 +321,10 @@ import {
   SAMLIdentityProviderConfiguration,
   RolePolicie,
   UpdateUserSyncProvisioningResponse,
-  CreateGroupResponse,
+  DeleteSCIMCredentialResponse,
   UpdateZoneRequest,
   DeleteAccountResponse,
-  DeleteSCIMCredentialResponse,
+  CreateGroupResponse,
 } from "./organization_models"
 
 /**
@@ -340,6 +344,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QuitOrganizationResponse) => void
   ): Promise<QuitOrganizationResponse> {
     return this.request("QuitOrganization", req, cb)
+  }
+
+  /**
+   * 绑定成员访问授权策略和组织管理员子账号
+   */
+  async BindOrganizationPolicySubAccount(
+    req: BindOrganizationPolicySubAccountRequest,
+    cb?: (error: string, rep: BindOrganizationPolicySubAccountResponse) => void
+  ): Promise<BindOrganizationPolicySubAccountResponse> {
+    return this.request("BindOrganizationPolicySubAccount", req, cb)
   }
 
   /**
@@ -610,6 +624,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRoleConfigurationResponse) => void
   ): Promise<CreateRoleConfigurationResponse> {
     return this.request("CreateRoleConfiguration", req, cb)
+  }
+
+  /**
+   * 解绑成员访问授权策略和组织管理员子账号
+   */
+  async CancelOrganizationPolicySubAccount(
+    req: CancelOrganizationPolicySubAccountRequest,
+    cb?: (error: string, rep: CancelOrganizationPolicySubAccountResponse) => void
+  ): Promise<CancelOrganizationPolicySubAccountResponse> {
+    return this.request("CancelOrganizationPolicySubAccount", req, cb)
   }
 
   /**

@@ -13,6 +13,27 @@ export interface SubmitDrawPortraitJobResponse {
     RequestId?: string;
 }
 /**
+ * RefineImage请求参数结构体
+ */
+export interface RefineImageRequest {
+    /**
+     * 输入图 Url。
+  Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
+  图片限制：转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+     */
+    InputUrl?: string;
+    /**
+     * 输入图 Base64 数据。
+  Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
+  图片限制：转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+     */
+    InputImage?: string;
+    /**
+     * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 示例值：url
+     */
+    RspImgType?: string;
+}
+/**
  * logo参数
  */
 export interface LogoParam {
@@ -1123,6 +1144,21 @@ export interface QueryTextToImageProJobRequest {
  * GenerateAvatar返回参数结构体
  */
 export interface GenerateAvatarResponse {
+    /**
+     * 根据入参 RspImgType 填入不同，返回不同的内容。
+  如果传入 base64 则返回生成图 Base64 编码。
+  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
+     */
+    ResultImage?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RefineImage返回参数结构体
+ */
+export interface RefineImageResponse {
     /**
      * 根据入参 RspImgType 填入不同，返回不同的内容。
   如果传入 base64 则返回生成图 Base64 编码。

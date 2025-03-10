@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpdateAuthorizationPolicyPriorityResponse,
+  DescribeDeviceCertificatesResponse,
   DeleteUserRequest,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
@@ -26,9 +27,11 @@ import {
   ActivateDeviceCertificateRequest,
   CreateInstanceResponse,
   ApplyRegistrationCodeRequest,
+  DescribeMessageListRequest,
   ModifyJWTAuthenticatorRequest,
   AuthorizationPolicyPriority,
   DescribeInsPublicEndpointsResponse,
+  DescribeSharedSubscriptionLagResponse,
   DeleteTopicRequest,
   ModifyUserResponse,
   DescribeCaCertificateResponse,
@@ -44,12 +47,15 @@ import {
   ModifyInstanceRequest,
   RegisterDeviceCertificateResponse,
   MQTTAuthenticatorItem,
+  DescribeClientListResponse,
   Tag,
+  DescribeMessageListResponse,
   MQTTInstanceItem,
   DescribeInstanceListResponse,
   ApplyRegistrationCodeResponse,
   ModifyInstanceResponse,
   ModifyInsPublicEndpointResponse,
+  MQTTMessageItem,
   ModifyJWKSAuthenticatorResponse,
   CreateInsPublicEndpointResponse,
   CreateUserResponse,
@@ -81,6 +87,7 @@ import {
   DescribeTopicRequest,
   PublishMessageRequest,
   CreateTopicResponse,
+  DescribeClientListRequest,
   DeleteInsPublicEndpointResponse,
   MQTTEndpointItem,
   DescribeInsVPCEndpointsRequest,
@@ -95,7 +102,7 @@ import {
   RegisterDeviceCertificateRequest,
   Filter,
   DeactivateDeviceCertificateRequest,
-  DescribeDeviceCertificatesResponse,
+  MQTTClientSubscription,
   ModifyTopicRequest,
   CreateUserRequest,
   DescribeInstanceResponse,
@@ -110,6 +117,7 @@ import {
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   DescribeAuthorizationPoliciesRequest,
+  RevokedDeviceCertificateResponse,
   DescribeProductSKUListRequest,
   DescribeTopicListResponse,
   DescribeDeviceCertificateResponse,
@@ -118,10 +126,11 @@ import {
   CreateJWTAuthenticatorRequest,
   DescribeCaCertificatesRequest,
   DeviceCertificateItem,
+  MQTTClientInfo,
   MQTTTopicItem,
   PriceTag,
   ModifyAuthorizationPolicyRequest,
-  RevokedDeviceCertificateResponse,
+  DescribeSharedSubscriptionLagRequest,
   DeleteTopicResponse,
   ModifyInstanceCertBindingRequest,
   DescribeInstanceRequest,
@@ -341,6 +350,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInsVPCEndpointsResponse) => void
   ): Promise<DescribeInsVPCEndpointsResponse> {
     return this.request("DescribeInsVPCEndpoints", req, cb)
+  }
+
+  /**
+   * 查询 MQTT 客户端详情
+   */
+  async DescribeClientList(
+    req: DescribeClientListRequest,
+    cb?: (error: string, rep: DescribeClientListResponse) => void
+  ): Promise<DescribeClientListResponse> {
+    return this.request("DescribeClientList", req, cb)
   }
 
   /**
@@ -582,6 +601,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询消息列表，如查询死信，请设置ConsumerGroup参数
+   */
+  async DescribeMessageList(
+    req: DescribeMessageListRequest,
+    cb?: (error: string, rep: DescribeMessageListResponse) => void
+  ): Promise<DescribeMessageListResponse> {
+    return this.request("DescribeMessageList", req, cb)
+  }
+
+  /**
    * 添加mqtt角色
    */
   async CreateUser(
@@ -589,6 +618,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserResponse) => void
   ): Promise<CreateUserResponse> {
     return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 查询共享订阅消息堆积量
+   */
+  async DescribeSharedSubscriptionLag(
+    req: DescribeSharedSubscriptionLagRequest,
+    cb?: (error: string, rep: DescribeSharedSubscriptionLagResponse) => void
+  ): Promise<DescribeSharedSubscriptionLagResponse> {
+    return this.request("DescribeSharedSubscriptionLag", req, cb)
   }
 
   /**

@@ -1962,6 +1962,11 @@ export interface Policy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
+  /**
+   * 引擎类型
+
+   */
+  EngineGeneration?: string
 }
 
 /**

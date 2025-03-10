@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QuitOrganization", req, cb);
     }
     /**
+     * 绑定成员访问授权策略和组织管理员子账号
+     */
+    async BindOrganizationPolicySubAccount(req, cb) {
+        return this.request("BindOrganizationPolicySubAccount", req, cb);
+    }
+    /**
      * 查询用户组中的用户列表
      */
     async ListGroupMembers(req, cb) {
@@ -194,6 +200,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateRoleConfiguration(req, cb) {
         return this.request("CreateRoleConfiguration", req, cb);
+    }
+    /**
+     * 解绑成员访问授权策略和组织管理员子账号
+     */
+    async CancelOrganizationPolicySubAccount(req, cb) {
+        return this.request("CancelOrganizationPolicySubAccount", req, cb);
     }
     /**
      * 接受加入共享单元邀请。
