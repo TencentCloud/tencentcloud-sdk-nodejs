@@ -141,6 +141,10 @@ export interface CreateRoomRequest {
      * 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0
      */
     RecordStream?: number;
+    /**
+     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     */
+    WhiteBoardSnapshotMode?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -665,37 +669,30 @@ export interface CreateGroupWithSubGroupRequest {
 export interface RoomItem {
     /**
      * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 房间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoomId?: number;
     /**
      * 房间状态。0 未开始 ；1进行中  ；2 已结束；3已过期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: number;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: number;
     /**
      * 实际开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealStartTime?: number;
     /**
      * 实际结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealEndTime?: number;
     /**
@@ -703,89 +700,77 @@ export interface RoomItem {
   1 标清
   2 高清
   3 全高清
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resolution?: number;
     /**
      * 最大允许连麦人数。已废弃，使用字段 MaxMicNumber
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxRTCMember?: number;
     /**
      * 房间录制地址。已废弃，使用新字段 RecordUrl
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReplayUrl?: string;
     /**
      * 录制地址（协议为https)。仅在房间结束后存在。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordUrl?: string;
     /**
      * 课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxMicNumber?: number;
     /**
      * 打开学生麦克风/摄像头的授权开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableDirectControl?: number;
     /**
      * 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InteractionMode?: number;
     /**
      * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VideoOrientation?: number;
     /**
      * 开启课后评分。 0：不开启(默认)  1：开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsGradingRequiredPostClass?: number;
     /**
      * 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展）
   注：大班课的布局(layout)只有三分屏
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoomType?: number;
     /**
      * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndDelayTime?: number;
     /**
      * 直播类型：0 常规（默认）1 伪直播
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LiveType?: number;
     /**
      * 伪直播回放链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordLiveUrl?: string;
     /**
      * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableAutoStart?: number;
     /**
      * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordBackground?: string;
     /**
      * 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordScene?: string;
     /**
      * 录制自定义语言，仅recordlayout=9的时候此参数有效
      */
     RecordLang?: string;
+    /**
+     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     */
+    WhiteBoardSnapshotMode?: number;
 }
 /**
  * 课堂评分字段
@@ -2199,22 +2184,18 @@ export interface DescribeRoomResponse {
     DisableRecord?: number;
     /**
      * 助教UserId列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Assistants?: Array<string>;
     /**
      * 录制地址（协议为https)。仅在房间结束后存在。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordUrl?: string;
     /**
      * 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 房间绑定的群组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
@@ -2284,6 +2265,10 @@ export interface DescribeRoomResponse {
      * 录制模板。房间子类型为视频+白板（SubType=videodoc）时默认为3，房间子类型为纯视频（SubType=video）时默认为0。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
      */
     RecordLayout?: number;
+    /**
+     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     */
+    WhiteBoardSnapshotMode?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2935,6 +2920,10 @@ export interface RoomInfo {
      * 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0
      */
     RecordStream?: number;
+    /**
+     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     */
+    WhiteBoardSnapshotMode?: number;
 }
 /**
  * DescribeMarquee返回参数结构体
@@ -3726,6 +3715,10 @@ export interface ModifyRoomRequest {
      * @deprecated
      */
     RecordLang?: string;
+    /**
+     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     */
+    WhiteBoardSnapshotMode?: number;
 }
 /**
  * 自定义录制信息

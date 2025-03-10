@@ -80,61 +80,51 @@ export interface AppInfoItem {
     /**
      * App包名
      */
-    AppPackage: string;
+    AppPackage?: string;
     /**
      * App名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * App版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppVersion: string;
+    AppVersion?: string;
     /**
      * 应用平台, 0:android, 1:ios, 2:小程序
      */
-    Platform: number;
+    Platform?: number;
     /**
      * App隐私诊断报告下载链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReportUrl: string;
+    ReportUrl?: string;
     /**
      * App隐私诊断报告名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReportTitle: string;
+    ReportTitle?: string;
     /**
      * App诊断堆栈报告下载链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BehaviorUrl: string;
+    BehaviorUrl?: string;
     /**
      * App诊断堆栈报告名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BehaviorTitle: string;
+    BehaviorTitle?: string;
     /**
      * 诊断高风险项数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    HighRiskCount: number;
+    HighRiskCount?: number;
     /**
      * 隐私申明文件名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivacyTextName: string;
+    PrivacyTextName?: string;
     /**
      * 软件MD5
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SoftwareMD5: string;
+    SoftwareMD5?: string;
     /**
      * 隐私文本MD5
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivacyTextMD5: string;
+    PrivacyTextMD5?: string;
 }
 /**
  * DescribeResourceUsageInfo返回参数结构体
@@ -143,11 +133,11 @@ export interface DescribeResourceUsageInfoResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义，暂时未定
      */
-    Result: number;
+    Result?: number;
     /**
      * 资源使用信息
      */
-    Data: ResourceUsageInfoData;
+    Data?: ResourceUsageInfoData;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -217,32 +207,28 @@ export interface ResourceUsageInfoData {
 export interface TaskFlowStepsInfo {
     /**
      * 流程编号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowNo: string;
+    FlowNo?: string;
     /**
      * 流程名称
      */
-    FlowName: string;
+    FlowName?: string;
     /**
      * 流程状态, 其他值:进行中, 2:成功, 3:失败
      */
-    FlowStatus: number;
+    FlowStatus?: number;
     /**
      * 流程状态描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowStateDesc: string;
+    FlowStateDesc?: string;
     /**
      * 流程启动时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 流程完成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
 }
 /**
  * CreateAppScanTask请求参数结构体
@@ -461,41 +447,39 @@ export interface AppTaskData {
     /**
      * 任务ID
      */
-    TaskID: string;
+    TaskID?: string;
     /**
      * 任务类型, 0:基础版, 1:专家版, 2:本地化
      */
-    TaskType: number;
+    TaskType?: number;
     /**
      * 0:默认值(待检测/待咨询), 1.检测中, 2:待评估, 3:评估中, 4:任务完成/咨询完成, 5:任务失败, 6:咨询中;
      */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskErrMsg: string;
+    TaskErrMsg?: string;
     /**
      * 任务来源,0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android)
      */
-    Source: number;
+    Source?: number;
     /**
      * 应用信息
      */
-    AppInfo: AppInfoItem;
+    AppInfo?: AppInfoItem;
     /**
      * 任务启动时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务完成时间(更新时间)
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 联系人信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContactName: string;
+    ContactName?: string;
 }
 /**
  * DescribeScanTaskStatus请求参数结构体

@@ -145,6 +145,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceCertBinding", req, cb);
     }
     /**
+     * 查询MQTT实例公网接入点
+     */
+    async DescribeInsVPCEndpoints(req, cb) {
+        return this.request("DescribeInsVPCEndpoints", req, cb);
+    }
+    /**
      * 获取产品售卖规格
      */
     async DescribeProductSKUList(req, cb) {

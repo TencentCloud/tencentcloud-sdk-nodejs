@@ -69,8 +69,9 @@ export declare class Client extends AbstractClient {
     ScaleOutInstances(req: ScaleOutInstancesRequest, cb?: (error: string, rep: ScaleOutInstancesResponse) => void): Promise<ScaleOutInstancesResponse>;
     /**
      * 伸缩组内实例退出备用中状态。
-* 备用中状态的实例负载均衡器权重值为 0，退出备用中状态后，权重值也会恢复
-* 对备用中状态实例进行开关机操作也会使其退出备用中状态
+* 退出备用中状态后，实例会进入运行中状态，CLB 权重值恢复为预设值
+* 调用弹性伸缩开关机接口会使得备用中状态发生变化，而云服务器开关机接口不会影响
+* 实例退出备用中状态后，伸缩组会上调期望实例数，新期望数不能大于最大值
      */
     ExitStandby(req: ExitStandbyRequest, cb?: (error: string, rep: ExitStandbyResponse) => void): Promise<ExitStandbyResponse>;
     /**

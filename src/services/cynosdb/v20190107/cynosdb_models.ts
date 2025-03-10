@@ -2997,7 +2997,7 @@ export interface CreateClustersData {
  */
 export interface DescribeProxiesRequest {
   /**
-   * 集群ID（该参数必传，例如cynosdbmysql-xxxxxx）
+   * 集群 ID（该参数必传，例如 cynosdbmysql-2u2mh111）。
    */
   ClusterId?: string
   /**
@@ -8287,6 +8287,10 @@ pausing
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZoneAttr?: Array<SlaveZoneAttrItem>
+  /**
+   * 版本标签
+   */
+  CynosVersionTag?: string
 }
 
 /**

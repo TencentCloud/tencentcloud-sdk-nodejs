@@ -28,7 +28,7 @@ import {
   ApplyRegistrationCodeRequest,
   ModifyJWTAuthenticatorRequest,
   AuthorizationPolicyPriority,
-  ModifyInstanceRequest,
+  DescribeInsPublicEndpointsResponse,
   DeleteTopicRequest,
   ModifyUserResponse,
   DescribeCaCertificateResponse,
@@ -40,10 +40,11 @@ import {
   ProductSkuItem,
   ModifyJWKSAuthenticatorRequest,
   RegisterCaCertificateResponse,
+  DeleteInstanceRequest,
+  ModifyInstanceRequest,
   RegisterDeviceCertificateResponse,
   MQTTAuthenticatorItem,
   Tag,
-  DescribeDeviceCertificateRequest,
   MQTTInstanceItem,
   DescribeInstanceListResponse,
   ApplyRegistrationCodeResponse,
@@ -82,6 +83,7 @@ import {
   CreateTopicResponse,
   DeleteInsPublicEndpointResponse,
   MQTTEndpointItem,
+  DescribeInsVPCEndpointsRequest,
   DescribeTopicListRequest,
   AuthorizationPolicyItem,
   RevokedDeviceCertificateRequest,
@@ -98,8 +100,8 @@ import {
   CreateUserRequest,
   DescribeInstanceResponse,
   ModifyInstanceCertBindingResponse,
-  DeleteInstanceRequest,
-  DescribeInsPublicEndpointsResponse,
+  DescribeInsVPCEndpointsResponse,
+  DescribeDeviceCertificateRequest,
   ModifyInsPublicEndpointRequest,
   DeleteInsPublicEndpointRequest,
   DescribeUserListRequest,
@@ -329,6 +331,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceCertBindingResponse) => void
   ): Promise<ModifyInstanceCertBindingResponse> {
     return this.request("ModifyInstanceCertBinding", req, cb)
+  }
+
+  /**
+   * 查询MQTT实例公网接入点
+   */
+  async DescribeInsVPCEndpoints(
+    req: DescribeInsVPCEndpointsRequest,
+    cb?: (error: string, rep: DescribeInsVPCEndpointsResponse) => void
+  ): Promise<DescribeInsVPCEndpointsResponse> {
+    return this.request("DescribeInsVPCEndpoints", req, cb)
   }
 
   /**

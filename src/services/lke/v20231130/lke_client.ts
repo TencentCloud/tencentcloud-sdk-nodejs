@@ -114,7 +114,7 @@ import {
   GetAppSecretRequest,
   ModelParameter,
   DeleteQACateResponse,
-  QueryParseDocResultResponse,
+  SaveDocResponse,
   ListReleaseDocPreviewResponse,
   WordRecognizeInfo,
   RenameDocRequest,
@@ -179,7 +179,7 @@ import {
   DescribeReleaseResponse,
   DescribeConcurrencyUsageGraphResponse,
   ListDocItem,
-  ParseDocRequest,
+  VerifyQARequest,
   Polygon,
   AppModel,
   Stat,
@@ -226,7 +226,6 @@ import {
   DeleteAttributeLabelResponse,
   RetryReleaseRequest,
   KnowledgeQaPlugin,
-  VerifyQARequest,
   DeleteQACateRequest,
   GenerateQARequest,
   GetWsTokenRequest,
@@ -258,7 +257,6 @@ import {
   CreateQAResponse,
   ReRankDataObject,
   StopDocParseResponse,
-  ParseDocResponse,
   ListQACateRequest,
   ListReleaseQAPreviewRequest,
   DescribeReleaseInfoResponse,
@@ -273,9 +271,7 @@ import {
   DescribeStorageCredentialRequest,
   QAList,
   DescribeCorpResponse,
-  QueryParseDocResultRequest,
   ModifyDocCateResponse,
-  SaveDocResponse,
   ListReleaseResponse,
   ListModelResponse,
   ListAttributeLabelResponse,
@@ -765,18 +761,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已迁移到新接口了，无调用量
-
-查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
-     */
-  async QueryParseDocResult(
-    req: QueryParseDocResultRequest,
-    cb?: (error: string, rep: QueryParseDocResultResponse) => void
-  ): Promise<QueryParseDocResultResponse> {
-    return this.request("QueryParseDocResult", req, cb)
-  }
-
-  /**
    * 获取QA分类
    */
   async ListQACate(
@@ -987,18 +971,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRejectedQuestionResponse) => void
   ): Promise<ModifyRejectedQuestionResponse> {
     return this.request("ModifyRejectedQuestion", req, cb)
-  }
-
-  /**
-     * 接口已迁移到新接口了，无调用量
-
-接口即将下线，请切换使用新接口：[文档解析](https://cloud.tencent.com/document/product/1759/107504)
-     */
-  async ParseDoc(
-    req: ParseDocRequest,
-    cb?: (error: string, rep: ParseDocResponse) => void
-  ): Promise<ParseDocResponse> {
-    return this.request("ParseDoc", req, cb)
   }
 
   /**

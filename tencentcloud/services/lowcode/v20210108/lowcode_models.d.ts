@@ -3,6 +3,10 @@
  */
 export interface DescribeKnowledgeSetListRequest {
     /**
+     * 环境ID
+     */
+    EnvId: string;
+    /**
      * 知识库标识，精准查询
      */
     Name?: string;
@@ -10,6 +14,10 @@ export interface DescribeKnowledgeSetListRequest {
      * 知识库名称，精准查询
      */
     Title?: string;
+    /**
+     * 分页起始位
+     */
+    Offset?: number;
     /**
      * 查询条数
      */
@@ -79,6 +87,10 @@ export interface DeleteKnowledgeDocumentSetRsp {
  */
 export interface UploadKnowledgeDocumentSetRequest {
     /**
+     * 环境ID
+     */
+    EnvId: string;
+    /**
      * 知识库标识
      */
     CollectionView: string;
@@ -87,7 +99,7 @@ export interface UploadKnowledgeDocumentSetRequest {
      */
     FileName: string;
     /**
-     * 文件存储位置的可读地址
+     * 腾讯云文件存储位置的可读地址
      */
     CosUrl: string;
     /**
@@ -277,6 +289,10 @@ export interface DocumentQuery {
  */
 export interface UpdateKnowledgeSetRequest {
     /**
+     * 环境ID
+     */
+    EnvId: string;
+    /**
      * 知识库标识
      */
     Name: string;
@@ -292,6 +308,10 @@ export interface UpdateKnowledgeSetRequest {
      * 状态;ENABLED启用；NOT_ENABLED不启用
      */
     Active?: string;
+    /**
+     * 知识库的meta信息
+     */
+    Meta?: string;
 }
 /**
  * 知识库搜索文档信息
@@ -546,6 +566,10 @@ export interface KnowledgeSet {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
+    /**
+     * 知识库的meta信息
+     */
+    Meta?: string;
 }
 /**
  * 文件拆分信息
@@ -573,6 +597,10 @@ export interface KnowledgeSplitterPreprocess {
  */
 export interface DescribeKnowledgeDocumentSetDetailRequest {
     /**
+     * 环境ID
+     */
+    EnvId: string;
+    /**
      * 知识库标识
      */
     CollectionView: string;
@@ -599,6 +627,10 @@ export interface CreateKnowledgeSetResponse {
  */
 export interface DeleteKnowledgeSetRequest {
     /**
+     * 环境ID
+     */
+    EnvId: string;
+    /**
      * 知识库标识
      */
     Name: string;
@@ -624,6 +656,10 @@ export interface RelationField {
  * DescribeKnowledgeDocumentSetList请求参数结构体
  */
 export interface DescribeKnowledgeDocumentSetListRequest {
+    /**
+     * 环境ID
+     */
+    EnvId: string;
     /**
      * 知识库标识
      */
@@ -714,6 +750,10 @@ export interface DescribeDataSourceListRequest {
  * DeleteKnowledgeDocumentSet请求参数结构体
  */
 export interface DeleteKnowledgeDocumentSetRequest {
+    /**
+     * 环境ID
+     */
+    EnvId: string;
     /**
      * 知识库标识
      */
@@ -840,6 +880,10 @@ export interface TicketAuthInfo {
  */
 export interface CreateKnowledgeSetRequest {
     /**
+     * 环境ID
+     */
+    EnvId: string;
+    /**
      * 知识库标识
      */
     Name: string;
@@ -851,6 +895,10 @@ export interface CreateKnowledgeSetRequest {
      * 描述
      */
     Desc?: string;
+    /**
+     * 知识库的meta信息
+     */
+    Meta?: string;
 }
 /**
  * 上传知识库文档返回结果

@@ -4,8 +4,10 @@
 export interface ScheduleSettings {
     /**
      * 执行策略：
-  <br><li>ONCE：单次执行
-  <br><li>RECURRENCE：周期执行
+  - ONCE：单次执行
+  - RECURRENCE：周期执行
+  
+  只有在 CreateInvoker 时才必填，ModifyInvoker 时为非必填
      */
     Policy: string;
     /**
@@ -14,6 +16,8 @@ export interface ScheduleSettings {
     Recurrence?: string;
     /**
      * 执行器下次执行时间。Policy 为 ONCE 时，需要指定此字段。
+  
+  时间格式为：YYYY-MM-DDThh:mm:ssZ
      */
     InvokeTime?: string;
 }
@@ -66,6 +70,8 @@ export interface CreateCommandResponse {
 export interface DisableInvokerRequest {
     /**
      * 待停止的执行器ID。
+  
+  可通过 [DescribeInvokers(查询执行器)](https://cloud.tencent.com/document/api/1340/61759) 接口获取。
      */
     InvokerId: string;
 }
@@ -90,7 +96,7 @@ export interface RegisterInstanceInfo {
      */
     MachineId?: string;
     /**
-     * 系统名。
+     * 系统名。取值：Linux | Windows。
      */
     SystemName?: string;
     /**
@@ -111,13 +117,17 @@ export interface RegisterInstanceInfo {
      */
     Status?: string;
     /**
-     * 创建时间。
+     * 创建时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     CreatedTime?: string;
     /**
-     * 上次更新时间。
+     * 上次更新时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     UpdatedTime?: string;
+    /**
+     * 标签
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * 自动化助手客户端信息
@@ -156,6 +166,8 @@ export interface AutomationAgentInfo {
 export interface DisableRegisterCodesRequest {
     /**
      * 注册码ID。
+  
+  可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。
      */
     RegisterCodeIds: Array<string>;
 }
@@ -164,27 +176,31 @@ export interface DisableRegisterCodesRequest {
  */
 export interface DescribeRegisterInstancesRequest {
     /**
-     * 实例id。
+     * 托管实例 id。
+  
+  参数不支持同时指定 `InstanceIds` 和 `Filters` 。
+  
      */
     InstanceIds?: Array<string>;
     /**
-     * 过滤器列表。
+     * 过滤器列表。参数不支持同时指定 `InstanceIds` 和 `Filters` 。
+  
   
   - instance-name
   
-  按照【实例名称】进行过滤。
+  按照【托管实例名称】进行过滤。
   类型：String
   必选：否
   
   - instance-id
   
-  按照【实例ID】进行过滤。
+  按照【托管实例ID】进行过滤。
   类型：String
   必选：否
   
   - register-code-id
   
-  按照【注册码ID】进行过滤。
+  按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。
   类型：String
   必选：否
   
@@ -212,6 +228,8 @@ export interface DescribeRegisterInstancesRequest {
 export interface DeleteRegisterCodesRequest {
     /**
      * 注册码ID列表。限制输入的注册码ID数量大于0小于100。
+  
+  可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。
      */
     RegisterCodeIds: Array<string>;
 }
@@ -230,8 +248,15 @@ export interface Invocation {
     /**
      * 执行任务状态。取值范围：
   
-  <ul> <li>PENDING：等待下发</li> <li>RUNNING：命令运行中</li> <li>SUCCESS：命令成功</li> <li>FAILED：命令失败</li> <li>TIMEOUT：命令超时</li> <li>PARTIAL_FAILED：命令部分失败</li> <li>PARTIAL_CANCELLED：任务部分取消</li> <li>CANCELLED：任务全部取消</li> <li>CANCELLING：任务取消中</li> </ul>
-  
+  - PENDING：等待下发
+  - RUNNING：命令运行中
+  - CANCELLING：取消中
+  - SUCCESS：命令成功
+  - TIMEOUT：命令超时
+  - FAILED：命令失败
+  - CANCELLED：命令全部取消
+  - PARTIAL_FAILED：命令部分失败
+  - PARTIAL_CANCELLED：命令部分取消
      */
     InvocationStatus?: string;
     /**
@@ -243,19 +268,19 @@ export interface Invocation {
      */
     Description?: string;
     /**
-     * 执行活动开始时间。
+     * 执行活动开始时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     StartTime?: string;
     /**
-     * 执行活动结束时间。
+     * 执行活动结束时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     EndTime?: string;
     /**
-     * 执行活动创建时间。
+     * 执行活动创建时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     CreatedTime?: string;
     /**
-     * 执行活动更新时间。
+     * 执行活动更新时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     UpdatedTime?: string;
     /**
@@ -276,6 +301,9 @@ export interface Invocation {
     Username?: string;
     /**
      * 调用来源。
+  
+  - USER：来源于用户调用。
+  - INVOKER：来源于定时执行。
      */
     InvocationSource?: string;
     /**
@@ -309,6 +337,11 @@ export interface Invocation {
 export interface GeneralResourceQuotaSet {
     /**
      * 资源名称
+  
+  取值为：
+  
+  - COMMAND：命令
+  - REGISTER_CODE：托管实例注册码
      */
     ResourceName?: string;
     /**
@@ -329,9 +362,12 @@ export interface RunCommandRequest {
      */
     Content: string;
     /**
-     * 待执行命令的实例ID列表，上限200。支持实例类型：
-  <li> CVM </li>
-  <li> LIGHTHOUSE </li>
+     * 待执行命令的实例ID列表，上限200。
+  
+  可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：
+  - CVM
+  - Lighthouse
+  - TAT 托管实例
      */
     InstanceIds: Array<string>;
     /**
@@ -343,7 +379,7 @@ export interface RunCommandRequest {
      */
     Description?: string;
     /**
-     * 命令类型，目前支持取值：SHELL、POWERSHELL。默认：SHELL。
+     * 命令类型，目前支持取值：SHELL、POWERSHELL、BAT。默认：SHELL。
      */
     CommandType?: string;
     /**
@@ -373,6 +409,8 @@ export interface RunCommandRequest {
     /**
      * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+  仅在命令的 EnableParameter 为 true 时，才允许设置此参数。
+  参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。
   如果 Parameters 未提供，将使用这里的默认值进行替换。
   自定义参数最多20个。
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
@@ -380,12 +418,16 @@ export interface RunCommandRequest {
     DefaultParameters?: string;
     /**
      * 自定义参数数组。 如果 Parameters 未提供，将使用这里的默认值进行替换。 自定义参数最多20个。
+  如果 Parameters 未提供，将使用这里的默认值进行替换。
+  仅在命令的 EnableParameter 为 true 时，才允许设置此参数。
+  参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。
      */
     DefaultParameterConfs?: Array<DefaultParameterConf>;
     /**
      * Command 的自定义参数。字段类型为json encoded string。如：{"varA": "222"}。
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
-  如果未提供该参数取值，将使用 DefaultParameters 进行替换。
+  仅在命令的 EnableParameter 为 true 时，才允许设置此参数。
+  如果未提供该参数取值，将使用 DefaultParameters 或 DefaultParameterConfs 进行替换。
   自定义参数最多20个。
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
@@ -416,17 +458,23 @@ export interface RunCommandRequest {
  */
 export interface InvokeCommandRequest {
     /**
-     * 待触发的命令ID。
+     * 待触发的命令ID。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
      */
     CommandId: string;
     /**
      * 待执行命令的实例ID列表，上限200。
+  
+  可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：
+  - CVM
+  - Lighthouse
+  - TAT 托管实例
      */
     InstanceIds: Array<string>;
     /**
      * Command 的自定义参数。字段类型为json encoded string。如：{"varA": "222"}。
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
-  如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
+  仅在命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
+  如果未提供该参数取值，将使用 Command 的 DefaultParameters 或 DefaultParameterConfs 进行替换。
   自定义参数最多20个。
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
@@ -467,7 +515,12 @@ export interface DescribeInvocationTasksRequest {
     /**
      * 过滤条件。<br>
   
-  <li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。</li> <li> invocation-task-id - String - 是否必填：否 -（过滤条件）按照执行任务ID过滤。</li> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。</li> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。</li> <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationTaskIds` 和 `Filters` 。
+  - invocation-task-id - String - 是否必填：否 -（过滤条件）按照执行任务ID过滤。
+  - invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。可通过 [DescribeInvocations(查询执行活动)](https://cloud.tencent.com/document/api/1340/52679) 接口获取。
+  - instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型： CVM、Lighthouse、TAT 托管实例
+  - command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
+  
+  每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationTaskIds` 和 `Filters` 。
      */
     Filters?: Array<Filter>;
     /**
@@ -479,9 +532,12 @@ export interface DescribeInvocationTasksRequest {
      */
     Offset?: number;
     /**
-     * 是否隐藏输出，取值范围：
+     * 是否隐藏命令输出结果，取值范围：
   
-  <ul> <li>true：隐藏输出</li> <li>false：不隐藏</li> </ul> 默认为 true。
+  - true：隐藏输出
+  - false：不隐藏
+   
+  默认为 true。
      */
     HideOutput?: boolean;
 }
@@ -507,11 +563,11 @@ export interface CommandDocument {
      */
     Content?: string;
     /**
-     * 命令类型。
+     * 命令类型。取值为 SHELL、POWERSHELL、BAT 之一。
      */
     CommandType?: string;
     /**
-     * 超时时间。
+     * 超时时间。单位：秒。
      */
     Timeout?: number;
     /**
@@ -561,12 +617,12 @@ export interface TaskResult {
      */
     Output?: string;
     /**
-     * 命令执行开始时间。
+     * 命令执行开始时间。格式为：YYYY-MM-DDThh:mm:ssZ
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecStartTime?: string;
     /**
-     * 命令执行结束时间。
+     * 命令执行结束时间。格式为：YYYY-MM-DDThh:mm:ssZ
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecEndTime?: string;
@@ -589,6 +645,8 @@ export interface TaskResult {
 export interface ModifyInvokerRequest {
     /**
      * 待修改的执行器ID。
+  
+  可通过 [DescribeInvokers(查询执行器)](https://cloud.tencent.com/document/api/1340/61759) 接口获取。
      */
     InvokerId: string;
     /**
@@ -601,6 +659,8 @@ export interface ModifyInvokerRequest {
     Type?: string;
     /**
      * 待修改的命令ID。
+  
+  可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
      */
     CommandId?: string;
     /**
@@ -609,10 +669,16 @@ export interface ModifyInvokerRequest {
     Username?: string;
     /**
      * 待修改的自定义参数。
+  
+  仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
      */
     Parameters?: string;
     /**
      * 待修改的实例ID列表。列表长度上限100。
+  
+  可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。
+  
+  实例需要安装 TAT 客户端, 且客户端为 Online 状态。可通过 [DescribeAutomationAgentStatus(查询客户端状态)](https://cloud.tencent.com/document/api/1340/52682) 接口查询客户端状态。
      */
     InstanceIds?: Array<string>;
     /**
@@ -627,35 +693,36 @@ export interface InvocationTaskBasicInfo {
     /**
      * 执行任务ID。
      */
-    InvocationTaskId: string;
+    InvocationTaskId?: string;
     /**
      * 执行任务状态。取值范围：
-  <li> PENDING：等待下发
-  <li> DELIVERING：下发中
-  <li> DELIVER_DELAYED：延时下发
-  <li> DELIVER_FAILED：下发失败
-  <li> START_FAILED：命令启动失败
-  <li> RUNNING：命令运行中
-  <li> SUCCESS：命令成功
-  <li> FAILED：命令执行失败，执行完退出码不为 0
-  <li> TIMEOUT：命令超时
-  <li> TASK_TIMEOUT：执行任务超时
-  <li> CANCELLING：取消中
-  <li> CANCELLED：已取消（命令启动前就被取消）
-  <li> TERMINATED：已中止（命令执行期间被取消）
+  
+  - PENDING：等待下发
+  - DELIVERING：下发中
+  - DELIVER_DELAYED：延时下发
+  - DELIVER_FAILED：下发失败
+  - START_FAILED：命令启动失败
+  - RUNNING：命令运行中
+  - SUCCESS：命令成功
+  - FAILED：命令执行失败，执行完退出码不为 0
+  - TIMEOUT：命令超时
+  - TASK_TIMEOUT：客户端无响应
+  - CANCELLING：取消中
+  - CANCELLED：已取消（命令启动前就被取消）
+  - TERMINATED：已中止（命令执行期间被取消）
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
 }
 /**
  * DeleteCommands请求参数结构体
  */
 export interface DeleteCommandsRequest {
     /**
-     * 待删除命令id
+     * 待删除的命令 ID。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
      */
     CommandIds: Array<string>;
 }
@@ -673,7 +740,12 @@ export interface EnableInvokerResponse {
  */
 export interface DescribeQuotasRequest {
     /**
-     * 资源名称，目前有"COMMAND","REGISTER_CODE" 这两个指标
+     * 资源名称
+  
+  取值为：
+  
+  - COMMAND：命令
+  - REGISTER_CODE：托管实例注册码
      */
     ResourceNames: Array<string>;
 }
@@ -683,6 +755,8 @@ export interface DescribeQuotasRequest {
 export interface EnableInvokerRequest {
     /**
      * 待启用的执行器ID。
+  
+  可通过 [DescribeInvokers(查询执行器)](https://cloud.tencent.com/document/api/1340/61759) 接口获取。
      */
     InvokerId: string;
 }
@@ -753,15 +827,15 @@ export interface RegionInfo {
     /**
      * 地域名称，例如，ap-guangzhou
      */
-    Region: string;
+    Region?: string;
     /**
      * 地域描述，例如: 广州
      */
-    RegionName: string;
+    RegionName?: string;
     /**
-     * 地域是否可用状态，AVAILABLE 代表可用
+     * 地域是否可用状态，AVAILABLE 代表可用，UNAVAILABLE 代表不可用。
      */
-    RegionState: string;
+    RegionState?: string;
 }
 /**
  * DescribeInvokers返回参数结构体
@@ -794,7 +868,9 @@ export interface CancelInvocationResponse {
  */
 export interface DeleteRegisterInstanceRequest {
     /**
-     * 实例ID。
+     * 托管实例ID。
+  
+  可通过 [DescribeRegisterInstances(查询托管实例)](https://cloud.tencent.com/document/api/1340/96924) 接口获取。
      */
     InstanceId: string;
 }
@@ -875,10 +951,16 @@ export interface CreateInvokerRequest {
     Type: string;
     /**
      * 远程命令ID。
+  
+  可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
      */
     CommandId: string;
     /**
      * 触发器关联的实例ID。列表上限 100。
+  
+  可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。
+  
+  实例需要安装 TAT 客户端, 且客户端为 Online 状态。可通过 [DescribeAutomationAgentStatus(查询客户端状态)](https://cloud.tencent.com/document/api/1340/52682) 接口查询客户端状态。
      */
     InstanceIds: Array<string>;
     /**
@@ -887,10 +969,12 @@ export interface CreateInvokerRequest {
     Username?: string;
     /**
      * 命令自定义参数。
+  
+  仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
      */
     Parameters?: string;
     /**
-     * 周期执行器设置，当创建周期执行器时，必须指定此参数。
+     * 周期执行器设置。当创建周期执行器时，必须指定此参数。
      */
     ScheduleSettings?: ScheduleSettings;
 }
@@ -900,10 +984,18 @@ export interface CreateInvokerRequest {
 export interface DescribeAutomationAgentStatusRequest {
     /**
      * 待查询的实例ID列表。
+  
+  可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。
+  
+  参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。
      */
     InstanceIds?: Array<string>;
     /**
-     * <li>agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。</li><br><li>environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。</li><br><li>instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。</li>
+     * - agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。
+  - environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。
+  - instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。
+  
+  参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。
      */
     Filters?: Array<Filter>;
     /**
@@ -933,7 +1025,7 @@ export interface InvokeCommandResponse {
  */
 export interface ModifyCommandRequest {
     /**
-     * 命令ID。
+     * 命令ID。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
      */
     CommandId: string;
     /**
@@ -949,7 +1041,7 @@ export interface ModifyCommandRequest {
      */
     Content?: string;
     /**
-     * 命令类型，目前支持取值：SHELL、POWERSHELL。
+     * 命令类型，目前支持取值：SHELL、POWERSHELL、BAT。
      */
     CommandType?: string;
     /**
@@ -962,16 +1054,18 @@ export interface ModifyCommandRequest {
     Timeout?: number;
     /**
      * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。
+  参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。
   采取整体全覆盖式修改，即修改时必须提供所有新默认值。
-  必须 Command 的 EnableParameter 为 true 时，才允许修改这个值。
+  仅在命令的 EnableParameter 为 true 时，才允许修改此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
   自定义参数最多20个。
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
     DefaultParameters?: string;
     /**
-     * 自定义参数数组。
-  如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。
+     * 自定义参数数组。如果 InvokeCommand 时未提供参数取值，将使用这里的默认值进行替换。
+  参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。
+  仅在命令的 EnableParameter 为 true 时，才允许修改此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
   自定义参数最多20个。
      */
     DefaultParameterConfs?: Array<DefaultParameterConf>;
@@ -998,10 +1092,19 @@ export interface ModifyCommandRequest {
 export interface DescribeInvokersRequest {
     /**
      * 执行器ID列表。
+  
+  参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。
+  
      */
     InvokerIds?: Array<string>;
     /**
-     * 过滤条件：<li> invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。</li> <li> command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。</li> <li> type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。</li>
+     * 过滤条件：
+  
+  - invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。
+  - command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
+  - type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。目前仅支持 SCHEDULE 一种。
+  
+  参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。
      */
     Filters?: Array<Filter>;
     /**
@@ -1023,14 +1126,15 @@ export interface DescribeCommandsRequest {
     CommandIds?: Array<string>;
     /**
      * 过滤条件。
-  <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。</li>
-  <li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。</li>
-  <li> command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL 或 POWERSHELL。</li>
-  <li> scene-id - String - 是否必填：否 -（过滤条件）按照场景ID过滤。</li>
-  <li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。</li>
-  <li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
-  <li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
-  <li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例4</li>
+  
+  - command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。
+  - command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。
+  - command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL、POWERSHELL、BAT。
+  - scene-id - String - 是否必填：否 -（过滤条件）按照场景ID过滤。可通过 [DescribeScenes(查询场景)](https://cloud.tencent.com/document/api/1340/109968) 接口获取场景ID。
+  - created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER。TAT 代表公共命令，USER 代表由用户创建的命令。
+  - tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。
+  - tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。
+  - tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例4
   
   每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。
      */
@@ -1160,7 +1264,7 @@ export interface Command {
      */
     Content?: string;
     /**
-     * 命令类型。
+     * 命令类型。取值为 SHELL、POWERSHELL、BAT 之一。
      */
     CommandType?: string;
     /**
@@ -1172,11 +1276,11 @@ export interface Command {
      */
     Timeout?: number;
     /**
-     * 命令创建时间。
+     * 命令创建时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     CreatedTime?: string;
     /**
-     * 命令更新时间。
+     * 命令更新时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     UpdatedTime?: string;
     /**
@@ -1225,7 +1329,10 @@ export interface Command {
  */
 export interface PreviewReplacedCommandContentRequest {
     /**
-     * 本次预览采用的自定义参数。字段类型为 json encoded string，如：{\"varA\": \"222\"}。
+     * 本次预览采用的自定义参数。字段类型为 json encoded string，如：{"varA": "222"}。
+  仅在命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
+  如果有设置过 DefaultParameters 或 DefaultParameterConfs，会与 Parameters 进行叠加，优先使用 Parameters 的值。
+  
   key 为自定义参数名称，value 为该参数的取值。kv 均为字符串型。
   自定义参数最多 20 个。
   自定义参数名称需符合以下规范：字符数目上限 64，可选范围【a-zA-Z0-9-_】。
@@ -1233,7 +1340,8 @@ export interface PreviewReplacedCommandContentRequest {
      */
     Parameters?: string;
     /**
-     * 要进行替换预览的命令，如果有设置过 DefaultParameters，会与 Parameters 进行叠加，后者覆盖前者。
+     * 要进行替换预览的命令。
+  可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
   CommandId 与 Content，必须且只能提供一个。
      */
     CommandId?: string;
@@ -1262,7 +1370,19 @@ export interface InvocationTask {
     /**
      * 执行任务状态。取值范围：
   
-  <ul> <li>PENDING：等待下发</li> <li>DELIVERING：下发中</li> <li>DELIVER_DELAYED：延时下发</li> <li>DELIVER_FAILED：下发失败</li> <li>START_FAILED：命令启动失败</li> <li>RUNNING：命令运行中</li> <li>SUCCESS：命令成功</li> <li>FAILED：命令执行失败，执行完退出码不为 0</li> <li>TIMEOUT：命令超时</li> <li>TASK_TIMEOUT：执行任务超时</li> <li>CANCELLING：取消中</li> <li>CANCELLED：已取消（命令启动前就被取消）</li> <li>TERMINATED：已中止（命令执行期间被取消）</li> </ul>
+  - PENDING：等待下发
+  - DELIVERING：下发中
+  - DELIVER_DELAYED：延时下发
+  - DELIVER_FAILED：下发失败
+  - START_FAILED：命令启动失败
+  - RUNNING：命令运行中
+  - SUCCESS：命令成功
+  - FAILED：命令执行失败，执行完退出码不为 0
+  - TIMEOUT：命令超时
+  - TASK_TIMEOUT：客户端无响应
+  - CANCELLING：取消中
+  - CANCELLED：已取消（命令启动前就被取消）
+  - TERMINATED：已中止（命令执行期间被取消）
      */
     TaskStatus?: string;
     /**
@@ -1274,21 +1394,21 @@ export interface InvocationTask {
      */
     TaskResult?: TaskResult;
     /**
-     * 执行任务开始时间。
+     * 执行任务开始时间。格式为：YYYY-MM-DDThh:mm:ssZ
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
-     * 执行任务结束时间。
+     * 执行任务结束时间。格式为：YYYY-MM-DDThh:mm:ssZ
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
-     * 创建时间。
+     * 创建时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     CreatedTime?: string;
     /**
-     * 更新时间。
+     * 更新时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     UpdatedTime?: string;
     /**
@@ -1329,23 +1449,33 @@ export interface InvokerRecord {
     /**
      * 执行器ID。
      */
-    InvokerId: string;
+    InvokerId?: string;
     /**
-     * 执行时间。
+     * 执行时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
-    InvokeTime: string;
+    InvokeTime?: string;
     /**
      * 执行原因。
      */
-    Reason: string;
+    Reason?: string;
     /**
      * 命令执行ID。
      */
-    InvocationId: string;
+    InvocationId?: string;
     /**
      * 触发结果。
+  
+  - PENDING：等待下发
+  - RUNNING：命令运行中
+  - CANCELLING：取消中
+  - SUCCESS：命令成功
+  - TIMEOUT：命令超时
+  - FAILED：命令失败
+  - CANCELLED：命令全部取消
+  - PARTIAL_FAILED：命令部分失败
+  - PARTIAL_CANCELLED：命令部分取消
      */
-    Result: string;
+    Result?: string;
 }
 /**
  * DescribeRegisterCodes返回参数结构体
@@ -1400,13 +1530,18 @@ export interface CreateInvokerResponse {
  */
 export interface CancelInvocationRequest {
     /**
-     * 执行活动ID
+     * 执行活动ID。
+  
+  可通过 [DescribeInvocations(查询执行活动)](https://cloud.tencent.com/document/api/1340/52679) 接口获取。
      */
     InvocationId: string;
     /**
-     * 实例ID列表，上限100。支持实例类型：
-  <li> CVM </li>
-  <li> LIGHTHOUSE </li>
+     * 实例ID列表，上限100。
+  
+  可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：
+  - CVM
+  - Lighthouse
+  - TAT 托管实例
      */
     InstanceIds?: Array<string>;
 }
@@ -1432,7 +1567,7 @@ export interface DescribeRegisterCodesRequest {
  */
 export interface DeleteCommandRequest {
     /**
-     * 待删除的命令ID。
+     * 待删除的命令 ID。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
      */
     CommandId: string;
 }
@@ -1459,14 +1594,16 @@ export interface Scene {
     SceneName?: string;
     /**
      * 场景创建者。
+  
+  - TAT：公共场景
      */
     CreatedBy?: string;
     /**
-     * 创建时间。
+     * 创建时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     CreatedTime?: string;
     /**
-     * 更新时间。
+     * 更新时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     UpdatedTime?: string;
 }
@@ -1475,14 +1612,18 @@ export interface Scene {
  */
 export interface DescribeScenesRequest {
     /**
-     * 场景 ID 数组
+     * 场景 ID 数组。
+  
+  参数不支持同时指定 `SceneIds ` 和 `Filters ` 。
+  
      */
     SceneIds?: Array<string>;
     /**
      * 过滤条件。
-  <li> scene-id - String - 是否必填：否 -（过滤条件）按照场景 ID 过滤。</li>
-  <li> scene-name - String - 是否必填：否 -（过滤条件）按照场景名称过滤。</li>
-  <li> created-by - String - 是否必填：否 -（过滤条件）按照场景创建者过滤，取值为 TAT 或 USER。TAT 代表公共命令，USER 代表由用户创建的命令。</li>
+  
+  - scene-id - String - 是否必填：否 -（过滤条件）按照场景 ID 过滤。
+  - scene-name - String - 是否必填：否 -（过滤条件）按照场景名称过滤。
+  - created-by - String - 是否必填：否 -（过滤条件）按照场景创建者过滤，目前仅支持 TAT，代表公共场景。
   
   每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `SceneIds` 和 `Filters` 。
      */
@@ -1511,6 +1652,8 @@ export interface DeleteRegisterCodesResponse {
 export interface DescribeInvokerRecordsRequest {
     /**
      * 执行器ID列表。列表上限 100。
+  
+  可通过 [DescribeInvokers(查询执行器)](https://cloud.tencent.com/document/api/1340/61759) 接口获取。
      */
     InvokerIds?: Array<string>;
     /**
@@ -1528,6 +1671,8 @@ export interface DescribeInvokerRecordsRequest {
 export interface DeleteInvokerRequest {
     /**
      * 待删除的执行器ID。
+  
+  可通过 [DescribeInvokers(查询执行器)](https://cloud.tencent.com/document/api/1340/61759) 接口获取。
      */
     InvokerId: string;
 }
@@ -1536,7 +1681,9 @@ export interface DeleteInvokerRequest {
  */
 export interface ModifyRegisterInstanceRequest {
     /**
-     * 实例ID。
+     * 托管实例ID。
+  
+  可通过 [DescribeRegisterInstances(查询托管实例)](https://cloud.tencent.com/document/api/1340/96924) 接口获取。
      */
     InstanceId: string;
     /**
@@ -1681,7 +1828,7 @@ export interface CreateCommandRequest {
      */
     Description?: string;
     /**
-     * 命令类型，目前支持取值：SHELL、POWERSHELL。默认：SHELL。
+     * 命令类型，目前支持取值：SHELL、POWERSHELL、BAT。默认：SHELL。
      */
     CommandType?: string;
     /**
@@ -1702,6 +1849,8 @@ export interface CreateCommandRequest {
      * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
   如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。
+  参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。
+  仅在 EnableParameter 参数为 true 时，才允许设置此参数。
   自定义参数最多20个。
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
@@ -1709,6 +1858,8 @@ export interface CreateCommandRequest {
     /**
      * 自定义参数数组。
   如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。
+  参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。
+  仅在 EnableParameter 参数为 true 时，才允许设置此参数。
   自定义参数最多20个。
      */
     DefaultParameterConfs?: Array<DefaultParameterConf>;
@@ -1746,7 +1897,7 @@ export interface Invoker {
      */
     Name?: string;
     /**
-     * 执行器类型。
+     * 执行器类型。目前仅支持 SCHEDULE 一种。
      */
     Type?: string;
     /**
@@ -1775,11 +1926,11 @@ export interface Invoker {
      */
     ScheduleSettings?: ScheduleSettings;
     /**
-     * 创建时间。
+     * 创建时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     CreatedTime?: string;
     /**
-     * 修改时间。
+     * 修改时间。格式为：YYYY-MM-DDThh:mm:ssZ
      */
     UpdatedTime?: string;
 }

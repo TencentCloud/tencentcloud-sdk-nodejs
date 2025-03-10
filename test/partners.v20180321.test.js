@@ -18,6 +18,16 @@ const client = new tencentcloud.partners.v20180321.Client({
 })
 describe("partners.v20180321.test.js", function () {
 
+it("partners.v20180321.RemovePayRelationForClient", async function () {
+    try {
+       const data = await client.RemovePayRelationForClient({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.AssignClientsToSales", async function () {
     try {
        const data = await client.AssignClientsToSales({})
@@ -118,9 +128,9 @@ it("partners.v20180321.DescribeSalesmans", async function () {
     }
 })
 
-it("partners.v20180321.RemovePayRelationForClient", async function () {
+it("partners.v20180321.DescribeClientJoinIncreaseList", async function () {
     try {
-       const data = await client.RemovePayRelationForClient({})
+       const data = await client.DescribeClientJoinIncreaseList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

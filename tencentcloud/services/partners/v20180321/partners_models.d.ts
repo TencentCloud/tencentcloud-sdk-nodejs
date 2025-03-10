@@ -156,6 +156,19 @@ export interface RemovePayRelationForClientRequest {
     ClientUin: string;
 }
 /**
+ * DescribeClientJoinIncreaseList返回参数结构体
+ */
+export interface DescribeClientJoinIncreaseListResponse {
+    /**
+     * 已审核代客列表
+     */
+    List?: Array<ClientIncreaseInfoList>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRebateInfosNew返回参数结构体
  */
 export interface DescribeRebateInfosNewResponse {
@@ -230,6 +243,36 @@ export interface DescribeAgentDealsByCacheResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 客户增量激励考核信息列表
+ */
+export interface ClientIncreaseInfoList {
+    /**
+     * 客户UIN
+     */
+    ClientUin?: string;
+    /**
+     * 是否参与增量政策，
+  Y：是，N：否
+     */
+    IsJoinIncrease?: string;
+    /**
+     * 增量考核关联时间
+     */
+    IncreaseUseAssociateDate?: string;
+    /**
+     * 参与增量考核的原始客户等级
+     */
+    TLevel?: string;
+    /**
+     * 增量考核目标,分
+     */
+    IncreaseGoal?: string;
+    /**
+     * 完成订单金额,分
+     */
+    TotalBaseAmt?: string;
 }
 /**
  * 返佣信息定义
@@ -386,6 +429,15 @@ export interface DescribeAgentRelateBigDealIdsRequest {
      * 大订单号
      */
     BigDealId: string;
+}
+/**
+ * DescribeClientJoinIncreaseList请求参数结构体
+ */
+export interface DescribeClientJoinIncreaseListRequest {
+    /**
+     * 客户UIN列表
+     */
+    ClientUins: Array<string>;
 }
 /**
  * DescribeRebateInfos请求参数结构体

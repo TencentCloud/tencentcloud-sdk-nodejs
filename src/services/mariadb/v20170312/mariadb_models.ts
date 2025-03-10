@@ -632,7 +632,7 @@ export interface CreateAccountRequest {
    */
   InstanceId: string
   /**
-   * 登录用户名，由字母、数字、下划线和连字符组成，长度为1~32位。
+   * 账号名，账号名需要1-32个字符，由字母、数字或特殊字符组成；以字母开头；特殊字符为_-
    */
   UserName: string
   /**
@@ -640,7 +640,7 @@ export interface CreateAccountRequest {
    */
   Host: string
   /**
-   * 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。
+   * 账号密码，密码需要 8\~32 个字符，不能以 '/' 开头，并且至少包含字母、数字和特殊字符 ()~!@#$%^&*-+=_|{}[]:<>,.?/ 中的两项
    */
   Password?: string
   /**
@@ -648,7 +648,7 @@ export interface CreateAccountRequest {
    */
   ReadOnly?: number
   /**
-   * 账号备注，可以包含中文、英文字符、常见符号和数字，长度为0~256字符
+   * 账号备注，可以包含中文、英文字符、常见符号和数字，最多256个字符
    */
   Description?: string
   /**
@@ -1159,7 +1159,7 @@ export interface ResetAccountPasswordRequest {
    */
   Host: string
   /**
-   * 新密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
+   * 密码需要 8\~32 个字符，不能以 '/' 开头，并且至少包含字母、数字和特殊字符 ()~!@#$%^&*-+=_|{}[]:<>,.?/ 中的两项
    */
   Password?: string
   /**
@@ -2628,7 +2628,7 @@ export interface OpenDBExtranetAccessResponse {
   /**
    * 异步任务ID，可通过 DescribeFlow 查询任务状态。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3367,7 +3367,7 @@ export interface OpenDBExtranetAccessRequest {
    */
   InstanceId: string
   /**
-   * 是否IPv6，默认0
+   * 是否为IPV6网络类型实例，0:否，1:是，不传默认为0表示实例为IPV4网络类型
    */
   Ipv6Flag?: number
 }

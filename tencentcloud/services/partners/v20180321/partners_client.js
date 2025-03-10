@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", clientConfig);
     }
     /**
+     * 合作伙伴为客户消除强代付关系
+     */
+    async RemovePayRelationForClient(req, cb) {
+        return this.request("RemovePayRelationForClient", req, cb);
+    }
+    /**
      * 为代客or申请中代客分派跟进人（业务员），入参可从以下API获取
 - 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
 - 申请中代客列表获取API：[DescribeAgentClients](https://cloud.tencent.com/document/product/563/16046)
@@ -91,10 +97,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSalesmans", req, cb);
     }
     /**
-     * 合作伙伴为客户消除强代付关系
+     * 查询合作伙伴名下客户的参与增量激励考核信息列表
      */
-    async RemovePayRelationForClient(req, cb) {
-        return this.request("RemovePayRelationForClient", req, cb);
+    async DescribeClientJoinIncreaseList(req, cb) {
+        return this.request("DescribeClientJoinIncreaseList", req, cb);
     }
     /**
      * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额

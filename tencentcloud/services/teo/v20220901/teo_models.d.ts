@@ -6470,11 +6470,16 @@ export interface ResponseSpeedLimitParameters {
      */
     Mode: string;
     /**
-     * 限速值，单位为：KB/s，填写数值，指定限速大小。
+     * 限速值，指定限速大小，填写含单位的数值或变量。当前支持单位有：KB/s。
      */
     MaxSpeed: string;
     /**
-     * 限速开始值，可以为下载大小或指定时长，单位为：KB或s，当 Mode 取值为 LimitAfterSpecificBytesDownloaded 或 LimitAfterSpecificSecondsDownloaded 时，该参数必填。填写数值，指定下载大小或指定时长。
+     * 限速开始值，可以为下载大小或指定时长，填写含单位的数值或变量，指定下载大小或指定时长。
+  
+  - 当Mode 取值为 LimitAfterSpecificBytesDownloaded 时，单位取值有： KB；
+  
+  - 当Mode 取值为 LimitAfterSpecificSecondsDownloaded 时，单位取值有： s。
+  
      */
     StartAt?: string;
 }

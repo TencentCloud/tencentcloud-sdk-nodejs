@@ -1793,7 +1793,6 @@ export interface InstanceInfo {
   ClientLimitMax?: number
   /**
    * 实例的节点详细信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeSet?: Array<NodeInfo>
   /**

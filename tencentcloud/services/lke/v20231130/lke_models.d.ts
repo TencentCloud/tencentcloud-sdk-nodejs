@@ -2658,29 +2658,25 @@ export interface DeleteQACateResponse {
     RequestId?: string;
 }
 /**
- * QueryParseDocResult返回参数结构体
+ * SaveDoc返回参数结构体
  */
-export interface QueryParseDocResultResponse {
+export interface SaveDocResponse {
     /**
-     * 等待 / 执行中 / 成功 / 失败
+     * 文档ID
      */
-    Status?: string;
+    DocBizId?: string;
     /**
-     * 解析后的文件内容
+     * 导入错误信息
      */
-    Name?: string;
+    ErrorMsg?: string;
     /**
-     * 文件下载地址
+     * 错误链接
      */
-    Url?: string;
+    ErrorLink?: string;
     /**
-     * 解析失败原因
+     * 错误链接文本
      */
-    Reason?: string;
-    /**
-     * 消耗量，输出页数
-     */
-    Usage?: Usage;
+    ErrorLinkText?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4305,30 +4301,25 @@ export interface ListDocItem {
     CreateTime?: string;
 }
 /**
- * ParseDoc请求参数结构体
+ * VerifyQA请求参数结构体
  */
-export interface ParseDocRequest {
+export interface VerifyQARequest {
     /**
-     * 文件名称(需要包括文件后缀, 最大长度1024字节)
+     * 问答列表
      */
-    Name: string;
+    List: Array<QAList>;
     /**
-     * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf), 该地址需要外网可以直接无状态访问
+     * 应用ID
      */
-    Url: string;
+    BotBizId: string;
     /**
-     * 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节)
+     * 登录用户主账号(集成商模式必填)
      */
-    TaskId: string;
+    LoginUin?: string;
     /**
-     * 切分策略
+     * 登录用户子账号(集成商模式必填)
      */
-    Policy?: string;
-    /**
-     * 默认值: parse
-     * @deprecated
-     */
-    Operate?: string;
+    LoginSubAccountUin?: string;
 }
 /**
  * 文本的坐标，以四个顶点坐标表示
@@ -5586,27 +5577,6 @@ export interface KnowledgeQaPlugin {
     IsBindingKnowledge?: boolean;
 }
 /**
- * VerifyQA请求参数结构体
- */
-export interface VerifyQARequest {
-    /**
-     * 问答列表
-     */
-    List: Array<QAList>;
-    /**
-     * 应用ID
-     */
-    BotBizId: string;
-    /**
-     * 登录用户主账号(集成商模式必填)
-     */
-    LoginUin?: string;
-    /**
-     * 登录用户子账号(集成商模式必填)
-     */
-    LoginSubAccountUin?: string;
-}
-/**
  * DeleteQACate请求参数结构体
  */
 export interface DeleteQACateRequest {
@@ -6284,19 +6254,6 @@ export interface StopDocParseResponse {
     RequestId?: string;
 }
 /**
- * ParseDoc返回参数结构体
- */
-export interface ParseDocResponse {
-    /**
-     * 任务ID
-     */
-    TaskId?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ListQACate请求参数结构体
  */
 export interface ListQACateRequest {
@@ -6623,43 +6580,9 @@ export interface DescribeCorpResponse {
     RequestId?: string;
 }
 /**
- * QueryParseDocResult请求参数结构体
- */
-export interface QueryParseDocResultRequest {
-    /**
-     * 任务ID
-     */
-    TaskId: string;
-}
-/**
  * ModifyDocCate返回参数结构体
  */
 export interface ModifyDocCateResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * SaveDoc返回参数结构体
- */
-export interface SaveDocResponse {
-    /**
-     * 文档ID
-     */
-    DocBizId?: string;
-    /**
-     * 导入错误信息
-     */
-    ErrorMsg?: string;
-    /**
-     * 错误链接
-     */
-    ErrorLink?: string;
-    /**
-     * 错误链接文本
-     */
-    ErrorLinkText?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

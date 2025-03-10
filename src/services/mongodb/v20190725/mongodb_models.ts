@@ -2749,11 +2749,11 @@ export interface DbURL {
 - MONGOS_READ_PRIMARY_AND_SECONDARY：指通过该URI 连接 Mongos 的主节点与从节点。
 - MONGOS_READ_SECONDARY_AND_READONLY：指通过该URI 连接 Mongos 的从节点与只读节点。
    */
-  URLType: string
+  URLType?: string
   /**
    * 实例 URI 形式的连接串访问地址示例。
    */
-  Address: string
+  Address?: string
 }
 
 /**

@@ -23,10 +23,12 @@ import {
   DescribeAgentAuditedClientsRequest,
   DescribeRebateInfosNewRequest,
   RemovePayRelationForClientRequest,
+  DescribeClientJoinIncreaseListResponse,
   DescribeRebateInfosNewResponse,
   AgentPayDealsRequest,
   DescribeAgentClientGradeResponse,
   DescribeAgentDealsByCacheResponse,
+  ClientIncreaseInfoList,
   RebateInfoElem,
   DescribeAgentPayDealsV2Response,
   AgentTransferMoneyRequest,
@@ -35,6 +37,7 @@ import {
   UnbindClientElem,
   RemovePayRelationForClientResponse,
   DescribeAgentRelateBigDealIdsRequest,
+  DescribeClientJoinIncreaseListRequest,
   DescribeRebateInfosRequest,
   CreatePayRelationForClientResponse,
   DescribeAgentAuditedClientsResponse,
@@ -78,6 +81,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("partners.tencentcloudapi.com", "2018-03-21", clientConfig)
+  }
+
+  /**
+   * 合作伙伴为客户消除强代付关系
+   */
+  async RemovePayRelationForClient(
+    req: RemovePayRelationForClientRequest,
+    cb?: (error: string, rep: RemovePayRelationForClientResponse) => void
+  ): Promise<RemovePayRelationForClientResponse> {
+    return this.request("RemovePayRelationForClient", req, cb)
   }
 
   /**
@@ -184,13 +197,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合作伙伴为客户消除强代付关系
+   * 查询合作伙伴名下客户的参与增量激励考核信息列表
    */
-  async RemovePayRelationForClient(
-    req: RemovePayRelationForClientRequest,
-    cb?: (error: string, rep: RemovePayRelationForClientResponse) => void
-  ): Promise<RemovePayRelationForClientResponse> {
-    return this.request("RemovePayRelationForClient", req, cb)
+  async DescribeClientJoinIncreaseList(
+    req: DescribeClientJoinIncreaseListRequest,
+    cb?: (error: string, rep: DescribeClientJoinIncreaseListResponse) => void
+  ): Promise<DescribeClientJoinIncreaseListResponse> {
+    return this.request("DescribeClientJoinIncreaseList", req, cb)
   }
 
   /**

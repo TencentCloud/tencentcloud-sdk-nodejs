@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, DescribeRebateInfosNewRequest, RemovePayRelationForClientRequest, DescribeRebateInfosNewResponse, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeAgentPayDealsV2Response, AgentTransferMoneyRequest, DescribeAgentPayDealsV2Request, RemovePayRelationForClientResponse, DescribeAgentRelateBigDealIdsRequest, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeAgentRelateBigDealIdsResponse, DescribeAgentSelfPayDealsV2Request, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentDealsByCacheRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, DescribeAgentSelfPayDealsV2Response, AssignClientsToSalesResponse, AuditApplyClientResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeClientBalanceNewRequest, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest, AssignClientsToSalesRequest, DescribeClientBalanceNewResponse } from "./partners_models";
+import { DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, DescribeRebateInfosNewRequest, RemovePayRelationForClientRequest, DescribeClientJoinIncreaseListResponse, DescribeRebateInfosNewResponse, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeAgentPayDealsV2Response, AgentTransferMoneyRequest, DescribeAgentPayDealsV2Request, RemovePayRelationForClientResponse, DescribeAgentRelateBigDealIdsRequest, DescribeClientJoinIncreaseListRequest, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeAgentRelateBigDealIdsResponse, DescribeAgentSelfPayDealsV2Request, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentDealsByCacheRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, DescribeAgentSelfPayDealsV2Response, AssignClientsToSalesResponse, AuditApplyClientResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeClientBalanceNewRequest, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest, AssignClientsToSalesRequest, DescribeClientBalanceNewResponse } from "./partners_models";
 /**
  * partners client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 合作伙伴为客户消除强代付关系
+     */
+    RemovePayRelationForClient(req: RemovePayRelationForClientRequest, cb?: (error: string, rep: RemovePayRelationForClientResponse) => void): Promise<RemovePayRelationForClientResponse>;
     /**
      * 为代客or申请中代客分派跟进人（业务员），入参可从以下API获取
 - 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
@@ -51,9 +55,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeSalesmans(req: DescribeSalesmansRequest, cb?: (error: string, rep: DescribeSalesmansResponse) => void): Promise<DescribeSalesmansResponse>;
     /**
-     * 合作伙伴为客户消除强代付关系
+     * 查询合作伙伴名下客户的参与增量激励考核信息列表
      */
-    RemovePayRelationForClient(req: RemovePayRelationForClientRequest, cb?: (error: string, rep: RemovePayRelationForClientResponse) => void): Promise<RemovePayRelationForClientResponse>;
+    DescribeClientJoinIncreaseList(req: DescribeClientJoinIncreaseListRequest, cb?: (error: string, rep: DescribeClientJoinIncreaseListResponse) => void): Promise<DescribeClientJoinIncreaseListResponse>;
     /**
      * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
      */

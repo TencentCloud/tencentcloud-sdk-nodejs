@@ -28,10 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("controlcenter.tencentcloudapi.com", "2023-01-10", clientConfig);
     }
     /**
+     * 获取某个基线项历史应用信息
+     */
+    async ListDeployStepTasks(req, cb) {
+        return this.request("ListDeployStepTasks", req, cb);
+    }
+    /**
+     * 获取用户基线配置数据
+     */
+    async GetAccountFactoryBaseline(req, cb) {
+        return this.request("GetAccountFactoryBaseline", req, cb);
+    }
+    /**
+     * 更新用户当前基线项配置，基线配置会覆盖更新为当前配置。新增基线项时需要将新增的基线配置加到现有配置，删除基线项时需要将删除的基线配置从现有配置移除，然后保存最新基线配置。
+     */
+    async UpdateAccountFactoryBaseline(req, cb) {
+        return this.request("UpdateAccountFactoryBaseline", req, cb);
+    }
+    /**
      * 批量对存量账号应用基线
      */
     async BatchApplyAccountBaselines(req, cb) {
         return this.request("BatchApplyAccountBaselines", req, cb);
+    }
+    /**
+     * 获取账号工厂系统基线项
+     */
+    async ListAccountFactoryBaselineItems(req, cb) {
+        return this.request("ListAccountFactoryBaselineItems", req, cb);
     }
 }
 exports.Client = Client;

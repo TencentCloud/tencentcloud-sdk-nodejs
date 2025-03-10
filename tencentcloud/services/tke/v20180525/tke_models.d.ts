@@ -298,22 +298,18 @@ export interface Step {
     Name?: string;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartAt?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndAt?: string;
     /**
      * 当前状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 执行信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
 }
@@ -323,32 +319,26 @@ export interface Step {
 export interface SwitchInfo {
     /**
      * 开启标识符 true代表开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enable?: boolean;
     /**
      * CLS日志集ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogsetId?: string;
     /**
      * CLS日志主题ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicId?: string;
     /**
      * 当前log-agent版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
     /**
      * 是否可升级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpgradeAble?: boolean;
     /**
      * CLS日志主题所属region
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicRegion?: string;
 }
@@ -484,17 +474,14 @@ export interface Addon {
     AddonVersion?: string;
     /**
      * addon的参数，是一个json格式的base64转码后的字符串
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RawValues?: string;
     /**
      * addon的状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Phase?: string;
     /**
      * addon失败的原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
     /**
@@ -800,12 +787,10 @@ export interface ClusterAsGroup {
     Status?: string;
     /**
      * 节点是否设置成不可调度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUnschedulable?: boolean;
     /**
      * 伸缩组的label列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Labels?: Array<Label>;
     /**
@@ -1213,22 +1198,18 @@ export interface Label {
 export interface PodLimitsByType {
     /**
      * TKE共享网卡非固定IP模式可支持的Pod数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TKERouteENINonStaticIP?: number;
     /**
      * TKE共享网卡固定IP模式可支持的Pod数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TKERouteENIStaticIP?: number;
     /**
      * TKE独立网卡模式可支持的Pod数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TKEDirectENI?: number;
     /**
      * TKE中继网卡模式可支持的Pod数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TKESubENI?: number;
 }
@@ -1841,22 +1822,18 @@ export interface UpdateEKSContainerInstanceRequest {
 export interface CUDNN {
     /**
      * cuDNN的版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version: string;
     /**
      * cuDNN的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * cuDNN的Doc名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DocName?: string;
     /**
      * cuDNN的Dev名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DevName?: string;
 }
@@ -1957,7 +1934,6 @@ export interface Exec {
 export interface DescribeEdgeAvailableExtraArgsResponse {
     /**
      * 集群版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterVersion?: string;
     /**
@@ -2014,12 +1990,10 @@ export interface Instance {
     InstanceState?: string;
     /**
      * 实例是否封锁状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DrainStatus?: string;
     /**
      * 节点配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
@@ -2028,17 +2002,14 @@ export interface Instance {
     CreatedTime?: string;
     /**
      * 节点内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LanIP?: string;
     /**
      * 资源池ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodePoolId?: string;
     /**
      * 自动伸缩组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoscalingGroupId?: string;
 }
@@ -2337,22 +2308,18 @@ export interface DescribeClusterInstancesRequest {
 export interface PodLimitsInstance {
     /**
      * 机型所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
      * 机型所属机型族
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceFamily?: string;
     /**
      * 实例机型名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 机型可支持的最大VPC-CNI模式Pod数量信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodLimits?: PodLimitsByType;
 }
@@ -2506,7 +2473,6 @@ export interface UpdateEdgeClusterVersionRequest {
 export interface GetTkeAppChartListResponse {
     /**
      * 所支持的chart列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppCharts?: Array<AppChart>;
     /**
@@ -2546,7 +2512,6 @@ export interface UpgradeAbleInstancesItem {
     Version?: string;
     /**
      * 当前版本的最新小版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestVersion?: string;
     /**
@@ -2586,7 +2551,6 @@ export interface UpgradeClusterInstancesResponse {
 export interface CustomDriver {
     /**
      * 自定义GPU驱动地址链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Address?: string;
 }
@@ -3029,7 +2993,6 @@ export interface CreateTKEEdgeClusterResponse {
 export interface DescribeEdgeClusterExtraArgsResponse {
     /**
      * 集群自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterExtraArgs?: EdgeClusterExtraArgs;
     /**
@@ -3236,12 +3199,10 @@ export interface Probe {
 export interface NodeCountSummary {
     /**
      * 手动管理的节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManuallyAdded?: ManuallyAdded;
     /**
      * 自动管理的节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoscalingAdded?: AutoscalingAdded;
 }
@@ -3291,32 +3252,26 @@ export interface EdgeCluster {
     EdgeClusterVersion?: string;
     /**
      * 节点最大Pod数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxNodePodNum?: number;
     /**
      * 集群高级设置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterAdvancedSettings?: EdgeClusterAdvancedSettings;
     /**
      * 边缘容器集群级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 是否支持自动提升集群配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoUpgradeClusterLevel?: boolean;
     /**
      * 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeType?: string;
     /**
      * 边缘集群组件的版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EdgeVersion?: string;
     /**
@@ -3737,32 +3692,26 @@ export interface BackupStorageLocation {
     StorageRegion?: string;
     /**
      * 存储服务提供方，默认腾讯云
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Provider?: string;
     /**
      * 对象存储桶名称，如果是COS必须是tke-backup-前缀开头
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
     /**
      * 对象存储桶路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
     /**
      * 存储仓库状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: string;
     /**
      * 详细状态信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 最后一次检查时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastValidationTime?: string;
 }
@@ -4422,12 +4371,10 @@ export interface UpgradeNodeResetParam {
 export interface DriverVersion {
     /**
      * GPU驱动或者CUDA的版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version: string;
     /**
      * GPU驱动或者CUDA的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
 }
@@ -4828,7 +4775,6 @@ export interface CreateEdgeCVMInstancesResponse {
 export interface DescribeEdgeLogSwitchesResponse {
     /**
      * 集群日志开关集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchSet?: Array<string>;
     /**
@@ -5040,12 +4986,10 @@ export interface RenewReservedInstancesResponse {
 export interface EdgeClusterInternalLB {
     /**
      * 是否开启内网访问LB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled: boolean;
     /**
      * 内网访问LB关联的子网Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: Array<string>;
 }
@@ -5214,12 +5158,10 @@ export interface EdgeClusterAdvancedSettings {
     ExtraArgs?: EdgeClusterExtraArgs;
     /**
      * 运行时类型，支持"docker"和"containerd"，默认为docker
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Runtime?: string;
     /**
      * 集群kube-proxy转发模式，支持"iptables"和"ipvs"，默认为iptables
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyMode?: string;
 }
@@ -5229,32 +5171,26 @@ export interface EdgeClusterAdvancedSettings {
 export interface DescribeExternalNodeSupportConfigResponse {
     /**
      * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterCIDR?: string;
     /**
      * 集群网络插件类型，支持：CiliumBGP、CiliumVXLan
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkType?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 是否开启第三方节点专线连接支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
     /**
      * 节点所属交换机的BGP AS 号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AS?: string;
     /**
      * 节点所属交换机的交换机 IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchIP?: string;
     /**
@@ -5263,17 +5199,14 @@ export interface DescribeExternalNodeSupportConfigResponse {
     Status?: string;
     /**
      * 如果开启失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedReason?: string;
     /**
      * 内网访问地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Master?: string;
     /**
      * 镜像仓库代理地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Proxy?: string;
     /**
@@ -5291,7 +5224,6 @@ export interface DescribeExternalNodeSupportConfigResponse {
     PublicConnectUrl?: string;
     /**
      * 注册节点公网版自定义域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicCustomDomain?: string;
     /**
@@ -5851,7 +5783,6 @@ export interface ClusterLevelAttribute {
     Enable?: boolean;
     /**
      * 其他资源数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OtherCount?: number;
 }
@@ -6580,12 +6511,10 @@ export interface InstanceUpgradeProgressItem {
     LifeState?: string;
     /**
      * 升级开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartAt?: string;
     /**
      * 升级结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndAt?: string;
     /**
@@ -7066,7 +6995,6 @@ export interface VirtualNode {
     Phase?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedTime?: string;
 }
@@ -7471,17 +7399,14 @@ export interface RenewReservedInstancesRequest {
 export interface VersionInstance {
     /**
      * 版本名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
     /**
      * Remark
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -8063,32 +7988,26 @@ export interface DescribeClusterPendingReleasesResponse {
 export interface DataDisk {
     /**
      * 云盘类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskType: string;
     /**
      * 文件系统(ext3/ext4/xfs)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileSystem: string;
     /**
      * 云盘大小(G）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize: number;
     /**
      * 是否自动化格式盘并挂载
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoFormatAndMount: boolean;
     /**
      * 挂载目录
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MountTarget: string;
     /**
      * 挂载设备名或分区名，当且仅当添加已有节点时需要
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskPartition: string;
 }
@@ -8214,12 +8133,10 @@ export interface InstanceDataDiskMountSetting {
 export interface EdgeClusterPublicLB {
     /**
      * 是否开启公网访问LB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled: boolean;
     /**
      * 允许访问的公网cidr
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowFromCidrs?: Array<string>;
 }
@@ -8326,7 +8243,6 @@ export interface TcpSocket {
 export interface TagSpecification {
     /**
      * 标签绑定的资源类型，当前支持类型："cluster"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceType?: string;
     /**
@@ -8640,22 +8556,18 @@ export interface Switch {
     ClusterId?: string;
     /**
      * 审计开关的详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Audit?: SwitchInfo;
     /**
      * 事件开关的详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Event?: SwitchInfo;
     /**
      * 普通日志的详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Log?: SwitchInfo;
     /**
      * master 日志详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterLog?: SwitchInfo;
 }
@@ -8665,22 +8577,18 @@ export interface Switch {
 export interface ImageInstance {
     /**
      * 镜像别名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Alias?: string;
     /**
      * 操作系统名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OsName?: string;
     /**
      * 镜像ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageId?: string;
     /**
      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OsCustomizeType?: string;
 }
@@ -8802,27 +8710,22 @@ export interface DescribeTKEEdgeExternalKubeconfigResponse {
 export interface EdgeArgsFlag {
     /**
      * 参数名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 参数类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 参数描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Usage?: string;
     /**
      * 参数默认值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Default?: string;
     /**
      * 参数可选范围（目前包含range和in两种，"[]"代表range，如"[1, 5]"表示参数必须>=1且 <=5, "()"代表in， 如"('aa', 'bb')"表示参数只能为字符串'aa'或者'bb'，该参数为空表示不校验）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Constraint?: string;
 }
@@ -9910,12 +9813,10 @@ export interface DescribeAvailableTKEEdgeVersionResponse {
     Versions?: Array<string>;
     /**
      * 边缘集群最新版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EdgeVersionLatest?: string;
     /**
      * 边缘集群当前版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EdgeVersionCurrent?: string;
     /**
@@ -9964,22 +9865,18 @@ export interface InstallEdgeLogAgentResponse {
 export interface EdgeAvailableExtraArgs {
     /**
      * kube-apiserver可用的自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeAPIServer?: Array<EdgeArgsFlag>;
     /**
      * kube-controller-manager可用的自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeControllerManager?: Array<EdgeArgsFlag>;
     /**
      * kube-scheduler可用的自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeScheduler?: Array<EdgeArgsFlag>;
     /**
      * kubelet可用的自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Kubelet?: Array<EdgeArgsFlag>;
 }
@@ -10586,17 +10483,14 @@ export interface TaskStepInfo {
     LifeState?: string;
     /**
      * 步骤开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartAt?: string;
     /**
      * 步骤结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndAt?: string;
     /**
      * 若步骤生命周期为failed,则此字段显示错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedMsg?: string;
 }
@@ -10619,22 +10513,18 @@ export interface DeletePrometheusAlertRuleRequest {
 export interface NodePoolRuntime {
     /**
      * 节点池ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodePoolId?: string;
     /**
      * 运行时类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeType?: string;
     /**
      * 运行时版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeVersion?: string;
     /**
      * 节点池名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodePoolName?: string;
 }
@@ -10817,17 +10707,14 @@ export interface DescribeBackupStorageLocationsResponse {
 export interface OptionalRuntimes {
     /**
      * 运行时类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeType?: string;
     /**
      * 运行时版本列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeVersions?: Array<string>;
     /**
      * 该类型的默认运行时版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultVersion?: string;
 }
@@ -11060,12 +10947,10 @@ export interface ModifyPrometheusGlobalNotificationRequest {
 export interface FailedResource {
     /**
      * 资源六段式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resource?: string;
     /**
      * 执行失败的原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }
@@ -11092,12 +10977,10 @@ export interface DescribeClusterNodePoolsResponse {
 export interface UnavailableReason {
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
 }
@@ -11336,27 +11219,22 @@ export interface DeleteECMInstancesResponse {
 export interface DescribeEdgeClusterUpgradeInfoResponse {
     /**
      * 可升级的集群组件及其版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComponentVersion?: string;
     /**
      * 边缘集群当前版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EdgeVersionCurrent?: string;
     /**
      * 边缘组件镜像仓库地址前缀，包含域名和命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegistryPrefix?: string;
     /**
      * 集群升级状态，可能值：running、updating、failed
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterUpgradeStatus?: string;
     /**
      * 集群升级中状态或者失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterUpgradeStatusReason?: string;
     /**
@@ -11786,7 +11664,6 @@ export interface CreateClusterReleaseResponse {
 export interface ClusterProperty {
     /**
      * 节点hostname命名模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeNameType?: string;
 }
@@ -11796,17 +11673,14 @@ export interface ClusterProperty {
 export interface EdgeClusterExtraArgs {
     /**
      * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeAPIServer?: Array<string>;
     /**
      * kube-controller-manager自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeControllerManager?: Array<string>;
     /**
      * kube-scheduler自定义参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeScheduler?: Array<string>;
 }
@@ -11837,32 +11711,26 @@ export interface ReleaseHistory {
     Namespace?: string;
     /**
      * 应用版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Revision?: number;
     /**
      * 应用状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 应用制品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Chart?: string;
     /**
      * 应用制品版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppVersion?: string;
     /**
      * 应用更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdatedTime?: string;
     /**
      * 应用描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
 }
@@ -11958,7 +11826,6 @@ export interface AppChart {
     Name?: string;
     /**
      * chart的标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: string;
     /**
@@ -12256,12 +12123,10 @@ export interface ForwardApplicationRequestV3Response {
 export interface RuntimeConfig {
     /**
      * 运行时类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeType?: string;
     /**
      * 运行时版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeVersion?: string;
 }
@@ -12367,22 +12232,18 @@ export interface ClusterStatus {
     ClusterFailedNodeNum?: number;
     /**
      * 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterClosedNodeNum?: number;
     /**
      * 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterClosingNodeNum?: number;
     /**
      * 集群是否开启删除保护
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterDeletionProtection?: boolean;
     /**
      * 集群是否可审计
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterAuditEnabled?: boolean;
 }
@@ -12822,7 +12683,6 @@ export interface PrometheusTemplate {
 export interface GPUArgs {
     /**
      * 是否启用MIG特性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MIGEnable?: boolean;
     /**
@@ -12831,17 +12691,14 @@ export interface GPUArgs {
     Driver?: DriverVersion;
     /**
      * CUDA版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CUDA?: DriverVersion;
     /**
      * cuDNN版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CUDNN?: CUDNN;
     /**
      * 自定义GPU驱动信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomDriver?: CustomDriver;
 }
@@ -12855,17 +12712,14 @@ export interface RouteTableConflict {
     RouteTableType?: string;
     /**
      * 路由表CIDR。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteTableCidrBlock?: string;
     /**
      * 路由表名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteTableName?: string;
     /**
      * 路由表ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteTableId?: string;
 }

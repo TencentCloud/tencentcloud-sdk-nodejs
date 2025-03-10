@@ -21,22 +21,18 @@
 export interface Network {
   /**
    * VpcId(VPC网络下有效)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网Id(VPC网络下有效)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 内网访问IP。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
    * 内网访问Port。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
@@ -308,12 +304,10 @@ export interface Inbound {
 export interface Tag {
   /**
    * 标签键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
 }

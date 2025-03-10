@@ -216,35 +216,38 @@ export interface AuthorizationPolicyPriority {
 }
 
 /**
- * ModifyInstance请求参数结构体
+ * DescribeInsPublicEndpoints返回参数结构体
  */
-export interface ModifyInstanceRequest {
+export interface DescribeInsPublicEndpointsResponse {
   /**
-   * 实例ID
+   * 接入点
    */
-  InstanceId: string
+  Endpoints?: Array<MQTTEndpointItem>
   /**
-   * 要修改实例名称
+   * 实例id
    */
-  Name?: string
+  InstanceId?: string
   /**
-   * 要修改的备注信息
+   * 带宽
    */
-  Remark?: string
+  Bandwidth?: number
   /**
-   * 要变更的配置规格
+   * 公网访问规则
    */
-  SkuCode?: string
+  Rules?: Array<PublicAccessRule>
   /**
-   * 客户端证书注册方式：
-JITP：自动注册
-API：手动通过API注册
+   * 公网状态：
+    NORMAL-正常
+    CLOSING-关闭中
+    MODIFYING-修改中
+    CREATING-开启中
+    CLOSE-关闭
    */
-  DeviceCertificateProvisionType?: string
+  Status?: string
   /**
-   * 自动注册证书是否自动激活
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AutomaticActivation?: boolean
+  RequestId?: string
 }
 
 /**
@@ -519,6 +522,48 @@ export interface RegisterCaCertificateResponse {
 }
 
 /**
+ * DeleteInstance请求参数结构体
+ */
+export interface DeleteInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 要修改实例名称
+   */
+  Name?: string
+  /**
+   * 要修改的备注信息
+   */
+  Remark?: string
+  /**
+   * 要变更的配置规格
+   */
+  SkuCode?: string
+  /**
+   * 客户端证书注册方式：
+JITP：自动注册
+API：手动通过API注册
+   */
+  DeviceCertificateProvisionType?: string
+  /**
+   * 自动注册证书是否自动激活
+   */
+  AutomaticActivation?: boolean
+}
+
+/**
  * RegisterDeviceCertificate返回参数结构体
  */
 export interface RegisterDeviceCertificateResponse {
@@ -573,20 +618,6 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
-}
-
-/**
- * DescribeDeviceCertificate请求参数结构体
- */
-export interface DescribeDeviceCertificateRequest {
-  /**
-   * 设备证书sn
-   */
-  DeviceCertificateSn: string
-  /**
-   * 集群id
-   */
-  InstanceId: string
 }
 
 /**
@@ -1313,6 +1344,16 @@ export interface MQTTEndpointItem {
 }
 
 /**
+ * DescribeInsVPCEndpoints请求参数结构体
+ */
+export interface DescribeInsVPCEndpointsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeTopicList请求参数结构体
  */
 export interface DescribeTopicListRequest {
@@ -1794,48 +1835,31 @@ export interface ModifyInstanceCertBindingResponse {
 }
 
 /**
- * DeleteInstance请求参数结构体
+ * DescribeInsVPCEndpoints返回参数结构体
  */
-export interface DeleteInstanceRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-}
-
-/**
- * DescribeInsPublicEndpoints返回参数结构体
- */
-export interface DescribeInsPublicEndpointsResponse {
+export interface DescribeInsVPCEndpointsResponse {
   /**
    * 接入点
    */
   Endpoints?: Array<MQTTEndpointItem>
   /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 带宽
-   */
-  Bandwidth?: number
-  /**
-   * 公网访问规则
-   */
-  Rules?: Array<PublicAccessRule>
-  /**
-   * 公网状态：
-    NORMAL-正常
-    CLOSING-关闭中
-    MODIFYING-修改中
-    CREATING-开启中
-    CLOSE-关闭
-   */
-  Status?: string
-  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeviceCertificate请求参数结构体
+ */
+export interface DescribeDeviceCertificateRequest {
+  /**
+   * 设备证书sn
+   */
+  DeviceCertificateSn: string
+  /**
+   * 集群id
+   */
+  InstanceId: string
 }
 
 /**

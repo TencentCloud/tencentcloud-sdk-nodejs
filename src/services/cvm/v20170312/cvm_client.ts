@@ -59,6 +59,7 @@ import {
   DescribeImageFromFamilyRequest,
   DescribeRegionsResponse,
   ImportImageDataDisk,
+  PurchaseReservedInstancesOfferingRequest,
   RebootInstancesRequest,
   InstanceTypeConfigStatus,
   HostPriceInfo,
@@ -94,6 +95,7 @@ import {
   DescribeLaunchTemplateVersionsRequest,
   InquiryPriceResizeInstanceDisksRequest,
   RunInstancesResponse,
+  ReservedInstancePrice,
   DisasterRecoverGroupQuota,
   DescribeHpcClustersResponse,
   ModifyImageSharePermissionResponse,
@@ -113,6 +115,8 @@ import {
   CreateHpcClusterResponse,
   Placement,
   DescribeDisasterRecoverGroupsRequest,
+  ModifyKeyPairAttributeResponse,
+  ModifyInstancesRenewFlagRequest,
   SyncImagesRequest,
   DisassociateInstancesKeyPairsRequest,
   DescribeImageQuotaRequest,
@@ -137,13 +141,13 @@ import {
   CreateDisasterRecoverGroupRequest,
   DescribeChcDeniedActionsRequest,
   DescribeImportImageOsResponse,
-  ModifyKeyPairAttributeResponse,
+  InquirePricePurchaseReservedInstancesOfferingRequest,
   PrePaidQuota,
   StopInstancesRequest,
   DataDisk,
   DescribeKeyPairsRequest,
   OperationCountLimit,
-  RunAutomationServiceEnabled,
+  ReservedInstanceConfigInfoItem,
   LaunchTemplateVersionData,
   TargetOS,
   DeleteDisasterRecoverGroupsResponse,
@@ -158,6 +162,8 @@ import {
   EnhancedService,
   CreateKeyPairResponse,
   DescribeInstanceVncUrlResponse,
+  DescribeReservedInstancesOfferingsRequest,
+  ReservedInstanceFamilyItem,
   DescribeInternetChargeTypeConfigsRequest,
   ExitRescueModeRequest,
   DescribeDisasterRecoverGroupsResponse,
@@ -165,6 +171,7 @@ import {
   ActionTimer,
   ModifyInstanceDiskTypeResponse,
   CreateLaunchTemplateRequest,
+  DescribeReservedInstancesConfigInfosRequest,
   InquiryPriceResetInstanceRequest,
   DescribeLaunchTemplatesRequest,
   ResetInstancesInternetMaxBandwidthRequest,
@@ -198,12 +205,14 @@ import {
   ResizeInstanceDisksRequest,
   DescribeInternetChargeTypeConfigsResponse,
   AccountQuotaOverview,
+  RunAutomationServiceEnabled,
   DescribeZoneInstanceConfigInfosRequest,
   DescribeZonesResponse,
   ItemPrice,
   InstanceTypeQuotaItem,
   InquiryPriceTerminateInstancesRequest,
   ImageOsList,
+  ReservedInstanceTypeItem,
   ExportImagesResponse,
   RemoveChcDeployVpcRequest,
   InquiryPriceRunInstancesResponse,
@@ -217,10 +226,12 @@ import {
   InquiryPriceResizeInstanceDisksResponse,
   TerminateInstancesRequest,
   SharePermission,
+  PurchaseReservedInstancesOfferingResponse,
   DeleteImagesResponse,
   ResetInstanceRequest,
   ImportImageResponse,
   ModifyDisasterRecoverGroupAttributeRequest,
+  ReservedInstancePriceItem,
   ConfigureChcAssistVpcResponse,
   RebootInstancesResponse,
   DescribeChcHostsRequest,
@@ -228,14 +239,17 @@ import {
   LaunchTemplate,
   InquiryPriceResetInstancesTypeResponse,
   DeleteHpcClustersRequest,
+  ReservedInstancesOffering,
   CreateLaunchTemplateVersionResponse,
   ImageQuota,
   ModifyImageAttributeResponse,
   InquiryPriceRenewInstancesRequest,
   GPUInfo,
+  DescribeReservedInstancesOfferingsResponse,
   InstanceRefund,
   DescribeInstanceTypeConfigsRequest,
   RegionInfo,
+  DescribeReservedInstancesConfigInfosResponse,
   DescribeImageFromFamilyResponse,
   ModifyLaunchTemplateDefaultVersionRequest,
   ModifyInstancesAttributeResponse,
@@ -244,7 +258,7 @@ import {
   InquiryPriceRenewHostsResponse,
   ResizeInstanceDisksResponse,
   LoginSettings,
-  ModifyInstancesRenewFlagRequest,
+  InquirePricePurchaseReservedInstancesOfferingResponse,
   DisassociateSecurityGroupsRequest,
   ModifyHostsAttributeRequest,
   RenewInstancesRequest,
@@ -457,6 +471,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeReservedInstancesConfigInfos)供用户列出可购买预留实例机型配置。预留实例当前只针对国际站白名单用户开放。
+   */
+  async DescribeReservedInstancesConfigInfos(
+    req: DescribeReservedInstancesConfigInfosRequest,
+    cb?: (error: string, rep: DescribeReservedInstancesConfigInfosResponse) => void
+  ): Promise<DescribeReservedInstancesConfigInfosResponse> {
+    return this.request("DescribeReservedInstancesConfigInfos", req, cb)
+  }
+
+  /**
    * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
    */
   async DescribeInstanceFamilyConfigs(
@@ -464,6 +488,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceFamilyConfigsResponse) => void
   ): Promise<DescribeInstanceFamilyConfigsResponse> {
     return this.request("DescribeInstanceFamilyConfigs", req, cb)
+  }
+
+  /**
+   * 本接口(InquirePricePurchaseReservedInstancesOffering)用于创建预留实例询价。本接口仅允许针对购买限制范围内的预留实例配置进行询价。预留实例当前只针对国际站白名单用户开放。
+   */
+  async InquirePricePurchaseReservedInstancesOffering(
+    req: InquirePricePurchaseReservedInstancesOfferingRequest,
+    cb?: (error: string, rep: InquirePricePurchaseReservedInstancesOfferingResponse) => void
+  ): Promise<InquirePricePurchaseReservedInstancesOfferingResponse> {
+    return this.request("InquirePricePurchaseReservedInstancesOffering", req, cb)
   }
 
   /**
@@ -893,6 +927,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(PurchaseReservedInstancesOffering)用于用户购买一个或者多个指定配置的预留实例，预留实例当前只针对国际站白名单用户开放。
+   */
+  async PurchaseReservedInstancesOffering(
+    req: PurchaseReservedInstancesOfferingRequest,
+    cb?: (error: string, rep: PurchaseReservedInstancesOfferingResponse) => void
+  ): Promise<PurchaseReservedInstancesOfferingResponse> {
+    return this.request("PurchaseReservedInstancesOffering", req, cb)
+  }
+
+  /**
      * 本接口 (ModifyInstancesRenewFlag) 用于修改包年包月实例续费标识。
 
 * 实例被标识为自动续费后，每次在实例到期时，会自动续费一个月。
@@ -1070,6 +1114,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DescribeKeyPairsResponse) => void
   ): Promise<DescribeKeyPairsResponse> {
     return this.request("DescribeKeyPairs", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeReservedInstancesOfferings)供用户列出可购买的预留实例配置，预留实例当前只针对国际站白名单用户开放。
+   */
+  async DescribeReservedInstancesOfferings(
+    req: DescribeReservedInstancesOfferingsRequest,
+    cb?: (error: string, rep: DescribeReservedInstancesOfferingsResponse) => void
+  ): Promise<DescribeReservedInstancesOfferingsResponse> {
+    return this.request("DescribeReservedInstancesOfferings", req, cb)
   }
 
   /**

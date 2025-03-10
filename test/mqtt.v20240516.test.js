@@ -208,6 +208,16 @@ it("mqtt.v20240516.ModifyInstanceCertBinding", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeInsVPCEndpoints", async function () {
+    try {
+       const data = await client.DescribeInsVPCEndpoints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeProductSKUList", async function () {
     try {
        const data = await client.DescribeProductSKUList({})
