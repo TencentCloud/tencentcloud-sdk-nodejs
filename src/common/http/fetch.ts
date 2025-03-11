@@ -1,5 +1,5 @@
 import fetch, { RequestInit, Response } from "node-fetch"
-import HttpsProxyAgent = require("https-proxy-agent")
+import HttpsProxyAgent from "https-proxy-agent"
 
 export interface FetchOptions extends Omit<RequestInit, "signal"> {
   proxy?: string

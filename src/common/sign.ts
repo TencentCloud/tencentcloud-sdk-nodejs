@@ -1,7 +1,7 @@
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import * as crypto from "crypto"
 import { URL } from "url"
-import * as JSONBigInt from "json-bigint"
+import JSONBigInt from "json-bigint"
 
 const JSONbigNative = JSONBigInt({ useNativeBigInt: true })
 

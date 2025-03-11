@@ -21,8 +21,8 @@
       "./node_modules/@types"
     ],
     "allowSyntheticDefaultImports": true /* 允许从没有设置默认导出的模块中默认导入，仅用于提示，不影响编译结果*/,
-    "esModuleInterop": false /* 允许编译生成文件时，在代码中注入工具类(__importDefault、__importStar)对ESM与commonjs混用情况做兼容处理*/,
-    "sourceMap": false
+    "esModuleInterop": true /* 允许编译生成文件时，在代码中注入工具类(__importDefault、__importStar)对ESM与commonjs混用情况做兼容处理*/,
+    "sourceMap": false,
   },
   "include": [
     /* 需要编译的文件 */
