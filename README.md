@@ -52,10 +52,24 @@ npm install tencentcloud-sdk-nodejs --save
 
 ## 通过源码包安装
 
-1. 前往 [GitHub 仓库](https://github.com/tencentcloud/tencentcloud-sdk-nodejs) 或者 [Gitee 仓库](https://gitee.com/tencentcloud/tencentcloud-sdk-nodejs) 下载源码压缩包。
-2. 解压源码包到您项目合适的位置，例如 `sdk/tencentcloud-sdk-nodejs`。
-3. 执行 `npm install ./sdk/tencentcloud-sdk-nodejs`。
-4. 使用 `require("tencentcloud-sdk-nodejs")` 的方式引入 SDK，具体可参考示例。
+1. clone 代码到本地：
+```
+git clone https://github.com/tencentcloud/tencentcloud-sdk-nodejs
+# 或者
+git clone https://gitee.com/tencentcloud/tencentcloud-sdk-nodejs
+```
+2. 在项目根目录执行以下命令完成构建：
+```
+npm install && npm run build
+```
+3. 打包 NPM 压缩文件，例如 `tencentcloud-sdk-nodejs-4.0.0.tgz`
+```
+npm pack
+```
+4. 安装包到你的项目里：
+```
+npm install /path/to/tencentcloud-sdk-nodejs/tencentcloud-sdk-nodejs-4.0.0.tgz
+```
 
 # 示例
 
