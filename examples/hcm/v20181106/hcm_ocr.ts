@@ -1,4 +1,4 @@
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
+import * as tencentcloud from "tencentcloud-sdk-nodejs-hcm"
 
 // 导入对应产品模块的client models
 const HcmClient = tencentcloud.hcm.v20181106.Client

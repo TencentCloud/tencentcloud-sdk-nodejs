@@ -1,7 +1,5 @@
-import * as tencentcloud from "../../tencentcloud-sdk-nodejs"
-// import * as tencentcloud from "tencentcloud-sdk-nodejs"
-import CvmRoleCredential from "../../tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential"
-// import CvmRoleCredential from "tencentcloud-sdk-nodejs/tencentcloud/common/cvm_role_credential"
+import * as tencentcloud from "tencentcloud-sdk-nodejs-cvm"
+import CvmRoleCredential from "tencentcloud-sdk-nodejs-common/tencentcloud/common/cvm_role_credential"
 
 
 async function main() {

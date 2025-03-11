@@ -1,4 +1,4 @@
-const tencentcloud = require("../../../../tencentcloud-sdk-nodejs")
+const tencentcloud = require("tencentcloud-sdk-nodejs-soe")
 
 // 导入对应产品模块的client models
 const SoeClient = tencentcloud.soe.v20180724.Client

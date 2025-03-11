@@ -1,4 +1,4 @@
-const tencentcloud = require("../../../../tencentcloud-sdk-nodejs")
+const tencentcloud = require("tencentcloud-sdk-nodejs-ecc")
 
 // 导入对应产品模块的client models
 const EccClient = tencentcloud.ecc.v20181213.Client

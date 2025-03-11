@@ -1,4 +1,4 @@
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
+import * as tencentcloud from "tencentcloud-sdk-nodejs-cvm"
 
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client
