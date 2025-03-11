@@ -624,7 +624,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(EnableTransparentDataEncryption)用于开启云数据库 MongoDB 的透明加密能力。
+   * 本接口（EnableTransparentDataEncryption）用于开启云数据库 MongoDB 的透明加密能力。
    */
   async EnableTransparentDataEncryption(
     req: EnableTransparentDataEncryptionRequest,

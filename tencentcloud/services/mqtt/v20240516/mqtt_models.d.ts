@@ -8,21 +8,25 @@ export interface UpdateAuthorizationPolicyPriorityResponse {
     RequestId?: string;
 }
 /**
- * DescribeDeviceCertificates返回参数结构体
+ * MQTT 订阅关系
  */
-export interface DescribeDeviceCertificatesResponse {
+export interface MQTTClientSubscription {
     /**
-     * 总数
+     * topic 订阅
      */
-    TotalCount?: number;
+    TopicFilter?: string;
     /**
-     * 设备证书
+     * 服务质量等级
      */
-    Data?: Array<DeviceCertificateItem>;
+    Qos?: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 堆积数量
      */
-    RequestId?: string;
+    Lag?: number;
+    /**
+     * 投递未确认数量
+     */
+    Inflight?: number;
 }
 /**
  * DeleteUser请求参数结构体
@@ -72,42 +76,34 @@ export interface CaCertificateItem {
     VerificationCertificate?: string;
     /**
      * ca状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 上次激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastActivationTime?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedTime?: number;
     /**
      * 预销毁时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: number;
     /**
      * 上次去激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastInactivationTime?: number;
     /**
      * Ca证书颁发者CN
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaIssuerCn?: string;
     /**
      * 生效时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotBeforeTime?: number;
     /**
      * 失效时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotAfterTime?: number;
 }
@@ -229,12 +225,10 @@ export interface ModifyJWTAuthenticatorRequest {
 export interface AuthorizationPolicyPriority {
     /**
      * 策略id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id: number;
     /**
      * 优先级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Priority: number;
 }
@@ -353,7 +347,6 @@ export interface DescribeCaCertificateResponse {
     Format?: string;
     /**
      * Ca证书颁发者CN
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaIssuerCn?: string;
     /**
@@ -415,17 +408,14 @@ export interface DeleteAuthenticatorRequest {
 export interface PublicAccessRule {
     /**
      * ip网段信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpRule: string;
     /**
      * 允许或者拒绝
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Allow: boolean;
     /**
      * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -459,47 +449,38 @@ export interface ProductSkuItem {
      * 规格类型
   BASIC：基础版
   PRO ：专业版
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 规格代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkuCode?: string;
     /**
      * 是否售卖
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OnSale?: boolean;
     /**
      * topic num限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicNumLimit?: number;
     /**
      * tps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TpsLimit?: number;
     /**
      * 客户端连接数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientNumLimit?: number;
     /**
      * 单客户端最大订阅数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxSubscriptionPerClient?: number;
     /**
      * 授权规则条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthorizationPolicyLimit?: number;
     /**
      * 计费项信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PriceTags?: Array<PriceTag>;
 }
@@ -600,27 +581,22 @@ export interface RegisterDeviceCertificateResponse {
 export interface MQTTAuthenticatorItem {
     /**
      * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 BYOC：一端一证认证器
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 认证器配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Config?: string;
     /**
      * 认证器状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 说明
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -643,12 +619,10 @@ export interface DescribeClientListResponse {
 export interface Tag {
     /**
      * 标签名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue: string;
 }
@@ -658,12 +632,10 @@ export interface Tag {
 export interface DescribeMessageListResponse {
     /**
      * 查询总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 消息记录列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<MQTTMessageItem>;
     /**
@@ -674,6 +646,19 @@ export interface DescribeMessageListResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * HTTP 认证器header
+ */
+export interface HeaderItem {
+    /**
+     * header key
+     */
+    Key: string;
+    /**
+     * header value
+     */
+    Value: string;
 }
 /**
  * MQTT 实例信息
@@ -719,7 +704,6 @@ export interface MQTTInstanceItem {
     TopicNumLimit?: number;
     /**
      * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -732,57 +716,46 @@ export interface MQTTInstanceItem {
     SkuCode?: string;
     /**
      * 弹性TPS限流值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TpsLimit?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 单客户端最大订阅数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxSubscriptionPerClient?: number;
     /**
      * 客户端连接数上线
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientNumLimit?: number;
     /**
      * 是否自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 计费模式， POSTPAID，按量计费 PREPAID，包年包月
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode?: string;
     /**
      * 到期时间，秒为单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpiryTime?: number;
     /**
      * 预销毁时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DestroyTime?: number;
     /**
      * 授权规则条数限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthorizationPolicyLimit?: number;
     /**
      * 最大ca配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxCaNum?: number;
     /**
      * 最大订阅数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxSubscription?: number;
 }
@@ -792,7 +765,6 @@ export interface MQTTInstanceItem {
 export interface DescribeInstanceListResponse {
     /**
      * 查询总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -831,6 +803,15 @@ export interface ModifyInstanceResponse {
     RequestId?: string;
 }
 /**
+ * CreateHttpAuthenticator返回参数结构体
+ */
+export interface CreateHttpAuthenticatorResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyInsPublicEndpoint返回参数结构体
  */
 export interface ModifyInsPublicEndpointResponse {
@@ -845,47 +826,38 @@ export interface ModifyInsPublicEndpointResponse {
 export interface MQTTMessageItem {
     /**
      * 消息ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MsgId?: string;
     /**
      * 消息tag
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: string;
     /**
      * 消息key
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Keys?: string;
     /**
      * 客户端地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProducerAddr?: string;
     /**
      * 消息发送时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProduceTime?: string;
     /**
      * 死信重发次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeadLetterResendTimes?: number;
     /**
      * 死信重发成功次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeadLetterResendSuccessTimes?: number;
     /**
      * 子topic
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubTopic?: string;
     /**
      * 消息质量等级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Qos?: string;
 }
@@ -1081,12 +1053,10 @@ export interface DeleteInstanceResponse {
 export interface DescribeProductSKUListResponse {
     /**
      * 查询总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * mqtt商品配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MQTTProductSkuList?: Array<ProductSkuItem>;
     /**
@@ -1164,6 +1134,15 @@ export interface CreateJWKSAuthenticatorResponse {
     RequestId?: string;
 }
 /**
+ * ModifyHttpAuthenticator返回参数结构体
+ */
+export interface ModifyHttpAuthenticatorResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAuthorizationPolicies返回参数结构体
  */
 export interface DescribeAuthorizationPoliciesResponse {
@@ -1221,7 +1200,6 @@ export interface TagFilter {
 export interface DescribeUserListResponse {
     /**
      * 查询总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1290,6 +1268,19 @@ export interface ActivateCaCertificateRequest {
     CaSn: string;
 }
 /**
+ * HTTP 认证器body
+ */
+export interface BodyItem {
+    /**
+     * body key
+     */
+    Key: string;
+    /**
+     * body key
+     */
+    Value: string;
+}
+/**
  * ActivateDeviceCertificate返回参数结构体
  */
 export interface ActivateDeviceCertificateResponse {
@@ -1345,21 +1336,75 @@ export interface PublishMessageRequest {
     Retain?: boolean;
 }
 /**
- * CreateTopic返回参数结构体
+ * AuthorizationPolicyItem
  */
-export interface CreateTopicResponse {
+export interface AuthorizationPolicyItem {
     /**
-     * 实例ID
+     * 规则ID
+     */
+    Id?: number;
+    /**
+     * 集群ID
      */
     InstanceId?: string;
     /**
-     * 主题
+     * 规则名
      */
-    Topic?: string;
+    PolicyName?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 规则语法版本
      */
-    RequestId?: string;
+    Version?: number;
+    /**
+     * 越小越优先
+     */
+    Priority?: number;
+    /**
+     * allow/deny
+     */
+    Effect?: string;
+    /**
+     * connect、pub、sub
+     */
+    Actions?: string;
+    /**
+     * 资源
+     */
+    Resources?: string;
+    /**
+     * client
+     */
+    ClientId?: string;
+    /**
+     * 用户
+     */
+    Username?: string;
+    /**
+     * IP地址
+     */
+    Ip?: string;
+    /**
+     * 0，1，2
+     */
+    Qos?: string;
+    /**
+     * 1：表示匹配retain消息
+  2：表示匹配非retain消息
+  3：表示匹配retain和非retain消息
+     */
+    Retain?: number;
+    /**
+     * 描述
+     */
+    Remark?: string;
+    /**
+     * 1713164969433
+     */
+    CreatedTime?: number;
+    /**
+     * 1713164969433
+     */
+    UpdateTime?: number;
 }
 /**
  * DescribeClientList请求参数结构体
@@ -1393,37 +1438,30 @@ export interface DeleteInsPublicEndpointResponse {
 export interface MQTTEndpointItem {
     /**
      * 类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 接入点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
     /**
      * vpc信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 主机
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Host?: string;
     /**
      * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: number;
     /**
      * 接入点ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
 }
@@ -1459,87 +1497,21 @@ export interface DescribeTopicListRequest {
     Limit?: number;
 }
 /**
- * AuthorizationPolicyItem
+ * CreateTopic返回参数结构体
  */
-export interface AuthorizationPolicyItem {
+export interface CreateTopicResponse {
     /**
-     * 规则ID
-     */
-    Id?: number;
-    /**
-     * 集群ID
+     * 实例ID
      */
     InstanceId?: string;
     /**
-     * 规则名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 主题
      */
-    PolicyName?: string;
+    Topic?: string;
     /**
-     * 规则语法版本
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Version?: number;
-    /**
-     * 越小越优先
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Priority?: number;
-    /**
-     * allow/deny
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Effect?: string;
-    /**
-     * connect、pub、sub
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Actions?: string;
-    /**
-     * 资源
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Resources?: string;
-    /**
-     * client
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClientId?: string;
-    /**
-     * 用户
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Username?: string;
-    /**
-     * IP地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Ip?: string;
-    /**
-     * 0，1，2
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Qos?: string;
-    /**
-     * 1：表示匹配retain消息
-  2：表示匹配非retain消息
-  3：表示匹配retain和非retain消息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Retain?: number;
-    /**
-     * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark?: string;
-    /**
-     * 1713164969433
-     */
-    CreatedTime?: number;
-    /**
-     * 1713164969433
-     */
-    UpdateTime?: number;
+    RequestId?: string;
 }
 /**
  * RevokedDeviceCertificate请求参数结构体
@@ -1733,25 +1705,21 @@ export interface DeactivateDeviceCertificateRequest {
     DeviceCertificateSn: string;
 }
 /**
- * MQTT 订阅关系
+ * DescribeDeviceCertificates返回参数结构体
  */
-export interface MQTTClientSubscription {
+export interface DescribeDeviceCertificatesResponse {
     /**
-     * topic 订阅
+     * 总数
      */
-    TopicFilter?: string;
+    TotalCount?: number;
     /**
-     * 服务质量等级
+     * 设备证书
      */
-    Qos?: number;
+    Data?: Array<DeviceCertificateItem>;
     /**
-     * 堆积数量
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Lag?: number;
-    /**
-     * 投递未确认数量
-     */
-    Inflight?: number;
+    RequestId?: string;
 }
 /**
  * ModifyTopic请求参数结构体
@@ -2046,6 +2014,51 @@ export interface RevokedDeviceCertificateResponse {
     RequestId?: string;
 }
 /**
+ * CreateHttpAuthenticator请求参数结构体
+ */
+export interface CreateHttpAuthenticatorRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * jwks端点
+     */
+    Endpoint: string;
+    /**
+     * 最大并发连接数，默认8，范围：1-20
+     */
+    Concurrency?: number;
+    /**
+     * 网络请求方法 Get 或 Post，默认post
+     */
+    Method?: string;
+    /**
+     * 认证器是否开启：open-启用；close-关闭
+     */
+    Status?: string;
+    /**
+     * 说明
+     */
+    Remark?: string;
+    /**
+     * 连接超时时间，单位：秒，范围：1-30
+     */
+    ConnectTimeout?: number;
+    /**
+     * 请求超时时间，单位：秒，范围：1-30
+     */
+    ReadTimeout?: number;
+    /**
+     * 转发请求header
+     */
+    Header?: Array<HeaderItem>;
+    /**
+     * 转发请求body
+     */
+    Body?: Array<BodyItem>;
+}
+/**
  * DescribeProductSKUList请求参数结构体
  */
 export declare type DescribeProductSKUListRequest = null;
@@ -2055,7 +2068,6 @@ export declare type DescribeProductSKUListRequest = null;
 export interface DescribeTopicListResponse {
     /**
      * 查询总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2117,7 +2129,6 @@ export interface DescribeDeviceCertificateResponse {
     Format?: string;
     /**
      * 客户端id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientId?: string;
     /**
@@ -2129,6 +2140,10 @@ export interface DescribeDeviceCertificateResponse {
      * 证书生效开始时间
      */
     NotBeforeTime?: number;
+    /**
+     * 组织单位
+     */
+    OrganizationalUnit?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2219,7 +2234,6 @@ export interface DescribeCaCertificatesRequest {
 export interface DeviceCertificateItem {
     /**
      * 客户端id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientId?: string;
     /**
@@ -2251,13 +2265,15 @@ export interface DeviceCertificateItem {
      */
     Status?: string;
     /**
+     * 组织单位
+     */
+    OrganizationalUnit?: string;
+    /**
      * 上次激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastActivationTime?: number;
     /**
      * 上次取消激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastInactivationTime?: number;
     /**
@@ -2266,24 +2282,20 @@ export interface DeviceCertificateItem {
     CreatedTime?: number;
     /**
      * 预销毁时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: number;
     /**
      * 证书来源：
   API, 手动注册
   JITP 自动注册
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertificateSource?: string;
     /**
      * 证书失效日期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotAfterTime?: number;
     /**
      * 证书生效开始日期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotBeforeTime?: number;
 }
@@ -2293,47 +2305,38 @@ export interface DeviceCertificateItem {
 export interface MQTTClientInfo {
     /**
      * 客户端唯一标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientId?: string;
     /**
      * 客户端网络地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientAddress?: string;
     /**
      * MQTT 协议版本，4 表示 MQTT 3.1.1
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtocolVersion?: number;
     /**
      * 保持连接时间，单位：秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Keepalive?: number;
     /**
      * 连接状态，CONNECTED 已连接，DISCONNECTED 未连接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectionStatus?: string;
     /**
      * 客户端创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 上次建立连接时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectTime?: number;
     /**
      * 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisconnectTime?: number;
     /**
      * 客户端的订阅列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MQTTClientSubscriptions?: Array<MQTTClientSubscription>;
 }
@@ -2351,7 +2354,6 @@ export interface MQTTTopicItem {
     Topic?: string;
     /**
      * 主题描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -2373,7 +2375,6 @@ export interface PriceTag {
     Code?: string;
     /**
      * 步长
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Step?: number;
 }
@@ -2495,6 +2496,51 @@ export interface ModifyInstanceCertBindingRequest {
     AutomaticActivation?: boolean;
 }
 /**
+ * ModifyHttpAuthenticator请求参数结构体
+ */
+export interface ModifyHttpAuthenticatorRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 端点
+     */
+    Endpoint?: string;
+    /**
+     * 认证器状态：open-启用；close-关闭
+     */
+    Status?: string;
+    /**
+     * 最大并发连接数，默认8，范围：1-20
+     */
+    Concurrency?: number;
+    /**
+     * 连接超时时间，单位：秒，范围：1-30
+     */
+    ConnectTimeout?: number;
+    /**
+     * 请求超时时间，单位：秒，范围：1-30
+     */
+    ReadTimeout?: number;
+    /**
+     * 说明
+     */
+    Remark?: string;
+    /**
+     * 请求方法，GET 或者 POST
+     */
+    Method?: string;
+    /**
+     * 请求header
+     */
+    Header?: Array<HeaderItem>;
+    /**
+     * 请求body
+     */
+    Body?: Array<BodyItem>;
+}
+/**
  * DescribeInstance请求参数结构体
  */
 export interface DescribeInstanceRequest {
@@ -2556,7 +2602,6 @@ export interface IpRule {
     Allow: boolean;
     /**
      * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark: string;
 }

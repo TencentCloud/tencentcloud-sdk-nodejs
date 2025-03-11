@@ -68,32 +68,26 @@ export interface DescribeFileSystemResponse {
     FileSystem?: FileSystem;
     /**
      * 文件系统已使用容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CapacityUsed?: number;
     /**
      * 已使用COS归档存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ArchiveCapacityUsed?: number;
     /**
      * 已使用COS标准存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StandardCapacityUsed?: number;
     /**
      * 已使用COS低频存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DegradeCapacityUsed?: number;
     /**
      * 已使用COS深度归档存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeepArchiveCapacityUsed?: number;
     /**
      * 已使用COS智能分层存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IntelligentCapacityUsed?: number;
     /**

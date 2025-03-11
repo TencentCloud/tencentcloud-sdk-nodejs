@@ -194,7 +194,7 @@ export declare class Client extends AbstractClient {
      */
     KillOps(req: KillOpsRequest, cb?: (error: string, rep: KillOpsResponse) => void): Promise<KillOpsResponse>;
     /**
-     * 本接口(EnableTransparentDataEncryption)用于开启云数据库 MongoDB 的透明加密能力。
+     * 本接口（EnableTransparentDataEncryption）用于开启云数据库 MongoDB 的透明加密能力。
      */
     EnableTransparentDataEncryption(req: EnableTransparentDataEncryptionRequest, cb?: (error: string, rep: EnableTransparentDataEncryptionResponse) => void): Promise<EnableTransparentDataEncryptionResponse>;
     /**

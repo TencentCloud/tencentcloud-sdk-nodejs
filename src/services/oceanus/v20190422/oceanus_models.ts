@@ -754,12 +754,19 @@ export interface TreeJobSets {
   ScalingType?: number
   /**
    * RunningCpu
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCpu?: number
   /**
    * RunningMem
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningMem?: number
+  /**
+   * sql
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DecodeSqlCode?: string
 }
 
 /**
@@ -3300,6 +3307,16 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningMem?: number
+  /**
+   * 是否开了默认告警
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpenJobDefaultAlarm?: number
+  /**
+   * 操作中描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgressDesc?: string
 }
 
 /**
@@ -3646,6 +3663,10 @@ export interface CreateJobRequest {
    * 作业描述
    */
   Description?: string
+  /**
+   * 开启默认告警
+   */
+  OpenJobDefaultAlarm?: number
 }
 
 /**

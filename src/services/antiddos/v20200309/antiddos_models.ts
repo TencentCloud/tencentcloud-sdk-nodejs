@@ -3528,7 +3528,7 @@ export interface CreateCCPrecisionPolicyRequest {
    */
   Domain: string
   /**
-   * 策略方式，可取值alg表示验证码，drop表示丢弃
+   * 策略方式，可取值alg表示验证码，drop表示丢弃，trans表示放行
    */
   PolicyAction: string
   /**

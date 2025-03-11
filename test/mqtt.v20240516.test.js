@@ -418,6 +418,16 @@ it("mqtt.v20240516.DeleteAuthorizationPolicy", async function () {
     }
 })
 
+it("mqtt.v20240516.ModifyHttpAuthenticator", async function () {
+    try {
+       const data = await client.ModifyHttpAuthenticator({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DeleteAuthenticator", async function () {
     try {
        const data = await client.DeleteAuthenticator({})
@@ -511,6 +521,16 @@ it("mqtt.v20240516.CreateAuthorizationPolicy", async function () {
 it("mqtt.v20240516.ModifyInstance", async function () {
     try {
        const data = await client.ModifyInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.CreateHttpAuthenticator", async function () {
+    try {
+       const data = await client.CreateHttpAuthenticator({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

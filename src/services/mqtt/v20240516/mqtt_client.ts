@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpdateAuthorizationPolicyPriorityResponse,
-  DescribeDeviceCertificatesResponse,
+  MQTTClientSubscription,
   DeleteUserRequest,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
@@ -50,10 +50,12 @@ import {
   DescribeClientListResponse,
   Tag,
   DescribeMessageListResponse,
+  HeaderItem,
   MQTTInstanceItem,
   DescribeInstanceListResponse,
   ApplyRegistrationCodeResponse,
   ModifyInstanceResponse,
+  CreateHttpAuthenticatorResponse,
   ModifyInsPublicEndpointResponse,
   MQTTMessageItem,
   ModifyJWKSAuthenticatorResponse,
@@ -74,6 +76,7 @@ import {
   CreateJWKSAuthenticatorRequest,
   DescribeTopicResponse,
   CreateJWKSAuthenticatorResponse,
+  ModifyHttpAuthenticatorResponse,
   DescribeAuthorizationPoliciesResponse,
   CreateTopicRequest,
   DeleteCaCertificateResponse,
@@ -83,16 +86,17 @@ import {
   DeactivateDeviceCertificateResponse,
   MQTTUserItem,
   ActivateCaCertificateRequest,
+  BodyItem,
   ActivateDeviceCertificateResponse,
   DescribeTopicRequest,
   PublishMessageRequest,
-  CreateTopicResponse,
+  AuthorizationPolicyItem,
   DescribeClientListRequest,
   DeleteInsPublicEndpointResponse,
   MQTTEndpointItem,
   DescribeInsVPCEndpointsRequest,
   DescribeTopicListRequest,
-  AuthorizationPolicyItem,
+  CreateTopicResponse,
   RevokedDeviceCertificateRequest,
   CreateAuthorizationPolicyResponse,
   DescribeAuthenticatorRequest,
@@ -102,7 +106,7 @@ import {
   RegisterDeviceCertificateRequest,
   Filter,
   DeactivateDeviceCertificateRequest,
-  MQTTClientSubscription,
+  DescribeDeviceCertificatesResponse,
   ModifyTopicRequest,
   CreateUserRequest,
   DescribeInstanceResponse,
@@ -118,6 +122,7 @@ import {
   DeleteAuthorizationPolicyRequest,
   DescribeAuthorizationPoliciesRequest,
   RevokedDeviceCertificateResponse,
+  CreateHttpAuthenticatorRequest,
   DescribeProductSKUListRequest,
   DescribeTopicListResponse,
   DescribeDeviceCertificateResponse,
@@ -133,6 +138,7 @@ import {
   DescribeSharedSubscriptionLagRequest,
   DeleteTopicResponse,
   ModifyInstanceCertBindingRequest,
+  ModifyHttpAuthenticatorRequest,
   DescribeInstanceRequest,
   DescribeCaCertificatesResponse,
   ModifyUserRequest,
@@ -561,6 +567,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改MQTT HTTP 认证器
+   */
+  async ModifyHttpAuthenticator(
+    req: ModifyHttpAuthenticatorRequest,
+    cb?: (error: string, rep: ModifyHttpAuthenticatorResponse) => void
+  ): Promise<ModifyHttpAuthenticatorResponse> {
+    return this.request("ModifyHttpAuthenticator", req, cb)
+  }
+
+  /**
    * 根据认证器类型删除一个MQTT认证器
    */
   async DeleteAuthenticator(
@@ -658,5 +674,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceResponse) => void
   ): Promise<ModifyInstanceResponse> {
     return this.request("ModifyInstance", req, cb)
+  }
+
+  /**
+   * 创建一个HTTP的认证器
+   */
+  async CreateHttpAuthenticator(
+    req: CreateHttpAuthenticatorRequest,
+    cb?: (error: string, rep: CreateHttpAuthenticatorResponse) => void
+  ): Promise<CreateHttpAuthenticatorResponse> {
+    return this.request("CreateHttpAuthenticator", req, cb)
   }
 }

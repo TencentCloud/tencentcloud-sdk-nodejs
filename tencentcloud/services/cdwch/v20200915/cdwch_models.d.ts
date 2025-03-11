@@ -123,7 +123,7 @@ export interface DescribeInstanceNodesRequest {
      */
     InstanceId: string;
     /**
-     * 集群角色类型，默认为 "data"数据节点
+     * 集群角色类型，“DATA” 为数据节点、“COMMON” 为 ZooKeeper 节点，默认为 "DATA" 数据节点。
      */
     NodeRole?: string;
     /**
@@ -1229,12 +1229,12 @@ export interface DescribeInstanceNodesResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例节点总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceNodesList: Array<InstanceNode>;
+    InstanceNodesList?: Array<InstanceNode>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

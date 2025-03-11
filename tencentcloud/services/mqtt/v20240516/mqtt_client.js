@@ -279,6 +279,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuthorizationPolicy", req, cb);
     }
     /**
+     * 修改MQTT HTTP 认证器
+     */
+    async ModifyHttpAuthenticator(req, cb) {
+        return this.request("ModifyHttpAuthenticator", req, cb);
+    }
+    /**
      * 根据认证器类型删除一个MQTT认证器
      */
     async DeleteAuthenticator(req, cb) {
@@ -337,6 +343,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
+    }
+    /**
+     * 创建一个HTTP的认证器
+     */
+    async CreateHttpAuthenticator(req, cb) {
+        return this.request("CreateHttpAuthenticator", req, cb);
     }
 }
 exports.Client = Client;

@@ -304,7 +304,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("KillOps", req, cb);
     }
     /**
-     * 本接口(EnableTransparentDataEncryption)用于开启云数据库 MongoDB 的透明加密能力。
+     * 本接口（EnableTransparentDataEncryption）用于开启云数据库 MongoDB 的透明加密能力。
      */
     async EnableTransparentDataEncryption(req, cb) {
         return this.request("EnableTransparentDataEncryption", req, cb);
