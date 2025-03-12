@@ -2,15 +2,24 @@
   "name": "tencentcloud-sdk-nodejs",
   "version": "4.0.1049",
   "description": "腾讯云 API NODEJS SDK",
-  "main": "tencentcloud/index.js",
+  "main": "./tencentcloud/index.js",
+  "module": "./es/index.js",
+  "types": "./tencentcloud/index.d.ts",
   "scripts": {
     "test": "mocha -t 10000",
-    "build": "tsc",
-    "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}'"
+    "build": "concurrently 'npm:build:cjs' 'npm:build:es'",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:es": "tsc -p tsconfig.es.json",
+    "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}'",
+    "clean": "rimraf tencentcloud es"
   },
   "engines": {
     "node": ">=10"
   },
+  "files": [
+    "tencentcloud",
+    "es"
+  ],
   "keywords": [
     "tencentcloudapi",
     "tencentcloud",
@@ -49,10 +58,12 @@
     "@typescript-eslint/parser": "^2.34.0",
     "babel-eslint": "^10.0.2",
     "chai": "^4.2.0",
+    "concurrently": "^6.5.1",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.17.0",
-    "mocha": "^8.1.1",
+    "mocha": "^8.4.0",
     "prettier": "^2.3.0",
+    "rimraf": "^5.0.10",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   }
