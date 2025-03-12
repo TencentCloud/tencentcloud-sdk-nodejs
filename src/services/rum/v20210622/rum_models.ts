@@ -3485,6 +3485,7 @@ export interface RumProject {
   AccessPoint?: string
   /**
    * kafka旁路配置信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Kafka?: Kafka
 }

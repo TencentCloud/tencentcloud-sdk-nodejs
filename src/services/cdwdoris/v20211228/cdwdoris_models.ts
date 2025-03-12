@@ -900,6 +900,10 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
    * 排序方式
    */
   SortOrder?: string
+  /**
+   * user
+   */
+  UserName?: string
 }
 
 /**
@@ -1903,6 +1907,10 @@ export interface DescribeSlowQueryRecordsRequest {
    * 排序方式
    */
   SortOrder?: string
+  /**
+   * user
+   */
+  UserName?: string
 }
 
 /**

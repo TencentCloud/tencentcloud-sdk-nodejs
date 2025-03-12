@@ -80,6 +80,7 @@ import {
   ModifyNetworkAccessStrategyResponse,
   RestartSREInstanceRequest,
   UnbindAutoScalerResourceStrategyFromGroupsRequest,
+  ConfigFilePersistent,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
   PolarisLimiterAddress,

@@ -1024,6 +1024,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CreateChannelOrganizationInfoChangeUrl", req, cb);
     }
     /**
+     * 查询用户模版类型，分为两种模式：
+<ul>
+<li>QueryBindTemplate:false，查询用户合同模版类型，返回用户合同模版类型ID，用户合同模版类型名称，用户合同模版类型描述信息</li>
+<li>QueryBindTemplate:false，查询用户合同模版类型，返回用户合同模版类型ID，用户合同模版类型名称，用户合同模版类型描述信息，被绑定的模版数量</li>
+</ul>
+     */
+    async DescribeUserFlowType(req, cb) {
+        return this.request("DescribeUserFlowType", req, cb);
+    }
+    /**
      * 接口（ChannelCreateFlowGroupByFiles）用于使用 PDF 文件创建合同组签署流程。
 
 - 该接口允许通过选择多个模板一次性创建多个合同，这些合同被组织在一个合同组中。

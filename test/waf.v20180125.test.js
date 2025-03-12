@@ -1478,6 +1478,16 @@ it("waf.v20180125.ModifyApiSecEventChange", async function () {
     }
 })
 
+it("waf.v20180125.ModifyUserSignatureClass", async function () {
+    try {
+       const data = await client.ModifyUserSignatureClass({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.AddDomainWhiteRule", async function () {
     try {
        const data = await client.AddDomainWhiteRule({})
@@ -1491,6 +1501,16 @@ it("waf.v20180125.AddDomainWhiteRule", async function () {
 it("waf.v20180125.ModifyDomainIpv6Status", async function () {
     try {
        const data = await client.ModifyDomainIpv6Status({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.UpdateProtectionModes", async function () {
+    try {
+       const data = await client.UpdateProtectionModes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

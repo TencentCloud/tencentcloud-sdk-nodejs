@@ -1495,6 +1495,10 @@ export interface DescribeBackupFilesResponse {
    */
   TotalCount?: number
   /**
+   * 文件下载链接路径前缀
+   */
+  UrlPrefix?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2732,11 +2736,11 @@ export interface DescribeBinlogTimeResponse {
   /**
    * 开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

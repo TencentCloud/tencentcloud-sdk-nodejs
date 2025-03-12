@@ -1768,6 +1768,16 @@ it("wedata.v20210820.LockIntegrationTask", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeReportTaskList", async function () {
+    try {
+       const data = await client.DescribeReportTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.SubmitWorkflow", async function () {
     try {
        const data = await client.SubmitWorkflow({})
@@ -2401,6 +2411,16 @@ it("wedata.v20210820.DescribeRealTimeTaskInstanceNodeInfo", async function () {
 it("wedata.v20210820.DescribeIntegrationStatistics", async function () {
     try {
        const data = await client.DescribeIntegrationStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeReportTaskDetail", async function () {
+    try {
+       const data = await client.DescribeReportTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

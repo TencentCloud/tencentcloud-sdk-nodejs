@@ -77,7 +77,6 @@ export interface ClientNodeAttribute {
   InstanceId?: string
   /**
    * 自定义挂载点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPoint?: string
 }
@@ -113,11 +112,11 @@ export interface DescribeFileSystemsResponse {
   /**
    * 文件系统列表
    */
-  FSAttributeList: Array<FSAttribute>
+  FSAttributeList?: Array<FSAttribute>
   /**
    * 总共的文件系统数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -232,7 +231,6 @@ export interface QueryCrossVpcSubnetSupportForClientNodeRequest {
 export interface ChargeAttribute {
   /**
    * 到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurDeadline?: string
   /**
@@ -241,12 +239,10 @@ export interface ChargeAttribute {
   PayMode?: string
   /**
    * 自动付费标识：0:默认未设置 1:自动续费 2 不自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
    * 资源ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
 }
@@ -573,12 +569,10 @@ export interface BatchDeleteClientNodesRequest {
 export interface SubnetInfo {
   /**
    * vpc id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId: string
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
 }
@@ -919,12 +913,10 @@ export interface MappedBucket {
   DataRepositoryTaskAutoStrategy?: Array<string>
   /**
    * 绑定bucket的数据流动策略ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: string
   /**
    * 规则备注与描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleDescription?: string
   /**
@@ -933,17 +925,14 @@ export interface MappedBucket {
   Status?: number
   /**
    * 是否使用全球加速域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccelerateFlag?: boolean
   /**
    * 桶所在的园区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketRegion?: string
   /**
    * 自定义Endpoint
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Endpoint?: string
 }

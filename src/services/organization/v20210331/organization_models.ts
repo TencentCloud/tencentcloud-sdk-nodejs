@@ -1913,6 +1913,28 @@ export interface UpdateSCIMCredentialStatusResponse {
 }
 
 /**
+ * UpdateOrganizationMembersPolicy请求参数结构体
+ */
+export interface UpdateOrganizationMembersPolicyRequest {
+  /**
+   * 成员Uin列表。最多10个
+   */
+  MemberUins: Array<number | bigint>
+  /**
+   * 成员访问策略Id。可通过DescribeOrganizationMemberPolicies获取
+   */
+  PolicyId: number
+  /**
+   * 成员访问身份ID。可通过ListOrganizationIdentity获取
+   */
+  IdentityId: number
+  /**
+   * 策略描述。最大长度为128个字符
+   */
+  Description?: string
+}
+
+/**
  * 共享单元资源
  */
 export interface ShareUnitResource {
@@ -5592,6 +5614,16 @@ export interface DescribePolicyRequest {
  * DeleteGroup返回参数结构体
  */
 export interface DeleteGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateOrganizationMembersPolicy返回参数结构体
+ */
+export interface UpdateOrganizationMembersPolicyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

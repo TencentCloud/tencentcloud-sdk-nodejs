@@ -58,16 +58,15 @@ export interface DescribeScanTaskListResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Result: number;
+    Result?: number;
     /**
      * 任务总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 诊断任务数据列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<AppTaskData>;
+    Data?: Array<AppTaskData>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -339,21 +338,19 @@ export interface DescribeFileTicketResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Result: number;
+    Result?: number;
     /**
      * 上传url(任务来源为2时:Post方法（100:apk,101:txt）, 任务来源为1时:put方法)
      */
-    UploadUrl: string;
+    UploadUrl?: string;
     /**
      * 上传url鉴权信息(任务来源为1时上传需要, Authorization参数值)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UploadSign: string;
+    UploadSign?: string;
     /**
      * 上传文件ID(任务来源为1时提交诊断任务需要)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FildID: string;
+    FildID?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -366,21 +363,19 @@ export interface DescribeScanTaskStatusResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Result: number;
+    Result?: number;
     /**
      * 0:默认值(待检测/待咨询), 1.检测中,  4:任务完成/咨询完成, 5:任务失败, 6:咨询中;
      */
-    Status: number;
+    Status?: number;
     /**
      * 诊断失败的错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrMsg: string;
+    ErrMsg?: string;
     /**
      * 任务流详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowSteps: Array<TaskFlowStepsInfo>;
+    FlowSteps?: Array<TaskFlowStepsInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

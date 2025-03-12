@@ -109,6 +109,7 @@ import {
   DeleteOrganizationMembersResponse,
   ManagerShareUnit,
   UpdateSCIMCredentialStatusResponse,
+  UpdateOrganizationMembersPolicyRequest,
   ShareUnitResource,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberAuthIdentityResponse,
@@ -295,6 +296,7 @@ import {
   CreateSCIMCredentialRequest,
   DescribePolicyRequest,
   DeleteGroupResponse,
+  UpdateOrganizationMembersPolicyResponse,
   UpdateUserStatusRequest,
   JoinedGroups,
   CreateRoleConfigurationResponse,
@@ -964,6 +966,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePolicyResponse) => void
   ): Promise<DeletePolicyResponse> {
     return this.request("DeletePolicy", req, cb)
+  }
+
+  /**
+   * 修改组织成员访问策略
+   */
+  async UpdateOrganizationMembersPolicy(
+    req: UpdateOrganizationMembersPolicyRequest,
+    cb?: (error: string, rep: UpdateOrganizationMembersPolicyResponse) => void
+  ): Promise<UpdateOrganizationMembersPolicyResponse> {
+    return this.request("UpdateOrganizationMembersPolicy", req, cb)
   }
 
   /**

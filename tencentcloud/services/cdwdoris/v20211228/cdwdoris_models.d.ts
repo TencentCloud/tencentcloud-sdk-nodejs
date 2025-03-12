@@ -841,6 +841,10 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
      * 排序方式
      */
     SortOrder?: string;
+    /**
+     * user
+     */
+    UserName?: string;
 }
 /**
  * DescribeRestoreTaskDetail返回参数结构体
@@ -1809,6 +1813,10 @@ export interface DescribeSlowQueryRecordsRequest {
      * 排序方式
      */
     SortOrder?: string;
+    /**
+     * user
+     */
+    UserName?: string;
 }
 /**
  * DescribeInstanceNodesRole返回参数结构体

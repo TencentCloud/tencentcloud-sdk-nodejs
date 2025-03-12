@@ -24,7 +24,7 @@ import {
   DescribeBatchOperateTaskPage,
   DescribeIntegrationStatisticsResponse,
   UnlockIntegrationTaskResponse,
-  SubmitTaskTestRunResponse,
+  DescribeReportTaskListRequest,
   DescribeStreamTaskLogListRequest,
   GovDatasourceInfo,
   DescribeIntegrationNodeResponse,
@@ -180,7 +180,7 @@ import {
   DescribeRuleGroupResponse,
   DeleteDataSourcesResponse,
   DescribeBatchOperateTaskDTO,
-  ModifyTaskLinksRequest,
+  DescribeReportTaskListResponse,
   DescribeOpsMakePlansResponse,
   EventCaseConsumeLogOptDtoCollection,
   DeleteFileRequest,
@@ -208,6 +208,7 @@ import {
   DeleteResourceFileResponse,
   SubmitTaskResponse,
   ModifyApproveStatusResponse,
+  TaskInfoVo,
   DescribeAlarmEventsResponse,
   DescribeInstanceLogListResponse,
   RuleGroup,
@@ -239,6 +240,7 @@ import {
   GetFileInfoResponse,
   BaseUser,
   InstanceCondition,
+  ReportTaskDetail,
   FreezeOpsTasksResponse,
   IntegrationNodeMapping,
   ColumnAggregationLineage,
@@ -253,6 +255,7 @@ import {
   DescribeInstanceLogFileResponse,
   PairDto,
   CosTokenResponse,
+  ModifyTaskLinksRequest,
   DeleteTaskDsResponse,
   LifecycleInfo,
   DescribeAllByFolderNewResponse,
@@ -296,6 +299,7 @@ import {
   SubscribeWebHook,
   DescribeTableLineageInfoRequest,
   CreateTaskFolderRequest,
+  EngineTaskInfo,
   IntegrationNodeDetail,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
@@ -378,6 +382,7 @@ import {
   InstanceStatisticInfo,
   CommitRuleGroupTaskRequest,
   CheckIntegrationNodeNameExistsRequest,
+  DescribeReportTaskDetailRequest,
   GetOfflineInstanceListResponse,
   DescribeOpsMakePlansRequest,
   CreateOpsMakePlanRequest,
@@ -413,6 +418,7 @@ import {
   DescribeTableMetaRequest,
   DescribeWorkflowInfoByIdResponse,
   OpsTaskCanvasInfoList,
+  SubmitTaskTestRunResponse,
   ModifyDimensionWeightResponse,
   ModifyTaskAlarmRegularResponse,
   InstanceSearchCondition,
@@ -478,6 +484,7 @@ import {
   InstanceApiOpsRequest,
   SubmitSqlTaskRequest,
   DescribeTaskLockStatusResponse,
+  ReportTaskListInfo,
   RemoveWorkflowDsRequest,
   BatchKillIntegrationTaskInstancesRequest,
   DeleteTaskDsRequest,
@@ -621,6 +628,7 @@ import {
   DescribeEventCasesResponse,
   DescribeTableSchemaInfoResponse,
   DiagnoseProResponse,
+  DescribeReportTaskDetailResponse,
   UpdateWorkflowOwnerResponse,
   SetTaskAlarmNewRequest,
   DescribeInstanceListResponse,
@@ -2544,6 +2552,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 查询上报任务列表
+   */
+  async DescribeReportTaskList(
+    req: DescribeReportTaskListRequest,
+    cb?: (error: string, rep: DescribeReportTaskListResponse) => void
+  ): Promise<DescribeReportTaskListResponse> {
+    return this.request("DescribeReportTaskList", req, cb)
+  }
+
+  /**
    * 提交工作流
    */
   async SubmitWorkflow(
@@ -3186,6 +3204,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeIntegrationStatisticsResponse) => void
   ): Promise<DescribeIntegrationStatisticsResponse> {
     return this.request("DescribeIntegrationStatistics", req, cb)
+  }
+
+  /**
+   * 查询上报任务详情
+   */
+  async DescribeReportTaskDetail(
+    req: DescribeReportTaskDetailRequest,
+    cb?: (error: string, rep: DescribeReportTaskDetailResponse) => void
+  ): Promise<DescribeReportTaskDetailResponse> {
+    return this.request("DescribeReportTaskDetail", req, cb)
   }
 
   /**

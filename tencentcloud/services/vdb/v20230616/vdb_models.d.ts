@@ -104,6 +104,7 @@ export interface DescribeInstancesRequest {
     Status?: Array<string>;
     /**
      * 按照引擎筛选实例。
+     * @deprecated
      */
     EngineNames?: Array<string>;
     /**
@@ -120,6 +121,7 @@ export interface DescribeInstancesRequest {
     CreateAt?: string;
     /**
      * 按照可用区筛选实例。
+     * @deprecated
      */
     Zones?: Array<string>;
     /**
@@ -175,7 +177,6 @@ export interface DisassociateSecurityGroupsRequest {
 export interface DescribeInstanceNodesResponse {
     /**
      * 实例pod列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<NodeInfo>;
     /**
@@ -333,62 +334,50 @@ export interface DescribeInstanceNodesRequest {
 export interface InstanceInfo {
     /**
      * 实例ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例自定义名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 用户APPID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 地域。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 可用区。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
      * 产品。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Product?: string;
     /**
      * 网络信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Networks?: Array<Network>;
     /**
      * 分片信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ShardNum?: number;
     /**
      * 副本数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReplicaNum?: number;
     /**
      * CPU.
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cpu?: number;
     /**
      * 内存。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Memory?: number;
     /**
      * 磁盘。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Disk?: number;
     /**
@@ -411,77 +400,63 @@ export interface InstanceInfo {
     Project?: string;
     /**
      * 所属标签。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceTags?: Array<Tag>;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedAt?: string;
     /**
      * 资源状态。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 引擎名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineName?: string;
     /**
      * 引擎版本。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineVersion?: string;
     /**
      * api版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiVersion?: string;
     /**
      * 计费模式。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode?: number;
     /**
      * 差异化扩展信息, json格式。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Extend?: string;
     /**
      * 过期时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpiredAt?: string;
     /**
      * 是否不过期(永久)。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNoExpired?: boolean;
     /**
      * 外网地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanAddress?: string;
     /**
      * 隔离时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsolateAt?: string;
     /**
      * 是否自动续费。0: 不自动续费(可以支持特权不停服)；1:自动续费；2:到期不续费.
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenew?: number;
 }
 /**
- * 实例pod信息，仅包含 pod 名称
+ * 实例pod信息， pod 名称
  */
 export interface NodeInfo {
     /**
      * Pod名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
 }
@@ -491,7 +466,6 @@ export interface NodeInfo {
 export interface DescribeInstancesResponse {
     /**
      * 实例列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<InstanceInfo>;
     /**

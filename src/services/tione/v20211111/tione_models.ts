@@ -2632,6 +2632,16 @@ export interface DatasetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnnotationSchemaConfigured?: boolean
+  /**
+   * 创建者名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorNickname?: string
+  /**
+   * cfs路径是否有修改
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCfsUpdated?: boolean
 }
 
 /**
@@ -3472,6 +3482,16 @@ export interface DatasetGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnnotationSchemaConfigured?: boolean
+  /**
+   * 创建者名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorNickname?: string
+  /**
+   * cfs路径是否有修改
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCfsUpdated?: boolean
 }
 
 /**

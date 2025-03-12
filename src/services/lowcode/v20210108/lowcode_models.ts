@@ -51,17 +51,14 @@ export interface DescribeKnowledgeSetListRequest {
 export interface KnowledgeDocumentSetInfo {
   /**
    * 文件的字符数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TextLength?: number
   /**
    * 文件的字节数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ByteLength?: number
   /**
    * 文件被预处理、Embedding 向量化的进度。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedProgress?: number
   /**
@@ -71,22 +68,18 @@ Loading：文件解析中。
 Failure：文件解析、写入出错。
 Ready：文件解析、写入完成。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedStatus?: string
   /**
    * 文件创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 文件最后更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdateTime?: string
   /**
    * 文件关键字。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Keywords?: string
 }
@@ -97,7 +90,6 @@ Ready：文件解析、写入完成。
 export interface DeleteKnowledgeDocumentSetRsp {
   /**
    * 删除文档数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AffectedCount?: number
 }
@@ -204,22 +196,18 @@ export interface DescribeKnowledgeDocumentSetListResponse {
 export interface UploadKnowledgeDocumentSetRsp {
   /**
    * 给文件分配的 ID 信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetId?: string
   /**
    * 文件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetName?: string
   /**
    * 文件标题
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileTitle?: string
   /**
    * 文件元信息，为jsonstring
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileMetaData?: string
 }
@@ -569,34 +557,28 @@ export interface DataSourceDetail {
 export interface KnowledgeSet {
   /**
    * 知识库标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 知识库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
    * 状态，
 NOT_ENABLED未启用
 ENABLED 已启用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Active?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
@@ -614,7 +596,6 @@ export interface KnowledgeSplitterPreprocess {
 false：不追加。
 true：将段落 Title 追加到切分后的段落。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppendTitleToChunk?: boolean
   /**
@@ -622,7 +603,6 @@ true：将段落 Title 追加到切分后的段落。
 false：不追加。
 true：将全文的 keywords 追加到切分后的段落。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppendKeywordsToChunk?: boolean
 }
@@ -811,47 +791,38 @@ export interface DeleteKnowledgeDocumentSetRequest {
 export interface QureyKnowledgeDocumentSet {
   /**
    * 文件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetId?: string
   /**
    * 文件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetName?: string
   /**
    * 文件内容前 200个字符。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TextPrefix?: string
   /**
    * 文件拆分信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SplitterPreprocess?: KnowledgeSplitterPreprocess
   /**
    * 文件详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetInfo?: QureyKnowledgeDocumentSetInfo
   /**
    * 文件标题
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileTitle?: string
   /**
    * 文件元信息，必须为jsonstring
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileMetaData?: string
   /**
    * name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 作者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Author?: string
 }
@@ -955,12 +926,10 @@ export interface CreateKnowledgeSetRequest {
 export interface DescribeKnowledgeDocumentSetDetailRsp {
   /**
    * 获取的数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
    * 文档信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSet?: KnowledgeDocumentSet
 }
@@ -971,17 +940,14 @@ export interface DescribeKnowledgeDocumentSetDetailRsp {
 export interface QureyKnowledgeDocumentSetInfo {
   /**
    * 文件的字符数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TextLength?: number
   /**
    * 文件的字节数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ByteLength?: number
   /**
    * 文件被预处理、Embedding 向量化的进度。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedProgress?: number
   /**
@@ -991,27 +957,22 @@ Loading：文件解析中。
 Failure：文件解析、写入出错。
 Ready：文件解析、写入完成。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedStatus?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedErrorMsg?: string
   /**
    * 文件创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 文件最后更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdateTime?: string
   /**
    * 文件关键字。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Keywords?: string
 }
@@ -1022,12 +983,10 @@ Ready：文件解析、写入完成。
 export interface DescribeKnowledgeDocumentSetListRsp {
   /**
    * 文件集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSets?: Array<QureyKnowledgeDocumentSet>
   /**
    * 条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
 }
@@ -1038,52 +997,42 @@ export interface DescribeKnowledgeDocumentSetListRsp {
 export interface KnowledgeDocumentSet {
   /**
    * 文档id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetId?: string
   /**
    * 文档名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetName?: string
   /**
    * 文件完整内容。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Text?: string
   /**
    * 文件内容前 200个字符。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TextPrefix?: string
   /**
    * 文件详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentSetInfo?: KnowledgeDocumentSetInfo
   /**
    * 文件拆分信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SplitterPreprocess?: KnowledgeSplitterPreprocess
   /**
    * 未使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 文档标题
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileTitle?: string
   /**
    * 文档元信息，必须为jsonstring
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileMetaData?: string
   /**
    * 作者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Author?: string
 }
@@ -1152,12 +1101,10 @@ export interface SearchDocRsp {
 export interface KnowledgeSetRsp {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 知识库列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeSets?: Array<KnowledgeSet>
 }

@@ -907,6 +907,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApiSecEventChange", req, cb);
     }
     /**
+     * 切换Tiga引擎规则类型的生效开关
+     */
+    async ModifyUserSignatureClass(req, cb) {
+        return this.request("ModifyUserSignatureClass", req, cb);
+    }
+    /**
      * 增加域名规则白名单
      */
     async AddDomainWhiteRule(req, cb) {
@@ -917,6 +923,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDomainIpv6Status(req, cb) {
         return this.request("ModifyDomainIpv6Status", req, cb);
+    }
+    /**
+     * 更新Tiga引擎下大类规则的防护模式
+     */
+    async UpdateProtectionModes(req, cb) {
+        return this.request("UpdateProtectionModes", req, cb);
     }
     /**
      * 修改用户防护规则等级

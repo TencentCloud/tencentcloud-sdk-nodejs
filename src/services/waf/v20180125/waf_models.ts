@@ -354,6 +354,39 @@ export interface LoadBalancerPackageNew {
 }
 
 /**
+ * ModifyUserSignatureClass返回参数结构体
+ */
+export interface ModifyUserSignatureClassResponse {
+  /**
+   * 规则类型ID
+   */
+  TypeID?: string
+  /**
+   * 规则类型状态，0：关闭，1：开启
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateProtectionModes返回参数结构体
+ */
+export interface UpdateProtectionModesResponse {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommonRsp?: CommonRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * cc规则
  */
 export interface CCRuleItem {
@@ -2633,21 +2666,21 @@ export interface AddCustomWhiteRuleResponse {
 }
 
 /**
- * SwitchElasticMode请求参数结构体
+ * ModifyUserSignatureClass请求参数结构体
  */
-export interface SwitchElasticModeRequest {
+export interface ModifyUserSignatureClassRequest {
   /**
-   * 版本，只能是sparta-waf, clb-waf, cdn-waf
+   * 域名
    */
-  Edition: string
+  Domain?: string
   /**
-   * 0代表关闭，1代表打开
+   * 规则类型ID
    */
-  Mode: number
+  TypeID?: string
   /**
-   * 实例id
+   * 规则类型状态，0:关闭，1:开启
    */
-  InstanceID?: string
+  Status?: number
 }
 
 /**
@@ -6359,6 +6392,24 @@ export interface TimedJob {
    * 结束时间戳，单位为秒
    */
   EndDateTime?: number
+}
+
+/**
+ * SwitchElasticMode请求参数结构体
+ */
+export interface SwitchElasticModeRequest {
+  /**
+   * 版本，只能是sparta-waf, clb-waf, cdn-waf
+   */
+  Edition: string
+  /**
+   * 0代表关闭，1代表打开
+   */
+  Mode: number
+  /**
+   * 实例id
+   */
+  InstanceID?: string
 }
 
 /**
@@ -10222,6 +10273,28 @@ export interface DescribeWebshellStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateProtectionModes请求参数结构体
+ */
+export interface UpdateProtectionModesRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 资源类型
+   */
+  Edition: string
+  /**
+   * 大类规则ID
+   */
+  TypeIDs: Array<string>
+  /**
+   * 0表示观察，1表示拦截
+   */
+  Mode: number
 }
 
 /**

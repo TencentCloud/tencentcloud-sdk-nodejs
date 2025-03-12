@@ -648,6 +648,16 @@ it("organization.v20210331.DeletePolicy", async function () {
     }
 })
 
+it("organization.v20210331.UpdateOrganizationMembersPolicy", async function () {
+    try {
+       const data = await client.UpdateOrganizationMembersPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.CreateGroup", async function () {
     try {
        const data = await client.CreateGroup({})

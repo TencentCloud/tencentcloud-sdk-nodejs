@@ -6427,7 +6427,7 @@ export interface ModifyInstanceEventResponse {
  */
 export interface UpgradeInstanceRequest {
   /**
-   * 待变更实例 ID。
+   * 待变更实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
   InstanceId: string
   /**
@@ -6446,6 +6446,12 @@ export interface UpgradeInstanceRequest {
    * 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。
    */
   NodeSet?: Array<RedisNodeInfo>
+  /**
+   * 切换时间。 
+- 1：维护时间窗操作：在设置的维护时间窗内执行操作。请通过接口[DescribeMaintenanceWindow](https://cloud.tencent.com/document/product/239/46336)查询设置的维护时间窗时间段。缩副本、扩缩分片、扩内存均支持在维护时间窗执行操作。
+- 2：立即操作：默认切换时刻。操作将立即执行，无需等待维护时间窗。
+   */
+  SwitchOption?: number
 }
 
 /**

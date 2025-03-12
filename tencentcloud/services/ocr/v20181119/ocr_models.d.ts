@@ -7326,8 +7326,7 @@ export interface VerifyOfdVatInvoiceOCRRequest {
      */
     OfdFileUrl?: string;
     /**
-     * OFD文件的 Base64 值。
-  OfdFileUrl 和 OfdFileBase64 必传其一，若两者都传，只解析OfdFileBase64。
+     * OFD文件的 Base64 值。OfdFileUrl 和 OfdFileBase64 必传其一，若两者都传，只使用OfdFileUrl。
      */
     OfdFileBase64?: string;
     /**

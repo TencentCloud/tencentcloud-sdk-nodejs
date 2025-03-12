@@ -174,21 +174,57 @@ export interface UnlockIntegrationTaskResponse {
     RequestId?: string;
 }
 /**
- * SubmitTaskTestRun返回参数结构体
+ * DescribeReportTaskList请求参数结构体
  */
-export interface SubmitTaskTestRunResponse {
+export interface DescribeReportTaskListRequest {
     /**
-     * 提交运行jobid
+     * 页码
      */
-    JobId?: number;
+    PageNum?: number;
     /**
-     * 运行记录id
+     * 每页条数
      */
-    RecordId?: Array<number | bigint>;
+    PageSize?: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 租户id
      */
-    RequestId?: string;
+    TenantId?: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 任务id
+     */
+    TaskId?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 作业id
+     */
+    JobId?: string;
+    /**
+     * 引擎任务id
+     */
+    EngineTaskId?: string;
+    /**
+     * 产品模块
+     */
+    ProductSource?: string;
+    /**
+     * 主账号
+     */
+    OnwerUid?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
 }
 /**
  * DescribeStreamTaskLogList请求参数结构体
@@ -1604,7 +1640,11 @@ export interface EventCaseAuditLogOptDto {
  */
 export interface DescribeTableLineageRequest {
     /**
-     * 查询方向，INPUT,OUTPUT,BOTH枚举值
+     * 查询方向枚举值
+  
+  - INPUT
+  - OUTPUT
+  - BOTH
      */
     Direction: string;
     /**
@@ -4842,6 +4882,16 @@ export interface TableLineageInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DatabaseId?: string;
+    /**
+     * 数据来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataFromType?: string;
+    /**
+     * 采集id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectJobId?: string;
 }
 /**
  * DescribeSchedulerInstanceStatus返回参数结构体
@@ -5430,33 +5480,17 @@ export interface DescribeBatchOperateTaskDTO {
     DatasourceType?: string;
 }
 /**
- * ModifyTaskLinks请求参数结构体
+ * DescribeReportTaskList返回参数结构体
  */
-export interface ModifyTaskLinksRequest {
+export interface DescribeReportTaskListResponse {
     /**
-     * 项目Id
+     * 1
      */
-    ProjectId: string;
+    Data?: ReportTaskListInfo;
     /**
-     * 父任务ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TaskFrom: string;
-    /**
-     * 子任务ID
-     */
-    TaskTo: string;
-    /**
-     * 子任务工作流
-     */
-    WorkflowId: string;
-    /**
-     * 父任务工作流
-     */
-    RealFromWorkflowId: string;
-    /**
-     * 父子任务之间的依赖关系
-     */
-    LinkDependencyType?: string;
+    RequestId?: string;
 }
 /**
  * DescribeOpsMakePlans返回参数结构体
@@ -6458,6 +6492,101 @@ export interface ModifyApproveStatusResponse {
     RequestId?: string;
 }
 /**
+ * 任务信息
+ */
+export interface TaskInfoVo {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppID?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskTypeId?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OnwerUid?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InChargeId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineType?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineName?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineSubType?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineTaskId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeStatus?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeUser?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeStartTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeEndTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductSource?: string;
+}
+/**
  * DescribeAlarmEvents返回参数结构体
  */
 export interface DescribeAlarmEventsResponse {
@@ -6810,7 +6939,11 @@ export interface CreateOfflineTaskResponse {
  */
 export interface DescribeColumnLineageRequest {
     /**
-     * 查询方向，INPUT,OUTPUT,BOTH枚举值
+     * 查询方向枚举值
+  
+  - INPUT
+  - OUTPUT
+  - BOTH
      */
     Direction: string;
     /**
@@ -7745,6 +7878,46 @@ export interface InstanceCondition {
     ProductName?: string;
 }
 /**
+ * 上报任务详情
+ */
+export interface ReportTaskDetail {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineTaskId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeStatus?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeStartTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeEndTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskTypeId?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessInfo?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineTaskInfo?: EngineTaskInfo;
+}
+/**
  * FreezeOpsTasks返回参数结构体
  */
 export interface FreezeOpsTasksResponse {
@@ -8019,6 +8192,35 @@ export interface CosTokenResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorUin?: string;
+}
+/**
+ * ModifyTaskLinks请求参数结构体
+ */
+export interface ModifyTaskLinksRequest {
+    /**
+     * 项目Id
+     */
+    ProjectId: string;
+    /**
+     * 父任务ID
+     */
+    TaskFrom: string;
+    /**
+     * 子任务ID
+     */
+    TaskTo: string;
+    /**
+     * 子任务工作流
+     */
+    WorkflowId: string;
+    /**
+     * 父任务工作流
+     */
+    RealFromWorkflowId: string;
+    /**
+     * 父子任务之间的依赖关系
+     */
+    LinkDependencyType?: string;
 }
 /**
  * DeleteTaskDs返回参数结构体
@@ -9564,6 +9766,111 @@ export interface CreateTaskFolderRequest {
   ACROSS_WORKFLOWS：跨工作流
      */
     TaskNodeType?: string;
+}
+/**
+ * 引擎任务信息
+ */
+export interface EngineTaskInfo {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineSubmitTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeTimes?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CuConsume?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceUsage?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineName?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineExeStatus?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskKind?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskType?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskContent?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InputBytesSum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShuffleReadBytesSum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShuffleReadRecordsSum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputRecordsSum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputBytesSum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputFilesNum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputSmallFilesNum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WaitTime?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueryResultTime?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CmdArgs?: string;
 }
 /**
  * 集成节点详情
@@ -11881,6 +12188,59 @@ export interface CheckIntegrationNodeNameExistsRequest {
     Id?: number;
 }
 /**
+ * DescribeReportTaskDetail请求参数结构体
+ */
+export interface DescribeReportTaskDetailRequest {
+    /**
+     * 页码
+     */
+    PageNum?: number;
+    /**
+     * 每页条数
+     */
+    PageSize?: number;
+    /**
+     * 租户id
+     */
+    TenantId?: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 任务id
+     */
+    TaskId?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 作业id
+     */
+    JobId?: string;
+    /**
+     * 引擎任务id
+     */
+    EngineTaskId?: string;
+    /**
+     * 产品模块
+     */
+    ProductSource?: string;
+    /**
+     * 主账号
+     */
+    OnwerUid?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
+}
+/**
  * GetOfflineInstanceList返回参数结构体
  */
 export interface GetOfflineInstanceListResponse {
@@ -12874,6 +13234,23 @@ export interface OpsTaskCanvasInfoList {
     CirculateTaskList?: Array<OpsTaskCanvasDto>;
 }
 /**
+ * SubmitTaskTestRun返回参数结构体
+ */
+export interface SubmitTaskTestRunResponse {
+    /**
+     * 提交运行jobid
+     */
+    JobId?: number;
+    /**
+     * 运行记录id
+     */
+    RecordId?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyDimensionWeight返回参数结构体
  */
 export interface ModifyDimensionWeightResponse {
@@ -13503,7 +13880,7 @@ export interface DescribeColumnLineageResponse {
      * 字段血缘信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ColumnAggregationLineage: ColumnAggregationLineage;
+    ColumnAggregationLineage?: ColumnAggregationLineage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14457,6 +14834,36 @@ export interface DescribeTaskLockStatusResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 上报任务信息
+ */
+export interface ReportTaskListInfo {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rows?: Array<TaskInfoVo>;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageNum?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageSize?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalPageNumber?: number;
 }
 /**
  * RemoveWorkflowDs请求参数结构体
@@ -19668,6 +20075,20 @@ export interface DiagnoseProResponse {
      * 结果
      */
     Data?: DiagnoseRep;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeReportTaskDetail返回参数结构体
+ */
+export interface DescribeReportTaskDetailResponse {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: ReportTaskDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

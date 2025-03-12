@@ -380,6 +380,19 @@ export interface Component {
     ForbidMoveAndDelete?: boolean;
 }
 /**
+ * DescribeUserFlowType返回参数结构体
+ */
+export interface DescribeUserFlowTypeResponse {
+    /**
+     * 查询到的所有用户合同类型列表
+     */
+    AllUserFlowTypes?: Array<TemplateUserFlowType>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ChannelDeleteSealPolicies请求参数结构体
  */
 export interface ChannelDeleteSealPoliciesRequest {
@@ -2699,6 +2712,10 @@ export interface TemplateInfo {
   <li>2：停用，表示模板处于停用状态，禁止用户使用该模板。</li></ul>
      */
     Available?: number;
+    /**
+     * 模版的用户合同类型
+     */
+    UserFlowType?: UserFlowType;
 }
 /**
  * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
@@ -4088,6 +4105,27 @@ export interface UserThreeFactor {
   <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
      */
     IdCardNumber: string;
+}
+/**
+ * 模版对应的合同类型
+ */
+export interface TemplateUserFlowType {
+    /**
+     * 合同类型id
+     */
+    UserFlowTypeId?: string;
+    /**
+     * 用户合同类型名称
+     */
+    Name?: string;
+    /**
+     * 每个合同类型绑定的模版数量
+     */
+    TemplateNum?: number;
+    /**
+     * 合同类型的具体描述
+     */
+    Description?: string;
 }
 /**
  * ChannelCreateUserAutoSignEnableUrl请求参数结构体
@@ -7069,38 +7107,21 @@ export interface ChannelDescribeFlowComponentsResponse {
     RequestId?: string;
 }
 /**
- * 主题配置
+ * 用户合同类型信息
  */
-export interface WebThemeConfig {
+export interface UserFlowType {
     /**
-     * 是否显示页面底部电子签logo，取值如下：
-  <ul><li> **true**：页面底部显示电子签logo</li>
-  <li> **false**：页面底部不显示电子签logo（默认）</li></ul>
+     * 用户合同类型id
      */
-    DisplaySignBrandLogo?: boolean;
+    UserFlowTypeId?: string;
     /**
-     * 主题颜色：
-  支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
-  <br/>
+     * 用户合同类型名称
      */
-    WebEmbedThemeColor?: string;
+    Name?: string;
     /**
-     * 企业认证页背景图（base64图片）
-  
+     * 用户合同类型的描述信息
      */
-    AuthenticateBackground?: string;
-    /**
-     * 隐藏企业认证页面导航栏，取值如下：
-  <ul><li> **true**：隐藏企业认证页面导航栏</li>
-  <li> **false**：显示企业认证页面导航栏（默认）</li></ul>
-     */
-    HideAuthenticateNavigationBar?: boolean;
-    /**
-     * 隐藏企业认证顶部logo，取值如下：
-  <ul><li> **true**：隐藏企业认证顶部logo</li>
-  <li> **false**：显示企业认证顶部logo（默认）</li></ul>
-     */
-    HideAuthenticateTopLogo?: boolean;
+    Description?: string;
 }
 /**
  * DeleteOrganizationAuthorizations请求参数结构体
@@ -8115,6 +8136,10 @@ export interface DescribeTemplatesRequest {
      * @deprecated
      */
     Operator?: UserInfo;
+    /**
+     * 用户合同类型id
+     */
+    UserFlowTypeId?: string;
 }
 /**
  * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：
@@ -8787,6 +8812,27 @@ export interface CreateFlowBlockchainEvidenceUrlRequest {
     ExpiredOn?: number;
 }
 /**
+ * DescribeUserFlowType请求参数结构体
+ */
+export interface DescribeUserFlowTypeRequest {
+    /**
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 <ul> <li>渠道应用标识: Agent.AppId</li> <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li> <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li> </ul> 第三方平台子客企业和员工必须已经经过实名认证
+     */
+    Agent: Agent;
+    /**
+     * 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。 <ul><li><strong>模板的用户合同类型</strong>：<strong>Key</strong>设置为 <code>user-flow-type-id</code> ，<strong>Values</strong>为您想要查询的用户模版类型id列表。</li></ul>
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 查询绑定了模版的用户合同类型
+  <ul>
+  <li>false（默认值），查询用户合同类型</li>
+  <li>true，查询绑定了模版的用户合同类型</li>
+  </ul>
+     */
+    QueryBindTemplate?: boolean;
+}
+/**
  * ChannelCreateFlowApprovers请求参数结构体
  */
 export interface ChannelCreateFlowApproversRequest {
@@ -8874,6 +8920,40 @@ export interface DescribeExtendedServiceAuthInfoResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 主题配置
+ */
+export interface WebThemeConfig {
+    /**
+     * 是否显示页面底部电子签logo，取值如下：
+  <ul><li> **true**：页面底部显示电子签logo</li>
+  <li> **false**：页面底部不显示电子签logo（默认）</li></ul>
+     */
+    DisplaySignBrandLogo?: boolean;
+    /**
+     * 主题颜色：
+  支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
+  <br/>
+     */
+    WebEmbedThemeColor?: string;
+    /**
+     * 企业认证页背景图（base64图片）
+  
+     */
+    AuthenticateBackground?: string;
+    /**
+     * 隐藏企业认证页面导航栏，取值如下：
+  <ul><li> **true**：隐藏企业认证页面导航栏</li>
+  <li> **false**：显示企业认证页面导航栏（默认）</li></ul>
+     */
+    HideAuthenticateNavigationBar?: boolean;
+    /**
+     * 隐藏企业认证顶部logo，取值如下：
+  <ul><li> **true**：隐藏企业认证顶部logo</li>
+  <li> **false**：显示企业认证顶部logo（默认）</li></ul>
+     */
+    HideAuthenticateTopLogo?: boolean;
 }
 /**
  * ChannelCreateEmbedWebUrl请求参数结构体

@@ -55,7 +55,6 @@ export interface MigrateStepDetailInfo {
   Status?: number
   /**
    * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
 }
@@ -843,7 +842,6 @@ export interface SubscribeInfo {
   ConsumeStartTime?: string
   /**
    * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
@@ -885,7 +883,6 @@ export interface SubscribeInfo {
   Tags?: Array<TagItem>
   /**
    * 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscribeVersion?: string
 }
@@ -910,7 +907,6 @@ export interface TagItem {
   TagKey: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
 }
@@ -1185,17 +1181,14 @@ export interface CompleteMigrateJobResponse {
 export interface SubscribeObject {
   /**
    * 数据订阅对象的类型，0-数据库，1-数据库内的表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectsType: number
   /**
    * 订阅数据库的名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName: string
   /**
    * 订阅数据库中表名称数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableNames?: Array<string>
 }
@@ -1332,7 +1325,6 @@ MySQL暂不支持额外参数设置。
 export interface SubsErr {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
 }

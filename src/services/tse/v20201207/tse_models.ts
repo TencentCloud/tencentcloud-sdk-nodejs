@@ -1558,6 +1558,24 @@ export interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
 }
 
 /**
+ * 配置文件持久化
+ */
+export interface ConfigFilePersistent {
+  /**
+   * 文件编码
+   */
+  Encoding?: string
+  /**
+   * 文件下发路径
+   */
+  Path?: string
+  /**
+   * 文件后置命令
+   */
+  PostCmd?: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayPublicNetwork请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
@@ -2905,79 +2923,72 @@ export interface VpcInfo {
 export interface ConfigFile {
   /**
    * 配置文件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 配置文件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 配置文件命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 配置文件组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Group?: string
   /**
    * 配置文件内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 配置文件格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Format?: string
   /**
    * 配置文件注释
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 配置文件状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 配置文件标签数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<ConfigFileTag>
   /**
    * 配置文件创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 配置文件创建者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateBy?: string
   /**
    * 配置文件修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 配置文件修改者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyBy?: string
   /**
    * 配置文件发布时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseTime?: string
   /**
    * 配置文件发布者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseBy?: string
+  /**
+   * 配置文件类型
+   */
+  ConfigFileSupportedClient?: number
+  /**
+   * 配置文件持久化
+   */
+  ConfigFilePersistent?: ConfigFilePersistent
 }
 
 /**
@@ -3483,89 +3494,80 @@ export interface KongCertificatesPreview {
 export interface ConfigFileRelease {
   /**
    * 配置文件发布id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 配置文件发布名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 配置文件发布命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 配置文件发布组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Group?: string
   /**
    * 配置文件发布文件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileName?: string
   /**
    * 配置文件发布内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 配置文件发布注释
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 配置文件发布Md5
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Md5?: string
   /**
    * 配置文件发布版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: number
   /**
    * 配置文件发布创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 配置文件发布创建者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateBy?: string
   /**
    * 配置文件发布修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 配置文件发布修改者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyBy?: string
   /**
    * 发布描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseDescription?: string
   /**
    * 是否生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Active?: boolean
   /**
    * 格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Format?: string
   /**
    * 配置文件ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFileId?: string
+  /**
+   * 配置文件类型
+   */
+  ConfigFileSupportedClient?: number
+  /**
+   * 配置文件持久化
+   */
+  ConfigFilePersistent?: ConfigFilePersistent
 }
 
 /**
@@ -6581,12 +6583,10 @@ export interface ModifyNativeGatewayServerGroupResponse {
 export interface ConfigFileTag {
   /**
    * key-value 键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * key-value 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -7312,94 +7312,85 @@ export interface RollbackConfigFileReleasesResponse {
 export interface ConfigFileReleaseHistory {
   /**
    * 配置文件发布历史记录id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 配置文件发布历史名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 配置文件发布历史命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 配置文件发布历史组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Group?: string
   /**
    * 配置文件发布历史名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileName?: string
   /**
    * 配置文件发布历史内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 配置文件发布历史格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Format?: string
   /**
    * 配置文件发布历史注释
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 配置文件发布历史Md5
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Md5?: string
   /**
    * 配置文件发布历史类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 配置文件发布历史状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 配置文件发布历史标签组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<ConfigFileTag>
   /**
    * 配置文件发布创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 配置文件发布创建者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateBy?: string
   /**
    * 配置文件发布修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 配置文件发布修改者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyBy?: string
   /**
    * 发布描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseDescription?: string
   /**
    * 原因，用于失败时原因展示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseReason?: string
+  /**
+   * 配置文件类型
+
+   */
+  ConfigFileSupportedClient?: number
+  /**
+   * 配置文件持久化
+   */
+  ConfigFilePersistent?: ConfigFilePersistent
 }
 
 /**

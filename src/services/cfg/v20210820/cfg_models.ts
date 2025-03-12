@@ -716,7 +716,6 @@ export interface ActionFilter {
 export interface PolicyTriggerLog {
   /**
    * 演练ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**
@@ -988,7 +987,6 @@ export interface DescribeObjectTypeListRequest {
 export interface DescribeTaskPolicyTriggerLogResponse {
   /**
    * 触发日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerLogs?: Array<PolicyTriggerLog>
   /**

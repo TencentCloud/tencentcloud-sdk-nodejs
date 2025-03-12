@@ -1144,6 +1144,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CreateDynamicFlowApprover", req, cb);
     }
     /**
+     * 查询用户模版类型，分为两种模式：
+<ul>
+<li>QueryBindTemplate:false，查询用户合同模版类型，返回用户合同模版类型ID，用户合同模版类型名称，用户合同模版类型描述信息</li>
+<li>QueryBindTemplate:false，查询用户合同模版类型，返回用户合同模版类型ID，用户合同模版类型名称，用户合同模版类型描述信息，被绑定的模版数量</li>
+</ul>
+     */
+    async DescribeUserFlowType(req, cb) {
+        return this.request("DescribeUserFlowType", req, cb);
+    }
+    /**
      * 此接口（CreateIntegrationEmployees）用于创建企业员工。创建的员工初始化为未实名，如下图所示。
 
 ![image](https://qcloudimg.tencent-cloud.cn/raw/2bdcc0d91ac3146b5e8c28811a78ffe9.png)

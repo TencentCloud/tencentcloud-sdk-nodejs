@@ -1088,6 +1088,12 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
         return this.request("LockIntegrationTask", req, cb);
     }
     /**
+     * 查询上报任务列表
+     */
+    async DescribeReportTaskList(req, cb) {
+        return this.request("DescribeReportTaskList", req, cb);
+    }
+    /**
      * 提交工作流
      */
     async SubmitWorkflow(req, cb) {
@@ -1475,6 +1481,12 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
      */
     async DescribeIntegrationStatistics(req, cb) {
         return this.request("DescribeIntegrationStatistics", req, cb);
+    }
+    /**
+     * 查询上报任务详情
+     */
+    async DescribeReportTaskDetail(req, cb) {
+        return this.request("DescribeReportTaskDetail", req, cb);
     }
     /**
      * 批量停止工作流

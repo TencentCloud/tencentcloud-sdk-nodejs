@@ -1103,32 +1103,29 @@ export interface ModifyUserTypeRequest {
 export interface NotebookSessionStatementInfo {
   /**
    * 完成时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Completed: number
+  Completed?: number
   /**
    * 开始时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Started: number
+  Started?: number
   /**
    * 完成进度，百分制
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
    * Session Statement唯一标识
    */
-  StatementId: string
+  StatementId?: string
   /**
    * Session Statement状态，包含：waiting（排队中）、running（运行中）、available（正常）、error（异常）、cancelling（取消中）、cancelled（已取消）
    */
-  State: string
+  State?: string
   /**
    * Statement输出信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutPut: StatementOutput
+  OutPut?: StatementOutput
   /**
    * 批任务id
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1136,12 +1133,10 @@ export interface NotebookSessionStatementInfo {
   BatchId?: string
   /**
    * 运行语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: string
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
 }
@@ -1577,6 +1572,10 @@ export interface DescribeNotebookSessionStatementSqlResultRequest {
    * 批次Id
    */
   BatchId?: string
+  /**
+   * 返回结果集中字段值长度截取，如果超过该长度则截取到该长度
+   */
+  DataFieldCutLen?: number
 }
 
 /**
@@ -1627,6 +1626,10 @@ export interface DescribeTaskResultRequest {
    * 是否转化数据类型
    */
   IsTransformDataType?: boolean
+  /**
+   * 返回结果集中字段长度截取，如果字段值长度超过该长度则截取到该长度
+   */
+  DataFieldCutLen?: number
 }
 
 /**
@@ -2053,6 +2056,10 @@ export interface CreateTasksRequest {
    * 是否使用multi- statement方式运行一批次任务，true: 是，false: 否
    */
   IsMultiStatement?: boolean
+  /**
+   * 任务来源信息
+   */
+  SourceInfo?: Array<KVPair>
 }
 
 /**
@@ -4687,6 +4694,10 @@ export interface DescribeDataEngineEventsRequest {
    * 偏移量，默认为0
    */
   Offset?: number
+  /**
+   * 资源组id
+   */
+  SessionId?: string
 }
 
 /**
@@ -5605,37 +5616,33 @@ export interface AttachWorkGroupPolicyRequest {
 export interface StatementOutput {
   /**
    * 执行总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecutionCount: number
+  ExecutionCount?: number
   /**
    * Statement数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<KVPair>
+  Data?: Array<KVPair>
   /**
    * Statement状态:ok,error
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 错误名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorName: string
+  ErrorName?: string
   /**
    * 错误类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorValue: string
+  ErrorValue?: string
   /**
    * 错误堆栈信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: Array<string>
+  ErrorMessage?: Array<string>
   /**
    * SQL类型任务结果返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SQLResult?: string
 }
@@ -5694,6 +5701,10 @@ export interface DescribeTasksOverviewRequest {
    * 引擎名
    */
   DataEngineName?: string
+  /**
+   * DataEngine-dm8bjs29
+   */
+  HouseIds?: Array<string>
 }
 
 /**
@@ -5824,6 +5835,10 @@ export interface CreateTaskRequest {
    * 标准spark执行任务resourceGroupName
    */
   ResourceGroupName?: string
+  /**
+   * 任务来源信息
+   */
+  SourceInfo?: Array<KVPair>
 }
 
 /**
@@ -6893,12 +6908,10 @@ export interface GenerateCreateMangedTableSqlRequest {
 export interface StatementInformation {
   /**
    * SQL任务唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
    * SQL内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SQL?: string
 }
@@ -6923,12 +6936,10 @@ export interface TaskResultInfo {
   TaskId?: string
   /**
    * 数据源名称，当前任务执行时候选中的默认数据源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceConnectionName?: string
   /**
    * 数据库名称，当前任务执行时候选中的默认数据库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
@@ -6974,7 +6985,6 @@ export interface TaskResultInfo {
   ResultSchema?: Array<Column>
   /**
    * 结果信息，反转义后，外层数组的每个元素为一行数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultSet?: string
   /**
@@ -6999,7 +7009,6 @@ export interface TaskResultInfo {
   TotalTime?: number
   /**
    * 获取结果消耗的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryResultTime?: number
 }
@@ -7284,6 +7293,10 @@ export interface CreateSparkSessionBatchSQLRequest {
    * 用户自定义主键，需唯一
    */
   CustomKey?: string
+  /**
+   * 任务来源信息
+   */
+  SourceInfo?: Array<KVPair>
 }
 
 /**
@@ -8334,6 +8347,10 @@ export interface CreateSparkAppTaskRequest {
    * spark作业程序入参，以空格分隔；一般用于周期性调用使用
    */
   CmdArgs?: string
+  /**
+   * 任务来源信息
+   */
+  SourceInfo?: Array<KVPair>
 }
 
 /**
@@ -8352,12 +8369,10 @@ export interface DeleteWorkGroupRequest {
 export interface KVPair {
   /**
    * 配置的key值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 配置的value值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }

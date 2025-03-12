@@ -406,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePolicy", req, cb);
     }
     /**
+     * 修改组织成员访问策略
+     */
+    async UpdateOrganizationMembersPolicy(req, cb) {
+        return this.request("UpdateOrganizationMembersPolicy", req, cb);
+    }
+    /**
      * 创建用户组
      */
     async CreateGroup(req, cb) {

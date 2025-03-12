@@ -1014,12 +1014,10 @@ export interface InstanceInfo {
   AuditRunningStatus?: string
   /**
    * 内网vip。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternalVip?: string
   /**
    * 内网port。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternalVport?: number
   /**
@@ -1028,12 +1026,10 @@ export interface InstanceInfo {
   CreateTime?: string
   /**
    * 所属集群ID（仅对集群数据库产品该字段非空，如TDSQL-C）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 所属集群名称（仅对集群数据库产品该字段非空，如TDSQL-C）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
 }
@@ -1182,7 +1178,6 @@ export interface DescribeDBDiagReportTasksRequest {
 export interface CreateDBDiagReportTaskResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncRequestId?: number
   /**
@@ -1906,20 +1901,19 @@ export interface HealthStatus {
   /**
    * 健康分数，满分100。
    */
-  HealthScore: number
+  HealthScore?: number
   /**
    * 健康等级，取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK"- 危险；"HIGH_RISK" - 高危。
    */
-  HealthLevel: string
+  HealthLevel?: string
   /**
    * 总扣分分数。
    */
-  ScoreLost: number
+  ScoreLost?: number
   /**
    * 扣分详情。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScoreDetails: Array<ScoreDetail>
+  ScoreDetails?: Array<ScoreDetail>
 }
 
 /**

@@ -28,6 +28,8 @@ import {
   ProductInfo,
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
+  ModifyUserSignatureClassResponse,
+  UpdateProtectionModesResponse,
   CCRuleItem,
   DescribeCertificateVerifyResultResponse,
   ModifyUserSignatureRuleResponse,
@@ -118,7 +120,7 @@ import {
   ModifyAntiInfoLeakRulesResponse,
   QpsData,
   AddCustomWhiteRuleResponse,
-  SwitchElasticModeRequest,
+  ModifyUserSignatureClassRequest,
   HostDel,
   DescribeModuleStatusRequest,
   DeleteAttackWhiteRuleRequest,
@@ -264,6 +266,7 @@ import {
   DescribeCCAutoStatusRequest,
   DescribeDomainDetailsClbRequest,
   TimedJob,
+  SwitchElasticModeRequest,
   DomainPackageNew,
   ModifyDomainsCLSStatusResponse,
   ModifyBotStatusResponse,
@@ -402,6 +405,7 @@ import {
   ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
   DescribeWebshellStatusResponse,
+  UpdateProtectionModesRequest,
   FindAllDomainDetail,
   DeleteAntiInfoLeakRuleRequest,
   DescribeVipInfoResponse,
@@ -1901,6 +1905,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 切换Tiga引擎规则类型的生效开关
+   */
+  async ModifyUserSignatureClass(
+    req: ModifyUserSignatureClassRequest,
+    cb?: (error: string, rep: ModifyUserSignatureClassResponse) => void
+  ): Promise<ModifyUserSignatureClassResponse> {
+    return this.request("ModifyUserSignatureClass", req, cb)
+  }
+
+  /**
    * 增加域名规则白名单
    */
   async AddDomainWhiteRule(
@@ -1918,6 +1932,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDomainIpv6StatusResponse) => void
   ): Promise<ModifyDomainIpv6StatusResponse> {
     return this.request("ModifyDomainIpv6Status", req, cb)
+  }
+
+  /**
+   * 更新Tiga引擎下大类规则的防护模式
+   */
+  async UpdateProtectionModes(
+    req: UpdateProtectionModesRequest,
+    cb?: (error: string, rep: UpdateProtectionModesResponse) => void
+  ): Promise<UpdateProtectionModesResponse> {
+    return this.request("UpdateProtectionModes", req, cb)
   }
 
   /**
