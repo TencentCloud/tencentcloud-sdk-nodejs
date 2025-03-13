@@ -4,22 +4,18 @@
 export interface AuctionInfo {
     /**
      * 竞拍人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bidder?: string;
     /**
      * 竞拍时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuctionTime?: string;
     /**
      * 竞拍价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuctionPrice?: number;
     /**
      * 状态 up: 领先 down: 落后
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
 }
@@ -56,52 +52,42 @@ export interface DeleteTemplateResponse {
 export interface BiddingResult {
     /**
      * business_id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessID?: string;
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 当前价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentPrice?: number;
     /**
      * 当前用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentNickname?: string;
     /**
      * 我的出价
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BiddingPrice?: number;
     /**
      * 竞价保证金
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BiddingBondPrice?: number;
     /**
      * 竞价结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BiddingEndTime?: string;
     /**
      * 竞价标识，1 领先，2 落后
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BiddingFlag?: number;
     /**
      * 出价次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BiddingNum?: number;
     /**
      * 2 竞价中  3 等待出价 4 竞价失败 10 竞价持有者赎回
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
 }
@@ -430,22 +416,18 @@ export interface CheckBatchStatusRequest {
 export interface ReserveBidInfo {
     /**
      * 用户
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     User?: string;
     /**
      * 出价
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
      * 出价时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BidTime?: string;
     /**
      * 当前状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BidStatus?: string;
 }
@@ -506,12 +488,10 @@ export interface CreateDomainBatchRequest {
 export interface SucDomainInfo {
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 业务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessId?: string;
 }
@@ -534,7 +514,6 @@ export interface ModifyTemplateResponse {
 export interface BiddingSuccessfulResult {
     /**
      * 支付结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayEndTime?: string;
 }
@@ -747,7 +726,6 @@ export interface DomainBatchDetailSet {
     Status?: string;
     /**
      * 失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
     /**
@@ -760,7 +738,6 @@ export interface DomainBatchDetailSet {
     UpdatedOn?: string;
     /**
      * 订单号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BigDealId?: string;
 }
@@ -819,11 +796,11 @@ export interface DomainSimpleInfo {
     /**
      * 域名资源ID。
      */
-    DomainId: string;
+    DomainId?: string;
     /**
      * 域名名称。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 域名实名认证状态。
   NotUpload：未实名认证
@@ -832,12 +809,11 @@ export interface DomainSimpleInfo {
   Reject：实名审核失败
   NoAudit: 无需实名认证
      */
-    RealNameAuditStatus: string;
+    RealNameAuditStatus?: string;
     /**
      * 域名实名认证不通过原因。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealNameAuditUnpassReason: string;
+    RealNameAuditUnpassReason?: string;
     /**
      * 域名命名审核状态。
   NotAudit：命名审核未上传
@@ -846,20 +822,19 @@ export interface DomainSimpleInfo {
   Approved：域名命名审核通过
   Rejected：域名命名审核拒绝
      */
-    DomainNameAuditStatus: string;
+    DomainNameAuditStatus?: string;
     /**
      * 域名命名审核不通过原因。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DomainNameAuditUnpassReason: string;
+    DomainNameAuditUnpassReason?: string;
     /**
      * 注册时间。
      */
-    CreationDate: string;
+    CreationDate?: string;
     /**
      * 到期时间
      */
-    ExpirationDate: string;
+    ExpirationDate?: string;
     /**
      * 域名状态。
   ok：正常
@@ -878,7 +853,7 @@ export interface DomainSimpleInfo {
   serverRenewProhibited: 注册局禁止续费
   clientRenewProhobited: 注册商禁止续费
      */
-    DomainStatus: Array<string>;
+    DomainStatus?: Array<string>;
     /**
      * 域名购买状态。
   ok：正常
@@ -894,7 +869,7 @@ export interface DomainSimpleInfo {
   TransferTransing：转入中
   TransferFailed：转入失败
      */
-    BuyStatus: string;
+    BuyStatus?: string;
     /**
      * 注册商类型
   epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
@@ -902,40 +877,40 @@ export interface DomainSimpleInfo {
   yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
   xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
      */
-    RegistrarType: string;
+    RegistrarType?: string;
     /**
      * 域名绑定的ns
      */
-    NameServer: Array<string>;
+    NameServer?: Array<string>;
     /**
      * true：开启锁定
   false：关闭锁定
      */
-    LockTransfer: boolean;
+    LockTransfer?: boolean;
     /**
      * 锁定结束时间
      */
-    LockEndTime: string;
+    LockEndTime?: string;
     /**
      * 认证类型：I=个人，E=企业
      */
-    RegistrantType: string;
+    RegistrantType?: string;
     /**
      * 域名所有者，中文
      */
-    OrganizationNameCN: string;
+    OrganizationNameCN?: string;
     /**
      * 域名所有者，英文
      */
-    OrganizationName: string;
+    OrganizationName?: string;
     /**
      * 域名联系人，中文
      */
-    RegistrantNameCN: string;
+    RegistrantNameCN?: string;
     /**
      * 域名联系人，英文
      */
-    RegistrantName: string;
+    RegistrantName?: string;
 }
 /**
  * CreateDomainRedemption返回参数结构体
@@ -999,7 +974,6 @@ export interface BatchStatus {
 export interface DescribePreAuctionListResponse {
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1153,52 +1127,42 @@ export interface UpdateProhibitionBatchRequest {
 export interface PreReleaseInfo {
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 预订倒计时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReservationTime?: string;
     /**
      * 域名注册时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegTime?: string;
     /**
      * 域名删除时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DelTime?: string;
     /**
      * 当前人数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentPeople?: number;
     /**
      * 当前价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
      * 是否收藏
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFollow?: boolean;
     /**
      * 是否已经预约
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAppoint?: boolean;
     /**
      * 业务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessId?: string;
     /**
      * 是否为原持有者
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDomainUser?: boolean;
 }
@@ -1397,32 +1361,26 @@ export interface DescribePreDomainListRequest {
 export interface PreAuctionInfo {
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 竞价倒计时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BiddingTime?: string;
     /**
      * 出价次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BidCount?: number;
     /**
      * 当前价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
      * 用户操作 bid：出价 "noAction"：无法操作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Op?: string;
     /**
      * 业务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessId?: string;
 }
@@ -1441,12 +1399,10 @@ export interface CreatePhoneEmailResponse {
 export interface FailReservedDomainInfo {
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 预约失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailReason?: string;
 }
@@ -1592,32 +1548,26 @@ export interface ReservedPreDomainInfo {
     ReservedStatus?: number;
     /**
      * 域名预定失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailReason?: string;
     /**
      * 预计变更所有权时间（仅用于参考，实际时间会存在误差）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChangeOwnerTime?: string;
     /**
      * 注册时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegTime?: string;
     /**
      * 到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: string;
     /**
      * 资源ID，用于删除资源信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
      * 业务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessId?: string;
 }
@@ -1987,7 +1937,6 @@ export interface ModifyIntlCustomDnsHostRequest {
 export interface DescribePreReleaseListResponse {
     /**
      * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2641,22 +2590,18 @@ export interface DomainList {
 export interface PriceScopeConf {
     /**
      * 最高价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxPrice?: number;
     /**
      * 最低价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinPrice?: number;
     /**
      * 价格幅度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
      * 保证金
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DepositPrice?: number;
 }
@@ -2705,11 +2650,11 @@ export interface DomainBaseInfo {
     /**
      * 域名资源ID。
      */
-    DomainId: string;
+    DomainId?: string;
     /**
      * 域名名称。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 域名实名认证状态。
   NotUpload：未实名认证
@@ -2718,12 +2663,12 @@ export interface DomainBaseInfo {
   Reject：实名审核失败
   NoAudit: 无需实名认证
      */
-    RealNameAuditStatus: string;
+    RealNameAuditStatus?: string;
     /**
      * 域名实名认证不通过原因。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealNameAuditUnpassReason: string;
+    RealNameAuditUnpassReason?: string;
     /**
      * 域名命名审核状态。
   NotAudit：命名审核未上传
@@ -2732,20 +2677,20 @@ export interface DomainBaseInfo {
   Approved：域名命名审核通过
   Rejected：域名命名审核拒绝
      */
-    DomainNameAuditStatus: string;
+    DomainNameAuditStatus?: string;
     /**
      * 域名命名审核不通过原因。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DomainNameAuditUnpassReason: string;
+    DomainNameAuditUnpassReason?: string;
     /**
      * 注册时间。
      */
-    CreationDate: string;
+    CreationDate?: string;
     /**
      * 到期时间
      */
-    ExpirationDate: string;
+    ExpirationDate?: string;
     /**
      * 域名状态。
   ok：正常
@@ -2764,7 +2709,7 @@ export interface DomainBaseInfo {
   serverRenewProhibited: 注册局禁止续费
   clientRenewProhobited: 注册商禁止续费
      */
-    DomainStatus: Array<string>;
+    DomainStatus?: Array<string>;
     /**
      * 域名购买状态。
   ok：正常
@@ -2780,7 +2725,7 @@ export interface DomainBaseInfo {
   TransferTransing：转入中
   TransferFailed：转入失败
      */
-    BuyStatus: string;
+    BuyStatus?: string;
     /**
      * 注册商类型
   epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
@@ -2788,20 +2733,20 @@ export interface DomainBaseInfo {
   yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
   xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
      */
-    RegistrarType: string;
+    RegistrarType?: string;
     /**
      * 域名绑定的ns
      */
-    NameServer: Array<string>;
+    NameServer?: Array<string>;
     /**
      * true：开启锁定
   false：关闭锁定
      */
-    LockTransfer: boolean;
+    LockTransfer?: boolean;
     /**
      * 锁定结束时间
      */
-    LockEndTime: string;
+    LockEndTime?: string;
 }
 /**
  * DescribeTldList返回参数结构体
@@ -3031,37 +2976,30 @@ export interface DescribePreReleaseListRequest {
 export interface BiddingAppointResult {
     /**
      * business_id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessID?: string;
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 预定价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppointPrice?: number;
     /**
      * 预约保证金
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppointBondPrice?: number;
     /**
      * 预约结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppointEndTime?: string;
     /**
      * 预约人数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppointNum?: number;
     /**
      * 1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
 }

@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAcls", req, cb);
     }
     /**
+     * 外部客户访问资产
+     */
+    async AccessDevices(req, cb) {
+        return this.request("AccessDevices", req, cb);
+    }
+    /**
      * 查询用户购买的堡垒机服务信息，包括资源ID、授权点数、VPC、过期时间等。
      */
     async DescribeResources(req, cb) {

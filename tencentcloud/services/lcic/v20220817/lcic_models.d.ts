@@ -270,6 +270,15 @@ export interface DescribeSupervisorsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeWhiteBoardSnapshot请求参数结构体
+ */
+export interface DescribeWhiteBoardSnapshotRequest {
+    /**
+     * 房间ID
+     */
+    RoomId?: number;
+}
+/**
  * DeleteUser返回参数结构体
  */
 export interface DeleteUserResponse {
@@ -277,6 +286,15 @@ export interface DeleteUserResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteWhiteBoardSnapshot请求参数结构体
+ */
+export interface DeleteWhiteBoardSnapshotRequest {
+    /**
+     * 房间ID
+     */
+    RoomId?: number;
 }
 /**
  * BatchDeleteRecord请求参数结构体
@@ -1008,6 +1026,15 @@ export interface BatchUserRequest {
   
      */
     Avatar?: string;
+}
+/**
+ * DeleteWhiteBoardSnapshot返回参数结构体
+ */
+export interface DeleteWhiteBoardSnapshotResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * LoginUser返回参数结构体
@@ -3085,6 +3112,31 @@ export interface DescribeQuestionListResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QuestionInfo?: Array<QuestionInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeWhiteBoardSnapshot返回参数结构体
+ */
+export interface DescribeWhiteBoardSnapshotResponse {
+    /**
+     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     */
+    WhiteBoardSnapshotMode?: number;
+    /**
+     * 板书任务状态，0：未开始，1：进行中，2：失败，3：成功，4：已删除
+     */
+    Status?: number;
+    /**
+     * 板书截图链接
+     */
+    Result?: Array<string>;
+    /**
+     * 总数
+     */
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

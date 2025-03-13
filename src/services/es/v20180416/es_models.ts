@@ -3915,6 +3915,11 @@ export interface ServerlessIndexMetaField {
    */
   IndexName?: string
   /**
+   * 索引元数据JSON
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexMetaJson?: string
+  /**
    * 索引文档数
 注意：此字段可能返回 null，表示取不到有效值。
    */

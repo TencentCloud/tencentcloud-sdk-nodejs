@@ -8,45 +8,29 @@ export interface ResetDeviceAccountPasswordResponse {
     RequestId?: string;
 }
 /**
- * DescribeLoginEvent请求参数结构体
+ * 认证信息
  */
-export interface DescribeLoginEventRequest {
+export interface AccessInfo {
     /**
-     * 用户名，如果不包含其他条件时对user_name or real_name两个字段模糊查询
+     * 地址
      */
-    UserName?: string;
+    Ip?: string;
     /**
-     * 姓名，模糊查询
+     * 端口
      */
-    RealName?: string;
+    Port?: number;
     /**
-     * 查询时间范围，起始时间
+     * 账号
      */
-    StartTime?: string;
+    User?: string;
     /**
-     * 查询时间范围，结束时间
+     * 密码
      */
-    EndTime?: string;
+    Password?: string;
     /**
-     * 来源IP，模糊查询
+     * 唤起链接｜wss链接
      */
-    SourceIp?: string;
-    /**
-     * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
-     */
-    Entry?: number;
-    /**
-     * 操作结果，1-成功，2-失败
-     */
-    Result?: number;
-    /**
-     * 分页偏移位置，默认值为0
-     */
-    Offset?: number;
-    /**
-     * 分页每页记录数，默认20
-     */
-    Limit?: number;
+    AccessURL?: string;
 }
 /**
  * ModifyResource返回参数结构体
@@ -80,13 +64,73 @@ export interface DeleteAclsRequest {
     IdSet: Array<number | bigint>;
 }
 /**
- * DeleteDeviceGroups返回参数结构体
+ * SearchSession请求参数结构体
  */
-export interface DeleteDeviceGroupsResponse {
+export interface SearchSessionRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 内部Ip
      */
-    RequestId?: string;
+    PrivateIp?: string;
+    /**
+     * 外部Ip
+     */
+    PublicIp?: string;
+    /**
+     * 用户名，长度不超过20
+     */
+    UserName?: string;
+    /**
+     * 账号，长度不超过64
+     */
+    Account?: string;
+    /**
+     * 来源Ip
+     */
+    FromIp?: string;
+    /**
+     * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
+     */
+    StartTime?: string;
+    /**
+     * 搜索区间的结束时间
+     */
+    EndTime?: string;
+    /**
+     * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
+     */
+    Kind?: number;
+    /**
+     * 偏移量
+     */
+    Offset?: number;
+    /**
+     * 分页的页内记录数，默认为20，最大200
+     */
+    Limit?: number;
+    /**
+     * 姓名，长度不超过20
+     */
+    RealName?: string;
+    /**
+     * 主机名，长度不超过64
+     */
+    DeviceName?: string;
+    /**
+     * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
+     */
+    Status?: number;
+    /**
+     * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
+     */
+    Id?: string;
+    /**
+     * 应用资产类型, 1-web
+     */
+    AppAssetKindSet?: Array<number | bigint>;
+    /**
+     * 应用资产Url
+     */
+    AppAssetUrl?: string;
 }
 /**
  * DescribeDeviceGroups返回参数结构体
@@ -224,6 +268,47 @@ export interface CreateChangePwdTaskResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeLoginEvent请求参数结构体
+ */
+export interface DescribeLoginEventRequest {
+    /**
+     * 用户名，如果不包含其他条件时对user_name or real_name两个字段模糊查询
+     */
+    UserName?: string;
+    /**
+     * 姓名，模糊查询
+     */
+    RealName?: string;
+    /**
+     * 查询时间范围，起始时间
+     */
+    StartTime?: string;
+    /**
+     * 查询时间范围，结束时间
+     */
+    EndTime?: string;
+    /**
+     * 来源IP，模糊查询
+     */
+    SourceIp?: string;
+    /**
+     * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
+     */
+    Entry?: number;
+    /**
+     * 操作结果，1-成功，2-失败
+     */
+    Result?: number;
+    /**
+     * 分页偏移位置，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 分页每页记录数，默认20
+     */
+    Limit?: number;
 }
 /**
  * ModifyUserGroup返回参数结构体
@@ -665,73 +750,29 @@ export interface ImportExternalDeviceRequest {
     DeviceSet: Array<ExternalDevice>;
 }
 /**
- * SearchSession请求参数结构体
+ * DescribeResources请求参数结构体
  */
-export interface SearchSessionRequest {
+export interface DescribeResourcesRequest {
     /**
-     * 内部Ip
+     * 地域码, 如: ap-guangzhou
      */
-    PrivateIp?: string;
+    ApCode?: string;
     /**
-     * 外部Ip
+     * 按照堡垒机开通的 VPC 实例ID查询
      */
-    PublicIp?: string;
+    VpcId?: string;
     /**
-     * 用户名，长度不超过20
+     * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
      */
-    UserName?: string;
+    ResourceIds?: Array<string>;
     /**
-     * 账号，长度不超过64
-     */
-    Account?: string;
-    /**
-     * 来源Ip
-     */
-    FromIp?: string;
-    /**
-     * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
-     */
-    StartTime?: string;
-    /**
-     * 搜索区间的结束时间
-     */
-    EndTime?: string;
-    /**
-     * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
-     */
-    Kind?: number;
-    /**
-     * 偏移量
-     */
-    Offset?: number;
-    /**
-     * 分页的页内记录数，默认为20，最大200
+     * 每页条目数量
      */
     Limit?: number;
     /**
-     * 姓名，长度不超过20
+     * 分页偏移位置
      */
-    RealName?: string;
-    /**
-     * 主机名，长度不超过64
-     */
-    DeviceName?: string;
-    /**
-     * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
-     */
-    Status?: number;
-    /**
-     * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
-     */
-    Id?: string;
-    /**
-     * 应用资产类型, 1-web
-     */
-    AppAssetKindSet?: Array<number | bigint>;
-    /**
-     * 应用资产Url
-     */
-    AppAssetUrl?: string;
+    Offset?: number;
 }
 /**
  * BindDeviceResource返回参数结构体
@@ -1075,6 +1116,59 @@ export interface Department {
      * 管理员用户
      */
     ManagerUsers?: Array<DepartmentManagerUser>;
+}
+/**
+ * AccessDevices请求参数结构体
+ */
+export interface AccessDevicesRequest {
+    /**
+     * 资源id
+     */
+    InstanceId: string;
+    /**
+     * 账号
+     */
+    Account: string;
+    /**
+     * 运维端登录账号
+     */
+    LoginAccount: string;
+    /**
+     * 运维端登录密码
+     */
+    LoginPassword: string;
+    /**
+     * 密码
+     */
+    Password?: string;
+    /**
+     * 私钥
+     */
+    PrivateKey?: string;
+    /**
+     * 私钥密码
+     */
+    PrivateKeyPassword?: string;
+    /**
+     * 客户端工具
+     */
+    Exe?: string;
+    /**
+     * RDP挂载盘符驱动（mstsc支持）
+     */
+    Drivers?: Array<string>;
+    /**
+     * 窗口宽度（RDP支持）
+     */
+    Width?: number;
+    /**
+     * 窗口高度（RDP支持）
+     */
+    Height?: number;
+    /**
+     * 是否内网访问（默认不是）
+     */
+    IntranetAccess?: boolean;
 }
 /**
  * ModifyCmdTemplate请求参数结构体
@@ -1570,6 +1664,53 @@ export interface DescribeAclsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyUser请求参数结构体
+ */
+export interface ModifyUserRequest {
+    /**
+     * 用户ID
+     */
+    Id: number;
+    /**
+     * 用户姓名，最大长度20个字符，不能包含空格
+     */
+    RealName: string;
+    /**
+     * 按照"国家地区代码|手机号"的格式输入。如: "+86|xxxxxxxx"
+     */
+    Phone?: string;
+    /**
+     * 电子邮件
+     */
+    Email?: string;
+    /**
+     * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
+  生效、失效时间不填则用户长期有效
+     */
+    ValidateFrom?: string;
+    /**
+     * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
+  生效、失效时间不填则用户长期有效
+     */
+    ValidateTo?: string;
+    /**
+     * 所属用户组ID集合
+     */
+    GroupIdSet?: Array<number | bigint>;
+    /**
+     * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
+     */
+    AuthType?: number;
+    /**
+     * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
+     */
+    ValidateTime?: string;
+    /**
+     * 用户所属部门的ID，如1.2.3
+     */
+    DepartmentId?: string;
 }
 /**
  * CreateCmdTemplate返回参数结构体
@@ -2169,51 +2310,17 @@ export interface Clb {
     ClbIp?: string;
 }
 /**
- * ModifyUser请求参数结构体
+ * AccessDevices返回参数结构体
  */
-export interface ModifyUserRequest {
+export interface AccessDevicesResponse {
     /**
-     * 用户ID
+     * 认证信息
      */
-    Id: number;
+    AccessInfo?: AccessInfo;
     /**
-     * 用户姓名，最大长度20个字符，不能包含空格
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    RealName: string;
-    /**
-     * 按照"国家地区代码|手机号"的格式输入。如: "+86|xxxxxxxx"
-     */
-    Phone?: string;
-    /**
-     * 电子邮件
-     */
-    Email?: string;
-    /**
-     * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
-  生效、失效时间不填则用户长期有效
-     */
-    ValidateFrom?: string;
-    /**
-     * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
-  生效、失效时间不填则用户长期有效
-     */
-    ValidateTo?: string;
-    /**
-     * 所属用户组ID集合
-     */
-    GroupIdSet?: Array<number | bigint>;
-    /**
-     * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
-     */
-    AuthType?: number;
-    /**
-     * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
-     */
-    ValidateTime?: string;
-    /**
-     * 用户所属部门的ID，如1.2.3
-     */
-    DepartmentId?: string;
+    RequestId?: string;
 }
 /**
  * DeleteUsers请求参数结构体
@@ -3086,29 +3193,13 @@ export interface ModifyAclResponse {
     RequestId?: string;
 }
 /**
- * DescribeResources请求参数结构体
+ * DeleteDeviceGroups返回参数结构体
  */
-export interface DescribeResourcesRequest {
+export interface DeleteDeviceGroupsResponse {
     /**
-     * 地域码, 如: ap-guangzhou
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ApCode?: string;
-    /**
-     * 按照堡垒机开通的 VPC 实例ID查询
-     */
-    VpcId?: string;
-    /**
-     * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
-     */
-    ResourceIds?: Array<string>;
-    /**
-     * 每页条目数量
-     */
-    Limit?: number;
-    /**
-     * 分页偏移位置
-     */
-    Offset?: number;
+    RequestId?: string;
 }
 /**
  * DeleteDeviceGroups请求参数结构体

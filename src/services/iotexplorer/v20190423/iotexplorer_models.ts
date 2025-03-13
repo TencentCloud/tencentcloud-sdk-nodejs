@@ -16,30 +16,23 @@
  */
 
 /**
- * GetTWeCallPkgList请求参数结构体
+ * UpdateDevicesEnableState返回参数结构体
  */
-export interface GetTWeCallPkgListRequest {
+export interface UpdateDevicesEnableStateResponse {
   /**
-   * appId
-   * @deprecated
+   * 删除的结果代码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniProgramAppId?: string
+  ResultCode: string
   /**
-   * 类型
+   * 删除的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PkgType?: Array<number | bigint>
+  ResultMessage: string
   /**
-   * 状态
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: Array<number | bigint>
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 每页数据大小
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -590,44 +583,6 @@ export interface BindCloudStorageUserRequest {
    * 用户ID
    */
   UserId: string
-}
-
-/**
- * CreateLoRaFrequency请求参数结构体
- */
-export interface CreateLoRaFrequencyRequest {
-  /**
-   * 频点配置名称
-   */
-  FreqName?: string
-  /**
-   * 数据上行信道
-   */
-  ChannelsDataUp?: Array<number | bigint>
-  /**
-   * 数据下行RX1信道
-   */
-  ChannelsDataRX1?: Array<number | bigint>
-  /**
-   * 数据下行RX2信道
-   */
-  ChannelsDataRX2?: Array<number | bigint>
-  /**
-   * 入网上行信道
-   */
-  ChannelsJoinUp?: Array<number | bigint>
-  /**
-   * 入网下行RX1信道
-   */
-  ChannelsJoinRX1?: Array<number | bigint>
-  /**
-   * 入网下行RX2信道
-   */
-  ChannelsJoinRX2?: Array<number | bigint>
-  /**
-   * 频点配置描述
-   */
-  Description?: string
 }
 
 /**
@@ -1698,47 +1653,6 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDeviceOnlineCount?: number
-}
-
-/**
- * TWeCall设备信息
- */
-export interface TWeCallPkgInfo {
-  /**
-   * 包ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PkgId?: string
-  /**
-   * 包类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PkgType?: number
-  /**
-   * 生效时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: number
-  /**
-   * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExpireTime?: number
-  /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 已使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LicenseUsedNum?: number
-  /**
-   * 总量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LicenseTotalNum?: number
 }
 
 /**
@@ -3730,24 +3644,6 @@ export interface DescribeCloudStorageAIServiceResponse {
 }
 
 /**
- * AssignTWeCallLicense请求参数结构体
- */
-export interface AssignTWeCallLicenseRequest {
-  /**
-   * voip类型
-   */
-  PkgType: number
-  /**
-   * appId
-   */
-  MiniProgramAppId: string
-  /**
-   * License数，只支持50,500,1000,5000,10000,20000,50000
-   */
-  DeductNum: number
-}
-
-/**
  * 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间
  */
 export interface PackageInfo {
@@ -5381,13 +5277,41 @@ export interface DeleteLoRaGatewayResponse {
 }
 
 /**
- * AssignTWeCallLicense返回参数结构体
+ * CreateLoRaFrequency请求参数结构体
  */
-export interface AssignTWeCallLicenseResponse {
+export interface CreateLoRaFrequencyRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 频点配置名称
    */
-  RequestId?: string
+  FreqName?: string
+  /**
+   * 数据上行信道
+   */
+  ChannelsDataUp?: Array<number | bigint>
+  /**
+   * 数据下行RX1信道
+   */
+  ChannelsDataRX1?: Array<number | bigint>
+  /**
+   * 数据下行RX2信道
+   */
+  ChannelsDataRX2?: Array<number | bigint>
+  /**
+   * 入网上行信道
+   */
+  ChannelsJoinUp?: Array<number | bigint>
+  /**
+   * 入网下行RX1信道
+   */
+  ChannelsJoinRX1?: Array<number | bigint>
+  /**
+   * 入网下行RX2信道
+   */
+  ChannelsJoinRX2?: Array<number | bigint>
+  /**
+   * 频点配置描述
+   */
+  Description?: string
 }
 
 /**
@@ -6044,26 +5968,6 @@ export interface CloudStorageAIServiceTaskFileInfo {
    * 视频文件元数据（仅当文件为视频类型时包含该字段）
    */
   VideoMetaInfo?: CloudStorageAIServiceTaskVideoMetaInfo
-}
-
-/**
- * UpdateDevicesEnableState返回参数结构体
- */
-export interface UpdateDevicesEnableStateResponse {
-  /**
-   * 删除的结果代码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResultCode: string
-  /**
-   * 删除的结果信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResultMessage: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7916,27 +7820,6 @@ export interface ResetCloudStorageAIServiceRequest {
 }
 
 /**
- * TWeCall分类统计数据
- */
-export interface TWeCallCategoryPkgInfo {
-  /**
-   * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PkgType?: number
-  /**
-   * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  All?: number
-  /**
-   * 已使用数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Used?: number
-}
-
-/**
  * ModifyModelDefinition返回参数结构体
  */
 export interface ModifyModelDefinitionResponse {
@@ -8036,29 +7919,6 @@ export interface EnableTopicRuleRequest {
    * 规则名称
    */
   RuleName: string
-}
-
-/**
- * GetTWeCallPkgList返回参数结构体
- */
-export interface GetTWeCallPkgListResponse {
-  /**
-   * 激活状态
-   */
-  TWeCallPkgList?: Array<TWeCallPkgInfo>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 分类统计
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TWeCallCategoryPkgList?: Array<TWeCallCategoryPkgInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

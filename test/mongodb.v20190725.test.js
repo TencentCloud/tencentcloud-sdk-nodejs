@@ -218,6 +218,16 @@ it("mongodb.v20190725.CreateAccountUser", async function () {
     }
 })
 
+it("mongodb.v20190725.OfflineIsolatedDBInstance", async function () {
+    try {
+       const data = await client.OfflineIsolatedDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.ModifyDBInstanceParamTpl", async function () {
     try {
        const data = await client.ModifyDBInstanceParamTpl({})
@@ -298,9 +308,9 @@ it("mongodb.v20190725.DescribeDBInstances", async function () {
     }
 })
 
-it("mongodb.v20190725.OfflineIsolatedDBInstance", async function () {
+it("mongodb.v20190725.DescribeDBInstanceNamespace", async function () {
     try {
-       const data = await client.OfflineIsolatedDBInstance({})
+       const data = await client.DescribeDBInstanceNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

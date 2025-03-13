@@ -148,6 +148,16 @@ it("lcic.v20220817.GetWatermark", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeWhiteBoardSnapshot", async function () {
+    try {
+       const data = await client.DescribeWhiteBoardSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeGroup", async function () {
     try {
        const data = await client.DescribeGroup({})
@@ -168,9 +178,9 @@ it("lcic.v20220817.ModifyApp", async function () {
     }
 })
 
-it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
+it("lcic.v20220817.DescribeDocument", async function () {
     try {
-       const data = await client.UnbindDocumentFromRoom({})
+       const data = await client.DescribeDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +428,16 @@ it("lcic.v20220817.DescribeRecordTask", async function () {
     }
 })
 
+it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
+    try {
+       const data = await client.UnbindDocumentFromRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.BindDocumentToRoom", async function () {
     try {
        const data = await client.BindDocumentToRoom({})
@@ -628,9 +648,9 @@ it("lcic.v20220817.DeleteRoom", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeDocument", async function () {
+it("lcic.v20220817.DeleteWhiteBoardSnapshot", async function () {
     try {
-       const data = await client.DescribeDocument({})
+       const data = await client.DeleteWhiteBoardSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -19,16 +19,20 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateSavingPlanOrderRequest,
+  DescribeSavingPlanCoverageRequest,
   CreateSavingPlanOrderResponse,
   DescribeSavingPlanDeductRequest,
   SavingPlanOverviewDetail,
+  SavingPlanCoverageRate,
   DescribeSavingPlanUsageRequest,
   SavingPlanDeductDetail,
+  SavingPlanCoverageDetail,
   DescribeSavingPlanOverviewResponse,
   DescribeSavingPlanUsageResponse,
   DescribeSavingPlanDeductResponse,
   DescribeSavingPlanOverviewRequest,
   SavingPlanUsageDetail,
+  DescribeSavingPlanCoverageResponse,
 } from "./svp_models"
 
 /**
@@ -38,6 +42,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("svp.tencentcloudapi.com", "2024-01-25", clientConfig)
+  }
+
+  /**
+   * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
+   */
+  async DescribeSavingPlanCoverage(
+    req: DescribeSavingPlanCoverageRequest,
+    cb?: (error: string, rep: DescribeSavingPlanCoverageResponse) => void
+  ): Promise<DescribeSavingPlanCoverageResponse> {
+    return this.request("DescribeSavingPlanCoverage", req, cb)
   }
 
   /**

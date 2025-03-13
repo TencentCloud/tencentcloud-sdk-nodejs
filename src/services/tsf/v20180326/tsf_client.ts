@@ -49,7 +49,7 @@ import {
   DeleteApplicationResponse,
   QuantileEntity,
   ModifyProgramRequest,
-  DescribePathRewriteResponse,
+  DescribeSimpleGroupsResponse,
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
   ReleaseFileConfigRequest,
@@ -69,7 +69,7 @@ import {
   TaskRecord,
   CreateNamespaceResponse,
   RedoTaskBatchRequest,
-  DescribeGroupsResponse,
+  DescribeTaskLastStatusRequest,
   ModifyUploadInfoResponse,
   EnableLaneRuleResponse,
   TsfPageConfig,
@@ -151,7 +151,7 @@ import {
   DescribeProgramsRequest,
   DescribePublicConfigRequest,
   ImageRepository,
-  DescribeOverviewInvocationResponse,
+  DescribeInovcationIndicatorsRequest,
   CommonOption,
   CreatePublicConfigResponse,
   LaneRules,
@@ -170,7 +170,7 @@ import {
   StartContainerGroupResponse,
   ModifyTaskRequest,
   DeleteUnitNamespacesResponse,
-  DisableTaskRequest,
+  DescribeMicroservicesByGroupIdsRequest,
   DescribeStatisticsResponse,
   DescribeBasicResourceUsageResponse,
   CreateAllGatewayApiAsyncResponse,
@@ -217,6 +217,7 @@ import {
   ServiceStatisticsResult,
   CreateContainGroupResponse,
   DescribeContainerGroupDetailResponse,
+  DisableTaskRequest,
   CreatePathRewritesWithDetailRespResponse,
   Ports,
   UpdateRepositoryRequest,
@@ -250,7 +251,7 @@ import {
   LaneInfo,
   DescribeConfigReleaseLogsResponse,
   DeletePublicConfigResponse,
-  DescribeSimpleGroupsResponse,
+  DescribePathRewriteResponse,
   DescribeFlowLastBatchStateRequest,
   MetricDataCurve,
   GroupInfo,
@@ -268,7 +269,7 @@ import {
   VolumeInfo,
   UpdateApiTimeoutsRequest,
   Metric,
-  DescribeInovcationIndicatorsRequest,
+  DescribeOverviewInvocationResponse,
   ShrinkInstancesRequest,
   DescribeSimpleNamespacesRequest,
   ExecuteTaskFlowResponse,
@@ -461,7 +462,7 @@ import {
   ApplicationAttribute,
   TaskFlowLastBatchState,
   DeletePkgsResponse,
-  DescribeTaskLastStatusRequest,
+  DescribeGroupsResponse,
   DescribeBusinessLogConfigsResponse,
   ApplicationForPage,
   DescribeInvocationMetricScatterPlotRequest,
@@ -511,6 +512,7 @@ import {
   RevocationPublicConfigRequest,
   ModifyLaneRuleResponse,
   TsfPageSimpleGroup,
+  DescribeMicroservicesByGroupIdsResponse,
   DescribeGroupAttributeRequest,
   ModifyClusterResponse,
   PkgInfo,
@@ -2193,6 +2195,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: EnableTaskResponse) => void
   ): Promise<EnableTaskResponse> {
     return this.request("EnableTask", req, cb)
+  }
+
+  /**
+   * 通过部署组ID获取微服务
+   */
+  async DescribeMicroservicesByGroupIds(
+    req: DescribeMicroservicesByGroupIdsRequest,
+    cb?: (error: string, rep: DescribeMicroservicesByGroupIdsResponse) => void
+  ): Promise<DescribeMicroservicesByGroupIdsResponse> {
+    return this.request("DescribeMicroservicesByGroupIds", req, cb)
   }
 
   /**

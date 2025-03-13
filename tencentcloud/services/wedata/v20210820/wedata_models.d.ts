@@ -1332,6 +1332,64 @@ export interface ColumnLineageInfo {
     TableId?: string;
 }
 /**
+ * TriggerManualTasks请求参数结构体
+ */
+export interface TriggerManualTasksRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
+    /**
+     * 触发运行名称
+     */
+    TriggerName: string;
+    /**
+     * 运行范围 ENTIRE_WORKFLOW or SPECIFIED_TASK
+     */
+    TriggerScope: string;
+    /**
+     * 运行数据时间列表
+     */
+    DataTimeList: Array<string>;
+    /**
+     * 工作流ID
+     */
+    WorkflowId: string;
+    /**
+     * 备注
+     */
+    Remark?: string;
+    /**
+     * 需要运行的任务列表
+  TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK此参数必传
+     */
+    TaskIds?: Array<string>;
+    /**
+     * 用户提交运行时指定的调度资源组，未指定时使用任务配置的调度资源组
+     */
+    SchedulerResourceGroup?: string;
+    /**
+     * 用户提交运行时指定的集成资源组，未指定时使用任务配置的集成资源组
+     */
+    IntegrationResourceGroup?: string;
+    /**
+     * 执行顺序 ASC、RAND、DESC
+     */
+    ExecOrder?: string;
+    /**
+     * 自定义参数，最高优先级
+     */
+    CustomParams?: Array<KVPair>;
+    /**
+     * 页面反显使用，无业务含义
+     */
+    ExtraParams?: string;
+    /**
+     * 实例时间的时区
+     */
+    ScheduleTimeZone?: string;
+}
+/**
  * 任务血缘信息，包括源表和目标表
  */
 export interface TaskLineageInfoPair {
@@ -2039,6 +2097,25 @@ export interface AlarmEventInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncType?: number;
+}
+/**
+ * TriggerManualTasks返回参数结构体
+ */
+export interface TriggerManualTasksResponse {
+    /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestFromSource?: string;
+    /**
+     * 详情结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: ManualTriggerRecordOpsDto;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTaskLineage请求参数结构体
@@ -8090,6 +8167,97 @@ export interface DeleteResourceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 手动工作流触发运行记录实体
+ */
+export interface ManualTriggerRecordOpsDto {
+    /**
+     * 运行触发记录ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerId?: string;
+    /**
+     * 用户提交运行时配置的运行名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerName?: string;
+    /**
+     * 用户提交运行的备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 数据时间列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatetimeList?: Array<string>;
+    /**
+     * 任务数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskCnt?: number;
+    /**
+     * 实例数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceCnt?: number;
+    /**
+     * 已完成的实例数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FinishedInstanceCnt?: number;
+    /**
+     * 成功的实例数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SuccessInstanceCnt?: number;
+    /**
+     * 记录运行状态
+   INIT, RUNNING, FINISHED
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 用户提交运行时的入参，主要用于前端反显和记录原始提交信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerParams?: string;
+    /**
+     * 用户主账号ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerUin?: string;
+    /**
+     * 用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserUin?: string;
+    /**
+     * 用户展示名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserName?: string;
+    /**
+     * 租户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TenantId?: string;
+    /**
+     * 项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 数据实例时间的时区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleTimeZone?: string;
 }
 /**
  * ModifyRule返回参数结构体
@@ -20266,6 +20434,21 @@ export interface DescribeApply {
      * 分页大小
      */
     PageSize?: number;
+}
+/**
+ * 键值对
+ */
+export interface KVPair {
+    /**
+     * 键名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    K: string;
+    /**
+     * 值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    V: string;
 }
 /**
  * CreateDataSource返回参数结构体

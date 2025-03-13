@@ -56,6 +56,7 @@ import {
   WorkFlowExecuteDto,
   RecordsSpeed,
   ColumnLineageInfo,
+  TriggerManualTasksRequest,
   TaskLineageInfoPair,
   JudgeResourceFileResponse,
   DataServicePublishedApiListFilter,
@@ -74,6 +75,7 @@ import {
   ColumnItem,
   RuleGroupExecResult,
   AlarmEventInfo,
+  TriggerManualTasksResponse,
   DescribeTaskLineageRequest,
   BytesSpeed,
   CheckTaskNameExistRequest,
@@ -251,6 +253,7 @@ import {
   DescribeExecStrategyResponse,
   DescribeSuccessorOpsTaskInfosResponse,
   DeleteResourceResponse,
+  ManualTriggerRecordOpsDto,
   ModifyRuleResponse,
   DescribeInstanceLogFileResponse,
   PairDto,
@@ -639,6 +642,7 @@ import {
   StopIntegrationTaskRequest,
   FunctionTypeOrKind,
   DescribeApply,
+  KVPair,
   CreateDataSourceResponse,
   BatchReturn,
   DescribeFolderWorkflowListResponse,
@@ -1433,6 +1437,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeTaskTableMetricOverviewResponse) => void
   ): Promise<DescribeTaskTableMetricOverviewResponse> {
     return this.request("DescribeTaskTableMetricOverview", req, cb)
+  }
+
+  /**
+   * 手动任务触发运行
+   */
+  async TriggerManualTasks(
+    req: TriggerManualTasksRequest,
+    cb?: (error: string, rep: TriggerManualTasksResponse) => void
+  ): Promise<TriggerManualTasksResponse> {
+    return this.request("TriggerManualTasks", req, cb)
   }
 
   /**

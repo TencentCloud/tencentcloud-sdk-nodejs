@@ -108,6 +108,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetWatermark", req, cb);
     }
     /**
+     * 查询白板板书截图
+     */
+    async DescribeWhiteBoardSnapshot(req, cb) {
+        return this.request("DescribeWhiteBoardSnapshot", req, cb);
+    }
+    /**
      * 此接口用于获取群组详情
      */
     async DescribeGroup(req, cb) {
@@ -120,10 +126,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApp", req, cb);
     }
     /**
-     * 文档从房间解绑
+     * 获取文档信息
      */
-    async UnbindDocumentFromRoom(req, cb) {
-        return this.request("UnbindDocumentFromRoom", req, cb);
+    async DescribeDocument(req, cb) {
+        return this.request("DescribeDocument", req, cb);
     }
     /**
      * 此接口用于获取指定应用ID下用户列表
@@ -268,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRecordTask(req, cb) {
         return this.request("DescribeRecordTask", req, cb);
+    }
+    /**
+     * 文档从房间解绑
+     */
+    async UnbindDocumentFromRoom(req, cb) {
+        return this.request("UnbindDocumentFromRoom", req, cb);
     }
     /**
      * 功能概述
@@ -418,10 +430,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRoom", req, cb);
     }
     /**
-     * 获取文档信息
+     * 删除白板板书截图
      */
-    async DescribeDocument(req, cb) {
-        return this.request("DescribeDocument", req, cb);
+    async DeleteWhiteBoardSnapshot(req, cb) {
+        return this.request("DeleteWhiteBoardSnapshot", req, cb);
     }
     /**
      * 开始录制

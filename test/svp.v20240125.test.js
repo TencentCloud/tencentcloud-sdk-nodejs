@@ -18,6 +18,16 @@ const client = new tencentcloud.svp.v20240125.Client({
 })
 describe("svp.v20240125.test.js", function () {
 
+it("svp.v20240125.DescribeSavingPlanCoverage", async function () {
+    try {
+       const data = await client.DescribeSavingPlanCoverage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("svp.v20240125.DescribeSavingPlanUsage", async function () {
     try {
        const data = await client.DescribeSavingPlanUsage({})

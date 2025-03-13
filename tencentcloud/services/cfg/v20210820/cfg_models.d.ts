@@ -337,20 +337,20 @@ export interface ActionFieldConfigDetail {
   radio  单选
   time   时间选择
      */
-    Type: string;
+    Type?: string;
     /**
      * 组件label
      */
-    Lable: string;
+    Lable?: string;
     /**
      * 组件唯一标识， 传回后端时的key
      */
-    Field: string;
+    Field?: string;
     /**
      * 默认值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DefaultValue: string;
+    DefaultValue?: string;
     /**
      * 支持配置项如下,可根据需要选择配置项，不需要配置是设置空{}：
   
@@ -380,11 +380,11 @@ export interface ActionFieldConfigDetail {
   通过调接口获取选项                                                                                                                                       { api: string(接口地址),                                                                                                                                       params: string[] (接口参数,对应于参数配置的field，前端根据field对应的所有组件的输入值作为参数查询数据， 为空时在组件加载时直接请求数据)                                                                                                    }
   }
      */
-    Config: string;
+    Config?: string;
     /**
      * 是否必填 (0 -- 否   1-- 是)
      */
-    Required: number;
+    Required?: number;
     /**
      * compute配置依赖的其他field满足的条件时通过校验（如：三个表单项中必须至少有一个填写了）
   
@@ -394,11 +394,11 @@ export interface ActionFieldConfigDetail {
   
   ]
      */
-    Validate: string;
+    Validate?: string;
     /**
      * 是否可见
      */
-    Visible: string;
+    Visible?: string;
 }
 /**
  * 任务分组动作
@@ -656,7 +656,6 @@ export interface DescribePolicy {
     TaskPolicyRule: string;
     /**
      * 护栏策略生效处理策略 1:顺序执行，2:暂停
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskPolicyDealType: number;
 }
@@ -1010,6 +1009,10 @@ export interface ObjectType {
      * 1.接入层 2.逻辑层 3. 数据层
      */
     ArchLayer?: number;
+    /**
+     * 是否支持演练生图
+     */
+    IsArchSvg?: boolean;
 }
 /**
  * DescribeTaskPolicyTriggerLog请求参数结构体
@@ -1191,6 +1194,10 @@ export interface Task {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskRegionName?: string;
+    /**
+     * 架构ID
+     */
+    TaskArchId?: string;
 }
 /**
  * 演练人员组织
@@ -1229,7 +1236,6 @@ export interface TaskReportInfo {
     Expired?: boolean;
     /**
      * 演练报告cos文件地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CosUrl?: string;
     /**
@@ -1247,7 +1253,6 @@ export interface TaskReportInfo {
     ArchiveTime?: string;
     /**
      * 归档ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ArchiveUuid?: string;
 }

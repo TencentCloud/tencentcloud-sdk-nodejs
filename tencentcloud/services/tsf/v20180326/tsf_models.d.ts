@@ -765,13 +765,13 @@ export interface ModifyProgramRequest {
     EmptyProgramItemList?: boolean;
 }
 /**
- * DescribePathRewrite返回参数结构体
+ * DescribeSimpleGroups返回参数结构体
  */
-export interface DescribePathRewriteResponse {
+export interface DescribeSimpleGroupsResponse {
     /**
-     * 路径重写规则对象
+     * 简单部署组列表
      */
-    Result?: PathRewrite;
+    Result?: TsfPageSimpleGroup;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1157,17 +1157,13 @@ export interface RedoTaskBatchRequest {
     BatchId: string;
 }
 /**
- * DescribeGroups返回参数结构体
+ * DescribeTaskLastStatus请求参数结构体
  */
-export interface DescribeGroupsResponse {
+export interface DescribeTaskLastStatusRequest {
     /**
-     * 虚拟机部署组分页信息
+     * 任务ID
      */
-    Result?: TsfPageVmGroup;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    TaskId: string;
 }
 /**
  * ModifyUploadInfo返回参数结构体
@@ -2943,18 +2939,57 @@ export interface ImageRepository {
     RepoName?: string;
 }
 /**
- * DescribeOverviewInvocation返回参数结构体
+ * DescribeInovcationIndicators请求参数结构体
  */
-export interface DescribeOverviewInvocationResponse {
+export interface DescribeInovcationIndicatorsRequest {
     /**
-     * 监控统计数据列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 维度
      */
-    Result: Array<MetricDataPoint>;
+    Dimension: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 开始时间
      */
-    RequestId?: string;
+    StartTime: string;
+    /**
+     * 结束时间
+     */
+    EndTime: string;
+    /**
+     * 命名空间ID
+     */
+    NamespaceId?: string;
+    /**
+     * 微服务ID
+     */
+    ServiceId?: string;
+    /**
+     * 调用方服务名
+     */
+    CallerServiceName?: string;
+    /**
+     * 被调方服务名
+     */
+    CalleeServiceName?: string;
+    /**
+     * 调用方接口名
+     */
+    CallerInterfaceName?: string;
+    /**
+     * 被调方接口名
+     */
+    CalleeInterfaceName?: string;
+    /**
+     * 应用ID
+     */
+    ApplicationId?: string;
+    /**
+     * 部署组ID
+     */
+    GroupId?: string;
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
 }
 /**
  * 通用选项
@@ -3296,13 +3331,13 @@ export interface DeleteUnitNamespacesResponse {
     RequestId?: string;
 }
 /**
- * DisableTask请求参数结构体
+ * DescribeMicroservicesByGroupIds请求参数结构体
  */
-export interface DisableTaskRequest {
+export interface DescribeMicroservicesByGroupIdsRequest {
     /**
-     * 任务ID
+     * 部署组ID列表
      */
-    TaskId: string;
+    GroupIds: Array<string>;
 }
 /**
  * DescribeStatistics返回参数结构体
@@ -4464,6 +4499,15 @@ export interface DescribeContainerGroupDetailResponse {
     RequestId?: string;
 }
 /**
+ * DisableTask请求参数结构体
+ */
+export interface DisableTaskRequest {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+}
+/**
  * CreatePathRewritesWithDetailResp返回参数结构体
  */
 export interface CreatePathRewritesWithDetailRespResponse {
@@ -5145,13 +5189,13 @@ export interface DeletePublicConfigResponse {
     RequestId?: string;
 }
 /**
- * DescribeSimpleGroups返回参数结构体
+ * DescribePathRewrite返回参数结构体
  */
-export interface DescribeSimpleGroupsResponse {
+export interface DescribePathRewriteResponse {
     /**
-     * 简单部署组列表
+     * 路径重写规则对象
      */
-    Result?: TsfPageSimpleGroup;
+    Result?: PathRewrite;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5714,57 +5758,18 @@ export interface Metric {
     Function?: string;
 }
 /**
- * DescribeInovcationIndicators请求参数结构体
+ * DescribeOverviewInvocation返回参数结构体
  */
-export interface DescribeInovcationIndicatorsRequest {
+export interface DescribeOverviewInvocationResponse {
     /**
-     * 维度
+     * 监控统计数据列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Dimension: string;
+    Result: Array<MetricDataPoint>;
     /**
-     * 开始时间
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    StartTime: string;
-    /**
-     * 结束时间
-     */
-    EndTime: string;
-    /**
-     * 命名空间ID
-     */
-    NamespaceId?: string;
-    /**
-     * 微服务ID
-     */
-    ServiceId?: string;
-    /**
-     * 调用方服务名
-     */
-    CallerServiceName?: string;
-    /**
-     * 被调方服务名
-     */
-    CalleeServiceName?: string;
-    /**
-     * 调用方接口名
-     */
-    CallerInterfaceName?: string;
-    /**
-     * 被调方接口名
-     */
-    CalleeInterfaceName?: string;
-    /**
-     * 应用ID
-     */
-    ApplicationId?: string;
-    /**
-     * 部署组ID
-     */
-    GroupId?: string;
-    /**
-     * 实例ID
-     */
-    InstanceId?: string;
+    RequestId?: string;
 }
 /**
  * ShrinkInstances请求参数结构体
@@ -7413,12 +7418,7 @@ export interface CreateApplicationRequest {
      */
     ApmInstanceId?: string;
     /**
-     * 编程语言;
-  J - JAVA；
-  C - C/C++；
-  P - Python；
-  G - Go；
-  O - Other；
+     * 编程语言:  Java；C/C++；Python；Go；Other
      */
     ProgramLanguage?: string;
     /**
@@ -10467,13 +10467,17 @@ export interface DeletePkgsResponse {
     RequestId?: string;
 }
 /**
- * DescribeTaskLastStatus请求参数结构体
+ * DescribeGroups返回参数结构体
  */
-export interface DescribeTaskLastStatusRequest {
+export interface DescribeGroupsResponse {
     /**
-     * 任务ID
+     * 虚拟机部署组分页信息
      */
-    TaskId: string;
+    Result?: TsfPageVmGroup;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeBusinessLogConfigs返回参数结构体
@@ -11586,6 +11590,19 @@ export interface TsfPageSimpleGroup {
      * 简单部署组列表
      */
     Content?: Array<SimpleGroup>;
+}
+/**
+ * DescribeMicroservicesByGroupIds返回参数结构体
+ */
+export interface DescribeMicroservicesByGroupIdsResponse {
+    /**
+     * 微服务信息分页列表
+     */
+    Result?: TsfPageMicroservice;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeGroupAttribute请求参数结构体
@@ -13664,7 +13681,7 @@ export interface ServiceGovernanceConfig {
      */
     EnableGovernance?: boolean;
     /**
-     * 服务治理类型
+     * 服务治理类型（枚举：SHARE、EXCLUSIVE）
      */
     GovernanceType?: string;
     /**

@@ -107,6 +107,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAddresses", req, cb);
     }
     /**
+     * 本接口（CheckGatewayFlowMonitor）用于查询网关是否启用流量监控。
+     */
+    async CheckGatewayFlowMonitor(req, cb) {
+        return this.request("CheckGatewayFlowMonitor", req, cb);
+    }
+    /**
      * 本接口（CreateCcnRouteTables）用于给指定的云联网实例新建路由表。
      */
     async CreateCcnRouteTables(req, cb) {

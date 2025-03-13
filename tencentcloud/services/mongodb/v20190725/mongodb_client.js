@@ -149,6 +149,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccountUser", req, cb);
     }
     /**
+     * 本接口(OfflineIsolatedDBInstance)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态。
+     */
+    async OfflineIsolatedDBInstance(req, cb) {
+        return this.request("OfflineIsolatedDBInstance", req, cb);
+    }
+    /**
      * 本接口(ModifyDBInstanceParamTpl )用于修改MongoDB云数据库实例的参数模板。
 **说明：ModifyDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
      */
@@ -201,10 +207,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstances", req, cb);
     }
     /**
-     * 本接口(OfflineIsolatedDBInstance)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态。
+     * 本接口（DescribeDBInstanceNamespace）用于查询数据库的表信息。
      */
-    async OfflineIsolatedDBInstance(req, cb) {
-        return this.request("OfflineIsolatedDBInstance", req, cb);
+    async DescribeDBInstanceNamespace(req, cb) {
+        return this.request("DescribeDBInstanceNamespace", req, cb);
     }
     /**
      * 本接口（DescribeSlowLogPatterns）用于获取数据库实例慢日志的统计信息。

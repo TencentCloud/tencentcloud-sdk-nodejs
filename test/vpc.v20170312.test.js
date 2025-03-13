@@ -138,6 +138,16 @@ it("vpc.v20170312.DescribeAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.CheckGatewayFlowMonitor", async function () {
+    try {
+       const data = await client.CheckGatewayFlowMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateCcnRouteTables", async function () {
     try {
        const data = await client.CreateCcnRouteTables({})

@@ -42,26 +42,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StyleImage", req, cb);
     }
     /**
-     * 上传一张照片，输出滤镜处理后的图片。
+     * 用户上传一张人脸图片（最多能处理一张图片中最大的五张人脸信息），精准定位五官，实现美肤、亮肤、祛痘等美颜功能。
      */
-    async StyleImagePro(req, cb) {
-        return this.request("StyleImagePro", req, cb);
-    }
-    /**
-     * 产品不再维护，准备下线。
-
-撤销视频美颜任务请求
-     */
-    async CancelBeautifyVideoJob(req, cb) {
-        return this.request("CancelBeautifyVideoJob", req, cb);
-    }
-    /**
-     * 产品不再维护，准备下线。
-
-查询视频美颜处理进度
-     */
-    async QueryBeautifyVideoJob(req, cb) {
-        return this.request("QueryBeautifyVideoJob", req, cb);
+    async BeautifyPic(req, cb) {
+        return this.request("BeautifyPic", req, cb);
     }
     /**
      * 删除已注册的唇色素材。
@@ -70,10 +54,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteModel", req, cb);
     }
     /**
-     * 用户上传一张人脸图片（最多能处理一张图片中最大的五张人脸信息），精准定位五官，实现美肤、亮肤、祛痘等美颜功能。
+     * 上传一张照片，输出滤镜处理后的图片。
      */
-    async BeautifyPic(req, cb) {
-        return this.request("BeautifyPic", req, cb);
+    async StyleImagePro(req, cb) {
+        return this.request("StyleImagePro", req, cb);
     }
     /**
      * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
@@ -93,14 +77,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetModelList(req, cb) {
         return this.request("GetModelList", req, cb);
-    }
-    /**
-     * 产品不再维护，准备下线。
-
-视频美颜(此接口目前已下线)
-     */
-    async BeautifyVideo(req, cb) {
-        return this.request("BeautifyVideo", req, cb);
     }
 }
 exports.Client = Client;

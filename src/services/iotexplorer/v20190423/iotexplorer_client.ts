@@ -18,7 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  GetTWeCallPkgListRequest,
+  UpdateDevicesEnableStateResponse,
   PackageConsumeStat,
   DescribeCloudStoragePackageConsumeDetailsResponse,
   TWeCallActiveInfo,
@@ -48,7 +48,6 @@ import {
   ModifyCloudStorageAIServiceResponse,
   DescribeDeviceFirmWareRequest,
   BindCloudStorageUserRequest,
-  CreateLoRaFrequencyRequest,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
   CreateProjectResponse,
   DeleteProjectResponse,
@@ -97,7 +96,6 @@ import {
   DeleteDeviceResponse,
   ModifyLoRaFrequencyResponse,
   InstanceDetail,
-  TWeCallPkgInfo,
   ListEventHistoryResponse,
   GetBatchProductionsListResponse,
   DescribeDeviceFirmwaresResponse,
@@ -196,7 +194,6 @@ import {
   DescribeDeviceLocationSolveRequest,
   DescribeVideoLicenseRequest,
   DescribeCloudStorageAIServiceResponse,
-  AssignTWeCallLicenseRequest,
   PackageInfo,
   DeleteDevicesResponse,
   ModifyStudioProductResponse,
@@ -278,7 +275,7 @@ import {
   DescribePackageConsumeTasksRequest,
   GetFamilyDeviceUserListResponse,
   DeleteLoRaGatewayResponse,
-  AssignTWeCallLicenseResponse,
+  CreateLoRaFrequencyRequest,
   LoRaGatewayItem,
   ModifyLoRaFrequencyRequest,
   CreateLoRaFrequencyResponse,
@@ -304,7 +301,6 @@ import {
   CloudStoragePackageInfo,
   DevicesItem,
   CloudStorageAIServiceTaskFileInfo,
-  UpdateDevicesEnableStateResponse,
   GenerateSignedVideoURLRequest,
   ModifyPositionFenceRequest,
   ModifySpacePropertyRequest,
@@ -395,13 +391,11 @@ import {
   PublishFirmwareUpdateMessageRequest,
   UpdateDevicesEnableStateRequest,
   ResetCloudStorageAIServiceRequest,
-  TWeCallCategoryPkgInfo,
   ModifyModelDefinitionResponse,
   RemoveUserByRoomIdFromTRTCResponse,
   ModifyLoRaGatewayRequest,
   DescribeCloudStorageTimeRequest,
   EnableTopicRuleRequest,
-  GetTWeCallPkgListResponse,
   DescribeFirmwareTaskRequest,
 } from "./iotexplorer_models"
 
@@ -1319,18 +1313,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 微信VOIP功能调整下线
-
-查询TWeCall包列表
-     */
-  async GetTWeCallPkgList(
-    req: GetTWeCallPkgListRequest,
-    cb?: (error: string, rep: GetTWeCallPkgListResponse) => void
-  ): Promise<GetTWeCallPkgListResponse> {
-    return this.request("GetTWeCallPkgList", req, cb)
-  }
-
-  /**
    * 批量禁用启用设备
    */
   async UpdateDevicesEnableState(
@@ -1378,18 +1360,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchPositionSpaceResponse) => void
   ): Promise<SearchPositionSpaceResponse> {
     return this.request("SearchPositionSpace", req, cb)
-  }
-
-  /**
-     * 微信VOIP功能调整下线
-
-分配License
-     */
-  async AssignTWeCallLicense(
-    req: AssignTWeCallLicenseRequest,
-    cb?: (error: string, rep: AssignTWeCallLicenseResponse) => void
-  ): Promise<AssignTWeCallLicenseResponse> {
-    return this.request("AssignTWeCallLicense", req, cb)
   }
 
   /**

@@ -485,6 +485,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceBasic", req, cb);
     }
     /**
+     * 设置巡检任务配置
+     */
+    async ModifyInspectionSettings(req, cb) {
+        return this.request("ModifyInspectionSettings", req, cb);
+    }
+    /**
      * 调整Pod数量
      */
     async ModifyPodNum(req, cb) {

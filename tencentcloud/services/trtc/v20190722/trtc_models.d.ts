@@ -57,6 +57,16 @@ export interface AgentConfig {
      * 欢迎消息优先级，0默认，1高优，高优不能被打断。
      */
     WelcomeMessagePriority?: number;
+    /**
+     * 用于过滤LLM返回内容，不播放括号中的内容。
+  1：中文括号（）
+  2：英文括号()
+  3：中文方括号【】
+  4：英文方括号[]
+  5：英文花括号{}
+  默认值为空，表示不进行过滤。
+     */
+    FilterBracketsContent?: number;
 }
 /**
  * CreatePicture请求参数结构体
@@ -286,8 +296,8 @@ export interface STTConfig {
   语音转文本不同套餐版本支持的语言如下：
   
   **基础版**：
-  - "zh": 中文
-  - "zh-TW": 中国台湾
+  - "zh": 中文（简体）
+  - "zh-TW": 中文（繁体）
   - "en": 英语
   
   **标准版：**
@@ -633,7 +643,7 @@ export interface VideoEncode {
      */
     Width: number;
     /**
-     * 输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
+     * 输出流高，音视频输出时必填。取值范围[0,1920]，单位为像素值。
      */
     Height: number;
     /**
@@ -2995,7 +3005,7 @@ export interface StartAIConversationRequest {
     LLMConfig?: string;
     /**
      * TTS配置，为JSON字符串，腾讯云TTS示例如下：
-   <pre>{ <br> &emsp; "AppId": 您的应用ID, // Integer 必填<br> &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent"<br> &emsp; "SecretId": "您的密钥ID", // String 必填<br> &emsp; "SecretKey":  "您的密钥Key", // String 必填<br> &emsp; "VoiceType": 101001, // Integer  必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见<a href="https://cloud.tencent.com/document/product/1073/34112">语音合成计费概述</a>。完整的音色 ID 列表请参见<a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823">语音合成音色列表</a>。<br> &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍  6: 代表2.5倍  如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 <a href="https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz">语速转换</a><br> &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。<br> &emsp; "PrimaryLanguage": "zh-CN" // String 非必填，主要语言<br> &emsp;}</pre>
+   <pre>{ <br> &emsp; "AppId": 您的应用ID, // Integer 必填<br> &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent"<br> &emsp; "SecretId": "您的密钥ID", // String 必填<br> &emsp; "SecretKey":  "您的密钥Key", // String 必填<br> &emsp; "VoiceType": 101001, // Integer  必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见<a href="https://cloud.tencent.com/document/product/1073/34112">语音合成计费概述</a>。完整的音色 ID 列表请参见<a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823">语音合成音色列表</a>。<br> &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍  6: 代表2.5倍  如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 <a href="https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz">语速转换</a><br> &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。<br> &emsp;}</pre>
      */
     TTSConfig?: string;
     /**
@@ -3064,6 +3074,7 @@ export interface StartPublishCdnStreamRequest {
     AgentParams: AgentParams;
     /**
      * 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转码费用。
+  注：混流是必须转码，这个参数需设置为1。
      */
     WithTranscoding: number;
     /**
@@ -3621,6 +3632,7 @@ export interface UpdatePublishCdnStreamRequest {
     SequenceNumber: number;
     /**
      * 是否转码，0表示无需转码，1表示需要转码。
+  注：混流是必须转码，这个参数需设置为1。
      */
     WithTranscoding: number;
     /**

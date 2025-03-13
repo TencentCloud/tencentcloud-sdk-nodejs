@@ -1908,7 +1908,7 @@ export interface DescribeTaskLogRequest {
     /**
      * 下一次分页参数，第一次传空。透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
      */
-    Context: string;
+    Context?: string;
     /**
      * 是否升序排列，true:升序排序，false:倒序，默认false，倒序排列
      */

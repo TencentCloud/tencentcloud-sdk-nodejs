@@ -1538,6 +1538,16 @@ it("tsf.v20180326.EnableTask", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeMicroservicesByGroupIds", async function () {
+    try {
+       const data = await client.DescribeMicroservicesByGroupIds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.CreateMicroserviceWithDetailResp", async function () {
     try {
        const data = await client.CreateMicroserviceWithDetailResp({})

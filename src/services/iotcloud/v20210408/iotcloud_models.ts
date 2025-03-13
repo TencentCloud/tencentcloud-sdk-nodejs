@@ -634,7 +634,7 @@ export interface DescribeDeviceShadowResponse {
   /**
    * 设备影子数据
    */
-  Data: string
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2112,15 +2112,15 @@ export interface ListSDKLogResponse {
   /**
    * 日志检索上下文
    */
-  Context: string
+  Context?: string
   /**
    * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 日志列表
    */
-  Results: Array<SDKLogItem>
+  Results?: Array<SDKLogItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3128,23 +3128,23 @@ export interface SDKLogItem {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 设备名称
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 日志等级
    */
-  Level: string
+  Level?: string
   /**
    * 日志时间
    */
-  DateTime: string
+  DateTime?: string
   /**
    * 日志内容
    */
-  Content: string
+  Content?: string
 }
 
 /**
@@ -3420,12 +3420,12 @@ export interface DescribeResourceTasksResponse {
    * 资源任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskInfos: Array<FirmwareTaskInfo>
+  TaskInfos?: Array<FirmwareTaskInfo>
   /**
    * 资源任务总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

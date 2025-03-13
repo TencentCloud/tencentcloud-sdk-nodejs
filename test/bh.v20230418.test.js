@@ -208,6 +208,16 @@ it("bh.v20230418.DeleteAcls", async function () {
     }
 })
 
+it("bh.v20230418.AccessDevices", async function () {
+    try {
+       const data = await client.AccessDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DescribeResources", async function () {
     try {
        const data = await client.DescribeResources({})

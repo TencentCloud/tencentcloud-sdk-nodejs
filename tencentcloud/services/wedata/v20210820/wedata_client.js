@@ -416,6 +416,12 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
         return this.request("DescribeTaskTableMetricOverview", req, cb);
     }
     /**
+     * 手动任务触发运行
+     */
+    async TriggerManualTasks(req, cb) {
+        return this.request("TriggerManualTasks", req, cb);
+    }
+    /**
      * 无
      */
     async SubmitTaskTestRun(req, cb) {

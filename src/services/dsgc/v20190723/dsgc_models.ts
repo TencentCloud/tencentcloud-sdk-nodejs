@@ -3927,10 +3927,12 @@ export interface DescribeBindDBListRequest {
   DspaId: string
   /**
    * 数据源类型
+   * @deprecated
    */
   DataSourceType?: string
   /**
    * 数据源ID
+   * @deprecated
    */
   DataSourceId?: string
 }

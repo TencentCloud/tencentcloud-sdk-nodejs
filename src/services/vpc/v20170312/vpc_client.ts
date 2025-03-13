@@ -151,7 +151,7 @@ import {
   ModifyIp6TranslatorResponse,
   CreateVpcEndPointServiceWhiteListResponse,
   AssociateInstancesToCcnRouteTableRequest,
-  UnlockCcnBandwidthsRequest,
+  CheckGatewayFlowMonitorRequest,
   DeleteIp6TranslatorsResponse,
   DescribeNatGatewaySourceIpTranslationNatRulesResponse,
   DescribeHighPriorityRouteTablesResponse,
@@ -303,6 +303,7 @@ import {
   DescribeVpcResourceDashboardRequest,
   ModifyIp6RuleRequest,
   ReplaceRouteTableAssociationRequest,
+  UnlockCcnBandwidthsRequest,
   PrivateNatCrossDomainInfo,
   LocalDestinationIpPortTranslationNatRule,
   AssociateNetworkAclSubnetsRequest,
@@ -408,6 +409,7 @@ import {
   ModifyDirectConnectGatewayAttributeResponse,
   DescribeVpnGatewaysRequest,
   NetDetectIpState,
+  CheckGatewayFlowMonitorResponse,
   InternetPrice,
   ModifyIp6AddressesBandwidthResponse,
   CreateSubnetsRequest,
@@ -652,7 +654,7 @@ import {
   DescribeRouteTableAssociatedInstancesRequest,
   ReleaseIPv6AddressesRequest,
   DisassociateIPv6AddressResponse,
-  DescribeAddressTemplateGroupsResponse,
+  DescribeAddressTemplatesResponse,
   SetCcnRegionBandwidthLimitsRequest,
   ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
@@ -953,7 +955,7 @@ import {
   DeleteTrafficPackagesResponse,
   DeleteCustomerGatewayRequest,
   LockCcnBandwidthsResponse,
-  DescribeAddressTemplatesResponse,
+  DescribeAddressTemplateGroupsResponse,
   Quota,
   WithdrawNotifyRoutesResponse,
   AcceptVpcPeeringConnectionRequest,
@@ -1129,6 +1131,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAddressesResponse) => void
   ): Promise<DescribeAddressesResponse> {
     return this.request("DescribeAddresses", req, cb)
+  }
+
+  /**
+   * 本接口（CheckGatewayFlowMonitor）用于查询网关是否启用流量监控。
+   */
+  async CheckGatewayFlowMonitor(
+    req: CheckGatewayFlowMonitorRequest,
+    cb?: (error: string, rep: CheckGatewayFlowMonitorResponse) => void
+  ): Promise<CheckGatewayFlowMonitorResponse> {
+    return this.request("CheckGatewayFlowMonitor", req, cb)
   }
 
   /**

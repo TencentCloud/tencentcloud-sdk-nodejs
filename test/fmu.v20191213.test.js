@@ -38,29 +38,9 @@ it("fmu.v20191213.StyleImage", async function () {
     }
 })
 
-it("fmu.v20191213.StyleImagePro", async function () {
+it("fmu.v20191213.BeautifyPic", async function () {
     try {
-       const data = await client.StyleImagePro({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("fmu.v20191213.CancelBeautifyVideoJob", async function () {
-    try {
-       const data = await client.CancelBeautifyVideoJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("fmu.v20191213.QueryBeautifyVideoJob", async function () {
-    try {
-       const data = await client.QueryBeautifyVideoJob({})
+       const data = await client.BeautifyPic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +58,9 @@ it("fmu.v20191213.DeleteModel", async function () {
     }
 })
 
-it("fmu.v20191213.BeautifyPic", async function () {
+it("fmu.v20191213.StyleImagePro", async function () {
     try {
-       const data = await client.BeautifyPic({})
+       const data = await client.StyleImagePro({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,16 +81,6 @@ it("fmu.v20191213.TryLipstickPic", async function () {
 it("fmu.v20191213.GetModelList", async function () {
     try {
        const data = await client.GetModelList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("fmu.v20191213.BeautifyVideo", async function () {
-    try {
-       const data = await client.BeautifyVideo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

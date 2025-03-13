@@ -948,6 +948,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("EnableTask", req, cb);
     }
     /**
+     * 通过部署组ID获取微服务
+     */
+    async DescribeMicroservicesByGroupIds(req, cb) {
+        return this.request("DescribeMicroservicesByGroupIds", req, cb);
+    }
+    /**
      * 新增微服务返回id
      */
     async CreateMicroserviceWithDetailResp(req, cb) {

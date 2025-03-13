@@ -254,17 +254,21 @@ export interface KillOpsRequest {
     Operations: Array<Operation>;
 }
 /**
- * InquirePriceRenewDBInstances请求参数结构体
+ * DescribeDBInstanceNamespace返回参数结构体
  */
-export interface InquirePriceRenewDBInstancesRequest {
+export interface DescribeDBInstanceNamespaceResponse {
     /**
-     * 实例ID。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。
+     * 查询实例的数据库列表。若未使用 DbName 指定具体查询的数据库，则仅返回查询实例所有的数据库列表，而不返回 Collections 集合信息。
      */
-    InstanceIds: Array<string>;
+    Databases?: Array<string>;
     /**
-     * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+     * 查询的集合信息。指定 DbName 时，则仅返回该数据库下的集合列表。
      */
-    InstanceChargePrepaid: InstanceChargePrepaid;
+    Collections?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSlowLogs请求参数结构体
@@ -417,6 +421,19 @@ export interface DescribeBackupRulesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDBInstanceNamespace请求参数结构体
+ */
+export interface DescribeDBInstanceNamespaceRequest {
+    /**
+     * 指定查询数据库所属的实例 ID，支持批量查询。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+     */
+    InstanceId: string;
+    /**
+     * 指定查询的数据库名。为空时，返回当前实例的全部数据库列表。
+     */
+    DbName?: string;
 }
 /**
  * 用于描述MongoDB数据库慢日志统计信息
@@ -1458,6 +1475,19 @@ export interface DescribeAccountUsersResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * InquirePriceRenewDBInstances请求参数结构体
+ */
+export interface InquirePriceRenewDBInstancesRequest {
+    /**
+     * 实例ID。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。
+     */
+    InstanceIds: Array<string>;
+    /**
+     * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+     */
+    InstanceChargePrepaid: InstanceChargePrepaid;
 }
 /**
  * DescribeBackupDownloadTask请求参数结构体

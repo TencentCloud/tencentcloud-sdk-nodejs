@@ -19,16 +19,17 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ResetDeviceAccountPasswordResponse,
-  DescribeLoginEventRequest,
+  AccessInfo,
   ModifyResourceResponse,
   BindDeviceAccountPasswordRequest,
   DeleteAclsRequest,
-  DeleteDeviceGroupsResponse,
+  SearchSessionRequest,
   DescribeDeviceGroupsResponse,
   DeleteCmdTemplatesResponse,
   DeleteDevicesResponse,
   ChangePwdTaskInfo,
   CreateChangePwdTaskResponse,
+  DescribeLoginEventRequest,
   ModifyUserGroupResponse,
   BindDeviceAccountPasswordResponse,
   DescribeChangePwdTaskDetailRequest,
@@ -47,7 +48,7 @@ import {
   SearchFileBySidResult,
   SearchCommandRequest,
   ImportExternalDeviceRequest,
-  SearchSessionRequest,
+  DescribeResourcesRequest,
   BindDeviceResourceResponse,
   ResetDeviceAccountPrivateKeyResponse,
   DeleteUserGroupMembersResponse,
@@ -62,6 +63,7 @@ import {
   DescribeUserGroupMembersRequest,
   OperationEvent,
   Department,
+  AccessDevicesRequest,
   ModifyCmdTemplateRequest,
   SessionResult,
   CreateUserResponse,
@@ -78,6 +80,7 @@ import {
   CreateDeviceGroupRequest,
   CreateAclResponse,
   DescribeAclsResponse,
+  ModifyUserRequest,
   CreateCmdTemplateResponse,
   ModifyAclRequest,
   SearchAuditLogRequest,
@@ -101,7 +104,7 @@ import {
   Group,
   DescribeAssetSyncStatusRequest,
   Clb,
-  ModifyUserRequest,
+  AccessDevicesResponse,
   DeleteUsersRequest,
   DeleteDeviceAccountsRequest,
   DeleteDeviceGroupMembersResponse,
@@ -145,7 +148,7 @@ import {
   DescribeDomainsRequest,
   DescribeCmdTemplatesRequest,
   ModifyAclResponse,
-  DescribeResourcesRequest,
+  DeleteDeviceGroupsResponse,
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
@@ -367,6 +370,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAclsResponse) => void
   ): Promise<DeleteAclsResponse> {
     return this.request("DeleteAcls", req, cb)
+  }
+
+  /**
+   * 外部客户访问资产
+   */
+  async AccessDevices(
+    req: AccessDevicesRequest,
+    cb?: (error: string, rep: AccessDevicesResponse) => void
+  ): Promise<AccessDevicesResponse> {
+    return this.request("AccessDevices", req, cb)
   }
 
   /**

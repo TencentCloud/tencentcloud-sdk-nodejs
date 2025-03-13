@@ -486,7 +486,6 @@ export interface LaunchConfiguration {
     InstanceTags?: Array<InstanceTag>;
     /**
      * 标签列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
     /**
@@ -536,7 +535,6 @@ export interface LaunchConfiguration {
     DisasterRecoverGroupIds?: Array<string>;
     /**
      * 镜像族名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageFamily?: string;
     /**
@@ -725,13 +723,17 @@ export interface ExitStandbyRequest {
  */
 export interface SystemDisk {
     /**
-     * 系统盘类型。系统盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：CLOUD_PREMIUM。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 系统盘类型。系统盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围
+  <li>LOCAL_BASIC：本地硬盘</li>
+  <li>LOCAL_SSD：本地SSD硬盘</li>
+  <li>CLOUD_BASIC：普通云硬盘</li>
+  <li>CLOUD_PREMIUM：高性能云硬盘</li>
+  <li>CLOUD_SSD：SSD云硬盘</li>
+  <li>默认取值：CLOUD_PREMIUM。</li>
      */
     DiskType?: string;
     /**
      * 系统盘大小，单位：GB。默认值为 50
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize?: number;
 }
@@ -745,7 +747,6 @@ export interface SpotMarketOptions {
     MaxPrice: string;
     /**
      * 竞价请求类型，当前仅支持类型：one-time，默认值为one-time
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SpotInstanceType?: string;
 }
@@ -1037,7 +1038,6 @@ export interface Tag {
     Value: string;
     /**
      * 标签绑定的资源类型，当前支持类型："auto-scaling-group", "launch-configuration"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceType?: string;
 }
@@ -1494,7 +1494,6 @@ export interface AutoScalingGroup {
     CapacityRebalance?: boolean;
     /**
      * 实例名称序号相关设置。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceNameIndexSettings?: InstanceNameIndexSettings;
 }
@@ -1813,7 +1812,6 @@ export interface ModifyAutoScalingGroupResponse {
 export interface ExitStandbyResponse {
     /**
      * 伸缩活动ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActivityId?: string;
     /**
@@ -1827,32 +1825,26 @@ export interface ExitStandbyResponse {
 export interface InvocationResult {
     /**
      * 实例ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 执行活动ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationId?: string;
     /**
      * 执行任务ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InvocationTaskId?: string;
     /**
      * 命令ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CommandId?: string;
     /**
      * 执行任务状态。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskStatus?: string;
     /**
      * 执行异常信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMessage?: string;
 }
@@ -1916,7 +1908,6 @@ export interface InstanceMarketOptionsRequest {
     SpotOptions: SpotMarketOptions;
     /**
      * 市场选项类型，当前只支持取值：spot
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarketType?: string;
 }
@@ -1984,7 +1975,6 @@ export interface ModifyLifecycleHookResponse {
 export interface LifecycleCommand {
     /**
      * 远程命令ID。若选择执行命令，则此项必填。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CommandId: string;
     /**
@@ -1992,7 +1982,6 @@ export interface LifecycleCommand {
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
   如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
   自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Parameters?: string;
 }
@@ -2300,12 +2289,10 @@ export interface DataDisk {
   <li>CLOUD_HSSD：增强型SSD云硬盘</li>
   <li>CLOUD_TSSD：极速型SSD云硬盘</li>
   默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskType?: string;
     /**
      * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize?: number;
     /**
@@ -2419,85 +2406,84 @@ export interface Instance {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 伸缩组ID
      */
-    AutoScalingGroupId: string;
+    AutoScalingGroupId?: string;
     /**
      * 启动配置ID
      */
-    LaunchConfigurationId: string;
+    LaunchConfigurationId?: string;
     /**
      * 启动配置名称
      */
-    LaunchConfigurationName: string;
+    LaunchConfigurationName?: string;
     /**
-     * 生命周期状态，取值如下：<br>
-  <li>IN_SERVICE：运行中
-  <li>CREATING：创建中
-  <li>CREATION_FAILED：创建失败
-  <li>TERMINATING：中止中
-  <li>TERMINATION_FAILED：中止失败
-  <li>ATTACHING：绑定中
-  <li>ATTACH_FAILED：绑定失败
-  <li>DETACHING：解绑中
-  <li>DETACH_FAILED：解绑失败
-  <li>ATTACHING_LB：绑定LB中
-  <li>DETACHING_LB：解绑LB中
-  <li>MODIFYING_LB：修改LB中
-  <li>STARTING：开机中
-  <li>START_FAILED：开机失败
-  <li>STOPPING：关机中
-  <li>STOP_FAILED：关机失败
-  <li>STOPPED：已关机
-  <li>IN_LAUNCHING_HOOK：扩容生命周期挂钩中
-  <li>IN_TERMINATING_HOOK：缩容生命周期挂钩中
+     * 生命周期状态，取值如下：
+  <li>IN_SERVICE：运行中</li>
+  <li>CREATING：创建中</li>
+  <li>CREATION_FAILED：创建失败</li>
+  <li>TERMINATING：中止中</li>
+  <li>TERMINATION_FAILED：中止失败</li>
+  <li>ATTACHING：绑定中</li>
+  <li>ATTACH_FAILED：绑定失败</li>
+  <li>DETACHING：解绑中</li>
+  <li>DETACH_FAILED：解绑失败</li>
+  <li>ATTACHING_LB：绑定LB中</li>
+  <li>DETACHING_LB：解绑LB中</li>
+  <li>MODIFYING_LB：修改LB中</li>
+  <li>STARTING：开机中</li>
+  <li>START_FAILED：开机失败</li>
+  <li>STOPPING：关机中</li>
+  <li>STOP_FAILED：关机失败</li>
+  <li>STOPPED：已关机</li>
+  <li>IN_LAUNCHING_HOOK：扩容生命周期挂钩中</li>
+  <li>IN_TERMINATING_HOOK：缩容生命周期挂钩中</li>
      */
-    LifeCycleState: string;
+    LifeCycleState?: string;
     /**
      * 健康状态，取值包括HEALTHY和UNHEALTHY
      */
-    HealthStatus: string;
+    HealthStatus?: string;
     /**
      * 是否加入缩容保护
      */
-    ProtectedFromScaleIn: boolean;
+    ProtectedFromScaleIn?: boolean;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 创建类型，取值包括AUTO_CREATION, MANUAL_ATTACHING。
      */
-    CreationType: string;
+    CreationType?: string;
     /**
      * 实例加入时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 实例类型
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 版本号
      */
-    VersionNumber: number;
+    VersionNumber?: number;
     /**
      * 伸缩组名称
      */
-    AutoScalingGroupName: string;
+    AutoScalingGroupName?: string;
     /**
      * 预热状态，取值如下：
-  <li>WAITING_ENTER_WARMUP：等待进入预热
-  <li>NO_NEED_WARMUP：无需预热
-  <li>IN_WARMUP：预热中
-  <li>AFTER_WARMUP：完成预热
+  <li>WAITING_ENTER_WARMUP：等待进入预热</li>
+  <li>NO_NEED_WARMUP：无需预热</li>
+  <li>IN_WARMUP：预热中</li>
+  <li>AFTER_WARMUP：完成预热</li>
      */
-    WarmupStatus: string;
+    WarmupStatus?: string;
     /**
      * 置放群组id，仅支持指定一个。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisasterRecoverGroupIds?: Array<string>;
 }
@@ -2614,7 +2600,6 @@ export interface RunSecurityServiceEnabled {
   <li>TRUE：表示开启云安全服务</li>
   <li>FALSE：表示不开启云安全服务</li>
   默认取值：TRUE。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
 }
@@ -2627,18 +2612,16 @@ export interface RefreshBatchRelatedInstance {
      */
     InstanceId?: string;
     /**
-     * 刷新实例状态。如果在刷新时实例被移出或销毁，状态会更新为 NOT_FOUND。取值如下：<br><li>WAITING：待刷新</li><li>INIT：初始化中</li><li>RUNNING：刷新中</li><li>FAILED：刷新失败</li><li>CANCELLED：已取消</li><li>SUCCESSFUL：刷新成功</li><li>NOT_FOUND：实例不存在
+     * 刷新实例状态。如果在刷新时实例被移出或销毁，状态会更新为 NOT_FOUND。取值如下：<li>WAITING：待刷新</li><li>INIT：初始化中</li><li>RUNNING：刷新中</li><li>FAILED：刷新失败</li><li>CANCELLED：已取消</li><li>SUCCESSFUL：刷新成功</li><li>NOT_FOUND：实例不存在</li>
      */
     InstanceStatus?: string;
     /**
      * 实例刷新中最近一次伸缩活动 ID，可通过 DescribeAutoScalingActivities 接口查询。
   需注意伸缩活动与实例刷新活动不同，一次实例刷新活动可能包括多次伸缩活动。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastActivityId?: string;
     /**
      * 实例刷新状态信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStatusMessage?: string;
 }
@@ -2897,7 +2880,6 @@ export interface ScaleOutInstancesResponse {
 export interface RefreshSettings {
     /**
      * 滚动更新设置参数。RefreshMode 为滚动更新该参数必须填写。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RollingUpdateSettings: RollingUpdateSettings;
     /**
@@ -2978,7 +2960,6 @@ export interface ServiceSettings {
   RECREATE：重建实例替代原有不健康实例；
   RESET：对原有不健康实例进行重装系统操作，可保持数据盘、内网IP、实例id等信息不发生变化，实例登录设置、主机名、增强服务和 UserData 与当前启动配置保持一致。
   默认取值：RECREATE
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReplaceMode?: string;
     /**
@@ -3397,7 +3378,6 @@ export interface RefreshActivity {
     RefreshActivityId?: string;
     /**
      * 原始刷新活动ID，仅在回滚刷新活动中存在。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginRefreshActivityId?: string;
     /**
@@ -3432,7 +3412,6 @@ export interface RefreshActivity {
     Status?: string;
     /**
      * 当前刷新批次序号。例如，2 表示当前活动正在刷新第二批次的实例。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentRefreshBatchNum?: number;
     /**
@@ -3447,7 +3426,6 @@ export interface RefreshActivity {
     EndTime?: string;
     /**
      * 刷新活动创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedTime?: string;
 }
@@ -3534,7 +3512,6 @@ export interface LifecycleHook {
     LifecycleTransitionType?: string;
     /**
      * 远程命令执行对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LifecycleCommand?: LifecycleCommand;
 }
@@ -3928,7 +3905,6 @@ export interface RunMonitorServiceEnabled {
   <li>TRUE：表示开启云监控服务</li>
   <li>FALSE：表示不开启云监控服务</li>
   默认取值：TRUE。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
 }

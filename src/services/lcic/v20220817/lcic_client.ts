@@ -26,7 +26,9 @@ import {
   DeleteUserRequest,
   WatermarkConfig,
   DescribeSupervisorsResponse,
+  DescribeWhiteBoardSnapshotRequest,
   DeleteUserResponse,
+  DeleteWhiteBoardSnapshotRequest,
   BatchDeleteRecordRequest,
   ModifyAppResponse,
   UnblockKickedUserResponse,
@@ -63,6 +65,7 @@ import {
   SetAppCustomContentResponse,
   UnblockKickedUserRequest,
   BatchUserRequest,
+  DeleteWhiteBoardSnapshotResponse,
   LoginUserResponse,
   ModifyGroupRequest,
   DescribeAppDetailRequest,
@@ -154,6 +157,7 @@ import {
   DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
   DescribeQuestionListResponse,
+  DescribeWhiteBoardSnapshotResponse,
   GetRoomsResponse,
   SetMarqueeResponse,
   QuestionInfo,
@@ -331,6 +335,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询白板板书截图
+   */
+  async DescribeWhiteBoardSnapshot(
+    req: DescribeWhiteBoardSnapshotRequest,
+    cb?: (error: string, rep: DescribeWhiteBoardSnapshotResponse) => void
+  ): Promise<DescribeWhiteBoardSnapshotResponse> {
+    return this.request("DescribeWhiteBoardSnapshot", req, cb)
+  }
+
+  /**
    * 此接口用于获取群组详情
    */
   async DescribeGroup(
@@ -351,13 +365,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档从房间解绑
+   * 获取文档信息
    */
-  async UnbindDocumentFromRoom(
-    req: UnbindDocumentFromRoomRequest,
-    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
-  ): Promise<UnbindDocumentFromRoomResponse> {
-    return this.request("UnbindDocumentFromRoom", req, cb)
+  async DescribeDocument(
+    req: DescribeDocumentRequest,
+    cb?: (error: string, rep: DescribeDocumentResponse) => void
+  ): Promise<DescribeDocumentResponse> {
+    return this.request("DescribeDocument", req, cb)
   }
 
   /**
@@ -601,6 +615,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 文档从房间解绑
+   */
+  async UnbindDocumentFromRoom(
+    req: UnbindDocumentFromRoomRequest,
+    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
+  ): Promise<UnbindDocumentFromRoomResponse> {
+    return this.request("UnbindDocumentFromRoom", req, cb)
+  }
+
+  /**
      * 功能概述
 本接口提供教学场景下的课程文档预绑定能力，支持将课件课堂ID进行关联映射，实现课件的自动化预加载。
 
@@ -833,13 +857,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取文档信息
+   * 删除白板板书截图
    */
-  async DescribeDocument(
-    req: DescribeDocumentRequest,
-    cb?: (error: string, rep: DescribeDocumentResponse) => void
-  ): Promise<DescribeDocumentResponse> {
-    return this.request("DescribeDocument", req, cb)
+  async DeleteWhiteBoardSnapshot(
+    req: DeleteWhiteBoardSnapshotRequest,
+    cb?: (error: string, rep: DeleteWhiteBoardSnapshotResponse) => void
+  ): Promise<DeleteWhiteBoardSnapshotResponse> {
+    return this.request("DeleteWhiteBoardSnapshot", req, cb)
   }
 
   /**

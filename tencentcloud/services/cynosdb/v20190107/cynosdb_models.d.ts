@@ -336,27 +336,22 @@ export interface DescribeClusterDetailDatabasesRequest {
 export interface RollbackRoGroupInfo {
     /**
      * 实例组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceGroupId?: string;
     /**
      * vpc信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqVpcId?: string;
     /**
      * 子网信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqSubnetId?: string;
     /**
      * vip信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * vport信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport?: number;
 }
@@ -526,12 +521,10 @@ export interface ModifyInstanceUpgradeLimitDaysResponse {
 export interface DatabaseTables {
     /**
      * 数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Database?: string;
     /**
      * 表名称列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tables?: Array<string>;
 }
@@ -545,12 +538,10 @@ export interface UserHostPrivilege {
     DbUserName: string;
     /**
      * 客户端ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbHost: string;
     /**
      * 用户权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbPrivilege: string;
 }
@@ -762,17 +753,14 @@ export interface BackupFileInfo {
     SnapshotTime?: string;
     /**
      * 备份ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupId?: number;
     /**
      * 快照类型，可选值：full，全量；increment，增量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SnapShotType?: string;
     /**
      * 备份文件备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupName?: string;
 }
@@ -1211,12 +1199,10 @@ export interface ModifyInstanceData {
     OldStorageLimit?: number;
     /**
      * 变配前实例机器类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldDeviceType?: string;
     /**
      * 变配后实例机器类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceType?: string;
     /**
@@ -1351,43 +1337,36 @@ export interface SlowQueriesItem {
     /**
      * 远程读取次数
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncReadCountRemote?: number;
     /**
      * 远程读取的字节数
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncReadBytesRemote?: number;
     /**
      * 远程读取所花费的时间（微秒）
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncReadTimeRemote?: number;
     /**
      * 远程写入次数
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncWriteCountRemote?: number;
     /**
      * 远程写入的字节数。
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncWriteBytesRemote?: number;
     /**
      * 远程写入所花费的时间（微秒）。
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncWriteTimeRemote?: number;
     /**
      * 事务提交延迟（微秒）
   数据库内核版本大于3.1.12
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrxCommitDelay?: number;
 }
@@ -2396,53 +2375,44 @@ export interface DescribeServerlessStrategyResponse {
 export interface InstanceCLSDeliveryInfo {
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例name
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 日志主题id
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicId?: string;
     /**
      * 日志主题name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicName?: string;
     /**
      * 日志集id
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 日志集name
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 日志投递地域
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 投递状态creating,running,offlining,offlined
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 日志类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogType?: string;
 }
@@ -2691,17 +2661,14 @@ export interface InstanceAuditLogFilter {
 export interface SlaveZoneStockInfo {
     /**
      * 备可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZone?: string;
     /**
      * 备可用区的库存数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StockCount?: number;
     /**
      * 备可用区是否有库存
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasStock?: boolean;
 }
@@ -2803,27 +2770,22 @@ export interface DescribeResourcePackageListResponse {
 export interface ObjectTask {
     /**
      * 任务自增ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskType?: string;
     /**
      * 任务状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskStatus?: string;
     /**
      * 任务ID（集群ID|实例组ID|实例ID）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectId?: string;
     /**
      * 任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectType?: string;
 }
@@ -2920,7 +2882,6 @@ export interface ModifyParamItem {
     CurrentValue: string;
     /**
      * 参数旧值（只在出参时有用）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldValue?: string;
 }
@@ -3232,12 +3193,10 @@ export interface ModifyDbVersionData {
 export interface DatabasePrivileges {
     /**
      * 数据库
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Db: string;
     /**
      * 权限列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
 }
@@ -3287,57 +3246,46 @@ export interface DeleteAuditLogFileResponse {
 export interface InstanceNetInfo {
     /**
      * 网络类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceGroupType?: string;
     /**
      * 实例组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceGroupId?: string;
     /**
      * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 网络类型, 0-基础网络, 1-vpc网络, 2-黑石网络
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetType?: number;
     /**
      * 私有网络IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * 私有网络端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport?: number;
     /**
      * 外网域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanDomain?: string;
     /**
      * 外网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanIP?: string;
     /**
      * 外网端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanPort?: number;
     /**
      * 外网开启状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanStatus?: string;
 }
@@ -3851,42 +3799,34 @@ export interface DbInfo {
     CollateRule?: string;
     /**
      * 数据库备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 用户权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserHostPrivileges?: Array<UserHostPrivilege>;
     /**
      * 数据库ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbId?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 用户appid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 用户Uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
      * 集群Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
 }
@@ -4038,57 +3978,46 @@ export interface CreateProxyEndPointResponse {
 export interface NetAddr {
     /**
      * 内网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * 内网端口号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport?: number;
     /**
      * 外网域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanDomain?: string;
     /**
      * 外网端口号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanPort?: number;
     /**
      * 网络类型（ro-只读,rw/ha-读写）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetType?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqSubnetId?: string;
     /**
      * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqVpcId?: string;
     /**
      * 描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 外网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanIP?: string;
     /**
      * 外网状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanStatus?: string;
     /**
      * 实例组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceGroupId?: string;
 }
@@ -4212,17 +4141,14 @@ export interface ModifyClusterNameResponse {
 export interface CrossRegionBackupItem {
     /**
      * 备份的目标地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CrossRegion?: string;
     /**
      * 目标地域的备份任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupId?: string;
+    BackupId?: number;
     /**
      * 目标地域的备份状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupStatus?: string;
 }
@@ -4331,7 +4257,6 @@ export interface SaleZone {
     PhysicalZone?: string;
     /**
      * 用户是否有可用区权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasPermission?: boolean;
     /**
@@ -4383,12 +4308,10 @@ export interface StartCLSDeliveryRequest {
 export interface SlaveZoneAttrItem {
     /**
      * 可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
      * binlog同步方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BinlogSyncWay?: string;
 }
@@ -4398,12 +4321,10 @@ export interface SlaveZoneAttrItem {
 export interface DeliverSummary {
     /**
      * 投递类型，store（存储类），mq（消息通道）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeliverType?: string;
     /**
      * 投递子类型：cls，ckafka。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeliverSubType?: string;
 }
@@ -4857,29 +4778,24 @@ export interface DescribeInstanceDetailRequest {
 export interface Package {
     /**
      * AppID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 资源包唯一ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageId?: string;
     /**
      * 资源包名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageName?: string;
     /**
      * 资源包类型
   CCU-计算资源包，DISK-存储资源包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageType?: string;
     /**
      * 资源包使用地域
   china-中国内地通用，overseas-港澳台及海外通用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageRegion?: string;
     /**
@@ -4890,42 +4806,34 @@ export interface Package {
   normal_finish-使用完；
   apply_refund-申请退费中；
   refund-已退费。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 资源包总量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageTotalSpec?: number;
     /**
      * 资源包已使用量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageUsedSpec?: number;
     /**
      * 是否还有库存余量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasQuota?: boolean;
     /**
      * 绑定实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindInstanceInfos?: Array<BindInstanceInfo>;
     /**
      * 生效时间：2022-07-01 00:00:00
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 失效时间：2022-08-01 00:00:00
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: string;
     /**
      * 资源包历史绑定（已解绑）实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HistoryBindResourceInfos?: Array<BindInstanceInfo>;
 }
@@ -5736,17 +5644,14 @@ export interface SwitchClusterZoneResponse {
 export interface ProxyConnectionPoolInfo {
     /**
      * 连接池保持阈值：单位（秒）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectionPoolTimeOut: number;
     /**
      * 是否开启了连接池
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpenConnectionPool?: string;
     /**
      * 连接池类型：SessionConnectionPool（会话级别连接池）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectionPoolType?: string;
 }
@@ -5829,35 +5734,29 @@ export interface DescribeInstancesResponse {
 export interface SalePackageSpec {
     /**
      * 资源包使用地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageRegion?: string;
     /**
      * 资源包类型
   CCU-计算资源包
   DISK-存储资源包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageType?: string;
     /**
      * 资源包版本
   base-基础版本，common-通用版本，enterprise-企业版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageVersion?: string;
     /**
      * 当前版本资源包最小资源数，计算资源单位：个；存储资源：GB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinPackageSpec?: number;
     /**
      * 当前版本资源包最大资源数，计算资源单位：个；存储资源：GB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxPackageSpec?: number;
     /**
      * 资源包有效期，单位:天
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireDay?: number;
 }
@@ -6175,12 +6074,10 @@ export interface ModifyVipVportRequest {
 export interface InstanceAbility {
     /**
      * 实例是否支持强制重启，可选值：yes：支持，no：不支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSupportForceRestart?: string;
     /**
      * 不支持强制重启的原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NonsupportForceRestartReason?: string;
 }
@@ -6529,22 +6426,18 @@ export interface ModifyParamsData {
 export interface BindInstanceInfo {
     /**
      * 绑定的集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 绑定的实例所在的地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceRegion?: string;
     /**
      * 绑定的实例类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 绑定集群下的实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtendIds?: Array<string>;
 }
@@ -7074,32 +6967,28 @@ export interface DescribeBackupDownloadUrlResponse {
 export interface TradePrice {
     /**
      * 预付费模式下资源总价，不包含优惠，单位:分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalPrice: number;
+    TotalPrice?: number;
     /**
      * 总的折扣，100表示100%不打折
      */
-    Discount: number;
+    Discount?: number;
     /**
      * 预付费模式下的优惠后总价, 单位: 分,例如用户享有折扣 =TotalPrice × Discount
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalPriceDiscount: number;
+    TotalPriceDiscount?: number;
     /**
      * 后付费模式下的单位资源价格，不包含优惠，单位:分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnitPrice: number;
+    UnitPrice?: number;
     /**
      * 优惠后后付费模式下的单位资源价格, 单位: 分,例如用户享有折扣=UnitPricet × Discount
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnitPriceDiscount: number;
+    UnitPriceDiscount?: number;
     /**
      * 计费价格单位
      */
-    ChargeUnit: string;
+    ChargeUnit?: string;
 }
 /**
  * DescribeBinlogConfig请求参数结构体
@@ -7986,42 +7875,34 @@ export interface RestartInstanceRequest {
 export interface PackageDetail {
     /**
      * AppId账户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 资源包唯一ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageId?: string;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 成功抵扣容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SuccessDeductSpec?: number;
     /**
      * 截止当前，资源包已使用的容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageTotalUsedSpec?: number;
     /**
      * 抵扣开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 抵扣结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 扩展信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtendInfo?: string;
 }
@@ -8031,12 +7912,10 @@ export interface PackageDetail {
 export interface BinlogConfigInfo {
     /**
      * binlog保留时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BinlogSaveDays: number;
     /**
      * binlog异地地域备份是否开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BinlogCrossRegionsEnable: string;
     /**
@@ -8295,62 +8174,50 @@ export interface ModifyInstanceNameRequest {
 export interface RollbackInstanceInfo {
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * vpc信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqVpcId?: string;
     /**
      * 子网信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqSubnetId?: string;
     /**
      * vip信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * vport信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport?: number;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * cpu大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cpu?: number;
     /**
      * 内存大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mem?: number;
     /**
      * 存储大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageLimit?: number;
 }
@@ -8475,7 +8342,6 @@ export interface ClusterInstanceDetail {
 export interface ClusterSlaveData {
     /**
      * 旧主可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldMasterZone?: string;
     /**
@@ -8485,7 +8351,6 @@ export interface ClusterSlaveData {
     OldSlaveZone?: Array<string>;
     /**
      * 新主可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewMasterZone?: string;
     /**
@@ -8495,12 +8360,10 @@ export interface ClusterSlaveData {
     NewSlaveZone?: Array<string>;
     /**
      * 新从可用区属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewSlaveZoneAttr?: Array<SlaveZoneAttrItem>;
     /**
      * 旧可用区属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldSlaveZoneAttr?: Array<SlaveZoneAttrItem>;
 }
@@ -8510,17 +8373,14 @@ export interface ClusterSlaveData {
 export interface OldAddrInfo {
     /**
      * IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport?: number;
     /**
      * 期望执行回收时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReturnTime?: string;
 }
@@ -8771,17 +8631,14 @@ export interface ProxyGroup {
     CurrentProxyVersion?: string;
     /**
      * 集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 用户AppId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 读写节点开通数据库代理
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpenRw?: string;
 }
@@ -8996,27 +8853,22 @@ export interface DescribeAuditRuleTemplatesResponse {
 export interface LogicBackupConfigInfo {
     /**
      * 是否开启自动逻辑备份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicBackupEnable?: string;
     /**
      * 自动逻辑备份开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicBackupTimeBeg?: number;
     /**
      * 自动逻辑备份结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicBackupTimeEnd?: number;
     /**
      * 自动逻辑备份保留时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicReserveDuration?: number;
     /**
      * 是否开启跨地域逻辑备份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicCrossRegionsEnable?: string;
     /**
@@ -9266,7 +9118,6 @@ export interface DescribeBackupListRequest {
 export interface SwitchClusterLogBin {
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
 }
@@ -9334,17 +9185,14 @@ export interface ParamItemDetail {
     Description?: string;
     /**
      * 类型是否为公式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFunc?: boolean;
     /**
      * 参数配置公式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Func?: string;
     /**
      * 支持公式的参数的默认公式样式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FuncPattern?: string;
 }
@@ -9428,12 +9276,10 @@ export interface RenewClustersResponse {
 export interface RollbackTableInfo {
     /**
      * 旧表名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldTable: string;
     /**
      * 新表名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewTable: string;
 }
@@ -9577,7 +9423,6 @@ export interface ParamInfo {
     Default?: string;
     /**
      * 参数为enum/string/bool时，可选值列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnumValue?: Array<string>;
     /**
@@ -9614,27 +9459,22 @@ export interface ParamInfo {
     Description?: string;
     /**
      * 是否为全局参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsGlobal?: number;
     /**
      * 参数是否可修改
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifiableInfo?: ModifiableInfo;
     /**
      * 是否为函数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFunc?: boolean;
     /**
      * 函数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Func?: string;
     /**
      * 支持公式的参数的默认公式样式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FuncPattern?: string;
 }
@@ -9767,42 +9607,39 @@ export interface TemplateParamInfo {
     /**
      * 当前值
      */
-    CurrentValue: string;
+    CurrentValue?: string;
     /**
      * 默认值
      */
-    Default: string;
+    Default?: string;
     /**
      * 参数类型为enum时可选的值类型集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnumValue: Array<string>;
+    EnumValue?: Array<string>;
     /**
      * 参数类型为float/integer时的最大值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Max: string;
+    Max?: string;
     /**
      * 参数类型为float/integer时的最小值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Min: string;
+    Min?: string;
     /**
      * 参数名称
      */
-    ParamName: string;
+    ParamName?: string;
     /**
      * 是否需要重启
      */
-    NeedReboot: number;
+    NeedReboot?: number;
     /**
      * 参数描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 参数类型，integer/float/string/enum
      */
-    ParamType: string;
+    ParamType?: string;
 }
 /**
  * CreateBackup返回参数结构体
@@ -9874,18 +9711,15 @@ export interface RollbackToNewClusterResponse {
 export interface ResourcePackage {
     /**
      * 资源包的唯一ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageId?: string;
     /**
      * 资源包类型：CCU：计算资源包
   DISK：存储资源包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageType?: string;
     /**
      * 当前资源包绑定在当前实例下的抵扣优先级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeductionPriority?: number;
 }
@@ -9986,7 +9820,6 @@ export interface UpgradeInstanceResponse {
 export interface CreateAuditRuleTemplateResponse {
     /**
      * 生成的规则模板ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateId?: string;
     /**
@@ -10323,12 +10156,10 @@ export interface SaleRegion {
 export interface ProxyVersionInfo {
     /**
      * proxy版本号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyVersion?: string;
     /**
      * 版本描述：GA:稳定版  BETA:尝鲜版，DEPRECATED:过旧，
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyVersionType?: string;
 }
@@ -10453,17 +10284,14 @@ export interface ModifiableInfo {
 export interface TaskMaintainInfo {
     /**
      * 执行开始时间(距离0点的秒数)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainStartTime?: number;
     /**
      * 持续的时间(单位：秒)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainDuration?: number;
     /**
      * 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainWeekDays?: Array<string>;
 }
@@ -10482,17 +10310,14 @@ export interface DescribeServerlessStrategyRequest {
 export interface TablePrivileges {
     /**
      * 数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Db: string;
     /**
      * 表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableName: string;
     /**
      * 权限列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
 }
@@ -10532,17 +10357,14 @@ export interface DeleteBackupRequest {
 export interface ErrorLogItemExport {
     /**
      * 时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: string;
     /**
      * 日志等级，可选值note, warning，error
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 日志内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
 }

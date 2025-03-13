@@ -2860,13 +2860,16 @@ export interface AssociateInstancesToCcnRouteTableRequest {
 }
 
 /**
- * UnlockCcnBandwidths请求参数结构体
+ * CheckGatewayFlowMonitor请求参数结构体
  */
-export interface UnlockCcnBandwidthsRequest {
+export interface CheckGatewayFlowMonitorRequest {
   /**
-   * 带宽实例对象数组。
+   * 网关实例ID，目前我们支持的网关实例类型有，
+专线网关实例ID，形如，`dcg-ltjahce6`；
+Nat网关实例ID，形如，`nat-ltjahce6`；
+VPN网关实例ID，形如，`vpn-ltjahce6`。
    */
-  Instances: Array<CcnFlowLock>
+  GatewayId: string
 }
 
 /**
@@ -5779,6 +5782,16 @@ export interface ReplaceRouteTableAssociationRequest {
 }
 
 /**
+ * UnlockCcnBandwidths请求参数结构体
+ */
+export interface UnlockCcnBandwidthsRequest {
+  /**
+   * 带宽实例对象数组。
+   */
+  Instances: Array<CcnFlowLock>
+}
+
+/**
  * 私网NAT网关跨域信息
  */
 export interface PrivateNatCrossDomainInfo {
@@ -7906,6 +7919,24 @@ export interface NetDetectIpState {
    * 丢包率
    */
   PacketLossRate?: number
+}
+
+/**
+ * CheckGatewayFlowMonitor返回参数结构体
+ */
+export interface CheckGatewayFlowMonitorResponse {
+  /**
+   * 网关是否启用了流控。true为启用，false未启用。
+   */
+  Enabled: boolean
+  /**
+   * 网关的带宽。
+   */
+  Bandwidth: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12951,9 +12982,9 @@ export interface DisassociateIPv6AddressResponse {
 }
 
 /**
- * DescribeAddressTemplateGroups返回参数结构体
+ * DescribeAddressTemplates返回参数结构体
  */
-export interface DescribeAddressTemplateGroupsResponse {
+export interface DescribeAddressTemplatesResponse {
   /**
    * 符合条件的实例数量。
    */
@@ -12961,7 +12992,7 @@ export interface DescribeAddressTemplateGroupsResponse {
   /**
    * IP地址模板。
    */
-  AddressTemplateGroupSet?: Array<AddressTemplateGroup>
+  AddressTemplateSet?: Array<AddressTemplate>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18780,9 +18811,9 @@ export interface LockCcnBandwidthsResponse {
 }
 
 /**
- * DescribeAddressTemplates返回参数结构体
+ * DescribeAddressTemplateGroups返回参数结构体
  */
-export interface DescribeAddressTemplatesResponse {
+export interface DescribeAddressTemplateGroupsResponse {
   /**
    * 符合条件的实例数量。
    */
@@ -18790,7 +18821,7 @@ export interface DescribeAddressTemplatesResponse {
   /**
    * IP地址模板。
    */
-  AddressTemplateSet?: Array<AddressTemplate>
+  AddressTemplateGroupSet?: Array<AddressTemplateGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

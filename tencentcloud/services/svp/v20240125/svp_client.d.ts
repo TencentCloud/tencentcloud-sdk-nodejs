@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateSavingPlanOrderRequest, CreateSavingPlanOrderResponse, DescribeSavingPlanDeductRequest, DescribeSavingPlanUsageRequest, DescribeSavingPlanOverviewResponse, DescribeSavingPlanUsageResponse, DescribeSavingPlanDeductResponse, DescribeSavingPlanOverviewRequest } from "./svp_models";
+import { CreateSavingPlanOrderRequest, DescribeSavingPlanCoverageRequest, CreateSavingPlanOrderResponse, DescribeSavingPlanDeductRequest, DescribeSavingPlanUsageRequest, DescribeSavingPlanOverviewResponse, DescribeSavingPlanUsageResponse, DescribeSavingPlanDeductResponse, DescribeSavingPlanOverviewRequest, DescribeSavingPlanCoverageResponse } from "./svp_models";
 /**
  * svp client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
+     */
+    DescribeSavingPlanCoverage(req: DescribeSavingPlanCoverageRequest, cb?: (error: string, rep: DescribeSavingPlanCoverageResponse) => void): Promise<DescribeSavingPlanCoverageResponse>;
     /**
      * 查用当前用户明细节省计划查询时段内的使用情况
      */

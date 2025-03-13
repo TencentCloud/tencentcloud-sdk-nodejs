@@ -24,6 +24,7 @@ import {
   ModifyResourceResponse,
   ZoneSetting,
   PodSpecInfo,
+  ScaleOutInstanceRequest,
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
   NodeSelector,
@@ -37,6 +38,7 @@ import {
   ModifyPodNumResponse,
   CreateInstanceResponse,
   PersistentVolumeContext,
+  TerminateTasksResponse,
   TerminateTasksRequest,
   HostVolumeContext,
   DescribeServiceNodeInfosRequest,
@@ -68,7 +70,7 @@ import {
   ClusterInstancesInfo,
   ModifyResourcesTagsResponse,
   CreateCloudInstanceResponse,
-  ScaleOutInstanceRequest,
+  RunJobFlowRequest,
   DescribeInstanceRenewNodesResponse,
   KyuubiQueryInfo,
   DescribeHBaseTableOverviewResponse,
@@ -135,6 +137,7 @@ import {
   DescribeResourceScheduleRequest,
   PodParameter,
   ModifySLInstanceResponse,
+  InspectionTaskSettings,
   SyncPodStateResponse,
   UserManagerUserBriefInfo,
   AllNodeResourceSpec,
@@ -180,12 +183,13 @@ import {
   MultiDisk,
   TerminateInstanceRequest,
   DescribeNodeResourceConfigFastRequest,
+  TaskSettings,
   MetricTags,
   ExternalAccess,
   ModifyResourceSchedulerRequest,
   TableSchemaItem,
   LoginSettings,
-  RunJobFlowRequest,
+  ModifyInspectionSettingsResponse,
   DescribeKyuubiQueryInfoRequest,
   PriceResource,
   ModifyGlobalConfigResponse,
@@ -316,7 +320,7 @@ import {
   NodeSelectorTerm,
   DescribeTrinoQueryInfoRequest,
   EmrPrice,
-  TerminateTasksResponse,
+  ModifyInspectionSettingsRequest,
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
   DescribeAutoScaleRecordsRequest,
@@ -1095,6 +1099,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceBasicResponse) => void
   ): Promise<ModifyInstanceBasicResponse> {
     return this.request("ModifyInstanceBasic", req, cb)
+  }
+
+  /**
+   * 设置巡检任务配置
+   */
+  async ModifyInspectionSettings(
+    req: ModifyInspectionSettingsRequest,
+    cb?: (error: string, rep: ModifyInspectionSettingsResponse) => void
+  ): Promise<ModifyInspectionSettingsResponse> {
+    return this.request("ModifyInspectionSettings", req, cb)
   }
 
   /**

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("svp.tencentcloudapi.com", "2024-01-25", clientConfig);
     }
     /**
+     * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
+     */
+    async DescribeSavingPlanCoverage(req, cb) {
+        return this.request("DescribeSavingPlanCoverage", req, cb);
+    }
+    /**
      * 查用当前用户明细节省计划查询时段内的使用情况
      */
     async DescribeSavingPlanUsage(req, cb) {

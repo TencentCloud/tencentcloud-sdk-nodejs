@@ -187,6 +187,135 @@ export interface PodSpecInfo {
 }
 
 /**
+ * ScaleOutInstance请求参数结构体
+ */
+export interface ScaleOutInstanceRequest {
+  /**
+   * 扩容的时间单位。取值范围：
+<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   */
+  TimeUnit: string
+  /**
+   * 扩容的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   */
+  TimeSpan: number
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 实例计费模式。取值范围：
+<li>0：表示按量计费。</li>
+<li>1：表示包年包月。</li>
+   */
+  PayMode: number
+  /**
+   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
+   */
+  ClientToken?: string
+  /**
+   * 引导操作脚本设置。
+   */
+  PreExecutedFileSettings?: Array<PreExecuteFileSettings>
+  /**
+   * 扩容的Task节点数量。
+   */
+  TaskCount?: number
+  /**
+   * 扩容的Core节点数量。
+   */
+  CoreCount?: number
+  /**
+   * 扩容时不需要安装的进程。
+   */
+  UnNecessaryNodeList?: Array<number | bigint>
+  /**
+   * 扩容的Router节点数量。
+   */
+  RouterCount?: number
+  /**
+   * 部署的服务。
+<li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li>
+<li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
+   */
+  SoftDeployInfo?: Array<number | bigint>
+  /**
+   * 启动的进程。
+   */
+  ServiceNodeInfo?: Array<number | bigint>
+  /**
+   * 分散置放群组ID列表，当前仅支持指定一个。
+   */
+  DisasterRecoverGroupIds?: Array<string>
+  /**
+   * 扩容节点绑定标签列表。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+   */
+  HardwareResourceType?: string
+  /**
+   * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
+   */
+  PodSpec?: PodSpec
+  /**
+   * 使用clickhouse集群扩容时，选择的机器分组名称
+   */
+  ClickHouseClusterName?: string
+  /**
+   * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+   */
+  ClickHouseClusterType?: string
+  /**
+   * 规则扩容指定 yarn node label
+   */
+  YarnNodeLabel?: string
+  /**
+   * POD自定义权限和自定义参数
+   */
+  PodParameter?: PodParameter
+  /**
+   * 扩容的Master节点的数量。
+使用clickhouse集群扩容时，该参数不生效。
+使用kafka集群扩容时，该参数不生效。
+当HardwareResourceType=POD时，该参数不生效。
+   */
+  MasterCount?: number
+  /**
+   * 扩容后是否启动服务，true：启动，false：不启动
+   */
+  StartServiceAfterScaleOut?: string
+  /**
+   * 可用区，默认是集群的主可用区
+   */
+  ZoneId?: number
+  /**
+   * 子网，默认是集群创建时的子网
+   */
+  SubnetId?: string
+  /**
+   * 预设配置组
+   */
+  ScaleOutServiceConfAssign?: string
+  /**
+   * 0表示关闭自动续费，1表示开启自动续费
+   */
+  AutoRenew?: number
+  /**
+   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   */
+  ResourceBaseType?: string
+  /**
+   * 计算资源id
+   */
+  ComputeResourceId?: string
+}
+
+/**
  * Pod资源售卖规格
  */
 export interface PodSaleSpec {
@@ -564,6 +693,16 @@ export interface PersistentVolumeContext {
    * 云盘额外性能
    */
   ExtraPerformance?: number
+}
+
+/**
+ * TerminateTasks返回参数结构体
+ */
+export interface TerminateTasksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1821,132 +1960,71 @@ export interface CreateCloudInstanceResponse {
 }
 
 /**
- * ScaleOutInstance请求参数结构体
+ * RunJobFlow请求参数结构体
  */
-export interface ScaleOutInstanceRequest {
+export interface RunJobFlowRequest {
   /**
-   * 扩容的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   * 作业名称。
    */
-  TimeUnit: string
+  Name: string
   /**
-   * 扩容的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   * 是否新创建集群。
+true，新创建集群，则使用Instance中的参数进行集群创建。
+false，使用已有集群，则通过InstanceId传入。
    */
-  TimeSpan: number
+  CreateCluster: boolean
   /**
-   * 实例ID。
+   * 作业流程执行步骤。
    */
-  InstanceId: string
+  Steps: Array<Step>
   /**
-   * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
+   * 作业流程正常完成时，集群的处理方式，可选择:
+Terminate 销毁集群。
+Reserve 保留集群。
    */
-  PayMode: number
+  InstancePolicy: string
   /**
-   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
+   * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
+   */
+  ProductVersion?: string
+  /**
+   * 只在CreateCluster为true时生效。
+true 表示安装kerberos，false表示不安装kerberos。
+   */
+  SecurityClusterFlag?: boolean
+  /**
+   * 只在CreateCluster为true时生效。
+新建集群时，要安装的软件列表。
+   */
+  Software?: Array<string>
+  /**
+   * 引导脚本。
+   */
+  BootstrapActions?: Array<BootstrapAction>
+  /**
+   * 指定配置创建集群。
+   */
+  Configurations?: Array<Configuration>
+  /**
+   * 作业日志保存地址。
+   */
+  LogUri?: string
+  /**
+   * 只在CreateCluster为false时生效。
+   */
+  InstanceId?: string
+  /**
+   * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
+   */
+  ApplicationRole?: string
+  /**
+   * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
    */
   ClientToken?: string
   /**
-   * 引导操作脚本设置。
+   * 只在CreateCluster为true时生效，使用该配置创建集群。
    */
-  PreExecutedFileSettings?: Array<PreExecuteFileSettings>
-  /**
-   * 扩容的Task节点数量。
-   */
-  TaskCount?: number
-  /**
-   * 扩容的Core节点数量。
-   */
-  CoreCount?: number
-  /**
-   * 扩容时不需要安装的进程。
-   */
-  UnNecessaryNodeList?: Array<number | bigint>
-  /**
-   * 扩容的Router节点数量。
-   */
-  RouterCount?: number
-  /**
-   * 部署的服务。
-<li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li>
-<li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
-   */
-  SoftDeployInfo?: Array<number | bigint>
-  /**
-   * 启动的进程。
-   */
-  ServiceNodeInfo?: Array<number | bigint>
-  /**
-   * 分散置放群组ID列表，当前仅支持指定一个。
-   */
-  DisasterRecoverGroupIds?: Array<string>
-  /**
-   * 扩容节点绑定标签列表。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
-   */
-  HardwareResourceType?: string
-  /**
-   * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
-   */
-  PodSpec?: PodSpec
-  /**
-   * 使用clickhouse集群扩容时，选择的机器分组名称
-   */
-  ClickHouseClusterName?: string
-  /**
-   * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
-   */
-  ClickHouseClusterType?: string
-  /**
-   * 规则扩容指定 yarn node label
-   */
-  YarnNodeLabel?: string
-  /**
-   * POD自定义权限和自定义参数
-   */
-  PodParameter?: PodParameter
-  /**
-   * 扩容的Master节点的数量。
-使用clickhouse集群扩容时，该参数不生效。
-使用kafka集群扩容时，该参数不生效。
-当HardwareResourceType=POD时，该参数不生效。
-   */
-  MasterCount?: number
-  /**
-   * 扩容后是否启动服务，true：启动，false：不启动
-   */
-  StartServiceAfterScaleOut?: string
-  /**
-   * 可用区，默认是集群的主可用区
-   */
-  ZoneId?: number
-  /**
-   * 子网，默认是集群创建时的子网
-   */
-  SubnetId?: string
-  /**
-   * 预设配置组
-   */
-  ScaleOutServiceConfAssign?: string
-  /**
-   * 0表示关闭自动续费，1表示开启自动续费
-   */
-  AutoRenew?: number
-  /**
-   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
-   */
-  ResourceBaseType?: string
-  /**
-   * 计算资源id
-   */
-  ComputeResourceId?: string
+  Instance?: ClusterSetting
 }
 
 /**
@@ -3844,6 +3922,36 @@ export interface ModifySLInstanceResponse {
 }
 
 /**
+ * 设置巡检任务配置
+ */
+export interface InspectionTaskSettings {
+  /**
+   * 巡检任务的唯一标记
+   */
+  TaskType: string
+  /**
+   * 巡检任务组名称
+   */
+  Group?: string
+  /**
+   * 巡检任务名称
+   */
+  Name?: string
+  /**
+   * 巡检任务参数设置
+   */
+  TaskSettings?: Array<TaskSettings>
+  /**
+   * 是否选中，”true“ ”false“
+   */
+  Selected?: string
+  /**
+   * 是否开启监控
+   */
+  Enable?: string
+}
+
+/**
  * SyncPodState返回参数结构体
  */
 export interface SyncPodStateResponse {
@@ -4980,6 +5088,28 @@ export interface DescribeNodeResourceConfigFastRequest {
 }
 
 /**
+ * 巡检任务参数
+ */
+export interface TaskSettings {
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
+   * 参数值
+   */
+  Value?: string
+  /**
+   * 参数唯一标记
+   */
+  Key?: string
+  /**
+   * 是否可编辑，”true" "false"
+   */
+  Editable?: string
+}
+
+/**
  * 指标tag
  */
 export interface MetricTags {
@@ -5072,71 +5202,21 @@ export interface LoginSettings {
 }
 
 /**
- * RunJobFlow请求参数结构体
+ * ModifyInspectionSettings返回参数结构体
  */
-export interface RunJobFlowRequest {
+export interface ModifyInspectionSettingsResponse {
   /**
-   * 作业名称。
+   * 返回值描述
    */
-  Name: string
+  Info?: string
   /**
-   * 是否新创建集群。
-true，新创建集群，则使用Instance中的参数进行集群创建。
-false，使用已有集群，则通过InstanceId传入。
+   * 返回成功修改的巡检任务Id
    */
-  CreateCluster: boolean
+  JobId?: string
   /**
-   * 作业流程执行步骤。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Steps: Array<Step>
-  /**
-   * 作业流程正常完成时，集群的处理方式，可选择:
-Terminate 销毁集群。
-Reserve 保留集群。
-   */
-  InstancePolicy: string
-  /**
-   * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
-   */
-  ProductVersion?: string
-  /**
-   * 只在CreateCluster为true时生效。
-true 表示安装kerberos，false表示不安装kerberos。
-   */
-  SecurityClusterFlag?: boolean
-  /**
-   * 只在CreateCluster为true时生效。
-新建集群时，要安装的软件列表。
-   */
-  Software?: Array<string>
-  /**
-   * 引导脚本。
-   */
-  BootstrapActions?: Array<BootstrapAction>
-  /**
-   * 指定配置创建集群。
-   */
-  Configurations?: Array<Configuration>
-  /**
-   * 作业日志保存地址。
-   */
-  LogUri?: string
-  /**
-   * 只在CreateCluster为false时生效。
-   */
-  InstanceId?: string
-  /**
-   * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
-   */
-  ApplicationRole?: string
-  /**
-   * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
-   */
-  ClientToken?: string
-  /**
-   * 只在CreateCluster为true时生效，使用该配置创建集群。
-   */
-  Instance?: ClusterSetting
+  RequestId?: string
 }
 
 /**
@@ -9193,13 +9273,49 @@ export interface EmrPrice {
 }
 
 /**
- * TerminateTasks返回参数结构体
+ * ModifyInspectionSettings请求参数结构体
  */
-export interface TerminateTasksResponse {
+export interface ModifyInspectionSettingsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 巡检类型，FixedTime/RealTime
+   */
+  Type: string
+  /**
+   * 任务配置
+   */
+  Settings: Array<InspectionTaskSettings>
+  /**
+   * 开始时间戳
+   */
+  StartTime?: number
+  /**
+   * 结束时间戳
+   */
+  EndTime?: number
+  /**
+   * 巡检周期，eg EveryDay EveryWeek EveryMonth
+   */
+  Strategy?: string
+  /**
+   * 每天的开始的时间
+   */
+  Clock?: string
+  /**
+   * 每周的周几
+   */
+  DayOfWeek?: string
+  /**
+   * 每月的第几号
+   */
+  DayOfMonth?: string
+  /**
+   * 巡检作业Id
+   */
+  JobId?: string
 }
 
 /**
