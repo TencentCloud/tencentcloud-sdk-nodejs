@@ -1,7 +1,7 @@
-const tencentcloud = require("tencentcloud-sdk-nodejs-hcm")
+const { hcm } = require("tencentcloud-sdk-nodejs-hcm")
 
 // 导入对应产品模块的client models
-const HcmClient = tencentcloud.hcm.v20181106.Client
+const HcmClient = hcm.v20181106.Client
 
 // 实例化要请求产品的client对象。profile可选。
 const client = new HcmClient({
