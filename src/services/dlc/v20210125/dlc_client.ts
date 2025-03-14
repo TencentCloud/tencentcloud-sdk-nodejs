@@ -241,11 +241,13 @@ import {
   UpdateDataEngineResponse,
   DescribeTasksOverviewRequest,
   TPartition,
+  DescribeTaskMonitorInfosRequest,
   LakeFsInfo,
   QueryResultRequest,
   CheckDataEngineImageCanBeRollbackRequest,
   CreateTaskRequest,
   CreateTableRequest,
+  TaskMonitorInfo,
   DescribeSparkSessionBatchSqlLogRequest,
   WorkGroupIdSetOfUserId,
   DescribeUpdatableDataEnginesRequest,
@@ -260,6 +262,7 @@ import {
   DatasourceConnectionInfo,
   DescribeDataEngineImageVersionsRequest,
   BindWorkGroupsToUserResponse,
+  AssignMangedTablePropertiesResponse,
   SparkSessionBatchLog,
   DeleteScriptRequest,
   AddDMSPartitionsRequest,
@@ -281,7 +284,7 @@ import {
   DMSPartition,
   WorkGroupDetailInfo,
   DescribeThirdPartyAccessUserRequest,
-  AssignMangedTablePropertiesResponse,
+  OptimizerEngineInfo,
   UpdateDataEngineConfigResponse,
   DataEngineImageVersion,
   MysqlInfo,
@@ -308,6 +311,7 @@ import {
   DeleteCHDFSBindingProductResponse,
   CancelNotebookSessionStatementBatchRequest,
   DescribeLakeFsTaskResultResponse,
+  DescribeTaskMonitorInfosResponse,
   DescribeTasksCostInfoRequest,
   UserDetailInfo,
   DescribeTaskResultResponse,
@@ -501,13 +505,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ListTaskJobLogName）用于获取spark-jar日志名称列表
+   * 查询任务监控指标信息
    */
-  async ListTaskJobLogName(
-    req: ListTaskJobLogNameRequest,
-    cb?: (error: string, rep: ListTaskJobLogNameResponse) => void
-  ): Promise<ListTaskJobLogNameResponse> {
-    return this.request("ListTaskJobLogName", req, cb)
+  async DescribeTaskMonitorInfos(
+    req: DescribeTaskMonitorInfosRequest,
+    cb?: (error: string, rep: DescribeTaskMonitorInfosResponse) => void
+  ): Promise<DescribeTaskMonitorInfosResponse> {
+    return this.request("DescribeTaskMonitorInfos", req, cb)
   }
 
   /**
@@ -771,13 +775,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
+   * 本接口（ListTaskJobLogName）用于获取spark-jar日志名称列表
    */
-  async ModifySparkAppBatch(
-    req: ModifySparkAppBatchRequest,
-    cb?: (error: string, rep: ModifySparkAppBatchResponse) => void
-  ): Promise<ModifySparkAppBatchResponse> {
-    return this.request("ModifySparkAppBatch", req, cb)
+  async ListTaskJobLogName(
+    req: ListTaskJobLogNameRequest,
+    cb?: (error: string, rep: ListTaskJobLogNameResponse) => void
+  ): Promise<ListTaskJobLogNameResponse> {
+    return this.request("ListTaskJobLogName", req, cb)
   }
 
   /**
@@ -804,7 +808,7 @@ export class Client extends AbstractClient {
    * 添加数据优化资源
    */
   async AddOptimizerEngines(
-    req?: AddOptimizerEnginesRequest,
+    req: AddOptimizerEnginesRequest,
     cb?: (error: string, rep: AddOptimizerEnginesResponse) => void
   ): Promise<AddOptimizerEnginesResponse> {
     return this.request("AddOptimizerEngines", req, cb)
@@ -1738,6 +1742,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteThirdPartyAccessUserResponse) => void
   ): Promise<DeleteThirdPartyAccessUserResponse> {
     return this.request("DeleteThirdPartyAccessUser", req, cb)
+  }
+
+  /**
+   * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
+   */
+  async ModifySparkAppBatch(
+    req: ModifySparkAppBatchRequest,
+    cb?: (error: string, rep: ModifySparkAppBatchResponse) => void
+  ): Promise<ModifySparkAppBatchResponse> {
+    return this.request("ModifySparkAppBatch", req, cb)
   }
 
   /**

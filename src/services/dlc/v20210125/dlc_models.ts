@@ -5746,6 +5746,36 @@ export interface TPartition {
 }
 
 /**
+ * DescribeTaskMonitorInfos请求参数结构体
+ */
+export interface DescribeTaskMonitorInfosRequest {
+  /**
+   * 任务ID列表，上限50个
+   */
+  TaskIdList?: Array<string>
+  /**
+   * 引擎名称
+   */
+  HouseName?: string
+  /**
+   * 任务创建时间的起始时间
+   */
+  CreateTimeStart?: string
+  /**
+   * 任务创建时间的结束时间
+   */
+  CreateTimeEnd?: string
+  /**
+   * 每一页条数
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+}
+
+/**
  * 描述DLC托管存储基本信息
  */
 export interface LakeFsInfo {
@@ -5849,6 +5879,40 @@ export interface CreateTableRequest {
    * 数据表配置信息
    */
   TableInfo: TableInfo
+}
+
+/**
+ * 任务监控信息
+ */
+export interface TaskMonitorInfo {
+  /**
+   * 任务id
+   */
+  TaskId?: string
+  /**
+   * 引擎名称
+   */
+  HouseName?: string
+  /**
+   * sql语句
+   */
+  QuerySQL?: string
+  /**
+   * 任务时间
+   */
+  CreateTime?: string
+  /**
+   * 执行时间
+   */
+  UsedTime?: string
+  /**
+   * 数据扫描量
+   */
+  DataAmount?: string
+  /**
+   * 指标信息
+   */
+  QueryStats?: string
 }
 
 /**
@@ -6188,6 +6252,20 @@ export interface DescribeDataEngineImageVersionsRequest {
  * BindWorkGroupsToUser返回参数结构体
  */
 export interface BindWorkGroupsToUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AssignMangedTableProperties返回参数结构体
+ */
+export interface AssignMangedTablePropertiesResponse {
+  /**
+   * 分配的原生表表属性
+   */
+  Properties?: Array<Property>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6774,17 +6852,24 @@ export interface WorkGroupDetailInfo {
 export type DescribeThirdPartyAccessUserRequest = null
 
 /**
- * AssignMangedTableProperties返回参数结构体
+ * 数据优化引擎信息
  */
-export interface AssignMangedTablePropertiesResponse {
+export interface OptimizerEngineInfo {
   /**
-   * 分配的原生表表属性
+   * 引擎资源名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Properties?: Array<Property>
+  HouseName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 引擎资源ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  HouseId: string
+  /**
+   * 该参数仅针对spark作业引擎有效，用于执行数据优化任务的资源大小，不填时将采用该引擎所有资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HouseSize?: number
 }
 
 /**
@@ -7451,6 +7536,24 @@ export interface DescribeLakeFsTaskResultResponse {
    * 路径的访问实例
    */
   AccessToken?: LakeFileSystemToken
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskMonitorInfos返回参数结构体
+ */
+export interface DescribeTaskMonitorInfosResponse {
+  /**
+   * 任务监控信息列表
+   */
+  TaskMonitorInfoList?: Array<TaskMonitorInfo>
+  /**
+   * 任务总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8710,7 +8813,24 @@ export interface RollbackDataEngineImageResponse {
 /**
  * AddOptimizerEngines请求参数结构体
  */
-export type AddOptimizerEnginesRequest = null
+export interface AddOptimizerEnginesRequest {
+  /**
+   * 数据目录名称
+   */
+  Catalog: string
+  /**
+   * 引擎信息列表
+   */
+  Engines: Array<OptimizerEngineInfo>
+  /**
+   * 数据库名称
+   */
+  Database?: string
+  /**
+   * 数据表名称
+   */
+  Table?: string
+}
 
 /**
  * 数据表分块信息。

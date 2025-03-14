@@ -30,13 +30,45 @@ export interface Canvas {
 }
 
 /**
- * StopOnlineRecord返回参数结构体
+ * CreateVideoGenerationTask请求参数结构体
  */
-export interface StopOnlineRecordResponse {
+export interface CreateVideoGenerationTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实时录制任务的TaskId
    */
-  RequestId?: string
+  OnlineRecordTaskId: string
+  /**
+   * 客户的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * 视频生成的白板参数，例如白板宽高等。
+
+此参数与开始录制接口提供的Whiteboard参数互斥，在本接口与开始录制接口都提供了Whiteboard参数时，优先使用本接口指定的Whiteboard参数进行视频生成，否则使用开始录制接口提供的Whiteboard参数进行视频生成。
+   */
+  Whiteboard?: Whiteboard
+  /**
+   * 视频拼接参数
+
+此参数与开始录制接口提供的Concat参数互斥，在本接口与开始录制接口都提供了Concat参数时，优先使用本接口指定的Concat参数进行视频拼接，否则使用开始录制接口提供的Concat参数进行视频拼接。
+   */
+  Concat?: Concat
+  /**
+   * 视频生成混流参数
+
+此参数与开始录制接口提供的MixStream参数互斥，在本接口与开始录制接口都提供了MixStream参数时，优先使用本接口指定的MixStream参数进行视频混流，否则使用开始录制接口提供的MixStream参数进行视频拼混流。
+   */
+  MixStream?: MixStream
+  /**
+   * 视频生成控制参数，用于更精细地指定需要生成哪些流，某一路流是否禁用音频，是否只录制小画面等
+
+此参数与开始录制接口提供的RecordControl参数互斥，在本接口与开始录制接口都提供了RecordControl参数时，优先使用本接口指定的RecordControl参数进行视频生成控制，否则使用开始录制接口提供的RecordControl参数进行视频拼生成控制。
+   */
+  RecordControl?: RecordControl
+  /**
+   * 内部参数
+   */
+  ExtraData?: string
 }
 
 /**
@@ -54,42 +86,6 @@ export interface SetVideoGenerationTaskCallbackKeyRequest {
 }
 
 /**
- * DescribeTIWRoomDailyUsage请求参数结构体
- */
-export interface DescribeTIWRoomDailyUsageRequest {
-  /**
-   * 互动白板应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 需要查询的子产品用量，支持传入以下值
-- sp_tiw_board: 互动白板时长，单位为分钟
-- sp_tiw_ric: 实时录制时长，单位分钟
-   */
-  SubProduct: string
-  /**
-   * 开始时间，格式YYYY-MM-DD，查询结果里包括该天数据
-   */
-  StartTime: string
-  /**
-   * 结束时间，格式YYYY-MM-DD，查询结果里包括该天数据，单次查询统计区间最多不能超过31天。
-   */
-  EndTime: string
-  /**
-   * 需要查询的房间ID列表，不填默认查询全部房间
-   */
-  RoomIDs?: Array<number | bigint>
-  /**
-   * 查询偏移量，默认为0
-   */
-  Offset?: number
-  /**
-   * 每次查询返回条目限制，默认为20
-   */
-  Limit?: number
-}
-
-/**
  * DescribeWhiteboardPush请求参数结构体
  */
 export interface DescribeWhiteboardPushRequest {
@@ -104,139 +100,9 @@ export interface DescribeWhiteboardPushRequest {
 }
 
 /**
- * DescribeWhiteboardPushSearch返回参数结构体
- */
-export interface DescribeWhiteboardPushSearchResponse {
-  /**
-   * 推流任务搜索结果集合
-   */
-  WhiteboardPushTaskSet: Array<WhiteboardPushTaskSearchResult>
-  /**
-   * 推流总任务数
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ResumeOnlineRecord返回参数结构体
  */
 export interface ResumeOnlineRecordResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 互动白板用量信息
- */
-export interface UsageDataItem {
-  /**
-   * 日期，格式为YYYY-MM-DD
-   */
-  Time: string
-  /**
-   * 白板应用SDKAppID
-   */
-  SdkAppId: number
-  /**
-   * 互动白板子产品，请求参数传入的一致
-- sp_tiw_board: 互动白板时长
-- sp_tiw_dt: 动态转码页数
-- sp_tiw_st: 静态转码页数
-- sp_tiw_ric: 实时录制时长
-   */
-  SubProduct: string
-  /**
-   * 用量值
-- 静态转码、动态转码单位为页
-- 白板时长、实时录制时长单位为分钟
-   */
-  Value: number
-}
-
-/**
- * DescribeWhiteboardApplicationConfig返回参数结构体
- */
-export interface DescribeWhiteboardApplicationConfigResponse {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 白板应用任务相关配置
-   */
-  Configs: Array<WhiteboardApplicationConfig>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 白板推流任务结果
- */
-export interface WhiteboardPushResult {
-  /**
-   * AUTO - 自动停止推流， USER_CALL - 用户主动调用停止推流
-   */
-  FinishReason: string
-  /**
-   * 异常数
-   */
-  ExceptionCnt: number
-  /**
-   * 房间号
-   */
-  RoomId: number
-  /**
-   * IM群组ID
-   */
-  GroupId: string
-  /**
-   * 推流真实开始时间
-   */
-  PushStartTime: number
-  /**
-   * 推流结束时间
-   */
-  PushStopTime: number
-  /**
-   * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
-   */
-  IMSyncTime: number
-  /**
-   * 任务失败错误码
-   */
-  ErrorCode: number
-  /**
-   * 错误信息
-   */
-  ErrorMsg: string
-}
-
-/**
- * CreateSnapshotTask返回参数结构体
- */
-export interface CreateSnapshotTaskResponse {
-  /**
-   * 白板板书生成任务ID，只有任务创建成功的时候才会返回此字段
-   */
-  TaskID: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyApplication返回参数结构体
- */
-export interface ModifyApplicationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -268,31 +134,54 @@ export interface CreateTranscodeResponse {
 }
 
 /**
- * DescribeUserResources返回参数结构体
+ * 视频信息
  */
-export interface DescribeUserResourcesResponse {
+export interface VideoInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 视频开始播放的时间（单位：毫秒）
    */
-  RequestId?: string
-}
-
-/**
- * 日志查询里返回的白板用户数据
- */
-export interface UserListItem {
+  VideoPlayTime: number
   /**
-   * 房间内的用户ID
+   * 视频大小（字节）
+   */
+  VideoSize: number
+  /**
+   * 视频格式
+   */
+  VideoFormat: string
+  /**
+   * 视频播放时长（单位：毫秒）
+   */
+  VideoDuration: number
+  /**
+   * 视频文件URL
+   */
+  VideoUrl: string
+  /**
+   * 视频文件Id
+   */
+  VideoId: string
+  /**
+   * 视频流类型 
+- 0：摄像头视频 
+- 1：屏幕分享视频
+- 2：白板视频 
+- 3：混流视频
+- 4：纯音频（mp3)
+   */
+  VideoType: number
+  /**
+   * 摄像头/屏幕分享视频所属用户的 Id（白板视频为空、混流视频tic_mixstream_房间号_混流布局类型、辅路视频tic_substream_用户Id）
    */
   UserId: string
   /**
-   * 用户在查询时间段内最早出现的时间，Unix时间戳，单位毫秒
+   * 视频分辨率的宽
    */
-  StartTime: number
+  Width: number
   /**
-   * 用户在查询时间段内最晚出现的时间，Unix时间戳，单位毫秒
+   * 视频分辨率的高
    */
-  EndTime: number
+  Height: number
 }
 
 /**
@@ -367,83 +256,17 @@ export interface Interrupt {
 }
 
 /**
- * CreateApplication请求参数结构体
+ * DescribeOnlineRecord请求参数结构体
  */
-export interface CreateApplicationRequest {
-  /**
-   * 应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * App名字
-   */
-  AppName?: string
-  /**
-   * 创建IM应用需要的SKey
-   */
-  SKey?: string
-  /**
-   * 创建IM应用需要的TinyId
-   */
-  TinyId?: string
-  /**
-   * 需要绑定的标签列表
-   */
-  TagList?: Array<Tag>
-}
-
-/**
- * 日志查询里返回的白板房间数据
- */
-export interface RoomListItem {
-  /**
-   * 房间ID
-   */
-  RoomId: string
-  /**
-   * 房间在查询时间段内最早出现的时间，Unix时间戳，单位毫秒
-   */
-  StartTime: number
-  /**
-   * 房间在查询时间段内最晚出现的时间，Unix时间戳，单位毫秒
-   */
-  EndTime: number
-  /**
-   * 房间里成员数
-   */
-  UserNumber: number
-}
-
-/**
- * ModifyWhiteboardBucketConfig请求参数结构体
- */
-export interface ModifyWhiteboardBucketConfigRequest {
+export interface DescribeOnlineRecordRequest {
   /**
    * 客户的SdkAppId
    */
   SdkAppId: number
   /**
-   * 需要查询的任务类型
-recording: 实时录制
-transcode: 文档转码
+   * 实时录制任务Id
    */
-  TaskType: string
-  /**
-   * COS存储桶名字
-   */
-  BucketName: string
-  /**
-   * COS存储桶地域
-   */
-  BucketLocation: string
-  /**
-   * 存储桶里资源前缀
-   */
-  BucketPrefix: string
-  /**
-   * 返回Url域名
-   */
-  ResultDomain: string
+  TaskId: string
 }
 
 /**
@@ -457,114 +280,13 @@ export interface SetOnlineRecordCallbackKeyResponse {
 }
 
 /**
- * DescribeRecordSearch返回参数结构体
+ * StopOnlineRecord返回参数结构体
  */
-export interface DescribeRecordSearchResponse {
-  /**
-   * 录制任务搜索结果集合
-   */
-  RecordTaskSet: Array<RecordTaskSearchResult>
-  /**
-   * 录制总任务数
-   */
-  TotalCount: number
+export interface StopOnlineRecordResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeAPIService请求参数结构体
- */
-export interface DescribeAPIServiceRequest {
-  /**
-   * 目前支持的Service为cos:GetService，cdn:DescribeDomainsConfig
-   */
-  Service: string
-  /**
-   * JSON格式的请求参数
-   */
-  Data?: string
-}
-
-/**
- * DescribeQualityMetrics请求参数结构体
- */
-export interface DescribeQualityMetricsRequest {
-  /**
-   * 白板应用的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 开始时间，Unix时间戳，单位秒，时间跨度不能超过7天
-   */
-  StartTime: number
-  /**
-   * 结束时间，Unix时间戳，单位秒，时间跨度不能超过7天
-   */
-  EndTime: number
-  /**
-   * 查询的指标，目前支持以下值
-  - image_load_total_count: 图片加载总数（单位，次）
-  - image_load_fail_count: 图片加载失败数量（单位，次）
-  - image_load_success_rate: 图片加载成功率（百分比）
-  - ppt_load_total_count: PPT加载总数（单位，次）
-  - ppt_load_fail_count: PPT加载失败总数（单位，次）
-  - ppt_load_success_rate: PPT加载成功率（单位，百分比）
-  - verify_sdk_total_count: 白板鉴权总次数（单位，次）
-  - verify_sdk_fail_count: 白板鉴权失败次数（单位，次）
-  - verify_sdk_success_rate: 白板鉴权成功率（单位，百分比）
-  - verify_sdk_in_one_second_rate: 白板鉴权秒开率（单位，百分比）
-  - verify_sdk_cost_avg: 白板鉴权耗时平均时间（单位，毫秒）
-   */
-  Metric: string
-  /**
-   * 聚合的时间维度，目前只支持1小时，输入值为"1h"
-   */
-  Interval?: string
-}
-
-/**
- * CreateVideoGenerationTask请求参数结构体
- */
-export interface CreateVideoGenerationTaskRequest {
-  /**
-   * 录制任务的TaskId
-   */
-  OnlineRecordTaskId: string
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 视频生成的白板参数，例如白板宽高等。
-
-此参数与开始录制接口提供的Whiteboard参数互斥，在本接口与开始录制接口都提供了Whiteboard参数时，优先使用本接口指定的Whiteboard参数进行视频生成，否则使用开始录制接口提供的Whiteboard参数进行视频生成。
-   */
-  Whiteboard?: Whiteboard
-  /**
-   * 视频拼接参数
-
-此参数与开始录制接口提供的Concat参数互斥，在本接口与开始录制接口都提供了Concat参数时，优先使用本接口指定的Concat参数进行视频拼接，否则使用开始录制接口提供的Concat参数进行视频拼接。
-   */
-  Concat?: Concat
-  /**
-   * 视频生成混流参数
-
-此参数与开始录制接口提供的MixStream参数互斥，在本接口与开始录制接口都提供了MixStream参数时，优先使用本接口指定的MixStream参数进行视频混流，否则使用开始录制接口提供的MixStream参数进行视频拼混流。
-   */
-  MixStream?: MixStream
-  /**
-   * 视频生成控制参数，用于更精细地指定需要生成哪些流，某一路流是否禁用音频，是否只录制小画面等
-
-此参数与开始录制接口提供的RecordControl参数互斥，在本接口与开始录制接口都提供了RecordControl参数时，优先使用本接口指定的RecordControl参数进行视频生成控制，否则使用开始录制接口提供的RecordControl参数进行视频拼生成控制。
-   */
-  RecordControl?: RecordControl
-  /**
-   * 内部参数
-   */
-  ExtraData?: string
 }
 
 /**
@@ -575,24 +297,6 @@ export interface DescribeTranscodeCallbackRequest {
    * 应用的SdkAppId
    */
   SdkAppId: number
-}
-
-/**
- * DescribeTranscodeSearch返回参数结构体
- */
-export interface DescribeTranscodeSearchResponse {
-  /**
-   * 转码任务搜索结果集合
-   */
-  TranscodeTaskSet: Array<TranscodeTaskSearchResult>
-  /**
-   * 转码总任务数
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -620,41 +324,9 @@ export interface SetWhiteboardPushCallbackKeyResponse {
 }
 
 /**
- * DescribeRoomList请求参数结构体
- */
-export interface DescribeRoomListRequest {
-  /**
-   * 白板应用的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间
-   */
-  TimeRange: Array<number | bigint>
-  /**
-   * 额外的查询条件
-   */
-  Query?: string
-  /**
-   * 返回最大的数据条数，默认1000
-   */
-  MaxSize?: number
-}
-
-/**
  * SetWhiteboardPushCallback返回参数结构体
  */
 export interface SetWhiteboardPushCallbackResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ApplyTiwTrial返回参数结构体
- */
-export interface ApplyTiwTrialResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -728,13 +400,60 @@ export interface DescribeRunningTasksResponse {
 }
 
 /**
- * DescribeApplicationUsage返回参数结构体
+ * DescribeWhiteboardPush返回参数结构体
  */
-export interface DescribeApplicationUsageResponse {
+export interface DescribeWhiteboardPushResponse {
   /**
-   * 画图所需的用量数据
+   * 推流结束原因，
+- AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
+- USER_CALL: 主动调用了停止推流接口
+- EXCEPTION: 推流异常结束
    */
-  Data: Array<DataItem>
+  FinishReason?: string
+  /**
+   * 需要查询结果的白板推流任务Id
+   */
+  TaskId?: string
+  /**
+   * 推流任务状态
+- PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
+- PUSHING: 表示推流已开始
+- STOPPED: 表示推流已停止
+   */
+  Status?: string
+  /**
+   * 房间号
+   */
+  RoomId?: number
+  /**
+   * 白板的群组 Id
+   */
+  GroupId?: string
+  /**
+   * 推流用户Id
+   */
+  PushUserId?: string
+  /**
+   * 实际开始推流时间，Unix 时间戳，单位秒
+   */
+  PushStartTime?: number
+  /**
+   * 实际停止推流时间，Unix 时间戳，单位秒
+   */
+  PushStopTime?: number
+  /**
+   * 推流过程中出现异常的次数
+   */
+  ExceptionCnt?: number
+  /**
+   * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
+   */
+  IMSyncTime?: number
+  /**
+   * 备份推流任务结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Backup?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -742,31 +461,17 @@ export interface DescribeApplicationUsageResponse {
 }
 
 /**
- * DescribeAPIService返回参数结构体
+ * SetVideoGenerationTaskCallback请求参数结构体
  */
-export interface DescribeAPIServiceResponse {
+export interface SetVideoGenerationTaskCallbackRequest {
   /**
-   * Json格式的响应数据
+   * 客户的SdkAppId
    */
-  ResponseData?: string
+  SdkAppId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
    */
-  RequestId?: string
-}
-
-/**
- * 查询指标返回的时间序列
- */
-export interface TimeValue {
-  /**
-   * Unix时间戳，单位秒
-   */
-  Time: number
-  /**
-   * 查询指标对应当前时间的值
-   */
-  Value: number
+  Callback: string
 }
 
 /**
@@ -781,86 +486,6 @@ export interface DescribeWarningCallbackResponse {
    * 告警回调鉴权密钥
    */
   CallbackKey?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 实时录制结果
- */
-export interface RecordTaskResult {
-  /**
-   * AUTO - 自动停止录制， USER_CALL - 用户主动调用停止录制
-   */
-  FinishReason: string
-  /**
-   * 异常数
-   */
-  ExceptionCnt: number
-  /**
-   * 房间号
-   */
-  RoomId: number
-  /**
-   * 分组
-   */
-  GroupId: string
-  /**
-   * 录制真实开始时间
-   */
-  RecordStartTime: number
-  /**
-   * 录制结束时间
-   */
-  RecordStopTime: number
-  /**
-   * 录制总时长
-   */
-  TotalTime: number
-  /**
-   * 视频信息列表
-   */
-  VideoInfos: Array<VideoInfo>
-  /**
-   * 被忽略的视频时间段
-   */
-  OmittedDurations: Array<OmittedDuration>
-  /**
-   * 详情
-   */
-  Details: string
-  /**
-   * 任务失败错误码
-   */
-  ErrorCode: number
-  /**
-   * 错误信息
-   */
-  ErrorMsg: string
-}
-
-/**
- * DescribeWhiteboardBucketConfig请求参数结构体
- */
-export interface DescribeWhiteboardBucketConfigRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 需要查询的任务类型
-recording: 实时录制
-transcode: 文档转码
-   */
-  TaskType: string
-}
-
-/**
- * DescribeUsageSummary返回参数结构体
- */
-export interface DescribeUsageSummaryResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -896,40 +521,6 @@ export interface DescribeRunningTasksRequest {
 }
 
 /**
- * DescribeApplicationUsage请求参数结构体
- */
-export interface DescribeApplicationUsageRequest {
-  /**
-   * 用量开始时间（包括该时间点）
-   */
-  BeginTime: string
-  /**
-   * 用量结束时间（不包括该时间点）
-   */
-  EndTime: string
-  /**
-   * 白板子产品名
-   */
-  SubProduct: string
-  /**
-   * 时间跨度单位
-- MONTHLY：月
-- DAILY：天
-- MINUTELY：分钟
-   */
-  TimeLevel: string
-  /**
-   * 白板应用的SdkAppId
-   */
-  SdkAppId?: number
-  /**
-   * true: 返回加权求和后的用量数据
-false: 返回原始用量数据
-   */
-  IsWeighted?: boolean
-}
-
-/**
  * 白板板书结果
  */
 export interface SnapshotResult {
@@ -956,13 +547,17 @@ export interface SnapshotResult {
 }
 
 /**
- * SetWarningCallback返回参数结构体
+ * DescribeVideoGenerationTask请求参数结构体
  */
-export interface SetWarningCallbackResponse {
+export interface DescribeVideoGenerationTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 客户的SdkAppId
    */
-  RequestId?: string
+  SdkAppId: number
+  /**
+   * 录制视频生成的任务Id
+   */
+  TaskId: string
 }
 
 /**
@@ -1021,52 +616,13 @@ export interface DescribeVideoGenerationTaskResponse {
 }
 
 /**
- * SetPPTCheckCallbackKey请求参数结构体
+ * SetWarningCallback返回参数结构体
  */
-export interface SetPPTCheckCallbackKeyRequest {
+export interface SetWarningCallbackResponse {
   /**
-   * 应用的SdkAppId
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SdkAppId: number
-  /**
-   * 设置回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
-   */
-  CallbackKey: string
-}
-
-/**
- * 画图数据，Time/Value/Details
- */
-export interface DataItem {
-  /**
-   * 时间
-按月格式yyyy-mm
-按天格式yyyy-mm-dd
-按分钟格式 yyyy-mm-dd HH:MM:SS
-   */
-  Time: string
-  /**
-   * 画图所需要的值
-   */
-  Value: number
-  /**
-   * 各个具体指标的详情
-   */
-  Details: Array<Detail>
-}
-
-/**
- * DescribeVideoGenerationTask请求参数结构体
- */
-export interface DescribeVideoGenerationTaskRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 录制视频生成的任务Id
-   */
-  TaskId: string
+  RequestId?: string
 }
 
 /**
@@ -1171,32 +727,6 @@ export interface DescribeTranscodeRequest {
 }
 
 /**
- * DescribeBoardSDKLog返回参数结构体
- */
-export interface DescribeBoardSDKLogResponse {
-  /**
-   * 总共能查到日志条数
-   */
-  Total: number
-  /**
-   * 日志详细内容
-   */
-  Sources: Array<string>
-  /**
-   * 按时间段聚合后每个时间段的日志条数
-   */
-  Buckets: Array<string>
-  /**
-   * 用于递归拉取的上下文Key，下一次请求的时候带上
-   */
-  Context: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * SetOnlineRecordCallback返回参数结构体
  */
 export interface SetOnlineRecordCallbackResponse {
@@ -1243,83 +773,17 @@ export interface DescribeTranscodeCallbackResponse {
 }
 
 /**
- * DescribeUserList返回参数结构体
+ * SetOnlineRecordCallback请求参数结构体
  */
-export interface DescribeUserListResponse {
+export interface SetOnlineRecordCallbackRequest {
   /**
-   * 房间内的用户列表
-   */
-  UserList: Array<UserListItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyAutoRenewFlag返回参数结构体
- */
-export interface ModifyAutoRenewFlagResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeApplicationInfos返回参数结构体
- */
-export interface DescribeApplicationInfosResponse {
-  /**
-   * 应用列表
-   */
-  ApplicationInfos: Array<ApplicationItem>
-  /**
-   * 是否包含所有的应用，0-不包含，1-包含
-   */
-  AllOption: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTIWDailyUsage请求参数结构体
- */
-export interface DescribeTIWDailyUsageRequest {
-  /**
-   * 互动白板应用SdkAppId
+   * 客户的SdkAppId
    */
   SdkAppId: number
   /**
-   * 需要查询的子产品用量，支持传入以下值
-- sp_tiw_board: 互动白板时长，单位为分钟
-- sp_tiw_dt: 动态转码页数，单位页
-- sp_tiw_st: 静态转码页数，单位页
-- sp_tiw_ric: 实时录制时长，单位分钟
-
-注意：动态转码以1:8的比例计算文档转码页数，静态转码以1:1的比例计算文档转码页数
+   * 实时录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
    */
-  SubProduct: string
-  /**
-   * 开始时间，格式YYYY-MM-DD，查询结果里包括该天数据
-   */
-  StartTime: string
-  /**
-   * 结束时间，格式YYYY-MM-DD，查询结果里包括该天数据，单次查询统计区间最多不能超过31天。
-   */
-  EndTime: string
-}
-
-/**
- * DescribeWhiteboardBucketConfig返回参数结构体
- */
-export interface DescribeWhiteboardBucketConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Callback: string
 }
 
 /**
@@ -1353,44 +817,6 @@ export interface MixStream {
 }
 
 /**
- * DescribeBoardSDKLog请求参数结构体
- */
-export interface DescribeBoardSDKLogRequest {
-  /**
-   * 白板应用的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 需要查询日志的白板房间号
-   */
-  RoomId: string
-  /**
-   * 需要查询日志的用户ID
-   */
-  UserId: string
-  /**
-   * 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间
-   */
-  TimeRange: Array<number | bigint>
-  /**
-   * 聚合日志条数查询的桶的时间范围，如5m, 1h, 4h等
-   */
-  AggregationInterval: string
-  /**
-   * 额外的查询条件
-   */
-  Query?: string
-  /**
-   * 是否按时间升序排列
-   */
-  Ascending?: boolean
-  /**
-   * 用于递归拉取的上下文Key，在上一次请求中返回
-   */
-  Context?: string
-}
-
-/**
  * DescribeVideoGenerationTaskCallback请求参数结构体
  */
 export interface DescribeVideoGenerationTaskCallbackRequest {
@@ -1398,20 +824,6 @@ export interface DescribeVideoGenerationTaskCallbackRequest {
    * 应用的SdkAppId
    */
   SdkAppId: number
-}
-
-/**
- * SetVideoGenerationTaskCallback请求参数结构体
- */
-export interface SetVideoGenerationTaskCallbackRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
-   */
-  Callback: string
 }
 
 /**
@@ -1427,16 +839,6 @@ export interface SetWhiteboardPushCallbackKeyRequest {
    */
   CallbackKey: string
 }
-
-/**
- * DescribeTranscodeSearch请求参数结构体
- */
-export type DescribeTranscodeSearchRequest = null
-
-/**
- * ApplyTiwTrial请求参数结构体
- */
-export type ApplyTiwTrialRequest = null
 
 /**
  * 鉴权参数
@@ -1457,24 +859,6 @@ export interface AuthParam {
 }
 
 /**
- * 计费用量数据里，带不同指标Tag的详情
- */
-export interface Detail {
-  /**
-   * 用量指标
-   */
-  TagName: string
-  /**
-   * 用量权重
-   */
-  Weight: number
-  /**
-   * 用量的值
-   */
-  Value: number
-}
-
-/**
  * StartWhiteboardPush请求参数结构体
  */
 export interface StartWhiteboardPushRequest {
@@ -1491,7 +875,7 @@ export interface StartWhiteboardPushRequest {
   RoomId: number
   /**
    * 用于白板推流服务进入白板房间的用户ID。在没有额外指定`IMAuthParam`和`TRTCAuthParam`的情况下，这个用户ID同时会用于IM登录、IM加群、TRTC进房推流等操作。
-用户ID最大长度不能大于60个字节，该用户ID必须是一个单独的未同时在其他地方使用的用户ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该用户ID和其他地方同时在使用的用户ID重复，会导致白板推流服务与其他使用场景帐号互踢，影响正常推流。
+用户ID最大长度不能大于60个字节，该用户ID必须是一个单独的未同时在其他地方使用的用户ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该用户ID和其他地方同时在使用的用户ID重复，会导致白板推流服务与其他使用场景账号互踢，影响正常推流。
    */
   PushUserId: string
   /**
@@ -1626,25 +1010,6 @@ TRTCAppSceneLIVE - 直播场景，即绝大多数时间都是一人直播，偶�
 }
 
 /**
- * SetWarningCallback请求参数结构体
- */
-export interface SetWarningCallbackRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 告警回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。
-回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/90112
-   */
-  Callback: string
-  /**
-   * 设置告警回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
-   */
-  CallbackKey: string
-}
-
-/**
  * DescribeVideoGenerationTaskCallback返回参数结构体
  */
 export interface DescribeVideoGenerationTaskCallbackResponse {
@@ -1660,57 +1025,6 @@ export interface DescribeVideoGenerationTaskCallbackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 实时录制任务搜索结果
- */
-export interface WhiteboardPushTaskSearchResult {
-  /**
-   * 任务唯一ID
-   */
-  TaskId: string
-  /**
-   * 白板推流任务状态
-- PREPARED: 推流在准备阶段
-- PUSHING: 正在推流
-- STOPPED：推流已停止
-   */
-  Status: string
-  /**
-   * 白板推流房间号
-   */
-  RoomId: number
-  /**
-   * 任务创建时间
-   */
-  CreateTime: string
-  /**
-   * 用户应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 白板推流结果
-   */
-  Result: WhiteboardPushResult
-  /**
-   * 白板推流用户ID
-   */
-  PushUserId: string
-}
-
-/**
- * ModifyWhiteboardApplicationConfig请求参数结构体
- */
-export interface ModifyWhiteboardApplicationConfigRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 白板应用任务相关配置
-   */
-  Configs: Array<WhiteboardApplicationConfig>
 }
 
 /**
@@ -1753,7 +1067,7 @@ export interface StartOnlineRecordRequest {
   /**
    * 需要录制的白板房间号，取值范围: (1, 4294967295)。
 
-1. 在没有指定`GroupId`的情况下，实时录制默认以`RoomId`的字符串表达形式作为同步白板信令的IM群组ID（比如`RoomId`为1234，则IM群组ID为"1234"），并加群进行信令同步，请在开始录制前确保相应IM群组已创建完成，否则会导致录制失败。
+1. 在没有指定`GroupId`的情况下，实时录制默认以`RoomId`的字符串表达形式作为同步白板信令的IM群组ID（比如`RoomId`为12358，则IM群组ID为"12358"），并加群进行信令同步，请在开始录制前确保相应IM群组已创建完成，否则会导致录制失败。
 2. 在没有指定`TRTCRoomId`和`TRTCRoomIdStr`的情况下，默认会以`RoomId`作为TRTC房间号进房拉流进行录制。
    */
   RoomId: number
@@ -1841,11 +1155,6 @@ VIDEO_GENERATION_MODE - 视频生成模式（内测中，需邮件申请开通�
 }
 
 /**
- * DescribeUserStatus请求参数结构体
- */
-export type DescribeUserStatusRequest = null
-
-/**
  * DescribeOnlineRecordCallback请求参数结构体
  */
 export interface DescribeOnlineRecordCallbackRequest {
@@ -1853,41 +1162,6 @@ export interface DescribeOnlineRecordCallbackRequest {
    * 应用的SdkAppId
    */
   SdkAppId: number
-}
-
-/**
- * 实时录制任务搜索结果
- */
-export interface RecordTaskSearchResult {
-  /**
-   * 任务唯一ID
-   */
-  TaskId: string
-  /**
-   * 实时录制任务状态
-- PAUSED: 录制已暂停
-- PREPARED: 录制在准备阶段
-- RECORDING: 正在录制
-- STOPPED：录制已停止
-- FINISHED: 录制已结束
-   */
-  Status: string
-  /**
-   * 实时录制房间号
-   */
-  RoomId: number
-  /**
-   * 任务创建时间
-   */
-  CreateTime: string
-  /**
-   * 用户应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 实时录制结果
-   */
-  Result: RecordTaskResult
 }
 
 /**
@@ -1935,28 +1209,6 @@ export interface SetVideoGenerationTaskCallbackResponse {
 }
 
 /**
- * 白板应用
- */
-export interface ApplicationItem {
-  /**
-   * 应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 应用名
-   */
-  AppName: string
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-  /**
-   * 标签列表
-   */
-  TagList: Array<Tag>
-}
-
-/**
  * DescribeTranscodeByUrl返回参数结构体
  */
 export interface DescribeTranscodeByUrlResponse {
@@ -1980,6 +1232,99 @@ export interface DescribeTranscodeByUrlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopWhiteboardPush请求参数结构体
+ */
+export interface StopWhiteboardPushRequest {
+  /**
+   * 客户的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * 需要停止的白板推流任务 Id
+   */
+  TaskId: string
+}
+
+/**
+ * SetWhiteboardPushCallback请求参数结构体
+ */
+export interface SetWhiteboardPushCallbackRequest {
+  /**
+   * 客户的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * 白板推流任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+   */
+  Callback: string
+}
+
+/**
+ * 实时录制视频拼接参数
+ */
+export interface Concat {
+  /**
+   * 是否开启拼接功能
+在开启了视频拼接功能的情况下，实时录制服务会把同一个用户因为暂停导致的多段视频拼接成一个视频
+   */
+  Enabled: boolean
+  /**
+   * 视频拼接时使用的垫片图片下载地址，不填默认用全黑的图片进行视频垫片
+   */
+  Image?: string
+}
+
+/**
+ * 板书文件存储cos参数
+ */
+export interface SnapshotCOS {
+  /**
+   * cos所在腾讯云账号uin
+   */
+  Uin: number
+  /**
+   * cos所在地区
+   */
+  Region: string
+  /**
+   * cos存储桶名称
+   */
+  Bucket: string
+  /**
+   * 板书文件存储根目录
+   */
+  TargetDir?: string
+  /**
+   * CDN加速域名
+   */
+  Domain?: string
+}
+
+/**
+ * CreateVideoGenerationTask返回参数结构体
+ */
+export interface CreateVideoGenerationTaskResponse {
+  /**
+   * 视频生成的任务Id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePPTCheckCallback请求参数结构体
+ */
+export interface DescribePPTCheckCallbackRequest {
+  /**
+   * 应用的SdkAppId
+   */
+  SdkAppId: number
 }
 
 /**
@@ -2046,235 +1391,17 @@ false -- 不开启
 
 12: 存在不兼容的多倍行距设置
 -- 自动处理方式： 不支持处理
+
+13: 存在带有特殊符号内容的datetime类型的a:fld标签元素
+-- 自动处理方式： a:fld标签替换为普通文本
    */
   AutoHandleUnsupportedElementTypes?: Array<number | bigint>
-}
-
-/**
- * 视频信息
- */
-export interface VideoInfo {
-  /**
-   * 视频开始播放的时间（单位：毫秒）
-   */
-  VideoPlayTime: number
-  /**
-   * 视频大小（字节）
-   */
-  VideoSize: number
-  /**
-   * 视频格式
-   */
-  VideoFormat: string
-  /**
-   * 视频播放时长（单位：毫秒）
-   */
-  VideoDuration: number
-  /**
-   * 视频文件URL
-   */
-  VideoUrl: string
-  /**
-   * 视频文件Id
-   */
-  VideoId: string
-  /**
-   * 视频流类型 
-- 0：摄像头视频 
-- 1：屏幕分享视频
-- 2：白板视频 
-- 3：混流视频
-- 4：纯音频（mp3)
-   */
-  VideoType: number
-  /**
-   * 摄像头/屏幕分享视频所属用户的 Id（白板视频为空、混流视频tic_mixstream_房间号_混流布局类型、辅路视频tic_substream_用户Id）
-   */
-  UserId: string
-  /**
-   * 视频分辨率的宽
-   */
-  Width: number
-  /**
-   * 视频分辨率的高
-   */
-  Height: number
-}
-
-/**
- * SetWhiteboardPushCallback请求参数结构体
- */
-export interface SetWhiteboardPushCallbackRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 白板推流任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40257
-   */
-  Callback: string
-}
-
-/**
- * DescribeTIWDailyUsage返回参数结构体
- */
-export interface DescribeTIWDailyUsageResponse {
-  /**
-   * 指定区间指定产品的用量汇总
-   */
-  Usages: Array<UsageDataItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 实时录制视频拼接参数
- */
-export interface Concat {
-  /**
-   * 是否开启拼接功能
-在开启了视频拼接功能的情况下，实时录制服务会把同一个用户因为暂停导致的多段视频拼接成一个视频
-   */
-  Enabled: boolean
-  /**
-   * 视频拼接时使用的垫片图片下载地址，不填默认用全黑的图片进行视频垫片
-   */
-  Image?: string
-}
-
-/**
- * DescribeWhiteboardApplicationConfig请求参数结构体
- */
-export interface DescribeWhiteboardApplicationConfigRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 需要查询的任务类型
-recording: 实时录制
-transcode: 文档转码
-   */
-  TaskTypes: Array<string>
-  /**
-   * 需要查询配置的SdkAppId列表
-   */
-  SdkAppIds?: Array<number | bigint>
-}
-
-/**
- * 互动白板房间用量信息
- */
-export interface RoomUsageDataItem {
-  /**
-   * 日期，格式为YYYY-MM-DD
-   */
-  Time: string
-  /**
-   * 白板应用SDKAppID
-   */
-  SdkAppId: number
-  /**
-   * 互动白板子产品，请求参数传入的一致
-- sp_tiw_board: 互动白板时长
-- sp_tiw_ric: 实时录制时长
-   */
-  SubProduct: string
-  /**
-   * 用量值
-- 白板时长、实时录制时长单位为分钟
-   */
-  Value: number
-  /**
-   * 互动白板房间号
-   */
-  RoomID: number
-}
-
-/**
- * 板书文件存储cos参数
- */
-export interface SnapshotCOS {
-  /**
-   * cos所在腾讯云账号uin
-   */
-  Uin: number
-  /**
-   * cos所在地区
-   */
-  Region: string
-  /**
-   * cos存储桶名称
-   */
-  Bucket: string
-  /**
-   * 板书文件存储根目录
-   */
-  TargetDir?: string
-  /**
-   * CDN加速域名
-   */
-  Domain?: string
-}
-
-/**
- * CreateVideoGenerationTask返回参数结构体
- */
-export interface CreateVideoGenerationTaskResponse {
-  /**
-   * 视频生成的任务Id
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribePPTCheckCallback请求参数结构体
- */
-export interface DescribePPTCheckCallbackRequest {
-  /**
-   * 应用的SdkAppId
-   */
-  SdkAppId: number
-}
-
-/**
- * 实时录制白板参数，例如白板宽高等
- */
-export interface Whiteboard {
-  /**
-   * 实时录制结果里白板视频宽，取值必须大于等于2，默认为1280
-   */
-  Width?: number
-  /**
-   * 实时录制结果里白板视频高，取值必须大于等于2，默认为960
-   */
-  Height?: number
-  /**
-   * 白板初始化参数，透传到白板 SDK
-   */
-  InitParam?: string
 }
 
 /**
  * PauseOnlineRecord返回参数结构体
  */
 export interface PauseOnlineRecordResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyWhiteboardApplicationConfig返回参数结构体
- */
-export interface ModifyWhiteboardApplicationConfigResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2416,20 +1543,6 @@ export interface SetOnlineRecordCallbackKeyRequest {
 }
 
 /**
- * ModifyApplication请求参数结构体
- */
-export interface ModifyApplicationRequest {
-  /**
-   * 应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * App名字
-   */
-  AppName: string
-}
-
-/**
  * DescribeOnlineRecordCallback返回参数结构体
  */
 export interface DescribeOnlineRecordCallbackResponse {
@@ -2489,122 +1602,18 @@ false - 所有流都录制大画面，默认为false。
 }
 
 /**
- * DescribeQualityMetrics返回参数结构体
+ * SetPPTCheckCallbackKey请求参数结构体
  */
-export interface DescribeQualityMetricsResponse {
+export interface SetPPTCheckCallbackKeyRequest {
   /**
-   * 输入的查询指标
-   */
-  Metric: string
-  /**
-   * 时间序列
-   */
-  Content: Array<TimeValue>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 转码任务结果
- */
-export interface TranscodeTaskResult {
-  /**
-   * 转码结果地址
-   */
-  ResultUrl: string
-  /**
-   * 分辨率
-   */
-  Resolution: string
-  /**
-   * 标题（一般为文件名）
-   */
-  Title: string
-  /**
-   * 转码页数
-   */
-  Pages: number
-  /**
-   * 缩略图URL前缀，比如，该URL前缀为http://example.com/g0jb42ps49vtebjshilb/，那么动态PPT第1页的缩略图URL为
-http://example.com/g0jb42ps49vtebjshilb/1.jpg，其它页以此类推
-
-如果发起文档转码请求参数中带了ThumbnailResolution参数，并且转码类型为动态转码，该参数不为空，其余情况该参数为空字符串
-   */
-  ThumbnailUrl: string
-  /**
-   * 动态转码缩略图生成分辨率
-   */
-  ThumbnailResolution: string
-  /**
-   * 转码压缩文件下载的URL，如果发起文档转码请求参数中CompressFileType为空或者不是支持的压缩格式，该参数为空字符串
-   */
-  CompressFileUrl: string
-  /**
-   * 任务失败错误码
-   */
-  ErrorCode: number
-  /**
-   * 任务失败错误信息
-   */
-  ErrorMsg: string
-}
-
-/**
- * DescribeIMApplications返回参数结构体
- */
-export interface DescribeIMApplicationsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SetOnlineRecordCallback请求参数结构体
- */
-export interface SetOnlineRecordCallbackRequest {
-  /**
-   * 客户的SdkAppId
+   * 应用的SdkAppId
    */
   SdkAppId: number
   /**
-   * 实时录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
+   * 设置回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
    */
-  Callback: string
+  CallbackKey: string
 }
-
-/**
- * DescribeUserList请求参数结构体
- */
-export interface DescribeUserListRequest {
-  /**
-   * 白板应用的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 需要查询用户列表的白板房间号
-   */
-  RoomId: string
-  /**
-   * 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间
-   */
-  TimeRange: Array<number | bigint>
-  /**
-   * 额外的查询条件
-   */
-  Query?: string
-  /**
-   * 返回最大的数据条数，默认1000
-   */
-  MaxSize?: number
-}
-
-/**
- * DescribeUserResources请求参数结构体
- */
-export type DescribeUserResourcesRequest = null
 
 /**
  * SetPPTCheckCallback返回参数结构体
@@ -2614,20 +1623,6 @@ export interface SetPPTCheckCallbackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeOnlineRecord请求参数结构体
- */
-export interface DescribeOnlineRecordRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 实时录制任务Id
-   */
-  TaskId: string
 }
 
 /**
@@ -2678,20 +1673,6 @@ export interface ExcelParam {
 非0 -- 代表水平方向
    */
   PaperDirection?: number
-}
-
-/**
- * DescribePostpaidUsage请求参数结构体
- */
-export interface DescribePostpaidUsageRequest {
-  /**
-   * 开始时间
-   */
-  BeginTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
 }
 
 /**
@@ -2765,43 +1746,6 @@ false - 录制大画面。
 }
 
 /**
- * DescribeRoomList返回参数结构体
- */
-export interface DescribeRoomListResponse {
-  /**
-   * 白板房间列表
-   */
-  RoomList: Array<RoomListItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeIMApplications请求参数结构体
- */
-export type DescribeIMApplicationsRequest = null
-
-/**
- * ModifyAutoRenewFlag请求参数结构体
- */
-export interface ModifyAutoRenewFlagRequest {
-  /**
-   * 资源Id，从DescribeUserResources接口中获取Level=1的正式月功能费的SubProduct，一般为sp_tiw_package
-   */
-  SubProduct: string
-  /**
-   * 资源Id，从DescribeUserResources接口中获取Level=1的正式月功能费资源Id
-   */
-  ResourceId: string
-  /**
-   * 自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续 费，需要设置为0
-   */
-  AutoRenewFlag: number
-}
-
-/**
  * PPT错误元素
  */
 export interface PPTErr {
@@ -2860,39 +1804,6 @@ Finished - 任务已结束
 }
 
 /**
- * DescribeUserStatus返回参数结构体
- */
-export interface DescribeUserStatusResponse {
-  /**
-   * 客户的AppId
-   */
-  AppId?: number
-  /**
-   * 是否开通过白板（试用或正式）
-
-0: 从未开通过白板服务
-1: 已经开通过白板服务
-   */
-  IsTiwUser?: number
-  /**
-   * 是否开通过互动课堂（试用或正式）
-   */
-  IsSaaSUser?: number
-  /**
-   * 是否使用白板的课后录制
-   */
-  IsTiwOfflineRecordUser?: number
-  /**
-   * 用户是否实名认证
-   */
-  IsAuthenticated?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 流布局参数
  */
 export interface StreamLayout {
@@ -2923,17 +1834,13 @@ export interface StreamLayout {
 }
 
 /**
- * DescribeTIWRoomDailyUsage返回参数结构体
+ * CreateSnapshotTask返回参数结构体
  */
-export interface DescribeTIWRoomDailyUsageResponse {
+export interface CreateSnapshotTaskResponse {
   /**
-   * 指定区间指定产品的房间用量列表
+   * 白板板书生成任务ID，只有任务创建成功的时候才会返回此字段
    */
-  Usages: Array<RoomUsageDataItem>
-  /**
-   * 用量列表总数
-   */
-  Total: number
+  TaskID: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2957,16 +1864,6 @@ export interface DescribeWhiteboardPushCallbackResponse {
    */
   RequestId?: string
 }
-
-/**
- * DescribeApplicationInfos请求参数结构体
- */
-export type DescribeApplicationInfosRequest = null
-
-/**
- * DescribeWhiteboardPushSearch请求参数结构体
- */
-export type DescribeWhiteboardPushSearchRequest = null
 
 /**
  * 正在运行的任务列表项
@@ -3048,64 +1945,22 @@ export interface SetPPTCheckCallbackRequest {
 }
 
 /**
- * DescribeWhiteboardPush返回参数结构体
+ * SetWarningCallback请求参数结构体
  */
-export interface DescribeWhiteboardPushResponse {
+export interface SetWarningCallbackRequest {
   /**
-   * 推流结束原因，
-- AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
-- USER_CALL: 主动调用了停止推流接口
-- EXCEPTION: 推流异常结束
+   * 客户的SdkAppId
    */
-  FinishReason?: string
+  SdkAppId: number
   /**
-   * 需要查询结果的白板推流任务Id
+   * 告警回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。
+回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/90112
    */
-  TaskId?: string
+  Callback: string
   /**
-   * 推流任务状态
-- PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
-- PUSHING: 表示推流已开始
-- STOPPED: 表示推流已停止
+   * 设置告警回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
    */
-  Status?: string
-  /**
-   * 房间号
-   */
-  RoomId?: number
-  /**
-   * 白板的群组 Id
-   */
-  GroupId?: string
-  /**
-   * 推流用户Id
-   */
-  PushUserId?: string
-  /**
-   * 实际开始推流时间，Unix 时间戳，单位秒
-   */
-  PushStartTime?: number
-  /**
-   * 实际停止推流时间，Unix 时间戳，单位秒
-   */
-  PushStopTime?: number
-  /**
-   * 推流过程中出现异常的次数
-   */
-  ExceptionCnt?: number
-  /**
-   * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
-   */
-  IMSyncTime?: number
-  /**
-   * 备份推流任务结果信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Backup?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CallbackKey: string
 }
 
 /**
@@ -3123,40 +1978,21 @@ export interface StartOnlineRecordResponse {
 }
 
 /**
- * 标签
+ * 实时录制白板参数，例如白板宽高等
  */
-export interface Tag {
+export interface Whiteboard {
   /**
-   * 标签键
+   * 实时录制结果里白板视频宽，取值必须大于等于2，默认为1280
    */
-  TagKey: string
+  Width?: number
   /**
-   * 标签值
+   * 实时录制结果里白板视频高，取值必须大于等于2，默认为960
    */
-  TagValue: string
-}
-
-/**
- * DescribeUsageSummary请求参数结构体
- */
-export interface DescribeUsageSummaryRequest {
+  Height?: number
   /**
-   * 统计时间段的开始时间
+   * 白板初始化参数，透传到白板 SDK
    */
-  BeginTime: string
-  /**
-   * 统计时间段的结束时间
-   */
-  EndTime: string
-  /**
-   * 需要获取用量的子产品列表
-   */
-  SubProducts: Array<string>
-  /**
-   * true: 返回加权后的数据
-false: 返回原始数据
-   */
-  IsWeighted?: boolean
+  InitParam?: string
 }
 
 /**
@@ -3185,16 +2021,6 @@ export interface CreatePPTCheckTaskResponse {
    * 检测任务的唯一标识Id，用于查询该任务的进度以及检测结果
    */
   TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyWhiteboardBucketConfig返回参数结构体
- */
-export interface ModifyWhiteboardBucketConfigResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3351,16 +2177,6 @@ export interface SetTranscodeCallbackRequest {
 }
 
 /**
- * DescribePostpaidUsage返回参数结构体
- */
-export interface DescribePostpaidUsageResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * StartWhiteboardPush返回参数结构体
  */
 export interface StartWhiteboardPushResponse {
@@ -3378,133 +2194,6 @@ export interface StartWhiteboardPushResponse {
    */
   RequestId?: string
 }
-
-/**
- * 白板应用配置，包括资源存储桶，域名，回调地址，回调密钥等
- */
-export interface WhiteboardApplicationConfig {
-  /**
-   * 任务类型
-
-recording: 实时录制
-transcode: 文档转码
-   */
-  TaskType: string
-  /**
-   * 存储桶名字
-   */
-  BucketName: string
-  /**
-   * 存储桶地域
-   */
-  BucketLocation: string
-  /**
-   * 资源在存储桶中的前缀
-   */
-  BucketPrefix: string
-  /**
-   * 目标CDN域名
-   */
-  ResultDomain: string
-  /**
-   * 回调地址
-   */
-  Callback: string
-  /**
-   * 回调鉴权密钥
-   */
-  CallbackKey: string
-  /**
-   * 配置的应用SdkAppId
-   */
-  SdkAppId?: number
-  /**
-   * IM管理员UserId
-   */
-  AdminUserId?: string
-  /**
-   * IM管理员UserSig
-   */
-  AdminUserSig?: string
-}
-
-/**
- * 转码任务搜索结果
- */
-export interface TranscodeTaskSearchResult {
-  /**
-   * 任务创建时间
-   */
-  CreateTime: string
-  /**
-   * 任务唯一ID
-   */
-  TaskId: string
-  /**
-   * 任务的当前状态
-- QUEUED: 正在排队等待转换
-- PROCESSING: 转换中
-- FINISHED: 转换完成
-   */
-  Status: string
-  /**
-   * 转码文件原始名称
-   */
-  OriginalFilename: string
-  /**
-   * 用户应用SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 转码任务结果
-   */
-  Result: TranscodeTaskResult
-  /**
-   * 是否静态转码
-   */
-  IsStatic: boolean
-}
-
-/**
- * CreateApplication返回参数结构体
- */
-export interface CreateApplicationResponse {
-  /**
-   * 客户的AppId
-   */
-  AppId?: number
-  /**
-   * App名字
-   */
-  AppName?: string
-  /**
-   * 应用SdkAppId
-   */
-  SdkAppId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StopWhiteboardPush请求参数结构体
- */
-export interface StopWhiteboardPushRequest {
-  /**
-   * 客户的SdkAppId
-   */
-  SdkAppId: number
-  /**
-   * 需要停止的白板推流任务 Id
-   */
-  TaskId: string
-}
-
-/**
- * DescribeRecordSearch请求参数结构体
- */
-export type DescribeRecordSearchRequest = null
 
 /**
  * DescribePPTCheck请求参数结构体

@@ -88,9 +88,9 @@ it("dlc.v20210125.DescribeWorkGroupInfo", async function () {
     }
 })
 
-it("dlc.v20210125.ListTaskJobLogName", async function () {
+it("dlc.v20210125.DescribeTaskMonitorInfos", async function () {
     try {
-       const data = await client.ListTaskJobLogName({})
+       const data = await client.DescribeTaskMonitorInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +358,9 @@ it("dlc.v20210125.DescribeTables", async function () {
     }
 })
 
-it("dlc.v20210125.ModifySparkAppBatch", async function () {
+it("dlc.v20210125.ListTaskJobLogName", async function () {
     try {
-       const data = await client.ModifySparkAppBatch({})
+       const data = await client.ListTaskJobLogName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1321,6 +1321,16 @@ it("dlc.v20210125.DescribeViews", async function () {
 it("dlc.v20210125.DeleteThirdPartyAccessUser", async function () {
     try {
        const data = await client.DeleteThirdPartyAccessUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifySparkAppBatch", async function () {
+    try {
+       const data = await client.ModifySparkAppBatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

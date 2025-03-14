@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWorkGroupInfo", req, cb);
     }
     /**
-     * 本接口（ListTaskJobLogName）用于获取spark-jar日志名称列表
+     * 查询任务监控指标信息
      */
-    async ListTaskJobLogName(req, cb) {
-        return this.request("ListTaskJobLogName", req, cb);
+    async DescribeTaskMonitorInfos(req, cb) {
+        return this.request("DescribeTaskMonitorInfos", req, cb);
     }
     /**
      * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
@@ -232,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTables", req, cb);
     }
     /**
-     * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
+     * 本接口（ListTaskJobLogName）用于获取spark-jar日志名称列表
      */
-    async ModifySparkAppBatch(req, cb) {
-        return this.request("ModifySparkAppBatch", req, cb);
+    async ListTaskJobLogName(req, cb) {
+        return this.request("ListTaskJobLogName", req, cb);
     }
     /**
      * DMS元数据更新分区
@@ -812,6 +812,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteThirdPartyAccessUser(req, cb) {
         return this.request("DeleteThirdPartyAccessUser", req, cb);
+    }
+    /**
+     * 本接口（ModifySparkAppBatch）用于批量修改Spark作业参数配置
+     */
+    async ModifySparkAppBatch(req, cb) {
+        return this.request("ModifySparkAppBatch", req, cb);
     }
     /**
      * DMS元数据获取库
