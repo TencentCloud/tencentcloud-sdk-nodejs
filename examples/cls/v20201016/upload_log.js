@@ -1,4 +1,4 @@
-const { CommonClient } = require("../../../tencentcloud/common/common_client")
+const { CommonClient } = require("tencentcloud-sdk-nodejs-common")
 const protobuf = require("protobufjs")
 const lz4 = require("lz4")
 const path = require("path")

@@ -1,7 +1,7 @@
-const tencentcloud = require("../../../tencentcloud")
+const { hunyuan } = require("tencentcloud-sdk-nodejs-hunyuan")
 
 // 导入对应产品模块的client models
-const HunyuanClient = tencentcloud.hunyuan.v20230901.Client
+const HunyuanClient = hunyuan.v20230901.Client
 
 // 实例化要请求产品的client对象。profile可选。
 const client = new HunyuanClient({

@@ -1,7 +1,7 @@
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
+import { ecc } from "tencentcloud-sdk-nodejs-ecc"
 
 // 导入对应产品模块的client models
-const EccClient = tencentcloud.ecc.v20181213.Client
+const EccClient = ecc.v20181213.Client
 
 // 实例化要请求产品的client对象。profile可选。
 const client = new EccClient({
