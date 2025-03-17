@@ -91,12 +91,10 @@ export interface DescribeCloudDedicatedZoneHostsResponse {
 export interface ExtraInfo {
   /**
    * 专属可用区当地时间本周一日期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ThisMondayLocalDate?: string
   /**
    * 专属可用区当地时间上周一日期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastMondayLocalDate?: string
 }
@@ -167,12 +165,10 @@ export interface CloudDedicatedZoneResourceSummaryInfo {
 export interface DescribeCloudDedicatedZoneResourceSummaryResponse {
   /**
    * 资源水位详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceSummarySet?: Array<CloudDedicatedZoneResourceSummaryInfo>
   /**
    * 资源水位扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraInfo?: ExtraInfo
   /**

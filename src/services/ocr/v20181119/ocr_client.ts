@@ -67,6 +67,7 @@ import {
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
+  BankSlip,
   QuestionOCRResponse,
   SealInfo,
   InvoiceGeneralInfo,

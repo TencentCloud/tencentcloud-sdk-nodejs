@@ -28,4 +28,14 @@ it("tchd.v20230306.DescribeEvents", async function () {
     }
 })
 
+it("tchd.v20230306.DescribeEventStatistics", async function () {
+    try {
+       const data = await client.DescribeEventStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

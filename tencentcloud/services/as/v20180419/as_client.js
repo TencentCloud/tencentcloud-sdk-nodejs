@@ -416,6 +416,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLaunchConfigurations", req, cb);
     }
     /**
+     * 伸缩组内实例进入备用中状态。
+* 备用中状态实例的 CLB 权重值为 0，不会被自动缩容、不健康替换、实例刷新操作选中
+* 调用弹性伸缩开关机接口会使得备用中状态发生变化，而云服务器开关机接口不会影响
+* 实例进入备用中状态后，伸缩组会尝试下调期望实例数，新期望数不会小于最小值
+     */
+    async EnterStandby(req, cb) {
+        return this.request("EnterStandby", req, cb);
+    }
+    /**
      * 本接口（CreateScalingPolicy）用于创建告警触发策略。
      */
     async CreateScalingPolicy(req, cb) {

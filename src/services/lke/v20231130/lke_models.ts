@@ -3458,7 +3458,7 @@ export interface AppConfig {
  */
 export interface DescribeReleaseRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4282,7 +4282,7 @@ export interface DescribeReleaseResponse {
    */
   Description?: string
   /**
-   * 发布状态(1待发布 2发布中 3发布成功 4发布失败 5发布中 6发布中 7发布失败 9发布暂停)
+   * 发布状态(1待发布 2发布中 3发布成功 4发布失败 5发布中(审核中) 6发布中(审核完成) 7发布失败(审核失败) 9发布暂停)
    */
   Status?: number
   /**
@@ -5689,7 +5689,7 @@ export interface ModifyAppRequest {
  */
 export interface RunReRankRequest {
   /**
-   * 模型名称, 必填，默认: lke-reranker-base
+   * 查询内容，必填
    */
   Query?: string
   /**

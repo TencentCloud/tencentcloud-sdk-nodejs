@@ -662,6 +662,20 @@ export interface Advice {
 }
 
 /**
+ * EnterStandby请求参数结构体
+ */
+export interface EnterStandbyRequest {
+  /**
+   * 伸缩组 ID。
+   */
+  AutoScalingGroupId: string
+  /**
+   * 运行中状态实例列表，不支持传入非运行中状态实例。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * CreateLifecycleHook返回参数结构体
  */
 export interface CreateLifecycleHookResponse {
@@ -928,13 +942,21 @@ export interface ExecuteScalingPolicyResponse {
 }
 
 /**
- * DeleteAutoScalingGroup请求参数结构体
+ * 应用型负载均衡器标识信息
  */
-export interface DeleteAutoScalingGroupRequest {
+export interface ForwardLoadBalancerIdentification {
   /**
-   * 伸缩组ID
+   * 负载均衡器ID
    */
-  AutoScalingGroupId: string
+  LoadBalancerId: string
+  /**
+   * 应用型负载均衡监听器 ID
+   */
+  ListenerId: string
+  /**
+   * 转发规则ID，注意：针对七层监听器此参数必填
+   */
+  LocationId?: string
 }
 
 /**
@@ -2027,6 +2049,20 @@ export interface RefreshBatch {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
+}
+
+/**
+ * EnterStandby返回参数结构体
+ */
+export interface EnterStandbyResponse {
+  /**
+   * 伸缩活动ID。
+   */
+  ActivityId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3751,21 +3787,13 @@ export interface InstanceNameIndexSettings {
 }
 
 /**
- * 应用型负载均衡器标识信息
+ * DeleteAutoScalingGroup请求参数结构体
  */
-export interface ForwardLoadBalancerIdentification {
+export interface DeleteAutoScalingGroupRequest {
   /**
-   * 负载均衡器ID
+   * 伸缩组ID
    */
-  LoadBalancerId: string
-  /**
-   * 应用型负载均衡监听器 ID
-   */
-  ListenerId: string
-  /**
-   * 转发规则ID，注意：针对七层监听器此参数必填
-   */
-  LocationId?: string
+  AutoScalingGroupId: string
 }
 
 /**

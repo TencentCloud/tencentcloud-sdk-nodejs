@@ -104,6 +104,32 @@ export interface DescribeInstancesNewResponse {
 }
 
 /**
+ * 副可用区详情
+ */
+export interface SecondaryZoneInfo {
+  /**
+   * 副可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecondaryZone?: string
+  /**
+   * 可用区可用的子网id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecondarySubnet?: string
+  /**
+   * 可用区可用的子网可用ip的数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIpNum?: string
+  /**
+   * 可用区可用的子网可用ip的数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecondaryUserSubnetIPNum?: number
+}
+
+/**
  * 数据库权限信息
  */
 export interface DatabasePrivilegeInfo {
@@ -736,6 +762,10 @@ SpecName从DescribeSpec接口中返回的CommonSpec.Name（ZK节点）获取
    * 标签列表
    */
   TagItems?: Array<Tag>
+  /**
+   * 副可用去信息
+   */
+  SecondaryZoneInfo?: Array<SecondaryZoneInfo>
 }
 
 /**
@@ -1247,6 +1277,10 @@ export interface DescribeInstancesNewRequest {
    * 信息详细与否
    */
   IsSimple?: boolean
+  /**
+   * vip列表
+   */
+  Vips?: Array<string>
 }
 
 /**

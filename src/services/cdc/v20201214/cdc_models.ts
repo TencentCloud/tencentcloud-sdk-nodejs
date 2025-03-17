@@ -157,7 +157,6 @@ export interface DedicatedClusterType {
   DedicatedClusterTypeId?: string
   /**
    * 配置描述，对应描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
@@ -494,17 +493,14 @@ export interface DedicatedClusterOrderItem {
   TypeName?: string
   /**
    * 规格展示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComputeFormat?: string
   /**
    * 规格类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TypeFamily?: string
   /**
    * 0未支付，1已支付
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubOrderPayStatus?: number
 }
@@ -655,62 +651,50 @@ export interface ModifyOrderStatusResponse {
 export interface SetInfo {
   /**
    * 云硬盘仓库id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetId?: string
   /**
    * 云硬盘仓库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetName?: string
   /**
    * 云硬盘仓库类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetType?: string
   /**
    * 云硬盘仓库容量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetSize?: number
   /**
    * 云硬盘仓库状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetStatus?: string
   /**
    * 云硬盘仓库创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 读流量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadTraffic?: DetailData
   /**
    * 写流量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WriteTraffic?: DetailData
   /**
    * 读IO
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadIO?: DetailData
   /**
    * 写IO
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WriteIO?: DetailData
   /**
    * 平均等待时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Await?: DetailData
   /**
    * 利用率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Util?: DetailData
 }
@@ -721,14 +705,12 @@ export interface SetInfo {
 export interface InBandwidth {
   /**
    * 时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamps: Array<number>
+  Timestamps?: Array<number>
   /**
    * 时间对应的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Values: Array<number>
+  Values?: Array<number>
 }
 
 /**
@@ -747,7 +729,6 @@ export interface DescribeDedicatedClusterCosCapacityRequest {
 export interface VpngwBandwidthData {
   /**
    * 出带宽流量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutBandwidth?: OutBandwidth
   /**
@@ -860,75 +841,73 @@ export interface DedicatedClusterOrder {
   Action?: string
   /**
    * 子订单详情列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DedicatedClusterOrderItems?: Array<DedicatedClusterOrderItem>
   /**
    * cpu值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu?: number
   /**
    * mem值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mem?: number
   /**
    * gpu值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Gpu?: number
   /**
    * 0代表未支付，1代表已支付
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayStatus?: number
   /**
    * 支付方式，一次性、按月、按年
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayType?: string
   /**
    * 购买时长的单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeUnit?: string
   /**
    * 购买时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeSpan?: number
   /**
    * 订单类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderType?: string
   /**
    * 验收状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckStatus?: string
   /**
    * 交付预期时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DeliverExpectTime?: string
   /**
    * 交付实际完成时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DeliverFinishTime?: string
   /**
    * 验收预期时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckExpectTime?: string
   /**
    * 验收实际完成时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckFinishTime?: string
   /**
    * 订单SLA
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderSLA?: string
   /**
    * 订单支付计划
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderPayPlan?: string
 }
@@ -1082,7 +1061,6 @@ export interface DedicatedCluster {
   Zone?: string
   /**
    * 专用集群的描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
@@ -1101,6 +1079,10 @@ export interface DedicatedCluster {
    * 专用集群所属的站点id。
    */
   SiteId?: string
+  /**
+   * 专用集群的运营状态
+   */
+  RunningStatus?: string
 }
 
 /**
@@ -1320,24 +1302,20 @@ export interface DescribeDedicatedClusterHostsResponse {
 export interface LocalNetInfo {
   /**
    * 协议
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 网络id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 路由信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  BGPRoute: string
+  BGPRoute?: string
   /**
    * 本地IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalIp: string
+  LocalIp?: string
 }
 
 /**
@@ -1586,7 +1564,6 @@ export interface HostInfo {
   ExpireTime?: string
   /**
    * 宿主机id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostId?: string
 }
@@ -1693,7 +1670,6 @@ export interface Site {
   SiteId?: string
   /**
    * 站点描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
@@ -1774,14 +1750,12 @@ export interface DescribeDedicatedClusterHostStatisticsRequest {
 export interface OutBandwidth {
   /**
    * 时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamps: Array<number>
+  Timestamps?: Array<number>
   /**
    * 对应时间的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Values: Array<number>
+  Values?: Array<number>
 }
 
 /**

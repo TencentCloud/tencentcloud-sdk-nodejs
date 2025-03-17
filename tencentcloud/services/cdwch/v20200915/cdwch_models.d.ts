@@ -83,6 +83,31 @@ export interface DescribeInstancesNewResponse {
     RequestId?: string;
 }
 /**
+ * 副可用区详情
+ */
+export interface SecondaryZoneInfo {
+    /**
+     * 副可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecondaryZone?: string;
+    /**
+     * 可用区可用的子网id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecondarySubnet?: string;
+    /**
+     * 可用区可用的子网可用ip的数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserIpNum?: string;
+    /**
+     * 可用区可用的子网可用ip的数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecondaryUserSubnetIPNum?: number;
+}
+/**
  * 数据库权限信息
  */
 export interface DatabasePrivilegeInfo {
@@ -689,6 +714,10 @@ export interface CreateInstanceNewRequest {
      * 标签列表
      */
     TagItems?: Array<Tag>;
+    /**
+     * 副可用去信息
+     */
+    SecondaryZoneInfo?: Array<SecondaryZoneInfo>;
 }
 /**
  * 实例描述信息
@@ -1187,6 +1216,10 @@ export interface DescribeInstancesNewRequest {
      * 信息详细与否
      */
     IsSimple?: boolean;
+    /**
+     * vip列表
+     */
+    Vips?: Array<string>;
 }
 /**
  * DeleteBackUpData返回参数结构体

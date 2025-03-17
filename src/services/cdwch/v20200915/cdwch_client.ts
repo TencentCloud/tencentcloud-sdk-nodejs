@@ -22,6 +22,7 @@ import {
   ScaleOutInstanceRequest,
   ScaleOutInstanceResponse,
   DescribeInstancesNewResponse,
+  SecondaryZoneInfo,
   DatabasePrivilegeInfo,
   DescribeInstanceKeyValConfigsRequest,
   DescribeInstanceNodesRequest,

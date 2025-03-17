@@ -35,5 +35,12 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeEvents(req, cb) {
         return this.request("DescribeEvents", req, cb);
     }
+    /**
+     * 本接口用于查询腾讯云健康看板的实时可用性事件信息，可以通过产品列表、地域进行过滤查询。
+可以参考健康看板历史事件页面来获取查询案例（链接：https://status.cloud.tencent.com/history）。
+     */
+    async DescribeEventStatistics(req, cb) {
+        return this.request("DescribeEventStatistics", req, cb);
+    }
 }
 exports.Client = Client;

@@ -417,7 +417,7 @@ export interface ShareBlueprintAcrossAccountsRequest {
      */
     BlueprintId: string;
     /**
-     * 接收共享镜像的账号Id列表。账号ID不同于QQ号，查询用户账号ID请查看账号信息中的账号ID栏。账号个数取值最大为10。
+     * 接收共享镜像的[账号ID](https://cloud.tencent.com/document/product/213/4944#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id)列表。账号ID不同于QQ号，查询用户账号ID请查看账号信息中的账号ID栏。账号个数取值最大为10。
      */
     AccountIds: Array<string>;
 }
@@ -586,7 +586,10 @@ export interface ResetInstanceBlueprint {
      */
     BlueprintInfo?: Blueprint;
     /**
-     * 实例镜像是否可重置为目标镜像
+     * 实例镜像是否可重置为目标镜像。
+  取值：
+  true（允许）
+  false（不允许）
      */
     IsResettable?: boolean;
     /**
@@ -660,7 +663,7 @@ export interface ModifyInstancesBundleRequest {
      */
     InstanceIds: Array<string>;
     /**
-     * 待变更的套餐Id。可通过[DescribeBundles](https://cloud.tencent.com/document/api/1207/47575)接口返回值中的BundleId获取。
+     * 待变更的套餐Id。注意不可和当前要升配的实例套餐ID相同。可通过[DescribeBundles](https://cloud.tencent.com/document/api/1207/47575)接口返回值中的BundleId获取。
      */
     BundleId: string;
     /**
@@ -710,7 +713,10 @@ export interface DiscountDetail {
      */
     TimeSpan?: number;
     /**
-     * 计费单元。
+     * 时间单位。
+  取值为：
+  - m - 月
+  - d - 日
      */
     TimeUnit?: string;
     /**
@@ -1225,18 +1231,28 @@ export interface Disk {
     DiskName?: string;
     /**
      * 磁盘类型
+  枚举值：
+  <li> SYSTEM_DISK: 系统盘 </li>
+  <li> DATA_DISK: 数据盘 </li>
+  
      */
     DiskUsage?: string;
     /**
      * 磁盘介质类型
+  枚举值:
+  <li> CLOUD_BASIC: 普通云硬盘 </li>
+  <li> CLOUD_PREMIUM: 高性能云硬盘 </li>
+  <li> CLOUD_SSD: SSD云硬盘 </li>
      */
     DiskType?: string;
     /**
      * 磁盘付费类型
+  <li> PREPAID: 预付费 </li>
+  <li> POSTPAID_BY_HOUR: 按小时后付费 </li>
      */
     DiskChargeType?: string;
     /**
-     * 磁盘大小
+     * 磁盘大小, 单位GB
      */
     DiskSize?: number;
     /**
@@ -1246,7 +1262,7 @@ export interface Disk {
     /**
      * 磁盘状态，取值范围：
   <li>PENDING：创建中。 </li>
-  <li>UNATTACHED：未挂载。</li>
+  <li>UNATTACHED：待挂载。</li>
   <li>ATTACHING：挂载中。</li>
   <li>ATTACHED：已挂载。</li>
   <li>DETACHING：卸载中。 </li>
@@ -1595,6 +1611,7 @@ export interface DescribeBlueprintsRequest {
   <li>blueprint-id</li>按照【镜像 ID】进行过滤。
   类型：String
   必选：否
+  镜像 ID ，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取。
   <li>blueprint-type</li>按照【镜像类型】进行过滤。
   取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。
   类型：String
@@ -1612,8 +1629,9 @@ export interface DescribeBlueprintsRequest {
   <li>scene-id</li>按照【使用场景Id】进行过滤。
   类型：String
   必选：否
+  场景Id，可通过[查看使用场景列表](https://cloud.tencent.com/document/product/1207/83512)接口获取。
   
-  每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds 和 Filters 。
+  每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。
      */
     Filters?: Array<Filter>;
 }
@@ -1630,7 +1648,17 @@ export interface InstanceReturnable {
      */
     IsReturnable?: boolean;
     /**
-     * 实例退还失败错误码。
+     * 实例退还失败错误码。取值:
+  0: 可以退还
+  1: 资源已退货。如为退货后续费资源，请于购买6小时后操作
+  2: 资源已到期
+  3: 资源购买超过5天不支持退款
+  4: 非预付费资源不支持退款
+  8: 退货数量超出限额
+  9: 涉及活动订单不支持退款
+  10: 资源不支持自助退，请走工单退款
+  11: 涉及推广奖励渠道订单，请提工单咨询
+  12: 根据业务侧产品规定，该资源不允许退款
      */
     ReturnFailCode?: number;
     /**
@@ -1836,7 +1864,7 @@ export interface DeleteDiskBackupsResponse {
  */
 export interface DeleteSnapshotsRequest {
     /**
-     * 要删除的快照 ID 列表，可通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a>查询。
+     * 要删除的快照 ID 列表，每次请求批量快照的上限为10个，可通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a>查询。
      */
     SnapshotIds: Array<string>;
 }
@@ -2288,7 +2316,7 @@ export interface InquirePriceCreateBlueprintResponse {
     /**
      * 自定义镜像的价格参数。
      */
-    BlueprintPrice: BlueprintPrice;
+    BlueprintPrice?: BlueprintPrice;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2717,7 +2745,7 @@ export interface DescribeInstanceVncUrlResponse {
     /**
      * 实例的管理终端地址。
      */
-    InstanceVncUrl: string;
+    InstanceVncUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3078,27 +3106,31 @@ export interface DiskConfig {
     /**
      * 可用区。
      */
-    Zone: string;
+    Zone?: string;
     /**
-     * 云硬盘类型。
+     * 云硬盘类型。枚举值如下：
+  
+  <li>CLOUD_BASIC：普通云硬盘</li>
+  <li>CLOUD_PREMIUM：高性能云硬盘</li>
+  <li>CLOUD_SSD：SSD云硬盘</li>
      */
-    DiskType: string;
+    DiskType?: string;
     /**
      * 云硬盘可售卖状态。
      */
-    DiskSalesState: string;
+    DiskSalesState?: string;
     /**
      * 最大云硬盘大小。
      */
-    MaxDiskSize: number;
+    MaxDiskSize?: number;
     /**
      * 最小云硬盘大小。
      */
-    MinDiskSize: number;
+    MinDiskSize?: number;
     /**
      * 云硬盘步长。
      */
-    DiskStepSize: number;
+    DiskStepSize?: number;
 }
 /**
  * CreateDiskBackup返回参数结构体
@@ -3118,7 +3150,7 @@ export interface CreateDiskBackupResponse {
  */
 export interface DescribeSnapshotsDeniedActionsRequest {
     /**
-     * 快照 ID 列表, 可通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a> 查询。
+     * 快照 ID 列表,每次请求批量快照的上限是100个。 可通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a> 查询。
      */
     SnapshotIds: Array<string>;
 }
@@ -3210,14 +3242,22 @@ export interface ResizeDisksRequest {
 export interface DiskChargePrepaid {
     /**
      * 新购周期。
+  可选值：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
      */
     Period: number;
     /**
-     * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。
+     * 自动续费标识。取值范围：
+  - NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。
+  - NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。
+  - DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知。
+  
+  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。
      */
     RenewFlag?: string;
     /**
-     * 新购单位. 默认值: "m"。
+     * 新购单位.。
+  可选值：m - 月。
+  默认值：m - 月。
      */
     TimeUnit?: string;
 }
@@ -3817,11 +3857,11 @@ export interface DeleteBlueprintsRequest {
  */
 export interface FirewallRuleInfo {
     /**
-     * 应用类型，取值：自定义，HTTP(80)，HTTPS(443)，Linux登录(22)，Windows登录(3389)，MySQL(3306)，SQL Server(1433)，全部TCP，全部UDP，Ping-ICMP，ALL。
+     * 应用类型，取值：自定义，HTTP(80)，HTTPS(443)，Linux登录(22)，Windows登录(3389)，MySQL(3306)，SQL Server(1433)，全部TCP，全部UDP，Ping-ICMP，Windows登录优化 (3389)，FTP (21)，Ping，Ping (IPv6)，ALL。
      */
     AppType?: string;
     /**
-     * 协议，取值：TCP，UDP，ICMP，ALL。
+     * 协议，取值：TCP，UDP，ICMP，ICMPv6，ALL。
      */
     Protocol?: string;
     /**
@@ -4186,7 +4226,7 @@ export interface TerminateInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
- * 续费云硬盘包年包月相关参数设置
+ * 续费云硬盘包年包月相关参数设置。
  */
 export interface RenewDiskChargePrepaid {
     /**
@@ -4194,7 +4234,11 @@ export interface RenewDiskChargePrepaid {
      */
     Period?: number;
     /**
-     * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。
+     * 自动续费标识。
+  取值范围：
+  <li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
+  <li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知</li>
+  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云硬盘到期后将按月自动续费。
      */
     RenewFlag?: string;
     /**
@@ -4202,7 +4246,10 @@ export interface RenewDiskChargePrepaid {
      */
     TimeUnit?: string;
     /**
-     * 当前实例到期时间。如“2018-01-01 00:00:00”。指定该参数即可对齐云硬盘所挂载的实例到期时间。该参数与Period必须指定其一，且不支持同时指定。
+     * 当前实例到期时间。如“2018-01-01 00:00:00”。
+  指定该参数即可对齐云硬盘所挂载的实例到期时间。
+  该参数与Period必须指定其一，且不支持同时指定。
+  该参数值必须大于入参中云硬盘的过期时间。
      */
     CurInstanceDeadline?: string;
 }
@@ -4245,6 +4292,7 @@ export interface ApplyFirewallTemplateResponse {
 export interface TerminateDisksRequest {
     /**
      * 云硬盘ID列表。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
+  每次批量请求云硬盘的上限数量为100。
      */
     DiskIds: Array<string>;
 }
@@ -5028,7 +5076,7 @@ export interface CancelShareBlueprintAcrossAccountsRequest {
      */
     BlueprintId: string;
     /**
-     * 接收共享镜像的账号ID列表。账号ID不同于QQ号，查询用户账号ID请查看账号信息中的账号ID栏。账号个数取值最大为10。
+     * 接收共享镜像的[账号ID](https://cloud.tencent.com/document/product/213/4944#.E8.8E.B7.E5.8F.96.E4.B8.BB.E8.B4.A6.E5.8F.B7.E7.9A.84.E8.B4.A6.E5.8F.B7-id)列表。账号ID不同于QQ号，查询用户账号ID请查看账号信息中的账号ID栏。账号个数取值最大为10。
      */
     AccountIds: Array<string>;
 }
@@ -5067,7 +5115,9 @@ export interface InquirePriceCreateDisksResponse {
  */
 export interface InstanceChargePrepaid {
     /**
-     * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+     * 购买实例的时长，单位：月。
+  - 创建实例时，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+  - 续费实例时，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
      */
     Period: number;
     /**

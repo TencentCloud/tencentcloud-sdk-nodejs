@@ -210,7 +210,7 @@ export interface DescribeReportTaskListRequest {
      */
     EngineTaskId?: string;
     /**
-     * 产品模块
+     * 数据来源,DATA_INTEGRATION、DATA_EXPLORATION、DATA_QUALITY、OM_CENTER等
      */
     ProductSource?: string;
     /**
@@ -5561,7 +5561,7 @@ export interface DescribeBatchOperateTaskDTO {
  */
 export interface DescribeReportTaskListResponse {
     /**
-     * 1
+     * 任务列表信息
      */
     Data?: ReportTaskListInfo;
     /**
@@ -6573,92 +6573,92 @@ export interface ModifyApproveStatusResponse {
  */
 export interface TaskInfoVo {
     /**
-     * 1
+     * 租户id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AppID?: string;
     /**
-     * 1
+     * 项目id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
-     * 1
+     * 任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: string;
     /**
-     * 1
+     * 任务名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
-     * 1
+     * 任务类型id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskTypeId?: number;
     /**
-     * 1
+     * 主账号id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OnwerUid?: string;
     /**
-     * 1
+     * 负责人
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InChargeId?: string;
     /**
-     * 1
+     * 实例id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
-     * 1
+     * jobId
   注意：此字段可能返回 null，表示取不到有效值。
      */
     JobId?: string;
     /**
-     * 1
+     * 引擎类型，DLC、EMR
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineType?: string;
     /**
-     * 1
+     * 引擎名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineName?: string;
     /**
-     * 1
+     * 引擎子类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineSubType?: string;
     /**
-     * 1
+     * 引擎taskId
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineTaskId?: string;
     /**
-     * 1
+     * 引擎执行状态，枚举
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeStatus?: string;
     /**
-     * 1
+     * 引擎执行用户
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeUser?: string;
     /**
-     * 1
+     * 引擎执行开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeStartTime?: string;
     /**
-     * 1
+     * 引擎执行结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeEndTime?: string;
     /**
-     * 1
+     * 数据来源,DATA_INTEGRATION、DATA_EXPLORATION、DATA_QUALITY、OM_CENTER等
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductSource?: string;
@@ -7959,37 +7959,37 @@ export interface InstanceCondition {
  */
 export interface ReportTaskDetail {
     /**
-     * 1
+     * 引擎任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineTaskId?: string;
     /**
-     * 1
+     * 引擎执行状态，枚举
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeStatus?: string;
     /**
-     * 1
+     * 引擎执行开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeStartTime?: string;
     /**
-     * 1
+     * 引擎执行结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeEndTime?: string;
     /**
-     * 1
+     * 任务类型id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskTypeId?: number;
     /**
-     * 1
+     * 业务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessInfo?: string;
     /**
-     * 1
+     * 引擎任务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineTaskInfo?: EngineTaskInfo;
@@ -9940,102 +9940,107 @@ export interface CreateTaskFolderRequest {
  */
 export interface EngineTaskInfo {
     /**
-     * 1
+     * 引擎提交时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineSubmitTime?: string;
     /**
-     * 1
+     * 引擎执行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeTime?: string;
     /**
-     * 1
+     * 引擎执行总时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeTimes?: number;
     /**
-     * 1
+     * cu消耗
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CuConsume?: number;
     /**
-     * 1
+     * 资源消耗
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceUsage?: number;
     /**
-     * 1
+     * 引擎名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineName?: string;
     /**
-     * 1
+     * 引擎执行状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineExeStatus?: string;
     /**
-     * 1
+     * 任务种类
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskKind?: string;
     /**
-     * 1
+     * 任务类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskType?: string;
     /**
-     * 1
+     * 任务SQL语句
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskContent?: string;
     /**
-     * 1
+     * 数据扫描总 bytes
+  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InputBytesSum?: number;
     /**
-     * 1
+     * shuffle read 总 bytes
+  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ShuffleReadBytesSum?: number;
     /**
-     * 1
+     * shuffle read 总行数
+  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ShuffleReadRecordsSum?: number;
     /**
-     * 1
+     * 输出总行数
+  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputRecordsSum?: number;
     /**
-     * 1
+     * 输出总 bytes
+  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputBytesSum?: number;
     /**
-     * 1
+     * 输出文件数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputFilesNum?: number;
     /**
-     * 1
+     * 输出小文件数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputSmallFilesNum?: number;
     /**
-     * 1
+     * 执行等待时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WaitTime?: number;
     /**
-     * 1
+     * 查询结果时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QueryResultTime?: number;
     /**
-     * 1
+     * 入参
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CmdArgs?: string;
@@ -12360,53 +12365,13 @@ export interface CheckIntegrationNodeNameExistsRequest {
  */
 export interface DescribeReportTaskDetailRequest {
     /**
-     * 页码
-     */
-    PageNum?: number;
-    /**
-     * 每页条数
-     */
-    PageSize?: number;
-    /**
      * 租户id
      */
-    TenantId?: string;
-    /**
-     * 项目id
-     */
-    ProjectId?: string;
-    /**
-     * 任务id
-     */
-    TaskId?: string;
-    /**
-     * 实例id
-     */
-    InstanceId?: string;
-    /**
-     * 作业id
-     */
-    JobId?: string;
+    TenantId: string;
     /**
      * 引擎任务id
      */
-    EngineTaskId?: string;
-    /**
-     * 产品模块
-     */
-    ProductSource?: string;
-    /**
-     * 主账号
-     */
-    OnwerUid?: string;
-    /**
-     * 开始时间
-     */
-    StartTime?: string;
-    /**
-     * 结束时间
-     */
-    EndTime?: string;
+    EngineTaskId: string;
 }
 /**
  * GetOfflineInstanceList返回参数结构体
@@ -15008,27 +14973,27 @@ export interface DescribeTaskLockStatusResponse {
  */
 export interface ReportTaskListInfo {
     /**
-     * 1
+     * 任务列表详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Rows?: Array<TaskInfoVo>;
     /**
-     * 1
+     * 页码
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PageNum?: number;
     /**
-     * 1
+     * 每页条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PageSize?: number;
     /**
-     * 1
+     * 总记录数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
-     * 1
+     * 总页数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalPageNumber?: number;
@@ -19847,6 +19812,11 @@ export interface Project {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecondModuleList?: Array<string>;
+    /**
+     * 项目负责人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Owner?: BaseUser;
 }
 /**
  * DescribeRealTimeTaskMetricOverview返回参数结构体

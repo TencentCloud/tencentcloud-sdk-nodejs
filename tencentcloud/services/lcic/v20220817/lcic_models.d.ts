@@ -142,7 +142,7 @@ export interface CreateRoomRequest {
      */
     RecordStream?: number;
     /**
-     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     * 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式
      */
     WhiteBoardSnapshotMode?: number;
 }
@@ -2948,7 +2948,7 @@ export interface RoomInfo {
      */
     RecordStream?: number;
     /**
-     * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+     * 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式
      */
     WhiteBoardSnapshotMode?: number;
 }

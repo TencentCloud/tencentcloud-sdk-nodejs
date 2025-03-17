@@ -438,6 +438,16 @@ it("as.v20180419.DescribeLaunchConfigurations", async function () {
     }
 })
 
+it("as.v20180419.EnterStandby", async function () {
+    try {
+       const data = await client.EnterStandby({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.CreateScalingPolicy", async function () {
     try {
        const data = await client.CreateScalingPolicy({})

@@ -16,6 +16,34 @@
  */
 
 /**
+ * DescribeEventStatistics返回参数结构体
+ */
+export interface DescribeEventStatisticsResponse {
+  /**
+   * 正常产品数
+   */
+  Data?: TotalStatus
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEvents返回参数结构体
+ */
+export interface DescribeEventsResponse {
+  /**
+   * 事件详情列表
+   */
+  Data?: ProductEventList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 事件详情信息，包含：产品名称、地域名称、事件开始时间、事件结束时间、事件当前状态；
  */
 export interface EventDetail {
@@ -50,17 +78,48 @@ export interface EventDetail {
 }
 
 /**
- * DescribeEvents返回参数结构体
+ * 产品可用性事件详情列表
  */
-export interface DescribeEventsResponse {
+export interface ProductEventList {
   /**
    * 事件详情列表
    */
-  Data?: ProductEventList
+  EventList?: Array<EventDetail>
+}
+
+/**
+ * 状态汇总
+ */
+export interface TotalStatus {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 正常状态的数目
    */
-  RequestId?: string
+  NormalCount?: number
+  /**
+   * 通知状态的数目
+   */
+  NotifyCount?: number
+  /**
+   * 异常状态的数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AbnormalCount?: number
+}
+
+/**
+ * DescribeEventStatistics请求参数结构体
+ */
+export interface DescribeEventStatisticsRequest {
+  /**
+   * 1. 查询非区域性产品事件时，地域ID指定为：non-regional
+2. 其他地域ID取值请参考：https://cloud.tencent.com/document/api/213/15692
+   */
+  RegionId: string
+  /**
+   * 1. 不指定产品列表时将查询所有产品。
+2. 产品ID示例：cvm、lb、cdb、cdn、crs
+   */
+  ProductIds?: Array<string>
 }
 
 /**
@@ -82,14 +141,4 @@ export interface DescribeEventsRequest {
 3. 其他地域ID取值请参考：https://cloud.tencent.com/document/api/213/15692
    */
   RegionIds?: Array<string>
-}
-
-/**
- * 产品可用性事件详情列表
- */
-export interface ProductEventList {
-  /**
-   * 事件详情列表
-   */
-  EventList?: Array<EventDetail>
 }

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeEventsResponse, DescribeEventsRequest } from "./tchd_models";
+import { DescribeEventStatisticsResponse, DescribeEventsResponse, DescribeEventStatisticsRequest, DescribeEventsRequest } from "./tchd_models";
 /**
  * tchd client
  * @class
@@ -13,4 +13,9 @@ export declare class Client extends AbstractClient {
 可以参考健康看板历史事件页面来获取查询案例（链接：https://status.cloud.tencent.com/history）。
      */
     DescribeEvents(req: DescribeEventsRequest, cb?: (error: string, rep: DescribeEventsResponse) => void): Promise<DescribeEventsResponse>;
+    /**
+     * 本接口用于查询腾讯云健康看板的实时可用性事件信息，可以通过产品列表、地域进行过滤查询。
+可以参考健康看板历史事件页面来获取查询案例（链接：https://status.cloud.tencent.com/history）。
+     */
+    DescribeEventStatistics(req: DescribeEventStatisticsRequest, cb?: (error: string, rep: DescribeEventStatisticsResponse) => void): Promise<DescribeEventStatisticsResponse>;
 }

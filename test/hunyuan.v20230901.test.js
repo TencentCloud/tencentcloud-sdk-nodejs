@@ -118,6 +118,16 @@ it("hunyuan.v20230901.GetThreadMessageList", async function () {
     }
 })
 
+it("hunyuan.v20230901.GroupChatCompletions", async function () {
+    try {
+       const data = await client.GroupChatCompletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.GetThreadMessage", async function () {
     try {
        const data = await client.GetThreadMessage({})

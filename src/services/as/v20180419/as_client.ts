@@ -33,6 +33,7 @@ import {
   CreateLaunchConfigurationResponse,
   RelatedInstance,
   Advice,
+  EnterStandbyRequest,
   CreateLifecycleHookResponse,
   ClearLaunchConfigurationAttributesResponse,
   DescribeAutoScalingGroupsResponse,
@@ -47,7 +48,7 @@ import {
   ModifyScheduledActionResponse,
   AttachLoadBalancersResponse,
   ExecuteScalingPolicyResponse,
-  DeleteAutoScalingGroupRequest,
+  ForwardLoadBalancerIdentification,
   SetInstancesProtectionResponse,
   StartAutoScalingInstancesResponse,
   CompleteLifecycleActionRequest,
@@ -92,6 +93,7 @@ import {
   ModifyScalingPolicyRequest,
   InstanceMarketOptionsRequest,
   RefreshBatch,
+  EnterStandbyResponse,
   UpgradeLifecycleHookResponse,
   InstanceTag,
   ModifyLifecycleHookResponse,
@@ -158,7 +160,7 @@ import {
   ForwardLoadBalancer,
   ClearLaunchConfigurationAttributesRequest,
   InstanceNameIndexSettings,
-  ForwardLoadBalancerIdentification,
+  DeleteAutoScalingGroupRequest,
   AutoScalingAdvice,
   StartAutoScalingInstancesRequest,
   AttachInstancesRequest,
@@ -747,6 +749,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLaunchConfigurationsResponse) => void
   ): Promise<DescribeLaunchConfigurationsResponse> {
     return this.request("DescribeLaunchConfigurations", req, cb)
+  }
+
+  /**
+   * 伸缩组内实例进入备用中状态。
+   * 备用中状态实例的 CLB 权重值为 0，不会被自动缩容、不健康替换、实例刷新操作选中
+   * 调用弹性伸缩开关机接口会使得备用中状态发生变化，而云服务器开关机接口不会影响
+   * 实例进入备用中状态后，伸缩组会尝试下调期望实例数，新期望数不会小于最小值
+   */
+  async EnterStandby(
+    req: EnterStandbyRequest,
+    cb?: (error: string, rep: EnterStandbyResponse) => void
+  ): Promise<EnterStandbyResponse> {
+    return this.request("EnterStandby", req, cb)
   }
 
   /**

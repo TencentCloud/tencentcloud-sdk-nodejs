@@ -1648,6 +1648,21 @@ export interface EnterpriseLicenseOCRResponse {
 }
 
 /**
+ * 银行回单
+ */
+export interface BankSlip {
+  /**
+   * 银行回单信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BankSlipInfos?: Array<BankSlipInfo>
+  /**
+   * 银行回单信息常用字段
+   */
+  CommonBankSlipInfos?: Array<BankSlipInfo>
+}
+
+/**
  * QuestionOCR返回参数结构体
  */
 export interface QuestionOCRResponse {
@@ -4369,6 +4384,11 @@ export interface SingleInvoiceItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomsPaymentReceipt?: CustomsPaymentReceipt
+  /**
+   * 银行回单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BankSlip?: BankSlip
 }
 
 /**

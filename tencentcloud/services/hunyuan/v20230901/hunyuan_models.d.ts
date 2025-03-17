@@ -272,6 +272,19 @@ export interface Multimedia {
     Ext?: SongExt;
 }
 /**
+ * 人物描述
+ */
+export interface Character {
+    /**
+     * 人物名称
+     */
+    Name?: string;
+    /**
+     * 人物对应SystemPrompt
+     */
+    SystemPrompt?: string;
+}
+/**
  * ActivateService请求参数结构体
  */
 export interface ActivateServiceRequest {
@@ -845,21 +858,104 @@ export interface EmbeddingData {
     Object?: string;
 }
 /**
- * function定义
+ * 群聊会话内容
  */
-export interface ToolFunction {
+export interface GroupMessage {
     /**
-     * function名称，只能包含a-z，A-Z，0-9，\_或-
+     * 角色，可选值包括 system、user、assistant、 tool。
      */
-    Name: string;
+    Role: string;
     /**
-     * function参数，一般为json字符串
+     * 文本内容
      */
-    Parameters: string;
+    Content?: string;
     /**
-     * function的简单描述
+     * 角色名称
      */
-    Description?: string;
+    Name?: string;
+}
+/**
+ * GroupChatCompletions请求参数结构体
+ */
+export interface GroupChatCompletionsRequest {
+    /**
+     * 模型名称，可选值包括 hunyuan-large-role-group。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。
+     */
+    Model: string;
+    /**
+     * 聊天上下文信息。
+     */
+    Messages: Array<GroupMessage>;
+    /**
+     * 流式调用开关。
+  说明：
+  1. 未传值时默认为非流式调用（false）。
+  2. 流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。
+  3. 非流式调用时：
+  调用方式与普通 HTTP 请求无异。
+  接口响应耗时较长，**如需更低时延建议设置为 true**。
+  只返回一次最终结果（返回值取 Choices[n].Message 中的值）。
+  
+  注意：
+  通过 SDK 调用时，流式和非流式调用需用**不同的方式**获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。
+     */
+    Stream?: boolean;
+    /**
+     * 目标人物名称
+     */
+    TargetCharacterName?: string;
+    /**
+     * 角色描述
+     */
+    GroupChatConfig?: GroupChatConfig;
+    /**
+     * 用户ID
+     */
+    UserId?: string;
+    /**
+     * 对话接口
+     */
+    SessionId?: string;
+}
+/**
+ * 搜索结果信息
+ */
+export interface SearchInfo {
+    /**
+     * 搜索引文信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SearchResults?: Array<SearchResult>;
+    /**
+     * 脑图（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Mindmap?: Mindmap;
+    /**
+     * 相关事件（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelevantEvents?: Array<RelevantEvent>;
+    /**
+     * 相关组织及人物（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelevantEntities?: Array<RelevantEntity>;
+    /**
+     * 时间线（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timeline?: Array<Timeline>;
+    /**
+     * 是否命中搜索深度模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportDeepSearch?: boolean;
+    /**
+     * 搜索回复大纲（深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Outline?: Array<string>;
 }
 /**
  * 返回的内容（流式返回）
@@ -959,6 +1055,23 @@ export interface ThreadAdditionalMessage {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Attachments?: Array<ThreadMessageAttachmentObject>;
+}
+/**
+ * function定义
+ */
+export interface ToolFunction {
+    /**
+     * function名称，只能包含a-z，A-Z，0-9，\_或-
+     */
+    Name: string;
+    /**
+     * function参数，一般为json字符串
+     */
+    Parameters: string;
+    /**
+     * function的简单描述
+     */
+    Description?: string;
 }
 /**
  * 具体的function调用
@@ -1103,6 +1216,57 @@ export interface SubmitHunyuanImageJobResponse {
     JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GroupChatCompletions返回参数结构体
+ */
+export interface GroupChatCompletionsResponse {
+    /**
+     * Unix 时间戳，单位为秒。
+     */
+    Created?: number;
+    /**
+     * Token 统计信息。
+  按照总 Token 数量计费。
+     */
+    Usage?: Usage;
+    /**
+     * 免责声明。
+     */
+    Note?: string;
+    /**
+     * 本次请求的 RequestId。
+     */
+    Id?: string;
+    /**
+     * 回复内容。
+     */
+    Choices?: Array<Choice>;
+    /**
+     * 错误信息。
+  如果流式返回中服务处理异常，返回该错误信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: ErrorMsg;
+    /**
+     * 搜索结果信息
+     */
+    SearchInfo?: SearchInfo;
+    /**
+     * 多媒体信息。
+  说明：
+  1. 可以用多媒体信息替换回复内容里的占位符，得到完整的消息。
+  2. 可能会出现回复内容里存在占位符，但是因为审核等原因没有返回多媒体信息。
+     */
+    Replaces?: Array<Replace>;
+    /**
+     * 推荐问答。
+     */
+    RecommendedQuestions?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
      */
     RequestId?: string;
 }
@@ -1497,44 +1661,21 @@ export interface ErrorMsg {
     Code?: number;
 }
 /**
- * 搜索结果信息
+ * 群聊配置
  */
-export interface SearchInfo {
+export interface GroupChatConfig {
     /**
-     * 搜索引文信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 人物名称
      */
-    SearchResults?: Array<SearchResult>;
+    UserName?: string;
     /**
-     * 脑图（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回）
-  注意：此字段可能返回 null，表示取不到有效值。
+     * ### 主题：\n武道修炼与科技创新的碰撞\n\n### 地点：\n布尔玛的实验室\n\n### 故事背景：\n布尔玛正在研发一种新型的龙珠雷达，旨在更精确地定位龙珠的位置。她邀请了孙悟空、天津饭、饺子和雅木茶前来测试新设备。然而，这些武道家们对科技的理解有限，导致了一系列有趣的误解和互动。\n\n### 人物关系：\n- **布尔玛**：天才科学家，负责研发和解释新设备。\n- **孙悟空**：纯粹的战斗狂，对科技一窍不通，但对新事物充满好奇。\n- **天津饭**：严肃自律的武道家，对科技持谨慎态度，但愿意尝试。\n- **饺子**：内向单纯，依赖天津饭，对科技感到困惑和害怕。\n- **雅木茶**：幽默自嘲的前沙漠强盗，对科技有一定了解，但更倾向于轻松调侃。\n\n### 人物目标：\n- **布尔玛**：希望新龙珠雷达能够得到有效测试，并得到反馈以改进。\n- **孙悟空**：希望通过新设备找到更强的对手进行战斗。\n- **天津饭**：希望通过测试新设备提升自己的武道修炼。\n- **饺子**：希望在不引起麻烦的情况下完成任务，并得到天津饭的认可。\n- **雅木茶**：希望通过参与测试证明自己的价值，同时享受与朋友们的互动。\n\n### 场景描述：\n布尔玛在实验室中展示她的新龙珠雷达，解释其工作原理和优势。孙悟空对设备的功能感到兴奋，但完全无法理解技术细节，不断提出天真的问题。天津饭则严肃地询问设备的安全性和可靠性，表现出对科技的谨慎态度。饺子对复杂的设备感到害怕，不断向天津饭寻求确认和安慰。雅木茶则在一旁调侃大家的反应，试图缓解紧张气氛。布尔玛在解释过程中不断被孙悟空的问题打断，感到无奈，但也被他的热情所感染。最终，大家决定一起外出测试新设备，展开一场充满欢笑和冒险的旅程。
      */
-    Mindmap?: Mindmap;
+    Description?: string;
     /**
-     * 相关事件（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 角色描述
      */
-    RelevantEvents?: Array<RelevantEvent>;
-    /**
-     * 相关组织及人物（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RelevantEntities?: Array<RelevantEntity>;
-    /**
-     * 时间线（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Timeline?: Array<Timeline>;
-    /**
-     * 是否命中搜索深度模式
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SupportDeepSearch?: boolean;
-    /**
-     * 搜索回复大纲（深度模式下返回）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Outline?: Array<string>;
+    Characters?: Array<Character>;
 }
 /**
  * RunThread返回参数结构体

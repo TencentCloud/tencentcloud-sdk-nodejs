@@ -1644,6 +1644,10 @@ export interface DescribeDBDiagEventsRequest {
      */
     InstanceIds?: Array<string>;
     /**
+     * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+     */
+    Product?: string;
+    /**
      * 偏移量，默认0。
      */
     Offset?: number;
@@ -3169,11 +3173,11 @@ export interface DescribeDBDiagEventsResponse {
     /**
      * 诊断事件的总数目。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 诊断事件的列表。
      */
-    Items: Array<DiagHistoryEventItem>;
+    Items?: Array<DiagHistoryEventItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

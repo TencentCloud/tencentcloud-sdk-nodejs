@@ -65,7 +65,6 @@ export interface BizTaskModifyInstanceParam {
     InstanceId?: string;
     /**
      * 实例参数修改任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyInstanceParamList?: Array<ModifyParamItem>;
 }
@@ -361,22 +360,18 @@ export interface RollbackRoGroupInfo {
 export interface CreateClustersResponse {
     /**
      * 冻结流水ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TranId?: string;
     /**
      * 订单号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DealNames?: Array<string>;
     /**
      * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: Array<string>;
     /**
      * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterIds?: Array<string>;
     /**
@@ -1024,7 +1019,6 @@ export interface CynosdbInstance {
     ServerlessStatus?: string;
     /**
      * 预付费存储Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageId?: string;
     /**
@@ -1037,17 +1031,14 @@ export interface CynosdbInstance {
     PhysicalZone?: string;
     /**
      * 商业类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessType?: string;
     /**
      * 任务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tasks?: Array<ObjectTask>;
     /**
      * 是否冻结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFreeze?: string;
     /**
@@ -1057,7 +1048,6 @@ export interface CynosdbInstance {
     ResourceTags?: Array<Tag>;
     /**
      * 主可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterZone?: string;
     /**
@@ -1067,7 +1057,6 @@ export interface CynosdbInstance {
     SlaveZones?: Array<string>;
     /**
      * 实例网络信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceNetInfo?: Array<InstanceNetInfo>;
     /**
@@ -1077,22 +1066,18 @@ export interface CynosdbInstance {
     ResourcePackages?: Array<ResourcePackage>;
     /**
      * 实例索引形态,可选值【mixedRowColumn（行列混存），onlyRowIndex（仅行存）】
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIndexMode?: string;
     /**
      * 当前实例支持的能力
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceAbility?: InstanceAbility;
     /**
      * 实例机器类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceType?: string;
     /**
      * 实例存储类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStorageType?: string;
 }
@@ -1263,22 +1248,18 @@ export interface ProxySpec {
 export interface AddInstancesResponse {
     /**
      * 冻结流水，一次开通一个冻结流水。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TranId?: string;
     /**
      * 后付费订单号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DealNames?: Array<string>;
     /**
      * 发货资源id列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: Array<string>;
     /**
      * 大订单号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BigDealIds?: Array<string>;
     /**
@@ -1376,34 +1357,30 @@ export interface SlowQueriesItem {
 export interface ProxyGroupInfo {
     /**
      * 数据库代理组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyGroup: ProxyGroup;
+    ProxyGroup?: ProxyGroup;
     /**
      * 数据库代理组读写分离信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyGroupRwInfo: ProxyGroupRwInfo;
+    ProxyGroupRwInfo?: ProxyGroupRwInfo;
     /**
      * 数据库代理节点信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyNodes: Array<ProxyNodeInfo>;
+    ProxyNodes?: Array<ProxyNodeInfo>;
     /**
      * 数据库代理连接池信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectionPool: ProxyConnectionPoolInfo;
+    ConnectionPool?: ProxyConnectionPoolInfo;
     /**
      * 数据库代理网络信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetAddrInfos: Array<NetAddr>;
+    NetAddrInfos?: Array<NetAddr>;
     /**
      * 数据库代理任务集
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tasks: Array<ObjectTask>;
+    Tasks?: Array<ObjectTask>;
 }
 /**
  * AssociateSecurityGroups返回参数结构体
@@ -1884,7 +1861,6 @@ export interface ProxyGroupRwInfo {
     InstanceWeights?: Array<ProxyInstanceWeight>;
     /**
      * 是否开通读写节点，yse-是，no-否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpenRw?: string;
     /**
@@ -2956,7 +2932,6 @@ export interface DescribeBinlogsResponse {
     TotalCount?: number;
     /**
      * Binlog列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Binlogs?: Array<BinlogItem>;
     /**
@@ -3147,22 +3122,18 @@ export interface CreateParamTemplateResponse {
 export interface DescribeAccountAllGrantPrivilegesResponse {
     /**
      * 权限语句
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivilegeStatements?: Array<string>;
     /**
      * 全局权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GlobalPrivileges?: Array<string>;
     /**
      * 数据库权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DatabasePrivileges?: Array<DatabasePrivileges>;
     /**
      * 数据库表权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TablePrivileges?: Array<TablePrivileges>;
     /**
@@ -3359,17 +3330,14 @@ export interface RollbackData {
     SnapshotTime?: string;
     /**
      * 回档到serverlessls集群时最小CPU
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinCpu?: number;
     /**
      * 回档到serverlessls集群时最大CPU
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxCpu?: number;
     /**
      * 快照ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SnapShotId?: number;
     /**
@@ -3384,12 +3352,10 @@ export interface RollbackData {
     RollbackTables?: Array<RollbackTable>;
     /**
      * 备份文件名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupFileName?: string;
     /**
      * 回档进程
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RollbackProcess?: RollbackProcessInfo;
 }
@@ -3678,22 +3644,18 @@ export interface DescribeBackupConfigResponse {
     ReserveDuration?: number;
     /**
      * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupFreq?: Array<string>;
     /**
      * 备份方式，logic-逻辑备份，snapshot-快照备份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupType?: string;
     /**
      * 跨地域逻辑备份配置修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicCrossRegionsConfigUpdateTime?: string;
     /**
      * 自动逻辑备份配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogicBackupConfig?: LogicBackupConfigInfo;
     /**
@@ -3758,22 +3720,18 @@ export interface DescribeProjectSecurityGroupsRequest {
 export interface ServerlessZoneStockInfo {
     /**
      * 可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
      * 存储量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StockCount?: number;
     /**
      * 是否包含库存
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasStock?: boolean;
     /**
      * 从可用区库存信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZoneStockInfos?: Array<SlaveZoneStockInfo>;
 }
@@ -4890,7 +4848,6 @@ export interface ReloadBalanceProxyNodeRequest {
 export interface DescribeAccountsResponse {
     /**
      * 数据库账号列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountSet?: Array<Account>;
     /**
@@ -5089,12 +5046,10 @@ export interface BizTaskModifyParamsData {
     ClusterId?: string;
     /**
      * 集群参数修改数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterParamList?: Array<ModifyParamItem>;
     /**
      * 实例参数修改数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyInstanceParams?: Array<BizTaskModifyInstanceParam>;
 }
@@ -5258,7 +5213,6 @@ export interface BizTaskInfo {
     ClusterId?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
@@ -5267,12 +5221,10 @@ export interface BizTaskInfo {
     CreateTime?: string;
     /**
      * 延迟执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DelayTime?: string;
     /**
      * 任务失败信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrMsg?: string;
     /**
@@ -5356,17 +5308,14 @@ export interface BizTaskInfo {
     ModifyParamsData?: Array<ModifyParamsData>;
     /**
      * 创建集群任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateClustersData?: CreateClustersData;
     /**
      * 集群回档任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RollbackData?: RollbackData;
     /**
      * 实例变配任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyInstanceData?: ModifyInstanceData;
     /**
@@ -5376,12 +5325,10 @@ export interface BizTaskInfo {
     ManualBackupData?: ManualBackupData;
     /**
      * 修改内核版本任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyDbVersionData?: ModifyDbVersionData;
     /**
      * 集群可用区信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterSlaveData?: ClusterSlaveData;
     /**
@@ -5396,13 +5343,11 @@ export interface BizTaskInfo {
     ModifyInstanceParamsData?: BizTaskModifyParamsData;
     /**
      * 维护时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskMaintainInfo?: TaskMaintainInfo;
     /**
      * 实例日志投递信息
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>;
     /**
@@ -5532,12 +5477,10 @@ export interface DescribeBackupConfigRequest {
 export interface ExchangeInstanceInfo {
     /**
      * 源实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcInstanceInfo?: RollbackInstanceInfo;
     /**
      * 目标实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstInstanceInfo?: RollbackInstanceInfo;
 }
@@ -7084,179 +7027,144 @@ export interface CynosdbCluster {
     InstanceNum: number;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin: string;
     /**
      * 引擎类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbType: string;
     /**
      * 用户appid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId: number;
     /**
      * 集群状态描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusDesc: string;
     /**
      * 集群创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime: string;
     /**
      * 付费模式。0-按量计费，1-包年包月
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode: number;
     /**
      * 截止时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PeriodEndTime: string;
     /**
      * 集群读写vip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip: string;
     /**
      * 集群读写vport
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport: number;
     /**
      * 项目id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectID: number;
     /**
      * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * cynos内核版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CynosVersion?: string;
     /**
      * 存储容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageLimit?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 正在处理的任务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProcessingTask?: string;
     /**
      * 集群的任务数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tasks?: Array<ObjectTask>;
     /**
      * 集群绑定的tag数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceTags?: Array<Tag>;
     /**
      * Db类型(NORMAL, SERVERLESS)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbMode?: string;
     /**
      * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
   resume
   pause
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerlessStatus?: string;
     /**
      * 集群预付费存储值大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Storage?: number;
     /**
      * 集群存储为预付费时的存储ID，用于预付费存储变配
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageId?: string;
     /**
      * 集群存储付费模式。0-按量计费，1-包年包月
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StoragePayMode?: number;
     /**
      * 集群计算规格对应的最小存储值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinStorageSize?: number;
     /**
      * 集群计算规格对应的最大存储值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxStorageSize?: number;
     /**
      * 集群网络信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetAddrs?: Array<NetAddr>;
     /**
      * 物理可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PhysicalZone?: string;
     /**
      * 主可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterZone?: string;
     /**
      * 是否有从可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasSlaveZone?: string;
     /**
      * 从可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZones?: Array<string>;
     /**
      * 商业类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessType?: string;
     /**
      * 是否冻结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFreeze?: string;
     /**
      * 订单来源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrderSource?: string;
     /**
      * 能力
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ability?: Ability;
     /**
      * 实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourcePackages?: Array<ResourcePackage>;
 }
@@ -7643,7 +7551,6 @@ export interface CynosdbClusterDetail {
     Zone?: string;
     /**
      * 物理可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PhysicalZone?: string;
     /**
@@ -7664,27 +7571,22 @@ export interface CynosdbClusterDetail {
     ServerlessStatus?: string;
     /**
      * 存储Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageId?: string;
     /**
      * 存储大小，单位为G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Storage?: number;
     /**
      * 最大存储规格，单位为G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxStorageSize?: number;
     /**
      * 最小存储规格，单位为G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinStorageSize?: number;
     /**
      * 存储付费类型，1为包年包月，0为按量计费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StoragePayMode?: number;
     /**
@@ -7717,7 +7619,6 @@ export interface CynosdbClusterDetail {
     DbType?: string;
     /**
      * Db类型：<li>NORMAL</li><li>SERVERLESS</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbMode?: string;
     /**
@@ -7726,7 +7627,6 @@ export interface CynosdbClusterDetail {
     DbVersion?: string;
     /**
      * 存储空间上限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageLimit?: number;
     /**
@@ -7747,42 +7647,34 @@ export interface CynosdbClusterDetail {
     RoAddr?: Array<Addr>;
     /**
      * 集群支持的功能
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ability?: Ability;
     /**
      * cynos版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CynosVersion?: string;
     /**
      * 商业类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessType?: string;
     /**
      * 是否有从可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasSlaveZone?: string;
     /**
      * 是否冻结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFreeze?: string;
     /**
      * 任务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tasks?: Array<ObjectTask>;
     /**
      * 主可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterZone?: string;
     /**
      * 从可用区列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZones?: Array<string>;
     /**
@@ -7807,52 +7699,42 @@ export interface CynosdbClusterDetail {
     ResourceTags?: Array<Tag>;
     /**
      * Proxy状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyStatus?: string;
     /**
      * binlog开关，可选值：ON, OFF
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogBin?: string;
     /**
      * 是否跳过交易
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSkipTrade?: string;
     /**
      * pitr类型，可选值：normal, redo_pitr
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PitrType?: string;
     /**
      * 是否打开密码复杂度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsOpenPasswordComplexity?: string;
     /**
      * 网络类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkStatus?: string;
     /**
      * 集群绑定的资源包信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourcePackages?: Array<ResourcePackage>;
     /**
      * 自动续费标识，1为自动续费，0为到期不续
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 节点网络类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkType?: string;
     /**
      * 备可用区属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZoneAttr?: Array<SlaveZoneAttrItem>;
     /**
@@ -8124,12 +8006,10 @@ export interface InstanceAuditRule {
 export interface ExchangeRoGroupInfo {
     /**
      * 源RO组信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcRoGroupInfo?: RollbackRoGroupInfo;
     /**
      * 目标RO组信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstRoGroupInfo?: RollbackRoGroupInfo;
 }
@@ -8298,37 +8178,30 @@ export interface ClusterInstanceDetail {
     InstanceRole?: string;
     /**
      * 执行开始时间(距离0点的秒数)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainStartTime?: number;
     /**
      * 持续的时间(单位：秒)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainDuration?: number;
     /**
      * 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainWeekDays?: Array<string>;
     /**
      * serverless实例子状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerlessStatus?: string;
     /**
      * 实例任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceTasks?: Array<ObjectTask>;
     /**
      * 实例机器类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceDeviceType?: string;
     /**
      * 实例存储类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStorageType?: string;
     /**
@@ -8544,17 +8417,14 @@ export interface CynosdbInstanceGroup {
     InstanceSet?: Array<CynosdbInstance>;
     /**
      * VPC的ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqVpcId?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqSubnetId?: string;
     /**
      * 正在回收IP信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldAddrInfo?: OldAddrInfo;
     /**
@@ -8945,7 +8815,6 @@ export interface ParamDetail {
     Min?: string;
     /**
      * 参数的可选枚举值。如果为非枚举值，则为空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnumValue?: Array<string>;
     /**
@@ -8962,22 +8831,18 @@ export interface ParamDetail {
     MatchValue?: string;
     /**
      * true-为公式，false-非公式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFunc?: boolean;
     /**
      * 参数设置为公式时，Func返回设置的公式内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Func?: string;
     /**
      * 参数是否可修改
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifiableInfo?: ModifiableInfo;
     /**
      * 支持公式的参数的默认公式样式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FuncPattern?: string;
 }
@@ -9289,12 +9154,10 @@ export interface RollbackTableInfo {
 export interface RollbackProcessInfo {
     /**
      * 是否可以交换vip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsVipSwitchable?: boolean;
     /**
      * vip可交换时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VipSwitchableTime?: string;
     /**
@@ -9309,17 +9172,14 @@ export interface RollbackProcessInfo {
     ExchangeRoGroupInfoList?: Array<ExchangeRoGroupInfo>;
     /**
      * 当前步骤
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentStep?: string;
     /**
      * 当前步骤进度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentStepProgress?: number;
     /**
      * 当前步骤剩余时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentStepRemainingTime?: string;
 }
@@ -9996,12 +9856,10 @@ export interface InstanceSpec {
     MaxIoBandWidth?: number;
     /**
      * 地域库存信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneStockInfos?: Array<ZoneStockInfo>;
     /**
      * 库存数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StockCount?: number;
 }
@@ -10087,12 +9945,10 @@ export interface ModifyServerlessStrategyRequest {
 export interface DescribeBinlogConfigResponse {
     /**
      * Binlog跨地域配置更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BinlogCrossRegionsConfigUpdateTime?: string;
     /**
      * Binlog配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BinlogConfig?: BinlogConfigInfo;
     /**
@@ -10478,7 +10334,6 @@ export interface ZoneStockInfo {
     StockCount?: number;
     /**
      * 备可用区库存信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZoneStockInfos?: Array<SlaveZoneStockInfo>;
 }
