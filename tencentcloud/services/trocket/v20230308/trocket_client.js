@@ -234,6 +234,12 @@ TopicName，主题名称过滤
         return this.request("DescribeMessageList", req, cb);
     }
     /**
+     * 重置消费位点
+     */
+    async ResetConsumerGroupOffset(req, cb) {
+        return this.request("ResetConsumerGroupOffset", req, cb);
+    }
+    /**
      * 获取主题列表，Filter参数使用说明如下：
 
 1. TopicName，主题名称模糊搜索

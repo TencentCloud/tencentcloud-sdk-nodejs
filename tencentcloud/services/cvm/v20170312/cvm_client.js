@@ -221,6 +221,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageSharePermission", req, cb);
     }
     /**
+     * 获取指定实例的属性，目前支持查询实例自定义数据User-Data。
+     */
+    async DescribeInstancesAttributes(req, cb) {
+        return this.request("DescribeInstancesAttributes", req, cb);
+    }
+    /**
      * 本接口 (DescribeInstancesModification) 用于查询指定实例支持调整的机型配置。
      */
     async DescribeInstancesModification(req, cb) {

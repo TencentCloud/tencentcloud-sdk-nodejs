@@ -106,11 +106,11 @@ export interface RegisterInstanceInfo {
    */
   RegisterCodeId?: string
   /**
-   * 实例ID。
+   * 托管实例ID。
    */
   InstanceId?: string
   /**
-   * 实例名。
+   * 托管实例名。
    */
   InstanceName?: string
   /**
@@ -1489,6 +1489,9 @@ export interface InvocationTask {
   ErrorInfo?: string
   /**
    * 调用来源。
+
+- USER：来源于用户调用。
+- INVOKER：来源于定时执行。
    */
   InvocationSource?: string
 }
@@ -1559,7 +1562,6 @@ export interface DescribeRegisterCodesResponse {
   TotalCount?: number
   /**
    * 注册码信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisterCodeSet?: Array<RegisterCodeInfo>
   /**
@@ -2014,7 +2016,6 @@ export interface Invoker {
   Enable?: boolean
   /**
    * 执行器周期计划。周期执行器会返回此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleSettings?: ScheduleSettings
   /**

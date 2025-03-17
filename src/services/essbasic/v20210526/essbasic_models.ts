@@ -1176,7 +1176,7 @@ export interface FlowFileInfo {
    */
   NeedSignReview?: boolean
   /**
-   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
    */
   FlowDisplayType?: number
 }
@@ -1350,7 +1350,7 @@ export interface BaseFlowInfo {
    */
   Components?: Array<Component>
   /**
-   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
 
    */
   FlowDisplayType?: number
@@ -1641,6 +1641,12 @@ export interface ChannelCreatePrepareFlowRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 签署控件的配置信息，用在嵌入式发起的页面配置，包括
+
+- 签署控件 是否默认展示日期.
+   */
+  SignComponentConfig?: SignComponentConfig
 }
 
 /**
@@ -2875,6 +2881,22 @@ export interface DynamicFlowApproverResult {
    * 签署人状态信息
    */
   ApproverStatus?: number
+}
+
+/**
+ * 签署控件的配置信息，用在嵌入式发起的页面配置，包括 
+
+- 签署控件 是否默认展示日期.
+ */
+export interface SignComponentConfig {
+  /**
+   * 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。
+
+- false 展示签署日期（默认）
+- true 不展示签署日期 
+![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。
+   */
+  HideDate?: boolean
 }
 
 /**
@@ -4692,7 +4714,7 @@ export interface FlowInfo {
    */
   AutoSignScene?: string
   /**
-   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
    */
   FlowDisplayType?: number
 }

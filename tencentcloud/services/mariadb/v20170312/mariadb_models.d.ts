@@ -164,7 +164,6 @@ export interface ParamDesc {
     Value?: string;
     /**
      * 设置过的值，参数生效后，该值和value一样。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SetValue?: string;
     /**
@@ -1264,7 +1263,6 @@ export interface SlowLogData {
     User?: string;
     /**
      * 样例Sql
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExampleSql?: string;
     /**
@@ -3422,7 +3420,6 @@ export interface InstanceBackupFileItem {
     InstanceStatus?: number;
     /**
      * 分片ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ShardId?: string;
     /**
@@ -3554,12 +3551,10 @@ export interface IsolateDBInstanceRequest {
 export interface InstanceSpec {
     /**
      * 设备型号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Machine: string;
     /**
      * 该机型对应的可售卖规格列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SpecInfos: Array<SpecConfigInfo>;
 }
@@ -3578,24 +3573,20 @@ export interface DescribeFlowRequest {
 export interface DCNReplicaConfig {
     /**
      * DCN 运行状态，START为正常运行，STOP为暂停
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoReplicationMode: string;
+    RoReplicationMode?: string;
     /**
      * 延迟复制的类型，DEFAULT为正常，DUE_TIME为指定时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DelayReplicationType: string;
+    DelayReplicationType?: string;
     /**
      * 延迟复制的指定时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DueTime: string;
+    DueTime?: string;
     /**
      * 延迟复制时的延迟秒数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReplicationDelay: number;
+    ReplicationDelay?: number;
 }
 /**
  * ModifyAccountPrivileges请求参数结构体
@@ -3901,12 +3892,10 @@ export interface DescribeDBInstancesResponse {
 export interface ConstraintRange {
     /**
      * 约束类型为section时的最小值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Min?: string;
     /**
      * 约束类型为section时的最大值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Max?: string;
 }
@@ -4036,7 +4025,6 @@ export interface DBAccount {
     ReadOnly?: number;
     /**
      * 该字段对只读账号有意义，表示选择主备延迟小于该值的备机
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DelayThresh?: number;
     /**

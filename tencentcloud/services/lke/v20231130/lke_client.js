@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopDocParse", req, cb);
     }
     /**
-     * 创建属性
+     * 创建标签
      */
     async CreateAttributeLabel(req, cb) {
         return this.request("CreateAttributeLabel", req, cb);

@@ -41,17 +41,14 @@ export interface RocketMQNamespace {
 export interface CreateRabbitMQBindingResponse {
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * vhost名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
     /**
      * 路由关系Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindingId?: number;
     /**
@@ -588,7 +585,6 @@ export interface RabbitMQVipInstance {
     InstanceName?: string;
     /**
      * 实例版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceVersion?: string;
     /**
@@ -629,7 +625,6 @@ export interface RabbitMQVipInstance {
     PayMode?: number;
     /**
      * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -653,12 +648,10 @@ export interface RabbitMQVipInstance {
     PublicAccessEndpoint?: string;
     /**
      * VPC 接入点列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vpcs?: Array<VpcEndpointInfo>;
     /**
      * 创建时间，毫秒为单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
@@ -688,7 +681,6 @@ export interface RabbitMQClusterInfo {
     CreateTime?: number;
     /**
      * 集群说明信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -697,7 +689,6 @@ export interface RabbitMQClusterInfo {
     Vpcs?: Array<VpcEndpointInfo>;
     /**
      * 可用区信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneIds?: Array<number | bigint>;
     /**
@@ -747,27 +738,22 @@ export interface RabbitMQClusterInfo {
     ClusterStatus?: number;
     /**
      * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
     /**
      * 是否开启镜像队列策略。1表示开启，0表示没开启。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MirrorQueuePolicyFlag?: number;
     /**
      * 每秒消费消息数 单位：条/秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MessageConsumeRate?: number;
     /**
      * 集群版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterVersion?: string;
     /**
      * 计费模式，0-后付费，1-预付费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode?: number;
     /**
@@ -806,12 +792,10 @@ export interface RabbitMQVirtualHostStatistics {
 export interface DescribeRabbitMQQueuesResponse {
     /**
      * 列表信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueueInfoList?: Array<RabbitMQQueueListInfo>;
     /**
      * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1110,27 +1094,22 @@ export interface RabbitMQPermission {
     VirtualHost?: string;
     /**
      * 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigRegexp?: string;
     /**
      * 权限类型，消息写入相关操作，该用户可操作该vhost下的资源名称正则表达式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WriteRegexp?: string;
     /**
      * 权限类型，消息读取相关操作，该用户可操作该vhost下的资源名称正则表达式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadRegexp?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
 }
@@ -2195,17 +2174,14 @@ export interface DeleteRabbitMQPermissionResponse {
 export interface DeleteRabbitMQBindingResponse {
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * vhost参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
     /**
      * 路由关系Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindingId?: number;
     /**
@@ -2219,7 +2195,6 @@ export interface DeleteRabbitMQBindingResponse {
 export interface ModifyRabbitMQVipInstanceResponse {
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -2314,7 +2289,6 @@ export interface VpcEndpointInfo {
     VpcEndpoint: string;
     /**
      * vpc接入点状态 OFF/ON/CREATING/DELETING
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcDataStreamEndpointStatus?: string;
 }
@@ -2821,12 +2795,10 @@ export interface ImportRocketMQTopicsRequest {
 export interface DeleteRabbitMQVipInstanceResponse {
     /**
      * 订单号Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TranId?: string;
     /**
      * 实例Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -2898,30 +2870,29 @@ export interface RabbitMQClusterAccessInfo {
     VpcWebConsoleEndpoint?: string;
     /**
      * 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicWebConsoleSwitchStatus?: string;
     /**
      * Vpc管控台开关状态，示例值，
   OFF/ON/CREATING/DELETING
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcWebConsoleSwitchStatus?: string;
     /**
      * 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicDataStreamStatus?: string;
     /**
      * Prometheus信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrometheusEndpointInfo?: PrometheusEndpointInfo;
     /**
      * 公网域名接入点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WebConsoleDomainEndpoint?: string;
+    /**
+     * 控制面所使用的VPC信息
+     */
+    ControlPlaneEndpointInfo?: VpcEndpointInfo;
 }
 /**
  * DescribeBindClusters返回参数结构体
@@ -3429,7 +3400,6 @@ export interface ExchangeQuota {
     MaxExchange?: number;
     /**
      * 已创建exchange数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedExchange?: number;
 }
@@ -3450,7 +3420,7 @@ export interface RabbitMQQueueListConsumerDetailInfo {
      * 消费者数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumersNumber: number;
+    ConsumersNumber?: number;
 }
 /**
  * ExportRocketMQMessageDetail返回参数结构体
@@ -3755,12 +3725,10 @@ export interface RabbitMQQueueListInfo {
     Remark?: string;
     /**
      * 消费者信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConsumerDetail?: RabbitMQQueueListConsumerDetailInfo;
     /**
      * 队列类型，取值 "classic"，"quorum"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueueType?: string;
     /**
@@ -3780,37 +3748,30 @@ export interface RabbitMQQueueListInfo {
     MessageRateOut?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
     /**
      * 队列是否持久化，true 为持久化，false 为非持久化
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Durable?: boolean;
     /**
      * 队列是否为自动删除队列，true 为自动删除，false 为非自动删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoDelete?: boolean;
     /**
      * 队列所属实例 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 队列所属虚拟主机名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
     /**
      * 队列所在主节点名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Node?: string;
     /**
@@ -3820,12 +3781,10 @@ export interface RabbitMQQueueListInfo {
     Policy?: string;
     /**
      * 扩展参数 key-value 对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Arguments?: string;
     /**
      * 是否独占队列
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Exclusive?: boolean;
 }
@@ -4099,12 +4058,10 @@ export interface ModifyAMQPClusterRequest {
 export interface DescribeRabbitMQBindingsResponse {
     /**
      * 路由关系列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindingInfoList?: Array<RabbitMQBindingListInfo>;
     /**
      * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -4461,34 +4418,34 @@ export interface AMQPClusterInfo {
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 地域信息
      */
-    Region: string;
+    Region?: string;
     /**
      * 创建时间，毫秒为单位
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 集群说明信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 公网接入地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicEndPoint: string;
+    PublicEndPoint?: string;
     /**
      * VPC接入地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcEndPoint: string;
+    VpcEndPoint?: string;
 }
 /**
  * ModifyRocketMQInstanceSpec返回参数结构体
@@ -5780,19 +5737,16 @@ export interface PublicAccessRule {
 export interface RabbitMQClusterWhiteListInfo {
     /**
      * 废弃
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    WhiteList: string;
+    WhiteList?: string;
     /**
      * 公网管控台白名单
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicControlConsoleWhiteList: string;
+    PublicControlConsoleWhiteList?: string;
     /**
      * 公网数据流白名单
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicDataStreamWhiteList: string;
+    PublicDataStreamWhiteList?: string;
     /**
      * 公网管控台白名单状态
   注意：此字段可能返回 null，表示取不到有效值。
@@ -6074,47 +6028,38 @@ export interface DescribePublishersRequest {
 export interface RabbitMQBindingListInfo {
     /**
      * 路由关系id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindingId?: number;
     /**
      * Vhost参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
     /**
      * 源exchange名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: string;
     /**
      * 目标类型,queue或exchange
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DestinationType?: string;
     /**
      * 目标资源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Destination?: string;
     /**
      * 绑定key
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoutingKey?: string;
     /**
      * 源exchange类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceExchangeType?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
 }
@@ -6507,12 +6452,10 @@ export interface DescribeRocketMQPublicAccessPointResponse {
 export interface DescribeRabbitMQExchangesResponse {
     /**
      * 策略列表信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExchangeInfoList?: Array<RabbitMQExchangeListInfo>;
     /**
      * 策略结果总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -6526,22 +6469,18 @@ export interface DescribeRabbitMQExchangesResponse {
 export interface DescribeRabbitMQQueueDetailResponse {
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * Vhost参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
     /**
      * 队列名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueueName?: string;
     /**
      * 队列类型,取值classic或quorum
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueueType?: string;
     /**
@@ -6551,7 +6490,6 @@ export interface DescribeRabbitMQQueueDetailResponse {
     Consumers?: number;
     /**
      * 持久标记
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Durable?: boolean;
     /**
@@ -6636,7 +6574,6 @@ export interface DescribeRabbitMQQueueDetailResponse {
     MaxInMemoryBytes?: number;
     /**
      * 创建时间戳,单位秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
@@ -6661,7 +6598,6 @@ export interface DescribeRabbitMQQueueDetailResponse {
     QuorumInitialGroupSize?: number;
     /**
      * 是否为独占队列
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Exclusive?: boolean;
     /**
@@ -6671,7 +6607,6 @@ export interface DescribeRabbitMQQueueDetailResponse {
     Policy?: string;
     /**
      * 扩展参数 key-value
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Arguments?: string;
     /**
@@ -7170,12 +7105,10 @@ export interface DescribeRabbitMQVipInstanceResponse {
     ClusterSpecInfo?: RabbitMQClusterSpecInfo;
     /**
      * 集群访问
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterNetInfo?: RabbitMQClusterAccessInfo;
     /**
      * 集群白名单
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterWhiteListInfo?: RabbitMQClusterWhiteListInfo;
     /**
@@ -7253,7 +7186,6 @@ export interface VirtualHostQuota {
     MaxVirtualHost?: number;
     /**
      * 已创建vhost数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedVirtualHost?: number;
 }
@@ -8028,7 +7960,6 @@ export interface QueueQuota {
     MaxQueue?: number;
     /**
      * 已创建Queue数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedQueue?: number;
 }
@@ -8379,57 +8310,46 @@ export interface RabbitMQVirtualHostInfo {
     VirtualHost?: string;
     /**
      * vhost描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * vhost标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<string>;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
     /**
      * vhost概览统计信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHostStatistics?: RabbitMQVirtualHostStatistics;
     /**
      * 消息轨迹开关,true打开,false关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TraceFlag?: boolean;
     /**
      * vhost状态，与原生控制台对应，有running、partial、stopped、unknown
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 消息堆积数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MessageHeapCount?: number;
     /**
      * 输入消息速率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MessageRateIn?: number;
     /**
      * 输出消息速率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MessageRateOut?: number;
     /**
      * 是否存在镜像队列策略，true 为存在，false 为不存
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MirrorQueuePolicyFlag?: boolean;
 }
@@ -9118,22 +9038,18 @@ export interface RabbitMQExchangeListInfo {
     ExchangeType?: string;
     /**
      * VHost参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
     /**
      * exchange 创建者, "system":"系统创建", "user":"用户创建"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExchangeCreator?: string;
     /**
      * exchange 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTimeStamp?: string;
     /**
      * exchange 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModTimeStamp?: string;
     /**
@@ -9148,22 +9064,18 @@ export interface RabbitMQExchangeListInfo {
     MessageRateOut?: number;
     /**
      * 是否为持久化交换机，true 为持久化，false 为非持久化
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Durable?: boolean;
     /**
      * 是否为自动删除交换机，true 为自动删除，false 为非自动删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoDelete?: boolean;
     /**
      * 是否为内部交换机，true 为内部交换机
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Internal?: boolean;
     /**
      * 交换机所属实例 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -9173,7 +9085,6 @@ export interface RabbitMQExchangeListInfo {
     Policy?: string;
     /**
      * 扩展参数 key-value 对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Arguments?: string;
     /**
@@ -9515,12 +9426,10 @@ export interface RabbitMQUser {
     Password?: string;
     /**
      * 用户描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<string>;
     /**
@@ -9585,12 +9494,10 @@ export interface DeleteRabbitMQVirtualHostRequest {
 export interface CreateRabbitMQVipInstanceResponse {
     /**
      * 订单号Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TranId?: string;
     /**
      * 实例Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -10215,21 +10122,19 @@ export interface AMQPClusterDetail {
     /**
      * 集群基本信息
      */
-    Info: AMQPClusterInfo;
+    Info?: AMQPClusterInfo;
     /**
      * 集群配置信息
      */
-    Config: AMQPClusterConfig;
+    Config?: AMQPClusterConfig;
     /**
      * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * CreateEnvironmentRole请求参数结构体

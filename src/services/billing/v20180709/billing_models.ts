@@ -69,27 +69,22 @@ export interface DescribeCostSummaryByProductRequest {
 export interface DescribeCostExplorerSummaryResponse {
   /**
    * 数据条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 表头信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Header?: AnalyseHeaderDetail
   /**
    * 数据明细
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Detail?: Array<AnalyseDetail>
   /**
    * 数据总计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalDetail?: AnalyseDetail
   /**
    * 筛选框
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionValue?: AnalyseConditionDetail
   /**
@@ -438,12 +433,10 @@ export interface DescribeBillDetailForOrganizationResponse {
 export interface BillDetailComponentConfig {
   /**
    * 配置描述名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 配置描述值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -1790,22 +1783,18 @@ export interface DescribeAllocationSummaryByItemResponse {
 export interface DescribeDosageDetailByDateResponse {
   /**
    * 计量单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Unit?: string
   /**
    * 用量数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetailSets?: Array<DetailSet>
   /**
    * 错误码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetCode?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetMsg?: string
   /**
@@ -2060,12 +2049,10 @@ export interface DescribeBillSummaryByTagResponse {
 export interface SummaryDetail {
   /**
    * 账单维度编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupKey?: string
   /**
    * 账单维度值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupValue?: string
   /**
@@ -2090,12 +2077,10 @@ export interface SummaryDetail {
   VoucherPayAmount?: string
   /**
    * 分成金账户支出：通过分成金账户支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TransferPayAmount?: string
   /**
    * 产品汇总信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Business?: Array<BusinessSummaryInfo>
 }
@@ -2310,7 +2295,6 @@ export interface AnalyseDetail {
   Total?: string
   /**
    * 日期明细金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeDetail?: Array<AnalyseTimeDetail>
 }
@@ -2719,127 +2703,102 @@ export interface ApplicableProducts {
 export interface AllocationSummaryByResource {
   /**
    * 分账单元唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TreeNodeUniqKey?: string
   /**
    * 分账单元名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TreeNodeUniqKeyName?: string
   /**
    * 日期：结算日期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillDate?: string
   /**
    * 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayerUin?: string
   /**
    * 使用者 UIN：实际使用资源的账号 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
    * 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperateUin?: string
   /**
    * 计费模式编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 计费模式：资源的计费模式，区分为包年包月和按量计费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayModeName?: string
   /**
    * 交易类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionType?: string
   /**
    * 交易类型：明细交易类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionTypeName?: string
   /**
    * 产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessCode?: string
   /**
    * 产品名称：用户所采购的各类云产品
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessCodeName?: string
   /**
    * 子产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductCode?: string
   /**
    * 子产品名称：用户采购的具体产品细分类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductCodeName?: string
   /**
    * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 地域名称：资源所属地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionName?: string
   /**
    * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 可用区：资源所属可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneName?: string
   /**
    * 实例类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-”
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceTypeName?: string
   /**
    * 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
   /**
    * 分账标签：资源绑定的标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: Array<BillTag>
   /**
    * 项目ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
@@ -2847,47 +2806,38 @@ export interface AllocationSummaryByResource {
 0 - 分摊 
 1 - 归集 
 -1 -  未分配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllocationType?: number
   /**
    * 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如客户享受一口价/合同价则默认不展示，退费类场景也默认不展示），指定价模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCost?: string
   /**
    * 预留实例抵扣时长：本产品或服务使用预留实例抵扣的使用时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiTimeSpan?: string
   /**
    * 预留实例抵扣原价：本产品或服务使用预留实例抵扣的组件原价金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiCost?: string
   /**
    * 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealTotalCost?: string
   /**
    * 现金账户支出(元)：通过现金账户支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CashPayAmount?: string
   /**
    * 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoucherPayAmount?: string
   /**
    * 赠送账户支出(元)：使用赠送金支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IncentivePayAmount?: string
   /**
    * 分成账户支出(元)：通过分成金账户支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TransferPayAmount?: string
   /**
@@ -2904,42 +2854,34 @@ export interface AllocationSummaryByResource {
   SplitItemName?: string
   /**
    * 开始使用时间：产品服务开始使用时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeeBeginTime?: string
   /**
    * 结束使用时间：产品服务结束使用时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeeEndTime?: string
   /**
    * 节省计划抵扣原价：节省计划抵扣原价 = 节省计划包抵扣面值 / 节省计划抵扣率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SPCost?: string
   /**
    * 国内国际编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionType?: string
   /**
    * 国内国际：资源所属区域类型（国内、国际）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionTypeName?: string
   /**
    * 配置描述：对应资源下各组件名称及用量（如组件为用量累加型计费则为合计用量）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentConfig?: string
   /**
    * SPDeduction
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SPDeduction?: string
   /**
    * 账单月
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillMonth?: string
 }
@@ -3155,27 +3097,22 @@ export interface BillDetail {
   OperateUin?: string
   /**
    * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<BillTagInfo>
   /**
    * 产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessCode?: string
   /**
    * 子产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductCode?: string
   /**
    * 交易类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionType?: string
   /**
    * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: string
   /**
@@ -3184,52 +3121,42 @@ export interface BillDetail {
   ProjectId?: number
   /**
    * 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PriceInfo?: Array<string>
   /**
    * 关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssociatedOrder?: BillDetailAssociatedOrder
   /**
    * 计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Formula?: string
   /**
    * 计费规则：各产品详细的计费规则官网说明链接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FormulaUrl?: string
   /**
    * 账单归属日
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillDay?: string
   /**
    * 账单归属月
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillMonth?: string
   /**
    * 账单记录ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 国内国际编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionType?: string
   /**
    * 国内国际：资源所属区域类型（国内、国际）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionTypeName?: string
   /**
    * 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReserveDetail?: string
   /**
@@ -3256,12 +3183,10 @@ export interface DescribeBillDetailResponse {
   DetailSet?: Array<BillDetail>
   /**
    * 总记录数，24小时缓存一次，可能比实际总记录数少
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
   /**
@@ -5073,7 +4998,6 @@ export interface DetailSet {
   DetailPoints?: Array<DetailPoint>
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceID?: string
 }
@@ -5113,12 +5037,10 @@ export interface BillDetailComponent {
   UsedAmountUnit?: string
   /**
    * 原始用量/时长：组件被资源包抵扣前的原始用量/时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealTotalMeasure?: string
   /**
    * 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量/时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductedMeasure?: string
   /**
@@ -5159,42 +5081,34 @@ export interface BillDetailComponent {
   IncentivePayAmount?: string
   /**
    * 分成金账户支出：通过分成金账户支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TransferPayAmount?: string
   /**
    * 组件类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ItemCode?: string
   /**
    * 组件名称编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentCode?: string
   /**
    * 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContractPrice?: string
   /**
    * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * 预留实例抵扣的使用时长：本产品或服务使用预留实例抵扣的使用时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiTimeSpan?: string
   /**
    * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginalCostWithRI?: string
   /**
    * 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SPDeductionRate?: string
   /**
@@ -5205,17 +5119,14 @@ export interface BillDetailComponent {
   SPDeduction?: string
   /**
    * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginalCostWithSP?: string
   /**
    * 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlendedDiscount?: string
   /**
    * 配置描述：资源配置规格信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentConfig?: Array<BillDetailComponentConfig>
 }
@@ -6261,32 +6172,26 @@ export interface DescribeVoucherInfoResponse {
 export interface BillDetailAssociatedOrder {
   /**
    * 新购订单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrepayPurchase?: string
   /**
    * 续费订单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrepayRenew?: string
   /**
    * 升配订单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrepayModifyUp?: string
   /**
    * 冲销订单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReverseOrder?: string
   /**
    * 优惠调整后订单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NewOrder?: string
   /**
    * 优惠调整前订单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Original?: string
 }
@@ -7137,103 +7042,83 @@ export interface CosDetailSets {
 export interface DescribeDosageDetail {
   /**
    * 日期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Date?: string
   /**
    * 账号 ID 是用户在腾讯云的唯一账号标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 用量统计类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DosageType?: string
   /**
    * 产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductCode?: string
   /**
    * 子产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCode?: string
   /**
    * 组件类型编码
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingItemCode?: string
   /**
    * 组件编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubBillingItemCode?: string
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductCodeName?: string
   /**
    * 子产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCodeName?: string
   /**
    * 组件类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingItemCodeName?: string
   /**
    * 组件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubBillingItemCodeName?: string
   /**
    * 用量单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DosageUnit?: string
   /**
    * 用量起始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DosageBeginTime?: string
   /**
    * 用量截止时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DosageEndTime?: string
   /**
    * 标准用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DosageValue?: number
   /**
    * 抵扣用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductValue?: number
   /**
    * 抵扣余量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemainValue?: number
   /**
    * sdkAppId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SdkAppId?: string
   /**
    * 其他信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrStr?: Array<JsonObject>
   /**
    * 用量模板名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SheetName?: Array<string>
 }
@@ -7280,42 +7165,34 @@ export interface DescribeAllocationTrendByMonthResponse {
 export interface AnalyseConditionDetail {
   /**
    * 产品
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Business?: Array<AnalyseBusinessDetail>
   /**
    * 项目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Project?: Array<AnalyseProjectDetail>
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: Array<AnalyseRegionDetail>
   /**
    * 计费模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: Array<AnalysePayModeDetail>
   /**
    * 交易类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionType?: Array<AnalyseActionTypeDetail>
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: Array<AnalyseZoneDetail>
   /**
    * 资源所有者Uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: Array<AnalyseOwnerUinDetail>
   /**
    * 费用类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Amount?: Array<AnalyseAmountDetail>
 }

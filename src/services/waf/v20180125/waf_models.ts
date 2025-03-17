@@ -1869,6 +1869,16 @@ export interface ModifyApiSecEventChangeRequest {
 }
 
 /**
+ * DescribePostCLSFlows请求参数结构体
+ */
+export interface DescribePostCLSFlowsRequest {
+  /**
+   * 1-访问日志，2-攻击日志，默认为访问日志。
+   */
+  LogType?: number
+}
+
+/**
  * 规则执行的时间结构体
  */
 export interface JobDateTime {
@@ -2012,6 +2022,20 @@ export interface DescribeFindDomainListRequest {
  * ModifyInstanceElasticMode返回参数结构体
  */
 export interface ModifyInstanceElasticModeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePostCLSFlows返回参数结构体
+ */
+export interface DescribePostCLSFlowsResponse {
+  /**
+   * 客户的投递流列表
+   */
+  PostCLSFlows?: Array<PostCLSFlowInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2508,6 +2532,44 @@ export interface LoadBalancer {
 }
 
 /**
+ * CKafka投递流
+ */
+export interface PostCLSFlowInfo {
+  /**
+   * 投递流唯一ID
+   */
+  FlowId?: number
+  /**
+   * 1-访问日志 2-攻击日志
+   */
+  LogType?: number
+  /**
+   * 状态 0-为关闭 1-为启用
+   */
+  Status?: number
+  /**
+   * CLS所在区域
+   */
+  CLSRegion?: string
+  /**
+   * CLS日志集合名称
+   */
+  LogsetName?: string
+  /**
+   * CLS日志集合ID
+   */
+  LogsetID?: string
+  /**
+   * CLS日志主题名称
+   */
+  LogTopicName?: string
+  /**
+   * CLS日志集合ID
+   */
+  LogTopicID?: string
+}
+
+/**
  * CDC场景下负载均衡WAF的集群信息
  */
 export interface CdcCluster {
@@ -2723,6 +2785,16 @@ export interface DeleteAttackWhiteRuleRequest {
    * 用户域名
    */
   Domain: string
+}
+
+/**
+ * CreatePostCLSFlow返回参数结构体
+ */
+export interface CreatePostCLSFlowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4787,9 +4859,9 @@ export interface DescribeUserSignatureRuleRequest {
 }
 
 /**
- * ModifyAreaBanRule返回参数结构体
+ * ModifyProtectionStatus返回参数结构体
  */
-export interface ModifyAreaBanRuleResponse {
+export interface ModifyProtectionStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5584,6 +5656,16 @@ export interface IpAccessControlItem {
    * 定时任务配置详情
    */
   JobDateTime?: JobDateTime
+}
+
+/**
+ * DestroyPostCLSFlow返回参数结构体
+ */
+export interface DestroyPostCLSFlowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7919,9 +8001,9 @@ export interface UpsertCCRuleRequest {
 }
 
 /**
- * ModifyProtectionStatus返回参数结构体
+ * ModifyAreaBanRule返回参数结构体
  */
-export interface ModifyProtectionStatusResponse {
+export interface ModifyAreaBanRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8574,9 +8656,22 @@ export interface BotStatPointItem {
 }
 
 /**
- * DescribeCiphersDetail请求参数结构体
+ * CreatePostCLSFlow请求参数结构体
  */
-export type DescribeCiphersDetailRequest = null
+export interface CreatePostCLSFlowRequest {
+  /**
+   * 投递的CLS所在区域，默认为ap-shanghai
+   */
+  CLSRegion?: string
+  /**
+   * 投递的CLS所在日志集合名称，默认为 waf_post_logset
+   */
+  LogsetName?: string
+  /**
+   * 1-访问日志，2-攻击日志，默认为访问日志。
+   */
+  LogType?: number
+}
 
 /**
  * CC规则详情
@@ -9883,6 +9978,20 @@ export interface BotQPS {
 }
 
 /**
+ * DestroyPostCLSFlow请求参数结构体
+ */
+export interface DestroyPostCLSFlowRequest {
+  /**
+   * 投递流的流ID
+   */
+  FlowId: number
+  /**
+   * 1-访问日志，2-攻击日志，默认为访问日志。
+   */
+  LogType?: number
+}
+
+/**
  * DescribeApiDetail请求参数结构体
  */
 export interface DescribeApiDetailRequest {
@@ -10007,6 +10116,11 @@ export interface TLSCiphers {
    */
   CipherName?: string
 }
+
+/**
+ * DescribeCiphersDetail请求参数结构体
+ */
+export type DescribeCiphersDetailRequest = null
 
 /**
  * DescribeDomainVerifyResult返回参数结构体

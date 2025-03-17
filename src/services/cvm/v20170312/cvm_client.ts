@@ -76,7 +76,7 @@ import {
   ImportInstancesActionTimerResponse,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,
-  RemoveChcAssistVpcResponse,
+  DescribeInternetChargeTypeConfigsResponse,
   InternetChargeTypeConfig,
   DescribeImagesResponse,
   ModifyInstancesVpcAttributeResponse,
@@ -95,6 +95,7 @@ import {
   DescribeLaunchTemplateVersionsRequest,
   InquiryPriceResizeInstanceDisksRequest,
   RunInstancesResponse,
+  InstanceAttribute,
   ReservedInstancePrice,
   DisasterRecoverGroupQuota,
   DescribeHpcClustersResponse,
@@ -130,7 +131,7 @@ import {
   DescribeInstancesModificationRequest,
   InstanceMarketOptionsRequest,
   DescribeImageSharePermissionResponse,
-  DeleteLaunchTemplateVersionsResponse,
+  DescribeInstancesAttributesResponse,
   DescribeTaskInfoRequest,
   InquiryPriceRunInstancesRequest,
   Image,
@@ -188,7 +189,8 @@ import {
   InquiryPriceRenewInstancesResponse,
   AllocateHostsResponse,
   DescribeImageSharePermissionRequest,
-  DescribeInstancesRequest,
+  DescribeInstancesAttributesRequest,
+  DescribeInstanceTypeConfigsRequest,
   InquiryPriceResetInstanceResponse,
   RunInstancesRequest,
   Filter,
@@ -198,12 +200,13 @@ import {
   EnterRescueModeResponse,
   DescribeTaskInfoResponse,
   DescribeDisasterRecoverGroupQuotaRequest,
+  DeleteLaunchTemplateVersionsResponse,
   StartInstancesResponse,
   ModifyInstancesVpcAttributeRequest,
   ChargePrepaid,
   ModifyInstancesChargeTypeRequest,
   ResizeInstanceDisksRequest,
-  DescribeInternetChargeTypeConfigsResponse,
+  Attribute,
   AccountQuotaOverview,
   RunAutomationServiceEnabled,
   DescribeZoneInstanceConfigInfosRequest,
@@ -247,7 +250,7 @@ import {
   GPUInfo,
   DescribeReservedInstancesOfferingsResponse,
   InstanceRefund,
-  DescribeInstanceTypeConfigsRequest,
+  DescribeInstancesRequest,
   RegionInfo,
   DescribeReservedInstancesConfigInfosResponse,
   DescribeImageFromFamilyResponse,
@@ -287,6 +290,7 @@ import {
   InternetAccessible,
   RenewHostsResponse,
   DisassociateSecurityGroupsResponse,
+  RemoveChcAssistVpcResponse,
   Snapshot,
   ModifyInstancesProjectResponse,
   InstanceChargePrepaid,
@@ -594,6 +598,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageSharePermissionResponse) => void
   ): Promise<DescribeImageSharePermissionResponse> {
     return this.request("DescribeImageSharePermission", req, cb)
+  }
+
+  /**
+   * 获取指定实例的属性，目前支持查询实例自定义数据User-Data。
+   */
+  async DescribeInstancesAttributes(
+    req: DescribeInstancesAttributesRequest,
+    cb?: (error: string, rep: DescribeInstancesAttributesResponse) => void
+  ): Promise<DescribeInstancesAttributesResponse> {
+    return this.request("DescribeInstancesAttributes", req, cb)
   }
 
   /**

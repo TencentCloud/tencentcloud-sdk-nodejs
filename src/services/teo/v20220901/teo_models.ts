@@ -2402,6 +2402,34 @@ export interface ModifyZoneSettingRequest {
 }
 
 /**
+ * 检测长度限制规则详情
+ */
+export interface DetectLengthLimitRule {
+  /**
+   * 规则Id。仅出参使用。
+   */
+  RuleId: number
+  /**
+   * 规则名称。仅出参使用。
+   */
+  RuleName: string
+  /**
+   * 规则描述，仅出参使用。
+   */
+  Description: string
+  /**
+   * 规则配置条件。仅出参使用。
+   */
+  Conditions: Array<DetectLengthLimitCondition>
+  /**
+   * 处置方式，取值有：
+<li>skip：当请求正文数据超过 Conditions 出参中 body_depth 设置的检测深度时，跳过所有请求正文内容的检测；</li>
+<li>scan：仅检测 Conditions 出参中 body_depth 设置的检测深度，对超出部分的请求正文内容直接截断处理，超出部分的请求正文不会经过安全检测。</li>仅出参使用。
+   */
+  Action: string
+}
+
+/**
  * 源站组健康状态。
  */
 export interface OriginGroupHealthStatus {
@@ -2637,7 +2665,7 @@ export interface BotManagedRule {
 }
 
 /**
- * 安全配置
+ * Web安全配置
  */
 export interface SecurityConfig {
   /**
@@ -2690,6 +2718,11 @@ export interface SecurityConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlowPostConfig?: SlowPostConfig
+  /**
+   * 检测长度限制配置。仅出参使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectLengthLimitConfig?: DetectLengthLimitConfig
 }
 
 /**
@@ -4956,6 +4989,16 @@ export interface CreatePlanRequest {
 不填该参数时，默认开通套餐时长为 1 个月，不开启自动续费。
    */
   PrepaidPlanParam?: PrepaidPlanParam
+}
+
+/**
+ * 检测长度限制
+ */
+export interface DetectLengthLimitConfig {
+  /**
+   * 检测长度限制的规则列表。
+   */
+  DetectLengthLimitRules: Array<DetectLengthLimitRule>
 }
 
 /**
@@ -10403,6 +10446,16 @@ export interface AlgDetectSession {
 }
 
 /**
+ * ModifyZoneStatus返回参数结构体
+ */
+export interface ModifyZoneStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteContentIdentifier请求参数结构体
  */
 export interface DeleteContentIdentifierRequest {
@@ -10844,23 +10897,22 @@ export interface DescribeRulesRequest {
 }
 
 /**
- * DescribeContentQuota返回参数结构体
+ * 检测长度限制配置条件。
  */
-export interface DescribeContentQuotaResponse {
+export interface DetectLengthLimitCondition {
   /**
-   * 刷新相关配额。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 匹配条件的参数名称，取值有：
+<li>body_depth：请求正文包部分的检测深度。</li>
    */
-  PurgeQuota?: Array<Quota>
+  Name: string
   /**
-   * 预热相关配额。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 匹配条件的参数值，取值与 Name 成对使用。
+当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：
+<li>8KB；</li>
+<li>64KB；</li>
+<li>128KB。</li>
    */
-  PrefetchQuota?: Array<Quota>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Values: Array<string>
 }
 
 /**
@@ -12413,9 +12465,19 @@ export interface CheckCnameStatusRequest {
 }
 
 /**
- * ModifyZoneStatus返回参数结构体
+ * DescribeContentQuota返回参数结构体
  */
-export interface ModifyZoneStatusResponse {
+export interface DescribeContentQuotaResponse {
+  /**
+   * 刷新相关配额。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PurgeQuota?: Array<Quota>
+  /**
+   * 预热相关配额。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrefetchQuota?: Array<Quota>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DetailedRolePerm,
   DescribeProductSKUsRequest,
+  ResetConsumerGroupOffsetResponse,
   ProductSKU,
   DescribeRoleListResponse,
   DeleteMQTTTopicRequest,
@@ -164,6 +165,7 @@ import {
   DescribeInstanceRequest,
   DescribeProductSKUsResponse,
   DescribeMQTTMessageListRequest,
+  ResetConsumerGroupOffsetRequest,
 } from "./trocket_models"
 
 /**
@@ -511,6 +513,16 @@ TopicName，主题名称过滤
     cb?: (error: string, rep: DescribeMessageListResponse) => void
   ): Promise<DescribeMessageListResponse> {
     return this.request("DescribeMessageList", req, cb)
+  }
+
+  /**
+   * 重置消费位点
+   */
+  async ResetConsumerGroupOffset(
+    req: ResetConsumerGroupOffsetRequest,
+    cb?: (error: string, rep: ResetConsumerGroupOffsetResponse) => void
+  ): Promise<ResetConsumerGroupOffsetResponse> {
+    return this.request("ResetConsumerGroupOffset", req, cb)
   }
 
   /**

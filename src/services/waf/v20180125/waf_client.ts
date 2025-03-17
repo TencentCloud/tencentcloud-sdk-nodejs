@@ -91,6 +91,7 @@ import {
   DeleteCustomRuleRequest,
   DescribeUserSignatureRuleV2Request,
   ModifyApiSecEventChangeRequest,
+  DescribePostCLSFlowsRequest,
   JobDateTime,
   DescribeHostsRequest,
   ModifyCustomWhiteRuleStatusRequest,
@@ -98,6 +99,7 @@ import {
   ClbWafRegionItem,
   DescribeFindDomainListRequest,
   ModifyInstanceElasticModeResponse,
+  DescribePostCLSFlowsResponse,
   TargetEntity,
   DeleteHostRequest,
   DescribeDomainCountInfoRequest,
@@ -115,6 +117,7 @@ import {
   DescribeUserDomainInfoResponse,
   TLSVersion,
   LoadBalancer,
+  PostCLSFlowInfo,
   CdcCluster,
   DescribeCustomRulesRspRuleListItem,
   ModifyAntiInfoLeakRulesResponse,
@@ -124,6 +127,7 @@ import {
   HostDel,
   DescribeModuleStatusRequest,
   DeleteAttackWhiteRuleRequest,
+  CreatePostCLSFlowResponse,
   DescribeHostsResponse,
   DescribeAccessIndexRequest,
   DomainInfo,
@@ -193,7 +197,7 @@ import {
   GoodNews,
   ScanIpInfo,
   DescribeUserSignatureRuleRequest,
-  ModifyAreaBanRuleResponse,
+  ModifyProtectionStatusResponse,
   DescribeUserClbWafRegionsRequest,
   AddAntiInfoLeakRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
@@ -227,6 +231,7 @@ import {
   DescribeInstancesResponse,
   AccessRuleTagInfo,
   IpAccessControlItem,
+  DestroyPostCLSFlowResponse,
   UpsertCCAutoStatusResponse,
   ModifyGenerateDealsResponse,
   UpsertSessionResponse,
@@ -326,7 +331,7 @@ import {
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
-  ModifyProtectionStatusResponse,
+  ModifyAreaBanRuleResponse,
   DescribeDomainsRequest,
   ModifyDomainPostActionRequest,
   BotPkg,
@@ -349,7 +354,7 @@ import {
   DescribeAntiInfoLeakRulesStrategyItem,
   ApiParameterType,
   BotStatPointItem,
-  DescribeCiphersDetailRequest,
+  CreatePostCLSFlowRequest,
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
   DescribeAntiInfoLeakageRulesResponse,
@@ -385,6 +390,7 @@ import {
   BatchIpAccessControlData,
   DescribePeakValueRequest,
   BotQPS,
+  DestroyPostCLSFlowRequest,
   DescribeApiDetailRequest,
   DescribePolicyStatusResponse,
   CdcRegion,
@@ -392,6 +398,7 @@ import {
   DescribeDomainRulesResponse,
   CreateDealsResponse,
   TLSCiphers,
+  DescribeCiphersDetailRequest,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
   DeleteCCRuleRequest,
@@ -903,6 +910,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建CLS投递流任务
+   */
+  async CreatePostCLSFlow(
+    req: CreatePostCLSFlowRequest,
+    cb?: (error: string, rep: CreatePostCLSFlowResponse) => void
+  ): Promise<CreatePostCLSFlowResponse> {
+    return this.request("CreatePostCLSFlow", req, cb)
+  }
+
+  /**
    * 生成攻击日志的产生时间柱状图
    */
   async GetAttackHistogram(
@@ -1253,6 +1270,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取CLS投递流任务列表
+   */
+  async DescribePostCLSFlows(
+    req: DescribePostCLSFlowsRequest,
+    cb?: (error: string, rep: DescribePostCLSFlowsResponse) => void
+  ): Promise<DescribePostCLSFlowsResponse> {
+    return this.request("DescribePostCLSFlows", req, cb)
+  }
+
+  /**
    * 切换防篡改开关
    */
   async ModifyAntiFakeUrlStatus(
@@ -1420,6 +1447,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchDomainRulesResponse) => void
   ): Promise<SwitchDomainRulesResponse> {
     return this.request("SwitchDomainRules", req, cb)
+  }
+
+  /**
+   * 销毁CLS投递流任务
+   */
+  async DestroyPostCLSFlow(
+    req: DestroyPostCLSFlowRequest,
+    cb?: (error: string, rep: DestroyPostCLSFlowResponse) => void
+  ): Promise<DestroyPostCLSFlowResponse> {
+    return this.request("DestroyPostCLSFlow", req, cb)
   }
 
   /**

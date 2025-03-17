@@ -588,7 +588,6 @@ export interface DescribeBatchOperationLogDetailsResponse {
     TotalCount?: number;
     /**
      * 日志详情列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainBatchDetailSet?: Array<DomainBatchDetailSet>;
     /**
@@ -1274,7 +1273,6 @@ export interface DescribeBatchOperationLogsResponse {
     TotalCount?: number;
     /**
      * 日志列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainBatchLogSet?: Array<DomainBatchLogSet>;
     /**
@@ -1517,7 +1515,6 @@ export interface DescribeBiddingDetailResponse {
 export interface CreateDomainBatchResponse {
     /**
      * 批量日志ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogId?: number;
     /**
@@ -1941,7 +1938,6 @@ export interface DescribePreReleaseListResponse {
     TotalCount?: number;
     /**
      * 预释放列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PreReleaseList?: Array<PreReleaseInfo>;
     /**
@@ -2129,12 +2125,10 @@ export interface BidPreDomainsRequest {
 export interface DescribeAuctionListResponse {
     /**
      * 竞拍详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuctionList?: Array<AuctionInfo>;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2375,7 +2369,6 @@ export interface DescribeBatchOperationLogDetailsRequest {
 export interface DescribeDomainNameListResponse {
     /**
      * 域名信息集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainSet?: Array<DomainList>;
     /**
@@ -2480,22 +2473,18 @@ export interface DeleteTemplateRequest {
 export interface BidDetailPageResponse {
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 当前域名价格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentPrice?: number;
     /**
      * 用户上次出价
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BidPrice?: number;
     /**
      * 当前加价幅度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentPriceScope?: number;
     /**
@@ -2505,7 +2494,6 @@ export interface BidDetailPageResponse {
     PriceScope?: Array<PriceScopeConf>;
     /**
      * 用户当前已经支付了的保证金
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DepositPrice?: number;
     /**
@@ -2795,6 +2783,14 @@ export interface DomainBatchLogSet {
      * 批量操作失败个数
      */
     Failed?: number;
+    /**
+     * 是否付费
+     */
+    PayStatus?: boolean;
+    /**
+     * 大订单ID
+     */
+    BigDealId?: string;
 }
 /**
  * CreateCustomDnsHost请求参数结构体

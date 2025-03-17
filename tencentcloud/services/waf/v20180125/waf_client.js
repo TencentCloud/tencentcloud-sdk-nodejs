@@ -305,6 +305,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpsertIpAccessControl", req, cb);
     }
     /**
+     * 创建CLS投递流任务
+     */
+    async CreatePostCLSFlow(req, cb) {
+        return this.request("CreatePostCLSFlow", req, cb);
+    }
+    /**
      * 生成攻击日志的产生时间柱状图
      */
     async GetAttackHistogram(req, cb) {
@@ -515,6 +521,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFindDomainList", req, cb);
     }
     /**
+     * 获取CLS投递流任务列表
+     */
+    async DescribePostCLSFlows(req, cb) {
+        return this.request("DescribePostCLSFlows", req, cb);
+    }
+    /**
      * 切换防篡改开关
      */
     async ModifyAntiFakeUrlStatus(req, cb) {
@@ -615,6 +627,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SwitchDomainRules(req, cb) {
         return this.request("SwitchDomainRules", req, cb);
+    }
+    /**
+     * 销毁CLS投递流任务
+     */
+    async DestroyPostCLSFlow(req, cb) {
+        return this.request("DestroyPostCLSFlow", req, cb);
     }
     /**
      * Waf 批量防护IP黑白名单查询

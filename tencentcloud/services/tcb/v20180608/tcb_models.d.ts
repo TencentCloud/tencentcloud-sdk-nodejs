@@ -69,9 +69,8 @@ export interface DescribeEnvLimitResponse {
 export interface DescribeCloudBaseRunAllVpcsResponse {
     /**
      * 所有vpcid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vpcs: Array<string>;
+    Vpcs?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -250,12 +249,10 @@ export interface RollUpdateCloudBaseRunServerVersionResponse {
     Result?: string;
     /**
      * 滚动更新的VersionName
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionName?: string;
     /**
      * 操作记录id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunId?: string;
     /**
@@ -514,17 +511,14 @@ export interface DescribeCloudBaseBuildServiceResponse {
     PackageVersion?: string;
     /**
      * 下载链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DownloadUrl?: string;
     /**
      * 下载Httpheader
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DownloadHeaders?: Array<KVPair>;
     /**
      * 下载链接是否过期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutDate?: boolean;
     /**
@@ -571,7 +565,6 @@ export interface DescribeCloudBaseRunPodListResponse {
     TotalCount?: number;
     /**
      * 容器列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodList?: Array<CloudBaseRunVersionPod>;
     /**
@@ -1365,17 +1358,14 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     VersionName?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * Dockefile的路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DockerfilePath?: string;
     /**
      * DockerBuild的目录
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildDir?: string;
     /**
@@ -1404,7 +1394,6 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     PolicyThreshold?: number;
     /**
      * 环境变量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvParams?: string;
     /**
@@ -1417,62 +1406,50 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     UpdatedTime?: string;
     /**
      * 版本的IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionIP?: string;
     /**
      * 版本的端口号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionPort?: number;
     /**
      * 版本状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 代码包的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageName?: string;
     /**
      * 代码版本的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageVersion?: string;
     /**
      * 枚举（package/repository/image)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UploadType?: string;
     /**
      * Repo的类型(gitlab/github/coding)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoType?: string;
     /**
      * 地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Repo?: string;
     /**
      * 分支
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Branch?: string;
     /**
      * 服务名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerName?: string;
     /**
      * 是否对于外网开放
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublic?: boolean;
     /**
      * vpc id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
@@ -1482,52 +1459,42 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     SubnetIds?: Array<string>;
     /**
      * 日志采集路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomLogs?: string;
     /**
      * 监听端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ContainerPort?: number;
     /**
      * 延迟多长时间开始健康检查（单位s）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InitialDelaySeconds?: number;
     /**
      * 镜像地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: string;
     /**
      * CPU 大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuSize?: number;
     /**
      * MEM 大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemSize?: number;
     /**
      * 是否有Dockerfile：0-default has, 1-has, 2-has not
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasDockerfile?: number;
     /**
      * 基础镜像
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BaseImage?: string;
     /**
      * 容器启动入口命令
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EntryPoint?: string;
     /**
      * 仓库语言
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoLanguage?: string;
     /**
@@ -1542,7 +1509,6 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     TkeClusterInfo?: TkeClusterInfo;
     /**
      * 版本工作负载类型；deployment/deamonset
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TkeWorkloadType?: string;
     /**
@@ -2426,7 +2392,6 @@ export interface CloudBaseRunImageSecretInfo {
 export interface CreateCloudBaseRunResourceResponse {
     /**
      * 返回集群创建是否成功 succ为成功。并且中间无err
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
@@ -2579,7 +2544,6 @@ export interface PostPaidEnvDeductInfo {
 export interface ModifyCloudBaseRunServerFlowConfResponse {
     /**
      * 返回结果，succ代表成功
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
@@ -2593,12 +2557,10 @@ export interface ModifyCloudBaseRunServerFlowConfResponse {
 export interface DescribeCloudBaseRunOperationTypesResponse {
     /**
      * 操作类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Action?: Array<string>;
     /**
      * 服务名列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerName?: Array<string>;
     /**
@@ -2633,7 +2595,6 @@ export interface SpecialCostItem {
 export interface EstablishCloudBaseRunServerResponse {
     /**
      * 创建服务是否成功
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
@@ -3787,22 +3748,18 @@ export interface StaticStorageInfo {
 export interface DescribeCloudBaseRunResourceForExtendResponse {
     /**
      * 集群状态(creating/succ)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterStatus?: string;
     /**
      * 虚拟集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualClusterId?: string;
     /**
      * vpc id信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
@@ -3924,12 +3881,10 @@ export interface UnfreezeCloudBaseRunServersResponse {
   失败：fail
   部分：partial（部分成功、部分失败）
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
      * 解冻失败列表
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FailServerList?: Array<string>;
@@ -3944,7 +3899,6 @@ export interface UnfreezeCloudBaseRunServersResponse {
 export interface DescribeCloudBaseRunConfForGateWayResponse {
     /**
      * 最近更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastUpTime?: string;
     /**
@@ -4128,17 +4082,14 @@ export interface SmsFreeQuota {
 export interface CreateCloudBaseRunServerVersionResponse {
     /**
      * 状态(creating/succ)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
      * 版本名称（只有Result为succ的时候，才会返回VersionName)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionName?: string;
     /**
      * 操作记录id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunId?: string;
     /**
@@ -4477,17 +4428,14 @@ export interface DescribeCbrServerVersionResponse {
     VersionName?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * Dockefile的路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DockerfilePath?: string;
     /**
      * DockerBuild的目录
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildDir?: string;
     /**
@@ -4508,7 +4456,6 @@ export interface DescribeCbrServerVersionResponse {
     MaxNum?: number;
     /**
      * 环境变量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvParams?: string;
     /**
@@ -4521,102 +4468,82 @@ export interface DescribeCbrServerVersionResponse {
     UpdatedTime?: string;
     /**
      * 版本的IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionIP?: string;
     /**
      * 版本的端口号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionPort?: number;
     /**
      * 版本状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 枚举（package/repository/image)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UploadType?: string;
     /**
      * 服务名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerName?: string;
     /**
      * 是否对于外网开放
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublic?: boolean;
     /**
      * vpc id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetIds?: Array<string>;
     /**
      * 日志采集路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomLogs?: string;
     /**
      * 监听端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ContainerPort?: number;
     /**
      * 延迟多长时间开始健康检查（单位s）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InitialDelaySeconds?: number;
     /**
      * 镜像地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: string;
     /**
      * 是否有Dockerfile：0-default has, 1-has, 2-has not
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasDockerfile?: number;
     /**
      * 基础镜像
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BaseImage?: string;
     /**
      * 容器启动入口命令
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EntryPoint?: string;
     /**
      * 自动扩缩容策略组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyDetail?: Array<HpaPolicy>;
     /**
      * Tke集群信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TkeClusterInfo?: TkeClusterInfo;
     /**
      * 版本工作负载类型；deployment/deamonset
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TkeWorkloadType?: string;
     /**
      * 代码包信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageInfo?: CbrPackageInfo;
     /**
      * 仓库信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoInfo?: CbrRepoInfo;
     /**
@@ -4724,22 +4651,18 @@ export interface CloudBaseRunVpcInfo {
 export interface DescribeCloudBaseRunResourceResponse {
     /**
      * 集群状态(creating/succ)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterStatus?: string;
     /**
      * 虚拟集群ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualClusterId?: string;
     /**
      * vpc id信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
@@ -5274,17 +5197,14 @@ export interface DescribeCloudBaseRunVersionResponse {
     VersionName?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * Dockefile的路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DockerfilePath?: string;
     /**
      * DockerBuild的目录
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildDir?: string;
     /**
@@ -5305,7 +5225,6 @@ export interface DescribeCloudBaseRunVersionResponse {
     PolicyThreshold?: number;
     /**
      * 环境变量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvParams?: string;
     /**
@@ -5318,112 +5237,90 @@ export interface DescribeCloudBaseRunVersionResponse {
     UpdatedTime?: string;
     /**
      * 版本的IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionIP?: string;
     /**
      * 版本的端口号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionPort?: number;
     /**
      * 版本状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 代码包的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageName?: string;
     /**
      * 代码版本的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageVersion?: string;
     /**
      * 枚举（package/repository/image)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UploadType?: string;
     /**
      * Repo的类型(coding/gitlab/github/coding)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepoType?: string;
     /**
      * 地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Repo?: string;
     /**
      * 分支
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Branch?: string;
     /**
      * 服务名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerName?: string;
     /**
      * 是否对于外网开放
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublic?: boolean;
     /**
      * vpc id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetIds?: Array<string>;
     /**
      * 日志采集路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomLogs?: string;
     /**
      * 监听端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ContainerPort?: number;
     /**
      * 延迟多长时间开始健康检查（单位s）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InitialDelaySeconds?: number;
     /**
      * 镜像地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: string;
     /**
      * CPU 大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuSize?: number;
     /**
      * MEM 大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemSize?: number;
     /**
      * 扩缩容策略详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyDetail?: Array<HpaPolicy>;
     /**
      * Cpu的Request值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cpu?: number;
     /**
      * Mem的Request值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mem?: number;
     /**
@@ -5529,42 +5426,34 @@ export declare type DescribeCloudBaseRunVersionRsByConditionRequest = null;
 export interface DescribeCloudBaseRunServerResponse {
     /**
      * 个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 版本列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionItems?: Array<CloudBaseRunServerVersionItem>;
     /**
      * 服务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerName?: string;
     /**
      * 是否对于外网开放
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublic?: boolean;
     /**
      * 镜像仓库
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageRepo?: string;
     /**
      * 流量配置的类型（FLOW,URL_PARAMS)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrafficType?: string;
     /**
      * 服务创建类型，默认为空，一键部署为oneclick
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceType?: string;
     /**
      * 服务标签, function: 托管函数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag?: string;
     /**
@@ -5612,7 +5501,6 @@ export interface Tag {
 export interface DescribeCloudBaseRunVersionSnapshotResponse {
     /**
      * 版本历史
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Snapshots?: Array<CloudRunServiceSimpleVersionSnapshot>;
     /**
@@ -5698,12 +5586,10 @@ export interface FreezeCloudBaseRunServersResponse {
   失败：fail
   部分：partial（部分成功、部分失败）
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
      * 冻结失败服务列表
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FailServerList?: Array<string>;
@@ -6161,7 +6047,6 @@ export interface DescribeDatabaseACLResponse {
 export interface ModifyCloudBaseRunServerVersionResponse {
     /**
      * 返回结果（succ为成功）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**

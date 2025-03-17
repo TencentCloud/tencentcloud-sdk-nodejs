@@ -478,6 +478,16 @@ it("waf.v20180125.UpsertIpAccessControl", async function () {
     }
 })
 
+it("waf.v20180125.CreatePostCLSFlow", async function () {
+    try {
+       const data = await client.CreatePostCLSFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.GetAttackHistogram", async function () {
     try {
        const data = await client.GetAttackHistogram({})
@@ -828,6 +838,16 @@ it("waf.v20180125.DescribeFindDomainList", async function () {
     }
 })
 
+it("waf.v20180125.DescribePostCLSFlows", async function () {
+    try {
+       const data = await client.DescribePostCLSFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAntiFakeUrlStatus", async function () {
     try {
        const data = await client.ModifyAntiFakeUrlStatus({})
@@ -991,6 +1011,16 @@ it("waf.v20180125.DeleteSpartaProtection", async function () {
 it("waf.v20180125.SwitchDomainRules", async function () {
     try {
        const data = await client.SwitchDomainRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DestroyPostCLSFlow", async function () {
+    try {
+       const data = await client.DestroyPostCLSFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

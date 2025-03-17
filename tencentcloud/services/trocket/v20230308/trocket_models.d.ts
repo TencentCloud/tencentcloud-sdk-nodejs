@@ -28,6 +28,15 @@ export interface DetailedRolePerm {
  */
 export declare type DescribeProductSKUsRequest = null;
 /**
+ * ResetConsumerGroupOffset返回参数结构体
+ */
+export interface ResetConsumerGroupOffsetResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 商品售卖信息
  */
 export interface ProductSKU {
@@ -3681,4 +3690,25 @@ export interface DescribeMQTTMessageListRequest {
      * 查询结果限制数量
      */
     Limit?: number;
+}
+/**
+ * ResetConsumerGroupOffset请求参数结构体
+ */
+export interface ResetConsumerGroupOffsetRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 主题名称
+     */
+    Topic: string;
+    /**
+     * 重置位点时间（单位：毫秒）-1表示重置到最新位点
+     */
+    ResetTimestamp: number;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
 }

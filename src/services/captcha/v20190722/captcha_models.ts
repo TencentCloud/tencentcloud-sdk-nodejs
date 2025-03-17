@@ -44,19 +44,19 @@ export interface CaptchaOperDataInterceptUnit {
   /**
    * 时间
    */
-  DateKey: string
+  DateKey?: string
   /**
    * 停止验证数量
    */
-  AllStopCnt: number
+  AllStopCnt?: number
   /**
    * 图片停止加载数量
    */
-  PicStopCnt: number
+  PicStopCnt?: number
   /**
    * 策略拦截数量
    */
-  StrategyStopCnt: number
+  StrategyStopCnt?: number
 }
 
 /**
@@ -66,11 +66,11 @@ export interface CaptchaOperDataTryTimesDistributeUnit {
   /**
    * 尝试次数
    */
-  TryCount: number
+  TryCount?: number
   /**
    * 用户请求数量
    */
-  UserCount: number
+  UserCount?: number
 }
 
 /**
@@ -317,36 +317,30 @@ AccountType 是 8 时，对应 imei、idfa、imeiMD5 或者 idfaMD5。
 AccountType 是 0 时，对应账号信息。
 AccountType 是 10004 时，对应手机号的 MD5。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: string
+  UserId?: string
   /**
    * 操作时间戳，单位秒（对应输入参数）。 
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+
    */
-  PostTime: number
+  PostTime?: number
   /**
    * 对应输入参数，AccountType 是 QQ 或微信开放账号时，用于标识 QQ 或微信用户登录 后关联业务自身的账号 ID。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssociateAccount: string
+  AssociateAccount?: string
   /**
-   * 业务详情。 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务详情
    */
-  UserIp: string
+  UserIp?: string
   /**
    * 风险值 pass : 无恶意
 review：需要人工审核
 reject：拒绝，高风险恶意
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskLevel: string
+  RiskLevel?: string
   /**
-   * 风险类型，请查看下面详细说明 注意：此字段可能返回 null，表示取不到有效值。
+   * 风险类型，请查看下面详细说明 
 账号风险	
         账号信用低	1	账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素
 	疑似 低活跃账号	11	账号活跃度与正常用户有差异
@@ -369,7 +363,7 @@ reject：拒绝，高风险恶意
 	非公网有效 ip 	205	传进来的 IP 地址为内网 ip 地址或者 ip 保留地
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskType: Array<number | bigint>
+  RiskType?: Array<number | bigint>
 }
 
 /**
@@ -427,11 +421,11 @@ export interface TicketInterceptUnit {
   /**
    * 时间
    */
-  DateKey: string
+  DateKey?: string
   /**
    * 票据验证拦截量
    */
-  Intercept: number
+  Intercept?: number
 }
 
 /**
@@ -603,19 +597,19 @@ export interface CaptchaUserAllAppId {
   /**
    * 验证码应用ID
    */
-  CaptchaAppId: number
+  CaptchaAppId?: number
   /**
    * 注册应用名称
    */
-  AppName: string
+  AppName?: string
   /**
    * 腾讯云APPID
    */
-  TcAppId: number
+  TcAppId?: number
   /**
    * 渠道信息
    */
-  ChannelInfo: string
+  ChannelInfo?: string
 }
 
 /**
@@ -671,11 +665,11 @@ export interface TicketThroughUnit {
   /**
    * 时间
    */
-  DateKey: string
+  DateKey?: string
   /**
    * 票据验证的通过量
    */
-  Through: number
+  Through?: number
 }
 
 /**
@@ -773,15 +767,15 @@ export interface CaptchaOperDataTryTimesUnit {
   /**
    * 时间
    */
-  DateKey: string
+  DateKey?: string
   /**
    * 平均尝试次数
    */
-  CntPerPass: Array<number>
+  CntPerPass?: Array<number>
   /**
    * market平均尝试次数
    */
-  MarketCntPerPass: number
+  MarketCntPerPass?: number
 }
 
 /**
@@ -844,12 +838,10 @@ export interface DescribeCaptchaMiniRiskResultResponse {
   /**
    * 状态描述及验证错误信息
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CaptchaMsg?: string
   /**
    * 拦截策略返回信息
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ManageMarketingRiskValue?: OutputManageMarketingRiskValue
@@ -907,11 +899,11 @@ export interface TicketAmountUnit {
   /**
    * 时间
    */
-  DateKey: string
+  DateKey?: string
   /**
    * 票据验证总量
    */
-  Amount: number
+  Amount?: number
 }
 
 /**
@@ -1163,15 +1155,15 @@ export interface CaptchaOperDataLoadTimeUnit {
   /**
    * 时间
    */
-  DateKey: string
+  DateKey?: string
   /**
    * Market加载时间
    */
-  MarketLoadTime: number
+  MarketLoadTime?: number
   /**
    * AppId加载时间
    */
-  AppIdLoadTime: number
+  AppIdLoadTime?: number
 }
 
 /**
@@ -1473,7 +1465,6 @@ export interface DescribeCaptchaMiniResultResponse {
   CaptchaCode?: number
   /**
    * 状态描述及验证错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CaptchaMsg?: string
   /**

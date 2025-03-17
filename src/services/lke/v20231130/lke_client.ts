@@ -429,7 +429,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建属性
+   * 创建标签
    */
   async CreateAttributeLabel(
     req: CreateAttributeLabelRequest,

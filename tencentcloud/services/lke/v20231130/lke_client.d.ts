@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     StopDocParse(req: StopDocParseRequest, cb?: (error: string, rep: StopDocParseResponse) => void): Promise<StopDocParseResponse>;
     /**
-     * 创建属性
+     * 创建标签
      */
     CreateAttributeLabel(req: CreateAttributeLabelRequest, cb?: (error: string, rep: CreateAttributeLabelResponse) => void): Promise<CreateAttributeLabelResponse>;
     /**

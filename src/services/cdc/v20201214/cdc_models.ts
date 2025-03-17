@@ -253,22 +253,18 @@ export interface DescribeDedicatedClusterOverviewResponse {
   HostCount?: number
   /**
    * vpn通道状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpnConnectionState?: string
   /**
    * vpn网关监控数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpngwBandwidthData?: VpngwBandwidthData
   /**
    * 本地网关信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalNetInfo?: LocalNetInfo
   /**
    * vpn网关通道监控数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpnConnectionBandwidthData?: Array<VpngwBandwidthData>
   /**
@@ -996,7 +992,6 @@ export interface DescribeDedicatedClusterHostsRequest {
 export interface CreateDedicatedClusterOrderResponse {
   /**
    * 专用集群订单id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DedicatedClusterOrderId?: string
   /**
@@ -1283,7 +1278,6 @@ export interface DescribeDedicatedClusterCbsStatisticsResponse {
 export interface DescribeDedicatedClusterHostsResponse {
   /**
    * 宿主机信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostInfoSet?: Array<HostInfo>
   /**

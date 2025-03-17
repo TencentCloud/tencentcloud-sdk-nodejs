@@ -188,6 +188,16 @@ it("trro.v20220325.DescribeDeviceInfo", async function () {
     }
 })
 
+it("trro.v20220325.ModifyProjectSecMode", async function () {
+    try {
+       const data = await client.ModifyProjectSecMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trro.v20220325.DescribeDeviceSessionList", async function () {
     try {
        const data = await client.DescribeDeviceSessionList({})

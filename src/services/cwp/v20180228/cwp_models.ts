@@ -6754,7 +6754,7 @@ export interface VulDefenceEvent {
    */
   Status?: number
   /**
-   * 0 专业版,1 旗舰版,2 LH普惠版（仅限LH使用）,3  CVM普惠版（仅限CVM使用）
+   * 0 专业版,1 旗舰版,2 LH轻量版（仅限LH使用）,3  CVM轻量版（仅限CVM使用）
    */
   UpgradeType?: number
   /**
@@ -7481,7 +7481,7 @@ https://cloud.tencent.com/document/api/213/15753#Instance
    */
   KernelVersion?: string
   /**
-   * 防护版本 BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版.
+   * 防护版本 BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版.
    */
   ProtectType?: string
   /**
@@ -8533,7 +8533,7 @@ export interface NetAttackEventInfo {
    */
   Count?: number
   /**
-   * 机器付费版本，0 基础版，1专业版，2旗舰版，3普惠版
+   * 机器付费版本，0 基础版，1专业版，2旗舰版，3轻量版
    */
   PayVersion?: number
   /**
@@ -10194,7 +10194,7 @@ export interface AssetMachineDetail {
    */
   CpuLoad?: string
   /**
-   * 防护级别：0基础版，1专业版，2旗舰版，3普惠版
+   * 防护级别：0基础版，1专业版，2旗舰版，3轻量版
    */
   ProtectLevel?: number
   /**
@@ -11707,6 +11707,14 @@ export interface DescribeRansomDefenseEventsListRequest {
    * 排序字段支持CreateTime
    */
   By?: string
+  /**
+   * 事件创建起始时间
+   */
+  CreateBeginTime?: string
+  /**
+   * 事件创建结束时间
+   */
+  CreateEndTime?: string
 }
 
 /**
@@ -11805,9 +11813,13 @@ export interface RansomDefenseStrategyMachineBackupInfo {
    */
   BackupSuccessCount?: number
   /**
-   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
+   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版
    */
   HostVersion?: number
+  /**
+   * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
+   */
+  MachineType?: string
 }
 
 /**
@@ -12764,7 +12776,7 @@ export interface CreateRansomDefenseStrategyRequest {
    */
   ExcludeDir?: string
   /**
-   * 备份模式： 0按周，1按天
+   * 备份模式： 0按周，1按天，2不备份
    */
   BackupType?: number
   /**
@@ -13109,13 +13121,17 @@ export interface RansomDefenseStrategyMachineDetail {
    */
   DiskInfo?: string
   /**
-   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
+   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版
    */
   HostVersion?: number
   /**
    * 策略名称
    */
   StrategyName?: string
+  /**
+   * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
+   */
+  MachineType?: string
 }
 
 /**
@@ -14412,7 +14428,7 @@ export interface RansomDefenseStrategy {
    */
   ExcludeDir?: string
   /**
-   * 备份模式： 0按周，1按天
+   * 备份模式： 0按周，1按天，2不备份
    */
   BackupType?: number
   /**
@@ -14993,7 +15009,7 @@ export interface NetAttackEvent {
    */
   VulDefenceStatus?: number
   /**
-   * 机器付费版本，0 基础版，1专业版，2旗舰版，3普惠版
+   * 机器付费版本，0 基础版，1专业版，2旗舰版，3轻量版
    */
   PayVersion?: number
   /**
@@ -21477,7 +21493,7 @@ export interface Machine {
    */
   KernelVersion?: string
   /**
-   * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
+   * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版
    */
   ProtectType?: string
   /**
@@ -27773,6 +27789,10 @@ export interface HostTagInfo {
    * 主机instance ID
    */
   InstanceID?: string
+  /**
+   * 主机类型
+   */
+  MachineType?: string
 }
 
 /**
@@ -28479,7 +28499,7 @@ export interface VulEffectHostList {
    */
   Description?: string
   /**
-   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
+   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版
    */
   HostVersion?: number
   /**
@@ -28628,7 +28648,7 @@ export interface RansomDefenseBackup {
    */
   EventStatus?: number
   /**
-   * 备份状态：0备份中，1正常，2、3失败，4快照已过期，9快照已删除
+   * 备份状态：0备份中，1正常，2、3失败，4快照已过期，5快照数量超出限制，9快照已删除
    */
   BackupStatus?: number
   /**

@@ -105,6 +105,7 @@ import {
   SignQrCode,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
+  SignComponentConfig,
   UnbindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationUserRolesResponse,
   CreateFlowRequest,

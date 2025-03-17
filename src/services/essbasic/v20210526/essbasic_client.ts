@@ -102,6 +102,7 @@ import {
   IntentionAction,
   ChannelCreateOrganizationBatchSignUrlRequest,
   DynamicFlowApproverResult,
+  SignComponentConfig,
   GetDownloadFlowUrlResponse,
   ChannelRole,
   FlowGroupApproverInfo,
