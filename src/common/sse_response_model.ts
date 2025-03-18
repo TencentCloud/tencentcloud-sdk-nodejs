@@ -1,5 +1,5 @@
 import { EventEmitter } from "events"
-import { Readable } from "stream"
+import { createInterface, ReadLine } from "readline"
 
 interface EventSourceMessage {
   /** The event ID to set the EventSource object's last event ID value. */
@@ -16,10 +16,15 @@ class SSEEventEmitter extends EventEmitter {}
 
 export class SSEResponseModel {
   private stream: NodeJS.ReadableStream
+  private readline: ReadLine
   private eventSource: SSEEventEmitter
 
   constructor(stream: NodeJS.ReadableStream) {
     this.stream = stream
+    this.readline = createInterface({
+      input: stream,
+      crlfDelay: Infinity
+    })
     this.eventSource = new SSEEventEmitter()
     this.init()
   }
@@ -28,17 +33,23 @@ export class SSEResponseModel {
    * @inner
    */
   private init() {
-    const { stream, eventSource } = this
-    stream.on("data", (chunk) => {
-      if (chunk !== null) {
-        const messages = chunk.toString().split("\n\n")
-        for (let i = 0; i < messages.length; i++) {
-          if (messages[i].length > 0) {
-            eventSource.emit("message", this.parseSSEMessage(messages[i]))
-          }
-        }
+    const { stream, readline, eventSource } = this
+    
+    let lines:string[] = []
+    readline.on("line", (line) => {
+      if (line) {
+        lines.push(line)
+        return
+      }
+
+      eventSource.emit("message", this.parseSSEMessage(lines.splice(0)));
+    })
+    readline.on("close", () => {
+      if (lines.length > 0) {
+        eventSource.emit("message", this.parseSSEMessage(lines.splice(0)));
       }
     })
+
     stream.on("close", () => {
       eventSource.emit("close")
     })
@@ -50,7 +61,7 @@ export class SSEResponseModel {
   /**
    * @inner
    */
-  private parseSSEMessage(chunk: string) {
+  private parseSSEMessage(lines: string[]) {
     const message: EventSourceMessage = {
       data: "",
       event: "",
@@ -58,7 +69,6 @@ export class SSEResponseModel {
       retry: undefined,
     }
 
-    const lines = chunk.split("\n")
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
       // line is of format "<field>:<value>" or "<field>: <value>"
@@ -107,15 +117,18 @@ export class SSEResponseModel {
   }
 
   async *[Symbol.asyncIterator](): AsyncIterableIterator<EventSourceMessage> {
-    for await (const chunk of this.stream) {
-      if (chunk !== null) {
-        const messages = chunk.toString().split("\n\n")
-        for (let i = 0; i < messages.length; i++) {
-          if (messages[i].length > 0) {
-            yield this.parseSSEMessage(messages[i])
-          }
-        }
+    let lines: string[] = []
+    for await (const line of this.readline) {
+      if (line) {
+        lines.push(line)
+        continue
       }
+
+      yield this.parseSSEMessage(lines.splice(0))
+    }
+
+    if (lines.length > 0) {
+      yield this.parseSSEMessage(lines.splice(0))
     }
   }
 }
