@@ -2029,11 +2029,11 @@ export interface ScaleUpInstanceResponse {
  */
 export interface DescribeInstanceInfoResponse {
   /**
-   * 1
+   * 集群描述信息
    */
   SimpleInstanceInfo?: SimpleInstanceInfo
   /**
-   * 1
+   * 错误信息
    */
   ErrorMsg?: string
   /**

@@ -165,6 +165,14 @@ export interface CreateModelServiceRequest {
      * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
      */
     InstancePerReplicas?: number;
+    /**
+     * 30
+     */
+    TerminationGracePeriodSeconds?: number;
+    /**
+     * ["sleep","60"]
+     */
+    PreStopCommand?: Array<string>;
 }
 /**
  * 描述在线服务
@@ -1283,6 +1291,14 @@ export interface ModifyModelServiceRequest {
      * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
      */
     InstancePerReplicas?: number;
+    /**
+     * 30
+     */
+    TerminationGracePeriodSeconds?: number;
+    /**
+     * ["sleep","60"]
+     */
+    PreStopCommand?: Array<string>;
 }
 /**
  * ChatCompletion请求参数结构体
@@ -2839,6 +2855,14 @@ export interface ServiceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ServicePort?: number;
+    /**
+     * 服务的优雅退出时限。单位为秒，默认值为30，最小为1
+     */
+    TerminationGracePeriodSeconds?: number;
+    /**
+     * 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束
+     */
+    PreStopCommand?: Array<string>;
 }
 /**
  * DescribeModelService请求参数结构体

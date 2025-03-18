@@ -231,7 +231,6 @@ export interface DescribeEnvDealRegionResponse {
 export interface DeleteCloudBaseRunServerVersionResponse {
     /**
      * 返回结果，succ为成功
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
@@ -3764,7 +3763,6 @@ export interface DescribeCloudBaseRunResourceForExtendResponse {
     Region?: string;
     /**
      * 子网信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetIds?: Array<CloudBaseRunVpcSubnet>;
     /**

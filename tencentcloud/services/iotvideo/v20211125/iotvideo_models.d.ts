@@ -1013,55 +1013,17 @@ export interface DescribeCloudStoragePackageConsumeStatsResponse {
     RequestId?: string;
 }
 /**
- * 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间
+ * DescribeP2PRoute返回参数结构体
  */
-export interface PackageInfo {
+export interface DescribeP2PRouteResponse {
     /**
-     * 云存开启状态，0为未开启，2为正在生效，1为已过期
-  注：这里只返回状态为0的数据
+     * 当前p2p线路
      */
-    Status?: number;
+    RouteId?: number;
     /**
-     * 云存类型，1为全时云存，2为事件云存
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    CSType?: number;
-    /**
-     * 云存回看时长
-     */
-    CSShiftDuration?: number;
-    /**
-     * 云存套餐过期时间
-     */
-    CSExpiredTime?: number;
-    /**
-     * 云存套餐创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatedAt?: number;
-    /**
-     * 云存套餐更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdatedAt?: number;
-    /**
-     * 套餐id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PackageId?: string;
-    /**
-     * 订单id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OrderId?: string;
-    /**
-     * 通道id
-     */
-    ChannelId?: number;
-    /**
-     * 用户id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CSUserId?: string;
+    RequestId?: string;
 }
 /**
  * DescribeFirmware请求参数结构体
@@ -1780,6 +1742,57 @@ export interface GetAllFirmwareVersionRequest {
     ProductID: string;
 }
 /**
+ * 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间
+ */
+export interface PackageInfo {
+    /**
+     * 云存开启状态，0为未开启，2为正在生效，1为已过期
+  注：这里只返回状态为0的数据
+     */
+    Status?: number;
+    /**
+     * 云存类型，1为全时云存，2为事件云存
+     */
+    CSType?: number;
+    /**
+     * 云存回看时长
+     */
+    CSShiftDuration?: number;
+    /**
+     * 云存套餐过期时间
+     */
+    CSExpiredTime?: number;
+    /**
+     * 云存套餐创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: number;
+    /**
+     * 云存套餐更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedAt?: number;
+    /**
+     * 套餐id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PackageId?: string;
+    /**
+     * 订单id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrderId?: string;
+    /**
+     * 通道id
+     */
+    ChannelId?: number;
+    /**
+     * 用户id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CSUserId?: string;
+}
+/**
  * DescribeFirmwareTaskDevices请求参数结构体
  */
 export interface DescribeFirmwareTaskDevicesRequest {
@@ -2161,6 +2174,15 @@ export interface CreateProductResponse {
     RequestId?: string;
 }
 /**
+ * ChangeP2PRoute返回参数结构体
+ */
+export interface ChangeP2PRouteResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TRTC调用参数
  */
 export interface TRTCParams {
@@ -2503,29 +2525,21 @@ export interface CreateProductRequest {
     NetType?: string;
 }
 /**
- * DescribeFirmwareTasks请求参数结构体
+ * ChangeP2PRoute请求参数结构体
  */
-export interface DescribeFirmwareTasksRequest {
+export interface ChangeP2PRouteRequest {
     /**
      * 产品ID
      */
-    ProductID: string;
+    ProductId: string;
     /**
-     * 固件版本号
+     * 设备名称
      */
-    FirmwareVersion: string;
+    DeviceName: string;
     /**
-     * 查询偏移量
+     * P2P线路
      */
-    Offset: number;
-    /**
-     * 返回查询结果条数
-     */
-    Limit: number;
-    /**
-     * 搜索过滤条件
-     */
-    Filters?: Array<SearchKeyword>;
+    RouteId: number;
 }
 /**
  * GetFirmwareURL返回参数结构体
@@ -3500,6 +3514,31 @@ export interface BindCloudStorageUserResponse {
  */
 export declare type DescribeFreeCloudStorageNumRequest = null;
 /**
+ * DescribeFirmwareTasks请求参数结构体
+ */
+export interface DescribeFirmwareTasksRequest {
+    /**
+     * 产品ID
+     */
+    ProductID: string;
+    /**
+     * 固件版本号
+     */
+    FirmwareVersion: string;
+    /**
+     * 查询偏移量
+     */
+    Offset: number;
+    /**
+     * 返回查询结果条数
+     */
+    Limit: number;
+    /**
+     * 搜索过滤条件
+     */
+    Filters?: Array<SearchKeyword>;
+}
+/**
  * CancelDeviceFirmwareTask请求参数结构体
  */
 export interface CancelDeviceFirmwareTaskRequest {
@@ -4208,6 +4247,19 @@ export interface DescribeAIModelChannelRequest {
      * 产品ID
      */
     ProductId: string;
+}
+/**
+ * DescribeP2PRoute请求参数结构体
+ */
+export interface DescribeP2PRouteRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
 }
 /**
  * DescribeAIModelUsage请求参数结构体

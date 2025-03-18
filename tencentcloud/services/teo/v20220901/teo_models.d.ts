@@ -723,6 +723,23 @@ export interface QUICParameters {
     Switch?: string;
 }
 /**
+ * 托管规则组信息
+ */
+export interface ManagedRuleGroupMeta {
+    /**
+     * 托管规则组描述，仅出参。
+     */
+    GroupDetail?: string;
+    /**
+     * 托管规则组名称，仅出参。
+     */
+    GroupName?: string;
+    /**
+     * 当前托管规则组下的所有子规则信息，仅出参。
+     */
+    RuleDetails?: Array<ManagedRuleDetail>;
+}
+/**
  * 速率限制规则
  */
 export interface RateLimitConfig {
@@ -2182,6 +2199,28 @@ export interface StatusCodeCacheParam {
     CacheTime?: number;
 }
 /**
+ * 安全的执行动作
+ */
+export interface SecurityAction {
+    /**
+     * 安全执行的具体动作。取值有：
+  <li>Deny：拦截；</li><li>Monitor：观察；</li><li>ReturnCustomPage：使用指定页面拦截；</li><li>Redirect：重定向至 URL；</li><li>BlockIP：IP 封禁；</li><li>JSChallenge：JavaScript 挑战；</li><li>ManagedChallenge：托管挑战；</li><li>Disabled：未启用；</li><li>Allow：放行。</li>
+     */
+    Name: string;
+    /**
+     * 当 Name 为 BlockIP 时的附加参数。
+     */
+    BlockIPActionParameters?: BlockIPActionParameters;
+    /**
+     * 当 Name 为 ReturnCustomPage 时的附加参数。
+     */
+    ReturnCustomPageActionParameters?: ReturnCustomPageActionParameters;
+    /**
+     * 当 Name 为 Redirect 时的附加参数。
+     */
+    RedirectActionParameters?: RedirectActionParameters;
+}
+/**
  * ModifyZoneSetting请求参数结构体
  */
 export interface ModifyZoneSettingRequest {
@@ -3480,6 +3519,31 @@ export interface DescribePrefetchTasksResponse {
     RequestId?: string;
 }
 /**
+ * 托管规则详情
+ */
+export interface ManagedRuleDetail {
+    /**
+     * 托管规则Id。
+     */
+    RuleId?: string;
+    /**
+     * 托管规则的防护级别。取值有：<li>low：低风险，此规则风险较低，适用于非常严格控制环境下的访问场景，该等级规则可能造成较多的误报；</li><li>medium：中风险，表示此条规则风险正常，适用较为严格的防护场景；</li><li>high：高风险，表示此条规则风险较高，大多数场景不会产生误报；</li><li>extreme：超高风险，表示此条规则风险极高，基本不会产生误报；</li>
+     */
+    RiskLevel?: string;
+    /**
+     * 规则描述。
+     */
+    Description?: string;
+    /**
+     * 规则标签。部分类型的规则不存在标签。
+     */
+    Tags?: Array<string>;
+    /**
+     * 规则所属版本。
+     */
+    RuleVersion?: string;
+}
+/**
  * DescribeZoneSetting请求参数结构体
  */
 export interface DescribeZoneSettingRequest {
@@ -3515,25 +3579,27 @@ export interface FileVerification {
  */
 export interface ModifySecurityPolicyRequest {
     /**
-     * 站点Id。
+     * 站点 ID。
      */
     ZoneId: string;
     /**
-     * 安全配置。
+     * 安全策略配置。<li>当 SecurityPolicy 参数中的 CustomRule 被设置时，SecurityConfig 参数中的 AclConfg、 IpTableConfg 将被忽略；</li><li>当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略。</li><li>对于自定义规则以及托管规则策略配置建议使用 SecurityPolicy 参数进行设置。</li>
      */
     SecurityConfig: SecurityConfig;
     /**
-     * 子域名/应用名。
-  
-  注意：当同时指定本参数和 TemplateId 参数时，本参数不生效。请勿同时指定本参数和 TemplateId 参数。
+     * 安全策略配置。对 Web 防护自定义策略和托管规则配置建议使用，支持表达式语法对安全策略进行配置。
+     */
+    SecurityPolicy?: SecurityPolicy;
+    /**
+     * 安全策略类型，可使用以下参数值： <li>ZoneDefaultPolicy：用于指定站点级策略；</li><li>Template：用于指定策略模板，需要同时指定 TemplateId 参数；</li><li>Host：用于指定域名级策略（注意：当使用域名来指定域名服务策略时，仅支持已经应用了域名级策略的域名服务或者策略模板）。</li>
      */
     Entity?: string;
     /**
-     * 指定模板策略 ID，或指定站点全局策略。
-  - 如需配置策略模板，请指定策略模板 ID。
-  - 如需配置站点全局策略，请使用 @ZoneLevel@Domain 参数值
-  
-  注意：当使用本参数时，Entity 参数不生效。请勿同时使用本参数和 Entity 参数。
+     * 指定域名。当 Entity 参数值为 Host 时，使用本参数指定的域名级策略，例如：使用 www.example.com ，配置该域名的域名级策略。
+     */
+    Host?: string;
+    /**
+     * 指定策略模板 ID。当 Entity 参数值为 Template 时，使用本参数指定策略模板的 ID。
      */
     TemplateId?: string;
 }
@@ -3902,41 +3968,72 @@ export interface ModifyDnsRecordsStatusRequest {
     RecordsToDisable?: Array<string>;
 }
 /**
- * ModifyHostsCertificate请求参数结构体
+ * ModifyZone请求参数结构体
  */
-export interface ModifyHostsCertificateRequest {
+export interface ModifyZoneRequest {
     /**
      * 站点 ID。
      */
     ZoneId: string;
     /**
-     * 需要修改证书配置的加速域名。
+     * 站点接入方式，取值有：
+  <li>full：NS 接入；</li>
+  <li>partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；</li>
+  <li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>不填写保持原有配置。
      */
-    Hosts: Array<string>;
+    Type?: string;
     /**
-     * 配置服务端证书的模式，取值有：
-  <li>disable：不配置服务端证书；</li>
-  <li>eofreecert：配置 EdgeOne 免费服务端证书；</li>
-  <li>sslcert：配置 SSL 托管服务端证书；</li>
-  不填写表示服务端证书保持原有配置。
+     * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
      */
-    Mode?: string;
+    VanityNameServers?: VanityNameServers;
     /**
-     * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
+     * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
      */
-    ServerCertInfo?: Array<ServerCertInfo>;
+    AliasZoneName?: string;
     /**
-     * 托管类型，取值有：
-  <li>none：不托管EO；</li>
-  <li>apply：托管EO</li>
-  不填，默认取值为none。
-     * @deprecated
+     * 站点接入地域，取值有：
+  <li> global：全球；</li>
+  <li> mainland：中国大陆；</li>
+  <li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
      */
-    ApplyType?: string;
+    Area?: string;
     /**
-     * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。
+     * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
      */
-    ClientCertInfo?: MutualTLS;
+    ZoneName?: string;
+}
+/**
+ * Web安全的自定义规则
+ */
+export interface CustomRule {
+    /**
+     * 自定义规则的名称。
+     */
+    Name: string;
+    /**
+     * 自定义规则的具体内容，需符合表达式语法，详细规范参见产品文档。
+     */
+    Condition: string;
+    /**
+     * 自定义规则的执行动作。	SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>ReturnCustomPage：使用指定页面拦截；</li><li>Redirect：重定向至 URL；</li><li>BlockIP：IP 封禁；</li><li>JSChallenge：JavaScript 挑战；</li><li>ManagedChallenge：托管挑战；</li><li>Allow：放行。</li>
+     */
+    Action: SecurityAction;
+    /**
+     * 自定义规则是否开启。取值有：<li>on：开启</li><li>off：关闭</li>
+     */
+    Enabled: string;
+    /**
+     * 自定义规则的 ID。<br>通过规则 ID 可支持不同的规则配置操作：<br> - 增加新规则：ID 为空或不指定 ID 参数；<br> - 修改已有规则：指定需要更新/修改的规则 ID；<br> - 删除已有规则：CustomRules 参数中，Rules 列表中未包含的已有规则将被删除。
+     */
+    Id?: string;
+    /**
+     * 自定义规则的类型。取值有：<li>BasicAccessRule：基础访问管控；</li><li>PreciseMatchRule：精准匹配规则，默认；</li><li>ManagedAccessRule：专家定制规则，仅出参。</li><br/>默认为PreciseMatchRule。
+     */
+    RuleType?: string;
+    /**
+     * 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（PreciseMatchRule）。
+     */
+    Priority?: number;
 }
 /**
  * Bot扩展处置方式，多处置动作组合。
@@ -4010,6 +4107,15 @@ export interface ExceptConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExceptUserRules?: Array<ExceptUserRule>;
+}
+/**
+ * Web安全重定向的附加参数
+ */
+export interface RedirectActionParameters {
+    /**
+     * 重定向的URL。
+     */
+    URL: string;
 }
 /**
  * DeleteOriginGroup请求参数结构体
@@ -4666,6 +4772,15 @@ export interface DeleteSharedCNAMERequest {
     SharedCNAME: string;
 }
 /**
+ * Web安全的自定义规则结构
+ */
+export interface CustomRules {
+    /**
+     * 自定义规则的定义列表。<br>使用 ModifySecurityPolicy 修改 Web 防护配置时: <br> -  若未指定 Rules 参数，或 Rules 参数长度为零：清空所有自定义规则配置。<br> - 若 SecurityPolicy 参数中，未指定 CustomRules 参数值：保持已有自定义规则配置，不做修改。
+     */
+    Rules?: Array<CustomRule>;
+}
+/**
  * ModifyRealtimeLogDeliveryTask请求参数结构体
  */
 export interface ModifyRealtimeLogDeliveryTaskRequest {
@@ -4753,6 +4868,15 @@ export interface DestroyPlanRequest {
      * 套餐 ID，形如 edgeone-2wdo315m2y4c。
      */
     PlanId: string;
+}
+/**
+ * Web安全IP封禁的附加参数
+ */
+export interface BlockIPActionParameters {
+    /**
+     * 封禁 IP 的惩罚时长。支持的单位有：<li>s：秒，取值范围1～120；</li><li>m：分，取值范围1～120；</li><li>h：小时，取值范围1～48。</li>
+     */
+    Duration: string;
 }
 /**
  * CreatePlan请求参数结构体
@@ -5654,6 +5778,25 @@ export interface IpTableConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IpTableRules?: Array<IpTableRule>;
+}
+/**
+ * ModifyApplicationProxyStatus请求参数结构体
+ */
+export interface ModifyApplicationProxyStatusRequest {
+    /**
+     * 站点ID。
+     */
+    ZoneId: string;
+    /**
+     * 代理ID。
+     */
+    ProxyId: string;
+    /**
+     * 状态，取值有：
+  <li>offline: 停用；</li>
+  <li>online: 启用。</li>
+     */
+    Status: string;
 }
 /**
  * DeleteOriginGroup返回参数结构体
@@ -6614,6 +6757,43 @@ export interface DescribeL4ProxyResponse {
     RequestId?: string;
 }
 /**
+ * ModifyHostsCertificate请求参数结构体
+ */
+export interface ModifyHostsCertificateRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 需要修改证书配置的加速域名。
+     */
+    Hosts: Array<string>;
+    /**
+     * 配置服务端证书的模式，取值有：
+  <li>disable：不配置服务端证书；</li>
+  <li>eofreecert：配置 EdgeOne 免费服务端证书；</li>
+  <li>sslcert：配置 SSL 托管服务端证书；</li>
+  不填写表示服务端证书保持原有配置。
+     */
+    Mode?: string;
+    /**
+     * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
+     */
+    ServerCertInfo?: Array<ServerCertInfo>;
+    /**
+     * 托管类型，取值有：
+  <li>none：不托管EO；</li>
+  <li>apply：托管EO</li>
+  不填，默认取值为none。
+     * @deprecated
+     */
+    ApplyType?: string;
+    /**
+     * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。
+     */
+    ClientCertInfo?: MutualTLS;
+}
+/**
  * ModifyOriginGroup返回参数结构体
  */
 export interface ModifyOriginGroupResponse {
@@ -6779,6 +6959,19 @@ export interface ModifyL7AccSettingResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * Web安全自定义页面的附加参数
+ */
+export interface ReturnCustomPageActionParameters {
+    /**
+     * 响应状态码。
+     */
+    ResponseCode: string;
+    /**
+     * 响应的自定义页面ID。
+     */
+    ErrorPageId: string;
 }
 /**
  * BindZoneToPlan返回参数结构体
@@ -7351,6 +7544,19 @@ export interface DeleteApplicationProxyRuleRequest {
     RuleId: string;
 }
 /**
+ * 托管规则的项配置
+ */
+export interface ManagedRuleAction {
+    /**
+     * 托管规则组下的具体项，用于改写此单条规则项配置的内容，具体参考产品文档。
+     */
+    RuleId: string;
+    /**
+     * RuleId 中指定托管规则项的处置动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，响应拦截页面；</li><li>Monitor：观察，不处理请求记录安全事件到日志中；</li><li>Disabled：未启用，不扫描请求跳过该规则。</li>
+     */
+    Action: SecurityAction;
+}
+/**
  * ModifyL7AccRule返回参数结构体
  */
 export interface ModifyL7AccRuleResponse {
@@ -7613,23 +7819,29 @@ export interface ModifyFunctionRequest {
     Content?: string;
 }
 /**
- * ModifyApplicationProxyStatus请求参数结构体
+ * 托管规则组配置。
  */
-export interface ModifyApplicationProxyStatusRequest {
+export interface ManagedRuleGroup {
     /**
-     * 站点ID。
+     * 托管规则的组名称，未指定配置的规则分组将按照默认配置处理，GroupId 的具体取值参考产品文档。
      */
-    ZoneId: string;
+    GroupId: string;
     /**
-     * 代理ID。
+     * 托管规则组的防护级别。取值有：<li>loose：宽松，只包含超高风险规则，此时需配置Action，且RuleActions配置无效；</li><li>normal：正常，包含超高风险和高风险规则，此时需配置Action，且RuleActions配置无效；</li><li>strict：严格，包含超高风险、高风险和中风险规则，此时需配置Action，且RuleActions配置无效；</li><li>extreme：超严格，包含超高风险、高风险、中风险和低风险规则，此时需配置Action，且RuleActions配置无效；</li><li>custom：自定义，精细化策略，按单条规则配置处置方式，此时Action字段无效，使用RuleActions配置单条规则的精细化策略。</li>
      */
-    ProxyId: string;
+    SensitivityLevel: string;
     /**
-     * 状态，取值有：
-  <li>offline: 停用；</li>
-  <li>online: 启用。</li>
+     * 托管规则组的处置动作。SecurityAction 的 Name 取值支持：<li>Deny：拦截，响应拦截页面；</li><li>Monitor：观察，不处理请求记录安全事件到日志中；</li><li>Disabled：未启用，不扫描请求跳过该规则。</li>
      */
-    Status: string;
+    Action: SecurityAction;
+    /**
+     * 托管规则组下规则项的具体配置，仅在 SensitivityLevel 为 custom 时配置生效。
+     */
+    RuleActions?: Array<ManagedRuleAction>;
+    /**
+     * 托管规则组信息，仅出参。
+     */
+    MetaData?: ManagedRuleGroupMeta;
 }
 /**
  * CreateZone请求参数结构体
@@ -7678,6 +7890,19 @@ export interface CreateZoneRequest {
      * @deprecated
      */
     JumpStart?: boolean;
+}
+/**
+ * 安全策略配置
+ */
+export interface SecurityPolicy {
+    /**
+     * 自定义规则配置。
+     */
+    CustomRules?: CustomRules;
+    /**
+     * 托管规则配置。
+     */
+    ManagedRules?: ManagedRules;
 }
 /**
  * 站点归属信息
@@ -9868,39 +10093,17 @@ export interface ModifyApplicationProxyRuleStatusResponse {
     RequestId?: string;
 }
 /**
- * ModifyZone请求参数结构体
+ * 托管规则自动更新选项
  */
-export interface ModifyZoneRequest {
+export interface ManagedRuleAutoUpdate {
     /**
-     * 站点 ID。
+     * 是否开启自动更新至最新版本。取值有：<li>on：开启</li><li>off：关闭</li>
      */
-    ZoneId: string;
+    AutoUpdateToLatestVersion: string;
     /**
-     * 站点接入方式，取值有：
-  <li>full：NS 接入；</li>
-  <li>partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；</li>
-  <li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>不填写保持原有配置。
+     * 当前使用的版本，格式符合ISO 8601标准，如2023-12-21T12:00:32Z，默认为空，仅出参。
      */
-    Type?: string;
-    /**
-     * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
-     */
-    VanityNameServers?: VanityNameServers;
-    /**
-     * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
-     */
-    AliasZoneName?: string;
-    /**
-     * 站点接入地域，取值有：
-  <li> global：全球；</li>
-  <li> mainland：中国大陆；</li>
-  <li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
-     */
-    Area?: string;
-    /**
-     * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
-     */
-    ZoneName?: string;
+    RulesetVersion?: string;
 }
 /**
  * 回源时携带客户端 IP 所属地域信息，值的格式为 ISO-3166-1 两位字母代码。
@@ -11716,6 +11919,31 @@ export interface CacheConfigCustomTime {
      * 自定义缓存时间数值，单位为秒，取值：0-315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
      */
     CacheTime?: number;
+}
+/**
+ * Web安全的托管规则
+ */
+export interface ManagedRules {
+    /**
+     * 托管规则是否开启。取值有：<li>on：开启，所有托管规则按配置生效；</li><li>off：关闭，所有托管规则不生效。</li>
+     */
+    Enabled: string;
+    /**
+     * 评估模式是否开启，仅在 Enabled 参数为 on 时有效。取值有：<li>on：开启，表示所有托管规则以观察模式生效；</li><li>off：关闭，表示所有托管规则以实际配置生效。</li>
+     */
+    DetectionOnly: string;
+    /**
+     * 托管规则语义分析选项是否开启，仅在 Enabled 参数为 on 时有效。取值有：<li>on：开启，对请求进行语义分析后进行处理；</li><li>off：关闭，对请求不进行语义分析，直接进行处理。</li> <br/>默认为 off。
+     */
+    SemanticAnalysis?: string;
+    /**
+     * 托管规则自动更新选项。
+     */
+    AutoUpdate?: ManagedRuleAutoUpdate;
+    /**
+     * 托管规则组的配置。如果此结构传空数组或 GroupId 未包含在列表内将按照默认方式处理。
+     */
+    ManagedRuleGroups?: Array<ManagedRuleGroup>;
 }
 /**
  * 安全策略模板的绑定关系。

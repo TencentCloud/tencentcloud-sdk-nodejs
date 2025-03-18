@@ -31,6 +31,7 @@ import {
   ControlDeviceDataRequest,
   DeviceActiveResult,
   DeleteLoRaFrequencyResponse,
+  ModifyApplicationResponse,
   CreateFreeCloudStorageResponse,
   ModifyPositionFenceResponse,
   DescribeCloudStorageAIServiceTaskRequest,
@@ -48,6 +49,7 @@ import {
   ModifyCloudStorageAIServiceResponse,
   DescribeDeviceFirmWareRequest,
   BindCloudStorageUserRequest,
+  ChangeP2PRouteResponse,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
   CreateProjectResponse,
   DeleteProjectResponse,
@@ -55,6 +57,7 @@ import {
   CreateDeviceResponse,
   CreateDeviceRequest,
   InheritCloudStorageUserResponse,
+  ChangeP2PRouteRequest,
   DescribeDeviceResponse,
   PublishBroadcastMessageRequest,
   GetStudioProductListResponse,
@@ -120,7 +123,7 @@ import {
   TransferCloudStorageRequest,
   FenceAlarmPoint,
   DescribeFirmwareRequest,
-  DescribeCloudStorageAIServiceCallbackResponse,
+  DescribeP2PRouteResponse,
   ListTopicPolicyResponse,
   GenSingleDeviceSignatureOfPublicResponse,
   FenceBindDeviceItem,
@@ -129,6 +132,7 @@ import {
   DescribeLoRaFrequencyRequest,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
+  DescribeCloudStorageAIServiceCallbackResponse,
   BindDevicesResponse,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
@@ -187,7 +191,7 @@ import {
   DescribeDeviceDataResponse,
   DescribePositionFenceListRequest,
   InvokeCloudStorageAIServiceTaskRequest,
-  CreatePositionSpaceRequest,
+  ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
@@ -296,7 +300,7 @@ import {
   DescribeCloudStorageEventsRequest,
   DeviceInfo,
   DescribeInstanceRequest,
-  ResetCloudStorageRequest,
+  CreatePositionSpaceRequest,
   DeleteProjectRequest,
   CloudStoragePackageInfo,
   DevicesItem,
@@ -357,6 +361,7 @@ import {
   TopicRule,
   DescribeCloudStoragePackageConsumeStatsRequest,
   DeleteFenceBindResponse,
+  IotApplication,
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
   PositionSpaceInfo,
@@ -370,6 +375,7 @@ import {
   CreateFreeCloudStorageRequest,
   DescribeLoRaFrequencyResponse,
   CreateCloudStorageAIServiceTaskResponse,
+  ModifyApplicationRequest,
   DescribeCloudStorageDateResponse,
   DescribeFreeCloudStorageNumResponse,
   CloudStorageTimeInfo,
@@ -382,6 +388,7 @@ import {
   CreateBatchProductionResponse,
   GetTopicRuleListRequest,
   DeleteStudioProductRequest,
+  DescribeP2PRouteRequest,
   GetDeviceSumStatisticsRequest,
   DescribeCloudStorageAIServiceCallbackRequest,
   DescribeCloudStorageRequest,
@@ -456,6 +463,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceResponse) => void
   ): Promise<DescribeDeviceResponse> {
     return this.request("DescribeDevice", req, cb)
+  }
+
+  /**
+   * 当前p2p线路
+   */
+  async DescribeP2PRoute(
+    req: DescribeP2PRouteRequest,
+    cb?: (error: string, rep: DescribeP2PRouteResponse) => void
+  ): Promise<DescribeP2PRouteResponse> {
+    return this.request("DescribeP2PRoute", req, cb)
   }
 
   /**
@@ -856,6 +873,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoLicenseResponse) => void
   ): Promise<DescribeVideoLicenseResponse> {
     return this.request("DescribeVideoLicense", req, cb)
+  }
+
+  /**
+   * p2p路线切换
+   */
+  async ChangeP2PRoute(
+    req: ChangeP2PRouteRequest,
+    cb?: (error: string, rep: ChangeP2PRouteResponse) => void
+  ): Promise<ChangeP2PRouteResponse> {
+    return this.request("ChangeP2PRoute", req, cb)
   }
 
   /**
@@ -1310,6 +1337,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFreeCloudStorageResponse) => void
   ): Promise<CreateFreeCloudStorageResponse> {
     return this.request("CreateFreeCloudStorage", req, cb)
+  }
+
+  /**
+   * 更新应用信息
+   */
+  async ModifyApplication(
+    req: ModifyApplicationRequest,
+    cb?: (error: string, rep: ModifyApplicationResponse) => void
+  ): Promise<ModifyApplicationResponse> {
+    return this.request("ModifyApplication", req, cb)
   }
 
   /**

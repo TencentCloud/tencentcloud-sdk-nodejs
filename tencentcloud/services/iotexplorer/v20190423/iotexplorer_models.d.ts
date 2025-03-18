@@ -249,6 +249,19 @@ export interface DeleteLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
+ * ModifyApplication返回参数结构体
+ */
+export interface ModifyApplicationResponse {
+    /**
+     * 应用信息
+     */
+    Application?: IotApplication;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateFreeCloudStorage返回参数结构体
  */
 export interface CreateFreeCloudStorageResponse {
@@ -539,6 +552,15 @@ export interface BindCloudStorageUserRequest {
     UserId: string;
 }
 /**
+ * ChangeP2PRoute返回参数结构体
+ */
+export interface ChangeP2PRouteResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateDeviceTWeCallAuthorizeStatus请求参数结构体
  */
 export interface UpdateDeviceTWeCallAuthorizeStatusRequest {
@@ -648,6 +670,23 @@ export interface InheritCloudStorageUserResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ChangeP2PRoute请求参数结构体
+ */
+export interface ChangeP2PRouteRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * P2P线路
+     */
+    RouteId: number;
 }
 /**
  * DescribeDevice返回参数结构体
@@ -2019,23 +2058,13 @@ export interface DescribeFirmwareRequest {
     FirmwareVersion: string;
 }
 /**
- * DescribeCloudStorageAIServiceCallback返回参数结构体
+ * DescribeP2PRoute返回参数结构体
  */
-export interface DescribeCloudStorageAIServiceCallbackResponse {
+export interface DescribeP2PRouteResponse {
     /**
-     * 推送类型。http：HTTP 回调
+     * 当前p2p线路
      */
-    Type?: string;
-    /**
-     * HTTP 回调 URL
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CallbackUrl?: string;
-    /**
-     * HTTP 回调鉴权 Token
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CallbackToken?: string;
+    RouteId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2215,6 +2244,29 @@ export interface SearchPositionSpaceRequest {
      * 最大获取数量
      */
     Limit: number;
+}
+/**
+ * DescribeCloudStorageAIServiceCallback返回参数结构体
+ */
+export interface DescribeCloudStorageAIServiceCallbackResponse {
+    /**
+     * 推送类型。http：HTTP 回调
+     */
+    Type?: string;
+    /**
+     * HTTP 回调 URL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallbackUrl?: string;
+    /**
+     * HTTP 回调鉴权 Token
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallbackToken?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * BindDevices返回参数结构体
@@ -3272,33 +3324,25 @@ export interface InvokeCloudStorageAIServiceTaskRequest {
     CustomId?: string;
 }
 /**
- * CreatePositionSpace请求参数结构体
+ * ResetCloudStorage请求参数结构体
  */
-export interface CreatePositionSpaceRequest {
+export interface ResetCloudStorageRequest {
     /**
-     * 项目ID
+     * 产品ID
      */
-    ProjectId: string;
+    ProductId: string;
     /**
-     * 空间名称
+     * 设备名称
      */
-    SpaceName: string;
+    DeviceName: string;
     /**
-     * 授权类型，0：只读 1：读写
+     * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
      */
-    AuthorizeType: number;
+    ChannelId?: number;
     /**
-     * 产品列表
+     * 云存用户Id，为空则为默认云存空间。
      */
-    ProductIdList: Array<string>;
-    /**
-     * 描述
-     */
-    Description?: string;
-    /**
-     * 缩略图
-     */
-    Icon?: string;
+    UserId?: string;
 }
 /**
  * DescribeCloudStorageEventsWithAITasks请求参数结构体
@@ -5582,25 +5626,33 @@ export interface DescribeInstanceRequest {
     ProductId?: string;
 }
 /**
- * ResetCloudStorage请求参数结构体
+ * CreatePositionSpace请求参数结构体
  */
-export interface ResetCloudStorageRequest {
+export interface CreatePositionSpaceRequest {
     /**
-     * 产品ID
+     * 项目ID
      */
-    ProductId: string;
+    ProjectId: string;
     /**
-     * 设备名称
+     * 空间名称
      */
-    DeviceName: string;
+    SpaceName: string;
     /**
-     * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+     * 授权类型，0：只读 1：读写
      */
-    ChannelId?: number;
+    AuthorizeType: number;
     /**
-     * 云存用户Id，为空则为默认云存空间。
+     * 产品列表
      */
-    UserId?: string;
+    ProductIdList: Array<string>;
+    /**
+     * 描述
+     */
+    Description?: string;
+    /**
+     * 缩略图
+     */
+    Icon?: string;
 }
 /**
  * DeleteProject请求参数结构体
@@ -6814,6 +6866,128 @@ export interface DeleteFenceBindResponse {
     RequestId?: string;
 }
 /**
+ * 应用信息
+ */
+export interface IotApplication {
+    /**
+     * 应用 ID
+     */
+    IotAppID?: string;
+    /**
+     * 应用名称
+     */
+    AppName?: string;
+    /**
+     * 应用说明
+     */
+    Description?: string;
+    /**
+     * 开发模式
+     */
+    DevMode?: number;
+    /**
+     * iOS 平台 AppKey
+     */
+    IOSAppKey?: string;
+    /**
+     * iOS 平台 AppSecret
+     */
+    IOSAppSecret?: string;
+    /**
+     * Android 平台 AppKey
+     */
+    AndroidAppKey?: string;
+    /**
+     * Android 平台 AppSecret
+     */
+    AndroidAppSecret?: string;
+    /**
+     * 绑定的产品列表，数据为：ProdcutID 数组 JSON 序列化后的字符串
+     */
+    Products?: string;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 项目ID
+     */
+    ProjectId?: string;
+    /**
+     * 信鸽推送APP ID
+     */
+    PushSecretID?: string;
+    /**
+     * 信鸽推送SECRET KEY
+     */
+    PushSecretKey?: string;
+    /**
+     * iOS平台推送环境
+     */
+    PushEnvironment?: string;
+    /**
+     * 小程序平台 AppKey
+     */
+    MiniProgramAppKey?: string;
+    /**
+     * 小程序平台 AppSecret
+     */
+    MiniProgramAppSecret?: string;
+    /**
+     * TPNS服务iOS应用AccessID，TPNS全称为腾讯移动推送（Tencent Push Notification Service），详见：https://cloud.tencent.com/document/product/548
+     */
+    TPNSiOSAccessID?: string;
+    /**
+     * TPNS服务iOS应用SecretKey
+     */
+    TPNSiOSSecretKey?: string;
+    /**
+     * TPNS服务iOS应用推送环境
+     */
+    TPNSiOSPushEnvironment?: string;
+    /**
+     * TPNS服务Android应用AccessID
+     */
+    TPNSAndroidAccessID?: string;
+    /**
+     * TPNS服务Android应用SecretKey
+     */
+    TPNSAndroidSecretKey?: string;
+    /**
+     * TPNS服务iOS应用所属地域，详细说明参见 ModifyApplication 同名入参。
+     */
+    TPNSiOSRegion?: string;
+    /**
+     * TPNS服务Android应用所属地域，详细说明参见 ModifyApplication 同名入参。
+     */
+    TPNSAndroidRegion?: string;
+    /**
+     * 自主短信配置APPID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfSmsAppId?: string;
+    /**
+     * 自主短信配置APPKey
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfSmsAppKey?: string;
+    /**
+     * 自主短信配置签名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfSmsSign?: string;
+    /**
+     * 自主短信配置模板ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfSmsTemplateId?: number;
+    /**
+     * 第三方小程序强提醒开关 0：关闭；1：开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WechatNotifyStatus?: number;
+}
+/**
  * PublishBroadcastMessage返回参数结构体
  */
 export interface PublishBroadcastMessageResponse {
@@ -7071,6 +7245,71 @@ export interface CreateCloudStorageAIServiceTaskResponse {
     RequestId?: string;
 }
 /**
+ * ModifyApplication请求参数结构体
+ */
+export interface ModifyApplicationRequest {
+    /**
+     * 应用ID
+     */
+    IotAppID: string;
+    /**
+     * 应用名称
+     */
+    AppName?: string;
+    /**
+     * 应用说明
+     */
+    Description?: string;
+    /**
+     * 关联的产品
+     */
+    Products?: string;
+    /**
+     * 信鸽推送APP ID
+     */
+    PushSecretID?: string;
+    /**
+     * 信鸽推送SECRET KEY
+     */
+    PushSecretKey?: string;
+    /**
+     * iOS平台推送环境
+     */
+    PushEnvironment?: string;
+    /**
+     * TPNS服务iOS应用AccessID，TPNS全称为腾讯移动推送（Tencent Push Notification Service），详见：https://cloud.tencent.com/document/product/548
+     */
+    TPNSiOSAccessID?: string;
+    /**
+     * TPNS服务iOS应用SecretKey
+     */
+    TPNSiOSSecretKey?: string;
+    /**
+     * TPNS服务iOS应用推送环境
+     */
+    TPNSiOSPushEnvironment?: string;
+    /**
+     * TPNS服务Android应用AccessID
+     */
+    TPNSAndroidAccessID?: string;
+    /**
+     * TPNS服务Android应用SecretKey
+     */
+    TPNSAndroidSecretKey?: string;
+    /**
+     * TPNS服务iOS应用所属地域，广州：ap-guangzhou，上海：ap-shanghai，中国香港：ap-hongkong，新加坡：ap-singapore。
+     */
+    TPNSiOSRegion?: string;
+    /**
+     * TPNS服务Android应用所属地域，广州：ap-guangzhou，上海：ap-shanghai，中国香港：ap-hongkong，新加坡：ap-singapore。
+     */
+    TPNSAndroidRegion?: string;
+    /**
+     * TurnKey小程序托管
+     */
+    TurnKeySwitch?: number;
+}
+/**
  * DescribeCloudStorageDate返回参数结构体
  */
 export interface DescribeCloudStorageDateResponse {
@@ -7281,6 +7520,19 @@ export interface DeleteStudioProductRequest {
      * 产品ID
      */
     ProductId: string;
+}
+/**
+ * DescribeP2PRoute请求参数结构体
+ */
+export interface DescribeP2PRouteRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
 }
 /**
  * GetDeviceSumStatistics请求参数结构体

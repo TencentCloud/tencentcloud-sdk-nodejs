@@ -84,12 +84,10 @@ export interface ExtraInfo {
 export interface CloudDedicatedZoneHostsInfo {
     /**
      * Host的唯一标识uuid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostUuid?: string;
     /**
      * 实例名称数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstancesInfo?: Array<string>;
 }

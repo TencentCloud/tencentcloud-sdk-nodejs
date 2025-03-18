@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 实例节点列表
+     * 查询实例pod列表
      */
     async DescribeInstanceNodes(req, cb) {
         return this.request("DescribeInstanceNodes", req, cb);

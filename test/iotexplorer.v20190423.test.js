@@ -68,6 +68,16 @@ it("iotexplorer.v20190423.DescribeDevice", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeP2PRoute", async function () {
+    try {
+       const data = await client.DescribeP2PRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeCloudStorageEventsWithAITasks", async function () {
     try {
        const data = await client.DescribeCloudStorageEventsWithAITasks({})
@@ -461,6 +471,16 @@ it("iotexplorer.v20190423.TransferCloudStorage", async function () {
 it("iotexplorer.v20190423.DescribeVideoLicense", async function () {
     try {
        const data = await client.DescribeVideoLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ChangeP2PRoute", async function () {
+    try {
+       const data = await client.ChangeP2PRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -911,6 +931,16 @@ it("iotexplorer.v20190423.DescribeActivateLicenseService", async function () {
 it("iotexplorer.v20190423.CreateFreeCloudStorage", async function () {
     try {
        const data = await client.CreateFreeCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyApplication", async function () {
+    try {
+       const data = await client.ModifyApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

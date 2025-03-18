@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("dbbrain.tencentcloudapi.com", "2021-05-27", clientConfig);
     }
     /**
+     * 自治中心-终止自治任务（单次）
+     */
+    async DescribeDBAutonomyEvents(req, cb) {
+        return this.request("DescribeDBAutonomyEvents", req, cb);
+    }
+    /**
      * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
      */
     async DescribeTopSpaceTableTimeSeries(req, cb) {
@@ -220,16 +226,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserSqlAdvice", req, cb);
     }
     /**
+     * 自治中心-终止自治任务（单次）
+     */
+    async CancelRedisBigKeyAnalysisTasks(req, cb) {
+        return this.request("CancelRedisBigKeyAnalysisTasks", req, cb);
+    }
+    /**
      * 删除安全审计日志导出任务。
      */
     async DeleteSecurityAuditLogExportTasks(req, cb) {
         return this.request("DeleteSecurityAuditLogExportTasks", req, cb);
     }
     /**
-     * 更改实例限流任务状态，目前仅用于终止限流。
+     * 自治中心-终止自治任务（单次）
      */
-    async ModifySqlFilters(req, cb) {
-        return this.request("ModifySqlFilters", req, cb);
+    async DescribeDBAutonomyActions(req, cb) {
+        return this.request("DescribeDBAutonomyActions", req, cb);
     }
     /**
      * 查询redis大key分析任务列表。
@@ -274,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowLogs", req, cb);
     }
     /**
+     * 自治中心-终止自治任务（单次）；注意： 接口调用需要加白名单。
+     */
+    async DescribeUserAutonomyProfile(req, cb) {
+        return this.request("DescribeUserAutonomyProfile", req, cb);
+    }
+    /**
      * 获取实例异常诊断事件的详情信息。
      */
     async DescribeDBDiagEvent(req, cb) {
@@ -316,6 +334,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmPolicy", req, cb);
     }
     /**
+     * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+     */
+    async CreateUserAutonomyProfile(req, cb) {
+        return this.request("CreateUserAutonomyProfile", req, cb);
+    }
+    /**
      * 开启数据库审计服务
      */
     async OpenAuditService(req, cb) {
@@ -344,6 +368,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIndexRecommendAggregationSlowLogs(req, cb) {
         return this.request("DescribeIndexRecommendAggregationSlowLogs", req, cb);
+    }
+    /**
+     * 自治中心-终止自治任务（单次）
+     */
+    async CancelDBAutonomyAction(req, cb) {
+        return this.request("CancelDBAutonomyAction", req, cb);
     }
     /**
      * 创建中断会话的任务。
@@ -406,10 +436,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyUserAccount", req, cb);
     }
     /**
+     * 更改实例限流任务状态，目前仅用于终止限流。
+     */
+    async ModifySqlFilters(req, cb) {
+        return this.request("ModifySqlFilters", req, cb);
+    }
+    /**
      * 用于查询 redis 执行 kill 会话任务后代理节点的执行结果，入参异步任务 ID 从接口 CreateProxySessionKillTask 调用成功后取得。当前 product 只支持：redis。
      */
     async DescribeProxySessionKillTasks(req, cb) {
         return this.request("DescribeProxySessionKillTasks", req, cb);
+    }
+    /**
+     * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+     */
+    async ModifyUserAutonomyProfile(req, cb) {
+        return this.request("ModifyUserAutonomyProfile", req, cb);
     }
 }
 exports.Client = Client;

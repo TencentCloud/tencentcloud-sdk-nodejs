@@ -674,12 +674,10 @@ export interface IdentityPolicy {
   PolicyName?: string
   /**
    * 策略类型。取值 1-自定义策略  2-预设策略；默认值2
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType?: number
   /**
    * 自定义策略内容，遵循CAM策略语法。PolicyType 为自定义策略时有效且必选
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDocument?: string
 }
@@ -736,22 +734,18 @@ export interface ListPermissionPoliciesInRoleConfigurationResponse {
 export interface OrgFinancialByMonth {
   /**
    * 记录ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: number
+  Id?: number
   /**
    * 月份，格式：yyyy-mm，示例：2021-01。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Month: string
+  Month?: string
   /**
    * 消耗金额，单元：元。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCost: number
+  TotalCost?: number
   /**
    * 比上月增长率%。正数增长，负数下降，空值无法统计。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GrowthRate?: string
 }
@@ -1293,7 +1287,6 @@ export interface ShareUnitMember {
   ShareMemberUin?: number
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
 }
@@ -1877,27 +1870,22 @@ export interface ManagerShareUnit {
   Area?: string
   /**
    * 描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 共享单元资源数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareResourceNum?: number
   /**
    * 共享单元成员数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareMemberNum?: number
   /**
    * 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareScope?: number
 }
@@ -1948,7 +1936,6 @@ export interface ShareUnitResource {
   Type?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
@@ -1957,17 +1944,14 @@ export interface ShareUnitResource {
   ProductResourceId?: string
   /**
    * 共享单元成员数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SharedMemberNum?: number
   /**
    * 使用中共享单元成员数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SharedMemberUseNum?: number
   /**
    * 共享管理员OwnerUin。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareManagerUin?: number
 }
@@ -2327,12 +2311,10 @@ export interface EffectivePolicy {
 export interface Tag {
   /**
    * 标签键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
 }
@@ -2516,14 +2498,12 @@ export interface GetZoneStatisticsRequest {
 export interface NodeMainInfo {
   /**
    * 部门ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: number
+  NodeId?: number
   /**
    * 部门名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeName: string
+  NodeName?: string
 }
 
 /**
@@ -3378,20 +3358,19 @@ export interface ListTargetsForPolicyNode {
   /**
    * scp账号uin或节点Id
    */
-  Uin: number
+  Uin?: number
   /**
    * 关联类型 1-节点关联 2-用户关联
    */
-  RelatedType: number
+  RelatedType?: number
   /**
    * 账号或者节点名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 绑定时间
    */
-  AddTime: string
+  AddTime?: string
 }
 
 /**
@@ -3592,7 +3571,6 @@ export interface CreateOrgServiceAssignResponse {
 export interface AddOrganizationMemberEmailResponse {
   /**
    * 绑定Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindId?: number
   /**
@@ -3798,22 +3776,18 @@ export interface CheckAccountDeleteRequest {
 export interface OrgProductFinancial {
   /**
    * 产品Code。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 产品名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductCode: string
+  ProductCode?: string
   /**
    * 产品消耗，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCost: number
+  TotalCost?: number
   /**
    * 占比%。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ratio?: string
 }
@@ -4016,36 +3990,32 @@ export interface DescribeOrganizationFinancialByProductRequest {
 export interface ListPolicyNode {
   /**
    * 策略创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 策略绑定次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachedTimes: number
+  AttachedTimes?: number
   /**
    * 策略描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 策略名称
    */
-  PolicyName: string
+  PolicyName?: string
   /**
    * 策略Id
    */
-  PolicyId: number
+  PolicyId?: number
   /**
    * 策略更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 策略类型 1-自定义 2-预设
    */
-  Type: number
+  Type?: number
 }
 
 /**
@@ -4843,7 +4813,6 @@ export interface DescribePolicyResponse {
   PolicyId?: number
   /**
    * 策略名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
   /**
@@ -4852,22 +4821,18 @@ export interface DescribePolicyResponse {
   Type?: number
   /**
    * 策略描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 策略文档。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDocument?: string
   /**
    * 策略更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 策略创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddTime?: string
   /**
@@ -5005,44 +4970,39 @@ export interface ListPoliciesForTarget {
   /**
    * 策略Id
    */
-  StrategyId: number
+  StrategyId?: number
   /**
    * 策略名称
    */
-  StrategyName: string
+  StrategyName?: string
   /**
    * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 关联的账号或节点
    */
-  Uin: number
+  Uin?: number
   /**
    * 关联类型 1-节点 2-用户
    */
-  Type: number
+  Type?: number
   /**
    * 策略创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 策略更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 部门名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 策略绑定时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachTime: string
+  AttachTime?: string
 }
 
 /**
@@ -5740,7 +5700,6 @@ export interface ShareResource {
   ResourceId?: string
   /**
    * 产品资源ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductResourceId?: string
 }

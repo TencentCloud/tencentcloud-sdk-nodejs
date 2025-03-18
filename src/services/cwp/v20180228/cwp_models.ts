@@ -2067,7 +2067,7 @@ export interface DescribeMachineGeneralResponse {
    */
   NotProtectMachineCnt?: number
   /**
-   * 已防护普惠版机器数（Lighthouse机器）
+   * 已防护轻量机器数（Lighthouse机器）
    */
   LHGeneralDiscountCnt?: number
   /**
@@ -3449,7 +3449,7 @@ export interface DescribeVersionStatisticsResponse {
    */
   UltimateVersionNum?: number
   /**
-   * 普惠版数量
+   * 轻量版数量
    */
   GeneralVersionNum?: number
   /**
@@ -14529,7 +14529,7 @@ export interface DescribeScanVulSettingResponse {
    */
   ClickTimeout?: number
   /**
-   * 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机
+   * 为空默认扫描全部专业版、旗舰版、轻量版主机，不为空只扫描选中主机
    */
   Uuids?: Array<string>
   /**
@@ -18123,7 +18123,7 @@ export interface DescribeMachineInfoResponse {
    */
   HasAssetScan?: number
   /**
-   * 防护版本：BASIC_VERSION 基础版，PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版
+   * 防护版本：BASIC_VERSION 基础版，PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版
    */
   ProtectType?: string
   /**
@@ -18171,8 +18171,7 @@ export interface DescribeImportMachineInfoRequest {
    */
   IsQueryProMachine?: boolean
   /**
-   * 过滤条件：
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：普惠版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+普惠版</li>
+   * 过滤条件：<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：轻量版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+轻量版</li>
    */
   Filters?: Array<Filters>
 }
@@ -21740,7 +21739,7 @@ export interface ScanVulSettingRequest {
    */
   EnableScan?: number
   /**
-   * 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机
+   * 为空默认扫描全部专业版、旗舰版、轻量版主机，不为空只扫描选中主机
    */
   Uuids?: Array<string>
   /**
@@ -24335,7 +24334,7 @@ export interface DescribeLicenseGeneralResponse {
    */
   ProVersionLicenseCnt?: number
   /**
-   * 普惠版总授权数(有效订单的授权数)
+   * 轻量版总授权数(有效订单的授权数)
    */
   CwpVersionLicenseCnt?: number
   /**
@@ -24959,7 +24958,7 @@ export interface DescribeLicenseWhiteConfigResponse {
    */
   Professional?: VersionWhiteConfig
   /**
-   * 普惠版 配置信息
+   * 轻量版 配置信息
    */
   PrattWhitney?: VersionWhiteConfig
   /**
@@ -26134,6 +26133,10 @@ export interface RansomDefenseRollbackTask {
    * 主机示例ID
    */
   InstanceId?: string
+  /**
+   * 主机类型
+   */
+  MachineType?: string
 }
 
 /**
@@ -27793,6 +27796,14 @@ export interface HostTagInfo {
    * 主机类型
    */
   MachineType?: string
+  /**
+   * 可用区名称
+   */
+  RegionName?: string
+  /**
+   * 可用区ID
+   */
+  RegionId?: number
 }
 
 /**

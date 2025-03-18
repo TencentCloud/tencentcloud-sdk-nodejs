@@ -268,118 +268,116 @@ export interface DescribeSubscribeConfResponse {
   /**
    * 订阅实例ID
    */
-  SubscribeId: string
+  SubscribeId?: string
   /**
    * 订阅实例名称
    */
-  SubscribeName: string
+  SubscribeName?: string
   /**
    * 订阅通道
    */
-  ChannelId: string
+  ChannelId?: string
   /**
    * 订阅数据库类型
    */
-  Product: string
+  Product?: string
   /**
    * 被订阅的实例
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 被订阅的实例的状态，可能的值有running,offline,isolate
    */
-  InstanceStatus: string
+  InstanceStatus?: string
   /**
    * 订阅实例状态，可能的值有unconfigure-未配置，configuring-配置中，configured-已配置
    */
-  SubsStatus: string
+  SubsStatus?: string
   /**
    * 订阅实例生命周期状态，可能的值有：normal-正常，isolating-隔离中，isolated-已隔离，offlining-下线中
    */
-  Status: string
+  Status?: string
   /**
    * 订阅实例创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 订阅实例被隔离时间
    */
-  IsolateTime: string
+  IsolateTime?: string
   /**
    * 订阅实例到期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 订阅实例下线时间
    */
-  OfflineTime: string
+  OfflineTime?: string
   /**
    * 订阅实例消费时间起点。
    */
-  ConsumeStartTime: string
+  ConsumeStartTime?: string
   /**
    * 订阅实例计费类型，1-小时计费，0-包年包月
    */
-  PayType: number
+  PayType?: number
   /**
    * 订阅通道Vip
    */
-  Vip: string
+  Vip?: string
   /**
    * 订阅通道Port
    */
-  Vport: number
+  Vport?: number
   /**
    * 订阅通道所在VpcId
    */
-  UniqVpcId: string
+  UniqVpcId?: string
   /**
    * 订阅通道所在SubnetId
    */
-  UniqSubnetId: string
+  UniqSubnetId?: string
   /**
    * 当前SDK消费时间位点
    */
-  SdkConsumedTime: string
+  SdkConsumedTime?: string
   /**
    * 订阅SDK IP地址
    */
-  SdkHost: string
+  SdkHost?: string
   /**
    * 订阅对象类型0-全实例订阅，1-DDL数据订阅，2-DML结构订阅，3-DDL数据订阅+DML结构订阅
    */
-  SubscribeObjectType: number
+  SubscribeObjectType?: number
   /**
    * 订阅对象，当SubscribeObjectType 为0时，此字段为空数组
    */
-  SubscribeObjects: Array<SubscribeObject>
+  SubscribeObjects?: Array<SubscribeObject>
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 订阅实例的标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<TagItem>
+  Tags?: Array<TagItem>
   /**
    * 自动续费标识,0-不自动续费，1-自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 数据订阅版本。老版订阅填txdts，kafka版填kafka
    */
-  SubscribeVersion: string
+  SubscribeVersion?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Errors: Array<SubsErr>
+  Errors?: Array<SubsErr>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -458,7 +456,6 @@ export interface SrcInfo {
   Supplier?: string
   /**
    * 云联网ID，如：ccn-afp6kltc
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CcnId?: string
   /**

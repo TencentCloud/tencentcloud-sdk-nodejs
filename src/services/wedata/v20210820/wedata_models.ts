@@ -1443,6 +1443,10 @@ TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK
    * 实例时间的时区
    */
   ScheduleTimeZone?: string
+  /**
+   * 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理
+   */
+  TimeType?: string
 }
 
 /**
@@ -8510,6 +8514,10 @@ export interface ManualTriggerRecordOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
+  /**
+   * 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理
+   */
+  TimeType?: string
 }
 
 /**
@@ -11538,6 +11546,11 @@ REVERSE： 实例数据时间逆序
    * 执行应用参数
    */
   AppParam?: string
+  /**
+   * 补录计划时间范围的类型： 
+DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间
+   */
+  TimeType?: string
 }
 
 /**
@@ -15376,6 +15389,14 @@ export interface InstanceApiOpsRequest {
    * 时区
    */
   ScheduleTimeZone?: string
+  /**
+   * 计划调度时间
+   */
+  ScheduleTimeFrom?: string
+  /**
+   * 计划调度时间
+   */
+  ScheduleTimeTo?: string
 }
 
 /**

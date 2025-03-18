@@ -48,6 +48,24 @@ export interface SlowLogUser {
 }
 
 /**
+ * DescribeUserAutonomyProfile请求参数结构体
+ */
+export interface DescribeUserAutonomyProfileRequest {
+  /**
+   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）。
+   */
+  ProfileType: string
+  /**
+   * 实列ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
+}
+
+/**
  * redis key空间信息。
  */
 export interface RedisKeySpaceData {
@@ -116,41 +134,21 @@ export interface DescribeRedisTopKeyPrefixListRequest {
 }
 
 /**
- * 健康报告任务详情。
+ * DescribeDBAutonomyActions请求参数结构体
  */
-export interface HealthReportTask {
+export interface DescribeDBAutonomyActionsRequest {
   /**
-   * 异步任务请求 ID。
+   * 事件ID。
    */
-  AsyncRequestId: number
+  EventId: number
   /**
-   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
+   * 实列ID。
    */
-  Source: string
+  InstanceId: string
   /**
-   * 任务完成进度，单位%。
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
-  Progress: number
-  /**
-   * 任务创建时间。
-   */
-  CreateTime: string
-  /**
-   * 任务开始执行时间。
-   */
-  StartTime: string
-  /**
-   * 任务完成执行时间。
-   */
-  EndTime: string
-  /**
-   * 任务所属实例的基础信息。
-   */
-  InstanceInfo: InstanceBasicInfo
-  /**
-   * 健康报告中的健康信息。
-   */
-  HealthStatus: HealthStatus
+  Product: string
 }
 
 /**
@@ -206,6 +204,16 @@ export interface SecLogExportTaskInfo {
 }
 
 /**
+ * CancelDBAutonomyAction返回参数结构体
+ */
+export interface CancelDBAutonomyActionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OpenAuditService返回参数结构体
  */
 export interface OpenAuditServiceResponse {
@@ -213,6 +221,28 @@ export interface OpenAuditServiceResponse {
    * taskId 为0表示开通审计成功，否则开通失败
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserAutonomyProfile返回参数结构体
+ */
+export interface DescribeUserAutonomyProfileResponse {
+  /**
+   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）。
+   */
+  ProfileType?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
+  /**
+   * 自治用户配置。
+   */
+  ProfileInfo?: AutonomyUserProfileInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -552,6 +582,24 @@ export interface DescribeDBDiagEventResponse {
 }
 
 /**
+ * DescribeDBAutonomyActions返回参数结构体
+ */
+export interface DescribeDBAutonomyActionsResponse {
+  /**
+   * 自治事件总数。
+   */
+  TotalCount?: number
+  /**
+   * 自治事件列表。
+   */
+  Actions?: Array<AutonomyActionVo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSlowLogTopSqls请求参数结构体
  */
 export interface DescribeSlowLogTopSqlsRequest {
@@ -713,6 +761,44 @@ export interface RedisBigKeyTask {
 }
 
 /**
+ * 健康报告任务详情。
+ */
+export interface HealthReportTask {
+  /**
+   * 异步任务请求 ID。
+   */
+  AsyncRequestId: number
+  /**
+   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
+   */
+  Source: string
+  /**
+   * 任务完成进度，单位%。
+   */
+  Progress: number
+  /**
+   * 任务创建时间。
+   */
+  CreateTime: string
+  /**
+   * 任务开始执行时间。
+   */
+  StartTime: string
+  /**
+   * 任务完成执行时间。
+   */
+  EndTime: string
+  /**
+   * 任务所属实例的基础信息。
+   */
+  InstanceInfo: InstanceBasicInfo
+  /**
+   * 健康报告中的健康信息。
+   */
+  HealthStatus: HealthStatus
+}
+
+/**
  * CancelKillTask返回参数结构体
  */
 export interface CancelKillTaskResponse {
@@ -778,6 +864,32 @@ export interface DescribeTopSpaceSchemaTimeSeriesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifySqlFilters请求参数结构体
+ */
+export interface ModifySqlFiltersRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * SQL限流任务ID列表。
+   */
+  FilterIds: Array<number | bigint>
+  /**
+   * 限流任务状态，取值支持TERMINATED - 终止。
+   */
+  Status: string
+  /**
+   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   */
+  SessionToken?: string
+  /**
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -996,6 +1108,16 @@ export interface DiagHistoryEventItem {
 }
 
 /**
+ * CreateUserAutonomyProfile返回参数结构体
+ */
+export interface CreateUserAutonomyProfileResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProxySessionKillTasks请求参数结构体
  */
 export interface DescribeProxySessionKillTasksRequest {
@@ -1021,6 +1143,34 @@ export interface ModifyAlarmPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyUserAutonomyProfile返回参数结构体
+ */
+export interface ModifyUserAutonomyProfileResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelRedisBigKeyAnalysisTasks请求参数结构体
+ */
+export interface CancelRedisBigKeyAnalysisTasksRequest {
+  /**
+   * 自治任务ID。
+   */
+  AsyncRequestIds: Array<number | bigint>
+  /**
+   * 实列ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
 }
 
 /**
@@ -1083,6 +1233,32 @@ export interface UpdateMonitorSwitchRequest {
 }
 
 /**
+ * 自治用户配置详情
+ */
+export interface AutonomyUserProfileInfo {
+  /**
+   * 是否开启自治。
+   */
+  Enabled?: boolean
+  /**
+   * 用户Uin。
+   */
+  Uin?: string
+  /**
+   * 内存上限。
+   */
+  MemoryUpperLimit?: number
+  /**
+   * 指标阈值规则。
+   */
+  ThresholdRule?: MetricThreshold
+  /**
+   * 自治功能类型。
+   */
+  EnabledItems?: Array<string>
+}
+
+/**
  * 实时会话访问来源详情。
  */
 export interface SessionItem {
@@ -1127,25 +1303,45 @@ export interface StatisticDataInfo {
 }
 
 /**
- * 实例健康详情。
+ * 自治事件详情
  */
-export interface HealthStatus {
+export interface AutonomyEventVo {
   /**
-   * 健康分数，满分100。
+   * 自治事件ID。
    */
-  HealthScore?: number
+  EventId?: number
   /**
-   * 健康等级，取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK"- 危险；"HIGH_RISK" - 高危。
+   * 自治事件类型：支持RunningAutoRecovery，RedisAutoScale
    */
-  HealthLevel?: string
+  Type?: string
   /**
-   * 总扣分分数。
+   * 自治事件状态：支持 RUNNING，FINISHED，TERMINATED
    */
-  ScoreLost?: number
+  Status?: string
   /**
-   * 扣分详情。
+   * 触发原因。
    */
-  ScoreDetails?: Array<ScoreDetail>
+  Reason?: string
+  /**
+   * 自治任务触发时间。
+   */
+  TriggerTime?: number
+  /**
+   * 自治任务最后触发时间。
+   */
+  LastTriggerTime?: number
+  /**
+   * 自治任务创建时间。
+   */
+  CreateTime?: number
+  /**
+   * 自治任务更新时间。
+   */
+  UpdateTime?: number
+  /**
+   * 自治任务完成时间；非结束状态的时候，该值无意义。
+   */
+  FinishTime?: number
 }
 
 /**
@@ -1289,6 +1485,24 @@ export interface ContactItem {
 }
 
 /**
+ * DescribeDBAutonomyEvents返回参数结构体
+ */
+export interface DescribeDBAutonomyEventsResponse {
+  /**
+   * 自治事件列表总数。
+   */
+  TotalCount?: number
+  /**
+   * 自治事件列表。
+   */
+  Events?: Array<AutonomyEventVo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAuditLogFile返回参数结构体
  */
 export interface DeleteAuditLogFileResponse {
@@ -1388,21 +1602,51 @@ export interface TimeSlice {
 }
 
 /**
- * DeleteDBDiagReportTasks请求参数结构体
+ * 审计日志文件
  */
-export interface DeleteDBDiagReportTasksRequest {
+export interface AuditLogFile {
   /**
-   * 需要删除的任务id列表
+   * 审计日志文件生成异步任务ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestIds: Array<number | bigint>
+  AsyncRequestId?: number
   /**
-   * 实例ID
+   * 审计日志文件名称。
    */
-  InstanceId: string
+  FileName?: string
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Product?: string
+  CreateTime?: string
+  /**
+   * 文件状态值。可能返回的值为：
+"creating" - 生成中;
+"failed" - 创建失败;
+"success" - 已生成;
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 文件大小，单位为 KB。
+   */
+  FileSize?: number
+  /**
+   * 审计日志下载地址。
+   */
+  DownloadUrl?: string
+  /**
+   * 错误信息。
+   */
+  ErrMsg?: string
+  /**
+   * 文件生成进度。
+   */
+  Progress?: number
+  /**
+   * 文件生成成功时间。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -1553,6 +1797,24 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * 自治指标阈值
+ */
+export interface MetricThreshold {
+  /**
+   * 指标。
+   */
+  Metric?: string
+  /**
+   * 阈值。
+   */
+  Threshold?: number
+  /**
+   * 时间间隔。
+   */
+  Duration?: number
 }
 
 /**
@@ -2279,6 +2541,52 @@ export interface CreateDBDiagReportUrlRequest {
 }
 
 /**
+ * redis自治事件任务详情
+ */
+export interface AutonomyActionVo {
+  /**
+   * 自治任务ID。
+   */
+  ActionId?: number
+  /**
+   * 自治事件ID。
+   */
+  EventId?: number
+  /**
+   * 类型：支持RedisAutoScaleUp
+   */
+  Type?: string
+  /**
+   * 自治任务触发时间。
+   */
+  TriggerTime?: string
+  /**
+   * 自治任务创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 自治任务更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 自治任务完成时间。
+   */
+  FinishTime?: string
+  /**
+   * 剩余时间，单位：秒。
+   */
+  ExpireTime?: number
+  /**
+   * 触发原因。
+   */
+  Reason?: string
+  /**
+   * 自治任务状态：支持 RUNNING，FINISHED，TERMINATED，CANCELLED
+   */
+  Status?: string
+}
+
+/**
  * CloseAuditService返回参数结构体
  */
 export interface CloseAuditServiceResponse {
@@ -2470,6 +2778,28 @@ export interface DescribeDBDiagHistoryResponse {
 }
 
 /**
+ * CreateUserAutonomyProfile请求参数结构体
+ */
+export interface CreateUserAutonomyProfileRequest {
+  /**
+   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）
+   */
+  ProfileType: string
+  /**
+   * 实列ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 自治功能相关配置，标准JSON字符串格式。
+   */
+  ProfileInfo?: string
+}
+
+/**
  * mongodb慢查模板概览明细
  */
 export interface Aggregation {
@@ -2497,29 +2827,25 @@ export interface Aggregation {
 }
 
 /**
- * ModifySqlFilters请求参数结构体
+ * 实例健康详情。
  */
-export interface ModifySqlFiltersRequest {
+export interface HealthStatus {
   /**
-   * 实例ID。
+   * 健康分数，满分100。
    */
-  InstanceId: string
+  HealthScore?: number
   /**
-   * SQL限流任务ID列表。
+   * 健康等级，取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK"- 危险；"HIGH_RISK" - 高危。
    */
-  FilterIds: Array<number | bigint>
+  HealthLevel?: string
   /**
-   * 限流任务状态，取值支持TERMINATED - 终止。
+   * 总扣分分数。
    */
-  Status: string
+  ScoreLost?: number
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   * 扣分详情。
    */
-  SessionToken?: string
-  /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
-   */
-  Product?: string
+  ScoreDetails?: Array<ScoreDetail>
 }
 
 /**
@@ -3078,6 +3404,28 @@ export interface InstanceInfo {
 }
 
 /**
+ * ModifyUserAutonomyProfile请求参数结构体
+ */
+export interface ModifyUserAutonomyProfileRequest {
+  /**
+   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）
+   */
+  ProfileType: string
+  /**
+   * 实列ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 自治功能相关配置，标准JSON字符串格式。
+   */
+  NewProfileInfo?: string
+}
+
+/**
  * 通知模板
  */
 export interface TemplateInfo {
@@ -3478,6 +3826,36 @@ export interface ModifyAuditServiceResponse {
 }
 
 /**
+ * DescribeDBAutonomyEvents请求参数结构体
+ */
+export interface DescribeDBAutonomyEventsRequest {
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 实列ID。
+   */
+  InstanceId: string
+  /**
+   * 开始时间。
+   */
+  StartTime: string
+  /**
+   * 结束时间。
+   */
+  EndTime: string
+  /**
+   * 分页参数，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页参数，默认值为20。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeHealthScore请求参数结构体
  */
 export interface DescribeHealthScoreRequest {
@@ -3724,51 +4102,39 @@ export interface CreateProxySessionKillTaskResponse {
 }
 
 /**
- * 审计日志文件
+ * CancelDBAutonomyAction请求参数结构体
  */
-export interface AuditLogFile {
+export interface CancelDBAutonomyActionRequest {
   /**
-   * 审计日志文件生成异步任务ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 自治任务ID。
    */
-  AsyncRequestId?: number
+  ActionId: number
   /**
-   * 审计日志文件名称。
+   * 实列ID。
    */
-  FileName?: string
+  InstanceId: string
   /**
-   * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
-  CreateTime?: string
+  Product: string
+}
+
+/**
+ * DeleteDBDiagReportTasks请求参数结构体
+ */
+export interface DeleteDBDiagReportTasksRequest {
   /**
-   * 文件状态值。可能返回的值为：
-"creating" - 生成中;
-"failed" - 创建失败;
-"success" - 已生成;
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要删除的任务id列表
    */
-  Status?: string
+  AsyncRequestIds: Array<number | bigint>
   /**
-   * 文件大小，单位为 KB。
+   * 实例ID
    */
-  FileSize?: number
+  InstanceId: string
   /**
-   * 审计日志下载地址。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
-  DownloadUrl?: string
-  /**
-   * 错误信息。
-   */
-  ErrMsg?: string
-  /**
-   * 文件生成进度。
-   */
-  Progress?: number
-  /**
-   * 文件生成成功时间。
-   */
-  FinishTime?: string
+  Product?: string
 }
 
 /**
@@ -4423,6 +4789,20 @@ export interface DescribeHealthScoreResponse {
    * 健康得分以及异常扣分项。
    */
   Data: HealthScoreInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelRedisBigKeyAnalysisTasks返回参数结构体
+ */
+export interface CancelRedisBigKeyAnalysisTasksResponse {
+  /**
+   * 终止大Key任务结果；0-成功。
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

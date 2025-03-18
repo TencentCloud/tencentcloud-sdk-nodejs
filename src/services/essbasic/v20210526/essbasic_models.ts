@@ -1233,6 +1233,11 @@ export interface CreateFlowOption {
 **false**：（默认）不跳过，需要传ResourceId
    */
   SkipUploadFile?: boolean
+  /**
+   * 签署控件的配置信息，用在嵌入式发起的页面配置，包括 
+ - 签署控件 是否默认展示日期.
+   */
+  SignComponentConfig?: SignComponentConfig
 }
 
 /**
@@ -1642,9 +1647,11 @@ export interface ChannelCreatePrepareFlowRequest {
    */
   Operator?: UserInfo
   /**
-   * 签署控件的配置信息，用在嵌入式发起的页面配置，包括
+   * <font color="red">此参数已经废弃，请使用 CreateFlowOption 里面的 SignComponentConfig</font>
+签署控件的配置信息，用在嵌入式发起的页面配置，包括
 
 - 签署控件 是否默认展示日期.
+   * @deprecated
    */
   SignComponentConfig?: SignComponentConfig
 }
@@ -4947,6 +4954,10 @@ export interface ChannelCreateBatchQuickSignUrlRequest {
 注: `若参与方为企业员工时，暂不支持对参与方信息进行缓存`
    */
   CacheApproverInfo?: boolean
+  /**
+   * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`合同组暂不支持批量拒签功能。`
+   */
+  CanBatchReject?: boolean
 }
 
 /**
@@ -7821,6 +7832,10 @@ export interface ChannelCreateBatchSignUrlRequest {
 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。
    */
   UrlUseEnv?: string
+  /**
+   * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`合同组暂不支持批量拒签功能。`
+   */
+  CanBatchReject?: boolean
 }
 
 /**

@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDevice", req, cb);
     }
     /**
+     * 当前p2p线路
+     */
+    async DescribeP2PRoute(req, cb) {
+        return this.request("DescribeP2PRoute", req, cb);
+    }
+    /**
      * 拉取云存事件列表
      */
     async DescribeCloudStorageEventsWithAITasks(req, cb) {
@@ -296,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVideoLicense(req, cb) {
         return this.request("DescribeVideoLicense", req, cb);
+    }
+    /**
+     * p2p路线切换
+     */
+    async ChangeP2PRoute(req, cb) {
+        return this.request("ChangeP2PRoute", req, cb);
     }
     /**
      * 提供根据产品名称查找产品的能力
@@ -570,6 +582,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateFreeCloudStorage(req, cb) {
         return this.request("CreateFreeCloudStorage", req, cb);
+    }
+    /**
+     * 更新应用信息
+     */
+    async ModifyApplication(req, cb) {
+        return this.request("ModifyApplication", req, cb);
     }
     /**
      * 批量禁用启用设备

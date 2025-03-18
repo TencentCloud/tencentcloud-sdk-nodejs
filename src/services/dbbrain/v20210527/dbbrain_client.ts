@@ -20,11 +20,14 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SchemaSpaceTimeSeries,
   SlowLogUser,
+  DescribeUserAutonomyProfileRequest,
   RedisKeySpaceData,
   DescribeRedisTopKeyPrefixListRequest,
-  HealthReportTask,
+  DescribeDBAutonomyActionsRequest,
   SecLogExportTaskInfo,
+  CancelDBAutonomyActionResponse,
   OpenAuditServiceResponse,
+  DescribeUserAutonomyProfileResponse,
   DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
@@ -36,41 +39,49 @@ import {
   CreateRedisBigKeyAnalysisTaskResponse,
   CreateSecurityAuditLogExportTaskRequest,
   DescribeDBDiagEventResponse,
+  DescribeDBAutonomyActionsResponse,
   DescribeSlowLogTopSqlsRequest,
   DescribeRedisBigKeyAnalysisTasksResponse,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
   AuditInstanceInfo,
   RedisBigKeyTask,
+  HealthReportTask,
   CancelKillTaskResponse,
   DescribeRedisTopBigKeysResponse,
   DescribeSqlTemplateRequest,
   DescribeTopSpaceSchemaTimeSeriesResponse,
+  ModifySqlFiltersRequest,
   AuditLogFilter,
   SlowLogTopSqlItem,
   CreateKillTaskResponse,
   DescribeAuditInstanceListResponse,
   DiagHistoryEventItem,
+  CreateUserAutonomyProfileResponse,
   DescribeProxySessionKillTasksRequest,
   ModifyAlarmPolicyResponse,
+  ModifyUserAutonomyProfileResponse,
+  CancelRedisBigKeyAnalysisTasksRequest,
   CreateRedisBigKeyAnalysisTaskRequest,
   DescribeMySqlProcessListResponse,
   UpdateMonitorSwitchRequest,
+  AutonomyUserProfileInfo,
   SessionItem,
   StatisticDataInfo,
-  HealthStatus,
+  AutonomyEventVo,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
   ModifySqlFiltersResponse,
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
+  DescribeDBAutonomyEventsResponse,
   DeleteAuditLogFileResponse,
   DescribeDBSpaceStatusRequest,
   AlarmsRules,
   DescribeRedisProcessListRequest,
   TimeSlice,
-  DeleteDBDiagReportTasksRequest,
+  AuditLogFile,
   ModifyDiagDBInstanceConfRequest,
   DescribeSlowLogsResponse,
   UpdateAgentSwitchRequest,
@@ -80,6 +91,7 @@ import {
   CreateMailProfileResponse,
   UpdateMonitorSwitchResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
+  MetricThreshold,
   CancelKillTaskRequest,
   InstanceID,
   DescribeDBDiagHistoryRequest,
@@ -112,6 +124,7 @@ import {
   DescribeSqlFiltersResponse,
   MongoDBIndex,
   CreateDBDiagReportUrlRequest,
+  AutonomyActionVo,
   CloseAuditServiceResponse,
   DeleteRedisBigKeyAnalysisTasksResponse,
   CloseAuditServiceRequest,
@@ -121,8 +134,9 @@ import {
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagHistoryResponse,
+  CreateUserAutonomyProfileRequest,
   Aggregation,
-  ModifySqlFiltersRequest,
+  HealthStatus,
   DescribeAllUserContactResponse,
   MonitorMetric,
   ProfileInfo,
@@ -139,6 +153,7 @@ import {
   StatDimension,
   AlarmProfileList,
   InstanceInfo,
+  ModifyUserAutonomyProfileRequest,
   TemplateInfo,
   DescribeAuditInstanceListRequest,
   DescribeRedisBigKeyAnalysisTasksRequest,
@@ -156,6 +171,7 @@ import {
   DescribeIndexRecommendInfoResponse,
   Process,
   ModifyAuditServiceResponse,
+  DescribeDBAutonomyEventsRequest,
   DescribeHealthScoreRequest,
   DeleteRedisBigKeyAnalysisTasksRequest,
   IssueTypeInfo,
@@ -169,7 +185,8 @@ import {
   DescribeSlowLogUserHostStatsRequest,
   DescribeTopSpaceSchemasResponse,
   CreateProxySessionKillTaskResponse,
-  AuditLogFile,
+  CancelDBAutonomyActionRequest,
+  DeleteDBDiagReportTasksRequest,
   DescribeAlarmTemplateRequest,
   VerifyUserAccountResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
@@ -195,6 +212,7 @@ import {
   SlowLogInfoItem,
   IndexesToDrop,
   DescribeHealthScoreResponse,
+  CancelRedisBigKeyAnalysisTasksResponse,
   DescribeSecurityAuditLogExportTasksResponse,
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
@@ -215,6 +233,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dbbrain.tencentcloudapi.com", "2021-05-27", clientConfig)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async DescribeDBAutonomyEvents(
+    req: DescribeDBAutonomyEventsRequest,
+    cb?: (error: string, rep: DescribeDBAutonomyEventsResponse) => void
+  ): Promise<DescribeDBAutonomyEventsResponse> {
+    return this.request("DescribeDBAutonomyEvents", req, cb)
   }
 
   /**
@@ -538,6 +566,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async CancelRedisBigKeyAnalysisTasks(
+    req: CancelRedisBigKeyAnalysisTasksRequest,
+    cb?: (error: string, rep: CancelRedisBigKeyAnalysisTasksResponse) => void
+  ): Promise<CancelRedisBigKeyAnalysisTasksResponse> {
+    return this.request("CancelRedisBigKeyAnalysisTasks", req, cb)
+  }
+
+  /**
    * 删除安全审计日志导出任务。
    */
   async DeleteSecurityAuditLogExportTasks(
@@ -548,13 +586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更改实例限流任务状态，目前仅用于终止限流。
+   * 自治中心-终止自治任务（单次）
    */
-  async ModifySqlFilters(
-    req: ModifySqlFiltersRequest,
-    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
-  ): Promise<ModifySqlFiltersResponse> {
-    return this.request("ModifySqlFilters", req, cb)
+  async DescribeDBAutonomyActions(
+    req: DescribeDBAutonomyActionsRequest,
+    cb?: (error: string, rep: DescribeDBAutonomyActionsResponse) => void
+  ): Promise<DescribeDBAutonomyActionsResponse> {
+    return this.request("DescribeDBAutonomyActions", req, cb)
   }
 
   /**
@@ -628,6 +666,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 自治中心-终止自治任务（单次）；注意： 接口调用需要加白名单。
+   */
+  async DescribeUserAutonomyProfile(
+    req: DescribeUserAutonomyProfileRequest,
+    cb?: (error: string, rep: DescribeUserAutonomyProfileResponse) => void
+  ): Promise<DescribeUserAutonomyProfileResponse> {
+    return this.request("DescribeUserAutonomyProfile", req, cb)
+  }
+
+  /**
    * 获取实例异常诊断事件的详情信息。
    */
   async DescribeDBDiagEvent(
@@ -698,6 +746,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+   */
+  async CreateUserAutonomyProfile(
+    req: CreateUserAutonomyProfileRequest,
+    cb?: (error: string, rep: CreateUserAutonomyProfileResponse) => void
+  ): Promise<CreateUserAutonomyProfileResponse> {
+    return this.request("CreateUserAutonomyProfile", req, cb)
+  }
+
+  /**
    * 开启数据库审计服务
    */
   async OpenAuditService(
@@ -745,6 +803,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexRecommendAggregationSlowLogsResponse) => void
   ): Promise<DescribeIndexRecommendAggregationSlowLogsResponse> {
     return this.request("DescribeIndexRecommendAggregationSlowLogs", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async CancelDBAutonomyAction(
+    req: CancelDBAutonomyActionRequest,
+    cb?: (error: string, rep: CancelDBAutonomyActionResponse) => void
+  ): Promise<CancelDBAutonomyActionResponse> {
+    return this.request("CancelDBAutonomyAction", req, cb)
   }
 
   /**
@@ -848,6 +916,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更改实例限流任务状态，目前仅用于终止限流。
+   */
+  async ModifySqlFilters(
+    req: ModifySqlFiltersRequest,
+    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
+  ): Promise<ModifySqlFiltersResponse> {
+    return this.request("ModifySqlFilters", req, cb)
+  }
+
+  /**
    * 用于查询 redis 执行 kill 会话任务后代理节点的执行结果，入参异步任务 ID 从接口 CreateProxySessionKillTask 调用成功后取得。当前 product 只支持：redis。
    */
   async DescribeProxySessionKillTasks(
@@ -855,5 +933,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxySessionKillTasksResponse) => void
   ): Promise<DescribeProxySessionKillTasksResponse> {
     return this.request("DescribeProxySessionKillTasks", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+   */
+  async ModifyUserAutonomyProfile(
+    req: ModifyUserAutonomyProfileRequest,
+    cb?: (error: string, rep: ModifyUserAutonomyProfileResponse) => void
+  ): Promise<ModifyUserAutonomyProfileResponse> {
+    return this.request("ModifyUserAutonomyProfile", req, cb)
   }
 }

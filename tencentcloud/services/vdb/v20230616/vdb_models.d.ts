@@ -144,6 +144,10 @@ export interface DescribeInstancesRequest {
      * 按照标签筛选实例
      */
     ResourceTags?: Array<Tag>;
+    /**
+     * 任务状态：1-待执行任务；2-密钥更新中；3-网络变更中；4-参数变更中；5-embedding变更中；6-ai套件变更中；7-滚动升级中；8-纵向扩容中；9-纵向缩容中；10-横向扩容中；11-横向缩容中
+     */
+    TaskStatus?: Array<number | bigint>;
 }
 /**
  * AssociateSecurityGroups请求参数结构体
@@ -450,6 +454,10 @@ export interface InstanceInfo {
      * 是否自动续费。0: 不自动续费(可以支持特权不停服)；1:自动续费；2:到期不续费.
      */
     AutoRenew?: number;
+    /**
+     * 任务状态：0-无任务；1-待执行任务；2-密钥更新中；3-网络变更中；4-参数变更中；5-embedding变更中；6-ai套件变更中；7-滚动升级中；8-纵向扩容中；9-纵向缩容中；10-横向扩容中；11-横向缩容中
+     */
+    TaskStatus?: number;
 }
 /**
  * 实例pod信息， pod 名称
@@ -459,6 +467,10 @@ export interface NodeInfo {
      * Pod名称。
      */
     Name?: string;
+    /**
+     * pod状态
+     */
+    Status?: string;
 }
 /**
  * DescribeInstances返回参数结构体

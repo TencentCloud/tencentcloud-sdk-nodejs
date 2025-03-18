@@ -18,6 +18,16 @@ const client = new tencentcloud.dbbrain.v20210527.Client({
 })
 describe("dbbrain.v20210527.test.js", function () {
 
+it("dbbrain.v20210527.DescribeDBAutonomyEvents", async function () {
+    try {
+       const data = await client.DescribeDBAutonomyEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeTopSpaceTableTimeSeries", async function () {
     try {
        const data = await client.DescribeTopSpaceTableTimeSeries({})
@@ -338,6 +348,16 @@ it("dbbrain.v20210527.DescribeUserSqlAdvice", async function () {
     }
 })
 
+it("dbbrain.v20210527.CancelRedisBigKeyAnalysisTasks", async function () {
+    try {
+       const data = await client.CancelRedisBigKeyAnalysisTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DeleteSecurityAuditLogExportTasks", async function () {
     try {
        const data = await client.DeleteSecurityAuditLogExportTasks({})
@@ -348,9 +368,9 @@ it("dbbrain.v20210527.DeleteSecurityAuditLogExportTasks", async function () {
     }
 })
 
-it("dbbrain.v20210527.ModifySqlFilters", async function () {
+it("dbbrain.v20210527.DescribeDBAutonomyActions", async function () {
     try {
-       const data = await client.ModifySqlFilters({})
+       const data = await client.DescribeDBAutonomyActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,6 +448,16 @@ it("dbbrain.v20210527.DescribeSlowLogs", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeUserAutonomyProfile", async function () {
+    try {
+       const data = await client.DescribeUserAutonomyProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeDBDiagEvent", async function () {
     try {
        const data = await client.DescribeDBDiagEvent({})
@@ -498,6 +528,16 @@ it("dbbrain.v20210527.ModifyAlarmPolicy", async function () {
     }
 })
 
+it("dbbrain.v20210527.CreateUserAutonomyProfile", async function () {
+    try {
+       const data = await client.CreateUserAutonomyProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.OpenAuditService", async function () {
     try {
        const data = await client.OpenAuditService({})
@@ -541,6 +581,16 @@ it("dbbrain.v20210527.ModifyAuditService", async function () {
 it("dbbrain.v20210527.DescribeIndexRecommendAggregationSlowLogs", async function () {
     try {
        const data = await client.DescribeIndexRecommendAggregationSlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.CancelDBAutonomyAction", async function () {
+    try {
+       const data = await client.CancelDBAutonomyAction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +698,29 @@ it("dbbrain.v20210527.VerifyUserAccount", async function () {
     }
 })
 
+it("dbbrain.v20210527.ModifySqlFilters", async function () {
+    try {
+       const data = await client.ModifySqlFilters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeProxySessionKillTasks", async function () {
     try {
        const data = await client.DescribeProxySessionKillTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.ModifyUserAutonomyProfile", async function () {
+    try {
+       const data = await client.ModifyUserAutonomyProfile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

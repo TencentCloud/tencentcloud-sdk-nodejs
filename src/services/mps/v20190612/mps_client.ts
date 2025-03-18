@@ -406,6 +406,7 @@ import {
   ImageSpriteTemplate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   QualityControlItem,
+  SpekeDrm,
   DeleteStreamLinkFlowResponse,
   LiveStreamAsrFullTextRecognitionResult,
   AiReviewPornOcrTaskOutput,

@@ -1388,6 +1388,10 @@ export interface TriggerManualTasksRequest {
      * 实例时间的时区
      */
     ScheduleTimeZone?: string;
+    /**
+     * 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理
+     */
+    TimeType?: string;
 }
 /**
  * 任务血缘信息，包括源表和目标表
@@ -8258,6 +8262,10 @@ export interface ManualTriggerRecordOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleTimeZone?: string;
+    /**
+     * 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理
+     */
+    TimeType?: string;
 }
 /**
  * ModifyRule返回参数结构体
@@ -11197,6 +11205,11 @@ export interface MakePlanOpsDto {
      * 执行应用参数
      */
     AppParam?: string;
+    /**
+     * 补录计划时间范围的类型：
+  DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间
+     */
+    TimeType?: string;
 }
 /**
  * DescribeBatchOperateTask返回参数结构体
@@ -14893,6 +14906,14 @@ export interface InstanceApiOpsRequest {
      * 时区
      */
     ScheduleTimeZone?: string;
+    /**
+     * 计划调度时间
+     */
+    ScheduleTimeFrom?: string;
+    /**
+     * 计划调度时间
+     */
+    ScheduleTimeTo?: string;
 }
 /**
  * SubmitSqlTask请求参数结构体

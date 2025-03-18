@@ -21,7 +21,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeBillList(req: DescribeBillListRequest, cb?: (error: string, rep: DescribeBillListResponse) => void): Promise<DescribeBillListResponse>;
     /**
-     * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
+     * 当前接口已迁移至svp产品
+
+查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
      */
     DescribeSavingPlanCoverage(req: DescribeSavingPlanCoverageRequest, cb?: (error: string, rep: DescribeSavingPlanCoverageResponse) => void): Promise<DescribeSavingPlanCoverageResponse>;
     /**

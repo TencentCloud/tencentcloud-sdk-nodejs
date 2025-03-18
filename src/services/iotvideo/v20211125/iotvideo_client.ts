@@ -67,7 +67,7 @@ import {
   CreateDataForwardResponse,
   UploadFirmwareRequest,
   DescribeCloudStoragePackageConsumeStatsResponse,
-  PackageInfo,
+  DescribeP2PRouteResponse,
   DescribeFirmwareRequest,
   DescribeCloudStorageUsersResponse,
   DescribeProductRequest,
@@ -108,6 +108,7 @@ import {
   ControlDeviceDataRequest,
   AIModelUsageInfo,
   GetAllFirmwareVersionRequest,
+  PackageInfo,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
   DescribeDeviceStatusLogResponse,
@@ -125,6 +126,7 @@ import {
   ModifyPushChannelResponse,
   CallDeviceActionSyncResponse,
   CreateProductResponse,
+  ChangeP2PRouteResponse,
   TRTCParams,
   DescribeDeviceDataHistoryResponse,
   CallTRTCDeviceRequest,
@@ -139,7 +141,7 @@ import {
   DescribeFirmwareTaskResponse,
   FirmwareInfo,
   CreateProductRequest,
-  DescribeFirmwareTasksRequest,
+  ChangeP2PRouteRequest,
   GetFirmwareURLResponse,
   DescribeUserResponse,
   DescribePackageConsumeTaskResponse,
@@ -195,6 +197,7 @@ import {
   CreateCloudStorageResponse,
   BindCloudStorageUserResponse,
   DescribeFreeCloudStorageNumRequest,
+  DescribeFirmwareTasksRequest,
   CancelDeviceFirmwareTaskRequest,
   CancelDeviceFirmwareTaskResponse,
   DescribeBatchsRequest,
@@ -232,6 +235,7 @@ import {
   DescribeAIModelsResponse,
   InheritCloudStorageUserRequest,
   DescribeAIModelChannelRequest,
+  DescribeP2PRouteRequest,
   DescribeAIModelUsageRequest,
   DescribeBonusesRequest,
   DeleteFirmwareRequest,
@@ -555,6 +559,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 当前p2p线路
+   */
+  async DescribeP2PRoute(
+    req: DescribeP2PRouteRequest,
+    cb?: (error: string, rep: DescribeP2PRouteResponse) => void
+  ): Promise<DescribeP2PRouteResponse> {
+    return this.request("DescribeP2PRoute", req, cb)
+  }
+
+  /**
    * 本接口（DescribeFirmware）用于查询固件信息
    */
   async DescribeFirmware(
@@ -662,6 +676,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProductResponse) => void
   ): Promise<CreateProductResponse> {
     return this.request("CreateProduct", req, cb)
+  }
+
+  /**
+   * p2p路线切换
+   */
+  async ChangeP2PRoute(
+    req: ChangeP2PRouteRequest,
+    cb?: (error: string, rep: ChangeP2PRouteResponse) => void
+  ): Promise<ChangeP2PRouteResponse> {
+    return this.request("ChangeP2PRoute", req, cb)
   }
 
   /**

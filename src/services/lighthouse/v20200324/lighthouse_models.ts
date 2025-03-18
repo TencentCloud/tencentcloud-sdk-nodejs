@@ -38,7 +38,7 @@ export interface DescribeDockerContainersRequest {
    */
   InstanceId: string
   /**
-   * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
+   * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。参数不支持同时指定 ContainerIds 和 Filters。
    */
   ContainerIds?: Array<string>
   /**
@@ -151,12 +151,14 @@ export interface DescribeDiskBackupsRequest {
 <li>disk-backup-state</li>按照【云硬盘备份点状态】进行过滤。
 类型：String
 必选：否
-取值：参考数据结构 
-<a href="https://cloud.tencent.com/document/product/1207/47576#DiskBackup">DescribeSnapshots</a> 下的DiskBackupState取值。
+取值：参考数据结构 [DiskBackup](https://cloud.tencent.com/document/product/1207/47576#DiskBackup) 下的DiskBackupState取值。
 <li>disk-usage</li>按照【云硬盘类型】进行过滤。
 类型：String
 必选：否
-取值：SYSTEM_DISK或DATA_DISK
+取值：
+- SYSTEM_DISK - 系统盘
+- DATA_DISK - 数据盘
+
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。
    */
   Filters?: Array<Filter>
@@ -249,6 +251,7 @@ export interface CreateInstancesRequest {
   /**
    * 可用区列表。
 不填此参数，表示为随机可用区。
+可通过 <a href="https://cloud.tencent.com/document/product/1207/57513" target="_blank">DescribeZones</a>接口获取指定地域下的可用区列表信息
    */
   Zones?: Array<string>
   /**
@@ -293,10 +296,12 @@ false（默认）：发送正常请求，通过检查后直接创建实例
   InitCommand?: Command
   /**
    * 主域名。
+注意：域名指定后，仅支持购买一台实例（参数InstanceCount=1）。
    */
   DomainName?: string
   /**
    * 子域名。
+注意：域名指定后，仅支持购买一台实例（参数InstanceCount=1）。
    */
   Subdomain?: string
 }
@@ -406,7 +411,8 @@ export interface InquirePriceCreateDisksRequest {
    */
   DiskCount?: number
   /**
-   * 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。
+   * 指定云硬盘备份点配额，不传时默认为不带备份点配额。
+取值范围：0 到 500
    */
   DiskBackupQuota?: number
 }
@@ -583,7 +589,6 @@ export interface DescribeGeneralResourceQuotasRequest {
 - BLUEPRINT 自定义镜像
 - FREE_BLUEPRINT 免费自定义镜像
 - DATA_DISK 数据盘
-- FIREWALL_RULE 防火墙规则
    */
   ResourceNames: Array<string>
 }
@@ -733,7 +738,7 @@ false：表示不自动抵扣代金券
  */
 export interface DeleteDiskBackupsRequest {
   /**
-   * 云硬盘备份点ID列表，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。
+   * 云硬盘备份点ID列表，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。列表长度最大值为100。
    */
   DiskBackupIds: Array<string>
 }
@@ -901,7 +906,7 @@ NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW�
  */
 export interface ModifyDiskBackupsAttributeRequest {
   /**
-   * 云硬盘备份点ID，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379) 接口返回值中的 DiskBackupId 获取。
+   * 云硬盘备份点ID，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379) 接口返回值中的 DiskBackupId 获取。列表长度最大值为100。
    */
   DiskBackupIds: Array<string>
   /**
@@ -1003,39 +1008,40 @@ export interface DockerContainer {
   /**
    * 容器ID
    */
-  ContainerId: string
+  ContainerId?: string
   /**
    * 容器名称
    */
-  ContainerName: string
+  ContainerName?: string
   /**
    * 容器镜像地址
    */
-  ContainerImage: string
+  ContainerImage?: string
   /**
    * 容器Command
    */
-  Command: string
+  Command?: string
   /**
    * 容器状态描述
    */
-  Status: string
+  Status?: string
   /**
-   * 容器状态，和docker的容器状态保持一致，当前取值有：created, restarting, running, removing, paused, exited, or dead
+   * 容器状态，和docker的容器状态保持一致，当前取值有：created（已创建）、restarting（重启中）、running（运行中）、removing（迁移中）、paused（暂停）、exited（停止）和dead（死亡）
+
    */
-  State: string
+  State?: string
   /**
    * 容器端口主机端口映射列表
    */
-  PublishPortSet: Array<DockerContainerPublishPort>
+  PublishPortSet?: Array<DockerContainerPublishPort>
   /**
    * 容器挂载本地卷列表
    */
-  VolumeSet: Array<DockerContainerVolume>
+  VolumeSet?: Array<DockerContainerVolume>
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
 }
 
 /**
@@ -1180,7 +1186,7 @@ export interface DescribeInstancesTrafficPackagesResponse {
  */
 export interface DescribeDiskBackupsDeniedActionsRequest {
   /**
-   * 云硬盘备份点 ID 列表, 可通过<a href="https://cloud.tencent.com/document/product/1207/84379" target="_blank">DescribeDiskBackups</a>接口查询。
+   * 云硬盘备份点 ID 列表, 可通过<a href="https://cloud.tencent.com/document/product/1207/84379" target="_blank">DescribeDiskBackups</a>接口查询。列表长度最大值为100。
    */
   DiskBackupIds: Array<string>
 }
@@ -1493,7 +1499,7 @@ export interface CreateBlueprintRequest {
    */
   Description?: string
   /**
-   * 需要制作镜像的实例ID。
+   * 需要制作镜像的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
    */
   InstanceId?: string
   /**
@@ -2335,7 +2341,7 @@ export interface CreateInstancesResponse {
   /**
    * 当通过本接口来创建实例时会返回该参数，表示一个或多个实例ID。返回实例ID列表并不代表实例创建成功。
 
-可根据 DescribeInstances 接口查询返回的InstancesSet中对应实例的ID的状态来判断创建是否完成；如果实例状态由“启动中”变为“运行中”，则为创建成功。
+可根据<a href="https://cloud.tencent.com/document/product/1207/47573" target="_blank">DescribeInstances</a> 接口查询返回的InstancesSet中对应实例的ID的状态来判断创建是否完成；如果实例状态由“启动中”变为“运行中”，则为创建成功。
    */
   InstanceIdSet?: Array<string>
   /**
@@ -2401,7 +2407,7 @@ export interface DescribeModifyInstanceBundlesRequest {
 类型：String
 必选：否
 <li>bundle-type</li>按照 【套餐类型进行过滤】。
-取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);
+取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);STARTER_BUNDLE(入门型套餐);ECONOMY_BUNDLE(经济型套餐);RAZOR_SPEED_BUNDLE(锐驰型套餐)
 类型：String
 必选：否
 <li>bundle-state</li>按照【套餐状态】进行过滤。
@@ -3266,6 +3272,11 @@ export interface Bundle {
 <li>HK_EXCLUSIVE_BUNDLE：香港专属型 </li>
 <li>CAREFREE_BUNDLE：无忧型</li>
 <li>BEFAST_BUNDLE：蜂驰型 </li>
+<li>EXCLUSIVE_BUNDLE_02：境外专属Ⅱ型</li>
+<li>NEWCOMER_BUNDLE：新客专享</li>
+<li>GAME_PORTAL_BUNDLE：游戏专区</li>
+<li>ECONOMY_BUNDLE：经济型</li>
+<li>RAZOR_SPEED_BUNDLE：锐驰型</li>
    */
   BundleType?: string
   /**
@@ -3820,7 +3831,7 @@ export interface DescribeDiskDiscountRequest {
    */
   DiskSize: number
   /**
-   * 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置1个云硬盘备份点配额。
+   * 指定云硬盘备份点配额，不传时默认为不带备份点配额。目前只支持不带或设置[0 - 500]个云硬盘备份点配额。
    */
   DiskBackupQuota?: number
 }
@@ -4031,7 +4042,7 @@ export interface TrafficPackage {
  */
 export interface FirewallRule {
   /**
-   * 协议，取值：TCP，UDP，ICMP，ALL。
+   * 协议，取值：TCP，UDP，ICMP，ALL，ICMPv6。
    */
   Protocol: string
   /**
@@ -4340,7 +4351,7 @@ export interface DescribeResetInstanceBlueprintsRequest {
 必选：否
 可通过 <a href="https://cloud.tencent.com/document/product/1207/47689">DescribeBlueprints</a> 接口返回值中的 BlueprintId 获取。
 <li>blueprint-type</li>按照【镜像类型】进行过滤。
-取值： APP_OS（应用镜像 ）；PURE_OS（ 系统镜像）；PRIVATE（自定义镜像）。
+取值： APP_OS（应用镜像 ）；PURE_OS（ 系统镜像）；PRIVATE（自定义镜像）;DOCKER（Docker容器镜像）；SHARED（共享镜像）。
 类型：String
 必选：否
 <li>platform-type</li>按照【镜像平台类型】进行过滤。
@@ -4356,7 +4367,7 @@ export interface DescribeResetInstanceBlueprintsRequest {
 必选：否
 可通过 <a href="https://cloud.tencent.com/document/product/1207/47689">DescribeBlueprints</a> 接口返回值中的 BlueprintState 获取。
 
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
    */
   Filters?: Array<Filter>
 }
@@ -4404,7 +4415,11 @@ export interface DockerContainerConfiguration {
    */
   Command?: string
   /**
-   * 容器重启策略
+   * 容器重启策略。
+- no -默认策略，在容器退出时不重启容器
+- on-failure -在容器非正常退出时（退出状态非0），才会重启容器
+- on-failure:3 -在容器非正常退出时重启容器，最多重启3次
+- always -在容器退出时总是重启容器
    */
   RestartPolicy?: string
 }
@@ -4562,6 +4577,7 @@ export interface ResetInstanceRequest {
   BlueprintId?: string
   /**
    * 要创建的容器配置列表。
+注意：仅重装的镜像类型为Docker时支持传入该参数。
    */
   Containers?: Array<DockerContainerConfiguration>
   /**
@@ -5399,7 +5415,7 @@ export interface InquirePriceCreateDisksResponse {
   /**
    * 云硬盘价格。
    */
-  DiskPrice: DiskPrice
+  DiskPrice?: DiskPrice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceCommLog", req, cb);
     }
     /**
+     * 当前p2p线路
+     */
+    async DescribeP2PRoute(req, cb) {
+        return this.request("DescribeP2PRoute", req, cb);
+    }
+    /**
      * 本接口（DescribeFirmware）用于查询固件信息
      */
     async DescribeFirmware(req, cb) {
@@ -260,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateProduct(req, cb) {
         return this.request("CreateProduct", req, cb);
+    }
+    /**
+     * p2p路线切换
+     */
+    async ChangeP2PRoute(req, cb) {
+        return this.request("ChangeP2PRoute", req, cb);
     }
     /**
      * 继承云存用户

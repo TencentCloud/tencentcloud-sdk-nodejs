@@ -3095,7 +3095,7 @@ export interface SaveDocRequest {
    */
   Size: string
   /**
-   * 标签适用范围，默认填0即可
+   * 标签适用范围，需要传参为1
    */
   AttrRange?: number
   /**

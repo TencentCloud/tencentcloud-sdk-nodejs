@@ -89,7 +89,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例节点列表
+   * 查询实例pod列表
    */
   async DescribeInstanceNodes(
     req: DescribeInstanceNodesRequest,

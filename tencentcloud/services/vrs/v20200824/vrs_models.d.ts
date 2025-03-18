@@ -503,4 +503,10 @@ export interface TrainingTexts {
 /**
  * 取消任务响应
  */
-export declare type CancelVRSTaskRsp = null;
+export interface CancelVRSTaskRsp {
+    /**
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+}

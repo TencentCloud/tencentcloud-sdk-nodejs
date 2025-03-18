@@ -1605,6 +1605,11 @@ export interface UserRoleListDataUserRoleInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AppOpenUserId?: string;
+    /**
+     * 邮箱激活状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EmailActivationStatus?: number;
 }
 /**
  * 用户角色信息
@@ -2566,6 +2571,11 @@ export interface UserIdAndUserName {
      */
     GlobalUserName?: string;
     /**
+     * 全局角色编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GlobalUserCode?: string;
+    /**
      * 手机号
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -2595,6 +2605,16 @@ export interface UserIdAndUserName {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InValidateAppRange?: boolean;
+    /**
+     * -1 免激活  0 未激活  1 已激活 空代表待绑定
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EmailActivationStatus?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
 }
 /**
  * DeleteDatasource返回参数结构体

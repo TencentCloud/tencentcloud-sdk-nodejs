@@ -42,12 +42,10 @@ export interface TaskGroupAction {
     TaskGroupActionOrder: number;
     /**
      * 分组动作通用配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupActionGeneralConfiguration: string;
     /**
      * 分组动作自定义配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupActionCustomConfiguration: string;
     /**
@@ -72,47 +70,38 @@ export interface TaskGroupAction {
     TaskGroupActionStatusType: number;
     /**
      * RandomId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupActionRandomId: number;
     /**
      * RecoverId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupActionRecoverId: number;
     /**
      * ExecuteId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupActionExecuteId: number;
     /**
      * 调用api类型，0:tat, 1:云api
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionApiType?: number;
     /**
      * 1:故障，2:恢复
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionAttribute?: number;
     /**
      * 动作类型：平台、自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionType?: string;
     /**
      * 是否可重试
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsExecuteRedo?: boolean;
     /**
      * 动作风险级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionRisk?: string;
     /**
      * 动作运行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupActionExecuteTime?: number;
     /**
@@ -126,17 +115,14 @@ export interface TaskGroupAction {
 export interface ApmServiceInfo {
     /**
      * 业务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId: string;
     /**
      * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceNameList: Array<string>;
     /**
      * 地域ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: number;
 }
@@ -146,17 +132,14 @@ export interface ApmServiceInfo {
 export interface TaskGroupInstancesExecuteRules {
     /**
      * 实例选取模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstancesExecuteMode?: number;
     /**
      * 按比例选取模式下选取比例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstancesExecutePercent?: number;
     /**
      * 按数量选取模式下选取数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstancesExecuteNum?: number;
 }
@@ -245,7 +228,6 @@ export interface TaskGroup {
     TaskGroupTitle: string;
     /**
      * 分组描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupDescription: string;
     /**
@@ -282,12 +264,10 @@ export interface TaskGroup {
     TaskGroupDiscardInstanceList?: Array<string>;
     /**
      * 参演实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupSelectedInstanceList?: Array<string>;
     /**
      * 机器选取规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstancesExecuteRule?: Array<TaskGroupInstancesExecuteRules>;
 }
@@ -314,7 +294,6 @@ export interface DescribeActionFieldConfigListResponse {
     Results?: Array<ActionFieldConfigResult>;
     /**
      * 资源下线信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceOffline?: Array<ResourceOffline>;
     /**
@@ -348,7 +327,6 @@ export interface ActionFieldConfigDetail {
     Field?: string;
     /**
      * 默认值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultValue?: string;
     /**
@@ -418,12 +396,10 @@ export interface TemplateGroupAction {
     Order: number;
     /**
      * 分组动作通用配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GeneralConfiguration: string;
     /**
      * 分组动作自定义配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomConfiguration: string;
     /**
@@ -440,37 +416,30 @@ export interface TemplateGroupAction {
     ActionTitle: string;
     /**
      * 自身随机id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RandomId: number;
     /**
      * 恢复动作id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecoverId: number;
     /**
      * 执行动作id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecuteId: number;
     /**
      * 调用api类型，0:tat, 1:云api
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionApiType?: number;
     /**
      * 1:故障，2:恢复
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionAttribute?: number;
     /**
      * 动作类型：平台和自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionType?: string;
     /**
      * 动作风险等级，1:低风险 2:中风险 3:高风险
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionRisk?: string;
     /**
@@ -496,7 +465,6 @@ export interface Template {
     TemplateDescription?: string;
     /**
      * 自定义标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateTag?: string;
     /**
@@ -542,27 +510,22 @@ export interface Template {
     TemplatePolicy?: TemplatePolicy;
     /**
      * 标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<TagWithDescribe>;
     /**
      * 经验来源 0-自建 1-专家推荐
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateSource?: number;
     /**
      * apm应用信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApmServiceList?: Array<ApmServiceInfo>;
     /**
      * 告警指标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmPolicy?: Array<string>;
     /**
      * 护栏处理方式，1--顺序回滚，2--演练暂停
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyDealType?: number;
 }
@@ -682,22 +645,18 @@ export interface PolicyTriggerLog {
     TaskId?: number;
     /**
      * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 类型，0--触发，1--恢复
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TriggerType?: number;
     /**
      * 内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
     /**
      * 触发时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatTime?: string;
 }
@@ -797,17 +756,14 @@ export interface DescribeTaskListResponse {
 export interface ResourceOffline {
     /**
      * 资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: number;
     /**
      * 资源下线时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceDeleteTime?: string;
     /**
      * 资源下线提示
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceDeleteMessage?: string;
 }
@@ -838,7 +794,6 @@ export interface TaskMonitor {
     TaskMonitorId: number;
     /**
      * 监控指标ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricId: number;
     /**
@@ -855,12 +810,10 @@ export interface TaskMonitor {
     InstancesIds: Array<string>;
     /**
      * 中文指标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricChineseName: string;
     /**
      * 单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Unit: string;
 }
@@ -987,22 +940,18 @@ export interface ObjectType {
     ObjectTypeParams?: ObjectTypeConfig;
     /**
      * tke接口json解析规则，null不需要解析
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectTypeJsonParse?: ObjectTypeJsonParse;
     /**
      * 是否包含新动作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectHasNewAction?: boolean;
     /**
      * 对应在平台架构图中的资源类型名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectPlatformName?: string;
     /**
      * 1：平台支持的对象 2：应用支持的部分对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectSupportType?: number;
     /**
@@ -1049,12 +998,10 @@ export interface Task {
     TaskDescription: string;
     /**
      * 自定义标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskTag: string;
     /**
      * 任务状态，1001--未开始  1002--进行中（执行）1003--进行中（暂停）1004--执行结束
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskStatus: number;
     /**
@@ -1116,7 +1063,6 @@ export interface Task {
     TaskRegionId: number;
     /**
      * 监控指标列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskMonitors: Array<TaskMonitor>;
     /**
@@ -1126,7 +1072,6 @@ export interface Task {
     TaskPolicy: DescribePolicy;
     /**
      * 标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<TagWithDescribe>;
     /**
@@ -1146,17 +1091,14 @@ export interface Task {
     ApplicationId?: string;
     /**
      * 关联的应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 关联的告警指标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmPolicy?: Array<string>;
     /**
      * 关联的APM服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApmServiceList?: Array<ApmServiceInfo>;
     /**
@@ -1166,7 +1108,6 @@ export interface Task {
     VerifyId?: number;
     /**
      * 护栏处理方式，1--顺序回滚，2--演练暂停
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyDealType?: number;
     /**
@@ -1191,7 +1132,6 @@ export interface Task {
     TaskIssue?: string;
     /**
      * region信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskRegionName?: string;
     /**
@@ -1205,12 +1145,10 @@ export interface Task {
 export interface TaskOrg {
     /**
      * 演练角色
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskRole?: string;
     /**
      * 负责人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskOperator?: string;
 }
@@ -1478,22 +1416,18 @@ export interface DescribeActionLibraryListResponse {
 export interface ObjectTypeJsonParse {
     /**
      * 命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NameSpace?: string;
     /**
      * 工作负载名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WorkloadName?: string;
     /**
      * 节点IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LanIP?: string;
     /**
      * 节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
 }
@@ -1515,7 +1449,6 @@ export interface TaskListItem {
     TaskDescription?: string;
     /**
      * 任务标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskTag?: string;
     /**
@@ -1532,37 +1465,30 @@ export interface TaskListItem {
     TaskUpdateTime?: string;
     /**
      * 0--未开始，1--进行中，2--已完成
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskPreCheckStatus?: number;
     /**
      * 环境检查是否通过
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskPreCheckSuccess?: boolean;
     /**
      * 演练是否符合预期 1-符合预期 2-不符合预期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskExpect?: number;
     /**
      * 关联应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationId?: string;
     /**
      * 关联应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
     /**
      * 验证项ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VerifyId?: number;
     /**
      * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskStatusType?: number;
     /**
@@ -1650,7 +1576,6 @@ export interface TemplateMonitor {
     MonitorId?: number;
     /**
      * 监控指标ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricId?: number;
     /**
@@ -1663,7 +1588,6 @@ export interface TemplateMonitor {
     MetricName?: string;
     /**
      * 中文指标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricChineseName?: string;
 }
@@ -1685,7 +1609,6 @@ export interface TemplateGroup {
     Title: string;
     /**
      * 分组描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description: string;
     /**
@@ -1736,7 +1659,6 @@ export interface TaskGroupInstance {
     TaskGroupInstanceId: number;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstanceObjectId: string;
     /**
@@ -1757,12 +1679,10 @@ export interface TaskGroupInstance {
     TaskGroupInstanceStatusType: number;
     /**
      * 执行开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstanceStartTime: string;
     /**
      * 执行结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstanceEndTime: string;
     /**
@@ -1773,12 +1693,10 @@ export interface TaskGroupInstance {
     TaskGroupInstanceExecuteLog?: string;
     /**
      * 实例是否可重试
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstanceIsRedo?: boolean;
     /**
      * 动作实例执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstanceExecuteTime?: number;
 }
@@ -1874,42 +1792,34 @@ export interface ActionLibraryListResult {
     ActionContent?: string;
     /**
      * 二级分类
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceType?: string;
     /**
      * 动作描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionDetail?: string;
     /**
      * 是否允许当前账号使用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAllowed?: boolean;
     /**
      * 最佳实践案例的链接地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionBestCase?: string;
     /**
      * 对象类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectType?: string;
     /**
      * 监控指标ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricIdList?: Array<number | bigint>;
     /**
      * 是否是新动作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNewAction?: boolean;
     /**
      * 对象类型ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectTypeId?: number;
 }
@@ -1975,7 +1885,6 @@ export interface TemplateListItem {
     TemplateDescription?: string;
     /**
      * 经验库标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateTag?: string;
     /**
@@ -1996,7 +1905,6 @@ export interface TemplateListItem {
     TemplateUsedNum?: number;
     /**
      * 经验库来源 0-自建经验 1-专家推荐
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateSource?: number;
 }
@@ -2006,12 +1914,10 @@ export interface TemplateListItem {
 export interface TagWithCreate {
     /**
      * 标签键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue: string;
 }
@@ -2029,12 +1935,10 @@ export interface ObjectTypeConfigFields {
     Header: string;
     /**
      * 字段值是否需要转译，当不需要转译时，此字段返回null
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Transfer?: string;
     /**
      * tke的pod字段信息解析
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JsonParse?: string;
     /**

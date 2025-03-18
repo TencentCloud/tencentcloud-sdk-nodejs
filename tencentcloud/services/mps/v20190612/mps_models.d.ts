@@ -1287,6 +1287,22 @@ export interface MediaTranscodeItem {
      * 视频流信息。
      */
     VideoStreamSet?: Array<MediaVideoStreamItem>;
+    /**
+     * 视频转码使用增强项说明，增强项解释
+  <li>hdr：HDR配置</li>
+  <li>wd_fps：插帧帧率配置</li>
+  <li>video_super_resolution：	超分配置</li>
+  <li>repair：综合增强配置</li>
+  <li>denoise：视频降噪配置</li>
+  <li>color_enhance：色彩增强配置</li>
+  <li>scratch：去划痕配置</li>
+  <li>artifact：去伪影（毛刺）配置</li>
+  <li>sharp：细节增强配置</li>
+  <li>low_light：低光照增强配置</li>
+  <li>face_enhance：人脸增强配置</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallBackExtInfo?: string;
 }
 /**
  * 诊断结果项。
@@ -9053,7 +9069,7 @@ export interface AiAnalysisTaskTagInput {
     /**
      * 视频智能标签模板 ID。
      */
-    Definition: number;
+    Definition?: number;
 }
 /**
  * 智能描述结果类型
@@ -9686,6 +9702,40 @@ export interface QualityControlItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AreaCoordSet?: Array<number | bigint>;
+}
+/**
+ * FairPlay，WideVine，PlayReady 等Drm加密方式。
+ */
+export interface SpekeDrm {
+    /**
+     * 资源标记，
+  支持1-128个字符的数字、字母、下划线(_)、中划线(-)。
+     */
+    ResourceId: string;
+    /**
+     * drm厂商访问地址；
+  
+  注: 不同DRM厂商对子流的数量限制不一样，如 pallycon 限制不能超过5条子流，drmtoday厂商最多仅支持9条子流加密
+     */
+    KeyServerUrl: string;
+    /**
+     * 加密初始化向量(32字节字符串)。
+     */
+    Vector: string;
+    /**
+     * 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenc
+  
+  cbcs：PlayReady，Widevine，FairPlay 支持；
+  cenc：PlayReady，Widevine支持；
+     */
+    EncryptionMethod?: string;
+    /**
+     * 子流加密规则，默认 preset0
+  preset0：全部子流使用同一个key加密；
+  preset1：每个子流使用不同的key加密；
+  
+     */
+    EncryptionPreset?: string;
 }
 /**
  * DeleteStreamLinkFlow返回参数结构体
@@ -13783,6 +13833,10 @@ export interface DrmInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SimpleAesDrm?: SimpleAesDrm;
+    /**
+     * FairPlay, WideVine， PlayReady 加密信息。
+     */
+    SpekeDrm?: SpekeDrm;
 }
 /**
  * DescribeSampleSnapshotTemplates返回参数结构体

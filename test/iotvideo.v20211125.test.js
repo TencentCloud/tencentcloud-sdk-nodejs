@@ -298,6 +298,16 @@ it("iotvideo.v20211125.DescribeDeviceCommLog", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeP2PRoute", async function () {
+    try {
+       const data = await client.DescribeP2PRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.DescribeFirmware", async function () {
     try {
        const data = await client.DescribeFirmware({})
@@ -401,6 +411,16 @@ it("iotvideo.v20211125.BatchUpdateFirmware", async function () {
 it("iotvideo.v20211125.CreateProduct", async function () {
     try {
        const data = await client.CreateProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20211125.ChangeP2PRoute", async function () {
+    try {
+       const data = await client.ChangeP2PRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
