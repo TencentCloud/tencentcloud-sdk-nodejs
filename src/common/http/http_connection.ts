@@ -1,13 +1,13 @@
-import * as QueryString from "querystring"
+import QueryString from "querystring"
 import { URL } from "url"
-import * as isStream from "is-stream"
-import * as getStream from "get-stream"
-import * as FormData from "form-data"
+import isStream from "is-stream"
+import getStream from "get-stream"
+import FormData from "form-data"
 import Sign from "../sign"
 import fetch, { FetchOptions } from "./fetch"
 import { Response, RequestInit } from "node-fetch"
 import { Agent } from "http"
-import * as JSONBigInt from "json-bigint"
+import JSONBigInt from "json-bigint"
 
 const JSONbigNative = JSONBigInt({ useNativeBigInt: true })
 /**

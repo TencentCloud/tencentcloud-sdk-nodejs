@@ -1,7 +1,7 @@
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
+import { cbs } from "tencentcloud-sdk-nodejs-cbs"
 
 // 导入对应产品模块的client models
-const CbsClient = tencentcloud.cbs.v20170312.Client
+const CbsClient = cbs.v20170312.Client
 
 // 实例化要请求产品的client对象。profile可选。
 const client = new CbsClient({

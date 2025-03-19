@@ -1,7 +1,7 @@
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
+import { soe } from "tencentcloud-sdk-nodejs-soe"
 
 // 导入对应产品模块的client models
-const SoeClient = tencentcloud.soe.v20180724.Client
+const SoeClient = soe.v20180724.Client
 
 // 实例化要请求产品的client对象。profile可选。
 const client = new SoeClient({
