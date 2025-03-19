@@ -23,7 +23,7 @@ export class SSEResponseModel {
     this.stream = stream
     this.readline = createInterface({
       input: stream,
-      crlfDelay: Infinity
+      crlfDelay: Infinity,
     })
     this.eventSource = new SSEEventEmitter()
     this.init()
@@ -34,19 +34,19 @@ export class SSEResponseModel {
    */
   private init() {
     const { stream, readline, eventSource } = this
-    
-    let lines:string[] = []
+
+    let lines: string[] = []
     readline.on("line", (line) => {
       if (line) {
         lines.push(line)
         return
       }
 
-      eventSource.emit("message", this.parseSSEMessage(lines.splice(0)));
+      eventSource.emit("message", this.parseSSEMessage(lines.splice(0)))
     })
     readline.on("close", () => {
       if (lines.length > 0) {
-        eventSource.emit("message", this.parseSSEMessage(lines.splice(0)));
+        eventSource.emit("message", this.parseSSEMessage(lines.splice(0)))
       }
     })
 
