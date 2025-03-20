@@ -958,6 +958,16 @@ it("redis.v20180412.DescribeInstances", async function () {
     }
 })
 
+it("redis.v20180412.RemoveReplicationGroup", async function () {
+    try {
+       const data = await client.RemoveReplicationGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.OpenSSL", async function () {
     try {
        const data = await client.OpenSSL({})

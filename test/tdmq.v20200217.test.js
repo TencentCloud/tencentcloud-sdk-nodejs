@@ -418,16 +418,6 @@ it("tdmq.v20200217.DeleteCmqTopic", async function () {
     }
 })
 
-it("tdmq.v20200217.ModifyPublicNetworkAccessPoint", async function () {
-    try {
-       const data = await client.ModifyPublicNetworkAccessPoint({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.ModifyRocketMQInstance", async function () {
     try {
        const data = await client.ModifyRocketMQInstance({})

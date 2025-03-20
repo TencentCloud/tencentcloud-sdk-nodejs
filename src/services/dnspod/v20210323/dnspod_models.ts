@@ -857,18 +857,9 @@ export interface ModifyRecordGroupResponse {
 }
 
 /**
- * DescribeDomainShareInfo请求参数结构体
+ * DescribeDomainGroupList请求参数结构体
  */
-export interface DescribeDomainShareInfoRequest {
-  /**
-   * 域名
-   */
-  Domain: string
-  /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
-   */
-  DomainId?: number
-}
+export type DescribeDomainGroupListRequest = null
 
 /**
  * 域名列表元素
@@ -967,6 +958,16 @@ export interface DomainListItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<TagItem>
+}
+
+/**
+ * DescribeFileInfoByJobId请求参数结构体
+ */
+export interface DescribeFileInfoByJobIdRequest {
+  /**
+   * 任务ID
+   */
+  JobId: number
 }
 
 /**
@@ -1675,13 +1676,24 @@ export interface CreateRecordBatchRequest {
 }
 
 /**
- * ModifyDomainToGroup返回参数结构体
+ * 批量生成文件剩余时间
  */
-export interface ModifyDomainToGroupResponse {
+export interface LeftTime {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 剩余天数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Days?: number
+  /**
+   * 剩余小时数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hours?: number
+  /**
+   * 剩余分钟数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mins?: number
 }
 
 /**
@@ -2788,6 +2800,16 @@ export interface CreateSubdomainValidateTXTValueResponse {
 }
 
 /**
+ * ModifyDomainToGroup返回参数结构体
+ */
+export interface ModifyDomainToGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPackageAutoRenew返回参数结构体
  */
 export interface ModifyPackageAutoRenewResponse {
@@ -3063,6 +3085,28 @@ export interface LockInfo {
 }
 
 /**
+ * 批量导出子域名解析量查询条件
+ */
+export interface SubDomainsAnalyticsParamsItem {
+  /**
+   * 要查询解析量的主域名。
+   */
+  Domain: string
+  /**
+   * 要查询解析量的子域名主机头。
+   */
+  SubDomain?: string
+  /**
+   * 查询子域名列表的偏移量。没有指定查询的 Subdomain 参数时，根据分页参数返回每页子域名解析量。
+   */
+  Offset?: number
+  /**
+   * 查询子域名列表的每页条数。没有指定查询的 Subdomain 参数时，根据分页参数返回每页子域名解析量。
+   */
+  Limit?: number
+}
+
+/**
  * ModifyDomainOwner返回参数结构体
  */
 export interface ModifyDomainOwnerResponse {
@@ -3309,6 +3353,30 @@ export interface ModifyPackageAutoRenewRequest {
 }
 
 /**
+ * CreateDomainsAnalyticsFile请求参数结构体
+ */
+export interface CreateDomainsAnalyticsFileRequest {
+  /**
+   * 需要查询解析量的域名数组。
+   */
+  Domains: Array<string>
+  /**
+   * 查询解析量的时间区间起点。如：2023-01-01。
+   */
+  StartDate: string
+  /**
+   * 查询解析量的统计维度。默认为 DATE。
+DATE：按天统计
+HOUR：按小时统计
+   */
+  DNSFormat?: string
+  /**
+   * 查询解析量的时间区间终点。如：2023-01-01。默认为当天。
+   */
+  EndDate?: string
+}
+
+/**
  * ModifyDomainRemark请求参数结构体
  */
 export interface ModifyDomainRemarkRequest {
@@ -3334,6 +3402,20 @@ export interface ModifyDomainCustomLineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDomainShareInfo请求参数结构体
+ */
+export interface DescribeDomainShareInfoRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
 }
 
 /**
@@ -3731,6 +3813,67 @@ export interface ModifyRecordStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 生成的文件信息
+ */
+export interface FileInfo {
+  /**
+   * 文件 id。
+   */
+  FileId?: number
+  /**
+   * 文件生成时间。
+   */
+  CreatedOn?: string
+  /**
+   * 文件最后更新时间。
+   */
+  UpdatedOn?: string
+  /**
+   * 文件涉及到的域名。
+   */
+  Domains?: Array<string>
+  /**
+   * 文件名称。
+   */
+  Name?: string
+  /**
+   * 文件下载链接。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileUrl?: string
+  /**
+   * 生成文件的任务 id。
+   */
+  JobId?: number
+  /**
+   * 生成文件的进度。100 表示 完成度为100%。
+   */
+  Progress?: number
+  /**
+   * 文件状态。
+OK：已完成
+RUNNING：正在生成中
+ERROR：生成失败
+CANCELED：文件已取消生成
+CANCELING：文件正在取消生成
+EXPIRED：文件已过期
+   */
+  Status?: string
+  /**
+   * 生成文件的任务类型。
+RECORD_LOG：解析量数据
+RECORD_EXPORT：导出解析记录
+DOMAIN_EXPORT：导出域名列表
+   */
+  Type?: string
+  /**
+   * 剩余时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftTime?: LeftTime
 }
 
 /**
@@ -4231,6 +4374,36 @@ export interface PurviewInfo {
 }
 
 /**
+ * CreateSubDomainsAnalyticsFile请求参数结构体
+ */
+export interface CreateSubDomainsAnalyticsFileRequest {
+  /**
+   * 需要查询解析量的域名数组。
+   */
+  Domains: Array<SubDomainsAnalyticsParamsItem>
+  /**
+   * 查询解析量的时间区间起点。如：2023-01-01。
+   */
+  StartDate: string
+  /**
+   * 查询解析量子域名类型。
+1：子域名
+2：无解析量子域名
+   */
+  SubDomainType: number
+  /**
+   * 查询解析量的统计维度。默认为 DATE。
+DATE：按天统计
+HOUR：按小时统计
+   */
+  DNSFormat?: string
+  /**
+   * 查询解析量的时间区间终点。如：2023-01-01。默认为当天。
+   */
+  EndDate?: string
+}
+
+/**
  * DescribeRecordExistExceptDefaultNS请求参数结构体
  */
 export interface DescribeRecordExistExceptDefaultNSRequest {
@@ -4272,6 +4445,20 @@ export interface RollbackRecordSnapshotResponse {
  * DescribeUserDetail请求参数结构体
  */
 export type DescribeUserDetailRequest = null
+
+/**
+ * DescribeFileInfoByJobId返回参数结构体
+ */
+export interface DescribeFileInfoByJobIdResponse {
+  /**
+   * 生成文件相关信息
+   */
+  FileInfo?: FileInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * ModifyDomainStatus请求参数结构体
@@ -4849,9 +5036,18 @@ export interface CreateRecordGroupResponse {
 }
 
 /**
- * DescribeDomainGroupList请求参数结构体
+ * CreateSubDomainsAnalyticsFile返回参数结构体
  */
-export type DescribeDomainGroupListRequest = null
+export interface CreateSubDomainsAnalyticsFileResponse {
+  /**
+   * 当前批量任务 id。
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeBatchTask返回参数结构体
@@ -5056,6 +5252,20 @@ export interface DescribeDomainLogListResponse {
    * 日志总条数
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDomainsAnalyticsFile返回参数结构体
+ */
+export interface CreateDomainsAnalyticsFileResponse {
+  /**
+   * 当前批量任务 id。
+   */
+  JobId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

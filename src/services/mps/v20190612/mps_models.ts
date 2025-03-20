@@ -733,6 +733,27 @@ export interface AiRecognitionTaskAsrFullTextResultOutput {
 }
 
 /**
+ * 单个热词信息
+ */
+export interface AsrHotwordsSetItem {
+  /**
+   * 热词的序号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 热词文本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * 词语权重，取值范围 1-10,11,100
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+}
+
+/**
  * Ocr 文字涉违禁信息
  */
 export interface AiReviewProhibitedOcrTaskOutput {
@@ -761,6 +782,21 @@ export interface DeleteScheduleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 翻译结果。
+ */
+export interface SmartSubtitleTaskTransTextResultOutput {
+  /**
+   * 翻译片段列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSet?: Array<SmartSubtitleTaskTransTextSegmentItem>
+  /**
+   * 字幕文件地址。
+   */
+  SubtitlePath?: string
 }
 
 /**
@@ -892,6 +928,24 @@ eu-west-3
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AwsSQS?: AwsSQS
+}
+
+/**
+ * 字词信息。
+ */
+export interface WordResult {
+  /**
+   * 字词文本。
+   */
+  Word?: string
+  /**
+   * 字词起始时间戳，单位秒。
+   */
+  Start?: number
+  /**
+   * 字词结束时间戳，单位秒。
+   */
+  End?: number
 }
 
 /**
@@ -1101,6 +1155,43 @@ export interface AiReviewPoliticalOcrTaskInput {
 }
 
 /**
+ * 翻译结果。
+ */
+export interface SmartSubtitleTaskTransTextResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 翻译任务输入信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: SmartSubtitleTaskResultInput
+  /**
+   * 翻译任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: SmartSubtitleTaskTransTextResultOutput
+  /**
+   * 任务进度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
+}
+
+/**
  * ManageTask请求参数结构体
  */
 export interface ManageTaskRequest {
@@ -1300,6 +1391,43 @@ export interface DescribeStreamLinkEventRequest {
    * 媒体传输事件ID。
    */
   EventId: string
+}
+
+/**
+ * DescribeAsrHotwords请求参数结构体
+ */
+export interface DescribeAsrHotwordsRequest {
+  /**
+   * 需要查询的热词库 id
+   **注意：HotwordsId 与 Name 必须选择填写一个，如果同时填写，HotwordsId 优先级高于 Name**
+   */
+  HotwordsId?: string
+  /**
+   * 热词库名称，
+   **注意：HotwordsId 与 Name 必须选择填写一个，如果同时填写，HotwordsId 优先级高于 Name**
+   */
+  Name?: string
+  /**
+   * 分页偏移量，默认值：0。
+
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 热词排序字段，目前可选值为
+
+- Default：默认文件中的顺序
+- Weight：权重排序
+- Lexical：热词文本排序
+   */
+  OrderBy?: string
+  /**
+   * 热词排序顺序 0：升序（默认） 1：降序
+   */
+  OrderType?: number
 }
 
 /**
@@ -2291,81 +2419,21 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
 }
 
 /**
- * 内容审核结果
+ * DescribeStreamLinkFlowRealtimeStatus返回参数结构体
  */
-export interface AiContentReviewResult {
+export interface DescribeStreamLinkFlowRealtimeStatusResponse {
   /**
-   * 任务的类型，可以取的值有：
-<li>Porn：图片鉴黄</li>
-<li>Terrorism：图片敏感</li>
-<li>Political：图片敏感</li>
-<li>Porn.Asr：Asr 文字鉴黄</li>
-<li>Porn.Ocr：Ocr 文字鉴黄</li>
-<li>Political.Asr：Asr 文字敏感</li>
-<li>Political.Ocr：Ocr 文字敏感</li>
-<li>Terrorism.Ocr：Ocr 文字敏感</li>
-<li>Prohibited.Asr：Asr 文字鉴违禁</li>
-<li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
+   * 查询时间，单位s。
    */
-  Type: string
+  Timestamp: number
   /**
-   * 采样频率，即对视频每秒截取进行审核的帧数。
+   * 实时数据信息列表。
    */
-  SampleRate: number
+  Datas: Array<FlowRealtimeStatusItem>
   /**
-   * 审核的视频时长，单位：秒。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Duration: number
-  /**
-   * 视频内容审核智能画面鉴黄任务的查询结果，当任务类型为 Porn 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PornTask: AiReviewTaskPornResult
-  /**
-   * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Terrorism 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TerrorismTask: AiReviewTaskTerrorismResult
-  /**
-   * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Political 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PoliticalTask: AiReviewTaskPoliticalResult
-  /**
-   * 视频内容审核 Asr 文字鉴黄任务的查询结果，当任务类型为 Porn.Asr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PornAsrTask: AiReviewTaskPornAsrResult
-  /**
-   * 视频内容审核 Ocr 文字鉴黄任务的查询结果，当任务类型为 Porn.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PornOcrTask: AiReviewTaskPornOcrResult
-  /**
-   * 视频内容审核 Asr 文字敏感任务的查询结果，当任务类型为 Political.Asr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PoliticalAsrTask: AiReviewTaskPoliticalAsrResult
-  /**
-   * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Political.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PoliticalOcrTask: AiReviewTaskPoliticalOcrResult
-  /**
-   * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TerrorismOcrTask: AiReviewTaskTerrorismOcrResult
-  /**
-   * 视频内容审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProhibitedAsrTask: AiReviewTaskProhibitedAsrResult
-  /**
-   * 视频内容审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult
+  RequestId?: string
 }
 
 /**
@@ -2461,6 +2529,37 @@ export interface AiRecognitionTaskInput {
    * 用户扩展字段，一般场景不用填。
    */
   UserExtPara?: string
+}
+
+/**
+ * 智能按帧标签结果类型
+ */
+export interface AiAnalysisTaskFrameTagResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 智能按帧标签任务输入。
+   */
+  Input?: AiAnalysisTaskFrameTagInput
+  /**
+   * 智能按帧标签任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskFrameTagOutput
 }
 
 /**
@@ -3196,6 +3295,16 @@ export interface AiRecognitionTaskOcrWordsResultOutput {
 }
 
 /**
+ * ModifyLiveRecordTemplate返回参数结构体
+ */
+export interface ModifyLiveRecordTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 分段信息。
  */
 export interface AiParagraphInfo {
@@ -3447,6 +3556,34 @@ export interface DescribeFlowId {
    * flow所在的区域名称。
    */
   Region: string
+}
+
+/**
+ * DescribeSmartSubtitleTemplates请求参数结构体
+ */
+export interface DescribeSmartSubtitleTemplatesRequest {
+  /**
+   * 智能字幕模板唯一标识过滤条件，数组长度限制：10。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
+  /**
+   * 智能字幕模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -4784,34 +4921,13 @@ export interface ModifyAnimatedGraphicsTemplateResponse {
 }
 
 /**
- * 智能按帧标签结果类型
+ * DeleteSmartSubtitleTemplate请求参数结构体
  */
-export interface AiAnalysisTaskFrameTagResult {
+export interface DeleteSmartSubtitleTemplateRequest {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 智能字幕模板唯一标识。
    */
-  Status?: string
-  /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 智能按帧标签任务输入。
-   */
-  Input?: AiAnalysisTaskFrameTagInput
-  /**
-   * 智能按帧标签任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: AiAnalysisTaskFrameTagOutput
+  Definition: number
 }
 
 /**
@@ -5127,6 +5243,49 @@ export interface MediaProcessTaskImageSpriteResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
+}
+
+/**
+ * DescribeAsrHotwordsList请求参数结构体
+ */
+export interface DescribeAsrHotwordsListRequest {
+  /**
+   * 检索参数，根据热词库 id 查询
+   */
+  HotwordsId?: string
+  /**
+   * 检索参数，根据热词库名称查询
+   */
+  Name?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认返回所有热词库
+   */
+  Limit?: number
+  /**
+   * 热词排序顺序
+
+0：升序（默认）
+1：降序
+   */
+  OrderType?: number
+  /**
+   * 根据某个字段排序，默认使用创建时间，使用非法字段视为默认情况
+
+- CreateTime：创建时间排序
+- UpdateTime：更新时间排序
+- Name：热词库名称排序
+- WordCount：热词数量排序
+- HotwordsId：热词库 id 排序
+   */
+  OrderBy?: string
+  /**
+   * 0 临时热词 1 文件热词
+   */
+  Types?: Array<number | bigint>
 }
 
 /**
@@ -6635,6 +6794,20 @@ export interface AiAnalysisTaskTagOutput {
 }
 
 /**
+ * CreateAsrHotwords返回参数结构体
+ */
+export interface CreateAsrHotwordsResponse {
+  /**
+   * 热词库 id
+   */
+  HotwordsId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能精彩片段结果信息
  */
 export interface AiAnalysisTaskHighlightOutput {
@@ -6861,6 +7034,17 @@ export interface ProcessMediaRequest {
    * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
    */
   ResourceId?: string
+  /**
+   * 智能字幕
+   */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput
+  /**
+   * 是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
+   */
+  SkipMateData?: number
 }
 
 /**
@@ -7167,6 +7351,93 @@ export interface AiAnalysisTaskSegmentResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskSegmentOutput
+}
+
+/**
+ * 自定义智能字幕参数
+ */
+export interface RawSmartSubtitleParameter {
+  /**
+   * 智能字幕字幕语言类型
+0: 源语言
+1: 翻译语言
+2: 源语言+翻译语言
+当TranslateSwitch为OFF时仅支持取0
+当TranslateSwitch为ON时仅支持取1或2
+   */
+  SubtitleType: number
+  /**
+   * 智能字幕视频源语言
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+zh-PY：中英粤
+zh-medical：中文医疗
+yue：中文粤语
+vi：越南语
+ms：马来语
+id：印度尼西亚语
+fil：菲律宾语
+th：泰语
+pt：葡萄牙语
+tr：土耳其语
+ar：阿拉伯语
+es：西班牙语
+hi：印地语
+fr：法语
+de：德语
+zh_dialect：中文方言
+   */
+  VideoSrcLanguage: string
+  /**
+   * 智能字幕文件格式
+ vtt: WebVTT 格式
+不填或填空：不生成字幕文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitleFormat?: string
+  /**
+   * 字幕翻译开关
+ON: 开启翻译
+OFF: 关闭翻译
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranslateSwitch?: string
+  /**
+   * 字幕翻译目标语言
+当TranslateSwitch为ON的时候生效
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印度尼西亚语
+ms：马来语
+th：泰语
+ar：阿拉伯语
+hi：印地语
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranslateDstLanguage?: string
+  /**
+   * ASR热词库参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure
+  /**
+   * 自定义参数
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -7656,6 +7927,48 @@ export interface AsrWordsConfigureInfoForUpdate {
 标签个数最多 10 个，每个标签长度最多 16 个字符。
    */
   LabelSet?: Array<string>
+}
+
+/**
+ * 编排智能字幕任务结果类型
+ */
+export interface ScheduleSmartSubtitleTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 识别任务的输入。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: SmartSubtitlesTaskInput
+  /**
+   * 识别任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: Array<SmartSubtitlesResult>
+  /**
+   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -8194,26 +8507,21 @@ export interface ActivityPara {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlTask?: AiQualityControlTaskInput
+  /**
+   * 智能字幕任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput
 }
 
 /**
- * 文本涉敏任务控制参数
+ * ModifyAsrHotwords返回参数结构体
  */
-export interface TerrorismOcrReviewTemplateInfoForUpdate {
+export interface ModifyAsrHotwordsResponse {
   /**
-   * 文本涉敏任务开关，可选值：
-<li>ON：开启文本涉敏任务；</li>
-<li>OFF：关闭文本涉敏任务。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Switch?: string
-  /**
-   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
-   */
-  BlockConfidence?: number
-  /**
-   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
-   */
-  ReviewConfidence?: number
+  RequestId?: string
 }
 
 /**
@@ -9179,6 +9487,35 @@ export interface AiReviewTerrorismTaskOutput {
 }
 
 /**
+ * ModifyAsrHotwords请求参数结构体
+ */
+export interface ModifyAsrHotwordsRequest {
+  /**
+   * 热词库 id
+   */
+  HotwordsId: string
+  /**
+   * 热词库名称
+   */
+  Name?: string
+  /**
+   * 热词库文本
+   */
+  Content?: string
+  /**
+   * 热词库文件的 base64 的内容，Type 为 1 必选
+
+
+
+   */
+  FileContent?: string
+  /**
+   * 热词文件上传时的文件名
+   */
+  FileName?: string
+}
+
+/**
  * BatchStartStreamLinkFlow返回参数结构体
  */
 export interface BatchStartStreamLinkFlowResponse {
@@ -9254,6 +9591,32 @@ export interface AiReviewTerrorismOcrTaskOutput {
 }
 
 /**
+ * DescribeAsrHotwordsList返回参数结构体
+ */
+export interface DescribeAsrHotwordsListResponse {
+  /**
+   * 总热词库数量
+   */
+  TotalCount?: number
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认返回所有热词库
+   */
+  Limit?: number
+  /**
+   * 热词库列表
+   */
+  AsrHotwordsSet?: Array<AsrHotwordsSet>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能分析结果
  */
 export interface AiAnalysisResult {
@@ -9318,6 +9681,22 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HorizontalToVerticalTask?: AiAnalysisTaskHorizontalToVerticalResult
+}
+
+/**
+ * 智能字幕翻译的输入。
+ */
+export interface SmartSubtitleTaskResultInput {
+  /**
+   * 智能字幕模板 ID。
+   */
+  Definition?: number
+  /**
+   * 智能字幕自定义参数，当 Definition 填 0 时有效。
+该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawParameter?: RawSmartSubtitleParameter
 }
 
 /**
@@ -9477,6 +9856,16 @@ export interface AiAnalysisTaskDescriptionResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskDescriptionOutput
+}
+
+/**
+ * DeleteSmartSubtitleTemplate返回参数结构体
+ */
+export interface DeleteSmartSubtitleTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9965,6 +10354,26 @@ export interface DeleteSampleSnapshotTemplateRequest {
 }
 
 /**
+ * 文本涉敏任务控制参数
+ */
+export interface TerrorismOcrReviewTemplateInfoForUpdate {
+  /**
+   * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
+   */
+  Switch?: string
+  /**
+   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   */
+  ReviewConfidence?: number
+}
+
+/**
  * DescribeTranscodeTemplates返回参数结构体
  */
 export interface DescribeTranscodeTemplatesResponse {
@@ -10082,6 +10491,43 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
    * 识别文本。
    */
   Text: string
+}
+
+/**
+ * DeleteAsrHotwords返回参数结构体
+ */
+export interface DeleteAsrHotwordsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 语音全文识别片段。
+ */
+export interface SmartSubtitleTaskAsrFullTextSegmentItem {
+  /**
+   * 识别片段置信度。取值：0~100。
+   */
+  Confidence?: number
+  /**
+   * 识别片段起始的偏移时间，单位：秒。
+   */
+  StartTimeOffset?: number
+  /**
+   * 识别片段终止的偏移时间，单位：秒。
+   */
+  EndTimeOffset?: number
+  /**
+   * 识别文本。
+   */
+  Text?: string
+  /**
+   * 字词时间戳信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Wordlist?: Array<WordResult>
 }
 
 /**
@@ -10212,17 +10658,31 @@ export interface AiReviewPornOcrTaskOutput {
 }
 
 /**
- * CreateSampleSnapshotTemplate返回参数结构体
+ * CreateAsrHotwords请求参数结构体
  */
-export interface CreateSampleSnapshotTemplateResponse {
+export interface CreateAsrHotwordsRequest {
   /**
-   * 采样截图模板唯一标识。
+   * 0 临时热词 1 文件热词
    */
-  Definition?: number
+  Type: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 热词库名称
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 热词库文本，Type为 0 必选
+   */
+  Content?: string
+  /**
+   * 热词库文件的 base64 的内容，Type 为 1 必选
+
+
+   */
+  FileContent?: string
+  /**
+   * 上传的文件名
+   */
+  FileName?: string
 }
 
 /**
@@ -10486,6 +10946,32 @@ export interface TranscodeTemplate {
 }
 
 /**
+ * 语音翻译任务控制参数
+ */
+export interface TranslateConfigureInfo {
+  /**
+   * 语音翻译任务开关，可选值：
+<li>ON：开启智能语音翻译任务；</li>
+<li>OFF：关闭智能语音翻译任务。</li>
+   */
+  Switch: string
+  /**
+   * 视频源语言。
+   */
+  SourceLanguage?: string
+  /**
+   * 翻译目标语言。
+   */
+  DestinationLanguage?: string
+  /**
+   * 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：
+<li>vtt：生成 WebVTT 字幕文件。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitleFormat?: string
+}
+
+/**
  * DescribeStreamLinkFlowMediaStatistics返回参数结构体
  */
 export interface DescribeStreamLinkFlowMediaStatisticsResponse {
@@ -10709,6 +11195,21 @@ export interface DescribeMediaMetaDataResponse {
 }
 
 /**
+ * 语音全文识别结果。
+ */
+export interface SmartSubtitleTaskAsrFullTextResultOutput {
+  /**
+   * 语音全文识别片段列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSet?: Array<SmartSubtitleTaskAsrFullTextSegmentItem>
+  /**
+   * 字幕文件地址。
+   */
+  SubtitlePath?: string
+}
+
+/**
  * 文本涉敏任务控制参数
  */
 export interface TerrorismOcrReviewTemplateInfo {
@@ -10795,21 +11296,13 @@ export interface AiReviewTaskPornResult {
 }
 
 /**
- * DescribeStreamLinkFlowRealtimeStatus请求参数结构体
+ * 智能物体识别输出。
  */
-export interface DescribeStreamLinkFlowRealtimeStatusRequest {
+export interface AiRecognitionTaskObjectResultOutput {
   /**
-   * 流ID。
+   * 智能物体识别结果集。
    */
-  FlowId: string
-  /**
-   * 输入id数组，如果输入输出数组都为空，则代表全量查询。
-   */
-  InputIds?: Array<string>
-  /**
-   * 输出id数组，如果输入输出数组都为空，则代表全量查询。
-   */
-  OutputIds?: Array<string>
+  ResultSet: Array<AiRecognitionTaskObjectResultItem>
 }
 
 /**
@@ -11181,6 +11674,128 @@ export interface TranscodeTaskInput {
 }
 
 /**
+ * 智能字幕模板详情
+ */
+export interface SmartSubtitleTemplateItem {
+  /**
+   * 智能字幕模板唯一标识
+   */
+  Definition?: number
+  /**
+   * 智能字幕模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 智能字幕模板描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * ASR热词库参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure
+  /**
+   * 模板关联热词库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrHotWordsLibraryName?: string
+  /**
+   * 智能字幕视频源语言
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+zh-PY：中英粤
+zh-medical：中文医疗
+yue：中文粤语
+vi：越南语
+ms：马来语
+id：印度尼西亚语
+fil：菲律宾语
+th：泰语
+pt：葡萄牙语
+tr：土耳其语
+ar：阿拉伯语
+es：西班牙语
+hi：印地语
+fr：法语
+de：德语
+zh_dialect：中文方言
+   */
+  VideoSrcLanguage?: string
+  /**
+   * 智能字幕文件格式
+ vtt: WebVTT 格式
+不填或填空：不生成字幕文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitleFormat?: string
+  /**
+   * 智能字幕字幕语言类型
+0: 源语言
+1: 翻译语言
+2: 源语言+翻译语言
+当TranslateSwitch为OFF时仅支持取0
+当TranslateSwitch为ON时仅支持取1或2
+   */
+  SubtitleType?: number
+  /**
+   * 字幕翻译开关
+ON: 开启翻译
+OFF: 关闭翻译
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranslateSwitch?: string
+  /**
+   * 字幕翻译目标语言
+当TranslateSwitch为ON的时候生效
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印度尼西亚语
+ms：马来语
+th：泰语
+ar：阿拉伯语
+hi：印地语
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranslateDstLanguage?: string
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime?: string
+  /**
+   * 智能字幕预设模板别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AliasName?: string
+}
+
+/**
  * CreateStreamLinkSecurityGroup返回参数结构体
  */
 export interface CreateStreamLinkSecurityGroupResponse {
@@ -11310,6 +11925,20 @@ export interface ComposeImageOperation {
 }
 
 /**
+ * CreateSampleSnapshotTemplate返回参数结构体
+ */
+export interface CreateSampleSnapshotTemplateResponse {
+  /**
+   * 采样截图模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLiveRecordTemplate返回参数结构体
  */
 export interface CreateLiveRecordTemplateResponse {
@@ -11339,12 +11968,86 @@ export interface ActivityResult {
 <li>AIRecognition：智能识别。</li>
 <li>AIAnalysis：智能分析。</li>
 <li>AiQualityControl：媒体质检。</li>
+<li>SmartSubtitles：智能字幕。</li>
    */
   ActivityType?: string
   /**
    * 原子任务输出。
    */
   ActivityResItem?: ActivityResItem
+}
+
+/**
+ * DescribeAsrHotwords返回参数结构体
+ */
+export interface DescribeAsrHotwordsResponse {
+  /**
+   * 需要查询的热词库 id
+   */
+  HotwordsId?: string
+  /**
+   * 当前热词库 id 状态，为 0 表示查询的时刻，没有模板绑定这个热词库，可以删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 热词库的名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 临时热词库为 0，返回创建时候的字符串
+文件热词库为 1，返回创建是上传的文件内容
+
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 热词文件上传时的文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 查询返回的热词库列表
+   */
+  HotWords?: Array<AsrHotwordsSetItem>
+  /**
+   * 热词库文本，根据 Type 区分
+如果 Type 为 0，是热词库字符串
+如果 Type 是 1，是热词库文本文件的文件内容 base64 编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 当前热词库包含的词语数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordCount?: number
+  /**
+   * 分页偏移量，默认值：0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 热词库创建时间 ISOUTC 格式 "2006-01-02T15:04:05Z"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 热词库修改时间 ISOUTC 格式 "2006-01-02T15:04:05Z"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11476,6 +12179,16 @@ export interface OutputRISTSourceAddressResp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
+}
+
+/**
+ * ModifySmartSubtitleTemplate返回参数结构体
+ */
+export interface ModifySmartSubtitleTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12246,6 +12959,7 @@ export interface Activity {
 <li>action-snapshotByTimeOffset: 时间点截图</li>
 <li>action-adaptive-substream：自适应码流</li>
 <li>action-AIQualityControl：媒体质检</li>
+<li>action-SmartSubtitles：智能字幕</li>
 
 
 
@@ -12528,15 +13242,15 @@ export interface CreateContentReviewTemplateRequest {
    */
   Comment?: string
   /**
-   * 令人反感的信息的控制参数。
+   * 鉴黄任务控制参数。
    */
   PornConfigure?: PornConfigureInfo
   /**
-   * 令人不安全的信息的控制参数。
+   * 涉暴任务控制参数。
    */
   TerrorismConfigure?: TerrorismConfigureInfo
   /**
-   * 令人不适宜的信息的控制参数。
+   * 涉敏任务控制参数。
    */
   PoliticalConfigure?: PoliticalConfigureInfo
   /**
@@ -12891,13 +13605,39 @@ export interface HeadTailParameter {
 }
 
 /**
- * 智能分类任务输入类型
+ * DescribeStreamLinkFlowMediaStatistics请求参数结构体
  */
-export interface AiAnalysisTaskDescriptionInput {
+export interface DescribeStreamLinkFlowMediaStatisticsRequest {
   /**
-   * 视频智能描述模板 ID。
+   * 传输流ID。
    */
-  Definition: number
+  FlowId: string
+  /**
+   * 输入或输出类型，可选[input|output]。
+   */
+  Type: string
+  /**
+   * 输入或输出Id。
+   */
+  InputOutputId: string
+  /**
+   * 主通道或备通道，可选[0|1]。
+   */
+  Pipeline: string
+  /**
+   * 查询间隔，可选[5s|1min|5min|15min]。
+   */
+  Period: string
+  /**
+   * 统计的开始时间，默认为前一小时，最多支持查询近7天。
+UTC时间，如'2020-01-01T12:00:00Z'。
+   */
+  StartTime: string
+  /**
+   * 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。
+UTC时间，如'2020-01-01T12:00:00Z'。
+   */
+  EndTime: string
 }
 
 /**
@@ -13455,6 +14195,31 @@ export interface AiRecognitionTaskTransTextResultOutput {
 }
 
 /**
+ * 智能字幕结果。
+ */
+export interface SmartSubtitlesResult {
+  /**
+   * 任务的类型，取值范围：
+<li>AsrFullTextRecognition：语音全文识别，</li>
+<li>TransTextRecognition：语音翻译。</li>
+   */
+  Type?: string
+  /**
+   * 语音全文识别结果，当 Type 为
+ AsrFullTextRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResult
+  /**
+   * 翻译结果，当 Type 为
+
+TransTextRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransTextTask?: SmartSubtitleTaskTransTextResult
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate请求参数结构体
  */
 export interface ModifySnapshotByTimeOffsetTemplateRequest {
@@ -13508,6 +14273,22 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
 默认值：black 。
    */
   FillType?: string
+}
+
+/**
+ * 智能字幕热词参数
+ */
+export interface AsrHotWordsConfigure {
+  /**
+   * 热词开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
+  /**
+   * 热词库ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LibraryId?: string
 }
 
 /**
@@ -14295,21 +15076,102 @@ export interface AwsSQS {
 }
 
 /**
- * 字词信息。
+ * DeleteAsrHotwords请求参数结构体
  */
-export interface WordResult {
+export interface DeleteAsrHotwordsRequest {
   /**
-   * 字词文本。
+   * 删除的热词库 id
    */
-  Word?: string
+  HotwordsId: string
+}
+
+/**
+ * CreateSmartSubtitleTemplate请求参数结构体
+ */
+export interface CreateSmartSubtitleTemplateRequest {
   /**
-   * 字词起始时间戳，单位秒。
+   * 智能字幕模板名称
+长度限制：64 个字符。
    */
-  Start?: number
+  Name: string
   /**
-   * 字词结束时间戳，单位秒。
+   * 智能字幕视频源语言
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+zh-PY：中英粤
+zh-medical：中文医疗
+yue：中文粤语
+vi：越南语
+ms：马来语
+id：印度尼西亚语
+fil：菲律宾语
+th：泰语
+pt：葡萄牙语
+tr：土耳其语
+ar：阿拉伯语
+es：西班牙语
+hi：印地语
+fr：法语
+de：德语
+zh_dialect：中文方言
    */
-  End?: number
+  VideoSrcLanguage: string
+  /**
+   * 智能字幕字幕语言类型
+0: 源语言
+1: 翻译语言
+2: 源语言+翻译语言
+当TranslateSwitch为OFF时仅支持取0
+当TranslateSwitch为ON时仅支持取1或2
+   */
+  SubtitleType: number
+  /**
+   * 智能字幕模板描述信息
+长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 智能字幕文件格式
+ vtt: WebVTT 格式
+不填或填空：不生成字幕文件
+   */
+  SubtitleFormat?: string
+  /**
+   * ASR热词库参数
+   */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure
+  /**
+   * 字幕翻译开关
+ON: 开启翻译
+OFF: 关闭翻译
+   */
+  TranslateSwitch?: string
+  /**
+   * 字幕翻译目标语言
+当TranslateSwitch为ON的时候生效
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印度尼西亚语
+ms：马来语
+th：泰语
+ar：阿拉伯语
+hi：印地语
+   */
+  TranslateDstLanguage?: string
 }
 
 /**
@@ -14560,21 +15422,81 @@ export interface MediaContentReviewSegmentItem {
 }
 
 /**
- * DescribeStreamLinkFlowRealtimeStatus返回参数结构体
+ * 内容审核结果
  */
-export interface DescribeStreamLinkFlowRealtimeStatusResponse {
+export interface AiContentReviewResult {
   /**
-   * 查询时间，单位s。
+   * 任务的类型，可以取的值有：
+<li>Porn：图片鉴黄</li>
+<li>Terrorism：图片敏感</li>
+<li>Political：图片敏感</li>
+<li>Porn.Asr：Asr 文字鉴黄</li>
+<li>Porn.Ocr：Ocr 文字鉴黄</li>
+<li>Political.Asr：Asr 文字敏感</li>
+<li>Political.Ocr：Ocr 文字敏感</li>
+<li>Terrorism.Ocr：Ocr 文字敏感</li>
+<li>Prohibited.Asr：Asr 文字鉴违禁</li>
+<li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
    */
-  Timestamp: number
+  Type: string
   /**
-   * 实时数据信息列表。
+   * 采样频率，即对视频每秒截取进行审核的帧数。
    */
-  Datas: Array<FlowRealtimeStatusItem>
+  SampleRate: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 审核的视频时长，单位：秒。
    */
-  RequestId?: string
+  Duration: number
+  /**
+   * 视频内容审核智能画面鉴黄任务的查询结果，当任务类型为 Porn 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PornTask: AiReviewTaskPornResult
+  /**
+   * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Terrorism 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TerrorismTask: AiReviewTaskTerrorismResult
+  /**
+   * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Political 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PoliticalTask: AiReviewTaskPoliticalResult
+  /**
+   * 视频内容审核 Asr 文字鉴黄任务的查询结果，当任务类型为 Porn.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PornAsrTask: AiReviewTaskPornAsrResult
+  /**
+   * 视频内容审核 Ocr 文字鉴黄任务的查询结果，当任务类型为 Porn.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PornOcrTask: AiReviewTaskPornOcrResult
+  /**
+   * 视频内容审核 Asr 文字敏感任务的查询结果，当任务类型为 Political.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PoliticalAsrTask: AiReviewTaskPoliticalAsrResult
+  /**
+   * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Political.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PoliticalOcrTask: AiReviewTaskPoliticalOcrResult
+  /**
+   * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TerrorismOcrTask: AiReviewTaskTerrorismOcrResult
+  /**
+   * 视频内容审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProhibitedAsrTask: AiReviewTaskProhibitedAsrResult
+  /**
+   * 视频内容审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult
 }
 
 /**
@@ -14628,29 +15550,52 @@ export interface TerrorismImgReviewTemplateInfo {
 }
 
 /**
- * 语音翻译任务控制参数
+ * 热词库查询返回结果集
  */
-export interface TranslateConfigureInfo {
+export interface AsrHotwordsSet {
   /**
-   * 语音翻译任务开关，可选值：
-<li>ON：开启智能语音翻译任务；</li>
-<li>OFF：关闭智能语音翻译任务。</li>
-   */
-  Switch: string
-  /**
-   * 视频源语言。
-   */
-  SourceLanguage?: string
-  /**
-   * 翻译目标语言。
-   */
-  DestinationLanguage?: string
-  /**
-   * 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：
-<li>vtt：生成 WebVTT 字幕文件。</li>
+   * 热词库 Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubtitleFormat?: string
+  HotwordsId?: string
+  /**
+   * 当前热词库状态，数值表示绑定该热词库的智能字幕模板数量。
+Status 为 0 ，表示该热词库没有被智能字幕模版引用可以删除；
+Status 不为 0，表示该热词库不能被删除。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 热词库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 热词库中的热词数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordCount?: number
+  /**
+   * 热词文件上传时的文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 热词库创建时间 ISOUTC 时间格式  2006-01-02T15:04:05Z
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 热词库创建时间 ISOUTC 时间格式  2006-01-02T15:04:05Z
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 0：临时热词库
+1：文件热词库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
 }
 
 /**
@@ -14757,9 +15702,17 @@ no_config：未配置。
 }
 
 /**
- * ModifyLiveRecordTemplate返回参数结构体
+ * DescribeSmartSubtitleTemplates返回参数结构体
  */
-export interface ModifyLiveRecordTemplateResponse {
+export interface DescribeSmartSubtitleTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 智能字幕模板详情列表。
+   */
+  SmartSubtitleTemplateSet?: Array<SmartSubtitleTemplateItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15396,13 +16349,21 @@ export interface AiRecognitionTaskObjectResult {
 }
 
 /**
- * 智能物体识别输出。
+ * DescribeStreamLinkFlowRealtimeStatus请求参数结构体
  */
-export interface AiRecognitionTaskObjectResultOutput {
+export interface DescribeStreamLinkFlowRealtimeStatusRequest {
   /**
-   * 智能物体识别结果集。
+   * 流ID。
    */
-  ResultSet: Array<AiRecognitionTaskObjectResultItem>
+  FlowId: string
+  /**
+   * 输入id数组，如果输入输出数组都为空，则代表全量查询。
+   */
+  InputIds?: Array<string>
+  /**
+   * 输出id数组，如果输入输出数组都为空，则代表全量查询。
+   */
+  OutputIds?: Array<string>
 }
 
 /**
@@ -15660,6 +16621,11 @@ export interface WorkflowTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiQualityControlTaskResult?: ScheduleQualityControlTaskResult
+  /**
+   * 智能字幕任务的执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartSubtitlesTaskResult?: Array<SmartSubtitlesResult>
 }
 
 /**
@@ -15682,6 +16648,43 @@ export interface FlowMediaVideo {
    * 标志同一次推流。
    */
   SessionId: string
+}
+
+/**
+ * 语音全文识别结果。
+ */
+export interface SmartSubtitleTaskAsrFullTextResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 语音全文识别任务输入信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: SmartSubtitleTaskResultInput
+  /**
+   * 语音全文识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: SmartSubtitleTaskAsrFullTextResultOutput
+  /**
+   * 任务进度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
 }
 
 /**
@@ -15765,6 +16768,37 @@ export interface ComposeAudioStream {
 如果不设置，服务将根据音频参数自动采用合适的码率。
    */
   Bitrate?: number
+}
+
+/**
+ * 翻译片段。
+ */
+export interface SmartSubtitleTaskTransTextSegmentItem {
+  /**
+   * 识别片段置信度。取值：0~100。
+   */
+  Confidence?: number
+  /**
+   * 识别片段起始的偏移时间，单位：秒。
+   */
+  StartTimeOffset?: number
+  /**
+   * 识别片段终止的偏移时间，单位：秒。
+   */
+  EndTimeOffset?: number
+  /**
+   * 识别文本。
+   */
+  Text?: string
+  /**
+   * 翻译文本。
+   */
+  Trans?: string
+  /**
+   * 字词时间戳信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Wordlist?: Array<WordResult>
 }
 
 /**
@@ -15967,6 +17001,99 @@ export interface ModifyLiveRecordTemplateRequest {
 }
 
 /**
+ * ModifySmartSubtitleTemplate请求参数结构体
+ */
+export interface ModifySmartSubtitleTemplateRequest {
+  /**
+   * 智能字幕模板唯一标识
+   */
+  Definition: number
+  /**
+   * 字幕翻译开关
+ON: 开启翻译
+OFF: 关闭翻译
+   */
+  TranslateSwitch?: string
+  /**
+   * 智能字幕模板名称
+长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 智能字幕模板描述信息
+长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 智能字幕视频源语言
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+zh-PY：中英粤
+zh-medical：中文医疗
+yue：中文粤语
+vi：越南语
+ms：马来语
+id：印度尼西亚语
+fil：菲律宾语
+th：泰语
+pt：葡萄牙语
+tr：土耳其语
+ar：阿拉伯语
+es：西班牙语
+hi：印地语
+fr：法语
+de：德语
+zh_dialect：中文方言
+   */
+  VideoSrcLanguage?: string
+  /**
+   * 智能字幕文件格式
+ vtt: WebVTT 格式
+不填或填空：不生成字幕文件
+   */
+  SubtitleFormat?: string
+  /**
+   * 智能字幕字幕语言类型
+0: 源语言
+1: 翻译语言
+2: 源语言+翻译语言
+当TranslateSwitch为OFF时仅支持取0
+当TranslateSwitch为ON时仅支持取1或2
+   */
+  SubtitleType?: number
+  /**
+   * ASR热词库参数
+   */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure
+  /**
+   * 字幕翻译目标语言
+当TranslateSwitch为ON的时候生效
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印度尼西亚语
+ms：马来语
+th：泰语
+ar：阿拉伯语
+hi：印地语
+   */
+  TranslateDstLanguage?: string
+}
+
+/**
  * AI 视频智能分析输入参数类型
  */
 export interface AiAnalysisTaskInput {
@@ -16096,6 +17223,11 @@ export interface ActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlTask?: ScheduleQualityControlTaskResult
+  /**
+   * 智能字幕任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult
 }
 
 /**
@@ -16292,6 +17424,25 @@ export interface PoliticalAsrReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 智能字幕输入结构体
+ */
+export interface SmartSubtitlesTaskInput {
+  /**
+   * 智能字幕模板 ID 。
+   */
+  Definition?: number
+  /**
+   * 用户扩展字段，一般场景不用填。
+   */
+  UserExtPara?: string
+  /**
+   * 智能字幕自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawParameter?: RawSmartSubtitleParameter
 }
 
 /**
@@ -16568,39 +17719,13 @@ export interface AiRecognitionTaskFaceResultItem {
 }
 
 /**
- * DescribeStreamLinkFlowMediaStatistics请求参数结构体
+ * 智能分类任务输入类型
  */
-export interface DescribeStreamLinkFlowMediaStatisticsRequest {
+export interface AiAnalysisTaskDescriptionInput {
   /**
-   * 传输流ID。
+   * 视频智能描述模板 ID。
    */
-  FlowId: string
-  /**
-   * 输入或输出类型，可选[input|output]。
-   */
-  Type: string
-  /**
-   * 输入或输出Id。
-   */
-  InputOutputId: string
-  /**
-   * 主通道或备通道，可选[0|1]。
-   */
-  Pipeline: string
-  /**
-   * 查询间隔，可选[5s|1min|5min|15min]。
-   */
-  Period: string
-  /**
-   * 统计的开始时间，默认为前一小时，最多支持查询近7天。
-UTC时间，如'2020-01-01T12:00:00Z'。
-   */
-  StartTime: string
-  /**
-   * 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。
-UTC时间，如'2020-01-01T12:00:00Z'。
-   */
-  EndTime: string
+  Definition: number
 }
 
 /**
@@ -16620,7 +17745,7 @@ export interface RegionInfo {
   /**
    * 地区名称。
    */
-  Name: string
+  Name?: string
 }
 
 /**
@@ -16654,6 +17779,20 @@ export interface ComposeAudioOperation {
 <li>大于1表示升高音量。</li>
    */
   Volume?: number
+}
+
+/**
+ * CreateSmartSubtitleTemplate返回参数结构体
+ */
+export interface CreateSmartSubtitleTemplateResponse {
+  /**
+   * 智能字幕模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

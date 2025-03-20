@@ -215,7 +215,6 @@ export interface DescribeClusterParamsResponse {
   TotalCount?: number
   /**
    * 实例参数列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<ParamInfo>
   /**
@@ -327,7 +326,6 @@ export interface DescribeProxiesResponse {
   TotalCount?: number
   /**
    * 数据库代理组列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyGroupInfos?: Array<ProxyGroupInfo>
   /**
@@ -1143,32 +1141,26 @@ pause
 export interface DescribeClusterPasswordComplexityResponse {
   /**
    * 数据字典参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidatePasswordDictionary?: ParamInfo
   /**
    * 密码长度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidatePasswordLength?: ParamInfo
   /**
    * 大小写敏感字符个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidatePasswordMixedCaseCount?: ParamInfo
   /**
    * 数字个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidatePasswordNumberCount?: ParamInfo
   /**
    * 密码等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidatePasswordPolicy?: ParamInfo
   /**
    * 特殊字符个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidatePasswordSpecialCharCount?: ParamInfo
   /**
@@ -1693,25 +1685,21 @@ export interface StartCLSDeliveryResponse {
 export interface ParamItemInfo {
   /**
    * 参数名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamName?: string
   /**
    * 参数新值
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NewValue?: string
   /**
    * 参数旧值
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OldValue?: string
   /**
    * 参数公式
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueFunction?: string
 }
@@ -1841,7 +1829,6 @@ export interface DescribeZonesResponse {
 export interface SearchClusterTablesResponse {
   /**
    * 数据表列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tables?: Array<DatabaseTables>
   /**
@@ -1892,7 +1879,6 @@ export interface DescribeChangedParamsAfterUpgradeResponse {
   TotalCount?: number
   /**
    * 实例参数列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<ParamItemInfo>
   /**
@@ -2697,12 +2683,10 @@ export interface DescribeBinlogsRequest {
 export interface InquirePriceModifyResponse {
   /**
    * 实例价格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePrice?: TradePrice
   /**
    * 存储价格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StoragePrice?: TradePrice
   /**
@@ -2847,7 +2831,6 @@ export interface DescribeResourcePackageListResponse {
   Total?: number
   /**
    * 资源包明细
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Detail?: Array<Package>
   /**
@@ -3226,7 +3209,6 @@ export interface ServerlessSpec {
 export interface DescribeClusterDetailDatabasesResponse {
   /**
    * 数据库信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbInfos?: Array<DbInfo>
   /**
@@ -5362,7 +5344,7 @@ export interface ModifyBackupConfigRequest {
    */
   BackupFreq?: Array<string>
   /**
-   * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
+   * 该参数目前不支持修改，无需填写。
    */
   BackupType?: string
   /**
@@ -5757,12 +5739,10 @@ export interface DescribeAccountsRequest {
 export interface DescribeRollbackTimeRangeResponse {
   /**
    * 有效回归时间范围开始时间点（已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeRangeStart?: string
   /**
    * 有效回归时间范围结束时间点（已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeRangeEnd?: string
   /**
@@ -6301,7 +6281,6 @@ export interface DescribeClusterParamLogsResponse {
   TotalCount?: number
   /**
    * 参数修改记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterParamLogs?: Array<ClusterParamModifyLog>
   /**
@@ -7056,7 +7035,6 @@ export interface DescribeResourcePackageSaleSpecResponse {
   Total?: number
   /**
    * 资源包明细说明
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Detail?: Array<SalePackageSpec>
   /**
@@ -7802,12 +7780,10 @@ export interface ModifyClusterSlaveZoneRequest {
 export interface DescribeInstanceErrorLogsResponse {
   /**
    * 日志条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 错误日志列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorLogs?: Array<CynosdbErrorLogItem>
   /**
@@ -7822,12 +7798,10 @@ export interface DescribeInstanceErrorLogsResponse {
 export interface DescribeSupportProxyVersionResponse {
   /**
    * 支持的数据库代理版本集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportProxyVersions?: Array<string>
   /**
    * 当前proxy版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentProxyVersion?: string
   /**
@@ -8932,17 +8906,14 @@ export interface DescribeTasksRequest {
 export interface ModifyClusterStorageResponse {
   /**
    * 冻结流水ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranId?: string
   /**
    * 大订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDealIds?: Array<string>
   /**
    * 订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
   /**
@@ -9369,7 +9340,6 @@ export interface SwitchClusterLogBin {
 export interface ExportInstanceErrorLogsResponse {
   /**
    * 错误日志导出内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorLogItems?: Array<ErrorLogItemExport>
   /**
@@ -9468,7 +9438,6 @@ export interface GrantAccountPrivilegesRequest {
 export interface IsolateClusterResponse {
   /**
    * 任务流ID(后付费或者serverless资源返回，如果需要同步任务状态，请使用DescribeFlow接口)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
@@ -9488,27 +9457,22 @@ export interface IsolateClusterResponse {
 export interface RenewClustersResponse {
   /**
    * 预付费总订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDealIds?: Array<string>
   /**
    * 退款订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
   /**
    * 冻结流水，一次开通一个冻结流水
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranId?: string
   /**
    * 每个订单号对应的发货资源id列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceIds?: Array<string>
   /**
    * 集群id列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIds?: Array<string>
   /**
@@ -9937,22 +9901,18 @@ export interface DescribeInstancesWithinSameClusterResponse {
 export interface RollbackToNewClusterResponse {
   /**
    * 冻结流水ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranId?: string
   /**
    * 订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
   /**
    * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceIds?: Array<string>
   /**
    * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIds?: Array<string>
   /**
@@ -10063,12 +10023,10 @@ export interface DescribeInstanceCLSLogDeliveryRequest {
 export interface UpgradeInstanceResponse {
   /**
    * 冻结流水ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranId?: string
   /**
    * 大订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDealIds?: Array<string>
   /**

@@ -624,32 +624,26 @@ export interface DisableVpcCniNetworkTypeResponse {
 export interface PodDeductionRate {
   /**
    * Pod的 CPU
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu?: number
   /**
    * Pod 的内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Memory?: number
   /**
    *  Pod 的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    *  Pod 的 GPU 卡数，Pod 类型为 GPU 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuNum?: string
   /**
    * 这种规格的 Pod总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalNum?: number
   /**
    * 这种规格的 Pod被预留券抵扣的数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductionNum?: number
 }
@@ -4718,52 +4712,42 @@ export interface Taint {
 export interface ReservedInstanceUtilizationRate {
   /**
    * 使用率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rate?: number
   /**
    * 预留券数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Num?: number
   /**
    * 核数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CPU?: number
   /**
    * 内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Memory?: number
   /**
    *  预留券类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * GPU 卡数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuNum?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 集群 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 节点名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeName?: string
   /**
    * Pod 数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PodNum?: number
 }
@@ -5977,27 +5961,22 @@ export interface ModifyClusterVirtualNodePoolResponse {
 export interface SuperNodeResource {
   /**
    * 节点名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeName?: string
   /**
    * 节点上的资源总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Num?: number
   /**
    * 节点上的总核数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu?: number
   /**
    * 节点上的总内存数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Memory?: number
   /**
    * 节点上的总 GPU 卡数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Gpu?: number
 }
@@ -6112,7 +6091,6 @@ export interface PodChargeInfo {
   Type?: string
   /**
    * Pod是GPU时，表示GPU卡数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Gpu?: string
   /**
@@ -7360,27 +7338,22 @@ export interface VirtualNode {
 export interface PodNodeInfo {
   /**
    * 集群 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    *  节点名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeName?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    *  Pod 名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }

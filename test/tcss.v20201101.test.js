@@ -38,19 +38,9 @@ it("tcss.v20201101.CreateK8sApiAbnormalEventExportJob", async function () {
     }
 })
 
-it("tcss.v20201101.ModifySecLogDeliveryClsSetting", async function () {
+it("tcss.v20201101.UpdateAndPublishNetworkFirewallPolicyYamlDetail", async function () {
     try {
-       const data = await client.ModifySecLogDeliveryClsSetting({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcss.v20201101.DescribeAbnormalProcessEventsExport", async function () {
-    try {
-       const data = await client.DescribeAbnormalProcessEventsExport({})
+       const data = await client.UpdateAndPublishNetworkFirewallPolicyYamlDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +148,9 @@ it("tcss.v20201101.DescribeVirusAutoIsolateSampleDetail", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeAbnormalProcessRulesExport", async function () {
+it("tcss.v20201101.DescribeRiskSyscallEventsExport", async function () {
     try {
-       const data = await client.DescribeAbnormalProcessRulesExport({})
+       const data = await client.DescribeRiskSyscallEventsExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,16 +588,6 @@ it("tcss.v20201101.DescribeNetworkFirewallPolicyYamlDetail", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeEscapeEventsExport", async function () {
-    try {
-       const data = await client.DescribeEscapeEventsExport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcss.v20201101.CheckNetworkFirewallPolicyYaml", async function () {
     try {
        const data = await client.CheckNetworkFirewallPolicyYaml({})
@@ -631,16 +611,6 @@ it("tcss.v20201101.UpdateNetworkFirewallPolicyYamlDetail", async function () {
 it("tcss.v20201101.DescribeNetworkFirewallNamespaceList", async function () {
     try {
        const data = await client.DescribeNetworkFirewallNamespaceList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcss.v20201101.DescribeAssetImageListExport", async function () {
-    try {
-       const data = await client.DescribeAssetImageListExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +778,9 @@ it("tcss.v20201101.DescribeVirusManualScanEstimateTimeout", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeRiskSyscallEventsExport", async function () {
+it("tcss.v20201101.ModifySecLogDeliveryClsSetting", async function () {
     try {
-       const data = await client.DescribeRiskSyscallEventsExport({})
+       const data = await client.ModifySecLogDeliveryClsSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,6 +1038,16 @@ it("tcss.v20201101.DescribeContainerAssetSummary", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeVirusScanSetting", async function () {
+    try {
+       const data = await client.DescribeVirusScanSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeAssetSuperNodeList", async function () {
     try {
        const data = await client.DescribeAssetSuperNodeList({})
@@ -1158,9 +1138,9 @@ it("tcss.v20201101.DescribeVulScanInfo", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeVulImageSummary", async function () {
+it("tcss.v20201101.DescribeRaspRules", async function () {
     try {
-       const data = await client.DescribeVulImageSummary({})
+       const data = await client.DescribeRaspRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1411,6 +1391,16 @@ it("tcss.v20201101.AddEscapeWhiteList", async function () {
 it("tcss.v20201101.CreateImageExportJob", async function () {
     try {
        const data = await client.CreateImageExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DeleteRaspRules", async function () {
+    try {
+       const data = await client.DeleteRaspRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1821,16 +1811,6 @@ it("tcss.v20201101.DescribeComplianceAssetDetailInfo", async function () {
 it("tcss.v20201101.DescribeAccessControlRuleDetail", async function () {
     try {
        const data = await client.DescribeAccessControlRuleDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcss.v20201101.UpdateAndPublishNetworkFirewallPolicyYamlDetail", async function () {
-    try {
-       const data = await client.UpdateAndPublishNetworkFirewallPolicyYamlDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2538,9 +2518,9 @@ it("tcss.v20201101.DeleteCompliancePolicyItemFromWhitelist", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeVirusScanSetting", async function () {
+it("tcss.v20201101.DescribeRaspRuleVuls", async function () {
     try {
-       const data = await client.DescribeVirusScanSetting({})
+       const data = await client.DescribeRaspRuleVuls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2798,9 +2778,9 @@ it("tcss.v20201101.DescribeExportJobDownloadURL", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeAssetImageRegistryVulList", async function () {
+it("tcss.v20201101.DescribeAssetImageRegistryVulListExport", async function () {
     try {
-       const data = await client.DescribeAssetImageRegistryVulList({})
+       const data = await client.DescribeAssetImageRegistryVulListExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3258,16 +3238,6 @@ it("tcss.v20201101.DescribeAssetHostDetail", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeAssetImageRegistryVulListExport", async function () {
-    try {
-       const data = await client.DescribeAssetImageRegistryVulListExport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcss.v20201101.DescribeWebVulList", async function () {
     try {
        const data = await client.DescribeWebVulList({})
@@ -3288,9 +3258,9 @@ it("tcss.v20201101.DescribeRiskSyscallWhiteLists", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeAccessControlRulesExport", async function () {
+it("tcss.v20201101.DescribeAssetImageRegistryVulList", async function () {
     try {
-       const data = await client.DescribeAccessControlRulesExport({})
+       const data = await client.DescribeAssetImageRegistryVulList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3348,6 +3318,16 @@ it("tcss.v20201101.DescribeSecEventsTendency", async function () {
     }
 })
 
+it("tcss.v20201101.ModifyRaspRules", async function () {
+    try {
+       const data = await client.ModifyRaspRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeAssetImageDetail", async function () {
     try {
        const data = await client.DescribeAssetImageDetail({})
@@ -3371,6 +3351,16 @@ it("tcss.v20201101.ModifySecLogDeliveryKafkaSetting", async function () {
 it("tcss.v20201101.CreateAccessControlsRuleExportJob", async function () {
     try {
        const data = await client.CreateAccessControlsRuleExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeVulImageSummary", async function () {
+    try {
+       const data = await client.DescribeVulImageSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -230,6 +230,7 @@ import {
   DescribeDnsRecordsRequest,
   CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
+  MaxAgeParameters,
   ModifyApplicationProxyRuleResponse,
   FailReason,
   ModifyRequestHeaderParameters,
@@ -247,7 +248,7 @@ import {
   DeleteRealtimeLogDeliveryTaskResponse,
   RuleCondition,
   DescribeOverviewL7DataResponse,
-  MaxAgeParameters,
+  DescribeSecurityPolicyRequest,
   DescribeEnvironmentsResponse,
   CacheParameters,
   TimingDataItem,
@@ -534,6 +535,7 @@ import {
   CacheTag,
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
+  DescribeSecurityPolicyResponse,
   CreateContentIdentifierResponse,
   HostHeaderParameters,
   DescribeConfigGroupVersionsRequest,
@@ -1605,6 +1607,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: UpgradePlanResponse) => void
   ): Promise<UpgradePlanResponse> {
     return this.request("UpgradePlan", req, cb)
+  }
+
+  /**
+   * 查询安全防护配置详情。
+   */
+  async DescribeSecurityPolicy(
+    req: DescribeSecurityPolicyRequest,
+    cb?: (error: string, rep: DescribeSecurityPolicyResponse) => void
+  ): Promise<DescribeSecurityPolicyResponse> {
+    return this.request("DescribeSecurityPolicy", req, cb)
   }
 
   /**

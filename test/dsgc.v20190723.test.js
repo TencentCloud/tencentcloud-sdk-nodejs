@@ -188,16 +188,6 @@ it("dsgc.v20190723.DescribeDSPACategoryRuleStatistic", async function () {
     }
 })
 
-it("dsgc.v20190723.DescribeRuleDetail", async function () {
-    try {
-       const data = await client.DescribeRuleDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.DeleteDSPACOSDiscoveryTaskResult", async function () {
     try {
        const data = await client.DeleteDSPACOSDiscoveryTaskResult({})

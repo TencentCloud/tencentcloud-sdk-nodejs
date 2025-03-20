@@ -158,49 +158,43 @@ export interface SecLogExportTaskInfo {
   /**
    * 异步任务Id。
    */
-  AsyncRequestId: number
+  AsyncRequestId?: number
   /**
    * 任务开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 任务结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 任务创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 任务状态。
    */
-  Status: string
+  Status?: string
   /**
    * 任务执行进度。
    */
-  Progress: number
+  Progress?: number
   /**
    * 导出日志开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogStartTime: string
+  LogStartTime?: string
   /**
    * 导出日志结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogEndTime: string
+  LogEndTime?: string
   /**
    * 日志文件总大小，单位KB。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalSize: number
+  TotalSize?: number
   /**
    * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DangerLevels: Array<number | bigint>
+  DangerLevels?: Array<number | bigint>
 }
 
 /**
@@ -721,7 +715,6 @@ export interface AuditInstanceInfo {
   Region?: string
   /**
    * 资源Tags。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTags?: Array<string>
 }
@@ -1098,7 +1091,6 @@ export interface DiagHistoryEventItem {
   InstanceId?: string
   /**
    * 保留字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metric?: string
   /**
@@ -1282,22 +1274,18 @@ export interface SessionItem {
 export interface StatisticDataInfo {
   /**
    * 统计维度的值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 平均时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeAvg?: number
   /**
    * 总时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeSum?: number
   /**
    * 数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
 }
@@ -1607,7 +1595,6 @@ export interface TimeSlice {
 export interface AuditLogFile {
   /**
    * 审计日志文件生成异步任务ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncRequestId?: number
   /**
@@ -1616,7 +1603,6 @@ export interface AuditLogFile {
   FileName?: string
   /**
    * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
@@ -1624,7 +1610,6 @@ export interface AuditLogFile {
 "creating" - 生成中;
 "failed" - 创建失败;
 "success" - 已生成;
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -2030,20 +2015,19 @@ export interface ScoreDetail {
   /**
    * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
    */
-  IssueType: string
+  IssueType?: string
   /**
    * 扣分总分。
    */
-  ScoreLost: number
+  ScoreLost?: number
   /**
    * 扣分总分上限。
    */
-  ScoreLostMax: number
+  ScoreLostMax?: number
   /**
    * 扣分项列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<ScoreItem>
+  Items?: Array<ScoreItem>
 }
 
 /**
@@ -2646,17 +2630,14 @@ export interface InstanceConfs {
   OverviewDisplay?: string
   /**
    * redis大key分析的自定义分割符，仅redis使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyDelimiters?: Array<string>
   /**
    * 分片节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShardNum?: string
   /**
    * 是否开启大key周期性分析，仅redis产品有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisTopKey?: string
 }
@@ -2667,32 +2648,26 @@ export interface InstanceConfs {
 export interface ReceiveInfo {
   /**
    * 接收组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveGroup?: Array<number | bigint>
   /**
    * 最后接收时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndReceiveTime?: string
   /**
    * 接收名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveName?: string
   /**
    * 推送渠道
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SendChannel?: Array<number | bigint>
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartReceiveTime?: string
   /**
    * 接收用户列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveUin?: Array<ReceiveUin>
 }
@@ -2821,7 +2796,6 @@ export interface Aggregation {
   SortCount?: number
   /**
    * 慢查模板概览。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlowLogs?: Array<string>
 }
@@ -2905,22 +2879,18 @@ export interface ProfileInfo {
 export interface UserProfile {
   /**
    * 配置的id。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileId?: string
   /**
    * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileType?: string
   /**
    * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileLevel?: string
   /**
    * 配置名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileName?: string
   /**
@@ -3061,7 +3031,6 @@ export interface SchemaSpaceData {
   TableRows?: number
   /**
    * 库中所有表对应的独立物理文件大小加和（MB）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PhysicalFileSize?: number
 }
@@ -3187,72 +3156,58 @@ export interface StatDimension {
 export interface AlarmProfileList {
   /**
    * 0-不是 1-是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsWebHook?: number
   /**
    * 接收告警用户数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveUinCount?: number
   /**
    * 语言
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Lang?: string
   /**
    * 模板类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateType?: string
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * 接收组数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveGroupCount?: number
   /**
    * 更新用户的uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUin?: number
   /**
    * 接收类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveType?: Array<number | bigint>
   /**
    * 接收用户信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveInfo?: Array<ReceiveInfo>
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 模板名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateName?: string
   /**
    * 发送渠道
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SendChannel?: Array<number | bigint>
   /**
    * 模板id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateId?: number
   /**
    * webhook数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WebHookCount?: number
 }
@@ -4236,12 +4191,10 @@ export interface DescribeProxyProcessStatisticsRequest {
 export interface StatisticInfo {
   /**
    * 统计分析的维度。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Dimension?: string
   /**
    * 统计分析的维度下的统计数据详情。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<StatisticDataInfo>
 }
@@ -4253,16 +4206,15 @@ export interface MonitorFloatMetric {
   /**
    * 指标名称。
    */
-  Metric: string
+  Metric?: string
   /**
    * 指标单位。
    */
-  Unit: string
+  Unit?: string
   /**
    * 指标值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Values: Array<number>
+  Values?: Array<number>
 }
 
 /**
@@ -4726,12 +4678,10 @@ export interface SlowLogInfoItem {
   Database?: string
   /**
    * User来源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * IP来源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserHost?: string
   /**
@@ -4740,17 +4690,14 @@ export interface SlowLogInfoItem {
   QueryTime?: number
   /**
    * 锁时间,单位秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LockTime?: number
   /**
    * 扫描行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RowsExamined?: number
   /**
    * 返回行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RowsSent?: number
 }

@@ -250,9 +250,8 @@ export interface SpaceVirtualPrivateCloud {
 export interface ManagerNodeOverview {
   /**
    * 管控节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: string
+  NodeId?: string
 }
 
 /**
@@ -862,7 +861,6 @@ export interface DescribeClusterActivitiesResponse {
 export interface DescribeInitNodeScriptsResponse {
   /**
    * 节点初始化脚本列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InitNodeScriptSet?: Array<NodeScript>
   /**
@@ -1031,7 +1029,6 @@ export interface DescribeQueuesResponse {
 export interface CreateClusterResponse {
   /**
    * 集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
@@ -1852,9 +1849,8 @@ export interface SpaceSystemDisk {
 export interface ComputeNodeOverview {
   /**
    * 计算节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: string
+  NodeId?: string
 }
 
 /**

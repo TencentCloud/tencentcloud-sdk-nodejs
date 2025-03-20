@@ -81,7 +81,7 @@ import {
   ErrlogItem,
   ProxyGroupInfo,
   AssociateSecurityGroupsResponse,
-  BackupConfig,
+  DescribeCPUExpandStrategyInfoResponse,
   Rule,
   AuditPolicy,
   ProxyNode,
@@ -155,6 +155,7 @@ import {
   ImportRecord,
   DeleteAuditLogFileResponse,
   DescribeSlowLogsResponse,
+  DescribeCPUExpandStrategyInfoRequest,
   SlaveInfo,
   DescribeDBSecurityGroupsRequest,
   DescribeDBSwitchRecordsResponse,
@@ -228,7 +229,7 @@ import {
   DeleteRotationPasswordResponse,
   DescribeAccountsResponse,
   RollbackTimeRange,
-  ModifyProtectModeRequest,
+  AuditLog,
   DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
@@ -426,7 +427,7 @@ import {
   OfflineIsolatedInstancesRequest,
   InquiryPriceUpgradeInstancesRequest,
   ModifyInstanceParamResponse,
-  AuditLog,
+  ModifyProtectModeRequest,
   ColumnPrivilege,
   DescribeUploadedFilesResponse,
   DescribeDBPriceRequest,
@@ -448,11 +449,12 @@ import {
   DescribeAuditInstanceListRequest,
   DescribeBackupEncryptionStatusRequest,
   ModifyDBInstanceLogToCLSResponse,
+  AuditRuleTemplateInfo,
   ModifyTimeWindowRequest,
   AuditLogFile,
   DescribeAuditRuleTemplatesRequest,
   RollbackTables,
-  AuditRuleTemplateInfo,
+  BackupConfig,
   LocalBinlogConfigDefault,
   DescribeSSLStatusRequest,
   DescribeSlowLogDataRequest,
@@ -921,6 +923,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDatabaseResponse) => void
   ): Promise<CreateDatabaseResponse> {
     return this.request("CreateDatabase", req, cb)
+  }
+
+  /**
+   * 通过该 API 可以查询实例的 CPU 弹性扩容信息
+   */
+  async DescribeCPUExpandStrategyInfo(
+    req: DescribeCPUExpandStrategyInfoRequest,
+    cb?: (error: string, rep: DescribeCPUExpandStrategyInfoResponse) => void
+  ): Promise<DescribeCPUExpandStrategyInfoResponse> {
+    return this.request("DescribeCPUExpandStrategyInfo", req, cb)
   }
 
   /**

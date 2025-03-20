@@ -113,12 +113,10 @@ export interface NativeNodeInfo {
   SecurityGroupIDs?: Array<string>
   /**
    * VPC 唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
@@ -659,12 +657,10 @@ export interface InstanceExtraArgs {
 export interface MachineUpgradeSettings {
   /**
    * 是否开启自动升级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoUpgrade?: boolean
   /**
    * 运维窗口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeOptions?: AutoUpgradeOptions
   /**
@@ -674,7 +670,6 @@ export interface MachineUpgradeSettings {
   Components?: Array<string>
   /**
    * 升级时，最大不可升级的节点数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxUnavailable?: IntOrString
 }
@@ -752,12 +747,10 @@ export interface Tag {
 export interface MachineSetScaling {
   /**
    * 节点池最小副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinReplicas?: number
   /**
    * 节点池最大副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxReplicas?: number
   /**
@@ -1263,7 +1256,6 @@ export interface DescribeHealthCheckPolicyBindingsResponse {
 export interface NativeNodePoolInfo {
   /**
    * 伸缩配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scaling?: MachineSetScaling
   /**
@@ -1277,7 +1269,6 @@ export interface NativeNodePoolInfo {
   SecurityGroupIds?: Array<string>
   /**
    * 自动升级配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeSettings?: MachineUpgradeSettings
   /**
@@ -1291,7 +1282,6 @@ export interface NativeNodePoolInfo {
   InstanceChargeType?: string
   /**
    * 包年包月机型计费配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
@@ -1305,7 +1295,6 @@ export interface NativeNodePoolInfo {
   KeyIds?: Array<string>
   /**
    * Machine 系统配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Management?: ManagementConfig
   /**
@@ -1325,17 +1314,14 @@ export interface NativeNodePoolInfo {
   KubeletArgs?: Array<string>
   /**
    * 预定义脚本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Lifecycle?: LifecycleConfig
   /**
    * 运行时根目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeRootDir?: string
   /**
    * 是否开启弹性伸缩
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableAutoscaling?: boolean
   /**
@@ -1344,7 +1330,6 @@ export interface NativeNodePoolInfo {
   InstanceTypes?: Array<string>
   /**
    * 期望节点数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Replicas?: number
   /**
@@ -1353,7 +1338,6 @@ export interface NativeNodePoolInfo {
   ReadyReplicas?: number
   /**
    * 公网带宽设置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetAccessible?: InternetAccessible
   /**
@@ -1363,7 +1347,6 @@ export interface NativeNodePoolInfo {
   DataDisks?: Array<DataDisk>
   /**
    * 原生节点机型 Native, NativeCVM
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MachineType?: string
 }

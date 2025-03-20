@@ -32,6 +32,7 @@ import {
   SearchClsLogResponse,
   ModifyClsTopicResponse,
   StandaloneGatewayInfo,
+  EditAuthConfigResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
   DescribeStandaloneGatewayRequest,
@@ -72,7 +73,7 @@ import {
   CloudBaseRunVolumeMount,
   BackendServiceInfo,
   DescribePostpayFreeQuotasRequest,
-  DescribeActivityInfoResponse,
+  DeleteGatewayVersionRequest,
   CloudBaseRunImageInfo,
   DestroyStandaloneGatewayResponse,
   DescribeCloudBaseRunServerVersionResponse,
@@ -86,9 +87,8 @@ import {
   ModifyGatewayVersionTrafficRequest,
   DescribeQuotaDataResponse,
   DescribeGatewayCurveDataResponse,
-  ActivityInfoItem,
   KVPair,
-  DeleteGatewayVersionRequest,
+  SmsFreeQuota,
   FunctionInfo,
   CommonServiceAPIRequest,
   DestroyStaticStoreRequest,
@@ -119,7 +119,6 @@ import {
   DescribeExtensionUploadInfoRequest,
   DescribeBillingInfoRequest,
   HpaPolicy,
-  CloudBaseRunImageSecretInfo,
   CreateCloudBaseRunResourceResponse,
   DescribeStandaloneGatewayPackageResponse,
   LogObject,
@@ -188,7 +187,6 @@ import {
   DeleteGatewayVersionResponse,
   EstablishWxGatewayRouteResponse,
   DescribeDatabaseACLRequest,
-  SmsFreeQuota,
   CreateCloudBaseRunServerVersionResponse,
   CloudBaseRunServerVersionItem,
   PlatformStatistic,
@@ -202,13 +200,14 @@ import {
   DescribeWxCloudBaseRunEnvsRequest,
   CloudBaseRunServiceVolumeHostPath,
   DescribeCurveDataRequest,
-  DescribeActivityInfoRequest,
+  CloudBaseRunImageSecretInfo,
   BindEnvGatewayRequest,
   ModifyEnvResponse,
   DescribeCbrServerVersionResponse,
   CreateStandaloneGatewayResponse,
   DescribeQuotaDataRequest,
   CreateStaticStoreResponse,
+  EditAuthConfigRequest,
   CloudBaseRunVpcInfo,
   DescribeCloudBaseRunResourceResponse,
   StorageInfo,
@@ -518,6 +517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStaticStoreResponse) => void
   ): Promise<CreateStaticStoreResponse> {
     return this.request("CreateStaticStore", req, cb)
+  }
+
+  /**
+   * 修改登录配置
+   */
+  async EditAuthConfig(
+    req: EditAuthConfigRequest,
+    cb?: (error: string, rep: EditAuthConfigResponse) => void
+  ): Promise<EditAuthConfigResponse> {
+    return this.request("EditAuthConfig", req, cb)
   }
 
   /**
@@ -918,16 +927,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyEnvResponse) => void
   ): Promise<DestroyEnvResponse> {
     return this.request("DestroyEnv", req, cb)
-  }
-
-  /**
-   * 查询活动信息
-   */
-  async DescribeActivityInfo(
-    req: DescribeActivityInfoRequest,
-    cb?: (error: string, rep: DescribeActivityInfoResponse) => void
-  ): Promise<DescribeActivityInfoResponse> {
-    return this.request("DescribeActivityInfo", req, cb)
   }
 
   /**

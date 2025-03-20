@@ -365,11 +365,11 @@ export interface DescribeDevicesResponse {
   /**
    * 设备总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 设备详细信息列表
    */
-  Devices: Array<DeviceInfo>
+  Devices?: Array<DeviceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -616,11 +616,11 @@ export interface DescribeProductsResponse {
   /**
    * 产品总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 产品详细信息列表
    */
-  Products: Array<ProductInfo>
+  Products?: Array<ProductInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -864,8 +864,7 @@ export interface ListLogRequest {
    */
   MaxTime: number
   /**
-   * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。
-一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
+   * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:vlue worda。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
    */
   Keywords?: string
   /**
@@ -1980,19 +1979,19 @@ export interface ListLogResponse {
   /**
    * 日志上下文
    */
-  Context: string
+  Context?: string
   /**
    * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 日志列表
    */
-  Results: Array<CLSLogItem>
+  Results?: Array<CLSLogItem>
   /**
    * 日志总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3058,15 +3057,15 @@ export interface ProductMetadata {
   /**
    * 产品创建时间
    */
-  CreationDate: number
+  CreationDate?: number
   /**
    * 创建者 Uin
    */
-  CreateUserId: number
+  CreateUserId?: number
   /**
    * 账号 Uin
    */
-  UserId: number
+  UserId?: number
 }
 
 /**
@@ -3076,19 +3075,19 @@ export interface DescribeProductResponse {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 产品名
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 产品元数据
    */
-  ProductMetadata: ProductMetadata
+  ProductMetadata?: ProductMetadata
   /**
    * 产品属性
    */
-  ProductProperties: ProductProperties
+  ProductProperties?: ProductProperties
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

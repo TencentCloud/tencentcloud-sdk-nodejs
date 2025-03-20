@@ -418,7 +418,6 @@ export interface DescribeBillDetailForOrganizationResponse {
   Total?: number
   /**
    * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
   /**
@@ -560,22 +559,18 @@ export interface ConsumptionRegionSummaryDataItem {
   Business?: Array<ConsumptionBusinessSummaryDataItem>
   /**
    * 现金
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CashPayAmount?: string
   /**
    * 代金券
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoucherPayAmount?: string
   /**
    * 赠送金
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IncentivePayAmount?: string
   /**
    * 分成金
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TransferPayAmount?: string
 }
@@ -6428,12 +6423,10 @@ p_dsa（全球IP应用加速）：minute
 export interface BillComponent {
   /**
    * 组件类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentCode: string
   /**
    * 组件类型：用户购买的产品或服务对应的组件大类
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentCodeName: string
 }

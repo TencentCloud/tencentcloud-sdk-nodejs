@@ -43,7 +43,6 @@ import {
   ModifyClassificationRuleRequest,
   DescribeDSPADiscoveryServiceStatusResponse,
   CloudResourceItem,
-  DescribeRuleDetailResponse,
   DSPACosMetaDataInfo,
   AssessmentTemplate,
   ModifyDSPATaskResultRequest,
@@ -94,7 +93,6 @@ import {
   DescribeAssetDetailDataExportResultResponse,
   DeleteDSPADiscoveryTaskResultResponse,
   DspaDiscoveryTaskDataSource,
-  DescribeRuleDetailRequest,
   ModifyDSPADiscoveryTaskRequest,
   DeleteDSPAAssessmentTaskResponse,
   DspaDiscoveryComplianceGroupRuleInfo,
@@ -614,17 +612,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDSPACategoryRuleStatisticResponse) => void
   ): Promise<DescribeDSPACategoryRuleStatisticResponse> {
     return this.request("DescribeDSPACategoryRuleStatistic", req, cb)
-  }
-
-  /**
-     * 查询分类规则详情
-
-     */
-  async DescribeRuleDetail(
-    req?: DescribeRuleDetailRequest,
-    cb?: (error: string, rep: DescribeRuleDetailResponse) => void
-  ): Promise<DescribeRuleDetailResponse> {
-    return this.request("DescribeRuleDetail", req, cb)
   }
 
   /**

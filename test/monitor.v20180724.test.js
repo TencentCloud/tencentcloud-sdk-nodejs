@@ -1428,6 +1428,16 @@ it("monitor.v20180724.UpdateExporterIntegration", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusIntegrationMetrics", async function () {
+    try {
+       const data = await client.DescribePrometheusIntegrationMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeAllNamespaces", async function () {
     try {
        const data = await client.DescribeAllNamespaces({})

@@ -745,17 +745,14 @@ export interface MqttParam {
 export interface BrokerTopicFlowData {
   /**
    * 主题名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 主题Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * Topic 流量(MB)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicTraffic?: string
 }
@@ -1248,37 +1245,30 @@ export interface ConsumerGroupResponse {
   TotalCount?: number
   /**
    * 主题列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicList?: Array<ConsumerGroupTopic>
   /**
    * 消费分组List
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupList?: Array<ConsumerGroup>
   /**
    * 所有分区数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPartition?: number
   /**
    * 监控的分区列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PartitionListForMonitor?: Array<Partition>
   /**
    * 主题总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalTopic?: number
   /**
    * 监控的主题列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicListForMonitor?: Array<ConsumerGroupTopic>
   /**
    * 监控的组列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupListForMonitor?: Array<Group>
 }
@@ -1960,22 +1950,18 @@ export interface DescribeConsumerGroupResponse {
 export interface CreateInstancePostData {
   /**
    * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
    * 订单号列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
   /**
    * ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 订单和购买实例对应映射列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNameInstanceIdMapping?: Array<DealInstanceDTO>
 }
@@ -2603,22 +2589,18 @@ export interface ConsumerRecord {
   Offset?: number
   /**
    * 消息key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 消息value
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
    * 消息时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: number
   /**
    * 消息headers
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: string
 }
@@ -3167,67 +3149,54 @@ export interface RegexReplaceParam {
 export interface AclRule {
   /**
    * ACL规则名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
    * ckafka集群实例Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * ACL规则匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PatternType?: string
   /**
    * 表示前缀匹配的前缀的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Pattern?: string
   /**
    * Acl资源类型,目前只支持Topic,枚举值列表：Topic
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: string
   /**
    * 该规则所包含的ACL信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AclList?: string
   /**
    * 规则所创建的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTimeStamp?: string
   /**
    * 预设ACL规则是否应用到新增的topic中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsApplied?: number
   /**
    * 规则更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTimeStamp?: string
   /**
    * 规则的备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 其中一个显示的对应的TopicName
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 应用该ACL规则的Topic数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicCount?: number
   /**
    * patternType的中文显示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PatternTypeTitle?: string
 }
@@ -3620,7 +3589,6 @@ export interface CreateDatahubTaskRes {
   TaskId?: string
   /**
    * 数据转储Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatahubId?: string
 }
@@ -3804,7 +3772,6 @@ export interface AclResponse {
   TotalCount?: number
   /**
    * ACL列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AclList?: Array<Acl>
 }
@@ -3833,32 +3800,26 @@ export interface MapParam {
 export interface CtsdbConnectParam {
   /**
    * Ctsdb的连接port
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * Ctsdb连接源的实例vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceVip?: string
   /**
    * Ctsdb连接源的vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * Ctsdb连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * Ctsdb连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * Ctsdb连接源的实例资源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: string
 }
@@ -4528,28 +4489,23 @@ export interface DatahubTopicDTO {
 export interface ClsParam {
   /**
    * 生产的信息是否为json格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DecodeJson: boolean
   /**
    * cls日志主题id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * cls日志集id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogSet?: string
   /**
    * 当DecodeJson为false时必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentKey?: string
   /**
    * 指定消息中的某字段内容作为cls日志的时间。
 字段内容格式需要是秒级时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeField?: string
 }
@@ -4586,17 +4542,14 @@ export interface AnalyseParam {
   Format: string
   /**
    * 分隔符、正则表达式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Regex?: string
   /**
    * 需再次处理的KEY——模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputValueType?: string
   /**
    * 需再次处理的KEY——KEY表达式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputValue?: string
 }
@@ -5082,17 +5035,14 @@ export interface DeleteUserRequest {
 export interface BatchModifyTopicResultDTO {
   /**
    * ckafka集群实例Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 主题名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 操作返回码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReturnCode?: string
   /**
@@ -5410,32 +5360,26 @@ export interface EsConnectParam {
 export interface CtsdbModifyConnectParam {
   /**
    * Ctsdb的连接port
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * Ctsdb连接源的实例vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceVip?: string
   /**
    * Ctsdb连接源的vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * Ctsdb连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * Ctsdb连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * Ctsdb连接源的实例资源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: string
 }
@@ -5714,7 +5658,6 @@ export interface TdwParam {
 export interface CdcClusterResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
 }
@@ -5753,17 +5696,14 @@ export interface CreateUserResponse {
 export interface BrokerTopicData {
   /**
    * 主题名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 主题Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * 主题占用Broker 容量大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSize?: number
 }
@@ -5774,7 +5714,6 @@ export interface BrokerTopicData {
 export interface BatchAnalyseParam {
   /**
    * ONE_BY_ONE单条输出，MERGE合并输出
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Format: string
 }
@@ -6091,42 +6030,34 @@ export interface DescribeUserResponse {
 export interface CosParam {
   /**
    * cos 存储桶名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketName: string
   /**
    * 地域代码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
   /**
    * 对象名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectKey?: string
   /**
    * 汇聚消息量的大小（单位：MB)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AggregateBatchSize?: number
   /**
    * 汇聚的时间间隔（单位：小时）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AggregateInterval?: number
   /**
    * 消息汇聚后的文件格式（支持csv, json）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FormatOutputType?: string
   /**
    * 转储的对象目录前缀
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectKeyPrefix?: string
   /**
    * 根据strptime 时间格式化的分区格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DirectoryTimeFormat?: string
 }
@@ -6233,22 +6164,18 @@ export interface DeleteInstancePreRequest {
 export interface ClickHouseSchema {
   /**
    * 表的列名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ColumnName: string
   /**
    * 该列对应的jsonKey名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonKey: string
   /**
    * 表列项的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
    * 列项是否允许为空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowNull: boolean
 }
@@ -6737,7 +6664,6 @@ export interface DescribeGroup {
 export interface DatahubTaskIdRes {
   /**
    * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
 }
@@ -7092,7 +7018,6 @@ export interface DeleteTopicResponse {
 export interface ConnectResourceResourceIdResp {
   /**
    * 连接源的Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
 }
@@ -7324,7 +7249,6 @@ export interface Assignment {
   Version?: number
   /**
    * topic信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Topics?: Array<GroupInfoTopics>
 }
@@ -7590,95 +7514,77 @@ export interface DatahubResource {
 export interface ClickHouseParam {
   /**
    * ClickHouse的集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cluster: string
   /**
    * ClickHouse的数据库名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * ClickHouse的数据表名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * ClickHouse的schema
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Schema: Array<ClickHouseSchema>
   /**
    * 实例资源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * ClickHouse的连接ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
   /**
    * ClickHouse的连接port
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * ClickHouse的用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * ClickHouse的密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * 实例vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceVip?: string
   /**
    * 实例的vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * 是否为自建集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfBuilt?: boolean
   /**
    * ClickHouse是否抛弃解析失败的消息，默认为true
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DropInvalidMessage?: boolean
   /**
    * ClickHouse 类型，emr-clickhouse : "emr";cdw-clickhouse : "cdwch";自建 : ""
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DropCls?: DropCls
   /**
    * 每批次投递到 ClickHouse 表消息数量，默认为 1000 条。
 提高该参数值，有利于减少往  ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchSize?: number
   /**
    * 每次从 topic 中拉取消息大小，默认为 1MB，即至少要从 topic 中批量拉取 1MB 消息，才进行数据投递到 ClickHouse 操作。
 提高该参数值，有利于减少往  ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerFetchMinBytes?: number
   /**
    * 每次从 topic 拉取消息最大等待时间，当超过当前最大等待时间时，即使没有拉取到 ConsumerFetchMinBytes 大小，也将进行 ClickHouse 投递操作。
 提高该参数值，有利于减少往  ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerFetchMaxWaitMs?: number
 }
@@ -7714,42 +7620,34 @@ export interface CreateInstancePreResp {
 export interface ClickHouseModifyConnectParam {
   /**
    * ClickHouse连接源的实例资源【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * ClickHouse的连接port【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * ClickHouse连接源的实例vip【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceVip?: string
   /**
    * ClickHouse连接源的vpcId【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * ClickHouse连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * ClickHouse连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * ClickHouse连接源是否为自建集群【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfBuilt?: boolean
   /**
    * 是否更新到关联的Datahub任务，默认为true
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdate?: boolean
 }
@@ -8005,7 +7903,6 @@ export interface CreateInstancePostResp {
   ReturnMessage?: string
   /**
    * 返回的Data数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CreateInstancePostData
 }
@@ -8068,32 +7965,26 @@ export interface ClusterInfo {
   ClusterName?: string
   /**
    * 集群最大磁盘 单位GB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDiskSize?: number
   /**
    * 集群最大带宽 单位MB/s
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxBandWidth?: number
   /**
    * 集群当前可用磁盘  单位GB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AvailableDiskSize?: number
   /**
    * 集群当前可用带宽 单位MB/s
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AvailableBandWidth?: number
   /**
    * 集群所属可用区，表明集群归属的可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneIds?: Array<number | bigint>
 }
@@ -8305,7 +8196,6 @@ export interface AppIdResponse {
   TotalCount?: number
   /**
    * 符合要求的App Id列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppIdList?: Array<number | bigint>
 }
@@ -8499,48 +8389,39 @@ export interface TopicSubscribeGroup {
 export interface Config {
   /**
    * 消息保留时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Retention?: number
   /**
    * 最小同步复制数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinInsyncReplicas?: number
   /**
    * 日志清理模式，默认 delete。
 delete：日志按保存时间删除；compact：日志按 key 压缩；compact, delete：日志按 key 压缩且会保存时间删除。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CleanUpPolicy?: string
   /**
    * Segment 分片滚动的时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentMs?: number
   /**
    * 0表示 false。 1表示 true。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UncleanLeaderElectionEnable?: number
   /**
    * Segment 分片滚动的字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentBytes?: number
   /**
    * 最大消息字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxMessageBytes?: number
   /**
    * 消息保留文件大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetentionBytes?: number
   /**
    * 消息保存的时间类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogMsgTimestampType?: string
 }
@@ -9181,12 +9062,10 @@ export interface Acl {
   ResourceName?: string
   /**
    * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Principal?: string
   /**
    * 默认\*,表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
@@ -9268,42 +9147,34 @@ export interface CreateDatahubTaskResponse {
 export interface ClickHouseConnectParam {
   /**
    * ClickHouse的连接port
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
   /**
    * ClickHouse连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName: string
   /**
    * ClickHouse连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password: string
   /**
    * ClickHouse连接源的实例资源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * ClickHouse连接源是否为自建集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfBuilt: boolean
   /**
    * ClickHouse连接源的实例vip，当为腾讯云实例时，必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceVip?: string
   /**
    * ClickHouse连接源的vpcId，当为腾讯云实例时，必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * 是否更新到关联的Datahub任务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdate?: boolean
 }
@@ -9376,7 +9247,6 @@ export interface AclRuleResp {
   TotalCount?: number
   /**
    * AclRule列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AclRuleList?: Array<AclRule>
 }

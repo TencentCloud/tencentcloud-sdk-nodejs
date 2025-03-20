@@ -1557,14 +1557,13 @@ export interface AlarmGroupByItem {
 }
 
 /**
- * DescribeAlarmNoticeCallbacks返回参数结构体
+ * DescribePrometheusIntegrationMetrics返回参数结构体
  */
-export interface DescribeAlarmNoticeCallbacksResponse {
+export interface DescribePrometheusIntegrationMetricsResponse {
   /**
-   * 告警回调通知
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集成指标详情分组
    */
-  URLNotices?: Array<URLNotice>
+  IntegrationMetricSet?: Array<IntegrationMetricGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4033,6 +4032,24 @@ export interface ResumeGrafanaInstanceRequest {
    * Grafana 实例 ID，例如：grafana-12345678
    */
   InstanceId: string
+}
+
+/**
+ * prometheus集成分组指标
+ */
+export interface IntegrationMetricGroup {
+  /**
+   * 分组标识
+   */
+  Group?: string
+  /**
+   * 指标详情
+   */
+  Metrics?: Array<IntegrationMetric>
+  /**
+   * 分组名称
+   */
+  GroupName?: string
 }
 
 /**
@@ -8839,6 +8856,21 @@ export interface PrometheusRegionItem {
 }
 
 /**
+ * DescribeAlarmNoticeCallbacks返回参数结构体
+ */
+export interface DescribeAlarmNoticeCallbacksResponse {
+  /**
+   * 告警回调通知
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  URLNotices?: Array<URLNotice>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPrometheusInstanceAttributes请求参数结构体
  */
 export interface ModifyPrometheusInstanceAttributesRequest {
@@ -9447,6 +9479,37 @@ export interface Operator {
 }
 
 /**
+ * Prometheus用量信息
+ */
+export interface PrometheusInstanceTenantUsage {
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 计费周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcDate?: string
+  /**
+   * 总用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 基础指标用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Basic?: number
+  /**
+   * 付费指标用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fee?: number
+}
+
+/**
  * DescribeServiceDiscovery请求参数结构体
  */
 export interface DescribeServiceDiscoveryRequest {
@@ -9542,6 +9605,16 @@ export interface DescribeAlarmNoticeRequest {
    * 告警通知模板 id
    */
   NoticeId: string
+}
+
+/**
+ * DescribePrometheusIntegrationMetrics请求参数结构体
+ */
+export interface DescribePrometheusIntegrationMetricsRequest {
+  /**
+   * 集成类型标识。取值参考DescribePrometheusIntegrations接口返回中IntegrationSet[i].Code参数
+   */
+  IntegrationCode: string
 }
 
 /**
@@ -9807,34 +9880,29 @@ export interface DescribePrometheusGlobalConfigRequest {
 }
 
 /**
- * Prometheus用量信息
+ * prometheus集成指标详情
  */
-export interface PrometheusInstanceTenantUsage {
+export interface IntegrationMetric {
   /**
-   * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 指标名
    */
-  InstanceId?: string
+  MetricName?: string
   /**
-   * 计费周期
-注意：此字段可能返回 null，表示取不到有效值。
+   * 指标名称
    */
-  CalcDate?: string
+  Name?: string
   /**
-   * 总用量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 统计类型
    */
-  Total?: number
+  MetricType?: string
   /**
-   * 基础指标用量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 单位
    */
-  Basic?: number
+  Unit?: string
   /**
-   * 付费指标用量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 指标详细描述
    */
-  Fee?: number
+  Description?: string
 }
 
 /**

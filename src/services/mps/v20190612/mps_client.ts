@@ -45,8 +45,10 @@ import {
   DeleteAnimatedGraphicsTemplateResponse,
   AiReviewTaskProhibitedOcrResult,
   AiRecognitionTaskAsrFullTextResultOutput,
+  AsrHotwordsSetItem,
   AiReviewProhibitedOcrTaskOutput,
   DeleteScheduleResponse,
+  SmartSubtitleTaskTransTextResultOutput,
   ManageTaskResponse,
   BatchDeleteStreamLinkFlowRequest,
   FlowMediaInfo,
@@ -54,12 +56,14 @@ import {
   DescribeRTMPPullSourceAddress,
   DescribeOutputRTMPPullSettings,
   AwsS3FileUploadTrigger,
+  WordResult,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
   ModifyOutputInfo,
   MediaSnapshotByTimeOffsetItem,
   NumberFormat,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
+  SmartSubtitleTaskTransTextResult,
   ManageTaskRequest,
   FlowInOutResp,
   EnhanceConfig,
@@ -68,6 +72,7 @@ import {
   ModifyStreamLinkEventRequest,
   OcrWordsConfigureInfo,
   DescribeStreamLinkEventRequest,
+  DescribeAsrHotwordsRequest,
   MediaTranscodeItem,
   DiagnoseResult,
   RawWatermarkParameter,
@@ -99,10 +104,11 @@ import {
   DeletePersonSampleRequest,
   DescribeStreamLinkFlowsResponse,
   AiRecognitionTaskAsrWordsSegmentItem,
-  AiContentReviewResult,
+  DescribeStreamLinkFlowRealtimeStatusResponse,
   ParseLiveStreamProcessNotificationResponse,
   DescribeVideoDatabaseEntryTaskDetailRequest,
   AiRecognitionTaskInput,
+  AiAnalysisTaskFrameTagResult,
   AudioTemplateInfo,
   ExecuteFunctionResponse,
   CoverConfigureInfo,
@@ -135,6 +141,7 @@ import {
   CreateScheduleResponse,
   TagConfigureInfo,
   AiRecognitionTaskOcrWordsResultOutput,
+  ModifyLiveRecordTemplateResponse,
   AiParagraphInfo,
   AudioSeparateConfig,
   DeleteAIRecognitionTemplateRequest,
@@ -148,6 +155,7 @@ import {
   AiAnalysisTaskClassificationOutput,
   SRTAddressDestination,
   DescribeFlowId,
+  DescribeSmartSubtitleTemplatesRequest,
   FlowRealtimeStatusItem,
   DisassociateSecurityGroupResponse,
   AiRecognitionTaskOcrFullTextResultOutput,
@@ -209,7 +217,7 @@ import {
   ProhibitedAsrReviewTemplateInfoForUpdate,
   DisableScheduleResponse,
   ModifyAnimatedGraphicsTemplateResponse,
-  AiAnalysisTaskFrameTagResult,
+  DeleteSmartSubtitleTemplateRequest,
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
   EditMediaOutputConfig,
@@ -225,6 +233,7 @@ import {
   CreateStreamLinkOutputInfoResponse,
   S3InputInfo,
   MediaProcessTaskImageSpriteResult,
+  DescribeAsrHotwordsListRequest,
   AiAnalysisTaskDescriptionOutput,
   DescribeStreamLinkEventAttachedFlowsRequest,
   RTPAddressDestination,
@@ -278,6 +287,7 @@ import {
   BatchStopStreamLinkFlowRequest,
   RTMPAddressDestination,
   AiAnalysisTaskTagOutput,
+  CreateAsrHotwordsResponse,
   AiAnalysisTaskHighlightOutput,
   QualityControlItemConfig,
   CreateStreamLinkEventResponse,
@@ -297,6 +307,7 @@ import {
   DescribeStreamLinkRegionsResponse,
   DescribeVideoSearchTaskDetailResponse,
   AiAnalysisTaskSegmentResult,
+  RawSmartSubtitleParameter,
   AiRecognitionTaskAsrFullTextResultInput,
   DescribeStreamLinkFlowStatisticsResponse,
   AiRecognitionTaskAsrWordsResultOutput,
@@ -320,6 +331,7 @@ import {
   DescribeGroupAttachFlowsByIdRequest,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
+  ScheduleSmartSubtitleTaskResult,
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
   DescribeStreamLinkActivateStateResponse,
@@ -331,7 +343,7 @@ import {
   HLSPullSourceAddress,
   LiveStreamAiRecognitionResultInfo,
   ActivityPara,
-  TerrorismOcrReviewTemplateInfoForUpdate,
+  ModifyAsrHotwordsResponse,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   ModifyImageSpriteTemplateResponse,
   CreateInputRISTSettings,
@@ -369,12 +381,15 @@ import {
   DescribeInput,
   DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
+  ModifyAsrHotwordsRequest,
   BatchStartStreamLinkFlowResponse,
   DisassociateSecurityGroupRequest,
   ProhibitedConfigureInfo,
   DescribeStreamLinkFlowSRTStatisticsResponse,
   AiReviewTerrorismOcrTaskOutput,
+  DescribeAsrHotwordsListResponse,
   AiAnalysisResult,
+  SmartSubtitleTaskResultInput,
   ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,
   FlowVideo,
@@ -383,6 +398,7 @@ import {
   DeleteSampleSnapshotTemplateResponse,
   AiAnalysisTaskTagInput,
   AiAnalysisTaskDescriptionResult,
+  DeleteSmartSubtitleTemplateResponse,
   ResetWorkflowRequest,
   AiRecognitionTaskObjectResultInput,
   AiReviewTaskTerrorismResult,
@@ -402,15 +418,18 @@ import {
   DeleteScheduleRequest,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
+  TerrorismOcrReviewTemplateInfoForUpdate,
   DescribeTranscodeTemplatesResponse,
   ImageSpriteTemplate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
+  DeleteAsrHotwordsResponse,
+  SmartSubtitleTaskAsrFullTextSegmentItem,
   QualityControlItem,
   SpekeDrm,
   DeleteStreamLinkFlowResponse,
   LiveStreamAsrFullTextRecognitionResult,
   AiReviewPornOcrTaskOutput,
-  CreateSampleSnapshotTemplateResponse,
+  CreateAsrHotwordsRequest,
   AiAnalysisTaskHighlightInput,
   ProhibitedAsrReviewTemplateInfo,
   WithdrawsWatermarkResponse,
@@ -421,6 +440,7 @@ import {
   ActionConfigInfo,
   MediaAiAnalysisTagItem,
   TranscodeTemplate,
+  TranslateConfigureInfo,
   DescribeStreamLinkFlowMediaStatisticsResponse,
   PornOcrReviewTemplateInfo,
   CreateOutputInfoRTPSettings,
@@ -431,11 +451,12 @@ import {
   CreateVideoDatabaseEntryTaskResponse,
   AiReviewProhibitedAsrTaskInput,
   DescribeMediaMetaDataResponse,
+  SmartSubtitleTaskAsrFullTextResultOutput,
   TerrorismOcrReviewTemplateInfo,
   SharpEnhanceConfig,
   ImageEncodeConfig,
   AiReviewTaskPornResult,
-  DescribeStreamLinkFlowRealtimeStatusRequest,
+  AiRecognitionTaskObjectResultOutput,
   AiAnalysisTaskDelLogoOutput,
   AiReviewProhibitedAsrTaskOutput,
   LiveStreamFaceRecognitionResult,
@@ -450,12 +471,15 @@ import {
   AdaptiveStreamTemplate,
   DescribeStreamLinkEventsRequest,
   TranscodeTaskInput,
+  SmartSubtitleTemplateItem,
   CreateStreamLinkSecurityGroupResponse,
   ModifyAIRecognitionTemplateRequest,
   ParseNotificationResponse,
   ComposeImageOperation,
+  CreateSampleSnapshotTemplateResponse,
   CreateLiveRecordTemplateResponse,
   ActivityResult,
+  DescribeAsrHotwordsResponse,
   DescribeInputHLSPullSettings,
   ResetWorkflowResponse,
   DescribeStreamLinkFlowsRequest,
@@ -463,6 +487,7 @@ import {
   CreateAIAnalysisTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   OutputRISTSourceAddressResp,
+  ModifySmartSubtitleTemplateResponse,
   UserDefineConfigureInfoForUpdate,
   S3OutputStorage,
   CosFileUploadTrigger,
@@ -525,7 +550,7 @@ import {
   DescribeStreamLinkRegionsRequest,
   ModifyStreamLinkInputResponse,
   HeadTailParameter,
-  AiAnalysisTaskDescriptionInput,
+  DescribeStreamLinkFlowMediaStatisticsRequest,
   DescribeTaskDetailResponse,
   LiveStreamAiRecognitionResultItem,
   DeleteImageSpriteTemplateRequest,
@@ -546,7 +571,9 @@ import {
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
   AiRecognitionTaskTransTextResultOutput,
+  SmartSubtitlesResult,
   ModifySnapshotByTimeOffsetTemplateRequest,
+  AsrHotWordsConfigure,
   LiveStreamAiReviewResultItem,
   DescribeVideoSearchTaskDetailRequest,
   CreateInputRTPSettings,
@@ -576,7 +603,8 @@ import {
   DescribeWordSamplesRequest,
   AddOnSubtitle,
   AwsSQS,
-  WordResult,
+  DeleteAsrHotwordsRequest,
+  CreateSmartSubtitleTemplateRequest,
   LiveStreamProcessTask,
   QualityControlData,
   DescribeOutputRISTSettings,
@@ -585,14 +613,14 @@ import {
   ComposeImageItem,
   TaskSimpleInfo,
   MediaContentReviewSegmentItem,
-  DescribeStreamLinkFlowRealtimeStatusResponse,
+  AiContentReviewResult,
   LiveActivityResult,
   TerrorismImgReviewTemplateInfo,
-  TranslateConfigureInfo,
+  AsrHotwordsSet,
   AiAnalysisTaskHeadTailInput,
   FlowMediaAudio,
   DescribeTranscodeTemplatesRequest,
-  ModifyLiveRecordTemplateResponse,
+  DescribeSmartSubtitleTemplatesResponse,
   DescribeStreamLinkSecurityGroupsResponse,
   BatchDeleteStreamLinkFlowResponse,
   SchedulesInfo,
@@ -619,7 +647,7 @@ import {
   ModifyInput,
   VideoDenoiseConfig,
   AiRecognitionTaskObjectResult,
-  AiRecognitionTaskObjectResultOutput,
+  DescribeStreamLinkFlowRealtimeStatusRequest,
   DescribeAIAnalysisTemplatesResponse,
   CreateSnapshotByTimeOffsetTemplateRequest,
   ParseLiveStreamProcessNotificationRequest,
@@ -628,10 +656,12 @@ import {
   CreateSampleSnapshotTemplateRequest,
   WorkflowTask,
   FlowMediaVideo,
+  SmartSubtitleTaskAsrFullTextResult,
   AiReviewTaskPornAsrResult,
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
   ComposeAudioStream,
+  SmartSubtitleTaskTransTextSegmentItem,
   FaceConfigureInfo,
   AiRecognitionTaskFaceResultOutput,
   PornImgReviewTemplateInfoForUpdate,
@@ -642,6 +672,7 @@ import {
   OcrFullTextConfigureInfo,
   ModifyStreamLinkSecurityGroupResponse,
   ModifyLiveRecordTemplateRequest,
+  ModifySmartSubtitleTemplateRequest,
   AiAnalysisTaskInput,
   DeleteAnimatedGraphicsTemplateRequest,
   DeleteSnapshotByTimeOffsetTemplateRequest,
@@ -656,6 +687,7 @@ import {
   QualityControlTemplate,
   TerrorismConfigureInfo,
   PoliticalAsrReviewTemplateInfo,
+  SmartSubtitlesTaskInput,
   CreateAnimatedGraphicsTemplateResponse,
   TranslateConfigureInfoForUpdate,
   SampleSnapshotTemplate,
@@ -664,11 +696,12 @@ import {
   MediaImageSpriteItem,
   AudioEnhanceConfig,
   AiRecognitionTaskFaceResultItem,
-  DescribeStreamLinkFlowMediaStatisticsRequest,
+  AiAnalysisTaskDescriptionInput,
   AiAnalysisTaskCoverInput,
   RegionInfo,
   CreateStreamLinkInputResponse,
   ComposeAudioOperation,
+  CreateSmartSubtitleTemplateResponse,
   LiveStreamAiAnalysisResultItem,
   AiRecognitionTaskTransTextResult,
   DescribeAIRecognitionTemplatesRequest,
@@ -698,6 +731,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询智能字幕热词库
+   */
+  async DescribeAsrHotwords(
+    req: DescribeAsrHotwordsRequest,
+    cb?: (error: string, rep: DescribeAsrHotwordsResponse) => void
+  ): Promise<DescribeAsrHotwordsResponse> {
+    return this.request("DescribeAsrHotwords", req, cb)
+  }
+
+  /**
    * 创建用户自定义指定时间点截图模板，数量上限：16。
    */
   async CreateSnapshotByTimeOffsetTemplate(
@@ -715,6 +758,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkFlowRealtimeStatusResponse) => void
   ): Promise<DescribeStreamLinkFlowRealtimeStatusResponse> {
     return this.request("DescribeStreamLinkFlowRealtimeStatus", req, cb)
+  }
+
+  /**
+   * 创建用户自定义转动图模板，数量上限：16。
+   */
+  async CreateAnimatedGraphicsTemplate(
+    req: CreateAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
+  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
+    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 修改用户自定义智能字幕模板。
+   */
+  async ModifySmartSubtitleTemplate(
+    req: ModifySmartSubtitleTemplateRequest,
+    cb?: (error: string, rep: ModifySmartSubtitleTemplateResponse) => void
+  ): Promise<ModifySmartSubtitleTemplateResponse> {
+    return this.request("ModifySmartSubtitleTemplate", req, cb)
   }
 
   /**
@@ -780,6 +843,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户自定义智能字幕模板。
+   */
+  async DeleteSmartSubtitleTemplate(
+    req: DeleteSmartSubtitleTemplateRequest,
+    cb?: (error: string, rep: DeleteSmartSubtitleTemplateResponse) => void
+  ): Promise<DeleteSmartSubtitleTemplateResponse> {
+    return this.request("DeleteSmartSubtitleTemplate", req, cb)
+  }
+
+  /**
      * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
 该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 中的解析实现事件通知的解析。
      */
@@ -832,6 +905,7 @@ export class Client extends AbstractClient {
 8. 智能内容分析（标签、分类、封面、按帧标签、拆条、集锦、片头片尾、游戏打点）；
 9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）。
 10. 媒体质检（直播流格式诊断、音画内容检测（抖动、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等）、无参考打分）
+11. 智能字幕（语音全文、语音热词、语音翻译）
      */
   async ProcessMedia(
     req: ProcessMediaRequest,
@@ -924,13 +998,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义指定时间点截图模板。
+   * 删除智能字幕热词库
    */
-  async DeleteSnapshotByTimeOffsetTemplate(
-    req: DeleteSnapshotByTimeOffsetTemplateRequest,
-    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
-  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
-    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
+  async DeleteAsrHotwords(
+    req: DeleteAsrHotwordsRequest,
+    cb?: (error: string, rep: DeleteAsrHotwordsResponse) => void
+  ): Promise<DeleteAsrHotwordsResponse> {
+    return this.request("DeleteAsrHotwords", req, cb)
   }
 
   /**
@@ -951,6 +1025,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeMediaForZhiXueResponse) => void
   ): Promise<RecognizeMediaForZhiXueResponse> {
     return this.request("RecognizeMediaForZhiXue", req, cb)
+  }
+
+  /**
+   * 获取热词库列表
+   */
+  async DescribeAsrHotwordsList(
+    req: DescribeAsrHotwordsListRequest,
+    cb?: (error: string, rep: DescribeAsrHotwordsListResponse) => void
+  ): Promise<DescribeAsrHotwordsListResponse> {
+    return this.request("DescribeAsrHotwordsList", req, cb)
   }
 
   /**
@@ -1240,6 +1324,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建自定义智能字幕模板
+   */
+  async CreateSmartSubtitleTemplate(
+    req: CreateSmartSubtitleTemplateRequest,
+    cb?: (error: string, rep: CreateSmartSubtitleTemplateResponse) => void
+  ): Promise<CreateSmartSubtitleTemplateResponse> {
+    return this.request("CreateSmartSubtitleTemplate", req, cb)
+  }
+
+  /**
    * 查询媒体传输所有地区。
    */
   async DescribeStreamLinkRegions(
@@ -1340,6 +1434,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据智能字幕 模板唯一标识，获取智能字幕模板详情列表。返回结果包含符合条件的所有用户自定义智能字幕模板及系统预置智能字幕模板
+   */
+  async DescribeSmartSubtitleTemplates(
+    req: DescribeSmartSubtitleTemplatesRequest,
+    cb?: (error: string, rep: DescribeSmartSubtitleTemplatesResponse) => void
+  ): Promise<DescribeSmartSubtitleTemplatesResponse> {
+    return this.request("DescribeSmartSubtitleTemplates", req, cb)
+  }
+
+  /**
    * 修改媒体传输流的输出配置。
    */
   async ModifyStreamLinkOutputInfo(
@@ -1387,6 +1491,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkEventsResponse) => void
   ): Promise<DescribeStreamLinkEventsResponse> {
     return this.request("DescribeStreamLinkEvents", req, cb)
+  }
+
+  /**
+   * 智能字幕更新热词库接口
+   */
+  async ModifyAsrHotwords(
+    req: ModifyAsrHotwordsRequest,
+    cb?: (error: string, rep: ModifyAsrHotwordsResponse) => void
+  ): Promise<ModifyAsrHotwordsResponse> {
+    return this.request("ModifyAsrHotwords", req, cb)
   }
 
   /**
@@ -1723,13 +1837,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义转动图模板，数量上限：16。
+   * 删除用户自定义指定时间点截图模板。
    */
-  async CreateAnimatedGraphicsTemplate(
-    req: CreateAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
-  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
-    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
+  async DeleteSnapshotByTimeOffsetTemplate(
+    req: DeleteSnapshotByTimeOffsetTemplateRequest,
+    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
+  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
+    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
@@ -1810,6 +1924,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkFlowMediaStatisticsResponse) => void
   ): Promise<DescribeStreamLinkFlowMediaStatisticsResponse> {
     return this.request("DescribeStreamLinkFlowMediaStatistics", req, cb)
+  }
+
+  /**
+   * 智能字幕新建热词库接口
+   */
+  async CreateAsrHotwords(
+    req: CreateAsrHotwordsRequest,
+    cb?: (error: string, rep: CreateAsrHotwordsResponse) => void
+  ): Promise<CreateAsrHotwordsResponse> {
+    return this.request("CreateAsrHotwords", req, cb)
   }
 
   /**

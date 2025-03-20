@@ -6132,6 +6132,10 @@ export interface DisasterRecoverGroup {
    */
   CreateTime?: string
   /**
+   * 置放群组亲和度
+   */
+  Affinity?: number
+  /**
    * 置放群组关联的标签列表。
    */
   Tags?: Array<Tag>

@@ -445,7 +445,6 @@ export interface ClusterActivity {
 export interface CreateClusterResponse {
   /**
    * 集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
@@ -757,9 +756,8 @@ export interface BindAutoScalingGroupResponse {
 export interface ManagerNodeOverview {
   /**
    * 管控节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: string
+  NodeId?: string
 }
 
 /**
@@ -812,9 +810,8 @@ export interface DeleteClusterRequest {
 export interface ComputeNodeOverview {
   /**
    * 计算节点ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: string
+  NodeId?: string
 }
 
 /**

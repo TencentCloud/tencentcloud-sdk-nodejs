@@ -423,7 +423,6 @@ export interface MonitorMetric {
   Unit?: string
   /**
    * 指标值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<number | bigint>
 }
@@ -476,7 +475,6 @@ export interface MonitorFloatMetric {
   Unit?: string
   /**
    * 指标值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<number>
 }
@@ -765,17 +763,14 @@ export interface DiagHistoryEventItem {
   DiagItem?: string
   /**
    * 实例 ID 。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 保留字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metric?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
 }
@@ -1235,20 +1230,19 @@ export interface ScoreDetail {
   /**
    * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
    */
-  IssueType: string
+  IssueType?: string
   /**
    * 扣分总分。
    */
-  ScoreLost: number
+  ScoreLost?: number
   /**
    * 扣分总分上限。
    */
-  ScoreLostMax: number
+  ScoreLostMax?: number
   /**
    * 扣分项列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<ScoreItem>
+  Items?: Array<ScoreItem>
 }
 
 /**
@@ -1442,49 +1436,43 @@ export interface SecLogExportTaskInfo {
   /**
    * 异步任务Id。
    */
-  AsyncRequestId: number
+  AsyncRequestId?: number
   /**
    * 任务开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 任务结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 任务创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 任务状态。
    */
-  Status: string
+  Status?: string
   /**
    * 任务执行进度。
    */
-  Progress: number
+  Progress?: number
   /**
    * 导出日志开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogStartTime: string
+  LogStartTime?: string
   /**
    * 导出日志结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogEndTime: string
+  LogEndTime?: string
   /**
    * 日志文件总大小，单位KB。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalSize: number
+  TotalSize?: number
   /**
    * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DangerLevels: Array<number | bigint>
+  DangerLevels?: Array<number | bigint>
 }
 
 /**
@@ -1867,7 +1855,6 @@ export interface InstanceConfs {
   OverviewDisplay?: string
   /**
    * redis大key分析的自定义分割符，仅redis使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyDelimiters?: Array<string>
 }
@@ -2026,22 +2013,18 @@ export interface CreateSecurityAuditLogExportTaskResponse {
 export interface UserProfile {
   /**
    * 配置的id。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileId?: string
   /**
    * 配置类型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileType?: string
   /**
    * 配置级别，"User"或"Instance"。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileLevel?: string
   /**
    * 配置名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileName?: string
   /**
@@ -2084,7 +2067,6 @@ export interface SchemaSpaceData {
   TableRows?: number
   /**
    * 库中所有表对应的独立物理文件大小加和（MB）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PhysicalFileSize?: number
 }

@@ -73,7 +73,6 @@ import {
   DescribeAssetImageScanStatusResponse,
   DescribeVirusAutoIsolateSampleDetailResponse,
   DescribeVulDefenceEventTendencyRequest,
-  DescribeAbnormalProcessRulesExportRequest,
   DescribePurchaseStateInfoResponse,
   SoftQuotaDayInfo,
   DescribeVulDefencePluginResponse,
@@ -81,6 +80,7 @@ import {
   RunTimeFilters,
   DescribeVirusDetailRequest,
   DeleteEscapeWhiteListRequest,
+  DescribeRaspRulesRequest,
   DescribeClusterDetailRequest,
   ModifyK8sApiAbnormalRuleInfoRequest,
   UpdateAndPublishNetworkFirewallPolicyDetailResponse,
@@ -105,6 +105,7 @@ import {
   ComplianceK8SDetailInfo,
   AccessControlEventDescription,
   DescribeAccessControlEventsResponse,
+  DeleteRaspRulesResponse,
   SecLogDeliveryKafkaSettingInfo,
   DescribeRiskSyscallWhiteListsResponse,
   CreateNetworkFirewallPolicyDiscoverResponse,
@@ -151,6 +152,7 @@ import {
   ModifyReverseShellStatusRequest,
   DescribePublicKeyResponse,
   DescribeRiskDnsListRequest,
+  ModifyRaspRulesRequest,
   SetCheckModeRequest,
   DescribeAssetImageRiskListExportRequest,
   DescribeAssetSuperNodeListRequest,
@@ -196,6 +198,7 @@ import {
   ClsLogsetInfo,
   ModifyEscapeEventStatusResponse,
   CheckRepeatAssetImageRegistryResponse,
+  RiskSyscallWhiteListInfo,
   VulDefenceEvent,
   DescribeAccessControlEventsExportRequest,
   ExportVirusListResponse,
@@ -213,6 +216,7 @@ import {
   CreateDefenceVulExportJobResponse,
   StopVirusScanTaskRequest,
   AbnormalProcessRuleInfo,
+  DescribeRaspRuleVulsResponse,
   ScanComplianceAssetsByPolicyItemResponse,
   CreateRiskDnsEventExportJobRequest,
   ComplianceWhitelistItem,
@@ -305,7 +309,6 @@ import {
   DeleteIgnoreVulResponse,
   ModifyAssetImageRegistryScanStopOneKeyRequest,
   DeleteSearchTemplateRequest,
-  SwitchImageAutoAuthorizedRuleResponse,
   DescribeExportJobResultRequest,
   DescribeNetworkFirewallNamespaceLabelListRequest,
   DescribeK8sApiAbnormalEventListRequest,
@@ -333,6 +336,7 @@ import {
   DescribeVirusSummaryResponse,
   DescribeAssetDBServiceListRequest,
   UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
+  ModifyRaspRulesResponse,
   DescribeProVersionInfoResponse,
   AddEditAbnormalProcessRuleResponse,
   ScanComplianceScanFailedAssetsRequest,
@@ -344,8 +348,9 @@ import {
   AddNetworkFirewallPolicyYamlDetailRequest,
   DescribeVulLevelImageSummaryResponse,
   ScanComplianceAssetsResponse,
-  DescribeClusterNodesRequest,
+  DescribeCompliancePeriodTaskListRequest,
   CreateAssetImageVirusExportJobResponse,
+  RaspRuleVul,
   DescribeIndexListRequest,
   CreateWebVulExportJobResponse,
   DescribeReverseShellWhiteListDetailResponse,
@@ -367,6 +372,7 @@ import {
   K8sApiAbnormalRuleScopeInfo,
   ClusterNodeInfo,
   StopVulScanTaskRequest,
+  RaspRule,
   DescribeNetworkFirewallNamespaceListResponse,
   ImageRepoInfo,
   CreateAssetImageRegistryScanTaskResponse,
@@ -390,7 +396,6 @@ import {
   DescribeAssetImageRiskListExportResponse,
   ModifySecLogCleanSettingInfoRequest,
   DescribeAccessControlEventsRequest,
-  DescribeCompliancePeriodTaskListRequest,
   DescribeAccessControlRuleDetailRequest,
   ModifyVirusScanTimeoutSettingRequest,
   CreateProcessEventsExportJobResponse,
@@ -419,7 +424,6 @@ import {
   DescribeAffectedNodeListResponse,
   DeleteK8sApiAbnormalRuleRequest,
   ModifyVirusFileStatusResponse,
-  DescribeAbnormalProcessRulesExportResponse,
   DescribeSuperNodePodListRequest,
   DescribeAbnormalProcessEventTendencyRequest,
   DescribeEscapeEventDetailResponse,
@@ -498,6 +502,7 @@ import {
   DescribeNetworkFirewallPodLabelsListRequest,
   CreateVirusScanTaskResponse,
   DescribeNetworkFirewallAuditRecordRequest,
+  VasInfoResourceDetail,
   DescribeAssetProcessListRequest,
   DescribeAssetProcessListResponse,
   SecTendencyEventInfo,
@@ -507,14 +512,13 @@ import {
   DescribeAssetImageRegistryDetailRequest,
   CreateAssetImageRegistryScanTaskRequest,
   DescribeAssetClusterListRequest,
-  DescribeAssetImageListExportResponse,
+  StopVulScanTaskResponse,
   WarningRule,
   VulAffectedContainerInfo,
   DescribeLogStorageStatisticResponse,
   CreateSearchTemplateResponse,
   DescribeAssetContainerDetailResponse,
   DescribeVulDefenceSettingResponse,
-  DescribeNetworkFirewallPolicyYamlDetailResponse,
   DescribeImageComponentListRequest,
   AbnormalProcessChildRuleInfo,
   DescribeNetworkFirewallPolicyListResponse,
@@ -561,20 +565,18 @@ import {
   CreateEmergencyVulExportJobRequest,
   K8sApiAbnormalRuleListItem,
   DescribeVirusScanTaskStatusResponse,
-  DescribeEscapeEventsExportResponse,
   ComplianceImageDetailInfo,
   DescribeVulScanLocalImageListResponse,
   DescribeComplianceWhitelistItemListRequest,
   DescribeAccessControlDetailRequest,
   ClusterRiskItem,
   DescribeVirusListResponse,
-  DescribeAbnormalProcessEventsExportRequest,
+  ProcessDetailBaseInfo,
   DescribeVulSummaryResponse,
   DescribeAssetComponentListRequest,
   DescribeEmergencyVulListRequest,
   DeleteReverseShellEventsResponse,
   DescribeAbnormalProcessDetailResponse,
-  DescribeAssetImageListExportRequest,
   ModifyAssetImageRegistryScanStopOneKeyResponse,
   DescribeImageRiskSummaryResponse,
   VulDefenceEventDetail,
@@ -595,6 +597,7 @@ import {
   DescribeAssetWebServiceListResponse,
   VulDetailInfo,
   DescribeVulLevelSummaryResponse,
+  DescribeRaspRuleVulsRequest,
   AddNetworkFirewallPolicyDetailRequest,
   DescribeComplianceTaskPolicyItemSummaryListRequest,
   CompliancePolicyItemSummary,
@@ -624,7 +627,6 @@ import {
   DescribeComplianceAssetPolicyItemListResponse,
   ComplianceFilters,
   ImageVirusInfo,
-  StopVulScanTaskResponse,
   ModifyEscapeWhiteListResponse,
   DescribeUserPodListResponse,
   ImagesInfo,
@@ -718,18 +720,16 @@ import {
   DeleteRiskSyscallWhiteListsResponse,
   DescribeAssetImageVirusListRequest,
   DescribeAssetImageScanSettingResponse,
-  DescribeReverseShellDetailResponse,
+  DescribeClusterNodesRequest,
   DescribeClusterSummaryRequest,
   AddIgnoreVulRequest,
   CreateEscapeWhiteListExportJobResponse,
-  DescribeAccessControlRulesExportResponse,
   ModifyAbnormalProcessStatusResponse,
-  DescribeAbnormalProcessEventsExportResponse,
   ExportJobInfo,
   DescribeContainerAssetSummaryResponse,
   CreateAssetImageScanTaskRequest,
   CreateSearchTemplateRequest,
-  DescribeEscapeEventsExportRequest,
+  SwitchImageAutoAuthorizedRuleResponse,
   AddEditAbnormalProcessRuleRequest,
   CheckRepeatAssetImageRegistryRequest,
   AffectedNodeItem,
@@ -775,7 +775,7 @@ import {
   AddAndPublishNetworkFirewallPolicyYamlDetailRequest,
   CreateComplianceTaskRequest,
   ImageRegistryInfo,
-  DescribeAccessControlRulesExportRequest,
+  DescribeNetworkFirewallPolicyYamlDetailResponse,
   OpenTcssTrialRequest,
   CreateEscapeEventsExportJobResponse,
   RiskSyscallEventDescription,
@@ -817,7 +817,7 @@ import {
   ModifyAssetImageRegistryScanStopRequest,
   DeleteNetworkFirewallPolicyDetailResponse,
   DescribeK8sApiAbnormalTendencyRequest,
-  RiskSyscallWhiteListInfo,
+  DescribeReverseShellDetailResponse,
   DescribeNewestVulResponse,
   DescribeCompliancePolicyItemAffectedAssetListResponse,
   DescribeComplianceAssetPolicyItemListRequest,
@@ -825,7 +825,7 @@ import {
   ImageScanInquireInfo,
   SearchTemplate,
   DescribeContainerSecEventSummaryResponse,
-  ProcessDetailBaseInfo,
+  DeleteRaspRulesRequest,
   DescribeAssetHostListRequest,
   CreateVulDefenceHostExportJobRequest,
   DescribeImageAutoAuthorizedLogListRequest,
@@ -842,6 +842,7 @@ import {
   AddEditReverseShellWhiteListRequest,
   VulIgnoreRegistryImage,
   DescribeVirusTaskListRequest,
+  DescribeRaspRulesResponse,
   CreateRiskDnsEventExportJobResponse,
   DescribeAssetImageRegistryVirusListExportRequest,
   DescribeWebVulListResponse,
@@ -892,25 +893,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新安全日志-日志投递cls配置
+   * 容器网络更新Yaml网络策略并发布任务
    */
-  async ModifySecLogDeliveryClsSetting(
-    req: ModifySecLogDeliveryClsSettingRequest,
-    cb?: (error: string, rep: ModifySecLogDeliveryClsSettingResponse) => void
-  ): Promise<ModifySecLogDeliveryClsSettingResponse> {
-    return this.request("ModifySecLogDeliveryClsSetting", req, cb)
-  }
-
-  /**
-     * 接口已废弃
-
-查询运行时异常进程事件列表信息导出
-     */
-  async DescribeAbnormalProcessEventsExport(
-    req: DescribeAbnormalProcessEventsExportRequest,
-    cb?: (error: string, rep: DescribeAbnormalProcessEventsExportResponse) => void
-  ): Promise<DescribeAbnormalProcessEventsExportResponse> {
-    return this.request("DescribeAbnormalProcessEventsExport", req, cb)
+  async UpdateAndPublishNetworkFirewallPolicyYamlDetail(
+    req: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
+    cb?: (error: string, rep: UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse) => void
+  ): Promise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse> {
+    return this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, cb)
   }
 
   /**
@@ -1014,15 +1003,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃
-
-查询运行时异常进程策略列表信息导出
-     */
-  async DescribeAbnormalProcessRulesExport(
-    req: DescribeAbnormalProcessRulesExportRequest,
-    cb?: (error: string, rep: DescribeAbnormalProcessRulesExportResponse) => void
-  ): Promise<DescribeAbnormalProcessRulesExportResponse> {
-    return this.request("DescribeAbnormalProcessRulesExport", req, cb)
+   * 运行时高危系统调用列表导出
+   */
+  async DescribeRiskSyscallEventsExport(
+    req: DescribeRiskSyscallEventsExportRequest,
+    cb?: (error: string, rep: DescribeRiskSyscallEventsExportResponse) => void
+  ): Promise<DescribeRiskSyscallEventsExportResponse> {
+    return this.request("DescribeRiskSyscallEventsExport", req, cb)
   }
 
   /**
@@ -1457,18 +1444,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃
-
-DescribeEscapeEventsExport  查询容器逃逸事件列表导出
-     */
-  async DescribeEscapeEventsExport(
-    req: DescribeEscapeEventsExportRequest,
-    cb?: (error: string, rep: DescribeEscapeEventsExportResponse) => void
-  ): Promise<DescribeEscapeEventsExportResponse> {
-    return this.request("DescribeEscapeEventsExport", req, cb)
-  }
-
-  /**
    * 容器网络创建检查Yaml网络策略任务
    */
   async CheckNetworkFirewallPolicyYaml(
@@ -1496,18 +1471,6 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
     cb?: (error: string, rep: DescribeNetworkFirewallNamespaceListResponse) => void
   ): Promise<DescribeNetworkFirewallNamespaceListResponse> {
     return this.request("DescribeNetworkFirewallNamespaceList", req, cb)
-  }
-
-  /**
-     * 接口已废弃
-
-容器安全搜索查询镜像列表导出
-     */
-  async DescribeAssetImageListExport(
-    req: DescribeAssetImageListExportRequest,
-    cb?: (error: string, rep: DescribeAssetImageListExportResponse) => void
-  ): Promise<DescribeAssetImageListExportResponse> {
-    return this.request("DescribeAssetImageListExport", req, cb)
   }
 
   /**
@@ -1671,13 +1634,13 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
-   * 运行时高危系统调用列表导出
+   * 更新安全日志-日志投递cls配置
    */
-  async DescribeRiskSyscallEventsExport(
-    req: DescribeRiskSyscallEventsExportRequest,
-    cb?: (error: string, rep: DescribeRiskSyscallEventsExportResponse) => void
-  ): Promise<DescribeRiskSyscallEventsExportResponse> {
-    return this.request("DescribeRiskSyscallEventsExport", req, cb)
+  async ModifySecLogDeliveryClsSetting(
+    req: ModifySecLogDeliveryClsSettingRequest,
+    cb?: (error: string, rep: ModifySecLogDeliveryClsSettingResponse) => void
+  ): Promise<ModifySecLogDeliveryClsSettingResponse> {
+    return this.request("ModifySecLogDeliveryClsSetting", req, cb)
   }
 
   /**
@@ -1932,6 +1895,16 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
+   * 运行时查询文件查杀设置
+   */
+  async DescribeVirusScanSetting(
+    req?: DescribeVirusScanSettingRequest,
+    cb?: (error: string, rep: DescribeVirusScanSettingResponse) => void
+  ): Promise<DescribeVirusScanSettingResponse> {
+    return this.request("DescribeVirusScanSetting", req, cb)
+  }
+
+  /**
    * 查询超级节点列表
    */
   async DescribeAssetSuperNodeList(
@@ -2022,13 +1995,13 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
-   * 查询漏洞镜像统计
+   * 查询支持防御的漏洞列表
    */
-  async DescribeVulImageSummary(
-    req?: DescribeVulImageSummaryRequest,
-    cb?: (error: string, rep: DescribeVulImageSummaryResponse) => void
-  ): Promise<DescribeVulImageSummaryResponse> {
-    return this.request("DescribeVulImageSummary", req, cb)
+  async DescribeRaspRules(
+    req: DescribeRaspRulesRequest,
+    cb?: (error: string, rep: DescribeRaspRulesResponse) => void
+  ): Promise<DescribeRaspRulesResponse> {
+    return this.request("DescribeRaspRules", req, cb)
   }
 
   /**
@@ -2279,6 +2252,16 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
     cb?: (error: string, rep: CreateImageExportJobResponse) => void
   ): Promise<CreateImageExportJobResponse> {
     return this.request("CreateImageExportJob", req, cb)
+  }
+
+  /**
+   * 删除漏洞防御白名单
+   */
+  async DeleteRaspRules(
+    req: DeleteRaspRulesRequest,
+    cb?: (error: string, rep: DeleteRaspRulesResponse) => void
+  ): Promise<DeleteRaspRulesResponse> {
+    return this.request("DeleteRaspRules", req, cb)
   }
 
   /**
@@ -2690,16 +2673,6 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
     cb?: (error: string, rep: DescribeAccessControlRuleDetailResponse) => void
   ): Promise<DescribeAccessControlRuleDetailResponse> {
     return this.request("DescribeAccessControlRuleDetail", req, cb)
-  }
-
-  /**
-   * 容器网络更新Yaml网络策略并发布任务
-   */
-  async UpdateAndPublishNetworkFirewallPolicyYamlDetail(
-    req: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
-    cb?: (error: string, rep: UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse) => void
-  ): Promise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse> {
-    return this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, cb)
   }
 
   /**
@@ -3405,13 +3378,13 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
-   * 运行时查询文件查杀设置
+   * 获取漏洞防御白名单漏洞列表
    */
-  async DescribeVirusScanSetting(
-    req?: DescribeVirusScanSettingRequest,
-    cb?: (error: string, rep: DescribeVirusScanSettingResponse) => void
-  ): Promise<DescribeVirusScanSettingResponse> {
-    return this.request("DescribeVirusScanSetting", req, cb)
+  async DescribeRaspRuleVuls(
+    req: DescribeRaspRuleVulsRequest,
+    cb?: (error: string, rep: DescribeRaspRuleVulsResponse) => void
+  ): Promise<DescribeRaspRuleVulsResponse> {
+    return this.request("DescribeRaspRuleVuls", req, cb)
   }
 
   /**
@@ -3665,13 +3638,13 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
-   * 镜像仓库查询镜像漏洞列表
+   * 镜像仓库漏洞列表导出
    */
-  async DescribeAssetImageRegistryVulList(
-    req: DescribeAssetImageRegistryVulListRequest,
-    cb?: (error: string, rep: DescribeAssetImageRegistryVulListResponse) => void
-  ): Promise<DescribeAssetImageRegistryVulListResponse> {
-    return this.request("DescribeAssetImageRegistryVulList", req, cb)
+  async DescribeAssetImageRegistryVulListExport(
+    req: DescribeAssetImageRegistryVulListExportRequest,
+    cb?: (error: string, rep: DescribeAssetImageRegistryVulListExportResponse) => void
+  ): Promise<DescribeAssetImageRegistryVulListExportResponse> {
+    return this.request("DescribeAssetImageRegistryVulListExport", req, cb)
   }
 
   /**
@@ -4125,16 +4098,6 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
-   * 镜像仓库漏洞列表导出
-   */
-  async DescribeAssetImageRegistryVulListExport(
-    req: DescribeAssetImageRegistryVulListExportRequest,
-    cb?: (error: string, rep: DescribeAssetImageRegistryVulListExportResponse) => void
-  ): Promise<DescribeAssetImageRegistryVulListExportResponse> {
-    return this.request("DescribeAssetImageRegistryVulListExport", req, cb)
-  }
-
-  /**
    * 查询web应用漏洞列表
    */
   async DescribeWebVulList(
@@ -4155,15 +4118,13 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
-     * 接口已废弃
-
-查询运行时访问控制策略列表导出
-     */
-  async DescribeAccessControlRulesExport(
-    req: DescribeAccessControlRulesExportRequest,
-    cb?: (error: string, rep: DescribeAccessControlRulesExportResponse) => void
-  ): Promise<DescribeAccessControlRulesExportResponse> {
-    return this.request("DescribeAccessControlRulesExport", req, cb)
+   * 镜像仓库查询镜像漏洞列表
+   */
+  async DescribeAssetImageRegistryVulList(
+    req: DescribeAssetImageRegistryVulListRequest,
+    cb?: (error: string, rep: DescribeAssetImageRegistryVulListResponse) => void
+  ): Promise<DescribeAssetImageRegistryVulListResponse> {
+    return this.request("DescribeAssetImageRegistryVulList", req, cb)
   }
 
   /**
@@ -4217,6 +4178,16 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
   }
 
   /**
+   * 编辑或者创建java内存马白名单
+   */
+  async ModifyRaspRules(
+    req: ModifyRaspRulesRequest,
+    cb?: (error: string, rep: ModifyRaspRulesResponse) => void
+  ): Promise<ModifyRaspRulesResponse> {
+    return this.request("ModifyRaspRules", req, cb)
+  }
+
+  /**
    * 查询镜像详细信息
    */
   async DescribeAssetImageDetail(
@@ -4244,6 +4215,16 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
     cb?: (error: string, rep: CreateAccessControlsRuleExportJobResponse) => void
   ): Promise<CreateAccessControlsRuleExportJobResponse> {
     return this.request("CreateAccessControlsRuleExportJob", req, cb)
+  }
+
+  /**
+   * 查询漏洞镜像统计
+   */
+  async DescribeVulImageSummary(
+    req?: DescribeVulImageSummaryRequest,
+    cb?: (error: string, rep: DescribeVulImageSummaryResponse) => void
+  ): Promise<DescribeVulImageSummaryResponse> {
+    return this.request("DescribeVulImageSummary", req, cb)
   }
 
   /**

@@ -741,7 +741,6 @@ export interface RoleToken {
   RoleName?: string
   /**
    * 用于goosefs client/sdk等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Token?: string
 }

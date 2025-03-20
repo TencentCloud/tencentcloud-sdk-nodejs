@@ -1582,25 +1582,28 @@ export interface AssociateSecurityGroupsResponse {
 }
 
 /**
- * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段
+ * DescribeCPUExpandStrategyInfo返回参数结构体
  */
-export interface BackupConfig {
+export interface DescribeCPUExpandStrategyInfoResponse {
   /**
-   * 第二个从库复制方式，可能的返回值：async-异步，semisync-半同步
+   * 策略类型。可选值 auto、manual。如果返回为NULL说明尚未开通弹性扩容策略
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReplicationMode?: string
+  Type?: string
   /**
-   * 第二个从库可用区的正式名称，如ap-shanghai-1
+   * 手动扩容的 CPU 。Type为 manual 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone?: string
+  ExpandCpu?: number
   /**
-   * 第二个从库内网IP地址
+   * 自动扩容策略。Type 为 auto 时有效
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vip?: string
+  AutoStrategy?: AutoStrategy
   /**
-   * 第二个从库访问端口
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Vport?: number
+  RequestId?: string
 }
 
 /**
@@ -3265,6 +3268,16 @@ export interface DescribeSlowLogsResponse {
 }
 
 /**
+ * DescribeCPUExpandStrategyInfo请求参数结构体
+ */
+export interface DescribeCPUExpandStrategyInfoRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+}
+
+/**
  * 备机信息
  */
 export interface SlaveInfo {
@@ -4586,17 +4599,89 @@ export interface RollbackTimeRange {
 }
 
 /**
- * ModifyProtectMode请求参数结构体
+ * 审计日志详细信息
  */
-export interface ModifyProtectModeRequest {
+export interface AuditLog {
   /**
-   * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
+   * 影响行数。
    */
-  ProtectMode: number
+  AffectRows?: number
   /**
-   * 实例ID。
+   * 错误码。
    */
-  InstanceId: string
+  ErrCode?: number
+  /**
+   * SQL 类型。
+   */
+  SqlType?: string
+  /**
+   * 审计策略名称，逐步下线。
+   */
+  PolicyName?: string
+  /**
+   * 数据库名称。
+   */
+  DBName?: string
+  /**
+   * SQL 语句。
+   */
+  Sql?: string
+  /**
+   * 客户端地址。
+   */
+  Host?: string
+  /**
+   * 用户名。
+   */
+  User?: string
+  /**
+   * 执行时间，微秒。
+   */
+  ExecTime?: number
+  /**
+   * 时间。
+   */
+  Timestamp?: string
+  /**
+   * 返回行数。
+   */
+  SentRows?: number
+  /**
+   * 线程ID。
+   */
+  ThreadId?: number
+  /**
+   * 扫描行数。
+   */
+  CheckRows?: number
+  /**
+   * cpu执行时间，微秒。
+   */
+  CpuTime?: number
+  /**
+   * IO等待时间，微秒。
+   */
+  IoWaitTime?: number
+  /**
+   * 锁等待时间，微秒。
+   */
+  LockWaitTime?: number
+  /**
+   * 开始时间，与timestamp构成一个精确到纳秒的时间。
+   */
+  NsTime?: number
+  /**
+   * 事物持续时间，微秒。
+   */
+  TrxLivingTime?: number
+  /**
+   * 日志命中规则模板的基本信息
+   */
+  TemplateInfo?: Array<LogRuleTemplateInfo>
+  /**
+   *  事务ID
+   */
+  TrxId?: number
 }
 
 /**
@@ -9620,89 +9705,17 @@ export interface ModifyInstanceParamResponse {
 }
 
 /**
- * 审计日志详细信息
+ * ModifyProtectMode请求参数结构体
  */
-export interface AuditLog {
+export interface ModifyProtectModeRequest {
   /**
-   * 影响行数。
+   * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
    */
-  AffectRows?: number
+  ProtectMode: number
   /**
-   * 错误码。
+   * 实例ID。
    */
-  ErrCode?: number
-  /**
-   * SQL 类型。
-   */
-  SqlType?: string
-  /**
-   * 审计策略名称，逐步下线。
-   */
-  PolicyName?: string
-  /**
-   * 数据库名称。
-   */
-  DBName?: string
-  /**
-   * SQL 语句。
-   */
-  Sql?: string
-  /**
-   * 客户端地址。
-   */
-  Host?: string
-  /**
-   * 用户名。
-   */
-  User?: string
-  /**
-   * 执行时间，微秒。
-   */
-  ExecTime?: number
-  /**
-   * 时间。
-   */
-  Timestamp?: string
-  /**
-   * 返回行数。
-   */
-  SentRows?: number
-  /**
-   * 线程ID。
-   */
-  ThreadId?: number
-  /**
-   * 扫描行数。
-   */
-  CheckRows?: number
-  /**
-   * cpu执行时间，微秒。
-   */
-  CpuTime?: number
-  /**
-   * IO等待时间，微秒。
-   */
-  IoWaitTime?: number
-  /**
-   * 锁等待时间，微秒。
-   */
-  LockWaitTime?: number
-  /**
-   * 开始时间，与timestamp构成一个精确到纳秒的时间。
-   */
-  NsTime?: number
-  /**
-   * 事物持续时间，微秒。
-   */
-  TrxLivingTime?: number
-  /**
-   * 日志命中规则模板的基本信息
-   */
-  TemplateInfo?: Array<LogRuleTemplateInfo>
-  /**
-   *  事务ID
-   */
-  TrxId?: number
+  InstanceId: string
 }
 
 /**
@@ -10109,6 +10122,52 @@ export interface ModifyDBInstanceLogToCLSResponse {
 }
 
 /**
+ * 审计规则模板的详情
+ */
+export interface AuditRuleTemplateInfo {
+  /**
+   * 规则模板ID。
+   */
+  RuleTemplateId?: string
+  /**
+   * 规则模板名称。
+   */
+  RuleTemplateName?: string
+  /**
+   * 规则模板的过滤条件。
+   */
+  RuleFilters?: Array<RuleFilters>
+  /**
+   * 规则模板描述。
+   */
+  Description?: string
+  /**
+   * 规则模板创建时间。
+   */
+  CreateAt?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+   */
+  AlarmPolicy?: number
+  /**
+   * 规则模板应用在哪些在实例。
+   */
+  AffectedInstances?: Array<string>
+  /**
+   * 模板状态。0-无任务 ，1-修改中。
+   */
+  Status?: number
+  /**
+   * 模板更新时间。
+   */
+  UpdateAt?: string
+}
+
+/**
  * ModifyTimeWindow请求参数结构体
  */
 export interface ModifyTimeWindowRequest {
@@ -10218,49 +10277,25 @@ export interface RollbackTables {
 }
 
 /**
- * 审计规则模板的详情
+ * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段
  */
-export interface AuditRuleTemplateInfo {
+export interface BackupConfig {
   /**
-   * 规则模板ID。
+   * 第二个从库复制方式，可能的返回值：async-异步，semisync-半同步
    */
-  RuleTemplateId?: string
+  ReplicationMode?: string
   /**
-   * 规则模板名称。
+   * 第二个从库可用区的正式名称，如ap-shanghai-1
    */
-  RuleTemplateName?: string
+  Zone?: string
   /**
-   * 规则模板的过滤条件。
+   * 第二个从库内网IP地址
    */
-  RuleFilters?: Array<RuleFilters>
+  Vip?: string
   /**
-   * 规则模板描述。
+   * 第二个从库访问端口
    */
-  Description?: string
-  /**
-   * 规则模板创建时间。
-   */
-  CreateAt?: string
-  /**
-   * 告警等级。1-低风险，2-中风险，3-高风险。
-   */
-  AlarmLevel?: number
-  /**
-   * 告警策略。0-不告警，1-告警。
-   */
-  AlarmPolicy?: number
-  /**
-   * 规则模板应用在哪些在实例。
-   */
-  AffectedInstances?: Array<string>
-  /**
-   * 模板状态。0-无任务 ，1-修改中。
-   */
-  Status?: number
-  /**
-   * 模板更新时间。
-   */
-  UpdateAt?: string
+  Vport?: number
 }
 
 /**

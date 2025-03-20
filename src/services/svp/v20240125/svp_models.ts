@@ -235,102 +235,82 @@ export interface DescribeSavingPlanUsageRequest {
 export interface SavingPlanDeductDetail {
   /**
    * 账号id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
    * 账号名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUinName?: string
   /**
    * 抵扣账号id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayerUin?: string
   /**
    * 抵扣账号名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayerUinName?: string
   /**
    * 节省计划资源id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpId?: string
   /**
    * 产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductCode?: string
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 子产品编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCode?: string
   /**
    * 子产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductName?: string
   /**
    * 交易ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutTradeNo?: string
   /**
    * 地域id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionName?: string
   /**
    * 地区id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 地区名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneName?: string
   /**
    * 开始使用时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpStartTime?: string
   /**
    * 结束使用时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpEndTime?: string
   /**
    * 折扣时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductTime?: string
   /**
    * 抵扣金额，单位分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductAmount?: string
   /**
    * 抵扣折扣率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductDiscount?: string
   /**
    * 抵扣比率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductRate?: string
 }
@@ -414,8 +394,7 @@ export interface SavingPlanCoverageDetail {
  */
 export interface DescribeSavingPlanOverviewResponse {
   /**
-   * 节省计划总览明细数据	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节省计划总览明细数据
    */
   Overviews?: Array<SavingPlanOverviewDetail>
   /**

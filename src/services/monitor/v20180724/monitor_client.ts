@@ -72,7 +72,7 @@ import {
   Targets,
   GetTopNMonitorDataResponse,
   AlarmGroupByItem,
-  DescribeAlarmNoticeCallbacksResponse,
+  DescribePrometheusIntegrationMetricsResponse,
   DescribePrometheusInstanceUsageRequest,
   DeleteSSOAccountRequest,
   CreatePrometheusRecordRuleYamlRequest,
@@ -182,6 +182,7 @@ import {
   DescribeGrafanaWhiteListResponse,
   DescribeAlertRulesResponse,
   ResumeGrafanaInstanceRequest,
+  IntegrationMetricGroup,
   DescribeBasicAlarmListResponse,
   ModifyAlarmReceiversRequest,
   DescribeExporterIntegrationsRequest,
@@ -369,6 +370,7 @@ import {
   DescribeInstalledPluginsResponse,
   UpdateGrafanaConfigResponse,
   PrometheusRegionItem,
+  DescribeAlarmNoticeCallbacksResponse,
   ModifyPrometheusInstanceAttributesRequest,
   DescribePrometheusConfigResponse,
   UpdateGrafanaEnvironmentsResponse,
@@ -400,11 +402,13 @@ import {
   ModifyAlarmPolicyStatusRequest,
   ConditionsTemp,
   Operator,
+  PrometheusInstanceTenantUsage,
   DescribeServiceDiscoveryRequest,
   TaskStepInfo,
   DescribePrometheusTempResponse,
   DescribeGrafanaConfigResponse,
   DescribeAlarmNoticeRequest,
+  DescribePrometheusIntegrationMetricsRequest,
   PrometheusTemp,
   DescribePolicyConditionListCondition,
   DeletePrometheusTempRequest,
@@ -417,7 +421,7 @@ import {
   DeletePrometheusTempSyncRequest,
   DescribePluginOverviewsRequest,
   DescribePrometheusGlobalConfigRequest,
-  PrometheusInstanceTenantUsage,
+  IntegrationMetric,
   DescribePrometheusZonesRequest,
   DescribePrometheusAlertGroupsRequest,
   ModifyPolicyGroupRequest,
@@ -1921,6 +1925,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void
   ): Promise<UpdateExporterIntegrationResponse> {
     return this.request("UpdateExporterIntegration", req, cb)
+  }
+
+  /**
+   * 获取prometheus集成指标
+   */
+  async DescribePrometheusIntegrationMetrics(
+    req: DescribePrometheusIntegrationMetricsRequest,
+    cb?: (error: string, rep: DescribePrometheusIntegrationMetricsResponse) => void
+  ): Promise<DescribePrometheusIntegrationMetricsResponse> {
+    return this.request("DescribePrometheusIntegrationMetrics", req, cb)
   }
 
   /**

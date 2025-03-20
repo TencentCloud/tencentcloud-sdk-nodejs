@@ -110,7 +110,7 @@ import {
   ModifyEnvironmentRoleRequest,
   DescribeRocketMQRolesResponse,
   SubscriptionTopic,
-  ModifyRocketMQRoleRequest,
+  AMQPClusterConfig,
   DescribeMqMsgTraceRequest,
   SendBatchMessagesRequest,
   DescribeRabbitMQNodeListResponse,
@@ -148,7 +148,7 @@ import {
   DescribeRocketMQConsumerConnectionsResponse,
   DescribeCmqSubscriptionDetailRequest,
   DescribeRocketMQClusterResponse,
-  AMQPClusterConfig,
+  ModifyRocketMQRoleRequest,
   ServerLog,
   DescribeMsgTraceResponse,
   ModifyClusterRequest,
@@ -311,7 +311,6 @@ import {
   DescribeRocketMQConsumeStatsRequest,
   SendMessagesResponse,
   SendCmqMsgResponse,
-  ModifyPublicNetworkAccessPointResponse,
   ModifyCmqQueueAttributeRequest,
   RabbitMQClusterSpecInfo,
   DeleteCmqSubscribeResponse,
@@ -334,7 +333,6 @@ import {
   DescribeRocketMQPublicAccessPointRequest,
   RabbitMQPrivateNode,
   RetryRocketMQDlqMessageRequest,
-  ModifyPublicNetworkAccessPointRequest,
   DescribeRocketMQSourceClusterGroupListResponse,
   DescribeRocketMQTopicsByGroupRequest,
   DescribeRocketMQConsumeStatsResponse,
@@ -823,16 +821,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCmqTopicResponse) => void
   ): Promise<DeleteCmqTopicResponse> {
     return this.request("DeleteCmqTopic", req, cb)
-  }
-
-  /**
-   * RabbitMQ专享版修改公网管控台，vpc15672开关
-   */
-  async ModifyPublicNetworkAccessPoint(
-    req: ModifyPublicNetworkAccessPointRequest,
-    cb?: (error: string, rep: ModifyPublicNetworkAccessPointResponse) => void
-  ): Promise<ModifyPublicNetworkAccessPointResponse> {
-    return this.request("ModifyPublicNetworkAccessPoint", req, cb)
   }
 
   /**

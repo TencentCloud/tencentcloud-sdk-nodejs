@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpgradeProxyVersionRequest,
+  RemoveReplicationGroupRequest,
   UpgradeSmallVersionRequest,
   ModifyInstanceParamsResponse,
   EnableReplicaReadonlyRequest,
@@ -135,6 +136,7 @@ import {
   DescribeInstanceMonitorTookDistRequest,
   DeleteReplicationInstanceRequest,
   SwitchAccessNewInstanceRequest,
+  RemoveReplicationGroupResponse,
   KillMasterGroupRequest,
   SwitchAccessNewInstanceResponse,
   CloneInstancesResponse,
@@ -1242,6 +1244,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 删除复制组
+   */
+  async RemoveReplicationGroup(
+    req: RemoveReplicationGroupRequest,
+    cb?: (error: string, rep: RemoveReplicationGroupResponse) => void
+  ): Promise<RemoveReplicationGroupResponse> {
+    return this.request("RemoveReplicationGroup", req, cb)
   }
 
   /**

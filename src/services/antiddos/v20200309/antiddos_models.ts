@@ -1738,31 +1738,31 @@ export interface CCLevelPolicy {
   /**
    * 实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * Ip
    */
-  Ip: string
+  Ip?: string
   /**
    * 协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 防护等级，可取值default表示默认策略，loose表示宽松，strict表示严格
    */
-  Level: string
+  Level?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
 }
 
 /**
@@ -2061,15 +2061,15 @@ export interface BGPIPInstanceUsages {
   /**
    * 已使用的端口规则数，单位条
    */
-  PortRulesUsage: number
+  PortRulesUsage?: number
   /**
    * 已使用的域名规则数，单位条
    */
-  DomainRulesUsage: number
+  DomainRulesUsage?: number
   /**
    * 最近7天的攻击次数，单位次
    */
-  Last7DayAttackCount: number
+  Last7DayAttackCount?: number
 }
 
 /**
@@ -2127,11 +2127,11 @@ export interface DescribeOverviewDDoSEventListResponse {
   /**
    * 记录总数
    */
-  Total: number
+  Total?: number
   /**
    * 事件列表
    */
-  EventList: Array<OverviewDDoSEvent>
+  EventList?: Array<OverviewDDoSEvent>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3031,11 +3031,11 @@ on(开启)
 off(关闭)
 ]
    */
-  DDoSAI: string
+  DDoSAI?: string
   /**
    * AI防护开关所属的资源实例
    */
-  InstanceDetailList: Array<InstanceRelation>
+  InstanceDetailList?: Array<InstanceRelation>
 }
 
 /**
@@ -3153,39 +3153,39 @@ export interface CCPrecisionPolicy {
   /**
    * 策略Id
    */
-  PolicyId: string
+  PolicyId?: string
   /**
    * 实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * Ip地址
    */
-  Ip: string
+  Ip?: string
   /**
    * 协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 策略方式（丢弃或验证码）
    */
-  PolicyAction: string
+  PolicyAction?: string
   /**
    * 策略列表
    */
-  PolicyList: Array<CCPrecisionPlyRecord>
+  PolicyList?: Array<CCPrecisionPlyRecord>
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
 }
 
 /**
@@ -3528,7 +3528,7 @@ export interface CreateCCPrecisionPolicyRequest {
    */
   Domain: string
   /**
-   * 策略方式，可取值alg表示验证码，drop表示丢弃，trans表示放行
+   * 策略方式，可取值alg表示人机校验，drop表示丢弃，trans表示放行
    */
   PolicyAction: string
   /**
@@ -3979,35 +3979,35 @@ export interface CCReqLimitPolicy {
   /**
    * 策略Id
    */
-  PolicyId: string
+  PolicyId?: string
   /**
    * 实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * Ip地址
    */
-  Ip: string
+  Ip?: string
   /**
    * 协议，可取值HTTP，HTTPS
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 策略项
    */
-  PolicyRecord: CCReqLimitPolicyRecord
+  PolicyRecord?: CCReqLimitPolicyRecord
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
 }
 
 /**
@@ -5717,15 +5717,15 @@ export interface BGPInstanceUsages {
   /**
    * 已使用的防护次数，单位次
    */
-  ProtectCountUsage: number
+  ProtectCountUsage?: number
   /**
    * 已防护的IP数，单位个
    */
-  ProtectIPNumberUsage: number
+  ProtectIPNumberUsage?: number
   /**
    * 最近7天的攻击次数，单位次
    */
-  Last7DayAttackCount: number
+  Last7DayAttackCount?: number
 }
 
 /**

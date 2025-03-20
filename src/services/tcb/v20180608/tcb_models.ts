@@ -366,52 +366,53 @@ export interface StandaloneGatewayInfo {
 }
 
 /**
+ * EditAuthConfig返回参数结构体
+ */
+export interface EditAuthConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CloudBaseRun 的 Side 描述定义
  */
 export interface CloudBaseRunSideSpec {
   /**
    * 容器镜像
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerImage?: string
   /**
    * 容器端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerPort?: number
   /**
    * 容器的名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerName?: string
   /**
    * kv的json字符串
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvVar?: string
   /**
    * InitialDelaySeconds 延迟多长时间启动健康检查
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialDelaySeconds?: number
   /**
    * CPU大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu?: number
   /**
    * 内存大小（单位：M）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mem?: number
   /**
    * 安全特性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Security?: CloudBaseSecurityContext
   /**
    * 挂载信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeMountInfos?: Array<CloudBaseRunVolumeMount>
 }
@@ -698,147 +699,118 @@ export interface DestroyStandaloneGatewayRequest {
 export interface CloudRunServiceSimpleVersionSnapshot {
   /**
    * 版本名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionName?: string
   /**
    * 版本备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * cpu规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu?: number
   /**
    * 内存规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mem?: number
   /**
    * 最小副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinNum?: number
   /**
    * 最大副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxNum?: number
   /**
    * 镜像url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageUrl?: string
   /**
    * 扩容策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType?: string
   /**
    * 策略阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyThreshold?: number
   /**
    * 环境参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvParams?: string
   /**
    * 容器端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerPort?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 更新类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UploadType?: string
   /**
    * dockerfile路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DockerfilePath?: string
   /**
    * 构建路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildDir?: string
   /**
    * repo类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoType?: string
   /**
    * 仓库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Repo?: string
   /**
    * 分支
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Branch?: string
   /**
    * 环境id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvId?: string
   /**
    * 服务名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerName?: string
   /**
    * package名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageName?: string
   /**
    * package版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageVersion?: string
   /**
    * 自定义log路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomLogs?: string
   /**
    * 延时健康检查时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialDelaySeconds?: number
   /**
    * snapshot名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotName?: string
   /**
    * 镜像信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageInfo?: CloudBaseRunImageInfo
   /**
    * 代码仓库信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeDetail?: CloudBaseCodeRepoDetail
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -1297,17 +1269,14 @@ export interface DescribeCloudBaseRunServerRequest {
 export interface CloudBaseRunEmptyDirVolumeSource {
   /**
    * 启用emptydir数据卷
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableEmptyDirVolume?: boolean
   /**
    * "","Memory","HugePages"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Medium?: string
   /**
    * emptydir数据卷大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SizeLimit?: string
 }
@@ -1318,17 +1287,14 @@ export interface CloudBaseRunEmptyDirVolumeSource {
 export interface CloudBaseRunVolumeMount {
   /**
    * 资源名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 挂载路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPath?: string
   /**
    * 是否只读
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadOnly?: boolean
   /**
@@ -1338,7 +1304,6 @@ export interface CloudBaseRunVolumeMount {
   NfsVolumes?: Array<CloudBaseRunNfsVolumeSource>
   /**
    * 挂载配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPropagation?: string
 }
@@ -1368,17 +1333,37 @@ export interface DescribePostpayFreeQuotasRequest {
 }
 
 /**
- * DescribeActivityInfo返回参数结构体
+ * DeleteGatewayVersion请求参数结构体
  */
-export interface DescribeActivityInfoResponse {
+export interface DeleteGatewayVersionRequest {
   /**
-   * 活动详情
+   * 环境id
    */
-  ActivityInfoList: Array<ActivityInfoItem>
+  EnvId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 网关id
    */
-  RequestId?: string
+  GatewayId: string
+  /**
+   * 版本名
+   */
+  VersionName: string
+  /**
+   * 是否删除服务
+   */
+  IsDeleteServer?: boolean
+  /**
+   * 是否删除镜像
+   */
+  IsDeleteImage?: boolean
+  /**
+   * 是否强制删除
+   */
+  IsForce?: boolean
+  /**
+   * 操作者记录
+   */
+  OperatorRemark?: string
 }
 
 /**
@@ -1850,36 +1835,6 @@ export interface DescribeGatewayCurveDataResponse {
 }
 
 /**
- * 活动信息
- */
-export interface ActivityInfoItem {
-  /**
-   * 活动id
-   */
-  ActivityId?: number
-  /**
-   * 记录插入时间
-   */
-  CreateTime?: string
-  /**
-   * 记录最后一次变更时间
-   */
-  UpdateTime?: string
-  /**
-   * 活动开始时间
-   */
-  StartTime?: string
-  /**
-   * 活动结束时间
-   */
-  ExpireTime?: string
-  /**
-   * 自定义备注信息
-   */
-  Tag?: string
-}
-
-/**
  * 键值对
  */
 export interface KVPair {
@@ -1894,37 +1849,29 @@ export interface KVPair {
 }
 
 /**
- * DeleteGatewayVersion请求参数结构体
+ * 短信免费量
  */
-export interface DeleteGatewayVersionRequest {
+export interface SmsFreeQuota {
   /**
-   * 环境id
+   * 免费量总条数
    */
-  EnvId: string
+  FreeQuota?: number
   /**
-   * 网关id
+   * 共计已使用总条数
    */
-  GatewayId: string
+  TotalUsedQuota?: number
   /**
-   * 版本名
+   * 免费周期起点，0000-00-00 00:00:00 形式
    */
-  VersionName: string
+  CycleStart?: string
   /**
-   * 是否删除服务
+   * 免费周期终点，0000-00-00 00:00:00 形式
    */
-  IsDeleteServer?: boolean
+  CycleEnd?: string
   /**
-   * 是否删除镜像
+   * 今天已使用总条数
    */
-  IsDeleteImage?: boolean
-  /**
-   * 是否强制删除
-   */
-  IsForce?: boolean
-  /**
-   * 操作者记录
-   */
-  OperatorRemark?: string
+  TodayUsedQuota?: number
 }
 
 /**
@@ -2275,27 +2222,22 @@ export interface DescribeEnvsRequest {
 export interface CloudBaseRunVersionFlowItem {
   /**
    * 版本名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionName: string
   /**
    * 流量占比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowRatio?: number
   /**
    * 流量参数键值对（URL参数/HEADERS参数）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UrlParam?: ObjectKV
   /**
    * 优先级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Priority?: number
   /**
    * 是否是默认兜底版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefaultPriority?: boolean
 }
@@ -2427,7 +2369,6 @@ export interface CbrRepoInfo {
   RepoLanguage?: string
   /**
    * 分支名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Branch?: string
 }
@@ -2472,36 +2413,12 @@ export interface DescribeBillingInfoRequest {
 export interface HpaPolicy {
   /**
    * 策略类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType?: string
   /**
    * 策略阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyThreshold?: number
-}
-
-/**
- * ImageSecretInfo的信息
- */
-export interface CloudBaseRunImageSecretInfo {
-  /**
-   * 镜像地址
-   */
-  RegistryServer?: string
-  /**
-   * 用户名
-   */
-  UserName?: string
-  /**
-   * 仓库密码
-   */
-  Password?: string
-  /**
-   * 邮箱
-   */
-  Email?: string
 }
 
 /**
@@ -3089,17 +3006,14 @@ export interface CreateHostingDomainResponse {
 export interface TkeClusterInfo {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 集群的vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 版本内网CLB所在子网Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionClbSubnetId?: string
 }
@@ -3786,37 +3700,30 @@ export interface DescribeEndUserStatisticRequest {
 export interface CloudBaseRunVpcSubnet {
   /**
    * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 子网的ipv4
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cidr?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * subnet类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Target?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -4152,13 +4059,10 @@ export interface DatabasesInfo {
 
 /**
  * cloudrun安全特性
-
-
  */
 export interface CloudBaseSecurityContext {
   /**
    * 安全特性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Capabilities?: CloudBaseCapabilities
 }
@@ -4234,32 +4138,6 @@ export interface DescribeDatabaseACLRequest {
    * 集合名称
    */
   CollectionName: string
-}
-
-/**
- * 短信免费量
- */
-export interface SmsFreeQuota {
-  /**
-   * 免费量总条数
-   */
-  FreeQuota?: number
-  /**
-   * 共计已使用总条数
-   */
-  TotalUsedQuota?: number
-  /**
-   * 免费周期起点，0000-00-00 00:00:00 形式
-   */
-  CycleStart?: string
-  /**
-   * 免费周期终点，0000-00-00 00:00:00 形式
-   */
-  CycleEnd?: string
-  /**
-   * 今天已使用总条数
-   */
-  TodayUsedQuota?: number
 }
 
 /**
@@ -4535,7 +4413,6 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
 export interface CloudBaseRunServiceVolumeHostPath {
   /**
    * 主机路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
 }
@@ -4591,13 +4468,25 @@ export interface DescribeCurveDataRequest {
 }
 
 /**
- * DescribeActivityInfo请求参数结构体
+ * ImageSecretInfo的信息
  */
-export interface DescribeActivityInfoRequest {
+export interface CloudBaseRunImageSecretInfo {
   /**
-   * 活动id列表
+   * 镜像地址
    */
-  ActivityIdList?: Array<number | bigint>
+  RegistryServer?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 仓库密码
+   */
+  Password?: string
+  /**
+   * 邮箱
+   */
+  Email?: string
 }
 
 /**
@@ -4832,22 +4721,41 @@ export interface CreateStaticStoreResponse {
 }
 
 /**
+ * EditAuthConfig请求参数结构体
+ */
+export interface EditAuthConfigRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 手机号登录配置 "TRUE",  "FALSE", "LOGIN_ONLY"
+   */
+  PhoneNumberLogin?: string
+  /**
+   * 匿名登录配置 "TRUE",  "FALSE"
+   */
+  AnonymousLogin?: string
+  /**
+   * 用户名密码登录配置 "TRUE",  "FALSE"
+   */
+  UsernameLogin?: string
+}
+
+/**
  * vpc信息
  */
 export interface CloudBaseRunVpcInfo {
   /**
    * vpc的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetIds?: Array<string>
   /**
    * 创建类型(0=继承; 1=新建; 2=指定)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateType?: number
 }
@@ -4988,7 +4896,6 @@ export interface CloudBaseRunVersionPod {
   PodId?: string
   /**
    * pod ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PodIp?: string
   /**
@@ -4997,7 +4904,6 @@ export interface CloudBaseRunVersionPod {
   Status?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
 }
@@ -5846,32 +5752,26 @@ export interface FreezeCloudBaseRunServersResponse {
 export interface CloudRunServiceVolume {
   /**
    * 名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * NFS的挂载方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NFS?: CloudBaseRunNfsVolumeSource
   /**
    * secret名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretName?: string
   /**
    * 是否开启临时目录逐步废弃，请使用 EmptyDir
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableEmptyDirVolume?: boolean
   /**
    * emptydir数据卷详细信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EmptyDir?: CloudBaseRunEmptyDirVolumeSource
   /**
    * 主机路径挂载信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostPath?: CloudBaseRunServiceVolumeHostPath
 }

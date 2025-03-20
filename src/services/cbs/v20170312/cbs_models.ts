@@ -109,7 +109,6 @@ export interface AutoSnapshotPolicy {
   AutoSnapshotPolicyState?: string
   /**
    * 是否是跨账号复制快照快照, 1：是, 0: 不是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCopyToRemote?: number
   /**
@@ -147,17 +146,14 @@ export interface AutoSnapshotPolicy {
   CopyToAccountUin?: string
   /**
    * 已绑定当前定期快照策略的实例ID列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceIdSet?: Array<string>
   /**
    * 该定期快照创建的快照可以保留的月数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetentionMonths?: number
   /**
    * 该定期快照创建的快照最大保留数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetentionAmount?: number
   /**
@@ -172,7 +168,6 @@ export interface AutoSnapshotPolicy {
   CopyFromAccountUin?: string
   /**
    * 标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
 }
@@ -500,22 +495,18 @@ export interface InquirePriceModifyDiskExtraPerformanceResponse {
 export interface AdvancedRetentionPolicy {
   /**
    * 保留最新快照Days天内的每天最新的一个快照，取值范围：[0, 100]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Days: number
   /**
    * 保留最新快照Weeks周内的每周最新的一个快照，取值范围：[0, 100]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weeks: number
   /**
    * 保留最新快照Months月内的每月最新的一个快照， 取值范围：[0, 100]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Months: number
   /**
    * 保留最新快照Years年内的每年最新的一个快照，取值范围：[0, 100]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Years: number
 }
@@ -1372,7 +1363,6 @@ export interface CdcSize {
   DiskTotal?: number
   /**
    * 独享集群的可用容量大小，单位GiB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskAvailable?: number
 }

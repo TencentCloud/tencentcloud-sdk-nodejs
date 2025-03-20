@@ -1028,6 +1028,16 @@ it("teo.v20220901.UpgradePlan", async function () {
     }
 })
 
+it("teo.v20220901.DescribeSecurityPolicy", async function () {
+    try {
+       const data = await client.DescribeSecurityPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyFunctionRulePriority", async function () {
     try {
        const data = await client.ModifyFunctionRulePriority({})

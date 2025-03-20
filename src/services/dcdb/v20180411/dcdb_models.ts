@@ -111,7 +111,6 @@ export interface ParamDesc {
   Value?: string
   /**
    * 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetValue?: string
   /**
@@ -489,12 +488,10 @@ export interface DescribeDBSecurityGroupsResponse {
   Groups?: Array<SecurityGroup>
   /**
    * 实例VIP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VIP?: string
   /**
    * 实例端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VPort?: string
   /**
@@ -2257,77 +2254,62 @@ export interface SpecConfigInfo {
 export interface TmpInstance {
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 实例备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceRemark?: string
   /**
    * 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TempType?: number
   /**
    * 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 实例虚IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
    * 实例虚端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vport?: number
   /**
    * 有效期结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodEndTime?: string
   /**
    * 源实例 ID，形如：tdsql-ow728lmc。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SrcInstanceId?: string
   /**
    * 实例状态描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
    * 实例所在地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 实例所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 实例虚IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vipv6?: string
   /**
    * 实例IPv6标志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6Flag?: number
 }
@@ -2748,17 +2730,14 @@ export interface DCDBShardInfo {
   ProxyVersion?: string
   /**
    * 付费模型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Paymode?: string
   /**
    * 分片的主可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShardMasterZone?: string
   /**
    * 分片的从可用区列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShardSlaveZones?: Array<string>
   /**
@@ -3248,7 +3227,6 @@ export interface DescribeDCDBShardsResponse {
   Shards?: Array<DCDBShardInfo>
   /**
    * 灾备标志，0-无，1-主实例，2-灾备实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnFlag?: number
   /**
@@ -3844,12 +3822,10 @@ export interface SlowLogData {
   User?: string
   /**
    * 样例Sql
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExampleSql?: string
   /**
    * 账户的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
 }

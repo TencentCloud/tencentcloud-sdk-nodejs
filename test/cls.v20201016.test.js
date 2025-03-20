@@ -168,26 +168,6 @@ it("cls.v20201016.CreateTopic", async function () {
     }
 })
 
-it("cls.v20201016.DescribeCloudProductLogTasks", async function () {
-    try {
-       const data = await client.DescribeCloudProductLogTasks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cls.v20201016.DeleteCloudProductLogTask", async function () {
-    try {
-       const data = await client.DeleteCloudProductLogTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cls.v20201016.DeleteAlarmNotice", async function () {
     try {
        const data = await client.DeleteAlarmNotice({})
@@ -341,16 +321,6 @@ it("cls.v20201016.CreateShipper", async function () {
 it("cls.v20201016.CreateNoticeContent", async function () {
     try {
        const data = await client.CreateNoticeContent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cls.v20201016.ModifyCloudProductLogTask", async function () {
-    try {
-       const data = await client.ModifyCloudProductLogTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +498,9 @@ it("cls.v20201016.ModifyAlarmShield", async function () {
     }
 })
 
-it("cls.v20201016.CreateCloudProductLogTask", async function () {
+it("cls.v20201016.SearchDashboardSubscribe", async function () {
     try {
-       const data = await client.CreateCloudProductLogTask({})
+       const data = await client.SearchDashboardSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -931,16 +901,6 @@ it("cls.v20201016.DeleteConfig", async function () {
 it("cls.v20201016.DescribeConfigExtras", async function () {
     try {
        const data = await client.DescribeConfigExtras({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cls.v20201016.SearchDashboardSubscribe", async function () {
-    try {
-       const data = await client.SearchDashboardSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1858,12 +1858,10 @@ GZJGZY: 公证机构执业证。
   ImgUrl: string
   /**
    * 原始照片地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginImgUrl?: string
   /**
    * 联系人证件号码。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegistrantCertificateCode?: string
   /**
@@ -1896,12 +1894,10 @@ GAJZZ: 中国港澳居住证。
 TWJZZ: 中国台湾居住证。
 QTTYDM: 其他-统一社会信用代码证书。
 GZJGZY: 公证机构执业证。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegistrantCertificateType?: string
   /**
    * 联系人证件照片地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegistrantImgUrl?: string
 }

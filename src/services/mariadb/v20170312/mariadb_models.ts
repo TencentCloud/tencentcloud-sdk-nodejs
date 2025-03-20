@@ -470,12 +470,10 @@ export interface DescribeDBSecurityGroupsResponse {
   Groups?: Array<SecurityGroup>
   /**
    * 实例VIP。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VIP?: string
   /**
    * 实例端口。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VPort?: string
   /**
@@ -1183,13 +1181,12 @@ export interface CopyAccountPrivilegesResponse {
 export interface DCNReplicaStatus {
   /**
    * DCN 的运行状态，START为正常运行，STOP为暂停，
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 当前延迟情况，取备实例的 master 节点的 delay 值
    */
-  Delay: number
+  Delay?: number
 }
 
 /**
@@ -2358,77 +2355,62 @@ export interface SpecConfigInfo {
 export interface TmpInstance {
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 实例备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceRemark?: string
   /**
    * 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TempType?: number
   /**
    * 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 实例虚IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
    * 实例虚端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vport?: number
   /**
    * 有效期结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodEndTime?: string
   /**
    * 源实例 ID，形如：tdsql-ow728lmc。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SrcInstanceId?: string
   /**
    * 实例状态描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
    * 实例所在地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 实例所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 实例虚IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vipv6?: string
   /**
    * 实例IPv6标志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6Flag?: number
 }
@@ -3509,12 +3491,11 @@ export interface DescribeBackupTimeResponse {
   /**
    * 返回的配置数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例备份时间配置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<DBBackupTimeConfig>
+  Items?: Array<DBBackupTimeConfig>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

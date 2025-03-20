@@ -110,22 +110,18 @@ export interface CreateDBInstancesRequest {
 export interface TaskDetail {
   /**
    * 当前执行的子任务步骤名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentStep?: string
   /**
    * 当前任务所拥有的子步骤描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllSteps?: string
   /**
    * 任务的输入参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: string
   /**
    * 任务的输出参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: string
   /**
@@ -134,17 +130,14 @@ export interface TaskDetail {
 1：立即切换
 2：指定时间切换
 3：维护时间窗口内切换。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SwitchTag?: number
   /**
    * 指定的切换时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SwitchTime?: string
   /**
    * 任务的提示信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
 }
@@ -293,7 +286,6 @@ export interface DescribeAccountsRequest {
 export interface DeleteReadOnlyGroupResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
@@ -501,58 +493,55 @@ export interface SpecItemInfo {
   /**
    * 规格ID
    */
-  SpecCode: string
+  SpecCode?: string
   /**
    * PostgreSQL的版本编号
    */
-  Version: string
+  Version?: string
   /**
    * 内核编号对应的完整版本名称
    */
-  VersionName: string
+  VersionName?: string
   /**
    * CPU核数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存大小，单位：MB
    */
-  Memory: number
+  Memory?: number
   /**
    * 该规格所支持最大存储容量，单位：GB
    */
-  MaxStorage: number
+  MaxStorage?: number
   /**
    * 该规格所支持最小存储容量，单位：GB
    */
-  MinStorage: number
+  MinStorage?: number
   /**
    * 该规格的预估QPS
    */
-  Qps: number
+  Qps?: number
   /**
    * 【该字段废弃】
    */
-  Pid: number
+  Pid?: number
   /**
    * 机器类型
    */
-  Type: string
+  Type?: string
   /**
    * PostgreSQL的主要版本编号
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MajorVersion: string
+  MajorVersion?: string
   /**
    * PostgreSQL的内核版本编号
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  KernelVersion: string
+  KernelVersion?: string
   /**
    * 是否支持TDE数据加密功能，0-不支持，1-支持
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsSupportTDE: number
+  IsSupportTDE?: number
 }
 
 /**
@@ -587,7 +576,6 @@ export interface ParameterTemplate {
 export interface CreateDBInstanceNetworkAccessResponse {
   /**
    * 流程ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
@@ -1197,38 +1185,35 @@ export interface DBInstanceNetInfo {
   /**
    * DNS域名
    */
-  Address: string
+  Address?: string
   /**
    * IP地址
    */
-  Ip: string
+  Ip?: string
   /**
    * 连接Port地址
    */
-  Port: number
+  Port?: number
   /**
    * 网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）；
    */
-  NetType: string
+  NetType?: string
   /**
    * 网络连接状态，1、initing（未开通）；2、opened（已开通）；3、closed（已关闭）；4、opening（开通中）；5、closing（关闭中）；
    */
-  Status: string
+  Status?: string
   /**
    * 私有网络ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 连接数据库的协议类型，当前支持：postgresql、mssql（MSSQL兼容语法）
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProtocolType: string
+  ProtocolType?: string
 }
 
 /**
@@ -1567,17 +1552,14 @@ export interface LockAccountResponse {
 export interface CloneDBInstanceResponse {
   /**
    * 订单号。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealName?: string
   /**
    * 订单流水号。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillId?: string
   /**
    * 克隆出的新实例ID，当前只支持后付费返回该值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBInstanceId?: string
   /**
@@ -1624,32 +1606,26 @@ export interface AddDBInstanceToReadOnlyGroupResponse {
 export interface EncryptionKey {
   /**
    * KMS实例加密的KeyId。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyId?: string
   /**
    * KMS实例加密Key的别名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyAlias?: string
   /**
    * 实例加密密钥DEK的密文。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DEKCipherTextBlob?: string
   /**
    * 密钥是否启用，1-启用， 0-未启用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsEnabled?: number
   /**
    * KMS密钥所在地域。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyRegion?: string
   /**
    * DEK密钥创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
 }
@@ -1956,7 +1932,6 @@ export interface TaskSet {
   StartTime?: string
   /**
    * 任务的结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
@@ -1969,7 +1944,6 @@ export interface TaskSet {
   Progress?: number
   /**
    * 任务的详情信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskDetail?: TaskDetail
 }
@@ -2045,27 +2019,22 @@ export interface DescribeDefaultParametersResponse {
 export interface ServerlessDBInstanceNetInfo {
   /**
    * 地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
    * ip地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
   /**
    * 端口号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 网络类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetType?: string
 }
@@ -2320,20 +2289,19 @@ export interface SpecInfo {
   /**
    * 地域英文编码，对应RegionSet的Region字段
    */
-  Region: string
+  Region?: string
   /**
    * 区域英文编码，对应ZoneSet的Zone字段
    */
-  Zone: string
+  Zone?: string
   /**
    * 规格详细信息列表
    */
-  SpecItemInfoList: Array<SpecItemInfo>
+  SpecItemInfoList?: Array<SpecItemInfo>
   /**
    * 支持KMS的地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportKMSRegions: Array<string>
+  SupportKMSRegions?: Array<string>
 }
 
 /**
@@ -2487,44 +2455,36 @@ export interface ModifyPrivilege {
 export interface NetworkAccess {
   /**
    * 网络资源id，实例id或RO组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 资源类型，1-实例 2-RO组
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceType: number
+  ResourceType?: number
   /**
    * 私有网络ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * IPV4地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vip: string
+  Vip?: string
   /**
    * IPV6地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vip6: string
+  Vip6?: string
   /**
    * 访问端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vport: number
+  Vport?: number
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 网络状态，1-申请中，2-使用中，3-删除中，4-已删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcStatus: number
+  VpcStatus?: number
 }
 
 /**
@@ -2690,27 +2650,22 @@ export interface ParamSpecRelation {
 export interface DatabaseObject {
   /**
    * 支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectType: string
   /**
    * 所描述的数据库对象名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectName: string
   /**
    * 所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
    * 所要描述的数据库对象，所属的模式名称。当描述对象不为database、schema时，此参数必选。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
    * 所要描述的数据库对象，所属的表名称。当描述的对象类型为column时，此参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
 }
@@ -2852,7 +2807,6 @@ export interface PgDeal {
 export interface DeleteReadOnlyGroupNetworkAccessResponse {
   /**
    * 流程ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
@@ -2973,7 +2927,6 @@ export interface DBBackup {
   ExternalAddr?: string
   /**
    * 备份集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetId?: string
 }
@@ -3159,42 +3112,34 @@ export interface DescribeParamsEventRequest {
 export interface EventInfo {
   /**
    * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamName?: string
   /**
    * 原参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OldValue?: string
   /**
    * 本次修改期望参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NewValue?: string
   /**
    * 后台参数修改开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 后台参数生效开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EffectiveTime?: string
   /**
    * 修改状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
    * 操作者（一般为用户sub UIN）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
   /**
    * 时间日志。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventLog?: string
 }
@@ -3374,12 +3319,10 @@ export interface DescribeSlowQueryListResponse {
   TotalCount?: number
   /**
    * 查询到的慢日志耗时分段分析结果。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationAnalysis?: Array<DurationAnalysis>
   /**
    * 查询到的慢日志详细信息集合。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RawSlowQueryList?: Array<RawSlowQuery>
   /**
@@ -3394,87 +3337,70 @@ export interface DescribeSlowQueryListResponse {
 export interface ServerlessDBInstance {
   /**
    * 实例id，唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBInstanceId?: string
   /**
    * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBInstanceName?: string
   /**
    * 实例状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBInstanceStatus?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 项目id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 私有网络Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 字符集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBCharset?: string
   /**
    * 数据库版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBVersion?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 实例网络信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBInstanceNetInfo?: Array<ServerlessDBInstanceNetInfo>
   /**
    * 实例账户信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBAccountSet?: Array<ServerlessDBAccount>
   /**
    * 实例下的db信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBDatabaseList?: Array<string>
   /**
    * 实例绑定的标签数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<Tag>
   /**
    * 数据库内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBKernelVersion?: string
   /**
    * 数据库主要版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBMajorVersion?: string
 }
@@ -3608,19 +3534,16 @@ export interface CloseServerlessDBExtranetAccessResponse {
 export interface EventItem {
   /**
    * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 修改事件数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventCount: number
+  EventCount?: number
   /**
    * 修改时间详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventDetail: Array<EventInfo>
+  EventDetail?: Array<EventInfo>
 }
 
 /**
@@ -3798,7 +3721,6 @@ export interface Detail {
   TotalCallNum?: number
   /**
    * 慢SQL统计分析列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisItems?: Array<AnalysisItems>
 }
@@ -4140,7 +4062,6 @@ export interface DescribeServerlessDBInstancesResponse {
   TotalCount?: number
   /**
    * 查询结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBInstanceSet?: Array<ServerlessDBInstance>
   /**
@@ -4549,42 +4470,34 @@ export interface ModifyAccountPrivilegesResponse {
 export interface Database {
   /**
    * 数据库名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
    * 数据库所有者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseOwner?: string
   /**
    * 数据库字符编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Encoding?: string
   /**
    * 数据库排序规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Collate?: string
   /**
    * 数据库字符分类
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ctype?: string
   /**
    * 数据库是否允许连接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowConn?: boolean
   /**
    * 数据库最大连接数，-1表示无限制
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnLimit?: number
   /**
    * 数据库权限列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Privileges?: string
 }
@@ -4799,7 +4712,6 @@ Standby，代表备节点。
   Zone: string
   /**
    * 专属集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DedicatedClusterId?: string
 }
@@ -4894,22 +4806,18 @@ export interface DescribeBackupDownloadRestrictionResponse {
   RestrictionType?: string
   /**
    * vpc限制效力，ALLOW 允许；DENY 拒绝。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcRestrictionEffect?: string
   /**
    * 允许或拒绝下载备份文件的vpcId列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcIdSet?: Array<string>
   /**
    * ip限制效力，ALLOW 允许；DENY 拒绝。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IpRestrictionEffect?: string
   /**
    * 允许或拒绝下载备份文件的ip列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IpSet?: Array<string>
   /**
@@ -5289,12 +5197,11 @@ export interface CreateReadOnlyGroupResponse {
   /**
    * 只读组ID
    */
-  ReadOnlyGroupId: string
+  ReadOnlyGroupId?: string
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5307,7 +5214,6 @@ export interface CreateReadOnlyGroupResponse {
 export interface DeleteDBInstanceNetworkAccessResponse {
   /**
    * 流程ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
@@ -5665,24 +5571,23 @@ export interface RegionInfo {
   /**
    * 该地域对应的英文名称
    */
-  Region: string
+  Region?: string
   /**
    * 该地域对应的中文名称
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 该地域对应的数字编号
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
    */
-  RegionState: string
+  RegionState?: string
   /**
    * 该地域是否支持国际站售卖，0：不支持，1：支持
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportInternational: number
+  SupportInternational?: number
 }
 
 /**
@@ -5904,57 +5809,46 @@ export interface ModifyDBInstanceParametersRequest {
 export interface DedicatedCluster {
   /**
    * 专属集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DedicatedClusterId?: string
   /**
    * 专属集群名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 专属集群所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 灾备集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StandbyDedicatedClusterSet?: Array<string>
   /**
    * 实例数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCount?: number
   /**
    * Cpu总量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuTotal?: number
   /**
    * Cpu可用数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuAvailable?: number
   /**
    * 内存总量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemTotal?: number
   /**
    * 内存可用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemAvailable?: number
   /**
    * 磁盘总量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskTotal?: number
   /**
    * 磁盘可用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskAvailable?: number
 }
@@ -5965,17 +5859,14 @@ export interface DedicatedCluster {
 export interface ServerlessDBAccount {
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBUser?: string
   /**
    * 密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBPassword?: string
   /**
    * 连接数限制
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DBConnLimit?: number
 }
@@ -6435,7 +6326,6 @@ base-backup-id：按照备份集ID过滤，类型为string。
 export interface DescribeEncryptionKeysResponse {
   /**
    * 实例密钥信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptionKeys?: Array<EncryptionKey>
   /**
@@ -6450,7 +6340,6 @@ export interface DescribeEncryptionKeysResponse {
 export interface CreateReadOnlyGroupNetworkAccessResponse {
   /**
    * 流程ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**

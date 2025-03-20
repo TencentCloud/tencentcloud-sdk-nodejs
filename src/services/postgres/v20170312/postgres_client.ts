@@ -439,7 +439,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
+   * 【接口下线中，请勿使用】本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
    */
   async DeleteServerlessDBInstance(
     req: DeleteServerlessDBInstanceRequest,
@@ -660,7 +660,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
+   * 【接口下线中，请勿使用】本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
    */
   async CloseServerlessDBExtranetAccess(
     req: CloseServerlessDBExtranetAccessRequest,
@@ -680,7 +680,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
+   * 【接口下线中，请勿使用】本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
    */
   async CreateServerlessDBInstance(
     req: CreateServerlessDBInstanceRequest,
@@ -750,7 +750,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
+   * 【接口下线中，请勿使用】本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
    */
   async OpenServerlessDBExtranetAccess(
     req: OpenServerlessDBExtranetAccessRequest,
@@ -790,7 +790,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询一个或多个serverlessDB实例的详细信息
+   * 【接口下线中，请勿使用】用于查询一个或多个serverlessDB实例的详细信息
    */
   async DescribeServerlessDBInstances(
     req: DescribeServerlessDBInstancesRequest,

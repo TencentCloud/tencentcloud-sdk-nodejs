@@ -3765,6 +3765,10 @@ export interface CreateDsFolderRequest {
    * 父文件夹ID
    */
   ParentsFolderId?: string
+  /**
+   * 文件夹来源 template管理，orchestrationSpace 编排空间
+   */
+  FolderForm?: string
 }
 
 /**
@@ -6123,6 +6127,11 @@ export interface DatabaseMeta {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastAccessTimeByTables?: number
+  /**
+   * 库guid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseGuid?: string
 }
 
 /**
@@ -7821,6 +7830,26 @@ false 否
 - manual    手动工作流
    */
   WorkflowType?: string
+  /**
+   * 任务类型id列表
+   */
+  TaskTypeIdList?: Array<number | bigint>
+  /**
+   * 责任人id列表
+   */
+  InChargeIdList?: Array<string>
+  /**
+   * 自身责任人
+   */
+  OnlyMe?: boolean
+  /**
+   * 是否包含代码模版
+   */
+  IncludeCodeTemplate?: boolean
+  /**
+   * 编排空间 或代码模版 orchestrationSpace 编排空间 template模版管理
+   */
+  FolderForm?: string
 }
 
 /**
@@ -10556,6 +10585,10 @@ export interface GenHiveTableDDLSqlRequest {
    * 获取源信息的环境
    */
   Env?: string
+  /**
+   * doris写入模式配置
+   */
+  WriteMode?: string
 }
 
 /**

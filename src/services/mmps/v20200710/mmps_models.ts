@@ -300,21 +300,19 @@ export interface DescribeScanTaskReportUrlResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Result: number
+  Result?: number
   /**
    * 诊断报告/堆栈信息下载链接
    */
-  ReportUrl: string
+  ReportUrl?: string
   /**
    * 诊断报告/堆栈名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportTitle: string
+  ReportTitle?: string
   /**
    * 诊断json结果内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportResult: string
+  ReportResult?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -616,32 +614,28 @@ export interface DescribeScanTaskReportUrlRequest {
 export interface TaskFlowStepsInfo {
   /**
    * 流程编号
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowNo: string
+  FlowNo?: string
   /**
    * 流程名称
    */
-  FlowName: string
+  FlowName?: string
   /**
    * 流程状态, 其他值:进行中, 2:成功, 3:失败
    */
-  FlowStatus: number
+  FlowStatus?: number
   /**
    * 流程状态描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowStateDesc: string
+  FlowStateDesc?: string
   /**
    * 流程启动时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 流程完成时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
 }
 
 /**
@@ -651,17 +645,15 @@ export interface DescribeFlySecMiniAppScanTaskListResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Ret: number
+  Ret?: number
   /**
    * 诊断任务数据列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<FlySecMiniAppTaskData>
+  Data?: Array<FlySecMiniAppTaskData>
   /**
    * 诊断任务数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -731,12 +723,11 @@ export interface DescribeFlySecMiniAppReportUrlResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Ret: number
+  Ret?: number
   /**
    * 诊断报告下载链接
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -753,12 +744,10 @@ export interface DescribeScanTaskListResponse {
   Result?: number
   /**
    * 诊断任务数据列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<AppTaskData>
   /**
    * 任务总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -777,12 +766,10 @@ export interface AppInfoItem {
   AppPackage?: string
   /**
    * 小程序应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppName?: string
   /**
    * 小程序应用版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppVersion?: string
   /**
@@ -791,42 +778,34 @@ export interface AppInfoItem {
   Platform?: number
   /**
    * 小程序隐私诊断报告下载链接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportUrl?: string
   /**
    * 小程序隐私诊断报告名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportTitle?: string
   /**
    * 小程序隐私诊断堆栈报告下载链接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BehaviorUrl?: string
   /**
    * 小程序隐私诊断堆栈报告名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BehaviorTitle?: string
   /**
    * 诊断风险项数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighRiskCount?: number
   /**
    * 隐私申明文件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivacyTextName?: string
   /**
    * 软件MD5
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SoftwareMD5?: string
   /**
    * 隐私文本MD5
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivacyTextMD5?: string
 }
@@ -838,26 +817,23 @@ export interface DescribeFlySecMiniAppScanTaskStatusResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Ret: number
+  Ret?: number
   /**
    * 诊断状态, 0:排队中, 1:成功, 2:失败, 3:进行中
    */
-  Status: number
+  Status?: number
   /**
    * 诊断失败错误码
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Errno: number
+  Errno?: number
   /**
    * 小程序名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniAppName: string
+  MiniAppName?: string
   /**
    * 小程序版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniAppVersion: string
+  MiniAppVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -871,17 +847,15 @@ export interface DescribeFlySecMiniAppScanReportListResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Ret: number
+  Ret?: number
   /**
    * 诊断报告数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<FlySecMiniAppReportData>
+  Data?: Array<FlySecMiniAppReportData>
   /**
    * 诊断任务数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -952,7 +926,6 @@ export interface AppTaskData {
   TaskStatus?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskErrMsg?: string
   /**
@@ -973,7 +946,6 @@ export interface AppTaskData {
   EndTime?: string
   /**
    * 联系人信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContactName?: string
 }

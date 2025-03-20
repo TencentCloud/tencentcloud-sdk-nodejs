@@ -66,17 +66,14 @@ export interface ScaleOutInstanceRequest {
 export interface ScaleOutInstanceResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -109,22 +106,18 @@ export interface DescribeInstancesNewResponse {
 export interface SecondaryZoneInfo {
   /**
    * 副可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecondaryZone?: string
   /**
    * 可用区可用的子网id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecondarySubnet?: string
   /**
    * 可用区可用的子网可用ip的数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserIpNum?: string
   /**
    * 可用区可用的子网可用ip的数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecondaryUserSubnetIPNum?: number
 }
@@ -361,17 +354,14 @@ export interface DescribeSpecRequest {
 export interface ScaleCNOutUpInstanceResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -441,28 +431,27 @@ export interface ClusterConfigsInfoFromEMR {
   /**
    * 配置文件名称
    */
-  FileName: string
+  FileName?: string
   /**
    * 配置文件对应的相关属性信息
    */
-  FileConf: string
+  FileConf?: string
   /**
    * 配置文件对应的其他属性信息
    */
-  KeyConf: string
+  KeyConf?: string
   /**
    * 配置文件的内容，base64编码
    */
-  OriParam: string
+  OriParam?: string
   /**
    * 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启
    */
-  NeedRestart: number
+  NeedRestart?: number
   /**
    * 保存配置文件的路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilePath: string
+  FilePath?: string
 }
 
 /**
@@ -471,14 +460,12 @@ export interface ClusterConfigsInfoFromEMR {
 export interface ClusterInfo {
   /**
    * vcluster名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 当前cluster的IP列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeIps: Array<string>
+  NodeIps?: Array<string>
 }
 
 /**
@@ -505,7 +492,6 @@ export interface OpenBackUpRequest {
 export interface ModifyInstanceKeyValConfigsResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -524,37 +510,30 @@ export interface ModifyInstanceKeyValConfigsResponse {
 export interface BackupTableContent {
   /**
    * 数据库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * 表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 表总字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalBytes: number
   /**
    * 虚拟cluster
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VCluster?: string
   /**
    * 表ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ips?: string
   /**
    * zk路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZooPath?: string
   /**
    * cvm的ip地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rip?: string
 }
@@ -622,47 +601,38 @@ export interface ConfigSubmitContext {
 export interface InstanceStateInfo {
   /**
    * 集群状态，例如：Serving
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceState?: string
   /**
    * 集群操作创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowCreateTime?: string
   /**
    * 集群操作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowName?: string
   /**
    * 集群操作进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowProgress?: number
   /**
    * 集群状态描述，例如：运行中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateDesc?: string
   /**
    * 集群流程错误信息，例如：“创建失败，资源不足”
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
   /**
    * 当前步骤的名称，例如：”购买资源中“
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessName?: string
   /**
    * 请求id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestId?: string
   /**
    * 流程的二级名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessSubName?: string
 }
@@ -1065,9 +1035,8 @@ export interface NodeSpec {
 export interface DescribeBackUpJobDetailResponse {
   /**
    * 备份表详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableContents: Array<BackupTableContent>
+  TableContents?: Array<BackupTableContent>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1167,12 +1136,10 @@ export interface DescribeInstanceKeyValConfigsResponse {
 export interface ServiceInfo {
   /**
    * 服务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 服务的版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
 }
@@ -1184,11 +1151,11 @@ export interface MapConfigItem {
   /**
    * key
    */
-  ConfKey: string
+  ConfKey?: string
   /**
    * 列表
    */
-  Items: Array<InstanceConfigInfo>
+  Items?: Array<InstanceConfigInfo>
 }
 
 /**
@@ -1407,51 +1374,47 @@ export interface ResourceSpec {
   /**
    * 规格名称，例如“SCH1"
    */
-  Name: string
+  Name?: string
   /**
    * cpu核数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存大小，单位G
    */
-  Mem: number
+  Mem?: number
   /**
    * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
    */
-  Type: string
+  Type?: string
   /**
    * 系统盘描述信息
    */
-  SystemDisk: DiskSpec
+  SystemDisk?: DiskSpec
   /**
    * 数据盘描述信息
    */
-  DataDisk: DiskSpec
+  DataDisk?: DiskSpec
   /**
    * 最大节点数目限制
    */
-  MaxNodeSize: number
+  MaxNodeSize?: number
   /**
    * 是否可用，false代表售罄
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Available: boolean
+  Available?: boolean
   /**
    * 规格描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComputeSpecDesc: string
+  ComputeSpecDesc?: string
   /**
    * 规格名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 库存数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceQuota: number
+  InstanceQuota?: number
 }
 
 /**
@@ -1652,7 +1615,6 @@ export interface NodesSummary {
 export interface DescribeInstanceShardsResponse {
   /**
    * 实例shard信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceShardsList?: string
   /**
@@ -1699,32 +1661,26 @@ export interface InstanceNode {
   NodeGroups?: Array<GroupInfo>
   /**
    * VPC IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rip?: string
   /**
    * ture的时候表示该节点上部署了chproxy进程
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCHProxy?: boolean
   /**
    * 节点状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 节点uuid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UUID?: string
   /**
    * 区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 区描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneDesc?: string
   /**
@@ -1873,7 +1829,6 @@ export interface DescribeInstanceRequest {
 export interface InstanceDetail {
   /**
    * 告警策略是否可用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableAlarmStrategy?: boolean
 }
@@ -1921,7 +1876,6 @@ export interface AttachCBSSpec {
 export interface ScheduleStrategy {
   /**
    * 备份桶名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosBucketName?: string
   /**
@@ -1942,7 +1896,6 @@ export interface ScheduleStrategy {
   ScheduleId?: number
   /**
    * 下次备份时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextBackupTime?: string
 }
@@ -2002,7 +1955,6 @@ export interface DescribeBackUpTablesRequest {
 export interface DestroyInstanceResponse {
   /**
    * 作业id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowID?: string
   /**
@@ -2025,17 +1977,14 @@ export interface DestroyInstanceResponse {
 export interface ResizeDiskResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2114,7 +2063,6 @@ export interface ScaleCNOutUpInstanceRequest {
 export interface DescribeCkSqlApisResponse {
   /**
    * 返回的查询数据，大部分情况是list，也可能是bool
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReturnData?: string
   /**
@@ -2155,17 +2103,14 @@ export interface DescribeBackUpJobRequest {
 export interface ScaleUpInstanceResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**

@@ -35,12 +35,10 @@ export interface DescribeWorkSpaceBuildingCountAndAreaRequest {
 export interface ApplicationList {
   /**
    * 应用列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationInfoList?: Array<ApplicationInfo>
   /**
    * 当前查询条件命中的数据总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: string
 }
@@ -89,12 +87,10 @@ export interface DescribeGroupInfo {
   Name?: string
   /**
    * 分组描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 分组父级ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentId?: number
 }
@@ -105,112 +101,90 @@ export interface DescribeGroupInfo {
 export interface AlarmInfo {
   /**
    * 工作空间id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: number
   /**
    * 告警ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 告警状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 告警时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Time?: number
   /**
    * 告警业务类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 告警业务类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TypeName?: string
   /**
    * 子告警类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubType?: string
   /**
    * 子告警类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubTypeName?: string
   /**
    * 告警级别id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: number
   /**
    * 告警级别名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LevelName?: string
   /**
    * 上报应用appid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
    * 设备wid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName?: string
   /**
    * 空间位置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Position?: string
   /**
    * 上报图片
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportImg?: ReportImg
   /**
    * 告警描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
    * 处理人
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HandlePersonSet?: Array<HandlerPersonInfo>
   /**
    * 处理记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HandleRecordSet?: Array<HandleRecordInfo>
   /**
    * 扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Extend?: string
   /**
    * 应用扩展字段1
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtendOne?: string
   /**
    * 应用扩展字段2
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtendTwo?: string
   /**
    * 应用透传字段,有效字段为x-json后的字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Echo?: string
 }
@@ -221,112 +195,90 @@ export interface AlarmInfo {
 export interface DeviceDataInfo {
   /**
    * 设备ID， wid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName?: string
   /**
    * 设备类型Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTypeCode?: string
   /**
    * 设备类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTypeName?: string
   /**
    * 产品Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: number
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductAbility?: number
   /**
    * 设备位置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceInfoSet?: Array<DeviceSpaceInfo>
   /**
    * 模型id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelId?: string
   /**
    * 模型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelName?: string
   /**
    * 设备标签名，非必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTagSet?: Array<string>
   /**
    * 激活状态（1激活、0未激活）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsActive?: number
   /**
    *  激活时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActiveTime?: string
   /**
    * 推流状态（推流中、未推流） 仅摄像机有的状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLive?: boolean
   /**
    * 设备所属父设备id（子设备才有）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWID?: string
   /**
    * 设备所有父设备名称（子设备才有）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWIDName?: string
   /**
    * 序列号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SN?: string
   /**
    * 设备点位坐标值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: DeviceLocation
   /**
    * 自定义字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FieldList?: Array<CustomFieldInfo>
   /**
    * 分组信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupInfo?: string
   /**
    * 通信在/离线状态（online=normal+fault，offline）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceStatus?: string
   /**
    * 设备业务状态（normal、fault、offline）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -337,7 +289,6 @@ export interface DeviceDataInfo {
 export interface BuildingProfileRes {
   /**
    * 建筑概要信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingProfile?: BuildingProfile
 }
@@ -388,27 +339,22 @@ export interface DescribeDeviceStatusStatRequest {
 export interface ProductSet {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 产品信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Product?: Array<ProductInfo>
 }
@@ -419,12 +365,10 @@ export interface ProductSet {
 export interface Action {
   /**
    * 动作id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 动作名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -550,17 +494,14 @@ export interface DescribeEdgeApplicationTokenResponse {
 export interface DeviceLocation {
   /**
    * 点位X坐标值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   X?: number
   /**
    * 点位Y坐标值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Y?: number
   /**
    * 点位Z坐标值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Z?: number
 }
@@ -571,12 +512,10 @@ export interface DeviceLocation {
 export interface SsoUserResult {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 租户人员数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Users?: Array<SsoUser>
 }
@@ -587,57 +526,46 @@ export interface SsoUserResult {
 export interface SsoTeamUser {
   /**
    * 用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
   /**
    * 用户名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealName?: string
   /**
    * 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserType?: string
   /**
    * 所属租户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TenantId?: string
   /**
    * 邮箱
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
    * 电话
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Phone?: string
   /**
    * 用户状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateAt?: number
   /**
    * 部门ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentId?: string
   /**
    * 部门名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentName?: string
   /**
    * 是否关联权限
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LinkFilter?: number
 }
@@ -670,7 +598,6 @@ export interface AddDeviceInfo {
 export interface EmptyRes {
   /**
    * 返回请求状态,成功ok，失败error
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
 }
@@ -681,37 +608,30 @@ export interface EmptyRes {
 export interface ApiContent {
   /**
    * 所属API的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 参数名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 参数类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 是否为动态值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Dynamic?: boolean
   /**
    * 是否必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Required?: boolean
   /**
    * 参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
    * 默认值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultValue?: string
 }
@@ -736,7 +656,6 @@ export interface DescribeWorkspaceListResponse {
 export interface SpaceDeviceRelationRes {
   /**
    * 设备空间绑定关系列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceDeviceRelationList?: Array<SpaceDeviceRelation>
 }
@@ -747,67 +666,54 @@ export interface SpaceDeviceRelationRes {
 export interface ProductInfo {
   /**
    * 工作空间id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: number
   /**
    * 产品PID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: number
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 设备类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTypeName?: string
   /**
    * 设备类型id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTypeId?: string
   /**
    * 产品属性，如：网关（1）、直连设备（2）、子设备（3）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Attribute?: number
   /**
    * 产品型号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductType?: string
   /**
    * 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductAbility?: number
   /**
    * 生产厂商
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Manufacturer?: string
   /**
    * 维保厂商
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaintenanceMfr?: string
   /**
    * 物模型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelName?: string
   /**
    * 物模型id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelId?: string
   /**
    * 物模型类型，产品模型/标准模型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelType?: number
 }
@@ -818,107 +724,86 @@ export interface ProductInfo {
 export interface ApiInfo {
   /**
    * API的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiId?: string
   /**
    * API名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * API所属应用的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
    * API所属的项目空间的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
    * API所属目录的编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PoiCode?: string
   /**
    *  接口分类0. 其他服务 1. IOT服务 2. 空间服务 3.微应用服务 4.场景服务 5.AI算法服务 6.任务算法服务 7.第三方服务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 数据授权 0:否 1:是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataAudit?: number
   /**
    * 是否需要申请 0:否 1:是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyAudit?: number
   /**
    * API详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * API地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
    * 请求方法类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
    * API状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * API预览地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreviewUrl?: string
   /**
    * query参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryParams?: Array<ApiContent>
   /**
    * 路径参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PathParams?: Array<ApiContent>
   /**
    * 请求头
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestHeaders?: Array<ApiContent>
   /**
    * 响应头
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseHeaders?: Array<ApiContent>
   /**
    * 是否为公共空间接口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCommonSpace?: boolean
   /**
    * 请求体（base64编码）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Body?: string
   /**
    * 响应体（base64编码）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseBody?: string
   /**
    * 接口方式 1.http 2消息通知服务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Style?: number
 }
@@ -975,42 +860,34 @@ export interface BatchCreateDeviceResponse {
 export interface ElementPropertyRes {
   /**
    * 建筑id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingId?: string
   /**
    * 构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementId?: string
   /**
    * 构件属性集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PropertySet?: Array<ElementProperty>
   /**
    * 构件地理坐标
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Coordinates?: ElementCoordinates
   /**
    * 构件偏移量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Translate?: ElementTranslate
   /**
    * 构件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementName?: string
   /**
    * 构件类型代码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EntityTypeCode?: string
   /**
    * 构件类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EntityTypeName?: string
 }
@@ -1188,13 +1065,11 @@ export interface ReportMsgRes {
   /**
    * 上报消息对应下标的16位标识Id, 即第几个消息
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportId?: string
   /**
    * 上报消息结果，1表示成功推送，0表示推送失败
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportStatus?: number
 }
@@ -1205,7 +1080,6 @@ export interface ReportMsgRes {
 export interface DescribeDeviceGroupListRes {
   /**
    * 设备分组list
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<DescribeGroupInfo>
 }
@@ -1256,12 +1130,10 @@ export interface DescribeApplicationListRequest {
 export interface ElementProfileTreeNode {
   /**
    * 构件概要信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementProfile?: ElementProfile
   /**
    * 子节点信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Children?: Array<ElementProfileTreeNode>
 }
@@ -1272,37 +1144,30 @@ export interface ElementProfileTreeNode {
 export interface WorkspaceInfo {
   /**
    * 工作空间Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: number
   /**
    * 工作空间中文名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChineseName?: string
   /**
    * 工作空间描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 工作空间是否删除状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 该工作空间绑定的区/县的行政区名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParkName?: string
   /**
    * 该工作空间绑定的区/县的行政区编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParkNum?: string
   /**
    * 获取该工作空间绑定的区/县的上级行政区划信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdministrativeDetailSet?: Array<AdministrativeDetail>
 }
@@ -1407,27 +1272,22 @@ export interface DescribeSpaceRelationByDeviceIdRequest {
 export interface AlarmTypeDetailInfo {
   /**
    * 告警类型id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 父节点id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentId?: number
   /**
    * 0-标准告警类型，1-自定义告警类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 告警名称类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 告警类型英文名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnglishName?: string
 }
@@ -1578,17 +1438,14 @@ export interface DescribeSpaceDeviceRelationListRequest {
 export interface FileUploadURL {
   /**
    * 上传地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UploadURL?: string
   /**
    * 文件Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileId?: string
   /**
    * 下载地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DownloadURL?: string
 }
@@ -1613,17 +1470,14 @@ export interface DescribeApplicationListResponse {
 export interface ElementProperty {
   /**
    * 属性名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 属性描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 属性内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
 }
@@ -1634,7 +1488,6 @@ export interface ElementProperty {
 export interface BuildingListRes {
   /**
    * 建筑列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingProfileList?: Array<BuildingProfile>
 }
@@ -1645,22 +1498,18 @@ export interface BuildingListRes {
 export interface DeviceSpaceInfo {
   /**
    * 空间Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 空间名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 空间级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: number
   /**
    * 空间编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: string
 }
@@ -1689,37 +1538,30 @@ export interface DescribeFileDownloadURLRequest {
 export interface DeviceStatusStatRes {
   /**
    * 工作空间Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: number
   /**
    * 汇总数。在线（正常+故障） + 离线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 正常数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalSum?: number
   /**
    * 离线数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OfflineSum?: number
   /**
    * 故障数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FaultSum?: number
   /**
    * 设备类型概览列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTypeOverviewSet?: Array<DeviceTypeOverview>
   /**
    * 设备类型统计列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatLevelSet?: Array<StatLevel>
 }
@@ -1730,12 +1572,10 @@ export interface DeviceStatusStatRes {
 export interface HandlerPersonInfo {
   /**
    * 用户id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -1746,12 +1586,10 @@ export interface HandlerPersonInfo {
 export interface Event {
   /**
    * 事件id或动作Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 事件名称或动作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -1829,57 +1667,46 @@ export interface DescribeSpaceTypeListRequest {
 export interface SpaceInfo {
   /**
    * 项目空间id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: number
   /**
    * 租户id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TenantId?: number
   /**
    * 英文名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnglishName?: string
   /**
    * 中文名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChineseName?: string
   /**
    * 项目空间描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 项目空间状态:0 启用 1 停用 -1 已删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 是否是公共空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCommWorkspace?: boolean
   /**
    * 有效期开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidityStartTime?: string
   /**
    * 有效期结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidityEndTime?: string
   /**
    * 选中状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Selected?: number
   /**
    * 系统生成状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSystem?: number
 }
@@ -1924,12 +1751,10 @@ export interface DescribeModelListRequest {
 export interface VideoCloudRecordRes {
   /**
    * 录像信息总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 录像信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordSet?: Array<RecordInfo>
 }
@@ -1940,12 +1765,10 @@ export interface VideoCloudRecordRes {
 export interface SsoDepartmentsResult {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 部门列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Departments?: Array<SsoDepartment>
 }
@@ -1956,32 +1779,26 @@ export interface SsoDepartmentsResult {
 export interface VideoRecordStreamRes {
   /**
    * FLV协议格式视频流
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FLV?: string
   /**
    * RTMP协议格式视频流
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RTMP?: string
   /**
    * HLS协议格式视频流
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HLS?: string
   /**
    * WebRtc协议格式视频流
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WebRTC?: string
   /**
    * RAW协议格式视频流
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RAW?: RawInfo
   /**
    * 视频流的唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Stream?: string
 }
@@ -1992,22 +1809,18 @@ export interface VideoRecordStreamRes {
 export interface ControlDeviceRes {
   /**
    * 设备Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 指令接受, 0表示成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: number
   /**
    * 控制结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
    * 批量大于1时，可用此seq进行链路追踪
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Seq?: string
 }
@@ -2018,7 +1831,6 @@ export interface ControlDeviceRes {
 export interface WorkspaceInfoList {
   /**
    * 项目空间列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<SpaceInfo>
 }
@@ -2029,7 +1841,6 @@ export interface WorkspaceInfoList {
 export interface BuildingModelRes {
   /**
    * 建模模型信息出参
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Models?: Array<BuildingModel>
 }
@@ -2068,7 +1879,6 @@ export interface BatchDeleteDeviceResponse {
 export interface SpaceRelationRes {
   /**
    * 空间层级关系
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceRelation?: SpaceRelation
 }
@@ -2079,12 +1889,10 @@ export interface SpaceRelationRes {
 export interface SsoTeamUserResult {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 部门用户列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Users?: Array<SsoTeamUser>
 }
@@ -2131,27 +1939,22 @@ export interface DescribePropertyListRequest {
 export interface DescribeEventListRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 事件信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventDetailSet?: Array<EventDetail>
 }
@@ -2196,12 +1999,10 @@ export interface DescribeProductListRequest {
 export interface ApplicationLogo {
   /**
    * logo图片对应的fileId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileId?: string
   /**
    * logo图片地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
 }
@@ -2212,27 +2013,22 @@ export interface ApplicationLogo {
 export interface DescribeLinkRuleListRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 联动规则列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LinkRuleSet?: Array<LinkRuleInfo>
 }
@@ -2243,22 +2039,18 @@ export interface DescribeLinkRuleListRes {
 export interface CreateDeviceFailed {
   /**
    * 产品id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: number
   /**
    * 父设备wid，不为空表示导入自设备
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWID?: string
   /**
    * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
    * 设备sn序列号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SN?: string
 }
@@ -2269,17 +2061,14 @@ export interface CreateDeviceFailed {
 export interface ElementTranslate {
   /**
    * X方向偏移量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   X?: number
   /**
    * Y方向偏移量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Y?: number
   /**
    * Z方向偏移量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Z?: number
 }
@@ -2372,17 +2161,14 @@ export interface DescribeDeviceTypeListResponse {
 export interface AlarmStatusData {
   /**
    * 告警状态ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusID?: string
   /**
    * 告警状态名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusName?: string
   /**
    * 告警状态类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusType?: string
 }
@@ -2393,17 +2179,14 @@ export interface AlarmStatusData {
 export interface RecordInfo {
   /**
    * 本录像片段开始时间（s）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 本录像片段结束时间（s）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 录像片段文件url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoURL?: string
 }
@@ -2424,22 +2207,18 @@ export interface DescribeVideoRecordStreamResponse {
 export interface CreateDeviceSucceeded {
   /**
    * 产品id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: number
   /**
    * 父设备wid，不为空表示导入自设备
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentWID?: string
   /**
    * 设备编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 设备sn序列号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SN?: string
 }
@@ -2468,57 +2247,46 @@ export interface SceneInfo {
 export interface RuleDetailRes {
   /**
    * 联动id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: number
   /**
    * 联动名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
    * 联动说明
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleDesc?: string
   /**
    * 1 全天有效，0：固定时间段有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidType?: number
   /**
    * 有效期，json字符串（全天有效时为空）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidPeriod?: string
   /**
    * 起始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginDate?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndDate?: string
   /**
    * 启用状态。1-启用，0-停用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 触发规则，事件的组合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventRule?: string
   /**
    * 事件对象集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventInfoSet?: Array<EventObj>
   /**
    * 动作对象集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionInfoSet?: Array<ActionObj>
 }
@@ -2575,27 +2343,22 @@ export interface DescribeDeviceStatusStatResponse {
 export interface DeviceShadowRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 设备影子列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Set?: Array<DeviceShadowInfo>
 }
@@ -2606,7 +2369,6 @@ export interface DeviceShadowRes {
 export interface DescribeAlarmTypeListRes {
   /**
    * 告警类型查询列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmTypeSet?: Array<AlarmTypeDetailInfo>
 }
@@ -2635,82 +2397,66 @@ export interface DescribeBuildingModelRequest {
 export interface SsoUser {
   /**
    * 用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
   /**
    * 用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * 用户名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealName?: string
   /**
    * 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserType?: string
   /**
    * 所属租户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TenantId?: string
   /**
    * 所属组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserGroup?: string
   /**
    * 邮箱
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
    * 电话
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Phone?: string
   /**
    * 用户状态，0待审核，1正常启用，2禁用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateAt?: number
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateAt?: number
   /**
    * 是否属于团队，0不可用，1属于，2不属
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BelongTeam?: number
   /**
    * 部门ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentId?: string
   /**
    * 部门名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentName?: string
   /**
    * 子账户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentUserId?: number
   /**
    * 密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
 }
@@ -2721,17 +2467,14 @@ export interface SsoUser {
 export interface AdministrativeDetail {
   /**
    * 行政区域类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdministrativeTypeCode?: string
   /**
    * 行政区域编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdministrativeCode?: string
   /**
    * 行政区域名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdministrativeName?: string
 }
@@ -2742,22 +2485,18 @@ export interface AdministrativeDetail {
 export interface BuildingModel {
   /**
    * 构件ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementId?: string
   /**
    * 构件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementName?: string
   /**
    * 模型类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelType?: string
   /**
    * 模型URL
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelUrl?: string
 }
@@ -2768,12 +2507,10 @@ export interface BuildingModel {
 export interface SpaceDeviceRelation {
   /**
    * 设备id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceId?: string
   /**
    * 构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementId?: string
 }
@@ -2817,12 +2554,10 @@ focusOut - 焦距变远
 export interface AdministrationData {
   /**
    * 行政区划编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdministrationCode?: string
   /**
    * 行政区划名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdministrationName?: string
 }
@@ -2928,17 +2663,14 @@ export interface BatchReportAppMessageRes {
   /**
    * 上报数量
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalElements?: number
   /**
    * 提交数量（推送成功）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Commit?: number
   /**
    * 消息推送结果列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpanMap?: Array<ReportMsgRes>
 }
@@ -2995,7 +2727,6 @@ export interface SpaceDataTotalStatsRes {
 export interface DescribeCityWorkspaceListRes {
   /**
    * 通过城市id查询工作空间列表结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceSet?: Array<WorkspaceInfo>
 }
@@ -3006,7 +2737,6 @@ export interface DescribeCityWorkspaceListRes {
 export interface DeviceTypeSet {
   /**
    * 设备类型列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Set?: Array<DeviceType>
 }
@@ -3053,32 +2783,26 @@ export interface ModifyDeviceGroupInfo {
 export interface StatLevel {
   /**
    * 汇总数。在线（正常+故障） + 离线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 正常数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalSum?: number
   /**
    * 离线数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OfflineSum?: number
   /**
    * 故障数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FaultSum?: number
   /**
    * 空间id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceCode?: string
   /**
    * 设备类型统计列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatDeviceTypeSet?: Array<StatDeviceType>
 }
@@ -3119,7 +2843,6 @@ export interface DescribeWorkspaceUserListRequest {
 export interface ControlDeviceSet {
   /**
    * 设备控制后返回结果集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Set?: Array<ControlDeviceRes>
 }
@@ -3130,12 +2853,10 @@ export interface ControlDeviceSet {
 export interface BatchCreateDeviceRes {
   /**
    * 新增成功的设备列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessSet?: Array<CreateDeviceSucceeded>
   /**
    * 新增失败的设备列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailSet?: Array<CreateDeviceFailed>
 }
@@ -3170,27 +2891,22 @@ export interface SaveDeviceGroupRes {
 export interface DescribeDeviceListRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 设备信息集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceDataSet?: Array<DeviceDataInfo>
 }
@@ -3297,32 +3013,26 @@ export interface DescribeSpaceTypeListResponse {
 export interface BuildingProfile {
   /**
    * 建筑id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingId?: string
   /**
    * 建筑名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingName?: string
   /**
    * 空间编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceCode?: string
   /**
    * 经度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Longitude?: number
   /**
    * 纬度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Latitude?: number
   /**
    * 地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
 }
@@ -3333,7 +3043,6 @@ export interface BuildingProfile {
 export interface ApplicationTokenInfo {
   /**
    * 应用申请调用API的令牌
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Token?: string
 }
@@ -3358,12 +3067,10 @@ export interface DescribeAlarmLevelListResponse {
 export interface AlarmLevelInfo {
   /**
    * 级别id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LevelId?: number
   /**
    * 级别名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LevelName?: string
 }
@@ -3375,49 +3082,40 @@ export interface HandleRecordInfo {
   /**
    * 告警处理记录id
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 操作类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperationType?: string
   /**
    * 处理时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Time?: string
   /**
    * 类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 文件列表
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileSet?: Array<FileInfo>
   /**
    * 应用appid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
    * 扩展字段1，存非孪生中台用户id
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtendOne?: string
 }
@@ -3428,17 +3126,14 @@ export interface HandleRecordInfo {
 export interface ElementProfileTreeRes {
   /**
    * 建筑id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingId?: string
   /**
    * 父级构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentElementId?: string
   /**
    * 构件树
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Root?: ElementProfileTreeNode
 }
@@ -3449,27 +3144,22 @@ export interface ElementProfileTreeRes {
 export interface DeviceTagRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 设备标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Set?: Array<DeviceTagInfo>
 }
@@ -3516,52 +3206,42 @@ export interface DescribeDeviceGroupListRequest {
 export interface ActionDetail {
   /**
    * 动作id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 动作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 动作类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionType?: string
   /**
    * 动作说明
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionDesc?: string
   /**
    * 消息类型，orgin/custom/model
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgType?: string
   /**
    * 消息内容,有效值为x-json:后的字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgContent?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 设备唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 关联故障列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LinkRuleSet?: Array<LinkRule>
   /**
    * 动作下沉配置,有效值为x-json:后的字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SinkConfig?: string
 }
@@ -3572,7 +3252,6 @@ export interface ActionDetail {
 export interface DescribeAdministrationByTagRes {
   /**
    * 行政区划列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<AdministrationData>
 }
@@ -3724,27 +3403,22 @@ export interface BatchKillAlarmRequest {
 export interface DescribeActionListRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 动作列表查询集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionDetailSet?: Array<ActionDetail>
 }
@@ -3755,42 +3429,34 @@ export interface DescribeActionListRes {
 export interface LinkRuleInfo {
   /**
    * 联动id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 联动名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 事件列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventSet?: Array<Event>
   /**
    * 动作列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionSet?: Array<Action>
   /**
    * 状态：0开，-1关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 起始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginDate?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndDate?: string
   /**
    * 有效周期内容,有效字段为x-json后的字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidPeriod?: string
 }
@@ -3801,32 +3467,26 @@ export interface LinkRuleInfo {
 export interface StatDeviceType {
   /**
    * 汇总数。在线（正常+故障） + 离线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 正常数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Normal?: number
   /**
    * 离线数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Offline?: number
   /**
    * 故障数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Fault?: number
   /**
    * 设备名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 设备类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
 }
@@ -3929,12 +3589,10 @@ export interface DescribeEventListResponse {
 export interface DeviceTagInfo {
   /**
    * 标签Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagId?: number
   /**
    * 标签名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagName?: string
 }
@@ -3945,28 +3603,23 @@ export interface DeviceTagInfo {
 export interface DeviceType {
   /**
    * 设备类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: string
   /**
    * 设备类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 父设备类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentCode?: string
   /**
    * 父设备类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentName?: string
   /**
    * 是否子系统，1是
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSubsystem?: number
 }
@@ -3999,32 +3652,26 @@ export interface DescribeDeviceTagListRequest {
 export interface SpaceRelation {
   /**
    * 构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementId?: string
   /**
    * 构件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementName?: string
   /**
    * 空间层级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: number
   /**
    * 空间编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceCode?: string
   /**
    * 父级空间编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentSpaceCode?: string
   /**
    * 子构件信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Children?: Array<SpaceRelation>
 }
@@ -4050,12 +3697,10 @@ export interface FileInfo {
   /**
    * 文件id
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileId?: string
   /**
    * 名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportName?: string
 }
@@ -4108,17 +3753,14 @@ export interface ReportAppMessageRequest {
 export interface SsoDepartment {
   /**
    * 部门ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentId?: string
   /**
    * 部门名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 父级部门ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentDepartmentId?: string
 }
@@ -4129,37 +3771,30 @@ export interface SsoDepartment {
 export interface ApplicationInfo {
   /**
    * 应用分配的appId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
   /**
    * 应用中文名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 应用地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
    * 应用logo
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationLogo?: ApplicationLogo
   /**
    * 应用类型，0:saas应用 1:平台应用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * engine
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnglishName?: string
   /**
    * 能源管理应用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }
@@ -4312,12 +3947,10 @@ export interface DescribeVideoCloudRecordRequest {
 export interface ElementProfilePageRes {
   /**
    * 构件总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 构件列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<ElementProfile>
 }
@@ -4346,12 +3979,10 @@ export interface DescribeAdministrationByTagRequest {
 export interface ReportImg {
   /**
    * 类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
 }
@@ -4362,47 +3993,38 @@ export interface ReportImg {
 export interface EventDetail {
   /**
    * 事件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 事件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 事件触发类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: string
   /**
    * 事件触发条件，返回为x-json后的字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerCondition?: string
   /**
    * 有效期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidPeriod?: string
   /**
    * 关联规则列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LinkRuleSet?: Array<LinkRule>
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 设备类型，当触发类型为deviceType时返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
   /**
    * 设备的wid，当触发类型是device返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
 }
@@ -4441,7 +4063,6 @@ export interface ControlDeviceResponse {
 export interface DescribeAlarmLevelListRes {
   /**
    * 告警级别枚举获取数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevelSet?: Array<AlarmLevelInfo>
 }
@@ -4452,27 +4073,22 @@ export interface DescribeAlarmLevelListRes {
 export interface DescribeAlarmListRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 告警列表集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmInfoSet?: Array<AlarmInfo>
 }
@@ -4483,23 +4099,19 @@ export interface DescribeAlarmListRes {
 export interface CameraExtendInfoRes {
   /**
    * 存储方式 (nvr或cosmtav)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SaveType?: string
   /**
    * 云存储天数（save_type是cosmtav时这个参数才有效）
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SaveDay?: number
   /**
    * 实时分辨率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveResolution?: number
   /**
    * 历史分辨率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HistoryResolution?: number
 }
@@ -4610,32 +4222,26 @@ export interface DescribeInterfaceListRequest {
 export interface DeviceTypeOverview {
   /**
    * 设备类型值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
   /**
    * 设备类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 汇总数。在线（正常+故障） + 离线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 正常数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Normal?: number
   /**
    * 离线数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Offline?: number
   /**
    * 故障数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Fault?: number
 }
@@ -4745,7 +4351,6 @@ raw (视频原始帧)
 export interface SceneListRes {
   /**
    * 场景列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneList?: Array<SceneInfo>
 }
@@ -4756,12 +4361,10 @@ export interface SceneListRes {
 export interface ApiInfoList {
   /**
    * API列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiInfo?: Array<ApiInfo>
   /**
    * 数据总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
 }
@@ -4840,72 +4443,58 @@ export interface SaveDeviceGroupResponse {
 export interface ElementProfile {
   /**
    * 建筑id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingId?: string
   /**
    * 构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementId?: string
   /**
    * 构件类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EntityType?: string
   /**
    * 构件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementName?: string
   /**
    * 构件空间级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: number
   /**
    * 底部标高（单位mm）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BottomHeight?: number
   /**
    * 排序
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sort?: number
   /**
    * 空间编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceCode?: string
   /**
    * 空间分类编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceTypeCode?: string
   /**
    * 空间分类名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceTypeName?: string
   /**
    * 父级构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentElementId?: string
   /**
    * 空间层级类型编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpacePoiId?: string
   /**
    * 构件描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementDesc?: string
   /**
    * 删除标记
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDelete?: number
 }
@@ -4944,22 +4533,18 @@ export interface DescribeWorkSpaceBuildingCountAndAreaResponse {
 export interface EventObj {
   /**
    * 事件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 事件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 事件触发类型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 时间触发条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Condition?: string
 }
@@ -4970,22 +4555,18 @@ export interface EventObj {
 export interface CustomFieldInfo {
   /**
    * 字段id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 字段key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 字段名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 字段值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Val?: string
 }
@@ -5010,7 +4591,6 @@ export interface AlarmTypeInfo {
 export interface SpaceTypeListRes {
   /**
    * 空间分类列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceTypeList?: Array<SpaceType>
 }
@@ -5123,12 +4703,10 @@ export interface DescribeAdministrationByTagResponse {
 export interface LinkRule {
   /**
    * 关联联动规则id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 关联联动规则名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -5139,12 +4717,10 @@ export interface LinkRule {
 export interface SpaceType {
   /**
    * 空间分类编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceTypeCode?: string
   /**
    * 空间分类名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceTypeName?: string
 }
@@ -5155,47 +4731,38 @@ export interface SpaceType {
 export interface ActionObj {
   /**
    * 动作id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 动作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 动作类型。（app/推送消息至应用-携带空间设备：无,appWithNearbyDevices/推送至应用-携带空间设备：携带,device/推送消息至设备-指定设备,nearbyDevices/推送消息至设备-事件所在范围内的设备,toAlarm/转换为告警,toNotification/转换为通知）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 动作说明
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
    * 消息类型，orgin/custom/model
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgType?: string
   /**
    * 消息内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgContent?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 动作下沉配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SinkConfig?: string
   /**
    *  具体应用（appid）/具体设备（DIN/subID）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyDevice?: string
 }
@@ -5206,42 +4773,34 @@ export interface ActionObj {
 export interface ModelInfo {
   /**
    * 工作空间id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: number
   /**
    * 模型名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelName?: string
   /**
    * 物模型id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelId?: string
   /**
    * 关联产品信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RelatedProduct?: Array<RelatedProduct>
   /**
    * 设备类型名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceTypeName?: string
   /**
    * 设备类型id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
   /**
    * 物模型类型，产品模型/标准模型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelType?: number
   /**
    * 模型参数内容,有效字段为"x-json:"后的字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelParams?: string
 }
@@ -5252,27 +4811,22 @@ export interface ModelInfo {
 export interface DeviceStatusInfo {
   /**
    * 设备ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 设备状态（online=normal+fault、offline）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceStatus?: string
   /**
    * 设备状态更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceStatusUpdateTime?: string
   /**
    * 设备业务状态（normal、fault、offline）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 推流状态。推流中-true，未推流-false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAlive?: boolean
 }
@@ -5283,27 +4837,22 @@ export interface DeviceStatusInfo {
 export interface DeviceStatusRes {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 设备状态信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceStatusSet?: Array<DeviceStatusInfo>
 }
@@ -5328,17 +4877,14 @@ export interface BatchKillAlarmResponse {
 export interface DeviceShadowInfo {
   /**
    * 设备ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WID?: string
   /**
    * 设备影子数据,返回有效数据为"x-json:"后字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceShadow?: string
   /**
    * 设备影子更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceShadowUpdateTime?: string
 }
@@ -5349,37 +4895,30 @@ export interface DeviceShadowInfo {
 export interface DeviceSpaceInfoRes {
   /**
    * 建筑id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildingId?: string
   /**
    * 构件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementId?: string
   /**
    * 构件类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EntityType?: string
   /**
    * 构件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElementName?: string
   /**
    * 构件级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: number
   /**
    * 底部标高（单位mm）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BottomHeight?: number
   /**
    * 空间编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpaceCode?: string
 }
@@ -5530,7 +5069,6 @@ export interface DescribeTenantBuildingCountAndAreaResponse {
 export interface SpaceDataListStatsRes {
   /**
    * 楼栋数量与建筑面积列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<SpaceDataStats>
 }
@@ -5541,37 +5079,30 @@ export interface SpaceDataListStatsRes {
 export interface RawInfo {
   /**
    * 加密向量（如果视频网关选择流为非加密传输这个参数可忽略）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SM4Vector?: string
   /**
    * 专线ip (非专线接入可忽略)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NATIP?: string
   /**
    * 客户端握手鉴权参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamToken?: string
   /**
    * 拉流端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * 视频流加密key,目前为AES128加密KEY（如果视频网关选择流为非加密传输这个参数可忽略）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamEnKey?: string
   /**
    * 拉流公网地址（非公网接入时，这个地址是内网地址）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IP?: string
   /**
    * 拉流内网地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerIP?: string
 }
@@ -5583,7 +5114,6 @@ export interface FileDownloadURL {
   /**
    * 下载地址
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileURL?: string
 }
@@ -5594,7 +5124,6 @@ export interface FileDownloadURL {
 export interface DescribeAlarmStatusListRes {
   /**
    * 告警状态返回结构
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<AlarmStatusData>
 }
@@ -5656,27 +5185,22 @@ raw (视频原始帧)
 export interface ModelSet {
   /**
    * 第几页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
    * 每页条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPage?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRow?: number
   /**
    * 模型基础信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Set?: Array<ModelInfo>
 }
@@ -5814,17 +5338,14 @@ export interface DescribeCameraExtendInfoRequest {
 export interface ElementCoordinates {
   /**
    * 经度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Longitude?: number
   /**
    * 纬度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Latitude?: number
   /**
    * 高程
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Altitude?: number
 }
@@ -5863,7 +5384,6 @@ export interface DescribeTenantUserListResponse {
 export interface SpaceDeviceIdListRes {
   /**
    * 设备id列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceIds?: Array<string>
 }
@@ -5948,12 +5468,10 @@ export interface DescribeSpaceDeviceIdListRequest {
 export interface RelatedProduct {
   /**
    * 关联产品pid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 关联产品名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }

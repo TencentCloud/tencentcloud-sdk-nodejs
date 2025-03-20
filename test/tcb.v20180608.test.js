@@ -258,6 +258,16 @@ it("tcb.v20180608.CreateStaticStore", async function () {
     }
 })
 
+it("tcb.v20180608.EditAuthConfig", async function () {
+    try {
+       const data = await client.EditAuthConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeSpecialCostItems", async function () {
     try {
        const data = await client.DescribeSpecialCostItems({})
@@ -651,16 +661,6 @@ it("tcb.v20180608.DescribeCloudBaseRunOperationTypes", async function () {
 it("tcb.v20180608.DestroyEnv", async function () {
     try {
        const data = await client.DestroyEnv({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DescribeActivityInfo", async function () {
-    try {
-       const data = await client.DescribeActivityInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

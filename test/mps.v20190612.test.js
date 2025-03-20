@@ -18,6 +18,16 @@ const client = new tencentcloud.mps.v20190612.Client({
 })
 describe("mps.v20190612.test.js", function () {
 
+it("mps.v20190612.DescribeAsrHotwords", async function () {
+    try {
+       const data = await client.DescribeAsrHotwords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateSnapshotByTimeOffsetTemplate", async function () {
     try {
        const data = await client.CreateSnapshotByTimeOffsetTemplate({})
@@ -31,6 +41,26 @@ it("mps.v20190612.CreateSnapshotByTimeOffsetTemplate", async function () {
 it("mps.v20190612.DescribeStreamLinkFlowRealtimeStatus", async function () {
     try {
        const data = await client.DescribeStreamLinkFlowRealtimeStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
+    try {
+       const data = await client.CreateAnimatedGraphicsTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifySmartSubtitleTemplate", async function () {
+    try {
+       const data = await client.ModifySmartSubtitleTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +111,16 @@ it("mps.v20190612.DeleteAnimatedGraphicsTemplate", async function () {
 it("mps.v20190612.DescribeAIAnalysisTemplates", async function () {
     try {
        const data = await client.DescribeAIAnalysisTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteSmartSubtitleTemplate", async function () {
+    try {
+       const data = await client.DeleteSmartSubtitleTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +258,9 @@ it("mps.v20190612.DescribeLiveRecordTemplates", async function () {
     }
 })
 
-it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
+it("mps.v20190612.DeleteAsrHotwords", async function () {
     try {
-       const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
+       const data = await client.DeleteAsrHotwords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +281,16 @@ it("mps.v20190612.EnableWorkflow", async function () {
 it("mps.v20190612.RecognizeMediaForZhiXue", async function () {
     try {
        const data = await client.RecognizeMediaForZhiXue({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeAsrHotwordsList", async function () {
+    try {
+       const data = await client.DescribeAsrHotwordsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +578,16 @@ it("mps.v20190612.ModifyStreamLinkInput", async function () {
     }
 })
 
+it("mps.v20190612.CreateSmartSubtitleTemplate", async function () {
+    try {
+       const data = await client.CreateSmartSubtitleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamLinkRegions", async function () {
     try {
        const data = await client.DescribeStreamLinkRegions({})
@@ -628,6 +688,16 @@ it("mps.v20190612.DescribeStreamLinkEventAttachedFlows", async function () {
     }
 })
 
+it("mps.v20190612.DescribeSmartSubtitleTemplates", async function () {
+    try {
+       const data = await client.DescribeSmartSubtitleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
     try {
        const data = await client.ModifyStreamLinkOutputInfo({})
@@ -671,6 +741,16 @@ it("mps.v20190612.DescribeContentReviewTemplates", async function () {
 it("mps.v20190612.DescribeStreamLinkEvents", async function () {
     try {
        const data = await client.DescribeStreamLinkEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyAsrHotwords", async function () {
+    try {
+       const data = await client.ModifyAsrHotwords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +1068,9 @@ it("mps.v20190612.DeletePersonSample", async function () {
     }
 })
 
-it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
+it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
     try {
-       const data = await client.CreateAnimatedGraphicsTemplate({})
+       const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1061,6 +1141,16 @@ it("mps.v20190612.DeleteSampleSnapshotTemplate", async function () {
 it("mps.v20190612.DescribeStreamLinkFlowMediaStatistics", async function () {
     try {
        const data = await client.DescribeStreamLinkFlowMediaStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateAsrHotwords", async function () {
+    try {
+       const data = await client.CreateAsrHotwords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

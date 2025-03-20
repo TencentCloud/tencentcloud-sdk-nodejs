@@ -2981,47 +2981,38 @@ export interface DescribeGatewayFlowMonitorDetailResponse {
 export interface IpGeolocationInfo {
   /**
    * 国家信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Country?: string
   /**
    * 省、州、郡一级行政区域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Province?: string
   /**
    * 市一级行政区域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   City?: string
   /**
    * 市内区域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 接入运营商信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Isp?: string
   /**
    * 骨干运营商名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsName?: string
   /**
    * 骨干运营商AS号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsId?: string
   /**
    * 注释信息。目前的填充值为移动接入用户的APN值，如无APN属性则为空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * IP地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressIp?: string
 }
@@ -3646,12 +3637,10 @@ export interface TrafficFlow {
   Value?: number
   /**
    * 格式化后的流量，单位见参数 FormatUnit
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FormatValue?: number
   /**
    * 格式化后流量的单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FormatUnit?: string
 }
@@ -4935,12 +4924,10 @@ export interface InternetPriceDetail {
   UnitPrice?: number
   /**
    * 折扣后的价格，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiscountPrice?: number
   /**
    * 计价单元，可取值范围：<ul> <li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeUnit?: string
   /**
@@ -6341,7 +6328,6 @@ export interface TrafficPackage {
   TrafficPackageId?: string
   /**
    * 流量包名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrafficPackageName?: string
   /**
@@ -6370,7 +6356,6 @@ export interface TrafficPackage {
   UsedAmount?: number
   /**
    * 流量包标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<Tag>
   /**
@@ -12634,7 +12619,6 @@ export interface UsedDetail {
   TrafficPackageId?: string
   /**
    * 流量包名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrafficPackageName?: string
   /**
@@ -18852,7 +18836,6 @@ export interface Quota {
   QuotaLimit?: number
   /**
    * 配额所属的网络组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QuotaGroup?: string
 }

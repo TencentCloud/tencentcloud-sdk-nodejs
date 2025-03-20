@@ -8671,6 +8671,10 @@ export interface CreatePostCLSFlowRequest {
    * 1-访问日志，2-攻击日志，默认为访问日志。
    */
   LogType?: number
+  /**
+   * 投递的CLS所在日志主题的名称，默认为 waf_post_logtopic
+   */
+  LogTopicName?: string
 }
 
 /**
