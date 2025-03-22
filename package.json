@@ -10,6 +10,7 @@
     "build": "concurrently 'npm:build:cjs' 'npm:build:es'",
     "build:cjs": "tsc -p tsconfig.json",
     "build:es": "tsc -p tsconfig.es.json",
+    "build:slim": "node ./scripts/build_slim.js",
     "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}'",
     "clean": "rimraf tencentcloud es"
   },
@@ -59,6 +60,7 @@
     "babel-eslint": "^10.0.2",
     "chai": "^4.2.0",
     "concurrently": "^6.5.1",
+    "esbuild": "^0.25.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.17.0",
     "mocha": "^8.4.0",
