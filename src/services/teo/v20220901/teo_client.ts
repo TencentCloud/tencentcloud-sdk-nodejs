@@ -55,6 +55,7 @@ import {
   ModifyAccelerationDomainStatusesResponse,
   DeployRecord,
   RuleExtraParameter,
+  ModifyL7AccRulePriorityRequest,
   WebSocket,
   ModifyAccelerationDomainRequest,
   ModifyContentIdentifierResponse,
@@ -233,6 +234,7 @@ import {
   MaxAgeParameters,
   ModifyApplicationProxyRuleResponse,
   FailReason,
+  ModifyL7AccRulePriorityResponse,
   ModifyRequestHeaderParameters,
   CreateConfigGroupVersionResponse,
   DownloadL7LogsRequest,
@@ -1086,6 +1088,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeConfigGroupVersionsResponse) => void
   ): Promise<DescribeConfigGroupVersionsResponse> {
     return this.request("DescribeConfigGroupVersions", req, cb)
+  }
+
+  /**
+   * 本接口用于修改[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中规则列表的优先级，本接口需要传入站点 ID 下完整的规则 ID 列表，规则 ID 列表可以通过[查询七层加速规则](https://cloud.tencent.com/document/product/1552/115820)接口获取，最终优先级顺序将调整成规则 ID 列表的顺序，从前往后执行。
+   */
+  async ModifyL7AccRulePriority(
+    req: ModifyL7AccRulePriorityRequest,
+    cb?: (error: string, rep: ModifyL7AccRulePriorityResponse) => void
+  ): Promise<ModifyL7AccRulePriorityResponse> {
+    return this.request("ModifyL7AccRulePriority", req, cb)
   }
 
   /**

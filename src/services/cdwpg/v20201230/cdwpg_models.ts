@@ -520,22 +520,22 @@ export interface ErrorLogDetail {
    * 用户名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName: string
+  UserName?: string
   /**
    * 数据库
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Database: string
+  Database?: string
   /**
    * 报错时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorTime: string
+  ErrorTime?: string
   /**
    * 报错信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
 }
 
 /**

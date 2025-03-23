@@ -318,9 +318,9 @@ export interface GetAppKnowledgeCountRequest {
 }
 
 /**
- * ResetSession返回参数结构体
+ * StopDocParse返回参数结构体
  */
-export interface ResetSessionResponse {
+export interface StopDocParseResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3419,20 +3419,6 @@ export interface CreateAppRequest {
 }
 
 /**
- * ResetSession请求参数结构体
- */
-export interface ResetSessionRequest {
-  /**
-   * 会话ID
-   */
-  SessionId: string
-  /**
-   * 是否仅清空会话关联
-   */
-  IsOnlyEmptyTheDialog?: boolean
-}
-
-/**
  * 应用配置
  */
 export interface AppConfig {
@@ -6501,16 +6487,6 @@ export interface ReRankDataObject {
    * 第二段内容
    */
   PromptB: string
-}
-
-/**
- * StopDocParse返回参数结构体
- */
-export interface StopDocParseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

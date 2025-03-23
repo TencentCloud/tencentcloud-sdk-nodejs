@@ -45,6 +45,7 @@ import {
   UpdateServiceDiscoveryRequest,
   PrometheusRecordRuleYamlItem,
   Label,
+  ModifyConditionsTemplateRequestCondition,
   DescribeGrafanaIntegrationsResponse,
   CreatePrometheusMultiTenantInstancePostPayModeResponse,
   UpdatePrometheusAgentStatusResponse,
@@ -118,6 +119,7 @@ import {
   RecordingRuleSet,
   DescribeBasicAlarmListRequest,
   DescribePrometheusAlertGroupsResponse,
+  CreateConditionsTemplateResponse,
   DescribePrometheusTempSyncRequest,
   DescribePrometheusGlobalConfigResponse,
   CreateRecordingRuleResponse,
@@ -379,6 +381,7 @@ import {
   ModifyPrometheusTempResponse,
   DescribeRecordingRulesResponse,
   UpdateGrafanaWhiteListRequest,
+  ModifyConditionsTemplateRequestEventCondition,
   UpdatePrometheusAgentStatusRequest,
   DescribeGrafanaInstancesResponse,
   DescribeRemoteURLsResponse,
@@ -465,6 +468,7 @@ import {
   DescribeAlarmNoticeCallbacksRequest,
   DescribeStatisticDataRequest,
   GrafanaNotificationChannel,
+  CreateConditionsTemplateRequest,
   PrometheusAlertGroupSet,
   SetDefaultAlarmPolicyRequest,
   CLSNotice,
@@ -965,13 +969,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改告警策略触发条件
+   * 创建告警条件模板
    */
-  async ModifyAlarmPolicyCondition(
-    req: ModifyAlarmPolicyConditionRequest,
-    cb?: (error: string, rep: ModifyAlarmPolicyConditionResponse) => void
-  ): Promise<ModifyAlarmPolicyConditionResponse> {
-    return this.request("ModifyAlarmPolicyCondition", req, cb)
+  async CreateConditionsTemplate(
+    req: CreateConditionsTemplateRequest,
+    cb?: (error: string, rep: CreateConditionsTemplateResponse) => void
+  ): Promise<CreateConditionsTemplateResponse> {
+    return this.request("CreateConditionsTemplate", req, cb)
   }
 
   /**
@@ -1967,6 +1971,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrometheusRecordRuleYamlResponse) => void
   ): Promise<CreatePrometheusRecordRuleYamlResponse> {
     return this.request("CreatePrometheusRecordRuleYaml", req, cb)
+  }
+
+  /**
+   * 修改告警策略触发条件
+   */
+  async ModifyAlarmPolicyCondition(
+    req: ModifyAlarmPolicyConditionRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyConditionResponse) => void
+  ): Promise<ModifyAlarmPolicyConditionResponse> {
+    return this.request("ModifyAlarmPolicyCondition", req, cb)
   }
 
   /**

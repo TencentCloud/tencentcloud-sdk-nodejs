@@ -118,16 +118,6 @@ it("lke.v20231130.DeleteQA", async function () {
     }
 })
 
-it("lke.v20231130.StopDocParse", async function () {
-    try {
-       const data = await client.StopDocParse({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.CreateAttributeLabel", async function () {
     try {
        const data = await client.CreateAttributeLabel({})
@@ -978,9 +968,9 @@ it("lke.v20231130.ReconstructDocument", async function () {
     }
 })
 
-it("lke.v20231130.ResetSession", async function () {
+it("lke.v20231130.StopDocParse", async function () {
     try {
-       const data = await client.ResetSession({})
+       const data = await client.StopDocParse({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

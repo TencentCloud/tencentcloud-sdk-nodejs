@@ -518,6 +518,16 @@ it("teo.v20220901.DescribeConfigGroupVersions", async function () {
     }
 })
 
+it("teo.v20220901.ModifyL7AccRulePriority", async function () {
+    try {
+       const data = await client.ModifyL7AccRulePriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyZoneSetting", async function () {
     try {
        const data = await client.ModifyZoneSetting({})

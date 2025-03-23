@@ -131,13 +131,11 @@ export interface DatabasePrivilegeInfo {
    */
   DatabaseName: string
   /**
-   * //库表权限，SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE、CREATE_TABLE、DROP_DATABASE
-注意：此字段可能返回 null，表示取不到有效值。
+   * 库表权限，SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE、CREATE_TABLE、DROP_DATABASE
    */
   DatabasePrivileges?: Array<string>
   /**
-   * // 库下面的表权限
-注意：此字段可能返回 null，表示取不到有效值。
+   * 库下面的表权限
    */
   TablePrivilegeList?: Array<TablePrivilegeInfo>
 }
@@ -317,7 +315,6 @@ export interface DescribeSpecResponse {
   DataSpec?: Array<ResourceSpec>
   /**
    * 云盘列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachCBSSpec?: Array<DiskSpec>
   /**
@@ -417,7 +414,11 @@ export interface DescribeBackUpTablesResponse {
   /**
    * 可备份表列表
    */
-  AvailableTables: Array<BackupTableContent>
+  AvailableTables?: Array<BackupTableContent>
+  /**
+   * 错误描述
+   */
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -554,12 +555,10 @@ export interface OpenBackUpResponse {
 export interface CreateInstanceNewResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
@@ -744,12 +743,10 @@ SpecName从DescribeSpec接口中返回的CommonSpec.Name（ZK节点）获取
 export interface InstanceInfo {
   /**
    * 集群实例ID, "cdw-xxxx" 字符串类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 集群实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -757,252 +754,202 @@ export interface InstanceInfo {
 Init 创建中; Serving 运行中； 
 Deleted已销毁；Deleting 销毁中；
 Modify 集群变更中；
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 地域, ap-guangzhou
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 可用区， ap-guangzhou-3
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 私有网络名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 付费类型，"hour", "prepay"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 数据节点描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterSummary?: NodesSummary
   /**
    * zookeeper节点描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonSummary?: NodesSummary
   /**
    * 高可用，“true" "false"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HA?: string
   /**
    * 访问地址，例如 "10.0.0.1:9000"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessInfo?: string
   /**
    * 记录ID，数值型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * regionId, 表示地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 可用区说明，例如 "广州二区"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneDesc?: string
   /**
    * 错误流程说明信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
   /**
    * 状态描述，例如“运行中”等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
    * 自动续费标记
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: boolean
   /**
    * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 监控信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Monitor?: string
   /**
    * 是否开通日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HasClsTopic?: boolean
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsTopicId?: string
   /**
    * 日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsLogSetId?: string
   /**
    * 是否支持xml配置管理
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableXMLConfig?: number
   /**
    * 区域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionDesc?: string
   /**
    * 弹性网卡地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Eip?: string
   /**
    * 冷热分层系数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosMoveFactor?: number
   /**
    * external/local/yunti
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Kind?: string
   /**
    * 是否弹性ck
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsElastic?: boolean
   /**
    * 集群详细状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateInfo?: InstanceStateInfo
   /**
    * ZK高可用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HAZk?: boolean
   /**
    * 挂载盘,默认0:没有类型；1:裸盘;2:lvm
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountDiskType?: number
   /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
+   * chproxy连接ip
    */
   CHProxyVip?: string
   /**
    * cos buket的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosBucketName?: string
   /**
    * 是否可以挂载云盘
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanAttachCbs?: boolean
   /**
    * 是否可以挂载云盘阵列
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanAttachCbsLvm?: boolean
   /**
    * 是否可以挂载cos
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanAttachCos?: boolean
   /**
    * 服务信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Components?: Array<ServiceInfo>
   /**
    * 可升级的内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeVersions?: string
   /**
    * ex-index
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EsIndexId?: string
   /**
    * username
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EsIndexUsername?: string
   /**
    * password
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EsIndexPassword?: string
   /**
    * true
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HasEsIndex?: boolean
   /**
    * true
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSecondaryZone?: boolean
   /**
    * desc
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecondaryZoneInfo?: string
   /**
    * 是否clickhouse-keeper
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClickHouseKeeper?: boolean
   /**
    * 实例扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: InstanceDetail
   /**
    * 安全组白名单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsWhiteSGs?: boolean
   /**
    * 绑定的安全组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindSGs?: Array<string>
   /**
@@ -1330,31 +1277,39 @@ export interface BackUpJobDisplay {
   /**
    * 备份任务id
    */
-  JobId: number
+  JobId?: number
   /**
    * 备份任务名
    */
-  Snapshot: string
+  Snapshot?: string
   /**
    * 任务类型(元数据),(数据)
    */
-  BackUpType: string
+  BackUpType?: string
   /**
    * 备份数据量
    */
-  BackUpSize: number
+  BackUpSize?: number
   /**
    * 任务创建时间
    */
-  BackUpTime: string
+  BackUpTime?: string
   /**
    * 任务过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 任务状态
    */
-  JobStatus: string
+  JobStatus?: string
+  /**
+   * 处理数据量
+   */
+  ProcessSize?: number
+  /**
+   * 错误原因
+   */
+  ErrorReason?: string
 }
 
 /**
@@ -1493,9 +1448,16 @@ export interface DescribeInstanceResponse {
 export interface DescribeBackUpJobResponse {
   /**
    * 任务列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  BackUpJobs: Array<BackUpJobDisplay>
+  BackUpJobs?: Array<BackUpJobDisplay>
+  /**
+   * 错误描述
+   */
+  ErrorMsg?: string
+  /**
+   * 数量
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1547,64 +1509,57 @@ export interface NodesSummary {
   /**
    * 机型，如 S1
    */
-  Spec: string
+  Spec?: string
   /**
    * 节点数目
    */
-  NodeSize: number
+  NodeSize?: number
   /**
    * cpu核数，单位个
    */
-  Core: number
+  Core?: number
   /**
    * 内存大小，单位G
    */
-  Memory: number
+  Memory?: number
   /**
    * 磁盘大小，单位G
    */
-  Disk: number
+  Disk?: number
   /**
    * 磁盘类型
    */
-  DiskType: string
+  DiskType?: string
   /**
    * 磁盘描述
    */
-  DiskDesc: string
+  DiskDesc?: string
   /**
    * 挂载云盘信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachCBSSpec: AttachCBSSpec
+  AttachCBSSpec?: AttachCBSSpec
   /**
    * 子产品类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductType?: string
   /**
    * 规格对应的核数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecCore?: number
   /**
    * 规格对应的内存大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecMemory?: number
   /**
    * 磁盘的数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount?: number
   /**
    * 磁盘的最大大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDiskSize?: number
   /**
    * 是否为加密云盘
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Encrypt?: number
 }
@@ -1910,29 +1865,32 @@ export interface DescribeInstanceStateResponse {
   InstanceState?: string
   /**
    * 集群操作创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowCreateTime?: string
   /**
    * 集群操作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowName?: string
   /**
    * 集群操作进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowProgress?: number
   /**
    * 集群状态描述，例如：运行中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateDesc?: string
   /**
    * 集群流程错误信息，例如：“创建失败，资源不足”
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
+  /**
+   * 当前步骤的名称，例如：”购买资源中“
+   */
+  ProcessName?: string
+  /**
+   * 当前步骤的名称，例如：”购买资源中“
+   */
+  ProcessSubName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

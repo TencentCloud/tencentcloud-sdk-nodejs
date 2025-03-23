@@ -73,21 +73,21 @@ export interface DescribeListBGPIPInstancesResponse {
 }
 
 /**
- * DescribeBlackWhiteIpList返回参数结构体
+ * ModifyNewDomainRules请求参数结构体
  */
-export interface DescribeBlackWhiteIpListResponse {
+export interface ModifyNewDomainRulesRequest {
   /**
-   * 黑名单IP列表
+   * DDoS防护子产品代号（bgpip表示高防IP）
    */
-  BlackIpList: Array<string>
+  Business: string
   /**
-   * 白名单IP列表
+   * 资源ID
    */
-  WhiteIpList: Array<string>
+  Id: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 域名转发规则
    */
-  RequestId?: string
+  Rule: NewL7RuleEntry
 }
 
 /**
@@ -508,24 +508,6 @@ export interface InstanceRelation {
 }
 
 /**
- * ModifyNewDomainRules请求参数结构体
- */
-export interface ModifyNewDomainRulesRequest {
-  /**
-   * DDoS防护子产品代号（bgpip表示高防IP）
-   */
-  Business: string
-  /**
-   * 资源ID
-   */
-  Id: string
-  /**
-   * 域名转发规则
-   */
-  Rule: NewL7RuleEntry
-}
-
-/**
  * 地域信息
  */
 export interface RegionInfo {
@@ -934,36 +916,6 @@ off(关闭)
 ]
    */
   DDoSAI: string
-}
-
-/**
- * DescribeListProtectThresholdConfig请求参数结构体
- */
-export interface DescribeListProtectThresholdConfigRequest {
-  /**
-   * 页起始偏移，取值为(页码-1)*一页条数
-   */
-  Offset: number
-  /**
-   * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
-   */
-  Limit: number
-  /**
-   * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
-   */
-  FilterInstanceId: string
-  /**
-   * IP搜索
-   */
-  FilterIp?: string
-  /**
-   * 域名搜索(查询域名与协议的CC防护阈值时使用）
-   */
-  FilterDomain?: string
-  /**
-   * 协议搜索(查询域名与协议的CC防护阈值时使用）
-   */
-  FilterProtocol?: string
 }
 
 /**
@@ -2445,16 +2397,6 @@ export interface ModifyPacketFilterConfigRequest {
 }
 
 /**
- * DescribeBlackWhiteIpList请求参数结构体
- */
-export interface DescribeBlackWhiteIpListRequest {
-  /**
-   * 资源实例ID
-   */
-  InstanceId: string
-}
-
-/**
  * CreateCcGeoIPBlockConfig请求参数结构体
  */
 export interface CreateCcGeoIPBlockConfigRequest {
@@ -3215,28 +3157,6 @@ export interface DescribeOverviewDDoSEventListRequest {
 }
 
 /**
- * 域名与协议纬度的CC防护阈值
- */
-export interface ListenerCcThreholdConfig {
-  /**
-   * 域名
-   */
-  Domain: string
-  /**
-   * 协议（可取值https）
-   */
-  Protocol: string
-  /**
-   * 开关状态（0：关闭，1：开启）
-   */
-  CCEnable: number
-  /**
-   * cc防护阈值
-   */
-  CCThreshold: number
-}
-
-/**
  * 高防弹性公网IP关联信息
  */
 export interface EipAddressRelation {
@@ -3643,118 +3563,6 @@ export interface AnycastOutPackRelation {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CurDeadline?: string
-}
-
-/**
- * 防护阈值配置相关信息
- */
-export interface ProtectThresholdRelation {
-  /**
-   * DDoS防护等级，取值[
-low(宽松)
-middle(适中)
-high(严格)
-]
-   */
-  DDoSLevel: string
-  /**
-   * DDoS清洗阈值，单位Mbps
-   */
-  DDoSThreshold: number
-  /**
-   * DDoS的AI防护开关，取值[
-on(开启)
-off(关闭)
-]
-   */
-  DDoSAI: string
-  /**
-   * CC清洗开关，取值[
-0(关闭)
-1(开启)
-]
-   */
-  CCEnable: number
-  /**
-   * CC清洗阈值，单位QPS
-   */
-  CCThreshold: number
-  /**
-   * 所属的资源实例
-   */
-  InstanceDetailList: Array<InstanceRelation>
-  /**
-   * 域名与协议纬度的防护阈值
-   */
-  ListenerCcThresholdList: Array<ListenerCcThreholdConfig>
-  /**
-   * SYN FLOOD流量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SynFloodThreshold: number
-  /**
-   * SYN FLOOD包量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SynFloodPktThreshold: number
-  /**
-   * UDP FLOOD流量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UdpFloodThreshold: number
-  /**
-   * UDP FLOOD包量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UdpFloodPktThreshold: number
-  /**
-   * ACK FLOOD流量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AckFloodThreshold: number
-  /**
-   * ACK FLOOD包量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AckFloodPktThreshold: number
-  /**
-   * SYNACK FLOOD流量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SynAckFloodThreshold: number
-  /**
-   * SYNACK FLOOD包量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SynAckFloodPktThreshold: number
-  /**
-   * RST FLOOD流量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RstFloodThreshold: number
-  /**
-   * RST FLOOD包量阈值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RstFloodPktThreshold: number
-}
-
-/**
- * DescribeListProtectThresholdConfig返回参数结构体
- */
-export interface DescribeListProtectThresholdConfigResponse {
-  /**
-   * 总记录数
-   */
-  Total: number
-  /**
-   * 防护阈值配置列表
-   */
-  ConfigList: Array<ProtectThresholdRelation>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6007,19 +5815,19 @@ export interface SchedulingDomainInfo {
   /**
    * 调度域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 线路IP列表
    */
-  LineIPList: Array<IPLineInfo>
+  LineIPList?: Array<IPLineInfo>
   /**
    * 调度方式，当前仅支持优先级的方式，取值[priority]
    */
-  Method: string
+  Method?: string
   /**
    * 调度域名解析记录的TTL值
    */
-  TTL: number
+  TTL?: number
   /**
    * 运行状态，取值[
 0：未运行
@@ -6027,20 +5835,20 @@ export interface SchedulingDomainInfo {
 2：运行异常
 ]
    */
-  Status: number
+  Status?: number
   /**
    * 创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 最后修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 域名名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsrDomainName: string
+  UsrDomainName?: string
 }
 
 /**

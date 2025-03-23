@@ -488,9 +488,9 @@ it("monitor.v20180724.DescribePolicyConditionList", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
+it("monitor.v20180724.CreateConditionsTemplate", async function () {
     try {
-       const data = await client.ModifyAlarmPolicyCondition({})
+       const data = await client.CreateConditionsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1461,6 +1461,16 @@ it("monitor.v20180724.CreateServiceDiscovery", async function () {
 it("monitor.v20180724.CreatePrometheusRecordRuleYaml", async function () {
     try {
        const data = await client.CreatePrometheusRecordRuleYaml({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyCondition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

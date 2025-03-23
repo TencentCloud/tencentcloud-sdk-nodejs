@@ -3685,6 +3685,30 @@ export interface RuleGroupExecStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DlcGroupName?: string
+  /**
+   * 任务名称
+   */
+  RuleGroupName?: string
+  /**
+   * 数据库名称
+   */
+  DatabaseName?: string
+  /**
+   * schema名称
+   */
+  SchemaName?: string
+  /**
+   * 表名称
+   */
+  TableName?: string
+  /**
+   * 数据源id
+   */
+  DatasourceId?: string
+  /**
+   * 任务描述
+   */
+  Description?: string
 }
 
 /**
@@ -4844,6 +4868,10 @@ export interface ProdSchedulerTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: number
+  /**
+   * 生产任务类型
+   */
+  TaskType?: string
 }
 
 /**
@@ -7048,6 +7076,35 @@ export interface RuleGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterDeployType?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 执行详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecDetail?: string
+  /**
+   * 事中关联任务数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PipelineTaskCount?: number
+  /**
+   * 有效规则数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableRuleCount?: number
+  /**
+   * 任务描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 监控创建人
+   */
+  CreateUserName?: string
 }
 
 /**
@@ -18781,6 +18838,11 @@ export interface RuleGroupSubscribe {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
+  /**
+   * 发送对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmMessageRule?: string
 }
 
 /**

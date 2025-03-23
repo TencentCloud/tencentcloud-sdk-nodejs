@@ -21,12 +21,10 @@
 export interface EventVar {
   /**
    * 自定义键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 自定义值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -97,17 +95,14 @@ export interface ComputeEnvData {
 export interface Authentication {
   /**
    * 授权场景，例如COS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scene: string
   /**
    * SecretId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretId: string
   /**
    * SecretKey
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretKey: string
 }
@@ -168,17 +163,14 @@ export interface DescribeTaskLogsRequest {
 export interface AgentRunningMode {
   /**
    * 场景类型，支持WINDOWS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scene: string
   /**
    * 运行Agent的User
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User: string
   /**
    * 运行Agent的Session
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Session: string
 }
@@ -451,7 +443,6 @@ export interface InstanceTypeConfig {
 export interface CommandLine {
   /**
    * 任务执行命令。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Command: string
 }
@@ -509,42 +500,34 @@ export interface DescribeComputeEnvActivitiesResponse {
 export interface TaskInstanceMetrics {
   /**
    * Submitted个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubmittedCount?: number
   /**
    * Pending个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingCount?: number
   /**
    * Runnable个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunnableCount?: number
   /**
    * Starting个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartingCount?: number
   /**
    * Running个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCount?: number
   /**
    * Succeed个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SucceedCount?: number
   /**
    * FailedInterrupted个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedInterruptedCount?: number
   /**
    * Failed个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedCount?: number
 }
@@ -559,32 +542,26 @@ export interface TaskInstanceLog {
   TaskInstanceIndex?: number
   /**
    * 标准输出日志（Base64编码，解码后最大日志长度2048字节）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StdoutLog?: string
   /**
    * 标准错误日志（Base64编码，解码后最大日志长度2048字节）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrLog?: string
   /**
    * 标准输出重定向路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StdoutRedirectPath?: string
   /**
    * 标准错误重定向路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrRedirectPath?: string
   /**
    * 标准输出重定向文件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StdoutRedirectFileName?: string
   /**
    * 标准错误重定向文件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrRedirectFileName?: string
 }
@@ -595,12 +572,10 @@ export interface TaskInstanceLog {
 export interface MountDataDisk {
   /**
    * 挂载点，Linux系统合法路径，或Windows系统盘符,比如"H:\\"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalPath: string
   /**
    * 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileSystemType?: string
 }
@@ -634,12 +609,10 @@ export interface TaskView {
 export interface Tag {
   /**
    * 标签键。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 标签值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -795,27 +768,22 @@ export interface DetachInstancesResponse {
 export interface Application {
   /**
    * 应用程序的交付方式，包括PACKAGE、LOCAL 两种取值，分别指远程存储的软件包、计算环境本地。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeliveryForm: string
   /**
    * 任务执行命令。与Commands不能同时指定。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Command?: string
   /**
    * 应用程序软件包的远程存储路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackagePath?: string
   /**
    * 应用使用Docker的相关配置。在使用Docker配置的情况下，DeliveryForm 为 LOCAL 表示直接使用Docker镜像内部的应用软件，通过Docker方式运行；DeliveryForm 为 PACKAGE，表示将远程应用包注入到Docker镜像后，通过Docker方式运行。为避免Docker不同版本的兼容性问题，Docker安装包及相关依赖由Batch统一负责，对于已安装Docker的自定义镜像，请卸载后再使用Docker特性。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Docker?: Docker
   /**
    * 任务执行命令信息。与Command不能同时指定。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Commands?: Array<CommandLine>
 }
@@ -978,42 +946,34 @@ export interface ComputeNodeMetrics {
 export interface TaskMetrics {
   /**
    * Submitted个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubmittedCount?: number
   /**
    * Pending个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingCount?: number
   /**
    * Runnable个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunnableCount?: number
   /**
    * Starting个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartingCount?: number
   /**
    * Running个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCount?: number
   /**
    * Succeed个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SucceedCount?: number
   /**
    * FailedInterrupted个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedInterruptedCount?: number
   /**
    * Failed个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedCount?: number
 }
@@ -1187,49 +1147,48 @@ export interface DescribeComputeEnvCreateInfoResponse {
   /**
    * 计算环境 ID
    */
-  EnvId: string
+  EnvId?: string
   /**
    * 计算环境名称
    */
-  EnvName: string
+  EnvName?: string
   /**
    * 计算环境描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvDescription: string
+  EnvDescription?: string
   /**
    * 计算环境类型，仅支持“MANAGED”类型
    */
-  EnvType: string
+  EnvType?: string
   /**
    * 计算环境参数
    */
-  EnvData: EnvData
+  EnvData?: EnvData
   /**
    * 数据盘挂载选项
    */
-  MountDataDisks: Array<MountDataDisk>
+  MountDataDisks?: Array<MountDataDisk>
   /**
    * 输入映射
    */
-  InputMappings: Array<InputMapping>
+  InputMappings?: Array<InputMapping>
   /**
    * 授权信息
    */
-  Authentications: Array<Authentication>
+  Authentications?: Array<Authentication>
   /**
    * 通知信息
    */
-  Notifications: Array<Notification>
+  Notifications?: Array<Notification>
   /**
    * 计算节点期望个数
    */
-  DesiredComputeNodeCount: number
+  DesiredComputeNodeCount?: number
   /**
    * 计算环境绑定的标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1256,12 +1215,10 @@ export interface ComputeEnvCreateInfo {
   EnvId?: string
   /**
    * 计算环境名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvName?: string
   /**
    * 计算环境描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvDescription?: string
   /**
@@ -1274,22 +1231,18 @@ export interface ComputeEnvCreateInfo {
   EnvData?: EnvData
   /**
    * 数据盘挂载选项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountDataDisks?: Array<MountDataDisk>
   /**
    * 输入映射
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputMappings?: Array<InputMapping>
   /**
    * 授权信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Authentications?: Array<Authentication>
   /**
    * 通知信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Notifications?: Array<Notification>
   /**
@@ -1298,7 +1251,6 @@ export interface ComputeEnvCreateInfo {
   DesiredComputeNodeCount?: number
   /**
    * 计算环境标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
 }
@@ -1557,7 +1509,6 @@ export interface DescribeJobResponse {
   Tags?: Array<Tag>
   /**
    * 下一步动作
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextAction?: string
   /**
@@ -1955,23 +1906,19 @@ export interface DescribeJobRequest {
  */
 export interface RedirectInfo {
   /**
-   * 标准输出重定向路径; 
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标准输出重定向路径;
    */
   StdoutRedirectPath?: string
   /**
    * 标准错误重定向路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrRedirectPath?: string
   /**
    * 标准输出重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StdoutRedirectFileName?: string
   /**
    * 标准错误重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrRedirectFileName?: string
 }
@@ -2020,17 +1967,14 @@ export interface SubmitJobResponse {
 export interface InputMapping {
   /**
    * 源端路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourcePath: string
   /**
    * 目的端路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestinationPath: string
   /**
    * 挂载配置项参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountOptionParameter?: string
 }
@@ -2041,22 +1985,18 @@ export interface InputMapping {
 export interface RedirectLocalInfo {
   /**
    * 标准输出重定向本地路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StdoutLocalPath?: string
   /**
    * 标准错误重定向本地路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrLocalPath?: string
   /**
    * 标准输出重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StdoutLocalFileName?: string
   /**
    * 标准错误重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StderrLocalFileName?: string
 }
@@ -2077,12 +2017,10 @@ export interface DescribeJobSubmitInfoRequest {
 export interface Dependence {
   /**
    * 依赖关系的起点任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTask: string
   /**
    * 依赖关系的终点任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTask: string
 }
@@ -2156,7 +2094,6 @@ export interface Docker {
   DelayOnRetry?: number
   /**
    * Docker命令运行参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DockerRunOption?: string
 }
@@ -2628,7 +2565,6 @@ export interface TaskInstanceView {
   TaskInstanceState?: string
   /**
    * 应用程序执行结束的exit code
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExitCode?: number
   /**
@@ -2637,7 +2573,6 @@ export interface TaskInstanceView {
   StateReason?: string
   /**
    * 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComputeNodeInstanceId?: string
   /**
@@ -2646,17 +2581,14 @@ export interface TaskInstanceView {
   CreateTime?: string
   /**
    * 启动时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LaunchTime?: string
   /**
    * 开始运行时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningTime?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
@@ -2962,12 +2894,10 @@ export interface Activity {
   StartTime?: string
   /**
    * 活动结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 云服务器实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
 }
@@ -3105,7 +3035,6 @@ export interface JobView {
   Priority?: number
   /**
    * 位置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Placement?: Placement
   /**
@@ -3114,7 +3043,6 @@ export interface JobView {
   CreateTime?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
@@ -3123,7 +3051,6 @@ export interface JobView {
   TaskMetrics?: TaskMetrics
   /**
    * 作业绑定的标签列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
 }
@@ -3134,12 +3061,10 @@ export interface JobView {
 export interface EnvVar {
   /**
    * 环境变量名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 环境变量取值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }

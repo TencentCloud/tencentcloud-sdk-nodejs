@@ -559,6 +559,14 @@ export interface DescribeServiceOverviewRequest {
    */
   Metrics: Array<QueryMetricItem>
   /**
+   * 开始时间（单位：秒）
+   */
+  StartTime: number
+  /**
+   * 结束时间（单位：秒）
+   */
+  EndTime: number
+  /**
    * 聚合维度
    */
   GroupBy: Array<string>
@@ -566,14 +574,6 @@ export interface DescribeServiceOverviewRequest {
    * 过滤条件
    */
   Filters?: Array<Filter>
-  /**
-   * 开始时间（单位：秒）
-   */
-  StartTime?: number
-  /**
-   * 结束时间（单位：秒）
-   */
-  EndTime?: number
   /**
    * 排序方式
 Value 填写：
@@ -620,11 +620,11 @@ export interface DescribeTagValuesRequest {
   /**
    * 开始时间（单位为秒）
    */
-  StartTime?: number
+  StartTime: number
   /**
    * 结束时间（单位为秒）
    */
-  EndTime?: number
+  EndTime: number
   /**
    * 过滤条件
    */
@@ -868,15 +868,15 @@ export interface DescribeGeneralSpanListRequest {
   /**
    * 业务系统 ID
    */
-  InstanceId?: string
+  InstanceId: string
   /**
    * Span 查询开始时间戳（单位：秒）
    */
-  StartTime?: number
+  StartTime: number
   /**
    * Span 查询结束时间戳（单位：秒）
    */
-  EndTime?: number
+  EndTime: number
   /**
    * 通用过滤参数
    */
@@ -1020,21 +1020,25 @@ export interface DescribeApmAgentRequest {
  */
 export interface DescribeMetricRecordsRequest {
   /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
    * 指标列表
    */
   Metrics: Array<QueryMetricItem>
   /**
-   * 业务系统 ID
-   */
-  InstanceId?: string
-  /**
    * 开始时间（单位为秒）
    */
-  StartTime?: number
+  StartTime: number
   /**
    * 结束时间（单位为秒）
    */
-  EndTime?: number
+  EndTime: number
+  /**
+   * 聚合维度
+   */
+  GroupBy: Array<string>
   /**
    * 过滤条件
    */
@@ -1043,10 +1047,6 @@ export interface DescribeMetricRecordsRequest {
    * Or 过滤条件
    */
   OrFilters?: Array<Filter>
-  /**
-   * 聚合维度
-   */
-  GroupBy?: Array<string>
   /**
    * 排序
 现支持的 Key 有：

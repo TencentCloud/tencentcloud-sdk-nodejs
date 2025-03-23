@@ -50,6 +50,7 @@ import {
   KeyValue,
   DescribeServiceNodeInfosResponse,
   EmrProductConfigDetail,
+  RenewPriceDetail,
   ResetYarnConfigRequest,
   DayRepeatStrategy,
   DescribeTrinoQueryInfoResponse,
@@ -139,7 +140,7 @@ import {
   ModifySLInstanceResponse,
   InspectionTaskSettings,
   SyncPodStateResponse,
-  UserManagerUserBriefInfo,
+  TerminateInstanceRequest,
   AllNodeResourceSpec,
   Placement,
   DescribeGlobalConfigResponse,
@@ -181,7 +182,7 @@ import {
   DescribeResourceScheduleResponse,
   UserManagerFilter,
   MultiDisk,
-  TerminateInstanceRequest,
+  NodeRenewPriceDetail,
   DescribeNodeResourceConfigFastRequest,
   TaskSettings,
   MetricTags,
@@ -198,6 +199,7 @@ import {
   ModifySLInstanceRequest,
   DescribeInsightListResponse,
   CustomServiceDefine,
+  UserManagerUserBriefInfo,
   StageInfoDetail,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
@@ -750,7 +752,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云盘扩容
+   * 云数据盘扩容
    */
   async ResizeDataDisks(
     req: ResizeDataDisksRequest,

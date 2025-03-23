@@ -2068,6 +2068,10 @@ export interface CreateProxySessionKillTaskRequest {
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
   Product: string
+  /**
+   * 实列代理ID。
+   */
+  InstanceProxyId?: string
 }
 
 /**
@@ -2854,7 +2858,6 @@ export interface MonitorMetric {
   Unit?: string
   /**
    * 指标值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<number>
 }
@@ -3823,7 +3826,7 @@ export interface DescribeHealthScoreRequest {
    */
   Time: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product: string
 }
@@ -4735,7 +4738,7 @@ export interface DescribeHealthScoreResponse {
   /**
    * 健康得分以及异常扣分项。
    */
-  Data: HealthScoreInfo
+  Data?: HealthScoreInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

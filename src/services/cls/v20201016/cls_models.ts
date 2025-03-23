@@ -388,7 +388,6 @@ export interface ParquetKeyInfo {
   KeyType: string
   /**
    * 解析失败赋值信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyNonExistingField: string
 }
@@ -1531,32 +1530,26 @@ export interface MachineGroupInfo {
   CreateTime?: string
   /**
    * 机器组绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 是否开启机器组自动更新
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoUpdate?: string
   /**
    * 升级开始时间，建议业务低峰期升级LogListener
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateStartTime?: string
   /**
    * 升级结束时间，建议业务低峰期升级LogListener
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateEndTime?: string
   /**
    * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceLogging?: boolean
   /**
    * 机器组中机器离线定期清理时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DelayCleanupTime?: number
   /**
@@ -1661,22 +1654,18 @@ export interface NoticeRule {
     - 下一个子节点value支持的值：整型值单位分钟
 以下示例表示：告警持续时间大于1分钟或告警持续时间大于等于2分钟或告警持续时间小于3分钟或告警持续时间小于等于4分钟
 `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">\",\"Type\":\"Compare\"},{\"Value\":1,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">=\",\"Type\":\"Compare\"},{\"Value\":2,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<\",\"Type\":\"Compare\"},{\"Value\":3,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<=\",\"Type\":\"Compare\"},{\"Value\":4,\"Type\":\"Value\"}]}]}]}`
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rule?: string
   /**
    * 告警通知接收者信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
    * 告警通知模板回调信息，包括企业微信、钉钉、飞书。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WebCallbacks?: Array<WebCallback>
   /**
    * 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Escalate?: boolean
   /**
@@ -1684,17 +1673,14 @@ export interface NoticeRule {
 - 无人认领且未恢复：告警没有恢复并且没有人认领则升级
 - 未恢复：当前告警持续未恢复则升级
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 告警升级间隔。单位：分钟，范围`[1，14400]`
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Interval?: number
   /**
    * 告警升级后下一个环节的通知渠道配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EscalateNotice?: EscalateNoticeInfo
 }
@@ -1838,12 +1824,10 @@ export interface ScheduledSqlTaskInfo {
   SrcTopicRegion?: string
   /**
    * 语法规则，0：Lucene语法，1：CQL语法
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SyntaxRule?: number
   /**
    * 是否开启投递服务日志。1：关闭，2：开启。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HasServicesLog?: number
 }
@@ -2867,12 +2851,10 @@ export interface PartitionInfo {
 export interface NoticeContentTemplate {
   /**
    * 通知内容模板ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeContentId?: string
   /**
    * 通知内容模板名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
@@ -2880,12 +2862,10 @@ export interface NoticeContentTemplate {
 
 0： 中文
 1： 英文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 通知内容模板信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeContents?: Array<NoticeContent>
   /**
@@ -2893,27 +2873,22 @@ export interface NoticeContentTemplate {
 
 0： 用户自定义
 1： 系统内置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Flag?: number
   /**
    * 创建者主账号。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: number
   /**
    * 创建/修改者子账号。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUin?: number
   /**
    * 创建时间 秒级时间戳。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 更新时间 秒级时间戳。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
 }
@@ -3856,18 +3831,15 @@ export interface NoticeContentInfo {
   /**
    * 通知内容模板标题信息。
 部分通知渠道类型不支持“标题”，请参照腾讯云控制台页面。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
   /**
    * 通知内容模板正文信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 请求头（Request Headers）：在HTTP请求中，请求头包含了客户端向服务器发送的附加信息，如用户代理、授权凭证、期望的响应格式等。
 仅“自定义回调”支持该配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<string>
 }
@@ -4967,7 +4939,6 @@ export interface WebCallback {
   Url: string
   /**
    * 集成配置ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WebCallbackId?: string
   /**
@@ -4977,34 +4948,28 @@ export interface WebCallback {
 
 注意：
 - 参数CallbackType为Http时为必选，其它回调方式无需填写。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
    * 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeContentId?: string
   /**
    * 提醒类型。
 
 0：不提醒；1：指定人；2：所有人
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemindType?: number
   /**
    * 电话列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mobiles?: Array<string>
   /**
    * 用户ID列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserIds?: Array<string>
   /**
    * 该参数已废弃，请使用NoticeContentId。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<string>
   /**
@@ -5653,7 +5618,6 @@ export interface TopicInfo {
   SubAssumerName?: string
   /**
    * 主题描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Describes?: string
   /**
@@ -5675,7 +5639,6 @@ HotPeriod=0为没有开启日志沉降。
   IsWebTracking?: boolean
   /**
    * 日志主题扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Extends?: TopicExtendInfo
   /**
@@ -5803,12 +5766,10 @@ Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:�
   Type: string
   /**
    * 告警触发通知内容模板。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerContent?: NoticeContentInfo
   /**
    * 告警恢复通知内容模板。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecoveryContent?: NoticeContentInfo
 }
@@ -6064,7 +6025,6 @@ export interface NoticeReceiver {
   ReceiverChannels: Array<string>
   /**
    * 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeContentId?: string
   /**
@@ -6940,7 +6900,6 @@ export interface ShipperInfo {
   Status?: boolean
   /**
    * 投递日志的过滤规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterRules?: Array<FilterRuleInfo>
   /**
@@ -6949,12 +6908,10 @@ export interface ShipperInfo {
   Partition?: string
   /**
    * 投递日志的压缩配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Compress?: CompressInfo
   /**
    * 投递日志的内容格式配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: ContentInfo
   /**
@@ -6963,27 +6920,22 @@ export interface ShipperInfo {
   CreateTime?: string
   /**
    * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilenameMode?: number
   /**
    * 投递数据范围的开始时间点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 投递数据范围的结束时间点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 历史数据投递的进度（仅当用户选择的数据内中历史数据时才有效）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number
   /**
    * 历史数据全部投递完成剩余的时间（仅当用户选择的数据中有历史数据时才有效）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemainTime?: number
   /**
@@ -6993,12 +6945,10 @@ export interface ShipperInfo {
 2：任务运行中
 3：任务运行异常
 4：任务运行结束
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HistoryStatus?: number
   /**
    * cos桶类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
 }
@@ -7106,12 +7056,10 @@ export interface DescribeConsumerResponse {
 export interface MetricLabel {
   /**
    * 指标名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 指标内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -7219,14 +7167,12 @@ offlineTime
 export interface MultiCondition {
   /**
    * 触发条件。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Condition?: string
   /**
    * 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。
 
 - 不填则默认为0。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: number
 }
@@ -7295,7 +7241,6 @@ export interface MachineInfo {
   Ip?: string
   /**
    * 机器实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceID?: string
   /**
@@ -7360,7 +7305,6 @@ export interface MonitorTime {
   /**
    * 执行的周期cron表达式。示例：`"* /1 * * * *"` 从左到右每个field的含义 Minutes field, Hours field,Day of month field,Month field,Day of week field， 不支持秒级别。
 当type为`Cron`时，CronExpression字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CronExpression?: string
 }

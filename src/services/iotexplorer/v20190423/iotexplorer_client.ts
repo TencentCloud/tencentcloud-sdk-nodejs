@@ -72,6 +72,7 @@ import {
   CreateTRTCSignaturesWithRoomIdRequest,
   DescribeSpaceFenceEventListRequest,
   FenceEventItem,
+  DescribeUnbindedDevicesRequest,
   RegisteredDeviceNetTypeInfo,
   DescribeGatewaySubDeviceListRequest,
   GetDeviceListRequest,
@@ -190,6 +191,7 @@ import {
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   DescribePositionFenceListRequest,
+  DescribeUnbindedDevicesResponse,
   InvokeCloudStorageAIServiceTaskRequest,
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
@@ -733,6 +735,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFenceEventListResponse) => void
   ): Promise<DescribeFenceEventListResponse> {
     return this.request("DescribeFenceEventList", req, cb)
+  }
+
+  /**
+   * 获取未绑定的设备列表
+   */
+  async DescribeUnbindedDevices(
+    req: DescribeUnbindedDevicesRequest,
+    cb?: (error: string, rep: DescribeUnbindedDevicesResponse) => void
+  ): Promise<DescribeUnbindedDevicesResponse> {
+    return this.request("DescribeUnbindedDevices", req, cb)
   }
 
   /**

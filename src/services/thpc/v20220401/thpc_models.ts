@@ -407,7 +407,6 @@ export interface ClusterActivity {
   ActivityStatus?: string
   /**
    * 集群活动状态码。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivityStatusCode?: string
   /**
@@ -429,12 +428,10 @@ export interface ClusterActivity {
   RelatedNodeActivitySet?: Array<NodeActivity>
   /**
    * 集群活动开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 集群活动结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
 }

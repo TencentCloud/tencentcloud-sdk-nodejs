@@ -338,6 +338,16 @@ it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeUnbindedDevices", async function () {
+    try {
+       const data = await client.DescribeUnbindedDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateIotVideoCloudStorage", async function () {
     try {
        const data = await client.CreateIotVideoCloudStorage({})

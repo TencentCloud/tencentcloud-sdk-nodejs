@@ -1104,6 +1104,32 @@ export interface EmrProductConfigDetail {
 }
 
 /**
+ * 节点子项续费询价明细
+ */
+export interface RenewPriceDetail {
+  /**
+   * 计费项名称
+   */
+  BillingName?: string
+  /**
+   * 折扣
+   */
+  Policy?: number
+  /**
+   * 数量
+   */
+  Quantity?: number
+  /**
+   * 原价
+   */
+  OriginalCost?: number
+  /**
+   * 折扣价
+   */
+  DiscountCost?: number
+}
+
+/**
  * ResetYarnConfig请求参数结构体
  */
 export interface ResetYarnConfigRequest {
@@ -2211,6 +2237,10 @@ ALIGN_DEADLINE：自动对其到期时间
    * 可选参数，不传该参数则仅执行挂载操作。传入True时，会在挂载成功后将云硬盘设置为随云主机销毁模式，仅对按量计费云硬盘有效。
    */
   DeleteWithInstance?: boolean
+  /**
+   * 新挂磁盘时可支持配置的服务名称列表
+   */
+  SelectiveConfServices?: Array<string>
 }
 
 /**
@@ -3193,6 +3223,22 @@ export interface DescribeNodeDataDisksRequest {
    * 节点CVM实例Id列表
    */
   CvmInstanceIds: Array<string>
+  /**
+   * 查询云盘的过滤条件
+   */
+  Filters?: Array<Filters>
+  /**
+   * 模糊搜索
+   */
+  InnerSearch?: string
+  /**
+   * 每页返回数量，默认值为100，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 数据偏移值
+   */
+  Offset?: number
 }
 
 /**
@@ -3331,6 +3377,10 @@ export interface InquiryPriceRenewInstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PriceDetail?: Array<PriceDetail>
+  /**
+   * 节点续费询价明细列表
+   */
+  NodeRenewPriceDetails?: Array<NodeRenewPriceDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3962,33 +4012,25 @@ export interface SyncPodStateResponse {
 }
 
 /**
- * 用户管理中用户的简要信息
+ * TerminateInstance请求参数结构体
  */
-export interface UserManagerUserBriefInfo {
+export interface TerminateInstanceRequest {
   /**
-   * 用户名
+   * 实例ID。
    */
-  UserName?: string
+  InstanceId: string
   /**
-   * 用户所属的组
+   * 销毁节点ID。该参数为预留参数，用户无需配置。
    */
-  UserGroup?: string
+  ResourceIds?: Array<string>
   /**
-   * Manager表示管理员、NormalUser表示普通用户
+   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
    */
-  UserType?: string
+  ResourceBaseType?: string
   /**
-   * 用户创建时间
+   * 计算资源ID
    */
-  CreateTime?: string
-  /**
-   * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
-   */
-  SupportDownLoadKeyTab?: boolean
-  /**
-   * keytab文件的下载地址
-   */
-  DownLoadKeyTabUrl?: string
+  ComputeResourceId?: string
 }
 
 /**
@@ -5032,25 +5074,41 @@ export interface MultiDisk {
 }
 
 /**
- * TerminateInstance请求参数结构体
+ * 节点续费询价明细
  */
-export interface TerminateInstanceRequest {
+export interface NodeRenewPriceDetail {
   /**
-   * 实例ID。
+   * 计费类型，包月为1、包销为3
    */
-  InstanceId: string
+  ChargeType?: number
   /**
-   * 销毁节点ID。该参数为预留参数，用户无需配置。
+   * emr资源id
    */
-  ResourceIds?: Array<string>
+  EmrResourceId?: string
   /**
-   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   * 节点类型
    */
-  ResourceBaseType?: string
+  NodeType?: string
   /**
-   * 计算资源ID
+   * 节点内网ip
    */
-  ComputeResourceId?: string
+  Ip?: string
+  /**
+   * 当前到期时间
+   */
+  ExpireTime?: string
+  /**
+   * 原价
+   */
+  OriginalCost?: number
+  /**
+   * 折扣价
+   */
+  DiscountCost?: number
+  /**
+   * 节点子项续费询价明细列表
+   */
+  RenewPriceDetails?: Array<RenewPriceDetail>
 }
 
 /**
@@ -5472,6 +5530,36 @@ export interface CustomServiceDefine {
    * 自定义参数value
    */
   Value?: string
+}
+
+/**
+ * 用户管理中用户的简要信息
+ */
+export interface UserManagerUserBriefInfo {
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 用户所属的组
+   */
+  UserGroup?: string
+  /**
+   * Manager表示管理员、NormalUser表示普通用户
+   */
+  UserType?: string
+  /**
+   * 用户创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
+   */
+  SupportDownLoadKeyTab?: boolean
+  /**
+   * keytab文件的下载地址
+   */
+  DownLoadKeyTabUrl?: string
 }
 
 /**
@@ -6630,12 +6718,16 @@ export interface DescribeNodeDataDisksResponse {
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 云盘列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CBSList: Array<CBSInstance>
+  CBSList?: Array<CBSInstance>
+  /**
+   * 云盘最大容量
+   */
+  MaxSize?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6886,10 +6978,6 @@ export interface ResizeDataDisksRequest {
    */
   InstanceId: string
   /**
-   * 需要扩容的云盘ID
-   */
-  DiskIds: Array<string>
-  /**
    * 需要扩充的容量值，容量值需要大于原容量，并且为10的整数倍
    */
   DiskSize: number
@@ -6897,6 +6985,14 @@ export interface ResizeDataDisksRequest {
    * 需要扩容的节点ID列表
    */
   CvmInstanceIds: Array<string>
+  /**
+   * 需要扩容的云盘ID
+   */
+  DiskIds?: Array<string>
+  /**
+   * 是否扩容全部云硬盘
+   */
+  ResizeAll?: boolean
 }
 
 /**
@@ -7514,6 +7610,10 @@ export interface InquirePriceRenewEmrResponse {
    */
   TimeSpan?: number
   /**
+   * 节点续费询价明细列表
+   */
+  NodeRenewPriceDetails?: Array<NodeRenewPriceDetail>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8080,6 +8180,10 @@ export interface CBSInstance {
    * 云盘是否为共享型云盘。
    */
   Shareable?: boolean
+  /**
+   * emr节点ID
+   */
+  EmrResourceId?: string
 }
 
 /**

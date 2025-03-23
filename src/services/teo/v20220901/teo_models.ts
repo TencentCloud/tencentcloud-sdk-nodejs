@@ -965,6 +965,20 @@ export interface RuleExtraParameter {
 }
 
 /**
+ * ModifyL7AccRulePriority请求参数结构体
+ */
+export interface ModifyL7AccRulePriorityRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 站点 ID 下完整的规则 ID 列表，规则 ID 列表可以通过 [查询七层加速规则](https://cloud.tencent.com/document/product/1552/115820) 获取，最终优先级顺序将调整成规则 ID 列表的顺序，从前往后依次执行。
+   */
+  RuleIds: Array<string>
+}
+
+/**
  * WebSocket配置
  */
 export interface WebSocket {
@@ -5279,6 +5293,16 @@ export interface FailReason {
    * 处理失败的资源列表。
    */
   Targets: Array<string>
+}
+
+/**
+ * ModifyL7AccRulePriority返回参数结构体
+ */
+export interface ModifyL7AccRulePriorityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11143,7 +11167,7 @@ export interface DetectLengthLimitCondition {
   /**
    * 匹配条件的参数值，取值与 Name 成对使用。
 当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：
-<li>8KB；</li>
+<li>10KB；</li>
 <li>64KB；</li>
 <li>128KB。</li>
    */

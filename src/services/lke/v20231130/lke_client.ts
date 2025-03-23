@@ -26,7 +26,7 @@ import {
   DescribeQAResponse,
   GetWsTokenReq_Label,
   GetAppKnowledgeCountRequest,
-  ResetSessionResponse,
+  StopDocParseResponse,
   ListSelectDocResponse,
   DescribeReleaseInfoRequest,
   DeleteDocRequest,
@@ -145,7 +145,6 @@ import {
   GroupQAResponse,
   QuoteInfo,
   CreateAppRequest,
-  ResetSessionRequest,
   AppConfig,
   DescribeReleaseRequest,
   ReleaseQA,
@@ -256,7 +255,6 @@ import {
   ListAppKnowledgeDetailRequest,
   CreateQAResponse,
   ReRankDataObject,
-  StopDocParseResponse,
   ListQACateRequest,
   ListReleaseQAPreviewRequest,
   DescribeReleaseInfoResponse,
@@ -416,16 +414,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteQAResponse) => void
   ): Promise<DeleteQAResponse> {
     return this.request("DeleteQA", req, cb)
-  }
-
-  /**
-   * 终止文档解析
-   */
-  async StopDocParse(
-    req: StopDocParseRequest,
-    cb?: (error: string, rep: StopDocParseResponse) => void
-  ): Promise<StopDocParseResponse> {
-    return this.request("StopDocParse", req, cb)
   }
 
   /**
@@ -1293,13 +1281,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置会话
+   * 终止文档解析
    */
-  async ResetSession(
-    req: ResetSessionRequest,
-    cb?: (error: string, rep: ResetSessionResponse) => void
-  ): Promise<ResetSessionResponse> {
-    return this.request("ResetSession", req, cb)
+  async StopDocParse(
+    req: StopDocParseRequest,
+    cb?: (error: string, rep: StopDocParseResponse) => void
+  ): Promise<StopDocParseResponse> {
+    return this.request("StopDocParse", req, cb)
   }
 
   /**

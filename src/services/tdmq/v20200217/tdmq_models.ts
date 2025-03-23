@@ -1221,38 +1221,47 @@ export interface DeleteRocketMQTopicResponse {
 export interface Publisher {
   /**
    * 生产者id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProducerId?: number
   /**
    * 生产者名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProducerName?: string
   /**
    * 生产者地址
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
    * 客户端版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientVersion?: string
   /**
    * 消息生产速率（条/秒）
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateIn?: number
   /**
    * 消息生产吞吐速率（字节/秒）
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgThroughputIn?: number
   /**
    * 平均消息大小（字节）
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AverageMsgSize?: number
   /**
    * 连接时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectedSince?: string
   /**
    * 生产者连接的主题分区号
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Partition?: number
 }
@@ -1556,6 +1565,7 @@ export interface ModifyRocketMQNamespaceResponse {
 export interface DimensionInstance {
   /**
    * 实例的维度组合
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Dimensions: Array<DimensionOpt>
 }
@@ -1638,18 +1648,22 @@ export interface InternalTenant {
   MaxDispatchTps?: number
   /**
    * 命名空间最大消费带宽，byte为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDispatchRateInBytes?: number
   /**
    * 命名空间最大生产带宽，byte为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPublishRateInBytes?: number
   /**
    * 消息最大保留空间，MB为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxRetentionSizeInMB?: number
   /**
    * public Access Enabled
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicAccessEnabled?: boolean
 }
@@ -1946,10 +1960,12 @@ export interface CreateRocketMQVipInstanceRequest {
 export interface PulsarNetworkAccessPointInfo {
   /**
    * vpc的id，支撑网和公网接入点，该字段为空
+注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网id，支撑网和公网接入点，该字段为空
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
@@ -1973,26 +1989,32 @@ export interface PulsarNetworkAccessPointInfo {
 2：跨地域访问，已经完成了异地切换，该状态用于源集群的接入点，该状态下的接入点不可删除
 3：跨地域访问，随时可以进行异地访问切回，该状态用于目标集群的接入点，该状态下的接入点不可删除
 4:跨地域访问，目标集群已经完成异地切回，等待删除状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OperationType?: number
   /**
    * 接入点类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessPointsType?: string
   /**
    * 带宽，目前只有公网会有这个值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Bandwidth?: number
   /**
    * 类
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityPolicy?: Array<SecurityPolicy>
   /**
    * 是否是标准的接入点 true是标准的 false不是标准的
+注意：此字段可能返回 null，表示取不到有效值。
    */
   StandardAccessPoint?: boolean
   /**
    * 可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneName?: string
 }
@@ -2813,6 +2835,7 @@ export interface PulsarProClusterInfo {
   Version?: string
   /**
    * 节点分布情况
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeDistribution?: Array<InstanceNodeDistribution>
   /**
@@ -2821,23 +2844,28 @@ export interface PulsarProClusterInfo {
   MaxStorage?: number
   /**
    * 是否可以修改路由
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CanEditRoute?: boolean
   /**
    * 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingLabelVersion?: string
   /**
    * 实例到期时间戳，毫秒级精度。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
   /**
    * 是否开启自动创建主题
 true就是开启了，false是关闭
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoCreateTopicStatus?: boolean
   /**
    * 自动创建主题的默认分区数，如果没开启就是0
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultPartitionNumber?: number
   /**
@@ -4002,10 +4030,12 @@ export interface ModifyRocketMQInstanceRequest {
 export interface Tag {
   /**
    * 标签的key的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey: string
   /**
    * 标签的Value的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
 }
@@ -4425,6 +4455,7 @@ export interface PulsarProInstance {
   PayMode?: number
   /**
    * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
@@ -4433,14 +4464,17 @@ export interface PulsarProInstance {
   SpecName?: string
   /**
    * 规格外弹性TPS
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ScalableTps?: number
   /**
    * VPC的id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
@@ -4449,14 +4483,17 @@ export interface PulsarProInstance {
   MaxBandWidth?: number
   /**
    * 集群的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 集群创建时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingLabelVersion?: string
   /**
@@ -4531,11 +4568,13 @@ export interface DescribeAMQPClustersRequest {
 export interface EnvironmentRoleSet {
   /**
    * 需要绑定的命名空间Id，不重复且存在资源
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvironmentId: string
   /**
    * 名字空间需要绑定的权限，枚举为 "consume" "produce" 组合，但是不为空
 
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Permissions: Array<string>
 }
@@ -4811,6 +4850,7 @@ export interface Cluster {
   Healthy?: number
   /**
    * 集群健康信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyInfo?: string
   /**
@@ -4839,68 +4879,84 @@ export interface Cluster {
   MaxStorageCapacity?: number
   /**
    * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 公网访问接入点
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicEndPoint?: string
   /**
    * VPC访问接入点
+注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcEndPoint?: string
   /**
    * 命名空间数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceNum?: number
   /**
    * 已使用存储限制，MB为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedStorageBudget?: number
   /**
    * 最大生产消息速率，以条数为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPublishRateInMessages?: number
   /**
    * 最大推送消息速率，以条数为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDispatchRateInMessages?: number
   /**
    * 最大生产消息速率，以字节为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPublishRateInBytes?: number
   /**
    * 最大推送消息速率，以字节为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDispatchRateInBytes?: number
   /**
    * 已创建主题数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicNum?: number
   /**
    * 最长消息延时，以秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxMessageDelayInSeconds?: number
   /**
    * 是否开启公网访问，不填时默认开启
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicAccessEnabled?: boolean
   /**
    * 标签
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 计费模式：
 0: 按量计费
 1: 包年包月
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
   /**
    * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 项目名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
@@ -5518,6 +5574,7 @@ export interface CreateRocketMQNamespaceResponse {
 export interface Topic_Simplification {
   /**
    * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
@@ -5525,6 +5582,7 @@ export interface Topic_Simplification {
 1: 非持久分区
 2: 持久非分区
 3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PulsarTopicType?: number
 }
@@ -5721,6 +5779,7 @@ export interface InstanceNodeDistribution {
   NodePermWipeFlag?: boolean
   /**
    * 可用区状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneStatus?: string
 }
@@ -6097,6 +6156,7 @@ export interface VpcBindRecord {
   Port?: number
   /**
    * 说明，128个字符以内
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
 }
@@ -6358,11 +6418,13 @@ export interface PulsarProClusterSpecInfo {
   MaxTopics?: number
   /**
    * 规格外弹性TPS
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ScalableTps?: number
   /**
    * 32或者128
 当前集群topic的最大分区数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPartitions?: number
   /**
@@ -6385,74 +6447,92 @@ export interface Subscription {
   EnvironmentId?: string
   /**
    * 消费者开始连接的时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectedSince?: string
   /**
    * 消费者地址。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerAddr?: string
   /**
    * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerCount?: string
   /**
    * 消费者名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerName?: string
   /**
    * 堆积的消息数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgBacklog?: string
   /**
    * 于TTL，此订阅下没有被发送而是被丢弃的比例。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateExpired?: string
   /**
    * 消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateOut?: string
   /**
    * 消费者每秒消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgThroughputOut?: string
   /**
    * 订阅名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscriptionName?: string
   /**
    * 消费者集合。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerSets?: Array<Consumer>
   /**
    * 是否在线。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOnline?: boolean
   /**
    * 消费进度集合。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumersScheduleSets?: Array<ConsumersSchedule>
   /**
    * 备注。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 订阅类型，Exclusive，Shared，Failover， Key_Shared，空或NULL表示未知，
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SubType?: string
   /**
    * 是否由于未 ack 数到达上限而被 block
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockedSubscriptionOnUnackedMsgs?: boolean
   /**
    * 未 ack 消息数上限
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxUnackedMsgNum?: number
 }
@@ -6853,15 +6933,18 @@ export interface DescribeRocketMQTopicMsgsResponse {
 export interface SecurityPolicy {
   /**
    * ip或者网段
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Route?: string
   /**
    * 策略 true就是允许，白名单或者 false 拒绝 黑名单
 
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Policy?: boolean
   /**
    * 备注
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
 }
@@ -7163,54 +7246,67 @@ export interface ModifyRocketMQInstanceResponse {
 export interface PartitionsTopic {
   /**
    * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AverageMsgSize?: string
   /**
    * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerCount?: string
   /**
    * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LastConfirmedEntry?: string
   /**
    * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LastLedgerCreatedTimestamp?: string
   /**
    * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateIn?: string
   /**
    * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateOut?: string
   /**
    * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgThroughputIn?: string
   /**
    * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgThroughputOut?: string
   /**
    * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NumberOfEntries?: string
   /**
    * 子分区id。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Partitions?: number
   /**
    * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProducerCount?: string
   /**
    * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalSize?: string
   /**
    * topic类型描述。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicType?: number
 }
@@ -7587,14 +7683,17 @@ export interface ModifyRabbitMQPermissionRequest {
 export interface ConsumersSchedule {
   /**
    * 当前分区id。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Partitions?: number
   /**
    * 消息数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NumberOfEntries?: number
   /**
    * 消息积压数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgBacklog?: number
   /**
@@ -7607,6 +7706,7 @@ export interface ConsumersSchedule {
   MsgThroughputOut?: string
   /**
    * 超时丢弃比例。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateExpired?: string
 }
@@ -7817,10 +7917,12 @@ export interface Sort {
 export interface ConsumerLogs {
   /**
    * 记录数。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 消费日志。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerLogSets?: Array<ConsumerLog>
 }
@@ -8744,54 +8846,67 @@ export interface CreateEnvironmentResponse {
 export interface Topic {
   /**
    * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AverageMsgSize?: string
   /**
    * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerCount?: string
   /**
    * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LastConfirmedEntry?: string
   /**
    * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LastLedgerCreatedTimestamp?: string
   /**
    * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateIn?: string
   /**
    * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateOut?: string
   /**
    * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgThroughputIn?: string
   /**
    * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgThroughputOut?: string
   /**
    * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NumberOfEntries?: string
   /**
    * 分区数<=0：topic下无子分区。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Partitions?: number
   /**
    * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProducerCount?: string
   /**
    * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalSize?: string
   /**
    * 分区topic里面的子分区。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SubTopicSets?: Array<PartitionsTopic>
   /**
@@ -8802,34 +8917,42 @@ export interface Topic {
 3：重试队列；
 4：死信队列；
 5：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicType?: number
   /**
    * 环境（命名空间）名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvironmentId?: string
   /**
    * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 说明，128个字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 生产者上限。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProducerLimit?: string
   /**
    * 消费者上限。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerLimit?: string
   /**
@@ -8837,11 +8960,13 @@ export interface Topic {
 1: 非持久分区
 2: 持久非分区
 3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PulsarTopicType?: number
   /**
    * 未消费消息过期时间，单位：秒
 
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgTTL?: number
   /**
@@ -9466,14 +9591,17 @@ export interface Environment {
   NamespaceName?: string
   /**
    * Topic数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicNum?: number
   /**
    * 消息保留策略
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RetentionPolicy?: RetentionPolicy
   /**
    * 是否自动创建订阅
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoSubscriptionCreation?: boolean
 }
@@ -9830,22 +9958,27 @@ export interface ModifyTopicRequest {
 export interface Consumer {
   /**
    * 消费者开始连接的时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectedSince?: string
   /**
    * 消费者地址。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerAddr?: string
   /**
    * 消费者名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerName?: string
   /**
    * 消费者版本。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientVersion?: string
   /**
    * 消费者连接的主题分区号
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Partition?: number
 }

@@ -2396,14 +2396,12 @@ export interface DescribeChannelsResponse {
 export interface DeviceMonitorValue {
   /**
    * 统计值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: number
+  Value?: number
   /**
    * 统计时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Time: number
+  Time?: number
 }
 
 /**
@@ -3014,59 +3012,48 @@ export interface ModifySubscriptionStatusResponse {
 export interface MessageForward {
   /**
    * 配置ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntId: number
+  IntId?: number
   /**
    * 用户Uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
   /**
    * json数组， 转发类型 1: 告警 2:GPS
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MessageType: string
+  MessageType?: string
   /**
    * 区域ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 区域名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Instance: string
+  Instance?: string
   /**
    * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * kafka topic id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * topic 名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicName: string
+  TopicName?: string
 }
 
 /**
@@ -3135,12 +3122,10 @@ export interface GetRecordDatesByDevRequest {
 export interface DescribeLiveChannelListResponse {
   /**
    * 频道总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 频道信息数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveChannels?: Array<LiveChannelInfo>
   /**
@@ -3604,39 +3589,32 @@ export interface DescribeDeviceGroupRequest {
 export interface LiveChannelInfo {
   /**
    * 频道ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveChannelId: string
+  LiveChannelId?: string
   /**
    * 频道名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveChannelName: string
+  LiveChannelName?: string
   /**
    * 频道类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveChannelType: number
+  LiveChannelType?: number
   /**
    * 通道直播状态：1: 未推流，2: 推流中
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveStatus: number
+  LiveStatus?: number
   /**
    * 推流地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PushStreamAddress: string
+  PushStreamAddress?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -3819,14 +3797,12 @@ export interface RecordPlanItem {
 export interface DescribeMessageForwardsResponse {
   /**
    * 配置总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 配置列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<MessageForward>
+  List?: Array<MessageForward>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4062,12 +4038,10 @@ export interface ModifyMessageForwardResponse {
 export interface DescribeDeviceListResponse {
   /**
    * 设备总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 设备详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Devices?: Array<AllDeviceInfo>
   /**

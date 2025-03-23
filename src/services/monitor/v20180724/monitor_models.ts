@@ -661,6 +661,44 @@ export interface Label {
 }
 
 /**
+ * ModifyConditionsTemplateRequestCondition，Condition入参字段值
+ */
+export interface ModifyConditionsTemplateRequestCondition {
+  /**
+   * 统计周期
+   */
+  CalcPeriod: string
+  /**
+   * 统计方式
+   */
+  CalcType: string
+  /**
+   * 持续周期
+   */
+  ContinuePeriod: string
+  /**
+   * 指标ID
+   */
+  MetricID: number
+  /**
+   * 统计值
+   */
+  CalcValue: string
+  /**
+   * 告警通知周期
+   */
+  AlarmNotifyPeriod?: string
+  /**
+   * 告警通知方式
+   */
+  AlarmNotifyType?: number
+  /**
+   * 规则ID
+   */
+  RuleID?: number
+}
+
+/**
  * DescribeGrafanaIntegrations返回参数结构体
  */
 export interface DescribeGrafanaIntegrationsResponse {
@@ -2573,6 +2611,20 @@ export interface DescribePrometheusAlertGroupsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateConditionsTemplate返回参数结构体
+ */
+export interface CreateConditionsTemplateResponse {
+  /**
+   * 模板策略组ID
+   */
+  GroupID?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9057,6 +9109,28 @@ export interface UpdateGrafanaWhiteListRequest {
 }
 
 /**
+ * ModifyConditionsTemplateRequestEventCondition
+ */
+export interface ModifyConditionsTemplateRequestEventCondition {
+  /**
+   * 告警通知周期
+   */
+  AlarmNotifyPeriod: string
+  /**
+   * 告警通知方式
+   */
+  AlarmNotifyType: string
+  /**
+   * 事件ID
+   */
+  EventID: string
+  /**
+   * 规则ID
+   */
+  RuleID?: number
+}
+
+/**
  * UpdatePrometheusAgentStatus请求参数结构体
  */
 export interface UpdatePrometheusAgentStatusRequest {
@@ -11117,6 +11191,52 @@ export interface GrafanaNotificationChannel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrganizationIds?: Array<string>
+}
+
+/**
+ * CreateConditionsTemplate请求参数结构体
+ */
+export interface CreateConditionsTemplateRequest {
+  /**
+   * 固定值，monitor
+   */
+  Module: string
+  /**
+   * 视图名
+   */
+  ViewName: string
+  /**
+   * 组名
+   */
+  GroupName: string
+  /**
+   * 是否为与关系
+   */
+  IsUnionRule?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 父ID
+   */
+  ParentGroupID?: number
+  /**
+   * 是否屏蔽
+   */
+  IsShielded?: number
+  /**
+   * 复合告警表达式
+   */
+  ComplexExpression?: string
+  /**
+   * 指标告警条件
+   */
+  Conditions?: Array<ModifyConditionsTemplateRequestCondition>
+  /**
+   * 事件告警条件
+   */
+  EventConditions?: Array<ModifyConditionsTemplateRequestEventCondition>
 }
 
 /**

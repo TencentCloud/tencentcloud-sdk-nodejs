@@ -45,7 +45,6 @@ export interface ClusterOverview {
   SchedulerType?: string
   /**
    * 集群调度器版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerVersion?: string
   /**
@@ -751,12 +750,10 @@ export interface ExpansionNodeConfigOverview {
 export interface GooseFSxOptionOverview {
   /**
    * 文件系统master的ip和端口列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Masters?: Array<string>
   /**
    * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalPath?: string
 }
@@ -973,7 +970,6 @@ export interface ClusterActivity {
   ActivityStatus?: string
   /**
    * 集群活动状态码。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivityStatusCode?: string
   /**
@@ -995,12 +991,10 @@ export interface ClusterActivity {
   RelatedNodeActivitySet?: Array<NodeActivity>
   /**
    * 集群活动开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 集群活动结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
 }
