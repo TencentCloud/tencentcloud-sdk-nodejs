@@ -44,11 +44,19 @@ npm install tencentcloud-sdk-nodejs-vpc --save
 
 ### 安装全产品 SDK
 
+如果项目依赖的云产品较多，可以引入全产品 SDK。
+
 ```
 npm install tencentcloud-sdk-nodejs --save
 ```
 
-全产品 SDK 包含了所有云产品的调用代码，体积偏大，对体积敏感的场景，推荐安装指定产品 SDK。
+全产品 SDK 包含所有云产品调用代码和 TypeScript 类型文件，体积偏大。对于体积敏感的场景，推荐安装指定产品 SDK。
+
+如果既希望全产品调用，又对包体积比较敏感，可以使用 Slim 版本 SDK。Slim SDK 移除类型文件，并进行了代码压缩，适合体积敏感场景使用：
+
+```
+npm install tencentcloud-sdk-slim-nodejs --save
+```
 
 ## 通过源码包安装
 
