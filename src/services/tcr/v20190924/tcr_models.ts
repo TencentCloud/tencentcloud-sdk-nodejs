@@ -220,34 +220,28 @@ export interface ModifyRepositoryResponse {
 export interface TriggerInvokePara {
   /**
    * AppId
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: string
+  AppId?: string
   /**
    * TKE集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * TKE集群命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace: string
+  Namespace?: string
   /**
    * TKE集群工作负载名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceName: string
+  ServiceName?: string
   /**
    * TKE集群工作负载中容器名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContainerName: string
+  ContainerName?: string
   /**
    * TKE集群地域数字ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterRegion: number
+  ClusterRegion?: number
 }
 
 /**
@@ -293,47 +287,38 @@ export interface DescribeInstanceCustomizedDomainResponse {
 export interface TriggerLogResp {
   /**
    * 仓库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoName?: string
   /**
    * Tag名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagName?: string
   /**
    * 触发器名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerName?: string
   /**
    * 触发方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeSource?: string
   /**
    * 触发动作
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeAction?: string
   /**
    * 触发时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeTime?: string
   /**
    * 触发条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeCondition?: TriggerInvokeCondition
   /**
    * 触发参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokePara?: TriggerInvokePara
   /**
    * 触发结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeResult?: TriggerInvokeResult
 }
@@ -818,7 +803,6 @@ export interface FavorResp {
   TotalCount?: number
   /**
    * 仓库信息数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoInfo?: Array<Favors>
 }
@@ -949,37 +933,30 @@ export interface CreateMultipleSecurityPolicyResponse {
 export interface TriggerResp {
   /**
    * 触发器名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerName?: string
   /**
    * 触发来源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeSource?: string
   /**
    * 触发动作
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeAction?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 触发条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeCondition?: TriggerInvokeCondition
   /**
    * 触发器参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokePara?: TriggerInvokePara
 }
@@ -1283,24 +1260,22 @@ export interface DeleteInstanceCustomizedDomainRequest {
 export interface Tag {
   /**
    * 云标签的key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 云标签的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
 
 /**
- *  作业调度信息
+ * 作业调度信息
  */
 export interface Schedule {
   /**
    * 类型：Hourly, Daily, Weekly, Custom, Manual, Dryrun, None
    */
-  Type: string
+  Type?: string
 }
 
 /**
@@ -1426,7 +1401,6 @@ export interface AutoDelStrategyInfoResp {
   TotalCount?: number
   /**
    * 自动删除策略列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyInfo?: Array<AutoDelStrategyInfo>
 }
@@ -1672,19 +1646,16 @@ export interface DescribeRepositoryOwnerPersonalResponse {
 export interface VpcPrivateDomainStatus {
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * unique vpc id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * ENABLE代表已经开启，DISABLE代表未开启，ERROR代表查询出错
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -1693,12 +1664,10 @@ export interface VpcPrivateDomainStatus {
 export interface Permission {
   /**
    * 资源路径，目前仅支持Namespace
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository、tcr:CreateRepository、tcr:CreateHelmChart、tcr:DescribeHelmCharts
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Actions: Array<string>
 }
@@ -1767,29 +1736,27 @@ export interface TcrImageInfo {
   /**
    * 哈希值
    */
-  Digest: string
+  Digest?: string
   /**
    * 镜像体积（单位：字节）
    */
-  Size: number
+  Size?: number
   /**
    * Tag名称
    */
-  ImageVersion: string
+  ImageVersion?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 制品类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Kind: string
+  Kind?: string
   /**
    * KMS 签名信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  KmsSignature: string
+  KmsSignature?: string
 }
 
 /**
@@ -1971,32 +1938,26 @@ export interface Favors {
   RepoType?: string
   /**
    * Pull总共的次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PullCount?: number
   /**
    * 仓库收藏次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FavorCount?: number
   /**
    * 仓库是否公开
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Public?: number
   /**
    * 是否为官方所有
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsQcloudOfficial?: boolean
   /**
    * 仓库Tag的数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagCount?: number
   /**
    * Logo
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Logo?: string
   /**
@@ -2161,12 +2122,10 @@ export interface TcrNamespaceInfo {
   NamespaceId?: number
   /**
    * 实例云标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSpecification?: TagSpecification
   /**
    * 命名空间元数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata?: Array<KeyValueString>
   /**
@@ -2455,16 +2414,15 @@ export interface RegistryStatus {
   /**
    * 实例的Id
    */
-  RegistryId: string
+  RegistryId?: string
   /**
    * 实例的状态
    */
-  Status: string
+  Status?: string
   /**
    * 附加状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Conditions: Array<RegistryCondition>
+  Conditions?: Array<RegistryCondition>
 }
 
 /**
@@ -2523,7 +2481,6 @@ export interface DeleteRepositoryPersonalResponse {
 export interface CreateInstanceTokenResponse {
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Username?: string
   /**
@@ -2536,7 +2493,6 @@ export interface CreateInstanceTokenResponse {
   ExpTime?: number
   /**
    * 长期凭证的TokenId，短期凭证没有TokenId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TokenId?: string
   /**
@@ -2555,7 +2511,6 @@ export interface DescribeApplicationTriggerLogPersonalResp {
   TotalCount?: number
   /**
    * 触发日志列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogInfo?: Array<TriggerLogResp>
 }
@@ -2768,12 +2723,10 @@ export interface DeleteSignaturePolicyResponse {
 export interface TriggerInvokeResult {
   /**
    * 请求TKE返回值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReturnCode?: number
   /**
    * 请求TKE返回信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReturnMsg?: string
 }
@@ -2936,12 +2889,10 @@ export interface ModifyRepositoryAccessPersonalRequest {
 export interface TagSpecification {
   /**
    * 默认值为instance
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType: string
   /**
    * 云标签数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags: Array<Tag>
 }
@@ -3066,44 +3017,43 @@ export interface RepositoryInfoResp {
   /**
    * 镜像仓库名字
    */
-  RepoName: string
+  RepoName?: string
   /**
    * 镜像仓库类型
    */
-  RepoType: string
+  RepoType?: string
   /**
    * 镜像仓库服务地址
    */
-  Server: string
+  Server?: string
   /**
    * 创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 镜像仓库描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 是否为公有镜像
    */
-  Public: number
+  Public?: number
   /**
    * 下载次数
    */
-  PullCount: number
+  PullCount?: number
   /**
    * 收藏次数
    */
-  FavorCount: number
+  FavorCount?: number
   /**
    * 是否为用户收藏
    */
-  IsUserFavor: boolean
+  IsUserFavor?: boolean
   /**
    * 是否为腾讯云官方镜像
    */
-  IsQcloudOfficial: boolean
+  IsQcloudOfficial?: boolean
 }
 
 /**
@@ -3333,22 +3283,18 @@ DeleteFailed, 实例删除失败
   InternalEndpoint?: string
   /**
    * 实例云标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSpecification?: TagSpecification
   /**
    * 实例过期时间（预付费）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredAt?: string
   /**
    * 实例付费类型，0表示后付费，1表示预付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMod?: number
   /**
    * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: number
   /**
@@ -3504,7 +3450,6 @@ export interface TriggerInvokeCondition {
   InvokeMethod?: string
   /**
    * 触发表达式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeExpr?: string
 }
@@ -3689,7 +3634,6 @@ export interface TaskDetail {
   TaskStatus?: string
   /**
    * 任务的状态信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskMessage?: string
   /**
@@ -3698,7 +3642,6 @@ export interface TaskDetail {
   CreatedTime?: string
   /**
    * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishedTime?: string
 }
@@ -4018,7 +3961,6 @@ export interface DeleteImageAccelerateServiceResponse {
 export interface CVEWhitelistItem {
   /**
    * 漏洞白名单 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CVEID?: string
 }
@@ -4207,7 +4149,6 @@ export interface CheckInstanceNameResponse {
   IsValidated?: boolean
   /**
    * 1: Illegal（名称非法）, 2:Reserved（名字保留）, 3:Existed（名字已存在）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetailCode?: number
   /**
@@ -4577,7 +4518,6 @@ export interface TagInfo {
   CreationTime?: string
   /**
    * 制品创建至今时间长度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationDays?: string
   /**
@@ -4802,22 +4742,18 @@ export interface DescribeTagRetentionRulesRequest {
 export interface ServiceAccount {
   /**
    * 服务级账号名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 是否禁用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Disable?: boolean
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiresAt?: number
   /**
@@ -4827,12 +4763,10 @@ export interface ServiceAccount {
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Permissions?: Array<Permission>
 }
@@ -4913,9 +4847,8 @@ export interface DescribeInstanceCustomizedDomainRequest {
 export interface SameImagesResp {
   /**
    * tag列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SameImages: Array<string>
+  SameImages?: Array<string>
 }
 
 /**

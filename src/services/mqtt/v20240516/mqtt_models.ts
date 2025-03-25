@@ -35,6 +35,9 @@ export interface MQTTClientSubscription {
   TopicFilter?: string
   /**
    * 服务质量等级
+0: 至多一次
+1: 至少一次
+2: 恰好一次
    */
   Qos?: number
   /**
@@ -76,7 +79,7 @@ export interface ModifyJWTAuthenticatorResponse {
  */
 export interface CaCertificateItem {
   /**
-   * common name
+   * 证书的公用名(Common Name)
    */
   CaCn?: string
   /**
@@ -88,7 +91,7 @@ export interface CaCertificateItem {
    */
   CaSn?: string
   /**
-   * 证书格式
+   * 证书格式，当前仅支持 PEM 格式
    */
   Format?: string
   /**
@@ -96,23 +99,27 @@ export interface CaCertificateItem {
    */
   VerificationCertificate?: string
   /**
-   * ca状态
+   * CA证书的状态
+    ACTIVE：激活
+    INACTIVE：未激活
+    REVOKED：吊销
+    PENDING_ACTIVATION：注册待激活
    */
   Status?: string
   /**
-   * 上次激活时间
+   * 上次激活时间，毫秒级时间戳 。
    */
   LastActivationTime?: number
   /**
-   * 创建时间
+   * 创建时间，毫秒级时间戳 。
    */
   CreatedTime?: number
   /**
-   * 预销毁时间
+   * 更新时间，毫秒级时间戳 。
    */
   UpdateTime?: number
   /**
-   * 上次去激活时间
+   * 上次去激活时间，毫秒级时间戳 。
    */
   LastInactivationTime?: number
   /**
@@ -120,11 +127,11 @@ export interface CaCertificateItem {
    */
   CaIssuerCn?: string
   /**
-   * 生效时间
+   * 生效时间，毫秒级时间戳 。
    */
   NotBeforeTime?: number
   /**
-   * 失效时间
+   * 失效时间，毫秒级时间戳 。
    */
   NotAfterTime?: number
 }
@@ -144,11 +151,11 @@ export interface ModifyAuthorizationPolicyResponse {
  */
 export interface ActivateDeviceCertificateRequest {
   /**
-   * 集群id
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 设备证书序列号
+   * 设备证书的SN序列号，可以从 [DescribeDeviceCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。
    */
   DeviceCertificateSn: string
 }
@@ -172,7 +179,7 @@ export interface CreateInstanceResponse {
  */
 export interface ApplyRegistrationCodeRequest {
   /**
-   * 集群id
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }
@@ -252,7 +259,7 @@ password-使用密码字段传递
  */
 export interface AuthorizationPolicyPriority {
   /**
-   * 策略id
+   * 授权策略规则id，可以从 [DescribeAuthorizationPolicies](https://cloud.tencent.com/document/api/1778/111074)接口获得。
    */
   Id: number
   /**
@@ -274,7 +281,7 @@ export interface DescribeInsPublicEndpointsResponse {
    */
   InstanceId?: string
   /**
-   * 带宽
+   * 带宽，单位Mbps
    */
   Bandwidth?: number
   /**
@@ -397,11 +404,20 @@ export interface DescribeCaCertificateResponse {
  */
 export interface DescribeDeviceCertificatesRequest {
   /**
-   * 集群ID
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 过滤器支持ClientId、CaSn、DeviceCertificateSn、Status搜索
+   * 支持搜索参数
+ClientId：客户端id
+CaSn：所属的CA证书SN
+DeviceCertificateSn：设备证书SN
+DeviceCertificateCn：设备证书CN
+OrganizationalUnit：证书OU
+NotAfterEnd：过期时间小于等于指定时间的证书
+NotAfterStart：过期时间大于等于指定时间的证书
+Status：证书状态
+
    */
   Filters?: Array<Filter>
   /**
@@ -426,14 +442,14 @@ export interface DescribeDeviceCertificatesRequest {
  */
 export interface DeleteAuthenticatorRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
    * 认证器类型:
 JWT：JWT认证器
 JWKS：JWKS认证器
-BYOC：一端一证认证器
+HTTP：HTTP认证器
    */
   Type: string
 }
@@ -625,23 +641,38 @@ export interface RegisterDeviceCertificateResponse {
  */
 export interface MQTTAuthenticatorItem {
   /**
-   * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 BYOC：一端一证认证器
+   * 认证器类型
+JWT：JWT认证器
+JWKS：JWKS认证器
+HTTP：HTTP认证器
    */
   Type?: string
   /**
-   * 认证器配置
+   * HTTP认证器
+headers（请求头）：标准请求头和自定义请求头
+endpoint（接入点）：认证服务器接入点
+method（http请求方法）：POST/GET
+readTimeout（读超时时间）：读取认证服务器数据超时时间，单位秒
+connectTimeout（连接超时时间）：连接认证服务器超时时间，单位秒
+body（请求体）：http请求体
+concurrency（并发数）：最大并发请求数
+样例：{"headers":[{"key":"Content-type","value":"application/json"},{"key":"username","value":"${Username}"}],"endpoint":"https://127.0.0.1:443","method":"POST","readTimeout":10,"connectTimeout":10,"body":[{"key":"client-id","value":"${ClientId}"}],"concurrency":8}
+
+参考 [认证管理概述](https://cloud.tencent.com/document/product/1778/114813)
    */
   Config?: string
   /**
    * 认证器状态
+open：认证器打开
+close：认证器关闭
    */
   Status?: string
   /**
-   * 创建时间
+   * 创建时间，毫秒级时间戳 。
    */
   CreateTime?: number
   /**
-   * 说明
+   * 说明，最长 128 字符。
    */
   Remark?: string
 }
@@ -1046,11 +1077,11 @@ export interface DeactivateCaCertificateResponse {
  */
 export interface DeleteCaCertificateRequest {
   /**
-   * 集群id
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 证书序列号
+   * 证书序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。
    */
   CaSn: string
 }
@@ -1074,7 +1105,7 @@ export interface DeleteDeviceCertificateRequest {
  */
 export interface DescribeInsPublicEndpointsRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }
@@ -1238,15 +1269,15 @@ export interface DescribeAuthorizationPoliciesResponse {
  */
 export interface CreateTopicRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题，不能为空，只能包含字母、数字、“-”及“_”，3-100 字符。
    */
   Topic: string
   /**
-   * 备注
+   * 备注，最长 128 字符
    */
   Remark?: string
 }
@@ -1330,11 +1361,11 @@ export interface MQTTUserItem {
    */
   Remark?: string
   /**
-   * 创建时间，秒为单位
+   * 创建时间，毫秒级时间戳 。
    */
   CreatedTime?: number
   /**
-   * 修改时间，秒为单位
+   * 修改时间，毫秒级时间戳 。
    */
   ModifiedTime?: number
 }
@@ -1396,11 +1427,11 @@ export interface DescribeTopicRequest {
  */
 export interface PublishMessageRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 消息 payload，需要按 encoding 指定的编码方式进行编码
+   * 消息负载 Payload，是消息的实际内容，需要按 encoding 指定的编码方式进行编码
    */
   Payload: string
   /**
@@ -1417,6 +1448,9 @@ export interface PublishMessageRequest {
   Encoding?: string
   /**
    * 消息的服务质量等级，默认为 1
+QoS 0（至多一次）消息发送后，不保证接收方一定收到，也不要求接收方确认。
+QoS 1（至少一次）消息至少被接收方成功接收一次，但可能重复。
+QoS 2（恰好一次）消息确保被接收方接收且仅接收一次，无重复。
    */
   Qos?: number
   /**
@@ -1430,69 +1464,78 @@ export interface PublishMessageRequest {
  */
 export interface AuthorizationPolicyItem {
   /**
-   * 规则ID
+   * 策略规则ID
    */
   Id?: number
   /**
-   * 集群ID
+   * MQTT集群ID
    */
   InstanceId?: string
   /**
-   * 规则名
+   * 策略规则名
    */
   PolicyName?: string
   /**
-   * 规则语法版本
+   * 规则语法版本，当前仅支持1，默认为1
    */
   Version?: number
   /**
-   * 越小越优先
+   * 策略优先级，优先级ID越小表示策略越优先检查生效。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   Priority?: number
   /**
-   * allow/deny
+   * 决策
+allow：允许符合该策略的设备的访问请求。
+deny：拒绝覆盖该策略的设备的访问请求。
+可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   Effect?: string
   /**
-   * connect、pub、sub
+   * 操作
+connect：连接
+pub：发布mqtt消息
+sub：订阅mqtt消息
+可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   Actions?: string
   /**
-   * 资源
+   * 资源，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   Resources?: string
   /**
-   * client
+   * 条件-连接设备ID，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   ClientId?: string
   /**
-   * 用户
+   * 条件-用户名，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
+
    */
   Username?: string
   /**
-   * IP地址
+   * 条件-客户端IP地址，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   Ip?: string
   /**
-   * 0，1，2
+   * 条件-服务质量，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
    */
   Qos?: string
   /**
-   * 1：表示匹配retain消息
+   * 条件-保留消息，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。
+1：表示匹配retain消息
 2：表示匹配非retain消息
 3：表示匹配retain和非retain消息
    */
   Retain?: number
   /**
-   * 描述
+   * 备注，长度不超过128个字符。
    */
   Remark?: string
   /**
-   * 1713164969433
+   * 创建时间。毫秒级时间戳 。
    */
   CreatedTime?: number
   /**
-   * 1713164969433
+   * 更新时间。毫秒级时间戳 。
    */
   UpdateTime?: number
 }
@@ -1502,7 +1545,7 @@ export interface AuthorizationPolicyItem {
  */
 export interface DescribeClientListRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -1564,7 +1607,7 @@ export interface MQTTEndpointItem {
  */
 export interface DescribeInsVPCEndpointsRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }
@@ -1574,7 +1617,7 @@ export interface DescribeInsVPCEndpointsRequest {
  */
 export interface DescribeTopicListRequest {
   /**
-   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -1583,11 +1626,11 @@ export interface DescribeTopicListRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 查询起始位置
+   * 查询起始位置，默认0。
    */
   Offset?: number
   /**
-   * 查询结果限制数量
+   * 查询结果限制数量，默认0，最大20
    */
   Limit?: number
 }
@@ -1639,11 +1682,14 @@ export interface CreateAuthorizationPolicyResponse {
  */
 export interface DescribeAuthenticatorRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 HTTP:HTTP认证器
+   * 认证器类型:
+JWT：JWT认证器
+JWKS：JWKS认证器
+HTTP：HTTP认证器
    */
   Type?: string
 }
@@ -1801,11 +1847,11 @@ export interface Filter {
  */
 export interface DeactivateDeviceCertificateRequest {
   /**
-   * 集群id
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 设备证书序列号
+   * 设备证书的SN序列号，可以从 [DescribeDeviceCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、设备证书文件中获得。
    */
   DeviceCertificateSn: string
 }
@@ -1833,15 +1879,15 @@ export interface DescribeDeviceCertificatesResponse {
  */
 export interface ModifyTopicRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题，不能为空，只能包含字母、数字、“-”及“_”，3-100 字符。
    */
   Topic: string
   /**
-   * 备注信息
+   * 备注信息，最长 128 字符
    */
   Remark?: string
 }
@@ -1851,11 +1897,11 @@ export interface ModifyTopicRequest {
  */
 export interface CreateUserRequest {
   /**
-   * 实例ID
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 用户名
+   * 用户名，不能为空，只支持数字 大小写字母 分隔符("_","-")，不能超过 32 个字符
    */
   Username: string
   /**
@@ -1863,7 +1909,7 @@ export interface CreateUserRequest {
    */
   Password?: string
   /**
-   * 备注
+   * 备注，长度不超过128个字符。
    */
   Remark?: string
 }
@@ -2003,11 +2049,11 @@ export interface DescribeInsVPCEndpointsResponse {
  */
 export interface DescribeDeviceCertificateRequest {
   /**
-   * 设备证书sn
+   * 设备证书的SN序列号，用于唯一标识一个设备证书。
    */
   DeviceCertificateSn: string
   /**
-   * 集群id
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }
@@ -2035,7 +2081,7 @@ export interface ModifyInsPublicEndpointRequest {
  */
 export interface DeleteInsPublicEndpointRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }
@@ -2045,20 +2091,20 @@ export interface DeleteInsPublicEndpointRequest {
  */
 export interface DescribeUserListRequest {
   /**
-   * 实例ID
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
    * 查询条件列表支持字段
-Username：Username模糊查询
+Username：按照【用户名】进行过滤，支持模糊过滤，类型：String
    */
   Filters?: Array<Filter>
   /**
-   * 查询起始位置
+   * 查询起始位置，默认值0
    */
   Offset?: number
   /**
-   * 查询结果限制数量
+   * 查询结果限制数量，默认值20，最大值100
    */
   Limit?: number
 }
@@ -2082,7 +2128,7 @@ export interface DescribeCaCertificateRequest {
  */
 export interface UpdateAuthorizationPolicyPriorityRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -2106,11 +2152,11 @@ export interface CreateJWTAuthenticatorResponse {
  */
 export interface DeleteAuthorizationPolicyRequest {
   /**
-   * 实例ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 策略规则id
+   * 授权策略规则id，可以从 [DescribeAuthorizationPolicies](https://cloud.tencent.com/document/api/1778/111074)接口获得。
    */
   Id: number
 }
@@ -2120,7 +2166,7 @@ export interface DeleteAuthorizationPolicyRequest {
  */
 export interface DescribeAuthorizationPoliciesRequest {
   /**
-   * 集群ID
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId?: string
 }
@@ -2209,27 +2255,31 @@ export interface DescribeTopicListResponse {
  */
 export interface DescribeDeviceCertificateResponse {
   /**
-   * 创建时间
+   * 创建时间，毫秒级时间戳 。
    */
   CreatedTime?: number
   /**
-   * 上次更新时间
+   * 上次更新时间，毫秒级时间戳 。
    */
   UpdateTime?: number
   /**
-   * 证书失效日期
+   * 证书失效日期，毫秒级时间戳 。
    */
   NotAfterTime?: number
   /**
-   * 上次激活时间
+   * 上次激活时间，毫秒级时间戳 。
    */
   LastActivationTime?: number
   /**
-   * 上次取消激活时间
+   * 上次取消激活时间，毫秒级时间戳 。
    */
   LastInactivationTime?: number
   /**
-   * 证书状态
+   * 设备证书的状态
+    ACTIVE：激活 
+    INACTIVE：未激活
+    REVOKED：吊销
+    PENDING_ACTIVATION：注册待激活
    */
   Status?: string
   /**
@@ -2249,7 +2299,7 @@ export interface DescribeDeviceCertificateResponse {
    */
   DeviceCertificateCn?: string
   /**
-   * 证书格式
+   * 证书格式，当前仅支持PEM格式
    */
   Format?: string
   /**
@@ -2257,12 +2307,13 @@ export interface DescribeDeviceCertificateResponse {
    */
   ClientId?: string
   /**
-   *     API, 手动注册   
-    JITP 自动注册
+   * 证书来源    
+API：手动注册   
+JITP：自动注册
    */
   CertificateSource?: string
   /**
-   * 证书生效开始时间
+   * 证书生效开始时间，毫秒级时间戳 。
    */
   NotBeforeTime?: number
   /**
@@ -2305,11 +2356,11 @@ InstanceStatus：集群状态搜索（RUNNING-运行中，CREATING-创建中，M
  */
 export interface DeactivateCaCertificateRequest {
   /**
-   * 集群id
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 证书序列号
+   * 证书序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。
    */
   CaSn: string
 }
@@ -2353,7 +2404,7 @@ export interface CreateJWTAuthenticatorRequest {
  */
 export interface DescribeCaCertificatesRequest {
   /**
-   * 集群ID
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }
@@ -2435,7 +2486,7 @@ JITP 自动注册
  */
 export interface MQTTClientInfo {
   /**
-   * 客户端唯一标识
+   * 客户端ID
    */
   ClientId?: string
   /**
@@ -2443,7 +2494,10 @@ export interface MQTTClientInfo {
    */
   ClientAddress?: string
   /**
-   * MQTT 协议版本，4 表示 MQTT 3.1.1
+   * MQTT 协议版本
+3：表示MQTT 3.1版本
+4：表示 MQTT 3.1.1
+5:   标识MQTT 5.0协议
    */
   ProtocolVersion?: number
   /**
@@ -2455,15 +2509,15 @@ export interface MQTTClientInfo {
    */
   ConnectionStatus?: string
   /**
-   * 客户端创建时间
+   * 客户端创建时间，毫秒级时间戳 。
    */
   CreateTime?: number
   /**
-   * 上次建立连接时间
+   * 上次建立连接时间，毫秒级时间戳 。
    */
   ConnectTime?: number
   /**
-   * 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义
+   * 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义，毫秒级时间戳 。
    */
   DisconnectTime?: number
   /**
@@ -2708,7 +2762,7 @@ export interface DescribeCaCertificatesResponse {
  */
 export interface ModifyUserRequest {
   /**
-   * 实例ID
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -2716,7 +2770,7 @@ export interface ModifyUserRequest {
    */
   Username: string
   /**
-   * 备注
+   * 备注，长度不超过128个字符。
    */
   Remark?: string
 }

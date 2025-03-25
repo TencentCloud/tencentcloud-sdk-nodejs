@@ -213,22 +213,18 @@ export interface Position {
 export interface SelfOperation {
   /**
    * 联系人员电话
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StuffContact: string
   /**
    * 身份证号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StuffIDCard: string
   /**
    * 人员姓名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StuffName: string
   /**
    * 上门时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperationTime: string
 }
@@ -1266,7 +1262,6 @@ export interface DeviceOrderBaseInfo {
   IdcId?: number
   /**
    * 机房名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IdcName?: string
   /**
@@ -1385,7 +1380,6 @@ export interface WorkOrderData {
   CreateTime?: string
   /**
    * 工单完成时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
 }
@@ -2034,7 +2028,6 @@ export interface DescribeAvailableModelListResponse {
 export interface Personnel {
   /**
    * 证件号码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IDCardNumber: string
   /**
@@ -2043,42 +2036,34 @@ HONG_KONG_AND_MACAO_PASS: 港澳通行证',
 PASSPORT: 护照,
 DRIVING_LICENSE: 驾照,
 OTHER: 其他
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IDCardType: string
   /**
    * 公司名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Company: string
   /**
    * 语言。对应关系：ENGLISH: 英文, CHINESE: 中文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LanguageType: string
   /**
    * 姓名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 电话
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TelNumber: string
   /**
    * 职位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Position?: string
   /**
    * 微信
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Wechat?: string
   /**
    * 邮箱
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
 }

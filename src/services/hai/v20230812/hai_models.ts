@@ -49,7 +49,6 @@ export interface NetworkStatus {
 export interface InquirePriceRunInstancesResponse {
   /**
    * 发货参数对应的价格组合，当DryRun=True，会返回空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Price?: Price
   /**
@@ -336,17 +335,14 @@ NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_
 export interface Price {
   /**
    * 实例价格信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePrice?: ItemPrice
   /**
    * 云盘价格信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudDiskPrice?: ItemPrice
   /**
    * 分实例价格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PriceDetailSet?: Array<ItemPriceDetail>
 }
@@ -749,49 +745,40 @@ export interface ApplicationInfo {
   /**
    * 应用id
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationName?: string
   /**
    * 应用描述
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 应用的环境配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigEnvironment?: string
   /**
    * 系统盘大小下限
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinSystemDiskSize?: number
   /**
    * 应用类型，目前该项取值可以为PRIVATE_APPLICATION或者PUBLIC_APPLICATION
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationType?: string
   /**
    * 应用状态：CREATING-创建中；ONLINE -正常在线；DELETING -删除中；ARREARS - 欠费隔离
 示例值：ONLINE
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationState?: string
   /**
    * 应用创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 应用大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationSize?: number
 }
@@ -802,22 +789,18 @@ export interface ApplicationInfo {
 export interface ItemPriceDetail {
   /**
    * 实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 实例价格详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePrice?: ItemPrice
   /**
    * 磁盘价格详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudDiskPrice?: ItemPrice
   /**
    * 该实例的总价钱
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceTotalPrice?: ItemPrice
 }
@@ -851,28 +834,23 @@ export type DescribeRegionsRequest = null
 export interface ItemPrice {
   /**
    * 原单价
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnitPrice?: number
   /**
    * 折扣后单价
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiscountUnitPrice?: number
   /**
    * 折扣
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Discount?: number
   /**
    * 单位：时/月
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeUnit?: string
   /**
    * 商品数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Amount?: number
 }

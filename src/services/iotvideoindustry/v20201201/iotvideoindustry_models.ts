@@ -803,14 +803,12 @@ export interface DescribeLiveRecordPlanByIdRequest {
 export interface LiveRecordPlanItem {
   /**
    * 计划ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PlanId: string
+  PlanId?: string
   /**
    * 计划名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PlanName: string
+  PlanName?: string
 }
 
 /**
@@ -1563,19 +1561,16 @@ export interface DescribeDeviceEventResponse {
 export interface RecordStatisticValue {
   /**
    * 期望执行时间 秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpectTimeLen: number
+  ExpectTimeLen?: number
   /**
    * 实际执行时间 秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordTimeLen: number
+  RecordTimeLen?: number
   /**
    * 存储大小 G
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileSize: number
+  FileSize?: number
 }
 
 /**
@@ -2439,17 +2434,14 @@ export type DescribeRecordingPlansRequest = null
 export interface TimeTemplateSpec {
   /**
    * 一周中的周几
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DayofWeek: number
   /**
    * 时间片段的开始时分。格式【HH:MM】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginTime: string
   /**
    * 时间片段的结束时分。格式【HH:MM】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime: string
 }
@@ -3432,12 +3424,10 @@ export interface DeleteLiveChannelRequest {
 export interface StatisticItem {
   /**
    * 日期。格式【YYYY-MM-DD】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Date?: string
   /**
    * 统计数额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sum?: number
 }
@@ -4160,27 +4150,22 @@ export interface DeleteLiveChannelResponse {
 export interface StreamAddress {
   /**
    * 流ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamId?: string
   /**
    * rtsp流地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RtspAddr?: string
   /**
    * rtmp流地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RtmpAddr?: string
   /**
    * hls流地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HlsAddr?: string
   /**
    * flv流地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlvAddr?: string
 }

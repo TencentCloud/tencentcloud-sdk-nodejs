@@ -1217,7 +1217,7 @@ export interface TargetGroupInstance {
    */
   BindIP: string
   /**
-   * 目标组实例的端口
+   * 目标组实例的端口，全监听目标组不支持传此字段。
    */
   Port?: number
   /**
@@ -1227,7 +1227,7 @@ v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时�
    */
   Weight?: number
   /**
-   * 目标组实例的新端口
+   * 目标组实例的新端口，全监听目标组不支持传此字段。
    */
   NewPort?: number
 }
@@ -2780,53 +2780,53 @@ export interface TargetGroupBackend {
   /**
    * 目标组ID
    */
-  TargetGroupId: string
+  TargetGroupId?: string
   /**
    * 后端服务的类型，可取：CVM、ENI（即将支持）
    */
-  Type: string
+  Type?: string
   /**
    * 后端服务的唯一 ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
-   * 后端服务的监听端口
+   * 后端服务的监听端口，全端口段监听器此字段返回0，代表无效端口，即不支持设置。
    */
-  Port: number
+  Port?: number
   /**
    * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
    */
-  Weight: number
+  Weight?: number
   /**
    * 后端服务的外网 IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicIpAddresses: Array<string>
+  PublicIpAddresses?: Array<string>
   /**
    * 后端服务的内网 IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivateIpAddresses: Array<string>
+  PrivateIpAddresses?: Array<string>
   /**
    * 后端服务的实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 后端服务被绑定的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegisteredTime: string
+  RegisteredTime?: string
   /**
    * 弹性网卡唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EniId: string
+  EniId?: string
   /**
    * 后端服务的可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: number
+  ZoneId?: number
 }
 
 /**
@@ -3143,7 +3143,7 @@ export interface Backend {
    */
   InstanceId?: string
   /**
-   * 后端服务的监听端口
+   * 后端服务的监听端口，如果是全端口段监听器绑定的全监听目标组场景，此端口返回0，表示无效端口，绑定的后端服务的端口随监听器端口。
    */
   Port?: number
   /**
@@ -3785,7 +3785,7 @@ export interface CreateTargetGroupRequest {
    */
   VpcId?: string
   /**
-   * 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。
+   * 目标组的默认端口， 后续添加服务器时可使用该默认端口。全监听目标组不支持此参数，非全监听目标组Port和TargetGroupInstances.N中的port二者必填其一。
 
    */
   Port?: number
@@ -3814,6 +3814,10 @@ export interface CreateTargetGroupRequest {
 
    */
   Weight?: number
+  /**
+   * 全监听目标组标识，为true表示是全监听目标组，false表示不是全监听目标组。
+   */
+  FullListenSwitch?: boolean
 }
 
 /**
@@ -4844,7 +4848,7 @@ export interface ModifyTargetGroupAttributeRequest {
    */
   TargetGroupName?: string
   /**
-   * 目标组的新默认端口。
+   * 目标组的新默认端口。全监听目标组不支持此参数。
    */
   Port?: number
   /**
@@ -5165,7 +5169,7 @@ export interface SnatIp {
  */
 export interface ModifyLoadBalancerMixIpTargetRequest {
   /**
-   * 负载均衡实例ID数组。
+   * 负载均衡实例ID数组，默认支持20个负载均衡实例ID。
    */
   LoadBalancerIds: Array<string>
   /**
@@ -5689,7 +5693,7 @@ export interface TargetGroupInfo {
    */
   TargetGroupName?: string
   /**
-   * 目标组的默认端口
+   * 目标组的默认端口，全监听目标组此字段返回0，表示无效端口。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
@@ -5730,6 +5734,10 @@ export interface TargetGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
+  /**
+   * 是否全监听目标组
+   */
+  FullListenSwitch?: boolean
 }
 
 /**

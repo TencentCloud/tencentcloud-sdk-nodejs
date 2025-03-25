@@ -2682,7 +2682,7 @@ export interface CreateUserOIDCConfigRequest {
    */
   Scope?: Array<string>
   /**
-   * 描述
+   * 描述信息。由用户自行定义。
    */
   Description?: string
 }

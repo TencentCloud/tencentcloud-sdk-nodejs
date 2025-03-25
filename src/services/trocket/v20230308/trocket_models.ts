@@ -180,7 +180,6 @@ export interface CreateInstanceResponse {
 export interface SourceClusterTopicConfig {
   /**
    * 主题名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName: string
   /**
@@ -198,27 +197,22 @@ PartitionedOrder 分区顺序消息
 Transaction 事务消息
 DelayScheduled 延时消息
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicType: string
   /**
    * 队列数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueNum: number
   /**
    * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * 是否已导入，作为入参时无效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Imported?: boolean
   /**
    * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
@@ -227,22 +221,18 @@ Unknown 未知，
 AlreadyExists 已存在，
 Success 成功，
 Failure 失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImportStatus?: string
   /**
    * 4.x的命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceV4?: string
   /**
    * 4.x的主题名，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicNameV4?: string
   /**
    * 4.x的完整命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FullNamespaceV4?: string
 }
@@ -3325,7 +3315,6 @@ basic_1k,
 export interface DescribeTopicListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -3364,7 +3353,6 @@ export interface TopicConsumeStats {
   SubString?: string
   /**
    * 最后消费进度更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdateTime?: number
 }

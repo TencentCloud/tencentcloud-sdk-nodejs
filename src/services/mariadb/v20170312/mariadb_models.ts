@@ -85,7 +85,7 @@ export interface CreateDBInstanceRequest {
    */
   ProjectId?: number
   /**
-   * 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。
+   * 数据库引擎版本，当前可选：8.0，5.7，10.1。
    */
   DbVersionId?: string
   /**
@@ -1739,7 +1739,6 @@ export interface DescribeDBInstanceDetailResponse {
   IsEncryptSupported?: number
   /**
    * 内网IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip6?: string
   /**
@@ -1756,32 +1755,26 @@ export interface DescribeDBInstanceDetailResponse {
   Qps?: number
   /**
    * 是否支持IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6Flag?: number
   /**
    * 外网IPv6地址，公网可访问
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WanVipv6?: string
   /**
    * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WanStatusIpv6?: number
   /**
    * 外网IPv6端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WanPortIpv6?: number
   /**
    * 数据库引擎
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbEngine?: string
   /**
    * 数据库版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbVersion?: string
   /**
@@ -1790,42 +1783,34 @@ export interface DescribeDBInstanceDetailResponse {
   ResourceTags?: Array<ResourceTag>
   /**
    * DCN标志，0-无，1-主实例，2-灾备实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnFlag?: number
   /**
    * DCN状态，0-无，1-创建中，2-同步中，3-已断开
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnStatus?: number
   /**
    * DCN灾备实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnDstNum?: number
   /**
    * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: number
   /**
    * 实例的各个DB节点信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodesInfo?: Array<NodeInfo>
   /**
    * 实例是否支持设置用户连接数限制，内核为10.1暂不支持。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsMaxUserConnectionsSupported?: boolean
   /**
    * 对外显示的数据库版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbVersionId?: string
   /**
    * 加密状态, 0-未开启，1-已开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptStatus?: number
   /**
@@ -1840,12 +1825,10 @@ export interface DescribeDBInstanceDetailResponse {
   ReplicaStatus?: DCNReplicaStatus
   /**
    * 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExclusterType?: number
   /**
    * VPC就近访问
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RsAccessStrategy?: number
   /**
@@ -1899,7 +1882,6 @@ export interface CreateDBInstanceResponse {
   DealName?: string
   /**
    * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceIds?: Array<string>
   /**
@@ -3083,17 +3065,14 @@ export interface DBInstance {
   Qps?: number
   /**
    * 付费模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Paymode?: string
   /**
    * 实例处于异步任务时的异步任务流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Locker?: number
   /**
    * 实例目前运行状态描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
@@ -3118,67 +3097,54 @@ export interface DBInstance {
   Cpu?: number
   /**
    * 实例IPv6标志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6Flag?: number
   /**
    * 内网IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vipv6?: string
   /**
    * 外网IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WanVipv6?: string
   /**
    * 外网IPv6端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WanPortIpv6?: number
   /**
    * 外网IPv6状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WanStatusIpv6?: number
   /**
    * 数据库引擎
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbEngine?: string
   /**
    * 数据库版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbVersion?: string
   /**
    * DCN标志，0-无，1-主实例，2-灾备实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnFlag?: number
   /**
    * DCN状态，0-无，1-创建中，2-同步中，3-已断开
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnStatus?: number
   /**
    * DCN灾备实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DcnDstNum?: number
   /**
    * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: number
   /**
    * 实例标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTags?: Array<ResourceTag>
   /**
    * 数据库版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbVersionId?: string
 }

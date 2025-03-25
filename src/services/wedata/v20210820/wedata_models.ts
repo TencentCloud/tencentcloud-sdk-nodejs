@@ -17423,6 +17423,11 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IfSupportCreateAndDDL?: CreateAndDDLSupport
+  /**
+   * 字段数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnCount?: number
 }
 
 /**

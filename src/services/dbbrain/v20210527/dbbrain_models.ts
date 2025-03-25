@@ -2618,12 +2618,10 @@ export interface MongoDBIndex {
   Score?: number
   /**
    * 推荐索引列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexesToBuild?: Array<IndexesToBuild>
   /**
    * 无效索引列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexesToDrop?: Array<IndexesToDrop>
 }
@@ -3144,12 +3142,10 @@ export interface DescribeTopSpaceTablesRequest {
 export interface ReceiveUin {
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UinName?: string
   /**
    * 用户id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
 }

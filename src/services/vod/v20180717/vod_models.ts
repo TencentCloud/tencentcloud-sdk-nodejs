@@ -2869,17 +2869,14 @@ export interface DescribeDailyPlayStatFileListResponse {
 export interface CLSTopicInfo {
   /**
    * 日志主题 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * 日志主题名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 日志集 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogsetId?: string
 }
@@ -3182,46 +3179,45 @@ export interface RemoveWatermarkTask {
   /**
    * 任务 ID 。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败：
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 智能去除水印任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Input: RemoveWaterMarkTaskInput
+  Input?: RemoveWaterMarkTaskInput
   /**
    * 智能去除水印任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: RemoveWaterMarkTaskOutput
+  Output?: RemoveWaterMarkTaskOutput
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
-  SessionId: string
+  SessionId?: string
   /**
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
-  SessionContext: string
+  SessionContext?: string
 }
 
 /**
@@ -3851,12 +3847,10 @@ export interface QualityInspectTask {
   MetaData?: MediaMetaData
   /**
    * 音画质检测任务输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: QualityInspectTaskInput
   /**
    * 音画质检测任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: QualityInspectTaskOutput
   /**
@@ -4038,56 +4032,56 @@ export interface WatermarkTemplate {
   /**
    * 水印模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 水印类型，取值：
 <li>image：图片水印；</li>
 <li>text：文字水印。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 水印模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 水印图片原点距离视频图像原点的水平位置。
 <li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
 <li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
    */
-  XPos: string
+  XPos?: string
   /**
    * 水印图片原点距离视频图像原点的垂直位置。
 <li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
 <li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
    */
-  YPos: string
+  YPos?: string
   /**
    * 图片水印模板，仅当 Type 为 image，该字段有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageTemplate: ImageWatermarkTemplate
+  ImageTemplate?: ImageWatermarkTemplate
   /**
    * 文字水印模板，仅当 Type 为 text，该字段有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TextTemplate: TextWatermarkTemplateInput
+  TextTemplate?: TextWatermarkTemplateInput
   /**
    * SVG 水印模板，当 Type 为 svg，该字段有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SvgTemplate: SvgWatermarkInput
+  SvgTemplate?: SvgWatermarkInput
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 原点位置，可选值：
 <li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
@@ -4095,7 +4089,7 @@ export interface WatermarkTemplate {
 <li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
 <li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。；</li>
    */
-  CoordinateOrigin: string
+  CoordinateOrigin?: string
 }
 
 /**
@@ -5351,7 +5345,7 @@ export interface SvgWatermarkInputForUpdate {
 <li>当字符串以 H% 结尾，表示水印 Height 为视频高度的百分比大小，如 10H% 表示 Height 为视频高度的 10%；</li>
 <li>当字符串以 S% 结尾，表示水印 Height 为视频短边的百分比大小，如 10S% 表示 Height 为视频短边的 10%；</li>
 <li>当字符串以 L% 结尾，表示水印 Height 为视频长边的百分比大小，如 10L% 表示 Height 为视频长边的 10%；</li>
-<li>当字符串以 % 结尾时，含义同 H%。
+<li>当字符串以 % 结尾时，含义同 H%。</li>
 默认值为 0px。
    */
   Height?: string
@@ -5363,6 +5357,7 @@ export interface SvgWatermarkInputForUpdate {
 可以看出，A、B、C、D 都是周期性地显示 5 秒、隐藏 15 秒，且四者有固定的显示顺序。
 此配置项即用来描述单个水印的周期配置。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   CycleConfig?: WatermarkCycleConfigForUpdate
 }
@@ -7420,7 +7415,7 @@ export interface RebuildMediaTaskInput {
    */
   EndTimeOffset?: number
   /**
-   * 音画质重生模版号。
+   * 音画质重生模板号。
    */
   Definition?: number
   /**
@@ -13060,12 +13055,10 @@ export interface TranscodeTemplate {
   RemoveAudio?: number
   /**
    * 视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoTemplate?: VideoTemplateInfo
   /**
    * 音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioTemplate?: AudioTemplateInfo
   /**
@@ -16115,28 +16108,28 @@ export interface RebuildMediaTaskOutput {
   /**
    * 文件类型，例如 mp4、flv 等。
    */
-  FileType: string
+  FileType?: string
   /**
    * 媒体文件播放地址。
    */
-  FileUrl: string
+  FileUrl?: string
   /**
    * 媒体文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
    */
-  MediaName: string
+  MediaName?: string
   /**
    * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
 <li>默认值：0，表示其他分类。</li>
    */
-  ClassId: number
+  ClassId?: number
   /**
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -18897,55 +18890,52 @@ export interface RebuildMediaTask {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，0 表示成功，其他值表示失败：
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 音画质重生任务进度，取值范围 [0-100] 。
    */
-  Progress: number
+  Progress?: number
   /**
    * 音画质重生任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Input: RebuildMediaTaskInput
+  Input?: RebuildMediaTaskInput
   /**
    * 音画质重生任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: RebuildMediaTaskOutput
+  Output?: RebuildMediaTaskOutput
   /**
    * 音画质重生输出视频的元信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
-  SessionId: string
+  SessionId?: string
   /**
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
-  SessionContext: string
+  SessionContext?: string
 }
 
 /**
@@ -20080,7 +20070,7 @@ export interface RemoveWaterMarkTaskInput {
   /**
    * 媒体文件 ID。
    */
-  FileId: string
+  FileId?: string
 }
 
 /**
@@ -20250,52 +20240,42 @@ export interface QualityInspectTemplateItem {
   ScreenshotInterval?: number
   /**
    * 视频画面抖动重影检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JitterConfigure?: JitterConfigureInfo
   /**
    * 视频画面模糊检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlurConfigure?: BlurConfigureInfo
   /**
    * 视频画面低光、过曝检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AbnormalLightingConfigure?: AbnormalLightingConfigureInfo
   /**
    * 视频画面花屏检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CrashScreenConfigure?: CrashScreenConfigureInfo
   /**
    * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo
   /**
    * 视频画面噪点检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoiseConfigure?: NoiseConfigureInfo
   /**
    * 视频画面马赛克检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MosaicConfigure?: MosaicConfigureInfo
   /**
    * 视频画面二维码检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QRCodeConfigure?: QRCodeConfigureInfo
   /**
    * 视频画面质量评价的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
   /**
    * 音频（静音、低音、爆音）检测的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceConfigure?: VoiceConfigureInfo
   /**

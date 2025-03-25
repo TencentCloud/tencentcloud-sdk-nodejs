@@ -21,7 +21,6 @@
 export interface QueryChainMakerDemoBlockTransactionResponse {
   /**
    * 区块交易
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<ChainMakerTransactionResult>
   /**
@@ -30,7 +29,6 @@ export interface QueryChainMakerDemoBlockTransactionResponse {
   BlockHeight?: number
   /**
    * 交易数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TxCount?: number
   /**
@@ -820,7 +818,6 @@ export interface GetClusterSummaryResponse {
 export interface QueryChainMakerDemoContractResponse {
   /**
    * 交易结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ChainMakerContractResult
   /**
@@ -853,37 +850,30 @@ export interface ChainMakerTransactionResult {
   Code?: number
   /**
    * 交易结果码含义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeMessage?: string
   /**
    * 交易ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TxId?: string
   /**
    * Gas使用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GasUsed?: number
   /**
    * 区块高度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockHeight?: number
   /**
    * 合约执行结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContractEvent?: string
   /**
    * 合约返回信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 交易时间，单位是秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: number
 }
@@ -1004,7 +994,6 @@ export interface QueryChainMakerDemoContractRequest {
 export interface QueryChainMakerDemoTransactionResponse {
   /**
    * 交易结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ChainMakerTransactionResult
   /**
@@ -1073,27 +1062,22 @@ export interface ChainMakerContractResult {
   Code?: number
   /**
    * 交易结果码含义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeMessage?: string
   /**
    * 交易ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TxId?: string
   /**
    * Gas使用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GasUsed?: number
   /**
    * 合约返回消息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 合约函数返回，base64编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
 }
@@ -1447,32 +1431,26 @@ export interface QueryChainMakerDemoBlockTransactionRequest {
 export interface Transaction {
   /**
    * 交易ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TxId?: string
   /**
    * 合约名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChaincodeName?: string
   /**
    * 交易发送者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sender?: string
   /**
    * 交易创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 交易所在区块高度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockHeight?: number
   /**
    * 交易在区块中的序号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TxIndex?: number
 }
@@ -1553,7 +1531,6 @@ export interface QueryChainMakerBlockTransactionResponse {
 export interface InvokeChainMakerDemoContractResponse {
   /**
    * 交易结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ChainMakerContractResult
   /**

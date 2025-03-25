@@ -888,7 +888,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * p2p路线切换
+   * p2p路线切换（此接口目前处于内测接口，可以联系申请加白 ）
    */
   async ChangeP2PRoute(
     req: ChangeP2PRouteRequest,

@@ -177,7 +177,6 @@ export interface RocketMQVipInstance {
   InstanceName?: string
   /**
    * 实例版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceVersion?: string
   /**
@@ -227,27 +226,22 @@ export interface RocketMQVipInstance {
   SpecName?: string
   /**
    * 最大可设置消息保留时间，小时为单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxRetention?: number
   /**
    * 最小可设置消息保留时间，小时为单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinRetention?: number
   /**
    * 实例消息保留时间，小时为单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Retention?: number
   /**
    * 是否开启ACL鉴权
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AclEnabled?: boolean
   /**
    * 销毁时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestroyTime?: number
 }
@@ -4640,7 +4634,6 @@ export interface AMQPClusterInfo {
 export interface ModifyRocketMQInstanceSpecResponse {
   /**
    * 订单号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderId?: string
   /**

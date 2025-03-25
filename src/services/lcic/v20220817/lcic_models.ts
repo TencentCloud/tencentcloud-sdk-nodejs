@@ -20,15 +20,15 @@
  */
 export interface CreateRoomRequest {
   /**
-   * 房间名称。
+   * 课堂名称。
    */
   Name: string
   /**
-   * 预定的房间开始时间，unix时间戳（秒）。
+   * 预定的课堂开始时间，unix时间戳（秒）。
    */
   StartTime: number
   /**
-   * 预定的房间结束时间，unix时间戳（秒）。
+   * 预定的课堂结束时间，unix时间戳（秒）。
    */
   EndTime: number
   /**
@@ -43,13 +43,11 @@ export interface CreateRoomRequest {
    */
   Resolution: number
   /**
-   * 设置房间/课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。该取值影响计费，请根据业务实际情况设置。计费规则见“购买指南”下“计费概述”。
+   * 设置课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。该取值影响计费，请根据业务实际情况设置。计费规则见“购买指南”下“计费概述”。
    */
   MaxMicNumber: number
   /**
-   * 房间子类型，可以有以下取值：
-videodoc 文档+视频
-video 纯视频
+   * 课堂子类型，可以有以下取值：videodoc 文档+视频video 纯视频
    */
   SubType: string
   /**
@@ -96,7 +94,7 @@ video 纯视频
    */
   RecordLayout?: number
   /**
-   * 房间绑定的群组ID,非空时限制组成员进入
+   * 课堂绑定的群组ID,非空时限制组成员进入
    */
   GroupId?: string
   /**
@@ -120,8 +118,7 @@ video 纯视频
    */
   IsGradingRequiredPostClass?: number
   /**
-   * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)
-注：大班课的布局(layout)只有三分屏
+   * 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)注：大班课的布局(layout)只有三分屏
    */
   RoomType?: number
   /**
@@ -486,7 +483,7 @@ export interface BatchCreateGroupWithMembersResponse {
  */
 export interface GetRoomEventResponse {
   /**
-   * 该房间的事件总数，keyword搜索不影响该值。
+   * 该课堂的事件总数，keyword搜索不影响该值。
    */
   Total?: number
   /**
@@ -872,7 +869,7 @@ export interface ClassScoreItem {
  */
 export interface DescribeRoomRequest {
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -1056,7 +1053,7 @@ export interface UnblockKickedUserRequest {
    */
   SdkAppId: number
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -1243,7 +1240,7 @@ export interface GetRoomMessageRequest {
    */
   SdkAppId: number
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -1518,7 +1515,7 @@ export interface GroupInfo {
  */
 export interface GetRoomEventRequest {
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -1909,7 +1906,7 @@ export interface BatchCreateRoomRequest {
    */
   SdkAppId: number
   /**
-   * 创建房间ID列表
+   * 创建课堂ID列表
    */
   RoomInfos: Array<RoomInfo>
 }
@@ -2267,15 +2264,15 @@ export interface TransferItem {
  */
 export interface DescribeRoomResponse {
   /**
-   * 房间名称。
+   * 课堂名称。
    */
   Name?: string
   /**
-   * 预定的房间开始时间，unix时间戳（秒）。
+   * 预定的课堂开始时间，unix时间戳（秒）。
    */
   StartTime?: number
   /**
-   * 预定的房间结束时间，unix时间戳（秒）。
+   * 预定的课堂结束时间，unix时间戳（秒）。
    */
   EndTime?: number
   /**
@@ -2298,7 +2295,7 @@ export interface DescribeRoomResponse {
    */
   Resolution?: number
   /**
-   * 设置房间/课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
+   * 设置课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
    */
   MaxMicNumber?: number
   /**
@@ -2314,9 +2311,7 @@ export interface DescribeRoomResponse {
    */
   AudioQuality?: number
   /**
-   * 房间子类型，可以有以下取值：
-videodoc 文档+视频
-video 纯视频
+   * 课堂子类型，可以有以下取值：videodoc 文档+视频video 纯视频
    */
   SubType?: string
   /**
@@ -2339,7 +2334,7 @@ video 纯视频
    */
   Status?: number
   /**
-   * 房间绑定的群组ID
+   * 课堂绑定的群组ID
    */
   GroupId?: string
   /**
@@ -2357,12 +2352,11 @@ video 纯视频
    */
   VideoOrientation?: number
   /**
-   * 该房间是否开启了课后评分功能。0：未开启  1：开启
+   * 该课堂是否开启了课后评分功能。0：未开启  1：开启
    */
   IsGradingRequiredPostClass?: number
   /**
-   * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
-注：大班课的布局(layout)只有三分屏
+   * 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏
    */
   RoomType?: number
   /**
@@ -2450,7 +2444,7 @@ export interface DescribeRecordStreamResponse {
  */
 export interface DescribeCurrentMemberListRequest {
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -2578,11 +2572,11 @@ export interface DescribeRoomStatisticsResponse {
    */
   RealEndTime?: number
   /**
-   * 房间消息总数。
+   * 课堂消息总数。
    */
   MessageCount?: number
   /**
-   * 房间连麦总数。
+   * 课堂连麦总数。
    */
   MicCount?: number
   /**
@@ -3186,7 +3180,7 @@ export interface AnswerInfo {
  */
 export interface DescribeRoomStatisticsRequest {
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -3308,7 +3302,7 @@ export interface GetRoomsResponse {
    */
   Total?: number
   /**
-   * 房间列表
+   * 课堂列表
    */
   Rooms?: Array<RoomItem>
   /**
@@ -3358,7 +3352,7 @@ export interface QuestionInfo {
  */
 export interface KickUserFromRoomRequest {
   /**
-   * 房间Id。
+   * 课堂Id。
    */
   RoomId: number
   /**
@@ -3702,7 +3696,7 @@ export interface SceneItem {
  */
 export interface DeleteRoomRequest {
   /**
-   * 房间ID。
+   * 课堂ID。
    */
   RoomId: number
 }

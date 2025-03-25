@@ -907,7 +907,6 @@ export interface DescribeInvocationMetricDataDimensionResponse {
 export interface SearchStdoutLogResponse {
   /**
    * 标准输出日志列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageStdoutLogV2
   /**
@@ -2925,7 +2924,6 @@ export interface DeleteImageTag {
 export interface DescribeContainerGroupDeployInfoResponse {
   /**
    * 获取部署组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ContainerGroupDeploy
   /**
@@ -3086,6 +3084,10 @@ export interface ImageRepository {
    * 仓库名，等同reponame字段
    */
   RepoName?: string
+  /**
+   * 仓库类型
+   */
+  RepoType?: string
 }
 
 /**
@@ -5056,7 +5058,6 @@ export interface Namespace {
 export interface DescribeGroupResponse {
   /**
    * 虚拟机部署组详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: VmGroup
   /**
@@ -5743,22 +5744,18 @@ export interface DescribeGroupUseDetailResponse {
 export interface ContainerGroupDeploy {
   /**
    * 部署组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceNum?: number
   /**
    * 已启动实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentNum?: number
   /**
@@ -5803,7 +5800,6 @@ export interface ContainerGroupDeploy {
   AccessType?: number
   /**
    * 端口映射
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProtocolPorts?: Array<ProtocolPort>
   /**
@@ -5878,7 +5874,6 @@ export interface ContainerGroupDeploy {
   HealthCheckSettings?: HealthCheckSettings
   /**
    * 是否部署Agent容器
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployAgent?: boolean
   /**
@@ -5888,12 +5883,10 @@ export interface ContainerGroupDeploy {
   Alias?: string
   /**
    * 是否创建 k8s service
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DisableService?: boolean
   /**
    * service 是否为 headless 类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadlessService?: boolean
   /**
@@ -5918,12 +5911,10 @@ export interface ContainerGroupDeploy {
   KubeInjectEnable?: boolean
   /**
    * 仓库类型 (person, tcr)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoType?: string
   /**
    * 预热配置设置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmupSetting?: WarmupSetting
   /**
@@ -5933,22 +5924,18 @@ export interface ContainerGroupDeploy {
   GatewayConfig?: GatewayConfig
   /**
    * 容器名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerName?: string
   /**
    * 附加容器列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdditionalContainerList?: Array<GroupContainerInfo>
   /**
    * 内部容器列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternalContainerList?: Array<GroupContainerInfo>
   /**
    * service列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceSettingList?: Array<ServiceSetting>
 }
@@ -6188,6 +6175,10 @@ export interface SearchBusinessLogRequest {
    * 游标ID
    */
   ScrollId?: string
+  /**
+   * 查询es使用searchAfter时，游标
+   */
+  SearchAfter?: Array<string>
 }
 
 /**
@@ -6731,7 +6722,6 @@ export interface RevokeFileConfigResponse {
 export interface SearchBusinessLogResponse {
   /**
    * 业务日志列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageBusinessLogV2
   /**
@@ -6961,77 +6951,62 @@ export interface GroupContainerInfo {
   TagName: string
   /**
    * 容器名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerName?: string
   /**
    * 镜像名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoName?: string
   /**
    * 仓库类型,tcr，address，personal，默认personal
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoType?: string
   /**
    * tcr仓库信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TcrRepoInfo?: TcrRepoInfo
   /**
    * 镜像server
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Server?: string
   /**
    * 凭证名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretName?: string
   /**
    * jvm 参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JvmOpts?: string
   /**
    * 容器最大的 CPU 核数，对应 K8S 的 limit
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuLimit?: string
   /**
    * 容器分配的 CPU 核数，对应 K8S 的 request
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuRequest?: string
   /**
    * 容器分配的内存 MiB 数，对应 K8S 的 request
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemRequest?: string
   /**
    * 容器最大的内存 MiB 数，对应 K8S 的 limit
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemLimit?: string
   /**
    * 健康检查配置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckSettings?: HealthCheckSettings
   /**
    * 环境变量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Envs?: Array<Env>
   /**
    * 环境变量,作为入参时不用填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserEnvs?: Array<Env>
   /**
    * 数据卷挂载点信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeMountInfoList?: Array<VolumeMountInfo>
 }
@@ -7457,12 +7432,10 @@ export interface ShrinkGroupRequest {
 export interface TsfPageStdoutLogV2 {
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 标准输出日志列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<StdoutLogV2>
   /**
@@ -7475,6 +7448,11 @@ export interface TsfPageStdoutLogV2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
+  /**
+   * 游标ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchAfter?: Array<string>
 }
 
 /**
@@ -8497,17 +8475,14 @@ export interface DescribeTaskRecordsResponse {
 export interface VmGroup {
   /**
    * 部署组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 部署组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 部署组状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupStatus?: string
   /**
@@ -8527,42 +8502,34 @@ export interface VmGroup {
   PackageVersion?: string
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
    * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceId?: string
   /**
    * 命名空间名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName?: string
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationName?: string
   /**
    * 部署组机器数目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCount?: number
   /**
    * 部署组运行中机器数目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunInstanceCount?: number
   /**
@@ -8572,17 +8539,14 @@ export interface VmGroup {
   StartupParameters?: string
   /**
    * 部署组创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 部署组更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 部署组停止机器数目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OffInstanceCount?: number
   /**
@@ -8592,22 +8556,18 @@ export interface VmGroup {
   GroupDesc?: string
   /**
    * 微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceType?: string
   /**
    * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationType?: string
   /**
    * 部署组资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupResourceType?: string
   /**
    * 部署组更新时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: number
   /**
@@ -8617,32 +8577,26 @@ export interface VmGroup {
   DeployDesc?: string
   /**
    * 滚动发布的更新方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateType?: number
   /**
    * 发布是否启用beta批次
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployBetaEnable?: boolean
   /**
    * 滚动发布的批次比例列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployBatch?: Array<number>
   /**
    * 滚动发布的批次执行方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployExeMode?: string
   /**
    * 滚动发布的每个批次的等待时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployWaitTime?: number
   /**
    * 是否开启了健康检查
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableHealthCheck?: boolean
   /**
@@ -8672,12 +8626,10 @@ export interface VmGroup {
   Alias?: string
   /**
    * javaagent信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentProfileList?: Array<AgentProfile>
   /**
    * 预热属性配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmupSetting?: WarmupSetting
   /**
@@ -8687,9 +8639,38 @@ export interface VmGroup {
   GatewayConfig?: GatewayConfig
   /**
    * 批次是否开启健康检查
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableBatchHealthCheck?: boolean
+  /**
+   * 是否开启cgroup控制内存cpu
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilebeatCgroupEnable?: boolean
+  /**
+   * filebeat使用cpu上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilebeatMaxCpu?: number
+  /**
+   * filebeat使用内存上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilebeatMaxMem?: number
+  /**
+   * 仓库ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepositoryId?: string
+  /**
+   * 仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepositoryName?: string
+  /**
+   * 仓库类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepositoryType?: string
 }
 
 /**
@@ -8712,109 +8693,92 @@ export interface DescribeApiUseDetailResponse {
 export interface ServiceSetting {
   /**
    * 0:公网, 1:集群内访问, 2：NodePort, 3: VPC 内网访问
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessType: number
   /**
    * 容器端口映射
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProtocolPorts: Array<ProtocolPort>
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId: string
   /**
    * 是否创建 k8s service，默认为 false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DisableService?: boolean
   /**
    * service 是否为 headless 类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadlessService?: boolean
   /**
    * 当为 true 且 DisableService 也为 true 时，会删除之前创建的 service，请小心使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowDeleteService?: boolean
   /**
    * 开启SessionAffinity，true为开启，false为不开启，默认为false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenSessionAffinity?: boolean
   /**
    * SessionAffinity会话时间，默认10800
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionAffinityTimeoutSeconds?: number
   /**
    * 服务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * 外部流量策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExternalTrafficStrategy?: string
   /**
    * 外部流量策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExternalTrafficPolicy?: string
   /**
    * 负载均衡提供者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerProvisioner?: string
   /**
    * 负载均衡类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancingType?: string
   /**
    * k8s负载均衡内网vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIp?: string
   /**
    * 禁用服务Int记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DisableServiceInt?: number
   /**
    * 开启SessionAffinity Int记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenSessionAffinityInt?: number
   /**
    * 开启HeadlessService int记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadlessServiceInt?: number
   /**
    * 服务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * VPC网络ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 负载均衡VIP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancingIp?: string
   /**
    * 负载均衡id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerId?: string
+  /**
+   * 已存在的负载均衡id
+   */
+  ExistingLoadBalancerId?: string
 }
 
 /**
@@ -11221,7 +11185,6 @@ export interface DescribeInvocationMetricDataCurveRequest {
 export interface VmGroupOther {
   /**
    * 部署组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
@@ -11241,27 +11204,22 @@ export interface VmGroupOther {
   PackageVersion?: string
   /**
    * 部署组实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCount?: number
   /**
    * 部署组运行中实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunInstanceCount?: number
   /**
    * 部署组中停止实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OffInstanceCount?: number
   /**
    * 部署组状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupStatus?: string
   /**
    * 服务配置信息是否匹配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNotEqualServiceConfig?: boolean
   /**
@@ -13764,12 +13722,10 @@ export interface CreateMicroserviceWithDetailRespResponse {
 export interface TsfPageBusinessLogV2 {
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 业务日志列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<BusinessLogV2>
   /**
@@ -13782,6 +13738,11 @@ export interface TsfPageBusinessLogV2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
+  /**
+   * 查询es时，使用searchAfter返回的游标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchAfter?: Array<string>
 }
 
 /**
@@ -15239,6 +15200,10 @@ export interface SearchStdoutLogRequest {
    * 游标ID
    */
   ScrollId?: string
+  /**
+   * 查询es使用searchAfter时，游标
+   */
+  SearchAfter?: Array<string>
 }
 
 /**

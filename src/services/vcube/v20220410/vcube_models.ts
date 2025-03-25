@@ -123,12 +123,10 @@ export interface XMagicResourceSimpleInfo {
   UpdatedAt?: string
   /**
    * 资源开始生效时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 资源结束生效时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
@@ -152,32 +150,26 @@ export interface XMagicResourceSimpleInfo {
   Operation?: Array<string>
   /**
    * 是否可以使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUse?: boolean
   /**
    * single: 原子能力,combined:套餐
-注意：此字段可能返回 null，表示取不到有效值。
    */
   XMagicType?: string
   /**
    * 功能模块名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 资源所属业务方 xmagic：优图，avatar：虚拟形象 
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源所属业务方 xmagic：优图，avatar：虚拟形象
    */
   BizType?: string
   /**
    * 资源id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 资源自动续费状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
 }
@@ -261,7 +253,6 @@ export interface DescribeTrialFeatureResponse {
   XMagicTrial?: XMagicTrial
   /**
    * 可以开通的优图测试功能列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   XMagicTrialList?: Array<XMagicTrial>
   /**
@@ -475,81 +466,73 @@ export interface LicenseResourceInfo {
   /**
    * 授权功能Id
    */
-  Id: number
+  Id?: number
   /**
    * 用户appid
    */
-  AppId: string
+  AppId?: string
   /**
    * 有效期时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Duration: string
+  Duration?: string
   /**
    * 功能Id
    */
-  FeatureId: number
+  FeatureId?: number
   /**
    * 此license资源的开始生效时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 此license资源的生效结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 创建时间
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 更新时间
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * 此资源是否可用于续期和更新有效期
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsUse: boolean
+  IsUse?: boolean
   /**
    * 此资源的状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 销毁时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolatedTimestamp: string
+  IsolatedTimestamp?: string
   /**
    * 功能模块名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 功能模块类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 资源包信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Package: Package
+  Package?: Package
   /**
    * 应用信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Application: AppInfo
+  Application?: AppInfo
   /**
    * 资源Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 自动续费状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
 }
@@ -561,76 +544,68 @@ export interface LicenseResourceSimpleInfo {
   /**
    * 授权功能Id
    */
-  Id: number
+  Id?: number
   /**
    * 用户appid
    */
-  AppId: string
+  AppId?: string
   /**
    * 有效期时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Duration: string
+  Duration?: string
   /**
    * 功能Id
    */
-  FeatureId: number
+  FeatureId?: number
   /**
    * 此license资源的开始生效时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 此license资源的生效结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 创建时间
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 更新时间
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * 此资源是否可用于续期和更新有效期
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsUse: boolean
+  IsUse?: boolean
   /**
    * 此资源的状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 销毁时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolatedTimestamp: string
+  IsolatedTimestamp?: string
   /**
    * 功能模块名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 功能模块类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 资源包信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Package: Package
+  Package?: Package
   /**
    * 资源id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 自动续费状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
 }
@@ -690,23 +665,27 @@ export interface XMagicTrial {
   /**
    * 功能名称
    */
-  Name: string
+  Name?: string
   /**
    * 可以申请的次数
    */
-  TrialCount: number
+  TrialCount?: number
   /**
    * 每次申请的时长单位：天
    */
-  Duration: number
+  Duration?: number
   /**
    * 功能类别
    */
-  Plan: string
+  Plan?: string
   /**
    * single: 原子能力,combined:套餐
    */
-  XMagicType: string
+  XMagicType?: string
+  /**
+   * vod：点播 live：直播
+   */
+  BizType?: string
 }
 
 /**
@@ -796,7 +775,6 @@ export interface License {
   LicenseType?: string
   /**
    * 测试license 是否可以续期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Renewal?: boolean
   /**
@@ -805,12 +783,10 @@ export interface License {
   LicenseId?: number
   /**
    * license名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 测试license 是否升级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Update?: boolean
   /**
@@ -825,7 +801,6 @@ export interface License {
   Group?: number
   /**
    * 过期：true ，未过期：其它
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expired?: boolean
   /**
@@ -835,12 +810,10 @@ export interface License {
   RestTime?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: string
   /**
@@ -850,7 +823,6 @@ export interface License {
   Resource?: RenewResource
   /**
    * 是否为马甲包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsVest?: boolean
 }
@@ -924,42 +896,34 @@ export interface XMagicResource {
   XMagic?: boolean
   /**
    * 资源开始生效时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 资源结束生效时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 资源包是否过期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expired?: boolean
   /**
    * 功能模块名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * single: 原子能力,combined:套餐
-注意：此字段可能返回 null，表示取不到有效值。
    */
   XMagicType?: string
   /**
    * xmagic:优图， avatar：虚拟人
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BizType?: string
   /**
    * 资源Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 资源是否可以使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUse?: boolean
 }
@@ -970,12 +934,10 @@ export interface XMagicResource {
 export interface RenewResource {
   /**
    * 资源Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 自动续期标记，0：默认，1：自动续期，2：不续期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
@@ -990,12 +952,10 @@ export interface RenewResource {
   Refund?: boolean
   /**
    * 子产品码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCode?: string
   /**
    * 资源到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
 }
@@ -1087,12 +1047,10 @@ export interface CreateActivityLicenseResponse {
   AppId?: string
   /**
    * app名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppName?: string
   /**
    * ios包名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleId?: string
   /**
@@ -1101,7 +1059,6 @@ export interface CreateActivityLicenseResponse {
   PackageName?: string
   /**
    * 有效时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
   /**
@@ -1122,12 +1079,10 @@ export interface CreateActivityLicenseResponse {
   LicenseUrl?: string
   /**
    * license剩余天数，最后一天以及过期显示0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResidueDay?: number
   /**
    * license剩余秒数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Residue?: number
   /**
@@ -1226,7 +1181,6 @@ export interface AppInfo {
   AppId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppName?: string
   /**
@@ -1335,37 +1289,36 @@ export interface Package {
   /**
    * 资源包Id
    */
-  Id: number
+  Id?: number
   /**
    * 资源包资源Id
    */
-  BizResourceId: string
+  BizResourceId?: string
   /**
    * 站点 中国站还是国际站
    */
-  Site: string
+  Site?: string
   /**
    * 资源包开始生效时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 资源包过期时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 资源包退费时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RefundTime: string
+  RefundTime?: string
   /**
    * 资源包名称
    */
-  Name: string
+  Name?: string
   /**
    * 资源包类型ID,对应点播：PackageId 对应直播：TypeId
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
 }
 
 /**
@@ -1374,12 +1327,10 @@ export interface Package {
 export interface DescribeXMagicResourceResponse {
   /**
    * 优图资源包信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources?: Array<XMagicResource>
   /**
    * 资源数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
@@ -1416,17 +1367,14 @@ export interface VideoFeature {
   FeatureId?: number
   /**
    * 功能名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 功能类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 是否可以申请试用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Trial?: boolean
   /**
@@ -1441,22 +1389,18 @@ export interface VideoFeature {
   Duration?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: string
   /**
    * 功能所属业务方
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BizType?: string
   /**
    * 平台类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Platform?: string
 }
@@ -1468,41 +1412,39 @@ export interface Feature {
   /**
    * 索引
    */
-  Id: number
+  Id?: number
   /**
    * 功能ID
    */
-  FeatureId: number
+  FeatureId?: number
   /**
    * 功能名称
    */
-  Name: string
+  Name?: string
   /**
    * 功能类型
    */
-  Type: string
+  Type?: string
   /**
    * 是否可以申请试用
    */
-  Trial: boolean
+  Trial?: boolean
   /**
    * 可以试用的次数
    */
-  TrialCount: number
+  TrialCount?: number
   /**
    * 可以试用的时长，单位天
    */
-  Duration: number
+  Duration?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedAt: string
+  UpdatedAt?: string
 }
 
 /**
@@ -1632,7 +1574,7 @@ export interface DescribeVcubeApplicationAndLicenseResponse {
  */
 export interface CreateTestXMagicRequest {
   /**
-   * 应用id
+   * 将腾讯特效创建到哪个应用下
    */
   ApplicationId: number
   /**
@@ -1724,7 +1666,6 @@ export interface XMagicInfo {
   CompanyType?: string
   /**
    * 优图套餐类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Plan?: string
   /**
@@ -1762,7 +1703,6 @@ export interface XMagicInfo {
   RenewalCount?: number
   /**
    * 历次审批的回复
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reply?: Array<string>
   /**
@@ -1775,7 +1715,6 @@ export interface XMagicInfo {
   UpdatedAt?: string
   /**
    * 用户更新信息的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
@@ -1790,12 +1729,10 @@ export interface XMagicInfo {
   RestTime?: number
   /**
    * single: 原子能力,combined:套餐
-注意：此字段可能返回 null，表示取不到有效值。
    */
   XMagicType?: string
   /**
    * 优图模块名称，自动中英文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
@@ -1805,7 +1742,6 @@ export interface XMagicInfo {
   Resource?: RenewResource
   /**
    * 是否是马甲包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsVest?: boolean
 }
@@ -1834,11 +1770,11 @@ export interface ApplicationInfo {
   AppType?: string
   /**
    * license数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Licenses?: Array<License>
   /**
    * license 秘钥
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseKey?: string
   /**
@@ -1848,22 +1784,18 @@ export interface ApplicationInfo {
   PackageName?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: string
   /**
    * 用户应用Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: number
   /**
    * 视立方下载license的url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseUrl?: string
   /**
@@ -1955,7 +1887,7 @@ export interface CreateApplicationAndWebPlayerLicenseResponse {
  */
 export interface ModifyTrialLicenseRequest {
   /**
-   * 执照ID
+   * 授权ID
    */
   LicenseId: string
 }
@@ -2077,7 +2009,12 @@ export interface CreateApplicationAndBindLicenseRequest {
 /**
  * 视立方产品概览页新闻动态
  */
-export type NewsInfo = null
+export interface NewsInfo {
+  /**
+   * 新闻Id
+   */
+  Id?: number
+}
 
 /**
  * DescribeFeatureList返回参数结构体
@@ -2085,12 +2022,10 @@ export type NewsInfo = null
 export interface DescribeFeatureListResponse {
   /**
    * 功能列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureList?: Array<VideoFeature>
   /**
    * 优图功能列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   XMagicFeatureList?: Array<XMagicFeature>
   /**
@@ -2105,12 +2040,10 @@ export interface DescribeFeatureListResponse {
 export interface DescribeXMagicResourceListResponse {
   /**
    * 优图资源包信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources?: Array<XMagicResourceSimpleInfo>
   /**
    * 资源数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**

@@ -917,7 +917,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建房间
+   * 创建课堂
    */
   async CreateRoom(
     req: CreateRoomRequest,

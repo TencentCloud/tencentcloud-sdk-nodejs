@@ -21,7 +21,6 @@
 export interface DescribeAndroidInstanceTasksStatusResponse {
   /**
    * 任务状态集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskStatusSet?: Array<AndroidInstanceTaskStatus>
   /**
@@ -164,7 +163,6 @@ export interface SyncExecuteCommandOnAndroidInstancesRequest {
 export interface UninstallAndroidInstancesAppResponse {
   /**
    * 任务集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -211,7 +209,6 @@ export interface AndroidApp {
   AndroidAppId?: string
   /**
    * 安卓应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
@@ -220,7 +217,6 @@ export interface AndroidApp {
   State?: string
   /**
    * 安卓应用版本列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidAppVersionInfo?: Array<AndroidAppVersionInfo>
   /**
@@ -235,7 +231,6 @@ export interface AndroidApp {
 export interface DescribeAndroidAppsResponse {
   /**
    * 安卓应用列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Apps?: Array<AndroidApp>
   /**
@@ -338,7 +333,6 @@ export interface StartPublishStreamRequest {
 export interface CreateAndroidInstanceImageResponse {
   /**
    * 安卓实例镜像 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImageId?: string
   /**
@@ -373,7 +367,6 @@ export interface DeleteAndroidInstanceImagesRequest {
 export interface DescribeAndroidInstanceAppsResponse {
   /**
    * 安卓应用列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Apps?: Array<AndroidInstanceAppInfo>
   /**
@@ -557,7 +550,6 @@ export interface StopPublishStreamResponse {
 export interface StartAndroidInstancesResponse {
   /**
    * 任务集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -664,12 +656,10 @@ export interface CreateAndroidInstanceWebShellResponse {
 export interface DescribeAndroidInstanceImagesResponse {
   /**
    * 镜像总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 镜像列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImages?: Array<AndroidInstanceImage>
   /**
@@ -712,7 +702,6 @@ export interface SyncExecuteCommandResult {
   InstanceId?: string
   /**
    * 命令执行输出内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: string
   /**
@@ -823,7 +812,6 @@ export interface SwitchGameArchiveResponse {
 export interface InstallAndroidInstancesAppResponse {
   /**
    * 任务集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -838,12 +826,10 @@ export interface InstallAndroidInstancesAppResponse {
 export interface AndroidInstanceTask {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceId?: string
 }
@@ -1027,11 +1013,11 @@ export interface StartPublishStreamToCSSRequest {
  */
 export interface Filter {
   /**
-   * "aaa"
+   * 字段名
    */
   Name: string
   /**
-   * ["bbb", "ccc"]
+   * 字段值列表
    */
   Values: Array<string>
 }
@@ -1042,7 +1028,6 @@ export interface Filter {
 export interface ResetAndroidInstancesResponse {
   /**
    * 任务集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -1103,7 +1088,6 @@ export interface StopGameRequest {
 export interface RebootAndroidInstancesResponse {
   /**
    * 任务集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**
@@ -1224,7 +1208,6 @@ export interface AndroidInstanceTaskStatus {
   AndroidInstanceId?: string
   /**
    * 任务执行结果描述，针对某些任务，可以是可解析的 json
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskResult?: string
 }
@@ -1309,7 +1292,6 @@ export interface AndroidInstance {
   AndroidInstanceRegion?: string
   /**
    * 实例可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceZone?: string
   /**
@@ -1322,7 +1304,6 @@ export interface AndroidInstance {
   AndroidInstanceType?: string
   /**
    * 实例镜像 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImageId?: string
   /**
@@ -1418,22 +1399,18 @@ export interface StartPublishStreamResponse {
 export interface AndroidInstanceImage {
   /**
    * 镜像 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImageId?: string
   /**
    * 镜像名称，由业务方自定义，仅用于展示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImageName?: string
   /**
    * 镜像状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImageState?: string
   /**
    * 镜像可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidInstanceImageZone?: string
 }
@@ -1540,17 +1517,14 @@ export interface CreateSessionResponse {
 export interface AndroidInstanceAppInfo {
   /**
    * 应用id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidAppId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 应用版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidAppVersion?: string
   /**
@@ -1619,7 +1593,6 @@ export interface CreateAndroidInstanceSSHRequest {
 export interface StopAndroidInstancesResponse {
   /**
    * 任务集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSet?: Array<AndroidInstanceTask>
   /**

@@ -664,7 +664,6 @@ export interface ModifyPodNumResponse {
 export interface CreateInstanceResponse {
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
@@ -991,7 +990,6 @@ export interface KeyValue {
 export interface DescribeServiceNodeInfosResponse {
   /**
    * 总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCnt?: number
   /**
@@ -1001,7 +999,6 @@ export interface DescribeServiceNodeInfosResponse {
   ServiceNodeList?: Array<ServiceNodeDetailInfo>
   /**
    * 集群所有节点的别名序列化
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AliasInfo?: string
   /**
@@ -2273,12 +2270,10 @@ export interface DescribeInstancesResponse {
 export interface ModifyYarnDeployResponse {
   /**
    * 为false不点亮部署生效、重置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDraft?: boolean
   /**
    * 错误信息，预留
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2524,7 +2519,6 @@ export interface EmrListInstance {
   ClusterId?: string
   /**
    * 常见状态描述：集群生产中,集群运行中,集群创建中,集群已关闭,集群已删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
@@ -2565,37 +2559,30 @@ export interface EmrListInstance {
   Id?: number
   /**
    * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: number
   /**
    * 项目ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 区域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: number
   /**
    * 网络ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: number
   /**
    * 地区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 状态码, 取值为-2(集群已删除), -1(集群已关闭), 0(集群生产中), 2(集群运行中), 3(集群创建中)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
@@ -2605,47 +2592,38 @@ export interface EmrListInstance {
   Tags?: Array<Tag>
   /**
    * 告警信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmInfo?: string
   /**
    * 是否是woodpecker集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsWoodpeckerCluster?: number
   /**
    * Vpc中文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcName?: string
   /**
    * 子网中文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetName?: string
   /**
    * 字符串VpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * 字符串子网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqSubnetId?: string
   /**
    * 集群类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterClass?: string
   /**
    * 是否为跨AZ集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsMultiZoneCluster?: boolean
   /**
    * 是否手戳集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsHandsCluster?: boolean
   /**
@@ -2655,14 +2633,16 @@ export interface EmrListInstance {
   OutSideSoftInfo?: Array<SoftDependInfo>
   /**
    * 当前集群的应用场景是否支持体外客户端
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportOutsideCluster?: boolean
   /**
    * 是否专有集群场景集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDedicatedCluster?: boolean
+  /**
+   * 集群支持克隆
+   */
+  IsSupportClone?: boolean
 }
 
 /**
@@ -4639,7 +4619,6 @@ export interface DescribeYarnScheduleHistoryResponse {
   Tasks?: Array<SchedulerTaskInfo>
   /**
    * 任务详情总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -6458,7 +6437,6 @@ export interface DescribeEmrOverviewMetricsResponse {
 export interface ClusterRelationMeta {
   /**
    * 集群类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: string
   /**
@@ -6806,7 +6784,6 @@ export interface RepeatStrategy {
   NotRepeat?: NotRepeatStrategy
   /**
    * 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。必须填写
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expire?: string
   /**

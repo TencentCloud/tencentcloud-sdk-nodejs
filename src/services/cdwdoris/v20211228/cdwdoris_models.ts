@@ -97,6 +97,10 @@ export interface DescribeInstanceOperationsRequest {
    * 结束时间
    */
   EndTime?: string
+  /**
+   * 计算组ID
+   */
+  ComputeGroupId?: string
 }
 
 /**
@@ -185,6 +189,14 @@ export interface ModifyUserPrivilegesV3Request {
    * 用户链接来自的 IP
    */
   WhiteHost?: string
+  /**
+   * 更新类型，默认0，1为更新绑定计算组
+   */
+  UpdateType?: number
+  /**
+   * 需绑定计算组列表
+   */
+  UpdateComputeGroups?: Array<string>
 }
 
 /**
@@ -674,6 +686,10 @@ export interface ZoneInfo {
    * 是否为主力园区
    */
   Main?: boolean
+  /**
+   * 0表示未开通容器化，1表示已开通容器化
+   */
+  ContainerEnabled?: number
 }
 
 /**
@@ -904,6 +920,10 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
    * user
    */
   UserName?: string
+  /**
+   * 计算组列表
+   */
+  ComputeGroups?: Array<string>
 }
 
 /**
@@ -1064,6 +1084,10 @@ export interface SlowQueryRecord {
    * cpu执行时间
    */
   CpuTimeMs?: number
+  /**
+   * 计算组
+   */
+  ComputeGroup?: string
 }
 
 /**
@@ -1192,6 +1216,10 @@ export interface InstanceOperation {
    * 操作明细
    */
   OperationDetail?: string
+  /**
+   * 计算组id
+   */
+  ComputerGroupId?: string
 }
 
 /**
@@ -1577,6 +1605,10 @@ export interface DataBaseAuditRecord {
    * 是否是查询
    */
   IsQuery?: boolean
+  /**
+   * 计算组
+   */
+  ComputeGroup?: string
 }
 
 /**
@@ -1764,6 +1796,10 @@ export interface DescribeSpecRequest {
    * 机型名称
    */
   SpecName?: string
+  /**
+   * 是否存算分离
+   */
+  IsSSC?: boolean
 }
 
 /**
@@ -1911,6 +1947,10 @@ export interface DescribeSlowQueryRecordsRequest {
    * user
    */
   UserName?: string
+  /**
+   * 计算组列表
+   */
+  ComputeGroups?: Array<string>
 }
 
 /**
@@ -2205,6 +2245,10 @@ export interface InstanceNode {
    * 创建时间
    */
   CreateTime?: string
+  /**
+   * 计算组ID
+   */
+  ComputeGroupId?: string
 }
 
 /**
@@ -2531,6 +2575,10 @@ Modify 集群变更中；
    * cn节点信息
    */
   CNSummary?: NodesSummary
+  /**
+   * 计算组个数
+   */
+  ComputeGroupCount?: number
 }
 
 /**
@@ -2585,6 +2633,10 @@ export interface DescribeInstancesRequest {
    * 搜索标签列表，没匹配到则不过滤集群列表
    */
   SearchTags?: Array<SearchTags>
+  /**
+   * 0 : 存算一体,1：存算分离,2:ALL
+   */
+  InstanceType?: number
 }
 
 /**
@@ -2970,6 +3022,10 @@ export interface DescribeDatabaseAuditRecordsRequest {
    * 是否是查询
    */
   IsQuery?: Array<boolean>
+  /**
+   * 计算组列表
+   */
+  ComputeGroups?: Array<string>
 }
 
 /**
@@ -3731,6 +3787,10 @@ export interface ModifyUserBindWorkloadGroupResponse {
  */
 export interface ClusterConfigsInfoFromEMR {
   /**
+   * 计算组id
+   */
+  ComputeGroupId?: string
+  /**
    * 配置文件名称
    */
   FileName?: string
@@ -3954,6 +4014,10 @@ export interface DescribeDatabaseAuditDownloadRequest {
    * 是否是查询
    */
   IsQuery?: Array<boolean>
+  /**
+   * 计算组列表
+   */
+  ComputeGroups?: Array<string>
 }
 
 /**
@@ -4037,6 +4101,14 @@ export interface ActionAlterUserRequest {
    * 用户权限类型 0:普通用户 1:管理员
    */
   UserPrivilege?: number
+  /**
+   * 计算组列表
+   */
+  ComputeGroups?: Array<string>
+  /**
+   * 集群ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -4129,6 +4201,14 @@ export interface NodeInfos {
    * 创建时间
    */
   CreateTime?: string
+  /**
+   * 计算组id
+   */
+  ComputeGroupId?: string
+  /**
+   * rip
+   */
+  RIp?: string
 }
 
 /**

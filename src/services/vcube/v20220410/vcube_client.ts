@@ -174,7 +174,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑更改应用
+   * 更改测试包名信息
    */
   async ModifyApplication(
     req: ModifyApplicationRequest,
@@ -344,7 +344,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 申请开通测试版优图
+   * 申请开通测试版腾讯特效
    */
   async CreateTestXMagic(
     req: CreateTestXMagicRequest,

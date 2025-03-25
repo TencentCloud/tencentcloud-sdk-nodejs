@@ -21,14 +21,17 @@
 export interface ConfigParams {
   /**
    * 名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterName?: string
   /**
    * 值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterValue?: string
   /**
    * 修改前的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterOldValue?: string
 }
@@ -121,49 +124,49 @@ export interface InstanceStateInfo {
    * 集群状态，例如：Serving
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 集群操作创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowCreateTime: string
+  FlowCreateTime?: string
   /**
    * 集群操作名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowName: string
+  FlowName?: string
   /**
    * 集群操作进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowProgress: number
+  FlowProgress?: number
   /**
    * 集群状态描述，例如：运行中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceStateDesc: string
+  InstanceStateDesc?: string
   /**
    * 集群流程错误信息，例如：“创建失败，资源不足”
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowMsg: string
+  FlowMsg?: string
   /**
    * 当前步骤的名称，例如：”购买资源中“
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessName: string
+  ProcessName?: string
   /**
    * 集群是否有备份中任务，有为1,无为0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupStatus?: number
   /**
-   * 1
+   * 请求id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestId?: string
   /**
-   * 1
+   * 集群是否有备份中任务，有为1,无为0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupOpenStatus?: number
@@ -312,11 +315,11 @@ export interface DescribeAccountsRequest {
  */
 export interface ScaleOutInstanceResponse {
   /**
-   * 1
+   * 流程id
    */
   FlowId?: string
   /**
-   * 1
+   * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
@@ -547,11 +550,11 @@ export interface DescribeDBParamsRequest {
    */
   NodeTypes?: Array<string>
   /**
-   * range::(0,100]
+   * 分页参数，分页步长，默认为10 示例值：10
    */
   Limit?: number
   /**
-   * range::[0,INF)
+   * 分页参数，第一页为0，第二页为10
    */
   Offset?: number
   /**
@@ -566,14 +569,17 @@ export interface DescribeDBParamsRequest {
 export interface CBSSpec {
   /**
    * 盘类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType: string
   /**
    * 大小
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize: number
   /**
    * 个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount: number
 }
@@ -713,57 +719,57 @@ export interface InstanceInfo {
    */
   ID?: number
   /**
-   * cdwpg-cn或者其他
+   * 内核版本类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
-   * cdwpg-cn或者其他
+   * 集群名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
-   * Running
+   * 集群状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 运行中
+   * 集群状态详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
-   * 无
+   * 集群状态信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateInfo?: InstanceStateInfo
   /**
-   * -
+   * 集群id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceID?: string
   /**
-   * 2022-09-05 20:00:01
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * ap-chongqing
+   * 地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * ap
+   * 地区
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
-   * region
+   * 地域详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionDesc?: string
   /**
-   * zone
+   * 地区详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneDesc?: string
@@ -773,7 +779,7 @@ export interface InstanceInfo {
    */
   Tags?: Array<Tag>
   /**
-   * v3
+   * 内核版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
@@ -793,42 +799,42 @@ export interface InstanceInfo {
    */
   DNNodes?: Array<InstanceNodeGroup>
   /**
-   * 1
+   * 地域id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
-   * 1
+   * 地区id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
-   * 1
+   * 私有网络
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 1
+   * 子网
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
-   * 1
+   * 过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
-   * 1
+   * 计费方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
-   * 1
+   * 自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: boolean
   /**
-   * 1
+   * 集群id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
@@ -865,41 +871,41 @@ export interface ParamDetail {
    * 参数名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 默认值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 是否需要重启
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NeedRestart: boolean
+  NeedRestart?: boolean
   /**
    * 当前运行值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningValue: string
+  RunningValue?: string
   /**
    * 取值范围
    */
-  ValueRange: ValueRange
+  ValueRange?: ValueRange
   /**
    * 单位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
   /**
    * 英文简介
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShortDesc: string
+  ShortDesc?: string
   /**
    * 参数名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParameterName: string
+  ParameterName?: string
 }
 
 /**
@@ -917,7 +923,7 @@ export interface DescribeInstancesResponse {
    */
   InstancesList?: Array<InstanceInfo>
   /**
-   * -
+   * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
@@ -989,32 +995,32 @@ export interface ResetAccountPasswordResponse {
  */
 export interface DiskSpecPlus {
   /**
-   * 1
+   * 磁盘个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount?: number
   /**
-   * 1
+   * 磁盘最大值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDiskSize?: number
   /**
-   * 1
+   * 磁盘最小值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MinDiskSize?: number
   /**
-   * 1
+   * 磁盘类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
   /**
-   * 1
+   * 磁盘类型详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskDesc?: string
   /**
-   * 1
+   * 机型类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmClass?: string
@@ -1105,11 +1111,11 @@ export interface ResourceInfo {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 搜索的集群id名称
+   * 用集群id搜索
    */
   SearchInstanceId?: string
   /**
-   * 搜索的集群name
+   * 用集群名字搜索
    */
   SearchInstanceName?: string
   /**
@@ -1326,17 +1332,17 @@ export interface Range {
  */
 export interface InstanceNodeGroup {
   /**
-   * 1
+   * 机型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecName?: string
   /**
-   * 1
+   * 磁盘信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDisk?: DiskSpecPlus
   /**
-   * 1
+   * 机器个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmCount?: number
@@ -1429,19 +1435,19 @@ export interface ScaleUpInstanceRequest {
  */
 export interface CNResourceSpec {
   /**
-   * 无
+   * 节点类型
    */
   Type: string
   /**
-   * 无
+   * 机型
    */
   SpecName: string
   /**
-   * 无
+   * 节点个数
    */
   Count: number
   /**
-   * 无
+   * 磁盘信息
    */
   DiskSpec: CBSSpec
 }
@@ -1472,22 +1478,22 @@ export interface ParamItem {
    * 节点类型, cn/dn
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeType: string
+  NodeType?: string
   /**
    * 节点名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeName: string
+  NodeName?: string
   /**
    * 参数个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 参数信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Details: Array<ParamDetail>
+  Details?: Array<ParamDetail>
 }
 
 /**
@@ -1713,15 +1719,15 @@ export interface SlowLogDetail {
   /**
    * 花费总时间
    */
-  TotalTime: number
+  TotalTime?: number
   /**
    * 调用总次数
    */
-  TotalCallTimes: number
+  TotalCallTimes?: number
   /**
    * 慢SQL
    */
-  NormalQuerys: Array<NormQueryItem>
+  NormalQuerys?: Array<NormQueryItem>
 }
 
 /**
@@ -1732,22 +1738,22 @@ export interface ValueRange {
    * 参数类型，可以为 enum，string，section; 其中enum表示枚举，类似： utf8,latin1,gbk; string表示返回的参数值是字符串; section表示返回的参数值是一个取值范围，类似：[4-8]
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * type 取section的时候，返回的参数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Range: Range
+  Range?: Range
   /**
    * type 取enum的时候，返回参数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enum: Array<string>
+  Enum?: Array<string>
   /**
    * type 取string的时候，返回的参数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  String: string
+  String?: string
 }
 
 /**
@@ -1820,47 +1826,47 @@ export interface InstanceOperation {
   /**
    * 操作名称，例如“create_instance"、“scaleout_instance”等
    */
-  Id: number
+  Id?: number
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 操作名称描述，例如“创建”，“修改集群名称”等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Action: string
+  Action?: string
   /**
    * 状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 操作开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 操作结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 操作上下文
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Context: string
+  Context?: string
   /**
    * 操作更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 操作UIN
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
 }
 
 /**

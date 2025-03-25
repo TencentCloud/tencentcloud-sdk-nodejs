@@ -5300,6 +5300,14 @@ export interface DescribeOrganizationMembersRequest {
    * 成员标签搜索列表，最大10个
    */
   Tags?: Array<Tag>
+  /**
+   * 组织单元ID
+   */
+  NodeId?: number
+  /**
+   * 组织单元名称
+   */
+  NodeName?: string
 }
 
 /**

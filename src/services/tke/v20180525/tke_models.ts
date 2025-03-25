@@ -916,42 +916,34 @@ export interface CreateBackupStorageLocationResponse {
 export interface KubeJarvisStateDiagnostic {
   /**
    * 诊断开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 诊断结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 诊断目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalogues?: Array<KubeJarvisStateCatalogue>
   /**
    * 诊断类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 诊断名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 诊断描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
    * 诊断结果列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<KubeJarvisStateResultsItem>
   /**
    * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: Array<KubeJarvisStateStatistic>
 }
@@ -1961,12 +1953,10 @@ export interface KubeJarvisStateCatalogue {
    * 目录级别，支持参数：
 first：一级目录
 second：二级目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogueLevel?: string
   /**
    * 目录名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogueName?: string
 }
@@ -2164,32 +2154,26 @@ export interface ModifyClusterAttributeResponse {
 export interface KubeJarvisStateInspectionResult {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 诊断开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 诊断结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: Array<KubeJarvisStateStatistic>
   /**
    * 诊断结果详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Diagnostics?: Array<KubeJarvisStateDiagnostic>
   /**
    * 查询巡检报告相关报错
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Error?: string
 }
@@ -2997,12 +2981,10 @@ export interface DescribePrometheusGlobalConfigResponse {
 export interface KubeJarvisStateInspectionResultsItem {
   /**
    * 巡检结果名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: Array<KubeJarvisStateStatistic>
 }
@@ -3997,12 +3979,10 @@ export interface DescribeTKEEdgeClustersResponse {
 export interface KubeJarvisStateResultObjInfo {
   /**
    * 对象属性名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PropertyName?: string
   /**
    * 对象属性值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PropertyValue?: string
 }
@@ -8150,12 +8130,10 @@ export interface DescribeClusterReleaseDetailsRequest {
 export interface KubeJarvisStateResultsItem {
   /**
    * 诊断结果级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: string
   /**
    * 诊断对象名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjName?: string
   /**
@@ -8165,12 +8143,10 @@ export interface KubeJarvisStateResultsItem {
   ObjInfo?: Array<KubeJarvisStateResultObjInfo>
   /**
    * 诊断项标题
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
   /**
    * 诊断项描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
@@ -8180,12 +8156,10 @@ export interface KubeJarvisStateResultsItem {
   Proposal?: string
   /**
    * 诊断建议文档链接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProposalDocUrl?: string
   /**
    * 诊断建议文档名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProposalDocName?: string
 }
@@ -8631,12 +8605,10 @@ export interface TagSpecification {
 export interface KubeJarvisStateDiagnosticOverview {
   /**
    * 诊断目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalogues?: Array<KubeJarvisStateCatalogue>
   /**
    * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: Array<KubeJarvisStateStatistic>
 }
@@ -12946,12 +12918,10 @@ export interface AddVpcCniSubnetsResponse {
 export interface KubeJarvisStateStatistic {
   /**
    * 诊断结果的健康水平
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyLevel?: string
   /**
    * 诊断结果的统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
 }
@@ -12984,17 +12954,14 @@ export interface ExistedInstancesForNode {
 export interface KubeJarvisStateInspectionOverview {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 诊断结果统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: Array<KubeJarvisStateStatistic>
   /**
    * 诊断结果详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Diagnostics?: Array<KubeJarvisStateDiagnosticOverview>
 }
