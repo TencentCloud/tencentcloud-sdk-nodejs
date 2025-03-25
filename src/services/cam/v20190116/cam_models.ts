@@ -3432,42 +3432,42 @@ export interface AttachedUserPolicy {
   /**
    * 策略ID
    */
-  PolicyId: string
+  PolicyId?: string
   /**
    * 策略名
    */
-  PolicyName: string
+  PolicyName?: string
   /**
    * 策略描述
    */
-  Description: string
+  Description?: string
   /**
    * 创建时间
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 策略类型(1表示自定义策略，2表示预设策略)
    */
-  StrategyType: string
+  StrategyType?: string
   /**
    * 创建模式(1表示按产品或项目权限创建的策略，其他表示策略语法创建的策略)
    */
-  CreateMode: string
+  CreateMode?: string
   /**
    * 随组关联信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Groups: Array<AttachedUserPolicyGroupInfo>
+  Groups?: Array<AttachedUserPolicyGroupInfo>
   /**
    * 是否已下线(0:否 1:是)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Deactived: number
+  Deactived?: number
   /**
    * 已下线的产品列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeactivedDetail: Array<string>
+  DeactivedDetail?: Array<string>
 }
 
 /**

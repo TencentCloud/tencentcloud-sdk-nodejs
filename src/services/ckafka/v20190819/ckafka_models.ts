@@ -218,7 +218,6 @@ export interface DescribeConnectResourceResp {
 export interface AuthorizeTokenResponse {
   /**
    * 0 成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: number
   /**
@@ -1123,7 +1122,6 @@ export interface Partitions {
 export interface DescribeTopicResponse {
   /**
    * 返回的结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TopicResult
   /**
@@ -1686,7 +1684,6 @@ export interface MariaDBModifyConnectParam {
 export interface DescribeRegionResponse {
   /**
    * 返回地域枚举结果列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<Region>
   /**
@@ -1832,7 +1829,6 @@ export interface CreateInstancePostData {
 export interface DeleteDatahubTaskResponse {
   /**
    * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DatahubTaskIdRes
   /**
@@ -2017,7 +2013,6 @@ export interface InstanceAttributesResponse {
 export interface DescribeDatahubTopicsResponse {
   /**
    * 主题列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DescribeDatahubTopicsResp
   /**
@@ -2407,10 +2402,12 @@ export interface ConsumerRecord {
   Offset?: number
   /**
    * 消息key
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 消息value
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
@@ -2419,6 +2416,7 @@ export interface ConsumerRecord {
   Timestamp?: number
   /**
    * 消息headers
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: string
 }
@@ -2443,7 +2441,6 @@ export interface DeleteGroupResponse {
 export interface CreateTokenResponse {
   /**
    * token串
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -3471,7 +3468,6 @@ export interface DescribeRegionRequest {
 export interface DescribeGroupInfoResponse {
   /**
    * 返回的结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<GroupInfoResponse>
   /**
@@ -4609,7 +4605,6 @@ export interface DescribeDatahubTopicsResp {
 export interface ModifyDatahubTaskResponse {
   /**
    * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DatahubTaskIdRes
   /**
@@ -6131,7 +6126,6 @@ export interface TopicFlowRankingResult {
 export interface InstanceScalingDownResponse {
   /**
    * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ScalingDownResp
   /**
@@ -6863,7 +6857,6 @@ export interface UrlDecodeParam {
 export interface CancelAuthorizationTokenResponse {
   /**
    * 0 成功 非0 失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: number
   /**
@@ -7283,7 +7276,6 @@ export interface SMTParam {
 export interface CheckCdcClusterResponse {
   /**
    * 返回结果状态Success
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -8168,7 +8160,6 @@ export interface ModifyRoutineMaintenanceTaskResponse {
 export interface DescribeConnectResourceResponse {
   /**
    * 连接源的Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DescribeConnectResourceResp
   /**
@@ -8704,6 +8695,7 @@ export interface ClickHouseConnectParam {
   UniqVpcId?: string
   /**
    * 是否更新到关联的Datahub任务
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdate?: boolean
 }

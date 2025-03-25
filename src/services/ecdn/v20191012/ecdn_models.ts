@@ -16,20 +16,6 @@
  */
 
 /**
- * PurgePathCache请求参数结构体
- */
-export interface PurgePathCacheRequest {
-  /**
-   * 要刷新的目录列表，必须包含协议头部。
-   */
-  Paths: Array<string>
-  /**
-   * 刷新类型，flush 代表刷新有更新的资源，delete 表示刷新全部资源。
-   */
-  FlushType: string
-}
-
-/**
  * DescribeEcdnStatistics请求参数结构体
  */
 export interface DescribeEcdnStatisticsRequest {
@@ -79,16 +65,6 @@ global: 全部
 默认 global
    */
   Area?: string
-}
-
-/**
- * StartEcdnDomain请求参数结构体
- */
-export interface StartEcdnDomainRequest {
-  /**
-   * 待启用域名。
-   */
-  Domain: string
 }
 
 /**
@@ -149,25 +125,13 @@ twoWay - 双向校验
 }
 
 /**
- * CreateVerifyRecord返回参数结构体
+ * PurgeUrlsCache请求参数结构体
  */
-export interface CreateVerifyRecordResponse {
+export interface PurgeUrlsCacheRequest {
   /**
-   * 子解析
+   * 要刷新的Url列表，必须包含协议头部。
    */
-  SubDomain: string
-  /**
-   * 解析值
-   */
-  Record: string
-  /**
-   * 解析类型
-   */
-  RecordType: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Urls: Array<string>
 }
 
 /**
@@ -279,42 +243,6 @@ export interface ForceRedirect {
 }
 
 /**
- * DescribeIpStatus返回参数结构体
- */
-export interface DescribeIpStatusResponse {
-  /**
-   * 节点列表
-   */
-  Ips: Array<IpStatus>
-  /**
-   * 节点总个数
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribePurgeQuota返回参数结构体
- */
-export interface DescribePurgeQuotaResponse {
-  /**
-   * Url刷新用量及配额。
-   */
-  UrlPurge: Quota
-  /**
-   * 目录刷新用量及配额。
-   */
-  PathPurge: Quota
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeEcdnDomainStatistics返回参数结构体
  */
 export interface DescribeEcdnDomainStatisticsResponse {
@@ -359,16 +287,6 @@ export interface DomainData {
    * 结果详情
    */
   DetailData: Array<DetailData>
-}
-
-/**
- * StopEcdnDomain请求参数结构体
- */
-export interface StopEcdnDomainRequest {
-  /**
-   * 待停用域名。
-   */
-  Domain: string
 }
 
 /**
@@ -441,32 +359,17 @@ export interface DescribePurgeTasksRequest {
 }
 
 /**
- * 域名查询时过滤条件。
+ * DescribeEcdnStatistics返回参数结构体
  */
-export interface DomainFilter {
+export interface DescribeEcdnStatisticsResponse {
   /**
-   * 过滤字段名，支持的列表如下：
-- origin：主源站。
-- domain：域名。
-- resourceId：域名id。
-- status：域名状态，online，offline，processing。
-- disable：域名封禁状态，normal，unlicensed。
-- projectId：项目ID。
-- fullUrlCache：全路径缓存，on或off。
-- https：是否配置https，on，off或processing。
-- originPullProtocol：回源协议类型，支持http，follow或https。
-- area：加速区域，支持mainland，overseas或global。
-- tagKey：标签键。
+   * 指定条件查询得到的数据明细
    */
-  Name: string
+  Data: Array<ResourceData>
   /**
-   * 过滤字段值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: Array<string>
-  /**
-   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
-   */
-  Fuzzy?: boolean
+  RequestId?: string
 }
 
 /**
@@ -508,13 +411,17 @@ export interface Hsts {
 }
 
 /**
- * PurgeUrlsCache请求参数结构体
+ * 排序类型的数据结构
  */
-export interface PurgeUrlsCacheRequest {
+export interface DetailData {
   /**
-   * 要刷新的Url列表，必须包含协议头部。
+   * 数据类型的名称
    */
-  Urls: Array<string>
+  Name: string
+  /**
+   * 数据值
+   */
+  Value: number
 }
 
 /**
@@ -550,35 +457,6 @@ export interface HttpHeaderPathRule {
 }
 
 /**
- * UpdateDomainConfig返回参数结构体
- */
-export interface UpdateDomainConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 排序类型的数据结构
- */
-export interface DetailData {
-  /**
-   * 数据类型的名称
-   */
-  Name: string
-  /**
-   * 数据值
-   */
-  Value: number
-}
-
-/**
- * DescribePurgeQuota请求参数结构体
- */
-export type DescribePurgeQuotaRequest = null
-
-/**
  * DescribeEcdnDomainLogs返回参数结构体
  */
 export interface DescribeEcdnDomainLogsResponse {
@@ -609,60 +487,6 @@ export interface EcdnData {
    * 明细数据组合
    */
   DetailData: Array<TimestampData>
-}
-
-/**
- * UpdateDomainConfig请求参数结构体
- */
-export interface UpdateDomainConfigRequest {
-  /**
-   * 域名。
-   */
-  Domain: string
-  /**
-   * 源站配置。
-   */
-  Origin?: Origin
-  /**
-   * 项目id。
-   */
-  ProjectId?: number
-  /**
-   * IP黑白名单配置。
-   */
-  IpFilter?: IpFilter
-  /**
-   * IP限频配置。
-   */
-  IpFreqLimit?: IpFreqLimit
-  /**
-   * 源站响应头部配置。
-   */
-  ResponseHeader?: ResponseHeader
-  /**
-   * 节点缓存配置。
-   */
-  CacheKey?: CacheKey
-  /**
-   * 缓存规则配置。
-   */
-  Cache?: Cache
-  /**
-   * Https配置。
-   */
-  Https?: Https
-  /**
-   * 访问协议强制跳转配置。
-   */
-  ForceRedirect?: ForceRedirect
-  /**
-   * 域名加速区域，mainland，overseas或global，分别表示中国境内加速，海外加速或全球加速。
-   */
-  Area?: string
-  /**
-   * WebSocket配置
-   */
-  WebSocket?: WebSocket
 }
 
 /**
@@ -773,26 +597,6 @@ export interface DomainBriefInfo {
 }
 
 /**
- * StartEcdnDomain返回参数结构体
- */
-export interface StartEcdnDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteEcdnDomain返回参数结构体
- */
-export interface DeleteEcdnDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 标签键和标签值
  */
 export interface Tag {
@@ -823,30 +627,6 @@ export interface WebSocket {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
-}
-
-/**
- * StopEcdnDomain返回参数结构体
- */
-export interface StopEcdnDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * PurgePathCache返回参数结构体
- */
-export interface PurgePathCacheResponse {
-  /**
-   * 刷新任务Id。
-   */
-  TaskId: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -884,64 +664,6 @@ export interface IpFilter {
 }
 
 /**
- * AddEcdnDomain请求参数结构体
- */
-export interface AddEcdnDomainRequest {
-  /**
-   * 域名。
-   */
-  Domain: string
-  /**
-   * 源站配置。
-   */
-  Origin: Origin
-  /**
-   * 域名加速区域，mainland，overseas或global，分别表示中国境内加速，海外加速或全球加速。
-   */
-  Area: string
-  /**
-   * 项目id，默认0。
-   */
-  ProjectId?: number
-  /**
-   * IP黑白名单配置。
-   */
-  IpFilter?: IpFilter
-  /**
-   * IP限频配置。
-   */
-  IpFreqLimit?: IpFreqLimit
-  /**
-   * 源站响应头部配置。
-   */
-  ResponseHeader?: ResponseHeader
-  /**
-   * 节点缓存配置。
-   */
-  CacheKey?: CacheKey
-  /**
-   * 缓存规则配置。
-   */
-  Cache?: Cache
-  /**
-   * Https配置。
-   */
-  Https?: Https
-  /**
-   * 访问协议强制跳转配置。
-   */
-  ForceRedirect?: ForceRedirect
-  /**
-   * 域名绑定的标签
-   */
-  Tag?: Array<Tag>
-  /**
-   * WebSocket配置
-   */
-  WebSocket?: WebSocket
-}
-
-/**
  * 自定义响应头配置。
  */
 export interface ResponseHeader {
@@ -975,16 +697,6 @@ export interface DescribeDomainsResponse {
 }
 
 /**
- * DeleteEcdnDomain请求参数结构体
- */
-export interface DeleteEcdnDomainRequest {
-  /**
-   * 待删除域名。
-   */
-  Domain: string
-}
-
-/**
  * DescribePurgeTasks返回参数结构体
  */
 export interface DescribePurgeTasksResponse {
@@ -996,16 +708,6 @@ export interface DescribePurgeTasksResponse {
    * 任务总数，用于分页。
    */
   TotalCount: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AddEcdnDomain返回参数结构体
- */
-export interface AddEcdnDomainResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1093,13 +795,17 @@ export interface CacheRule {
 }
 
 /**
- * DescribeEcdnStatistics返回参数结构体
+ * DescribeIpStatus返回参数结构体
  */
-export interface DescribeEcdnStatisticsResponse {
+export interface DescribeIpStatusResponse {
   /**
-   * 指定条件查询得到的数据明细
+   * 节点列表
    */
-  Data: Array<ResourceData>
+  Ips: Array<IpStatus>
+  /**
+   * 节点总个数
+   */
+  TotalCount: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1200,6 +906,35 @@ export interface CacheKey {
 }
 
 /**
+ * 域名查询时过滤条件。
+ */
+export interface DomainFilter {
+  /**
+   * 过滤字段名，支持的列表如下：
+- origin：主源站。
+- domain：域名。
+- resourceId：域名id。
+- status：域名状态，online，offline，processing。
+- disable：域名封禁状态，normal，unlicensed。
+- projectId：项目ID。
+- fullUrlCache：全路径缓存，on或off。
+- https：是否配置https，on，off或processing。
+- originPullProtocol：回源协议类型，支持http，follow或https。
+- area：加速区域，支持mainland，overseas或global。
+- tagKey：标签键。
+   */
+  Name: string
+  /**
+   * 过滤字段值。
+   */
+  Value: Array<string>
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
+   */
+  Fuzzy?: boolean
+}
+
+/**
  * DescribeEcdnDomainStatistics请求参数结构体
  */
 export interface DescribeEcdnDomainStatisticsRequest {
@@ -1245,24 +980,6 @@ global: 全部
 默认 global
    */
   Area?: string
-}
-
-/**
- * 刷新用量及刷新配额
- */
-export interface Quota {
-  /**
-   * 单次批量提交配额上限。
-   */
-  Batch: number
-  /**
-   * 每日提交配额上限。
-   */
-  Total: number
-  /**
-   * 每日剩余的可提交配额。
-   */
-  Available: number
 }
 
 /**
@@ -1427,14 +1144,4 @@ export interface DescribeDomainsRequest {
    * 查询条件过滤器。
    */
   Filters?: Array<DomainFilter>
-}
-
-/**
- * CreateVerifyRecord请求参数结构体
- */
-export interface CreateVerifyRecordRequest {
-  /**
-   * 要取回的域名
-   */
-  Domain: string
 }

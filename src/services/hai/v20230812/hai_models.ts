@@ -21,7 +21,6 @@
 export interface NetworkStatus {
   /**
    * HAI 的实例 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
@@ -36,12 +35,10 @@ export interface NetworkStatus {
   Bandwidth?: number
   /**
    * 流量包总量，单位GB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalTrafficAmount?: number
   /**
    * 流量包剩余量，单位GB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemainingTrafficAmount?: number
 }
@@ -314,25 +311,21 @@ export interface RegionInfo {
   /**
    * ap-guangzhou
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 华南地区(广州)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionName?: string
   /**
    * 地域是否可用状态
 AVAILABLE：可用
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionState?: string
   /**
    * 学术加速是否支持：
 NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。对于ALREADY_SUPPORT的地域才需进一步调用DescribeScholarRocketStatus查看学术加速是开启还是关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScholarRocketSupportState?: string
 }
@@ -404,7 +397,6 @@ export interface DescribeMuskPromptsRequest {
 export interface DescribeScenesResponse {
   /**
    * 场景详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneSet?: Array<SceneInfo>
   /**
@@ -457,13 +449,11 @@ export interface SceneInfo {
   /**
    * 场景id
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneId?: string
   /**
    * 场景名
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneName?: string
 }
@@ -660,7 +650,6 @@ export interface DescribeScenesRequest {
 export interface DescribeRegionsResponse {
   /**
    * 地域列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionSet?: Array<RegionInfo>
   /**

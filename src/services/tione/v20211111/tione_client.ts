@@ -154,6 +154,7 @@ import {
   DescribeBillingResourceGroupRequest,
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,
+  GooseFSx,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
   ModelInputInfo,

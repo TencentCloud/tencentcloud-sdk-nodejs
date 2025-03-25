@@ -450,30 +450,27 @@ export interface DescribeFlySecMiniAppScanTaskParamResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Ret: number
+  Ret?: number
   /**
    * 小程序AppID
    */
-  MiniAppID: string
+  MiniAppID?: string
   /**
    * 诊断模式 1:基础诊断，2:深度诊断
    */
-  Mode: number
+  Mode?: number
   /**
    * 小程序测试账号(自有账号体系需提供,其他情况不需要)
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniAppTestAccount: string
+  MiniAppTestAccount?: string
   /**
    * 小程序测试密码(自有账号体系需提供,其他情况不需要)
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniAppTestPwd: string
+  MiniAppTestPwd?: string
   /**
    * 诊断扫描版本 0:正式版 1:体验版
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVersion: number
+  ScanVersion?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

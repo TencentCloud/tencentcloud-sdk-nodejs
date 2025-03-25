@@ -3847,22 +3847,18 @@ export interface ClusterCondition {
   Status?: string
   /**
    * 最后一次探测到该状态的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastProbeTime?: string
   /**
    * 最后一次转换到该过程的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastTransitionTime?: string
   /**
    * 转换到该过程的简明原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
    * 转换到该过程的更多信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
 }
@@ -4027,17 +4023,14 @@ export interface DescribeAvailableTKEEdgeVersionRequest {
 export interface OpenConstraintInfo {
   /**
    * 策略实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 策略实例关联事件数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventNums?: number
   /**
    * 实例yaml详情base64编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   YamlDetail?: string
 }
@@ -7502,27 +7495,22 @@ export interface DescribePrometheusGlobalNotificationRequest {
 export interface ClusterPublicLB {
   /**
    * 是否开启公网访问LB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled: boolean
   /**
    * 允许访问的来源CIDR列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowFromCidrs?: Array<string>
   /**
    * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityPolicies?: Array<string>
   /**
    * 外网访问相关的扩展参数，格式为json
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraParam?: string
   /**
    * 新内外网功能，需要传递安全组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroup?: string
 }
@@ -7547,7 +7535,6 @@ export interface DescribePrometheusTemplateSyncResponse {
 export interface CreateEksLogConfigResponse {
   /**
    * 日志采集topicid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
@@ -11389,7 +11376,6 @@ export interface CreateClusterEndpointVipRequest {
 export interface ClusterInternalLB {
   /**
    * 是否开启内网访问LB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled: boolean
   /**

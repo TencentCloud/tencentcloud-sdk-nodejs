@@ -88,6 +88,16 @@ it("dbbrain.v20210527.DescribeSqlTemplate", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeDBPerfTimeSeries", async function () {
+    try {
+       const data = await client.DescribeDBPerfTimeSeries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeTopSpaceSchemas", async function () {
     try {
        const data = await client.DescribeTopSpaceSchemas({})
@@ -258,9 +268,9 @@ it("dbbrain.v20210527.DescribeSlowLogUserHostStats", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeSlowLogTopSqls", async function () {
+it("dbbrain.v20210527.DescribeRedisCmdPerfTimeSeries", async function () {
     try {
-       const data = await client.DescribeSlowLogTopSqls({})
+       const data = await client.DescribeRedisCmdPerfTimeSeries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +428,16 @@ it("dbbrain.v20210527.DescribeSecurityAuditLogExportTasks", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeSlowLogTopSqls", async function () {
+    try {
+       const data = await client.DescribeSlowLogTopSqls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeAllUserContact", async function () {
     try {
        const data = await client.DescribeAllUserContact({})
@@ -448,9 +468,9 @@ it("dbbrain.v20210527.DescribeSlowLogs", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeUserAutonomyProfile", async function () {
+it("dbbrain.v20210527.DescribeRedisCommandOverview", async function () {
     try {
-       const data = await client.DescribeUserAutonomyProfile({})
+       const data = await client.DescribeRedisCommandOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +481,16 @@ it("dbbrain.v20210527.DescribeUserAutonomyProfile", async function () {
 it("dbbrain.v20210527.DescribeDBDiagEvent", async function () {
     try {
        const data = await client.DescribeDBDiagEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeUserAutonomyProfile", async function () {
+    try {
+       const data = await client.DescribeUserAutonomyProfile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +721,16 @@ it("dbbrain.v20210527.CreateDBDiagReportUrl", async function () {
 it("dbbrain.v20210527.VerifyUserAccount", async function () {
     try {
        const data = await client.VerifyUserAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeRedisCommandCostStatistics", async function () {
+    try {
+       const data = await client.DescribeRedisCommandCostStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

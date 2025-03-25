@@ -18,49 +18,9 @@ const client = new tencentcloud.ecdn.v20191012.Client({
 })
 describe("ecdn.v20191012.test.js", function () {
 
-it("ecdn.v20191012.AddEcdnDomain", async function () {
-    try {
-       const data = await client.AddEcdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ecdn.v20191012.DescribeIpStatus", async function () {
     try {
        const data = await client.DescribeIpStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.PurgePathCache", async function () {
-    try {
-       const data = await client.PurgePathCache({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.StartEcdnDomain", async function () {
-    try {
-       const data = await client.StartEcdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.UpdateDomainConfig", async function () {
-    try {
-       const data = await client.UpdateDomainConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,39 +58,9 @@ it("ecdn.v20191012.DescribeDomainsConfig", async function () {
     }
 })
 
-it("ecdn.v20191012.DescribePurgeQuota", async function () {
-    try {
-       const data = await client.DescribePurgeQuota({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ecdn.v20191012.PurgeUrlsCache", async function () {
     try {
        const data = await client.PurgeUrlsCache({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.StopEcdnDomain", async function () {
-    try {
-       const data = await client.StopEcdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.DeleteEcdnDomain", async function () {
-    try {
-       const data = await client.DeleteEcdnDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +78,9 @@ it("ecdn.v20191012.DescribeDomains", async function () {
     }
 })
 
-it("ecdn.v20191012.CreateVerifyRecord", async function () {
+it("ecdn.v20191012.DescribeEcdnStatistics", async function () {
     try {
-       const data = await client.CreateVerifyRecord({})
+       const data = await client.DescribeEcdnStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,16 +91,6 @@ it("ecdn.v20191012.CreateVerifyRecord", async function () {
 it("ecdn.v20191012.DescribeEcdnDomainStatistics", async function () {
     try {
        const data = await client.DescribeEcdnDomainStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.DescribeEcdnStatistics", async function () {
-    try {
-       const data = await client.DescribeEcdnStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

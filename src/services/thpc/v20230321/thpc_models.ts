@@ -125,6 +125,10 @@ export interface NodeOverview {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeId?: string
+  /**
+   * 节点的工作状态
+   */
+  NodeAllocateState?: string
 }
 
 /**
@@ -489,12 +493,10 @@ export interface DescribeClustersRequest {
 export interface TagSpecification {
   /**
    * 标签绑定的资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType: string
   /**
    * 标签对列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags: Array<Tag>
 }
@@ -585,7 +587,6 @@ export interface QueueConfigOverview {
   ExpansionNodeConfigs?: Array<ExpansionNodeConfigOverview>
   /**
    * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DesiredIdleNodeCapacity?: number
   /**
@@ -595,19 +596,16 @@ export interface QueueConfigOverview {
   /**
    * 扩容比例。默认值：100。取值范围：1～100。
 如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleOutRatio?: number
   /**
    * 比例扩容阈值。默认值：0。取值范围：0～200。
 当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
 此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleOutNodeThreshold?: number
   /**
    * 每轮扩容最大节点个数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxNodesPerCycle?: number
   /**
@@ -616,7 +614,6 @@ export interface QueueConfigOverview {
 
 - 当ScaleUpMemRatio=0时，会匹配到16GB内存规格的实例,但是由于操作系统内的可用内存为14.9GB小于作业所需的15GB，扩容出来的实例作业无法运行起来。
 - 当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleUpMemRatio?: number
 }
@@ -688,7 +685,6 @@ export interface DeleteClusterStorageOptionRequest {
 export interface RunMonitorServiceEnabled {
   /**
    * 是否开启[腾讯云可观测平台](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启腾讯云可观测平台服务</li><br><li>FALSE：表示不开启腾讯云可观测平台服务</li><br><br>默认取值：TRUE。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
 }
@@ -898,7 +894,6 @@ export interface DataDisk {
 export interface QueueOverview {
   /**
    * 队列名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueName?: string
 }
@@ -923,17 +918,14 @@ export interface LoginSettings {
 export interface EnhancedService {
   /**
    * 开启云安全服务。若不指定该参数，则默认开启云安全服务。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityService?: RunSecurityServiceEnabled
   /**
    * 开启腾讯云可观测平台服务。若不指定该参数，则默认开启腾讯云可观测平台服务。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorService?: RunMonitorServiceEnabled
   /**
    * 开启云自动化助手服务（TencentCloud Automation Tools，TAT）。若不指定该参数，默认开启云自动化助手服务。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutomationService?: RunAutomationServiceEnabled
 }
@@ -1202,12 +1194,10 @@ export interface NodeScript {
   /**
    * 节点执行脚本获取地址。
 目前仅支持cos地址。地址最大长度：255。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptPath: string
   /**
    * 脚本执行超时时间（包含拉取脚本的时间）。单位秒，默认值：30。取值范围：10～1200。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
 }
@@ -2120,12 +2110,10 @@ export interface GooseFSxOption {
 export interface SpacePlacement {
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone: string
   /**
    * 项目，默认是0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
 }

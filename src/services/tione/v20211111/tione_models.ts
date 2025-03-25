@@ -4049,6 +4049,10 @@ export interface ModelInfo {
    */
   CosPathInfo?: CosPathInfo
   /**
+   * GooseFSx的配置，ModelSource为GooseFSx时有效
+   */
+  GooseFSx?: GooseFSx
+  /**
    * 模型对应的算法框架，预留
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4981,6 +4985,20 @@ export interface ChatCompletionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GosseFSx的配置
+ */
+export interface GooseFSx {
+  /**
+   * goosefsx实例id
+   */
+  Id?: string
+  /**
+   * GooseFSx实例需要挂载的路径
+   */
+  Path?: string
 }
 
 /**

@@ -727,8 +727,7 @@ export interface MQTTInstanceItem {
    */
   Version?: string
   /**
-   * 实例类型，
-EXPERIMENT，体验版
+   * 实例类型
 BASIC，基础版
 PRO，专业版
 PLATINUM，铂金版
@@ -769,7 +768,7 @@ DELETING，删除中
    */
   TpsLimit?: number
   /**
-   * 创建时间
+   * 创建时间，毫秒级时间戳
    */
   CreateTime?: number
   /**
@@ -781,7 +780,9 @@ DELETING，删除中
    */
   ClientNumLimit?: number
   /**
-   * 是否自动续费
+   * 是否自动续费。仅包年包月就去那生效。
+1:自动续费
+0:非自动续费
    */
   RenewFlag?: number
   /**
@@ -789,11 +790,11 @@ DELETING，删除中
    */
   PayMode?: string
   /**
-   * 到期时间，秒为单位
+   * 到期时间，毫秒级时间戳
    */
   ExpiryTime?: number
   /**
-   * 预销毁时间
+   * 预销毁时间，毫秒级时间戳
    */
   DestroyTime?: number
   /**
@@ -1573,7 +1574,7 @@ export interface DescribeInsVPCEndpointsRequest {
  */
 export interface DescribeTopicListRequest {
   /**
-   * 实例ID
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -2279,18 +2280,18 @@ export interface DescribeDeviceCertificateResponse {
  */
 export interface DescribeInstanceListRequest {
   /**
-   * 查询条件列表,支持以下子弹
+   * 查询条件列表,支持以下字段
 InstanceName：集群名模糊搜索
 InstanceId：集群id精确搜索
-InstanceStatus：集群状态搜索
+InstanceStatus：集群状态搜索（RUNNING-运行中，CREATING-创建中，MODIFYING-变配中，DELETING-删除中）
    */
   Filters?: Array<Filter>
   /**
-   * 查询起始位置
+   * 查询起始位置，默认0
    */
   Offset?: number
   /**
-   * 查询结果限制数量
+   * 查询结果限制数量，默认20，最大100
    */
   Limit?: number
   /**

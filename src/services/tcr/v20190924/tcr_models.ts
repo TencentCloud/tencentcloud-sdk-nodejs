@@ -380,12 +380,10 @@ export interface DuplicateImagePersonalRequest {
 export interface RetentionRule {
   /**
    * 支持的策略，可选值为latestPushedK（保留最新推送多少个版本）nDaysSinceLastPush（保留近天内推送）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 规则设置下的对应值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: number
 }
@@ -1585,11 +1583,11 @@ export interface DescribeWebhookTriggerResponse {
   /**
    * 触发器总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 触发器列表
    */
-  Triggers: Array<WebhookTrigger>
+  Triggers?: Array<WebhookTrigger>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2078,11 +2076,11 @@ export interface DescribeRepositoriesRequest {
    */
   RepositoryName?: string
   /**
-   * 页数，用于分页
+   * 页数，第几页，用于分页
    */
   Offset?: number
   /**
-   * 每页个数，用于分页
+   * 每页个数，用于分页，最大值为100
    */
   Limit?: number
   /**
@@ -2446,7 +2444,6 @@ export interface WebhookTrigger {
   NamespaceId?: number
   /**
    * 触发器所属命名空间名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName?: string
 }
@@ -5060,33 +5057,31 @@ export interface TcrRepositoryInfo {
   /**
    * 仓库名称
    */
-  Name: string
+  Name?: string
   /**
    * 命名空间名称
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 创建时间，格式"2006-01-02 15:04:05.999999999 -0700 MST"
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 是否公开
    */
-  Public: boolean
+  Public?: boolean
   /**
    * 仓库详细描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 简单描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  BriefDescription: string
+  BriefDescription?: string
   /**
    * 更新时间，格式"2006-01-02 15:04:05.999999999 -0700 MST"
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**

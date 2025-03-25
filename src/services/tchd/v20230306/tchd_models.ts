@@ -101,7 +101,6 @@ export interface TotalStatus {
   NotifyCount?: number
   /**
    * 异常状态的数目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AbnormalCount?: number
 }

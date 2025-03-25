@@ -1653,12 +1653,10 @@ export interface DescribeSlowLogTopSqlsRequest {
 export interface DescribeMailProfileResponse {
   /**
    * 邮件配置详情。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileList?: Array<UserProfile>
   /**
    * 邮件模板总数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**

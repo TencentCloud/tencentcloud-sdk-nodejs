@@ -339,12 +339,10 @@ export interface TableSpaceTimeSeries {
 export interface DescribeAuditLogFilesResponse {
   /**
    * 符合条件的审计日志文件个数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 审计日志文件详情。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<AuditLogFile>
   /**
@@ -434,25 +432,37 @@ export interface DescribeSlowLogsRequest {
 }
 
 /**
- * DescribeTopSpaceTables请求参数结构体
+ * DescribeRedisCmdPerfTimeSeries请求参数结构体
  */
-export interface DescribeTopSpaceTablesRequest {
+export interface DescribeRedisCmdPerfTimeSeriesRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID
    */
   InstanceId: string
   /**
-   * 返回的Top表数量，最大值为100，默认为20。
+   * 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。
    */
-  Limit?: number
+  Product: string
   /**
-   * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
+   * 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。
    */
-  SortBy?: string
+  StartTime: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。
    */
-  Product?: string
+  EndTime: string
+  /**
+   * 需要分析的redis命令
+   */
+  CommandList: Array<string>
+  /**
+   * 监控指标，以逗号分隔
+   */
+  Metric: string
+  /**
+   * 监控指标时间粒度，单位秒，若不提供则根据开始时间和结束时间取默认值
+   */
+  Period?: number
 }
 
 /**
@@ -1148,21 +1158,37 @@ export interface ModifyUserAutonomyProfileResponse {
 }
 
 /**
- * CancelRedisBigKeyAnalysisTasks请求参数结构体
+ * DescribeIndexRecommendInfo返回参数结构体
  */
-export interface CancelRedisBigKeyAnalysisTasksRequest {
+export interface DescribeIndexRecommendInfoResponse {
   /**
-   * 自治任务ID。
+   * 索引推荐的集合数量。
    */
-  AsyncRequestIds: Array<number | bigint>
+  CollectionNum?: number
   /**
-   * 实列ID。
+   * 索引推荐的索引数量。
    */
-  InstanceId: string
+  IndexNum?: number
   /**
-   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   * 索引项。
    */
-  Product: string
+  Items?: Array<MongoDBIndex>
+  /**
+   * 优化级别，1-4，优先级从高到低。
+   */
+  Level?: number
+  /**
+   * 历史优化数。
+   */
+  Optimized?: number
+  /**
+   * 累计优化条数。
+   */
+  OptimizedCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1635,6 +1661,28 @@ export interface AuditLogFile {
 }
 
 /**
+ * DescribeRedisCommandCostStatistics请求参数结构体
+ */
+export interface DescribeRedisCommandCostStatisticsRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。
+   */
+  StartTime: string
+  /**
+   * 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。
+   */
+  EndTime: string
+  /**
+   * 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。
+   */
+  Product: string
+}
+
+/**
  * ModifyDiagDBInstanceConf请求参数结构体
  */
 export interface ModifyDiagDBInstanceConfRequest {
@@ -1846,6 +1894,48 @@ export interface DescribeDBDiagHistoryRequest {
    * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * 慢日志详细信息
+ */
+export interface SlowLogInfoItem {
+  /**
+   * 慢日志开始时间
+   */
+  Timestamp?: string
+  /**
+   * sql语句
+   */
+  SqlText?: string
+  /**
+   * 数据库
+   */
+  Database?: string
+  /**
+   * User来源
+   */
+  UserName?: string
+  /**
+   * IP来源
+   */
+  UserHost?: string
+  /**
+   * 执行时间,单位秒
+   */
+  QueryTime?: number
+  /**
+   * 锁时间,单位秒
+   */
+  LockTime?: number
+  /**
+   * 扫描行数
+   */
+  RowsExamined?: number
+  /**
+   * 返回行数
+   */
+  RowsSent?: number
 }
 
 /**
@@ -2103,6 +2193,20 @@ export interface DescribeProxyProcessStatisticsResponse {
 }
 
 /**
+ * redis命令延迟趋势
+ */
+export interface CmdPerfInfo {
+  /**
+   * redis命令
+   */
+  Command?: string
+  /**
+   * 监控数据
+   */
+  SeriesData?: MonitorMetricSeriesData
+}
+
+/**
  * 热key分析返回信息
  */
 export interface TopHotKeys {
@@ -2158,6 +2262,20 @@ export interface SlowLogHost {
    * 该来源地址的慢日志数目。
    */
   Count: number
+}
+
+/**
+ * DescribeRedisCmdPerfTimeSeries返回参数结构体
+ */
+export interface DescribeRedisCmdPerfTimeSeriesResponse {
+  /**
+   * redis命令延迟趋势
+   */
+  CmdPerfList?: Array<CmdPerfInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2845,6 +2963,20 @@ export interface DescribeAllUserContactResponse {
 }
 
 /**
+ * DescribeRedisCommandCostStatistics返回参数结构体
+ */
+export interface DescribeRedisCommandCostStatisticsResponse {
+  /**
+   * redis延迟分布区间
+   */
+  CmdCostGroups?: Array<CmdCostGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 监控数据
  */
 export interface MonitorMetric {
@@ -2982,6 +3114,28 @@ export interface InstanceBasicInfo {
    * 实例引擎版本。
    */
   EngineVersion?: string
+}
+
+/**
+ * DescribeTopSpaceTables请求参数结构体
+ */
+export interface DescribeTopSpaceTablesRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+  /**
+   * 返回的Top表数量，最大值为100，默认为20。
+   */
+  Limit?: number
+  /**
+   * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
+   */
+  SortBy?: string
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -3534,6 +3688,20 @@ export interface CreateSchedulerMailProfileResponse {
 }
 
 /**
+ * redis访问命令详情
+ */
+export interface RedisCmdInfo {
+  /**
+   * redis命令
+   */
+  Cmd?: string
+  /**
+   * 命令次数
+   */
+  Count?: number
+}
+
+/**
  * DescribeAlarmTemplate返回参数结构体
  */
 export interface DescribeAlarmTemplateResponse {
@@ -3645,18 +3813,38 @@ export interface DescribeDBDiagEventsResponse {
 export interface DescribeMailProfileResponse {
   /**
    * 邮件配置详情。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProfileList?: Array<UserProfile>
   /**
    * 邮件配置总数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * redis延迟分布区间详情
+ */
+export interface CmdCostGroup {
+  /**
+   * 该延迟区间内命令数占总命令数百分比
+   */
+  Percent?: number
+  /**
+   * 延迟区间上界，单位ms
+   */
+  CostUpperLimit?: string
+  /**
+   * 延迟区间下界，单位ms
+   */
+  CostLowerLimit?: string
+  /**
+   * 该延迟区间内命令次数
+   */
+  Count?: number
 }
 
 /**
@@ -3698,37 +3886,21 @@ export interface DescribeRedisTopBigKeysRequest {
 }
 
 /**
- * DescribeIndexRecommendInfo返回参数结构体
+ * CancelRedisBigKeyAnalysisTasks请求参数结构体
  */
-export interface DescribeIndexRecommendInfoResponse {
+export interface CancelRedisBigKeyAnalysisTasksRequest {
   /**
-   * 索引推荐的集合数量。
+   * 自治任务ID。
    */
-  CollectionNum?: number
+  AsyncRequestIds: Array<number | bigint>
   /**
-   * 索引推荐的索引数量。
+   * 实列ID。
    */
-  IndexNum?: number
+  InstanceId: string
   /**
-   * 索引项。
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
-  Items?: Array<MongoDBIndex>
-  /**
-   * 优化级别，1-4，优先级从高到低。
-   */
-  Level?: number
-  /**
-   * 历史优化数。
-   */
-  Optimized?: number
-  /**
-   * 累计优化条数。
-   */
-  OptimizedCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Product: string
 }
 
 /**
@@ -3985,6 +4157,20 @@ export interface SchemaItem {
    * 数据库名称
    */
   Schema: string
+}
+
+/**
+ * DescribeRedisCommandOverview返回参数结构体
+ */
+export interface DescribeRedisCommandOverviewResponse {
+  /**
+   * redis访问命令统计
+   */
+  CmdList?: Array<RedisCmdInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4278,21 +4464,25 @@ information-通知
 }
 
 /**
- * DescribeRedisTopKeyPrefixList返回参数结构体
+ * DescribeRedisCommandOverview请求参数结构体
  */
-export interface DescribeRedisTopKeyPrefixListResponse {
+export interface DescribeRedisCommandOverviewRequest {
   /**
-   * top key前缀列表。
+   * 实例 ID
    */
-  Items?: Array<RedisPreKeySpaceData>
+  InstanceId: string
   /**
-   * 采集时间戳（秒）。
+   * 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。
    */
-  Timestamp?: number
+  StartTime: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。
    */
-  RequestId?: string
+  EndTime: string
+  /**
+   * 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。
+   */
+  Product: string
 }
 
 /**
@@ -4664,45 +4854,35 @@ export interface MonitorMetricSeriesData {
 }
 
 /**
- * 慢日志详细信息
+ * DescribeDBPerfTimeSeries返回参数结构体
  */
-export interface SlowLogInfoItem {
+export interface DescribeDBPerfTimeSeriesResponse {
   /**
-   * 慢日志开始时间
+   * 实列性能数据。
    */
-  Timestamp?: string
+  Data?: MonitorMetricSeriesData
   /**
-   * sql语句
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SqlText?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeRedisTopKeyPrefixList返回参数结构体
+ */
+export interface DescribeRedisTopKeyPrefixListResponse {
   /**
-   * 数据库
+   * top key前缀列表。
    */
-  Database?: string
+  Items?: Array<RedisPreKeySpaceData>
   /**
-   * User来源
+   * 采集时间戳（秒）。
    */
-  UserName?: string
+  Timestamp?: number
   /**
-   * IP来源
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserHost?: string
-  /**
-   * 执行时间,单位秒
-   */
-  QueryTime?: number
-  /**
-   * 锁时间,单位秒
-   */
-  LockTime?: number
-  /**
-   * 扫描行数
-   */
-  RowsExamined?: number
-  /**
-   * 返回行数
-   */
-  RowsSent?: number
+  RequestId?: string
 }
 
 /**
@@ -4845,6 +5025,52 @@ export interface DescribeNoPrimaryKeyTablesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDBPerfTimeSeries请求参数结构体
+ */
+export interface DescribeDBPerfTimeSeriesRequest {
+  /**
+   * 需要获取性能趋势的实例ID。
+   */
+  InstanceId: string
+  /**
+   * 开始时间。
+   */
+  StartTime: string
+  /**
+   * 结束时间。
+   */
+  EndTime: string
+  /**
+   * 指标名称，多个指标之间用逗号分隔。
+   */
+  Metric: string
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB
+   */
+  Product: string
+  /**
+   * 需要获取性能趋势的集群ID。
+   */
+  ClusterId?: string
+  /**
+   * 性能数据统计粒度。
+   */
+  Period?: number
+  /**
+   * 实列节点ID。
+   */
+  InstanceNodeId?: string
+  /**
+   * 实列代理ID。
+   */
+  InstanceProxyId?: string
+  /**
+   * 代理节点ID。
+   */
+  ProxyId?: string
 }
 
 /**

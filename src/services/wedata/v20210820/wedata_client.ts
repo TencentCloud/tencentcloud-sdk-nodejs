@@ -1293,7 +1293,7 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
    * 添加项目用户角色
    */
   async AddProjectUserRole(
-    req?: AddProjectUserRoleRequest,
+    req: AddProjectUserRoleRequest,
     cb?: (error: string, rep: AddProjectUserRoleResponse) => void
   ): Promise<AddProjectUserRoleResponse> {
     return this.request("AddProjectUserRole", req, cb)

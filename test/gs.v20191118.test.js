@@ -18,26 +18,6 @@ const client = new tencentcloud.gs.v20191118.Client({
 })
 describe("gs.v20191118.test.js", function () {
 
-it("gs.v20191118.DescribeInstancesCount", async function () {
-    try {
-       const data = await client.DescribeInstancesCount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gs.v20191118.TrylockWorker", async function () {
-    try {
-       const data = await client.TrylockWorker({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gs.v20191118.StopGame", async function () {
     try {
        const data = await client.StopGame({})
@@ -48,9 +28,9 @@ it("gs.v20191118.StopGame", async function () {
     }
 })
 
-it("gs.v20191118.SaveGameArchive", async function () {
+it("gs.v20191118.SyncExecuteCommandOnAndroidInstances", async function () {
     try {
-       const data = await client.SaveGameArchive({})
+       const data = await client.SyncExecuteCommandOnAndroidInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +48,139 @@ it("gs.v20191118.StartPublishStreamToCSS", async function () {
     }
 })
 
+it("gs.v20191118.CreateAndroidInstanceSSH", async function () {
+    try {
+       const data = await client.CreateAndroidInstanceSSH({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.UninstallAndroidInstancesApp", async function () {
+    try {
+       const data = await client.UninstallAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CreateAndroidInstanceImage", async function () {
+    try {
+       const data = await client.CreateAndroidInstanceImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.TrylockWorker", async function () {
+    try {
+       const data = await client.TrylockWorker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ModifyAndroidInstanceInformation", async function () {
+    try {
+       const data = await client.ModifyAndroidInstanceInformation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DeleteAndroidInstanceImages", async function () {
+    try {
+       const data = await client.DeleteAndroidInstanceImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DescribeAndroidInstanceLabels", async function () {
+    try {
+       const data = await client.DescribeAndroidInstanceLabels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DescribeAndroidInstanceImages", async function () {
+    try {
+       const data = await client.DescribeAndroidInstanceImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StartAndroidInstancesApp", async function () {
+    try {
+       const data = await client.StartAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.RestartAndroidInstancesApp", async function () {
+    try {
+       const data = await client.RestartAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DeleteAndroidInstanceLabel", async function () {
+    try {
+       const data = await client.DeleteAndroidInstanceLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.SwitchGameArchive", async function () {
     try {
        const data = await client.SwitchGameArchive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CreateAndroidInstanceLabel", async function () {
+    try {
+       const data = await client.CreateAndroidInstanceLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CreateAndroidInstanceWebShell", async function () {
+    try {
+       const data = await client.CreateAndroidInstanceWebShell({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,6 +198,96 @@ it("gs.v20191118.StartPublishStream", async function () {
     }
 })
 
+it("gs.v20191118.DescribeAndroidInstances", async function () {
+    try {
+       const data = await client.DescribeAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.SyncAndroidInstanceImage", async function () {
+    try {
+       const data = await client.SyncAndroidInstanceImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.RebootAndroidInstances", async function () {
+    try {
+       const data = await client.RebootAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DescribeInstancesCount", async function () {
+    try {
+       const data = await client.DescribeInstancesCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CreateAndroidInstances", async function () {
+    try {
+       const data = await client.CreateAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+    try {
+       const data = await client.UploadFileToAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StartAndroidInstances", async function () {
+    try {
+       const data = await client.StartAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ModifyAndroidInstanceResolution", async function () {
+    try {
+       const data = await client.ModifyAndroidInstanceResolution({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ConnectAndroidInstance", async function () {
+    try {
+       const data = await client.ConnectAndroidInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.StopPublishStream", async function () {
     try {
        const data = await client.StopPublishStream({})
@@ -98,9 +298,139 @@ it("gs.v20191118.StopPublishStream", async function () {
     }
 })
 
+it("gs.v20191118.DescribeAndroidInstanceApps", async function () {
+    try {
+       const data = await client.DescribeAndroidInstanceApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StopAndroidInstancesApp", async function () {
+    try {
+       const data = await client.StopAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CreateSession", async function () {
     try {
        const data = await client.CreateSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ResetAndroidInstances", async function () {
+    try {
+       const data = await client.ResetAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.InstallAndroidInstancesApp", async function () {
+    try {
+       const data = await client.InstallAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DescribeAndroidApps", async function () {
+    try {
+       const data = await client.DescribeAndroidApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CopyAndroidInstance", async function () {
+    try {
+       const data = await client.CopyAndroidInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DestroyAndroidInstances", async function () {
+    try {
+       const data = await client.DestroyAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesUserId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ExecuteCommandOnAndroidInstances", async function () {
+    try {
+       const data = await client.ExecuteCommandOnAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StopAndroidInstances", async function () {
+    try {
+       const data = await client.StopAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ModifyAndroidInstancesLabels", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesLabels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.SaveGameArchive", async function () {
+    try {
+       const data = await client.SaveGameArchive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DescribeAndroidInstanceTasksStatus", async function () {
+    try {
+       const data = await client.DescribeAndroidInstanceTasksStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

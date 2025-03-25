@@ -1828,6 +1828,10 @@ export interface KillOpsMakePlanInstancesRequest {
  */
 export interface AddProjectUserRoleResponse {
   /**
+   * 返回数据
+   */
+  Data?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4545,7 +4549,20 @@ export interface Rule {
 /**
  * AddProjectUserRole请求参数结构体
  */
-export type AddProjectUserRoleRequest = null
+export interface AddProjectUserRoleRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 用户uin
+   */
+  UserIds: Array<string>
+  /**
+   * 角色id
+   */
+  RoleIds: Array<string>
+}
 
 /**
  * ModifyRuleGroupSubscription请求参数结构体
@@ -9967,6 +9984,11 @@ export interface AlarmReceiverInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LarkGroup?: number
+  /**
+   * 发送结果 大json格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmMessageSendResult?: string
 }
 
 /**
@@ -16542,6 +16564,11 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessType?: number
+  /**
+   * alarm message rule
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmMessageRule?: string
 }
 
 /**

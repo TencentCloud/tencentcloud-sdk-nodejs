@@ -192,22 +192,18 @@ export interface LogInfo {
   PkgLogId?: string
   /**
    * 日志内容的Json序列化字符串
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogJson?: string
   /**
    * 日志来源主机名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostName?: string
   /**
    * 原始日志(仅在日志创建索引异常时有值)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RawLog?: string
   /**
    * 日志创建索引异常原因(仅在日志创建索引异常时有值)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStatus?: string
 }
@@ -349,7 +345,6 @@ export interface DeleteScheduledSqlRequest {
 export interface DynamicIndex {
   /**
    * 键值索引自动配置开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: boolean
 }
@@ -1115,37 +1110,30 @@ export interface CreateConfigExtraResponse {
 export interface KafkaRechargeInfo {
   /**
    * Kafka数据订阅配置的ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * Kafka导入任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaType?: number
   /**
    * 腾讯云CKafka实例ID，KafkaType为0时必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaInstance?: string
   /**
    * 服务地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerAddr?: string
   /**
-   * ServerAddr是否为加密连接	
-注意：此字段可能返回 null，表示取不到有效值。
+   * ServerAddr是否为加密连接
    */
   IsEncryptionAddr?: boolean
   /**
@@ -1154,37 +1142,30 @@ export interface KafkaRechargeInfo {
   Protocol?: KafkaProtocolInfo
   /**
    * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserKafkaTopics?: string
   /**
-   * 用户Kafka消费组名称	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户Kafka消费组名称
    */
   ConsumerGroupName?: string
   /**
    * 状态 ，1：运行中；2：暂停。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 导入数据位置，-2:最早（默认），-1：最晚
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Offset?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 日志导入规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogRechargeRule?: LogRechargeRuleInfo
 }
@@ -1213,12 +1194,10 @@ export interface ContainerWorkLoadInfo {
   Name: string
   /**
    * 容器名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Container?: string
   /**
    * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
 }
@@ -1713,7 +1692,6 @@ export interface DashboardNoticeMode {
    * 回调Url。
 <br><li/> 当ReceiverType是 Wecom 时，Url必填。
 <br><li/> 当ReceiverType不是 Wecom 时，Url不能填写。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
 }
@@ -1725,25 +1703,21 @@ export interface KafkaProtocolInfo {
   /**
    * 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证。
 入参必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
    * 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512。
 当Protocol为sasl_plaintext或sasl_ssl时必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mechanism?: string
   /**
    * 用户名。
 当Protocol为sasl_plaintext或sasl_ssl时必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * 用户密码。
 当Protocol为sasl_plaintext或sasl_ssl时必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
 }
@@ -2233,7 +2207,6 @@ export interface FullTextInfo {
   Tokenizer: string
   /**
    * 是否包含中文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainZH?: boolean
 }
@@ -2799,7 +2772,6 @@ export interface SearchLogInfos {
   Period?: number
   /**
    * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
 }
@@ -2921,12 +2893,10 @@ export interface EscalateNoticeInfo {
   WebCallbacks: Array<WebCallback>
   /**
    * 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Escalate?: boolean
   /**
    * 告警升级间隔。单位：分钟，范围`[1，14400]`
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Interval?: number
   /**
@@ -2934,12 +2904,10 @@ export interface EscalateNoticeInfo {
 - 无人认领且未恢复：告警没有恢复并且没有人认领则升级
 - 未恢复：当前告警持续未恢复则升级
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 告警升级后下一个环节的通知渠道配置，最多可配置5个环节。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EscalateNotice?: EscalateNoticeInfo
 }
@@ -3754,22 +3722,18 @@ export interface DashboardSubscribeData {
   TemplateVariables?: Array<DashboardTemplateVariable>
   /**
    * 时区。参考：https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#SHANGHAI
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timezone?: string
   /**
    * 语言。 zh 中文、en`英文。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscribeLanguage?: string
   /**
    * 调用链接域名。http:// 或者 https:// 开头，不能/结尾
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JumpDomain?: string
   /**
    * 自定义跳转链接。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JumpUrl?: string
 }
@@ -3947,27 +3911,22 @@ export interface AnonymousInfo {
 export interface ExtractRuleInfo {
   /**
    * 时间字段的key名字，TikeKey和TimeFormat必须成对出现
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeKey?: string
   /**
    * 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeFormat?: string
   /**
    * 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Delimiter?: string
   /**
    * 整条日志匹配规则，只有LogType为fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogRegex?: string
   /**
    * 行首匹配规则，只有LogType为multiline_log或fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginRegex?: string
   /**
@@ -3979,7 +3938,6 @@ export interface ExtractRuleInfo {
    * 日志过滤规则列表（旧版），需要过滤日志的key，及其对应的regex。
  注意：2.9.3及以上版本LogListener ，建议使用AdvanceFilterRules配置日志过滤规则。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterKeyRegex?: Array<KeyRegexInfo>
   /**
@@ -4004,7 +3962,6 @@ export interface ExtractRuleInfo {
 注意
 - 目前取0值时，表示UTF-8编码
 - COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsGBK?: number
   /**
@@ -4018,7 +3975,6 @@ export interface ExtractRuleInfo {
 注意：
 - 该字段适用于：创建采集规则配置、修改采集规则配置。
 - COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
@@ -4026,7 +3982,6 @@ export interface ExtractRuleInfo {
 注意：
 - 该字段适用于：创建采集规则配置、修改采集规则配置。
 - COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
@@ -4037,7 +3992,6 @@ auto：自动匹配rfc3164或者rfc5424其中一种协议。
 注意：
 - 该字段适用于：创建采集规则配置、修改采集规则配置
 - COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParseProtocol?: string
   /**
@@ -4057,7 +4011,6 @@ auto：自动匹配rfc3164或者rfc5424其中一种协议。
 注意：
 - MetadataType为3时必填。
 - COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PathRegex?: string
   /**
@@ -4184,7 +4137,6 @@ TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
 平铺示例：
 TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
 平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagTransaction?: number
   /**
@@ -4222,12 +4174,10 @@ export interface LogsetInfo {
   CreateTime?: string
   /**
    * 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssumerName?: string
   /**
    * 日志集绑定的标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
@@ -4354,7 +4304,6 @@ export interface LogRechargeRuleInfo {
   DefaultTimeSwitch: boolean
   /**
    * 整条日志匹配规则，只有RechargeType为fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogRegex?: string
   /**
@@ -4363,47 +4312,38 @@ export interface LogRechargeRuleInfo {
   UnMatchLogSwitch?: boolean
   /**
    * 解析失败日志的键名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnMatchLogKey?: string
   /**
    * 解析失败日志时间来源，0: 系统当前时间，1: Kafka消息时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnMatchLogTimeSrc?: number
   /**
    * 默认时间来源，0: 系统当前时间，1: Kafka消息时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultTimeSrc?: number
   /**
    * 时间字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeKey?: string
   /**
    * 时间提取正则表达式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeRegex?: string
   /**
    * 时间字段格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeFormat?: string
   /**
    * 时间字段时区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeZone?: string
   /**
    * 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata?: Array<string>
   /**
    * 日志Key列表，RechargeType为full_regex_log时必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Keys?: Array<string>
   /**
@@ -4749,7 +4689,6 @@ export interface JsonInfo {
   MetaFields: Array<string>
   /**
    * 投递Json格式，0：字符串方式投递；1:以结构化方式投递
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonType?: number
 }
@@ -5272,17 +5211,14 @@ export interface PreviewLogStatistic {
 export interface SearchLogErrors {
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
    * 错误码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCodeStr?: string
 }
@@ -5536,7 +5472,6 @@ export interface ExportInfo {
   SyntaxRule?: number
   /**
    * 导出字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DerivedFields?: Array<string>
 }
@@ -5910,22 +5845,18 @@ export interface LogContextInfo {
   BTime?: number
   /**
    * 日志来源主机名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostName?: string
   /**
    * 原始日志(仅在日志创建索引异常时有值)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RawLog?: string
   /**
    * 日志创建索引异常原因(仅在日志创建索引异常时有值)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStatus?: string
   /**
    * 日志内容的高亮描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighLights?: Array<HighLightItem>
 }
@@ -6351,7 +6282,6 @@ export interface DashboardInfo {
   DashboardName?: string
   /**
    * 仪表盘数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -6360,37 +6290,30 @@ export interface DashboardInfo {
   CreateTime?: string
   /**
    * AssumerUin非空则表示创建该日志主题的服务方Uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssumerUin?: number
   /**
    * RoleName非空则表示创建该日志主题的服务方使用的角色
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleName?: string
   /**
    * AssumerName非空则表示创建该日志主题的服务方名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssumerName?: string
   /**
    * 日志主题绑定的标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 仪表盘所在地域： 为了兼容老的地域。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DashboardRegion?: string
   /**
    * 修改仪表盘的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 仪表盘对应的topic相关信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DashboardTopicInfos?: Array<DashboardTopicInfo>
 }
@@ -6453,17 +6376,14 @@ export interface DataTransformTaskInfo {
   EtlContent?: string
   /**
    * 数据加工类型。0：标准加工任务；1：前置加工任务。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataTransformType?: number
   /**
    * 保留失败日志状态。 1:不保留，2:保留
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeepFailureLog?: number
   /**
    * 失败日志的字段名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureLogKey?: string
 }
@@ -7315,12 +7235,10 @@ export interface MonitorTime {
 export interface SearchLogTopics {
   /**
    * 多日志主题检索对应的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Errors?: Array<SearchLogErrors>
   /**
    * 多日志主题检索各日志主题信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Infos?: Array<SearchLogInfos>
 }
@@ -8045,88 +7963,71 @@ export interface DeleteTopicResponse {
 export interface CosRechargeInfo {
   /**
    * COS导入配置ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * 日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogsetId?: string
   /**
    * COS导入任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * COS存储桶
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Bucket?: string
   /**
    * COS存储桶所在地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketRegion?: string
   /**
    * COS文件所在文件夹的前缀
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Prefix?: string
   /**
    * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；
 默认为minimalist_log
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogType?: string
   /**
    * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 是否启用:   0： 未启用  ， 1：启用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enable?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 进度条百分值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number
   /**
    * supported: "", "gzip", "lzop", "snappy”; 默认空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Compress?: string
   /**
    * 见： ExtractRuleInfo 结构描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtractRuleInfo?: ExtractRuleInfo
   /**
    * COS导入任务类型。1：一次性导入任务；2：持续性导入任务。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: number
   /**
    * 元数据。支持 bucket，object。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata?: Array<string>
 }

@@ -34,7 +34,7 @@ import {
   DescribeAuditLogFilesResponse,
   DescribeIndexRecommendAggregationSlowLogsRequest,
   DescribeSlowLogsRequest,
-  DescribeTopSpaceTablesRequest,
+  DescribeRedisCmdPerfTimeSeriesRequest,
   ScoreItem,
   CreateRedisBigKeyAnalysisTaskResponse,
   CreateSecurityAuditLogExportTaskRequest,
@@ -61,7 +61,7 @@ import {
   DescribeProxySessionKillTasksRequest,
   ModifyAlarmPolicyResponse,
   ModifyUserAutonomyProfileResponse,
-  CancelRedisBigKeyAnalysisTasksRequest,
+  DescribeIndexRecommendInfoResponse,
   CreateRedisBigKeyAnalysisTaskRequest,
   DescribeMySqlProcessListResponse,
   UpdateMonitorSwitchRequest,
@@ -82,6 +82,7 @@ import {
   DescribeRedisProcessListRequest,
   TimeSlice,
   AuditLogFile,
+  DescribeRedisCommandCostStatisticsRequest,
   ModifyDiagDBInstanceConfRequest,
   DescribeSlowLogsResponse,
   UpdateAgentSwitchRequest,
@@ -95,6 +96,7 @@ import {
   CancelKillTaskRequest,
   InstanceID,
   DescribeDBDiagHistoryRequest,
+  SlowLogInfoItem,
   CreateAuditLogFileResponse,
   AuditInstance,
   IndexesToBuild,
@@ -106,9 +108,11 @@ import {
   CreateProxySessionKillTaskRequest,
   DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
+  CmdPerfInfo,
   TopHotKeys,
   DescribeIndexRecommendInfoRequest,
   SlowLogHost,
+  DescribeRedisCmdPerfTimeSeriesResponse,
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
   MailConfiguration,
@@ -138,12 +142,14 @@ import {
   Aggregation,
   HealthStatus,
   DescribeAllUserContactResponse,
+  DescribeRedisCommandCostStatisticsResponse,
   MonitorMetric,
   ProfileInfo,
   UserProfile,
   AddUserContactRequest,
   CreateSqlFilterRequest,
   InstanceBasicInfo,
+  DescribeTopSpaceTablesRequest,
   ReceiveUin,
   SchemaSpaceData,
   DescribeAllUserContactRequest,
@@ -161,14 +167,16 @@ import {
   DescribeSecurityAuditLogExportTasksRequest,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
+  RedisCmdInfo,
   DescribeAlarmTemplateResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
   ModifyAuditServiceRequest,
   DescribeIndexRecommendAggregationSlowLogsResponse,
   DescribeDBDiagEventsResponse,
   DescribeMailProfileResponse,
+  CmdCostGroup,
   DescribeRedisTopBigKeysRequest,
-  DescribeIndexRecommendInfoResponse,
+  CancelRedisBigKeyAnalysisTasksRequest,
   Process,
   ModifyAuditServiceResponse,
   DescribeDBAutonomyEventsRequest,
@@ -181,6 +189,7 @@ import {
   DescribeRedisTopHotKeysResponse,
   CreateSecurityAuditLogExportTaskResponse,
   SchemaItem,
+  DescribeRedisCommandOverviewResponse,
   CreateSqlFilterResponse,
   DescribeSlowLogUserHostStatsRequest,
   DescribeTopSpaceSchemasResponse,
@@ -194,7 +203,7 @@ import {
   StatisticInfo,
   MonitorFloatMetric,
   ModifyAlarmPolicyRequest,
-  DescribeRedisTopKeyPrefixListResponse,
+  DescribeRedisCommandOverviewRequest,
   DescribeAllUserGroupResponse,
   DescribeRedisProcessListResponse,
   CreateAuditLogFileRequest,
@@ -209,7 +218,8 @@ import {
   DescribeUserSqlAdviceRequest,
   DescribeDBDiagReportTasksRequest,
   MonitorMetricSeriesData,
-  SlowLogInfoItem,
+  DescribeDBPerfTimeSeriesResponse,
+  DescribeRedisTopKeyPrefixListResponse,
   IndexesToDrop,
   DescribeHealthScoreResponse,
   CancelRedisBigKeyAnalysisTasksResponse,
@@ -217,6 +227,7 @@ import {
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
   DescribeNoPrimaryKeyTablesResponse,
+  DescribeDBPerfTimeSeriesRequest,
   DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
   DescribeDiagDBInstancesRequest,
@@ -303,6 +314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSqlTemplateResponse) => void
   ): Promise<DescribeSqlTemplateResponse> {
     return this.request("DescribeSqlTemplate", req, cb)
+  }
+
+  /**
+   * 根据实例ID获取指定时间段的性能趋势。
+   */
+  async DescribeDBPerfTimeSeries(
+    req: DescribeDBPerfTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeDBPerfTimeSeriesResponse) => void
+  ): Promise<DescribeDBPerfTimeSeriesResponse> {
+    return this.request("DescribeDBPerfTimeSeries", req, cb)
   }
 
   /**
@@ -476,13 +497,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+   * 延迟分析-命令字分析-查询命令延迟趋势
    */
-  async DescribeSlowLogTopSqls(
-    req: DescribeSlowLogTopSqlsRequest,
-    cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
-  ): Promise<DescribeSlowLogTopSqlsResponse> {
-    return this.request("DescribeSlowLogTopSqls", req, cb)
+  async DescribeRedisCmdPerfTimeSeries(
+    req: DescribeRedisCmdPerfTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeRedisCmdPerfTimeSeriesResponse) => void
+  ): Promise<DescribeRedisCmdPerfTimeSeriesResponse> {
+    return this.request("DescribeRedisCmdPerfTimeSeries", req, cb)
   }
 
   /**
@@ -636,6 +657,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+   */
+  async DescribeSlowLogTopSqls(
+    req: DescribeSlowLogTopSqlsRequest,
+    cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
+  ): Promise<DescribeSlowLogTopSqlsResponse> {
+    return this.request("DescribeSlowLogTopSqls", req, cb)
+  }
+
+  /**
    * 获取邮件发送中联系人的相关信息。
    */
   async DescribeAllUserContact(
@@ -666,13 +697,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 自治中心-终止自治任务（单次）；注意： 接口调用需要加白名单。
+   * 延迟分析-查询实例访问命令统计
    */
-  async DescribeUserAutonomyProfile(
-    req: DescribeUserAutonomyProfileRequest,
-    cb?: (error: string, rep: DescribeUserAutonomyProfileResponse) => void
-  ): Promise<DescribeUserAutonomyProfileResponse> {
-    return this.request("DescribeUserAutonomyProfile", req, cb)
+  async DescribeRedisCommandOverview(
+    req: DescribeRedisCommandOverviewRequest,
+    cb?: (error: string, rep: DescribeRedisCommandOverviewResponse) => void
+  ): Promise<DescribeRedisCommandOverviewResponse> {
+    return this.request("DescribeRedisCommandOverview", req, cb)
   }
 
   /**
@@ -683,6 +714,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBDiagEventResponse) => void
   ): Promise<DescribeDBDiagEventResponse> {
     return this.request("DescribeDBDiagEvent", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）；注意： 接口调用需要加白名单。
+   */
+  async DescribeUserAutonomyProfile(
+    req: DescribeUserAutonomyProfileRequest,
+    cb?: (error: string, rep: DescribeUserAutonomyProfileResponse) => void
+  ): Promise<DescribeUserAutonomyProfileResponse> {
+    return this.request("DescribeUserAutonomyProfile", req, cb)
   }
 
   /**
@@ -913,6 +954,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyUserAccountResponse) => void
   ): Promise<VerifyUserAccountResponse> {
     return this.request("VerifyUserAccount", req, cb)
+  }
+
+  /**
+   * 延迟分析-查询命令延迟分布
+   */
+  async DescribeRedisCommandCostStatistics(
+    req: DescribeRedisCommandCostStatisticsRequest,
+    cb?: (error: string, rep: DescribeRedisCommandCostStatisticsResponse) => void
+  ): Promise<DescribeRedisCommandCostStatisticsResponse> {
+    return this.request("DescribeRedisCommandCostStatistics", req, cb)
   }
 
   /**

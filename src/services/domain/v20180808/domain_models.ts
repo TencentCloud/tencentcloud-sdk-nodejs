@@ -2789,7 +2789,6 @@ NoAudit: 无需实名认证
   RealNameAuditStatus?: string
   /**
    * 域名实名认证不通过原因。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealNameAuditUnpassReason?: string
   /**

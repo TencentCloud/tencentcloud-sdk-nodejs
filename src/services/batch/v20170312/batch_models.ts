@@ -793,11 +793,11 @@ export interface Application {
  */
 export interface EnvDataCpm {
   /**
-   * 黑石可用区名称列表。如ap-guangzhou-bls-1, 可通过黑石接口[DescribeRegions]( https://cloud.tencent.com/document/api/386/33564)接口获取。不是Batch可用区名称。目前仅支持一个可用区名称。
+   * 黑石可用区名称列表。如ap-guangzhou-bls-1。不是Batch可用区名称。目前仅支持一个可用区名称。
    */
   Zones: Array<string>
   /**
-   * 购买的机型ID。通过黑石接口[DescribeDeviceClass]( https://cloud.tencent.com/document/api/386/32911)查询设备型号，获取机型信息。
+   * 购买的机型ID。
    */
   InstanceTypes: Array<string>
   /**
@@ -809,7 +809,7 @@ export interface EnvDataCpm {
    */
   TimeSpan: number
   /**
-   * RAID类型ID。通过黑石接口[DescribeDeviceClassPartition]( https://cloud.tencent.com/document/api/386/32910)查询机型RAID方式以及系统盘大小，获取RAID信息。
+   * RAID类型ID。
    */
   RaidId: number
   /**
@@ -861,7 +861,7 @@ export interface EnvDataCpm {
    */
   ImageId?: string
   /**
-   * 系统盘根分区大小，单位为G，默认取值10G。通过黑石接口[DescribeDeviceClassPartition]( https://cloud.tencent.com/document/api/386/32910)查询机型RAID方式以及系统盘大小，获取根分区信息。
+   * 系统盘根分区大小，单位为G，默认取值10G。
    */
   SysRootSpace?: number
   /**
