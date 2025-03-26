@@ -1357,7 +1357,6 @@ export interface AssociateBusinessLogConfigRequest {
 export interface DescribeJvmMonitorResponse {
   /**
    * Java实例jvm监控数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: JvmMonitorData
   /**
@@ -8407,7 +8406,6 @@ export interface ExecuteTaskFlowRequest {
 export interface DescribeBusinessLogConfigResponse {
   /**
    * 日志配置项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: BusinessLogConfig
   /**
@@ -9957,9 +9955,13 @@ export interface ThreadPicture {
    */
   ThreadActive?: Array<CurvePoint>
   /**
-   * 守护线程数
+   * 守护线程数 拼写错误，废弃
    */
   DeamonThreadCount?: Array<CurvePoint>
+  /**
+   * 守护线程数
+   */
+  DaemonThreadCount?: Array<CurvePoint>
 }
 
 /**
@@ -14030,7 +14032,6 @@ export interface BusinessLogConfig {
   ConfigName?: string
   /**
    * 配置项日志路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigPath?: string
   /**
@@ -14045,7 +14046,6 @@ export interface BusinessLogConfig {
   ConfigTags?: string
   /**
    * 配置项对应的ES管道
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigPipeline?: string
   /**
@@ -14060,7 +14060,6 @@ export interface BusinessLogConfig {
   ConfigUpdateTime?: string
   /**
    * 配置项解析规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigSchema?: BusinessLogConfigSchema
   /**
@@ -14071,9 +14070,18 @@ export interface BusinessLogConfig {
   ConfigAssociatedGroups?: Array<BusinesLogConfigAssociatedGroup>
   /**
    * 配置项关联部署组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigAssociatedGroupList?: Array<BusinessLogConfigAssociatedGroup>
+  /**
+   * 是否开启filebeat高级配置开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilebeatConfigEnable?: boolean
+  /**
+   * close_timeout参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilebeatCloseTimeout?: number
 }
 
 /**

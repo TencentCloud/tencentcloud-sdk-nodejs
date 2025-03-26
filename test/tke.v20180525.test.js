@@ -328,6 +328,16 @@ it("tke.v20180525.DeleteBackupStorageLocation", async function () {
     }
 })
 
+it("tke.v20180525.DescribeTKEEdgeExternalKubeconfig", async function () {
+    try {
+       const data = await client.DescribeTKEEdgeExternalKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeAvailableTKEEdgeVersion", async function () {
     try {
        const data = await client.DescribeAvailableTKEEdgeVersion({})
@@ -438,9 +448,9 @@ it("tke.v20180525.ModifyReservedInstanceScope", async function () {
     }
 })
 
-it("tke.v20180525.DescribeTKEEdgeExternalKubeconfig", async function () {
+it("tke.v20180525.DescribeOSImages", async function () {
     try {
-       const data = await client.DescribeTKEEdgeExternalKubeconfig({})
+       const data = await client.DescribeOSImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

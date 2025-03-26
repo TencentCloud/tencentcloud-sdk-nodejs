@@ -83,7 +83,6 @@ STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源�
 export interface DescribeServiceLoginSettingsResponse {
   /**
    * 服务登录配置详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoginSettings?: Array<LoginSetting>
   /**
@@ -117,12 +116,10 @@ export interface DescribeInstanceNetworkStatusResponse {
 export interface Instance {
   /**
    * 实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -134,72 +131,59 @@ ARREARS：表示待回收
 STOPPED_NO_CHARGE：表示关机不收费
 TERMINATING：表示销毁中
 TERMINATED：表示已销毁
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceState?: string
   /**
    * 应用名称
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationName?: string
   /**
    * 算力套餐名称
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleName?: string
   /**
    * 实例所包含的GPU卡数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GPUCount?: number
   /**
    * 算力
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GPUPerformance?: string
   /**
    * 显存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GPUMemory?: string
   /**
    * CPU核数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CPU?: string
   /**
    * 内存
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Memory?: string
   /**
    * 系统盘数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemDisk?: SystemDisk
   /**
    * 内网ip地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivateIpAddresses?: Array<string>
   /**
    * 公网ip地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicIpAddresses?: Array<string>
   /**
    * 安全组ID
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupIds?: Array<string>
   /**
    * 实例最新操作
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperation?: string
   /**
@@ -208,37 +192,30 @@ SUCCESS：表示操作成功
 OPERATING：表示操作执行中
 FAILED：表示操作失败
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationState?: string
   /**
    * 实例创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 公网出带宽上限，默认10Mbps
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxOutBandwidth?: string
   /**
    * 每月免费流量，默认500G
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxFreeTraffic?: string
   /**
    * 应用配置环境
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigurationEnvironment?: string
   /**
    * 实例包含的登录服务详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoginServices?: Array<LoginService>
   /**
    * 应用服务的操作系统类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OSType?: string
 }
@@ -495,13 +472,11 @@ export interface DescribeInstancesResponse {
   /**
    * 实例总数
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 分页实例详情
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceSet?: Array<Instance>
   /**
@@ -871,7 +846,6 @@ export interface DescribeInstanceNetworkStatusRequest {
 export interface LoginService {
   /**
    * 登录方式名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
 }

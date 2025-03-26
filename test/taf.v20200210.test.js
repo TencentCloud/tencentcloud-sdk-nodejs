@@ -28,4 +28,14 @@ it("taf.v20200210.ManagePortraitRisk", async function () {
     }
 })
 
+it("taf.v20200210.ManageDeviceRisk", async function () {
+    try {
+       const data = await client.ManageDeviceRisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

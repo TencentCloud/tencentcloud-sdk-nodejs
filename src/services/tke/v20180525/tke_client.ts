@@ -65,6 +65,7 @@ import {
   Tag,
   DescribePrometheusAgentInstancesRequest,
   ModifyClusterAttributeRequest,
+  KubeJarvisStateInspectionResult,
   DescribeClusterRoutesResponse,
   DescribeClustersRequest,
   UpgradeClusterInstancesRequest,
@@ -115,7 +116,7 @@ import {
   DescribeEnableVpcCniProgressRequest,
   Instance,
   ModifyClusterAttributeResponse,
-  KubeJarvisStateInspectionResult,
+  DescribeOSImagesRequest,
   CreateEksLogConfigRequest,
   CreateClusterResponse,
   PrometheusClusterAgentPodConfig,
@@ -242,11 +243,13 @@ import {
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
   OIDCConfigAuthenticationOptions,
+  DescribeOSImagesResponse,
   CreateClusterRequest,
   CreateEdgeCVMInstancesRequest,
   DescribeClusterReleaseHistoryRequest,
   NodePoolOption,
   DescribeEdgeClusterExtraArgsRequest,
+  DescribeRouteTableConflictsResponse,
   DescribeClustersResponse,
   DeleteClusterVirtualNodeResponse,
   PrometheusAgentInfo,
@@ -383,7 +386,7 @@ import {
   CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
   CreatePrometheusClusterAgentRequest,
-  DescribeRouteTableConflictsResponse,
+  DeleteEKSContainerInstancesResponse,
   DescribePrometheusInstancesOverviewResponse,
   DescribeEKSClusterCredentialRequest,
   EnableClusterDeletionProtectionRequest,
@@ -407,9 +410,10 @@ import {
   ECMEnhancedService,
   InstanceDataDiskMountSetting,
   EdgeClusterPublicLB,
+  OSImage,
   EnableEncryptionProtectionRequest,
   EnhancedService,
-  DeleteEKSContainerInstancesResponse,
+  DescribeClusterNodePoolsResponse,
   DescribePostNodeResourcesResponse,
   DescribePrometheusAlertRuleRequest,
   UninstallLogAgentRequest,
@@ -425,7 +429,7 @@ import {
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
   ReleaseDetails,
-  DescribePrometheusInstanceInitStatusRequest,
+  DescribeAddonRequest,
   DescribeClusterLevelAttributeResponse,
   PrometheusGrafanaInfo,
   Switch,
@@ -553,7 +557,6 @@ import {
   CreateECMInstancesResponse,
   ModifyPrometheusGlobalNotificationRequest,
   FailedResource,
-  DescribeClusterNodePoolsResponse,
   UnavailableReason,
   GetUpgradeInstanceProgressRequest,
   UpdateEKSClusterResponse,
@@ -636,7 +639,7 @@ import {
   GetMostSuitableImageCacheRequest,
   DeleteEKSContainerInstancesRequest,
   DescribeClusterCommonNamesResponse,
-  DescribeAddonRequest,
+  DescribePrometheusInstanceInitStatusRequest,
   PrometheusTemplate,
   GPUArgs,
   RouteTableConflict,
@@ -973,6 +976,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取边缘计算外部访问的kubeconfig
+   */
+  async DescribeTKEEdgeExternalKubeconfig(
+    req: DescribeTKEEdgeExternalKubeconfigRequest,
+    cb?: (error: string, rep: DescribeTKEEdgeExternalKubeconfigResponse) => void
+  ): Promise<DescribeTKEEdgeExternalKubeconfigResponse> {
+    return this.request("DescribeTKEEdgeExternalKubeconfig", req, cb)
+  }
+
+  /**
    * 边缘计算支持版本和k8s版本
    */
   async DescribeAvailableTKEEdgeVersion(
@@ -1083,13 +1096,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取边缘计算外部访问的kubeconfig
+   * 获取OS聚合信息
    */
-  async DescribeTKEEdgeExternalKubeconfig(
-    req: DescribeTKEEdgeExternalKubeconfigRequest,
-    cb?: (error: string, rep: DescribeTKEEdgeExternalKubeconfigResponse) => void
-  ): Promise<DescribeTKEEdgeExternalKubeconfigResponse> {
-    return this.request("DescribeTKEEdgeExternalKubeconfig", req, cb)
+  async DescribeOSImages(
+    req?: DescribeOSImagesRequest,
+    cb?: (error: string, rep: DescribeOSImagesResponse) => void
+  ): Promise<DescribeOSImagesResponse> {
+    return this.request("DescribeOSImages", req, cb)
   }
 
   /**

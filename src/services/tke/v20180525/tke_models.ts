@@ -135,6 +135,31 @@ export interface DeleteClusterResponse {
  */
 export interface ContainerState {
   /**
+   * 容器运行退出码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExitCode?: number
+  /**
+   * 容器运行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishTime?: string
+  /**
+   * 容器状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 容器状态 Reason
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
+  /**
+   * 容器重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestartCount?: number
+  /**
    * 容器运行开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -143,31 +168,6 @@ export interface ContainerState {
    * 容器状态：created, running, exited, unknown
    */
   State?: string
-  /**
-   * 容器运行结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FinishTime?: string
-  /**
-   * 容器运行退出码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExitCode?: number
-  /**
-   * 容器状态 Reason
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Reason?: string
-  /**
-   * 容器状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
-  /**
-   * 容器重启次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RestartCount?: number
 }
 
 /**
@@ -221,13 +221,13 @@ export interface ModifyClusterImageResponse {
  */
 export interface CbsVolume {
   /**
-   * cbs volume 数据卷名称
-   */
-  Name: string
-  /**
    * 腾讯云cbs盘Id
    */
   CbsDiskId: string
+  /**
+   * cbs volume 数据卷名称
+   */
+  Name: string
 }
 
 /**
@@ -1079,6 +1079,36 @@ export interface ModifyClusterAttributeRequest {
    * 集群属性
    */
   ClusterProperty?: ClusterProperty
+}
+
+/**
+ * 集群巡检检查结果
+ */
+export interface KubeJarvisStateInspectionResult {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 诊断开始时间
+   */
+  StartTime?: string
+  /**
+   * 诊断结束时间
+   */
+  EndTime?: string
+  /**
+   * 诊断结果统计
+   */
+  Statistics?: Array<KubeJarvisStateStatistic>
+  /**
+   * 诊断结果详情
+   */
+  Diagnostics?: Array<KubeJarvisStateDiagnostic>
+  /**
+   * 查询巡检报告相关报错
+   */
+  Error?: string
 }
 
 /**
@@ -2149,34 +2179,9 @@ export interface ModifyClusterAttributeResponse {
 }
 
 /**
- * 集群巡检检查结果
+ * DescribeOSImages请求参数结构体
  */
-export interface KubeJarvisStateInspectionResult {
-  /**
-   * 集群ID
-   */
-  ClusterId?: string
-  /**
-   * 诊断开始时间
-   */
-  StartTime?: string
-  /**
-   * 诊断结束时间
-   */
-  EndTime?: string
-  /**
-   * 诊断结果统计
-   */
-  Statistics?: Array<KubeJarvisStateStatistic>
-  /**
-   * 诊断结果详情
-   */
-  Diagnostics?: Array<KubeJarvisStateDiagnostic>
-  /**
-   * 查询巡检报告相关报错
-   */
-  Error?: string
-}
+export type DescribeOSImagesRequest = null
 
 /**
  * CreateEksLogConfig请求参数结构体
@@ -3318,16 +3323,15 @@ export interface ModifyOpenPolicyListRequest {
  */
 export interface Probe {
   /**
+   * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailureThreshold?: number
+  /**
    * Number of seconds after the container has started before liveness probes are initiated.
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialDelaySeconds?: number
-  /**
-   * Number of seconds after which the probe times out.
-Defaults to 1 second. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeoutSeconds?: number
   /**
    * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3339,10 +3343,11 @@ Defaults to 1 second. Minimum value is 1.
    */
   SuccessThreshold?: number
   /**
-   * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
+   * Number of seconds after which the probe times out.
+Defaults to 1 second. Minimum value is 1.
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailureThreshold?: number
+  TimeoutSeconds?: number
 }
 
 /**
@@ -3617,13 +3622,13 @@ export interface NfsVolume {
    */
   Name: string
   /**
-   * NFS 服务器地址
-   */
-  Server: string
-  /**
    * NFS 数据卷路径
    */
   Path: string
+  /**
+   * NFS 服务器地址
+   */
+  Server: string
   /**
    * 默认为 False
    */
@@ -3906,15 +3911,20 @@ export interface DescribeEKSClustersResponse {
  */
 export interface VolumeMount {
   /**
+   * 挂载路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MountPath: string
+  /**
    * volume名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
-   * 挂载路径
+   * 传播挂载方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MountPath: string
+  MountPropagation?: string
   /**
    * 是否只读
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3925,11 +3935,6 @@ export interface VolumeMount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubPath?: string
-  /**
-   * 传播挂载方式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MountPropagation?: string
   /**
    * 子路径表达式
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4783,6 +4788,26 @@ export interface OIDCConfigAuthenticationOptions {
 }
 
 /**
+ * DescribeOSImages返回参数结构体
+ */
+export interface DescribeOSImagesResponse {
+  /**
+   * 镜像信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OSImageSeriesSet?: Array<OSImage>
+  /**
+   * 镜像数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCluster请求参数结构体
  */
 export interface CreateClusterRequest {
@@ -4913,6 +4938,24 @@ export interface DescribeEdgeClusterExtraArgsRequest {
 }
 
 /**
+ * DescribeRouteTableConflicts返回参数结构体
+ */
+export interface DescribeRouteTableConflictsResponse {
+  /**
+   * 路由表是否冲突。
+   */
+  HasConflict?: boolean
+  /**
+   * 路由表冲突列表。
+   */
+  RouteTableConflictSet?: Array<RouteTableConflict>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusters返回参数结构体
  */
 export interface DescribeClustersResponse {
@@ -5024,7 +5067,6 @@ export interface DescribePrometheusTemplatesResponse {
 export interface UpdateEKSContainerInstanceResponse {
   /**
    * 容器实例 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EksCiId?: string
   /**
@@ -5637,65 +5679,63 @@ export interface Container {
    */
   Name: string
   /**
-   * 容器启动命令
-   */
-  Commands?: Array<string>
-  /**
    * 容器启动参数
    */
   Args?: Array<string>
   /**
-   * 容器内操作系统的环境变量
+   * 容器启动命令
    */
-  EnvironmentVars?: Array<EnvironmentVariable>
+  Commands?: Array<string>
   /**
    * CPU，制改容器最多可使用的核数，该值不可超过容器实例的总核数。单位：核。
    */
   Cpu?: number
   /**
-   * 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB
-   */
-  Memory?: number
-  /**
-   * 数据卷挂载信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VolumeMounts?: Array<VolumeMount>
-  /**
    * 当前状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentState?: ContainerState
   /**
-   * 重启次数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 容器内操作系统的环境变量
    */
-  RestartCount?: number
-  /**
-   * 容器工作目录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkingDir?: string
-  /**
-   * 存活探针
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LivenessProbe?: LivenessOrReadinessProbe
-  /**
-   * 就绪探针
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReadinessProbe?: LivenessOrReadinessProbe
+  EnvironmentVars?: Array<EnvironmentVariable>
   /**
    * Gpu限制
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuLimit?: number
   /**
+   * 存活探针
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LivenessProbe?: LivenessOrReadinessProbe
+  /**
+   * 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB
+   */
+  Memory?: number
+  /**
+   * 就绪探针
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadinessProbe?: LivenessOrReadinessProbe
+  /**
+   * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestartCount?: number
+  /**
    * 容器的安全上下文
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityContext?: SecurityContext
+  /**
+   * 数据卷挂载信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeMounts?: Array<VolumeMount>
+  /**
+   * 容器工作目录
+   */
+  WorkingDir?: string
 }
 
 /**
@@ -6965,19 +7005,16 @@ export interface SecurityContext {
 export interface DNSConfig {
   /**
    * DNS 服务器IP地址列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nameservers?: Array<string>
   /**
-   * DNS搜索域列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Searches?: Array<string>
-  /**
    * 对象选项列表，每个对象由name和value（可选）构成
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Options?: Array<DNSConfigOption>
+  /**
+   * DNS搜索域列表
+   */
+  Searches?: Array<string>
 }
 
 /**
@@ -7729,6 +7766,35 @@ export interface VersionInstance {
  */
 export interface EksCi {
   /**
+   * 自动为用户创建的EipId
+   */
+  AutoCreatedEipId?: string
+  /**
+   * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
+   */
+  CamRoleName?: string
+  /**
+   * 容器列表
+   */
+  Containers?: Array<Container>
+  /**
+   * CPU大小
+   */
+  Cpu?: number
+  /**
+   * CPU类型
+   */
+  CpuType?: string
+  /**
+   * 接到请求后的系统创建时间。
+   */
+  CreationTime?: string
+  /**
+   * 容器实例绑定的Eip地址，注意可能为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EipAddress?: string
+  /**
    * EKS Cotainer Instance Id
    */
   EksCiId?: string
@@ -7737,111 +7803,68 @@ export interface EksCi {
    */
   EksCiName?: string
   /**
-   * 内存大小
-   */
-  Memory?: number
-  /**
-   * CPU大小
-   */
-  Cpu?: number
-  /**
-   * 安全组ID
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * 容器组的重启策略
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RestartPolicy?: string
-  /**
-   * 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：
-Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；
-Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；
-Failed和Succeeded这两种状态都会停止运行，停止计费。
-Pending是创建中，Running是 运行中。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 接到请求后的系统创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreationTime?: string
-  /**
-   * 容器全部成功退出后的时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SucceededTime?: string
-  /**
-   * 容器列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Containers?: Array<Container>
-  /**
    * 数据卷信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EksCiVolume?: EksCiVolume
   /**
-   * 容器组运行的安全上下文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SecurityContext?: SecurityContext
-  /**
-   * 内网ip地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrivateIp?: string
-  /**
-   * 容器实例绑定的Eip地址，注意可能为空
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EipAddress?: string
-  /**
-   * GPU类型。如无使用GPU则不返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GpuType?: string
-  /**
-   * CPU类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CpuType?: string
-  /**
    * GPU卡数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuCount?: number
   /**
-   * 实例所属VPC的Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * GPU类型。如无使用GPU则不返回
    */
-  VpcId?: string
-  /**
-   * 实例所属子网Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId?: string
+  GpuType?: string
   /**
    * 初始化容器列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InitContainers?: Array<Container>
   /**
-   * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 内存大小
    */
-  CamRoleName?: string
-  /**
-   * 自动为用户创建的EipId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AutoCreatedEipId?: string
+  Memory?: number
   /**
    * 容器状态是否持久化
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PersistStatus?: boolean
+  /**
+   * 内网ip地址
+   */
+  PrivateIp?: string
+  /**
+   * 容器组的重启策略
+   */
+  RestartPolicy?: string
+  /**
+   * 容器组运行的安全上下文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityContext?: SecurityContext
+  /**
+   * 安全组ID
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：
+Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；
+Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；
+Failed和Succeeded这两种状态都会停止运行，停止计费。
+Pending是创建中，Running是 运行中。
+   */
+  Status?: string
+  /**
+   * 实例所属子网Id
+   */
+  SubnetId?: string
+  /**
+   * 容器全部成功退出后的时间
+   */
+  SucceededTime?: string
+  /**
+   * 实例所属VPC的Id
+   */
+  VpcId?: string
 }
 
 /**
@@ -8012,17 +8035,9 @@ export interface CreatePrometheusClusterAgentRequest {
 }
 
 /**
- * DescribeRouteTableConflicts返回参数结构体
+ * DeleteEKSContainerInstances返回参数结构体
  */
-export interface DescribeRouteTableConflictsResponse {
-  /**
-   * 路由表是否冲突。
-   */
-  HasConflict?: boolean
-  /**
-   * 路由表冲突列表。
-   */
-  RouteTableConflictSet?: Array<RouteTableConflict>
+export interface DeleteEKSContainerInstancesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8481,6 +8496,36 @@ export interface EdgeClusterPublicLB {
 }
 
 /**
+ * 操作系统描述
+ */
+export interface OSImage {
+  /**
+   * os聚合名称
+   */
+  SeriesName?: string
+  /**
+   * os别名
+   */
+  Alias?: string
+  /**
+   * os名称
+   */
+  OsName?: string
+  /**
+   * 操作系统类型(分为定制和非定制，取值分别为:DOCKER_CUSTOMIZE、GENERAL)
+   */
+  OsCustomizeType?: string
+  /**
+   * os是否下线(online表示在线,offline表示下线)
+   */
+  Status?: string
+  /**
+   * 镜像id
+   */
+  ImageId?: string
+}
+
+/**
  * EnableEncryptionProtection请求参数结构体
  */
 export interface EnableEncryptionProtectionRequest {
@@ -8513,9 +8558,17 @@ export interface EnhancedService {
 }
 
 /**
- * DeleteEKSContainerInstances返回参数结构体
+ * DescribeClusterNodePools返回参数结构体
  */
-export interface DeleteEKSContainerInstancesResponse {
+export interface DescribeClusterNodePoolsResponse {
+  /**
+   * NodePools（节点池列表）
+   */
+  NodePoolSet?: Array<NodePool>
+  /**
+   * 资源总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8579,7 +8632,6 @@ export interface UninstallLogAgentRequest {
 export interface TcpSocket {
   /**
    * TcpSocket检测的端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
 }
@@ -8849,13 +8901,17 @@ export interface ReleaseDetails {
 }
 
 /**
- * DescribePrometheusInstanceInitStatus请求参数结构体
+ * DescribeAddon请求参数结构体
  */
-export interface DescribePrometheusInstanceInitStatusRequest {
+export interface DescribeAddonRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
-  InstanceId: string
+  ClusterId: string
+  /**
+   * addon名称（不传时会返回集群下全部的addon）
+   */
+  AddonName?: string
 }
 
 /**
@@ -11438,24 +11494,6 @@ export interface FailedResource {
 }
 
 /**
- * DescribeClusterNodePools返回参数结构体
- */
-export interface DescribeClusterNodePoolsResponse {
-  /**
-   * NodePools（节点池列表）
-   */
-  NodePoolSet?: Array<NodePool>
-  /**
-   * 资源总数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 不可用原因
  */
 export interface UnavailableReason {
@@ -12703,19 +12741,17 @@ export interface DeleteClusterEndpointVipRequest {
 export interface LivenessOrReadinessProbe {
   /**
    * 探针参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Probe: Probe
-  /**
-   * HttpGet检测参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpGet?: HttpGet
   /**
    * 容器内检测命令参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Exec?: Exec
+  /**
+   * HttpGet检测参数
+   */
+  HttpGet?: HttpGet
   /**
    * TcpSocket检测的端口参数
 注意：此字段可能返回 null，表示取不到有效值。
@@ -12843,13 +12879,12 @@ export interface DeleteImageCachesResponse {
 export interface DescribeEKSContainerInstanceRegionsResponse {
   /**
    * EKS Container Instance支持的地域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regions: Array<EksCiRegionInfo>
+  Regions?: Array<EksCiRegionInfo>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13150,17 +13185,13 @@ export interface DescribeClusterCommonNamesResponse {
 }
 
 /**
- * DescribeAddon请求参数结构体
+ * DescribePrometheusInstanceInitStatus请求参数结构体
  */
-export interface DescribeAddonRequest {
+export interface DescribePrometheusInstanceInitStatusRequest {
   /**
-   * 集群ID
+   * 实例ID
    */
-  ClusterId: string
-  /**
-   * addon名称（不传时会返回集群下全部的addon）
-   */
-  AddonName?: string
+  InstanceId: string
 }
 
 /**

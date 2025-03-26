@@ -921,6 +921,10 @@ export interface DescribeVpcEndPointRequest {
    * 终端节点ID列表。
    */
   EndPointId?: Array<string>
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -1952,6 +1956,10 @@ export interface CreateVpcEndPointRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
    */
   Tags?: Array<Tag>
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -2147,6 +2155,10 @@ export interface ModifyVpcEndPointServiceAttributeRequest {
    * 后端服务的ID，比如lb-xxx。
    */
   ServiceInstanceId?: string
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -2529,6 +2541,10 @@ export interface DeleteVpcEndPointServiceRequest {
    * 终端节点ID。
    */
   EndPointServiceId: string
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -7998,6 +8014,10 @@ export interface DescribeVpcEndPointServiceRequest {
    * <li>不支持同时传入参数 Filters 。</li> <li>列出授权给当前账号的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，哪些终端节点服务授权了该账户。</li>
    */
   IsListAuthorizedEndPointService?: boolean
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -9719,6 +9739,10 @@ export interface CreateVpcEndPointServiceRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
    */
   Tags?: Array<Tag>
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -14277,6 +14301,10 @@ export interface EnableVpcEndPointConnectRequest {
 <li> true：自动接受。</li> <li> false：不自动接受。</li>
    */
   AcceptFlag: boolean
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -14884,6 +14912,10 @@ export interface ModifyVpcEndPointAttributeRequest {
    * 安全组ID列表。
    */
   SecurityGroupIds?: Array<string>
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**
@@ -15004,6 +15036,10 @@ export interface DeleteVpcEndPointRequest {
    * 终端节点ID。
    */
   EndPointId: string
+  /**
+   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   */
+  IpAddressType?: string
 }
 
 /**

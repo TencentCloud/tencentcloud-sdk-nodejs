@@ -179,19 +179,16 @@ export interface DescribeCaptchaRceResultResponse {
   CaptchaCode?: number
   /**
    * 状态描述及验证错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CaptchaMsg?: string
   /**
    * 无感验证模式下，该参数返回验证结果：
 EvilLevel=0 请求无恶意
 EvilLevel=100 请求有恶意
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EvilLevel?: number
   /**
    * 前端获取验证码时间，时间戳格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GetCaptchaTime?: number
   /**
@@ -205,9 +202,12 @@ EvilLevel=100 请求有恶意
   SubmitCaptchaTime?: number
   /**
    * rce检测结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RceResult?: RceResult
+  /**
+   * 设备风险大类
+   */
+  DeviceRiskCategory?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -265,42 +265,34 @@ export interface GetRequestStatisticsRequest {
 export interface RceResult {
   /**
    * 用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
   /**
    * 操作时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PostTime?: number
   /**
    * 业务参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssociateAccount?: string
   /**
    * 用户Ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserIp?: string
   /**
    * 风险等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskLevel?: string
   /**
    * 风险类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskType?: Array<number | bigint>
   /**
    * 设备唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConstId?: string
   /**
    * 风险扩展参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskInformation?: string
 }
@@ -707,19 +699,16 @@ export interface DescribeCaptchaResultResponse {
   CaptchaCode?: number
   /**
    * 状态描述及验证错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CaptchaMsg?: string
   /**
    * 无感验证模式下，该参数返回验证结果：
 EvilLevel=0 请求无恶意
 EvilLevel=100 请求有恶意
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EvilLevel?: number
   /**
    * 前端获取验证码时间，时间戳格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GetCaptchaTime?: number
   /**

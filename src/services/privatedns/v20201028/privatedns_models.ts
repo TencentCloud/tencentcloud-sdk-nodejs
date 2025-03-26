@@ -318,7 +318,6 @@ export interface PrivateZoneRecord {
   TTL?: number
   /**
    * MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MX?: number
   /**
@@ -345,12 +344,10 @@ export interface PrivateZoneRecord {
   Extra?: string
   /**
    * 0暂停，1启用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: number
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
 }
@@ -966,7 +963,6 @@ export interface MetricData {
   DataSet?: Array<DatePoint>
   /**
    * 查询范围内的请求总量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricCount?: number
 }
@@ -1019,7 +1015,6 @@ export interface PrivateZone {
   RecordCount?: number
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
@@ -1041,12 +1036,10 @@ export interface PrivateZone {
   Tags?: Array<TagInfo>
   /**
    * 绑定的关联账号的vpc列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountVpcSet?: Array<AccountVpcInfoOutput>
   /**
    * 是否自定义TLD
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCustomTld?: boolean
   /**
@@ -1055,17 +1048,14 @@ export interface PrivateZone {
   CnameSpeedupStatus?: string
   /**
    * 转发规则名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardRuleName?: string
   /**
    * 转发规则类型：云上到云下，DOWN；云下到云上，UP，目前只支持DOWN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardRuleType?: string
   /**
    * 转发的地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardAddress?: string
   /**
@@ -1075,7 +1065,6 @@ export interface PrivateZone {
   EndPointName?: string
   /**
    * 已删除的vpc
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeletedVpcSet?: Array<VpcInfo>
 }

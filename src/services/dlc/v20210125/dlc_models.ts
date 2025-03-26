@@ -4826,6 +4826,10 @@ export interface DatasourceConnectionConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TCHouseD?: TCHouseD
+  /**
+   * TccHive数据目录连接信息
+   */
+  TccHive?: TccHive
 }
 
 /**
@@ -7193,6 +7197,40 @@ export interface CreateTasksResponse {
 }
 
 /**
+ * TccHive数据结构
+ */
+export interface TccHive {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 终端节点服务ID
+   */
+  EndpointServiceId?: string
+  /**
+   * thrift连接地址
+   */
+  MetaStoreUrl?: string
+  /**
+   * hive版本
+   */
+  HiveVersion?: string
+  /**
+   * 网络信息
+   */
+  TccConnection?: NetWork
+  /**
+   * Hms终端节点服务ID
+   */
+  HmsEndpointServiceId?: string
+}
+
+/**
  * GrantDLCCatalogAccess返回参数结构体
  */
 export interface GrantDLCCatalogAccessResponse {
@@ -7452,6 +7490,36 @@ export interface SQLTask {
    * 任务的配置信息
    */
   Config?: Array<KVPair>
+}
+
+/**
+ * 网络配置信息
+ */
+export interface NetWork {
+  /**
+   * 服务clbip
+   */
+  ClbIp?: string
+  /**
+   * 服务clbPort
+   */
+  ClbPort?: string
+  /**
+   * vpc实例id
+   */
+  VpcId?: string
+  /**
+   * vpc网段
+   */
+  VpcCidrBlock?: string
+  /**
+   * 子网实例id
+   */
+  SubnetId?: string
+  /**
+   * 子网网段
+   */
+  SubnetCidrBlock?: string
 }
 
 /**
@@ -7807,27 +7875,22 @@ export interface DescribeSparkAppJobRequest {
 export interface TCHouseD {
   /**
    * 数据源实例的唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 数据源名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 数据源的JDBC
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JdbcUrl?: string
   /**
    * 用于访问数据源的用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
   /**
    * 数据源访问密码，需要base64编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
@@ -7837,12 +7900,10 @@ export interface TCHouseD {
   Location?: DatasourceConnectionLocation
   /**
    * 默认数据库名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbName?: string
   /**
    * 访问信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessInfo?: string
 }
@@ -8290,7 +8351,6 @@ export interface HiveInfo {
   InstanceName?: string
   /**
    * EMR集群中hive组件的版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HiveVersion?: string
   /**

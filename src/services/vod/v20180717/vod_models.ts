@@ -141,19 +141,19 @@ export interface AiRecognitionTaskAsrFullTextSegmentItem {
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别文本。
    */
-  Text: string
+  Text?: string
 }
 
 /**
@@ -163,47 +163,47 @@ export interface DescribeFileAttributesTask {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，0 表示成功，其他值表示失败：
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 任务进度，取值范围 [0-100] 。
    */
-  Progress: number
+  Progress?: number
   /**
    * 媒体文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 获取媒体文件属性任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: DescribeFileAttributesTaskOutput
+  Output?: DescribeFileAttributesTaskOutput
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
-  SessionId: string
+  SessionId?: string
   /**
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
-  SessionContext: string
+  SessionContext?: string
 }
 
 /**
@@ -315,7 +315,7 @@ export interface AiAnalysisTaskClassificationInput {
   /**
    * 视频智能分类模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -497,23 +497,23 @@ export interface MediaAiAnalysisHighlightItem {
   /**
    * 智能精彩集锦地址。
    */
-  HighlightUrl: string
+  HighlightUrl?: string
   /**
    * 智能精彩集锦封面地址。
    */
-  CovImgUrl: string
+  CovImgUrl?: string
   /**
    * 智能精彩集锦的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 智能精彩集锦持续时间。
    */
-  Duration: number
+  Duration?: number
   /**
    * 智能精彩集锦子片段列表，精彩集锦片段由这些子片段拼接生成。
    */
-  SegmentSet: Array<HighlightSegmentItem>
+  SegmentSet?: Array<HighlightSegmentItem>
 }
 
 /**
@@ -601,7 +601,6 @@ export interface AiReviewTaskProhibitedAsrResult {
   Input?: AiReviewProhibitedAsrTaskInput
   /**
    * 音视频审核 Asr 文字鉴违禁任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewProhibitedAsrTaskOutput
   /**
@@ -732,7 +731,6 @@ export interface AiReviewTaskProhibitedOcrResult {
   Input?: AiReviewProhibitedOcrTaskInput
   /**
    * 音视频审核 Ocr 文字鉴违禁任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewProhibitedOcrTaskOutput
   /**
@@ -1015,21 +1013,11 @@ export interface ModifySampleSnapshotTemplateRequest {
    */
   Name?: string
   /**
-   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 截图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Width?: number
   /**
-   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 截图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Height?: number
   /**
@@ -1136,37 +1124,37 @@ export interface CreateImageSpriteTask2017 {
   /**
    * 截图雪碧图任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 错误码
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 截取雪碧图文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 雪碧图规格，参见[雪碧图截图模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
    */
-  Definition: number
+  Definition?: number
   /**
    * 雪碧图小图总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 截取雪碧图输出的地址。
    */
-  ImageSpriteUrlSet: Array<string>
+  ImageSpriteUrlSet?: Array<string>
   /**
    * 雪碧图子图位置与时间关系 WebVtt 文件地址。
    */
-  WebVttUrl: string
+  WebVttUrl?: string
 }
 
 /**
@@ -1178,23 +1166,23 @@ export interface ClipFileInfo2017 {
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误描述。
    */
-  Message: string
+  Message?: string
   /**
    * 输出目标文件的文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 输出目标文件的文件地址。
    */
-  FileUrl: string
+  FileUrl?: string
   /**
    * 输出目标文件的文件类型。
    */
-  FileType: string
+  FileType?: string
 }
 
 /**
@@ -1204,19 +1192,19 @@ export interface TempCertificate {
   /**
    * 临时安全证书 Id。
    */
-  SecretId: string
+  SecretId?: string
   /**
    * 临时安全证书 Key。
    */
-  SecretKey: string
+  SecretKey?: string
   /**
    * Token 值。
    */
-  Token: string
+  Token?: string
   /**
    * 证书无效的时间，返回 Unix 时间戳，精确到秒。
    */
-  ExpiredTime: number
+  ExpiredTime?: number
 }
 
 /**
@@ -1255,7 +1243,6 @@ export interface AiReviewTaskPoliticalOcrResult {
   Input?: AiReviewPoliticalOcrTaskInput
   /**
    * 音视频审核 Ocr 文字涉及令人不适宜信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewPoliticalOcrTaskOutput
   /**
@@ -1329,23 +1316,23 @@ export interface AiSampleWord {
   /**
    * 关键词。
    */
-  Keyword: string
+  Keyword?: string
   /**
    * 关键词标签。
    */
-  TagSet: Array<string>
+  TagSet?: Array<string>
   /**
    * 关键词应用场景。
    */
-  UsageSet: Array<string>
+  UsageSet?: Array<string>
   /**
    * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -1530,29 +1517,24 @@ export interface ContentReviewTemplateItem {
   Comment?: string
   /**
    * 鉴别涉及令人反感的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PornConfigure?: PornConfigureInfo
   /**
    * 鉴别涉及令人不安全的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TerrorismConfigure?: TerrorismConfigureInfo
   /**
    * 鉴别涉及令人不适宜的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PoliticalConfigure?: PoliticalConfigureInfo
   /**
    * 违禁控制参数。违禁内容包括：
 <li>谩骂；</li>
 <li>涉毒违法。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProhibitedConfigure?: ProhibitedConfigureInfo
   /**
    * 用户自定义音视频审核控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDefineConfigure?: UserDefineConfigureInfo
   /**
@@ -1889,12 +1871,10 @@ export interface RoundPlayInfo {
   Url?: string
   /**
    * 创建时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
@@ -2089,15 +2069,15 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -2404,48 +2384,39 @@ export interface AIRecognitionTemplateItem {
   Type?: string
   /**
    * 头尾识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadTailConfigure?: HeadTailConfigureInfo
   /**
    * 拆条识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentConfigure?: SegmentConfigureInfo
   /**
    * 人脸识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FaceConfigure?: FaceConfigureInfo
   /**
    * 文本全文识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrFullTextConfigure?: OcrFullTextConfigureInfo
   /**
    * 文本关键词识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrWordsConfigure?: OcrWordsConfigureInfo
   /**
    * 语音全文识别控制参数。
 <font color=red>注意：本参数已不再维护，推荐使用 AsrTranslateConfigure 参数发起语音翻译识别（当 DstLanguage 不填或填空字符串时，则不进行翻译，计费项和语音全文识别一致）。</font> 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrFullTextConfigure?: AsrFullTextConfigureInfo
   /**
    * 语音关键词识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrWordsConfigure?: AsrWordsConfigureInfo
   /**
    * 语音翻译识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrTranslateConfigure?: AsrTranslateConfigureInfo
   /**
    * 物体识别控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectConfigure?: ObjectConfigureInfo
   /**
@@ -2498,7 +2469,6 @@ export interface AiRecognitionTaskFaceResult {
   Input?: AiRecognitionTaskFaceResultInput
   /**
    * 人脸识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskFaceResultOutput
   /**
@@ -2522,7 +2492,7 @@ export interface AiRecognitionTaskHeadTailResultInput {
   /**
    * 视频片头片尾识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -2950,7 +2920,7 @@ export interface AiRecognitionTaskOcrWordsResultInput {
   /**
    * 文本关键词识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -3318,11 +3288,11 @@ export interface MediaAiAnalysisCoverItem {
   /**
    * 智能封面地址。
    */
-  CoverUrl: string
+  CoverUrl?: string
   /**
    * 智能封面的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -3415,11 +3385,11 @@ export interface ConcatTask2017 {
   /**
    * 视频拼接任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 视频拼接源文件信息。
    */
-  FileInfoSet: Array<ConcatFileInfo2017>
+  FileInfoSet?: Array<ConcatFileInfo2017>
 }
 
 /**
@@ -3539,7 +3509,6 @@ export interface AiAnalysisTaskCoverResult {
   Input?: AiAnalysisTaskCoverInput
   /**
    * 智能封面任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskCoverOutput
   /**
@@ -3700,7 +3669,6 @@ export interface AiAnalysisTaskHighlightResult {
   Input?: AiAnalysisTaskHighlightInput
   /**
    * 智能精彩片段任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskHighlightOutput
   /**
@@ -3781,11 +3749,11 @@ export interface AiSampleFaceInfo {
   /**
    * 人脸图片 ID。
    */
-  FaceId: string
+  FaceId?: string
   /**
    * 人脸图片地址。
    */
-  Url: string
+  Url?: string
 }
 
 /**
@@ -4099,7 +4067,7 @@ export interface CoverBySnapshotTaskOutput {
   /**
    * 封面 URL。
    */
-  CoverUrl: string
+  CoverUrl?: string
 }
 
 /**
@@ -4842,7 +4810,7 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
   /**
    * 语音全文识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -5149,19 +5117,19 @@ export interface AiRecognitionTaskFaceSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**
@@ -5388,7 +5356,6 @@ export interface AiReviewTaskTerrorismOcrResult {
   Input?: AiReviewTerrorismOcrTaskInput
   /**
    * 音视频审核 Ocr 文字涉及令人不安全的信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewTerrorismOcrTaskOutput
   /**
@@ -5457,7 +5424,6 @@ export interface AiRecognitionTaskOcrWordsResult {
   Input?: AiRecognitionTaskOcrWordsResultInput
   /**
    * 文本关键词识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskOcrWordsResultOutput
   /**
@@ -5516,12 +5482,10 @@ export interface AiRecognitionTaskSegmentResult {
   Message?: string
   /**
    * 视频拆条任务输入信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: AiRecognitionTaskSegmentResultInput
   /**
    * 视频拆条任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskSegmentResultOutput
   /**
@@ -5800,15 +5764,15 @@ export interface AiRecognitionTaskOcrFullTextSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段结果集。
    */
-  TextSet: Array<AiRecognitionTaskOcrFullTextSegmentTextItem>
+  TextSet?: Array<AiRecognitionTaskOcrFullTextSegmentTextItem>
 }
 
 /**
@@ -6119,7 +6083,6 @@ export interface AiRecognitionTaskAsrTranslateResult {
   Input?: AiRecognitionTaskAsrTranslateResultInput
   /**
    * 语音翻译任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskAsrTranslateResultOutput
   /**
@@ -6221,23 +6184,23 @@ export interface ConcatFileInfo2017 {
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 视频拼接源文件的 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 视频拼接源文件的地址。
    */
-  FileUrl: string
+  FileUrl?: string
   /**
    * 视频拼接源文件的格式。
    */
-  FileType: string
+  FileType?: string
 }
 
 /**
@@ -6812,21 +6775,11 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
    */
   Name?: string
   /**
-   * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 动图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Width?: number
   /**
-   * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 动图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Height?: number
   /**
@@ -7291,7 +7244,6 @@ export interface AiReviewTaskPornOcrResult {
   Input?: AiReviewPornOcrTaskInput
   /**
    * Ocr 文字音视频审核涉及令人反感的信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewPornOcrTaskOutput
   /**
@@ -7530,31 +7482,31 @@ export interface AiRecognitionTaskSegmentSegmentItem {
   /**
    * 文件 ID。仅当处理的是点播文件并且拆条生成的子片段为点播文件时有效。
    */
-  FileId: string
+  FileId?: string
   /**
    * 视频拆条片段 Url。
    */
-  SegmentUrl: string
+  SegmentUrl?: string
   /**
    * 拆条片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 拆条片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 拆条片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 拆条封面图片 Url。
    */
-  CovImgUrl: string
+  CovImgUrl?: string
   /**
    * 特殊字段，请忽略。
    */
-  SpecialInfo: string
+  SpecialInfo?: string
 }
 
 /**
@@ -7979,7 +7931,6 @@ export interface AiAnalysisTaskTagResult {
   Input?: AiAnalysisTaskTagInput
   /**
    * 智能标签任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskTagOutput
   /**
@@ -8481,7 +8432,6 @@ export interface AiRecognitionTaskOcrFullTextResult {
   Input?: AiRecognitionTaskOcrFullTextResultInput
   /**
    * 文本全文识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskOcrFullTextResultOutput
   /**
@@ -9372,35 +9322,35 @@ export interface AiSamplePerson {
   /**
    * 人物 ID。
    */
-  PersonId: string
+  PersonId?: string
   /**
    * 人物名称。
    */
-  Name: string
+  Name?: string
   /**
    * 人物描述。
    */
-  Description: string
+  Description?: string
   /**
    * 人脸信息。
    */
-  FaceInfoSet: Array<AiSampleFaceInfo>
+  FaceInfoSet?: Array<AiSampleFaceInfo>
   /**
    * 人物标签。
    */
-  TagSet: Array<string>
+  TagSet?: Array<string>
   /**
    * 应用场景。
    */
-  UsageSet: Array<string>
+  UsageSet?: Array<string>
   /**
    * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -9765,19 +9715,19 @@ export interface AiRecognitionTaskHeadTailResultOutput {
   /**
    * 片头识别置信度。取值：0~100。
    */
-  HeadConfidence: number
+  HeadConfidence?: number
   /**
    * 视频片头的结束时间点，单位：秒。
    */
-  HeadTimeOffset: number
+  HeadTimeOffset?: number
   /**
    * 片尾识别置信度。取值：0~100。
    */
-  TailConfidence: number
+  TailConfidence?: number
   /**
    * 视频片尾的开始时间点，单位：秒。
    */
-  TailTimeOffset: number
+  TailTimeOffset?: number
 }
 
 /**
@@ -10398,47 +10348,43 @@ export interface AIAnalysisTemplateItem {
   /**
    * 智能分析模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 智能分析模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 智能分析模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 智能分类任务控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassificationConfigure: ClassificationConfigureInfo
+  ClassificationConfigure?: ClassificationConfigureInfo
   /**
    * 智能标签任务控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagConfigure: TagConfigureInfo
+  TagConfigure?: TagConfigureInfo
   /**
    * 智能封面任务控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoverConfigure: CoverConfigureInfo
+  CoverConfigure?: CoverConfigureInfo
   /**
    * 智能按帧标签任务控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FrameTagConfigure: FrameTagConfigureInfo
+  FrameTagConfigure?: FrameTagConfigureInfo
   /**
    * 智能精彩集锦任务控制参数。
    */
-  HighlightConfigure: HighlightsConfigureInfo
+  HighlightConfigure?: HighlightsConfigureInfo
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -11251,32 +11197,27 @@ export interface AiAnalysisResult {
 <li>FrameTag：智能按帧标签</li>
 <li>Highlight：智能精彩集锦</li>
    */
-  Type: string
+  Type?: string
   /**
    * 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassificationTask: AiAnalysisTaskClassificationResult
+  ClassificationTask?: AiAnalysisTaskClassificationResult
   /**
    * 视频内容分析智能封面任务的查询结果，当任务类型为 Cover 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoverTask: AiAnalysisTaskCoverResult
+  CoverTask?: AiAnalysisTaskCoverResult
   /**
    * 视频内容分析智能标签任务的查询结果，当任务类型为 Tag 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagTask: AiAnalysisTaskTagResult
+  TagTask?: AiAnalysisTaskTagResult
   /**
    * 视频内容分析智能按帧标签任务的查询结果，当任务类型为 FrameTag 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FrameTagTask: AiAnalysisTaskFrameTagResult
+  FrameTagTask?: AiAnalysisTaskFrameTagResult
   /**
    * 视频内容分析智能精彩集锦任务的查询结果，当任务类型为 Highlight 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  HighlightTask: AiAnalysisTaskHighlightResult
+  HighlightTask?: AiAnalysisTaskHighlightResult
 }
 
 /**
@@ -11400,11 +11341,11 @@ export interface AiRecognitionTaskOcrWordsResultItem {
   /**
    * 文本关键词。
    */
-  Word: string
+  Word?: string
   /**
    * 文本关键出现的片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskOcrWordsSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskOcrWordsSegmentItem>
 }
 
 /**
@@ -11482,7 +11423,7 @@ export interface AiAnalysisTaskTagInput {
   /**
    * 视频智能标签模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -11564,7 +11505,7 @@ export interface AiRecognitionTaskObjectResultInput {
   /**
    * 物体识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -11811,7 +11752,6 @@ export interface AiReviewTaskTerrorismResult {
   Input?: AiReviewTerrorismTaskInput
   /**
    * 音视频审核涉及令人不安全的信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewTerrorismTaskOutput
   /**
@@ -12264,7 +12204,6 @@ export interface DescribeTranscodeTemplatesResponse {
   TotalCount?: number
   /**
    * 转码模板详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeTemplateSet?: Array<TranscodeTemplate>
   /**
@@ -12280,11 +12219,11 @@ export interface MediaAiAnalysisTagItem {
   /**
    * 标签名称。
    */
-  Tag: string
+  Tag?: string
   /**
    * 标签的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -12332,15 +12271,15 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
   /**
    * 识别文本。
    */
-  Text: string
+  Text?: string
 }
 
 /**
@@ -12640,7 +12579,7 @@ export interface AiAnalysisTaskHighlightInput {
   /**
    * 视频智能精彩片段模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -13004,15 +12943,15 @@ export interface ClipTask2017 {
   /**
    * 视频剪辑任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 视频剪辑任务源文件 ID。
    */
-  SrcFileId: string
+  SrcFileId?: string
   /**
    * 视频剪辑输出的文件信息。
    */
-  FileInfo: ClipFileInfo2017
+  FileInfo?: ClipFileInfo2017
 }
 
 /**
@@ -13211,7 +13150,7 @@ export interface DescribeFileAttributesTaskOutput {
   /**
    * 媒体文件的 Md5 值。
    */
-  Md5: string
+  Md5?: string
   /**
    * 媒体文件的 Sha1 值。
    */
@@ -13402,7 +13341,6 @@ export interface AiReviewTaskPornResult {
   Input?: AiReviewPornTaskInput
   /**
    * 音视频审核涉及令人反感的信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewPornTaskOutput
   /**
@@ -13591,7 +13529,6 @@ export interface AiAnalysisTaskClassificationResult {
   Input?: AiAnalysisTaskClassificationInput
   /**
    * 智能分类任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskClassificationOutput
   /**
@@ -14930,11 +14867,11 @@ export interface MediaAiAnalysisClassificationItem {
   /**
    * 智能分类的类别名称。
    */
-  Classification: string
+  Classification?: string
   /**
    * 智能分类的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -14963,7 +14900,6 @@ export interface AiAnalysisTaskFrameTagResult {
   Input?: AiAnalysisTaskFrameTagInput
   /**
    * 智能按帧标签任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskFrameTagOutput
   /**
@@ -15066,7 +15002,6 @@ export interface AiRecognitionTaskAsrFullTextResult {
   Input?: AiRecognitionTaskAsrFullTextResultInput
   /**
    * 语音全文识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskAsrFullTextResultOutput
   /**
@@ -15226,19 +15161,19 @@ export interface AiRecognitionTaskOcrWordsSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**
@@ -15317,7 +15252,6 @@ export interface MediaCastEvent {
 <li>Scheduled ：等待定时时间到达后启动；</li>
 <li>Stopped ：已经停止转推；</li>
 <li>Idle ：空闲。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -16052,7 +15986,7 @@ export interface AiAnalysisTaskFrameTagInput {
   /**
    * 视频智能按帧标签模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -16062,15 +15996,15 @@ export interface MediaAiAnalysisFrameTagSegmentItem {
   /**
    * 按帧标签起始的偏移时间。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 按帧标签结束的偏移时间。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 时间片段内的标签列表。
    */
-  TagSet: Array<MediaAiAnalysisFrameTagItem>
+  TagSet?: Array<MediaAiAnalysisFrameTagItem>
 }
 
 /**
@@ -16080,11 +16014,11 @@ export interface AiRecognitionTaskAsrWordsResultItem {
   /**
    * 语音关键词。
    */
-  Word: string
+  Word?: string
   /**
    * 语音关键词出现的时间片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskAsrWordsSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskAsrWordsSegmentItem>
 }
 
 /**
@@ -16444,17 +16378,17 @@ export interface AiSampleFailFaceInfo {
   /**
    * 对应入参 FaceContents 中错误图片下标，从 0 开始。
    */
-  Index: number
+  Index?: number
   /**
    * 错误码，取值：
 <li>0：成功；</li>
 <li>其他：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误描述。
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -16672,7 +16606,7 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
   /**
    * 文本全文识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -16725,7 +16659,7 @@ export interface AiRecognitionTaskSegmentResultInput {
   /**
    * 视频拆条模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -16814,7 +16748,7 @@ export interface AiRecognitionTaskFaceResultInput {
   /**
    * 人脸识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -16900,7 +16834,6 @@ export interface AiReviewTaskPoliticalResult {
   Input?: AiReviewPoliticalTaskInput
   /**
    * 音视频审核涉及令人不适宜信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewPoliticalTaskOutput
   /**
@@ -16970,21 +16903,11 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
    */
   Name?: string
   /**
-   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 截图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Width?: number
   /**
-   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 截图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Height?: number
   /**
@@ -17227,12 +17150,10 @@ export interface ReviewAudioVideoTask {
   Message?: string
   /**
    * 音视频审核任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: ReviewAudioVideoTaskInput
   /**
    * 音视频审核任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: ReviewAudioVideoTaskOutput
   /**
@@ -17506,7 +17427,7 @@ export interface AiRecognitionTaskAsrWordsResultInput {
   /**
    * 语音关键词识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -17518,15 +17439,15 @@ export interface SnapshotByTimeOffset2017 {
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 截图的具体时间点，单位：毫秒。
    */
-  TimeOffset: number
+  TimeOffset?: number
   /**
    * 截图输出文件地址。
    */
-  Url: string
+  Url?: string
 }
 
 /**
@@ -17731,11 +17652,11 @@ export interface ModifyImageSpriteTemplateRequest {
    */
   Name?: string
   /**
-   * 雪碧图中小图的宽度，取值范围： [128, 4096]，单位：px。
+   * 雪碧图中小图的宽度，取值范围： [32, 4096]，单位：px。
    */
   Width?: number
   /**
-   * 雪碧图中小图的高度，取值范围： [128, 4096]，单位：px。
+   * 雪碧图中小图的高度，取值范围： [32, 4096]，单位：px。
    */
   Height?: number
   /**
@@ -17766,10 +17687,7 @@ export interface ModifyImageSpriteTemplateRequest {
    */
   ColumnCount?: number
   /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：black 。
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li><li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li><li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li><li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>默认值：black 。
    */
   FillType?: string
   /**
@@ -19378,7 +19296,6 @@ export interface AiRecognitionTaskObjectResult {
   Input?: AiRecognitionTaskObjectResultInput
   /**
    * 物体识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskObjectResultOutput
   /**
@@ -19513,7 +19430,6 @@ export interface AiRecognitionTaskAsrWordsResult {
   Input?: AiRecognitionTaskAsrWordsResultInput
   /**
    * 语音关键词识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskAsrWordsResultOutput
   /**
@@ -19539,7 +19455,7 @@ export interface CreateSubAppIdRequest {
    */
   Name: string
   /**
-   * 应用简介，长度限制： 300个字符。
+   * 应用简介，长度限制： 300个字符。不填则应用简介默认为空。
    */
   Description?: string
 }
@@ -19899,7 +19815,6 @@ export interface AiReviewTaskPornAsrResult {
   Input?: AiReviewPornAsrTaskInput
   /**
    * 音视频审核 Asr 文字涉及令人反感的信息的任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewPornAsrTaskOutput
   /**
@@ -20565,16 +20480,16 @@ export interface MediaAiAnalysisFrameTagItem {
   /**
    * 按帧标签名称。
    */
-  Tag: string
+  Tag?: string
   /**
    * 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。
 比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。
    */
-  CategorySet: Array<string>
+  CategorySet?: Array<string>
   /**
    * 按帧标签的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -21041,7 +20956,6 @@ export interface AiRecognitionTaskHeadTailResult {
   Input?: AiRecognitionTaskHeadTailResultInput
   /**
    * 视频片头片尾识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskHeadTailResultOutput
   /**
@@ -21104,21 +21018,21 @@ export interface AiRecognitionTaskFaceResultItem {
   /**
    * 人物唯一标识 ID。
    */
-  Id: string
+  Id?: string
   /**
    * 人物库类型，表示识别出的人物来自哪个人物库：
 <li>Default：默认人物库；</li>
 <li>UserDefine：用户自定义人物库。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 人物名称。
    */
-  Name: string
+  Name?: string
   /**
    * 人物出现的片段结果集。
    */
-  SegmentSet: Array<AiRecognitionTaskFaceSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskFaceSegmentItem>
 }
 
 /**
@@ -21128,7 +21042,7 @@ export interface AiAnalysisTaskCoverInput {
   /**
    * 视频智能封面模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -21337,12 +21251,10 @@ export interface RoundPlayFilePlayInfo {
   StartPlayTime?: string
   /**
    * 播放时长，单位为秒。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
   /**
    * 播放进度，单位为秒。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number
 }
@@ -21472,15 +21384,15 @@ export interface HighlightSegmentItem {
   /**
    * 置信度。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 片段起始时间偏移。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 片段结束时间偏移。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
 }
 
 /**
@@ -21750,54 +21662,45 @@ export interface AiRecognitionResult {
   /**
    * 视频片头片尾识别结果，当 Type 为
  HeadTailRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadTailTask?: AiRecognitionTaskHeadTailResult
   /**
    * 视频拆条识别结果，当 Type 为
  SegmentRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentTask?: AiRecognitionTaskSegmentResult
   /**
    * 人脸识别结果，当 Type 为 
  FaceRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FaceTask?: AiRecognitionTaskFaceResult
   /**
    * 语音关键词识别结果，当 Type 为
  AsrWordsRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrWordsTask?: AiRecognitionTaskAsrWordsResult
   /**
    * 语音全文识别结果，当 Type 为
  AsrFullTextRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult
   /**
    * 语音翻译结果，当 Type 为 AsrTranslateRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrTranslateTask?: AiRecognitionTaskAsrTranslateResult
   /**
    * 文本关键词识别结果，当 Type 为
  OcrWordsRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrWordsTask?: AiRecognitionTaskOcrWordsResult
   /**
    * 文本全文识别结果，当 Type 为
  OcrFullTextRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult
   /**
    * 物体识别结果，当 Type 为
  ObjectRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectTask?: AiRecognitionTaskObjectResult
 }

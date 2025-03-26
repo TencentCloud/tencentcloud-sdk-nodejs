@@ -178,38 +178,37 @@ export interface AutoSnapshotPolicy {
 export interface DetailPrice {
   /**
    * 描述计费项目名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PriceTitle: string
+  PriceTitle?: string
   /**
    * 描述计费项目显示名称，用户控制台展示。
    */
-  PriceName: string
+  PriceName?: string
   /**
    * 预付费云盘预支费用的原价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 预付费云盘预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiscountPrice: number
+  DiscountPrice?: number
   /**
    * 后付费云盘原单价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPrice: number
+  UnitPrice?: number
   /**
    * 后付费云盘折扣单价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPriceDiscount: number
+  UnitPriceDiscount?: number
   /**
    * 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChargeUnit: string
+  ChargeUnit?: string
   /**
    * 高精度预付费云盘预支费用的原价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2341,7 +2340,6 @@ export interface PrepayPrice {
   UnitPrice?: number
   /**
    * 计费项目明细列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetailPrices?: Array<DetailPrice>
 }

@@ -1066,11 +1066,11 @@ export interface ResourceTagMapping {
    * 资源六段式。腾讯云使用资源六段式描述一个资源。
 例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
    */
-  Resource: string
+  Resource?: string
   /**
    * 资源关联的标签列表
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }
 
 /**

@@ -1340,7 +1340,6 @@ China-Mainland（中国大陆）
 China-Hong Kong, Macao and Taiwan（港澳台地区）
 America（美国）
 Europe（欧洲）
-India（印度）
 Other-Overseas（其他境外地区）
    */
   ProductRegion?: string
@@ -2184,31 +2183,31 @@ export interface ProductBase {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 产器型号(APP产品,为APP包名)
    */
-  ProductModel: string
+  ProductModel?: string
   /**
    * 产品名称
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 产品描述信息
    */
-  ProductDescription: string
+  ProductDescription?: string
   /**
    * 创建时间，UNIX 时间戳，单位秒
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 物模型发布版本号,0代表物模型尚未发布
    */
-  IotModelRevision: number
+  IotModelRevision?: number
   /**
    * 产品密钥
    */
-  SecretKey: string
+  SecretKey?: string
   /**
    * 设备功能码
 ypsxth : 音频双向通话;	
@@ -2219,23 +2218,22 @@ Alexa : Alexa接入;
 Google : Google接入;
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FuncCode: Array<string>
+  FuncCode?: Array<string>
   /**
    * 产品类别，0 : 普通视频设备；1 : NVR设备
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductCate: number
+  ProductCate?: number
   /**
    * 产品地域
 China-Mainland（中国大陆）
 China-Hong Kong, Macao and Taiwan（港澳台地区）
 America（美国）
 Europe（欧洲）
-India（印度）
 Other-Overseas（其他境外地区）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductRegion: string
+  ProductRegion?: string
 }
 
 /**

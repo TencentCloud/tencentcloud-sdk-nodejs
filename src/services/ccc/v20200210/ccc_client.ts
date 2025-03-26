@@ -93,6 +93,7 @@ import {
   SkillGroupInfoItem,
   CreateAIAgentCallRequest,
   UpdateCCCSkillGroupRequest,
+  TimeRange,
   ModifyStaffPasswordRequest,
   ModifyStaffResponse,
   ModifyExtensionRequest,

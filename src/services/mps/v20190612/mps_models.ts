@@ -1431,6 +1431,34 @@ export interface DescribeAsrHotwordsRequest {
 }
 
 /**
+ * 音轨信息
+ */
+export interface AudioTrackChannelInfo {
+  /**
+   * 是否开启混音，可选值：
+0：表示不开启混音
+1：表示开启混音
+默认值：0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelsRemix?: number
+  /**
+   * 合并音轨输入类型，可选值：
+trask：表示使用音轨id；
+trask_channel： 表示使用音轨id和声道id；
+默认：trask。
+注意：如果原视频是多声道，建议使用trask_channel。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectType?: string
+  /**
+   * 音轨信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputTrackInfo?: Array<TrackInfo>
+}
+
+/**
  * 转码信息
  */
 export interface MediaTranscodeItem {
@@ -2608,6 +2636,12 @@ export interface AudioTemplateInfo {
 默认值：2。
    */
   AudioChannel?: number
+  /**
+   * 合并音轨信息。
+注意：此字段只是自适应转码生效，
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrackChannelInfo?: AudioTrackChannelInfo
 }
 
 /**
@@ -5462,6 +5496,32 @@ export interface ImageWatermarkInput {
 <li>repeat：水印循环播放，直到视频结束（默认值）。</li>
    */
   RepeatType?: string
+}
+
+/**
+ * 音轨信息
+ */
+export interface TrackInfo {
+  /**
+   * 音轨和声道数字，说明：
+当：SelectType值为trask，此值为整数类型，例如：1；
+当：SelectType值为trask_channel，此值为小数类型，例如：1.0；
+默认值：1.0
+注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrackNum?: string
+  /**
+   * 声道音量大小，说明：
+当：AudioChannel的值为1时，此值长度为1；
+当：AudioChannel的值为2时，此值长度为2；
+当：AudioChannel的值为6时，此值长度大于2。
+此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。
+注意：支持3位小数。
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelVolume?: Array<number>
 }
 
 /**
@@ -10795,6 +10855,10 @@ export interface SegmentRecognitionItem {
    * 直播拆条用，人物位置参考信息用于横转竖。
    */
   PersonPositionUrl?: string
+  /**
+   * 指定人物ID。
+   */
+  PersonId?: string
 }
 
 /**
@@ -11580,6 +11644,12 @@ export interface AdaptiveStreamTemplate {
 <li>1：是。</li>
    */
   RemoveVideo?: number
+  /**
+   * 音频参数信息列表。
+注意：参数数组长度最大为64。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioList?: Array<AudioTemplateInfo>
 }
 
 /**
@@ -17926,6 +17996,16 @@ export interface HighlightSegmentItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentTags?: Array<string>
+  /**
+   * 直播切片对应直播起始时间点，采用 ISO 日期格式。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: string
+  /**
+   * 直播切片对应直播结束时间点，采用 ISO 日期格式。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
 }
 
 /**

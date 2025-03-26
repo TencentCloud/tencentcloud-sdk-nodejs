@@ -20,7 +20,7 @@
  */
 export interface ChatCompletionsRequest {
   /**
-   * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-code、hunyuan-role、hunyuan-functioncall、hunyuan-vision、hunyuan-turbo、hunyuan-turbo-latest、hunyuan-turbo-20241223、hunyuan-turbo-20241120、hunyuan-large、hunyuan-large-longcontext、hunyuan-turbo-vision、hunyuan-standard-vision、hunyuan-lite-vision、hunyuan-turbos-20250226、hunyuan-turbos-latest、hunyuan-t1-20250321、hunyuan-t1-latest。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。
+   * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-code、hunyuan-role、hunyuan-functioncall、hunyuan-vision、hunyuan-turbo、hunyuan-turbo-latest、hunyuan-turbo-20241223、hunyuan-turbo-20241120、hunyuan-large、hunyuan-large-longcontext、hunyuan-turbo-vision、hunyuan-standard-vision、hunyuan-lite-vision、hunyuan-turbos-20250226、hunyuan-turbos-latest、hunyuan-t1-20250321、hunyuan-t1-latest、hunyuan-turbos-role-plus。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。
    */
   Model: string
   /**
@@ -77,6 +77,7 @@ export interface ChatCompletionsRequest {
 2. 未传值时默认打开开关。
 3. 关闭时将直接由主模型生成回复内容，可以降低响应时延（对于流式输出时的首字时延尤为明显）。但在少数场景里，回复效果可能会下降。
 4. 安全审核能力不属于功能增强范围，不受此字段影响。
+5. 2025-04-20 00:00:00起，由默认开启状态转为默认关闭状态。
    */
   EnableEnhancement?: boolean
   /**
@@ -227,7 +228,7 @@ export interface GetEmbeddingRequest {
    */
   Input?: string
   /**
-   * 输入文本数组。输入数组总长度不超过 200 。
+   * 输入文本数组。输入数组总长度不超过 50 。
    */
   InputList?: Array<string>
 }

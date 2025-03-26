@@ -814,6 +814,14 @@ export interface CreatePredictiveDialingCampaignRequest {
    * 被叫属性
    */
   CalleeAttributes?: Array<CalleeAttribute>
+  /**
+   * IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones
+   */
+  TimeZone?: string
+  /**
+   * 可用时间段
+   */
+  AvailableTime?: Array<TimeRange>
 }
 
 /**
@@ -1507,9 +1515,9 @@ export interface CreateAutoCalloutTaskRequest {
    */
   Callers: Array<string>
   /**
-   * 呼叫使用的Ivr
+   * 呼叫使用的 IVR Id，不填时需要填写 AIAgentId
    */
-  IvrId: number
+  IvrId?: number
   /**
    * 任务名
    */
@@ -1538,6 +1546,18 @@ export interface CreateAutoCalloutTaskRequest {
    * 被叫属性
    */
   CalleeAttributes?: Array<CalleeAttribute>
+  /**
+   * IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones
+   */
+  TimeZone?: string
+  /**
+   * 可用时间段
+   */
+  AvailableTime?: Array<TimeRange>
+  /**
+   * 智能体 ID，不填写时需要填写 IvrId
+   */
+  AIAgentId?: number
 }
 
 /**
@@ -2310,6 +2330,20 @@ export interface UpdateCCCSkillGroupRequest {
 }
 
 /**
+ * 时间范围，24 小时制，格式为 09:00:00
+ */
+export interface TimeRange {
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+}
+
+/**
  * ModifyStaffPassword请求参数结构体
  */
 export interface ModifyStaffPasswordRequest {
@@ -2677,8 +2711,14 @@ export interface StaffInfo {
   StaffNumber?: string
   /**
    * 用户角色id
+一个用户绑定了多个角色时以RoleIdList为准
+   * @deprecated
    */
   RoleId?: number
+  /**
+   * 用户角色id列表
+   */
+  RoleIdList?: number
   /**
    * 所属技能组列表
    */

@@ -163,12 +163,10 @@ export interface DescribeInstanceDetailResponse {
   Zone?: string
   /**
    * 金融围笼ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FenceId?: string
   /**
    * 所属集群ID(默认集群为空)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
@@ -184,109 +182,107 @@ export interface DescribeInstanceDetail {
   /**
    * 独享集群实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 独享集群实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 产品ID, 0:CDB, 1:TDSQL
    */
-  ProductId: number
+  ProductId?: number
   /**
    * 集群类型, 0:公有云, 1:金融围笼, 2:CDC集群
    */
-  Type: number
+  Type?: number
   /**
    * 主机类型, 0:物理机, 1:CVM机型, 2:CDC机型
    */
-  HostType: number
+  HostType?: number
   /**
    * 自动续费标志, 0:未设置, 1:自动续费, 2:到期不续费
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 集群状态
    */
-  Status: number
+  Status?: number
   /**
    * 集群状态描述
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 到期时间
    */
-  PeriodEndTime: string
+  PeriodEndTime?: string
   /**
    * 主机数
    */
-  HostNum: number
+  HostNum?: number
   /**
    * DB实例数
    */
-  DbNum: number
+  DbNum?: number
   /**
    * 分配策略, 0:紧凑, 1:均匀
    */
-  AssignStrategy: number
+  AssignStrategy?: number
   /**
    * 总主机CPU(单位:核数)
    */
-  CpuSpec: number
+  CpuSpec?: number
   /**
    * 总已分配CPU(单位:核数)
    */
-  CpuAssigned: number
+  CpuAssigned?: number
   /**
    * 总可分配CPU(单位:核数)
    */
-  CpuAssignable: number
+  CpuAssignable?: number
   /**
    * 总主机内存(单位:GB)
    */
-  MemorySpec: number
+  MemorySpec?: number
   /**
    * 总已分配内存(单位:GB)
    */
-  MemoryAssigned: number
+  MemoryAssigned?: number
   /**
    * 总可分配内存(单位:GB)
    */
-  MemoryAssignable: number
+  MemoryAssignable?: number
   /**
    * 总机器磁盘(单位:GB)
    */
-  DiskSpec: number
+  DiskSpec?: number
   /**
    * 总已分配磁盘(单位:GB)
    */
-  DiskAssigned: number
+  DiskAssigned?: number
   /**
    * 总可分配磁盘(单位:GB)
    */
-  DiskAssignable: number
+  DiskAssignable?: number
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 金融围笼ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FenceId: string
+  FenceId?: string
   /**
    * 所属集群ID(默认集群为空)
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
 }
 
 /**
@@ -433,22 +429,18 @@ export interface HostDetail {
 export interface InstanceDeviceInfo {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 读写设备组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadWriteDevice?: Array<DeviceInfo>
   /**
    * 只读设备组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadOnlyDevice?: Array<DeviceInfo>
   /**
    * 空闲设备组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeDevice?: Array<DeviceInfo>
 }

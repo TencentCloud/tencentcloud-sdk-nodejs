@@ -570,7 +570,7 @@ export interface DescribeDeviceResourceResponse {
   /**
    * 设备资源详情
    */
-  Result: DeviceResourceInfo
+  Result?: DeviceResourceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1439,7 +1439,7 @@ export interface DescribeProductResourceResponse {
    * 资源详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ProductResourceInfo
+  Result?: ProductResourceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2587,12 +2587,12 @@ export interface DescribeDeviceResourcesResponse {
   /**
    * 资源总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 资源列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: Array<DeviceResourceInfo>
+  Result?: Array<DeviceResourceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3518,39 +3518,39 @@ export interface DeviceResourceInfo {
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductID?: string
   /**
    * 产品名
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 资源名称
    */
-  Name: string
+  Name?: string
   /**
    * 资源文件md5
    */
-  Md5: string
+  Md5?: string
   /**
    * 资源文件大小
    */
-  Size: number
+  Size?: number
   /**
    * 资源更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 设备名称
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 设备资源上传状态
    */
-  Status: number
+  Status?: number
   /**
    * 设备资源上传百分比
    */
-  Percent: number
+  Percent?: number
 }
 
 /**

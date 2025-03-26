@@ -268,7 +268,6 @@ export interface DescribeNamespacesResponse {
 export interface DescribeInstanceCustomizedDomainResponse {
   /**
    * 域名信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DomainInfoList?: Array<CustomizedDomainInfo>
   /**
@@ -738,7 +737,6 @@ export interface DescribeInstancesResponse {
   TotalCount?: number
   /**
    * 实例信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Registries?: Array<Registry>
   /**
@@ -2356,9 +2354,8 @@ export interface CreateSignaturePolicyResponse {
 export interface DescribeInternalEndpointDnsStatusResponse {
   /**
    * vpc私有域名解析状态列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcSet: Array<VpcPrivateDomainStatus>
+  VpcSet?: Array<VpcPrivateDomainStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3462,6 +3459,14 @@ export interface DescribeImmutableTagRulesRequest {
    * 实例 Id
    */
   RegistryId: string
+  /**
+   * 页数，默认为1
+   */
+  Page?: number
+  /**
+   * 每页展示个数，最大值为100
+   */
+  PageSize?: number
 }
 
 /**
@@ -3772,12 +3777,10 @@ export interface DescribeImageManifestsResponse {
   Config?: string
   /**
    * 镜像的Labels信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<KeyValueString>
   /**
    * 镜像大小，单位：byte
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: number
   /**
@@ -4192,12 +4195,11 @@ export interface DescribeExternalEndpointStatusResponse {
   /**
    * 开启公网访问状态，开启中（Opening）、已开启（Opened）、关闭（Closed）
    */
-  Status: string
+  Status?: string
   /**
    * 原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4247,12 +4249,10 @@ export interface ManageExternalEndpointResponse {
 export interface DescribeImmutableTagRulesResponse {
   /**
    * 规则列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rules?: Array<ImmutableTagRule>
   /**
    * 未创建规则的命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EmptyNs?: Array<string>
   /**
@@ -4353,7 +4353,6 @@ export interface CreateInstanceTokenRequest {
 export interface DescribeServiceAccountsResponse {
   /**
    * 服务级账号列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceAccounts?: Array<ServiceAccount>
   /**
@@ -4758,7 +4757,6 @@ export interface ServiceAccount {
   ExpiresAt?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**

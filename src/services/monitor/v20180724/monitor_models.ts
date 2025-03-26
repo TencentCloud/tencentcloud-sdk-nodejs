@@ -996,6 +996,21 @@ export interface AlarmPolicy {
    * 通知模板绑定内容模板信息
    */
   NoticeTmplBindInfos?: Array<NoticeContentTmplBindInfo>
+  /**
+   * 模板通知的等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HierarchicalNotices?: Array<AlarmHierarchicalNotice>
+  /**
+   * 通知模板绑定内容模板信息，同NoticeTmplBindInfos
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContentTmplBindInfos?: Array<NoticeContentTmplBindInfo>
+  /**
+   * 预设配置id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PredefinedConfigID?: string
 }
 
 /**
@@ -2370,6 +2385,11 @@ export interface URLNotice {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weekday?: Array<number | bigint>
+  /**
+   * 组名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupMembers?: string
 }
 
 /**
@@ -10700,13 +10720,7 @@ export interface DescribeAlarmPoliciesRequest {
    */
   Namespaces?: Array<string>
   /**
-   * 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：
-`[ {"Dimensions": {"unInstanceId": "ins-qr8d555g"}}, {"Dimensions": {"unInstanceId": "ins-qr8d555h"}} ]`
-具体也可以参考下方的示例 2。
-
-不同云产品参数示例详见 [维度信息Dimensions列表](https://cloud.tencent.com/document/product/248/50397)
-
-注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时
+   * 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：`[[{"name":"unInstanceId","value":"ins-qr888845g"}]]`具体也可以参考下方的示例 2。不同云产品参数示例详见 [维度信息Dimensions列表](https://cloud.tencent.com/document/product/248/50397)注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时
    */
   Dimensions?: string
   /**
@@ -10791,6 +10805,10 @@ export interface DescribeAlarmPoliciesRequest {
    * 通知内容模板ID筛选
    */
   NoticeContentTmplIDs?: Array<string>
+  /**
+   * 是否为预设策略，1是，0否
+   */
+  IsPredefined?: number
 }
 
 /**
