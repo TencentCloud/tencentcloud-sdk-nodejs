@@ -238,9 +238,9 @@ it("ocr.v20181119.MainlandPermitOCR", async function () {
     }
 })
 
-it("ocr.v20181119.FlightInvoiceOCR", async function () {
+it("ocr.v20181119.GeneralBasicOCR", async function () {
     try {
-       const data = await client.FlightInvoiceOCR({})
+       const data = await client.GeneralBasicOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,16 +318,6 @@ it("ocr.v20181119.BizLicenseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.GetTaskState", async function () {
-    try {
-       const data = await client.GetTaskState({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.RecognizeGeneralCardWarn", async function () {
     try {
        const data = await client.RecognizeGeneralCardWarn({})
@@ -338,9 +328,9 @@ it("ocr.v20181119.RecognizeGeneralCardWarn", async function () {
     }
 })
 
-it("ocr.v20181119.GeneralBasicOCR", async function () {
+it("ocr.v20181119.FlightInvoiceOCR", async function () {
     try {
-       const data = await client.GeneralBasicOCR({})
+       const data = await client.FlightInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,16 +391,6 @@ it("ocr.v20181119.RecognizeValidIDCardOCR", async function () {
 it("ocr.v20181119.BankCardOCR", async function () {
     try {
        const data = await client.BankCardOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.VatInvoiceVerify", async function () {
-    try {
-       const data = await client.VatInvoiceVerify({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,16 +541,6 @@ it("ocr.v20181119.RecognizeOnlineTaxiItineraryOCR", async function () {
 it("ocr.v20181119.RecognizeTableOCR", async function () {
     try {
        const data = await client.RecognizeTableOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.CreateAIFormTask", async function () {
-    try {
-       const data = await client.CreateAIFormTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

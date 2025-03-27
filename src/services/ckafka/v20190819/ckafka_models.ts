@@ -2710,7 +2710,7 @@ export interface DeleteAclRequest {
    */
   Operation: number
   /**
-   * 权限类型，(2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
+   * 权限类型，(2:DENY，3:ALLOW)，当前ckafka支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
    */
   PermissionType: number
   /**
@@ -3111,7 +3111,7 @@ export interface SaleInfo {
    */
   Flag?: boolean
   /**
-   * ckakfa版本号(1.1.1/2.4.2/0.10.2)
+   * ckafka版本号(1.1.1/2.4.2/0.10.2)
    */
   Version?: string
   /**
@@ -3271,7 +3271,7 @@ export interface CreateAclRequest {
    */
   Operation: number
   /**
-   * 权限类型，(2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
+   * 权限类型，(2:DENY，3:ALLOW)，当前ckafka支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
    */
   PermissionType: number
   /**

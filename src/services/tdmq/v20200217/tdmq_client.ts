@@ -27,7 +27,6 @@ import {
   RocketMQVipInstance,
   DescribeCmqQueuesResponse,
   DescribeAllTenantsResponse,
-  RocketMQConsumerTopic,
   DescribeRabbitMQNodeListRequest,
   DeleteCmqQueueResponse,
   ConsumerStats,
@@ -166,7 +165,6 @@ import {
   CreateRocketMQEnvironmentRoleRequest,
   SetRocketMQPublicAccessPointRequest,
   DeleteEnvironmentsResponse,
-  ModifyAMQPClusterRequest,
   DescribeRabbitMQBindingsResponse,
   FilterSubscription,
   TopicStats,
@@ -204,7 +202,7 @@ import {
   MigrateTopic,
   DeleteRabbitMQBindingRequest,
   DescribeRocketMQSmoothMigrationTaskResponse,
-  DescribeBindClustersRequest,
+  DeleteRabbitMQVirtualHostResponse,
   CreateRabbitMQVirtualHostRequest,
   VerifyRocketMQConsumeRequest,
   DescribeRabbitMQQueueDetailRequest,
@@ -246,7 +244,7 @@ import {
   DescribeRocketMQMsgResponse,
   DescribeEnvironmentAttributesRequest,
   ModifyPublicNetworkSecurityPolicyResponse,
-  DeleteRabbitMQVirtualHostResponse,
+  RocketMQConsumerTopic,
   DescribePublishersRequest,
   RabbitMQBindingListInfo,
   ModifyPublicNetworkSecurityPolicyRequest,
@@ -307,6 +305,7 @@ import {
   Sort,
   ConsumerLogs,
   DescribeMqMsgTraceResponse,
+  DescribeBindClustersRequest,
   CreateRabbitMQUserRequest,
   DescribeRocketMQConsumeStatsRequest,
   SendMessagesResponse,
@@ -399,7 +398,6 @@ import {
   DescribeRocketMQGroupsRequest,
   DescribeRocketMQMsgTraceResponse,
   ImportRocketMQTopicsResponse,
-  ModifyAMQPClusterResponse,
   DescribePublisherSummaryResponse,
   DeleteCmqTopicRequest,
   DescribePulsarProInstanceDetailResponse,
@@ -469,18 +467,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRabbitMQExchangesResponse) => void
   ): Promise<DescribeRabbitMQExchangesResponse> {
     return this.request("DescribeRabbitMQExchanges", req, cb)
-  }
-
-  /**
-     * 历史原因，该接口位于tdmq-manager，目前rabbitmq产品没有使用该接口，当前使用的是ModifyRabbitMQVipInstance。不过从调用链上看，线网还有请求流程，所以走预下线流程。
-
-更新Amqp集群信息
-     */
-  async ModifyAMQPCluster(
-    req: ModifyAMQPClusterRequest,
-    cb?: (error: string, rep: ModifyAMQPClusterResponse) => void
-  ): Promise<ModifyAMQPClusterResponse> {
-    return this.request("ModifyAMQPCluster", req, cb)
   }
 
   /**

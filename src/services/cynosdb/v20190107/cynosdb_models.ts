@@ -1553,7 +1553,6 @@ export interface AuditRuleTemplateInfo {
   RuleFilters?: Array<RuleFilters>
   /**
    * 规则模板描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
@@ -1562,27 +1561,22 @@ export interface AuditRuleTemplateInfo {
   CreateAt?: string
   /**
    * 规则模板修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateAt?: string
   /**
    * 告警等级。1-低风险，2-中风险，3-高风险。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: number
   /**
    * 告警策略。0-不告警，1-告警。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmPolicy?: number
   /**
    * 模板状态。0-无任务 ，1-修改中。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 规则模板应用在哪些在实例。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AffectedInstances?: Array<string>
 }
@@ -9045,7 +9039,6 @@ export interface DescribeAuditRuleTemplatesResponse {
   TotalCount?: number
   /**
    * 规则模板详细信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<AuditRuleTemplateInfo>
   /**

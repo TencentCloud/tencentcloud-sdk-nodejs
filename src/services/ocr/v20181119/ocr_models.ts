@@ -141,6 +141,7 @@ FailedOperation.UnKnowError：表示识别失败；
 17：医疗发票
 18：完税凭证
 19：海关缴款书
+20：银行回单
    */
   Type?: number
   /**
@@ -655,7 +656,7 @@ export interface WordItem {
  */
 export interface MLIDPassportOCRRequest {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。
    */
   ImageBase64?: string
   /**
@@ -663,8 +664,7 @@ export interface MLIDPassportOCRRequest {
    */
   RetImage?: boolean
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
 }
@@ -1134,28 +1134,6 @@ export interface WaybillOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateAIFormTask请求参数结构体
- */
-export interface CreateAIFormTaskRequest {
-  /**
-   * 多个文件的URL列表
-   */
-  FileList: Array<SmartFormFileUrl>
-  /**
-   * 备注信息1
-   */
-  FirstNotes?: string
-  /**
-   * 备注信息2
-   */
-  SecondNotes?: string
-  /**
-   * 文件类型
-   */
-  FileType?: number
 }
 
 /**
@@ -1929,12 +1907,19 @@ EntrustmentBook -- 海运托书
 WordRecognize -- 手写英文作文模版
 Statement -- 对账单识别模板
 BookingConfirmation -- 配舱通知书识别模板
+AirWayBill -- 航空运单识别模板
+DispatchWeightNote -- 磅单发货单识别模板
+ReceiptWeightNote -- 磅单收货单识别模板
    */
   ConfigId?: string
   /**
    * 是否开启全文字段坐标值的识别
    */
   EnableCoord?: boolean
+  /**
+   * 是否开启父子key识别，默认是
+   */
+  OutputParentKey?: boolean
 }
 
 /**
@@ -3368,6 +3353,7 @@ export interface RecognizeGeneralInvoiceRequest {
 17：医疗发票
 18：完税凭证
 19：海关缴款书
+20：银行回单
 -1：其他发票
    */
   Types?: Array<number | bigint>
@@ -4193,21 +4179,29 @@ export interface GroupInfo {
 }
 
 /**
- * 发票字段坐标信息。包括字段英文名称、字段值所在位置的四点坐标、字段所属行号，具体内容请点击左侧链接。
+ * OrgCodeCertOCR返回参数结构体
  */
-export interface ItemPolygonInfo {
+export interface OrgCodeCertOCRResponse {
   /**
-   * 发票的英文字段名称（如Title）
+   * 代码
    */
-  Key?: string
+  OrgCode?: string
   /**
-   * 字段值所在位置的四点坐标
+   * 机构名称
    */
-  Polygon?: Polygon
+  Name?: string
   /**
-   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
+   * 地址
    */
-  Row?: number
+  Address?: string
+  /**
+   * 有效期
+   */
+  ValidDate?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4407,20 +4401,6 @@ export interface InvoiceGeneralOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 智慧表单上传文件信息
- */
-export interface SmartFormFileUrl {
-  /**
-   * 文件url地址
-   */
-  FileUrl: string
-  /**
-   * 文件的顺序，顺序从1开始
-   */
-  FileOrderNumber: number
 }
 
 /**
@@ -5063,40 +5043,6 @@ export interface VatRollInvoiceOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * VatInvoiceVerify请求参数结构体
- */
-export interface VatInvoiceVerifyRequest {
-  /**
-   * 发票代码， 一张发票一天只能查询5次。
-   */
-  InvoiceCode: string
-  /**
-   * 发票号码（8位）
-   */
-  InvoiceNo: string
-  /**
-   * 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。
-   */
-  InvoiceDate: string
-  /**
-   * 根据票种传递对应值，如果报参数错误，请仔细检查每个票种对应的值
-
-增值税专用发票：开具金额（不含税）
-
-增值税普通发票、增值税电子普通发票（含通行费发票）、增值税普通发票（卷票）：校验码后6位
-
-区块链发票：不含税金额/校验码，例如：“285.01/856ab”
-
-机动车销售统一发票：不含税价
-
-货物运输业增值税专用发票：合计金额
-
-二手车销售统一发票：车价合计
-   */
-  Additional: string
 }
 
 /**
@@ -6567,28 +6513,6 @@ export interface EnglishOCRRequest {
    * 预处理开关，功能是检测图片倾斜的角度，将原本倾斜的图片矫正。该参数默认值为true。
    */
   Preprocess?: boolean
-}
-
-/**
- * VatInvoiceVerify返回参数结构体
- */
-export interface VatInvoiceVerifyResponse {
-  /**
-   * 增值税发票信息，详情请点击左侧链接。
-   */
-  Invoice?: VatInvoice
-  /**
-   * 机动车销售统一发票信息
-   */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo
-  /**
-   * 二手车销售统一发票信息
-   */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -8433,23 +8357,21 @@ export interface ItemCoord {
 }
 
 /**
- * CreateAIFormTask返回参数结构体
+ * 发票字段坐标信息。包括字段英文名称、字段值所在位置的四点坐标、字段所属行号，具体内容请点击左侧链接。
  */
-export interface CreateAIFormTaskResponse {
+export interface ItemPolygonInfo {
   /**
-   * 本次识别任务的唯一身份ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 发票的英文字段名称（如Title）
    */
-  TaskId?: string
+  Key?: string
   /**
-   * 本次识别任务的操作URL，有效期自生成之时起共24小时
-注意：此字段可能返回 null，表示取不到有效值。
+   * 字段值所在位置的四点坐标
    */
-  OperateUrl?: string
+  Polygon?: Polygon
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
    */
-  RequestId?: string
+  Row?: number
 }
 
 /**
@@ -9014,25 +8936,6 @@ export interface Polygon {
 }
 
 /**
- * GetTaskState返回参数结构体
- */
-export interface GetTaskStateResponse {
-  /**
-   * 1:任务识别完成，还未提交
-2:任务已手动关闭
-3:任务已提交
-4:任务识别中
-5:超时：任务超过了可操作的24H时限
-6:任务识别失败
-   */
-  TaskState?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 保险单据信息
  */
 export interface InsuranceBillInfo {
@@ -9116,16 +9019,6 @@ export interface QuestionOCRRequest {
    * 是否开启切边增强和弯曲矫正,默认为false不开启
    */
   EnableImageCrop?: boolean
-}
-
-/**
- * GetTaskState请求参数结构体
- */
-export interface GetTaskStateRequest {
-  /**
-   * 智慧表单任务唯一身份ID
-   */
-  TaskId: string
 }
 
 /**
@@ -10192,25 +10085,44 @@ export interface BusInvoiceOCRRequest {
 }
 
 /**
- * OrgCodeCertOCR返回参数结构体
+ * QuotaInvoiceOCR返回参数结构体
  */
-export interface OrgCodeCertOCRResponse {
+export interface QuotaInvoiceOCRResponse {
   /**
-   * 代码
+   * 发票号码
    */
-  OrgCode?: string
+  InvoiceNum?: string
   /**
-   * 机构名称
+   * 发票代码
    */
-  Name?: string
+  InvoiceCode?: string
   /**
-   * 地址
+   * 大写金额
    */
-  Address?: string
+  Rate?: string
   /**
-   * 有效期
+   * 小写金额
    */
-  ValidDate?: string
+  RateNum?: string
+  /**
+   * 发票消费类型
+   */
+  InvoiceType?: string
+  /**
+   * 省
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Province?: string
+  /**
+   * 市
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  City?: string
+  /**
+   * 是否有公司印章（1有 0无 空为识别不出）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasStamp?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10970,16 +10882,6 @@ export interface WaybillOCRRequest {
 }
 
 /**
- * ReconstructDocument配置选项
- */
-export interface ReconstructDocumentConfig {
-  /**
-   * 生成的Markdown中是否嵌入图片
-   */
-  EnableInsetImage?: boolean
-}
-
-/**
  * RecognizeStoreName返回参数结构体
  */
 export interface RecognizeStoreNameResponse {
@@ -11546,48 +11448,13 @@ export interface FinanBillOCRRequest {
 }
 
 /**
- * QuotaInvoiceOCR返回参数结构体
+ * ReconstructDocument配置选项
  */
-export interface QuotaInvoiceOCRResponse {
+export interface ReconstructDocumentConfig {
   /**
-   * 发票号码
+   * 生成的Markdown中是否嵌入图片
    */
-  InvoiceNum?: string
-  /**
-   * 发票代码
-   */
-  InvoiceCode?: string
-  /**
-   * 大写金额
-   */
-  Rate?: string
-  /**
-   * 小写金额
-   */
-  RateNum?: string
-  /**
-   * 发票消费类型
-   */
-  InvoiceType?: string
-  /**
-   * 省
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Province?: string
-  /**
-   * 市
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  City?: string
-  /**
-   * 是否有公司印章（1有 0无 空为识别不出）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HasStamp?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EnableInsetImage?: boolean
 }
 
 /**

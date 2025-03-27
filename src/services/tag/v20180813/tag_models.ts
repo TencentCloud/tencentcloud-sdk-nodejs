@@ -932,12 +932,12 @@ export interface ResourceIdTag {
    * 资源唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 标签键值对
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKeyValues: Array<Tag>
+  TagKeyValues?: Array<Tag>
 }
 
 /**
@@ -1110,11 +1110,11 @@ export interface GetResourcesResponse {
   /**
    * 获取的下一页的Token值
    */
-  PaginationToken: string
+  PaginationToken?: string
   /**
    * 资源及关联的标签(键和值)列表
    */
-  ResourceTagMappingList: Array<ResourceTagMapping>
+  ResourceTagMappingList?: Array<ResourceTagMapping>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1507,25 +1507,25 @@ export interface ResourceTag {
    * 资源所在地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceRegion: string
+  ResourceRegion?: string
   /**
    * 业务类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceType: string
+  ServiceType?: string
   /**
    * 资源前缀
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourcePrefix: string
+  ResourcePrefix?: string
   /**
    * 资源唯一标记
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 资源标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }

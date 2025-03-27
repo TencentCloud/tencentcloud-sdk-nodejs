@@ -2627,6 +2627,10 @@ export interface DescribeCloudRecordingRequest {
    * 录制任务的唯一Id，在启动录制成功后会返回。
    */
   TaskId: string
+  /**
+   * 转推录制任务发起时所填，标识一次录制
+   */
+  RecorderKey?: string
 }
 
 /**
@@ -3683,6 +3687,10 @@ Exited：表示当前录制任务正在退出的过程中。
    * 录制文件信息。
    */
   StorageFileList?: Array<StorageFile>
+  /**
+   * 转推录制任务发起时所填，标识一次录制
+   */
+  RecorderKey?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

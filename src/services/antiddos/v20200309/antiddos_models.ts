@@ -1306,27 +1306,22 @@ export interface OverviewDDoSEvent {
 export interface StaticPackRelation {
   /**
    * 保底带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProtectBandwidth?: number
   /**
    * 业务带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalBandwidth?: number
   /**
    * 转发规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardRulesLimit?: number
   /**
    * 自动续费标记
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
    * 到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurDeadline?: string
 }
@@ -1495,7 +1490,6 @@ export interface BoundIpInfo {
   IspCode?: number
   /**
    * 域名化资产对应的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
 }
@@ -1811,7 +1805,6 @@ export interface AclConfig {
   Action: string
   /**
    * 策略优先级，数字越小，级别越高，该规则越靠前匹配，取值1-1000
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Priority?: number
 }
@@ -2505,12 +2498,10 @@ export interface DescribeBasicDeviceStatusResponse {
   Data?: Array<KeyValue>
   /**
    * 域名化资产的名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBData?: Array<KeyValue>
   /**
    * cnamewaf资源状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CnameWafData?: Array<KeyValue>
   /**
@@ -2564,7 +2555,6 @@ export interface L4RuleSource {
   Port?: number
   /**
    * 备份源站，1: 备份源站，0: 普通源站
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Backup?: number
 }
@@ -2703,22 +2693,18 @@ export interface BGPIPInstance {
   StaticPackRelation?: StaticPackRelation
   /**
    * 区分高防IP境外线路
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 区分集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tgw?: number
   /**
    * 高防弹性公网IP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)。只对高防弹性公网IP实例有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EipAddressStatus?: string
   /**
    * 是否高防弹性公网IP实例，是为1，否为0。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EipFlag?: number
   /**
@@ -2735,7 +2721,6 @@ export interface BGPIPInstance {
   EipAddressInfo?: EipAddressRelation
   /**
    * 建议客户接入的域名，客户可使用域名接入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
   /**
@@ -2744,17 +2729,14 @@ export interface BGPIPInstance {
   DamDDoSStatus?: number
   /**
    * 是否Ipv6版本的IP, 是为1，否为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   V6Flag?: number
   /**
    * 是否渠道版高防IP，是为1，否为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BGPIPChannelFlag?: number
   /**
    * 资源关联标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagInfoList?: Array<TagInfo>
   /**
@@ -2765,22 +2747,18 @@ export interface BGPIPInstance {
   AnycastOutPackRelation?: AnycastOutPackRelation
   /**
    * 资源实例版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceVersion?: number
   /**
    * 重保实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConvoyId?: string
   /**
    * 带宽后付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElasticBandwidth?: number
   /**
    * 是否为EO代播的ip: 1是，0不是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EOFlag?: number
 }
@@ -3162,27 +3140,22 @@ export interface DescribeOverviewDDoSEventListRequest {
 export interface EipAddressRelation {
   /**
    * 高防弹性公网IP绑定的实例地区，例如hk代表中国香港
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EipAddressRegion?: string
   /**
    * 绑定的资源实例ID。可能是一个CVM。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EipBoundRscIns?: string
   /**
    * 绑定的弹性网卡ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EipBoundRscEni?: string
   /**
    * 绑定的资源内网ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EipBoundRscVip?: string
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
 }
@@ -3296,7 +3269,6 @@ export interface IPLineInfo {
   ResourceFlag?: number
   /**
    * 域名化资产对应的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
 }
@@ -3545,22 +3517,18 @@ SMP(smp协议)
 export interface AnycastOutPackRelation {
   /**
    * 业务带宽(单位M)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalBandwidth?: number
   /**
    * 转发规则数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardRulesLimit?: number
   /**
    * 自动续费标记
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
    * 到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurDeadline?: string
 }
@@ -4106,37 +4074,30 @@ export interface BGPInstanceSpecification {
   AutoRenewFlag?: number
   /**
    * 联合产品标记，0代表普通高防包，1代表联合高防包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnionPackFlag?: number
   /**
    * 业务带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceBandWidth?: number
   /**
    * 战斗服版本标记，0表示普通高防包，1表示战斗服高防包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BattleEditionFlag?: number
   /**
    * 渠道版标记，0表示普通高防包，1表示渠道版高防包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelEditionFlag?: number
   /**
    * 高防包企业版标记，0表示普通高防包；1表示企业版高防包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnterpriseFlag?: number
   /**
    * 高防包企业版弹性阈值，0表示未开启；大于0为弹性防护阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElasticLimit?: number
   /**
    * 降配后的防护能力，单位Gbps
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DownGradeProtect?: number
 }
@@ -4496,7 +4457,6 @@ export interface BGPIPL7RuleEntry {
   ErrCode?: number
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: number
 }
@@ -4529,7 +4489,6 @@ export interface DescribeBizTrendResponse {
   MetricName?: string
   /**
    * 返回DataList中的最大值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxData?: number
   /**
@@ -4642,7 +4601,6 @@ export interface NewL7RuleEntry {
   HttpsToHttpEnable?: number
   /**
    * 接入端口值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualPort?: number
   /**
@@ -4655,7 +4613,6 @@ export interface NewL7RuleEntry {
   ErrCode?: number
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: number
 }
@@ -4913,7 +4870,6 @@ export interface DescribeCCTrendResponse {
   Data?: Array<number | bigint>
   /**
    * 资源ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
@@ -4972,7 +4928,6 @@ other(托管IP)
   InstanceId: string
   /**
    * 域名化资产对应的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
 }
@@ -5243,12 +5198,10 @@ export interface BGPInstance {
   VitalityVersion?: number
   /**
    * 网络线路
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Line?: number
   /**
    * 不计费的业务带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeServiceBandwidth?: number
   /**
@@ -5261,32 +5214,26 @@ export interface BGPInstance {
   GiftServiceBandWidth?: number
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 是否是基础防护加强版 0: 不是 1: 是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BasicPlusFlag?: number
   /**
    * 是否标准版2.0 0: 包含标准版2.0 1: 只查询标准版2.0 2: 不查标准版2.0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanCntFlag?: number
   /**
    * 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TransRegionFlag?: number
   /**
    * 是否为超级高防包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuperPackFlag?: number
   /**
    * 所属ZoneId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
 }
@@ -5305,7 +5252,6 @@ export interface DescribeBizMonitorTrendResponse {
   MetricName?: string
   /**
    * 返回DataList中的最大值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxData?: number
   /**
@@ -5627,7 +5573,6 @@ export interface L7RuleEntry {
   CCEnable?: number
   /**
    * 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpsToHttpEnable?: number
   /**
@@ -5652,7 +5597,6 @@ export interface L7RuleEntry {
   CCStatus?: number
   /**
    * 接入端口值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualPort?: number
   /**
@@ -5733,7 +5677,6 @@ export interface DescribeDDoSTrendResponse {
   Data?: Array<number | bigint>
   /**
    * 资源ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
@@ -5846,7 +5789,6 @@ export interface SchedulingDomainInfo {
   ModifyTime?: string
   /**
    * 域名名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsrDomainName?: string
 }

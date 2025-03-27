@@ -3804,6 +3804,10 @@ export interface CreateBasicDBInstancesRequest {
    * 系统时区，默认：China Standard Time
    */
   TimeZone?: string
+  /**
+   * 磁盘加密标识，0-不加密，1-加密
+   */
+  DiskEncryptFlag?: number
 }
 
 /**
@@ -3866,6 +3870,10 @@ export interface DescribeDBInstancesAttributeResponse {
    * 多节点备机只读信息
    */
   MultiDrReadableInfo?: Array<DrReadableInfo>
+  /**
+   * 是否开启磁盘加密，1-开启，0-未开启
+   */
+  IsDiskEncryptFlag?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4516,6 +4524,10 @@ export interface CreateCloudDBInstancesRequest {
    * 备节点可用区，默认为空。当MultiNodes = true时，主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。
    */
   DrZones?: Array<string>
+  /**
+   * 磁盘加密标识，0-不加密，1-加密
+   */
+  DiskEncryptFlag?: number
 }
 
 /**
@@ -5193,6 +5205,10 @@ export interface CreateCloudReadOnlyDBInstancesRequest {
    * 系统时区，默认：China Standard Time
    */
   TimeZone?: string
+  /**
+   * 磁盘加密标识，0-不加密，1-加密
+   */
+  DiskEncryptFlag?: number
 }
 
 /**

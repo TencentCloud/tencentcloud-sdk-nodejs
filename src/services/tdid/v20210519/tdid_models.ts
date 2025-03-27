@@ -720,27 +720,22 @@ export interface UpdateCredentialStateRequest {
 export interface GetOverSummaryResponse {
   /**
    * 用户参与应用的统计指标
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppCounter?: ResourceCounterData
   /**
    * 用户部署应用的统计指标
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserCounter?: ResourceCounterData
   /**
    * 用户参与的应用总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppCnt?: number
   /**
    * 用户部署的应用总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployCnt?: number
   /**
    * 部署网络子链总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChainCnt?: number
   /**

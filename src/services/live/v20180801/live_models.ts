@@ -2205,11 +2205,15 @@ export interface TaskDurationInfo {
   /**
    * 拉流转推任务的时间点
    */
-  Time: string
+  Time?: string
   /**
    * 拉流转推任务的时长，单位为分钟
    */
-  Duration: number
+  Duration?: number
+  /**
+   * 拉流转推任务的时长，单位为秒
+   */
+  DurationSecond?: number
 }
 
 /**
@@ -5706,6 +5710,10 @@ Oversea：则查询国外数据，
 默认：查询国内+国外的数据。
    */
   MainlandOrOversea?: string
+  /**
+   * 可选值：  PullLivePushLive：拉流源类型为直播  PullVodPushLive：拉流源类型为点播  PullPicPushLive：拉流源类型为图片  默认：查询全部拉流源类型
+   */
+  SourceType?: string
 }
 
 /**
@@ -7965,6 +7973,10 @@ export interface DescribePullTransformPushInfoResponse {
    * 拉流转推得总时长
    */
   TotalDuration?: number
+  /**
+   * 拉流转推得总时长（秒）
+   */
+  TotalDurationSecond?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

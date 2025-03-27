@@ -5779,6 +5779,10 @@ export interface ReverseShellEventInfo {
    * 处理时间
    */
   ModifyTime?: string
+  /**
+   * 命令详情的转义后内容，供正则加白全字符串匹配使用
+   */
+  CmdLineQuote?: string
 }
 
 /**
@@ -14792,6 +14796,10 @@ export interface ReverseShell {
    * 威胁等级：0中危，1高危
    */
   RiskLevel?: number
+  /**
+   * 命令详情的转义后内容，供正则加白全字符串匹配使用
+   */
+  CmdLineQuote?: string
 }
 
 /**
@@ -21568,6 +21576,14 @@ export interface SecurityTrend {
  * ScanTaskAgain返回参数结构体
  */
 export interface ScanTaskAgainResponse {
+  /**
+   * 下发成功的主机数
+   */
+  SuccessCount?: number
+  /**
+   * 基础版(不支持扫描)主机数
+   */
+  BasicVersionCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -6593,6 +6593,11 @@ wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、els
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Period?: string
+  /**
+   * 互联互通标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInterconnection?: number
 }
 
 /**
@@ -7383,6 +7388,11 @@ export interface IotApplication {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatNotifyStatus?: number
+  /**
+   * 互联互通产品ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InterconnectionProducts?: string
 }
 
 /**

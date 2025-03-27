@@ -68,16 +68,6 @@ it("tdmq.v20200217.DescribeRabbitMQExchanges", async function () {
     }
 })
 
-it("tdmq.v20200217.ModifyAMQPCluster", async function () {
-    try {
-       const data = await client.ModifyAMQPCluster({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.DescribeRocketMQMsgTrace", async function () {
     try {
        const data = await client.DescribeRocketMQMsgTrace({})

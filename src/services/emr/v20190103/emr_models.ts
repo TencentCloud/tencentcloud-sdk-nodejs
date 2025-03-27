@@ -255,7 +255,7 @@ export interface ScaleOutInstanceRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+   * 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型
    */
   HardwareResourceType?: string
   /**
@@ -7806,7 +7806,7 @@ export interface ScaleOutClusterRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+   * 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型
    */
   HardwareSourceType?: string
   /**

@@ -884,21 +884,19 @@ export interface DescribeScanTaskStatusResponse {
   /**
    * 返回值, 0:成功, 其他值请查看“返回值”定义
    */
-  Result: number
+  Result?: number
   /**
    * 0:默认值(待检测/待咨询), 1.检测中,  4:任务完成/咨询完成, 5:任务失败, 6:咨询中;
    */
-  Status: number
+  Status?: number
   /**
    * 诊断失败的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 任务流详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowSteps: Array<TaskFlowStepsInfo>
+  FlowSteps?: Array<TaskFlowStepsInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

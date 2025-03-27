@@ -440,6 +440,10 @@ export interface UploadFileToAndroidInstancesRequest {
    * 文件下载 URL
    */
   FileURL: string
+  /**
+   * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
+   */
+  DestinationDirectory?: string
 }
 
 /**

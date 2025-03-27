@@ -139,27 +139,22 @@ export interface ModifyConsumerGroupPasswordRequest {
 export interface StepTip {
   /**
    * 错误码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 解决方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Solution?: string
   /**
    * 帮助文档
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HelpDoc?: string
   /**
    * 当前步骤跳过信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SkipInfo?: string
 }
@@ -1787,7 +1782,6 @@ export interface SkippedDetail {
   TotalCount?: number
   /**
    * 跳过校验的表详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<SkippedItem>
 }
@@ -4067,7 +4061,6 @@ export interface DistributeRule {
   TablePattern: string
   /**
    * 列名。如果 RuleType 为 cols，此项必填。订阅任务会用该列的值计算分区。mongo没有按列分区，因此也不用传这个字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Columns?: Array<string>
 }

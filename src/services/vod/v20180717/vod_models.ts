@@ -1286,17 +1286,14 @@ export interface QualityEnhanceTask {
   Progress?: number
   /**
    * 音画质重生任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: QualityEnhanceTaskInput
   /**
    * 音画质重生任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: QualityEnhanceTaskOutput
   /**
    * 音画质重生输出视频的元信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaData?: MediaMetaData
   /**
@@ -1424,15 +1421,15 @@ export interface MediaSnapshotByTimePicInfoItem {
   /**
    * 该张截图对应视频文件中的时间偏移，单位为<font color=red>毫秒</font>。
    */
-  TimeOffset: number
+  TimeOffset?: number
   /**
    * 该张截图的 URL 地址。
    */
-  Url: string
+  Url?: string
   /**
    * 截图如果被打上了水印，被打水印的模板 ID 列表。
    */
-  WaterMarkDefinition: Array<number | bigint>
+  WaterMarkDefinition?: Array<number | bigint>
 }
 
 /**
@@ -1628,7 +1625,6 @@ export interface AudioTransform {
   Type: string
   /**
    * 音量调节参数， 当 Type = Volume 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeParam?: AudioVolumeParam
 }
@@ -1640,37 +1636,37 @@ export interface TranscodeTask2017 {
   /**
    * 转码任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 错误码
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 被转码文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 被转码文件名称。
    */
-  FileName: string
+  FileName?: string
   /**
    * 视频时长，单位：秒。
    */
-  Duration: number
+  Duration?: number
   /**
    * 封面地址。
    */
-  CoverUrl: string
+  CoverUrl?: string
   /**
    * 视频转码后生成的播放信息。
    */
-  PlayInfoSet: Array<TranscodePlayInfo2017>
+  PlayInfoSet?: Array<TranscodePlayInfo2017>
 }
 
 /**
@@ -2766,15 +2762,15 @@ export interface EditMediaTaskInput {
   /**
    * 输入视频的来源类型，可以取的值为 File，Stream 两种。
    */
-  InputType: string
+  InputType?: string
   /**
    * 输入的视频文件信息，当 InputType 为 File 时，该字段有值。
    */
-  FileInfoSet: Array<EditMediaFileInfo>
+  FileInfoSet?: Array<EditMediaFileInfo>
   /**
    * 输入的流信息，当 InputType 为 Stream 时，该字段有值。
    */
-  StreamInfoSet: Array<EditMediaStreamInfo>
+  StreamInfoSet?: Array<EditMediaStreamInfo>
 }
 
 /**
@@ -4275,11 +4271,11 @@ export interface TaskOutputMediaInfo {
   /**
    * 媒体文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 转拉完成后生成的媒体文件基础信息。
    */
-  MediaBasicInfo: MediaBasicInfo
+  MediaBasicInfo?: MediaBasicInfo
 }
 
 /**
@@ -4387,7 +4383,7 @@ export interface PlayStatFileInfo {
   /**
    * 播放统计数据所属日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  Date: string
+  Date?: string
   /**
    * 播放统计文件的 URL 地址。播放统计文件内容为：
 <li> date：播放日期。</li>
@@ -4401,7 +4397,7 @@ export interface PlayStatFileInfo {
 <li> android_play_times：Android 端播放次数。</li>
 <li> host_name	域名。</li>
    */
-  Url: string
+  Url?: string
 }
 
 /**
@@ -4762,7 +4758,6 @@ export interface ReduceMediaBitrateTranscodeResult {
   Input?: TranscodeTaskInput
   /**
    * 转码任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: MediaTranscodeItem
   /**
@@ -4786,11 +4781,11 @@ export interface SimpleAesEdkPair {
   /**
    * 加密后的数据密钥。
    */
-  Edk: string
+  Edk?: string
   /**
    * 数据密钥。返回的数据密钥 DK 为 Base64 编码字符串。
    */
-  Dk: string
+  Dk?: string
 }
 
 /**
@@ -5097,7 +5092,6 @@ export interface ProductInstanceRecource {
 export interface PersistenceCompleteTask {
   /**
    * 固化生成的媒体 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileId?: string
   /**
@@ -5105,7 +5099,6 @@ export interface PersistenceCompleteTask {
 <li>SimpleHlsClip：来自简单 HLS 剪辑；</li>
 <li>FastEditMedia：来自快速媒体编辑；</li>
 <li>LiveRealTimeClip:来自直播即时剪辑。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PersistenceSource?: string
 }
@@ -5846,7 +5839,6 @@ export interface SplitMediaTaskSegmentInfo {
   Input?: SplitMediaTaskInput
   /**
    * 视频拆条任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: TaskOutputMediaInfo
   /**
@@ -6637,7 +6629,6 @@ export interface DeleteHeadTailTemplateResponse {
 export interface RebuildAudioInfo {
   /**
    * 音频降噪控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioDenoiseInfo?: AudioDenoiseInfo
 }
@@ -6680,22 +6671,18 @@ export interface RebuildMediaTemplate {
   Comment?: string
   /**
    * 音画质重生视频控制信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RebuildVideoInfo?: RebuildVideoInfo
   /**
    * 音画质重生音频控制信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RebuildAudioInfo?: RebuildAudioInfo
   /**
    * 输出视频控制信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetVideoInfo?: RebuildMediaTargetVideoStream
   /**
    * 输出音频控制信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetAudioInfo?: RebuildMediaTargetAudioStream
   /**
@@ -7430,17 +7417,14 @@ export interface RebuildMediaTaskInput {
 export interface UserDefineConfigureInfo {
   /**
    * 用户自定义人物音视频审核控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FaceReviewInfo?: UserDefineFaceReviewTemplateInfo
   /**
    * 用户自定义语音音视频审核控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrReviewInfo?: UserDefineAsrTextReviewTemplateInfo
   /**
    * 用户自定义文本音视频审核控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo
 }
@@ -7516,34 +7500,34 @@ export interface RestoreMediaTask {
   /**
    * 文件ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 文件原始存储类型。
    */
-  OriginalStorageClass: string
+  OriginalStorageClass?: string
   /**
    * 文件目标存储类型。对于临时取回，目标存储类型与原始存储类型相同。
    */
-  TargetStorageClass: string
+  TargetStorageClass?: string
   /**
    * 取回模式，取值：
 <li>Expedited：极速模式</li>
 <li>Standard：标准模式</li>
 <li>Bulk：批量模式</li>
    */
-  RestoreTier: string
+  RestoreTier?: string
   /**
    * 临时取回副本有效期，单位：天。对于永久取回，取值为0。
    */
-  RestoreDay: number
+  RestoreDay?: number
   /**
    * 该字段已废弃。
    */
-  Status: number
+  Status?: number
   /**
    * 该字段已废弃。
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -7797,12 +7781,10 @@ export interface EditMediaTask {
   Progress?: number
   /**
    * 视频编辑任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: EditMediaTaskInput
   /**
    * 视频编辑任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: EditMediaTaskOutput
   /**
@@ -8248,7 +8230,6 @@ export interface FileVerifyInfo {
   FileVerifyDomains?: Array<string>
   /**
    * 文件校验文件名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileVerifyName?: string
 }
@@ -8322,13 +8303,13 @@ export interface ProcessImageRequest {
    */
   Operation: string
   /**
-   * 图片内容智能识别参数，当 Operation 为 ContentReview 时该字段有效。
-   */
-  ContentReviewInput?: ImageContentReviewInput
-  /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+  /**
+   * 图片内容智能识别参数，当 Operation 为 ContentReview 时该字段有效。
+   */
+  ContentReviewInput?: ImageContentReviewInput
 }
 
 /**
@@ -8347,7 +8328,7 @@ export interface ComplexAdaptiveDynamicStreamingTask {
    */
   Status?: string
   /**
-   * 自适应码流任务的执行状态与结果，每个元素对应一个自适应码流模版。
+   * 自适应码流任务的执行状态与结果，每个元素对应一个自适应码流模板。
    */
   ComplexAdaptiveDynamicStreamingTaskResultSet?: Array<ComplexAdaptiveDynamicStreamingTaskResult>
 }
@@ -8684,6 +8665,10 @@ Type 对应的格式必须为 HLS 格式。
  */
 export interface ModifyEventConfigRequest {
   /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
    * 接收事件通知的方式。
 <li>PUSH：[HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)；</li>
 <li>PULL：[基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779)。</li>
@@ -8706,10 +8691,6 @@ export interface ModifyEventConfigRequest {
    * 是否接收剪辑固化完成事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
    */
   PersistenceCompleteEventSwitch?: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
 }
 
 /**
@@ -9522,21 +9503,21 @@ export interface AnimatedGraphicsTemplate {
   /**
    * 转动图模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 模板类型，取值范围：
 <li>Preset：系统预置模板；</li>
 <li>Custom：用户自定义模板。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 转动图模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 转动图模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
@@ -9545,7 +9526,7 @@ export interface AnimatedGraphicsTemplate {
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
    */
-  Width: number
+  Width?: number
   /**
    * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
@@ -9554,34 +9535,34 @@ export interface AnimatedGraphicsTemplate {
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
    */
-  Height: number
+  Height?: number
   /**
    * 分辨率自适应，可选值：
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
 默认值：open。
    */
-  ResolutionAdaptive: string
+  ResolutionAdaptive?: string
   /**
    * 动图格式。
    */
-  Format: string
+  Format?: string
   /**
    * 帧率。
    */
-  Fps: number
+  Fps?: number
   /**
    * 图片质量。
    */
-  Quality: number
+  Quality?: number
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -9872,7 +9853,6 @@ export interface CreateWatermarkTemplateRequest {
 export interface ComplexAdaptiveDynamicStreamingTaskInput {
   /**
    * 自适应码流参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara
 }
@@ -9998,50 +9978,48 @@ export interface ComposeMediaTask {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 错误码
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 制作媒体文件任务进度，取值范围 [0-100] 。
    */
-  Progress: number
+  Progress?: number
   /**
    * 制作媒体文件任务的输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Input: ComposeMediaTaskInput
+  Input?: ComposeMediaTaskInput
   /**
    * 制作媒体文件任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: ComposeMediaTaskOutput
+  Output?: ComposeMediaTaskOutput
   /**
    * 输出视频的元信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
-  SessionId: string
+  SessionId?: string
   /**
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
-  SessionContext: string
+  SessionContext?: string
 }
 
 /**
@@ -10115,23 +10093,23 @@ export interface TranscodePlayInfo2017 {
   /**
    * 播放地址。
    */
-  Url: string
+  Url?: string
   /**
    * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。
    */
-  Definition: number
+  Definition?: number
   /**
    * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 视频流高度的最大值，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 视频流宽度的最大值，单位：px。
    */
-  Width: number
+  Width?: number
 }
 
 /**
@@ -10141,41 +10119,41 @@ export interface SplitMediaTask {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 视频拆条任务详细信息列表。
    */
-  FileInfoSet: Array<SplitMediaTaskSegmentInfo>
+  FileInfoSet?: Array<SplitMediaTaskSegmentInfo>
   /**
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
-  SessionContext: string
+  SessionContext?: string
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
-  SessionId: string
+  SessionId?: string
   /**
    * 视频拆条任务进度，取值范围 [0-100] 。
    */
-  Progress: number
+  Progress?: number
 }
 
 /**
@@ -10787,7 +10765,7 @@ export interface AiSampleTagOperation {
  */
 export interface ComplexAdaptiveDynamicStreamingTaskOutput {
   /**
-   * 自适应码流模版 ID。
+   * 自适应码流模板 ID。
    */
   Definition?: number
   /**
@@ -10912,7 +10890,6 @@ export interface ComplexAdaptiveDynamicStreamingTaskResult {
   Input?: ComplexAdaptiveDynamicStreamingTaskInput
   /**
    * 自适应码流任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: ComplexAdaptiveDynamicStreamingTaskOutput
 }
@@ -11097,12 +11074,10 @@ export interface QualityInspectTaskInput {
 export interface ProhibitedConfigureInfo {
   /**
    * 语音违禁控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrReviewInfo?: ProhibitedAsrReviewTemplateInfo
   /**
    * 文本违禁控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrReviewInfo?: ProhibitedOcrReviewTemplateInfo
 }
@@ -11680,7 +11655,6 @@ export interface DomainDetailInfo {
   Domain?: string
   /**
    * 加速地区信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccelerateAreaInfos?: Array<AccelerateAreaInfo>
   /**
@@ -11692,17 +11666,14 @@ export interface DomainDetailInfo {
   DeployStatus?: string
   /**
    * HTTPS 配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HTTPSConfig?: DomainHTTPSConfig
   /**
    * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy
   /**
    * [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RefererAuthPolicy?: RefererAuthPolicy
   /**
@@ -11712,12 +11683,10 @@ export interface DomainDetailInfo {
   CreateTime?: string
   /**
    * 域名 QUIC 配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QUICConfig?: DomainQUICConfig
   /**
    * IP 访问限制配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPFilterPolicy?: IPFilterPolicy
   /**
@@ -11857,17 +11826,14 @@ export interface DescribeEventConfigResponse {
 export interface DescribeCdnLogsResponse {
   /**
    * 日志下载链接总数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 海外CDN节点的日志下载列表。如果域名没有开启海外加速，忽略该参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OverseaCdnLogs?: Array<CdnLogInfo>
   /**
    * 国内CDN节点的日志下载列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DomesticCdnLogs?: Array<CdnLogInfo>
   /**
@@ -12357,12 +12323,11 @@ export interface FileDeleteResultItem {
   /**
    * 删除的文件 ID 。
    */
-  FileId: string
+  FileId?: string
   /**
    * 本次删除的文件部分。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeleteParts: Array<MediaDeleteItem>
+  DeleteParts?: Array<MediaDeleteItem>
 }
 
 /**
@@ -12407,7 +12372,7 @@ export interface RefererAuthPolicy {
    */
   AuthType?: string
   /**
-   * 用于校验的 Referer 列表，最大支持20个 Referer。当 Status 取值为 Enabled 时， Referers 不能为空数组。Referer 的格式参考域名的格式。
+   * 用于校验的 Referer 列表，最大支持  400 个 Referer。当 Status 取值为 Enabled 时， Referers 不能为空数组。Referer 的格式参考域名的格式。
    */
   Referers?: Array<string>
   /**
@@ -12426,15 +12391,15 @@ export interface TaskStatDataItem {
   /**
    * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
    */
-  Time: string
+  Time?: string
   /**
    * 任务数。
    */
-  Count: number
+  Count?: number
   /**
    * 任务用量。
    */
-  Usage: number
+  Usage?: number
 }
 
 /**
@@ -13079,12 +13044,10 @@ export interface JustInTimeTranscodeTemplate {
   Comment?: string
   /**
    * 视频参数配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoConfigure?: VideoConfigureInfo
   /**
    * 水印参数配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WatermarkConfigure?: WatermarkConfigureData
 }
@@ -13812,36 +13775,36 @@ export interface WechatPublishTask {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务状态，取值：
 WAITING：等待中；
 PROCESSING：处理中；
 FINISH：已完成。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 发布视频文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 微信发布模板 ID。
    */
-  Definition: number
+  Definition?: number
   /**
    * 发布视频所对应的转码模板 ID，为 0 代表原始视频。
    */
-  SourceDefinition: number
+  SourceDefinition?: number
   /**
    * 微信发布状态，取值：
 <li>FAIL：失败；</li>
@@ -13849,15 +13812,15 @@ FINISH：已完成。
 <li>AUDITNOTPASS：审核未通过；</li>
 <li>NOTTRIGGERED：尚未发起微信发布。</li>
    */
-  WechatStatus: string
+  WechatStatus?: string
   /**
    * 微信 Vid。
    */
-  WechatVid: string
+  WechatVid?: string
   /**
    * 微信地址。
    */
-  WechatUrl: string
+  WechatUrl?: string
 }
 
 /**
@@ -14515,11 +14478,11 @@ export interface SpecificationDataItem {
   /**
    * 任务规格。
    */
-  Specification: string
+  Specification?: string
   /**
    * 统计数据。
    */
-  Data: Array<TaskStatDataItem>
+  Data?: Array<TaskStatDataItem>
 }
 
 /**
@@ -14764,7 +14727,6 @@ export interface DeleteVodDomainRequest {
 export interface DescribeDrmKeyProviderInfoResponse {
   /**
    * 华曦达（SDMC）相关的 DRM 密钥提供商信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SDMCInfo?: SDMCDrmKeyProviderInfo
   /**
@@ -15113,17 +15075,14 @@ export interface PoliticalImgReviewTemplateInfo {
 export interface PoliticalConfigureInfo {
   /**
    * 画面鉴别涉及令人不适宜的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImgReviewInfo?: PoliticalImgReviewTemplateInfo
   /**
    * 语音鉴别涉及令人不适宜的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrReviewInfo?: PoliticalAsrReviewTemplateInfo
   /**
    * 文本鉴别涉及令人不适宜的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrReviewInfo?: PoliticalOcrReviewTemplateInfo
 }
@@ -15190,42 +15149,42 @@ export interface MediaProcessTaskResult {
 <li>CoverBySnapshot：截图做封面</li>
 <li>AdaptiveDynamicStreaming：自适应码流</li>
    */
-  Type: string
+  Type?: string
   /**
    * 视频转码任务的查询结果，当任务类型为 Transcode 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TranscodeTask: MediaProcessTaskTranscodeResult
+  TranscodeTask?: MediaProcessTaskTranscodeResult
   /**
    * 视频转动图任务的查询结果，当任务类型为 AnimatedGraphics 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult
+  AnimatedGraphicTask?: MediaProcessTaskAnimatedGraphicResult
   /**
    * 对视频按时间点截图任务的查询结果，当任务类型为 SnapshotByTimeOffset 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotByTimeOffsetTask: MediaProcessTaskSnapshotByTimeOffsetResult
+  SnapshotByTimeOffsetTask?: MediaProcessTaskSnapshotByTimeOffsetResult
   /**
    * 对视频采样截图任务的查询结果，当任务类型为 SampleSnapshot 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult
+  SampleSnapshotTask?: MediaProcessTaskSampleSnapshotResult
   /**
    * 对视频截雪碧图任务的查询结果，当任务类型为 ImageSprite 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageSpriteTask: MediaProcessTaskImageSpriteResult
+  ImageSpriteTask?: MediaProcessTaskImageSpriteResult
   /**
    * 对视频截图做封面任务的查询结果，当任务类型为 CoverBySnapshot 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoverBySnapshotTask: MediaProcessTaskCoverBySnapshotResult
+  CoverBySnapshotTask?: MediaProcessTaskCoverBySnapshotResult
   /**
    * 对视频转自适应码流任务的查询结果，当任务类型为 AdaptiveDynamicStreaming 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult
+  AdaptiveDynamicStreamingTask?: MediaProcessTaskAdaptiveDynamicStreamingResult
 }
 
 /**
@@ -15465,52 +15424,52 @@ export interface MediaMetaData {
   /**
    * 上传的媒体文件大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
    */
-  Size: number
+  Size?: number
   /**
    * 容器类型，例如 m4a，mp4 等。
    */
-  Container: string
+  Container?: string
   /**
    * 视频流码率平均值与音频流码率平均值之和，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 视频流高度的最大值，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 视频流宽度的最大值，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 视频时长，单位：秒。
    */
-  Duration: number
+  Duration?: number
   /**
    * 视频拍摄时的选择角度，单位：度。
    */
-  Rotate: number
+  Rotate?: number
   /**
    * 视频流信息。
    */
-  VideoStreamSet: Array<MediaVideoStreamItem>
+  VideoStreamSet?: Array<MediaVideoStreamItem>
   /**
    * 音频流信息。
    */
-  AudioStreamSet: Array<MediaAudioStreamItem>
+  AudioStreamSet?: Array<MediaAudioStreamItem>
   /**
    * 视频时长，单位：秒。
    */
-  VideoDuration: number
+  VideoDuration?: number
   /**
    * 音频时长，单位：秒。
    */
-  AudioDuration: number
+  AudioDuration?: number
   /**
    * 媒体文件的 Md5 值。
 <li><font color=red>注意</font>：如需要获取媒体文件的 Md5，调用 DescribeFileAttributes 接口，待任务执行完成后获取。</li>
    */
-  Md5: string
+  Md5?: string
 }
 
 /**
@@ -16589,12 +16548,10 @@ export interface ReduceMediaBitrateMediaProcessTaskResult {
   Type?: string
   /**
    * 降码率任务中视频转码任务的查询结果，当任务类型为 Transcode 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeTask?: ReduceMediaBitrateTranscodeResult
   /**
    * 降码率任务中对视频转自适应码流任务的查询结果，当任务类型为 AdaptiveDynamicStreaming 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdaptiveDynamicStreamingTask?: ReduceMediaBitrateAdaptiveDynamicStreamingResult
 }
@@ -17626,7 +17583,6 @@ export interface SubAppIdInfo {
 export interface DescribeAllClassResponse {
   /**
    * 分类信息集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClassInfoSet?: Array<MediaClassInfo>
   /**
@@ -18178,7 +18134,6 @@ export interface ReduceMediaBitrateTask {
   FileUrl?: string
   /**
    * 原始视频的元信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaData?: MediaMetaData
   /**
@@ -18372,11 +18327,11 @@ export interface QualityEnhanceTaskOutput {
 }
 
 /**
- * 审核模版详情
+ * 审核模板详情
  */
 export interface ReviewTemplate {
   /**
-   * 审核模版唯一标签。
+   * 审核模板唯一标签。
    */
   Definition?: number
   /**
@@ -19122,29 +19077,29 @@ export interface SplitMediaTaskInput {
   /**
    * 视频的 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 视频拆条起始的偏移时间，单位：秒。
 <li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
 <li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
 <li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 视频拆条结束的偏移时间，单位：秒。
 <li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
 <li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
 <li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * [任务流模板](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF)名字，如果要对生成的新视频执行任务流时填写。
    */
-  ProcedureName: string
+  ProcedureName?: string
   /**
    * 视频拆条输出信息。
    */
-  OutputConfig: SplitMediaOutputConfig
+  OutputConfig?: SplitMediaOutputConfig
 }
 
 /**
@@ -19176,17 +19131,14 @@ export interface DescribeVodDomainsRequest {
 export interface PornConfigureInfo {
   /**
    * 画面鉴别涉及令人反感的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImgReviewInfo?: PornImgReviewTemplateInfo
   /**
    * 语音鉴别涉及令人反感的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrReviewInfo?: PornAsrReviewTemplateInfo
   /**
    * 文本鉴别涉及令人反感的信息的控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrReviewInfo?: PornOcrReviewTemplateInfo
 }
@@ -20285,19 +20237,19 @@ export interface SnapshotByTimeOffsetTask2017 {
   /**
    * 截图任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 截图文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
    */
-  Definition: number
+  Definition?: number
   /**
    * 截图结果信息。
    */
-  SnapshotInfoSet: Array<SnapshotByTimeOffset2017>
+  SnapshotInfoSet?: Array<SnapshotByTimeOffset2017>
 }
 
 /**
@@ -20455,12 +20407,10 @@ export interface ExtractCopyRightWatermarkTask {
   ErrCodeExt?: string
   /**
    * 提取版权水印任务输入信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: ExtractCopyRightWatermarkTaskInput
   /**
    * 提取版权水印任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: ExtractCopyRightWatermarkTaskOutput
   /**
@@ -20794,12 +20744,10 @@ export interface HandleCurrentPlaylistRequest {
 export interface TerrorismConfigureInfo {
   /**
    * 画面鉴别涉及令人不安全的信息的任务控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImgReviewInfo?: TerrorismImgReviewTemplateInfo
   /**
    * 文字鉴别涉及令人不安全的信息的任务控制参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrReviewInfo?: TerrorismOcrReviewTemplateInfo
 }

@@ -1272,15 +1272,15 @@ export interface DeviceCommLogItem {
   /**
    * 时间
    */
-  Time: string
+  Time?: string
   /**
    * 日志类型，device 设备上行，shadow 服务端下行。
    */
-  Type: string
+  Type?: string
   /**
    * 通讯数据。
    */
-  Data: string
+  Data?: string
 }
 
 /**
@@ -4403,7 +4403,7 @@ export interface DescribeProductResponse {
   /**
    * 产品详情
    */
-  Data: VideoProduct
+  Data?: VideoProduct
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4840,6 +4840,16 @@ export interface DescribeCloudStorageOrderResponse {
    * 通道id
    */
   ChannelId?: number
+  /**
+   * 订单金额，单位为分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Price?: number
+  /**
+   * 支付金额，单位为分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Amount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

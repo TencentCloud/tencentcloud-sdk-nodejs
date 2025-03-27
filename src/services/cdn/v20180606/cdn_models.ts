@@ -1841,11 +1841,11 @@ export interface DescribeIpStatusResponse {
   /**
    * 节点列表
    */
-  Ips: Array<IpStatus>
+  Ips?: Array<IpStatus>
   /**
    * 节点总个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4022,7 +4022,7 @@ export interface SearchClsLogResponse {
   /**
    * 查询结果
    */
-  Logs: ClsSearchLogs
+  Logs?: ClsSearchLogs
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4463,15 +4463,15 @@ export interface ListTopClsLogDataResponse {
   /**
    * 数据列表
    */
-  Data: Array<ClsLogIpData>
+  Data?: Array<ClsLogIpData>
   /**
    * 获取到Top总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 获取到的不重复IP条数
    */
-  IpCount: number
+  IpCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5298,7 +5298,7 @@ export interface CreateClsLogTopicResponse {
    * 主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5787,11 +5787,11 @@ export interface DescribeReportDataResponse {
   /**
    * 域名维度数据详情
    */
-  DomainReport: Array<ReportData>
+  DomainReport?: Array<ReportData>
   /**
    * 项目维度数据详情
    */
-  ProjectReport: Array<ReportData>
+  ProjectReport?: Array<ReportData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5805,32 +5805,32 @@ export interface ListClsTopicDomainsResponse {
   /**
    * 开发者ID
    */
-  AppId: number
+  AppId?: number
   /**
    * 渠道
    */
-  Channel: string
+  Channel?: string
   /**
    * 日志集ID
    */
-  LogsetId: string
+  LogsetId?: string
   /**
    * 日志主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名
    */
-  DomainAreaConfigs: Array<DomainAreaConfig>
+  DomainAreaConfigs?: Array<DomainAreaConfig>
   /**
    * 日志主题名称
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 日志主题最近更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8974,12 +8974,12 @@ export interface DescribeDomainsConfigResponse {
   /**
    * 域名列表
    */
-  Domains: Array<DetailDomain>
+  Domains?: Array<DetailDomain>
   /**
    * 符合查询条件的域名总数
 用于分页查询
    */
-  TotalNumber: number
+  TotalNumber?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9016,11 +9016,11 @@ export interface DescribeIpVisitResponse {
   /**
    * 数据统计的时间粒度，支持5min,  day，分别表示5分钟，1天的时间粒度。
    */
-  Interval: string
+  Interval?: string
   /**
    * 各个资源的回源数据详情。
    */
-  Data: Array<ResourceData>
+  Data?: Array<ResourceData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10360,11 +10360,11 @@ export interface DescribeUrlViolationsResponse {
    * 违规 URL 详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UrlRecordList: Array<ViolationUrl>
+  UrlRecordList?: Array<ViolationUrl>
   /**
    * 记录总数，用于分页
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10379,12 +10379,12 @@ export interface DescribePurgeTasksResponse {
    * 详细刷新记录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PurgeLogs: Array<PurgeTask>
+  PurgeLogs?: Array<PurgeTask>
   /**
    * 任务总数，用于分页
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

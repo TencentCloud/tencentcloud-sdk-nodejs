@@ -712,6 +712,7 @@ export interface CreateUserRoleRequest {
   RoleIdList?: Array<number | bigint>
   /**
    * 用户列表（废弃）
+   * @deprecated
    */
   UserList?: Array<UserIdAndUserName>
   /**
@@ -2259,6 +2260,7 @@ export interface CreateUserRoleProjectRequest {
   RoleIdList?: Array<number | bigint>
   /**
    * 用户列表（废弃）
+   * @deprecated
    */
   UserList?: Array<UserIdAndUserName>
   /**

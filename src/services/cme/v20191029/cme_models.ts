@@ -22,15 +22,15 @@ export interface AudioStreamInfo {
   /**
    * 码率，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 采样率，单位：hz。
    */
-  SamplingRate: number
+  SamplingRate?: number
   /**
    * 编码格式。
    */
-  Codec: string
+  Codec?: string
 }
 
 /**
@@ -40,11 +40,11 @@ export interface ClassDeletedEvent {
   /**
    * 删除的分类归属。
    */
-  Owner: Entity
+  Owner?: Entity
   /**
    * 删除的分类路径列表。
    */
-  ClassPathSet: Array<string>
+  ClassPathSet?: Array<string>
 }
 
 /**
@@ -96,7 +96,7 @@ export interface MaterialDeletedEvent {
   /**
    * 删除的媒体 Id 列表。
    */
-  MaterialIdSet: Array<string>
+  MaterialIdSet?: Array<string>
 }
 
 /**
@@ -225,11 +225,11 @@ export interface DescribeTeamsResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 团队列表。
    */
-  TeamSet: Array<TeamInfo>
+  TeamSet?: Array<TeamInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -349,7 +349,7 @@ export interface MediaCastPlayInfo {
 <li> Working : 运行中；</li>
 <li> Idle: 空闲状态。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 当前播放的输入源 Id。
    */
@@ -357,19 +357,19 @@ export interface MediaCastPlayInfo {
   /**
    * 当前播放的输入源的播放位置，单位：秒。
    */
-  CurrentSourcePosition: number
+  CurrentSourcePosition?: number
   /**
    * 当前播放的输入源时长，单位：秒。
    */
-  CurrentSourceDuration: number
+  CurrentSourceDuration?: number
   /**
    * 输出源状态信息。
    */
-  DestinationStatusSet: Array<MediaCastDestinationStatus>
+  DestinationStatusSet?: Array<MediaCastDestinationStatus>
   /**
    * 已经循环播放的次数。
    */
-  LoopCount: number
+  LoopCount?: number
 }
 
 /**
@@ -379,11 +379,11 @@ export interface TeamInfo {
   /**
    * 团队 ID。
    */
-  TeamId: string
+  TeamId?: string
   /**
    * 团队名称。
    */
-  Name: string
+  Name?: string
   /**
    * 团队成员个数
    */
@@ -395,7 +395,7 @@ export interface TeamInfo {
   /**
    * 团队最后更新时间，格式按照 ISO 8601 标准表示。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -405,11 +405,11 @@ export interface ClassInfo {
   /**
    * 归属者。
    */
-  Owner: Entity
+  Owner?: Entity
   /**
    * 分类路径。
    */
-  ClassPath: string
+  ClassPath?: string
 }
 
 /**
@@ -799,15 +799,15 @@ export interface ProjectInfo {
   /**
    * 项目 Id。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 项目名称。
    */
-  Name: string
+  Name?: string
   /**
    * 画布宽高比。
    */
-  AspectRatio: string
+  AspectRatio?: string
   /**
    * 项目类别，取值有：
 <li>VIDEO_EDIT：视频编辑。</li>
@@ -816,33 +816,33 @@ export interface ProjectInfo {
 <li>STREAM_CONNECT：云转推。</li>
 <li>RECORD_REPLAY：录制回放。</li>
    */
-  Category: string
+  Category?: string
   /**
    * 归属者。
    */
-  Owner: Entity
+  Owner?: Entity
   /**
    * 项目封面图片地址。
    */
-  CoverUrl: string
+  CoverUrl?: string
   /**
    * 云转推项目信息，仅当项目类别取值 STREAM_CONNECT 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StreamConnectProjectInfo: StreamConnectProjectInfo
+  StreamConnectProjectInfo?: StreamConnectProjectInfo
   /**
    * 点播转直播项目信息，仅当项目类别取值为 MEDIA_CAST 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MediaCastProjectInfo: MediaCastProjectInfo
+  MediaCastProjectInfo?: MediaCastProjectInfo
   /**
    * 项目更新时间，格式按照 ISO 8601 标准表示。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 项目创建时间，格式按照 ISO 8601 标准表示。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -966,34 +966,34 @@ export interface PlatformInfo {
   /**
    * 平台标识。
    */
-  Platform: string
+  Platform?: string
   /**
    * 平台描述。
    */
-  Description: string
+  Description?: string
   /**
    * 云点播子应用 Id。
    */
-  VodSubAppId: number
+  VodSubAppId?: number
   /**
    * 平台绑定的 license Id。
    */
-  LicenseId: string
+  LicenseId?: string
   /**
    * 平台状态，可取值为：
 <li>Normal：正常，可使用。；</li>
 <li>Stopped：已停用，暂无法使用；</li>
 <li>Expired：已过期，需要重新购买会员包。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 创建时间，格式按照 ISO 8601 标准表示。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间，格式按照 ISO 8601 标准表示。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -1030,23 +1030,23 @@ export interface LinkMaterial {
 <li>CLASS: 分类链接;</li>
 <li> MATERIAL：素材链接。</li>
    */
-  LinkType: string
+  LinkType?: string
   /**
    * 链接状态取值：
 <li> Normal：正常 ；</li>
 <li>NotFound：链接目标不存在；</li> <li>Forbidden：无权限。</li>
    */
-  LinkStatus: string
+  LinkStatus?: string
   /**
    * 素材链接详细信息，当LinkType="MATERIAL"时有值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LinkMaterialInfo: LinkMaterialInfo
+  LinkMaterialInfo?: LinkMaterialInfo
   /**
    * 分类链接目标信息，当LinkType=“CLASS”时有值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LinkClassInfo: ClassInfo
+  LinkClassInfo?: ClassInfo
 }
 
 /**
@@ -1104,14 +1104,14 @@ export interface MediaCastDestinationStatus {
   /**
    * 输出源直播地址。
    */
-  PushUrl: string
+  PushUrl?: string
   /**
    * 输出源的状态。取值有：
 <li> Working ：运行中；</li>
 <li> Stopped：停止输出；</li>
 <li> Failed：输出失败。</li>
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -1135,28 +1135,28 @@ export interface AudioMaterial {
   /**
    * 素材元信息。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
   /**
    * 素材媒体文件的播放 URL 地址。
    */
-  MaterialUrl: string
+  MaterialUrl?: string
   /**
    * 素材媒体文件的封面图片地址。
    */
-  CoverUrl: string
+  CoverUrl?: string
   /**
    * 素材状态。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialStatus: MaterialStatus
+  MaterialStatus?: MaterialStatus
   /**
    * 素材媒体文件的原始 URL 地址。
    */
-  OriginalUrl: string
+  OriginalUrl?: string
   /**
    * 云点播媒资 FileId。
    */
-  VodFileId: string
+  VodFileId?: string
 }
 
 /**
@@ -1298,7 +1298,7 @@ export interface ExportVideoByEditorTrackDataRequest {
 export interface MaterialTagInfo {
   /**
    * 标签类型，取值为：
-<li>PRESET：预置标签；</li>
+<li>PRESET：预置标签。</li>
    */
   Type: string
   /**
@@ -1467,11 +1467,11 @@ export interface DescribePlatformsResponse {
   /**
    * 符合查询条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 平台信息列表。
    */
-  PlatformInfoSet: Array<PlatformInfo>
+  PlatformInfoSet?: Array<PlatformInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1665,7 +1665,6 @@ export interface WeiboPublishInfo {
 export interface MediaCastSourceInfo {
   /**
    * 输入源 Id，由系统分配。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
@@ -1815,7 +1814,7 @@ export interface StreamConnectOutputInfo {
  */
 export interface ParseEventRequest {
   /**
-   * 平台名称，指定访问的平台。
+   * 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
    */
   Platform: string
   /**
@@ -1841,19 +1840,19 @@ export interface ClassMovedEvent {
   /**
    * 源分类归属。
    */
-  SourceOwner: Entity
+  SourceOwner?: Entity
   /**
    * 源分类路径列表。
    */
-  SourceClassPathSet: Array<string>
+  SourceClassPathSet?: Array<string>
   /**
    * 目标分类归属。
    */
-  DestinationOwner: Entity
+  DestinationOwner?: Entity
   /**
    * 目标分类归属。
    */
-  DestinationClassPath: string
+  DestinationClassPath?: string
 }
 
 /**
@@ -2074,23 +2073,23 @@ export interface MediaImageSpriteInfo {
   /**
    * 雪碧图小图的高度。
    */
-  Height: number
+  Height?: number
   /**
    * 雪碧图小图的宽度。
    */
-  Width: number
+  Width?: number
   /**
    * 雪碧图小图的总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 截取雪碧图输出的地址。
    */
-  ImageUrlSet: Array<string>
+  ImageUrlSet?: Array<string>
   /**
    * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
    */
-  WebVttUrl: string
+  WebVttUrl?: string
 }
 
 /**
@@ -2200,7 +2199,7 @@ export interface CreateVideoEncodingPresetResponse {
   /**
    * 模板 ID。
    */
-  Id: number
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2458,27 +2457,27 @@ export interface ImageMaterial {
   /**
    * 图片高度，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 图片宽度，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 素材媒体文件的展示 URL 地址。
    */
-  MaterialUrl: string
+  MaterialUrl?: string
   /**
    * 图片大小，单位：字节。
    */
-  Size: number
+  Size?: number
   /**
    * 素材媒体文件的原始 URL 地址。
    */
-  OriginalUrl: string
+  OriginalUrl?: string
   /**
    * 云点播媒资 FileId。
    */
-  VodFileId: string
+  VodFileId?: string
 }
 
 /**
@@ -2506,11 +2505,11 @@ export interface DescribeSharedSpaceResponse {
   /**
    * 查询到的共享空间总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 各个共享空间对应的授权者信息。
    */
-  AuthorizerSet: Array<Authorizer>
+  AuthorizerSet?: Array<Authorizer>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2550,7 +2549,7 @@ export interface MoveResourceResponse {
  */
 export interface MoveClassRequest {
   /**
-   * 平台名称，指定访问的平台。
+   * 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
    */
   Platform: string
   /**
@@ -2636,11 +2635,11 @@ export interface DescribeTeamMembersResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 团队成员列表。
    */
-  MemberSet: Array<TeamMemberInfo>
+  MemberSet?: Array<TeamMemberInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2664,7 +2663,7 @@ export interface CreateTeamResponse {
   /**
    * 创建的团队 ID。
    */
-  TeamId: string
+  TeamId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2732,23 +2731,23 @@ export interface MaterialMovedEvent {
   /**
    * 要移动的媒体 Id 列表。
    */
-  MaterialIdSet: Array<string>
+  MaterialIdSet?: Array<string>
   /**
    * 源媒体归属。
    */
-  SourceOwner: Entity
+  SourceOwner?: Entity
   /**
    * 源媒体分类路径。
    */
-  SourceClassPath: string
+  SourceClassPath?: string
   /**
    * 目标媒体分类归属。
    */
-  DestinationOwner: Entity
+  DestinationOwner?: Entity
   /**
    * 目标媒体分类路径。
    */
-  DestinationClassPath: string
+  DestinationClassPath?: string
 }
 
 /**
@@ -2784,7 +2783,7 @@ export interface MaterialBasicInfo {
   /**
    * 媒体 Id。
    */
-  MaterialId: string
+  MaterialId?: string
   /**
    * 媒体类型，取值为：
 <li> AUDIO :音频;</li>
@@ -2793,45 +2792,45 @@ export interface MaterialBasicInfo {
 <li> LINK  :链接.</li>
 <li> OTHER : 其他.</li>
    */
-  MaterialType: string
+  MaterialType?: string
   /**
    * 媒体归属实体。
    */
-  Owner: Entity
+  Owner?: Entity
   /**
    * 媒体名称。
    */
-  Name: string
+  Name?: string
   /**
    * 媒体文件的创建时间，使用 ISO 日期格式。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 媒体文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 ISO 日期格式。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 媒体的分类路径。
    */
-  ClassPath: string
+  ClassPath?: string
   /**
    * 预置标签列表。
    */
-  PresetTagSet: Array<PresetTagInfo>
+  PresetTagSet?: Array<PresetTagInfo>
   /**
    * 人工标签列表。
    */
-  TagSet: Array<string>
+  TagSet?: Array<string>
   /**
    * 媒体文件的预览图。
    */
-  PreviewUrl: string
+  PreviewUrl?: string
   /**
    * 媒体绑定的标签信息列表 。
 该字段已废弃。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagInfoSet: Array<MaterialTagInfo>
+  TagInfoSet?: Array<MaterialTagInfo>
 }
 
 /**
@@ -2902,15 +2901,15 @@ export interface StreamConnectOutputInterruptInfo {
   /**
    * 云转推输出标识。
    */
-  Id: string
+  Id?: string
   /**
    * 云转推输出名称。
    */
-  Name: string
+  Name?: string
   /**
    * 云转推输出地址。
    */
-  Url: string
+  Url?: string
 }
 
 /**
@@ -2920,22 +2919,22 @@ export interface JoinTeamInfo {
   /**
    * 团队 ID。
    */
-  TeamId: string
+  TeamId?: string
   /**
    * 团队名称。
    */
-  Name: string
+  Name?: string
   /**
    * 团队成员个数。
    */
-  MemberCount: number
+  MemberCount?: number
   /**
    * 成员在团队中的角色，取值有：
 <li>Owner：团队所有者，添加团队成员及修改团队成员解决时不能填此角色；</li>
 <li>Admin：团队管理员；</li>
 <li>Member：普通成员。</li>
    */
-  Role: string
+  Role?: string
 }
 
 /**
@@ -3046,37 +3045,37 @@ export interface TaskBaseInfo {
   /**
    * 任务 Id。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务类型，取值有：
 <li>VIDEO_EDIT_PROJECT_EXPORT：项目导出。</li>
    */
-  TaskType: string
+  TaskType?: string
   /**
    * 任务状态，取值有：
 <li>PROCESSING：处理中：</li>
 <li>SUCCESS：成功；</li>
 <li>FAIL：失败。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 任务进度，取值为：0~100。
    */
-  Progress: number
+  Progress?: number
   /**
    * 错误码。
 <li>0：成功；</li>
 <li>其他值：失败。</li>
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 创建时间，格式按照 ISO 8601 标准表示。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -3108,23 +3107,23 @@ export interface VideoStreamInfo {
   /**
    * 码率，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 高度，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 宽度，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 编码格式。
    */
-  Codec: string
+  Codec?: string
   /**
    * 帧率，单位：hz。
    */
-  Fps: number
+  Fps?: number
 }
 
 /**
@@ -3344,19 +3343,19 @@ export interface MaterialModifiedEvent {
   /**
    * 媒体 Id。
    */
-  MaterialId: string
+  MaterialId?: string
   /**
    * 更新后的媒体名称。如未更新则为空。
    */
-  Name: string
+  Name?: string
   /**
    * 更新后的媒体预置标签列表。如未更新媒体预置标签，则该字段为空数组。
    */
-  PresetTagIdSet: Array<string>
+  PresetTagIdSet?: Array<string>
   /**
    * 更新后的媒体自定义标签列表。如未更新媒体自定义标签，则该字段为空数组。
    */
-  TagSet: Array<string>
+  TagSet?: Array<string>
 }
 
 /**
@@ -3516,11 +3515,11 @@ export interface OtherMaterial {
   /**
    * 素材媒体文件的播放 URL 地址。
    */
-  MaterialUrl: string
+  MaterialUrl?: string
   /**
    * 云点播媒资 FileId。
    */
-  VodFileId: string
+  VodFileId?: string
 }
 
 /**
@@ -3543,74 +3542,74 @@ export interface EventContent {
 <li>Task.VideoExportCompleted：视频导出完成事件； </li>
 <li>Project.MediaCast.StatusChanged：点播转直播项目状态变更事件。 </li>
    */
-  EventType: string
+  EventType?: string
   /**
    * 操作者，表示触发事件的操作者。如果是 `cmeid_system` 表示平台管理员操作。
    */
-  Operator: string
+  Operator?: string
   /**
    * 新文件产生事件。仅当 EventType 为 Storage.NewFileCreated 时有效。
    */
-  StorageNewFileCreatedEvent: StorageNewFileCreatedEvent
+  StorageNewFileCreatedEvent?: StorageNewFileCreatedEvent
   /**
    * 云转推项目状态变更事件。仅当 EventType 为 Project.StreamConnect.StatusChanged 时有效。
    */
-  ProjectStreamConnectStatusChangedEvent: ProjectStreamConnectStatusChangedEvent
+  ProjectStreamConnectStatusChangedEvent?: ProjectStreamConnectStatusChangedEvent
   /**
    * 导播台项目状态变更事件。仅当 EventType 为 Project.Switcher.StatusChanged 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectSwitcherStatusChangedEvent: ProjectSwitcherStatusChangedEvent
+  ProjectSwitcherStatusChangedEvent?: ProjectSwitcherStatusChangedEvent
   /**
    * 媒体导入事件。仅当 EventType 为 Material.Imported 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialImportedEvent: MaterialImportedEvent
+  MaterialImportedEvent?: MaterialImportedEvent
   /**
    * 媒体添加事件。仅当 EventType 为 Material.Added 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialAddedEvent: MaterialAddedEvent
+  MaterialAddedEvent?: MaterialAddedEvent
   /**
    * 媒体移动事件。仅当 EventType 为 Material.Moved 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialMovedEvent: MaterialMovedEvent
+  MaterialMovedEvent?: MaterialMovedEvent
   /**
    * 媒体更新事件。仅当 EventType 为 Material.Modified 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialModifiedEvent: MaterialModifiedEvent
+  MaterialModifiedEvent?: MaterialModifiedEvent
   /**
    * 媒体删除事件。仅当 EventType 为 Material.Deleted 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialDeletedEvent: MaterialDeletedEvent
+  MaterialDeletedEvent?: MaterialDeletedEvent
   /**
    * 分类创建事件。仅当 EventType 为 Class.Created 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassCreatedEvent: ClassCreatedEvent
+  ClassCreatedEvent?: ClassCreatedEvent
   /**
    * 分类移动事件。仅当 EventType 为 Class.Moved 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassMovedEvent: ClassMovedEvent
+  ClassMovedEvent?: ClassMovedEvent
   /**
    * 分类删除事件。仅当 EventType 为 Class.Deleted 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassDeletedEvent: ClassDeletedEvent
+  ClassDeletedEvent?: ClassDeletedEvent
   /**
    * 视频导出完成事件。仅当 EventType 为 Task.VideoExportCompleted 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VideoExportCompletedEvent: VideoExportCompletedEvent
+  VideoExportCompletedEvent?: VideoExportCompletedEvent
   /**
    * 点播转直播项目状态变更事件。仅当 EventType 为 Project.MediaCast.StatusChanged 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectMediaCastStatusChangedEvent: ProjectMediaCastStatusChangedEvent
+  ProjectMediaCastStatusChangedEvent?: ProjectMediaCastStatusChangedEvent
 }
 
 /**
@@ -3620,36 +3619,36 @@ export interface VideoMaterial {
   /**
    * 素材元信息。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
   /**
    * 雪碧图信息。
    */
-  ImageSpriteInfo: MediaImageSpriteInfo
+  ImageSpriteInfo?: MediaImageSpriteInfo
   /**
    * 素材媒体文件的播放 URL 地址。
    */
-  MaterialUrl: string
+  MaterialUrl?: string
   /**
    * 素材媒体文件的封面图片地址。
    */
-  CoverUrl: string
+  CoverUrl?: string
   /**
    * 媒体文件分辨率。取值为：LD/SD/HD/FHD/2K/4K。
    */
-  Resolution: string
+  Resolution?: string
   /**
    * 素材状态。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaterialStatus: MaterialStatus
+  MaterialStatus?: MaterialStatus
   /**
    * 素材媒体文件的原始 URL 地址。
    */
-  OriginalUrl: string
+  OriginalUrl?: string
   /**
    * 云点播媒资 FileId。
    */
-  VodFileId: string
+  VodFileId?: string
 }
 
 /**
@@ -3659,11 +3658,11 @@ export interface DescribeVideoEncodingPresetsResponse {
   /**
    * 符合条件的编码配置总个数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 视频编码配置信息。
    */
-  VideoEncodingPresetSet: Array<VideoEncodingPreset>
+  VideoEncodingPresetSet?: Array<VideoEncodingPreset>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3676,13 +3675,12 @@ export interface DescribeVideoEncodingPresetsResponse {
 export interface DescribeResourceAuthorizationResponse {
   /**
    * 符合条件的资源授权记录总数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 授权信息列表。
    */
-  AuthorizationInfoSet: Array<AuthorizationInfo>
+  AuthorizationInfoSet?: Array<AuthorizationInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3696,11 +3694,11 @@ export interface FlattenListMediaResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 该分类路径下及其子分类下的所有媒体基础信息列表。
    */
-  MaterialInfoSet: Array<MaterialInfo>
+  MaterialInfoSet?: Array<MaterialInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3833,15 +3831,15 @@ export interface MaterialAddedEvent {
   /**
    * 添加的媒体 Id 列表。
    */
-  MaterialIdSet: Array<string>
+  MaterialIdSet?: Array<string>
   /**
    * 添加的媒体归属。
    */
-  Owner: Entity
+  Owner?: Entity
   /**
    * 添加的媒体分类路径。
    */
-  ClassPath: string
+  ClassPath?: string
 }
 
 /**
@@ -3922,11 +3920,11 @@ export interface DescribeJoinTeamsResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 团队列表。
    */
-  TeamSet: Array<JoinTeamInfo>
+  TeamSet?: Array<JoinTeamInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3973,7 +3971,7 @@ export interface MaterialStatus {
 <li>ABNORMAL : 异常，不可用于编辑；</li>
 <li>PROCESSING：处理中，暂不可用于编辑。</li>
    */
-  EditorUsableStatus: string
+  EditorUsableStatus?: string
 }
 
 /**
@@ -4019,15 +4017,15 @@ export interface VideoEditTemplateMaterial {
   /**
    * 视频编辑模板宽高比。
    */
-  AspectRatio: string
+  AspectRatio?: string
   /**
    * 卡槽信息。
    */
-  SlotSet: Array<SlotInfo>
+  SlotSet?: Array<SlotInfo>
   /**
    * 模板预览视频 URL 地址 。
    */
-  PreviewVideoUrl: string
+  PreviewVideoUrl?: string
 }
 
 /**
@@ -4191,7 +4189,7 @@ export interface DescribeTaskDetailRequest {
  */
 export interface ModifyVideoEncodingPresetRequest {
   /**
-   * 平台名称，指定访问的平台。
+   * 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
    */
   Platform: string
   /**
@@ -4387,7 +4385,7 @@ export interface MaterialInfo {
  */
 export interface DescribeVideoEncodingPresetsRequest {
   /**
-   * 平台名称，指定访问的平台。
+   * 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
    */
   Platform: string
   /**
@@ -4411,13 +4409,13 @@ export interface LoginStatusInfo {
   /**
    * 用户 Id。
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户登录状态。
 <li>Online：在线；</li>
 <li>Offline：离线。</li>
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -4427,7 +4425,7 @@ export interface DescribeClassResponse {
   /**
    * 分类信息列表。
    */
-  ClassInfoSet: Array<ClassInfo>
+  ClassInfoSet?: Array<ClassInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4441,7 +4439,7 @@ export interface GenerateVideoSegmentationSchemeByAiResponse {
   /**
    * 视频智能拆条任务 Id 。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4586,39 +4584,39 @@ export interface MediaMetaData {
   /**
    * 大小。
    */
-  Size: number
+  Size?: number
   /**
    * 容器类型。
    */
-  Container: string
+  Container?: string
   /**
    * 视频流码率平均值与音频流码率平均值之和，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 视频流高度的最大值，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 视频流宽度的最大值，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 时长，单位：秒。
    */
-  Duration: number
+  Duration?: number
   /**
    * 视频拍摄时的选择角度，单位：度
    */
-  Rotate: number
+  Rotate?: number
   /**
    * 视频流信息。
    */
-  VideoStreamInfoSet: Array<VideoStreamInfo>
+  VideoStreamInfoSet?: Array<VideoStreamInfo>
   /**
    * 音频流信息。
    */
-  AudioStreamInfoSet: Array<AudioStreamInfo>
+  AudioStreamInfoSet?: Array<AudioStreamInfo>
 }
 
 /**
@@ -4733,39 +4731,39 @@ export interface VideoEncodingPreset {
   /**
    * 配置 ID。
    */
-  Id: number
+  Id?: number
   /**
    * 配置名。
    */
-  Name: string
+  Name?: string
   /**
    * 封装格式，可选值：
 <li>mp4 ；</li>
 <li>mov 。</li>
    */
-  Container: string
+  Container?: string
   /**
    * 是否去除视频数据，可选值：
 <li>0：保留；</li>
 <li>1：去除。</li>
 默认值：0。
    */
-  RemoveVideo: number
+  RemoveVideo?: number
   /**
    * 是否去除音频数据，可选值：
 <li>0：保留；</li>
 <li>1：去除。</li>
 默认值：0。
    */
-  RemoveAudio: number
+  RemoveAudio?: number
   /**
    * 视频编码配置中的视频设置。
    */
-  VideoSetting: VideoEncodingPresetVideoSetting
+  VideoSetting?: VideoEncodingPresetVideoSetting
   /**
    * 视频编码配置中的音频设置。
    */
-  AudioSetting: VideoEncodingPresetAudioSetting
+  AudioSetting?: VideoEncodingPresetAudioSetting
 }
 
 /**

@@ -79,6 +79,10 @@ export interface ClusterOverview {
    * 集群所属私有网络ID。
    */
   VpcId?: string
+  /**
+   * 集群类型
+   */
+  ClusterType?: string
 }
 
 /**

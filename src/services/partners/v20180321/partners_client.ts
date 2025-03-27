@@ -30,6 +30,7 @@ import {
   DescribeAgentDealsByCacheResponse,
   ClientIncreaseInfoList,
   RebateInfoElem,
+  DescribeClientSwitchTraTaskInfoResponse,
   DescribeAgentPayDealsV2Response,
   AgentTransferMoneyRequest,
   DescribeAgentPayDealsV2Request,
@@ -61,6 +62,7 @@ import {
   AssignClientsToSalesResponse,
   AgentBillElem,
   AuditApplyClientResponse,
+  DescribeClientSwitchTraTaskInfoRequest,
   DescribeAgentBillsRequest,
   AgentPayDealsResponse,
   RefundMap,
@@ -84,16 +86,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合作伙伴为客户消除强代付关系
-   */
-  async RemovePayRelationForClient(
-    req: RemovePayRelationForClientRequest,
-    cb?: (error: string, rep: RemovePayRelationForClientResponse) => void
-  ): Promise<RemovePayRelationForClientResponse> {
-    return this.request("RemovePayRelationForClient", req, cb)
-  }
-
-  /**
      * 为代客or申请中代客分派跟进人（业务员），入参可从以下API获取
 - 代客列表获取API： [DescribeAgentAuditedClients](https://cloud.tencent.com/document/product/563/19184)
 - 申请中代客列表获取API：[DescribeAgentClients](https://cloud.tencent.com/document/product/563/16046)
@@ -107,46 +99,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询代理商名下指定代客的自付订单（预付费）
-   */
-  async DescribeAgentSelfPayDealsV2(
-    req: DescribeAgentSelfPayDealsV2Request,
-    cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void
-  ): Promise<DescribeAgentSelfPayDealsV2Response> {
-    return this.request("DescribeAgentSelfPayDealsV2", req, cb)
-  }
-
-  /**
-   * 代理商名下客户解绑记录查询接口
-   */
-  async DescribeUnbindClientList(
-    req: DescribeUnbindClientListRequest,
-    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
-  ): Promise<DescribeUnbindClientListResponse> {
-    return this.request("DescribeUnbindClientList", req, cb)
-  }
-
-  /**
-   * 代理商可以对名下客户添加备注、修改备注
-   */
-  async ModifyClientRemark(
-    req: ModifyClientRemarkRequest,
-    cb?: (error: string, rep: ModifyClientRemarkResponse) => void
-  ): Promise<ModifyClientRemarkResponse> {
-    return this.request("ModifyClientRemark", req, cb)
-  }
-
-  /**
-   * 代理商支付订单接口，支持自付/代付
-   */
-  async AgentPayDeals(
-    req: AgentPayDealsRequest,
-    cb?: (error: string, rep: AgentPayDealsResponse) => void
-  ): Promise<AgentPayDealsResponse> {
-    return this.request("AgentPayDeals", req, cb)
-  }
-
-  /**
    * 代理商可查询自己及名下代客所有业务明细
    */
   async DescribeAgentBills(
@@ -154,16 +106,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentBillsResponse) => void
   ): Promise<DescribeAgentBillsResponse> {
     return this.request("DescribeAgentBills", req, cb)
-  }
-
-  /**
-   * 代理商可查询自己名下全部返佣信息
-   */
-  async DescribeRebateInfosNew(
-    req: DescribeRebateInfosNewRequest,
-    cb?: (error: string, rep: DescribeRebateInfosNewResponse) => void
-  ): Promise<DescribeRebateInfosNewResponse> {
-    return this.request("DescribeRebateInfosNew", req, cb)
   }
 
   /**
@@ -187,23 +129,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 代理商查询名下业务员列表信息
+   * 合作伙伴为客户消除强代付关系
    */
-  async DescribeSalesmans(
-    req: DescribeSalesmansRequest,
-    cb?: (error: string, rep: DescribeSalesmansResponse) => void
-  ): Promise<DescribeSalesmansResponse> {
-    return this.request("DescribeSalesmans", req, cb)
+  async RemovePayRelationForClient(
+    req: RemovePayRelationForClientRequest,
+    cb?: (error: string, rep: RemovePayRelationForClientResponse) => void
+  ): Promise<RemovePayRelationForClientResponse> {
+    return this.request("RemovePayRelationForClient", req, cb)
   }
 
   /**
-   * 查询合作伙伴名下客户的参与增量激励考核信息列表
+   * 代理商可以对名下客户添加备注、修改备注
    */
-  async DescribeClientJoinIncreaseList(
-    req: DescribeClientJoinIncreaseListRequest,
-    cb?: (error: string, rep: DescribeClientJoinIncreaseListResponse) => void
-  ): Promise<DescribeClientJoinIncreaseListResponse> {
-    return this.request("DescribeClientJoinIncreaseList", req, cb)
+  async ModifyClientRemark(
+    req: ModifyClientRemarkRequest,
+    cb?: (error: string, rep: ModifyClientRemarkResponse) => void
+  ): Promise<ModifyClientRemarkResponse> {
+    return this.request("ModifyClientRemark", req, cb)
   }
 
   /**
@@ -217,33 +159,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据大订单号查询关联申请合并支付的其他订单号
+   * 代理商名下客户解绑记录查询接口
    */
-  async DescribeAgentRelateBigDealIds(
-    req: DescribeAgentRelateBigDealIdsRequest,
-    cb?: (error: string, rep: DescribeAgentRelateBigDealIdsResponse) => void
-  ): Promise<DescribeAgentRelateBigDealIdsResponse> {
-    return this.request("DescribeAgentRelateBigDealIds", req, cb)
+  async DescribeUnbindClientList(
+    req: DescribeUnbindClientListRequest,
+    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
+  ): Promise<DescribeUnbindClientListResponse> {
+    return this.request("DescribeUnbindClientList", req, cb)
   }
 
   /**
-   * 代理商可查询自己名下待审核客户列表
+   * 代理商支付订单接口，支持自付/代付
    */
-  async DescribeAgentClients(
-    req: DescribeAgentClientsRequest,
-    cb?: (error: string, rep: DescribeAgentClientsResponse) => void
-  ): Promise<DescribeAgentClientsResponse> {
-    return this.request("DescribeAgentClients", req, cb)
+  async AgentPayDeals(
+    req: AgentPayDealsRequest,
+    cb?: (error: string, rep: AgentPayDealsResponse) => void
+  ): Promise<AgentPayDealsResponse> {
+    return this.request("AgentPayDeals", req, cb)
   }
 
   /**
-   * 传入代客uin，查客户级别，客户审核状态，客户实名认证状态
+   * 代理商查询名下业务员列表信息
    */
-  async DescribeAgentClientGrade(
-    req: DescribeAgentClientGradeRequest,
-    cb?: (error: string, rep: DescribeAgentClientGradeResponse) => void
-  ): Promise<DescribeAgentClientGradeResponse> {
-    return this.request("DescribeAgentClientGrade", req, cb)
+  async DescribeSalesmans(
+    req: DescribeSalesmansRequest,
+    cb?: (error: string, rep: DescribeSalesmansResponse) => void
+  ): Promise<DescribeSalesmansResponse> {
+    return this.request("DescribeSalesmans", req, cb)
+  }
+
+  /**
+   * 代理商可以审核其名下申请中代客
+   */
+  async AuditApplyClient(
+    req: AuditApplyClientRequest,
+    cb?: (error: string, rep: AuditApplyClientResponse) => void
+  ): Promise<AuditApplyClientResponse> {
+    return this.request("AuditApplyClient", req, cb)
+  }
+
+  /**
+   * 查询客户的交易类型切换任务的信息，查询成功则获取当前用户的切换链接，查询失败则返回失败的原因
+   */
+  async DescribeClientSwitchTraTaskInfo(
+    req: DescribeClientSwitchTraTaskInfoRequest,
+    cb?: (error: string, rep: DescribeClientSwitchTraTaskInfoResponse) => void
+  ): Promise<DescribeClientSwitchTraTaskInfoResponse> {
+    return this.request("DescribeClientSwitchTraTaskInfo", req, cb)
   }
 
   /**
@@ -267,23 +229,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 合作伙伴为客户创建强代付关系
+   * 查询合作伙伴名下客户的参与增量激励考核信息列表
    */
-  async CreatePayRelationForClient(
-    req: CreatePayRelationForClientRequest,
-    cb?: (error: string, rep: CreatePayRelationForClientResponse) => void
-  ): Promise<CreatePayRelationForClientResponse> {
-    return this.request("CreatePayRelationForClient", req, cb)
+  async DescribeClientJoinIncreaseList(
+    req: DescribeClientJoinIncreaseListRequest,
+    cb?: (error: string, rep: DescribeClientJoinIncreaseListResponse) => void
+  ): Promise<DescribeClientJoinIncreaseListResponse> {
+    return this.request("DescribeClientJoinIncreaseList", req, cb)
   }
 
   /**
-   * 代理商可以审核其名下申请中代客
+   * 查询代理商名下指定代客的自付订单（预付费）
    */
-  async AuditApplyClient(
-    req: AuditApplyClientRequest,
-    cb?: (error: string, rep: AuditApplyClientResponse) => void
-  ): Promise<AuditApplyClientResponse> {
-    return this.request("AuditApplyClient", req, cb)
+  async DescribeAgentSelfPayDealsV2(
+    req: DescribeAgentSelfPayDealsV2Request,
+    cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void
+  ): Promise<DescribeAgentSelfPayDealsV2Response> {
+    return this.request("DescribeAgentSelfPayDealsV2", req, cb)
+  }
+
+  /**
+   * 根据大订单号查询关联申请合并支付的其他订单号
+   */
+  async DescribeAgentRelateBigDealIds(
+    req: DescribeAgentRelateBigDealIdsRequest,
+    cb?: (error: string, rep: DescribeAgentRelateBigDealIdsResponse) => void
+  ): Promise<DescribeAgentRelateBigDealIdsResponse> {
+    return this.request("DescribeAgentRelateBigDealIds", req, cb)
   }
 
   /**
@@ -294,5 +266,45 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentDealsByCacheResponse) => void
   ): Promise<DescribeAgentDealsByCacheResponse> {
     return this.request("DescribeAgentDealsByCache", req, cb)
+  }
+
+  /**
+   * 传入代客uin，查客户级别，客户审核状态，客户实名认证状态
+   */
+  async DescribeAgentClientGrade(
+    req: DescribeAgentClientGradeRequest,
+    cb?: (error: string, rep: DescribeAgentClientGradeResponse) => void
+  ): Promise<DescribeAgentClientGradeResponse> {
+    return this.request("DescribeAgentClientGrade", req, cb)
+  }
+
+  /**
+   * 代理商可查询自己名下全部返佣信息
+   */
+  async DescribeRebateInfosNew(
+    req: DescribeRebateInfosNewRequest,
+    cb?: (error: string, rep: DescribeRebateInfosNewResponse) => void
+  ): Promise<DescribeRebateInfosNewResponse> {
+    return this.request("DescribeRebateInfosNew", req, cb)
+  }
+
+  /**
+   * 代理商可查询自己名下待审核客户列表
+   */
+  async DescribeAgentClients(
+    req: DescribeAgentClientsRequest,
+    cb?: (error: string, rep: DescribeAgentClientsResponse) => void
+  ): Promise<DescribeAgentClientsResponse> {
+    return this.request("DescribeAgentClients", req, cb)
+  }
+
+  /**
+   * 合作伙伴为客户创建强代付关系
+   */
+  async CreatePayRelationForClient(
+    req: CreatePayRelationForClientRequest,
+    cb?: (error: string, rep: CreatePayRelationForClientResponse) => void
+  ): Promise<CreatePayRelationForClientResponse> {
+    return this.request("CreatePayRelationForClient", req, cb)
   }
 }

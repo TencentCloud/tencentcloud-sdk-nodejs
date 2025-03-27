@@ -49,7 +49,6 @@ import {
   FinanBillSliceOCRResponse,
   DriverLicenseOCRResponse,
   WaybillOCRResponse,
-  CreateAIFormTaskRequest,
   Words,
   TextDetectionEn,
   ElectronicFlightTicketFull,
@@ -145,11 +144,10 @@ import {
   VatInvoiceGoodsInfo,
   RecognizeThaiIDCardOCRResponse,
   GroupInfo,
-  ItemPolygonInfo,
+  OrgCodeCertOCRResponse,
   PermitOCRRequest,
   SingleInvoiceItem,
   InvoiceGeneralOCRResponse,
-  SmartFormFileUrl,
   VatInvoiceVerifyNewResponse,
   VatInvoiceInfo,
   TaxiInvoiceOCRRequest,
@@ -160,7 +158,6 @@ import {
   TrainTicket,
   TextDetectRequest,
   VatRollInvoiceOCRResponse,
-  VatInvoiceVerifyRequest,
   EduPaperOCRResponse,
   RecognizeThaiIDCardOCRRequest,
   BusinessCardInfo,
@@ -191,7 +188,6 @@ import {
   RideHailingDriverLicenseOCRResponse,
   ImageEnhancementRequest,
   EnglishOCRRequest,
-  VatInvoiceVerifyResponse,
   VatElectronicInfo,
   RecognizeValidIDCardOCRResponse,
   DetectedWords,
@@ -246,7 +242,7 @@ import {
   GeneralCardWarnInfo,
   TollInvoice,
   ItemCoord,
-  CreateAIFormTaskResponse,
+  ItemPolygonInfo,
   MixedInvoiceOCRRequest,
   ShippingInvoice,
   TableDetectInfo,
@@ -260,11 +256,9 @@ import {
   DocumentElement,
   RecognizeGeneralInvoiceResponse,
   Polygon,
-  GetTaskStateResponse,
   InsuranceBillInfo,
   ContentInfo,
   QuestionOCRRequest,
-  GetTaskStateRequest,
   TextTractorVehicleBack,
   RecognizeMedicalInvoiceOCRRequest,
   InsuranceBillOCRResponse,
@@ -291,7 +285,7 @@ import {
   ImageCoordinates,
   RecognizeForeignPermanentResidentIdCardResponse,
   BusInvoiceOCRRequest,
-  OrgCodeCertOCRResponse,
+  QuotaInvoiceOCRResponse,
   TemporaryIDCardInfo,
   VatInvoiceItem,
   RideHailingTransportLicenseOCRResponse,
@@ -316,7 +310,6 @@ import {
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
   WaybillOCRRequest,
-  ReconstructDocumentConfig,
   RecognizeStoreNameResponse,
   GetOCRTokenRequest,
   RideHailingTransportLicenseOCRRequest,
@@ -332,7 +325,7 @@ import {
   TableOCRRequest,
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
-  QuotaInvoiceOCRResponse,
+  ReconstructDocumentConfig,
   RecognizeGeneralTextImageWarnRequest,
   RecognizeForeignPermanentResidentIdCardRequest,
   GeneralFastOCRResponse,
@@ -718,15 +711,75 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
+     * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
 
-默认接口请求频率限制：5次/秒。
+适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
+
+产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th style="width:200px">【荐】通用印刷体识别</th>
+          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+          <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>96%</td>
+          <td>99%</td>
+          <td>91%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>中</td>
+          <td>高</td>
+          <td>低</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
+          <td>中文、英文、中英文</td>
+          <td>中文、英文、中英文</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+
+默认接口请求频率限制：20次/秒。
      */
-  async FlightInvoiceOCR(
-    req: FlightInvoiceOCRRequest,
-    cb?: (error: string, rep: FlightInvoiceOCRResponse) => void
-  ): Promise<FlightInvoiceOCRResponse> {
-    return this.request("FlightInvoiceOCR", req, cb)
+  async GeneralBasicOCR(
+    req: GeneralBasicOCRRequest,
+    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
+  ): Promise<GeneralBasicOCRResponse> {
+    return this.request("GeneralBasicOCR", req, cb)
   }
 
   /**
@@ -899,6 +952,11 @@ export class Client extends AbstractClient {
           <td> 19 </td>
         </tr>
         <tr>
+          <td> BankSlip </td>
+          <td> 银行回单 </td>
+          <td> 20 </td>
+        </tr>
+        <tr>
           <td> OtherInvoice </td>
           <td> 其他发票 </td>
           <td> -1 </td>
@@ -979,18 +1037,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 智慧表单产品已下线，需要下线相关API
-
-支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
-     */
-  async GetTaskState(
-    req: GetTaskStateRequest,
-    cb?: (error: string, rep: GetTaskStateResponse) => void
-  ): Promise<GetTaskStateResponse> {
-    return this.request("GetTaskState", req, cb)
-  }
-
-  /**
      * 支持通用证照的有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能，支持通用证照的ps伪造检测，可以应用于各种证件信息有效性校验场景。
 
 默认接口请求频率限制：5次/秒。
@@ -1003,75 +1049,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
+     * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
 
-适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
-
-产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
-
-通用印刷体识别不同版本的差异如下：
-<table style="width:715px">
-      <thead>
-        <tr>
-          <th style="width:150px"></th>
-          <th style="width:200px">【荐】通用印刷体识别</th>
-          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-          <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> 适用场景</td>
-          <td>适用于所有通用场景的印刷体识别</td>
-          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
-        </tr>
-        <tr>
-          <td>识别准确率</td>
-          <td>96%</td>
-          <td>99%</td>
-          <td>91%</td>
-        </tr>
-        <tr>
-          <td>价格</td>
-          <td>中</td>
-          <td>高</td>
-          <td>低</td>
-        </tr>
-        <tr>
-          <td>支持的语言</td>
-          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
-          <td>中文、英文、中英文</td>
-          <td>中文、英文、中英文</td>
-        </tr>
-        <tr>
-          <td>自动语言检测</td>
-          <td>支持</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>返回文本行坐标</td>
-          <td>支持</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>自动旋转纠正</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-        </tr>
-      </tbody>
-    </table>
-
-默认接口请求频率限制：20次/秒。
+默认接口请求频率限制：5次/秒。
      */
-  async GeneralBasicOCR(
-    req: GeneralBasicOCRRequest,
-    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
-  ): Promise<GeneralBasicOCRResponse> {
-    return this.request("GeneralBasicOCR", req, cb)
+  async FlightInvoiceOCR(
+    req: FlightInvoiceOCRRequest,
+    cb?: (error: string, rep: FlightInvoiceOCRResponse) => void
+  ): Promise<FlightInvoiceOCRResponse> {
+    return this.request("FlightInvoiceOCR", req, cb)
   }
 
   /**
@@ -1146,20 +1132,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BankCardOCRResponse) => void
   ): Promise<BankCardOCRResponse> {
     return this.request("BankCardOCR", req, cb)
-  }
-
-  /**
-     * 已上线VatInvoiceVerifyNew，VatInvoiceVerify需要下线，产品在官网已发通告
-
-本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async VatInvoiceVerify(
-    req: VatInvoiceVerifyRequest,
-    cb?: (error: string, rep: VatInvoiceVerifyResponse) => void
-  ): Promise<VatInvoiceVerifyResponse> {
-    return this.request("VatInvoiceVerify", req, cb)
   }
 
   /**
@@ -1382,20 +1354,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeTableOCRResponse) => void
   ): Promise<RecognizeTableOCRResponse> {
     return this.request("RecognizeTableOCR", req, cb)
-  }
-
-  /**
-     * 智慧表单产品已下线，需要下线相关API
-
-本接口可创建智能表单录入任务，支持多个识别图片和PDF的URL上传，返回含有识别内容的操作页面URL。
-
-智能表单录入产品提供高准确率的表单识别技术和人工核对工具，支持自定义字段，将识别结果自动填入到自定义条目中，并提供人工操作工具，完成整个表单识别过程。适用性强，可对票据、合同、货单等文件的识别，适用于金融、货代、保险、档案等领域。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
-     */
-  async CreateAIFormTask(
-    req: CreateAIFormTaskRequest,
-    cb?: (error: string, rep: CreateAIFormTaskResponse) => void
-  ): Promise<CreateAIFormTaskResponse> {
-    return this.request("CreateAIFormTask", req, cb)
   }
 
   /**

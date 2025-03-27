@@ -333,6 +333,36 @@ export interface RebateInfoElem {
 }
 
 /**
+ * DescribeClientSwitchTraTaskInfo返回参数结构体
+ */
+export interface DescribeClientSwitchTraTaskInfoResponse {
+  /**
+   * 客户UIN
+   */
+  ClientUin?: string
+  /**
+   * 切换类型：代理,代采
+   */
+  SwitchType?: string
+  /**
+   * ok，符合，fail，不符合
+   */
+  Result?: string
+  /**
+   * 切换链接
+   */
+  SwitchUrl?: string
+  /**
+   * 不符合的原因
+   */
+  ResultMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAgentPayDealsV2返回参数结构体
  */
 export interface DescribeAgentPayDealsV2Response {
@@ -1152,6 +1182,20 @@ export interface AuditApplyClientResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeClientSwitchTraTaskInfo请求参数结构体
+ */
+export interface DescribeClientSwitchTraTaskInfoRequest {
+  /**
+   * 代客UIN
+   */
+  ClientUin: string
+  /**
+   * 1：代理，2：代采
+   */
+  SwitchType: number
 }
 
 /**

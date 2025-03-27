@@ -4793,12 +4793,10 @@ export interface OIDCConfigAuthenticationOptions {
 export interface DescribeOSImagesResponse {
   /**
    * 镜像信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OSImageSeriesSet?: Array<OSImage>
   /**
    * 镜像数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
