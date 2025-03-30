@@ -25,11 +25,12 @@ import {
   DeleteTrainingModelVersionResponse,
   ServiceEIP,
   NotebookSetItem,
+  StartTrainingTaskRequest,
   SSHConfig,
   Usage,
   DescribeBillingResourceGroupsRequest,
   DeleteNotebookRequest,
-  RDMAConfig,
+  Filter,
   DescribeTrainingModelVersionsRequest,
   SpecUnit,
   CreateDatasetResponse,
@@ -43,7 +44,7 @@ import {
   DescribeBillingResourceGroupsResponse,
   SpecPrice,
   StartNotebookResponse,
-  CFSTurbo,
+  DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionRequest,
   ResourceInstanceRunningJobInfo,
   ImageFIlter,
@@ -84,6 +85,7 @@ import {
   DeleteTrainingModelResponse,
   DescribeInferTemplatesResponse,
   DescribeBillingSpecsRequest,
+  RDMAConfig,
   InferCodeInfo,
   DescribeInferTemplatesRequest,
   PrivateLinkInfo,
@@ -99,8 +101,10 @@ import {
   ImageInfo,
   ServiceInfo,
   DescribeModelServiceRequest,
+  CreateTrainingTaskResponse,
   DeleteModelServiceRequest,
   DescribeModelServiceGroupRequest,
+  CreateTrainingTaskRequest,
   Message,
   CreatePresignedNotebookUrlRequest,
   StopNotebookResponse,
@@ -114,6 +118,7 @@ import {
   DescribeBillingSpecsPriceRequest,
   Instance,
   DescribeBillingSpecsResponse,
+  DeleteTrainingTaskResponse,
   DescribeNotebooksResponse,
   DatasetGroup,
   StatefulSetCondition,
@@ -124,8 +129,9 @@ import {
   ScheduledAction,
   DescribeNotebooksRequest,
   DeleteNotebookResponse,
+  DeleteTrainingTaskRequest,
   NotebookDetail,
-  Filter,
+  DescribeBillingResourceInstanceRunningJobsRequest,
   ModifyModelServiceResponse,
   PodInfo,
   ModelInfo,
@@ -146,7 +152,7 @@ import {
   DescribeTrainingTasksResponse,
   DescribeNotebookRequest,
   LocalDisk,
-  DescribeBillingResourceInstanceRunningJobsRequest,
+  EncodedStartCmdInfo,
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
@@ -155,13 +161,14 @@ import {
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,
   GooseFSx,
-  DescribeTrainingTaskPodsRequest,
+  CFSTurbo,
   DescribeTrainingModelVersionsResponse,
   ModelInputInfo,
   DeleteDatasetRequest,
   DataConfig,
   ResourceConf,
   PushTrainingMetricsResponse,
+  StopTrainingTaskResponse,
   HDFSConfig,
   DescribeTrainingTaskPodsResponse,
   ModelAccelerateTask,
@@ -175,9 +182,11 @@ import {
   DescribeBillingSpecsPriceResponse,
   MultiModalContent,
   DescribeTrainingModelVersionResponse,
-  EnvVar,
-  LogConfig,
   WorkloadStatus,
+  EnvVar,
+  StopTrainingTaskRequest,
+  LogConfig,
+  StartTrainingTaskResponse,
 } from "./tione_models"
 
 /**
@@ -290,6 +299,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建模型训练任务
+   */
+  async CreateTrainingTask(
+    req: CreateTrainingTaskRequest,
+    cb?: (error: string, rep: CreateTrainingTaskResponse) => void
+  ): Promise<CreateTrainingTaskResponse> {
+    return this.request("CreateTrainingTask", req, cb)
+  }
+
+  /**
    * 删除Notebook
    */
   async DeleteNotebook(
@@ -350,13 +369,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 模型加速之后的模型版本列表
+   * 删除模型
    */
-  async DescribeModelAccelerateVersions(
-    req: DescribeModelAccelerateVersionsRequest,
-    cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void
-  ): Promise<DescribeModelAccelerateVersionsResponse> {
-    return this.request("DescribeModelAccelerateVersions", req, cb)
+  async DeleteTrainingModel(
+    req: DeleteTrainingModelRequest,
+    cb?: (error: string, rep: DeleteTrainingModelResponse) => void
+  ): Promise<DeleteTrainingModelResponse> {
+    return this.request("DeleteTrainingModel", req, cb)
   }
 
   /**
@@ -377,6 +396,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateNotebookResponse) => void
   ): Promise<CreateNotebookResponse> {
     return this.request("CreateNotebook", req, cb)
+  }
+
+  /**
+   * 启动模型训练任务
+   */
+  async StartTrainingTask(
+    req: StartTrainingTaskRequest,
+    cb?: (error: string, rep: StartTrainingTaskResponse) => void
+  ): Promise<StartTrainingTaskResponse> {
+    return this.request("StartTrainingTask", req, cb)
   }
 
   /**
@@ -407,6 +436,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PushTrainingMetricsResponse) => void
   ): Promise<PushTrainingMetricsResponse> {
     return this.request("PushTrainingMetrics", req, cb)
+  }
+
+  /**
+   * 停止模型训练任务
+   */
+  async StopTrainingTask(
+    req: StopTrainingTaskRequest,
+    cb?: (error: string, rep: StopTrainingTaskResponse) => void
+  ): Promise<StopTrainingTaskResponse> {
+    return this.request("StopTrainingTask", req, cb)
   }
 
   /**
@@ -490,13 +529,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除模型
+   * 删除训练任务
    */
-  async DeleteTrainingModel(
-    req: DeleteTrainingModelRequest,
-    cb?: (error: string, rep: DeleteTrainingModelResponse) => void
-  ): Promise<DeleteTrainingModelResponse> {
-    return this.request("DeleteTrainingModel", req, cb)
+  async DeleteTrainingTask(
+    req: DeleteTrainingTaskRequest,
+    cb?: (error: string, rep: DeleteTrainingTaskResponse) => void
+  ): Promise<DeleteTrainingTaskResponse> {
+    return this.request("DeleteTrainingTask", req, cb)
+  }
+
+  /**
+   * 模型加速之后的模型版本列表
+   */
+  async DescribeModelAccelerateVersions(
+    req: DescribeModelAccelerateVersionsRequest,
+    cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void
+  ): Promise<DescribeModelAccelerateVersionsResponse> {
+    return this.request("DescribeModelAccelerateVersions", req, cb)
   }
 
   /**

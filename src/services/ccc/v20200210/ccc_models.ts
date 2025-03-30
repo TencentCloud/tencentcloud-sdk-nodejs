@@ -664,6 +664,54 @@ HoaiMy
 }
 
 /**
+ * 带有技能组优先级的座席信息
+ */
+export interface StaffInfo {
+  /**
+   * 座席名称
+   */
+  Name?: string
+  /**
+   * 座席邮箱
+   */
+  Mail?: string
+  /**
+   * 座席电话号码
+   */
+  Phone?: string
+  /**
+   * 座席昵称
+   */
+  Nick?: string
+  /**
+   * 座席工号
+   */
+  StaffNumber?: string
+  /**
+   * 用户角色id
+一个用户绑定了多个角色时以RoleIdList为准
+   * @deprecated
+   */
+  RoleId?: number
+  /**
+   * 用户角色id列表
+   */
+  RoleIdList?: number
+  /**
+   * 所属技能组列表
+   */
+  SkillGroupList?: Array<SkillGroupItem>
+  /**
+   * 最后修改时间
+   */
+  LastModifyTimestamp?: number
+  /**
+   * 座席分机号（1 到 8 打头，4 - 6 位）
+   */
+  ExtensionNumber?: string
+}
+
+/**
  * CreateAdminURL返回参数结构体
  */
 export interface CreateAdminURLResponse {
@@ -756,6 +804,24 @@ export interface ModifyStaffPasswordResponse {
 }
 
 /**
+ * TransferToManual请求参数结构体
+ */
+export interface TransferToManualRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 会话ID
+   */
+  SessionId: string
+  /**
+   * 技能组Id
+   */
+  SkillGroupId: number
+}
+
+/**
  * CreatePredictiveDialingCampaign请求参数结构体
  */
 export interface CreatePredictiveDialingCampaignRequest {
@@ -831,6 +897,16 @@ export interface CreatePredictiveDialingCampaignRequest {
    * 可用时间段
    */
   AvailableTime?: Array<TimeRange>
+}
+
+/**
+ * AbortAgentCruiseDialingCampaign返回参数结构体
+ */
+export interface AbortAgentCruiseDialingCampaignResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1324,21 +1400,49 @@ export interface AICallExtractResultInfo {
 }
 
 /**
- * DescribeIMCdrList返回参数结构体
+ * CreateAgentCruiseDialingCampaign请求参数结构体
  */
-export interface DescribeIMCdrListResponse {
+export interface CreateAgentCruiseDialingCampaignRequest {
   /**
-   * 总记录数
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  TotalCount?: number
+  SdkAppId: number
   /**
-   * 服务记录列表
+   * 任务名称
    */
-  IMCdrList?: Array<IMCdrInfo>
+  Name: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 座席账号
    */
-  RequestId?: string
+  Agent: string
+  /**
+   * 单轮并发呼叫量 1-20
+   */
+  ConcurrencyNumber: number
+  /**
+   * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+   */
+  StartTime: number
+  /**
+   * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+   */
+  EndTime: number
+  /**
+   * 被叫列表，支持 E.164 或不带国家码形式的号码
+   */
+  Callees?: Array<string>
+  /**
+   * 主叫列表，使用管理端展示的号码格式
+   */
+  Callers?: Array<string>
+  /**
+   * 被叫呼叫顺序 0 随机 1 顺序
+   */
+  CallOrder?: number
+  /**
+   * 调用方自定义数据，最大长度 1024
+   */
+  UUI?: string
 }
 
 /**
@@ -2703,51 +2807,35 @@ export interface UnbindNumberCallOutSkillGroupResponse {
 }
 
 /**
- * 带有技能组优先级的座席信息
+ * DescribeAgentCruiseDialingCampaign请求参数结构体
  */
-export interface StaffInfo {
+export interface DescribeAgentCruiseDialingCampaignRequest {
   /**
-   * 座席名称
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Name?: string
+  SdkAppId: number
   /**
-   * 座席邮箱
+   * 任务 ID
    */
-  Mail?: string
+  CampaignId: number
+}
+
+/**
+ * DescribePSTNActiveSessionList请求参数结构体
+ */
+export interface DescribePSTNActiveSessionListRequest {
   /**
-   * 座席电话号码
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Phone?: string
+  SdkAppId: number
   /**
-   * 座席昵称
+   * 数据偏移
    */
-  Nick?: string
+  Offset: number
   /**
-   * 座席工号
+   * 返回的数据条数，最大 25
    */
-  StaffNumber?: string
-  /**
-   * 用户角色id
-一个用户绑定了多个角色时以RoleIdList为准
-   * @deprecated
-   */
-  RoleId?: number
-  /**
-   * 用户角色id列表
-   */
-  RoleIdList?: number
-  /**
-   * 所属技能组列表
-   */
-  SkillGroupList?: Array<SkillGroupItem>
-  /**
-   * 最后修改时间
-   */
-  LastModifyTimestamp?: number
-  /**
-   * 座席分机号（1 到 8 打头，4 - 6 位）
-   */
-  ExtensionNumber?: string
+  Limit: number
 }
 
 /**
@@ -2776,6 +2864,20 @@ export interface DescribeAICallExtractResultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 上传音频文件失败信息
+ */
+export interface UploadIvrAudioFailedInfo {
+  /**
+   * 文件名
+   */
+  FileName?: string
+  /**
+   * 失败原因
+   */
+  FailedMsg?: string
 }
 
 /**
@@ -2940,6 +3042,24 @@ export interface OwnNumberApplyDetailItem {
    * 呼出被叫格式，使用 {+E.164} 或 {E.164},
    */
   OutboundCalleeFormat?: string
+}
+
+/**
+ * DescribeIMCdrList返回参数结构体
+ */
+export interface DescribeIMCdrListResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 服务记录列表
+   */
+  IMCdrList?: Array<IMCdrInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3119,21 +3239,17 @@ export interface Filter {
 }
 
 /**
- * UnbindStaffSkillGroupList请求参数结构体
+ * AbortAgentCruiseDialingCampaign请求参数结构体
  */
-export interface UnbindStaffSkillGroupListRequest {
+export interface AbortAgentCruiseDialingCampaignRequest {
   /**
    * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
-   * 客服邮箱
+   * 任务 ID
    */
-  StaffEmail: string
-  /**
-   * 解绑技能组列表
-   */
-  SkillGroupList: Array<number | bigint>
+  CampaignId: number
 }
 
 /**
@@ -3164,6 +3280,16 @@ export interface BindNumberCallOutSkillGroupResponse {
  * HangUpCall返回参数结构体
  */
 export interface HangUpCallResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TransferToManual返回参数结构体
+ */
+export interface TransferToManualResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3699,35 +3825,45 @@ export interface BindStaffSkillGroupListRequest {
 }
 
 /**
- * DescribePSTNActiveSessionList请求参数结构体
+ * CreateAgentCruiseDialingCampaign返回参数结构体
  */
-export interface DescribePSTNActiveSessionListRequest {
+export interface CreateAgentCruiseDialingCampaignResponse {
+  /**
+   * 生成的任务 ID
+   */
+  CampaignId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyOwnNumberApply返回参数结构体
+ */
+export interface ModifyOwnNumberApplyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindStaffSkillGroupList请求参数结构体
+ */
+export interface UnbindStaffSkillGroupListRequest {
   /**
    * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
-   * 数据偏移
+   * 客服邮箱
    */
-  Offset: number
+  StaffEmail: string
   /**
-   * 返回的数据条数，最大 25
+   * 解绑技能组列表
    */
-  Limit: number
-}
-
-/**
- * 上传音频文件失败信息
- */
-export interface UploadIvrAudioFailedInfo {
-  /**
-   * 文件名
-   */
-  FileName?: string
-  /**
-   * 失败原因
-   */
-  FailedMsg?: string
+  SkillGroupList: Array<number | bigint>
 }
 
 /**
@@ -3771,9 +3907,49 @@ export interface ModifyCompanyApplyRequest {
 }
 
 /**
- * ModifyOwnNumberApply返回参数结构体
+ * DescribeAgentCruiseDialingCampaign返回参数结构体
  */
-export interface ModifyOwnNumberApplyResponse {
+export interface DescribeAgentCruiseDialingCampaignResponse {
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 座席账号
+   */
+  Agent?: string
+  /**
+   * 单轮并发呼叫量 1-20
+   */
+  ConcurrencyNumber?: number
+  /**
+   * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+   */
+  StartTime?: number
+  /**
+   * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+   */
+  EndTime?: number
+  /**
+   * 被叫呼叫顺序 0 随机 1 顺序
+   */
+  CallOrder?: number
+  /**
+   * 调用方自定义数据，最大长度 1024
+   */
+  UUI?: string
+  /**
+   * 任务状态 0 未启动 1 运行中 2 已完成 3 已终止
+   */
+  State?: number
+  /**
+   * 被叫总数
+   */
+  TotalCalleeCount?: number
+  /**
+   * 已呼被叫数
+   */
+  CalledCalleeCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -32,13 +32,16 @@ import {
   DescribeAutoCalloutTaskRequest,
   CreateUserSigResponse,
   CreateAICallRequest,
+  StaffInfo,
   CreateAdminURLResponse,
   PausePredictiveDialingCampaignRequest,
   CreateCallOutSessionResponse,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
   ModifyStaffPasswordResponse,
+  TransferToManualRequest,
   CreatePredictiveDialingCampaignRequest,
+  AbortAgentCruiseDialingCampaignResponse,
   CreateCompanyApplyResponse,
   ServeParticipant,
   AICallExtractResultElement,
@@ -54,7 +57,7 @@ import {
   PackageBuyInfo,
   DescribeTelCdrRequest,
   AICallExtractResultInfo,
-  DescribeIMCdrListResponse,
+  CreateAgentCruiseDialingCampaignRequest,
   DescribeAICallExtractResultRequest,
   CreateStaffResponse,
   DescribePredictiveDialingCampaignsRequest,
@@ -110,9 +113,11 @@ import {
   DeletePredictiveDialingCampaignResponse,
   IVRKeyPressedElement,
   UnbindNumberCallOutSkillGroupResponse,
-  StaffInfo,
+  DescribeAgentCruiseDialingCampaignRequest,
+  DescribePSTNActiveSessionListRequest,
   CreateAutoCalloutTaskResponse,
   DescribeAICallExtractResultResponse,
+  UploadIvrAudioFailedInfo,
   UploadIvrAudioResponse,
   ModifyExtensionResponse,
   DescribeCompanyListResponse,
@@ -121,6 +126,7 @@ import {
   CallInMetrics,
   DescribeCCCBuyInfoListRequest,
   OwnNumberApplyDetailItem,
+  DescribeIMCdrListResponse,
   DescribePredictiveDialingCampaignsResponse,
   DescribeTelCallInfoRequest,
   Variable,
@@ -131,10 +137,11 @@ import {
   CreateCarrierPrivilegeNumberApplicantRequest,
   AITransferItem,
   Filter,
-  UnbindStaffSkillGroupListRequest,
+  AbortAgentCruiseDialingCampaignRequest,
   CreateOwnNumberApplyResponse,
   BindNumberCallOutSkillGroupResponse,
   HangUpCallResponse,
+  TransferToManualResponse,
   StopAutoCalloutTaskResponse,
   AbortPredictiveDialingCampaignRequest,
   TelCdrInfo,
@@ -150,11 +157,12 @@ import {
   CompanyStateInfo,
   DeleteExtensionResponse,
   BindStaffSkillGroupListRequest,
-  DescribePSTNActiveSessionListRequest,
-  UploadIvrAudioFailedInfo,
+  CreateAgentCruiseDialingCampaignResponse,
+  ModifyOwnNumberApplyResponse,
+  UnbindStaffSkillGroupListRequest,
   DescribeCallInMetricsResponse,
   ModifyCompanyApplyRequest,
-  ModifyOwnNumberApplyResponse,
+  DescribeAgentCruiseDialingCampaignResponse,
   CreateAICallResponse,
   DescribeCompanyListRequest,
   CreateIVRSessionResponse,
@@ -234,6 +242,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止座席巡航式外呼任务
+   */
+  async AbortAgentCruiseDialingCampaign(
+    req: AbortAgentCruiseDialingCampaignRequest,
+    cb?: (error: string, rep: AbortAgentCruiseDialingCampaignResponse) => void
+  ): Promise<AbortAgentCruiseDialingCampaignResponse> {
+    return this.request("AbortAgentCruiseDialingCampaign", req, cb)
+  }
+
+  /**
      * 用于调用AI模型发起外呼通话，仅限自有电话号码使用，目前开通高级版座席**限时**免费体验。
 
 发起通话前，请先确认您的AI模型是否兼容 OpenAI、Azure 或 Minimax 协议，并前往模型服务商网站获取相关鉴权信息。 具体功能说明请参考文档 [腾讯云联络中心AI通话平台](https://cloud.tencent.com/document/product/679/112100)。
@@ -243,6 +261,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAICallResponse) => void
   ): Promise<CreateAICallResponse> {
     return this.request("CreateAICall", req, cb)
+  }
+
+  /**
+   * 查询 座席巡航式外呼任务
+   */
+  async DescribeAgentCruiseDialingCampaign(
+    req: DescribeAgentCruiseDialingCampaignRequest,
+    cb?: (error: string, rep: DescribeAgentCruiseDialingCampaignResponse) => void
+  ): Promise<DescribeAgentCruiseDialingCampaignResponse> {
+    return this.request("DescribeAgentCruiseDialingCampaign", req, cb)
   }
 
   /**
@@ -502,6 +530,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 特定场景下讲会话转接到人工坐席
+   */
+  async TransferToManual(
+    req: TransferToManualRequest,
+    cb?: (error: string, rep: TransferToManualResponse) => void
+  ): Promise<TransferToManualResponse> {
+    return this.request("TransferToManual", req, cb)
+  }
+
+  /**
    * 获取技能组信息列表
    */
   async DescribeSkillGroupInfoList(
@@ -559,6 +597,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAICallExtractResultResponse) => void
   ): Promise<DescribeAICallExtractResultResponse> {
     return this.request("DescribeAICallExtractResult", req, cb)
+  }
+
+  /**
+   * 座席巡航式外呼。
+   */
+  async CreateAgentCruiseDialingCampaign(
+    req: CreateAgentCruiseDialingCampaignRequest,
+    cb?: (error: string, rep: CreateAgentCruiseDialingCampaignResponse) => void
+  ): Promise<CreateAgentCruiseDialingCampaignResponse> {
+    return this.request("CreateAgentCruiseDialingCampaign", req, cb)
   }
 
   /**

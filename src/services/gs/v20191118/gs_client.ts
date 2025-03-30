@@ -62,12 +62,14 @@ import {
   SyncExecuteCommandResult,
   RestartAndroidInstancesAppResponse,
   DescribeAndroidInstanceTasksStatusRequest,
+  CreateAndroidInstancesScreenshotResponse,
   DescribeInstancesCountResponse,
   ExecuteCommandOnAndroidInstancesRequest,
   ModifyAndroidInstanceInformationResponse,
   DestroyAndroidInstancesResponse,
   SaveGameArchiveRequest,
   SwitchGameArchiveResponse,
+  CreateAndroidInstancesScreenshotRequest,
   InstallAndroidInstancesAppResponse,
   AndroidInstanceTask,
   ConnectAndroidInstanceResponse,
@@ -163,6 +165,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAndroidInstanceSSHResponse) => void
   ): Promise<CreateAndroidInstanceSSHResponse> {
     return this.request("CreateAndroidInstanceSSH", req, cb)
+  }
+
+  /**
+   * 安卓实例截图
+   */
+  async CreateAndroidInstancesScreenshot(
+    req: CreateAndroidInstancesScreenshotRequest,
+    cb?: (error: string, rep: CreateAndroidInstancesScreenshotResponse) => void
+  ): Promise<CreateAndroidInstancesScreenshotResponse> {
+    return this.request("CreateAndroidInstancesScreenshot", req, cb)
   }
 
   /**

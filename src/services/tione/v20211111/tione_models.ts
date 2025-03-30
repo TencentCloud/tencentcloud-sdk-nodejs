@@ -593,6 +593,16 @@ export interface NotebookSetItem {
 }
 
 /**
+ * StartTrainingTask请求参数结构体
+ */
+export interface StartTrainingTaskRequest {
+  /**
+   * 训练任务ID
+   */
+  Id: string
+}
+
+/**
  * notebook ssh端口配置
  */
 export interface SSHConfig {
@@ -690,14 +700,25 @@ export interface DeleteNotebookRequest {
 }
 
 /**
- * RDMA配置
+ * 过滤器
  */
-export interface RDMAConfig {
+export interface Filter {
   /**
-   * 是否开启RDMA
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤字段名称
    */
-  Enable?: boolean
+  Name?: string
+  /**
+   * 过滤字段取值
+   */
+  Values?: Array<string>
+  /**
+   * 是否开启反向查询
+   */
+  Negative?: boolean
+  /**
+   * 是否开启模糊匹配
+   */
+  Fuzzy?: boolean
 }
 
 /**
@@ -1014,19 +1035,13 @@ export interface StartNotebookResponse {
 }
 
 /**
- * 配置CFSTurbo参数
+ * DescribeTrainingTaskPods请求参数结构体
  */
-export interface CFSTurbo {
+export interface DescribeTrainingTaskPodsRequest {
   /**
-   * CFSTurbo实例id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 训练任务ID
    */
-  Id?: string
-  /**
-   * CFSTurbo路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Path?: string
+  Id: string
 }
 
 /**
@@ -2342,6 +2357,17 @@ export interface DescribeBillingSpecsRequest {
 }
 
 /**
+ * RDMA配置
+ */
+export interface RDMAConfig {
+  /**
+   * 是否开启RDMA
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+}
+
+/**
  * 推理代码的信息
  */
 export interface InferCodeInfo {
@@ -2976,6 +3002,20 @@ export interface DescribeModelServiceRequest {
 }
 
 /**
+ * CreateTrainingTask返回参数结构体
+ */
+export interface CreateTrainingTaskResponse {
+  /**
+   * 训练任务ID
+   */
+  Id?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteModelService请求参数结构体
  */
 export interface DeleteModelServiceRequest {
@@ -3001,6 +3041,105 @@ export interface DescribeModelServiceGroupRequest {
    * 服务分类
    */
   ServiceCategory?: string
+}
+
+/**
+ * CreateTrainingTask请求参数结构体
+ */
+export interface CreateTrainingTaskRequest {
+  /**
+   * 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   */
+  Name: string
+  /**
+   * 计费模式，eg：PREPAID 包年包月（资源组）;
+POSTPAID_BY_HOUR 按量计费
+   */
+  ChargeType: string
+  /**
+   * 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}]
+   */
+  ResourceConfigInfos: Array<ResourceConfigInfo>
+  /**
+   * 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH
+   */
+  FrameworkName?: string
+  /**
+   * 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9
+   */
+  FrameworkVersion?: string
+  /**
+   * 训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu
+   */
+  FrameworkEnvironment?: string
+  /**
+   * 预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询
+   */
+  ResourceGroupId?: string
+  /**
+   * 标签配置
+   */
+  Tags?: Array<Tag>
+  /**
+   * 自定义镜像信息
+   */
+  ImageInfo?: ImageInfo
+  /**
+   * COS代码包路径
+   */
+  CodePackagePath?: CosPathInfo
+  /**
+   * 任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数
+   */
+  StartCmdInfo?: StartCmdInfo
+  /**
+   * 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD
+   */
+  TrainingMode?: string
+  /**
+   * 数据配置，依赖DataSource字段，数量不超过10个
+   */
+  DataConfigs?: Array<DataConfig>
+  /**
+   * VPC Id
+   */
+  VpcId?: string
+  /**
+   * 子网Id
+   */
+  SubnetId?: string
+  /**
+   * COS训练输出路径
+   */
+  Output?: CosPathInfo
+  /**
+   * CLS日志配置
+   */
+  LogConfig?: LogConfig
+  /**
+   * 调优参数，不超过2048个字符
+   */
+  TuningParameters?: string
+  /**
+   * 是否上报日志
+   */
+  LogEnable?: boolean
+  /**
+   * 备注，不超过1024个字符
+   */
+  Remark?: string
+  /**
+   * 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx
+   */
+  DataSource?: string
+  /**
+   * 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292)
+   */
+  CallbackUrl?: string
+  /**
+   * 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效
+   */
+  EncodedStartCmdInfo?: EncodedStartCmdInfo
 }
 
 /**
@@ -3318,6 +3457,16 @@ export interface DescribeBillingSpecsResponse {
    * 计费项列表
    */
   Specs?: Array<Spec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteTrainingTask返回参数结构体
+ */
+export interface DeleteTrainingTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3733,6 +3882,16 @@ export interface DeleteNotebookResponse {
 }
 
 /**
+ * DeleteTrainingTask请求参数结构体
+ */
+export interface DeleteTrainingTaskRequest {
+  /**
+   * 训练任务ID
+   */
+  Id: string
+}
+
+/**
  * 类型NotebookDetail
  */
 export interface NotebookDetail {
@@ -3947,25 +4106,17 @@ export interface NotebookDetail {
 }
 
 /**
- * 过滤器
+ * DescribeBillingResourceInstanceRunningJobs请求参数结构体
  */
-export interface Filter {
+export interface DescribeBillingResourceInstanceRunningJobsRequest {
   /**
-   * 过滤字段名称
+   * 资源组id
    */
-  Name?: string
+  ResourceGroupId: string
   /**
-   * 过滤字段取值
+   * 资源组节点id
    */
-  Values?: Array<string>
-  /**
-   * 是否开启反向查询
-   */
-  Negative?: boolean
-  /**
-   * 是否开启模糊匹配
-   */
-  Fuzzy?: boolean
+  ResourceInstanceId: string
 }
 
 /**
@@ -4710,17 +4861,13 @@ export interface LocalDisk {
 }
 
 /**
- * DescribeBillingResourceInstanceRunningJobs请求参数结构体
+ * 编码后的启动命令信息
  */
-export interface DescribeBillingResourceInstanceRunningJobsRequest {
+export interface EncodedStartCmdInfo {
   /**
-   * 资源组id
+   * 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""}
    */
-  ResourceGroupId: string
-  /**
-   * 资源组节点id
-   */
-  ResourceInstanceId: string
+  StartCmdInfo?: string
 }
 
 /**
@@ -5002,13 +5149,19 @@ export interface GooseFSx {
 }
 
 /**
- * DescribeTrainingTaskPods请求参数结构体
+ * 配置CFSTurbo参数
  */
-export interface DescribeTrainingTaskPodsRequest {
+export interface CFSTurbo {
   /**
-   * 训练任务ID
+   * CFSTurbo实例id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
+  /**
+   * CFSTurbo路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
 }
 
 /**
@@ -5169,6 +5322,16 @@ TI.GN7.20XLARGE320.POST: 80C320G T4*4
  * PushTrainingMetrics返回参数结构体
  */
 export interface PushTrainingMetricsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopTrainingTask返回参数结构体
+ */
+export interface StopTrainingTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5594,38 +5757,6 @@ export interface DescribeTrainingModelVersionResponse {
 }
 
 /**
- * 环境变量
- */
-export interface EnvVar {
-  /**
-   * 环境变量key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 环境变量value
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-}
-
-/**
- * 日志配置
- */
-export interface LogConfig {
-  /**
-   * 日志需要投递到cls的日志集
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogsetId: string
-  /**
-   * 日志需要投递到cls的主题
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicId: string
-}
-
-/**
  * 工作负载的状态
  */
 export interface WorkloadStatus {
@@ -5672,4 +5803,56 @@ Stopping 停止中
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
+}
+
+/**
+ * 环境变量
+ */
+export interface EnvVar {
+  /**
+   * 环境变量key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 环境变量value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
+ * StopTrainingTask请求参数结构体
+ */
+export interface StopTrainingTaskRequest {
+  /**
+   * 训练任务ID
+   */
+  Id: string
+}
+
+/**
+ * 日志配置
+ */
+export interface LogConfig {
+  /**
+   * 日志需要投递到cls的日志集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogsetId: string
+  /**
+   * 日志需要投递到cls的主题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId: string
+}
+
+/**
+ * StartTrainingTask返回参数结构体
+ */
+export interface StartTrainingTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

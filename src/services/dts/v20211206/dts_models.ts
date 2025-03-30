@@ -4435,6 +4435,7 @@ export interface SyncJobInfo {
   AllActions?: Array<string>
   /**
    * 当前状态能进行的操作
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Actions?: Array<string>
   /**

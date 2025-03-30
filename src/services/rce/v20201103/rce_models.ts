@@ -1306,10 +1306,6 @@ export interface DataAuthorizationInfo {
    * 客户获得用户授权所依赖的协议地址。
    */
   PrivacyPolicyLink?: string
-  /**
-   * 是否是用户个人敏感数据（不推荐使用）。固定填：1。
-   */
-  IsPersonalData?: number
 }
 
 /**

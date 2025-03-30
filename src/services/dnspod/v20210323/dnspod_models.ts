@@ -713,7 +713,6 @@ export interface DomainInfo {
   CnameSpeedup?: string
   /**
    * 域名备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
@@ -766,7 +765,6 @@ export interface DomainInfo {
   Uin?: string
   /**
    * 域名实际使用的NS列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActualNsList?: Array<string>
   /**
@@ -775,17 +773,14 @@ export interface DomainInfo {
   RecordCount?: number
   /**
    * 域名所有者的账户昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerNick?: string
   /**
    * 是否在付费套餐宽限期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsGracePeriod?: string
   /**
    * 是否在付费套餐缓冲期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VipBuffered?: string
   /**
@@ -810,12 +805,10 @@ export interface DomainInfo {
   VipResourceId?: string
   /**
    * 是否是子域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSubDomain?: boolean
   /**
    * 域名关联的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<TagItem>
   /**
@@ -2101,44 +2094,44 @@ export interface RecordInfo {
   /**
    * 记录 ID 。
    */
-  Id: number
+  Id?: number
   /**
    * 子域名(主机记录)。
    */
-  SubDomain: string
+  SubDomain?: string
   /**
    * 记录类型, 详见 DescribeRecordType 接口。
    */
-  RecordType: string
+  RecordType?: string
   /**
    * 解析记录的线路，详见 DescribeRecordLineList 接口。
    */
-  RecordLine: string
+  RecordLine?: string
   /**
    * 解析记录的线路 ID ，详见 DescribeRecordLineList 接口。
    */
-  RecordLineId: string
+  RecordLineId?: string
   /**
    * 记录值。
    */
-  Value: string
+  Value?: string
   /**
    * 记录权重值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Weight?: number
   /**
    * 记录的 MX 记录值，非 MX 记录类型，默认为 0。
    */
-  MX: number
+  MX?: number
   /**
    * 记录的 TTL 值。
    */
-  TTL: number
+  TTL?: number
   /**
    * 记录状态。0表示禁用，1表示启用。
    */
-  Enabled: number
+  Enabled?: number
   /**
    * 该记录的 D 监控状态。
 "Ok" : 服务器正常。
@@ -2146,20 +2139,19 @@ export interface RecordInfo {
 "Down" : 服务器宕机。
 "" : 该记录未开启 D 监控。
    */
-  MonitorStatus: string
+  MonitorStatus?: string
   /**
    * 记录的备注。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 记录最后更新时间。
    */
-  UpdatedOn: string
+  UpdatedOn?: string
   /**
    * 域名 ID 。
    */
-  DomainId: number
+  DomainId?: number
 }
 
 /**
@@ -2959,57 +2951,56 @@ export interface RecordListItem {
   /**
    * 记录Id
    */
-  RecordId: number
+  RecordId?: number
   /**
    * 记录值
    */
-  Value: string
+  Value?: string
   /**
    * 记录状态，启用：ENABLE，暂停：DISABLE
    */
-  Status: string
+  Status?: string
   /**
    * 更新时间
    */
-  UpdatedOn: string
+  UpdatedOn?: string
   /**
    * 主机名
    */
-  Name: string
+  Name?: string
   /**
    * 记录线路
    */
-  Line: string
+  Line?: string
   /**
    * 线路Id
    */
-  LineId: string
+  LineId?: string
   /**
    * 记录类型
    */
-  Type: string
+  Type?: string
   /**
    * 记录权重，用于负载均衡记录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Weight?: number
   /**
    * 记录监控状态，正常：OK，告警：WARN，宕机：DOWN，未设置监控或监控暂停则为空
    */
-  MonitorStatus: string
+  MonitorStatus?: string
   /**
    * 记录备注说明
    */
-  Remark: string
+  Remark?: string
   /**
    * 记录缓存时间
    */
-  TTL: number
+  TTL?: number
   /**
    * MX值，只有MX记录有
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MX: number
+  MX?: number
   /**
    * 是否是默认的ns记录
    */
@@ -3178,43 +3169,38 @@ export interface CustomLineInfo {
 export interface ModifyRecordBatchDetail {
   /**
    * 见RecordInfoBatchModify
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordList: Array<BatchRecordInfo>
+  RecordList?: Array<BatchRecordInfo>
   /**
    * 任务编号
    */
-  Id: number
+  Id?: number
   /**
    * 域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainGrade: string
+  DomainGrade?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 该条任务运行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operation: string
+  Operation?: string
   /**
    * 域名ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainId: number
+  DomainId?: number
 }
 
 /**
@@ -3428,7 +3414,6 @@ export interface KeyValue {
   Key: string
   /**
    * 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -4010,7 +3995,6 @@ export interface DescribeRecordSnapshotRollbackResultResponse {
   Status?: string
   /**
    * 失败的记录信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedRecordList?: Array<SnapshotRecord>
   /**
@@ -4967,27 +4951,22 @@ export interface DomainShareUserInfo {
   DomainShareId?: number
   /**
    * 共享模式。r-只读；w-可写；rw-可读写。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mode?: string
   /**
    * 共享到的用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nickname?: string
   /**
    * 共享到的用户UIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QCloudUIN?: string
   /**
    * 共享状态。enabled-有效；pause-无效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 共享的子域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubDomain?: string
 }
@@ -5002,7 +4981,6 @@ export interface TagItem {
   TagKey: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
 }
@@ -5240,8 +5218,7 @@ export interface DescribeSnapshotRollbackResultRequest {
  */
 export interface DescribeDomainLogListResponse {
   /**
-   * 域名信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 域名日志信息
    */
   LogList?: Array<string>
   /**

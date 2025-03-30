@@ -58,6 +58,16 @@ it("gs.v20191118.CreateAndroidInstanceSSH", async function () {
     }
 })
 
+it("gs.v20191118.CreateAndroidInstancesScreenshot", async function () {
+    try {
+       const data = await client.CreateAndroidInstancesScreenshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.UninstallAndroidInstancesApp", async function () {
     try {
        const data = await client.UninstallAndroidInstancesApp({})

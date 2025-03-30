@@ -2525,7 +2525,6 @@ export interface ModifyBackupNameRequest {
 export interface AuditRuleFilters {
   /**
    * 单条审计规则。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleFilters: Array<RuleFilters>
 }
@@ -3047,12 +3046,10 @@ export interface DescribeBinlogsResponse {
 export interface AuditInstanceInfo {
   /**
    * 项目ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<Tag>
 }
@@ -3596,32 +3593,26 @@ export interface Tag {
 export interface RuleTemplateInfo {
   /**
    * 规则模板ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateId?: string
   /**
    * 规则模板名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateName?: string
   /**
    * 规则内容。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleFilters?: Array<RuleFilters>
   /**
    * 告警等级。1-低风险，2-中风险，3-高风险。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: number
   /**
    * 告警策略。0-不告警，1-告警。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmPolicy?: number
   /**
    * 规则描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }
@@ -3963,67 +3954,54 @@ export interface InstanceAuditStatus {
   AuditStatus?: string
   /**
    * 日志保留时长。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogExpireDay?: number
   /**
    * 高频存储时长。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighLogExpireDay?: number
   /**
    * 低频存储时长。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LowLogExpireDay?: number
   /**
    * 日志存储量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingAmount?: number
   /**
    * 高频存储量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighRealStorage?: number
   /**
    * 低频存储量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LowRealStorage?: number
   /**
    * 是否为全审计。true-表示全审计。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditAll?: boolean
   /**
    * 审计开通时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateAt?: string
   /**
    * 实例相关信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceInfo?: AuditInstanceInfo
   /**
    * 总存储量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealStorage?: number
   /**
    * 实例所应用的规则模板。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateIds?: Array<string>
   /**
    * 是否开启日志投递：ON，OFF
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Deliver?: string
   /**
    * 日志投递类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeliverSummary?: Array<DeliverSummary>
 }
@@ -4451,6 +4429,14 @@ export interface DeliverSummary {
    * 投递子类型：cls，ckafka。
    */
   DeliverSubType?: string
+  /**
+   * 投递者
+   */
+  DeliverConsumer?: string
+  /**
+   * 投递者名称
+   */
+  DeliverConsumerName?: string
 }
 
 /**
@@ -5164,42 +5150,34 @@ export interface AuditLog {
   ThreadId?: number
   /**
    * 扫描行数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckRows?: number
   /**
    * cpu执行时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuTime?: number
   /**
    * IO等待时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IoWaitTime?: number
   /**
    * 锁等待时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LockWaitTime?: number
   /**
    * 事务持续等待时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrxLivingTime?: number
   /**
    * 开始时间，与timestamp构成一个精确到纳秒的时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NsTime?: number
   /**
    * 日志命中规则模板的基本信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateInfo?: Array<LogRuleTemplateInfo>
   /**
    * 事务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrxId?: number
 }
@@ -6931,22 +6909,18 @@ export interface BindClusterResourcePackagesResponse {
 export interface LogRuleTemplateInfo {
   /**
    * 模板ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateId?: string
   /**
    * 规则模板名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateName?: string
   /**
    * 告警等级。1-低风险，2-中风险，3-高风险。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: string
   /**
    * 规则模板变更状态：0-未变更；1-已变更；2-已删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateStatus?: number
 }
@@ -8283,22 +8257,18 @@ export interface InstanceAuditRule {
   InstanceId?: string
   /**
    * 是否是规则审计。true-规则审计，false-全审计。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditRule?: boolean
   /**
    * 审计规则详情。仅当AuditRule=true时有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**
    * 是否是审计策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OldRule?: boolean
   /**
    * 实例应用的规则模板详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplates?: Array<RuleTemplateInfo>
 }

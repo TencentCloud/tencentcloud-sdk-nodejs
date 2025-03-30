@@ -48,9 +48,29 @@ it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     }
 })
 
+it("ccc.v20200210.AbortAgentCruiseDialingCampaign", async function () {
+    try {
+       const data = await client.AbortAgentCruiseDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateAICall", async function () {
     try {
        const data = await client.CreateAICall({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeAgentCruiseDialingCampaign", async function () {
+    try {
+       const data = await client.DescribeAgentCruiseDialingCampaign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +328,16 @@ it("ccc.v20200210.DescribeTelCdr", async function () {
     }
 })
 
+it("ccc.v20200210.TransferToManual", async function () {
+    try {
+       const data = await client.TransferToManual({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
     try {
        const data = await client.DescribeSkillGroupInfoList({})
@@ -361,6 +391,16 @@ it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
 it("ccc.v20200210.DescribeAICallExtractResult", async function () {
     try {
        const data = await client.DescribeAICallExtractResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.CreateAgentCruiseDialingCampaign", async function () {
+    try {
+       const data = await client.CreateAgentCruiseDialingCampaign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

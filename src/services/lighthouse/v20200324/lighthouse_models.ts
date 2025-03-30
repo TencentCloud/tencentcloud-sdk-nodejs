@@ -4039,10 +4039,13 @@ export interface TrafficPackage {
 export interface FirewallRule {
   /**
    * 协议，取值：TCP，UDP，ICMP，ALL，ICMPv6。
+
+- 使用ICMP协议时，只支持CidrBlock，不支持使用Port、Ipv6CidrBlock参数；
+- 使用ICMPv6协议时，只支持Ipv6CidrBlock，不支持使用Port、Ipv6CidrBlock参数；
    */
   Protocol: string
   /**
-   * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
+   * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。注意：单独的端口与离散端口不能同时存在。
    */
   Port?: string
   /**
@@ -4060,7 +4063,7 @@ export interface FirewallRule {
    */
   Ipv6CidrBlock?: string
   /**
-   * 取值：ACCEPT，DROP。默认为 ACCEPT。
+   * 取值：ACCEPT（允许），DROP（拒绝）。默认为 ACCEPT。
    */
   Action?: string
   /**

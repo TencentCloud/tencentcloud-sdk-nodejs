@@ -920,8 +920,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 平滑迁移过程获取源集群topic列表接口
-   */
+     * 平滑迁移相关接口已迁移至trocket产品下，该接口已废弃
+
+平滑迁移过程获取源集群topic列表接口
+     */
   async DescribeRocketMQSourceClusterTopicList(
     req: DescribeRocketMQSourceClusterTopicListRequest,
     cb?: (error: string, rep: DescribeRocketMQSourceClusterTopicListResponse) => void
@@ -1210,8 +1212,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询RocketMQ平滑迁移任务列表
-   */
+     * 平滑迁移相关接口已迁移至trocket产品下，该接口已废弃
+
+用于查询RocketMQ平滑迁移任务列表
+     */
   async DescribeRocketMQSmoothMigrationTaskList(
     req: DescribeRocketMQSmoothMigrationTaskListRequest,
     cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskListResponse) => void
@@ -1784,8 +1788,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 平滑迁移过程获取源集群group列表接口
-   */
+     * 平滑迁移相关接口已迁移至trocket产品下，该接口已废弃
+
+平滑迁移过程获取源集群group列表接口
+     */
   async DescribeRocketMQSourceClusterGroupList(
     req: DescribeRocketMQSourceClusterGroupListRequest,
     cb?: (error: string, rep: DescribeRocketMQSourceClusterGroupListResponse) => void

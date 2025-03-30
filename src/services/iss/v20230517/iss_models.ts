@@ -330,6 +330,28 @@ export interface ControlRecordTimelineRequest {
 }
 
 /**
+ * 修改录像上云模板数据结构
+ */
+export interface UpdateRecordBackupTemplateModify {
+  /**
+   * 模板名称（不修改名称时，不需要带该字段）
+   */
+  TemplateName?: string
+  /**
+   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   */
+  TimeSections?: Array<RecordTemplateTimeSections>
+  /**
+   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   */
+  DevTimeSections?: Array<RecordTemplateTimeSections>
+  /**
+   * 上云倍速（支持1，2，4倍速）
+   */
+  Scale?: number
+}
+
+/**
  * DeleteOrganization请求参数结构体
  */
 export interface DeleteOrganizationRequest {
@@ -1053,6 +1075,16 @@ export interface DescribeRecordRetrieveTaskRequest {
 }
 
 /**
+ * ControlDeviceSnapshot返回参数结构体
+ */
+export interface ControlDeviceSnapshotResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAITask请求参数结构体
  */
 export interface DescribeAITaskRequest {
@@ -1720,6 +1752,36 @@ export interface ListAITasksRequest {
   PageNumber?: number
   /**
    * 每页数量。可选值1～200，默认为20
+   */
+  PageSize?: number
+}
+
+/**
+ * ListDeviceSnapshots请求参数结构体
+ */
+export interface ListDeviceSnapshotsRequest {
+  /**
+   * 通道ID
+   */
+  ChannelId: string
+  /**
+   * 设备ID（该字段暂不生效）
+   */
+  DeviceId?: string
+  /**
+   * 查询开始时间，默认查询当天
+   */
+  Start?: number
+  /**
+   * 查询结束时间，默认查询当天
+   */
+  End?: number
+  /**
+   * 分页页码，默认1
+   */
+  PageNumber?: number
+  /**
+   * 分页大小，默认200，最大2000
    */
   PageSize?: number
 }
@@ -2394,6 +2456,40 @@ export interface DeleteGatewayRequest {
    * 网关索引ID（从获取网关列表接口ListGateways中获取）
    */
   GatewayId: string
+}
+
+/**
+ * 抓拍结果信息
+ */
+export interface GBDeviceSnapInfo {
+  /**
+   * 文件名称
+   */
+  FileName?: string
+  /**
+   * 下载地址，空值表示存储图片过期
+   */
+  DownloadUrl?: string
+  /**
+   * 图片大小，单位B
+   */
+  ImageSize?: number
+  /**
+   * 文件的创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 图片的接收时间
+   */
+  ReceivedTime?: string
+  /**
+   * 预览地址，空值表示存储图片过期
+   */
+  PreviewUrl?: string
+  /**
+   * 国标信令会话ID，同时对应控制设备抓拍 ( ControlDeviceSnapshot )接口返回的request_id
+   */
+  SessionId?: string
 }
 
 /**
@@ -3212,6 +3308,28 @@ export interface ListAITaskData {
 }
 
 /**
+ * ControlDeviceSnapshot请求参数结构体
+ */
+export interface ControlDeviceSnapshotRequest {
+  /**
+   * 通道ID
+   */
+  ChannelId: string
+  /**
+   * 连拍张数，可选值范围1～10
+   */
+  SnapNum: number
+  /**
+   * 抓拍间隔时间，可选值范围1～1800
+   */
+  Interval: number
+  /**
+   * 图片存储时间，默认 7 天，仅支持（7, 15, 30, 60, 90, 180, 365）天
+   */
+  Expire?: number
+}
+
+/**
  * 修改实时上云模板的请求数据结构
  */
 export interface UpdateRecordTemplateData {
@@ -3637,25 +3755,17 @@ export interface PlayRecordRequest {
 }
 
 /**
- * 修改录像上云模板数据结构
+ * 录像切片信息
  */
-export interface UpdateRecordBackupTemplateModify {
+export interface RecordSliceInfo {
   /**
-   * 模板名称（不修改名称时，不需要带该字段）
+   * 计划ID
    */
-  TemplateName?: string
+  PlanId?: string
   /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * 录像切片开始和结束时间列表
    */
-  TimeSections?: Array<RecordTemplateTimeSections>
-  /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-   */
-  DevTimeSections?: Array<RecordTemplateTimeSections>
-  /**
-   * 上云倍速（支持1，2，4倍速）
-   */
-  Scale?: number
+  List?: Array<RecordTimeLine>
 }
 
 /**
@@ -4899,17 +5009,21 @@ export interface ControlDeviceStreamData {
 }
 
 /**
- * 录像切片信息
+ * ListDeviceSnapshots返回参数结构体
  */
-export interface RecordSliceInfo {
+export interface ListDeviceSnapshotsResponse {
   /**
-   * 计划ID
+   * 抓拍结果信息列表
    */
-  PlanId?: string
+  Data?: Array<GBDeviceSnapInfo>
   /**
-   * 录像切片开始和结束时间列表
+   * 抓拍结果总数
    */
-  List?: Array<RecordTimeLine>
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

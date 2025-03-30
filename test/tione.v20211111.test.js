@@ -118,6 +118,16 @@ it("tione.v20211111.DeleteDataset", async function () {
     }
 })
 
+it("tione.v20211111.CreateTrainingTask", async function () {
+    try {
+       const data = await client.CreateTrainingTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteNotebook", async function () {
     try {
        const data = await client.DeleteNotebook({})
@@ -178,9 +188,9 @@ it("tione.v20211111.ChatCompletion", async function () {
     }
 })
 
-it("tione.v20211111.DescribeModelAccelerateVersions", async function () {
+it("tione.v20211111.DeleteTrainingModel", async function () {
     try {
-       const data = await client.DescribeModelAccelerateVersions({})
+       const data = await client.DeleteTrainingModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +211,16 @@ it("tione.v20211111.CreateDataset", async function () {
 it("tione.v20211111.CreateNotebook", async function () {
     try {
        const data = await client.CreateNotebook({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.StartTrainingTask", async function () {
+    try {
+       const data = await client.StartTrainingTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +251,16 @@ it("tione.v20211111.DeleteModelServiceGroup", async function () {
 it("tione.v20211111.PushTrainingMetrics", async function () {
     try {
        const data = await client.PushTrainingMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.StopTrainingTask", async function () {
+    try {
+       const data = await client.StopTrainingTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +348,19 @@ it("tione.v20211111.DescribeNotebooks", async function () {
     }
 })
 
-it("tione.v20211111.DeleteTrainingModel", async function () {
+it("tione.v20211111.DeleteTrainingTask", async function () {
     try {
-       const data = await client.DeleteTrainingModel({})
+       const data = await client.DeleteTrainingTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeModelAccelerateVersions", async function () {
+    try {
+       const data = await client.DescribeModelAccelerateVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
