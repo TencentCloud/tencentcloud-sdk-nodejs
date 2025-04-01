@@ -32,6 +32,7 @@ import {
   DescribeDBDiagHistoryResponse,
   ScoreItem,
   DescribeDiagDBInstancesRequest,
+  RedisInstanceConf,
   DescribeDBSpaceStatusRequest,
   DescribeAllUserContactResponse,
   DescribeUserSqlAdviceResponse,

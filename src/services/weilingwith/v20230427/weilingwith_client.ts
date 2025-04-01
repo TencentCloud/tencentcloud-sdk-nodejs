@@ -728,8 +728,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过城市id查询工作空间列表
-   */
+     * 老微瓴后续不继续更新
+
+通过城市id查询工作空间列表
+     */
   async DescribeCityWorkspaceList(
     req: DescribeCityWorkspaceListRequest,
     cb?: (error: string, rep: DescribeCityWorkspaceListResponse) => void

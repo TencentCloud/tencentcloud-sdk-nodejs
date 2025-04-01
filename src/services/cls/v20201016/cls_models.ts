@@ -994,21 +994,95 @@ export interface CollectInfo {
 }
 
 /**
- * MergePartition请求参数结构体
+ * DeleteCloudProductLogCollection请求参数结构体
  */
-export interface MergePartitionRequest {
+export interface DeleteCloudProductLogCollectionRequest {
   /**
-   * 日志主题ID
+   * 实例ID
    */
-  TopicId: string
+  InstanceId: string
   /**
-   * 合并的PartitionId（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等，且找到的分区必须是读写分区（Staus:readwrite），入参PartitionId与找到的PartitionId设置为只读分区（Status:readonly）,再新建一个新的读写分区） 。[获取分区列表](https://cloud.tencent.com/document/product/614/56469)
+   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+   */
+  AssumerName: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType: string
+  /**
+   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
+- CDS所有日志类型：ap-guangzhou
+- CDB-AUDIT: gz
+- TDSQL-C-AUDIT: gz
+- MongoDB-AUDIT: gz
+- MongoDB-SlowLog：ap-guangzhou
+- MongoDB-ErrorLog：ap-guangzhou
+- TDMYSQL-SLOW：gz
+- DCDB所有日志类型：gz
+- MariaDB所有日志类型：gz
+- PostgreSQL所有日志类型：gz
+- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- APIS所有日志类型：gz
+   */
+  CloudProductRegion: string
+}
 
-1. 入参PartitionId只能是读写分区（Status的值有readonly，readwrite），且能找到入参PartitionId的下一个可读写分区（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等）；
-2. 入参PartitionId不能是最后一个分区（PartitionId的ExclusiveEndKey不能是ffffffffffffffffffffffffffffffff）；
-3. topic的分区数量是有限制的（默认50个），合并之后不能超过最大分区，否则不能合并。
+/**
+ * CreateCloudProductLogCollection请求参数结构体
+ */
+export interface CreateCloudProductLogCollectionRequest {
+  /**
+   * 实例ID
    */
-  PartitionId: number
+  InstanceId: string
+  /**
+   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+   */
+  AssumerName: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType: string
+  /**
+   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
+- CDS所有日志类型：ap-guangzhou
+- CDB-AUDIT: gz
+- TDSQL-C-AUDIT:  gz
+- MongoDB-AUDIT:  gz
+- MongoDB-SlowLog：ap-guangzhou
+- MongoDB-ErrorLog：ap-guangzhou
+- TDMYSQL-SLOW：gz
+- DCDB所有日志类型：gz
+- MariaDB所有日志类型：gz
+- PostgreSQL所有日志类型：gz
+- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- APIS所有日志类型：gz
+   */
+  CloudProductRegion: string
+  /**
+   * CLS目标地域
+   */
+  ClsRegion: string
+  /**
+   * 日志集名称，未填LogsetId时必填。若日志集不存在, 将自动创建
+   */
+  LogsetName?: string
+  /**
+   * 日志主题名称，在未填TopicId时必填。 若日志主题不存在，将自动创建
+   */
+  TopicName?: string
+  /**
+   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   */
+  Extend?: string
+  /**
+   * 日志集id
+   */
+  LogsetId?: string
+  /**
+   * 日志主题id
+   */
+  TopicId?: string
 }
 
 /**
@@ -1203,22 +1277,37 @@ export interface ContainerWorkLoadInfo {
 }
 
 /**
- * DescribeConfigExtras返回参数结构体
+ * 云产品日志投递任务信息
  */
-export interface DescribeConfigExtrasResponse {
+export interface CloudProductLogTaskInfo {
   /**
-   * 采集配置列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志服务地域
    */
-  Configs?: Array<ConfigExtraInfo>
+  ClsRegion?: string
   /**
-   * 过滤到的总数目
+   * 实例ID
    */
-  TotalCount?: number
+  InstanceId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 日志集ID
    */
-  RequestId?: string
+  LogsetId?: string
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   */
+  Extend?: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType?: string
+  /**
+   * 任务状态， 0创建中 1创建完成 2 删除中
+   */
+  Status?: number
 }
 
 /**
@@ -1467,6 +1556,24 @@ export interface ModifyScheduledSqlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 投递日志的过滤规则
+ */
+export interface FilterRuleInfo {
+  /**
+   * 过滤规则Key
+   */
+  Key: string
+  /**
+   * 过滤规则
+   */
+  Regex: string
+  /**
+   * 过滤规则Value
+   */
+  Value: string
 }
 
 /**
@@ -3027,21 +3134,21 @@ export interface ExcludePathInfo {
 }
 
 /**
- * 投递日志的过滤规则
+ * DescribeCloudProductLogTasks返回参数结构体
  */
-export interface FilterRuleInfo {
+export interface DescribeCloudProductLogTasksResponse {
   /**
-   * 过滤规则Key
+   * 日志配置详情列表
    */
-  Key: string
+  Tasks?: Array<CloudProductLogTaskInfo>
   /**
-   * 过滤规则
+   * 日志配置总数
    */
-  Regex: string
+  TotalCount?: number
   /**
-   * 过滤规则Value
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: string
+  RequestId?: string
 }
 
 /**
@@ -3776,6 +3883,16 @@ export interface CreateDeliverCloudFunctionRequest {
    * 投递最大消息数
    */
   MaxMsgNum?: number
+}
+
+/**
+ * ModifyCloudProductLogCollection返回参数结构体
+ */
+export interface ModifyCloudProductLogCollectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4574,13 +4691,53 @@ export interface DeleteConfigExtraRequest {
 }
 
 /**
- * CreateDeliverCloudFunction返回参数结构体
+ * 仪表盘信息
  */
-export interface CreateDeliverCloudFunctionResponse {
+export interface DashboardInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 仪表盘id
    */
-  RequestId?: string
+  DashboardId?: string
+  /**
+   * 仪表盘名字
+   */
+  DashboardName?: string
+  /**
+   * 仪表盘数据
+   */
+  Data?: string
+  /**
+   * 创建仪表盘的时间
+   */
+  CreateTime?: string
+  /**
+   * AssumerUin非空则表示创建该日志主题的服务方Uin
+   */
+  AssumerUin?: number
+  /**
+   * RoleName非空则表示创建该日志主题的服务方使用的角色
+   */
+  RoleName?: string
+  /**
+   * AssumerName非空则表示创建该日志主题的服务方名称
+   */
+  AssumerName?: string
+  /**
+   * 日志主题绑定的标签信息
+   */
+  Tags?: Array<Tag>
+  /**
+   * 仪表盘所在地域： 为了兼容老的地域。
+   */
+  DashboardRegion?: string
+  /**
+   * 修改仪表盘的时间
+   */
+  UpdateTime?: string
+  /**
+   * 仪表盘对应的topic相关信息
+   */
+  DashboardTopicInfos?: Array<DashboardTopicInfo>
 }
 
 /**
@@ -5035,6 +5192,44 @@ export interface CreateShipperResponse {
 }
 
 /**
+ * ModifyCloudProductLogCollection请求参数结构体
+ */
+export interface ModifyCloudProductLogCollectionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+   */
+  AssumerName: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType: string
+  /**
+   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
+- CDS所有日志类型：ap-guangzhou
+- CDB-AUDIT: gz
+- TDSQL-C-AUDIT: gz
+- MongoDB-AUDIT: gz
+- MongoDB-SlowLog：ap-guangzhou
+- MongoDB-ErrorLog：ap-guangzhou
+- TDMYSQL-SLOW：gz
+- DCDB所有日志类型：gz
+- MariaDB所有日志类型：gz
+- PostgreSQL所有日志类型：gz
+- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- APIS所有日志类型：gz
+   */
+  CloudProductRegion: string
+  /**
+   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   */
+  Extend?: string
+}
+
+/**
  * 告警历史详情
  */
 export interface AlertHistoryRecord {
@@ -5407,6 +5602,20 @@ export interface ModifyKafkaConsumerRequest {
    * kafka协议消费数据格式
    */
   ConsumerContent?: KafkaConsumerContent
+}
+
+/**
+ * DeleteCloudProductLogCollection返回参数结构体
+ */
+export interface DeleteCloudProductLogCollectionResponse {
+  /**
+   * 枚举值，0创建中 1创建完成 2删除中 3删除完成
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6269,53 +6478,13 @@ export interface ModifyAlarmNoticeResponse {
 }
 
 /**
- * 仪表盘信息
+ * CreateDeliverCloudFunction返回参数结构体
  */
-export interface DashboardInfo {
+export interface CreateDeliverCloudFunctionResponse {
   /**
-   * 仪表盘id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DashboardId?: string
-  /**
-   * 仪表盘名字
-   */
-  DashboardName?: string
-  /**
-   * 仪表盘数据
-   */
-  Data?: string
-  /**
-   * 创建仪表盘的时间
-   */
-  CreateTime?: string
-  /**
-   * AssumerUin非空则表示创建该日志主题的服务方Uin
-   */
-  AssumerUin?: number
-  /**
-   * RoleName非空则表示创建该日志主题的服务方使用的角色
-   */
-  RoleName?: string
-  /**
-   * AssumerName非空则表示创建该日志主题的服务方名称
-   */
-  AssumerName?: string
-  /**
-   * 日志主题绑定的标签信息
-   */
-  Tags?: Array<Tag>
-  /**
-   * 仪表盘所在地域： 为了兼容老的地域。
-   */
-  DashboardRegion?: string
-  /**
-   * 修改仪表盘的时间
-   */
-  UpdateTime?: string
-  /**
-   * 仪表盘对应的topic相关信息
-   */
-  DashboardTopicInfos?: Array<DashboardTopicInfo>
+  RequestId?: string
 }
 
 /**
@@ -6593,19 +6762,33 @@ export interface ModifyConsoleSharingResponse {
 }
 
 /**
- * 机器组类型描述
+ * CreateCloudProductLogCollection返回参数结构体
  */
-export interface MachineGroupTypeInfo {
+export interface CreateCloudProductLogCollectionResponse {
   /**
-   * 机器组类型。支持 ip 和 label。
-- ip：表示该机器组Values中存的是采集机器的ip地址
-- label：表示该机器组Values中存储的是机器的标签
+   * 日志主题ID
    */
-  Type: string
+  TopicId?: string
   /**
-   * 机器描述列表。
+   * 日志主题名称
    */
-  Values?: Array<string>
+  TopicName?: string
+  /**
+   * 日志集ID
+   */
+  LogsetId?: string
+  /**
+   * 日志集名称
+   */
+  LogsetName?: string
+  /**
+   * -1 创建中，1创建完成
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6927,6 +7110,40 @@ export interface ModifyMachineGroupRequest {
    * 机器组元数据信息列表
    */
   MetaTags?: Array<MetaTagInfo>
+}
+
+/**
+ * 机器组类型描述
+ */
+export interface MachineGroupTypeInfo {
+  /**
+   * 机器组类型。支持 ip 和 label。
+- ip：表示该机器组Values中存的是采集机器的ip地址
+- label：表示该机器组Values中存储的是机器的标签
+   */
+  Type: string
+  /**
+   * 机器描述列表。
+   */
+  Values?: Array<string>
+}
+
+/**
+ * MergePartition请求参数结构体
+ */
+export interface MergePartitionRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 合并的PartitionId（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等，且找到的分区必须是读写分区（Staus:readwrite），入参PartitionId与找到的PartitionId设置为只读分区（Status:readonly）,再新建一个新的读写分区） 。[获取分区列表](https://cloud.tencent.com/document/product/614/56469)
+
+1. 入参PartitionId只能是读写分区（Status的值有readonly，readwrite），且能找到入参PartitionId的下一个可读写分区（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等）；
+2. 入参PartitionId不能是最后一个分区（PartitionId的ExclusiveEndKey不能是ffffffffffffffffffffffffffffffff）；
+3. topic的分区数量是有限制的（默认50个），合并之后不能超过最大分区，否则不能合并。
+   */
+  PartitionId: number
 }
 
 /**
@@ -7493,6 +7710,37 @@ machineGroupId
 }
 
 /**
+ * DescribeCloudProductLogTasks请求参数结构体
+ */
+export interface DescribeCloudProductLogTasksRequest {
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为100，最大值100。
+   */
+  Limit?: number
+  /**
+   * - assumerName
+  - 按照【云产品标识】进行过滤。
+  - 类型：String
+  - 必选：否
+  - 枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+- logType
+  - 按照【日志类型】进行过滤。
+  - 类型：String
+  - 必选：否
+  - 枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+- instanceId
+  - 按照【实例ID】进行过滤。
+  - 类型：String
+  - 必选：否
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * CreateAlarmNotice请求参数结构体
  */
 export interface CreateAlarmNoticeRequest {
@@ -8037,11 +8285,11 @@ export interface CosRechargeInfo {
  */
 export interface SearchLogRequest {
   /**
-   * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
+   * 要检索分析的日志的起始时间，**Unix时间戳（毫秒）**
    */
   From: number
   /**
-   * 要检索分析的日志的结束时间，Unix时间戳（毫秒）
+   * 要检索分析的日志的结束时间，**Unix时间戳（毫秒）**
    */
   To: number
   /**
@@ -8052,11 +8300,12 @@ export interface SearchLogRequest {
   Query: string
   /**
    * 检索语法规则，默认值为0，推荐使用1 。
-
 - 0：Lucene语法
-- 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。
+- 1：CQL语法（CLS Query Language，日志服务专用检索语法）
 
-详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+ ⚠️⚠️ **注意**
+ **该参数值建议设置为 1，使用 CQL 语法规则，控制台日志检索及仪表盘默认均使用该语法规则。**
+ 该参数值未指定或者为 0 时，将使用 Lucene 语法，语法容易报错且查询结果与控制台默认语法规则不一致。详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>。
    */
   SyntaxRule?: number
   /**
@@ -8479,6 +8728,25 @@ export interface CreateScheduledSqlRequest {
  * RetryShipperTask返回参数结构体
  */
 export interface RetryShipperTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConfigExtras返回参数结构体
+ */
+export interface DescribeConfigExtrasResponse {
+  /**
+   * 采集配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Configs?: Array<ConfigExtraInfo>
+  /**
+   * 过滤到的总数目
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

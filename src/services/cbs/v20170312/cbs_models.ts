@@ -1038,7 +1038,7 @@ export interface CreateSnapshotRequest {
   /**
    * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
    */
-  DiskId: string
+  DiskId?: string
   /**
    * 快照名称，不传则新快照名称默认为“未命名”。
    */

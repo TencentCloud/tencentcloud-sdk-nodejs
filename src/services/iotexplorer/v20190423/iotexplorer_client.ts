@@ -203,6 +203,7 @@ import {
   PackageInfo,
   DeleteDevicesResponse,
   ModifyStudioProductResponse,
+  CloudStorageAIServiceTaskFileLabel,
   BindDevicesRequest,
   DescribePackageConsumeTaskRequest,
   DismissRoomByStrRoomIdFromTRTCResponse,

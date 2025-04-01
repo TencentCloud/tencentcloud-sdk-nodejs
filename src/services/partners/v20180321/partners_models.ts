@@ -63,6 +63,10 @@ export interface AgentClientElem {
    * 客户名称，此字段和控制台返回一致。
    */
   ClientName?: string
+  /**
+   * 增量目标金额(分)
+   */
+  IncreaseGoal?: string
 }
 
 /**

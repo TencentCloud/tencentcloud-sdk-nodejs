@@ -23,12 +23,12 @@ export interface UpdateDevicesEnableStateResponse {
    * 删除的结果代码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultCode: string
+  ResultCode?: string
   /**
    * 删除的结果信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultMessage: string
+  ResultMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -144,7 +144,7 @@ export interface DescribeModelDefinitionResponse {
   /**
    * 产品数据模板
    */
-  Model: ProductModelDefinition
+  Model?: ProductModelDefinition
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -330,6 +330,12 @@ export interface DescribeCloudStorageAIServiceTaskRequest {
    * 任务 ID
    */
   TaskId: string
+  /**
+   * 下载 URL 的过期时间。
+
+若传入该参数，则响应中将包含所有文件的下载 URL
+   */
+  FileURLExpireTime?: number
 }
 
 /**
@@ -934,11 +940,11 @@ export interface TopicItem {
   /**
    * Topic名称
    */
-  TopicName: string
+  TopicName?: string
   /**
    * Topic权限 , 1上报  2下发
    */
-  Privilege: number
+  Privilege?: number
 }
 
 /**
@@ -1002,23 +1008,23 @@ export interface FenceEventItem {
   /**
    * 围栏事件的产品Id
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 围栏事件的设备名称
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 围栏Id
    */
-  FenceId: number
+  FenceId?: number
   /**
    * 围栏事件的告警类型（In，进围栏报警；Out，出围栏报警；InOrOut，进围栏或者出围栏均报警）
    */
-  AlertType: string
+  AlertType?: string
   /**
    * 围栏事件的设备位置信息
    */
-  Data: FenceAlarmPoint
+  Data?: FenceAlarmPoint
 }
 
 /**
@@ -1266,23 +1272,23 @@ export interface ProjectEntry {
   /**
    * 项目ID
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 项目名称
    */
-  ProjectName: string
+  ProjectName?: string
   /**
    * 项目描述
    */
-  ProjectDesc: string
+  ProjectDesc?: string
   /**
    * 创建时间，unix时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 更新时间，unix时间戳
    */
-  UpdateTime: number
+  UpdateTime?: number
 }
 
 /**
@@ -1527,29 +1533,29 @@ export interface ProductModelDefinition {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 模型定义
    */
-  ModelDefine: string
+  ModelDefine?: string
   /**
    * 更新时间，秒级时间戳
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 创建时间，秒级时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 产品所属分类的模型快照（产品创建时刻的）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryModel: string
+  CategoryModel?: string
   /**
    * 产品的连接类型的模型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetTypeModel: string
+  NetTypeModel?: string
 }
 
 /**
@@ -1559,15 +1565,15 @@ export interface PositionFenceInfo {
   /**
    * 围栏信息
    */
-  GeoFence: PositionFenceItem
+  GeoFence?: PositionFenceItem
   /**
    * 围栏创建时间
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 围栏更新时间
    */
-  UpdateTime: number
+  UpdateTime?: number
 }
 
 /**
@@ -1578,12 +1584,12 @@ export interface DeleteDeviceResponse {
    * 删除的结果代码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultCode: string
+  ResultCode?: string
   /**
    * 删除的结果信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultMessage: string
+  ResultMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1597,7 +1603,7 @@ export interface ModifyLoRaFrequencyResponse {
   /**
    * 频点信息
    */
-  Data: LoRaFrequencyEntry
+  Data?: LoRaFrequencyEntry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1699,7 +1705,7 @@ export interface InstanceDetail {
    */
   CellNum?: number
   /**
-   * 实例Tag
+   * 实例Tag，企业实例必传
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingTag?: string
@@ -1772,7 +1778,7 @@ export interface DescribeDeviceFirmwaresResponse {
    * 固件信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Firmwares: Array<DeviceFirmwareInfo>
+  Firmwares?: Array<DeviceFirmwareInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2088,7 +2094,6 @@ export interface InvokeExternalSourceAIServiceTaskResponse {
   TaskId?: string
   /**
    * 任务信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskInfo?: CloudStorageAIServiceTask
   /**
@@ -2172,15 +2177,15 @@ export interface FenceAlarmPoint {
   /**
    * 围栏告警时间
    */
-  AlarmTime: number
+  AlarmTime?: number
   /**
    * 围栏告警位置的经度
    */
-  Longitude: number
+  Longitude?: number
   /**
    * 围栏告警位置的纬度
    */
-  Latitude: number
+  Latitude?: number
 }
 
 /**
@@ -2404,12 +2409,10 @@ export interface DescribeCloudStorageAIServiceCallbackResponse {
   Type?: string
   /**
    * HTTP 回调 URL
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackUrl?: string
   /**
    * HTTP 回调鉴权 Token
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackToken?: string
   /**
@@ -2784,11 +2787,11 @@ export interface DescribeBindedProductsResponse {
   /**
    * 当前分页的子产品数组
    */
-  Products: Array<BindProductInfo>
+  Products?: Array<BindProductInfo>
   /**
    * 绑定的子产品总数量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2999,7 +3002,7 @@ export interface CreateLoRaGatewayResponse {
   /**
    * LoRa 网关信息
    */
-  Gateway: LoRaGatewayItem
+  Gateway?: LoRaGatewayItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3032,27 +3035,27 @@ export interface DescribeDeviceBindGatewayResponse {
    * 网关产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayProductId: string
+  GatewayProductId?: string
   /**
    * 网关设备名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayDeviceName: string
+  GatewayDeviceName?: string
   /**
    * 网关产品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayName: string
+  GatewayName?: string
   /**
    * 设备对应产品所属的主账号名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayProductOwnerName: string
+  GatewayProductOwnerName?: string
   /**
    * 设备对应产品所属的主账号 UIN
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayProductOwnerUin: string
+  GatewayProductOwnerUin?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3088,32 +3091,32 @@ export interface EventHistoryItem {
    * 事件的时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeStamp: number
+  TimeStamp?: number
   /**
    * 事件的产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 事件的设备名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 事件的标识符ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventId: string
+  EventId?: string
   /**
    * 事件的类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 事件的数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: string
+  Data?: string
 }
 
 /**
@@ -3326,55 +3329,55 @@ export interface ProjectEntryEx {
   /**
    * 项目ID
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 项目名称
    */
-  ProjectName: string
+  ProjectName?: string
   /**
    * 项目描述
    */
-  ProjectDesc: string
+  ProjectDesc?: string
   /**
    * 项目创建时间，unix时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 项目更新时间，unix时间戳
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 产品数量
    */
-  ProductCount: number
+  ProductCount?: number
   /**
    * NativeApp数量
    */
-  NativeAppCount: number
+  NativeAppCount?: number
   /**
    * WebApp数量
    */
-  WebAppCount: number
+  WebAppCount?: number
   /**
    * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 应用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationCount: number
+  ApplicationCount?: number
   /**
    * 设备注册总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceCount: number
+  DeviceCount?: number
   /**
    * 是否开通物联使能
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableOpenState: number
+  EnableOpenState?: number
 }
 
 /**
@@ -3788,12 +3791,12 @@ export interface DeleteDevicesResponse {
    * 删除的结果代码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultCode: string
+  ResultCode?: string
   /**
    * 删除的结果信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultMessage: string
+  ResultMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3812,6 +3815,20 @@ export interface ModifyStudioProductResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云存 AI 任务输出文件标签
+ */
+export interface CloudStorageAIServiceTaskFileLabel {
+  /**
+   * key1
+   */
+  Key?: string
+  /**
+   * value1
+   */
+  Value?: string
 }
 
 /**
@@ -3947,15 +3964,15 @@ export interface ProductDevicesPositionItem {
   /**
    * 设备位置列表
    */
-  Items: Array<DevicePositionItem>
+  Items?: Array<DevicePositionItem>
   /**
    * 产品标识
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 设备位置数量
    */
-  Total: number
+  Total?: number
 }
 
 /**
@@ -4007,15 +4024,15 @@ export interface DescribeGatewayBindDevicesResponse {
   /**
    * 子设备信息。
    */
-  Devices: Array<BindDeviceInfo>
+  Devices?: Array<BindDeviceInfo>
   /**
    * 子设备总数。
    */
-  Total: number
+  Total?: number
   /**
    * 子设备所属的产品名。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4177,11 +4194,11 @@ export interface DeviceDataHistoryItem {
   /**
    * 时间点，毫秒时间戳
    */
-  Time: string
+  Time?: string
   /**
    * 字段取值
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -4215,23 +4232,23 @@ export interface BatchProductionInfo {
   /**
    * 量产ID
    */
-  BatchProductionId: string
+  BatchProductionId?: string
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 烧录方式
    */
-  BurnMethod: number
+  BurnMethod?: number
   /**
    * 创建时间
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 产品名称
    */
-  ProductName: string
+  ProductName?: string
 }
 
 /**
@@ -4413,43 +4430,43 @@ export interface LoRaFrequencyEntry {
   /**
    * 频点唯一ID
    */
-  FreqId: string
+  FreqId?: string
   /**
    * 频点名称
    */
-  FreqName: string
+  FreqName?: string
   /**
    * 频点描述
    */
-  Description: string
+  Description?: string
   /**
    * 数据上行信道
    */
-  ChannelsDataUp: Array<number | bigint>
+  ChannelsDataUp?: Array<number | bigint>
   /**
    * 数据下行信道RX1
    */
-  ChannelsDataRX1: Array<number | bigint>
+  ChannelsDataRX1?: Array<number | bigint>
   /**
    * 数据下行信道RX2
    */
-  ChannelsDataRX2: Array<number | bigint>
+  ChannelsDataRX2?: Array<number | bigint>
   /**
    * 入网上行信道
    */
-  ChannelsJoinUp: Array<number | bigint>
+  ChannelsJoinUp?: Array<number | bigint>
   /**
    * 入网下行RX1信道
    */
-  ChannelsJoinRX1: Array<number | bigint>
+  ChannelsJoinRX1?: Array<number | bigint>
   /**
    * 入网下行RX2信道
    */
-  ChannelsJoinRX2: Array<number | bigint>
+  ChannelsJoinRX2?: Array<number | bigint>
   /**
    * 创建时间
    */
-  CreateTime: number
+  CreateTime?: number
 }
 
 /**
@@ -4548,23 +4565,23 @@ export interface TRTCParams {
   /**
    * TRTC入参: TRTC的实例ID
    */
-  SdkAppId: number
+  SdkAppId?: number
   /**
    * TRTC入参: 用户加入房间的ID
    */
-  UserId: string
+  UserId?: string
   /**
    * TRTC入参: 用户的签名用来鉴权
    */
-  UserSig: string
+  UserSig?: string
   /**
    * TRTC入参: 加入的TRTC房间名称
    */
-  StrRoomId: string
+  StrRoomId?: string
   /**
    * TRTC入参: 校验TRTC的KEY
    */
-  PrivateKey: string
+  PrivateKey?: string
 }
 
 /**
@@ -4838,23 +4855,23 @@ export interface PositionFenceItem {
   /**
    * 围栏Id
    */
-  FenceId: number
+  FenceId?: number
   /**
    * 位置空间Id
    */
-  SpaceId: string
+  SpaceId?: string
   /**
    * 围栏名称
    */
-  FenceName: string
+  FenceName?: string
   /**
    * 围栏描述
    */
-  FenceDesc: string
+  FenceDesc?: string
   /**
    * 围栏区域信息，采用 GeoJSON 格式
    */
-  FenceArea: string
+  FenceArea?: string
 }
 
 /**
@@ -4886,7 +4903,7 @@ export interface GetCOSURLResponse {
   /**
    * 固件URL
    */
-  Url: string
+  Url?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5498,7 +5515,7 @@ export interface CreateLoRaFrequencyResponse {
   /**
    * LoRa频点信息
    */
-  Data: LoRaFrequencyEntry
+  Data?: LoRaFrequencyEntry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5686,7 +5703,7 @@ export interface ModifyLoRaGatewayResponse {
   /**
    * 返回网关数据
    */
-  Gateway: LoRaGatewayItem
+  Gateway?: LoRaGatewayItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5837,106 +5854,106 @@ export interface DeviceInfo {
   /**
    * 设备名
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 0: 离线, 1: 在线, 2: 获取失败, 3 未激活
    */
-  Status: number
+  Status?: number
   /**
    * 设备密钥，密钥加密的设备返回
    */
-  DevicePsk: string
+  DevicePsk?: string
   /**
    * 首次上线时间
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FirstOnlineTime: number
+  FirstOnlineTime?: number
   /**
    * 最后一次上线时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoginTime: number
+  LoginTime?: number
   /**
    * 设备创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 设备固件版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
   /**
    * 设备证书
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceCert: string
+  DeviceCert?: string
   /**
    * 日志级别
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogLevel: number
+  LogLevel?: number
   /**
    * LoRaWAN 设备地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevAddr: string
+  DevAddr?: string
   /**
    * LoRaWAN 应用密钥
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppKey: string
+  AppKey?: string
   /**
    * LoRaWAN 设备唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevEUI: string
+  DevEUI?: string
   /**
    * LoRaWAN 应用会话密钥
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppSKey: string
+  AppSKey?: string
   /**
    * LoRaWAN 网络会话密钥
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NwkSKey: string
+  NwkSKey?: string
   /**
    * 创建人Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateUserId: number
+  CreateUserId?: number
   /**
    * 创建人昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatorNickName: string
+  CreatorNickName?: string
   /**
    * 启用/禁用状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableState: number
+  EnableState?: number
   /**
    * 产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 产品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 设备类型（设备、子设备、网关）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceType: string
+  DeviceType?: string
   /**
    * 是否是 lora 设备
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsLora: boolean
+  IsLora?: boolean
 }
 
 /**
@@ -6061,6 +6078,10 @@ export interface CloudStorageAIServiceTaskFileInfo {
    * 视频文件元数据（仅当文件为视频类型时包含该字段）
    */
   VideoMetaInfo?: CloudStorageAIServiceTaskVideoMetaInfo
+  /**
+   * 文件标签
+   */
+  Labels?: Array<CloudStorageAIServiceTaskFileLabel>
 }
 
 /**
@@ -6479,22 +6500,22 @@ export interface DeviceData {
    * 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceCert: string
+  DeviceCert?: string
   /**
    * 设备名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevicePrivateKey: string
+  DevicePrivateKey?: string
   /**
    * 对称加密密钥，base64编码。采用对称加密时返回该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevicePsk: string
+  DevicePsk?: string
 }
 
 /**
@@ -7207,7 +7228,7 @@ export interface DirectBindDeviceInFamilyResponse {
   /**
    * 返回设备信息
    */
-  AppDeviceInfo: AppDeviceInfo
+  AppDeviceInfo?: AppDeviceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7221,26 +7242,26 @@ export interface TopicRule {
   /**
    * 规则名称。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
    */
-  Sql: string
+  Sql?: string
   /**
    * 规则描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 行为的JSON字符串。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Actions: string
+  Actions?: string
   /**
    * 是否禁用规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleDisabled: boolean
+  RuleDisabled?: boolean
 }
 
 /**

@@ -583,6 +583,14 @@ export interface ModifyJWKSAuthenticatorRequest {
  */
 export interface RegisterCaCertificateResponse {
   /**
+   * mqtt实例ID
+   */
+  InstanceId?: string
+  /**
+   * ca 证书的序列号
+   */
+  CaSn?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -616,7 +624,7 @@ export interface ModifyInstanceRequest {
   Remark?: string
   /**
    * 需要变更的配置规格
-基础版和增强版集群不能升配到铂金版规格，铂金版集群不能降配至基础版和增强版规格。
+基础版和专业版集群不能升配到铂金版规格，铂金版集群不能降配至基础版和增强版规格。
    */
   SkuCode?: string
   /**
@@ -639,6 +647,18 @@ API：手动通过API注册
  * RegisterDeviceCertificate返回参数结构体
  */
 export interface RegisterDeviceCertificateResponse {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId?: string
+  /**
+   * 关联的CA证书SN
+   */
+  CaSn?: string
+  /**
+   * 设备证书的SN
+   */
+  DeviceCertificateSn?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2605,19 +2625,20 @@ export interface MQTTTopicItem {
  */
 export interface PriceTag {
   /**
-   * 计价名称
+   * 计价名称，表示规格的计费项项目分类，具体规格的计价名称可参考  [获取MQTT产品售卖规格](https://cloud.tencent.com/document/product/1778/116232) 接口的返回结果。
    */
   Name?: string
   /**
-   * 计价类别
+   * 计价类别，计价名称子类，具体规格的计价类别可参考  [获取MQTT产品售卖规格](https://cloud.tencent.com/document/product/1778/116232) 的返回结果。
    */
   Category?: string
   /**
-   * 计费项标签
+   * 计费项标签，为计价名称（Name）下计价类别（Category）的子项目，表示一个具体的收费项。规格的计费项标签可参考 
+ [获取MQTT产品售卖规格](https://cloud.tencent.com/document/product/1778/116232) 接口的返回结果。
    */
   Code?: string
   /**
-   * 步长
+   * 计费步长，表示该规格在 计价名称（Name）下的计价类别（Category）的计费项标签（Code）计费数量。具体规格该字段取值参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/product/1778/116232)
    */
   Step?: number
 }
@@ -2794,7 +2815,7 @@ export interface ModifyHttpAuthenticatorRequest {
  */
 export interface DescribeInstanceRequest {
   /**
-   * 实例ID [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
 }

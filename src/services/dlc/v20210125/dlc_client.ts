@@ -66,11 +66,12 @@ import {
   CreateExportTaskRequest,
   CreateDMSTableRequest,
   DMSTable,
-  ModifyWorkGroupResponse,
+  ModifyAdvancedStoreLocationResponse,
   DMSSds,
   OpendThirdAccessUserInfo,
   DescribeDataEnginesScaleDetailResponse,
   DescribeNotebookSessionStatementSqlResultRequest,
+  CreateSparkSubmitTaskRequest,
   CreateTableResponse,
   ListTaskJobLogNameRequest,
   DescribeTaskResultRequest,
@@ -331,11 +332,12 @@ import {
   DescribeNotebookSessionResponse,
   DescribeSubUserAccessPolicyResponse,
   CreateScriptResponse,
-  ModifyAdvancedStoreLocationResponse,
+  ModifyWorkGroupResponse,
   CreateTasksInOrderResponse,
   TagInfo,
   DeleteSparkAppRequest,
   DescribeDLCCatalogAccessRequest,
+  CreateSparkSubmitTaskResponse,
   DetachUserPolicyRequest,
   DescribeTaskLogResponse,
   DescribeTasksResponse,
@@ -1664,6 +1666,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void
   ): Promise<UnbindWorkGroupsFromUserResponse> {
     return this.request("UnbindWorkGroupsFromUser", req, cb)
+  }
+
+  /**
+   * 本接口（CreateSparkSubmitTask）用于提交SparkSbumit批流任务。
+   */
+  async CreateSparkSubmitTask(
+    req: CreateSparkSubmitTaskRequest,
+    cb?: (error: string, rep: CreateSparkSubmitTaskResponse) => void
+  ): Promise<CreateSparkSubmitTaskResponse> {
+    return this.request("CreateSparkSubmitTask", req, cb)
   }
 
   /**

@@ -19409,6 +19409,10 @@ export interface CreateSubAppIdRequest {
    * 应用简介，长度限制： 300个字符。不填则应用简介默认为空。
    */
   Description?: string
+  /**
+   * 应用类型， 取值有：<li>AllInOne：一体化；</li><li>Professional：专业版。</li>默认值为 AllInOne。
+   */
+  Type?: string
 }
 
 /**

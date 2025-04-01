@@ -306,7 +306,7 @@ export interface CreateDBDiagReportTaskRequest {
    */
   ContactGroup?: Array<number | bigint>
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认值为"mysql"。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认值为"mysql"。
    */
   Product?: string
 }
@@ -670,11 +670,11 @@ export interface DescribeDBDiagReportTasksResponse {
   /**
    * 任务总数目。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务列表。
    */
-  Tasks: Array<HealthReportTask>
+  Tasks?: Array<HealthReportTask>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -770,35 +770,35 @@ export interface HealthReportTask {
   /**
    * 异步任务请求 ID。
    */
-  AsyncRequestId: number
+  AsyncRequestId?: number
   /**
    * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
    */
-  Source: string
+  Source?: string
   /**
    * 任务完成进度，单位%。
    */
-  Progress: number
+  Progress?: number
   /**
    * 任务创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 任务开始执行时间。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 任务完成执行时间。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 任务所属实例的基础信息。
    */
-  InstanceInfo: InstanceBasicInfo
+  InstanceInfo?: InstanceBasicInfo
   /**
    * 健康报告中的健康信息。
    */
-  HealthStatus: HealthStatus
+  HealthStatus?: HealthStatus
 }
 
 /**
@@ -2087,11 +2087,11 @@ export interface CreateDBDiagReportUrlResponse {
   /**
    * 健康报告浏览地址。
    */
-  ReportUrl: string
+  ReportUrl?: string
   /**
    * 健康报告浏览地址到期时间戳（秒）。
    */
-  ExpireTime: number
+  ExpireTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2639,7 +2639,7 @@ export interface CreateDBDiagReportUrlRequest {
    */
   AsyncRequestId: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -2859,6 +2859,24 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
 }
 
 /**
+ * Redis实例内存配置参数
+ */
+export interface RedisInstanceConf {
+  /**
+   * 副本数量
+   */
+  ReplicasNum?: string
+  /**
+   * 分片数量
+   */
+  ShardNum?: string
+  /**
+   * 分片内存大小，单位MB
+   */
+  ShardSize?: string
+}
+
+/**
  * DescribeDBDiagHistory返回参数结构体
  */
 export interface DescribeDBDiagHistoryResponse {
@@ -2940,6 +2958,10 @@ export interface HealthStatus {
    * 扣分详情。
    */
   ScoreDetails?: Array<ScoreDetail>
+  /**
+   * 健康等级版本，默认为"V1"
+   */
+  HealthLevelVersion?: string
 }
 
 /**
@@ -3112,6 +3134,42 @@ export interface InstanceBasicInfo {
    * 实例引擎版本。
    */
   EngineVersion?: string
+  /**
+   * CPU数量，对于Redis为0。
+   */
+  Cpu?: number
+  /**
+   * 实例部署模式。
+   */
+  DeployMode?: string
+  /**
+   * 实例内存配置。
+   */
+  InstanceConf?: RedisInstanceConf
+  /**
+   * DBbrain是否支持该实例。
+   */
+  IsSupported?: boolean
+  /**
+   * 实例内存，单位MB。
+   */
+  Memory?: number
+  /**
+   * 实例地域。
+   */
+  Region?: string
+  /**
+   * 实例子网统一ID，对于redis为空字符串。
+   */
+  UniqSubnetId?: string
+  /**
+   * 实例私有网络统一ID，对于redis为空字符串。
+   */
+  UniqVpcId?: string
+  /**
+   * 实例磁盘容量，对于Redis为0。
+   */
+  Volume?: number
 }
 
 /**
@@ -3253,7 +3311,7 @@ export interface DescribeDBDiagEventRequest {
    */
   EventId?: number
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -4810,7 +4868,7 @@ export interface DescribeDBDiagReportTasksRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
+   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 计划任务；"MANUAL" - 手动触发。
    */
   Sources?: Array<string>
   /**
@@ -4830,7 +4888,7 @@ export interface DescribeDBDiagReportTasksRequest {
    */
   Limit?: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }

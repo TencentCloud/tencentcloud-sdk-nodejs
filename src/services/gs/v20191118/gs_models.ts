@@ -223,6 +223,10 @@ export interface AndroidApp {
    * 安卓应用创建时间
    */
   CreateTime?: string
+  /**
+   * 用户 Id
+   */
+  UserId?: string
 }
 
 /**
@@ -1094,6 +1098,10 @@ export interface DescribeAndroidAppsRequest {
    * 应用ID数组
    */
   AndroidAppIds?: Array<string>
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
 }
 
 /**

@@ -70,6 +70,7 @@ import {
   DescribeTableLineageRequest,
   KillOpsMakePlanInstancesRequest,
   AddProjectUserRoleResponse,
+  ModifyDimensionWeightResponse,
   BatchResumeIntegrationTasksResponse,
   DescribeFieldBasicInfoResponse,
   ColumnItem,
@@ -131,8 +132,8 @@ import {
   DescribeRuleGroupsByPageRequest,
   FolderDsDto,
   BatchDeleteIntegrationTasksResponse,
-  SearchConditionInstanceNew,
   DescribeTaskTableMetricOverviewResponse,
+  BaseRole,
   BatchRerunIntegrationTaskInstancesRequest,
   DescribeWorkflowTaskCountResponse,
   TaskTag,
@@ -172,12 +173,13 @@ import {
   ModifyTaskNameResponse,
   BatchDeleteOpsTasksRequest,
   GetCosTokenRequest,
-  WorkflowExtOpsDto,
+  UpdateProjectUserRoleRequest,
   LineageParamRecord,
   BatchResult,
   StartTaskInfo,
   DescribeIntegrationStatisticsInstanceTrendResponse,
   DescribeInstanceLogListRequest,
+  WorkflowExtOpsDto,
   IntegrationNodeInfo,
   DescribeRuleGroupResponse,
   DeleteDataSourcesResponse,
@@ -208,6 +210,7 @@ import {
   IntegrationTaskInfo,
   DeleteResourceFilesRequest,
   DeleteResourceFileResponse,
+  PageRoles,
   SubmitTaskResponse,
   ModifyApproveStatusResponse,
   TaskInfoVo,
@@ -217,6 +220,7 @@ import {
   DescribeTableQualityDetailsRequest,
   DescribeScheduleInstancesResponse,
   DeleteProjectParamDsResponse,
+  DescribeRoleListResponse,
   DescribeTablePartitionsRequest,
   DescribeOpsWorkflowsRequest,
   CreateOfflineTaskResponse,
@@ -422,7 +426,8 @@ import {
   DescribeWorkflowInfoByIdResponse,
   OpsTaskCanvasInfoList,
   SubmitTaskTestRunResponse,
-  ModifyDimensionWeightResponse,
+  UpdateProjectUserRoleResponse,
+  DescribeRoleListRequest,
   ModifyTaskAlarmRegularResponse,
   InstanceSearchCondition,
   CreateRuleResponse,
@@ -720,6 +725,7 @@ import {
   DeleteIntegrationTaskResponse,
   TableBaseInfo,
   BatchCreateTaskVersionAsyncResponse,
+  SearchConditionInstanceNew,
   DescribeInstanceByCycleRequest,
   Duty,
   DescribeThirdTaskRunLogRequest,
@@ -1540,13 +1546,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 抢占锁定集成任务
+   * 获取角色列表信息
    */
-  async RobAndLockIntegrationTask(
-    req: RobAndLockIntegrationTaskRequest,
-    cb?: (error: string, rep: RobAndLockIntegrationTaskResponse) => void
-  ): Promise<RobAndLockIntegrationTaskResponse> {
-    return this.request("RobAndLockIntegrationTask", req, cb)
+  async DescribeRoleList(
+    req: DescribeRoleListRequest,
+    cb?: (error: string, rep: DescribeRoleListResponse) => void
+  ): Promise<DescribeRoleListResponse> {
+    return this.request("DescribeRoleList", req, cb)
   }
 
   /**
@@ -2546,6 +2552,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 抢占锁定集成任务
+   */
+  async RobAndLockIntegrationTask(
+    req: RobAndLockIntegrationTaskRequest,
+    cb?: (error: string, rep: RobAndLockIntegrationTaskResponse) => void
+  ): Promise<RobAndLockIntegrationTaskResponse> {
+    return this.request("RobAndLockIntegrationTask", req, cb)
+  }
+
+  /**
    * 启动集成任务
    */
   async StartIntegrationTask(
@@ -3078,6 +3094,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeFunctionKindsResponse) => void
   ): Promise<DescribeFunctionKindsResponse> {
     return this.request("DescribeFunctionKinds", req, cb)
+  }
+
+  /**
+   * 修改项目用户角色
+   */
+  async UpdateProjectUserRole(
+    req: UpdateProjectUserRoleRequest,
+    cb?: (error: string, rep: UpdateProjectUserRoleResponse) => void
+  ): Promise<UpdateProjectUserRoleResponse> {
+    return this.request("UpdateProjectUserRole", req, cb)
   }
 
   /**

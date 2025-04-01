@@ -649,6 +649,14 @@ export interface WordItem {
    * 四点坐标
    */
   Coord?: Polygon
+  /**
+   * 描述性信息
+   */
+  AdvancedInfo?: string
+  /**
+   * 单词的四点坐标
+   */
+  WordCoord?: Array<WordPolygon>
 }
 
 /**
@@ -1910,6 +1918,7 @@ BookingConfirmation -- 配舱通知书识别模板
 AirWayBill -- 航空运单识别模板
 DispatchWeightNote -- 磅单发货单识别模板
 ReceiptWeightNote -- 磅单收货单识别模板
+ArticalRecognize -- 手写作文模版
    */
   ConfigId?: string
   /**
@@ -1920,6 +1929,10 @@ ReceiptWeightNote -- 磅单收货单识别模板
    * 是否开启父子key识别，默认是
    */
   OutputParentKey?: boolean
+  /**
+   * 模版的单个属性配置
+   */
+  ConfigAdvanced?: ConfigAdvanced
 }
 
 /**
@@ -8207,6 +8220,16 @@ export interface DutyPaidProofOCRRequest {
 }
 
 /**
+ * 支持模版的单个属性配置
+ */
+export interface ConfigAdvanced {
+  /**
+   * 模版的单个属性配置
+   */
+  Scene?: string
+}
+
+/**
  * RecognizeHealthCodeOCR返回参数结构体
  */
 export interface RecognizeHealthCodeOCRResponse {
@@ -10613,6 +10636,20 @@ export interface LicensePlateInfo {
    * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
    */
   Color?: string
+}
+
+/**
+ * 单词坐标信息
+ */
+export interface WordPolygon {
+  /**
+   * 文本块内容
+   */
+  DetectedText?: string
+  /**
+   * 四点坐标
+   */
+  Coord?: Polygon
 }
 
 /**

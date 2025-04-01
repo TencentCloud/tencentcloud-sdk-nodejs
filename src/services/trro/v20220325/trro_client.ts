@@ -18,19 +18,25 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeDeviceSessionDetailsResponse,
+  CloudStorage,
+  StartPublishLiveStreamResponse,
   DeleteProjectRequest,
   License,
+  BoundLicensesRequest,
   PolicyInfo,
+  CreateCloudRecordingResponse,
+  StartPublishLiveStreamRequest,
   ModifyDeviceResponse,
   GetLicensesRequest,
   DescribePolicyResponse,
   BatchDeleteDevicesRequest,
-  SessionInfo,
+  ModifyProjectSecModeRequest,
   DescribeDeviceInfoRequest,
   DescribeSessionStatisticsByIntervalResponse,
+  GetLicenseStatResponse,
+  SessionInfo,
   DescribeRecentSessionListRequest,
-  RecentSessionInfo,
+  DescribeDeviceSessionDetailsResponse,
   DescribeProjectInfoRequest,
   ModifyPolicyRequest,
   DescribeDeviceInfoResponse,
@@ -38,10 +44,11 @@ import {
   DescribeProjectListResponse,
   ModifyProjectResponse,
   BatchDeletePolicyResponse,
-  GetLicenseStatResponse,
+  CreateCloudRecordingRequest,
   DescribePolicyRequest,
   ModifyPolicyResponse,
   Device,
+  DeleteCloudRecordingResponse,
   DescribeSessionStatisticsRequest,
   ModifyProjectSecModeResponse,
   BatchDeleteDevicesResponse,
@@ -51,10 +58,12 @@ import {
   DescribeProjectListRequest,
   ProjectInfo,
   BatchDeletePolicyRequest,
-  DescribeDeviceSessionListResponse,
+  RecentSessionInfo,
+  CreateProjectResponse,
   DescribeProjectInfoResponse,
   DescribeDeviceListResponse,
-  BoundLicensesRequest,
+  StopPublishLiveStreamRequest,
+  DeleteCloudRecordingRequest,
   DeleteProjectResponse,
   DescribeDeviceListRequest,
   SessionDeviceDetail,
@@ -63,17 +72,22 @@ import {
   MultiNet,
   DescribeSessionStatisticsByIntervalRequest,
   CreateDeviceRequest,
+  StopPublishLiveStreamResponse,
   DescribeSessionStatisticsResponse,
+  PublishParams,
   GetDevicesResponse,
   BoundLicensesResponse,
   DescribeDeviceSessionDetailsRequest,
   GetLicensesResponse,
   DeviceInfo,
   DescribeDeviceSessionListRequest,
-  ModifyProjectSecModeRequest,
+  ModifyCallbackUrlRequest,
+  VideoList,
   GetDevicesRequest,
-  CreateProjectResponse,
+  DescribeDeviceSessionListResponse,
+  VideoParams,
   SessionIntervalStatistic,
+  ModifyCallbackUrlResponse,
   GetDeviceLicenseRequest,
   CreateProjectRequest,
 } from "./trro_models"
@@ -85,6 +99,18 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trro.tencentcloudapi.com", "2022-03-25", clientConfig)
+  }
+
+  /**
+     * 设置回调URL
+录制回调事件内容参考：https://cloud.tencent.com/document/product/647/81113
+转推回调事件内容参考：https://cloud.tencent.com/document/product/647/88552
+     */
+  async ModifyCallbackUrl(
+    req: ModifyCallbackUrlRequest,
+    cb?: (error: string, rep: ModifyCallbackUrlResponse) => void
+  ): Promise<ModifyCallbackUrlResponse> {
+    return this.request("ModifyCallbackUrl", req, cb)
   }
 
   /**
@@ -105,6 +131,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDevicesResponse) => void
   ): Promise<GetDevicesResponse> {
     return this.request("GetDevices", req, cb)
+  }
+
+  /**
+   * 停止指定的混流转推任务。如果没有调用 Stop 接口停止任务，所有参与混流转推的主播离开房间超过MaxIdleTime 设置的时间后，任务也会自动停止。
+   */
+  async StopPublishLiveStream(
+    req: StopPublishLiveStreamRequest,
+    cb?: (error: string, rep: StopPublishLiveStreamResponse) => void
+  ): Promise<StopPublishLiveStreamResponse> {
+    return this.request("StopPublishLiveStream", req, cb)
   }
 
   /**
@@ -168,6 +204,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启动一个混流转推任务，将 TRTC 房间的多路音视频流混成一路音视频流，编码后推到直播 CDN 或者回推到 TRTC 房间。也支持不转码直接转推 TRTC 房间的单路流。启动成功后，会返回一个 SdkAppid 维度唯一的任务 Id（TaskId）。您需要保存该 TaskId，后续需要依赖此 TaskId 更新和结束任务。
+   */
+  async StartPublishLiveStream(
+    req: StartPublishLiveStreamRequest,
+    cb?: (error: string, rep: StartPublishLiveStreamResponse) => void
+  ): Promise<StartPublishLiveStreamResponse> {
+    return this.request("StartPublishLiveStream", req, cb)
+  }
+
+  /**
    * 按授权查看license列表
    */
   async GetLicenses(
@@ -175,6 +221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetLicensesResponse) => void
   ): Promise<GetLicensesResponse> {
     return this.request("GetLicenses", req, cb)
+  }
+
+  /**
+   * 启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。
+   */
+  async CreateCloudRecording(
+    req: CreateCloudRecordingRequest,
+    cb?: (error: string, rep: CreateCloudRecordingResponse) => void
+  ): Promise<CreateCloudRecordingResponse> {
+    return this.request("CreateCloudRecording", req, cb)
   }
 
   /**
@@ -277,6 +333,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceSessionListResponse) => void
   ): Promise<DescribeDeviceSessionListResponse> {
     return this.request("DescribeDeviceSessionList", req, cb)
+  }
+
+  /**
+   * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+   */
+  async DeleteCloudRecording(
+    req: DeleteCloudRecordingRequest,
+    cb?: (error: string, rep: DeleteCloudRecordingResponse) => void
+  ): Promise<DeleteCloudRecordingResponse> {
+    return this.request("DeleteCloudRecording", req, cb)
   }
 
   /**

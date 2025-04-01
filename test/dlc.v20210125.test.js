@@ -1248,6 +1248,16 @@ it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     }
 })
 
+it("dlc.v20210125.CreateSparkSubmitTask", async function () {
+    try {
+       const data = await client.CreateSparkSubmitTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeWorkGroups", async function () {
     try {
        const data = await client.DescribeWorkGroups({})

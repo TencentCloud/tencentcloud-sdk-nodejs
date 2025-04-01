@@ -18,6 +18,16 @@ const client = new tencentcloud.trro.v20220325.Client({
 })
 describe("trro.v20220325.test.js", function () {
 
+it("trro.v20220325.ModifyCallbackUrl", async function () {
+    try {
+       const data = await client.ModifyCallbackUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trro.v20220325.DescribeProjectInfo", async function () {
     try {
        const data = await client.DescribeProjectInfo({})
@@ -31,6 +41,16 @@ it("trro.v20220325.DescribeProjectInfo", async function () {
 it("trro.v20220325.GetDevices", async function () {
     try {
        const data = await client.GetDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trro.v20220325.StopPublishLiveStream", async function () {
+    try {
+       const data = await client.StopPublishLiveStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +118,29 @@ it("trro.v20220325.BatchDeletePolicy", async function () {
     }
 })
 
+it("trro.v20220325.StartPublishLiveStream", async function () {
+    try {
+       const data = await client.StartPublishLiveStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trro.v20220325.GetLicenses", async function () {
     try {
        const data = await client.GetLicenses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trro.v20220325.CreateCloudRecording", async function () {
+    try {
+       const data = await client.CreateCloudRecording({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +241,16 @@ it("trro.v20220325.ModifyProjectSecMode", async function () {
 it("trro.v20220325.DescribeDeviceSessionList", async function () {
     try {
        const data = await client.DescribeDeviceSessionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trro.v20220325.DeleteCloudRecording", async function () {
+    try {
+       const data = await client.DeleteCloudRecording({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

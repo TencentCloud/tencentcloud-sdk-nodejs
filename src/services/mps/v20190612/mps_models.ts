@@ -990,7 +990,7 @@ export interface ModifyOutputInfo {
    */
   Description: string
   /**
-   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。
+   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。
    */
   Protocol: string
   /**
@@ -2405,23 +2405,23 @@ export interface DescribeStreamLinkFlowsResponse {
   /**
    * 流的配置信息列表。
    */
-  Infos: Array<DescribeFlow>
+  Infos?: Array<DescribeFlow>
   /**
    * 当前页数。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页大小。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 总数量。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2453,11 +2453,11 @@ export interface DescribeStreamLinkFlowRealtimeStatusResponse {
   /**
    * 查询时间，单位s。
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 实时数据信息列表。
    */
-  Datas: Array<FlowRealtimeStatusItem>
+  Datas?: Array<FlowRealtimeStatusItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3873,7 +3873,7 @@ export interface CreateStreamLinkFlowRequest {
  */
 export interface CreateOutputSRTSettingsDestinations {
   /**
-   * 输出的IP。
+   * 输出的IP或域名。
    */
   Ip: string
   /**
@@ -5718,7 +5718,7 @@ export interface DeleteWordSamplesRequest {
  */
 export interface SRTSourceAddressReq {
   /**
-   * 对端IP。
+   * 对端IP或域名。
    */
   Ip: string
   /**
@@ -6990,7 +6990,7 @@ export interface CreateStreamLinkEventResponse {
   /**
    * 创建的Event信息。
    */
-  Info: DescribeEvent
+  Info?: DescribeEvent
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7517,7 +7517,7 @@ export interface DescribeStreamLinkFlowStatisticsResponse {
   /**
    * 传输流的媒体数据列表。
    */
-  Infos: Array<FlowStatisticsArray>
+  Infos?: Array<FlowStatisticsArray>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8396,7 +8396,7 @@ export interface CreateInput {
    */
   InputName: string
   /**
-   * 输入的协议，可选[SRT|RTP|RTMP_PUSH|RTMP_PULL|RTSP_PULL|RIST]。
+   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。
    */
   Protocol: string
   /**
@@ -10283,7 +10283,7 @@ export interface ModifyStreamLinkOutputInfoResponse {
   /**
    * 修改后的Output配置。
    */
-  Info: DescribeOutput
+  Info?: DescribeOutput
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11042,7 +11042,7 @@ export interface DescribeStreamLinkFlowMediaStatisticsResponse {
   /**
    * 传输流的媒体数据列表。
    */
-  Infos: Array<FlowMediaInfo>
+  Infos?: Array<FlowMediaInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16072,23 +16072,23 @@ export interface DescribeStreamLinkFlowLogsResponse {
   /**
    * 日志信息列表。
    */
-  Infos: Array<FlowLogInfo>
+  Infos?: Array<FlowLogInfo>
   /**
    * 当前页码。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页大小。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 总数量。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

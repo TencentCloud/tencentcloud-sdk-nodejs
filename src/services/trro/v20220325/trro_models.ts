@@ -16,13 +16,53 @@
  */
 
 /**
- * DescribeDeviceSessionDetails返回参数结构体
+ * 云端录制文件上传到云存储的参数（对象存储cos）
  */
-export interface DescribeDeviceSessionDetailsResponse {
+export interface CloudStorage {
   /**
-   * 按设备区分的会话详细数据
+   * 腾讯云对象存储COS以及第三方云存储账号信息
+0：腾讯云对象存储 COS
+1：AWS
+【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中
+示例值：0
    */
-  Details?: Array<SessionDeviceDetail>
+  Vendor: number
+  /**
+   * 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224#.E5.9C.B0.E5.9F.9F）。
+示例值：cn-shanghai-1
+
+AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions）
+示例值：ap-shanghai(cos, 具体参考云存储厂商支持的地域)
+   */
+  Region: string
+  /**
+   * 云存储桶名称。
+   */
+  Bucket: string
+  /**
+   * 云存储的access_key账号信息。
+若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。
+   */
+  AccessKey: string
+  /**
+   * 云存储的secret_key账号信息。
+若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。
+   */
+  SecretKey: string
+  /**
+   * 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。
+   */
+  FileNamePrefix?: Array<string>
+}
+
+/**
+ * StartPublishLiveStream返回参数结构体
+ */
+export interface StartPublishLiveStreamResponse {
+  /**
+   * 用于唯一标识转推任务，由腾讯云服务端生成，后续停止请求需要携带TaskiD参数。
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -70,6 +110,24 @@ export interface License {
 }
 
 /**
+ * BoundLicenses请求参数结构体
+ */
+export interface BoundLicensesRequest {
+  /**
+   * license数量
+   */
+  Count: number
+  /**
+   * 设备id
+   */
+  DeviceId: string
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+}
+
+/**
  * 权限信息
  */
 export interface PolicyInfo {
@@ -85,6 +143,42 @@ export interface PolicyInfo {
    * 最近添加时间
    */
   ModifyTime: string
+}
+
+/**
+ * CreateCloudRecording返回参数结构体
+ */
+export interface CreateCloudRecordingResponse {
+  /**
+   * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartPublishLiveStream请求参数结构体
+ */
+export interface StartPublishLiveStreamRequest {
+  /**
+   * 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转码费用。 示例值：1
+   */
+  WithTranscoding: number
+  /**
+   * 所有参与混流转推的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
+   */
+  MaxIdleTime: number
+  /**
+   * 转推视频参数
+   */
+  VideoParams: VideoParams
+  /**
+   * 转推的URL参数，一个任务最多支持10个推流URL
+   */
+  PublishParams: Array<PublishParams>
 }
 
 /**
@@ -168,6 +262,98 @@ export interface BatchDeleteDevicesRequest {
 }
 
 /**
+ * ModifyProjectSecMode请求参数结构体
+ */
+export interface ModifyProjectSecModeRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 安全模式  
+0：关闭项目共享密钥 
+1：开启项目共享密钥
+   */
+  Mode: number
+  /**
+   * 项目密钥 32位 小写英文+数字；  项目密钥模式必填
+   */
+  Key?: string
+  /**
+   * 自动注册方式
+0：关闭自动注册
+1：仅允许现场设备自动注册
+2：仅允许远端设备自动注册
+3：允许现场和远端设备均自动注册
+   */
+  AutoRegister?: number
+  /**
+   * 是否允许远端获取现场设备列表（getGwList）
+0：不允许
+1：允许
+   */
+  FieldListEnable?: number
+}
+
+/**
+ * DescribeDeviceInfo请求参数结构体
+ */
+export interface DescribeDeviceInfoRequest {
+  /**
+   * 目标设备所属项目ID
+   */
+  ProjectId: string
+  /**
+   * 目标设备ID
+   */
+  DeviceId: string
+}
+
+/**
+ * DescribeSessionStatisticsByInterval返回参数结构体
+ */
+export interface DescribeSessionStatisticsByIntervalResponse {
+  /**
+   * 各时间段的会话统计数据
+   */
+  SessionStatistics?: Array<SessionIntervalStatistic>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetLicenseStat返回参数结构体
+ */
+export interface GetLicenseStatResponse {
+  /**
+   * 有效授权
+   */
+  Valid?: number
+  /**
+   * 已绑定授权
+   */
+  Bound?: number
+  /**
+   * 未绑定授权
+   */
+  UnBound?: number
+  /**
+   * 过期授权
+   */
+  Expire?: number
+  /**
+   * 当月用量超时授权个数
+   */
+  MonthlyExpire?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 会话信息
  */
 export interface SessionInfo {
@@ -202,34 +388,6 @@ export interface SessionInfo {
 }
 
 /**
- * DescribeDeviceInfo请求参数结构体
- */
-export interface DescribeDeviceInfoRequest {
-  /**
-   * 目标设备所属项目ID
-   */
-  ProjectId: string
-  /**
-   * 目标设备ID
-   */
-  DeviceId: string
-}
-
-/**
- * DescribeSessionStatisticsByInterval返回参数结构体
- */
-export interface DescribeSessionStatisticsByIntervalResponse {
-  /**
-   * 各时间段的会话统计数据
-   */
-  SessionStatistics?: Array<SessionIntervalStatistic>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeRecentSessionList请求参数结构体
  */
 export interface DescribeRecentSessionListRequest {
@@ -260,33 +418,17 @@ export interface DescribeRecentSessionListRequest {
 }
 
 /**
- * 最新会话信息
+ * DescribeDeviceSessionDetails返回参数结构体
  */
-export interface RecentSessionInfo {
+export interface DescribeDeviceSessionDetailsResponse {
   /**
-   * 会话ID
+   * 按设备区分的会话详细数据
    */
-  SessionId?: string
+  Details?: Array<SessionDeviceDetail>
   /**
-   * 远端设备ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RemoteDeviceId?: string
-  /**
-   * 现场设备ID
-   */
-  FieldDeviceId?: string
-  /**
-   * 分辨率
-   */
-  Resolution?: string
-  /**
-   * 会话开始时间
-   */
-  StartTime?: number
-  /**
-   * 最后更新时间
-   */
-  LatestUpdateTime?: number
+  RequestId?: string
 }
 
 /**
@@ -407,33 +549,37 @@ export interface BatchDeletePolicyResponse {
 }
 
 /**
- * GetLicenseStat返回参数结构体
+ * CreateCloudRecording请求参数结构体
  */
-export interface GetLicenseStatResponse {
+export interface CreateCloudRecordingRequest {
   /**
-   * 有效授权
+   * 项目id
    */
-  Valid?: number
+  ProjectId: string
   /**
-   * 已绑定授权
+   * 设备id
    */
-  Bound?: number
+  DeviceId: string
   /**
-   * 未绑定授权
+   * 视频流号
    */
-  UnBound?: number
+  VideoStreamId: number
   /**
-   * 过期授权
+   * 腾讯云对象存储COS以及第三方云存储的账号信息
    */
-  Expire?: number
+  CloudStorage: CloudStorage
   /**
-   * 当月用量超时授权个数
+   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】 Hls 格式录制此参数不生效。
    */
-  MonthlyExpire?: number
+  MaxMediaFileDuration?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 输出文件的格式（存储至COS等第三方存储时有效）。0：输出文件为hls格式。1：输出文件格式为hls+mp4。2：输出文件格式为hls+aac 。3：(默认)输出文件格式为mp4。4：输出文件格式为aac。
    */
-  RequestId?: string
+  OutputFormat?: number
+  /**
+   * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。 示例值：30
+   */
+  MaxIdleTime?: number
 }
 
 /**
@@ -524,6 +670,16 @@ export interface Device {
    * 月封顶时长（分钟)
    */
   LimitedTime?: number
+}
+
+/**
+ * DeleteCloudRecording返回参数结构体
+ */
+export interface DeleteCloudRecordingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -697,21 +853,43 @@ export interface BatchDeletePolicyRequest {
 }
 
 /**
- * DescribeDeviceSessionList返回参数结构体
+ * 最新会话信息
  */
-export interface DescribeDeviceSessionListResponse {
+export interface RecentSessionInfo {
   /**
-   * 总个数
+   * 会话ID
    */
-  Total?: number
+  SessionId?: string
   /**
-   * 会话列表
+   * 远端设备ID
    */
-  DeviceSessionList?: Array<SessionInfo>
+  RemoteDeviceId?: string
   /**
-   * 本页数量
+   * 现场设备ID
    */
-  Num?: number
+  FieldDeviceId?: string
+  /**
+   * 分辨率
+   */
+  Resolution?: string
+  /**
+   * 会话开始时间
+   */
+  StartTime?: number
+  /**
+   * 最后更新时间
+   */
+  LatestUpdateTime?: number
+}
+
+/**
+ * CreateProject返回参数结构体
+ */
+export interface CreateProjectResponse {
+  /**
+   * 项目ID，长度为16位
+   */
+  ProjectId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -767,21 +945,23 @@ export interface DescribeDeviceListResponse {
 }
 
 /**
- * BoundLicenses请求参数结构体
+ * StopPublishLiveStream请求参数结构体
  */
-export interface BoundLicensesRequest {
+export interface StopPublishLiveStreamRequest {
   /**
-   * license数量
+   * 唯一标识转推任务。
    */
-  Count: number
+  TaskId: string
+}
+
+/**
+ * DeleteCloudRecording请求参数结构体
+ */
+export interface DeleteCloudRecordingRequest {
   /**
-   * 设备id
+   * 录制任务的唯一Id，在启动录制成功后会返回。
    */
-  DeviceId: string
-  /**
-   * 项目ID
-   */
-  ProjectId: string
+  TaskId: string
 }
 
 /**
@@ -1083,6 +1263,16 @@ export interface CreateDeviceRequest {
 }
 
 /**
+ * StopPublishLiveStream返回参数结构体
+ */
+export interface StopPublishLiveStreamResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSessionStatistics返回参数结构体
  */
 export interface DescribeSessionStatisticsResponse {
@@ -1110,6 +1300,20 @@ export interface DescribeSessionStatisticsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 转推参数，一个任务最多支持10个推流URL。
+ */
+export interface PublishParams {
+  /**
+   * 腾讯云直播推流地址url
+   */
+  PublishUrl: string
+  /**
+   * 是否是腾讯云CDN，0为转推非腾讯云CDN，1为转推腾讯CDN，不携带该参数默认为1。
+   */
+  IsTencentUrl: number
 }
 
 /**
@@ -1233,37 +1437,47 @@ export interface DescribeDeviceSessionListRequest {
 }
 
 /**
- * ModifyProjectSecMode请求参数结构体
+ * ModifyCallbackUrl请求参数结构体
  */
-export interface ModifyProjectSecModeRequest {
+export interface ModifyCallbackUrlRequest {
   /**
-   * 项目ID
+   * 项目id
    */
   ProjectId: string
   /**
-   * 安全模式  
-0：关闭项目共享密钥 
-1：开启项目共享密钥
+   * 回调URL
    */
-  Mode: number
+  CallbackUrl: string
   /**
-   * 项目密钥 32位 小写英文+数字；  项目密钥模式必填
+   * 回调签名密钥，用于校验回调信息的完整性
    */
-  Key?: string
+  SignKey?: string
+}
+
+/**
+ * 原视频流参数列表
+ */
+export interface VideoList {
   /**
-   * 自动注册方式
-0：关闭自动注册
-1：仅允许现场设备自动注册
-2：仅允许远端设备自动注册
-3：允许现场和远端设备均自动注册
+   * 项目id
    */
-  AutoRegister?: number
+  ProjectId: string
   /**
-   * 是否允许远端获取现场设备列表（getGwList）
-0：不允许
-1：允许
+   * 设备id
    */
-  FieldListEnable?: number
+  DeviceId: string
+  /**
+   * 流id
+   */
+  VideoStreamId: number
+  /**
+   * 子画面在输出时的宽度，单位为像素值，不填默认为0。
+   */
+  Width: number
+  /**
+   * 子画面在输出时的高度，单位为像素值，不填默认为0。
+   */
+  Height: number
 }
 
 /**
@@ -1289,17 +1503,55 @@ export interface GetDevicesRequest {
 }
 
 /**
- * CreateProject返回参数结构体
+ * DescribeDeviceSessionList返回参数结构体
  */
-export interface CreateProjectResponse {
+export interface DescribeDeviceSessionListResponse {
   /**
-   * 项目ID，长度为16位
+   * 总个数
    */
-  ProjectId?: string
+  Total?: number
+  /**
+   * 会话列表
+   */
+  DeviceSessionList?: Array<SessionInfo>
+  /**
+   * 本页数量
+   */
+  Num?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 转推视频参数
+ */
+export interface VideoParams {
+  /**
+   * 输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
+   */
+  Width: number
+  /**
+   * 输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
+   */
+  Height: number
+  /**
+   * 输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
+   */
+  Fps: number
+  /**
+   * 输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
+   */
+  BitRate: number
+  /**
+   * 输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
+   */
+  Gop: number
+  /**
+   * 转推视频流列表
+   */
+  VideoList: Array<VideoList>
 }
 
 /**
@@ -1334,6 +1586,24 @@ export interface SessionIntervalStatistic {
    * 优良会话占比，单位：%
    */
   NotBadSessionRatio: number
+}
+
+/**
+ * ModifyCallbackUrl返回参数结构体
+ */
+export interface ModifyCallbackUrlResponse {
+  /**
+   * 响应码，0：成功，其他：失败
+   */
+  Code?: number
+  /**
+   * 响应消息，ok:成功，其他：失败
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

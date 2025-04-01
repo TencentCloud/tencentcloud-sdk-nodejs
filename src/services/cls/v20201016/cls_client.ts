@@ -60,7 +60,8 @@ import {
   ModifyAlarmResponse,
   DescribeShipperTasksRequest,
   CollectInfo,
-  MergePartitionRequest,
+  DeleteCloudProductLogCollectionRequest,
+  CreateCloudProductLogCollectionRequest,
   DescribeShippersResponse,
   TopicIdAndRegion,
   DescribeKafkaConsumerResponse,
@@ -68,7 +69,7 @@ import {
   KafkaRechargeInfo,
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
-  DescribeConfigExtrasResponse,
+  CloudProductLogTaskInfo,
   ModifyDataTransformRequest,
   DescribeScheduledSqlInfoResponse,
   CallBackInfo,
@@ -80,6 +81,7 @@ import {
   FilePathInfo,
   DescribeIndexRequest,
   ModifyScheduledSqlResponse,
+  FilterRuleInfo,
   ConditionInfo,
   MachineGroupInfo,
   DeleteMachineGroupInfoRequest,
@@ -136,7 +138,7 @@ import {
   EscalateNoticeInfo,
   CreateConfigExtraRequest,
   ExcludePathInfo,
-  FilterRuleInfo,
+  DescribeCloudProductLogTasksResponse,
   ConfigExtraInfo,
   AdvanceFilterRuleInfo,
   SplitPartitionRequest,
@@ -165,6 +167,7 @@ import {
   DashboardSubscribeData,
   ModifyAlarmShieldResponse,
   CreateDeliverCloudFunctionRequest,
+  ModifyCloudProductLogCollectionResponse,
   DeleteConsumerRequest,
   NoticeContentInfo,
   CreateWebCallbackRequest,
@@ -192,7 +195,7 @@ import {
   AlarmNoticeDeliverConfig,
   DescribeMachineGroupsResponse,
   DeleteConfigExtraRequest,
-  CreateDeliverCloudFunctionResponse,
+  DashboardInfo,
   ModifyConfigRequest,
   AddMachineGroupInfoRequest,
   DescribeKafkaRechargesRequest,
@@ -209,6 +212,7 @@ import {
   DeleteConsoleSharingResponse,
   CreateConfigRequest,
   CreateShipperResponse,
+  ModifyCloudProductLogCollectionRequest,
   AlertHistoryRecord,
   DescribeKafkaRechargesResponse,
   DeleteIndexResponse,
@@ -224,6 +228,7 @@ import {
   DeleteConfigResponse,
   DeleteShipperResponse,
   ModifyKafkaConsumerRequest,
+  DeleteCloudProductLogCollectionResponse,
   ExportInfo,
   ModifyIndexResponse,
   TopicInfo,
@@ -252,7 +257,7 @@ import {
   QueryRangeMetricResponse,
   ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
-  DashboardInfo,
+  CreateDeliverCloudFunctionResponse,
   DataTransformTaskInfo,
   DescribeMachinesResponse,
   ModifyCosRechargeResponse,
@@ -265,7 +270,7 @@ import {
   CreateConsoleSharingResponse,
   ModifyKafkaConsumerResponse,
   ModifyConsoleSharingResponse,
-  MachineGroupTypeInfo,
+  CreateCloudProductLogCollectionResponse,
   DeleteConfigFromMachineGroupRequest,
   SearchCosRechargeInfoResponse,
   DescribeAlarmsRequest,
@@ -278,6 +283,8 @@ import {
   ShipperInfo,
   AddMachineGroupInfoResponse,
   ModifyMachineGroupRequest,
+  MachineGroupTypeInfo,
+  MergePartitionRequest,
   DeleteDashboardSubscribeRequest,
   DescribeConsumerResponse,
   MetricLabel,
@@ -302,6 +309,7 @@ import {
   ContainerFileInfo,
   CsvInfo,
   DescribeConfigExtrasRequest,
+  DescribeCloudProductLogTasksRequest,
   CreateAlarmNoticeRequest,
   ModifyShipperResponse,
   DescribeIndexResponse,
@@ -335,6 +343,7 @@ import {
   MergePartitionResponse,
   CreateScheduledSqlRequest,
   RetryShipperTaskResponse,
+  DescribeConfigExtrasResponse,
 } from "./cls_models"
 
 /**
@@ -384,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAlarmLogResponse) => void
   ): Promise<GetAlarmLogResponse> {
     return this.request("GetAlarmLog", req, cb)
+  }
+
+  /**
+   * 内部云产品接入使用相关接口
+   */
+  async DeleteCloudProductLogCollection(
+    req: DeleteCloudProductLogCollectionRequest,
+    cb?: (error: string, rep: DeleteCloudProductLogCollectionResponse) => void
+  ): Promise<DeleteCloudProductLogCollectionResponse> {
+    return this.request("DeleteCloudProductLogCollection", req, cb)
   }
 
   /**
@@ -498,6 +517,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云产品接入使用相关接口
+   */
+  async DescribeCloudProductLogTasks(
+    req: DescribeCloudProductLogTasksRequest,
+    cb?: (error: string, rep: DescribeCloudProductLogTasksResponse) => void
+  ): Promise<DescribeCloudProductLogTasksResponse> {
+    return this.request("DescribeCloudProductLogTasks", req, cb)
+  }
+
+  /**
    * 该接口用于删除通知渠道组
    */
   async DeleteAlarmNotice(
@@ -555,6 +584,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicsResponse) => void
   ): Promise<DescribeTopicsResponse> {
     return this.request("DescribeTopics", req, cb)
+  }
+
+  /**
+   * 内部云产品接入使用相关接口
+   */
+  async CreateCloudProductLogCollection(
+    req: CreateCloudProductLogCollectionRequest,
+    cb?: (error: string, rep: CreateCloudProductLogCollectionResponse) => void
+  ): Promise<CreateCloudProductLogCollectionResponse> {
+    return this.request("CreateCloudProductLogCollection", req, cb)
   }
 
   /**
@@ -625,6 +664,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void
   ): Promise<ModifyKafkaRechargeResponse> {
     return this.request("ModifyKafkaRecharge", req, cb)
+  }
+
+  /**
+   * 内部云产品接入使用相关接口
+   */
+  async ModifyCloudProductLogCollection(
+    req: ModifyCloudProductLogCollectionRequest,
+    cb?: (error: string, rep: ModifyCloudProductLogCollectionResponse) => void
+  ): Promise<ModifyCloudProductLogCollectionResponse> {
+    return this.request("ModifyCloudProductLogCollection", req, cb)
   }
 
   /**

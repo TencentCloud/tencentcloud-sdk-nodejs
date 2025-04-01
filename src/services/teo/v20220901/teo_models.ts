@@ -5174,9 +5174,17 @@ export interface IPGroup {
    */
   Name: string
   /**
-   * IP 组内容，仅支持 IP 及 IP 掩码。
+   * IP 组内容，仅支持 IP 及 IP 网段。
    */
   Content: Array<string>
+  /**
+   * IP 定时过期信息。
+作为入参：用于为指定的 IP 地址或网段配置定时过期时间。
+作为出参，包含以下两类信息：
+<li>当前未到期的定时过期信息：尚未触发的过期配置。</li>
+<li>一周内已到期的定时过期信息：已触发的过期配置。</li>
+   */
+  IPExpireInfo?: Array<IPExpireInfo>
 }
 
 /**
@@ -6612,6 +6620,20 @@ export interface DescribeLoadBalancerListRequest {
 
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 存储定时过期时间和对应 IP。
+ */
+export interface IPExpireInfo {
+  /**
+   * 定时过期时间，遵循 ISO 8601 标准的日期和时间格式。例如 "2022-01-01T00:00:00+08:00"。
+   */
+  ExpireTime?: string
+  /**
+   * IP 列表。仅支持 IP  及 IP 网段。
+   */
+  IPList?: Array<string>
 }
 
 /**
@@ -9945,10 +9967,7 @@ export interface ModifySecurityIPGroupRequest {
    */
   IPGroup: IPGroup
   /**
-   * 操作类型，取值有：
-<li> append: 向 IPGroup 中追加 Content 参数中内容；</li>
-<li> remove: 从 IPGroup 中删除 Content 参数中内容；</li>
-<li> update: 全量替换 IPGroup 内容，并可修改 IPGroup 名称。 </li>
+   * 操作类型，取值有：<li> append: 向 IPGroup 中添加新的 IP 地址或设置定时过期时间；</li><li>  remove: 从 IPGroup 中删除指定的 IP 地址或其定时过期时间；</li><li>  update: 完全替换 IPGroup 中 Content 或 ExpireInfo 的内容，并且可以修改 IPGroup 的名称。</li>    使用 append 操作时注意：   <li> 为 IP 或网段添加定时过期时间时，必须晚于当前时间。如果该 IP 或网段在组中不存在，必须同时在 Content 参数中添加该 IP 或网段。若该 IP 或网段已存在过期时间，则新时间将覆盖原有时间。</li>  使用 remove 操作时注意： <li> 删除 IP 或网段时，相关的未过期的定时过期时间也会被删除；</li> <li> 删除定时过期时间时，仅能删除当前未过期的时间。</li>  使用 update 操作时注意： <li> 替换 Content 内容时，不在 Content 中的 IP 或网段的未过期时间会被删除；</li> <li> 替换 IPExpireInfo 内容时，IPExpireInfo 中的 IP 或网段必须在 Content 中或在 IP 组中存在。</li>
    */
   Mode: string
 }
@@ -12789,7 +12808,7 @@ export interface DescribeContentQuotaResponse {
  */
 export interface DescribeSecurityIPGroupResponse {
   /**
-   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称和 IP / 网段列表信息。
+   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、 IP / 网段列表信息和过期时间信息。
    */
   IPGroups?: Array<IPGroup>
   /**

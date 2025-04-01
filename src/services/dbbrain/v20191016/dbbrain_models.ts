@@ -292,6 +292,24 @@ export interface DescribeDiagDBInstancesRequest {
 }
 
 /**
+ * Redis实例内存配置参数
+ */
+export interface RedisInstanceConf {
+  /**
+   * 副本数量
+   */
+  ReplicasNum?: string
+  /**
+   * 分片数量
+   */
+  ShardNum?: string
+  /**
+   * 分片内存大小，单位MB
+   */
+  ShardSize?: string
+}
+
+/**
  * DescribeDBSpaceStatus请求参数结构体
  */
 export interface DescribeDBSpaceStatusRequest {
@@ -456,7 +474,7 @@ export interface CreateDBDiagReportTaskRequest {
    */
   ContactGroup?: Array<number | bigint>
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认值为"mysql"。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认值为"mysql"。
    */
   Product?: string
 }
@@ -587,6 +605,42 @@ export interface InstanceBasicInfo {
    * 实例引擎版本。
    */
   EngineVersion?: string
+  /**
+   * CPU数量，对于Redis为0。
+   */
+  Cpu?: number
+  /**
+   * 实例部署模式。
+   */
+  DeployMode?: string
+  /**
+   * 实例内存配置。
+   */
+  InstanceConf?: RedisInstanceConf
+  /**
+   * DBbrain是否支持该实例。
+   */
+  IsSupported?: boolean
+  /**
+   * 实例内存，单位MB。
+   */
+  Memory?: number
+  /**
+   * 实例地域。
+   */
+  Region?: string
+  /**
+   * 实例子网统一ID，对于redis为空字符串。
+   */
+  UniqSubnetId?: string
+  /**
+   * 实例私有网络统一ID，对于redis为空字符串。
+   */
+  UniqVpcId?: string
+  /**
+   * 实例磁盘容量，对于Redis为0。
+   */
+  Volume?: number
 }
 
 /**
@@ -672,7 +726,7 @@ export interface DescribeDBDiagEventRequest {
    */
   EventId?: number
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -1142,7 +1196,7 @@ export interface DescribeDBDiagReportTasksRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
+   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 计划任务；"MANUAL" - 手动触发。
    */
   Sources?: Array<string>
   /**
@@ -1162,7 +1216,7 @@ export interface DescribeDBDiagReportTasksRequest {
    */
   Limit?: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -1899,6 +1953,10 @@ export interface HealthStatus {
    * 扣分详情。
    */
   ScoreDetails?: Array<ScoreDetail>
+  /**
+   * 健康等级版本，默认为V1
+   */
+  HealthLevelVersion?: string
 }
 
 /**
@@ -1946,7 +2004,7 @@ export interface CreateDBDiagReportUrlRequest {
    */
   AsyncRequestId: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }

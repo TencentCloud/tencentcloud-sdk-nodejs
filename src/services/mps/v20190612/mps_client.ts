@@ -969,9 +969,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询媒体传输流的媒体质量数据。
-
-     */
+   * 查询媒体传输流的媒体质量数据。
+   */
   async DescribeStreamLinkFlowStatistics(
     req: DescribeStreamLinkFlowStatisticsRequest,
     cb?: (error: string, rep: DescribeStreamLinkFlowStatisticsResponse) => void
@@ -1918,9 +1917,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询媒体传输流的媒体质量数据。
-
-     */
+   * 查询媒体传输流的媒体质量数据。
+   */
   async DescribeStreamLinkFlowMediaStatistics(
     req: DescribeStreamLinkFlowMediaStatisticsRequest,
     cb?: (error: string, rep: DescribeStreamLinkFlowMediaStatisticsResponse) => void

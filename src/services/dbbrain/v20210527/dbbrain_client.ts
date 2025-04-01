@@ -137,6 +137,7 @@ import {
   DescribeSqlTemplateResponse,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
+  RedisInstanceConf,
   DescribeDBDiagHistoryResponse,
   CreateUserAutonomyProfileRequest,
   Aggregation,

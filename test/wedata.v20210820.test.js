@@ -758,9 +758,9 @@ it("wedata.v20210820.DescribeRuleGroupTable", async function () {
     }
 })
 
-it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
+it("wedata.v20210820.DescribeRoleList", async function () {
     try {
-       const data = await client.RobAndLockIntegrationTask({})
+       const data = await client.DescribeRoleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1758,6 +1758,16 @@ it("wedata.v20210820.DescribeRules", async function () {
     }
 })
 
+it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
+    try {
+       const data = await client.RobAndLockIntegrationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.StartIntegrationTask", async function () {
     try {
        const data = await client.StartIntegrationTask({})
@@ -2281,6 +2291,16 @@ it("wedata.v20210820.DescribeDataSourceInfoList", async function () {
 it("wedata.v20210820.DescribeFunctionKinds", async function () {
     try {
        const data = await client.DescribeFunctionKinds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.UpdateProjectUserRole", async function () {
+    try {
+       const data = await client.UpdateProjectUserRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

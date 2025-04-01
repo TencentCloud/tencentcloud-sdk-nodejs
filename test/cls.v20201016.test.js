@@ -58,6 +58,16 @@ it("cls.v20201016.GetAlarmLog", async function () {
     }
 })
 
+it("cls.v20201016.DeleteCloudProductLogCollection", async function () {
+    try {
+       const data = await client.DeleteCloudProductLogCollection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateIndex", async function () {
     try {
        const data = await client.CreateIndex({})
@@ -168,6 +178,16 @@ it("cls.v20201016.CreateTopic", async function () {
     }
 })
 
+it("cls.v20201016.DescribeCloudProductLogTasks", async function () {
+    try {
+       const data = await client.DescribeCloudProductLogTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteAlarmNotice", async function () {
     try {
        const data = await client.DeleteAlarmNotice({})
@@ -221,6 +241,16 @@ it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
 it("cls.v20201016.DescribeTopics", async function () {
     try {
        const data = await client.DescribeTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateCloudProductLogCollection", async function () {
+    try {
+       const data = await client.CreateCloudProductLogCollection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +321,16 @@ it("cls.v20201016.ModifyIndex", async function () {
 it("cls.v20201016.ModifyKafkaRecharge", async function () {
     try {
        const data = await client.ModifyKafkaRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyCloudProductLogCollection", async function () {
+    try {
+       const data = await client.ModifyCloudProductLogCollection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

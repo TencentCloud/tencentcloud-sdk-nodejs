@@ -289,6 +289,7 @@ import {
   CreateConfigGroupVersionRequest,
   AclUserRule,
   DescribeLoadBalancerListRequest,
+  IPExpireInfo,
   AccessURLRedirectParameters,
   DescribeDDoSAttackEventRequest,
   CacheConfigParameters,

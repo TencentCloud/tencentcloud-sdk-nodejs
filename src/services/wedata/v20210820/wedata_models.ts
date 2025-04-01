@@ -1838,6 +1838,20 @@ export interface AddProjectUserRoleResponse {
 }
 
 /**
+ * ModifyDimensionWeight返回参数结构体
+ */
+export interface ModifyDimensionWeightResponse {
+  /**
+   * 更新权重是否成功
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchResumeIntegrationTasks返回参数结构体
  */
 export interface BatchResumeIntegrationTasksResponse {
@@ -4114,25 +4128,6 @@ export interface BatchDeleteIntegrationTasksResponse {
 }
 
 /**
- * 搜索条件
- */
-export interface SearchConditionInstanceNew {
-  /**
-   * 执行空间，可选 
- "DRY_RUN"
-   */
-  ExecutionSpace: string
-  /**
-   * 业务产品，可选: <DATA_DEV / DATA_QUALITY / DATA_INTEGRATION，默认DATA_DEV。非空。默认 自身项目
-   */
-  ProductName?: string
-  /**
-   * 资源组信息，可选
-   */
-  ResourceGroup?: string
-}
-
-/**
  * DescribeTaskTableMetricOverview返回参数结构体
  */
 export interface DescribeTaskTableMetricOverviewResponse {
@@ -4153,6 +4148,96 @@ export interface DescribeTaskTableMetricOverviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 基础角色对象
+ */
+export interface BaseRole {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleName?: string
+  /**
+   * 角色昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 角色类型, 分为System,Tenant,Project,Commercial
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleType?: string
+  /**
+   * 系统预设
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystemDefault?: boolean
+  /**
+   * 自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Parameters?: string
+  /**
+   * 成员统计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberCount?: number
+  /**
+   * 权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Privileges?: Array<RolePrivilege>
+  /**
+   * 操作者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: BaseUser
+  /**
+   * 操作时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateTime?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTimeStr?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTimeStr?: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
 }
 
 /**
@@ -5402,84 +5487,21 @@ export interface GetCosTokenRequest {
 }
 
 /**
- * 工作流
+ * UpdateProjectUserRole请求参数结构体
  */
-export interface WorkflowExtOpsDto {
-  /**
-   * 任务数量count
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskCount?: number
-  /**
-   * 文件名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FolderName?: string
-  /**
-   * 工作流id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkFlowId?: string
-  /**
-   * 责任人
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Owner?: string
-  /**
-   * 责任人userId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerId?: string
+export interface UpdateProjectUserRoleRequest {
   /**
    * 项目id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId?: string
+  ProjectId: string
   /**
-   * 项目标识
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户id
    */
-  ProjectIdent?: string
+  UserIds: Array<string>
   /**
-   * 项目名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 角色id
    */
-  ProjectName?: string
-  /**
-   * 工作流描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkFlowDesc?: string
-  /**
-   * 工作流名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkFlowName?: string
-  /**
-   * 工作流文件id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FolderId?: string
-  /**
-   * 工作流状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 工作流创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 最近更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyTime?: string
-  /**
-   * 工作流类型，周期cycle，手动manual
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowType?: string
+  RoleIds: Array<string>
 }
 
 /**
@@ -5572,6 +5594,87 @@ export interface DescribeInstanceLogListRequest {
    * 数据时间
    */
   CurRunDate: string
+}
+
+/**
+ * 工作流
+ */
+export interface WorkflowExtOpsDto {
+  /**
+   * 任务数量count
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskCount?: number
+  /**
+   * 文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderName?: string
+  /**
+   * 工作流id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowId?: string
+  /**
+   * 责任人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 责任人userId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerId?: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 项目标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectIdent?: string
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 工作流描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowDesc?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowName?: string
+  /**
+   * 工作流文件id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: string
+  /**
+   * 工作流状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 工作流创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 最近更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 工作流类型，周期cycle，手动manual
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowType?: string
 }
 
 /**
@@ -6808,6 +6911,37 @@ export interface DeleteResourceFileResponse {
 }
 
 /**
+ * 角色列表分页信息
+ */
+export interface PageRoles {
+  /**
+   * 角色信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rows?: Array<BaseRole>
+  /**
+   * 页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 总分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber?: number
+}
+
+/**
  * SubmitTask返回参数结构体
  */
 export interface SubmitTaskResponse {
@@ -7190,6 +7324,20 @@ export interface DeleteProjectParamDsResponse {
 false 删除失败
    */
   Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRoleList返回参数结构体
+ */
+export interface DescribeRoleListResponse {
+  /**
+   * 角色列表
+   */
+  Data?: PageRoles
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13930,17 +14078,71 @@ export interface SubmitTaskTestRunResponse {
 }
 
 /**
- * ModifyDimensionWeight返回参数结构体
+ * UpdateProjectUserRole返回参数结构体
  */
-export interface ModifyDimensionWeightResponse {
-  /**
-   * 更新权重是否成功
-   */
-  Data?: boolean
+export interface UpdateProjectUserRoleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRoleList请求参数结构体
+ */
+export interface DescribeRoleListRequest {
+  /**
+   * 返回所有角色。
+   */
+  ShowAllRoles?: boolean
+  /**
+   * 需要返回的角色类型(system,tenant,project)
+   */
+  IncludeRoleTypes?: Array<string>
+  /**
+   * 返回角色绑定人员统计，仅私有化版本支持
+   */
+  DescribeMemberCount?: boolean
+  /**
+   * 返回操作者信息，私有化多租户版本
+   */
+  DescribeOperator?: boolean
+  /**
+   * 系统角色
+   */
+  DescribeSystemRoleOnly?: boolean
+  /**
+   * 自定义角色
+   */
+  DescribeCustomRoleOnly?: boolean
+  /**
+   * 查看权限
+   */
+  DescribePrivileges?: boolean
+  /**
+   * 筛选角色id
+   */
+  RoleIds?: Array<string>
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 分页信息
+   */
+  PageSize?: number
+  /**
+   * 查询字段
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段
+   */
+  OrderFields?: Array<OrderFields>
 }
 
 /**
@@ -23181,6 +23383,25 @@ export interface BatchCreateTaskVersionAsyncResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 搜索条件
+ */
+export interface SearchConditionInstanceNew {
+  /**
+   * 执行空间，可选 
+ "DRY_RUN"
+   */
+  ExecutionSpace: string
+  /**
+   * 业务产品，可选: <DATA_DEV / DATA_QUALITY / DATA_INTEGRATION，默认DATA_DEV。非空。默认 自身项目
+   */
+  ProductName?: string
+  /**
+   * 资源组信息，可选
+   */
+  ResourceGroup?: string
 }
 
 /**
