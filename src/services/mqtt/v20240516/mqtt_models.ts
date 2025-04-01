@@ -483,11 +483,11 @@ export interface VpcInfo {
   /**
    * VPC ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
    */
-  SubnetId: string
+  SubnetId?: string
 }
 
 /**
@@ -508,6 +508,7 @@ export interface ProductSkuItem {
    * 规格类型
 BASIC：基础版
 PRO ：专业版
+PLATINUM： 铂金版
    */
   InstanceType?: string
   /**
@@ -516,6 +517,8 @@ PRO ：专业版
   SkuCode?: string
   /**
    * 是否售卖
+1: 可售卖
+0: 不可售卖
    */
   OnSale?: boolean
   /**
@@ -523,7 +526,7 @@ PRO ：专业版
    */
   TopicNumLimit?: number
   /**
-   * tps
+   * MQTT 集群下每秒钟生产消息量和消费消息量之和。详细计算方式参考 [计费概述](https://cloud.tencent.com/document/product/1778/109698)
    */
   TpsLimit?: number
   /**

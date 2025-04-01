@@ -470,11 +470,11 @@ export interface BotRecord {
   /**
    * 动作，取值为以为3个类型中的一个："intercept","permit","monitor"，分别表示： 拦截， 放行，监控
    */
-  Action: string
+  Action?: string
   /**
    * 会话总次数
    */
-  Nums: number
+  Nums?: number
   /**
    * BotType=UB时，表示预测标签，取值如下：
                 "crawler_unregular",
@@ -504,45 +504,45 @@ BotType=TCB时，表示Bot分类，取值如下：
                 "Marketing"
 BotType=UCB时，为二期接口，暂时未定义内容
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 会话持续时间
    */
-  SessionDuration: number
+  SessionDuration?: number
   /**
    * 访问源IP
    */
-  SrcIp: string
+  SrcIp?: string
   /**
    * 异常特征
    */
-  BotFeature: Array<string>
+  BotFeature?: Array<string>
   /**
    * 最新检测时间
    */
-  Time: string
+  Time?: string
   /**
    * BOT得分
    */
-  Score: number
+  Score?: number
   /**
    * 平均速率
    */
-  AvgSpeed: number
+  AvgSpeed?: number
   /**
    * BotType=TCB，表示TCB名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TcbDetail: string
+  TcbDetail?: string
   /**
    * BOT记录唯一ID，用于查询访问详情
    */
-  Id: string
+  Id?: string
   /**
    * 域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
 }
 
 /**
@@ -1737,12 +1737,10 @@ export interface StopCdnDomainRequest {
 export interface EnableCachesResponse {
   /**
    * 结果列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheOptResult?: CacheOptResult
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
@@ -1806,12 +1804,10 @@ off：关闭
 export interface DisableCachesResponse {
   /**
    * 提交结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheOptResult?: CacheOptResult
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
@@ -2012,11 +2008,11 @@ export interface PushTask {
   /**
    * 预热任务 ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 预热 URL
    */
-  Url: string
+  Url?: string
   /**
    * 预热任务状态
 fail：预热失败
@@ -2024,27 +2020,27 @@ done：预热成功
 process：预热中
 invalid：预热无效(源站返回4xx或5xx状态码)
    */
-  Status: string
+  Status?: string
   /**
    * 预热进度百分比
    */
-  Percent: number
+  Percent?: number
   /**
    * 预热任务提交时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 预热区域
 mainland：境内
 overseas：境外
 global：全球
    */
-  Area: string
+  Area?: string
   /**
    * 预热任务更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -2056,7 +2052,7 @@ export interface SecurityConfig {
 on：开启
 off：关闭
    */
-  Switch: string
+  Switch?: string
 }
 
 /**
@@ -3107,30 +3103,30 @@ export interface TopicInfo {
   /**
    * 主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题名字
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 是否启用投递
    */
-  Enabled: number
+  Enabled?: number
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 归属于cdn或ecdn
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Channel: string
+  Channel?: string
   /**
    * cls侧是否已经被删除
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Deleted: string
+  Deleted?: string
 }
 
 /**
@@ -3802,14 +3798,12 @@ export interface MapInfo {
 export interface DescribeCertDomainsResponse {
   /**
    * 已接入CDN的域名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domains: Array<string>
+  Domains?: Array<string>
   /**
    * 已配置证书的CDN域名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertifiedDomains: Array<string>
+  CertifiedDomains?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5058,24 +5052,20 @@ client：指定查询客户端地区（用户请求终端所在地区）数据
 export interface DescribeImageConfigResponse {
   /**
    * WebpAdapter配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  WebpAdapter: WebpAdapter
+  WebpAdapter?: WebpAdapter
   /**
    * TpgAdapter配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TpgAdapter: TpgAdapter
+  TpgAdapter?: TpgAdapter
   /**
    * GuetzliAdapter配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GuetzliAdapter: GuetzliAdapter
+  GuetzliAdapter?: GuetzliAdapter
   /**
    * AvifAdapter配置项
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvifAdapter: AvifAdapter
+  AvifAdapter?: AvifAdapter
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5296,7 +5286,6 @@ sha256：按SHA-256算法取hash值
 export interface CreateClsLogTopicResponse {
   /**
    * 主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
@@ -5761,17 +5750,14 @@ export interface CreateVerifyRecordResponse {
   RecordType?: string
   /**
    * 文件验证 URL 指引
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileVerifyUrl?: string
   /**
    * 文件校验域名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileVerifyDomains?: Array<string>
   /**
    * 文件校验文件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileVerifyName?: string
   /**
@@ -5828,7 +5814,6 @@ export interface ListClsTopicDomainsResponse {
   TopicName?: string
   /**
    * 日志主题最近更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
@@ -6081,12 +6066,10 @@ export interface StartCdnDomainRequest {
 export interface DescribePushTasksResponse {
   /**
    * 预热历史记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PushLogs?: Array<PushTask>
   /**
    * 任务总数，用于分页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -6632,12 +6615,10 @@ off：不支持
 export interface GetDisableRecordsResponse {
   /**
    * 封禁历史记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UrlRecordList?: Array<UrlRecord>
   /**
    * 任务总数，用于分页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -7767,7 +7748,6 @@ export interface DescribeDiagnoseReportResponse {
   OriginInfo?: DiagnoseData
   /**
    * 刷新检测信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PurgeInfo?: DiagnoseData
   /**
@@ -8941,7 +8921,6 @@ export interface TopDetailData {
 export interface DescribeDistrictIspDataResponse {
   /**
    * 地区运营商数据明细
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<DistrictIspInfo>
   /**
@@ -9306,7 +9285,6 @@ blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
 rand 为随机字符串，0 ~ 100 位大小写字母与数字组成；
 uid 为 0；
 md5hash：MD5（文件路径-timestamp-rand-uid-自定义密钥）
-
  */
 export interface AuthenticationTypeA {
   /**
@@ -9350,30 +9328,30 @@ export interface IpStatus {
   /**
    * 节点 IP
    */
-  Ip: string
+  Ip?: string
   /**
    * 节点所属区域
    */
-  District: string
+  District?: string
   /**
    * 节点所属运营商
    */
-  Isp: string
+  Isp?: string
   /**
    * 节点所在城市
    */
-  City: string
+  City?: string
   /**
    * 节点状态
 online：上线状态，正常调度服务中
 offline：下线状态
    */
-  Status: string
+  Status?: string
   /**
    * 节点 IPV6
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ipv6: string
+  Ipv6?: string
 }
 
 /**
@@ -9843,25 +9821,25 @@ export interface DomainLog {
   /**
    * 日志包起始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 日志包结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 日志包下载链接
    */
-  LogPath: string
+  LogPath?: string
   /**
    * 日志包对应加速区域
 mainland：境内
 overseas：境外
    */
-  Area: string
+  Area?: string
   /**
    * 日志包文件名
    */
-  LogName: string
+  LogName?: string
   /**
    * 文件大小，单位: Byte
 注意：此字段可能返回 null，表示取不到有效值。
@@ -10377,12 +10355,10 @@ export interface DescribeUrlViolationsResponse {
 export interface DescribePurgeTasksResponse {
   /**
    * 详细刷新记录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PurgeLogs?: Array<PurgeTask>
   /**
    * 任务总数，用于分页
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**

@@ -630,6 +630,14 @@ export interface DescribeUserProjectListRequest {
    * 无
    */
   PageSize?: number
+  /**
+   * 是否过滤掉企业管理员
+   */
+  IsFilterPerAuthUser?: boolean
+  /**
+   * 是否过滤掉当前用户
+   */
+  IsFilterCurrentUser?: boolean
 }
 
 /**
@@ -1806,6 +1814,21 @@ export interface Project {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigList?: Array<ProjectConfigList>
+  /**
+   * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedUserName?: string
+  /**
+   * 所属人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 所属人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerName?: string
 }
 
 /**
@@ -1987,6 +2010,16 @@ export interface DatasourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseVPC?: boolean
+  /**
+   * 所属人ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 所属人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerName?: string
 }
 
 /**
@@ -2198,6 +2231,14 @@ export interface DescribeUserRoleProjectListRequest {
    * 是否只获取绑定企微应用的
    */
   IsOnlyBindAppUser?: boolean
+  /**
+   * 是否获取全部数据
+   */
+  AllPage?: boolean
+  /**
+   * 角色编码
+   */
+  RoleCode?: string
 }
 
 /**

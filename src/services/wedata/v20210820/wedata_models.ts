@@ -3607,6 +3607,11 @@ export interface ProjectUserRole {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
+  /**
+   * 是否项目负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsProjectOwner?: boolean
 }
 
 /**

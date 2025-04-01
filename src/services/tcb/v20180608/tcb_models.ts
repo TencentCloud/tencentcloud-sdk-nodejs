@@ -3637,7 +3637,7 @@ export interface DescribeWxGatewaysRequest {
   /**
    * 环境ID
    */
-  EnvId: string
+  EnvId?: string
   /**
    * 网关ID
    */
@@ -5942,6 +5942,10 @@ export interface GatewayItem {
    * Donut接入域名
    */
   AccessDomain?: string
+  /**
+   * 标签键值对
+   */
+  Tags?: Array<Tag>
 }
 
 /**

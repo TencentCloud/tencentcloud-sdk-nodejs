@@ -577,7 +577,7 @@ export class Client extends AbstractClient {
    * 本接口(DescribeDBInstanceSpecs)用于查询可创建的云数据库可售卖的规格配置。
    */
   async DescribeDBInstanceSpecs(
-    req?: DescribeDBInstanceSpecsRequest,
+    req: DescribeDBInstanceSpecsRequest,
     cb?: (error: string, rep: DescribeDBInstanceSpecsResponse) => void
   ): Promise<DescribeDBInstanceSpecsResponse> {
     return this.request("DescribeDBInstanceSpecs", req, cb)

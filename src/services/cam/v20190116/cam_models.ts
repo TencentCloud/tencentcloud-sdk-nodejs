@@ -158,12 +158,10 @@ export interface Receiver {
   IsReceiverOwner?: number
   /**
    * 是否允许微信接收通知
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatFlag?: number
   /**
    * 账号uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: number
 }
@@ -240,7 +238,6 @@ export interface DetachGroupPolicyRequest {
 export interface DescribeRoleListResponse {
   /**
    * 角色详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<RoleInfo>
   /**
@@ -801,17 +798,14 @@ export interface DeleteRoleResponse {
 export interface PolicyVersionItem {
   /**
    * 策略版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionId?: number
   /**
    * 策略版本创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateDate?: string
   /**
    * 是否是正在生效的版本。0表示不是，1表示是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefaultVersion?: number
 }
@@ -1031,7 +1025,6 @@ export interface RemoveUserFromGroupRequest {
 export interface CreatePolicyVersionResponse {
   /**
    * 策略版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionId?: number
   /**
@@ -1063,7 +1056,6 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
   List?: Array<StrategyInfo>
   /**
    * 保留字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceTypeList?: Array<string>
   /**
@@ -1151,12 +1143,10 @@ export interface WeChatWorkSubAccount {
   Email?: string
   /**
    * 企业微信UserId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WeChatWorkUserId?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
 }
@@ -1461,12 +1451,10 @@ export interface GetUserResponse {
   Email?: string
   /**
    * 最近一次登录ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecentlyLoginIP?: string
   /**
    * 最近一次登录时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecentlyLoginTime?: string
   /**
@@ -2181,27 +2169,22 @@ export interface AttachPolicyInfo {
   PolicyId?: number
   /**
    * 策略名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddTime?: string
   /**
    * 创建来源，1 通过控制台创建, 2 通过策略语法创建
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateMode?: number
   /**
    * 取值为User和QCS。User代表自定义策略，QCS代表系统策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType?: string
   /**
    * 策略备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
@@ -2221,12 +2204,10 @@ export interface AttachPolicyInfo {
   OperateUinType?: number
   /**
    * 是否已下线，1代表已下线，0代表未下线
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Deactived?: number
   /**
    * 已下线的产品列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeactivedDetail?: Array<string>
 }
@@ -3036,7 +3017,6 @@ export interface UpdateOIDCConfigRequest {
 export interface CreateRoleResponse {
   /**
    * 角色ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleId?: string
   /**
@@ -3121,7 +3101,6 @@ export interface ListGroupsRequest {
 export interface ListPolicyVersionsResponse {
   /**
    * 策略版本列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Versions?: Array<PolicyVersionItem>
   /**
@@ -3265,7 +3244,6 @@ export interface AttachedPolicyOfRole {
   AddTime?: string
   /**
    * 策略类型，User表示自定义策略，QCS表示预设策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType?: string
   /**
@@ -3274,17 +3252,14 @@ export interface AttachedPolicyOfRole {
   CreateMode?: number
   /**
    * 是否已下线(0:否 1:是)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Deactived?: number
   /**
    * 已下线的产品列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeactivedDetail?: Array<string>
   /**
    * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }
@@ -3455,17 +3430,14 @@ export interface AttachedUserPolicy {
   CreateMode?: string
   /**
    * 随组关联信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Groups?: Array<AttachedUserPolicyGroupInfo>
   /**
    * 是否已下线(0:否 1:是)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Deactived?: number
   /**
    * 已下线的产品列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeactivedDetail?: Array<string>
 }
@@ -3508,32 +3480,26 @@ export interface ListUsersForGroupResponse {
 export interface GetPolicyResponse {
   /**
    * 策略名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
   /**
    * 策略描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 1 表示自定义策略，2 表示预设策略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 策略创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddTime?: string
   /**
    * 策略最近更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 策略文档。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDocument?: string
   /**
@@ -3543,7 +3509,6 @@ export interface GetPolicyResponse {
   PresetAlias?: string
   /**
    * 是否是服务相关策略，0代表不是服务相关策略，1代表是服务相关策略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsServiceLinkedRolePolicy?: number
   /**
@@ -3577,12 +3542,10 @@ export interface AttachEntityOfPolicy {
   Id?: string
   /**
    * 实体名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 实体Uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: number
   /**
@@ -3591,7 +3554,6 @@ export interface AttachEntityOfPolicy {
   RelatedType?: number
   /**
    * 策略关联时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachmentTime?: string
 }
@@ -3698,12 +3660,10 @@ export interface DescribeSubAccountsResponse {
 export interface ListEntitiesForPolicyResponse {
   /**
    * 实体总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalNum?: number
   /**
    * 实体列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<AttachEntityOfPolicy>
   /**
@@ -3760,7 +3720,6 @@ export interface DescribeSafeAuthFlagCollResponse {
   OffsiteFlag?: OffsiteFlag
   /**
    * 是否提示信任设备1 ：提示 0: 不提示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PromptTrust?: number
   /**

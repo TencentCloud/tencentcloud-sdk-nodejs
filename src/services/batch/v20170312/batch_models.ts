@@ -446,22 +446,21 @@ export interface CommandLine {
 }
 
 /**
- * 描述了实例登录相关配置与信息。
+ * 扩展数据
  */
-export interface LoginSettings {
+export interface Externals {
   /**
-   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。</li> 
-<li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。</li><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+   * 释放地址
    */
-  Password?: string
+  ReleaseAddress?: boolean
   /**
-   * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+   * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络</li><li>VPC1.0：私有网络VPC1.0</li>
    */
-  KeyIds?: Array<string>
+  UnsupportNetworks?: Array<string>
   /**
-   * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<li>TRUE：表示保持镜像的登录设置</li><li>FALSE：表示不保持镜像的登录设置</li>默认取值：FALSE。
+   * HDD本地存储属性
    */
-  KeepImageLogin?: string
+  StorageBlockAttr?: StorageBlock
 }
 
 /**
@@ -616,58 +615,6 @@ export interface Tag {
 }
 
 /**
- * 扩展数据
- */
-export interface Externals {
-  /**
-   * 释放地址
-   */
-  ReleaseAddress?: boolean
-  /**
-   * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络</li><li>VPC1.0：私有网络VPC1.0</li>
-   */
-  UnsupportNetworks?: Array<string>
-  /**
-   * HDD本地存储属性
-   */
-  StorageBlockAttr?: StorageBlock
-}
-
-/**
- * 操作系统类型
- */
-export interface OsInfo {
-  /**
-   * 操作系统ID。
-   */
-  OsTypeId?: number
-  /**
-   * 操作系统名称。
-   */
-  OsName?: string
-  /**
-   * 操作系统名称描述。
-   */
-  OsDescription?: string
-  /**
-   * 操作系统英文名称。
-   */
-  OsEnglishDescription?: string
-  /**
-   * 操作系统的分类，如CentOs Debian。
-   */
-  OsClass?: string
-  /**
-   * 标识镜像分类。public:公共镜像; private: 专属镜像。
-   */
-  ImageTag?: string
-  /**
-   * 操作系统，ext4文件下所支持的最大的磁盘大小。单位为T。
-   */
-  MaxPartitionSize?: number
-}
-
-/**
  * DescribeComputeEnv返回参数结构体
  */
 export interface DescribeComputeEnvResponse {
@@ -727,20 +674,6 @@ export interface DescribeComputeEnvResponse {
 }
 
 /**
- * DescribeCpmOsInfo返回参数结构体
- */
-export interface DescribeCpmOsInfoResponse {
-  /**
-   * 操作系统信息列表。
-   */
-  OsInfoSet: Array<OsInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * TerminateJob请求参数结构体
  */
 export interface TerminateJobRequest {
@@ -784,96 +717,6 @@ export interface Application {
    * 任务执行命令信息。与Command不能同时指定。
    */
   Commands?: Array<CommandLine>
-}
-
-/**
- * 黑石计算环境数据
- */
-export interface EnvDataCpm {
-  /**
-   * 黑石可用区名称列表。如ap-guangzhou-bls-1。不是Batch可用区名称。目前仅支持一个可用区名称。
-   */
-  Zones: Array<string>
-  /**
-   * 购买的机型ID。
-   */
-  InstanceTypes: Array<string>
-  /**
-   * 购买时长单位，取值：m(月)。
-   */
-  TimeUnit: string
-  /**
-   * 购买时长。
-   */
-  TimeSpan: number
-  /**
-   * RAID类型ID。
-   */
-  RaidId: number
-  /**
-   * 部署服务器的操作系统ID。通过批量计算接口DescribeCpmOsInfo查询操作系统信息。
-   */
-  OsTypeId: number
-  /**
-   * 黑石VPC列表，目前仅支持一个VPC。
-   */
-  VirtualPrivateClouds: Array<CpmVirtualPrivateCloud>
-  /**
-   * 是否安装安全Agent，取值：1(安装) 0(不安装)，默认取值0。
-   */
-  NeedSecurityAgent?: number
-  /**
-   * 是否安装监控Agent，取值：1(安装) 0(不安装)，默认取值0。
-   */
-  NeedMonitorAgent?: number
-  /**
-   * 自动续费标志位，取值：1(自动续费) 0(不自动续费)，默认取值0。
-   */
-  AutoRenewFlag?: number
-  /**
-   * 数据盘是否格式化，取值：1(格式化) 0(不格式化)，默认取值为1。
-   */
-  IsZoning?: number
-  /**
-   * 指定数据盘的文件系统格式，当前支持 ext4和xfs选项， 默认为ext4。 参数适用于数据盘和Linux， 且在IsZoning为1时生效。
-   */
-  FileSystem?: string
-  /**
-   * 设置Linux root或Windows Administrator的密码。若不设置此参数，默认情况下会随机生成密码，并以站内信方式通知到用户。
-   */
-  Password?: string
-  /**
-   * 是否分配弹性公网IP，取值：1(分配) 0(不分配)，默认取值0。
-   */
-  ApplyEip?: number
-  /**
-   * 弹性公网IP计费模式，取值：flow(按流量计费) bandwidth(按带宽计费)，默认取值flow。
-   */
-  EipPayMode?: string
-  /**
-   * 弹性公网IP带宽限制，单位Mb。
-   */
-  EipBandwidth?: number
-  /**
-   * 自定义镜像ID，取值生效时用自定义镜像部署物理机。
-   */
-  ImageId?: string
-  /**
-   * 系统盘根分区大小，单位为G，默认取值10G。
-   */
-  SysRootSpace?: number
-  /**
-   * /data分区大小，单位为G。如果系统盘还有剩余大小，会分配给/data分区。（特殊情况：如果剩余空间不足10G，并且没有指定/data分区，则剩余空间会分配给Root分区）。
-   */
-  SysDataSpace?: number
-  /**
-   * 是否开启超线程，取值：1(开启) 0(关闭)，默认取值1。
-   */
-  HyperThreading?: number
-  /**
-   * 指定的内网IP列表，不指定时自动分配。
-   */
-  LanIps?: Array<string>
 }
 
 /**
@@ -1322,20 +1165,6 @@ export interface DescribeTaskTemplatesResponse {
 }
 
 /**
- * CreateCpmComputeEnv返回参数结构体
- */
-export interface CreateCpmComputeEnvResponse {
-  /**
-   * 计算环境ID
-   */
-  EnvId: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteJob请求参数结构体
  */
 export interface DeleteJobRequest {
@@ -1343,24 +1172,6 @@ export interface DeleteJobRequest {
    * 作业ID
    */
   JobId: string
-}
-
-/**
- * CreateCpmComputeEnv请求参数结构体
- */
-export interface CreateCpmComputeEnvRequest {
-  /**
-   * 计算环境信息
-   */
-  ComputeEnv: NamedCpmComputeEnv
-  /**
-   * 位置信息
-   */
-  Placement?: Placement
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由用户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-   */
-  ClientToken?: string
 }
 
 /**
@@ -1379,63 +1190,6 @@ export interface DescribeTaskLogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 黑石计算环境
- */
-export interface NamedCpmComputeEnv {
-  /**
-   * 计算环境名称
-   */
-  EnvName: string
-  /**
-   * 计算环境具体参数
-   */
-  EnvData: EnvDataCpm
-  /**
-   * 计算节点期望个数
-   */
-  DesiredComputeNodeCount: number
-  /**
-   * 计算环境描述
-   */
-  EnvDescription?: string
-  /**
-   * 计算环境管理类型， 取值MANAGED。
-   */
-  EnvType?: string
-  /**
-   * 授权信息
-   */
-  Authentications?: Array<Authentication>
-  /**
-   * 输入映射信息
-   */
-  InputMappings?: Array<InputMapping>
-  /**
-   * 通知信息
-   */
-  Notifications?: Notification
-  /**
-   * 非活跃节点处理策略，默认“RECREATE”，即对于实例创建失败或异常退还的计算节点，定期重新创建实例资源。
-   */
-  ActionIfComputeNodeInactive?: string
-  /**
-   * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值100，如果不设置的话，系统会设置一个默认值，当前为7。
-   */
-  ResourceMaxRetryCount?: number
-  /**
-   * 标签列表。通过指定该参数可以支持绑定标签到黑石计算环境。每个黑石计算环境最多绑定10个标签。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 表示通知信息的通知目标类型。
-取值范围：CMQ，TDMQ_CMQ。
-CMQ:表示向腾讯云CMQ发送消息。
-TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
-   */
-  NotificationTarget?: string
 }
 
 /**
@@ -1545,16 +1299,6 @@ export interface ModifyTaskTemplateRequest {
    * 任务模板信息
    */
   TaskTemplateInfo?: Task
-}
-
-/**
- * DescribeCpmOsInfo请求参数结构体
- */
-export interface DescribeCpmOsInfoRequest {
-  /**
-   * 黑石设备类型代号。 可以从[DescribeDeviceClass](https://cloud.tencent.com/document/api/386/32911)查询设备类型列表。
-   */
-  DeviceClassCode?: string
 }
 
 /**
@@ -1730,17 +1474,22 @@ export interface SpotMarketOptions {
 }
 
 /**
- * 黑石私有网络
+ * 描述了实例登录相关配置与信息。
  */
-export interface CpmVirtualPrivateCloud {
+export interface LoginSettings {
   /**
-   * 黑石私有网络ID
+   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。</li> 
+<li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。</li><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
    */
-  VpcId: string
+  Password?: string
   /**
-   * 黑石子网ID
+   * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
    */
-  SubnetId: string
+  KeyIds?: Array<string>
+  /**
+   * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<li>TRUE：表示保持镜像的登录设置</li><li>FALSE：表示不保持镜像的登录设置</li>默认取值：FALSE。
+   */
+  KeepImageLogin?: string
 }
 
 /**

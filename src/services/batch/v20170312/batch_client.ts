@@ -35,7 +35,7 @@ import {
   Task,
   InstanceTypeConfig,
   CommandLine,
-  LoginSettings,
+  Externals,
   TerminateComputeNodesResponse,
   DescribeComputeEnvActivitiesResponse,
   TaskInstanceMetrics,
@@ -43,14 +43,10 @@ import {
   MountDataDisk,
   TaskView,
   Tag,
-  Externals,
-  OsInfo,
   DescribeComputeEnvResponse,
-  DescribeCpmOsInfoResponse,
   TerminateJobRequest,
   DetachInstancesResponse,
   Application,
-  EnvDataCpm,
   OutputMappingConfig,
   AttachInstancesResponse,
   ComputeNodeMetrics,
@@ -69,22 +65,18 @@ import {
   DescribeComputeEnvRequest,
   InstanceMarketOptionsRequest,
   DescribeTaskTemplatesResponse,
-  CreateCpmComputeEnvResponse,
   DeleteJobRequest,
-  CreateCpmComputeEnvRequest,
   DescribeTaskLogsResponse,
-  NamedCpmComputeEnv,
   DeleteTaskTemplatesRequest,
   DescribeJobResponse,
   DescribeComputeEnvCreateInfoRequest,
   ModifyTaskTemplateRequest,
-  DescribeCpmOsInfoRequest,
   DataDisk,
   NamedComputeEnv,
   DeleteJobResponse,
   EventConfig,
   SpotMarketOptions,
-  CpmVirtualPrivateCloud,
+  LoginSettings,
   DetachInstancesRequest,
   Instance,
   OutputMapping,
@@ -171,16 +163,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTaskTemplateResponse) => void
   ): Promise<CreateTaskTemplateResponse> {
     return this.request("CreateTaskTemplate", req, cb)
-  }
-
-  /**
-   * 创建黑石计算环境
-   */
-  async CreateCpmComputeEnv(
-    req: CreateCpmComputeEnvRequest,
-    cb?: (error: string, rep: CreateCpmComputeEnvResponse) => void
-  ): Promise<CreateCpmComputeEnvResponse> {
-    return this.request("CreateCpmComputeEnv", req, cb)
   }
 
   /**
@@ -436,16 +418,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteJobResponse) => void
   ): Promise<DeleteJobResponse> {
     return this.request("DeleteJob", req, cb)
-  }
-
-  /**
-   * 创建黑石计算环境时，查询批量计算环境支持的黑石操作系统信息
-   */
-  async DescribeCpmOsInfo(
-    req: DescribeCpmOsInfoRequest,
-    cb?: (error: string, rep: DescribeCpmOsInfoResponse) => void
-  ): Promise<DescribeCpmOsInfoResponse> {
-    return this.request("DescribeCpmOsInfo", req, cb)
   }
 
   /**

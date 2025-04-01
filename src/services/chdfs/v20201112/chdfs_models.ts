@@ -655,7 +655,7 @@ export interface RestoreTask {
    */
   FilePath?: string
   /**
-   * 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持极速）
+   * 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持标准）
    */
   Type?: number
   /**

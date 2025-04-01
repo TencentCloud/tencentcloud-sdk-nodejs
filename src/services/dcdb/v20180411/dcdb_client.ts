@@ -300,7 +300,7 @@ export class Client extends AbstractClient {
    * 查询可创建的分布式数据库可售卖的分片规格配置。
    */
   async DescribeShardSpec(
-    req?: DescribeShardSpecRequest,
+    req: DescribeShardSpecRequest,
     cb?: (error: string, rep: DescribeShardSpecResponse) => void
   ): Promise<DescribeShardSpecResponse> {
     return this.request("DescribeShardSpec", req, cb)

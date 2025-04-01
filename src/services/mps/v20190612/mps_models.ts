@@ -6252,7 +6252,7 @@ export interface CreateOutputInfo {
    */
   Description: string
   /**
-   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。
+   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。
    */
   Protocol: string
   /**
@@ -9622,7 +9622,7 @@ export interface DescribeStreamLinkFlowSRTStatisticsResponse {
   /**
    * 传输流的SRT质量数据列表。
    */
-  Infos: Array<FlowSRTInfo>
+  Infos?: Array<FlowSRTInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12563,7 +12563,7 @@ export interface DescribeStreamLinkFlowResponse {
   /**
    * 流的配置信息。
    */
-  Info: DescribeFlow
+  Info?: DescribeFlow
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

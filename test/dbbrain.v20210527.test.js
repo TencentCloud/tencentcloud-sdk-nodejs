@@ -628,6 +628,16 @@ it("dbbrain.v20210527.CancelDBAutonomyAction", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeRedisSlowLogTopSqls", async function () {
+    try {
+       const data = await client.DescribeRedisSlowLogTopSqls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateKillTask", async function () {
     try {
        const data = await client.CreateKillTask({})
@@ -761,6 +771,16 @@ it("dbbrain.v20210527.DescribeProxySessionKillTasks", async function () {
 it("dbbrain.v20210527.ModifyUserAutonomyProfile", async function () {
     try {
        const data = await client.ModifyUserAutonomyProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeSlowLogQueryTimeStats", async function () {
+    try {
+       const data = await client.DescribeSlowLogQueryTimeStats({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

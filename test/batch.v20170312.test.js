@@ -38,16 +38,6 @@ it("batch.v20170312.CreateTaskTemplate", async function () {
     }
 })
 
-it("batch.v20170312.CreateCpmComputeEnv", async function () {
-    try {
-       const data = await client.CreateCpmComputeEnv({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("batch.v20170312.TerminateComputeNode", async function () {
     try {
        const data = await client.TerminateComputeNode({})
@@ -281,16 +271,6 @@ it("batch.v20170312.DescribeComputeEnvCreateInfos", async function () {
 it("batch.v20170312.DeleteJob", async function () {
     try {
        const data = await client.DeleteJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("batch.v20170312.DescribeCpmOsInfo", async function () {
-    try {
-       const data = await client.DescribeCpmOsInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

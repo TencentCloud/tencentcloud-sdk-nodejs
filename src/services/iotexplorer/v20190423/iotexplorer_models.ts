@@ -21,12 +21,10 @@
 export interface UpdateDevicesEnableStateResponse {
   /**
    * 删除的结果代码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultCode?: string
   /**
    * 删除的结果信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultMessage?: string
   /**
@@ -83,12 +81,10 @@ export interface TWeCallActiveInfo {
   ModelId?: string
   /**
    * Sn信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sn?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
   /**
@@ -157,14 +153,12 @@ export interface DescribeModelDefinitionResponse {
 export interface GetGatewaySubDeviceListResponse {
   /**
    * 设备的总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 设备列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceList: FamilySubDevice
+  DeviceList?: FamilySubDevice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -253,17 +247,14 @@ export interface DeviceActiveResult {
   ModelId?: string
   /**
    * SN信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sn?: string
   /**
    * 设备激活状态，0：激活成功；50011：系统错误；50012：产品不存在；50013：设备不存在；50014：产品无权限；50015：不是音视频产品；50016：SN格式错误；50017：激活码类型错误；50018：激活次数限频；50019：激活码不足；50020：SN已暂停；
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrCode?: number
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
 }
@@ -298,12 +289,10 @@ export interface ModifyApplicationResponse {
 export interface CreateFreeCloudStorageResponse {
   /**
    * 订单金额，单位为分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Price?: number
   /**
    * 支付金额，单位为分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Amount?: number
   /**
@@ -362,12 +351,10 @@ export interface DescribeCloudStorageThumbnailListRequest {
 export interface CheckFirmwareUpdateResponse {
   /**
    * 设备当前固件版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentVersion?: string
   /**
    * 固件可升级版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DstVersion?: string
   /**
@@ -414,7 +401,6 @@ export interface DescribeCloudStoragePackageConsumeDetailsRequest {
 export interface DescribeActivateLicenseServiceResponse {
   /**
    * 增值服务激活码信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<LicenseServiceNumInfo>
   /**
@@ -678,7 +664,7 @@ export interface CreateDeviceResponse {
   /**
    * 设备参数描述。
    */
-  Data: DeviceData
+  Data?: DeviceData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -794,11 +780,11 @@ export interface GetStudioProductListResponse {
   /**
    * 产品列表
    */
-  Products: Array<ProductEntry>
+  Products?: Array<ProductEntry>
   /**
    * 产品数量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -878,17 +864,15 @@ export interface DescribeFenceEventListRequest {
 export interface ActivateTWeCallLicenseResponse {
   /**
    * 设备激活返回数据
-注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   DeviceList?: Array<DeviceActiveResult>
   /**
    * 设备激活失败返回数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureList?: Array<DeviceActiveResult>
   /**
    * 设备激活成功返回数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessList?: Array<DeviceActiveResult>
   /**
@@ -1478,24 +1462,20 @@ export interface PauseTWeCallDeviceRequest {
 export interface DescribeDeviceDataHistoryResponse {
   /**
    * 属性字段名称，对应数据模板中功能属性的标识符
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FieldName: string
+  FieldName?: string
   /**
    * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Context: string
+  Context?: string
   /**
    * 历史数据结果数组，返回对应时间点及取值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Results: Array<DeviceDataHistoryItem>
+  Results?: Array<DeviceDataHistoryItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1509,19 +1489,17 @@ export interface DeviceUser {
   /**
    * 用户ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户角色 1所有者，0：其他分享者
    */
-  Role: number
+  Role?: number
   /**
    * 家庭ID，所有者带该参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FamilyId?: string
   /**
    * 家庭名称，所有者带该参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FamilyName?: string
 }
@@ -1548,12 +1526,10 @@ export interface ProductModelDefinition {
   CreateTime?: number
   /**
    * 产品所属分类的模型快照（产品创建时刻的）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CategoryModel?: string
   /**
    * 产品的连接类型的模型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetTypeModel?: string
 }
@@ -1582,12 +1558,10 @@ export interface PositionFenceInfo {
 export interface DeleteDeviceResponse {
   /**
    * 删除的结果代码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultCode?: string
   /**
    * 删除的结果信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultMessage?: string
   /**
@@ -1661,62 +1635,50 @@ export interface InstanceDetail {
   ExpireTime?: string
   /**
    * 总设备数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalDevice?: number
   /**
    * 激活设备数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivateDevice?: number
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 实例状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 消息上下行配置TPS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpDownTPS?: number
   /**
    * 当前消息上下行TPS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpDownCurrentTPS?: number
   /**
    * 消息转发配置TPS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardTPS?: number
   /**
    * 消息转发当前TPS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardCurrentTPS?: number
   /**
    * 实例单元数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CellNum?: number
   /**
    * 实例Tag，企业实例必传
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingTag?: string
   /**
    * 每日消息数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EverydayFreeMessageCount?: number
   /**
    * 最大在线设备数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDeviceOnlineCount?: number
 }
@@ -1727,24 +1689,20 @@ export interface InstanceDetail {
 export interface ListEventHistoryResponse {
   /**
    * 搜索上下文, 用作查询游标
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Context: string
+  Context?: string
   /**
    * 搜索结果数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 搜索结果是否已经结束
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 搜集结果集
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventHistory: Array<EventHistoryItem>
+  EventHistory?: Array<EventHistoryItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1776,7 +1734,6 @@ export interface GetBatchProductionsListResponse {
 export interface DescribeDeviceFirmwaresResponse {
   /**
    * 固件信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Firmwares?: Array<DeviceFirmwareInfo>
   /**
@@ -1813,17 +1770,14 @@ export interface DescribeCloudStorageUsersRequest {
 export interface TWeCallLicenseInfo {
   /**
    * voip类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TWeCallType?: string
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalNum?: number
   /**
    * 已使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedNum?: number
 }
@@ -1976,12 +1930,10 @@ export interface DescribeGatewaySubProductsResponse {
 export interface GetDeviceListResponse {
   /**
    * 返回的设备列表, 注意列表设备的 DevicePsk 为空, 要获取设备的 DevicePsk 请使用 DescribeDevice
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Devices?: Array<DeviceInfo>
   /**
    * 产品下的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -2011,46 +1963,39 @@ export interface BindProductInfo {
   /**
    * 产品ID。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 产品名称。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 产品所属项目ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 物模型类型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataProtocol: number
+  DataProtocol?: number
   /**
    * 产品分组模板ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryId: number
+  CategoryId?: number
   /**
    * 产品类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductType: number
+  ProductType?: number
   /**
    * 连接类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetType: string
+  NetType?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevStatus: string
+  DevStatus?: string
   /**
    * 产品拥有者名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductOwnerName: string
+  ProductOwnerName?: string
 }
 
 /**
@@ -2296,17 +2241,14 @@ export interface DescribeBatchProductionResponse {
   UploadUrl?: string
   /**
    * 成功数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessCount?: number
   /**
    * 量产最后失败原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastFailedReason?: string
   /**
    * 量产状态  0：任务创建，未量产；1：处理中；2：量产结束上传结果中；3：任务完成
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
@@ -2438,16 +2380,15 @@ export interface CallDeviceActionSyncResponse {
   /**
    * 调用Id
    */
-  ClientToken: string
+  ClientToken?: string
   /**
    * 输出参数，取值设备端上报$thing/up/action method为action_reply 的 response字段，物模型协议参考https://cloud.tencent.com/document/product/1081/34916#.E8.AE.BE.E5.A4.87.E8.A1.8C.E4.B8.BA.E8.B0.83.E7.94.A8
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputParams: string
+  OutputParams?: string
   /**
    * 返回状态，取值设备端上报$thing/up/action	method为action_reply 的 status字段，如果不包含status字段，则取默认值，空字符串，物模型协议参考https://cloud.tencent.com/document/product/1081/34916#.E8.AE.BE.E5.A4.87.E8.A1.8C.E4.B8.BA.E8.B0.83.E7.94.A8
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2616,20 +2557,19 @@ export interface DescribeDeviceLocationSolveResponse {
   /**
    * 经度
    */
-  Longitude: number
+  Longitude?: number
   /**
    * 纬度
    */
-  Latitude: number
+  Latitude?: number
   /**
    * 类型
    */
-  LocationType: string
+  LocationType?: string
   /**
    * 误差精度预估，单位为米
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Accuracy: number
+  Accuracy?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2656,12 +2596,10 @@ export interface DescribeStudioProductResponse {
 export interface CreateIotVideoCloudStorageResponse {
   /**
    * 订单金额，单位为分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Price?: number
   /**
    * 支付金额，单位为分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Amount?: number
   /**
@@ -2749,25 +2687,23 @@ export interface PositionItem {
   /**
    * 位置点的时间
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 位置点的经度
    */
-  Longitude: number
+  Longitude?: number
   /**
    * 位置点的纬度
    */
-  Latitude: number
+  Latitude?: number
   /**
    * 位置点的定位类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocationType: string
+  LocationType?: string
   /**
    * 位置点的精度预估，单位为米
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Accuracy: number
+  Accuracy?: number
 }
 
 /**
@@ -2916,7 +2852,6 @@ export interface CloudStorageEvent {
 export interface DescribeInstanceResponse {
   /**
    * 实例信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: InstanceDetail
   /**
@@ -3033,27 +2968,22 @@ export interface GetBatchProductionsListRequest {
 export interface DescribeDeviceBindGatewayResponse {
   /**
    * 网关产品ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayProductId?: string
   /**
    * 网关设备名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayDeviceName?: string
   /**
    * 网关产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayName?: string
   /**
    * 设备对应产品所属的主账号名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayProductOwnerName?: string
   /**
    * 设备对应产品所属的主账号 UIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayProductOwnerUin?: string
   /**
@@ -3069,14 +2999,13 @@ export interface ControlDeviceDataResponse {
   /**
    * 返回信息
    */
-  Data: string
+  Data?: string
   /**
    * JSON字符串， 返回下发控制的结果信息, 
 Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic.
 pushResult 是表示发送结果，其中 0 表示成功， 23101 表示设备未在线或没有订阅相关的 MQTT Topic。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3089,32 +3018,26 @@ pushResult 是表示发送结果，其中 0 表示成功， 23101 表示设备�
 export interface EventHistoryItem {
   /**
    * 事件的时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeStamp?: number
   /**
    * 事件的产品ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: string
   /**
    * 事件的设备名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName?: string
   /**
    * 事件的标识符ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventId?: string
   /**
    * 事件的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 事件的数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
 }
@@ -3125,9 +3048,8 @@ export interface EventHistoryItem {
 export interface CreatePositionSpaceResponse {
   /**
    * 空间Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpaceId: string
+  SpaceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3178,9 +3100,8 @@ export interface DeletePositionSpaceResponse {
 export interface DescribeActivateDeviceResponse {
   /**
    * 设备激活详情信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: ActivateDeviceInfo
+  Data?: ActivateDeviceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3265,7 +3186,6 @@ export interface DescribeCloudStorageResponse {
   ShiftDuration?: number
   /**
    * 云存用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
   /**
@@ -3360,22 +3280,18 @@ export interface ProjectEntryEx {
   WebAppCount?: number
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 应用数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationCount?: number
   /**
    * 设备注册总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceCount?: number
   /**
    * 是否开通物联使能
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableOpenState?: number
 }
@@ -3460,7 +3376,7 @@ export interface DescribeDeviceDataResponse {
   /**
    * 设备数据
    */
-  Data: string
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3491,13 +3407,12 @@ export interface DescribePositionFenceListRequest {
 export interface DescribeUnbindedDevicesResponse {
   /**
    * 未绑定的设备列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnbindedDevices: Array<BindDeviceInfo>
+  UnbindedDevices?: Array<BindDeviceInfo>
   /**
    * 设备的总数量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3645,7 +3560,6 @@ export interface CloudStorageTimeData {
   TimeList?: Array<CloudStorageTimeInfo>
   /**
    * 播放地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoURL?: string
 }
@@ -3754,22 +3668,18 @@ export interface PackageInfo {
   CSExpiredTime?: number
   /**
    * 云存套餐创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: number
   /**
    * 云存套餐更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: number
   /**
    * 套餐id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageId?: string
   /**
    * 订单id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderId?: string
   /**
@@ -3778,7 +3688,6 @@ export interface PackageInfo {
   ChannelId?: number
   /**
    * 用户id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CSUserId?: string
 }
@@ -3789,12 +3698,10 @@ export interface PackageInfo {
 export interface DeleteDevicesResponse {
   /**
    * 删除的结果代码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultCode?: string
   /**
    * 删除的结果信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultMessage?: string
   /**
@@ -3879,12 +3786,10 @@ export interface DismissRoomByStrRoomIdFromTRTCResponse {
 export interface DescribeFirmwareUpdateStatusResponse {
   /**
    * 升级任务源版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriVersion?: string
   /**
    * 升级任务目标版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DstVersion?: string
   /**
@@ -3893,7 +3798,6 @@ export interface DescribeFirmwareUpdateStatusResponse {
   Status?: number
   /**
    * 进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
   /**
@@ -3908,7 +3812,6 @@ export interface DescribeFirmwareUpdateStatusResponse {
 export interface PublishFirmwareUpdateMessageResponse {
   /**
    * 请求状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -4275,12 +4178,10 @@ export interface DeleteDeviceRequest {
 export interface GetProjectListResponse {
   /**
    * 项目列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Projects?: Array<ProjectEntryEx>
   /**
    * 列表项个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -4331,22 +4232,18 @@ export interface DescribeFirmwareResponse {
   ProductId?: string
   /**
    * 固件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 固件描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 固件Md5值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Md5sum?: string
   /**
    * 固件上传的秒级时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Createtime?: number
   /**
@@ -4355,12 +4252,10 @@ export interface DescribeFirmwareResponse {
   ProductName?: string
   /**
    * 固件升级模块
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FwType?: string
   /**
    * 固件用户自定义配置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDefined?: string
   /**
@@ -4490,15 +4385,19 @@ export interface RegisteredDeviceTypeInfo {
   /**
    * 已注册设备数
    */
-  NormalDeviceNum: number
+  NormalDeviceNum?: number
   /**
    * 已注册网关数
    */
-  GatewayDeviceNum: number
+  GatewayDeviceNum?: number
   /**
    * 已注册子设备数
    */
-  SubDeviceNum: number
+  SubDeviceNum?: number
+  /**
+   * 已注册视频设备数
+   */
+  VideoDeviceNum?: number
 }
 
 /**
@@ -4507,12 +4406,10 @@ export interface RegisteredDeviceTypeInfo {
 export interface ThumbnailURLInfoList {
   /**
    * 缩略图访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ThumbnailURL?: string
   /**
    * 缩略图访问地址的过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
 }
@@ -4553,7 +4450,6 @@ export interface LicenseServiceNumInfo {
   UsedNum?: number
   /**
    * TWeCall激活码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TWeCallLicense?: Array<TWeCallLicenseInfo>
 }
@@ -4644,52 +4540,42 @@ export interface GetStudioProductListRequest {
 export interface DescribeFirmwareTaskResponse {
   /**
    * 固件任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**
    * 固件任务状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 固件任务创建时间，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 固件任务升级类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeMode?: string
   /**
    * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: string
   /**
    * 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginalVersion?: string
   /**
    * 创建账号ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserId?: number
   /**
    * 创建账号ID昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorNickName?: string
   /**
@@ -4930,14 +4816,12 @@ export interface ReleaseStudioProductRequest {
 export interface SearchPositionSpaceResponse {
   /**
    * 位置空间列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<PositionSpaceInfo>
+  List?: Array<PositionSpaceInfo>
   /**
    * 符合条件的位置空间个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5027,11 +4911,11 @@ export interface CallDeviceActionAsyncResponse {
   /**
    * 调用Id
    */
-  ClientToken: string
+  ClientToken?: string
   /**
    * 异步调用状态
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5044,12 +4928,10 @@ export interface CallDeviceActionAsyncResponse {
 export interface GetPositionSpaceListResponse {
   /**
    * 位置空间列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<PositionSpaceInfo>
   /**
    * 位置空间数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -5074,12 +4956,10 @@ export interface CreatePositionFenceResponse {
 export interface DescribeTopicRuleResponse {
   /**
    * 规则描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rule?: TopicRule
   /**
    * 规则绑定的标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CamTag?: Array<CamTag>
   /**
@@ -5134,7 +5014,6 @@ export interface DeviceSignatureInfo {
 export interface TWeCallInfo {
   /**
    * Sn信息，SN格式：产品ID_设备名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sn: string
   /**
@@ -5175,12 +5054,10 @@ export interface DescribeDeviceRequest {
 export interface CamTag {
   /**
    * 标签键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey?: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
 }
@@ -5191,12 +5068,10 @@ export interface CamTag {
 export interface WXDeviceInfo {
   /**
    * 设备ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceId?: string
   /**
    * 设备信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WXIoTDeviceInfo?: WXIoTDeviceInfo
 }
@@ -5292,14 +5167,12 @@ export interface CloudStorageAIServiceTaskVideoMetaInfo {
 export interface DescribeGatewaySubDeviceListResponse {
   /**
    * 设备的总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 设备列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceList: Array<FamilySubDevice>
+  DeviceList?: Array<FamilySubDevice>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5330,7 +5203,6 @@ export interface SearchStudioProductResponse {
 export interface DescribeVideoLicenseResponse {
   /**
    * 视频激活码分类概览
-注意：此字段可能返回 null，表示取不到有效值。
    */
   License?: Array<VideoLicenseEntity>
   /**
@@ -5359,7 +5231,6 @@ export interface DescribePackageConsumeTasksRequest {
 export interface GetFamilyDeviceUserListResponse {
   /**
    * 设备的用户列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserList?: Array<DeviceUser>
   /**
@@ -5736,17 +5607,14 @@ export interface DescribeCloudStorageAIServiceRequest {
 export interface DescribeCloudStorageOrderResponse {
   /**
    * 云存套餐开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 云存套餐过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
   /**
    * 套餐id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageId?: string
   /**
@@ -5762,12 +5630,10 @@ export interface DescribeCloudStorageOrderResponse {
   ChannelId?: number
   /**
    * 订单金额，单位为分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Price?: number
   /**
    * 支付金额，单位为分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Amount?: number
   /**
@@ -5796,7 +5662,6 @@ export interface DescribeActivateLicenseServiceRequest {
 export interface CreateTRTCSignaturesWithRoomIdResponse {
   /**
    * 返回参数数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TRTCParamList?: Array<TRTCParams>
   /**
@@ -5866,92 +5731,74 @@ export interface DeviceInfo {
   /**
    * 首次上线时间
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstOnlineTime?: number
   /**
    * 最后一次上线时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoginTime?: number
   /**
    * 设备创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 设备固件版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 设备证书
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceCert?: string
   /**
    * 日志级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogLevel?: number
   /**
    * LoRaWAN 设备地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DevAddr?: string
   /**
    * LoRaWAN 应用密钥
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppKey?: string
   /**
    * LoRaWAN 设备唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DevEUI?: string
   /**
    * LoRaWAN 应用会话密钥
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppSKey?: string
   /**
    * LoRaWAN 网络会话密钥
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NwkSKey?: string
   /**
    * 创建人Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserId?: number
   /**
    * 创建人昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorNickName?: string
   /**
    * 启用/禁用状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableState?: number
   /**
    * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: string
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 设备类型（设备、子设备、网关）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
   /**
    * 是否是 lora 设备
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLora?: boolean
 }
@@ -6333,17 +6180,14 @@ export interface ListEventHistoryRequest {
 export interface WXIoTDeviceInfo {
   /**
    * sn信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SN?: string
   /**
    * 票据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SNTicket?: string
   /**
    * 模板ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelId?: string
 }
@@ -6414,14 +6258,12 @@ export interface PublishRRPCMessageRequest {
 export interface DescribePositionFenceListResponse {
   /**
    * 围栏列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<PositionFenceInfo>
+  List?: Array<PositionFenceInfo>
   /**
    * 围栏数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6498,22 +6340,18 @@ export interface DescribeProjectResponse {
 export interface DeviceData {
   /**
    * 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceCert?: string
   /**
    * 设备名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName?: string
   /**
    * 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DevicePrivateKey?: string
   /**
    * 对称加密密钥，base64编码。采用对称加密时返回该参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DevicePsk?: string
 }
@@ -6581,42 +6419,34 @@ wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、els
   ModuleId?: number
   /**
    * 是否使用脚本进行二进制转json功能 可以取值 true / false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableProductScript?: string
   /**
    * 创建人 UinId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserId?: number
   /**
    * 创建者昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorNickName?: string
   /**
    * 绑定策略（1：强踢；2：非强踢；0：表示无意义）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindStrategy?: number
   /**
    * 设备数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceCount?: number
   /**
    * 平均传输速率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rate?: string
   /**
    * 有效期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Period?: string
   /**
    * 互联互通标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsInterconnection?: number
 }
@@ -6628,11 +6458,11 @@ export interface BindDeviceInfo {
   /**
    * 产品ID。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 设备名称。
    */
-  DeviceName: string
+  DeviceName?: string
 }
 
 /**
@@ -6851,7 +6681,6 @@ export interface ModifyCloudStorageAIServiceCallbackRequest {
 export interface GetWechatDeviceTicketResponse {
   /**
    * 微信设备信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WXDeviceInfo?: WXDeviceInfo
   /**
@@ -6968,42 +6797,34 @@ export interface FirmwareInfo {
   CreateTime?: number
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 固件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 固件描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: string
   /**
    * 固件升级模块
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FwType?: string
   /**
    * 创建者子 uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserId?: number
   /**
    * 创建者昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorNickName?: string
   /**
    * 固件用户自定义配置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDefined?: string
 }
@@ -7056,32 +6877,26 @@ export interface CreateFenceBindRequest {
 export interface AuthMiniProgramAppInfo {
   /**
    * 小程序APPID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MiniProgramAppId?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 小程序名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MiniProgramName?: string
   /**
    * 激活码数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseNum?: number
   /**
-   * 应用ID 
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用ID
    */
   IotAppId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IotAppName?: string
 }
@@ -7093,47 +6908,43 @@ export interface FamilySubDevice {
   /**
    * 产品Id
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 设备名称
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 设备ID
    */
-  DeviceId: string
+  DeviceId?: string
   /**
    * 设备别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AliasName: string
+  AliasName?: string
   /**
    * 设备绑定的家庭ID
    */
-  FamilyId: string
+  FamilyId?: string
   /**
    * 设备所在的房间ID，默认"0"
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoomId: string
+  RoomId?: string
   /**
    * 图标
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IconUrl: string
+  IconUrl?: string
   /**
    * grid图标
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IconUrlGrid: string
+  IconUrlGrid?: string
   /**
    * 设备绑定时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 设备更新时间戳
    */
-  UpdateTime: number
+  UpdateTime?: number
 }
 
 /**
@@ -7209,12 +7020,11 @@ export interface GetLoRaGatewayListResponse {
   /**
    * 返回总数
    */
-  Total: number
+  Total?: number
   /**
    * 返回详情项
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Gateways: Array<LoRaGatewayItem>
+  Gateways?: Array<LoRaGatewayItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7249,17 +7059,14 @@ export interface TopicRule {
   Sql?: string
   /**
    * 规则描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 行为的JSON字符串。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Actions?: string
   /**
    * 是否禁用规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleDisabled?: boolean
 }
@@ -7386,32 +7193,26 @@ export interface IotApplication {
   TPNSAndroidRegion?: string
   /**
    * 自主短信配置APPID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfSmsAppId?: string
   /**
    * 自主短信配置APPKey
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfSmsAppKey?: string
   /**
    * 自主短信配置签名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfSmsSign?: string
   /**
    * 自主短信配置模板ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfSmsTemplateId?: number
   /**
    * 第三方小程序强提醒开关 0：关闭；1：开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatNotifyStatus?: number
   /**
    * 互联互通产品ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InterconnectionProducts?: string
 }
@@ -7455,44 +7256,43 @@ export interface PositionSpaceInfo {
   /**
    * 项目Id
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 位置空间Id
    */
-  SpaceId: string
+  SpaceId?: string
   /**
    * 位置空间名称
    */
-  SpaceName: string
+  SpaceName?: string
   /**
    * 授权类型
    */
-  AuthorizeType: number
+  AuthorizeType?: number
   /**
    * 描述备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 产品列表
    */
-  ProductIdList: Array<string>
+  ProductIdList?: Array<string>
   /**
    * 缩略图
    */
-  Icon: string
+  Icon?: string
   /**
    * 创建时间
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 更新时间
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 用户自定义地图缩放
    */
-  Zoom: number
+  Zoom?: number
 }
 
 /**
@@ -7663,9 +7463,8 @@ ye1w3d：事件3天周套餐
 export interface DescribeLoRaFrequencyResponse {
   /**
    * 返回详情项
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: LoRaFrequencyEntry
+  Data?: LoRaFrequencyEntry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7897,27 +7696,35 @@ export interface DeviceActivationDetail {
   /**
    * 可注册设备数
    */
-  TotalDeviceNum: number
+  TotalDeviceNum?: number
   /**
    * 已注册设备数
    */
-  UsedDeviceNum: number
+  UsedDeviceNum?: number
   /**
    * 设备授权数
    */
-  TotalNormalLicense: number
+  TotalNormalLicense?: number
   /**
    * 已使用设备授权数
    */
-  UsedNormalLicense: number
+  UsedNormalLicense?: number
   /**
    * 蓝牙授权数
    */
-  TotalBluetoothLicense: number
+  TotalBluetoothLicense?: number
   /**
    * 已使用蓝牙授权数
    */
-  UsedBluetoothLicense: number
+  UsedBluetoothLicense?: number
+  /**
+   * 可免费注册设备数
+   */
+  TotalFreeLicense?: number
+  /**
+   * 已使用注册设备数
+   */
+  UsedFreeLicense?: number
 }
 
 /**

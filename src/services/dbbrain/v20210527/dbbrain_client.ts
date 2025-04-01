@@ -56,6 +56,7 @@ import {
   SlowLogTopSqlItem,
   CreateKillTaskResponse,
   DescribeAuditInstanceListResponse,
+  DescribeRedisSlowLogTopSqlsResponse,
   DiagHistoryEventItem,
   CreateUserAutonomyProfileResponse,
   DescribeProxySessionKillTasksRequest,
@@ -68,6 +69,7 @@ import {
   AutonomyUserProfileInfo,
   SessionItem,
   StatisticDataInfo,
+  DescribeRedisSlowLogTopSqlsRequest,
   AutonomyEventVo,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
@@ -146,6 +148,7 @@ import {
   DescribeRedisCommandCostStatisticsResponse,
   MonitorMetric,
   ProfileInfo,
+  SqlCostDistribution,
   UserProfile,
   AddUserContactRequest,
   CreateSqlFilterRequest,
@@ -194,6 +197,7 @@ import {
   CreateSqlFilterResponse,
   DescribeSlowLogUserHostStatsRequest,
   DescribeTopSpaceSchemasResponse,
+  DescribeSlowLogQueryTimeStatsResponse,
   CreateProxySessionKillTaskResponse,
   CancelDBAutonomyActionRequest,
   DeleteDBDiagReportTasksRequest,
@@ -232,9 +236,11 @@ import {
   DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
   DescribeDiagDBInstancesRequest,
+  SlowLogAgg,
   Table,
   DescribeMySqlProcessListRequest,
   DescribeSecurityAuditLogDownloadUrlsResponse,
+  DescribeSlowLogQueryTimeStatsRequest,
   DescribeProxySessionKillTasksResponse,
 } from "./dbbrain_models"
 
@@ -858,6 +864,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 统计排序指定时间段内的top慢sql。
+   */
+  async DescribeRedisSlowLogTopSqls(
+    req: DescribeRedisSlowLogTopSqlsRequest,
+    cb?: (error: string, rep: DescribeRedisSlowLogTopSqlsResponse) => void
+  ): Promise<DescribeRedisSlowLogTopSqlsResponse> {
+    return this.request("DescribeRedisSlowLogTopSqls", req, cb)
+  }
+
+  /**
    * 创建中断会话的任务。
    */
   async CreateKillTask(
@@ -995,5 +1011,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserAutonomyProfileResponse) => void
   ): Promise<ModifyUserAutonomyProfileResponse> {
     return this.request("ModifyUserAutonomyProfile", req, cb)
+  }
+
+  /**
+   * 统计排序指定时间段内的top慢sql。
+   */
+  async DescribeSlowLogQueryTimeStats(
+    req: DescribeSlowLogQueryTimeStatsRequest,
+    cb?: (error: string, rep: DescribeSlowLogQueryTimeStatsResponse) => void
+  ): Promise<DescribeSlowLogQueryTimeStatsResponse> {
+    return this.request("DescribeSlowLogQueryTimeStats", req, cb)
   }
 }

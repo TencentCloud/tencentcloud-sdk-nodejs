@@ -3268,6 +3268,16 @@ it("vpc.v20170312.DescribeIp6Translators", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeNatGatewayFlowMonitorDetail", async function () {
+    try {
+       const data = await client.DescribeNatGatewayFlowMonitorDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DisableGatewayFlowMonitor", async function () {
     try {
        const data = await client.DisableGatewayFlowMonitor({})

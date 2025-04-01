@@ -1983,7 +1983,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建位置空间
+   * 创建位置空间。
    */
   async CreatePositionSpace(
     req: CreatePositionSpaceRequest,

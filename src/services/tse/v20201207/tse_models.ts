@@ -1038,17 +1038,14 @@ export interface SourceInstanceAuth {
 export interface AutoScalerPolicy {
   /**
    * 类型，Pods
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: number
   /**
    * 扩容周期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodSeconds?: number
 }
@@ -1093,22 +1090,18 @@ export interface KVMapping {
 export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
   /**
    * 定时伸缩周期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Period?: string
   /**
    * 定时伸缩开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartAt?: string
   /**
    * 定时伸缩目标节点数，不超过指标伸缩中定义的最大节点数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetReplicas?: number
   /**
    * 定时伸缩cron表达式，无需输入
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Crontab?: string
 }
@@ -1327,12 +1320,10 @@ export interface DeleteCloudNativeAPIGatewayRouteRateLimitRequest {
 export interface AutoScalerBehavior {
   /**
    * 扩容行为配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleUp?: AutoScalerRules
   /**
    * 缩容行为配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleDown?: AutoScalerRules
 }
@@ -2152,7 +2143,6 @@ export interface ModifyCloudNativeAPIGatewayServiceRateLimitResponse {
 export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
   /**
    * 最大副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxReplicas?: number
   /**
@@ -2288,17 +2278,14 @@ export interface DescribeSREInstancesResponse {
 export interface AutoScalerRules {
   /**
    * 稳定窗口时间，扩容时默认0，缩容时默认300
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StabilizationWindowSeconds?: number
   /**
    * 选择策略依据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SelectPolicy?: string
   /**
    * 扩缩容策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Policies?: Array<AutoScalerPolicy>
 }
@@ -7739,7 +7726,6 @@ export interface CreateAutoScalerResourceStrategyResponse {
   Result?: boolean
   /**
    * 策略Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyId?: string
   /**
@@ -7823,17 +7809,14 @@ export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
    * 指标资源名称
 - cpu
 - memory
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
   /**
    * 指标目标类型，目前只支持百分比Utilization
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetType?: string
   /**
    * 指标目标值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetValue?: number
 }

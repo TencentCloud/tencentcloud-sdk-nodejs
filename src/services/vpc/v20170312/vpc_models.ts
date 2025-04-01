@@ -2727,6 +2727,33 @@ export interface DeleteReserveIpAddressesResponse {
 }
 
 /**
+ * 网络探测目的IP的验证结果。
+ */
+export interface NetDetectIpState {
+  /**
+   * 探测目的IPv4地址。
+   */
+  DetectDestinationIp?: string
+  /**
+   * 探测结果。
+0：成功；
+-1：查询不到路由丢包；
+-2：外出ACL丢包；
+-3：IN ACL丢包；
+-4：其他错误；
+   */
+  State?: number
+  /**
+   * 时延，单位毫秒
+   */
+  Delay?: number
+  /**
+   * 丢包率
+   */
+  PacketLossRate?: number
+}
+
+/**
  * ResetRoutes返回参数结构体
  */
 export interface ResetRoutesResponse {
@@ -7903,30 +7930,37 @@ export interface DescribeVpnGatewaysRequest {
 }
 
 /**
- * 网络探测目的IP的验证结果。
+ * nat网关流量监控明细。
  */
-export interface NetDetectIpState {
+export interface NatGatewayFlowMonitorDetail {
   /**
-   * 探测目的IPv4地址。
+   * 来源`IP`。
    */
-  DetectDestinationIp?: string
+  PrivateIpAddress?: string
   /**
-   * 探测结果。
-0：成功；
--1：查询不到路由丢包；
--2：外出ACL丢包；
--3：IN ACL丢包；
--4：其他错误；
+   * 入包量。
    */
-  State?: number
+  InPkg?: number
   /**
-   * 时延，单位毫秒
+   * 出包量。
    */
-  Delay?: number
+  OutPkg?: number
   /**
-   * 丢包率
+   * 入流量，单位：`Byte`。
    */
-  PacketLossRate?: number
+  InTraffic?: number
+  /**
+   * 出流量，单位：`Byte`。
+   */
+  OutTraffic?: number
+  /**
+   * 并发连接数。仅标准型nat支持此参数。
+   */
+  ConcurrentConnectionCount?: number
+  /**
+   * 新建连接速率。仅标准型nat支持此参数。
+   */
+  NewConnectionRate?: number
 }
 
 /**
@@ -11123,6 +11157,36 @@ export interface ModifyTrafficMirrorAttributeResponse {
 }
 
 /**
+ * DescribeNatGatewayFlowMonitorDetail请求参数结构体
+ */
+export interface DescribeNatGatewayFlowMonitorDetailRequest {
+  /**
+   * 时间点。表示要查询的时刻。聚合粒度为60、300时，会查询最近一个整分钟开始的聚合周期；聚合粒度为3600时，会查询最近一个整点开始的聚合周期；聚合粒度为86400时，会查询最近一个整天开始的聚合周期。形如：`2019-03-24T10:51:23+08:00`。
+   */
+  TimePoint: string
+  /**
+   * NAT网关的ID，形如：`nat-ig8xpno8`。
+   */
+  NatGatewayId: string
+  /**
+   * 展示排序靠前的数据。默认值：10，表示默认展示排序前 10 的数据。最大值：100。
+   */
+  TopN?: number
+  /**
+   * 排序字段。支持：入包量`InPkg`、出包量`OutPkg`、入流量`InTraffic`、出流量`OutTraffic`，标准型nat额外支持 并发连接数`ConcurrentConnectionCount` 、新建连接速率`NewConnectionRate`。默认值`OutTraffic`。
+   */
+  OrderField?: string
+  /**
+   * 聚合时间粒度。支持：60、300、3600、86400，即按照1分钟、5分钟、1小时、1天进行聚合查询。
+   */
+  AggregationTimeRange?: number
+  /**
+   * 是否查询全部指标。默认值：True，表示查询全部指标。
+   */
+  AllMetricMode?: boolean
+}
+
+/**
  * ModifyGatewayFlowQos返回参数结构体
  */
 export interface ModifyGatewayFlowQosResponse {
@@ -11136,6 +11200,24 @@ export interface ModifyGatewayFlowQosResponse {
  * ModifyNetworkInterfaceQos返回参数结构体
  */
 export interface ModifyNetworkInterfaceQosResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeNatGatewayFlowMonitorDetail返回参数结构体
+ */
+export interface DescribeNatGatewayFlowMonitorDetailResponse {
+  /**
+   * 符合条件的对象数。
+   */
+  TotalCount?: number
+  /**
+   * 网关流量监控明细。
+   */
+  NatGatewayFlowMonitorDetailSet?: Array<NatGatewayFlowMonitorDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

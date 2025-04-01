@@ -1064,6 +1064,24 @@ export interface DescribeAuditInstanceListResponse {
 }
 
 /**
+ * DescribeRedisSlowLogTopSqls返回参数结构体
+ */
+export interface DescribeRedisSlowLogTopSqlsResponse {
+  /**
+   * 符合条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 慢日志 top sql 列表。
+   */
+  Rows?: Array<SlowLogAgg>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例诊断历史事件
  */
 export interface DiagHistoryEventItem {
@@ -1314,6 +1332,48 @@ export interface StatisticDataInfo {
    * 数量。
    */
   Count?: number
+}
+
+/**
+ * DescribeRedisSlowLogTopSqls请求参数结构体
+ */
+export interface DescribeRedisSlowLogTopSqlsRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+  /**
+   * 开始时间，如“2019-09-10 12:13:14”。
+   */
+  StartTime: string
+  /**
+   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   */
+  EndTime: string
+  /**
+   * 服务产品类型，支持值： "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * Redis Proxy节点ID。
+   */
+  InstanceProxyId?: string
+  /**
+   * 排序键，支持ExecTimes,QueryTime,QueryTimeMax,QueryTimeAvg等排序键，默认为QueryTime。
+   */
+  SortBy?: string
+  /**
+   * 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。
+   */
+  OrderBy?: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -1827,9 +1887,21 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
    */
   EndTime: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
    */
   Product?: string
+  /**
+   * Proxy节点ID。
+   */
+  InstanceProxyId?: string
+  /**
+   * 实列节点ID。
+   */
+  InstanceNodeId?: string
+  /**
+   * 查询类型，目前支持值：mongod，mongos。
+   */
+  Type?: string
 }
 
 /**
@@ -3026,6 +3098,28 @@ export interface ProfileInfo {
    * 邮件模板的内容。
    */
   MailConfiguration: MailConfiguration
+}
+
+/**
+ * 分段耗时 SQL 分布
+ */
+export interface SqlCostDistribution {
+  /**
+   * sql条数。
+   */
+  Count?: number
+  /**
+   * 分段耗时下边界，单位是秒。
+   */
+  From?: number
+  /**
+   * 分段耗时上边界，单位是秒。
+   */
+  To?: number
+  /**
+   * 耗时占比。
+   */
+  Ratio?: number
 }
 
 /**
@@ -4286,6 +4380,24 @@ export interface DescribeTopSpaceSchemasResponse {
 }
 
 /**
+ * DescribeSlowLogQueryTimeStats返回参数结构体
+ */
+export interface DescribeSlowLogQueryTimeStatsResponse {
+  /**
+   * 符合条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 慢日志 top sql 列表。
+   */
+  Items?: Array<SqlCostDistribution>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProxySessionKillTask返回参数结构体
  */
 export interface CreateProxySessionKillTaskResponse {
@@ -5210,6 +5322,44 @@ export interface DescribeDiagDBInstancesRequest {
 }
 
 /**
+ * redis top慢日志聚合详情。
+ */
+export interface SlowLogAgg {
+  /**
+   * 命令模版。
+   */
+  Cmd?: string
+  /**
+   * 命令详情。
+   */
+  Detail?: string
+  /**
+   * 执行次数。
+   */
+  ExecTimes?: number
+  /**
+   * 总耗时。
+   */
+  QueryTime?: number
+  /**
+   * 平均执行时间。
+   */
+  QueryTimeAvg?: number
+  /**
+   * 最大执行时间。
+   */
+  QueryTimeMax?: number
+  /**
+   * 最小执行时间。
+   */
+  QueryTimeMin?: number
+  /**
+   * 总耗时占比
+   */
+  QueryTimeRatio?: number
+}
+
+/**
  * 表结构。
  */
 export interface Table {
@@ -5301,6 +5451,40 @@ export interface DescribeSecurityAuditLogDownloadUrlsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSlowLogQueryTimeStats请求参数结构体
+ */
+export interface DescribeSlowLogQueryTimeStatsRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+  /**
+   * 开始时间，如“2019-09-10 12:13:14”。
+   */
+  StartTime: string
+  /**
+   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   */
+  EndTime: string
+  /**
+   * "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
+   */
+  Product: string
+  /**
+   * Proxy节点ID。
+   */
+  InstanceProxyId?: string
+  /**
+   * 实列节点ID。
+   */
+  InstanceNodeId?: string
+  /**
+   * 查询类型，目前支持值：mongod，mongos。
+   */
+  Type?: string
 }
 
 /**

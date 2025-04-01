@@ -265,13 +265,13 @@ export interface DescribeDCDBPriceResponse {
    * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
    * 币种：国内站为人民币，国际站为美元
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 实际价格，受折扣等影响，可能和原价不同
    * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述
    * 币种：国内站人民币，国际站美元
    */
-  Price: number
+  Price?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -965,6 +965,10 @@ export interface BriefNodeInfo {
    * 节点所属分片的分片ID
    */
   ShardId?: string
+  /**
+   * 节点所在可用区
+   */
+  Zone?: string
 }
 
 /**
@@ -1073,6 +1077,10 @@ export interface NodeInfo {
    * DB节点角色，取值为master或者slave
    */
   Role?: string
+  /**
+   * 节点所在的可用区
+   */
+  Zone?: string
 }
 
 /**
@@ -1624,6 +1632,10 @@ export interface DescribeDCDBInstanceDetailResponse {
    */
   IsDcnSwitchSupported?: number
   /**
+   * cpu类型，英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD
+   */
+  CpuType?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1702,6 +1714,10 @@ export interface DescribeDCDBPriceRequest {
    * microPent：微分
    */
   AmountUnit?: string
+  /**
+   * Cpu类型，如：英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD
+   */
+  CpuType?: string
 }
 
 /**
@@ -2127,7 +2143,12 @@ export interface GrantAccountPrivilegesRequest {
 /**
  * DescribeShardSpec请求参数结构体
  */
-export type DescribeShardSpecRequest = null
+export interface DescribeShardSpecRequest {
+  /**
+   * Cpu类型，如：英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD
+   */
+  CpuType?: string
+}
 
 /**
  * DescribeDCDBShards请求参数结构体
@@ -2168,13 +2189,21 @@ export interface SwitchDBInstanceHARequest {
    */
   InstanceId: string
   /**
-   * 切换的目标区域，会自动选择该可用区中延迟最低的节点。
+   * 指定可用区标识符，具体含义由zoneMode参数决定。 
+
+- 当zoneMode为target时表示目标可用区 
+
+- 当zoneMode为avoid时表示需避开的故障可用区
    */
   Zone: string
   /**
    * 指定分片实例id进行切换
    */
   ShardInstanceIds?: Array<string>
+  /**
+   * 可用区模式选择器，定义zone参数的语义类型。  - 默认值：target  - 可选值：target, avoid
+   */
+  ZoneMode?: string
 }
 
 /**
@@ -3175,7 +3204,7 @@ export interface DescribeShardSpecResponse {
   /**
    * 按机型分类的可售卖规格列表
    */
-  SpecConfig: Array<SpecConfig>
+  SpecConfig?: Array<SpecConfig>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3650,6 +3679,10 @@ export interface CreateHourDCDBInstanceRequest {
    * DCN同步模式，0：异步， 1：强同步
    */
   DcnSyncMode?: number
+  /**
+   * Cpu类型，如：英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD
+   */
+  CpuType?: string
 }
 
 /**
@@ -4188,6 +4221,10 @@ export interface CreateDCDBInstanceRequest {
    * DCN同步模式，0：异步， 1：强同步
    */
   DcnSyncMode?: number
+  /**
+   * Cpu类型，如：英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD
+   */
+  CpuType?: string
 }
 
 /**
@@ -4501,6 +4538,14 @@ export interface RegionInfo {
    * 可选择的主可用区和从可用区
    */
   AvailableChoice?: Array<ShardZoneChooseInfo>
+  /**
+   * 主机类型，如：物理机：Machine，容器：Container。
+   */
+  HostType?: string
+  /**
+   * Cpu类型，如：英特尔：Intel/AMD，海光：Hygon
+   */
+  CpuType?: string
 }
 
 /**

@@ -409,7 +409,8 @@ export interface DescribeMaterialListRequest {
    */
   MaterialId?: string
   /**
-   * 每次拉取条数
+   * 每次拉取条数。
+每次拉取素材最多可支持拉取20条素材信息，如果需要拉取全部素材信息，可以分多次请求拉取全部素材信息。
    */
   Limit?: number
   /**

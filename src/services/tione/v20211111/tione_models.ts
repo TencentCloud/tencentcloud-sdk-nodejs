@@ -2924,7 +2924,7 @@ HYBRID_PAID:
    * 定时停止的配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduledAction?: string
+  ScheduledAction?: ScheduledAction
   /**
    * 实例列表
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4432,6 +4432,14 @@ UPDATING 更新中
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AvailableReplicasCount?: number
+  /**
+   * 服务组的subuin
+   */
+  SubUin?: string
+  /**
+   * 服务组的app_id
+   */
+  AppId?: number
 }
 
 /**

@@ -1507,7 +1507,7 @@ export interface DiskConfig {
    */
   Available?: boolean
   /**
-   * 付费模式。取值范围：<br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费。
+   * 付费模式。取值范围：<br><li>PREPAID：表示预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费。</li>
    */
   DiskChargeType?: string
   /**
@@ -1520,26 +1520,25 @@ export interface DiskConfig {
    */
   InstanceFamily?: string
   /**
-   * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
+   * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘</li><br><li>CLOUD_PREMIUM：表示高性能云硬盘</li><br><li>CLOUD_SSD：SSD表示SSD云硬盘。</li>
    */
   DiskType?: string
   /**
    * 云盘大小变化的最小步长，单位GB。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StepSize: number
+  StepSize?: number
   /**
    * 额外的性能区间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtraPerformanceRange: Array<number | bigint>
+  ExtraPerformanceRange?: Array<number | bigint>
   /**
    * 实例机型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceClass?: string
   /**
-   * 云盘类型。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
+   * 云盘类型。取值范围：<br><li>SYSTEM_DISK：表示系统盘</li><br><li>DATA_DISK：表示数据盘。</li>
    */
   DiskUsage?: string
   /**
@@ -1552,7 +1551,6 @@ export interface DiskConfig {
   MaxDiskSize?: number
   /**
    * 描述预付费或后付费云盘的价格。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Price?: Price
 }
@@ -2387,7 +2385,6 @@ export interface Cdc {
   CdcState?: string
   /**
    * 独享集群所属的[可用区](/document/product/213/15753#ZoneInfo)ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
@@ -2396,7 +2393,6 @@ export interface Cdc {
   CdcName?: string
   /**
    * 独享集群的资源容量大小。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcResource?: CdcSize
   /**

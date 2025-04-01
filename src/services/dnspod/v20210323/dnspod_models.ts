@@ -125,43 +125,40 @@ export interface CreateTXTRecordResponse {
 export interface DescribeBatchTaskDetail {
   /**
    * 见BatchRecordInfo
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordList: Array<BatchRecordInfo>
+  RecordList?: Array<BatchRecordInfo>
   /**
    * 任务编号
    */
-  Id: number
+  Id?: number
   /**
    * 域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainGrade: string
+  DomainGrade?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 该条任务运行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operation: string
+  Operation?: string
   /**
    * 域名ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainId: number
+  DomainId?: number
 }
 
 /**
@@ -374,48 +371,41 @@ export interface DescribeSnapshotListResponse {
 export interface CreateDomainBatchRecord {
   /**
    * 子域名(主机记录)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubDomain: string
+  SubDomain?: string
   /**
    * 记录类型, 详见 DescribeRecordType 接口
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordType: string
+  RecordType?: string
   /**
    * 解析记录的线路，详见 DescribeRecordLineList 接口
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordLine: string
+  RecordLine?: string
   /**
    * 记录值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 记录的 TTL 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TTL: number
+  TTL?: number
   /**
    * 记录添加状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operation: string
+  Operation?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 此条记录在列表中的ID
    */
-  Id: number
+  Id?: number
 }
 
 /**
@@ -1674,17 +1664,14 @@ export interface CreateRecordBatchRequest {
 export interface LeftTime {
   /**
    * 剩余天数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Days?: number
   /**
    * 剩余小时数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Hours?: number
   /**
    * 剩余分钟数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mins?: number
 }
@@ -2174,7 +2161,6 @@ export interface DescribeSnapshotRollbackTaskRequest {
 export interface CheckRecordSnapshotRollbackResponse {
   /**
    * 错误原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
@@ -2257,43 +2243,38 @@ export interface DescribeDomainPreviewRequest {
 export interface CreateRecordBatchDetail {
   /**
    * 见RecordInfoBatch
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordList: Array<CreateRecordBatchRecord>
+  RecordList?: Array<CreateRecordBatchRecord>
   /**
    * 任务编号
    */
-  Id: number
+  Id?: number
   /**
    * 域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainGrade: string
+  DomainGrade?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 该条任务运行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operation: string
+  Operation?: string
   /**
    * 域名ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainId: number
+  DomainId?: number
 }
 
 /**
@@ -2643,56 +2624,48 @@ export interface DeleteRecordResponse {
 export interface CreateRecordBatchRecord {
   /**
    * 子域名(主机记录)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubDomain: string
+  SubDomain?: string
   /**
    * 记录类型, 详见 DescribeRecordType 接口
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordType: string
+  RecordType?: string
   /**
    * 解析记录的线路，详见 DescribeRecordLineList 接口
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordLine: string
+  RecordLine?: string
   /**
    * 记录值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 记录的 TTL 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TTL: number
+  TTL?: number
   /**
    * 记录添加状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operation: string
+  Operation?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 此条记录在列表中的ID
    */
-  Id: number
+  Id?: number
   /**
    * 记录的MX权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MX: number
+  MX?: number
   /**
    * 记录的权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
 }
@@ -2874,12 +2847,10 @@ export interface CheckSnapshotRollbackResponse {
   Timeout?: number
   /**
    * 检查失败数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Failed?: number
   /**
    * 失败记录信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedRecordList?: Array<SnapshotRecord>
   /**
@@ -3856,7 +3827,6 @@ DOMAIN_EXPORT：导出域名列表
   Type?: string
   /**
    * 剩余时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftTime?: LeftTime
 }
@@ -4594,38 +4564,33 @@ export interface DescribeDomainPurviewRequest {
 export interface CreateDomainBatchDetail {
   /**
    * 见RecordInfoBatch
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordList: Array<CreateDomainBatchRecord>
+  RecordList?: Array<CreateDomainBatchRecord>
   /**
    * 任务编号
    */
-  Id: number
+  Id?: number
   /**
    * 域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainGrade: string
+  DomainGrade?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 该条任务运行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operation: string
+  Operation?: string
 }
 
 /**
