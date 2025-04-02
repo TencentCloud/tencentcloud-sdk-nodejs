@@ -2321,6 +2321,10 @@ export interface DBInfo {
    */
   TmpToken?: string
   /**
+   * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
+   */
+  EncryptConn?: string
+  /**
    * tdsql的分片id。如节点类型为set必填。
    */
   SetId?: string
@@ -3450,6 +3454,26 @@ export interface DynamicOptions {
    * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作；不能部分更新该选项的内部字段；有更新时、需要全量更新该字段
    */
   ConflictHandleOption?: ConflictHandleOption
+  /**
+   * 同步到kafka链路的kafka配置
+   */
+  KafkaOption?: KafkaOption
+  /**
+   * 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持
+   */
+  FilterBeginCommit?: boolean
+  /**
+   * 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持
+   */
+  FilterCheckpoint?: boolean
+  /**
+   * 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、ExecuteAfterIgnore(忽略并继续执行)
+   */
+  DealOfExistSameTable?: string
+  /**
+   * 仅增量任务重新设置指定位点
+   */
+  StartPosition?: string
 }
 
 /**
