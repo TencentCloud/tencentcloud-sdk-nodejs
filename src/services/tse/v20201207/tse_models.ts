@@ -91,27 +91,22 @@ export interface GovernanceAlias {
   Namespace?: string
   /**
    * 服务别名的描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 服务别名创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 服务别名修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 服务别名ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 该服务别名是否可以编辑
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Editable?: boolean
 }
@@ -136,12 +131,10 @@ export interface DescribeCloudNativeAPIGatewayUpstreamRequest {
 export interface Metadata {
   /**
    * 元数据键名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 元数据键值。不填则默认为空字符串。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -746,22 +739,18 @@ export interface DescribeCloudNativeAPIGatewayResult {
 export interface PolarisCLSTopicInfo {
   /**
    * 日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogSetId?: string
   /**
    * 日志集名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogSetName?: string
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * 日志主题名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
 }
@@ -966,47 +955,38 @@ export interface DescribeCloudNativeAPIGatewayConfigRequest {
 export interface KongTarget {
   /**
    * Host
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host: string
   /**
    * 端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
   /**
    * 权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight: number
   /**
    * 健康状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Health?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * Target的来源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
   /**
    * CVM实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmInstanceId?: string
   /**
    * CVM实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmInstanceName?: string
   /**
    * target标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<string>
 }
@@ -1074,12 +1054,10 @@ export interface DescribeNacosServerInterfacesResponse {
 export interface KVMapping {
   /**
    * key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * value
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -1168,7 +1146,6 @@ export interface EnvInfo {
   ClientBandWidth?: number
   /**
    * 客户端内网开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableConfigIntranet?: boolean
 }
@@ -1193,47 +1170,38 @@ export interface DeleteGovernanceInstancesRequest {
 export interface ConfigFileTemplate {
   /**
    * 配置文件模板id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 配置文件模板名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 配置文件模板内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 配置文件模板格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Format?: string
   /**
    * 配置文件模板注释
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 配置文件模板创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 配置文件模板创建者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateBy?: string
   /**
    * 配置文件模板修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 配置文件模板修改者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyBy?: string
 }
@@ -1348,7 +1316,6 @@ export interface ListFilter {
 export interface CreateCloudNativeAPIGatewayPublicNetworkResponse {
   /**
    * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: CreatePublicNetworkResult
   /**
@@ -1596,32 +1563,26 @@ export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
 export interface ReleaseVersion {
   /**
    * 配置发布的版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 是否生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Active?: boolean
   /**
    * 配置发布的ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 配置发布的命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 配置发布的分组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Group?: string
   /**
    * 配置发布的文件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileName?: string
 }
@@ -1632,9 +1593,8 @@ export interface ReleaseVersion {
 export interface PolarisLimiterAddress {
   /**
    * VPC接入IP列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntranetAddress: string
+  IntranetAddress?: string
 }
 
 /**
@@ -2296,47 +2256,38 @@ export interface AutoScalerRules {
 export interface GovernanceInterfaceDescription {
   /**
    * 契约接口ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: string
   /**
    * 方法名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
    * 路径/接口名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
    * 内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 创建来源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
   /**
    * 信息摘要
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Revision?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 接口名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -2694,22 +2645,18 @@ export interface DescribeSREInstanceAccessAddressResponse {
   EnvAddressInfos?: Array<EnvAddressInfo>
   /**
    * 控制台公网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsoleInternetAddress?: string
   /**
    * 控制台内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsoleIntranetAddress?: string
   /**
    * 客户端公网带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetBandWidth?: number
   /**
    * 控制台公网带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsoleInternetBandWidth?: number
   /**
@@ -2719,7 +2666,6 @@ export interface DescribeSREInstanceAccessAddressResponse {
   LimiterAddressInfos?: Array<PolarisLimiterAddress>
   /**
    * InternetAddress 的公网 CLB 多可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBMultiRegion?: CLBMultiRegion
   /**
@@ -2894,12 +2840,10 @@ export interface VpcInfo {
   SubnetId: string
   /**
    * 内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IntranetAddress?: string
   /**
    * 负载均衡均衡接入点子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LbSubnetId?: string
 }
@@ -3088,9 +3032,8 @@ export interface KongServicePreview {
 export interface NacosServerInterface {
   /**
    * 接口名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Interface: string
+  Interface?: string
 }
 
 /**
@@ -3382,22 +3325,18 @@ export interface EnvAddressInfo {
   ConfigInternetServiceIp?: string
   /**
    * config内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigIntranetAddress?: string
   /**
    * 是否开启config内网clb
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableConfigIntranet?: boolean
   /**
    * 客户端公网带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetBandWidth?: number
   /**
    * 客户端公网CLB多可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBMultiRegion?: CLBMultiRegion
 }
@@ -3657,47 +3596,38 @@ export interface KongRoutePreview {
 export interface DescribeInstanceRegionInfo {
   /**
    * 引擎部署地域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineRegion?: string
   /**
    * 引擎在该地域的副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Replica?: number
   /**
    * 引擎在该地域的规格id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecId?: string
   /**
    * 客户端内网的网络信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IntranetVpcInfos?: Array<VpcInfo>
   /**
    * 控制台内网的网络信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsoleIntranetVpcInfos?: Array<VpcInfo>
   /**
    * 是否开公网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableClientInternet?: boolean
   /**
    * 限流客户端内网的网络信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LimiterIntranetVpcInfos?: Array<VpcInfo>
   /**
    * 是否为主地域，仅在服务治理中心多地域有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MainRegion?: boolean
   /**
    * 该地域所在的EKS集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EKSClusterID?: string
 }
@@ -3708,57 +3638,46 @@ export interface DescribeInstanceRegionInfo {
 export interface GovernanceServiceContract {
   /**
    * 契约名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 所属服务命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace: string
   /**
    * 协议
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol: string
   /**
    * 契约ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: string
   /**
    * 所属服务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Service?: string
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 信息摘要
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Revision?: string
   /**
    * 额外内容描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 契约接口列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Interfaces?: Array<GovernanceInterfaceDescription>
 }
@@ -3855,7 +3774,6 @@ export interface ModifyAutoScalerResourceStrategyResponse {
 export interface CreateCloudNativeAPIGatewayCertificateResponse {
   /**
    * 创建证书结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: CertificateInfo
   /**
@@ -3870,17 +3788,14 @@ export interface CreateCloudNativeAPIGatewayCertificateResponse {
 export interface StorageOption {
   /**
    * 存储对象，分为snap和txn两种
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 存储类型，分为三类CLOUD_PREMIUM/CLOUD_SSD/CLOUD_SSD_PLUS，分别对应高性能云硬盘、SSD云硬盘、增强型SSD云硬盘
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 存储容量，[50, 3200]的范围
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Capacity?: number
 }
@@ -3924,7 +3839,6 @@ export interface UpdateUpstreamHealthCheckConfigRequest {
 export interface DescribeConfigFileResponse {
   /**
    * 配置文件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFile?: ConfigFile
   /**
@@ -3953,17 +3867,14 @@ export interface AccurateQpsThreshold {
 export interface ZookeeperRegionMyIdInfo {
   /**
    * 地域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * myid 的起始号段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MyIdStart?: number
   /**
    * myid 的结束号段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MyIdEnd?: number
 }
@@ -4580,7 +4491,6 @@ export interface PublishConfigFilesResponse {
   Result?: boolean
   /**
    * 配置文件发布Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFileReleaseId?: string
   /**
@@ -4621,17 +4531,14 @@ export interface BoundK8SInfo {
   BoundClusterId: string
   /**
    * 绑定的kubernetes的集群类型，分tke和eks两种
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BoundClusterType: string
   /**
    * 服务同步模式，all为全量同步，demand为按需同步
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SyncMode?: string
   /**
    * 绑定的kubernetes集群所在地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindRegion?: string
 }
@@ -4749,77 +4656,62 @@ export interface ModifyGovernanceInstancesRequest {
 export interface GovernanceNamespace {
   /**
    * 命名空间名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 命名空间描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 命名空间下总服务数据量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalServiceCount?: number
   /**
    * 命名空间下总健康实例数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalHealthInstanceCount?: number
   /**
    * 命名空间下总实例数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalInstanceCount?: number
   /**
    * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 是否可以编辑
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Editable?: boolean
   /**
    * 可以操作此命名空间的用户ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserIds?: Array<string>
   /**
    * 可以操作此命名空间的用户组ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupIds?: Array<string>
   /**
    * 移除可以操作此命名空间的用户ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveUserIds?: Array<string>
   /**
    * 移除可以操作此命名空间的用户组ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveGroupIds?: Array<string>
   /**
    * 该命名空间下的服务对哪些命名空间可见
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceExportTo?: Array<string>
   /**
-   * 是否开启同步到全局注册中心	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启同步到全局注册中心
    */
   SyncToGlobalRegistry?: boolean
 }
@@ -5024,12 +4916,10 @@ export interface DescribeAllConfigFileTemplatesResponse {
 export interface ConfigFileGroupTag {
   /**
    * key-value 键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * key-value 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -5066,17 +4956,14 @@ export interface DescribeConfigFileReleaseVersionsRequest {
 export interface GovernanceServiceContractVersion {
   /**
    * 契约版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 契约名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 唯一名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
 }
@@ -5197,82 +5084,66 @@ export interface GovernanceService {
   Namespace?: string
   /**
    * 元数据信息数组。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadatas?: Array<Metadata>
   /**
    * 描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 服务所属部门。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Department?: string
   /**
    * 服务所属业务。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Business?: string
   /**
    * 健康服务实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyInstanceCount?: number
   /**
    * 服务实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalInstanceCount?: number
   /**
    * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 是否可以编辑
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Editable?: boolean
   /**
    * 可以编辑该资源的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserIds?: Array<string>
   /**
    * 可以编辑该资源的用户组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupIds?: Array<string>
   /**
    * 移除可以编辑该资源的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveUserIds?: Array<string>
   /**
    * 移除可以编辑该资源的用户组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveGroupIds?: Array<string>
   /**
-   * 该服务对哪些命名空间可见	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 该服务对哪些命名空间可见
    */
   ExportTo?: Array<string>
   /**
    * 该服务信息摘要签名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Revision?: string
   /**
@@ -5313,22 +5184,18 @@ export interface NacosReplica {
   Status?: string
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: string
   /**
-   * VPC ID	
-注意：此字段可能返回 null，表示取不到有效值。
+   * VPC ID
    */
   VpcId?: string
 }
@@ -5353,7 +5220,6 @@ export interface CreateGovernanceInstancesResponse {
 export interface CreateGatewayServiceResult {
   /**
    * 网关服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceId?: string
 }
@@ -5390,17 +5256,14 @@ export interface DeleteEngineResponse {
 export interface Location {
   /**
    * 大区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 机房
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Campus?: string
 }
@@ -5531,27 +5394,22 @@ Zookeeper: 是否为Leader固定地域
 export interface ConfigFileReleaseDeletion {
   /**
    * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 配置分组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Group?: string
   /**
    * 文件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileName?: string
   /**
    * 发布版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseVersion?: string
   /**
    * 配置发布ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
 }
@@ -5754,27 +5612,22 @@ export interface ZookeeperReplica {
   Status?: string
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: string
   /**
    * 别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AliasName?: string
   /**
    * VPC ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
 }
@@ -5827,7 +5680,6 @@ export interface DeleteGovernanceAliasesRequest {
 export interface CertificateInfo {
   /**
    * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
 }
@@ -6007,77 +5859,62 @@ export interface GovernanceInstance {
   Namespace?: string
   /**
    * 实例ip地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
    * 实例端口信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * 通信协议。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
    * 版本信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 负载均衡权重。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
   /**
    * 是否开启健康检查。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableHealthCheck?: boolean
   /**
    * 实例是否健康。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Healthy?: boolean
   /**
    * 实例是否隔离。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Isolate?: boolean
   /**
    * 实例创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 实例修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 元数据数组。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadatas?: Array<Metadata>
   /**
    * 上报心跳间隔。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ttl?: number
   /**
    * 版本信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceVersion?: string
   /**
    * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthStatus?: string
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
 }
@@ -6132,92 +5969,74 @@ export interface CreateEngineResponse {
 export interface ConfigFileGroup {
   /**
    * 配置文件组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 配置文件组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 创建者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateBy?: string
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 修改者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyBy?: string
   /**
    * 文件数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileCount?: number
   /**
    * 关联用户，link_users
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserIds?: Array<string>
   /**
    * 组id，link_groups
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupIds?: Array<string>
   /**
    * remove_link_users
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveUserIds?: Array<string>
   /**
    * remove_link_groups
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveGroupIds?: Array<string>
   /**
    * 是否可编辑
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Editable?: boolean
   /**
    * 归属者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Owner?: string
   /**
    * 部门
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Department?: string
   /**
    * 业务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Business?: string
   /**
    * 配置文件组标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFileGroupTags?: Array<ConfigFileGroupTag>
 }
@@ -6260,27 +6079,22 @@ export interface DescribeNacosServerInterfacesRequest {
 export interface KongUpstreamInfo {
   /**
    * IP或域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
    * 端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * 服务来源ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceID?: string
   /**
    * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 服务（注册中心或Kubernetes中的服务）名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
@@ -6290,87 +6104,70 @@ export interface KongUpstreamInfo {
   Targets?: Array<KongTarget>
   /**
    * 服务来源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceType?: string
   /**
    * SCF函数类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfType?: string
   /**
    * SCF函数命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfNamespace?: string
   /**
    * SCF函数名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfLambdaName?: string
   /**
    * SCF函数版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfLambdaQualifier?: string
   /**
    * 冷启动时间，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlowStart?: number
   /**
    * 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Algorithm?: string
   /**
    * CVM弹性伸缩组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingGroupID?: string
   /**
    * CVM弹性伸缩组端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingCvmPort?: number
   /**
    * CVM弹性伸缩组使用的CVM TAT命令状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingTatCmdStatus?: string
   /**
    * CVM弹性伸缩组生命周期挂钩状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingHookStatus?: string
   /**
    * 服务来源的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceName?: string
   /**
    * 精确的服务来源类型，新建服务来源时候传入的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealSourceType?: string
   /**
    * upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthStatus?: string
   /**
    * 云函数是否开启CAM鉴权，不填时默认为开启(true)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfCamAuthEnable?: boolean
   /**
    * 云函数是否开启Base64编码，默认为false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfIsBase64Encoded?: boolean
   /**
    * 云函数是否开启响应集成，默认为false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfIsIntegratedResponse?: boolean
 }
@@ -6421,7 +6218,6 @@ export interface DescribeZookeeperReplicasResponse {
   Replicas?: Array<ZookeeperReplica>
   /**
    * 副本个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -7043,17 +6839,14 @@ export interface GatewayInstanceSchemeAndPorts {
 export interface CreatePublicNetworkResult {
   /**
    * 网关实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 客户端公网网络ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkId?: string
 }
@@ -7098,17 +6891,14 @@ export interface DescribeNativeGatewayServiceSourcesRequest {
 export interface CLBMultiRegion {
   /**
    * 是否启用多可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBMultiZoneFlag?: boolean
   /**
    * 主可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBMasterZone?: string
   /**
    * 备可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBSlaveZone?: string
 }
@@ -7147,7 +6937,6 @@ export interface CreateConfigFileResponse {
   Result?: boolean
   /**
    * 创建的配置文件Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFileId?: string
   /**
@@ -7441,7 +7230,6 @@ export interface ServiceGovernanceInfo {
   LimiterVpcInfos?: Array<VpcInfo>
   /**
    * 引擎关联CLS日志主题信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CLSTopics?: Array<PolarisCLSTopicInfo>
 }
@@ -7456,7 +7244,6 @@ export interface DescribeNacosReplicasResponse {
   Replicas?: Array<NacosReplica>
   /**
    * 副本个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -7628,17 +7415,14 @@ export interface ZookeeperRegionInfo {
 - SingleRegion: 普通单地域
 - MultiRegion: 普通多地域场景
 - MasterSlave: 两地域，主备地域场景
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployMode?: string
   /**
    * 主地域的额外信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MainRegion?: ZookeeperRegionMyIdInfo
   /**
    * 其他地域的额外信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OtherRegions?: Array<ZookeeperRegionMyIdInfo>
 }
@@ -7873,142 +7657,114 @@ export interface SREInstance {
   VpcId?: string
   /**
    * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetIds?: Array<string>
   /**
    * 是否开启持久化存储
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableStorage?: boolean
   /**
    * 数据存储方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
   /**
    * 云硬盘容量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageCapacity?: number
   /**
    * 计费方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Paymode?: string
   /**
    * EKS集群的ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EKSClusterID?: string
   /**
    * 集群创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 环境配置信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvInfos?: Array<EnvInfo>
   /**
    * 引擎所在的区域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineRegion?: string
   /**
    * 注册引擎是否开启公网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableInternet?: boolean
   /**
    * 私有网络列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcInfos?: Array<VpcInfo>
   /**
    * 服务治理相关信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceGovernanceInfos?: Array<ServiceGovernanceInfo>
   /**
    * 实例的标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<KVPair>
   /**
    * 引擎实例是否开启控制台公网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableConsoleInternet?: boolean
   /**
    * 引擎实例是否开启控制台内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableConsoleIntranet?: boolean
   /**
    * 引擎实例是否展示参数配置页面
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigInfoVisible?: boolean
   /**
    * 引擎实例控制台默认密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsoleDefaultPwd?: string
   /**
    * 交易付费类型，0后付费/1预付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TradeType?: number
   /**
    * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
    * 预付费到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurDeadline?: string
   /**
    * 隔离开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolateTime?: string
   /**
    * 实例地域相关的描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionInfos?: Array<DescribeInstanceRegionInfo>
   /**
    * 所在EKS环境，分为common和yunti
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EKSType?: string
   /**
    * 引擎的产品版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureVersion?: string
   /**
    * 引擎实例是否开启客户端内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableClientIntranet?: boolean
   /**
    * 存储额外配置选项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageOption?: Array<StorageOption>
   /**
    * Zookeeper的额外环境数据信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZookeeperRegionInfo?: ZookeeperRegionInfo
   /**
    * 部署架构
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployMode?: string
 }
@@ -8201,12 +7957,10 @@ export interface CreateOrUpdateConfigFileAndReleaseResponse {
   Result?: boolean
   /**
    * 配置发布Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFileReleaseId?: string
   /**
    * 配置文件Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigFileId?: string
   /**
@@ -8417,7 +8171,6 @@ export interface DescribeGovernanceServiceContractsResponse {
   Size?: number
   /**
    * 契约定义列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceContracts?: Array<GovernanceServiceContract>
   /**
@@ -8508,9 +8261,8 @@ export interface KongServiceDetail {
 export interface ZookeeperServerInterface {
   /**
    * 接口名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Interface: string
+  Interface?: string
 }
 
 /**

@@ -1354,6 +1354,10 @@ export interface SessionResult {
    * 应用资产url
    */
   AppAssetUrl?: string
+  /**
+   * 回放类型 默认0, 1-rfb 2-mp4 3-ssh
+   */
+  ReplayType?: number
 }
 
 /**

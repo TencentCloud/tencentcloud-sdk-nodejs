@@ -6496,11 +6496,11 @@ export interface ModifyTopicAttributesRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 生产限流，单位 MB/s
+   * 生产限流，单位 MB/s；设置为-1，则生产不限流
    */
   QuotaProducerByteRate?: number
   /**
-   * 消费限流，单位 MB/s
+   * 消费限流，单位 MB/s；设置为-1，则消费不限流
    */
   QuotaConsumerByteRate?: number
   /**
