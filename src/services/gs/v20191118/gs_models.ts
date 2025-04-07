@@ -24,6 +24,10 @@ export interface DescribeAndroidInstanceTasksStatusResponse {
    */
   TaskStatusSet?: Array<AndroidInstanceTaskStatus>
   /**
+   * 任务总数量
+   */
+  Total?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -733,9 +737,21 @@ export interface RestartAndroidInstancesAppResponse {
  */
 export interface DescribeAndroidInstanceTasksStatusRequest {
   /**
-   * 任务ID列表
+   * 任务 ID 列表
    */
-  TaskIds: Array<string>
+  TaskIds?: Array<string>
+  /**
+   * 条件过滤器
+   */
+  Filter?: Array<Filter>
+  /**
+   * 偏移量，默认为 0
+   */
+  Offset?: number
+  /**
+   * 限制量，默认为20，最大值为100
+   */
+  Limit?: number
 }
 
 /**
@@ -1252,6 +1268,18 @@ export interface AndroidInstanceTaskStatus {
    * 任务执行结果描述，针对某些任务，可以是可解析的 json
    */
   TaskResult?: string
+  /**
+   * 任务类型
+   */
+  TaskType?: string
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务完成时间
+   */
+  CompleteTime?: string
 }
 
 /**

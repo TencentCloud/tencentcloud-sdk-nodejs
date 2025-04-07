@@ -2599,22 +2599,9 @@ export interface SecurityGroupOrderIndexData {
 }
 
 /**
- * DescribeFwGroupInstanceInfo返回参数结构体
+ * DescribeCfwInsStatus请求参数结构体
  */
-export interface DescribeFwGroupInstanceInfoResponse {
-  /**
-   * 防火墙(组)详细信息
-   */
-  VpcFwGroupLst?: Array<VpcFwGroupInfo>
-  /**
-   * 防火墙(组)个数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeCfwInsStatusRequest = null
 
 /**
  * DescribeSourceAsset返回参数结构体
@@ -3962,6 +3949,25 @@ export interface RemoveEnterpriseSecurityGroupRuleRequest {
 }
 
 /**
+ * DescribeCfwInsStatus返回参数结构体
+ */
+export interface DescribeCfwInsStatusResponse {
+  /**
+   * 防火墙实例运行状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CfwInsStatus?: Array<CfwInsStatus>
+  /**
+   * 0
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteResourceGroup请求参数结构体
  */
 export interface DeleteResourceGroupRequest {
@@ -3972,45 +3978,21 @@ export interface DeleteResourceGroupRequest {
 }
 
 /**
- * 安全组规则
+ * DescribeFwGroupInstanceInfo返回参数结构体
  */
-export interface SecurityGroupSimplifyRule {
+export interface DescribeFwGroupInstanceInfoResponse {
   /**
-   * 访问源示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-region：地域(ap-gaungzhou)
+   * 防火墙(组)详细信息
    */
-  SourceContent?: string
+  VpcFwGroupLst?: Array<VpcFwGroupInfo>
   /**
-   * 访问目的示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-region：地域(ap-gaungzhou)
+   * 防火墙(组)个数
    */
-  DestContent?: string
+  Total?: number
   /**
-   * 协议；TCP/UDP/ICMP/ANY
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Protocol?: string
-  /**
-   * 描述
-   */
-  Description?: string
-  /**
-   * 规则对应的唯一id
-   */
-  RuleUuid?: number
-  /**
-   * 规则序号
-   */
-  Sequence?: number
+  RequestId?: string
 }
 
 /**
@@ -5295,6 +5277,50 @@ export interface CustomWhiteRule {
 }
 
 /**
+ * 防火墙实例运行状态
+ */
+export interface CfwInsStatus {
+  /**
+   * 防火墙实例id
+   */
+  CfwInsId?: string
+  /**
+   * 防火墙类型，nat：nat防火墙；ew：vpc间防火墙
+   */
+  FwType?: string
+  /**
+   * 实例所属地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 实例运行状态，Running：正常运行；BypassAutoFix：bypass修复；Updating：升级中；Expand：扩容中；BypassManual：手动触发bypass中；BypassAuto：自动触发bypass中
+   */
+  Status?: string
+  /**
+   * 事件时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventTime?: string
+  /**
+   * 恢复时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecoverTime?: string
+  /**
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CfwInsName?: string
+  /**
+   * Normal: 正常模式
+OnlyRoute: 透明模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficMode?: string
+}
+
+/**
  * DescribeFwEdgeIps返回参数结构体
  */
 export interface DescribeFwEdgeIpsResponse {
@@ -5880,6 +5906,48 @@ export interface DescribeBlockIgnoreListRequest {
 whitelist 白名单列表
    */
   ShowType?: string
+}
+
+/**
+ * 安全组规则
+ */
+export interface SecurityGroupSimplifyRule {
+  /**
+   * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+   */
+  SourceContent?: string
+  /**
+   * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+   */
+  DestContent?: string
+  /**
+   * 协议；TCP/UDP/ICMP/ANY
+   */
+  Protocol?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 规则对应的唯一id
+   */
+  RuleUuid?: number
+  /**
+   * 规则序号
+   */
+  Sequence?: number
 }
 
 /**

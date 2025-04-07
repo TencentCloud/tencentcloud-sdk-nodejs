@@ -698,6 +698,16 @@ it("cfw.v20190904.DescribeIPStatusList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeCfwInsStatus", async function () {
+    try {
+       const data = await client.DescribeCfwInsStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeEnterpriseSecurityGroupRule", async function () {
     try {
        const data = await client.DescribeEnterpriseSecurityGroupRule({})

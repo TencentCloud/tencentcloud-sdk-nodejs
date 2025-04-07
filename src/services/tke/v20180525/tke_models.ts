@@ -4539,7 +4539,7 @@ export interface DeleteClusterInstancesRequest {
   /**
    * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
    */
-  InstanceDeleteMode?: string
+  InstanceDeleteMode: string
   /**
    * 是否强制删除(当节点在初始化时，可以指定参数为TRUE)
    */

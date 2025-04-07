@@ -6801,7 +6801,10 @@ export interface ClusterInfoItem {
    */
   Region?: string
   /**
-   * 防护状态: 已防护: Defended 未防护: UnDefended
+   * 防护状态: 
+已防护: Defended 
+未防护: UnDefended
+部分防护: PartDefened
    */
   DefenderStatus?: string
   /**

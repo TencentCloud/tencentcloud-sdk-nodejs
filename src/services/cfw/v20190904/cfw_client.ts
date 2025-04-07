@@ -114,7 +114,7 @@ import {
   ModifyBlockIgnoreRuleNewResponse,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
-  DescribeFwGroupInstanceInfoResponse,
+  DescribeCfwInsStatusRequest,
   DescribeSourceAssetResponse,
   DescribeFwGroupInstanceInfoRequest,
   ModifyBlockIgnoreRuleRequest,
@@ -176,8 +176,9 @@ import {
   AddEnterpriseSecurityGroupRulesResponse,
   UnHandleEventDetail,
   RemoveEnterpriseSecurityGroupRuleRequest,
+  DescribeCfwInsStatusResponse,
   DeleteResourceGroupRequest,
-  SecurityGroupSimplifyRule,
+  DescribeFwGroupInstanceInfoResponse,
   DescribeBlockByIpTimesListRequest,
   VpcRuleItem,
   DescribeIdsWhiteRuleResponse,
@@ -223,6 +224,7 @@ import {
   DeleteBlockIgnoreRuleNewRequest,
   RemoveNatAcRuleResponse,
   CustomWhiteRule,
+  CfwInsStatus,
   DescribeFwEdgeIpsResponse,
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,
@@ -246,6 +248,7 @@ import {
   EnterpriseSecurityGroupRuleBetaInfo,
   SetNatFwEipRequest,
   DescribeBlockIgnoreListRequest,
+  SecurityGroupSimplifyRule,
   ModifyBlockTopResponse,
   RemoveAclRuleResponse,
   DeleteNatFwInstanceRequest,
@@ -1003,6 +1006,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeIPStatusListResponse) => void
   ): Promise<DescribeIPStatusListResponse> {
     return this.request("DescribeIPStatusList", req, cb)
+  }
+
+  /**
+   * cfw实例运行状态查询
+   */
+  async DescribeCfwInsStatus(
+    req?: DescribeCfwInsStatusRequest,
+    cb?: (error: string, rep: DescribeCfwInsStatusResponse) => void
+  ): Promise<DescribeCfwInsStatusResponse> {
+    return this.request("DescribeCfwInsStatus", req, cb)
   }
 
   /**

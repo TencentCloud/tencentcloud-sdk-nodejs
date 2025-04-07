@@ -1001,6 +1001,10 @@ export interface IDCardInfoResult {
    * 身份证头像照片的地址（人像面）
    */
   PortraitUrl?: string
+  /**
+   * 整型错误码
+   */
+  IntErrorCode?: number
 }
 
 /**
