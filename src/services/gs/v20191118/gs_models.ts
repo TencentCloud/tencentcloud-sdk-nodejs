@@ -148,6 +148,32 @@ RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运�
 }
 
 /**
+ * RestoreAndroidInstanceFromStorage请求参数结构体
+ */
+export interface RestoreAndroidInstanceFromStorageRequest {
+  /**
+   * 安卓实例ID
+   */
+  AndroidInstanceId: string
+  /**
+   * 自定义备份对象Key
+   */
+  ObjectKey: string
+  /**
+   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
+   */
+  StorageType: string
+  /**
+   * COS协议选项
+   */
+  COSOptions?: COSOptions
+  /**
+   * S3存储协议选项
+   */
+  S3Options?: S3Options
+}
+
+/**
  * SyncExecuteCommandOnAndroidInstances请求参数结构体
  */
 export interface SyncExecuteCommandOnAndroidInstancesRequest {
@@ -284,6 +310,40 @@ export interface ModifyAndroidInstancesLabelsRequest {
 }
 
 /**
+ * BackUpAndroidInstanceToStorage请求参数结构体
+ */
+export interface BackUpAndroidInstanceToStorageRequest {
+  /**
+   * 安卓实例ID
+   */
+  AndroidInstanceId: string
+  /**
+   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
+   */
+  StorageType: string
+  /**
+   * 自定义对象Key
+   */
+  ObjectKey: string
+  /**
+   * 包含的路径，支持仅含一个通配符*，通配符不能出现在路径开始
+   */
+  Includes?: Array<string>
+  /**
+   * 需要排除路径，支持仅含一个通配符*，通配符不能出现在路径开始
+   */
+  Excludes?: Array<string>
+  /**
+   * COS协议选项
+   */
+  COSOptions?: COSOptions
+  /**
+   * S3存储协议选项
+   */
+  S3Options?: S3Options
+}
+
+/**
  * 同步安卓实例镜像信息
  */
 export interface SyncAndroidInstanceImage {
@@ -384,33 +444,13 @@ export interface DescribeAndroidInstanceAppsResponse {
 }
 
 /**
- * CreateAndroidInstanceSSH返回参数结构体
+ * CreateAndroidInstanceWebShell请求参数结构体
  */
-export interface CreateAndroidInstanceSSHResponse {
+export interface CreateAndroidInstanceWebShellRequest {
   /**
-   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   * 实例 ID
    */
-  PrivateKey?: string
-  /**
-   * 用户名称
-   */
-  UserName?: string
-  /**
-   * 连接地址
-   */
-  HostName?: string
-  /**
-   * 连接端口
-   */
-  Port?: number
-  /**
-   * 连接参考命令
-   */
-  ConnectCommand?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AndroidInstanceId: string
 }
 
 /**
@@ -519,6 +559,20 @@ export interface SyncExecuteCommandOnAndroidInstancesResponse {
 }
 
 /**
+ * RestoreAndroidInstanceFromStorage返回参数结构体
+ */
+export interface RestoreAndroidInstanceFromStorageResponse {
+  /**
+   * 实例任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartAndroidInstancesApp请求参数结构体
  */
 export interface StartAndroidInstancesAppRequest {
@@ -571,17 +625,25 @@ export interface StartAndroidInstancesResponse {
 }
 
 /**
- * DeleteAndroidInstanceLabel请求参数结构体
+ * DescribeAndroidInstanceLabels请求参数结构体
  */
-export interface DeleteAndroidInstanceLabelRequest {
+export interface DescribeAndroidInstanceLabelsRequest {
   /**
-   * 标签键
+   * 标签键列表
    */
-  Key: string
+  Keys?: Array<string>
   /**
-   * 标签值
+   * 标签值列表
    */
-  Value?: string
+  Values?: Array<string>
+  /**
+   * 偏移量，默认为 0
+   */
+  Offset?: number
+  /**
+   * 限制量，默认为20，最大值为100
+   */
+  Limit?: number
 }
 
 /**
@@ -1165,13 +1227,25 @@ export interface TrylockWorkerResponse {
 }
 
 /**
- * CreateAndroidInstanceWebShell请求参数结构体
+ * S3协议参数
  */
-export interface CreateAndroidInstanceWebShellRequest {
+export interface S3Options {
   /**
-   * 实例 ID
+   * 存储节点
    */
-  AndroidInstanceId: string
+  EndPoint: string
+  /**
+   * 存储桶
+   */
+  Bucket: string
+  /**
+   * 密钥 ID
+   */
+  AccessKeyId: string
+  /**
+   * 密钥 Key
+   */
+  SecretAccessKey: string
 }
 
 /**
@@ -1185,25 +1259,17 @@ export interface ModifyAndroidInstancesLabelsResponse {
 }
 
 /**
- * DescribeAndroidInstanceLabels请求参数结构体
+ * DeleteAndroidInstanceLabel请求参数结构体
  */
-export interface DescribeAndroidInstanceLabelsRequest {
+export interface DeleteAndroidInstanceLabelRequest {
   /**
-   * 标签键列表
+   * 标签键
    */
-  Keys?: Array<string>
+  Key: string
   /**
-   * 标签值列表
+   * 标签值
    */
-  Values?: Array<string>
-  /**
-   * 偏移量，默认为 0
-   */
-  Offset?: number
-  /**
-   * 限制量，默认为20，最大值为100
-   */
-  Limit?: number
+  Value?: string
 }
 
 /**
@@ -1404,6 +1470,54 @@ export interface AndroidInstance {
    * 用户ID
    */
   UserId?: string
+  /**
+   * 内网 IP
+   */
+  PrivateIP?: string
+}
+
+/**
+ * COS协议参数
+ */
+export interface COSOptions {
+  /**
+   * 存储桶
+   */
+  Bucket: string
+  /**
+   * 存储区域
+   */
+  Region: string
+}
+
+/**
+ * CreateAndroidInstanceSSH返回参数结构体
+ */
+export interface CreateAndroidInstanceSSHResponse {
+  /**
+   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   */
+  PrivateKey?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 连接地址
+   */
+  HostName?: string
+  /**
+   * 连接端口
+   */
+  Port?: number
+  /**
+   * 连接参考命令
+   */
+  ConnectCommand?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1641,6 +1755,20 @@ NOT_EXISTS: 要求对象标签不存在标签键 Key
    * 标签值列表
    */
   Values?: Array<string>
+}
+
+/**
+ * BackUpAndroidInstanceToStorage返回参数结构体
+ */
+export interface BackUpAndroidInstanceToStorageResponse {
+  /**
+   * 实例任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

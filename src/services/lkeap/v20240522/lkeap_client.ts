@@ -85,6 +85,8 @@ import {
   CreateReconstructDocumentFlowResponse,
   DeleteKnowledgeBaseRequest,
   CreateQARequest,
+  GetCharacterUsageRequest,
+  GetCharacterUsageResponse,
   UploadDocResponse,
   AttributeItem,
   EmbeddingObject,
@@ -339,6 +341,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取字符使用量统计
+   */
+  async GetCharacterUsage(
+    req?: GetCharacterUsageRequest,
+    cb?: (error: string, rep: GetCharacterUsageResponse) => void
+  ): Promise<GetCharacterUsageResponse> {
+    return this.request("GetCharacterUsage", req, cb)
+  }
+
+  /**
      * 用于上传实时文档内容。
 实时文档在上传后可以立即通过SearchRealtime进行实时检索，适用于在会话中对文档进行问答的场景。
      */
@@ -363,7 +375,7 @@ export class Client extends AbstractClient {
   /**
      * ### 接口功能
 
-调用接口，发起一次对话请求。单账号限制接口并发上限为5。
+调用接口，发起一次对话请求。单账号限制接口并发上限为100。
 如需使用OpenAI兼容接口， 请参考文档：[Deepseek OpenAI对话接口](https://cloud.tencent.com/document/product/1772/115969)
 
 #### 在线体验

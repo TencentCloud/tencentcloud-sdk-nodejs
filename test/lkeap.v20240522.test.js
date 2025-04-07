@@ -248,6 +248,16 @@ it("lkeap.v20240522.CreateSplitDocumentFlow", async function () {
     }
 })
 
+it("lkeap.v20240522.GetCharacterUsage", async function () {
+    try {
+       const data = await client.GetCharacterUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lkeap.v20240522.UploadDocRealtime", async function () {
     try {
        const data = await client.UploadDocRealtime({})

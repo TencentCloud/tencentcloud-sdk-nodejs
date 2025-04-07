@@ -158,16 +158,6 @@ it("mna.v20210119.GetDevice", async function () {
     }
 })
 
-it("mna.v20210119.CreateQos", async function () {
-    try {
-       const data = await client.CreateQos({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("mna.v20210119.DeleteL3Conn", async function () {
     try {
        const data = await client.DeleteL3Conn({})
@@ -181,16 +171,6 @@ it("mna.v20210119.DeleteL3Conn", async function () {
 it("mna.v20210119.DeleteGroup", async function () {
     try {
        const data = await client.DeleteGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mna.v20210119.DescribeQos", async function () {
-    try {
-       const data = await client.DescribeQos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,16 +281,6 @@ it("mna.v20210119.AddL3Conn", async function () {
 it("mna.v20210119.CreateEncryptedKey", async function () {
     try {
        const data = await client.CreateEncryptedKey({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mna.v20210119.DeleteQos", async function () {
-    try {
-       const data = await client.DeleteQos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

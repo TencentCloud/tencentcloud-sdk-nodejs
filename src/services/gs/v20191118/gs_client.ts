@@ -23,6 +23,7 @@ import {
   StartPublishStreamToCSSResponse,
   StartAndroidInstancesRequest,
   CreateSessionRequest,
+  RestoreAndroidInstanceFromStorageRequest,
   SyncExecuteCommandOnAndroidInstancesRequest,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
@@ -31,6 +32,7 @@ import {
   DescribeAndroidAppsResponse,
   StopAndroidInstancesAppRequest,
   ModifyAndroidInstancesLabelsRequest,
+  BackUpAndroidInstanceToStorageRequest,
   SyncAndroidInstanceImage,
   AndroidInstanceLabel,
   DeleteAndroidInstanceImagesResponse,
@@ -39,18 +41,19 @@ import {
   ModifyAndroidInstanceResolutionResponse,
   DeleteAndroidInstanceImagesRequest,
   DescribeAndroidInstanceAppsResponse,
-  CreateAndroidInstanceSSHResponse,
+  CreateAndroidInstanceWebShellRequest,
   ResetAndroidInstancesRequest,
   UploadFileToAndroidInstancesRequest,
   SaveGameArchiveResponse,
   ConnectAndroidInstanceRequest,
   CopyAndroidInstanceRequest,
   SyncExecuteCommandOnAndroidInstancesResponse,
+  RestoreAndroidInstanceFromStorageResponse,
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesUserIdRequest,
   StopPublishStreamResponse,
   StartAndroidInstancesResponse,
-  DeleteAndroidInstanceLabelRequest,
+  DescribeAndroidInstanceLabelsRequest,
   ModifyAndroidInstancesUserIdResponse,
   InstallAndroidInstancesAppRequest,
   UninstallAndroidInstancesAppRequest,
@@ -88,9 +91,9 @@ import {
   StopGameRequest,
   RebootAndroidInstancesResponse,
   TrylockWorkerResponse,
-  CreateAndroidInstanceWebShellRequest,
+  S3Options,
   ModifyAndroidInstancesLabelsResponse,
-  DescribeAndroidInstanceLabelsRequest,
+  DeleteAndroidInstanceLabelRequest,
   CopyAndroidInstanceResponse,
   DeleteAndroidInstanceLabelResponse,
   DescribeAndroidInstanceImagesRequest,
@@ -101,6 +104,8 @@ import {
   StopGameResponse,
   CreateAndroidInstanceLabelRequest,
   AndroidInstance,
+  COSOptions,
+  CreateAndroidInstanceSSHResponse,
   CreateAndroidInstancesRequest,
   CreateAndroidInstanceLabelResponse,
   StartPublishStreamResponse,
@@ -113,6 +118,7 @@ import {
   AndroidInstanceAppInfo,
   StopAndroidInstancesRequest,
   LabelRequirement,
+  BackUpAndroidInstanceToStorageResponse,
   CreateAndroidInstanceSSHRequest,
   StopAndroidInstancesResponse,
   CreateAndroidInstanceImageRequest,
@@ -125,6 +131,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("gs.tencentcloudapi.com", "2019-11-18", clientConfig)
+  }
+
+  /**
+   * 备份云手机到指定存储
+   */
+  async BackUpAndroidInstanceToStorage(
+    req: BackUpAndroidInstanceToStorageRequest,
+    cb?: (error: string, rep: BackUpAndroidInstanceToStorageResponse) => void
+  ): Promise<BackUpAndroidInstanceToStorageResponse> {
+    return this.request("BackUpAndroidInstanceToStorage", req, cb)
   }
 
   /**
@@ -148,13 +164,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开始云端推流
+   * 指定存储还原云手机
    */
-  async StartPublishStreamToCSS(
-    req: StartPublishStreamToCSSRequest,
-    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
-  ): Promise<StartPublishStreamToCSSResponse> {
-    return this.request("StartPublishStreamToCSS", req, cb)
+  async RestoreAndroidInstanceFromStorage(
+    req: RestoreAndroidInstanceFromStorageRequest,
+    cb?: (error: string, rep: RestoreAndroidInstanceFromStorageResponse) => void
+  ): Promise<RestoreAndroidInstanceFromStorageResponse> {
+    return this.request("RestoreAndroidInstanceFromStorage", req, cb)
   }
 
   /**
@@ -368,13 +384,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传文件到安卓实例
+   * 开始云端推流
    */
-  async UploadFileToAndroidInstances(
-    req: UploadFileToAndroidInstancesRequest,
-    cb?: (error: string, rep: UploadFileToAndroidInstancesResponse) => void
-  ): Promise<UploadFileToAndroidInstancesResponse> {
-    return this.request("UploadFileToAndroidInstances", req, cb)
+  async StartPublishStreamToCSS(
+    req: StartPublishStreamToCSSRequest,
+    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
+  ): Promise<StartPublishStreamToCSSResponse> {
+    return this.request("StartPublishStreamToCSS", req, cb)
   }
 
   /**
@@ -445,6 +461,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSessionResponse) => void
   ): Promise<CreateSessionResponse> {
     return this.request("CreateSession", req, cb)
+  }
+
+  /**
+   * 上传文件到安卓实例
+   */
+  async UploadFileToAndroidInstances(
+    req: UploadFileToAndroidInstancesRequest,
+    cb?: (error: string, rep: UploadFileToAndroidInstancesResponse) => void
+  ): Promise<UploadFileToAndroidInstancesResponse> {
+    return this.request("UploadFileToAndroidInstances", req, cb)
   }
 
   /**

@@ -21,12 +21,11 @@ import {
   DeleteL3ConnResponse,
   GetDeviceResponse,
   GetMultiFlowStatisticResponse,
-  DestAddressInfo,
+  FlowDetails,
   UpdateL3ConnResponse,
   UpdateHardwareResponse,
   UpdateNetInfo,
   UpdateL3SwitchRequest,
-  DescribeQosResponse,
   AddL3ConnRequest,
   OrderPerLicenseResponse,
   GetFlowPackagesRequest,
@@ -44,12 +43,10 @@ import {
   GetGroupDetailRequest,
   GroupDeleteDeviceResponse,
   GroupAddDeviceRequest,
-  NetworkData,
   GetStatisticDataResponse,
   GetPublicKeyRequest,
   GetFlowStatisticByGroupResponse,
   GetNetMonitorResponse,
-  DeleteQosRequest,
   GetFlowStatisticByRegionRequest,
   GetFlowAlarmInfoRequest,
   GetVendorHardwareRequest,
@@ -59,36 +56,28 @@ import {
   CreateEncryptedKeyResponse,
   UpdateL3SwitchResponse,
   GetL3ConnListResponse,
-  CreateQosRequest,
   GroupInfo,
   ModifyPackageRenewFlagResponse,
-  DeleteQosResponse,
   VendorHardware,
   GetDeviceRequest,
   ActivateHardwareResponse,
   GetFlowStatisticByGroupRequest,
   GetDevicesResponse,
-  DescribeQosRequest,
   AddL3ConnResponse,
   GetDevicesRequest,
   SetNotifyUrlRequest,
   GetDevicePayModeRequest,
-  Capacity,
-  GetFlowStatisticRequest,
   SlotNetInfo,
   DeviceNetInfo,
   NetDetails,
-  CreateQosResponse,
   ActivateHardware,
   DownloadActiveDeviceCountResponse,
   GetHardwareListRequest,
-  FlowDetails,
   GroupDeleteDeviceRequest,
   DeviceDetails,
   GetFlowStatisticByRegionResponse,
   ActiveDeviceList,
   GetMultiFlowStatisticRequest,
-  ExpectedThreshold,
   GetFlowAlarmInfoResponse,
   OrderFlowPackageRequest,
   GetGroupDetailResponse,
@@ -103,7 +92,6 @@ import {
   GetFlowStatisticResponse,
   UpdateHardwareRequest,
   GetNetMonitorRequest,
-  SrcAddressInfo,
   GetGroupListResponse,
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
@@ -115,7 +103,7 @@ import {
   DeleteGroupResponse,
   GetPublicKeyResponse,
   AddHardwareResponse,
-  Context,
+  GetFlowStatisticRequest,
   AddDeviceResponse,
   GetDevicePayModeResponse,
   GetActiveDeviceCountRequest,
@@ -123,7 +111,6 @@ import {
   DevicePayModeInfo,
   MonitorData,
   DeleteDeviceResponse,
-  DeviceInfo,
   AddHardwareRequest,
   Hardware,
   UpdateL3CidrRequest,
@@ -280,18 +267,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 产品下线
-
-移动网络发起Qos加速过程
-     */
-  async CreateQos(
-    req: CreateQosRequest,
-    cb?: (error: string, rep: CreateQosResponse) => void
-  ): Promise<CreateQosResponse> {
-    return this.request("CreateQos", req, cb)
-  }
-
-  /**
    * 删除互通规则
    */
   async DeleteL3Conn(
@@ -309,18 +284,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteGroupResponse) => void
   ): Promise<DeleteGroupResponse> {
     return this.request("DeleteGroup", req, cb)
-  }
-
-  /**
-     * 产品下线
-
-获取Qos加速状态
-     */
-  async DescribeQos(
-    req: DescribeQosRequest,
-    cb?: (error: string, rep: DescribeQosResponse) => void
-  ): Promise<DescribeQosResponse> {
-    return this.request("DescribeQos", req, cb)
   }
 
   /**
@@ -431,18 +394,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEncryptedKeyResponse) => void
   ): Promise<CreateEncryptedKeyResponse> {
     return this.request("CreateEncryptedKey", req, cb)
-  }
-
-  /**
-     * 产品下线
-
-移动网络停止Qos加速过程
-     */
-  async DeleteQos(
-    req: DeleteQosRequest,
-    cb?: (error: string, rep: DeleteQosResponse) => void
-  ): Promise<DeleteQosResponse> {
-    return this.request("DeleteQos", req, cb)
   }
 
   /**

@@ -18,6 +18,16 @@ const client = new tencentcloud.gs.v20191118.Client({
 })
 describe("gs.v20191118.test.js", function () {
 
+it("gs.v20191118.BackUpAndroidInstanceToStorage", async function () {
+    try {
+       const data = await client.BackUpAndroidInstanceToStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.StopGame", async function () {
     try {
        const data = await client.StopGame({})
@@ -38,9 +48,9 @@ it("gs.v20191118.SyncExecuteCommandOnAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.StartPublishStreamToCSS", async function () {
+it("gs.v20191118.RestoreAndroidInstanceFromStorage", async function () {
     try {
-       const data = await client.StartPublishStreamToCSS({})
+       const data = await client.RestoreAndroidInstanceFromStorage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +268,9 @@ it("gs.v20191118.CreateAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+it("gs.v20191118.StartPublishStreamToCSS", async function () {
     try {
-       const data = await client.UploadFileToAndroidInstances({})
+       const data = await client.StartPublishStreamToCSS({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +341,16 @@ it("gs.v20191118.StopAndroidInstancesApp", async function () {
 it("gs.v20191118.CreateSession", async function () {
     try {
        const data = await client.CreateSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+    try {
+       const data = await client.UploadFileToAndroidInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

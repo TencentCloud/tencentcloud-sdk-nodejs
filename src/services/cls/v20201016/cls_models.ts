@@ -191,6 +191,10 @@ export interface LogInfo {
    */
   PkgLogId?: string
   /**
+   * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
+   */
+  HighLights?: Array<HighLightItem>
+  /**
    * 日志内容的Json序列化字符串
    */
   LogJson?: string
@@ -8368,6 +8372,10 @@ export interface SearchLogRequest {
 两种返回方式在编码格式上有少量区别，建议使用true
    */
   UseNewAnalysis?: boolean
+  /**
+   * 是否高亮符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
+   */
+  HighLight?: boolean
 }
 
 /**
@@ -8541,15 +8549,15 @@ https://cloud.tencent.com/document/product/614/18940
 }
 
 /**
- * 日志内容高亮描述信息
+ * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
  */
 export interface HighLightItem {
   /**
-   * 高亮的日志Key
+   * 高亮的日志字段名称
    */
   Key?: string
   /**
-   * 高亮的语法
+   * 高亮的关键词
    */
   Values?: Array<string>
 }
