@@ -29,8 +29,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交任务事件接口
-   */
+     * smop产品下线，接口也一起下线
+
+提交任务事件接口
+     */
   async SubmitTaskEvent(
     req: SubmitTaskEventRequest,
     cb?: (error: string, rep: SubmitTaskEventResponse) => void

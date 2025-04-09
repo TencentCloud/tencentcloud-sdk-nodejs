@@ -24,7 +24,6 @@ import {
   ConsumptionBusinessSummaryDataItem,
   BillTagInfo,
   AllocationOverviewTotal,
-  SavingPlanCoverageRate,
   BillTransactionInfo,
   ConditionBusiness,
   AnalyseActionTypeDetail,
@@ -57,7 +56,6 @@ import {
   DescribeAllocationTrendByMonthRequest,
   DescribeVoucherUsageDetailsResponse,
   ConsumptionSummaryTotal,
-  SavingPlanCoverageDetail,
   DescribeAllocationOverviewRequest,
   DescribeGatherResourceResponse,
   DescribeCostDetailResponse,
@@ -78,7 +76,6 @@ import {
   DescribeBillSummaryByTagRequest,
   AnalyseDetail,
   BillDays,
-  DescribeSavingPlanCoverageResponse,
   AnalyseAmountDetail,
   DescribeBillSummaryByProjectRequest,
   DescribeBillResourceSummaryForOrganizationRequest,
@@ -94,7 +91,6 @@ import {
   ConditionPayMode,
   BillProductLink,
   AllocationTreeNode,
-  DescribeSavingPlanCoverageRequest,
   PayDealsResponse,
   BillDetail,
   DescribeBillDetailResponse,
@@ -237,18 +233,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillListResponse) => void
   ): Promise<DescribeBillListResponse> {
     return this.request("DescribeBillList", req, cb)
-  }
-
-  /**
-     * 当前接口已迁移至svp产品
-
-查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
-     */
-  async DescribeSavingPlanCoverage(
-    req: DescribeSavingPlanCoverageRequest,
-    cb?: (error: string, rep: DescribeSavingPlanCoverageResponse) => void
-  ): Promise<DescribeSavingPlanCoverageResponse> {
-    return this.request("DescribeSavingPlanCoverage", req, cb)
   }
 
   /**

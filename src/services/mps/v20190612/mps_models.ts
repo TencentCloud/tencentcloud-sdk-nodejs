@@ -298,7 +298,7 @@ export interface AiAnalysisTaskClassificationInput {
   /**
    * 视频智能分类模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -2218,11 +2218,11 @@ export interface MediaAiAnalysisClassificationItem {
   /**
    * 智能分类的类别名称。
    */
-  Classification: string
+  Classification?: string
   /**
    * 智能分类的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -2266,11 +2266,8 @@ export interface AudioTemplateInfoForUpdate {
    */
   Bitrate?: number
   /**
-   * 音频流的采样率，可选值：
-<li>32000</li>
-<li>44100</li>
-<li>48000</li>
-单位：Hz。
+   * 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档]https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53
+注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SampleRate?: number
@@ -2435,15 +2432,15 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -2620,11 +2617,8 @@ export interface AudioTemplateInfo {
    */
   Bitrate: number
   /**
-   * 音频流的采样率，可选值：
-<li>32000</li>
-<li>44100</li>
-<li>48000</li>
-单位：Hz。
+   * 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档]https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53
+注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！
    */
   SampleRate: number
   /**
@@ -3267,11 +3261,11 @@ export interface MediaAiAnalysisCoverItem {
   /**
    * 智能封面存储路径。
    */
-  CoverPath: string
+  CoverPath?: string
   /**
    * 智能封面的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -5087,7 +5081,7 @@ export interface AiAnalysisTaskSegmentInput {
   /**
    * 拆条任务模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -5950,8 +5944,9 @@ second：表示秒
   FpsDenominator?: number
   /**
    * 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：
-<li>side_by_side：左右视角</li>
-<li>top_bottom：上下视角</li>
+<li>side_by_side：原视频内容左右排列布局</li>
+<li>top_bottom：原视频内容上下排列布局</li>
+计费将按照切分后的分辨率尺寸上报用量及计费；
 默认值:side_by_side
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -6759,19 +6754,19 @@ export interface AiRecognitionTaskFaceSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**
@@ -7507,7 +7502,7 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
   /**
    * 语音全文识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -7812,16 +7807,16 @@ export interface MediaAiAnalysisFrameTagItem {
   /**
    * 按帧标签名称。
    */
-  Tag: string
+  Tag?: string
   /**
    * 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。
 比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。
    */
-  CategorySet: Array<string>
+  CategorySet?: Array<string>
   /**
    * 按帧标签的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -8204,8 +8199,9 @@ second：表示秒
   FpsDenominator?: number
   /**
    * 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：
-<li>side_by_side：左右视角</li>
-<li>top_bottom：上下视角</li>
+<li>side_by_side：原视频内容左右排列布局</li>
+<li>top_bottom：原视频内容上下排列布局</li>
+计费将按照切分后的分辨率尺寸上报用量及计费；
 默认值:side_by_side
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -9211,11 +9207,11 @@ export interface AiRecognitionTaskObjectResultItem {
   /**
    * 识别的物体名称。
    */
-  Name: string
+  Name?: string
   /**
    * 物体出现的片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskObjectSeqmentItem>
+  SegmentSet?: Array<AiRecognitionTaskObjectSeqmentItem>
 }
 
 /**
@@ -9986,7 +9982,7 @@ export interface AiRecognitionTaskObjectResultInput {
   /**
    * 物体识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -10619,18 +10615,18 @@ export interface QualityControlItem {
  */
 export interface SpekeDrm {
   /**
-   * 资源标记，
+   * 资源标记，该字段内容为用户自定义；
 支持1-128个字符的数字、字母、下划线(_)、中划线(-)。
    */
   ResourceId: string
   /**
-   * drm厂商访问地址；
+   * DRM厂商访问地址，该字段内容从DRM厂商获取。
 
-注: 不同DRM厂商对子流的数量限制不一样，如 pallycon 限制不能超过5条子流，drmtoday厂商最多仅支持9条子流加密
+注: 不同DRM厂商对子流的数量限制不一样，如 PallyCon 限制不能超过5条子流，DRMtoday厂商最多仅支持9条子流加密
    */
   KeyServerUrl: string
   /**
-   * 加密初始化向量(32字节字符串)。
+   * 加密初始化向量(32字节字符串)，该字段内容为用户自定义。
    */
   Vector: string
   /**
@@ -10752,7 +10748,7 @@ export interface AiAnalysisTaskHighlightInput {
   /**
    * 视频智能精彩片段模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -10925,11 +10921,11 @@ export interface MediaAiAnalysisTagItem {
   /**
    * 标签名称。
    */
-  Tag: string
+  Tag?: string
   /**
    * 标签的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
 }
 
 /**
@@ -13604,7 +13600,7 @@ export interface AiAnalysisTaskFrameTagInput {
   /**
    * 视频智能按帧标签模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -13614,15 +13610,15 @@ export interface MediaAiAnalysisFrameTagSegmentItem {
   /**
    * 按帧标签起始的偏移时间。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 按帧标签结束的偏移时间。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 时间片段内的标签列表。
    */
-  TagSet: Array<MediaAiAnalysisFrameTagItem>
+  TagSet?: Array<MediaAiAnalysisFrameTagItem>
 }
 
 /**
@@ -13632,11 +13628,11 @@ export interface AiRecognitionTaskAsrWordsResultItem {
   /**
    * 语音关键词。
    */
-  Word: string
+  Word?: string
   /**
    * 语音关键词出现的时间片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskAsrWordsSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskAsrWordsSegmentItem>
 }
 
 /**
@@ -14166,7 +14162,7 @@ export interface AiRecognitionTaskFaceResultInput {
   /**
    * 人脸识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -14694,7 +14690,7 @@ export interface AiRecognitionTaskAsrWordsResultInput {
   /**
    * 语音关键词识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -15675,7 +15671,7 @@ export interface AiAnalysisTaskHeadTailInput {
   /**
    * 片头片尾识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -16103,7 +16099,7 @@ export interface AiAnalysisTaskHeadTailOutput {
    * 片头pts。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HeadTimeOffset: number
+  HeadTimeOffset?: number
   /**
    * 片尾pts。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -16285,19 +16281,19 @@ export interface AiRecognitionTaskObjectSeqmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**
@@ -17795,7 +17791,7 @@ export interface AiAnalysisTaskDescriptionInput {
   /**
    * 视频智能描述模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -17805,7 +17801,7 @@ export interface AiAnalysisTaskCoverInput {
   /**
    * 视频智能封面模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**

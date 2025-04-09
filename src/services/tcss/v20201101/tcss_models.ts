@@ -1426,6 +1426,10 @@ State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁)
    */
   DefendHostCoresCnt?: number
   /**
+   * 试用的专业版核数
+   */
+  TrialCoresCnt?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4366,9 +4370,13 @@ export interface EscapeWhiteListInfo {
    */
   ID?: number
   /**
-   * 关联主机数量
+   * 关联主机数量（包含普通节点和超级节点数量）
    */
   HostCount?: number
+  /**
+   * 关联超级节点数量
+   */
+  SuperNodeCount?: number
   /**
    * 关联容器数量
    */
@@ -8879,13 +8887,17 @@ export interface DescribeAssetImageDetailResponse {
    */
   Size?: number
   /**
-   * 关联主机个数
+   * 关联主机个数(包含普通节点数和超级节点数)
    */
   HostCnt?: number
   /**
    * 关联容器个数
    */
   ContainerCnt?: number
+  /**
+   * 超级节点数
+   */
+  SuperNodeCnt?: number
   /**
    * 最近扫描时间
    */
@@ -10364,9 +10376,13 @@ export interface VulAffectedImageInfo {
    */
   ImageName?: string
   /**
-   * 关联的主机数
+   * 关联的主机数(包含普通节点数和超级节点数)
    */
   HostCount?: number
+  /**
+   * 关联的超级节点数
+   */
+  SuperNodeCount?: number
   /**
    * 关联的容器数
    */
@@ -16232,9 +16248,13 @@ export interface ImagesInfo {
    */
   Size?: number
   /**
-   * 主机个数
+   * 主机个数(包含普通节点数和超级节点数)
    */
   HostCnt?: number
+  /**
+   * 超级节点数
+   */
+  SuperNodeCnt?: number
   /**
    * 容器个数
    */

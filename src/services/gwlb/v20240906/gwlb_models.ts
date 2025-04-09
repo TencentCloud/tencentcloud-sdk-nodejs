@@ -544,6 +544,10 @@ export interface CreateTargetGroupRequest {
    * 是否支持全死全活。默认支持。
    */
   AllDeadToAlive?: boolean
+  /**
+   * 标签。
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**

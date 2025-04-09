@@ -149,7 +149,7 @@ FailedOperation.UnKnowError：表示识别失败；
    */
   Polygon?: Polygon
   /**
-   * 识别出的图片在混贴票据图片中的旋转角度。
+   * 识别出切图后各图片的旋转角度。
    */
   Angle?: number
   /**

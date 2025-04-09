@@ -212,6 +212,7 @@ import {
   CreatePartnerAutoSignAuthUrlRequest,
   ChannelCreateBatchCancelFlowUrlRequest,
   ChannelDescribeAccountBillDetailResponse,
+  PresetApproverInfo,
   ApproverRestriction,
   CreateFlowForwardsResponse,
   ChannelCreateFlowByFilesResponse,

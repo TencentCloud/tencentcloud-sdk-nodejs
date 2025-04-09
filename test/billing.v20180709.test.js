@@ -48,16 +48,6 @@ it("billing.v20180709.DescribeBillList", async function () {
     }
 })
 
-it("billing.v20180709.DescribeSavingPlanCoverage", async function () {
-    try {
-       const data = await client.DescribeSavingPlanCoverage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("billing.v20180709.DescribeAllocationSummaryByResource", async function () {
     try {
        const data = await client.DescribeAllocationSummaryByResource({})

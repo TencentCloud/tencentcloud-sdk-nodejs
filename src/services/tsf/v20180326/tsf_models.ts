@@ -101,7 +101,6 @@ export interface ModifyPathRewriteRequest {
 export interface DescribeUnitRulesV2Response {
   /**
    * 分页列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageUnitRuleV2
   /**
@@ -134,12 +133,10 @@ export interface ApiDetailResponse {
   RequestContentType?: string
   /**
    * API  能否调试
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanRun?: boolean
   /**
    * API 状态 0:离线 1:在线，默认0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
@@ -545,7 +542,6 @@ false：停止失败
 export interface CreateConfigTemplateWithDetailRespResponse {
   /**
    * 创建成功，返回 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ConfigTemplate
   /**
@@ -594,7 +590,6 @@ export interface DescribeGroupReleaseRequest {
 export interface DescribeConfigTemplateResponse {
   /**
    * 导入结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ConfigTemplate
   /**
@@ -751,7 +746,6 @@ export interface DeleteApplicationResponse {
    * 删除应用操作是否成功。
 true：操作成功。
 false：操作失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -832,9 +826,8 @@ export interface DescribeSimpleGroupsResponse {
 export interface DescribeConfigsResponse {
   /**
    * 分页后的配置项列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageConfig
+  Result?: TsfPageConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -935,9 +928,8 @@ export interface CreateGatewayApiResponse {
 export interface DescribeFileConfigsResponse {
   /**
    * 文件配置项列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageFileConfig
+  Result?: TsfPageFileConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1249,7 +1241,6 @@ export interface ModifyUploadInfoResponse {
 export interface EnableLaneRuleResponse {
   /**
    * 操作状态。成功：true，失败：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -1314,7 +1305,6 @@ export interface CreateApiRateLimitRuleRequest {
 export interface DisableLaneRuleResponse {
   /**
    * 操作状态。成功：true，失败：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -1405,7 +1395,6 @@ export interface ChangeApiUsableStatusRequest {
 export interface DescribeMicroservicesResponse {
   /**
    * 微服务分页列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageMicroservice
   /**
@@ -1430,7 +1419,6 @@ export interface DescribeApiRateLimitRulesRequest {
 export interface DescribeApiGroupsResponse {
   /**
    * 翻页结构体
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageApiGroupInfo
   /**
@@ -1503,9 +1491,8 @@ export interface ReleaseConfigResponse {
 export interface DescribeUnitRuleResponse {
   /**
    * 单元化规则对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: UnitRule
+  Result?: UnitRule
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2005,7 +1992,6 @@ export interface DescribeRepositoryResponse {
 export interface ReleaseConfigWithDetailRespResponse {
   /**
    * 配置项发布 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ConfigRelease
   /**
@@ -2449,9 +2435,8 @@ export interface CosUploadInfo {
 export interface DescribeLanesResponse {
   /**
    * 泳道列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: LaneInfos
+  Result?: LaneInfos
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2746,9 +2731,8 @@ export interface DraftApiGroupRequest {
 export interface CreateLaneResponse {
   /**
    * 泳道ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2888,17 +2872,14 @@ export interface DescribePkgsResponse {
 export interface ConfigMapOption {
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mode?: string
 }
@@ -3167,9 +3148,8 @@ export interface CommonOption {
 export interface CreatePublicConfigResponse {
   /**
    * true：创建成功；false：创建失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3210,9 +3190,8 @@ export interface TsfPageVmGroup {
 export interface CreateConfigResponse {
   /**
    * true：创建成功；false：创建失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3249,7 +3228,6 @@ export interface DescribeCreateGatewayApiStatusRequest {
 export interface RevocationPublicConfigResponse {
   /**
    * true：撤销成功；false：撤销失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -3491,7 +3469,6 @@ export interface ModifyTaskRequest {
 export interface DeleteUnitNamespacesResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -4022,7 +3999,6 @@ export interface ContainGroup {
 export interface CreateConfigWithDetailRespResponse {
   /**
    * 配置项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Config
   /**
@@ -4037,7 +4013,6 @@ export interface CreateConfigWithDetailRespResponse {
 export interface DescribeGroupBusinessLogConfigsResponse {
   /**
    * 业务日志配置列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageBusinessLogConfig
   /**
@@ -4088,7 +4063,6 @@ export interface UpdateUnitRuleRequest {
 export interface ReleasePublicConfigResponse {
   /**
    * true：发布成功；false：发布失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -4731,7 +4705,6 @@ export interface DisableTaskRequest {
 export interface CreatePathRewritesWithDetailRespResponse {
   /**
    * 返回路径重写规则 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<string>
   /**
@@ -4872,7 +4845,6 @@ export interface DeleteMicroserviceRequest {
 export interface CreatePublicConfigWithDetailRespResponse {
   /**
    * 公共配置项 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Config
   /**
@@ -5298,7 +5270,6 @@ export interface GroupUnitApiDailyUseStatistics {
 export interface DescribeFileConfigReleasesResponse {
   /**
    * 配置项发布信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageFileConfigRelease
   /**
@@ -5313,7 +5284,6 @@ export interface DescribeFileConfigReleasesResponse {
 export interface DisableUnitRouteResponse {
   /**
    * 返回结果，成功失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -5414,7 +5384,6 @@ export interface LaneInfo {
 export interface DescribeConfigReleaseLogsResponse {
   /**
    * 分页的配置项发布历史列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageConfigReleaseLog
   /**
@@ -5429,7 +5398,6 @@ export interface DescribeConfigReleaseLogsResponse {
 export interface DeletePublicConfigResponse {
   /**
    * true：删除成功；false：删除失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -5588,9 +5556,8 @@ export interface ShrinkInstancesResponse {
 export interface DeleteLaneRuleResponse {
   /**
    * 操作状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5664,7 +5631,6 @@ export interface ContainerGroupOther {
   HealthCheckSettings?: HealthCheckSettings
   /**
    * 服务配置信息是否匹配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNotEqualServiceConfig?: boolean
 }
@@ -6200,9 +6166,8 @@ export interface ExpandGroupResponse {
 export interface DescribePublicConfigsResponse {
   /**
    * 分页后的全局配置项列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageConfig
+  Result?: TsfPageConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6215,7 +6180,6 @@ export interface DescribePublicConfigsResponse {
 export interface DescribeUnitNamespacesResponse {
   /**
    * 单元化命名空间对象列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageUnitNamespace
   /**
@@ -6391,7 +6355,6 @@ export interface ApiDefinitionDescr {
 export interface DescribeLaneRulesResponse {
   /**
    * 泳道规则列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: LaneRules
   /**
@@ -6705,8 +6668,7 @@ export interface ModifyTaskResponse {
  */
 export interface RevokeFileConfigResponse {
   /**
-   * 撤回结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 撤回结果，成功：true，失败：false。
    */
   Result?: boolean
   /**
@@ -7016,7 +6978,6 @@ export interface GroupContainerInfo {
 export interface CreateUnitRuleWithDetailRespResponse {
   /**
    * 单元化规则信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: UnitRule
   /**
@@ -7301,8 +7262,7 @@ export interface Microservice {
  */
 export interface UpdateUnitRuleResponse {
   /**
-   * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否成功，成功：true，失败：false。
    */
   Result?: boolean
   /**
@@ -7474,7 +7434,6 @@ export interface RepositoryList {
 export interface CreateLaneRuleResponse {
   /**
    * 泳道规则Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -7517,7 +7476,6 @@ export interface DescribeContainerGroupsResponse {
 export interface CreateUnitNamespacesResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -7532,7 +7490,6 @@ export interface CreateUnitNamespacesResponse {
 export interface UpdateApiGroupResponse {
   /**
    * 返回结果，true: 成功, false: 失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -7644,34 +7601,28 @@ export interface GatewayPlugin {
 export interface GatewayApiGroupVo {
   /**
    * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 分组下API个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupApiCount: number
+  GroupApiCount?: number
   /**
    * 分组API列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupApis: Array<GatewayGroupApiVo>
+  GroupApis?: Array<GatewayGroupApiVo>
   /**
    * 网关实例的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayInstanceType: string
+  GatewayInstanceType?: string
   /**
    * 网关实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayInstanceId: string
+  GatewayInstanceId?: string
 }
 
 /**
@@ -7851,12 +7802,10 @@ openJDK版本：8、17
 export interface LaneInfos {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 泳道信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<LaneInfo>
 }
@@ -7893,7 +7842,6 @@ export interface CreateTaskFlowRequest {
 export interface CreateFileConfigWithDetailRespResponse {
   /**
    * 文件配置项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: FileConfig
   /**
@@ -7934,12 +7882,10 @@ export interface CreateConfigTemplateWithDetailRespRequest {
 export interface TsfPageGatewayPlugin {
   /**
    * 记录总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 记录实体列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<GatewayPlugin>
 }
@@ -7982,7 +7928,6 @@ export interface UnbindApiGroupResponse {
 export interface DescribeGroupReleaseResponse {
   /**
    * 部署组发布的相关信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: GroupRelease
   /**
@@ -8184,8 +8129,7 @@ export interface ModifyPathRewriteResponse {
  */
 export interface EnableUnitRuleResponse {
   /**
-   * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否成功，成功：true，失败：false。
    */
   Result?: boolean
   /**
@@ -8200,7 +8144,6 @@ export interface EnableUnitRuleResponse {
 export interface DescribeEnabledUnitRuleResponse {
   /**
    * 单元化规则对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: UnitRule
   /**
@@ -8272,8 +8215,7 @@ export interface TsfApiListResponse {
  */
 export interface EnableUnitRouteResponse {
   /**
-   * 返回结果，成功失败
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回结果。成功：true，失败：false。
    */
   Result?: boolean
   /**
@@ -8429,8 +8371,7 @@ export interface TerminateTaskFlowBatchRequest {
  */
 export interface CreateUnitRuleResponse {
   /**
-   * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否成功，成功：true，失败：false。；
    */
   Result?: boolean
   /**
@@ -8899,7 +8840,6 @@ export interface CreatePathRewritesWithDetailRespRequest {
 export interface DeleteFileConfigResponse {
   /**
    * 删除结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -8994,9 +8934,8 @@ export interface DeleteFileConfigRequest {
 export interface DescribePublicConfigSummaryResponse {
   /**
    * 分页的全局配置统计信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageConfig
+  Result?: TsfPageConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9439,7 +9378,6 @@ export interface ApiDetailInfo {
 export interface DeleteUnitRuleResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -9758,24 +9696,20 @@ export interface SchedulingStrategy {
 export interface GatewayVo {
   /**
    * 网关部署组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayDeployGroupId: string
+  GatewayDeployGroupId?: string
   /**
    * 网关部署组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayDeployGroupName: string
+  GatewayDeployGroupName?: string
   /**
    * API 分组个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupNum: number
+  GroupNum?: number
   /**
    * API 分组列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Groups: Array<GatewayApiGroupVo>
+  Groups?: Array<GatewayApiGroupVo>
 }
 
 /**
@@ -9918,7 +9852,6 @@ export interface DescribePublicConfigResponse {
 export interface DescribeUsableUnitNamespacesResponse {
   /**
    * 单元化命名空间对象列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageUnitNamespace
   /**
@@ -9932,10 +9865,9 @@ export interface DescribeUsableUnitNamespacesResponse {
  */
 export interface ReleaseFileConfigResponse {
   /**
-   * 发布结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 发布结果，成功：true，失败：false。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10043,7 +9975,6 @@ export interface SimpleGroup {
 export interface CreateApiRateLimitRuleWithDetailRespResponse {
   /**
    * 创建的规则 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ApiRateLimitRule
   /**
@@ -10694,7 +10625,6 @@ export interface OverviewBasicResourceUsage {
 export interface DescribeUnitRulesResponse {
   /**
    * 分页列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<TsfPageUnitRule>
   /**
@@ -10913,7 +10843,6 @@ export interface DescribeGroupsResponse {
 export interface DescribeBusinessLogConfigsResponse {
   /**
    * 业务日志配置列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageBusinessLogConfig
   /**
@@ -10928,12 +10857,10 @@ export interface DescribeBusinessLogConfigsResponse {
 export interface ApplicationForPage {
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationName?: string
   /**
@@ -10943,42 +10870,34 @@ export interface ApplicationForPage {
   ApplicationDesc?: string
   /**
    * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationType?: string
   /**
    * 微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceType?: string
   /**
    * 编程语言
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgLang?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 应用资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationResourceType?: string
   /**
    * 应用runtime类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationRuntimeType?: string
   /**
    * Apigateway的serviceId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApigatewayServiceId?: string
   /**
@@ -10993,7 +10912,6 @@ export interface ApplicationForPage {
   ServiceConfigList?: Array<ServiceConfig>
   /**
    * IgnoreCreateImageRepository
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IgnoreCreateImageRepository?: boolean
   /**
@@ -11018,17 +10936,14 @@ export interface ApplicationForPage {
   MicroserviceSubType?: string
   /**
    * 应用编程语言类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgramLanguage?: string
   /**
    * 开发框架类型[SpringCloud，Dubbo，Go-GRPC，Other]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkType?: string
   /**
    * 注册配置治理信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceGovernanceConfig?: ServiceGovernanceConfig
   /**
@@ -11038,7 +10953,6 @@ export interface ApplicationForPage {
   MicroserviceTypeList?: Array<string>
   /**
    * 是否同时创建镜像仓库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateSameNameImageRepository?: boolean
 }
@@ -11456,12 +11370,10 @@ export interface DescribePublicConfigReleasesRequest {
 export interface TsfPageFileConfigRelease {
   /**
    * 数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<FileConfigRelease>
 }
@@ -11714,19 +11626,16 @@ export interface CreateFileConfigRequest {
 export interface GroupApiUseStatistics {
   /**
    * 总调用数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopStatusCode: Array<ApiUseStatisticsEntity>
+  TopStatusCode?: Array<ApiUseStatisticsEntity>
   /**
    * 平均错误率
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopTimeCost: Array<ApiUseStatisticsEntity>
+  TopTimeCost?: Array<ApiUseStatisticsEntity>
   /**
    * 分位值对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Quantile: QuantileEntity
+  Quantile?: QuantileEntity
 }
 
 /**
@@ -11763,9 +11672,8 @@ export interface DescribeContainerGroupAttributeResponse {
 export interface CreateFileConfigResponse {
   /**
    * true：创建成功；false：创建失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11892,7 +11800,6 @@ export interface DisassociateBusinessLogConfigRequest {
 export interface DescribePublicConfigReleaseLogsResponse {
   /**
    * 分页后的公共配置项发布历史列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageConfigReleaseLog
   /**
@@ -12039,7 +11946,6 @@ export interface RevocationPublicConfigRequest {
 export interface ModifyLaneRuleResponse {
   /**
    * 操作状态。成功：true，失败：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -12436,9 +12342,8 @@ export interface CreateConfigTemplateRequest {
 export interface DescribeApiGroupResponse {
   /**
    * API分组信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ApiGroupInfo
+  Result?: ApiGroupInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12487,7 +12392,6 @@ export interface CreateLaneRequest {
 export interface CreateApiGroupResponse {
   /**
    * API分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -12703,12 +12607,10 @@ export interface DeleteGroupRequest {
 export interface ContainerGroupDetail {
   /**
    * 部署组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
@@ -12718,12 +12620,10 @@ export interface ContainerGroupDetail {
   InstanceNum?: number
   /**
    * 已启动实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentNum?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
@@ -12743,42 +12643,34 @@ export interface ContainerGroupDetail {
   TagName?: string
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
    * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceId?: string
   /**
    * 命名空间名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName?: string
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
   /**
    * 负载均衡ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LbIp?: string
   /**
    * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationType?: string
   /**
    * Service ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIp?: string
   /**
@@ -12803,7 +12695,6 @@ export interface ContainerGroupDetail {
   AccessType?: number
   /**
    * 更新方式：0:快速更新 1:滚动更新
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateType?: number
   /**
@@ -12813,17 +12704,14 @@ export interface ContainerGroupDetail {
   UpdateIvl?: number
   /**
    * 端口数组对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProtocolPorts?: Array<ProtocolPort>
   /**
    * 环境变量数组对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Envs?: Array<Env>
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationName?: string
   /**
@@ -12833,12 +12721,10 @@ export interface ContainerGroupDetail {
   Message?: string
   /**
    * 部署组状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 服务类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceType?: string
   /**
@@ -12858,17 +12744,14 @@ export interface ContainerGroupDetail {
   SubnetId?: string
   /**
    * 部署组资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupResourceType?: string
   /**
    * 部署组实例个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCount?: number
   /**
    * 部署组更新时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: number
   /**
@@ -12888,7 +12771,6 @@ export interface ContainerGroupDetail {
   HealthCheckSettings?: HealthCheckSettings
   /**
    * 允许PlainYamlDeploy
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowPlainYamlDeploy?: boolean
   /**
@@ -13098,12 +12980,10 @@ export interface DescribeContainerGroupsRequest {
 export interface TsfPageBusinessLogConfig {
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 业务日志配置项列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<BusinessLogConfig>
 }
@@ -13957,7 +13837,6 @@ export interface DeleteContainerGroupRequest {
 export interface AdvanceSettings {
   /**
    * 子任务单机并发数限制，默认值为2
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubTaskConcurrency?: number
 }
@@ -14074,12 +13953,10 @@ export interface BusinessLogConfig {
   ConfigAssociatedGroupList?: Array<BusinessLogConfigAssociatedGroup>
   /**
    * 是否开启filebeat高级配置开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilebeatConfigEnable?: boolean
   /**
    * close_timeout参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilebeatCloseTimeout?: number
 }
@@ -14261,7 +14138,6 @@ export interface ServiceGovernanceConfig {
 export interface DisableUnitRuleResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -14407,12 +14283,10 @@ export interface StopTaskExecuteResponse {
 export interface TsfPageUnitRuleV2 {
   /**
    * 记录总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 记录实体列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<UnitRule>
 }
@@ -14489,7 +14363,6 @@ export interface DescribeSimpleGroupsRequest {
 export interface DescribeConfigReleasesResponse {
   /**
    * 分页的配置发布信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageConfigRelease
   /**
@@ -14613,22 +14486,18 @@ export interface UnitNamespace {
   NamespaceName: string
   /**
    * 单元化命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 网关实体ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayInstanceId?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
 }
@@ -14827,7 +14696,6 @@ export interface DeployContainerGroupResponse {
    * 部署容器应用是否成功。
 true：成功。
 false：失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -14893,7 +14761,6 @@ export interface ResourceFieldRef {
 export interface DescribeReleasedConfigResponse {
   /**
    * 已发布的配置内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -15326,7 +15193,6 @@ export interface ModifyGroupRequest {
 export interface DescribeMicroserviceResponse {
   /**
    * 微服务详情实例列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageMsInstance
   /**
@@ -15539,7 +15405,6 @@ GW — 网关资源类型；
 export interface DescribePublicConfigReleasesResponse {
   /**
    * 公共配置发布信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageConfigRelease
   /**

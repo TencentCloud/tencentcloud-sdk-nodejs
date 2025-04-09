@@ -1195,6 +1195,37 @@ export interface CreateBatchResponse {
 }
 
 /**
+ * 云存上报统计信息
+ */
+export interface CountDataInfo {
+  /**
+   * 视频上报异常次数
+   */
+  VideoExceptionNum?: number
+  /**
+   * 视频上报成功次数
+   */
+  VideoSuccessNum?: number
+  /**
+   * 视频上报成功率
+
+   */
+  VideoSuccessRate?: string
+  /**
+   * 事件上报异常次数
+   */
+  EventExceptionNum?: number
+  /**
+   * 事件上报成功次数
+   */
+  EventSuccessNum?: number
+  /**
+   * 事件上报成功率
+   */
+  EventSuccessRate?: string
+}
+
+/**
  * DescribePackageConsumeTasks返回参数结构体
  */
 export interface DescribePackageConsumeTasksResponse {
@@ -2340,6 +2371,20 @@ export interface TRTCParams {
 }
 
 /**
+ * DescribeCsReportCountDataInfo返回参数结构体
+ */
+export interface DescribeCsReportCountDataInfoResponse {
+  /**
+   * 云存上报统计信息
+   */
+  Data?: CountDataInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeviceDataHistory返回参数结构体
  */
 export interface DescribeDeviceDataHistoryResponse {
@@ -2574,42 +2619,25 @@ export interface DescribeFirmwareTaskResponse {
 }
 
 /**
- * 设备固件详细信息
+ * DescribeDevices请求参数结构体
  */
-export interface FirmwareInfo {
+export interface DescribeDevicesRequest {
   /**
-   * 固件版本
+   * 需要查看设备列表的产品 ID
    */
-  Version?: string
+  ProductId: string
   /**
-   * 固件MD5值
+   * 偏移量，Offset从0开始
    */
-  Md5sum?: string
+  Offset: number
   /**
-   * 固件创建时间
+   * 分页的大小，最大100
    */
-  CreateTime?: number
+  Limit: number
   /**
-   * 产品名称
+   * 需要过滤的设备名称
    */
-  ProductName?: string
-  /**
-   * 固件名称
-   */
-  Name?: string
-  /**
-   * 固件描述
-   */
-  Description?: string
-  /**
-   * 产品ID
-   */
-  ProductId?: string
-  /**
-   * 固件升级模块
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FwType?: string
+  DeviceName?: string
 }
 
 /**
@@ -3199,6 +3227,16 @@ export interface DescribeProductDynamicRegisterRequest {
 }
 
 /**
+ * UploadFirmware返回参数结构体
+ */
+export interface UploadFirmwareResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetCloudStorageEvent请求参数结构体
  */
 export interface ResetCloudStorageEventRequest {
@@ -3651,13 +3689,42 @@ export interface DescribeCloudStoragePackageConsumeDetailsRequest {
 }
 
 /**
- * UploadFirmware返回参数结构体
+ * 设备固件详细信息
  */
-export interface UploadFirmwareResponse {
+export interface FirmwareInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 固件版本
    */
-  RequestId?: string
+  Version?: string
+  /**
+   * 固件MD5值
+   */
+  Md5sum?: string
+  /**
+   * 固件创建时间
+   */
+  CreateTime?: number
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 固件名称
+   */
+  Name?: string
+  /**
+   * 固件描述
+   */
+  Description?: string
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 固件升级模块
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FwType?: string
 }
 
 /**
@@ -4649,25 +4716,29 @@ export interface SearchKeyword {
 }
 
 /**
- * DescribeDevices请求参数结构体
+ * DescribeCsReportCountDataInfo请求参数结构体
  */
-export interface DescribeDevicesRequest {
+export interface DescribeCsReportCountDataInfoRequest {
   /**
-   * 需要查看设备列表的产品 ID
+   * 产品id
    */
   ProductId: string
   /**
-   * 偏移量，Offset从0开始
+   * 设备名
    */
-  Offset: number
+  DeviceName: string
   /**
-   * 分页的大小，最大100
+   * 统计开始时间戳
    */
-  Limit: number
+  StartTime: number
   /**
-   * 需要过滤的设备名称
+   * 统计结束时间戳
    */
-  DeviceName?: string
+  EndTime: number
+  /**
+   * 设备通道
+   */
+  ChannelId?: number
 }
 
 /**

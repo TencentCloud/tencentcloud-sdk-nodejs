@@ -18,16 +18,11 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ManagePortraitRiskOutput,
-  ManageDeviceRiskOutput,
-  ManageDeviceRiskValueOutput,
   ManagePortraitRiskResponse,
-  ManageDeviceRiskInput,
-  ManagePortraitRiskValueOutput,
-  ManageDeviceRiskRequest,
+  ManagePortraitRiskOutput,
   ManagePortraitRiskInput,
   ManagePortraitRiskRequest,
-  ManageDeviceRiskResponse,
+  ManagePortraitRiskValueOutput,
 } from "./taf_models"
 
 /**
@@ -47,15 +42,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManagePortraitRiskResponse) => void
   ): Promise<ManagePortraitRiskResponse> {
     return this.request("ManagePortraitRisk", req, cb)
-  }
-
-  /**
-   * oaid 设备风险接口
-   */
-  async ManageDeviceRisk(
-    req: ManageDeviceRiskRequest,
-    cb?: (error: string, rep: ManageDeviceRiskResponse) => void
-  ): Promise<ManageDeviceRiskResponse> {
-    return this.request("ManageDeviceRisk", req, cb)
   }
 }

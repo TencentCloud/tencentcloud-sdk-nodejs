@@ -75,6 +75,7 @@ import {
   CheckForwardAuthRequest,
   DescribeDeviceDataRequest,
   CreateBatchResponse,
+  CountDataInfo,
   DescribePackageConsumeTasksResponse,
   DescribeDeviceActionHistoryResponse,
   DescribeCategoryRequest,
@@ -128,6 +129,7 @@ import {
   CreateProductResponse,
   ChangeP2PRouteResponse,
   TRTCParams,
+  DescribeCsReportCountDataInfoResponse,
   DescribeDeviceDataHistoryResponse,
   CallTRTCDeviceRequest,
   CallDeviceActionAsyncRequest,
@@ -139,7 +141,7 @@ import {
   InheritCloudStorageUserResponse,
   DescribeDeviceEventHistoryResponse,
   DescribeFirmwareTaskResponse,
-  FirmwareInfo,
+  DescribeDevicesRequest,
   CreateProductRequest,
   ChangeP2PRouteRequest,
   GetFirmwareURLResponse,
@@ -168,6 +170,7 @@ import {
   BalanceTransaction,
   FirmwareTaskInfo,
   DescribeProductDynamicRegisterRequest,
+  UploadFirmwareResponse,
   ResetCloudStorageEventRequest,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
@@ -191,7 +194,7 @@ import {
   CloudStorageTimeInfo,
   ModifyDeviceResponse,
   DescribeCloudStoragePackageConsumeDetailsRequest,
-  UploadFirmwareResponse,
+  FirmwareInfo,
   DescribeCloudStorageOrderRequest,
   DescribeDeviceRequest,
   CreateCloudStorageResponse,
@@ -244,7 +247,7 @@ import {
   AIModelInfo,
   DescribeCloudStorageThumbnailResponse,
   SearchKeyword,
-  DescribeDevicesRequest,
+  DescribeCsReportCountDataInfoRequest,
   DescribeModelDefinitionRequest,
   DescribeProductDynamicRegisterResponse,
   DescribeFirmwareTaskStatisticsResponse,
@@ -1286,6 +1289,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBonusesResponse) => void
   ): Promise<DescribeBonusesResponse> {
     return this.request("DescribeBonuses", req, cb)
+  }
+
+  /**
+   * 获取云存上报统计信息
+   */
+  async DescribeCsReportCountDataInfo(
+    req: DescribeCsReportCountDataInfoRequest,
+    cb?: (error: string, rep: DescribeCsReportCountDataInfoResponse) => void
+  ): Promise<DescribeCsReportCountDataInfoResponse> {
+    return this.request("DescribeCsReportCountDataInfo", req, cb)
   }
 
   /**

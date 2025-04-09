@@ -739,58 +739,47 @@ export interface CreateDhcpIpResponse {
 export interface SecurityGroupPolicy {
   /**
    * 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyIndex?: number
   /**
    * 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
    * 端口(all, 离散port,  range)。
 说明：如果Protocol设置为ALL，则Port也需要设置为all。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: string
   /**
    * 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceTemplate?: ServiceTemplateSpecification
   /**
    * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CidrBlock?: string
   /**
    * 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6CidrBlock?: string
   /**
    * 安全组实例ID，例如：sg-ohuuioma。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupId?: string
   /**
    * IP地址ID或者IP地址组ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressTemplate?: AddressTemplateSpecification
   /**
    * ACCEPT 或 DROP。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Action?: string
   /**
    * 安全组规则描述。作为入参时，当未传递该参数或值为空，且参数CidrBlock或Ipv6CidrBlock值为MY_PUBLIC_IP时，该参数的值将会被自动填充为Replaced-From-MY_PUBLIC_IP。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDescription?: string
   /**
    * 安全组最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
 }
@@ -1061,7 +1050,7 @@ vpc-id：按照VPCID过滤，local-gateway-name：按照本地网关名称过滤
  */
 export interface FlowLog {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID。
+   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
    */
   VpcId?: string
   /**
@@ -1073,7 +1062,7 @@ export interface FlowLog {
    */
   FlowLogName?: string
   /**
-   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG。
+   * 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。
    */
   ResourceType?: string
   /**
@@ -1081,7 +1070,7 @@ export interface FlowLog {
    */
   ResourceId?: string
   /**
-   * 流日志采集类型，ACCEPT|REJECT|ALL。
+   * 流日志采集类型，ACCEPT（允许），REJECT（拒绝），ALL（全部）。
    */
   TrafficType?: string
   /**
@@ -1089,7 +1078,7 @@ export interface FlowLog {
    */
   CloudLogId?: string
   /**
-   * 流日志存储ID状态。
+   * 流日志存储ID状态。SUCCESS（成功），DELETED（删除）。
    */
   CloudLogState?: string
   /**
@@ -1110,17 +1099,14 @@ export interface FlowLog {
   Enable?: boolean
   /**
    * 消费端类型：cls、ckafka。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
   /**
    * 消费端信息，当消费端类型为ckafka时返回。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowLogStorage?: FlowLogStorage
   /**
    * 流日志存储ID对应的地域信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudLogRegion?: string
 }
@@ -2039,22 +2025,18 @@ export interface DeleteNetworkAclEntriesRequest {
 export interface SecurityGroupPolicySet {
   /**
    * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 出站规则。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: Array<SecurityGroupPolicy>
   /**
    * 入站规则。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ingress?: Array<SecurityGroupPolicy>
   /**
    * 安全组策略条目统计。只用于出参。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyStatistics?: PolicyStatistics
 }
@@ -2437,12 +2419,10 @@ NONEXTHOP：无下一跳；
 export interface RouteTableAssociation {
   /**
    * 子网实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 路由表实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteTableId?: string
 }
@@ -3528,12 +3508,10 @@ export interface ModifyAssistantCidrResponse {
 export interface CidrForCcn {
   /**
    * local cidr值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cidr?: string
   /**
    * 是否发布到了云联网。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublishedToVbc?: boolean
 }
@@ -3898,12 +3876,10 @@ export interface NetworkAclEntry {
   Priority?: number
   /**
    * IPv4网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryID至少提供一个。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkAclIpv4EntryId?: string
   /**
    * IPv6网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryId至少提供一个。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkAclIpv6EntryId?: string
 }
@@ -4826,17 +4802,14 @@ export interface DeleteDirectConnectGatewayCcnRoutesResponse {
 export interface HaVipAssociation {
   /**
    * HaVip绑定的子机或网卡唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
   /**
    * HaVip实例唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HaVipId?: string
   /**
    * HaVip绑定的类型。取值:CVM, ENI。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
 }
@@ -5418,12 +5391,10 @@ export interface CreateAddressTemplateGroupRequest {
 export interface RouteECMPAlgorithm {
   /**
    *  目标网段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestinationCidrBlock?: string
   /**
    * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetRouteAlgorithm?: string
 }
@@ -5604,7 +5575,6 @@ export interface FlowLogStorage {
   StorageId: string
   /**
    * 主题Id，当流日志存储类型为ckafka时，必填。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageTopic?: string
 }
@@ -6101,22 +6071,18 @@ export interface TemplateLimit {
 export interface PolicyStatistics {
   /**
    * 入站IPv4总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IngressIPv4TotalCount: number
   /**
    * 入站IPv6总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IngressIPv6TotalCount: number
   /**
    * 出站IPv4总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EgressIPv4TotalCount: number
   /**
    * 出站IPv6总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EgressIPv6TotalCount: number
 }
@@ -6649,14 +6615,12 @@ export interface DescribeIpGeolocationDatabaseUrlResponse {
 export interface VpcTaskResultDetailInfo {
   /**
    * 资源ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 状态。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -7661,17 +7625,14 @@ export interface TrafficMirror {
   CreateTime?: string
   /**
    * 流量镜像的类型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 流量镜像所属的子网ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetInfo?: Array<TrafficMirrorTargetResourceInfo>
 }
@@ -9854,12 +9815,10 @@ export interface Ipv6Address {
   State?: string
   /**
    * 如果 IPv6地址是 ULA 类型，绑定的公网IP地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicIpAddress?: string
   /**
    * `IPv6`地址的类型: `GUA`(全球单播地址), `OTHER`(非GUA/ULA地址), `ULA`(唯一本地地址)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressType?: string
 }
@@ -10453,8 +10412,7 @@ export interface LocalGateway {
    */
   CreateTime?: string
   /**
-   * 标签键值对。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签键值对。
    */
   TagSet?: Array<Tag>
   /**
@@ -14447,32 +14405,26 @@ export interface Resource {
 export interface HighPriorityRouteTable {
   /**
    * 高优路由表唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighPriorityRouteTableId?: string
   /**
    * VPC实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 高优路由表名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 高优路由表关联的子网列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetSet?: Array<string>
   /**
    * 高优路由表条目信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighPriorityRouteSet?: Array<HighPriorityRoute>
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
 }
@@ -15989,6 +15941,10 @@ export interface ModifyVpnConnectionAttributeRequest {
    * 健康检查配置
    */
   HealthCheckConfig?: HealthCheckConfig
+  /**
+   * BGP隧道配置
+   */
+  BgpConfig?: BgpConfig
 }
 
 /**
@@ -16063,7 +16019,6 @@ export interface RouteTable {
   TagSet?: Array<Tag>
   /**
    * local路由是否发布云联网。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalCidrForCcn?: Array<CidrForCcn>
 }
@@ -16550,52 +16505,42 @@ export interface ReleaseAddressesResponse {
 export interface HighPriorityRoute {
   /**
    * 高优路由表唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighPriorityRouteTableId?: string
   /**
    * 高优路由表条目唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HighPriorityRouteId?: string
   /**
    * 目标网段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestinationCidrBlock?: string
   /**
    * 网关类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayType?: string
   /**
    * 网关唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 高优路由条目描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * ECMP算法，支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetRouteAlgorithm?: string
   /**
    * 出参展示，是否为CDC属性高优路由
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCdc?: boolean
   /**
    * 出参展示，CDC 唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
 }
@@ -17477,7 +17422,6 @@ export interface SecurityGroup {
   TagSet?: Array<Tag>
   /**
    * 安全组更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
 }
@@ -18102,12 +18046,10 @@ export interface TrafficMirrorTarget {
   AlgHash?: string
   /**
    * 流量镜像的接收endpoint（公网IP）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetEndPoints?: Array<string>
   /**
    * 流量镜像的接收类型，分别为：IP/ENI/CLB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetType?: string
 }

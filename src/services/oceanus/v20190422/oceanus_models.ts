@@ -1105,6 +1105,12 @@ export interface DescribeClustersRequest {
   OrderType?: number
   /**
    * 过滤规则
+    
+- Name
+    按照集群的名字进行模糊查询。例如：测试
+    类型： String
+    必选： 否
+    
    */
   Filters?: Array<Filter>
   /**

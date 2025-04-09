@@ -16,6 +16,21 @@
  */
 
 /**
+ * ManagePortraitRisk返回参数结构体
+ */
+export interface ManagePortraitRiskResponse {
+  /**
+   * 业务出参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ManagePortraitRiskOutput
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 业务出参
  */
 export interface ManagePortraitRiskOutput {
@@ -32,96 +47,6 @@ export interface ManagePortraitRiskOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: ManagePortraitRiskValueOutput
-}
-
-/**
- * 业务出参
- */
-export interface ManageDeviceRiskOutput {
-  /**
-   * 返回码（0：成功，1002: 参数错误 ， 4300： 权限错误，其他：失败）
-   */
-  Code?: number
-  /**
-   * 返回码对应的信息
-   */
-  Message?: string
-  /**
-   * 业务结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: ManageDeviceRiskValueOutput
-}
-
-/**
- * 业务出参
- */
-export interface ManageDeviceRiskValueOutput {
-  /**
-   * 设备评分
-   */
-  Score?: number
-}
-
-/**
- * ManagePortraitRisk返回参数结构体
- */
-export interface ManagePortraitRiskResponse {
-  /**
-   * 业务出参
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: ManagePortraitRiskOutput
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 业务入参
- */
-export interface ManageDeviceRiskInput {
-  /**
-   * 设备操作平台  1：android
-   */
-  OsType: number
-  /**
-   * 设备类型  6: oaid_md5(32位小写)
-   */
-  DeviceType: number
-  /**
-   * 根据 DeviceType 填写设备标识
-   */
-  DeviceId: string
-  /**
-   * 用户ip，只支持ipv4
-   */
-  ClientIp: string
-}
-
-/**
- * 业务出参
- */
-export interface ManagePortraitRiskValueOutput {
-  /**
-   * 对应的IP
-   */
-  UserIp?: string
-  /**
-   * 返回风险等级, 0 - 4，0代表无风险，数值越大，风险越高
-   */
-  Level?: number
-}
-
-/**
- * ManageDeviceRisk请求参数结构体
- */
-export interface ManageDeviceRiskRequest {
-  /**
-   * 业务入参
-   */
-  BusinessSecurityData: ManageDeviceRiskInput
 }
 
 /**
@@ -153,15 +78,15 @@ export interface ManagePortraitRiskRequest {
 }
 
 /**
- * ManageDeviceRisk返回参数结构体
+ * 业务出参
  */
-export interface ManageDeviceRiskResponse {
+export interface ManagePortraitRiskValueOutput {
   /**
-   * 业务出参
+   * 对应的IP
    */
-  Data?: ManageDeviceRiskOutput
+  UserIp?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 返回风险等级, 0 - 4，0代表无风险，数值越大，风险越高
    */
-  RequestId?: string
+  Level?: number
 }

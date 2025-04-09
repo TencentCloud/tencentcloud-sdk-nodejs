@@ -32,12 +32,14 @@ import {
   DeviceActiveResult,
   DeleteLoRaFrequencyResponse,
   ModifyApplicationResponse,
+  DescribeCsReportCountDataInfoRequest,
   CreateFreeCloudStorageResponse,
   ModifyPositionFenceResponse,
   DescribeCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageThumbnailListRequest,
   CheckFirmwareUpdateResponse,
   DescribeCloudStorageUsersResponse,
+  CountDataInfo,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   DescribeActivateLicenseServiceResponse,
   WifiInfo,
@@ -245,6 +247,7 @@ import {
   DescribeFenceEventListResponse,
   LicenseServiceNumInfo,
   TRTCParams,
+  DescribeCsReportCountDataInfoResponse,
   ModifyCloudStorageAIServiceRequest,
   GetStudioProductListRequest,
   DescribeFirmwareTaskResponse,
@@ -256,7 +259,7 @@ import {
   PositionFenceItem,
   VideoLicenseEntity,
   GetCOSURLResponse,
-  ReleaseStudioProductRequest,
+  GetTopicRuleListResponse,
   SearchPositionSpaceResponse,
   GenerateCloudStorageAIServiceTaskFileURLResponse,
   ActivateDeviceInfo,
@@ -318,7 +321,7 @@ import {
   UpdateFirmwareResponse,
   ModifyStudioProductRequest,
   CreateBatchProductionRequest,
-  GetTopicRuleListResponse,
+  ReleaseStudioProductRequest,
   CancelAssignTWeCallLicenseRequest,
   DescribeCloudStoragePackageConsumeStatsResponse,
   ListEventHistoryRequest,
@@ -1930,6 +1933,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchTopicRuleResponse) => void
   ): Promise<SearchTopicRuleResponse> {
     return this.request("SearchTopicRule", req, cb)
+  }
+
+  /**
+   * 获取云存上报统计信息
+   */
+  async DescribeCsReportCountDataInfo(
+    req: DescribeCsReportCountDataInfoRequest,
+    cb?: (error: string, rep: DescribeCsReportCountDataInfoResponse) => void
+  ): Promise<DescribeCsReportCountDataInfoResponse> {
+    return this.request("DescribeCsReportCountDataInfo", req, cb)
   }
 
   /**

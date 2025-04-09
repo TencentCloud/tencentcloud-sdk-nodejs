@@ -1528,6 +1528,16 @@ it("iotexplorer.v20190423.SearchTopicRule", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCsReportCountDataInfo", async function () {
+    try {
+       const data = await client.DescribeCsReportCountDataInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeCloudStorageEvents", async function () {
     try {
        const data = await client.DescribeCloudStorageEvents({})

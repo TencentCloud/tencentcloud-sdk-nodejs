@@ -235,6 +235,26 @@ export interface DescribeRegisterInstancesRequest {
 类型：String
 必选：否
 
+- tag-key
+
+按照【标签键】进行过滤。
+类型：String
+必选：否
+
+- tag-value
+
+按照【标签值】进行过滤。
+类型：String
+必选：否
+
+- tag:tag-key
+
+按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
+类型：String
+必选：否
+
+例如 Filter 为 {"Name": "tag:key1", "Values": ["v1", "v2"] } ，即查询所有标签为 key1:v1 或 key1:v2 的资源。
+
 
    */
   Filters?: Array<Filter>
@@ -987,7 +1007,11 @@ export interface CreateRegisterCodeRequest {
    */
   EffectiveTime?: number
   /**
-   * 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。默认不做限制。
+   * 限制注册码只能从 IpAddressRange 所描述公网出口进行注册。
+
+默认为空，即无任何限制。
+
+取值应为标准 IPv4 或 CIDRv4 格式。例如 192.168.1.1 或 192.168.0.0/16。
    */
   IpAddressRange?: string
 }

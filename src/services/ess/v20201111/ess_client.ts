@@ -136,6 +136,7 @@ import {
   DescribeOrganizationAuthStatusResponse,
   CreateUserAutoSignSealUrlResponse,
   FillApproverInfo,
+  Recipient,
   OccupiedSeal,
   IntentionActionResultDetail,
   CreateEmployeeQualificationSealQrCodeRequest,
@@ -213,7 +214,7 @@ import {
   CreateFlowByFilesResponse,
   UploadFilesResponse,
   SuccessCreateStaffData,
-  Recipient,
+  PresetApproverInfo,
   DescribeFlowEvidenceReportRequest,
   FailedCreateRoleData,
   CreateEmployeeChangeUrlRequest,
@@ -428,8 +429,10 @@ export class Client extends AbstractClient {
 1. 创建印章
 2. 创建模板
 3. 修改模板
-4. 预览模板
-5. 预览合同流程
+4. 创建起草合同
+5. 预览模板
+6. 预览合同流程
+ 
 
 预览模板的嵌入页面长相如下：
 ![image](https://qcloudimg.tencent-cloud.cn/raw/57bdda4a884e3f5b2de12d5a282a3651.png)

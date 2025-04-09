@@ -3316,23 +3316,23 @@ export interface HTTPListener {
   /**
    * 监听器ID
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 监听器名称
    */
-  ListenerName: string
+  ListenerName?: string
   /**
    * 监听器端口
    */
-  Port: number
+  Port?: number
   /**
    * 监听器创建时间，Unix时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTP
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 监听器状态，其中：
 0表示运行中；
@@ -3341,17 +3341,16 @@ export interface HTTPListener {
 3表示源站调整中；
 4表示配置变更中。
    */
-  ListenerStatus: number
+  ListenerStatus?: number
   /**
    * 监听器的通道ID，如果监听器属于通道组，则为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyId: string
+  ProxyId?: string
   /**
    * 监听器的通道组ID，如果监听器属于通道，则为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
 }
 
 /**
@@ -3678,7 +3677,6 @@ export interface HTTPSListener {
   CreateTime?: number
   /**
    * 服务器SSL证书的别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertificateAlias?: string
   /**
@@ -3690,7 +3688,6 @@ export interface HTTPSListener {
    * 监听器认证方式。其中，
 0表示单向认证；
 1表示双向认证。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthType?: number
   /**
@@ -3700,7 +3697,6 @@ export interface HTTPSListener {
   ClientCertificateAlias?: string
   /**
    * 多客户端CA证书别名信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolyClientCertificateAliasInfo?: Array<CertificateAliasInfo>
   /**
@@ -3708,12 +3704,10 @@ export interface HTTPSListener {
 0，不支持Http3接入；
 1，持Http3接入。
 注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Http3Supported?: number
   /**
    * 监听器的通道ID，如果监听器属于通道组，则为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyId?: string
   /**
@@ -3723,12 +3717,10 @@ export interface HTTPSListener {
   GroupId?: string
   /**
    * 支持的TLS版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TLSSupportVersion?: Array<string>
   /**
    * 支持的TLS密码套件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TLSCiphers?: string
 }
@@ -4841,88 +4833,72 @@ export interface DomainRuleSet {
   RuleSet?: Array<RuleInfo>
   /**
    * 该域名对应的服务器证书ID，值为default时，表示使用默认证书（监听器配置的证书）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertificateId?: string
   /**
    * 该域名对应服务器证书名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertificateAlias?: string
   /**
    * 该域名对应的客户端证书ID，值为default时，表示使用默认证书（监听器配置的证书）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientCertificateId?: string
   /**
    * 该域名对应客户端证书名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientCertificateAlias?: string
   /**
    * 该域名对应基础认证配置ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BasicAuthConfId?: string
   /**
    * 基础认证开关，其中：
 0，表示未开启；
 1，表示已开启。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BasicAuth?: number
   /**
    * 该域名对应基础认证配置名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BasicAuthConfAlias?: string
   /**
    * 该域名对应源站认证证书ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerCertificateId?: string
   /**
    * 源站认证开关，其中：
 0，表示未开启；
 1，表示已开启。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerAuth?: number
   /**
    * 该域名对应源站认证证书名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerCertificateAlias?: string
   /**
    * 该域名对应通道认证证书ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GaapCertificateId?: string
   /**
    * 通道认证开关，其中：
 0，表示未开启；
 1，表示已开启。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GaapAuth?: number
   /**
    * 该域名对应通道认证证书名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GaapCertificateAlias?: string
   /**
    * 源站认证域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerCertificateDomain?: string
   /**
    * 多客户端证书时，返回多个证书的id和别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolyClientCertificateAliasInfo?: Array<CertificateAliasInfo>
   /**
    * 多源站证书时，返回多个证书的id和别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolyRealServerCertificateAliasInfo?: Array<CertificateAliasInfo>
   /**
@@ -4930,34 +4906,28 @@ export interface DomainRuleSet {
 0表示运行中，
 1表示变更中，
 2表示删除中。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DomainStatus?: number
   /**
    * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BanStatus?: string
   /**
    * Http3特性标识，其中：
 0表示关闭；
 1表示启用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Http3Supported?: number
   /**
    * 是否为默认域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefaultServer?: boolean
   /**
    * TLS套件包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TLSCiphers?: string
   /**
    * TLS版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TLSSupportVersion?: Array<string>
 }
@@ -5602,7 +5572,6 @@ export interface UDPListener {
   Port?: number
   /**
    * 监听器转发源站端口，仅V1版本通道或通道组监听器有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerPort?: number
   /**
@@ -5640,72 +5609,58 @@ export interface UDPListener {
   CreateTime?: number
   /**
    * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionPersist?: number
   /**
    * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DelayLoop?: number
   /**
    * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectTimeout?: number
   /**
    * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyThreshold?: number
   /**
    * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnhealthyThreshold?: number
   /**
    * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailoverSwitch?: number
   /**
    * 源站是否开启健康检查：1开启，0关闭。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheck?: number
   /**
    * UDP源站健康类型。PORT表示检查端口，PING表示PING。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckType?: string
   /**
    * UDP源站健康检查探测端口。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckPort?: number
   /**
    * UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContextType?: string
   /**
    * UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SendContext?: string
   /**
    * UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecvContext?: string
   /**
    * 监听器的通道ID，如果监听器属于通道组，则为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyId?: string
   /**
    * 监听器的通道组ID，如果监听器属于通道，则为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
 }

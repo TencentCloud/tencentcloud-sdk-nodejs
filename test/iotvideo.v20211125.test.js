@@ -1028,6 +1028,16 @@ it("iotvideo.v20211125.DescribeBonuses", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeCsReportCountDataInfo", async function () {
+    try {
+       const data = await client.DescribeCsReportCountDataInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.DescribeCloudStorageEvents", async function () {
     try {
        const data = await client.DescribeCloudStorageEvents({})

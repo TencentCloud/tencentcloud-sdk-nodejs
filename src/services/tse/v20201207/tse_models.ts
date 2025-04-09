@@ -296,7 +296,6 @@ export interface CreateCloudNativeAPIGatewayResponse {
 export interface DescribeUpstreamHealthCheckConfigResponse {
   /**
    * 健康检查配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: UpstreamHealthCheckConfig
   /**
@@ -329,17 +328,14 @@ export interface NetworkAccessControl {
 export interface DescribePublicNetworkResult {
   /**
    * 网关实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 网关分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 客户端公网信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicNetwork?: CloudNativeAPIGatewayConfig
 }
@@ -553,7 +549,6 @@ export interface DeleteGovernanceNamespacesResponse {
 export interface DescribeCloudNativeAPIGatewayRoutesResponse {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: KongServiceRouteList
   /**
@@ -2338,12 +2333,10 @@ export interface ModifyNativeGatewayServerGroupRequest {
 export interface DescribeGatewayInstancePortResult {
   /**
    * 云原生API网关ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 网关实例协议端口列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
 }
@@ -2364,7 +2357,6 @@ export interface ModifyConsoleNetworkResponse {
 export interface DescribeWafDomainsResponse {
   /**
    * 已被 WAF 防护域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DescribeWafDomainsResult
   /**
@@ -2712,7 +2704,6 @@ export interface DescribeConfigFilesResponse {
 export interface DescribeCloudNativeAPIGatewayServicesResponse {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: KongServices
   /**
@@ -2950,22 +2941,18 @@ export interface ModifyNativeGatewayServiceSourceRequest {
 export interface KongActiveHealthCheck {
   /**
    * 主动健康检查健康探测间隔，单位：秒，0表示不开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyInterval?: number
   /**
    * 主动健康检查异常探测间隔，单位：秒，0表示不开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnHealthyInterval?: number
   /**
    * 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpPath?: string
   /**
    * GET HTTP 请求的超时时间，单位：秒。默认 60。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
 }
@@ -2986,37 +2973,30 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
 export interface KongServicePreview {
   /**
    * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID: string
   /**
    * 服务名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<string>
   /**
    * 后端配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamInfo?: KongUpstreamInfo
   /**
    * 后端类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamType?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 是否可编辑
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Editable?: boolean
   /**
@@ -3070,7 +3050,6 @@ export interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
 export interface UpdateUpstreamTargetsResponse {
   /**
    * 是否更新成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -3152,7 +3131,6 @@ export interface KongUpstreamPreview {
 export interface KongCertificate {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cert?: KongCertificatesPreview
 }
@@ -3357,59 +3335,48 @@ export interface ModifyCloudNativeAPIGatewayRouteResponse {
 export interface KongCertificatesPreview {
   /**
    * 证书名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 绑定的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindDomains?: Array<string>
   /**
    * 证书状态：expired(已过期)
                    active(生效中)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 证书pem格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Crt?: string
   /**
    * 证书私钥
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 证书过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 证书上传时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 证书签发时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IssueTime?: string
   /**
    * 证书来源：native(kong自定义证书)
                     ssl(ssl平台证书)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertSource?: string
   /**
    * ssl平台证书Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertId?: string
 }
@@ -3502,12 +3469,10 @@ export interface ConfigFileRelease {
 export interface KongRoutePreview {
   /**
    * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID: string
   /**
    * 服务名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
@@ -3527,27 +3492,22 @@ export interface KongRoutePreview {
   Hosts?: Array<string>
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocols?: Array<string>
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreserveHost?: boolean
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpsRedirectStatusCode?: number
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StripPath?: boolean
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
@@ -3558,22 +3518,18 @@ export interface KongRoutePreview {
   ForceHttps?: boolean
   /**
    * 服务名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceID?: string
   /**
    * 目的端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestinationPorts?: Array<number | bigint>
   /**
    * 路由的Headers
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<KVMapping>
   /**
@@ -3903,7 +3859,6 @@ export interface CloudNativeAPIGatewayConfig {
   ConsoleType?: string
   /**
    * HTTP链接地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpUrl?: string
   /**
@@ -3916,17 +3871,14 @@ export interface CloudNativeAPIGatewayConfig {
   NetType?: string
   /**
    * 管理员用户名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdminUser?: string
   /**
    * 管理员密码。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdminPassword?: string
   /**
    * 网络状态, Open|Closed|Updating
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -3936,67 +3888,54 @@ export interface CloudNativeAPIGatewayConfig {
   AccessControl?: NetworkAccessControl
   /**
    * 内网子网 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 内网VPC ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 负载均衡的描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 负载均衡的规格类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaType?: string
   /**
    * clb规格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaName?: string
   /**
    * clb vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
    * 带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetMaxBandwidthOut?: number
   /**
    * 是否多可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiZoneFlag?: boolean
   /**
    * 主可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterZoneId?: string
   /**
    * 备可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZoneId?: string
   /**
    * 主可用区名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterZoneName?: string
   /**
    * 备可用区名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZoneName?: string
   /**
    * 网络 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkId?: string
 }
@@ -4395,7 +4334,6 @@ export interface RollbackConfigFileReleasesRequest {
 export interface DescribeCloudNativeAPIGatewayInfoByIpResponse {
   /**
    * 出参
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DescribeInstanceInfoByIpResult
   /**
@@ -4613,7 +4551,6 @@ export interface GovernanceInstanceInput {
 export interface CreateNativeGatewayServerGroupResponse {
   /**
    * 网关分组创建信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: CreateCloudNativeAPIGatewayServerGroupResult
   /**
@@ -5230,12 +5167,10 @@ export interface CreateGatewayServiceResult {
 export interface DescribeInstanceInfoByIpResult {
   /**
    * 实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 分组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
 }
@@ -5300,7 +5235,6 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
 export interface DescribeCloudNativeAPIGatewayPortsResponse {
   /**
    * 云原生API网关实例协议端口列表响应结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DescribeGatewayInstancePortResult
   /**
@@ -5524,47 +5458,38 @@ export interface CreateGovernanceNamespacesResponse {
 export interface UpstreamHealthCheckConfig {
   /**
    * 开启主动健康检查
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableActiveHealthCheck?: boolean
   /**
    * 主动健康检查配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActiveHealthCheck?: KongActiveHealthCheck
   /**
    * 开启被动健康检查
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnablePassiveHealthCheck?: boolean
   /**
    * 被动健康检查配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PassiveHealthCheck?: KongPassiveHealthCheck
   /**
    * 连续健康阈值，单位：次
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Successes?: number
   /**
-   * 连续异常阈值，单位：次	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 连续异常阈值，单位：次
    */
   Failures?: number
   /**
    * 超时阈值，单位：次
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeouts?: number
   /**
    * 健康HTTP状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyHttpStatuses?: Array<number | bigint>
   /**
    * 异常HTTP状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnhealthyHttpStatuses?: Array<number | bigint>
   /**
@@ -5575,7 +5500,6 @@ export interface UpstreamHealthCheckConfig {
   IgnoreZeroWeightNodes?: boolean
   /**
    * 健康检查支持权重为0节点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZeroWeightHeathCheck?: boolean
 }
@@ -6412,7 +6336,6 @@ export interface ListCloudNativeAPIGatewayResult {
 export interface CreateCloudNativeAPIGatewayServiceResponse {
   /**
    * 网关服务创建结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: CreateGatewayServiceResult
   /**
@@ -6588,12 +6511,10 @@ export interface CreateGovernanceAliasResponse {
 export interface CloudNativeAPIGatewayNodeConfig {
   /**
    * 节点配置, 1c2g|2c4g|4c8g|8c16g。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Specification: string
   /**
    * 节点数量，2-9。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Number: number
 }
@@ -6823,12 +6744,10 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
 export interface GatewayInstanceSchemeAndPorts {
   /**
    * 端口协议，可选HTTP、HTTPS、TCP和UDP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scheme?: string
   /**
    * 端口列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PortList?: Array<number | bigint>
 }
@@ -7258,7 +7177,6 @@ export interface DescribeNacosReplicasResponse {
 export interface KongPassiveHealthCheck {
   /**
    * 后端target协议类型，被动健康检查支持http和tcp，主动健康检查支持http
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
 }
@@ -7396,7 +7314,6 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
 export interface DescribePublicNetworkResponse {
   /**
    * 获取云原生API网关公网详情响应结果。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DescribePublicNetworkResult
   /**
@@ -7870,7 +7787,6 @@ export interface DeleteCloudNativeAPIGatewayRequest {
 export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: KongCertificate
   /**
@@ -8113,12 +8029,10 @@ export interface CreateAutoScalerResourceStrategyRequest {
 export interface KongServices {
   /**
    * kong实例的服务列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceList?: Array<KongServicePreview>
   /**
    * 列表总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
 }
@@ -8147,12 +8061,10 @@ export interface CreateCloudNativeAPIGatewayServerGroupResult {
   GroupId?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
 }
@@ -8185,7 +8097,6 @@ export interface DescribeGovernanceServiceContractsResponse {
 export interface UpdateUpstreamHealthCheckConfigResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -8545,12 +8456,10 @@ zk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM
 export interface KongServiceRouteList {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteList?: Array<KongRoutePreview>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
 }

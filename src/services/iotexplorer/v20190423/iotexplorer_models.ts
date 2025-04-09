@@ -284,6 +284,32 @@ export interface ModifyApplicationResponse {
 }
 
 /**
+ * DescribeCsReportCountDataInfo请求参数结构体
+ */
+export interface DescribeCsReportCountDataInfoRequest {
+  /**
+   * 产品id
+   */
+  ProductId: string
+  /**
+   * 设备名
+   */
+  DeviceName: string
+  /**
+   * 统计开始时间戳
+   */
+  StartTime: number
+  /**
+   * 统计结束时间戳
+   */
+  EndTime: number
+  /**
+   * 设备通道
+   */
+  ChannelId?: number
+}
+
+/**
  * CreateFreeCloudStorage返回参数结构体
  */
 export interface CreateFreeCloudStorageResponse {
@@ -379,6 +405,37 @@ export interface DescribeCloudStorageUsersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云存上报统计信息
+ */
+export interface CountDataInfo {
+  /**
+   * 视频上报异常次数
+   */
+  VideoExceptionNum?: number
+  /**
+   * 视频上报成功次数
+   */
+  VideoSuccessNum?: number
+  /**
+   * 视频上报成功率
+
+   */
+  VideoSuccessRate?: string
+  /**
+   * 事件上报异常次数
+   */
+  EventExceptionNum?: number
+  /**
+   * 事件上报成功次数
+   */
+  EventSuccessNum?: number
+  /**
+   * 事件上报成功率
+   */
+  EventSuccessRate?: string
 }
 
 /**
@@ -4479,6 +4536,20 @@ export interface TRTCParams {
 }
 
 /**
+ * DescribeCsReportCountDataInfo返回参数结构体
+ */
+export interface DescribeCsReportCountDataInfoResponse {
+  /**
+   * 云存上报统计信息
+   */
+  Data?: CountDataInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCloudStorageAIService请求参数结构体
  */
 export interface ModifyCloudStorageAIServiceRequest {
@@ -4795,17 +4866,21 @@ export interface GetCOSURLResponse {
 }
 
 /**
- * ReleaseStudioProduct请求参数结构体
+ * GetTopicRuleList返回参数结构体
  */
-export interface ReleaseStudioProductRequest {
+export interface GetTopicRuleListResponse {
   /**
-   * 产品ID
+   * 规则总数量
    */
-  ProductId: string
+  TotalCnt?: number
   /**
-   * 产品DevStatus
+   * 规则列表
    */
-  DevStatus: string
+  Rules?: Array<TopicRuleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6093,21 +6168,17 @@ export interface CreateBatchProductionRequest {
 }
 
 /**
- * GetTopicRuleList返回参数结构体
+ * ReleaseStudioProduct请求参数结构体
  */
-export interface GetTopicRuleListResponse {
+export interface ReleaseStudioProductRequest {
   /**
-   * 规则总数量
+   * 产品ID
    */
-  TotalCnt?: number
+  ProductId: string
   /**
-   * 规则列表
+   * 产品DevStatus
    */
-  Rules?: Array<TopicRuleInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DevStatus: string
 }
 
 /**

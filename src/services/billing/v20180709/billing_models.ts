@@ -181,20 +181,6 @@ export interface AllocationOverviewTotal {
 }
 
 /**
- * 节省计划覆盖率聚合数据
- */
-export interface SavingPlanCoverageRate {
-  /**
-   * 聚合时间维度，按天聚合格式为yyyy-MM-dd，按月聚合格式为yyyy-MM
-   */
-  DatePoint?: string
-  /**
-   * 覆盖率结果，取值[0, 100]
-   */
-  Rate?: number
-}
-
-/**
  * 收支明细的流水信息
  */
 export interface BillTransactionInfo {
@@ -1551,83 +1537,6 @@ export interface ConsumptionSummaryTotal {
 }
 
 /**
- * 节省计划覆盖率数据
- */
-export interface SavingPlanCoverageDetail {
-  /**
-   * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
-   */
-  ResourceId?: string
-  /**
-   * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionId?: number
-  /**
-   * 产品编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductCode?: string
-  /**
-   * 子产品编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubProductCode?: string
-  /**
-   * 费用起始日期，格式yyyy-MM-dd
-   */
-  StartDate?: string
-  /**
-   * 费用结束日期，格式yyyy-MM-dd，目前与StartDate相等
-   */
-  EndDate?: string
-  /**
-   * 节省计划覆盖金额（即节省计划支付金额）
-   */
-  SpCoveredAmount?: number
-  /**
-   * 节省计划未覆盖金额（即优惠后总价）
-   */
-  SpUncoveredAmount?: number
-  /**
-   * 总支出（即节省计划未覆盖金额 + 节省计划覆盖金额）
-   */
-  TotalRealAmount?: number
-  /**
-   * 按量计费预期金额（即折前价 * 折扣）
-   */
-  ExpectedAmount?: number
-  /**
-   * 覆盖率结果，取值[0, 100]
-   */
-  SpCoverage?: number
-  /**
-   * 支付者昵称
-   */
-  PayerUinName?: string
-  /**
-   * 使用者昵称
-   */
-  OwnerUinName?: string
-  /**
-   * 支付者uin
-   */
-  PayerUin?: string
-  /**
-   * 计费项名称
-   */
-  SubBillingItemName?: string
-  /**
-   * 计费细项名称
-   */
-  BillingItemName?: string
-  /**
-   * 子产品名称
-   */
-  SubProductName?: string
-}
-
-/**
  * DescribeAllocationOverview请求参数结构体
  */
 export interface DescribeAllocationOverviewRequest {
@@ -2317,28 +2226,6 @@ export interface BillDays {
 }
 
 /**
- * DescribeSavingPlanCoverage返回参数结构体
- */
-export interface DescribeSavingPlanCoverageResponse {
-  /**
-   * 节省计划覆盖率明细数据
-   */
-  DetailSet?: Array<SavingPlanCoverageDetail>
-  /**
-   * 节省计划覆盖率聚合数据
-   */
-  RateSet?: Array<SavingPlanCoverageRate>
-  /**
-   * 查询命中的节省计划覆盖率明细数据总条数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 成本分析金额返回数据模型
  */
 export interface AnalyseAmountDetail {
@@ -2970,32 +2857,6 @@ export interface AllocationTreeNode {
    * 分账单元名称
    */
   TreeNodeUniqKeyName?: string
-}
-
-/**
- * DescribeSavingPlanCoverage请求参数结构体
- */
-export interface DescribeSavingPlanCoverageRequest {
-  /**
-   * 费用起始日期，格式yyyy-MM-dd
-   */
-  StartDate: string
-  /**
-   * 费用结束日期，格式yyyy-MM-dd
-   */
-  EndDate: string
-  /**
-   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
-   */
-  Offset: number
-  /**
-   * 数量，最大值为200
-   */
-  Limit: number
-  /**
-   * 取值包括1（缺省值）和2，1表示按天统计覆盖率，2表示按月统计覆盖率，此参数仅影响返回的RateSet聚合粒度，不影响返回的DetailSet
-   */
-  PeriodType?: number
 }
 
 /**
