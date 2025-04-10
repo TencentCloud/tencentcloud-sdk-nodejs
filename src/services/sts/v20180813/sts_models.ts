@@ -163,13 +163,25 @@ export interface AssumeRoleResponse {
 }
 
 /**
- * QueryApiKey请求参数结构体
+ * GetSessionToken返回参数结构体
  */
-export interface QueryApiKeyRequest {
+export interface GetSessionTokenResponse {
   /**
-   * 待查询的账号uin(不填默认查当前账号uin)
+   * 临时访问凭证
    */
-  TargetUin?: number
+  Credentials?: Credentials
+  /**
+   * 证书无效的时间，返回 Unix 时间戳，精确到秒
+   */
+  ExpiredTime?: number
+  /**
+   * 临时访问凭证的过期时间，以 iso8601 格式的 UTC 时间表示
+   */
+  Expiration?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -243,6 +255,34 @@ export interface GetCallerIdentityResponse {
 }
 
 /**
+ * QueryApiKey请求参数结构体
+ */
+export interface QueryApiKeyRequest {
+  /**
+   * 待查询的账号uin(不填默认查当前账号uin)
+   */
+  TargetUin?: number
+}
+
+/**
+ * GetSessionToken请求参数结构体
+ */
+export interface GetSessionTokenRequest {
+  /**
+   * MFA序列号，与进行调用的CAM用户关联的MFA设备的标识号。格式qcs::cam:uin/${ownerUin}::mfa/${mfaType}。mfaType支持softToken（软token）
+   */
+  SerialNumber: string
+  /**
+   * mfa身份验证码。
+   */
+  TokenCode: string
+  /**
+   * 指定临时证书的有效期，单位：秒，默认1800秒，主账号最长可设定有效期为7200秒，子账号最长可设定有效期为129600秒。
+   */
+  DurationSeconds?: number
+}
+
+/**
  * 临时证书
  */
 export interface Credentials {
@@ -302,6 +342,14 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
    * 调用者身份uin
    */
   SourceIdentity?: string
+  /**
+   * MFA序列号，与进行调用的CAM用户关联的MFA设备的标识号。格式qcs::cam:uin/${ownerUin}::mfa/${mfaType}。mfaType支持softToken（软token）
+   */
+  SerialNumber?: string
+  /**
+   * mfa身份验证码。
+   */
+  TokenCode?: string
 }
 
 /**

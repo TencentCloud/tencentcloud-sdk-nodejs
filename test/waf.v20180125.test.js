@@ -98,6 +98,16 @@ it("waf.v20180125.DeleteIpAccessControl", async function () {
     }
 })
 
+it("waf.v20180125.ModifyUserSignatureRule", async function () {
+    try {
+       const data = await client.ModifyUserSignatureRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAreaBanAreas", async function () {
     try {
        const data = await client.DescribeAreaBanAreas({})
@@ -201,6 +211,16 @@ it("waf.v20180125.DescribeApiDetail", async function () {
 it("waf.v20180125.DescribeScanIp", async function () {
     try {
        const data = await client.DescribeScanIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreatePostCKafkaFlow", async function () {
+    try {
+       const data = await client.CreatePostCKafkaFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,16 +341,6 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
 it("waf.v20180125.DescribeIpHitItems", async function () {
     try {
        const data = await client.DescribeIpHitItems({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.DeleteSession", async function () {
-    try {
-       const data = await client.DeleteSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,6 +528,16 @@ it("waf.v20180125.DescribeUserSignatureRuleV2", async function () {
     }
 })
 
+it("waf.v20180125.DescribePostCKafkaFlows", async function () {
+    try {
+       const data = await client.DescribePostCKafkaFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeVipInfo", async function () {
     try {
        const data = await client.DescribeVipInfo({})
@@ -608,9 +628,9 @@ it("waf.v20180125.ModifyInstanceRenewFlag", async function () {
     }
 })
 
-it("waf.v20180125.DescribeUserLevel", async function () {
+it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
     try {
-       const data = await client.DescribeUserLevel({})
+       const data = await client.DescribeDomainDetailsSaas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,9 +1068,9 @@ it("waf.v20180125.DescribeWafAutoDenyRules", async function () {
     }
 })
 
-it("waf.v20180125.AddCustomRule", async function () {
+it("waf.v20180125.DeleteSession", async function () {
     try {
-       const data = await client.AddCustomRule({})
+       const data = await client.DeleteSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1088,9 +1108,9 @@ it("waf.v20180125.ModifyAntiInfoLeakRuleStatus", async function () {
     }
 })
 
-it("waf.v20180125.RefreshAccessCheckResult", async function () {
+it("waf.v20180125.DestroyPostCKafkaFlow", async function () {
     try {
-       const data = await client.RefreshAccessCheckResult({})
+       const data = await client.DestroyPostCKafkaFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1248,9 +1268,9 @@ it("waf.v20180125.ModifyAttackWhiteRule", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
+it("waf.v20180125.AddCustomRule", async function () {
     try {
-       const data = await client.DescribeDomainDetailsSaas({})
+       const data = await client.AddCustomRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1258,9 +1278,9 @@ it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
     }
 })
 
-it("waf.v20180125.ModifyUserSignatureRule", async function () {
+it("waf.v20180125.DescribeUserLevel", async function () {
     try {
-       const data = await client.ModifyUserSignatureRule({})
+       const data = await client.DescribeUserLevel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1501,6 +1521,16 @@ it("waf.v20180125.DescribeDomainRules", async function () {
 it("waf.v20180125.ModifyApiSecEventChange", async function () {
     try {
        const data = await client.ModifyApiSecEventChange({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.RefreshAccessCheckResult", async function () {
+    try {
+       const data = await client.RefreshAccessCheckResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

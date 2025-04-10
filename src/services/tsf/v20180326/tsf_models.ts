@@ -628,12 +628,10 @@ export interface DescribeDeliveryConfigResponse {
 export interface ForceSchedule {
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AffinityList?: Array<Affinity>
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AntiAffinityList?: Array<Affinity>
 }
@@ -1070,7 +1068,6 @@ export interface TaskRule {
   RuleType: string
   /**
    * Cron类型规则，cron表达式。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expression?: string
   /**
@@ -1120,12 +1117,10 @@ export interface TaskRecord {
   TimeOut?: number
   /**
    * 重试次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryCount?: number
   /**
    * 重试间隔
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryInterval?: number
   /**
@@ -1142,47 +1137,38 @@ export interface TaskRecord {
   TaskId?: string
   /**
    * 判断任务成功的操作符
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessOperator?: string
   /**
    * 判断任务成功的阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessRatio?: number
   /**
    * 分片数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShardCount?: number
   /**
    * 高级设置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvanceSettings?: AdvanceSettings
   /**
    * 分片参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShardArguments?: Array<ShardArgument>
   /**
    * 所属工作流ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BelongFlowIds?: Array<string>
   /**
    * 任务历史ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskLogId?: string
   /**
    * 触发类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: string
   /**
    * 任务参数，长度限制10000个字符
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskArgument?: string
 }
@@ -1542,20 +1528,19 @@ export interface InvocationMetricScatterPlot {
   /**
    * 时间轴截止时间，GMT，精确到毫秒
    */
-  EndTime: number
+  EndTime?: number
   /**
    * 时间粒度
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 时间轴开始时间，GMT，精确到毫秒
    */
-  Period: number
+  Period?: number
   /**
    * 多值数据点集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataPoints: Array<MultiValueDataPoints>
+  DataPoints?: Array<MultiValueDataPoints>
 }
 
 /**
@@ -2917,11 +2902,11 @@ export interface DescribeContainerGroupDeployInfoResponse {
  */
 export interface DescribeOverviewInvocationRequest {
   /**
-   * 命名空间ID
+   * 命名空间ID， 此参数必填
    */
   NamespaceId?: string
   /**
-   * 监控统计类型，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时
+   * 监控统计类型，必填，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时
    */
   Type?: string
   /**
@@ -3507,7 +3492,6 @@ export interface DescribeStatisticsResponse {
 export interface DescribeBasicResourceUsageResponse {
   /**
    * TSF基本资源信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: OverviewBasicResourceUsage
   /**
@@ -3872,7 +3856,7 @@ export interface DescribeDeliveryConfigByGroupIdResponse {
  */
 export interface ModifyContainerGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID 必填项
    */
   GroupId?: string
   /**
@@ -5516,7 +5500,6 @@ export interface DisassociateKafkaConfigResponse {
 export interface ValueFrom {
   /**
    * k8s env 的 FieldRef
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FieldRef?: FieldRef
   /**
@@ -5526,12 +5509,10 @@ export interface ValueFrom {
   ResourceFieldRef?: ResourceFieldRef
   /**
    * k8s env的configMapKeyRef
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigMapKeyRef?: CommonRef
   /**
    * k8s env 的 secretKeyRef
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretKeyRef?: CommonRef
 }
@@ -5983,9 +5964,8 @@ export interface Metric {
 export interface DescribeOverviewInvocationResponse {
   /**
    * 监控统计数据列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: Array<MetricDataPoint>
+  Result?: Array<MetricDataPoint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6797,12 +6777,10 @@ export interface UpdateConfigTemplateResponse {
 export interface TrySchedule {
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AffinityList?: Array<Affinity>
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AntiAffinityList?: Array<Affinity>
 }
@@ -7409,7 +7387,6 @@ export interface TsfPageStdoutLogV2 {
   Status?: string
   /**
    * 游标ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchAfter?: Array<string>
 }
@@ -8582,32 +8559,26 @@ export interface VmGroup {
   EnableBatchHealthCheck?: boolean
   /**
    * 是否开启cgroup控制内存cpu
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilebeatCgroupEnable?: boolean
   /**
    * filebeat使用cpu上限
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilebeatMaxCpu?: number
   /**
    * filebeat使用内存上限
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilebeatMaxMem?: number
   /**
    * 仓库ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepositoryId?: string
   /**
    * 仓库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepositoryName?: string
   /**
    * 仓库类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepositoryType?: string
 }
@@ -8864,44 +8835,36 @@ export interface ResourceTaskStatusResult {
 export interface ContainerEvent {
   /**
    * 第一次出现的时间，以 ms 为单位的时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FirstTimestamp: number
+  FirstTimestamp?: number
   /**
    * 最后一次出现的时间，以 ms 为单位的时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastTimestamp: number
+  LastTimestamp?: number
   /**
    * 级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Kind: string
+  Kind?: string
   /**
    * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
    * 详细描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: string
+  Message?: string
   /**
    * 出现次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Count: number
+  Count?: number
 }
 
 /**
@@ -9816,19 +9779,16 @@ export interface CreateTaskRequest {
 export interface OperationInfo {
   /**
    * 初始化按钮的控制信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Init: OperationInfoDetail
+  Init?: OperationInfoDetail
   /**
    * 添加实例按钮的控制信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddInstance: OperationInfoDetail
+  AddInstance?: OperationInfoDetail
   /**
    * 销毁机器的控制信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Destroy: OperationInfoDetail
+  Destroy?: OperationInfoDetail
 }
 
 /**
@@ -10055,9 +10015,8 @@ export interface ModifyContainerGroupResponse {
    * 更新部署组是否成功。
 true：成功。
 false：失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10376,7 +10335,6 @@ export interface ApiVersionArray {
 export interface GatewayConfig {
   /**
    * 服务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
 }
@@ -11333,7 +11291,6 @@ export interface DescribeTaskDetailRequest {
 export interface MultiValue {
   /**
    * 数据点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<number>
 }
@@ -13179,12 +13136,10 @@ export interface DeliveryConfigBindGroup {
 export interface CustomPodSchedule {
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForceSchedule?: ForceSchedule
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrySchedule?: TrySchedule
 }
@@ -13261,17 +13216,14 @@ export interface EnableUnitRouteRequest {
 export interface TsfPageApplication {
   /**
    * 应用总数目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 应用信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<ApplicationForPage>
   /**
    * 获取部署组实例列表返回的原始批次个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecTotalCount?: number
 }
@@ -13622,7 +13574,6 @@ export interface TsfPageBusinessLogV2 {
   Status?: string
   /**
    * 查询es时，使用searchAfter返回的游标
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchAfter?: Array<string>
 }
@@ -13633,7 +13584,6 @@ export interface TsfPageBusinessLogV2 {
 export interface FieldRef {
   /**
    * k8s 的 FieldPath
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FieldPath?: string
 }
@@ -14005,7 +13955,6 @@ export interface UpdateHealthCheckSettingsResponse {
    * 更新健康检查配置操作是否成功。
 true：操作成功。
 false：操作失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -14750,7 +14699,6 @@ false：操作失败。
 export interface ResourceFieldRef {
   /**
    * k8s 的 Resource
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: string
 }

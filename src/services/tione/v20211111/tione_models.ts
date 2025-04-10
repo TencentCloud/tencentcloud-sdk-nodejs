@@ -193,183 +193,75 @@ HYBRID_PAID:
 }
 
 /**
- * 描述在线服务
+ * DescribeLogs请求参数结构体
  */
-export interface Service {
+export interface DescribeLogsRequest {
   /**
-   * 服务组id
+   * 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测
+枚举值：
+- TRAIN
+- NOTEBOOK
+- INFER
+- BATCH
    */
-  ServiceGroupId?: string
+  Service: string
   /**
-   * 服务id
+   * 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时
+   */
+  StartTime?: string
+  /**
+   * 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间
+   */
+  EndTime?: string
+  /**
+   * 日志查询条数，默认值100，最大值100
+   */
+  Limit?: number
+  /**
+   * 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：
+- Service类型为TRAIN：
+  调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId
+- Service类型为NOTEBOOK：
+  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName
+- Service类型为INFER：
+  调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId
+- Service类型为BATCH：
+  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId
    */
   ServiceId?: string
   /**
-   * 服务组名
+   * Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：
+- Service类型为TRAIN：
+  调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames
+- Service类型为NOTEBOOK：
+  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName
+- Service类型为INFER：
+  调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos
+- Service类型为BATCH：
+  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList
+注：支持结尾通配符*
    */
-  ServiceGroupName?: string
+  PodName?: string
   /**
-   * 服务描述
-注意：此字段可能返回 null，表示取不到有效值。
+   * 排序方向（可选值为ASC, DESC ），默认为DESC
    */
-  ServiceDescription?: string
+  Order?: string
   /**
-   * 服务的详细信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 按哪个字段排序（可选值为Timestamp），默认值为Timestamp
    */
-  ServiceInfo?: ServiceInfo
+  OrderField?: string
   /**
-   * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回
    */
-  ClusterId?: string
+  Context?: string
   /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤条件
+注意: 
+1. Filter.Name：目前只支持Key（也就是按关键字过滤日志）
+2. Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足
+3. Filter. Negative和Filter. Fuzzy没有使用
    */
-  Region?: string
-  /**
-   * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 付费类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChargeType?: string
-  /**
-   * 包年包月服务的资源组id，按量计费的服务为空
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupId?: string
-  /**
-   * 包年包月服务对应的资源组名字
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupName?: string
-  /**
-   * 服务的标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 服务所在的 ingress 的 name
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IngressName?: string
-  /**
-   * 创建者
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreatedBy?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * 主账号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Uin?: string
-  /**
-   * 子账号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubUin?: string
-  /**
-   * app_id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId?: number
-  /**
-   * 服务的业务状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BusinessStatus?: string
-  /**
-   * 已废弃,以ServiceInfo中的对应为准
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  ServiceLimit?: ServiceLimit
-  /**
-   * 已废弃,以ServiceInfo中的对应为准
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  ScheduledAction?: ScheduledAction
-  /**
-   * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateFailedReason?: string
-  /**
-   * 服务状态
-CREATING 创建中
-CREATE_FAILED 创建失败
-Normal	正常运行中
-Stopped  已停止
-Stopping 停止中
-Abnormal 异常
-Pending 启动中
-Waiting 就绪中
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 费用信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BillingInfo?: string
-  /**
-   * 模型权重
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: number
-  /**
-   * 服务的创建来源
-AUTO_ML: 来自自动学习的一键发布
-DEFAULT: 其他来源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateSource?: string
-  /**
-   * 版本号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Version?: string
-  /**
-   * 服务组下服务的最高版本号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LatestVersion?: string
-  /**
-   * 资源组类别 托管 NORMAL，纳管 SW
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupSWType?: string
-  /**
-   * 服务的归档状态  Waiting 等待归档中，Archived 已归档
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ArchiveStatus?: string
-  /**
-   * 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeployType?: string
-  /**
-   * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstancePerReplicas?: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -770,6 +662,186 @@ export interface CreateDatasetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述在线服务
+ */
+export interface Service {
+  /**
+   * 服务组id
+   */
+  ServiceGroupId?: string
+  /**
+   * 服务id
+   */
+  ServiceId?: string
+  /**
+   * 服务组名
+   */
+  ServiceGroupName?: string
+  /**
+   * 服务描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceDescription?: string
+  /**
+   * 服务的详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceInfo?: ServiceInfo
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeType?: string
+  /**
+   * 包年包月服务的资源组id，按量计费的服务为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * 包年包月服务对应的资源组名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
+  /**
+   * 服务的标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 服务所在的 ingress 的 name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IngressName?: string
+  /**
+   * 创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedBy?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 子账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
+  /**
+   * app_id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * 服务的业务状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessStatus?: string
+  /**
+   * 已废弃,以ServiceInfo中的对应为准
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ServiceLimit?: ServiceLimit
+  /**
+   * 已废弃,以ServiceInfo中的对应为准
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ScheduledAction?: ScheduledAction
+  /**
+   * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateFailedReason?: string
+  /**
+   * 服务状态
+CREATING 创建中
+CREATE_FAILED 创建失败
+Normal	正常运行中
+Stopped  已停止
+Stopping 停止中
+Abnormal 异常
+Pending 启动中
+Waiting 就绪中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 费用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingInfo?: string
+  /**
+   * 模型权重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 服务的创建来源
+AUTO_ML: 来自自动学习的一键发布
+DEFAULT: 其他来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateSource?: string
+  /**
+   * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 服务组下服务的最高版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestVersion?: string
+  /**
+   * 资源组类别 托管 NORMAL，纳管 SW
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupSWType?: string
+  /**
+   * 服务的归档状态  Waiting 等待归档中，Archived 已归档
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArchiveStatus?: string
+  /**
+   * 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeployType?: string
+  /**
+   * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstancePerReplicas?: string
 }
 
 /**
@@ -4512,6 +4584,32 @@ export interface CreateTrainingModelResponse {
 }
 
 /**
+ * 单条日志数据结构
+ */
+export interface LogIdentity {
+  /**
+   * 单条日志的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: string
+  /**
+   * 单条日志的内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message: string
+  /**
+   * 这条日志对应的Pod名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodName: string
+  /**
+   * 日志的时间戳（RFC3339格式的时间字符串）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp: string
+}
+
+/**
  * StopModelAccelerateTask返回参数结构体
  */
 export interface StopModelAccelerateTaskResponse {
@@ -4866,6 +4964,26 @@ export interface LocalDisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalPath?: string
+}
+
+/**
+ * DescribeLogs返回参数结构体
+ */
+export interface DescribeLogsResponse {
+  /**
+   * 分页的游标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Context?: string
+  /**
+   * 日志数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: Array<LogIdentity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

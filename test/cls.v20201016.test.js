@@ -388,6 +388,16 @@ it("cls.v20201016.DeleteMachineGroup", async function () {
     }
 })
 
+it("cls.v20201016.DeleteCosRecharge", async function () {
+    try {
+       const data = await client.DeleteCosRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeKafkaRecharges", async function () {
     try {
        const data = await client.DescribeKafkaRecharges({})

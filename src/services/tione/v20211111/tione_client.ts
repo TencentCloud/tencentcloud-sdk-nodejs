@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateModelServiceRequest,
-  Service,
+  DescribeLogsRequest,
   DescribeModelAccelerateVersionsRequest,
   StopModelAccelerateTaskRequest,
   DeleteTrainingModelVersionResponse,
@@ -34,6 +34,7 @@ import {
   DescribeTrainingModelVersionsRequest,
   SpecUnit,
   CreateDatasetResponse,
+  Service,
   CrossTenantENIInfo,
   HyperParameter,
   DescribeTrainingTasksRequest,
@@ -142,6 +143,7 @@ import {
   DescribeModelServiceGroupResponse,
   DescribeNotebookResponse,
   CreateTrainingModelResponse,
+  LogIdentity,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
   ServiceEIPInfo,
@@ -152,6 +154,7 @@ import {
   DescribeTrainingTasksResponse,
   DescribeNotebookRequest,
   LocalDisk,
+  DescribeLogsResponse,
   EncodedStartCmdInfo,
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,
@@ -476,6 +479,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePresignedNotebookUrlResponse) => void
   ): Promise<CreatePresignedNotebookUrlResponse> {
     return this.request("CreatePresignedNotebookUrl", req, cb)
+  }
+
+  /**
+   * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
+   */
+  async DescribeLogs(
+    req: DescribeLogsRequest,
+    cb?: (error: string, rep: DescribeLogsResponse) => void
+  ): Promise<DescribeLogsResponse> {
+    return this.request("DescribeLogs", req, cb)
   }
 
   /**

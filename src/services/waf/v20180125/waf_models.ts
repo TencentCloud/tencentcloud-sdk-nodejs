@@ -102,6 +102,24 @@ export interface DescribeUserClbWafRegionsResponse {
 }
 
 /**
+ * TLS 加密套件
+ */
+export interface TLSCiphers {
+  /**
+   * TLS版本ID
+   */
+  VersionId?: number
+  /**
+   * 加密套件ID
+   */
+  CipherId?: number
+  /**
+   * 加密套件
+   */
+  CipherName?: string
+}
+
+/**
  * AddAntiFakeUrl请求参数结构体
  */
 export interface AddAntiFakeUrlRequest {
@@ -1664,6 +1682,20 @@ export interface Rule {
 }
 
 /**
+ * DescribePostCKafkaFlows返回参数结构体
+ */
+export interface DescribePostCKafkaFlowsResponse {
+  /**
+   * 客户的投递流列表
+   */
+  PostCKafkaFlows?: Array<PostCKafkaFlowInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 规则的匹配条件结构体
  */
 export interface Strategy {
@@ -2433,6 +2465,36 @@ export interface ModifyUserSignatureRuleRequest {
    * 下发修改的规则列表
    */
   RuleID?: Array<ReqUserRule>
+}
+
+/**
+ * BatchOperateUserSignatureRules请求参数结构体
+ */
+export interface BatchOperateUserSignatureRulesRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 0:关闭，1:开启，2:仅观察
+   */
+  Status: string
+  /**
+   * 如果SelectedAll为true，则表示反选的规则，否则表示手动选择的规则ID
+   */
+  RuleIds?: Array<string>
+  /**
+   * 仅观察原因
+   */
+  Reason?: number
+  /**
+   * 是否全选
+   */
+  SelectedAll?: boolean
+  /**
+   * 过滤
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -4879,6 +4941,54 @@ export interface DescribeUserClbWafRegionsRequest {
 }
 
 /**
+ * DescribePostCKafkaFlows请求参数结构体
+ */
+export interface DescribePostCKafkaFlowsRequest {
+  /**
+   * 1-访问日志，2-攻击日志，默认为访问日志。
+   */
+  LogType?: number
+}
+
+/**
+ * CreatePostCKafkaFlow请求参数结构体
+ */
+export interface CreatePostCKafkaFlowRequest {
+  /**
+   * 投递的CKafka所在区域
+   */
+  CKafkaRegion: string
+  /**
+   * 客户的CKafka 实例ID
+   */
+  CKafkaID: string
+  /**
+   * 支撑环境是IP:PORT，外网环境是domain:PORT
+   */
+  Brokers: string
+  /**
+   * 默认为none，支持snappy、gzip和lz4压缩，推荐snappy
+   */
+  Compression: string
+  /**
+   * 1-外网TGW，2-支撑环境，默认为支撑环境
+   */
+  VipType: number
+  /**
+   * 1-访问日志，2-攻击日志，默认为访问日志
+   */
+  LogType: number
+  /**
+   * 主题名称，默认不传或者传空字符串，默认值为waf_post_access_log
+   */
+  Topic: string
+  /**
+   * kafka集群的版本号
+   */
+  KafkaVersion: string
+}
+
+/**
  * AddAntiInfoLeakRules返回参数结构体
  */
 export interface AddAntiInfoLeakRulesResponse {
@@ -5116,6 +5226,20 @@ export interface ModifyHostRequest {
    * 实例唯一ID
    */
   InstanceID?: string
+}
+
+/**
+ * DestroyPostCKafkaFlow请求参数结构体
+ */
+export interface DestroyPostCKafkaFlowRequest {
+  /**
+   * 投递流的流ID
+   */
+  FlowId: number
+  /**
+   * 1-访问日志，2-攻击日志，默认为访问日志。
+   */
+  LogType?: number
 }
 
 /**
@@ -7488,33 +7612,13 @@ export interface DescribeCCRuleRequest {
 }
 
 /**
- * BatchOperateUserSignatureRules请求参数结构体
+ * CreatePostCKafkaFlow返回参数结构体
  */
-export interface BatchOperateUserSignatureRulesRequest {
+export interface CreatePostCKafkaFlowResponse {
   /**
-   * 域名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain: string
-  /**
-   * 0:关闭，1:开启，2:仅观察
-   */
-  Status: string
-  /**
-   * 如果SelectedAll为true，则表示反选的规则，否则表示手动选择的规则ID
-   */
-  RuleIds?: Array<string>
-  /**
-   * 仅观察原因
-   */
-  Reason?: number
-  /**
-   * 是否全选
-   */
-  SelectedAll?: boolean
-  /**
-   * 过滤
-   */
-  Filters?: Array<FiltersItemNew>
+  RequestId?: string
 }
 
 /**
@@ -7542,61 +7646,9 @@ export interface DescribeAreaBanRuleRequest {
 }
 
 /**
- * DescribeApiDetail返回参数结构体
+ * ModifyIpAccessControl返回参数结构体
  */
-export interface DescribeApiDetailResponse {
-  /**
-   * 请求样例，json字符串格式
-   */
-  Log?: string
-  /**
-   * 请求参数样例列表
-   */
-  ParameterList?: Array<ApiParameterType>
-  /**
-   * 当前场景标签
-   */
-  Scene?: string
-  /**
-   * 敏感字段
-   */
-  SensitiveFields?: Array<string>
-  /**
-   * 7天内是否活跃
-   */
-  IsActive?: boolean
-  /**
-   * 访问ip数
-   */
-  IpCount?: number
-  /**
-   * 访问地域数量
-   */
-  RegionCount?: number
-  /**
-   * 关联事件数
-   */
-  EventCount?: number
-  /**
-   * 涉敏数据条数
-   */
-  SensitiveCount?: number
-  /**
-   * 风险等级
-   */
-  Level?: number
-  /**
-   * 响应体
-   */
-  RspLog?: string
-  /**
-   * 昨日访问峰值QPS
-   */
-  MaxQPS?: number
-  /**
-   * 历史样例
-   */
-  ApiDetailSampleHistory?: Array<ApiDetailSampleHistory>
+export interface ModifyIpAccessControlResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10104,21 +10156,13 @@ export interface CreateDealsResponse {
 }
 
 /**
- * TLS 加密套件
+ * DestroyPostCKafkaFlow返回参数结构体
  */
-export interface TLSCiphers {
+export interface DestroyPostCKafkaFlowResponse {
   /**
-   * TLS版本ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  VersionId?: number
-  /**
-   * 加密套件ID
-   */
-  CipherId?: number
-  /**
-   * 加密套件
-   */
-  CipherName?: string
+  RequestId?: string
 }
 
 /**
@@ -10482,9 +10526,61 @@ export interface DescribeVipInfoResponse {
 }
 
 /**
- * ModifyIpAccessControl返回参数结构体
+ * DescribeApiDetail返回参数结构体
  */
-export interface ModifyIpAccessControlResponse {
+export interface DescribeApiDetailResponse {
+  /**
+   * 请求样例，json字符串格式
+   */
+  Log?: string
+  /**
+   * 请求参数样例列表
+   */
+  ParameterList?: Array<ApiParameterType>
+  /**
+   * 当前场景标签
+   */
+  Scene?: string
+  /**
+   * 敏感字段
+   */
+  SensitiveFields?: Array<string>
+  /**
+   * 7天内是否活跃
+   */
+  IsActive?: boolean
+  /**
+   * 访问ip数
+   */
+  IpCount?: number
+  /**
+   * 访问地域数量
+   */
+  RegionCount?: number
+  /**
+   * 关联事件数
+   */
+  EventCount?: number
+  /**
+   * 涉敏数据条数
+   */
+  SensitiveCount?: number
+  /**
+   * 风险等级
+   */
+  Level?: number
+  /**
+   * 响应体
+   */
+  RspLog?: string
+  /**
+   * 昨日访问峰值QPS
+   */
+  MaxQPS?: number
+  /**
+   * 历史样例
+   */
+  ApiDetailSampleHistory?: Array<ApiDetailSampleHistory>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10613,6 +10709,44 @@ export interface DescribeSessionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CKafka投递流
+ */
+export interface PostCKafkaFlowInfo {
+  /**
+   * 投递流唯一ID
+   */
+  FlowId?: number
+  /**
+   * 1-访问日志 2-攻击日志
+   */
+  LogType?: number
+  /**
+   * 状态 0-为关闭 1-为启用
+   */
+  Status?: number
+  /**
+   * CKafka所在区域
+   */
+  CKafkaRegion?: string
+  /**
+   * CKafka实例ID
+   */
+  CKafkaID?: string
+  /**
+   * ckafka地址信息
+   */
+  Brokers?: string
+  /**
+   * ckafka版本号
+   */
+  Version?: string
+  /**
+   * 主题名称
+   */
+  Topic?: string
 }
 
 /**

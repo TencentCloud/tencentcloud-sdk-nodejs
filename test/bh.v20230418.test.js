@@ -18,9 +18,9 @@ const client = new tencentcloud.bh.v20230418.Client({
 })
 describe("bh.v20230418.test.js", function () {
 
-it("bh.v20230418.ModifyDeviceGroup", async function () {
+it("bh.v20230418.DescribeOperationEvent", async function () {
     try {
-       const data = await client.ModifyDeviceGroup({})
+       const data = await client.DescribeOperationEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("bh.v20230418.ResetUser", async function () {
     }
 })
 
-it("bh.v20230418.DeleteDevices", async function () {
+it("bh.v20230418.CreateOperationTask", async function () {
     try {
-       const data = await client.DeleteDevices({})
+       const data = await client.CreateOperationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +308,16 @@ it("bh.v20230418.DeleteDeviceGroups", async function () {
     }
 })
 
+it("bh.v20230418.DeleteOperationTasks", async function () {
+    try {
+       const data = await client.DeleteOperationTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ModifyAcl", async function () {
     try {
        const data = await client.ModifyAcl({})
@@ -408,9 +418,19 @@ it("bh.v20230418.DeleteChangePwdTask", async function () {
     }
 })
 
-it("bh.v20230418.DescribeOperationEvent", async function () {
+it("bh.v20230418.DeleteDevices", async function () {
     try {
-       const data = await client.DescribeOperationEvent({})
+       const data = await client.DeleteDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyOperationTask", async function () {
+    try {
+       const data = await client.ModifyOperationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +451,16 @@ it("bh.v20230418.DeleteDeviceAccounts", async function () {
 it("bh.v20230418.DeleteUserGroups", async function () {
     try {
        const data = await client.DeleteUserGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.RunOperationTask", async function () {
+    try {
+       const data = await client.RunOperationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +491,16 @@ it("bh.v20230418.ModifyResource", async function () {
 it("bh.v20230418.SearchAuditLog", async function () {
     try {
        const data = await client.SearchAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeOperationTask", async function () {
+    try {
+       const data = await client.DescribeOperationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -621,6 +661,16 @@ it("bh.v20230418.CreateUser", async function () {
 it("bh.v20230418.BindDeviceAccountPrivateKey", async function () {
     try {
        const data = await client.BindDeviceAccountPrivateKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyDeviceGroup", async function () {
+    try {
+       const data = await client.ModifyDeviceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

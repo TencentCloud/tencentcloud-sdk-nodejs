@@ -130,125 +130,125 @@ export interface LogstashInstanceInfo {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 用户ID
    */
-  AppId: number
+  AppId?: number
   /**
    * 用户UIN
    */
-  Uin: string
+  Uin?: string
   /**
    * 实例所属VPC的ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 实例所属子网的ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁
    */
-  Status: number
+  Status?: number
   /**
    * 实例计费模式。取值范围：  PREPAID：表示预付费，即包年包月  POSTPAID_BY_HOUR：表示后付费，即按量计费  CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
    */
-  ChargeType: string
+  ChargeType?: string
   /**
    * 包年包月购买时长,单位:月
    */
-  ChargePeriod: number
+  ChargePeriod?: number
   /**
    * 自动续费标识。取值范围：  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费  NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费  DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费  默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
-  RenewFlag: string
+  RenewFlag?: string
   /**
    * 节点规格<li>LOGSTASH.S1.SMALL2：1核2G</li><li>LOGSTASH.S1.MEDIUM4：2核4G</li><li>LOGSTASH.S1.MEDIUM8：2核8G</li><li>LOGSTASH.S1.LARGE16：4核16G</li><li>LOGSTASH.S1.2XLARGE32：8核32G</li><li>LOGSTASH.S1.4XLARGE32：16核32G</li><li>LOGSTASH.S1.4XLARGE64：16核64G</li>
    */
-  NodeType: string
+  NodeType?: string
   /**
    * 节点个数
    */
-  NodeNum: number
+  NodeNum?: number
   /**
    * 节点磁盘类型
    */
-  DiskType: string
+  DiskType?: string
   /**
    * 节点磁盘大小，单位GB
    */
-  DiskSize: number
+  DiskSize?: number
   /**
    * Logstash版本号
    */
-  LogstashVersion: string
+  LogstashVersion?: string
   /**
    * License类型<li>oss：开源版</li><li>xpack：基础版</li>默认值xpack
    */
-  LicenseType: string
+  LicenseType?: string
   /**
    * 实例创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例最后修改操作时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 实例到期时间
    */
-  Deadline: string
+  Deadline?: string
   /**
    * 实例节点类型
    */
-  Nodes: Array<LogstashNodeInfo>
+  Nodes?: Array<LogstashNodeInfo>
   /**
    * 实例绑定的ES集群ID
    */
-  BindedESInstanceId: string
+  BindedESInstanceId?: string
   /**
    * 实例的YML配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  YMLConfig: string
+  YMLConfig?: string
   /**
    * 扩展文件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtendedFiles: Array<LogstashExtendedFile>
+  ExtendedFiles?: Array<LogstashExtendedFile>
   /**
    * 可维护时间段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperationDuration: OperationDuration
+  OperationDuration?: OperationDuration
   /**
    * CPU数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CpuNum: number
+  CpuNum?: number
   /**
    * 实例标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagList: Array<TagInfo>
+  TagList?: Array<TagInfo>
   /**
    * 内存大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MemSize: number
+  MemSize?: number
 }
 
 /**
@@ -681,31 +681,31 @@ export interface MasterNodeInfo {
   /**
    * 是否启用了专用主节点
    */
-  EnableDedicatedMaster: boolean
+  EnableDedicatedMaster?: boolean
   /**
    * 专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
    */
-  MasterNodeType: string
+  MasterNodeType?: string
   /**
    * 专用主节点个数
    */
-  MasterNodeNum: number
+  MasterNodeNum?: number
   /**
    * 专用主节点CPU核数
    */
-  MasterNodeCpuNum: number
+  MasterNodeCpuNum?: number
   /**
    * 专用主节点内存大小，单位GB
    */
-  MasterNodeMemSize: number
+  MasterNodeMemSize?: number
   /**
    * 专用主节点磁盘大小，单位GB
    */
-  MasterNodeDiskSize: number
+  MasterNodeDiskSize?: number
   /**
    * 专用主节点磁盘类型
    */
-  MasterNodeDiskType: string
+  MasterNodeDiskType?: string
 }
 
 /**
@@ -815,46 +815,46 @@ export interface LogstashPipeline {
   /**
    * 管道ID
    */
-  PipelineId: string
+  PipelineId?: string
   /**
    * 管道描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PipelineDesc: string
+  PipelineDesc?: string
   /**
    * 管道配置内容
    */
-  Config: string
+  Config?: string
   /**
    * 管道的Worker数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Workers: number
+  Workers?: number
   /**
    * 管道批处理大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchSize: number
+  BatchSize?: number
   /**
    * 管道批处理延迟
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchDelay: number
+  BatchDelay?: number
   /**
    * 管道缓冲队列类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueType: string
+  QueueType?: string
   /**
    * 管道缓冲队列大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueMaxBytes: string
+  QueueMaxBytes?: string
   /**
    * 管道缓冲队列检查点写入数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueCheckPointWrites: number
+  QueueCheckPointWrites?: number
 }
 
 /**
@@ -1114,7 +1114,7 @@ export interface ServerlessSpace {
    */
   ClusterType?: number
   /**
-   * key:value
+   * 空间标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<TagInfo>
@@ -1145,35 +1145,35 @@ export interface SubTaskDetail {
   /**
    * 子任务名
    */
-  Name: string
+  Name?: string
   /**
    * 子任务结果
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 子任务错误信息
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 子任务类型
    */
-  Type: string
+  Type?: string
   /**
    * 子任务状态，0处理中 1成功 -1失败
    */
-  Status: number
+  Status?: number
   /**
    * 升级检查失败的索引名
    */
-  FailedIndices: Array<string>
+  FailedIndices?: Array<string>
   /**
    * 子任务结束时间
    */
-  FinishTime: string
+  FinishTime?: string
   /**
    * 子任务等级，1警告 2失败
    */
-  Level: number
+  Level?: number
 }
 
 /**
@@ -1342,19 +1342,19 @@ export interface InstanceLog {
   /**
    * 日志时间
    */
-  Time: string
+  Time?: string
   /**
    * 日志级别
    */
-  Level: string
+  Level?: string
   /**
    * 集群节点ip
    */
-  Ip: string
+  Ip?: string
   /**
    * 日志内容
    */
-  Message: string
+  Message?: string
   /**
    * 集群节点ID
    */
@@ -1696,11 +1696,11 @@ export interface KeyValue {
   /**
    * 键
    */
-  Key: string
+  Key?: string
   /**
    * 值
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -1780,11 +1780,11 @@ export interface DescribeLogstashInstancesResponse {
   /**
    * 返回的实例个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例详细信息列表
    */
-  InstanceList: Array<LogstashInstanceInfo>
+  InstanceList?: Array<LogstashInstanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1917,51 +1917,61 @@ export interface LogstashPipelineInfo {
   /**
    * 管道ID
    */
-  PipelineId: string
+  PipelineId?: string
   /**
    * 管道描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PipelineDesc: string
+  PipelineDesc?: string
   /**
    * 管道配置内容
    */
-  Config: string
+  Config?: string
   /**
    * 管道状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 管道的Worker数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Workers: number
+  Workers?: number
   /**
    * 管道批处理大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchSize: number
+  BatchSize?: number
   /**
    * 管道批处理延迟
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchDelay: number
+  BatchDelay?: number
   /**
    * 管道缓冲队列类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueType: string
+  QueueType?: string
   /**
    * 管道缓冲队列大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueMaxBytes: string
+  QueueMaxBytes?: string
   /**
    * 管道缓冲队列检查点写入数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueCheckPointWrites: number
+  QueueCheckPointWrites?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -2121,35 +2131,35 @@ export interface KibanaView {
   /**
    * Kibana节点IP
    */
-  Ip: string
+  Ip?: string
   /**
    * 节点总磁盘大小
    */
-  DiskSize: number
+  DiskSize?: number
   /**
    * 磁盘使用率
    */
-  DiskUsage: number
+  DiskUsage?: number
   /**
    * 节点内存大小
    */
-  MemSize: number
+  MemSize?: number
   /**
    * 内存使用率
    */
-  MemUsage: number
+  MemUsage?: number
   /**
    * 节点cpu个数
    */
-  CpuNum: number
+  CpuNum?: number
   /**
    * cpu使用率
    */
-  CpuUsage: number
+  CpuUsage?: number
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * ts-0noqayxu-az6-hot-03222010-0
    */
@@ -2296,31 +2306,31 @@ export interface DescribeInstancePluginInfo {
   /**
    * 插件名
    */
-  PluginName: string
+  PluginName?: string
   /**
    * 插件版本
    */
-  PluginVersion: string
+  PluginVersion?: string
   /**
    * 插件描述
    */
-  PluginDesc: string
+  PluginDesc?: string
   /**
    * 插件状态：-2 已卸载 -1 卸载中 0 安装中 1 已安装
    */
-  Status: number
+  Status?: number
   /**
    * 插件是否可卸载
    */
-  Removable: boolean
+  Removable?: boolean
   /**
    * 0：系统插件
    */
-  PluginType: number
+  PluginType?: number
   /**
    * 插件变更时间
    */
-  PluginUpdateTime: string
+  PluginUpdateTime?: string
 }
 
 /**
@@ -2906,11 +2916,11 @@ export interface DescribeLogstashPipelinesResponse {
   /**
    * 管道总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 管道列表
    */
-  LogstashPipelineList: Array<LogstashPipelineInfo>
+  LogstashPipelineList?: Array<LogstashPipelineInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3994,7 +4004,7 @@ export interface ServerlessIndexMetaField {
    */
   TagList?: Array<TagInfo>
   /**
-   * 3782478.47
+   * 索引流量，单位byte
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexTraffic?: number
@@ -4270,6 +4280,11 @@ SUCCESS     备份成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Failures?: Array<Failures>
+  /**
+   * 是否用户备份
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserBackUp?: string
 }
 
 /**
@@ -4352,32 +4367,32 @@ export interface ServerlessIndexNetworkField {
    * 地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 区域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * vpc唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcUid: string
+  VpcUid?: string
   /**
    * 子网唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetUid: string
+  SubnetUid?: string
   /**
    * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Username: string
+  Username?: string
   /**
    * 密码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Password: string
+  Password?: string
 }
 
 /**
@@ -4611,15 +4626,15 @@ export interface LogstashNodeInfo {
   /**
    * 节点ID
    */
-  NodeId: string
+  NodeId?: string
   /**
    * 节点IP
    */
-  Ip: string
+  Ip?: string
   /**
    * 节点端口
    */
-  Port: number
+  Port?: number
 }
 
 /**
@@ -4654,27 +4669,27 @@ export interface BackingIndexMetaField {
    * 后备索引名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexName: string
+  IndexName?: string
   /**
    * 后备索引状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexStatus: string
+  IndexStatus?: string
   /**
    * 后备索引存储大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexStorage: number
+  IndexStorage?: number
   /**
    * 后备索引当前生命周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexPhrase: string
+  IndexPhrase?: string
   /**
    * 后备索引创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexCreateTime: string
+  IndexCreateTime?: string
 }
 
 /**
@@ -5202,7 +5217,7 @@ export interface CosSnapShotInfo {
    */
   Version?: string
   /**
-   * 普通索引信息列表
+   * 普通[{"DataStreamName":"ilm-history-5","Is索引信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonIndexArr?: Array<CommonIndexInfo>

@@ -25,10 +25,12 @@ import {
   GetFederationTokenResponse,
   QueryApiKeyResponse,
   AssumeRoleResponse,
-  QueryApiKeyRequest,
+  GetSessionTokenResponse,
   GetFederationTokenRequest,
   Tag,
   GetCallerIdentityResponse,
+  QueryApiKeyRequest,
+  GetSessionTokenRequest,
   Credentials,
   AssumeRoleRequest,
   GetCallerIdentityRequest,
@@ -105,6 +107,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssumeRoleWithWebIdentityResponse) => void
   ): Promise<AssumeRoleWithWebIdentityResponse> {
     return this.request("AssumeRoleWithWebIdentity", req, cb)
+  }
+
+  /**
+   * 获取MFA临时证书
+   */
+  async GetSessionToken(
+    req: GetSessionTokenRequest,
+    cb?: (error: string, rep: GetSessionTokenResponse) => void
+  ): Promise<GetSessionTokenResponse> {
+    return this.request("GetSessionToken", req, cb)
   }
 
   /**

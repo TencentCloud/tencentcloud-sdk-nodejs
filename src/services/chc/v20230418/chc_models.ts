@@ -559,6 +559,40 @@ export interface DescribeDeviceListRequest {
 }
 
 /**
+ * CreateSpeciallyQuitWorkOrder请求参数结构体
+ */
+export interface CreateSpeciallyQuitWorkOrderRequest {
+  /**
+   * 机房id
+   */
+  IdcId: number
+  /**
+   * 设备类型：otherDevice。此接口只支持其他设备
+   */
+  DeviceType: string
+  /**
+   * 交接方式 1.物流上门收货 2.客户上门自提
+   */
+  HandoverMethod: string
+  /**
+   * 物流上门收货必传
+   */
+  LogisticsReceipt?: LogisticsReceipt
+  /**
+   * 客户上门自提必传
+   */
+  CustomerReceipt?: CustomerReceipt
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 当设备类型为otherDevice，此参数必传
+   */
+  OtherDeviceList?: Array<OtherDevReceivingInfo>
+}
+
+/**
  * ConfirmCommonServiceWorkOrder请求参数结构体
  */
 export interface ConfirmCommonServiceWorkOrderRequest {
@@ -1239,17 +1273,13 @@ export interface WireReceivingInfo {
 }
 
 /**
- * DescribeRacksDistribution返回参数结构体
+ * DescribeModelTemplate请求参数结构体
  */
-export interface DescribeRacksDistributionResponse {
+export interface DescribeModelTemplateRequest {
   /**
-   * 机架的用量分布
+   * 型号类型，只支持传入 server 和 netDevice
    */
-  DistributionSet?: Array<Distribution>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeviceType: string
 }
 
 /**
@@ -2167,7 +2197,7 @@ export interface CreateQuitWorkOrderRequest {
    */
   DeviceType: string
   /**
-   * 下架选择 1.自行解决 2.由腾讯IDC负责 3.不涉及下架，如：其他设备退出
+   * 下架选择 1.自行解决 2.由腾讯IDC负责
    */
   StuffOption: string
   /**
@@ -2276,6 +2306,20 @@ export interface OrderStep {
  * CreatePowerOffWorkOrder返回参数结构体
  */
 export interface CreatePowerOffWorkOrderResponse {
+  /**
+   * 创建的工单信息
+   */
+  WorkOrderSet?: Array<WorkOrderTinyInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSpeciallyQuitWorkOrder返回参数结构体
+ */
+export interface CreateSpeciallyQuitWorkOrderResponse {
   /**
    * 创建的工单信息
    */
@@ -2511,13 +2555,17 @@ export interface DevicePosition {
 }
 
 /**
- * DescribeModelTemplate请求参数结构体
+ * DescribeRacksDistribution返回参数结构体
  */
-export interface DescribeModelTemplateRequest {
+export interface DescribeRacksDistributionResponse {
   /**
-   * 型号类型，只支持传入 server 和 netDevice
+   * 机架的用量分布
    */
-  DeviceType: string
+  DistributionSet?: Array<Distribution>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

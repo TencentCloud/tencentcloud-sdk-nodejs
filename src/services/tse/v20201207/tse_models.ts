@@ -159,12 +159,10 @@ export interface DescribeUpstreamHealthCheckConfigRequest {
 export interface KeyValue {
   /**
    * 条件的Key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 条件的Value
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -467,32 +465,26 @@ export interface ModifyConsoleNetworkRequest {
 export interface PublicAddressConfig {
   /**
    * 公网 ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
    * 公网最大带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetMaxBandwidthOut?: number
   /**
    * 公网所属分组 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 公网所属分组名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 公网负载均衡 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkId?: string
   /**
    * 公网负载均衡描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }
@@ -647,83 +639,67 @@ export interface DescribeCloudNativeAPIGatewayResult {
   CreateTime?: string
   /**
    * 实例的标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<InstanceTagInfo>
   /**
    * 是否开启 cls 日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableCls?: boolean
   /**
    * 付费模式，0表示后付费，1预付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TradeType?: number
   /**
    * 实例版本，当前支持开发版、标准版、专业版【TRIAL、STANDARD、PROFESSIONAL】
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureVersion?: string
   /**
    * 公网出流量带宽，[1,2048]Mbps
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetMaxBandwidthOut?: number
   /**
    * 自动续费标记，0表示默认状态(用户未设置，即初始状态)；
 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
    * 到期时间，预付费时使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurDeadline?: string
   /**
    * 隔离时间，实例隔离时使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolateTime?: string
   /**
    * 是否开启客户端公网。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableInternet?: boolean
   /**
    * 实例实际的地域信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineRegion?: string
   /**
    * Ingress class名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IngressClassName?: string
   /**
    * 公网计费方式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetPayMode?: string
   /**
    * 云原生API网关小版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayMinorVersion?: string
   /**
    * 实例监听的端口信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePort?: InstancePort
   /**
    * 公网CLB默认类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerType?: string
   /**
    * 公网IP地址列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicIpAddresses?: Array<string>
 }
@@ -780,12 +756,10 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
 export interface CloudAPIGatewayCanaryRuleList {
   /**
    * 灰度规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanaryRuleList?: Array<CloudNativeAPIGatewayCanaryRule>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
 }
@@ -830,12 +804,10 @@ export interface CloudNativeAPIGatewayRateLimitDetail {
   QpsThresholds?: Array<QpsThreshold>
   /**
    * 需要进行流量控制的请求路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
    * 需要进行流量控制的请求头Key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Header?: string
   /**
@@ -845,7 +817,6 @@ ip service consumer credential path header
   LimitBy?: string
   /**
    * 外部redis配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExternalRedis?: ExternalRedis
   /**
@@ -854,18 +825,15 @@ local 单机
 redis  默认redis
 external_redis 外部redis
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Policy?: string
   /**
    * 响应配置，响应策略为text
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RateLimitResponse?: RateLimitResponse
   /**
    * 请求转发地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RateLimitResponseUrl?: string
   /**
@@ -992,17 +960,14 @@ export interface KongTarget {
 export interface SourceInstanceAuth {
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Username?: string
   /**
    * 账户密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * 访问凭据 token
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessToken?: string
 }
@@ -1211,37 +1176,30 @@ export interface CloudNativeAPIGatewayStrategy {
   StrategyId?: string
   /**
    * 策略名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyName?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 弹性伸缩配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
   /**
    * 网关实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 定时伸缩配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
   /**
@@ -1429,37 +1387,30 @@ export interface NativeGatewayServerGroup {
   IsFirstGroup?: number
   /**
    * 关联策略信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindingStrategy?: CloudNativeAPIGatewayStrategy
   /**
    * 网关实例 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 带宽
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetMaxBandwidthOut?: number
   /**
    * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
   /**
    * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetIds?: string
   /**
    * 分组默认权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultWeight?: number
   /**
    * 弹性节点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElasticNumber?: number
 }
@@ -1756,22 +1707,18 @@ export interface DescribeAutoScalerResourceStrategiesRequest {
 export interface RuleFilter {
   /**
    * 限流条件的Key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 限流条件的Values
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
   /**
    * 操作符
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
   /**
    * header或query对应的name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -1974,7 +1921,6 @@ export interface InternetConfig {
 export interface KongUpstreamList {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamList?: Array<KongUpstreamPreview>
 }
@@ -2148,37 +2094,30 @@ export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
 export interface CloudNativeAPIGatewayCanaryRuleCondition {
   /**
    * 条件类型，支持 path, method, query, header, cookie, body 和 system。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
    * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 操作符，支持 "le", "eq", "lt", "ne", "ge", "gt", "regex", "exists", "in", "not in",  "prefix" ,"exact", "regex" 等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
   /**
    * 目标参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
    * 分隔符，当 Operator 为 in 或者 not in 时生效。支持值为英文逗号，英文分号，空格，换行符。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Delimiter?: string
   /**
    * 全局配置 Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalConfigId?: string
   /**
    * 全局配置名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalConfigName?: string
 }
@@ -2504,22 +2443,18 @@ export interface DescribeCloudNativeAPIGatewayServiceRateLimitRequest {
 export interface CloudNativeAPIGatewayBalancedService {
   /**
    * 服务 ID，作为入参时，必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceID?: string
   /**
    * 服务名称，作为入参时，无意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * Upstream 名称，作为入参时，无意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamName?: string
   /**
    * 百分比，10 即 10%，范围0-100
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
 }
@@ -3110,17 +3045,14 @@ export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
 export interface KongUpstreamPreview {
   /**
    * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID: string
   /**
    * 服务名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 后端配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Target?: Array<KongTarget>
 }
@@ -3145,12 +3077,10 @@ export interface SourceInfo {
   Addresses?: Array<string>
   /**
    * 微服务引擎VPC信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcInfo?: SourceInstanceVpcInfo
   /**
    * 微服务引擎鉴权信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Auth?: SourceInstanceAuth
 }
@@ -3690,22 +3620,18 @@ export interface DeleteCloudNativeAPIGatewayCertificateRequest {
 export interface LimitRule {
   /**
    * 请求匹配条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Filters?: Array<RuleFilter>
   /**
    * 参数限流依据组合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LimitBy?: Array<KeyValue>
   /**
    * 限流阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QpsThresholds?: Array<QpsThreshold>
   /**
    * 精确限流阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccurateQpsThresholds?: Array<AccurateQpsThreshold>
 }
@@ -3968,42 +3894,34 @@ export interface DescribeNativeGatewayServerGroupsRequest {
 export interface RouteWafStatus {
   /**
    * 路由的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 路由的 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    *  路由是否开启 WAF 防护
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 方法
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Methods?: Array<string>
   /**
    * 路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Paths?: Array<string>
   /**
    * 域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Hosts?: Array<string>
   /**
    * 路由对应服务的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * 路由对应服务的ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceId?: string
 }
@@ -4126,22 +4044,18 @@ export interface DescribeGovernanceAliasesResponse {
 export interface ServiceWafStatus {
   /**
    *  服务的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 服务的 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 服务的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    *  服务是否开启 WAF 防护
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -4234,7 +4148,6 @@ export interface UpdateCloudNativeAPIGatewayResult {
   Status?: string
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
 }
@@ -4259,12 +4172,10 @@ export interface ModifyGovernanceNamespacesRequest {
 export interface SourceInstanceVpcInfo {
   /**
    * 微服务引擎VPC信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcID?: string
   /**
    * 微服务引擎子网信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetID?: string
 }
@@ -4299,17 +4210,14 @@ export interface DescribeAllConfigFileTemplatesRequest {
 export interface RateLimitResponse {
   /**
    * 自定义响应体
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Body?: string
   /**
    * Headers
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<KVMapping>
   /**
    * http状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpStatus?: number
 }
@@ -4348,17 +4256,14 @@ export interface DescribeCloudNativeAPIGatewayInfoByIpResponse {
 export interface CloudNativeAPIGatewayCanaryRule {
   /**
    * 优先级，值范围为 0 到 100；值越大，优先级越高；不同规则间优先级不可重复
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Priority: number
   /**
    * 是否启用规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled: boolean
   /**
    * 参数匹配条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionList?: Array<CloudNativeAPIGatewayCanaryRuleCondition>
   /**
@@ -4368,48 +4273,39 @@ export interface CloudNativeAPIGatewayCanaryRule {
   BalancedServiceList?: Array<CloudNativeAPIGatewayBalancedService>
   /**
    * 归属服务 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceId?: string
   /**
    * 归属服务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * 灰度规则类别
 Standard｜Lane
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: string
   /**
    * 全链路灰度策略多个条件之间的匹配方式，与AND，或OR
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MatchType?: string
   /**
    * 泳道组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 泳道组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 泳道ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LaneId?: string
   /**
    * 泳道名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LaneName?: string
   /**
    * 泳道匹配规则：严格STRICT｜宽松PERMISSIVE
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MatchMode?: string
   /**
@@ -4776,27 +4672,22 @@ export interface CreateCloudNativeAPIGatewayRequest {
 export interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
   /**
    * 网关分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 节点配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeConfig?: CloudNativeAPIGatewayNodeConfig
   /**
    * 绑定时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindTime?: string
   /**
    * 网关分组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 绑定状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -4930,22 +4821,18 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
 export interface ExternalRedis {
   /**
    * redis ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RedisHost: string
   /**
    * redis密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RedisPassword: string
   /**
    * redis端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RedisPort: number
   /**
    * 超时时间  ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RedisTimeout: number
 }
@@ -5691,7 +5578,6 @@ export interface DeleteConfigFileGroupRequest {
 export interface KongCertificatesList {
   /**
    * 证书列表总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -6952,22 +6838,18 @@ export interface DescribeConfigFileRequest {
 export interface InstancePort {
   /**
    * 监听的 http 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpPort?: string
   /**
    * 监听的 https 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpsPort?: string
   /**
    * 监听的 tcp 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TcpPort?: string
   /**
    * 监听的 udp 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UdpPort?: string
 }
@@ -7106,7 +6988,6 @@ export interface DeleteNativeGatewayServerGroupResult {
   Status?: string
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
 }
@@ -7201,12 +7082,10 @@ export interface CanaryPriorityRule {
 export interface CloudNativeAPIGatewayVpcConfig {
   /**
    * 私有网络ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
 }
@@ -7279,17 +7158,14 @@ export interface DescribeCloudNativeAPIGatewayConfigResult {
   ConfigList?: Array<CloudNativeAPIGatewayConfig>
   /**
    * 分组子网信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupSubnetId?: string
   /**
    * 分组VPC信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupVpcId?: string
   /**
    * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
 }
@@ -7700,37 +7576,30 @@ export interface CloudNativeAPIGatewayNode {
   NodeIp?: string
   /**
    * Zone id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: string
   /**
    * Zone
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 分组名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 节点权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
   /**
    * 是否默认权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefaultWeight?: boolean
 }
@@ -8111,17 +7980,14 @@ export interface UpdateUpstreamHealthCheckConfigResponse {
 export interface KongServiceDetail {
   /**
    * 服务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID: string
   /**
    * 服务名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 后端协议
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
@@ -8131,12 +7997,10 @@ export interface KongServiceDetail {
   Path?: string
   /**
    * 后端延时，单位ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
   /**
    * 重试次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Retries?: number
   /**
@@ -8146,22 +8010,18 @@ export interface KongServiceDetail {
   Tags?: Array<string>
   /**
    * 后端配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamInfo?: KongUpstreamInfo
   /**
    * 后端类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamType?: string
   /**
    * 是否可编辑
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Editable?: boolean
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
 }
@@ -8182,17 +8042,14 @@ export interface ZookeeperServerInterface {
 export interface DescribePublicAddressConfigResult {
   /**
    * 网关实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayId?: string
   /**
    * 公网地址信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigList?: Array<PublicAddressConfig>
   /**
-   * 总个数	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总个数
    */
   TotalCount?: number
 }
@@ -8481,14 +8338,13 @@ export interface CreateCloudNativeAPIGatewayResult {
   /**
    * 云原生API网关ID。
    */
-  GatewayId: string
+  GatewayId?: string
   /**
    * 云原生网关状态。
    */
-  Status: string
+  Status?: string
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
 }
@@ -8641,22 +8497,18 @@ export interface DescribeConfigFileReleaseResponse {
 export interface DescribeWafProtectionResult {
   /**
    * 全局防护状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalStatus?: string
   /**
    * 服务防护状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServicesStatus?: Array<ServiceWafStatus>
   /**
    * 路由防护状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteStatus?: Array<RouteWafStatus>
   /**
    * 对象防护状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectStatus?: string
 }

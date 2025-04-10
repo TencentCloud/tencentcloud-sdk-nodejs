@@ -228,9 +228,9 @@ it("chc.v20230418.DescribePositionStatusSummary", async function () {
     }
 })
 
-it("chc.v20230418.DescribeIdcUnitAssetDetail", async function () {
+it("chc.v20230418.CreateSpeciallyQuitWorkOrder", async function () {
     try {
-       const data = await client.DescribeIdcUnitAssetDetail({})
+       const data = await client.CreateSpeciallyQuitWorkOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +321,16 @@ it("chc.v20230418.DescribeWorkOrderStatistics", async function () {
 it("chc.v20230418.DescribeResourceUsage", async function () {
     try {
        const data = await client.DescribeResourceUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chc.v20230418.DescribeIdcUnitAssetDetail", async function () {
+    try {
+       const data = await client.DescribeIdcUnitAssetDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1743,31 +1743,33 @@ export interface ChannelCreateSealPolicyResponse {
 }
 
 /**
- * 机构信息
+ * OperateTemplate请求参数结构体
  */
-export interface OrganizationInfo {
+export interface OperateTemplateRequest {
   /**
-   * 用户在渠道的机构编号
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（模板的归属企业）</li>
+<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （操作人）</li>
+</ul>
    */
-  OrganizationOpenId: string
+  Agent: Agent
   /**
-   * 机构在平台的编号
+   * 模板ID，为32位字符串。
    */
-  OrganizationId?: string
+  TemplateId: string
   /**
-   * 用户渠道
+   * 操作类型，可取值如下:
+<ul>
+<li>DELETE:  删除</li>
+<li>ENABLE: 启用</li>
+<li>DISABLE: 停用</li>
+</ul>
    */
-  Channel?: string
-  /**
-   * 用户真实的IP
-   * @deprecated
-   */
-  ClientIp?: string
-  /**
-   * 机构的代理IP
-   * @deprecated
-   */
-  ProxyIp?: string
+  OperateType: string
 }
 
 /**
@@ -3606,6 +3608,41 @@ export interface ArchiveDynamicFlowResponse {
 }
 
 /**
+ * 主题配置
+ */
+export interface WebThemeConfig {
+  /**
+   * 是否显示页面底部电子签logo，取值如下：
+<ul><li> **true**：页面底部显示电子签logo</li>
+<li> **false**：页面底部不显示电子签logo（默认）</li></ul>
+   */
+  DisplaySignBrandLogo?: boolean
+  /**
+   * 主题颜色：
+支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
+<br/>
+   */
+  WebEmbedThemeColor?: string
+  /**
+   * 企业认证页背景图（base64图片）
+
+   */
+  AuthenticateBackground?: string
+  /**
+   * 隐藏企业认证页面导航栏，取值如下：
+<ul><li> **true**：隐藏企业认证页面导航栏</li>
+<li> **false**：显示企业认证页面导航栏（默认）</li></ul>
+   */
+  HideAuthenticateNavigationBar?: boolean
+  /**
+   * 隐藏企业认证顶部logo，取值如下：
+<ul><li> **true**：隐藏企业认证顶部logo</li>
+<li> **false**：显示企业认证顶部logo（默认）</li></ul>
+   */
+  HideAuthenticateTopLogo?: boolean
+}
+
+/**
  * CreateConsoleLoginUrl请求参数结构体
  */
 export interface CreateConsoleLoginUrlRequest {
@@ -5060,6 +5097,16 @@ export interface ChannelDescribeEmployeesRequest {
    * @deprecated
    */
   Operator?: UserInfo
+}
+
+/**
+ * OperateTemplate返回参数结构体
+ */
+export interface OperateTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9301,38 +9348,31 @@ export interface DescribeExtendedServiceAuthInfoResponse {
 }
 
 /**
- * 主题配置
+ * 机构信息
  */
-export interface WebThemeConfig {
+export interface OrganizationInfo {
   /**
-   * 是否显示页面底部电子签logo，取值如下：
-<ul><li> **true**：页面底部显示电子签logo</li>
-<li> **false**：页面底部不显示电子签logo（默认）</li></ul>
+   * 用户在渠道的机构编号
    */
-  DisplaySignBrandLogo?: boolean
+  OrganizationOpenId: string
   /**
-   * 主题颜色：
-支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
-<br/>
+   * 机构在平台的编号
    */
-  WebEmbedThemeColor?: string
+  OrganizationId?: string
   /**
-   * 企业认证页背景图（base64图片）
-
+   * 用户渠道
    */
-  AuthenticateBackground?: string
+  Channel?: string
   /**
-   * 隐藏企业认证页面导航栏，取值如下：
-<ul><li> **true**：隐藏企业认证页面导航栏</li>
-<li> **false**：显示企业认证页面导航栏（默认）</li></ul>
+   * 用户真实的IP
+   * @deprecated
    */
-  HideAuthenticateNavigationBar?: boolean
+  ClientIp?: string
   /**
-   * 隐藏企业认证顶部logo，取值如下：
-<ul><li> **true**：隐藏企业认证顶部logo</li>
-<li> **false**：显示企业认证顶部logo（默认）</li></ul>
+   * 机构的代理IP
+   * @deprecated
    */
-  HideAuthenticateTopLogo?: boolean
+  ProxyIp?: string
 }
 
 /**

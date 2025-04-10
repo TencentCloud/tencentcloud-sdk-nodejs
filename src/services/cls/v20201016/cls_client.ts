@@ -162,6 +162,7 @@ import {
   CreateMachineGroupResponse,
   DescribeCosRechargesRequest,
   AlarmTarget,
+  ModifyShipperResponse,
   CreateKafkaRechargeResponse,
   ModifyScheduledSqlRequest,
   DashboardSubscribeData,
@@ -185,6 +186,7 @@ import {
   AnalysisDimensional,
   DeleteWebCallbackRequest,
   LogRechargeRuleInfo,
+  DeleteCosRechargeRequest,
   ShipperTaskInfo,
   CloseKafkaConsumerRequest,
   RuleTagInfo,
@@ -311,7 +313,7 @@ import {
   DescribeConfigExtrasRequest,
   DescribeCloudProductLogTasksRequest,
   CreateAlarmNoticeRequest,
-  ModifyShipperResponse,
+  DeleteCosRechargeResponse,
   DescribeIndexResponse,
   HistogramInfo,
   DescribeMachineGroupConfigsRequest,
@@ -724,6 +726,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMachineGroupResponse) => void
   ): Promise<DeleteMachineGroupResponse> {
     return this.request("DeleteMachineGroup", req, cb)
+  }
+
+  /**
+   * 本接口用于删除cos导入任务
+   */
+  async DeleteCosRecharge(
+    req: DeleteCosRechargeRequest,
+    cb?: (error: string, rep: DeleteCosRechargeResponse) => void
+  ): Promise<DeleteCosRechargeResponse> {
+    return this.request("DeleteCosRecharge", req, cb)
   }
 
   /**

@@ -1251,6 +1251,10 @@ export interface GetRoomMessageRequest {
    * 消息拉取的条数。最大数量不能超过套餐包限制。
    */
   Limit?: number
+  /**
+   * 请求消息的userId
+   */
+  UserId?: string
 }
 
 /**

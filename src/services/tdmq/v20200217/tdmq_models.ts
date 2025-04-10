@@ -494,6 +494,16 @@ export interface RocketMQGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryMaxTimes?: number
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
 }
 
 /**
@@ -9057,6 +9067,16 @@ export interface RocketMQTopic {
    * 创建时间，以毫秒为单位
    */
   UpdateTime?: number
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
   /**
    * 最后写入时间，单位为秒
 注意：此字段可能返回 null，表示取不到有效值。

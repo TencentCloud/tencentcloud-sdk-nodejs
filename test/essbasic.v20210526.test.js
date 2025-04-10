@@ -448,6 +448,16 @@ it("essbasic.v20210526.ChannelCreateMultiFlowSignQRCode", async function () {
     }
 })
 
+it("essbasic.v20210526.OperateTemplate", async function () {
+    try {
+       const data = await client.OperateTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ModifyExtendedService", async function () {
     try {
        const data = await client.ModifyExtendedService({})

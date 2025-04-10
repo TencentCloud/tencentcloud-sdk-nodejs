@@ -725,7 +725,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
+   * 本接口（CreateAuditLogFile）用于创建云数据库实例的审计日志文件。
    */
   async CreateAuditLogFile(
     req: CreateAuditLogFileRequest,

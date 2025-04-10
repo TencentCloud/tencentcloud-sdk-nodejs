@@ -37,97 +37,78 @@ export interface StatusNode {
   NextNode?: string
   /**
    * 审批意见模型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Opinion?: ApproveOpinion
   /**
    * scf函数名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfName?: string
   /**
    * 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）18: 外部审批中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubStatus?: number
   /**
    * 审批节点审批人
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApprovedUin?: Array<number | bigint>
   /**
    * 审批时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 审批意见信息 审批节点:审批人意见  执行节点:scf函数执行日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
    * 有权限审批该节点的uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Users?: ApproveUser
   /**
    * 是否有权限审批该节点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsApprove?: boolean
   /**
    * 审批id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveId?: string
   /**
    * 审批方式 0或签 1会签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveMethod?: number
   /**
    * 审批节点审批类型，1人工审批 2自动通过 3自动决绝 4外部审批scf
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveType?: number
   /**
    * 外部审批类型 scf:0或null ; CKafka:1
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallMethod?: number
   /**
    * CKafka - 接入资源ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataHubId?: string
   /**
    * CKafka - 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
    * CKafka - 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CKafkaRegion?: string
   /**
    * 外部审批Url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExternalUrl?: string
   /**
    * 并行节点 3-4
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParallelNodes?: string
   /**
    * scf拒绝时返回信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RejectedCloudFunctionMsg?: string
   /**
    * 上一个节点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrevNode?: string
 }
@@ -254,7 +235,6 @@ export interface GetBpaasApproveDetailResponse {
   ApplyOwnUin?: number
   /**
    * 申请人昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyUinNick?: string
   /**
@@ -267,37 +247,30 @@ export interface GetBpaasApproveDetailResponse {
   BpaasName?: string
   /**
    * 申请参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationParams?: Array<ApplyParam>
   /**
    * 申请原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
    * 申请时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 申请单状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 节点信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nodes?: Array<StatusNode>
   /**
    * 正在审批的节点id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApprovingNodeId?: string
   /**
-   * 更新时间，时间格式：2021-12-12 10:12:10	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 更新时间，时间格式：2021-12-12 10:12:10
    */
   ModifyTime?: string
   /**

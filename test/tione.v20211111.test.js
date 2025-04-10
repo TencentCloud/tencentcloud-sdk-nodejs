@@ -298,6 +298,16 @@ it("tione.v20211111.CreatePresignedNotebookUrl", async function () {
     }
 })
 
+it("tione.v20211111.DescribeLogs", async function () {
+    try {
+       const data = await client.DescribeLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteModelService", async function () {
     try {
        const data = await client.DeleteModelService({})

@@ -21,6 +21,7 @@ import {
   ModifyWebshellStatusRequest,
   WafRuleLimit,
   DescribeUserClbWafRegionsResponse,
+  TLSCiphers,
   AddAntiFakeUrlRequest,
   ModifyIpAccessControlRequest,
   DescribeApiListVersionTwoResponse,
@@ -84,6 +85,7 @@ import {
   DescribeUserSignatureRuleResponse,
   AccessValueInfo,
   Rule,
+  DescribePostCKafkaFlowsResponse,
   Strategy,
   UpsertCCRuleResponse,
   DescribeHostRequest,
@@ -113,6 +115,7 @@ import {
   DeleteSessionResponse,
   DescribeAccessIndexResponse,
   ModifyUserSignatureRuleRequest,
+  BatchOperateUserSignatureRulesRequest,
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
   TLSVersion,
@@ -199,6 +202,8 @@ import {
   DescribeUserSignatureRuleRequest,
   ModifyProtectionStatusResponse,
   DescribeUserClbWafRegionsRequest,
+  DescribePostCKafkaFlowsRequest,
+  CreatePostCKafkaFlowRequest,
   AddAntiInfoLeakRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
   AddDomainWhiteRuleRequest,
@@ -209,6 +214,7 @@ import {
   DescribeRuleLimitResponse,
   CreateAccessExportResponse,
   ModifyHostRequest,
+  DestroyPostCKafkaFlowRequest,
   DescribeHistogramResponse,
   ClbObject,
   ModifyUserLevelResponse,
@@ -313,10 +319,10 @@ import {
   ModifyWebshellStatusResponse,
   GenerateDealsAndPayNewResponse,
   DescribeCCRuleRequest,
-  BatchOperateUserSignatureRulesRequest,
+  CreatePostCKafkaFlowResponse,
   GetAttackDownloadRecordsResponse,
   DescribeAreaBanRuleRequest,
-  DescribeApiDetailResponse,
+  ModifyIpAccessControlResponse,
   VipInfo,
   DescribeAccessHistogramResponse,
   DescribeTopAttackDomainResponse,
@@ -397,7 +403,7 @@ import {
   GetAttackTotalCountResponse,
   DescribeDomainRulesResponse,
   CreateDealsResponse,
-  TLSCiphers,
+  DestroyPostCKafkaFlowResponse,
   DescribeCiphersDetailRequest,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
@@ -416,7 +422,7 @@ import {
   FindAllDomainDetail,
   DeleteAntiInfoLeakRuleRequest,
   DescribeVipInfoResponse,
-  ModifyIpAccessControlResponse,
+  DescribeApiDetailResponse,
   DescribeRuleLimitRequest,
   ModifyDomainPostActionResponse,
   ModifyDomainsCLSStatusRequest,
@@ -425,6 +431,7 @@ import {
   DescribeDomainWhiteRulesResponse,
   ModifyWafAutoDenyRulesRequest,
   DescribeSessionResponse,
+  PostCKafkaFlowInfo,
   UpsertSessionRequest,
   DescribeHostLimitRequest,
   ClbDomainsInfo,
@@ -526,6 +533,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteIpAccessControlResponse) => void
   ): Promise<DeleteIpAccessControlResponse> {
     return this.request("DeleteIpAccessControl", req, cb)
+  }
+
+  /**
+   * 修改用户防护规则，开启关闭具体的某条规则
+   */
+  async ModifyUserSignatureRule(
+    req: ModifyUserSignatureRuleRequest,
+    cb?: (error: string, rep: ModifyUserSignatureRuleResponse) => void
+  ): Promise<ModifyUserSignatureRuleResponse> {
+    return this.request("ModifyUserSignatureRule", req, cb)
   }
 
   /**
@@ -636,6 +653,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanIpResponse) => void
   ): Promise<DescribeScanIpResponse> {
     return this.request("DescribeScanIp", req, cb)
+  }
+
+  /**
+   * 创建CKafka投递流任务
+   */
+  async CreatePostCKafkaFlow(
+    req: CreatePostCKafkaFlowRequest,
+    cb?: (error: string, rep: CreatePostCKafkaFlowResponse) => void
+  ): Promise<CreatePostCKafkaFlowResponse> {
+    return this.request("CreatePostCKafkaFlow", req, cb)
   }
 
   /**
@@ -756,16 +783,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpHitItemsResponse) => void
   ): Promise<DescribeIpHitItemsResponse> {
     return this.request("DescribeIpHitItems", req, cb)
-  }
-
-  /**
-   * 删除CC攻击的session设置
-   */
-  async DeleteSession(
-    req: DeleteSessionRequest,
-    cb?: (error: string, rep: DeleteSessionResponse) => void
-  ): Promise<DeleteSessionResponse> {
-    return this.request("DeleteSession", req, cb)
   }
 
   /**
@@ -950,6 +967,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取CKafka投递流任务列表
+   */
+  async DescribePostCKafkaFlows(
+    req: DescribePostCKafkaFlowsRequest,
+    cb?: (error: string, rep: DescribePostCKafkaFlowsResponse) => void
+  ): Promise<DescribePostCKafkaFlowsResponse> {
+    return this.request("DescribePostCKafkaFlows", req, cb)
+  }
+
+  /**
    * 根据过滤条件查询VIP信息
    */
   async DescribeVipInfo(
@@ -1040,13 +1067,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户防护规则等级
+   * 查询单个saaswaf域名详情
    */
-  async DescribeUserLevel(
-    req: DescribeUserLevelRequest,
-    cb?: (error: string, rep: DescribeUserLevelResponse) => void
-  ): Promise<DescribeUserLevelResponse> {
-    return this.request("DescribeUserLevel", req, cb)
+  async DescribeDomainDetailsSaas(
+    req: DescribeDomainDetailsSaasRequest,
+    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
+  ): Promise<DescribeDomainDetailsSaasResponse> {
+    return this.request("DescribeDomainDetailsSaas", req, cb)
   }
 
   /**
@@ -1480,13 +1507,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增加访问控制（自定义策略）
+   * 删除CC攻击的session设置
    */
-  async AddCustomRule(
-    req: AddCustomRuleRequest,
-    cb?: (error: string, rep: AddCustomRuleResponse) => void
-  ): Promise<AddCustomRuleResponse> {
-    return this.request("AddCustomRule", req, cb)
+  async DeleteSession(
+    req: DeleteSessionRequest,
+    cb?: (error: string, rep: DeleteSessionResponse) => void
+  ): Promise<DeleteSessionResponse> {
+    return this.request("DeleteSession", req, cb)
   }
 
   /**
@@ -1520,13 +1547,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 刷新接入检查的结果，后台会生成接入检查任务
+   * 销毁CKafka投递流任务
    */
-  async RefreshAccessCheckResult(
-    req: RefreshAccessCheckResultRequest,
-    cb?: (error: string, rep: RefreshAccessCheckResultResponse) => void
-  ): Promise<RefreshAccessCheckResultResponse> {
-    return this.request("RefreshAccessCheckResult", req, cb)
+  async DestroyPostCKafkaFlow(
+    req: DestroyPostCKafkaFlowRequest,
+    cb?: (error: string, rep: DestroyPostCKafkaFlowResponse) => void
+  ): Promise<DestroyPostCKafkaFlowResponse> {
+    return this.request("DestroyPostCKafkaFlow", req, cb)
   }
 
   /**
@@ -1680,23 +1707,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个saaswaf域名详情
+   * 增加访问控制（自定义策略）
    */
-  async DescribeDomainDetailsSaas(
-    req: DescribeDomainDetailsSaasRequest,
-    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
-  ): Promise<DescribeDomainDetailsSaasResponse> {
-    return this.request("DescribeDomainDetailsSaas", req, cb)
+  async AddCustomRule(
+    req: AddCustomRuleRequest,
+    cb?: (error: string, rep: AddCustomRuleResponse) => void
+  ): Promise<AddCustomRuleResponse> {
+    return this.request("AddCustomRule", req, cb)
   }
 
   /**
-   * 修改用户防护规则，开启关闭具体的某条规则
+   * 获取用户防护规则等级
    */
-  async ModifyUserSignatureRule(
-    req: ModifyUserSignatureRuleRequest,
-    cb?: (error: string, rep: ModifyUserSignatureRuleResponse) => void
-  ): Promise<ModifyUserSignatureRuleResponse> {
-    return this.request("ModifyUserSignatureRule", req, cb)
+  async DescribeUserLevel(
+    req: DescribeUserLevelRequest,
+    cb?: (error: string, rep: DescribeUserLevelResponse) => void
+  ): Promise<DescribeUserLevelResponse> {
+    return this.request("DescribeUserLevel", req, cb)
   }
 
   /**
@@ -1939,6 +1966,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApiSecEventChangeResponse) => void
   ): Promise<ModifyApiSecEventChangeResponse> {
     return this.request("ModifyApiSecEventChange", req, cb)
+  }
+
+  /**
+   * 刷新接入检查的结果，后台会生成接入检查任务
+   */
+  async RefreshAccessCheckResult(
+    req: RefreshAccessCheckResultRequest,
+    cb?: (error: string, rep: RefreshAccessCheckResultResponse) => void
+  ): Promise<RefreshAccessCheckResultResponse> {
+    return this.request("RefreshAccessCheckResult", req, cb)
   }
 
   /**

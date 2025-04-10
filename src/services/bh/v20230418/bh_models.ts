@@ -26,6 +26,24 @@ export interface ResetDeviceAccountPasswordResponse {
 }
 
 /**
+ * DescribeOperationTask返回参数结构体
+ */
+export interface DescribeOperationTaskResponse {
+  /**
+   * 运维任务列表
+   */
+  OperationTasks?: Array<OperationTask>
+  /**
+   * 任务总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 认证信息
  */
 export interface AccessInfo {
@@ -83,6 +101,16 @@ export interface DeleteAclsRequest {
    * 待删除的权限ID集合
    */
   IdSet: Array<number | bigint>
+}
+
+/**
+ * ModifyOperationTask返回参数结构体
+ */
+export interface ModifyOperationTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -153,6 +181,52 @@ export interface SearchSessionRequest {
    * 应用资产Url
    */
   AppAssetUrl?: string
+}
+
+/**
+ * ModifyOperationTask请求参数结构体
+ */
+export interface ModifyOperationTaskRequest {
+  /**
+   * 任务Id
+   */
+  Id: number
+  /**
+   * 任务名称
+   */
+  Name: string
+  /**
+   * 任务类型, 1 - 手工执行, 2 - 周期性自动执行
+   */
+  Type: number
+  /**
+   * 执行账号
+   */
+  Account: string
+  /**
+   * 超时时间,单位秒
+   */
+  Timeout: number
+  /**
+   * 执行脚本内容
+   */
+  Script: string
+  /**
+   * 执行主机集合，满足条件以下三个条件：1. 资产绑定可用的专业版或国密版堡垒机服务；2、资产类型为linux资产；3、用户具有资产权限，且资产添加了指定执行账号
+   */
+  DeviceIdSet: Array<number | bigint>
+  /**
+   * 执行间隔，单位天. 手工执行时无需传入
+   */
+  Period?: number
+  /**
+   * 首次执行日期，默认1970-01-01T08:00:01+08:00,手工执行时无需传入
+   */
+  FirstTime?: string
+  /**
+   * Script参数是否需要进行base64编码后传递，1-需要进行base64编码后传递，非1值-不需要进行base64编码后传递
+   */
+  Encoding?: number
 }
 
 /**
@@ -393,6 +467,16 @@ export interface ResetDeviceAccountPasswordRequest {
    * ID集合
    */
   IdSet: Array<number | bigint>
+}
+
+/**
+ * RunOperationTask返回参数结构体
+ */
+export interface RunOperationTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1375,6 +1459,16 @@ export interface CreateUserResponse {
 }
 
 /**
+ * DeleteOperationTasks请求参数结构体
+ */
+export interface DeleteOperationTasksRequest {
+  /**
+   * 运维任务ID集合
+   */
+  IdSet: Array<number | bigint>
+}
+
+/**
  * 应用资产信息
  */
 export interface AppAsset {
@@ -1649,6 +1743,20 @@ export interface DescribeLoginEventResponse {
 }
 
 /**
+ * CreateDeviceGroup请求参数结构体
+ */
+export interface CreateDeviceGroupRequest {
+  /**
+   * 资产组名，最大长度32字符
+   */
+  Name: string
+  /**
+   * 资产组所属部门ID，如：1.2.3
+   */
+  DepartmentId?: string
+}
+
+/**
  * 立即执行改密任务的入参
  */
 export interface RunChangePwdTaskDetail {
@@ -1674,6 +1782,48 @@ export interface DeleteDeviceGroupMembersRequest {
    * 需要删除的资产ID集合
    */
   MemberIdSet: Array<number | bigint>
+}
+
+/**
+ * 运维任务信息
+ */
+export interface OperationTask {
+  /**
+   * 运维任务主键ID
+   */
+  Id?: number
+  /**
+   * 运维任务ID
+   */
+  OperationId?: string
+  /**
+   * 运维任务名称
+   */
+  Name?: string
+  /**
+   * 创建用户
+   */
+  UserName?: string
+  /**
+   * 运维人员姓名
+   */
+  RealName?: string
+  /**
+   * 任务类型，1 - 手工执行任务， 2 - 周期性任务
+   */
+  Type?: number
+  /**
+   * 周期性任务执行间隔，单位天
+   */
+  Period?: number
+  /**
+   * 执行账户
+   */
+  NextTime?: string
+  /**
+   * 下一次执行时间
+   */
+  FirstTime?: string
 }
 
 /**
@@ -1713,17 +1863,17 @@ export interface DescribeChangePwdTaskResponse {
 }
 
 /**
- * CreateDeviceGroup请求参数结构体
+ * CreateOperationTask返回参数结构体
  */
-export interface CreateDeviceGroupRequest {
+export interface CreateOperationTaskResponse {
   /**
-   * 资产组名，最大长度32字符
+   * 运维任务ID
    */
-  Name: string
+  TaskId?: number
   /**
-   * 资产组所属部门ID，如：1.2.3
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DepartmentId?: string
+  RequestId?: string
 }
 
 /**
@@ -1814,6 +1964,16 @@ export interface CreateCmdTemplateResponse {
    * 新建成功后返回的记录ID
    */
   Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteOperationTasks返回参数结构体
+ */
+export interface DeleteOperationTasksResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2491,6 +2651,28 @@ export interface ModifyOAuthSettingResponse {
 }
 
 /**
+ * DescribeOperationTask请求参数结构体
+ */
+export interface DescribeOperationTaskRequest {
+  /**
+   * 运维任务名称
+   */
+  Name?: string
+  /**
+   * 运维任务类型，1 - 手工执行任务， 2 - 周期性任务
+   */
+  Type?: number
+  /**
+   * 分页偏移位置，默认值为0
+   */
+  Offset?: number
+  /**
+   * 每页条目数，默认20
+   */
+  Limit?: number
+}
+
+/**
  * DescribeUserGroupMembers返回参数结构体
  */
 export interface DescribeUserGroupMembersResponse {
@@ -3002,6 +3184,48 @@ export interface ChangePwdTaskDetail {
    * 上次改密结果。0-未改密  1-改密成功 2-改密失败
    */
   LastChangeStatus?: number
+}
+
+/**
+ * CreateOperationTask请求参数结构体
+ */
+export interface CreateOperationTaskRequest {
+  /**
+   * 运维任务名称
+   */
+  Name: string
+  /**
+   * 运维任务类型,1 - 手工执行, 2 - 周期性自动执行
+   */
+  Type: number
+  /**
+   * 执行账号
+   */
+  Account: string
+  /**
+   * 超时时间,单位秒
+   */
+  Timeout: number
+  /**
+   * 执行脚本内容
+   */
+  Script: string
+  /**
+   * 执行主机集合，满足条件以下三个条件：1. 资产绑定可用的专业版或国密版堡垒机服务；2、资产类型为linux资产；3、用户具有资产权限，且资产添加了指定执行账号
+   */
+  DeviceIdSet: Array<number | bigint>
+  /**
+   * 执行间隔，单位天. 手工执行时无需传入
+   */
+  Period?: number
+  /**
+   * 首次执行日期 默认1970-01-01T08:00:01+08:00,手工执行时无需传入
+   */
+  FirstTime?: string
+  /**
+   * Script参数是否需要进行base64编码后传递，1-需要进行base64编码后传递，非1值-不需要进行base64编码后传递
+   */
+  Encoding?: number
 }
 
 /**
@@ -3597,6 +3821,16 @@ export interface BindDeviceResourceRequest {
    * 网络域ID
    */
   DomainId?: string
+}
+
+/**
+ * RunOperationTask请求参数结构体
+ */
+export interface RunOperationTaskRequest {
+  /**
+   * 运维任务ID
+   */
+  Id: number
 }
 
 /**

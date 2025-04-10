@@ -41,6 +41,7 @@ import {
   WorkOrderFamilyDetail,
   DescribePositionStatusSummaryResponse,
   DescribeDeviceListRequest,
+  CreateSpeciallyQuitWorkOrderRequest,
   ConfirmCommonServiceWorkOrderRequest,
   OtherDevReceivingInfo,
   DescribeModelEvaluationWorkOrderDetailRequest,
@@ -74,7 +75,7 @@ import {
   NetReceivingInfo,
   DescribeCampusListResponse,
   WireReceivingInfo,
-  DescribeRacksDistributionResponse,
+  DescribeModelTemplateRequest,
   DeviceOrderBaseInfo,
   CreateMovingWorkOrderResponse,
   Campus,
@@ -117,13 +118,14 @@ import {
   CreatePowerOnWorkOrderRequest,
   OrderStep,
   CreatePowerOffWorkOrderResponse,
+  CreateSpeciallyQuitWorkOrderResponse,
   DeviceHistory,
   PersonnelVisitBaseInfo,
   ConfirmCommonServiceWorkOrderResponse,
   CreatePowerOffWorkOrderRequest,
   CreateQuitWorkOrderResponse,
   DevicePosition,
-  DescribeModelTemplateRequest,
+  DescribeRacksDistributionResponse,
   DescribeCustomerInfoRequest,
   DescribeDeviceListResponse,
   DescribeDeviceWorkOrderDetailRequest,
@@ -355,13 +357,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询机房管理单元资产详情
+   * 创建临时设备退出工单
    */
-  async DescribeIdcUnitAssetDetail(
-    req: DescribeIdcUnitAssetDetailRequest,
-    cb?: (error: string, rep: DescribeIdcUnitAssetDetailResponse) => void
-  ): Promise<DescribeIdcUnitAssetDetailResponse> {
-    return this.request("DescribeIdcUnitAssetDetail", req, cb)
+  async CreateSpeciallyQuitWorkOrder(
+    req: CreateSpeciallyQuitWorkOrderRequest,
+    cb?: (error: string, rep: CreateSpeciallyQuitWorkOrderResponse) => void
+  ): Promise<CreateSpeciallyQuitWorkOrderResponse> {
+    return this.request("CreateSpeciallyQuitWorkOrder", req, cb)
   }
 
   /**
@@ -452,6 +454,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceUsageResponse) => void
   ): Promise<DescribeResourceUsageResponse> {
     return this.request("DescribeResourceUsage", req, cb)
+  }
+
+  /**
+   * 查询机房管理单元资产详情
+   */
+  async DescribeIdcUnitAssetDetail(
+    req: DescribeIdcUnitAssetDetailRequest,
+    cb?: (error: string, rep: DescribeIdcUnitAssetDetailResponse) => void
+  ): Promise<DescribeIdcUnitAssetDetailResponse> {
+    return this.request("DescribeIdcUnitAssetDetail", req, cb)
   }
 
   /**

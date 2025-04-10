@@ -2247,11 +2247,11 @@ export interface DescribeTagRetentionExecutionTaskRequest {
    */
   ExecutionId: number
   /**
-   * 分页Page
+   * 页数，第几页，用于分页
    */
   Offset?: number
   /**
-   * 分页PageSize
+   * 每页个数，用于分页，最大值为100
    */
   Limit?: number
 }
@@ -4570,7 +4570,9 @@ export interface CreateRepositoryRequest {
    */
   NamespaceName: string
   /**
-   * 仓库名称
+   * 仓库名称，需满足以下规则：
+1. 长度需 ​大于2且小于245个字符 
+2. 仅允许小写字母、数字及符号 . _ -
    */
   RepositoryName: string
   /**

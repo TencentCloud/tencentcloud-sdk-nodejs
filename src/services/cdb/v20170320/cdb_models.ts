@@ -2381,6 +2381,10 @@ export interface CreateAuditLogFileRequest {
    * 过滤条件。可按设置的过滤条件过滤日志。
    */
   LogFilter?: Array<InstanceAuditLogFilters>
+  /**
+   * 下载筛选列
+   */
+  ColumnFilter?: Array<string>
 }
 
 /**

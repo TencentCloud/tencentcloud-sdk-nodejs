@@ -3750,6 +3750,16 @@ export interface AlarmTarget {
 }
 
 /**
+ * ModifyShipper返回参数结构体
+ */
+export interface ModifyShipperResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateKafkaRecharge返回参数结构体
  */
 export interface CreateKafkaRechargeResponse {
@@ -4471,6 +4481,20 @@ export interface LogRechargeRuleInfo {
    * json解析模式，开启首层数据解析
    */
   ParseArray?: boolean
+}
+
+/**
+ * DeleteCosRecharge请求参数结构体
+ */
+export interface DeleteCosRechargeRequest {
+  /**
+   * COS导入配置Id
+   */
+  Id: string
+  /**
+   * 日志主题Id
+   */
+  TopicId: string
 }
 
 /**
@@ -7803,9 +7827,9 @@ export interface CreateAlarmNoticeRequest {
 }
 
 /**
- * ModifyShipper返回参数结构体
+ * DeleteCosRecharge返回参数结构体
  */
-export interface ModifyShipperResponse {
+export interface DeleteCosRechargeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

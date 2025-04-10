@@ -19,11 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ResetDeviceAccountPasswordResponse,
+  DescribeOperationTaskResponse,
   AccessInfo,
   ModifyResourceResponse,
   BindDeviceAccountPasswordRequest,
   DeleteAclsRequest,
+  ModifyOperationTaskResponse,
   SearchSessionRequest,
+  ModifyOperationTaskRequest,
   DescribeDeviceGroupsResponse,
   DeleteCmdTemplatesResponse,
   DeleteDevicesResponse,
@@ -34,6 +37,7 @@ import {
   BindDeviceAccountPasswordResponse,
   DescribeChangePwdTaskDetailRequest,
   ResetDeviceAccountPasswordRequest,
+  RunOperationTaskResponse,
   AddUserGroupMembersRequest,
   CreateResourceRequest,
   DescribeDevicesResponse,
@@ -67,21 +71,25 @@ import {
   ModifyCmdTemplateRequest,
   SessionResult,
   CreateUserResponse,
+  DeleteOperationTasksRequest,
   AppAsset,
   DescribeAssetSyncStatusResponse,
   ModifyChangePwdTaskResponse,
   DescribeUserGroupsRequest,
   CreateAclRequest,
   DescribeLoginEventResponse,
+  CreateDeviceGroupRequest,
   RunChangePwdTaskDetail,
   DeleteDeviceGroupMembersRequest,
+  OperationTask,
   SearchCommandResponse,
   DescribeChangePwdTaskResponse,
-  CreateDeviceGroupRequest,
+  CreateOperationTaskResponse,
   CreateAclResponse,
   DescribeAclsResponse,
   ModifyUserRequest,
   CreateCmdTemplateResponse,
+  DeleteOperationTasksResponse,
   ModifyAclRequest,
   SearchAuditLogRequest,
   CreateResourceResponse,
@@ -110,6 +118,7 @@ import {
   DeleteDeviceGroupMembersResponse,
   ModifyDeviceGroupResponse,
   ModifyOAuthSettingResponse,
+  DescribeOperationTaskRequest,
   DescribeUserGroupMembersResponse,
   ImportExternalDeviceResponse,
   SearchSessionCommandResponse,
@@ -130,6 +139,7 @@ import {
   ModifyDeviceResponse,
   ModifyUserResponse,
   ChangePwdTaskDetail,
+  CreateOperationTaskRequest,
   DescribeCmdTemplatesResponse,
   CreateDeviceAccountRequest,
   AddDeviceGroupMembersResponse,
@@ -155,6 +165,7 @@ import {
   Resource,
   RunChangePwdTaskResponse,
   BindDeviceResourceRequest,
+  RunOperationTaskRequest,
   Acl,
   TagFilter,
   DescribeDevicesRequest,
@@ -183,13 +194,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改资产组
+   * 查询操作日志
    */
-  async ModifyDeviceGroup(
-    req: ModifyDeviceGroupRequest,
-    cb?: (error: string, rep: ModifyDeviceGroupResponse) => void
-  ): Promise<ModifyDeviceGroupResponse> {
-    return this.request("ModifyDeviceGroup", req, cb)
+  async DescribeOperationEvent(
+    req: DescribeOperationEventRequest,
+    cb?: (error: string, rep: DescribeOperationEventResponse) => void
+  ): Promise<DescribeOperationEventResponse> {
+    return this.request("DescribeOperationEvent", req, cb)
   }
 
   /**
@@ -263,13 +274,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除主机
+   * 创建运维任务
    */
-  async DeleteDevices(
-    req: DeleteDevicesRequest,
-    cb?: (error: string, rep: DeleteDevicesResponse) => void
-  ): Promise<DeleteDevicesResponse> {
-    return this.request("DeleteDevices", req, cb)
+  async CreateOperationTask(
+    req: CreateOperationTaskRequest,
+    cb?: (error: string, rep: CreateOperationTaskResponse) => void
+  ): Promise<CreateOperationTaskResponse> {
+    return this.request("CreateOperationTask", req, cb)
   }
 
   /**
@@ -473,6 +484,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除运维任务
+   */
+  async DeleteOperationTasks(
+    req: DeleteOperationTasksRequest,
+    cb?: (error: string, rep: DeleteOperationTasksResponse) => void
+  ): Promise<DeleteOperationTasksResponse> {
+    return this.request("DeleteOperationTasks", req, cb)
+  }
+
+  /**
    * 修改访问权限
    */
   async ModifyAcl(
@@ -573,13 +594,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询操作日志
+   * 删除主机
    */
-  async DescribeOperationEvent(
-    req: DescribeOperationEventRequest,
-    cb?: (error: string, rep: DescribeOperationEventResponse) => void
-  ): Promise<DescribeOperationEventResponse> {
-    return this.request("DescribeOperationEvent", req, cb)
+  async DeleteDevices(
+    req: DeleteDevicesRequest,
+    cb?: (error: string, rep: DeleteDevicesResponse) => void
+  ): Promise<DeleteDevicesResponse> {
+    return this.request("DeleteDevices", req, cb)
+  }
+
+  /**
+   * 修改运维任务
+   */
+  async ModifyOperationTask(
+    req: ModifyOperationTaskRequest,
+    cb?: (error: string, rep: ModifyOperationTaskResponse) => void
+  ): Promise<ModifyOperationTaskResponse> {
+    return this.request("ModifyOperationTask", req, cb)
   }
 
   /**
@@ -600,6 +631,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserGroupsResponse) => void
   ): Promise<DeleteUserGroupsResponse> {
     return this.request("DeleteUserGroups", req, cb)
+  }
+
+  /**
+   * 执行运维任务
+   */
+  async RunOperationTask(
+    req: RunOperationTaskRequest,
+    cb?: (error: string, rep: RunOperationTaskResponse) => void
+  ): Promise<RunOperationTaskResponse> {
+    return this.request("RunOperationTask", req, cb)
   }
 
   /**
@@ -630,6 +671,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchAuditLogResponse) => void
   ): Promise<SearchAuditLogResponse> {
     return this.request("SearchAuditLog", req, cb)
+  }
+
+  /**
+   * 获取运维任务列表
+   */
+  async DescribeOperationTask(
+    req: DescribeOperationTaskRequest,
+    cb?: (error: string, rep: DescribeOperationTaskResponse) => void
+  ): Promise<DescribeOperationTaskResponse> {
+    return this.request("DescribeOperationTask", req, cb)
   }
 
   /**
@@ -790,6 +841,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindDeviceAccountPrivateKeyResponse) => void
   ): Promise<BindDeviceAccountPrivateKeyResponse> {
     return this.request("BindDeviceAccountPrivateKey", req, cb)
+  }
+
+  /**
+   * 修改资产组
+   */
+  async ModifyDeviceGroup(
+    req: ModifyDeviceGroupRequest,
+    cb?: (error: string, rep: ModifyDeviceGroupResponse) => void
+  ): Promise<ModifyDeviceGroupResponse> {
+    return this.request("ModifyDeviceGroup", req, cb)
   }
 
   /**
