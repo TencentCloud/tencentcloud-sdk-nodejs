@@ -2004,6 +2004,10 @@ export interface PluginToolReqParam {
    * 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用
    */
   SubParams?: Array<PluginToolReqParam>
+  /**
+   * 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见
+   */
+  GlobalHidden?: boolean
 }
 
 /**
@@ -3619,13 +3623,17 @@ export interface CallDetail {
 }
 
 /**
- * ModifyRejectedQuestion返回参数结构体
+ * 文档列表筛选标识位
  */
-export interface ModifyRejectedQuestionResponse {
+export interface DocFilterFlag {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 标识位
    */
-  RequestId?: string
+  Flag?: string
+  /**
+   * 标识值
+   */
+  Value?: boolean
 }
 
 /**
@@ -4017,6 +4025,14 @@ export interface ListDocRequest {
    * 分类ID
    */
   CateBizId?: string
+  /**
+   * 文件类型分类筛选
+   */
+  FileTypes?: Array<string>
+  /**
+   * 文档列表筛选标识位
+   */
+  FilterFlag?: Array<DocFilterFlag>
 }
 
 /**
@@ -5226,7 +5242,19 @@ export interface KnowledgeQaConfig {
    */
   Greeting?: string
   /**
-   * 角色描述，300字符以内
+   * 角色描述，4000字符以内。通过填写描述，设定应用的 #角色名称、 #风格特点 及可达成的#意图。建议按照下面的模板填写，且自定义意图建议不超过5个。
+
+#角色名称：
+#风格特点：
+#输出要求：
+#能力限制：
+
+能够达成以下用户意图
+##意图名称：
+##意图描述：
+##意图示例：
+##意图实现：
+
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleDescription?: string
@@ -5280,6 +5308,16 @@ export interface KnowledgeQaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThoughtModel?: AppModel
+  /**
+   * 意图达成方式优先级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntentAchievements?: Array<IntentAchievement>
+  /**
+   * 是否开启图文检索
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageTextRetrieval?: boolean
 }
 
 /**
@@ -5572,6 +5610,10 @@ export interface GetDocPreviewResponse {
    */
   NewName?: string
   /**
+   * 文件md结果cos临时地址
+   */
+  ParseResultCosUrl?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5797,6 +5839,20 @@ export interface KnowledgeQaPlugin {
    * 插件是否和知识库绑定
    */
   IsBindingKnowledge?: boolean
+}
+
+/**
+ * 意图达成方式
+ */
+export interface IntentAchievement {
+  /**
+   * 意图达成方式，qa:问答回复、doc：文档回复、workflow：工作流回复，llm：大模型回复
+   */
+  Name?: string
+  /**
+   * 意图达成方式描述
+   */
+  Desc?: string
 }
 
 /**
@@ -6628,6 +6684,16 @@ export interface DeleteAppRequest {
    * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
    */
   AppType: string
+}
+
+/**
+ * ModifyRejectedQuestion返回参数结构体
+ */
+export interface ModifyRejectedQuestionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

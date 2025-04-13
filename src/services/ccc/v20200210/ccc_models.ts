@@ -740,6 +740,28 @@ export interface PausePredictiveDialingCampaignRequest {
 }
 
 /**
+ * DescribeAILatency请求参数结构体
+ */
+export interface DescribeAILatencyRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 会话 ID
+   */
+  SessionId: string
+  /**
+   * 查找起始时间
+   */
+  StartTime: number
+  /**
+   * 1737350008
+   */
+  EndTime: number
+}
+
+/**
  * CreateCallOutSession返回参数结构体
  */
 export interface CreateCallOutSessionResponse {
@@ -897,6 +919,16 @@ export interface CreatePredictiveDialingCampaignRequest {
    * 可用时间段
    */
   AvailableTime?: Array<TimeRange>
+}
+
+/**
+ * RestoreMemberOnline返回参数结构体
+ */
+export interface RestoreMemberOnlineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1253,33 +1285,23 @@ export interface CreateAIAgentCallResponse {
 }
 
 /**
- * AI 通话提取配置项
+ * DescribeAILatency返回参数结构体
  */
-export interface AICallExtractConfigElement {
+export interface DescribeAILatencyResponse {
   /**
-   * 配置项类型，包括
-Text 文本
-Selector 选项
-Boolean 布尔值
-Number 数字
+   * 时延明细数据
+ -1表示无对应数据
    */
-  InfoType: string
+  AILatencyDetail?: Array<AILatencyDetail>
   /**
-   * 配置项名称，不可重复
+   * 时延统计数据
+ -1表示无对应数据
    */
-  InfoName: string
+  AILatencyStatistics?: AILatencyStatistics
   /**
-   * 配置项具体内容
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InfoContent?: string
-  /**
-   * 配置项提取内容示例
-   */
-  Examples?: Array<string>
-  /**
-   * InfoType 为 Selector，需要配置此字段
-   */
-  Choices?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1331,50 +1353,33 @@ export interface PackageBuyInfo {
 }
 
 /**
- * DescribeTelCdr请求参数结构体
+ * AI 通话提取配置项
  */
-export interface DescribeTelCdrRequest {
+export interface AICallExtractConfigElement {
   /**
-   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   * 配置项类型，包括
+Text 文本
+Selector 选项
+Boolean 布尔值
+Number 数字
    */
-  StartTimeStamp: number
+  InfoType: string
   /**
-   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   * 配置项名称，不可重复
    */
-  EndTimeStamp: number
+  InfoName: string
   /**
-   * 实例 ID（废弃）
-   * @deprecated
+   * 配置项具体内容
    */
-  InstanceId?: number
+  InfoContent?: string
   /**
-   * 返回数据条数，上限（废弃）
+   * 配置项提取内容示例
    */
-  Limit?: number
+  Examples?: Array<string>
   /**
-   * 偏移（废弃）
+   * InfoType 为 Selector，需要配置此字段
    */
-  Offset?: number
-  /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-   */
-  SdkAppId?: number
-  /**
-   * 分页尺寸（必填），上限 100
-   */
-  PageSize?: number
-  /**
-   * 分页页码（必填），从 0 开始
-   */
-  PageNumber?: number
-  /**
-   * 按手机号筛选
-   */
-  Phones?: Array<string>
-  /**
-   * 按SessionId筛选
-   */
-  SessionIds?: Array<string>
+  Choices?: Array<string>
 }
 
 /**
@@ -1397,6 +1402,70 @@ export interface AICallExtractResultInfo {
    * 提取类型是数字
    */
   Number?: number
+}
+
+/**
+ * 文本会话服务记录信息
+ */
+export interface IMCdrInfo {
+  /**
+   * 服务记录ID
+   */
+  Id?: string
+  /**
+   * 服务时长秒数
+   */
+  Duration?: number
+  /**
+   * 结束状态
+0 异常结束
+1 正常结束
+3 无座席在线
+17 座席放弃接听
+100 黑名单
+101 座席手动转接
+102 IVR阶段放弃
+108 用户超时自动结束
+109 用户主动结束
+   */
+  EndStatus?: number
+  /**
+   * 用户昵称
+   */
+  Nickname?: string
+  /**
+   * 服务类型 1为全媒体，2为文本客服
+   */
+  Type?: number
+  /**
+   * 客服ID
+   */
+  StaffId?: string
+  /**
+   * 服务时间戳
+   */
+  Timestamp?: number
+  /**
+   * 会话ID
+   */
+  SessionId?: string
+  /**
+   * 技能组ID
+   */
+  SkillGroupId?: string
+  /**
+   * 技能组名称
+   */
+  SkillGroupName?: string
+  /**
+   * 满意度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Satisfaction?: IMSatisfaction
+  /**
+   * 用户ID
+   */
+  ClientUserId?: string
 }
 
 /**
@@ -1587,6 +1656,24 @@ export interface DescribeStaffInfoListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI时延统计
+ */
+export interface AILatencyStatisticsInfo {
+  /**
+   * 最小值
+   */
+  MinLatency?: number
+  /**
+   * 中位数
+   */
+  MiddleLatency?: number
+  /**
+   * p90
+   */
+  P90Latency?: number
 }
 
 /**
@@ -2349,6 +2436,20 @@ export interface DescribeIvrAudioListRequest {
 }
 
 /**
+ * ForceMemberOffline请求参数结构体
+ */
+export interface ForceMemberOfflineRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 客服ID
+   */
+  UserId: string
+}
+
+/**
  * 技能组信息
  */
 export interface SkillGroupInfoItem {
@@ -2451,6 +2552,20 @@ export interface UpdateCCCSkillGroupRequest {
 }
 
 /**
+ * RestoreMemberOnline请求参数结构体
+ */
+export interface RestoreMemberOnlineRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 客服ID
+   */
+  UserId: string
+}
+
+/**
  * 时间范围，24 小时制，格式为 09:00:00
  */
 export interface TimeRange {
@@ -2480,6 +2595,53 @@ export interface ModifyStaffPasswordRequest {
    * 设置的密码
    */
   Password: string
+}
+
+/**
+ * DescribeTelCdr请求参数结构体
+ */
+export interface DescribeTelCdrRequest {
+  /**
+   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   */
+  StartTimeStamp: number
+  /**
+   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   */
+  EndTimeStamp: number
+  /**
+   * 实例 ID（废弃）
+   * @deprecated
+   */
+  InstanceId?: number
+  /**
+   * 返回数据条数，上限（废弃）
+   */
+  Limit?: number
+  /**
+   * 偏移（废弃）
+   */
+  Offset?: number
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId?: number
+  /**
+   * 分页尺寸（必填），上限 100
+   */
+  PageSize?: number
+  /**
+   * 分页页码（必填），从 0 开始
+   */
+  PageNumber?: number
+  /**
+   * 按手机号筛选
+   */
+  Phones?: Array<string>
+  /**
+   * 按SessionId筛选
+   */
+  SessionIds?: Array<string>
 }
 
 /**
@@ -3207,6 +3369,32 @@ export interface CreateCarrierPrivilegeNumberApplicantRequest {
 }
 
 /**
+ * AI时延明细
+ */
+export interface AILatencyDetail {
+  /**
+   * 对话ID
+   */
+  RoundId?: string
+  /**
+   * asr时延（毫秒）
+   */
+  ASRLatency?: number
+  /**
+   * tts时延（毫秒）
+   */
+  TTSLatency?: number
+  /**
+   * llm时延（毫秒）
+   */
+  LLMLatency?: number
+  /**
+   * 端到端时延（毫秒）
+   */
+  ETELatency?: number
+}
+
+/**
  * AI转人工配置项
  */
 export interface AITransferItem {
@@ -3250,6 +3438,16 @@ export interface AbortAgentCruiseDialingCampaignRequest {
    * 任务 ID
    */
   CampaignId: number
+}
+
+/**
+ * ForceMemberOffline返回参数结构体
+ */
+export interface ForceMemberOfflineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4236,67 +4434,25 @@ export interface DescribePSTNActiveSessionListResponse {
 }
 
 /**
- * 文本会话服务记录信息
+ * AI时延统计
  */
-export interface IMCdrInfo {
+export interface AILatencyStatistics {
   /**
-   * 服务记录ID
+   * asr时延统计
    */
-  Id?: string
+  ASRLatency?: AILatencyStatisticsInfo
   /**
-   * 服务时长秒数
+   * tts时延统计
    */
-  Duration?: number
+  TTSLatency?: AILatencyStatisticsInfo
   /**
-   * 结束状态
-0 异常结束
-1 正常结束
-3 无座席在线
-17 座席放弃接听
-100 黑名单
-101 座席手动转接
-102 IVR阶段放弃
-108 用户超时自动结束
-109 用户主动结束
+   * llm时延统计
    */
-  EndStatus?: number
+  LLMLatency?: AILatencyStatisticsInfo
   /**
-   * 用户昵称
+   * 端到端时延统计
    */
-  Nickname?: string
-  /**
-   * 服务类型 1为全媒体，2为文本客服
-   */
-  Type?: number
-  /**
-   * 客服ID
-   */
-  StaffId?: string
-  /**
-   * 服务时间戳
-   */
-  Timestamp?: number
-  /**
-   * 会话ID
-   */
-  SessionId?: string
-  /**
-   * 技能组ID
-   */
-  SkillGroupId?: string
-  /**
-   * 技能组名称
-   */
-  SkillGroupName?: string
-  /**
-   * 满意度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Satisfaction?: IMSatisfaction
-  /**
-   * 用户ID
-   */
-  ClientUserId?: string
+  ETELatency?: AILatencyStatisticsInfo
 }
 
 /**

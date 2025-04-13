@@ -38,6 +38,16 @@ it("ccc.v20200210.DescribeExtensions", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeAILatency", async function () {
+    try {
+       const data = await client.DescribeAILatency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     try {
        const data = await client.DescribeAutoCalloutTasks({})
@@ -608,6 +618,16 @@ it("ccc.v20200210.DescribeIMCdrList", async function () {
     }
 })
 
+it("ccc.v20200210.ForceMemberOffline", async function () {
+    try {
+       const data = await client.ForceMemberOffline({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeCallInMetrics", async function () {
     try {
        const data = await client.DescribeCallInMetrics({})
@@ -681,6 +701,16 @@ it("ccc.v20200210.CreateAIAgentCall", async function () {
 it("ccc.v20200210.DeletePredictiveDialingCampaign", async function () {
     try {
        const data = await client.DeletePredictiveDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.RestoreMemberOnline", async function () {
+    try {
+       const data = await client.RestoreMemberOnline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

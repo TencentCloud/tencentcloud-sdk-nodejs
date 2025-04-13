@@ -760,18 +760,18 @@ export interface AiReviewProhibitedOcrTaskOutput {
   /**
    * Ocr 文字涉违禁评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Ocr 文字涉违禁结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Ocr 文字有涉违禁嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewOcrTextSegmentItem>
 }
 
 /**
@@ -1444,10 +1444,10 @@ export interface AudioTrackChannelInfo {
   ChannelsRemix?: number
   /**
    * 合并音轨输入类型，可选值：
-trask：表示使用音轨id；
-trask_channel： 表示使用音轨id和声道id；
-默认：trask。
-注意：如果原视频是多声道，建议使用trask_channel。
+track：表示使用音轨id；
+track_channel： 表示使用音轨id和声道id；
+默认：track。
+注意：如果原视频是多声道，建议使用track_channel。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelectType?: string
@@ -2608,16 +2608,25 @@ export interface AudioTemplateInfo {
 <li>mp2。</li>
 当外层参数 Container 为 hls 时，可选值为：
 <li>aac；</li>
-<li>mp3。</li>
+<li>mp3;</li>
+<li>eac3：自适应转码音轨合并时使用。</li>
    */
   Codec: string
   /**
    * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
 当取值为 0，表示音频码率和原始音频保持一致。
+注意：如果使用自适应转码音轨合并TrackChannelInfo参数，取值范围：
+1）、不能填0；
+2）、Codec为：aac时，取值范围：[26, 256];
+3）、Codec为：ac3时，取值范围：[26, 640];
+4)、Codec为：eac3时，取值范围：[26, 6144]，备注：当SampleRate为44100HZ，最大值为：5644，当SampleRate为48000HZ，最大值为：6144，
+
+
    */
   Bitrate: number
   /**
    * 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档]https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53
+单位：Hz
 注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！
    */
   SampleRate: number
@@ -2729,7 +2738,7 @@ export interface AiReviewPornAsrTaskInput {
   /**
    * 鉴黄模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -3809,11 +3818,11 @@ export interface AiSampleFaceInfo {
   /**
    * 人脸图片 ID。
    */
-  FaceId: string
+  FaceId?: string
   /**
    * 人脸图片地址。
    */
-  Url: string
+  Url?: string
 }
 
 /**
@@ -4799,7 +4808,7 @@ export interface SvgWatermarkInputForUpdate {
 <li>当字符串以 S% 结尾，表示水印 Height 为视频短边的百分比大小，如 10S% 表示 Height 为视频短边的 10%；</li>
 <li>当字符串以 L% 结尾，表示水印 Height 为视频长边的百分比大小，如 10L% 表示 Height 为视频长边的 10%；</li>
 <li>当字符串以 % 结尾时，含义同 H%。
-默认值为 0px。
+默认值为 0px。</li>
    */
   Height?: string
 }
@@ -4975,15 +4984,15 @@ export interface AiRecognitionTaskOcrFullTextSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段结果集。
    */
-  TextSet: Array<AiRecognitionTaskOcrFullTextSegmentTextItem>
+  TextSet?: Array<AiRecognitionTaskOcrFullTextSegmentTextItem>
 }
 
 /**
@@ -5091,18 +5100,18 @@ export interface AiReviewPornAsrTaskOutput {
   /**
    * Asr 文字涉黄评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Asr 文字涉黄结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Asr 文字有涉黄嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewAsrTextSegmentItem>
 }
 
 /**
@@ -5383,39 +5392,39 @@ export interface MediaContentReviewOcrTextSegmentItem {
   /**
    * 嫌疑片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 嫌疑片段结束的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 嫌疑片段置信度。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 嫌疑片段审核结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 嫌疑关键词列表。
    */
-  KeywordSet: Array<string>
+  KeywordSet?: Array<string>
   /**
    * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
   /**
    * 嫌疑图片 URL （图片不会永久存储，到达
 PicUrlExpireTime 时间点后图片将被删除）。
    */
-  Url: string
+  Url?: string
   /**
    * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  PicUrlExpireTime: string
+  PicUrlExpireTime?: string
 }
 
 /**
@@ -5507,9 +5516,9 @@ export interface TrackInfo {
   TrackNum?: string
   /**
    * 声道音量大小，说明：
-当：AudioChannel的值为1时，此值长度为1；
-当：AudioChannel的值为2时，此值长度为2；
-当：AudioChannel的值为6时，此值长度大于2。
+当：AudioChannel的值为1时，此数组长度为1，例如：[6]；
+当：AudioChannel的值为2时，此数组长度为2，例如：[0,6]；
+当：AudioChannel的值为6时，此数组长度大于2小于16，例如：[-60,0,0,6]。
 此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。
 注意：支持3位小数。
 
@@ -6496,7 +6505,7 @@ export interface AiReviewPornOcrTaskInput {
   /**
    * 鉴黄模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -6615,47 +6624,47 @@ export interface MediaAnimatedGraphicsItem {
   /**
    * 转动图文件的存储位置。
    */
-  Storage: TaskOutputStorage
+  Storage?: TaskOutputStorage
   /**
    * 转动图的文件路径。
    */
-  Path: string
+  Path?: string
   /**
    * 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/862/37042#.E9.A2.84.E7.BD.AE.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
    */
-  Definition: number
+  Definition?: number
   /**
    * 动图格式，如 gif。
    */
-  Container: string
+  Container?: string
   /**
    * 动图的高度，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 动图的宽度，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 动图码率，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 动图大小，单位：字节。
    */
-  Size: number
+  Size?: number
   /**
    * 动图的md5值。
    */
-  Md5: string
+  Md5?: string
   /**
    * 动图在视频中的起始时间偏移，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 动图在视频中的结束时间偏移，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
 }
 
 /**
@@ -7299,7 +7308,7 @@ export interface AiRecognitionTaskTransTextResultInput {
   /**
    * 翻译模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -7714,27 +7723,27 @@ export interface ImageWatermarkTemplate {
   /**
    * 水印图片地址。
    */
-  ImageUrl: string
+  ImageUrl?: string
   /**
    * 水印的宽度。支持 %、px 两种格式：
 <li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
 <li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
    */
-  Width: string
+  Width?: string
   /**
    * 水印的高度。支持 %、px 两种格式：
 <li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
 <li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素；</li>
 0px：表示 Height 按照 Width 对视频宽度的比例缩放。
    */
-  Height: string
+  Height?: string
   /**
    * 水印重复类型。使用场景：水印为动态图像。取值范围：
 <li>once：动态水印播放完后，不再出现；</li>
 <li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
 <li>repeat：水印循环播放，直到视频结束。</li>
    */
-  RepeatType: string
+  RepeatType?: string
 }
 
 /**
@@ -7840,35 +7849,35 @@ export interface AiSamplePerson {
   /**
    * 人物 ID。
    */
-  PersonId: string
+  PersonId?: string
   /**
    * 人物名称。
    */
-  Name: string
+  Name?: string
   /**
    * 人物描述。
    */
-  Description: string
+  Description?: string
   /**
    * 人脸信息。
    */
-  FaceInfoSet: Array<AiSampleFaceInfo>
+  FaceInfoSet?: Array<AiSampleFaceInfo>
   /**
    * 人物标签。
    */
-  TagSet: Array<string>
+  TagSet?: Array<string>
   /**
    * 应用场景。
    */
-  UsageSet: Array<string>
+  UsageSet?: Array<string>
   /**
    * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -9632,18 +9641,18 @@ export interface AiReviewTerrorismOcrTaskOutput {
   /**
    * Ocr 文字涉敏评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Ocr 文字涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Ocr 文字有涉敏嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewOcrTextSegmentItem>
 }
 
 /**
@@ -9838,11 +9847,11 @@ export interface AiRecognitionTaskOcrWordsResultItem {
   /**
    * 文本关键词。
    */
-  Word: string
+  Word?: string
   /**
    * 文本关键出现的片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskOcrWordsSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskOcrWordsSegmentItem>
 }
 
 /**
@@ -10147,26 +10156,26 @@ export interface MediaContentReviewAsrTextSegmentItem {
   /**
    * 嫌疑片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 嫌疑片段结束的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 嫌疑片段置信度。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 嫌疑片段审核结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 嫌疑关键词列表。
    */
-  KeywordSet: Array<string>
+  KeywordSet?: Array<string>
 }
 
 /**
@@ -10538,15 +10547,15 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
   /**
    * 识别文本。
    */
-  Text: string
+  Text?: string
 }
 
 /**
@@ -10699,18 +10708,18 @@ export interface AiReviewPornOcrTaskOutput {
   /**
    * Ocr 文字涉黄评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Ocr 文字涉黄结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Ocr 文字有涉黄嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewOcrTextSegmentItem>
 }
 
 /**
@@ -11237,7 +11246,7 @@ export interface AiReviewProhibitedAsrTaskInput {
   /**
    * 鉴违禁模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -11396,18 +11405,18 @@ export interface AiReviewProhibitedAsrTaskOutput {
   /**
    * Asr 文字涉违禁评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Asr 文字涉违禁结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Asr 文字有涉违禁嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewAsrTextSegmentItem>
 }
 
 /**
@@ -11642,7 +11651,7 @@ export interface AdaptiveStreamTemplate {
   RemoveVideo?: number
   /**
    * 音频参数信息列表。
-注意：参数数组长度最大为64。
+注意：参数只在自适应转码使用音轨合并多音轨时使用, 参数数组长度最大为64。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioList?: Array<AudioTemplateInfo>
@@ -12594,14 +12603,14 @@ export interface AiReviewPornTaskOutput {
   /**
    * 视频鉴黄评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 鉴黄结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 视频鉴黄结果标签，取值范围：
 <li>porn：色情。</li>
@@ -12609,11 +12618,11 @@ export interface AiReviewPornTaskOutput {
 <li>vulgar：低俗。</li>
 <li>intimacy：亲密行为。</li>
    */
-  Label: string
+  Label?: string
   /**
    * 有涉黄嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewSegmentItem>
+  SegmentSet?: Array<MediaContentReviewSegmentItem>
 }
 
 /**
@@ -12820,19 +12829,19 @@ export interface AiRecognitionTaskOcrWordsSegmentItem {
   /**
    * 识别片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 识别片段终止的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**
@@ -14064,7 +14073,7 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
   /**
    * 文本全文识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -15025,7 +15034,7 @@ export interface AiReviewProhibitedOcrTaskInput {
   /**
    * 鉴违禁模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -15456,35 +15465,35 @@ export interface MediaContentReviewSegmentItem {
   /**
    * 嫌疑片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 嫌疑片段结束的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 嫌疑片段涉黄分数。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 嫌疑片段鉴黄结果标签。
    */
-  Label: string
+  Label?: string
   /**
    * 嫌疑片段鉴黄结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 嫌疑图片 URL （图片不会永久存储，到达
  PicUrlExpireTime 时间点后图片将被删除）。
    */
-  Url: string
+  Url?: string
   /**
    * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  PicUrlExpireTime: string
+  PicUrlExpireTime?: string
 }
 
 /**

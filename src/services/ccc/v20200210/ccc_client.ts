@@ -35,12 +35,14 @@ import {
   StaffInfo,
   CreateAdminURLResponse,
   PausePredictiveDialingCampaignRequest,
+  DescribeAILatencyRequest,
   CreateCallOutSessionResponse,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
   ModifyStaffPasswordResponse,
   TransferToManualRequest,
   CreatePredictiveDialingCampaignRequest,
+  RestoreMemberOnlineResponse,
   AbortAgentCruiseDialingCampaignResponse,
   CreateCompanyApplyResponse,
   ServeParticipant,
@@ -52,11 +54,12 @@ import {
   DescribePredictiveDialingCampaignRequest,
   DescribePredictiveDialingCampaignResponse,
   CreateAIAgentCallResponse,
-  AICallExtractConfigElement,
+  DescribeAILatencyResponse,
   DescribeAutoCalloutTasksResponse,
   PackageBuyInfo,
-  DescribeTelCdrRequest,
+  AICallExtractConfigElement,
   AICallExtractResultInfo,
+  IMCdrInfo,
   CreateAgentCruiseDialingCampaignRequest,
   DescribeAICallExtractResultRequest,
   CreateStaffResponse,
@@ -66,6 +69,7 @@ import {
   DeletePredictiveDialingCampaignRequest,
   UploadIvrAudioRequest,
   DescribeStaffInfoListResponse,
+  AILatencyStatisticsInfo,
   UnbindNumberCallOutSkillGroupRequest,
   CreateAutoCalloutTaskRequest,
   ResumePredictiveDialingCampaignResponse,
@@ -93,11 +97,14 @@ import {
   DescribeStaffInfoListRequest,
   AutoCalloutTaskInfo,
   DescribeIvrAudioListRequest,
+  ForceMemberOfflineRequest,
   SkillGroupInfoItem,
   CreateAIAgentCallRequest,
   UpdateCCCSkillGroupRequest,
+  RestoreMemberOnlineRequest,
   TimeRange,
   ModifyStaffPasswordRequest,
+  DescribeTelCdrRequest,
   ModifyStaffResponse,
   ModifyExtensionRequest,
   CreatePredictiveDialingCampaignResponse,
@@ -135,9 +142,11 @@ import {
   StaffSkillGroupList,
   ResetExtensionPasswordResponse,
   CreateCarrierPrivilegeNumberApplicantRequest,
+  AILatencyDetail,
   AITransferItem,
   Filter,
   AbortAgentCruiseDialingCampaignRequest,
+  ForceMemberOfflineResponse,
   CreateOwnNumberApplyResponse,
   BindNumberCallOutSkillGroupResponse,
   HangUpCallResponse,
@@ -178,7 +187,7 @@ import {
   DescribeChatMessagesResponse,
   SdkAppIdBuyInfo,
   DescribePSTNActiveSessionListResponse,
-  IMCdrInfo,
+  AILatencyStatistics,
   DescribeIMCdrListRequest,
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
@@ -229,6 +238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExtensionsResponse) => void
   ): Promise<DescribeExtensionsResponse> {
     return this.request("DescribeExtensions", req, cb)
+  }
+
+  /**
+   * 获取 AI 时延信息
+   */
+  async DescribeAILatency(
+    req: DescribeAILatencyRequest,
+    cb?: (error: string, rep: DescribeAILatencyResponse) => void
+  ): Promise<DescribeAILatencyResponse> {
+    return this.request("DescribeAILatency", req, cb)
   }
 
   /**
@@ -810,6 +829,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 强制客服下线
+   */
+  async ForceMemberOffline(
+    req: ForceMemberOfflineRequest,
+    cb?: (error: string, rep: ForceMemberOfflineResponse) => void
+  ): Promise<ForceMemberOfflineResponse> {
+    return this.request("ForceMemberOffline", req, cb)
+  }
+
+  /**
    * 获取呼入实时数据统计指标
    */
   async DescribeCallInMetrics(
@@ -889,6 +918,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePredictiveDialingCampaignResponse) => void
   ): Promise<DeletePredictiveDialingCampaignResponse> {
     return this.request("DeletePredictiveDialingCampaign", req, cb)
+  }
+
+  /**
+   * 恢复客服上线
+   */
+  async RestoreMemberOnline(
+    req: RestoreMemberOnlineRequest,
+    cb?: (error: string, rep: RestoreMemberOnlineResponse) => void
+  ): Promise<RestoreMemberOnlineResponse> {
+    return this.request("RestoreMemberOnline", req, cb)
   }
 
   /**

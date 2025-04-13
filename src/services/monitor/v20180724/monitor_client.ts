@@ -146,6 +146,7 @@ import {
   InstallPluginsRequest,
   DescribeAlarmEventsResponse,
   DescribeServiceDiscoveryResponse,
+  ExportPrometheusReadOnlyDynamicAPIRequest,
   PrometheusTag,
   DescribePolicyConditionListMetric,
   NoticeContentTmplBindInfo,
@@ -176,7 +177,7 @@ import {
   DescribePrometheusGlobalNotificationResponse,
   PrometheusAlertGroupRuleSet,
   DescribeMonitorTypesRequest,
-  DimensionsDesc,
+  ExportPrometheusReadOnlyDynamicAPIResponse,
   DeletePrometheusAlertPolicyRequest,
   RemoteWrite,
   ModifyPrometheusAgentExternalLabelsResponse,
@@ -309,6 +310,7 @@ import {
   ModifyAlarmPolicyNoticeResponse,
   NoticeBindPolicys,
   PrometheusAlertRule,
+  CleanGrafanaInstanceResponse,
   UnbindPrometheusManagedGrafanaResponse,
   DescribeGrafanaChannelsResponse,
   DescribeAlarmPolicyResponse,
@@ -456,7 +458,7 @@ import {
   IntegrationConfiguration,
   DescribePrometheusAgentsResponse,
   ModifyPrometheusGlobalNotificationResponse,
-  CleanGrafanaInstanceResponse,
+  DimensionsDesc,
   CreateAlertRuleRequest,
   ModifyPrometheusRecordRuleYamlResponse,
   DeletePrometheusScrapeJobsResponse,
@@ -554,6 +556,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAlertRuleResponse) => void
   ): Promise<UpdateAlertRuleResponse> {
     return this.request("UpdateAlertRule", req, cb)
+  }
+
+  /**
+   * Prometheus 内部动态 api 代理，仅内部使用
+   */
+  async ExportPrometheusReadOnlyDynamicAPI(
+    req?: ExportPrometheusReadOnlyDynamicAPIRequest,
+    cb?: (error: string, rep: ExportPrometheusReadOnlyDynamicAPIResponse) => void
+  ): Promise<ExportPrometheusReadOnlyDynamicAPIResponse> {
+    return this.request("ExportPrometheusReadOnlyDynamicAPI", req, cb)
   }
 
   /**

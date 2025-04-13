@@ -535,6 +535,28 @@ export interface SubmitHunyuanImageChatJobResponse {
 }
 
 /**
+ * SubmitHunyuanTo3DJob请求参数结构体
+ */
+export interface SubmitHunyuanTo3DJobRequest {
+  /**
+   * 3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
+   */
+  Prompt?: string
+  /**
+   * 输入图 Base64 数据。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
+   */
+  ImageBase64?: string
+  /**
+   * 输入图Url。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
+   */
+  ImageUrl?: string
+  /**
+   * 生成数量。默认1，当前限制只能为1。
+   */
+  Num?: number
+}
+
+/**
  * 会话消息未完成原因
  */
 export interface ThreadMessageInCompleteDetailsObject {
@@ -804,6 +826,34 @@ export interface GetThreadMessageListRequest {
 }
 
 /**
+ * SubmitHunyuanTo3DJob返回参数结构体
+ */
+export interface SubmitHunyuanTo3DJobResponse {
+  /**
+   * 任务id
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 3D文件
+ */
+export interface File3D {
+  /**
+   * 3D文件的格式。取值范围：GIF, OBJ
+   */
+  Type?: string
+  /**
+   * 文件的Url
+   */
+  Url?: string
+}
+
+/**
  * 返回的回复, 支持多个
  */
 export interface Choice {
@@ -989,6 +1039,16 @@ export interface GroupChatCompletionsRequest {
 }
 
 /**
+ * 3D文件列表
+ */
+export interface File3Ds {
+  /**
+   * 3D文件列表
+   */
+  File3D?: Array<File3D>
+}
+
+/**
  * 搜索结果信息
  */
 export interface SearchInfo {
@@ -1059,6 +1119,16 @@ export interface SetPayModeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryHunyuanTo3DJob请求参数结构体
+ */
+export interface QueryHunyuanTo3DJobRequest {
+  /**
+   * 任务ID
+   */
+  JobId?: string
 }
 
 /**
@@ -2047,4 +2117,30 @@ export interface EmbeddingUsage {
    * 总 Token 数。
    */
   TotalTokens?: number
+}
+
+/**
+ * QueryHunyuanTo3DJob返回参数结构体
+ */
+export interface QueryHunyuanTo3DJobResponse {
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  Status?: string
+  /**
+   * 生成的3D文件数组
+   */
+  ResultFile3Ds?: Array<File3Ds>
+  /**
+   * 错误码
+   */
+  ErrorCode?: string
+  /**
+   * 错误信息
+   */
+  ErrorMessage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

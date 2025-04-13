@@ -3227,6 +3227,11 @@ export interface DescribeServiceDiscoveryResponse {
 }
 
 /**
+ * ExportPrometheusReadOnlyDynamicAPI请求参数结构体
+ */
+export type ExportPrometheusReadOnlyDynamicAPIRequest = null
+
+/**
  * Prometheus 托管服务标签
  */
 export interface PrometheusTag {
@@ -3947,13 +3952,13 @@ export interface DescribeMonitorTypesRequest {
 }
 
 /**
- * 维度信息
+ * ExportPrometheusReadOnlyDynamicAPI返回参数结构体
  */
-export interface DimensionsDesc {
+export interface ExportPrometheusReadOnlyDynamicAPIResponse {
   /**
-   * 维度名数组
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Dimensions: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -7016,6 +7021,16 @@ export interface PrometheusAlertRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleState?: number
+}
+
+/**
+ * CleanGrafanaInstance返回参数结构体
+ */
+export interface CleanGrafanaInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10943,13 +10958,13 @@ export interface ModifyPrometheusGlobalNotificationResponse {
 }
 
 /**
- * CleanGrafanaInstance返回参数结构体
+ * 维度信息
  */
-export interface CleanGrafanaInstanceResponse {
+export interface DimensionsDesc {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 维度名数组
    */
-  RequestId?: string
+  Dimensions: Array<string>
 }
 
 /**

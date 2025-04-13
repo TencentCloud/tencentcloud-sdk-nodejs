@@ -29263,7 +29263,7 @@ export interface DescribeHostLoginListResponse {
    */
   TotalCount?: number
   /**
-   * 登录审计列表
+   * 异常登录列表
    */
   HostLoginList?: Array<HostLoginList>
   /**

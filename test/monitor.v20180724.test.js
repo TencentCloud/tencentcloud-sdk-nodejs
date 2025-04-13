@@ -78,6 +78,16 @@ it("monitor.v20180724.UpdateAlertRule", async function () {
     }
 })
 
+it("monitor.v20180724.ExportPrometheusReadOnlyDynamicAPI", async function () {
+    try {
+       const data = await client.ExportPrometheusReadOnlyDynamicAPI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeMonitorResourceInfo", async function () {
     try {
        const data = await client.DescribeMonitorResourceInfo({})
