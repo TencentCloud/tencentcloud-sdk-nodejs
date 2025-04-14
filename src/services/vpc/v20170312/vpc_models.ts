@@ -319,7 +319,7 @@ export interface DescribeBandwidthPackageResourcesRequest {
    */
   BandwidthPackageId: string
   /**
-   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下：
+   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。详细的过滤条件如下：
 <li> resource-id - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 的唯一 ID 过滤。共享带宽包内资源 唯一 ID 形如：eip-11112222。</li>
 <li> resource-type - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 类型过滤，目前仅支持 弹性IP 和 负载均衡 两种类型，可选值为 Address 和 LoadBalance。</li>
    */
@@ -983,7 +983,7 @@ export interface DescribeBandwidthPackageBillUsageResponse {
   /**
    * 当前计费用量
    */
-  BandwidthPackageBillBandwidthSet: Array<BandwidthPackageBillBandwidth>
+  BandwidthPackageBillBandwidthSet?: Array<BandwidthPackageBillBandwidth>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1243,19 +1243,27 @@ tag:tag-key - String - （过滤条件）按照标签键值对进行过滤。 ta
  */
 export interface AddBandwidthPackageResourcesRequest {
   /**
-   * 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'
+   * 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。
    */
   ResourceIds: Array<string>
   /**
-   * 带宽包唯一标识ID，形如'bwp-xxxx'
+   * 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
    */
   BandwidthPackageId?: string
   /**
-   * 带宽包类型，当前支持'BGP'、'HIGH_QUALITY_BGP'、'ANYCAST'、'SINGLEISP_CUCC'、'SINGLEISP_CMCC'、'SINGLEISP_CTCC'等类型。
+   * 带宽包类型，可选值：
+<li>BGP: 普通BGP共享带宽包</li>
+<li>HIGH_QUALITY_BGP: 精品BGP共享带宽包</li>
+<li>ANYCAST：公网加速带宽包</li>
+<li>SINGLEISP_CMCC: 中国移动共享带宽包</li>
+<li>SINGLEISP_CTCC: 中国电信共享带宽包</li>
+<li>SINGLEISP_CUCC: 中国联通共享带宽包</li>
    */
   NetworkType?: string
   /**
-   * 资源类型，包括'Address', 'LoadBalance'
+   * 资源类型，可选值：
+<li>Address：弹性公网IP</li>
+<li>LoadBalance：负载均衡</li>
    */
   ResourceType?: string
   /**
@@ -1552,7 +1560,7 @@ export interface DeleteVpnGatewaySslClientRequest {
  */
 export interface DescribeBandwidthPackageBillUsageRequest {
   /**
-   * 后付费共享带宽包的唯一ID
+   * 后付费共享带宽包的唯一ID，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209)接口获取BandwidthPackageId。
    */
   BandwidthPackageId: string
 }
@@ -1967,8 +1975,13 @@ export interface ModifyBandwidthPackageAttributeRequest {
    */
   BandwidthPackageName: string
   /**
-   * 带宽包计费模式，示例 ：
-'TOP5_POSTPAID_BY_MONTH'（后付费-TOP5计费）
+   * 带宽包计费模式，可选值:
+<li>ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费</li>
+<li>PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费</li>
+<li>BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费</li>
+<li>FIXED_PREPAID_BY_MONTH: 常规BGP-预付费</li>
+<li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算</li>
+<li>TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请</li>
    */
   ChargeType?: string
 }
@@ -2450,7 +2463,7 @@ export interface ModifyCustomerGatewayAttributeRequest {
  */
 export interface DescribeBandwidthPackageBandwidthRangeResponse {
   /**
-   * 带宽包带宽上下限详细信息。
+   * 带宽包带宽上下限详细信息。ResourceId：带宽包id、BandwidthLowerLimit：带宽下限、BandwidthUpperLimit：带宽上限。
    */
   BandwidthRangeSet?: Array<BandwidthRange>
   /**
@@ -3941,11 +3954,23 @@ export interface BandwidthRange {
    */
   ResourceId?: string
   /**
-   * 带宽下限，单位：Mbps。
+   * 带宽下限，单位：Mbps。计费类型以及对应的带宽下限：
+- TOP5_POSTPAID_BY_MONTH: 默认无下限
+- BANDWIDTH_POSTPAID_BY_DAY: 50
+- FIXED_PREPAID_BY_MONTH: 100
+- ENHANCED95_POSTPAID_BY_MONTH: 300
+- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 50
+- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 50
    */
   BandwidthLowerLimit?: number
   /**
-   * 带宽上限，单位：Mbps。
+   * 带宽上限，单位：Mbps。计费类型以及对应的带宽上限：
+- TOP5_POSTPAID_BY_MONTH: 默认无上限
+- BANDWIDTH_POSTPAID_BY_DAY: 300
+- FIXED_PREPAID_BY_MONTH: 5000
+- ENHANCED95_POSTPAID_BY_MONTH: 5000
+- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 300
+- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 2000
    */
   BandwidthUpperLimit?: number
 }
@@ -4089,13 +4114,21 @@ export interface DeleteAddressTemplateResponse {
 }
 
 /**
- * ResumeSnapshotInstance返回参数结构体
+ * MigrateBandwidthPackageResources请求参数结构体
  */
-export interface ResumeSnapshotInstanceResponse {
+export interface MigrateBandwidthPackageResourcesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 当前资源所在的共享带宽包ID
    */
-  RequestId?: string
+  BandwidthPackageId: string
+  /**
+   * 要迁移的目标共享带宽包的ID
+   */
+  TargetBandwidthPackageId: string
+  /**
+   * 要迁移的资源的ID列表
+   */
+  ResourceIds: Array<string>
 }
 
 /**
@@ -4766,8 +4799,8 @@ export interface DescribeBandwidthPackagesRequest {
    * 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下：
 <li> bandwidth-package-id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。</li>
 <li> bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。</li>
-<li> network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'HIGH_QUALITY_BGP','BGP','SINGLEISP'和'ANYCAST'。</li>
-<li> charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括: <li>'TOP5_POSTPAID_BY_MONTH':按月后付费TOP5计费</li><li> 'PERCENT95_POSTPAID_BY_MONTH':按月后付费月95计费</li><li>'ENHANCED95_POSTPAID_BY_MONTH':按月后付费增强型95计费</li><li>'FIXED_PREPAID_BY_MONTH':包月预付费计费</li><li>‘PEAK_BANDWIDTH_POSTPAID_BY_DAY’: 后付费日结按带宽计费</li>
+<li> network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。网络类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824#BandwidthPackage)。</li>
+<li> charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824#BandwidthPackage)。</li>
 <li> resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance'</li>
 <li> resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx'</li>
 <li> resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。</li>
@@ -5926,6 +5959,16 @@ export interface RenewVpnGatewayRequest {
  * AssociateIPv6Address返回参数结构体
  */
 export interface AssociateIPv6AddressResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResumeSnapshotInstance返回参数结构体
+ */
+export interface ResumeSnapshotInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10273,7 +10316,7 @@ export interface DownloadCustomerGatewayConfigurationRequest {
  */
 export interface DeleteBandwidthPackageRequest {
   /**
-   * 待删除带宽包唯一ID
+   * 待删除带宽包唯一ID，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
    */
   BandwidthPackageId: string
 }
@@ -11621,11 +11664,11 @@ export interface DeleteNatGatewayRequest {
  */
 export interface ModifyBandwidthPackageBandwidthRequest {
   /**
-   * 带宽包限速大小。单位：Mbps。
+   * 带宽包限速大小。单位：Mbps。带宽包计费类型对应的带宽上下限可参考：[BandwidthRange](https://cloud.tencent.com/document/api/215/15824#BandwidthRange)
    */
   InternetMaxBandwidth: number
   /**
-   * 共享带宽包ID
+   * 共享带宽包ID，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
    */
   BandwidthPackageId: string
 }
@@ -14452,7 +14495,7 @@ export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRe
  */
 export interface DescribeBandwidthPackageBandwidthRangeRequest {
   /**
-   * 带宽包资源ID列表，单次查询上限20。
+   * 带宽包资源ID列表，单次查询上限20。可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
    */
   BandwidthPackageIds?: Array<string>
 }
@@ -14504,6 +14547,16 @@ export interface AllocateAddressesResponse {
 }
 
 /**
+ * MigrateBandwidthPackageResources返回参数结构体
+ */
+export interface MigrateBandwidthPackageResourcesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCdcUsedIdcVlan请求参数结构体
  */
 export type DescribeCdcUsedIdcVlanRequest = null
@@ -14517,12 +14570,23 @@ export interface BandwidthPackage {
    */
   BandwidthPackageId?: string
   /**
-   * 带宽包类型，包括'BGP','SINGLEISP','ANYCAST','SINGLEISP_CMCC','SINGLEISP_CTCC','SINGLEISP_CUCC'
+   * 带宽包类型，包括：
+<li>BGP: 普通BGP共享带宽包</li>
+<li>HIGH_QUALITY_BGP: 精品BGP共享带宽包</li>
+<li>ANYCAST：公网加速带宽包</li>
+<li>SINGLEISP_CMCC: 中国移动共享带宽包</li>
+<li>SINGLEISP_CTCC: 中国电信共享带宽包</li>
+<li>SINGLEISP_CUCC: 中国联通共享带宽包</li>
    */
   NetworkType?: string
   /**
-   * 带宽包计费类型，包括:<li>'TOP5_POSTPAID_BY_MONTH':按月后付费TOP5计费</li><li> 'PERCENT95_POSTPAID_BY_MONTH':按月后付费月95计费</li><li>'ENHANCED95_POSTPAID_BY_MONTH':按月后付费增强型95计费</li><li>'FIXED_PREPAID_BY_MONTH':包月预付费计费</li><li>‘PEAK_BANDWIDTH_POSTPAID_BY_DAY’: 后付费日结按带宽计费</li>
-
+   * 带宽包计费类型, 包括:
+<li>ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费</li>
+<li>PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费</li>
+<li>BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费</li>
+<li>FIXED_PREPAID_BY_MONTH: 常规BGP-预付费</li>
+<li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算</li>
+<li>TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请</li>
    */
   ChargeType?: string
   /**
@@ -14658,29 +14722,30 @@ export interface CreateBandwidthPackageRequest {
 <li>SINGLEISP_CMCC: 中国移动共享带宽包</li>
 <li>SINGLEISP_CTCC: 中国电信共享带宽包</li>
 <li>SINGLEISP_CUCC: 中国联通共享带宽包</li>
+注意：仅部分地域支持三网带宽包和精品BGP带宽包。
    */
   NetworkType?: string
   /**
    * 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:
-<li>TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费</li>
-<li>PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费</li>
-<li>FIXED_PREPAID_BY_MONTH: 包月预付费计费</li>
-<li>ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费</li>
-<li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费</li>
-<li>PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费按主流量计费</li>
+<li>ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费</li>
+<li>PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费</li>
+<li>BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费</li>
+<li>FIXED_PREPAID_BY_MONTH: 常规BGP-预付费</li>
+<li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算</li>
+<li>TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请</li>
 
    */
   ChargeType?: string
   /**
-   * 带宽包名称。
+   * 带宽包名称。名称长度小于60，只包含数字、字母和下划线。
    */
   BandwidthPackageName?: string
   /**
-   * 带宽包数量(传统账户类型只能填1), 标准账户类型取值范围为1~20。
+   * 带宽包数量(传统账户类型只能填1), 标准账户类型取值范围为1~20。默认为1。
    */
   BandwidthPackageCount?: number
   /**
-   * 带宽包限速大小。单位：Mbps，-1表示不限速。不同计费类型的带宽包对应不同的带宽上下限。
+   * 带宽包限速大小。单位：Mbps，-1表示不限速。带宽包计费类型对应的带宽上下限可参考：[BandwidthRange](https://cloud.tencent.com/document/api/215/15824#BandwidthRange)
    */
   InternetMaxBandwidth?: number
   /**
@@ -14692,11 +14757,11 @@ export interface CreateBandwidthPackageRequest {
    */
   Protocol?: string
   /**
-   * 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。
+   * 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。预付费计费类型必传。
    */
   TimeSpan?: number
   /**
-   * 网络出口，默认值：center_egress1
+   * 网络出口，默认值：center_egress1，其它可选值：center_egress2、center_egress3。
    */
   Egress?: string
 }
@@ -15844,17 +15909,19 @@ export interface AssociateNatGatewayAddressResponse {
  */
 export interface RemoveBandwidthPackageResourcesRequest {
   /**
-   * 带宽包唯一标识ID，形如'bwp-xxxx'
+   * 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
    */
   BandwidthPackageId?: string
   /**
-   * 资源类型，包括‘Address’, ‘LoadBalance’
+   * 资源类型，可选值：
+<li>Address：弹性公网IP</li>
+<li>LoadBalance：负载均衡</li>
    */
   ResourceType?: string
-  /**
-   * 资源ID，可支持资源形如'eip-xxxx', 'lb-xxxx'
-   */
-  ResourceIds?: Array<string>
 }
 
 /**
@@ -18911,6 +18978,11 @@ export interface Quota {
 - `TOTAL_EIP6_QUOTA`：用户当前地域下，传统弹性公网IPv6的配额数；
 - `BGP_EIPv6_QUOTA`：用户当前地域下，可申请的 BGP 弹性公网IPv6 的配额数；
 - `SINGLEISP_EIPv6_QUOTA`：用户当前地域下，可申请的静态单线弹性公网IPv6 的配额数；
+- `TOTAL_BANDWIDTHPKG_QUOTA`：用户当前地域下，可申请的带宽包总配额；
+- `PRIMARY_TRAFFIC_SINGLE_BWP_QUOTA`：用户当前地域下，可申请的静态单线主流量带宽包配额数；
+- `PRIMARY_TRAFFIC_BGP_BWP_QUOTA`：用户当前地域下，可申请的BGP主流量带宽包配额数；
+- `BandwidthGuaranteedRatio`：用户当前地域下，保底带宽包默认保底比例；
+- `TezBandwidthGuaranteedRatio`：用户当前地域下，边缘可用区保底带宽包默认保底比例；
    */
   QuotaId?: string
   /**

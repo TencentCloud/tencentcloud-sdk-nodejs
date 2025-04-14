@@ -5557,7 +5557,20 @@ export type CheckTcbServiceRequest = null
 /**
  * DescribeCloudBaseRunVersionRsByCondition请求参数结构体
  */
-export type DescribeCloudBaseRunVersionRsByConditionRequest = null
+export interface DescribeCloudBaseRunVersionRsByConditionRequest {
+  /**
+   * 环境ID；EnvId和ClusterId不能同时为空
+   */
+  EnvId?: string
+  /**
+   * 集群ID；EnvId和ClusterId不能同时为空
+   */
+  ClusterId?: string
+  /**
+   * 过滤网关服务开关
+   */
+  FilterGwSwitch?: boolean
+}
 
 /**
  * DescribeCloudBaseRunServer返回参数结构体

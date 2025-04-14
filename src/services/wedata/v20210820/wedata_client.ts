@@ -61,6 +61,7 @@ import {
   JudgeResourceFileResponse,
   DataServicePublishedApiListFilter,
   SubmitTaskRequest,
+  ListInstancesResponse,
   DescribeTableMetasRequest,
   RuleExecResultDetail,
   DataSourceInfoPage,
@@ -92,6 +93,7 @@ import {
   DataSourceEnvInfo,
   DescribeDataCheckStatRequest,
   TablePropertyScore,
+  SubscribeWebHook,
   GetOfflineInstanceListRequest,
   TaskTypeMap,
   InstanceLifeDetailDto,
@@ -122,7 +124,7 @@ import {
   ModifyWorkflowScheduleRequest,
   CreateDsFolderRequest,
   RegisterEventRequest,
-  Property,
+  InstanceDetailVO,
   MakePlanOpsDtoCollection,
   DescribeTableMetasResponse,
   UploadContentResponse,
@@ -160,6 +162,7 @@ import {
   RulePage,
   DimensionScoreInfo,
   DescribeTaskScriptResponse,
+  InstancePageVO,
   CollectionInstanceOpsDto,
   DrInstanceOpsDtoPage,
   TableLineageInfo,
@@ -176,6 +179,7 @@ import {
   UpdateProjectUserRoleRequest,
   LineageParamRecord,
   BatchResult,
+  InstanceLogVO,
   StartTaskInfo,
   DescribeIntegrationStatisticsInstanceTrendResponse,
   DescribeInstanceLogListRequest,
@@ -298,12 +302,13 @@ import {
   GeneralTaskParam,
   DescribeTableBasicInfoResponse,
   WorkflowScheduleDtoDs,
+  Property,
   ModifyRuleTemplateRequest,
   DescribeRuleExecStatResponse,
   TaskByCycle,
   DagInstancesResponse,
   DimensionScore,
-  SubscribeWebHook,
+  GetInstanceLogResponse,
   DescribeTableLineageInfoRequest,
   CreateTaskFolderRequest,
   EngineTaskInfo,
@@ -337,10 +342,12 @@ import {
   TaskVersionInstance,
   TableInfo,
   DescribeProjectRequest,
+  GetTaskInstanceResponse,
   CreateIntegrationTaskResponse,
   DescribeIntegrationTasksResponse,
   DeleteProjectUsersResponse,
   DescribeAlarmReceiverRequest,
+  InstanceVO,
   DescribeStatisticInstanceStatusTrendOpsResponse,
   SchedulerTaskInstanceInfo,
   DescribeSchedulerTaskCntByStatusResponse,
@@ -376,6 +383,7 @@ import {
   BatchOperationOpsDto,
   RuleExecConfig,
   SuspendIntegrationTaskResponse,
+  ListInstancesRequest,
   DescribeSchedulerRunTimeInstanceCntByStatusResponse,
   CreateTaskFolderResponse,
   ModifyTaskScriptResponse,
@@ -389,6 +397,7 @@ import {
   InstanceStatisticInfo,
   CommitRuleGroupTaskRequest,
   CheckIntegrationNodeNameExistsRequest,
+  InstanceLifeCycleVO,
   DescribeReportTaskDetailRequest,
   GetOfflineInstanceListResponse,
   DescribeOpsMakePlansRequest,
@@ -467,6 +476,7 @@ import {
   DescribeDataServicePublishedApiDetailRequest,
   DescribeTaskTableMetricOverviewRequest,
   SourceFieldInfo,
+  GetTaskInstanceRequest,
   DeleteDsFolderRequest,
   SaveCustomFunctionResponse,
   ModifyDsFolderRequest,
@@ -597,6 +607,7 @@ import {
   FieldConfig,
   DescribeRealTimeTaskMetricOverviewRequest,
   DescribeDatabaseMetasResponse,
+  OfflineTaskAddParam,
   FreezeTasksByWorkflowIdsResponse,
   SubmitWorkflowRequest,
   DescribeResourceManagePathTreesResponse,
@@ -757,7 +768,7 @@ import {
   FolderOpsDto,
   DescribeTaskLockStatusRequest,
   DescribeRuleExecStatRequest,
-  OfflineTaskAddParam,
+  GetInstanceLogRequest,
   RuleConfig,
   LogContent,
   RealTimeTaskSpeed,
@@ -1236,6 +1247,17 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+设置任务告警，新建/更新告警信息（最新）
+     */
+  async SetTaskAlarmNew(
+    req: SetTaskAlarmNewRequest,
+    cb?: (error: string, rep: SetTaskAlarmNewResponse) => void
+  ): Promise<SetTaskAlarmNewResponse> {
+    return this.request("SetTaskAlarmNew", req, cb)
+  }
+
+  /**
    * 查看事件实例的消费任务
    */
   async DescribeEventConsumeTasks(
@@ -1596,14 +1618,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-更新任务
-     */
-  async ModifyTaskInfo(
-    req: ModifyTaskInfoRequest,
-    cb?: (error: string, rep: ModifyTaskInfoResponse) => void
-  ): Promise<ModifyTaskInfoResponse> {
-    return this.request("ModifyTaskInfo", req, cb)
+   * 获取实例列表
+   */
+  async GetInstanceLog(
+    req: GetInstanceLogRequest,
+    cb?: (error: string, rep: GetInstanceLogResponse) => void
+  ): Promise<GetInstanceLogResponse> {
+    return this.request("GetInstanceLog", req, cb)
   }
 
   /**
@@ -1954,6 +1975,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: CreateOpsMakePlanResponse) => void
   ): Promise<CreateOpsMakePlanResponse> {
     return this.request("CreateOpsMakePlan", req, cb)
+  }
+
+  /**
+   * 获取实例列表
+   */
+  async GetTaskInstance(
+    req: GetTaskInstanceRequest,
+    cb?: (error: string, rep: GetTaskInstanceResponse) => void
+  ): Promise<GetTaskInstanceResponse> {
+    return this.request("GetTaskInstance", req, cb)
   }
 
   /**
@@ -2943,6 +2974,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 获取实例列表
+   */
+  async ListInstances(
+    req: ListInstancesRequest,
+    cb?: (error: string, rep: ListInstancesResponse) => void
+  ): Promise<ListInstancesResponse> {
+    return this.request("ListInstances", req, cb)
+  }
+
+  /**
    * 提交规则组运行任务接口
    */
   async CommitRuleGroupTask(
@@ -3046,13 +3087,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
 
   /**
      * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-设置任务告警，新建/更新告警信息（最新）
+更新任务
      */
-  async SetTaskAlarmNew(
-    req: SetTaskAlarmNewRequest,
-    cb?: (error: string, rep: SetTaskAlarmNewResponse) => void
-  ): Promise<SetTaskAlarmNewResponse> {
-    return this.request("SetTaskAlarmNew", req, cb)
+  async ModifyTaskInfo(
+    req: ModifyTaskInfoRequest,
+    cb?: (error: string, rep: ModifyTaskInfoResponse) => void
+  ): Promise<ModifyTaskInfoResponse> {
+    return this.request("ModifyTaskInfo", req, cb)
   }
 
   /**

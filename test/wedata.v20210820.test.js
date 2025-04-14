@@ -448,6 +448,16 @@ it("wedata.v20210820.DescribeOpsInstanceLogList", async function () {
     }
 })
 
+it("wedata.v20210820.SetTaskAlarmNew", async function () {
+    try {
+       const data = await client.SetTaskAlarmNew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeEventConsumeTasks", async function () {
     try {
        const data = await client.DescribeEventConsumeTasks({})
@@ -808,9 +818,9 @@ it("wedata.v20210820.DescribeDataSourceList", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyTaskInfo", async function () {
+it("wedata.v20210820.GetInstanceLog", async function () {
     try {
-       const data = await client.ModifyTaskInfo({})
+       const data = await client.GetInstanceLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1161,6 +1171,16 @@ it("wedata.v20210820.DeleteResourceFiles", async function () {
 it("wedata.v20210820.CreateOpsMakePlan", async function () {
     try {
        const data = await client.CreateOpsMakePlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.GetTaskInstance", async function () {
+    try {
+       const data = await client.GetTaskInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2148,6 +2168,16 @@ it("wedata.v20210820.BatchDeleteOpsTasks", async function () {
     }
 })
 
+it("wedata.v20210820.ListInstances", async function () {
+    try {
+       const data = await client.ListInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CommitRuleGroupTask", async function () {
     try {
        const data = await client.CommitRuleGroupTask({})
@@ -2248,9 +2278,9 @@ it("wedata.v20210820.BatchResumeIntegrationTasks", async function () {
     }
 })
 
-it("wedata.v20210820.SetTaskAlarmNew", async function () {
+it("wedata.v20210820.ModifyTaskInfo", async function () {
     try {
-       const data = await client.SetTaskAlarmNew({})
+       const data = await client.ModifyTaskInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

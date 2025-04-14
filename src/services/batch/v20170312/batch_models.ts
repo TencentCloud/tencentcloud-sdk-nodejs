@@ -1319,13 +1319,7 @@ export interface DataDisk {
    */
   DiskId?: string
   /**
-   * 数据盘是否随子机销毁。取值范围：
-<li>true：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li>
-<li>
-  false：子机销毁时，保留数据盘<br />
-  默认取值：true<br />
-  该参数目前仅用于 `RunInstances` 接口。
-</li>
+   * 数据盘是否随子机销毁。取值范围：<li>true：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li><li>false：子机销毁时，保留数据盘</li><br/>默认取值：true <br/>该参数目前仅用于 `RunInstances` 接口。
    */
   DeleteWithInstance?: boolean
   /**
@@ -1333,13 +1327,7 @@ export interface DataDisk {
    */
   SnapshotId?: string
   /**
-   * 数据盘是加密。取值范围：
-<li>true：加密</li>
-<li>
-  false：不加密<br />
-  默认取值：false<br />
-  该参数目前仅用于 `RunInstances` 接口。
-</li>
+   * 数据盘是否加密。取值范围：<li>true：加密</li><li>false：不加密</li><br/>默认取值：false<br/>该参数目前仅用于 `RunInstances` 接口。
    */
   Encrypt?: boolean
   /**
@@ -2035,7 +2023,7 @@ export interface InstanceTypeQuotaItem {
    */
   InstanceType?: string
   /**
-   * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br></li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br></li>`SPOTPAID`：表示竞价实例付费。
+   * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br></li><li>POSTPAID_BY_HOUR：表示后付费，即按量计费</li><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br></li><li>SPOTPAID：表示竞价实例付费。</li>
    */
   InstanceChargeType?: string
   /**
@@ -2067,7 +2055,7 @@ export interface InstanceTypeQuotaItem {
    */
   LocalDiskTypeList?: Array<LocalDiskType>
   /**
-   * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br></li>SOLD_OUT：表示实例已售罄。
+   * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br></li><li>SOLD_OUT：表示实例已售罄。</li>
    */
   Status?: string
   /**
@@ -2116,10 +2104,7 @@ export interface InstanceTypeQuotaItem {
   Frequency?: string
   /**
    * 描述库存情况。取值范围：
-<li> EnoughStock：表示对应库存非常充足</li> 
-<li>NormalStock：表示对应库存供应有保障</li>
-<li> UnderStock：表示对应库存即将售罄</li> 
-<li>WithoutStock：表示对应库存已经售罄</li>
+<li> EnoughStock：表示对应库存非常充足</li> <li>NormalStock：表示对应库存供应有保障</li><li> UnderStock：表示对应库存即将售罄</li> <li>WithoutStock：表示对应库存已经售罄</li>
    */
   StatusCategory?: string
 }
@@ -2147,11 +2132,11 @@ export interface StorageBlock {
    */
   Type?: string
   /**
-   * HDD本地存储的最小容量
+   * HDD本地存储的最小容量。单位：GiB。
    */
   MinSize?: number
   /**
-   * HDD本地存储的最大容量
+   * HDD本地存储的最大容量。单位：GiB。
    */
   MaxSize?: number
 }

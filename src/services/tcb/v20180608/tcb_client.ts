@@ -943,7 +943,7 @@ export class Client extends AbstractClient {
    * DescribeCloudBaseRunVersionRsByCondition 获取云托管详情
    */
   async DescribeCloudBaseRunVersionRsByCondition(
-    req?: DescribeCloudBaseRunVersionRsByConditionRequest,
+    req: DescribeCloudBaseRunVersionRsByConditionRequest,
     cb?: (error: string, rep: DescribeCloudBaseRunVersionRsByConditionResponse) => void
   ): Promise<DescribeCloudBaseRunVersionRsByConditionResponse> {
     return this.request("DescribeCloudBaseRunVersionRsByCondition", req, cb)

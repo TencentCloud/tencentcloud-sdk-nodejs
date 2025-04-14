@@ -1528,6 +1528,20 @@ export interface SubmitTaskRequest {
 }
 
 /**
+ * ListInstances返回参数结构体
+ */
+export interface ListInstancesResponse {
+  /**
+   * 实例结果集
+   */
+  Data?: InstancePageVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTableMetas请求参数结构体
  */
 export interface DescribeTableMetasRequest {
@@ -2540,6 +2554,22 @@ export interface TablePropertyScore {
 }
 
 /**
+ * 群机器人订阅配置
+ */
+export interface SubscribeWebHook {
+  /**
+   * 群机器人类型，当前支持飞书
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HookType?: string
+  /**
+   * 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HookAddress?: string
+}
+
+/**
  * GetOfflineInstanceList请求参数结构体
  */
 export interface GetOfflineInstanceListRequest {
@@ -2580,7 +2610,15 @@ export interface TaskTypeMap {
  */
 export interface InstanceLifeDetailDto {
   /**
-   * 实例状态
+   * **实例状态**
+- [0] 表示 等待事件
+- [12] 表示 等待上游
+- [6, 7, 9, 10, 18] 表示 等待运行
+- [1, 19, 22] 表示 运行中
+- [21] 表示 跳过运行
+- [3] 表示 失败重试
+- [8, 4, 5, 13] 表示 失败
+- [2] 表示 成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
@@ -2590,7 +2628,16 @@ export interface InstanceLifeDetailDto {
    */
   StartTime?: string
   /**
-   * 实例生命周期阶段状态
+   * **实例生命周期阶段状态**
+
+- WAIT_UPSTREAM 表示 等待事件/上游状态
+- WAIT_RUN 表示 等待运行状态
+- RUNNING 表示 运行中状态
+- COMPLETE 表示 终态-完成
+- FAILED 表示 终态-失败重试
+- EXPIRED 表示 终态-失败
+- SKIP_RUNNING 表示 终态-被上游分支节点跳过的分支
+- HISTORY 表示 兼容历史实例
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DetailState?: string
@@ -3865,17 +3912,187 @@ export interface RegisterEventRequest {
 }
 
 /**
- * dlc建表属性
+ * 调度实例详情
  */
-export interface Property {
+export interface InstanceDetailVO {
   /**
-   * key值
+   * 实例唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  InstanceKey?: string
   /**
-   * value值
+   * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  ProjectId?: string
+  /**
+   * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: string
+  /**
+   * 文件夹名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderName?: string
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 负责人列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeList?: Array<string>
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * **任务周期类型**
+支持过滤多个，条件间为 或 的过滤关系
+* O: ONEOFF_CYCLE
+* Y: YEAR_CYCLE
+* M: MONTH_CYCLE
+* W: WEEK_CYCLE
+* D: DAY_CYCLE
+* H: HOUR_CYCLE
+* I: MINUTE_CYCLE
+* C: CRONTAB_CYCLE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskCycleType?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: TaskTypeOpsDto
+  /**
+   * 执行资源组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupId?: string
+  /**
+   * 资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupName?: string
+  /**
+   * 标准数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurRunDate?: string
+  /**
+   * 下一个标准数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextCurDate?: string
+  /**
+   * 每次运行失败，下发重试次数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TryLimit?: number
+  /**
+   * 当前运行已下发运行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tries?: number
+  /**
+   * 累计运行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRunNum?: number
+  /**
+   * 生命周期编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeRoundNum?: number
+  /**
+   * **实例类型**
+
+- 0 表示补录类型
+- 1 表示周期实例
+- 2 表示非周期实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: number
+  /**
+   * **实例状态**
+
+- [0] 表示 等待事件
+- [12] 表示 等待上游
+- [6, 7, 9, 10, 18] 表示 等待运行
+- [1, 19, 22] 表示 运行中
+- [21] 表示 跳过运行
+- [3] 表示 失败重试
+- [8, 4, 5, 13] 表示 失败
+- [2] 表示 成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceState?: number
+  /**
+   * 计划调度时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerTime?: string
+  /**
+   * 运行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 运行完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 耗费时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: string
+  /**
+   * **实例运行触发类型**
+
+- RERUN 表示重跑
+- ADDITION 表示补录
+- PERIODIC 表示周期
+- APERIODIC 表示非周期
+- RERUN_SKIP_RUN 表示重跑 - 空跑
+- ADDITION_SKIP_RUN 表示补录 - 空跑
+- PERIODIC_SKIP_RUN 表示周期 - 空跑
+- APERIODIC_SKIP_RUN 表示非周期 - 空跑
+- MANUAL_TRIGGER 表示手动触发
+- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceRunType?: string
+  /**
+   * **下发执行ID**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionJobId?: string
+  /**
+   * **实例生命周期列表**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceLifeCycleList?: Array<InstanceLifeCycleVO>
+  /**
+   * **实例最近一次的执行日志**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestLog?: InstanceLogVO
 }
 
 /**
@@ -5077,6 +5294,42 @@ export interface DescribeTaskScriptResponse {
 }
 
 /**
+ * 实例列表分页实体
+ */
+export interface InstancePageVO {
+  /**
+   * **总条数**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * **总分页数**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPage?: number
+  /**
+   * 页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 每页条目数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总分页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageCount?: number
+  /**
+   * 数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<InstanceVO>
+}
+
+/**
  * 实例列表结构体
  */
 export interface CollectionInstanceOpsDto {
@@ -5544,6 +5797,104 @@ export interface BatchResult {
    * 总任务数
    */
   Total: number
+}
+
+/**
+ * 实例日志内容
+ */
+export interface InstanceLogVO {
+  /**
+   * 实例唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceKey?: string
+  /**
+   * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * **实例状态**
+
+- [0] 表示 等待事件
+- [12] 表示 等待上游
+- [6, 7, 9, 10, 18] 表示 等待运行
+- [1, 19, 22] 表示 运行中
+- [21] 表示 跳过运行
+- [3] 表示 失败重试
+- [8, 4, 5, 13] 表示 失败
+- [2] 表示 成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceState?: number
+  /**
+   * **实例运行触发类型**
+
+- RERUN 表示重跑
+- ADDITION 表示补录
+- PERIODIC 表示周期
+- APERIODIC 表示非周期
+- RERUN_SKIP_RUN 表示重跑 - 空跑
+- ADDITION_SKIP_RUN 表示补录 - 空跑
+- PERIODIC_SKIP_RUN 表示周期 - 空跑
+- APERIODIC_SKIP_RUN 表示非周期 - 空跑
+- MANUAL_TRIGGER 表示手动触发
+- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunType?: string
+  /**
+   * 开始运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 运行完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * **运行代码内容**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeInfo?: string
+  /**
+   * **运行代码文件大小**
+单位KB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeFileSize?: string
+  /**
+   * 日志所在节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerIp?: string
+  /**
+   * **日志内容**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogInfo?: string
+  /**
+   * **日志文件大小**
+单位KB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogFileSize?: string
+  /**
+   * **本次查询返回的日志行数**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LineCount?: number
+  /**
+   * 执行平台日志分页查询参数, 每次请求透明传入。第一页查询时值为空字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtInfo?: string
+  /**
+   * 日志分页查询，是否最后一页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEnd?: boolean
 }
 
 /**
@@ -10315,6 +10666,20 @@ export interface WorkflowScheduleDtoDs {
 }
 
 /**
+ * dlc建表属性
+ */
+export interface Property {
+  /**
+   * key值
+   */
+  Key: string
+  /**
+   * value值
+   */
+  Value: string
+}
+
+/**
  * ModifyRuleTemplate请求参数结构体
  */
 export interface ModifyRuleTemplateRequest {
@@ -10425,19 +10790,18 @@ export interface DimensionScore {
 }
 
 /**
- * 群机器人订阅配置
+ * GetInstanceLog返回参数结构体
  */
-export interface SubscribeWebHook {
+export interface GetInstanceLogResponse {
   /**
-   * 群机器人类型，当前支持飞书
+   * 调度实例详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HookType?: string
+  Data?: InstanceLogVO
   /**
-   * 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HookAddress?: string
+  RequestId?: string
 }
 
 /**
@@ -11457,6 +11821,21 @@ export interface DescribeProjectRequest {
 }
 
 /**
+ * GetTaskInstance返回参数结构体
+ */
+export interface GetTaskInstanceResponse {
+  /**
+   * 调度实例详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: InstanceDetailVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationTask返回参数结构体
  */
 export interface CreateIntegrationTaskResponse {
@@ -11548,6 +11927,150 @@ export interface DescribeAlarmReceiverRequest {
    * 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组)
    */
   MonitorType?: number
+}
+
+/**
+ * 调度运行实例实体
+ */
+export interface InstanceVO {
+  /**
+   * **实例唯一标识**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceKey?: string
+  /**
+   * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: string
+  /**
+   * 文件夹名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderName?: string
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 负责人列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeList?: Array<string>
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: TaskTypeOpsDto
+  /**
+   * **任务周期类型**
+支持过滤多个，条件间为 或 的过滤关系
+* O: ONEOFF_CYCLE
+* Y: YEAR_CYCLE
+* M: MONTH_CYCLE
+* W: WEEK_CYCLE
+* D: DAY_CYCLE
+* H: HOUR_CYCLE
+* I: MINUTE_CYCLE
+* C: CRONTAB_CYCLE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskCycleType?: string
+  /**
+   * 标准数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurRunDate?: string
+  /**
+   * 每次运行失败，下发重试次数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TryLimit?: number
+  /**
+   * **失败重试次数**
+再次使用 手动重跑 或 补录实例等方式触发运行时，会被重置为 0 后重新计数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tries?: number
+  /**
+   * 累计运行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRunNum?: number
+  /**
+   * **实例类型**
+
+- 0 表示补录类型
+- 1 表示周期实例
+- 2 表示非周期实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: number
+  /**
+   * **实例状态**
+
+- [0] 表示 等待事件
+- [12] 表示 等待上游
+- [6, 7, 9, 10, 18] 表示 等待运行
+- [1, 19, 22] 表示 运行中
+- [21] 表示 跳过运行
+- [3] 表示 失败重试
+- [8, 4, 5, 13] 表示 失败
+- [2] 表示 成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceState?: number
+  /**
+   * 运行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 运行完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 耗费时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: string
+  /**
+   * 计划调度时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerTime?: string
+  /**
+   * 执行资源组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupId?: string
+  /**
+   * 资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupName?: string
 }
 
 /**
@@ -12709,6 +13232,138 @@ export interface SuspendIntegrationTaskResponse {
 }
 
 /**
+ * ListInstances请求参数结构体
+ */
+export interface ListInstancesRequest {
+  /**
+   * **项目ID**
+   */
+  ProjectId: string
+  /**
+   * **实例计划调度时间**
+过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss
+   */
+  ScheduleTimeFrom: string
+  /**
+   * **实例计划调度时间**
+过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss
+   */
+  ScheduleTimeTo: string
+  /**
+   * **页码，整型**
+配合pageSize使用且不能小于1， 默认值1
+   */
+  PageNumber?: number
+  /**
+   * **每页数目，整型**
+配合pageNumber使用且不能大于200, 默认值 10
+   */
+  PageSize?: number
+  /**
+   * **查询结果排序字段**
+
+- SCHEDULE_DATE 表示 计划调度时间
+- START_TIME 表示 实例开始执行时间
+- END_TIME 表示 实例结束执行时间
+- COST_TIME 表示 实例执行时长
+   */
+  SortColumn?: string
+  /**
+   * **实例排序方式**
+
+- ASC 
+- DESC
+   */
+  SortType?: string
+  /**
+   * **实例类型**
+
+- 0 表示补录类型
+- 1 表示周期实例
+- 2 表示非周期实例
+   */
+  InstanceType?: number
+  /**
+   * **实例执行状态**
+支持过滤多个，条件间为 或 的过滤关系
+
+- [0] 表示 等待事件
+- [12] 表示 等待上游
+- [6, 7, 9, 10, 18] 表示 等待运行
+- [1, 19, 22] 表示 运行中
+- [21] 表示 跳过运行
+- [3] 表示 失败重试
+- [8, 4, 5, 13] 表示 失败
+- [2] 表示 成功
+   */
+  InstanceStateList?: Array<number | bigint>
+  /**
+   * **任务类型Id**
+
+- 支持过滤多个，条件间为 或 的过滤关系
+- 可以通过接口 DescribeAllTaskType 获取项目支持的全部任务类型
+   */
+  TaskTypeIdList?: Array<number | bigint>
+  /**
+   * **任务周期类型**
+支持过滤多个，条件间为 或 的过滤关系
+* O: ONEOFF_CYCLE
+* Y: YEAR_CYCLE
+* M: MONTH_CYCLE
+* W: WEEK_CYCLE
+* D: DAY_CYCLE
+* H: HOUR_CYCLE
+* I: MINUTE_CYCLE
+* C: CRONTAB_CYCLE
+   */
+  TaskCycleList?: Array<string>
+  /**
+   * **任务名称 或 任务ID**
+支持模糊搜索过滤, 多个用 英文逗号, 分割
+   */
+  Keyword?: string
+  /**
+   * **任务负责人**
+支持过滤多个，条件间为 或 的过滤关系
+   */
+  InChargeList?: Array<string>
+  /**
+   * **任务所属文件件**
+支持过滤多个，条件间为 或 的过滤关系
+可以通过接口 FindAllFolder 获取项目下的所有文件夹列表
+   */
+  TaskFolderIdList?: Array<string>
+  /**
+   * **任务所属工作流**
+支持过滤多个，条件间为 或 的过滤关系
+可以通过接口 DescribeOpsWorkflows 获取项目下的所有工作流列表
+   */
+  WorkflowIdList?: Array<string>
+  /**
+   * **执行资源组Id**
+支持过滤多个，条件间为 或 的过滤关系
+可以通过接口 DescribeNormalSchedulerExecutorGroups 获取项目下的所有调度资源组列表
+可以通过接口 DescribeNormalIntegrationExecutorGroups 获取项目下的所有集成资源组列表
+   */
+  ExecutorGroupIdList?: Array<string>
+  /**
+   * **开始时间**
+过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss
+   */
+  StartTimeFrom?: string
+  /**
+   * **开始时间**
+过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss
+   */
+  StartTimeTo?: string
+  /**
+   * **时区**
+timeZone, 默认UTC+8
+   */
+  ScheduleTimeZone?: string
+}
+
+/**
  * DescribeSchedulerRunTimeInstanceCntByStatus返回参数结构体
  */
 export interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
@@ -13024,6 +13679,96 @@ export interface CheckIntegrationNodeNameExistsRequest {
    * 节点ID
    */
   Id?: number
+}
+
+/**
+ * 调度实例详情
+ */
+export interface InstanceLifeCycleVO {
+  /**
+   * 实例唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceKey?: string
+  /**
+   * **实例状态**
+
+- [0] 表示 等待事件
+- [12] 表示 等待上游
+- [6, 7, 9, 10, 18] 表示 等待运行
+- [1, 19, 22] 表示 运行中
+- [21] 表示 跳过运行
+- [3] 表示 失败重试
+- [8, 4, 5, 13] 表示 失败
+- [2] 表示 成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceState?: number
+  /**
+   * 生命周期编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeRoundNum?: number
+  /**
+   * **实例运行触发类型**
+
+- RERUN 表示重跑
+- ADDITION 表示补录
+- PERIODIC 表示周期
+- APERIODIC 表示非周期
+- RERUN_SKIP_RUN 表示重跑 - 空跑
+- ADDITION_SKIP_RUN 表示补录 - 空跑
+- PERIODIC_SKIP_RUN 表示周期 - 空跑
+- APERIODIC_SKIP_RUN 表示非周期 - 空跑
+- MANUAL_TRIGGER 表示手动触发
+- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunType?: string
+  /**
+   * 失败重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tries?: number
+  /**
+   * **实例生命周期列表**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeCycleDetailList?: Array<InstanceLifeDetailDto>
+  /**
+   * **实例代码文件**
+该文件内容为当次执行实例运行使用的代码，仅部分任务支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeFileName?: string
+  /**
+   * **下发执行ID**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionJobId?: string
+  /**
+   * 日志所在执行节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerIp?: string
+  /**
+   * 日志文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginFileName?: string
+  /**
+   * **实例日志类型**
+
+- run: 运行; 
+- kill: 终止
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogType?: string
+  /**
+   * 耗费时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: string
 }
 
 /**
@@ -15102,6 +15847,25 @@ export interface SourceFieldInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
+}
+
+/**
+ * GetTaskInstance请求参数结构体
+ */
+export interface GetTaskInstanceRequest {
+  /**
+   * **项目ID**
+   */
+  ProjectId: string
+  /**
+   * **实例唯一标识**
+   */
+  InstanceKey: string
+  /**
+   * **时区**
+timeZone, 默认UTC+8
+   */
+  ScheduleTimeZone?: string
 }
 
 /**
@@ -17635,6 +18399,26 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
    */
   IfSupportCreateAndDDL?: CreateAndDDLSupport
   /**
+   * 资产来源 历史默认值都是CRAWLER
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataFromType?: string
+  /**
+   * 引擎侧责任人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineOwner?: string
+  /**
+   * 数据分层UUID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLayerUuid?: string
+  /**
+   * 数据分层名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLayerName?: string
+  /**
    * 字段数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -19320,6 +20104,10 @@ export interface DescribeInstanceLogFileRequest {
    */
   CurrentLifeRound?: number
   /**
+   * 最大生命周期数
+   */
+  MaxLifeRound?: number
+  /**
    * 当前生命周期重试次数
    */
   Tries?: number
@@ -20006,6 +20794,97 @@ export interface DescribeDatabaseMetasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 离线任务新增参数
+ */
+export interface OfflineTaskAddParam {
+  /**
+   * 名称
+   */
+  WorkflowName: string
+  /**
+   * 依赖：yes、no
+   */
+  DependencyWorkflow: string
+  /**
+   * 任务开始数据时间。非空。默认当前时间
+   */
+  StartTime: string
+  /**
+   * 任务结束数据时间。非空。默认当前时间
+   */
+  EndTime: string
+  /**
+   * 周期类型。一次性任务:6、分钟任务：1、小时任务：2、天任务：3、周任务：4、月任务：5、crontab任务：0
+   */
+  CycleType: number
+  /**
+   * 间隔，可选，默认1。非空。默认 1
+   */
+  CycleStep: number
+  /**
+   * 延时执行时间，单位分钟
+   */
+  DelayTime: number
+  /**
+   * 任务cron表达式，仅cron任务使用，其他时候默认为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CrontabExpression: string
+  /**
+   * 重试等待
+   */
+  RetryWait: number
+  /**
+   * 是否可以重试
+   */
+  Retriable: number
+  /**
+   * 重试限制
+   */
+  TryLimit: number
+  /**
+   * 优先级
+   */
+  RunPriority: number
+  /**
+   * 产品名称
+   */
+  ProductName: string
+  /**
+   * 1 有序串行 一次一个，排队 orderly 
+2 无序串行 一次一个，不排队 serial  
+3 并行 一次多个 parallel
+   */
+  SelfDepend: number
+  /**
+   * 时间指定，如月任务指定1，3号，则填入 1，3。非空。默认 ""
+月任务：如具体1，3号则写 "1,3"，指定月末不可和具体号数一起输入，仅能为 "L"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskAction?: string
+  /**
+   * 调度执行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionEndTime?: string
+  /**
+   * 调度执行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionStartTime?: string
+  /**
+   * 是否自动提交
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskAutoSubmit?: boolean
+  /**
+   * 实例生成方式，T_PLUS_0 当天任务当天调度 / T_PLUS_1 当天任务后一天调度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceInitStrategy?: string
 }
 
 /**
@@ -24382,94 +25261,63 @@ export interface DescribeRuleExecStatRequest {
 }
 
 /**
- * 离线任务新增参数
+ * GetInstanceLog请求参数结构体
  */
-export interface OfflineTaskAddParam {
+export interface GetInstanceLogRequest {
   /**
-   * 名称
+   * **项目ID**
    */
-  WorkflowName: string
+  ProjectId: string
   /**
-   * 依赖：yes、no
+   * **实例唯一标识**
    */
-  DependencyWorkflow: string
+  InstanceKey: string
   /**
-   * 任务开始数据时间。非空。默认当前时间
+   * 生命周期编号
    */
-  StartTime: string
+  LifeRoundNum: number
   /**
-   * 任务结束数据时间。非空。默认当前时间
+   * **时区**
+timeZone, 默认UTC+8
    */
-  EndTime: string
+  ScheduleTimeZone?: string
   /**
-   * 周期类型。一次性任务:6、分钟任务：1、小时任务：2、天任务：3、周任务：4、月任务：5、crontab任务：0
+   * **日志所在执行机Ip**
    */
-  CycleType: number
+  BrokerIp?: string
   /**
-   * 间隔，可选，默认1。非空。默认 1
+   * **日志文件**
+实例详情中 executionJobId 为空时，但 originFileName 不为空时，入参中必须包含 originFileName 与 brokerIp
+如果 executionJobId 与 originFileName 都为空，则说明实例未下发执行或没有产生日志。例如分支节点 或 归并节点
    */
-  CycleStep: number
+  OriginFileName?: string
   /**
-   * 延时执行时间，单位分钟
+   * **执行ID**
+
+实例详情中 executionJobId 不为空时，入参中需包含executionJobId 。originFileName 与 brokerIp为非必要参数
    */
-  DelayTime: number
+  ExecutionJobId?: string
   /**
-   * 任务cron表达式，仅cron任务使用，其他时候默认为空
-注意：此字段可能返回 null，表示取不到有效值。
+   * **日志级别**
+默认All
+
+- Info
+- Debug
+- Warn
+- Error
+- All
    */
-  CrontabExpression: string
+  LogLevel?: string
   /**
-   * 重试等待
+   * **获取日志的开始行 行号**
+默认 1
    */
-  RetryWait: number
+  StartLineNum?: number
   /**
-   * 是否可以重试
+   * **获取日志的结束行 行号**
+默认 10000
    */
-  Retriable: number
-  /**
-   * 重试限制
-   */
-  TryLimit: number
-  /**
-   * 优先级
-   */
-  RunPriority: number
-  /**
-   * 产品名称
-   */
-  ProductName: string
-  /**
-   * 1 有序串行 一次一个，排队 orderly 
-2 无序串行 一次一个，不排队 serial  
-3 并行 一次多个 parallel
-   */
-  SelfDepend: number
-  /**
-   * 时间指定，如月任务指定1，3号，则填入 1，3。非空。默认 ""
-月任务：如具体1，3号则写 "1,3"，指定月末不可和具体号数一起输入，仅能为 "L"
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskAction?: string
-  /**
-   * 调度执行结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExecutionEndTime?: string
-  /**
-   * 调度执行开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExecutionStartTime?: string
-  /**
-   * 是否自动提交
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskAutoSubmit?: boolean
-  /**
-   * 实例生成方式，T_PLUS_0 当天任务当天调度 / T_PLUS_1 当天任务后一天调度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceInitStrategy?: string
+  EndLineCount?: number
 }
 
 /**

@@ -4732,6 +4732,16 @@ export interface DeleteDatasetResponse {
 }
 
 /**
+ * 主机路径挂载配置
+ */
+export interface HostPath {
+  /**
+   * 需要挂载的主机路径
+   */
+  Path?: string
+}
+
+/**
  * 训练任务详情
  */
 export interface TrainingTaskDetail {
@@ -5395,6 +5405,10 @@ export interface DataConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CBSSource?: CBSConfig
+  /**
+   * 主机路径信息
+   */
+  HostPathSource?: HostPath
 }
 
 /**

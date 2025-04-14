@@ -58,13 +58,17 @@ export interface StartPublishStreamToCSSResponse {
 }
 
 /**
- * StartAndroidInstances请求参数结构体
+ * CreateAndroidApp请求参数结构体
  */
-export interface StartAndroidInstancesRequest {
+export interface CreateAndroidAppRequest {
   /**
-   * 实例ID
+   * 安卓应用名字
    */
-  AndroidInstanceIds: Array<string>
+  Name: string
+  /**
+   * 用户 Id
+   */
+  UserId?: string
 }
 
 /**
@@ -212,6 +216,16 @@ export interface StopAndroidInstancesAppResponse {
 }
 
 /**
+ * DeleteAndroidApp返回参数结构体
+ */
+export interface DeleteAndroidAppResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAndroidInstanceLabels返回参数结构体
  */
 export interface DescribeAndroidInstanceLabelsResponse {
@@ -260,6 +274,24 @@ export interface AndroidApp {
 }
 
 /**
+ * ModifyAndroidApp请求参数结构体
+ */
+export interface ModifyAndroidAppRequest {
+  /**
+   * 安卓应用 Id
+   */
+  AndroidAppId: string
+  /**
+   * 安卓应用名称
+   */
+  Name: string
+  /**
+   * 用户 Id
+   */
+  UserId?: string
+}
+
+/**
  * DescribeAndroidApps返回参数结构体
  */
 export interface DescribeAndroidAppsResponse {
@@ -289,6 +321,20 @@ export interface StopAndroidInstancesAppRequest {
    * 应用包名
    */
   PackageName: string
+}
+
+/**
+ * CreateAndroidAppVersion请求参数结构体
+ */
+export interface CreateAndroidAppVersionRequest {
+  /**
+   * 应用ID
+   */
+  AndroidAppId: string
+  /**
+   * 应用包下载地址
+   */
+  DownloadUrl?: string
 }
 
 /**
@@ -382,6 +428,16 @@ export interface DeleteAndroidInstanceImagesResponse {
 }
 
 /**
+ * StartAndroidInstances请求参数结构体
+ */
+export interface StartAndroidInstancesRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceIds: Array<string>
+}
+
+/**
  * StartPublishStream请求参数结构体
  */
 export interface StartPublishStreamRequest {
@@ -444,13 +500,33 @@ export interface DescribeAndroidInstanceAppsResponse {
 }
 
 /**
- * CreateAndroidInstanceWebShell请求参数结构体
+ * CreateAndroidInstanceSSH返回参数结构体
  */
-export interface CreateAndroidInstanceWebShellRequest {
+export interface CreateAndroidInstanceSSHResponse {
   /**
-   * 实例 ID
+   * 连接私钥，需要保存为文件形式，例如 private_key.pem
    */
-  AndroidInstanceId: string
+  PrivateKey?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 连接地址
+   */
+  HostName?: string
+  /**
+   * 连接端口
+   */
+  Port?: number
+  /**
+   * 连接参考命令
+   */
+  ConnectCommand?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -587,6 +663,16 @@ export interface StartAndroidInstancesAppRequest {
 }
 
 /**
+ * DeleteAndroidAppVersion返回参数结构体
+ */
+export interface DeleteAndroidAppVersionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAndroidInstancesUserId请求参数结构体
  */
 export interface ModifyAndroidInstancesUserIdRequest {
@@ -625,25 +711,17 @@ export interface StartAndroidInstancesResponse {
 }
 
 /**
- * DescribeAndroidInstanceLabels请求参数结构体
+ * DeleteAndroidInstanceLabel请求参数结构体
  */
-export interface DescribeAndroidInstanceLabelsRequest {
+export interface DeleteAndroidInstanceLabelRequest {
   /**
-   * 标签键列表
+   * 标签键
    */
-  Keys?: Array<string>
+  Key: string
   /**
-   * 标签值列表
+   * 标签值
    */
-  Values?: Array<string>
-  /**
-   * 偏移量，默认为 0
-   */
-  Offset?: number
-  /**
-   * 限制量，默认为20，最大值为100
-   */
-  Limit?: number
+  Value?: string
 }
 
 /**
@@ -764,6 +842,16 @@ export interface StopPublishStreamRequest {
    * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
   UserId: string
+}
+
+/**
+ * 安卓应用Cos数据
+ */
+export interface AndroidAppCosInfo {
+  /**
+   * 安卓应用ID
+   */
+  AndroidAppId: string
 }
 
 /**
@@ -914,6 +1002,20 @@ export interface CreateAndroidInstancesScreenshotRequest {
    * 实例 ID 列表
    */
   AndroidInstanceIds: Array<string>
+}
+
+/**
+ * CreateCosCredential请求参数结构体
+ */
+export interface CreateCosCredentialRequest {
+  /**
+   * Cos 密钥类型， Mobile 移动端, PC 桌面, AndroidApp 安卓应用
+   */
+  CosType: string
+  /**
+   * 云手机 Cos 数据
+   */
+  AndroidAppCosInfo?: AndroidAppCosInfo
 }
 
 /**
@@ -1079,6 +1181,20 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
 }
 
 /**
+ * DeleteAndroidAppVersion请求参数结构体
+ */
+export interface DeleteAndroidAppVersionRequest {
+  /**
+   * 安卓应用 Id
+   */
+  AndroidAppId: string
+  /**
+   * 安卓应用版本
+   */
+  AndroidAppVersion: string
+}
+
+/**
  * StartAndroidInstancesApp返回参数结构体
  */
 export interface StartAndroidInstancesAppResponse {
@@ -1167,6 +1283,16 @@ export interface RestartAndroidInstancesAppRequest {
 }
 
 /**
+ * StopAndroidInstances请求参数结构体
+ */
+export interface StopAndroidInstancesRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceIds: Array<string>
+}
+
+/**
  * DescribeAndroidApps请求参数结构体
  */
 export interface DescribeAndroidAppsRequest {
@@ -1249,6 +1375,16 @@ export interface S3Options {
 }
 
 /**
+ * CreateAndroidInstanceWebShell请求参数结构体
+ */
+export interface CreateAndroidInstanceWebShellRequest {
+  /**
+   * 实例 ID
+   */
+  AndroidInstanceId: string
+}
+
+/**
  * ModifyAndroidInstancesLabels返回参数结构体
  */
 export interface ModifyAndroidInstancesLabelsResponse {
@@ -1259,17 +1395,25 @@ export interface ModifyAndroidInstancesLabelsResponse {
 }
 
 /**
- * DeleteAndroidInstanceLabel请求参数结构体
+ * DescribeAndroidInstanceLabels请求参数结构体
  */
-export interface DeleteAndroidInstanceLabelRequest {
+export interface DescribeAndroidInstanceLabelsRequest {
   /**
-   * 标签键
+   * 标签键列表
    */
-  Key: string
+  Keys?: Array<string>
   /**
-   * 标签值
+   * 标签值列表
    */
-  Value?: string
+  Values?: Array<string>
+  /**
+   * 偏移量，默认为 0
+   */
+  Offset?: number
+  /**
+   * 限制量，默认为20，最大值为100
+   */
+  Limit?: number
 }
 
 /**
@@ -1290,6 +1434,16 @@ export interface CopyAndroidInstanceResponse {
  * DeleteAndroidInstanceLabel返回参数结构体
  */
 export interface DeleteAndroidInstanceLabelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAndroidApp返回参数结构体
+ */
+export interface ModifyAndroidAppResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1491,29 +1645,41 @@ export interface COSOptions {
 }
 
 /**
- * CreateAndroidInstanceSSH返回参数结构体
+ * CreateCosCredential返回参数结构体
  */
-export interface CreateAndroidInstanceSSHResponse {
+export interface CreateCosCredentialResponse {
   /**
-   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   * Cos SecretID
    */
-  PrivateKey?: string
+  SecretID?: string
   /**
-   * 用户名称
+   * Cos SecretKey
    */
-  UserName?: string
+  SecretKey?: string
   /**
-   * 连接地址
+   * Cos Session
    */
-  HostName?: string
+  SessionToken?: string
   /**
-   * 连接端口
+   * Cos Bucket
    */
-  Port?: number
+  CosBucket?: string
   /**
-   * 连接参考命令
+   * Cos Region
    */
-  ConnectCommand?: string
+  CosRegion?: string
+  /**
+   * Cos 操作路径
+   */
+  Path?: string
+  /**
+   * Cos 密钥的起始时间
+   */
+  StartTime?: number
+  /**
+   * Cos 密钥的失效时间
+   */
+  ExpiredTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1726,13 +1892,13 @@ export interface AndroidInstanceAppInfo {
 }
 
 /**
- * StopAndroidInstances请求参数结构体
+ * DeleteAndroidApp请求参数结构体
  */
-export interface StopAndroidInstancesRequest {
+export interface DeleteAndroidAppRequest {
   /**
-   * 实例ID
+   * 应用ID
    */
-  AndroidInstanceIds: Array<string>
+  AndroidAppId: string
 }
 
 /**
@@ -1755,6 +1921,20 @@ NOT_EXISTS: 要求对象标签不存在标签键 Key
    * 标签值列表
    */
   Values?: Array<string>
+}
+
+/**
+ * CreateAndroidAppVersion返回参数结构体
+ */
+export interface CreateAndroidAppVersionResponse {
+  /**
+   * 应用版本
+   */
+  AndroidAppVersion?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1783,6 +1963,20 @@ export interface CreateAndroidInstanceSSHRequest {
    * 连接过期时间，最长可设置7天
    */
   ExpiredTime: string
+}
+
+/**
+ * CreateAndroidApp返回参数结构体
+ */
+export interface CreateAndroidAppResponse {
+  /**
+   * 应用ID
+   */
+  AndroidAppId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -150,6 +150,7 @@ import {
   DescribeModelAccelerateTaskRequest,
   Container,
   DeleteDatasetResponse,
+  HostPath,
   TrainingTaskDetail,
   DescribeTrainingTasksResponse,
   DescribeNotebookRequest,

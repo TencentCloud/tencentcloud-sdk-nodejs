@@ -224,7 +224,7 @@ import {
   DeleteHighPriorityRouteTablesRequest,
   CreateSecurityGroupWithPoliciesResponse,
   DeleteAddressTemplateResponse,
-  ResumeSnapshotInstanceResponse,
+  MigrateBandwidthPackageResourcesRequest,
   ModifySubnetAttributeResponse,
   ResetNatGatewayConnectionRequest,
   ResetHighPriorityRoutesResponse,
@@ -313,6 +313,7 @@ import {
   DescribeVpnConnectionsResponse,
   RenewVpnGatewayRequest,
   AssociateIPv6AddressResponse,
+  ResumeSnapshotInstanceResponse,
   DescribeCdcNetPlanesRequest,
   DescribePrivateNatGatewayRegionsRequest,
   DescribeSnapshotPoliciesRequest,
@@ -725,6 +726,7 @@ import {
   DescribeRouteTablesResponse,
   DeleteDhcpIpRequest,
   AllocateAddressesResponse,
+  MigrateBandwidthPackageResourcesResponse,
   DescribeCdcUsedIdcVlanRequest,
   BandwidthPackage,
   CcnBatchRouteTable,
@@ -1700,6 +1702,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (MigrateBandwidthPackageResources) 用于共享带宽包之间迁移资源
+   */
+  async MigrateBandwidthPackageResources(
+    req: MigrateBandwidthPackageResourcesRequest,
+    cb?: (error: string, rep: MigrateBandwidthPackageResourcesResponse) => void
+  ): Promise<MigrateBandwidthPackageResourcesResponse> {
+    return this.request("MigrateBandwidthPackageResources", req, cb)
+  }
+
+  /**
    * 本接口（WithdrawNotifyRoutes）用于撤销已发布到云联网的路由。路由表列表页操作增加“从云联网撤销”。
    */
   async WithdrawNotifyRoutes(
@@ -1882,7 +1894,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 接口用于修改带宽包属性，包括带宽包名字等
+   * 接口用于修改带宽包属性，包括带宽包名称和计费模式
    */
   async ModifyBandwidthPackageAttribute(
     req: ModifyBandwidthPackageAttributeRequest,
@@ -4703,7 +4715,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 接口支持删除共享带宽包，包括[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[IP带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+   * 接口支持删除共享带宽包，包括[设备带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)和[IP带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)
    */
   async DeleteBandwidthPackage(
     req: DeleteBandwidthPackageRequest,

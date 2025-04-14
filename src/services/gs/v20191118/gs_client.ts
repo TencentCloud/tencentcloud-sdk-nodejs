@@ -21,27 +21,31 @@ import {
   DescribeAndroidInstanceTasksStatusResponse,
   ExecuteCommandOnAndroidInstancesResponse,
   StartPublishStreamToCSSResponse,
-  StartAndroidInstancesRequest,
+  CreateAndroidAppRequest,
   CreateSessionRequest,
   RestoreAndroidInstanceFromStorageRequest,
   SyncExecuteCommandOnAndroidInstancesRequest,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
+  DeleteAndroidAppResponse,
   DescribeAndroidInstanceLabelsResponse,
   AndroidApp,
+  ModifyAndroidAppRequest,
   DescribeAndroidAppsResponse,
   StopAndroidInstancesAppRequest,
+  CreateAndroidAppVersionRequest,
   ModifyAndroidInstancesLabelsRequest,
   BackUpAndroidInstanceToStorageRequest,
   SyncAndroidInstanceImage,
   AndroidInstanceLabel,
   DeleteAndroidInstanceImagesResponse,
+  StartAndroidInstancesRequest,
   StartPublishStreamRequest,
   CreateAndroidInstanceImageResponse,
   ModifyAndroidInstanceResolutionResponse,
   DeleteAndroidInstanceImagesRequest,
   DescribeAndroidInstanceAppsResponse,
-  CreateAndroidInstanceWebShellRequest,
+  CreateAndroidInstanceSSHResponse,
   ResetAndroidInstancesRequest,
   UploadFileToAndroidInstancesRequest,
   SaveGameArchiveResponse,
@@ -50,10 +54,11 @@ import {
   SyncExecuteCommandOnAndroidInstancesResponse,
   RestoreAndroidInstanceFromStorageResponse,
   StartAndroidInstancesAppRequest,
+  DeleteAndroidAppVersionResponse,
   ModifyAndroidInstancesUserIdRequest,
   StopPublishStreamResponse,
   StartAndroidInstancesResponse,
-  DescribeAndroidInstanceLabelsRequest,
+  DeleteAndroidInstanceLabelRequest,
   ModifyAndroidInstancesUserIdResponse,
   InstallAndroidInstancesAppRequest,
   UninstallAndroidInstancesAppRequest,
@@ -62,6 +67,7 @@ import {
   DescribeAndroidInstanceImagesResponse,
   ModifyAndroidInstanceInformationRequest,
   StopPublishStreamRequest,
+  AndroidAppCosInfo,
   SyncExecuteCommandResult,
   RestartAndroidInstancesAppResponse,
   DescribeAndroidInstanceTasksStatusRequest,
@@ -73,6 +79,7 @@ import {
   SaveGameArchiveRequest,
   SwitchGameArchiveResponse,
   CreateAndroidInstancesScreenshotRequest,
+  CreateCosCredentialRequest,
   InstallAndroidInstancesAppResponse,
   AndroidInstanceTask,
   ConnectAndroidInstanceResponse,
@@ -81,21 +88,25 @@ import {
   SyncAndroidInstanceImageRequest,
   ModifyAndroidInstanceResolutionRequest,
   AndroidAppVersionInfo,
+  DeleteAndroidAppVersionRequest,
   StartAndroidInstancesAppResponse,
   SwitchGameArchiveRequest,
   StartPublishStreamToCSSRequest,
   Filter,
   ResetAndroidInstancesResponse,
   RestartAndroidInstancesAppRequest,
+  StopAndroidInstancesRequest,
   DescribeAndroidAppsRequest,
   StopGameRequest,
   RebootAndroidInstancesResponse,
   TrylockWorkerResponse,
   S3Options,
+  CreateAndroidInstanceWebShellRequest,
   ModifyAndroidInstancesLabelsResponse,
-  DeleteAndroidInstanceLabelRequest,
+  DescribeAndroidInstanceLabelsRequest,
   CopyAndroidInstanceResponse,
   DeleteAndroidInstanceLabelResponse,
+  ModifyAndroidAppResponse,
   DescribeAndroidInstanceImagesRequest,
   AndroidInstanceTaskStatus,
   UploadFileToAndroidInstancesResponse,
@@ -105,7 +116,7 @@ import {
   CreateAndroidInstanceLabelRequest,
   AndroidInstance,
   COSOptions,
-  CreateAndroidInstanceSSHResponse,
+  CreateCosCredentialResponse,
   CreateAndroidInstancesRequest,
   CreateAndroidInstanceLabelResponse,
   StartPublishStreamResponse,
@@ -116,10 +127,12 @@ import {
   RebootAndroidInstancesRequest,
   CreateSessionResponse,
   AndroidInstanceAppInfo,
-  StopAndroidInstancesRequest,
+  DeleteAndroidAppRequest,
   LabelRequirement,
+  CreateAndroidAppVersionResponse,
   BackUpAndroidInstanceToStorageResponse,
   CreateAndroidInstanceSSHRequest,
+  CreateAndroidAppResponse,
   StopAndroidInstancesResponse,
   CreateAndroidInstanceImageRequest,
 } from "./gs_models"
@@ -141,6 +154,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BackUpAndroidInstanceToStorageResponse) => void
   ): Promise<BackUpAndroidInstanceToStorageResponse> {
     return this.request("BackUpAndroidInstanceToStorage", req, cb)
+  }
+
+  /**
+   * 批量修改安卓实例的用户ID
+   */
+  async ModifyAndroidInstancesUserId(
+    req: ModifyAndroidInstancesUserIdRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesUserIdResponse) => void
+  ): Promise<ModifyAndroidInstancesUserIdResponse> {
+    return this.request("ModifyAndroidInstancesUserId", req, cb)
   }
 
   /**
@@ -314,6 +337,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建安卓应用
+   */
+  async CreateAndroidApp(
+    req: CreateAndroidAppRequest,
+    cb?: (error: string, rep: CreateAndroidAppResponse) => void
+  ): Promise<CreateAndroidAppResponse> {
+    return this.request("CreateAndroidApp", req, cb)
+  }
+
+  /**
+   * 上传文件到安卓实例
+   */
+  async UploadFileToAndroidInstances(
+    req: UploadFileToAndroidInstancesRequest,
+    cb?: (error: string, rep: UploadFileToAndroidInstancesResponse) => void
+  ): Promise<UploadFileToAndroidInstancesResponse> {
+    return this.request("UploadFileToAndroidInstances", req, cb)
+  }
+
+  /**
    * 创建安卓实例 WebShell 连接
    */
   async CreateAndroidInstanceWebShell(
@@ -384,13 +427,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开始云端推流
+   * 用于创建 Cos 临时密钥
    */
-  async StartPublishStreamToCSS(
-    req: StartPublishStreamToCSSRequest,
-    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
-  ): Promise<StartPublishStreamToCSSResponse> {
-    return this.request("StartPublishStreamToCSS", req, cb)
+  async CreateCosCredential(
+    req: CreateCosCredentialRequest,
+    cb?: (error: string, rep: CreateCosCredentialResponse) => void
+  ): Promise<CreateCosCredentialResponse> {
+    return this.request("CreateCosCredential", req, cb)
+  }
+
+  /**
+   * 修改安卓应用信息
+   */
+  async ModifyAndroidApp(
+    req: ModifyAndroidAppRequest,
+    cb?: (error: string, rep: ModifyAndroidAppResponse) => void
+  ): Promise<ModifyAndroidAppResponse> {
+    return this.request("ModifyAndroidApp", req, cb)
   }
 
   /**
@@ -464,13 +517,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传文件到安卓实例
+   * 删除安卓应用版本
    */
-  async UploadFileToAndroidInstances(
-    req: UploadFileToAndroidInstancesRequest,
-    cb?: (error: string, rep: UploadFileToAndroidInstancesResponse) => void
-  ): Promise<UploadFileToAndroidInstancesResponse> {
-    return this.request("UploadFileToAndroidInstances", req, cb)
+  async DeleteAndroidAppVersion(
+    req: DeleteAndroidAppVersionRequest,
+    cb?: (error: string, rep: DeleteAndroidAppVersionResponse) => void
+  ): Promise<DeleteAndroidAppVersionResponse> {
+    return this.request("DeleteAndroidAppVersion", req, cb)
   }
 
   /**
@@ -518,6 +571,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建安卓应用版本
+   */
+  async CreateAndroidAppVersion(
+    req: CreateAndroidAppVersionRequest,
+    cb?: (error: string, rep: CreateAndroidAppVersionResponse) => void
+  ): Promise<CreateAndroidAppVersionResponse> {
+    return this.request("CreateAndroidAppVersion", req, cb)
+  }
+
+  /**
    * 销毁安卓实例
    */
   async DestroyAndroidInstances(
@@ -528,13 +591,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量修改安卓实例的用户ID
+   * 删除安卓应用
    */
-  async ModifyAndroidInstancesUserId(
-    req: ModifyAndroidInstancesUserIdRequest,
-    cb?: (error: string, rep: ModifyAndroidInstancesUserIdResponse) => void
-  ): Promise<ModifyAndroidInstancesUserIdResponse> {
-    return this.request("ModifyAndroidInstancesUserId", req, cb)
+  async DeleteAndroidApp(
+    req: DeleteAndroidAppRequest,
+    cb?: (error: string, rep: DeleteAndroidAppResponse) => void
+  ): Promise<DeleteAndroidAppResponse> {
+    return this.request("DeleteAndroidApp", req, cb)
   }
 
   /**
@@ -545,6 +608,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExecuteCommandOnAndroidInstancesResponse) => void
   ): Promise<ExecuteCommandOnAndroidInstancesResponse> {
     return this.request("ExecuteCommandOnAndroidInstances", req, cb)
+  }
+
+  /**
+   * 开始云端推流
+   */
+  async StartPublishStreamToCSS(
+    req: StartPublishStreamToCSSRequest,
+    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
+  ): Promise<StartPublishStreamToCSSResponse> {
+    return this.request("StartPublishStreamToCSS", req, cb)
   }
 
   /**

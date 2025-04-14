@@ -1133,6 +1133,14 @@ pause
    * 实例存储类型
    */
   InstanceStorageType?: string
+  /**
+   * 未知字段
+   */
+  CynosVersionTag?: string
+  /**
+   * libradb 节点信息
+   */
+  NodeList?: Array<string>
 }
 
 /**
@@ -7718,6 +7726,10 @@ export interface CreateAuditLogFileRequest {
    * 审计日志过滤条件
    */
   LogFilter?: Array<InstanceAuditLogFilter>
+  /**
+   * 审计日志列
+   */
+  ColumnFilter?: Array<string>
 }
 
 /**
@@ -8489,6 +8501,10 @@ export interface ClusterInstanceDetail {
    * 数据库类型
    */
   DbMode?: string
+  /**
+   * 节点列表
+   */
+  NodeList?: Array<string>
 }
 
 /**

@@ -28,9 +28,9 @@ it("bh.v20230418.DescribeOperationEvent", async function () {
     }
 })
 
-it("bh.v20230418.DescribeDeviceGroupMembers", async function () {
+it("bh.v20230418.DescribeAssetSyncStatus", async function () {
     try {
-       const data = await client.DescribeDeviceGroupMembers({})
+       const data = await client.DescribeAssetSyncStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("bh.v20230418.ModifyOAuthSetting", async function () {
     }
 })
 
-it("bh.v20230418.ModifyCmdTemplate", async function () {
+it("bh.v20230418.DeleteAccessWhiteListRules", async function () {
     try {
-       const data = await client.ModifyCmdTemplate({})
+       const data = await client.DeleteAccessWhiteListRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +171,26 @@ it("bh.v20230418.BindDeviceResource", async function () {
 it("bh.v20230418.BindDeviceAccountPassword", async function () {
     try {
        const data = await client.BindDeviceAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchFileBySid", async function () {
+    try {
+       const data = await client.SearchFileBySid({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyCmdTemplate", async function () {
+    try {
+       const data = await client.ModifyCmdTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +388,9 @@ it("bh.v20230418.ResetDeviceAccountPrivateKey", async function () {
     }
 })
 
-it("bh.v20230418.DescribeAssetSyncStatus", async function () {
+it("bh.v20230418.CreateAccessWhiteListRule", async function () {
     try {
-       const data = await client.DescribeAssetSyncStatus({})
+       const data = await client.CreateAccessWhiteListRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +401,16 @@ it("bh.v20230418.DescribeAssetSyncStatus", async function () {
 it("bh.v20230418.CreateDeviceAccount", async function () {
     try {
        const data = await client.CreateDeviceAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeAccessWhiteListRules", async function () {
+    try {
+       const data = await client.DescribeAccessWhiteListRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +618,9 @@ it("bh.v20230418.DescribeUserGroupMembers", async function () {
     }
 })
 
-it("bh.v20230418.SearchFileBySid", async function () {
+it("bh.v20230418.DescribeDeviceGroupMembers", async function () {
     try {
-       const data = await client.SearchFileBySid({})
+       const data = await client.DescribeDeviceGroupMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +681,16 @@ it("bh.v20230418.CreateResource", async function () {
 it("bh.v20230418.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchTaskResult", async function () {
+    try {
+       const data = await client.SearchTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

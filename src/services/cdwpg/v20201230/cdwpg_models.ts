@@ -82,12 +82,10 @@ export interface DescribeUserHbaConfigResponse {
 export interface AccessInfo {
   /**
    * 地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
    * 协议
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
 }
@@ -1175,12 +1173,10 @@ export interface DescribeInstanceOperationsResponse {
 export interface CreateInstanceByApiResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**

@@ -470,9 +470,25 @@ export interface ResetDeviceAccountPasswordRequest {
 }
 
 /**
- * RunOperationTask返回参数结构体
+ * DescribeAccessWhiteListRules返回参数结构体
  */
-export interface RunOperationTaskResponse {
+export interface DescribeAccessWhiteListRulesResponse {
+  /**
+   * 记录总数
+   */
+  TotalCount?: number
+  /**
+   * 访问白名单规则列表
+   */
+  AccessWhiteListRuleSet?: Array<AccessWhiteListRule>
+  /**
+   * 是否放开全部来源IP，如果为true，TotalCount为0，AccessWhiteListRuleSet为空
+   */
+  AllowAny?: boolean
+  /**
+   * 是否开启自动添加来源IP, 如果为true, 在开启访问白名单的情况下将自动添加来源IP
+   */
+  AllowAuto?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -565,6 +581,20 @@ export interface DescribeDevicesResponse {
  * ResetUser返回参数结构体
  */
 export interface ResetUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccessWhiteListRule返回参数结构体
+ */
+export interface CreateAccessWhiteListRuleResponse {
+  /**
+   * 新建成功后返回的记录ID
+   */
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -716,21 +746,39 @@ export interface SearchFileRequest {
 }
 
 /**
- * DescribeDomains返回参数结构体
+ * CreateAccessWhiteListRule请求参数结构体
  */
-export interface DescribeDomainsResponse {
+export interface CreateAccessWhiteListRuleRequest {
   /**
-   * 网络域总数
+   * ip 10.10.10.1或者网段10.10.10.0/24，最小长度4字节，最大长度40字节。
    */
-  TotalCount?: number
+  Source: string
   /**
-   * 网络域列表
+   * 备注信息，最小长度0字符，最大长度40字符。
    */
-  DomainSet?: Array<Domain>
+  Remark?: string
+}
+
+/**
+ * 访问白名单规则
+ */
+export interface AccessWhiteListRule {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则ID
    */
-  RequestId?: string
+  Id?: number
+  /**
+   * IP或者网段
+   */
+  Source?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -1328,30 +1376,25 @@ export interface AccessDevicesRequest {
 }
 
 /**
- * ModifyCmdTemplate请求参数结构体
+ * DescribeAccessWhiteListRules请求参数结构体
  */
-export interface ModifyCmdTemplateRequest {
+export interface DescribeAccessWhiteListRulesRequest {
   /**
-   * 模板名，最长32字符，不能包含空白字符
+   * 用户ID集合，非必需，如果使用IdSet参数则忽略Name参数
    */
-  Name: string
+  IdSet?: Array<number | bigint>
   /**
-   * 命令列表，\n分隔，最长32768字节
+   * 来源IP或网段，模糊查询，最大长度64字符
    */
-  CmdList: string
+  Name?: string
   /**
-   * 命令模板ID
+   * 分页偏移位置，默认0
    */
-  Id: number
+  Offset?: number
   /**
-   * CmdList字段前端是否base64传值。
-0：否，1：是
+   * 每页条目数量，默认20
    */
-  Encoding?: number
-  /**
-   * 命令模板类型 1-内置模板 2-自定义模板
-   */
-  Type?: number
+  Limit?: number
 }
 
 /**
@@ -1768,6 +1811,16 @@ export interface RunChangePwdTaskDetail {
    * 资产账号
    */
   Account: string
+}
+
+/**
+ * RunOperationTask返回参数结构体
+ */
+export interface RunOperationTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2403,17 +2456,29 @@ export interface ResetDeviceAccountPrivateKeyRequest {
 }
 
 /**
- * 部门管理员信息
+ * DescribeDeviceGroups请求参数结构体
  */
-export interface DepartmentManagerUser {
+export interface DescribeDeviceGroupsRequest {
   /**
-   * 管理员Id
+   * 资产组ID集合
    */
-  ManagerId?: string
+  IdSet?: Array<number | bigint>
   /**
-   * 管理员姓名
+   * 资产组名，最长64个字符，模糊查询
    */
-  ManagerName?: string
+  Name?: string
+  /**
+   * 分页偏移位置，默认值为0
+   */
+  Offset?: number
+  /**
+   * 每页条目数量，缺省20，最大500
+   */
+  Limit?: number
+  /**
+   * 部门ID，用于过滤属于某个部门的资产组
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -2621,6 +2686,93 @@ export interface DeleteDeviceAccountsRequest {
 }
 
 /**
+ * SearchTaskResult请求参数结构体
+ */
+export interface SearchTaskResultRequest {
+  /**
+   * 搜索区间的开始时间
+   */
+  StartTime?: string
+  /**
+   * 搜索区间的结束时间
+   */
+  EndTime?: string
+  /**
+   * 运维任务ID
+   */
+  OperationId?: string
+  /**
+   * 运维任务名称
+   */
+  Name?: string
+  /**
+   * 用户名，长度不超过20
+   */
+  UserName?: string
+  /**
+   * 姓名，长度不超过20
+   */
+  RealName?: string
+  /**
+   * 任务类型
+1 手工运维任务
+2 定时任务
+3 账号推送任务
+   */
+  TaskType?: Array<number | bigint>
+  /**
+   * 查询偏移
+   */
+  Offset?: number
+  /**
+   * 分页的页内记录数，默认为20，最大200
+   */
+  Limit?: number
+}
+
+/**
+ * 运维父任务执行结果
+ */
+export interface TaskResult {
+  /**
+   * 运维任务结果日志ID
+   */
+  Id?: string
+  /**
+   * 运维任务ID
+   */
+  OperationId?: string
+  /**
+   * 运维任务名称
+   */
+  Name?: string
+  /**
+   * 执行任务来源IP
+   */
+  FromIp?: string
+  /**
+   * 运维任务所属用户
+   */
+  UserName?: string
+  /**
+   * 运维任务所属用户的姓名
+   */
+  RealName?: string
+  /**
+   * 运维任务执行状态 1 - 执行中，2 - 成功，3 - 失败，4 - 部分失败
+   */
+  Status?: number
+  /**
+   * 运维任务开始时间
+   */
+  StartTime?: string
+  /**
+   * 运维任务结束时间
+   */
+  EndTime?: string
+}
+
+/**
  * DeleteDeviceGroupMembers返回参数结构体
  */
 export interface DeleteDeviceGroupMembersResponse {
@@ -2716,6 +2868,16 @@ export interface SearchSessionCommandResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteAccessWhiteListRules请求参数结构体
+ */
+export interface DeleteAccessWhiteListRulesRequest {
+  /**
+   * 待删除的ID集合
+   */
+  IdSet: Array<number | bigint>
 }
 
 /**
@@ -2912,6 +3074,48 @@ export interface CreateDeviceAccountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 主机参数，导入外部主机时使用
+ */
+export interface ExternalDevice {
+  /**
+   * 操作系统名称，只能是Linux、Windows或MySQL
+   */
+  OsName: string
+  /**
+   * IP地址
+   */
+  Ip: string
+  /**
+   * 管理端口
+   */
+  Port: number
+  /**
+   * 主机名，可为空
+   */
+  Name?: string
+  /**
+   * 资产所属的部门ID
+   */
+  DepartmentId?: string
+  /**
+   * 资产多节点：字段ip和端口
+   */
+  IpPortSet?: Array<string>
+  /**
+   * 是否启用SSL,1:启用 0：禁用，仅支持Redis资产
+   */
+  EnableSSL?: number
+  /**
+   * SSL证书，EnableSSL时必填
+   */
+  SSLCert?: string
+  /**
+   * SSL证书名称，EnableSSL时必填
+   */
+  SSLCertName?: string
 }
 
 /**
@@ -3187,6 +3391,33 @@ export interface ChangePwdTaskDetail {
 }
 
 /**
+ * ModifyCmdTemplate请求参数结构体
+ */
+export interface ModifyCmdTemplateRequest {
+  /**
+   * 模板名，最长32字符，不能包含空白字符
+   */
+  Name: string
+  /**
+   * 命令列表，\n分隔，最长32768字节
+   */
+  CmdList: string
+  /**
+   * 命令模板ID
+   */
+  Id: number
+  /**
+   * CmdList字段前端是否base64传值。
+0：否，1：是
+   */
+  Encoding?: number
+  /**
+   * 命令模板类型 1-内置模板 2-自定义模板
+   */
+  Type?: number
+}
+
+/**
  * CreateOperationTask请求参数结构体
  */
 export interface CreateOperationTaskRequest {
@@ -3443,6 +3674,24 @@ export interface CreateChangePwdTaskRequest {
    * 周期任务首次执行时间
    */
   FirstTime?: string
+}
+
+/**
+ * SearchTaskResult返回参数结构体
+ */
+export interface SearchTaskResultResponse {
+  /**
+   * 记录数
+   */
+  TotalCount?: number
+  /**
+   * 运维任务执行结果
+   */
+  TaskResult?: Array<TaskResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4047,29 +4296,17 @@ BindingStatus 绑定状态
 }
 
 /**
- * DescribeDeviceGroups请求参数结构体
+ * 部门管理员信息
  */
-export interface DescribeDeviceGroupsRequest {
+export interface DepartmentManagerUser {
   /**
-   * 资产组ID集合
+   * 管理员Id
    */
-  IdSet?: Array<number | bigint>
+  ManagerId?: string
   /**
-   * 资产组名，最长64个字符，模糊查询
+   * 管理员姓名
    */
-  Name?: string
-  /**
-   * 分页偏移位置，默认值为0
-   */
-  Offset?: number
-  /**
-   * 每页条目数量，缺省20，最大500
-   */
-  Limit?: number
-  /**
-   * 部门ID，用于过滤属于某个部门的资产组
-   */
-  DepartmentId?: string
+  ManagerName?: string
 }
 
 /**
@@ -4174,45 +4411,21 @@ export interface DescribeOperationEventResponse {
 }
 
 /**
- * 主机参数，导入外部主机时使用
+ * DescribeDomains返回参数结构体
  */
-export interface ExternalDevice {
+export interface DescribeDomainsResponse {
   /**
-   * 操作系统名称，只能是Linux、Windows或MySQL
+   * 网络域总数
    */
-  OsName: string
+  TotalCount?: number
   /**
-   * IP地址
+   * 网络域列表
    */
-  Ip: string
+  DomainSet?: Array<Domain>
   /**
-   * 管理端口
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Port: number
-  /**
-   * 主机名，可为空
-   */
-  Name?: string
-  /**
-   * 资产所属的部门ID
-   */
-  DepartmentId?: string
-  /**
-   * 资产多节点：字段ip和端口
-   */
-  IpPortSet?: Array<string>
-  /**
-   * 是否启用SSL,1:启用 0：禁用，仅支持Redis资产
-   */
-  EnableSSL?: number
-  /**
-   * SSL证书，EnableSSL时必填
-   */
-  SSLCert?: string
-  /**
-   * SSL证书名称，EnableSSL时必填
-   */
-  SSLCertName?: string
+  RequestId?: string
 }
 
 /**
@@ -4437,6 +4650,16 @@ export interface AddDeviceGroupMembersRequest {
  * DeleteDeviceAccounts返回参数结构体
  */
 export interface DeleteDeviceAccountsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAccessWhiteListRules返回参数结构体
+ */
+export interface DeleteAccessWhiteListRulesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

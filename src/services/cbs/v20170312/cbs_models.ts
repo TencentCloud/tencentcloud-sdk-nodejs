@@ -1343,7 +1343,7 @@ export interface ModifyAutoSnapshotPolicyAttributeResponse {
  */
 export interface TerminateDisksRequest {
   /**
-   * 需退还的云盘ID列表。
+   * 需退还的云盘ID列表，通过[DescribeDisks](/document/product/362/16315)接口查询。
    */
   DiskIds: Array<string>
   /**

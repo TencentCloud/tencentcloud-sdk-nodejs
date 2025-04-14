@@ -638,6 +638,16 @@ it("vpc.v20170312.DeleteAddressTemplate", async function () {
     }
 })
 
+it("vpc.v20170312.MigrateBandwidthPackageResources", async function () {
+    try {
+       const data = await client.MigrateBandwidthPackageResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.WithdrawNotifyRoutes", async function () {
     try {
        const data = await client.WithdrawNotifyRoutes({})

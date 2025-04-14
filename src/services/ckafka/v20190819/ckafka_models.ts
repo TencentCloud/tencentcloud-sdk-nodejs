@@ -96,17 +96,25 @@ export interface DescribeTopicSyncReplicaResponse {
 }
 
 /**
- * DescribeDatahubGroupOffsets返回参数结构体
+ * FetchMessageByOffset请求参数结构体
  */
-export interface DescribeDatahubGroupOffsetsResponse {
+export interface FetchMessageByOffsetRequest {
   /**
-   * 返回的结果对象
+   * ckafka集群实例Id
    */
-  Result?: GroupOffsetResponse
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 主题名
    */
-  RequestId?: string
+  Topic: string
+  /**
+   * 分区id
+   */
+  Partition: number
+  /**
+   * 位点信息，必填
+   */
+  Offset?: number
 }
 
 /**
@@ -1341,25 +1349,17 @@ export interface InstanceDetailResponse {
 }
 
 /**
- * ModifyInstancePre请求参数结构体
+ * DescribeDatahubGroupOffsets返回参数结构体
  */
-export interface ModifyInstancePreRequest {
+export interface DescribeDatahubGroupOffsetsResponse {
   /**
-   * ckafka集群实例Id
+   * 返回的结果对象
    */
-  InstanceId: string
+  Result?: GroupOffsetResponse
   /**
-   * 预计磁盘，根据磁盘步长，规格向上调整。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DiskSize?: number
-  /**
-   * 预计带宽，根据带宽步长，规格向上调整。
-   */
-  BandWidth?: number
-  /**
-   * 预计分区，根据带宽步长，规格向上调整。
-   */
-  Partition?: number
+  RequestId?: string
 }
 
 /**
@@ -3231,13 +3231,25 @@ export interface DescribeGroupResponse {
 }
 
 /**
- * DescribeDatahubTopic请求参数结构体
+ * DescribeTopicSubscribeGroup接口出参
  */
-export interface DescribeDatahubTopicRequest {
+export interface TopicSubscribeGroup {
   /**
-   * 弹性topic名称
+   * 总数
    */
-  Name: string
+  TotalCount?: number
+  /**
+   * 消费分组状态数量信息
+   */
+  StatusCountInfo?: string
+  /**
+   * 消费分组信息
+   */
+  GroupsInfo?: Array<GroupInfoResponse>
+  /**
+   * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
+   */
+  Status?: number
 }
 
 /**
@@ -4221,6 +4233,28 @@ export interface DatahubTopicDTO {
 }
 
 /**
+ * ModifyInstancePre请求参数结构体
+ */
+export interface ModifyInstancePreRequest {
+  /**
+   * ckafka集群实例Id
+   */
+  InstanceId: string
+  /**
+   * 预计磁盘，根据磁盘步长，规格向上调整。
+   */
+  DiskSize?: number
+  /**
+   * 预计带宽，根据带宽步长，规格向上调整。
+   */
+  BandWidth?: number
+  /**
+   * 预计分区，根据带宽步长，规格向上调整。
+   */
+  Partition?: number
+}
+
+/**
  * Cls类型入参
  */
 export interface ClsParam {
@@ -4395,6 +4429,36 @@ export interface EsModifyConnectParam {
    * 是否更新到关联的Datahub任务
    */
   IsUpdate?: boolean
+}
+
+/**
+ * DescribeTypeInstances请求参数结构体
+ */
+export interface DescribeTypeInstancesRequest {
+  /**
+   * （过滤条件）按照实例ID过滤
+   */
+  InstanceId?: string
+  /**
+   * （过滤条件）按照实例名称过滤，支持模糊查询
+   */
+  SearchWord?: string
+  /**
+   * （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部
+   */
+  Status?: Array<number | bigint>
+  /**
+   * 偏移量，不填默认为0
+   */
+  Offset?: number
+  /**
+   * 返回数量，不填则默认10，最大值100
+   */
+  Limit?: number
+  /**
+   * 匹配标签key值。
+   */
+  TagKey?: string
 }
 
 /**
@@ -5213,6 +5277,20 @@ export interface DeleteAclRuleRequest {
 }
 
 /**
+ * DescribeTypeInstances返回参数结构体
+ */
+export interface DescribeTypeInstancesResponse {
+  /**
+   * 返回的结果
+   */
+  Result?: InstanceResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyConnectResource请求参数结构体
  */
 export interface ModifyConnectResourceRequest {
@@ -5320,6 +5398,16 @@ export interface TdwParam {
    * TDW端口，默认8099
    */
   TdwPort?: number
+}
+
+/**
+ * DescribeCvmInfo请求参数结构体
+ */
+export interface DescribeCvmInfoRequest {
+  /**
+   * ckafka集群实例Id
+   */
+  InstanceId: string
 }
 
 /**
@@ -6053,6 +6141,60 @@ export interface CreateUserRequest {
 }
 
 /**
+ * 主题属性返回结果实体
+ */
+export interface TopicAttributesResponse {
+  /**
+   * 主题 ID
+   */
+  TopicId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 主题备注
+   */
+  Note?: string
+  /**
+   * 分区个数
+   */
+  PartitionNum?: number
+  /**
+   * IP 白名单开关，1：打开； 0：关闭
+   */
+  EnableWhiteList?: number
+  /**
+   * IP 白名单列表
+   */
+  IpWhiteList?: Array<string>
+  /**
+   * topic 配置数组
+   */
+  Config?: Config
+  /**
+   * 分区详情
+   */
+  Partitions?: Array<TopicPartitionDO>
+  /**
+   * ACL预设策略开关，1：打开； 0：关闭
+   */
+  EnableAclRule?: number
+  /**
+   * 预设策略列表
+   */
+  AclRuleList?: Array<AclRule>
+  /**
+   * topic 限流策略
+   */
+  QuotaConfig?: InstanceQuotaConfigResp
+  /**
+   * 副本数
+   */
+  ReplicaNum?: number
+}
+
+/**
  * 实例购买付费参数
  */
 export interface InstanceChargeParam {
@@ -6088,6 +6230,26 @@ export interface CheckCdcClusterRequest {
    * 任务ID
    */
   TaskId: number
+}
+
+/**
+ * CVM和IP信息
+ */
+export interface CvmAndIpInfo {
+  /**
+   * ckafka集群实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CkafkaInstanceId?: string
+  /**
+   * CVM实例ID
+   */
+  InstanceId?: string
+  /**
+   * IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
 }
 
 /**
@@ -7726,6 +7888,20 @@ export interface DatahubTopicResp {
 }
 
 /**
+ * DescribeCvmInfo返回参数结构体
+ */
+export interface DescribeCvmInfoResponse {
+  /**
+   * 返回结果
+   */
+  Result?: ListCvmAndIpInfoRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRouteTriggerTime返回参数结构体
  */
 export interface DeleteRouteTriggerTimeResponse {
@@ -7896,25 +8072,13 @@ export interface DescribeUserRequest {
 }
 
 /**
- * DescribeTopicSubscribeGroup接口出参
+ * DescribeDatahubTopic请求参数结构体
  */
-export interface TopicSubscribeGroup {
+export interface DescribeDatahubTopicRequest {
   /**
-   * 总数
+   * 弹性topic名称
    */
-  TotalCount?: number
-  /**
-   * 消费分组状态数量信息
-   */
-  StatusCountInfo?: string
-  /**
-   * 消费分组信息
-   */
-  GroupsInfo?: Array<GroupInfoResponse>
-  /**
-   * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
-   */
-  Status?: number
+  Name: string
 }
 
 /**
@@ -7966,28 +8130,6 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogMsgTimestampType?: string
-}
-
-/**
- * FetchMessageByOffset请求参数结构体
- */
-export interface FetchMessageByOffsetRequest {
-  /**
-   * ckafka集群实例Id
-   */
-  InstanceId: string
-  /**
-   * 主题名
-   */
-  Topic: string
-  /**
-   * 分区id
-   */
-  Partition: number
-  /**
-   * 位点信息，必填
-   */
-  Offset?: number
 }
 
 /**
@@ -8215,57 +8357,19 @@ export interface InquireCkafkaPriceResponse {
 }
 
 /**
- * 主题属性返回结果实体
+ * CVM和IP 信息列表
  */
-export interface TopicAttributesResponse {
+export interface ListCvmAndIpInfoRsp {
   /**
-   * 主题 ID
+   * cvm和IP 列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId?: string
+  CvmList?: Array<CvmAndIpInfo>
   /**
-   * 创建时间
+   * 实例数据量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: number
-  /**
-   * 主题备注
-   */
-  Note?: string
-  /**
-   * 分区个数
-   */
-  PartitionNum?: number
-  /**
-   * IP 白名单开关，1：打开； 0：关闭
-   */
-  EnableWhiteList?: number
-  /**
-   * IP 白名单列表
-   */
-  IpWhiteList?: Array<string>
-  /**
-   * topic 配置数组
-   */
-  Config?: Config
-  /**
-   * 分区详情
-   */
-  Partitions?: Array<TopicPartitionDO>
-  /**
-   * ACL预设策略开关，1：打开； 0：关闭
-   */
-  EnableAclRule?: number
-  /**
-   * 预设策略列表
-   */
-  AclRuleList?: Array<AclRule>
-  /**
-   * topic 限流策略
-   */
-  QuotaConfig?: InstanceQuotaConfigResp
-  /**
-   * 副本数
-   */
-  ReplicaNum?: number
+  TotalCount?: number
 }
 
 /**

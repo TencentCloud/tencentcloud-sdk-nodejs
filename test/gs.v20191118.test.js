@@ -28,6 +28,16 @@ it("gs.v20191118.BackUpAndroidInstanceToStorage", async function () {
     }
 })
 
+it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesUserId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.StopGame", async function () {
     try {
        const data = await client.StopGame({})
@@ -198,6 +208,26 @@ it("gs.v20191118.CreateAndroidInstanceLabel", async function () {
     }
 })
 
+it("gs.v20191118.CreateAndroidApp", async function () {
+    try {
+       const data = await client.CreateAndroidApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+    try {
+       const data = await client.UploadFileToAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CreateAndroidInstanceWebShell", async function () {
     try {
        const data = await client.CreateAndroidInstanceWebShell({})
@@ -268,9 +298,19 @@ it("gs.v20191118.CreateAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.StartPublishStreamToCSS", async function () {
+it("gs.v20191118.CreateCosCredential", async function () {
     try {
-       const data = await client.StartPublishStreamToCSS({})
+       const data = await client.CreateCosCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ModifyAndroidApp", async function () {
+    try {
+       const data = await client.ModifyAndroidApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +388,9 @@ it("gs.v20191118.CreateSession", async function () {
     }
 })
 
-it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+it("gs.v20191118.DeleteAndroidAppVersion", async function () {
     try {
-       const data = await client.UploadFileToAndroidInstances({})
+       const data = await client.DeleteAndroidAppVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +438,16 @@ it("gs.v20191118.CopyAndroidInstance", async function () {
     }
 })
 
+it("gs.v20191118.CreateAndroidAppVersion", async function () {
+    try {
+       const data = await client.CreateAndroidAppVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DestroyAndroidInstances", async function () {
     try {
        const data = await client.DestroyAndroidInstances({})
@@ -408,9 +458,9 @@ it("gs.v20191118.DestroyAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
+it("gs.v20191118.DeleteAndroidApp", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesUserId({})
+       const data = await client.DeleteAndroidApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +471,16 @@ it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
 it("gs.v20191118.ExecuteCommandOnAndroidInstances", async function () {
     try {
        const data = await client.ExecuteCommandOnAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StartPublishStreamToCSS", async function () {
+    try {
+       const data = await client.StartPublishStreamToCSS({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

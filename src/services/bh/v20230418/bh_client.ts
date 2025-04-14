@@ -37,18 +37,20 @@ import {
   BindDeviceAccountPasswordResponse,
   DescribeChangePwdTaskDetailRequest,
   ResetDeviceAccountPasswordRequest,
-  RunOperationTaskResponse,
+  DescribeAccessWhiteListRulesResponse,
   AddUserGroupMembersRequest,
   CreateResourceRequest,
   DescribeDevicesResponse,
   ResetUserResponse,
+  CreateAccessWhiteListRuleResponse,
   DeleteUserGroupMembersRequest,
   RunChangePwdTaskRequest,
   DescribeChangePwdTaskDetailResponse,
   DeleteUserGroupsResponse,
   ModifyDeviceRequest,
   SearchFileRequest,
-  DescribeDomainsResponse,
+  CreateAccessWhiteListRuleRequest,
+  AccessWhiteListRule,
   SearchFileBySidResult,
   SearchCommandRequest,
   ImportExternalDeviceRequest,
@@ -68,7 +70,7 @@ import {
   OperationEvent,
   Department,
   AccessDevicesRequest,
-  ModifyCmdTemplateRequest,
+  DescribeAccessWhiteListRulesRequest,
   SessionResult,
   CreateUserResponse,
   DeleteOperationTasksRequest,
@@ -80,6 +82,7 @@ import {
   DescribeLoginEventResponse,
   CreateDeviceGroupRequest,
   RunChangePwdTaskDetail,
+  RunOperationTaskResponse,
   DeleteDeviceGroupMembersRequest,
   OperationTask,
   SearchCommandResponse,
@@ -104,7 +107,7 @@ import {
   CreateCmdTemplateRequest,
   ModifyCmdTemplateResponse,
   ResetDeviceAccountPrivateKeyRequest,
-  DepartmentManagerUser,
+  DescribeDeviceGroupsRequest,
   CreateAssetSyncJobResponse,
   BindDeviceAccountPrivateKeyRequest,
   ModifyChangePwdTaskRequest,
@@ -115,6 +118,8 @@ import {
   AccessDevicesResponse,
   DeleteUsersRequest,
   DeleteDeviceAccountsRequest,
+  SearchTaskResultRequest,
+  TaskResult,
   DeleteDeviceGroupMembersResponse,
   ModifyDeviceGroupResponse,
   ModifyOAuthSettingResponse,
@@ -122,11 +127,13 @@ import {
   DescribeUserGroupMembersResponse,
   ImportExternalDeviceResponse,
   SearchSessionCommandResponse,
+  DeleteAccessWhiteListRulesRequest,
   DeleteUserGroupsRequest,
   User,
   ResetUserRequest,
   Device,
   CreateDeviceAccountResponse,
+  ExternalDevice,
   ModifyDeviceGroupRequest,
   Domain,
   Filter,
@@ -139,6 +146,7 @@ import {
   ModifyDeviceResponse,
   ModifyUserResponse,
   ChangePwdTaskDetail,
+  ModifyCmdTemplateRequest,
   CreateOperationTaskRequest,
   DescribeCmdTemplatesResponse,
   CreateDeviceAccountRequest,
@@ -150,6 +158,7 @@ import {
   DeleteChangePwdTaskRequest,
   ModifyUserGroupRequest,
   CreateChangePwdTaskRequest,
+  SearchTaskResultResponse,
   LoginEvent,
   DeleteChangePwdTaskResponse,
   CreateUserGroupResponse,
@@ -169,18 +178,19 @@ import {
   Acl,
   TagFilter,
   DescribeDevicesRequest,
-  DescribeDeviceGroupsRequest,
+  DepartmentManagerUser,
   ACTemplate,
   SearchSessionCommandRequest,
   SearchFileBySidRequest,
   DescribeOperationEventResponse,
-  ExternalDevice,
+  DescribeDomainsResponse,
   SearchFileResult,
   DeleteAclsResponse,
   DescribeDeviceGroupMembersRequest,
   DescribeAclsRequest,
   AddDeviceGroupMembersRequest,
   DeleteDeviceAccountsResponse,
+  DeleteAccessWhiteListRulesResponse,
   SearchFileResponse,
 } from "./bh_models"
 
@@ -204,13 +214,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资产组成员列表
+   * 查询资产同步状态
    */
-  async DescribeDeviceGroupMembers(
-    req: DescribeDeviceGroupMembersRequest,
-    cb?: (error: string, rep: DescribeDeviceGroupMembersResponse) => void
-  ): Promise<DescribeDeviceGroupMembersResponse> {
-    return this.request("DescribeDeviceGroupMembers", req, cb)
+  async DescribeAssetSyncStatus(
+    req: DescribeAssetSyncStatusRequest,
+    cb?: (error: string, rep: DescribeAssetSyncStatusResponse) => void
+  ): Promise<DescribeAssetSyncStatusResponse> {
+    return this.request("DescribeAssetSyncStatus", req, cb)
   }
 
   /**
@@ -224,13 +234,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改高危命令模板
+   * 删除访问白名单规则
    */
-  async ModifyCmdTemplate(
-    req: ModifyCmdTemplateRequest,
-    cb?: (error: string, rep: ModifyCmdTemplateResponse) => void
-  ): Promise<ModifyCmdTemplateResponse> {
-    return this.request("ModifyCmdTemplate", req, cb)
+  async DeleteAccessWhiteListRules(
+    req: DeleteAccessWhiteListRulesRequest,
+    cb?: (error: string, rep: DeleteAccessWhiteListRulesResponse) => void
+  ): Promise<DeleteAccessWhiteListRulesResponse> {
+    return this.request("DeleteAccessWhiteListRules", req, cb)
   }
 
   /**
@@ -351,6 +361,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindDeviceAccountPasswordResponse) => void
   ): Promise<BindDeviceAccountPasswordResponse> {
     return this.request("BindDeviceAccountPassword", req, cb)
+  }
+
+  /**
+   * 搜索文件传输会话下文件操作列表
+   */
+  async SearchFileBySid(
+    req: SearchFileBySidRequest,
+    cb?: (error: string, rep: SearchFileBySidResponse) => void
+  ): Promise<SearchFileBySidResponse> {
+    return this.request("SearchFileBySid", req, cb)
+  }
+
+  /**
+   * 修改高危命令模板
+   */
+  async ModifyCmdTemplate(
+    req: ModifyCmdTemplateRequest,
+    cb?: (error: string, rep: ModifyCmdTemplateResponse) => void
+  ): Promise<ModifyCmdTemplateResponse> {
+    return this.request("ModifyCmdTemplate", req, cb)
   }
 
   /**
@@ -544,13 +574,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资产同步状态
+   * 添加访问白名单规则
    */
-  async DescribeAssetSyncStatus(
-    req: DescribeAssetSyncStatusRequest,
-    cb?: (error: string, rep: DescribeAssetSyncStatusResponse) => void
-  ): Promise<DescribeAssetSyncStatusResponse> {
-    return this.request("DescribeAssetSyncStatus", req, cb)
+  async CreateAccessWhiteListRule(
+    req: CreateAccessWhiteListRuleRequest,
+    cb?: (error: string, rep: CreateAccessWhiteListRuleResponse) => void
+  ): Promise<CreateAccessWhiteListRuleResponse> {
+    return this.request("CreateAccessWhiteListRule", req, cb)
   }
 
   /**
@@ -561,6 +591,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeviceAccountResponse) => void
   ): Promise<CreateDeviceAccountResponse> {
     return this.request("CreateDeviceAccount", req, cb)
+  }
+
+  /**
+   * 查询访问白名单规则列表
+   */
+  async DescribeAccessWhiteListRules(
+    req: DescribeAccessWhiteListRulesRequest,
+    cb?: (error: string, rep: DescribeAccessWhiteListRulesResponse) => void
+  ): Promise<DescribeAccessWhiteListRulesResponse> {
+    return this.request("DescribeAccessWhiteListRules", req, cb)
   }
 
   /**
@@ -764,13 +804,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 搜索文件传输会话下文件操作列表
+   * 查询资产组成员列表
    */
-  async SearchFileBySid(
-    req: SearchFileBySidRequest,
-    cb?: (error: string, rep: SearchFileBySidResponse) => void
-  ): Promise<SearchFileBySidResponse> {
-    return this.request("SearchFileBySid", req, cb)
+  async DescribeDeviceGroupMembers(
+    req: DescribeDeviceGroupMembersRequest,
+    cb?: (error: string, rep: DescribeDeviceGroupMembersResponse) => void
+  ): Promise<DescribeDeviceGroupMembersResponse> {
+    return this.request("DescribeDeviceGroupMembers", req, cb)
   }
 
   /**
@@ -831,6 +871,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserResponse) => void
   ): Promise<CreateUserResponse> {
     return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 搜索运维任务执行结果
+   */
+  async SearchTaskResult(
+    req: SearchTaskResultRequest,
+    cb?: (error: string, rep: SearchTaskResultResponse) => void
+  ): Promise<SearchTaskResultResponse> {
+    return this.request("SearchTaskResult", req, cb)
   }
 
   /**
