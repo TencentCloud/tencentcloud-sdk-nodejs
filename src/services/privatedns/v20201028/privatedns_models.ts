@@ -198,7 +198,7 @@ export interface AccountVpcInfoOutput {
  */
 export interface DescribePrivateZoneRequest {
   /**
-   * 域名，格式必须是标准的TLD
+   * 私有域id
    */
   ZoneId: string
 }
@@ -705,7 +705,7 @@ export interface DescribePrivateZoneResponse {
  */
 export interface CreatePrivateZoneResponse {
   /**
-   * 私有域ID, zone-xxxxxx
+   * 私有域ID, zone-12345678
    */
   ZoneId?: string
   /**
@@ -1223,7 +1223,7 @@ export interface DeletePrivateZoneRecordResponse {
  */
 export interface ModifyPrivateZoneVpcResponse {
   /**
-   * 私有域ID, zone-xxxxxx
+   * 私有域ID, zone-12345ds6
    */
   ZoneId?: string
   /**

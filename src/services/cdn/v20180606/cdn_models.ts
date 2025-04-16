@@ -1513,11 +1513,11 @@ sum：累加求和
 max：最大值，带宽模式下，采用 5 分钟粒度汇总数据，计算峰值带宽
 avg：平均值
    */
-  Name: string
+  Name?: string
   /**
    * 汇总后的数据值
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -1717,7 +1717,7 @@ export interface CacheOptResult {
    * 失败的url列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailUrls: Array<string>
+  FailUrls?: Array<string>
 }
 
 /**
@@ -2167,14 +2167,14 @@ export interface AdvanceConfig {
    * 高级配置名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 是否支持高级配置，
 on：支持
 off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -2229,7 +2229,7 @@ export interface Compatibility {
    * 兼容标志状态码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Code: number
+  Code?: number
 }
 
 /**
@@ -2257,15 +2257,15 @@ export interface ClsSearchLogs {
   /**
    * 获取更多检索结果的游标
    */
-  Context: string
+  Context?: string
   /**
    * 搜索结果是否已经全部返回
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 日志内容信息
    */
-  Results: Array<ClsLogObject>
+  Results?: Array<ClsLogObject>
 }
 
 /**
@@ -2275,7 +2275,7 @@ export interface OriginIp {
   /**
    * 回源IP段/回源IP，默认返回IP段信息。
    */
-  Ip: string
+  Ip?: string
 }
 
 /**
@@ -2338,34 +2338,34 @@ export interface CdnIp {
   /**
    * 指定查询的 IP
    */
-  Ip: string
+  Ip?: string
   /**
    * IP 归属：
 yes：节点归属于腾讯云 CDN
 no：节点不属于腾讯云 CDN
    */
-  Platform: string
+  Platform?: string
   /**
    * 节点所处的省份/国家
 unknown 表示节点位置未知
    */
-  Location: string
+  Location?: string
   /**
    * 节点上下线历史记录
    */
-  History: Array<CdnIpHistory>
+  History?: Array<CdnIpHistory>
   /**
    * 节点的所在区域
 mainland：中国境内加速节点
 overseas：中国境外加速节点
 unknown：服务地域无法获取
    */
-  Area: string
+  Area?: string
   /**
    * 节点的所在城市
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  City: string
+  City?: string
 }
 
 /**
@@ -2418,17 +2418,17 @@ export interface DiagnoseList {
    * 诊断任务标签。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnoseTag: string
+  DiagnoseTag?: string
   /**
    * 报告ID，用于获取详细诊断报告。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportId: string
+  ReportId?: string
   /**
    * 客户端信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientInfo: Array<ClientInfo>
+  ClientInfo?: Array<ClientInfo>
   /**
    * 最终诊断结果。
 -1：已提交
@@ -2438,12 +2438,12 @@ export interface DiagnoseList {
 3  ： 诊断页面异常关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FinalDiagnose: number
+  FinalDiagnose?: number
   /**
    * 诊断任务创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -2505,27 +2505,27 @@ export interface ReportData {
   /**
    * 项目ID/域名ID。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 项目名称/域名。
    */
-  Resource: string
+  Resource?: string
   /**
    * 流量总和/带宽最大值，单位分别为bytes，bps。
    */
-  Value: number
+  Value?: number
   /**
    * 单个资源占总体百分比。
    */
-  Percentage: number
+  Percentage?: number
   /**
    * 计费流量总和/计费带宽最大值，单位分别为bytes，bps。
    */
-  BillingValue: number
+  BillingValue?: number
   /**
    * 计费数值占总体百分比。
    */
-  BillingPercentage: number
+  BillingPercentage?: number
 }
 
 /**
@@ -3785,11 +3785,11 @@ export interface MapInfo {
   /**
    * 对象 Id
    */
-  Id: number
+  Id?: number
   /**
    * 对象名称
    */
-  Name: string
+  Name?: string
 }
 
 /**
@@ -3843,11 +3843,11 @@ multiDomains：表示多域名汇总明细数据
 项目 ID：指定项目查询时，显示为项目 ID
 all：账号维度明细数据
    */
-  Resource: string
+  Resource?: string
   /**
    * 回源数据详情
    */
-  OriginData: Array<CdnData>
+  OriginData?: Array<CdnData>
 }
 
 /**
@@ -4443,11 +4443,11 @@ multiDomains：表示多域名汇总明细数据
 项目 ID：指定项目查询时，显示为项目 ID
 all：账号维度明细数据
    */
-  Resource: string
+  Resource?: string
   /**
    * 排序结果详情
    */
-  DetailData: Array<TopDetailData>
+  DetailData?: Array<TopDetailData>
 }
 
 /**
@@ -4838,22 +4838,22 @@ export interface DiagnoseUnit {
    * 内容单元英文名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  Key?: string
   /**
    * 内容单元中文名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyText: string
+  KeyText?: string
   /**
    * 报告内容。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 报告内容。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValueText: string
+  ValueText?: string
 }
 
 /**
@@ -4864,37 +4864,37 @@ export interface DiagnoseInfo {
    * 待诊断的URL。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnoseUrl: string
+  DiagnoseUrl?: string
   /**
    * 由系统生成的诊断链接。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnoseLink: string
+  DiagnoseLink?: string
   /**
    * 诊断创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 诊断链接过期时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireDate: string
+  ExpireDate?: string
   /**
    * 诊断链接当前访问次数，一个诊断链接最多可访问10次。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VisitCount: number
+  VisitCount?: number
   /**
    * 访问诊断链接的客户端简易信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientList: Array<DiagnoseList>
+  ClientList?: Array<DiagnoseList>
   /**
    * 域名加速区域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Area: string
+  Area?: string
 }
 
 /**
@@ -5175,22 +5175,22 @@ export interface UrlRecord {
    * 状态(disable表示封禁，enable表示解封)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 对应的url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealUrl: string
+  RealUrl?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -6141,51 +6141,51 @@ export interface DistrictIspInfo {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 协议类型
    */
-  Protocol: string
+  Protocol?: string
   /**
    * IP协议类型
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 起始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 时间间隔，单位为分钟
    */
-  Interval: number
+  Interval?: number
   /**
    * 指标名称
    */
-  Metric: string
+  Metric?: string
   /**
    * 地区ID
    */
-  District: number
+  District?: number
   /**
    * 运营商ID
    */
-  Isp: number
+  Isp?: number
   /**
    * 指标数据点
    */
-  DataPoints: Array<number | bigint>
+  DataPoints?: Array<number | bigint>
   /**
    * 地区名称
    */
-  DistrictName: string
+  DistrictName?: string
   /**
    * 运营商名称
    */
-  IspName: string
+  IspName?: string
 }
 
 /**
@@ -7655,27 +7655,27 @@ export interface ClsLogObject {
   /**
    * 主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题名字
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 日志时间
    */
-  Timestamp: string
+  Timestamp?: string
   /**
    * 日志内容
    */
-  Content: string
+  Content?: string
   /**
    * 采集路径
    */
-  Filename: string
+  Filename?: string
   /**
    * 日志来源设备
    */
-  Source: string
+  Source?: string
 }
 
 /**
@@ -7703,11 +7703,11 @@ export interface RegionMapRelation {
   /**
    * 区域ID。
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 子区域ID列表
    */
-  SubRegionIdList: Array<number | bigint>
+  SubRegionIdList?: Array<number | bigint>
 }
 
 /**
@@ -7949,11 +7949,11 @@ multiDomains：表示多域名汇总明细数据
 某一个项目 ID：指定项目查询时，显示为项目 ID
 all：账号维度数据明细
    */
-  Resource: string
+  Resource?: string
   /**
    * 计费数据详情
    */
-  BillingData: Array<CdnData>
+  BillingData?: Array<CdnData>
 }
 
 /**
@@ -8334,34 +8334,34 @@ export interface PurgeTask {
   /**
    * 刷新任务 ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 刷新 URL
    */
-  Url: string
+  Url?: string
   /**
    * 刷新任务状态
 fail：刷新失败
 done：刷新成功
 process：刷新中
    */
-  Status: string
+  Status?: string
   /**
    * 刷新类型
 url：URL 刷新
 path：目录刷新
    */
-  PurgeType: string
+  PurgeType?: string
   /**
    * 刷新方式
 flush：刷新更新资源（仅目录刷新时有此类型）
 delete：刷新全部资源
    */
-  FlushType: string
+  FlushType?: string
   /**
    * 刷新任务提交时间
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -8908,11 +8908,11 @@ export interface TopDetailData {
   /**
    * 数据类型的名称
    */
-  Name: string
+  Name?: string
   /**
    * 数据值
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -9416,13 +9416,13 @@ export interface CdnIpHistory {
 online：节点上线
 offline：节点下线
    */
-  Status: string
+  Status?: string
   /**
    * 操作类型对应的操作时间
 当该值为 null 时表示无历史状态变更记录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Datetime: string
+  Datetime?: string
 }
 
 /**
@@ -9541,7 +9541,7 @@ export interface DiagnoseData {
    * 诊断报告内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<DiagnoseUnit>
+  Data?: Array<DiagnoseUnit>
   /**
    * 当前诊断项是否正常。
 "ok"：正常
@@ -9549,7 +9549,7 @@ export interface DiagnoseData {
 "warning"："警告"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -10124,15 +10124,15 @@ statusCode：状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 �
 5XX：返回 5XX 状态码汇总及各 5 开头状态码数据，单位为 个
 或指定查询的某一具体状态码
    */
-  Metric: string
+  Metric?: string
   /**
    * 明细数据组合
    */
-  DetailData: Array<TimestampData>
+  DetailData?: Array<TimestampData>
   /**
    * 汇总数据组合
    */
-  SummarizedData: SummarizedData
+  SummarizedData?: SummarizedData
 }
 
 /**
@@ -10204,22 +10204,22 @@ export interface ClientInfo {
    * 省份。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProvName: string
+  ProvName?: string
   /**
    * 国家。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Country: string
+  Country?: string
   /**
    * 运营商。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IspName: string
+  IspName?: string
   /**
    * 客户端IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ip: string
+  Ip?: string
 }
 
 /**
@@ -10301,19 +10301,19 @@ export interface Quota {
   /**
    * 单次批量提交配额上限。
    */
-  Batch: number
+  Batch?: number
   /**
    * 每日提交配额上限。
    */
-  Total: number
+  Total?: number
   /**
    * 每日剩余的可提交配额。
    */
-  Available: number
+  Available?: number
   /**
    * 配额的区域。
    */
-  Area: string
+  Area?: string
 }
 
 /**

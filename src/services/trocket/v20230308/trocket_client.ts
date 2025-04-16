@@ -35,7 +35,9 @@ import {
   InstanceItemExtraInfo,
   CreateMQTTInsPublicEndpointResponse,
   ImportSourceClusterConsumerGroupsResponse,
+  TopicStageChangeResult,
   DeleteTopicRequest,
+  MigratingTopic,
   ModifyMQTTInstanceRequest,
   PublicAccessRule,
   VpcInfo,
@@ -43,29 +45,34 @@ import {
   DescribeRoleListRequest,
   DescribeMQTTClientResponse,
   DescribeMQTTMessageListResponse,
-  ImportSourceClusterConsumerGroupsRequest,
+  DescribeMigratingTopicStatsResponse,
   DescribeMQTTProductSKUListRequest,
   DescribeConsumerLagRequest,
+  DescribeMigratingGroupStatsRequest,
   Tag,
+  DescribeSourceClusterGroupListResponse,
   DescribeMessageListResponse,
   DescribeMQTTMessageResponse,
-  DescribeMQTTInstanceListResponse,
+  DeleteSmoothMigrationTaskRequest,
   MQTTInstanceItem,
   DescribeInstanceListResponse,
   ModifyInstanceResponse,
   CreateConsumerGroupRequest,
-  MQTTMessageItem,
+  ChangeMigratingTopicToNextStageResponse,
   DescribeMQTTClientRequest,
+  DescribeSourceClusterGroupListRequest,
   DescribeMQTTInsVPCEndpointsResponse,
   DescribeMQTTInsPublicEndpointsResponse,
   DescribeInstanceListRequest,
   ResendDeadLetterMessageResponse,
+  MQTTMessageItem,
   DeleteMQTTUserRequest,
   ModifyMQTTInstanceCertBindingRequest,
   CreateMQTTTopicResponse,
   DescribeMQTTInstanceRequest,
   ImportSourceClusterTopicsRequest,
   CreateMQTTUserResponse,
+  SourceClusterGroupConfig,
   DeleteInstanceResponse,
   DescribeTopicResponse,
   DeleteMQTTInsPublicEndpointResponse,
@@ -77,16 +84,19 @@ import {
   DescribeMessageRequest,
   DeleteRoleRequest,
   MQTTProductSkuItem,
-  CustomMapEntry,
+  DescribeMQTTInstanceListResponse,
+  DescribeMigratingTopicStatsRequest,
   TagFilter,
   DeleteConsumerGroupRequest,
   CreateConsumerGroupResponse,
+  RollbackMigratingTopicStageRequest,
   DescribeMQTTUserListResponse,
   ModifyMQTTUserResponse,
   PriceTag,
   DescribeTopicListByGroupResponse,
   DescribeMessageTraceResponse,
-  MQTTUserItem,
+  DoHealthCheckOnMigratingTopicRequest,
+  DescribeMigratingTopicListResponse,
   ModifyMQTTInsPublicEndpointRequest,
   ModifyMQTTInstanceCertBindingResponse,
   InstanceItem,
@@ -94,13 +104,18 @@ import {
   DescribeTopicRequest,
   DeleteMQTTInstanceRequest,
   DescribeMessageTraceRequest,
+  DeleteSmoothMigrationTaskResponse,
   CreateTopicResponse,
+  DescribeMigratingGroupStatsResponse,
   DescribeMQTTInstanceListRequest,
   ModifyConsumerGroupResponse,
   CreateMQTTInstanceResponse,
   DescribeMQTTInstanceResponse,
+  ImportSourceClusterConsumerGroupsRequest,
   MQTTEndpointItem,
+  RemoveMigratingTopicRequest,
   DescribeMessageResponse,
+  DoHealthCheckOnMigratingTopicResponse,
   DeleteMQTTUserResponse,
   ImportSourceClusterTopicsResponse,
   DescribeTopicListRequest,
@@ -118,6 +133,7 @@ import {
   DescribeMQTTInsPublicEndpointsRequest,
   DeleteRoleResponse,
   DescribeTopicListByGroupRequest,
+  DescribeMigratingTopicListRequest,
   Filter,
   ModifyMQTTTopicResponse,
   DescribeMQTTTopicListRequest,
@@ -133,12 +149,15 @@ import {
   ModifyMQTTInsPublicEndpointResponse,
   ResendDeadLetterMessageRequest,
   CreateMQTTUserRequest,
+  RollbackMigratingTopicStageResponse,
   DescribeFusionInstanceListRequest,
   DescribeMQTTMessageRequest,
+  CustomMapEntry,
   CreateRoleResponse,
   DescribeMQTTTopicListResponse,
+  MQTTUserItem,
   ModifyInstanceEndpointRequest,
-  SourceClusterGroupConfig,
+  ChangeMigratingTopicToNextStageRequest,
   DescribeMQTTUserListRequest,
   ModifyMQTTInstanceResponse,
   CreateMQTTInstanceRequest,
@@ -164,6 +183,7 @@ import {
   ModifyInstanceEndpointResponse,
   DescribeInstanceRequest,
   DescribeProductSKUsResponse,
+  RemoveMigratingTopicResponse,
   DescribeMQTTMessageListRequest,
   ResetConsumerGroupOffsetRequest,
 } from "./trocket_models"
@@ -196,6 +216,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMQTTInstanceCertBindingResponse) => void
   ): Promise<ModifyMQTTInstanceCertBindingResponse> {
     return this.request("ModifyMQTTInstanceCertBinding", req, cb)
+  }
+
+  /**
+   * 修改 RocketMQ 5.x 集群接入点。
+   */
+  async ModifyInstanceEndpoint(
+    req: ModifyInstanceEndpointRequest,
+    cb?: (error: string, rep: ModifyInstanceEndpointResponse) => void
+  ): Promise<ModifyInstanceEndpointResponse> {
+    return this.request("ModifyInstanceEndpoint", req, cb)
+  }
+
+  /**
+     * 查询Topic迁移状态列表
+
+查询过滤器，支持TopicName、MigrationStatus查询
+     */
+  async DescribeMigratingTopicList(
+    req: DescribeMigratingTopicListRequest,
+    cb?: (error: string, rep: DescribeMigratingTopicListResponse) => void
+  ): Promise<DescribeMigratingTopicListResponse> {
+    return this.request("DescribeMigratingTopicList", req, cb)
   }
 
   /**
@@ -241,13 +283,13 @@ TopicName，主题名称过滤
   }
 
   /**
-   * 重新发送死信消息
+   * 从迁移列表中移除主题，仅当主题处于初始状态时有效
    */
-  async ResendDeadLetterMessage(
-    req: ResendDeadLetterMessageRequest,
-    cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void
-  ): Promise<ResendDeadLetterMessageResponse> {
-    return this.request("ResendDeadLetterMessage", req, cb)
+  async RemoveMigratingTopic(
+    req: RemoveMigratingTopicRequest,
+    cb?: (error: string, rep: RemoveMigratingTopicResponse) => void
+  ): Promise<RemoveMigratingTopicResponse> {
+    return this.request("RemoveMigratingTopic", req, cb)
   }
 
   /**
@@ -311,13 +353,28 @@ TopicName，主题名称过滤
   }
 
   /**
-   * 导入topic列表
+     * 平滑迁移过程获取源集群group列表接口
+
+查询过滤器，支持字段
+GroupName，消费组名称模糊搜索
+Imported，是否已导入
+ImportStatus，导入状态
+     */
+  async DescribeSourceClusterGroupList(
+    req: DescribeSourceClusterGroupListRequest,
+    cb?: (error: string, rep: DescribeSourceClusterGroupListResponse) => void
+  ): Promise<DescribeSourceClusterGroupListResponse> {
+    return this.request("DescribeSourceClusterGroupList", req, cb)
+  }
+
+  /**
+   * 检查迁移中的主题是否处于正常状态，只有处于正常状态的主题，才可以进入下一个迁移阶段
    */
-  async ImportSourceClusterTopics(
-    req: ImportSourceClusterTopicsRequest,
-    cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
-  ): Promise<ImportSourceClusterTopicsResponse> {
-    return this.request("ImportSourceClusterTopics", req, cb)
+  async DoHealthCheckOnMigratingTopic(
+    req: DoHealthCheckOnMigratingTopicRequest,
+    cb?: (error: string, rep: DoHealthCheckOnMigratingTopicResponse) => void
+  ): Promise<DoHealthCheckOnMigratingTopicResponse> {
+    return this.request("DoHealthCheckOnMigratingTopic", req, cb)
   }
 
   /**
@@ -423,6 +480,16 @@ TopicName，主题名称过滤
     cb?: (error: string, rep: DescribeConsumerClientResponse) => void
   ): Promise<DescribeConsumerClientResponse> {
     return this.request("DescribeConsumerClient", req, cb)
+  }
+
+  /**
+   * 查看迁移消费组的实时信息
+   */
+  async DescribeMigratingGroupStats(
+    req: DescribeMigratingGroupStatsRequest,
+    cb?: (error: string, rep: DescribeMigratingGroupStatsResponse) => void
+  ): Promise<DescribeMigratingGroupStatsResponse> {
+    return this.request("DescribeMigratingGroupStats", req, cb)
   }
 
   /**
@@ -589,13 +656,13 @@ TopicName，主题名称过滤
   }
 
   /**
-   * 修改 RocketMQ 5.x 集群接入点。
+   * 导入topic列表
    */
-  async ModifyInstanceEndpoint(
-    req: ModifyInstanceEndpointRequest,
-    cb?: (error: string, rep: ModifyInstanceEndpointResponse) => void
-  ): Promise<ModifyInstanceEndpointResponse> {
-    return this.request("ModifyInstanceEndpoint", req, cb)
+  async ImportSourceClusterTopics(
+    req: ImportSourceClusterTopicsRequest,
+    cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
+  ): Promise<ImportSourceClusterTopicsResponse> {
+    return this.request("ImportSourceClusterTopics", req, cb)
   }
 
   /**
@@ -609,6 +676,16 @@ TopicName，主题名称过滤
     cb?: (error: string, rep: DescribeTopicListResponse) => void
   ): Promise<DescribeTopicListResponse> {
     return this.request("DescribeTopicList", req, cb)
+  }
+
+  /**
+   * 重新发送死信消息
+   */
+  async ResendDeadLetterMessage(
+    req: ResendDeadLetterMessageRequest,
+    cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void
+  ): Promise<ResendDeadLetterMessageResponse> {
+    return this.request("ResendDeadLetterMessage", req, cb)
   }
 
   /**
@@ -764,6 +841,26 @@ ConsumerGroup，消费组名称过滤
   }
 
   /**
+   * 修改迁移中的Topic状态进入下一步
+   */
+  async ChangeMigratingTopicToNextStage(
+    req: ChangeMigratingTopicToNextStageRequest,
+    cb?: (error: string, rep: ChangeMigratingTopicToNextStageResponse) => void
+  ): Promise<ChangeMigratingTopicToNextStageResponse> {
+    return this.request("ChangeMigratingTopicToNextStage", req, cb)
+  }
+
+  /**
+   * 用于查询迁移主题的实时数据
+   */
+  async DescribeMigratingTopicStats(
+    req: DescribeMigratingTopicStatsRequest,
+    cb?: (error: string, rep: DescribeMigratingTopicStatsResponse) => void
+  ): Promise<DescribeMigratingTopicStatsResponse> {
+    return this.request("DescribeMigratingTopicStats", req, cb)
+  }
+
+  /**
    * 删除主题
    */
   async DeleteTopic(
@@ -771,6 +868,26 @@ ConsumerGroup，消费组名称过滤
     cb?: (error: string, rep: DeleteTopicResponse) => void
   ): Promise<DeleteTopicResponse> {
     return this.request("DeleteTopic", req, cb)
+  }
+
+  /**
+   * 删除平滑迁移任务，只有被取消的任务才可删除
+   */
+  async DeleteSmoothMigrationTask(
+    req: DeleteSmoothMigrationTaskRequest,
+    cb?: (error: string, rep: DeleteSmoothMigrationTaskResponse) => void
+  ): Promise<DeleteSmoothMigrationTaskResponse> {
+    return this.request("DeleteSmoothMigrationTask", req, cb)
+  }
+
+  /**
+   * 回滚正在迁移的主题至前一个阶段
+   */
+  async RollbackMigratingTopicStage(
+    req: RollbackMigratingTopicStageRequest,
+    cb?: (error: string, rep: RollbackMigratingTopicStageResponse) => void
+  ): Promise<RollbackMigratingTopicStageResponse> {
+    return this.request("RollbackMigratingTopicStage", req, cb)
   }
 
   /**

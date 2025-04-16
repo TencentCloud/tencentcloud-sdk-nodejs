@@ -1628,6 +1628,7 @@ export interface FirewallTemplateApplyRecordDetail {
 
 - SUCCESS：成功
 - FAILED：失败
+- RUNNING：运行中
    */
   ApplyState?: string
   /**
@@ -1735,6 +1736,7 @@ export interface DescribeBlueprintsRequest {
 <li>blueprint-state</li>按照【镜像状态】进行过滤。
 类型：String
 必选：否
+镜像状态，可通过[数据结构Blueprint](https://cloud.tencent.com/document/api/1207/47576#Blueprint)中的BlueprintState来获取。
 <li>scene-id</li>按照【使用场景Id】进行过滤。
 类型：String
 必选：否
@@ -1902,7 +1904,7 @@ export interface DescribeKeyPairsResponse {
  */
 export interface FirewallTemplate {
   /**
-   * 模板Id。
+   * 模板ID。
    */
   TemplateId?: string
   /**
@@ -1910,11 +1912,11 @@ export interface FirewallTemplate {
    */
   TemplateName?: string
   /**
-   * 模板类型。
+   * 模板类型。取值: "PRIVATE"(个人模版)
    */
   TemplateType?: string
   /**
-   * 模板状态。
+   * 模板状态。取值: "NORMAL"(正常)
    */
   TemplateState?: string
   /**
@@ -3060,7 +3062,7 @@ export interface Blueprint {
    */
   PlatformType?: string
   /**
-   * 镜像类型，如 APP_OS、PURE_OS、PRIVATE。
+   * 镜像类型，如 APP_OS（应用镜像）, PURE_OS（系统镜像）, DOCKER（容器）, PRIVATE（私有镜像）, SHARED（共享镜像）, GAME_PORTAL（游戏专区镜像）。
    */
   BlueprintType?: string
   /**
@@ -3072,7 +3074,7 @@ export interface Blueprint {
    */
   RequiredSystemDiskSize?: number
   /**
-   * 镜像状态。
+   * 镜像状态，镜镜像状态，NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（已隔离）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。
    */
   BlueprintState?: string
   /**

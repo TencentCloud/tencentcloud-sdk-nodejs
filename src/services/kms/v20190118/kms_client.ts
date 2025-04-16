@@ -72,6 +72,7 @@ import {
   DeleteWhiteBoxKeyRequest,
   AlgorithmInfo,
   GetRegionsResponse,
+  ExclusiveHSM,
   GenerateDataKeyResponse,
   CreateWhiteBoxKeyRequest,
   OverwriteWhiteBoxDeviceFingerprintsResponse,

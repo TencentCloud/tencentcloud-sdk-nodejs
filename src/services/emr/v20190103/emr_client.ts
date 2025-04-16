@@ -34,7 +34,7 @@ import {
   DescribeHDFSStorageInfoResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
-  DescribeHiveQueriesRequest,
+  PodVolume,
   ModifyPodNumResponse,
   CreateInstanceResponse,
   PersistentVolumeContext,
@@ -108,7 +108,7 @@ import {
   HostPathVolumeSource,
   VPCSettings,
   DiffHeader,
-  DescribeInstancesListResponse,
+  DescribeHiveQueriesRequest,
   DescribeInstanceRenewNodesRequest,
   DescribeSparkQueriesResponse,
   JobResult,
@@ -120,7 +120,7 @@ import {
   ModifyGlobalConfigRequest,
   StopParams,
   DependService,
-  PodSpec,
+  DescribeInspectionTaskResultRequest,
   InquiryPriceRenewInstanceResponse,
   DescribeJobFlowRequest,
   CloudResource,
@@ -177,7 +177,6 @@ import {
   ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
   SetNodeResourceConfigDefaultResponse,
-  PodVolume,
   PriceDetail,
   DescribeResourceScheduleResponse,
   UserManagerFilter,
@@ -203,6 +202,7 @@ import {
   StageInfoDetail,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
+  ModifyYarnQueueV2Request,
   DescribeCvmQuotaResponse,
   DAGInfo,
   CreateClusterRequest,
@@ -213,7 +213,7 @@ import {
   NodeResource,
   DescribeClusterNodesRequest,
   ModifyInstanceBasicResponse,
-  ModifyYarnQueueV2Request,
+  DescribeInspectionTaskResultResponse,
   DescribeCvmQuotaRequest,
   DescribeImpalaQueriesRequest,
   ComponentBasicRestartInfo,
@@ -249,6 +249,7 @@ import {
   NodeSpecDiskV2,
   CLBSetting,
   DeployYarnConfResponse,
+  DescribeInstancesListResponse,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
   ShortNodeInfo,
@@ -307,6 +308,7 @@ import {
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   Item,
+  PodSpec,
   ModifySLInstanceBasicResponse,
   DescribeStarRocksQueryInfoResponse,
   ModifyYarnQueueV2Response,
@@ -1111,6 +1113,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInspectionSettingsResponse) => void
   ): Promise<ModifyInspectionSettingsResponse> {
     return this.request("ModifyInspectionSettings", req, cb)
+  }
+
+  /**
+   * 获取巡检任务结果列表
+   */
+  async DescribeInspectionTaskResult(
+    req: DescribeInspectionTaskResultRequest,
+    cb?: (error: string, rep: DescribeInspectionTaskResultResponse) => void
+  ): Promise<DescribeInspectionTaskResultResponse> {
+    return this.request("DescribeInspectionTaskResult", req, cb)
   }
 
   /**

@@ -40,6 +40,7 @@ export interface CreateRoomRequest {
 1 标清
 2 高清
 3 全高清
+注意：连麦人数（MaxMicNumber）>6时，仅可使用标清
    */
   Resolution: number
   /**
@@ -159,6 +160,10 @@ export interface CreateRoomRequest {
    * 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式
    */
   WhiteBoardSnapshotMode?: number
+  /**
+   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   */
+  SubtitlesTranscription?: number
 }
 
 /**
@@ -3511,6 +3516,11 @@ export interface SendRoomNormalMessageRequest {
    * 昵称，当FromAccount没有在房间中，需要填写NickName，当FromAccount在房间中，填写NickName无意义
    */
   NickName?: string
+  /**
+   * 消息的优先级，默认优先级 Normal。
+可以指定3种优先级，从高到低依次为 High、Normal 和 Low，区分大小写。
+   */
+  Priority?: string
 }
 
 /**

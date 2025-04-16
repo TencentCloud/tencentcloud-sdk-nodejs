@@ -618,6 +618,16 @@ it("bh.v20230418.DescribeUserGroupMembers", async function () {
     }
 })
 
+it("bh.v20230418.SearchSubtaskResultById", async function () {
+    try {
+       const data = await client.SearchSubtaskResultById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DescribeDeviceGroupMembers", async function () {
     try {
        const data = await client.DescribeDeviceGroupMembers({})

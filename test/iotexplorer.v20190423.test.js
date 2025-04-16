@@ -158,6 +158,16 @@ it("iotexplorer.v20190423.GenerateSignedVideoURL", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateTWeSeeRecognitionTask", async function () {
+    try {
+       const data = await client.CreateTWeSeeRecognitionTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeDeviceBindGateway", async function () {
     try {
        const data = await client.DescribeDeviceBindGateway({})
@@ -1331,6 +1341,16 @@ it("iotexplorer.v20190423.DescribeDeviceDataHistory", async function () {
 it("iotexplorer.v20190423.ModifyPositionFence", async function () {
     try {
        const data = await client.ModifyPositionFence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.InvokeTWeSeeRecognitionTask", async function () {
+    try {
+       const data = await client.InvokeTWeSeeRecognitionTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

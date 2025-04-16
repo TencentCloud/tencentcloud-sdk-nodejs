@@ -2555,6 +2555,20 @@ export interface PackageConsumeTask {
 }
 
 /**
+ * CreateTWeSeeRecognitionTask返回参数结构体
+ */
+export interface CreateTWeSeeRecognitionTaskResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UnbindProducts请求参数结构体
  */
 export interface UnbindProductsRequest {
@@ -2645,6 +2659,34 @@ export interface DescribeStudioProductResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TWeSee 语义理解结果
+ */
+export interface VisionRecognitionResult {
+  /**
+   * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空）
+   */
+  Status?: number
+  /**
+   * 识别到的目标类型。可能取值：
+
+- `person`：人
+- `vehicle`：车辆
+- `dog`：狗
+- `cat`：猫
+- `fire`：火焰
+- `smoke`：烟雾
+- `package`：快递包裹
+- `license_plate`：车牌
+
+   */
+  DetectedClassifications?: Array<string>
+  /**
+   * 视频摘要文本
+   */
+  Summary?: string
 }
 
 /**
@@ -3944,6 +3986,62 @@ export interface ResetCloudStorageAIServiceResponse {
 }
 
 /**
+ * CreateTWeSeeRecognitionTask请求参数结构体
+ */
+export interface CreateTWeSeeRecognitionTaskRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 输入视频 / 图片的 URL
+   */
+  InputURL: string
+  /**
+   * 自定义事件 ID
+   */
+  CustomId?: string
+  /**
+   * 是否保存该事件使其可被搜索
+   */
+  EnableSearch?: boolean
+  /**
+   * 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间）
+   */
+  StartTimeMs?: number
+  /**
+   * 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间）
+   */
+  EndTimeMs?: number
+  /**
+   * 算法配置
+   */
+  Config?: string
+  /**
+   * 是否自定义设备，为 true 时不检查设备存在性，默认为 false
+   */
+  IsCustomDevice?: boolean
+  /**
+   * 输入类型。可选值：
+
+- `video`：视频（默认值）
+- `image`：图片
+   */
+  InputType?: string
+  /**
+   * 摘要服务质量。可选值：
+
+- `minutely`：分钟级（默认值）
+- `immediate`：立即
+   */
+  SummaryQOS?: string
+}
+
+/**
  * InvokeCloudStorageAIServiceTask返回参数结构体
  */
 export interface InvokeCloudStorageAIServiceTaskResponse {
@@ -4171,6 +4269,62 @@ export interface GetTWeCallActiveStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InvokeTWeSeeRecognitionTask请求参数结构体
+ */
+export interface InvokeTWeSeeRecognitionTaskRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 输入视频 / 图片的 URL
+   */
+  InputURL: string
+  /**
+   * 自定义事件 ID
+   */
+  CustomId?: string
+  /**
+   * 是否保存该事件使其可被搜索
+   */
+  EnableSearch?: boolean
+  /**
+   * 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间）
+   */
+  StartTimeMs?: number
+  /**
+   * 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间）
+   */
+  EndTimeMs?: number
+  /**
+   * 算法配置
+   */
+  Config?: string
+  /**
+   * 是否自定义设备，为 true 时不检查设备存在性，默认为 false
+   */
+  IsCustomDevice?: boolean
+  /**
+   * 输入类型。可选值：
+
+- `video`：视频（默认值）
+- `image`：图片
+   */
+  InputType?: string
+  /**
+   * 摘要服务质量。可选值：
+
+- `minutely`：分钟级（默认值）
+- `immediate`：立即
+   */
+  SummaryQOS?: string
 }
 
 /**
@@ -4417,6 +4571,28 @@ export interface LoRaFrequencyEntry {
    * 创建时间
    */
   CreateTime?: number
+}
+
+/**
+ * InvokeTWeSeeRecognitionTask返回参数结构体
+ */
+export interface InvokeTWeSeeRecognitionTaskResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 任务是否执行完成
+   */
+  Completed?: boolean
+  /**
+   * 语义理解任务结果（仅当 Completed 为 true 时包含该出参）
+   */
+  Result?: VisionRecognitionResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

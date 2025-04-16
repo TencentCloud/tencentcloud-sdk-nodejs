@@ -862,6 +862,20 @@ export interface GetRegionsResponse {
 }
 
 /**
+ * 独享版集群
+ */
+export interface ExclusiveHSM {
+  /**
+   * 独享集群Id
+   */
+  HsmClusterId?: string
+  /**
+   * 独享集群名称
+   */
+  HsmClusterName?: string
+}
+
+/**
  * GenerateDataKey返回参数结构体
  */
 export interface GenerateDataKeyResponse {
@@ -1122,6 +1136,10 @@ export interface GetServiceStatusResponse {
    * 返回KMS用户密钥规格数量
    */
   CmkLimit?: number
+  /**
+   * 返回独享集群组
+   */
+  ExclusiveHSMList?: Array<ExclusiveHSM>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

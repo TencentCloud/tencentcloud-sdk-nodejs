@@ -38,6 +38,26 @@ it("trocket.v20230308.ModifyMQTTInstanceCertBinding", async function () {
     }
 })
 
+it("trocket.v20230308.ModifyInstanceEndpoint", async function () {
+    try {
+       const data = await client.ModifyInstanceEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeMigratingTopicList", async function () {
+    try {
+       const data = await client.DescribeMigratingTopicList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeMessageTrace", async function () {
     try {
        const data = await client.DescribeMessageTrace({})
@@ -78,9 +98,9 @@ it("trocket.v20230308.ModifyMQTTTopic", async function () {
     }
 })
 
-it("trocket.v20230308.ResendDeadLetterMessage", async function () {
+it("trocket.v20230308.RemoveMigratingTopic", async function () {
     try {
-       const data = await client.ResendDeadLetterMessage({})
+       const data = await client.RemoveMigratingTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,19 @@ it("trocket.v20230308.DescribeMQTTProductSKUList", async function () {
     }
 })
 
-it("trocket.v20230308.ImportSourceClusterTopics", async function () {
+it("trocket.v20230308.DescribeSourceClusterGroupList", async function () {
     try {
-       const data = await client.ImportSourceClusterTopics({})
+       const data = await client.DescribeSourceClusterGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DoHealthCheckOnMigratingTopic", async function () {
+    try {
+       const data = await client.DoHealthCheckOnMigratingTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +281,16 @@ it("trocket.v20230308.DescribeMQTTInsVPCEndpoints", async function () {
 it("trocket.v20230308.DescribeConsumerClient", async function () {
     try {
        const data = await client.DescribeConsumerClient({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeMigratingGroupStats", async function () {
+    try {
+       const data = await client.DescribeMigratingGroupStats({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +458,9 @@ it("trocket.v20230308.DescribeInstance", async function () {
     }
 })
 
-it("trocket.v20230308.ModifyInstanceEndpoint", async function () {
+it("trocket.v20230308.ImportSourceClusterTopics", async function () {
     try {
-       const data = await client.ModifyInstanceEndpoint({})
+       const data = await client.ImportSourceClusterTopics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +471,16 @@ it("trocket.v20230308.ModifyInstanceEndpoint", async function () {
 it("trocket.v20230308.DescribeTopicList", async function () {
     try {
        const data = await client.DescribeTopicList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.ResendDeadLetterMessage", async function () {
+    try {
+       const data = await client.ResendDeadLetterMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +618,49 @@ it("trocket.v20230308.ModifyInstance", async function () {
     }
 })
 
+it("trocket.v20230308.ChangeMigratingTopicToNextStage", async function () {
+    try {
+       const data = await client.ChangeMigratingTopicToNextStage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeMigratingTopicStats", async function () {
+    try {
+       const data = await client.DescribeMigratingTopicStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DeleteTopic", async function () {
     try {
        const data = await client.DeleteTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DeleteSmoothMigrationTask", async function () {
+    try {
+       const data = await client.DeleteSmoothMigrationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.RollbackMigratingTopicStage", async function () {
+    try {
+       const data = await client.RollbackMigratingTopicStage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

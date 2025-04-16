@@ -32,23 +32,23 @@ export interface RegionDetail {
   /**
    * 区域ID
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 区域英文名或中文名
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 机房所属大区
    */
-  RegionArea: string
+  RegionArea?: string
   /**
    * 机房所属大区名
    */
-  RegionAreaName: string
+  RegionAreaName?: string
   /**
    * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
    */
-  IDCType: string
+  IDCType?: string
   /**
    * 特性位图，每个bit位代表一种特性，其中：
 0，表示不支持该特性；
@@ -61,14 +61,13 @@ export interface RegionDetail {
 第5个bit，支持精品BGP接入；
 第6个bit，支持三网接入；
 第7个bit，支持接入段Qos加速。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FeatureBitmap: number
+  FeatureBitmap?: number
   /**
    * 接入区域支持的能力
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportFeature: SupportFeature
+  SupportFeature?: SupportFeature
 }
 
 /**
@@ -383,27 +382,22 @@ export interface DomainErrorPageInfo {
   ErrorNos?: Array<number | bigint>
   /**
    * 新的错误码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NewErrorNo?: number
   /**
    * 需要清理的响应头
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClearHeaders?: Array<string>
   /**
    * 需要设置的响应头
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetHeaders?: Array<HttpHeaderParam>
   /**
    * 设置的响应体(不包括 HTTP头)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Body?: string
   /**
    * 规则状态,0为成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
 }
@@ -456,32 +450,26 @@ export interface DescribeCertificateDetailRequest {
 export interface ProxyAccessInfo {
   /**
    * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: string
   /**
    * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionName?: string
   /**
    * 通道ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyId?: string
   /**
    * 通道接入ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
    * 三网通道VIP列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VipList?: Array<IPDetail>
   /**
    * 接入点IDC类型。ec或dc
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceRegionIdcType?: string
 }
@@ -1132,7 +1120,6 @@ export interface CertificateDetail {
   CertificateType?: number
   /**
    * 证书名字。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertificateAlias?: string
   /**
@@ -1141,32 +1128,26 @@ export interface CertificateDetail {
   CertificateContent?: string
   /**
    * 密钥内容。仅当证书类型为SSL证书时，返回该字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertificateKey?: string
   /**
    * 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginTime?: number
   /**
    * 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 证书签发者通用名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IssuerCN?: string
   /**
    * 证书主题通用名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubjectCN?: string
 }
@@ -1515,18 +1496,15 @@ export interface RuleInfo {
   BindStatus?: number
   /**
    * 通道转发到源站的请求所携带的host，其中default表示直接转发接收到的host。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ForwardHost?: string
   /**
    * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerNameIndicationSwitch?: string
   /**
    * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerNameIndication?: string
@@ -1725,7 +1703,6 @@ export interface BindRealServerInfo {
   ProjectId?: number
   /**
    * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<TagPair>
 }
@@ -2163,7 +2140,6 @@ export interface TCPListener {
   BindStatus?: number
   /**
    * 监听器绑定的源站信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerSet?: Array<BindRealServer>
   /**
@@ -2172,32 +2148,26 @@ export interface TCPListener {
   CreateTime?: number
   /**
    * 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIPMethod?: number
   /**
    * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthyThreshold?: number
   /**
    * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnhealthyThreshold?: number
   /**
    * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailoverSwitch?: number
   /**
    * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionPersist?: number
   /**
    * 监听器的通道ID，如果监听器属于通道组，则为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyId?: string
   /**
@@ -2379,7 +2349,6 @@ export interface Domain {
   ProjectId?: number
   /**
    * 默认入口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultValue?: string
   /**
@@ -2397,12 +2366,10 @@ export interface Domain {
   UpdateTime?: number
   /**
    * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<TagPair>
   /**
    * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BanStatus?: string
 }
@@ -2782,7 +2749,6 @@ export interface ProxyGroupInfo {
   Domain?: string
   /**
    * 通道组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
@@ -2810,24 +2776,20 @@ CHANGING表示部分部署中。
   TagSet?: Array<TagPair>
   /**
    * 通道组版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 通道组是否包含微软通道
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyType?: number
   /**
    * 支持Http3特性的标识，其中：
 0表示关闭；
 1表示启用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Http3Supported?: number
   /**
@@ -2842,7 +2804,6 @@ CHANGING表示部分部署中。
 第5个bit，支持精品BGP接入；
 第6个bit，支持三网接入；
 第7个bit，支持接入段Qos加速。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureBitmap?: number
@@ -2898,7 +2859,6 @@ export interface Certificate {
   CertificateType?: number
   /**
    * 证书名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertificateAlias?: string
   /**
@@ -2907,22 +2867,18 @@ export interface Certificate {
   CreateTime?: number
   /**
    * 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginTime?: number
   /**
    * 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 证书签发者通用名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IssuerCN?: string
   /**
    * 证书主题通用名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubjectCN?: string
 }
@@ -3413,39 +3369,32 @@ export interface ProxyGroupDetail {
   GroupId?: string
   /**
    * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<TagPair>
   /**
    * 安全策略ID，当设置了安全策略时，存在该字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyId?: string
   /**
    * 通道组版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIPMethod?: Array<number | bigint>
   /**
    * IP版本，可取值：IPv4、IPv6，默认值IPv4
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPAddressVersion?: string
   /**
    * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示银牌加速通道组，CrossBorder表示跨境通道组。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageType?: string
   /**
    * 支持Http3特性的标识，其中：
 0表示关闭；
 1表示启用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Http3Supported?: number
   /**
@@ -3461,14 +3410,12 @@ export interface ProxyGroupDetail {
 第6个bit，支持三网接入；
 第7个bit，支持接入段Qos加速。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureBitmap?: number
   /**
    * 是否支持设置TLS设置
 0表示不支持；
 1表示支持。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportTLSChoice?: number
 }
@@ -4143,17 +4090,14 @@ export interface RuleCheckParams {
   Domain?: string
   /**
    * 源站服务失败统计频率
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedCountInter?: number
   /**
    * 源站健康性检查阀值，超过该阀值会屏蔽服务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedThreshold?: number
   /**
    * 源站健康性检测超出阀值后，屏蔽的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockInter?: number
 }
@@ -4193,31 +4137,31 @@ export interface AccessRegionDetial {
   /**
    * 区域ID
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 区域的中文或英文名称
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 可选的并发量取值数组
    */
-  ConcurrentList: Array<number | bigint>
+  ConcurrentList?: Array<number | bigint>
   /**
    * 可选的带宽取值数组
    */
-  BandwidthList: Array<number | bigint>
+  BandwidthList?: Array<number | bigint>
   /**
    * 机房所属大区
    */
-  RegionArea: string
+  RegionArea?: string
   /**
    * 机房所属大区名
    */
-  RegionAreaName: string
+  RegionAreaName?: string
   /**
    * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
    */
-  IDCType: string
+  IDCType?: string
   /**
    * 特性位图，每个bit位代表一种特性，其中：
 0，表示不支持该特性；
@@ -4230,9 +4174,8 @@ export interface AccessRegionDetial {
 第5个bit，支持精品BGP接入；
 第6个bit，支持三网接入；
 第7个bit，支持接入段Qos加速。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FeatureBitmap: number
+  FeatureBitmap?: number
 }
 
 /**
@@ -4286,7 +4229,6 @@ export interface SecurityPolicyRuleOut {
   AliasName?: string
   /**
    * 目标端口范围
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestPortRange?: string
   /**
@@ -4295,12 +4237,10 @@ export interface SecurityPolicyRuleOut {
   RuleId?: string
   /**
    * 要匹配的协议类型（TCP/UDP）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
    * 安全策略ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyId?: string
 }
@@ -4346,12 +4286,10 @@ export interface BindRealServer {
 0表示正常；
 1表示异常。
 未开启健康检查状态时，该状态始终为正常。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerStatus?: number
   /**
    * 源站的端口号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerPort?: number
   /**
@@ -4653,32 +4591,31 @@ export interface CountryAreaMap {
   /**
    * 国家名称。
    */
-  NationCountryName: string
+  NationCountryName?: string
   /**
    * 国家编码。
    */
-  NationCountryInnerCode: string
+  NationCountryInnerCode?: string
   /**
    * 地区名称。
    */
-  GeographicalZoneName: string
+  GeographicalZoneName?: string
   /**
    * 地区编码。
    */
-  GeographicalZoneInnerCode: string
+  GeographicalZoneInnerCode?: string
   /**
    * 大洲名称。
    */
-  ContinentName: string
+  ContinentName?: string
   /**
    * 大洲编码。
    */
-  ContinentInnerCode: string
+  ContinentInnerCode?: string
   /**
    * 标注信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
 }
 
 /**
@@ -5681,7 +5618,6 @@ export interface DeleteGlobalDomainRequest {
 export interface ProxyInfo {
   /**
    * （旧参数，请使用ProxyId）通道实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
@@ -5742,7 +5678,6 @@ MOVING表示迁移中。
   Version?: string
   /**
    * （新参数）通道实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyId?: string
   /**
@@ -5765,12 +5700,10 @@ MOVING表示迁移中。
   PolicyId?: string
   /**
    * 接入地域详细信息，包括地域ID和地域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessRegionInfo?: RegionDetail
   /**
    * 源站地域详细信息，包括地域ID和地域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealServerRegionInfo?: RegionDetail
   /**
@@ -5779,22 +5712,18 @@ MOVING表示迁移中。
   ForwardIP?: string
   /**
    * 标签列表，不存在标签时，该字段为空列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<TagPair>
   /**
    * 是否支持安全组配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportSecurity?: number
   /**
    * 计费类型: 0表示按带宽计费  1表示按流量计费。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingType?: number
   /**
    * 关联了解析的域名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RelatedGlobalDomains?: Array<string>
   /**
@@ -5804,50 +5733,41 @@ MOVING表示迁移中。
   ModifyConfigTime?: number
   /**
    * 通道类型，100表示THUNDER通道，103表示微软合作通道
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyType?: number
   /**
    * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIPMethod?: Array<number | bigint>
   /**
    * IP版本：IPv4、IPv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPAddressVersion?: string
   /**
    * 网络类型：normal表示常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全EIP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkType?: string
   /**
    * 通道套餐类型：Thunder表示标准通道，Accelerator表示银牌加速通道，
 CrossBorder表示跨境通道。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageType?: string
   /**
    * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BanStatus?: string
   /**
    * IP列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPList?: Array<IPDetail>
   /**
    * 支持Http3协议的标识，其中：
 0表示关闭；
 1表示启用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Http3Supported?: number
   /**
    * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InBanBlacklist?: number
   /**
@@ -5863,19 +5783,16 @@ CrossBorder表示跨境通道。
 第6个bit，支持三网接入；
 第7个bit，支持接入段Qos加速。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureBitmap?: number
   /**
    * 是否是开启了auto scale的通道，0表示否，1表示是。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAutoScaleProxy?: number
   /**
    * 是否允许设置TLS配置
 0表示不支持；
 1表示支持。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportTLSChoice?: number
 }

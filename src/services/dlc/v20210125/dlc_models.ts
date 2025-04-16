@@ -49,22 +49,18 @@ export interface DescribeResultDownloadResponse {
   Status?: string
   /**
    * 任务异常原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
    * 临时SecretId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretId?: string
   /**
    * 临时SecretKey
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretKey?: string
   /**
    * 临时Token
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Token?: string
   /**
@@ -233,7 +229,6 @@ export interface PythonSparkImage {
   SparkImageVersion?: string
   /**
    * spark镜像描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
@@ -296,27 +291,22 @@ export interface DescribeNotebookSessionsRequest {
 export interface SmartOptimizerLifecyclePolicy {
   /**
    * 生命周期启用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LifecycleEnable?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expiration?: number
   /**
    * 是否删表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DropTable?: boolean
   /**
    * 过期字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredField?: string
   /**
    * 过期字段格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredFieldFormat?: string
 }
@@ -327,22 +317,18 @@ export interface SmartOptimizerLifecyclePolicy {
 export interface DescribeDMSDatabaseResponse {
   /**
    * 数据库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * schema名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
    * 存储地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
   /**
    * 数据对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Asset?: Asset
   /**
@@ -359,12 +345,11 @@ export interface Policys {
    * 策略集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicySet: Array<Policy>
+  PolicySet?: Array<Policy>
   /**
    * 策略总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -400,12 +385,10 @@ export interface NotebookSessionStatementBatchInformation {
   NotebookSessionStatementBatch?: Array<NotebookSessionStatementInfo>
   /**
    * 当前批任务是否运行完成
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAvailable?: boolean
   /**
    * Session唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionId?: string
   /**
@@ -444,22 +427,18 @@ export interface DescribeDataEngineEventsResponse {
   Events?: Array<HouseEventsInfo>
   /**
    * 分页号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Page?: number
   /**
    * 分页大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: number
   /**
    * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPages?: number
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -474,24 +453,24 @@ export interface DescribeDataEngineEventsResponse {
 export interface SessionResourceTemplate {
   /**
    * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DriverSize?: string
   /**
    * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorSize?: string
   /**
    * 指定executor数量，最小值为1，最大值小于集群规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorNums?: number
   /**
    * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorMaxNumbers?: number
+  /**
+   * 运行时参数
+   */
+  RunningTimeParameters?: Array<DataEngineConfigPair>
 }
 
 /**
@@ -558,27 +537,22 @@ export interface DescribeDMSPartitionsRequest {
 export interface DescribeDMSTableResponse {
   /**
    * 基础对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Asset?: Asset
   /**
    * 视图文本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ViewOriginalText?: string
   /**
    * 视图文本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ViewExpandedText?: string
   /**
    * hive维护版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Retention?: number
   /**
    * 存储对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sds?: DMSSds
   /**
@@ -593,47 +567,38 @@ export interface DescribeDMSTableResponse {
   Partitions?: Array<DMSPartition>
   /**
    * 表类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 数据库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbName?: string
   /**
    * Schame名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
    * 存储大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageSize?: number
   /**
    * 记录数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordCount?: number
   /**
    * 生命周期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LifeTime?: number
   /**
    * 最后访问时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastAccessTime?: string
   /**
    * 数据更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataUpdateTime?: string
   /**
    * 结构更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StructUpdateTime?: string
   /**
@@ -643,7 +608,6 @@ export interface DescribeDMSTableResponse {
   Columns?: Array<DMSColumn>
   /**
    * 表名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
@@ -695,7 +659,6 @@ export interface DescribeDMSTablesResponse {
   TableList?: Array<DMSTableInfo>
   /**
    * 统计值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -711,20 +674,24 @@ export interface DescribeAdvancedStoreLocationResponse {
   /**
    * 是否启用高级设置：0-否，1-是
    */
-  Enable: number
+  Enable?: number
   /**
    * 查询结果保存cos路径
    */
-  StoreLocation: string
+  StoreLocation?: string
   /**
    * 是否有托管存储权限
    */
-  HasLakeFs: boolean
+  HasLakeFs?: boolean
   /**
    * 托管存储状态，HasLakeFs等于true时，该值才有意义
+   */
+  LakeFsStatus?: string
+  /**
+   * 托管存储桶类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LakeFsStatus: string
+  BucketType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -770,7 +737,6 @@ export interface CancelNotebookSessionStatementBatchResponse {
 export interface SmartOptimizerChangeTablePolicy {
   /**
    * change表的数据保存时间，单位为天
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataRetentionTime?: number
 }
@@ -781,17 +747,14 @@ export interface SmartOptimizerChangeTablePolicy {
 export interface BatchSqlTask {
   /**
    * SQL子任务唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
    * 运行SQL
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteSQL?: string
   /**
    * 任务信息，成功则返回：Task Success!，失败则返回异常信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
 }
@@ -941,7 +904,6 @@ export interface UpdateDataEngineRequest {
 export interface SmartOptimizerWrittenPolicy {
   /**
    * none/enable/disable/default
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WrittenEnable?: string
 }
@@ -1038,7 +1000,6 @@ export interface DescribeUsersResponse {
 export interface SmartOptimizerPolicy {
   /**
    * 是否继承
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Inherit?: string
   /**
@@ -1517,22 +1478,18 @@ export interface DMSSds {
 export interface OpendThirdAccessUserInfo {
   /**
    * id信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 用户主UIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 用户AppId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
    * 开通时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
 }
@@ -1744,7 +1701,6 @@ export interface QueryResultResponse {
   ResultSchema?: Array<Column>
   /**
    * 分页信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextToken?: string
   /**
@@ -1769,12 +1725,10 @@ export interface RevokeDLCCatalogAccessRequest {
 export interface DataGovernPolicy {
   /**
    * 治理规则类型，Customize: 自定义；Intelligence: 智能治理
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: string
   /**
    * 治理引擎
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GovernEngine?: string
 }
@@ -2172,7 +2126,6 @@ export interface TableResponseInfo {
   Partitions?: Array<Partition>
   /**
    * 数据存储路径。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
   /**
@@ -2182,37 +2135,30 @@ export interface TableResponseInfo {
   Properties?: Array<Property>
   /**
    * 数据表更新时间, 单位: ms。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifiedTime?: string
   /**
    * 数据表创建时间,单位: ms。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 数据格式。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputFormat?: string
   /**
    * 数据表存储大小（单位：Byte）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageSize?: number
   /**
    * 数据表行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordCount?: number
   /**
    * xxxx
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MapMaterializedViewName?: string
   /**
    * 访问热点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeatValue?: number
   /**
@@ -2448,32 +2394,26 @@ export interface DescribeNotebookSessionStatementSqlResultResponse {
   ResultSchema?: Array<Column>
   /**
    * 分页信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextToken?: string
   /**
    * 存储结果地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputPath?: string
   /**
    * 引擎计算耗时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UseTime?: number
   /**
    * 结果条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AffectRows?: number
   /**
    * 数据扫描量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataAmount?: number
   /**
    * spark ui地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UiUrl?: string
   /**
@@ -2502,12 +2442,10 @@ export interface ModifyUserRequest {
 export interface DescribeTasksCostInfoResponse {
   /**
    * 下一页的标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchAfter?: string
   /**
    * 返回的数据，字符串类型的二维数组，首行为列中文名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -2590,32 +2528,26 @@ export interface CreateStoreLocationResponse {
 export interface BatchSQLCostInfo {
   /**
    * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchId?: string
   /**
    * 引擎名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineName?: string
   /**
    * 引擎id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineId?: string
   /**
    * 本次消耗，单位cu
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cost?: number
   /**
    * 时间开销，秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeCost?: number
   /**
    * 操作者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
 }
@@ -2686,7 +2618,6 @@ export interface WorkGroupInfo {
   WorkGroupName?: string
   /**
    * 工作组描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkGroupDescription?: string
   /**
@@ -2733,22 +2664,18 @@ export interface SwitchDataEngineRequest {
 export interface DLCCatalogAccess {
   /**
    * VPCID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId: string
   /**
    * 产品类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Product: string
   /**
    * 描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
 }
@@ -2797,7 +2724,6 @@ export interface Task {
 export interface DataEngineConfigInstanceInfo {
   /**
    * 引擎ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineId?: string
   /**
@@ -2834,22 +2760,18 @@ export interface CrontabResumeSuspendStrategy {
 export interface VpcInfo {
   /**
    * vpc Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * vpc子网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcCidrBlock?: string
   /**
    * 规则Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: number
   /**
    * 权限组Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessGroupId?: string
 }
@@ -2868,7 +2790,6 @@ export interface NotebookSessions {
   SessionId?: string
   /**
    * 代理用户，默认为root
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyUser?: string
   /**
@@ -2877,7 +2798,6 @@ export interface NotebookSessions {
   State?: string
   /**
    * Spark任务返回的AppId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkAppId?: string
   /**
@@ -2894,7 +2814,6 @@ export interface NotebookSessions {
   DataEngineName?: string
   /**
    * 最新的运行时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastRunningTime?: string
   /**
@@ -2903,27 +2822,22 @@ export interface NotebookSessions {
   Creator?: string
   /**
    * spark ui地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkUiUrl?: string
   /**
    * session类型，group：资源组session independent：独立资源session，不依赖资源组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionType?: string
   /**
    * 引擎id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineId?: string
   /**
    * 资源组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
    * 资源组名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
 }
@@ -3000,7 +2914,6 @@ export type DescribeLakeFsInfoRequest = null
 export interface CreateCHDFSBindingProductResponse {
   /**
    * 绑定信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPointAssociates?: Array<MountPointAssociates>
   /**
@@ -3073,7 +2986,6 @@ engine-name：库表的模糊搜索。
 export interface DescribeUserTypeResponse {
   /**
    * 用户类型。ADMIN：管理员 COMMON：普通用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserType?: string
   /**
@@ -3132,12 +3044,10 @@ export interface DescribeDataEngineRequest {
 export interface GroupInfo {
   /**
    * 用户组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkGroupId?: number
   /**
    * 策略类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyType?: string
 }
@@ -3452,45 +3362,45 @@ export interface UserInfo {
   /**
    * 用户Id，和子用户uin相同
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户描述信息，方便区分不同用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserDescription: string
+  UserDescription?: string
   /**
    * 单独给用户绑定的权限集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicySet: Array<Policy>
+  PolicySet?: Array<Policy>
   /**
    * 当前用户的创建者
    */
-  Creator: string
+  Creator?: string
   /**
    * 创建时间，格式如2021-07-28 16:19:32
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 关联的工作组集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkGroupSet: Array<WorkGroupMessage>
+  WorkGroupSet?: Array<WorkGroupMessage>
   /**
    * 是否是主账号
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsOwner: boolean
+  IsOwner?: boolean
   /**
    * 用户类型。ADMIN：管理员 COMMON：普通用户。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserType: string
+  UserType?: string
   /**
    * 用户别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserAlias: string
+  UserAlias?: string
+  /**
+   * 账号类型
+   */
+  AccountType?: string
 }
 
 /**
@@ -3511,12 +3421,11 @@ export interface Users {
    * 用户信息集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserSet: Array<UserMessage>
+  UserSet?: Array<UserMessage>
   /**
    * 用户总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -3603,7 +3512,6 @@ export interface TextFile {
   Format?: string
   /**
    * 处理文本用的正则表达式。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Regex?: string
 }
@@ -3616,12 +3524,11 @@ export interface WorkGroups {
    * 工作组信息集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkGroupSet: Array<WorkGroupMessage>
+  WorkGroupSet?: Array<WorkGroupMessage>
   /**
    * 工作组总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -4054,22 +3961,18 @@ export interface KafkaInfo {
 export interface FavorInfo {
   /**
    * 优先事项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Priority?: number
   /**
    * Catalog名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalog?: string
   /**
    * DataBase名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataBase?: string
   /**
    * Table名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Table?: string
 }
@@ -4162,7 +4065,6 @@ export interface Other {
 export interface CreateSparkAppResponse {
   /**
    * App唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkAppId?: string
   /**
@@ -4177,7 +4079,6 @@ export interface CreateSparkAppResponse {
 export interface CreateTaskResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
@@ -4192,27 +4093,22 @@ export interface CreateTaskResponse {
 export interface MountPointAssociates {
   /**
    * 桶Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketId?: string
   /**
    * vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcCidrBlock?: string
   /**
    * 权限组Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessGroupId?: string
   /**
    * 权限规则Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessRuleId?: number
 }
@@ -4265,7 +4161,6 @@ export interface AnalysisTaskResults {
   InstanceStartTime?: number
   /**
    * 任务结束时间，毫秒时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCompleteTime?: number
   /**
@@ -4278,54 +4173,52 @@ export interface AnalysisTaskResults {
   SQL?: string
   /**
    * 计算资源名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineName?: string
   /**
    * 单位毫秒，引擎内执行耗时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JobTimeSum?: number
   /**
-   * 单位秒，CU资源消耗
-注意：此字段可能返回 null，表示取不到有效值。
+   * 单位秒，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和
    */
   TaskTimeSum?: number
   /**
    * 数据扫描总行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputRecordsSum?: number
   /**
    * 数据扫描总 bytes
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputBytesSum?: number
   /**
    * 输出总行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputRecordsSum?: number
   /**
    * 输出总 bytes
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputBytesSum?: number
   /**
    * shuffle read 总 bytes
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShuffleReadBytesSum?: number
   /**
    * shuffle read 总行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShuffleReadRecordsSum?: number
   /**
    * 洞察结果类型分类，一个 json 数组，有如下几种类型：SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisStatus?: string
+  /**
+   * 任务输出文件总数
+   */
+  OutputFilesNum?: number
+  /**
+   * 任务输出小文件总数
+   */
+  OutputSmallFilesNum?: number
 }
 
 /**
@@ -4821,7 +4714,6 @@ export interface DescribeDataEnginesResponse {
   DataEngines?: Array<DataEngineInfo>
   /**
    * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -4910,48 +4802,39 @@ export interface UpdateRowFilterRequest {
 export interface TColumn {
   /**
    * 字段名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 字段类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
    * 字段描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 字段默认值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Default?: string
   /**
    * 字段是否是非空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NotNull?: boolean
   /**
    * 表示整个 numeric 的长度,取值1-38
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Precision?: number
   /**
    * 表示小数部分的长度
 Scale小于Precision
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scale?: number
   /**
    * 字段位置，小的在前
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Position?: number
   /**
    * 是否为分区字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPartition?: boolean
 }
@@ -5211,32 +5094,26 @@ export interface NotebookSessionInfo {
   ProgramArchives?: Array<string>
   /**
    * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DriverSize?: string
   /**
    * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorSize?: string
   /**
    * 指定的Executor数量，默认为1
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorNumbers?: number
   /**
    * 代理用户，默认为root
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyUser?: string
   /**
    * 指定的Session超时时间，单位秒，默认3600秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeoutInSecond?: number
   /**
    * Spark任务返回的AppId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkAppId?: string
   /**
@@ -5258,42 +5135,34 @@ export interface NotebookSessionInfo {
   AppInfo?: Array<KVPair>
   /**
    * Spark ui地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkUiUrl?: string
   /**
    * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorMaxNumbers?: number
   /**
    * session类型，group：资源组下session independent：独立资源session， 不依赖资源组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionType?: string
   /**
    * 引擎id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineId?: string
   /**
    * 资源组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
    * 资源组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
    * session，pod大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PodSize?: number
   /**
    * pod数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PodNumbers?: number
 }
@@ -5562,12 +5431,10 @@ export interface QueryInternalTableWarehouseResponse {
 export interface Script {
   /**
    * 脚本Id，长度36字节。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptId?: string
   /**
    * 脚本名称，长度0-25。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptName?: string
   /**
@@ -5577,7 +5444,6 @@ export interface Script {
   ScriptDesc?: string
   /**
    * 默认关联数据库。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
@@ -5587,7 +5453,6 @@ export interface Script {
   SQLStatement?: string
   /**
    * 更新时间戳， 单位：ms。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
 }
@@ -5859,22 +5724,18 @@ export interface LakeFsInfo {
   CreateTimeStamp?: number
   /**
    * 是否是用户默认桶，0：默认桶，1：非默认桶
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultBucket?: number
   /**
    * 托管存储short name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShortName?: string
   /**
    * 桶描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 托管桶状态，当前取值为：creating、bind、readOnly、isolate
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -5888,7 +5749,7 @@ export interface QueryResultRequest {
    */
   TaskId: string
   /**
-   * lastReadFile为上一次读取的文件，lastReadOffset为上一次读取到的位置
+   * objectListMarker={marker}&lastReadFile={filename}&lastReadOffsetlastReadFile为上一次读取的文件，lastReadOffset为上一次读取到的位置
    */
   NextToken?: string
 }
@@ -6272,7 +6133,6 @@ export interface DatasourceConnectionInfo {
   DataEngines?: Array<DataEngineInfo>
   /**
    * 创建人
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAlias?: string
   /**
@@ -6282,12 +6142,10 @@ export interface DatasourceConnectionInfo {
   NetworkConnectionSet?: Array<NetworkConnection>
   /**
    * 连通性状态：0（未测试，默认）、1（正常）、2（失败）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectivityState?: number
   /**
    * 连通性测试提示信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectivityTips?: string
 }
@@ -6340,17 +6198,14 @@ export interface AssignMangedTablePropertiesResponse {
 export interface SparkSessionBatchLog {
   /**
    * 日志步骤：BEG/CS/DS/DSS/DSF/FINF/RTO/CANCEL/CT/DT/DTS/DTF/FINT/EXCE
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Step?: string
   /**
    * 时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Time?: string
   /**
    * 日志提示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
@@ -6412,22 +6267,18 @@ export interface DescribeUserRolesRequest {
 export interface ResourceInfo {
   /**
    * 归属类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttributionType?: string
   /**
    * 资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: string
   /**
    * 引擎名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 如资源类型为spark-sql 取值为Name, 如为spark-batch 取值为session app_name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Instance?: string
   /**
@@ -6437,12 +6288,10 @@ export interface ResourceInfo {
   Favor?: Array<FavorInfo>
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 标准引擎资源组信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
 }
@@ -6467,7 +6316,6 @@ export interface CreateImportTaskResponse {
 export interface SmartOptimizerIndexPolicy {
   /**
    * 开启索引
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexEnable?: string
 }
@@ -6599,22 +6447,18 @@ export interface ViewResponseInfo {
 export interface NetworkConnection {
   /**
    * 网络配置id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 网络配置唯一标志符
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssociateId?: string
   /**
    * 计算引擎id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HouseId?: string
   /**
    * 数据源id(已废弃)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceConnectionId?: string
   /**
@@ -6624,7 +6468,6 @@ export interface NetworkConnection {
   State?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
@@ -6639,12 +6482,10 @@ export interface NetworkConnection {
   Appid?: number
   /**
    * 计算引擎名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HouseName?: string
   /**
    * 网络配置名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceConnectionName?: string
   /**
@@ -6731,32 +6572,26 @@ export interface ModifyWorkGroupRequest {
 export interface SmartPolicyBaseInfo {
   /**
    * 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin: string
   /**
    * Catalog/Database/Table
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType?: string
   /**
    * Catalog名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalog?: string
   /**
    * 数据库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Database?: string
   /**
    * 表名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Table?: string
   /**
    * 用户appid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
 }
@@ -6863,42 +6698,34 @@ export interface DMSPartition {
 export interface WorkGroupDetailInfo {
   /**
    * 工作组Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkGroupId?: number
   /**
    * 工作组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkGroupName?: string
   /**
    * 包含的信息类型。User：用户信息；DataAuth：数据权限；EngineAuth:引擎权限
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 工作组上绑定的用户集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserInfo?: Users
   /**
    * 数据权限集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataPolicyInfo?: Policys
   /**
    * 引擎权限集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnginePolicyInfo?: Policys
   /**
    * 工作组描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkGroupDescription?: string
   /**
    * 行过滤信息集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RowFilterInfo?: Policys
   /**
@@ -6919,12 +6746,10 @@ export type DescribeThirdPartyAccessUserRequest = null
 export interface OptimizerEngineInfo {
   /**
    * 引擎资源名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HouseName: string
   /**
    * 引擎资源ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HouseId: string
   /**
@@ -6951,40 +6776,39 @@ export interface DataEngineImageVersion {
   /**
    * 镜像大版本ID
    */
-  ImageVersionId: string
+  ImageVersionId?: string
   /**
    * 镜像大版本名称
    */
-  ImageVersion: string
+  ImageVersion?: string
   /**
    * 镜像大版本描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 是否为公共版本：1：公共；2：私有
    */
-  IsPublic: number
+  IsPublic?: number
   /**
    * 集群类型：SparkSQL/PrestoSQL/SparkBatch
    */
-  EngineType: string
+  EngineType?: string
   /**
    * 版本状态：1：初始化；2：上线；3：下线
    */
-  IsSharedEngine: number
+  IsSharedEngine?: number
   /**
    * 版本状态：1：初始化；2：上线；3：下线
    */
-  State: number
+  State?: number
   /**
    * 插入时间
    */
-  InsertTime: string
+  InsertTime?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -7486,22 +7310,18 @@ export interface CreateSparkSessionBatchSQLRequest {
 export interface ListTaskJobLogDetailResponse {
   /**
    * 下一次分页参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
   /**
    * 是否获取完结
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListOver?: boolean
   /**
    * 日志详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<JobLogResult>
   /**
-   * 日志url
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志url(字段已废弃)
    */
   LogUrl?: string
   /**
@@ -7726,22 +7546,18 @@ task-operator- string （子uin过滤）
 export interface UserDetailInfo {
   /**
    * 用户Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
   /**
    * 返回的信息类型，Group：返回的当前用户的工作组信息；DataAuth：返回的当前用户的数据权限信息；EngineAuth：返回的当前用户的引擎权限信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 用户类型：ADMIN：管理员 COMMON：一般用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserType?: string
   /**
    * 用户描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDescription?: string
   /**
@@ -7761,7 +7577,6 @@ export interface UserDetailInfo {
   WorkGroupInfo?: WorkGroups
   /**
    * 用户别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAlias?: string
   /**
@@ -7771,9 +7586,13 @@ export interface UserDetailInfo {
   RowFilterInfo?: Policys
   /**
    * 账号类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountType?: string
+  /**
+   * 数据源权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogPolicyInfo?: Policys
 }
 
 /**
@@ -7881,7 +7700,6 @@ export interface WorkGroupMessage {
   WorkGroupName?: string
   /**
    * 工作组描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkGroupDescription?: string
   /**
@@ -7900,7 +7718,6 @@ export interface WorkGroupMessage {
 export interface DescribeUserDataEngineConfigResponse {
   /**
    * 用户引擎自定义配置项列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineConfigInstanceInfos?: Array<DataEngineConfigInstanceInfo>
   /**
@@ -8140,22 +7957,18 @@ export interface DetachUserPolicyRequest {
 export interface DescribeTaskLogResponse {
   /**
    * 下一次分页参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
   /**
    * 是否获取完结
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListOver?: boolean
   /**
    * 日志详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<JobLogResult>
   /**
    * 日志url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogUrl?: string
   /**
@@ -8312,22 +8125,18 @@ export interface UserRole {
   Desc?: string
   /**
    * 角色名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleName?: string
   /**
    * 创建者UIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
   /**
    * cos授权路径列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosPermissionList?: Array<CosPermission>
   /**
    * cam策略json
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PermissionJson?: string
 }
@@ -8448,27 +8257,22 @@ export interface CHDFSProductVpcInfo {
   /**
    * vpc id
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * vpc名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcName?: string
   /**
    * vpc子网信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcCidrBlock?: Array<VpcCidrBlock>
   /**
    * 规则Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: number
   /**
    * 权限组Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessGroupId?: string
 }
@@ -8630,7 +8434,6 @@ export interface TableBaseInfo {
   TableName: string
   /**
    * 该数据表所属数据源名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceConnectionName?: string
   /**
@@ -8640,22 +8443,18 @@ export interface TableBaseInfo {
   TableComment?: string
   /**
    * 具体类型，表or视图
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 数据格式类型，hive，iceberg等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableFormat?: string
   /**
    * 建表用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAlias?: string
   /**
    * 建表用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserSubUin?: string
   /**
@@ -8758,12 +8557,10 @@ export interface ListTaskJobLogDetailRequest {
 export interface SparkSessionBatchLogOperate {
   /**
    * 操作提示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Text?: string
   /**
    * 操作类型：COPY、LOG、UI、RESULT、List、TAB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operate?: string
   /**
@@ -8906,17 +8703,14 @@ export interface DescribeEngineUsageInfoRequest {
 export interface DataMaskStrategyInfo {
   /**
    * 策略名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyName?: string
   /**
    * MASK_SHOW_FIRST_4; MASK_SHOW_LAST_4;MASK_HASH; MASK_DATE_SHOW_YEAR; MASK_NULL; MASK_DEFAULT 等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyType?: string
   /**
    * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyDesc?: string
   /**
@@ -8926,12 +8720,10 @@ export interface DataMaskStrategyInfo {
   Groups?: Array<GroupInfo>
   /**
    * 用户子账号uin列表，按;拼接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Users?: string
   /**
    * 策略Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyId?: string
 }
@@ -8986,7 +8778,6 @@ export interface Partition {
   Comment?: string
   /**
    * 隐式分区转换策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Transform?: string
   /**
@@ -8996,7 +8787,6 @@ export interface Partition {
   TransformArgs?: Array<string>
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
 }
@@ -9450,7 +9240,6 @@ export interface TaskResponseInfo {
   RowAffectInfo?: string
   /**
    * 任务结果数据表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSet?: string
   /**
@@ -9471,22 +9260,18 @@ export interface TaskResponseInfo {
   TaskType?: string
   /**
    * 任务进度明细
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgressDetail?: string
   /**
    * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 计算资源id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineId?: string
   /**
    * 执行sql的子uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperateUin?: string
   /**
@@ -9496,82 +9281,66 @@ export interface TaskResponseInfo {
   DataEngineName?: string
   /**
    * 导入类型是本地导入还是cos
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputType?: string
   /**
    * 导入配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputConf?: string
   /**
    * 数据条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataNumber?: number
   /**
    * 查询数据能不能下载
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanDownload?: boolean
   /**
    * 用户别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAlias?: string
   /**
    * spark应用作业名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkJobName?: string
   /**
    * spark应用作业Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkJobId?: string
   /**
    * spark应用入口jar文件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkJobFile?: string
   /**
    * spark ui url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UiUrl?: string
   /**
    * 任务耗时，单位： ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalTime?: number
   /**
    * spark app job执行task的程序入口参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CmdArgs?: string
   /**
    * 集群镜像大版本名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageVersion?: string
   /**
    * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DriverSize?: string
   /**
    * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorSize?: string
   /**
    * 指定executor数量，最小值为1，最大值小于集群规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorNums?: number
   /**
    * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorMaxNumbers?: number
   /**
@@ -9591,17 +9360,14 @@ export interface TaskResponseInfo {
   PrestoMonitorMetrics?: PrestoMonitorMetrics
   /**
    * 结果文件格式：默认为csv
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultFormat?: string
   /**
    * 引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineTypeDetail?: string
   /**
    * spark引擎资源组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
 }
@@ -9612,9 +9378,8 @@ export interface TaskResponseInfo {
 export interface DescribeStoreLocationResponse {
   /**
    * 返回用户设置的结果存储位置路径，如果未设置则返回空字符串：""
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StoreLocation: string
+  StoreLocation?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9627,12 +9392,10 @@ export interface DescribeStoreLocationResponse {
 export interface QueryTaskCostDetailResponse {
   /**
    * 下一页的标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchAfter?: string
   /**
    * 返回的数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -9694,37 +9457,30 @@ export interface Column {
   Comment?: string
   /**
    * 表示整个 numeric 的长度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Precision?: number
   /**
    * 表示小数部分的长度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scale?: number
   /**
    * 是否为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nullable?: string
   /**
    * 字段位置，小的在前
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Position?: number
   /**
    * 字段创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 字段修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifiedTime?: string
   /**
    * 是否为分区字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPartition?: boolean
   /**
@@ -9878,7 +9634,6 @@ export interface DatabaseInfo {
   Properties?: Array<Property>
   /**
    * 数据库cos路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
 }
@@ -9988,12 +9743,10 @@ export interface DropDMSDatabaseResponse {
 export interface VpcCidrBlock {
   /**
    * 子网Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CidrId?: string
   /**
    * 子网网段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CidrAddr?: string
 }
@@ -10118,7 +9871,6 @@ export interface CreateNotebookSessionResponse {
   SessionId?: string
   /**
    * Spark任务返回的AppId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkAppId?: string
   /**
@@ -10402,7 +10154,6 @@ export interface DatabaseResponseInfo {
   DatabaseName?: string
   /**
    * 数据库描述信息，长度 0~256。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
@@ -10422,17 +10173,14 @@ export interface DatabaseResponseInfo {
   ModifiedTime?: string
   /**
    * cos存储路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
   /**
    * 建库用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAlias?: string
   /**
    * 建库用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserSubUin?: string
   /**
@@ -10442,7 +10190,6 @@ export interface DatabaseResponseInfo {
   GovernPolicy?: DataGovernPolicy
   /**
    * 数据库ID（无效字段）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseId?: string
 }

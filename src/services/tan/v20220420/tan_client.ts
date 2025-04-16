@@ -29,8 +29,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 推送节点数据
-   */
+     * 产品下线
+
+推送节点数据
+     */
   async CreateBlockNodeRecords(
     req: CreateBlockNodeRecordsRequest,
     cb?: (error: string, rep: CreateBlockNodeRecordsResponse) => void

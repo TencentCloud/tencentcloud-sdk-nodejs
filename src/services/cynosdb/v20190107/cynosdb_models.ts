@@ -1253,6 +1253,14 @@ export interface ModifyInstanceData {
    * 升级方式。升级完成后切换或维护时间内切换
    */
   UpgradeType?: string
+  /**
+   * libra节点数量
+   */
+  LibraNodeCount?: number
+  /**
+   * 原libra节点数量
+   */
+  OldLibraNodeCount?: number
 }
 
 /**
@@ -2964,6 +2972,10 @@ export interface ModifyParamItem {
    * 参数旧值（只在出参时有用）
    */
   OldValue?: string
+  /**
+   * libra组件类型
+   */
+  Component?: string
 }
 
 /**

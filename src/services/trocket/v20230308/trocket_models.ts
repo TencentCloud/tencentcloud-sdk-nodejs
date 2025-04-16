@@ -600,6 +600,27 @@ export interface ImportSourceClusterConsumerGroupsResponse {
 }
 
 /**
+ * 迁移主题修改状态后的结果
+ */
+export interface TopicStageChangeResult {
+  /**
+   * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
+  /**
+   * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Success?: boolean
+  /**
+   * 命名空间，仅4.x有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+}
+
+/**
  * DeleteTopic请求参数结构体
  */
 export interface DeleteTopicRequest {
@@ -611,6 +632,37 @@ export interface DeleteTopicRequest {
    * 主题名称
    */
   Topic: string
+}
+
+/**
+ * 迁移中的主题
+ */
+export interface MigratingTopic {
+  /**
+   * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
+  /**
+   * 迁移状态 S_RW_D_NA 源集群读写 S_RW_D_R 源集群读写目标集群读 S_RW_D_RW 源集群读写目标集群读写 S_R_D_RW 源集群读目标集群读写 S_NA_D_RW 目标集群读写
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrationStatus?: string
+  /**
+   * 是否完成健康检查	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckPassed?: boolean
+  /**
+   * 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。 NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckError?: string
+  /**
+   * 命名空间，仅4.x集群有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
 }
 
 /**
@@ -791,17 +843,29 @@ export interface DescribeMQTTMessageListResponse {
 }
 
 /**
- * ImportSourceClusterConsumerGroups请求参数结构体
+ * DescribeMigratingTopicStats返回参数结构体
  */
-export interface ImportSourceClusterConsumerGroupsRequest {
+export interface DescribeMigratingTopicStatsResponse {
   /**
-   * 任务ID
+   * 源集群的消费者数量
    */
-  TaskId: string
+  SourceClusterConsumerCount?: number
   /**
-   * 待导入的消费组列表
+   * 目标集群的消费者数量
    */
-  GroupList: Array<SourceClusterGroupConfig>
+  TargetClusterConsumerCount?: number
+  /**
+   * 源集群消费组列表
+   */
+  SourceClusterConsumerGroups?: Array<string>
+  /**
+   * 目标集群消费组列表
+   */
+  TargetClusterConsumerGroups?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -832,6 +896,24 @@ export interface DescribeConsumerLagRequest {
 }
 
 /**
+ * DescribeMigratingGroupStats请求参数结构体
+ */
+export interface DescribeMigratingGroupStatsRequest {
+  /**
+   * 迁移任务ID
+   */
+  TaskId: string
+  /**
+   * 消费组名称
+   */
+  GroupName: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+}
+
+/**
  * 标签数据
  */
 export interface Tag {
@@ -845,6 +927,25 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
+}
+
+/**
+ * DescribeSourceClusterGroupList返回参数结构体
+ */
+export interface DescribeSourceClusterGroupListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 消费组配置列表
+   */
+  Groups?: Array<SourceClusterGroupConfig>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -908,22 +1009,13 @@ export interface DescribeMQTTMessageResponse {
 }
 
 /**
- * DescribeMQTTInstanceList返回参数结构体
+ * DeleteSmoothMigrationTask请求参数结构体
  */
-export interface DescribeMQTTInstanceListResponse {
+export interface DeleteSmoothMigrationTaskRequest {
   /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务ID
    */
-  TotalCount?: number
-  /**
-   * 实例列表
-   */
-  Data?: Array<MQTTInstanceItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TaskId: string
 }
 
 /**
@@ -1062,54 +1154,17 @@ export interface CreateConsumerGroupRequest {
 }
 
 /**
- * 消息记录
+ * ChangeMigratingTopicToNextStage返回参数结构体
  */
-export interface MQTTMessageItem {
+export interface ChangeMigratingTopicToNextStageResponse {
   /**
-   * 消息ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 迁移主题状态修改的结果列表
    */
-  MsgId?: string
+  Results?: Array<TopicStageChangeResult>
   /**
-   * 消息tag
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Tags?: string
-  /**
-   * 消息key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Keys?: string
-  /**
-   * 客户端地址	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProducerAddr?: string
-  /**
-   * 消息发送时间	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProduceTime?: string
-  /**
-   * 死信重发次数	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeadLetterResendTimes?: number
-  /**
-   * 死信重发成功次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeadLetterResendSuccessTimes?: number
-  /**
-   * 子topic
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubTopic?: string
-  /**
-   * 消息质量等级
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Qos?: string
+  RequestId?: string
 }
 
 /**
@@ -1124,6 +1179,28 @@ export interface DescribeMQTTClientRequest {
    * 客户端详情
    */
   ClientId: string
+}
+
+/**
+ * DescribeSourceClusterGroupList请求参数结构体
+ */
+export interface DescribeSourceClusterGroupListRequest {
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1213,6 +1290,57 @@ export interface ResendDeadLetterMessageResponse {
 }
 
 /**
+ * 消息记录
+ */
+export interface MQTTMessageItem {
+  /**
+   * 消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgId?: string
+  /**
+   * 消息tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: string
+  /**
+   * 消息key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: string
+  /**
+   * 客户端地址	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerAddr?: string
+  /**
+   * 消息发送时间	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProduceTime?: string
+  /**
+   * 死信重发次数	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendTimes?: number
+  /**
+   * 死信重发成功次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendSuccessTimes?: number
+  /**
+   * 子topic
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubTopic?: string
+  /**
+   * 消息质量等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qos?: string
+}
+
+/**
  * DeleteMQTTUser请求参数结构体
  */
 export interface DeleteMQTTUserRequest {
@@ -1294,6 +1422,61 @@ export interface CreateMQTTUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 消费组配置信息
+ */
+export interface SourceClusterGroupConfig {
+  /**
+   * 消费组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName: string
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 是否已导入，作为入参时无效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Imported?: boolean
+  /**
+   * 命名空间，仅4.x集群有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 导入状态
+Unknown 未知
+Success 成功
+Failure 失败
+AlreadyExists 已存在
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportStatus?: string
+  /**
+   * 4.x的命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceV4?: string
+  /**
+   * 4.x的消费组名，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupNameV4?: string
+  /**
+   * 4.x的完整命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullNamespaceV4?: string
+  /**
+   * 是否为顺序投递，5.0有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumeMessageOrderly?: boolean
 }
 
 /**
@@ -1580,19 +1763,40 @@ export interface MQTTProductSkuItem {
 }
 
 /**
- * map结构返回
+ * DescribeMQTTInstanceList返回参数结构体
  */
-export interface CustomMapEntry {
+export interface DescribeMQTTInstanceListResponse {
   /**
-   * key
+   * 查询总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key?: string
+  TotalCount?: number
   /**
-   * value
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例列表
    */
-  Value?: string
+  Data?: Array<MQTTInstanceItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMigratingTopicStats请求参数结构体
+ */
+export interface DescribeMigratingTopicStatsRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 主题名称
+   */
+  TopicName: string
+  /**
+   * 命名空间，仅4.x集群有效
+   */
+  Namespace?: string
 }
 
 /**
@@ -1639,6 +1843,24 @@ export interface CreateConsumerGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RollbackMigratingTopicStage请求参数结构体
+ */
+export interface RollbackMigratingTopicStageRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 主题名称
+   */
+  TopicName: string
+  /**
+   * 命名空间，仅4.x集群有效
+   */
+  Namespace?: string
 }
 
 /**
@@ -1724,37 +1946,44 @@ export interface DescribeMessageTraceResponse {
 }
 
 /**
- * MQTT集群用户信息
+ * DoHealthCheckOnMigratingTopic请求参数结构体
  */
-export interface MQTTUserItem {
+export interface DoHealthCheckOnMigratingTopicRequest {
   /**
-   * 用户名
+   * 任务ID
    */
-  Username?: string
+  TaskId: string
   /**
-   * 密码
+   * 主题名称
    */
-  Password?: string
+  TopicName: string
   /**
-   * 是否开启消费
+   * 是否忽略当前检查
    */
-  PermRead?: boolean
+  IgnoreCheck?: boolean
   /**
-   * 是否开启生产
+   * 命名空间，仅4.x集群有效
    */
-  PermWrite?: boolean
+  Namespace?: string
+}
+
+/**
+ * DescribeMigratingTopicList返回参数结构体
+ */
+export interface DescribeMigratingTopicListResponse {
   /**
-   * 备注信息
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark?: string
+  TotalCount?: number
   /**
-   * 创建时间，秒为单位
+   * 主题列表
    */
-  CreatedTime?: number
+  MigrateTopics?: Array<MigratingTopic>
   /**
-   * 修改时间，秒为单位
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ModifiedTime?: number
+  RequestId?: string
 }
 
 /**
@@ -1964,6 +2193,16 @@ export interface DescribeMessageTraceRequest {
 }
 
 /**
+ * DeleteSmoothMigrationTask返回参数结构体
+ */
+export interface DeleteSmoothMigrationTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTopic返回参数结构体
  */
 export interface CreateTopicResponse {
@@ -1975,6 +2214,36 @@ export interface CreateTopicResponse {
    * 主题名
    */
   Topic?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMigratingGroupStats返回参数结构体
+ */
+export interface DescribeMigratingGroupStatsResponse {
+  /**
+   * 源集群消费组堆积
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConsumeLag?: number
+  /**
+   * 目标集群消费组堆积
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetConsumeLag?: number
+  /**
+   * 源集群连接客户端列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConsumerClients?: Array<ConsumerClient>
+  /**
+   * 目标集群连接客户端列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetConsumerClients?: Array<ConsumerClient>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2090,6 +2359,20 @@ PLATINUM 铂金版
 }
 
 /**
+ * ImportSourceClusterConsumerGroups请求参数结构体
+ */
+export interface ImportSourceClusterConsumerGroupsRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 待导入的消费组列表
+   */
+  GroupList: Array<SourceClusterGroupConfig>
+}
+
+/**
  * MQTTEndpoint
  */
 export interface MQTTEndpointItem {
@@ -2131,6 +2414,24 @@ export interface MQTTEndpointItem {
 }
 
 /**
+ * RemoveMigratingTopic请求参数结构体
+ */
+export interface RemoveMigratingTopicRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 主题名称
+   */
+  TopicName: string
+  /**
+   * 命名空间，仅迁移至4.x集群有效
+   */
+  Namespace?: string
+}
+
+/**
  * DescribeMessage返回参数结构体
  */
 export interface DescribeMessageResponse {
@@ -2169,6 +2470,31 @@ export interface DescribeMessageResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTracksCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DoHealthCheckOnMigratingTopic返回参数结构体
+ */
+export interface DoHealthCheckOnMigratingTopicResponse {
+  /**
+   * 是否通过
+   */
+  Passed?: boolean
+  /**
+   * 健康检查返回的错误信息
+NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
+  /**
+   * 健康检查返回的错误信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReasonList?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2681,6 +3007,28 @@ export interface DescribeTopicListByGroupRequest {
 }
 
 /**
+ * DescribeMigratingTopicList请求参数结构体
+ */
+export interface DescribeMigratingTopicListRequest {
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 查询过滤器
  */
 export interface Filter {
@@ -3068,6 +3416,16 @@ export interface CreateMQTTUserRequest {
 }
 
 /**
+ * RollbackMigratingTopicStage返回参数结构体
+ */
+export interface RollbackMigratingTopicStageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFusionInstanceList请求参数结构体
  */
 export interface DescribeFusionInstanceListRequest {
@@ -3108,6 +3466,22 @@ export interface DescribeMQTTMessageRequest {
 }
 
 /**
+ * map结构返回
+ */
+export interface CustomMapEntry {
+  /**
+   * key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * CreateRole返回参数结构体
  */
 export interface CreateRoleResponse {
@@ -3141,6 +3515,40 @@ export interface DescribeMQTTTopicListResponse {
 }
 
 /**
+ * MQTT集群用户信息
+ */
+export interface MQTTUserItem {
+  /**
+   * 用户名
+   */
+  Username?: string
+  /**
+   * 密码
+   */
+  Password?: string
+  /**
+   * 是否开启消费
+   */
+  PermRead?: boolean
+  /**
+   * 是否开启生产
+   */
+  PermWrite?: boolean
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 修改时间，秒为单位
+   */
+  ModifiedTime?: number
+}
+
+/**
  * ModifyInstanceEndpoint请求参数结构体
  */
 export interface ModifyInstanceEndpointRequest {
@@ -3168,58 +3576,21 @@ PUBLIC 公网
 }
 
 /**
- * 消费组配置信息
+ * ChangeMigratingTopicToNextStage请求参数结构体
  */
-export interface SourceClusterGroupConfig {
+export interface ChangeMigratingTopicToNextStageRequest {
   /**
-   * 消费组名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务ID
    */
-  GroupName: string
+  TaskId: string
   /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 主题名称列表
    */
-  Remark?: string
+  TopicNameList: Array<string>
   /**
-   * 是否已导入，作为入参时无效
-注意：此字段可能返回 null，表示取不到有效值。
+   * 命名空间列表，仅4.x集群有效，与TopicNameList一一对应
    */
-  Imported?: boolean
-  /**
-   * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 导入状态
-Unknown 未知
-Success 成功
-Failure 失败
-AlreadyExists 已存在
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportStatus?: string
-  /**
-   * 4.x的命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamespaceV4?: string
-  /**
-   * 4.x的消费组名，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupNameV4?: string
-  /**
-   * 4.x的完整命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FullNamespaceV4?: string
-  /**
-   * 是否为顺序投递，5.0有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumeMessageOrderly?: boolean
+  NamespaceList?: Array<string>
 }
 
 /**
@@ -3803,6 +4174,16 @@ export interface DescribeProductSKUsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<ProductSKU>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveMigratingTopic返回参数结构体
+ */
+export interface RemoveMigratingTopicResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

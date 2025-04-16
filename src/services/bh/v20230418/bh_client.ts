@@ -60,6 +60,7 @@ import {
   DeleteUserGroupMembersResponse,
   CmdTemplate,
   SearchCommandResult,
+  SearchSubtaskResultByIdResponse,
   ModifyOAuthSettingRequest,
   CreateUserGroupRequest,
   SearchFileTypeFilter,
@@ -80,6 +81,7 @@ import {
   DescribeUserGroupsRequest,
   CreateAclRequest,
   DescribeLoginEventResponse,
+  SearchSubtaskResultByIdRequest,
   CreateDeviceGroupRequest,
   RunChangePwdTaskDetail,
   RunOperationTaskResponse,
@@ -801,6 +803,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupMembersResponse) => void
   ): Promise<DescribeUserGroupMembersResponse> {
     return this.request("DescribeUserGroupMembers", req, cb)
+  }
+
+  /**
+   * 查询运维子任务执行结果
+   */
+  async SearchSubtaskResultById(
+    req: SearchSubtaskResultByIdRequest,
+    cb?: (error: string, rep: SearchSubtaskResultByIdResponse) => void
+  ): Promise<SearchSubtaskResultByIdResponse> {
+    return this.request("SearchSubtaskResultById", req, cb)
   }
 
   /**

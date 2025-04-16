@@ -1101,6 +1101,20 @@ export interface SearchCommandResult {
 }
 
 /**
+ * SearchSubtaskResultById返回参数结构体
+ */
+export interface SearchSubtaskResultByIdResponse {
+  /**
+   * 记录数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyOAuthSetting请求参数结构体
  */
 export interface ModifyOAuthSettingRequest {
@@ -1783,6 +1797,32 @@ export interface DescribeLoginEventResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SearchSubtaskResultById请求参数结构体
+ */
+export interface SearchSubtaskResultByIdRequest {
+  /**
+   * 运维任务名称
+   */
+  Name?: string
+  /**
+   * 查询偏移
+   */
+  Offset?: number
+  /**
+   * 分页的页内记录数，默认为20，最大200
+   */
+  Limit?: number
+  /**
+   * 运维父任务执行日志ID
+   */
+  Id?: string
+  /**
+   * 运维父任务执行状态
+   */
+  Status?: Array<number | bigint>
 }
 
 /**

@@ -62,12 +62,10 @@ export interface DescribeInstanceInfoRequest {
 export interface DescribeUserHbaConfigResponse {
   /**
    * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * hba数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HbaConfigs?: Array<HbaConfig>
   /**
@@ -120,7 +118,6 @@ export interface ModifyDBParametersResponse {
 export interface InstanceStateInfo {
   /**
    * 集群状态，例如：Serving
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceState?: string
   /**
@@ -361,27 +358,22 @@ export interface RestartInstanceResponse {
 export interface ChargeProperties {
   /**
    * 1-需要自动续期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag: number
   /**
    * 订单时间范围
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeSpan: number
   /**
    * 时间单位，一般为h和m
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeUnit: string
   /**
    * 计费类型0-按量计费，1-包年包月
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
   /**
    * PREPAID、POSTPAID_BY_HOUR
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeType?: string
 }
@@ -402,22 +394,18 @@ export interface DestroyInstanceByApiRequest {
 export interface UpgradeItem {
   /**
    * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
    * 原有内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceVersion?: string
   /**
    * 目标内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetVersion?: string
   /**
    * 任务创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
@@ -427,7 +415,6 @@ export interface UpgradeItem {
   EndTime?: string
   /**
    * 任务完成状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -519,22 +506,18 @@ export interface DescribeDBConfigHistoryRequest {
 export interface ErrorLogDetail {
   /**
    * 用户名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * 数据库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Database?: string
   /**
    * 报错时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorTime?: string
   /**
    * 报错信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
 }
@@ -622,7 +605,6 @@ export interface ModifyInstanceRequest {
 export interface DescribeSimpleInstancesResponse {
   /**
    * 集群列表总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -679,7 +661,6 @@ export interface DescribeSlowLogResponse {
 export interface ModifyUserHbaResponse {
   /**
    * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**
@@ -713,17 +694,14 @@ export interface NodeConfigParams {
 export interface InstanceInfo {
   /**
    * ID值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: number
   /**
    * 内核版本类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * 集群名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -748,17 +726,14 @@ export interface InstanceInfo {
   InstanceID?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 地区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
@@ -778,22 +753,18 @@ export interface InstanceInfo {
   Tags?: Array<Tag>
   /**
    * 内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 字符集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Charset?: string
   /**
    * CN节点列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CNNodes?: Array<InstanceNodeGroup>
   /**
    * DN节点列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DNNodes?: Array<InstanceNodeGroup>
   /**
@@ -808,37 +779,30 @@ export interface InstanceInfo {
   ZoneId?: number
   /**
    * 私有网络
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 计费方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: boolean
   /**
    * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 访问信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessDetails?: Array<AccessInfo>
 }
@@ -867,22 +831,18 @@ export interface DescribeDBParamsResponse {
 export interface ParamDetail {
   /**
    * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamName?: string
   /**
    * 默认值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultValue?: string
   /**
    * 是否需要重启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NeedRestart?: boolean
   /**
    * 当前运行值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningValue?: string
   /**
@@ -912,7 +872,6 @@ export interface ParamDetail {
 export interface DescribeInstancesResponse {
   /**
    * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -994,32 +953,26 @@ export interface ResetAccountPasswordResponse {
 export interface DiskSpecPlus {
   /**
    * 磁盘个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount?: number
   /**
    * 磁盘最大值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDiskSize?: number
   /**
    * 磁盘最小值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinDiskSize?: number
   /**
    * 磁盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
   /**
    * 磁盘类型详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskDesc?: string
   /**
    * 机型类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmClass?: string
 }
@@ -1084,22 +1037,18 @@ export interface DescribeUpgradeListRequest {
 export interface ResourceInfo {
   /**
    * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecName: string
   /**
    * 资源数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count: number
   /**
    * 磁盘信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSpec: CBSSpecInfo
   /**
    * 节点类型，cn 或dn
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
 }
@@ -1275,12 +1224,10 @@ export interface ScaleOutInstanceRequest {
 export interface DescribeAccountsResponse {
   /**
    * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 账号数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Accounts?: Array<AccountInfo>
   /**
@@ -1313,14 +1260,12 @@ export interface SearchTags {
 export interface Range {
   /**
    * 最小值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Min: string
+  Min?: string
   /**
    * 最大值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Max: string
+  Max?: string
 }
 
 /**
@@ -1329,17 +1274,14 @@ export interface Range {
 export interface InstanceNodeGroup {
   /**
    * 机型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecName?: string
   /**
    * 磁盘信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDisk?: DiskSpecPlus
   /**
    * 机器个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmCount?: number
 }
@@ -1472,22 +1414,18 @@ export interface DestroyInstanceByApiResponse {
 export interface ParamItem {
   /**
    * 节点类型, cn/dn
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeType?: string
   /**
    * 节点名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeName?: string
   /**
    * 参数个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 参数信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: Array<ParamDetail>
 }
@@ -1498,17 +1436,14 @@ export interface ParamItem {
 export interface CBSSpecInfo {
   /**
    * 盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType: string
   /**
    * 大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize: number
   /**
    * 个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount: number
 }
@@ -1550,52 +1485,42 @@ export interface HbaConfig {
 export interface SimpleInstanceInfo {
   /**
    * ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: number
   /**
    * 集群Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 集群名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 地区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 私有网络
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserVPCID?: string
   /**
    * 子网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserSubnetID?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
@@ -1605,17 +1530,14 @@ export interface SimpleInstanceInfo {
   AccessInfo?: string
   /**
    * 自动续费开关，0为不自动续费，1为自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: number
   /**
    * 计费方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeProperties?: ChargeProperties
   /**
    * 资源集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources?: Array<ResourceInfo>
   /**
@@ -1625,7 +1547,6 @@ export interface SimpleInstanceInfo {
   Tags?: Array<Tag>
   /**
    * 集群状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
 }
@@ -1663,13 +1584,17 @@ export interface CreateInstanceByApiRequest {
    */
   Resources: Array<ResourceSpecNew>
   /**
-   * 标签列表
+   * 废弃，用TagItems
    */
   Tags?: Tag
   /**
    * 版本
    */
   ProductVersion?: string
+  /**
+   * 标签列表
+   */
+  TagItems?: Array<Tag>
 }
 
 /**
@@ -1732,12 +1657,10 @@ export interface SlowLogDetail {
 export interface ValueRange {
   /**
    * 参数类型，可以为 enum，string，section; 其中enum表示枚举，类似： utf8,latin1,gbk; string表示返回的参数值是字符串; section表示返回的参数值是一个取值范围，类似：[4-8]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * type 取section的时候，返回的参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Range?: Range
   /**
@@ -1806,7 +1729,6 @@ export interface DescribeInstanceStateResponse {
   ProcessName?: string
   /**
    * 集群备份任务开启状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupStatus?: number
   /**
@@ -1825,22 +1747,18 @@ export interface InstanceOperation {
   Id?: number
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 操作名称描述，例如“创建”，“修改集群名称”等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Action?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 操作开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
@@ -1871,27 +1789,22 @@ export interface InstanceOperation {
 export interface InstanceSimpleInfoNew {
   /**
    * ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: number
   /**
    * 集群Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 集群名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 内核版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
@@ -1906,7 +1819,6 @@ export interface InstanceSimpleInfoNew {
   RegionDesc?: string
   /**
    * 地区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
@@ -1921,22 +1833,18 @@ export interface InstanceSimpleInfoNew {
   ZoneDesc?: string
   /**
    * 私有网络
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
@@ -1946,12 +1854,10 @@ export interface InstanceSimpleInfoNew {
   AccessInfo?: string
   /**
    * 计费方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: boolean
 }

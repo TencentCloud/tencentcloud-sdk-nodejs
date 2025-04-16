@@ -529,8 +529,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDisksAttribute)用于修改云硬盘属性。
-   */
+     * 本接口(ModifyDisksAttribute)用于修改云硬盘属性。
+云硬盘必须处于以下状态:
+<li> ATTACHED（已挂载）</li>
+<li> UNATTACHED（待挂载）</li>
+     */
   async ModifyDisksAttribute(
     req: ModifyDisksAttributeRequest,
     cb?: (error: string, rep: ModifyDisksAttributeResponse) => void
@@ -658,7 +661,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口（AttachDisks）用于挂载一个或多个云硬盘。
-<li>只能挂载处于待挂载状态的云硬盘</li>
+<li>只能挂载磁盘状态（DiskState）处于待挂载（UNATTACHED）状态的云硬盘，磁盘状态可通过接口查询云硬盘（DescribeDisks）获取</li>
      */
   async AttachDisks(
     req: AttachDisksRequest,

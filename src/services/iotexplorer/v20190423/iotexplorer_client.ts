@@ -143,10 +143,12 @@ import {
   DescribeFenceBindListResponse,
   TransferTWeCallDeviceRequest,
   PackageConsumeTask,
+  CreateTWeSeeRecognitionTaskResponse,
   UnbindProductsRequest,
   CreateCloudStorageAIServiceRequest,
   DescribeDeviceLocationSolveResponse,
   DescribeStudioProductResponse,
+  VisionRecognitionResult,
   CreateIotVideoCloudStorageResponse,
   DescribePackageConsumeTaskResponse,
   CheckFirmwareUpdateRequest,
@@ -215,6 +217,7 @@ import {
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
   ResetCloudStorageAIServiceResponse,
+  CreateTWeSeeRecognitionTaskRequest,
   InvokeCloudStorageAIServiceTaskResponse,
   ModifyFenceBindResponse,
   DescribeGatewayBindDevicesResponse,
@@ -230,6 +233,7 @@ import {
   CreateCloudStorageAIServiceResponse,
   DeviceDataHistoryItem,
   GetTWeCallActiveStatusResponse,
+  InvokeTWeSeeRecognitionTaskRequest,
   PauseTWeCallDeviceResponse,
   BatchProductionInfo,
   DeleteDeviceRequest,
@@ -241,6 +245,7 @@ import {
   UnbindProductsResponse,
   DescribeTopicPolicyResponse,
   LoRaFrequencyEntry,
+  InvokeTWeSeeRecognitionTaskResponse,
   DescribeDeviceFirmWareResponse,
   RegisteredDeviceTypeInfo,
   ThumbnailURLInfoList,
@@ -559,6 +564,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenerateSignedVideoURLResponse) => void
   ): Promise<GenerateSignedVideoURLResponse> {
     return this.request("GenerateSignedVideoURL", req, cb)
+  }
+
+  /**
+   * 创建 TWeSee 语义理解任务
+   */
+  async CreateTWeSeeRecognitionTask(
+    req: CreateTWeSeeRecognitionTaskRequest,
+    cb?: (error: string, rep: CreateTWeSeeRecognitionTaskResponse) => void
+  ): Promise<CreateTWeSeeRecognitionTaskResponse> {
+    return this.request("CreateTWeSeeRecognitionTask", req, cb)
   }
 
   /**
@@ -1743,6 +1758,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPositionFenceResponse) => void
   ): Promise<ModifyPositionFenceResponse> {
     return this.request("ModifyPositionFence", req, cb)
+  }
+
+  /**
+   * 同步执行 TWeSee 语义理解任务
+   */
+  async InvokeTWeSeeRecognitionTask(
+    req: InvokeTWeSeeRecognitionTaskRequest,
+    cb?: (error: string, rep: InvokeTWeSeeRecognitionTaskResponse) => void
+  ): Promise<InvokeTWeSeeRecognitionTaskResponse> {
+    return this.request("InvokeTWeSeeRecognitionTask", req, cb)
   }
 
   /**

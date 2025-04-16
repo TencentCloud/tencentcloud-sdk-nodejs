@@ -603,41 +603,23 @@ export interface ImpalaQuery {
 }
 
 /**
- * DescribeHiveQueries请求参数结构体
+ * Pod的存储设备描述信息。
  */
-export interface DescribeHiveQueriesRequest {
+export interface PodVolume {
   /**
-   * 集群ID
+   * 存储类型，可为"pvc"，"hostpath"。
    */
-  InstanceId: string
+  VolumeType: string
   /**
-   * 起始时间秒
+   * 当VolumeType为"pvc"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: number
+  PVCVolume?: PersistentVolumeContext
   /**
-   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
+   * 当VolumeType为"hostpath"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: number
-  /**
-   * 分页起始偏移，从0开始
-   */
-  Offset: number
-  /**
-   * 分页大小，合法范围[1,100]
-   */
-  Limit: number
-  /**
-   * 执行状态,ERROR等
-   */
-  State?: Array<string>
-  /**
-   * 结束时间大于的时间点
-   */
-  EndTimeGte?: number
-  /**
-   * 结束时间小于时间点
-   */
-  EndTimeLte?: number
+  HostVolume?: HostVolumeContext
 }
 
 /**
@@ -3049,21 +3031,41 @@ export interface DiffHeader {
 }
 
 /**
- * DescribeInstancesList返回参数结构体
+ * DescribeHiveQueries请求参数结构体
  */
-export interface DescribeInstancesListResponse {
+export interface DescribeHiveQueriesRequest {
   /**
-   * 符合条件的实例总数。
+   * 集群ID
    */
-  TotalCnt?: number
+  InstanceId: string
   /**
-   * 集群实例列表
+   * 起始时间秒
    */
-  InstancesList?: Array<EmrListInstance>
+  StartTime: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
    */
-  RequestId?: string
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
+  /**
+   * 执行状态,ERROR等
+   */
+  State?: Array<string>
+  /**
+   * 结束时间大于的时间点
+   */
+  EndTimeGte?: number
+  /**
+   * 结束时间小于时间点
+   */
+  EndTimeLte?: number
 }
 
 /**
@@ -3273,62 +3275,33 @@ export interface DependService {
 }
 
 /**
- * 扩容容器资源时的资源描述
+ * DescribeInspectionTaskResult请求参数结构体
  */
-export interface PodSpec {
+export interface DescribeInspectionTaskResultRequest {
   /**
-   * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+   * 实例ID
    */
-  ResourceProviderIdentifier: string
+  InstanceId: string
   /**
-   * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+   * 类型
    */
-  ResourceProviderType: string
+  Type?: string
   /**
-   * 资源的用途，即节点类型，当前仅支持"TASK"。
+   * 开始时间
    */
-  NodeType: string
+  StartTime?: number
   /**
-   * CPU核数。
+   * 结束时间
    */
-  Cpu: number
+  EndTime?: number
   /**
-   * 内存大小，单位为GB。
+   * 分页大小
    */
-  Memory: number
+  Limit?: number
   /**
-   * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。弃用
+   * 分页偏移量
    */
-  DataVolumes?: Array<string>
-  /**
-   * Eks集群-CPU类型，当前支持"intel"和"amd"
-   */
-  CpuType?: string
-  /**
-   * Pod节点数据目录挂载信息。
-   */
-  PodVolumes?: Array<PodVolume>
-  /**
-   * 是否浮动规格，1是，0否
-   */
-  IsDynamicSpec?: number
-  /**
-   * 浮动规格
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DynamicPodSpec?: DynamicPodSpec
-  /**
-   * 代表vpc网络唯一id
-   */
-  VpcId?: string
-  /**
-   * 代表vpc子网唯一id
-   */
-  SubnetId?: string
-  /**
-   * pod name
-   */
-  PodName?: string
+  Offset?: number
 }
 
 /**
@@ -4950,26 +4923,6 @@ export interface SetNodeResourceConfigDefaultResponse {
 }
 
 /**
- * Pod的存储设备描述信息。
- */
-export interface PodVolume {
-  /**
-   * 存储类型，可为"pvc"，"hostpath"。
-   */
-  VolumeType: string
-  /**
-   * 当VolumeType为"pvc"时，该字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PVCVolume?: PersistentVolumeContext
-  /**
-   * 当VolumeType为"hostpath"时，该字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HostVolume?: HostVolumeContext
-}
-
-/**
  * 价格详情
  */
 export interface PriceDetail {
@@ -5476,6 +5429,10 @@ export interface ModifySLInstanceRequest {
    * 该区域变配后的目标节点数量，所有区域节点总数应大于等于3，小于等于50。
    */
   NodeNum: number
+  /**
+   * 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808
+   */
+  ClientToken?: string
 }
 
 /**
@@ -5639,6 +5596,27 @@ export interface DescribeAutoScaleRecordsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyYarnQueueV2请求参数结构体
+ */
+export interface ModifyYarnQueueV2Request {
+  /**
+   * 集群Id
+   */
+  InstanceId: string
+  /**
+   * 调度器类型。可选值：
+
+1. capacity
+2. fair
+   */
+  Scheduler: string
+  /**
+   * 资源池数据
+   */
+  ConfigModifyInfoList: Array<ConfigModifyInfoV2>
 }
 
 /**
@@ -6020,24 +5998,25 @@ export interface ModifyInstanceBasicResponse {
 }
 
 /**
- * ModifyYarnQueueV2请求参数结构体
+ * DescribeInspectionTaskResult返回参数结构体
  */
-export interface ModifyYarnQueueV2Request {
+export interface DescribeInspectionTaskResultResponse {
   /**
-   * 集群Id
+   * 巡检任务记录，base64编码
    */
-  InstanceId: string
+  InspectionResultInfo?: string
   /**
-   * 调度器类型。可选值：
-
-1. capacity
-2. fair
+   * 记录总数
    */
-  Scheduler: string
+  Total?: number
   /**
-   * 资源池数据
+   * 类别信息，base64编码，{"FixedTime": "定时", "RealTime": "及时"}
    */
-  ConfigModifyInfoList: Array<ConfigModifyInfoV2>
+  TypeInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7039,6 +7018,24 @@ export interface DeployYarnConfResponse {
    * 启动流程后的流程ID，可以使用[DescribeClusterFlowStatusDetail](https://cloud.tencent.com/document/product/589/107224)接口来获取流程状态
    */
   FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstancesList返回参数结构体
+ */
+export interface DescribeInstancesListResponse {
+  /**
+   * 符合条件的实例总数。
+   */
+  TotalCnt?: number
+  /**
+   * 集群实例列表
+   */
+  InstancesList?: Array<EmrListInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8992,6 +8989,65 @@ export interface Item {
 }
 
 /**
+ * 扩容容器资源时的资源描述
+ */
+export interface PodSpec {
+  /**
+   * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+   */
+  ResourceProviderIdentifier: string
+  /**
+   * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+   */
+  ResourceProviderType: string
+  /**
+   * 资源的用途，即节点类型，当前仅支持"TASK"。
+   */
+  NodeType: string
+  /**
+   * CPU核数。
+   */
+  Cpu: number
+  /**
+   * 内存大小，单位为GB。
+   */
+  Memory: number
+  /**
+   * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。弃用
+   */
+  DataVolumes?: Array<string>
+  /**
+   * Eks集群-CPU类型，当前支持"intel"和"amd"
+   */
+  CpuType?: string
+  /**
+   * Pod节点数据目录挂载信息。
+   */
+  PodVolumes?: Array<PodVolume>
+  /**
+   * 是否浮动规格，1是，0否
+   */
+  IsDynamicSpec?: number
+  /**
+   * 浮动规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DynamicPodSpec?: DynamicPodSpec
+  /**
+   * 代表vpc网络唯一id
+   */
+  VpcId?: string
+  /**
+   * 代表vpc子网唯一id
+   */
+  SubnetId?: string
+  /**
+   * pod name
+   */
+  PodName?: string
+}
+
+/**
  * ModifySLInstanceBasic返回参数结构体
  */
 export interface ModifySLInstanceBasicResponse {
@@ -9782,6 +9838,10 @@ export interface CreateSLInstanceRequest {
    * 预付费参数
    */
   PrePaySetting?: PrePaySetting
+  /**
+   * 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808
+   */
+  ClientToken?: string
 }
 
 /**

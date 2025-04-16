@@ -3990,12 +3990,12 @@ export interface InstanceDetailVO {
    */
   ExecutorGroupName?: string
   /**
-   * 标准数据时间
+   * 实例数据时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CurRunDate?: string
   /**
-   * 下一个标准数据时间
+   * 下一个实例数据时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NextCurDate?: string
@@ -11998,7 +11998,7 @@ export interface InstanceVO {
    */
   TaskCycleType?: string
   /**
-   * 标准数据时间
+   * 实例数据时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CurRunDate?: string

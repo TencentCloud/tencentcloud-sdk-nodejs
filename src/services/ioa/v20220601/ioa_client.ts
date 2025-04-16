@@ -18,12 +18,15 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeDLPFileDetectResultRequest,
   RuleItem,
   DescribeLocalAccountAccountGroupsData,
   CreateDeviceVirtualGroupResponse,
+  CreateDLPFileDetectionTaskData,
   ComplexRule,
   Sort,
   DescribeRootAccountGroupResponse,
+  DescribeDLPFileDetectResultData,
   DescribeDevicesResponse,
   GetAccountGroupData,
   DescribeLocalAccountsResponse,
@@ -42,8 +45,11 @@ import {
   DescribeLocalAccountsData,
   Filter,
   DescribeLocalAccountsRequest,
+  CreateDLPFileDetectionTaskResponse,
   DescribeLocalAccountsPage,
+  DescribeDLPFileDetectResultResponse,
   Condition,
+  CreateDLPFileDetectionTaskRequest,
   CreateDeviceVirtualGroupRspData,
   SimpleRule,
 } from "./ioa_models"
@@ -58,13 +64,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
+   * 创建终端自定义分组，私有化调用path为：/capi/Assets/Device/CreateDeviceVirtualGroup
    */
-  async DescribeRootAccountGroup(
-    req?: DescribeRootAccountGroupRequest,
-    cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void
-  ): Promise<DescribeRootAccountGroupResponse> {
-    return this.request("DescribeRootAccountGroup", req, cb)
+  async CreateDeviceVirtualGroup(
+    req: CreateDeviceVirtualGroupRequest,
+    cb?: (error: string, rep: CreateDeviceVirtualGroupResponse) => void
+  ): Promise<CreateDeviceVirtualGroupResponse> {
+    return this.request("CreateDeviceVirtualGroup", req, cb)
+  }
+
+  /**
+   * 获取账号列表，支持分页，模糊搜索，私有化调用path为：/capi/Assets/Account/DescribeLocalAccounts
+   */
+  async DescribeLocalAccounts(
+    req: DescribeLocalAccountsRequest,
+    cb?: (error: string, rep: DescribeLocalAccountsResponse) => void
+  ): Promise<DescribeLocalAccountsResponse> {
+    return this.request("DescribeLocalAccounts", req, cb)
   }
 
   /**
@@ -78,13 +94,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建终端自定义分组，私有化调用path为：/capi/Assets/Device/CreateDeviceVirtualGroup
+   * 提交送检任务
    */
-  async CreateDeviceVirtualGroup(
-    req: CreateDeviceVirtualGroupRequest,
-    cb?: (error: string, rep: CreateDeviceVirtualGroupResponse) => void
-  ): Promise<CreateDeviceVirtualGroupResponse> {
-    return this.request("CreateDeviceVirtualGroup", req, cb)
+  async CreateDLPFileDetectionTask(
+    req: CreateDLPFileDetectionTaskRequest,
+    cb?: (error: string, rep: CreateDLPFileDetectionTaskResponse) => void
+  ): Promise<CreateDLPFileDetectionTaskResponse> {
+    return this.request("CreateDLPFileDetectionTask", req, cb)
+  }
+
+  /**
+   * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
+   */
+  async DescribeRootAccountGroup(
+    req?: DescribeRootAccountGroupRequest,
+    cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void
+  ): Promise<DescribeRootAccountGroupResponse> {
+    return this.request("DescribeRootAccountGroup", req, cb)
+  }
+
+  /**
+   * webservice查询文件检测结果
+   */
+  async DescribeDLPFileDetectResult(
+    req: DescribeDLPFileDetectResultRequest,
+    cb?: (error: string, rep: DescribeDLPFileDetectResultResponse) => void
+  ): Promise<DescribeDLPFileDetectResultResponse> {
+    return this.request("DescribeDLPFileDetectResult", req, cb)
   }
 
   /**
@@ -95,15 +131,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountGroupsResponse) => void
   ): Promise<DescribeAccountGroupsResponse> {
     return this.request("DescribeAccountGroups", req, cb)
-  }
-
-  /**
-   * 获取账号列表，支持分页，模糊搜索，私有化调用path为：/capi/Assets/Account/DescribeLocalAccounts
-   */
-  async DescribeLocalAccounts(
-    req: DescribeLocalAccountsRequest,
-    cb?: (error: string, rep: DescribeLocalAccountsResponse) => void
-  ): Promise<DescribeLocalAccountsResponse> {
-    return this.request("DescribeLocalAccounts", req, cb)
   }
 }
