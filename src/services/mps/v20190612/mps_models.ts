@@ -714,6 +714,24 @@ export interface AiReviewTaskProhibitedOcrResult {
 }
 
 /**
+ * 描述 URL 的完整信息
+ */
+export interface StreamUrlDetail {
+  /**
+   * 会描述运营商信息等
+   */
+  Label?: string
+  /**
+   * URL
+   */
+  Url?: string
+  /**
+   * Playback: 拉流播放地址； RelayDestination：转推目的地址；SourceCaptureUrl：回源拉流地址；IngestEndpoint：推流地址
+   */
+  Type?: string
+}
+
+/**
  * 语音全文识别结果。
  */
 export interface AiRecognitionTaskAsrFullTextResultOutput {
@@ -993,6 +1011,10 @@ export interface ModifyOutputInfo {
    * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。
    */
   Protocol: string
+  /**
+   * 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出。
+   */
+  OutputKind?: string
   /**
    * 转推SRT的配置。
    */
@@ -6265,6 +6287,14 @@ export interface CreateOutputInfo {
    */
   OutputRegion: string
   /**
+   * 输出类型：Internet/TencentCSS
+   */
+  OutputType?: string
+  /**
+   * 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出
+   */
+  OutputKind?: string
+  /**
    * 输出的SRT的配置。
    */
   SRTSettings?: CreateOutputSRTSettings
@@ -6293,10 +6323,6 @@ export interface CreateOutputInfo {
    * 可用区，output最多只支持输入一个可用区。
    */
   Zones?: Array<string>
-  /**
-   * 输出类型：Internet/TencentCSS
-   */
-  OutputType?: string
   /**
    * 输出的RIST的配置。
    */
@@ -9506,6 +9532,10 @@ export interface DescribeInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RISTSettings?: DescribeInputRISTSettings
+  /**
+   * 输入模块配置相关的URL信息，包含提供的推流地址，或者配置的第三方源流地址
+   */
+  StreamUrls?: Array<StreamUrlDetail>
 }
 
 /**
@@ -10043,6 +10073,10 @@ export interface DescribeOutput {
    */
   OutputType?: string
   /**
+   * 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出。
+   */
+  OutputKind?: string
+  /**
    * 输出描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -10118,6 +10152,10 @@ export interface DescribeOutput {
    * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
    */
   PidSelector?: PidSelector
+  /**
+   * 输出模块配置，相关的URL，包括提供的拉流地址，或者配置的输出到第三方的转推地址
+   */
+  StreamUrls?: Array<StreamUrlDetail>
 }
 
 /**

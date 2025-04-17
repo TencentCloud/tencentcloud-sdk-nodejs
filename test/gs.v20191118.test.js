@@ -178,6 +178,16 @@ it("gs.v20191118.RestartAndroidInstancesApp", async function () {
     }
 })
 
+it("gs.v20191118.ModifyAndroidInstancesResolution", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesResolution({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DeleteAndroidInstanceLabel", async function () {
     try {
        const data = await client.DeleteAndroidInstanceLabel({})
@@ -271,6 +281,16 @@ it("gs.v20191118.SyncAndroidInstanceImage", async function () {
 it("gs.v20191118.RebootAndroidInstances", async function () {
     try {
        const data = await client.RebootAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StopAndroidInstances", async function () {
+    try {
+       const data = await client.StopAndroidInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +508,9 @@ it("gs.v20191118.StartPublishStreamToCSS", async function () {
     }
 })
 
-it("gs.v20191118.StopAndroidInstances", async function () {
+it("gs.v20191118.ModifyAndroidAppVersion", async function () {
     try {
-       const data = await client.StopAndroidInstances({})
+       const data = await client.ModifyAndroidAppVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

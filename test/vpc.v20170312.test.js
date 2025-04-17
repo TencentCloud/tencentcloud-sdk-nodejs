@@ -68,6 +68,16 @@ it("vpc.v20170312.RemoveBandwidthPackageResources", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeInstanceJumbo", async function () {
+    try {
+       const data = await client.DescribeInstanceJumbo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyServiceTemplateGroupAttribute", async function () {
     try {
        const data = await client.ModifyServiceTemplateGroupAttribute({})

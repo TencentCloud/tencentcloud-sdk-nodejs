@@ -25,7 +25,6 @@ export interface CheckDataEngineConfigPairsValidityResponse {
   IsAvailable?: boolean
   /**
    * 无效参数集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnavailableConfig?: Array<string>
   /**

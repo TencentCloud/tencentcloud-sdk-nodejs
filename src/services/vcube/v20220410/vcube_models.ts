@@ -1822,6 +1822,10 @@ export interface ApplicationInfo {
    * 账号AppId
    */
   AppId?: string
+  /**
+   * 扩展包名数量上限
+   */
+  NameLimit?: number
 }
 
 /**

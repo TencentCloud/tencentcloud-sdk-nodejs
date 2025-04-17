@@ -218,16 +218,6 @@ it("lighthouse.v20200324.ModifyDisksAttribute", async function () {
     }
 })
 
-it("lighthouse.v20200324.ModifyInstancesLoginKeyPairAttribute", async function () {
-    try {
-       const data = await client.ModifyInstancesLoginKeyPairAttribute({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lighthouse.v20200324.RerunDockerContainer", async function () {
     try {
        const data = await client.RerunDockerContainer({})
@@ -381,16 +371,6 @@ it("lighthouse.v20200324.DescribeBlueprints", async function () {
 it("lighthouse.v20200324.ModifyDockerContainer", async function () {
     try {
        const data = await client.ModifyDockerContainer({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lighthouse.v20200324.DescribeInstanceLoginKeyPairAttribute", async function () {
-    try {
-       const data = await client.DescribeInstanceLoginKeyPairAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

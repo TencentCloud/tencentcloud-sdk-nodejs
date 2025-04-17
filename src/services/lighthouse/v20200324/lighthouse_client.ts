@@ -139,7 +139,6 @@ import {
   DescribeDockerActivitiesRequest,
   ImportKeyPairResponse,
   DeleteBlueprintsResponse,
-  ModifyInstancesLoginKeyPairAttributeRequest,
   IsolateInstancesRequest,
   DeleteFirewallTemplateResponse,
   CreateInstancesResponse,
@@ -181,7 +180,6 @@ import {
   TotalPrice,
   DeniedAction,
   DescribeAllScenesResponse,
-  ModifyInstancesLoginKeyPairAttributeResponse,
   InquirePriceRenewDisksResponse,
   Bundle,
   DiskConfig,
@@ -218,7 +216,6 @@ import {
   DescribeFirewallRulesResponse,
   DescribeInstancesReturnableResponse,
   ContainerEnv,
-  TrafficPackage,
   FirewallRule,
   DeleteBlueprintsRequest,
   FirewallRuleInfo,
@@ -254,7 +251,7 @@ import {
   DescribeDockerContainersResponse,
   ModifyDockerContainerResponse,
   DescribeDiskBackupsDeniedActionsResponse,
-  DescribeInstanceLoginKeyPairAttributeRequest,
+  TrafficPackage,
   FirewallTemplateApplyRecord,
   DescribeDockerContainerDetailResponse,
   DescribeBundleDiscountRequest,
@@ -300,7 +297,6 @@ import {
   InstanceChargePrepaid,
   ModifyInstancesAttributeResponse,
   Price,
-  DescribeInstanceLoginKeyPairAttributeResponse,
   DeleteFirewallTemplateRulesRequest,
 } from "./lighthouse_models"
 
@@ -542,23 +538,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 后端代码已与23年2月4号下线
-近90天只有一次调用记录，且明确返回前端接口下线错误信息
-
-经评估无风险，操作接口下线
-
-本接口用于设置实例默认登录密钥对属性。
-
-
-     */
-  async ModifyInstancesLoginKeyPairAttribute(
-    req: ModifyInstancesLoginKeyPairAttributeRequest,
-    cb?: (error: string, rep: ModifyInstancesLoginKeyPairAttributeResponse) => void
-  ): Promise<ModifyInstancesLoginKeyPairAttributeResponse> {
-    return this.request("ModifyInstancesLoginKeyPairAttribute", req, cb)
-  }
-
-  /**
    * 重新创建并运行实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重建情况。
    */
   async RerunDockerContainer(
@@ -742,20 +721,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDockerContainerResponse) => void
   ): Promise<ModifyDockerContainerResponse> {
     return this.request("ModifyDockerContainer", req, cb)
-  }
-
-  /**
-     * 后端代码已与23年2月4号下线
-近90天无调用记录
-经评估，下线无风险，操作下线
-
-本接口用于查询实例默认登录密钥属性。
-     */
-  async DescribeInstanceLoginKeyPairAttribute(
-    req: DescribeInstanceLoginKeyPairAttributeRequest,
-    cb?: (error: string, rep: DescribeInstanceLoginKeyPairAttributeResponse) => void
-  ): Promise<DescribeInstanceLoginKeyPairAttributeResponse> {
-    return this.request("DescribeInstanceLoginKeyPairAttribute", req, cb)
   }
 
   /**

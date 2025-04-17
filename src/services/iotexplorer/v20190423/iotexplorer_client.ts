@@ -61,7 +61,7 @@ import {
   InheritCloudStorageUserResponse,
   ChangeP2PRouteRequest,
   DescribeDeviceResponse,
-  PublishBroadcastMessageRequest,
+  DescribeCloudStorageEventsRequest,
   GetStudioProductListResponse,
   GetTWeCallActiveStatusRequest,
   GetAuthMiniProgramAppListRequest,
@@ -76,6 +76,8 @@ import {
   FenceEventItem,
   DescribeUnbindedDevicesRequest,
   RegisteredDeviceNetTypeInfo,
+  InvokeAISearchServiceResponse,
+  ModifyTWeSeeConfigRequest,
   DescribeGatewaySubDeviceListRequest,
   GetDeviceListRequest,
   DescribeDeviceDataHistoryRequest,
@@ -191,7 +193,7 @@ import {
   SearchKeyword,
   DescribeModelDefinitionRequest,
   DisableTopicRuleRequest,
-  ActivateTWeCallLicenseRequest,
+  DescribeTWeSeeConfigRequest,
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   DescribePositionFenceListRequest,
@@ -204,6 +206,7 @@ import {
   DescribeDeviceLocationSolveRequest,
   DescribeVideoLicenseRequest,
   DescribeCloudStorageAIServiceResponse,
+  InvokeAISearchServiceRequest,
   PackageInfo,
   DeleteDevicesResponse,
   ModifyStudioProductResponse,
@@ -225,6 +228,7 @@ import {
   GetAuthMiniProgramAppListResponse,
   UpdateDeviceTWeCallAuthorizeStatusResponse,
   ModifyProductCloudStorageAIServiceResponse,
+  ModifyTWeSeeConfigResponse,
   DevicePositionItem,
   GetDeviceLocationHistoryRequest,
   DeletePositionSpaceRequest,
@@ -254,6 +258,7 @@ import {
   TRTCParams,
   DescribeCsReportCountDataInfoResponse,
   ModifyCloudStorageAIServiceRequest,
+  GenerateSignedVideoURLRequest,
   GetStudioProductListRequest,
   DescribeFirmwareTaskResponse,
   DisableTopicRuleResponse,
@@ -308,7 +313,7 @@ import {
   DescribeCloudStorageOrderResponse,
   DescribeActivateLicenseServiceRequest,
   CreateTRTCSignaturesWithRoomIdResponse,
-  DescribeCloudStorageEventsRequest,
+  PublishBroadcastMessageRequest,
   DeviceInfo,
   DescribeInstanceRequest,
   CreatePositionSpaceRequest,
@@ -316,7 +321,7 @@ import {
   CloudStoragePackageInfo,
   DevicesItem,
   CloudStorageAIServiceTaskFileInfo,
-  GenerateSignedVideoURLRequest,
+  DescribeTWeSeeConfigResponse,
   ModifyPositionFenceRequest,
   ModifySpacePropertyRequest,
   DeleteTopicRuleResponse,
@@ -372,6 +377,7 @@ import {
   TopicRule,
   DescribeCloudStoragePackageConsumeStatsRequest,
   DeleteFenceBindResponse,
+  ActivateTWeCallLicenseRequest,
   IotApplication,
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
@@ -397,6 +403,7 @@ import {
   DeviceActivationDetail,
   UnbindDevicesResponse,
   CreateBatchProductionResponse,
+  TargetInfo,
   GetTopicRuleListRequest,
   DeleteStudioProductRequest,
   DescribeP2PRouteRequest,
@@ -677,6 +684,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 视频语义搜索
+   */
+  async InvokeAISearchService(
+    req: InvokeAISearchServiceRequest,
+    cb?: (error: string, rep: InvokeAISearchServiceResponse) => void
+  ): Promise<InvokeAISearchServiceResponse> {
+    return this.request("InvokeAISearchService", req, cb)
+  }
+
+  /**
    * 查询指定产品的云存 AI 服务开通状态
    */
   async DescribeProductCloudStorageAIService(
@@ -804,6 +821,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFenceBindListResponse) => void
   ): Promise<DescribeFenceBindListResponse> {
     return this.request("DescribeFenceBindList", req, cb)
+  }
+
+  /**
+   * 修改 TWeSee 配置
+   */
+  async ModifyTWeSeeConfig(
+    req: ModifyTWeSeeConfigRequest,
+    cb?: (error: string, rep: ModifyTWeSeeConfigResponse) => void
+  ): Promise<ModifyTWeSeeConfigResponse> {
+    return this.request("ModifyTWeSeeConfig", req, cb)
   }
 
   /**
@@ -2018,6 +2045,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
   ): Promise<DescribeModelDefinitionResponse> {
     return this.request("DescribeModelDefinition", req, cb)
+  }
+
+  /**
+   * 拉取 TWeSee 配置
+   */
+  async DescribeTWeSeeConfig(
+    req: DescribeTWeSeeConfigRequest,
+    cb?: (error: string, rep: DescribeTWeSeeConfigResponse) => void
+  ): Promise<DescribeTWeSeeConfigResponse> {
+    return this.request("DescribeTWeSeeConfig", req, cb)
   }
 
   /**

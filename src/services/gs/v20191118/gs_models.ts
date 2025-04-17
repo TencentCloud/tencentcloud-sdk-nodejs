@@ -69,6 +69,10 @@ export interface CreateAndroidAppRequest {
    * 用户 Id
    */
   UserId?: string
+  /**
+   * 应用模式（NORMAL : 普通模式、只支持 apk 文件上传，为默认值；ADVANCED : 高级模式、只支持上传 tgz 文件 和 自定义 shell 命令执行）
+   */
+  AppMode?: string
 }
 
 /**
@@ -216,6 +220,16 @@ export interface StopAndroidInstancesAppResponse {
 }
 
 /**
+ * ModifyAndroidAppVersion返回参数结构体
+ */
+export interface ModifyAndroidAppVersionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAndroidApp返回参数结构体
  */
 export interface DeleteAndroidAppResponse {
@@ -271,6 +285,10 @@ export interface AndroidApp {
    * 用户 Id
    */
   UserId?: string
+  /**
+   * 应用模式（NORMAL : 普通模式；ADVANCED : 高级模式）
+   */
+  AppMode?: string
 }
 
 /**
@@ -335,6 +353,10 @@ export interface CreateAndroidAppVersionRequest {
    * 应用包下载地址
    */
   DownloadUrl?: string
+  /**
+   * shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   */
+  Command?: string
 }
 
 /**
@@ -649,6 +671,28 @@ export interface RestoreAndroidInstanceFromStorageResponse {
 }
 
 /**
+ * ModifyAndroidAppVersion请求参数结构体
+ */
+export interface ModifyAndroidAppVersionRequest {
+  /**
+   * 安卓应用 Id
+   */
+  AndroidAppId: string
+  /**
+   * 安卓应用版本 Id
+   */
+  AndroidAppVersion: string
+  /**
+   * 安卓应用版本名称
+   */
+  AndroidAppVersionName: string
+  /**
+   * shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   */
+  Command?: string
+}
+
+/**
  * StartAndroidInstancesApp请求参数结构体
  */
 export interface StartAndroidInstancesAppRequest {
@@ -660,6 +704,16 @@ export interface StartAndroidInstancesAppRequest {
    * 应用包名
    */
   PackageName: string
+}
+
+/**
+ * ModifyAndroidInstancesResolution返回参数结构体
+ */
+export interface ModifyAndroidInstancesResolutionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -852,6 +906,10 @@ export interface AndroidAppCosInfo {
    * 安卓应用ID
    */
   AndroidAppId: string
+  /**
+   * 应用名称（支持 apk 和 tgz 两种格式文件，当应用 AppMode 为 NORMAL 时，只支持上传 apk 类型文件，当应用 AppMode 为 ADVANCED 高级模式时，只支持上传  tgz 类型文件）
+   */
+  FileName?: string
 }
 
 /**
@@ -1142,14 +1200,14 @@ export interface ModifyAndroidInstanceResolutionRequest {
   AndroidInstanceId: string
   /**
    * 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：
-实例类型为单开（A1）、双开（A2）、三开（ A3）：建议设置为 1080
-实例类型为 四开（A4） 及以上：建议设置为 720
+实例类型为单开（A1）：建议设置为 1080
+实例类型为双开（A2） 及以上：建议设置为 720
    */
   Width: number
   /**
    * 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：
-实例类型为单开（A1）、双开（A2）、三开（ A3）：建议设置为 1920
-实例类型为 四开（A4） 及以上：建议设置为 1280
+实例类型为单开（A1）：建议设置为 1920
+实例类型为双开（A2） 及以上：建议设置为 1280
    */
   Height: number
   /**
@@ -1158,6 +1216,16 @@ export interface ModifyAndroidInstanceResolutionRequest {
 分辨率为  1080x1920：建议配置为 480
    */
   DPI?: number
+  /**
+   * 帧率。ResolutionType 为 PHYSICAL 时才会修改帧率。另外建议按照以下数值设置，避免出现性能不足问题： 实例类型为单开（A1）：建议设置为 60 实例类型为双开（A2） 及以上：建议设置为 30
+   */
+  FPS?: number
+  /**
+   * 修改分辨率类型。修改物理分辨率，需要重启才能生效。
+OVERRIDE：默认值，修改覆盖（显示）分辨率
+PHYSICAL：修改物理分辨率
+   */
+  ResolutionType?: string
 }
 
 /**
@@ -1178,6 +1246,10 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
    * 安卓应用版本创建时间
    */
   CreateTime?: string
+  /**
+   * shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   */
+  Command?: string
 }
 
 /**
@@ -1224,6 +1296,16 @@ export interface SwitchGameArchiveRequest {
    * 游戏相关参数
    */
   GameContext?: string
+}
+
+/**
+ * StopAndroidInstances请求参数结构体
+ */
+export interface StopAndroidInstancesRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceIds: Array<string>
 }
 
 /**
@@ -1283,13 +1365,13 @@ export interface RestartAndroidInstancesAppRequest {
 }
 
 /**
- * StopAndroidInstances请求参数结构体
+ * DeleteAndroidApp请求参数结构体
  */
-export interface StopAndroidInstancesRequest {
+export interface DeleteAndroidAppRequest {
   /**
-   * 实例ID
+   * 应用ID
    */
-  AndroidInstanceIds: Array<string>
+  AndroidAppId: string
 }
 
 /**
@@ -1892,13 +1974,43 @@ export interface AndroidInstanceAppInfo {
 }
 
 /**
- * DeleteAndroidApp请求参数结构体
+ * ModifyAndroidInstancesResolution请求参数结构体
  */
-export interface DeleteAndroidAppRequest {
+export interface ModifyAndroidInstancesResolutionRequest {
   /**
-   * 应用ID
+   * 安卓实例 ID 列表
    */
-  AndroidAppId: string
+  AndroidInstanceIds: Array<string>
+  /**
+   * 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：
+实例类型为单开（A1）：建议设置为 1080
+实例类型为双开（A2） 及以上：建议设置为 720
+   */
+  Width: number
+  /**
+   * 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：
+实例类型为单开（A1）：建议设置为 1920
+实例类型为双开（A2） 及以上：建议设置为 1280
+   */
+  Height: number
+  /**
+   * 每英寸像素点。
+分辨率为 720x1280：建议配置为 320
+分辨率为  1080x1920：建议配置为 480
+   */
+  DPI: number
+  /**
+   * 帧率。ResolutionType 为 PHYSICAL 时才会修改帧率。另外建议按照以下数值设置，避免出现性能不足问题：
+实例类型为单开（A1）：建议设置为 60
+实例类型为双开（A2） 及以上：建议设置为 30
+   */
+  FPS?: number
+  /**
+   * 修改分辨率类型。修改物理分辨率，需要重启才能生效。
+OVERRIDE：默认值，修改覆盖（显示）分辨率
+PHYSICAL：修改物理分辨率
+   */
+  ResolutionType?: string
 }
 
 /**

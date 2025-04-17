@@ -2296,20 +2296,6 @@ export interface DeleteBlueprintsResponse {
 }
 
 /**
- * ModifyInstancesLoginKeyPairAttribute请求参数结构体
- */
-export interface ModifyInstancesLoginKeyPairAttributeRequest {
-  /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。
-   */
-  InstanceIds: Array<string>
-  /**
-   * 是否允许使用默认密钥对登录，YES：允许登录；NO：禁止登录
-   */
-  PermitLogin?: string
-}
-
-/**
  * IsolateInstances请求参数结构体
  */
 export interface IsolateInstancesRequest {
@@ -3187,16 +3173,6 @@ export interface DescribeAllScenesResponse {
 }
 
 /**
- * ModifyInstancesLoginKeyPairAttribute返回参数结构体
- */
-export interface ModifyInstancesLoginKeyPairAttributeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * InquirePriceRenewDisks返回参数结构体
  */
 export interface InquirePriceRenewDisksResponse {
@@ -3989,53 +3965,6 @@ export interface ContainerEnv {
 }
 
 /**
- * 流量包详情
- */
-export interface TrafficPackage {
-  /**
-   * 流量包ID。
-   */
-  TrafficPackageId?: string
-  /**
-   * 流量包生效周期内已使用流量，单位字节。
-   */
-  TrafficUsed?: number
-  /**
-   * 流量包生效周期内的总流量，单位字节。
-   */
-  TrafficPackageTotal?: number
-  /**
-   * 流量包生效周期内的剩余流量，单位字节。
-   */
-  TrafficPackageRemaining?: number
-  /**
-   * 流量包生效周期内超出流量包额度的流量，单位字节。
-   */
-  TrafficOverflow?: number
-  /**
-   * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
-格式为： YYYY-MM-DDThh:mm:ssZ。
-   */
-  StartTime?: string
-  /**
-   * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
-格式为： YYYY-MM-DDThh:mm:ssZ。
-   */
-  EndTime?: string
-  /**
-   * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
-格式为： YYYY-MM-DDThh:mm:ssZ。
-   */
-  Deadline?: string
-  /**
-   * 流量包状态：
-<li>NETWORK_NORMAL：正常</li>
-<li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
-   */
-  Status?: string
-}
-
-/**
  * 描述防火墙规则信息。
  */
 export interface FirewallRule {
@@ -4728,13 +4657,50 @@ export interface DescribeDiskBackupsDeniedActionsResponse {
 }
 
 /**
- * DescribeInstanceLoginKeyPairAttribute请求参数结构体
+ * 流量包详情
  */
-export interface DescribeInstanceLoginKeyPairAttributeRequest {
+export interface TrafficPackage {
   /**
-   * 实例ID。
+   * 流量包ID。
    */
-  InstanceId: string
+  TrafficPackageId?: string
+  /**
+   * 流量包生效周期内已使用流量，单位字节。
+   */
+  TrafficUsed?: number
+  /**
+   * 流量包生效周期内的总流量，单位字节。
+   */
+  TrafficPackageTotal?: number
+  /**
+   * 流量包生效周期内的剩余流量，单位字节。
+   */
+  TrafficPackageRemaining?: number
+  /**
+   * 流量包生效周期内超出流量包额度的流量，单位字节。
+   */
+  TrafficOverflow?: number
+  /**
+   * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+   */
+  StartTime?: string
+  /**
+   * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+   */
+  EndTime?: string
+  /**
+   * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+   */
+  Deadline?: string
+  /**
+   * 流量包状态：
+<li>NETWORK_NORMAL：正常</li>
+<li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
+   */
+  Status?: string
 }
 
 /**
@@ -5457,20 +5423,6 @@ export interface Price {
    * 实例价格。
    */
   InstancePrice?: InstancePrice
-}
-
-/**
- * DescribeInstanceLoginKeyPairAttribute返回参数结构体
- */
-export interface DescribeInstanceLoginKeyPairAttributeResponse {
-  /**
-   * 是否允许使用默认密钥对登录，YES：允许登录 NO：禁止登录。
-   */
-  PermitLogin: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

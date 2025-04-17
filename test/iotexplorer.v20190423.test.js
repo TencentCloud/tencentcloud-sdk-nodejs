@@ -268,6 +268,16 @@ it("iotexplorer.v20190423.ModifyFenceBind", async function () {
     }
 })
 
+it("iotexplorer.v20190423.InvokeAISearchService", async function () {
+    try {
+       const data = await client.InvokeAISearchService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeProductCloudStorageAIService", async function () {
     try {
        const data = await client.DescribeProductCloudStorageAIService({})
@@ -391,6 +401,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageAIService", async function () {
 it("iotexplorer.v20190423.DescribeFenceBindList", async function () {
     try {
        const data = await client.DescribeFenceBindList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyTWeSeeConfig", async function () {
+    try {
+       const data = await client.ModifyTWeSeeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1601,6 +1621,16 @@ it("iotexplorer.v20190423.DescribeProject", async function () {
 it("iotexplorer.v20190423.DescribeModelDefinition", async function () {
     try {
        const data = await client.DescribeModelDefinition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeTWeSeeConfig", async function () {
+    try {
+       const data = await client.DescribeTWeSeeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -616,14 +616,12 @@ export interface BindListenerRealServersResponse {
 export interface DescribeCustomHeaderResponse {
   /**
    * 规则id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 自定义header列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Headers: Array<HttpHeaderParam>
+  Headers?: Array<HttpHeaderParam>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1548,7 +1546,6 @@ export interface DescribeTaskStatusResponse {
   Status?: string
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
@@ -1811,9 +1808,8 @@ export interface DescribeAuthSignatureResponse {
 export interface DescribeDomainErrorPageInfoByIdsResponse {
   /**
    * 定制错误响应配置集
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorPageSet: Array<DomainErrorPageInfo>
+  ErrorPageSet?: Array<DomainErrorPageInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2283,12 +2279,11 @@ export interface DescribeProxyGroupListResponse {
   /**
    * 通道组总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 通道组列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyGroupList: Array<ProxyGroupInfo>
+  ProxyGroupList?: Array<ProxyGroupInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2889,9 +2884,8 @@ export interface Certificate {
 export interface DescribeDomainErrorPageInfoResponse {
   /**
    * 定制错误响应配置集
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorPageSet: Array<DomainErrorPageInfo>
+  ErrorPageSet?: Array<DomainErrorPageInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3562,7 +3556,6 @@ export interface SecurityPolicyRuleIn {
 export interface DescribeBlackHeaderResponse {
   /**
    * 禁用的自定义header列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BlackHeaders?: Array<string>
   /**
@@ -3884,12 +3877,10 @@ export interface InquiryPriceCreateProxyResponse {
   DiscountFlowUnitPrice?: number
   /**
    * 精品BGP的带宽费用价格，单位: 元/Mbps/天
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cn2BandwidthPrice?: number
   /**
    * 精品BGP的折后带宽费用价格，单位: 元/Mbps/天
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cn2BandwidthPriceWithDiscount?: number
   /**
@@ -5031,7 +5022,7 @@ export interface ModifyProxiesAttributeResponse {
  */
 export interface DescribeDomainErrorPageInfoByIdsRequest {
   /**
-   * 定制错误ID列表,最多支持10个
+   * 定制错误ID列表，最多支持10个
    */
   ErrorPageIds: Array<string>
 }

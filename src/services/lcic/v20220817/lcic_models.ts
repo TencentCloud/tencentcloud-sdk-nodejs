@@ -2417,6 +2417,10 @@ export interface DescribeRoomResponse {
    */
   WhiteBoardSnapshotMode?: number
   /**
+   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   */
+  SubtitlesTranscription?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3964,6 +3968,10 @@ video 纯视频
    * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
    */
   WhiteBoardSnapshotMode?: number
+  /**
+   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   */
+  SubtitlesTranscription?: number
 }
 
 /**

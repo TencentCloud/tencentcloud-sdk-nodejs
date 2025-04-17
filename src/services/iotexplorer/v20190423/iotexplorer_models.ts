@@ -809,25 +809,45 @@ export interface DescribeDeviceResponse {
 }
 
 /**
- * PublishBroadcastMessage请求参数结构体
+ * DescribeCloudStorageEvents请求参数结构体
  */
-export interface PublishBroadcastMessageRequest {
+export interface DescribeCloudStorageEventsRequest {
   /**
    * 产品ID
    */
   ProductId: string
   /**
-   * 消息内容
+   * 设备名称
    */
-  Payload: string
+  DeviceName: string
   /**
-   * 消息质量等级
+   * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
    */
-  Qos: number
+  StartTime?: number
   /**
-   * ayload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+   * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
    */
-  PayloadEncoding?: string
+  EndTime?: number
+  /**
+   * 请求上下文, 用作查询游标
+   */
+  Context?: string
+  /**
+   * 查询数据项目的最大数量, 默认为10。假设传Size=10，返回的实际事件数量为N，则 5 <= N <= 10。
+   */
+  Size?: number
+  /**
+   * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
+   */
+  EventId?: string
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+   */
+  ChannelId?: number
 }
 
 /**
@@ -1098,6 +1118,58 @@ export interface RegisteredDeviceNetTypeInfo {
    * 蓝牙设备数
    */
   BluetoothDeviceNum: number
+}
+
+/**
+ * InvokeAISearchService返回参数结构体
+ */
+export interface InvokeAISearchServiceResponse {
+  /**
+   * 基于搜索结果的总结
+   */
+  Summary?: string
+  /**
+   * 视频结果集
+   */
+  Targets?: Array<TargetInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTWeSeeConfig请求参数结构体
+ */
+export interface ModifyTWeSeeConfigRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
+  /**
+   * 是否开启视频摘要，不传则不修改
+   */
+  EnableSummary?: boolean
+  /**
+   * 是否开启视频搜索，不传则不修改
+   */
+  EnableSearch?: boolean
+  /**
+   * 配置参数，不传则不修改
+   */
+  Config?: string
 }
 
 /**
@@ -3438,22 +3510,25 @@ export interface DisableTopicRuleRequest {
 }
 
 /**
- * ActivateTWeCallLicense请求参数结构体
+ * DescribeTWeSeeConfig请求参数结构体
  */
-export interface ActivateTWeCallLicenseRequest {
+export interface DescribeTWeSeeConfigRequest {
   /**
-   * TWecall类型：0-体验套餐；1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
+   * 产品ID
    */
-  PkgType: number
+  ProductId: string
   /**
-   * 参数已弃用，不用传参
-   * @deprecated
+   * 设备名称
    */
-  MiniProgramAppId?: string
+  DeviceName: string
   /**
-   * 设备列表
+   * 用户ID
    */
-  DeviceList?: Array<TWeCallInfo>
+  UserId?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
 }
 
 /**
@@ -3740,6 +3815,28 @@ export interface DescribeCloudStorageAIServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InvokeAISearchService请求参数结构体
+ */
+export interface InvokeAISearchServiceRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 自然语言查询
+   */
+  Query: string
+  /**
+   * 搜索结果总结的语言类型，支持的类型有：en-US、zh-CN、id-ID、th-TH
+   */
+  SummaryLang?: string
 }
 
 /**
@@ -4137,6 +4234,16 @@ export interface UpdateDeviceTWeCallAuthorizeStatusResponse {
  * ModifyProductCloudStorageAIService返回参数结构体
  */
 export interface ModifyProductCloudStorageAIServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTWeSeeConfig返回参数结构体
+ */
+export interface ModifyTWeSeeConfigResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4755,6 +4862,24 @@ export interface ModifyCloudStorageAIServiceRequest {
    * 视频分析配置参数
    */
   Config?: string
+}
+
+/**
+ * GenerateSignedVideoURL请求参数结构体
+ */
+export interface GenerateSignedVideoURLRequest {
+  /**
+   * 视频播放原始URL地址
+   */
+  VideoURL: string
+  /**
+   * 播放链接过期时间
+   */
+  ExpireTime: number
+  /**
+   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+   */
+  ChannelId?: number
 }
 
 /**
@@ -5920,45 +6045,25 @@ export interface CreateTRTCSignaturesWithRoomIdResponse {
 }
 
 /**
- * DescribeCloudStorageEvents请求参数结构体
+ * PublishBroadcastMessage请求参数结构体
  */
-export interface DescribeCloudStorageEventsRequest {
+export interface PublishBroadcastMessageRequest {
   /**
    * 产品ID
    */
   ProductId: string
   /**
-   * 设备名称
+   * 消息内容
    */
-  DeviceName: string
+  Payload: string
   /**
-   * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
+   * 消息质量等级
    */
-  StartTime?: number
+  Qos: number
   /**
-   * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
+   * ayload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
    */
-  EndTime?: number
-  /**
-   * 请求上下文, 用作查询游标
-   */
-  Context?: string
-  /**
-   * 查询数据项目的最大数量, 默认为10。假设传Size=10，返回的实际事件数量为N，则 5 <= N <= 10。
-   */
-  Size?: number
-  /**
-   * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
-   */
-  EventId?: string
-  /**
-   * 用户ID
-   */
-  UserId?: string
-  /**
-   * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
-   */
-  ChannelId?: number
+  PayloadEncoding?: string
 }
 
 /**
@@ -6181,21 +6286,25 @@ export interface CloudStorageAIServiceTaskFileInfo {
 }
 
 /**
- * GenerateSignedVideoURL请求参数结构体
+ * DescribeTWeSeeConfig返回参数结构体
  */
-export interface GenerateSignedVideoURLRequest {
+export interface DescribeTWeSeeConfigResponse {
   /**
-   * 视频播放原始URL地址
+   * 是否开启视频摘要
    */
-  VideoURL: string
+  EnableSummary?: boolean
   /**
-   * 播放链接过期时间
+   * 是否开启视频搜索
    */
-  ExpireTime: number
+  EnableSearch?: boolean
   /**
-   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+   * 配置参数
    */
-  ChannelId?: number
+  Config?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7341,6 +7450,25 @@ export interface DeleteFenceBindResponse {
 }
 
 /**
+ * ActivateTWeCallLicense请求参数结构体
+ */
+export interface ActivateTWeCallLicenseRequest {
+  /**
+   * TWecall类型：0-体验套餐；1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
+   */
+  PkgType: number
+  /**
+   * 参数已弃用，不用传参
+   * @deprecated
+   */
+  MiniProgramAppId?: string
+  /**
+   * 设备列表
+   */
+  DeviceList?: Array<TWeCallInfo>
+}
+
+/**
  * 应用信息
  */
 export interface IotApplication {
@@ -8002,6 +8130,40 @@ export interface CreateBatchProductionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频语义搜索结果
+ */
+export interface TargetInfo {
+  /**
+   * 视频唯一ID
+   */
+  Id?: string
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 视频起始时间（毫秒级Unix时间戳）
+   */
+  StartTimeMs?: number
+  /**
+   * 视频结束时间（毫秒级Unix时间戳）
+   */
+  EndTimeMs?: number
+  /**
+   * 用户自定义事件ID，后续扩展使用
+   */
+  EventId?: string
+  /**
+   * 视频内容摘要
+   */
+  Summary?: string
 }
 
 /**

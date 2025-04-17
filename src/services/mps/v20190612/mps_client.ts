@@ -44,6 +44,7 @@ import {
   MediaAiAnalysisDescriptionItem,
   DeleteAnimatedGraphicsTemplateResponse,
   AiReviewTaskProhibitedOcrResult,
+  StreamUrlDetail,
   AiRecognitionTaskAsrFullTextResultOutput,
   AsrHotwordsSetItem,
   AiReviewProhibitedOcrTaskOutput,

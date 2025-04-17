@@ -122,47 +122,38 @@ export interface InstanceStateInfo {
   InstanceState?: string
   /**
    * 集群操作创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowCreateTime?: string
   /**
    * 集群操作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowName?: string
   /**
    * 集群操作进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowProgress?: number
   /**
    * 集群状态描述，例如：运行中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateDesc?: string
   /**
    * 集群流程错误信息，例如：“创建失败，资源不足”
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
   /**
    * 当前步骤的名称，例如：”购买资源中“
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessName?: string
   /**
    * 集群是否有备份中任务，有为1,无为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupStatus?: number
   /**
    * 请求id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestId?: string
   /**
    * 集群是否有备份中任务，有为1,无为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupOpenStatus?: number
 }
@@ -173,87 +164,70 @@ export interface InstanceStateInfo {
 export interface NormQueryItem {
   /**
    * 调用次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallTimes: number
   /**
    * 读共享内存块数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SharedReadBlocks: number
   /**
    * 写共享内存块数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SharedWriteBlocks: number
   /**
    * 数据库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName: string
   /**
    * 脱敏后语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalQuery: string
   /**
    * 执行时间最长的语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxElapsedQuery: string
   /**
    * 花费总时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CostTime: number
   /**
    * 客户端ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIp: string
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName: string
   /**
    * 总次数占比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCallTimesPercent: number
   /**
    * 总耗时占比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCostTimePercent: number
   /**
    * 花费最小时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinCostTime: number
   /**
    * 花费最大时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxCostTime: number
   /**
    * 最早一条时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstTime: string
   /**
    * 最晚一条时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastTime: string
   /**
    * 读io总耗时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadCostTime: number
   /**
    * 写io总耗时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WriteCostTime: number
 }
@@ -275,14 +249,13 @@ export interface AccountInfo {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 账号名
    */
-  UserName: string
+  UserName?: string
   /**
    * 账户属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Perms?: Array<string>
 }
@@ -315,7 +288,6 @@ export interface ScaleOutInstanceResponse {
   FlowId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -410,7 +382,6 @@ export interface UpgradeItem {
   CreateTime?: string
   /**
    * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
@@ -419,7 +390,6 @@ export interface UpgradeItem {
   Status?: string
   /**
    * 操作者
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperateUin?: string
 }
@@ -571,7 +541,6 @@ export interface CBSSpec {
 export interface DescribeInstanceNodesResponse {
   /**
    * error msg
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -609,12 +578,10 @@ export interface DescribeSimpleInstancesResponse {
   TotalCount?: number
   /**
    * 集群列表详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancesList?: Array<InstanceSimpleInfoNew>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -665,7 +632,6 @@ export interface ModifyUserHbaResponse {
   TaskId?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -706,12 +672,10 @@ export interface InstanceInfo {
   InstanceName?: string
   /**
    * 集群状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 集群状态详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
@@ -721,7 +685,6 @@ export interface InstanceInfo {
   InstanceStateInfo?: InstanceStateInfo
   /**
    * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceID?: string
   /**
@@ -738,17 +701,14 @@ export interface InstanceInfo {
   Zone?: string
   /**
    * 地域详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionDesc?: string
   /**
    * 地区详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneDesc?: string
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
@@ -769,12 +729,10 @@ export interface InstanceInfo {
   DNNodes?: Array<InstanceNodeGroup>
   /**
    * 地域id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 地区id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
@@ -851,17 +809,14 @@ export interface ParamDetail {
   ValueRange?: ValueRange
   /**
    * 单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Unit?: string
   /**
    * 英文简介
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ShortDesc?: string
   /**
    * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterName?: string
 }
@@ -881,7 +836,6 @@ export interface DescribeInstancesResponse {
   InstancesList?: Array<InstanceInfo>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -938,7 +892,6 @@ export interface ConfigHistory {
 export interface ResetAccountPasswordResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1130,7 +1083,6 @@ export interface CreateInstanceByApiResponse {
   InstanceId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1474,7 +1426,6 @@ export interface HbaConfig {
   Method: string
   /**
    * 是否遮盖
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Mask?: string
 }
@@ -1525,7 +1476,6 @@ export interface SimpleInstanceInfo {
   ExpireTime?: string
   /**
    * 访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessInfo?: string
   /**
@@ -1542,7 +1492,6 @@ export interface SimpleInstanceInfo {
   Resources?: Array<ResourceInfo>
   /**
    * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
@@ -1665,12 +1614,10 @@ export interface ValueRange {
   Range?: Range
   /**
    * type 取enum的时候，返回参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enum?: Array<string>
   /**
    * type 取string的时候，返回的参数值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   String?: string
 }
@@ -1699,32 +1646,26 @@ export interface DescribeInstanceStateResponse {
   InstanceState?: string
   /**
    * 集群操作创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowCreateTime?: string
   /**
    * 集群操作名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowName?: string
   /**
    * 集群操作进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowProgress?: number
   /**
    * 集群状态描述，例如：运行中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateDesc?: string
   /**
    * 集群流程错误信息，例如：“创建失败，资源不足”
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
   /**
    * 当前步骤的名称，例如：”购买资源中“
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessName?: string
   /**
@@ -1763,22 +1704,18 @@ export interface InstanceOperation {
   StartTime?: string
   /**
    * 操作结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 操作上下文
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
   /**
    * 操作更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 操作UIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
 }
@@ -1809,12 +1746,10 @@ export interface InstanceSimpleInfoNew {
   Region?: string
   /**
    * 地域Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 地域详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionDesc?: string
   /**
@@ -1823,12 +1758,10 @@ export interface InstanceSimpleInfoNew {
   Zone?: string
   /**
    * 地区id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 地区详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneDesc?: string
   /**
@@ -1849,7 +1782,6 @@ export interface InstanceSimpleInfoNew {
   ExpireTime?: string
   /**
    * 访问地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessInfo?: string
   /**

@@ -636,17 +636,87 @@ Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
 }
 
 /**
- * 计费项询价单元
+ * CreateDataset请求参数结构体
  */
-export interface SpecUnit {
+export interface CreateDatasetRequest {
   /**
-   * 计费项名称
+   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
    */
-  SpecName: string
+  DatasetName: string
   /**
-   * 计费项数量,建议不超过100万
+   * 数据集类型:
+TYPE_DATASET_TEXT，文本
+TYPE_DATASET_IMAGE，图片
+TYPE_DATASET_TABLE，表格
+TYPE_DATASET_OTHER，其他
    */
-  SpecCount: number
+  DatasetType?: string
+  /**
+   * 数据源cos路径
+   */
+  StorageDataPath?: CosPathInfo
+  /**
+   * 数据集标签cos存储路径
+   */
+  StorageLabelPath?: CosPathInfo
+  /**
+   * 数据集标签
+   */
+  DatasetTags?: Array<Tag>
+  /**
+   * 数据集标注状态:
+STATUS_NON_ANNOTATED，未标注
+STATUS_ANNOTATED，已标注
+   */
+  AnnotationStatus?: string
+  /**
+   * 标注类型:
+ANNOTATION_TYPE_CLASSIFICATION，图片分类
+ANNOTATION_TYPE_DETECTION，目标检测
+ANNOTATION_TYPE_SEGMENTATION，图片分割
+ANNOTATION_TYPE_TRACKING，目标跟踪
+ANNOTATION_TYPE_OCR，OCR
+ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
+   */
+  AnnotationType?: string
+  /**
+   * 标注格式:
+ANNOTATION_FORMAT_TI，TI平台格式
+ANNOTATION_FORMAT_PASCAL，Pascal Voc
+ANNOTATION_FORMAT_COCO，COCO
+ANNOTATION_FORMAT_FILE，文件目录结构
+ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
+ANNOTATION_FORMAT_TXT，文本类型TXT格式
+ANNOTATION_FORMAT_CSV，文本类型CSV格式
+ANNOTATION_FORMAT_JSON，文本类型JSON格式
+   */
+  AnnotationFormat?: string
+  /**
+   * 表头信息
+   */
+  SchemaInfos?: Array<SchemaInfo>
+  /**
+   * 数据是否存在表头
+   */
+  IsSchemaExisted?: boolean
+  /**
+   * 导入文件粒度
+TYPE_TEXT_LINE，按行
+TYPE_TEXT_FILE，按文件
+   */
+  ContentType?: string
+  /**
+   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
+   */
+  DatasetScene?: string
+  /**
+   * 数据集标签。
+   */
+  SceneTags?: Array<string>
+  /**
+   * 数据集CFS配置。仅支持LLM场景
+   */
+  CFSConfig?: CFSConfig
 }
 
 /**
@@ -2548,6 +2618,20 @@ export interface CronScaleJob {
 }
 
 /**
+ * 计费项询价单元
+ */
+export interface SpecUnit {
+  /**
+   * 计费项名称
+   */
+  SpecName: string
+  /**
+   * 计费项数量,建议不超过100万
+   */
+  SpecCount: number
+}
+
+/**
  * 推理镜像组
  */
 export interface InferTemplateGroup {
@@ -3212,6 +3296,10 @@ POSTPAID_BY_HOUR 按量计费
    * 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效
    */
   EncodedStartCmdInfo?: EncodedStartCmdInfo
+  /**
+   * 代码仓库配置
+   */
+  CodeRepos?: Array<CodeRepoConfig>
 }
 
 /**
@@ -4302,87 +4390,17 @@ export interface ModelInfo {
 }
 
 /**
- * CreateDataset请求参数结构体
+ * 代码仓库配置
  */
-export interface CreateDatasetRequest {
+export interface CodeRepoConfig {
   /**
-   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * 代码仓库Id
    */
-  DatasetName: string
+  Id: string
   /**
-   * 数据集类型:
-TYPE_DATASET_TEXT，文本
-TYPE_DATASET_IMAGE，图片
-TYPE_DATASET_TABLE，表格
-TYPE_DATASET_OTHER，其他
+   * 代码仓下载目标地址
    */
-  DatasetType?: string
-  /**
-   * 数据源cos路径
-   */
-  StorageDataPath?: CosPathInfo
-  /**
-   * 数据集标签cos存储路径
-   */
-  StorageLabelPath?: CosPathInfo
-  /**
-   * 数据集标签
-   */
-  DatasetTags?: Array<Tag>
-  /**
-   * 数据集标注状态:
-STATUS_NON_ANNOTATED，未标注
-STATUS_ANNOTATED，已标注
-   */
-  AnnotationStatus?: string
-  /**
-   * 标注类型:
-ANNOTATION_TYPE_CLASSIFICATION，图片分类
-ANNOTATION_TYPE_DETECTION，目标检测
-ANNOTATION_TYPE_SEGMENTATION，图片分割
-ANNOTATION_TYPE_TRACKING，目标跟踪
-ANNOTATION_TYPE_OCR，OCR
-ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
-   */
-  AnnotationType?: string
-  /**
-   * 标注格式:
-ANNOTATION_FORMAT_TI，TI平台格式
-ANNOTATION_FORMAT_PASCAL，Pascal Voc
-ANNOTATION_FORMAT_COCO，COCO
-ANNOTATION_FORMAT_FILE，文件目录结构
-ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
-ANNOTATION_FORMAT_TXT，文本类型TXT格式
-ANNOTATION_FORMAT_CSV，文本类型CSV格式
-ANNOTATION_FORMAT_JSON，文本类型JSON格式
-   */
-  AnnotationFormat?: string
-  /**
-   * 表头信息
-   */
-  SchemaInfos?: Array<SchemaInfo>
-  /**
-   * 数据是否存在表头
-   */
-  IsSchemaExisted?: boolean
-  /**
-   * 导入文件粒度
-TYPE_TEXT_LINE，按行
-TYPE_TEXT_FILE，按文件
-   */
-  ContentType?: string
-  /**
-   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
-   */
-  DatasetScene?: string
-  /**
-   * 数据集标签。
-   */
-  SceneTags?: Array<string>
-  /**
-   * 数据集CFS配置。仅支持LLM场景
-   */
-  CFSConfig?: CFSConfig
+  TargetPath: string
 }
 
 /**
@@ -4930,6 +4948,10 @@ export interface TrainingTaskDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackUrl?: string
+  /**
+   * 任务关联的代码仓库配置
+   */
+  CodeRepos?: Array<CodeRepoConfig>
 }
 
 /**

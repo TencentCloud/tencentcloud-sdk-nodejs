@@ -27,6 +27,7 @@ import {
   SyncExecuteCommandOnAndroidInstancesRequest,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
+  ModifyAndroidAppVersionResponse,
   DeleteAndroidAppResponse,
   DescribeAndroidInstanceLabelsResponse,
   AndroidApp,
@@ -53,7 +54,9 @@ import {
   CopyAndroidInstanceRequest,
   SyncExecuteCommandOnAndroidInstancesResponse,
   RestoreAndroidInstanceFromStorageResponse,
+  ModifyAndroidAppVersionRequest,
   StartAndroidInstancesAppRequest,
+  ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
   ModifyAndroidInstancesUserIdRequest,
   StopPublishStreamResponse,
@@ -91,11 +94,12 @@ import {
   DeleteAndroidAppVersionRequest,
   StartAndroidInstancesAppResponse,
   SwitchGameArchiveRequest,
+  StopAndroidInstancesRequest,
   StartPublishStreamToCSSRequest,
   Filter,
   ResetAndroidInstancesResponse,
   RestartAndroidInstancesAppRequest,
-  StopAndroidInstancesRequest,
+  DeleteAndroidAppRequest,
   DescribeAndroidAppsRequest,
   StopGameRequest,
   RebootAndroidInstancesResponse,
@@ -127,7 +131,7 @@ import {
   RebootAndroidInstancesRequest,
   CreateSessionResponse,
   AndroidInstanceAppInfo,
-  DeleteAndroidAppRequest,
+  ModifyAndroidInstancesResolutionRequest,
   LabelRequirement,
   CreateAndroidAppVersionResponse,
   BackUpAndroidInstanceToStorageResponse,
@@ -307,6 +311,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改安卓实例分辨率。需要注意的是该接口需要重启才能生效。
+   */
+  async ModifyAndroidInstancesResolution(
+    req: ModifyAndroidInstancesResolutionRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesResolutionResponse) => void
+  ): Promise<ModifyAndroidInstancesResolutionResponse> {
+    return this.request("ModifyAndroidInstancesResolution", req, cb)
+  }
+
+  /**
    * 创建安卓实例
    */
   async DeleteAndroidInstanceLabel(
@@ -404,6 +418,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RebootAndroidInstancesResponse) => void
   ): Promise<RebootAndroidInstancesResponse> {
     return this.request("RebootAndroidInstances", req, cb)
+  }
+
+  /**
+   * 重启安卓实例
+   */
+  async StopAndroidInstances(
+    req: StopAndroidInstancesRequest,
+    cb?: (error: string, rep: StopAndroidInstancesResponse) => void
+  ): Promise<StopAndroidInstancesResponse> {
+    return this.request("StopAndroidInstances", req, cb)
   }
 
   /**
@@ -621,13 +645,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启安卓实例
+   * 修改安卓应用版本
    */
-  async StopAndroidInstances(
-    req: StopAndroidInstancesRequest,
-    cb?: (error: string, rep: StopAndroidInstancesResponse) => void
-  ): Promise<StopAndroidInstancesResponse> {
-    return this.request("StopAndroidInstances", req, cb)
+  async ModifyAndroidAppVersion(
+    req: ModifyAndroidAppVersionRequest,
+    cb?: (error: string, rep: ModifyAndroidAppVersionResponse) => void
+  ): Promise<ModifyAndroidAppVersionResponse> {
+    return this.request("ModifyAndroidAppVersion", req, cb)
   }
 
   /**

@@ -417,6 +417,7 @@ export interface DescribeNetworkInterfacesRequest {
 <li>eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。</li>
 <li>address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。</li>
 <li>public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。</li>
+<li>address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -1031,8 +1032,7 @@ export interface ModifyNatGatewayAttributeRequest {
  */
 export interface DescribeLocalGatewayRequest {
   /**
-   * 查询条件：
-vpc-id：按照VPCID过滤，local-gateway-name：按照本地网关名称过滤，名称支持模糊搜索，local-gateway-id：按照本地网关实例ID过滤，cdc-id：按照cdc实例ID过滤查询。
+   * 支持的过滤条件如下:\n<li>vpc-id:按照VPCID过滤。</li>\n<li>local-gateway-name:本地网关名称,支持模糊查询。</li>\n<li>local-gateway-id:本地网关实例ID。</li>\n<li>cdc-id:cdc实例ID。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -1645,11 +1645,11 @@ export interface CreateIp6TranslatorsResponse {
  */
 export interface DescribeFlowLogsRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID。
+   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
    */
   VpcId?: string
   /**
-   * 流日志唯一ID。
+   * 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建。
    */
   FlowLogId?: string
   /**
@@ -1657,7 +1657,8 @@ export interface DescribeFlowLogsRequest {
    */
   FlowLogName?: string
   /**
-   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE。
+   * 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。
+
    */
   ResourceType?: string
   /**
@@ -1665,7 +1666,7 @@ export interface DescribeFlowLogsRequest {
    */
   ResourceId?: string
   /**
-   * 流日志采集类型，ACCEPT|REJECT|ALL。
+   * 流日志采集类型，ACCEPT（允许），REJECT（拒绝），ALL（全部）。
    */
   TrafficType?: string
   /**
@@ -1673,11 +1674,11 @@ export interface DescribeFlowLogsRequest {
    */
   CloudLogId?: string
   /**
-   * 流日志存储ID状态。
+   * 流日志存储ID状态。SUCCESS（成功），DELETED（删除）
    */
   CloudLogState?: string
   /**
-   * 按某个字段排序,支持字段：flowLogName,createTime，默认按CreatedTime。
+   * 按某个字段排序,支持字段：flowLogName,createTime，默认按createTime。
    */
   OrderField?: string
   /**
@@ -1689,7 +1690,7 @@ export interface DescribeFlowLogsRequest {
    */
   Offset?: number
   /**
-   * 每页行数，默认为10。
+   * 每页行数，默认为10。范围1-100。
    */
   Limit?: number
   /**
@@ -2009,11 +2010,12 @@ export interface TransformAddressResponse {
  */
 export interface DisassociateNetworkInterfaceSecurityGroupsRequest {
   /**
-   * 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。
+   * 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
    */
   NetworkInterfaceIds: Array<string>
   /**
-   * 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。
+   * 安全组实例ID，例如：sg-33ocnj9n，可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。每次请求的实例的上限为100。
    */
   SecurityGroupIds: Array<string>
 }
@@ -2087,19 +2089,19 @@ export interface DescribeHighPriorityRoutesRequest {
  */
 export interface ModifyFlowLogAttributeRequest {
   /**
-   * 流日志唯一ID。
+   * 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。
    */
   FlowLogId: string
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID，修改云联网流日志属性时可不填，其他流日志类型必填。
+   * 私用网络唯一ID。修改云联网流日志属性时可不填，其他流日志类型必填。
    */
   VpcId?: string
   /**
-   * 流日志实例名字。
+   * 流日志实例名字。长度为不超过60字节。
    */
   FlowLogName?: string
   /**
-   * 流日志实例描述。
+   * 流日志实例描述。长度为不超过512字节。
    */
   FlowLogDescription?: string
 }
@@ -2686,6 +2688,20 @@ export interface DescribeNatGatewaysRequest {
 }
 
 /**
+ * 云服务器巨帧状态
+ */
+export interface InstanceJumbo {
+  /**
+   * 实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 实例是否支持巨帧。
+   */
+  JumboState?: boolean
+}
+
+/**
  * ModifyFlowLogAttribute返回参数结构体
  */
 export interface ModifyFlowLogAttributeResponse {
@@ -2877,6 +2893,20 @@ export interface ModifyIp6TranslatorResponse {
  * CreateVpcEndPointServiceWhiteList返回参数结构体
  */
 export interface CreateVpcEndPointServiceWhiteListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceJumbo返回参数结构体
+ */
+export interface DescribeInstanceJumboResponse {
+  /**
+   * 云服务器巨帧状态
+   */
+  InstanceJumboSet?: Array<InstanceJumbo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3110,11 +3140,12 @@ export interface TranslationNatRuleInput {
  */
 export interface DeleteFlowLogRequest {
   /**
-   * 流日志唯一ID。
+   * 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。
    */
   FlowLogId: string
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID，删除云联网流日志时，可不填，其他流日志类型必填。
+   * 私用网络唯一ID。删除云联网流日志时，可不填，其他流日志类型必填。可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取流日志对应的私有网络唯一ID。也可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取当前账户的私有网络唯一ID。
+
    */
   VpcId?: string
 }
@@ -3373,6 +3404,10 @@ export interface AssignIpv6CidrBlockRequest {
    * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
    */
   VpcId: string
+  /**
+   * 申请IPv6 Cidr 的类型，`GUA`(全球单播地址), `ULA`(唯一本地地址)。
+   */
+  AddressType?: string
 }
 
 /**
@@ -3614,11 +3649,11 @@ export interface ModifyVpcEndPointAttributeResponse {
  */
 export interface DescribeFlowLogRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID。
+   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。该接口不支持拉取CCN类型的流日志，所以该字段为必选。
    */
   VpcId: string
   /**
-   * 流日志唯一ID。
+   * 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取；
    */
   FlowLogId: string
 }
@@ -5564,6 +5599,11 @@ export interface Vpc {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AssistantCidrSet?: Array<AssistantCidr>
+  /**
+   * 返回多运营商IPv6 Cidr Block
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ipv6CidrBlockSet?: Array<ISPIPv6CidrBlock>
 }
 
 /**
@@ -7934,6 +7974,16 @@ export interface DescribeVpnGatewaysRequest {
 }
 
 /**
+ * DescribeInstanceJumbo请求参数结构体
+ */
+export interface DescribeInstanceJumboRequest {
+  /**
+   * CVM实例ID列表。限制每次i最多查询10个实例。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * nat网关流量监控明细。
  */
 export interface NatGatewayFlowMonitorDetail {
@@ -8253,6 +8303,7 @@ export interface DescribeVpcsRequest {
   **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。
 <li>ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。</li>
 <li>isp-type  - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。</li>
+<li>address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -8424,6 +8475,10 @@ export interface AssignIpv6CidrBlockResponse {
    * 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`。
    */
   Ipv6CidrBlock?: string
+  /**
+   * 申请IPv6 Cidr 的类型，`GUA`,  `ULA`
+   */
+  AddressType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9861,7 +9916,7 @@ export interface Ipv6Address {
    */
   PublicIpAddress?: string
   /**
-   * `IPv6`地址的类型: `GUA`(全球单播地址), `OTHER`(非GUA/ULA地址), `ULA`(唯一本地地址)
+   * `IPv6`地址的类型: `GUA`(全球单播地址), `ULA`(唯一本地地址)
    */
   AddressType?: string
 }
@@ -10213,6 +10268,7 @@ export interface DescribeSubnetsRequest {
 <li>is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网</li>
 <li>ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。</li>
 <li>isp-type  - String - （过滤条件）运营商类型，形如: BGP 。</li>
+<li>address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -10373,27 +10429,22 @@ export interface HaVip {
   Business?: string
   /**
    * `HAVIP`的飘移范围。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HaVipAssociationSet?: Array<HaVipAssociation>
   /**
    * 是否开启`HAVIP`的飘移范围校验。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckAssociate?: boolean
   /**
    * CDC实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
    * HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlushedTime?: string
   /**
-   * 标签键值对。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签键值对。
    */
   TagSet?: Array<Tag>
 }
@@ -10686,7 +10737,7 @@ export interface CreateAndAttachNetworkInterfaceRequest {
    */
   VpcId: string
   /**
-   * 弹性网卡名称，最大长度不能超过60个字节。
+   * 弹性网卡名称，最大长度不能超过60个字符。
    */
   NetworkInterfaceName: string
   /**
@@ -11475,12 +11526,10 @@ export interface Subnet {
   TagSet?: Array<Tag>
   /**
    * CDC实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
    * 是否是CDC所属子网。0:否 1:是
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCdcSubnet?: number
 }
@@ -12681,11 +12730,11 @@ export interface CreateNatGatewayDestinationIpPortTranslationNatRuleRequest {
  */
 export interface CreateFlowLogRequest {
   /**
-   * 流日志实例名字。
+   * 流日志实例名字。长度为不超过60个字节。
    */
   FlowLogName: string
   /**
-   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG。
+   * 流日志所属资源类型，VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。当选择VPC， SUBNET，CCN，DCG时，请通过工单加入白名单。
    */
   ResourceType: string
   /**
@@ -12693,11 +12742,11 @@ export interface CreateFlowLogRequest {
    */
   ResourceId: string
   /**
-   * 流日志采集类型，ACCEPT|REJECT|ALL。
+   * 流日志采集类型，ACCEPT（允许），REJECT（拒绝），ALL（全部）。
    */
   TrafficType: string
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID，当ResourceType为CCN时不填，其他类型必填。
+   * 私用网络唯一ID。当ResourceType为CCN时不填，其他类型必填。
    */
   VpcId?: string
   /**
@@ -12705,7 +12754,9 @@ export interface CreateFlowLogRequest {
    */
   FlowLogDescription?: string
   /**
-   * 流日志存储ID。
+   * 流日志存储ID（cls的日志主题ID，
+可通过[DescribeTopics](https://cloud.tencent.com/document/api/1179/46086)接口获取。
+）。当StorageType为cls时，CloudLogId为必选。
    */
   CloudLogId?: string
   /**
@@ -12713,7 +12764,7 @@ export interface CreateFlowLogRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 消费端类型：cls、ckafka。默认值cls。
+   * 消费端类型：cls、ckafka。默认值cls。当选择kafka时，请通过工单加入白名单。
    */
   StorageType?: string
   /**
@@ -12995,6 +13046,16 @@ export interface ModifyReserveIpAddressRequest {
    * 内网保留 IP描述。
    */
   Description?: string
+}
+
+/**
+ * 返回多运营商IPv6 Cidr Block
+ */
+export interface ISPIPv6CidrBlock {
+  /**
+   * IPv6 Cidr 的类型：`GUA`(全球单播地址), `ULA`(唯一本地地址)
+   */
+  AddressType?: string
 }
 
 /**
@@ -13566,7 +13627,7 @@ export interface AssociateNetworkInterfaceSecurityGroupsResponse {
  */
 export interface EnableFlowLogsRequest {
   /**
-   * 流日志Id。
+   * 流日志Id。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。
    */
   FlowLogIds: Array<string>
 }
@@ -16019,7 +16080,8 @@ export interface ModifyVpnConnectionAttributeRequest {
  */
 export interface DeleteNetworkInterfaceRequest {
   /**
-   * 弹性网卡实例ID，例如：eni-m6dyj72l。
+   * 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
    */
   NetworkInterfaceId: string
 }
@@ -16248,11 +16310,13 @@ export interface ServicesInfo {
  */
 export interface MigratePrivateIpAddressRequest {
   /**
-   * 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。
+   * 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
    */
   SourceNetworkInterfaceId: string
   /**
-   * 待迁移的目的弹性网卡实例ID。
+   * 待迁移的目的弹性网卡实例ID。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
    */
   DestinationNetworkInterfaceId: string
   /**
@@ -16641,7 +16705,7 @@ export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest {
  */
 export interface DisableFlowLogsRequest {
   /**
-   * 流日志Id。
+   * 流日志Id。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。
    */
   FlowLogIds: Array<string>
 }

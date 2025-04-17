@@ -634,6 +634,10 @@ export interface ServerBaseConfig {
    * 服务标签, function: 函数托管
    */
   Tag?: string
+  /**
+   * 内网访问开关 close | open
+   */
+  InternalAccess?: string
 }
 
 /**

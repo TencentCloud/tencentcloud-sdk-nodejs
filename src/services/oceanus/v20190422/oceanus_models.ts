@@ -255,7 +255,7 @@ export interface CreateJobConfigRequest {
    */
   EntrypointClass?: string
   /**
-   * 主类入参
+   * 主类入参，需要区分下Sql作业配置，Jar作业配置，Python作业配置，具体参考下面的示例值
    */
   ProgramArgs?: string
   /**

@@ -231,7 +231,7 @@ export class Client extends AbstractClient {
   /**
      * 查询Topic迁移状态列表
 
-查询过滤器，支持TopicName、MigrationStatus查询
+查询过滤器，支持TopicName、MigrationStatus、Namespace查询
      */
   async DescribeMigratingTopicList(
     req: DescribeMigratingTopicListRequest,
@@ -359,6 +359,7 @@ TopicName，主题名称过滤
 GroupName，消费组名称模糊搜索
 Imported，是否已导入
 ImportStatus，导入状态
+Namespace，命名空间
      */
   async DescribeSourceClusterGroupList(
     req: DescribeSourceClusterGroupListRequest,

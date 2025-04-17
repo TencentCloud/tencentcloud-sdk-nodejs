@@ -605,17 +605,14 @@ export interface ImportSourceClusterConsumerGroupsResponse {
 export interface TopicStageChangeResult {
   /**
    * 主题名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Success?: boolean
   /**
    * 命名空间，仅4.x有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
 }
@@ -640,29 +637,43 @@ export interface DeleteTopicRequest {
 export interface MigratingTopic {
   /**
    * 主题名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 迁移状态 S_RW_D_NA 源集群读写 S_RW_D_R 源集群读写目标集群读 S_RW_D_RW 源集群读写目标集群读写 S_R_D_RW 源集群读目标集群读写 S_NA_D_RW 目标集群读写
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MigrationStatus?: string
   /**
-   * 是否完成健康检查	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否完成健康检查
    */
   HealthCheckPassed?: boolean
   /**
    * 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。 NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckError?: string
   /**
    * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
+  /**
+   * 4.x的命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceV4?: string
+  /**
+   * 4.x的主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicNameV4?: string
+  /**
+   * 4.x的完整命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullNamespaceV4?: string
+  /**
+   * 上次健康检查返回的错误列表
+   */
+  HealthCheckErrorList?: Array<string>
 }
 
 /**
@@ -935,7 +946,6 @@ export interface Tag {
 export interface DescribeSourceClusterGroupListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1186,14 +1196,6 @@ export interface DescribeMQTTClientRequest {
  */
 export interface DescribeSourceClusterGroupListRequest {
   /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
    * 任务ID
    */
   TaskId: string
@@ -1201,6 +1203,14 @@ export interface DescribeSourceClusterGroupListRequest {
    * 查询条件列表
    */
   Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
 }
 
 /**
@@ -1973,7 +1983,6 @@ export interface DoHealthCheckOnMigratingTopicRequest {
 export interface DescribeMigratingTopicListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -2226,22 +2235,18 @@ export interface CreateTopicResponse {
 export interface DescribeMigratingGroupStatsResponse {
   /**
    * 源集群消费组堆积
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceConsumeLag?: number
   /**
    * 目标集群消费组堆积
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetConsumeLag?: number
   /**
    * 源集群连接客户端列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceConsumerClients?: Array<ConsumerClient>
   /**
    * 目标集群连接客户端列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetConsumerClients?: Array<ConsumerClient>
   /**
@@ -2851,6 +2856,10 @@ export interface ConsumerClient {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerLag?: number
+  /**
+   * 消费者客户端类型（grpc；remoting；http）
+   */
+  ChannelProtocol?: string
 }
 
 /**
@@ -3011,14 +3020,6 @@ export interface DescribeTopicListByGroupRequest {
  */
 export interface DescribeMigratingTopicListRequest {
   /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
    * 任务ID
    */
   TaskId: string
@@ -3026,6 +3027,14 @@ export interface DescribeMigratingTopicListRequest {
    * 查询条件列表
    */
   Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
 }
 
 /**
