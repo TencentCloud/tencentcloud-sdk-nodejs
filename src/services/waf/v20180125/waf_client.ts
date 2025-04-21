@@ -25,6 +25,7 @@ import {
   AddAntiFakeUrlRequest,
   ModifyIpAccessControlRequest,
   DescribeApiListVersionTwoResponse,
+  GlobalSceneInfo,
   DescribePeakValueResponse,
   ProductInfo,
   DescribeAntiLeakageItem,
@@ -39,6 +40,7 @@ import {
   GenerateDealsAndPayNewRequest,
   DeleteCustomWhiteRuleResponse,
   ModifyHostModeResponse,
+  ModifyBotSceneStatusResponse,
   GetAttackDownloadRecordsRequest,
   MajorEventsPkg,
   DescribeDomainRulesRequest,
@@ -48,6 +50,7 @@ import {
   AccessKeyValueInfo,
   KVInt,
   AddAntiInfoLeakRulesRequest,
+  BotToken,
   DeleteAttackWhiteRuleResponse,
   DescribeWebshellStatusRequest,
   GetAttackHistogramResponse,
@@ -58,7 +61,7 @@ import {
   ModifyApiAnalyzeStatusResponse,
   ModifyAttackWhiteRuleRequest,
   HostRecord,
-  ModifyCustomRuleResponse,
+  DescribeBotUCBRuleRsp,
   FreshAntiFakeUrlRequest,
   ModifyAreaBanStatusRequest,
   SpartaProtectionPort,
@@ -66,6 +69,7 @@ import {
   DescribeSessionRequest,
   DescribePolicyStatusRequest,
   DescribeAccessFastAnalysisRequest,
+  UCBActionProportion,
   DeleteIpAccessControlRequest,
   DescribeDomainCountInfoResponse,
   ModifyHostModeRequest,
@@ -103,7 +107,7 @@ import {
   ModifyInstanceElasticModeResponse,
   DescribePostCLSFlowsResponse,
   TargetEntity,
-  DeleteHostRequest,
+  DescribeBotSceneUCBRuleRequest,
   DescribeDomainCountInfoRequest,
   DescribeCustomWhiteRuleResponse,
   ModifySpartaProtectionRequest,
@@ -124,6 +128,8 @@ import {
   CdcCluster,
   DescribeCustomRulesRspRuleListItem,
   ModifyAntiInfoLeakRulesResponse,
+  DeleteBotSceneUCBRuleRequest,
+  DeleteHostRequest,
   QpsData,
   AddCustomWhiteRuleResponse,
   ModifyUserSignatureClassRequest,
@@ -136,6 +142,7 @@ import {
   DomainInfo,
   DescribeAreaBanAreasResponse,
   DescribeDomainsResponse,
+  BotActionScopeRuleEntry,
   AddAntiFakeUrlResponse,
   SearchAttackLogResponse,
   ModifySpartaProtectionResponse,
@@ -162,8 +169,10 @@ import {
   ModifyCustomWhiteRuleResponse,
   SearchItem,
   ApiPkg,
+  ModifyBotSceneStatusRequest,
   DescribeAreaBanSupportAreasResponse,
   TigaMainClassMode,
+  DeleteBotSceneUCBRuleResponse,
   DescribeUserSignatureClassResponse,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
@@ -179,16 +188,18 @@ import {
   DescribePeakPointsResponse,
   ModifyInstanceRenewFlagRequest,
   UserWhiteRuleItem,
+  DescribeBotSceneUCBRuleResponse,
   GoodsDetailNew,
   DescribeAreaBanSupportAreasRequest,
   GoodsDetail,
   DeleteIpAccessControlResponse,
-  BatchIpAccessControlItem,
+  ClbObject,
   ApiSecKey,
   UserWhiteRule,
   PortInfo,
   AddAttackWhiteRuleRequest,
   FraudPkg,
+  UCBEntryValue,
   DescribeDomainDetailsClbResponse,
   ExportAccessInfo,
   DescribeIpAccessControlRequest,
@@ -198,12 +209,14 @@ import {
   ReqUserRule,
   DescribeIpHitItemsRequest,
   GoodNews,
+  ModifyBotSceneUCBRuleRequest,
   ScanIpInfo,
   DescribeUserSignatureRuleRequest,
   ModifyProtectionStatusResponse,
   DescribeUserClbWafRegionsRequest,
   DescribePostCKafkaFlowsRequest,
   CreatePostCKafkaFlowRequest,
+  DescribeBotSceneListResponse,
   AddAntiInfoLeakRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
   AddDomainWhiteRuleRequest,
@@ -216,10 +229,10 @@ import {
   ModifyHostRequest,
   DestroyPostCKafkaFlowRequest,
   DescribeHistogramResponse,
-  ClbObject,
+  BatchIpAccessControlItem,
   ModifyUserLevelResponse,
   CreateAccessExportRequest,
-  ModifyUserLevelRequest,
+  ModifyBotSceneUCBRuleResponse,
   DescribeIpHitItemsResponse,
   ModifyHostResponse,
   DescribeCertificateVerifyResultRequest,
@@ -229,6 +242,7 @@ import {
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
   MiniPkg,
+  BotSceneMatchCondition,
   DescribeAreaBanAreasRequest,
   AddDomainWhiteRuleResponse,
   DescribeIpAccessControlResponse,
@@ -236,7 +250,8 @@ import {
   CCRuleData,
   DescribeInstancesResponse,
   AccessRuleTagInfo,
-  IpAccessControlItem,
+  ModifyInstanceQpsLimitRequest,
+  InOutputUCBRuleEntry,
   DestroyPostCLSFlowResponse,
   UpsertCCAutoStatusResponse,
   ModifyGenerateDealsResponse,
@@ -249,6 +264,7 @@ import {
   DescribeFlowTrendResponse,
   CreateIpAccessControlResponse,
   UpsertIpAccessControlRequest,
+  BotSceneActionRule,
   SessionItem,
   ModifyObjectRequest,
   DescribeAccessExportsRequest,
@@ -260,10 +276,12 @@ import {
   IpAccessControlParam,
   DescribeCustomRuleListResponse,
   GetInstanceQpsLimitRequest,
+  BotSceneInfo,
   SessionData,
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
-  ModifyInstanceQpsLimitRequest,
+  ModifyCustomRuleResponse,
+  IpAccessControlItem,
   FreshAntiFakeUrlResponse,
   DeleteSpartaProtectionRequest,
   UserDomainInfo,
@@ -318,6 +336,7 @@ import {
   ModifyUserSignatureRuleV2Request,
   ModifyWebshellStatusResponse,
   GenerateDealsAndPayNewResponse,
+  ModifyUserLevelRequest,
   DescribeCCRuleRequest,
   CreatePostCKafkaFlowResponse,
   GetAttackDownloadRecordsResponse,
@@ -325,10 +344,12 @@ import {
   ModifyIpAccessControlResponse,
   VipInfo,
   DescribeAccessHistogramResponse,
-  DescribeTopAttackDomainResponse,
+  ModifyHostFlowModeResponse,
+  DescribeBotSceneListRequest,
   Goods,
   UpsertIpAccessControlResponse,
   DescribeAccessHistogramRequest,
+  BotScoreRuleEntry,
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
@@ -356,7 +377,7 @@ import {
   ModifyCustomRuleRequest,
   ModifyDomainWhiteRuleRequest,
   DescribePeakPointsRequest,
-  ModifyHostFlowModeResponse,
+  DescribeTopAttackDomainResponse,
   DescribeAntiInfoLeakRulesStrategyItem,
   ApiParameterType,
   BotStatPointItem,
@@ -382,6 +403,7 @@ import {
   PostAttackDownloadTaskRequest,
   ModifyAreaBanAreasRequest,
   ModifyModuleStatusResponse,
+  InOutputBotUCBRule,
   AttackLogInfo,
   ModifyHostStatusResponse,
   QPSPackageNew,
@@ -421,6 +443,7 @@ import {
   UpdateProtectionModesRequest,
   FindAllDomainDetail,
   DeleteAntiInfoLeakRuleRequest,
+  DescribeBotSceneOverviewResponse,
   DescribeVipInfoResponse,
   DescribeApiDetailResponse,
   DescribeRuleLimitRequest,
@@ -431,6 +454,7 @@ import {
   DescribeDomainWhiteRulesResponse,
   ModifyWafAutoDenyRulesRequest,
   DescribeSessionResponse,
+  DescribeBotSceneOverviewRequest,
   PostCKafkaFlowInfo,
   UpsertSessionRequest,
   DescribeHostLimitRequest,
@@ -776,6 +800,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 场景化后Bot获取UCB自定义规则策略
+   */
+  async DescribeBotSceneUCBRule(
+    req: DescribeBotSceneUCBRuleRequest,
+    cb?: (error: string, rep: DescribeBotSceneUCBRuleResponse) => void
+  ): Promise<DescribeBotSceneUCBRuleResponse> {
+    return this.request("DescribeBotSceneUCBRule", req, cb)
+  }
+
+  /**
    * Waf  IP封堵状态查询
    */
   async DescribeIpHitItems(
@@ -904,6 +938,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyHostStatusResponse) => void
   ): Promise<ModifyHostStatusResponse> {
     return this.request("ModifyHostStatus", req, cb)
+  }
+
+  /**
+   * 【接口复用】场景化后更新Bot的UCB自定义规则，两个调用位置：1.BOT全局白名单 2.BOT场景配置
+   */
+  async ModifyBotSceneUCBRule(
+    req: ModifyBotSceneUCBRuleRequest,
+    cb?: (error: string, rep: ModifyBotSceneUCBRuleResponse) => void
+  ): Promise<ModifyBotSceneUCBRuleResponse> {
+    return this.request("ModifyBotSceneUCBRule", req, cb)
   }
 
   /**
@@ -1207,6 +1251,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * bot子场景开关
+   */
+  async ModifyBotSceneStatus(
+    req: ModifyBotSceneStatusRequest,
+    cb?: (error: string, rep: ModifyBotSceneStatusResponse) => void
+  ): Promise<ModifyBotSceneStatusResponse> {
+    return this.request("ModifyBotSceneStatus", req, cb)
+  }
+
+  /**
    * 编辑负载均衡型WAF防护域名配置
    */
   async ModifyHost(
@@ -1424,6 +1478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpAccessControlResponse) => void
   ): Promise<DescribeIpAccessControlResponse> {
     return this.request("DescribeIpAccessControl", req, cb)
+  }
+
+  /**
+   * 获取Bot场景全局概览
+   */
+  async DescribeBotSceneOverview(
+    req: DescribeBotSceneOverviewRequest,
+    cb?: (error: string, rep: DescribeBotSceneOverviewResponse) => void
+  ): Promise<DescribeBotSceneOverviewResponse> {
+    return this.request("DescribeBotSceneOverview", req, cb)
   }
 
   /**
@@ -1789,6 +1853,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取BOT场景列表与概览
+   */
+  async DescribeBotSceneList(
+    req: DescribeBotSceneListRequest,
+    cb?: (error: string, rep: DescribeBotSceneListResponse) => void
+  ): Promise<DescribeBotSceneListResponse> {
+    return this.request("DescribeBotSceneList", req, cb)
+  }
+
+  /**
    * 开启或禁用精准白名单
    */
   async ModifyCustomWhiteRuleStatus(
@@ -1896,6 +1970,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateHostResponse) => void
   ): Promise<CreateHostResponse> {
     return this.request("CreateHost", req, cb)
+  }
+
+  /**
+   * 场景化后删除Bot的UCB自定义规则
+   */
+  async DeleteBotSceneUCBRule(
+    req: DeleteBotSceneUCBRuleRequest,
+    cb?: (error: string, rep: DeleteBotSceneUCBRuleResponse) => void
+  ): Promise<DeleteBotSceneUCBRuleResponse> {
+    return this.request("DeleteBotSceneUCBRule", req, cb)
   }
 
   /**

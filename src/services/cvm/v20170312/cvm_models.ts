@@ -323,7 +323,9 @@ export type DescribeZonesRequest = null
  */
 export interface ModifyKeyPairAttributeRequest {
   /**
-   * 密钥对ID，密钥对ID形如：`skey-xxxxxxxx`。<br><br>可以通过以下方式获取可用的密钥 ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥 ID。<br><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/9403) ，取返回信息中的 `KeyId` 获取密钥对 ID。
+   * 密钥对ID。可以通过以下方式获取可用的密钥 ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥 ID。</li>
+<li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/9403) ，取返回信息中的 `KeyId` 获取密钥对 ID。</li>
    */
   KeyId: string
   /**
@@ -832,7 +834,7 @@ export interface SystemDisk {
    */
   DiskId?: string
   /**
-   * 系统盘大小，单位：GB。默认值为 50
+   * 系统盘大小，单位：GiB。默认值为 50
    */
   DiskSize?: number
   /**
@@ -841,8 +843,6 @@ export interface SystemDisk {
   CdcId?: string
   /**
    * 磁盘名称，长度不超过128 个字符。
-
-该参数正在邀测中，暂未开放使用。
    */
   DiskName?: string
 }
@@ -1152,15 +1152,21 @@ export interface DeleteInstancesActionTimerRequest {
  */
 export interface AssociateInstancesKeyPairsRequest {
   /**
-   * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br>可以通过以下方式获取可用的实例ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li><li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的`InstanceId`获取实例ID。</li>
+   * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的`InstanceId`获取实例ID。</li>
    */
   InstanceIds: Array<string>
   /**
-   * 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-3glfot13`。<br>可以通过以下方式获取可用的密钥ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。</li><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。</li>
+   * 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。可以通过以下方式获取可用的密钥ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。</li>
+<li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。</li>
    */
   KeyIds: Array<string>
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：<br><li>true：表示在正常关机失败后进行强制关机。</li><li>false：表示在正常关机失败后不进行强制关机。</li>默认取值：false。
+   * 是否强制关机，默认值为 false。常规场景下，建议手动关机后绑定密钥。取值范围：
+<li>true：先执行强制关机，再绑定密钥。</li>
+<li>false：不执行强制关机，仅支持对已关机状态实例进行绑定操作。</li>
    */
   ForceStop?: boolean
 }
@@ -1384,9 +1390,7 @@ export interface ResetInstancesPasswordRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 重置后的实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：
-Linux 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字：0-9<br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/
-Windows 实例密码必须12\~30位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>如果实例即包含 `Linux` 实例又包含 `Windows` 实例，则密码复杂度限制按照 `Windows` 实例的限制。
+   * 重置后的实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]</li><li>大写字母：[A-Z]</li><li>数字：0-9</li><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/Windows 实例密码必须12\~30位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符</li><li>小写字母：[a-z]</li><li>大写字母：[A-Z]</li><li>数字： 0-9</li><li>特殊字符：()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li><li>如果实例即包含 `Linux` 实例又包含 `Windows` 实例，则密码复杂度限制按照 `Windows` 实例的限制。</li>
    */
   Password: string
   /**
@@ -1394,7 +1398,7 @@ Windows 实例密码必须12\~30位，不能以“/”开头且不包括用户�
    */
   UserName?: string
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>true：表示在正常关机失败后进行强制关机<br><li>false：表示在正常关机失败后不进行强制关机<br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>true：表示在正常关机失败后进行强制关机</li><li>false：表示在正常关机失败后不进行强制关机</li>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
    */
   ForceStop?: boolean
 }
@@ -2172,15 +2176,21 @@ KMS 密钥 ID 通过[KMS 控制台](https://console.cloud.tencent.com/kms2)获�
  */
 export interface DisassociateInstancesKeyPairsRequest {
   /**
-   * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br><br>可以通过以下方式获取可用的实例ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。<br><li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。
+   * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br>可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
   /**
-   * 密钥对ID列表，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-11112222`。<br><br>可以通过以下方式获取可用的密钥ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。<br><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。
+   * 密钥对ID列表，列表长度上限为100。可以通过以下方式获取可用的密钥ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。</li>
+<li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。</li>
    */
   KeyIds: Array<string>
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：<br><li>true：表示在正常关机失败后进行强制关机。<br><li>false：表示在正常关机失败后不进行强制关机。<br><br>默认取值：false。
+   * 是否强制关机，默认值为 false。常规场景下，建议手动关机后解绑密钥。取值范围：
+<li>true：先执行强制关机，再解绑密钥。</li>
+<li>false：不执行强制关机，仅支持对已关机状态实例进行解绑操作。</li>
    */
   ForceStop?: boolean
 }
@@ -2822,17 +2832,17 @@ export interface StopInstancesRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常关闭失败后选择强制关闭实例。取值范围：<br><li>true：表示在正常关闭失败后进行强制关闭<br><li>false：表示在正常关闭失败后不进行强制关闭<br><br>默认取值：false。
+   * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常关闭失败后选择强制关闭实例。取值范围：<br><li>true：表示在正常关闭失败后进行强制关闭</li><li>false：表示在正常关闭失败后不进行强制关闭</li><br>默认取值：false。
    */
   ForceStop?: boolean
   /**
-   * 实例的关闭模式。取值范围：<br><li>SOFT_FIRST：表示在正常关闭失败后进行强制关闭<br><li>HARD：直接强制关闭<br><li>SOFT：仅软关机<br>默认取值：SOFT。
+   * 实例的关闭模式。取值范围：<br><li>SOFT_FIRST：表示在正常关闭失败后进行强制关闭</li><li>HARD：直接强制关闭</li><li>SOFT：仅软关机</li>默认取值：SOFT。
    */
   StopType?: string
   /**
    * 按量计费实例关机收费模式。
-取值范围：<br><li>KEEP_CHARGING：关机继续收费<br><li>STOP_CHARGING：关机停止收费<br>默认取值：KEEP_CHARGING。
-该参数只针对部分按量计费云硬盘实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918)
+取值范围：<br><li>KEEP_CHARGING：关机继续收费</li><li>STOP_CHARGING：关机停止收费</li><br>默认取值：KEEP_CHARGING。
+该参数只针对部分按量计费实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918)
    */
   StoppedMode?: string
 }
@@ -2842,7 +2852,7 @@ export interface StopInstancesRequest {
  */
 export interface DataDisk {
   /**
-   * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+   * 数据盘大小，单位：GiB。最小调整步长为10GiB，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
    */
   DiskSize: number
   /**
@@ -2873,7 +2883,8 @@ export interface DataDisk {
    */
   KmsKeyId?: string
   /**
-   * 云硬盘性能，单位：MB/s
+   * 云硬盘性能，单位：MiB/s。使用此参数可给云硬盘购买额外的性能。
+当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）
    */
   ThroughputPerformance?: number
   /**
@@ -2888,8 +2899,6 @@ export interface DataDisk {
   BurstPerformance?: boolean
   /**
    * 磁盘名称，长度不超过128 个字符。
-
-该参数正在邀测中，暂未开放使用。
    */
   DiskName?: string
 }
@@ -3331,7 +3340,7 @@ export interface Instance {
    */
   InstanceName?: string
   /**
-   * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月</li><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费</li><li>`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。</li><li>`SPOTPAID`：表示竞价实例付费。</li>
+   * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。取值范围：<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）</li><br><li>SPOTPAID：竞价付费</li><br><li>CDCPAID：专用集群付费</li>
    */
   InstanceChargeType?: string
   /**
@@ -3389,7 +3398,7 @@ export interface Instance {
    */
   LoginSettings?: LoginSettings
   /**
-   * 实例状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>RUNNING：表示运行中<br></li><li>STOPPED：表示关机<br></li><li>STARTING：表示开机中<br></li><li>STOPPING：表示关机中<br></li><li>REBOOTING：表示重启中<br></li><li>SHUTDOWN：表示停止待销毁<br></li><li>TERMINATING：表示销毁中。<br></li>
+   * 实例状态。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)
    */
   InstanceState?: string
   /**
@@ -4217,7 +4226,7 @@ export interface CreateKeyPairRequest {
    */
   KeyName: string
   /**
-   * 密钥对创建后所属的项目ID。
+   * 密钥对创建后所属的项目ID，ProjectId为0表示默认项目。
 可以通过以下方式获取项目ID：
 <li>通过项目列表查询项目ID。</li>
 <li>通过调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的`projectId `获取项目ID。</li>
@@ -4382,7 +4391,8 @@ export interface RunInstancesRequest {
    */
   LoginSettings?: LoginSettings
   /**
-   * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+   * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的 sgId 字段来获取。若不指定该参数，则绑定指定项目下的默认安全组，如默认安全组不存在则将自动创建。
+
    */
   SecurityGroupIds?: Array<string>
   /**
@@ -4658,20 +4668,20 @@ export interface ModifyInstancesChargeTypeRequest {
  */
 export interface ResizeInstanceDisksRequest {
   /**
-   * 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。
+   * 待操作的实例ID。可通过[ DescribeInstances ](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。
    */
   InstanceId: string
   /**
-   * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
+   * 待扩容的数据盘配置信息，仅支持指定待扩容盘的目的容量。只支持扩容非弹性数据盘（[ DescribeDisks ](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GiB。最小扩容步长：10GiB。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
 <dx-alert infotype="explain" title="">您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert>
    */
   DataDisks?: Array<DataDisk>
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>true：表示在正常关机失败后进行强制关机</li><br><li>false：表示在正常关机失败后不进行强制关机</li><br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再扩容实例磁盘。取值范围：<br><li>true：表示在正常关机失败后进行强制关机</li><br><li>false：表示在正常关机失败后不进行强制关机</li><br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
    */
   ForceStop?: boolean
   /**
-   * 待扩容的系统盘配置信息。只支持扩容云盘。
+   * 待扩容的系统盘配置信息，仅支持指定待扩容盘的目的容量。只支持扩容云盘。
 <dx-alert infotype="explain" title="">您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert>
    */
   SystemDisk?: SystemDisk
@@ -5965,7 +5975,7 @@ export interface KeyPair {
    */
   KeyName?: string
   /**
-   * 密钥对所属的项目`ID`。
+   * 密钥对所属的项目 `ID`，ProjectId 为 0 时表示默认项目。
    */
   ProjectId?: number
   /**
@@ -6132,7 +6142,7 @@ export interface DisasterRecoverGroup {
    */
   InstanceIds?: Array<string>
   /**
-   * 分散置放群组创建时间。
+   * 分散置放群组创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
    */
   CreateTime?: string
   /**
@@ -6164,7 +6174,7 @@ export interface VirtualPrivateCloud {
    */
   VpcId: string
   /**
-   * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
+   * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) ，从接口返回中的`SubnetId `字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
    */
   SubnetId: string
   /**
@@ -6391,7 +6401,7 @@ export interface InternetAccessible {
    */
   PublicIpAssigned?: boolean
   /**
-   * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。
+   * 带宽包ID。可通过[ DescribeBandwidthPackages ](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。
    */
   BandwidthPackageId?: string
 }

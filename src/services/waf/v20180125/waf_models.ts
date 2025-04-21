@@ -208,6 +208,28 @@ export interface DescribeApiListVersionTwoResponse {
 }
 
 /**
+ * 当前开启的、匹配范围为全局、优先级最高的场景信息
+ */
+export interface GlobalSceneInfo {
+  /**
+   * 场景ID
+   */
+  SceneId?: string
+  /**
+   * 场景名称
+   */
+  SceneName?: string
+  /**
+   * 场景优先级
+   */
+  Priority?: number
+  /**
+   * 场景更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribePeakValue返回参数结构体
  */
 export interface DescribePeakValueResponse {
@@ -587,6 +609,16 @@ export interface ModifyHostModeResponse {
 }
 
 /**
+ * ModifyBotSceneStatus返回参数结构体
+ */
+export interface ModifyBotSceneStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetAttackDownloadRecords请求参数结构体
  */
 export type GetAttackDownloadRecordsRequest = null
@@ -757,6 +789,52 @@ export interface AddAntiInfoLeakRulesRequest {
    * 网址
    */
   Uri?: string
+}
+
+/**
+ * bot-token配置
+ */
+export interface BotToken {
+  /**
+   * 会话名称
+   */
+  Name?: string
+  /**
+   * 会话描述
+   */
+  Description?: string
+  /**
+   * 会话id
+   */
+  Id?: string
+  /**
+   * 策略的开关状态
+   */
+  Status?: boolean
+  /**
+   * 会话位置
+   */
+  Location?: string
+  /**
+   * 会话key
+   */
+  Key?: string
+  /**
+   * 会话匹配方式，前缀匹配、后缀匹配等
+   */
+  Operator?: string
+  /**
+   * 会话更新的时间戳
+   */
+  Timestamp?: number
+  /**
+   * 场景列表，内容为空表示全部场景应用
+   */
+  Scene?: Array<string>
+  /**
+   * 优先级
+   */
+  Priority?: number
 }
 
 /**
@@ -1043,17 +1121,17 @@ hybrid:混合云
 }
 
 /**
- * ModifyCustomRule返回参数结构体
+ * 获取自定义规则列表时的出参
  */
-export interface ModifyCustomRuleResponse {
+export interface DescribeBotUCBRuleRsp {
   /**
-   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   * 规则列表
    */
-  Success?: ResponseCode
+  Res?: Array<InOutputBotUCBRule>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则总数
    */
-  RequestId?: string
+  TotalCount?: number
 }
 
 /**
@@ -1265,6 +1343,20 @@ export interface DescribeAccessFastAnalysisRequest {
    * 返回的top数，默认返回top5
    */
   Count?: number
+}
+
+/**
+ * bot自定义规则动作灰度
+ */
+export interface UCBActionProportion {
+  /**
+   * 动作
+   */
+  Action?: string
+  /**
+   * 比例
+   */
+  Proportion?: number
 }
 
 /**
@@ -2089,13 +2181,49 @@ export interface TargetEntity {
 }
 
 /**
- * DeleteHost请求参数结构体
+ * DescribeBotSceneUCBRule请求参数结构体
  */
-export interface DeleteHostRequest {
+export interface DescribeBotSceneUCBRuleRequest {
   /**
-   * 删除的域名列表
+   * 域名
    */
-  HostsDel: Array<HostDel>
+  Domain: string
+  /**
+   * 翻页组件的起始页
+   */
+  Skip: number
+  /**
+   * 翻页组件的页数据条数
+   */
+  Limit: number
+  /**
+   * 排序参数
+   */
+  Sort: string
+  /**
+   * 1.BOT全局白名单处调用时，传"global";2.BOT场景配置处调用时，传具体的场景ID
+   */
+  SceneId: string
+  /**
+   * 需要过滤的动作
+   */
+  Operate?: string
+  /**
+   * 需要过滤的规则名称
+   */
+  Name?: string
+  /**
+   * 兼容老数据和新旧版前端
+   */
+  VersionFlag?: string
+  /**
+   * 生效方式：0-全部 1-永久生效 2-定时生效 3-周粒度生效 4-月粒度生效
+   */
+  TimerType?: number
+  /**
+   * 0-全部 1-生效中 2-已过期
+   */
+  ValidStatus?: number
 }
 
 /**
@@ -2746,6 +2874,34 @@ export interface ModifyAntiInfoLeakRulesResponse {
 }
 
 /**
+ * DeleteBotSceneUCBRule请求参数结构体
+ */
+export interface DeleteBotSceneUCBRuleRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 自定义规则ID
+   */
+  RuleId: string
+  /**
+   * 1.BOT全局白名单处调用时，传"global";2.BOT场景配置时，传具体的场景ID
+   */
+  SceneId: string
+}
+
+/**
+ * DeleteHost请求参数结构体
+ */
+export interface DeleteHostRequest {
+  /**
+   * 删除的域名列表
+   */
+  HostsDel: Array<HostDel>
+}
+
+/**
  * 获取弹性qps的默认相关值
  */
 export interface QpsData {
@@ -3139,6 +3295,32 @@ export interface DescribeDomainsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 动作策略的匹配规则实体
+ */
+export interface BotActionScopeRuleEntry {
+  /**
+   * 参数
+   */
+  Key?: string
+  /**
+   * 匹配符
+   */
+  Op?: string
+  /**
+   * 参数值
+   */
+  Value?: string
+  /**
+   * 对于头部字段匹配value的时候指定的头部名
+   */
+  Name?: string
+  /**
+   * 470后使用此字段存储多值
+   */
+  ValueArray?: Array<string>
 }
 
 /**
@@ -3697,6 +3879,24 @@ export interface ApiPkg {
 }
 
 /**
+ * ModifyBotSceneStatus请求参数结构体
+ */
+export interface ModifyBotSceneStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 场景ID
+   */
+  SceneId: string
+  /**
+   * true-开启 false-关闭
+   */
+  Status: boolean
+}
+
+/**
  * DescribeAreaBanSupportAreas返回参数结构体
  */
 export interface DescribeAreaBanSupportAreasResponse {
@@ -3722,6 +3922,21 @@ export interface TigaMainClassMode {
    * 防护模式，0表示观察，1表示拦截
    */
   Mode?: number
+}
+
+/**
+ * DeleteBotSceneUCBRule返回参数结构体
+ */
+export interface DeleteBotSceneUCBRuleResponse {
+  /**
+   * 正常情况下为null
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4072,6 +4287,21 @@ export interface UserWhiteRuleItem {
 }
 
 /**
+ * DescribeBotSceneUCBRule返回参数结构体
+ */
+export interface DescribeBotSceneUCBRuleResponse {
+  /**
+   * 返回数据包
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeBotUCBRuleRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 产品明细
  */
 export interface GoodsDetailNew {
@@ -4265,75 +4495,101 @@ export interface DeleteIpAccessControlResponse {
 }
 
 /**
- * 批量多域名黑白名单列表Ip
+ * Clb类型防护对象
  */
-export interface BatchIpAccessControlItem {
+export interface ClbObject {
   /**
-   * mongo表自增Id
-   * @deprecated
+   * 对象ID
    */
-  Id?: string
+  ObjectId?: string
   /**
-   * 黑名单42或白名单40
+   * 实例ID
    */
-  ActionType?: number
+  InstanceId?: string
   /**
-   * 黑白名单的IP
-   * @deprecated
+   * 实例名称
    */
-  Ip?: string
+  InstanceName?: string
   /**
-   * 备注
+   * 精准域名列表
    */
-  Note?: string
+  PreciseDomains?: Array<string>
   /**
-   * batch为批量域名，batch-group为防护对象组
+   * WAF功能开关状态，0关闭1开启
    */
-  Source?: string
+  Status?: number
   /**
-   * 修改时间
+   * WAF日志开关状态，0关闭1开启
    */
-  TsVersion?: number
+  ClsStatus?: number
   /**
-   * 超时时间
+   * CLB对象对应的虚拟域名
    */
-  ValidTs?: number
+  VirtualDomain?: string
   /**
-   * 域名列表
+   * 对象名称
    */
-  Hosts?: Array<string>
+  ObjectName?: string
   /**
-   * 55101145
+   * 公网地址
    */
-  RuleId?: number
+  PublicIp?: Array<string>
   /**
-   * IP列表
+   * 内网地址
    */
-  IpList?: Array<string>
+  PrivateIp?: Array<string>
   /**
-   * 创建时间
+   * VPC名称
    */
-  CreateTime?: number
+  VpcName?: string
   /**
-   * 定时任务类型
+   * VPC ID
    */
-  JobType?: string
+  Vpc?: string
   /**
-   * 周期任务类型
+   * waf实例等级，如果未绑定实例为0
    */
-  CronType?: string
+  InstanceLevel?: number
   /**
-   * 定时任务配置详情
+   * clb投递开关
    */
-  JobDateTime?: JobDateTime
+  PostCLSStatus?: number
   /**
-   * 生效状态
+   * kafka投递开关
    */
-  ValidStatus?: number
+  PostCKafkaStatus?: number
   /**
-   * 防护对象组ID列表，如果绑定的是防护对象组
+   * 对象类型：CLB:负载均衡器，TSE:云原生网关
    */
-  GroupIds?: Array<number | bigint>
+  Type?: string
+  /**
+   * 对象地域
+   */
+  Region?: string
+  /**
+   * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
+   */
+  Proxy?: number
+  /**
+   * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
+   */
+  IpHeaders?: Array<string>
+  /**
+   * bot防护开关
+   */
+  BotStatus?: number
+  /**
+   * api防护开关
+   */
+  ApiStatus?: number
+  /**
+   * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
+   */
+  ObjectFlowMode?: number
+  /**
+   * 数值形式的私有网络 ID
+   */
+  NumericalVpcId?: number
 }
 
 /**
@@ -4528,6 +4784,32 @@ export interface FraudPkg {
    * 续费标志
    */
   RenewFlag?: number
+}
+
+/**
+ * 云图API改版后, 不支持将复杂json类型编码成string,因此通过此复杂类型识别传入的不同类型参数值
+ */
+export interface UCBEntryValue {
+  /**
+   * string类型值
+   */
+  BasicValue?: string
+  /**
+   * 布尔类型值
+   */
+  LogicValue?: boolean
+  /**
+   * string数组类型值
+   */
+  BelongValue?: Array<string>
+  /**
+   * 指示有效的字段
+   */
+  ValidKey?: string
+  /**
+   * string数组类型值
+   */
+  MultiValue?: Array<string>
 }
 
 /**
@@ -4859,6 +5141,28 @@ export interface GoodNews {
 }
 
 /**
+ * ModifyBotSceneUCBRule请求参数结构体
+ */
+export interface ModifyBotSceneUCBRuleRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 1.BOT全局白名单处调用时，传"global";2.BOT场景配置时，传具体的场景ID
+   */
+  SceneId: string
+  /**
+   * 规则内容, 增加编码SceneId信息,1.BOT全局白名单处调用时，SceneId为"global", RuleType传10, Action为"permit";2.BOT场景配置时，SceneId为场景ID
+   */
+  Rule?: InOutputBotUCBRule
+  /**
+   * 530改批量操作
+   */
+  BatchRules?: Array<InOutputBotUCBRule>
+}
+
+/**
  * 扫描ip信息
  */
 export interface ScanIpInfo {
@@ -4986,6 +5290,28 @@ export interface CreatePostCKafkaFlowRequest {
    * kafka集群的版本号
    */
   KafkaVersion: string
+}
+
+/**
+ * DescribeBotSceneList返回参数结构体
+ */
+export interface DescribeBotSceneListResponse {
+  /**
+   * 符合筛选条件的场景数目
+   */
+  TotalCount?: number
+  /**
+   * 当TotalCount为0时，返回空
+   */
+  BotSceneList?: Array<BotSceneInfo>
+  /**
+   * true-简易模式
+   */
+  SimpleFlag?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5257,101 +5583,75 @@ export interface DescribeHistogramResponse {
 }
 
 /**
- * Clb类型防护对象
+ * 批量多域名黑白名单列表Ip
  */
-export interface ClbObject {
+export interface BatchIpAccessControlItem {
   /**
-   * 对象ID
+   * mongo表自增Id
+   * @deprecated
    */
-  ObjectId?: string
+  Id?: string
   /**
-   * 实例ID
+   * 黑名单42或白名单40
    */
-  InstanceId?: string
+  ActionType?: number
   /**
-   * 实例名称
+   * 黑白名单的IP
+   * @deprecated
    */
-  InstanceName?: string
+  Ip?: string
   /**
-   * 精准域名列表
+   * 备注
    */
-  PreciseDomains?: Array<string>
+  Note?: string
   /**
-   * WAF功能开关状态，0关闭1开启
+   * batch为批量域名，batch-group为防护对象组
    */
-  Status?: number
+  Source?: string
   /**
-   * WAF日志开关状态，0关闭1开启
+   * 修改时间
    */
-  ClsStatus?: number
+  TsVersion?: number
   /**
-   * CLB对象对应的虚拟域名
+   * 超时时间
    */
-  VirtualDomain?: string
+  ValidTs?: number
   /**
-   * 对象名称
+   * 域名列表
    */
-  ObjectName?: string
+  Hosts?: Array<string>
   /**
-   * 公网地址
+   * 55101145
    */
-  PublicIp?: Array<string>
+  RuleId?: number
   /**
-   * 内网地址
+   * IP列表
    */
-  PrivateIp?: Array<string>
+  IpList?: Array<string>
   /**
-   * VPC名称
+   * 创建时间
    */
-  VpcName?: string
+  CreateTime?: number
   /**
-   * VPC ID
+   * 定时任务类型
    */
-  Vpc?: string
+  JobType?: string
   /**
-   * waf实例等级，如果未绑定实例为0
+   * 周期任务类型
    */
-  InstanceLevel?: number
+  CronType?: string
   /**
-   * clb投递开关
+   * 定时任务配置详情
    */
-  PostCLSStatus?: number
+  JobDateTime?: JobDateTime
   /**
-   * kafka投递开关
+   * 生效状态
    */
-  PostCKafkaStatus?: number
+  ValidStatus?: number
   /**
-   * 对象类型：CLB:负载均衡器，TSE:云原生网关
+   * 防护对象组ID列表，如果绑定的是防护对象组
    */
-  Type?: string
-  /**
-   * 对象地域
-   */
-  Region?: string
-  /**
-   * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
-   */
-  Proxy?: number
-  /**
-   * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
-   */
-  IpHeaders?: Array<string>
-  /**
-   * bot防护开关
-   */
-  BotStatus?: number
-  /**
-   * api防护开关
-   */
-  ApiStatus?: number
-  /**
-   * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
-   */
-  ObjectFlowMode?: number
-  /**
-   * 数值形式的私有网络 ID
-   */
-  NumericalVpcId?: number
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -5399,17 +5699,17 @@ export interface CreateAccessExportRequest {
 }
 
 /**
- * ModifyUserLevel请求参数结构体
+ * ModifyBotSceneUCBRule返回参数结构体
  */
-export interface ModifyUserLevelRequest {
+export interface ModifyBotSceneUCBRuleResponse {
   /**
-   * 域名
+   * 正常情况下为null
    */
-  Domain: string
+  Data?: string
   /**
-   * 防护规则等级 300=standard，400=extended
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Level: number
+  RequestId?: string
 }
 
 /**
@@ -5615,6 +5915,32 @@ export interface MiniPkg {
 }
 
 /**
+ * 场景匹配条件
+ */
+export interface BotSceneMatchCondition {
+  /**
+   * 匹配参数
+   */
+  Key: string
+  /**
+   * 匹配符
+   */
+  Op: string
+  /**
+   * 匹配值
+   */
+  Value: string
+  /**
+   * 对于头部字段匹配value的时候指定的头部名
+   */
+  Name?: string
+  /**
+   * 470后使用此入参存在多值
+   */
+  ValueArray?: Array<string>
+}
+
+/**
  * DescribeAreaBanAreas请求参数结构体
  */
 export interface DescribeAreaBanAreasRequest {
@@ -5721,65 +6047,59 @@ export interface AccessRuleTagInfo {
 }
 
 /**
- * ip黑白名单
+ * ModifyInstanceQpsLimit请求参数结构体
  */
-export interface IpAccessControlItem {
+export interface ModifyInstanceQpsLimitRequest {
   /**
-   * mongo表自增Id
+   * 套餐实例id
    */
-  Id?: string
+  InstanceId: string
   /**
-   * 动作
+   * qps上限
    */
-  ActionType?: number
+  QpsLimit: number
+}
+
+/**
+ * 自定义规则UCB的Rule生效条件
+ */
+export interface InOutputUCBRuleEntry {
   /**
-   * ip
+   * 键
    */
-  Ip?: string
+  Key?: string
   /**
-   * 备注
+   * 操作符
    */
-  Note?: string
+  Op?: string
   /**
-   * 来源
+   * 值
    */
-  Source?: string
+  Value?: UCBEntryValue
   /**
-   * 更新时间戳
+   * 可选的补充操作符
    */
-  TsVersion?: number
+  OpOp?: string
   /**
-   * 有效截止时间戳
+   * 可选的补充参数
    */
-  ValidTs?: number
+  OpArg?: Array<string>
   /**
-   * 生效状态
+   * 可选的补充值
    */
-  ValidStatus?: number
+  OpValue?: number
   /**
-   * 55000001
+   * Header参数值时使用
    */
-  RuleId?: number
+  Name?: string
   /**
-   * IP列表
+   * 区域选择
    */
-  IpList?: Array<string>
+  Areas?: Array<Area>
   /**
-   * 规则创建时间
+   * 语言环境
    */
-  CreateTime?: number
-  /**
-   * 定时任务类型
-   */
-  JobType?: string
-  /**
-   * 周期任务类型
-   */
-  CronType?: string
-  /**
-   * 定时任务配置详情
-   */
-  JobDateTime?: JobDateTime
+  Lang?: string
 }
 
 /**
@@ -6010,6 +6330,52 @@ export interface UpsertIpAccessControlRequest {
    * 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值）
    */
   SourceType?: string
+}
+
+/**
+ * 获取场景动作策略列表时的动作策略实体
+ */
+export interface BotSceneActionRule {
+  /**
+   * 动作策略ID
+   */
+  RuleId?: string
+  /**
+   * 动作策略名称
+   */
+  RuleName?: string
+  /**
+   * 策略优先级
+   */
+  Priority?: number
+  /**
+   * 策略生效状态
+   */
+  Status?: boolean
+  /**
+   * 分数范围
+   */
+  Score?: Array<BotScoreRuleEntry>
+  /**
+   * 100-宽松、200-中等、300-严格、0-自定义
+   */
+  Level?: string
+  /**
+   * 生效范围，为空表示全部范围
+   */
+  Scope?: Array<BotActionScopeRuleEntry>
+  /**
+   * default：默认创建 custom：自定义创建
+   */
+  Type?: string
+  /**
+   * 匹配范围类型：全局匹配 or 自定义匹配范围
+   */
+  ScopeType?: string
+  /**
+   * 匹配条件间的与或关系
+   */
+  ActionMatchType?: string
 }
 
 /**
@@ -6263,6 +6629,144 @@ export interface GetInstanceQpsLimitRequest {
 }
 
 /**
+ * 场景的详细配置信息
+ */
+export interface BotSceneInfo {
+  /**
+   * 场景ID
+   */
+  SceneId?: string
+  /**
+   * 场景类型，default:默认场景,custom:非默认场景
+   */
+  Type?: string
+  /**
+   * 场景名
+   */
+  SceneName?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 场景模板类型，登录: login  秒杀:seckill  爬内容：crawl 自定义: custom
+   */
+  BusinessType?: Array<string>
+  /**
+   * 客户端类型，浏览器/H5 : browser  小程序: miniApp  App:
+   */
+  ClientType?: Array<string>
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 匹配范围
+   */
+  MatchCondition?: Array<BotSceneMatchCondition>
+  /**
+   * 场景开关
+   */
+  SceneStatus?: boolean
+  /**
+   * 前端对抗开关
+   */
+  JsInjectStatus?: boolean
+  /**
+   * AI开关
+   */
+  AIStatus?: boolean
+  /**
+   * TI开关
+   */
+  TIStatus?: boolean
+  /**
+   * 智能统计开关
+   */
+  StatisticStatus?: boolean
+  /**
+   * 动作策略数量
+   */
+  ActionRuleCount?: number
+  /**
+   * 自定义规则数量
+   */
+  UCBCount?: number
+  /**
+   * 场景的匹配范围，global-全部匹配 custom-自定义匹配范围
+   */
+  MatchType?: string
+  /**
+   * 匹配条件间的与或关系
+   */
+  ActionMatchType?: string
+  /**
+   * UA模块开关
+   */
+  UAStatus?: boolean
+  /**
+   * 简易模式场景：前端对抗对应mysql的记录id
+   */
+  JsInjectRuleId?: number
+  /**
+   * 简易模式场景：前端对抗配置动作
+   */
+  JsInjectAction?: number
+  /**
+   * 简易模式场景：前端对抗重定向路径
+   */
+  JsInjectRedirect?: string
+  /**
+   * 简易模式场景：动作策略信息  PS:简易模式只有一个动作策略
+   */
+  ActionRuleList?: Array<BotSceneActionRule>
+  /**
+   * 简易模式场景：monitor-观察 intercept-拦截 custom-自定义
+   */
+  BotIdPattern?: string
+  /**
+   * 简易模式场景：bot_id规则总数
+   */
+  BotIdCount?: number
+  /**
+   * 简易模式场景：观察动作的规则总数
+   */
+  BotIdMonitorCount?: number
+  /**
+   * 简易模式场景：拦截动作的规则总数
+   */
+  BotIdInterceptCount?: number
+  /**
+   * 创建场景时选择的规则集
+   */
+  RuleSetSelection?: Array<string>
+  /**
+   * 改场景的bot token列表
+   */
+  TokenList?: Array<BotToken>
+  /**
+   * 简易模式场景：重定向动作的规则总数
+   */
+  BotIdRedirectCount?: number
+  /**
+   * 简易模式场景：人机识别动作的规则总数
+   */
+  BotIdCaptchaCount?: number
+  /**
+   * 简易模式场景：防护等级
+   */
+  BotIdProtectLevel?: string
+  /**
+   * 简易模式场景：全局重定向路径
+   */
+  BotIdGlobalRedirect?: string
+  /**
+   * 简易模式场景：JS校验动作的规则总数
+   */
+  BotIdJsChallengeCount?: number
+}
+
+/**
  * 参数包装
  */
 export interface SessionData {
@@ -6297,17 +6801,79 @@ export interface SwitchDomainRulesResponse {
 }
 
 /**
- * ModifyInstanceQpsLimit请求参数结构体
+ * ModifyCustomRule返回参数结构体
  */
-export interface ModifyInstanceQpsLimitRequest {
+export interface ModifyCustomRuleResponse {
   /**
-   * 套餐实例id
+   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
    */
-  InstanceId: string
+  Success?: ResponseCode
   /**
-   * qps上限
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  QpsLimit: number
+  RequestId?: string
+}
+
+/**
+ * ip黑白名单
+ */
+export interface IpAccessControlItem {
+  /**
+   * mongo表自增Id
+   */
+  Id?: string
+  /**
+   * 动作
+   */
+  ActionType?: number
+  /**
+   * ip
+   */
+  Ip?: string
+  /**
+   * 备注
+   */
+  Note?: string
+  /**
+   * 来源
+   */
+  Source?: string
+  /**
+   * 更新时间戳
+   */
+  TsVersion?: number
+  /**
+   * 有效截止时间戳
+   */
+  ValidTs?: number
+  /**
+   * 生效状态
+   */
+  ValidStatus?: number
+  /**
+   * 55000001
+   */
+  RuleId?: number
+  /**
+   * IP列表
+   */
+  IpList?: Array<string>
+  /**
+   * 规则创建时间
+   */
+  CreateTime?: number
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 周期任务类型
+   */
+  CronType?: string
+  /**
+   * 定时任务配置详情
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -7582,6 +8148,20 @@ export interface GenerateDealsAndPayNewResponse {
 }
 
 /**
+ * ModifyUserLevel请求参数结构体
+ */
+export interface ModifyUserLevelRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 防护规则等级 300=standard，400=extended
+   */
+  Level: number
+}
+
+/**
  * DescribeCCRule请求参数结构体
  */
 export interface DescribeCCRuleRequest {
@@ -7716,21 +8296,51 @@ export interface DescribeAccessHistogramResponse {
 }
 
 /**
- * DescribeTopAttackDomain返回参数结构体
+ * ModifyHostFlowMode返回参数结构体
  */
-export interface DescribeTopAttackDomainResponse {
+export interface ModifyHostFlowModeResponse {
   /**
-   * CC攻击域名列表
+   * 成功的状态码
    */
-  CC?: Array<KVInt>
-  /**
-   * Web攻击域名列表
-   */
-  Web?: Array<KVInt>
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBotSceneList请求参数结构体
+ */
+export interface DescribeBotSceneListRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 每页数量
+   */
+  Limit: number
+  /**
+   * 页码
+   */
+  Offset: number
+  /**
+   * 场景模板类型，通过此下拉字段进行场景筛选。全部: all 登录: login  秒杀:seckill  爬内容：crawl 自定义: custom
+   */
+  BusinessType?: Array<string>
+  /**
+   * 通过场景名称模糊搜索
+   */
+  SceneName?: string
+  /**
+   * 是否只显示默认场景
+   */
+  IsDefault?: boolean
+  /**
+   * 是否仅显示生效场景
+   */
+  IsValid?: boolean
 }
 
 /**
@@ -7813,6 +8423,32 @@ export interface DescribeAccessHistogramRequest {
    * 柱状图间隔时间差，单位ms
    */
   Interval?: number
+}
+
+/**
+ * 动作策略的一条分数段实体
+ */
+export interface BotScoreRuleEntry {
+  /**
+   * 分数区间上限
+   */
+  Upper: string
+  /**
+   * 分数区间下限
+   */
+  Lower: string
+  /**
+   * 处置动作
+   */
+  Action: string
+  /**
+   * 流量标签
+   */
+  Label: string
+  /**
+   * 重定向
+   */
+  Redirect?: string
 }
 
 /**
@@ -8612,13 +9248,17 @@ wx_access-微信小程序峰值qps趋势图
 }
 
 /**
- * ModifyHostFlowMode返回参数结构体
+ * DescribeTopAttackDomain返回参数结构体
  */
-export interface ModifyHostFlowModeResponse {
+export interface DescribeTopAttackDomainResponse {
   /**
-   * 成功的状态码
+   * CC攻击域名列表
    */
-  Success?: ResponseCode
+  CC?: Array<KVInt>
+  /**
+   * Web攻击域名列表
+   */
+  Web?: Array<KVInt>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9759,6 +10399,104 @@ export interface ModifyModuleStatusResponse {
 }
 
 /**
+ * 修改/新增自定义规则的入参，查询自定义规则列表时的出参
+ */
+export interface InOutputBotUCBRule {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则名称
+   */
+  Name: string
+  /**
+   * UCB的具体规则项
+   */
+  Rule: Array<InOutputUCBRuleEntry>
+  /**
+   * 处置动作
+   */
+  Action: string
+  /**
+   * 规则开关
+   */
+  OnOff: string
+  /**
+   * 规则类型
+   */
+  RuleType: number
+  /**
+   * 规则优先级
+   */
+  Prior: number
+  /**
+   * 修改时间戳
+   */
+  Timestamp: number
+  /**
+   * 标签
+   */
+  Label: string
+  /**
+   * 入参ID
+   */
+  Id?: string
+  /**
+   * 场景ID
+   */
+  SceneId?: string
+  /**
+   * 生效时间
+   */
+  ValidTime?: number
+  /**
+   * 传入的appid
+   */
+  Appid?: number
+  /**
+   * 额外参数
+   */
+  AdditionArg?: string
+  /**
+   * 规则描述
+   */
+  Desc?: string
+  /**
+   * 规则ID
+   */
+  RuleId?: string
+  /**
+   * true-系统预设规则 false-自定义规则
+   */
+  PreDefine?: boolean
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 生效截止时间
+   */
+  ExpireTime?: number
+  /**
+   * 生效-1,失效-0
+   */
+  ValidStatus?: number
+  /**
+   * 自定义拦截页面ID
+   */
+  BlockPageId?: number
+  /**
+   * 当Action=intercept时，此字段必填
+   */
+  ActionList?: Array<UCBActionProportion>
+}
+
+/**
  * 攻击日志详情
  */
 export interface AttackLogInfo {
@@ -10512,6 +11250,37 @@ export interface DeleteAntiInfoLeakRuleRequest {
 }
 
 /**
+ * DescribeBotSceneOverview返回参数结构体
+ */
+export interface DescribeBotSceneOverviewResponse {
+  /**
+   * BOT总开关
+   */
+  Status?: boolean
+  /**
+   * 场景总数
+   */
+  SceneCount?: number
+  /**
+   * 生效场景数
+   */
+  ValidSceneCount?: number
+  /**
+   * 当前开启的、匹配范围为全局、优先级最高的场景
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentGlobalScene?: GlobalSceneInfo
+  /**
+   * 自定义规则总数，不包括BOT白名单
+   */
+  CustomRuleNums?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVipInfo返回参数结构体
  */
 export interface DescribeVipInfoResponse {
@@ -10712,6 +11481,16 @@ export interface DescribeSessionResponse {
 }
 
 /**
+ * DescribeBotSceneOverview请求参数结构体
+ */
+export interface DescribeBotSceneOverviewRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+}
+
+/**
  * CKafka投递流
  */
 export interface PostCKafkaFlowInfo {
@@ -10747,6 +11526,14 @@ export interface PostCKafkaFlowInfo {
    * 主题名称
    */
   Topic?: string
+  /**
+   * 压缩算法，支持gzip 和 lz4
+   */
+  Compression?: string
+  /**
+   * 描述信息
+   */
+  Content?: string
 }
 
 /**

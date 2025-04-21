@@ -448,7 +448,7 @@ export interface CreateOutputSRTSettings {
    */
   StreamId?: string
   /**
-   * 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。此参数同时设置了发送方和接收方的延迟（recvlatency和peerlatency）为相同的值。建议配置为至少3倍RTT，以确保在网络拥塞时能够有效处理数据包的重传和确认
+   * 转推SRT的延迟，默认120，单位ms，范围为[0, 3000]。此参数同时设置了发送方和接收方的延迟（recvlatency和peerlatency）为相同的值。建议配置为至少3倍RTT，以确保在网络拥塞时能够有效处理数据包的重传和确认
    */
   Latency?: number
   /**
@@ -456,7 +456,7 @@ export interface CreateOutputSRTSettings {
    */
   RecvLatency?: number
   /**
-   * 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。 此参数由发送方设置，用于告知接收方其期望的延迟缓冲时间
+   * 转推SRT的对端延迟，默认120，单位ms，范围为[0, 3000]。 此参数由发送方设置，用于告知接收方其期望的延迟缓冲时间
    */
   PeerLatency?: number
   /**
@@ -1890,15 +1890,15 @@ export interface MediaSnapshotByTimePicInfoItem {
   /**
    * 该张截图对应视频文件中的时间偏移，单位为秒。
    */
-  TimeOffset: number
+  TimeOffset?: number
   /**
    * 该张截图的路径。
    */
-  Path: string
+  Path?: string
   /**
    * 截图如果被打上了水印，被打水印的模板 ID 列表。
    */
-  WaterMarkDefinition: Array<number | bigint>
+  WaterMarkDefinition?: Array<number | bigint>
 }
 
 /**
@@ -1953,57 +1953,57 @@ export interface ContentReviewTemplateItem {
   /**
    * 内容审核模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 内容审核模板名称，长度限制：64 个字符。
    */
-  Name: string
+  Name?: string
   /**
    * 内容审核模板描述信息，长度限制：256 个字符。
    */
-  Comment: string
+  Comment?: string
   /**
    * 鉴黄控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PornConfigure: PornConfigureInfo
+  PornConfigure?: PornConfigureInfo
   /**
    * 涉敏控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TerrorismConfigure: TerrorismConfigureInfo
+  TerrorismConfigure?: TerrorismConfigureInfo
   /**
    * 涉敏控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PoliticalConfigure: PoliticalConfigureInfo
+  PoliticalConfigure?: PoliticalConfigureInfo
   /**
    * 违禁控制参数。违禁内容包括：
 <li>谩骂；</li>
 <li>涉毒违法。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProhibitedConfigure: ProhibitedConfigureInfo
+  ProhibitedConfigure?: ProhibitedConfigureInfo
   /**
    * 用户自定义内容审核控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserDefineConfigure: UserDefineConfigureInfo
+  UserDefineConfigure?: UserDefineConfigureInfo
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 模板类型，取值范围：
 * Preset：系统预置模板；
 * Custom：用户自定义模板。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
 }
 
 /**
@@ -3991,56 +3991,56 @@ export interface WatermarkTemplate {
   /**
    * 水印模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 水印类型，取值：
 <li>image：图片水印；</li>
 <li>text：文字水印。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 水印模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 水印图片原点距离视频图像原点的水平位置。
 <li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
 <li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
    */
-  XPos: string
+  XPos?: string
   /**
    * 水印图片原点距离视频图像原点的垂直位置。
 <li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
 <li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
    */
-  YPos: string
+  YPos?: string
   /**
    * 图片水印模板，仅当 Type 为 image，该字段有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageTemplate: ImageWatermarkTemplate
+  ImageTemplate?: ImageWatermarkTemplate
   /**
    * 文字水印模板，仅当 Type 为 text，该字段有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TextTemplate: TextWatermarkTemplateInput
+  TextTemplate?: TextWatermarkTemplateInput
   /**
    * SVG 水印模板，当 Type 为 svg，该字段有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SvgTemplate: SvgWatermarkInput
+  SvgTemplate?: SvgWatermarkInput
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 原点位置，可选值：
 <li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
@@ -4048,7 +4048,7 @@ export interface WatermarkTemplate {
 <li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
 <li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。；</li>
    */
-  CoordinateOrigin: string
+  CoordinateOrigin?: string
 }
 
 /**
@@ -6494,17 +6494,17 @@ export interface DescribeOutputRTPSettings {
    * 转推RTP的目标地址信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Destinations: Array<RTPAddressDestination>
+  Destinations?: Array<RTPAddressDestination>
   /**
    * 是否FEC。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FEC: string
+  FEC?: string
   /**
    * 空闲超时时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdleTimeout: number
+  IdleTimeout?: number
 }
 
 /**
@@ -7946,7 +7946,7 @@ export interface CreateInputSRTSettings {
    */
   StreamId?: string
   /**
-   * 延迟，默认0，单位ms，范围为[0, 3000]。
+   * 延迟，默认120，单位ms，范围为[0, 3000]。
    */
   Latency?: number
   /**
@@ -7954,7 +7954,7 @@ export interface CreateInputSRTSettings {
    */
   RecvLatency?: number
   /**
-   * 对端延迟，默认0，单位ms，范围为[0, 3000]。
+   * 对端延迟，默认120，单位ms，范围为[0, 3000]。
    */
   PeerLatency?: number
   /**
@@ -9284,45 +9284,45 @@ export interface LiveStreamAiReviewImagePoliticalResult {
   /**
    * 嫌疑片段起始的 PTS 时间，单位：秒。
    */
-  StartPtsTime: number
+  StartPtsTime?: number
   /**
    * 嫌疑片段结束的 PTS 时间，单位：秒。
    */
-  EndPtsTime: number
+  EndPtsTime?: number
   /**
    * 嫌疑片段敏感分数。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 嫌疑片段鉴黄结果建议，取值范围：
 <li>pass</li>
 <li>review</li>
 <li>block</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 视频敏感结果标签，取值范围：
 <li>politician：敏感人物。</li>
 <li>violation_photo：违规图标。</li>
    */
-  Label: string
+  Label?: string
   /**
    * 敏感人物、违规图标名字。
    */
-  Name: string
+  Name?: string
   /**
    * 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
   /**
    * 嫌疑图片 URL （图片不会永久存储，到达
 PicUrlExpireTime 时间点后图片将被删除）。
    */
-  Url: string
+  Url?: string
   /**
    * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  PicUrlExpireTime: string
+  PicUrlExpireTime?: string
 }
 
 /**
@@ -10224,26 +10224,26 @@ export interface MediaContentReviewPoliticalSegmentItem {
   /**
    * 嫌疑片段起始的偏移时间，单位：秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 嫌疑片段结束的偏移时间，单位：秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 嫌疑片段涉敏分数。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 嫌疑片段涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 涉敏人物、违规图标名字。
    */
-  Name: string
+  Name?: string
   /**
    * 嫌疑片段涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
@@ -10270,20 +10270,20 @@ celebrity：
 military：
 <li>sensitive_military：敏感军事人物。</li>
    */
-  Label: string
+  Label?: string
   /**
    * 嫌疑图片 URL （图片不会永久存储，到达
  PicUrlExpireTime 时间点后图片将被删除）。
    */
-  Url: string
+  Url?: string
   /**
    * 涉敏人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
   /**
    * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  PicUrlExpireTime: string
+  PicUrlExpireTime?: string
 }
 
 /**
@@ -10502,17 +10502,17 @@ export interface ImageSpriteTemplate {
   /**
    * 雪碧图模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 模板类型，取值范围：
 <li>Preset：系统预置模板；</li>
 <li>Custom：用户自定义模板。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 雪碧图模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
@@ -10521,7 +10521,7 @@ export interface ImageSpriteTemplate {
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
    */
-  Width: number
+  Width?: number
   /**
    * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
@@ -10530,53 +10530,53 @@ export interface ImageSpriteTemplate {
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
    */
-  Height: number
+  Height?: number
   /**
    * 分辨率自适应，可选值：
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
 默认值：open。
    */
-  ResolutionAdaptive: string
+  ResolutionAdaptive?: string
   /**
    * 采样类型。
    */
-  SampleType: string
+  SampleType?: string
   /**
    * 采样间隔。
    */
-  SampleInterval: number
+  SampleInterval?: number
   /**
    * 雪碧图中小图的行数。
    */
-  RowCount: number
+  RowCount?: number
   /**
    * 雪碧图中小图的列数。
    */
-  ColumnCount: number
+  ColumnCount?: number
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
 默认值：black 。
    */
-  FillType: string
+  FillType?: string
   /**
    * 模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 图片格式。
    */
-  Format: string
+  Format?: string
 }
 
 /**
@@ -10710,19 +10710,19 @@ export interface LiveStreamAsrFullTextRecognitionResult {
   /**
    * 识别文本。
    */
-  Text: string
+  Text?: string
   /**
    * 识别片段起始的 PTS 时间，单位：秒。
    */
-  StartPtsTime: number
+  StartPtsTime?: number
   /**
    * 识别片段终止的 PTS 时间，单位：秒。
    */
-  EndPtsTime: number
+  EndPtsTime?: number
   /**
    * 识别片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 识别开始UTC时间。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -12378,18 +12378,18 @@ export interface AiReviewPoliticalAsrTaskOutput {
   /**
    * Asr 文字敏感评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Asr 文字敏感结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Asr 文字敏感嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewAsrTextSegmentItem>
 }
 
 /**
@@ -13137,7 +13137,7 @@ export interface CreateStreamLinkOutputInfoRequest {
  */
 export interface ComposeMediaTrack {
   /**
-   * 轨道类型，取值有：<ul><li>Video ：视频轨道。视频轨道可由以下元素组成：</li><ul><li>Video 元素</li><li>Image 元素</li><li>Transition 元素</li><li>Empty 元素</li></ul><li>Audio ：音频轨道。音频轨道可由以下元素组成：</li><ul><li>Audio 元素</li><li>Transition 元素</li><li>Empty 元素</li></ul><li>Title：文字轨道。文字轨道可由以下元素组成：</li><ul><li>Subtitle 元素</li></ul>
+   * 轨道类型，取值有：<ul><li>Video ：视频轨道。视频轨道可由以下元素组成：</li><ul><li>Video 元素</li><li>Image 元素</li><li>Transition 元素</li><li>Empty 元素</li></ul><li>Audio ：音频轨道。音频轨道可由以下元素组成：</li><ul><li>Audio 元素</li><li>Transition 元素</li><li>Empty 元素</li></ul><li>Title：文字轨道。文字轨道可由以下元素组成：</li><ul><li>Subtitle 元素</li></ul></ul>
    */
   Type: string
   /**
@@ -14012,23 +14012,23 @@ export interface LiveStreamTransTextRecognitionResult {
   /**
    * 识别文本。
    */
-  Text: string
+  Text?: string
   /**
    * 翻译片段起始的 PTS 时间，单位：秒。
    */
-  StartPtsTime: number
+  StartPtsTime?: number
   /**
    * 翻译片段终止的 PTS 时间，单位：秒。
    */
-  EndPtsTime: number
+  EndPtsTime?: number
   /**
    * 翻译片段置信度。取值：0~100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 翻译文本。
    */
-  Trans: string
+  Trans?: string
   /**
    * 翻译开始UTC时间。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -14241,14 +14241,14 @@ export interface AiReviewPoliticalTaskOutput {
   /**
    * 视频涉敏评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 视频涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
@@ -14256,11 +14256,11 @@ violation_photo：
 其他（即 politician/entertainment/sport/entrepreneur/scholar/celebrity/military）：
 <li>politician：涉敏人物。</li>
    */
-  Label: string
+  Label?: string
   /**
    * 有涉敏嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewPoliticalSegmentItem>
+  SegmentSet?: Array<MediaContentReviewPoliticalSegmentItem>
 }
 
 /**
@@ -14878,22 +14878,22 @@ export interface LiveStreamAiReviewImageTerrorismResult {
   /**
    * 嫌疑片段起始的 PTS 时间，单位：秒。
    */
-  StartPtsTime: number
+  StartPtsTime?: number
   /**
    * 嫌疑片段结束的 PTS 时间，单位：秒。
    */
-  EndPtsTime: number
+  EndPtsTime?: number
   /**
    * 嫌疑片段涉敏分数。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 嫌疑片段涉敏结果建议，取值范围：
 <li>pass</li>
 <li>review</li>
 <li>block</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 视频涉敏结果标签，取值范围：
 <li>guns：武器枪支。</li>
@@ -14905,16 +14905,16 @@ export interface LiveStreamAiReviewImageTerrorismResult {
 <li>explosion：爆炸火灾。</li>
 <li>terrorists：涉敏人物。</li>
    */
-  Label: string
+  Label?: string
   /**
    * 嫌疑图片 URL （图片不会永久存储，到达
 PicUrlExpireTime 时间点后图片将被删除）。
    */
-  Url: string
+  Url?: string
   /**
    * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  PicUrlExpireTime: string
+  PicUrlExpireTime?: string
 }
 
 /**
@@ -16373,7 +16373,7 @@ export interface ModifyInput {
    */
   RTPSettings: CreateInputRTPSettings
   /**
-   * 输入的协议，可选[SRT|RTP|RTMP_PUSH|RTMP_PULL|RTSP_PULL|RIST]。	-
+   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。	-
    */
   Protocol?: string
   /**
@@ -17056,18 +17056,18 @@ export interface AiReviewPoliticalOcrTaskOutput {
   /**
    * Ocr 文字敏感评分，分值为0到100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * Ocr 文字敏感结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * Ocr 文字有敏感嫌疑的视频片段列表。
    */
-  SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>
+  SegmentSet?: Array<MediaContentReviewOcrTextSegmentItem>
 }
 
 /**
@@ -17218,10 +17218,10 @@ export interface AiAnalysisTaskInput {
   /**
    * 扩展参数，其值为序列化的 json字符串。
 注意：此参数为定制需求参数，参考如下：
-智能檫除：https://cloud.tencent.com/document/product/862/101530
-智能拆条：https://cloud.tencent.com/document/product/862/112098
-高光集锦：https://cloud.tencent.com/document/product/862/107280
-智能横转竖：https://cloud.tencent.com/document/product/862/112112
+[智能檫除](https://cloud.tencent.com/document/product/862/101530)
+[智能拆条](https://cloud.tencent.com/document/product/862/112098)
+[高光集锦](https://cloud.tencent.com/document/product/862/107280)
+[智能横转竖](https://cloud.tencent.com/document/product/862/112112)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtendedParameter?: string
@@ -17605,21 +17605,21 @@ export interface SampleSnapshotTemplate {
   /**
    * 采样截图模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 模板类型，取值范围：
 <li>Preset：系统预置模板；</li>
 <li>Custom：用户自定义模板。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 采样截图模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
@@ -17628,7 +17628,7 @@ export interface SampleSnapshotTemplate {
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
    */
-  Width: number
+  Width?: number
   /**
    * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
@@ -17637,34 +17637,34 @@ export interface SampleSnapshotTemplate {
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
    */
-  Height: number
+  Height?: number
   /**
    * 分辨率自适应，可选值：
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
 默认值：open。
    */
-  ResolutionAdaptive: string
+  ResolutionAdaptive?: string
   /**
    * 图片格式。
    */
-  Format: string
+  Format?: string
   /**
    * 采样截图类型。
    */
-  SampleType: string
+  SampleType?: string
   /**
    * 采样间隔。
    */
-  SampleInterval: number
+  SampleInterval?: number
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
@@ -17673,7 +17673,7 @@ export interface SampleSnapshotTemplate {
 <li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
 默认值：black 。
    */
-  FillType: string
+  FillType?: string
 }
 
 /**

@@ -1437,6 +1437,10 @@ export interface CreateFlowEvidenceReportRequest {
 <li> **1** :公证处核验报告</li></ul>
    */
   ReportType?: number
+  /**
+   * 混合云模式获取合同文件合并出证，默认：不同意。注：此参数需要联系腾讯电子签运营进行开通后生效
+   */
+  HybridEvidenceFlowFile?: boolean
 }
 
 /**

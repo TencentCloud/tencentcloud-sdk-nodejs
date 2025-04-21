@@ -72,10 +72,12 @@ import {
   DescribeProductEventListResponse,
   Targets,
   GetTopNMonitorDataResponse,
+  RegionPolicyObjectCount,
   AlarmGroupByItem,
   DescribePrometheusIntegrationMetricsResponse,
   DescribePrometheusInstanceUsageRequest,
   DeleteSSOAccountRequest,
+  DescribePolicyObjectCountRequest,
   CreatePrometheusRecordRuleYamlRequest,
   Instance,
   DescribeAlarmNoticesResponse,
@@ -83,6 +85,7 @@ import {
   DeletePrometheusAlertGroupsRequest,
   GrafanaInstanceInfo,
   DeletePrometheusConfigResponse,
+  DescribePolicyObjectCountResponse,
   CreatePrometheusRecordRuleYamlResponse,
   MetricObjectMeaning,
   AlarmEvent,
@@ -606,6 +609,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusInstanceUsageResponse) => void
   ): Promise<DescribePrometheusInstanceUsageResponse> {
     return this.request("DescribePrometheusInstanceUsage", req, cb)
+  }
+
+  /**
+   * 查询策略组在每个地域下面绑定的对象数统计
+   */
+  async DescribePolicyObjectCount(
+    req: DescribePolicyObjectCountRequest,
+    cb?: (error: string, rep: DescribePolicyObjectCountResponse) => void
+  ): Promise<DescribePolicyObjectCountResponse> {
+    return this.request("DescribePolicyObjectCount", req, cb)
   }
 
   /**

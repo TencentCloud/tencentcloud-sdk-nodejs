@@ -317,6 +317,20 @@ export interface DescribeAuditInstanceListResponse {
 }
 
 /**
+ * DescribeSlaveZones返回参数结构体
+ */
+export interface DescribeSlaveZonesResponse {
+  /**
+   * 从可用区
+   */
+  SlaveZones?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProxies返回参数结构体
  */
 export interface DescribeProxiesResponse {
@@ -2342,6 +2356,20 @@ export interface RollBackClusterResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * OpenSSL请求参数结构体
+ */
+export interface OpenSSLRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -7745,6 +7773,25 @@ export interface CreateAuditLogFileRequest {
 }
 
 /**
+ * DescribeSSLStatus返回参数结构体
+ */
+export interface DescribeSSLStatusResponse {
+  /**
+   * yes-开启，no-关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsOpenSSL?: string
+  /**
+   * 证书下载地址
+   */
+  DownloadUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterSlaveZone请求参数结构体
  */
 export interface ModifyClusterSlaveZoneRequest {
@@ -8145,6 +8192,26 @@ export interface DescribeInstanceSpecsResponse {
    * 规格信息
    */
   InstanceSpecSet?: Array<InstanceSpec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenSSL返回参数结构体
+ */
+export interface OpenSSLResponse {
+  /**
+   * 任务流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9937,6 +10004,20 @@ DISK：存储资源包
 }
 
 /**
+ * DescribeSlaveZones请求参数结构体
+ */
+export interface DescribeSlaveZonesRequest {
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 云架集群ID
+   */
+  OssClusterId?: number
+}
+
+/**
  * 计费资源信息
  */
 export interface BillingResourceInfo {
@@ -10372,6 +10453,20 @@ export interface SaleRegion {
    * 地域模块支持情况
    */
   Modules: Array<Module>
+}
+
+/**
+ * DescribeSSLStatus请求参数结构体
+ */
+export interface DescribeSSLStatusRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
 }
 
 /**

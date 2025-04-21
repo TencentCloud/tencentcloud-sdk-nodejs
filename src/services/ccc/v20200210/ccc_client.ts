@@ -44,7 +44,7 @@ import {
   CreatePredictiveDialingCampaignRequest,
   RestoreMemberOnlineResponse,
   AbortAgentCruiseDialingCampaignResponse,
-  CreateCompanyApplyResponse,
+  DescribeChatMessagesResponse,
   ServeParticipant,
   AICallExtractResultElement,
   DescribeTelCallInfoResponse,
@@ -78,7 +78,7 @@ import {
   CreateUserSigRequest,
   CreateCCCSkillGroupRequest,
   DescribePredictiveDialingSessionsResponse,
-  DescribeAutoCalloutTaskResponse,
+  DeleteCCCSkillGroupRequest,
   CreateCompanyApplyRequest,
   CreateCCCSkillGroupResponse,
   DescribeTelSessionRequest,
@@ -124,6 +124,7 @@ import {
   DescribePSTNActiveSessionListRequest,
   CreateAutoCalloutTaskResponse,
   DescribeAICallExtractResultResponse,
+  DeleteCCCSkillGroupResponse,
   UploadIvrAudioFailedInfo,
   UploadIvrAudioResponse,
   ModifyExtensionResponse,
@@ -184,7 +185,7 @@ import {
   CalleeAttribute,
   StaffStatusExtra,
   CreateStaffRequest,
-  DescribeChatMessagesResponse,
+  CreateCompanyApplyResponse,
   SdkAppIdBuyInfo,
   DescribePSTNActiveSessionListResponse,
   AILatencyStatistics,
@@ -193,6 +194,7 @@ import {
   DescribeChatMessagesRequest,
   DescribeTelSessionResponse,
   CreateAdminURLRequest,
+  DescribeAutoCalloutTaskResponse,
   DescribeStaffStatusMetricsResponse,
   AudioFileInfo,
   DescribeCarrierPrivilegeNumberApplicantsResponse,
@@ -293,13 +295,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取会话录音转文本信息
+   * 删除技能组
    */
-  async DescribeTelRecordAsr(
-    req: DescribeTelRecordAsrRequest,
-    cb?: (error: string, rep: DescribeTelRecordAsrResponse) => void
-  ): Promise<DescribeTelRecordAsrResponse> {
-    return this.request("DescribeTelRecordAsr", req, cb)
+  async DeleteCCCSkillGroup(
+    req: DeleteCCCSkillGroupRequest,
+    cb?: (error: string, rep: DeleteCCCSkillGroupResponse) => void
+  ): Promise<DeleteCCCSkillGroupResponse> {
+    return this.request("DeleteCCCSkillGroup", req, cb)
   }
 
   /**
@@ -776,6 +778,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserSigResponse) => void
   ): Promise<CreateUserSigResponse> {
     return this.request("CreateUserSig", req, cb)
+  }
+
+  /**
+   * 拉取会话录音转文本信息
+   */
+  async DescribeTelRecordAsr(
+    req: DescribeTelRecordAsrRequest,
+    cb?: (error: string, rep: DescribeTelRecordAsrResponse) => void
+  ): Promise<DescribeTelRecordAsrResponse> {
+    return this.request("DescribeTelRecordAsr", req, cb)
   }
 
   /**

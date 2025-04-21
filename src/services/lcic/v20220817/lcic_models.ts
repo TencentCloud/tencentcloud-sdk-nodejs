@@ -841,6 +841,10 @@ export interface RoomItem {
    * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
    */
   WhiteBoardSnapshotMode?: number
+  /**
+   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   */
+  SubtitlesTranscription?: number
 }
 
 /**
@@ -3106,6 +3110,10 @@ export interface RoomInfo {
    * 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式
    */
   WhiteBoardSnapshotMode?: number
+  /**
+   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   */
+  SubtitlesTranscription?: number
 }
 
 /**

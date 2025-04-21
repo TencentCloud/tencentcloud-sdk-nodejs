@@ -338,6 +338,16 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
     }
 })
 
+it("waf.v20180125.DescribeBotSceneUCBRule", async function () {
+    try {
+       const data = await client.DescribeBotSceneUCBRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeIpHitItems", async function () {
     try {
        const data = await client.DescribeIpHitItems({})
@@ -461,6 +471,16 @@ it("waf.v20180125.AddAntiInfoLeakRules", async function () {
 it("waf.v20180125.ModifyHostStatus", async function () {
     try {
        const data = await client.ModifyHostStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyBotSceneUCBRule", async function () {
+    try {
+       const data = await client.ModifyBotSceneUCBRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +788,16 @@ it("waf.v20180125.DescribeTopAttackDomain", async function () {
     }
 })
 
+it("waf.v20180125.ModifyBotSceneStatus", async function () {
+    try {
+       const data = await client.ModifyBotSceneStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyHost", async function () {
     try {
        const data = await client.ModifyHost({})
@@ -981,6 +1011,16 @@ it("waf.v20180125.DeleteAttackWhiteRule", async function () {
 it("waf.v20180125.DescribeIpAccessControl", async function () {
     try {
        const data = await client.DescribeIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeBotSceneOverview", async function () {
+    try {
+       const data = await client.DescribeBotSceneOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,6 +1388,16 @@ it("waf.v20180125.DescribeWafAutoDenyStatus", async function () {
     }
 })
 
+it("waf.v20180125.DescribeBotSceneList", async function () {
+    try {
+       const data = await client.DescribeBotSceneList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyCustomWhiteRuleStatus", async function () {
     try {
        const data = await client.ModifyCustomWhiteRuleStatus({})
@@ -1451,6 +1501,16 @@ it("waf.v20180125.DeleteCCRule", async function () {
 it("waf.v20180125.CreateHost", async function () {
     try {
        const data = await client.CreateHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteBotSceneUCBRule", async function () {
+    try {
+       const data = await client.DeleteBotSceneUCBRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

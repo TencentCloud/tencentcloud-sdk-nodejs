@@ -563,7 +563,6 @@ export interface CreateInstanceNewResponse {
   InstanceId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1068,7 +1067,6 @@ export interface DescribeInstanceKeyValConfigsResponse {
   MapConfigItems?: Array<MapConfigItem>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1961,17 +1959,14 @@ export interface DescribeBackUpScheduleResponse {
   BackUpOpened?: boolean
   /**
    * 元数据备份策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaStrategy?: ScheduleStrategy
   /**
    * 表数据备份策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataStrategy?: ScheduleStrategy
   /**
    * 备份表列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackUpContents?: Array<BackupTableContent>
   /**
@@ -1980,7 +1975,6 @@ export interface DescribeBackUpScheduleResponse {
   BackUpStatus?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**

@@ -1317,11 +1317,13 @@ export interface DBEndpointInfo {
    */
   DatabaseType: string
   /**
-   * 节点类型，为空或者simple表示普通节点、cluster表示集群节点；对于mongo业务，取值为replicaset(mongodb副本集)、standalone(mongodb单节点)、cluster(mongodb集群)；对于redis实例，为空或simple(单节点)、cluster(集群)、cluster-cache(cache集群)、cluster-proxy(代理集群)
+   * 节点类型，simple表示普通节点、cluster表示集群节点；
+对于mongo业务，取值为replicaset(mongodb副本集)、standalone(mongodb单节点)、cluster(mongodb集群)；
+对于redis实例，simple(单节点)、cluster-cache(直连集群)、cluster-proxy(代理集群)；
    */
   NodeType: string
   /**
-   * 数据库信息
+   * 实例具体的连接信息，如ip、port、接入方式等
    */
   Info: Array<DBInfo>
   /**
@@ -1338,7 +1340,7 @@ export interface DBEndpointInfo {
    */
   DatabaseNetEnv?: string
   /**
-   * tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，Info中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，Info中需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。
+   * tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，Info中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，Info中需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。对于mongodb链路，srv表示SRV连接串，为空或不传表示普通连接串，srv仅限于FetchMethod为change_stream的拉取模式
    */
   ConnectType?: string
 }

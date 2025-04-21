@@ -88,9 +88,9 @@ it("ccc.v20200210.DescribeAgentCruiseDialingCampaign", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelRecordAsr", async function () {
+it("ccc.v20200210.DeleteCCCSkillGroup", async function () {
     try {
-       const data = await client.DescribeTelRecordAsr({})
+       const data = await client.DeleteCCCSkillGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +561,16 @@ it("ccc.v20200210.UpdateCCCSkillGroup", async function () {
 it("ccc.v20200210.CreateUserSig", async function () {
     try {
        const data = await client.CreateUserSig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeTelRecordAsr", async function () {
+    try {
+       const data = await client.DescribeTelRecordAsr({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

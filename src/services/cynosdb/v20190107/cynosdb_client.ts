@@ -33,6 +33,7 @@ import {
   ModifyInstanceNameResponse,
   DescribeParamTemplatesRequest,
   DescribeAuditInstanceListResponse,
+  DescribeSlaveZonesResponse,
   DescribeProxiesResponse,
   DescribeClusterDetailDatabasesRequest,
   RollbackRoGroupInfo,
@@ -95,6 +96,7 @@ import {
   DescribeResourcePackageSaleSpecRequest,
   UnbindClusterResourcePackagesResponse,
   RollBackClusterResponse,
+  OpenSSLRequest,
   DescribeClusterInstanceGrpsResponse,
   ModifyBackupConfigResponse,
   ModifyClusterDatabaseRequest,
@@ -318,6 +320,7 @@ import {
   ModifyClusterParamRequest,
   OfflineInstanceResponse,
   CreateAuditLogFileRequest,
+  DescribeSSLStatusResponse,
   ModifyClusterSlaveZoneRequest,
   DescribeInstanceErrorLogsResponse,
   DescribeSupportProxyVersionResponse,
@@ -329,6 +332,7 @@ import {
   DescribeAccountPrivilegesRequest,
   ModifyAccountParamsResponse,
   DescribeInstanceSpecsResponse,
+  OpenSSLResponse,
   ParamItem,
   DescribeClusterDetailResponse,
   DescribeInstanceSlowQueriesRequest,
@@ -403,6 +407,7 @@ import {
   DescribeInstancesWithinSameClusterResponse,
   RollbackToNewClusterResponse,
   ResourcePackage,
+  DescribeSlaveZonesRequest,
   BillingResourceInfo,
   ModifyProxyRwSplitResponse,
   ModifyAccountDescriptionRequest,
@@ -420,6 +425,7 @@ import {
   DescribeBinlogConfigResponse,
   DescribeAuditLogFilesRequest,
   SaleRegion,
+  DescribeSSLStatusRequest,
   ProxyVersionInfo,
   DeleteAuditLogFileRequest,
   DescribeIsolatedInstancesResponse,
@@ -594,13 +600,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续费集群
+   * 查询从可用区
    */
-  async RenewClusters(
-    req: RenewClustersRequest,
-    cb?: (error: string, rep: RenewClustersResponse) => void
-  ): Promise<RenewClustersResponse> {
-    return this.request("RenewClusters", req, cb)
+  async DescribeSlaveZones(
+    req: DescribeSlaveZonesRequest,
+    cb?: (error: string, rep: DescribeSlaveZonesResponse) => void
+  ): Promise<DescribeSlaveZonesResponse> {
+    return this.request("DescribeSlaveZones", req, cb)
   }
 
   /**
@@ -731,6 +737,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxyNodesResponse) => void
   ): Promise<DescribeProxyNodesResponse> {
     return this.request("DescribeProxyNodes", req, cb)
+  }
+
+  /**
+   * 续费集群
+   */
+  async RenewClusters(
+    req: RenewClustersRequest,
+    cb?: (error: string, rep: RenewClustersResponse) => void
+  ): Promise<RenewClustersResponse> {
+    return this.request("RenewClusters", req, cb)
   }
 
   /**
@@ -1504,6 +1520,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例SSL状态
+   */
+  async DescribeSSLStatus(
+    req: DescribeSSLStatusRequest,
+    cb?: (error: string, rep: DescribeSSLStatusResponse) => void
+  ): Promise<DescribeSSLStatusResponse> {
+    return this.request("DescribeSSLStatus", req, cb)
+  }
+
+  /**
    * 此接口（ExportInstanceErrorLogs）用于导出实例错误日志。
    */
   async ExportInstanceErrorLogs(
@@ -1721,6 +1747,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeClusterVersionResponse) => void
   ): Promise<UpgradeClusterVersionResponse> {
     return this.request("UpgradeClusterVersion", req, cb)
+  }
+
+  /**
+   * 开启SSL加密
+   */
+  async OpenSSL(
+    req: OpenSSLRequest,
+    cb?: (error: string, rep: OpenSSLResponse) => void
+  ): Promise<OpenSSLResponse> {
+    return this.request("OpenSSL", req, cb)
   }
 
   /**

@@ -158,9 +158,9 @@ it("cynosdb.v20190107.CreateAuditLogFile", async function () {
     }
 })
 
-it("cynosdb.v20190107.RenewClusters", async function () {
+it("cynosdb.v20190107.DescribeSlaveZones", async function () {
     try {
-       const data = await client.RenewClusters({})
+       const data = await client.DescribeSlaveZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +291,16 @@ it("cynosdb.v20190107.ActivateInstance", async function () {
 it("cynosdb.v20190107.DescribeProxyNodes", async function () {
     try {
        const data = await client.DescribeProxyNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RenewClusters", async function () {
+    try {
+       const data = await client.RenewClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,6 +1078,16 @@ it("cynosdb.v20190107.DescribeAuditRuleWithInstanceIds", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeSSLStatus", async function () {
+    try {
+       const data = await client.DescribeSSLStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ExportInstanceErrorLogs", async function () {
     try {
        const data = await client.ExportInstanceErrorLogs({})
@@ -1281,6 +1301,16 @@ it("cynosdb.v20190107.DescribeInstances", async function () {
 it("cynosdb.v20190107.UpgradeClusterVersion", async function () {
     try {
        const data = await client.UpgradeClusterVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.OpenSSL", async function () {
+    try {
+       const data = await client.OpenSSL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -414,7 +414,7 @@ export interface WebSearchRequest {
    */
   BlackSites?: Array<string>
   /**
-   * 秒级时间冲，搜索网页的开始时间，默认不限制开始时间。
+   * 秒级时间戳，搜索网页的开始时间，默认不限制开始时间。
    */
   StartTime?: number
   /**
@@ -433,12 +433,10 @@ export interface WebSearchRequest {
 export interface WebPage {
   /**
    * 标题
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
   /**
    * url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
   /**

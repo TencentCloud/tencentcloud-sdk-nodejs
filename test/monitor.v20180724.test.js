@@ -128,6 +128,16 @@ it("monitor.v20180724.DescribePrometheusInstanceUsage", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePolicyObjectCount", async function () {
+    try {
+       const data = await client.DescribePolicyObjectCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyAlarmReceivers", async function () {
     try {
        const data = await client.ModifyAlarmReceivers({})

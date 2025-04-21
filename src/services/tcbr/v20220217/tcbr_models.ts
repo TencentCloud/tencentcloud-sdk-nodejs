@@ -638,6 +638,10 @@ export interface ServerBaseConfig {
    * 内网访问开关 close | open
    */
   InternalAccess?: string
+  /**
+   * 内网域名
+   */
+  InternalDomain?: string
 }
 
 /**
@@ -758,6 +762,10 @@ export interface ServerBaseInfo {
    * 服务类型: function 云函数2.0；container 容器服务
    */
   ServerType?: string
+  /**
+   * 流量类型，目前只有 FLOW
+   */
+  TrafficType?: string
 }
 
 /**

@@ -243,6 +243,10 @@ export interface TextToVoiceRequest {
    */
   VoiceType?: number
   /**
+   * 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。【已废弃】
+   */
+  FastVoiceType?: string
+  /**
    * 主语言类型：<li>1-中文（默认）</li><li>2-英文</li><li>3-日文</li>
    */
   PrimaryLanguage?: number
@@ -274,8 +278,4 @@ export interface TextToVoiceRequest {
    * 控制合成音频情感程度，取值范围为[50,200],默认为100；只有EmotionCategory不为空时生效；
    */
   EmotionIntensity?: number
-  /**
-   * 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。【已废弃】
-   */
-  FastVoiceType?: string
 }

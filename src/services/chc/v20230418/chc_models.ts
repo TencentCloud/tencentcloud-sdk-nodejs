@@ -325,6 +325,10 @@ export interface DescribeModelVersionListRequest {
    * 园区ID，当 Checked 参数传 True 时，该参数必须传值
    */
   CampusId?: number
+  /**
+   * 型号关键字，可以实现模糊匹配搜索功能
+   */
+  ModelName?: string
 }
 
 /**

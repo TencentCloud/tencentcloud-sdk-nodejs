@@ -1598,7 +1598,7 @@ drop：拒绝
    */
   RuleAction: string
   /**
-   * 描述
+   * 规则描述 用于规则使用或者场景的描述，最多支持50个字符
    */
   Description: string
   /**
@@ -2031,6 +2031,20 @@ export interface CreateAlertCenterRuleRequest {
    * 封禁域名-保留字段
    */
   BlockDomain?: string
+}
+
+/**
+ * 企业安全组域名解析的IP统计
+ */
+export interface SgDnsParseCount {
+  /**
+   * 有效下发的IP个数，离散数据
+   */
+  ValidCount?: number
+  /**
+   * 未下发的IP个数，离散数据
+   */
+  InvalidCount?: number
 }
 
 /**
@@ -4696,6 +4710,10 @@ ANY:表示所有
    * 规则id  等同RuleUuid
    */
   Id?: number
+  /**
+   * 域名解析的IP统计
+   */
+  DnsParseCount?: SgDnsParseCount
 }
 
 /**
@@ -5290,7 +5308,6 @@ export interface CfwInsStatus {
   FwType?: string
   /**
    * 实例所属地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
@@ -5299,23 +5316,19 @@ export interface CfwInsStatus {
   Status?: string
   /**
    * 事件时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventTime?: string
   /**
    * 恢复时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecoverTime?: string
   /**
    * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CfwInsName?: string
   /**
    * Normal: 正常模式
 OnlyRoute: 透明模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrafficMode?: string
 }
@@ -5340,6 +5353,10 @@ export interface DescribeFwEdgeIpsResponse {
    * 实例类型列表
    */
   InstanceTypeLst?: Array<string>
+  /**
+   * 串行模式开关个数
+   */
+  SerilCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6189,6 +6206,14 @@ export interface DescAcItem {
    * 规则最近命中时间
    */
   LastHitTime?: string
+  /**
+   * 地区简称
+   */
+  CountryKey?: string
+  /**
+   * 省份、城市简称
+   */
+  CityKey?: string
 }
 
 /**

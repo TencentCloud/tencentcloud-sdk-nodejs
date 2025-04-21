@@ -2027,7 +2027,7 @@ export interface RestoreClusterSnapshotRequest {
   /**
    * elastic用户名对应的密码信息
    */
-  Password?: string
+  Password: string
   /**
    * 要在所有恢复的索引中添加或更改的设置的逗号分隔列表。使用此参数可以在恢复快照时覆盖索引设置。
    */

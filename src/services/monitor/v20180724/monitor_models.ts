@@ -1594,6 +1594,20 @@ export interface GetTopNMonitorDataResponse {
 }
 
 /**
+ * DescribePolicyObjectCount接口返回的地域统计
+ */
+export interface RegionPolicyObjectCount {
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 绑定的实例数量
+   */
+  Count: number
+}
+
+/**
  * 聚合条件
  */
 export interface AlarmGroupByItem {
@@ -1653,6 +1667,20 @@ export interface DeleteSSOAccountRequest {
    * 用户账号 ID ，例如：10000000
    */
   UserId: string
+}
+
+/**
+ * DescribePolicyObjectCount请求参数结构体
+ */
+export interface DescribePolicyObjectCountRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+  /**
+   * 策略组Id
+   */
+  GroupId: number
 }
 
 /**
@@ -1820,6 +1848,26 @@ export interface GrafanaInstanceInfo {
  * DeletePrometheusConfig返回参数结构体
  */
 export interface DeletePrometheusConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePolicyObjectCount返回参数结构体
+ */
+export interface DescribePolicyObjectCountResponse {
+  /**
+   * 是否为多地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsMultiRegion?: boolean
+  /**
+   * 地域统计列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionList?: Array<RegionPolicyObjectCount>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

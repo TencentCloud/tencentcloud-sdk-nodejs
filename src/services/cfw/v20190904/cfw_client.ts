@@ -96,6 +96,7 @@ import {
   VpcFwCvmInsInfo,
   DescribeEnterpriseSecurityGroupRuleRequest,
   CreateAlertCenterRuleRequest,
+  SgDnsParseCount,
   ModifyNatFwReSelectResponse,
   CreateAlertCenterOmitRequest,
   DescribeVpcAcRuleRequest,

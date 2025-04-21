@@ -39,7 +39,6 @@ export interface CheckDataEngineConfigPairsValidityResponse {
 export interface DescribeResultDownloadResponse {
   /**
    * 下载文件路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
@@ -688,7 +687,6 @@ export interface DescribeAdvancedStoreLocationResponse {
   LakeFsStatus?: string
   /**
    * 托管存储桶类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketType?: string
   /**
@@ -1088,7 +1086,6 @@ export interface NotebookSessionStatementInfo {
   OutPut?: StatementOutput
   /**
    * 批任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchId?: string
   /**
@@ -3574,22 +3571,18 @@ export interface DescribeLakeFsTaskResultRequest {
 export interface OtherCHDFSBinding {
   /**
    * 产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
    * 用户名称（该字段已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuperUser?: Array<string>
   /**
    * vpc配置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcInfo?: Array<CHDFSProductVpcInfo>
   /**
    * 是否与该桶绑定（该字段已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsBind?: boolean
 }
@@ -9275,7 +9268,6 @@ export interface TaskResponseInfo {
   OperateUin?: string
   /**
    * 计算资源名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineName?: string
   /**

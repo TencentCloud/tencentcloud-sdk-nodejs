@@ -2053,12 +2053,24 @@ export interface RuleGroupExecResult {
   InstanceStatus?: string
   /**
    * 实例运行的开始时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 实例运行的结束时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
+  /**
+   * 监控名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupName?: string
+  /**
+   * 判断是否屏蔽监控 0.屏蔽 1.不屏蔽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupExist?: string
 }
 
 /**
@@ -4851,6 +4863,11 @@ export interface Rule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**

@@ -639,6 +639,7 @@ HoaiMy
   CustomTTSConfig?: string
   /**
    * 提示词变量
+   * @deprecated
    */
   PromptVariables?: Array<Variable>
   /**
@@ -654,7 +655,7 @@ HoaiMy
    */
   Temperature?: number
   /**
-   * 通用变量： <p>提示词变量</p> <p>欢迎语变量</p> <p> dify变量</p>  
+   * 通用变量： <p>提示词变量</p> <p>欢迎语变量</p> <p> 欢迎语延迟播放(秒级)：welcome-message-delay</p>  <p> dify变量</p>  
 
 1. dify-inputs-xxx 为dify的inputs变量
 2.  dify-inputs-user 为dify的user值
@@ -942,13 +943,17 @@ export interface AbortAgentCruiseDialingCampaignResponse {
 }
 
 /**
- * CreateCompanyApply返回参数结构体
+ * DescribeChatMessages返回参数结构体
  */
-export interface CreateCompanyApplyResponse {
+export interface DescribeChatMessagesResponse {
   /**
-   * 申请单ID
+   * 总记录数
    */
-  Id?: number
+  TotalCount?: number
+  /**
+   * 消息列表
+   */
+  Messages?: Array<MessageBody>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1862,46 +1867,17 @@ export interface DescribePredictiveDialingSessionsResponse {
 }
 
 /**
- * DescribeAutoCalloutTask返回参数结构体
+ * DeleteCCCSkillGroup请求参数结构体
  */
-export interface DescribeAutoCalloutTaskResponse {
+export interface DeleteCCCSkillGroupRequest {
   /**
-   * 任务名
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Name?: string
+  SdkAppId: number
   /**
-   * 任务描述
+   * 技能组ID
    */
-  Description?: string
-  /**
-   * 任务起始时间戳
-   */
-  NotBefore?: number
-  /**
-   * 任务结束时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NotAfter?: number
-  /**
-   * 主叫列表
-   */
-  Callers?: Array<string>
-  /**
-   * 被叫信息列表
-   */
-  Callees?: Array<AutoCalloutTaskCalleeInfo>
-  /**
-   * 任务使用的IvrId
-   */
-  IvrId?: number
-  /**
-   * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
-   */
-  State?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SkillGroupId: number
 }
 
 /**
@@ -2513,10 +2489,11 @@ export interface CreateAIAgentCallRequest {
   Callers?: Array<string>
   /**
    * 提示词变量
+   * @deprecated
    */
   PromptVariables?: Array<Variable>
   /**
-   * 通用变量： <p>提示词变量</p> <p>欢迎语变量</p> <p> dify变量</p>  
+   * 通用变量： <p>提示词变量</p> <p>欢迎语变量</p> <p> 欢迎语延迟播放(秒级)：welcome-message-delay</p>  <p> dify变量</p>  
 
 1. dify-inputs-xxx 为dify的inputs变量
 2.  dify-inputs-user 为dify的user值
@@ -3022,6 +2999,16 @@ export interface DescribeAICallExtractResultResponse {
    * 结果列表
    */
   ResultList?: Array<AICallExtractResultElement>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCCCSkillGroup返回参数结构体
+ */
+export interface DeleteCCCSkillGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4368,17 +4355,13 @@ export interface CreateStaffRequest {
 }
 
 /**
- * DescribeChatMessages返回参数结构体
+ * CreateCompanyApply返回参数结构体
  */
-export interface DescribeChatMessagesResponse {
+export interface CreateCompanyApplyResponse {
   /**
-   * 总记录数
+   * 申请单ID
    */
-  TotalCount?: number
-  /**
-   * 消息列表
-   */
-  Messages?: Array<MessageBody>
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4565,6 +4548,49 @@ export interface CreateAdminURLRequest {
    * 管理员账号
    */
   SeatUserId: string
+}
+
+/**
+ * DescribeAutoCalloutTask返回参数结构体
+ */
+export interface DescribeAutoCalloutTaskResponse {
+  /**
+   * 任务名
+   */
+  Name?: string
+  /**
+   * 任务描述
+   */
+  Description?: string
+  /**
+   * 任务起始时间戳
+   */
+  NotBefore?: number
+  /**
+   * 任务结束时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotAfter?: number
+  /**
+   * 主叫列表
+   */
+  Callers?: Array<string>
+  /**
+   * 被叫信息列表
+   */
+  Callees?: Array<AutoCalloutTaskCalleeInfo>
+  /**
+   * 任务使用的IvrId
+   */
+  IvrId?: number
+  /**
+   * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
+   */
+  State?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
