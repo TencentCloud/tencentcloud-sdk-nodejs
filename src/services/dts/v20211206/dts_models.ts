@@ -2166,7 +2166,7 @@ export interface CreateMigrationServiceResponse {
 }
 
 /**
- * 目标端为kakfa时添加的同步选项字段
+ * 目标端为kafka时添加的同步选项字段
  */
 export interface KafkaOption {
   /**

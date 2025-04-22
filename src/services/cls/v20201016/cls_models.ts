@@ -140,6 +140,10 @@ export interface AlarmInfo {
    */
   GroupTriggerCondition?: Array<string>
   /**
+   * 告警策略绑定的标签信息。
+   */
+  Tags?: Array<Tag>
+  /**
    * 监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。
    */
   MonitorObjectType?: number
@@ -5539,6 +5543,10 @@ long及double类型字段需为空；
    * 是否包含中文，long及double类型字段需为false
    */
   ContainZH?: boolean
+  /**
+   * 字段别名
+   */
+  Alias?: string
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   KeyValuePair,
   TaskResult,
   SuspendProbeTaskResponse,
+  DescribeProbeNodesResponse,
   ProbeTaskBasicConfiguration,
   DescribeInstantTasksResponse,
   DescribeDetailedSingleProbeDataRequest,
@@ -35,12 +36,12 @@ import {
   SuspendProbeTaskRequest,
   DescribeProbeMetricDataRequest,
   UpdateProbeTaskAttributesRequest,
-  DescribeProbeNodesResponse,
+  DescribeProbeTasksRequest,
   DescribeInstantTasksRequest,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
   ProbeTask,
-  DescribeProbeTasksRequest,
+  DescribeNodeGroupsRequest,
   ResumeProbeTaskResponse,
   DeleteProbeTaskResponse,
   CreateProbeTasksResponse,
@@ -51,6 +52,7 @@ import {
   Tag,
   DescribeNodesResponse,
   DescribeProbeMetricDataResponse,
+  DescribeNodeGroupsResponse,
   UpdateProbeTaskConfigurationListResponse,
   DetailedSingleDataDefine,
 } from "./cat_models"
@@ -106,6 +108,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询拨测节点
+   */
+  async DescribeProbeNodes(
+    req: DescribeProbeNodesRequest,
+    cb?: (error: string, rep: DescribeProbeNodesResponse) => void
+  ): Promise<DescribeProbeNodesResponse> {
+    return this.request("DescribeProbeNodes", req, cb)
+  }
+
+  /**
    * 获取拨测节点
    */
   async DescribeNodes(
@@ -146,13 +158,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询拨测节点
+   * 获取拨测点组（可用性拨测点组、高级拨测点组、我的拨测点组）
    */
-  async DescribeProbeNodes(
-    req: DescribeProbeNodesRequest,
-    cb?: (error: string, rep: DescribeProbeNodesResponse) => void
-  ): Promise<DescribeProbeNodesResponse> {
-    return this.request("DescribeProbeNodes", req, cb)
+  async DescribeNodeGroups(
+    req: DescribeNodeGroupsRequest,
+    cb?: (error: string, rep: DescribeNodeGroupsResponse) => void
+  ): Promise<DescribeNodeGroupsResponse> {
+    return this.request("DescribeNodeGroups", req, cb)
   }
 
   /**

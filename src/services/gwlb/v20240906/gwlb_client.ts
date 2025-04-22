@@ -162,9 +162,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改目标组的服务器权重。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
-     */
+   * 修改目标组的服务器权重。
+   */
   async ModifyTargetGroupInstancesWeight(
     req: ModifyTargetGroupInstancesWeightRequest,
     cb?: (error: string, rep: ModifyTargetGroupInstancesWeightResponse) => void

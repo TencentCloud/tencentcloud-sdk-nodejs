@@ -18,8 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreatePrivilegeCodeRequest,
   DescribeDLPFileDetectResultRequest,
   RuleItem,
+  DescribeSoftCensusListByDeviceData,
   DescribeLocalAccountAccountGroupsData,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
@@ -28,7 +30,7 @@ import {
   DescribeRootAccountGroupResponse,
   DescribeDLPFileDetectResultData,
   DescribeDevicesResponse,
-  GetAccountGroupData,
+  CreatePrivilegeCodeRspData,
   DescribeLocalAccountsResponse,
   DescribeAccountGroupsData,
   RuleExpression,
@@ -37,19 +39,24 @@ import {
   DescribeAccountGroupsRequest,
   DescribeAccountGroupsResponse,
   DescribeDevicesPageRsp,
+  DescribeSoftCensusListByDeviceResponse,
   FilterGroup,
+  DescribeSoftCensusListByDevicePageData,
+  DescribeLocalAccountsRequest,
   CreateDeviceVirtualGroupRequest,
   DescribeDevicesRequest,
   Paging,
   DeviceDetail,
-  DescribeLocalAccountsData,
+  GetAccountGroupData,
+  DescribeSoftCensusListByDeviceRequest,
   Filter,
-  DescribeLocalAccountsRequest,
+  DescribeLocalAccountsData,
   CreateDLPFileDetectionTaskResponse,
   DescribeLocalAccountsPage,
   DescribeDLPFileDetectResultResponse,
   Condition,
   CreateDLPFileDetectionTaskRequest,
+  CreatePrivilegeCodeResponse,
   CreateDeviceVirtualGroupRspData,
   SimpleRule,
 } from "./ioa_models"
@@ -84,6 +91,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看终端树下的软件列表,私有化调用path为：capi/Software/DescribeSoftCensusListByDevice
+   */
+  async DescribeSoftCensusListByDevice(
+    req: DescribeSoftCensusListByDeviceRequest,
+    cb?: (error: string, rep: DescribeSoftCensusListByDeviceResponse) => void
+  ): Promise<DescribeSoftCensusListByDeviceResponse> {
+    return this.request("DescribeSoftCensusListByDevice", req, cb)
+  }
+
+  /**
    * 查询满足条件的终端数据详情，私有化调用path为：/capi/Assets/Device/DescribeDevices
    */
   async DescribeDevices(
@@ -101,6 +118,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDLPFileDetectionTaskResponse) => void
   ): Promise<CreateDLPFileDetectionTaskResponse> {
     return this.request("CreateDLPFileDetectionTask", req, cb)
+  }
+
+  /**
+   * 生成特权码，私有化调用path为：capi/Assets/Device/CreatePrivilegeCode，生成的特权码、卸载码，仅对该设备当天有效
+   */
+  async CreatePrivilegeCode(
+    req: CreatePrivilegeCodeRequest,
+    cb?: (error: string, rep: CreatePrivilegeCodeResponse) => void
+  ): Promise<CreatePrivilegeCodeResponse> {
+    return this.request("CreatePrivilegeCode", req, cb)
   }
 
   /**

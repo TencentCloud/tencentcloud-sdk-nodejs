@@ -154,6 +154,21 @@ export interface SuspendProbeTaskResponse {
 }
 
 /**
+ * DescribeProbeNodes返回参数结构体
+ */
+export interface DescribeProbeNodesResponse {
+  /**
+   * 节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeSet?: Array<NodeDefine>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 拨测任务基础配置
  */
 export interface ProbeTaskBasicConfiguration {
@@ -439,18 +454,83 @@ export interface UpdateProbeTaskAttributesRequest {
 }
 
 /**
- * DescribeProbeNodes返回参数结构体
+ * DescribeProbeTasks请求参数结构体
  */
-export interface DescribeProbeNodesResponse {
+export interface DescribeProbeTasksRequest {
   /**
-   * 节点列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务 ID  列表
    */
-  NodeSet?: Array<NodeDefine>
+  TaskIDs?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务名
    */
-  RequestId?: string
+  TaskName?: string
+  /**
+   * 拨测目标
+   */
+  TargetAddress?: string
+  /**
+   * 任务状态列表
+<li>1 = 创建中</li>
+<li> 2 = 运行中 </li>
+<li> 3 = 运行异常 </li>
+<li> 4 = 暂停中 </li>
+<li> 5 = 暂停异常 </li>
+<li> 6 = 任务暂停 </li>
+<li> 7 = 任务删除中 </li>
+<li> 8 = 任务删除异常 </li>
+<li> 9 = 任务删除</li>
+<li> 10 = 定时任务暂停中 </li>
+   */
+  TaskStatus?: Array<number | bigint>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100
+   */
+  Limit?: number
+  /**
+   * 付费模式
+<li>1 = 试用版本</li>
+<li> 2 = 付费版本 </li>
+   */
+  PayMode?: number
+  /**
+   * 订单状态
+<li>1 = 正常</li>
+<li> 2 = 欠费 </li>
+   */
+  OrderState?: number
+  /**
+   * 拨测类型
+<li>1 = 页面浏览</li>
+<li> 2 =文件上传 </li>
+<li> 3 = 文件下载</li>
+<li> 4 = 端口性能 </li>
+<li> 5 = 网络质量 </li>
+<li> 6 =流媒体 </li>
+
+即使拨测只支持页面浏览，网络质量，文件下载
+   */
+  TaskType?: Array<number | bigint>
+  /**
+   * 节点类型
+   */
+  TaskCategory?: Array<number | bigint>
+  /**
+   * 排序的列
+   */
+  OrderBy?: string
+  /**
+   * 是否正序
+   */
+  Ascend?: boolean
+  /**
+   * 资源标签值
+   */
+  TagFilters?: Array<KeyValuePair>
 }
 
 /**
@@ -673,83 +753,49 @@ export interface ProbeTask {
 }
 
 /**
- * DescribeProbeTasks请求参数结构体
+ * DescribeNodeGroups请求参数结构体
  */
-export interface DescribeProbeTasksRequest {
+export interface DescribeNodeGroupsRequest {
   /**
-   * 任务 ID  列表
+   * 节点类型。0: 全部 1: IDC 2: LastMile 3: Mobile，不填默认为0
    */
-  TaskIDs?: Array<string>
+  NodeType?: Array<number | bigint>
   /**
-   * 任务名
+   * 节点分类。0: 全部 1: PC 2：Mobile，不填默认为0。PC分类包括IDC和LM节点类型，Mobile分类包括Mobile节点类型。与NodeType参数取交集。
    */
-  TaskName?: string
+  TaskCategory?: number
   /**
-   * 拨测目标
+   * IP类型。0: 全部 1: IPv4 2: IPv6，不填默认为0
    */
-  TargetAddress?: string
+  IPType?: number
   /**
-   * 任务状态列表
-<li>1 = 创建中</li>
-<li> 2 = 运行中 </li>
-<li> 3 = 运行异常 </li>
-<li> 4 = 暂停中 </li>
-<li> 5 = 暂停异常 </li>
-<li> 6 = 任务暂停 </li>
-<li> 7 = 任务删除中 </li>
-<li> 8 = 任务删除异常 </li>
-<li> 9 = 任务删除</li>
-<li> 10 = 定时任务暂停中 </li>
+   * 拨测点描述关键词。
    */
-  TaskStatus?: Array<number | bigint>
+  Name?: string
   /**
-   * 偏移量，默认为0
+   * 地域ID。0: 精选拨测点 1: 国内 2: 港澳台 3: 亚太 4: 欧洲与美洲 5: 非洲与大洋洲，不填默认为0
    */
-  Offset?: number
+  RegionID?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * 省份或国家ID。0表示全部，不填默认为0
    */
-  Limit?: number
+  DistrictID?: number
   /**
-   * 付费模式
-<li>1 = 试用版本</li>
-<li> 2 = 付费版本 </li>
+   * 运营商ID。0: 全部 1: 中国电信 2: 中国联通 3: 中国移动 99: 其他，不填默认为0
    */
-  PayMode?: number
+  NetServiceID?: number
   /**
-   * 订单状态
-<li>1 = 正常</li>
-<li> 2 = 欠费 </li>
+   * 节点组类型。0: 高级拨测点组 1: 可用性节点 2: 我的拨测点组，不填默认为0
    */
-  OrderState?: number
+  NodeGroupType?: number
   /**
-   * 拨测类型
-<li>1 = 页面浏览</li>
-<li> 2 =文件上传 </li>
-<li> 3 = 文件下载</li>
-<li> 4 = 端口性能 </li>
-<li> 5 = 网络质量 </li>
-<li> 6 =流媒体 </li>
-
-即使拨测只支持页面浏览，网络质量，文件下载
+   * 任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois，不填默认为0，不对任务类型做过滤
    */
-  TaskType?: Array<number | bigint>
+  TaskType?: number
   /**
-   * 节点类型
+   * 测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。
    */
-  TaskCategory?: Array<number | bigint>
-  /**
-   * 排序的列
-   */
-  OrderBy?: string
-  /**
-   * 是否正序
-   */
-  Ascend?: boolean
-  /**
-   * 资源标签值
-   */
-  TagFilters?: Array<KeyValuePair>
+  ProbeType?: number
 }
 
 /**
@@ -1011,6 +1057,16 @@ export interface DescribeProbeMetricDataResponse {
    *  返回指标 JSON 序列化后的字符串，具体如下所示："[{\"name\":\"task_navigate_request_gauge\",\"columns\":[\"time\",\"avg(first_screen_time) / 1000\"],\"values\":[[1641571200,6.756600000000001]],\"tags\":null}]"
    */
   MetricSet?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeNodeGroups返回参数结构体
+ */
+export interface DescribeNodeGroupsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

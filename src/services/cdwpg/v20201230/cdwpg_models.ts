@@ -21,17 +21,14 @@
 export interface ConfigParams {
   /**
    * 名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterName?: string
   /**
    * 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterValue?: string
   /**
    * 修改前的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterOldValue?: string
 }
@@ -520,17 +517,14 @@ export interface DescribeDBParamsRequest {
 export interface CBSSpec {
   /**
    * 盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType: string
   /**
    * 大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize: number
   /**
    * 个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount: number
 }

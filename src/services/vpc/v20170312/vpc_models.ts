@@ -293,6 +293,20 @@ export interface CreateVpcPeeringConnectionRequest {
 }
 
 /**
+ * ModifyGlobalRoutes请求参数结构体
+ */
+export interface ModifyGlobalRoutesRequest {
+  /**
+   * VPC唯一Id。
+   */
+  VpcId: string
+  /**
+   * 全局路由对象。仅支持修改：'Description'，其他字段暂不支持。
+   */
+  GlobalRoutes: Array<GlobalRoute>
+}
+
+/**
  * ResetTrafficMirrorFilter请求参数结构体
  */
 export interface ResetTrafficMirrorFilterRequest {
@@ -1467,6 +1481,44 @@ export interface DescribeVpcPrivateIpAddressesRequest {
    * 内网`IP`地址列表，批量查询单次请求最多支持`10`个。
    */
   PrivateIpAddresses: Array<string>
+}
+
+/**
+ * DescribeGlobalRoutes请求参数结构体
+ */
+export interface DescribeGlobalRoutesRequest {
+  /**
+   * 过滤条件。
+<li>global-route-id - String - （过滤条件）如全局路由唯一 Id，形如：gr-bmenrwu2。</li>
+<li>vpc-id - String - （过滤条件）VPC唯一Id， 形如： vpc-mcqaoy0f。</li>
+<li>gateway-id - String - （过滤条件）下一跳对象。</li>
+<li>gateway-type - String -  是否必填：否 - （过滤条件）按下一跳类型进行过滤。支持 NORMAL_CVM
+</li>
+<li>cdc-id - String - （过滤条件）CDC实例ID，形如：cluster-gbo27yc4。</li>
+<li>description - String - （过滤条件）描述。</li>
+<li>dest-cidr - String - （过滤条件）Ipv4目标网段。</li>
+<li>subnet-route-algorithm - String - （过滤条件）支持的 ECMP算法有：
+
+   - ECMP_QUINTUPLE_HASH：五元组hash
+   - ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash
+   - ECMP_DESTINATION_IP_HASH：目的IP hash
+   - ECMP_SOURCE_IP_HASH：源IP hash
+</li>
+
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量。
+   */
+  Offset?: number
+  /**
+   * 请求对象个数。
+   */
+  Limit?: number
+  /**
+   * 全局路由唯一Id列表。
+   */
+  GlobalRouteIds?: Array<string>
 }
 
 /**
@@ -3772,21 +3824,13 @@ export interface ModifyAddressesRenewFlagRequest {
 }
 
 /**
- * ModifyPrivateNatGatewayTranslationNatRule请求参数结构体
+ * ModifyGlobalRoutes返回参数结构体
  */
-export interface ModifyPrivateNatGatewayTranslationNatRuleRequest {
+export interface ModifyGlobalRoutesResponse {
   /**
-   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NatGatewayId: string
-  /**
-   * 转换规则对象数组。仅支持修改单个转换规则
-   */
-  TranslationNatRules: Array<TranslationNatRuleDiff>
-  /**
-   * 跨域参数，当VPC为跨域时填写为True。
-   */
-  CrossDomain?: boolean
+  RequestId?: string
 }
 
 /**
@@ -5533,13 +5577,17 @@ export interface DeleteSubnetResponse {
 }
 
 /**
- * EnableSnapshotPolicies返回参数结构体
+ * DeleteGlobalRoutes请求参数结构体
  */
-export interface EnableSnapshotPoliciesResponse {
+export interface DeleteGlobalRoutesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * VPC唯一Id。
    */
-  RequestId?: string
+  VpcId: string
+  /**
+   * 全局路由实例唯一Id列表。
+   */
+  GlobalRouteIds: Array<string>
 }
 
 /**
@@ -7009,6 +7057,44 @@ export interface DescribeSecurityGroupLimitsResponse {
 }
 
 /**
+ * 私网网关转发规则匹配ACL
+ */
+export interface TranslationAclRule {
+  /**
+   * ACL协议类型，可选值:"ALL","TCP","UDP"
+   */
+  Protocol: string
+  /**
+   * 源端口。
+   */
+  SourcePort: string
+  /**
+   * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
+   */
+  SourceCidr: string
+  /**
+   * 目的端口。
+   */
+  DestinationPort: string
+  /**
+   * 目的地址。
+   */
+  DestinationCidr: string
+  /**
+   * ACL规则`ID`。
+   */
+  AclRuleId?: number
+  /**
+   * 是否匹配。
+   */
+  Action?: number
+  /**
+   * ACL规则描述
+   */
+  Description?: string
+}
+
+/**
  * 对端网关
  */
 export interface CustomerGateway {
@@ -7078,6 +7164,24 @@ export interface CreateVpnGatewaySslServerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifySubnetAttribute请求参数结构体
+ */
+export interface ModifySubnetAttributeRequest {
+  /**
+   * 子网实例ID。形如：subnet-pxir56ns。
+   */
+  SubnetId: string
+  /**
+   * 子网名称，最大长度不能超过60个字节。
+   */
+  SubnetName?: string
+  /**
+   * 子网是否开启广播。
+   */
+  EnableBroadcast?: string
 }
 
 /**
@@ -8582,15 +8686,15 @@ export interface DescribeIpGeolocationDatabaseUrlRequest {
 }
 
 /**
- * DescribeVpcEndPoint返回参数结构体
+ * DescribeGlobalRoutes返回参数结构体
  */
-export interface DescribeVpcEndPointResponse {
+export interface DescribeGlobalRoutesResponse {
   /**
-   * 终端节点对象。
+   * 全局路由对象。
    */
-  EndPointSet?: Array<EndPoint>
+  GlobalRouteSet?: Array<GlobalRoute>
   /**
-   * 符合查询条件的终端节点个数。
+   * 符合条件的实例数量。
    */
   TotalCount?: number
   /**
@@ -10920,9 +11024,14 @@ export interface CcnRouteBroadcastPolicyRouteCondition {
 }
 
 /**
- * DeleteCdcNetPlanes请求参数结构体
+ * DeleteSecurityGroup请求参数结构体
  */
-export type DeleteCdcNetPlanesRequest = null
+export interface DeleteSecurityGroupRequest {
+  /**
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
+   */
+  SecurityGroupId: string
+}
 
 /**
  * DeleteNetDetect返回参数结构体
@@ -11075,41 +11184,18 @@ export interface UnassignIpv6CidrBlockRequest {
 }
 
 /**
- * 私网网关转发规则匹配ACL
+ * CreateGlobalRoutes请求参数结构体
  */
-export interface TranslationAclRule {
+export interface CreateGlobalRoutesRequest {
   /**
-   * ACL协议类型，可选值:"ALL","TCP","UDP"
+   * VPC唯一Id。
    */
-  Protocol: string
+  VpcId: string
   /**
-   * 源端口。
+   * 全局路由对象。创建时必填参数： 'GatewayType'，'GatewayId'，'DestinationCidrBlock'。
+
    */
-  SourcePort: string
-  /**
-   * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
-   */
-  SourceCidr: string
-  /**
-   * 目的端口。
-   */
-  DestinationPort: string
-  /**
-   * 目的地址。
-   */
-  DestinationCidr: string
-  /**
-   * ACL规则`ID`。
-   */
-  AclRuleId?: number
-  /**
-   * 是否匹配。
-   */
-  Action?: number
-  /**
-   * ACL规则描述
-   */
-  Description?: string
+  GlobalRoutes: Array<GlobalRoute>
 }
 
 /**
@@ -12037,18 +12123,21 @@ export interface GetCcnRegionBandwidthLimitsRequest {
 }
 
 /**
- * ModifyIpv6AddressesAttribute请求参数结构体
+ * DescribeVpcEndPoint返回参数结构体
  */
-export interface ModifyIpv6AddressesAttributeRequest {
+export interface DescribeVpcEndPointResponse {
   /**
-   * 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
-
+   * 终端节点对象。
    */
-  NetworkInterfaceId: string
+  EndPointSet?: Array<EndPoint>
   /**
-   * 指定的内网IPv6地址信息。
+   * 符合查询条件的终端节点个数。
    */
-  Ipv6Addresses: Array<Ipv6Address>
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12494,6 +12583,21 @@ export interface DescribePrivateNatGatewayTranslationNatRulesResponse {
 }
 
 /**
+ * ModifyIpv6AddressesAttribute请求参数结构体
+ */
+export interface ModifyIpv6AddressesAttributeRequest {
+  /**
+   * 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
+   */
+  NetworkInterfaceId: string
+  /**
+   * 指定的内网IPv6地址信息。
+   */
+  Ipv6Addresses: Array<Ipv6Address>
+}
+
+/**
  * 内网IP信息
  */
 export interface PrivateIpAddressSpecification {
@@ -12685,6 +12789,49 @@ export interface DeleteDirectConnectGatewayCcnRoutesRequest {
    * 地址类型，支持：IPv4、IPv6。默认IPv4。
    */
   AddressType?: string
+}
+
+/**
+ * 全局路由对象。
+ */
+export interface GlobalRoute {
+  /**
+   * 作为出参展示，表示VPC唯一Id，。
+   */
+  VpcId?: string
+  /**
+   * 全局路由唯一Id。
+   */
+  GlobalRouteId?: string
+  /**
+   * Ipv4目标网段。
+   */
+  DestinationCidrBlock?: string
+  /**
+   * 下一跳类型，支持 NORMAL_CVM。
+   */
+  GatewayType?: string
+  /**
+   * 下一跳对象，如果GatewayType类型是NORMAL_CVM填写子机IP。
+   */
+  GatewayId?: string
+  /**
+   * 备注。
+   */
+  Description?: string
+  /**
+   * 创建时间。
+   */
+  CreatedTime?: string
+  /**
+   * 支持的 ECMP算法有：
+
+- ECMP_QUINTUPLE_HASH：五元组hash
+- ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash
+- ECMP_DESTINATION_IP_HASH：目的IP hash
+- ECMP_SOURCE_IP_HASH：源IP hash。
+   */
+  SubnetRouteAlgorithm?: string
 }
 
 /**
@@ -13013,6 +13160,16 @@ export interface CheckDefaultSubnetResponse {
 }
 
 /**
+ * EnableSnapshotPolicies返回参数结构体
+ */
+export interface EnableSnapshotPoliciesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVpcPrivateIpAddresses返回参数结构体
  */
 export interface DescribeVpcPrivateIpAddressesResponse {
@@ -13144,9 +13301,9 @@ export interface DisassociateIPv6AddressResponse {
 }
 
 /**
- * DescribeAddressTemplates返回参数结构体
+ * DescribeAddressTemplateGroups返回参数结构体
  */
-export interface DescribeAddressTemplatesResponse {
+export interface DescribeAddressTemplateGroupsResponse {
   /**
    * 符合条件的实例数量。
    */
@@ -13154,7 +13311,7 @@ export interface DescribeAddressTemplatesResponse {
   /**
    * IP地址模板。
    */
-  AddressTemplateSet?: Array<AddressTemplate>
+  AddressTemplateGroupSet?: Array<AddressTemplateGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13986,6 +14143,20 @@ export interface ModifyNetworkAclAttributeRequest {
    * 网络ACL名称，最大长度不能超过60个字节。
    */
   NetworkAclName: string
+}
+
+/**
+ * CreateGlobalRoutes返回参数结构体
+ */
+export interface CreateGlobalRoutesResponse {
+  /**
+   * 全局路由对象。
+   */
+  GlobalRouteSet?: Array<GlobalRoute>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16744,22 +16915,9 @@ export interface ModifyPrivateIpAddressesAttributeResponse {
 }
 
 /**
- * ReplaceRoutes返回参数结构体
+ * DeleteCdcNetPlanes请求参数结构体
  */
-export interface ReplaceRoutesResponse {
-  /**
-   * 原路由策略信息。
-   */
-  OldRouteSet?: Array<Route>
-  /**
-   * 修改后的路由策略信息。
-   */
-  NewRouteSet?: Array<Route>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DeleteCdcNetPlanesRequest = null
 
 /**
  * ModifyHaVipAttribute返回参数结构体
@@ -16997,6 +17155,24 @@ export interface DescribeSecurityGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyPrivateNatGatewayTranslationNatRule请求参数结构体
+ */
+export interface ModifyPrivateNatGatewayTranslationNatRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 转换规则对象数组。仅支持修改单个转换规则
+   */
+  TranslationNatRules: Array<TranslationNatRuleDiff>
+  /**
+   * 跨域参数，当VPC为跨域时填写为True。
+   */
+  CrossDomain?: boolean
 }
 
 /**
@@ -17593,6 +17769,24 @@ export interface DescribeRouteListRequest {
  * DisableGatewayFlowMonitor返回参数结构体
  */
 export interface DisableGatewayFlowMonitorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReplaceRoutes返回参数结构体
+ */
+export interface ReplaceRoutesResponse {
+  /**
+   * 原路由策略信息。
+   */
+  OldRouteSet?: Array<Route>
+  /**
+   * 修改后的路由策略信息。
+   */
+  NewRouteSet?: Array<Route>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18271,13 +18465,13 @@ export interface CreateCustomerGatewayRequest {
 }
 
 /**
- * DeleteSecurityGroup请求参数结构体
+ * DeleteGlobalRoutes返回参数结构体
  */
-export interface DeleteSecurityGroupRequest {
+export interface DeleteGlobalRoutesResponse {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SecurityGroupId: string
+  RequestId?: string
 }
 
 /**
@@ -19013,9 +19207,9 @@ export interface LockCcnBandwidthsResponse {
 }
 
 /**
- * DescribeAddressTemplateGroups返回参数结构体
+ * DescribeAddressTemplates返回参数结构体
  */
-export interface DescribeAddressTemplateGroupsResponse {
+export interface DescribeAddressTemplatesResponse {
   /**
    * 符合条件的实例数量。
    */
@@ -19023,7 +19217,7 @@ export interface DescribeAddressTemplateGroupsResponse {
   /**
    * IP地址模板。
    */
-  AddressTemplateGroupSet?: Array<AddressTemplateGroup>
+  AddressTemplateSet?: Array<AddressTemplate>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19402,21 +19596,25 @@ export interface EnableVpnGatewaySslClientCertResponse {
 }
 
 /**
- * ModifySubnetAttribute请求参数结构体
+ * ModifyGlobalRouteECMPAlgorithm请求参数结构体
  */
-export interface ModifySubnetAttributeRequest {
+export interface ModifyGlobalRouteECMPAlgorithmRequest {
   /**
-   * 子网实例ID。形如：subnet-pxir56ns。
+   * VPC唯一Id。
    */
-  SubnetId: string
+  VpcId: string
   /**
-   * 子网名称，最大长度不能超过60个字节。
+   * Ipv4目标网段。
    */
-  SubnetName?: string
+  DestinationCidrBlock?: string
   /**
-   * 子网是否开启广播。
+   * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
    */
-  EnableBroadcast?: string
+  SubnetRouteAlgorithm?: string
+  /**
+   * CDC 集群唯一 ID。
+   */
+  CdcId?: string
 }
 
 /**
@@ -19498,6 +19696,16 @@ export interface InquiryPriceModifyAddressesBandwidthRequest {
    * 新带宽值
    */
   InternetMaxBandwidthOut: number
+}
+
+/**
+ * ModifyGlobalRouteECMPAlgorithm返回参数结构体
+ */
+export interface ModifyGlobalRouteECMPAlgorithmResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

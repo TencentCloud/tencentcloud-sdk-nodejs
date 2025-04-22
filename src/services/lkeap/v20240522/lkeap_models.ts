@@ -41,7 +41,7 @@ export interface ChatCompletionsRequest {
    */
   Temperature?: number
   /**
-   * 最大生成的token数量
+   * 最大生成的token数量，默认为4096，最大可设置为16384
    */
   MaxTokens?: number
 }

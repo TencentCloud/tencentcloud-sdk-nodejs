@@ -63,7 +63,6 @@ export interface Compression {
    * 支持的压缩算法列表，取值有：
 <li>brotli：brotli算法；</li>
 <li>gzip：gzip算法。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Algorithms?: Array<string>
 }
@@ -515,12 +514,10 @@ export interface DescribeHostsSettingResponse {
 export interface Origin {
   /**
    * 主源站列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Origins?: Array<string>
   /**
    * 备源站列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupOrigins?: Array<string>
   /**
@@ -528,14 +525,12 @@ export interface Origin {
 <li>http：强制 http 回源；</li>
 <li>follow：协议跟随回源；</li>
 <li>https：强制 https 回源。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginPullProtocol?: string
   /**
    * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
 <li>on：私有访问；</li>
 <li>off：公共访问。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosPrivateAccess?: string
 }
@@ -931,7 +926,6 @@ export interface DeployRecord {
   Message?: string
   /**
    * 发布记录 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordId?: string
   /**
@@ -1804,7 +1798,6 @@ export interface ForceRedirect {
    * 重定向状态码，取值有：
 <li>301：301跳转；</li>
 <li>302：302跳转。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RedirectStatusCode?: number
 }
@@ -1849,7 +1842,6 @@ export interface CachePrefresh {
   Switch: string
   /**
    * 缓存预刷新百分比，取值范围：1-99。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
 }
@@ -2622,19 +2614,16 @@ export interface CustomField {
 <li>RspHeader：从 HTTP 响应头中提取指定字段值；</li>
 <li>Cookie: 从 Cookie 中提取指定字段值；</li>
 <li>ReqBody: 从 HTTP 请求正文中通过 Google RE2 正则表达式提取指定内容。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 根据字段类型（Name）填入字段值的定义。需要区分大小写。
 <li>当字段类型为 ReqHeader、RspHeader、Cookie 时，填入需要提取值的参数名称，例如：Accept-Language。可输入 1-100 个字符，允许的字符开头为字母，中间为字母、数字、-，结尾为字母、数字；</li>
 <li>当字段类型为 ReqBody 时，填入 Google RE2 正则表达式，正则表达式长度上限为 4KB。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
   /**
    * 是否投递该字段，不填表示不投递此字段。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
 }
@@ -3218,12 +3207,10 @@ export interface AlgDetectResult {
 export interface DefaultServerCertInfo {
   /**
    * 服务器证书 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertId: string
   /**
    * 证书备注名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Alias?: string
   /**
@@ -3231,27 +3218,22 @@ export interface DefaultServerCertInfo {
 <li>default: 默认证书;</li>
 <li>upload:用户上传;</li>
 <li>managed:腾讯云托管。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 证书过期时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 证书生效时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EffectiveTime?: string
   /**
    * 证书公用名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonName?: string
   /**
    * 证书SAN域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubjectAltName?: Array<string>
   /**
@@ -3259,17 +3241,14 @@ export interface DefaultServerCertInfo {
 <li>processing: 部署中；</li>
 <li>deployed: 已部署；</li>
 <li>failed: 部署失败。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * Status为失败时,此字段返回失败原因。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 证书算法。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SignAlgo?: string
 }
@@ -3932,7 +3911,6 @@ export interface Task {
    * 节点缓存清除方法，取值有：
 <li>invalidate：标记过期，用户请求时触发回源校验，即发送带有 If-None-Match 和 If-Modified-Since 头部的 HTTP 条件请求。若源站响应 200，则节点会回源拉取新的资源并更新缓存；若源站响应 304，则节点不会更新缓存；</li>
 <li>delete：直接删除节点缓存，用户请求时触发回源拉取资源。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
@@ -3940,7 +3918,8 @@ export interface Task {
 <li>processing：处理中；</li>
 <li>success：成功；</li>
 <li> failed：失败；</li>
-<li>timeout：超时。</li>
+<li>timeout：超时；</li>
+<li>canceled：已取消。</li>
    */
   Status?: string
   /**
@@ -4111,12 +4090,10 @@ export interface ZoneConfig {
 export interface CustomizedHeader {
   /**
    * 自定义头部 Key。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 自定义头部 Value。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -4509,7 +4486,6 @@ export interface ApplicationProxyRule {
   SessionPersist?: boolean
   /**
    * 会话保持的时间，只有当SessionPersist为true时，该值才会生效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionPersistTime?: number
   /**
@@ -4520,7 +4496,6 @@ export interface ApplicationProxyRule {
   OriginPort?: string
   /**
    * 规则标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTag?: string
 }
@@ -4629,7 +4604,6 @@ export interface Zone {
   ActiveStatus?: string
   /**
    * 站点别名。数字、英文、-和_组合，限制20个字符。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AliasZoneName?: string
   /**
@@ -4824,19 +4798,18 @@ export interface CnameStatus {
   /**
    * 记录名称。
    */
-  RecordName: string
+  RecordName?: string
   /**
    * CNAME 地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cname: string
+  Cname?: string
   /**
-   * Cname状态信息，取值有：
+   * CNAME 状态信息，取值有：
 <li>active：生效；</li>
-<li>moved：不生效。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+<li>moved：不生效；</li>
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -4860,12 +4833,10 @@ export interface ServerCertInfo {
   /**
    * 服务器证书 ID。来源于 SSL 侧，您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertId: string
   /**
    * 证书备注名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Alias?: string
   /**
@@ -4873,27 +4844,22 @@ export interface ServerCertInfo {
 <li>default：默认证书；</li>
 <li>upload：用户上传；</li>
 <li>managed：腾讯云托管。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 证书过期时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 证书部署时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployTime?: string
   /**
    * 签名算法。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SignAlgo?: string
   /**
    * 证书归属域名名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonName?: string
 }
@@ -5391,29 +5357,29 @@ export interface RuleItem {
   /**
    * 规则ID。
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 规则名称，名称字符串长度 1~255。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 规则状态，取值有:
 <li> enable: 启用； </li>
 <li> disable: 未启用。 </li>
    */
-  Status: string
+  Status?: string
   /**
    * 规则内容。
    */
-  Rules: Array<Rule>
+  Rules?: Array<Rule>
   /**
    * 规则优先级, 值越大优先级越高，最小为 1。
    */
-  RulePriority: number
+  RulePriority?: number
   /**
    * 规则标签。
    */
-  Tags: Array<string>
+  Tags?: Array<string>
 }
 
 /**
@@ -5451,7 +5417,6 @@ export interface Cache {
   /**
    * 缓存过期时间设置。
 单位为秒，最大可设置为 365 天。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheTime?: number
   /**
@@ -5493,114 +5458,114 @@ export interface DetailHost {
   /**
    * 站点ID。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 加速服务状态，取值为：
 <li> process：部署中；</li>
 <li> online：已启动；</li>
 <li> offline：已关闭。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 域名。
    */
-  Host: string
+  Host?: string
   /**
    * 站点名称。
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 分配的Cname域名
    */
-  Cname: string
+  Cname?: string
   /**
    * 资源ID。
    */
-  Id: string
+  Id?: string
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 锁状态。
    */
-  Lock: number
+  Lock?: number
   /**
    * 域名状态类型。
    */
-  Mode: number
+  Mode?: number
   /**
    * 域名加速地域，取值有：
 <li> global：全球；</li>
 <li> mainland：中国大陆；</li>
 <li> overseas：境外区域。</li>
    */
-  Area: string
+  Area?: string
   /**
    * 加速类型配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccelerateType: AccelerateType
+  AccelerateType?: AccelerateType
   /**
    * Https配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Https: Https
+  Https?: Https
   /**
    * 缓存配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CacheConfig: CacheConfig
+  CacheConfig?: CacheConfig
   /**
    * 源站配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Origin: Origin
+  Origin?: Origin
   /**
    * 安全类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityType: SecurityType
+  SecurityType?: SecurityType
   /**
    * 缓存键配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CacheKey: CacheKey
+  CacheKey?: CacheKey
   /**
    * 智能压缩配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compression: Compression
+  Compression?: Compression
   /**
    * Waf防护配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Waf: Waf
+  Waf?: Waf
   /**
    * CC防护配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CC: CC
+  CC?: CC
   /**
    * DDoS防护配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DDoS: DDoS
+  DDoS?: DDoS
   /**
    * 智能路由配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SmartRouting: SmartRouting
+  SmartRouting?: SmartRouting
   /**
    * Ipv6访问配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ipv6: Ipv6
+  Ipv6?: Ipv6
   /**
    * 回源时是否携带客户端IP所属地域信息的配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientIpCountry: ClientIpCountry
+  ClientIpCountry?: ClientIpCountry
 }
 
 /**
@@ -6022,14 +5987,12 @@ export interface CacheKey {
    * 是否开启全路径缓存，取值有：
 <li>on：开启全路径缓存（即关闭参数忽略）；</li>
 <li>off：关闭全路径缓存（即开启参数忽略）。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FullUrlCache?: string
   /**
    * 是否忽略大小写缓存，取值有：
 <li>on：忽略；</li>
 <li>off：不忽略。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IgnoreCase?: string
   /**
@@ -8339,15 +8302,15 @@ export interface AscriptionInfo {
   /**
    * 主机记录。
    */
-  Subdomain: string
+  Subdomain?: string
   /**
    * 记录类型。
    */
-  RecordType: string
+  RecordType?: string
   /**
    * 记录值。
    */
-  RecordValue: string
+  RecordValue?: string
 }
 
 /**
@@ -8643,21 +8606,18 @@ export interface Hsts {
   Switch: string
   /**
    * MaxAge 数值。单位为秒，最大值为1天。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxAge?: number
   /**
    * 是否包含子域名，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeSubDomains?: string
   /**
    * 是否开启预加载，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Preload?: string
 }
@@ -9769,7 +9729,6 @@ export interface ClientIpHeader {
   Switch: string
   /**
    * 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HeaderName?: string
 }
@@ -9949,7 +9908,6 @@ export interface OriginGroup {
   UpdateTime?: string
   /**
    * 回源Host Header。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostHeader?: string
 }
@@ -10288,14 +10246,12 @@ export interface Https {
    * http2 配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Http2?: string
   /**
    * OCSP 配置开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OcspStapling?: string
   /**
@@ -10304,7 +10260,6 @@ export interface Https {
 <li>TLSV1.1：TLSv1.1版本；</li>
 <li>TLSV1.2：TLSv1.2版本；</li>
 <li>TLSv1.3：TLSv1.3版本。</li>修改时必须开启连续的版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TlsVersion?: Array<string>
   /**
@@ -10321,7 +10276,6 @@ export interface Https {
    * 申请类型，取值有：
 <li>apply：托管EdgeOne；</li>
 <li>none：不托管EdgeOne。</li>不填，默认取值为none。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyType?: string
   /**
@@ -10329,7 +10283,6 @@ export interface Https {
 <li>loose-v2023：提供高兼容性，安全性一般，支持 TLS 1.0-1.3 密码套件；</li>
 <li>general-v2023：提供较高兼容性，安全性中等，支持 TLS 1.2-1.3 密码套件；</li>
 <li>strict-v2023：提供高安全性能，禁用所有含不安全隐患的加密套件，支持 TLS 1.2-1.3 密码套件。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CipherSuite?: string
 }
@@ -10825,15 +10778,15 @@ export interface AliasDomain {
   /**
    * 别称域名名称。
    */
-  AliasName: string
+  AliasName?: string
   /**
    * 站点 ID。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 目标域名名称。
    */
-  TargetName: string
+  TargetName?: string
   /**
    * 别称域名状态，取值有：
 <li> active：已生效； </li>
@@ -10841,22 +10794,22 @@ export interface AliasDomain {
 <li> conflict：被找回。 </li>
 <li> stop：已停用；</li>
    */
-  Status: string
+  Status?: string
   /**
    * 封禁模式，取值有：
 <li> 0：未封禁； </li>
 <li> 11：合规封禁；</li>
 <li> 14：未备案封禁。</li>
    */
-  ForbidMode: number
+  ForbidMode?: number
   /**
    * 别称域名创建时间。
    */
-  CreatedOn: string
+  CreatedOn?: string
   /**
    * 别称域名修改时间。
    */
-  ModifiedOn: string
+  ModifiedOn?: string
 }
 
 /**
@@ -12042,7 +11995,6 @@ export interface Identification {
   ZoneName?: string
   /**
    * 验证子域名。验证站点时，该值为空。验证子域名是为具体子域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
   /**
@@ -12057,7 +12009,6 @@ export interface Identification {
   Ascription?: AscriptionInfo
   /**
    * 域名当前的 NS 记录。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginalNameServers?: Array<string>
   /**
@@ -12317,7 +12268,6 @@ export interface PostMaxSize {
   Switch: string
   /**
    * 最大限制，取值在1MB和500MB之间。单位字节。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxSize?: number
 }
@@ -13000,12 +12950,10 @@ export interface QueryString {
    * CacheKey使用QueryString的方式，取值有：
 <li>includeCustom：使用部分url参数；</li>
 <li>excludeCustom：排除部分url参数。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Action?: string
   /**
    * 使用/排除的url参数数组。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: Array<string>
 }

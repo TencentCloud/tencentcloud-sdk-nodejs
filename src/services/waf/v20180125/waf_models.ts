@@ -2626,6 +2626,24 @@ export interface BatchOperateUserSignatureRulesRequest {
 }
 
 /**
+ * 设置哪些字段是否存储或转发
+ */
+export interface FieldWriteConfig {
+  /**
+   * 1:开启 0:不开启
+   */
+  EnableHeaders?: number
+  /**
+   * 1:开启 0:不开启
+   */
+  EnableBody?: number
+  /**
+   * 1:开启 0:不开启
+   */
+  EnableBot?: number
+}
+
+/**
  * ModifyWafThreatenIntelligence返回参数结构体
  */
 export interface ModifyWafThreatenIntelligenceResponse {
@@ -5290,6 +5308,22 @@ export interface CreatePostCKafkaFlowRequest {
    * kafka集群的版本号
    */
   KafkaVersion: string
+  /**
+   * 是否开启SASL校验，默认不开启，0-关闭，1-开启
+   */
+  SASLEnable?: number
+  /**
+   * SASL用户名
+   */
+  SASLUser?: string
+  /**
+   * SASL密码
+   */
+  SASLPassword?: string
+  /**
+   * 开启访问日志某些字段是否投递
+   */
+  WriteConfig?: FieldWriteConfig
 }
 
 /**
@@ -11531,9 +11565,29 @@ export interface PostCKafkaFlowInfo {
    */
   Compression?: string
   /**
+   * 是否支持SASL,0-关闭，1-开启
+   */
+  SASLEnable?: number
+  /**
+   * SASL用户名
+   */
+  SASLUser?: string
+  /**
+   * SALS密码
+   */
+  SASLPassword?: string
+  /**
    * 描述信息
    */
   Content?: string
+  /**
+   * 1-外网TGW，2-支撑环境，默认为支撑环境
+   */
+  VipType?: number
+  /**
+   * 配置状态
+   */
+  WriteConfig?: FieldWriteConfig
 }
 
 /**

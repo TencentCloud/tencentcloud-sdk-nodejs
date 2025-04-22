@@ -16,6 +16,20 @@
  */
 
 /**
+ * CreatePrivilegeCode请求参数结构体
+ */
+export interface CreatePrivilegeCodeRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 必填；设备唯一标识符;
+   */
+  Mid?: string
+}
+
+/**
  * DescribeDLPFileDetectResult请求参数结构体
  */
 export interface DescribeDLPFileDetectResultRequest {
@@ -49,6 +63,72 @@ export interface RuleItem {
    * 内容，v2多值版本使用
    */
   Values?: Array<string>
+}
+
+/**
+ * 软件统计响应对象集合
+ */
+export interface DescribeSoftCensusListByDeviceData {
+  /**
+   * 终端用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * mac地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MacAddr?: string
+  /**
+   * 终端计算机名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 终端组路径名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupNamePath?: string
+  /**
+   * IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * 唯一标识Mid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mid?: string
+  /**
+   * 企业账户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoaUserName?: string
+  /**
+   * 终端分组Id(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: number
+  /**
+   * 终端组名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 终端列表Id(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 软件数量(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftNum?: number
+  /**
+   * 盗版风险（1=风险;2=未知）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PiracyRisk?: number
 }
 
 /**
@@ -164,77 +244,14 @@ export interface DescribeDevicesResponse {
 }
 
 /**
- * 账号分组详情响应数据
+ * 业务响应数据
  */
-export interface GetAccountGroupData {
+export interface CreatePrivilegeCodeRspData {
   /**
-   * 分组名称全路径，点分格式
+   * 特权码数据
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamePath?: string
-  /**
-   * 分组ID全路径，数组格式
-   */
-  IdPathArr?: Array<number | bigint>
-  /**
-   * 分组扩展信息
-   */
-  ExtraInfo?: string
-  /**
-   * 最后更新时间
-   */
-  Utime?: string
-  /**
-   * 当前分组的父分组ID
-   */
-  ParentId?: number
-  /**
-   * 源账号组ID，该字段仅适用于第三方同步的组织架构，通过OrgId-Id构成源组织架构分组ID-现组织架构分组ID映射关系
-   */
-  OrgId?: string
-  /**
-   * 分组名称
-   */
-  Name?: string
-  /**
-   * 分组ID
-   */
-  Id?: number
-  /**
-   * 分组描述
-   */
-  Description?: string
-  /**
-   * 分组导入源(只支持32位)
-   */
-  Source?: number
-  /**
-   * 分组ID全路径，点分格式
-   */
-  IdPath?: string
-  /**
-   * 创建时间
-   */
-  Itime?: string
-  /**
-   * 父源账号组ID，该字段仅适用于第三方同步的组织架构
-   */
-  ParentOrgId?: string
-  /**
-   * 导入信息,json格式
-   */
-  Import?: string
-  /**
-   * 是否开启导入架构
-   */
-  ImportEnable?: boolean
-  /**
-   * 导入类型
-   */
-  ImportType?: string
-  /**
-   * miniIAMId，MiniIAM源才有
-   */
-  MiniIamId?: string
+  Code?: string
 }
 
 /**
@@ -428,6 +445,21 @@ export interface DescribeDevicesPageRsp {
 }
 
 /**
+ * DescribeSoftCensusListByDevice返回参数结构体
+ */
+export interface DescribeSoftCensusListByDeviceResponse {
+  /**
+   * 业务响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeSoftCensusListByDevicePageData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * FilterGroups 条件过滤组
  */
 export interface FilterGroup {
@@ -435,6 +467,52 @@ export interface FilterGroup {
    * Filters 条件过滤
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 业务响应数据
+ */
+export interface DescribeSoftCensusListByDevicePageData {
+  /**
+   * 软件统计响应对象集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DescribeSoftCensusListByDeviceData>
+  /**
+   * 分页公共对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: Paging
+}
+
+/**
+ * DescribeLocalAccounts请求参数结构体
+ */
+export interface DescribeLocalAccountsRequest {
+  /**
+   * 查询条件：过滤或排序
+1、UserName，string类型，姓名
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
+2、UserId，string类型，账户
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
+3、Phone，string类型，手机号
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
+   */
+  Condition?: Condition
+  /**
+   * 获取账号的分组ID，不传默认获取全网根账号组
+   */
+  AccountGroupId?: number
+  /**
+   * 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户
+   */
+  ShowFlag?: number
 }
 
 /**
@@ -778,6 +856,116 @@ export interface DeviceDetail {
 }
 
 /**
+ * 账号分组详情响应数据
+ */
+export interface GetAccountGroupData {
+  /**
+   * 分组名称全路径，点分格式
+   */
+  NamePath?: string
+  /**
+   * 分组ID全路径，数组格式
+   */
+  IdPathArr?: Array<number | bigint>
+  /**
+   * 分组扩展信息
+   */
+  ExtraInfo?: string
+  /**
+   * 最后更新时间
+   */
+  Utime?: string
+  /**
+   * 当前分组的父分组ID
+   */
+  ParentId?: number
+  /**
+   * 源账号组ID，该字段仅适用于第三方同步的组织架构，通过OrgId-Id构成源组织架构分组ID-现组织架构分组ID映射关系
+   */
+  OrgId?: string
+  /**
+   * 分组名称
+   */
+  Name?: string
+  /**
+   * 分组ID
+   */
+  Id?: number
+  /**
+   * 分组描述
+   */
+  Description?: string
+  /**
+   * 分组导入源(只支持32位)
+   */
+  Source?: number
+  /**
+   * 分组ID全路径，点分格式
+   */
+  IdPath?: string
+  /**
+   * 创建时间
+   */
+  Itime?: string
+  /**
+   * 父源账号组ID，该字段仅适用于第三方同步的组织架构
+   */
+  ParentOrgId?: string
+  /**
+   * 导入信息,json格式
+   */
+  Import?: string
+  /**
+   * 是否开启导入架构
+   */
+  ImportEnable?: boolean
+  /**
+   * 导入类型
+   */
+  ImportType?: string
+  /**
+   * miniIAMId，MiniIAM源才有
+   */
+  MiniIamId?: string
+}
+
+/**
+ * DescribeSoftCensusListByDevice请求参数结构体
+ */
+export interface DescribeSoftCensusListByDeviceRequest {
+  /**
+   * 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios  ）
+   */
+  OsType?: number
+  /**
+   * 必填，终端分组ID
+   */
+  GroupId?: number
+  /**
+   * 过滤条件、分页参数   <li>Name - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，终端名。</li> 	<li>UserName - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，终端用户名。</li> 	<li>IoaUserName - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，最近登录账号。</li> 	<li>Ip - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，IP地址。</li> 	<li>MacAddr - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，MAC地址。</li>
+   */
+  Condition?: Condition
+}
+
+/**
+ * Filters 条件过滤
+ */
+export interface Filter {
+  /**
+   * 过滤字段
+   */
+  Field?: string
+  /**
+   * 过滤方式： eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于。具体支持哪些过滤方式，结合具体接口字段描述来定
+   */
+  Operator?: string
+  /**
+   * 过滤条件
+   */
+  Values?: Array<string>
+}
+
+/**
  * 获取账号列表响应的单个对象
  */
 export interface DescribeLocalAccountsData {
@@ -861,54 +1049,6 @@ export interface DescribeLocalAccountsData {
    * 账号登出时间
    */
   LogoutTime?: string
-}
-
-/**
- * Filters 条件过滤
- */
-export interface Filter {
-  /**
-   * 过滤字段
-   */
-  Field?: string
-  /**
-   * 过滤方式： eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于。具体支持哪些过滤方式，结合具体接口字段描述来定
-   */
-  Operator?: string
-  /**
-   * 过滤条件
-   */
-  Values?: Array<string>
-}
-
-/**
- * DescribeLocalAccounts请求参数结构体
- */
-export interface DescribeLocalAccountsRequest {
-  /**
-   * 查询条件：过滤或排序
-1、UserName，string类型，姓名
-是否必填：否
-过滤支持：是，支持eq、like、ilike
-排序支持：否
-2、UserId，string类型，账户
-是否必填：否
-过滤支持：是，支持eq、like、ilike
-排序支持：否
-3、Phone，string类型，手机号
-是否必填：否
-过滤支持：是，支持eq、like、ilike
-排序支持：否
-   */
-  Condition?: Condition
-  /**
-   * 获取账号的分组ID，不传默认获取全网根账号组
-   */
-  AccountGroupId?: number
-  /**
-   * 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户
-   */
-  ShowFlag?: number
 }
 
 /**
@@ -1005,6 +1145,21 @@ export interface CreateDLPFileDetectionTaskRequest {
    * 回调地址，暂时未使用
    */
   CallBackUrl?: string
+}
+
+/**
+ * CreatePrivilegeCode返回参数结构体
+ */
+export interface CreatePrivilegeCodeResponse {
+  /**
+   * 业务响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreatePrivilegeCodeRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

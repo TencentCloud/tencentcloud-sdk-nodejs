@@ -31,6 +31,7 @@ import {
   DeleteServiceTemplateResponse,
   CreateServiceTemplateRequest,
   CreateVpcPeeringConnectionRequest,
+  ModifyGlobalRoutesRequest,
   ResetTrafficMirrorFilterRequest,
   DescribeBandwidthPackageResourcesRequest,
   DescribeVpnConnectionsRequest,
@@ -84,6 +85,7 @@ import {
   ModifyVpnGatewaySslClientCertRequest,
   ModifyNetworkAclEntriesRequest,
   DescribeVpcPrivateIpAddressesRequest,
+  DescribeGlobalRoutesRequest,
   AddressTemplate,
   StopTrafficMirrorResponse,
   DeleteHaVipResponse,
@@ -206,7 +208,7 @@ import {
   AddIp6RulesRequest,
   DescribeAccountAttributesResponse,
   ModifyAddressesRenewFlagRequest,
-  ModifyPrivateNatGatewayTranslationNatRuleRequest,
+  ModifyGlobalRoutesResponse,
   AssignPrivateIpAddressesResponse,
   DescribeSecurityGroupsRequest,
   RefreshDirectConnectGatewayRouteToNatGatewayRequest,
@@ -289,7 +291,7 @@ import {
   DeleteCdcLDCXListRequest,
   RouteConflict,
   DeleteSubnetResponse,
-  EnableSnapshotPoliciesResponse,
+  DeleteGlobalRoutesRequest,
   Vpc,
   CreateVpnGatewayResponse,
   DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse,
@@ -364,10 +366,12 @@ import {
   ResetTrafficMirrorSrcsRequest,
   InquiryPriceCreateVpnGatewayResponse,
   DescribeSecurityGroupLimitsResponse,
+  TranslationAclRule,
   CustomerGateway,
   DescribeCcnRouteTableInputPolicysResponse,
   ModifyBandwidthPackageAttributeResponse,
   CreateVpnGatewaySslServerResponse,
+  ModifySubnetAttributeRequest,
   DisassociateIPv6AddressRequest,
   PrivateNatDestinationIpPortTranslationNatRule,
   CreateHighPriorityRouteTableRequest,
@@ -445,7 +449,7 @@ import {
   RemoveIp6RulesRequest,
   CreatePrivateNatGatewayTranslationNatRuleRequest,
   DescribeIpGeolocationDatabaseUrlRequest,
-  DescribeVpcEndPointResponse,
+  DescribeGlobalRoutesResponse,
   DescribeNetworkAclQuintupleEntriesRequest,
   NetDetectState,
   DescribeSnapshotPoliciesResponse,
@@ -544,13 +548,13 @@ import {
   DeleteDhcpIpResponse,
   SslVpnSever,
   CcnRouteBroadcastPolicyRouteCondition,
-  DeleteCdcNetPlanesRequest,
+  DeleteSecurityGroupRequest,
   DeleteNetDetectResponse,
   AllocateAddressesRequest,
   DeleteAssistantCidrResponse,
   DescribeDhcpIpsResponse,
   UnassignIpv6CidrBlockRequest,
-  TranslationAclRule,
+  CreateGlobalRoutesRequest,
   ResetHighPriorityRoutesRequest,
   ModifyAssistantCidrRequest,
   CreateReserveIpAddressesResponse,
@@ -603,7 +607,7 @@ import {
   DescribePrivateNatGatewayTranslationNatRulesRequest,
   DeleteCcnRouteTablesResponse,
   GetCcnRegionBandwidthLimitsRequest,
-  ModifyIpv6AddressesAttributeRequest,
+  DescribeVpcEndPointResponse,
   DescribeCustomerGatewayVendorsRequest,
   NetworkAclQuintupleEntries,
   CcnFlowLock,
@@ -628,6 +632,7 @@ import {
   ModifyVpcAttributeResponse,
   ModifyVpnConnectionAttributeResponse,
   DescribePrivateNatGatewayTranslationNatRulesResponse,
+  ModifyIpv6AddressesAttributeRequest,
   PrivateIpAddressSpecification,
   AlgType,
   DestinationIpPortTranslationNatRule,
@@ -637,6 +642,7 @@ import {
   AccountAttribute,
   AllocateIPv6AddressesResponse,
   DeleteDirectConnectGatewayCcnRoutesRequest,
+  GlobalRoute,
   ModifyNatGatewaySourceIpTranslationNatRuleResponse,
   CreateDefaultVpcRequest,
   CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
@@ -654,6 +660,7 @@ import {
   DescribeSecurityGroupReferencesRequest,
   DescribeTemplateLimitsResponse,
   CheckDefaultSubnetResponse,
+  EnableSnapshotPoliciesResponse,
   DescribeVpcPrivateIpAddressesResponse,
   ModifyReserveIpAddressRequest,
   ISPIPv6CidrBlock,
@@ -662,7 +669,7 @@ import {
   DescribeRouteTableAssociatedInstancesRequest,
   ReleaseIPv6AddressesRequest,
   DisassociateIPv6AddressResponse,
-  DescribeAddressTemplatesResponse,
+  DescribeAddressTemplateGroupsResponse,
   SetCcnRegionBandwidthLimitsRequest,
   ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
@@ -709,6 +716,7 @@ import {
   DisassociateDhcpIpWithAddressIpResponse,
   CreateVpcEndPointServiceResponse,
   ModifyNetworkAclAttributeRequest,
+  CreateGlobalRoutesResponse,
   CreatePrivateNatGatewayTranslationAclRuleRequest,
   DeleteVpnGatewayResponse,
   BackupPolicy,
@@ -843,7 +851,7 @@ import {
   ReplaceSecurityGroupPolicyResponse,
   EnableGatewayFlowMonitorRequest,
   ModifyPrivateIpAddressesAttributeResponse,
-  ReplaceRoutesResponse,
+  DeleteCdcNetPlanesRequest,
   ModifyHaVipAttributeResponse,
   CcnBandwidthInfo,
   CreateVpcPeeringConnectionResponse,
@@ -860,6 +868,7 @@ import {
   AssignIpv6AddressesResponse,
   CreateRoutesResponse,
   DescribeSecurityGroupsResponse,
+  ModifyPrivateNatGatewayTranslationNatRuleRequest,
   CreateVpcEndPointServiceWhiteListRequest,
   DeleteNatGatewaySourceIpTranslationNatRuleRequest,
   ModifyVpnGatewayCcnRoutesRequest,
@@ -891,6 +900,7 @@ import {
   UnlockCcnsResponse,
   DescribeRouteListRequest,
   DisableGatewayFlowMonitorResponse,
+  ReplaceRoutesResponse,
   DisassociateAddressResponse,
   DescribeTrafficPackagesResponse,
   DescribeVpnGatewayRoutesRequest,
@@ -928,7 +938,7 @@ import {
   DescribeAddressQuotaResponse,
   DescribePrivateNatGatewayLimitsRequest,
   CreateCustomerGatewayRequest,
-  DeleteSecurityGroupRequest,
+  DeleteGlobalRoutesResponse,
   CrossBorderCompliance,
   CreateTrafficMirrorRequest,
   CreateIp6TranslatorsRequest,
@@ -964,7 +974,7 @@ import {
   DeleteTrafficPackagesResponse,
   DeleteCustomerGatewayRequest,
   LockCcnBandwidthsResponse,
-  DescribeAddressTemplateGroupsResponse,
+  DescribeAddressTemplatesResponse,
   Quota,
   WithdrawNotifyRoutesResponse,
   AcceptVpcPeeringConnectionRequest,
@@ -985,7 +995,7 @@ import {
   NotifyRoutesResponse,
   Route,
   EnableVpnGatewaySslClientCertResponse,
-  ModifySubnetAttributeRequest,
+  ModifyGlobalRouteECMPAlgorithmRequest,
   RenewAddressesRequest,
   ModifyVpcEndPointServiceWhiteListResponse,
   DisassociateAddressRequest,
@@ -993,6 +1003,7 @@ import {
   DescribeBandwidthPackageQuotaRequest,
   DeleteVpcResponse,
   InquiryPriceModifyAddressesBandwidthRequest,
+  ModifyGlobalRouteECMPAlgorithmResponse,
   ReplaceCcnRouteTableInputPolicysRequest,
   InstanceChargePrepaid,
   DescribeTemplateLimitsRequest,
@@ -1965,6 +1976,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 查询全局路由列表。
+   */
+  async DescribeGlobalRoutes(
+    req: DescribeGlobalRoutesRequest,
+    cb?: (error: string, rep: DescribeGlobalRoutesResponse) => void
+  ): Promise<DescribeGlobalRoutesResponse> {
+    return this.request("DescribeGlobalRoutes", req, cb)
+  }
+
+  /**
    * 本接口（ModifyPrivateNatGatewayTranslationAclRule）用于修改私网NAT网关源端转换访问控制规则
    */
   async ModifyPrivateNatGatewayTranslationAclRule(
@@ -2607,6 +2628,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifyVpnGatewayCcnRoutesResponse) => void
   ): Promise<ModifyVpnGatewayCcnRoutesResponse> {
     return this.request("ModifyVpnGatewayCcnRoutes", req, cb)
+  }
+
+  /**
+   * 删除全局路由。
+   */
+  async DeleteGlobalRoutes(
+    req: DeleteGlobalRoutesRequest,
+    cb?: (error: string, rep: DeleteGlobalRoutesResponse) => void
+  ): Promise<DeleteGlobalRoutesResponse> {
+    return this.request("DeleteGlobalRoutes", req, cb)
   }
 
   /**
@@ -4516,6 +4547,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（CreateGlobalRoutes）用于创建全局路由。
+   */
+  async CreateGlobalRoutes(
+    req: CreateGlobalRoutesRequest,
+    cb?: (error: string, rep: CreateGlobalRoutesResponse) => void
+  ): Promise<CreateGlobalRoutesResponse> {
+    return this.request("CreateGlobalRoutes", req, cb)
+  }
+
+  /**
    * 重置高优路由表。
    */
   async ResetHighPriorityRoutes(
@@ -4694,6 +4735,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 修改全局路由表ECMP算法 HASH 策略。
+   */
+  async ModifyGlobalRouteECMPAlgorithm(
+    req: ModifyGlobalRouteECMPAlgorithmRequest,
+    cb?: (error: string, rep: ModifyGlobalRouteECMPAlgorithmResponse) => void
+  ): Promise<ModifyGlobalRouteECMPAlgorithmResponse> {
+    return this.request("ModifyGlobalRouteECMPAlgorithm", req, cb)
+  }
+
+  /**
    * 本接口（DeleteVpcPeeringConnection）用于删除私有网络对等连接。
    */
   async DeleteVpcPeeringConnection(
@@ -4826,13 +4877,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（CreateNetDetect）用于创建网络探测。
+   * 修改全局路由。
    */
-  async CreateNetDetect(
-    req: CreateNetDetectRequest,
-    cb?: (error: string, rep: CreateNetDetectResponse) => void
-  ): Promise<CreateNetDetectResponse> {
-    return this.request("CreateNetDetect", req, cb)
+  async ModifyGlobalRoutes(
+    req: ModifyGlobalRoutesRequest,
+    cb?: (error: string, rep: ModifyGlobalRoutesResponse) => void
+  ): Promise<ModifyGlobalRoutesResponse> {
+    return this.request("ModifyGlobalRoutes", req, cb)
   }
 
   /**
@@ -5287,6 +5338,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: CreateTrafficPackagesResponse) => void
   ): Promise<CreateTrafficPackagesResponse> {
     return this.request("CreateTrafficPackages", req, cb)
+  }
+
+  /**
+   * 本接口（CreateNetDetect）用于创建网络探测。
+   */
+  async CreateNetDetect(
+    req: CreateNetDetectRequest,
+    cb?: (error: string, rep: CreateNetDetectResponse) => void
+  ): Promise<CreateNetDetectResponse> {
+    return this.request("CreateNetDetect", req, cb)
   }
 
   /**

@@ -280,17 +280,14 @@ export interface DescribeQAResponse {
 }
 
 /**
- * 获取ws token label
+ * 扩展信息
  */
-export interface GetWsTokenReq_Label {
+export interface ExtraInfo {
   /**
-   * 标签名
+   * ECharts信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
-  /**
-   * 标签值
-   */
-  Values?: Array<string>
+  EChartsInfo?: Array<string>
 }
 
 /**
@@ -425,65 +422,19 @@ export interface RunNodeInfo {
 }
 
 /**
- * DescribeApp返回参数结构体
+ * Agent调试信息
  */
-export interface DescribeAppResponse {
+export interface AgentDebugInfo {
   /**
-   * 应用 ID
+   * 工具、大模型的输入信息，json
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppBizId?: string
+  Input?: string
   /**
-   * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
+   * 工具、大模型的输出信息，json
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppType?: string
-  /**
-   * 应用类型说明
-   */
-  AppTypeDesc?: string
-  /**
-   * 应用类型说明
-   */
-  BaseConfig?: BaseConfig
-  /**
-   * 应用配置
-   */
-  AppConfig?: AppConfig
-  /**
-   * 头像是否在申诉中
-   */
-  AvatarInAppeal?: boolean
-  /**
-   * 角色描述是否在申诉中
-   */
-  RoleInAppeal?: boolean
-  /**
-   * 名称是否在申诉中
-   */
-  NameInAppeal?: boolean
-  /**
-   * 欢迎语是否在申诉中
-   */
-  GreetingInAppeal?: boolean
-  /**
-   * 未知问题回复语是否在申诉中
-   */
-  BareAnswerInAppeal?: boolean
-  /**
-   * 应用appKey
-   */
-  AppKey?: string
-  /**
-   * 应用状态，1：未上线，2：运行中，3：停用
-   */
-  AppStatus?: number
-  /**
-   * 状态说明
-   */
-  AppStatusDesc?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Output?: string
 }
 
 /**
@@ -632,6 +583,11 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentThought?: AgentThought
+  /**
+   * 扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: ExtraInfo
 }
 
 /**
@@ -1117,21 +1073,17 @@ export interface ModifyQAAttrRangeRequest {
 }
 
 /**
- * ListRejectedQuestion返回参数结构体
+ * 获取ws token label
  */
-export interface ListRejectedQuestionResponse {
+export interface GetWsTokenReq_Label {
   /**
-   * 总数
+   * 标签名
    */
-  Total?: string
+  Name?: string
   /**
-   * 拒答问题列表
+   * 标签值
    */
-  List?: Array<RejectedQuestion>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Values?: Array<string>
 }
 
 /**
@@ -2314,7 +2266,7 @@ export interface DescribeDocResponse {
  */
 export interface CreateReleaseRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2439,6 +2391,29 @@ export interface KnowledgeQaOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseRecommended?: boolean
+}
+
+/**
+ * ModifyRejectedQuestion请求参数结构体
+ */
+export interface ModifyRejectedQuestionRequest {
+  /**
+   * 应用ID
+   */
+  BotBizId: string
+  /**
+   * 拒答问题
+
+
+   */
+  Question: string
+  /**
+   * 拒答问题来源的数据源唯一id
+
+
+
+   */
+  RejectedBizId: string
 }
 
 /**
@@ -3519,7 +3494,7 @@ export type ListAppCategoryRequest = null
  */
 export interface ListReleaseConfigPreviewRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4476,6 +4451,10 @@ export interface ListDocItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
+  /**
+   * 文档所属分类ID
+   */
+  CateBizId?: string
 }
 
 /**
@@ -4612,6 +4591,24 @@ export interface DescribeKnowledgeUsagePieGraphResponse {
    * 应用饼图详情列表
    */
   List?: Array<KnowledgeCapacityPieGraphDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListRejectedQuestion返回参数结构体
+ */
+export interface ListRejectedQuestionResponse {
+  /**
+   * 总数
+   */
+  Total?: string
+  /**
+   * 拒答问题列表
+   */
+  List?: Array<RejectedQuestion>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5230,6 +5227,11 @@ export interface ProcedureDebugging {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkFlow?: WorkFlowSummary
+  /**
+   * Agent调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Agent?: AgentDebugInfo
 }
 
 /**
@@ -5689,7 +5691,7 @@ export interface QueryRewriteRequest {
    */
   Question: string
   /**
-   * 需要改写的多轮历史会话
+   * 需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入，由于模型字符限制，最多提供4轮对话。
    */
   Messages: Array<Message>
   /**
@@ -6651,25 +6653,65 @@ export interface IsTransferIntentRequest {
 }
 
 /**
- * DescribeRefer请求参数结构体
+ * DescribeApp返回参数结构体
  */
-export interface DescribeReferRequest {
+export interface DescribeAppResponse {
   /**
-   * 应用ID
+   * 应用 ID
    */
-  BotBizId: string
+  AppBizId?: string
   /**
-   * 引用ID
+   * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
    */
-  ReferBizIds: Array<string>
+  AppType?: string
   /**
-   * 登录用户主账号(集成商模式必填)
+   * 应用类型说明
    */
-  LoginUin?: string
+  AppTypeDesc?: string
   /**
-   * 登录用户子账号(集成商模式必填)
+   * 应用类型说明
    */
-  LoginSubAccountUin?: string
+  BaseConfig?: BaseConfig
+  /**
+   * 应用配置
+   */
+  AppConfig?: AppConfig
+  /**
+   * 头像是否在申诉中
+   */
+  AvatarInAppeal?: boolean
+  /**
+   * 角色描述是否在申诉中
+   */
+  RoleInAppeal?: boolean
+  /**
+   * 名称是否在申诉中
+   */
+  NameInAppeal?: boolean
+  /**
+   * 欢迎语是否在申诉中
+   */
+  GreetingInAppeal?: boolean
+  /**
+   * 未知问题回复语是否在申诉中
+   */
+  BareAnswerInAppeal?: boolean
+  /**
+   * 应用appKey
+   */
+  AppKey?: string
+  /**
+   * 应用状态，1：未上线，2：运行中，3：停用
+   */
+  AppStatus?: number
+  /**
+   * 状态说明
+   */
+  AppStatusDesc?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7072,6 +7114,10 @@ export interface GetMsgRecordRequest {
    * 场景, 体验: 1; 正式: 2
    */
   Scene?: number
+  /**
+   * 传该值，代表拉取该记录id的前后总共count条消息记录
+   */
+  MidRecordId?: string
 }
 
 /**
@@ -7526,26 +7572,25 @@ export interface Filters {
 }
 
 /**
- * ModifyRejectedQuestion请求参数结构体
+ * DescribeRefer请求参数结构体
  */
-export interface ModifyRejectedQuestionRequest {
+export interface DescribeReferRequest {
   /**
    * 应用ID
    */
   BotBizId: string
   /**
-   * 拒答问题
-
-
+   * 引用ID
    */
-  Question: string
+  ReferBizIds: Array<string>
   /**
-   * 拒答问题来源的数据源唯一id
-
-
-
+   * 登录用户主账号(集成商模式必填)
    */
-  RejectedBizId: string
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
 }
 
 /**

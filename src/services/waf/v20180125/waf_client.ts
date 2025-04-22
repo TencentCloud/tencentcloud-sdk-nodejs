@@ -120,6 +120,7 @@ import {
   DescribeAccessIndexResponse,
   ModifyUserSignatureRuleRequest,
   BatchOperateUserSignatureRulesRequest,
+  FieldWriteConfig,
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
   TLSVersion,

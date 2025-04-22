@@ -467,6 +467,10 @@ export interface ClusterV2 {
    * 是否开启cls日志功能
    */
   EnableLogCollection?: boolean
+  /**
+   * 集群状态的原因
+   */
+  Reason?: string
 }
 
 /**

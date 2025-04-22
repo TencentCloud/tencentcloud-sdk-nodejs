@@ -92,7 +92,6 @@ export interface BatchDeregisterTargetsResponse {
   FailListenerIdSet?: Array<string>
   /**
    * 解绑失败错误原因信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
@@ -139,12 +138,10 @@ export interface RulesItems {
 export interface ExtraInfo {
   /**
    * 是否开通VIP直通
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZhiTong?: boolean
   /**
    * TgwGroup名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TgwGroupName?: string
 }
@@ -304,7 +301,7 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   ZoneId?: string
   /**
-   * 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。
+   * 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)
    */
   InternetAccessible?: InternetAccessible
   /**
@@ -375,11 +372,11 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   Egress?: string
   /**
-   * 负载均衡实例的预付费相关属性
+   * 负载均衡实例的预付费相关属性，API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)
    */
   LBChargePrepaid?: LBChargePrepaid
   /**
-   * 负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。
+   * 负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)
    */
   LBChargeType?: string
   /**
@@ -557,17 +554,14 @@ export interface ListenerBackend {
   Port?: number
   /**
    * 监听器下的规则信息（仅适用于HTTP/HTTPS监听器）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rules?: Array<RuleTargets>
   /**
    * 监听器上绑定的后端服务列表（仅适用于TCP/UDP/TCP_SSL监听器）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Targets?: Array<Backend>
   /**
    * 若支持端口段，则为端口段结束端口；若不支持端口段，则为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndPort?: number
 }
@@ -588,7 +582,6 @@ export interface SetLoadBalancerClsLogResponse {
 export interface DescribeLoadBalancerTrafficResponse {
   /**
    * 按出带宽从高到低排序后的负载均衡信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerTraffic?: Array<LoadBalancerTraffic>
   /**
@@ -785,13 +778,12 @@ export interface DescribeTargetGroupInstancesRequest {
 export interface DescribeIdleLoadBalancersResponse {
   /**
    * 闲置实例列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdleLoadBalancers: Array<IdleLoadBalancer>
+  IdleLoadBalancers?: Array<IdleLoadBalancer>
   /**
    * 所有闲置实例数目
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -808,17 +800,14 @@ export interface BindItem {
   LoadBalancerId: string
   /**
    * 配置绑定的监听器ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListenerId: string
   /**
    * 配置绑定的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain: string
   /**
    * 配置绑定的规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocationId?: string
 }
@@ -841,11 +830,11 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   Forward?: number
   /**
-   * 负载均衡实例的名称。
+   * 负载均衡实例的名称，支持模糊查询。
    */
   LoadBalancerName?: string
   /**
-   * 腾讯云为负载均衡实例分配的域名。
+   * 腾讯云为负载均衡实例分配的域名，支持模糊查询。
    */
   Domain?: string
   /**
@@ -869,19 +858,26 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   Limit?: number
   /**
-   * 排序参数，支持以下字段：LoadBalancerName，CreateTime，Domain，LoadBalancerType。
+   * 排序参数，支持以下字段：
+- LoadBalancerName
+- CreateTime
+- Domain
+- LoadBalancerType
+
+默认为 CreateTime。
+
    */
   OrderBy?: string
   /**
-   * 1：倒序，0：顺序，默认按照创建时间倒序。
+   * 1：倒序，0：顺序，默认为1，按照创建时间倒序。
    */
   OrderType?: number
   /**
-   * 搜索字段，模糊匹配名称、域名、VIP。
+   * 模糊搜索字段，模糊匹配负载均衡实例的名称、域名、负载均衡实例的 VIP 地址，负载均衡实例ID。
    */
   SearchKey?: string
   /**
-   * 负载均衡实例所属的项目 ID，可以通过 DescribeProject 接口获取。
+   * 负载均衡实例所属的项目 ID，可以通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取，不传默认所有项目。
    */
   ProjectId?: number
   /**
@@ -890,7 +886,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   WithRs?: number
   /**
    * 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，
-基础网络可传入'0'。
+查找基础网络类型的负载均衡可传入'0'。
    */
   VpcId?: string
   /**
@@ -902,7 +898,52 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   MasterZone?: string
   /**
-   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。<br/>`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下：<li> charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的实例计费模式过滤，包括"PREPAID","POSTPAID_BY_HOUR"。</li><li> internet-charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的网络计费模式过滤，包括"BANDWIDTH_PREPAID","TRAFFIC_POSTPAID_BY_HOUR","BANDWIDTH_POSTPAID_BY_HOUR","BANDWIDTH_PACKAGE"。</li><li> master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。</li><li> tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。</li><li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照CLB标签键值对进行过滤，tag-key使用具体的标签键进行替换。</li><li> function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。</li><li> vip-isp - String - 是否必填：否 - （过滤条件）按照 CLB VIP的运营商类型过滤，如："BGP","INTERNAL","CMCC","CTCC","CUCC"等。</li><li> sla-type - String - 是否必填：否 - （过滤条件）按照 CLB 的性能容量型规格过滤，包括"clb.c1.small","clb.c2.medium","clb.c3.small","clb.c3.medium","clb.c4.small","clb.c4.medium","clb.c4.large","clb.c4.xlarge","others"。</li><li> exclusive - uint64 - 是否必填：否 - （过滤条件）按照独占实例进行过滤。</li>
+   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。<br/>`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下：
+- charge-type
+按照【实例计费模式】进行过滤。实例计费模式例如：PREPAID。
+类型：String
+必选：否
+可选项：PREPAID(预付费)、POSTPAID_BY_HOUR(后付费)
+- internet-charge-type
+按照【网络计费模式】进行过滤。网络计费模式例如：BANDWIDTH_PREPAID。
+类型：String
+必选：否
+可选项：BANDWIDTH_PREPAID(预付费按带宽结算)、 TRAFFIC_POSTPAID_BY_HOUR(流量按小时后付费)、BANDWIDTH_POSTPAID_BY_HOUR(带宽按小时后付费)、BANDWIDTH_PACKAGE(带宽包用户)
+- master-zone-id
+按照【CLB主可用区ID】进行过滤。例如：100001（对应的是广州一区）。
+类型：String
+必选：否
+获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)
+- tag-key
+按照【CLB 标签的键】进行过滤，例如：tag-key。
+类型：String
+必选：否
+- tag:tag-key
+按照【CLB标签键值】进行过滤，例如：tag-test。
+类型：String
+必选：否
+- function-name
+按照【后端绑定SCF云函数的函数名称】进行过滤，例如：helloworld-1744958255。
+类型：String
+必选：否
+获取方式：[ListFunctions](https://cloud.tencent.com/document/api/583/18582)
+- vip-isp
+按照【CLB VIP的运营商类型】进行过滤，例如：BGP。
+类型：String
+必选：否
+公网类型可选项：BGP(多线)、CMCC(中国移动)、CTCC(中国电信)、CUCC(中国联通)
+内网类型可选项：INTERNAL(内网)
+- sla-type
+按照【CLB 的性能容量型规格】进行过滤，例如：clb.c4.xlarge。
+类型：String
+必选：否
+可选项：clb.c2.medium(标准型)、clb.c3.small(高阶型1)、clb.c3.medium(高阶型2)、clb.c4.small(超强型1)、clb.c4.medium(超强型2)、clb.c4.large(超强型3)、clb.c4.xlarge(超强型4)
+具体规格参数参考：
+- exclusive
+按照【独占实例】进行过滤。例如：1，代表筛选独占型实例。
+类型：String
+必选：否
+可选项：0、1
    */
   Filters?: Array<Filter>
   /**
@@ -948,23 +989,19 @@ export interface ClassicalTarget {
   Weight?: number
   /**
    * 后端服务的外网 IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicIpAddresses?: Array<string>
   /**
    * 后端服务的内网 IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivateIpAddresses?: Array<string>
   /**
    * 后端服务的实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 后端服务的状态
 1：故障，2：运行中，3：创建中，4：已关机，5：已退还，6：退还中， 7：重启中，8：开机中，9：关机中，10：密码重置中，11：格式化中，12：镜像制作中，13：带宽设置中，14：重装系统中，19：升级中，21：热迁移中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunFlag?: number
 }
@@ -997,7 +1034,6 @@ export interface ListenerItem {
   Targets?: Array<LbRsTargets>
   /**
    * 端口段监听器的结束端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndPort?: number
 }
@@ -1148,7 +1184,6 @@ export interface ZoneResource {
   MasterZone?: string
   /**
    * 资源列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceSet?: Array<Resource>
   /**
@@ -1178,7 +1213,6 @@ export interface ZoneResource {
   EdgeZone?: boolean
   /**
    * 网络出口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: string
 }
@@ -1286,12 +1320,10 @@ export interface CrossTargets {
   EniId?: string
   /**
    * 子机实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 子机实例名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -1320,7 +1352,6 @@ export interface RuleHealth {
   Url?: string
   /**
    * 本规则上绑定的后端服务的健康检查状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Targets?: Array<TargetHealth>
 }
@@ -1448,32 +1479,26 @@ export interface DescribeTargetsRequest {
 export interface ZoneInfo {
   /**
    * 可用区数值形式的唯一ID，如：100001
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 可用区字符串形式的唯一ID，如：ap-guangzhou-1
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 可用区名称，如：广州一区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneName?: string
   /**
    * 可用区所属地域，如：ap-guangzhou
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneRegion?: string
   /**
    * 可用区是否是LocalZone可用区，如：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalZone?: boolean
   /**
    * 可用区是否是EdgeZone可用区，如：false
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EdgeZone?: boolean
 }
@@ -1516,12 +1541,10 @@ export interface LoadBalancerHealth {
   LoadBalancerId?: string
   /**
    * 负载均衡实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerName?: string
   /**
    * 监听器列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Listeners?: Array<ListenerHealth>
 }
@@ -1721,37 +1744,36 @@ export interface IdleLoadBalancer {
   /**
    * 负载均衡ID
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * 负载均衡名字
    */
-  LoadBalancerName: string
+  LoadBalancerName?: string
   /**
    * 负载均衡所在地域
    */
-  Region: string
+  Region?: string
   /**
    * 负载均衡的vip
    */
-  Vip: string
+  Vip?: string
   /**
    * 闲置原因。NO_RULES：没有规则，NO_RS：有规则没有绑定子机。
    */
-  IdleReason: string
+  IdleReason?: string
   /**
    * 负载均衡实例的状态，包括
 0：创建中，1：正常运行。
    */
-  Status: number
+  Status?: number
   /**
    * 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。
    */
-  Forward: number
+  Forward?: number
   /**
    * 负载均衡域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
 }
 
 /**
@@ -1983,18 +2005,15 @@ export interface Target {
   /**
    * 后端服务的监听端口。
 注意：绑定CVM（云服务器）或ENI（弹性网卡）时必传此参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
   /**
    * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。表示绑定主网卡主IPv4地址；以下场景都不支持指定InstanceId：绑定非CVM，绑定CVM上的辅助网卡IP，通过跨域2.0绑定CVM，以及绑定CVM的IPv6地址等。
 注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
@@ -2004,12 +2023,10 @@ export interface Target {
   /**
    * 绑定IP时需要传入此参数，支持弹性网卡的IP和其他内网IP，如果是弹性网卡则必须先绑定至CVM，然后才能绑定到负载均衡实例。
 注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。如果绑定双栈IPV6子机，则必须传该参数。如果是跨地域绑定，则必须传该参数，不支持传InstanceId参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EniIp?: string
   /**
    * 标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: string
 }
@@ -2062,7 +2079,6 @@ export interface CertIdRelatedWithLoadBalancers {
   CertId?: string
   /**
    * 与证书关联的负载均衡实例列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancers?: Array<LoadBalancer>
 }
@@ -2111,9 +2127,8 @@ GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场�
 export interface DescribeClassicalLBHealthStatusResponse {
   /**
    * 后端健康状态列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthList: Array<ClassicalHealth>
+  HealthList?: Array<ClassicalHealth>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2173,7 +2188,6 @@ export interface Listener {
   SessionExpireTime?: number
   /**
    * 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SniSwitch?: number
   /**
@@ -2183,17 +2197,14 @@ export interface Listener {
   Rules?: Array<RuleOutput>
   /**
    * 监听器的名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListenerName?: string
   /**
    * 监听器的创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 端口段结束端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndPort?: number
   /**
@@ -2208,7 +2219,6 @@ export interface Listener {
   TargetGroup?: BasicTargetGroupInfo
   /**
    * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionType?: string
   /**
@@ -2218,17 +2228,14 @@ export interface Listener {
   KeepaliveEnable?: number
   /**
    * 仅支持Nat64 CLB TCP监听器
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Toa?: boolean
   /**
    * 解绑后端目标时，是否发RST给客户端，（此参数仅对于TCP监听器有意义）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeregisterTargetRst?: boolean
   /**
    * 监听器的属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrFlags?: Array<string>
   /**
@@ -2238,12 +2245,10 @@ export interface Listener {
   TargetGroupList?: Array<BasicTargetGroupInfo>
   /**
    * 监听器最大连接数，-1表示监听器维度不限速。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxConn?: number
   /**
    * 监听器最大新增连接数，-1表示监听器维度不限速。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxCps?: number
   /**
@@ -2253,9 +2258,12 @@ export interface Listener {
   IdleConnectTimeout?: number
   /**
    * 调度时间。触发强制重新调度后，长连接将会在设置的调度时间内断开并完成重新分配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RescheduleInterval?: number
+  /**
+   * 数据压缩模式
+   */
+  DataCompressMode?: string
 }
 
 /**
@@ -2265,28 +2273,27 @@ export interface LoadBalancerTraffic {
   /**
    * 负载均衡ID
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * 负载均衡名字
    */
-  LoadBalancerName: string
+  LoadBalancerName?: string
   /**
    * 负载均衡所在地域
    */
-  Region: string
+  Region?: string
   /**
    * 负载均衡的vip
    */
-  Vip: string
+  Vip?: string
   /**
    * 最大出带宽，单位：Mbps
    */
-  OutBandwidth: number
+  OutBandwidth?: number
   /**
    * CLB域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
 }
 
 /**
@@ -2298,12 +2305,10 @@ export interface SpecAvailability {
 <li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li>
 <li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li><li>shared（共享型）</li>
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecType?: string
   /**
    * 规格可用性。资源可用性，"Available"：可用，"Unavailable"：不可用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Availability?: string
 }
@@ -2322,7 +2327,6 @@ export interface ConfigListItem {
   ConfigType?: string
   /**
    * 配置名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigName?: string
   /**
@@ -2364,23 +2368,19 @@ export interface HealthCheck {
   HealthSwitch?: number
   /**
    * 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeOut?: number
   /**
    * 健康检查探测间隔时间，默认值：5，IPv4 CLB实例的取值范围为：2-300，IPv6 CLB 实例的取值范围为：5-300。单位：秒。
 说明：部分老旧 IPv4 CLB实例的取值范围为：5-300。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IntervalTime?: number
   /**
    * 健康阈值，默认值：3，表示当连续探测三次健康则表示该转发正常，可选值：2~10，单位：次。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthNum?: number
   /**
    * 不健康阈值，默认值：3，表示当连续探测三次不健康则表示该转发异常，可选值：2~10，单位：次。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnHealthNum?: number
   /**
@@ -2426,7 +2426,6 @@ export interface HealthCheck {
   RecvContext?: string
   /**
    * 健康检查使用的协议。取值 TCP | HTTP | HTTPS | GRPC | PING | CUSTOM，UDP监听器支持PING/CUSTOM，TCP监听器支持TCP/HTTP/CUSTOM，TCP_SSL/QUIC监听器支持TCP/HTTP，HTTP规则支持HTTP/GRPC，HTTPS规则支持HTTP/HTTPS/GRPC。HTTP监听器默认值为HTTP;TCP、TCP_SSL、QUIC监听器默认值为TCP;UDP监听器默认为PING;HTTPS监听器的CheckType默认值与后端转发协议一致。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckType?: string
   /**
@@ -2436,7 +2435,6 @@ export interface HealthCheck {
   HttpVersion?: string
   /**
    * 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceIpType?: number
   /**
@@ -2472,7 +2470,6 @@ export interface ReplaceCertForLoadBalancersResponse {
 export interface DescribeTargetsResponse {
   /**
    * 监听器后端绑定的机器信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Listeners?: Array<ListenerBackend>
   /**
@@ -2799,17 +2796,14 @@ export interface TargetGroupBackend {
   Weight?: number
   /**
    * 后端服务的外网 IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicIpAddresses?: Array<string>
   /**
    * 后端服务的内网 IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivateIpAddresses?: Array<string>
   /**
    * 后端服务的实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -2819,12 +2813,10 @@ export interface TargetGroupBackend {
   RegisteredTime?: string
   /**
    * 弹性网卡唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EniId?: string
   /**
    * 后端服务的可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
 }
@@ -2875,7 +2867,6 @@ export interface DescribeClassicalLBByInstanceIdRequest {
 export interface FunctionTarget {
   /**
    * 云函数相关信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Function: FunctionInfo
   /**
@@ -3157,7 +3148,6 @@ export interface Backend {
   PublicIpAddresses?: Array<string>
   /**
    * 后端服务的内网 IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivateIpAddresses?: Array<string>
   /**
@@ -3167,7 +3157,6 @@ export interface Backend {
   InstanceName?: string
   /**
    * 后端服务被绑定的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisteredTime?: string
   /**
@@ -3177,7 +3166,6 @@ export interface Backend {
   EniId?: string
   /**
    * 标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: string
 }
@@ -3188,12 +3176,10 @@ export interface Backend {
 export interface LBChargePrepaid {
   /**
    * 续费类型：AUTO_RENEW 自动续费，  MANUAL_RENEW 手动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: string
   /**
    * 购买时长，单位：月
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Period?: number
 }
@@ -3431,7 +3417,6 @@ export interface ClassicalLoadBalancerInfo {
   InstanceId?: string
   /**
    * 负载均衡实例ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerIds?: Array<string>
 }
@@ -3446,7 +3431,6 @@ export interface DescribeListenersResponse {
   Listeners?: Array<Listener>
   /**
    * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -3465,12 +3449,10 @@ export interface RuleOutput {
   LocationId?: string
   /**
    * 转发规则的域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
   /**
    * 转发规则的路径。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
   /**
@@ -3479,7 +3461,6 @@ export interface RuleOutput {
   SessionExpireTime?: number
   /**
    * 健康检查信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheck?: HealthCheck
   /**
@@ -3498,7 +3479,6 @@ WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Has
   ListenerId?: string
   /**
    * 转发规则的重定向目标信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RewriteTarget?: RewriteTarget
   /**
@@ -3536,27 +3516,22 @@ WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Has
   TargetGroup?: BasicTargetGroupInfo
   /**
    * WAF实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WafDomainId?: string
   /**
    * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrpcCallee?: string
   /**
    * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrpcFunc?: string
   /**
    * QUIC状态。QUIC_ACTIVE表示开启，QUIC_INACTIVE表示未开启。注意，只有HTTPS域名才能开启QUIC。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QuicStatus?: string
   /**
    * 转发规则的域名列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domains?: Array<string>
   /**
@@ -3566,7 +3541,6 @@ WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Has
   TargetGroupList?: Array<BasicTargetGroupInfo>
   /**
    * OAuth配置状态信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OAuth?: OAuth
 }
@@ -3655,12 +3629,10 @@ export interface RuleTargets {
   Url?: string
   /**
    * 后端服务的信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Targets?: Array<Backend>
   /**
    * 后端云函数的信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FunctionTargets?: Array<FunctionTarget>
 }
@@ -3741,7 +3713,6 @@ export interface ModifyListenerResponse {
 export interface DescribeTargetHealthResponse {
   /**
    * 负载均衡实例列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancers?: Array<LoadBalancerHealth>
   /**
@@ -3830,7 +3801,6 @@ export interface ClusterItem {
   ClusterId: string
   /**
    * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
@@ -3850,17 +3820,14 @@ export interface BindDetailItem {
   LoadBalancerId?: string
   /**
    * 配置绑定的监听器ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListenerId?: string
   /**
    * 配置绑定的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
   /**
    * 配置绑定的规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocationId?: string
   /**
@@ -3870,12 +3837,10 @@ export interface BindDetailItem {
   ListenerName?: string
   /**
    * 监听器协议
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
    * 监听器端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vport?: number
   /**
@@ -3885,7 +3850,6 @@ export interface BindDetailItem {
   Url?: string
   /**
    * 配置ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UconfigId?: string
 }
@@ -3943,6 +3907,7 @@ export interface CreateListenerRequest {
   SessionType?: string
   /**
    * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭。
+若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 [内测申请](https://cloud.tencent.com/apply/p/tsodp6qm21)。
    */
   KeepaliveEnable?: number
   /**
@@ -4018,12 +3983,10 @@ export interface CreateClsLogSetRequest {
 export interface TypeInfo {
   /**
    * 运营商类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 规格可用性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecAvailabilitySet?: Array<SpecAvailability>
 }
@@ -4059,35 +4022,33 @@ export interface ClusterResource {
   /**
    * 集群唯一ID，如tgw-12345678。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * ip地址。
    */
-  Vip: string
+  Vip?: string
   /**
    * 负载均衡唯一ID，如lb-12345678。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * 资源是否闲置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Idle: string
+  Idle?: string
   /**
    * 集群名称。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Isp: string
+  Isp?: string
   /**
    * 集群所在的可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClustersZone: ClustersZone
+  ClustersZone?: ClustersZone
 }
 
 /**
@@ -4126,12 +4087,10 @@ export interface DeregisterTargetsFromClassicalLBResponse {
 export interface ClustersZone {
   /**
    * 集群所在的主可用区。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterZone?: Array<string>
   /**
    * 集群所在的备可用区。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZone?: Array<string>
 }
@@ -4201,17 +4160,14 @@ export interface RewriteTarget {
   TargetLocationId?: string
   /**
    * 重定向状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RewriteCode?: number
   /**
    * 重定向是否携带匹配的url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TakeUrl?: boolean
   /**
    * 重定向类型，Manual: 手动重定向，Auto:  自动重定向
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RewriteType?: string
 }
@@ -4326,22 +4282,18 @@ export interface Cluster {
   ClustersVersion?: string
   /**
    * 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DisasterRecoveryType?: string
   /**
    * 网络出口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: string
   /**
    * IP版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPVersion?: string
   /**
    * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: Array<TagInfo>
 }
@@ -4390,7 +4342,6 @@ export interface DescribeLoadBalancersDetailResponse {
   TotalCount?: number
   /**
    * 负载均衡详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerDetailSet?: Array<LoadBalancerDetail>
   /**
@@ -4430,9 +4381,12 @@ export interface TargetHealth {
   HealthStatusDetial?: string
   /**
    * 目标组唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetGroupId?: string
+  /**
+   * Target的权重。
+   */
+  Weight?: number
 }
 
 /**
@@ -4626,12 +4580,10 @@ Public：公网属性，Private：内网属性；对于内网属性的负载均�
   SniSwitch?: number
   /**
    * 负载均衡实例的域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerDomain?: string
   /**
    * 网络出口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: string
   /**
@@ -4670,12 +4622,10 @@ export interface LbRsTargets {
   Port?: number
   /**
    * rs的vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: number
   /**
    * rs的权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
 }
@@ -4773,7 +4723,6 @@ export interface TargetRegionInfo {
   VpcId: string
   /**
    * Target所属网络，私有网络格式如86323，如果是基础网络，则为0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NumericalVpcId?: number
 }
@@ -4786,6 +4735,14 @@ export interface DescribeTargetHealthRequest {
    * 要查询的负载均衡实例ID列表。
    */
   LoadBalancerIds: Array<string>
+  /**
+   * 要查询的监听器ID列表。
+   */
+  ListenerIds?: Array<string>
+  /**
+   * 要查询的转发规则ID列表。
+   */
+  LocationIds?: Array<string>
 }
 
 /**
@@ -5011,7 +4968,6 @@ export interface DeleteTargetGroupsResponse {
 export interface Price {
   /**
    * 描述了实例价格。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePrice?: ItemPrice
   /**
@@ -5223,7 +5179,6 @@ export interface DescribeResourcesRequest {
 export interface DescribeClassicalLBListenersResponse {
   /**
    * 监听器列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Listeners?: Array<ClassicalListener>
   /**
@@ -5300,19 +5255,17 @@ export interface Resource {
   /**
    * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
    */
-  Type: Array<string>
+  Type?: Array<string>
   /**
    * 运营商信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
    */
-  Isp: string
+  Isp?: string
   /**
    * 可用资源。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvailabilitySet: Array<ResourceAvailability>
+  AvailabilitySet?: Array<ResourceAvailability>
   /**
    * 运营商类型信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TypeSet?: Array<TypeInfo>
 }
@@ -5527,7 +5480,6 @@ export interface DeleteLoadBalancerSnatIpsRequest {
 export interface InternetAccessible {
   /**
    * TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费，国际站用户不支持该计费模式; BANDWIDTH_PACKAGE 按带宽包计费;BANDWIDTH_PREPAID按带宽预付费。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetChargeType?: string
   /**
@@ -5535,7 +5487,6 @@ export interface InternetAccessible {
 - 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。
 - 对于公网属性和内网属性的性能容量型 CLB实例，最大出带宽的范围为1Mbps-61440Mbps。
 （调用CreateLoadBalancer创建LB时不指定此参数则设置为默认值10Mbps。此上限可调整）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetMaxBandwidthOut?: number
   /**
@@ -5553,13 +5504,11 @@ export interface OAuth {
    * 开启或关闭鉴权。
 True: 开启;
 False: 关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OAuthEnable?: boolean
   /**
    * IAP全部故障后，拒绝请求还是放行。BYPASS:通过,
 REJECT: 拒绝
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OAuthFailureStatus?: string
 }
@@ -5570,9 +5519,8 @@ REJECT: 拒绝
 export interface DescribeClassicalLBTargetsResponse {
   /**
    * 后端服务列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Targets: Array<ClassicalTarget>
+  Targets?: Array<ClassicalTarget>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5723,17 +5671,14 @@ export interface TargetGroupInfo {
   Protocol?: string
   /**
    * 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), gwlb(全局负载均衡目标组)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetGroupType?: string
   /**
    * 目标组已关联的规则数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssociatedRuleCount?: number
   /**
    * 目标组内的实例数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisteredInstancesCount?: number
   /**
@@ -5742,7 +5687,6 @@ export interface TargetGroupInfo {
   Tag?: Array<TagInfo>
   /**
    * 默认权重。只有v2类型目标组返回该字段。当返回为NULL时， 表示未设置默认权重。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
   /**
@@ -5803,12 +5747,10 @@ export interface CertificateOutput {
   CertId?: string
   /**
    * 客户端证书的 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CertCaId?: string
   /**
    * 多本服务器证书场景扩展的服务器证书ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtCertIds?: Array<string>
 }
@@ -5903,7 +5845,6 @@ export interface ListenerHealth {
   ListenerId?: string
   /**
    * 监听器名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListenerName?: string
   /**
@@ -5916,7 +5857,6 @@ export interface ListenerHealth {
   Port?: number
   /**
    * 监听器的转发规则列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rules?: Array<RuleHealth>
 }
@@ -5966,7 +5906,6 @@ export interface AssociationItem {
   ListenerName?: string
   /**
    * 关联目标组的权重， 该参数只有v2新版目标组生效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
 }
@@ -6021,7 +5960,7 @@ export interface LoadBalancer {
   LoadBalancerName?: string
   /**
    * 负载均衡实例的网络类型：
-OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均衡，可通过绑定EIP出公网，具体可参考EIP文档。
+OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均衡，可通过绑定EIP出公网，具体可参考EIP文档[绑定弹性公网IP](https://cloud.tencent.com/document/product/215/16700)。
    */
   LoadBalancerType?: string
   /**
@@ -6030,28 +5969,25 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
   Forward?: number
   /**
    * 负载均衡实例的域名，仅公网传统型和域名型负载均衡实例才提供该字段。逐步下线中，建议用LoadBalancerDomain替代。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
   /**
    * 负载均衡实例的 VIP 列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerVips?: Array<string>
   /**
    * 负载均衡实例的状态，包括
 0：创建中，1：正常运行。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 负载均衡实例的创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
+格式：YYYY-MM-DD HH:mm:ss
    */
   CreateTime?: string
   /**
    * 负载均衡实例的上次状态转换时间。
-注意：此字段可能返回 null，表示取不到有效值。
+格式：YYYY-MM-DD HH:mm:ss
    */
   StatusTime?: string
   /**
@@ -6060,22 +5996,18 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
   ProjectId?: number
   /**
    * 私有网络的 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 高防 LB 的标识，1：高防负载均衡 0：非高防负载均衡。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenBgp?: number
   /**
    * 在 2016 年 12 月份之前的传统型内网负载均衡都是开启了 snat 的。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Snat?: boolean
   /**
    * 0：表示未被隔离，1：表示被隔离。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Isolation?: number
   /**
@@ -6086,37 +6018,30 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
   Log?: string
   /**
    * 负载均衡实例所在的子网（仅对内网VPC型LB有意义）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 负载均衡实例的标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<TagInfo>
   /**
    * 负载均衡实例的安全组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecureGroups?: Array<string>
   /**
    * 负载均衡实例绑定的后端设备的基本信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetRegionInfo?: TargetRegionInfo
   /**
    * anycast负载均衡的发布域，对于非anycast的负载均衡，此字段返回为空字符串
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AnycastZone?: string
   /**
    * IP版本，ipv4 | ipv6
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressIPVersion?: string
   /**
-   * 数值形式的私有网络 ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数值形式的私有网络 ID。
    */
   NumericalVpcId?: number
   /**
@@ -6140,12 +6065,14 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
    */
   BackupZoneSet?: Array<ZoneInfo>
   /**
-   * 负载均衡实例被隔离的时间
+   * 负载均衡实例被隔离的时间。
+格式：YYYY-MM-DD HH:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolatedTime?: string
   /**
-   * 负载均衡实例的过期时间，仅对预付费负载均衡生效
+   * 负载均衡实例的过期时间，仅对预付费负载均衡生效。
+格式：YYYY-MM-DD HH:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
@@ -6160,18 +6087,16 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
    */
   NetworkAttributes?: InternetAccessible
   /**
-   * 负载均衡实例的预付费相关属性
+   * 负载均衡实例的预付费相关属性，仅在 ChargeType=PREPAID 时显示。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrepaidAttributes?: LBChargePrepaid
   /**
    * 负载均衡日志服务(CLS)的日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogSetId?: string
   /**
    * 负载均衡日志服务(CLS)的日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogTopicId?: string
   /**
@@ -6186,57 +6111,50 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
   ExtraInfo?: ExtraInfo
   /**
    * 是否可绑定高防包
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDDos?: boolean
   /**
    * 负载均衡维度的个性化配置ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigId?: string
   /**
    * 后端服务是否放通来自LB的流量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerPassToTarget?: boolean
   /**
    * 内网独占集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExclusiveCluster?: ExclusiveCluster
   /**
-   * IP地址版本为ipv6时此字段有意义， IPv6Nat64 | IPv6FullChain
+   * IP地址版本为ipv6时此字段有意义，IPv6Nat64 | IPv6FullChain。
+IPv6Nat64: 基于 NAT64 IPv6 过渡技术实现的负载均衡器。
+IPv6FullChain：基于 IPv6 单栈技术实现的负载均衡。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IPv6Mode?: string
   /**
    * 是否开启SnatPro。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SnatPro?: boolean
   /**
    * 开启SnatPro负载均衡后，SnatIp列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SnatIps?: Array<SnatIp>
   /**
    * 性能容量型规格。<ul><li> clb.c1.small：简约型规格 </li><li> clb.c2.medium：标准型规格 </li><li> clb.c3.small：高阶型1规格 </li><li> clb.c3.medium：高阶型2规格 </li><li> clb.c4.small：超强型1规格 </li><li> clb.c4.medium：超强型2规格 </li><li> clb.c4.large：超强型3规格 </li><li> clb.c4.xlarge：超强型4规格 </li><li>""：非性能容量型实例</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaType?: string
   /**
    * vip是否被封堵
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsBlock?: boolean
   /**
-   * 封堵或解封时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 封堵或解封时间。
+格式：YYYY-MM-DD HH:mm:ss。
    */
   IsBlockTime?: string
   /**
    * IP类型是否是本地BGP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalBgp?: boolean
   /**
@@ -6246,7 +6164,6 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
   ClusterTag?: string
   /**
    * 开启IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标功能。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MixIpTarget?: boolean
   /**
@@ -6261,12 +6178,10 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
   NfvInfo?: string
   /**
    * 负载均衡日志服务(CLS)的健康检查日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthLogSetId?: string
   /**
    * 负载均衡日志服务(CLS)的健康检查日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthLogTopicId?: string
   /**
@@ -6275,18 +6190,37 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
    */
   ClusterIds?: Array<string>
   /**
-   * 负载均衡的属性
-注意：此字段可能返回 null，表示取不到有效值。
+   * 负载均衡的属性，按位来决定是否开启
+2^0: 删除保护，开启后防止负载均衡被误删除。 
+2^1: 用户不可见，控制负载均衡对用户的可见性。 
+2^2: 阻塞状态，可能用于限制负载均衡的某些操作或流量。 
+2^3: 禁用负载均衡的NAT功能，可能用于特定场景下的流量直接转发。 
+2^4: 封禁状态，可能用于暂停负载均衡服务或限制访问。 
+2^5: 升配标志，可能用于标识负载均衡需要升级配置或性能。 
+2^6: 停止状态，开启后负载均衡暂停服务。 
+2^7: 不使用VPC网关，可能用于绕过VPC网关直接处理流量。 
+2^8: 安全组在TGW（Transit Gateway）中，涉及网络安全策略配置。 
+2^9: 共享限制标志，可能用于控制负载均衡的共享资源限制。 
+2^10: Web应用防火墙（WAF）标志，开启后启用WAF保护。 
+2^11: 域名型负载均衡，标识负载均衡是否基于域名进行流量分发。 
+2^12: IPv6源地址转换（SNAT），用于IPv6网络的源地址处理。 
+2^13: 隐藏域名，可能用于隐私保护或特定场景下不暴露域名。 
+2^14: 巨型帧支持，开启后支持更大的数据帧以提高网络效率。 
+2^15: 四层IP直连无NAT，可能用于四层负载均衡直接转发IP流量。 
+2^16: VPC网关三层服务，可能涉及三层网络服务的网关功能。 
+2^17: IPv6扩展标志，可能用于特定的IPv6功能支持。 
+2^18: IPv6独占标志，可能用于专属IPv6流量处理。 
+2^19: BGP专业版支持，可能涉及高级BGP路由功能。 
+2^20: TOA（TCP Option Address）清理，清除TCP选项中的地址信息。 
+
    */
   AttributeFlags?: Array<string>
   /**
    * 负载均衡实例的域名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerDomain?: string
   /**
    * 网络出口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: string
   /**

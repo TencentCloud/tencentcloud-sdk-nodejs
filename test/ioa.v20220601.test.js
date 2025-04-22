@@ -38,6 +38,16 @@ it("ioa.v20220601.DescribeLocalAccounts", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
+    try {
+       const data = await client.DescribeSoftCensusListByDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
@@ -51,6 +61,16 @@ it("ioa.v20220601.DescribeDevices", async function () {
 it("ioa.v20220601.CreateDLPFileDetectionTask", async function () {
     try {
        const data = await client.CreateDLPFileDetectionTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.CreatePrivilegeCode", async function () {
+    try {
+       const data = await client.CreatePrivilegeCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
