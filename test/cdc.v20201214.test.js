@@ -28,99 +28,9 @@ it("cdc.v20201214.ModifySiteDeviceInfo", async function () {
     }
 })
 
-it("cdc.v20201214.CreateDedicatedClusterOrder", async function () {
-    try {
-       const data = await client.CreateDedicatedClusterOrder({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DeleteDedicatedClusters", async function () {
-    try {
-       const data = await client.DeleteDedicatedClusters({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdc.v20201214.ModifySiteInfo", async function () {
     try {
        const data = await client.ModifySiteInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusterHostStatistics", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusterHostStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.ModifyDedicatedClusterInfo", async function () {
-    try {
-       const data = await client.ModifyDedicatedClusterInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeSites", async function () {
-    try {
-       const data = await client.DescribeSites({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusterOrders", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusterOrders({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.ModifyOrderStatus", async function () {
-    try {
-       const data = await client.ModifyOrderStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.CreateDedicatedCluster", async function () {
-    try {
-       const data = await client.CreateDedicatedCluster({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusters", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,36 +48,6 @@ it("cdc.v20201214.DescribeDedicatedClusterHosts", async function () {
     }
 })
 
-it("cdc.v20201214.DescribeDedicatedSupportedZones", async function () {
-    try {
-       const data = await client.DescribeDedicatedSupportedZones({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusterCbsStatistics", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusterCbsStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusterOverview", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusterOverview({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdc.v20201214.DeleteSites", async function () {
     try {
        const data = await client.DeleteSites({})
@@ -178,29 +58,9 @@ it("cdc.v20201214.DeleteSites", async function () {
     }
 })
 
-it("cdc.v20201214.DescribeSitesDetail", async function () {
+it("cdc.v20201214.DeleteDedicatedClusterImageCache", async function () {
     try {
-       const data = await client.DescribeSitesDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusterCosCapacity", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusterCosCapacity({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdc.v20201214.DescribeDedicatedClusterInstanceTypes", async function () {
-    try {
-       const data = await client.DescribeDedicatedClusterInstanceTypes({})
+       const data = await client.DeleteDedicatedClusterImageCache({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +78,169 @@ it("cdc.v20201214.DescribeDedicatedClusterTypes", async function () {
     }
 })
 
+it("cdc.v20201214.DeleteDedicatedClusters", async function () {
+    try {
+       const data = await client.DeleteDedicatedClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusterHostStatistics", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterHostStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusterOrders", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterOrders({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusters", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeSitesDetail", async function () {
+    try {
+       const data = await client.DescribeSitesDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusterCbsStatistics", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterCbsStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusterInstanceTypes", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterInstanceTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.CreateDedicatedClusterOrder", async function () {
+    try {
+       const data = await client.CreateDedicatedClusterOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusterCosCapacity", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterCosCapacity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.ModifyDedicatedClusterInfo", async function () {
+    try {
+       const data = await client.ModifyDedicatedClusterInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedSupportedZones", async function () {
+    try {
+       const data = await client.DescribeDedicatedSupportedZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdc.v20201214.CreateSite", async function () {
     try {
        const data = await client.CreateSite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.CreateDedicatedClusterImageCache", async function () {
+    try {
+       const data = await client.CreateDedicatedClusterImageCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeDedicatedClusterOverview", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusterOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.DescribeSites", async function () {
+    try {
+       const data = await client.DescribeSites({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.CreateDedicatedCluster", async function () {
+    try {
+       const data = await client.CreateDedicatedCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdc.v20201214.ModifyOrderStatus", async function () {
+    try {
+       const data = await client.ModifyOrderStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

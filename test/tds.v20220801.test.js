@@ -48,6 +48,16 @@ it("tds.v20220801.DescribeFraudPremium", async function () {
     }
 })
 
+it("tds.v20220801.DescribeFinanceFraudUltimate", async function () {
+    try {
+       const data = await client.DescribeFinanceFraudUltimate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tds.v20220801.DescribeFraudUltimate", async function () {
     try {
        const data = await client.DescribeFraudUltimate({})

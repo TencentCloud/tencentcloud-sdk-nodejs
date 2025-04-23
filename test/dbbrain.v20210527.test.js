@@ -598,6 +598,16 @@ it("dbbrain.v20210527.DescribeIndexRecommendInfo", async function () {
     }
 })
 
+it("dbbrain.v20210527.VerifyUserAccount", async function () {
+    try {
+       const data = await client.VerifyUserAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.ModifyAuditService", async function () {
     try {
        const data = await client.ModifyAuditService({})
@@ -728,9 +738,9 @@ it("dbbrain.v20210527.CreateDBDiagReportUrl", async function () {
     }
 })
 
-it("dbbrain.v20210527.VerifyUserAccount", async function () {
+it("dbbrain.v20210527.DescribeDBDiagReportContent", async function () {
     try {
-       const data = await client.VerifyUserAccount({})
+       const data = await client.DescribeDBDiagReportContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

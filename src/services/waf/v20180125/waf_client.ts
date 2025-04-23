@@ -37,6 +37,7 @@ import {
   ModifyUserSignatureRuleResponse,
   ModifyInstanceNameResponse,
   DescribeWafAutoDenyRulesRequest,
+  MajorEventsProPkg,
   GenerateDealsAndPayNewRequest,
   DeleteCustomWhiteRuleResponse,
   ModifyHostModeResponse,

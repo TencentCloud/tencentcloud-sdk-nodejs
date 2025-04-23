@@ -220,6 +220,10 @@ export interface CreateSecretRequest {
    * 标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。
+   */
+  KmsHsmClusterId?: string
 }
 
 /**
@@ -296,6 +300,10 @@ False -- 不开启
    * 轮转周期，以天为单位，默认为1天。
    */
   RotationFrequency?: number
+  /**
+   * KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。
+   */
+  KmsHsmClusterId?: string
 }
 
 /**
@@ -711,6 +719,10 @@ export interface CreateSSHKeyPairSecretRequest {
    * 用户自定义输入的SSH密钥对的名称，可由数字，字母和下划线组成，只能以数字和字母开头，长度不超过25个字符。
    */
   SSHKeyName?: string
+  /**
+   * KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。
+   */
+  KmsHsmClusterId?: string
 }
 
 /**

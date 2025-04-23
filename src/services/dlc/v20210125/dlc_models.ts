@@ -3556,6 +3556,20 @@ export interface ListTaskJobLogNameResponse {
 }
 
 /**
+ * DescribeClusterMonitorInfos返回参数结构体
+ */
+export interface DescribeClusterMonitorInfosResponse {
+  /**
+   * 集群监控信息列表
+   */
+  Info?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLakeFsTaskResult请求参数结构体
  */
 export interface DescribeLakeFsTaskResultRequest {
@@ -5784,6 +5798,28 @@ export interface CreateTaskRequest {
    * 任务来源信息
    */
   SourceInfo?: Array<KVPair>
+}
+
+/**
+ * DescribeClusterMonitorInfos请求参数结构体
+ */
+export interface DescribeClusterMonitorInfosRequest {
+  /**
+   * 引擎Id
+   */
+  DataEngineId: string
+  /**
+   * 任务创建时间的起始时间
+   */
+  TimeStart?: string
+  /**
+   * 任务创建时间的结束时间
+   */
+  TimeEnd?: string
+  /**
+   * 指标名称
+   */
+  MetricName?: string
 }
 
 /**

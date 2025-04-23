@@ -21,9 +21,11 @@ import {
   DescribeTrustedIDResponse,
   DescribeFraudUltimateRequest,
   DescribeFraudPremiumResponse,
+  DescribeFinanceFraudUltimateRequest,
   DescribeFraudBaseRequest,
   DescribeFraudBaseResponse,
   DataAuthorizationInfo,
+  DescribeFinanceFraudUltimateResponse,
   DescribeTrustedIDRequest,
   DescribeFraudPremiumRequest,
   DescribeFraudUltimateResponse,
@@ -67,6 +69,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFraudPremiumResponse) => void
   ): Promise<DescribeFraudPremiumResponse> {
     return this.request("DescribeFraudPremium", req, cb)
+  }
+
+  /**
+   * 查询设备标识及风险（金融旗舰版）
+   */
+  async DescribeFinanceFraudUltimate(
+    req: DescribeFinanceFraudUltimateRequest,
+    cb?: (error: string, rep: DescribeFinanceFraudUltimateResponse) => void
+  ): Promise<DescribeFinanceFraudUltimateResponse> {
+    return this.request("DescribeFinanceFraudUltimate", req, cb)
   }
 
   /**

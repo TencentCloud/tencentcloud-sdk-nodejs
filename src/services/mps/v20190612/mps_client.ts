@@ -185,6 +185,7 @@ import {
   TEHDConfig,
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
+  MP4ConfigureInfo,
   PornAsrReviewTemplateInfoForUpdate,
   LiveRecordTemplate,
   DescribeSnapshotByTimeOffsetTemplatesRequest,

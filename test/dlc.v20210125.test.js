@@ -1298,6 +1298,16 @@ it("dlc.v20210125.DescribeNotebookSessionStatement", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeClusterMonitorInfos", async function () {
+    try {
+       const data = await client.DescribeClusterMonitorInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.RenewDataEngine", async function () {
     try {
        const data = await client.RenewDataEngine({})

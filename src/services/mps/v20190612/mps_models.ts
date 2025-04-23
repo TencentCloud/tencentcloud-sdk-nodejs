@@ -964,6 +964,10 @@ export interface WordResult {
    * 字词结束时间戳，单位秒。
    */
   End?: number
+  /**
+   * 翻译文本
+   */
+  Trans?: string
 }
 
 /**
@@ -4240,6 +4244,16 @@ export interface AudioDenoiseConfig {
 }
 
 /**
+ * MP4配置参数
+ */
+export interface MP4ConfigureInfo {
+  /**
+   * 录制周期，单位：秒，取值范围 10 分钟到720分钟。默认值：60分钟（3600秒）。
+   */
+  Interval?: number
+}
+
+/**
  * 语音鉴黄任务控制参数。
  */
 export interface PornAsrReviewTemplateInfoForUpdate {
@@ -4271,6 +4285,10 @@ export interface LiveRecordTemplate {
    * HLS 配置参数
    */
   HLSConfigure?: HLSConfigureInfo
+  /**
+   * MP4配置参数
+   */
+  MP4Configure?: MP4ConfigureInfo
   /**
    * 录制模板名称。
    */
@@ -9587,7 +9605,10 @@ export interface AiReviewTerrorismTaskOutput {
  */
 export interface ModifyAsrHotwordsRequest {
   /**
-   * 热词库 id
+   * 热词库 id 
+如果热词库是文本热词：Name 和 Content 至少填一个 
+如果热词库是：Name、FileContent 和 FileName 至少填一个 
+
    */
   HotwordsId: string
   /**
@@ -13330,9 +13351,13 @@ export interface ExpressionConfigInfo {
  */
 export interface CreateLiveRecordTemplateRequest {
   /**
-   * HLS 配置参数
+   * HLS配置参数，和MP4Configure需要二选一必填。
    */
-  HLSConfigure: HLSConfigureInfo
+  HLSConfigure?: HLSConfigureInfo
+  /**
+   * MP4配置参数，和HLSConfigure需要二选一必填。
+   */
+  MP4Configure?: MP4ConfigureInfo
   /**
    * 录制模板名称，长度限制：64 个字符。
    */
@@ -15331,10 +15356,15 @@ export interface QualityControlData {
    */
   NoVideo?: boolean
   /**
-   * 视频无参考质量打分，百分制。
+   * 视频无参考质量评分，百分制。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEvaluationScore?: number
+  /**
+   * 视频无参考质量评分，MOS分数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityEvaluationMeanOpinionScore?: number
   /**
    * 内容质检检出异常项。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -17101,9 +17131,13 @@ export interface ModifyLiveRecordTemplateRequest {
    */
   Definition: number
   /**
-   * HLS 配置参数
+   * HLS配置参数，和MP4Configure需要二选一必填。
    */
   HLSConfigure?: HLSConfigureInfo
+  /**
+   * MP4配置参数，和HLSConfigure需要二选一必填。
+   */
+  MP4Configure?: MP4ConfigureInfo
   /**
    * 录制模板名称，长度限制：64 个字符。
    */

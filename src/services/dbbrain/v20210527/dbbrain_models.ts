@@ -312,6 +312,32 @@ export interface CreateDBDiagReportTaskRequest {
 }
 
 /**
+ * ModifyAuditService请求参数结构体
+ */
+export interface ModifyAuditServiceRequest {
+  /**
+   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   */
+  Product: string
+  /**
+   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   */
+  NodeRequestType: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
+   */
+  LogExpireDay: number
+  /**
+   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
+   */
+  HotLogExpireDay: number
+}
+
+/**
  * 库表空间时序数据
  */
 export interface TableSpaceTimeSeries {
@@ -3664,25 +3690,25 @@ export interface InstanceInfo {
 }
 
 /**
- * ModifyUserAutonomyProfile请求参数结构体
+ * DescribeTopSpaceSchemas请求参数结构体
  */
-export interface ModifyUserAutonomyProfileRequest {
+export interface DescribeTopSpaceSchemasRequest {
   /**
-   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）
-   */
-  ProfileType: string
-  /**
-   * 实列ID。
+   * 实例 ID 。
    */
   InstanceId: string
   /**
-   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   * 返回的Top库数量，最大值为100，默认为20。
    */
-  Product: string
+  Limit?: number
   /**
-   * 自治功能相关配置，标准JSON字符串格式。
+   * 筛选Top库所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
    */
-  NewProfileInfo?: string
+  SortBy?: string
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -3898,29 +3924,21 @@ export interface DescribeTopSpaceSchemaTimeSeriesRequest {
 }
 
 /**
- * ModifyAuditService请求参数结构体
+ * DescribeDBDiagReportContent请求参数结构体
  */
-export interface ModifyAuditServiceRequest {
+export interface DescribeDBDiagReportContentRequest {
   /**
-   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
-   */
-  Product: string
-  /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"。
-   */
-  NodeRequestType: string
-  /**
-   * 实例ID。
+   * 实例名
    */
   InstanceId: string
   /**
-   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
+   * 异步任务ID
    */
-  LogExpireDay: number
+  AsyncRequestId: number
   /**
-   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
    */
-  HotLogExpireDay: number
+  Product?: string
 }
 
 /**
@@ -4031,6 +4049,28 @@ export interface DescribeRedisTopBigKeysRequest {
    * 分片节点序号列表。当列表为空时，选择所有分片节点。
    */
   ShardIds?: Array<number | bigint>
+}
+
+/**
+ * ModifyUserAutonomyProfile请求参数结构体
+ */
+export interface ModifyUserAutonomyProfileRequest {
+  /**
+   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）
+   */
+  ProfileType: string
+  /**
+   * 实列ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 自治功能相关配置，标准JSON字符串格式。
+   */
+  NewProfileInfo?: string
 }
 
 /**
@@ -5124,25 +5164,17 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
 }
 
 /**
- * DescribeTopSpaceSchemas请求参数结构体
+ * DescribeDBDiagReportContent返回参数结构体
  */
-export interface DescribeTopSpaceSchemasRequest {
+export interface DescribeDBDiagReportContentResponse {
   /**
-   * 实例 ID 。
+   * 报告内容。
    */
-  InstanceId: string
+  Report?: string
   /**
-   * 返回的Top库数量，最大值为100，默认为20。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 筛选Top库所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
-   */
-  SortBy?: string
-  /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
-   */
-  Product?: string
+  RequestId?: string
 }
 
 /**

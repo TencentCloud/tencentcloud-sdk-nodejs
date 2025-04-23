@@ -571,6 +571,48 @@ export interface DescribeWafAutoDenyRulesRequest {
 }
 
 /**
+ * 重保防护资源信息
+ */
+export interface MajorEventsProPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 申请数量
+   */
+  InquireNum?: number
+  /**
+   * 使用数量
+   */
+  UsedNum?: number
+  /**
+   * 续费标志
+   */
+  RenewFlag?: number
+  /**
+   * 计费项
+   */
+  BillingItem?: string
+}
+
+/**
  * GenerateDealsAndPayNew请求参数结构体
  */
 export interface GenerateDealsAndPayNewRequest {
@@ -7692,6 +7734,10 @@ export interface InstanceInfo {
    * 最近3天最大带宽
    */
   Last3MaxBandwidth?: number
+  /**
+   * 重保增强包
+   */
+  MajorEventsProPkg?: MajorEventsProPkg
 }
 
 /**

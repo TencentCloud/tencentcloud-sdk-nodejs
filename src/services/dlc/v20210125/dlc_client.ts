@@ -164,6 +164,7 @@ import {
   WorkGroups,
   CreateNotebookSessionStatementResponse,
   ListTaskJobLogNameResponse,
+  DescribeClusterMonitorInfosResponse,
   DescribeLakeFsTaskResultRequest,
   OtherCHDFSBinding,
   AlterDMSTableRequest,
@@ -247,6 +248,7 @@ import {
   QueryResultRequest,
   CheckDataEngineImageCanBeRollbackRequest,
   CreateTaskRequest,
+  DescribeClusterMonitorInfosRequest,
   CreateTableRequest,
   TaskMonitorInfo,
   DescribeSparkSessionBatchSqlLogRequest,
@@ -1716,6 +1718,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNotebookSessionStatementResponse) => void
   ): Promise<DescribeNotebookSessionStatementResponse> {
     return this.request("DescribeNotebookSessionStatement", req, cb)
+  }
+
+  /**
+   * 查询任务监控指标信息
+   */
+  async DescribeClusterMonitorInfos(
+    req: DescribeClusterMonitorInfosRequest,
+    cb?: (error: string, rep: DescribeClusterMonitorInfosResponse) => void
+  ): Promise<DescribeClusterMonitorInfosResponse> {
+    return this.request("DescribeClusterMonitorInfos", req, cb)
   }
 
   /**

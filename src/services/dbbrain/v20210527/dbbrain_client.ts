@@ -30,6 +30,7 @@ import {
   DescribeUserAutonomyProfileResponse,
   DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
+  ModifyAuditServiceRequest,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
   DescribeIndexRecommendAggregationSlowLogsRequest,
@@ -163,7 +164,7 @@ import {
   StatDimension,
   AlarmProfileList,
   InstanceInfo,
-  ModifyUserAutonomyProfileRequest,
+  DescribeTopSpaceSchemasRequest,
   TemplateInfo,
   DescribeAuditInstanceListRequest,
   DescribeRedisBigKeyAnalysisTasksRequest,
@@ -174,12 +175,13 @@ import {
   RedisCmdInfo,
   DescribeAlarmTemplateResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
-  ModifyAuditServiceRequest,
+  DescribeDBDiagReportContentRequest,
   DescribeIndexRecommendAggregationSlowLogsResponse,
   DescribeDBDiagEventsResponse,
   DescribeMailProfileResponse,
   CmdCostGroup,
   DescribeRedisTopBigKeysRequest,
+  ModifyUserAutonomyProfileRequest,
   CancelRedisBigKeyAnalysisTasksRequest,
   Process,
   ModifyAuditServiceResponse,
@@ -229,7 +231,7 @@ import {
   DescribeHealthScoreResponse,
   CancelRedisBigKeyAnalysisTasksResponse,
   DescribeSecurityAuditLogExportTasksResponse,
-  DescribeTopSpaceSchemasRequest,
+  DescribeDBDiagReportContentResponse,
   DescribeSlowLogTopSqlsResponse,
   DescribeNoPrimaryKeyTablesResponse,
   DescribeDBPerfTimeSeriesRequest,
@@ -834,6 +836,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 验证用户数据库账号权限，获取会话token。
+   */
+  async VerifyUserAccount(
+    req: VerifyUserAccountRequest,
+    cb?: (error: string, rep: VerifyUserAccountResponse) => void
+  ): Promise<VerifyUserAccountResponse> {
+    return this.request("VerifyUserAccount", req, cb)
+  }
+
+  /**
    * 修改审计配置相关信息，如高频存储时长等
    */
   async ModifyAuditService(
@@ -964,13 +976,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 验证用户数据库账号权限，获取会话token。
+   * 健康报告内容。
    */
-  async VerifyUserAccount(
-    req: VerifyUserAccountRequest,
-    cb?: (error: string, rep: VerifyUserAccountResponse) => void
-  ): Promise<VerifyUserAccountResponse> {
-    return this.request("VerifyUserAccount", req, cb)
+  async DescribeDBDiagReportContent(
+    req: DescribeDBDiagReportContentRequest,
+    cb?: (error: string, rep: DescribeDBDiagReportContentResponse) => void
+  ): Promise<DescribeDBDiagReportContentResponse> {
+    return this.request("DescribeDBDiagReportContent", req, cb)
   }
 
   /**
