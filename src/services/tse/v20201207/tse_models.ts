@@ -2846,6 +2846,14 @@ export interface ConfigFile {
    * 配置文件持久化
    */
   ConfigFilePersistent?: ConfigFilePersistent
+  /**
+   * 是否开启加密算法
+   */
+  Encrypted?: boolean
+  /**
+   * 加密算法
+   */
+  EncryptAlgo?: string
 }
 
 /**
@@ -7031,6 +7039,10 @@ export interface ServiceGovernanceInfo {
    * 引擎关联CLS日志主题信息
    */
   CLSTopics?: Array<PolarisCLSTopicInfo>
+  /**
+   * 子用户密码
+   */
+  SubPassword?: string
 }
 
 /**

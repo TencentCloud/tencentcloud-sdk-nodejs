@@ -16,6 +16,24 @@
  */
 
 /**
+ * 拨测节点数（新建任务页面重构）
+ */
+export interface NodeTree {
+  /**
+   * 节点ID
+   */
+  ID?: string
+  /**
+   * 节点名称
+   */
+  Content?: string
+  /**
+   * 子节点
+   */
+  Children?: Array<NodeLeaf>
+}
+
+/**
  * DescribeNodes请求参数结构体
  */
 export interface DescribeNodesRequest {
@@ -180,6 +198,112 @@ export interface ProbeTaskBasicConfiguration {
    * 拨测目标地址
    */
   TargetAddress: string
+}
+
+/**
+ * 拨测任务
+ */
+export interface ProbeTask {
+  /**
+   * 任务名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 拨测类型
+<li>1 = 页面浏览</li>
+<li> 2 =文件上传 </li>
+<li> 3 = 文件下载</li>
+<li> 4 = 端口性能 </li>
+<li> 5 = 网络质量 </li>
+<li> 6 =流媒体 </li>
+
+即时拨测只支持页面浏览，网络质量，文件下载
+   */
+  TaskType?: number
+  /**
+   * 拨测节点列表
+   */
+  Nodes?: Array<string>
+  /**
+   * 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeIpType?: number
+  /**
+   * 拨测间隔，单位为分钟
+   */
+  Interval?: number
+  /**
+   * 拨测参数
+   */
+  Parameters?: string
+  /**
+   * 任务状态
+<li>1 = 创建中</li>
+<li> 2 = 运行中 </li>
+<li> 3 = 运行异常 </li>
+<li> 4 = 暂停中 </li>
+<li> 5 = 暂停异常 </li>
+<li> 6 = 任务暂停 </li>
+<li> 7 = 任务删除中 </li>
+<li> 8 = 任务删除异常 </li>
+<li> 9 = 任务删除</li>
+<li> 10 = 定时任务暂停中 </li>
+   */
+  Status?: number
+  /**
+   * 目标地址
+   */
+  TargetAddress?: string
+  /**
+   * 付费模式
+<li>1 = 试用版本</li>
+<li> 2 = 付费版本 </li>
+   */
+  PayMode?: number
+  /**
+   * 订单状态
+<li>1 = 正常</li>
+<li> 2 = 欠费 </li>
+   */
+  OrderState?: number
+  /**
+   * 任务分类
+<li>1 = PC</li>
+<li> 2 = Mobile </li>
+   */
+  TaskCategory?: number
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 定时任务cron表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cron?: string
+  /**
+   * 定时任务启动状态
+<li>1 = 定时任务表达式生效</li>
+<li> 2 = 定时任务表达式未生效（一般为任务手动暂停）</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronState?: number
+  /**
+   * 任务当前绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagInfoList?: Array<KeyValuePair>
+  /**
+   * 是否为同步账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubSyncFlag?: number
 }
 
 /**
@@ -359,6 +483,20 @@ export interface SingleInstantTask {
    * 节点类型
    */
   TaskCategory: number
+}
+
+/**
+ * Node节点基本信息，用于新建任务页面重构节点选择
+ */
+export interface NodeInfoBase {
+  /**
+   * 节点code
+   */
+  ID?: string
+  /**
+   * 节点名称
+   */
+  Content?: string
 }
 
 /**
@@ -647,109 +785,21 @@ export interface CreateProbeTasksRequest {
 }
 
 /**
- * 拨测任务
+ * 子节点。用于新建任务重构页面的节点选择
  */
-export interface ProbeTask {
+export interface NodeLeaf {
   /**
-   * 任务名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 子节点ID
    */
-  Name?: string
+  ID?: string
   /**
-   * 任务 ID
+   * 子节点名称
    */
-  TaskId?: string
+  Content?: string
   /**
-   * 拨测类型
-<li>1 = 页面浏览</li>
-<li> 2 =文件上传 </li>
-<li> 3 = 文件下载</li>
-<li> 4 = 端口性能 </li>
-<li> 5 = 网络质量 </li>
-<li> 6 =流媒体 </li>
-
-即时拨测只支持页面浏览，网络质量，文件下载
+   * 节点列表
    */
-  TaskType?: number
-  /**
-   * 拨测节点列表
-   */
-  Nodes?: Array<string>
-  /**
-   * 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NodeIpType?: number
-  /**
-   * 拨测间隔，单位为分钟
-   */
-  Interval?: number
-  /**
-   * 拨测参数
-   */
-  Parameters?: string
-  /**
-   * 任务状态
-<li>1 = 创建中</li>
-<li> 2 = 运行中 </li>
-<li> 3 = 运行异常 </li>
-<li> 4 = 暂停中 </li>
-<li> 5 = 暂停异常 </li>
-<li> 6 = 任务暂停 </li>
-<li> 7 = 任务删除中 </li>
-<li> 8 = 任务删除异常 </li>
-<li> 9 = 任务删除</li>
-<li> 10 = 定时任务暂停中 </li>
-   */
-  Status?: number
-  /**
-   * 目标地址
-   */
-  TargetAddress?: string
-  /**
-   * 付费模式
-<li>1 = 试用版本</li>
-<li> 2 = 付费版本 </li>
-   */
-  PayMode?: number
-  /**
-   * 订单状态
-<li>1 = 正常</li>
-<li> 2 = 欠费 </li>
-   */
-  OrderState?: number
-  /**
-   * 任务分类
-<li>1 = PC</li>
-<li> 2 = Mobile </li>
-   */
-  TaskCategory?: number
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 定时任务cron表达式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cron?: string
-  /**
-   * 定时任务启动状态
-<li>1 = 定时任务表达式生效</li>
-<li> 2 = 定时任务表达式未生效（一般为任务手动暂停）</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CronState?: number
-  /**
-   * 任务当前绑定的标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagInfoList?: Array<KeyValuePair>
-  /**
-   * 是否为同步账号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubSyncFlag?: number
+  Children?: Array<NodeInfoBase>
 }
 
 /**
@@ -1035,6 +1085,20 @@ export interface Tag {
 }
 
 /**
+ * 省份(国际)或运营商基本信息
+ */
+export interface DistinctOrNetServiceInfo {
+  /**
+   * 省份(国际)或运营商ID
+   */
+  ID?: string
+  /**
+   * 名称
+   */
+  Name?: string
+}
+
+/**
  * DescribeNodes返回参数结构体
  */
 export interface DescribeNodesResponse {
@@ -1067,6 +1131,21 @@ export interface DescribeProbeMetricDataResponse {
  * DescribeNodeGroups返回参数结构体
  */
 export interface DescribeNodeGroupsResponse {
+  /**
+   * 树状节点列表，总共两级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeList?: Array<NodeTree>
+  /**
+   * 省份或国家列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DistrictList?: Array<DistinctOrNetServiceInfo>
+  /**
+   * 运营商列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetServiceList?: Array<DistinctOrNetServiceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

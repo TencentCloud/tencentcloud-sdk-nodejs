@@ -58,7 +58,7 @@ export interface RocketMQNamespace {
  */
 export interface CreateRabbitMQBindingResponse {
   /**
-   * 实例名称
+   * 实例 ID
    */
   InstanceId?: string
   /**
@@ -286,15 +286,15 @@ export interface DescribeAllTenantsResponse {
  */
 export interface DescribeRabbitMQNodeListRequest {
   /**
-   * rabbitmq集群ID
+   * 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * 偏移量
+   * 偏移量，默认值 0
    */
   Offset?: number
   /**
-   * 一页限制
+   * 一页限制,moren
    */
   Limit?: number
   /**
@@ -302,16 +302,16 @@ export interface DescribeRabbitMQNodeListRequest {
    */
   NodeName?: string
   /**
-   * 过滤参数的名字和数值
-现在只有一个nodeStatus
-running/down
-数组类型，兼容后续添加过滤参数
+   * 过滤参数的名字和数值，当前仅支持根据节点状态筛选。
+"Name": "nodeStatus"
+"Value": running or down
 
    */
   Filters?: Array<Filter>
   /**
    * 按指定元素排序，现在只有2个
-cpuUsage/diskUsage
+cpuUsage：节点CPU利用率
+diskUsage：节点磁盘利用率
    */
   SortElement?: string
   /**
@@ -511,15 +511,15 @@ export interface RocketMQGroup {
  */
 export interface ModifyRabbitMQUserRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * 用户名，登录时使用
+   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
    */
   User: string
   /**
-   * 密码，登录时使用
+   * 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项
    */
   Password: string
   /**
@@ -527,7 +527,8 @@ export interface ModifyRabbitMQUserRequest {
    */
   Description?: string
   /**
-   * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围，不传则不修改
+   * 用户标签，用于决定改用户访问 RabbitMQ Management 的权限范围
+management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户
    */
   Tags?: Array<string>
   /**
@@ -1799,15 +1800,15 @@ export interface DescribeRocketMQSourceClusterTopicListResponse {
  */
 export interface DeleteRabbitMQPermissionRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * 用户名，登录时使用
+   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
    */
   User: string
   /**
-   * vhost名称
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到 Vhost 名称。
    */
   VirtualHost: string
 }
@@ -2246,7 +2247,7 @@ export interface DeleteRabbitMQPermissionResponse {
  */
 export interface DeleteRabbitMQBindingResponse {
   /**
-   * 实例名称
+   * 实例 ID
    */
   InstanceId?: string
   /**
@@ -2697,11 +2698,11 @@ export interface SendBatchMessagesRequest {
  */
 export interface DescribeRabbitMQNodeListResponse {
   /**
-   * 集群列表数量
+   * 集群节点数量
    */
   TotalCount?: number
   /**
-   * 集群列表
+   * 集群节点列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeList?: Array<RabbitMQPrivateNode>
@@ -2918,11 +2919,11 @@ export interface ImportRocketMQTopicsRequest {
  */
 export interface DeleteRabbitMQVipInstanceResponse {
   /**
-   * 订单号Id
+   * 订单号 ID
    */
   TranId?: string
   /**
-   * 实例Id
+   * 实例 ID
    */
   InstanceId?: string
   /**
@@ -3044,7 +3045,7 @@ export interface DescribeBindClustersResponse {
  */
 export interface ModifyRabbitMQVirtualHostRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
@@ -3052,7 +3053,7 @@ export interface ModifyRabbitMQVirtualHostRequest {
    */
   VirtualHost: string
   /**
-   * 描述
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   Description?: string
   /**
@@ -3130,11 +3131,11 @@ export interface CreateRabbitMQVipInstanceRequest {
    */
   ZoneIds: Array<number | bigint>
   /**
-   * 私有网络VpcId
+   * 私有网络ID，形如 vpc-xxx。有效的 VpcId 可通过登录[私有网络](https://console.cloud.tencent.com/vpc/vpc?rid=1)控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372)，从接口返回中的 unVpcId 字段获取。若在创建子机时 VpcId 与 SubnetId 同时传入 DEFAULT，则强制使用默认 vpc 网络。
    */
   VpcId: string
   /**
-   * 私有网络SubnetId
+   * 私有网络子网 ID，形如 subnet-xxx。有效的私有网络子网 ID 可通过登录[子网控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的 unSubnetId 字段获取。若在创建子机时 SubnetId 与 VpcId 同时传入 DEFAULT，则强制使用默认 vpc 网络。
    */
   SubnetId: string
   /**
@@ -3142,7 +3143,16 @@ export interface CreateRabbitMQVipInstanceRequest {
    */
   ClusterName: string
   /**
-   * 节点规格,基础型rabbit-vip-basic-1,标准型rabbit-vip-basic-2,高阶1型rabbit-vip-basic-3,高阶2型rabbit-vip-basic-4。不传默认为基础型
+   * 集群的节点规格，需要输入对应的规格标识：
+2C8G：rabbit-vip-basic-2c8g
+4C16G：rabbit-vip-basic-4c16g
+8C32G：rabbit-vip-basic-8c32g
+16C32G：rabbit-vip-basic-4
+16C64G：rabbit-vip-basic-16c64g
+2C4G：rabbit-vip-basic-5
+4C8G：rabbit-vip-basic-1
+8C16G（已售罄）：rabbit-vip-basic-2
+不传默认为 4C8G：rabbit-vip-basic-1
    */
   NodeSpec?: string
   /**
@@ -3154,11 +3164,11 @@ export interface CreateRabbitMQVipInstanceRequest {
    */
   StorageSize?: number
   /**
-   * 镜像队列,不传默认为false
+   * 是否开启默认镜像队列，true 表示为开启，false 表示为不开启。不传默认为 false
    */
   EnableCreateDefaultHaMirrorQueue?: boolean
   /**
-   * 预付费使用。自动续费,不传默认为true
+   * 仅预付费集群（PayMode 参数为 1 时）使用该参数，表示是否自动续费，true 表示打开自动续费。不传默认为 true
    */
   AutoRenewFlag?: boolean
   /**
@@ -3182,7 +3192,7 @@ export interface CreateRabbitMQVipInstanceRequest {
    */
   ResourceTags?: Array<Tag>
   /**
-   * 公网带宽大小，单位 M
+   * 公网带宽大小，单位 Mbps
    */
   Bandwidth?: number
   /**
@@ -5205,11 +5215,11 @@ TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入,
  */
 export interface DeleteRabbitMQBindingRequest {
   /**
-   * 实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * Vhost参数
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
   /**
@@ -5329,7 +5339,7 @@ export interface DeleteRabbitMQVirtualHostResponse {
  */
 export interface CreateRabbitMQVirtualHostRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
@@ -5586,7 +5596,7 @@ export interface CreateCmqQueueResponse {
  */
 export interface DeleteRabbitMQVipInstanceRequest {
   /**
-   * 实例Id
+   * 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
@@ -5684,11 +5694,11 @@ export interface DescribeRabbitMQPermissionRequest {
  */
 export interface DeleteRabbitMQUserRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * 用户名，登录时使用
+   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
    */
   User: string
 }
@@ -7643,15 +7653,15 @@ export interface DescribeAMQPClustersResponse {
  */
 export interface ModifyRabbitMQPermissionRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * 用户名，权限关联的用户
+   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
    */
   User: string
   /**
-   * vhost名称
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
   /**
@@ -7946,7 +7956,7 @@ export type DescribeBindClustersRequest = null
  */
 export interface CreateRabbitMQUserRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
@@ -7954,7 +7964,7 @@ export interface CreateRabbitMQUserRequest {
    */
   User: string
   /**
-   * 密码，登录时使用
+   * 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项
    */
   Password: string
   /**
@@ -8360,11 +8370,11 @@ export interface ModifyRocketMQRoleResponse {
  */
 export interface CreateRabbitMQBindingRequest {
   /**
-   * 实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * Vhost名称
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
   /**
@@ -8456,16 +8466,16 @@ export interface DescribeRocketMQPublicAccessPointRequest {
 }
 
 /**
- * RabbitMQ节点信息
+ * RabbitMQ 节点信息
  */
 export interface RabbitMQPrivateNode {
   /**
    * 节点名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeName: string
+  NodeName?: string
   /**
-   * 节点状态
+   * 节点状态，running 运行中，down 异常
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeStatus?: string
@@ -9854,11 +9864,11 @@ status - 实例状态
  */
 export interface DeleteRabbitMQVirtualHostRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * vhost名
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
 }
@@ -9868,11 +9878,11 @@ export interface DeleteRabbitMQVirtualHostRequest {
  */
 export interface CreateRabbitMQVipInstanceResponse {
   /**
-   * 订单号Id
+   * 订单号 ID
    */
   TranId?: string
   /**
-   * 实例Id
+   * 实例 ID
    */
   InstanceId?: string
   /**

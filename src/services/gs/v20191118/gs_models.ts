@@ -58,6 +58,16 @@ export interface StartPublishStreamToCSSResponse {
 }
 
 /**
+ * FetchAndroidInstancesLogs返回参数结构体
+ */
+export interface FetchAndroidInstancesLogsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAndroidApp请求参数结构体
  */
 export interface CreateAndroidAppRequest {
@@ -240,21 +250,13 @@ export interface DeleteAndroidAppResponse {
 }
 
 /**
- * DescribeAndroidInstanceLabels返回参数结构体
+ * ModifyAndroidInstancesInformation请求参数结构体
  */
-export interface DescribeAndroidInstanceLabelsResponse {
+export interface ModifyAndroidInstancesInformationRequest {
   /**
-   * 安卓实例标签总数
+   * 安卓实例信息数据
    */
-  Total?: number
-  /**
-   * 安卓实例标签列表
-   */
-  Labels?: Array<AndroidInstanceLabel>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AndroidInstanceInformations: Array<AndroidInstanceInformation>
 }
 
 /**
@@ -931,6 +933,24 @@ export interface SyncExecuteCommandResult {
 }
 
 /**
+ * DescribeAndroidInstanceLabels返回参数结构体
+ */
+export interface DescribeAndroidInstanceLabelsResponse {
+  /**
+   * 安卓实例标签总数
+   */
+  Total?: number
+  /**
+   * 安卓实例标签列表
+   */
+  Labels?: Array<AndroidInstanceLabel>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestartAndroidInstancesApp返回参数结构体
  */
 export interface RestartAndroidInstancesAppResponse {
@@ -1188,6 +1208,20 @@ export interface SyncAndroidInstanceImageRequest {
    * 目的同步可用区列表
    */
   DestinationZones: Array<string>
+}
+
+/**
+ * 安卓实例信息
+ */
+export interface AndroidInstanceInformation {
+  /**
+   * 安卓实例 ID
+   */
+  AndroidInstanceId: string
+  /**
+   * 实例名称
+   */
+  Name: string
 }
 
 /**
@@ -1727,6 +1761,16 @@ export interface COSOptions {
 }
 
 /**
+ * ModifyAndroidInstancesInformation返回参数结构体
+ */
+export interface ModifyAndroidInstancesInformationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCosCredential返回参数结构体
  */
 export interface CreateCosCredentialResponse {
@@ -2047,6 +2091,32 @@ export interface CreateAndroidAppVersionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * FetchAndroidInstancesLogs请求参数结构体
+ */
+export interface FetchAndroidInstancesLogsRequest {
+  /**
+   * 安卓实例 ID 列表
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * cos 桶名称
+   */
+  BucketName: string
+  /**
+   * cos 桶区域
+   */
+  BucketRegion: string
+  /**
+   * cos 桶目录，默认为 /log/
+   */
+  BucketDirectory?: string
+  /**
+   * 下载最近几天的日志，默认值为 1
+   */
+  RecentDays?: number
 }
 
 /**

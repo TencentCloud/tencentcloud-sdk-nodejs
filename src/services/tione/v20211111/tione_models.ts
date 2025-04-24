@@ -190,6 +190,14 @@ HYBRID_PAID:
    * ["sleep","60"]
    */
   PreStopCommand?: Array<string>
+  /**
+   * 是否启用 grpc 端口
+   */
+  GrpcEnable?: boolean
+  /**
+   * 健康探针
+   */
+  HealthProbe?: HealthProbe
 }
 
 /**
@@ -544,41 +552,29 @@ export interface Usage {
 }
 
 /**
- * DescribeBillingResourceGroups请求参数结构体
+ * AuthToken 的基础信息
  */
-export interface DescribeBillingResourceGroupsRequest {
+export interface AuthTokenBase {
   /**
-   * 资源组类型;
-枚举值:
-空: 通用, TRAIN: 训练, INFERENCE: 推理
+   * token 值
    */
-  Type?: string
+  Value?: string
   /**
-   * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)                    ResourceGroupName (资源组名称列表)                    AvailableNodeCount（资源组中可用节点数量）Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100
+   * token 别名
    */
-  Filters?: Array<Filter>
+  Name?: string
   /**
-   * 标签过滤
+   * token 描述
    */
-  TagFilters?: Array<TagFilter>
+  Description?: string
   /**
-   * 偏移量，默认为0；分页查询起始位置，如：Limit为100，第一页Offset为0，第二页OffSet为100....即每页左边为闭区间
+   * token 创建时间
    */
-  Offset?: number
+  CreateTime?: string
   /**
-   * 分页查询每页大小，默认20
+   * token状态
    */
-  Limit?: number
-  /**
-   * 支持模糊查找资源组id和资源组名
-   */
-  SearchWord?: string
-  /**
-   * 是否不展示节点列表; 
-true: 不展示，false 展示；
-默认为false
-   */
-  DontShowInstanceSet?: boolean
+  Status?: string
 }
 
 /**
@@ -636,87 +632,17 @@ Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
 }
 
 /**
- * CreateDataset请求参数结构体
+ * 代码仓库配置
  */
-export interface CreateDatasetRequest {
+export interface CodeRepoConfig {
   /**
-   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * 代码仓库Id
    */
-  DatasetName: string
+  Id: string
   /**
-   * 数据集类型:
-TYPE_DATASET_TEXT，文本
-TYPE_DATASET_IMAGE，图片
-TYPE_DATASET_TABLE，表格
-TYPE_DATASET_OTHER，其他
+   * 代码仓下载目标地址
    */
-  DatasetType?: string
-  /**
-   * 数据源cos路径
-   */
-  StorageDataPath?: CosPathInfo
-  /**
-   * 数据集标签cos存储路径
-   */
-  StorageLabelPath?: CosPathInfo
-  /**
-   * 数据集标签
-   */
-  DatasetTags?: Array<Tag>
-  /**
-   * 数据集标注状态:
-STATUS_NON_ANNOTATED，未标注
-STATUS_ANNOTATED，已标注
-   */
-  AnnotationStatus?: string
-  /**
-   * 标注类型:
-ANNOTATION_TYPE_CLASSIFICATION，图片分类
-ANNOTATION_TYPE_DETECTION，目标检测
-ANNOTATION_TYPE_SEGMENTATION，图片分割
-ANNOTATION_TYPE_TRACKING，目标跟踪
-ANNOTATION_TYPE_OCR，OCR
-ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
-   */
-  AnnotationType?: string
-  /**
-   * 标注格式:
-ANNOTATION_FORMAT_TI，TI平台格式
-ANNOTATION_FORMAT_PASCAL，Pascal Voc
-ANNOTATION_FORMAT_COCO，COCO
-ANNOTATION_FORMAT_FILE，文件目录结构
-ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
-ANNOTATION_FORMAT_TXT，文本类型TXT格式
-ANNOTATION_FORMAT_CSV，文本类型CSV格式
-ANNOTATION_FORMAT_JSON，文本类型JSON格式
-   */
-  AnnotationFormat?: string
-  /**
-   * 表头信息
-   */
-  SchemaInfos?: Array<SchemaInfo>
-  /**
-   * 数据是否存在表头
-   */
-  IsSchemaExisted?: boolean
-  /**
-   * 导入文件粒度
-TYPE_TEXT_LINE，按行
-TYPE_TEXT_FILE，按文件
-   */
-  ContentType?: string
-  /**
-   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
-   */
-  DatasetScene?: string
-  /**
-   * 数据集标签。
-   */
-  SceneTags?: Array<string>
-  /**
-   * 数据集CFS配置。仅支持LLM场景
-   */
-  CFSConfig?: CFSConfig
+  TargetPath: string
 }
 
 /**
@@ -1177,13 +1103,19 @@ export interface StartNotebookResponse {
 }
 
 /**
- * DescribeTrainingTaskPods请求参数结构体
+ * 配置CFSTurbo参数
  */
-export interface DescribeTrainingTaskPodsRequest {
+export interface CFSTurbo {
   /**
-   * 训练任务ID
+   * CFSTurbo实例id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
+  /**
+   * CFSTurbo路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
 }
 
 /**
@@ -1510,6 +1442,14 @@ HYBRID_PAID:
    * ["sleep","60"]
    */
   PreStopCommand?: Array<string>
+  /**
+   * 是否启动grpc端口
+   */
+  GrpcEnable?: boolean
+  /**
+   * 健康探针
+   */
+  HealthProbe?: HealthProbe
 }
 
 /**
@@ -1883,6 +1823,16 @@ export interface DescribeModelServiceGroupsResponse {
 }
 
 /**
+ * http get 行为
+ */
+export interface HTTPGetAction {
+  /**
+   * http 路径
+   */
+  Path?: string
+}
+
+/**
  * DescribeBillingResourceInstanceRunningJobs返回参数结构体
  */
 export interface DescribeBillingResourceInstanceRunningJobsResponse {
@@ -2225,6 +2175,44 @@ export interface GooseFS {
 }
 
 /**
+ * DescribeBillingResourceGroups请求参数结构体
+ */
+export interface DescribeBillingResourceGroupsRequest {
+  /**
+   * 资源组类型;
+枚举值:
+空: 通用, TRAIN: 训练, INFERENCE: 推理
+   */
+  Type?: string
+  /**
+   * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)                    ResourceGroupName (资源组名称列表)                    AvailableNodeCount（资源组中可用节点数量）Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签过滤
+   */
+  TagFilters?: Array<TagFilter>
+  /**
+   * 偏移量，默认为0；分页查询起始位置，如：Limit为100，第一页Offset为0，第二页OffSet为100....即每页左边为闭区间
+   */
+  Offset?: number
+  /**
+   * 分页查询每页大小，默认20
+   */
+  Limit?: number
+  /**
+   * 支持模糊查找资源组id和资源组名
+   */
+  SearchWord?: string
+  /**
+   * 是否不展示节点列表; 
+true: 不展示，false 展示；
+默认为false
+   */
+  DontShowInstanceSet?: boolean
+}
+
+/**
  * 键值对
  */
 export interface Option {
@@ -2554,6 +2542,10 @@ export interface PrivateLinkInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
+  /**
+   * grpc内网调用地址
+   */
+  InnerGrpcAddr?: Array<string>
 }
 
 /**
@@ -3141,6 +3133,14 @@ HYBRID_PAID:
    * 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束
    */
   PreStopCommand?: Array<string>
+  /**
+   * 是否启用grpc端口
+   */
+  GrpcEnable?: boolean
+  /**
+   * 健康探针
+   */
+  HealthProbe?: HealthProbe
 }
 
 /**
@@ -3631,6 +3631,20 @@ export interface DeleteTrainingTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 在线服务的 AuthToken 数据
+ */
+export interface AuthToken {
+  /**
+   * AuthToken 基础信息
+   */
+  Base?: AuthTokenBase
+  /**
+   * AuthToken 限流数组
+   */
+  Limits?: Array<AuthTokenLimit>
 }
 
 /**
@@ -4331,6 +4345,16 @@ export interface PodInfo {
 }
 
 /**
+ * 探针行为
+ */
+export interface ProbeAction {
+  /**
+   * http get 行为
+   */
+  HTTPGet?: HTTPGetAction
+}
+
+/**
  * 模型描述信息
  */
 export interface ModelInfo {
@@ -4390,17 +4414,87 @@ export interface ModelInfo {
 }
 
 /**
- * 代码仓库配置
+ * CreateDataset请求参数结构体
  */
-export interface CodeRepoConfig {
+export interface CreateDatasetRequest {
   /**
-   * 代码仓库Id
+   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
    */
-  Id: string
+  DatasetName: string
   /**
-   * 代码仓下载目标地址
+   * 数据集类型:
+TYPE_DATASET_TEXT，文本
+TYPE_DATASET_IMAGE，图片
+TYPE_DATASET_TABLE，表格
+TYPE_DATASET_OTHER，其他
    */
-  TargetPath: string
+  DatasetType?: string
+  /**
+   * 数据源cos路径
+   */
+  StorageDataPath?: CosPathInfo
+  /**
+   * 数据集标签cos存储路径
+   */
+  StorageLabelPath?: CosPathInfo
+  /**
+   * 数据集标签
+   */
+  DatasetTags?: Array<Tag>
+  /**
+   * 数据集标注状态:
+STATUS_NON_ANNOTATED，未标注
+STATUS_ANNOTATED，已标注
+   */
+  AnnotationStatus?: string
+  /**
+   * 标注类型:
+ANNOTATION_TYPE_CLASSIFICATION，图片分类
+ANNOTATION_TYPE_DETECTION，目标检测
+ANNOTATION_TYPE_SEGMENTATION，图片分割
+ANNOTATION_TYPE_TRACKING，目标跟踪
+ANNOTATION_TYPE_OCR，OCR
+ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
+   */
+  AnnotationType?: string
+  /**
+   * 标注格式:
+ANNOTATION_FORMAT_TI，TI平台格式
+ANNOTATION_FORMAT_PASCAL，Pascal Voc
+ANNOTATION_FORMAT_COCO，COCO
+ANNOTATION_FORMAT_FILE，文件目录结构
+ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
+ANNOTATION_FORMAT_TXT，文本类型TXT格式
+ANNOTATION_FORMAT_CSV，文本类型CSV格式
+ANNOTATION_FORMAT_JSON，文本类型JSON格式
+   */
+  AnnotationFormat?: string
+  /**
+   * 表头信息
+   */
+  SchemaInfos?: Array<SchemaInfo>
+  /**
+   * 数据是否存在表头
+   */
+  IsSchemaExisted?: boolean
+  /**
+   * 导入文件粒度
+TYPE_TEXT_LINE，按行
+TYPE_TEXT_FILE，按文件
+   */
+  ContentType?: string
+  /**
+   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
+   */
+  DatasetScene?: string
+  /**
+   * 数据集标签。
+   */
+  SceneTags?: Array<string>
+  /**
+   * 数据集CFS配置。仅支持LLM场景
+   */
+  CFSConfig?: CFSConfig
 }
 
 /**
@@ -4530,6 +4624,14 @@ UPDATING 更新中
    * 服务组的app_id
    */
   AppId?: number
+  /**
+   * 是否开启鉴权
+   */
+  AuthorizationEnable?: boolean
+  /**
+   * 限流鉴权 token 列表
+   */
+  AuthTokens?: Array<AuthToken>
 }
 
 /**
@@ -4581,6 +4683,20 @@ export interface DescribeNotebookResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AuthToken 限流信息
+ */
+export interface AuthTokenLimit {
+  /**
+   * 限频策略：PerMinute 每分钟限频；PerDay 每日限频
+   */
+  Strategy?: string
+  /**
+   * 上限值
+   */
+  Max?: number
 }
 
 /**
@@ -5218,6 +5334,18 @@ export interface ServiceCallInfoV2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthToken?: string
+  /**
+   * LLM token 列表
+   */
+  AuthTokens?: Array<AuthToken>
+  /**
+   * 是否开启限流
+   */
+  EnableLimit?: boolean
+  /**
+   * 访问grpc时需携带的虚拟Host
+   */
+  GrpcHost?: string
 }
 
 /**
@@ -5307,19 +5435,13 @@ export interface GooseFSx {
 }
 
 /**
- * 配置CFSTurbo参数
+ * DescribeTrainingTaskPods请求参数结构体
  */
-export interface CFSTurbo {
+export interface DescribeTrainingTaskPodsRequest {
   /**
-   * CFSTurbo实例id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 训练任务ID
    */
-  Id?: string
-  /**
-   * CFSTurbo路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Path?: string
+  Id: string
 }
 
 /**
@@ -5498,6 +5620,24 @@ export interface StopTrainingTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 健康探针
+ */
+export interface HealthProbe {
+  /**
+   * 存活探针
+   */
+  LivenessProbe?: Probe
+  /**
+   * 就绪探针
+   */
+  ReadinessProbe?: Probe
+  /**
+   * 启动探针
+   */
+  StartupProbe?: Probe
 }
 
 /**
@@ -5806,6 +5946,36 @@ export interface DescribeTrainingTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 探针结构信息
+ */
+export interface Probe {
+  /**
+   * 探针行为
+   */
+  ProbeAction?: ProbeAction
+  /**
+   * 等待服务启动的延迟
+   */
+  InitialDelaySeconds?: number
+  /**
+   * 轮询检查时间间隔
+   */
+  PeriodSeconds?: number
+  /**
+   * 检查超时时长
+   */
+  TimeoutSeconds?: number
+  /**
+   * 检测失败认定次数
+   */
+  FailureThreshold?: number
+  /**
+   * 检测成功认定次数，就绪默认 3，存活/启动默认 1
+   */
+  SuccessThreshold?: number
 }
 
 /**

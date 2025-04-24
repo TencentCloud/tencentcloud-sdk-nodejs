@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  NodeTree,
   DescribeNodesRequest,
   Label,
   Field,
@@ -26,11 +27,13 @@ import {
   SuspendProbeTaskResponse,
   DescribeProbeNodesResponse,
   ProbeTaskBasicConfiguration,
+  ProbeTask,
   DescribeInstantTasksResponse,
   DescribeDetailedSingleProbeDataRequest,
   DescribeProbeTasksResponse,
   UpdateProbeTaskAttributesResponse,
   SingleInstantTask,
+  NodeInfoBase,
   DeleteProbeTaskRequest,
   DescribeDetailedSingleProbeDataResponse,
   SuspendProbeTaskRequest,
@@ -40,7 +43,7 @@ import {
   DescribeInstantTasksRequest,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
-  ProbeTask,
+  NodeLeaf,
   DescribeNodeGroupsRequest,
   ResumeProbeTaskResponse,
   DeleteProbeTaskResponse,
@@ -50,6 +53,7 @@ import {
   DescribeProbeNodesRequest,
   NodeDefine,
   Tag,
+  DistinctOrNetServiceInfo,
   DescribeNodesResponse,
   DescribeProbeMetricDataResponse,
   DescribeNodeGroupsResponse,

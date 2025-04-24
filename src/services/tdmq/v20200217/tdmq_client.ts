@@ -1172,7 +1172,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * RabbitMQ专享版查询节点列表
+   * 查询 RabbitMQ 托管版节点列表
    */
   async DescribeRabbitMQNodeList(
     req: DescribeRabbitMQNodeListRequest,
@@ -1326,7 +1326,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建RabbitMQ专享版实例
+   * 创建 RabbitMQ 托管版实例
    */
   async CreateRabbitMQVipInstance(
     req: CreateRabbitMQVipInstanceRequest,
@@ -1748,7 +1748,7 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 删除RabbitMQ专享版实例
+   * 删除 RabbitMQ 托管版实例
    */
   async DeleteRabbitMQVipInstance(
     req: DeleteRabbitMQVipInstanceRequest,

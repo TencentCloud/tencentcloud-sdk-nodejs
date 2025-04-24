@@ -21,6 +21,7 @@ import {
   DescribeAndroidInstanceTasksStatusResponse,
   ExecuteCommandOnAndroidInstancesResponse,
   StartPublishStreamToCSSResponse,
+  FetchAndroidInstancesLogsResponse,
   CreateAndroidAppRequest,
   CreateSessionRequest,
   RestoreAndroidInstanceFromStorageRequest,
@@ -29,7 +30,7 @@ import {
   StopAndroidInstancesAppResponse,
   ModifyAndroidAppVersionResponse,
   DeleteAndroidAppResponse,
-  DescribeAndroidInstanceLabelsResponse,
+  ModifyAndroidInstancesInformationRequest,
   AndroidApp,
   ModifyAndroidAppRequest,
   DescribeAndroidAppsResponse,
@@ -72,6 +73,7 @@ import {
   StopPublishStreamRequest,
   AndroidAppCosInfo,
   SyncExecuteCommandResult,
+  DescribeAndroidInstanceLabelsResponse,
   RestartAndroidInstancesAppResponse,
   DescribeAndroidInstanceTasksStatusRequest,
   CreateAndroidInstancesScreenshotResponse,
@@ -89,6 +91,7 @@ import {
   DescribeAndroidInstancesRequest,
   DescribeAndroidInstancesResponse,
   SyncAndroidInstanceImageRequest,
+  AndroidInstanceInformation,
   ModifyAndroidInstanceResolutionRequest,
   AndroidAppVersionInfo,
   DeleteAndroidAppVersionRequest,
@@ -120,6 +123,7 @@ import {
   CreateAndroidInstanceLabelRequest,
   AndroidInstance,
   COSOptions,
+  ModifyAndroidInstancesInformationResponse,
   CreateCosCredentialResponse,
   CreateAndroidInstancesRequest,
   CreateAndroidInstanceLabelResponse,
@@ -134,6 +138,7 @@ import {
   ModifyAndroidInstancesResolutionRequest,
   LabelRequirement,
   CreateAndroidAppVersionResponse,
+  FetchAndroidInstancesLogsRequest,
   BackUpAndroidInstanceToStorageResponse,
   CreateAndroidInstanceSSHRequest,
   CreateAndroidAppResponse,
@@ -268,6 +273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAndroidInstanceImagesResponse) => void
   ): Promise<DeleteAndroidInstanceImagesResponse> {
     return this.request("DeleteAndroidInstanceImages", req, cb)
+  }
+
+  /**
+   * 批量修改安卓实例信息
+   */
+  async ModifyAndroidInstancesInformation(
+    req: ModifyAndroidInstancesInformationRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesInformationResponse) => void
+  ): Promise<ModifyAndroidInstancesInformationResponse> {
+    return this.request("ModifyAndroidInstancesInformation", req, cb)
   }
 
   /**
@@ -622,6 +637,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAndroidAppResponse) => void
   ): Promise<DeleteAndroidAppResponse> {
     return this.request("DeleteAndroidApp", req, cb)
+  }
+
+  /**
+   * 批量获取安卓实例日志
+   */
+  async FetchAndroidInstancesLogs(
+    req: FetchAndroidInstancesLogsRequest,
+    cb?: (error: string, rep: FetchAndroidInstancesLogsResponse) => void
+  ): Promise<FetchAndroidInstancesLogsResponse> {
+    return this.request("FetchAndroidInstancesLogs", req, cb)
   }
 
   /**

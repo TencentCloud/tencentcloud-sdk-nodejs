@@ -696,8 +696,13 @@ export interface StaffInfo {
   RoleId?: number
   /**
    * 用户角色id列表
+   * @deprecated
    */
   RoleIdList?: number
+  /**
+   * 用户角色id列表
+   */
+  RoleList?: Array<number | bigint>
   /**
    * 所属技能组列表
    */

@@ -138,6 +138,16 @@ it("gs.v20191118.DeleteAndroidInstanceImages", async function () {
     }
 })
 
+it("gs.v20191118.ModifyAndroidInstancesInformation", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesInformation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DescribeAndroidInstanceLabels", async function () {
     try {
        const data = await client.DescribeAndroidInstanceLabels({})
@@ -481,6 +491,16 @@ it("gs.v20191118.DestroyAndroidInstances", async function () {
 it("gs.v20191118.DeleteAndroidApp", async function () {
     try {
        const data = await client.DeleteAndroidApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.FetchAndroidInstancesLogs", async function () {
+    try {
+       const data = await client.FetchAndroidInstancesLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
