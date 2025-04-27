@@ -420,7 +420,7 @@ export interface DescribeSubscriptionStatusResponse {
   /**
    * 设备GB28181报警订阅状态 1：未开启订阅；2：已开启订阅
    */
-  AlarmStatus: number
+  AlarmStatus?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -704,7 +704,7 @@ export interface DescribeDeviceMonitorDataResponse {
   /**
    * 查询设备统计monitor信息列表
    */
-  Data: Array<DeviceMonitorValue>
+  Data?: Array<DeviceMonitorValue>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1941,11 +1941,11 @@ export interface DescribeLiveRecordPlanIdsResponse {
   /**
    * 总个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 计划数组
    */
-  Plans: Array<LiveRecordPlanItem>
+  Plans?: Array<LiveRecordPlanItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2308,7 +2308,7 @@ export interface DescribeDeviceResponse {
   /**
    * 设备详情信息
    */
-  Device: AllDeviceInfo
+  Device?: AllDeviceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2623,23 +2623,23 @@ export interface DescribeLiveRecordPlanByIdResponse {
   /**
    * 计划名称
    */
-  PlanName: string
+  PlanName?: string
   /**
    * 模板ID
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 模板名称
    */
-  TemplateName: string
+  TemplateName?: string
   /**
    * 存储时间
    */
-  RecordStorageTime: number
+  RecordStorageTime?: number
   /**
    * 计划类型
    */
-  PlanType: number
+  PlanType?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2731,7 +2731,7 @@ export interface DescribeRecordStreamResponse {
   /**
    * 结果
    */
-  Data: DescribeRecordStreamData
+  Data?: DescribeRecordStreamData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3820,23 +3820,23 @@ export interface DescribeCurrentDeviceDataResponse {
   /**
    * 通道数
    */
-  Channels: number
+  Channels?: number
   /**
    * 设备数
    */
-  Devices: number
+  Devices?: number
   /**
    * 在线通道数
    */
-  OnlineChannels: number
+  OnlineChannels?: number
   /**
    * 在线设备数
    */
-  OnlineDevices: number
+  OnlineDevices?: number
   /**
    * 正在录制通道数
    */
-  RecordingChannels: number
+  RecordingChannels?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3871,6 +3871,10 @@ export interface DeleteTimeTemplateRequest {
  * DeleteWarning返回参数结构体
  */
 export interface DeleteWarningResponse {
+  /**
+   * 操作个数
+   */
+  Cnt?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4061,7 +4065,7 @@ export interface DeleteLiveRecordPlanResponse {
   /**
    * 删除状态描述
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4187,7 +4191,7 @@ export interface DescribeChannelLocalRecordURLResponse {
   /**
    * 结果
    */
-  Data: DescribeRecordStreamData
+  Data?: DescribeRecordStreamData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4512,7 +4516,7 @@ export interface DescribeLiveStreamResponse {
    * 拉流地址，只有在推流情况下才有
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: StreamAddress
+  Data?: StreamAddress
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -3064,7 +3064,11 @@ export interface SaveDocRequest {
    */
   ETag: string
   /**
-   * cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性  <br> 成功上传cos后，从返回头中获取
+   * cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性  
+成功上传cos后，从返回头中获取
+
+请注意：
+cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判定为重复文档
    */
   CosHash: string
   /**

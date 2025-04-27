@@ -2325,9 +2325,24 @@ export interface DescribeBackupUrlResponse {
  */
 export interface InquiryPriceRenewInstanceResponse {
   /**
-   * 价格，单位：分。
+   * 价格
    */
   Price?: number
+  /**
+   * 高精度价格
+   */
+  HighPrecisionPrice?: number
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 价格金额单位
+
+- pent: 分
+- microPent: 微分
+   */
+  AmountUnit?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2407,9 +2422,24 @@ export type DescribeProductInfoRequest = null
  */
 export interface InquiryPriceCreateInstanceResponse {
   /**
-   * 价格，单位：分
+   * 价格
    */
   Price?: number
+  /**
+   * 高精度价格
+   */
+  HighPrecisionPrice?: number
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 价格金额单位
+
+- pent: 分
+- microPent: 微分
+   */
+  AmountUnit?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6240,9 +6270,24 @@ export interface SecurityGroupDetail {
  */
 export interface InquiryPriceUpgradeInstanceResponse {
   /**
-   * 价格，单位：分
+   * 价格
    */
   Price?: number
+  /**
+   * 高精度价格
+   */
+  HighPrecisionPrice?: number
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 价格金额单位
+
+- pent: 分
+- microPent: 微分
+   */
+  AmountUnit?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

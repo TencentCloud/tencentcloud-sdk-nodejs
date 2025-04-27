@@ -477,8 +477,10 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
   }
 
   /**
-   * 删除SCDN域名
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+删除SCDN域名
+     */
   async DeleteScdnDomain(
     req: DeleteScdnDomainRequest,
     cb?: (error: string, rep: DeleteScdnDomainResponse) => void
@@ -647,8 +649,10 @@ CreateDiagnoseUrl 用于添加域名诊断任务URL。
   }
 
   /**
-   * StopScdnDomain 用于关闭域名的安全防护配置
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+StopScdnDomain 用于关闭域名的安全防护配置
+     */
   async StopScdnDomain(
     req: StopScdnDomainRequest,
     cb?: (error: string, rep: StopScdnDomainResponse) => void
@@ -710,8 +714,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * 查询在SCDN IP安全策略
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+查询在SCDN IP安全策略
+     */
   async DescribeScdnIpStrategy(
     req: DescribeScdnIpStrategyRequest,
     cb?: (error: string, rep: DescribeScdnIpStrategyResponse) => void
@@ -730,8 +736,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * UpdateScdnDomain 用于修改 SCDN 加速域名安全相关配置
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+UpdateScdnDomain 用于修改 SCDN 加速域名安全相关配置
+     */
   async UpdateScdnDomain(
     req: UpdateScdnDomainRequest,
     cb?: (error: string, rep: UpdateScdnDomainResponse) => void
@@ -740,8 +748,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
+     */
   async ListScdnLogTasks(
     req: ListScdnLogTasksRequest,
     cb?: (error: string, rep: ListScdnLogTasksResponse) => void
@@ -760,8 +770,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * CreateScdnLogTask 用于创建事件日志任务
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+CreateScdnLogTask 用于创建事件日志任务
+     */
   async CreateScdnLogTask(
     req: CreateScdnLogTaskRequest,
     cb?: (error: string, rep: CreateScdnLogTaskResponse) => void
@@ -780,8 +792,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * 获取SCDN的Top数据
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+获取SCDN的Top数据
+     */
   async DescribeScdnTopData(
     req: DescribeScdnTopDataRequest,
     cb?: (error: string, rep: DescribeScdnTopDataResponse) => void
@@ -860,8 +874,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * StartScdnDomain 用于开启域名的安全防护配置
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+StartScdnDomain 用于开启域名的安全防护配置
+     */
   async StartScdnDomain(
     req: StartScdnDomainRequest,
     cb?: (error: string, rep: StartScdnDomainResponse) => void
@@ -1036,8 +1052,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * CreateScdnDomain 用于创建 SCDN 加速域名
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+CreateScdnDomain 用于创建 SCDN 加速域名
+     */
   async CreateScdnDomain(
     req: CreateScdnDomainRequest,
     cb?: (error: string, rep: CreateScdnDomainResponse) => void
@@ -1066,8 +1084,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
+     */
   async CreateScdnFailedLogTask(
     req: CreateScdnFailedLogTaskRequest,
     cb?: (error: string, rep: CreateScdnFailedLogTaskResponse) => void
@@ -1107,8 +1127,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * 查询BOT会话记录列表
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+查询BOT会话记录列表
+     */
   async DescribeScdnBotRecords(
     req: DescribeScdnBotRecordsRequest,
     cb?: (error: string, rep: DescribeScdnBotRecordsResponse) => void
@@ -1117,8 +1139,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
+     */
   async DescribeScdnConfig(
     req: DescribeScdnConfigRequest,
     cb?: (error: string, rep: DescribeScdnConfigResponse) => void
@@ -1178,8 +1202,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配置信息
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配置信息
+     */
   async ListScdnDomains(
     req: ListScdnDomainsRequest,
     cb?: (error: string, rep: ListScdnDomainsResponse) => void
@@ -1209,8 +1235,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * 获取BOT统计数据列表
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+获取BOT统计数据列表
+     */
   async DescribeScdnBotData(
     req: DescribeScdnBotDataRequest,
     cb?: (error: string, rep: DescribeScdnBotDataResponse) => void
@@ -1259,8 +1287,10 @@ EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时
   }
 
   /**
-   * 获取Bot攻击的Top数据列表
-   */
+     * SCDN平台已经正式下线，接口开始预下线处理
+
+获取Bot攻击的Top数据列表
+     */
   async ListScdnTopBotData(
     req: ListScdnTopBotDataRequest,
     cb?: (error: string, rep: ListScdnTopBotDataResponse) => void

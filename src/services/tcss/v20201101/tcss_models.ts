@@ -1977,6 +1977,18 @@ export interface CreateVulScanTaskRequest {
    * 仓库镜像重新漏洞扫描时的任务ID
    */
   RegistryTaskID?: number
+  /**
+   * 本地镜像容器运行中
+   */
+  LocalImageContainerRunning?: boolean
+  /**
+   * 仓库镜像容器运行中
+   */
+  RegistryImageContainerRunning?: boolean
+  /**
+   * 仓库镜像是否是最新
+   */
+  IsLatest?: boolean
 }
 
 /**

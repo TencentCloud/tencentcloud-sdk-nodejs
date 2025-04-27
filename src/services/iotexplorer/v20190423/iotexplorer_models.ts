@@ -1133,6 +1133,10 @@ export interface InvokeAISearchServiceResponse {
    */
   Targets?: Array<TargetInfo>
   /**
+   * 视频回放URL
+   */
+  VideoURL?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3837,6 +3841,10 @@ export interface InvokeAISearchServiceRequest {
    * 搜索结果总结的语言类型，支持的类型有：en-US、zh-CN、id-ID、th-TH
    */
   SummaryLang?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
 }
 
 /**
@@ -6848,13 +6856,21 @@ export interface CloudStorageAIServiceTask {
    */
   ServiceType?: string
   /**
-   * 对应云存视频的起始时间
+   * 对应云存视频的起始时间（秒级 UNIX 时间戳）
    */
   StartTime?: number
   /**
-   * 对应云存视频的结束时间
+   * 对应云存视频的起始时间（毫秒级 UNIX 时间戳）
+   */
+  StartTimeMs?: number
+  /**
+   * 对应云存视频的结束时间（秒级 UNIX 时间戳）
    */
   EndTime?: number
+  /**
+   * 对应云存视频的结束时间（毫秒级 UNIX 时间戳）
+   */
+  EndTimeMs?: number
   /**
    * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；4：执行中）
    */
@@ -8164,6 +8180,14 @@ export interface TargetInfo {
    * 视频内容摘要
    */
   Summary?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
+  /**
+   * 缩略图路径
+   */
+  Thumbnail?: string
 }
 
 /**

@@ -3924,6 +3924,42 @@ export interface RegisterEventRequest {
 }
 
 /**
+ * EventCaseOpsDto
+ */
+export interface EventCaseOpsDto {
+  /**
+   * 案例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CaseId?: string
+  /**
+   * 案例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 时间格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dimension?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreationTimestamp?: string
+  /**
+   * 消费者id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerId?: string
+  /**
+   * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
  * 调度实例详情
  */
 export interface InstanceDetailVO {
@@ -5574,39 +5610,18 @@ export interface CountOpsInstanceStateRequest {
 }
 
 /**
- * EventCaseOpsDto
+ * DescribeThirdTaskRunLog返回参数结构体
  */
-export interface EventCaseOpsDto {
+export interface DescribeThirdTaskRunLogResponse {
   /**
-   * 案例ID
+   * 获取第三方运行日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaseId?: string
+  Data?: string
   /**
-   * 案例名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 时间格式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Dimension?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreationTimestamp?: string
-  /**
-   * 消费者id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumerId?: string
-  /**
-   * 描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
+  RequestId?: string
 }
 
 /**
@@ -6735,6 +6750,48 @@ export interface DescribeAllByFolderNewRequest {
    * 是否计算总数
    */
   IsCount?: boolean
+}
+
+/**
+ * DescribeTenantProjects请求参数结构体
+ */
+export interface DescribeTenantProjectsRequest {
+  /**
+   * 第几页
+   */
+  PageNumber: number
+  /**
+   * 一页几条
+   */
+  PageSize: number
+  /**
+   * 是否展示关联执行组的信息。正常应该不是从项目列表里获取
+   */
+  DescribeExecutors?: boolean
+  /**
+   * 是否展示项目管理员信息，减少默认返回的请求内容
+   */
+  DescribeAdminUsers?: boolean
+  /**
+   * 统计项目人员数量。数据地图需求
+   */
+  DescribeMemberCount?: boolean
+  /**
+   * 自定义条件查询
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段
+   */
+  OrderFields?: Array<OrderField>
+  /**
+   * 默认不提供创建者信息，该参数与CAM交互比较耗时
+   */
+  DescribeCreator?: boolean
+  /**
+   * 是否展示关联资源池信息
+   */
+  DescribeResourcePools?: boolean
 }
 
 /**
@@ -9470,6 +9527,37 @@ export interface TablePartition {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AverageFileSizeWithUnit?: string
+}
+
+/**
+ * 查询数据源分页列表
+ */
+export interface ProjectPage {
+  /**
+   * 分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber: number
+  /**
+   * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize: number
+  /**
+   * 数据源列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rows: Array<Project>
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 总分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber: number
 }
 
 /**
@@ -18855,14 +18943,13 @@ export interface RuleExecDateStat {
 }
 
 /**
- * DescribeThirdTaskRunLog返回参数结构体
+ * DescribeTenantProjects返回参数结构体
  */
-export interface DescribeThirdTaskRunLogResponse {
+export interface DescribeTenantProjectsResponse {
   /**
-   * 获取第三方运行日志
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目列表
    */
-  Data?: string
+  Data?: ProjectPage
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

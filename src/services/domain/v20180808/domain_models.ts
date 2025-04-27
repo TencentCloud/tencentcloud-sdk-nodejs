@@ -28,7 +28,7 @@ export interface AuctionInfo {
    */
   AuctionTime?: string
   /**
-   * 竞拍价格
+   * 竞拍价格 单位元
    */
   AuctionPrice?: number
   /**
@@ -72,7 +72,7 @@ export interface DeleteTemplateResponse {
  */
 export interface BiddingResult {
   /**
-   * business_id
+   * 预约ID
    */
   BusinessID?: string
   /**
@@ -80,7 +80,7 @@ export interface BiddingResult {
    */
   Domain?: string
   /**
-   * 当前价格
+   * 当前价格 单位元
    */
   CurrentPrice?: number
   /**
@@ -88,11 +88,11 @@ export interface BiddingResult {
    */
   CurrentNickname?: string
   /**
-   * 我的出价
+   * 我的出价 单位元
    */
   BiddingPrice?: number
   /**
-   * 竞价保证金
+   * 竞价保证金 单位元
    */
   BiddingBondPrice?: number
   /**
@@ -248,7 +248,7 @@ export interface DeleteCustomDnsHostResponse {
   /**
    * 异步任务ID
    */
-  LogId: number
+  LogId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -260,7 +260,8 @@ export interface DeleteCustomDnsHostResponse {
  */
 export interface DescribeBiddingSuccessfulDetailRequest {
   /**
-   * business_id
+   * 预约ID
+可通过DescribeBiddingSuccessfulList接口获取
    */
   BusinessID?: string
 }
@@ -270,11 +271,12 @@ export interface DescribeBiddingSuccessfulDetailRequest {
  */
 export interface RenewDomainBatchRequest {
   /**
-   * 域名续费的年限。
+   * 域名续费的年限。取值范围[1,9]
    */
   Period: number
   /**
    * 批量续费的域名。
+一次提交不大于4000个
    */
   Domains: Array<string>
   /**
@@ -339,7 +341,8 @@ export interface SetDomainAutoRenewResponse {
  */
 export interface DescribeBiddingAppointDetailRequest {
   /**
-   * business_id
+   * 预约ID
+可通过DescribeBiddingList接口获取
    */
   BusinessID?: string
 }
@@ -349,7 +352,8 @@ export interface DescribeBiddingAppointDetailRequest {
  */
 export interface DescribeCustomDnsHostSetRequest {
   /**
-   * 域名实例ID(域名基本信息或我的域名列表接口可获取)
+   * 域名实例ID
+可通过DescribeDomainList接口获取
    */
   DomainId: string
   /**
@@ -369,7 +373,7 @@ export interface CreateCustomDnsHostResponse {
   /**
    * 异步任务ID
    */
-  LogId: number
+  LogId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -393,7 +397,8 @@ export interface DescribeBiddingAppointListRequest {
    */
   Domain?: string
   /**
-   * 状态： 1 已预约 9 预约持有者索回
+   * 状态：
+1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约
    */
   Status?: Array<number | bigint>
   /**
@@ -444,6 +449,15 @@ export interface DescribeBiddingListResponse {
 export interface CheckBatchStatusRequest {
   /**
    * 操作日志 ID数组，最多 200 个
+可通过任意批量操作接口获取，例如：
+BatchModifyDomainInfo
+ModifyDomainDNSBatch
+ModifyDomainOwnerBatch
+UpdateProhibitionBatch
+TransferProhibitionBatch
+TransferInDomainBatch
+TransferInDomainBatchBuy
+CancelTransferOutInBatch
    */
   LogIds: Array<number | bigint>
 }
@@ -591,7 +605,7 @@ export interface ModifyCustomDnsHostResponse {
   /**
    * 异步任务ID
    */
-  LogId: number
+  LogId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -617,11 +631,11 @@ export interface DescribeAuctionListRequest {
    */
   BusinessId: string
   /**
-   * 条数，默认10条
+   * 条数，默认10，最大100
    */
   Limit?: number
   /**
-   * 偏移量
+   * 偏移量 默认0
    */
   OffSet?: number
 }
@@ -726,14 +740,16 @@ export interface DescribeUnPreDomainDetailResponse {
   ExpireTime?: string
   /**
    * 域名状态
+ bid：出价
+noAction：无法操作
    */
   Status?: string
   /**
-   * 域名价格
+   * 域名价格 单位元
    */
   CurrentPrice?: number
   /**
-   * 域名保证金
+   * 域名保证金 单位元
    */
   AppointBondPrice?: number
   /**
@@ -763,7 +779,17 @@ export interface DomainBatchDetailSet {
    */
   Id?: number
   /**
-   * 类型  new: 注册域名 batch_transfer_prohibition_on:开启禁止转移  batch_transfer_prohibition_off:关闭禁止转移 batch_update_prohibition_on:开启禁止更新   batch_update_prohibition_off:关闭禁止更新
+   * 类型  
+new：注册域名
+renew：续费域名
+batch_transfer_prohibition_on：开启禁止转移锁
+batch_transfer_prohibition_off：关闭禁止转移锁
+batch_update_prohibition_on：开启禁止更新锁
+batch_update_prohibition_off：关闭禁止更新锁
+batch_modify_owner：域名转移
+batch_modify_domain_info：域名信息修改
+batch_transfer_in：域名转入
+batch_cancel_transfer_out：域名取消转出
    */
   Action?: string
   /**
@@ -778,7 +804,7 @@ success  操作成功。
    */
   Status?: string
   /**
-   * 失败原因
+   * 失败原因，如果状态成功(Status:success),则该字段为空
    */
   Reason?: string
   /**
@@ -824,7 +850,8 @@ export interface SendPhoneEmailCodeResponse {
  */
 export interface BidDetailPageRequest {
   /**
-   * 业务ID
+   * 预约ID
+可通过DescribeBiddingList接口获取
    */
   BusinessId: string
 }
@@ -838,7 +865,7 @@ export interface BiddingPreReleaseResponse {
    */
   IsNeedPay?: boolean
   /**
-   * 计费请求参数，以Json字符串的形式进行返回。
+   * 计费请求参数，以类Json字符串的形式进行返回。用于计费下单
    */
   BillingParam?: string
   /**
@@ -1027,6 +1054,16 @@ export interface BatchStatus {
   Status?: string
   /**
    * 批量任务类型
+new：注册域名
+renew：续费域名
+batch_transfer_prohibition_on：开启禁止转移锁
+batch_transfer_prohibition_off：关闭禁止转移锁
+batch_update_prohibition_on：开启禁止更新锁
+batch_update_prohibition_off：关闭禁止更新锁
+batch_modify_owner：域名转移
+batch_modify_domain_info：域名信息修改
+batch_transfer_in：域名转入
+batch_cancel_transfer_out：域名取消转出
    */
   BatchAction?: string
 }
@@ -1041,7 +1078,6 @@ export interface DescribePreAuctionListResponse {
   TotalCount?: number
   /**
    * 预释放竞价列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreAuctionList?: Array<PreAuctionInfo>
   /**
@@ -1182,12 +1218,13 @@ export interface CreateTemplateResponse {
 export interface UpdateProhibitionBatchRequest {
   /**
    * 批量操作的域名。
+一次提交不大于4000个
    */
   Domains: Array<string>
   /**
    * 是否开启禁止域名更新。
-True:开启禁止域名更新状态。
-False：关闭禁止域名更新状态。
+true:开启禁止域名更新状态。
+false：关闭禁止域名更新状态。
    */
   Status: boolean
 }
@@ -1244,10 +1281,11 @@ export interface PreReleaseInfo {
 export interface BiddingPreReleaseRequest {
   /**
    * 业务ID
+可通过DescribeBiddingList接口获取
    */
   BusinessId: string
   /**
-   * 价格
+   * 价格 单位元
    */
   Price: number
 }
@@ -1304,6 +1342,10 @@ export interface DescribePayWaitDetailResponse {
   Domain?: string
   /**
    * 域名类型
+pay：等待支持
+sub：已经预订
+wait：等待出价
+finish：完成出价
    */
   Status?: string
   /**
@@ -1315,11 +1357,11 @@ export interface DescribePayWaitDetailResponse {
    */
   RegTime?: string
   /**
-   * 域名成交价格
+   * 域名成交价格 单位元
    */
   Price?: number
   /**
-   * 待退还保证金
+   * 待退还保证金 单位元
    */
   RetDeposit?: number
   /**
@@ -1365,11 +1407,11 @@ export interface DescribeBatchOperationLogsResponse {
  */
 export interface DescribePreAuctionListRequest {
   /**
-   * 页码
+   * 页码 默认1
    */
   PageNumber?: number
   /**
-   * 条数
+   * 条数 默认20 最大100
    */
   PageSize?: number
 }
@@ -1393,7 +1435,8 @@ export interface SendPhoneEmailCodeRequest {
  */
 export interface DeleteBiddingRequest {
   /**
-   * business_id
+   * 预约ID
+可通过DescribeBiddingList接口获取
    */
   BusinessID?: string
 }
@@ -1451,15 +1494,17 @@ export interface PreAuctionInfo {
    */
   BiddingTime?: string
   /**
-   * 出价次数
+   * 出价次数 单位元
    */
   BidCount?: number
   /**
-   * 当前价格
+   * 当前价格 单位元
    */
   Price?: number
   /**
-   * 用户操作 bid：出价 "noAction"：无法操作
+   * 用户操作 
+bid：出价 
+noAction：无法操作
    */
   Op?: string
   /**
@@ -1501,15 +1546,15 @@ export interface ReservedPreDomainsRequest {
    */
   DomainList: Array<string>
   /**
-   * 模板ID
+   * 模板ID 可通过DescribeTemplates接口获取
    */
   TemplateId: string
   /**
-   * 结束后是否自动支付尾款，默认开启 传入1关闭
+   * 结束后是否自动支付尾款，默认1 开启 传入0关闭
    */
   IsAutoPay?: number
   /**
-   * 结束后是否自动进行梯度保证金扣除，默认开启 传入1关闭
+   * 结束后是否自动进行梯度保证金扣除，默认1开启 传入0关闭
    */
   IsBidAutoPay?: number
 }
@@ -1523,7 +1568,8 @@ export interface BatchModifyDomainInfoRequest {
    */
   Domains: Array<string>
   /**
-   * 模板ID(可从模板列表接口获取)
+   * 模板ID
+可从DescribeTemplates接口获取
    */
   TemplateId: string
   /**
@@ -1567,7 +1613,7 @@ export interface DescribeBiddingDetailResponse {
    */
   DeleteTime?: string
   /**
-   * 当前价格
+   * 当前价格 单位元
    */
   CurrentPrice?: number
   /**
@@ -1575,7 +1621,7 @@ export interface DescribeBiddingDetailResponse {
    */
   CurrentNickname?: string
   /**
-   * 竞价保证金
+   * 竞价保证金 单位元
    */
   BiddingBondPrice?: number
   /**
@@ -1591,7 +1637,7 @@ export interface DescribeBiddingDetailResponse {
    */
   BiddingBondRefund?: string
   /**
-   * 我的出价
+   * 我的出价 单位元
    */
   BiddingPrice?: number
   /**
@@ -1692,6 +1738,7 @@ export interface DescribeTemplateResponse {
 export interface DescribePayWaitDetailRequest {
   /**
    * 业务ID
+可通过DescribeBiddingList接口获取
    */
   BusinessId: string
 }
@@ -1712,12 +1759,13 @@ export interface DescribeDomainSimpleInfoRequest {
 export interface TransferProhibitionBatchRequest {
   /**
    * 批量操作的域名。
+一次提交不大于4000个
    */
   Domains: Array<string>
   /**
    * 是否开启禁止域名转移。
-True: 开启禁止域名转移状态。
-False：关闭禁止域名转移状态。
+true: 开启禁止域名转移状态。
+false：关闭禁止域名转移状态。
    */
   Status: boolean
 }
@@ -1767,7 +1815,12 @@ export interface TemplateInfo {
    */
   TemplateId?: string
   /**
-   * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+   * 认证状态:
+NotUpload: 未实名认证
+InAudit: 实名审核中
+Approved: 已实名认证
+Reject: 实名审核失败
+NotVerified: 实名信息待修改
    */
   AuditStatus?: string
   /**
@@ -1908,6 +1961,7 @@ GZJGZY: 公证机构执业证。
 export interface TransferInDomainBatchRequest {
   /**
    * 转入的域名名称数组。
+一次提交不大于4000个
    */
   Domains: Array<string>
   /**
@@ -1916,6 +1970,7 @@ export interface TransferInDomainBatchRequest {
   PassWords: Array<string>
   /**
    * 模板ID。
+可通过DescribeTemplates接口获取
    */
   TemplateId: string
   /**
@@ -2207,10 +2262,11 @@ export interface ModifyDomainOwnerBatchResponse {
 export interface ModifyDomainOwnerBatchRequest {
   /**
    * 要过户的域名。
+一次提交不大于4000个
    */
   Domains: Array<string>
   /**
-   * 转入账户的uin。
+   * 转入账户的主uin。
    */
   NewOwnerUin: string
   /**
@@ -2296,7 +2352,8 @@ export interface CreatePhoneEmailRequest {
    */
   Type: number
   /**
-   * 验证码(通过SendPhoneEmailCode发送到手机或邮箱的验证码)
+   * 验证码
+通过调用SendPhoneEmailCode接口发送到手机或邮箱的验证码：https://cloud.tencent.com/document/api/242/62666
    */
   VerifyCode: string
 }
@@ -2306,7 +2363,8 @@ export interface CreatePhoneEmailRequest {
  */
 export interface DescribeBiddingDetailRequest {
   /**
-   * business_id
+   * 预约ID
+可通过DescribeBiddingList接口获取
    */
   BusinessID?: string
 }
@@ -2354,11 +2412,11 @@ export interface DescribeBiddingAppointDetailResponse {
    */
   DeleteTime?: string
   /**
-   * 当前价格
+   * 当前价格 单位元
    */
   AppointPrice?: number
   /**
-   * 预约保证金
+   * 预约保证金 单位元
    */
   AppointBondPrice?: number
   /**
@@ -2432,7 +2490,7 @@ export interface DescribeBiddingSuccessfulDetailResponse {
    */
   SuccessfulTime?: string
   /**
-   * 得标价格
+   * 得标价格 单位元
    */
   SuccessfulPrice?: number
   /**
@@ -2456,7 +2514,7 @@ export interface DescribeBiddingSuccessfulDetailResponse {
    */
   BiddingBondRefund?: string
   /**
-   * 保证金
+   * 保证金 单位元
    */
   BiddingBondPrice?: number
   /**
@@ -2515,7 +2573,7 @@ export interface DescribeDomainNameListResponse {
  */
 export interface SyncCustomDnsHostRequest {
   /**
-   * 域名实例ID
+   * 域名实例ID，可以通过DescribeDomainList接口获取
    */
   DomainId: string
 }
@@ -2595,7 +2653,8 @@ export interface ContactInfo {
  */
 export interface DeleteTemplateRequest {
   /**
-   * 模板ID(可通过模板信息列表获取)
+   * 模板ID
+可通过DescribeTemplates接口获取
    */
   TemplateId: string
 }
@@ -2609,15 +2668,15 @@ export interface BidDetailPageResponse {
    */
   Domain?: string
   /**
-   * 当前域名价格
+   * 当前域名价格 单位元
    */
   CurrentPrice?: number
   /**
-   * 用户上次出价
+   * 用户上次出价 单位元
    */
   BidPrice?: number
   /**
-   * 当前加价幅度
+   * 当前加价幅度 单位元
    */
   CurrentPriceScope?: number
   /**
@@ -2626,7 +2685,7 @@ export interface BidDetailPageResponse {
    */
   PriceScope?: Array<PriceScopeConf>
   /**
-   * 用户当前已经支付了的保证金
+   * 用户当前已经支付了的保证金 单位元
    */
   DepositPrice?: number
   /**
@@ -2713,19 +2772,19 @@ TransferFailed：转入失败
  */
 export interface PriceScopeConf {
   /**
-   * 最高价格
+   * 最高价格 单位元
    */
   MaxPrice?: number
   /**
-   * 最低价格
+   * 最低价格 单位元
    */
   MinPrice?: number
   /**
-   * 价格幅度
+   * 价格幅度 单位元
    */
   Price?: number
   /**
-   * 保证金
+   * 保证金 单位元
    */
   DepositPrice?: number
 }
@@ -2939,14 +2998,17 @@ done 执行完成。
 export interface CreateCustomDnsHostRequest {
   /**
    * 域名实例ID
+可通过DescribeDomainLIst接口获取
    */
   DomainId: string
   /**
    * Dns名称
+例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式
    */
   DnsName: string
   /**
    * IP地址列表
+可选择：正常IP地址范围
    */
   IpSet: Array<string>
 }
@@ -2957,10 +3019,12 @@ export interface CreateCustomDnsHostRequest {
 export interface DeleteCustomDnsHostRequest {
   /**
    * 域名实例ID
+可通过DescribeDomainList接口获取
    */
   DomainId: string
   /**
    * DNS名称
+例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式
    */
   DnsName: string
 }
@@ -2984,7 +3048,8 @@ export interface CheckBatchStatusResponse {
  */
 export interface CreateDomainRedemptionRequest {
   /**
-   * 域名 ID
+   * 域名ID
+可通过DescribeDomainList接口获取
    */
   DomainId: string
 }
@@ -2994,7 +3059,7 @@ export interface CreateDomainRedemptionRequest {
  */
 export interface SetDomainAutoRenewRequest {
   /**
-   * 域名ID 例如：domain-123abc
+   * 域名ID 例如：domain-dwerewwq可通过DescribreDomainList接口获取
    */
   DomainId: string
   /**
@@ -3013,7 +3078,7 @@ export interface SyncCustomDnsHostResponse {
   /**
    * 异步任务ID
    */
-  LogId: number
+  LogId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3119,7 +3184,7 @@ export interface DescribePreReleaseListRequest {
  */
 export interface BiddingAppointResult {
   /**
-   * business_id
+   * 预约ID
    */
   BusinessID?: string
   /**
@@ -3127,11 +3192,11 @@ export interface BiddingAppointResult {
    */
   Domain?: string
   /**
-   * 预定价格
+   * 预定价格 单位元
    */
   AppointPrice?: number
   /**
-   * 预约保证金
+   * 预约保证金 单位元
    */
   AppointBondPrice?: number
   /**

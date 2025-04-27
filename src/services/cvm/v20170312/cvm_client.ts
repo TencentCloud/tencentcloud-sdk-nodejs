@@ -827,7 +827,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 进入救援模式
+   * 本接口（EnterRescueMode）用于进入救援模式。
    */
   async EnterRescueMode(
     req: EnterRescueModeRequest,

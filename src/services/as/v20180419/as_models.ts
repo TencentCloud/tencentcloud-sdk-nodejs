@@ -365,7 +365,7 @@ export interface AutoScalingNotification {
  */
 export interface ModifyScheduledActionRequest {
   /**
-   * 待修改的定时任务ID
+   * 待修改的定时任务ID。可以通过调用接口 [DescribeScheduledActions](https://cloud.tencent.com/document/api/377/20450) ，取返回信息中的 ScheduledActionId 获取定时任务ID。
    */
   ScheduledActionId: string
   /**
@@ -393,7 +393,7 @@ export interface ModifyScheduledActionRequest {
    */
   EndTime?: string
   /**
-   * 定时任务的重复方式。为标准 Cron 格式<br>此参数与`EndTime`需要同时指定。
+   * 定时任务的重复方式。为标准 Cron 格式，[Recurrence参数限制](https://cloud.tencent.com/document/product/377/88119)为5个字段，由空格分开，结构为：分，小时，日期，月份，星期。此参数与`EndTime`需要同时指定。
    */
   Recurrence?: string
 }
@@ -666,11 +666,15 @@ export interface Advice {
  */
 export interface EnterStandbyRequest {
   /**
-   * 伸缩组 ID。
+   * 伸缩组 ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 运行中状态实例列表，不支持传入非运行中状态实例。
+   * 运行中状态实例列表，不支持传入非运行中状态实例。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
 }
@@ -722,7 +726,9 @@ export interface DescribeAutoScalingGroupsResponse {
  */
 export interface CreateScheduledActionRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
@@ -750,7 +756,7 @@ export interface CreateScheduledActionRequest {
    */
   EndTime?: string
   /**
-   * 定时任务的重复方式。为标准 Cron 格式<br><br>此参数与`EndTime`需要同时指定。
+   * 定时任务的重复方式。为标准 Cron 格式。定时任务中的 [Recurrence参数限制](https://cloud.tencent.com/document/product/377/88119) 为5个字段，由空格分开，结构为：分，小时，日期，月份，星期。此参数与`EndTime`需要同时指定。
    */
   Recurrence?: string
 }
@@ -760,11 +766,15 @@ export interface CreateScheduledActionRequest {
  */
 export interface ExitStandbyRequest {
   /**
-   * 伸缩组 ID。
+   * 伸缩组 ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 备用中状态 CVM 实例列表。
+   * 备用中状态 CVM 实例列表。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
 }
@@ -810,7 +820,7 @@ export interface StopAutoScalingInstancesResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -976,7 +986,7 @@ export interface StartAutoScalingInstancesResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1083,11 +1093,15 @@ export interface DescribeLaunchConfigurationsResponse {
  */
 export interface RemoveInstancesRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * CVM实例ID列表
+   * CVM实例ID列表。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
 }
@@ -1194,7 +1208,7 @@ export interface RemoveInstancesResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1226,11 +1240,15 @@ export interface DeleteLaunchConfigurationRequest {
  */
 export interface SetInstancesProtectionRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 实例ID。
+   * 实例ID。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
   /**
@@ -1256,7 +1274,7 @@ export interface DetachInstancesResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1596,7 +1614,7 @@ export interface AttachInstancesResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1641,11 +1659,13 @@ export interface ScaleInInstancesResponse {
  */
 export interface CancelInstanceRefreshRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 刷新活动ID。
+   * 刷新活动ID。可以通过调用接口 [DescribeRefreshActivities](https://cloud.tencent.com/document/api/377/99175) ，取返回信息中的 RefreshActivityId 获取实例刷新活动ID。
    */
   RefreshActivityId: string
 }
@@ -2533,11 +2553,15 @@ export interface CreateAutoScalingGroupFromInstanceResponse {
  */
 export interface DetachInstancesRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * CVM实例ID列表
+   * CVM实例ID列表。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
 }
@@ -2721,11 +2745,11 @@ export interface IPv6InternetAccessible {
  */
 export interface DescribeScheduledActionsRequest {
   /**
-   * 按照一个或者多个定时任务ID查询。实例ID形如：asst-am691zxo。每次请求的实例的上限为100。参数不支持同时指定ScheduledActionIds和Filters。
+   * 按照一个或者多个定时任务ID查询。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 获取定时任务 ID。每次请求的实例的上限为100。参数不支持同时指定ScheduledActionIds和Filters。
    */
   ScheduledActionIds?: Array<string>
   /**
-   * 过滤条件。
+   * 过滤条件。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 获取定时任务 ID，定时任务名称，伸缩组 ID。
 <li> scheduled-action-id - String - 是否必填：否 -（过滤条件）按照定时任务ID过滤。</li>
 <li> scheduled-action-name - String - 是否必填：否 - （过滤条件） 按照定时任务名称过滤。</li>
 <li> auto-scaling-group-id - String - 是否必填：否 - （过滤条件） 按照伸缩组ID过滤。</li>
@@ -2782,7 +2806,7 @@ export interface RefreshBatchRelatedInstance {
  */
 export interface DeleteScheduledActionRequest {
   /**
-   * 待删除的定时任务ID。
+   * 待删除的定时任务ID。可以通过调用接口 [DescribeScheduledActions](https://cloud.tencent.com/document/api/377/20450) ，取返回信息中的 ScheduledActionId 获取定时任务ID。
    */
   ScheduledActionId: string
 }
@@ -2935,7 +2959,7 @@ export interface ScheduledAction {
    */
   StartTime?: string
   /**
-   * 定时任务的重复方式。
+   * 定时任务的重复方式。定时任务中的[Recurrence参数限制](https://cloud.tencent.com/document/product/377/88119)为5个字段，由空格分开，结构为：分，小时，日期，月份，星期。
    */
   Recurrence?: string
   /**
@@ -2955,7 +2979,7 @@ export interface ScheduledAction {
    */
   MinSize?: number
   /**
-   * 定时任务的创建时间。取值为`UTC`时间，按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ssZ`。
+   * 定时任务的创建时间。取值为标准`UTC`时间，按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ssZ`。
    */
   CreatedTime?: string
   /**
@@ -2971,23 +2995,23 @@ export interface ScheduledAction {
  */
 export interface ModifyLifecycleHookRequest {
   /**
-   * 生命周期挂钩ID。
+   * 生命周期挂钩ID。可以通过调用接口 [DescribeLifecycleHooks](https://cloud.tencent.com/document/api/377/34452) ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。
    */
   LifecycleHookId: string
   /**
-   * 生命周期挂钩名称。
+   * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线（_）、短横线（-）、小数点（.），最大长度不能超128。
    */
   LifecycleHookName?: string
   /**
-   * 进入生命周期挂钩场景，取值包括：
-<li> INSTANCE_LAUNCHING：实例启动后</li>
-<li> INSTANCE_TERMINATING：实例销毁前</li>
+   * 进入生命周期挂钩场景，取值范围如下:
+   * INSTANCE_LAUNCHING: 扩容生命周期挂钩
+   * INSTANCE_TERMINATING: 缩容生命周期挂钩
    */
   LifecycleTransition?: string
   /**
-   * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值包括：
-<li> CONTINUE： 超时后继续伸缩活动</li> 
-<li> ABANDON：超时后终止伸缩活动</li> 
+   * 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围如下：
+   * CONTINUE: 默认值，表示继续执行扩缩容活动
+   * ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。
    */
   DefaultResult?: string
   /**
@@ -2995,7 +3019,7 @@ export interface ModifyLifecycleHookRequest {
    */
   HeartbeatTimeout?: number
   /**
-   * 弹性伸缩向通知目标发送的附加信息。
+   * 弹性伸缩向通知目标发送的附加信息。NotificationMetadata 与 LifecycleCommand互斥，二者不可同时指定。
    */
   NotificationMetadata?: string
   /**
@@ -3003,11 +3027,11 @@ export interface ModifyLifecycleHookRequest {
    */
   LifecycleTransitionType?: string
   /**
-   * 通知目标信息。
+   * 通知目标信息。NotificationTarget 与 LifecycleCommand互斥，二者不可同时指定。
    */
   NotificationTarget?: NotificationTarget
   /**
-   * 远程命令执行对象。
+   * 远程命令执行对象。通知参数 NotificationMetadata、NotificationTarget 与 LifecycleCommand互斥，不可同时指定。
    */
   LifecycleCommand?: LifecycleCommand
 }
@@ -3280,11 +3304,13 @@ export interface CreateScalingPolicyRequest {
  */
 export interface ResumeInstanceRefreshRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可通过如下方式获取：
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 刷新活动ID。
+   * 刷新活动ID。可以通过调用接口 [DescribeRefreshActivities](https://cloud.tencent.com/document/api/377/99175) ，取返回信息中的 RefreshActivityId 获取实例刷新活动ID。
    */
   RefreshActivityId: string
   /**
@@ -3383,7 +3409,9 @@ export interface ModifyLoadBalancerTargetAttributesRequest {
  */
 export interface RollbackInstanceRefreshRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可以通过以下方式获取可用的伸缩组ID： 
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
@@ -3391,7 +3419,7 @@ export interface RollbackInstanceRefreshRequest {
    */
   RefreshSettings: RefreshSettings
   /**
-   * 原始刷新活动 ID。
+   * 原始刷新活动 ID。可以通过调用接口 [DescribeRefreshActivities](https://cloud.tencent.com/document/api/377/99175) ，取返回信息中的 OriginRefreshActivityId 获取原始刷新活动ID。
    */
   OriginRefreshActivityId: string
   /**
@@ -3507,11 +3535,13 @@ export interface EnableAutoScalingGroupRequest {
  */
 export interface StopInstanceRefreshRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可以通过以下方式获取可用的伸缩组ID：
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 刷新活动ID。
+   * 刷新活动ID。可以通过调用接口 [DescribeRefreshActivities](https://cloud.tencent.com/document/api/377/99175) ，取返回信息中的 RefreshActivityId 获取实例刷新活动ID。
    */
   RefreshActivityId: string
 }
@@ -3736,7 +3766,9 @@ export interface ForwardLoadBalancer {
  */
 export interface ClearLaunchConfigurationAttributesRequest {
   /**
-   * 启动配置ID。
+   * 启动配置ID。可通过如下方式获取：
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 查询启动配置ID。</li>
+<li>通过调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。</li>
    */
   LaunchConfigurationId: string
   /**
@@ -3822,11 +3854,15 @@ export interface AutoScalingAdvice {
  */
 export interface StartAutoScalingInstancesRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 待开启的CVM实例ID列表
+   * 待开启的CVM实例ID列表。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
 }
@@ -3836,11 +3872,15 @@ export interface StartAutoScalingInstancesRequest {
  */
 export interface AttachInstancesRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * CVM实例ID列表
+   * CVM实例ID列表。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
 }
@@ -3911,19 +3951,23 @@ export interface SpotMixedAllocationPolicy {
  */
 export interface UpgradeLifecycleHookRequest {
   /**
-   * 生命周期挂钩ID
+   * 生命周期挂钩ID。可以通过调用接口 [DescribeLifecycleHooks](https://cloud.tencent.com/document/api/377/34452) ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。
    */
   LifecycleHookId: string
   /**
-   * 生命周期挂钩名称
+   * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线（_）、短横线（-）、小数点（.），最大长度不能超128个字符。
    */
   LifecycleHookName: string
   /**
-   * 进行生命周期挂钩的场景，取值范围包括“INSTANCE_LAUNCHING”和“INSTANCE_TERMINATING”
+   * 进行生命周期挂钩的场景，取值范围如下:
+   * INSTANCE_LAUNCHING: 扩容生命周期挂钩
+   * INSTANCE_TERMINATING: 缩容生命周期挂钩
    */
   LifecycleTransition: string
   /**
-   * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值范围是“CONTINUE”或“ABANDON”，默认值为“CONTINUE”
+   * 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围是如下：
+   * CONTINUE: 默认值，表示继续执行扩缩容活动
+   * ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。
    */
   DefaultResult?: string
   /**
@@ -3931,7 +3975,7 @@ export interface UpgradeLifecycleHookRequest {
    */
   HeartbeatTimeout?: number
   /**
-   * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串""
+   * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串。NotificationMetadata 和 LifecycleCommand参数互斥，二者不可同时指定。
    */
   NotificationMetadata?: string
   /**
@@ -3943,7 +3987,7 @@ export interface UpgradeLifecycleHookRequest {
    */
   LifecycleTransitionType?: string
   /**
-   * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+   * 远程命令执行对象。通知参数 NotificationMetadata、NotificationTarget 与 LifecycleCommand 互斥，不可同时指定。
    */
   LifecycleCommand?: LifecycleCommand
 }
@@ -4078,11 +4122,15 @@ export interface ModifyDesiredCapacityResponse {
  */
 export interface StopAutoScalingInstancesRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
-   * 待关闭的CVM实例ID列表
+   * 待关闭的CVM实例ID列表。可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds: Array<string>
   /**

@@ -21,10 +21,9 @@
 export interface ScheduleSettings {
   /**
    * 执行策略：
+
 - ONCE：单次执行
 - RECURRENCE：周期执行
-
-只有在 CreateInvoker 时才必填，ModifyInvoker 时为非必填
    */
   Policy: string
   /**
@@ -203,12 +202,14 @@ export interface DescribeRegisterInstancesRequest {
   /**
    * 托管实例 id。
 
+每次请求的上限为 100。
+
 参数不支持同时指定 `InstanceIds` 和 `Filters` 。
 
    */
   InstanceIds?: Array<string>
   /**
-   * 过滤器列表。参数不支持同时指定 `InstanceIds` 和 `Filters` 。
+   * 过滤器列表。每次请求的 `Filters` 的上限为 10，`Filter.Values` 的上限为 5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。
 
 
 - instance-name
@@ -707,11 +708,15 @@ export interface ModifyInvokerRequest {
    */
   InvokerId: string
   /**
-   * 待修改的执行器名称。
+   * 待修改的执行器名称。长度不超过 120 字符。
    */
   Name?: string
   /**
-   * 执行器类型，当前仅支持周期类型执行器，取值：`SCHEDULE` 。
+   * 待修改的执行器类型。
+
+可选取值（当前仅支持一种）：
+
+- `SCHEDULE`：周期类型执行器。
    */
   Type?: string
   /**
@@ -721,11 +726,11 @@ export interface ModifyInvokerRequest {
    */
   CommandId?: string
   /**
-   * 待修改的用户名。
+   * 待修改的用户名。长度不超过 256 字符。
    */
   Username?: string
   /**
-   * 待修改的自定义参数。
+   * 待修改的自定义参数。字段类型为 JSON encode string。
 
 仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
    */
@@ -740,6 +745,8 @@ export interface ModifyInvokerRequest {
   InstanceIds?: Array<string>
   /**
    * 待修改的周期执行器设置。
+
+要将执行器类型修改为 `SCHEDULE` 时，必须指定此参数。
    */
   ScheduleSettings?: ScheduleSettings
 }
@@ -1021,11 +1028,15 @@ export interface CreateRegisterCodeRequest {
  */
 export interface CreateInvokerRequest {
   /**
-   * 执行器名称。
+   * 执行器名称。长度不超过 120 字符。
    */
   Name: string
   /**
-   * 执行器类型，当前仅支持周期类型执行器，取值：`SCHEDULE` 。
+   * 执行器类型。
+
+可选取值（当前仅支持一种）：
+
+- `SCHEDULE`：周期类型执行器。
    */
   Type: string
   /**
@@ -1043,17 +1054,19 @@ export interface CreateInvokerRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 命令执行用户。
+   * 命令执行用户。长度不超过 256 字符。
    */
   Username?: string
   /**
-   * 命令自定义参数。
+   * 命令自定义参数。字段类型为 JSON encode string。
 
 仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。
    */
   Parameters?: string
   /**
-   * 周期执行器设置。当创建周期执行器时，必须指定此参数。
+   * 周期执行器设置。
+
+当执行器类型为 `SCHEDULE` 时，必须指定此参数。
    */
   ScheduleSettings?: ScheduleSettings
 }
@@ -1067,6 +1080,8 @@ export interface DescribeAutomationAgentStatusRequest {
 
 可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。
 
+每次请求的上限为 100。
+
 参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。
    */
   InstanceIds?: Array<string>
@@ -1075,7 +1090,7 @@ export interface DescribeAutomationAgentStatusRequest {
 - environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。
 - instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。
 
-参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。
+每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。
    */
   Filters?: Array<Filter>
   /**
@@ -1174,7 +1189,9 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
  */
 export interface DescribeInvokersRequest {
   /**
-   * 执行器ID列表。
+   * 执行器 ID 列表。
+
+每次请求的上限为 100。
 
 参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。
 
@@ -1185,9 +1202,9 @@ export interface DescribeInvokersRequest {
 
 - invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。
 - command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。
-- type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。目前仅支持 SCHEDULE 一种。
+- invoker-type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。目前仅支持 SCHEDULE 一种。
 
-参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。
+每次请求的 `Filters` 的上限为 10，`Filter.Values` 的上限为 5。参数不支持同时指定 `InvokerIds` 和 `Filters` 。
    */
   Filters?: Array<Filter>
   /**
@@ -1653,6 +1670,10 @@ export interface CancelInvocationRequest {
 export interface DescribeRegisterCodesRequest {
   /**
    * 注册码ID。
+
+每次请求的上限为 100。
+
+参数不支持同时指定 `RegisterCodeIds ` 和 `Filters ` 。
    */
   RegisterCodeIds?: Array<string>
   /**
@@ -1719,6 +1740,8 @@ export interface Scene {
 export interface DescribeScenesRequest {
   /**
    * 场景 ID 数组。
+
+每次请求的上限为 100。
 
 参数不支持同时指定 `SceneIds ` 和 `Filters ` 。
 

@@ -761,12 +761,10 @@ export interface ResizeDiskResponse {
 export interface Disk {
   /**
    * 云盘是否与挂载的实例一起销毁。<br><li>true:销毁实例时会同时销毁云盘，只支持按小时后付费云盘。</li><li>false：销毁实例时不销毁云盘。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeleteWithInstance?: boolean
   /**
    * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: string
   /**
@@ -783,7 +781,6 @@ export interface Disk {
   SnapshotCount?: number
   /**
    * 云盘已挂载到子机，且子机与云盘都是包年包月。<br><li>true：子机设置了自动续费标识，但云盘未设置</li><li>false：云盘自动续费标识正常。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlagError?: boolean
   /**
@@ -808,7 +805,6 @@ export interface Disk {
   BackupDisk?: boolean
   /**
    * 与云盘绑定的标签，云盘未绑定标签则取值为空。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
@@ -817,22 +813,19 @@ export interface Disk {
   InstanceId?: string
   /**
    * 云盘的挂载类型。取值范围：<br><li>PF: PF挂载</li><li>VF: VF挂载</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachMode?: string
   /**
-   * 云盘关联的定期快照ID。只有在调用DescribeDisks接口时，入参ReturnBindAutoSnapshotPolicy取值为TRUE才会返回该参数。
+   * 云盘关联的定期快照ID。只有在调用[DescribeDisks](/document/product/362/16315)接口时，入参ReturnBindAutoSnapshotPolicy取值为TRUE才会返回该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoSnapshotPolicyIds?: Array<string>
   /**
-   * 云硬盘额外性能值，单位MB/s。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云硬盘额外性能值，单位MiB/s。
    */
   ThroughputPerformance?: number
   /**
    * 云盘是否处于类型变更中。取值范围：<br><li>false:表示云盘不处于类型变更中</li><li>true:表示云盘已发起类型变更，正处于迁移中。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Migrating?: boolean
   /**
@@ -840,7 +833,7 @@ export interface Disk {
    */
   DiskId?: string
   /**
-   * 云盘拥有的快照总容量，单位为MB。
+   * 云盘拥有的快照总容量，单位为MiB。
    */
   SnapshotSize?: number
   /**
@@ -866,7 +859,6 @@ export interface Disk {
   DiskSize?: number
   /**
    * 云盘类型变更的迁移进度，取值0到100。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MigratePercent?: number
   /**
@@ -887,7 +879,6 @@ export interface Disk {
   SnapshotAbility?: boolean
   /**
    * 在云盘已挂载到实例，且实例与云盘都是包年包月的条件下，此字段才有意义。<br><li>true:云盘到期时间早于实例。</li><li>false：云盘到期时间晚于实例。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeadlineError?: boolean
   /**
@@ -895,13 +886,12 @@ export interface Disk {
    */
   RollbackPercent?: number
   /**
-   * 当前时间距离盘到期的天数（仅对预付费盘有意义）。
+   * 当前时间距离云硬盘到期的天数（仅对预付费云硬盘有意义）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DifferDaysOfDeadline?: number
   /**
-   * 预付费云盘在不支持主动退还的情况下，该参数表明不支持主动退还的具体原因。取值范围：<br><li>1：云硬盘已经退还</li><li>2：云硬盘已过期</li><li>3：云盘不支持退还</li><li>8：超过可退还数量的限制。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预付费云盘在不支持主动退还的情况下，该参数表明不支持主动退还的具体原因。取值范围：<br><li>1：云硬盘已经退还</li><li>2：云硬盘已过期</li><li>3：云盘不支持退还</li><li>8：超过可退还数量的限制。</li><li>10：非弹性云硬盘、系统盘、后付费云硬盘等不支持退还</li>
    */
   ReturnFailCode?: number
   /**
@@ -935,19 +925,20 @@ export interface Disk {
   LastAttachInsId?: string
   /**
    * 云硬盘最后一次操作错误提示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorPrompt?: string
   /**
    * 云盘是否开启性能突发
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BurstPerformance?: boolean
   /**
    * 云硬盘加密类型，值为ENCRYPT_V1和ENCRYPT_V2，分别表示第一代和第二代加密技术，两种加密技术互不兼容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptType?: string
+  /**
+   * 加密盘密钥ID
+   */
+  KmsKeyId?: string
 }
 
 /**
@@ -1287,7 +1278,8 @@ export interface ModifySnapshotAttributeResponse {
  */
 export interface ModifyDiskAttributesRequest {
   /**
-   * 一个或多个待操作的云硬盘ID。如果传入多个云盘ID，仅支持所有云盘修改为同一属性。
+   * 一个或多个待操作的云硬盘ID，可以通过[DescribeDisks](/document/product/362/16315)接口查询。如果传入多个云盘ID，仅支持将所有云盘修改为同一属性。
+
    */
   DiskIds: Array<string>
   /**
@@ -1308,10 +1300,13 @@ export interface ModifyDiskAttributesRequest {
   DeleteWithInstance?: boolean
   /**
    * 变更云盘类型时，可传入该参数，表示变更的目标类型，取值范围：<br><li>CLOUD_PREMIUM：表示高性能云硬盘</li><li>CLOUD_SSD：表示SSD云硬盘。</li>当前不支持批量变更类型，即传入DiskType时，DiskIds仅支持传入一块云盘；<br>变更云盘类型时不支持同时变更其他属性。
+具体说明请参考[调整云硬盘类型](https://cloud.tencent.com/document/product/362/32540)
    */
   DiskType?: string
   /**
-   * 开启/关闭云盘性能突发功能
+   * 开启/关闭云盘性能突发功能，取值范围： 
+CREATE：开启
+CANCEL：关闭
    */
   BurstPerformanceOperation?: string
 }
@@ -1446,7 +1441,7 @@ export interface ModifyDisksChargeTypeRequest {
  */
 export interface InitializeDisksRequest {
   /**
-   * 待重新初始化的云硬盘ID列表， 单次初始化限制20块以内
+   * 待重新初始化的云硬盘ID列表，可以通过[DescribeDisks](/document/product/362/16315)接口查询， 单次初始化限制20块以内
    */
   DiskIds: Array<string>
 }
@@ -1997,7 +1992,7 @@ export interface DiskBackup {
  */
 export interface DescribeDisksRequest {
   /**
-   * 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。<br> <li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)<br></li> <li>disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)<br></li> <li>portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)<br></li> <li>project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。<br></li> <li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。<br></li> <li>disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。<br></li> <li>disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。)<br></li> <li>disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)<br></li> <li>instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。<br></li> <li>zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753#ZoneInfo)过滤。<br></li> <li>instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。<br></li> <li>instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。<br></li> <li>tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。<br></li> <li>tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。<br></li> <li>tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。<br></li> <li>dedicated-cluster-id - Array of String - 是否必填：否 -（过滤条件）按照 CDC 独享集群 ID 进行过滤。<br></li> <li>cluster-group-id - String - 是否必填：否 -（过滤条件）按照 集群群组 ID 进行过滤。</li>
+   * 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。<br> <li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)<br></li> <li>disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)<br></li> <li>portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)<br></li> <li>project-id - Array of String - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。<br></li> <li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。<br></li> <li>disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。<br></li> <li>disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。)<br></li> <li>disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收 | DUMPING：拷贝硬盘中。)<br></li> <li>instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。<br></li> <li>zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753#ZoneInfo)过滤。<br></li> <li>instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。<br></li> <li>instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。<br></li> <li>tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。<br></li> <li>tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。<br></li> <li>tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。<br></li> <li>dedicated-cluster-id - Array of String - 是否必填：否 -（过滤条件）按照 CDC 独享集群 ID 进行过滤。<br></li> <li>cluster-group-id - String - 是否必填：否 -（过滤条件）按照 集群群组 ID 进行过滤。</li>
    */
   Filters?: Array<Filter>
   /**

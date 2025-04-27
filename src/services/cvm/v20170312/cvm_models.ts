@@ -1090,11 +1090,11 @@ export interface RebootInstancesRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常重启失败后选择强制重启实例。取值范围：<br><li>true：表示在正常重启失败后进行强制重启<br><li>false：表示在正常重启失败后不进行强制重启<br><br>默认取值：false。
+   * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常重启失败后选择强制重启实例。取值范围：<br><li>true：表示在正常重启失败后进行强制重启</li><li>false：表示在正常重启失败后不进行强制重启</li><br>默认取值：false。
    */
   ForceReboot?: boolean
   /**
-   * 关机类型。取值范围：<br><li>SOFT：表示软关机<br><li>HARD：表示硬关机<br><li>SOFT_FIRST：表示优先软关机，失败再执行硬关机<br><br>默认取值：SOFT。
+   * 关机类型。取值范围：<br><li>SOFT：表示软关机</li><li>HARD：表示硬关机</li><li>SOFT_FIRST：表示优先软关机，失败再执行硬关机</li><br>默认取值：SOFT。
    */
   StopType?: string
 }
@@ -1572,11 +1572,12 @@ export interface ModifyImageAttributeRequest {
  */
 export interface EnterRescueModeRequest {
   /**
-   * 需要进入救援模式的实例id
+   * 需要进入救援模式的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。
+
    */
   InstanceId: string
   /**
-   * 救援模式下系统密码
+   * 救援模式下系统密码。不同操作系统类型密码复杂度限制不一样，具体如下：<li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。</li><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。</li>
    */
   Password: string
   /**
@@ -2573,11 +2574,15 @@ export interface Image {
    */
   OsName?: string
   /**
-   * 镜像类型
+   * 镜像类型。镜像类型返回值包括：
+   * `PUBLIC_IMAGE` 公共镜像
+   * `PRIVATE_IMAGE` 自定义镜像
+   * `SHARED_IMAGE` 共享镜像
    */
   ImageType?: string
   /**
-   * 镜像创建时间
+   * 镜像创建时间。
+按照 ISO8601 标准表示，并且使用 UTC 时间，格式为：YYYY-MM-DDThh:mm:ssZ。
    */
   CreatedTime?: string
   /**
@@ -2589,11 +2594,14 @@ export interface Image {
    */
   ImageDescription?: string
   /**
-   * 镜像大小
+   * 镜像大小，单位 GiB。
    */
   ImageSize?: number
   /**
-   * 镜像架构
+   * 镜像架构。镜像架构返回值包括：
+   * `x86_64`
+   * `arm`
+   * `i386`
    */
   Architecture?: string
   /**
@@ -2616,7 +2624,10 @@ IMPORTFAILED-导入失败
    */
   ImageCreator?: string
   /**
-   * 镜像来源
+   * 镜像来源。镜像来源返回值包括：
+   * `OFFICIAL` 官方镜像
+   * `CREATE_IMAGE` 用户自建镜像
+   * `EXTERNAL_IMPORT` 用户外部导入镜像
    */
   ImageSource?: string
   /**
@@ -2637,7 +2648,9 @@ IMPORTFAILED-导入失败
    */
   Tags?: Array<Tag>
   /**
-   * 镜像许可类型
+   * 镜像许可类型。镜像许可类型返回值包括：
+   * `TencentCloud` 腾讯云官方许可
+   * `BYOL` 用户自带许可
    */
   LicenseType?: string
   /**
@@ -2648,6 +2661,10 @@ IMPORTFAILED-导入失败
    * 镜像是否废弃
    */
   ImageDeprecated?: boolean
+  /**
+   * CDC镜像缓存状态
+   */
+  CdcCacheStatus?: string
 }
 
 /**
@@ -4294,7 +4311,7 @@ export interface AllocateHostsResponse {
  */
 export interface DescribeImageSharePermissionRequest {
   /**
-   * 需要共享的镜像Id
+   * 需要共享的镜像 ID，可通过 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) 接口返回的`ImageId`获取。
    */
   ImageId: string
 }
@@ -5252,7 +5269,8 @@ export interface TerminateInstancesRequest {
  */
 export interface SharePermission {
   /**
-   * 镜像分享时间
+   * 镜像分享时间。
+按照 ISO8601 标准表示，并且使用 UTC 时间，格式为：YYYY-MM-DDThh:mm:ssZ。
    */
   CreatedTime?: string
   /**
@@ -5796,17 +5814,17 @@ export interface DescribeImagesRequest {
 <li><strong>image-id</strong></li>
 <p style="padding-left: 30px;">按照【<strong>镜像ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>image-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>镜像类型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：</p><p style="padding-left: 30px;">PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像)</p><p style="padding-left: 30px;">PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)</p><p style="padding-left: 30px;">SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像)</p>
+<p style="padding-left: 30px;">按照【<strong>镜像类型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：</p><p style="padding-left: 30px;">PRIVATE_IMAGE: 自定义镜像 (本账户创建的镜像)</p><p style="padding-left: 30px;">PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)</p><p style="padding-left: 30px;">SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像)</p>
 <li><strong>image-name</strong></li>
-<p style="padding-left: 30px;">按照【<strong>镜像名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>镜像名称</strong>】进行过滤。支持模糊查询。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>platform</strong></li>
-<p style="padding-left: 30px;">按照【<strong>镜像平台</strong>】进行过滤，如CentOS。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>镜像平台</strong>】进行过滤，如 CentOS，支持模糊匹配。可通过 <a href="https://cloud.tencent.com/document/api/213/15715" target="_blank">DescribeImages</a> 接口返回的<code> Platform </code>获取。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-key</strong></li>
-<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。可通过 <a href="https://cloud.tencent.com/document/product/651/72275" target="_blank"> GetTags </a> 接口返回的<code> TagKey </code>获取。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-value</strong></li>
-<p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。可通过 <a href="https://cloud.tencent.com/document/product/651/72275" target="_blank"> GetTags </a> 接口返回的<code> TagValue </code>获取。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag:tag-key</strong></li>
-<p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。可通过 <a href="https://cloud.tencent.com/document/product/651/72275" target="_blank"> GetTags </a> 接口返回的<code> TagKey 和 TagValue </code>获取。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
    */
   Filters?: Array<Filter>
   /**
@@ -5818,7 +5836,7 @@ export interface DescribeImagesRequest {
    */
   Limit?: number
   /**
-   * 实例类型，如 `S1.SMALL1`
+   * 实例类型，如 `S1.SMALL1`。可通过 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 接口返回的 `InstanceType` 获取。
    */
   InstanceType?: string
 }
@@ -6460,7 +6478,7 @@ DATA_DISK：数据盘。
    */
   DiskUsage?: string
   /**
-   * 创建此快照的云硬盘大小，单位GB。
+   * 创建此快照的云硬盘大小，单位 GiB。
    */
   DiskSize?: number
 }

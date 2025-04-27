@@ -3627,7 +3627,7 @@ export interface DescribeFlowId {
  */
 export interface DescribeSmartSubtitleTemplatesRequest {
   /**
-   * 智能字幕模板唯一标识过滤条件，数组长度限制：10。
+   * 智能字幕模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number | bigint>
   /**

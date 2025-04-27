@@ -810,7 +810,7 @@ export interface DeviceDetail {
    */
   NGNStrategyVer?: string
   /**
-   * 最近登录账户的账号
+   * 最近登录账户的账号(账号系统用户账号)
    */
   IOAUserName?: string
   /**
@@ -846,13 +846,17 @@ export interface DeviceDetail {
    */
   AccountGroupName?: string
   /**
-   * 最近登录账户的姓名
+   * 最近登录账户的姓名(账号系统用户姓名)
    */
   AccountName?: string
   /**
    * 账号组id
    */
   AccountGroupId?: number
+  /**
+   * 终端备注名
+   */
+  RemarkName?: string
 }
 
 /**

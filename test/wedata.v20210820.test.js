@@ -2228,6 +2228,16 @@ it("wedata.v20210820.DescribeOpsMakePlans", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTenantProjects", async function () {
+    try {
+       const data = await client.DescribeTenantProjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeWorkflowCanvasInfo", async function () {
     try {
        const data = await client.DescribeWorkflowCanvasInfo({})

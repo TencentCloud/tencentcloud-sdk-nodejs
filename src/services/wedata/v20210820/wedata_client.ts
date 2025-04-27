@@ -124,6 +124,7 @@ import {
   ModifyWorkflowScheduleRequest,
   CreateDsFolderRequest,
   RegisterEventRequest,
+  EventCaseOpsDto,
   InstanceDetailVO,
   MakePlanOpsDtoCollection,
   DescribeTableMetasResponse,
@@ -168,7 +169,7 @@ import {
   TableLineageInfo,
   DescribeSchedulerInstanceStatusResponse,
   CountOpsInstanceStateRequest,
-  EventCaseOpsDto,
+  DescribeThirdTaskRunLogResponse,
   CreateTaskVersionDsResponse,
   InstanceNodeInfo,
   BatchUpdateIntegrationTasksRequest,
@@ -202,6 +203,7 @@ import {
   DescribeDependTaskListsRequest,
   DatabaseMeta,
   DescribeAllByFolderNewRequest,
+  DescribeTenantProjectsRequest,
   DescribeTaskRunHistoryResponse,
   BatchStopWorkflowsByIdsRequest,
   DescribeDutyScheduleListResponse,
@@ -274,6 +276,7 @@ import {
   DescribeDataServicePublishedApiListResp,
   KillScheduleInstancesResponse,
   TablePartition,
+  ProjectPage,
   DescribeWorkflowTaskCountRequest,
   DescribeInstanceListRequest,
   ModifyWorkflowScheduleResponse,
@@ -563,7 +566,7 @@ import {
   SpeedValue,
   FunctionVersion,
   RuleExecDateStat,
-  DescribeThirdTaskRunLogResponse,
+  DescribeTenantProjectsResponse,
   DescribeTaskAlarmRegulationsRequest,
   CreateCustomFunctionResponse,
   ScreenInstanceInfo,
@@ -3033,6 +3036,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeOpsMakePlansResponse) => void
   ): Promise<DescribeOpsMakePlansResponse> {
     return this.request("DescribeOpsMakePlans", req, cb)
+  }
+
+  /**
+   * 租户全局范围的项目列表，与用户查看范围无关.
+   */
+  async DescribeTenantProjects(
+    req: DescribeTenantProjectsRequest,
+    cb?: (error: string, rep: DescribeTenantProjectsResponse) => void
+  ): Promise<DescribeTenantProjectsResponse> {
+    return this.request("DescribeTenantProjects", req, cb)
   }
 
   /**

@@ -716,35 +716,35 @@ export interface MySqlProcess {
   /**
    * 线程ID。
    */
-  ID: string
+  ID?: string
   /**
    * 线程的操作账号名。
    */
-  User: string
+  User?: string
   /**
    * 线程的操作主机地址。
    */
-  Host: string
+  Host?: string
   /**
    * 线程的操作数据库。
    */
-  DB: string
+  DB?: string
   /**
    * 线程的操作状态。
    */
-  State: string
+  State?: string
   /**
    * 线程的执行类型。
    */
-  Command: string
+  Command?: string
   /**
    * 线程的操作时长，单位秒。
    */
-  Time: string
+  Time?: string
   /**
    * 线程的操作语句。
    */
-  Info: string
+  Info?: string
 }
 
 /**
