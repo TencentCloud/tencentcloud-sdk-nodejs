@@ -41,6 +41,7 @@ import {
   UpdateOrganizationResponse,
   DescribeDeviceData,
   ListAITasksResponse,
+  BatchDeleteVideoDownloadTaskRequest,
   AIConfig,
   UpdateDeviceOrganizationRequest,
   UpdateDeviceOrganizationResponse,
@@ -75,7 +76,7 @@ import {
   DeleteRecordTemplateRequest,
   DescribeGatewayResponse,
   ListRecordBackupPlanDevicesData,
-  TaskData,
+  DeleteTaskResponse,
   DescribeGatewayRequest,
   AddRecordBackupTemplateData,
   DeleteUserDeviceRequest,
@@ -84,7 +85,7 @@ import {
   ListOrganizationChannelNumbersRequest,
   GatewayVersion,
   UpdateRecordBackupPlanModify,
-  UpdateAITaskRequest,
+  ListVideoDownloadTaskResponse,
   FaceMaskAIResultInfo,
   SmokingAIResultInfo,
   BaseAIResultInfo,
@@ -104,7 +105,7 @@ import {
   Location,
   AITemplates,
   DescribeOrganizationRequest,
-  UpdateAITaskStatusResponse,
+  TaskData,
   ControlRecordResponse,
   UpdateDeviceData,
   AddRecordPlanRequest,
@@ -112,8 +113,11 @@ import {
   DescribeOrganizationData,
   DescribeVideoDownloadUrlResponse,
   RecordPlanOptData,
+  ListSubTasksData,
   DescribeRecordPlanResponse,
+  Timeline,
   ListGatewaysData,
+  RecordRetrieveTaskChannelInfo,
   CallISAPIRequest,
   AddRecordRetrieveTaskRequest,
   DescribeRecordPlanRequest,
@@ -121,12 +125,13 @@ import {
   ListRecordBackupPlansResponse,
   OrganizationChannelInfo,
   ChannelInfo,
-  RecordRetrieveTaskChannelInfo,
+  DescribeDevicePresetRequest,
   DescribeDomainRequest,
   BatchOperateDeviceData,
   RecordPlaybackUrl,
-  ListSubTasksData,
+  BatchDeleteVideoDownloadTaskResponse,
   ListOrganizationChannelNumbersData,
+  VideoDownloadTask,
   CallISAPIResponse,
   ListRecordPlanDevicesRequest,
   ListTasksResponse,
@@ -144,12 +149,15 @@ import {
   ListRecordBackupTemplatesResponse,
   ListRecordPlanChannelsResponse,
   CarAIResultInfo,
+  UpdateRecordTemplateRequest,
   DescribeRecordPlaybackUrlRequest,
+  DescribeDeviceAddrList,
   ListRecordPlansResponse,
   DescribeRecordTemplateResponse,
   DescribeAITaskResultResponse,
   ListRecordPlanDevicesResponse,
   DescribeDevicePresetResponse,
+  UpdateAITaskRequest,
   UpdateRecordBackupPlanRequest,
   RecordTimeLine,
   DescribeGatewayVersionData,
@@ -159,6 +167,7 @@ import {
   AddOrgData,
   AddUserDeviceRequest,
   ListRecordBackupPlanDevicesResponse,
+  DeleteTaskRequest,
   GatewayDevice,
   ControlDevicePTZRequest,
   DescribeRecordBackupPlanRequest,
@@ -166,13 +175,14 @@ import {
   DescribeDeviceChannelRequest,
   UpdateUserDeviceResponse,
   GatewaysData,
+  VideoDownloadTaskData,
   ListGatewayDevicesData,
   ListForbidplayChannelsData,
-  DescribeDevicePresetRequest,
+  CreateVideoDownloadTaskResponse,
   ListGatewaysResponse,
   AddRecordBackupPlanData,
   DescribeGatewayProtocolResponse,
-  Timeline,
+  DescribeGBDeviceAddrRequest,
   ListAITaskData,
   ControlDeviceSnapshotRequest,
   UpdateRecordTemplateData,
@@ -200,9 +210,11 @@ import {
   PlayRecordRequest,
   RecordSliceInfo,
   QueryForbidPlayChannelListRequest,
+  ListVideoDownloadTaskData,
   PlateContent,
   UpgradeGatewayRequest,
   DescribeRecordFileResponse,
+  DescribeGBDeviceAddrResponse,
   ControlDevicePresetRequest,
   ControlDeviceStreamRequest,
   ListRecordRetrieveTasksResponse,
@@ -233,12 +245,14 @@ import {
   AddAITaskResponse,
   DescribeDeviceRegion,
   RecordPlanChannelInfo,
+  UpdateAITaskStatusResponse,
   SetForbidPlayChannelsResponse,
-  UpdateRecordTemplateRequest,
+  ListVideoDownloadTaskRequest,
   DeleteRecordBackupTemplateRequest,
   ListGatewayDevicesRequest,
   DeleteAITaskResponse,
   DescribeVideoBitRateList,
+  UpdateRecordTemplateResponse,
   AddRecordBackupTemplateResponse,
   PlayRecordResponse,
   DescribeGatewayMonitorResponse,
@@ -269,6 +283,7 @@ import {
   UpdateRecordBackupTemplateRequest,
   UpdateDeviceStatusResponse,
   DeleteUserDeviceResponse,
+  RemoteAddrInfo,
   UpdateRecordBackupPlanResponse,
   DescribeDomainRegionData,
   AddOrganizationRequest,
@@ -276,7 +291,7 @@ import {
   DescribeStreamAuthResponse,
   ListRecordBackupPlanData,
   DeleteRecordBackupTemplateResponse,
-  UpdateRecordTemplateResponse,
+  CreateVideoDownloadTaskRequest,
   DescribeRecordRetrieveTaskResponse,
   DescribeStreamAuthRequest,
   UpdateRecordBackupTemplateData,
@@ -445,13 +460,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改实时上云模板
+   * 用于设置推拉流鉴权配置。
    */
-  async UpdateRecordTemplate(
-    req: UpdateRecordTemplateRequest,
-    cb?: (error: string, rep: UpdateRecordTemplateResponse) => void
-  ): Promise<UpdateRecordTemplateResponse> {
-    return this.request("UpdateRecordTemplate", req, cb)
+  async AddStreamAuth(
+    req: AddStreamAuthRequest,
+    cb?: (error: string, rep: AddStreamAuthResponse) => void
+  ): Promise<AddStreamAuthResponse> {
+    return this.request("AddStreamAuth", req, cb)
   }
 
   /**
@@ -475,13 +490,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于设置推拉流鉴权配置。
+   * 用于修改实时上云模板
    */
-  async AddStreamAuth(
-    req: AddStreamAuthRequest,
-    cb?: (error: string, rep: AddStreamAuthResponse) => void
-  ): Promise<AddStreamAuthResponse> {
-    return this.request("AddStreamAuth", req, cb)
+  async UpdateRecordTemplate(
+    req: UpdateRecordTemplateRequest,
+    cb?: (error: string, rep: UpdateRecordTemplateResponse) => void
+  ): Promise<UpdateRecordTemplateResponse> {
+    return this.request("UpdateRecordTemplate", req, cb)
   }
 
   /**
@@ -562,6 +577,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoBitRateResponse) => void
   ): Promise<DescribeVideoBitRateResponse> {
     return this.request("DescribeVideoBitRate", req, cb)
+  }
+
+  /**
+   * 创建本地录像下载任务
+   */
+  async CreateVideoDownloadTask(
+    req: CreateVideoDownloadTaskRequest,
+    cb?: (error: string, rep: CreateVideoDownloadTaskResponse) => void
+  ): Promise<CreateVideoDownloadTaskResponse> {
+    return this.request("CreateVideoDownloadTask", req, cb)
   }
 
   /**
@@ -805,6 +830,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于批量删除本地录像下载失败的任务
+   */
+  async BatchDeleteVideoDownloadTask(
+    req: BatchDeleteVideoDownloadTaskRequest,
+    cb?: (error: string, rep: BatchDeleteVideoDownloadTaskResponse) => void
+  ): Promise<BatchDeleteVideoDownloadTaskResponse> {
+    return this.request("BatchDeleteVideoDownloadTask", req, cb)
+  }
+
+  /**
    * 用于查询任务的子任务列表
    */
   async ListSubTasks(
@@ -835,6 +870,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于获取国标设备的公网地址
+   */
+  async DescribeGBDeviceAddr(
+    req: DescribeGBDeviceAddrRequest,
+    cb?: (error: string, rep: DescribeGBDeviceAddrResponse) => void
+  ): Promise<DescribeGBDeviceAddrResponse> {
+    return this.request("DescribeGBDeviceAddr", req, cb)
+  }
+
+  /**
    * 用于查询用户下所有实时上云计划中的通道列表
    */
   async ListRecordPlanChannels(
@@ -852,6 +897,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUserDeviceResponse) => void
   ): Promise<AddUserDeviceResponse> {
     return this.request("AddUserDevice", req, cb)
+  }
+
+  /**
+   * 用于删除执行完成的任务
+   */
+  async DeleteTask(
+    req: DeleteTaskRequest,
+    cb?: (error: string, rep: DeleteTaskResponse) => void
+  ): Promise<DeleteTaskResponse> {
+    return this.request("DeleteTask", req, cb)
   }
 
   /**
@@ -986,6 +1041,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserDeviceResponse) => void
   ): Promise<DeleteUserDeviceResponse> {
     return this.request("DeleteUserDevice", req, cb)
+  }
+
+  /**
+   * 查询本店里录像下载任务列表
+   */
+  async ListVideoDownloadTask(
+    req: ListVideoDownloadTaskRequest,
+    cb?: (error: string, rep: ListVideoDownloadTaskResponse) => void
+  ): Promise<ListVideoDownloadTaskResponse> {
+    return this.request("ListVideoDownloadTask", req, cb)
   }
 
   /**

@@ -439,8 +439,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【接口下线中，请勿使用】本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
-   */
+     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
+
+【接口下线中，请勿使用】本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
+     */
   async DeleteServerlessDBInstance(
     req: DeleteServerlessDBInstanceRequest,
     cb?: (error: string, rep: DeleteServerlessDBInstanceResponse) => void
@@ -660,8 +662,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【接口下线中，请勿使用】本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
-   */
+     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
+
+【接口下线中，请勿使用】本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
+     */
   async CloseServerlessDBExtranetAccess(
     req: CloseServerlessDBExtranetAccessRequest,
     cb?: (error: string, rep: CloseServerlessDBExtranetAccessResponse) => void
@@ -680,8 +684,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【接口下线中，请勿使用】本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
-   */
+     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
+
+【接口下线中，请勿使用】本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
+     */
   async CreateServerlessDBInstance(
     req: CreateServerlessDBInstanceRequest,
     cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void
@@ -750,8 +756,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【接口下线中，请勿使用】本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
-   */
+     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
+
+【接口下线中，请勿使用】本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
+     */
   async OpenServerlessDBExtranetAccess(
     req: OpenServerlessDBExtranetAccessRequest,
     cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void
@@ -790,8 +798,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 【接口下线中，请勿使用】用于查询一个或多个serverlessDB实例的详细信息
-   */
+     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
+
+【接口下线中，请勿使用】用于查询一个或多个serverlessDB实例的详细信息
+     */
   async DescribeServerlessDBInstances(
     req: DescribeServerlessDBInstancesRequest,
     cb?: (error: string, rep: DescribeServerlessDBInstancesResponse) => void

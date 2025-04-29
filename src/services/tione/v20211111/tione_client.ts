@@ -25,7 +25,7 @@ import {
   DeleteTrainingModelVersionResponse,
   ServiceEIP,
   NotebookSetItem,
-  StartTrainingTaskRequest,
+  ModifyNotebookTagsRequest,
   SSHConfig,
   Usage,
   AuthTokenBase,
@@ -39,6 +39,7 @@ import {
   HyperParameter,
   DescribeTrainingTasksRequest,
   VolumeMount,
+  ModifyNotebookTagsResponse,
   DescribeBillingResourceGroupResponse,
   ServiceCallInfo,
   CosPathInfo,
@@ -56,6 +57,7 @@ import {
   InferTemplate,
   DescribeModelAccelerateVersionsResponse,
   DescribeBuildInImagesRequest,
+  StartTrainingTaskRequest,
   ContainerStatus,
   ModifyModelServiceRequest,
   ChatCompletionRequest,
@@ -378,6 +380,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChatCompletionResponse) => void
   ): Promise<ChatCompletionResponse> {
     return this.request("ChatCompletion", req, cb)
+  }
+
+  /**
+   * 修改Notebook标签
+   */
+  async ModifyNotebookTags(
+    req: ModifyNotebookTagsRequest,
+    cb?: (error: string, rep: ModifyNotebookTagsResponse) => void
+  ): Promise<ModifyNotebookTagsResponse> {
+    return this.request("ModifyNotebookTags", req, cb)
   }
 
   /**

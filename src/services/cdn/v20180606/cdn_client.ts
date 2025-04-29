@@ -457,8 +457,10 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
   }
 
   /**
-   * 获取Waf攻击Top数据
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+获取Waf攻击Top数据
+     */
   async ListTopWafData(
     req: ListTopWafDataRequest,
     cb?: (error: string, rep: ListTopWafDataResponse) => void
@@ -598,8 +600,10 @@ GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
   }
 
   /**
-   * CC统计数据查询
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+CC统计数据查询
+     */
   async DescribeCcData(
     req: DescribeCcDataRequest,
     cb?: (error: string, rep: DescribeCcDataResponse) => void
@@ -672,8 +676,10 @@ DescribeDiagnoseReport 用于获取指定报告id的内容。
   }
 
   /**
-   * DDoS统计数据查询
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+DDoS统计数据查询
+     */
   async DescribeDDoSData(
     req: DescribeDDoSDataRequest,
     cb?: (error: string, rep: DescribeDDoSDataResponse) => void
@@ -704,8 +710,10 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-   * 获取CC攻击Top数据
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+获取CC攻击Top数据
+     */
   async ListTopCcData(
     req: ListTopCcDataRequest,
     cb?: (error: string, rep: ListTopCcDataResponse) => void
@@ -760,8 +768,10 @@ ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任�
   }
 
   /**
-   * 获取Bot攻击的Top信息
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+获取Bot攻击的Top信息
+     */
   async ListTopBotData(
     req: ListTopBotDataRequest,
     cb?: (error: string, rep: ListTopBotDataResponse) => void
@@ -918,7 +928,7 @@ StartScdnDomain 用于开启域名的安全防护配置
 
   /**
      * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。
-对应内容分发网络控制台【图片鉴黄】页面。
+对应内容分发网络控制台【内容合规】页面。
      */
   async DescribeUrlViolations(
     req: DescribeUrlViolationsRequest,
@@ -928,8 +938,10 @@ StartScdnDomain 用于开启域名的安全防护配置
   }
 
   /**
-   * Waf统计数据查询
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+Waf统计数据查询
+     */
   async DescribeWafData(
     req: DescribeWafDataRequest,
     cb?: (error: string, rep: DescribeWafDataResponse) => void
@@ -938,8 +950,10 @@ StartScdnDomain 用于开启域名的安全防护配置
   }
 
   /**
-   * 获取DDoS攻击Top数据
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+获取DDoS攻击Top数据
+     */
   async ListTopDDoSData(
     req: ListTopDDoSDataRequest,
     cb?: (error: string, rep: ListTopDDoSDataResponse) => void
@@ -1021,8 +1035,10 @@ StartScdnDomain 用于开启域名的安全防护配置
   }
 
   /**
-   * DescribeEventLogData 用于查询事件日志统计曲线
-   */
+     * SCDN平台下线，接口开始预下线处理
+
+DescribeEventLogData 用于查询事件日志统计曲线
+     */
   async DescribeEventLogData(
     req: DescribeEventLogDataRequest,
     cb?: (error: string, rep: DescribeEventLogDataResponse) => void

@@ -44,6 +44,10 @@ export interface ChatCompletionsRequest {
    * 最大生成的token数量，默认为4096，最大可设置为16384
    */
   MaxTokens?: number
+  /**
+   * 是否启用联网搜索
+   */
+  EnableSearch?: boolean
 }
 
 /**
@@ -654,6 +658,14 @@ export interface DocumentUsage {
    * 文档拆分任务消耗的总token数
    */
   TotalTokens?: number
+  /**
+   * 拆分消耗的token数
+   */
+  SplitTokens?: number
+  /**
+   * mllm消耗的token数
+   */
+  MllmTokens?: number
 }
 
 /**
@@ -672,6 +684,40 @@ export interface ListAttributeLabelsRequest {
    * 每页数目，最大50，默认20
    */
   PageSize?: number
+}
+
+/**
+ * 搜索结果
+ */
+export interface SearchResult {
+  /**
+   * 索引
+   */
+  Index?: number
+  /**
+   * 链接地址
+   */
+  Url?: string
+  /**
+   * 标题
+   */
+  Name?: string
+  /**
+   * 摘要
+   */
+  Snippet?: string
+  /**
+   * 图标
+   */
+  Icon?: string
+  /**
+   * 站点
+   */
+  Site?: string
+  /**
+   * 1740412800
+   */
+  PublishedTime?: number
 }
 
 /**
@@ -1505,6 +1551,10 @@ export interface Message {
 ReasoningConent参数仅支持出参，且只有deepseek-r1模型会返回。
    */
   ReasoningContent?: string
+  /**
+   * 搜索结果
+   */
+  SearchResults?: Array<SearchResult>
 }
 
 /**

@@ -35,6 +35,7 @@ import {
   DescribeScenesResponse,
   DescribeApplicationsRequest,
   SceneInfo,
+  CreateApplicationRequest,
   RunInstancesRequest,
   DescribeInstancesResponse,
   SystemDisk,
@@ -49,6 +50,7 @@ import {
   CreateMuskPromptResponse,
   DescribeServiceLoginSettingsRequest,
   ApplicationInfo,
+  CreateApplicationResponse,
   ItemPriceDetail,
   CreateMuskPromptRequest,
   DescribeRegionsRequest,
@@ -197,5 +199,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopInstanceResponse) => void
   ): Promise<StopInstanceResponse> {
     return this.request("StopInstance", req, cb)
+  }
+
+  /**
+   * 本接口（CreateApplicaiton）用于对HAI实例制作自定义应用。
+   */
+  async CreateApplication(
+    req: CreateApplicationRequest,
+    cb?: (error: string, rep: CreateApplicationResponse) => void
+  ): Promise<CreateApplicationResponse> {
+    return this.request("CreateApplication", req, cb)
   }
 }

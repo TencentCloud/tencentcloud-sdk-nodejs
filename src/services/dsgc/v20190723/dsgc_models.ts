@@ -1364,6 +1364,10 @@ export interface ScanTaskResult {
    * 结果建议
    */
   Suggestion?: string
+  /**
+   * 扫描进度
+   */
+  Progress?: number
 }
 
 /**

@@ -2297,6 +2297,10 @@ export interface OrderStep {
    */
   OwnerName?: string
   /**
+   * 处理人手机号
+   */
+  OwnerPhone?: string
+  /**
    * 完成时间
    */
   FinishTime?: string

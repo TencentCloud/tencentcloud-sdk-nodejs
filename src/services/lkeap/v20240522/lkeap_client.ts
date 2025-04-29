@@ -48,6 +48,7 @@ import {
   ListDocsResponse,
   DocumentUsage,
   ListAttributeLabelsRequest,
+  SearchResult,
   DeleteAttributeLabelsRequest,
   RetrieveKnowledgeRequest,
   Choice,

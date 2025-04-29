@@ -168,9 +168,9 @@ it("iss.v20230517.ListTasks", async function () {
     }
 })
 
-it("iss.v20230517.UpdateRecordTemplate", async function () {
+it("iss.v20230517.AddStreamAuth", async function () {
     try {
-       const data = await client.UpdateRecordTemplate({})
+       const data = await client.AddStreamAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("iss.v20230517.PlayRecord", async function () {
     }
 })
 
-it("iss.v20230517.AddStreamAuth", async function () {
+it("iss.v20230517.UpdateRecordTemplate", async function () {
     try {
-       const data = await client.AddStreamAuth({})
+       const data = await client.UpdateRecordTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +281,16 @@ it("iss.v20230517.DescribeRecordBackupTemplate", async function () {
 it("iss.v20230517.DescribeVideoBitRate", async function () {
     try {
        const data = await client.DescribeVideoBitRate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.CreateVideoDownloadTask", async function () {
+    try {
+       const data = await client.CreateVideoDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +538,16 @@ it("iss.v20230517.DescribeDevicePreset", async function () {
     }
 })
 
+it("iss.v20230517.BatchDeleteVideoDownloadTask", async function () {
+    try {
+       const data = await client.BatchDeleteVideoDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.ListSubTasks", async function () {
     try {
        const data = await client.ListSubTasks({})
@@ -558,6 +578,16 @@ it("iss.v20230517.DescribeAITaskResult", async function () {
     }
 })
 
+it("iss.v20230517.DescribeGBDeviceAddr", async function () {
+    try {
+       const data = await client.DescribeGBDeviceAddr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.ListRecordPlanChannels", async function () {
     try {
        const data = await client.ListRecordPlanChannels({})
@@ -571,6 +601,16 @@ it("iss.v20230517.ListRecordPlanChannels", async function () {
 it("iss.v20230517.AddUserDevice", async function () {
     try {
        const data = await client.AddUserDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.DeleteTask", async function () {
+    try {
+       const data = await client.DeleteTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +741,16 @@ it("iss.v20230517.UpdateRecordPlan", async function () {
 it("iss.v20230517.DeleteUserDevice", async function () {
     try {
        const data = await client.DeleteUserDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.ListVideoDownloadTask", async function () {
+    try {
+       const data = await client.ListVideoDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

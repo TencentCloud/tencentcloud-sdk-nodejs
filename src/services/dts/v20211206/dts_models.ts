@@ -127,10 +127,6 @@ export interface ModifyConsumerGroupPasswordRequest {
    * 新密码。字符长度不小于3，不大于32
    */
   NewPassword: string
-  /**
-   * 旧密码，非必选
-   */
-  OldPassword?: string
 }
 
 /**

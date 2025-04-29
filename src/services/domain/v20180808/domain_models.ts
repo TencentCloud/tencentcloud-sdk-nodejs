@@ -1238,15 +1238,15 @@ export interface PreReleaseInfo {
    */
   Domain?: string
   /**
-   * 预订倒计时
+   * 预订倒计时(YYYY-MM-DD hh:mm:ss)
    */
   ReservationTime?: string
   /**
-   * 域名注册时间
+   * 域名注册时间(YYYY-MM-DD hh:mm:ss)
    */
   RegTime?: string
   /**
-   * 域名删除时间
+   * 域名删除时间(YYYY-MM-DD hh:mm:ss)
    */
   DelTime?: string
   /**
@@ -1259,10 +1259,14 @@ export interface PreReleaseInfo {
   Price?: number
   /**
    * 是否收藏
+true：收藏
+false：未收藏
    */
   IsFollow?: boolean
   /**
    * 是否已经预约
+true：预约
+false：未预约
    */
   IsAppoint?: boolean
   /**
@@ -1271,6 +1275,8 @@ export interface PreReleaseInfo {
   BusinessId?: string
   /**
    * 是否为原持有者
+true：是原持有人
+false：非原持有人
    */
   IsDomainUser?: boolean
 }
@@ -2374,7 +2380,8 @@ export interface DescribeBiddingDetailRequest {
  */
 export interface DescribeTemplateRequest {
   /**
-   * 模板ID(模板列表接口可获取)
+   * 模板ID
+通过DescribeTemplateList接口获取:https://cloud.tencent.com/document/api/242/48940
    */
   TemplateId: string
 }
@@ -3090,19 +3097,34 @@ export interface SyncCustomDnsHostResponse {
  */
 export interface DescribePreReleaseListRequest {
   /**
-   * 关键词
+   * 单独使用Keywords：使用域名关键词进行搜索
+Keywords+DomainStart（true）：使用域名开头关键词进行搜索
+Keywords+DomainEnd（true）：使用域名结尾关键词进行搜索
+Keywords+DomainStart（true）+DomainEnd（true）：使用域名开头或结尾关键词进行搜索
    */
   Keywords?: string
   /**
-   * 搜索关键字，开头
+   * 是否以域名开头关键词进行搜索
+true：是
+false：否
    */
   DomainStart?: boolean
   /**
-   * 搜索关键字结尾
+   * 是否以域名结尾关键词进行搜索
+true：是
+false：否
    */
   DomainEnd?: boolean
   /**
-   * 排序
+   * 不同排序规则：
+1： 价格升序
+2： 价格降序
+3： 域名升序
+4： 结束时间升序
+5： 店铺推荐升序
+6： 结束时间降序
+15:  创建时间升序
+其他：结束时间升序
    */
   Sort?: number
   /**
@@ -3122,59 +3144,185 @@ export interface DescribePreReleaseListRequest {
    */
   LengthEnd?: number
   /**
-   * 页码
+   * 页码（默认为1）
    */
   PageNumber?: number
   /**
-   * 每页显示数
+   * 每页显示数（默认为20）
    */
   PageSize?: number
   /**
    * 后缀
+1="com"
+2="net"
+4="biz"
+6="info"
+7="co"
+9="cn"
+10="com.cn"
+11="wang"
+12="vip"
+13="cc"
+14="net.cn"
+15="org.cn"
+16="top"
+17="asia"
+18="tv"
+19="club"
+20="shop"
+21 ="中国"
+23="online"
+24="xyz"
+25="网店"
+26="网址"
+27="在线"
+28="ltd"
+29="fans"
+30="ren"
+31="icu"
    */
   Suffix?: Array<number | bigint>
   /**
    * 一级分类
+1:"纯数字"
+2:"单数字"
+3:"双数字"
+4:"三数字"
+5:"四数字"
+6:"五数字"
+7:"六数字"
+9:"单字母"
+10:"双字母"
+11:"三字母"
+12:"四字母"
+13:"五字母"
+14:"单拼"
+15:"双拼"
+16:"三拼"
+17:"杂米"
+18:"两杂"
+19:"三杂"
+20:"四杂"
+
    */
   ClassOne?: number
   /**
    * 二级分类
+13:"0开或带4"
+14:"非0开不带4"
+15:"不带0,4"
+0:"非全声母"
+6:"全声母"
+16:"不带0,4"
+32:"全声母"
+5010:"CVCV"
    */
   ClassTwo?: Array<number | bigint>
   /**
    * 三级分类
+111:"AAA"
+401:"3A及以上"
+402:"AA结尾"
+1122:"AABB"
+1123:"AABC"
+1212:"ABAB"
+1221:"ABBA"
+1233:"ABCC"
+501:"4A及以上"
+502:"3A及以上"
+503:"AAA开头"
+504:"AAA结尾"
+505:"AA开头"
+506:"AA结尾"
+507:"三顺子开头"
+508:"三顺子结尾"
+11223:"AABBC"
+12233:"ABBCC"
+601:"5A及以上"
+602:"4A及以上"
+603:"3A及以上"
+604:"4A开头"
+605:"4A结尾"
+606:"AAA开头"
+607:"AAA结尾"
+608:"AA开头"
+609:"AA结尾"
+610:"ABAB开头"
+611:"ABAB结尾"
+612:"AABB开头"
+613:"AABB结尾"
+614:"四顺子开头"
+615:"四顺子结尾"
+616:"三顺子开头"
+617:"三顺子结尾"
+121212:"ABABAB"
+112233:"AABBCC"
+123123:"ABCABC"
+211:"LNN"
+221:"LLN"
+121:"NLN"
+212:"LNL"
+122:"NLL"
+1112:"NNNL"
+2111:"LNNN"
+1212:"NLNL"
+2121:"LNLN"
+1222:"NLLL"
+2221:"LLLN"
+1122:"NNLL"
+2211:"LLNN"
+31:"W结尾"
+112:"AAB"
+122:"ABB"
+121:"ABA"
+41:"W结尾"
+1112:"AAAB"
+1222:"ABBB"
+1122:"AABB"
+1212:"ABAB"
    */
   ClassThree?: Array<number | bigint>
   /**
    * 四级分类
+1:"仅含2种数字"
+1:"仅含2种数字"
+2:"仅含3种数字"
+4:"仅含1种字母"
+8:"仅含1种数字"
+
    */
   ClassFour?: Array<number | bigint>
   /**
-   * 排除关键字，开头
+   * 是否以域名开头排除关键词进行搜索
    */
   FilterStart?: boolean
   /**
-   * 排除关键字，结尾
+   * 是否以域名结尾排除关键词进行搜索
    */
   FilterEnd?: boolean
   /**
-   * 排除关键字
+   * 域名排除关键词
+单独使用FilterWords：使用排除关键词进行搜索
+FilterWords+FilterStart（true）：使用域名开头排除关键词进行搜索
+FilterWords+FilterEnd（true）：使用域名结尾排除关键词进行搜索
+FilterWords+FilterStart（true）+FilterEnd（true）：使用域名开头或结尾排除关键词进行搜索
    */
   FilterWords?: string
   /**
-   * 交易类型
+   * 交易类型（目前只支持10）
+10: 预释放域名
    */
   TransType?: number
   /**
-   * 搜索白金域名
+   * 是否搜索白金域名
    */
   IsTop?: boolean
   /**
-   * 结束时间排序啊 desc:倒序 asc:正序
+   * 结束时间排序 desc:倒序 asc:正序
    */
   EndTimeSort?: string
   /**
-   * 结束时间
+   * 结束时间（YYYY-MM-DD）
    */
   EndTime?: string
 }

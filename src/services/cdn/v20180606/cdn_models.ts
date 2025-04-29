@@ -7040,7 +7040,7 @@ export interface ListTopClsLogDataRequest {
    */
   Channel?: string
   /**
-   * 要查询的Top条数，最大值为100，默认为10
+   * 要查询的Top条数，建议最大值100，默认为10
    */
   Limit?: number
   /**
@@ -9102,7 +9102,7 @@ export interface DescribeCertDomainsRequest {
    */
   Cert?: string
   /**
-   * 托管证书ID，Cert和CertId不能均未空，都填写时以CerId为准。
+   * 托管证书ID，Cert和CertId不能均未空，都填写时以CertId为准。
    */
   CertId?: string
   /**

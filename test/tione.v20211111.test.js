@@ -188,6 +188,16 @@ it("tione.v20211111.ChatCompletion", async function () {
     }
 })
 
+it("tione.v20211111.ModifyNotebookTags", async function () {
+    try {
+       const data = await client.ModifyNotebookTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingModel", async function () {
     try {
        const data = await client.DeleteTrainingModel({})

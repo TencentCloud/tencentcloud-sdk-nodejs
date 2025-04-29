@@ -427,6 +427,24 @@ export interface SceneInfo {
 }
 
 /**
+ * CreateApplication请求参数结构体
+ */
+export interface CreateApplicationRequest {
+  /**
+   * 需要制作自定义应用的HAI实例ID
+   */
+  InstanceId: string
+  /**
+   * 自定义应用的应用名称
+   */
+  ApplicationName: string
+  /**
+   * 自定义应用的描述
+   */
+  ApplicationDescription?: string
+}
+
+/**
  * RunInstances请求参数结构体
  */
 export interface RunInstancesRequest {
@@ -748,6 +766,20 @@ export interface ApplicationInfo {
    * 应用大小
    */
   ApplicationSize?: number
+}
+
+/**
+ * CreateApplication返回参数结构体
+ */
+export interface CreateApplicationResponse {
+  /**
+   * HAI自定义应用ID
+   */
+  ApplicationId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

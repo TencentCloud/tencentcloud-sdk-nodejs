@@ -2350,6 +2350,16 @@ export interface AgentProcedure {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplyIndex?: number
+  /**
+   * 主agent
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceAgentName?: string
+  /**
+   * 挂号agent
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetAgentName?: string
 }
 
 /**
@@ -5492,6 +5502,14 @@ export interface ModelInfo {
    * 模型类别 generate：生成模型，thought：思考模型
    */
   ModelCategory?: string
+  /**
+   * 是否默认模型
+   */
+  IsDefault?: boolean
+  /**
+   * 角色提示词输入长度限制
+   */
+  RoleLenLimit?: number
 }
 
 /**
@@ -7099,7 +7117,7 @@ export interface GetMsgRecordRequest {
    */
   Type: number
   /**
-   * 数量
+   * 数量,  数量需大于2
    */
   Count: number
   /**
@@ -7111,7 +7129,7 @@ export interface GetMsgRecordRequest {
    */
   LastRecordId?: string
   /**
-   * 应用AppKey, 当Type=5[API访客]时, 该字段必填
+   * 应用AppKey, 当Type=5[API访客]时, 该字段必填  :</br>  获取方式:</br>   1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取</br>   2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项
    */
   BotAppKey?: string
   /**

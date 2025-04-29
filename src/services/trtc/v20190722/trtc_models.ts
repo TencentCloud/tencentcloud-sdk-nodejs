@@ -1415,14 +1415,12 @@ export interface EmulateMobileParams {
    * 移动设备类型，
 0: 手机
 1: 平板
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MobileDeviceType?: number
   /**
    * 屏幕方向，
 0: 竖屏，
 1: 横屏
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScreenOrientation?: number
 }

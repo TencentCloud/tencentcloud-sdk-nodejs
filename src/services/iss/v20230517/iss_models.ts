@@ -644,6 +644,16 @@ export interface ListAITasksResponse {
 }
 
 /**
+ * BatchDeleteVideoDownloadTask请求参数结构体
+ */
+export interface BatchDeleteVideoDownloadTaskRequest {
+  /**
+   * 本地录像下载任务 ID 列表
+   */
+  DownloadTaskIds?: Array<string>
+}
+
+/**
  * AI分析配置
  */
 export interface AIConfig {
@@ -1190,89 +1200,13 @@ export interface ListRecordBackupPlanDevicesData {
 }
 
 /**
- * 查询复杂任务详情返回结果
+ * DeleteTask返回参数结构体
  */
-export interface TaskData {
+export interface DeleteTaskResponse {
   /**
-   * 任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId?: string
-  /**
-   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
-   */
-  Status?: number
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-  /**
-   * 进度（0-1）
-   */
-  Progress?: number
-  /**
-   * 任务操作类型，批量任务类型以Batch开头
-   */
-  Action?: string
-  /**
-   * 操作类型中文描述
-   */
-  ActionZhDesc?: string
-  /**
-   * 任务类型 1.简单 2.复杂 3.子任务
-   */
-  TaskType?: number
-  /**
-   * 任务资源id（复杂任务该字段无效）
-   */
-  ResourceId?: string
-  /**
-   * 总任务数（仅复杂任务有效）
-   */
-  Total?: number
-  /**
-   * 成功任务数（仅复杂任务有效）
-   */
-  SuccessCount?: number
-  /**
-   * 失败任务数（仅复杂任务有效）
-   */
-  FailCount?: number
-  /**
-   * 运行任务数（仅复杂任务有效）
-   */
-  RunningCount?: number
-  /**
-   * 启动任务时间
-   */
-  StartedAt?: string
-  /**
-   * 创建任务时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新任务时间
-   */
-  UpdatedAt?: string
-  /**
-   * 任务运行时间，单位ms
-   */
-  Runtime?: number
-  /**
-   * 设备ID
-   */
-  DeviceId?: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 通道ID
-   */
-  ChannelId?: string
-  /**
-   *  通道名称
-   */
-  ChannelName?: string
+  RequestId?: string
 }
 
 /**
@@ -1453,37 +1387,17 @@ export interface UpdateRecordBackupPlanModify {
 }
 
 /**
- * UpdateAITask请求参数结构体
+ * ListVideoDownloadTask返回参数结构体
  */
-export interface UpdateAITaskRequest {
+export interface ListVideoDownloadTaskResponse {
   /**
-   * AI 任务 ID
+   * 本地录像下载任务列表
    */
-  TaskId: string
+  Data?: ListVideoDownloadTaskData
   /**
-   * AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Desc?: string
-  /**
-   * 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。
-   */
-  ChannelList?: Array<string>
-  /**
-   * AI 结果回调地址。类似 "http://ip:port/***或者https://domain/***
-   */
-  CallbackUrl?: string
-  /**
-   * 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。
-   */
-  IsStartTheTask?: boolean
-  /**
-   * AI 配置列表
-   */
-  Templates?: Array<AITemplates>
+  RequestId?: string
 }
 
 /**
@@ -1846,13 +1760,89 @@ export interface AITemplates {
 export type DescribeOrganizationRequest = null
 
 /**
- * UpdateAITaskStatus返回参数结构体
+ * 查询复杂任务详情返回结果
  */
-export interface UpdateAITaskStatusResponse {
+export interface TaskData {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
+  TaskId?: string
+  /**
+   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+   */
+  Status?: number
+  /**
+   * 失败原因
+   */
+  FailReason?: string
+  /**
+   * 进度（0-1）
+   */
+  Progress?: number
+  /**
+   * 任务操作类型，批量任务类型以Batch开头
+   */
+  Action?: string
+  /**
+   * 操作类型中文描述
+   */
+  ActionZhDesc?: string
+  /**
+   * 任务类型 1.简单 2.复杂 3.子任务
+   */
+  TaskType?: number
+  /**
+   * 任务资源id（复杂任务该字段无效）
+   */
+  ResourceId?: string
+  /**
+   * 总任务数（仅复杂任务有效）
+   */
+  Total?: number
+  /**
+   * 成功任务数（仅复杂任务有效）
+   */
+  SuccessCount?: number
+  /**
+   * 失败任务数（仅复杂任务有效）
+   */
+  FailCount?: number
+  /**
+   * 运行任务数（仅复杂任务有效）
+   */
+  RunningCount?: number
+  /**
+   * 启动任务时间
+   */
+  StartedAt?: string
+  /**
+   * 创建任务时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新任务时间
+   */
+  UpdatedAt?: string
+  /**
+   * 任务运行时间，单位ms
+   */
+  Runtime?: number
+  /**
+   * 设备ID
+   */
+  DeviceId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: string
+  /**
+   *  通道名称
+   */
+  ChannelName?: string
 }
 
 /**
@@ -2074,6 +2064,20 @@ export interface RecordPlanOptData {
 }
 
 /**
+ * 列举子任务列表
+ */
+export interface ListSubTasksData {
+  /**
+   * 子任务列表
+   */
+  List?: Array<SubTaskData>
+  /**
+   * 子任务数量
+   */
+  TotalCount?: number
+}
+
+/**
  * DescribeRecordPlan返回参数结构体
  */
 export interface DescribeRecordPlanResponse {
@@ -2088,6 +2092,20 @@ export interface DescribeRecordPlanResponse {
 }
 
 /**
+ * 时间片段结构体
+ */
+export interface Timeline {
+  /**
+   * 分片起始时间
+   */
+  Begin?: number
+  /**
+   * 分片结束时间
+   */
+  End?: number
+}
+
+/**
  * 查询网关列表返回结果
  */
 export interface ListGatewaysData {
@@ -2099,6 +2117,32 @@ export interface ListGatewaysData {
    * 网关数量
    */
   TotalCount?: number
+}
+
+/**
+ * 取回任务通道信息
+ */
+export interface RecordRetrieveTaskChannelInfo {
+  /**
+   * 设备通道所属的设备ID
+   */
+  DeviceId?: string
+  /**
+   * 设备通道所属的设备名称
+   */
+  DeviceName?: string
+  /**
+   * 设备通道ID
+   */
+  ChannelId?: string
+  /**
+   * 设备通道名称
+   */
+  ChannelName?: string
+  /**
+   * 任务状态，0:已取回，1:取回中，2:待取回, 3:无归档录像
+   */
+  Status?: number
 }
 
 /**
@@ -2228,29 +2272,13 @@ export interface ChannelInfo {
 }
 
 /**
- * 取回任务通道信息
+ * DescribeDevicePreset请求参数结构体
  */
-export interface RecordRetrieveTaskChannelInfo {
+export interface DescribeDevicePresetRequest {
   /**
-   * 设备通道所属的设备ID
+   * 通道ID（从通道查询接口DescribeDeviceChannel中获取）
    */
-  DeviceId?: string
-  /**
-   * 设备通道所属的设备名称
-   */
-  DeviceName?: string
-  /**
-   * 设备通道ID
-   */
-  ChannelId?: string
-  /**
-   * 设备通道名称
-   */
-  ChannelName?: string
-  /**
-   * 任务状态，0:已取回，1:取回中，2:待取回, 3:无归档录像
-   */
-  Status?: number
+  ChannelId: string
 }
 
 /**
@@ -2279,17 +2307,13 @@ export interface RecordPlaybackUrl {
 }
 
 /**
- * 列举子任务列表
+ * BatchDeleteVideoDownloadTask返回参数结构体
  */
-export interface ListSubTasksData {
+export interface BatchDeleteVideoDownloadTaskResponse {
   /**
-   * 子任务列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  List?: Array<SubTaskData>
-  /**
-   * 子任务数量
-   */
-  TotalCount?: number
+  RequestId?: string
 }
 
 /**
@@ -2304,6 +2328,98 @@ export interface ListOrganizationChannelNumbersData {
    * 组织下未添加到计划的通道总数
    */
   NotInPlanCount?: number
+}
+
+/**
+ * 本地录像下载任务
+ */
+export interface VideoDownloadTask {
+  /**
+   * 下载任务 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownloadTaskId?: string
+  /**
+   * 通道 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelId?: string
+  /**
+   * 通道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelName?: string
+  /**
+   * 通道编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelCode?: string
+  /**
+   * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceName?: string
+  /**
+   * 设备编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceCode?: string
+  /**
+   * 任务状态（0：未执行；1：执行中；2 任务完成；
+3：任务失败）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 下载录像时间段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoTimeSection?: string
+  /**
+   * 倍速
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scale?: number
+  /**
+   * 下载时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownloadTime?: number
+  /**
+   * 录像大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoSize?: number
+  /**
+   * 任务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 文件下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileDownloadUrl?: string
+  /**
+   * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedReason?: string
+  /**
+   * 生命周期规则，热存天数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Expire?: number
+  /**
+   * mp4预览地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PreviewUrl?: string
 }
 
 /**
@@ -2701,6 +2817,20 @@ export interface CarAIResultInfo {
 }
 
 /**
+ * UpdateRecordTemplate请求参数结构体
+ */
+export interface UpdateRecordTemplateRequest {
+  /**
+   * 模板ID
+   */
+  TemplateId: string
+  /**
+   * 修改内容
+   */
+  Mod: UpdateRecordTemplateData
+}
+
+/**
  * DescribeRecordPlaybackUrl请求参数结构体
  */
 export interface DescribeRecordPlaybackUrlRequest {
@@ -2724,6 +2854,16 @@ export interface DescribeRecordPlaybackUrlRequest {
    * 云录像回放时，是否需要开启时间戳矫正，主要解决时间戳反转，会退等问题导致无法播放
    */
   CorrectTimestamp?: boolean
+}
+
+/**
+ * 查询国标设备地址列表
+ */
+export interface DescribeDeviceAddrList {
+  /**
+   * 设备地址列表
+   */
+  RemoteAddrs?: Array<RemoteAddrInfo>
 }
 
 /**
@@ -2800,6 +2940,40 @@ export interface DescribeDevicePresetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateAITask请求参数结构体
+ */
+export interface UpdateAITaskRequest {
+  /**
+   * AI 任务 ID
+   */
+  TaskId: string
+  /**
+   * AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符
+   */
+  Name?: string
+  /**
+   * AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符
+   */
+  Desc?: string
+  /**
+   * 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。
+   */
+  ChannelList?: Array<string>
+  /**
+   * AI 结果回调地址。类似 "http://ip:port/***或者https://domain/***
+   */
+  CallbackUrl?: string
+  /**
+   * 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。
+   */
+  IsStartTheTask?: boolean
+  /**
+   * AI 配置列表
+   */
+  Templates?: Array<AITemplates>
 }
 
 /**
@@ -3008,6 +3182,16 @@ export interface ListRecordBackupPlanDevicesResponse {
 }
 
 /**
+ * DeleteTask请求参数结构体
+ */
+export interface DeleteTaskRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * 网关设备数据
  */
 export interface GatewayDevice {
@@ -3166,6 +3350,17 @@ export interface GatewaysData {
 }
 
 /**
+ * 录像下载任务数据结构
+ */
+export interface VideoDownloadTaskData {
+  /**
+   * 下载任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownloadTaskId?: string
+}
+
+/**
  * 查询网关设备列表返回数据
  */
 export interface ListGatewayDevicesData {
@@ -3203,13 +3398,17 @@ export interface ListForbidplayChannelsData {
 }
 
 /**
- * DescribeDevicePreset请求参数结构体
+ * CreateVideoDownloadTask返回参数结构体
  */
-export interface DescribeDevicePresetRequest {
+export interface CreateVideoDownloadTaskResponse {
   /**
-   * 通道ID（从通道查询接口DescribeDeviceChannel中获取）
+   * 下载任务返回结果
    */
-  ChannelId: string
+  Data?: VideoDownloadTaskData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3283,17 +3482,13 @@ export interface DescribeGatewayProtocolResponse {
 }
 
 /**
- * 时间片段结构体
+ * DescribeGBDeviceAddr请求参数结构体
  */
-export interface Timeline {
+export interface DescribeGBDeviceAddrRequest {
   /**
-   * 分片起始时间
+   * 设备ID列表
    */
-  Begin?: number
-  /**
-   * 分片结束时间
-   */
-  End?: number
+  DeviceIds: Array<string>
 }
 
 /**
@@ -3787,6 +3982,22 @@ export interface QueryForbidPlayChannelListRequest {
 }
 
 /**
+ * 本地录像下载任务列表
+ */
+export interface ListVideoDownloadTaskData {
+  /**
+   * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<VideoDownloadTask>
+  /**
+   * 任务总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+}
+
+/**
  * AI车牌信息
  */
 export interface PlateContent {
@@ -3826,6 +4037,20 @@ export interface DescribeRecordFileResponse {
    * 返回结果
    */
   Data?: DescribeRecordFileData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGBDeviceAddr返回参数结构体
+ */
+export interface DescribeGBDeviceAddrResponse {
+  /**
+   * 无
+   */
+  Data?: DescribeDeviceAddrList
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4493,6 +4718,16 @@ export interface RecordPlanChannelInfo {
 }
 
 /**
+ * UpdateAITaskStatus返回参数结构体
+ */
+export interface UpdateAITaskStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SetForbidPlayChannels返回参数结构体
  */
 export interface SetForbidPlayChannelsResponse {
@@ -4503,17 +4738,45 @@ export interface SetForbidPlayChannelsResponse {
 }
 
 /**
- * UpdateRecordTemplate请求参数结构体
+ * ListVideoDownloadTask请求参数结构体
  */
-export interface UpdateRecordTemplateRequest {
+export interface ListVideoDownloadTaskRequest {
   /**
-   * 模板ID
+   * 设备名称，用于模糊搜索
    */
-  TemplateId: string
+  DeviceName?: string
   /**
-   * 修改内容
+   * 通道名称，用于模糊搜索
    */
-  Mod: UpdateRecordTemplateData
+  ChannelName?: string
+  /**
+   * 任务状态（0：准备中，1：执行中，2：已完成，3：失败）
+   */
+  Status?: number
+  /**
+   * 排序规则（仅支持 StartTime，EndTime，倒序为-StartTime，-EndTime）
+   */
+  SortRule?: string
+  /**
+   * 响应是否携带预览地址(0:不携带；1:携带)
+   */
+  WithPreviewUrl?: number
+  /**
+   * 分页页数
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 下载任务 ID
+   */
+  DownloadTaskId?: string
+  /**
+   * 下载地址过期时间，单位秒，最大为 1 天， 86400秒
+   */
+  UrlExpires?: number
 }
 
 /**
@@ -4562,6 +4825,20 @@ export interface DescribeVideoBitRateList {
    * 通道码率列表
    */
   BitRates?: Array<BitRateInfo>
+}
+
+/**
+ * UpdateRecordTemplate返回参数结构体
+ */
+export interface UpdateRecordTemplateResponse {
+  /**
+   * 返回结果
+   */
+  Data?: RecordTemplateInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5079,6 +5356,20 @@ export interface DeleteUserDeviceResponse {
 }
 
 /**
+ * 设备地址返回结果
+ */
+export interface RemoteAddrInfo {
+  /**
+   * 设备Id
+   */
+  DeviceId?: string
+  /**
+   * IP地址
+   */
+  Addr?: string
+}
+
+/**
  * UpdateRecordBackupPlan返回参数结构体
  */
 export interface UpdateRecordBackupPlanResponse {
@@ -5209,17 +5500,37 @@ export interface DeleteRecordBackupTemplateResponse {
 }
 
 /**
- * UpdateRecordTemplate返回参数结构体
+ * CreateVideoDownloadTask请求参数结构体
  */
-export interface UpdateRecordTemplateResponse {
+export interface CreateVideoDownloadTaskRequest {
   /**
-   * 返回结果
+   * 通道ID
    */
-  Data?: RecordTemplateInfo
+  ChannelId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开始时间
    */
-  RequestId?: string
+  BeginTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 默认1倍速，支持（1,2,4,8）倍速
+   */
+  Scale?: number
+  /**
+   * 转码后的mp4文件过期时间（支持7,15,30,60,90,180,365）
+   */
+  Expire?: number
+  /**
+   * 下载文件格式，当前仅支持（1：mp4）
+   */
+  FileType?: number
+  /**
+   * 完成策略（0：拉流失败但是录像不完整则认为任务失败，不生成 MP4；1：拉流失败但是录像不完整则认为任务成功，生成 mp4）
+   */
+  CompletionPolicy?: number
 }
 
 /**

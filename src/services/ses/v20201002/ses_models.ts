@@ -1135,6 +1135,10 @@ export interface SendEmailRequest {
    * smtp头中可以设置的其它字段
    */
   SmtpHeaders?: string
+  /**
+   * smtp头中的from字段，建议域名与FromEmailAddress保持一致
+   */
+  HeaderFrom?: string
 }
 
 /**
