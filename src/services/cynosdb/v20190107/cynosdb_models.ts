@@ -7778,7 +7778,6 @@ export interface CreateAuditLogFileRequest {
 export interface DescribeSSLStatusResponse {
   /**
    * yes-开启，no-关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOpenSSL?: string
   /**
@@ -8204,12 +8203,10 @@ export interface DescribeInstanceSpecsResponse {
 export interface OpenSSLResponse {
   /**
    * 任务流ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
    * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**

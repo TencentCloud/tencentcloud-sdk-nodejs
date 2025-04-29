@@ -2649,7 +2649,7 @@ export interface InstanceLifeDetailDto {
 - FAILED 表示 终态-失败重试
 - EXPIRED 表示 终态-失败
 - SKIP_RUNNING 表示 终态-被上游分支节点跳过的分支
-- HISTORY 表示 兼容历史实例
+- HISTORY 表示 兼容2024-03-30之前的历史实例，之后实例无需关注次枚举类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DetailState?: string
@@ -4063,7 +4063,9 @@ export interface InstanceDetailVO {
    */
   TotalRunNum?: number
   /**
-   * 生命周期编号
+   * **实例生命周期编号，标识实例的某一次执行**
+
+例如：周期实例第一次运行的编号为0，用户后期又重跑了该实例，第二次的执行的编号为1
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LifeRoundNum?: number
@@ -5918,7 +5920,10 @@ export interface InstanceLogVO {
    */
   LineCount?: number
   /**
-   * 执行平台日志分页查询参数, 每次请求透明传入。第一页查询时值为空字符串
+   * **分页查询日志时使用，无具体业务含义**
+
+第一次查询时值为null 
+第二次及以后查询时使用上一次查询返回信息中的ExtInfo字段值即可
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtInfo?: string
@@ -13345,12 +13350,12 @@ export interface ListInstancesRequest {
    */
   ProjectId: string
   /**
-   * **实例计划调度时间**
+   * **实例计划调度时间过滤条件**
 过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss
    */
   ScheduleTimeFrom: string
   /**
-   * **实例计划调度时间**
+   * **实例计划调度时间过滤条件**
 过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss
    */
   ScheduleTimeTo: string
@@ -13367,10 +13372,10 @@ export interface ListInstancesRequest {
   /**
    * **查询结果排序字段**
 
-- SCHEDULE_DATE 表示 计划调度时间
-- START_TIME 表示 实例开始执行时间
-- END_TIME 表示 实例结束执行时间
-- COST_TIME 表示 实例执行时长
+- SCHEDULE_DATE 表示 根据计划调度时间排序
+- START_TIME 表示 根据实例开始执行时间排序
+- END_TIME 表示 根据实例结束执行时间排序
+- COST_TIME 表示 根据实例执行时长排序
    */
   SortColumn?: string
   /**
@@ -13452,12 +13457,12 @@ export interface ListInstancesRequest {
    */
   ExecutorGroupIdList?: Array<string>
   /**
-   * **开始时间**
+   * **实例执行开始时间过滤条件**
 过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss
    */
   StartTimeFrom?: string
   /**
-   * **开始时间**
+   * **实例执行开始时间过滤条件**
 过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss
    */
   StartTimeTo?: string
@@ -13810,7 +13815,9 @@ export interface InstanceLifeCycleVO {
    */
   InstanceState?: number
   /**
-   * 生命周期编号
+   * **实例生命周期编号，标识实例的某一次执行**
+
+例如：周期实例第一次运行的编号为0，用户后期又重跑了该实例，第二次执行的编号为1
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LifeRoundNum?: number
@@ -13848,6 +13855,8 @@ export interface InstanceLifeCycleVO {
   CodeFileName?: string
   /**
    * **下发执行ID**
+统一执行平台下发执行到新版执行机标识某次执行的唯一ID，存量老执行机下发执行没有此ID。
+如果不知道执行机版本是否支持此ID，可以联系腾讯云运维同学
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionJobId?: string
@@ -25377,7 +25386,9 @@ export interface GetInstanceLogRequest {
    */
   InstanceKey: string
   /**
-   * 生命周期编号
+   * **实例生命周期编号，标识实例的某一次执行**
+
+例如：周期实例第一次运行的编号为0，用户后期又重跑了该实例，第二次执行的编号为1
    */
   LifeRoundNum: number
   /**
@@ -25422,6 +25433,13 @@ timeZone, 默认UTC+8
 默认 10000
    */
   EndLineCount?: number
+  /**
+   * **分页查询日志时使用，无具体业务含义**
+
+第一次查询时值为null 
+第二次及以后查询时使用上一次查询返回信息中的ExtInfo字段值即可
+   */
+  ExtInfo?: string
 }
 
 /**

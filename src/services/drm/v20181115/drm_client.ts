@@ -125,9 +125,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
-
-     */
+   * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+   */
   async DescribeDRMLicense(
     req: DescribeDRMLicenseRequest,
     cb?: (error: string, rep: DescribeDRMLicenseResponse) => void

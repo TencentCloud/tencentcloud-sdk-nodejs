@@ -1413,6 +1413,14 @@ export interface NativeGatewayServerGroup {
    * 弹性节点
    */
   ElasticNumber?: number
+  /**
+   * 是否支持TOA
+   */
+  SupportTOA?: boolean
+  /**
+   * 是否支持IPV6
+   */
+  SupportIPV6?: boolean
 }
 
 /**
@@ -3872,6 +3880,10 @@ export interface CloudNativeAPIGatewayConfig {
    * 网络 id
    */
   NetworkId?: string
+  /**
+   * 是否为新 ipv6 CLB
+   */
+  IPV6FullChain?: boolean
 }
 
 /**

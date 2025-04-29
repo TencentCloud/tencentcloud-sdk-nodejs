@@ -638,6 +638,10 @@ export interface DescribeUserProjectListRequest {
    * 是否过滤掉当前用户
    */
   IsFilterCurrentUser?: boolean
+  /**
+   * 关键字
+   */
+  Keyword?: string
 }
 
 /**

@@ -139,7 +139,7 @@ Block 确认违规
 }
 
 /**
- *  数据存储信息
+ * 数据存储信息
  */
 export interface StorageInfo {
   /**
@@ -700,7 +700,7 @@ export interface CreateVideoModerationTaskRequest {
    */
   Tasks: Array<TaskInput>
   /**
-   * 验证签名参数，具体可以参考[验签说明](https://cloud.tencent.com/document/product/1265/104001#42dd87d2-580f-46cf-a953-639a787d1eda)。
+   * 可选参数，该字段表示回调签名的key信息，用于保证数据的安全性。 签名方法为在返回的HTTP头部添加 X-Signature 的字段，值为： seed + body 的 SHA256 编码和Hex字符串，在收到回调数据后，可以根据返回的body，用 **sha256(seed + body)**, 计算出 `X-Signature` 进行验证。<br>具体使用实例可参考 [回调签名示例](https://cloud.tencent.com/document/product/1265/104001#42dd87d2-580f-46cf-a953-639a787d1eda)。
    */
   Seed?: string
   /**

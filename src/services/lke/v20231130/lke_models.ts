@@ -5921,6 +5921,7 @@ export interface GetWsTokenRequest {
   BotAppKey?: string
   /**
    * 访客ID（外部输入，建议唯一，标识当前接入会话的用户）
+长度限制： string(64)
    */
   VisitorBizId?: string
   /**

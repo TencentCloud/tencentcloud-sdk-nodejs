@@ -765,7 +765,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CheckMigrateCluster）用于高可用实例一键迁移到集群版校验。
+   * 本接口（CheckMigrateCluster）用于高可用实例一键迁移到云盘版校验。
    */
   async CheckMigrateCluster(
     req: CheckMigrateClusterRequest,
@@ -1452,7 +1452,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeClusterInfo）用于查询集群版实例信息。
+   * 本接口（DescribeClusterInfo）用于查询云盘版实例信息。
    */
   async DescribeClusterInfo(
     req: DescribeClusterInfoRequest,

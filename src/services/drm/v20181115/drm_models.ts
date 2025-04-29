@@ -82,27 +82,27 @@ export interface FairPlayPemDigestInfo {
    * fairplay 私钥pem id。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FairPlayPemId: number
+  FairPlayPemId?: number
   /**
    * 私钥的优先级。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Priority: number
+  Priority?: number
   /**
    * 私钥的md5 信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Md5Pem: string
+  Md5Pem?: string
   /**
    * ASK的md5信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Md5Ask: string
+  Md5Ask?: string
   /**
    * 私钥解密密钥的md5值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Md5PemDecryptKey: string
+  Md5PemDecryptKey?: string
 }
 
 /**
@@ -270,24 +270,24 @@ export interface Key {
   /**
    * 加密track类型。Widevine支持SD、HD、UHD1、UHD2、AUDIO。Fairplay只支持HD。
    */
-  Track: string
+  Track?: string
   /**
    * 密钥ID。
    */
-  KeyId: string
+  KeyId?: string
   /**
    * 原始Key使用AES-128 ECB模式和SessionKey加密的后的二进制数据，Base64编码的字符串。
    */
-  Key: string
+  Key?: string
   /**
    * 原始IV使用AES-128 ECB模式和SessionKey加密的后的二进制数据，Base64编码的字符串。
    */
-  Iv: string
+  Iv?: string
   /**
    * 该key生成时的时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InsertTimestamp: number
+  InsertTimestamp?: number
 }
 
 /**
@@ -297,11 +297,11 @@ export interface DescribeDRMLicenseResponse {
   /**
    * 内容ID。
    */
-  ContentId: string
+  ContentId?: string
   /**
    * 加密密钥。
    */
-  TXEncryptionToken: string
+  TXEncryptionToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

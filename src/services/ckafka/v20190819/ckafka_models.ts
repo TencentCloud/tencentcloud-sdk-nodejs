@@ -6238,7 +6238,6 @@ export interface CheckCdcClusterRequest {
 export interface CvmAndIpInfo {
   /**
    * ckafka集群实例Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CkafkaInstanceId?: string
   /**
@@ -6247,7 +6246,6 @@ export interface CvmAndIpInfo {
   InstanceId?: string
   /**
    * IP地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
 }
@@ -8362,12 +8360,10 @@ export interface InquireCkafkaPriceResponse {
 export interface ListCvmAndIpInfoRsp {
   /**
    * cvm和IP 列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmList?: Array<CvmAndIpInfo>
   /**
    * 实例数据量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
 }

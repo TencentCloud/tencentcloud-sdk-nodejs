@@ -356,9 +356,13 @@ export interface CreateAndroidAppVersionRequest {
    */
   DownloadUrl?: string
   /**
-   * shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   * 应用 shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   Command?: string
+  /**
+   * 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   */
+  UninstallCommand?: string
 }
 
 /**
@@ -689,9 +693,13 @@ export interface ModifyAndroidAppVersionRequest {
    */
   AndroidAppVersionName: string
   /**
-   * shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   * 应用 shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   Command?: string
+  /**
+   * 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   */
+  UninstallCommand?: string
 }
 
 /**
@@ -1281,9 +1289,13 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
    */
   CreateTime?: string
   /**
-   * shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   * shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   Command?: string
+  /**
+   * shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
+   */
+  UninstallCommand?: string
 }
 
 /**
