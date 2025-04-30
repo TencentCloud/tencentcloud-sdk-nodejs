@@ -228,12 +228,10 @@ export interface TargetGroupBackend {
   RegisteredTime?: string
   /**
    * 弹性网卡唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EniId?: string
   /**
    * 后端服务的可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
 }

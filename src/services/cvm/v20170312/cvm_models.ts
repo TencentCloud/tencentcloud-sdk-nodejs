@@ -319,6 +319,16 @@ export interface InquiryPriceResetInstancesInternetMaxBandwidthResponse {
 export type DescribeZonesRequest = null
 
 /**
+ * 自定义metadata
+ */
+export interface Metadata {
+  /**
+   * 自定义metadata键值对列表。
+   */
+  Items: Array<MetadataItem>
+}
+
+/**
  * ModifyKeyPairAttribute请求参数结构体
  */
 export interface ModifyKeyPairAttributeRequest {
@@ -2548,6 +2558,12 @@ export interface InquiryPriceRunInstancesRequest {
    */
   InstanceMarketOptions?: InstanceMarketOptionsRequest
   /**
+   * 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。
+
+**注：内测中**。
+   */
+  Metadata?: Metadata
+  /**
    * 高性能计算集群ID。
    */
   HpcClusterId?: string
@@ -3634,6 +3650,19 @@ false（默认）：发送正常请求，通过检查后直接创建实例。
    * 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：<br><li>TRUE：表示开启实例保护，不允许通过api接口删除实例</li><br><li>FALSE：表示关闭实例保护，允许通过api接口删除实例</li><br><br>默认取值：FALSE。
    */
   DisableApiTermination?: boolean
+  /**
+   * 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。
+   **注：内测中**。
+   */
+  Metadata?: Metadata
+  /**
+   * 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。
+
+- Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] 
+- Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3] 
+**注：内测中**。
+   */
+  TemplateDataModifyAction?: string
 }
 
 /**
@@ -3979,6 +4008,19 @@ false（默认）：发送正常请求，通过检查后直接创建实例。
    * 标签描述列表。通过指定该参数可以绑定标签到实例启动模板。
    */
   LaunchTemplateTagSpecification?: Array<TagSpecification>
+  /**
+   * 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。
+   **注：内测中**。
+   */
+  Metadata?: Metadata
+  /**
+   * 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。
+
+- Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] 
+- Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3] 
+**注：内测中**。
+   */
+  TemplateDataModifyAction?: string
 }
 
 /**
@@ -4453,6 +4495,11 @@ export interface RunInstancesRequest {
    * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
    */
   UserData?: string
+  /**
+   * 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。
+   **注：内测中**。
+   */
+  Metadata?: Metadata
   /**
    * 是否只预检此次请求。
 true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
@@ -6113,6 +6160,21 @@ export interface ResetInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义metadata key和value
+ */
+export interface MetadataItem {
+  /**
+   * 自定义metadata键，需符合正则 ^[a-zA-Z0-9_-]+$，长度 ≤128 字节（大小写敏感）；
+
+   */
+  Key: string
+  /**
+   * 自定义metadata值，支持任意数据（含二进制），大小 ≤256 KB（大小写敏感）；
+   */
+  Value: string
 }
 
 /**
