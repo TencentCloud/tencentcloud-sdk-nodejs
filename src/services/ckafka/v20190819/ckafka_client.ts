@@ -34,7 +34,9 @@ import {
   FetchMessageListByOffsetRequest,
   Region,
   CreateAclRuleRequest,
+  RouteFilter,
   DescribeInstancesDetailResponse,
+  InstanceRoute,
   DescribeTaskStatusRequest,
   DescribeAclRuleRequest,
   JgwOperateResponse,
@@ -43,6 +45,7 @@ import {
   Tag,
   ModifyAclRuleResponse,
   RecordMapping,
+  SecurityGroupRoute,
   MongoDBModifyConnectParam,
   FetchMessageListByOffsetResponse,
   DeleteRouteTriggerTimeRequest,
@@ -108,6 +111,7 @@ import {
   InstanceDetail,
   InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
+  SecurityGroupRouteResp,
   DeleteAclRequest,
   CreateInstancePostResponse,
   RouteDTO,
@@ -121,6 +125,7 @@ import {
   DescribeDatahubTasksResponse,
   FetchMessageByOffsetResponse,
   RegexReplaceParam,
+  DescribeSecurityGroupRoutesResponse,
   AclRule,
   DescribeACLResponse,
   TopicMessageHeapRanking,
@@ -343,6 +348,7 @@ import {
   ModifyRoutineMaintenanceTaskResponse,
   DescribeConnectResourceResponse,
   Filter,
+  DescribeSecurityGroupRoutesRequest,
   ModifyPasswordResponse,
   InquireCkafkaPriceResponse,
   ListCvmAndIpInfoRsp,
@@ -1056,6 +1062,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatahubTopicsResponse) => void
   ): Promise<DescribeDatahubTopicsResponse> {
     return this.request("DescribeDatahubTopics", req, cb)
+  }
+
+  /**
+   * 获取安全组路由信息列表
+   */
+  async DescribeSecurityGroupRoutes(
+    req: DescribeSecurityGroupRoutesRequest,
+    cb?: (error: string, rep: DescribeSecurityGroupRoutesResponse) => void
+  ): Promise<DescribeSecurityGroupRoutesResponse> {
+    return this.request("DescribeSecurityGroupRoutes", req, cb)
   }
 
   /**

@@ -561,6 +561,27 @@ export interface CreateAclRuleRequest {
 }
 
 /**
+ * 路由列表过滤器
+ */
+export interface RouteFilter {
+  /**
+   * 过滤名称,目前支持security-group-id,按安全组关联过滤
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 过滤值,当过滤名称为security-group-id时仅支持传单个value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
+  /**
+   * 过滤关系,支持IN和NOT_IN,默认为IN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Relation?: string
+}
+
+/**
  * DescribeInstancesDetail返回参数结构体
  */
 export interface DescribeInstancesDetailResponse {
@@ -572,6 +593,22 @@ export interface DescribeInstancesDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例路由
+ */
+export interface InstanceRoute {
+  /**
+   * ckafka集群实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId: string
+  /**
+   * 路由Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteId: number
 }
 
 /**
@@ -773,6 +810,37 @@ export interface RecordMapping {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultValue?: string
+}
+
+/**
+ * 安全组路由信息
+ */
+export interface SecurityGroupRoute {
+  /**
+   * 路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceRoute?: InstanceRoute
+  /**
+   * 关联的安全组列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * ckafka集群实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 路由vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 路由vip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
 }
 
 /**
@@ -2690,6 +2758,22 @@ export interface DescribeTopicDetailResponse {
 }
 
 /**
+ * 安全组路由信息返回结果
+ */
+export interface SecurityGroupRouteResp {
+  /**
+   * 符合条件的安全组路由信息总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 符合条件的安全组路由信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupRoutes?: Array<SecurityGroupRoute>
+}
+
+/**
  * DeleteAcl请求参数结构体
  */
 export interface DeleteAclRequest {
@@ -2930,6 +3014,20 @@ export interface RegexReplaceParam {
    * 替换新值
    */
   NewValue: string
+}
+
+/**
+ * DescribeSecurityGroupRoutes返回参数结构体
+ */
+export interface DescribeSecurityGroupRoutesResponse {
+  /**
+   * 返回的安全组路由信息结果对象
+   */
+  Result?: SecurityGroupRouteResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8324,6 +8422,32 @@ export interface Filter {
    * 字段的过滤值。
    */
   Values: Array<string>
+}
+
+/**
+ * DescribeSecurityGroupRoutes请求参数结构体
+ */
+export interface DescribeSecurityGroupRoutesRequest {
+  /**
+   * 路由信息
+   */
+  InstanceRoute?: InstanceRoute
+  /**
+   * 过滤器
+   */
+  Filters?: Array<RouteFilter>
+  /**
+   * 分页Offset,默认0
+   */
+  Offset?: number
+  /**
+   * 分页Limit,默认20
+   */
+  Limit?: number
+  /**
+   * 关键词,可根据实例id/实例名称/vip模糊搜索
+   */
+  SearchWord?: string
 }
 
 /**

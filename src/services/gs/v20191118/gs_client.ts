@@ -26,6 +26,7 @@ import {
   CreateSessionRequest,
   RestoreAndroidInstanceFromStorageRequest,
   SyncExecuteCommandOnAndroidInstancesRequest,
+  RebootAndroidInstanceHostsResponse,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
   ModifyAndroidAppVersionResponse,
@@ -122,6 +123,7 @@ import {
   StopGameResponse,
   CreateAndroidInstanceLabelRequest,
   AndroidInstance,
+  RebootAndroidInstanceHostsRequest,
   COSOptions,
   ModifyAndroidInstancesInformationResponse,
   CreateCosCredentialResponse,
@@ -543,6 +545,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopAndroidInstancesAppResponse) => void
   ): Promise<StopAndroidInstancesAppResponse> {
     return this.request("StopAndroidInstancesApp", req, cb)
+  }
+
+  /**
+     * 重启安卓实例宿主机。请注意：
+
+- 当前每 15 分钟只能重启一次
+- 一个宿主机可能有多个云手机实例，重启宿主机会影响运行在上面的所有实例，请确保该宿主机上的所有云手机实例未投入业务使用
+     */
+  async RebootAndroidInstanceHosts(
+    req: RebootAndroidInstanceHostsRequest,
+    cb?: (error: string, rep: RebootAndroidInstanceHostsResponse) => void
+  ): Promise<RebootAndroidInstanceHostsResponse> {
+    return this.request("RebootAndroidInstanceHosts", req, cb)
   }
 
   /**

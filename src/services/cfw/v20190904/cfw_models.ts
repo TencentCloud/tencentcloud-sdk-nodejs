@@ -779,6 +779,84 @@ export interface DeleteNatFwInstanceResponse {
 }
 
 /**
+ * ModifyBlockIgnoreRule请求参数结构体
+ */
+export interface ModifyBlockIgnoreRuleRequest {
+  /**
+   * 规则列表
+   */
+  Rule: IntrusionDefenseRule
+  /**
+   * 规则类型，1封禁，2放通
+   */
+  RuleType: number
+}
+
+/**
+ * SearchLog返回参数结构体
+ */
+export interface SearchLogResponse {
+  /**
+   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。
+注意：
+* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
+   */
+  Context?: string
+  /**
+   * 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志
+注意：仅当检索分析语句(Query)不包含SQL时有效
+   */
+  ListOver?: boolean
+  /**
+   * 返回的是否为统计分析（即SQL）结果
+   */
+  Analysis?: boolean
+  /**
+   * 匹配检索条件的原始日志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Results?: Array<LogInfo>
+  /**
+   * 日志统计分析结果的列名
+当UseNewAnalysis为false时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColNames?: Array<string>
+  /**
+   * 日志统计分析结果
+当UseNewAnalysis为false时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisResults?: Array<LogItems>
+  /**
+   * 日志统计分析结果
+当UseNewAnalysis为true时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisRecords?: Array<string>
+  /**
+   * 日志统计分析结果的列属性
+当UseNewAnalysis为true时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<Column>
+  /**
+   * 本次统计分析使用的采样率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SamplingRate?: number
+  /**
+   * 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topics?: SearchLogTopics
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteBlockIgnoreRuleNew返回参数结构体
  */
 export interface DeleteBlockIgnoreRuleNewResponse {
@@ -2323,6 +2401,20 @@ export interface AddAclRuleResponse {
 }
 
 /**
+ * RemoveVpcAcRule请求参数结构体
+ */
+export interface RemoveVpcAcRuleRequest {
+  /**
+   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   */
+  RuleUuids: Array<number | bigint>
+  /**
+   * 仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则
+   */
+  IpVersion?: number
+}
+
+/**
  * DeleteRemoteAccessDomain请求参数结构体
  */
 export interface DeleteRemoteAccessDomainRequest {
@@ -2358,6 +2450,16 @@ export interface DeleteSecurityGroupRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LogItem的数组
+ */
+export interface LogItems {
+  /**
+   * 分析结果返回的KV数据对
+   */
+  Data?: Array<LogItem>
 }
 
 /**
@@ -2674,17 +2776,17 @@ export interface DescribeFwGroupInstanceInfoRequest {
 }
 
 /**
- * ModifyBlockIgnoreRule请求参数结构体
+ * 日志中的KV对
  */
-export interface ModifyBlockIgnoreRuleRequest {
+export interface LogItem {
   /**
-   * 规则列表
+   * 日志Key
    */
-  Rule: IntrusionDefenseRule
+  Key?: string
   /**
-   * 规则类型，1封禁，2放通
+   * 日志Value
    */
-  RuleType: number
+  Value?: string
 }
 
 /**
@@ -2852,6 +2954,27 @@ export interface RuleChangeItem {
 }
 
 /**
+ * 多日志主题检索错误信息
+ */
+export interface SearchLogErrors {
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeStr?: string
+}
+
+/**
  * 入侵防御封禁列表、放通列表添加规则入参
  */
 export interface IntrusionDefenseRule {
@@ -3008,6 +3131,20 @@ export interface ModifyNatSequenceRulesResponse {
 }
 
 /**
+ * StopSecurityGroupRuleDispatch返回参数结构体
+ */
+export interface StopSecurityGroupRuleDispatchResponse {
+  /**
+   * true代表成功，false代表错误
+   */
+  Status?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetSync返回参数结构体
  */
 export interface DescribeAssetSyncResponse {
@@ -3102,21 +3239,57 @@ export interface CreateNatFwInstanceResponse {
 }
 
 /**
- * 新增模式传递参数
+ * 日志结果信息
  */
-export interface NewModeItems {
+export interface LogInfo {
   /**
-   * 新增模式下接入的vpc列表
+   * 日志时间，单位ms
    */
-  VpcList: Array<string>
+  Time?: number
   /**
-   * 新增模式下绑定的出口弹性公网ip列表，其中Eips和AddCount至少传递一个。
+   * 日志主题ID
    */
-  Eips?: Array<string>
+  TopicId?: string
   /**
-   * 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。
+   * 日志主题名称
    */
-  AddCount?: number
+  TopicName?: string
+  /**
+   * 日志来源IP
+   */
+  Source?: string
+  /**
+   * 日志文件名称
+   */
+  FileName?: string
+  /**
+   * 日志上报请求包的ID
+   */
+  PkgId?: string
+  /**
+   * 请求包内日志的ID
+   */
+  PkgLogId?: string
+  /**
+   * 日志内容的Json序列化字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogJson?: string
+  /**
+   * 日志来源主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostName?: string
+  /**
+   * 原始日志(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawLog?: string
+  /**
+   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexStatus?: string
 }
 
 /**
@@ -4863,17 +5036,13 @@ export interface DescribeFwSyncStatusResponse {
 }
 
 /**
- * DescribeBlockByIpTimesList返回参数结构体
+ * DeleteNatFwInstance请求参数结构体
  */
-export interface DescribeBlockByIpTimesListResponse {
+export interface DeleteNatFwInstanceRequest {
   /**
-   * 返回数据
+   * 防火墙实例id
    */
-  Data?: Array<IpStatic>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CfwInstance: string
 }
 
 /**
@@ -4927,13 +5096,17 @@ export interface VpcFwInstanceShow {
 }
 
 /**
- * DescribeRuleOverview请求参数结构体
+ * 日志分析的列属性
  */
-export interface DescribeRuleOverviewRequest {
+export interface Column {
   /**
-   * 方向，0：出站，1：入站
+   * 列的名字
    */
-  Direction?: number
+  Name?: string
+  /**
+   * 列的属性
+   */
+  Type?: string
 }
 
 /**
@@ -5510,6 +5683,25 @@ export interface ModifyBlockIgnoreRuleResponse {
 }
 
 /**
+ * 多日志主题检索topic信息
+ */
+export interface SearchLogInfos {
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志存储生命周期
+   */
+  Period?: number
+  /**
+   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Context?: string
+}
+
+/**
  * DescribeTLogIpList返回参数结构体
  */
 export interface DescribeTLogIpListResponse {
@@ -5524,23 +5716,41 @@ export interface DescribeTLogIpListResponse {
 }
 
 /**
- * StopSecurityGroupRuleDispatch返回参数结构体
+ * 多日志主题检索相关信息
  */
-export interface StopSecurityGroupRuleDispatchResponse {
+export interface MultiTopicSearchInformation {
   /**
-   * true代表成功，false代表错误
+   * 要检索分析的日志主题ID
    */
-  Status?: boolean
+  TopicId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
    */
-  RequestId?: string
+  Context?: string
 }
 
 /**
  * DescribeNatFwInfoCount请求参数结构体
  */
 export type DescribeNatFwInfoCountRequest = null
+
+/**
+ * 新增模式传递参数
+ */
+export interface NewModeItems {
+  /**
+   * 新增模式下接入的vpc列表
+   */
+  VpcList: Array<string>
+  /**
+   * 新增模式下绑定的出口弹性公网ip列表，其中Eips和AddCount至少传递一个。
+   */
+  Eips?: Array<string>
+  /**
+   * 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。
+   */
+  AddCount?: number
+}
 
 /**
  * 封禁列表和放通列表结构体
@@ -5992,13 +6202,17 @@ export interface RemoveAclRuleResponse {
 }
 
 /**
- * DeleteNatFwInstance请求参数结构体
+ * DescribeBlockByIpTimesList返回参数结构体
  */
-export interface DeleteNatFwInstanceRequest {
+export interface DescribeBlockByIpTimesListResponse {
   /**
-   * 防火墙实例id
+   * 返回数据
    */
-  CfwInstance: string
+  Data?: Array<IpStatic>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6514,17 +6728,13 @@ export interface CreateNatFwInstanceWithDomainRequest {
 }
 
 /**
- * RemoveVpcAcRule请求参数结构体
+ * DescribeRuleOverview请求参数结构体
  */
-export interface RemoveVpcAcRuleRequest {
+export interface DescribeRuleOverviewRequest {
   /**
-   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   * 方向，0：出站，1：入站
    */
-  RuleUuids: Array<number | bigint>
-  /**
-   * 仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则
-   */
-  IpVersion?: number
+  Direction?: number
 }
 
 /**
@@ -6618,6 +6828,22 @@ export interface ModifyVpcFwGroupResponse {
 }
 
 /**
+ * 多主题检索返回信息
+ */
+export interface SearchLogTopics {
+  /**
+   * 多日志主题检索对应的错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Errors?: Array<SearchLogErrors>
+  /**
+   * 多日志主题检索各日志主题信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<SearchLogInfos>
+}
+
+/**
  * DeleteResourceGroup返回参数结构体
  */
 export interface DeleteResourceGroupResponse {
@@ -6625,6 +6851,95 @@ export interface DeleteResourceGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SearchLog请求参数结构体
+ */
+export interface SearchLogRequest {
+  /**
+   * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
+   */
+  From: number
+  /**
+   * 要检索分析的日志的结束时间，Unix时间戳（毫秒）
+   */
+  To: number
+  /**
+   * 检索分析语句，最大长度为12KB
+语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
+使用*或空字符串可查询所有日志
+   */
+  Query: string
+  /**
+   * 检索语法规则，默认值为0，推荐使用1 。
+
+- 0：Lucene语法
+- 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。
+
+详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+   */
+  SyntaxRule?: number
+  /**
+   * - 要检索分析的日志主题ID，仅能指定一个日志主题。
+- 如需同时检索多个日志主题，请使用Topics参数。
+- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
+   */
+  TopicId?: string
+  /**
+   * - 要检索分析的日志主题列表，最大支持50个日志主题。
+- 检索单个日志主题时请使用TopicId。
+- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
+   */
+  Topics?: Array<MultiTopicSearchInformation>
+  /**
+   * 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+注意：
+* 仅当检索分析语句(Query)不包含SQL时有效
+* SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a>
+   */
+  Sort?: string
+  /**
+   * 表示单次查询返回的原始日志条数，默认为100，最大值为1000。
+注意：
+* 仅当检索分析语句(Query)不包含SQL时有效
+* SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+
+可通过两种方式获取后续更多日志：
+* Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志
+* Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制
+   */
+  Limit?: number
+  /**
+   * 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。 
+注意：
+* 仅当检索分析语句(Query)不包含SQL时有效
+* 不能与Context参数同时使用
+* 仅适用于单日志主题检索
+   */
+  Offset?: number
+  /**
+   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
+注意：
+* 透传该参数时，请勿修改除该参数外的其它参数
+* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
+* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+   */
+  Context?: string
+  /**
+   * 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。
+0：自动采样;
+0～1：按指定采样率采样，例如0.02;
+1：不采样，即精确分析
+默认值为1
+   */
+  SamplingRate?: number
+  /**
+   * 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效
+为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效
+两种返回方式在编码格式上有少量区别，建议使用true
+   */
+  UseNewAnalysis?: boolean
 }
 
 /**

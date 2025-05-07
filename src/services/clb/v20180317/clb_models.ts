@@ -877,7 +877,7 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   SearchKey?: string
   /**
-   * 负载均衡实例所属的项目 ID，可以通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取，不传默认所有项目。
+   * 负载均衡实例所属的项目 ID，可以通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725)接口获取，不传默认所有项目。
    */
   ProjectId?: number
   /**
@@ -885,12 +885,12 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   WithRs?: number
   /**
-   * 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，
+   * 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，可以通过[DescribeVpcs](https://cloud.tencent.com/document/api/215/15778)接口获取。
 查找基础网络类型的负载均衡可传入'0'。
    */
   VpcId?: string
   /**
-   * 安全组ID，如 sg-m1cc****。
+   * 安全组ID，如 sg-m1cc****，可以通过接口[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)获取。
    */
   SecurityGroup?: string
   /**
@@ -918,10 +918,12 @@ OPEN：公网属性， INTERNAL：内网属性。
 按照【CLB 标签的键】进行过滤，例如：tag-key。
 类型：String
 必选：否
+获取方式：[DescribeTags](https://cloud.tencent.com/document/api/651/35316)
 - tag:tag-key
 按照【CLB标签键值】进行过滤，例如：tag-test。
 类型：String
 必选：否
+获取方式：[DescribeTagKeys](https://cloud.tencent.com/document/api/651/35318)
 - function-name
 按照【后端绑定SCF云函数的函数名称】进行过滤，例如：helloworld-1744958255。
 类型：String
@@ -2364,6 +2366,7 @@ export interface RegisterTargetsWithClassicalLBRequest {
 export interface HealthCheck {
   /**
    * 是否开启健康检查：1（开启）、0（关闭）。
+默认为开启。
    */
   HealthSwitch?: number
   /**
@@ -5489,7 +5492,14 @@ export interface InternetAccessible {
    */
   InternetMaxBandwidthOut?: number
   /**
-   * 带宽包的类型，如SINGLEISP（单线）、BGP（多线）。
+   * 带宽包的类型，如 BGP（多线）。
+类型如下：
+SINGLEISP: 单线
+BGP: 多线
+HIGH_QUALITY_BGP: 精品BGP共享带宽包
+SINGLEISP_CMCC: 中国移动共享带宽包
+SINGLEISP_CTCC: 中国电信共享带宽包
+SINGLEISP_CUCC: 中国联通共享带宽包
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BandwidthpkgSubType?: string
@@ -6040,7 +6050,7 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
    */
   AddressIPVersion?: string
   /**
-   * 数值形式的私有网络 ID。
+   * 数值形式的私有网络 ID，可以通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
    */
   NumericalVpcId?: number
   /**

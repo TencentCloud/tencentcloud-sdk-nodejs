@@ -408,6 +408,16 @@ it("gs.v20191118.StopAndroidInstancesApp", async function () {
     }
 })
 
+it("gs.v20191118.RebootAndroidInstanceHosts", async function () {
+    try {
+       const data = await client.RebootAndroidInstanceHosts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CreateSession", async function () {
     try {
        const data = await client.CreateSession({})
