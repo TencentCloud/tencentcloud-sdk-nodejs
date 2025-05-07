@@ -260,8 +260,8 @@ export interface DeleteCustomDnsHostResponse {
  */
 export interface DescribeBiddingSuccessfulDetailRequest {
   /**
-   * 预约ID
-可通过DescribeBiddingSuccessfulList接口获取
+   * 预约ID 
+可通过[DescribeBiddingSuccessfulList](https://cloud.tencent.com/document/api/242/106596)接口获取
    */
   BusinessID?: string
 }
@@ -342,7 +342,7 @@ export interface SetDomainAutoRenewResponse {
 export interface DescribeBiddingAppointDetailRequest {
   /**
    * 预约ID
-可通过DescribeBiddingList接口获取
+可通过[DescribeBiddingAppointList](https://cloud.tencent.com/document/api/242/106600)接口获取
    */
   BusinessID?: string
 }
@@ -353,7 +353,7 @@ export interface DescribeBiddingAppointDetailRequest {
 export interface DescribeCustomDnsHostSetRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainList接口获取
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   DomainId: string
   /**
@@ -386,10 +386,12 @@ export interface CreateCustomDnsHostResponse {
 export interface DescribeBiddingAppointListRequest {
   /**
    * 页码
+默认值1
    */
   PageNumber: number
   /**
    * 每页数量
+默认：20 取值范围【1，200】
    */
   PageSize: number
   /**
@@ -402,7 +404,12 @@ export interface DescribeBiddingAppointListRequest {
    */
   Status?: Array<number | bigint>
   /**
-   * 排序字段：AppointEndTime 预约结束时间
+   * 排序字段：
+默认<空>，不排序
+可选值：
+AppointEndTime 预约结束时间
+BiddingPrice 竞价保证金
+BiddingEndTime 竞价结束时间
    */
   SortField?: string
   /**
@@ -450,14 +457,12 @@ export interface CheckBatchStatusRequest {
   /**
    * 操作日志 ID数组，最多 200 个
 可通过任意批量操作接口获取，例如：
-BatchModifyDomainInfo
-ModifyDomainDNSBatch
-ModifyDomainOwnerBatch
-UpdateProhibitionBatch
-TransferProhibitionBatch
-TransferInDomainBatch
-TransferInDomainBatchBuy
-CancelTransferOutInBatch
+[BatchModifyDomainInfo](https://cloud.tencent.com/document/product/242/49197)
+[ModifyDomainDNSBatch](https://cloud.tencent.com/document/product/242/49211)
+[ModifyDomainOwnerBatch](https://cloud.tencent.com/document/product/242/49196)
+[UpdateProhibitionBatch](https://cloud.tencent.com/document/api/242/49193)
+[TransferProhibitionBatch](https://cloud.tencent.com/document/api/242/49194)
+[TransferInDomainBatch](https://cloud.tencent.com/document/api/242/49195)
    */
   LogIds: Array<number | bigint>
 }
@@ -570,6 +575,7 @@ export interface ModifyTemplateResponse {
 export interface BiddingSuccessfulResult {
   /**
    * 支付结束时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   PayEndTime?: string
 }
@@ -627,7 +633,8 @@ export interface BidPreDomainsResponse {
  */
 export interface DescribeAuctionListRequest {
   /**
-   * 业务ID，通过接口DescribeBiddingList返回结果中获取
+   * 业务ID 
+通过接口[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)返回结果中获取
    */
   BusinessId: string
   /**
@@ -664,10 +671,12 @@ export interface DescribeBatchOperationLogDetailsResponse {
 export interface ModifyDomainDNSBatchRequest {
   /**
    * 批量操作的域名。
+一次提交不超过4000个
    */
   Domains: Array<string>
   /**
    * 域名DNS 数组。
+不少于2个，一般建议2-6个
    */
   Dns: Array<string>
 }
@@ -727,15 +736,18 @@ export interface DescribeUnPreDomainDetailResponse {
    */
   PreCount?: number
   /**
-   * 域名注册时间
+   * 域名注册时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   RegTime?: string
   /**
-   * 域名删除时间
+   * 域名删除时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   DeleteTime?: string
   /**
-   * 到期时间
+   * 到期时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   ExpireTime?: string
   /**
@@ -851,7 +863,7 @@ export interface SendPhoneEmailCodeResponse {
 export interface BidDetailPageRequest {
   /**
    * 预约ID
-可通过DescribeBiddingList接口获取
+可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取
    */
   BusinessId: string
 }
@@ -1286,8 +1298,8 @@ false：非原持有人
  */
 export interface BiddingPreReleaseRequest {
   /**
-   * 业务ID
-可通过DescribeBiddingList接口获取
+   * 业务ID(竞价域名的预约ID) 
+可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取
    */
   BusinessId: string
   /**
@@ -1334,6 +1346,7 @@ export interface ModifyIntlCustomDnsHostResponse {
 export interface DescribeDomainBaseInfoRequest {
   /**
    * 域名
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   Domain: string
 }
@@ -1355,11 +1368,13 @@ finish：完成出价
    */
   Status?: string
   /**
-   * 支付结束时间
+   * 支付结束时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   EndTime?: string
   /**
-   * 域名注册时间
+   * 域名注册时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   RegTime?: string
   /**
@@ -1442,7 +1457,7 @@ export interface SendPhoneEmailCodeRequest {
 export interface DeleteBiddingRequest {
   /**
    * 预约ID
-可通过DescribeBiddingList接口获取
+可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取
    */
   BusinessID?: string
 }
@@ -1497,10 +1512,11 @@ export interface PreAuctionInfo {
   Domain?: string
   /**
    * 竞价倒计时
+格式:YYYY-MM-DD HH:mm:ss
    */
   BiddingTime?: string
   /**
-   * 出价次数 单位元
+   * 出价次数
    */
   BidCount?: number
   /**
@@ -1552,7 +1568,8 @@ export interface ReservedPreDomainsRequest {
    */
   DomainList: Array<string>
   /**
-   * 模板ID 可通过DescribeTemplates接口获取
+   * 模板ID 
+可通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取
    */
   TemplateId: string
   /**
@@ -1600,22 +1617,27 @@ export interface DescribeBiddingDetailResponse {
   BiddingNum?: number
   /**
    * 竞价开始时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   BiddingStartTime?: string
   /**
    * 竞价结束时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   BiddingEndTime?: string
   /**
    *  注册时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   RegTime?: string
   /**
    * 过期时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   ExpireTime?: string
   /**
    * 删除时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   DeleteTime?: string
   /**
@@ -1743,8 +1765,8 @@ export interface DescribeTemplateResponse {
  */
 export interface DescribePayWaitDetailRequest {
   /**
-   * 业务ID
-可通过DescribeBiddingList接口获取
+   * 业务ID(竞价域名的预约ID) 
+可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取
    */
   BusinessId: string
 }
@@ -2180,14 +2202,15 @@ BiddingPrice 我的价格
 export interface ModifyCustomDnsHostRequest {
   /**
    * 域名实例ID
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   DomainId: string
   /**
-   * DNS名称
+   * Dns名称 例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式
    */
   DnsName: string
   /**
-   * IP地址列表
+   * IP地址列表 可选择：正常IP地址范围
    */
   IpSet: Array<string>
 }
@@ -2198,10 +2221,12 @@ export interface ModifyCustomDnsHostRequest {
 export interface DescribeBiddingSuccessfulListRequest {
   /**
    * 页码
+默认：1
    */
   PageNumber: number
   /**
    * 每页数量
+默认：20 取值范围【1，200】
    */
   PageSize: number
   /**
@@ -2213,7 +2238,9 @@ export interface DescribeBiddingSuccessfulListRequest {
    */
   Status?: Array<number | bigint>
   /**
-   * 排序字段：SuccessfulTime 预约结束时间
+   * 排序字段：
+默认<空>，不排序
+SuccessfulTime 预约结束时间
    */
   SortField?: string
   /**
@@ -2370,7 +2397,7 @@ export interface CreatePhoneEmailRequest {
 export interface DescribeBiddingDetailRequest {
   /**
    * 预约ID
-可通过DescribeBiddingList接口获取
+可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取
    */
   BusinessID?: string
 }
@@ -2400,22 +2427,27 @@ export interface DescribeBiddingAppointDetailResponse {
   AppointNum?: number
   /**
    * 预约开始时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   AppointStartTime?: string
   /**
    * 预约结束时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   AppointEndTime?: string
   /**
    *  注册时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   RegTime?: string
   /**
    * 过期时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   ExpireTime?: string
   /**
    * 删除时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   DeleteTime?: string
   /**
@@ -2494,6 +2526,7 @@ export interface DescribeBiddingSuccessfulDetailResponse {
   Domain?: string
   /**
    * 得标时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   SuccessfulTime?: string
   /**
@@ -2502,18 +2535,22 @@ export interface DescribeBiddingSuccessfulDetailResponse {
   SuccessfulPrice?: number
   /**
    *  注册时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   RegTime?: string
   /**
    * 过期时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   ExpireTime?: string
   /**
    * 删除时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   DeleteTime?: string
   /**
    * 付款结束时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   PayEndTime?: string
   /**
@@ -2580,7 +2617,8 @@ export interface DescribeDomainNameListResponse {
  */
 export interface SyncCustomDnsHostRequest {
   /**
-   * 域名实例ID，可以通过DescribeDomainList接口获取
+   * 域名实例ID
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   DomainId: string
 }
@@ -2742,18 +2780,29 @@ false 不是
   AutoRenew?: number
   /**
    * 注册时间。
+格式:YYYY-MM-DD HH:mm:ss
    */
   CreationDate?: string
   /**
    * 到期时间。
+格式:YYYY-MM-DD HH:mm:ss
    */
   ExpirationDate?: string
   /**
-   * 域名后缀
+   * 域名后缀，根据具体域名确定
+例如:
+123.com 后缀则为.com
+123.com.cn 后缀则为.com.cn
+123.中国 后缀则为.中国
+
    */
   Tld?: string
   /**
-   * 编码后的后缀（中文会进行编码）
+   * 编码后的后缀（中文会进行Punycode编码）根据具体域名确定
+例如:
+123.com 后缀则为.com
+123.com.cn 后缀则为.com.cn
+123.中国 后缀则为.xn--fiqs8s
    */
   CodeTld?: string
   /**
@@ -2858,7 +2907,7 @@ NoAudit: 无需实名认证
    */
   RealNameAuditStatus?: string
   /**
-   * 域名实名认证不通过原因。
+   * 域名实名认证不通过原因。<具体内容以实名审核机构返回为准>
    */
   RealNameAuditUnpassReason?: string
   /**
@@ -2871,16 +2920,18 @@ Rejected：域名命名审核拒绝
    */
   DomainNameAuditStatus?: string
   /**
-   * 域名命名审核不通过原因。
+   * 域名命名审核不通过原因。<具体内容以实名审核机构返回为准>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DomainNameAuditUnpassReason?: string
   /**
    * 注册时间。
+格式:YYYY-MM-DD
    */
   CreationDate?: string
   /**
    * 到期时间
+格式:YYYY-MM-DD
    */
   ExpirationDate?: string
   /**
@@ -2937,6 +2988,7 @@ false：关闭锁定
   LockTransfer?: boolean
   /**
    * 锁定结束时间
+格式:YYYY-MM-DD HH:mm:ss
    */
   LockEndTime?: string
 }
@@ -3005,7 +3057,7 @@ done 执行完成。
 export interface CreateCustomDnsHostRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainLIst接口获取
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   DomainId: string
   /**
@@ -3026,7 +3078,7 @@ export interface CreateCustomDnsHostRequest {
 export interface DeleteCustomDnsHostRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainList接口获取
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   DomainId: string
   /**
@@ -3066,7 +3118,8 @@ export interface CreateDomainRedemptionRequest {
  */
 export interface SetDomainAutoRenewRequest {
   /**
-   * 域名ID 例如：domain-dwerewwq可通过DescribreDomainList接口获取
+   * 域名实例ID
+可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
    */
   DomainId: string
   /**

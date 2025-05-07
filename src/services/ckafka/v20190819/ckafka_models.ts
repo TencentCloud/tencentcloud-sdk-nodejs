@@ -566,17 +566,14 @@ export interface CreateAclRuleRequest {
 export interface RouteFilter {
   /**
    * 过滤名称,目前支持security-group-id,按安全组关联过滤
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 过滤值,当过滤名称为security-group-id时仅支持传单个value
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
   /**
    * 过滤关系,支持IN和NOT_IN,默认为IN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Relation?: string
 }
@@ -601,12 +598,10 @@ export interface DescribeInstancesDetailResponse {
 export interface InstanceRoute {
   /**
    * ckafka集群实例Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
   /**
    * 路由Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteId: number
 }
@@ -818,27 +813,22 @@ export interface RecordMapping {
 export interface SecurityGroupRoute {
   /**
    * 路由信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceRoute?: InstanceRoute
   /**
    * 关联的安全组列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupIds?: Array<string>
   /**
    * ckafka集群实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 路由vpcId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 路由vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
 }
@@ -2763,12 +2753,10 @@ export interface DescribeTopicDetailResponse {
 export interface SecurityGroupRouteResp {
   /**
    * 符合条件的安全组路由信息总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 符合条件的安全组路由信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupRoutes?: Array<SecurityGroupRoute>
 }

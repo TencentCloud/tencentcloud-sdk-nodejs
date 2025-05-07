@@ -3366,11 +3366,11 @@ export interface IKEOptionsSpecification {
  */
 export interface DescribeTaskResultRequest {
   /**
-   * 异步任务ID。TaskId和DealName必填一个参数
+   * 异步任务ID。从异步任务接口返回结果中查看。例如：[AllocateAddresses](https://cloud.tencent.com/document/product/215/16699)接口。TaskId和DealName必填一个参数。
    */
   TaskId?: number
   /**
-   * 计费订单号。TaskId和DealName必填一个参数
+   * 计费订单号。在控制台中的[费用中心-订单管理](https://console.cloud.tencent.com/expense/deal)中查看订单号。TaskId和DealName必填一个参数。
    */
   DealName?: string
 }
@@ -3986,11 +3986,11 @@ export interface ModifyNetworkAclAttributeResponse {
  */
 export interface ModifyIPv6AddressesAttributesRequest {
   /**
-   * 弹性公网IPv6唯一ID列表。
+   * 弹性公网IPv6唯一ID列表。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressIds。
    */
   IPv6AddressIds: Array<string>
   /**
-   * 弹性公网IPv6地址名称
+   * 弹性公网IPv6地址名称，长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"_"，不能包含空格。
    */
   IPv6AddressName?: string
 }
@@ -4054,19 +4054,22 @@ export interface BandwidthRange {
  */
 export interface ModifyAddressInternetChargeTypeRequest {
   /**
-   * 弹性公网IP的唯一ID，形如eip-xxx
+   * 弹性公网IP的唯一ID，形如eip-xxx，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressId: string
   /**
-   * 弹性公网IP调整目标计费模式，支持 "BANDWIDTH_PREPAID_BY_MONTH"、"TRAFFIC_POSTPAID_BY_HOUR"、"BANDWIDTH_POSTPAID_BY_HOUR"
+   * 弹性公网IP调整目标计费模式，支持：
+BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费
+TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
+BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
    */
   InternetChargeType: string
   /**
-   * 弹性公网IP调整目标带宽值
+   * 弹性公网IP调整目标带宽值，可调整的带宽上限值参考产品文档[带宽上限](https://cloud.tencent.com/document/product/1199/48333)。
    */
   InternetMaxBandwidthOut: number
   /**
-   * 包月带宽网络计费模式参数。弹性公网IP的调整目标计费模式是"BANDWIDTH_PREPAID_BY_MONTH"时，必传该参数。
+   * 包月带宽网络计费模式参数。弹性公网IP的调整目标计费模式是 BANDWIDTH_PREPAID_BY_MONTH（包月按带宽预付费）时，必传该参数。
    */
   AddressChargePrepaid?: AddressChargePrepaid
 }
@@ -4076,15 +4079,15 @@ export interface ModifyAddressInternetChargeTypeRequest {
  */
 export interface ModifyIp6AddressesBandwidthRequest {
   /**
-   * 修改的目标带宽，单位Mbps
+   * 修改的目标带宽，单位Mbps。可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。
    */
   InternetMaxBandwidthOut: number
   /**
-   * IPv6地址。Ip6Addresses和Ip6AddressId必须且只能传一个
+   * IPv6地址。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6Addresses。Ip6Addresses和Ip6AddressIds必须且只能传一个。
    */
   Ip6Addresses?: Array<string>
   /**
-   * IPv6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressId必须且只能传一个
+   * IPv6地址对应的唯一ID，形如eip-xxxxxxxx。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6AddressIds。Ip6Addresses和Ip6AddressIds必须且只能传一个。
    */
   Ip6AddressIds?: Array<string>
 }
@@ -7413,11 +7416,11 @@ export interface AddressTemplateSpecification {
   /**
    * IP地址ID，例如：ipm-2uw6ujo6。
    */
-  AddressId: string
+  AddressId?: string
   /**
    * IP地址组ID，例如：ipmg-2uw6ujo6。
    */
-  AddressGroupId: string
+  AddressGroupId?: string
 }
 
 /**
@@ -8807,11 +8810,14 @@ export interface DeletePrivateNatGatewayTranslationAclRuleResponse {
  */
 export interface DescribeSpecificTrafficPackageUsedDetailsRequest {
   /**
-   * 共享流量包唯一ID
+   * 共享流量包唯一ID。可以使用[DescribeTrafficPackages](https://cloud.tencent.com/document/product/215/80090?locationSource=from%3Ddoc-search%26scope%3Dcurrent%26keyword%3D%E6%B5%81%E9%87%8F%E5%8C%85)接口获取TrafficPackageId。
    */
   TrafficPackageId: string
   /**
-   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。详细的过滤条件如下：<li> resource-id - String - 是否必填：否 - （过滤条件）按照抵扣流量资源的唯一 ID 过滤。</li><li> resource-type - String - 是否必填：否 - （过滤条件）按照资源类型过滤，资源类型包括 CVM 和 EIP </li>
+   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。详细的过滤条件如下：<ul style="margin:0"><li> resource-type - String - 是否必填：否 - （过滤条件）按照资源类型过滤，资源类型包括 EIP、BWP、LB。 </li>
+<li> resource-id - String - 是否必填：否 - （过滤条件）按照抵扣流量资源的唯一 ID 过滤。以下补充资源ID获取方式：<ul><li>EIP：可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取资源ID。</li>
+<li>BWP：可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口获取资源ID。</li>
+<li>LB：可以使用[DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685)接口获取资源ID。</li></ul></li></ul>
    */
   Filters?: Array<Filter>
   /**
@@ -8823,11 +8829,13 @@ export interface DescribeSpecificTrafficPackageUsedDetailsRequest {
    */
   OrderType?: number
   /**
-   * 开始时间。不传默认为当前时间往前推30天
+   * 开始时间。待查询的共享流量包用量开始时间。不传默认为当前时间往前推30天。
+时间格式：YYYY-MM-DD hh:mm:ss
    */
   StartTime?: string
   /**
-   * 结束时间。不传默认为当前时间
+   * 结束时间。待查询的共享流量包用量结束时间。不传默认为当前时间。
+时间格式：YYYY-MM-DD hh:mm:ss
    */
   EndTime?: string
   /**
@@ -9358,21 +9366,24 @@ export interface ModifyVpnGatewayAttributeResponse {
  */
 export interface AllocateIPv6AddressesRequest {
   /**
-   * EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名。
+   * EIP名称，用于申请EIP时用户自定义该EIP的个性化名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"_"，不能包含空格。
+默认值：未命名
    */
   AddressName?: string
   /**
    * 弹性公网IPv6类型，可选值：
 
-- EIPv6：普通IPv6
-- HighQualityEIPv6：精品IPv6
-注意：需联系产品开通精品IPv6白名单，且仅部分地域支持精品IPv6
+- EIPv6：弹性公网IPv6
+- HighQualityEIPv6：精品BGP线路弹性公网IPv6
+注意：弹性公网IPv6产品需开白才能使用，其中精品BGP线路仅在中国香港支持。
 
-默认值：EIPv6。
+默认值：EIPv6
    */
   AddressType?: string
   /**
-   * 申请的弹性公网IPv6数量，默认值：1。
+   * 申请的弹性公网IPv6数量。单次最多可以申请20个弹性公网IPv6实例，总配额请参见[弹性公网 IPv6 配额说明](https://cloud.tencent.com/document/product/1142/38369)。
+
+默认值：1
    */
   AddressCount?: number
   /**
@@ -9381,7 +9392,7 @@ export interface AllocateIPv6AddressesRequest {
 - BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费
 - TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
 
-默认值：TRAFFIC_POSTPAID_BY_HOUR。
+默认值：TRAFFIC_POSTPAID_BY_HOUR
    */
   InternetChargeType?: string
   /**
@@ -9391,7 +9402,7 @@ export interface AllocateIPv6AddressesRequest {
 - CMCC：中国移动
 - CTCC：中国电信
 - CUCC：中国联通
-注意：仅部分地域支持静态单线IP。
+注意：仅部分地域支持静态单线IP。具体请以控制台购买页展示为准。
    */
   InternetServiceProvider?: string
   /**
@@ -9399,14 +9410,14 @@ export interface AllocateIPv6AddressesRequest {
 
 可选值范围取决于EIP计费方式：
 
-- BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps
-- TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps
+- BANDWIDTH_PACKAGE（共享带宽包付费）：1 Mbps 至 2000 Mbps
+- TRAFFIC_POSTPAID_BY_HOUR（流量按小时后付费）：1 Mbps 至 100 Mbps
 
-默认值：1 Mbps。
+默认值：1
    */
   InternetMaxBandwidthOut?: number
   /**
-   * 带宽包唯一ID参数。
+   * 带宽包唯一ID参数。可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
 设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费。
    */
   BandwidthPackageId?: string
@@ -9419,10 +9430,9 @@ export interface AllocateIPv6AddressesRequest {
 
 - CENTER_EGRESS_1：中心出口一
 - CENTER_EGRESS_2：中心出口二
-- CENTER_EGRESS_3：中心出口三
-注意：不同运营商或资源类型对应的网络出口需要联系产品开白
+注意：不同地域支持的线路类型、网络出口略有差异，请以控制台展示为准。
 
-默认值：CENTER_EGRESS_1。
+默认值：CENTER_EGRESS_1
    */
   Egress?: string
 }
@@ -11025,32 +11035,34 @@ export interface DeleteNetDetectResponse {
  */
 export interface AllocateAddressesRequest {
   /**
-   * EIP数量。默认值：1。
+   * EIP数量。可申请的数量限制参考：[EIP 配额限制](https://cloud.tencent.com/document/product/1199/41648)。默认值：1。
    */
   AddressCount?: number
   /**
-   * EIP线路类型。默认值：BGP。
-<ul style="margin:0"><li>已开通静态单线IP白名单的用户，可选值：<ul><li>CMCC：中国移动</li>
+   * EIP线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
+<ul style="margin:0"><li>BGP：常规 BGP 线路</li>
+<li>已开通静态单线IP白名单的用户，可选值：<ul><li>CMCC：中国移动</li>
 <li>CTCC：中国电信</li>
-<li>CUCC：中国联通</li></ul>注意：仅部分地域支持静态单线IP。</li></ul>
+<li>CUCC：中国联通</li></ul></li>注意：仅部分地域支持静态单线IP。</ul>
+
    */
   InternetServiceProvider?: string
   /**
    * EIP计费方式。
-<ul style="margin:0"><li>已开通标准账户类型白名单的用户，可选值：<ul><li>BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费（需额外开通共享带宽包白名单）</li>
+<ul style="margin:0"><li>标准账户类型，可选值：<ul><li>BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费</li>
 <li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费</li>
 <li>BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费</li>
 <li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费</li></ul>默认值：TRAFFIC_POSTPAID_BY_HOUR。</li>
-<li>未开通标准账户类型白名单的用户，EIP计费方式与其绑定的实例的计费方式一致，无需传递此参数。</li></ul>
+<li>传统账户类型，无需传递此参数，EIP计费方式与其绑定的实例的计费方式一致，无需传递此参数。</li></ul>
    */
   InternetChargeType?: string
   /**
    * EIP出带宽上限，单位：Mbps。
-<ul style="margin:0"><li>已开通标准账户类型白名单的用户，可选值范围取决于EIP计费方式：<ul><li>BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps</li>
+<ul style="margin:0"><li>标准账户类型EIP出带宽上限，可选值范围取决于EIP计费方式：<ul><li>BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps</li>
 <li>BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li>
 <li>BANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 Mbps</li>
 <li>TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li></ul>默认值：1 Mbps。</li>
-<li>未开通标准账户类型白名单的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。</li></ul>
+<li>传统账户类型无需传递此参数，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。</li></ul>
    */
   InternetMaxBandwidthOut?: number
   /**
@@ -11058,10 +11070,12 @@ export interface AllocateAddressesRequest {
    */
   AddressChargePrepaid?: AddressChargePrepaid
   /**
-   * EIP类型。默认值：EIP。
-<ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>AnycastEIP：加速IP，可参见 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)</li></ul>注意：仅部分地域支持加速IP。</li></ul>
-<ul style="margin:0"><li>已开通精品IP白名单的用户，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅部分地域支持精品IP。</li></ul>
-<ul style="margin:0"><li>已开高防IP白名单的用户，可选值：<ul><li>AntiDDoSEIP：高防IP</li></ul>注意：仅部分地域支持高防IP。</li></ul>
+   * EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。
+<li>EIP：弹性公网 IP。 </li>
+<li>AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP。</li>
+<li>HighQualityEIP：精品 IP。仅部分地域支持精品IP。</li>
+<li>AntiDDoSEIP：高防 IP。仅部分地域支持高防IP。</li>
+
    */
   AddressType?: string
   /**
@@ -13523,15 +13537,16 @@ export interface ModifySnapshotPoliciesRequest {
  */
 export interface ModifyAddressAttributeRequest {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressId: string
   /**
-   * 修改后的 EIP 名称。长度上限为128个字符。
+   * 修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"\_"，不能包含空格。
    */
   AddressName?: string
   /**
-   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。注意该参数仅对EIP直通功能可见的用户可以设定。
+   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。
+注意：该参数仅对 EIP 直通功能可见的用户可以设定，EIP 必须为绑定状态，绑定的对象为 CVM 。
    */
   EipDirectConnection?: string
 }
@@ -14385,7 +14400,6 @@ export interface Address {
   InternetChargeType?: string
   /**
    * 弹性公网IP关联的标签列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<Tag>
   /**
@@ -14420,12 +14434,10 @@ export interface Address {
   BandwidthPackageId?: string
   /**
    * 传统弹性公网IPv6所属vpc唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnVpcId?: string
   /**
    * CDC唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DedicatedClusterId?: string
 }
@@ -14525,11 +14537,12 @@ export interface VpnGateway {
  */
 export interface ModifyAddressesBandwidthRequest {
   /**
-   * EIP唯一标识ID列表，形如'eip-xxxx'
+   * EIP唯一标识ID列表，形如'eip-xxxx'，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
+
    */
   AddressIds: Array<string>
   /**
-   * 调整带宽目标值
+   * 调整带宽目标值，可调整的带宽上限值参考产品文档[带宽上限](https://cloud.tencent.com/document/product/1199/48333)。
    */
   InternetMaxBandwidthOut: number
   /**
@@ -14814,7 +14827,6 @@ export interface BandwidthPackage {
   Bandwidth?: number
   /**
    * 网络出口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Egress?: string
   /**
@@ -15265,7 +15277,7 @@ export interface DescribeTaskResultResponse {
    */
   TaskId?: number
   /**
-   * 执行结果，包括"SUCCESS", "FAILED", "RUNNING"
+   * 执行结果，包括"SUCCESS"：异步任务执行成功, "FAILED"：异步任务执行失败, "RUNNING"：异步任务执行中
    */
   Result?: string
   /**
@@ -17855,7 +17867,7 @@ export interface DeleteRoutesRequest {
  */
 export interface AssociateAddressRequest {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。
+   * 标识 EIP 的唯一 ID。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。EIP 唯一 ID 形如：`eip-11112222`。
    */
   AddressId: string
   /**
@@ -18837,11 +18849,11 @@ export interface DescribeClassicLinkInstancesRequest {
  */
 export interface ReleaseIp6AddressesBandwidthRequest {
   /**
-   * IPv6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个
+   * IPv6地址。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6Addresses。Ip6Addresses和Ip6AddressIds必须且只能传一个。
    */
   Ip6Addresses?: Array<string>
   /**
-   * IPv6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。
+   * IPv6地址对应的唯一ID，形如eip-xxxxxxxx。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6AddressIds。Ip6Addresses和Ip6AddressIds必须且只能传一个。
    */
   Ip6AddressIds?: Array<string>
 }
@@ -19396,7 +19408,7 @@ export interface CreateSecurityGroupWithPoliciesRequest {
  */
 export interface ReleaseAddressesRequest {
   /**
-   * 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：`eip-11112222`。
+   * 标识 EIP 的唯一 ID 列表。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。EIP 唯一 ID 形如：`eip-11112222`。
    */
   AddressIds: Array<string>
 }
@@ -19597,7 +19609,7 @@ export interface ModifyGlobalRouteECMPAlgorithmRequest {
  */
 export interface RenewAddressesRequest {
   /**
-   * EIP唯一标识ID列表，形如'eip-xxxx'
+   * EIP唯一标识ID列表，形如'eip-xxxx'，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressIds: Array<string>
   /**
@@ -19621,11 +19633,11 @@ export interface ModifyVpcEndPointServiceWhiteListResponse {
  */
 export interface DisassociateAddressRequest {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressId: string
   /**
-   * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：<br><li />TRUE：表示解绑 EIP 之后分配普通公网 IP。<br><li />FALSE：表示解绑 EIP 之后不分配普通公网 IP。<br>默认取值：FALSE。<br><br>只有满足以下条件时才能指定该参数：<br><li /> 只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。<br><li />解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 [DescribeAddressQuota](https://cloud.tencent.com/document/api/213/1378) 接口获取。
+   * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：<li>TRUE：表示解绑 EIP 之后分配普通公网 IP。</li><li>FALSE：表示解绑 EIP 之后不分配普通公网 IP。</li>默认取值：FALSE。<br><br>只有满足以下条件时才能指定该参数：<li>只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。</li><li>解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 [DescribeAddressQuota](https://cloud.tencent.com/document/api/213/1378) 接口获取。</li>
    */
   ReallocateNormalPublicIp?: boolean
 }

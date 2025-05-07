@@ -215,8 +215,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改自定义DNS Host
-   */
+     * 修改自定义DNS Host
+域名在“正常状态”下可修改已经存在的自定义DNS Host，域名如果“未实名”则无法修改，账户如果未实名则无法修改。 默认每个域名 自定义DNS Host 数量不超过10个
+     */
   async ModifyCustomDnsHost(
     req: ModifyCustomDnsHostRequest,
     cb?: (error: string, rep: ModifyCustomDnsHostResponse) => void
@@ -426,8 +427,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建自定义DNS Host
-   */
+     * 创建自定义DNS Host
+域名在“正常状态”下可创建，域名如果“未实名”则无法创建，账户如果未实名则无法创建。
+默认每个域名 自定义DNS Host 数量不超过10个
+     */
   async CreateCustomDnsHost(
     req: CreateCustomDnsHostRequest,
     cb?: (error: string, rep: CreateCustomDnsHostResponse) => void
@@ -666,8 +669,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除自定义DNS Host
-   */
+     * 删除自定义DNS Host
+仅能删除域名在“正常状态”下，已经创建过的自定义Host，域名如果“未实名”或账户未实名，则无法操作
+     */
   async DeleteCustomDnsHost(
     req: DeleteCustomDnsHostRequest,
     cb?: (error: string, rep: DeleteCustomDnsHostResponse) => void

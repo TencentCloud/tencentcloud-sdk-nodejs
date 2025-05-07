@@ -1883,56 +1883,65 @@ export interface SnapshotGroup {
   /**
    * 快照组ID。
    */
-  SnapshotGroupId: string
+  SnapshotGroupId?: string
   /**
    * 快照组类型。NORMAL: 普通快照组，非一致性快照。
    */
-  SnapshotGroupType: string
+  SnapshotGroupType?: string
   /**
    * 快照组是否包含系统盘快照。
    */
-  ContainRootSnapshot: boolean
+  ContainRootSnapshot?: boolean
   /**
    * 快照组包含的快照ID列表。
    */
-  SnapshotIdSet: Array<string>
+  SnapshotIdSet?: Array<string>
   /**
-   * 快照组状态。<br><li>NORMAL: 正常<br><li>CREATING:创建中<br><li>ROLLBACKING:回滚中
+   * <ul>
+    <li>NORMAL: 正常</li>
+    <li>CREATING: 创建中</li>
+    <li>ROLLBACKING: 回滚中</li>
+</ul>
    */
-  SnapshotGroupState: string
+  SnapshotGroupState?: string
   /**
    * 快照组创建进度。
    */
-  Percent: number
+  Percent?: number
   /**
    * 快照组创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 快照组最新修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 快照组关联的镜像列表。
    */
-  Images: Array<Image>
+  Images?: Array<Image>
   /**
    * 快照组名称。
    */
-  SnapshotGroupName: string
+  SnapshotGroupName?: string
   /**
    * 快照组关联的镜像数量。
    */
-  ImageCount: number
+  ImageCount?: number
   /**
    * 快照组是否永久保留
    */
-  IsPermanent: boolean
+  IsPermanent?: boolean
   /**
    * 快照组到期时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeadlineTime: string
+  DeadlineTime?: string
+  /**
+   * 来源自动快照策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoSnapshotPolicyId?: string
 }
 
 /**

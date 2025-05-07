@@ -127,13 +127,17 @@ export interface UploadKnowledgeDocumentSetRequest {
    */
   FileTitle?: string
   /**
-   * 	文件元信息，为jsonstring
+   * 文件元信息，为jsonstring
    */
   FileMetaData?: string
   /**
    * 文件id
    */
   DocumentSetId?: string
+  /**
+   * 使用 regex 分割文档
+   */
+  Delimiter?: string
 }
 
 /**

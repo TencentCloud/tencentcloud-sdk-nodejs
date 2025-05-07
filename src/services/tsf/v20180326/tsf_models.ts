@@ -9412,7 +9412,7 @@ export interface DescribeImageTagsResponse {
  */
 export interface BindPluginResponse {
   /**
-   * 返回结果，成功失败
+   * 返回结果，成功：true，失败：false。
    */
   Result?: boolean
   /**

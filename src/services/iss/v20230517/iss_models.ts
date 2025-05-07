@@ -2336,88 +2336,71 @@ export interface ListOrganizationChannelNumbersData {
 export interface VideoDownloadTask {
   /**
    * 下载任务 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DownloadTaskId?: string
   /**
    * 通道 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelId?: string
   /**
    * 通道名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelName?: string
   /**
    * 通道编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelCode?: string
   /**
    * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName?: string
   /**
    * 设备编码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceCode?: string
   /**
    * 任务状态（0：未执行；1：执行中；2 任务完成；
 3：任务失败）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 下载录像时间段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoTimeSection?: string
   /**
    * 倍速
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Scale?: number
   /**
    * 下载时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DownloadTime?: number
   /**
    * 录像大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoSize?: number
   /**
    * 任务开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 文件下载地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileDownloadUrl?: string
   /**
    * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedReason?: string
   /**
    * 生命周期规则，热存天数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expire?: number
   /**
    * mp4预览地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreviewUrl?: string
 }
@@ -3355,7 +3338,6 @@ export interface GatewaysData {
 export interface VideoDownloadTaskData {
   /**
    * 下载任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DownloadTaskId?: string
 }
@@ -3987,12 +3969,10 @@ export interface QueryForbidPlayChannelListRequest {
 export interface ListVideoDownloadTaskData {
   /**
    * 任务列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<VideoDownloadTask>
   /**
    * 任务总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
 }

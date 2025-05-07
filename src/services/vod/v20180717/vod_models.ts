@@ -12704,6 +12704,10 @@ export interface PullUploadRequest {
    */
   ClassId?: number
   /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
    * 来源上下文，用于透传用户请求信息，当指定 Procedure 任务后，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
   SessionContext?: string

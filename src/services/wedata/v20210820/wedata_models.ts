@@ -11299,6 +11299,14 @@ export interface GenHiveTableDDLSqlRequest {
    * doris写入模式配置
    */
   WriteMode?: string
+  /**
+   * 任务类型 201（实时）， 202（离线）
+   */
+  TaskType?: number
+  /**
+   * 目标端table名称
+   */
+  SinkTableName?: string
 }
 
 /**

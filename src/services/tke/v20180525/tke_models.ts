@@ -1940,21 +1940,21 @@ export interface UpdateEKSContainerInstanceRequest {
  */
 export interface CUDNN {
   /**
-   * cuDNN的版本
-   */
-  Version: string
-  /**
    * cuDNN的名字
    */
   Name: string
   /**
-   * cuDNN的Doc名字
+   * cuDNN的版本
    */
-  DocName?: string
+  Version: string
   /**
    * cuDNN的Dev名字
    */
   DevName?: string
+  /**
+   * cuDNN的Doc名字
+   */
+  DocName?: string
 }
 
 /**
@@ -4573,13 +4573,13 @@ export interface UpgradeNodeResetParam {
  */
 export interface DriverVersion {
   /**
-   * GPU驱动或者CUDA的版本
-   */
-  Version: string
-  /**
    * GPU驱动或者CUDA的名字
    */
   Name: string
+  /**
+   * GPU驱动或者CUDA的版本
+   */
+  Version: string
 }
 
 /**
@@ -13274,14 +13274,6 @@ cluster 集群级别
  */
 export interface GPUArgs {
   /**
-   * 是否启用MIG特性
-   */
-  MIGEnable?: boolean
-  /**
-   * GPU驱动版本信息
-   */
-  Driver?: DriverVersion
-  /**
    * CUDA版本信息
    */
   CUDA?: DriverVersion
@@ -13293,6 +13285,14 @@ export interface GPUArgs {
    * 自定义GPU驱动信息
    */
   CustomDriver?: CustomDriver
+  /**
+   * GPU驱动版本信息
+   */
+  Driver?: DriverVersion
+  /**
+   * 是否启用MIG特性
+   */
+  MIGEnable?: boolean
 }
 
 /**

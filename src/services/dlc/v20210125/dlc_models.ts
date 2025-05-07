@@ -6287,6 +6287,10 @@ export interface DescribeUserRolesRequest {
    * 正序或者倒序，例如：desc
    */
   Sorting?: string
+  /**
+   * 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻）
+   */
+  IsDefault?: number
 }
 
 /**
@@ -8167,6 +8171,10 @@ export interface UserRole {
    * cam策略json
    */
   PermissionJson?: string
+  /**
+   * 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻）
+   */
+  IsDefault?: number
 }
 
 /**

@@ -2106,6 +2106,10 @@ export interface CreateClustersRequest {
    */
   Memory?: number
   /**
+   * 实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos
+   */
+  InstanceCount?: number
+  /**
    * 该参数无实际意义，已废弃。
 存储大小，单位GB。
    */
@@ -2159,10 +2163,6 @@ timeRollback，时间点回档
 当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
    */
   StorageLimit?: number
-  /**
-   * 实例数量，数量范围为(0,16]
-   */
-  InstanceCount?: number
   /**
    * 包年包月购买时长
    */

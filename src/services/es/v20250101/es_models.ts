@@ -20,23 +20,23 @@
  */
 export interface ChatCompletionsRequest {
   /**
-   * 会话内容，按对话时间从旧到新在数组中排列，长度受模型窗口大小限制
+   * 会话内容，按对话时间从旧到新在数组中排列，长度受模型窗口大小限制。
    */
   Messages: Array<Message>
   /**
-   * 模型名称
+   * 模型名称，可选模型列表：hunyuan-turbo，hunyuan-large，hunyuan-large-longcontext，hunyuan-standard，hunyuan-standard-256K，deepseek-r1，deepseek-v3，deepseek-r1-distill-qwen-32b。
    */
   ModelName: string
   /**
-   * 是否以流式接口的形式返回数据，默认true
+   * 是否以流式接口的形式返回数据，默认true。
    */
   Stream?: boolean
   /**
-   * 取值区间为[0.0, 1.0], 非必要不建议使用, 不合理的取值会影响效果
+   * 取值区间为[0.0, 1.0], 非必要不建议使用, 不合理的取值会影响效果 。
    */
   TopP?: number
   /**
-   * 取值区间为[0.0, 2.0], 非必要不建议使用, 不合理的取值会影响效果
+   * 取值区间为[0.0, 2.0], 非必要不建议使用, 不合理的取值会影响效果 。
    */
   Temperature?: number
   /**
@@ -68,15 +68,15 @@ export interface DocumentChunkUsage {
  */
 export interface ChunkDocumentAsyncRequest {
   /**
-   * 文件信息
+   * 文件信息。
    */
   Document: Document
   /**
-   * 模型名称
+   * 模型名称，可选模型列表：doc-tree-chunk。
    */
   ModelName: string
   /**
-   * 文件切片配置
+   * 文件切片配置。
    */
   Config?: ChunkConfigAsync
 }
@@ -86,15 +86,15 @@ export interface ChunkDocumentAsyncRequest {
  */
 export interface ChunkDocumentRequest {
   /**
-   * 文件切片文件信息
+   * 切片文件信息。
    */
   Document: ChunkDocument
   /**
-   * 模型名称
+   * 模型名称，可选模型列表：doc-chunk。
    */
   ModelName: string
   /**
-   * 文件切片配置
+   * 文件切片配置。
    */
   Config?: ChunkConfig
 }
@@ -190,15 +190,15 @@ export interface Usage {
  */
 export interface ParseDocumentResponse {
   /**
-   * 进度
+   * 进度：0-100。
    */
   Progress?: string
   /**
-   *  解析文件结果
+   *  解析文件结果。
    */
   DocumentParseResultUrl?: string
   /**
-   * 失败页码
+   * 失败页码。
    */
   FailedPages?: Array<number | bigint>
   /**
@@ -241,11 +241,11 @@ export interface Document {
  */
 export interface GetTextEmbeddingRequest {
   /**
-   * 模型名称
+   * 模型名称，可选模型列表：bge-base-zh-v1.5,conan-embedding-v1,bge-m3,KaLM-embedding-multilingual-mini-v1。
    */
   ModelName: string
   /**
-   * 需进行向量化的文本集
+   * 需进行向量化的文本集。
    */
   Texts: Array<string>
 }
@@ -283,15 +283,15 @@ export interface ChunkDocumentResponse {
  */
 export interface GetDocumentParseResultResponse {
   /**
-   * 任务状态
+   * 任务状态，-1：失败，0：运行中，1：成功。
    */
   Status?: number
   /**
-   * 结果文件
+   * 结果文件。
    */
   DocumentParseResultUrl?: string
   /**
-   * 失败的页码
+   * 失败的页码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedPages?: Array<number | bigint>
@@ -334,23 +334,23 @@ export interface Choice {
  */
 export interface RunRerankRequest {
   /**
-   * 模型名称
+   * 模型名称，可选模型列表：bge-reranker-large，bge-reranker-v2-m3。
    */
   ModelName: string
   /**
-   * 查询文本
+   * 查询文本。
    */
   Query: string
   /**
-   * 待排序的候选doc列表
+   * 待排序的候选doc列表。
    */
   Documents: Array<string>
   /**
-   * 排序返回的top文档数量, 如果没有指定则返回全部候选doc，如果指定的top_n值大于输入的候选doc数量，返回全部doc
+   * 排序返回的top文档数量, 如果没有指定则返回全部候选doc，如果指定的top_n值大于输入的候选doc数量，返回全部doc。
    */
   TopN?: number
   /**
-   * 返回的排序结果列表里面是否返回每一条document原文，默认值False
+   * 返回的排序结果列表里面是否返回每一条document原文，默认值False。
    */
   ReturnDocuments?: boolean
 }
@@ -504,15 +504,15 @@ export interface ParseDocument {
  */
 export interface GetDocumentChunkResultResponse {
   /**
-   * 任务状态
+   * 任务状态，-1：失败，0：运行中，1：成功。
    */
   Status?: number
   /**
-   * 切片结果
+   * 切片结果文件。
    */
   DocumentChunkResultUrl?: string
   /**
-   * 用量
+   * Token用量。
    */
   Usage?: DocumentChunkUsage
   /**
@@ -580,7 +580,7 @@ export interface ParseDocumentRequest {
    */
   Document: ParseDocument
   /**
-   * 模型名称
+   * 模型名称，doc-llm。
    */
   ModelName: string
 }
@@ -618,7 +618,7 @@ export interface GetTextEmbeddingResponse {
    */
   Data?: Array<EmbeddingData>
   /**
-   * 消耗token数量
+   * 向量化消耗的token数量。
    */
   Usage?: Usage
   /**
@@ -632,11 +632,11 @@ export interface GetTextEmbeddingResponse {
  */
 export interface RunRerankResponse {
   /**
-   * 输出结果集
+   * 输出结果集。
    */
   Data?: Array<RerankResult>
   /**
-   * 消耗token数量
+   * 消耗token数量。
    */
   Usage?: Usage
   /**
@@ -650,11 +650,11 @@ export interface RunRerankResponse {
  */
 export interface ParseDocumentAsyncRequest {
   /**
-   * 文件信息
+   * 文件信息。
    */
   Document: Document
   /**
-   * 模型名称
+   * 模型名称，可选模型列表：doc-llm。
    */
   ModelName: string
 }
@@ -664,11 +664,11 @@ export interface ParseDocumentAsyncRequest {
  */
 export interface ChunkDocument {
   /**
-   * 文件类型
+   * 文件类型，支持 MD，TXT 格式。
    */
   FileType?: string
   /**
-   * 文件的 base64值
+   * 文本原文，使用字符串格式输入。
    */
   FileContent?: string
 }
