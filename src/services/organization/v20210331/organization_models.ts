@@ -422,17 +422,14 @@ export interface RoleProvisioningsTask {
   TargetUin?: number
   /**
    * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetType?: string
   /**
    * 任务类型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
   /**
    * 任务状态：InProgress: 进行中，Failed: 失败 3:Success: 成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskStatus?: string
 }
@@ -3240,7 +3237,6 @@ export interface TaskInfo {
   Status?: string
   /**
    * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureReason?: string
 }
@@ -4738,7 +4734,6 @@ export interface PolicyDetail {
   PolicyId: number
   /**
    * 策略名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
 }
@@ -6197,7 +6192,6 @@ export interface SAMLIdentityProviderConfiguration {
 export interface RolePolicie {
   /**
    * 策略ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RolePolicyId?: number
   /**

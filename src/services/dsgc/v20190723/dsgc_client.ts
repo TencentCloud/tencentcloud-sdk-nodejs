@@ -142,6 +142,7 @@ import {
   ListDSPAMetaResourcesRequest,
   ModifyDSPAAssessmentRiskTemplateResponse,
   RiskLevelTrendItem,
+  DspaDiscoveryTask,
   DescribeDSPAESDiscoveryTaskResultDetailRequest,
   NOSQLInstance,
   DeleteDSPADiscoveryTaskResultRequest,
@@ -153,6 +154,7 @@ import {
   DescribeDSPADiscoveryTaskDetailRequest,
   DescribeDSPARDBDataAssetByComplianceIdResponse,
   CreateNewClassificationResponse,
+  DescribeDSPADiscoveryTasksResponse,
   ListDSPAClustersResponse,
   CopyDSPATemplateRequest,
   VerifyDSPADiscoveryRuleRequest,
@@ -282,6 +284,7 @@ import {
   AssessmentRiskItem,
   ModifyNewClassificationResponse,
   BindDSPAResourceDatabasesRequest,
+  DescribeDSPADiscoveryTasksRequest,
   DescribeMongoAssetSensitiveDistributionRequest,
   GetUserQuotaInfoRequest,
   ModifyLevelStateRequest,
@@ -696,6 +699,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReportTaskDownloadUrlResponse) => void
   ): Promise<DescribeReportTaskDownloadUrlResponse> {
     return this.request("DescribeReportTaskDownloadUrl", req, cb)
+  }
+
+  /**
+   * 一个分类合并到另一个分类中（分类拖拽功能）
+   */
+  async ModifyMergeClassification(
+    req?: ModifyMergeClassificationRequest,
+    cb?: (error: string, rep: ModifyMergeClassificationResponse) => void
+  ): Promise<ModifyMergeClassificationResponse> {
+    return this.request("ModifyMergeClassification", req, cb)
   }
 
   /**
@@ -1253,13 +1266,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 一个分类合并到另一个分类中（分类拖拽功能）
+   * 获取分类分级任务列表
    */
-  async ModifyMergeClassification(
-    req?: ModifyMergeClassificationRequest,
-    cb?: (error: string, rep: ModifyMergeClassificationResponse) => void
-  ): Promise<ModifyMergeClassificationResponse> {
-    return this.request("ModifyMergeClassification", req, cb)
+  async DescribeDSPADiscoveryTasks(
+    req: DescribeDSPADiscoveryTasksRequest,
+    cb?: (error: string, rep: DescribeDSPADiscoveryTasksResponse) => void
+  ): Promise<DescribeDSPADiscoveryTasksResponse> {
+    return this.request("DescribeDSPADiscoveryTasks", req, cb)
   }
 
   /**

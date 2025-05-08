@@ -133,7 +133,6 @@ PLATINUM，铂金版
 export interface DescribeRoleListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -526,6 +525,11 @@ PREPAID，包年包月
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DestroyTime?: number
+  /**
+   * 所属可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneIds?: Array<number | bigint>
 }
 
 /**
@@ -577,6 +581,10 @@ export interface InstanceItemExtraInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStatus?: number
+  /**
+   * 是否已冻结
+   */
+  IsFrozen?: boolean
 }
 
 /**
@@ -964,7 +972,6 @@ export interface DescribeSourceClusterGroupListResponse {
 export interface DescribeMessageListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1109,7 +1116,6 @@ DELETING，删除中
 export interface DescribeInstanceListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1161,6 +1167,36 @@ export interface CreateConsumerGroupRequest {
    * 备注
    */
   Remark?: string
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
+}
+
+/**
+ * 客户端订阅详情，可用于辅助判断哪些客户端订阅关系不一致
+ */
+export interface ClientSubscriptionInfo {
+  /**
+   * 客户端ID
+   */
+  ClientId?: string
+  /**
+   * 客户端地址
+   */
+  ClientAddr?: string
+  /**
+   * 订阅主题
+   */
+  Topic?: string
+  /**
+   * 订阅表达式
+   */
+  SubString?: string
+  /**
+   * 订阅方式
+   */
+  ExpressionType?: string
 }
 
 /**
@@ -1620,7 +1656,6 @@ export interface DescribeMQTTInsVPCEndpointsRequest {
 export interface DescribeFusionInstanceListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1666,6 +1701,10 @@ TRANSACTION:事务消息
    * 消息保留时长
    */
   MsgTTL?: number
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**
@@ -1923,7 +1962,6 @@ export interface PriceTag {
 export interface DescribeTopicListByGroupResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -2755,6 +2793,11 @@ CLUSTERING 集群模式;
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageModel?: string
+  /**
+   * 订阅不一致的客户端列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientSubscriptionInfos?: Array<ClientSubscriptionInfo>
 }
 
 /**
@@ -4018,7 +4061,6 @@ export interface MQTTTopicItem {
 export interface DescribeConsumerGroupListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**

@@ -239,7 +239,7 @@ export interface BatchModifyTargetWeightResponse {
  */
 export interface SetSecurityGroupForLoadbalancersRequest {
   /**
-   * 安全组ID，如 sg-12345678
+   * 安全组ID，如 sg-12345678。可以通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口获取。
    */
   SecurityGroup: string
   /**
@@ -248,7 +248,8 @@ DEL 解绑安全组
    */
   OperationType: string
   /**
-   * 负载均衡实例ID数组
+   * 负载均衡实例ID数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+列表支持的最大长度为20。
    */
   LoadBalancerIds: Array<string>
 }
@@ -760,7 +761,7 @@ export interface ModifyLoadBalancerAttributesResponse {
  */
 export interface DescribeTargetGroupInstancesRequest {
   /**
-   * 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤。
+   * 过滤条件，当前支持按照 TargetGroupId，BindIP，InstanceId 多个条件组合过滤。
    */
   Filters: Array<Filter>
   /**
@@ -1122,7 +1123,7 @@ export interface DeregisterTargetsFromClassicalLBRequest {
  */
 export interface InquiryPriceModifyLoadBalancerRequest {
   /**
-   * 负载均衡实例ID
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
   /**
@@ -1225,7 +1226,9 @@ export interface ZoneResource {
  */
 export interface AssociateTargetGroupsRequest {
   /**
-   * 绑定的关系数组。一次请求最多支持20个。
+   * 绑定的关系数组，目标组类型需要一致。
+一次请求最多支持20个。
+
    */
   Associations: Array<TargetGroupAssociation>
 }
@@ -1259,8 +1262,8 @@ export interface TargetGroupInstance {
   Port?: number
   /**
    * 目标组实例的权重
-
 v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。
+取值范围：0-100
    */
   Weight?: number
   /**
@@ -1290,7 +1293,7 @@ export interface CreateRuleResponse {
   /**
    * 创建的转发规则的唯一标识数组。
    */
-  LocationIds: Array<string>
+  LocationIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1691,11 +1694,11 @@ export interface DescribeCustomizedConfigListRequest {
    */
   ConfigType: string
   /**
-   * 拉取页偏移，默认值0
+   * 拉取页偏移，默认值0。
    */
   Offset?: number
   /**
-   * 拉取数目，默认值20
+   * 拉取数目，默认值20。
    */
   Limit?: number
   /**
@@ -1703,13 +1706,21 @@ export interface DescribeCustomizedConfigListRequest {
    */
   ConfigName?: string
   /**
-   * 配置ID
+   * 配置ID，可以通过 [DescribeCustomizedConfigList](https://cloud.tencent.com/document/api/214/60009) 接口查询。
    */
   UconfigIds?: Array<string>
   /**
    * 过滤条件如下：
-<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 负载均衡ID 过滤，如："lb-12345678"。</li>
-<li> vip - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip 过滤，如："1.1.1.1","2204::22:3"。</li>
+- loadbalancer-id
+按照【负载均衡 ID】进行过滤。实例计费模式例如：lb-9vxezxza。
+类型：String
+必选：否
+获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
+- vip
+按照【负载均衡VIP】进行过滤。网络计费模式例如："1.1.1.1","2204::22:3"。
+类型：String
+必选：否
+获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
    */
   Filters?: Array<Filter>
 }
@@ -1837,7 +1848,7 @@ export interface DescribeLoadBalancerListByCertIdResponse {
   /**
    * 证书ID，以及与该证书ID关联的负载均衡实例列表
    */
-  CertSet: Array<CertIdRelatedWithLoadBalancers>
+  CertSet?: Array<CertIdRelatedWithLoadBalancers>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1871,7 +1882,7 @@ export interface DescribeTargetGroupsRequest {
    */
   Offset?: number
   /**
-   * 过滤条件数组，与TargetGroupIds互斥，支持TargetGroupVpcId和TargetGroupName。
+   * 过滤条件数组，与TargetGroupIds互斥，支持 TargetGroupVpcId（私有网络 ID）和 TargetGroupName（目标组名称）以及 Tag（标签）。
    */
   Filters?: Array<Filter>
 }
@@ -1988,7 +1999,8 @@ export interface DescribeLBListenersRequest {
  */
 export interface SlaUpdateParam {
   /**
-   * lb的字符串ID
+   * 负载均衡实例 ID。
+可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
   /**
@@ -2328,7 +2340,7 @@ export interface ConfigListItem {
    */
   UconfigId?: string
   /**
-   * 配置类型
+   * 配置类型， 可选值：CLB（实例维度配置）， SERVER（服务维度配置），LOCATION（规则维度配置）
    */
   ConfigType?: string
   /**
@@ -2340,11 +2352,13 @@ export interface ConfigListItem {
    */
   ConfigContent?: string
   /**
-   * 增加配置时间
+   * 配置的创建时间。
+格式：YYYY-MM-DD HH:mm:ss
    */
   CreateTimestamp?: string
   /**
-   * 修改配置时间
+   * 配置的修改时间。
+格式：YYYY-MM-DD HH:mm:ss
    */
   UpdateTimestamp?: string
 }
@@ -2599,7 +2613,7 @@ export interface RegisterTargetsRequest {
    */
   Targets: Array<Target>
   /**
-   * 转发规则的ID，当绑定后端服务到七层转发规则时，必须提供此参数或Domain+Url两者之一。
+   * 转发规则的ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取，当绑定后端服务到七层转发规则时，必须提供此参数或Domain+Url两者之一。
    */
   LocationId?: string
   /**
@@ -2653,7 +2667,7 @@ export interface CreateTopicRequest {
    */
   TopicType?: string
   /**
-   * 存储时间，单位天
+   * 存储时间，单位天，默认为 30。
 - 日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。
 - 日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。
    */
@@ -2969,7 +2983,7 @@ export interface ModifyTargetGroupInstancesWeightRequest {
    */
   TargetGroupId: string
   /**
-   * 待修改权重的服务器数组。
+   * 待修改权重的服务器数组，在这个接口 Port 为必填项。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -3274,7 +3288,8 @@ export interface DeleteLoadBalancerRequest {
  */
 export interface ModifyLoadBalancersProjectRequest {
   /**
-   * 一个或多个待操作的负载均衡实例ID。
+   * 一个或多个待操作的负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+列表支持最大长度为20。
    */
   LoadBalancerIds: Array<string>
   /**
@@ -3331,11 +3346,11 @@ export interface CertificateInput {
    */
   CertContent?: string
   /**
-   * 上传客户端 CA 证书的名称，如果 SSLMode=mutual，如果没有 CertCaId，则此项必传。
+   * 上传客户端 CA 证书的名称，如果 SSLMode=MUTUAL，如果没有 CertCaId，则此项必传。
    */
   CertCaName?: string
   /**
-   * 上传客户端证书的内容，如果 SSLMode=mutual，如果没有 CertCaId，则此项必传。
+   * 上传客户端证书的内容，如果 SSLMode=MUTUAL，如果没有 CertCaId，则此项必传。
    */
   CertCaContent?: string
 }
@@ -3359,11 +3374,12 @@ export interface ResourceAvailability {
  */
 export interface SetLoadBalancerSecurityGroupsRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
   /**
    * 安全组ID构成的数组，一个负载均衡实例最多可绑定50个安全组，如果要解绑所有安全组，可不传此参数。
+可以通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口查询。
    */
   SecurityGroups?: Array<string>
 }
@@ -3392,7 +3408,7 @@ export interface DescribeCustomizedConfigAssociateListResponse {
 export interface SetCustomizedConfigForLoadBalancerRequest {
   /**
    * 操作类型。
-- ADD：添加
+- ADD：创建
 - DELETE：删除
 - UPDATE：修改
 - BIND：绑定
@@ -3404,15 +3420,17 @@ export interface SetCustomizedConfigForLoadBalancerRequest {
    */
   UconfigId?: string
   /**
-   * 个性化配置内容。创建个性化配置或修改个性化配置的内容时，必传此字段
+   * 个性化配置内容。创建个性化配置或修改个性化配置的内容时，必传此字段。
+具体限制查看 [七层个性化配置](https://cloud.tencent.com/document/product/214/15171)
    */
   ConfigContent?: string
   /**
-   * 个性化配置名称。创建个性化配置或修改个性化配置的名字时，必传此字段
+   * 个性化配置名称。创建个性化配置或修改个性化配置的名字时，必传此字段。
    */
   ConfigName?: string
   /**
-   * 负载均衡实例ID。绑定解绑时，必传此字段
+   * 负载均衡实例ID。绑定解绑时，必传此字段。
+可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerIds?: Array<string>
 }
@@ -3632,11 +3650,11 @@ export interface CreateTopicResponse {
  */
 export interface CreateRuleRequest {
   /**
-   * 负载均衡实例 ID。
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取
    */
   LoadBalancerId: string
   /**
-   * 监听器 ID。
+   * 监听器 ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取
    */
   ListenerId: string
   /**
@@ -3661,10 +3679,12 @@ export interface ModifyTargetGroupInstancesPortResponse {
 export interface LbRsItem {
   /**
    * vpc的字符串id，只支持字符串id。
+可以通过 [DescribeVpcs](https://cloud.tencent.com/document/api/215/15778) 接口查询。
    */
   VpcId: string
   /**
-   * 需要查询后端的内网ip，可以是cvm和弹性网卡。
+   * 需要查询后端的内网 IP，可以是 CVM 和弹性网卡。
+可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。
    */
   PrivateIp: string
 }
@@ -3718,7 +3738,8 @@ export interface DeregisterTargetGroupInstancesRequest {
    */
   TargetGroupId: string
   /**
-   * 待解绑的服务器信息。
+   * 待解绑的服务器信息，支持批量解除绑定，单次批量解除数量最多为20个。
+
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -3840,13 +3861,21 @@ export interface CreateTargetGroupRequest {
     <li>取值范围[0, 100]</li>
     <li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li>
 </ul>
-
+v1 目标组类型不支持设置 Weight 参数。
    */
   Weight?: number
   /**
    * 全监听目标组标识，为true表示是全监听目标组，false表示不是全监听目标组。
    */
   FullListenSwitch?: boolean
+  /**
+   * 是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，0:关闭；1:开启， 默认关闭。
+   */
+  KeepaliveEnable?: boolean
+  /**
+   * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。TCP/UDP目标组不支持该参数。
+   */
+  SessionExpireTime?: number
 }
 
 /**
@@ -4054,7 +4083,7 @@ export interface TypeInfo {
  */
 export interface DisassociateTargetGroupsRequest {
   /**
-   * 待解绑的规则关系数组。
+   * 待解绑的规则关系数组，支持批量解绑多个监听器，单次批量解除最多20个。
    */
   Associations: Array<TargetGroupAssociation>
 }
@@ -4762,7 +4791,8 @@ export interface BatchTarget {
  */
 export interface DescribeLoadBalancerListByCertIdRequest {
   /**
-   * 服务端证书的ID，或客户端证书的ID
+   * 服务端证书的ID，或客户端证书的ID。可以通过 [DescribeCertificate](https://cloud.tencent.com/document/api/400/41674) 接口查询。
+数组最大长度为20。
    */
   CertIds: Array<string>
 }
@@ -4877,8 +4907,17 @@ export interface ModifyTargetGroupAttributeRequest {
     <li>取值范围[0, 100]</li>
     <li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li> 
 </ul>
+v1目标组类型不支持设置Weight参数。
    */
   Weight?: number
+  /**
+   * 是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，true:关闭；false:开启， 默认关闭。
+   */
+  KeepaliveEnable?: boolean
+  /**
+   * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。TCP/UDP目标组不支持该参数。
+   */
+  SessionExpireTime?: number
 }
 
 /**
@@ -4961,11 +5000,11 @@ export interface InquiryPriceCreateLoadBalancerResponse {
  */
 export interface CreateLoadBalancerSnatIpsRequest {
   /**
-   * 负载均衡唯一性ID，例如：lb-12345678。
+   * 负载均衡唯一性ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。例如：lb-12345678。
    */
   LoadBalancerId: string
   /**
-   * 添加的SnatIp信息，可指定IP申请，或者指定子网自动申请。单个CLB实例可申请的默认上限为10个。
+   * 添加的SnatIp信息，可指定IP申请，或者指定子网自动申请。可以通过 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784) 查询获取，单个CLB实例可申请的默认上限为10个。
    */
   SnatIps: Array<SnatIp>
   /**
@@ -5049,7 +5088,7 @@ export interface ModifyTargetGroupInstancesPortRequest {
    */
   TargetGroupId: string
   /**
-   * 待修改端口的服务器数组。
+   * 待修改端口的服务器数组，在这个接口 NewPort 和 Port 为必填项。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -5118,7 +5157,7 @@ export interface RuleInput {
    */
   Scheduler?: string
   /**
-   * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/GRPC/TRPC，TRPC暂未对外开放，默认HTTP。
+   * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/GRPC/GRPCS/TRPC，TRPC暂未对外开放，默认HTTP。
    */
   ForwardType?: string
   /**
@@ -5189,6 +5228,7 @@ export interface SnatIp {
 export interface ModifyLoadBalancerMixIpTargetRequest {
   /**
    * 负载均衡实例ID数组，默认支持20个负载均衡实例ID。
+可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerIds: Array<string>
   /**
@@ -5225,8 +5265,20 @@ export interface DescribeResourcesRequest {
   Offset?: number
   /**
    * 查询可用区资源列表条件，详细的过滤条件如下：
-<li>master-zone -- String - 是否必填：否 - （过滤条件）按照 地区 类型过滤，如："ap-guangzhou-2"。</li><li>ip-version -- String - 是否必填：否 - （过滤条件）按照 IP 类型过滤，可选值："IPv4"、"IPv6"、"IPv6_Nat"。</li>
-<li> isp -- String - 是否必填：否 - （过滤条件）按照 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC"。</li>
+- master-zone
+按照【地域可用区】进行过滤，例如：ap-guangzhou-2。
+类型：String
+必选：否
+- ip-version
+按照【IP 类型】进行过滤，例如：IPv4。
+类型：String
+必选：否
+可选项：IPv4、IPv6、IPv6_Nat
+- isp
+按照【ISP 类型】进行过滤，例如：BGP。
+类型：String
+必选：否
+可选项：BGP、CMCC（中国移动）、CUCC（中国联通）、CTCC（中国电信）、BGP_PRO、INTERNAL（内网）
    */
   Filters?: Array<Filter>
 }
@@ -5362,7 +5414,7 @@ export interface ModifyFunctionTargetsRequest {
    */
   ListenerId: string
   /**
-   * 要修改的后端云函数服务列表。
+   * 要修改的后端云函数服务列表，仅支持 Event 函数类型。
    */
   FunctionTargets: Array<FunctionTarget>
   /**
@@ -5404,8 +5456,9 @@ export interface Quota {
 <li> TOTAL_LISTENER_QUOTA：一个CLB下的监听器配额 </li>
 <li> TOTAL_LISTENER_RULE_QUOTA：一个监听器下的转发规则配额 </li>
 <li> TOTAL_TARGET_BIND_QUOTA：一条转发规则下可绑定设备的配额 </li>
-<li> TOTAL_SNAP_IP_QUOTA： 一个CLB实例下跨地域2.0的SNAT IP配额 </li>
+<li> TOTAL_SNAT_IP_QUOTA： 一个CLB实例下跨地域2.0的SNAT IP配额 </li>
 <li>TOTAL_ISP_CLB_QUOTA：用户当前地域下的三网CLB配额 </li>
+<li>TOTAL_FULL_PORT_RANGE_LISTENER_QUOTA：一个CLB实例下的单个协议全端口段监听器配额</li>
    */
   QuotaId?: string
   /**
@@ -5424,7 +5477,7 @@ export interface Quota {
  */
 export interface SetLoadBalancerClsLogRequest {
   /**
-   * 负载均衡实例 ID。
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
   /**
@@ -5523,11 +5576,11 @@ export interface DescribeIdleLoadBalancersRequest {
  */
 export interface DeleteLoadBalancerSnatIpsRequest {
   /**
-   * 负载均衡唯一ID，例如：lb-12345678。
+   * 负载均衡唯一ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。例如：lb-12345678。
    */
   LoadBalancerId: string
   /**
-   * 删除SnatIp地址数组。
+   * 删除SnatIp地址数组，最大支持删除数量为20个。
    */
   Ips: Array<string>
 }
@@ -5788,7 +5841,7 @@ export interface DeleteLoadBalancerSnatIpsResponse {
  */
 export interface InquiryPriceRenewLoadBalancerRequest {
   /**
-   * 负载均衡实例ID
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
   /**
@@ -6009,7 +6062,7 @@ export interface RegisterTargetGroupInstancesRequest {
    */
   TargetGroupId: string
   /**
-   * 服务器实例数组
+   * 服务器实例数组，服务器和目标组的 VPC 需相同。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -6071,11 +6124,11 @@ OPEN：公网属性， INTERNAL：内网属性；对于内网属性的负载均�
    */
   OpenBgp?: number
   /**
-   * 在 2016 年 12 月份之前的传统型内网负载均衡都是开启了 snat 的。
+   * 是否开启 SNAT，在 2016 年 12 月份之前的传统型内网负载均衡都是开启了 SNAT 的。
    */
   Snat?: boolean
   /**
-   * 0：表示未被隔离，1：表示被隔离。
+   * 是否被隔离，0：表示未被隔离，1：表示被隔离。
    */
   Isolation?: number
   /**

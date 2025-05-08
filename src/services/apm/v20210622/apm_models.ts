@@ -131,6 +131,14 @@ export interface ModifyApmInstanceRequest {
    * 是否开启组件漏洞检测（0=关,1=开）
    */
   IsInstrumentationVulnerabilityScan?: number
+  /**
+   * 是否开启远程命令攻击检测
+   */
+  IsRemoteCommandExecutionAnalysis?: number
+  /**
+   * 是否开启内存马检测
+   */
+  IsMemoryHijackingAnalysis?: number
 }
 
 /**
@@ -291,6 +299,14 @@ export interface ApmInstanceDetail {
 }
    */
   StopReason?: number
+  /**
+   * 是否开远程命令执行检测（0=关， 1=开）
+   */
+  IsRemoteCommandExecutionAnalysis?: number
+  /**
+   * 是否开内存马执行检测（0=关， 1=开）
+   */
+  IsMemoryHijackingAnalysis?: number
 }
 
 /**

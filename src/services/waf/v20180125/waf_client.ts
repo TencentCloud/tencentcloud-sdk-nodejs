@@ -92,6 +92,7 @@ import {
   Rule,
   DescribePostCKafkaFlowsResponse,
   Strategy,
+  ModifyInstanceAttackLogPostResponse,
   UpsertCCRuleResponse,
   DescribeHostRequest,
   AccessFullTextInfo,
@@ -166,6 +167,7 @@ import {
   ModifyBotStatusRequest,
   ModifyHostFlowModeRequest,
   CreateHostRequest,
+  ModifyInstanceAttackLogPostRequest,
   GetInstanceQpsLimitResponse,
   CreateDealsRequest,
   ModifyCustomWhiteRuleResponse,
@@ -902,13 +904,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑SAAS型接入的紧急CC防护状态
+   * 修改实例攻击日志投递开关，企业版及以上版本可以开通，否则返回错误
    */
-  async UpsertCCAutoStatus(
-    req: UpsertCCAutoStatusRequest,
-    cb?: (error: string, rep: UpsertCCAutoStatusResponse) => void
-  ): Promise<UpsertCCAutoStatusResponse> {
-    return this.request("UpsertCCAutoStatus", req, cb)
+  async ModifyInstanceAttackLogPost(
+    req?: ModifyInstanceAttackLogPostRequest,
+    cb?: (error: string, rep: ModifyInstanceAttackLogPostResponse) => void
+  ): Promise<ModifyInstanceAttackLogPostResponse> {
+    return this.request("ModifyInstanceAttackLogPost", req, cb)
   }
 
   /**
@@ -1540,6 +1542,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchDomainRulesResponse) => void
   ): Promise<SwitchDomainRulesResponse> {
     return this.request("SwitchDomainRules", req, cb)
+  }
+
+  /**
+   * 编辑SAAS型接入的紧急CC防护状态
+   */
+  async UpsertCCAutoStatus(
+    req: UpsertCCAutoStatusRequest,
+    cb?: (error: string, rep: UpsertCCAutoStatusResponse) => void
+  ): Promise<UpsertCCAutoStatusResponse> {
+    return this.request("UpsertCCAutoStatus", req, cb)
   }
 
   /**

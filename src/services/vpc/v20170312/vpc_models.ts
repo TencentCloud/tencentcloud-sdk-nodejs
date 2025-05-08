@@ -1428,7 +1428,6 @@ export interface AssistantCidr {
   AssistantType?: number
   /**
    * 辅助CIDR拆分的子网。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetSet?: Array<Subnet>
 }
@@ -3809,7 +3808,7 @@ export interface DescribeAccountAttributesResponse {
  */
 export interface ModifyAddressesRenewFlagRequest {
   /**
-   * EIP唯一标识ID列表，形如'eip-xxxx'
+   * EIP唯一标识ID列表，形如'eip-xxxx'，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressIds: Array<string>
   /**
@@ -4401,22 +4400,18 @@ export interface NetworkInterface {
   EniType?: number
   /**
    * 网卡绑定的子机类型：cvm（普通CVM子机），eks（弹性容器服务Elastic Kubernetes Service）， hai（高性能应用服务Hyper Application Inventor）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Business?: string
   /**
    * 网卡所关联的CDC实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
    * 弹性网卡类型：0:标准型/1:扩展型。默认值为0。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachType?: number
   /**
    * 用于保留网卡主IP的资源ID用于保留网卡主IP的资源ID。用于删除网卡时作为入参数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
@@ -4425,7 +4420,6 @@ PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。
 
 可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QosLevel?: string
 }
@@ -4571,11 +4565,11 @@ export interface ModifyDirectConnectGatewayAttributeRequest {
  */
 export interface VpcEndPointServiceUser {
   /**
-   * AppId。
+   * AppId。可通过登录 腾讯云账号中心控制台 获取。
    */
   Owner?: number
   /**
-   * Uin。
+   * 用户Uin。可通过登录 腾讯云账号中心控制台 获取。
    */
   UserUin?: string
   /**
@@ -4583,11 +4577,12 @@ export interface VpcEndPointServiceUser {
    */
   Description?: string
   /**
-   * 创建时间。
+   * 创建时间。格式为字符串YYYY-MM-DD HH:MM:SS。
    */
   CreateTime?: string
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
+
    */
   EndPointServiceId?: string
 }
@@ -5059,7 +5054,7 @@ export interface InternetPriceDetail {
    */
   DiscountPrice?: number
   /**
-   * 计价单元，可取值范围：<ul> <li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。</li></ul>
+   * 计价单元，可取值范围：<ul> <li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。</li><li> MONTH :表示计价单元是按月来计算。当前涉及该计价单元的场景有：包月按带宽预付费（BANDWIDTH_PREPAID_BY_MONTH）。</li></ul>
    */
   ChargeUnit?: string
   /**
@@ -5514,15 +5509,15 @@ export interface RouteECMPAlgorithm {
  */
 export interface AssociateIPv6AddressRequest {
   /**
-   * 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。
+   * 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。
    */
   IPv6AddressId: string
   /**
-   * 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的networkInterfaceId获取。
+   * 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni?rid=1)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的networkInterfaceId获取。
    */
   NetworkInterfaceId?: string
   /**
-   * 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的Ipv6AddressSet.Address获取。
+   * 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni?rid=1)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的Ipv6AddressSet.Address获取。
    */
   PrivateIPv6Address?: string
 }
@@ -5642,12 +5637,10 @@ export interface Vpc {
   TagSet?: Array<Tag>
   /**
    * 辅助CIDR
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssistantCidrSet?: Array<AssistantCidr>
   /**
    * 返回多运营商IPv6 Cidr Block
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6CidrBlockSet?: Array<ISPIPv6CidrBlock>
 }
@@ -7172,11 +7165,12 @@ export interface ModifySubnetAttributeRequest {
  */
 export interface DisassociateIPv6AddressRequest {
   /**
-   * 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。
+   * 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。
    */
   IPv6AddressId: string
   /**
-   * 解绑时是否保持绑定弹性网卡。
+   * 解绑时是否保持绑定弹性网卡。可选值：true、false。
+默认值：false
    */
   KeepBindWithEni?: boolean
 }
@@ -7542,12 +7536,10 @@ NONEXTHOP：无下一跳；
   NextHopDestination?: string
   /**
    * 下一跳网关名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextHopName?: string
   /**
    * 网络探测描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetDetectDescription?: string
   /**
@@ -8438,11 +8430,11 @@ export interface ModifyIPv6AddressesAttributesResponse {
  */
 export interface InquiryPriceRenewAddressesRequest {
   /**
-   * 续费资源实例ID。
+   * 续费资源实例ID。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressIds: Array<string>
   /**
-   * 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递。
+   * 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，不支持其他计费模式。
    */
   AddressChargePrepaid: AddressChargePrepaid
 }
@@ -8977,7 +8969,7 @@ export interface DeleteDirectConnectGatewayResponse {
  */
 export interface DescribeIPv6AddressesRequest {
   /**
-   * 标识 IPv6 的唯一 ID 列。
+   * 标识 IPv6 的唯一 ID 列。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。
 
 - 传统弹性公网 IPv6 唯一 ID 形如：`eip-11112222`
 - 弹性公网 IPv6 唯一 ID 形如：`eipv6-11112222`
@@ -8995,9 +8987,9 @@ export interface DescribeIPv6AddressesRequest {
 - charge-type - String - 是否必填：否 - （过滤条件）按照计费类型过滤。
 - private-ipv6-address - String - 是否必填：否 - （过滤条件）按照绑定的内网 IPv6 地址过滤。
 - egress - String - 是否必填：否 - （过滤条件）按照出口过滤。
-- address-type - String - 是否必填：否 - （过滤条件）按照IPv6类型 进行过滤。可选值：'EIP6'，'EIPv6'，'WanIPv6'，'HighQualityEIPv6'。默认值是'EIPv6'。
-- address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'。
-- address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'，'BINDING'，'BIND'，'UNBINDING'，'UNBIND'，'OFFLINING'，'BIND_ENI'，'PRIVATE'。
+- address-type - String - 是否必填：否 - （过滤条件）按照IPv6类型 进行过滤。可选值：'EIP6'：传统弹性公网 IPv6，'EIPv6'：弹性公网 IPv6，'WanIPv6'：普通公网 IPv6，'HighQualityEIPv6'：精品弹性公网 IPv6。默认值是'EIPv6'。
+- address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'：常规BGP，'CMCC'：移动，'CUCC'：联通, 'CTCC'：电信。
+- address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'：创建中，'BINDING'：绑定中，'BIND'：已绑，'UNBINDING'：解绑中，'UNBIND'：未绑定，'OFFLINING'：下线中，'BIND_ENI'：绑定了ENI，'PRIVATE'：仅开通内网的IPv6。
 - address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。
 - tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。
 - tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。
@@ -9005,7 +8997,10 @@ export interface DescribeIPv6AddressesRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 是否查询传统型IPv6地址信息。
+   * 是否查询传统型IPv6地址信息。可选值：
+<li>True：查询传统型IPv6地址信息</li>
+<li>False：不查询传统型IPv6地址信息</li>
+默认值：False
    */
   Traditional?: boolean
   /**
@@ -9041,7 +9036,7 @@ export interface EndPoint {
    */
   EndPointId?: string
   /**
-   * VPCID。
+   * VPC唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
    */
   VpcId?: string
   /**
@@ -9077,7 +9072,7 @@ export interface EndPoint {
    */
   State?: string
   /**
-   * 创建时间。
+   * 创建时间。格式：YYYY-MM-DD HH:MM:SS。
    */
   CreateTime?: string
   /**
@@ -9086,17 +9081,14 @@ export interface EndPoint {
   GroupSet?: Array<string>
   /**
    * 终端节点服务名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * CDC 集群唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
-   * 标签键值对。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签键值对。
    */
   TagSet?: Array<Tag>
 }
@@ -9472,7 +9464,7 @@ export interface EndPointService {
    */
   ServiceVip?: string
   /**
-   * 后端服务的ID，比如lb-xxx。
+   * 后端服务的ID，比如lb-lip4e6bp。
    */
   ServiceInstanceId?: string
   /**
@@ -9481,40 +9473,34 @@ export interface EndPointService {
   AutoAcceptFlag?: boolean
   /**
    * 关联的终端节点个数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndPointCount?: number
   /**
    * 终端节点对象数组。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndPointSet?: Array<EndPoint>
   /**
-   * 创建时间。
+   * 创建时间。格式为YYYY-MM-DD HH:MM:SS字符串。
    */
   CreateTime?: string
   /**
-   * 挂载的PAAS服务类型，CLB,CDB,CRS
+   * 挂载的PAAS服务类型，CLB（负载均衡），CDB（云数据库 MySQL），CRS（云数据库 Redis），GWLB（网关负载均衡）。
    */
   ServiceType?: string
   /**
    * CDC 集群唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
-   * Uin
-注意：此字段可能返回 null，表示取不到有效值。
+   * 终端节点服务Uin。
    */
   ServiceUin?: string
   /**
    * 服务IP类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessIpType?: number
   /**
-   * 标签键值对。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签键值对。
    */
   TagSet?: Array<Tag>
 }
@@ -9811,7 +9797,7 @@ export interface BgpConfigAndAsn {
  */
 export interface DescribeAddressBandwidthRangeRequest {
   /**
-   * EIP资源ID列表，单次查询上限20。
+   * EIP资源ID列表，单次查询上限20，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressIds?: Array<string>
 }
@@ -12624,11 +12610,15 @@ AVAILABLE：可用的
  */
 export interface AlgType {
   /**
-   * Ftp协议Alg功能是否开启
+   * Ftp协议Alg功能是否开启，可选值：
+<li>true：开启Ftp协议Alg功能</li>
+<li>false：不开启Ftp协议Alg功能</li>
    */
   Ftp?: boolean
   /**
-   * Sip协议Alg功能是否开启
+   * Sip协议Alg功能是否开启，可选值：
+<li>true：开启Sip协议Alg功能</li>
+<li>false：不开启Sip协议Alg功能</li>
    */
   Sip?: boolean
 }
@@ -13272,7 +13262,7 @@ VPN网关：`VPNGW`</li>
  */
 export interface ReleaseIPv6AddressesRequest {
   /**
-   * IPv6地址唯一ID。
+   * IPv6地址唯一ID。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。
    */
   IPv6AddressIds: Array<string>
 }
@@ -14217,7 +14207,6 @@ export interface SnapshotPolicy {
   KeepTime: number
   /**
    * 是否创建新的cos桶，默认为False。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateNewCos: boolean
   /**
@@ -14234,7 +14223,6 @@ export interface SnapshotPolicy {
   SnapshotPolicyId?: string
   /**
    * 时间备份策略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupPolicies?: Array<BackupPolicy>
   /**
@@ -14243,12 +14231,10 @@ export interface SnapshotPolicy {
   Enable?: boolean
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 标签键值对。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签键值对。
    */
   TagSet?: Array<Tag>
 }
@@ -14339,11 +14325,11 @@ export interface Address {
    */
   CreatedTime?: string
   /**
-   * 绑定的弹性网卡ID
+   * 绑定的弹性网卡ID，null表示没有绑定弹性网卡。
    */
   NetworkInterfaceId?: string
   /**
-   * 绑定的资源内网ip
+   * 绑定的资源内网ip，null表示没有绑定资源内网ip。
    */
   PrivateAddressIp?: string
   /**
@@ -14371,11 +14357,13 @@ export interface Address {
    */
   EipAlgType?: AlgType
   /**
-   * 弹性公网IP的运营商信息，当前可能返回值包括"CMCC","CTCC","CUCC","BGP"
+   * 弹性公网IP的运营商信息，当前可能返回值包括"CMCC"(移动),"CTCC"(电信),"CUCC"(联通),"BGP"(常规BGP)。
    */
   InternetServiceProvider?: string
   /**
-   * 是否本地带宽EIP
+   * 是否本地带宽EIP，可选值：
+<li>true：本地带宽EIP</li>
+<li>false：非本地带宽EIP</li>
    */
   LocalBgp?: boolean
   /**
@@ -14403,12 +14391,21 @@ export interface Address {
    */
   TagSet?: Array<Tag>
   /**
-   * 到期时间。
+   * 预付费包月带宽IP到期时间。
+时间格式：YYYY-MM-DDThh:mm:ssZ
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeadlineDate?: string
   /**
-   * EIP绑定的实例类型。
+   * EIP绑定的实例类型。可选值：
+<li>CVM：云服务器</li>
+<li>NAT：NAT 网关</li>
+<li>HAVIP：高可用虚拟IP</li>
+<li>ENI：弹性网卡</li>
+<li>CLB：内网CLB</li>
+<li>DHCPIP：弹性内网IP</li>
+
+
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
@@ -15379,10 +15376,11 @@ export interface InquiryPriceAllocateAddressesRequest {
 <ul style="margin:0"><li>账号为标准账户类型的用户，可选值：<ul>
 <li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费</li>
 <li>BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费</li>
-<li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费</li></ul>默认值：TRAFFIC_POSTPAID_BY_HOUR。</li>
+<li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费</li>
+</ul></li>
 </ul>
    */
-  InternetChargeType?: string
+  InternetChargeType: string
   /**
    * EIP出带宽上限，单位：Mbps。
 <ul style="margin:0"><li>账号为标准账户类型的用户，可选值范围取决于EIP计费方式：<ul>
@@ -15390,6 +15388,7 @@ export interface InquiryPriceAllocateAddressesRequest {
 <li>BANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 Mbps</li>
 <li>TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li></ul>默认值：1 Mbps。</li>
 <li>账号为传统账户类型的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。</li></ul>
+
    */
   InternetMaxBandwidthOut?: number
   /**
@@ -15398,13 +15397,9 @@ export interface InquiryPriceAllocateAddressesRequest {
   AddressChargePrepaid?: AddressChargePrepaid
   /**
    * EIP类型。默认值：EIP。
-
-<ul style="margin:0"><li>精品IP，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅部分地域支持精品IP。</li></ul><ul style="margin:0">
-        <li>高防IP，可选值：<ul>
-                <li>AntiDDoSEIP：高防IP</li>
-            </ul>
-        </li>
-    </ul>
+<ul style="margin:0"><li>弹性公网IP，可选值：<ul><li>EIP：弹性公网IP</li></ul></li></ul>
+<ul style="margin:0"><li>精品IP，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅新加坡和中国香港支持精品IP。</li></ul>
+<ul style="margin:0"><li>高防IP，可选值：<ul><li>AntiDDoSEIP：高防IP</li></ul>注意：仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。</li></ul>
    */
   AddressType?: string
 }
@@ -17325,11 +17320,11 @@ export interface ServiceTemplateSpecification {
   /**
    * 协议端口ID，例如：ppm-f5n1f8da。
    */
-  ServiceId: string
+  ServiceId?: string
   /**
    * 协议端口组ID，例如：ppmg-f5n1f8da。
    */
-  ServiceGroupId: string
+  ServiceGroupId?: string
 }
 
 /**
@@ -19545,7 +19540,6 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
   RouteTableId?: string
   /**
    * 创建IPv6目的网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DestinationIpv6CidrBlock?: string
   /**
@@ -19554,7 +19548,6 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
   RouteItemId?: string
   /**
    * 路由策略是否发布到云联网。该字段仅做出参使用，作为入参字段时此参数不生效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublishedToVbc?: boolean
   /**
@@ -19563,7 +19556,6 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
   CreatedTime?: string
   /**
    * CDC 集群唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
 }

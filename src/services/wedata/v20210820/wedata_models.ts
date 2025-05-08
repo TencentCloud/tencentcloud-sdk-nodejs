@@ -113,6 +113,20 @@ export interface DescribeBatchOperateTaskPage {
 }
 
 /**
+ * UpdateWorkflowInfo返回参数结构体
+ */
+export interface UpdateWorkflowInfoResponse {
+  /**
+   * true代表成功，false代表失败
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIntegrationStatistics返回参数结构体
  */
 export interface DescribeIntegrationStatisticsResponse {
@@ -2273,6 +2287,55 @@ export interface BytesSpeed {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values: Array<SpeedValue>
+}
+
+/**
+ * RegisterDsEvent请求参数结构体
+ */
+export interface RegisterDsEventRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 事件名称
+   */
+  Name: string
+  /**
+   * 事件周期类型 1、分钟：MIN    2、小时 ：HOUR    3、天：DAY
+   */
+  EventSubType: string
+  /**
+   * 事件存活时间，值为大于0的整数
+   */
+  TimeToLive: string
+  /**
+   * 事件存活时间单位	1、天：DAYS    2、分钟：MINUTES
+   */
+  TimeUnit: string
+  /**
+   * 事件所属人，账号昵称
+   */
+  Owner: string
+  /**
+   * 事件描述
+   */
+  Description: string
+  /**
+   * 事件类型GENERAL、TIME_SERIES
+   * @deprecated
+   */
+  EventType?: string
+  /**
+   * 事件广播类型SINGLE、BROADCAST
+   * @deprecated
+   */
+  EventBroadcastType?: string
+  /**
+   * 时间格式
+   * @deprecated
+   */
+  DimensionFormat?: string
 }
 
 /**
@@ -8063,6 +8126,21 @@ export interface ModifyRuleRequest {
 }
 
 /**
+ * RunTasksByMultiWorkflow返回参数结构体
+ */
+export interface RunTasksByMultiWorkflowResponse {
+  /**
+   * 操作返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: OperationOpsDto
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据源对象
  */
 export interface DataSourceInfo {
@@ -11702,6 +11780,17 @@ export interface DescribeEventRequest {
 }
 
 /**
+ * 任务执行脚本
+ */
+export interface TaskScriptContent {
+  /**
+   * 脚本内容 base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScriptContent: string
+}
+
+/**
  * 表质量分分页结果
  */
 export interface TableQualityDetailPage {
@@ -12733,6 +12822,60 @@ export interface DeleteRuleResponse {
 }
 
 /**
+ * UpdateWorkflowInfo请求参数结构体
+ */
+export interface UpdateWorkflowInfoRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 操作者名称
+   */
+  OperatorName: string
+  /**
+   * 工作流id
+   */
+  WorkflowId: string
+  /**
+   * 责任人
+   */
+  Owner?: string
+  /**
+   * 责任人id
+   */
+  OwnerId?: string
+  /**
+   * 备注
+   */
+  WorkflowDesc?: string
+  /**
+   * 工作流名称
+   */
+  WorkflowName?: string
+  /**
+   * 所属文件夹id
+   */
+  FolderId?: string
+  /**
+   * 工作流所属用户分组id  若有多个,分号隔开: a;b;c
+   */
+  UserGroupId?: string
+  /**
+   * 工作流所属用户分组名称  若有多个,分号隔开: a;b;c
+   */
+  UserGroupName?: string
+  /**
+   * 工作流参数列表
+   */
+  WorkflowParams?: Array<ParamInfo>
+  /**
+   * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
+   */
+  GeneralTaskParams?: Array<GeneralTaskParam>
+}
+
+/**
  * 补录计划任务集合
  */
 export interface MakePlanTaskOpsDtoCollection {
@@ -12984,6 +13127,52 @@ export interface BatchStopIntegrationTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 监听者任务信息
+ */
+export interface EventListenerTaskInfo {
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName: string
+  /**
+   * 工作流id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName: string
+  /**
+   * 任务类型id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeId: number
+  /**
+   * 任务类型名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId: string
+  /**
+   * 任务周期类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleType?: string
 }
 
 /**
@@ -13482,6 +13671,28 @@ timeZone, 默认UTC+8
 }
 
 /**
+ * RenewWorkflowOwnerDs请求参数结构体
+ */
+export interface RenewWorkflowOwnerDsRequest {
+  /**
+   * 工作流ID
+   */
+  ProjectId: string
+  /**
+   * 责任人
+   */
+  Owner: string
+  /**
+   * 责任人ID
+   */
+  OwnerId: string
+  /**
+   * 工作流ID列表
+   */
+  WorkflowIds: Array<string>
+}
+
+/**
  * DescribeSchedulerRunTimeInstanceCntByStatus返回参数结构体
  */
 export interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
@@ -13621,6 +13832,60 @@ export interface DescribeQualityScoreResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateTaskNew请求参数结构体
+ */
+export interface CreateTaskNewRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 工作流id
+   */
+  WorkflowId: string
+  /**
+   * 任务名
+   */
+  TaskName: string
+  /**
+   * 26离线同步，30Python，31PySpark，32DLC，33Impala，34Hive SQL，35Shell，36Spark SQL，39Spark，40CDW PG，92MapReduce
+   */
+  TaskType: number
+  /**
+   * 扩展属性
+   */
+  TaskExt?: Array<TaskExtInfo>
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 任务实例初始化策略
+   */
+  InstanceInitStrategy?: string
+  /**
+   * 画布坐标横轴
+   */
+  LeftCoordinate?: number
+  /**
+   * 画布坐标纵轴
+   */
+  TopCoordinate?: number
+  /**
+   * 工作流目录ID
+   */
+  TaskFolderId?: string
+  /**
+   * 指定脚本内容，base64编码
+   */
+  Content?: string
+  /**
+   * 代码模版ID
+   */
+  CodeTemplateId?: string
 }
 
 /**
@@ -19953,44 +20218,17 @@ export interface DeleteResourceRequest {
 }
 
 /**
- * 数据质量规则组订阅信息
+ * RenewWorkflowOwnerDs返回参数结构体
  */
-export interface RuleGroupSubscribe {
+export interface RenewWorkflowOwnerDsResponse {
   /**
-   * 规则组Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 执行结果
    */
-  RuleGroupId?: number
+  Data?: BatchResultDs
   /**
-   * 订阅接收人列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Receivers?: Array<SubscribeReceiver>
-  /**
-   * 订阅方式 1.邮件email  2.短信sms
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubscribeType?: Array<number | bigint>
-  /**
-   * 群机器人配置的webhook信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebHooks?: Array<SubscribeWebHook>
-  /**
-   * 规则Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleId?: number
-  /**
-   * 规则名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleName?: string
-  /**
-   * 发送对象
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlarmMessageRule?: string
+  RequestId?: string
 }
 
 /**
@@ -20239,17 +20477,85 @@ export interface DescribeInstanceLogFileRequest {
 }
 
 /**
- * UnlockIntegrationTask请求参数结构体
+ * 数据质量规则组订阅信息
  */
-export interface UnlockIntegrationTaskRequest {
+export interface RuleGroupSubscribe {
   /**
-   * 任务id
+   * 规则组Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  RuleGroupId?: number
   /**
-   * 项目id
+   * 订阅接收人列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  Receivers?: Array<SubscribeReceiver>
+  /**
+   * 订阅方式 1.邮件email  2.短信sms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeType?: Array<number | bigint>
+  /**
+   * 群机器人配置的webhook信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebHooks?: Array<SubscribeWebHook>
+  /**
+   * 规则Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleName?: string
+  /**
+   * 发送对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmMessageRule?: string
+}
+
+/**
+ * 事件监听者信息
+ */
+export interface EventListenerDTO {
+  /**
+   * 关键字，一般为任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * REST_API、KAFKA
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreationTs: string
+  /**
+   * 配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PropertiesList: Array<ParamInfoDs>
+  /**
+   * 事件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventName: string
+  /**
+   * 监听者任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskInfo: EventListenerTaskInfo
+  /**
+   * 事件所属项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventProjectId: string
 }
 
 /**
@@ -20314,14 +20620,79 @@ export interface IntegrationInstanceLog {
 }
 
 /**
- * 任务执行脚本
+ * 事件管理- 事件实体
  */
-export interface TaskScriptContent {
+export interface EventDsDto {
   /**
-   * 脚本内容 base64编码
+   * 事件名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScriptContent: string
+  Name: string
+  /**
+   * 事件类型GENERAL、TIME_SERIES
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventType: string
+  /**
+   * 存活时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeToLive: number
+  /**
+   * 存活时间单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeUnit: string
+  /**
+   * 事件分割类型 SECOND、MIN、HOUR、DAY
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventSubType?: string
+  /**
+   * 事件广播类型SINGLE、BROADCAST
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventBroadcastType?: string
+  /**
+   * 时间格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimensionFormat?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreationTs?: string
+  /**
+   * 事件所属人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: string
+  /**
+   * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 事件监听者信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Listeners?: Array<EventListenerDTO>
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
 }
 
 /**
@@ -20547,6 +20918,20 @@ export interface GenHiveTableDDLSqlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnlockIntegrationTask请求参数结构体
+ */
+export interface UnlockIntegrationTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 项目id
+   */
+  ProjectId: string
 }
 
 /**
@@ -21858,6 +22243,21 @@ export interface DescribeOfflineTaskTokenResponse {
 }
 
 /**
+ * CreateTaskNew返回参数结构体
+ */
+export interface CreateTaskNewResponse {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTableInfoList返回参数结构体
  */
 export interface DescribeTableInfoListResponse {
@@ -22644,6 +23044,26 @@ export interface DescribeTaskScriptRequest {
    * 任务ID
    */
   TaskId: string
+}
+
+/**
+ * ModifyTaskLinksDs返回参数结构体
+ */
+export interface ModifyTaskLinksDsResponse {
+  /**
+   * 成功或失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: boolean
+  /**
+   * linkID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LinkId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -23490,14 +23910,14 @@ export interface DescribeRuleTemplatesByPageRequest {
 }
 
 /**
- * RunTasksByMultiWorkflow返回参数结构体
+ * RegisterDsEvent返回参数结构体
  */
-export interface RunTasksByMultiWorkflowResponse {
+export interface RegisterDsEventResponse {
   /**
-   * 操作返回结果
+   * 事件信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: OperationOpsDto
+  Data?: EventDsDto
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -24508,6 +24928,65 @@ export interface UploadResourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyTaskLinksDs请求参数结构体
+ */
+export interface ModifyTaskLinksDsRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 父任务ID
+   */
+  TaskFrom: string
+  /**
+   * 子任务ID
+   */
+  TaskTo: string
+  /**
+   * 子任务工作流
+   */
+  WorkflowId: string
+  /**
+   * 父任务工作流
+   */
+  RealFromWorkflowId: string
+  /**
+   * 请求来源，WEB 前端；CLIENT 客户端
+   */
+  RequestFromSource?: string
+  /**
+   * 父子任务之间的依赖关系
+    正常的依赖父任务全部实例  启用
+    normal_all(1),
+    normal_first_one(2), 正常的依赖父任务 第一个
+    normal_last_one(3), 正常的依赖父任务 最后一个
+    normal_any_one(4), 正常的依赖父任务 任意一个
+    normal_specific_one(5), 正常的依赖父任务 指定的一个
+    self(6), 自身依赖，可能用不到
+
+     非正常的依赖父任务全部实例  启用（向前依赖  明天)
+    non_normal_all_forward(11),
+    non_normal_first_one_forward(12), 非正常的依赖父任务 第一个
+    non_normal_last_one_forward(13), 非正常的依赖父任务 最后一个
+    non_normal_any_one_forward(14), 非正常的依赖父任务 任意一个
+    non_normal_specific_one_forward(15),非正常的依赖父任务 指定一个
+
+    非正常的依赖父任务全部实例  启用（向后依赖 昨天）
+    non_normal_all_backward(21),
+    non_normal_first_one_backward(22), 非正常的依赖父任务 第一个
+    non_normal_last_one_backward(23), 非正常的依赖父任务 最后一个
+    non_normal_any_one_backward(24), 非正常的依赖父任务 任意一个
+    non_normal_specific_one_backward(25) 非正常的依赖父任务 指定一个
+   */
+  LinkDependencyType?: string
+  /**
+   * 额外的属性信息 如分支节点、归并节点信息
+   */
+  LinkExt?: string
 }
 
 /**

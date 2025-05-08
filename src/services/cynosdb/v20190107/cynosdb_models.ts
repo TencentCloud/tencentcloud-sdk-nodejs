@@ -915,6 +915,20 @@ export interface CloseProxyRequest {
 }
 
 /**
+ * CloseSSL请求参数结构体
+ */
+export interface CloseSSLRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+}
+
+/**
  * 实例信息
  */
 export interface CynosdbInstance {
@@ -10172,6 +10186,26 @@ expireTime-过期时间，packageUsedSpec-使用容量，packageTotalSpec-总存
    * 限制
    */
   Limit?: number
+}
+
+/**
+ * CloseSSL返回参数结构体
+ */
+export interface CloseSSLResponse {
+  /**
+   * 流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

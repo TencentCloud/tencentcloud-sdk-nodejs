@@ -45,12 +45,10 @@ export interface StopLoggingRequest {
 export interface CmqRegionInfo {
   /**
    * 地域描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CmqRegionName?: string
   /**
    * cmq地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CmqRegion?: string
 }
@@ -87,12 +85,10 @@ export interface Storage {
   StoragePrefix: string
   /**
    * 被指定存储用户ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageAccountId?: string
   /**
    * 被指定存储用户appid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageAppId?: string
 }
@@ -154,12 +150,10 @@ export interface DescribeEventsResponse {
   NextToken?: number
   /**
    * 日志集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Events?: Array<Event>
   /**
    * 此字段已经废弃。翻页请使用ListOver配合NextToken，在ListOver为false进行下一页数据读取。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -338,27 +332,22 @@ export interface StartLoggingResponse {
 export interface AttributeKeyDetail {
   /**
    * 输入框类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelType: string
   /**
    * 初始化展示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Starter: string
   /**
    * 展示排序
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Order: number
   /**
    * AttributeKey值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
   /**
    * 中文标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Label: string
 }
@@ -449,12 +438,10 @@ export interface Tracks {
 export interface Resource {
   /**
    * 资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: string
   /**
    * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
 }
@@ -522,7 +509,6 @@ export interface StopLoggingResponse {
 export interface Filter {
   /**
    * 资源筛选条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceFields?: Array<ResourceField>
 }
@@ -533,17 +519,14 @@ export interface Filter {
 export interface ResourceField {
   /**
    * 跟踪事件所属产品（支持全部产品或单个产品，如：cam，全部：*）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType: string
   /**
    * 跟踪事件类型（读：Read；写：Write；全部：*）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionType: string
   /**
    * 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：[""]；指定ResourceType时，支持全部接口：[""]；支持部分接口：["cos", "cls"]，接口列表上限10个）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventNames: Array<string>
 }
@@ -602,7 +585,6 @@ export interface LookupAttribute {
 export interface ListAuditsResponse {
   /**
    * 查询跟踪集概要集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditSummarys?: Array<AuditSummary>
   /**
@@ -617,12 +599,10 @@ export interface ListAuditsResponse {
 export interface KeyMetadata {
   /**
    * 作为密钥更容易辨识，更容易被人看懂的别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Alias?: string
   /**
    * CMK的全局唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyId?: string
 }
@@ -753,22 +733,18 @@ export interface ListCmqEnableRegionResponse {
 export interface LookUpEventsResponse {
   /**
    * 查看更多日志的凭证
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextToken?: string
   /**
    * 日志集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Events?: Array<Event>
   /**
    * 日志集合是否结束
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListOver?: boolean
   /**
    * 数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -863,12 +839,10 @@ export interface DescribeAuditTrackResponse {
   CreateTime?: string
   /**
    * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrackForAllMembers?: number
   /**
    * 数据投递过滤条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Filters?: Filter
   /**
@@ -1003,7 +977,6 @@ export interface Event {
   EventName?: string
   /**
    * 证书ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretId?: string
   /**
@@ -1024,7 +997,6 @@ export interface Event {
   AccountID?: number
   /**
    * 源IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceIPAddress?: string
   /**
@@ -1051,22 +1023,18 @@ export interface Event {
 export interface AuditSummary {
   /**
    * 跟踪集状态，1：开启，0：关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditStatus?: number
   /**
    * COS存储桶名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosBucketName?: string
   /**
    * 跟踪集名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditName?: string
   /**
    * 日志前缀
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogFilePrefix?: string
 }

@@ -57,6 +57,7 @@ import {
   DescribeBinlogDownloadUrlResponse,
   SwitchClusterVpcRequest,
   CloseProxyRequest,
+  CloseSSLRequest,
   CynosdbInstance,
   DescribeClusterPasswordComplexityResponse,
   DescribeAuditRuleWithInstanceIdsRequest,
@@ -415,6 +416,7 @@ import {
   UpgradeInstanceResponse,
   CreateAuditRuleTemplateResponse,
   DescribeResourcePackageListRequest,
+  CloseSSLResponse,
   RevokeAccountPrivilegesRequest,
   OpenClusterPasswordComplexityResponse,
   OpenClusterReadOnlyInstanceGroupAccessRequest,
@@ -2017,6 +2019,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void
   ): Promise<RemoveClusterSlaveZoneResponse> {
     return this.request("RemoveClusterSlaveZone", req, cb)
+  }
+
+  /**
+   * 关闭SSL加密
+   */
+  async CloseSSL(
+    req: CloseSSLRequest,
+    cb?: (error: string, rep: CloseSSLResponse) => void
+  ): Promise<CloseSSLResponse> {
+    return this.request("CloseSSL", req, cb)
   }
 
   /**

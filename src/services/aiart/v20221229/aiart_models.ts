@@ -58,14 +58,17 @@ Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
 export interface LogoParam {
   /**
    * 水印 Url
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LogoUrl?: string
   /**
    * 水印 Base64，Url 和 Base64 二选一传入，如果都提供以 Url 为准
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LogoImage?: string
   /**
    * 水印图片位于生成结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LogoRect?: LogoRect
 }
@@ -774,18 +777,22 @@ Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
 export interface LogoRect {
   /**
    * 左上角X坐标
+注意：此字段可能返回 null，表示取不到有效值。
    */
   X?: number
   /**
    * 左上角Y坐标
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Y?: number
   /**
    * 方框宽度
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Width?: number
   /**
    * 方框高度
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Height?: number
 }

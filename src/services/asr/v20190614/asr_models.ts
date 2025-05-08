@@ -692,6 +692,7 @@ export interface ModifyCustomizationResponse {
 export interface GetAsrVocabListRequest {
   /**
    * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
+   * @deprecated
    */
   TagInfos?: Array<string>
   /**
@@ -1777,6 +1778,7 @@ export interface Model {
   /**
    * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   TagInfos?: Array<string>
 }

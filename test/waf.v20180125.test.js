@@ -438,9 +438,9 @@ it("waf.v20180125.DescribeAreaBanSupportAreas", async function () {
     }
 })
 
-it("waf.v20180125.UpsertCCAutoStatus", async function () {
+it("waf.v20180125.ModifyInstanceAttackLogPost", async function () {
     try {
-       const data = await client.UpsertCCAutoStatus({})
+       const data = await client.ModifyInstanceAttackLogPost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1071,6 +1071,16 @@ it("waf.v20180125.DeleteSpartaProtection", async function () {
 it("waf.v20180125.SwitchDomainRules", async function () {
     try {
        const data = await client.SwitchDomainRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.UpsertCCAutoStatus", async function () {
+    try {
+       const data = await client.UpsertCCAutoStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

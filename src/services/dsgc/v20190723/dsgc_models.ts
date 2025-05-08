@@ -3005,6 +3005,55 @@ export interface RiskLevelTrendItem {
 }
 
 /**
+ * 分类分级任务相关信息
+ */
+export interface DspaDiscoveryTask {
+  /**
+   * 任务名称
+   */
+  Name: string
+  /**
+   * 任务描述
+   */
+  Description: string
+  /**
+   * 执行周期，0单次 1每天 2每周 3每月
+   */
+  Period: number
+  /**
+   * 执行计划，0立即 1定时
+   */
+  Plan: number
+  /**
+   * 任务开关；1 打开，0 关闭
+   */
+  Enable: number
+  /**
+   * 元数据对象信息
+   */
+  DataSourceInfo: DspaDiscoveryTaskDataSource
+  /**
+   * 通用规则集开关，0 关闭，1 启用
+   */
+  GeneralRuleSetEnable: number
+  /**
+   * 任务最新的一次执行结果信息，该字段用于查询任务列表接口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result: ScanTaskResult
+  /**
+   * 定时开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimingStartTime: string
+  /**
+   * 关联模板是否更新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComplianceUpdate: boolean
+}
+
+/**
  * DescribeDSPAESDiscoveryTaskResultDetail请求参数结构体
  */
 export interface DescribeDSPAESDiscoveryTaskResultDetailRequest {
@@ -3186,6 +3235,24 @@ export interface DescribeDSPARDBDataAssetByComplianceIdResponse {
  * CreateNewClassification返回参数结构体
  */
 export interface CreateNewClassificationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDSPADiscoveryTasks返回参数结构体
+ */
+export interface DescribeDSPADiscoveryTasksResponse {
+  /**
+   * 任务列表
+   */
+  Items?: Array<DspaDiscoveryTask>
+  /**
+   * 符合条件的任务列表数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6079,6 +6146,47 @@ export interface BindDSPAResourceDatabasesRequest {
    * 解绑DB列表。
    */
   UnbindDbItems?: Array<DbResourceItem>
+}
+
+/**
+ * DescribeDSPADiscoveryTasks请求参数结构体
+ */
+export interface DescribeDSPADiscoveryTasksRequest {
+  /**
+   * DSPA实例ID
+   */
+  DspaId: string
+  /**
+   * 数据源类型，可取值如下：
+cdb 表示云数据库 MySQL,
+dcdb 表示TDSQL MySQL版,
+mariadb 表示云数据库 MariaDB,
+postgres 表示云数据库 PostgreSQL,
+cynosdbpg 表示TDSQL-C PostgreSQL版,
+cynosdbmysql 表示TDSQL-C MySQL版,
+selfbuilt-db 表示自建数据库
+   */
+  DataSourceType: string
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 任务扫描结果状态，可供选择的状态值有：-1待触发 0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败
+   */
+  StatusList?: Array<number | bigint>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回结果集数量，默认值是10000，最大值为10000，根据该资源的个数限制条件，该资源的个数不会超过10000，所以如果不输入该字段，默认获取全量数据
+   */
+  Limit?: number
 }
 
 /**

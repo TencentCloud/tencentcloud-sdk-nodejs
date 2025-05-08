@@ -268,6 +268,16 @@ it("dsgc.v20190723.DescribeReportTaskDownloadUrl", async function () {
     }
 })
 
+it("dsgc.v20190723.ModifyMergeClassification", async function () {
+    try {
+       const data = await client.ModifyMergeClassification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dsgc.v20190723.DescribeDSPACOSDiscoveryTaskResult", async function () {
     try {
        const data = await client.DescribeDSPACOSDiscoveryTaskResult({})
@@ -808,9 +818,9 @@ it("dsgc.v20190723.DescribeDSPAAssessmentRiskTemplateVulnerableList", async func
     }
 })
 
-it("dsgc.v20190723.ModifyMergeClassification", async function () {
+it("dsgc.v20190723.DescribeDSPADiscoveryTasks", async function () {
     try {
-       const data = await client.ModifyMergeClassification({})
+       const data = await client.DescribeDSPADiscoveryTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

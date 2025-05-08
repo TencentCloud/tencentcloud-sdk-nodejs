@@ -618,6 +618,16 @@ it("wedata.v20210820.DescribeOpsMakePlanTasks", async function () {
     }
 })
 
+it("wedata.v20210820.UpdateWorkflowInfo", async function () {
+    try {
+       const data = await client.UpdateWorkflowInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeTopTableStat", async function () {
     try {
        const data = await client.DescribeTopTableStat({})
@@ -641,6 +651,16 @@ it("wedata.v20210820.DescribeOrganizationalFunctions", async function () {
 it("wedata.v20210820.RunForceSucScheduleInstances", async function () {
     try {
        const data = await client.RunForceSucScheduleInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.CreateTaskNew", async function () {
+    try {
+       const data = await client.CreateTaskNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1308,9 +1328,9 @@ it("wedata.v20210820.DeleteDsFolder", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeBatchOperateTask", async function () {
+it("wedata.v20210820.DescribeDutyScheduleList", async function () {
     try {
-       const data = await client.DescribeBatchOperateTask({})
+       const data = await client.DescribeDutyScheduleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1448,9 +1468,9 @@ it("wedata.v20210820.DescribeInstanceDetailInfo", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeDutyScheduleList", async function () {
+it("wedata.v20210820.DescribeBatchOperateTask", async function () {
     try {
-       const data = await client.DescribeDutyScheduleList({})
+       const data = await client.DescribeBatchOperateTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1718,6 +1738,16 @@ it("wedata.v20210820.DescribeTableLineage", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyTaskLinksDs", async function () {
+    try {
+       const data = await client.ModifyTaskLinksDs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.SuspendIntegrationTask", async function () {
     try {
        const data = await client.SuspendIntegrationTask({})
@@ -1778,9 +1808,9 @@ it("wedata.v20210820.DescribeRules", async function () {
     }
 })
 
-it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
+it("wedata.v20210820.RegisterDsEvent", async function () {
     try {
-       const data = await client.RobAndLockIntegrationTask({})
+       const data = await client.RegisterDsEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2031,6 +2061,16 @@ it("wedata.v20210820.DescribeTaskAlarmRegulations", async function () {
 it("wedata.v20210820.DescribeIntegrationVersionNodesInfo", async function () {
     try {
        const data = await client.DescribeIntegrationVersionNodesInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RenewWorkflowOwnerDs", async function () {
+    try {
+       const data = await client.RenewWorkflowOwnerDs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2381,6 +2421,16 @@ it("wedata.v20210820.UpdateWorkflowOwner", async function () {
 it("wedata.v20210820.ModifyIntegrationNode", async function () {
     try {
        const data = await client.ModifyIntegrationNode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
+    try {
+       const data = await client.RobAndLockIntegrationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
