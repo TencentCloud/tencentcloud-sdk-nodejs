@@ -1647,6 +1647,12 @@ export interface CreateCfsFileSystemRequest {
    * 是否开启默认扩容，仅Turbo类型文件存储支持
    */
   EnableAutoScaleUp?: boolean
+  /**
+   * v1.5：创建普通版的通用文件系统；
+v3.1：创建增强版的通用文件系统
+说明：增强版的通用系统需要开通白名单才能使用，如有需要请提交工单与我们联系。
+   */
+  CfsVersion?: string
 }
 
 /**

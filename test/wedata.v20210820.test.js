@@ -158,6 +158,16 @@ it("wedata.v20210820.DescribeDataCheckStat", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeOpsWorkflows", async function () {
+    try {
+       const data = await client.DescribeOpsWorkflows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.BatchKillIntegrationTaskInstances", async function () {
     try {
        const data = await client.BatchKillIntegrationTaskInstances({})
@@ -2478,9 +2488,9 @@ it("wedata.v20210820.GetIntegrationNodeColumnSchema", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeOpsWorkflows", async function () {
+it("wedata.v20210820.DescribeBaseBizCatalogs", async function () {
     try {
-       const data = await client.DescribeOpsWorkflows({})
+       const data = await client.DescribeBaseBizCatalogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

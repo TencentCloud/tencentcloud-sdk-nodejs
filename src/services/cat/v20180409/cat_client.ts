@@ -22,7 +22,7 @@ import {
   DescribeNodesRequest,
   Label,
   Field,
-  KeyValuePair,
+  DescribeNodeGroupsResponse,
   TaskResult,
   SuspendProbeTaskResponse,
   DescribeProbeNodesResponse,
@@ -32,17 +32,19 @@ import {
   DescribeDetailedSingleProbeDataRequest,
   DescribeProbeTasksResponse,
   UpdateProbeTaskAttributesResponse,
+  DescribeProbeMetricTagValuesRequest,
   SingleInstantTask,
   NodeInfoBase,
   DeleteProbeTaskRequest,
   DescribeDetailedSingleProbeDataResponse,
   SuspendProbeTaskRequest,
   DescribeProbeMetricDataRequest,
-  UpdateProbeTaskAttributesRequest,
+  DescribeProbeMetricTagValuesResponse,
   DescribeProbeTasksRequest,
   DescribeInstantTasksRequest,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
+  UpdateProbeTaskAttributesRequest,
   NodeLeaf,
   DescribeNodeGroupsRequest,
   ResumeProbeTaskResponse,
@@ -56,7 +58,7 @@ import {
   DistinctOrNetServiceInfo,
   DescribeNodesResponse,
   DescribeProbeMetricDataResponse,
-  DescribeNodeGroupsResponse,
+  KeyValuePair,
   UpdateProbeTaskConfigurationListResponse,
   DetailedSingleDataDefine,
 } from "./cat_models"
@@ -119,6 +121,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProbeNodesResponse) => void
   ): Promise<DescribeProbeNodesResponse> {
     return this.request("DescribeProbeNodes", req, cb)
+  }
+
+  /**
+   * 查询同个任务类型下的维度标签值，包括查询用户任务信息，具体任务下的多个维度标签信息。（通过为DescribeProbeMetricData接口的Filters参数添加维度筛选条件，可实现多维数据分析）
+   */
+  async DescribeProbeMetricTagValues(
+    req: DescribeProbeMetricTagValuesRequest,
+    cb?: (error: string, rep: DescribeProbeMetricTagValuesResponse) => void
+  ): Promise<DescribeProbeMetricTagValuesResponse> {
+    return this.request("DescribeProbeMetricTagValues", req, cb)
   }
 
   /**

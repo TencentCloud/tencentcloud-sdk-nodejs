@@ -207,6 +207,7 @@ import {
   DescribeAllByFolderNewRequest,
   DescribeTenantProjectsRequest,
   DescribeTaskRunHistoryResponse,
+  LockIntegrationTaskRequest,
   BatchStopWorkflowsByIdsRequest,
   DescribeDutyScheduleListResponse,
   CommitIntegrationTaskRequest,
@@ -237,6 +238,7 @@ import {
   ModifyRuleRequest,
   RunTasksByMultiWorkflowResponse,
   DataSourceInfo,
+  DescribeBaseBizCatalogsResponse,
   FindAllFolderResponse,
   DescribeDataServicePublishedApiListRequest,
   ResourcePathTree,
@@ -501,7 +503,7 @@ import {
   SimpleTaskInfo,
   DescribeIntegrationStatisticsRecordsTrendRequest,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
-  DescribeWorkflowSchedulerInfoDsRequest,
+  BizCatalogsInfo,
   DescribeDependTaskListsResponse,
   CreateHiveTableResponse,
   RuleTemplatePage,
@@ -561,7 +563,7 @@ import {
   RegisterEventResponse,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
-  EventCaseAuditLogVOCollection,
+  DescribeWorkflowSchedulerInfoDsRequest,
   DescribeQualityScoreTrendRequest,
   RobLockState,
   SubmitTaskTestRunRequest,
@@ -621,6 +623,7 @@ import {
   DescribeRealTimeTaskMetricOverviewRequest,
   DescribeDatabaseMetasResponse,
   OfflineTaskAddParam,
+  DescribeBaseBizCatalogsRequest,
   FreezeTasksByWorkflowIdsResponse,
   SubmitWorkflowRequest,
   DescribeResourceManagePathTreesResponse,
@@ -713,7 +716,7 @@ import {
   StrToStrMap,
   WorkflowCanvasOpsDto,
   DlcRemoveOrphanFilesInfo,
-  LockIntegrationTaskRequest,
+  EventCaseAuditLogVOCollection,
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
   RegisterDsEventResponse,
@@ -970,6 +973,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeDataCheckStatResponse) => void
   ): Promise<DescribeDataCheckStatResponse> {
     return this.request("DescribeDataCheckStat", req, cb)
+  }
+
+  /**
+   * 查询用户生产工作流列表
+   */
+  async DescribeOpsWorkflows(
+    req: DescribeOpsWorkflowsRequest,
+    cb?: (error: string, rep: DescribeOpsWorkflowsResponse) => void
+  ): Promise<DescribeOpsWorkflowsResponse> {
+    return this.request("DescribeOpsWorkflows", req, cb)
   }
 
   /**
@@ -3305,13 +3318,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 查询用户生产工作流列表
+   * 数据地图-信息配置 数据类目列表
    */
-  async DescribeOpsWorkflows(
-    req: DescribeOpsWorkflowsRequest,
-    cb?: (error: string, rep: DescribeOpsWorkflowsResponse) => void
-  ): Promise<DescribeOpsWorkflowsResponse> {
-    return this.request("DescribeOpsWorkflows", req, cb)
+  async DescribeBaseBizCatalogs(
+    req?: DescribeBaseBizCatalogsRequest,
+    cb?: (error: string, rep: DescribeBaseBizCatalogsResponse) => void
+  ): Promise<DescribeBaseBizCatalogsResponse> {
+    return this.request("DescribeBaseBizCatalogs", req, cb)
   }
 
   /**

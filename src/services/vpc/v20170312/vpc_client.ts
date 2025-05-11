@@ -5287,7 +5287,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * EIP修改带宽询价
+   * 本接口（InquiryPriceModifyAddressesBandwidth）用于EIP修改带宽询价。
    */
   async InquiryPriceModifyAddressesBandwidth(
     req: InquiryPriceModifyAddressesBandwidthRequest,

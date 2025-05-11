@@ -907,7 +907,7 @@ export class Client extends AbstractClient {
    * 修改实例攻击日志投递开关，企业版及以上版本可以开通，否则返回错误
    */
   async ModifyInstanceAttackLogPost(
-    req?: ModifyInstanceAttackLogPostRequest,
+    req: ModifyInstanceAttackLogPostRequest,
     cb?: (error: string, rep: ModifyInstanceAttackLogPostResponse) => void
   ): Promise<ModifyInstanceAttackLogPostResponse> {
     return this.request("ModifyInstanceAttackLogPost", req, cb)

@@ -78,6 +78,16 @@ it("hunyuan.v20230901.GetEmbedding", async function () {
     }
 })
 
+it("hunyuan.v20230901.ImageQuestion", async function () {
+    try {
+       const data = await client.ImageQuestion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.GroupChatCompletions", async function () {
     try {
        const data = await client.GroupChatCompletions({})

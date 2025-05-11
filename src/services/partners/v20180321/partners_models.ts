@@ -307,6 +307,28 @@ Y：是，N：否
 }
 
 /**
+ * 订单子产品价格详情
+ */
+export interface SubProductPriceDetail {
+  /**
+   * 子产品名称
+   */
+  Name?: string
+  /**
+   * 折扣值，=100时表示无折扣，=85时表示8.5折
+   */
+  DiscountValue?: number
+  /**
+   * 原价，折扣前价格，单位：分
+   */
+  TotalCost?: number
+  /**
+   * 折后价，单位：分
+   */
+  RealTotalCost?: number
+}
+
+/**
  * 返佣信息定义
  */
 export interface RebateInfoElem {
@@ -971,6 +993,24 @@ export interface DescribeUnbindClientListRequest {
 }
 
 /**
+ * DescribeRebateInfos返回参数结构体
+ */
+export interface DescribeRebateInfosResponse {
+  /**
+   * 返佣信息列表
+   */
+  RebateInfoSet?: Array<RebateInfoElem>
+  /**
+   * 符合查询条件返佣信息数目
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAgentDealsByCache请求参数结构体
  */
 export interface DescribeAgentDealsByCacheRequest {
@@ -1014,6 +1054,24 @@ export interface DescribeAgentDealsByCacheRequest {
    * 支付方式，0：自付；1：代付
    */
   PayerMode?: number
+}
+
+/**
+ * DescribeAgentDealsPriceDetailByDealName请求参数结构体
+ */
+export interface DescribeAgentDealsPriceDetailByDealNameRequest {
+  /**
+   * 下单年份（订单创建时间归属年份）
+   */
+  DealCreatYear: number
+  /**
+   * 子订单号，每个请求最多查询100条
+   */
+  DealNames: Array<string>
+  /**
+   * 订单归属代客uin
+   */
+  OwnerUin?: string
 }
 
 /**
@@ -1163,6 +1221,24 @@ export interface AgentBillElem {
 }
 
 /**
+ * 订单价格详情
+ */
+export interface DealPriceDetail {
+  /**
+   * 子订单号
+   */
+  DealName?: string
+  /**
+   * 订单归属人uin（代客uin）
+   */
+  OwnerUin?: string
+  /**
+   * 子产品价格详情列表
+   */
+  SubProductPriceDetail?: Array<SubProductPriceDetail>
+}
+
+/**
  * AuditApplyClient返回参数结构体
  */
 export interface AuditApplyClientResponse {
@@ -1307,17 +1383,13 @@ export interface DealGoodsPriceNewElem {
 }
 
 /**
- * DescribeRebateInfos返回参数结构体
+ * DescribeAgentDealsPriceDetailByDealName返回参数结构体
  */
-export interface DescribeRebateInfosResponse {
+export interface DescribeAgentDealsPriceDetailByDealNameResponse {
   /**
-   * 返佣信息列表
+   * 子订单的费用详情
    */
-  RebateInfoSet?: Array<RebateInfoElem>
-  /**
-   * 符合查询条件返佣信息数目
-   */
-  TotalCount?: number
+  DealList?: Array<DealPriceDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

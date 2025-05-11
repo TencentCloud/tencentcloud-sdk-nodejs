@@ -567,7 +567,7 @@ export interface AddQueueRequest {
    */
   ClusterId: string
   /**
-   * 队列名称。<br><li>最多支持32个字符。
+   * 队列名称。<br><li>最多支持32个字符。</li>
    */
   QueueName: string
 }

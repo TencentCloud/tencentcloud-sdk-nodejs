@@ -29,6 +29,7 @@ import {
   DescribeAgentClientGradeResponse,
   DescribeAgentDealsByCacheResponse,
   ClientIncreaseInfoList,
+  SubProductPriceDetail,
   RebateInfoElem,
   DescribeClientSwitchTraTaskInfoResponse,
   DescribeAgentPayDealsV2Response,
@@ -53,7 +54,9 @@ import {
   DescribeSalesmansResponse,
   AgentAuditedClient,
   DescribeUnbindClientListRequest,
+  DescribeRebateInfosResponse,
   DescribeAgentDealsByCacheRequest,
+  DescribeAgentDealsPriceDetailByDealNameRequest,
   ModifyClientRemarkRequest,
   CreatePayRelationForClientRequest,
   AgentTransferMoneyResponse,
@@ -61,6 +64,7 @@ import {
   DescribeAgentSelfPayDealsV2Response,
   AssignClientsToSalesResponse,
   AgentBillElem,
+  DealPriceDetail,
   AuditApplyClientResponse,
   DescribeClientSwitchTraTaskInfoRequest,
   DescribeAgentBillsRequest,
@@ -69,7 +73,7 @@ import {
   AgentSalesmanElem,
   DescribeClientBalanceNewRequest,
   DealGoodsPriceNewElem,
-  DescribeRebateInfosResponse,
+  DescribeAgentDealsPriceDetailByDealNameResponse,
   DescribeAgentClientGradeRequest,
   RebateInfoElemNew,
   AssignClientsToSalesRequest,
@@ -226,6 +230,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentAuditedClientsResponse) => void
   ): Promise<DescribeAgentAuditedClientsResponse> {
     return this.request("DescribeAgentAuditedClients", req, cb)
+  }
+
+  /**
+   * 供代理商使用名下有效普通代客的预付费子订单号查询订单费用详情
+   */
+  async DescribeAgentDealsPriceDetailByDealName(
+    req: DescribeAgentDealsPriceDetailByDealNameRequest,
+    cb?: (error: string, rep: DescribeAgentDealsPriceDetailByDealNameResponse) => void
+  ): Promise<DescribeAgentDealsPriceDetailByDealNameResponse> {
+    return this.request("DescribeAgentDealsPriceDetailByDealName", req, cb)
   }
 
   /**

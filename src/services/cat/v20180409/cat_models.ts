@@ -114,17 +114,28 @@ export interface Field {
 }
 
 /**
- * 健值对
+ * DescribeNodeGroups返回参数结构体
  */
-export interface KeyValuePair {
+export interface DescribeNodeGroupsResponse {
   /**
-   * 健
+   * 树状节点列表，总共两级
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  NodeList?: Array<NodeTree>
   /**
-   * 值
+   * 省份或国家列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  DistrictList?: Array<DistinctOrNetServiceInfo>
+  /**
+   * 运营商列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetServiceList?: Array<DistinctOrNetServiceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -448,6 +459,43 @@ export interface UpdateProbeTaskAttributesResponse {
 }
 
 /**
+ * DescribeProbeMetricTagValues请求参数结构体
+ */
+export interface DescribeProbeMetricTagValuesRequest {
+  /**
+   * 分析任务类型，支持以下几种类型：
+AnalyzeTaskType_Network：网络质量
+AnalyzeTaskType_Browse：页面性能 
+AnalyzeTaskType_Transport：端口性能
+AnalyzeTaskType_UploadDownload：文件传输
+AnalyzeTaskType_MediaStream：音视频体验
+
+   */
+  AnalyzeTaskType?: string
+  /**
+   * 维度标签值，参考：
+host：任务域名
+errorInfo：状态类型
+area：拨测点地区
+operator：拨测点运营商
+taskId：任务ID
+   */
+  Key?: string
+  /**
+   * 过滤条件，可以传单个过滤条件也可以拼接多个参数，支持正则匹配
+   */
+  Filter?: string
+  /**
+   * 过滤条件数组
+   */
+  Filters?: Array<string>
+  /**
+   * 时间范围
+   */
+  TimeRange?: string
+}
+
+/**
  * 单个即时拨测任务信息
  */
 export interface SingleInstantTask {
@@ -578,17 +626,17 @@ AnalyzeTaskType_MediaStream：音视频体验
 }
 
 /**
- * UpdateProbeTaskAttributes请求参数结构体
+ * DescribeProbeMetricTagValues返回参数结构体
  */
-export interface UpdateProbeTaskAttributesRequest {
+export interface DescribeProbeMetricTagValuesResponse {
   /**
-   * 任务 ID
+   * 标签值序列化后的字符串
    */
-  TaskId: string
+  TagValueSet?: string
   /**
-   * 任务名，该参数为空时不作任何修改。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
+  RequestId?: string
 }
 
 /**
@@ -782,6 +830,20 @@ export interface CreateProbeTasksRequest {
    * 供应商子账户同步标志
    */
   SubSyncFlag?: number
+}
+
+/**
+ * UpdateProbeTaskAttributes请求参数结构体
+ */
+export interface UpdateProbeTaskAttributesRequest {
+  /**
+   * 任务 ID
+   */
+  TaskId: string
+  /**
+   * 任务名，该参数为空时不作任何修改。
+   */
+  Name?: string
 }
 
 /**
@@ -1128,28 +1190,17 @@ export interface DescribeProbeMetricDataResponse {
 }
 
 /**
- * DescribeNodeGroups返回参数结构体
+ * 健值对
  */
-export interface DescribeNodeGroupsResponse {
+export interface KeyValuePair {
   /**
-   * 树状节点列表，总共两级
-注意：此字段可能返回 null，表示取不到有效值。
+   * 健
    */
-  NodeList?: Array<NodeTree>
+  Key: string
   /**
-   * 省份或国家列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 值
    */
-  DistrictList?: Array<DistinctOrNetServiceInfo>
-  /**
-   * 运营商列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetServiceList?: Array<DistinctOrNetServiceInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Value: string
 }
 
 /**

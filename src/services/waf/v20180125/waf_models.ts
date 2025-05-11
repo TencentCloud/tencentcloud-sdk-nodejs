@@ -3849,7 +3849,16 @@ export interface CreateHostRequest {
 /**
  * ModifyInstanceAttackLogPost请求参数结构体
  */
-export type ModifyInstanceAttackLogPostRequest = null
+export interface ModifyInstanceAttackLogPostRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 攻击日志投递开关
+   */
+  AttackLogPost: number
+}
 
 /**
  * GetInstanceQpsLimit返回参数结构体

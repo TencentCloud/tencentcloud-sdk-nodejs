@@ -68,6 +68,16 @@ it("cat.v20180409.DescribeProbeNodes", async function () {
     }
 })
 
+it("cat.v20180409.DescribeProbeMetricTagValues", async function () {
+    try {
+       const data = await client.DescribeProbeMetricTagValues({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cat.v20180409.DescribeNodes", async function () {
     try {
        const data = await client.DescribeNodes({})

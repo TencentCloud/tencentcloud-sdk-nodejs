@@ -158,6 +158,16 @@ it("partners.v20180321.DescribeAgentAuditedClients", async function () {
     }
 })
 
+it("partners.v20180321.DescribeAgentDealsPriceDetailByDealName", async function () {
+    try {
+       const data = await client.DescribeAgentDealsPriceDetailByDealName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.DescribeClientJoinIncreaseList", async function () {
     try {
        const data = await client.DescribeClientJoinIncreaseList({})

@@ -6878,6 +6878,20 @@ export interface DescribeTaskRunHistoryResponse {
 }
 
 /**
+ * LockIntegrationTask请求参数结构体
+ */
+export interface LockIntegrationTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 项目id
+   */
+  ProjectId: string
+}
+
+/**
  * BatchStopWorkflowsByIds请求参数结构体
  */
 export interface BatchStopWorkflowsByIdsRequest {
@@ -8344,6 +8358,21 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSourceEnvInfos?: Array<DataSourceEnvInfo>
+}
+
+/**
+ * DescribeBaseBizCatalogs返回参数结构体
+ */
+export interface DescribeBaseBizCatalogsResponse {
+  /**
+   * 类目列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data: Array<BizCatalogsInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16579,17 +16608,39 @@ export interface DescribeRealTimeTaskInstanceNodeInfoRequest {
 }
 
 /**
- * DescribeWorkflowSchedulerInfoDs请求参数结构体
+ * 数据地图-数据类目信息
  */
-export interface DescribeWorkflowSchedulerInfoDsRequest {
+export interface BizCatalogsInfo {
   /**
-   * 项目ID
+   * 应用id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  AppId: string
   /**
-   * 工作流ID
+   * 类目id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId: string
+  Id: number
+  /**
+   * 类目层级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Level: number
+  /**
+   * 类目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 上级类目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId: number
+  /**
+   * 类目顺序
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Position: number
 }
 
 /**
@@ -18863,39 +18914,17 @@ export interface SubscribeReceiver {
 }
 
 /**
- * 事件实例分页查询结果
+ * DescribeWorkflowSchedulerInfoDs请求参数结构体
  */
-export interface EventCaseAuditLogVOCollection {
+export interface DescribeWorkflowSchedulerInfoDsRequest {
   /**
-   * 结果总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目ID
    */
-  TotalCount?: number
+  ProjectId: string
   /**
-   * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流ID
    */
-  TotalPage?: number
-  /**
-   * 当前页记录数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageCount?: number
-  /**
-   * 页码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageNumber?: number
-  /**
-   * 分页大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageSize?: number
-  /**
-   * 分页数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<EventCaseAuditLogOptDto>
+  WorkflowId: string
 }
 
 /**
@@ -21394,6 +21423,11 @@ export interface OfflineTaskAddParam {
 }
 
 /**
+ * DescribeBaseBizCatalogs请求参数结构体
+ */
+export type DescribeBaseBizCatalogsRequest = null
+
+/**
  * FreezeTasksByWorkflowIds返回参数结构体
  */
 export interface FreezeTasksByWorkflowIdsResponse {
@@ -23852,17 +23886,39 @@ export interface DlcRemoveOrphanFilesInfo {
 }
 
 /**
- * LockIntegrationTask请求参数结构体
+ * 事件实例分页查询结果
  */
-export interface LockIntegrationTaskRequest {
+export interface EventCaseAuditLogVOCollection {
   /**
-   * 任务id
+   * 结果总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TotalCount?: number
   /**
-   * 项目id
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  TotalPage?: number
+  /**
+   * 当前页记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageCount?: number
+  /**
+   * 页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 分页数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<EventCaseAuditLogOptDto>
 }
 
 /**
