@@ -294,7 +294,7 @@ export interface DescribeRabbitMQNodeListRequest {
    */
   Offset?: number
   /**
-   * 一页限制,moren
+   * 一页限制，默认值 20
    */
   Limit?: number
   /**
@@ -3073,11 +3073,11 @@ export interface ModifyRabbitMQVirtualHostRequest {
    */
   InstanceId: string
   /**
-   * vhost名
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
   /**
-   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
+   * Virtual Host 描述
    */
   Description?: string
   /**

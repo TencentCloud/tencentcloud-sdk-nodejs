@@ -71,13 +71,13 @@ export interface RegionDetail {
 }
 
 /**
- * 网络加速的目标地址信息
+ * DisableGlobalDomain返回参数结构体
  */
-export interface DestAddressInfo {
+export interface DisableGlobalDomainResponse {
   /**
-   * 加速的目标IP，可多ip一起加速
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DestIp: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -172,20 +172,6 @@ export interface DeleteProxyGroupRequest {
 默认为0，当通道组中存在通道或通道组中存在监听器/规则绑定了源站时，且Force为0时，该操作会返回失败。
    */
   Force?: number
-}
-
-/**
- * OpenSecurityPolicy返回参数结构体
- */
-export interface OpenSecurityPolicyResponse {
-  /**
-   * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -499,16 +485,6 @@ export interface DescribeProxyGroupStatisticsResponse {
 }
 
 /**
- * DisableGlobalDomain返回参数结构体
- */
-export interface DisableGlobalDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeResourcesByTag返回参数结构体
  */
 export interface DescribeResourcesByTagResponse {
@@ -598,16 +574,6 @@ export interface DescribeHTTPListenersRequest {
    * 过滤条件，支持按照端口或监听器名称进行模糊查询，该参数不能与ListenerName和Port同时使用
    */
   SearchValue?: string
-}
-
-/**
- * BindListenerRealServers返回参数结构体
- */
-export interface BindListenerRealServersResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -781,6 +747,24 @@ export interface DescribeHTTPSListenersRequest {
 该功能的启停无法在监听器创建完毕后再修改。
    */
   Http3Supported?: number
+}
+
+/**
+ * DescribeAccessRegionsByDestRegion返回参数结构体
+ */
+export interface DescribeAccessRegionsByDestRegionResponse {
+  /**
+   * 可用加速区域数量
+   */
+  TotalCount?: number
+  /**
+   * 可用加速区域信息列表
+   */
+  AccessRegionSet?: Array<AccessRegionDetial>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -995,13 +979,36 @@ export interface BindListenerRealServersRequest {
 }
 
 /**
- * DeleteDomainErrorPageInfo返回参数结构体
+ * ModifyProxyConfiguration请求参数结构体
  */
-export interface DeleteDomainErrorPageInfoResponse {
+export interface ModifyProxyConfigurationRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * （旧参数，请切换到ProxyId）通道的实例ID。
    */
-  RequestId?: string
+  InstanceId?: string
+  /**
+   * 需要调整到的目标带宽，单位：Mbps。
+Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+   */
+  Bandwidth?: number
+  /**
+   * 需要调整到的目标并发值，单位：万。
+Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+   */
+  Concurrent?: number
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+更多详细信息请参阅：如何保证幂等性。
+   */
+  ClientToken?: string
+  /**
+   * （新参数）通道的实例ID。
+   */
+  ProxyId?: string
+  /**
+   * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+   */
+  BillingType?: number
 }
 
 /**
@@ -1310,29 +1317,17 @@ export interface DeleteDomainRequest {
 }
 
 /**
- * CreateFirstLinkSession请求参数结构体
+ * OpenSecurityPolicy返回参数结构体
  */
-export interface CreateFirstLinkSessionRequest {
+export interface OpenSecurityPolicyResponse {
   /**
-   * 模版ID
+   * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
    */
-  TemplateId: string
+  TaskId?: string
   /**
-   * 终端网络信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SrcAddressInfo: SrcAddressInfo
-  /**
-   * 加速目标网络信息
-   */
-  DestAddressInfo: DestAddressInfo
-  /**
-   * 终端设备信息
-   */
-  DeviceInfo?: DeviceInfo
-  /**
-   * 接口扩展参数，如果是电信用户，需要填充CTCC Token字段
-   */
-  Capacity?: Capacity
+  RequestId?: string
 }
 
 /**
@@ -1669,16 +1664,6 @@ export interface DescribeRealServerStatisticsRequest {
 }
 
 /**
- * DeleteFirstLinkSession请求参数结构体
- */
-export interface DeleteFirstLinkSessionRequest {
-  /**
-   * 单次加速唯一会话Id
-   */
-  SessionId: string
-}
-
-/**
  * 添加源站的源站信息返回值
  */
 export interface BindRealServerInfo {
@@ -1877,17 +1862,9 @@ concurrent_connections：依据通道并发排序；
 }
 
 /**
- * DescribeAccessRegionsByDestRegion返回参数结构体
+ * BindListenerRealServers返回参数结构体
  */
-export interface DescribeAccessRegionsByDestRegionResponse {
-  /**
-   * 可用加速区域数量
-   */
-  TotalCount?: number
-  /**
-   * 可用加速区域信息列表
-   */
-  AccessRegionSet?: Array<AccessRegionDetial>
+export interface BindListenerRealServersResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2805,20 +2782,6 @@ CHANGING表示部分部署中。
 }
 
 /**
- * 接口扩展参数
- */
-export interface Capacity {
-  /**
-   * 电信鉴权的Token
-   */
-  CTCCToken?: string
-  /**
-   * 终端所处在的省份，建议不填写由服务端自动获取，若需填写请填写带有省、市、自治区、特别行政区等后缀的省份中文全称
-   */
-  Province?: string
-}
-
-/**
  * DescribeCertificates返回参数结构体
  */
 export interface DescribeCertificatesResponse {
@@ -3178,39 +3141,6 @@ export interface CreateRuleRequest {
    * HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。
    */
   ForcedRedirect?: string
-}
-
-/**
- * ModifyProxyConfiguration请求参数结构体
- */
-export interface ModifyProxyConfigurationRequest {
-  /**
-   * （旧参数，请切换到ProxyId）通道的实例ID。
-   */
-  InstanceId?: string
-  /**
-   * 需要调整到的目标带宽，单位：Mbps。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
-   */
-  Bandwidth?: number
-  /**
-   * 需要调整到的目标并发值，单位：万。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
-   */
-  Concurrent?: number
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-更多详细信息请参阅：如何保证幂等性。
-   */
-  ClientToken?: string
-  /**
-   * （新参数）通道的实例ID。
-   */
-  ProxyId?: string
-  /**
-   * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
-   */
-  BillingType?: number
 }
 
 /**
@@ -3904,47 +3834,6 @@ export interface NewRealServer {
 }
 
 /**
- * DescribeFirstLinkSession返回参数结构体
- */
-export interface DescribeFirstLinkSessionResponse {
-  /**
-   * 会话状态，具体如下：
-1： 加速中；
-0： 非加速中。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: number
-  /**
-   * 剩余加速时间，单位秒。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Duration: number
-  /**
-   * 加速套餐类型。
-套餐说明如下：
-T100K：上/下行保障100kbps；
-BD4M：下行带宽保障4Mbps；
-BU4M：上行带宽保障4Mbps。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SuiteType: string
-  /**
-   * 加速终端的公网ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SrcPublicIpv4: string
-  /**
-   * 加速目标ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DestIpv4: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeHTTPListeners返回参数结构体
  */
 export interface DescribeHTTPListenersResponse {
@@ -4237,26 +4126,6 @@ export interface SecurityPolicyRuleOut {
 }
 
 /**
- * CreateFirstLinkSession返回参数结构体
- */
-export interface CreateFirstLinkSessionResponse {
-  /**
-   * 加速成功时返回，单次加速唯一会话Id。。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SessionId: string
-  /**
-   * 剩余的加速时间，单位秒。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Duration: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 已绑定的源站信息
  */
 export interface BindRealServer {
@@ -4418,16 +4287,6 @@ export interface ModifyRuleAttributeRequest {
 }
 
 /**
- * DescribeFirstLinkSession请求参数结构体
- */
-export interface DescribeFirstLinkSessionRequest {
-  /**
-   * 单次加速唯一会话Id
-   */
-  SessionId: string
-}
-
-/**
  * BindRuleRealServers返回参数结构体
  */
 export interface BindRuleRealServersResponse {
@@ -4469,20 +4328,6 @@ export interface DescribeGroupAndStatisticsProxyRequest {
    * 项目ID
    */
   ProjectId: number
-}
-
-/**
- * 网络加速的原地址信息
- */
-export interface SrcAddressInfo {
-  /**
-   * 内网Ip4地址
-   */
-  SrcIpv4: string
-  /**
-   * 公网Ip4地址
-   */
-  SrcPublicIpv4: string
 }
 
 /**
@@ -4998,9 +4843,9 @@ export interface CloseProxyGroupResponse {
 }
 
 /**
- * DeleteFirstLinkSession返回参数结构体
+ * DeleteDomainErrorPageInfo返回参数结构体
  */
-export interface DeleteFirstLinkSessionResponse {
+export interface DeleteDomainErrorPageInfoResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5440,46 +5285,6 @@ export interface OpenProxyGroupRequest {
    * 通道组实例 ID
    */
   GroupId: string
-}
-
-/**
- * 终端设备信息
- */
-export interface DeviceInfo {
-  /**
-   * 设备数据卡所属的运营商
-1：移动
-2：电信
-3：联通
-4：广电
-99：其他
-   */
-  Vendor?: number
-  /**
-   * 设备操作系统
-1：Android
-2： IOS
-99：其他
-   */
-  OS?: number
-  /**
-   * 设备唯一标识
-IOS 填写 IDFV
-Android 填写 IMEI
-   */
-  DeviceId?: string
-  /**
-   * 用户手机号码
-   */
-  PhoneNum?: string
-  /**
-   * 无线信息
-1：4G
-2：5G
-3：WIFI
-99：其他
-   */
-  Wireless?: number
 }
 
 /**

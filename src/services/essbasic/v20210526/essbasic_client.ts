@@ -97,7 +97,6 @@ import {
   DescribeBatchOrganizationRegistrationUrlsRequest,
   PrepareFlowsResponse,
   SignUrl,
-  ChannelCancelFlowRequest,
   TemplateInfo,
   IntentionAction,
   ChannelCreateOrganizationBatchSignUrlRequest,
@@ -113,9 +112,10 @@ import {
   CreateBatchOrganizationRegistrationTasksResponse,
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
-  ChannelDescribeBillUsageDetailRequest,
+  ChannelCancelFlowRequest,
   ChannelCancelUserAutoSignEnableUrlRequest,
   DeleteOrganizationAuthorizationsResponse,
+  ChannelCreatePrepareFlowGroupRequest,
   DescribeExtendedServiceAuthDetailRequest,
   CreateOrganizationAuthFileRequest,
   FlowBatchApproverInfo,
@@ -180,11 +180,11 @@ import {
   ChannelCreateUserAutoSignEnableUrlResponse,
   ChannelGetTaskResultApiRequest,
   DescribeChannelOrganizationsRequest,
-  ChannelCreatePreparedPersonalEsignRequest,
+  ChannelDescribeBillUsageDetailResponse,
   FillError,
   CreateEmployeeChangeUrlResponse,
   ChannelRenewAutoSignLicenseRequest,
-  ChannelDescribeBillUsageDetailResponse,
+  ChannelCreatePreparedPersonalEsignRequest,
   IntentionActionResult,
   FlowDetailInfo,
   CreatePersonAuthCertificateImageRequest,
@@ -234,6 +234,7 @@ import {
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
+  ChannelCreatePrepareFlowGroupResponse,
   DescribeCancelFlowsTaskRequest,
   ChannelDescribeUserAutoSignStatusResponse,
   ProxyOrganizationOperator,
@@ -242,6 +243,7 @@ import {
   ChannelGetTaskResultApiResponse,
   PermissionGroup,
   ChannelCreateBatchSignUrlRequest,
+  ChannelUpdateSealStatusResponse,
   ChannelCreateOrganizationModifyQrCodeResponse,
   ChannelDeleteSealPoliciesResponse,
   ChannelCreateWebThemeConfigResponse,
@@ -284,7 +286,7 @@ import {
   CreateFlowBlockchainEvidenceUrlRequest,
   DescribeUserFlowTypeRequest,
   ChannelCreateFlowApproversRequest,
-  ChannelUpdateSealStatusResponse,
+  ChannelDescribeBillUsageDetailRequest,
   ChannelCreateFlowRemindsRequest,
   DescribeExtendedServiceAuthInfoResponse,
   OrganizationInfo,
@@ -1249,6 +1251,20 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: CreateBatchOrganizationAuthorizationUrlResponse) => void
   ): Promise<CreateBatchOrganizationAuthorizationUrlResponse> {
     return this.request("CreateBatchOrganizationAuthorizationUrl", req, cb)
+  }
+
+  /**
+     * 接口（ChannelCreatePrepareFlowGroup）用于创建嵌入式合同组签署流程。
+
+- 该接口当前仅支持文件发起
+- 该接口能力和ChannelCreateFlowGroupByFiles，~~ChannelCreateFlowGroupByTemplates~~保持一致。
+- 返回的FlowGroupId 为临时id，只有在页面内成功发起后FlowGroupId才会有效。
+     */
+  async ChannelCreatePrepareFlowGroup(
+    req: ChannelCreatePrepareFlowGroupRequest,
+    cb?: (error: string, rep: ChannelCreatePrepareFlowGroupResponse) => void
+  ): Promise<ChannelCreatePrepareFlowGroupResponse> {
+    return this.request("ChannelCreatePrepareFlowGroup", req, cb)
   }
 
   /**

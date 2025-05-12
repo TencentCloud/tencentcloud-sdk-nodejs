@@ -1268,16 +1268,6 @@ it("cdb.v20170320.DescribeAccounts", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeCpuExpandStrategy", async function () {
-    try {
-       const data = await client.DescribeCpuExpandStrategy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.ReloadBalanceProxyNode", async function () {
     try {
        const data = await client.ReloadBalanceProxyNode({})

@@ -1798,6 +1798,32 @@ export interface CreateIntegrationRoleRequest {
 }
 
 /**
+ * ModifyApplicationCallbackInfo请求参数结构体
+ */
+export interface ModifyApplicationCallbackInfoRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 操作类型：
+1-新增
+2-删除
+   */
+  OperateType: number
+  /**
+   * 企业应用回调信息
+   */
+  CallbackInfo: CallbackInfo
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+}
+
+/**
  * DeleteIntegrationRoleUsers返回参数结构体
  */
 export interface DeleteIntegrationRoleUsersResponse {
@@ -6041,6 +6067,24 @@ export interface CreateFlowEvidenceReportResponse {
 }
 
 /**
+ * CreatePrepareFlowGroup返回参数结构体
+ */
+export interface CreatePrepareFlowGroupResponse {
+  /**
+   * 合同(流程)组的合同组Id
+   */
+  FlowGroupId?: string
+  /**
+   * 嵌入式合同组发起链接
+   */
+  PrepareUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationRole返回参数结构体
  */
 export interface CreateIntegrationRoleResponse {
@@ -8015,7 +8059,7 @@ export interface CreateOrganizationBatchSignUrlRequest {
 您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。
 用户将利用链接对这些合同实施批量操作。
    */
-  FlowIds: Array<string>
+  FlowIds?: Array<string>
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -8048,6 +8092,10 @@ UserId必须是传入合同（FlowId）中的签署人。
 若传了此参数，则可以不传 UserId, Name, Mobile等参数
    */
   RecipientIds?: Array<string>
+  /**
+   * 合同组Id，传入此参数则可以不传FlowIds
+   */
+  FlowGroupId?: string
 }
 
 /**
@@ -8307,24 +8355,26 @@ export interface CancelUserAutoSignEnableUrlResponse {
 }
 
 /**
- * ModifyApplicationCallbackInfo请求参数结构体
+ * CreatePrepareFlowGroup请求参数结构体
  */
-export interface ModifyApplicationCallbackInfoRequest {
+export interface CreatePrepareFlowGroupRequest {
   /**
    * 执行本接口操作的员工信息。
 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 操作类型：
-1-新增
-2-删除
+   * 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
    */
-  OperateType: number
+  FlowGroupName: string
   /**
-   * 企业应用回调信息
+   * 合同（流程）组的子合同信息，支持2-50个子合同
    */
-  CallbackInfo: CallbackInfo
+  FlowGroupInfos: Array<FlowGroupInfo>
+  /**
+   * 资源类型，取值有： <ul><li> **1**：模板</li> <li> **2**：文件</li></ul>
+   */
+  ResourceType: number
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -8927,11 +8977,11 @@ export interface Component {
    */
   ComponentPage: number
   /**
-   * **在绝对定位方式和关键字定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。
+   * **在绝对定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。
    */
   ComponentPosX: number
   /**
-   * **在绝对定位方式和关键字定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。
+   * **在绝对定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。
    */
   ComponentPosY: number
   /**

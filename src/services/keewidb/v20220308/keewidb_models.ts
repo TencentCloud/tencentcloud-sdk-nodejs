@@ -902,6 +902,7 @@ export interface DescribeInstanceBackupsResponse {
   TotalCount?: number
   /**
    * 废弃字段。
+   * @deprecated
    */
   BackupSet?: Array<BinlogInfo>
   /**

@@ -498,6 +498,16 @@ it("essbasic.v20210526.CreateBatchOrganizationAuthorizationUrl", async function 
     }
 })
 
+it("essbasic.v20210526.ChannelCreatePrepareFlowGroup", async function () {
+    try {
+       const data = await client.ChannelCreatePrepareFlowGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateBatchQuickSignUrl", async function () {
     try {
        const data = await client.ChannelCreateBatchQuickSignUrl({})

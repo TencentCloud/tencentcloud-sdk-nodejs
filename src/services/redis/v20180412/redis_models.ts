@@ -718,6 +718,7 @@ export interface DescribeSlowLogResponse {
   TotalCount?: number
   /**
    * 已废弃，该参数存在命名不规范问题，后续用参数InstanceSlowLogDetail取代。慢查询详情。
+   * @deprecated
    */
   InstanceSlowlogDetail?: Array<InstanceSlowlogDetail>
   /**
@@ -2299,15 +2300,18 @@ export interface DescribeParamTemplateInfoRequest {
 export interface DescribeBackupUrlResponse {
   /**
    * 外网下载地址（6小时内链接有效），该字段正在逐步废弃中。
+   * @deprecated
    */
   DownloadUrl?: Array<string>
   /**
    * 内网下载地址（6小时内链接有效），该字段正在逐步废弃中。
+   * @deprecated
    */
   InnerDownloadUrl?: Array<string>
   /**
    * 文件名称，该字段正在逐步废弃中。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Filenames?: Array<string>
   /**
@@ -3145,6 +3149,7 @@ export interface DescribeTaskListRequest {
   Result?: Array<number | bigint>
   /**
    * 该字段已废弃，使用OperateUin代替，请忽略。
+   * @deprecated
    */
   OperatorUin?: Array<number | bigint>
   /**
@@ -3881,6 +3886,7 @@ export interface RemoveReplicationInstanceRequest {
 export interface EnableReplicaReadonlyResponse {
   /**
    * 错误：ERROR，正确OK（已废弃）
+   * @deprecated
    */
   Status?: string
   /**
@@ -3925,14 +3931,17 @@ export interface ModifyInstanceRequest {
   AutoRenews?: Array<number | bigint>
   /**
    * 目前在废弃中，存量用户还可以使用，建议新用户使用 InstanceIds。
+   * @deprecated
    */
   InstanceId?: string
   /**
    * 已经废弃
+   * @deprecated
    */
   InstanceName?: string
   /**
    * 已经废弃。
+   * @deprecated
    */
   AutoRenew?: number
 }
@@ -4060,6 +4069,7 @@ export interface ProductConf {
    * 该参数名因存在拼写不规范的问题，建议使用**EnableReplicaReadOnly**参数取代。其含义为是否支持副本只读。
 - true：支持副本只读。
 - false：不支持。
+   * @deprecated
    */
   EnableRepicaReadOnly?: boolean
   /**
@@ -4148,6 +4158,7 @@ export interface SwitchProxyResponse {
 export interface StartupInstanceResponse {
   /**
    * 该字段已废弃，请通过查询实例接口获取到的状态来判断实例是否已解隔离
+   * @deprecated
    */
   TaskId?: number
   /**
@@ -5031,6 +5042,7 @@ export interface InstanceSet {
   Size?: number
   /**
    * 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。
+   * @deprecated
    */
   SizeUsed?: number
   /**

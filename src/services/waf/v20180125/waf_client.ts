@@ -241,6 +241,7 @@ import {
   ModifyHostResponse,
   DescribeCertificateVerifyResultRequest,
   DescribeUserCdcClbWafRegionsRequest,
+  ParamCompareList,
   DeleteAttackDownloadRecordResponse,
   CreateIpAccessControlRequest,
   DescribeFlowTrendRequest,

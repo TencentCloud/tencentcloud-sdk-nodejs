@@ -48,6 +48,7 @@ import {
   CreateCloudRunEnvResponse,
   EnvBaseInfo,
   ServerBaseInfo,
+  TimerScale,
   EnvInfo,
   Tag,
   DescribeEnvBaseInfoRequest,

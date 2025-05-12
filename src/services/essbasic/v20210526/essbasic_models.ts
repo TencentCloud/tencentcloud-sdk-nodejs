@@ -181,11 +181,11 @@ export interface Component {
    */
   ComponentPage?: number
   /**
-   * **在绝对定位方式和关键字定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。
+   * **在绝对定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。
    */
   ComponentPosX?: number
   /**
-   * **在绝对定位方式和关键字定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。
+   * **在绝对定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。
    */
   ComponentPosY?: number
   /**
@@ -1366,6 +1366,14 @@ export interface BaseFlowInfo {
 
    */
   FlowDisplayType?: number
+  /**
+   * 签署文件资源Id列表，目前仅支持单个文件
+   */
+  FileIds?: Array<string>
+  /**
+   * 合同签署人信息
+   */
+  Approvers?: Array<CommonFlowApprover>
 }
 
 /**
@@ -2686,50 +2694,6 @@ export interface SignUrl {
 }
 
 /**
- * ChannelCancelFlow请求参数结构体
- */
-export interface ChannelCancelFlowRequest {
-  /**
-   * 要撤销的合同流程ID
-   */
-  FlowId: string
-  /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
-   */
-  Agent?: Agent
-  /**
-   * 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。
-   */
-  CancelMessage?: string
-  /**
-   * 撤销理由自定义格式,  会展示在合同预览的界面中,  可以选择下面的组合方式：
-
-**0** : 默认格式,  合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同
-**1** :  合同封面页面会展示为:  发起方以**CancelMessage**的理由撤销当前合同
-**2** : 保留企业名称,  合同封面页面会展示为:  发起方-企业名称以**CancelMessage**的理由撤销当前合同
-**3** : 保留企业名称+经办人名字,  合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同
-
-注: `CancelMessage为撤销当前合同的理由`
-
-![image](https://dyn.ess.tencent.cn/guide/capi/channel_ChannelCancelFlow.png)
-   */
-  CancelMessageFormat?: number
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  Operator?: UserInfo
-}
-
-/**
  * 此结构体 (TemplateInfo) 用于描述模板的信息。
 
 > **模板组成** 
@@ -2879,6 +2843,10 @@ export interface ChannelCreateOrganizationBatchSignUrlRequest {
    * 员工手机号，必须与姓名一起使用。 如果OpenId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。
    */
   Mobile?: string
+  /**
+   * 合同组Id，传入此参数则可以不传FlowIds
+   */
+  FlowGroupId?: string
 }
 
 /**
@@ -3230,56 +3198,47 @@ export interface CreateChannelFlowEvidenceReportRequest {
 }
 
 /**
- * ChannelDescribeBillUsageDetail请求参数结构体
+ * ChannelCancelFlow请求参数结构体
  */
-export interface ChannelDescribeBillUsageDetailRequest {
+export interface ChannelCancelFlowRequest {
+  /**
+   * 要撤销的合同流程ID
+   */
+  FlowId: string
   /**
    * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
 
 此接口下面信息必填。
 <ul>
 <li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
-第三方平台子客企业必须已经经过实名认证
+第三方平台子客企业和员工必须已经经过实名认证
    */
-  Agent: Agent
+  Agent?: Agent
   /**
-   * 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天
+   * 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。
    */
-  StartTime: string
+  CancelMessage?: string
   /**
-   * 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天
+   * 撤销理由自定义格式,  会展示在合同预览的界面中,  可以选择下面的组合方式：
+
+**0** : 默认格式,  合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同
+**1** :  合同封面页面会展示为:  发起方以**CancelMessage**的理由撤销当前合同
+**2** : 保留企业名称,  合同封面页面会展示为:  发起方-企业名称以**CancelMessage**的理由撤销当前合同
+**3** : 保留企业名称+经办人名字,  合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以**CancelMessage**的理由撤销当前合同
+
+注: `CancelMessage为撤销当前合同的理由`
+
+![image](https://dyn.ess.tencent.cn/guide/capi/channel_ChannelCancelFlow.png)
    */
-  EndTime: string
+  CancelMessageFormat?: number
   /**
-   * 查询的套餐类型 （选填 ）不传则查询所有套餐；
-目前支持:
-<ul>
-<li>**CloudEnterprise**: 企业版合同</li>
-<li>**SingleSignature**: 单方签章</li>
-<li>**CloudProve**: 签署报告</li>
-<li>**CloudOnlineSign**: 腾讯会议在线签约</li>
-<li>**ChannelWeCard**: 微工卡</li>
-<li>**SignFlow**: 合同套餐</li>
-<li>**SignFace**: 签署意愿（人脸识别）</li>
-<li>**SignPassword**: 签署意愿（密码）</li>
-<li>**SignSMS**: 签署意愿（短信）</li>
-<li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li>
-<li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li>
-<li>**OrgEssAuth**: 签署企业实名</li>
-<li>**FlowNotify**: 短信通知</li>
-<li>**AuthService**: 企业工商信息查询</li>
-</ul>
+   * 暂未开放
+   * @deprecated
    */
-  QuotaType?: string
-  /**
-   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0
-   */
-  Offset?: number
-  /**
-   * 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。
-   */
-  Limit?: number
+  Operator?: UserInfo
 }
 
 /**
@@ -3321,6 +3280,37 @@ export interface DeleteOrganizationAuthorizationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ChannelCreatePrepareFlowGroup请求参数结构体
+ */
+export interface ChannelCreatePrepareFlowGroupRequest {
+  /**
+   * 合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。
+   */
+  BaseFlowInfos: Array<BaseFlowInfo>
+  /**
+   * 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+   */
+  FlowGroupName: string
+  /**
+   * 资源类型，取值有： <ul><li> **1**：模板</li> <li> **2**：文件</li></ul>
+   */
+  ResourceType: number
+  /**
+   * 合同的发起企业和发起人信息，<a href="https://qcloudimg.tencent-cloud.cn/raw/b69f8aad306c40b7b78d096e39b2edbb.png" target="_blank">点击查看合同发起企业和人展示的位置</a>
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识: <a href="https://qcloudimg.tencent-cloud.cn/raw/a71872de3d540d55451e3e73a2ad1a6e.png" target="_blank">Agent.AppId</a></li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）</li>
+<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）</li>
+</ul>
+
+合同的发起企业和发起人必需已经完成实名，并加入企业
+   */
+  Agent?: Agent
 }
 
 /**
@@ -5970,70 +5960,21 @@ export interface DescribeChannelOrganizationsRequest {
 }
 
 /**
- * ChannelCreatePreparedPersonalEsign请求参数结构体
+ * ChannelDescribeBillUsageDetail返回参数结构体
  */
-export interface ChannelCreatePreparedPersonalEsignRequest {
+export interface ChannelDescribeBillUsageDetailResponse {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+   * 返回查询记录总数
    */
-  Agent: Agent
+  Total?: number
   /**
-   * 个人用户姓名
+   * 消耗记录详情
    */
-  UserName: string
+  Details?: Array<ChannelBillUsageDetail>
   /**
-   * 证件号码, 应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdCardNumber: string
-  /**
-   * 电子印章名字，1-50个中文字符
-注:`同一企业下电子印章名字不能相同`
-   */
-  SealName: string
-  /**
-   * 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。
-
-
-   */
-  SealImage: string
-  /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
-   */
-  Operator?: UserInfo
-  /**
-   * 证件类型，支持以下类型
-<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
-<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
-<li>OTHER_CARD_TYPE : 其他</li></ul>
-
-注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
-   */
-  IdCardType?: string
-  /**
-   * 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。
-   */
-  SealImageCompress?: boolean
-  /**
-   * 手机号码；当需要开通自动签时，该参数必传
-   */
-  Mobile?: string
-  /**
-   * 此字段已废弃，请勿继续使用。
-   */
-  EnableAutoSign?: boolean
-  /**
-   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减
-   */
-  LicenseType?: number
-  /**
-   * <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
-   */
-  SceneKey?: string
+  RequestId?: string
 }
 
 /**
@@ -6099,21 +6040,70 @@ export interface ChannelRenewAutoSignLicenseRequest {
 }
 
 /**
- * ChannelDescribeBillUsageDetail返回参数结构体
+ * ChannelCreatePreparedPersonalEsign请求参数结构体
  */
-export interface ChannelDescribeBillUsageDetailResponse {
+export interface ChannelCreatePreparedPersonalEsignRequest {
   /**
-   * 返回查询记录总数
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
    */
-  Total?: number
+  Agent: Agent
   /**
-   * 消耗记录详情
+   * 个人用户姓名
    */
-  Details?: Array<ChannelBillUsageDetail>
+  UserName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 证件号码, 应符合以下规则
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
-  RequestId?: string
+  IdCardNumber: string
+  /**
+   * 电子印章名字，1-50个中文字符
+注:`同一企业下电子印章名字不能相同`
+   */
+  SealName: string
+  /**
+   * 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。
+
+
+   */
+  SealImage: string
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator?: UserInfo
+  /**
+   * 证件类型，支持以下类型
+<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
+<li>OTHER_CARD_TYPE : 其他</li></ul>
+
+注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
+   */
+  IdCardType?: string
+  /**
+   * 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。
+   */
+  SealImageCompress?: boolean
+  /**
+   * 手机号码；当需要开通自动签时，该参数必传
+   */
+  Mobile?: string
+  /**
+   * 此字段已废弃，请勿继续使用。
+   */
+  EnableAutoSign?: boolean
+  /**
+   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减
+   */
+  LicenseType?: number
+  /**
+   * <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   */
+  SceneKey?: string
 }
 
 /**
@@ -7862,6 +7852,25 @@ true：隐藏，每个签署区要单独选择印章或者签名
 }
 
 /**
+ * ChannelCreatePrepareFlowGroup返回参数结构体
+ */
+export interface ChannelCreatePrepareFlowGroupResponse {
+  /**
+   * 合同组ID，为32位字符串。
+建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。
+   */
+  FlowGroupId?: string
+  /**
+   * 嵌入式发起链接
+   */
+  PrepareUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCancelFlowsTask请求参数结构体
  */
 export interface DescribeCancelFlowsTaskRequest {
@@ -8211,6 +8220,16 @@ export interface ChannelCreateBatchSignUrlRequest {
 注：`1. 合同组暂不支持批量拒签功能。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能`
    */
   CanBatchReject?: boolean
+}
+
+/**
+ * ChannelUpdateSealStatus返回参数结构体
+ */
+export interface ChannelUpdateSealStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9570,13 +9589,56 @@ export interface ChannelCreateFlowApproversRequest {
 }
 
 /**
- * ChannelUpdateSealStatus返回参数结构体
+ * ChannelDescribeBillUsageDetail请求参数结构体
  */
-export interface ChannelUpdateSealStatusResponse {
+export interface ChannelDescribeBillUsageDetailRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+</ul>
+第三方平台子客企业必须已经经过实名认证
    */
-  RequestId?: string
+  Agent: Agent
+  /**
+   * 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天
+   */
+  StartTime: string
+  /**
+   * 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天
+   */
+  EndTime: string
+  /**
+   * 查询的套餐类型 （选填 ）不传则查询所有套餐；
+目前支持:
+<ul>
+<li>**CloudEnterprise**: 企业版合同</li>
+<li>**SingleSignature**: 单方签章</li>
+<li>**CloudProve**: 签署报告</li>
+<li>**CloudOnlineSign**: 腾讯会议在线签约</li>
+<li>**ChannelWeCard**: 微工卡</li>
+<li>**SignFlow**: 合同套餐</li>
+<li>**SignFace**: 签署意愿（人脸识别）</li>
+<li>**SignPassword**: 签署意愿（密码）</li>
+<li>**SignSMS**: 签署意愿（短信）</li>
+<li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li>
+<li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li>
+<li>**OrgEssAuth**: 签署企业实名</li>
+<li>**FlowNotify**: 短信通知</li>
+<li>**AuthService**: 企业工商信息查询</li>
+</ul>
+   */
+  QuotaType?: string
+  /**
+   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0
+   */
+  Offset?: number
+  /**
+   * 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。
+   */
+  Limit?: number
 }
 
 /**

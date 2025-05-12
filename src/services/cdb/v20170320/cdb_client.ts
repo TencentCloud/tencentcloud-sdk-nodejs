@@ -229,7 +229,7 @@ import {
   DeleteRotationPasswordResponse,
   DescribeAccountsResponse,
   RollbackTimeRange,
-  AuditLog,
+  ModifyProtectModeRequest,
   DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
@@ -337,7 +337,6 @@ import {
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
   StartCpuExpandRequest,
-  DescribeCpuExpandStrategyRequest,
   CloseCDBProxyResponse,
   StopReplicationResponse,
   UpgradeDBInstanceEngineVersionRequest,
@@ -427,7 +426,7 @@ import {
   OfflineIsolatedInstancesRequest,
   InquiryPriceUpgradeInstancesRequest,
   ModifyInstanceParamResponse,
-  ModifyProtectModeRequest,
+  AuditLog,
   ColumnPrivilege,
   DescribeUploadedFilesResponse,
   DescribeDBPriceRequest,
@@ -440,7 +439,6 @@ import {
   UpgradeCDBProxyVersionResponse,
   ModifyAccountDescriptionRequest,
   ModifyAccountPasswordRequest,
-  DescribeCpuExpandStrategyResponse,
   InstanceRebootTime,
   RenewDBInstanceResponse,
   TablePrivilege,
@@ -1777,18 +1775,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
-  }
-
-  /**
-     * DescribeCpuExpandStrategy
-
-通过该 API 可以查询实例的 CPU 弹性扩容策略
-     */
-  async DescribeCpuExpandStrategy(
-    req: DescribeCpuExpandStrategyRequest,
-    cb?: (error: string, rep: DescribeCpuExpandStrategyResponse) => void
-  ): Promise<DescribeCpuExpandStrategyResponse> {
-    return this.request("DescribeCpuExpandStrategy", req, cb)
   }
 
   /**

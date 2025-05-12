@@ -414,13 +414,29 @@ export interface DescribeLoginEventRequest {
 }
 
 /**
- * ModifyUserGroup返回参数结构体
+ * 主机账号
  */
-export interface ModifyUserGroupResponse {
+export interface DeviceAccount {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 账号ID
    */
-  RequestId?: string
+  Id?: number
+  /**
+   * 主机ID
+   */
+  DeviceId?: number
+  /**
+   * 账号名
+   */
+  Account?: string
+  /**
+   * true-已托管密码，false-未托管密码
+   */
+  BoundPassword?: boolean
+  /**
+   * true-已托管私钥，false-未托管私钥
+   */
+  BoundPrivateKey?: boolean
 }
 
 /**
@@ -1412,93 +1428,13 @@ export interface DescribeAccessWhiteListRulesRequest {
 }
 
 /**
- * 搜索字符或图形会话时返回的SessionResul结构体
+ * ModifyUserGroup返回参数结构体
  */
-export interface SessionResult {
+export interface ModifyUserGroupResponse {
   /**
-   * 用户名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName?: string
-  /**
-   * 姓名
-   */
-  RealName?: string
-  /**
-   * 主机账号
-   */
-  Account?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 会话大小
-   */
-  Size?: number
-  /**
-   * 设备ID
-   */
-  InstanceId?: string
-  /**
-   * 设备名
-   */
-  DeviceName?: string
-  /**
-   * 内部Ip
-   */
-  PrivateIp?: string
-  /**
-   * 外部Ip
-   */
-  PublicIp?: string
-  /**
-   * 来源Ip
-   */
-  FromIp?: string
-  /**
-   * 会话持续时长
-   */
-  Duration?: number
-  /**
-   * 该会话内命令数量 ，搜索图形会话时该字段无意义
-   */
-  Count?: number
-  /**
-   * 该会话内高危命令数，搜索图形时该字段无意义
-   */
-  DangerCount?: number
-  /**
-   * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
-   */
-  Status?: number
-  /**
-   * 会话Id
-   */
-  Id?: string
-  /**
-   * 设备所属的地域
-   */
-  ApCode?: string
-  /**
-   * 会话协议
-   */
-  Protocol?: string
-  /**
-   * 应用资产类型：1-web
-   */
-  AppAssetKind?: number
-  /**
-   * 应用资产url
-   */
-  AppAssetUrl?: string
-  /**
-   * 回放类型 默认0, 1-rfb 2-mp4 3-ssh
-   */
-  ReplayType?: number
+  RequestId?: string
 }
 
 /**
@@ -2246,7 +2182,8 @@ export interface ModifyResourceRequest {
    */
   ResourceId: string
   /**
-   * 已废弃
+   * 状态
+   * @deprecated
    */
   Status?: string
   /**
@@ -2435,6 +2372,26 @@ export interface DeployResourceRequest {
    * 需要开通实例所属的CDC集群ID
    */
   CdcClusterId?: string
+  /**
+   * 开通堡垒机指定共享的clbId
+   */
+  ShareClbId?: string
+  /**
+   * 0-关闭web访问堡垒机，1-开启web访问堡垒机
+   */
+  WebAccess?: number
+  /**
+   * 0-关闭客户端访问堡垒机，1-开启客户端访问堡垒机
+   */
+  ClientAccess?: number
+  /**
+   * 0-关闭内网访问堡垒机，1-开启内网访问堡垒机
+   */
+  IntranetAccess?: number
+  /**
+   * 0-关闭公网访问堡垒机，1-开启公网访问堡垒机
+   */
+  ExternalAccess?: number
 }
 
 /**
@@ -3805,6 +3762,10 @@ export interface DescribeDeviceAccountsResponse {
    */
   TotalCount?: number
   /**
+   * 账号信息列表
+   */
+  DeviceAccountSet?: Array<DeviceAccount>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3914,6 +3875,96 @@ export interface SearchAuditLogResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 搜索字符或图形会话时返回的SessionResul结构体
+ */
+export interface SessionResult {
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 姓名
+   */
+  RealName?: string
+  /**
+   * 主机账号
+   */
+  Account?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 会话大小
+   */
+  Size?: number
+  /**
+   * 设备ID
+   */
+  InstanceId?: string
+  /**
+   * 设备名
+   */
+  DeviceName?: string
+  /**
+   * 内部Ip
+   */
+  PrivateIp?: string
+  /**
+   * 外部Ip
+   */
+  PublicIp?: string
+  /**
+   * 来源Ip
+   */
+  FromIp?: string
+  /**
+   * 会话持续时长
+   */
+  Duration?: number
+  /**
+   * 该会话内命令数量 ，搜索图形会话时该字段无意义
+   */
+  Count?: number
+  /**
+   * 该会话内高危命令数，搜索图形时该字段无意义
+   */
+  DangerCount?: number
+  /**
+   * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
+   */
+  Status?: number
+  /**
+   * 会话Id
+   */
+  Id?: string
+  /**
+   * 设备所属的地域
+   */
+  ApCode?: string
+  /**
+   * 会话协议
+   */
+  Protocol?: string
+  /**
+   * 应用资产类型：1-web
+   */
+  AppAssetKind?: number
+  /**
+   * 应用资产url
+   */
+  AppAssetUrl?: string
+  /**
+   * 回放类型 默认0, 1-rfb 2-mp4 3-ssh
+   */
+  ReplayType?: number
 }
 
 /**
@@ -4080,6 +4131,38 @@ export interface Resource {
    * 开通内网访问vpc的网段
    */
   IntranetVpcCidr?: string
+  /**
+   * 是否共享clb，true-共享clb，false-独享clb
+   */
+  ShareClb?: boolean
+  /**
+   * 共享clb id
+   */
+  OpenClbId?: string
+  /**
+   * 运营商信息
+   */
+  LbVipIsp?: string
+  /**
+   * linux资产命令行运维端口
+   */
+  TUICmdPort?: number
+  /**
+   * linux资产直连端口
+   */
+  TUIDirectPort?: number
+  /**
+   * 1 默认值，web访问开启，0 web访问关闭，2 web访问开通中，3 web访问关闭中
+   */
+  WebAccess?: number
+  /**
+   * 1 默认值，客户单访问开启，0 客户端访问关闭，2 客户端访问开通中，3 客户端访问关闭中
+   */
+  ClientAccess?: number
+  /**
+   * 1 默认值，外网访问开启，0 外网访问关闭，2 外网访问开通中，3 外网访问关闭中
+   */
+  ExternalAccess?: number
 }
 
 /**

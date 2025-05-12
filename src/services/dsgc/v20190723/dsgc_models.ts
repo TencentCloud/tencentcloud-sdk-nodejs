@@ -3009,48 +3009,52 @@ export interface RiskLevelTrendItem {
  */
 export interface DspaDiscoveryTask {
   /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
    * 任务名称
    */
-  Name: string
+  Name?: string
   /**
    * 任务描述
    */
-  Description: string
+  Description?: string
   /**
    * 执行周期，0单次 1每天 2每周 3每月
    */
-  Period: number
+  Period?: number
   /**
    * 执行计划，0立即 1定时
    */
-  Plan: number
+  Plan?: number
   /**
    * 任务开关；1 打开，0 关闭
    */
-  Enable: number
+  Enable?: number
   /**
    * 元数据对象信息
    */
-  DataSourceInfo: DspaDiscoveryTaskDataSource
+  DataSourceInfo?: DspaDiscoveryTaskDataSource
   /**
    * 通用规则集开关，0 关闭，1 启用
    */
-  GeneralRuleSetEnable: number
+  GeneralRuleSetEnable?: number
   /**
    * 任务最新的一次执行结果信息，该字段用于查询任务列表接口
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ScanTaskResult
+  Result?: ScanTaskResult
   /**
    * 定时开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimingStartTime: string
+  TimingStartTime?: string
   /**
    * 关联模板是否更新
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComplianceUpdate: boolean
+  ComplianceUpdate?: boolean
 }
 
 /**

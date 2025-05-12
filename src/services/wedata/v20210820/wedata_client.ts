@@ -45,7 +45,7 @@ import {
   BatchTaskOperateNew,
   DescribeRuleDimStatRequest,
   DescribeRuleTemplatesResponse,
-  DeleteDsFolderResponse,
+  CreateAndDDLSupport,
   CreateIntegrationNodeResponse,
   TaskInnerInfo,
   GetCosTokenResponse,
@@ -88,11 +88,12 @@ import {
   DescribeFunctionKindsResponse,
   DescribeInstanceDetailInfoResponse,
   DescribeTemplateDimCountRequest,
-  ModifyIntegrationTaskResponse,
+  CreateCodeTemplateVersionResponse,
   DescribeDataSourceListRequest,
   DescribeInstanceByCycleResponse,
   DataServiceRequestParam,
   DataSourceEnvInfo,
+  SubmitTaskResponse,
   DescribeDataCheckStatRequest,
   TablePropertyScore,
   SubscribeWebHook,
@@ -106,7 +107,7 @@ import {
   TableScoreStatisticsInfo,
   InstanceOpsDto,
   DescribeDutyScheduleDetailsRequest,
-  SubmitWorkflowResponse,
+  DescribeTasksForCodeTemplateResponse,
   TriggerEventRequest,
   WorkflowTaskCountOpsDto,
   StageCloudApiRequest,
@@ -153,7 +154,7 @@ import {
   AgentStatus,
   DescribeInstanceLogDetailRequest,
   BatchSuspendIntegrationTasksRequest,
-  CreateAndDDLSupport,
+  DeleteDsFolderResponse,
   DescribeDrInstancePageResponse,
   MoveTasksToFolderRequest,
   OrderFields,
@@ -163,6 +164,7 @@ import {
   ProdSchedulerTask,
   DeleteCustomFunctionResponse,
   RulePage,
+  UpdateCodeTemplateResponse,
   DimensionScoreInfo,
   DescribeTaskScriptResponse,
   InstancePageVO,
@@ -220,7 +222,7 @@ import {
   DeleteResourceFilesRequest,
   DeleteResourceFileResponse,
   PageRoles,
-  SubmitTaskResponse,
+  ReportTaskLineageResponse,
   ModifyApproveStatusResponse,
   TaskInfoVo,
   DescribeAlarmEventsResponse,
@@ -284,7 +286,7 @@ import {
   ProjectPage,
   DescribeWorkflowTaskCountRequest,
   DescribeInstanceListRequest,
-  ModifyWorkflowScheduleResponse,
+  GetOfflineInstanceListResponse,
   DeleteCustomFunctionRequest,
   DrInstanceOpsDto,
   InstanceLogInfo,
@@ -317,9 +319,11 @@ import {
   DagInstancesResponse,
   DimensionScore,
   GetInstanceLogResponse,
+  CreateCodeTemplateRequest,
   DescribeTableLineageInfoRequest,
   CreateTaskFolderRequest,
   EngineTaskInfo,
+  TaskSimpleVo,
   IntegrationNodeDetail,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
@@ -366,6 +370,7 @@ import {
   DescribeBatchOperateTaskResponse,
   StartIntegrationTaskResponse,
   SubmitWorkflow,
+  TableLineage,
   BatchResumeIntegrationTasksRequest,
   OperationOpsDto,
   DeleteTaskAlarmRegularResponse,
@@ -378,7 +383,7 @@ import {
   SimpleColumnInfo,
   CreateWorkflowDsRequest,
   CreateTaskResponse,
-  TableQualityDetail,
+  ModifyIntegrationTaskResponse,
   BatchStopIntegrationTasksResponse,
   EventListenerTaskInfo,
   DescribeApproveTypeListRequest,
@@ -412,7 +417,7 @@ import {
   CheckIntegrationNodeNameExistsRequest,
   InstanceLifeCycleVO,
   DescribeReportTaskDetailRequest,
-  GetOfflineInstanceListResponse,
+  DescribeWorkflowExecuteByIdResponse,
   DescribeOpsMakePlansRequest,
   CreateOpsMakePlanRequest,
   DescribeDimensionScoreResponse,
@@ -426,6 +431,7 @@ import {
   BatchOperateResultOpsDto,
   DeleteRuleRequest,
   ApproveType,
+  TaskFormParams,
   SubmitCustomFunctionResponse,
   TableNameFilter,
   RealTimeTaskInstanceNodeInfo,
@@ -488,6 +494,7 @@ import {
   DescribeTopTableStatResponse,
   DescribeDataServicePublishedApiDetailRequest,
   DescribeTaskTableMetricOverviewRequest,
+  ColumnLineage,
   SourceFieldInfo,
   GetTaskInstanceRequest,
   DeleteDsFolderRequest,
@@ -504,7 +511,9 @@ import {
   DescribeIntegrationStatisticsRecordsTrendRequest,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
   BizCatalogsInfo,
+  TaskCollectionParamDTO,
   DescribeDependTaskListsResponse,
+  OrderCondition,
   CreateHiveTableResponse,
   RuleTemplatePage,
   ModifyDataSourceResponse,
@@ -513,7 +522,7 @@ import {
   ModifyDimensionWeightRequest,
   CreateMakeDatetimeInfo,
   InstanceApiOpsRequest,
-  SubmitSqlTaskRequest,
+  CreateCodeTemplateResponse,
   DescribeTaskLockStatusResponse,
   ReportTaskListInfo,
   RemoveWorkflowDsRequest,
@@ -536,9 +545,12 @@ import {
   RuleTemplate,
   DeleteFileResponse,
   ResumeIntegrationTaskRequest,
+  DeleteCodeTemplateResponse,
   TriggerDsEventRequest,
   ModifyDataSourceRequest,
   DescribePendingSubmitTaskListRequest,
+  ReportTaskLineageRequest,
+  DescribeTasksForCodeTemplatePage,
   TriggerEventResponse,
   TaskAlarmInfo,
   DescribeSchedulerTaskCntByStatusRequest,
@@ -546,10 +558,12 @@ import {
   UpdateDataModelRegistryInfoResponse,
   DescribeOperateOpsTasksResponse,
   DescribeResourceManagePathTreesRequest,
+  ModifyExecStrategyRequest,
   DescribeDutyScheduleDetailsResponse,
   TaskLineageInfo,
   DescribeTableQualityDetailsResponse,
   DescribeProjectUsersRequest,
+  LineageTask,
   CommonIdOpsDto,
   BatchStopWorkflowsByIdsResponse,
   RuleGroupSchedulerInfo,
@@ -579,12 +593,13 @@ import {
   DescribeTenantProjectsResponse,
   DescribeTaskAlarmRegulationsRequest,
   CreateCustomFunctionResponse,
+  UpdateCodeTemplateRequest,
   ScreenInstanceInfo,
   ModifyTaskInfoRequest,
   DescribeOperateOpsTasksRequest,
   DescribeBatchOperateTaskRequest,
   DescribeTableMetaResponse,
-  TaskOpsDto,
+  TableQualityDetail,
   DescribeOfflineTaskTokenRequest,
   DescribeRuleExecDetailRequest,
   DeleteResourceRequest,
@@ -608,14 +623,16 @@ import {
   DescribeDrInstancePageRequest,
   RuntimeInstanceCntTop,
   ColumnMeta,
+  ModifyWorkflowScheduleResponse,
   GenHiveTableDDLSqlResponse,
   UnlockIntegrationTaskRequest,
   DescribeRuleGroupTableRequest,
   CheckAlarmRegularNameExistRequest,
   ColumnData,
+  TableLineagePair,
   RuleExecResult,
   Table,
-  DescribeWorkflowExecuteByIdResponse,
+  DescribeTasksForCodeTemplateRequest,
   TaskByStatus,
   CreateIntegrationTaskRequest,
   BatchRunOpsTaskRequest,
@@ -631,14 +648,16 @@ import {
   SystemRole,
   RuleGroupTableInnerInfo,
   DeleteIntegrationTaskRequest,
+  SubmitSqlTaskRequest,
   CompareResultItem,
   ModifyTaskScriptRequest,
   CreateIntegrationNodeRequest,
+  CreateCodeTemplateVersionRequest,
   DescribeTablePartitionsResponse,
   DescribeTableScoreTrendRequest,
   RuleExecResultPage,
   DescribeTaskByStatusReportRequest,
-  ModifyExecStrategyRequest,
+  ExtParam,
   BatchForceSuccessIntegrationTaskInstancesRequest,
   DescribeRealTimeTaskInstanceNodeInfoResponse,
   DescribeTaskByCycleReportRequest,
@@ -646,12 +665,14 @@ import {
   DescribeApproveListRequest,
   DescribeDutyScheduleListRequest,
   DescribeTaskLineageResponse,
+  SubmitWorkflowResponse,
   CommitRuleGroupTaskResponse,
   Project,
   DescribeRealTimeTaskMetricOverviewResponse,
   DescribeOfflineTaskTokenResponse,
   CreateTaskNewResponse,
   DescribeTableInfoListResponse,
+  DescribeFormVersionParamResponse,
   RemoveWorkflowDsResponse,
   GetOfflineDIInstanceListRequest,
   ModifyExecStrategyResponse,
@@ -690,11 +711,13 @@ import {
   SchemaDetail,
   DescribeRuleRequest,
   BatchOpsDTO,
+  TaskExtDsVO,
   DescribeAlarmReceiverResponse,
   DescribeTableLineageInfoResponse,
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
   Partition,
+  AttributeItemDsVO,
   RuleDimCnt,
   BatchOperateResult,
   DutySchedule,
@@ -703,6 +726,7 @@ import {
   DescribeTableSchemaInfoRequest,
   BatchStartIntegrationTasksResponse,
   DescribeIntegrationVersionNodesInfoRequest,
+  DeleteCodeTemplateRequest,
   DescribeSuccessorOpsTaskInfosRequest,
   DescribeSchedulerInstanceStatusRequest,
   DescribeScheduleInstancesRequest,
@@ -719,6 +743,7 @@ import {
   EventCaseAuditLogVOCollection,
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
+  TaskOpsDto,
   RegisterDsEventResponse,
   RenewWorkflowSchedulerInfoDsRequest,
   DutyScheduleDetailsInfo,
@@ -757,11 +782,13 @@ import {
   SearchConditionInstanceNew,
   DescribeInstanceByCycleRequest,
   Duty,
+  ColumnLineagePair,
   DescribeThirdTaskRunLogRequest,
   DescribeIntegrationStatisticsTaskStatusResponse,
   JudgeResourceFileRequest,
   UploadResourceResponse,
   ModifyTaskLinksDsRequest,
+  ParamMapDsDto,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
   DescribeIntegrationTaskResponse,
@@ -769,6 +796,7 @@ import {
   DescribeQualityScoreTrendResponse,
   RuleDimStat,
   CreateHiveTableByDDLRequest,
+  DescribeFormVersionParamRequest,
   DatabaseInfo,
   GetIntegrationNodeColumnSchemaResponse,
   StopIntegrationTaskResponse,
@@ -899,6 +927,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskScriptResponse) => void
   ): Promise<DescribeTaskScriptResponse> {
     return this.request("DescribeTaskScript", req, cb)
+  }
+
+  /**
+   * 血缘上报接口
+   */
+  async ReportTaskLineage(
+    req: ReportTaskLineageRequest,
+    cb?: (error: string, rep: ReportTaskLineageResponse) => void
+  ): Promise<ReportTaskLineageResponse> {
+    return this.request("ReportTaskLineage", req, cb)
   }
 
   /**
@@ -1106,6 +1144,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 删除代码模版
+   */
+  async DeleteCodeTemplate(
+    req: DeleteCodeTemplateRequest,
+    cb?: (error: string, rep: DeleteCodeTemplateResponse) => void
+  ): Promise<DeleteCodeTemplateResponse> {
+    return this.request("DeleteCodeTemplate", req, cb)
+  }
+
+  /**
    * 删除编排空间工作流
    */
   async RemoveWorkflowDs(
@@ -1216,6 +1264,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 提交代码模版
+   */
+  async CreateCodeTemplateVersion(
+    req: CreateCodeTemplateVersionRequest,
+    cb?: (error: string, rep: CreateCodeTemplateVersionResponse) => void
+  ): Promise<CreateCodeTemplateVersionResponse> {
+    return this.request("CreateCodeTemplateVersion", req, cb)
+  }
+
+  /**
    * 运维大屏-任务状态分布
    */
   async DescribeSchedulerTaskTypeCnt(
@@ -1223,6 +1281,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeSchedulerTaskTypeCntResponse) => void
   ): Promise<DescribeSchedulerTaskTypeCntResponse> {
     return this.request("DescribeSchedulerTaskTypeCnt", req, cb)
+  }
+
+  /**
+   * 创建代码模版
+   */
+  async CreateCodeTemplate(
+    req: CreateCodeTemplateRequest,
+    cb?: (error: string, rep: CreateCodeTemplateResponse) => void
+  ): Promise<CreateCodeTemplateResponse> {
+    return this.request("CreateCodeTemplate", req, cb)
   }
 
   /**
@@ -1675,6 +1743,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: GetInstanceLogResponse) => void
   ): Promise<GetInstanceLogResponse> {
     return this.request("GetInstanceLog", req, cb)
+  }
+
+  /**
+   * 查询模版关联的任务和可填充参数，为下一步代码模版提交做准备
+   */
+  async DescribeFormVersionParam(
+    req: DescribeFormVersionParamRequest,
+    cb?: (error: string, rep: DescribeFormVersionParamResponse) => void
+  ): Promise<DescribeFormVersionParamResponse> {
+    return this.request("DescribeFormVersionParam", req, cb)
   }
 
   /**
@@ -2196,6 +2274,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: BatchForceSuccessIntegrationTaskInstancesResponse) => void
   ): Promise<BatchForceSuccessIntegrationTaskInstancesResponse> {
     return this.request("BatchForceSuccessIntegrationTaskInstances", req, cb)
+  }
+
+  /**
+   * 分页查询引用模板的任务列表
+   */
+  async DescribeTasksForCodeTemplate(
+    req: DescribeTasksForCodeTemplateRequest,
+    cb?: (error: string, rep: DescribeTasksForCodeTemplateResponse) => void
+  ): Promise<DescribeTasksForCodeTemplateResponse> {
+    return this.request("DescribeTasksForCodeTemplate", req, cb)
   }
 
   /**
@@ -3245,6 +3333,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeRuleTemplatesResponse) => void
   ): Promise<DescribeRuleTemplatesResponse> {
     return this.request("DescribeRuleTemplates", req, cb)
+  }
+
+  /**
+   * 更新模版
+   */
+  async UpdateCodeTemplate(
+    req: UpdateCodeTemplateRequest,
+    cb?: (error: string, rep: UpdateCodeTemplateResponse) => void
+  ): Promise<UpdateCodeTemplateResponse> {
+    return this.request("UpdateCodeTemplate", req, cb)
   }
 
   /**

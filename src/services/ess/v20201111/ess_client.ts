@@ -78,6 +78,7 @@ import {
   CreateOrganizationAuthUrlRequest,
   CreateBatchQuickSignUrlResponse,
   CreateIntegrationRoleRequest,
+  ModifyApplicationCallbackInfoRequest,
   DeleteIntegrationRoleUsersResponse,
   CreateConvertTaskApiRequest,
   DeleteIntegrationEmployeesResponse,
@@ -180,6 +181,7 @@ import {
   HasAuthOrganization,
   RecipientComponentInfo,
   CreateFlowEvidenceReportResponse,
+  CreatePrepareFlowGroupResponse,
   CreateIntegrationRoleResponse,
   DetectInfoVideoData,
   DescribeFlowComponentsRequest,
@@ -256,7 +258,7 @@ import {
   CancelMultiFlowSignQRCodeRequest,
   DeleteIntegrationDepartmentRequest,
   CancelUserAutoSignEnableUrlResponse,
-  ModifyApplicationCallbackInfoRequest,
+  CreatePrepareFlowGroupRequest,
   CreateFileCounterSignResponse,
   VerifyDigitFileResult,
   StartFlowRequest,
@@ -2152,6 +2154,20 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: ArchiveDynamicFlowResponse) => void
   ): Promise<ArchiveDynamicFlowResponse> {
     return this.request("ArchiveDynamicFlow", req, cb)
+  }
+
+  /**
+     * 接口（CreatePrepareFlowGroup）用于创建嵌入式合同组签署流程。
+
+- 该接口当前仅支持文件发起
+- 该接口能力和CreateFlowGroupByFiles，~~CreateFlowGroupByTemplates~~保持一致。
+- 返回的FlowGroupId 为临时id，只有在页面内成功发起后FlowGroupId才会有效。
+     */
+  async CreatePrepareFlowGroup(
+    req: CreatePrepareFlowGroupRequest,
+    cb?: (error: string, rep: CreatePrepareFlowGroupResponse) => void
+  ): Promise<CreatePrepareFlowGroupResponse> {
+    return this.request("CreatePrepareFlowGroup", req, cb)
   }
 
   /**

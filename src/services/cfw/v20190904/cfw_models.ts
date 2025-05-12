@@ -1684,7 +1684,7 @@ drop：拒绝
    */
   OrderIndex: string
   /**
-   * 协议；TCP/UDP/ICMP/ANY
+   * 协议；TCP/UDP/ICMP/ICMPv6/ANY
    */
   Protocol?: string
   /**
@@ -7110,6 +7110,10 @@ export interface DescribeEnterpriseSGRuleProgressResponse {
    * 0-100，代表下发进度百分比
    */
   Progress?: number
+  /**
+   * 是否用户中止 用户中止返回true
+   */
+  UserStopped?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

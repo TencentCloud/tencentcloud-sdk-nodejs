@@ -218,9 +218,9 @@ it("gaap.v20180529.DescribeRuleRealServers", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeUDPListeners", async function () {
+it("gaap.v20180529.DescribeDestRegions", async function () {
     try {
-       const data = await client.DescribeUDPListeners({})
+       const data = await client.DescribeDestRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +228,9 @@ it("gaap.v20180529.DescribeUDPListeners", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeDestRegions", async function () {
+it("gaap.v20180529.DescribeRulesByRuleIds", async function () {
     try {
-       const data = await client.DescribeDestRegions({})
+       const data = await client.DescribeRulesByRuleIds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,16 +338,6 @@ it("gaap.v20180529.DeleteCertificate", async function () {
     }
 })
 
-it("gaap.v20180529.CreateFirstLinkSession", async function () {
-    try {
-       const data = await client.CreateFirstLinkSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gaap.v20180529.DescribeAccessRegionsByDestRegion", async function () {
     try {
        const data = await client.DescribeAccessRegionsByDestRegion({})
@@ -408,9 +398,9 @@ it("gaap.v20180529.ModifyGlobalDomainAttribute", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeRulesByRuleIds", async function () {
+it("gaap.v20180529.DescribeUDPListeners", async function () {
     try {
-       const data = await client.DescribeRulesByRuleIds({})
+       const data = await client.DescribeUDPListeners({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,29 +708,9 @@ it("gaap.v20180529.DescribeCertificateDetail", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeFirstLinkSession", async function () {
-    try {
-       const data = await client.DescribeFirstLinkSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gaap.v20180529.DescribeTaskStatus", async function () {
     try {
        const data = await client.DescribeTaskStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gaap.v20180529.DeleteFirstLinkSession", async function () {
-    try {
-       const data = await client.DeleteFirstLinkSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

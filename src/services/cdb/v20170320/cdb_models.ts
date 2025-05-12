@@ -4603,89 +4603,17 @@ export interface RollbackTimeRange {
 }
 
 /**
- * 审计日志详细信息
+ * ModifyProtectMode请求参数结构体
  */
-export interface AuditLog {
+export interface ModifyProtectModeRequest {
   /**
-   * 影响行数。
+   * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
    */
-  AffectRows?: number
+  ProtectMode: number
   /**
-   * 错误码。
+   * 实例ID。
    */
-  ErrCode?: number
-  /**
-   * SQL 类型。
-   */
-  SqlType?: string
-  /**
-   * 审计策略名称，逐步下线。
-   */
-  PolicyName?: string
-  /**
-   * 数据库名称。
-   */
-  DBName?: string
-  /**
-   * SQL 语句。
-   */
-  Sql?: string
-  /**
-   * 客户端地址。
-   */
-  Host?: string
-  /**
-   * 用户名。
-   */
-  User?: string
-  /**
-   * 执行时间，微秒。
-   */
-  ExecTime?: number
-  /**
-   * 时间。
-   */
-  Timestamp?: string
-  /**
-   * 返回行数。
-   */
-  SentRows?: number
-  /**
-   * 线程ID。
-   */
-  ThreadId?: number
-  /**
-   * 扫描行数。
-   */
-  CheckRows?: number
-  /**
-   * cpu执行时间，微秒。
-   */
-  CpuTime?: number
-  /**
-   * IO等待时间，微秒。
-   */
-  IoWaitTime?: number
-  /**
-   * 锁等待时间，微秒。
-   */
-  LockWaitTime?: number
-  /**
-   * 开始时间，与timestamp构成一个精确到纳秒的时间。
-   */
-  NsTime?: number
-  /**
-   * 事物持续时间，微秒。
-   */
-  TrxLivingTime?: number
-  /**
-   * 日志命中规则模板的基本信息
-   */
-  TemplateInfo?: Array<LogRuleTemplateInfo>
-  /**
-   *  事务ID
-   */
-  TrxId?: number
+  InstanceId: string
 }
 
 /**
@@ -7640,16 +7568,6 @@ export interface StartCpuExpandRequest {
 }
 
 /**
- * DescribeCpuExpandStrategy请求参数结构体
- */
-export interface DescribeCpuExpandStrategyRequest {
-  /**
-   * 实例 ID 。
-   */
-  InstanceId: string
-}
-
-/**
  * CloseCDBProxy返回参数结构体
  */
 export interface CloseCDBProxyResponse {
@@ -9723,17 +9641,89 @@ export interface ModifyInstanceParamResponse {
 }
 
 /**
- * ModifyProtectMode请求参数结构体
+ * 审计日志详细信息
  */
-export interface ModifyProtectModeRequest {
+export interface AuditLog {
   /**
-   * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
+   * 影响行数。
    */
-  ProtectMode: number
+  AffectRows?: number
   /**
-   * 实例ID。
+   * 错误码。
    */
-  InstanceId: string
+  ErrCode?: number
+  /**
+   * SQL 类型。
+   */
+  SqlType?: string
+  /**
+   * 审计策略名称，逐步下线。
+   */
+  PolicyName?: string
+  /**
+   * 数据库名称。
+   */
+  DBName?: string
+  /**
+   * SQL 语句。
+   */
+  Sql?: string
+  /**
+   * 客户端地址。
+   */
+  Host?: string
+  /**
+   * 用户名。
+   */
+  User?: string
+  /**
+   * 执行时间，微秒。
+   */
+  ExecTime?: number
+  /**
+   * 时间。
+   */
+  Timestamp?: string
+  /**
+   * 返回行数。
+   */
+  SentRows?: number
+  /**
+   * 线程ID。
+   */
+  ThreadId?: number
+  /**
+   * 扫描行数。
+   */
+  CheckRows?: number
+  /**
+   * cpu执行时间，微秒。
+   */
+  CpuTime?: number
+  /**
+   * IO等待时间，微秒。
+   */
+  IoWaitTime?: number
+  /**
+   * 锁等待时间，微秒。
+   */
+  LockWaitTime?: number
+  /**
+   * 开始时间，与timestamp构成一个精确到纳秒的时间。
+   */
+  NsTime?: number
+  /**
+   * 事物持续时间，微秒。
+   */
+  TrxLivingTime?: number
+  /**
+   * 日志命中规则模板的基本信息
+   */
+  TemplateInfo?: Array<LogRuleTemplateInfo>
+  /**
+   *  事务ID
+   */
+  TrxId?: number
 }
 
 /**
@@ -9998,29 +9988,6 @@ export interface ModifyAccountPasswordRequest {
    * 云数据库账号。
    */
   Accounts: Array<Account>
-}
-
-/**
- * DescribeCpuExpandStrategy返回参数结构体
- */
-export interface DescribeCpuExpandStrategyResponse {
-  /**
-   * 策略类型。可选值 auto、manual。
-   */
-  Type?: string
-  /**
-   * 手动扩容的 CPU 。Type为 manual 时有效。
-   */
-  ExpandCpu?: string
-  /**
-   * 自动扩容策略。Type 为 auto 时有效
-   * @deprecated
-   */
-  AutoStrategy?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

@@ -175,7 +175,7 @@ export interface File3D {
    */
   Type?: string
   /**
-   * 文件的Url
+   * 文件的Url（有效期24小时）
    */
   Url?: string
 }
@@ -1921,11 +1921,17 @@ export interface SubmitHunyuanTo3DJobRequest {
    */
   Prompt?: string
   /**
-   * 输入图 Base64 数据。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
+   * 输入图 Base64 数据。
+大小：单边分辨率要求不小于50，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）
+格式：jpg，png，jpeg，webp。
+ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
    */
   ImageBase64?: string
   /**
-   * 输入图Url。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
+   * 输入图Url。
+大小：单边分辨率要求不小于50，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）
+格式：jpg，png，jpeg，webp。
+ImageBase64/ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
    */
   ImageUrl?: string
   /**
@@ -1967,7 +1973,7 @@ export interface ImageQuestionRequest {
  */
 export interface SubmitHunyuanTo3DJobResponse {
   /**
-   * 任务id
+   * 任务id（有效期24小时）
    */
   JobId?: string
   /**
