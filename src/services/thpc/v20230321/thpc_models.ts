@@ -331,7 +331,7 @@ export interface AttachNodesRequest {
   /**
    * 队列名称。不指定则为默认队列：
 SLURM默认队列为：compute。 
-SGE默认队列为：all.q。
+
    */
   QueueName?: string
   /**
@@ -1101,14 +1101,13 @@ export interface CreateClusterRequest {
    */
   ComputeNodeCount?: number
   /**
-   * 调度器类型。默认取值：SLURM。<li>SGE：SGE调度器。</li><li>SLURM：SLURM调度器。</li>
+   * 调度器类型。默认取值：SLURM。<li>SLURM：SLURM调度器。</li>
    */
   SchedulerType?: string
   /**
    * 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器
 各调度器支持的集群版本：
 <li>SLURM：21.08.8、23.11.7</li>
-<li>SGE：     8.1.9</li>
    */
   SchedulerVersion?: string
   /**
@@ -2018,7 +2017,7 @@ export interface AddNodesRequest {
    */
   ClientToken?: string
   /**
-   * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li><li>SGE默认队列为：all.q。</li>
+   * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li>
 
    */
   QueueName?: string

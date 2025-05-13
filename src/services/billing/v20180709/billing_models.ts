@@ -16,6 +16,24 @@
  */
 
 /**
+ * CreateAllocationUnit请求参数结构体
+ */
+export interface CreateAllocationUnitRequest {
+  /**
+   * 新增分账单元父节点ID
+   */
+  ParentId: number
+  /**
+   * 新增分账单元名称
+   */
+  Name?: string
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
  * DescribeBillAdjustInfo返回参数结构体
  */
 export interface DescribeBillAdjustInfoResponse {
@@ -133,6 +151,64 @@ export interface ConsumptionBusinessSummaryDataItem {
    * 地域名称（仅在地域汇总总展示）
    */
   RegionName?: string
+}
+
+/**
+ * ModifyAllocationRule请求参数结构体
+ */
+export interface ModifyAllocationRuleRequest {
+  /**
+   * 所编辑公摊规则ID
+   */
+  RuleId: number
+  /**
+   * 编辑后公摊规则名称
+   */
+  Name: string
+  /**
+   * 公摊策略类型，枚举值如下： 1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊
+   */
+  Type: number
+  /**
+   * 编辑后公摊规则表达式
+   */
+  RuleDetail: AllocationRuleExpression
+  /**
+   * 编辑后公摊比例表达式
+   */
+  RatioDetail?: Array<AllocationRationExpression>
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
+ * DeleteAllocationRule请求参数结构体
+ */
+export interface DeleteAllocationRuleRequest {
+  /**
+   * 所删除公摊规则ID
+   */
+  RuleId: number
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
+ * CreateAllocationRule返回参数结构体
+ */
+export interface CreateAllocationRuleResponse {
+  /**
+   * 新增公摊规则ID
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -366,27 +442,132 @@ export interface DescribeCostSummaryByProductResponse {
 }
 
 /**
- * 商品详细信息
+ * DescribeAllocationTree返回参数结构体
  */
-export interface ProductInfo {
+export interface DescribeAllocationTreeResponse {
   /**
-   * 商品详情名称标识
+   * 分账单元ID
    */
-  Name: string
+  Id?: number
   /**
-   * 商品详情
+   * 分账单元名称
    */
-  Value: string
-}
-
-/**
- * DeleteAllocationTag返回参数结构体
- */
-export interface DeleteAllocationTagResponse {
+  Name?: string
+  /**
+   * 分账单元唯一标识
+   */
+  TreeNodeUniqKey?: string
+  /**
+   * 子树
+   */
+  Children?: Array<AllocationTree>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 分账账单月概览金额明细
+ */
+export interface AllocationMonthOverviewDetail {
+  /**
+   * 归集费用(现金)：基于归集规则直接归集到分账单元的现金
+   */
+  GatherCashPayAmount?: string
+  /**
+   * 归集费用(优惠券)：基于归集规则直接归集到分账单元的资源优惠券
+   */
+  GatherVoucherPayAmount?: string
+  /**
+   * 归集费用(赠送金)：基于归集规则直接归集到分账单元的资源赠送金
+   */
+  GatherIncentivePayAmount?: string
+  /**
+   * 归集费用(分成金)：基于归集规则直接归集到分账单元的资源分成金
+   */
+  GatherTransferPayAmount?: string
+  /**
+   * 分摊费用(现金)：基于分摊规则分摊到分账单元的资源现金
+   */
+  AllocateCashPayAmount?: string
+  /**
+   * 分摊费用(优惠券)：基于分摊规则分摊到分账单元的资源优惠券
+   */
+  AllocateVoucherPayAmount?: string
+  /**
+   * 分摊费用(赠送金)：基于分摊规则分摊到分账单元的资源赠送金
+   */
+  AllocateIncentivePayAmount?: string
+  /**
+   * 分摊费用(分成金)：基于分摊规则分摊到分账单元的资源分成金
+   */
+  AllocateTransferPayAmount?: string
+  /**
+   * 合计费用(现金)：分账单元总费用，归集费用(现金) + 分摊费用(现金)
+   */
+  TotalCashPayAmount?: string
+  /**
+   * 合计费用(优惠券)：分账单元总费用，归集费用(优惠券) + 分摊费用(优惠券)
+   */
+  TotalVoucherPayAmount?: string
+  /**
+   * 合计费用(赠送金)：分账单元总费用，归集费用(赠送金) + 分摊费用(赠送金)
+   */
+  TotalIncentivePayAmount?: string
+  /**
+   * 合计费用(分成金)：分账单元总费用，归集费用(分成金)+分摊费用(分成金)
+   */
+  TotalTransferPayAmount?: string
+  /**
+   * 归集费用(折后总额)：基于归集规则直接归集到分账单元的资源优惠后总价
+   */
+  GatherRealCost?: string
+  /**
+   * 分摊费用(折后总额)：基于分摊规则分摊到分账单元的资源优惠后总价
+   */
+  AllocateRealCost?: string
+  /**
+   * 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额)
+   */
+  RealTotalCost?: string
+  /**
+   * 占比(折后总额)：本分账单元合计费用(折后总额)/合计费用(折后总额)*100%
+   */
+  Ratio?: string
+  /**
+   * 环比(折后总额)：[本月分账单元合计费用(折后总额) - 上月分账单元合计费用(折后总额)] / 上月分账单元合计费用(折后总额) * 100%
+   */
+  Trend?: string
+  /**
+   * 环比箭头
+upward -上升
+downward - 下降
+none - 平稳
+   */
+  TrendType?: string
+}
+
+/**
+ * 分账目录树
+ */
+export interface AllocationTree {
+  /**
+   * 分账单元ID
+   */
+  Id?: number
+  /**
+   * 分账单元名称
+   */
+  Name?: string
+  /**
+   * 分账单元唯一标识
+   */
+  TreeNodeUniqKey?: string
+  /**
+   * 子树
+   */
+  Children?: Array<AllocationTree>
 }
 
 /**
@@ -510,11 +691,83 @@ export interface AdjustInfoDetail {
 }
 
 /**
+ * DescribeBillList返回参数结构体
+ */
+export interface DescribeBillListResponse {
+  /**
+   * 收支明细列表
+   */
+  TransactionList?: Array<BillTransactionInfo>
+  /**
+   * 总条数
+   */
+  Total?: number
+  /**
+   * 退费总额，单位（分）
+   */
+  ReturnAmount?: number
+  /**
+   * 充值总额，单位（分）
+   */
+  RechargeAmount?: number
+  /**
+   * 冻结总额，单位（分）
+   */
+  BlockAmount?: number
+  /**
+   * 解冻总额，单位（分）
+   */
+  UnblockAmount?: number
+  /**
+   * 扣费总额，单位（分）
+   */
+  DeductAmount?: number
+  /**
+   * 资金转入总额，单位（分）
+   */
+  AgentInAmount?: number
+  /**
+   * 垫付充值总额，单位（分）
+   */
+  AdvanceRechargeAmount?: number
+  /**
+   * 提现扣减总额，单位（分）
+   */
+  WithdrawAmount?: number
+  /**
+   * 资金转出总额，单位（分）
+   */
+  AgentOutAmount?: number
+  /**
+   * 还垫付总额，单位（分）
+   */
+  AdvancePayAmount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAllocateConditions请求参数结构体
  */
 export interface DescribeAllocateConditionsRequest {
   /**
    * 账单月份，格式为2024-02，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
+ * CreateAllocationRule请求参数结构体
+ */
+export interface CreateAllocationRuleRequest {
+  /**
+   * 公摊规则列表
+   */
+  RuleList: AllocationRulesSummary
+  /**
+   * 月份，不传默认当前月
    */
   Month?: string
 }
@@ -559,6 +812,52 @@ export interface ConsumptionRegionSummaryDataItem {
    * 分成金
    */
   TransferPayAmount?: string
+}
+
+/**
+ * DescribeAllocationUnitDetail返回参数结构体
+ */
+export interface DescribeAllocationUnitDetailResponse {
+  /**
+   * 分账单元ID
+   */
+  Id?: number
+  /**
+   * 分账单元所属UIN
+   */
+  Uin?: string
+  /**
+   * 分账单元名称
+   */
+  Name?: string
+  /**
+   * 分账单元父节点ID
+   */
+  ParentId?: number
+  /**
+   * 源组织名称
+   */
+  SourceName?: string
+  /**
+   * 源组织ID
+   */
+  SourceId?: string
+  /**
+   * 备注说明
+   */
+  Remark?: string
+  /**
+   * 分账单元标识
+   */
+  TreeNodeUniqKey?: string
+  /**
+   * 若分账单元设置归集规则，返回归集规则ID，若无分账规则，则不返回
+   */
+  RuleId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -921,6 +1220,20 @@ export interface TagSummaryOverviewItem {
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost?: string
+}
+
+/**
+ * DescribeGatherRuleDetail请求参数结构体
+ */
+export interface DescribeGatherRuleDetailRequest {
+  /**
+   * 所查询归集规则ID
+   */
+  Id: number
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
 }
 
 /**
@@ -1505,6 +1818,34 @@ export interface DescribeAllocationTrendByMonthRequest {
 }
 
 /**
+ * 分账单元id和名称
+ */
+export interface AllocationUnit {
+  /**
+   * 分账单元ID
+   */
+  NodeId?: number
+  /**
+   * 分账规则名称
+   */
+  TreeNodeUniqKeyName?: string
+}
+
+/**
+ * 分摊比例表达式
+ */
+export interface AllocationRationExpression {
+  /**
+   * 公摊规则所属分账单元ID
+   */
+  NodeId: number
+  /**
+   * 分账单元所占公摊比例，按占比分摊传0
+   */
+  Ratio: number
+}
+
+/**
  * DescribeVoucherUsageDetails返回参数结构体
  */
 export interface DescribeVoucherUsageDetailsResponse {
@@ -1936,6 +2277,52 @@ export interface AnalyseProjectDetail {
 }
 
 /**
+ * 按项目汇总消费详情
+ */
+export interface ProjectSummaryOverviewItem {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   */
+  ProjectName: string
+  /**
+   * 费用所占百分比，两位小数
+   */
+  RealTotalCostRatio: string
+  /**
+   * 优惠后总价
+   */
+  RealTotalCost: string
+  /**
+   * 现金账户支出：通过现金账户支付的金额
+   */
+  CashPayAmount: string
+  /**
+   * 赠送账户支出：使用赠送金支付的金额
+   */
+  IncentivePayAmount: string
+  /**
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   */
+  VoucherPayAmount: string
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
+  /**
+   * 账单月份，格式2019-08
+   */
+  BillMonth: string
+  /**
+   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+   */
+  TotalCost: string
+}
+
+/**
  * DescribeBillSummaryByTag返回参数结构体
  */
 export interface DescribeBillSummaryByTagResponse {
@@ -1957,6 +2344,24 @@ export interface DescribeBillSummaryByTagResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyGatherRule请求参数结构体
+ */
+export interface ModifyGatherRuleRequest {
+  /**
+   * 所编辑归集规则ID
+   */
+  Id: number
+  /**
+   * 所编辑分账规则详情
+   */
+  RuleDetail: AllocationRuleExpression
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
 }
 
 /**
@@ -2226,6 +2631,24 @@ export interface BillDays {
 }
 
 /**
+ * DescribeAllocationRuleSummary返回参数结构体
+ */
+export interface DescribeAllocationRuleSummaryResponse {
+  /**
+   * 公摊规则表达式
+   */
+  RuleList?: Array<AllocationRuleOverview>
+  /**
+   * 规则总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 成本分析金额返回数据模型
  */
 export interface AnalyseAmountDetail {
@@ -2255,6 +2678,24 @@ export interface DescribeBillSummaryByProjectRequest {
    * 查询账单数据的用户UIN
    */
   PayerUin?: string
+}
+
+/**
+ * CreateGatherRule请求参数结构体
+ */
+export interface CreateGatherRuleRequest {
+  /**
+   * 规则所属分账单元ID
+   */
+  Id: number
+  /**
+   * 归集规则详情
+   */
+  RuleList: GatherRuleSummary
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
 }
 
 /**
@@ -2496,6 +2937,16 @@ export interface DescribeBillSummaryByPayModeRequest {
    * 查询账单数据的用户UIN
    */
   PayerUin?: string
+}
+
+/**
+ * DeleteGatherRule返回参数结构体
+ */
+export interface DeleteGatherRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2780,6 +3231,20 @@ export interface AllocationSummaryByResource {
 }
 
 /**
+ * DescribeAllocationRuleDetail请求参数结构体
+ */
+export interface DescribeAllocationRuleDetailRequest {
+  /**
+   * 所查询公摊规则ID
+   */
+  RuleId: number
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
  * 分账账单月概览详情
  */
 export interface AllocationOverviewNode {
@@ -2860,6 +3325,16 @@ export interface AllocationTreeNode {
 }
 
 /**
+ * 归集规则列表
+ */
+export interface GatherRuleSummary {
+  /**
+   * 分账规则表达式
+   */
+  RuleDetail: AllocationRuleExpression
+}
+
+/**
  * PayDeals返回参数结构体
  */
 export interface PayDealsResponse {
@@ -2879,6 +3354,66 @@ export interface PayDealsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCostSummaryByProject请求参数结构体
+ */
+export interface DescribeCostSummaryByProjectRequest {
+  /**
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   */
+  BeginTime: string
+  /**
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   */
+  EndTime: string
+  /**
+   * 每次获取数据量，最大值为100
+   */
+  Limit: number
+  /**
+   * 偏移量,默认从0开始
+   */
+  Offset: number
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
+  /**
+   * 是否需要返回记录数量，0不需要，1需要，默认不需要
+   */
+  NeedRecordNum?: number
+}
+
+/**
+ * 明细账单关联单据信息
+ */
+export interface BillDetailAssociatedOrder {
+  /**
+   * 新购订单
+   */
+  PrepayPurchase?: string
+  /**
+   * 续费订单
+   */
+  PrepayRenew?: string
+  /**
+   * 升配订单
+   */
+  PrepayModifyUp?: string
+  /**
+   * 冲销订单
+   */
+  ReverseOrder?: string
+  /**
+   * 优惠调整后订单
+   */
+  NewOrder?: string
+  /**
+   * 优惠调整前订单
+   */
+  Original?: string
 }
 
 /**
@@ -3264,6 +3799,16 @@ export interface DescribeBillAdjustInfoRequest {
 截止时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据
    */
   TimeTo?: string
+}
+
+/**
+ * DeleteAllocationRule返回参数结构体
+ */
+export interface DeleteAllocationRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3905,84 +4450,27 @@ export interface AnalyseRegionDetail {
 }
 
 /**
- * 分账账单月概览金额明细
+ * 商品详细信息
  */
-export interface AllocationMonthOverviewDetail {
+export interface ProductInfo {
   /**
-   * 归集费用(现金)：基于归集规则直接归集到分账单元的现金
+   * 商品详情名称标识
    */
-  GatherCashPayAmount?: string
+  Name: string
   /**
-   * 归集费用(优惠券)：基于归集规则直接归集到分账单元的资源优惠券
+   * 商品详情
    */
-  GatherVoucherPayAmount?: string
+  Value: string
+}
+
+/**
+ * DeleteAllocationTag返回参数结构体
+ */
+export interface DeleteAllocationTagResponse {
   /**
-   * 归集费用(赠送金)：基于归集规则直接归集到分账单元的资源赠送金
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GatherIncentivePayAmount?: string
-  /**
-   * 归集费用(分成金)：基于归集规则直接归集到分账单元的资源分成金
-   */
-  GatherTransferPayAmount?: string
-  /**
-   * 分摊费用(现金)：基于分摊规则分摊到分账单元的资源现金
-   */
-  AllocateCashPayAmount?: string
-  /**
-   * 分摊费用(优惠券)：基于分摊规则分摊到分账单元的资源优惠券
-   */
-  AllocateVoucherPayAmount?: string
-  /**
-   * 分摊费用(赠送金)：基于分摊规则分摊到分账单元的资源赠送金
-   */
-  AllocateIncentivePayAmount?: string
-  /**
-   * 分摊费用(分成金)：基于分摊规则分摊到分账单元的资源分成金
-   */
-  AllocateTransferPayAmount?: string
-  /**
-   * 合计费用(现金)：分账单元总费用，归集费用(现金) + 分摊费用(现金)
-   */
-  TotalCashPayAmount?: string
-  /**
-   * 合计费用(优惠券)：分账单元总费用，归集费用(优惠券) + 分摊费用(优惠券)
-   */
-  TotalVoucherPayAmount?: string
-  /**
-   * 合计费用(赠送金)：分账单元总费用，归集费用(赠送金) + 分摊费用(赠送金)
-   */
-  TotalIncentivePayAmount?: string
-  /**
-   * 合计费用(分成金)：分账单元总费用，归集费用(分成金)+分摊费用(分成金)
-   */
-  TotalTransferPayAmount?: string
-  /**
-   * 归集费用(折后总额)：基于归集规则直接归集到分账单元的资源优惠后总价
-   */
-  GatherRealCost?: string
-  /**
-   * 分摊费用(折后总额)：基于分摊规则分摊到分账单元的资源优惠后总价
-   */
-  AllocateRealCost?: string
-  /**
-   * 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额)
-   */
-  RealTotalCost?: string
-  /**
-   * 占比(折后总额)：本分账单元合计费用(折后总额)/合计费用(折后总额)*100%
-   */
-  Ratio?: string
-  /**
-   * 环比(折后总额)：[本月分账单元合计费用(折后总额) - 上月分账单元合计费用(折后总额)] / 上月分账单元合计费用(折后总额) * 100%
-   */
-  Trend?: string
-  /**
-   * 环比箭头
-upward -上升
-downward - 下降
-none - 平稳
-   */
-  TrendType?: string
+  RequestId?: string
 }
 
 /**
@@ -4348,6 +4836,20 @@ export interface VoucherInfos {
 }
 
 /**
+ * DescribeAllocationUnitDetail请求参数结构体
+ */
+export interface DescribeAllocationUnitDetailRequest {
+  /**
+   * 所查询分账单元Id
+   */
+  Id: number
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
  * DescribeBillSummaryForOrganization请求参数结构体
  */
 export interface DescribeBillSummaryForOrganizationRequest {
@@ -4507,6 +5009,16 @@ export interface AllocationStat {
    * 费用平均信息
    */
   Average?: AllocationAverageData
+}
+
+/**
+ * ModifyGatherRule返回参数结构体
+ */
+export interface ModifyGatherRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4968,6 +5480,32 @@ export interface ConsumptionResourceSummaryConditionValue {
 }
 
 /**
+ * DescribeCostSummaryByRegion返回参数结构体
+ */
+export interface DescribeCostSummaryByRegionResponse {
+  /**
+   * 数据是否准备好，0未准备好，1准备好
+   */
+  Ready?: number
+  /**
+   * 消耗详情
+   */
+  Total?: ConsumptionSummaryTotal
+  /**
+   * 消耗按地域汇总详情
+   */
+  Data?: Array<ConsumptionRegionSummaryDataItem>
+  /**
+   * 记录数量，NeedRecordNum为0时返回null
+   */
+  RecordNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCostDetail请求参数结构体
  */
 export interface DescribeCostDetailRequest {
@@ -5191,33 +5729,13 @@ export interface DescribeBillResourceSummaryForOrganizationResponse {
 }
 
 /**
- * DescribeCostSummaryByProject请求参数结构体
+ * DescribeAllocationTree请求参数结构体
  */
-export interface DescribeCostSummaryByProjectRequest {
+export interface DescribeAllocationTreeRequest {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * 月份，不传默认当前月
    */
-  BeginTime: string
-  /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
-   */
-  EndTime: string
-  /**
-   * 每次获取数据量，最大值为100
-   */
-  Limit: number
-  /**
-   * 偏移量,默认从0开始
-   */
-  Offset: number
-  /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin?: string
-  /**
-   * 是否需要返回记录数量，0不需要，1需要，默认不需要
-   */
-  NeedRecordNum?: number
+  Month?: string
 }
 
 /**
@@ -5341,6 +5859,43 @@ export interface BillBusiness {
    * 产品名称：用户所采购的各类云产品
    */
   BusinessCodeName: string
+}
+
+/**
+ * DescribeAllocationRuleDetail返回参数结构体
+ */
+export interface DescribeAllocationRuleDetailResponse {
+  /**
+   * 公摊规则ID
+   */
+  Id?: number
+  /**
+   * 公摊规则所属UIN
+   */
+  Uin?: string
+  /**
+   * 公摊规则名称
+   */
+  Name?: string
+  /**
+   * 公摊策略类型，枚举值如下：
+1 - 自定义分摊占比 
+2 - 等比分摊 
+3 - 按占比分摊
+   */
+  Type?: number
+  /**
+   * 公摊规则表达式
+   */
+  RuleDetail?: AllocationRuleExpression
+  /**
+   * 公摊比例表达式，Type为1和2时返回
+   */
+  RatioDetail?: Array<AllocationRationExpression>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5604,6 +6159,36 @@ export interface CreateAllocationTagResponse {
 }
 
 /**
+ * ModifyAllocationUnit请求参数结构体
+ */
+export interface ModifyAllocationUnitRequest {
+  /**
+   * 所修改分账单元ID
+   */
+  Id: number
+  /**
+   * 修改后分账单元名称
+   */
+  Name?: string
+  /**
+   * 修改后分账单元源组织名称
+   */
+  SourceName?: string
+  /**
+   * 修改后分账单元源组织ID
+   */
+  SourceId?: string
+  /**
+   * 分账单元备注说明
+   */
+  Remark?: string
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
  * DescribeBillDownloadUrl返回参数结构体
  */
 export interface DescribeBillDownloadUrlResponse {
@@ -5829,6 +6414,7 @@ export interface DescribeBillDetailRequest {
   NeedRecordNum?: number
   /**
    * 已废弃参数，未开放
+   * @deprecated
    */
   ProductCode?: string
   /**
@@ -5949,91 +6535,42 @@ export interface DescribeVoucherInfoResponse {
 }
 
 /**
- * 明细账单关联单据信息
+ * 公摊规则列表
  */
-export interface BillDetailAssociatedOrder {
+export interface AllocationRulesSummary {
   /**
-   * 新购订单
+   * 新增公摊规则名称
    */
-  PrepayPurchase?: string
+  Name: string
   /**
-   * 续费订单
+   * 公摊策略类型，枚举值如下：
+1 - 自定义分摊占比 
+2 - 等比分摊
+3 - 按占比分摊
    */
-  PrepayRenew?: string
+  Type: number
   /**
-   * 升配订单
+   * 公摊规则表达式
    */
-  PrepayModifyUp?: string
+  RuleDetail: AllocationRuleExpression
   /**
-   * 冲销订单
+   * 公摊比例表达式，按占比分摊不传
    */
-  ReverseOrder?: string
-  /**
-   * 优惠调整后订单
-   */
-  NewOrder?: string
-  /**
-   * 优惠调整前订单
-   */
-  Original?: string
+  RatioDetail?: Array<AllocationRationExpression>
 }
 
 /**
- * DescribeBillList返回参数结构体
+ * DeleteGatherRule请求参数结构体
  */
-export interface DescribeBillListResponse {
+export interface DeleteGatherRuleRequest {
   /**
-   * 收支明细列表
+   * 所删除归集规则ID
    */
-  TransactionList?: Array<BillTransactionInfo>
+  RuleId: number
   /**
-   * 总条数
+   * 月份，不传默认当前月
    */
-  Total?: number
-  /**
-   * 退费总额，单位（分）
-   */
-  ReturnAmount?: number
-  /**
-   * 充值总额，单位（分）
-   */
-  RechargeAmount?: number
-  /**
-   * 冻结总额，单位（分）
-   */
-  BlockAmount?: number
-  /**
-   * 解冻总额，单位（分）
-   */
-  UnblockAmount?: number
-  /**
-   * 扣费总额，单位（分）
-   */
-  DeductAmount?: number
-  /**
-   * 资金转入总额，单位（分）
-   */
-  AgentInAmount?: number
-  /**
-   * 垫付充值总额，单位（分）
-   */
-  AdvanceRechargeAmount?: number
-  /**
-   * 提现扣减总额，单位（分）
-   */
-  WithdrawAmount?: number
-  /**
-   * 资金转出总额，单位（分）
-   */
-  AgentOutAmount?: number
-  /**
-   * 还垫付总额，单位（分）
-   */
-  AdvancePayAmount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Month?: string
 }
 
 /**
@@ -6169,6 +6706,20 @@ export interface BusinessSummaryOverviewItem {
 }
 
 /**
+ * CreateGatherRule返回参数结构体
+ */
+export interface CreateGatherRuleResponse {
+  /**
+   * 归集规则ID
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 标签筛选列表
  */
 export interface BillTag {
@@ -6276,6 +6827,16 @@ p_coding_devops（CODING DevOps）：comm、day
 p_dsa（全球IP应用加速）：minute
    */
   DosageType?: string
+}
+
+/**
+ * ModifyAllocationRule返回参数结构体
+ */
+export interface ModifyAllocationRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6659,6 +7220,24 @@ export interface DescribeAllocationSummaryByResourceResponse {
 }
 
 /**
+ * CreateAllocationUnit返回参数结构体
+ */
+export interface CreateAllocationUnitResponse {
+  /**
+   * 新增分账单元ID
+   */
+  Id?: number
+  /**
+   * 分账单元唯一标识
+   */
+  TreeNodeUniqKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDosageCosDetailByDate返回参数结构体
  */
 export interface DescribeDosageCosDetailByDateResponse {
@@ -6687,49 +7266,61 @@ export interface BillItem {
 }
 
 /**
- * 按项目汇总消费详情
+ * DeleteAllocationUnit请求参数结构体
  */
-export interface ProjectSummaryOverviewItem {
+export interface DeleteAllocationUnitRequest {
   /**
-   * 项目ID
+   * 所删除分账单元ID
    */
-  ProjectId: string
+  Id: number
   /**
-   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   * 月份，不传默认当前月
    */
-  ProjectName: string
+  Month?: string
+}
+
+/**
+ * 分账规则表达式
+ */
+export interface AllocationRuleExpression {
   /**
-   * 费用所占百分比，两位小数
+   * RuleKey：分账维度
+枚举值：
+ownerUin - 使用者UIN,
+operateUin - 操作者UIN,
+businessCode - 产品一层编码,
+productCode - 产品二层编码,
+itemCode - 产品四层编码,
+projectId - 项目ID,
+regionId - 地域ID,
+resourceId - 资源ID,
+tag - 标签键值对,
+payMode - 计费模式,
+instanceType - 实例类型,
+actionType - 交易类型
    */
-  RealTotalCostRatio: string
+  RuleKey?: string
   /**
-   * 优惠后总价
+   * 分账维度规则
+枚举值：
+in - 是
+not in - 不是
    */
-  RealTotalCost: string
+  Operator?: string
   /**
-   * 现金账户支出：通过现金账户支付的金额
+   * 分账维度值，例如当RuleKey为businessCode时，["p_cbs","p_sqlserver"]表示产品一层是"p_cbs","p_sqlserver"的费用
    */
-  CashPayAmount: string
+  RuleValue?: Array<string>
   /**
-   * 赠送账户支出：使用赠送金支付的金额
+   * 分账逻辑连接词，枚举值如下：
+and - 且
+or - 或
    */
-  IncentivePayAmount: string
+  Connectors?: string
   /**
-   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   * 嵌套规则
    */
-  VoucherPayAmount: string
-  /**
-   * 分成金账户支出：通过分成金账户支付的金额
-   */
-  TransferPayAmount: string
-  /**
-   * 账单月份，格式2019-08
-   */
-  BillMonth: string
-  /**
-   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
-   */
-  TotalCost: string
+  Children?: Array<AllocationRuleExpression>
 }
 
 /**
@@ -6744,6 +7335,16 @@ export interface BillProduct {
    * 子产品名称：用户采购的具体产品细分类型
    */
   ProductCodeName: string
+}
+
+/**
+ * DeleteAllocationUnit返回参数结构体
+ */
+export interface DeleteAllocationUnitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6900,6 +7501,36 @@ export interface DescribeDosageDetail {
 }
 
 /**
+ * DescribeAllocationRuleSummary请求参数结构体
+ */
+export interface DescribeAllocationRuleSummaryRequest {
+  /**
+   * 每次获取数据量，最大值1000
+   */
+  Limit: number
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+  /**
+   * 公摊策略类型，用于筛选。
+枚举值如下： 
+1 - 自定义分摊占比 
+2 - 等比分摊 
+3 - 按占比分摊
+   */
+  Type?: number
+  /**
+   * 公摊规则名称或分账单元名称，用于模糊筛选。
+   */
+  Name?: string
+}
+
+/**
  * 计费模式筛选列表
  */
 export interface BillPayMode {
@@ -6929,6 +7560,16 @@ export interface DescribeAllocationTrendByMonthResponse {
    * 费用统计信息
    */
   Stat?: AllocationStat
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAllocationUnit返回参数结构体
+ */
+export interface ModifyAllocationUnitResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7147,27 +7788,57 @@ export interface AnalyseHeaderTimeDetail {
 }
 
 /**
- * DescribeCostSummaryByRegion返回参数结构体
+ * DescribeGatherRuleDetail返回参数结构体
  */
-export interface DescribeCostSummaryByRegionResponse {
+export interface DescribeGatherRuleDetailResponse {
   /**
-   * 数据是否准备好，0未准备好，1准备好
+   * 归集规则ID
    */
-  Ready?: number
+  Id?: number
   /**
-   * 消耗详情
+   * 归集规则所属UIN
    */
-  Total?: ConsumptionSummaryTotal
+  Uin?: string
   /**
-   * 消耗按地域汇总详情
+   * 归集规则最后更新时间
    */
-  Data?: Array<ConsumptionRegionSummaryDataItem>
+  UpdateTime?: string
   /**
-   * 记录数量，NeedRecordNum为0时返回null
+   * 归集规则详情
    */
-  RecordNum?: number
+  RuleDetail?: AllocationRuleExpression
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 公摊规则概览
+ */
+export interface AllocationRuleOverview {
+  /**
+   * 公摊规则ID
+   */
+  RuleId?: number
+  /**
+   * 公摊规则名称
+   */
+  RuleName?: string
+  /**
+   * 公摊策略类型
+枚举值：
+1 - 自定义分摊占比 
+2 - 等比分摊 
+3 - 按占比分摊
+   */
+  Type?: number
+  /**
+   * 公摊规则最后更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 分账单元概览
+   */
+  AllocationNode?: Array<AllocationUnit>
 }

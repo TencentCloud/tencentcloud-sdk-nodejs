@@ -1808,6 +1808,10 @@ export interface DescribeAttributeLabelRequest {
    * 滚动加载游标的标签ID
    */
   LastLabelBizId?: string
+  /**
+   * 查询范围 all(或者传空):标准词和相似词 standard:标准词 similar:相似词
+   */
+  QueryScope?: string
 }
 
 /**
@@ -2255,6 +2259,14 @@ export interface DescribeDocResponse {
    * 分类ID
    */
   CateBizId?: string
+  /**
+   * 文档的用户自定义ID
+   */
+  CustomerKnowledgeId?: string
+  /**
+   * 文档的属性标记，0: 不做用户外部权限校验
+   */
+  AttributeFlags?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3062,7 +3074,12 @@ export interface SaveDocRequest {
    */
   FileName: string
   /**
-   * 文件类型(md|txt|docx|pdf|xlsx)
+   * 文档支持下面类型
+pdf、doc、docx、ppt、mhtml、pptx、wps、ppsx，单个文件不超过200MB；
+xlsx、xls、md、txt、csv、html，单个文件不超过20MB；
+
+图片支持下面类型：
+jpg、png、jpeg、tiff、bmp、gif，单个文件不超过50MB
    */
   FileType: string
   /**
@@ -3126,6 +3143,14 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    * 分类ID
    */
   CateBizId?: string
+  /**
+   * 文档的用户自定义ID
+   */
+  CustomerKnowledgeId?: string
+  /**
+   * 文档的属性标记，0: 不做用户外部权限校验
+   */
+  AttributeFlags?: Array<number | bigint>
 }
 
 /**
@@ -3925,6 +3950,10 @@ export interface AttrLabelDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
+  /**
+   * 标签值总数
+   */
+  LabelTotalCount?: string
 }
 
 /**
@@ -4469,6 +4498,14 @@ export interface ListDocItem {
    * 文档所属分类ID
    */
   CateBizId?: string
+  /**
+   * 文档的用户自定义ID
+   */
+  CustomerKnowledgeId?: string
+  /**
+   * 文档的属性标记，0: 不做用户外部权限校验
+   */
+  AttributeFlags?: Array<number | bigint>
 }
 
 /**
@@ -5510,6 +5547,10 @@ export interface ModelInfo {
    * 角色提示词输入长度限制
    */
   RoleLenLimit?: number
+  /**
+   * 是否专属并发模型
+   */
+  IsExclusive?: boolean
 }
 
 /**
@@ -6039,6 +6080,14 @@ export interface ModifyDocRequest {
    * 分类ID
    */
   CateBizId?: string
+  /**
+   * 文档的用户自定义ID
+   */
+  CustomerKnowledgeId?: string
+  /**
+   * 文档的属性标记，0: 不做用户外部权限校验
+   */
+  AttributeFlags?: Array<number | bigint>
 }
 
 /**
@@ -6141,6 +6190,10 @@ export interface ListAttributeLabelRequest {
    * 查询内容
    */
   Query?: string
+  /**
+   * 每个属性同步拉取的标签值数量
+   */
+  LabelSize?: number
 }
 
 /**

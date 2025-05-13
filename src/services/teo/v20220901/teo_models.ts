@@ -3532,7 +3532,6 @@ export interface AlgDetectRule {
   AlgConditions?: Array<AclCondition>
   /**
    * Cookie校验和会话行为分析。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlgDetectSession?: AlgDetectSession
   /**
@@ -5394,12 +5393,10 @@ export interface SlowRateConfig {
   Switch: string
   /**
    * 统计的间隔，单位是秒，即在首段包传输结束后，将数据传输轴按照本参数切分，每个分片独立计算慢速攻击。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Interval?: number
   /**
    * 统计时应用的速率阈值，单位是bps，即如果本分片中的传输速率没达到本参数的值，则判定为慢速攻击，应用慢速攻击的处置方式。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Threshold?: number
 }
@@ -6403,7 +6400,6 @@ export interface AclConfig {
   AclUserRules: Array<AclUserRule>
   /**
    * 托管定制规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Customizes?: Array<AclUserRule>
 }
@@ -6440,12 +6436,10 @@ export interface IntelligenceRule {
    * 开关，取值有：
 <li>on：开启；</li>
 <li>off：关闭。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Switch?: string
   /**
    * 规则详情。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IntelligenceRuleItems?: Array<IntelligenceRuleItem>
 }
@@ -9340,12 +9334,10 @@ export interface DropPageConfig {
   Switch: string
   /**
    * Waf(托管规则)模块的拦截页面配置。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WafDropPageDetail?: DropPageDetail
   /**
    * 自定义页面的拦截页面配置。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AclDropPageDetail?: DropPageDetail
 }
@@ -10044,7 +10036,6 @@ export interface SkipCondition {
   MatchFromType?: string
   /**
    * 匹配Key的值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MatchFrom?: Array<string>
   /**
@@ -10055,7 +10046,6 @@ export interface SkipCondition {
   MatchContentType?: string
   /**
    * 匹配Value的值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MatchContent?: Array<string>
 }

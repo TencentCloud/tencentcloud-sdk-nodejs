@@ -592,6 +592,16 @@ export interface DeleteNotebookRequest {
 }
 
 /**
+ * PushTrainingMetrics请求参数结构体
+ */
+export interface PushTrainingMetricsRequest {
+  /**
+   * 指标数据
+   */
+  Data?: Array<MetricData>
+}
+
+/**
  * 过滤器
  */
 export interface Filter {
@@ -951,6 +961,20 @@ CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（�
 }
 
 /**
+ * 滚动更新策略
+ */
+export interface RollingUpdate {
+  /**
+   * 滚动更新的最大不可用
+   */
+  MaxUnavailable?: NumOrPercent
+  /**
+   * 滚动更新的最大新增实例
+   */
+  MaxSurge?: NumOrPercent
+}
+
+/**
  * 外部挂载信息
  */
 export interface VolumeMount {
@@ -1091,15 +1115,15 @@ export interface SpecPrice {
   /**
    * 计费项名称
    */
-  SpecName: string
+  SpecName?: string
   /**
    * 原价，单位：分。最大值42亿，超过则返回0
    */
-  TotalCost: number
+  TotalCost?: number
   /**
    * 优惠后的价格，单位：分
    */
-  RealTotalCost: number
+  RealTotalCost?: number
   /**
    * 计费项数量
    */
@@ -1232,13 +1256,17 @@ export interface StartNotebookRequest {
 }
 
 /**
- * PushTrainingMetrics请求参数结构体
+ * 用于表示百分比或数量
  */
-export interface PushTrainingMetricsRequest {
+export interface NumOrPercent {
   /**
-   * 指标数据
+   * Num,Percent ,分别表示数量和百分比，默认为 Num
    */
-  Data?: Array<MetricData>
+  Type?: string
+  /**
+   * 数值
+   */
+  Value?: number
 }
 
 /**
@@ -1854,6 +1882,10 @@ export interface HTTPGetAction {
    * http 路径
    */
   Path?: string
+  /**
+   * 调用端口
+   */
+  Port?: number
 }
 
 /**
@@ -2327,19 +2359,29 @@ export interface ResourceGroup {
 }
 
 /**
- * 描述腾讯云标签
+ * 单条日志数据结构
  */
-export interface Tag {
+export interface LogIdentity {
   /**
-   * 标签键
+   * 单条日志的ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKey: string
+  Id: string
   /**
-   * 标签值
+   * 单条日志的内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagValue: string
+  Message: string
+  /**
+   * 这条日志对应的Pod名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodName: string
+  /**
+   * 日志的时间戳（RFC3339格式的时间字符串）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp: string
 }
 
 /**
@@ -2977,6 +3019,22 @@ export interface ImageInfo {
 }
 
 /**
+ * 描述腾讯云标签
+ */
+export interface Tag {
+  /**
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue: string
+}
+
+/**
  * 推理服务在集群中的信息
  */
 export interface ServiceInfo {
@@ -3165,6 +3223,10 @@ HYBRID_PAID:
    * 健康探针
    */
   HealthProbe?: HealthProbe
+  /**
+   * 滚动更新配置
+   */
+  RollingUpdate?: RollingUpdate
 }
 
 /**
@@ -3902,6 +3964,16 @@ export interface StatefulSetCondition {
 }
 
 /**
+ * tcp socket 健康探针检查行为
+ */
+export interface TCPSocketAction {
+  /**
+   * 调用端口
+   */
+  Port?: number
+}
+
+/**
  * 描述资源信息
  */
 export interface ResourceInfo {
@@ -4376,6 +4448,18 @@ export interface ProbeAction {
    * http get 行为
    */
   HTTPGet?: HTTPGetAction
+  /**
+   * 执行命令检查 行为
+   */
+  Exec?: ExecAction
+  /**
+   * tcp socket 检查行为
+   */
+  TCPSocket?: TCPSocketAction
+  /**
+   * 探针类型，默认 HTTPGet，可选值：HTTPGet、Exec、TCPSocket
+   */
+  ActionType?: string
 }
 
 /**
@@ -4656,6 +4740,10 @@ UPDATING 更新中
    * 限流鉴权 token 列表
    */
   AuthTokens?: Array<AuthToken>
+  /**
+   * 用于监控的创建来源字段
+   */
+  MonitorSource?: string
 }
 
 /**
@@ -4742,29 +4830,13 @@ export interface CreateTrainingModelResponse {
 }
 
 /**
- * 单条日志数据结构
+ * 主机路径挂载配置
  */
-export interface LogIdentity {
+export interface HostPath {
   /**
-   * 单条日志的ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要挂载的主机路径
    */
-  Id: string
-  /**
-   * 单条日志的内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message: string
-  /**
-   * 这条日志对应的Pod名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PodName: string
-  /**
-   * 日志的时间戳（RFC3339格式的时间字符串）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Timestamp: string
+  Path?: string
 }
 
 /**
@@ -4890,13 +4962,13 @@ export interface DeleteDatasetResponse {
 }
 
 /**
- * 主机路径挂载配置
+ * 执行命令探针检查行为
  */
-export interface HostPath {
+export interface ExecAction {
   /**
-   * 需要挂载的主机路径
+   * 执行命令列表
    */
-  Path?: string
+  Command?: Array<string>
 }
 
 /**

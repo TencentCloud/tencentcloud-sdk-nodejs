@@ -30,6 +30,32 @@ export interface Character {
 }
 
 /**
+ * 用户位置信息
+ */
+export interface Approximate {
+  /**
+   * 表示 ISO 国家代码
+   */
+  Country?: string
+  /**
+   * 表示城市名称
+   */
+  City?: string
+  /**
+   * 表示区域名称
+   */
+  Region?: string
+  /**
+   * 表示IANA时区
+   */
+  Timezone?: string
+  /**
+   * 表示详细地址
+   */
+  Address?: string
+}
+
+/**
  * 翻译接口返回的回复，支持多个
  */
 export interface TranslationChoice {
@@ -69,6 +95,24 @@ export interface Usage {
    * 总 Token 数量。
    */
   TotalTokens?: number
+}
+
+/**
+ * logo参数
+ */
+export interface LogoParam {
+  /**
+   * 水印url
+   */
+  LogoUrl?: string
+  /**
+   * 水印base64，url和base64二选一传入
+   */
+  LogoImage?: string
+  /**
+   * 水印图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
+   */
+  LogoRect?: LogoRect
 }
 
 /**
@@ -1307,24 +1351,20 @@ export interface ChatCompletionsRequest {
    * 是否开启深度阅读，默认是false，在值为true时，会返回深度阅读的结果信息。说明:1.深度阅读需要开启插件增强,即设置EnableEnhancement为true,当设置EnableDeepRead为true时EnableEnhancement默认为true；2.目前暂时只支持单文档单轮的深度阅读；3.深度阅读功能的文件上传可以使用FilesUploads接口，具体参数详见FilesUploads接口文档
    */
   EnableDeepRead?: boolean
+  /**
+   * 知识注入相关的参数信息
+   */
+  WebSearchOptions?: WebSearchOptions
 }
 
 /**
- * logo参数
+ * 外部知识
  */
-export interface LogoParam {
+export interface Knowledge {
   /**
-   * 水印url
+   * 表示具体的知识信息文本
    */
-  LogoUrl?: string
-  /**
-   * 水印base64，url和base64二选一传入
-   */
-  LogoImage?: string
-  /**
-   * 水印图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
-   */
-  LogoRect?: LogoRect
+  Text?: string
 }
 
 /**
@@ -1754,6 +1794,20 @@ export interface History {
 }
 
 /**
+ * 用户位置详细信息
+ */
+export interface UserLocation {
+  /**
+   * 表示位置类型
+   */
+  Type?: string
+  /**
+   * 用户近似位置的详细信息
+   */
+  Approximate?: Approximate
+}
+
+/**
  * FilesList请求参数结构体
  */
 export interface FilesListRequest {
@@ -1819,6 +1873,20 @@ export interface QueryHunyuanTo3DJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 知识注入相关的参数信息
+ */
+export interface WebSearchOptions {
+  /**
+   * 表示用户注入的知识信息
+   */
+  Knowledge?: Array<Knowledge>
+  /**
+   * 用户位置详细信息
+   */
+  UserLocation?: UserLocation
 }
 
 /**

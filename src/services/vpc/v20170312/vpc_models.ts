@@ -3417,7 +3417,7 @@ export interface ModifyIPv6AddressesBandwidthRequest {
    */
   IPv6AddressIds: Array<string>
   /**
-   * 弹性公网IPv6地址网络带宽，可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。
+   * 弹性公网IPv6地址网络带宽，可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://write.woa.com/document/123652708247588864#IPv6)。
    */
   InternetMaxBandwidthOut: number
 }
@@ -4078,7 +4078,7 @@ BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
  */
 export interface ModifyIp6AddressesBandwidthRequest {
   /**
-   * 修改的目标带宽，单位Mbps。可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。
+   * 修改的目标带宽，单位Mbps。可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://write.woa.com/document/123652708247588864#IPv6)。
    */
   InternetMaxBandwidthOut: number
   /**
