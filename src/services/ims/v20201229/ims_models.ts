@@ -221,27 +221,27 @@ export interface ObjectDetail {
   /**
    * 该参数用于返回识别对象的ID以方便识别和区分。
    */
-  Id: number
+  Id?: number
   /**
    * 该参数用于返回命中的实体标签。
    */
-  Name: string
+  Name?: string
   /**
    * 该参数用于返回对应实体标签所对应的值或内容。如：当标签为*二维码(QrCode)*时，该字段为识别出的二维码对应的URL地址。
    */
-  Value: string
+  Value?: string
   /**
    * 该参数用于返回对应实体标签命中的分值，取值为**0-100**，如：*QrCode 99* 则代表相应识别内容命中二维码场景标签的概率非常高。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回实体检测框的坐标位置（左上角xy坐标、长宽、旋转角度）以方便快速定位实体的相关信息。
    */
-  Location: Location
+  Location?: Location
   /**
    * 该参数用于返回命中的实体二级标签。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 该参数用于返回命中的人脸id
 注意：此字段可能返回 null，表示取不到有效值。
@@ -366,23 +366,23 @@ export interface Location {
   /**
    * 该参数用于返回检测框**左上角位置的横坐标**（x）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。
    */
-  X: number
+  X?: number
   /**
    * 该参数用于返回检测框**左上角位置的纵坐标**（y）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。
    */
-  Y: number
+  Y?: number
   /**
    * 该参数用于返回**检测框的宽度**（由左上角出发在x轴向右延伸的长度），结合剩余参数可唯一确定检测框的大小和位置。
    */
-  Width: number
+  Width?: number
   /**
    * 该参数用于返回**检测框的高度**（由左上角出发在y轴向下延伸的长度），结合剩余参数可唯一确定检测框的大小和位置。
    */
-  Height: number
+  Height?: number
   /**
    * 该参数用于返回**检测框的旋转角度**，该参数结合X和Y两个坐标参数可唯一确定检测框的具体位置；取值：**0-360**（**角度制**），方向为**逆时针旋转**。
    */
-  Rotate: number
+  Rotate?: number
 }
 
 /**
@@ -424,17 +424,17 @@ export interface LabelDetailItem {
    * 该字段用于返回识别对象的ID以方便识别和区分。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: number
+  Id?: number
   /**
    * 该字段用于返回识命中的子标签名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 该字段用于返回对应子标签命中的分值，取值为**0-100**，如：*Porn-SexBehavior 99* 则代表相应识别内容命中色情-性行为标签的分值为99。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
 }
 
 /**

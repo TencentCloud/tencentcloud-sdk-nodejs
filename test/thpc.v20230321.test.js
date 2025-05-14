@@ -238,6 +238,16 @@ it("thpc.v20230321.AddClusterStorageOption", async function () {
     }
 })
 
+it("thpc.v20230321.ModifyWorkspacesRenewFlag", async function () {
+    try {
+       const data = await client.ModifyWorkspacesRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.DeleteQueue", async function () {
     try {
        const data = await client.DeleteQueue({})

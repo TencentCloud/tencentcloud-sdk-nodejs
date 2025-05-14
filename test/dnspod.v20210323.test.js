@@ -118,6 +118,16 @@ it("dnspod.v20210323.CreateLineGroup", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainAndRecordList", async function () {
+    try {
+       const data = await client.DescribeDomainAndRecordList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeDomain", async function () {
     try {
        const data = await client.DescribeDomain({})

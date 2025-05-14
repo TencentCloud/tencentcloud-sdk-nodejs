@@ -37,6 +37,7 @@ import {
   Tag,
   GooseFSOption,
   StorageOptionOverview,
+  ModifyWorkspacesRenewFlagRequest,
   AddNodesResponse,
   DescribeAutoScalingConfigurationResponse,
   DescribeClustersRequest,
@@ -46,6 +47,7 @@ import {
   DescribeWorkspacesRequest,
   AddQueueRequest,
   QueueConfigOverview,
+  ModifyWorkspacesRenewFlagResponse,
   Placement,
   DescribeNodesResponse,
   GooseFSOptionOverview,
@@ -342,6 +344,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddClusterStorageOptionResponse) => void
   ): Promise<AddClusterStorageOptionResponse> {
     return this.request("AddClusterStorageOption", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyWorkspacesAttribute) 用于修改工作空间的属性（目前只支持修改工作空间的名称）。
+   */
+  async ModifyWorkspacesRenewFlag(
+    req: ModifyWorkspacesRenewFlagRequest,
+    cb?: (error: string, rep: ModifyWorkspacesRenewFlagResponse) => void
+  ): Promise<ModifyWorkspacesRenewFlagResponse> {
+    return this.request("ModifyWorkspacesRenewFlag", req, cb)
   }
 
   /**

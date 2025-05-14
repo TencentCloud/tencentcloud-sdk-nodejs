@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SchemaSpaceTimeSeries,
   SlowLogUser,
+  DescribeSlowLogTimeSeriesStatsRequest,
   DescribeUserAutonomyProfileRequest,
   RedisKeySpaceData,
   DescribeRedisTopKeyPrefixListRequest,
@@ -58,6 +59,7 @@ import {
   CreateKillTaskResponse,
   DescribeAuditInstanceListResponse,
   DescribeRedisSlowLogTopSqlsResponse,
+  RedisPreKeySpaceData,
   DiagHistoryEventItem,
   CreateUserAutonomyProfileResponse,
   DescribeProxySessionKillTasksRequest,
@@ -94,7 +96,7 @@ import {
   ProcessStatistic,
   CreateMailProfileResponse,
   UpdateMonitorSwitchResponse,
-  DescribeSlowLogTimeSeriesStatsRequest,
+  DescribeDBAutonomyActionRequest,
   MetricThreshold,
   CancelKillTaskRequest,
   InstanceID,
@@ -147,6 +149,7 @@ import {
   HealthStatus,
   DescribeAllUserContactResponse,
   DescribeRedisCommandCostStatisticsResponse,
+  CancelDBAutonomyEventResponse,
   MonitorMetric,
   ProfileInfo,
   SqlCostDistribution,
@@ -220,9 +223,10 @@ import {
   DescribeDBSpaceStatusResponse,
   SQLFilter,
   GroupItem,
-  RedisPreKeySpaceData,
+  CancelDBAutonomyEventRequest,
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeUserSqlAdviceRequest,
+  DescribeDBAutonomyActionResponse,
   DescribeDBDiagReportTasksRequest,
   MonitorMetricSeriesData,
   DescribeDBPerfTimeSeriesResponse,
@@ -396,13 +400,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例的配置信息。
+   * 查询redis实例top key前缀列表。
    */
-  async ModifyDiagDBInstanceConf(
-    req: ModifyDiagDBInstanceConfRequest,
-    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
-  ): Promise<ModifyDiagDBInstanceConfResponse> {
-    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  async DescribeRedisTopKeyPrefixList(
+    req: DescribeRedisTopKeyPrefixListRequest,
+    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
+  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
+    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
   }
 
   /**
@@ -636,6 +640,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 延迟分析-查询命令延迟分布
+   */
+  async DescribeRedisCommandCostStatistics(
+    req: DescribeRedisCommandCostStatisticsRequest,
+    cb?: (error: string, rep: DescribeRedisCommandCostStatisticsResponse) => void
+  ): Promise<DescribeRedisCommandCostStatisticsResponse> {
+    return this.request("DescribeRedisCommandCostStatistics", req, cb)
+  }
+
+  /**
    * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
    */
   async CreateAuditLogFile(
@@ -686,13 +700,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询redis实例top key前缀列表。
+   * 自治中心-终止自治事件
    */
-  async DescribeRedisTopKeyPrefixList(
-    req: DescribeRedisTopKeyPrefixListRequest,
-    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
-  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
-    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
+  async CancelDBAutonomyEvent(
+    req: CancelDBAutonomyEventRequest,
+    cb?: (error: string, rep: CancelDBAutonomyEventResponse) => void
+  ): Promise<CancelDBAutonomyEventResponse> {
+    return this.request("CancelDBAutonomyEvent", req, cb)
   }
 
   /**
@@ -866,6 +880,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改实例的配置信息。
+   */
+  async ModifyDiagDBInstanceConf(
+    req: ModifyDiagDBInstanceConfRequest,
+    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
+  ): Promise<ModifyDiagDBInstanceConfResponse> {
+    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
    * 自治中心-终止自治任务（单次）
    */
   async CancelDBAutonomyAction(
@@ -986,13 +1010,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 延迟分析-查询命令延迟分布
+   * 自治中心-查询自治事件任务详情。
    */
-  async DescribeRedisCommandCostStatistics(
-    req: DescribeRedisCommandCostStatisticsRequest,
-    cb?: (error: string, rep: DescribeRedisCommandCostStatisticsResponse) => void
-  ): Promise<DescribeRedisCommandCostStatisticsResponse> {
-    return this.request("DescribeRedisCommandCostStatistics", req, cb)
+  async DescribeDBAutonomyAction(
+    req: DescribeDBAutonomyActionRequest,
+    cb?: (error: string, rep: DescribeDBAutonomyActionResponse) => void
+  ): Promise<DescribeDBAutonomyActionResponse> {
+    return this.request("DescribeDBAutonomyAction", req, cb)
   }
 
   /**

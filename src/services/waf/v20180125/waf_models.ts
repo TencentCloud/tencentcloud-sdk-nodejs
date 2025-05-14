@@ -7795,6 +7795,10 @@ export interface InstanceInfo {
    * 重保增强包
    */
   MajorEventsProPkg?: MajorEventsProPkg
+  /**
+   * 1是基础2025版本；0不是
+   */
+  BasicFlag?: number
 }
 
 /**

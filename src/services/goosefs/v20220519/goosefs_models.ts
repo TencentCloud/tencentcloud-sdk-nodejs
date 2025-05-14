@@ -508,15 +508,15 @@ export interface ClientClusterManagerNodeInfo {
   /**
    * 客户端节点IP
    */
-  NodeIp: string
+  NodeIp?: string
   /**
    * 节点Instance Id
    */
-  NodeInstanceId: string
+  NodeInstanceId?: string
   /**
    * 初始密码
    */
-  InitialPassword: string
+  InitialPassword?: string
 }
 
 /**

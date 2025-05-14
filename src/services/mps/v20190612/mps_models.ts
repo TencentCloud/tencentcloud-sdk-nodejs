@@ -3242,6 +3242,11 @@ export interface ImageTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnhanceConfig?: ImageEnhanceConfig
+  /**
+   * 图片擦除配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EraseConfig?: ImageEraseConfig
 }
 
 /**
@@ -4676,23 +4681,14 @@ export interface ParseNotificationRequest {
 }
 
 /**
- * 直播录制任务输入参数类型
+ * 图片擦除参数
  */
-export interface LiveRecordTaskInput {
+export interface ImageEraseConfig {
   /**
-   * 直播录制模板 ID。
-   */
-  Definition: number
-  /**
-   * 直播录制后文件的目标存储，不填则继承上层的 OutputStorage 值。
+   * 图标擦除配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 直播录制后文件的输出路径。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputObjectPath?: string
+  ImageEraseLogo?: ImageEraseLogoConfig
 }
 
 /**
@@ -7295,6 +7291,32 @@ export interface ComposeVideoItem {
 }
 
 /**
+ * 直播识别 Ocr 全文识别
+ */
+export interface LiveStreamOcrFullTextRecognitionResult {
+  /**
+   * 语音文本。
+   */
+  Text?: string
+  /**
+   * 识别片段起始的 PTS 时间，单位：秒。
+   */
+  StartPtsTime?: number
+  /**
+   * 识别片段终止的 PTS 时间，单位：秒。
+   */
+  EndPtsTime?: number
+  /**
+   * 识别片段置信度。取值：0~100。
+   */
+  Confidence?: number
+  /**
+   * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+   */
+  AreaCoordSet?: Array<number | bigint>
+}
+
+/**
  * 对视频按指定时间点截图任务结果类型
  */
 export interface MediaProcessTaskSnapshotByTimeOffsetResult {
@@ -9194,6 +9216,26 @@ export interface MosaicInput {
 <li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
    */
   EndTimeOffset?: number
+}
+
+/**
+ * 直播录制任务输入参数类型
+ */
+export interface LiveRecordTaskInput {
+  /**
+   * 直播录制模板 ID。
+   */
+  Definition: number
+  /**
+   * 直播录制后文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 直播录制后文件的输出路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputObjectPath?: string
 }
 
 /**
@@ -11382,7 +11424,7 @@ export interface SharpEnhanceConfig {
  */
 export interface ImageEncodeConfig {
   /**
-   * 图片格式，取值范围：JPG、BMP、GIF、PNG、WebP，缺省为原图格式。
+   * 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Format?: string
@@ -13008,6 +13050,11 @@ export interface ImageEnhanceConfig {
    */
   SuperResolution?: SuperResolutionConfig
   /**
+   * 综合增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageQualityEnhance?: ImageQualityEnhanceConfig
+  /**
    * 色彩增强配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -13188,29 +13235,23 @@ export interface ProhibitedOcrReviewTemplateInfo {
 }
 
 /**
- * 直播识别 Ocr 全文识别
+ * 图标擦除配置
  */
-export interface LiveStreamOcrFullTextRecognitionResult {
+export interface ImageEraseLogoConfig {
   /**
-   * 语音文本。
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Text?: string
+  Switch?: string
   /**
-   * 识别片段起始的 PTS 时间，单位：秒。
+   * 需要擦除的多个框选区域，注意：参数数组长度最大为2。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartPtsTime?: number
-  /**
-   * 识别片段终止的 PTS 时间，单位：秒。
-   */
-  EndPtsTime?: number
-  /**
-   * 识别片段置信度。取值：0~100。
-   */
-  Confidence?: number
-  /**
-   * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
-   */
-  AreaCoordSet?: Array<number | bigint>
+  ImageAreaBoxes?: Array<ImageAreaBoxInfo>
 }
 
 /**
@@ -14428,6 +14469,26 @@ export interface AsrHotWordsConfigure {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LibraryId?: string
+}
+
+/**
+ * 图片框选区域信息
+ */
+export interface ImageAreaBoxInfo {
+  /**
+   * 图片框选区域类型，可选值：
+<li>logo：图标；</li>
+<li>text：文字。</li>
+默认值：logo。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 图片框选区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+示例值：[101, 85, 111, 95]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**

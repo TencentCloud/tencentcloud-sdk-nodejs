@@ -502,7 +502,7 @@ export interface CreateClusterRequest {
    */
   ComputeNodeCount?: number
   /**
-   * 调度器类型。默认取值：SLURM。<br><li>SGE：SGE调度器。</li><br><li>SLURM：SLURM调度器。</li>
+   * 调度器类型。默认取值：SLURM。<br><li>SLURM：SLURM调度器。</li>
    */
   SchedulerType?: string
   /**
@@ -974,7 +974,7 @@ export interface AddNodesRequest {
    */
   ClientToken?: string
   /**
-   * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li><li>SGE默认队列为：all.q。</li>
+   * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li>
    */
   QueueName?: string
   /**

@@ -158,6 +158,16 @@ it("wedata.v20210820.DescribeTaskByCycleReport", async function () {
     }
 })
 
+it("wedata.v20210820.DownloadLogByLine", async function () {
+    try {
+       const data = await client.DownloadLogByLine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeDataCheckStat", async function () {
     try {
        const data = await client.DescribeDataCheckStat({})
@@ -1051,6 +1061,16 @@ it("wedata.v20210820.DescribeWorkflowInfoById", async function () {
 it("wedata.v20210820.DescribeTaskByStatusReport", async function () {
     try {
        const data = await client.DescribeTaskByStatusReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTaskTemplates", async function () {
+    try {
+       const data = await client.DescribeTaskTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

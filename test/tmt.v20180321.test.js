@@ -38,9 +38,9 @@ it("tmt.v20180321.TextTranslateBatch", async function () {
     }
 })
 
-it("tmt.v20180321.ImageTranslate", async function () {
+it("tmt.v20180321.ImageTranslateLLM", async function () {
     try {
-       const data = await client.ImageTranslate({})
+       const data = await client.ImageTranslateLLM({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +51,16 @@ it("tmt.v20180321.ImageTranslate", async function () {
 it("tmt.v20180321.GetFileTranslate", async function () {
     try {
        const data = await client.GetFileTranslate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tmt.v20180321.ImageTranslate", async function () {
+    try {
+       const data = await client.ImageTranslate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -39,6 +39,7 @@ import {
   DomainAnalyticsInfo,
   ModifyRecordGroupRequest,
   DescribeVASStatisticResponse,
+  RollbackSnapshotResponse,
   DescribeBatchTaskRequest,
   DomainAnalyticsDetail,
   CreateSnapshotResponse,
@@ -54,8 +55,9 @@ import {
   SnapshotPageInfo,
   DomainInfo,
   CreateDomainBatchRequest,
+  DescribeDomainShareInfoRequest,
   ModifyRecordGroupResponse,
-  DescribeDomainGroupListRequest,
+  CreateSubDomainsAnalyticsFileResponse,
   DomainListItem,
   DescribeFileInfoByJobIdRequest,
   DeleteDomainBatchRequest,
@@ -76,7 +78,7 @@ import {
   DescribeSnapshotConfigResponse,
   RecordCountInfo,
   DeleteShareDomainResponse,
-  PackageDetailItem,
+  DescribeDomainAndRecordListResponse,
   ModifyDomainRemarkResponse,
   BatchRecordInfo,
   LineGroupInfo,
@@ -153,6 +155,7 @@ import {
   SubdomainAnalyticsInfo,
   CustomLineInfo,
   ModifyRecordBatchDetail,
+  DescribeSnapshotRollbackResultRequest,
   DescribeDomainShareUserListRequest,
   DeleteDomainBatchDetail,
   CreateDomainRequest,
@@ -163,7 +166,7 @@ import {
   CreateDomainsAnalyticsFileRequest,
   ModifyDomainRemarkRequest,
   ModifyDomainCustomLineResponse,
-  DescribeDomainShareInfoRequest,
+  BatchSearchDomainInfo,
   KeyValue,
   CreateLineGroupCopyResponse,
   CreateDomainAliasResponse,
@@ -183,7 +186,8 @@ import {
   ModifyRecordStatusResponse,
   FileInfo,
   CreateRecordGroupRequest,
-  RollbackSnapshotResponse,
+  PackageDetailItem,
+  DescribeDomainAndRecordListRequest,
   DescribeRecordGroupListResponse,
   LineGroupItem,
   DescribeSubdomainValidateStatusRequest,
@@ -236,14 +240,14 @@ import {
   TagItem,
   DescribeDomainWhoisResponse,
   CreateRecordGroupResponse,
-  CreateSubDomainsAnalyticsFileResponse,
+  DescribeDomainGroupListRequest,
   DescribeBatchTaskResponse,
   CheckRecordSnapshotRollbackRequest,
   CreateDomainCustomLineResponse,
   DescribeDomainAnalyticsRequest,
   ModifyDynamicDNSResponse,
   ModifyRecordRequest,
-  DescribeSnapshotRollbackResultRequest,
+  BatchSearchRecordInfo,
   DescribeDomainLogListResponse,
   CreateDomainsAnalyticsFileResponse,
 } from "./dnspod_models"
@@ -356,6 +360,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLineGroupResponse) => void
   ): Promise<CreateLineGroupResponse> {
     return this.request("CreateLineGroup", req, cb)
+  }
+
+  /**
+   * 批量操作中搜索域名
+   */
+  async DescribeDomainAndRecordList(
+    req: DescribeDomainAndRecordListRequest,
+    cb?: (error: string, rep: DescribeDomainAndRecordListResponse) => void
+  ): Promise<DescribeDomainAndRecordListResponse> {
+    return this.request("DescribeDomainAndRecordList", req, cb)
   }
 
   /**

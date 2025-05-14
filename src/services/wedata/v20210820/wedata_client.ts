@@ -123,7 +123,7 @@ import {
   DescribeSchedulerTaskTypeCntRequest,
   MakePlanTaskOpsDto,
   ProjectUserRole,
-  RuleGroupExecStrategy,
+  DownloadLogByLineRequest,
   ModifyWorkflowScheduleRequest,
   CreateDsFolderRequest,
   RegisterEventRequest,
@@ -136,7 +136,7 @@ import {
   RuleExecLog,
   AiOpsEventListenerDTO,
   DescribeRuleGroupsByPageRequest,
-  FolderDsDto,
+  DescribeTaskTemplatesResponse,
   BatchDeleteIntegrationTasksResponse,
   DescribeTaskTableMetricOverviewResponse,
   BaseRole,
@@ -184,7 +184,7 @@ import {
   UpdateProjectUserRoleRequest,
   LineageParamRecord,
   BatchResult,
-  InstanceLogVO,
+  InstanceLogByLine,
   StartTaskInfo,
   DescribeIntegrationStatisticsInstanceTrendResponse,
   DescribeInstanceLogListRequest,
@@ -204,6 +204,7 @@ import {
   DescribeOrganizationalFunctionsRequest,
   DescribeRuleTemplateResponse,
   CreateDataModelResponse,
+  PageTaskTemplateInfo,
   DescribeDependTaskListsRequest,
   DatabaseMeta,
   DescribeAllByFolderNewRequest,
@@ -261,11 +262,12 @@ import {
   InstanceCondition,
   ReportTaskDetail,
   FreezeOpsTasksResponse,
-  IntegrationNodeMapping,
+  DescribeTaskTemplatesRequest,
   ColumnAggregationLineage,
   ModifyRuleGroupSubscriptionResponse,
   CreateWorkflowDsResponse,
   CreateHiveTableByDDLResponse,
+  IntegrationNodeMapping,
   DescribeTaskByCycleResponse,
   DescribeExecStrategyResponse,
   DescribeSuccessorOpsTaskInfosResponse,
@@ -299,6 +301,7 @@ import {
   DryRunDIOfflineTaskRequest,
   CreateOfflineTaskRequest,
   DescribeIntegrationStatisticsRecordsTrendResponse,
+  JobLogErrorTip,
   EventOpsDto,
   DescribeFolderWorkflowListData,
   ScreenTaskInfo,
@@ -306,6 +309,7 @@ import {
   FilterOptional,
   TaskInstanceCountDto,
   DescribePendingSubmitTaskListResponse,
+  DownloadLogByLineResponse,
   BatchForceSuccessIntegrationTaskInstancesResponse,
   InstanceLifeCycleOpsDto,
   AlarmReceiverInfo,
@@ -407,7 +411,7 @@ import {
   RunForceSucScheduleInstancesRequest,
   DescribeQualityScoreResponse,
   CreateTaskNewRequest,
-  DescribeRulesByPageResponse,
+  CodeTemplateDetail,
   DescribeDsParentFolderTreeResponse,
   TopTableStatItem,
   DescribeEventConsumeTasksRequest,
@@ -535,6 +539,7 @@ import {
   RunRerunScheduleInstancesResponse,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
+  InstanceLogVO,
   ModifyTaskInfoResponse,
   DataCheckStat,
   CreateRuleRequest,
@@ -565,6 +570,7 @@ import {
   DescribeProjectUsersRequest,
   LineageTask,
   CommonIdOpsDto,
+  FolderDsDto,
   BatchStopWorkflowsByIdsResponse,
   RuleGroupSchedulerInfo,
   DatasourceBaseInfo,
@@ -704,6 +710,7 @@ import {
   DescribeIntegrationVersionNodesInfoResponse,
   DescribeRulesRequest,
   AiopsSimpleTaskDto,
+  RuleGroupExecStrategy,
   ResumeIntegrationTaskResponse,
   DescribeRuleResponse,
   DescribeTaskScriptRequest,
@@ -716,6 +723,7 @@ import {
   DescribeTableLineageInfoResponse,
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
+  DescribeRulesByPageResponse,
   Partition,
   AttributeItemDsVO,
   RuleDimCnt,
@@ -1001,6 +1009,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeTaskByCycleReportResponse) => void
   ): Promise<DescribeTaskByCycleReportResponse> {
     return this.request("DescribeTaskByCycleReport", req, cb)
+  }
+
+  /**
+   * 按行下载日志信息
+   */
+  async DownloadLogByLine(
+    req: DownloadLogByLineRequest,
+    cb?: (error: string, rep: DownloadLogByLineResponse) => void
+  ): Promise<DownloadLogByLineResponse> {
+    return this.request("DownloadLogByLine", req, cb)
   }
 
   /**
@@ -1903,6 +1921,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeTaskByStatusReportResponse) => void
   ): Promise<DescribeTaskByStatusReportResponse> {
     return this.request("DescribeTaskByStatusReport", req, cb)
+  }
+
+  /**
+   * 查询项目下所有任务列表,包括虚拟任务
+   */
+  async DescribeTaskTemplates(
+    req: DescribeTaskTemplatesRequest,
+    cb?: (error: string, rep: DescribeTaskTemplatesResponse) => void
+  ): Promise<DescribeTaskTemplatesResponse> {
+    return this.request("DescribeTaskTemplates", req, cb)
   }
 
   /**

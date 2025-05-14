@@ -18,24 +18,28 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TextTranslateResponse,
-  ImageTranslateRequest,
-  GetFileTranslateData,
-  SpeechTranslateResponse,
-  ImageRecord,
   ImageTranslateResponse,
+  SpeechTranslateResponse,
+  Task,
+  ItemValue,
+  GetFileTranslateRequest,
+  FileTranslateRequest,
+  ImageTranslateLLMRequest,
+  ImageRecord,
   LanguageDetectRequest,
   TextTranslateBatchResponse,
-  TextTranslateBatchRequest,
-  Task,
+  TransDetail,
   LanguageDetectResponse,
-  GetFileTranslateResponse,
   SpeechTranslateRequest,
-  FileTranslateResponse,
-  FileTranslateRequest,
   TextTranslateRequest,
-  GetFileTranslateRequest,
-  ItemValue,
+  TextTranslateBatchRequest,
+  GetFileTranslateResponse,
+  FileTranslateResponse,
+  GetFileTranslateData,
+  BoundingBox,
+  TextTranslateResponse,
+  ImageTranslateRequest,
+  ImageTranslateLLMResponse,
 } from "./tmt_models"
 
 /**
@@ -69,14 +73,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 提供13种语言的图片翻译服务，可自动识别图片中的文本内容并翻译成目标语言，识别后的文本按行翻译，后续会提供可按段落翻译的版本。<br />
+     * 提供18种语言的图片翻译服务，可自动识别图片中的文本内容并翻译成目标语言，识别后的文本按行翻译，后续会提供可按段落翻译的版本。
+
+- 输入图片格式：png、jpg、jpeg等常用图片格式，不支持gif动图。
+- 输出图片格式：jpg。
+
 提示：对于一般开发者，我们建议优先使用SDK接入简化开发。SDK使用介绍请直接查看 5. 开发者资源 部分。
      */
-  async ImageTranslate(
-    req: ImageTranslateRequest,
-    cb?: (error: string, rep: ImageTranslateResponse) => void
-  ): Promise<ImageTranslateResponse> {
-    return this.request("ImageTranslate", req, cb)
+  async ImageTranslateLLM(
+    req: ImageTranslateLLMRequest,
+    cb?: (error: string, rep: ImageTranslateLLMResponse) => void
+  ): Promise<ImageTranslateLLMResponse> {
+    return this.request("ImageTranslateLLM", req, cb)
   }
 
   /**
@@ -89,6 +97,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFileTranslateResponse) => void
   ): Promise<GetFileTranslateResponse> {
     return this.request("GetFileTranslate", req, cb)
+  }
+
+  /**
+     * 提供13种语言的图片翻译服务，可自动识别图片中的文本内容并翻译成目标语言，识别后的文本按行翻译，后续会提供可按段落翻译的版本。<br />
+提示：对于一般开发者，我们建议优先使用SDK接入简化开发。SDK使用介绍请直接查看 5. 开发者资源 部分。
+     */
+  async ImageTranslate(
+    req: ImageTranslateRequest,
+    cb?: (error: string, rep: ImageTranslateResponse) => void
+  ): Promise<ImageTranslateResponse> {
+    return this.request("ImageTranslate", req, cb)
   }
 
   /**

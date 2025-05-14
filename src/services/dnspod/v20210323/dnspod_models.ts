@@ -471,6 +471,20 @@ export interface DescribeVASStatisticResponse {
 }
 
 /**
+ * RollbackSnapshot返回参数结构体
+ */
+export interface RollbackSnapshotResponse {
+  /**
+   * 回滚任务 ID，用来查询回滚状态
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBatchTask请求参数结构体
  */
 export interface DescribeBatchTaskRequest {
@@ -826,6 +840,20 @@ export interface CreateDomainBatchRequest {
 }
 
 /**
+ * DescribeDomainShareInfo请求参数结构体
+ */
+export interface DescribeDomainShareInfoRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
+}
+
+/**
  * ModifyRecordGroup返回参数结构体
  */
 export interface ModifyRecordGroupResponse {
@@ -840,9 +868,18 @@ export interface ModifyRecordGroupResponse {
 }
 
 /**
- * DescribeDomainGroupList请求参数结构体
+ * CreateSubDomainsAnalyticsFile返回参数结构体
  */
-export type DescribeDomainGroupListRequest = null
+export interface CreateSubDomainsAnalyticsFileResponse {
+  /**
+   * 当前批量任务 id。
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 域名列表元素
@@ -1311,53 +1348,17 @@ export interface DeleteShareDomainResponse {
 }
 
 /**
- * 套餐配置明细
+ * DescribeDomainAndRecordList返回参数结构体
  */
-export interface PackageDetailItem {
+export interface DescribeDomainAndRecordListResponse {
   /**
-   * 套餐原价
+   * 域名列表
    */
-  RealPrice: number
+  DetailList?: Array<BatchSearchDomainInfo>
   /**
-   * 可更换域名次数
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ChangedTimes: number
-  /**
-   * 允许设置的最小 TTL 值
-   */
-  MinTtl: number
-  /**
-   * 负载均衡数量
-   */
-  RecordRoll: number
-  /**
-   * 子域名级数
-   */
-  SubDomainLevel: number
-  /**
-   * 泛解析级数
-   */
-  MaxWildcard: number
-  /**
-   * DNS 服务集群个数
-   */
-  DnsServerRegion: string
-  /**
-   * 套餐名称
-   */
-  DomainGradeCn: string
-  /**
-   * 套餐代号
-   */
-  GradeLevel: number
-  /**
-   * 套餐对应的 NS
-   */
-  Ns: Array<string>
-  /**
-   * 套餐代码
-   */
-  DomainGrade: string
+  RequestId?: string
 }
 
 /**
@@ -3175,6 +3176,24 @@ export interface ModifyRecordBatchDetail {
 }
 
 /**
+ * DescribeSnapshotRollbackResult请求参数结构体
+ */
+export interface DescribeSnapshotRollbackResultRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 快照回滚任务 ID
+   */
+  TaskId: number
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeDomainShareUserList请求参数结构体
  */
 export interface DescribeDomainShareUserListRequest {
@@ -3362,17 +3381,25 @@ export interface ModifyDomainCustomLineResponse {
 }
 
 /**
- * DescribeDomainShareInfo请求参数结构体
+ * 批量操作筛选域名信息
  */
-export interface DescribeDomainShareInfoRequest {
+export interface BatchSearchDomainInfo {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID
    */
   DomainId?: number
+  /**
+   * 域名套餐等级
+   */
+  DomainGrade?: string
+  /**
+   * 记录信息列表
+   */
+  RecordList?: Array<BatchSearchRecordInfo>
 }
 
 /**
@@ -3850,17 +3877,102 @@ export interface CreateRecordGroupRequest {
 }
 
 /**
- * RollbackSnapshot返回参数结构体
+ * 套餐配置明细
  */
-export interface RollbackSnapshotResponse {
+export interface PackageDetailItem {
   /**
-   * 回滚任务 ID，用来查询回滚状态
+   * 套餐原价
    */
-  TaskId?: number
+  RealPrice: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 可更换域名次数
    */
-  RequestId?: string
+  ChangedTimes: number
+  /**
+   * 允许设置的最小 TTL 值
+   */
+  MinTtl: number
+  /**
+   * 负载均衡数量
+   */
+  RecordRoll: number
+  /**
+   * 子域名级数
+   */
+  SubDomainLevel: number
+  /**
+   * 泛解析级数
+   */
+  MaxWildcard: number
+  /**
+   * DNS 服务集群个数
+   */
+  DnsServerRegion: string
+  /**
+   * 套餐名称
+   */
+  DomainGradeCn: string
+  /**
+   * 套餐代号
+   */
+  GradeLevel: number
+  /**
+   * 套餐对应的 NS
+   */
+  Ns: Array<string>
+  /**
+   * 套餐代码
+   */
+  DomainGrade: string
+}
+
+/**
+ * DescribeDomainAndRecordList请求参数结构体
+ */
+export interface DescribeDomainAndRecordListRequest {
+  /**
+   * 搜索所有域名。AllDomain、GroupIdList、DomainList、DomainIdList 参数传任一个即可。优先级为：AllDomain > GroupIdList  > DomainList > DomainIdList。
+   */
+  AllDomain?: string
+  /**
+   * 要搜索的域名列表。
+   */
+  DomainList?: Array<string>
+  /**
+   * 要搜索的域名 ID 列表。
+   */
+  DomainIdList?: Array<number | bigint>
+  /**
+   * 要搜索的域名分组 ID 列表。
+   */
+  GroupIdList?: Array<number | bigint>
+  /**
+   * 记录类型筛选
+   */
+  RecordType?: string
+  /**
+   * 子域名筛选
+   */
+  SubKeyword?: string
+  /**
+   * 记录值筛选
+   */
+  ValueKeyword?: string
+  /**
+   * 线路筛选
+   */
+  Area?: string
+  /**
+   * 备注筛选
+   */
+  Remark?: string
+  /**
+   * 记录状态筛选
+1：正常
+0：暂停
+
+   */
+  Enabled?: string
 }
 
 /**
@@ -4979,18 +5091,9 @@ export interface CreateRecordGroupResponse {
 }
 
 /**
- * CreateSubDomainsAnalyticsFile返回参数结构体
+ * DescribeDomainGroupList请求参数结构体
  */
-export interface CreateSubDomainsAnalyticsFileResponse {
-  /**
-   * 当前批量任务 id。
-   */
-  JobId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeDomainGroupListRequest = null
 
 /**
  * DescribeBatchTask返回参数结构体
@@ -5161,21 +5264,56 @@ export interface ModifyRecordRequest {
 }
 
 /**
- * DescribeSnapshotRollbackResult请求参数结构体
+ * 批量操作筛选记录信息
  */
-export interface DescribeSnapshotRollbackResultRequest {
+export interface BatchSearchRecordInfo {
   /**
-   * 域名
+   * 解析记录 ID
    */
-  Domain: string
+  RecordId?: number
   /**
-   * 快照回滚任务 ID
+   * 解析线路
    */
-  TaskId: number
+  Area: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 记录备注
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainId?: number
+  Remark?: string
+  /**
+   * TTL(秒)
+   */
+  TTL: number
+  /**
+   * 记录类型
+   */
+  RecordType: string
+  /**
+   * 记录是否启用
+   */
+  Enabled?: number
+  /**
+   * 权重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 记录分组 ID
+   */
+  GroupId?: number
+  /**
+   * 子域名
+   */
+  SubDomain: string
+  /**
+   * 解析值
+   */
+  Value: string
+  /**
+   * MX优先级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MX?: number
 }
 
 /**

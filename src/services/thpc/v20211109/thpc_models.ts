@@ -210,7 +210,7 @@ export interface CreateClusterRequest {
    */
   ComputeNodeCount?: number
   /**
-   * 调度器类型。<br><li>SGE：SGE调度器。</li><br><li>SLURM：SLURM调度器。</li>
+   * 调度器类型。<br><li>SLURM：SLURM调度器。</li>
    */
   SchedulerType?: string
   /**

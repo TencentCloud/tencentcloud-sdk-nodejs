@@ -425,15 +425,15 @@ export interface DeleteRuleRequest {
    */
   ListenerId: string
   /**
-   * 要删除的转发规则的ID组成的数组，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   * 要删除的转发规则的ID组成的数组，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
    */
   LocationIds?: Array<string>
   /**
-   * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
    */
   Domain?: string
   /**
-   * 要删除的转发规则的转发路径，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   * 要删除的转发规则的转发路径，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
    */
   Url?: string
   /**
@@ -2550,6 +2550,7 @@ export interface ModifyListenerRequest {
   /**
    * 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。
 True表示发送 RST 给客户端，False表示不发送 RST 给客户端。
+不传则表示不修改。
    */
   DeregisterTargetRst?: boolean
   /**
@@ -2578,6 +2579,7 @@ True表示发送 RST 给客户端，False表示不发送 RST 给客户端。
   IdleConnectTimeout?: number
   /**
    * 是否开启SNAT， True 表示开启 SNAT，False 表示不开启 SNAT。
+不传则表示不修改。
    */
   SnatEnable?: boolean
   /**
@@ -3273,7 +3275,7 @@ export interface AddCustomizedConfigResponse {
  */
 export interface DeleteLoadBalancerRequest {
   /**
-   * 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取数组大小最大支持20。
+   * 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取，数组大小最大支持20。
    */
   LoadBalancerIds: Array<string>
   /**
@@ -3739,7 +3741,7 @@ export interface DeregisterTargetGroupInstancesRequest {
   TargetGroupId: string
   /**
    * 待解绑的服务器信息，支持批量解除绑定，单次批量解除数量最多为20个。
-
+在这个接口 Port 参数为必填项。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -3771,7 +3773,7 @@ export interface ManualRewriteRequest {
  */
 export interface InquiryPriceRefundLoadBalancerRequest {
   /**
-   * 负载均衡实例ID
+   * 负载均衡实例ID。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
 }
@@ -4024,7 +4026,8 @@ export interface CreateListenerRequest {
    */
   IdleConnectTimeout?: number
   /**
-   * 是否开启SNAT，True（开启）、False（关闭）
+   * 是否开启SNAT，True（开启）、False（关闭）。
+默认为关闭。
    */
   SnatEnable?: boolean
   /**
@@ -4032,11 +4035,13 @@ export interface CreateListenerRequest {
    */
   FullEndPorts?: Array<number | bigint>
   /**
-   * 内网http监听器开启h2c开关，True（开启）、False（关闭）
+   * 内网http监听器开启h2c开关，True（开启）、False（关闭）。
+默认为关闭。
    */
   H2cSwitch?: boolean
   /**
-   * TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关。True（关闭）、False（开启）
+   * TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关。True（关闭）、False（开启）.
+默认为关闭。
    */
   SslCloseSwitch?: boolean
   /**
@@ -4398,6 +4403,10 @@ export interface ModifyTargetWeightRequest {
    */
   ListenerId: string
   /**
+   * 要修改权重的后端服务列表。
+   */
+  Targets: Array<Target>
+  /**
    * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
    */
   LocationId?: string
@@ -4409,10 +4418,6 @@ export interface ModifyTargetWeightRequest {
    * 目标规则的URL，提供LocationId参数时本参数不生效。
    */
   Url?: string
-  /**
-   * 要修改权重的后端服务列表。
-   */
-  Targets?: Array<Target>
   /**
    * 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
    */
@@ -5566,7 +5571,7 @@ export interface DescribeIdleLoadBalancersRequest {
    */
   Limit?: number
   /**
-   * 负载均衡所在地域。
+   * 负载均衡所在地域，可以通过 [DescribeRegions](https://cloud.tencent.com/document/product/1596/77930) 查询获取。
    */
   LoadBalancerRegion?: string
 }
@@ -5881,7 +5886,7 @@ export interface CertificateOutput {
  */
 export interface DeleteTargetGroupsRequest {
   /**
-   * 目标组的ID数组。
+   * 目标组的ID数组，单次最多支持删除20个。
    */
   TargetGroupIds: Array<string>
 }
@@ -5921,7 +5926,7 @@ export interface SetLoadBalancerStartStatusRequest {
    */
   OperationType: string
   /**
-   * 负载均衡实例ID。
+   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
    */
   LoadBalancerId: string
   /**

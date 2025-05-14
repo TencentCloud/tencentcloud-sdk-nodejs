@@ -261,7 +261,7 @@ export interface DeleteCustomDnsHostResponse {
 export interface DescribeBiddingSuccessfulDetailRequest {
   /**
    * 预约ID 
-可通过[DescribeBiddingSuccessfulList](https://cloud.tencent.com/document/api/242/106596)接口获取
+可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取
    */
   BusinessID?: string
 }
@@ -391,7 +391,7 @@ export interface DescribeBiddingAppointListRequest {
   PageNumber: number
   /**
    * 每页数量
-默认：20 取值范围【1，200】
+默认：20 取值范围[1，200]
    */
   PageSize: number
   /**
@@ -413,7 +413,10 @@ BiddingEndTime 竞价结束时间
    */
   SortField?: string
   /**
-   * 排序规则：asc升序，desc降序
+   * 排序规则：
+asc:升序
+desc:降序
+默认：asc
    */
   SortOrder?: string
 }
@@ -874,10 +877,13 @@ export interface BidDetailPageRequest {
 export interface BiddingPreReleaseResponse {
   /**
    * 是否需要额外支付
+true: 需要额外支付
+false: 不需要额外支付
    */
   IsNeedPay?: boolean
   /**
-   * 计费请求参数，以类Json字符串的形式进行返回。用于计费下单
+   * 计费请求参数，以类Json字符串的形式进行返回。json字符串前有一个">"特定标识符号，去掉标识符的字符串可用于计费下单
+
    */
   BillingParam?: string
   /**
@@ -948,7 +954,7 @@ clientTransferProhibited：注册商禁止转移
 clientUpdateProhibited：注册商禁止更新
 clientDeleteProhibited：注册商禁止删除
 serverRenewProhibited: 注册局禁止续费
-clientRenewProhobited: 注册商禁止续费
+clientRenewProhibited: 注册商禁止续费
    */
   DomainStatus?: Array<string>
   /**
@@ -1346,7 +1352,7 @@ export interface ModifyIntlCustomDnsHostResponse {
 export interface DescribeDomainBaseInfoRequest {
   /**
    * 域名
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   Domain: string
 }
@@ -1587,12 +1593,13 @@ export interface ReservedPreDomainsRequest {
  */
 export interface BatchModifyDomainInfoRequest {
   /**
-   * 批量修改的域名。
+   * 批量修改的域名数组
+个数最大不超过4000
    */
   Domains: Array<string>
   /**
-   * 模板ID
-可从DescribeTemplates接口获取
+   * 模板ID 
+可从[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取
    */
   TemplateId: string
   /**
@@ -1852,11 +1859,13 @@ NotVerified: 实名信息待修改
    */
   AuditStatus?: string
   /**
-   * 创建时间
+   * 创建时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   CreatedOn?: string
   /**
-   * 更新时间
+   * 更新时间 
+格式:YYYY-MM-DD HH:mm:ss
    */
   UpdatedOn?: string
   /**
@@ -1997,8 +2006,8 @@ export interface TransferInDomainBatchRequest {
    */
   PassWords: Array<string>
   /**
-   * 模板ID。
-可通过DescribeTemplates接口获取
+   * 模板ID。 
+可通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取
    */
   TemplateId: string
   /**
@@ -2226,7 +2235,7 @@ export interface DescribeBiddingSuccessfulListRequest {
   PageNumber: number
   /**
    * 每页数量
-默认：20 取值范围【1，200】
+默认：20 取值范围[1，200]
    */
   PageSize: number
   /**
@@ -2244,7 +2253,10 @@ SuccessfulTime 预约结束时间
    */
   SortField?: string
   /**
-   * 排序规则：asc升序，desc降序
+   * 排序规则：
+asc：升序
+desc：降序
+默认：asc
    */
   SortOrder?: string
 }
@@ -2386,7 +2398,7 @@ export interface CreatePhoneEmailRequest {
   Type: number
   /**
    * 验证码
-通过调用SendPhoneEmailCode接口发送到手机或邮箱的验证码：https://cloud.tencent.com/document/api/242/62666
+通过调用[SendPhoneEmailCode](https://cloud.tencent.com/document/api/242/62666)接口发送到手机或邮箱的验证码
    */
   VerifyCode: string
 }
@@ -2408,7 +2420,7 @@ export interface DescribeBiddingDetailRequest {
 export interface DescribeTemplateRequest {
   /**
    * 模板ID
-通过DescribeTemplateList接口获取:https://cloud.tencent.com/document/api/242/48940
+通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取
    */
   TemplateId: string
 }
@@ -2699,7 +2711,7 @@ export interface ContactInfo {
 export interface DeleteTemplateRequest {
   /**
    * 模板ID
-可通过DescribeTemplates接口获取
+可通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取
    */
   TemplateId: string
 }
@@ -2950,7 +2962,7 @@ clientTransferProhibited：注册商禁止转移
 clientUpdateProhibited：注册商禁止更新
 clientDeleteProhibited：注册商禁止删除
 serverRenewProhibited: 注册局禁止续费
-clientRenewProhobited: 注册商禁止续费
+clientRenewProhibited: 注册商禁止续费
    */
   DomainStatus?: Array<string>
   /**
@@ -3056,8 +3068,8 @@ done 执行完成。
  */
 export interface CreateCustomDnsHostRequest {
   /**
-   * 域名实例ID
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+   * 域名实例ID 
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
   /**
@@ -3119,7 +3131,7 @@ export interface CreateDomainRedemptionRequest {
 export interface SetDomainAutoRenewRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
   /**

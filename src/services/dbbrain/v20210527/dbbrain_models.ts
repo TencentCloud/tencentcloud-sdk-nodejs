@@ -48,6 +48,40 @@ export interface SlowLogUser {
 }
 
 /**
+ * DescribeSlowLogTimeSeriesStats请求参数结构体
+ */
+export interface DescribeSlowLogTimeSeriesStatsRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+  /**
+   * 开始时间，如“2019-09-10 12:13:14”。
+   */
+  StartTime: string
+  /**
+   * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
+   */
+  EndTime: string
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
+   */
+  Product?: string
+  /**
+   * Proxy节点ID。
+   */
+  InstanceProxyId?: string
+  /**
+   * 实列节点ID。
+   */
+  InstanceNodeId?: string
+  /**
+   * 查询类型，目前支持值：mongod，mongos。
+   */
+  Type?: string
+}
+
+/**
  * DescribeUserAutonomyProfile请求参数结构体
  */
 export interface DescribeUserAutonomyProfileRequest {
@@ -1108,6 +1142,36 @@ export interface DescribeRedisSlowLogTopSqlsResponse {
 }
 
 /**
+ * redis key前缀空间信息
+ */
+export interface RedisPreKeySpaceData {
+  /**
+   * 平均元素长度。
+   */
+  AveElementSize: number
+  /**
+   * 总占用内存（Byte）。
+   */
+  Length: number
+  /**
+   * key前缀。
+   */
+  KeyPreIndex: string
+  /**
+   * 元素数量。
+   */
+  ItemCount: number
+  /**
+   * key个数。
+   */
+  Count: number
+  /**
+   * 最大元素长度。
+   */
+  MaxElementSize: number
+}
+
+/**
  * 实例诊断历史事件
  */
 export interface DiagHistoryEventItem {
@@ -1897,37 +1961,21 @@ export interface UpdateMonitorSwitchResponse {
 }
 
 /**
- * DescribeSlowLogTimeSeriesStats请求参数结构体
+ * DescribeDBAutonomyAction请求参数结构体
  */
-export interface DescribeSlowLogTimeSeriesStatsRequest {
+export interface DescribeDBAutonomyActionRequest {
   /**
-   * 实例 ID 。
+   * 自治任务ID。
+   */
+  ActionId: number
+  /**
+   * 实列ID。
    */
   InstanceId: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
-  StartTime: string
-  /**
-   * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
-   */
-  EndTime: string
-  /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
-   */
-  Product?: string
-  /**
-   * Proxy节点ID。
-   */
-  InstanceProxyId?: string
-  /**
-   * 实列节点ID。
-   */
-  InstanceNodeId?: string
-  /**
-   * 查询类型，目前支持值：mongod，mongos。
-   */
-  Type?: string
+  Product: string
 }
 
 /**
@@ -3088,6 +3136,16 @@ export interface DescribeRedisCommandCostStatisticsResponse {
    * redis延迟分布区间
    */
   CmdCostGroups?: Array<CmdCostGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelDBAutonomyEvent返回参数结构体
+ */
+export interface CancelDBAutonomyEventResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4922,33 +4980,21 @@ export interface GroupItem {
 }
 
 /**
- * redis key前缀空间信息
+ * CancelDBAutonomyEvent请求参数结构体
  */
-export interface RedisPreKeySpaceData {
+export interface CancelDBAutonomyEventRequest {
   /**
-   * 平均元素长度。
+   * 自治事件ID。
    */
-  AveElementSize: number
+  EventId: number
   /**
-   * 总占用内存（Byte）。
+   * 实列ID。
    */
-  Length: number
+  InstanceId: string
   /**
-   * key前缀。
+   * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
-  KeyPreIndex: string
-  /**
-   * 元素数量。
-   */
-  ItemCount: number
-  /**
-   * key个数。
-   */
-  Count: number
-  /**
-   * 最大元素长度。
-   */
-  MaxElementSize: number
+  Product: string
 }
 
 /**
@@ -5001,6 +5047,64 @@ export interface DescribeUserSqlAdviceRequest {
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * DescribeDBAutonomyAction返回参数结构体
+ */
+export interface DescribeDBAutonomyActionResponse {
+  /**
+   * 自治任务ID。
+   */
+  ActionId?: number
+  /**
+   * 自治事件ID。
+   */
+  EventId?: number
+  /**
+   * 任务ID。
+   */
+  TaskId?: number
+  /**
+   * 类型：支持RedisAutoScaleUp
+   */
+  Type?: string
+  /**
+   * 自治任务触发时间。
+   */
+  TriggerTime?: string
+  /**
+   * 自治任务创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 自治任务更新时间。
+   */
+  UpdateTime?: string
+  /**
+   * 自治任务完成时间。
+   */
+  FinishTime?: string
+  /**
+   * 剩余时间，单位：秒。
+   */
+  ExpireTime?: number
+  /**
+   * 触发原因。
+   */
+  Reason?: string
+  /**
+   * 自治任务状态：支持 RUNNING，FINISHED，TERMINATED，CANCELLED
+   */
+  Status?: string
+  /**
+   * 任务相关的图表等信息。
+   */
+  Info?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

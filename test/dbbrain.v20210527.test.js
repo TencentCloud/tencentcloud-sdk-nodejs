@@ -158,9 +158,9 @@ it("dbbrain.v20210527.UpdateMonitorSwitch", async function () {
     }
 })
 
-it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
+it("dbbrain.v20210527.DescribeRedisTopKeyPrefixList", async function () {
     try {
-       const data = await client.ModifyDiagDBInstanceConf({})
+       const data = await client.DescribeRedisTopKeyPrefixList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +398,16 @@ it("dbbrain.v20210527.DescribeRedisBigKeyAnalysisTasks", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeRedisCommandCostStatistics", async function () {
+    try {
+       const data = await client.DescribeRedisCommandCostStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateAuditLogFile", async function () {
     try {
        const data = await client.CreateAuditLogFile({})
@@ -448,9 +458,9 @@ it("dbbrain.v20210527.DescribeAllUserContact", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeRedisTopKeyPrefixList", async function () {
+it("dbbrain.v20210527.CancelDBAutonomyEvent", async function () {
     try {
-       const data = await client.DescribeRedisTopKeyPrefixList({})
+       const data = await client.CancelDBAutonomyEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +638,16 @@ it("dbbrain.v20210527.DescribeIndexRecommendAggregationSlowLogs", async function
     }
 })
 
+it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
+    try {
+       const data = await client.ModifyDiagDBInstanceConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CancelDBAutonomyAction", async function () {
     try {
        const data = await client.CancelDBAutonomyAction({})
@@ -748,9 +768,9 @@ it("dbbrain.v20210527.DescribeDBDiagReportContent", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeRedisCommandCostStatistics", async function () {
+it("dbbrain.v20210527.DescribeDBAutonomyAction", async function () {
     try {
-       const data = await client.DescribeRedisCommandCostStatistics({})
+       const data = await client.DescribeDBAutonomyAction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

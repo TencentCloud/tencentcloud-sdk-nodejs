@@ -438,6 +438,20 @@ export interface StorageOptionOverview {
 }
 
 /**
+ * ModifyWorkspacesRenewFlag请求参数结构体
+ */
+export interface ModifyWorkspacesRenewFlagRequest {
+  /**
+   * 工作空间列表
+   */
+  SpaceIds: Array<string>
+  /**
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   */
+  RenewFlag: string
+}
+
+/**
  * AddNodes返回参数结构体
  */
 export interface AddNodesResponse {
@@ -631,6 +645,16 @@ export interface QueueConfigOverview {
 - 当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。
    */
   ScaleUpMemRatio?: number
+}
+
+/**
+ * ModifyWorkspacesRenewFlag返回参数结构体
+ */
+export interface ModifyWorkspacesRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

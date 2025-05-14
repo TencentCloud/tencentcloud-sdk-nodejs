@@ -3772,7 +3772,8 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
    */
   DBInstanceId: string
   /**
-   * 【废弃参数，不再生效】，实例计费类型。
+   * 实例计费类型。
+   * @deprecated
    */
   InstanceChargeType?: string
   /**
@@ -4884,7 +4885,8 @@ export interface CreateReadOnlyDBInstanceRequest {
    */
   Name?: string
   /**
-   * 【废弃】不再需要指定，内核版本号与主实例保持一致
+   * 不再需要指定，内核版本号与主实例保持一致
+   * @deprecated
    */
   DBVersion?: string
   /**
