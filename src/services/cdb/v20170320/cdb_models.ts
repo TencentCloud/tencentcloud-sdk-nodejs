@@ -5252,11 +5252,15 @@ export interface Inbound {
   /**
    * 地址模块
    */
-  AddressModule: string
+  AddressModule?: string
+  /**
+   * 规则ID，嵌套安全组的规则ID
+   */
+  Id?: string
   /**
    * 规则描述
    */
-  Desc: string
+  Desc?: string
 }
 
 /**
@@ -7247,6 +7251,10 @@ export interface RoInstanceInfo {
    * RO实例计费类型，可能返回值：0-包年包月，1-按量计费，2-后付费月结
    */
   PayType?: number
+  /**
+   * RO延迟复制状态。
+   */
+  ReplicationStatus?: string
 }
 
 /**
@@ -9249,7 +9257,7 @@ export interface OpenAuditServiceRequest {
    */
   HighLogExpireDay?: number
   /**
-   * 审计规则。同RuleTemplateIds都不填是全审计。
+   * 审计规则（该参数已废弃，不再生效）。
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**

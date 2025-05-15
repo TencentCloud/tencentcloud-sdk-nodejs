@@ -9103,6 +9103,10 @@ export interface AuditLogFile {
    * 错误信息。
    */
   ErrMsg?: string
+  /**
+   * 日志下载进度。
+   */
+  ProgressRate?: number
 }
 
 /**
@@ -9303,7 +9307,8 @@ export interface OpenAuditServiceRequest {
    */
   HighLogExpireDay?: number
   /**
-   * 审计规则。同RuleTemplateIds都不填是全审计。
+   * 审计规则(废弃)。
+   * @deprecated
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**

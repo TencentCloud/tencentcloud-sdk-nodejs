@@ -4368,6 +4368,76 @@ export interface BatchDeleteIntegrationTasksResponse {
 }
 
 /**
+ * ListBatchDetail返回参数结构体
+ */
+export interface ListBatchDetailResponse {
+  /**
+   * 批量操作ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobId?: number
+  /**
+   * 运行类型：
+ASYNC-异步
+SYNC-同步
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunType?: string
+  /**
+   * 成功列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessResource?: Array<AsyncResourceVO>
+  /**
+   * 失败列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailResource?: Array<AsyncResourceVO>
+  /**
+   * job类型
+BATCH_DELETE --批量删除：1、任务名称：ResourceName
+BATCH_CREATE_VERSION --批量提交：1、任务名称：ResourceId 2、资源组：GroupId
+BATCH_MODIFY_DATASOURCE --批量修改数据源：1、任务名称：ResourceName
+BATCH_MODIFY_INCHARGE --批量修改责任人：1、任务名称：ResourceName
+BATCH_MODIFY_PARAMETER --批量修改参数：1、任务名称：ResourceName
+BATCH_MODIFY_SCHEDULE --批量修改调度计划：1、任务名称：ResourceName
+BATCH_MODIFY_GROUPID --批量修改资源组：1、任务名称：ResourceName
+BATCH_MODIFY_CONFIG --批量修改高级配置：1、任务名称：ResourceName
+BATCH_MODIFY_SCHEDULE_PARAMETER --批量修改调度参数：1、任务名称：ResourceName
+FORM_CREATE_VERSION--模版提交
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobType?: string
+  /**
+   * CREATING("CREATING", "创建中"),
+INIT("INIT", "已被创建"),
+RUNNING("RUNNING", "运行中"),
+SUCCESS("SUCCESS", "成功"),
+FAIL("FAIL", "失败"),
+PART_SUCCESS("PART_SUCCESS", "部分成功"),
+PART_SUCCESS_WITH_ALARM("PART_SUCCESS_WITH_ALARM", "部分成功有告警"),
+SUCCESS_WITH_ALARM("SUCCESS_WITH_ALARM", "成功有告警"),
+UNKNOWN("UNKNOWN", "未知状态");
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobStatus?: string
+  /**
+   * 资源总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalResource?: number
+  /**
+   * 批量提交是是否需要审批，其他的批量操作默认为null
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedApprove?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskTableMetricOverview返回参数结构体
  */
 export interface DescribeTaskTableMetricOverviewResponse {
@@ -5815,6 +5885,24 @@ export interface BatchResult {
 }
 
 /**
+ * GetBatchDetailErrorLog请求参数结构体
+ */
+export interface GetBatchDetailErrorLogRequest {
+  /**
+   * 批量操作ID
+   */
+  JobId: number
+  /**
+   * 资源对象ID
+   */
+  ResourceId: string
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+}
+
+/**
  * 日志信息
  */
 export interface InstanceLogByLine {
@@ -6814,6 +6902,32 @@ export interface DescribeDutyScheduleListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 操作资源DTO
+ */
+export interface AsyncResourceVO {
+  /**
+   * 处理Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessId?: number
+  /**
+   * 资源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 自定义信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: Array<ParamInfo>
 }
 
 /**
@@ -10463,6 +10577,89 @@ export interface FilterOptional {
 }
 
 /**
+ * ModifyExecStrategy请求参数结构体
+ */
+export interface ModifyExecStrategyRequest {
+  /**
+   * 规则组ID
+   */
+  RuleGroupId?: number
+  /**
+   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+   */
+  MonitorType?: number
+  /**
+   * 计算队列
+   */
+  ExecQueue?: string
+  /**
+   * 执行资源组ID
+   */
+  ExecutorGroupId?: string
+  /**
+   * 执行资源组名称
+   */
+  ExecutorGroupName?: string
+  /**
+   * 关联的生产调度任务列表
+   */
+  Tasks?: Array<ProdSchedulerTask>
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+  /**
+   * 离线周期模式下,生效日期-开始时间
+   */
+  StartTime?: string
+  /**
+   * 离线周期模式下,生效日期-结束时间
+   */
+  EndTime?: string
+  /**
+   * 离线周期模式下,调度周期 
+MINUTE_CYCLE:I,
+HOUR_CYCLE:H,
+DAY_CYCLE:D,
+WEEK_CYCLE:W,
+MONTH_CYCLE:M
+   */
+  CycleType?: string
+  /**
+   * 离线周期模式下,调度步长
+   */
+  CycleStep?: number
+  /**
+   * 离线周期模式下,指定时间
+   */
+  TaskAction?: string
+  /**
+   * 延时执行时间，单位分钟，可选: <0-1439
+   */
+  DelayTime?: number
+  /**
+   * 数据库Id
+   */
+  DatabaseId?: string
+  /**
+   * 数据源Id
+   */
+  DatasourceId?: string
+  /**
+   * 数据表Id
+   */
+  TableId?: string
+  /**
+   * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   */
+  ExecEngineType?: string
+  /**
+   * 触发场景
+   */
+  TriggerTypes?: Array<string>
+}
+
+/**
  * 任务实例状态统计
  */
 export interface TaskInstanceCountDto {
@@ -14039,10 +14236,15 @@ export interface CodeTemplateDetail {
    */
   Submit?: boolean
   /**
-   * 任务脚本是否发生变化
+   * 模版脚本是否发生变化
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptChange?: boolean
+  /**
+   * 代码模版脚本，base64编码返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
 }
 
 /**
@@ -18461,86 +18663,18 @@ resource 资源
 }
 
 /**
- * ModifyExecStrategy请求参数结构体
+ * DescribeCodeTemplateDetail返回参数结构体
  */
-export interface ModifyExecStrategyRequest {
+export interface DescribeCodeTemplateDetailResponse {
   /**
-   * 规则组ID
+   * 代码详情
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleGroupId?: number
+  Data?: CodeTemplateDetail
   /**
-   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MonitorType?: number
-  /**
-   * 计算队列
-   */
-  ExecQueue?: string
-  /**
-   * 执行资源组ID
-   */
-  ExecutorGroupId?: string
-  /**
-   * 执行资源组名称
-   */
-  ExecutorGroupName?: string
-  /**
-   * 关联的生产调度任务列表
-   */
-  Tasks?: Array<ProdSchedulerTask>
-  /**
-   * 项目ID
-   */
-  ProjectId?: string
-  /**
-   * 离线周期模式下,生效日期-开始时间
-   */
-  StartTime?: string
-  /**
-   * 离线周期模式下,生效日期-结束时间
-   */
-  EndTime?: string
-  /**
-   * 离线周期模式下,调度周期 
-MINUTE_CYCLE:I,
-HOUR_CYCLE:H,
-DAY_CYCLE:D,
-WEEK_CYCLE:W,
-MONTH_CYCLE:M
-   */
-  CycleType?: string
-  /**
-   * 离线周期模式下,调度步长
-   */
-  CycleStep?: number
-  /**
-   * 离线周期模式下,指定时间
-   */
-  TaskAction?: string
-  /**
-   * 延时执行时间，单位分钟，可选: <0-1439
-   */
-  DelayTime?: number
-  /**
-   * 数据库Id
-   */
-  DatabaseId?: string
-  /**
-   * 数据源Id
-   */
-  DatasourceId?: string
-  /**
-   * 数据表Id
-   */
-  TableId?: string
-  /**
-   * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
-   */
-  ExecEngineType?: string
-  /**
-   * 触发场景
-   */
-  TriggerTypes?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -23612,6 +23746,21 @@ export interface TaskExtDsVO {
 }
 
 /**
+ * GetBatchDetailErrorLog返回参数结构体
+ */
+export interface GetBatchDetailErrorLogResponse {
+  /**
+   * 日志返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAlarmReceiver返回参数结构体
  */
 export interface DescribeAlarmReceiverResponse {
@@ -25643,20 +25792,6 @@ export interface DlcRewriteDataInfo {
 }
 
 /**
- * 质量概览表排行结果
- */
-export interface TopTableStat {
-  /**
-   * 告警表列表
-   */
-  AlarmTables: Array<TopTableStatItem>
-  /**
-   * 阻塞表列表
-   */
-  PipelineTables: Array<TopTableStatItem>
-}
-
-/**
  * 分页查询工作流画布运行起止时间
  */
 export interface WorkFlowExecuteDtoByPage {
@@ -25675,6 +25810,38 @@ export interface WorkFlowExecuteDtoByPage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
+}
+
+/**
+ * 质量概览表排行结果
+ */
+export interface TopTableStat {
+  /**
+   * 告警表列表
+   */
+  AlarmTables: Array<TopTableStatItem>
+  /**
+   * 阻塞表列表
+   */
+  PipelineTables: Array<TopTableStatItem>
+}
+
+/**
+ * DescribeCodeTemplateDetail请求参数结构体
+ */
+export interface DescribeCodeTemplateDetailRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 模版Id
+   */
+  CodeTemplateId: string
+  /**
+   * 是否需要返回脚本内容，默认false。
+   */
+  NeedReturnScriptContent?: boolean
 }
 
 /**
@@ -27143,6 +27310,20 @@ export interface DescribeRuleGroupRequest {
    * 数据库ID
    */
   DatabaseId?: string
+}
+
+/**
+ * ListBatchDetail请求参数结构体
+ */
+export interface ListBatchDetailRequest {
+  /**
+   * 批量操作历史Id
+   */
+  JobId: number
+  /**
+   * 项目Id
+   */
+  ProjectId?: string
 }
 
 /**

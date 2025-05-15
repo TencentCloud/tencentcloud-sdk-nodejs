@@ -4982,6 +4982,10 @@ export interface UserManagerFilter {
    * 用户来源
    */
   UserType?: string
+  /**
+   * 组名
+   */
+  Groups?: string
 }
 
 /**
@@ -6642,6 +6646,10 @@ export interface UserInfoForUserManager {
    * 备注
    */
   ReMark?: string
+  /**
+   * 用户副组
+   */
+  Groups?: Array<string>
 }
 
 /**

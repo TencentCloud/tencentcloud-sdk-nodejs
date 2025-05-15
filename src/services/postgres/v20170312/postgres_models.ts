@@ -802,20 +802,6 @@ export interface SwitchDBInstancePrimaryRequest {
 }
 
 /**
- * OpenServerlessDBExtranetAccess请求参数结构体
- */
-export interface OpenServerlessDBExtranetAccessRequest {
-  /**
-   * 实例的唯一标识符
-   */
-  DBInstanceId?: string
-  /**
-   * 实例名称
-   */
-  DBInstanceName?: string
-}
-
-/**
  * RenewInstance返回参数结构体
  */
 export interface RenewInstanceResponse {
@@ -1796,16 +1782,6 @@ export interface DescribeBackupDownloadURLResponse {
    * 备份的下载地址。
    */
   BackupDownloadURL?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * OpenServerlessDBExtranetAccess返回参数结构体
- */
-export interface OpenServerlessDBExtranetAccessResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

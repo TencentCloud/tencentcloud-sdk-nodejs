@@ -127,7 +127,7 @@ import {
   RangeOriginPullParameters,
   BotManagedRule,
   SecurityConfig,
-  L4OfflineLog,
+  CreateSecurityIPGroupRequest,
   ModifyPlanRequest,
   HostName,
   DDoS,
@@ -139,7 +139,7 @@ import {
   CreateFunctionRuleResponse,
   HTTPUpstreamTimeoutParameters,
   PrivateParameter,
-  CreateSecurityIPGroupRequest,
+  L4OfflineLog,
   CreateOriginGroupRequest,
   TopDataRecord,
   CreateSecurityIPGroupResponse,
@@ -197,6 +197,7 @@ import {
   RedirectActionParameters,
   DeleteOriginGroupRequest,
   AclCondition,
+  ZoneInfo,
   L7OfflineLog,
   ModifyRuleResponse,
   ApplicationProxyRule,
@@ -319,6 +320,7 @@ import {
   CustomErrorPage,
   DescribeDeployHistoryRequest,
   BillingData,
+  DescribePlansRequest,
   ModifyOriginGroupRequest,
   DeleteZoneResponse,
   CreateRuleResponse,
@@ -382,7 +384,7 @@ import {
   OwnershipVerification,
   CreateRuleRequest,
   ModifyL4ProxyStatusRequest,
-  RateLimitTemplateDetail,
+  Plan,
   CreateApplicationProxyRuleResponse,
   CertificateInfo,
   CreateApplicationProxyRequest,
@@ -471,6 +473,7 @@ import {
   IpTableRule,
   DDosProtectionConfig,
   ModifyFunctionRuleRequest,
+  DescribePlansResponse,
   IncreasePlanQuotaRequest,
   FunctionRule,
   UpstreamRequestCookie,
@@ -515,6 +518,7 @@ import {
   NsVerification,
   AccelerateMainland,
   StandardDebug,
+  RateLimitTemplateDetail,
   AuthenticationParameters,
   BindSecurityTemplateToEntityRequest,
   RuleEngineSubRule,
@@ -1445,6 +1449,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeCustomErrorPagesResponse) => void
   ): Promise<DescribeCustomErrorPagesResponse> {
     return this.request("DescribeCustomErrorPages", req, cb)
+  }
+
+  /**
+   * 查询套餐信息列表，支持分页。
+   */
+  async DescribePlans(
+    req: DescribePlansRequest,
+    cb?: (error: string, rep: DescribePlansResponse) => void
+  ): Promise<DescribePlansResponse> {
+    return this.request("DescribePlans", req, cb)
   }
 
   /**

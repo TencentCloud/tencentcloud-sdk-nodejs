@@ -468,16 +468,6 @@ it("postgres.v20170312.DescribeRegions", async function () {
     }
 })
 
-it("postgres.v20170312.OpenServerlessDBExtranetAccess", async function () {
-    try {
-       const data = await client.OpenServerlessDBExtranetAccess({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("postgres.v20170312.ModifyDBInstanceReadOnlyGroup", async function () {
     try {
        const data = await client.ModifyDBInstanceReadOnlyGroup({})

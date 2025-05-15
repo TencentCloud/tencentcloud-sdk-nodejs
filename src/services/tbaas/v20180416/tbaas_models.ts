@@ -180,28 +180,6 @@ export interface ApplyUserCertRequest {
 }
 
 /**
- * SrvInvoke返回参数结构体
- */
-export interface SrvInvokeResponse {
-  /**
-   * 返回码
-   */
-  RetCode?: number
-  /**
-   * 返回消息
-   */
-  RetMsg?: string
-  /**
-   * 返回数据
-   */
-  Data?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * GetTransactionDetailForUser返回参数结构体
  */
 export interface GetTransactionDetailForUserResponse {
@@ -394,52 +372,6 @@ export interface DownloadUserCertResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * GetLatesdTransactionList请求参数结构体
- */
-export interface GetLatesdTransactionListRequest {
-  /**
-   * 模块名称，固定字段：transaction
-   */
-  Module: string
-  /**
-   * 操作名称，固定字段：latest_transaction_list
-   */
-  Operation: string
-  /**
-   * 组织ID，固定字段：0
-   */
-  GroupId: number
-  /**
-   * 通道ID，固定字段：0
-   */
-  ChannelId: number
-  /**
-   * 获取的最新交易的区块数量，取值范围1~5
-   */
-  LatestBlockNumber: number
-  /**
-   * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
-   */
-  GroupName: string
-  /**
-   * 需要查询的通道名称，可在通道详情或列表中获取
-   */
-  ChannelName: string
-  /**
-   * 区块链网络ID，可在区块链网络详情或列表中获取
-   */
-  ClusterId: string
-  /**
-   * 需要获取的起始交易偏移
-   */
-  Offset?: number
-  /**
-   * 需要获取的交易数量
-   */
-  Limit?: number
 }
 
 /**
@@ -660,27 +592,31 @@ export interface InvokeChainMakerContractResponse {
 }
 
 /**
- * QueryChainMakerTransaction请求参数结构体
+ * SrvInvoke返回参数结构体
  */
-export interface QueryChainMakerTransactionRequest {
+export interface SrvInvokeResponse {
   /**
-   * 网络ID，可在区块链网络详情或列表中获取
+   * 返回码
    */
-  ClusterId: string
+  RetCode?: number
   /**
-   * 业务链ID，可在网络概览页获取
+   * 返回消息
    */
-  ChainId: string
+  RetMsg?: string
   /**
-   * 交易ID，通过调用合约的返回值获取
+   * 返回数据
    */
-  TxID: string
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * GetLatesdTransactionList返回参数结构体
+ * GetLatestTransactionList返回参数结构体
  */
-export interface GetLatesdTransactionListResponse {
+export interface GetLatestTransactionListResponse {
   /**
    * 交易总数量
    */
@@ -1386,21 +1322,21 @@ export interface QueryChainMakerContractRequest {
 }
 
 /**
- * GetLatestTransactionList返回参数结构体
+ * QueryChainMakerTransaction请求参数结构体
  */
-export interface GetLatestTransactionListResponse {
+export interface QueryChainMakerTransactionRequest {
   /**
-   * 交易总数量
+   * 网络ID，可在区块链网络详情或列表中获取
    */
-  TotalCount?: number
+  ClusterId: string
   /**
-   * 交易列表
+   * 业务链ID，可在网络概览页获取
    */
-  TransactionList?: Array<TransactionItem>
+  ChainId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 交易ID，通过调用合约的返回值获取
    */
-  RequestId?: string
+  TxID: string
 }
 
 /**

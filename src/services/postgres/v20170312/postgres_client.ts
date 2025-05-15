@@ -43,7 +43,6 @@ import {
   RestoreDBInstanceObjectsResponse,
   SlowlogDetail,
   SwitchDBInstancePrimaryRequest,
-  OpenServerlessDBExtranetAccessRequest,
   RenewInstanceResponse,
   DeleteServerlessDBInstanceResponse,
   DeleteLogBackupResponse,
@@ -89,7 +88,6 @@ import {
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
   DescribeBackupDownloadURLResponse,
-  OpenServerlessDBExtranetAccessResponse,
   ModifyMaintainTimeWindowResponse,
   InquiryPriceCreateDBInstancesResponse,
   Version,
@@ -532,8 +530,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。本接口已于2021.09.01日废弃，后续此接口将不再返回任何数据，推荐使用接口[DescribeSlowQueryList](https://cloud.tencent.com/document/api/409/60540)替代。
-   */
+     * 早期接口不规范，已提供新接口 DescribeSlowQueryList 替换
+
+本接口（DescribeDBSlowlogs）用于获取慢查询日志。本接口已于2021.09.01日废弃，后续此接口将不再返回任何数据，推荐使用接口[DescribeSlowQueryList](https://cloud.tencent.com/document/api/409/60540)替代。
+     */
   async DescribeDBSlowlogs(
     req: DescribeDBSlowlogsRequest,
     cb?: (error: string, rep: DescribeDBSlowlogsResponse) => void
@@ -756,18 +756,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
-
-【接口下线中，请勿使用】本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
-     */
-  async OpenServerlessDBExtranetAccess(
-    req: OpenServerlessDBExtranetAccessRequest,
-    cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void
-  ): Promise<OpenServerlessDBExtranetAccessResponse> {
-    return this.request("OpenServerlessDBExtranetAccess", req, cb)
-  }
-
-  /**
    * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
    */
   async ModifyDBInstanceReadOnlyGroup(
@@ -980,8 +968,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
-   */
+     * 早期接口，不规范，已提供新接口 CreateInstances 替换
+
+本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
+     */
   async CreateDBInstances(
     req: CreateDBInstancesRequest,
     cb?: (error: string, rep: CreateDBInstancesResponse) => void
@@ -1275,8 +1265,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
-   */
+     * 早期接口，不规范，已提供新接口 CreateInstances 替换
+
+本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
+     */
   async InitDBInstances(
     req: InitDBInstancesRequest,
     cb?: (error: string, rep: InitDBInstancesResponse) => void
@@ -1385,8 +1377,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。
-   */
+     * 早期接口，不规范，已提供新接口 ModifyDBInstanceSpec 替换
+
+本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。
+     */
   async UpgradeDBInstance(
     req: UpgradeDBInstanceRequest,
     cb?: (error: string, rep: UpgradeDBInstanceResponse) => void

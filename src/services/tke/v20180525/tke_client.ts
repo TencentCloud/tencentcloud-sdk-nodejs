@@ -620,6 +620,7 @@ import {
   DescribePrometheusAgentsResponse,
   DescribeVpcCniPodLimitsRequest,
   DeleteImageCachesResponse,
+  EtcdOverrideConfig,
   DescribeEKSContainerInstanceRegionsResponse,
   ModifyClusterRuntimeConfigResponse,
   ModifyPrometheusRecordRuleYamlResponse,

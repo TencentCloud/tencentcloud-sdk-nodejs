@@ -210,6 +210,34 @@ th（泰语）：zh（简体中文）、zh-HK（繁体中文）、zh-TW（繁体
  */
 export interface ImageTranslateLLMRequest {
   /**
+   * 图片数据的Base64字符串，经Base64编码后不超过 9M，分辨率建议600*800以上，支持PNG、JPG、JPEG格式。
+   */
+  Data: string
+  /**
+   * 目标语言，支持语言列表：
+
+- 中文：zh
+- 繁体（台湾）：zh-TW
+- 繁体（香港）：zh-HK
+- 英文：en
+- 日语：ja
+- 韩语：ko
+- 泰语：th
+- 越南语：vi
+- 俄语：ru
+- 德语：de
+- 法语：fr
+- 阿拉伯语：ar
+- 西班牙语：es
+- 意大利语：it
+- 印度尼西亚语：id
+- 马来西亚语：ms
+- 葡萄牙语：pt
+- 土耳其语：tr
+- 
+   */
+  Target: string
+  /**
    * 输入图 Url。 使用Url的时候，Data参数需要传入""。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。
 
    */
@@ -660,6 +688,27 @@ export interface ImageTranslateRequest {
  * ImageTranslateLLM返回参数结构体
  */
 export interface ImageTranslateLLMResponse {
+  /**
+   * 图片数据的Base64字符串，输出格式为JPG。
+
+   */
+  Data?: string
+  /**
+   * 原文本主要源语言。
+   */
+  Source?: string
+  /**
+   * 目标翻译语言。
+   */
+  Target?: string
+  /**
+   * 图片中的全部原文本。
+   */
+  SourceText?: string
+  /**
+   * 图片中全部译文。
+   */
+  TargetText?: string
   /**
    * 逆时针图片角度，取值范围为0-359
    */

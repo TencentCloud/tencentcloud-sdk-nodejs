@@ -118,16 +118,6 @@ it("tbaas.v20180416.DownloadUserCert", async function () {
     }
 })
 
-it("tbaas.v20180416.GetLatesdTransactionList", async function () {
-    try {
-       const data = await client.GetLatesdTransactionList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tbaas.v20180416.ApplyUserCert", async function () {
     try {
        const data = await client.ApplyUserCert({})

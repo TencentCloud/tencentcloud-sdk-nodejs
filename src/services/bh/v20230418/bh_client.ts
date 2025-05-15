@@ -65,6 +65,7 @@ import {
   CreateUserGroupRequest,
   SearchFileTypeFilter,
   BindDeviceAccountPrivateKeyResponse,
+  IOAUserGroup,
   SearchCommandBySidRequest,
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,

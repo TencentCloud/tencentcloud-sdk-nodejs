@@ -24,7 +24,6 @@ import {
   GetBlockTransactionListForUserResponse,
   ApplyChainMakerBatchUserCertResponse,
   ApplyUserCertRequest,
-  SrvInvokeResponse,
   GetTransactionDetailForUserResponse,
   SrvInvokeRequest,
   ApplyUserCertResponse,
@@ -32,7 +31,6 @@ import {
   InvokeFabricChaincodeResponse,
   SignCertCsr,
   DownloadUserCertResponse,
-  GetLatesdTransactionListRequest,
   InvokeResponse,
   QueryFabricChaincodeResponse,
   GetTransactionDetailForUserRequest,
@@ -41,8 +39,8 @@ import {
   TransactionItem,
   InvokeChainMakerDemoContractRequest,
   InvokeChainMakerContractResponse,
-  QueryChainMakerTransactionRequest,
-  GetLatesdTransactionListResponse,
+  SrvInvokeResponse,
+  GetLatestTransactionListResponse,
   QueryChainMakerTransactionResponse,
   DownloadUserCertRequest,
   GetClusterSummaryResponse,
@@ -68,7 +66,7 @@ import {
   QueryChainMakerContractResponse,
   InvokeChainMakerContractRequest,
   QueryChainMakerContractRequest,
-  GetLatestTransactionListResponse,
+  QueryChainMakerTransactionRequest,
   QueryChainMakerDemoBlockTransactionRequest,
   Transaction,
   QueryRequest,
@@ -185,16 +183,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadUserCertResponse) => void
   ): Promise<DownloadUserCertResponse> {
     return this.request("DownloadUserCert", req, cb)
-  }
-
-  /**
-   * 获取最新交易列表（已废弃）
-   */
-  async GetLatesdTransactionList(
-    req: GetLatesdTransactionListRequest,
-    cb?: (error: string, rep: GetLatesdTransactionListResponse) => void
-  ): Promise<GetLatesdTransactionListResponse> {
-    return this.request("GetLatesdTransactionList", req, cb)
   }
 
   /**

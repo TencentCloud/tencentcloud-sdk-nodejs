@@ -868,6 +868,16 @@ it("teo.v20220901.DescribeCustomErrorPages", async function () {
     }
 })
 
+it("teo.v20220901.DescribePlans", async function () {
+    try {
+       const data = await client.DescribePlans({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteLoadBalancer", async function () {
     try {
        const data = await client.DeleteLoadBalancer({})

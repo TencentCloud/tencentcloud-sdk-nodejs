@@ -68,11 +68,11 @@ export interface RiskDetails {
   /**
    * 该字段用于返回账号信息检测对应的风险类别，取值为：**RiskAccount**（账号存在风险）、**RiskIP**（IP地址存在风险）、**RiskIMEI**（移动设备识别码存在风险）。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回账号信息检测对应的风险等级，取值为：**1**（疑似存在风险）和**2**（存在恶意风险）。
    */
-  Level: number
+  Level?: number
 }
 
 /**
@@ -168,22 +168,22 @@ export interface HitInfo {
    * 标识模型命中还是关键词命中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 命中关键词
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Keyword: string
+  Keyword?: string
   /**
    * 自定义词库名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LibName: string
+  LibName?: string
   /**
    * 位置信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Positions: Array<Positions>
+  Positions?: Array<Positions>
 }
 
 /**

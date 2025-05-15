@@ -138,6 +138,7 @@ import {
   DescribeRuleGroupsByPageRequest,
   DescribeTaskTemplatesResponse,
   BatchDeleteIntegrationTasksResponse,
+  ListBatchDetailResponse,
   DescribeTaskTableMetricOverviewResponse,
   BaseRole,
   BatchRerunIntegrationTaskInstancesRequest,
@@ -184,6 +185,7 @@ import {
   UpdateProjectUserRoleRequest,
   LineageParamRecord,
   BatchResult,
+  GetBatchDetailErrorLogRequest,
   InstanceLogByLine,
   StartTaskInfo,
   DescribeIntegrationStatisticsInstanceTrendResponse,
@@ -213,6 +215,7 @@ import {
   LockIntegrationTaskRequest,
   BatchStopWorkflowsByIdsRequest,
   DescribeDutyScheduleListResponse,
+  AsyncResourceVO,
   CommitIntegrationTaskRequest,
   DescribeTableInfoListRequest,
   DescribeQualityScoreRequest,
@@ -307,6 +310,7 @@ import {
   ScreenTaskInfo,
   TableConfig,
   FilterOptional,
+  ModifyExecStrategyRequest,
   TaskInstanceCountDto,
   DescribePendingSubmitTaskListResponse,
   DownloadLogByLineResponse,
@@ -563,7 +567,7 @@ import {
   UpdateDataModelRegistryInfoResponse,
   DescribeOperateOpsTasksResponse,
   DescribeResourceManagePathTreesRequest,
-  ModifyExecStrategyRequest,
+  DescribeCodeTemplateDetailResponse,
   DescribeDutyScheduleDetailsResponse,
   TaskLineageInfo,
   DescribeTableQualityDetailsResponse,
@@ -719,6 +723,7 @@ import {
   DescribeRuleRequest,
   BatchOpsDTO,
   TaskExtDsVO,
+  GetBatchDetailErrorLogResponse,
   DescribeAlarmReceiverResponse,
   DescribeTableLineageInfoResponse,
   DlcExpiredSnapshotsInfo,
@@ -779,8 +784,9 @@ import {
   CommonId,
   CreateRuleTemplateRequest,
   DlcRewriteDataInfo,
-  TopTableStat,
   WorkFlowExecuteDtoByPage,
+  TopTableStat,
+  DescribeCodeTemplateDetailRequest,
   DescribeRuleExecDetailResponse,
   Filter,
   Pair,
@@ -831,6 +837,7 @@ import {
   BatchCreateIntegrationTaskAlarmsResponse,
   DescribeIntegrationStatisticsRequest,
   DescribeRuleGroupRequest,
+  ListBatchDetailRequest,
   ModifyTaskNameRequest,
   DescribeTrendStatRequest,
   DescribeOpsInstanceLogListResponse,
@@ -875,6 +882,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTaskResponse) => void
   ): Promise<CreateTaskResponse> {
     return this.request("CreateTask", req, cb)
+  }
+
+  /**
+   * 获取批量操作错误日志
+   */
+  async GetBatchDetailErrorLog(
+    req: GetBatchDetailErrorLogRequest,
+    cb?: (error: string, rep: GetBatchDetailErrorLogResponse) => void
+  ): Promise<GetBatchDetailErrorLogResponse> {
+    return this.request("GetBatchDetailErrorLog", req, cb)
   }
 
   /**
@@ -1994,6 +2011,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 提交工作流。本接口已废弃，请使用接口BatchCreateTaskVersionAsync。
+   */
+  async SubmitWorkflow(
+    req: SubmitWorkflowRequest,
+    cb?: (error: string, rep: SubmitWorkflowResponse) => void
+  ): Promise<SubmitWorkflowResponse> {
+    return this.request("SubmitWorkflow", req, cb)
+  }
+
+  /**
    * 删除数据源
    */
   async DeleteDataSources(
@@ -2519,13 +2546,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 查询模板详情
+   * 查询代码模版具体详情
    */
-  async DescribeRuleTemplate(
-    req: DescribeRuleTemplateRequest,
-    cb?: (error: string, rep: DescribeRuleTemplateResponse) => void
-  ): Promise<DescribeRuleTemplateResponse> {
-    return this.request("DescribeRuleTemplate", req, cb)
+  async DescribeCodeTemplateDetail(
+    req: DescribeCodeTemplateDetailRequest,
+    cb?: (error: string, rep: DescribeCodeTemplateDetailResponse) => void
+  ): Promise<DescribeCodeTemplateDetailResponse> {
+    return this.request("DescribeCodeTemplateDetail", req, cb)
   }
 
   /**
@@ -2799,13 +2826,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 提交工作流。本接口已废弃，请使用接口BatchCreateTaskVersionAsync。
+   * 获取批量操作详情列表
    */
-  async SubmitWorkflow(
-    req: SubmitWorkflowRequest,
-    cb?: (error: string, rep: SubmitWorkflowResponse) => void
-  ): Promise<SubmitWorkflowResponse> {
-    return this.request("SubmitWorkflow", req, cb)
+  async ListBatchDetail(
+    req: ListBatchDetailRequest,
+    cb?: (error: string, rep: ListBatchDetailResponse) => void
+  ): Promise<ListBatchDetailResponse> {
+    return this.request("ListBatchDetail", req, cb)
   }
 
   /**
@@ -3290,6 +3317,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: ModifyTaskInfoResponse) => void
   ): Promise<ModifyTaskInfoResponse> {
     return this.request("ModifyTaskInfo", req, cb)
+  }
+
+  /**
+   * 查询模板详情
+   */
+  async DescribeRuleTemplate(
+    req: DescribeRuleTemplateRequest,
+    cb?: (error: string, rep: DescribeRuleTemplateResponse) => void
+  ): Promise<DescribeRuleTemplateResponse> {
+    return this.request("DescribeRuleTemplate", req, cb)
   }
 
   /**

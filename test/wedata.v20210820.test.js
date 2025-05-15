@@ -28,6 +28,16 @@ it("wedata.v20210820.CreateTask", async function () {
     }
 })
 
+it("wedata.v20210820.GetBatchDetailErrorLog", async function () {
+    try {
+       const data = await client.GetBatchDetailErrorLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CreateTaskAlarmRegular", async function () {
     try {
        const data = await client.CreateTaskAlarmRegular({})
@@ -1138,6 +1148,16 @@ it("wedata.v20210820.DescribeFunctionTypes", async function () {
     }
 })
 
+it("wedata.v20210820.SubmitWorkflow", async function () {
+    try {
+       const data = await client.SubmitWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DeleteDataSources", async function () {
     try {
        const data = await client.DeleteDataSources({})
@@ -1658,9 +1678,9 @@ it("wedata.v20210820.UploadContent", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeRuleTemplate", async function () {
+it("wedata.v20210820.DescribeCodeTemplateDetail", async function () {
     try {
-       const data = await client.DescribeRuleTemplate({})
+       const data = await client.DescribeCodeTemplateDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1938,9 +1958,9 @@ it("wedata.v20210820.DescribeReportTaskList", async function () {
     }
 })
 
-it("wedata.v20210820.SubmitWorkflow", async function () {
+it("wedata.v20210820.ListBatchDetail", async function () {
     try {
-       const data = await client.SubmitWorkflow({})
+       const data = await client.ListBatchDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2421,6 +2441,16 @@ it("wedata.v20210820.BatchResumeIntegrationTasks", async function () {
 it("wedata.v20210820.ModifyTaskInfo", async function () {
     try {
        const data = await client.ModifyTaskInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeRuleTemplate", async function () {
+    try {
+       const data = await client.DescribeRuleTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

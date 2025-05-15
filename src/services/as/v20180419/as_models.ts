@@ -30,7 +30,7 @@ export interface DisableAutoScalingGroupResponse {
  */
 export interface ModifyLaunchConfigurationAttributesRequest {
   /**
-   * 启动配置ID
+   * 启动配置ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 或调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。
    */
   LaunchConfigurationId: string
   /**
@@ -39,7 +39,7 @@ export interface ModifyLaunchConfigurationAttributesRequest {
   ImageId?: string
   /**
    * 实例类型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。
-InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定多实例类型，并使原有的InstanceType失效。
+InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定多实例类型，并使原有的InstanceType失效。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格描述](https://cloud.tencent.com/document/product/213/11518)。
    */
   InstanceTypes?: Array<string>
   /**
@@ -123,11 +123,11 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    */
   EnhancedService?: EnhancedService
   /**
-   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   * CAM角色名称。可通过[DescribeRoleList](https://cloud.tencent.com/document/product/598/36223)接口返回值中的roleName获取。
    */
   CamRoleName?: string
   /**
-   * 高性能计算集群ID。<br>
+   * 高性能计算集群ID。可通过调用[DescribeHpcClusters](https://cloud.tencent.com/document/product/213/83220)接口获取该参数。
 注意：此字段默认为空。
    */
   HpcClusterId?: string
@@ -136,7 +136,7 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    */
   IPv6InternetAccessible?: IPv6InternetAccessible
   /**
-   * 置放群组id，仅支持指定一个。
+   * 置放群组id，仅支持指定一个。可通过调用[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)接口获取该参数。
    */
   DisasterRecoverGroupIds?: Array<string>
   /**
@@ -149,7 +149,7 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    */
   InstanceTags?: Array<InstanceTag>
   /**
-   * 镜像族名称。
+   * 镜像族名称。可通过调用[DescribeImages](https://cloud.tencent.com/document/product/213/15715)接口获取该参数。
    */
   ImageFamily?: string
   /**
@@ -167,7 +167,7 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
  */
 export interface DisableAutoScalingGroupRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
 }
@@ -195,7 +195,9 @@ export interface DescribeRefreshActivitiesResponse {
  */
 export interface ModifyAutoScalingGroupRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
@@ -203,31 +205,33 @@ export interface ModifyAutoScalingGroupRequest {
    */
   AutoScalingGroupName?: string
   /**
-   * 默认冷却时间，单位秒，默认值为300
+   * 默认冷却时间，单位秒，取值范围 [0,3600]，默认值为300。
    */
   DefaultCooldown?: number
   /**
-   * 期望实例数，大小介于最小实例数和最大实例数之间
+   * 期望实例数，取值范围 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   DesiredCapacity?: number
   /**
-   * 启动配置ID
+   * 启动配置ID。可以通过如下方式获取可用的启动配置ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 查询启动配置ID。</li>
+<li>通过调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。</li>
    */
   LaunchConfigurationId?: string
   /**
-   * 最大实例数，取值范围为0-2000。
+   * 最大实例数，取值范围为 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MaxSize?: number
   /**
-   * 最小实例数，取值范围为0-2000。
+   * 最小实例数，取值范围为 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MinSize?: number
   /**
-   * 项目ID
+   * 项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 ProjectId 字段来获取。默认值为 0，表示使用默认项目。
    */
   ProjectId?: number
   /**
-   * 子网ID列表
+   * 子网ID列表。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) ，从接口返回中的SubnetId字段获取。
    */
   SubnetIds?: Array<string>
   /**
@@ -237,7 +241,7 @@ export interface ModifyAutoScalingGroupRequest {
    */
   TerminationPolicies?: Array<string>
   /**
-   * VPC ID，基础网络则填空字符串。修改为具体VPC ID时，需指定相应的SubnetIds；修改为基础网络时，需指定相应的Zones。
+   * 私有网络ID。修改私有网络时，需将 SubnetIds 参数同步修改为该私有网络的子网。有效的 VpcId 可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc)查询；也可以调用接口 [DescribeVpc](https://cloud.tencent.com/document/api/215/15778) ，从接口返回中的 VpcId 字段获取。
    */
   VpcId?: string
   /**
@@ -265,7 +269,7 @@ export interface ModifyAutoScalingGroupRequest {
    */
   ServiceSettings?: ServiceSettings
   /**
-   * 实例具有IPv6地址数量的配置，取值包括0、1。
+   * 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 [IPv6使用限制](https://cloud.tencent.com/document/product/1142/38369)。
    */
   Ipv6AddressCount?: number
   /**
@@ -333,31 +337,42 @@ export interface AutoScalingNotification {
   /**
    * 伸缩组ID。
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
   /**
    * 用户组ID列表。
    */
-  NotificationUserGroupIds: Array<string>
+  NotificationUserGroupIds?: Array<string>
   /**
-   * 通知事件列表。
+   * 通知事件列表。取值范围如下:
+<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
+<li>SCALE_OUT_FAILED：扩容失败</li>
+<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
+<li>SCALE_IN_FAILED：缩容失败</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
    */
-  NotificationTypes: Array<string>
+  NotificationTypes?: Array<string>
   /**
    * 事件通知ID。
    */
-  AutoScalingNotificationId: string
+  AutoScalingNotificationId?: string
   /**
-   * 通知接收端类型。
+   * 通知接收端类型。取值范围如下：
+USER_GROUP：用户组
+TDMQ_CMQ_TOPIC：TDMQ CMQ 主题
+TDMQ_CMQ_QUEUE：TDMQ CMQ 队列
+CMQ_QUEUE：CMQ 队列，[CMQ 接口已下线](https://cloud.tencent.com/document/product/1496/83970)，已无法选用
+CMQ_TOPIC：CMQ 主题，[CMQ 接口已下线](https://cloud.tencent.com/document/product/1496/83970)，已无法选用
    */
-  TargetType: string
+  TargetType?: string
   /**
-   * CMQ 队列名。
+   * TDMQ CMQ 队列名。
    */
-  QueueName: string
+  QueueName?: string
   /**
-   * CMQ 主题名。
+   * TDMQ CMQ 主题名。
    */
-  TopicName: string
+  TopicName?: string
 }
 
 /**
@@ -408,13 +423,14 @@ export interface DescribeAutoScalingGroupsRequest {
   AutoScalingGroupIds?: Array<string>
   /**
    * 过滤条件。
-<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
+<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。
+可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
 <li> auto-scaling-group-name - String - 是否必填：否 -（过滤条件）按照伸缩组名称过滤。</li>
 <li> vague-auto-scaling-group-name - String - 是否必填：否 -（过滤条件）按照伸缩组名称模糊搜索。</li>
-<li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
-<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
-<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
-<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2</li>
+<li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 或调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。可通过调用接口 [GetTags](https://cloud.tencent.com/document/product/651/72275) ，取返回信息中的 TagKey 获取标签键。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。可通过调用接口 [GetTags](https://cloud.tencent.com/document/product/651/72275) ，取返回信息中的 TagValue 获取标签值。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换，请参考示例2。可通过调用接口 [GetTags](https://cloud.tencent.com/document/product/651/72275) ，取返回信息中的 TagKey 获取标签键。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AutoScalingGroupIds`和`Filters`。
    */
   Filters?: Array<Filter>
@@ -478,7 +494,7 @@ export interface LaunchConfiguration {
    */
   UserData?: string
   /**
-   * 启动配置创建时间。
+   * 启动配置创建时间，为标准`UTC`时间。
    */
   CreatedTime?: string
   /**
@@ -494,7 +510,11 @@ export interface LaunchConfiguration {
    */
   LaunchConfigurationStatus?: string
   /**
-   * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。<li>POSTPAID_BY_HOUR：按小时后付费</li><li>SPOTPAID：竞价付费</li>
+   * 实例计费类型，取值范围如下：
+<li>POSTPAID_BY_HOUR：按小时后付费</li>
+<li>SPOTPAID：竞价付费</li>
+<li>PREPAID：预付费，即包年包月</li>
+<li>CDCPAID：专用集群付费</li>
    */
   InstanceChargeType?: string
   /**
@@ -511,7 +531,7 @@ export interface LaunchConfiguration {
    */
   InstanceTags?: Array<InstanceTag>
   /**
-   * 标签列表。
+   * 标签列表，该参数内的标签仅用于绑定启动配置，不会传递给基于该启动配置扩容的 CVM 实例。
    */
   Tags?: Array<Tag>
   /**
@@ -519,11 +539,11 @@ export interface LaunchConfiguration {
    */
   VersionNumber?: number
   /**
-   * 更新时间。
+   * 更新时间，为标准`UTC`时间。
    */
   UpdatedTime?: string
   /**
-   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   * CAM角色名称。可通过[DescribeRoleList](https://cloud.tencent.com/document/product/598/36223)接口返回值中的roleName获取。
    */
   CamRoleName?: string
   /**
@@ -790,6 +810,9 @@ export interface SystemDisk {
 <li>CLOUD_BASIC：普通云硬盘</li>
 <li>CLOUD_PREMIUM：高性能云硬盘</li>
 <li>CLOUD_SSD：SSD云硬盘</li>
+<li>CLOUD_BSSD：通用型SSD云硬盘</li>
+<li>CLOUD_HSSD：增强型SSD云硬盘</li>
+<li>CLOUD_TSSD：极速型SSD云硬盘</li>
 <li>默认取值：CLOUD_PREMIUM。</li>
    */
   DiskType?: string
@@ -838,9 +861,9 @@ export interface DescribeScalingPoliciesRequest {
   /**
    * 过滤条件。
 <li> auto-scaling-policy-id - String - 是否必填：否 -（过滤条件）按照告警策略ID过滤。</li>
-<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
+<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
 <li> scaling-policy-name - String - 是否必填：否 -（过滤条件）按照告警策略名称过滤。</li>
-<li> scaling-policy-type - String - 是否必填：否 -（过滤条件）按照告警策略类型过滤，取值范围为SIMPLE，TARGET_TRACKING。</li>
+<li> scaling-policy-type - String - 是否必填：否 -（过滤条件）按照告警策略类型过滤，取值范围为SIMPLE，TARGET_TRACKING。两者分别表示简单策略和目标追踪策略。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AutoScalingPolicyIds`和`Filters`。
    */
   Filters?: Array<Filter>
@@ -998,19 +1021,22 @@ export interface StartAutoScalingInstancesResponse {
  */
 export interface CompleteLifecycleActionRequest {
   /**
-   * 生命周期挂钩ID
+   * 生命周期挂钩ID。可以通过调用接口 [DescribeLifecycleHooks](https://cloud.tencent.com/document/api/377/34452) ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。
    */
   LifecycleHookId: string
   /**
-   * 生命周期动作的结果，取值范围为“CONTINUE”或“ABANDON”
+   * 生命周期动作的结果，取值范围如下：
+<li>CONTINUE: 默认值，表示继续执行扩缩容活动</li>
+<li>ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。</li>
    */
   LifecycleActionResult: string
   /**
-   * 实例ID，“InstanceId”和“LifecycleActionToken”必须填充其中一个
+   * 实例ID，`InstanceId` 和 `LifecycleActionToken` 参数必须填写其中一个。可通过登录 [控制台](https://console.cloud.tencent.com/cvm/index) 或调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。
    */
   InstanceId?: string
   /**
-   * “InstanceId”和“LifecycleActionToken”必须填充其中一个
+   * 生命周期动作令牌，`InstanceId` 和 `LifecycleActionToken` 必须填充其中一个。
+该参数获取方式如下：配置 `NotificationTarget ` 参数的挂钩被触发时，向  `NotificationTarget `  参数中指定的消息队列投递包含令牌的消息，消息队列的消费者可从消息中获取令牌。
    */
   LifecycleActionToken?: string
 }
@@ -1036,7 +1062,7 @@ export interface CreateNotificationConfigurationResponse {
   /**
    * 通知ID。
    */
-  AutoScalingNotificationId: string
+  AutoScalingNotificationId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1129,7 +1155,7 @@ export interface Tag {
    */
   Value: string
   /**
-   * 标签绑定的资源类型，当前支持类型："auto-scaling-group", "launch-configuration"
+   * 标签绑定的资源类型，当前支持类型："auto-scaling-group", "launch-configuration"。分别表示：伸缩组资源，启动配置资源。
    */
   ResourceType?: string
 }
@@ -1139,15 +1165,15 @@ export interface Tag {
  */
 export interface DetachLoadBalancersRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
-   * 传统负载均衡器ID列表，列表长度上限为20，LoadBalancerIds 和 ForwardLoadBalancerIdentifications 二者同时最多只能指定一个
+   * 传统负载均衡器ID列表，列表长度上限为20，LoadBalancerIds 和 ForwardLoadBalancerIdentifications 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   LoadBalancerIds?: Array<string>
   /**
-   * 应用型负载均衡器标识信息列表，列表长度上限为100，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
+   * 负载均衡器标识信息列表，列表长度上限为100，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   ForwardLoadBalancerIdentifications?: Array<ForwardLoadBalancerIdentification>
 }
@@ -1157,13 +1183,16 @@ export interface DetachLoadBalancersRequest {
  */
 export interface DescribeAutoScalingInstancesRequest {
   /**
-   * 待查询云服务器（CVM）的实例ID。每次请求的上限为100。参数不支持同时指定InstanceIds和Filters。
+   * 待查询云服务器（CVM）的实例ID列表，列表长度上限为100，不支持同时指定 InstanceIds 和 Filters。
+可以通过以下方式获取可用的实例ID：
+<li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li>
+<li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
    */
   InstanceIds?: Array<string>
   /**
    * 过滤条件。
-<li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。</li>
-<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
+<li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。可通过登录[控制台](https://console.cloud.tencent.com/cvm/index)或调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。</li>
+<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。
    */
   Filters?: Array<Filter>
@@ -1182,15 +1211,15 @@ export interface DescribeAutoScalingInstancesRequest {
  */
 export interface ModifyLoadBalancersRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
-   * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   LoadBalancerIds?: Array<string>
   /**
-   * 应用型负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
   /**
@@ -1230,7 +1259,7 @@ export interface ModifyScalingPolicyResponse {
  */
 export interface DeleteLaunchConfigurationRequest {
   /**
-   * 需要删除的启动配置ID。
+   * 需要删除的启动配置ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 或调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。
    */
   LaunchConfigurationId: string
 }
@@ -1333,7 +1362,7 @@ export interface CreateLaunchConfigurationRequest {
    */
   ImageId?: string
   /**
-   * 启动配置所属项目ID。不填为默认项目。
+   * 启动配置所属项目ID。默认值为0，表示使用默认项目。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。
 注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。
    */
   ProjectId?: number
@@ -1384,15 +1413,15 @@ export interface CreateLaunchConfigurationRequest {
   InstanceMarketOptions?: InstanceMarketOptionsRequest
   /**
    * 实例机型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。
-`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。
+`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格描述](https://cloud.tencent.com/document/product/213/11518)。
    */
   InstanceTypes?: Array<string>
   /**
-   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   * CAM角色名称。可通过[DescribeRoleList](https://cloud.tencent.com/document/product/598/36223)接口返回值中的roleName获取。
    */
   CamRoleName?: string
   /**
-   * 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
+   * 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。该参数仅在 InstanceTypes 入参包含多个机型时生效。
 <li> ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。</li>
 <li> ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。</li>
 
@@ -1428,7 +1457,7 @@ export interface CreateLaunchConfigurationRequest {
    */
   DiskTypePolicy?: string
   /**
-   * 高性能计算集群ID。<br>
+   * 高性能计算集群ID。可通过调用[DescribeHpcClusters](https://cloud.tencent.com/document/product/213/83220)接口获取该参数。
 注意：此字段默认为空。
    */
   HpcClusterId?: string
@@ -1441,11 +1470,11 @@ export interface CreateLaunchConfigurationRequest {
    */
   DisasterRecoverGroupIds?: Array<string>
   /**
-   * 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。
+   * 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。可通过调用[DescribeImages](https://cloud.tencent.com/document/product/213/15715)接口获取该参数。
    */
   ImageFamily?: string
   /**
-   * 本地专用集群ID。
+   * 本地专用集群ID。可通过 [DescribeDedicatedClusters](https://cloud.tencent.com/document/product/1346/73758) 接口获取该参数。
    */
   DedicatedClusterId?: string
   /**
@@ -1537,11 +1566,13 @@ export interface AutoScalingGroup {
    */
   SubnetIdSet?: Array<string>
   /**
-   * 销毁策略
+   * 销毁策略。取值范围如下：
+<li>OLDEST_INSTANCE：优先销毁伸缩组中最旧的实例，默认取值。</li>
+<li>NEWEST_INSTANCE：优先销毁伸缩组中最新的实例。</li>
    */
   TerminationPolicySet?: Array<string>
   /**
-   * VPC标识
+   * 私有网络ID。
    */
   VpcId?: string
   /**
@@ -1549,7 +1580,10 @@ export interface AutoScalingGroup {
    */
   ZoneSet?: Array<string>
   /**
-   * 重试策略
+   * 重试策略，部分成功的伸缩活动判定为一次失败活动。取值范围如下：
+<li>IMMEDIATE_RETRY：默认取值，表示立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。</li>
+<li>INCREMENTAL_INTERVALS：间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大。前 10 次重试为快速重试，后续重试间隔逐步递增至 10 分钟、30 分钟、60 分钟、一天。</li>
+<li>NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。</li>
    */
   RetryPolicy?: string
   /**
@@ -1565,7 +1599,7 @@ export interface AutoScalingGroup {
    */
   ServiceSettings?: ServiceSettings
   /**
-   * 实例具有IPv6地址数量的配置
+   * 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 [IPv6使用限制](https://cloud.tencent.com/document/product/1142/38369)。
    */
   Ipv6AddressCount?: number
   /**
@@ -1581,7 +1615,8 @@ export interface AutoScalingGroup {
    */
   HealthCheckType?: string
   /**
-   * CLB健康检查宽限期
+   * CLB健康检查宽限期.当扩容的实例进入IN_SERVICE后，在宽限期时间范围内将不会被标记为不健康CLB_UNHEALTHY。
+默认值：0。取值范围[0, 7200]，单位：秒。
    */
   LoadBalancerHealthCheckGracePeriod?: number
   /**
@@ -1715,7 +1750,7 @@ export interface ScalingPolicy {
    */
   AdjustmentValue?: number
   /**
-   * 冷却时间，仅适用于简单策略。
+   * 冷却时间，单位为秒，仅适用于简单策略。取值范围 [0,3600]，默认冷却时间300秒。
    */
   Cooldown?: number
   /**
@@ -1758,7 +1793,7 @@ export interface ScalingPolicy {
  */
 export interface DescribeAutoScalingGroupLastActivitiesRequest {
   /**
-   * 伸缩组ID列表
+   * 伸缩组ID列表。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupIds: Array<string>
   /**
@@ -1816,7 +1851,7 @@ export interface ModifyLoadBalancersResponse {
  */
 export interface CreateNotificationConfigurationRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
@@ -1830,26 +1865,26 @@ export interface CreateNotificationConfigurationRequest {
    */
   NotificationTypes: Array<string>
   /**
-   * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
+   * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。该参数仅在 TargetType 为 USER_GROUP 时生效。
    */
   NotificationUserGroupIds?: Array<string>
   /**
-   * 通知接收端类型，取值如下
-<br><li>USER_GROUP：用户组
-<br><li>CMQ_QUEUE：CMQ 队列
-<br><li>CMQ_TOPIC：CMQ 主题
-<br><li>TDMQ_CMQ_TOPIC：TDMQ CMQ 主题
-<br><li>TDMQ_CMQ_QUEUE：TDMQ CMQ 队列
+   * 通知接收端类型，取值如下：
+<li>USER_GROUP：用户组</li>
+<li>TDMQ_CMQ_TOPIC：TDMQ CMQ 主题</li>
+<li>TDMQ_CMQ_QUEUE：TDMQ CMQ 队列</li>
+<li>CMQ_QUEUE：CMQ 队列，[CMQ已下线](https://cloud.tencent.com/document/product/1496/83970)，目前仅推荐使用  TDMQ CMQ。</li>
+<li>CMQ_TOPIC：CMQ 主题，[CMQ已下线](https://cloud.tencent.com/document/product/1496/83970)，目前仅推荐使用  TDMQ CMQ。</li>
 
 默认值为：`USER_GROUP`。
    */
   TargetType?: string
   /**
-   * CMQ 队列名称，如 TargetType 取值为 `CMQ_QUEUE` 或 `TDMQ_CMQ_QUEUE` 时，该字段必填。
+   * TDMQ CMQ 队列名，如 TargetType 取值为 `TDMQ_CMQ_QUEUE` ，该字段必填。
    */
   QueueName?: string
   /**
-   * CMQ 主题名称，如 TargetType 取值为 `CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC` 时，该字段必填。
+   * TDMQ CMQ 主题名，如 TargetType 取值为 `TDMQ_CMQ_TOPIC` ，该字段必填。
    */
   TopicName?: string
 }
@@ -1877,7 +1912,7 @@ export interface DescribeScheduledActionsResponse {
  */
 export interface ModifyNotificationConfigurationRequest {
   /**
-   * 待修改的通知ID。
+   * 待修改的通知ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeNotificationConfigurations](https://cloud.tencent.com/document/api/377/33183) ，取返回信息中的 AutoScalingNotificationId 获取通知ID。
    */
   AutoScalingNotificationId: string
   /**
@@ -1891,15 +1926,15 @@ export interface ModifyNotificationConfigurationRequest {
    */
   NotificationTypes?: Array<string>
   /**
-   * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
+   * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。该参数仅在 `TargetType ` 为 `USER_GROUP ` 时生效。
    */
   NotificationUserGroupIds?: Array<string>
   /**
-   * CMQ 队列或 TDMQ CMQ 队列名。
+   *  TDMQ CMQ 队列名。[原CMQ已下线](https://cloud.tencent.com/document/product/1496/83970)，目前仅推荐使用  TDMQ CMQ。该参数仅在 `TargetType ` 为 `TDMQ_CMQ_QUEUE ` 时生效。
    */
   QueueName?: string
   /**
-   * CMQ 主题或 TDMQ CMQ 主题名。
+   * TDMQ CMQ 主题名。[原CMQ已下线](https://cloud.tencent.com/document/product/1496/83970)，目前仅推荐使用  TDMQ CMQ。该参数仅在 `TargetType ` 为 `TDMQ_CMQ_TOPIC ` 时生效。
    */
   TopicName?: string
 }
@@ -1921,7 +1956,7 @@ export interface ModifyLoadBalancerTargetAttributesResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1987,11 +2022,11 @@ export interface InvocationResult {
  */
 export interface ModifyScalingPolicyRequest {
   /**
-   * 告警策略ID。
+   * 告警策略ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeScalingPolicies](https://cloud.tencent.com/document/api/377/33178) ，取返回信息中的 AutoScalingPolicyId 获取告警策略ID。
    */
   AutoScalingPolicyId: string
   /**
-   * 告警策略名称。
+   * 告警策略名称，在您账号中必须唯一。名称长度不能超过60，名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点。
    */
   ScalingPolicyName?: string
   /**
@@ -2163,43 +2198,43 @@ export interface CreateAutoScalingGroupRequest {
    */
   AutoScalingGroupName: string
   /**
-   * 启动配置ID
+   * 启动配置ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 或调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。
    */
   LaunchConfigurationId: string
   /**
-   * 最大实例数，取值范围为0-2000。
+   * 最大实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MaxSize: number
   /**
-   * 最小实例数，取值范围为0-2000。
+   * 最小实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MinSize: number
   /**
-   * VPC ID，基础网络则填空字符串
+   * 私有网络ID。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc)查询；也可以调用接口 [DescribeVpc](https://cloud.tencent.com/document/api/215/15778) ，从接口返回中的VpcId字段获取。
    */
   VpcId: string
   /**
-   * 默认冷却时间，单位秒，默认值为300
+   * 默认冷却时间，单位秒，默认值为300。取值范围为 [0,3600]。
    */
   DefaultCooldown?: number
   /**
-   * 期望实例数，大小介于最小实例数和最大实例数之间
+   * 期望实例数，取值范围 [0,2000]，默认值为最小值。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   DesiredCapacity?: number
   /**
-   * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   LoadBalancerIds?: Array<string>
   /**
-   * 伸缩组内实例所属项目ID。不填为默认项目。
+   * 伸缩组内实例所属项目ID。默认值为0，表示使用默认项目。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。
    */
   ProjectId?: number
   /**
-   * 应用型负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 负载均衡器列表，目前长度上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
    */
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
   /**
-   * 子网ID列表，VPC场景下必须指定子网。多个子网以填写顺序为优先级，依次进行尝试，直至可以成功创建实例。
+   * 子网ID列表，VPC场景下必须指定子网。多个子网以填写顺序为优先级，依次进行尝试，直至可以成功创建实例。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) ，从接口返回中的SubnetId字段获取。
    */
   SubnetIds?: Array<string>
   /**
@@ -2229,7 +2264,7 @@ export interface CreateAutoScalingGroupRequest {
    */
   ZonesCheckPolicy?: string
   /**
-   * 标签描述列表。通过指定该参数可以支持绑定标签到伸缩组。同时绑定标签到相应的资源实例。每个伸缩组最多支持30个标签。
+   * 标签描述列表。通过指定该参数可以支持绑定标签到伸缩组。同时绑定标签到相应的资源实例。每个伸缩组最多支持30个标签。可通过调用接口 [GetTags](https://cloud.tencent.com/document/product/651/72275) ，根据回参获取已有的标签键值对信息。
    */
   Tags?: Array<Tag>
   /**
@@ -2237,7 +2272,7 @@ export interface CreateAutoScalingGroupRequest {
    */
   ServiceSettings?: ServiceSettings
   /**
-   * 实例具有IPv6地址数量的配置，取值包括 0、1，默认值为0。
+   * 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 [IPv6使用限制](https://cloud.tencent.com/document/product/1142/38369)。
    */
   Ipv6AddressCount?: number
   /**
@@ -2449,15 +2484,16 @@ export interface DataDisk {
 <li>CLOUD_SSD：SSD云硬盘</li>
 <li>CLOUD_HSSD：增强型SSD云硬盘</li>
 <li>CLOUD_TSSD：极速型SSD云硬盘</li>
+<li>CLOUD_BSSD：通用型SSD云硬盘</li>
 默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
    */
   DiskType?: string
   /**
-   * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+   * 数据盘大小，单位：GB。不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
    */
   DiskSize?: number
   /**
-   * 数据盘快照 ID，类似 `snap-l8psqwnt`。
+   * 数据盘快照 ID，可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/362/15647) 接口获取该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotId?: string
@@ -2482,8 +2518,7 @@ export interface DataDisk {
    */
   ThroughputPerformance?: number
   /**
-   * 突发性能。是否开启突发性能，默认取值为 false。
-
+   * 突发性能。是否开启突发性能，默认取值为 false。当前该参数仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且需容量 > 460GB。
 注：内测中，需提单申请后使用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2509,7 +2544,7 @@ export interface RollbackInstanceRefreshResponse {
  */
 export interface DeleteScalingPolicyRequest {
   /**
-   * 待删除的告警策略ID。
+   * 待删除的告警策略ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeScalingPolicies](https://cloud.tencent.com/document/api/377/33178) ，取返回信息中的 AutoScalingPolicyId 获取告警策略ID。
    */
   AutoScalingPolicyId: string
 }
@@ -2527,7 +2562,7 @@ export interface LoginSettings {
    */
   Password?: string
   /**
-   * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+   * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
    */
   KeyIds?: Array<string>
   /**
@@ -2545,7 +2580,7 @@ export interface CreateAutoScalingGroupFromInstanceResponse {
   /**
    * 伸缩组ID
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2614,7 +2649,10 @@ export interface Instance {
    */
   LifeCycleState?: string
   /**
-   * 健康状态，取值包括HEALTHY和UNHEALTHY
+   * 健康状态，取值范围如下：
+<li>HEALTHY：实例处于健康状态</li>
+<li>UNHEALTHY：实例 ping 不可达</li>
+<li>CLB_UNHEALTHY：CLB 监听的实例端口不健康</li>
    */
   HealthStatus?: string
   /**
@@ -2630,7 +2668,7 @@ export interface Instance {
    */
   CreationType?: string
   /**
-   * 实例加入时间
+   * 实例加入时间，按照ISO8601标准表示，并且使用UTC时间。
    */
   AddTime?: string
   /**
@@ -2825,7 +2863,7 @@ export interface DescribeAutoScalingActivitiesRequest {
   ActivityIds?: Array<string>
   /**
    * 过滤条件。
-<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
+<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
 <li> activity-status-code - String - 是否必填：否 -（过滤条件）按照伸缩活动状态过滤。（INIT：初始化中|RUNNING：运行中|SUCCESSFUL：活动成功|PARTIALLY_SUCCESSFUL：活动部分成功|FAILED：活动失败|CANCELLED：活动取消）</li>
 <li> activity-type - String - 是否必填：否 -（过滤条件）按照伸缩活动类型过滤。（SCALE_OUT：扩容活动|SCALE_IN：缩容活动|ATTACH_INSTANCES：添加实例|REMOVE_INSTANCES：销毁实例|DETACH_INSTANCES：移出实例|TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁|REPLACE_UNHEALTHY_INSTANCE：替换不健康实例|UPDATE_LOAD_BALANCERS：更新负载均衡器）</li>
 <li> activity-id - String - 是否必填：否 -（过滤条件）按照伸缩活动ID过滤。</li>
@@ -2855,19 +2893,19 @@ export interface DescribeAutoScalingActivitiesRequest {
  */
 export interface ModifyDesiredCapacityRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
-   * 期望实例数
+   * 期望实例数，取值范围 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   DesiredCapacity: number
   /**
-   * 最小实例数，取值范围为0-2000。
+   * 最小实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MinSize?: number
   /**
-   * 最大实例数，取值范围为0-2000。
+   * 最大实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MaxSize?: number
 }
@@ -2905,7 +2943,9 @@ export interface StartInstanceRefreshResponse {
  */
 export interface CreateLifecycleHookRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:
+<li>通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。</li>
+<li>通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。</li>
    */
   AutoScalingGroupId: string
   /**
@@ -2913,11 +2953,15 @@ export interface CreateLifecycleHookRequest {
    */
   LifecycleHookName: string
   /**
-   * 进行生命周期挂钩的场景，取值范围包括 INSTANCE_LAUNCHING 和 INSTANCE_TERMINATING
+   * 进行生命周期挂钩的场景，取值范围如下:
+<li> INSTANCE_LAUNCHING: 扩容生命周期挂钩</li>
+<li>INSTANCE_TERMINATING: 缩容生命周期挂钩</li>
    */
   LifecycleTransition: string
   /**
-   * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值范围是 CONTINUE 或 ABANDON，默认值为 CONTINUE
+   * 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围如下：
+<li>CONTINUE: 默认值，表示继续执行扩缩容活动</li>
+<li>ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。</li>
    */
   DefaultResult?: string
   /**
@@ -2925,7 +2969,7 @@ export interface CreateLifecycleHookRequest {
    */
   HeartbeatTimeout?: number
   /**
-   * 弹性伸缩向通知目标发送的附加信息，配置通知时使用,默认值为空字符串""。最大长度不能超过1024个字节。
+   * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串，最长不超过 1024 字符。NotificationMetadata 和 LifecycleCommand参数互斥，二者不可同时指定。
    */
   NotificationMetadata?: string
   /**
@@ -2933,11 +2977,12 @@ export interface CreateLifecycleHookRequest {
    */
   NotificationTarget?: NotificationTarget
   /**
-   * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
+   * 进行生命周期挂钩的场景类型，取值范围包括 NORMAL 和 EXTENSION，默认值为 NORMAL。
+说明：设置为EXTENSION值，在 [AttachInstances](https://cloud.tencent.com/document/api/377/20441)、[DetachInstances](https://cloud.tencent.com/document/api/377/20436)、[RemoveInstaces](https://cloud.tencent.com/document/api/377/20431)、[StopAutoScalingInstances](https://cloud.tencent.com/document/api/377/40286)、[StartAutoScalingInstances](https://cloud.tencent.com/document/api/377/40287)、[StartInstanceRefresh](https://cloud.tencent.com/document/api/377/99172) 接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
    */
   LifecycleTransitionType?: string
   /**
-   * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+   * 远程命令执行对象。通知相关参数（NotificationTarget、NotificationMetadata）与该参数互斥，二者不可同时指定。
    */
   LifecycleCommand?: LifecycleCommand
 }
@@ -3186,11 +3231,11 @@ export interface CreateAutoScalingGroupResponse {
  */
 export interface TargetAttribute {
   /**
-   * 端口
+   * 端口。取值范围为 [1,65535]。作为入参时，该参数必填。
    */
   Port: number
   /**
-   * 权重
+   * 权重。取值范围为 [0,100]。作为入参时，该参数必填。
    */
   Weight: number
 }
@@ -3238,23 +3283,28 @@ export interface DescribeLifecycleHooksResponse {
  */
 export interface CreateScalingPolicyRequest {
   /**
-   * 伸缩组ID。
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
-   * 告警触发策略名称。
+   * 告警策略名称，在您账号中必须唯一。名称长度不能超过60，名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点。
    */
   ScalingPolicyName: string
   /**
-   * 告警触发策略类型，默认类型为SIMPLE。取值范围：<br><li>SIMPLE：简单策略</li><li>TARGET_TRACKING：目标追踪策略</li>
+   * 告警触发策略类型，默认类型为SIMPLE。取值范围：
+<li>SIMPLE：简单策略</li>
+<li>TARGET_TRACKING：目标追踪策略</li>
    */
   ScalingPolicyType?: string
   /**
-   * 告警触发后，期望实例数修改方式，仅适用于简单策略。取值范围：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
+   * 告警触发后，期望实例数修改方式，仅适用于简单策略，在简单策略场景下必填。取值范围：
+<li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li>
+<li>EXACT_CAPACITY：调整至指定期望实例数</li>
+<li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
    */
   AdjustmentType?: string
   /**
-   * 告警触发后，期望实例数的调整值，仅适用于简单策略。
+   * 告警触发后，期望实例数的调整值，仅适用于简单策略，在简单策略场景下必填。
 <li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> 
 <li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> 
 <li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。</li>
@@ -3265,11 +3315,11 @@ export interface CreateScalingPolicyRequest {
    */
   Cooldown?: number
   /**
-   * 告警监控指标，仅适用于简单策略。
+   * 告警监控指标，仅适用于简单策略，在简单策略场景下必填。
    */
   MetricAlarm?: MetricAlarm
   /**
-   * 预定义监控项，仅适用于目标追踪策略。取值范围：
+   * 预定义监控项，仅适用于目标追踪策略，在目标追踪策略场景下必填。取值范围：
 <li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li>
 <li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li>
 <li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li>
@@ -3278,7 +3328,7 @@ export interface CreateScalingPolicyRequest {
    */
   PredefinedMetricType?: string
   /**
-   * 目标值，仅适用于目标追踪策略。
+   * 目标值，仅适用于目标追踪策略，在目标追踪策略场景下必填。
 <li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li>
 <li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li>
 <li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li>
@@ -3328,7 +3378,7 @@ export interface ResumeInstanceRefreshRequest {
  */
 export interface DescribeAutoScalingAdvicesRequest {
   /**
-   * 待查询的伸缩组列表，上限100。
+   * 待查询的伸缩组列表，上限100。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupIds: Array<string>
 }
@@ -3338,7 +3388,7 @@ export interface DescribeAutoScalingAdvicesRequest {
  */
 export interface DeleteNotificationConfigurationRequest {
   /**
-   * 待删除的通知ID。
+   * 待删除的通知ID，目前为必填参数。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeNotificationConfigurations](https://cloud.tencent.com/document/api/377/33183) ，取返回信息中的 AutoScalingNotificationId 获取通知ID。
    */
   AutoScalingNotificationId?: string
 }
@@ -3378,8 +3428,8 @@ export interface DescribeLaunchConfigurationsRequest {
 export interface NotificationTarget {
   /**
    * 目标类型，取值范围包括`CMQ_QUEUE`、`CMQ_TOPIC`、`TDMQ_CMQ_QUEUE`、`TDMQ_CMQ_TOPIC`。
-<li> CMQ_QUEUE，指腾讯云消息队列-队列模型。</li>
-<li> CMQ_TOPIC，指腾讯云消息队列-主题模型。</li>
+<li> CMQ_QUEUE，指腾讯云消息队列-队列模型，对应产品已下线，[建议切换](https://cloud.tencent.com/document/product/1496/83970) TDMQ_CMQ_QUEUE 使用。</li>
+<li> CMQ_TOPIC，指腾讯云消息队列-主题模型，对应产品已下线，[建议切换](https://cloud.tencent.com/document/product/1496/83970) TDMQ_CMQ_TOPIC 使用。</li>
 <li> TDMQ_CMQ_QUEUE，指腾讯云 TDMQ 消息队列-队列模型。</li>
 <li> TDMQ_CMQ_TOPIC，指腾讯云 TDMQ 消息队列-主题模型。</li>
    */
@@ -3399,11 +3449,11 @@ export interface NotificationTarget {
  */
 export interface ModifyLoadBalancerTargetAttributesRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
-   * 需修改目标规则属性的应用型负载均衡器列表，列表长度上限为100
+   * 需修改目标规则属性的负载均衡器列表，列表长度上限为100。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   ForwardLoadBalancers: Array<ForwardLoadBalancer>
 }
@@ -3529,7 +3579,7 @@ export interface AutoScalingGroupAbstract {
  */
 export interface EnableAutoScalingGroupRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
 }
@@ -3605,7 +3655,9 @@ export interface RefreshActivity {
    */
   RefreshBatchSet?: Array<RefreshBatch>
   /**
-   * 刷新模式。
+   * 刷新模式。取值范围如下：
+<li>ROLLING_UPDATE_RESET：重装系统进行滚动更新</li>
+<li>ROLLING_UPDATE_REPLACE：新建实例替换进行滚动更新，该模式暂不支持回滚接口</li>
    */
   RefreshMode?: string
   /**
@@ -3635,17 +3687,17 @@ export interface RefreshActivity {
    */
   CurrentRefreshBatchNum?: number
   /**
-   * 刷新活动开始时间。
+   * 刷新活动开始时间，为标准 `UTC` 时间，格式形如 `YYYY-MM-DDTHH:mm:ssZ`。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 刷新活动结束时间。
+   * 刷新活动结束时间，为标准 `UTC` 时间，格式形如 `YYYY-MM-DDTHH:mm:ssZ`。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 刷新活动创建时间。
+   * 刷新活动创建时间，为标准 `UTC` 时间，格式形如 `YYYY-MM-DDTHH:mm:ssZ`。
    */
   CreatedTime?: string
 }
@@ -3655,7 +3707,7 @@ export interface RefreshActivity {
  */
 export interface DescribeNotificationConfigurationsRequest {
   /**
-   * 按照一个或者多个通知ID查询。实例ID形如：asn-2sestqbr。每次请求的实例的上限为100。参数不支持同时指定`AutoScalingNotificationIds`和`Filters`。
+   * 按照一个或者多个通知ID查询，列表长度上限为100。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 获取通知ID。参数不支持同时指定`AutoScalingNotificationIds`和`Filters`。
    */
   AutoScalingNotificationIds?: Array<string>
   /**
@@ -3751,19 +3803,19 @@ export interface LifecycleHook {
  */
 export interface ForwardLoadBalancer {
   /**
-   * 负载均衡器ID
+   * 负载均衡器ID。作为入参时，该参数必填。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   LoadBalancerId: string
   /**
-   * 应用型负载均衡监听器 ID
+   * 负载均衡监听器 ID。作为入参时，该参数必填。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   ListenerId: string
   /**
-   * 目标规则属性列表
+   * 目标规则属性列表。作为入参时，该参数必填。
    */
   TargetAttributes: Array<TargetAttribute>
   /**
-   * 转发规则ID，注意：针对七层监听器此参数必填
+   * 转发规则ID，注意：针对七层监听器此参数必填。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   LocationId?: string
   /**
@@ -3834,7 +3886,7 @@ export interface InstanceNameIndexSettings {
  */
 export interface DeleteAutoScalingGroupRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
 }
@@ -3911,15 +3963,15 @@ export interface StopInstanceRefreshResponse {
  */
 export interface AttachLoadBalancersRequest {
   /**
-   * 伸缩组ID
+   * 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。
    */
   AutoScalingGroupId: string
   /**
-   * 传统型负载均衡器ID列表，每个伸缩组绑定传统型负载均衡器数量上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 传统型负载均衡器ID列表，每个伸缩组绑定传统型负载均衡器数量上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   LoadBalancerIds?: Array<string>
   /**
-   * 应用型负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   * 负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
    */
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
 }
@@ -4080,15 +4132,15 @@ export interface Activity {
    */
   Description?: string
   /**
-   * 伸缩活动开始时间。
+   * 伸缩活动开始时间，为 `UTC` 标准时间。
    */
   StartTime?: string
   /**
-   * 伸缩活动结束时间。
+   * 伸缩活动结束时间，为 `UTC` 标准时间。
    */
   EndTime?: string
   /**
-   * 伸缩活动创建时间。
+   * 伸缩活动创建时间，为 `UTC` 标准时间。
    */
   CreatedTime?: string
   /**
@@ -4213,19 +4265,19 @@ export interface CreateAutoScalingGroupFromInstanceRequest {
    */
   AutoScalingGroupName: string
   /**
-   * 实例ID
+   * 实例ID。可通过登录[控制台](https://console.cloud.tencent.com/cvm/index)或调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。
    */
   InstanceId: string
   /**
-   * 最小实例数，取值范围为0-2000。
+   * 最小实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MinSize: number
   /**
-   * 最大实例数，取值范围为0-2000。
+   * 最大实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
    */
   MaxSize: number
   /**
-   * 期望实例数，大小介于最小实例数和最大实例数之间。
+   * 期望实例数，大小介于最小实例数和最大实例数之间。不传入时默认值等于最小值。
    */
   DesiredCapacity?: number
   /**
@@ -4309,7 +4361,7 @@ export interface DeleteLifecycleHookResponse {
  */
 export interface ExecuteScalingPolicyRequest {
   /**
-   * 告警伸缩策略ID，不支持目标追踪策略。
+   * 告警伸缩策略ID，不支持目标追踪策略。可通过 [DescribeScalingPolicies](https://cloud.tencent.com/document/api/377/33178) 接口返回的 `ScalingPolicyType ` 参数获取告警策略类型。
    */
   AutoScalingPolicyId: string
   /**

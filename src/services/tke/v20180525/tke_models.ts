@@ -2128,6 +2128,7 @@ export interface Instance {
   CreatedTime?: string
   /**
    * 节点内网IP
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LanIP?: string
   /**
@@ -6885,37 +6886,61 @@ export interface DescribePrometheusRecordRulesResponse {
  */
 export interface ClusterAdvancedSettings {
   /**
-   * 是否启用IPVS
-   */
-  IPVS?: boolean
-  /**
    * 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)
    */
   AsEnabled?: boolean
+  /**
+   * 是否开启审计开关
+   */
+  AuditEnabled?: boolean
+  /**
+   * 审计日志上传到的topic
+   */
+  AuditLogTopicId?: string
+  /**
+   * 审计日志上传到的logset日志集
+   */
+  AuditLogsetId?: string
+  /**
+   * 自定义模式下的基础pod数量
+   */
+  BasePodNumber?: number
+  /**
+   * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
+   */
+  CiliumMode?: string
   /**
    * 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker"
    */
   ContainerRuntime?: string
   /**
-   * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
+   * 是否启用集群删除保护
    */
-  NodeNameType?: string
+  DeletionProtection?: boolean
+  /**
+   * 是否开节点podCIDR大小的自定义模式
+   */
+  EnableCustomizedPodCIDR?: boolean
+  /**
+   * 元数据拆分存储Etcd配置
+   */
+  EtcdOverrideConfigs?: Array<EtcdOverrideConfig>
   /**
    * 集群自定义参数
    */
   ExtraArgs?: ClusterExtraArgs
   /**
-   * 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。
+   * 是否启用IPVS
    */
-  NetworkType?: string
+  IPVS?: boolean
+  /**
+   * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
+   */
+  IsDualStack?: boolean
   /**
    * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
    */
   IsNonStaticIpMode?: boolean
-  /**
-   * 是否启用集群删除保护
-   */
-  DeletionProtection?: boolean
   /**
    * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
 iptables模式：IPVS和KubeProxyMode都不设置
@@ -6927,45 +6952,25 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
    */
   KubeProxyMode?: string
   /**
-   * 是否开启审计开关
+   * 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。
    */
-  AuditEnabled?: boolean
+  NetworkType?: string
   /**
-   * 审计日志上传到的logset日志集
+   * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
    */
-  AuditLogsetId?: string
+  NodeNameType?: string
   /**
-   * 审计日志上传到的topic
+   * 是否开启QGPU共享
    */
-  AuditLogTopicId?: string
-  /**
-   * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
-   */
-  VpcCniType?: string
+  QGPUShareEnable?: boolean
   /**
    * 运行时版本
    */
   RuntimeVersion?: string
   /**
-   * 是否开节点podCIDR大小的自定义模式
+   * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
    */
-  EnableCustomizedPodCIDR?: boolean
-  /**
-   * 自定义模式下的基础pod数量
-   */
-  BasePodNumber?: number
-  /**
-   * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
-   */
-  CiliumMode?: string
-  /**
-   * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
-   */
-  IsDualStack?: boolean
-  /**
-   * 是否开启QGPU共享
-   */
-  QGPUShareEnable?: boolean
+  VpcCniType?: string
 }
 
 /**
@@ -10932,6 +10937,11 @@ export interface UninstallEdgeLogAgentRequest {
  */
 export interface ClusterExtraArgs {
   /**
+   * etcd自定义参数，只支持独立集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Etcd?: Array<string>
+  /**
    * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -10946,11 +10956,6 @@ export interface ClusterExtraArgs {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KubeScheduler?: Array<string>
-  /**
-   * etcd自定义参数，只支持独立集群
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Etcd?: Array<string>
 }
 
 /**
@@ -12874,6 +12879,16 @@ export interface DeleteImageCachesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 元数据拆分存储Etcd配置
+ */
+export interface EtcdOverrideConfig {
+  /**
+   * k8s资源，支持核心资源，控制类资源，配置及敏感资源
+   */
+  Resources: Array<string>
 }
 
 /**

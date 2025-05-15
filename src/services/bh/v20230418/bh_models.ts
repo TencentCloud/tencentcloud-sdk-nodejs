@@ -1207,6 +1207,32 @@ export interface BindDeviceAccountPrivateKeyResponse {
 }
 
 /**
+ * 同步过来的ioa用户分组信息
+ */
+export interface IOAUserGroup {
+  /**
+   * ioa用户组织id
+   */
+  OrgId?: number
+  /**
+   * ioa用户组织名称
+   */
+  OrgName?: string
+  /**
+   * ioa用户组织id路径
+   */
+  OrgIdPath?: string
+  /**
+   * ioa用户组织名称路径
+   */
+  OrgNamePath?: string
+  /**
+   * ioa关联用户源类型
+   */
+  Source?: number
+}
+
+/**
  * SearchCommandBySid请求参数结构体
  */
 export interface SearchCommandBySidRequest {
@@ -2252,6 +2278,10 @@ export interface AssetSyncStatus {
    * 同步任务是否正在进行中
    */
   InProcess?: boolean
+  /**
+   * 任务错误消息
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -2314,7 +2344,7 @@ export interface DescribeUsersRequest {
    */
   AuthorizedAppAssetIdSet?: Array<number | bigint>
   /**
-   * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部
+   * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 3-ioa 不传为全部
    */
   AuthTypeSet?: Array<number | bigint>
   /**
@@ -2326,6 +2356,14 @@ export interface DescribeUsersRequest {
 
    */
   Filters?: Array<Filter>
+  /**
+   * 是否获取cam用户, 0-否，1-是
+   */
+  IsCamUser?: number
+  /**
+   * 用户来源，0-bh，1-ioa,不传为全部
+   */
+  UserFromSet?: Array<number | bigint>
 }
 
 /**
@@ -2959,6 +2997,14 @@ export interface User {
    * 权限版本
    */
   AclVersion?: number
+  /**
+   * 用户来源，0-bh,1-ioa
+   */
+  UserFrom?: number
+  /**
+   * ioa同步过来的用户相关信息
+   */
+  IOAUserGroup?: IOAUserGroup
 }
 
 /**
@@ -3055,6 +3101,10 @@ export interface Device {
    * 已上传的SSL证书名称
    */
   SSLCertName?: string
+  /**
+   * IOA侧的资源ID
+   */
+  IOAId?: number
 }
 
 /**
@@ -4163,6 +4213,18 @@ export interface Resource {
    * 1 默认值，外网访问开启，0 外网访问关闭，2 外网访问开通中，3 外网访问关闭中
    */
   ExternalAccess?: number
+  /**
+   * 0默认值。0-免费版（试用版）ioa，1-付费版ioa
+   */
+  IOAResource?: number
+  /**
+   * 零信任堡垒机用户扩展包个数。1个扩展包对应20个用户数
+   */
+  PackageIOAUserCount?: number
+  /**
+   *  零信任堡垒机带宽扩展包个数。一个扩展包表示4M带宽
+   */
+  PackageIOABandwidth?: number
 }
 
 /**

@@ -410,7 +410,7 @@ export interface DescribeNetworkInterfacesRequest {
   NetworkInterfaceIds?: Array<string>
   /**
    * 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。
-<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
 </li>
 <li>subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。
 </li>
@@ -908,11 +908,14 @@ export interface DescribeServiceTemplateGroupsResponse {
  */
 export interface DescribeVpcEndPointRequest {
   /**
-   * 过滤条件。
-<li> end-point-service-id- String - （过滤条件）终端节点服务ID。</li>
+   * 过滤条件。当前支持如下过滤条件：
+<li> end-point-service-id- String - （过滤条件）终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
+</li>
 <li>end-point-name - String - （过滤条件）终端节点实例名称。</li>
-<li> end-point-id- String - （过滤条件）终端节点实例ID。</li>
-<li> vpc-id- String - （过滤条件）VPC实例ID。</li>
+<li> end-point-id- String - （过滤条件）终端节点实例ID。可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679) 
+接口获取。</li>
+<li> vpc-id- String - （过滤条件）VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+</li>
    */
   Filters?: Array<Filter>
   /**
@@ -924,7 +927,8 @@ export interface DescribeVpcEndPointRequest {
    */
   Limit?: number
   /**
-   * 终端节点ID列表。
+   * 终端节点ID列表。可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679) 
+获取。
    */
   EndPointId?: Array<string>
   /**
@@ -1060,7 +1064,7 @@ export interface DescribeLocalGatewayRequest {
  */
 export interface FlowLog {
   /**
-   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
    */
   VpcId?: string
   /**
@@ -1692,7 +1696,7 @@ export interface CreateIp6TranslatorsResponse {
  */
 export interface DescribeFlowLogsRequest {
   /**
-   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
    */
   VpcId?: string
   /**
@@ -1977,19 +1981,19 @@ export interface CreateVpnGatewaySslServerRequest {
  */
 export interface CreateVpcEndPointRequest {
   /**
-   * VPC实例ID。
+   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
    */
   VpcId: string
   /**
-   * 子网实例ID。
+   * 子网实例ID。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。
    */
   SubnetId: string
   /**
-   * 终端节点名称。
+   * 终端节点名称。限制为60个字符。
    */
   EndPointName: string
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
    */
   EndPointServiceId: string
   /**
@@ -1997,7 +2001,7 @@ export interface CreateVpcEndPointRequest {
    */
   EndPointVip?: string
   /**
-   * 安全组ID。
+   * 安全组ID。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。
    */
   SecurityGroupId?: string
   /**
@@ -2186,15 +2190,16 @@ export interface ReplaceHighPriorityRoutesResponse {
  */
 export interface ModifyVpcEndPointServiceAttributeRequest {
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
+
    */
   EndPointServiceId: string
   /**
-   * VPCID。
+   * VPC唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
    */
   VpcId: string
   /**
-   * 终端节点服务名称。
+   * 终端节点服务名称。长度不超过60个字符。
    */
   EndPointServiceName?: string
   /**
@@ -2202,7 +2207,11 @@ export interface ModifyVpcEndPointServiceAttributeRequest {
    */
   AutoAcceptFlag?: boolean
   /**
-   * 后端服务的ID，比如lb-xxx。
+   * 后端服务的ID，比如lb-p1hiksdg。CLB可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)接口获取；
+MYSQL可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/240/38568)接口获取；
+CRS可通过[DescribeInstances](https://cloud.tencent.com/document/product/239/20018)接口获取；
+GWLB可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/product/1782/111683)接口获取
+
    */
   ServiceInstanceId?: string
   /**
@@ -2526,11 +2535,11 @@ export interface DescribeBandwidthPackageBandwidthRangeResponse {
  */
 export interface DeleteVpcEndPointServiceWhiteListRequest {
   /**
-   * 用户UIN数组。
+   * 用户UIN数组。登录 腾讯云账号中心控制台
    */
   UserUin: Array<string>
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
    */
   EndPointServiceId: string
 }
@@ -2586,7 +2595,7 @@ export interface DetachNetworkInterfaceResponse {
  */
 export interface DeleteVpcEndPointServiceRequest {
   /**
-   * 终端节点ID。
+   * 终端节点ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
    */
   EndPointServiceId: string
   /**
@@ -3190,7 +3199,7 @@ export interface DeleteFlowLogRequest {
    */
   FlowLogId: string
   /**
-   * 私用网络唯一ID。删除云联网流日志时，可不填，其他流日志类型必填。可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取流日志对应的私有网络唯一ID。也可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取当前账户的私有网络唯一ID。
+   * 私用网络唯一ID。删除云联网流日志时，可不填，其他流日志类型必填。可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取流日志对应的私有网络唯一ID。也可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取当前账户的私有网络唯一ID。
 
    */
   VpcId?: string
@@ -3297,11 +3306,11 @@ export interface TranslationNatRuleDiff {
  */
 export interface DisassociateVpcEndPointSecurityGroupsRequest {
   /**
-   * 安全组ID数组。
+   * 安全组ID数组。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。
    */
   SecurityGroupIds: Array<string>
   /**
-   * 终端节点ID。
+   * 终端节点ID。可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679) 获取。
    */
   EndPointId: string
 }
@@ -3695,7 +3704,7 @@ export interface ModifyVpcEndPointAttributeResponse {
  */
 export interface DescribeFlowLogRequest {
   /**
-   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。该接口不支持拉取CCN类型的流日志，所以该字段为必选。
+   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。该接口不支持拉取CCN类型的流日志，所以该字段为必选。
    */
   VpcId: string
   /**
@@ -8166,10 +8175,15 @@ export interface CreateSubnetsRequest {
 export interface DescribeVpcEndPointServiceRequest {
   /**
    * 过滤条件。不支持同时传入参数 EndPointServiceIds and Filters。
-<li> service-id - String - （过滤条件）终端节点服务唯一ID。</li>
+<li> service-id - String - （过滤条件）终端节点服务唯一ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
+</li>
 <li>service-name - String - （过滤条件）终端节点实例名称。</li>
-<li>service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-xxx。</li>
-<li>service-type - String - （过滤条件）后端PAAS服务类型，CLB,CDB,CRS，不填默认查询类型为CLB。</li>
+<li>service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-dehd3e33。CLB可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)接口获取；
+MYSQL可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/240/38568)接口获取；
+CRS可通过[DescribeInstances](https://cloud.tencent.com/document/product/239/20018)接口获取；
+GWLB可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/product/1782/111683)接口获取。
+</li>
+<li>service-type - String - （过滤条件）后端PAAS服务类型，CLB（负载均衡），CDB（云数据库 MySQL），CRS（云数据库 Redis），GWLB（网关负载均衡），不填默认查询类型为CLB。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -8181,7 +8195,7 @@ export interface DescribeVpcEndPointServiceRequest {
    */
   Limit?: number
   /**
-   * 终端节点服务ID。不支持同时传入参数 EndPointServiceIds and Filters。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。不支持同时传入参数 EndPointServiceIds and Filters。
    */
   EndPointServiceIds?: Array<string>
   /**
@@ -8916,7 +8930,9 @@ export interface DescribeAssistantCidrRequest {
   VpcIds?: Array<string>
   /**
    * 过滤条件，参数不支持同时指定VpcIds和Filters。
-<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+
+当前支持的过滤条件如下：
+<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。（当前仅支持该过滤条件）</li>
    */
   Filters?: Array<Filter>
   /**
@@ -9039,7 +9055,7 @@ export interface EndPoint {
    */
   EndPointId?: string
   /**
-   * VPC唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+   * VPC唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
    */
   VpcId?: string
   /**
@@ -9684,15 +9700,15 @@ export interface DetachCcnInstancesRequest {
  */
 export interface ModifyVpcEndPointServiceWhiteListRequest {
   /**
-   * 用户UIN。
+   * 用户UIN。可以通过终端节点所在的用户通过登录 腾讯云账号中心控制台获取。
    */
   UserUin: string
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
    */
   EndPointServiceId: string
   /**
-   * 白名单描述信息。
+   * 白名单描述信息。长度不超过60个字符。
    */
   Description?: string
 }
@@ -9892,7 +9908,7 @@ export interface ModifyHighPriorityRouteTableAttributeRequest {
  */
 export interface CreateVpcEndPointServiceRequest {
   /**
-   * VPC实例ID。
+   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
    */
   VpcId: string
   /**
@@ -9904,7 +9920,8 @@ export interface CreateVpcEndPointServiceRequest {
    */
   AutoAcceptFlag: boolean
   /**
-   * 后端服务ID，比如lb-xxx。
+   * 后端服务ID，比如lb-p1hiksdg。CLB可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)接口获取；CDB可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/240/38568)接口获取；CRS可通过[DescribeInstances](https://cloud.tencent.com/document/product/239/20018)接口获取；GWLB可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/product/1782/111683)接口获取。
+
    */
   ServiceInstanceId: string
   /**
@@ -9912,7 +9929,7 @@ export interface CreateVpcEndPointServiceRequest {
    */
   IsPassService?: boolean
   /**
-   * 挂载的PAAS服务类型，CLB,CDB,CRS，不填默认挂载为CLB。
+   * 挂载的PAAS服务类型，CLB（负载均衡），CDB（云数据库 MySQL），CRS（云数据库 Redis），GWLB（网关负载均衡）。不填默认挂载为CLB。
    */
   ServiceType?: string
   /**
@@ -10024,7 +10041,7 @@ export interface DescribePrivateNatGatewayTranslationAclRulesResponse {
  */
 export interface CreateNetworkInterfaceRequest {
   /**
-   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
    */
   VpcId: string
   /**
@@ -10330,7 +10347,7 @@ export interface DescribeNetworkAclQuintupleEntriesResponse {
  */
 export interface DescribeSubnetsRequest {
   /**
-   * 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。
+   * 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100（该参数指定的子网是否返回，需要结合分页拉取参数Limit和Offset）。参数不支持同时指定SubnetIds和Filters。
    */
   SubnetIds?: Array<string>
   /**
@@ -10813,7 +10830,8 @@ export interface CheckTrafficMirrorResponse {
  */
 export interface CreateAndAttachNetworkInterfaceRequest {
   /**
-   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。
+   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
+
    */
   VpcId: string
   /**
@@ -14601,11 +14619,11 @@ export interface VpnGatewayRoute {
  */
 export interface EnableVpcEndPointConnectRequest {
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
    */
   EndPointServiceId: string
   /**
-   * 终端节点ID。
+   * 终端节点ID。可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679) 获取。
    */
   EndPointId: Array<string>
   /**
@@ -15228,15 +15246,15 @@ export interface AttachCcnInstancesResponse {
  */
 export interface ModifyVpcEndPointAttributeRequest {
   /**
-   * 终端节点ID。
+   * 终端节点ID。可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679) 获取。
    */
   EndPointId: string
   /**
-   * 终端节点名称。
+   * 终端节点名称。长度限制为60个字符。
    */
   EndPointName?: string
   /**
-   * 安全组ID列表。
+   * 安全组ID列表。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。
    */
   SecurityGroupIds?: Array<string>
   /**
@@ -15360,7 +15378,7 @@ export interface ReturnNormalAddressesResponse {
  */
 export interface DeleteVpcEndPointRequest {
   /**
-   * 终端节点ID。
+   * 终端节点ID。可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679) 获取。
    */
   EndPointId: string
   /**
@@ -16317,8 +16335,9 @@ export interface DescribeVpcEndPointServiceWhiteListRequest {
   Limit?: number
   /**
    * 过滤条件。
-<li> user-uin String - （过滤条件）用户UIN。</li>
-<li> end-point-service-id String - （过滤条件）终端节点服务ID。</li>
+<li> user-uin String - （过滤条件）用户UIN。登录 腾讯云账号中心控制台 获取。</li>
+<li> end-point-service-id String - （过滤条件）终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
+</li>
    */
   Filters?: Array<Filter>
 }
@@ -17160,15 +17179,15 @@ export interface ModifyPrivateNatGatewayTranslationNatRuleRequest {
  */
 export interface CreateVpcEndPointServiceWhiteListRequest {
   /**
-   * UIN。
+   * UIN。腾讯云账号中心控制台获取。
    */
   UserUin: string
   /**
-   * 终端节点服务ID。
+   * 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。
    */
   EndPointServiceId: string
   /**
-   * 白名单描述。
+   * 白名单描述。长度不超过60个字符。
    */
   Description?: string
 }

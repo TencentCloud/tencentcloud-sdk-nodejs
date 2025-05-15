@@ -509,6 +509,11 @@ export interface EmbedTokenInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SingleUserMultiToken?: boolean
+  /**
+   * 嵌出显示配置，目前为ChatBI嵌出场景用，TableFilter表示数据表列表过滤，SqlView表示sql查看功能
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigParam?: string
 }
 
 /**
@@ -1007,6 +1012,10 @@ Operator 目前支持
    * 一次创建的token数
    */
   TokenNum?: number
+  /**
+   * 嵌出显示配置，目前为ChatBI嵌出场景用，TableFilter表示数据表列表过滤，SqlView表示sql查看功能
+   */
+  ConfigParam?: string
 }
 
 /**

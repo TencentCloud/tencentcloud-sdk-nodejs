@@ -152,7 +152,7 @@ export interface DescribeTaskLogsRequest {
    */
   Offset?: number
   /**
-   * 最大任务实例数, 最大值为10.
+   * 最大任务实例数；默认值为5， 最大值为10。
    */
   Limit?: number
 }
