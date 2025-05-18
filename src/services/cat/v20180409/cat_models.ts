@@ -830,6 +830,10 @@ export interface CreateProbeTasksRequest {
    * 供应商子账户同步标志
    */
   SubSyncFlag?: number
+  /**
+   * 创建者名称
+   */
+  RtxName?: string
 }
 
 /**

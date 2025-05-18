@@ -2202,11 +2202,11 @@ export interface CreateAutoScalingGroupRequest {
    */
   LaunchConfigurationId: string
   /**
-   * 最大实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 最大实例数，取值范围为 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   MaxSize: number
   /**
-   * 最小实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 最小实例数，取值范围为 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   MinSize: number
   /**
@@ -2218,7 +2218,7 @@ export interface CreateAutoScalingGroupRequest {
    */
   DefaultCooldown?: number
   /**
-   * 期望实例数，取值范围 [0,2000]，默认值为最小值。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 期望实例数，取值范围 [0,2000]，默认值等于当前 MinSize，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   DesiredCapacity?: number
   /**
@@ -2897,15 +2897,15 @@ export interface ModifyDesiredCapacityRequest {
    */
   AutoScalingGroupId: string
   /**
-   * 期望实例数，取值范围 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 期望实例数，取值范围 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   DesiredCapacity: number
   /**
-   * 最小实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 最小实例数，取值范围为 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   MinSize?: number
   /**
-   * 最大实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 最大实例数，取值范围为 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   MaxSize?: number
 }
@@ -4269,15 +4269,15 @@ export interface CreateAutoScalingGroupFromInstanceRequest {
    */
   InstanceId: string
   /**
-   * 最小实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 最小实例数，取值范围为 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   MinSize: number
   /**
-   * 最大实例数，取值范围为0-2000。需满足最大值大于等于期望值，期望值大于等于最小值。
+   * 最大实例数，取值范围为 [0,2000]，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   MaxSize: number
   /**
-   * 期望实例数，大小介于最小实例数和最大实例数之间。不传入时默认值等于最小值。
+   * 期望实例数，取值范围 [0,2000]，默认值等于当前 MinSize，同时需满足 MaxSize >= DesiredCapacity >= MinSize 。
    */
   DesiredCapacity?: number
   /**

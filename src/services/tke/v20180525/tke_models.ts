@@ -217,7 +217,7 @@ export interface ModifyClusterImageResponse {
 }
 
 /**
- * EKS Instnace CBS volume
+ * EKS Instance CBS volume
  */
 export interface CbsVolume {
   /**
@@ -7798,11 +7798,11 @@ export interface EksCi {
    */
   EipAddress?: string
   /**
-   * EKS Cotainer Instance Id
+   * EKS Container Instance Id
    */
   EksCiId?: string
   /**
-   * EKS Cotainer Instance Name
+   * EKS Container Instance Name
    */
   EksCiName?: string
   /**

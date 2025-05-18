@@ -434,6 +434,7 @@ import {
   DeleteRulesResponse,
   OriginGroup,
   ModifySecurityIPGroupRequest,
+  VaryParameters,
   L4Proxy,
   SkipCondition,
   CreateSharedCNAMERequest,

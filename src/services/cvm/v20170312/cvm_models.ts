@@ -716,7 +716,16 @@ export interface RepairTaskInfo {
    */
   TaskSubType?: string
   /**
-   * 任务授权类型
+   * 任务授权类型，当前`AuthType`和维修任务提供的授权选项的对应关系如下：
+
+- `"1"`：仅提供【在线迁移授权】
+- `"2"`：仅提供【停机授权】
+- `"3"`：仅提供【在线换盘授权】
+- `"4"`：提供【停机换盘授权】（默认）、【弃盘迁移授权】（可选）
+- `"5"`：提供【停机授权】（默认）、【弃盘迁移授权】（可选）
+- `"6"`：仅提供【在线维护授权】
+- `"7"`：提供【在线维护授权】（默认）、【停机授权】（可选）
+- `"8"`：仅提供【弃盘迁移授权】
    */
   AuthType?: number
   /**
@@ -972,11 +981,11 @@ export interface RepairTaskControlRequest {
    */
   Product: string
   /**
-   * 指定待操作的实例ID列表，仅允许对列表中的实例ID相关的维修任务发起授权。
+   * 指定待操作的实例ID列表，仅允许对列表中的实例ID相关的维修任务发起授权，可通过 [DescribeTaskInfo](https://cloud.tencent.com/document/api/213/87933) 接口返回值中的`InstanceId`获取。
    */
   InstanceIds: Array<string>
   /**
-   * 维修任务ID。
+   * 指定待操作的维修任务ID，可通过 [DescribeTaskInfo](https://cloud.tencent.com/document/api/213/87933) 接口返回值中的`TaskId`获取。
    */
   TaskId: string
   /**
@@ -988,7 +997,12 @@ export interface RepairTaskControlRequest {
    */
   OrderAuthTime?: string
   /**
-   * 附加的授权处理策略。
+   * 附加的授权处理策略，不传或为空时，按默认授权方式进行处理。对于支持弃盘迁移授权的维修任务，当且仅当传入`LossyLocal`时，代表本次授权可允许发起弃盘迁移。
+
+注意：
+1. 指定`TaskSubMethod`为`LossyLocal`调用接口发起**弃盘迁移授权**时，本地盘实例的**所有本地盘数据都会清空**，相当于**重新部署本地盘实例**。
+2. 对于非本地盘实例，或不支持弃盘迁移选项的任务，指定`TaskSubMethod`为`LossyLocal`时接口不会报错，不过后端会自动忽略该参数。
+3. 特别的：如果本地盘实例系统盘是CBS云盘，并且`/etc/fstab`里之前配置了本地盘的自动挂载项，建议可根据业务侧的实际需求，评估是否在对应挂载项追加上`nofail`参数（代表对应挂载点挂载失败不阻塞开机流程）或注释对应的挂载路径。否则授权弃盘迁移后，对应本地盘数据已清空，自动挂载失败会导致实例开机流程失败进入救援模式。具体可参考 [Linux 实例：/etc/fstab 配置错误导致无法登录](https://cloud.tencent.com/document/product/213/72039)。
    */
   TaskSubMethod?: string
 }
@@ -2389,11 +2403,11 @@ export interface DescribeInstancesAttributesResponse {
  */
 export interface DescribeTaskInfoRequest {
   /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * 返回数量，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Limit: number
   /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * 偏移量。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Offset: number
   /**
@@ -2441,7 +2455,7 @@ export interface DescribeTaskInfoRequest {
    */
   TaskIds?: Array<string>
   /**
-   * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。
+   * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`，可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。
    */
   InstanceIds?: Array<string>
   /**
@@ -2449,11 +2463,11 @@ export interface DescribeTaskInfoRequest {
    */
   Aliases?: Array<string>
   /**
-   * 时间查询区间的起始位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当天`00:00:00`。
+   * 时间查询区间的起始位置，会根据任务创建时间`CreateTime`进行过滤，格式为`YYYY-MM-DD hh:mm:ss`。未传入时默认为当天`00:00:00`。
    */
   StartDate?: string
   /**
-   * 时间查询区间的终止位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当前时刻。
+   * 时间查询区间的终止位置，会根据任务创建时间`CreateTime`进行过滤，格式为`YYYY-MM-DD hh:mm:ss`。未传入时默认为当前时刻。
    */
   EndDate?: string
   /**
