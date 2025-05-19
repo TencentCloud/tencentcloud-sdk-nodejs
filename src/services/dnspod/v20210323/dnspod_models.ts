@@ -5274,20 +5274,19 @@ export interface BatchSearchRecordInfo {
   /**
    * 解析线路
    */
-  Area: string
+  Area?: string
   /**
    * 记录备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * TTL(秒)
    */
-  TTL: number
+  TTL?: number
   /**
    * 记录类型
    */
-  RecordType: string
+  RecordType?: string
   /**
    * 记录是否启用
    */
@@ -5304,11 +5303,11 @@ export interface BatchSearchRecordInfo {
   /**
    * 子域名
    */
-  SubDomain: string
+  SubDomain?: string
   /**
    * 解析值
    */
-  Value: string
+  Value?: string
   /**
    * MX优先级
 注意：此字段可能返回 null，表示取不到有效值。

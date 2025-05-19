@@ -893,8 +893,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除别称域名。
-   */
+     * 删除别称域名。
+该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
+     */
   async DeleteAliasDomain(
     req: DeleteAliasDomainRequest,
     cb?: (error: string, rep: DeleteAliasDomainResponse) => void
@@ -1117,8 +1118,9 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 创建别称域名。
-   */
+     * 创建别称域名。
+该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
+     */
   async CreateAliasDomain(
     req: CreateAliasDomainRequest,
     cb?: (error: string, rep: CreateAliasDomainResponse) => void
@@ -1127,8 +1129,9 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改别称域名状态。
-   */
+     * 修改别称域名状态。
+该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
+     */
   async ModifyAliasDomainStatus(
     req: ModifyAliasDomainStatusRequest,
     cb?: (error: string, rep: ModifyAliasDomainStatusResponse) => void
@@ -1709,8 +1712,9 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改别称域名。
-   */
+     * 修改别称域名。
+该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
+     */
   async ModifyAliasDomain(
     req: ModifyAliasDomainRequest,
     cb?: (error: string, rep: ModifyAliasDomainResponse) => void
@@ -2017,8 +2021,9 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询别称域名信息列表。
-   */
+     * 查询别称域名信息列表。
+该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
+     */
   async DescribeAliasDomains(
     req: DescribeAliasDomainsRequest,
     cb?: (error: string, rep: DescribeAliasDomainsResponse) => void

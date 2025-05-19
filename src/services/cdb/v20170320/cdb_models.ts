@@ -2324,6 +2324,7 @@ export interface ModifyRoGroupInfoRequest {
   IsBalanceRoLoad?: number
   /**
    * 废弃参数，无意义。
+   * @deprecated
    */
   ReplicationDelayTime?: number
 }
@@ -3692,10 +3693,12 @@ export interface StopCpuExpandResponse {
 export interface DescribeBackupConfigResponse {
   /**
    * 自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
+   * @deprecated
    */
   StartTimeMin?: number
   /**
    * 自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
+   * @deprecated
    */
   StartTimeMax?: number
   /**
@@ -6565,6 +6568,7 @@ export interface DeviceNetInfo {
 export interface ModifyDBInstanceVipVportResponse {
   /**
    * 异步任务ID。(该返回字段目前已废弃)
+   * @deprecated
    */
   AsyncRequestId?: string
   /**
@@ -8473,6 +8477,7 @@ export interface DescribeAuditPoliciesResponse {
 export interface IsolateDBInstanceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。(该返回字段目前已废弃，可以通过 DescribeDBInstances 接口查询实例的隔离状态)
+   * @deprecated
    */
   AsyncRequestId?: string
   /**

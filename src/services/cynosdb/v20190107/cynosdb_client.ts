@@ -171,6 +171,7 @@ import {
   DescribeClustersResponse,
   DescribeBackupConfigResponse,
   DescribeParamTemplatesResponse,
+  ProxyConfig,
   Addr,
   DescribeProjectSecurityGroupsRequest,
   ServerlessZoneStockInfo,

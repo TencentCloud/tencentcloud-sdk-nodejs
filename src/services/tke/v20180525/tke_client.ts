@@ -207,7 +207,6 @@ import {
   OpenConstraintInfo,
   DescribeClusterInspectionResultsOverviewRequest,
   ModifyPrometheusAlertPolicyRequest,
-  ForwardApplicationRequestV3Request,
   DescribeOpenPolicyListRequest,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
@@ -610,7 +609,6 @@ import {
   DescribeReservedInstancesRequest,
   DescribePodsBySpecRequest,
   UpdateClusterKubeconfigResponse,
-  ForwardApplicationRequestV3Response,
   RuntimeConfig,
   ModifyClusterAuthenticationOptionsRequest,
   DeleteClusterEndpointVipRequest,
@@ -1034,16 +1032,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVersionsResponse) => void
   ): Promise<DescribeVersionsResponse> {
     return this.request("DescribeVersions", req, cb)
-  }
-
-  /**
-   * 操作TKE集群的addon
-   */
-  async ForwardApplicationRequestV3(
-    req: ForwardApplicationRequestV3Request,
-    cb?: (error: string, rep: ForwardApplicationRequestV3Response) => void
-  ): Promise<ForwardApplicationRequestV3Response> {
-    return this.request("ForwardApplicationRequestV3", req, cb)
   }
 
   /**

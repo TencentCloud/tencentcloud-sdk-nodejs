@@ -2450,6 +2450,10 @@ export interface CustomSampleMatrix {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Streams?: Array<SampleStream>
+  /**
+   * 两个时间点的时间间隔，单位纳秒
+   */
+  Step?: number
 }
 
 /**

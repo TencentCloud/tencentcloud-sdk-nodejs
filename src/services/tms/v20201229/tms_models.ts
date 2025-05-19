@@ -84,7 +84,8 @@ export interface TextModerationRequest {
    */
   Content: string
   /**
-   * 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。<br>备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype
+   * 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](#https://console.cloud.tencent.com/cms/clouds/manage)中配置，控制台访问地址：。
+备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
    */
   BizType?: string
   /**
@@ -100,9 +101,13 @@ export interface TextModerationRequest {
    */
   Device?: Device
   /**
-   * Content的原始语种，比如en,zh
+   * 表示Content的原始语种，枚举值（"en","zh",""）en表示英文，zh表示中文，空字符表示默认语种中文，非中文场景耗时会更高，具体由送审文本内容决定，非中文场景需要联系客服确认
    */
   SourceLanguage?: string
+  /**
+   * 审核的业务类型，枚举值有{"","TEXT","TEXT_AIGC"},缺省值""和"TEXT"标识传统文本审核，"TEXT_AIGC"标识文本AIGC审核
+   */
+  Type?: string
 }
 
 /**
@@ -380,6 +385,10 @@ export interface TextModerationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SentimentAnalysis?: SentimentAnalysis
+  /**
+   * 该字段用于标识本次审核决策归因，比如text_nlp_tianji标识是由nlp tianji模型给出的审核决策，text_keyword_public标识命中了业务的关键词库
+   */
+  HitType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

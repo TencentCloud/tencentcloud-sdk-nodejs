@@ -388,16 +388,6 @@ it("tke.v20180525.DescribeVersions", async function () {
     }
 })
 
-it("tke.v20180525.ForwardApplicationRequestV3", async function () {
-    try {
-       const data = await client.ForwardApplicationRequestV3({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tke.v20180525.ModifyPrometheusAgentExternalLabels", async function () {
     try {
        const data = await client.ModifyPrometheusAgentExternalLabels({})

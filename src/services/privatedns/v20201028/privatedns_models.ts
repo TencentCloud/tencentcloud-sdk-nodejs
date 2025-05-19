@@ -632,19 +632,19 @@ export interface AccountVpcInfoOut {
  */
 export interface AccountVpcInfo {
   /**
-   * VpcId： vpc-xadsafsdasd
+   * VpcId
    */
   UniqVpcId: string
   /**
-   * Vpc所属地区: ap-guangzhou, ap-shanghai
+   * Vpc所属地区
    */
   Region: string
   /**
-   * Vpc所属账号: 123456789
+   * Vpc所属账号
    */
   Uin: string
   /**
-   * vpc资源名称：testname
+   * vpc资源名称
    */
   VpcName?: string
 }

@@ -409,9 +409,7 @@ export interface CreatePreparedPersonalEsignRequest {
    */
   IdCardType?: string
   /**
-   * 印章图片的base64
-注：已废弃
-请先通过UploadFiles接口上传文件，获取 FileId
+   * 该字段已不再使用
    * @deprecated
    */
   SealImage?: string
@@ -424,7 +422,7 @@ export interface CreatePreparedPersonalEsignRequest {
    */
   Mobile?: string
   /**
-   * 此字段已废弃，请勿继续使用。
+   * 该字段已不再使用
    */
   EnableAutoSign?: boolean
   /**
@@ -1308,6 +1306,11 @@ export interface CreateFlowOption {
  - 签署控件 是否默认展示日期.
    */
   SignComponentConfig?: SignComponentConfig
+  /**
+   * 是否禁止编辑（展示）水印控件属性
+<ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
+   */
+  ForbidEditWatermark?: boolean
 }
 
 /**
@@ -2860,7 +2863,7 @@ export interface CreateFlowRequest {
    */
   FlowType?: string
   /**
-   * 已经废弃字段，客户端Token，保持接口幂等性,最大长度64个字符
+   * 该字段已不再使用
    */
   ClientToken?: string
   /**
@@ -6323,7 +6326,7 @@ export interface CreateDocumentRequest {
    */
   Agent?: Agent
   /**
-   * 已废弃字段，客户端Token，保持接口幂等性,最大长度64个字符
+   * 该字段已不再使用
    */
   ClientToken?: string
 }
@@ -7403,9 +7406,9 @@ export interface ApproverInfo {
    */
   ApproverRoleName?: string
   /**
-   * <font coloe="red">【已废弃】</font>签署意愿确认渠道，默认为WEIXINAPP:人脸识别
+   * <font color="red">【已不再使用】</font>签署意愿确认渠道，默认为WEIXINAPP:人脸识别
 
-注: 将要废弃, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置
+注: 该字段已不再使用, 请用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置
    */
   VerifyChannel?: Array<string>
   /**
@@ -8563,7 +8566,7 @@ export interface CreatePrepareFlowRequest {
    */
   IntelligentStatus?: string
   /**
-   * 该字段已废弃，请使用InitiatorComponents
+   * 该字段已不再使用，请使用InitiatorComponents
    */
   Components?: Component
   /**
@@ -8621,7 +8624,7 @@ export interface CreatePrepareFlowRequest {
    */
   FlowDisplayType?: number
   /**
-   * <font color="red">此参数已经废弃，请使用 CreateFlowOption 里面的 SignComponentConfig</font>
+   * <font color="red">此字段已不再使用，请使用 CreateFlowOption 里面的 SignComponentConfig</font>
 签署控件的配置信息，用在嵌入式发起的页面配置，
 包括  
 
@@ -10077,9 +10080,7 @@ export interface UploadFilesRequest {
    */
   CoverRect?: boolean
   /**
-   * 用户自定义ID数组，与上传文件一一对应
-
-注: `历史遗留问题，已经废弃，调用接口时不用赋值`
+   * 该字段已不再使用
    */
   CustomIds?: Array<string>
   /**
@@ -10249,6 +10250,12 @@ export interface EmbedUrlOption {
 注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)和EmbedType=CREATE_CONTRACT_DRAFT_COOPEDIT(创建起草合同)有效**，
    */
   SkipUploadFile?: boolean
+  /**
+   * 是否禁止编辑（展示）水印控件属性
+<ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
+
+   */
+  ForbidEditWatermark?: boolean
 }
 
 /**

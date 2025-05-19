@@ -63,6 +63,7 @@ export interface InquirePriceRunInstancesResponse {
 export interface StopInstanceRequest {
   /**
    * 实例ID
+可通过DescribeInstances获取实例ID
    */
   InstanceId: string
   /**
@@ -152,15 +153,15 @@ TERMINATED：表示已销毁
    */
   GPUPerformance?: string
   /**
-   * 显存
+   * 显存，单位：GB
    */
   GPUMemory?: string
   /**
-   * CPU核数
+   * CPU核数，单位：核
    */
   CPU?: string
   /**
-   * 内存
+   * 内存，单位：GB
 
    */
   Memory?: string
@@ -194,15 +195,15 @@ FAILED：表示操作失败
    */
   LatestOperationState?: string
   /**
-   * 实例创建时间
+   * 实例创建时间，时间格式："YYYY-MM-DD HH:MM:SS"
    */
   CreateTime?: string
   /**
-   * 公网出带宽上限，默认10Mbps
+   * 公网出带宽上限，默认10Mbps，单位：Mbps
    */
   MaxOutBandwidth?: string
   /**
-   * 每月免费流量，默认500G
+   * 每月免费流量，默认500G，单位：GB
    */
   MaxFreeTraffic?: string
   /**
@@ -214,7 +215,7 @@ FAILED：表示操作失败
    */
   LoginServices?: Array<LoginService>
   /**
-   * 应用服务的操作系统类型
+   * 应用服务的操作系统类型；参数：linux、windows
    */
   OSType?: string
 }
@@ -253,6 +254,7 @@ export interface DescribeApplicationsResponse {
 export interface StartInstanceRequest {
   /**
    * 实例ID
+可通过DescribeInstances获取实例ID
    */
   InstanceId: string
   /**
@@ -280,12 +282,11 @@ export interface LoginSetting {
  */
 export interface RegionInfo {
   /**
-   * ap-guangzhou
-
+   * 地域
    */
   Region?: string
   /**
-   * 华南地区(广州)
+   * 地域名称
    */
   RegionName?: string
   /**
@@ -296,7 +297,7 @@ AVAILABLE：可用
   RegionState?: string
   /**
    * 学术加速是否支持：
-NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。对于ALREADY_SUPPORT的地域才需进一步调用DescribeScholarRocketStatus查看学术加速是开启还是关闭
+NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。
    */
   ScholarRocketSupportState?: string
 }
@@ -325,6 +326,7 @@ export interface Price {
 export interface TerminateInstancesRequest {
   /**
    * 实例ID列表
+可通过DescribeInstances接口获取ID列表.单次能查询100个InstanceId
    */
   InstanceIds: Array<string>
   /**
@@ -382,22 +384,15 @@ export interface DescribeApplicationsRequest {
    */
   ApplicationIds?: Array<string>
   /**
-   * 过滤器，跟ApplicationIds不能共用，支持的filter主要有：
-application-id: 精确匹配;
-scene-id: 精确匹配;
-application-name: 模糊匹配;
-application-type: 精确匹配;
+   * 过滤器，跟ApplicationIds不能共用，支持的filter主要有：application-id: 精确匹配;scene-id: 精确匹配，通过调用接口 [DescribeScenes](https://cloud.tencent.com/document/api/1721/101608)获取;application-name: 模糊匹配;application-type: 精确匹配，枚举类型如下：PUBLIC_APPLICATION（公共应用）/ PRIVATE_APPLICATION（自定义应用）/ COMMUNITY_APPLICATION（社区应用）;
    */
   Filters?: Array<Filter>
   /**
-   * 偏移量，默认为0
+   * 偏移量，不得小于0，默认为0
    */
   Offset?: number
   /**
-   * 返回量，默认为20
-MC：1000
-用户：100
-
+   * 返回量，不得大于100，默认为20
    */
   Limit?: number
   /**
@@ -449,11 +444,11 @@ export interface CreateApplicationRequest {
  */
 export interface RunInstancesRequest {
   /**
-   * 应用ID
+   * 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。
    */
   ApplicationId: string
   /**
-   * 算力套餐类型
+   * 算力套餐类型, 枚举：XL,XL_2X, 3XL, 3XL_2X, 4XL, 24GB_A
    */
   BundleType: string
   /**
@@ -461,11 +456,11 @@ export interface RunInstancesRequest {
    */
   SystemDisk?: SystemDisk
   /**
-   * 购买实例数量。
+   * 购买实例数量，单次请求实例数量上限为10.
    */
   InstanceCount?: number
   /**
-   * 实例显示名称
+   * 实例显示名称，名称长度限制为128个字符.
    */
   InstanceName?: string
   /**
@@ -507,7 +502,7 @@ export interface SystemDisk {
    */
   DiskType?: string
   /**
-   * 系统盘大小，单位：GB。默认值为 80
+   * 系统盘大小，单位：GB。默认值为 80，取值范围：80-1000
    */
   DiskSize?: number
   /**
@@ -535,20 +530,19 @@ export interface RunInstancesResponse {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 实例元组
+   * 实例元组，数量上限100
    */
   InstanceIds?: Array<string>
   /**
-   * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态；charge-type，付费方式；public-ip-address，公网IP过滤
+   * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有： instance-id，实例id； instance-state，实例状态：RUNNING，PENDING，STOPPED，ARREARS，STOPPED_NO_CHARGE； charge-type，付费方式：PREPAID_BY_MONTH，POSTPAID_BY_HOUR； public-ip-address，公网IP过滤
    */
   Filters?: Array<Filter>
   /**
-   * 偏移量，默认为0
-
+   * 偏移量，默认为0，不得大于100
    */
   Offset?: number
   /**
-   * 返回量，默认为20
+   * 返回量，默认为20，不能小于0
    */
   Limit?: number
 }
@@ -620,7 +614,7 @@ export interface MuskPromptInfo {
  */
 export interface DescribeScenesRequest {
   /**
-   * 场景id列表
+   * 场景id列表，单次能查询100个场景id
    */
   SceneIds?: Array<string>
 }
@@ -644,11 +638,11 @@ export interface DescribeRegionsResponse {
  */
 export interface InquirePriceRunInstancesRequest {
   /**
-   * 应用ID
+   * 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。
    */
   ApplicationId: string
   /**
-   * 算力套餐类型
+   * 算力套餐类型, 枚举：XL,XL_2X, 3XL, 3XL_2X, 4XL, 24GB_A.
    */
   BundleType: string
   /**
@@ -656,11 +650,11 @@ export interface InquirePriceRunInstancesRequest {
    */
   SystemDisk?: SystemDisk
   /**
-   * 购买实例数量。
+   * 购买实例数量，单次请求实例数量上限为10。
    */
   InstanceCount?: number
   /**
-   * 实例显示名称
+   * 实例显示名称，名称长度限制为128个字符。
    */
   InstanceName?: string
   /**
@@ -714,7 +708,7 @@ export interface CreateMuskPromptResponse {
  */
 export interface DescribeServiceLoginSettingsRequest {
   /**
-   * 实例id
+   * 实例ID通过调用接口[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612)获取。
    */
   InstanceId: string
   /**
@@ -746,11 +740,11 @@ export interface ApplicationInfo {
    */
   ConfigEnvironment?: string
   /**
-   * 系统盘大小下限
+   * 系统盘大小下限，单位GB
    */
   MinSystemDiskSize?: number
   /**
-   * 应用类型，目前该项取值可以为PRIVATE_APPLICATION或者PUBLIC_APPLICATION
+   * 应用类型，目前该项取值可以为PUBLIC_APPLICATION（公共应用）；PRIVATE_APPLICATION（自定义应用）；COMMUNITY_APPLICATION（社区应用）
    */
   ApplicationType?: string
   /**
@@ -759,11 +753,11 @@ export interface ApplicationInfo {
    */
   ApplicationState?: string
   /**
-   * 应用创建时间
+   * 应用创建时间，格式：%Y-%m-%d %H:%M:%S
    */
   CreateTime?: string
   /**
-   * 应用大小
+   * 应用大小，单位GB
    */
   ApplicationSize?: number
 }
@@ -859,7 +853,7 @@ export interface ItemPrice {
  */
 export interface DescribeInstanceNetworkStatusRequest {
   /**
-   * 实例ID数组，单次请求最多不超过100个实例
+   * 实例ID数组，单次请求最多不超过100个实例；实例ID通过调用接口[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612)获取。
    */
   InstanceIds: Array<string>
 }

@@ -588,6 +588,11 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraInfo?: ExtraInfo
+  /**
+   * 工作流信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlow?: WorkflowInfo
 }
 
 /**
@@ -661,6 +666,42 @@ export interface KnowledgeCapacityPieGraphDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Proportion?: number
+}
+
+/**
+ * 工作流信息
+ */
+export interface WorkflowInfo {
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 工作流运行ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * 选项卡
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionCards?: Array<string>
+  /**
+   * 多气泡的输出结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Outputs?: Array<string>
+  /**
+   * 工作流发布时间，unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowReleaseTime?: string
 }
 
 /**
@@ -1945,7 +1986,7 @@ export interface PluginToolReqParam {
    */
   Desc?: string
   /**
-   * 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object
+   * 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object, 99:null, 100:upspecified
    */
   Type?: number
   /**
@@ -1964,6 +2005,14 @@ export interface PluginToolReqParam {
    * 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见
    */
   GlobalHidden?: boolean
+  /**
+   * OneOf类型参数
+   */
+  OneOf?: Array<PluginToolReqParam>
+  /**
+   * AnyOf类型参数
+   */
+  AnyOf?: Array<PluginToolReqParam>
 }
 
 /**
@@ -2372,6 +2421,11 @@ export interface AgentProcedure {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetAgentName?: string
+  /**
+   * Agent的图标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentIcon?: string
 }
 
 /**
@@ -2498,6 +2552,11 @@ export interface AgentThought {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TraceId?: string
+  /**
+   * 文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Files?: Array<FileInfo>
 }
 
 /**
@@ -3000,6 +3059,21 @@ export interface AgentProcedureDebugging {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   References?: Array<AgentReference>
+  /**
+   * 展示正在执行的状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayStatus?: string
+  /**
+   * 云桌面的URL地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SandboxUrl?: string
+  /**
+   * 云桌面里面通过浏览器打开的URL地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayUrl?: string
 }
 
 /**
@@ -3045,6 +3119,27 @@ export interface ConvertDocumentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 音色参数
+ */
+export interface VoiceConfig {
+  /**
+   * 公有云音色id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoiceType?: number
+  /**
+   * 音色key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimbreKey?: string
+  /**
+   * 音色名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoiceName?: string
 }
 
 /**
@@ -3274,6 +3369,10 @@ export interface KnowledgeQaSingleWorkflow {
    * 工作流是否启用
    */
   IsEnable?: boolean
+  /**
+   * 是否开启异步调用工作流
+   */
+  AsyncWorkflow?: boolean
 }
 
 /**
@@ -3873,6 +3972,24 @@ export interface Message {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content: string
+}
+
+/**
+ * 数智人配置
+ */
+export interface DigitalHumanConfig {
+  /**
+   * 数智人资产key
+   */
+  AssetKey?: string
+  /**
+   * 数智人名称
+   */
+  Name?: string
+  /**
+   * 图像
+   */
+  Avatar?: string
 }
 
 /**
@@ -4994,6 +5111,11 @@ export interface Credentials {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpSecretKey?: string
+  /**
+   * 临时证书appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
 }
 
 /**
@@ -5283,6 +5405,10 @@ export interface ProcedureDebugging {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Agent?: AgentDebugInfo
+  /**
+   * 自定义参数
+   */
+  CustomVariables?: Array<string>
 }
 
 /**
@@ -5371,6 +5497,11 @@ export interface KnowledgeQaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageTextRetrieval?: boolean
+  /**
+   * 配置语音通话参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AiCall?: AICallConfig
 }
 
 /**
@@ -5411,6 +5542,37 @@ export interface MsgRecordReference {
    * 来源文档ID
    */
   DocId?: string
+}
+
+/**
+ * 智能通话
+ */
+export interface AICallConfig {
+  /**
+   * 启用语音互动功能
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableVoiceInteract?: boolean
+  /**
+   * 启用语音通话
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableVoiceCall?: boolean
+  /**
+   * 启用数智人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableDigitalHuman?: boolean
+  /**
+   * 音色配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Voice?: VoiceConfig
+  /**
+   * 数智人配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DigitalHuman?: DigitalHumanConfig
 }
 
 /**
@@ -5551,6 +5713,10 @@ export interface ModelInfo {
    * 是否专属并发模型
    */
   IsExclusive?: boolean
+  /**
+   * 模型支持智能通话效果
+   */
+  SupportAiCallStatus?: number
 }
 
 /**
@@ -5623,6 +5789,11 @@ export interface FileInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DocId?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
 }
 
 /**
@@ -6856,6 +7027,21 @@ export interface WorkFlowSummary {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunNodes?: Array<WorkflowRunNodeInfo>
+  /**
+   * 选项卡
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionCards?: Array<string>
+  /**
+   * 多气泡的输出结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Outputs?: Array<string>
+  /**
+   * 工作流发布时间，unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowReleaseTime?: string
 }
 
 /**

@@ -4180,15 +4180,18 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface ImportImageRequest {
   /**
-   * 导入镜像的操作系统架构，`x86_64` 或 `i386`
+   * 导入镜像的操作系统架构。
+取值范围包括：`x86_64` 、`i386`、`arm_64`
    */
   Architecture: string
   /**
-   * 导入镜像的操作系统类型，通过`DescribeImportImageOs`获取
+   * 导入镜像的操作系统类型 。
+可通过 [DescribeImportImageOs](https://cloud.tencent.com/document/api/213/15718) 接口返回值中的`ImportImageOsListSupported`获取。
    */
   OsType: string
   /**
-   * 导入镜像的操作系统版本，通过`DescribeImportImageOs`获取
+   * 导入镜像的操作系统版本。
+可通过 [DescribeImportImageOs](https://cloud.tencent.com/document/api/213/15718) 接口返回值中的`ImportImageOsVersionSet`获取。
    */
   OsVersion: string
   /**
@@ -4196,19 +4199,23 @@ export interface ImportImageRequest {
    */
   ImageUrl: string
   /**
-   * 镜像名称
+   * 镜像名称。
+最多支持 60 个字符。
    */
   ImageName: string
   /**
-   * 镜像描述
+   * 镜像描述。
+最多支持 256 个字符。
    */
   ImageDescription?: string
   /**
-   * 只检查参数，不执行任务
+   * 只检查参数，不执行任务。
+默认值：false
    */
   DryRun?: boolean
   /**
    * 是否强制导入，参考[强制导入镜像](https://cloud.tencent.com/document/product/213/12849)
+默认值：false
    */
   Force?: boolean
   /**
@@ -4217,13 +4224,16 @@ export interface ImportImageRequest {
   TagSpecification?: Array<TagSpecification>
   /**
    * 导入镜像后，激活操作系统采用的许可证类型。
-可选项：
+默认值：TencentCloud
+取值范围：
 TencentCloud: 腾讯云官方许可
 BYOL: 自带许可（Bring Your Own License）
    */
   LicenseType?: string
   /**
-   * 启动模式
+   * 启动模式。
+取值范围：`Legacy BIOS`、`UEFI`
+默认值：Legacy BIOS
    */
   BootMode?: string
   /**

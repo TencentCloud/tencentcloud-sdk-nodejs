@@ -229,29 +229,13 @@ export interface DescribeDBXlogsRequest {
 }
 
 /**
- * CreateReadOnlyGroupNetworkAccess请求参数结构体
+ * DescribeMaintainTimeWindow请求参数结构体
  */
-export interface CreateReadOnlyGroupNetworkAccessRequest {
+export interface DescribeMaintainTimeWindowRequest {
   /**
-   * RO组ID，形如：pgro-4t9c6g7k。
+   * 实例ID
    */
-  ReadOnlyGroupId: string
-  /**
-   * 私有网络统一 ID。
-   */
-  VpcId: string
-  /**
-   * 子网ID。
-   */
-  SubnetId: string
-  /**
-   * 是否指定分配vip true-指定分配  false-自动分配。
-   */
-  IsAssignVip: boolean
-  /**
-   * 目标VIP地址。
-   */
-  Vip?: string
+  DBInstanceId: string
 }
 
 /**
@@ -809,16 +793,6 @@ export interface RenewInstanceResponse {
    * 订单名
    */
   DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteServerlessDBInstance返回参数结构体
- */
-export interface DeleteServerlessDBInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1501,17 +1475,17 @@ export interface CreateBackupPlanRequest {
 }
 
 /**
- * CloseServerlessDBExtranetAccess请求参数结构体
+ * ModifyDBInstancesProject返回参数结构体
  */
-export interface CloseServerlessDBExtranetAccessRequest {
+export interface ModifyDBInstancesProjectResponse {
   /**
-   * 实例唯一标识符
+   * 转移项目成功的实例个数
    */
-  DBInstanceId?: string
+  Count?: number
   /**
-   * 实例名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceName?: string
+  RequestId?: string
 }
 
 /**
@@ -2781,16 +2755,6 @@ export interface DeleteReadOnlyGroupNetworkAccessResponse {
 }
 
 /**
- * DescribeMaintainTimeWindow请求参数结构体
- */
-export interface DescribeMaintainTimeWindowRequest {
-  /**
-   * 实例ID
-   */
-  DBInstanceId: string
-}
-
-/**
  * DescribeBackupSummaries返回参数结构体
  */
 export interface DescribeBackupSummariesResponse {
@@ -2897,17 +2861,21 @@ export interface DBBackup {
 }
 
 /**
- * ModifyDBInstancesProject返回参数结构体
+ * serverless账号描述
  */
-export interface ModifyDBInstancesProjectResponse {
+export interface ServerlessDBAccount {
   /**
-   * 转移项目成功的实例个数
+   * 用户名
    */
-  Count?: number
+  DBUser?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 密码
    */
-  RequestId?: string
+  DBPassword?: string
+  /**
+   * 连接数限制
+   */
+  DBConnLimit?: number
 }
 
 /**
@@ -3484,13 +3452,29 @@ dedicated-cluster-id: 按照专属集群ID筛选，类型为string
 }
 
 /**
- * CloseServerlessDBExtranetAccess返回参数结构体
+ * CreateReadOnlyGroupNetworkAccess请求参数结构体
  */
-export interface CloseServerlessDBExtranetAccessResponse {
+export interface CreateReadOnlyGroupNetworkAccessRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * RO组ID，形如：pgro-4t9c6g7k。
    */
-  RequestId?: string
+  ReadOnlyGroupId: string
+  /**
+   * 私有网络统一 ID。
+   */
+  VpcId: string
+  /**
+   * 子网ID。
+   */
+  SubnetId: string
+  /**
+   * 是否指定分配vip true-指定分配  false-自动分配。
+   */
+  IsAssignVip: boolean
+  /**
+   * 目标VIP地址。
+   */
+  Vip?: string
 }
 
 /**
@@ -3866,32 +3850,6 @@ export interface DescribeDBInstanceSSLConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyParameterTemplate请求参数结构体
- */
-export interface ModifyParameterTemplateRequest {
-  /**
-   * 参数模板ID，用于唯一确认参数模板，不可修改
-   */
-  TemplateId: string
-  /**
-   * 参数模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若该字段为空    ，则保持原参数模板名称
-   */
-  TemplateName?: string
-  /**
-   * 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若不传入该参数，则保持原参数模板描述
-   */
-  TemplateDescription?: string
-  /**
-   * 需要修改或添加的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
-   */
-  ModifyParamEntrySet?: Array<ParamEntry>
-  /**
-   * 需要从模板中删除的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
-   */
-  DeleteParamSet?: Array<string>
 }
 
 /**
@@ -4557,13 +4515,29 @@ export interface DescribeBaseBackupsResponse {
 }
 
 /**
- * ModifyDBInstanceParameters返回参数结构体
+ * ModifyParameterTemplate请求参数结构体
  */
-export interface ModifyDBInstanceParametersResponse {
+export interface ModifyParameterTemplateRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 参数模板ID，用于唯一确认参数模板，不可修改
    */
-  RequestId?: string
+  TemplateId: string
+  /**
+   * 参数模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若该字段为空    ，则保持原参数模板名称
+   */
+  TemplateName?: string
+  /**
+   * 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若不传入该参数，则保持原参数模板描述
+   */
+  TemplateDescription?: string
+  /**
+   * 需要修改或添加的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
+   */
+  ModifyParamEntrySet?: Array<ParamEntry>
+  /**
+   * 需要从模板中删除的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
+   */
+  DeleteParamSet?: Array<string>
 }
 
 /**
@@ -5180,17 +5154,13 @@ export interface ModifyAccountPrivilegesRequest {
 }
 
 /**
- * DeleteServerlessDBInstance请求参数结构体
+ * ModifyDBInstanceParameters返回参数结构体
  */
-export interface DeleteServerlessDBInstanceRequest {
+export interface ModifyDBInstanceParametersResponse {
   /**
-   * DB实例名称，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceName?: string
-  /**
-   * DB实例ID，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
-   */
-  DBInstanceId?: string
+  RequestId?: string
 }
 
 /**
@@ -5790,24 +5760,6 @@ export interface DedicatedCluster {
    * 磁盘可用量
    */
   DiskAvailable?: number
-}
-
-/**
- * serverless账号描述
- */
-export interface ServerlessDBAccount {
-  /**
-   * 用户名
-   */
-  DBUser?: string
-  /**
-   * 密码
-   */
-  DBPassword?: string
-  /**
-   * 连接数限制
-   */
-  DBConnLimit?: number
 }
 
 /**

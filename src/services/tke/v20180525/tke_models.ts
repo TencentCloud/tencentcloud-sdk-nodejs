@@ -4008,13 +4008,13 @@ export interface DescribeAvailableTKEEdgeVersionRequest {
  */
 export interface OpenConstraintInfo {
   /**
-   * 策略实例名称
-   */
-  Name?: string
-  /**
    * 策略实例关联事件数
    */
   EventNums?: number
+  /**
+   * 策略实例名称
+   */
+  Name?: string
   /**
    * 实例yaml详情base64编码
    */
@@ -4050,40 +4050,6 @@ export interface ModifyPrometheusAlertPolicyRequest {
    * 告警配置
    */
   AlertRule: PrometheusAlertPolicyItem
-}
-
-/**
- * ForwardApplicationRequestV3请求参数结构体
- */
-export interface ForwardApplicationRequestV3Request {
-  /**
-   * 请求集群addon的访问
-   */
-  Method: string
-  /**
-   * 请求集群addon的路径
-   */
-  Path: string
-  /**
-   * 请求集群addon后允许接收的数据格式
-   */
-  Accept?: string
-  /**
-   * 请求集群addon的数据格式
-   */
-  ContentType?: string
-  /**
-   * 请求集群addon的数据
-   */
-  RequestBody?: string
-  /**
-   * 集群名称
-   */
-  ClusterName?: string
-  /**
-   * 是否编码请求内容
-   */
-  EncodedBody?: string
 }
 
 /**
@@ -12681,20 +12647,6 @@ export interface UpdateClusterKubeconfigResponse {
    * 已更新的子账户Uin列表
    */
   UpdatedSubAccounts?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ForwardApplicationRequestV3返回参数结构体
- */
-export interface ForwardApplicationRequestV3Response {
-  /**
-   * 请求集群addon后返回的数据
-   */
-  ResponseBody?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

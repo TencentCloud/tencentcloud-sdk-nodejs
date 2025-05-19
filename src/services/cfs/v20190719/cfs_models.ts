@@ -509,7 +509,7 @@ export interface BindAutoSnapshotPolicyRequest {
  */
 export interface ModifyFileSystemAutoScaleUpRuleRequest {
   /**
-   * 文件系统id
+   * 文件系统id,通过查询文件系统列表获取该参数
    */
   FileSystemId: string
   /**
@@ -521,8 +521,7 @@ export interface ModifyFileSystemAutoScaleUpRuleRequest {
    */
   TargetThreshold: number
   /**
-   * 规则状态0:关闭，1 开启
-
+   * 规则状态0:关闭，1 开启；不传保留原状态
    */
   Status?: number
 }
@@ -532,7 +531,7 @@ export interface ModifyFileSystemAutoScaleUpRuleRequest {
  */
 export interface ScaleUpFileSystemRequest {
   /**
-   * 文件系统Id
+   * 文件系统Id,该参数通过查询文件系统列表接口获取
    */
   FileSystemId: string
   /**
@@ -818,7 +817,7 @@ UpdateCfsSnapshotAttribute
  */
 export interface DeleteAutoSnapshotPolicyRequest {
   /**
-   * 快照策略ID
+   * 快照策略ID，查询快照策略接口获取
    */
   AutoSnapshotPolicyId: string
 }
@@ -1084,7 +1083,7 @@ export interface DeleteCfsFileSystemRequest {
  */
 export interface UpdateFileSystemBandwidthLimitRequest {
   /**
-   * 文件系统 ID
+   * 文件系统 ID,通过查询文件系统列表获取
    */
   FileSystemId: string
   /**
@@ -1167,7 +1166,7 @@ export interface PGroup {
  */
 export interface SetUserQuotaRequest {
   /**
-   * 文件系统 ID
+   * 文件系统 ID,通过查询文件系统列表获取
    */
   FileSystemId: string
   /**
@@ -1382,21 +1381,21 @@ export interface CreateAccessCertRequest {
  */
 export interface DescribeUserQuotaRequest {
   /**
-   * 文件系统 ID
+   * 文件系统 ID,通过查询文件系统列表获取
    */
   FileSystemId: string
   /**
    * 过滤条件。
-UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir )
-UserId- Array of String - 是否必填：否 -（过滤条件）按id过滤。
+UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir，分别对应用户，用户组，目录 )
+UserId- Array of String - 是否必填：否 -（过滤条件）按用户id过滤。
    */
   Filters?: Array<Filter>
   /**
-   * Offset 分页码
+   * Offset 分页码，默认值0
    */
   Offset?: number
   /**
-   * Limit 页面大小，可填范围为大于0的整数
+   * Limit 页面大小，可填范围为大于0的整数，默认值是10
    */
   Limit?: number
 }
@@ -1588,11 +1587,11 @@ export interface CreateCfsFileSystemRequest {
    */
   NetInterface: string
   /**
-   * 权限组 ID
+   * 权限组 ID,pgroupbasic 是默认权限组
    */
   PGroupId: string
   /**
-   * 文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择turbo，不支持NFS、CIFS
+   * 文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择TURBO，不支持NFS、CIFS
    */
   Protocol?: string
   /**
@@ -1600,11 +1599,11 @@ export interface CreateCfsFileSystemRequest {
    */
   StorageType?: string
   /**
-   * 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填。
+   * 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取
    */
   VpcId?: string
   /**
-   * 子网 ID，若网络类型选择的是VPC，该字段为必填。
+   * 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取
    */
   SubnetId?: string
   /**
@@ -1624,7 +1623,7 @@ export interface CreateCfsFileSystemRequest {
    */
   ClientToken?: string
   /**
-   * 云联网ID， 若网络类型选择的是CCN，该字段为必填
+   * 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取
    */
   CcnId?: string
   /**
@@ -1636,15 +1635,15 @@ export interface CreateCfsFileSystemRequest {
    */
   Capacity?: number
   /**
-   * 文件系统快照ID
+   * 文件系统快照ID，通过查询快照列表获取该参数
    */
   SnapshotId?: string
   /**
-   * 定期快照策略ID
+   * 定期快照策略ID，通过查询快照策略信息获取
    */
   AutoSnapshotPolicyId?: string
   /**
-   * 是否开启默认扩容，仅Turbo类型文件存储支持
+   * 是否开启默认扩容，仅turbo类型文件存储支持
    */
   EnableAutoScaleUp?: boolean
   /**
@@ -1826,13 +1825,13 @@ export interface DescribeCfsSnapshotsRequest {
 <br>FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。
 <br>FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。
 <br>Status - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤
-(creating：表示创建中 | available：表示可用。| rollbacking：表示回滚。| rollbacking_new：表示由快照创建新文件系统中）
+(creating：表示创建中 | available：表示可用。| rollbacking：表示回滚。| rollbacking_new：表示由快照创建新文件系统中| create-failed 创建失败）
 <br>tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。
 <br>tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
    */
   Filters?: Array<Filter>
   /**
-   * 排序取值
+   * 按创建时间排序取值CreationTime
    */
   OrderField?: string
   /**
@@ -1898,7 +1897,7 @@ export interface UpdateCfsFileSystemSizeLimitRequest {
    */
   FsLimit: number
   /**
-   * 文件系统ID，目前仅支持标准型文件系统。
+   * 文件系统ID，目前仅支持标准型文件系统。该参数通过查询文件系统列表获取
    */
   FileSystemId: string
 }
@@ -2020,7 +2019,7 @@ export interface SnapshotInfo {
    */
   AliveDay?: number
   /**
-   * 快照进度百分比，1表示1%
+   * 快照进度百分比，1表示1% 范围1-100
    */
   Percent?: number
   /**
@@ -2142,7 +2141,7 @@ export interface DeleteAutoSnapshotPolicyResponse {
   /**
    * 快照策略ID
    */
-  AutoSnapshotPolicyId: string
+  AutoSnapshotPolicyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -72,7 +72,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例
+   * 本接口（DescribeInstances）用户查询实例
    */
   async DescribeInstances(
     req: DescribeInstancesRequest,
@@ -82,7 +82,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询应用
+   * 本接口（DescribeApplications）用于查询应用
    */
   async DescribeApplications(
     req: DescribeApplicationsRequest,
@@ -102,7 +102,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询场景
+   * 本接口（DescribeScenes）用于查询场景
    */
   async DescribeScenes(
     req: DescribeScenesRequest,
@@ -112,7 +112,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询地域列表
+   * 本接口（DescribeRegions）用于查询地域列表
    */
   async DescribeRegions(
     req?: DescribeRegionsRequest,
@@ -132,8 +132,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (StartInstance) 用于主动启动实例。
-   */
+     * 本接口 (StartInstance) 用于主动启动实例。
+‘运行中’、‘预付费’的实例不支持启动实例
+     */
   async StartInstance(
     req: StartInstanceRequest,
     cb?: (error: string, rep: StartInstanceResponse) => void
@@ -162,7 +163,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例的网络配置及消耗情况
+   * 本接口（DescribeInstanceNetworkStatus）用于查询实例的网络配置及消耗情况
    */
   async DescribeInstanceNetworkStatus(
     req: DescribeInstanceNetworkStatusRequest,
@@ -172,7 +173,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询服务登录配置
+   * 本接口（DescribeServiceLoginSettings）用于查询服务登录配置
    */
   async DescribeServiceLoginSettings(
     req: DescribeServiceLoginSettingsRequest,
@@ -192,8 +193,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (StopInstance) 用于主动关闭实例。
-   */
+     * 本接口 (StopInstance) 用于主动关闭实例。
+‘已关机’、‘预付费’的实例不支持关机
+     */
   async StopInstance(
     req: StopInstanceRequest,
     cb?: (error: string, rep: StopInstanceResponse) => void

@@ -1169,6 +1169,10 @@ pause
    * libradb 节点信息
    */
   NodeList?: Array<string>
+  /**
+   * 全球数据库唯一标识
+   */
+  GdnId?: string
 }
 
 /**
@@ -2044,6 +2048,7 @@ export interface DescribeAuditLogsRequest {
   OrderBy?: string
   /**
    * 已废弃。
+   * @deprecated
    */
   Filter?: AuditLogFilter
   /**
@@ -2269,6 +2274,14 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 实例初始化配置信息，主要用于购买集群时选不同规格实例
    */
   InstanceInitInfos?: Array<InstanceInitInfo>
+  /**
+   * 全球数据库唯一标识
+   */
+  GdnId?: string
+  /**
+   * 数据库代理配置
+   */
+  ProxyConfig?: ProxyConfig
 }
 
 /**
@@ -3874,6 +3887,44 @@ export interface DescribeParamTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 访问代理配置
+ */
+export interface ProxyConfig {
+  /**
+   * 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones)
+   */
+  ProxyCount?: number
+  /**
+   * cpu核数
+   */
+  Cpu?: number
+  /**
+   * 内存
+   */
+  Mem?: number
+  /**
+   * 连接池类型：SessionConnectionPool(会话级别连接池 )
+   */
+  ConnectionPoolType?: string
+  /**
+   * 是否开启连接池,yes-开启，no-不开启
+   */
+  OpenConnectionPool?: string
+  /**
+   * 连接池阈值：单位（秒）
+   */
+  ConnectionPoolTimeOut?: number
+  /**
+   * 描述说明
+   */
+  Description?: string
+  /**
+   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
+   */
+  ProxyZones?: Array<ProxyZone>
 }
 
 /**
@@ -7477,6 +7528,10 @@ pause
    * 实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK）
    */
   ResourcePackages?: Array<ResourcePackage>
+  /**
+   * 全球数据库唯一标识
+   */
+  GdnId?: string
 }
 
 /**
@@ -7774,6 +7829,7 @@ export interface CreateAuditLogFileRequest {
   OrderBy?: string
   /**
    * 已废弃。
+   * @deprecated
    */
   Filter?: AuditLogFilter
   /**
@@ -8088,6 +8144,17 @@ pausing
    * 版本标签
    */
   CynosVersionTag?: string
+  /**
+   * 全球数据库网络唯一标识
+   */
+  GdnId?: string
+  /**
+   * 集群在全球数据网络中的角色。
+主集群- primary
+从集群 - standby
+如为空，该字段无效
+   */
+  GdnRole?: string
 }
 
 /**

@@ -25,7 +25,7 @@ import {
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   DescribeDBXlogsRequest,
-  CreateReadOnlyGroupNetworkAccessRequest,
+  DescribeMaintainTimeWindowRequest,
   DescribeAccountsRequest,
   DeleteReadOnlyGroupResponse,
   OpenDBExtranetAccessRequest,
@@ -44,7 +44,6 @@ import {
   SlowlogDetail,
   SwitchDBInstancePrimaryRequest,
   RenewInstanceResponse,
-  DeleteServerlessDBInstanceResponse,
   DeleteLogBackupResponse,
   ModifyReadOnlyGroupConfigRequest,
   BackupSummary,
@@ -74,7 +73,7 @@ import {
   Tag,
   DescribeBackupSummariesRequest,
   CreateBackupPlanRequest,
-  CloseServerlessDBExtranetAccessRequest,
+  ModifyDBInstancesProjectResponse,
   CreateBaseBackupResponse,
   LockAccountResponse,
   CloneDBInstanceResponse,
@@ -126,11 +125,10 @@ import {
   ModifyDBInstanceHAConfigRequest,
   PgDeal,
   DeleteReadOnlyGroupNetworkAccessResponse,
-  DescribeMaintainTimeWindowRequest,
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
   DBBackup,
-  ModifyDBInstancesProjectResponse,
+  ServerlessDBAccount,
   DeleteBackupPlanRequest,
   CloneDBInstanceRequest,
   DeleteParameterTemplateRequest,
@@ -150,7 +148,7 @@ import {
   DescribeParamsEventResponse,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeDedicatedClustersRequest,
-  CloseServerlessDBExtranetAccessResponse,
+  CreateReadOnlyGroupNetworkAccessRequest,
   EventItem,
   RestartDBInstanceRequest,
   DescribeDBInstanceHAConfigRequest,
@@ -167,7 +165,6 @@ import {
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   DescribeDBInstanceSSLConfigResponse,
-  ModifyParameterTemplateRequest,
   DeleteAccountRequest,
   UpgradeDBInstanceKernelVersionResponse,
   InquiryPriceRenewDBInstanceResponse,
@@ -192,7 +189,7 @@ import {
   Filter,
   DescribeReadOnlyGroupsRequest,
   DescribeBaseBackupsResponse,
-  ModifyDBInstanceParametersResponse,
+  ModifyParameterTemplateRequest,
   DescribeDBVersionsResponse,
   ModifyDBInstanceSSLConfigRequest,
   DatabasePrivilege,
@@ -222,7 +219,7 @@ import {
   CreateReadOnlyGroupResponse,
   DeleteDBInstanceNetworkAccessResponse,
   ModifyAccountPrivilegesRequest,
-  DeleteServerlessDBInstanceRequest,
+  ModifyDBInstanceParametersResponse,
   ModifyReadOnlyGroupConfigResponse,
   AccountInfo,
   ModifyAccountRemarkRequest,
@@ -256,7 +253,6 @@ import {
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceParametersRequest,
   DedicatedCluster,
-  ServerlessDBAccount,
   DurationAnalysis,
   DescribeDBSlowlogsResponse,
   DescribeAccountPrivilegesRequest,
@@ -437,18 +433,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
-
-【接口下线中，请勿使用】本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
-     */
-  async DeleteServerlessDBInstance(
-    req: DeleteServerlessDBInstanceRequest,
-    cb?: (error: string, rep: DeleteServerlessDBInstanceResponse) => void
-  ): Promise<DeleteServerlessDBInstanceResponse> {
-    return this.request("DeleteServerlessDBInstance", req, cb)
-  }
-
-  /**
    * 本接口（CreateDBInstanceNetworkAccess）用于创建实例网络。
    */
   async CreateDBInstanceNetworkAccess(
@@ -469,13 +453,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
    */
-  async ModifyBackupDownloadRestriction(
-    req: ModifyBackupDownloadRestrictionRequest,
-    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
-  ): Promise<ModifyBackupDownloadRestrictionResponse> {
-    return this.request("ModifyBackupDownloadRestriction", req, cb)
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**
@@ -510,13 +494,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
+   * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
    */
-  async DescribeParameterTemplates(
-    req: DescribeParameterTemplatesRequest,
-    cb?: (error: string, rep: DescribeParameterTemplatesResponse) => void
-  ): Promise<DescribeParameterTemplatesResponse> {
-    return this.request("DescribeParameterTemplates", req, cb)
+  async DescribeSlowQueryAnalysis(
+    req: DescribeSlowQueryAnalysisRequest,
+    cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void
+  ): Promise<DescribeSlowQueryAnalysisResponse> {
+    return this.request("DescribeSlowQueryAnalysis", req, cb)
   }
 
   /**
@@ -602,13 +586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
+   * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
    */
-  async DescribeSlowQueryAnalysis(
-    req: DescribeSlowQueryAnalysisRequest,
-    cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void
-  ): Promise<DescribeSlowQueryAnalysisResponse> {
-    return this.request("DescribeSlowQueryAnalysis", req, cb)
+  async DescribeParameterTemplates(
+    req: DescribeParameterTemplatesRequest,
+    cb?: (error: string, rep: DescribeParameterTemplatesResponse) => void
+  ): Promise<DescribeParameterTemplatesResponse> {
+    return this.request("DescribeParameterTemplates", req, cb)
   }
 
   /**
@@ -659,18 +643,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestoreDBInstanceObjectsResponse) => void
   ): Promise<RestoreDBInstanceObjectsResponse> {
     return this.request("RestoreDBInstanceObjects", req, cb)
-  }
-
-  /**
-     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
-
-【接口下线中，请勿使用】本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
-     */
-  async CloseServerlessDBExtranetAccess(
-    req: CloseServerlessDBExtranetAccessRequest,
-    cb?: (error: string, rep: CloseServerlessDBExtranetAccessResponse) => void
-  ): Promise<CloseServerlessDBExtranetAccessResponse> {
-    return this.request("CloseServerlessDBExtranetAccess", req, cb)
   }
 
   /**
@@ -1337,13 +1309,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyBackupDownloadRestriction(
+    req: ModifyBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadRestrictionResponse> {
+    return this.request("ModifyBackupDownloadRestriction", req, cb)
   }
 
   /**

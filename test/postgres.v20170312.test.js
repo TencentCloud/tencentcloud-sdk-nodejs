@@ -158,16 +158,6 @@ it("postgres.v20170312.DescribeDBInstanceParameters", async function () {
     }
 })
 
-it("postgres.v20170312.DeleteServerlessDBInstance", async function () {
-    try {
-       const data = await client.DeleteServerlessDBInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("postgres.v20170312.CreateDBInstanceNetworkAccess", async function () {
     try {
        const data = await client.CreateDBInstanceNetworkAccess({})
@@ -188,9 +178,9 @@ it("postgres.v20170312.ModifyDBInstanceSpec", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyBackupDownloadRestriction", async function () {
+it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     try {
-       const data = await client.ModifyBackupDownloadRestriction({})
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +218,9 @@ it("postgres.v20170312.DescribeDatabases", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeParameterTemplates", async function () {
+it("postgres.v20170312.DescribeSlowQueryAnalysis", async function () {
     try {
-       const data = await client.DescribeParameterTemplates({})
+       const data = await client.DescribeSlowQueryAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +308,9 @@ it("postgres.v20170312.DescribeDBBackups", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeSlowQueryAnalysis", async function () {
+it("postgres.v20170312.DescribeParameterTemplates", async function () {
     try {
-       const data = await client.DescribeSlowQueryAnalysis({})
+       const data = await client.DescribeParameterTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,16 +361,6 @@ it("postgres.v20170312.DescribeParameterTemplateAttributes", async function () {
 it("postgres.v20170312.RestoreDBInstanceObjects", async function () {
     try {
        const data = await client.RestoreDBInstanceObjects({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("postgres.v20170312.CloseServerlessDBExtranetAccess", async function () {
-    try {
-       const data = await client.CloseServerlessDBExtranetAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1038,9 +1018,9 @@ it("postgres.v20170312.InquiryPriceRenewDBInstance", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
+it("postgres.v20170312.ModifyBackupDownloadRestriction", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.ModifyBackupDownloadRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

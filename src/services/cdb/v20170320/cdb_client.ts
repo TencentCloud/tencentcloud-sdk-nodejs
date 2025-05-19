@@ -803,7 +803,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeBackupConfig)用于查询数据库备份配置信息。
+   * 本接口（DescribeBackupConfig）用于查询数据库备份配置信息。
    */
   async DescribeBackupConfig(
     req: DescribeBackupConfigRequest,

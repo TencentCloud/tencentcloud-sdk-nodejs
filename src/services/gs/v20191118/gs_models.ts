@@ -1770,6 +1770,14 @@ export interface AndroidInstance {
    * 内网 IP
    */
   PrivateIP?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 机箱 ID
+   */
+  HostServerSerialNumber?: string
 }
 
 /**

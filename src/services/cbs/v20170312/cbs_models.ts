@@ -314,7 +314,7 @@ export interface InquiryPriceCreateDisksResponse {
  */
 export interface BindAutoSnapshotPolicyRequest {
   /**
-   * 要绑定的定期快照策略ID。
+   * 要绑定的定期快照策略ID，通过[ DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/362/33556)接口查询。
    */
   AutoSnapshotPolicyId: string
   /**
@@ -347,7 +347,10 @@ export interface DescribeAutoSnapshotPoliciesRequest {
    */
   AutoSnapshotPolicyIds?: Array<string>
   /**
-   * 过滤条件。参数不支持同时指定`AutoSnapshotPolicyIds`和`Filters`。<br><li>auto-snapshot-policy-id - Array of String - 是否必填：否 -（过滤条件）按定期快照策略ID进行过滤。定期快照策略ID形如：`asp-11112222`。<br><li>auto-snapshot-policy-state - Array of String - 是否必填：否 -（过滤条件）按定期快照策略的状态进行过滤。定期快照策略ID形如：`asp-11112222`。(NORMAL：正常 | ISOLATED：已隔离。)<br><li>auto-snapshot-policy-name - Array of String - 是否必填：否 -（过滤条件）按定期快照策略名称进行过滤。
+   * 过滤条件。参数不支持同时指定`AutoSnapshotPolicyIds`和`Filters`。<br>
+<li>auto-snapshot-policy-id - Array of String - 是否必填：否 -（过滤条件）按定期快照策略ID进行过滤。定期快照策略ID形如：`asp-3stvwfxx`。</li>
+<li>auto-snapshot-policy-state - Array of String - 是否必填：否 -（过滤条件）按定期快照策略的状态进行过滤。定期快照策略ID形如：`asp-3stvwfxx`。(NORMAL：正常 | ISOLATED：已隔离。)</li>
+<li>auto-snapshot-policy-name - Array of String - 是否必填：否 -（过滤条件）按定期快照策略名称进行过滤。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -359,11 +362,11 @@ export interface DescribeAutoSnapshotPoliciesRequest {
    */
   Offset?: number
   /**
-   * 输出定期快照列表的排列顺序。取值范围：<br><li>ASC：升序排列<br><li>DESC：降序排列。
+   * 输出定期快照列表的排列顺序。取值范围：<br><li>ASC：升序排列<br></li><li>DESC：降序排列。</li>
    */
   Order?: string
   /**
-   * 定期快照列表排序的依据字段。取值范围：<br><li>CREATETIME：依据定期快照的创建时间排序<br>默认按创建时间排序。
+   * 定期快照列表排序的依据字段。取值范围：<br><li>CREATE_TIME：依据定期快照的创建时间排序，默认按创建时间排序。</li>
    */
   OrderField?: string
 }
@@ -383,7 +386,7 @@ export interface ModifySnapshotsSharePermissionResponse {
  */
 export interface DeleteDiskBackupsRequest {
   /**
-   * 待删除的云硬盘备份点ID。
+   * 待删除的云硬盘备份点ID，可以通过[DescribeDiskBackups](/document/product/362/80278)接口查询。
    */
   DiskBackupIds: Array<string>
 }
@@ -523,7 +526,7 @@ export interface CreateDisksRequest {
    */
   DiskChargeType: string
   /**
-   * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘</li><br><li>CLOUD_PREMIUM：表示高性能云硬盘</li><br><li>CLOUD_BSSD：表示通用型SSD云硬盘</li><br><li>CLOUD_SSD：表示SSD云硬盘</li><br><li>CLOUD_HSSD：表示增强型SSD云硬盘</li><br><li>CLOUD_TSSD：表示极速型SSD云硬盘。</li>
+   * 硬盘介质类型。取值范围：<br><li>CLOUD_PREMIUM：表示高性能云硬盘</li><br><li>CLOUD_BSSD：表示通用型SSD云硬盘</li><br><li>CLOUD_SSD：表示SSD云硬盘</li><br><li>CLOUD_HSSD：表示增强型SSD云硬盘</li><br><li>CLOUD_TSSD：表示极速型SSD云硬盘。</li>极速型SSD云硬盘（CLOUD_TSSD）仅支持随部分实例类型一同购买，暂不支持单独创建。
    */
   DiskType: string
   /**
@@ -543,11 +546,11 @@ export interface CreateDisksRequest {
    */
   DiskCount?: number
   /**
-   * 可选参数。使用此参数可给云硬盘购买额外的性能。<br>当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）
+   * 使用此参数可给云硬盘购买额外的性能，单位MB/s。<br>当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）。
    */
   ThroughputPerformance?: number
   /**
-   * 可选参数。购买加密盘时自定义密钥， 当传入该参数时, Encrypt入参不为空
+   * 购买加密盘时自定义密钥，当传入该参数时，Encrypt参数不得为空。
    */
   KmsKeyId?: string
   /**
@@ -555,7 +558,7 @@ export interface CreateDisksRequest {
    */
   DiskSize?: number
   /**
-   * 可选参数，默认为False。传入True时，云盘将创建为共享型云盘。
+   * 传入True时，云盘将创建为共享型云盘，默认为False。因共享型云盘不支持加密，此参数与Encrypt参数不可同时传入。
    */
   Shareable?: boolean
   /**
@@ -563,7 +566,7 @@ export interface CreateDisksRequest {
    */
   ClientToken?: string
   /**
-   * 传入该参数用于创建加密云盘，取值固定为ENCRYPT。
+   * 传入该参数用于创建加密云盘，取值固定为ENCRYPT。因共享型云盘不支持加密，此参数与Shareable参数不可同时传入。
    */
   Encrypt?: string
   /**
@@ -571,11 +574,11 @@ export interface CreateDisksRequest {
    */
   DiskChargePrepaid?: DiskChargePrepaid
   /**
-   * 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过DescribeSnapshots接口返回的快照详情的IsPermanent字段来判断，true表示永久快照，false表示非永久快照。
+   * 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过[DescribeSnapshots](document/api/362/15647)接口返回的快照详情的IsPermanent字段来判断，True表示永久快照，False表示非永久快照。
    */
   DeleteSnapshot?: number
   /**
-   * 创建云盘时指定自动挂载并初始化该数据盘。
+   * 创建云盘时指定自动挂载并初始化该数据盘。因加密盘不支持自动挂载及初始化，此参数与Encrypt参数不可同时传入。
    */
   AutoMountConfiguration?: AutoMountConfiguration
   /**
@@ -583,7 +586,7 @@ export interface CreateDisksRequest {
    */
   DiskBackupQuota?: number
   /**
-   * 创建云盘时是否开启性能突发
+   * 创建云盘时是否开启性能突发。
    */
   BurstPerformance?: boolean
   /**
@@ -619,7 +622,7 @@ export interface AttachDisksRequest {
  */
 export interface DescribeDiskAssociatedAutoSnapshotPolicyRequest {
   /**
-   * 要查询的云硬盘ID，通过[DescribeDisks](https://tcloud4api.woa.com/document/product/362/15601?!preview&!document=1)接口查询。
+   * 要查询的云硬盘ID，通过[DescribeDisks](https://cloud.tencent.com/document/api/362/16315)接口查询。
    */
   DiskId: string
 }
@@ -672,11 +675,11 @@ export interface ModifyAutoSnapshotPolicyAttributeRequest {
    */
   AutoSnapshotPolicyId: string
   /**
-   * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
+   * 是否激活定期快照策略，`false`表示未激活，`true`表示激活；默认为`true`。
    */
   IsActivated?: boolean
   /**
-   * 通过该定期快照策略创建的快照是否永久保留。FALSE表示非永久保留，TRUE表示永久保留，默认为FALSE。
+   * 通过该定期快照策略创建的快照是否永久保留。`false`表示非永久保留，`true`表示永久保留，默认为`false`。
    */
   IsPermanent?: boolean
   /**
@@ -1126,7 +1129,7 @@ export interface DescribeSnapshotSharePermissionRequest {
  */
 export interface InquirePriceModifyDiskBackupQuotaRequest {
   /**
-   * 云硬盘ID， 通过DescribeDisks（查询云硬盘信息）接口查询。
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
    */
   DiskId: string
   /**
@@ -1401,11 +1404,11 @@ export interface ResizeDiskRequest {
  */
 export interface ApplyDiskBackupRequest {
   /**
-   * 云硬盘备份点ID，可通过 DescribeDiskBackups 查询。
+   * 云硬盘备份点ID，可以通过[DescribeDiskBackups](/document/product/362/80278)接口查询。
    */
   DiskBackupId: string
   /**
-   * 云硬盘备份点原云硬盘ID，可通过DescribeDisks接口查询。
+   * 云硬盘备份点原云硬盘ID，可以通过[DescribeDisks](/document/product/362/16315)接口查。
    */
   DiskId: string
   /**
@@ -1413,7 +1416,7 @@ export interface ApplyDiskBackupRequest {
    */
   AutoStopInstance?: boolean
   /**
-   * 回滚云硬盘备份点完成后是否自动开机，默认为FALSE，表示不自动开机
+   * 回滚云硬盘备份点完成后是否自动开机，默认为FALSE，表示不自动开机; AutoStartInstance参数需要在AutoStopInstance为true时才能为true。
    */
   AutoStartInstance?: boolean
 }
@@ -1423,7 +1426,7 @@ export interface ApplyDiskBackupRequest {
  */
 export interface ModifyDisksChargeTypeRequest {
   /**
-   * 一个或多个待操作的云硬盘ID。每次请求批量云硬盘上限为100。
+   * 一个或多个待操作的云硬盘ID,可以通过[DescribeDisks](/document/product/362/16315)接口查询。每次请求批量云硬盘上限为100。
    */
   DiskIds: Array<string>
   /**
@@ -1469,7 +1472,7 @@ export interface CreateAutoSnapshotPolicyResponse {
  */
 export interface ModifySnapshotAttributeRequest {
   /**
-   * 快照ID, 可通过[DescribeSnapshots](/document/product/362/15647)查询。
+   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询。
    */
   SnapshotId: string
   /**
@@ -1495,9 +1498,13 @@ export interface UnbindAutoSnapshotPolicyRequest {
    */
   AutoSnapshotPolicyId: string
   /**
-   * 要解绑定期快照策略的云盘ID列表。
+   * 要解绑定期快照策略的云盘ID列表。此参数与 InstanceIds 参数至少需要传入一个。
    */
   DiskIds?: Array<string>
+  /**
+   * 要解绑定期快照策略的实例ID列表。此参数与 DiskIds 参数至少需要传入一个。
+   */
+  InstanceIds?: Array<string>
 }
 
 /**
@@ -1578,7 +1585,7 @@ export interface InquirePriceModifyDiskBackupQuotaResponse {
   /**
    * 描述了修改云硬盘备份点之后的云盘价格。
    */
-  DiskPrice: Price
+  DiskPrice?: Price
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1590,7 +1597,7 @@ export interface InquirePriceModifyDiskBackupQuotaResponse {
  */
 export interface DeleteAutoSnapshotPoliciesRequest {
   /**
-   * 要删除的定期快照策略ID列表。
+   * 要删除的定期快照策略ID列表，通过[ DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/362/33556)接口查询。
    */
   AutoSnapshotPolicyIds: Array<string>
 }
@@ -1765,11 +1772,11 @@ export interface Snapshot {
    */
   ShareReference?: number
   /**
-   * 快照类型，目前该项取值可以为PRIVATE_SNAPSHOT或者SHARED_SNAPSHOT
+   * 快照类型，目前该项取值可以为`PRIVATE_SNAPSHOT`（私有快照）或者`SHARED_SNAPSHOT`（共享快照）
    */
   SnapshotType?: string
   /**
-   * 创建此快照的云硬盘大小，单位GB。
+   * 创建此快照的云硬盘大小，单位GiB。
    */
   DiskSize?: number
   /**
@@ -1777,7 +1784,7 @@ export interface Snapshot {
    */
   DiskId?: string
   /**
-   * 快照正在跨地域复制的目的地域，默认取值为[]。
+   * 快照正在跨地域复制的目的地域，若没有则返回`[]`。
    */
   CopyingToRegions?: Array<string>
   /**
@@ -2091,7 +2098,7 @@ export interface DescribeDiskStoragePoolResponse {
 }
 
 /**
- * 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的时刻点执行该条定期快照策。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，仅可设置其中一条策略规则。
+ * 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的时刻点执行该条定期快照策。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，必填且仅可设置其中一条策略规则。如果同时传入互斥规则，则只有一条生效，优先级为上文列出顺序：例如将三条规则全部设置，只有 DayOfWeek 生效。
  */
 export interface Policy {
   /**
