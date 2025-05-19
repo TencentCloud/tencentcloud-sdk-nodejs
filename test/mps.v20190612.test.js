@@ -68,6 +68,16 @@ it("mps.v20190612.ModifySmartSubtitleTemplate", async function () {
     }
 })
 
+it("mps.v20190612.DescribeBatchTaskDetail", async function () {
+    try {
+       const data = await client.DescribeBatchTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyLiveRecordTemplate", async function () {
     try {
        const data = await client.ModifyLiveRecordTemplate({})
@@ -358,6 +368,16 @@ it("mps.v20190612.ExecuteFunction", async function () {
     }
 })
 
+it("mps.v20190612.BatchProcessMedia", async function () {
+    try {
+       const data = await client.BatchProcessMedia({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamLinkFlows", async function () {
     try {
        const data = await client.DescribeStreamLinkFlows({})
@@ -371,6 +391,16 @@ it("mps.v20190612.DescribeStreamLinkFlows", async function () {
 it("mps.v20190612.ModifyAnimatedGraphicsTemplate", async function () {
     try {
        const data = await client.ModifyAnimatedGraphicsTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeImageTaskDetail", async function () {
+    try {
+       const data = await client.DescribeImageTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2122,6 +2122,16 @@ export interface AiReviewPoliticalTaskInput {
 }
 
 /**
+ * ModifyContentReviewTemplate返回参数结构体
+ */
+export interface ModifyContentReviewTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySchedule请求参数结构体
  */
 export interface ModifyScheduleRequest {
@@ -2675,13 +2685,63 @@ export interface AudioTemplateInfo {
 }
 
 /**
- * ExecuteFunction返回参数结构体
+ * DescribeBatchTaskDetail返回参数结构体
  */
-export interface ExecuteFunctionResponse {
+export interface DescribeBatchTaskDetailResponse {
   /**
-   * 处理结果打包后的字符串，具体与后台一同协调。
+   * 任务类型，目前取值有：
+<li>BatchTask：视频工作流批量处理任务。</li>
    */
-  Result?: string
+  TaskType?: string
+  /**
+   * 任务状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime?: string
+  /**
+   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  FinishTime?: string
+  /**
+   * 媒体处理任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 视频处理任务信息，仅当 TaskType 为 BatchTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BatchTaskResult?: BatchSubTaskResult
+  /**
+   * 任务的事件通知信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 任务流的优先级，取值范围为 [-10, 10]。
+   */
+  TasksPriority?: number
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。
+   */
+  SessionContext?: string
+  /**
+   * 扩展信息字段，仅用于特定场景。
+   */
+  ExtInfo?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4160,13 +4220,13 @@ export interface ScratchRepairConfig {
 }
 
 /**
- * 直播流 AI 审核结果
+ * DescribeImageTaskDetail请求参数结构体
  */
-export interface LiveStreamAiReviewResultInfo {
+export interface DescribeImageTaskDetailRequest {
   /**
-   * 内容审核结果列表。
+   * 图片处理任务的任务 ID。
    */
-  ResultSet: Array<LiveStreamAiReviewResultItem>
+  TaskId: string
 }
 
 /**
@@ -5121,13 +5181,24 @@ export interface PornConfigureInfoForUpdate {
 }
 
 /**
- * 拆条任务输入类型
+ * 批量任务子任务结果
  */
-export interface AiAnalysisTaskSegmentInput {
+export interface BatchSubTaskResult {
   /**
-   * 拆条任务模板 ID。
+   * 批量任务输入信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Definition?: number
+  InputInfos?: Array<MediaInputInfo>
+  /**
+   * 原始视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadatas?: Array<MediaMetaData>
+  /**
+   * 智能字幕任务的执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartSubtitlesTaskResult?: BatchSmartSubtitlesResult
 }
 
 /**
@@ -5562,6 +5633,20 @@ export interface TrackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelVolume?: Array<number>
+}
+
+/**
+ * BatchProcessMedia返回参数结构体
+ */
+export interface BatchProcessMediaResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6241,13 +6326,50 @@ export interface AiReviewTaskPornOcrResult {
 }
 
 /**
- * ModifyContentReviewTemplate返回参数结构体
+ * BatchProcessMedia请求参数结构体
  */
-export interface ModifyContentReviewTemplateResponse {
+export interface BatchProcessMediaRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 媒体处理的文件输入信息。
    */
-  RequestId?: string
+  InputInfo: Array<MediaInputInfo>
+  /**
+   * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与 InputInfo 中文件所在的目录一致。
+   */
+  OutputDir?: string
+  /**
+   * 智能字幕
+   */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput
+  /**
+   * 任务的事件通知信息，不填代表不获取事件通知。
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
+   */
+  TasksPriority?: number
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+   */
+  ResourceId?: string
+  /**
+   * 是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
+   */
+  SkipMateData?: number
 }
 
 /**
@@ -6858,6 +6980,38 @@ export interface AiAnalysisTaskDelLogoInput {
    * 视频智能擦除模板 ID。
    */
   Definition?: number
+}
+
+/**
+ * 智能字幕输出信息
+ */
+export interface SmartSubtitleTaskBatchOutput {
+  /**
+   * 任务进度。
+   */
+  Progress?: number
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 翻译任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransTextTask?: SmartSubtitleTaskTransTextResultOutput
+  /**
+   * 语音全文识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResultOutput
 }
 
 /**
@@ -7974,6 +8128,22 @@ export interface FlowStatistics {
 }
 
 /**
+ * 智能字幕结果。
+ */
+export interface BatchSmartSubtitlesResult {
+  /**
+   * 智能字幕任务输入信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: SmartSubtitleTaskResultInput
+  /**
+   * 智能字幕输出信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Outputs?: Array<SmartSubtitleTaskBatchOutput>
+}
+
+/**
  * 创建的输入SRT的配置信息。
  */
 export interface CreateInputSRTSettings {
@@ -9071,6 +9241,16 @@ export interface CreateVideoSearchTaskResponse {
 }
 
 /**
+ * 拆条任务输入类型
+ */
+export interface AiAnalysisTaskSegmentInput {
+  /**
+   * 拆条任务模板 ID。
+   */
+  Definition?: number
+}
+
+/**
  * CreateVideoSearchTask请求参数结构体
  */
 export interface CreateVideoSearchTaskRequest {
@@ -9108,6 +9288,20 @@ export interface LiveStreamTagRecognitionResult {
    * 识别片段置信度。取值：0~100。
    */
   Confidence?: number
+}
+
+/**
+ * ExecuteFunction返回参数结构体
+ */
+export interface ExecuteFunctionResponse {
+  /**
+   * 处理结果打包后的字符串，具体与后台一同协调。
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11501,6 +11695,16 @@ export interface AiAnalysisTaskDelLogoOutput {
 }
 
 /**
+ * DescribeBatchTaskDetail请求参数结构体
+ */
+export interface DescribeBatchTaskDetailRequest {
+  /**
+   * 视频处理任务的任务 ID。
+   */
+  TaskId: string
+}
+
+/**
  * Asr 文字涉违禁信息
  */
 export interface AiReviewProhibitedAsrTaskOutput {
@@ -11554,6 +11758,16 @@ export interface LiveStreamFaceRecognitionResult {
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
   AreaCoordSet?: Array<number | bigint>
+}
+
+/**
+ * 直播流 AI 审核结果
+ */
+export interface LiveStreamAiReviewResultInfo {
+  /**
+   * 内容审核结果列表。
+   */
+  ResultSet: Array<LiveStreamAiReviewResultItem>
 }
 
 /**
@@ -15276,6 +15490,40 @@ export interface AwsSQS {
 }
 
 /**
+ * 采样截图信息
+ */
+export interface MediaSampleSnapshotItem {
+  /**
+   * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition?: number
+  /**
+   * 采样方式，取值范围：
+<li>Percent：根据百分比间隔采样。</li>
+<li>Time：根据时间间隔采样。</li>
+   */
+  SampleType?: string
+  /**
+   * 采样间隔
+<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
+<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+   */
+  Interval?: number
+  /**
+   * 截图后文件的存储位置。
+   */
+  Storage?: TaskOutputStorage
+  /**
+   * 生成的截图 path 列表。
+   */
+  ImagePathSet?: Array<string>
+  /**
+   * 截图如果被打上了水印，被打水印的模板 ID 列表。
+   */
+  WaterMarkDefinition?: Array<number | bigint>
+}
+
+/**
  * DeleteAsrHotwords请求参数结构体
  */
 export interface DeleteAsrHotwordsRequest {
@@ -16334,37 +16582,38 @@ export interface LiveStreamObjectRecognitionResult {
 }
 
 /**
- * 采样截图信息
+ * DescribeImageTaskDetail返回参数结构体
  */
-export interface MediaSampleSnapshotItem {
+export interface DescribeImageTaskDetailResponse {
   /**
-   * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 任务类型，目前取值有：
+<li>WorkflowTask：工作流处理任务。</li>
+
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Definition?: number
+  TaskType?: string
   /**
-   * 采样方式，取值范围：
-<li>Percent：根据百分比间隔采样。</li>
-<li>Time：根据时间间隔采样。</li>
+   * 任务状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleType?: string
+  Status?: string
   /**
-   * 采样间隔
-<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
-<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+   * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Interval?: number
+  CreateTime?: string
   /**
-   * 截图后文件的存储位置。
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Storage?: TaskOutputStorage
+  FinishTime?: string
   /**
-   * 生成的截图 path 列表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImagePathSet?: Array<string>
-  /**
-   * 截图如果被打上了水印，被打水印的模板 ID 列表。
-   */
-  WaterMarkDefinition?: Array<number | bigint>
+  RequestId?: string
 }
 
 /**

@@ -94,6 +94,7 @@ import {
   DeleteContentReviewTemplateRequest,
   StartStreamLinkFlowResponse,
   AiReviewPoliticalTaskInput,
+  ModifyContentReviewTemplateResponse,
   ModifyScheduleRequest,
   MediaMetaData,
   CreateOutputRTPSettingsDestinations,
@@ -112,7 +113,7 @@ import {
   AiRecognitionTaskInput,
   AiAnalysisTaskFrameTagResult,
   AudioTemplateInfo,
-  ExecuteFunctionResponse,
+  DescribeBatchTaskDetailResponse,
   CoverConfigureInfo,
   AIRecognitionTemplateItem,
   AiReviewPornAsrTaskInput,
@@ -179,7 +180,7 @@ import {
   DescribeWordSamplesResponse,
   DescribeAIRecognitionTemplatesResponse,
   ScratchRepairConfig,
-  LiveStreamAiReviewResultInfo,
+  DescribeImageTaskDetailRequest,
   EditMediaResponse,
   PoliticalOcrReviewTemplateInfoForUpdate,
   TEHDConfig,
@@ -228,7 +229,7 @@ import {
   AiQualityControlTaskInput,
   VideoDBEntryTaskResult,
   PornConfigureInfoForUpdate,
-  AiAnalysisTaskSegmentInput,
+  BatchSubTaskResult,
   AiReviewPornAsrTaskOutput,
   ComposeTransitionItem,
   DeleteAIAnalysisTemplateRequest,
@@ -246,6 +247,7 @@ import {
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
   ImageWatermarkInput,
   TrackInfo,
+  BatchProcessMediaResponse,
   LiveRecordResult,
   AsrFullTextConfigureInfoForUpdate,
   LiveRecordFile,
@@ -266,7 +268,7 @@ import {
   ComposeSubtitleStyle,
   PornOcrReviewTemplateInfoForUpdate,
   AiReviewTaskPornOcrResult,
-  ModifyContentReviewTemplateResponse,
+  BatchProcessMediaRequest,
   DescribeWatermarkTemplatesRequest,
   CreateOutputInfo,
   TaskOutputStorage,
@@ -288,6 +290,7 @@ import {
   AiRecognitionTaskFaceSegmentItem,
   AiAnalysisTaskTagResult,
   AiAnalysisTaskDelLogoInput,
+  SmartSubtitleTaskBatchOutput,
   BatchStopStreamLinkFlowRequest,
   RTMPAddressDestination,
   AiAnalysisTaskTagOutput,
@@ -332,6 +335,7 @@ import {
   RecognizeMediaForZhiXueResponse,
   AiSamplePerson,
   FlowStatistics,
+  BatchSmartSubtitlesResult,
   CreateInputSRTSettings,
   DescribeGroupAttachFlowsByIdRequest,
   DescribeWorkflowsResponse,
@@ -366,8 +370,10 @@ import {
   CreateScheduleRequest,
   StreamLinkRegionInfo,
   CreateVideoSearchTaskResponse,
+  AiAnalysisTaskSegmentInput,
   CreateVideoSearchTaskRequest,
   LiveStreamTagRecognitionResult,
+  ExecuteFunctionResponse,
   FlowRealtimeStatusRTP,
   AnimatedGraphicTaskInput,
   OutputAddress,
@@ -464,8 +470,10 @@ import {
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
   AiAnalysisTaskDelLogoOutput,
+  DescribeBatchTaskDetailRequest,
   AiReviewProhibitedAsrTaskOutput,
   LiveStreamFaceRecognitionResult,
+  LiveStreamAiReviewResultInfo,
   DescribeSampleSnapshotTemplatesRequest,
   CoverConfigureInfoForUpdate,
   DisableWorkflowResponse,
@@ -610,6 +618,7 @@ import {
   DescribeWordSamplesRequest,
   AddOnSubtitle,
   AwsSQS,
+  MediaSampleSnapshotItem,
   DeleteAsrHotwordsRequest,
   CreateSmartSubtitleTemplateRequest,
   LiveStreamProcessTask,
@@ -646,7 +655,7 @@ import {
   SimpleAesDrm,
   DeleteTranscodeTemplateResponse,
   LiveStreamObjectRecognitionResult,
-  MediaSampleSnapshotItem,
+  DescribeImageTaskDetailResponse,
   DescribePersonSamplesResponse,
   ModifyScheduleResponse,
   PornConfigureInfo,
@@ -785,6 +794,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySmartSubtitleTemplateResponse) => void
   ): Promise<ModifySmartSubtitleTemplateResponse> {
     return this.request("ModifySmartSubtitleTemplate", req, cb)
+  }
+
+  /**
+   * 通过任务 ID 查询任务的执行状态和结果的详细信息（最多可以查询7天之内提交的任务）。
+   */
+  async DescribeBatchTaskDetail(
+    req: DescribeBatchTaskDetailRequest,
+    cb?: (error: string, rep: DescribeBatchTaskDetailResponse) => void
+  ): Promise<DescribeBatchTaskDetailResponse> {
+    return this.request("DescribeBatchTaskDetail", req, cb)
   }
 
   /**
@@ -1106,6 +1125,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 对 URL视频链接批量发起处理任务，功能包括：
+智能字幕（语音全文、语音热词、语音翻译）
+     */
+  async BatchProcessMedia(
+    req: BatchProcessMediaRequest,
+    cb?: (error: string, rep: BatchProcessMediaResponse) => void
+  ): Promise<BatchProcessMediaResponse> {
+    return this.request("BatchProcessMedia", req, cb)
+  }
+
+  /**
    * 批量查询媒体输入流的配置信息。
    */
   async DescribeStreamLinkFlows(
@@ -1123,6 +1153,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
   ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
     return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 通过任务 ID 查询任务的执行状态和结果的详细信息（最多可以查询7天之内提交的任务）。
+   */
+  async DescribeImageTaskDetail(
+    req: DescribeImageTaskDetailRequest,
+    cb?: (error: string, rep: DescribeImageTaskDetailResponse) => void
+  ): Promise<DescribeImageTaskDetailResponse> {
+    return this.request("DescribeImageTaskDetail", req, cb)
   }
 
   /**
