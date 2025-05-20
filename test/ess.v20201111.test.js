@@ -268,6 +268,16 @@ it("ess.v20201111.DisableUserAutoSign", async function () {
     }
 })
 
+it("ess.v20201111.CreateUserNameChangeUrl", async function () {
+    try {
+       const data = await client.CreateUserNameChangeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DeleteIntegrationEmployees", async function () {
     try {
        const data = await client.DeleteIntegrationEmployees({})

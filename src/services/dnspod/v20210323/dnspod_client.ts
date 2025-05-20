@@ -1113,7 +1113,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取任务详情
+   * 获取批量操作任务执行详情
    */
   async DescribeBatchTask(
     req: DescribeBatchTaskRequest,

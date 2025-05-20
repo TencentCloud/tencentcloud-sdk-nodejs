@@ -124,6 +124,7 @@ import {
   CreateOrganizationInfoChangeUrlResponse,
   DeleteOrganizationAuthorizationsResponse,
   DescribeExtendedServiceAuthDetailRequest,
+  CreateUserNameChangeUrlRequest,
   CreateOrganizationAuthFileRequest,
   Staff,
   ComponentLimit,
@@ -235,6 +236,7 @@ import {
   DynamicFlowApproverResult,
   UnbindEmployeeUserIdWithClientOpenIdRequest,
   DeleteOrganizationAuthorizationsRequest,
+  StartFlowRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
   CreateUserVerifyUrlRequest,
   CreatePartnerAutoSignAuthUrlRequest,
@@ -261,7 +263,7 @@ import {
   CreatePrepareFlowGroupRequest,
   CreateFileCounterSignResponse,
   VerifyDigitFileResult,
-  StartFlowRequest,
+  CreateUserNameChangeUrlResponse,
   CreateSealResponse,
   CreatePrepareFlowRequest,
   DescribeUserFlowTypeRequest,
@@ -859,6 +861,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableUserAutoSignResponse) => void
   ): Promise<DisableUserAutoSignResponse> {
     return this.request("DisableUserAutoSign", req, cb)
+  }
+
+  /**
+     * 生成个人用户实名更名链接，个人用户点击此链接进入更名流程（若用户未完成实名认证，则直接进入实名页面实名后再进行更名）。此链接为通用链接，任何点击生成链接的用户将会被引导至小程序个人更名页面完成更名。
+
+注： 调用此接口需要购买<font color="red"><b>单独的实名套餐包</b></font>。使用前请联系对接的客户经理沟通。
+     */
+  async CreateUserNameChangeUrl(
+    req: CreateUserNameChangeUrlRequest,
+    cb?: (error: string, rep: CreateUserNameChangeUrlResponse) => void
+  ): Promise<CreateUserNameChangeUrlResponse> {
+    return this.request("CreateUserNameChangeUrl", req, cb)
   }
 
   /**

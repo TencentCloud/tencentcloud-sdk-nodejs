@@ -2906,6 +2906,10 @@ export interface Template {
    * 时间轴
    */
   Timeline?: TimelineInformation
+  /**
+   * 内窥镜报告V2
+   */
+  EndoscopyV2?: Check
 }
 
 /**
@@ -3397,6 +3401,10 @@ export interface Block {
    * 体检报告信息
    */
   PhysicalExamination?: PhysicalExaminationV1
+  /**
+   * 内窥镜报告V2
+   */
+  EndoscopyV2?: Array<Check>
 }
 
 /**
@@ -7143,6 +7151,10 @@ export interface IndicatorItem {
    * 推测结果是否异常
    */
   InferNormal?: string
+  /**
+   * 标本
+   */
+  Sample?: string
 }
 
 /**

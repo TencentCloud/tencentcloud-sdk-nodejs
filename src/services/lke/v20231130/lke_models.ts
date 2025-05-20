@@ -7357,17 +7357,13 @@ export interface GetMsgRecordRequest {
    */
   Type: number
   /**
-   * 数量,  数量需大于2
+   * 数量,  数量需大于2, 最大1000
    */
   Count: number
   /**
    * 会话sessionid
    */
   SessionId: string
-  /**
-   * 最后一条记录ID
-   */
-  LastRecordId?: string
   /**
    * 应用AppKey, 当Type=5[API访客]时, 该字段必填  :</br>  获取方式:</br>   1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取</br>   2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项
    */
@@ -7377,7 +7373,17 @@ export interface GetMsgRecordRequest {
    */
   Scene?: number
   /**
+   * 最后一条记录ID， 消息从后往前获取
+
+MidRecordId与LastRecordId只能选择一个
+
+   */
+  LastRecordId?: string
+  /**
    * 传该值，代表拉取该记录id的前后总共count条消息记录
+
+MidRecordId与LastRecordId只能选择一个
+
    */
   MidRecordId?: string
 }

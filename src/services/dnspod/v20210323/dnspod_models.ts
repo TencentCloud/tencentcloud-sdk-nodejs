@@ -24,11 +24,11 @@ export interface CreateRecordRequest {
    */
   Domain: string
   /**
-   * 记录类型，通过 API 记录类型获得，大写英文，比如：A 。
+   * 记录类型，可通过接口DescribeRecordType获得，大写英文，比如：A 。
    */
   RecordType: string
   /**
-   * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+   * 记录线路，可以通过接口DescribeRecordLineList查看当前域名允许的线路信息，中文，比如：默认。
    */
   RecordLine: string
   /**
@@ -44,11 +44,11 @@ export interface CreateRecordRequest {
    */
   SubDomain?: string
   /**
-   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   * 线路的 ID，可以通过接口DescribeRecordLineList查看当前域名允许的线路信息，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
    */
   RecordLineId?: string
   /**
-   * MX 优先级，当记录类型是 MX 时有效，范围1-20，MX 记录时必选。
+   * MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围1-65535。
    */
   MX?: number
   /**
@@ -302,7 +302,7 @@ export interface ModifySubdomainStatusRequest {
    */
   Status: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
   /**
@@ -447,11 +447,11 @@ export interface ModifyRecordGroupRequest {
    */
   GroupName: string
   /**
-   * 要修改的分组 ID
+   * 要修改的分组 ID，可通过DescribeRecordGroupList接口获取所有记录分组
    */
   GroupId: number
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -532,7 +532,7 @@ export interface DescribeDomainCustomLineListRequest {
    */
   Domain: string
   /**
-   * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -546,11 +546,11 @@ export interface DeleteRecordGroupRequest {
    */
   Domain: string
   /**
-   * 分组 ID
+   * 分组 ID，可通过DescribeRecordGroupList接口获取所有记录分组
    */
   GroupId: number
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -614,7 +614,7 @@ export interface DescribeSnapshotListRequest {
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -1190,11 +1190,11 @@ export interface DeleteSnapshotRequest {
    */
   Domain: string
   /**
-   * 快照记录 ID
+   * 快照 ID。可以通过接口DescribeSnapshotList查询快照 ID
    */
   SnapshotId: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -1266,7 +1266,7 @@ export interface RollbackRecordSnapshotRequest {
    */
   Domain: string
   /**
-   * 快照 ID
+   * 快照 ID。可以通过接口DescribeSnapshotList查询快照 ID
    */
   SnapshotId: string
   /**
@@ -1274,11 +1274,11 @@ export interface RollbackRecordSnapshotRequest {
    */
   RecordList: Array<SnapshotRecord>
   /**
-   * 之前的快照回滚任务 ID
+   * 之前的快照回滚任务 ID。可从RollbackSnapshot接口获取
    */
   TaskId: number
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -1292,15 +1292,15 @@ export interface ModifyRecordToGroupRequest {
    */
   Domain: string
   /**
-   * 分组 ID
+   * 分组 ID，可通过DescribeRecordGroupList接口获取所有记录分组
    */
   GroupId: number
   /**
-   * 记录 ID，多个 ID 用竖线“|”分割
+   * 记录 ID，多个 ID 用竖线“|”分割，可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
    */
   RecordId: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -1580,7 +1580,7 @@ export interface DescribeSnapshotConfigRequest {
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -1650,7 +1650,7 @@ export interface DescribeRecordListResponse {
  */
 export interface CreateRecordBatchRequest {
   /**
-   * 域名ID，多个 domain_id 用英文逗号进行分割。
+   * 域名ID，多个域名ID用英文逗号进行分割。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainIdList: Array<string>
   /**
@@ -1774,7 +1774,7 @@ export interface ModifyDomainLockRequest {
    */
   Domain: string
   /**
-   * 域名要锁定的天数，最多可锁定的天数可以通过获取域名权限接口获取。
+   * 域名要锁定的天数，最多可锁定的天数可以通过DescribeDomainPurview接口获取。
    */
   LockDays: number
   /**
@@ -1810,11 +1810,11 @@ export interface ModifyTXTRecordRequest {
    */
   Value: string
   /**
-   * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+   * 记录 ID 。
    */
   RecordId: number
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
   /**
@@ -2327,7 +2327,7 @@ export interface DescribeRecordLineCategoryListRequest {
    */
   Domain: string
   /**
-   * 要查询线路列表的域名 ID。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId。
+   * 要查询线路列表的域名 ID。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。
    */
   DomainId?: number
 }
@@ -2490,7 +2490,7 @@ export interface ModifyRecordBatchRequest {
    */
   Value?: string
   /**
-   * MX记录优先级，仅当修改为 MX 记录时为必填参数。
+   * MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围1-65535。
    */
   MX?: string
 }
@@ -2794,7 +2794,7 @@ export interface ModifyRecordBatchResponse {
    */
   JobId?: number
   /**
-   * 见modifyRecordBatchDetail
+   * 见ModifyRecordBatchDetail
    */
   DetailList?: Array<ModifyRecordBatchDetail>
   /**
@@ -3202,7 +3202,7 @@ export interface DescribeDomainShareUserListRequest {
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
 }
@@ -3445,11 +3445,11 @@ export interface CreateDomainAliasResponse {
  */
 export interface DescribeRecordListRequest {
   /**
-   * 要获取的解析记录所属的域名
+   * 域名
    */
   Domain: string
   /**
-   * 要获取的解析记录所属的域名Id，如果传了DomainId，系统将会忽略Domain参数。 可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
   /**
@@ -3469,7 +3469,7 @@ export interface DescribeRecordListRequest {
    */
   RecordLineId?: string
   /**
-   * 获取某个分组下的解析记录时，传这个分组Id。
+   * 获取某个分组下的解析记录时，传这个分组Id。可通过DescribeRecordGroupList接口获取所有分组
    */
   GroupId?: number
   /**
@@ -3517,7 +3517,7 @@ export interface CreateTXTRecordRequest {
    */
   Domain: string
   /**
-   * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+   * 记录线路
    */
   RecordLine: string
   /**
@@ -3533,7 +3533,7 @@ export interface CreateTXTRecordRequest {
    */
   SubDomain?: string
   /**
-   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   * 线路的 ID，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
    */
   RecordLineId?: string
   /**
@@ -3549,7 +3549,7 @@ export interface CreateTXTRecordRequest {
    */
   Remark?: string
   /**
-   * 记录分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。
+   * 记录分组 Id。
    */
   GroupId?: number
 }
@@ -3568,7 +3568,7 @@ export interface DescribeRecordFilterListRequest {
    */
   Domain: string
   /**
-   * 要获取的解析记录所属的域名 Id，如果传了 DomainId，系统将会忽略 Domain 参数。 可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId。
+   * 要获取的解析记录所属的域名 Id，如果传了 DomainId，系统将会忽略 Domain 参数。
    */
   DomainId?: number
   /**
@@ -3580,11 +3580,11 @@ export interface DescribeRecordFilterListRequest {
    */
   RecordType?: Array<string>
   /**
-   * 获取某些线路ID的解析记录。可以通过接口 DescribeRecordLineList 查看当前域名允许的线路信息。
+   * 获取某些线路ID的解析记录。
    */
   RecordLine?: Array<string>
   /**
-   * 获取某些分组下的解析记录时，传这个分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。
+   * 获取某些分组下的解析记录时，传这个分组 Id。
    */
   GroupId?: Array<number | bigint>
   /**
@@ -3609,7 +3609,7 @@ UPDATED_ON：解析记录更新时间
    */
   SortType?: string
   /**
-   * 偏移量，默认值为0。如果入参携带"Domain","ffset","Limit" 这3个以外的参数，记录结果限制最大3000条
+   * 偏移量，默认值为0。如果入参携带"Domain","offset","Limit" 这3个以外的参数，记录结果限制最大3000条
    */
   Offset?: number
   /**
@@ -3871,7 +3871,7 @@ export interface CreateRecordGroupRequest {
    */
   GroupName: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
 }
@@ -4263,11 +4263,11 @@ export interface ModifyDynamicDNSRequest {
    */
   RecordId: number
   /**
-   * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+   * 记录线路，中文，比如：默认。
    */
   RecordLine: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
   /**
@@ -4275,7 +4275,7 @@ export interface ModifyDynamicDNSRequest {
    */
   SubDomain?: string
   /**
-   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   * 线路的 ID，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
    */
   RecordLineId?: string
   /**
@@ -4297,7 +4297,7 @@ export interface DescribeRecordGroupListRequest {
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
   /**
@@ -4363,7 +4363,7 @@ RECENT：最近操作过的域名
    */
   Limit?: number
   /**
-   * 根据域名分组 id 获取域名，可通过 DescribeDomain 或 DescribeDomainList 接口 GroupId 字段获取。
+   * 根据域名分组 id 获取域名
    */
   GroupId?: Array<number | bigint>
   /**
@@ -4478,7 +4478,7 @@ export interface DescribeRecordExistExceptDefaultNSRequest {
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
 }
@@ -4571,7 +4571,7 @@ export interface DescribeDomainListRequest {
    */
   Limit?: number
   /**
-   * 分组ID, 获取指定分组的域名
+   * 分组ID, 获取指定分组的域名，可以通过接口DescribeDomainGroupList查看当前域名分组信息
    */
   GroupId?: number
   /**
@@ -5138,7 +5138,7 @@ export interface CheckRecordSnapshotRollbackRequest {
    */
   Domain: string
   /**
-   * 快照 ID
+   * 快照记录 ID
    */
   SnapshotId: string
   /**
@@ -5182,7 +5182,7 @@ export interface DescribeDomainAnalyticsRequest {
    */
   DnsFormat?: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
 }
@@ -5210,11 +5210,11 @@ export interface ModifyRecordRequest {
    */
   Domain: string
   /**
-   * 记录类型，通过 API 记录类型获得，大写英文，比如：A 。
+   * 记录类型，可通过接口DescribeRecordType获得，大写英文，比如：A 。
    */
   RecordType: string
   /**
-   * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+   * 记录线路，可以通过接口DescribeRecordLineList查看当前域名允许的线路信息。比如：默认。
    */
   RecordLine: string
   /**
@@ -5234,11 +5234,11 @@ export interface ModifyRecordRequest {
    */
   SubDomain?: string
   /**
-   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   * 线路的 ID，可以通过接口DescribeRecordLineList查看当前域名允许的线路信息，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
    */
   RecordLineId?: string
   /**
-   * MX 优先级，当记录类型是 MX 时有效，范围1-20，MX 记录时必选。
+   * MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围1-65535。
    */
   MX?: number
   /**

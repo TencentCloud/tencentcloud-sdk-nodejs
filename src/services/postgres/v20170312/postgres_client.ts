@@ -51,7 +51,6 @@ import {
   DescribeProductConfigRequest,
   RemoveDBInstanceFromReadOnlyGroupRequest,
   CreateAccountRequest,
-  InitDBInstancesResponse,
   DescribeTasksResponse,
   DescribeMaintainTimeWindowResponse,
   DescribeDefaultParametersRequest,
@@ -173,7 +172,6 @@ import {
   DescribeServerlessDBInstancesResponse,
   DescribeBackupOverviewResponse,
   DescribeParameterTemplatesRequest,
-  InitDBInstancesRequest,
   DescribeClassesResponse,
   DeleteDBInstanceNetworkAccessRequest,
   ModifyDBInstanceDeploymentResponse,
@@ -860,13 +858,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
+   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
    */
-  async ModifyDBInstancesProject(
-    req: ModifyDBInstancesProjectRequest,
-    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
-  ): Promise<ModifyDBInstancesProjectResponse> {
-    return this.request("ModifyDBInstancesProject", req, cb)
+  async DeleteReadOnlyGroup(
+    req: DeleteReadOnlyGroupRequest,
+    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
+  ): Promise<DeleteReadOnlyGroupResponse> {
+    return this.request("DeleteReadOnlyGroup", req, cb)
   }
 
   /**
@@ -910,13 +908,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
+   * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
    */
-  async DeleteReadOnlyGroup(
-    req: DeleteReadOnlyGroupRequest,
-    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
-  ): Promise<DeleteReadOnlyGroupResponse> {
-    return this.request("DeleteReadOnlyGroup", req, cb)
+  async ModifyDBInstancesProject(
+    req: ModifyDBInstancesProjectRequest,
+    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
+  ): Promise<ModifyDBInstancesProjectResponse> {
+    return this.request("ModifyDBInstancesProject", req, cb)
   }
 
   /**
@@ -1234,18 +1232,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceSSLConfigResponse) => void
   ): Promise<ModifyDBInstanceSSLConfigResponse> {
     return this.request("ModifyDBInstanceSSLConfig", req, cb)
-  }
-
-  /**
-     * 早期接口，不规范，已提供新接口 CreateInstances 替换
-
-本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
-     */
-  async InitDBInstances(
-    req: InitDBInstancesRequest,
-    cb?: (error: string, rep: InitDBInstancesResponse) => void
-  ): Promise<InitDBInstancesResponse> {
-    return this.request("InitDBInstances", req, cb)
   }
 
   /**

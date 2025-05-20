@@ -26,7 +26,7 @@ import {
   DocItem,
   GetEmbeddingRequest,
   ImportQAsResponse,
-  UploadDocRealtimeRequest,
+  UploadDocResponse,
   DescribeDocResponse,
   AttributeLabelReferItem,
   DeleteQAsRequest,
@@ -55,6 +55,7 @@ import {
   CreateReconstructDocumentFlowConfig,
   RunRerankRequest,
   ChatUsage,
+  RetrieveKnowledgeRealtimeResponse,
   GetSplitDocumentResultRequest,
   Delta,
   ReconstructDocumentSSERequest,
@@ -71,7 +72,7 @@ import {
   GetSplitDocumentResultResponse,
   ModifyQAResponse,
   ReconstructDocumentFailedPage,
-  UploadDocRealtimeResponse,
+  RetrieveKnowledgeRealtimeRequest,
   SplitDocumentFailedPage,
   ModifyAttributeLabelResponse,
   QueryRewriteResponse,
@@ -88,7 +89,6 @@ import {
   CreateQARequest,
   GetCharacterUsageRequest,
   GetCharacterUsageResponse,
-  UploadDocResponse,
   AttributeItem,
   EmbeddingObject,
   Message,
@@ -134,6 +134,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetReconstructDocumentResultResponse) => void
   ): Promise<GetReconstructDocumentResultResponse> {
     return this.request("GetReconstructDocumentResult", req, cb)
+  }
+
+  /**
+   * 用于实时检索在UploadDocRealtime接口上传的实时文档内容。 使用场景：适用于在会话中对文档进行问答的场景
+   */
+  async RetrieveKnowledgeRealtime(
+    req: RetrieveKnowledgeRealtimeRequest,
+    cb?: (error: string, rep: RetrieveKnowledgeRealtimeResponse) => void
+  ): Promise<RetrieveKnowledgeRealtimeResponse> {
+    return this.request("RetrieveKnowledgeRealtime", req, cb)
   }
 
   /**
@@ -349,17 +359,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetCharacterUsageResponse) => void
   ): Promise<GetCharacterUsageResponse> {
     return this.request("GetCharacterUsage", req, cb)
-  }
-
-  /**
-     * 用于上传实时文档内容。
-实时文档在上传后可以立即通过SearchRealtime进行实时检索，适用于在会话中对文档进行问答的场景。
-     */
-  async UploadDocRealtime(
-    req: UploadDocRealtimeRequest,
-    cb?: (error: string, rep: UploadDocRealtimeResponse) => void
-  ): Promise<UploadDocRealtimeResponse> {
-    return this.request("UploadDocRealtime", req, cb)
   }
 
   /**

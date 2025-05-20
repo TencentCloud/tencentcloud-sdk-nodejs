@@ -644,12 +644,10 @@ export interface ServerBaseConfig {
   InternalDomain?: string
   /**
    * 运行模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperationMode?: string
   /**
    * 定时扩缩容配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimerScale?: Array<TimerScale>
 }
@@ -784,32 +782,26 @@ export interface ServerBaseInfo {
 export interface TimerScale {
   /**
    * 循环类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
    * 循环起始
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartDate?: string
   /**
    * 循环结束
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndDate?: string
   /**
    * 起始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 副本个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplicaNum?: number
 }

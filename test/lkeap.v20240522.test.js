@@ -48,6 +48,16 @@ it("lkeap.v20240522.GetReconstructDocumentResult", async function () {
     }
 })
 
+it("lkeap.v20240522.RetrieveKnowledgeRealtime", async function () {
+    try {
+       const data = await client.RetrieveKnowledgeRealtime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lkeap.v20240522.GetSplitDocumentResult", async function () {
     try {
        const data = await client.GetSplitDocumentResult({})
@@ -251,16 +261,6 @@ it("lkeap.v20240522.CreateSplitDocumentFlow", async function () {
 it("lkeap.v20240522.GetCharacterUsage", async function () {
     try {
        const data = await client.GetCharacterUsage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lkeap.v20240522.UploadDocRealtime", async function () {
-    try {
-       const data = await client.UploadDocRealtime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

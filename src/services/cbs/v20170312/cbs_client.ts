@@ -658,10 +658,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 为进一步规范化API命名，该接口决定预下线，新接口命名为：DescribeSnapshotOverview
-
-获取快照概览信息
-     */
+   * 获取快照概览信息
+   */
   async GetSnapOverview(
     req?: GetSnapOverviewRequest,
     cb?: (error: string, rep: GetSnapOverviewResponse) => void

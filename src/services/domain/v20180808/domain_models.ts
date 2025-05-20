@@ -353,7 +353,7 @@ export interface DescribeBiddingAppointDetailRequest {
 export interface DescribeCustomDnsHostSetRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
   /**
@@ -2211,7 +2211,7 @@ BiddingPrice 我的价格
 export interface ModifyCustomDnsHostRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
   /**
@@ -2630,7 +2630,7 @@ export interface DescribeDomainNameListResponse {
 export interface SyncCustomDnsHostRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
 }
@@ -3090,7 +3090,7 @@ export interface CreateCustomDnsHostRequest {
 export interface DeleteCustomDnsHostRequest {
   /**
    * 域名实例ID
-可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941)
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
   /**
@@ -3350,7 +3350,6 @@ false：否
   /**
    * 四级分类
 1:"仅含2种数字"
-1:"仅含2种数字"
 2:"仅含3种数字"
 4:"仅含1种字母"
 8:"仅含1种数字"
@@ -3379,7 +3378,7 @@ FilterWords+FilterStart（true）+FilterEnd（true）：使用域名开头或结
    */
   TransType?: number
   /**
-   * 是否搜索白金域名
+   * 是否搜索白金域名（默认值为false）
    */
   IsTop?: boolean
   /**

@@ -391,6 +391,10 @@ export interface CreateTranscodeTemplateRequest {
    * 音视频增强配置。
    */
   EnhanceConfig?: EnhanceConfig
+  /**
+   * 扩展参数，序列化的 json 字符串。
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -4476,6 +4480,22 @@ export interface WithdrawsWatermarkRequest {
 }
 
 /**
+ * 图片处理结果信息
+ */
+export interface ImageProcessTaskOutput {
+  /**
+   * 输出文件的路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 输出文件的存储位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+}
+
+/**
  * 视频编辑/合成任务 目标视频信息。
  */
 export interface ComposeTargetInfo {
@@ -5914,6 +5934,16 @@ export interface RawTranscodeParameter {
    * 极速高清转码参数。
    */
   TEHDConfig?: TEHDConfig
+  /**
+   * 扩展参数，序列化的 json 字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StdExtInfo?: string
+  /**
+   * 音视频增强配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnhanceConfig?: EnhanceConfig
 }
 
 /**
@@ -11821,6 +11851,32 @@ export interface DisableWorkflowResponse {
 }
 
 /**
+ * 图片处理任务结果类型
+ */
+export interface ImageProcessTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 转码任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: ImageProcessTaskOutput
+  /**
+   * 转码进度，取值范围 [0-100]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
+}
+
+/**
  * 智能分类任务结果类型
  */
 export interface AiAnalysisTaskClassificationResult {
@@ -13264,6 +13320,11 @@ export interface ImageEnhanceConfig {
    */
   SuperResolution?: SuperResolutionConfig
   /**
+   * 降噪配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Denoise?: ImageDenoiseConfig
+  /**
    * 综合增强配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -13283,6 +13344,11 @@ export interface ImageEnhanceConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FaceEnhance?: FaceEnhanceConfig
+  /**
+   * 低光照增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowLightEnhance?: LowLightEnhanceConfig
 }
 
 /**
@@ -16601,6 +16667,11 @@ export interface DescribeImageTaskDetailResponse {
    */
   Status?: string
   /**
+   * 图片处理任务的执行状态与结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageProcessTaskResultSet?: Array<ImageProcessTaskResult>
+  /**
    * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -16752,6 +16823,27 @@ export interface ModifyInput {
    * 输入节点的地区
    */
   InputRegion?: string
+}
+
+/**
+ * 图片降噪配置
+ */
+export interface ImageDenoiseConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 类型，可选值：
+<li>weak</li>
+<li>strong</li>
+默认值：weak。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
 }
 
 /**

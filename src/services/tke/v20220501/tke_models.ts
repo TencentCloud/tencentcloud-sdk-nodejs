@@ -78,13 +78,17 @@ export interface NativeNodeInfo {
    */
   RenewFlag?: string
   /**
-   * 节点计费模式（已弃用）
+   * 节点计费模式
    */
   PayMode?: string
   /**
    * 节点内存容量，单位：`GB`
    */
   Memory?: number
+  /**
+   * 节点系统盘配置信息
+   */
+  SystemDisk?: Disk
   /**
    * 公网带宽相关信息设置
    */
@@ -107,6 +111,26 @@ export interface NativeNodeInfo {
    */
   ExpiredTime?: string
   /**
+   * 节点外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WanIp?: string
+  /**
+   * 节点密钥 ID 列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyIds?: Array<string>
+  /**
+   * 节点GPU相关配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GPUParams?: GPUParams
+  /**
+   * 数据盘列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataDisks?: Array<DataDisk>
+  /**
    * 安全组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -124,6 +148,13 @@ export interface NativeNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OsImage?: string
+  /**
+   * **原生节点的 Machine 类型**
+
+- Native 表示 CXM 类型的原生节点
+- NativeCVM 表示 CVM 类型的原生节点
+   */
+  MachineType?: string
   /**
    * **原生节点对应的实例 ID**
 

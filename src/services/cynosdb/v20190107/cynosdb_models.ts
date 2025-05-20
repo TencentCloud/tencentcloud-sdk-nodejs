@@ -3525,11 +3525,11 @@ export interface RollbackData {
    */
   SnapshotTime?: string
   /**
-   * 回档到serverlessls集群时最小CPU
+   * 回档到 Serverless 集群时最小 CPU
    */
   MinCpu?: number
   /**
-   * 回档到serverlessls集群时最大CPU
+   * 回档到 Serverless 集群时最大 CPU
    */
   MaxCpu?: number
   /**
@@ -7439,6 +7439,10 @@ deleted:已删除
    */
   CynosVersion?: string
   /**
+   * cynos版本标签
+   */
+  CynosVersionTag?: string
+  /**
    * 存储容量
    */
   StorageLimit?: number
@@ -7532,6 +7536,10 @@ pause
    * 全球数据库唯一标识
    */
   GdnId?: string
+  /**
+   * 集群角色。主集群- primary，从集群 - standby，如果 GdnId为空，该字段无效。
+   */
+  GdnRole?: string
 }
 
 /**

@@ -48,7 +48,7 @@ export interface DescribeDiskBackupsRequest {
    */
   DiskBackupIds?: Array<string>
   /**
-   * 过滤条件，参数不支持同时指定 DiskBackupIds 和 Filters。过滤条件：<br><li>disk-backup-id - Array of String - 是否必填：否 -（过滤条件）按照备份点的ID过滤。备份点ID形如：dbp-11112222。</li><br><li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照创建备份点的云硬盘ID过滤。</li><br><li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按创建备份点的云硬盘类型过滤。 (SYSTEM_DISK：代表系统盘 | DATA_DISK：代表数据盘。)</li>
+   * 过滤条件，参数不支持同时指定 DiskBackupIds 和 Filters。过滤条件：<br><li>disk-backup-id - Array of String - 是否必填：否 -（过滤条件）按照备份点的ID过滤。备份点ID形如：dbp-11112222。</li><br><li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照创建备份点的云硬盘ID过滤。云硬盘ID形如：disk-srftydert。</li><br><li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按创建备份点的云硬盘类型过滤。 (SYSTEM_DISK：代表系统盘 | DATA_DISK：代表数据盘。)</li>
    */
   Filters?: Array<Filter>
   /**
@@ -302,7 +302,7 @@ export interface InquiryPriceCreateDisksResponse {
   /**
    * 描述了新购云盘的价格。
    */
-  DiskPrice: Price
+  DiskPrice?: Price
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1105,11 +1105,11 @@ export interface InquiryPriceRenewDisksRequest {
    */
   DiskChargePrepaids?: Array<DiskChargePrepaid>
   /**
-   * 指定云盘新的到期时间，形式如：2017-12-17 00:00:00。参数`NewDeadline`和`DiskChargePrepaids`是两种指定询价时长的方式，两者必传一个。
+   * 指定云硬盘新的到期时间，形式如：2017-12-17 00:00:00。参数`NewDeadline`和`DiskChargePrepaids`是两种指定询价时长的方式，两者必传一个。
    */
   NewDeadline?: string
   /**
-   * 云盘所属项目ID。 如传入则仅用于鉴权。
+   * 云硬盘所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。 如传入则仅用于鉴权。
    */
   ProjectId?: number
 }
@@ -1253,15 +1253,15 @@ export interface DeleteSnapshotsResponse {
  */
 export interface ModifyDisksRenewFlagRequest {
   /**
-   * 一个或多个待操作的云硬盘ID。
+   * 一个或多个待操作的云硬盘ID，该参数可以通过[DescribeDisks](/document/product/362/16315)接口查询。
    */
   DiskIds: Array<string>
   /**
-   * 	云硬盘的自动续费标识。取值范围：<ul><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li></ul>
+   * 云硬盘的自动续费标识。取值范围：<ul><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li></ul>
    */
   RenewFlag: string
   /**
-   * 该参数支持设置云硬盘的自动续费周期，单位为月。
+   * 该参数支持设置云硬盘的自动续费周期，单位为月。取值范围：[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36]
    */
   AutoRenewPeriod?: number
 }
@@ -1529,11 +1529,17 @@ export interface DiskConfig {
    */
   InstanceFamily?: string
   /**
-   * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘</li><br><li>CLOUD_PREMIUM：表示高性能云硬盘</li><br><li>CLOUD_SSD：SSD表示SSD云硬盘。</li>
+   * 云盘介质类型。取值范围：<br>
+CLOUD_BASIC：表示普通云硬盘<br>
+CLOUD_PREMIUM：表示高性能云硬盘<br>
+CLOUD_BSSD：表示通用型SSD云硬盘<br>
+CLOUD_SSD：表示SSD云硬盘<br>
+CLOUD_HSSD：表示增强型SSD云硬盘<br>
+CLOUD_TSSD：表示极速型SSD云硬盘。
    */
   DiskType?: string
   /**
-   * 云盘大小变化的最小步长，单位GB。
+   * 云盘大小变化的最小步长，单位GiB。
    */
   StepSize?: number
   /**
@@ -1551,11 +1557,11 @@ export interface DiskConfig {
    */
   DiskUsage?: string
   /**
-   * 最小可配置云盘大小，单位GB。
+   * 最小可配置云盘大小，单位GiB。
    */
   MinDiskSize?: number
   /**
-   * 最大可配置云盘大小，单位GB。
+   * 最大可配置云盘大小，单位GiB。
    */
   MaxDiskSize?: number
   /**
@@ -1607,15 +1613,21 @@ export interface DeleteAutoSnapshotPoliciesRequest {
  */
 export interface DiskChargePrepaid {
   /**
-   * 购买云盘的时长，默认单位为月，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+   * 购买云硬盘的时长，默认单位为月，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
    */
   Period: number
   /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。
+   * 自动续费标识。取值范围：
+<ul>
+  <li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
+  <li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
+  <li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
+</ul>
+默认取值：NOTIFY_AND_MANUAL_RENEW。
    */
   RenewFlag?: string
   /**
-   * 需要将云盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，云盘会自动按对齐到子机续费后的到期时间续费，示例取值：2018-03-30 20:15:03。
+   * 需要将云硬盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，云盘会自动按对齐到子机续费后的到期时间续费.
    */
   CurInstanceDeadline?: string
 }
@@ -1664,27 +1676,27 @@ export interface Filter {
  */
 export interface InquiryPriceCreateDisksRequest {
   /**
-   * 云硬盘计费类型。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费
+   * 云硬盘计费类型： <ul>   <li>PREPAID：预付费，即包年包月</li>   <li>POSTPAID_BY_HOUR：按小时后付费</li> </ul>
    */
   DiskChargeType: string
   /**
-   * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
+   * 硬盘介质类型。取值范围： <ul>   <li>CLOUD_PREMIUM：表示高性能云硬盘</li>   <li>CLOUD_SSD：表示SSD云硬盘</li>   <li>CLOUD_HSSD：表示增强型SSD云硬盘</li>   <li>CLOUD_TSSD：表示极速型SSD云硬盘</li> </ul>
    */
   DiskType: string
   /**
-   * 云硬盘大小，单位为GB。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
+   * 云硬盘大小，单位为GiB。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
    */
   DiskSize: number
   /**
-   * 云盘所属项目ID。
+   * 云硬盘所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
    */
   ProjectId?: number
   /**
-   * 购买云盘的数量。不填则默认为1。
+   * 购买云硬盘的数量。不填则默认为1。
    */
   DiskCount?: number
   /**
-   * 额外购买的云硬盘性能值，单位MB/s。<br>目前仅支持增强型SSD云硬盘（CLOUD_HSSD）和极速型SSD云硬盘（CLOUD_TSSD）
+   * 额外购买的云硬盘性能值，单位MiB/s。仅大小超过460GiB的增强型SSD（CLOUD_HSSD）和极速型SSD（CLOUD_TSSD）云硬盘才支持购买额外性能。
    */
   ThroughputPerformance?: number
   /**
@@ -1968,39 +1980,46 @@ export interface DiskBackup {
   /**
    * 云硬盘备份点的ID。
    */
-  DiskBackupId: string
+  DiskBackupId?: string
   /**
    * 云硬盘备份点关联的云硬盘ID。
    */
-  DiskId: string
+  DiskId?: string
   /**
-   * 云硬盘大小，单位GB。
+   * 云硬盘大小，单位GiB。
    */
-  DiskSize: number
+  DiskSize?: number
   /**
-   * 云硬盘类型。取值范围：<br><li>SYSTEM_DISK：系统盘<br><li>DATA_DISK：数据盘。
+   * 云硬盘类型。取值范围：<br>
+<li>SYSTEM_DISK：系统盘</li>
+<li>DATA_DISK：数据盘。</li>
    */
-  DiskUsage: string
+  DiskUsage?: string
   /**
    * 备份点名称。
    */
-  DiskBackupName: string
+  DiskBackupName?: string
   /**
-   * 云硬盘备份点状态。取值范围：<br><li>NORMAL：正常<br><li>CREATING：创建中<br><li>ROLLBACKING：回滚中
+   * <p>云硬盘备份点状态。取值范围：</p>
+<ul>
+  <li>NORMAL：正常</li>
+  <li>CREATING：创建中</li>
+  <li>ROLLBACKING：回滚中</li>
+</ul>
    */
-  DiskBackupState: string
+  DiskBackupState?: string
   /**
-   * 云硬盘创建进度百分比。
+   * 云硬盘备份点创建百分比。
    */
-  Percent: number
+  Percent?: number
   /**
    * 云硬盘备份点的创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
-   * 云盘是否为加密盘。取值范围：<br><li>false:表示非加密盘<br><li>true:表示加密盘。
+   * 云盘是否为加密盘。取值范围：<br><li>false:表示非加密盘<br></li>true:表示加密盘。
    */
-  Encrypt: boolean
+  Encrypt?: boolean
 }
 
 /**
@@ -2054,7 +2073,7 @@ export interface InquiryPriceRenewDisksResponse {
   /**
    * 描述了续费云盘的价格。
    */
-  DiskPrice: PrepayPrice
+  DiskPrice?: PrepayPrice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2134,7 +2153,7 @@ export interface ModifyDiskExtraPerformanceResponse {
  */
 export interface InquirePriceModifyDiskExtraPerformanceRequest {
   /**
-   * 额外购买的云硬盘性能值，单位MB/s。
+   * 额外购买的云硬盘性能值，单位MiB/s。仅大小超过460GiB的增强型SSD（CLOUD_HSSD）和极速型SSD（CLOUD_TSSD）云硬盘才支持购买额外性能。
    */
   ThroughputPerformance: number
   /**
@@ -2148,7 +2167,7 @@ export interface InquirePriceModifyDiskExtraPerformanceRequest {
  */
 export interface InquiryPriceResizeDiskRequest {
   /**
-   * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
+   * 云硬盘扩容后的大小，单位为GiB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
    */
   DiskSize: number
   /**
@@ -2156,7 +2175,7 @@ export interface InquiryPriceResizeDiskRequest {
    */
   DiskId: string
   /**
-   * 云盘所属项目ID。 如传入则仅用于鉴权。
+   * 云硬盘所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。 如传入则仅用于鉴权。
    */
   ProjectId?: number
 }
@@ -2166,11 +2185,11 @@ export interface InquiryPriceResizeDiskRequest {
  */
 export interface DescribeDiskConfigQuotaRequest {
   /**
-   * 查询类别，取值范围。<br><li>INQUIRY_CBS_CONFIG：查询云盘配置列表<br><li>INQUIRY_CVM_CONFIG：查询云盘与实例搭配的配置列表。
+   * 查询类别，取值范围。<br> INQUIRY_CBS_CONFIG：查询云盘配置列表<br> INQUIRY_CVM_CONFIG：查询云盘与实例搭配的配置列表。
    */
   InquiryType: string
   /**
-   * 付费模式。取值范围：<br><li>PREPAID：预付费<br><li>POSTPAID_BY_HOUR：后付费。
+   * 付费模式。取值范围：<br> PREPAID：预付费<br> POSTPAID_BY_HOUR：后付费。
    */
   DiskChargeType?: string
   /**
@@ -2178,7 +2197,7 @@ export interface DescribeDiskConfigQuotaRequest {
    */
   InstanceFamilies?: Array<string>
   /**
-   * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘。
+   * 硬盘介质类型。取值范围：<br> CLOUD_BASIC：表示普通云硬盘<br> CLOUD_PREMIUM：表示高性能云硬盘<br> CLOUD_SSD：表示SSD云硬盘<br> CLOUD_HSSD：表示增强型SSD云硬盘。
    */
   DiskTypes?: Array<string>
   /**
@@ -2186,11 +2205,11 @@ export interface DescribeDiskConfigQuotaRequest {
    */
   Zones?: Array<string>
   /**
-   * 实例内存大小。
+   * 实例内存大小,单位GB。
    */
   Memory?: number
   /**
-   * 系统盘或数据盘。取值范围：<br><li>SYSTEM_DISK：表示系统盘<br><li>DATA_DISK：表示数据盘。
+   * 系统盘或数据盘。取值范围：<br> SYSTEM_DISK：表示系统盘<br> DATA_DISK：表示数据盘。
    */
   DiskUsage?: string
   /**

@@ -961,20 +961,6 @@ export interface CreateAccountRequest {
 }
 
 /**
- * InitDBInstances返回参数结构体
- */
-export interface InitDBInstancesResponse {
-  /**
-   * 实例ID集合。
-   */
-  DBInstanceIdSet?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeTasks返回参数结构体
  */
 export interface DescribeTasksResponse {
@@ -4046,28 +4032,6 @@ export interface DescribeParameterTemplatesRequest {
    * 排序方式，枚举值，支持：asc（升序） ，desc（降序）
    */
   OrderByType?: string
-}
-
-/**
- * InitDBInstances请求参数结构体
- */
-export interface InitDBInstancesRequest {
-  /**
-   * 实例ID集合。
-   */
-  DBInstanceIdSet: Array<string>
-  /**
-   * 实例根账号用户名。
-   */
-  AdminName: string
-  /**
-   * 实例根账号用户名对应的密码。
-   */
-  AdminPassword: string
-  /**
-   * 实例字符集，目前只支持：UTF8、LATIN1。
-   */
-  Charset: string
 }
 
 /**

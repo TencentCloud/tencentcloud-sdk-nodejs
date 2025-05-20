@@ -249,6 +249,14 @@ export interface LogstashInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemSize?: number
+  /**
+   * 部署模式，0：单可用区、1：多可用区
+   */
+  DeployMode?: number
+  /**
+   * 多可用区部署时可用区的详细信息
+   */
+  MultiZoneInfo?: Array<ZoneDetail>
 }
 
 /**
@@ -3203,6 +3211,14 @@ export interface CreateLogstashInstanceRequest {
    * 可维护时间段
    */
   OperationDuration?: OperationDuration
+  /**
+   * 多可用区部署时可用区的详细信息
+   */
+  MultiZoneInfo?: Array<ZoneDetail>
+  /**
+   * 部署模式，0：单可用区、1：多可用区
+   */
+  DeployMode?: number
 }
 
 /**
@@ -4595,6 +4611,11 @@ export interface ZoneDetail {
    * 子网ID
    */
   SubnetId: string
+  /**
+   * 是否为隐藏可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hidden?: boolean
 }
 
 /**

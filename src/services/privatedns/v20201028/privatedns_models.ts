@@ -596,7 +596,7 @@ export interface CreatePrivateZoneRequest {
  */
 export interface VpcInfo {
   /**
-   * VpcId： vpc-xadsafsdasd
+   * VpcId
    */
   UniqVpcId: string
   /**
@@ -610,7 +610,7 @@ export interface VpcInfo {
  */
 export interface AccountVpcInfoOut {
   /**
-   * VpcId： vpc-xadsafsdasd
+   * VpcId
    */
   VpcId?: string
   /**

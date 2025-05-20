@@ -80,15 +80,15 @@ export interface ModifyChcAttributeResponse {
  */
 export interface DescribeHpcClustersRequest {
   /**
-   * 高性能计算集群ID数组。
+   * 一个或多个待操作的高性能计算集群ID。集群ID信息可通过 [查询高性能集群信息](https://cloud.tencent.com/document/api/213/83220) 接口获取。每次请求高性能计算集群信息的批量上限为100，默认配合Limit传参数，不能超过Limit值，Limit默认20。
    */
   HpcClusterIds?: Array<string>
   /**
-   * 高性能计算集群名称。
+   * 高性能计算集群名称，长度限制[1-60]。
    */
   Name?: string
   /**
-   * 可用区。
+   * 可用区信息。可用区信息可通过 [查询可用区信息](https://cloud.tencent.com/document/api/213/15707) 接口获取。
    */
   Zone?: string
   /**
@@ -96,15 +96,15 @@ export interface DescribeHpcClustersRequest {
    */
   Offset?: number
   /**
-   * 本次请求量, 默认值20。
+   * 本次请求量, 默认值20，范围限制为[1-100]。
    */
   Limit?: number
   /**
-   * 高性能计算集群类型。
+   * 高性能计算集群类型，当前有三个取值：分别是CDC/CHC/STANDARD，其中STANDARD是默认的标准模式。
    */
   HpcClusterType?: string
   /**
-   * 高性能计算集群对应的业务场景标识，当前只支持CDC。
+   * 高性能计算集群对应的业务场景标识，当前只支持CDC场景类型。
    */
   HpcClusterBusinessId?: string
   /**
@@ -871,7 +871,7 @@ export interface SystemDisk {
  */
 export interface ModifyInstancesDisasterRecoverGroupRequest {
   /**
-   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为1
+   * 一个或多个待操作的实例ID。可通过[ DescribeInstances ](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100
    */
   InstanceIds: Array<string>
   /**
@@ -889,15 +889,15 @@ export interface ModifyInstancesDisasterRecoverGroupRequest {
  */
 export interface ModifyHpcClusterAttributeRequest {
   /**
-   * 高性能计算集群ID。
+   * 高性能计算集群ID。集群ID可通过 [查询高性能集群信息](https://cloud.tencent.com/document/api/213/83220) 接口获取。
    */
   HpcClusterId: string
   /**
-   * 高性能计算集群新名称。
+   * 高性能计算集群新名称，长度限制[1-60]。
    */
   Name?: string
   /**
-   * 高性能计算集群新备注。
+   * 高性能计算集群新备注，长度[1-256]。
    */
   Remark?: string
 }
@@ -1916,7 +1916,7 @@ export interface ModifyInstancesAttributeRequest {
    */
   DisableApiTermination?: boolean
   /**
-   * 角色类别，与CamRoleName搭配使用，该值可从CAM DescribeRoleList, GetRole接口返回RoleType字段获取，当前只接受user、system和service_linked三种类别。
+   * 角色类别，与CamRoleName搭配使用，该值可从CAM [ DescribeRoleList ](https://cloud.tencent.com/document/product/598/36223)或[ GetRole ](https://cloud.tencent.com/document/product/598/36221)接口返回RoleType字段获取，当前只接受user、system和service_linked三种类别。
 举例：一般CamRoleName中包含“LinkedRoleIn”（如TKE_QCSLinkedRoleInPrometheusService）时，DescribeRoleList和GetRole返回的RoleType为service_linked，则本参数也需要传递service_linked。
 该参数默认值为user，若CameRoleName为非service_linked类型，本参数可不传递。
    */
@@ -5185,7 +5185,7 @@ export interface InquiryPriceRunInstancesResponse {
  */
 export interface TagSpecification {
   /**
-   * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”，密钥为“keypair”
+   * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”，密钥为“keypair”，置放群组为“ps”，高性能计算集群为“hpc”。
    */
   ResourceType: string
   /**

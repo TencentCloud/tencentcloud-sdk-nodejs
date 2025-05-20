@@ -4018,7 +4018,6 @@ export interface TigaMainClassMode {
 export interface DeleteBotSceneUCBRuleResponse {
   /**
    * 正常情况下为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -8780,14 +8779,6 @@ export interface UpsertCCRuleRequest {
    */
   Interval: string
   /**
-   * 检测Url
-   */
-  Url: string
-  /**
-   * 匹配方法，0表示等于，1表示前缀匹配，2表示包含，3表示不等于，6表示后缀匹配，7表示不包含
-   */
-  MatchFunc: number
-  /**
    * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，26表示精准人机识别，27表示JS校验
    */
   ActionType: string
@@ -8799,6 +8790,14 @@ export interface UpsertCCRuleRequest {
    * 动作有效时间
    */
   ValidTime: number
+  /**
+   * 检测Url
+   */
+  Url?: string
+  /**
+   * 匹配方法，0表示等于，1表示前缀匹配，2表示包含，3表示不等于，6表示后缀匹配，7表示不包含
+   */
+  MatchFunc?: number
   /**
    * CC的匹配条件JSON序列化的字符串，示例：[{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 Key为IPLocation时，可选值为13（属于）、14（不属于）。args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。
    */
@@ -8835,6 +8834,14 @@ export interface UpsertCCRuleRequest {
    * 限频方式
    */
   LimitMethod?: string
+  /**
+   * cel表达式
+   */
+  CelRule?: string
+  /**
+   * 配置方式的逻辑操作符，and或者or
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -9590,6 +9597,14 @@ export interface CCRuleItems {
    * 限频方式
    */
   LimitMethod?: string
+  /**
+   * cel表达式
+   */
+  CelRule?: string
+  /**
+   * 逻辑操作符
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -9822,6 +9837,10 @@ export interface ModifyCustomWhiteRuleRequest {
    * 定时任务配置
    */
   JobDateTime?: JobDateTime
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -9908,6 +9927,10 @@ export interface AddCustomWhiteRuleRequest {
    * 定时任务配置
    */
   JobDateTime?: JobDateTime
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
