@@ -10274,12 +10274,10 @@ expireTime-过期时间，packageUsedSpec-使用容量，packageTotalSpec-总存
 export interface CloseSSLResponse {
   /**
    * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
    * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: number
   /**

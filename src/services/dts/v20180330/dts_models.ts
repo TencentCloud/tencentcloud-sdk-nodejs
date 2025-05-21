@@ -241,10 +241,12 @@ export interface DstInfo {
   InstanceId?: string
   /**
    * 目标实例vip。已废弃，无需填写
+   * @deprecated
    */
   Ip?: string
   /**
    * 目标实例vport。已废弃，无需填写
+   * @deprecated
    */
   Port?: number
   /**

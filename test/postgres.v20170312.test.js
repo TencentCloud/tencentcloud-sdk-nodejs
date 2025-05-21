@@ -1048,16 +1048,6 @@ it("postgres.v20170312.DescribeReadOnlyGroups", async function () {
     }
 })
 
-it("postgres.v20170312.UpgradeDBInstance", async function () {
-    try {
-       const data = await client.UpgradeDBInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("postgres.v20170312.CreateInstances", async function () {
     try {
        const data = await client.CreateInstances({})

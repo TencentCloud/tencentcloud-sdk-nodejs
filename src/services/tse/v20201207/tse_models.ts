@@ -109,6 +109,11 @@ export interface GovernanceAlias {
    * 该服务别名是否可以编辑
    */
   Editable?: boolean
+  /**
+   * 元数据信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadatas?: Array<Metadata>
 }
 
 /**
@@ -3582,6 +3587,11 @@ export interface GovernanceServiceContract {
    * 契约接口列表
    */
   Interfaces?: Array<GovernanceInterfaceDescription>
+  /**
+   * 元数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadatas?: Array<Metadata>
 }
 
 /**
@@ -4566,6 +4576,11 @@ export interface GovernanceNamespace {
    * 是否开启同步到全局注册中心
    */
   SyncToGlobalRegistry?: boolean
+  /**
+   * 元数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadatas?: Array<Metadata>
 }
 
 /**
@@ -6790,11 +6805,11 @@ export interface KVPair {
   /**
    * 键
    */
-  Key: string
+  Key?: string
   /**
    * 值
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -7583,6 +7598,22 @@ export interface SREInstance {
    * 部署架构
    */
   DeployMode?: string
+  /**
+   * 全局属性
+   */
+  GlobalType?: string
+  /**
+   * 所属组类型
+   */
+  GroupType?: string
+  /**
+   * 组id
+   */
+  GroupId?: Array<string>
+  /**
+   * 是否为主地域
+   */
+  IsMainRegion?: boolean
 }
 
 /**

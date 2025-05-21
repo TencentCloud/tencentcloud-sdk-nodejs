@@ -26,25 +26,51 @@ export interface CreateFileSystemResponse {
 }
 
 /**
- * GooseFSx文件系统的属性
+ * CreateFileset请求参数结构体
  */
-export interface GooseFSxAttribute {
+export interface CreateFilesetRequest {
   /**
-   * GooseFSx的型号
+   * 文件系统id
    */
-  Model?: string
+  FileSystemId: string
   /**
-   * 容量单位是GB, 例如4608(4.5TB)
+   * Fileset名称
    */
-  Capacity?: number
+  FsetName: string
   /**
-   * 要关联映射的bucket列表
+   * Fileset目录
    */
-  MappedBucketList?: Array<MappedBucket>
+  FsetDir: string
   /**
-   * 客户侧管理节点信息
+   * Fileset容量配额（需带单位G）
    */
-  ClientManagerNodeList?: Array<ClientClusterManagerNodeInfo>
+  QuotaSizeLimit?: string
+  /**
+   * Fileset文件数配额
+   */
+  QuotaFilesLimit?: string
+  /**
+   * Fileset文件删除操作审计
+   */
+  AuditState?: string
+}
+
+/**
+ * DescribeFilesets请求参数结构体
+ */
+export interface DescribeFilesetsRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * FsetId列表
+   */
+  FilesetIds?: Array<string>
+  /**
+   * FsetDir列表
+   */
+  FilesetDirs?: Array<string>
 }
 
 /**
@@ -82,13 +108,25 @@ export interface ClientNodeAttribute {
 }
 
 /**
- * ModifyDataRepositoryBandwidth返回参数结构体
+ * GooseFSx文件系统的属性
  */
-export interface ModifyDataRepositoryBandwidthResponse {
+export interface GooseFSxAttribute {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * GooseFSx的型号
    */
-  RequestId?: string
+  Model?: string
+  /**
+   * 容量单位是GB, 例如4608(4.5TB)
+   */
+  Capacity?: number
+  /**
+   * 要关联映射的bucket列表
+   */
+  MappedBucketList?: Array<MappedBucket>
+  /**
+   * 客户侧管理节点信息
+   */
+  ClientManagerNodeList?: Array<ClientClusterManagerNodeInfo>
 }
 
 /**
@@ -124,6 +162,24 @@ export interface DescribeFileSystemsResponse {
 }
 
 /**
+ * DescribeFilesetGeneralConfig返回参数结构体
+ */
+export interface DescribeFilesetGeneralConfigResponse {
+  /**
+   * 配额对root用户生效
+   */
+  EnforceQuotaOnRoot?: string
+  /**
+   * 配置状态
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExpandCapacity返回参数结构体
  */
 export interface ExpandCapacityResponse {
@@ -131,6 +187,20 @@ export interface ExpandCapacityResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteFileset请求参数结构体
+ */
+export interface DeleteFilesetRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * Fileset id
+   */
+  FsetId: string
 }
 
 /**
@@ -189,6 +259,20 @@ export interface FSAttribute {
    * 文件系统付费信息
    */
   ChargeAttribute?: ChargeAttribute
+}
+
+/**
+ * DescribeFilesets返回参数结构体
+ */
+export interface DescribeFilesetsResponse {
+  /**
+   * Fileset列表
+   */
+  FilesetList?: Array<FilesetInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -276,6 +360,20 @@ export interface AttachFileSystemBucketRequest {
 }
 
 /**
+ * vpc子网信息
+ */
+export interface SubnetInfo {
+  /**
+   * vpc id
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+}
+
+/**
  * DeleteFileSystem请求参数结构体
  */
 export interface DeleteFileSystemRequest {
@@ -286,19 +384,13 @@ export interface DeleteFileSystemRequest {
 }
 
 /**
- * DescribeFileSystemBuckets请求参数结构体
+ * CreateFileset返回参数结构体
  */
-export interface DescribeFileSystemBucketsRequest {
+export interface CreateFilesetResponse {
   /**
-   * 文件系统ID
+   * Fileset id
    */
-  FileSystemId: string
-}
-
-/**
- * BatchAddClientNodes返回参数结构体
- */
-export interface BatchAddClientNodesResponse {
+  FsetId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -306,9 +398,9 @@ export interface BatchAddClientNodesResponse {
 }
 
 /**
- * AttachFileSystemBucket返回参数结构体
+ * BatchAddClientNodes返回参数结构体
  */
-export interface AttachFileSystemBucketResponse {
+export interface BatchAddClientNodesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -331,6 +423,26 @@ export interface GooseFSxBuildElement {
    * 要关联映射的bucket列表
    */
   MappedBucketList: Array<MappedBucket>
+}
+
+/**
+ * AttachFileSystemBucket返回参数结构体
+ */
+export interface AttachFileSystemBucketResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFilesetGeneralConfig请求参数结构体
+ */
+export interface DescribeFilesetGeneralConfigRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
 }
 
 /**
@@ -470,6 +582,42 @@ export interface ClientToken {
 }
 
 /**
+ * UpdateFileset请求参数结构体
+ */
+export interface UpdateFilesetRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * Fileset id
+   */
+  FsetId: string
+  /**
+   * 容量配额限定值
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 文件数配额限定值
+   */
+  QuotaFilesLimit?: string
+  /**
+   * Fileset文件删除操作审计
+   */
+  AuditState?: string
+}
+
+/**
+ * ModifyDataRepositoryBandwidth返回参数结构体
+ */
+export interface ModifyDataRepositoryBandwidthResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryDataRepositoryBandwidth返回参数结构体
  */
 export interface QueryDataRepositoryBandwidthResponse {
@@ -520,6 +668,74 @@ export interface ClientClusterManagerNodeInfo {
 }
 
 /**
+ * Fileset信息
+ */
+export interface FilesetInfo {
+  /**
+   * Fileset id
+   */
+  FsetId?: string
+  /**
+   * Fileset名称
+   */
+  FsetName?: string
+  /**
+   * Fileset目录
+   */
+  FsetDir?: string
+  /**
+   * Fileset容量配额限定值
+   */
+  QuotaSizeLimit?: string
+  /**
+   * 已使用容量配额
+   */
+  QuotaSizeUsed?: string
+  /**
+   * 容量配额使用占比
+   */
+  QuotaSizeUsedPercent?: string
+  /**
+   * Fileset文件数配额限定值
+   */
+  QuotaFilesLimit?: string
+  /**
+   * 已使用文件数配额
+   */
+  QuotaFilesUsed?: string
+  /**
+   * 文件数配额使用占比
+   */
+  QuotaFilesUsedPercent?: string
+  /**
+   * Fileset审计
+   */
+  AuditState?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
+  /**
+   * Fileset状态：creating 配置中 active 已生效 modify 修改中
+   */
+  Status?: string
+}
+
+/**
+ * UpdateFileset返回参数结构体
+ */
+export interface UpdateFilesetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 添加删除客户端节点列表
  */
 export interface LinuxNodeAttribute {
@@ -564,17 +780,23 @@ export interface BatchDeleteClientNodesRequest {
 }
 
 /**
- * vpc子网信息
+ * DescribeFileSystemBuckets请求参数结构体
  */
-export interface SubnetInfo {
+export interface DescribeFileSystemBucketsRequest {
   /**
-   * vpc id
+   * 文件系统ID
    */
-  VpcId: string
+  FileSystemId: string
+}
+
+/**
+ * UpdateFilesetGeneralConfig返回参数结构体
+ */
+export interface UpdateFilesetGeneralConfigResponse {
   /**
-   * 子网ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SubnetId?: string
+  RequestId?: string
 }
 
 /**
@@ -603,6 +825,20 @@ export interface DescribeFileSystemsRequest {
    * 每页的数量
    */
   Limit: number
+}
+
+/**
+ * UpdateFilesetGeneralConfig请求参数结构体
+ */
+export interface UpdateFilesetGeneralConfigRequest {
+  /**
+   * 文件系统id
+   */
+  FileSystemId: string
+  /**
+   * 配额对root用户生效
+   */
+  EnforceQuotaOnRoot?: string
 }
 
 /**
@@ -657,6 +893,16 @@ export interface DescribeClusterRolesResponse {
  * DeleteCrossVpcSubnetSupportForClientNode返回参数结构体
  */
 export interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteFileset返回参数结构体
+ */
+export interface DeleteFilesetResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

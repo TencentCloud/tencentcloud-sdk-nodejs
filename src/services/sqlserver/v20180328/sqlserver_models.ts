@@ -8637,7 +8637,7 @@ export interface DeleteDBInstanceRequest {
  */
 export interface RegionInfo {
   /**
-   * 地域英文ID，类似ap-guanghou
+   * 地域英文ID，类似ap-guangzhou
    */
   Region?: string
   /**

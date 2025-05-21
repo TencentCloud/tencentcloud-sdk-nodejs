@@ -604,6 +604,10 @@ export interface ScaleOutInstanceRequest {
    * 扩容后集群高可用类型：0：非高可用，1：读高可用，2：读写高可用。
    */
   HaType?: number
+  /**
+   * 前端鉴权使用
+   */
+  CheckAuth?: boolean
 }
 
 /**
@@ -2604,9 +2608,17 @@ export interface ScaleUpInstanceRequest {
    */
   SpecName: string
   /**
-   * 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE
+   * 角色（MASTER/CORE），MASTER 对应 FE，CORE对应BE
    */
   Type: string
+  /**
+   * 前端鉴权使用，后端API调用传false，传true不会执行变配
+   */
+  CheckAuth?: boolean
+  /**
+   * 是否滚动重启
+   */
+  RollingRestart?: boolean
 }
 
 /**
@@ -3284,6 +3296,10 @@ export interface ReduceInstanceRequest {
    * 缩容后集群高可用类型：0：非高可用，1：读高可用，2：读写高可用。
    */
   HaType: number
+  /**
+   * 前端鉴权使用
+   */
+  CheckAuth?: boolean
 }
 
 /**

@@ -5886,6 +5886,14 @@ FILE：手动添加域名文件验证。 需要用户手动在域名站点根目
    * 联系人职位。若没有传ManagerId， 则此字段必传
    */
   TechTitle?: string
+  /**
+   * 证书类型
+   */
+  Type?: number
+  /**
+   * 只针对Dnspod系列证书有效，ca机构类型可为sectigo和digicert
+   */
+  CaType?: string
 }
 
 /**

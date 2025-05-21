@@ -826,11 +826,11 @@ export type DescribeRegionsRequest = null
  */
 export interface ItemPrice {
   /**
-   * 原单价
+   * 原单价，元
    */
   UnitPrice?: number
   /**
-   * 折扣后单价
+   * 折扣后单价，元
    */
   DiscountUnitPrice?: number
   /**
@@ -900,7 +900,7 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：表示明确不自动续费(用户设置)
    */
   RenewFlag?: string
   /**
-   * 时长单位，默认值MONTH
+   * 时长单位，枚举： MONTH, DAY, HOUR；释义：月，日，小时
    */
   TimeUnit?: string
 }

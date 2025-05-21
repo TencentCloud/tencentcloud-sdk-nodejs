@@ -2176,48 +2176,6 @@ export interface ModifyAccountRemarkResponse {
 }
 
 /**
- * UpgradeDBInstance请求参数结构体
- */
-export interface UpgradeDBInstanceRequest {
-  /**
-   * 升级后的实例内存大小，单位GB
-   */
-  Memory: number
-  /**
-   * 升级后的实例磁盘大小，单位GB
-   */
-  Storage: number
-  /**
-   * 实例ID，形如postgres-lnp6j617
-   */
-  DBInstanceId: string
-  /**
-   * 是否自动使用代金券,1是,0否，默认不使用
-   */
-  AutoVoucher?: number
-  /**
-   * 代金券ID列表，目前仅支持指定一张代金券
-   */
-  VoucherIds?: Array<string>
-  /**
-   * 活动ID
-   */
-  ActivityId?: number
-  /**
-   * 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。
-   */
-  SwitchTag?: number
-  /**
-   * 切换开始时间
-   */
-  SwitchStartTime?: string
-  /**
-   * 切换截止时间
-   */
-  SwitchEndTime?: string
-}
-
-/**
  * DescribeZones请求参数结构体
  */
 export type DescribeZonesRequest = null
@@ -5900,24 +5858,6 @@ export interface DescribeParameterTemplateAttributesResponse {
    * 参数模板描述
    */
   TemplateDescription?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpgradeDBInstance返回参数结构体
- */
-export interface UpgradeDBInstanceResponse {
-  /**
-   * 交易名字。
-   */
-  DealName?: string
-  /**
-   * 冻结流水号
-   */
-  BillId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

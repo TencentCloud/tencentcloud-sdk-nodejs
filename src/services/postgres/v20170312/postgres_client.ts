@@ -100,7 +100,6 @@ import {
   ReadOnlyGroup,
   ModifyDBInstanceSpecRequest,
   ModifyAccountRemarkResponse,
-  UpgradeDBInstanceRequest,
   DescribeZonesRequest,
   SpecInfo,
   ModifyMaintainTimeWindowRequest,
@@ -259,7 +258,6 @@ import {
   DescribeAccountsResponse,
   ModifyDBInstanceChargeTypeRequest,
   DescribeParameterTemplateAttributesResponse,
-  UpgradeDBInstanceResponse,
   DescribeDBVersionsRequest,
   ModifyDBInstancesProjectRequest,
   DescribeDBSlowlogsRequest,
@@ -1332,18 +1330,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void
   ): Promise<DescribeReadOnlyGroupsResponse> {
     return this.request("DescribeReadOnlyGroups", req, cb)
-  }
-
-  /**
-     * 早期接口，不规范，已提供新接口 ModifyDBInstanceSpec 替换
-
-本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。
-     */
-  async UpgradeDBInstance(
-    req: UpgradeDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
-  ): Promise<UpgradeDBInstanceResponse> {
-    return this.request("UpgradeDBInstance", req, cb)
   }
 
   /**

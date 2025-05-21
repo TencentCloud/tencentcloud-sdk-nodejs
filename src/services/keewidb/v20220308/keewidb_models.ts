@@ -1928,13 +1928,18 @@ export interface DescribeInstancesRequest {
    */
   MonitorVersion?: string
   /**
-   * 根据标签的 Key 和 Value 筛选资源。该参数不配置或者数组设置为空值，则不根据标签进行过滤。
+   * 废弃字段。请使用TagList传参。
+   * @deprecated
    */
   InstanceTags?: InstanceTagInfo
   /**
    * 根据标签的 Key 筛选资源，该参数不配置或者数组设置为空值，则不根据标签Key进行过滤。
    */
   TagKeys?: Array<string>
+  /**
+   * 根据标签的 Key 和 Value 筛选资源。该参数不配置或者数组设置为空值，则不根据标签进行过滤。
+   */
+  TagList?: Array<InstanceTagInfo>
 }
 
 /**

@@ -2309,14 +2309,6 @@ export interface DescribeDocResponse {
    */
   CateBizId?: string
   /**
-   * 文档的用户自定义ID
-   */
-  CustomerKnowledgeId?: string
-  /**
-   * 文档的属性标记，0: 不做用户外部权限校验
-   */
-  AttributeFlags?: Array<number | bigint>
-  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3238,14 +3230,6 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    * 分类ID
    */
   CateBizId?: string
-  /**
-   * 文档的用户自定义ID
-   */
-  CustomerKnowledgeId?: string
-  /**
-   * 文档的属性标记，0: 不做用户外部权限校验
-   */
-  AttributeFlags?: Array<number | bigint>
 }
 
 /**
@@ -6251,14 +6235,6 @@ export interface ModifyDocRequest {
    * 分类ID
    */
   CateBizId?: string
-  /**
-   * 文档的用户自定义ID
-   */
-  CustomerKnowledgeId?: string
-  /**
-   * 文档的属性标记，0: 不做用户外部权限校验
-   */
-  AttributeFlags?: Array<number | bigint>
 }
 
 /**

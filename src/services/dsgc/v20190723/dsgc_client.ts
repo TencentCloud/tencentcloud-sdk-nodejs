@@ -598,8 +598,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑识别规则
-   */
+     * 旧版本DSGC接口下线
+
+编辑识别规则
+     */
   async ModifyClassificationRule(
     req?: ModifyClassificationRuleRequest,
     cb?: (error: string, rep: ModifyClassificationRuleResponse) => void
@@ -682,8 +684,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改分级分类模板信息
-   */
+     * 旧版本DSGC接口下线
+
+修改分级分类模板信息
+     */
   async ModifyStandardInfo(
     req?: ModifyStandardInfoRequest,
     cb?: (error: string, rep: ModifyStandardInfoResponse) => void
@@ -702,8 +706,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 一个分类合并到另一个分类中（分类拖拽功能）
-   */
+     * 旧版本DSGC接口下线
+
+一个分类合并到另一个分类中（分类拖拽功能）
+     */
   async ModifyMergeClassification(
     req?: ModifyMergeClassificationRequest,
     cb?: (error: string, rep: ModifyMergeClassificationResponse) => void
@@ -886,8 +892,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建新分类
-   */
+     * 旧版本DSGC接口下线
+
+创建新分类
+     */
   async CreateNewClassification(
     req?: CreateNewClassificationRequest,
     cb?: (error: string, rep: CreateNewClassificationResponse) => void
@@ -940,8 +948,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建识别规则
-   */
+     * 旧版本DSGC接口下线
+
+创建识别规则
+     */
   async CreateClassificationRule(
     req?: CreateClassificationRuleRequest,
     cb?: (error: string, rep: CreateClassificationRuleResponse) => void
@@ -970,8 +980,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改级别名称
-   */
+     * 旧版本DSGC接口下线
+
+修改级别名称
+     */
   async ModifyLevelName(
     req?: ModifyLevelNameRequest,
     cb?: (error: string, rep: ModifyLevelNameResponse) => void
@@ -1024,8 +1036,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改敏感级别信息
-   */
+     * 旧版本DSGC接口下线
+
+修改敏感级别信息
+     */
   async ModifyLevelInfo(
     req?: ModifyLevelInfoRequest,
     cb?: (error: string, rep: ModifyLevelInfoResponse) => void
@@ -1165,7 +1179,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询分类信息
+     * 旧版本DSGC接口下线
+
+查询分类信息
 
      */
   async DescribeClassificationInfo(
@@ -1316,8 +1332,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建或复制分级分类模板
-   */
+     * 旧版本DSGC接口下线
+
+创建或复制分级分类模板
+     */
   async CreateOrCopyStandard(
     req?: CreateOrCopyStandardRequest,
     cb?: (error: string, rep: CreateOrCopyStandardResponse) => void
@@ -1416,8 +1434,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改识别规则状态
-   */
+     * 旧版本DSGC接口下线
+
+修改识别规则状态
+     */
   async ModifyClassificationRuleState(
     req?: ModifyClassificationRuleStateRequest,
     cb?: (error: string, rep: ModifyClassificationRuleStateResponse) => void
@@ -1456,7 +1476,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询分类下规则列表
+     * 旧版本DSGC接口下线
+
+查询分类下规则列表
 
      */
   async DescribeRuleList(
@@ -1668,8 +1690,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改分类信息
-   */
+     * 旧版本DSGC接口下线
+
+修改分类信息
+     */
   async ModifyNewClassification(
     req?: ModifyNewClassificationRequest,
     cb?: (error: string, rep: ModifyNewClassificationResponse) => void
@@ -1688,8 +1712,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询标准下所有叶子节点分类
-   */
+     * 旧版本DSGC接口下线
+
+查询标准下所有叶子节点分类
+     */
   async DescribeLeafClassification(
     req?: DescribeLeafClassificationRequest,
     cb?: (error: string, rep: DescribeLeafClassificationResponse) => void
@@ -1758,8 +1784,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询标准下所有分类的识别规则数量(不算子分类下的识别规则)
-   */
+     * 旧版本DSGC接口下线
+
+查询标准下所有分类的识别规则数量(不算子分类下的识别规则)
+     */
   async DescribeClassificationRuleCount(
     req?: DescribeClassificationRuleCountRequest,
     cb?: (error: string, rep: DescribeClassificationRuleCountResponse) => void
@@ -1808,8 +1836,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启级别或关闭级别
-   */
+     * 旧版本DSGC接口下线
+
+开启级别或关闭级别
+     */
   async ModifyLevelState(
     req?: ModifyLevelStateRequest,
     cb?: (error: string, rep: ModifyLevelStateResponse) => void

@@ -2742,7 +2742,7 @@ export interface DescribeStudioProductResponse {
  */
 export interface VisionRecognitionResult {
   /**
-   * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空）
+   * 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功）
    */
   Status?: number
   /**
@@ -2760,9 +2760,13 @@ export interface VisionRecognitionResult {
    */
   DetectedClassifications?: Array<string>
   /**
-   * 视频摘要文本
+   * 摘要文本
    */
   Summary?: string
+  /**
+   * 摘要文本（次选语言）
+   */
+  AlternativeSummary?: string
 }
 
 /**

@@ -1269,8 +1269,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改机器组
-   */
+     * 修改机器组。
+注意：修改接口直接覆盖历史数据，改为本次合法入参数据，请谨慎调用此接口。
+     */
   async ModifyMachineGroup(
     req: ModifyMachineGroupRequest,
     cb?: (error: string, rep: ModifyMachineGroupResponse) => void
