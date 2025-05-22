@@ -2345,11 +2345,11 @@ export interface MidQueryCondition {
    */
   Key: string
   /**
-   * 操作符，支持等于(eq)、不等于(ne)，以及in
+   * 操作符，支持=、in
    */
   Operator: string
   /**
-   * 维度值，当Op是eq、ne时，只使用第一个元素
+   * 维度值，当Op是=时，只使用第一个元素
    */
   Value: Array<string>
 }

@@ -56,10 +56,8 @@ export interface TextResult {
   Suggestion?: string
   /**
    * 自定义词库的类型，自定义词库相关的信息可登录控制台中查看；
-
 1：自定义黑白库；
-
-2：自定义库；
+2：公库；
    */
   LibType?: number
   /**
@@ -108,22 +106,22 @@ export interface AudioResultDetailSpeakerResult {
    * 该字段用于返回检测结果需要检测的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回呻吟检测的置信度，取值范围：0（置信度最低）-100（置信度最高），越高代表音频越有可能属于说话人声纹。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: number
+  EndTime?: number
 }
 
 /**
@@ -589,22 +587,22 @@ export interface TaskLabel {
    * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回当前标签对应的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回当前标签（Lable）下的二级标签。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabel: string
+  SubLabel?: string
 }
 
 /**
@@ -637,17 +635,17 @@ export interface InputInfo {
    * 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 该字段表示文件访问的链接地址，格式为标准URL格式。<br> 备注：当Type为URL时此字段不为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
   /**
    * 该字段表示文件访问的腾讯云存储桶信息。<br> 备注：当Type为COS时此字段不为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BucketInfo: BucketInfo
+  BucketInfo?: BucketInfo
 }
 
 /**
@@ -701,27 +699,27 @@ export interface AudioResultDetailLanguageResult {
    * 该字段用于返回对应的语言种类信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 该参数用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于当前返回的语种标签；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: number
+  EndTime?: number
   /**
    * *内测中，敬请期待*
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabelCode: string
+  SubLabelCode?: string
 }
 
 /**
@@ -732,12 +730,12 @@ export interface RecognitionResult {
    * 可能的取值有：Teenager 、Gender
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 识别标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1126,23 +1124,23 @@ export interface MediaInfo {
   /**
    * 该字段用于返回传入的媒体文件的编码格式，如wav、mp3、aac、flac、amr、3gp、 m4a、wma、ogg、ape等。
    */
-  Codecs: string
+  Codecs?: string
   /**
    * 该字段用于返回对传入的流媒体文件进行分片的片段时长，单位为毫秒。**默认值为15秒**，支持用户自定义配置。
    */
-  Duration: number
+  Duration?: number
   /**
    * *内测中，敬请期待*
    */
-  Width: number
+  Width?: number
   /**
    * *内测中，敬请期待*
    */
-  Height: number
+  Height?: number
   /**
    * *内测中，敬请期待*
    */
-  Thumbnail: string
+  Thumbnail?: string
 }
 
 /**
@@ -1155,22 +1153,22 @@ export interface Tag {
 当Label 为Gender 时 Name可能取值有：Male 、Female
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 置信分：0～100，数值越大表示置信度越高
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 识别开始偏移时间，单位：毫秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 识别结束偏移时间，单位：毫秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: number
+  EndTime?: number
 }
 
 /**
@@ -1188,7 +1186,7 @@ export interface AudioSegments {
    */
   Result?: AudioResult
   /**
-   * 创建时间
+   * 入库时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string

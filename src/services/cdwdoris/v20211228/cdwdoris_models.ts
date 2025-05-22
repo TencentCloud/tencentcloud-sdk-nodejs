@@ -2320,6 +2320,18 @@ export interface NodeInfo {
    * Id
    */
   Id?: string
+  /**
+   * RIP
+   */
+  RIp?: string
+  /**
+   * 计算组ID
+   */
+  ComputeGroupId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
 }
 
 /**

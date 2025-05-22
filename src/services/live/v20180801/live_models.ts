@@ -10125,6 +10125,10 @@ export interface PushQualityData {
    * 推流服务端 IP。
    */
   ServerIp?: string
+  /**
+   * 关键帧间隔 GOP ，单位：ms。
+   */
+  GopSize?: number
 }
 
 /**

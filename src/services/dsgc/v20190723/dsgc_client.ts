@@ -18,7 +18,6 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeRuleListResponse,
   TopAsset,
   DescribeDSPADiscoveryTaskTablesResponse,
   DescribeCOSAssetSensitiveDistributionResponse,
@@ -40,7 +39,6 @@ import {
   DescribeDSPAAssessmentLatestRiskDetailInfoRequest,
   DescribeReportTaskDownloadUrlRequest,
   DspaFieldResultDataSample,
-  ModifyClassificationRuleRequest,
   DescribeDSPADiscoveryServiceStatusResponse,
   CloudResourceItem,
   DSPACosMetaDataInfo,
@@ -50,7 +48,6 @@ import {
   DescribeAssetOverviewResponse,
   ReportInfo,
   DescribeDSPAESDataAssetByComplianceIdRequest,
-  ModifyLevelNameRequest,
   ModifyDSPAAssessmentRiskLevelResponse,
   DspaCOSDiscoveryTask,
   COSDataRule,
@@ -84,7 +81,6 @@ import {
   DeleteDSPACOSDiscoveryTaskRequest,
   DspaDiscoveryComplianceGroupRule,
   CreateDSPAAssessmentTaskResponse,
-  DescribeClassificationRuleCountResponse,
   DescribeDSPAESDataAssetByComplianceIdResponse,
   ModifyDSPAAssessmentRiskRequest,
   DspaResourceAccount,
@@ -100,8 +96,6 @@ import {
   ModifyDSPACategoryRelationRequest,
   DescribeDSPAAssessmentRiskOverviewResponse,
   DspaDiscoveryTaskResultDetail,
-  DescribeLeafClassificationRequest,
-  CreateClassificationRuleRequest,
   DescribeDSPAAssessmentTemplatesRequest,
   HighRiskAssetsDetail,
   DspaSafeGuard,
@@ -109,7 +103,6 @@ import {
   DatagovRuleExtendParameter,
   ModifyDSPAClusterInfoResponse,
   DiscoveryCondition,
-  ModifyStandardInfoResponse,
   DescribeDSPAAssessmentRiskTemplateDetailRequest,
   DescribeDSPADiscoveryTaskResultDetailResponse,
   ModifyDSPACategoryRelationResponse,
@@ -145,15 +138,14 @@ import {
   DspaDiscoveryTask,
   DescribeDSPAESDiscoveryTaskResultDetailRequest,
   NOSQLInstance,
-  DeleteDSPADiscoveryTaskResultRequest,
-  ModifyLevelInfoResponse,
+  DescribeDSPAAssessmentTemplateControlItemsRequest,
+  RuleEffectItem,
   DspaDiscoveryRDBRules,
   DescribeDSPACOSDataAssetByComplianceIdResponse,
   CreateDSPAAssessmentRiskTemplateResponse,
   DescribeDSPACOSDataAssetBucketsResponse,
   DescribeDSPADiscoveryTaskDetailRequest,
   DescribeDSPARDBDataAssetByComplianceIdResponse,
-  CreateNewClassificationResponse,
   DescribeDSPADiscoveryTasksResponse,
   ListDSPAClustersResponse,
   CopyDSPATemplateRequest,
@@ -165,7 +157,6 @@ import {
   CreateAssetSortingReportRetryTaskResponse,
   DescribeDSPACategoriesResponse,
   DescribeDSPADiscoveryRulesResponse,
-  ModifyLevelStateResponse,
   StopDSPADiscoveryTaskRequest,
   RiskSideDistributed,
   LevelItem,
@@ -186,9 +177,7 @@ import {
   CreateDSPAComplianceRulesRequest,
   DescribeReportTaskDownloadUrlResponse,
   DescribeDSPAAssessmentRisksResponse,
-  CreateClassificationRuleResponse,
   DbInfo,
-  ModifyClassificationRuleResponse,
   CreateIdentifyRuleAnotherNameResponse,
   DescribeDSPACategoryTreeResponse,
   DescribeBindDBListRequest,
@@ -210,7 +199,6 @@ import {
   AccountRisk,
   DescribeDSPACategoryTreeWithRulesResponse,
   DescribeDSPAAssessmentRiskLevelDetailRequest,
-  DescribeLeafClassificationResponse,
   DescribeDSPAAssessmentRiskLevelTrendRequest,
   DataRules,
   DescribeDSPAAssessmentProcessingRiskOverviewRequest,
@@ -226,19 +214,15 @@ import {
   AssessmentRisk,
   DspaRDBDataAssetDetail,
   DataRule,
-  ModifyLevelNameResponse,
   EnableTrialVersionResponse,
   DSPAMetaType,
-  ModifyStandardInfoRequest,
   DescribeDSPAComplianceGroupDetailResponse,
   DescribeDSPAAssessmentRiskTemplateVulnerableListRequest,
   CreateDSPACategoryRelationResponse,
   DescribeDSPAAssessmentTemplatesResponse,
   DescribeDSPACOSTaskResultDetailResponse,
   DspaTaskResult,
-  DescribeRuleListRequest,
   DescribeDSPADataSourceDbInfoRequest,
-  CreateOrCopyStandardRequest,
   DspaDiscoveryTaskDbResult,
   QueryResourceDbBindStatusResponse,
   DspaDataSourceMngFilter,
@@ -255,7 +239,6 @@ import {
   DBInstanceInfo,
   ModifyDSPAComplianceGroupResponse,
   AssessmentTask,
-  DescribeClassificationInfoRequest,
   DescribeDSPAESDataSampleRequest,
   GetUserQuotaInfoResponse,
   DspaCOSDiscoveryTaskDetail,
@@ -268,7 +251,6 @@ import {
   ModifyDSPAESTaskResultResponse,
   CreateDSPACosMetaResourcesRequest,
   DescribeDSPAAssessmentRiskSideListRequest,
-  ModifyNewClassificationRequest,
   DspaUserResourceMeta,
   DataCategory,
   CreateIdentifyRuleAnotherNameRequest,
@@ -282,12 +264,10 @@ import {
   DescribeDSPAAssessmentLatestRiskListRequest,
   DescribeDSPADiscoveryTaskResultResponse,
   AssessmentRiskItem,
-  ModifyNewClassificationResponse,
   BindDSPAResourceDatabasesRequest,
   DescribeDSPADiscoveryTasksRequest,
   DescribeMongoAssetSensitiveDistributionRequest,
   GetUserQuotaInfoRequest,
-  ModifyLevelStateRequest,
   ModifyDSPACOSTaskResultResponse,
   Note,
   DescribeDSPACOSDiscoveryTaskResultRequest,
@@ -295,7 +275,6 @@ import {
   TopAssetStat,
   DescribeDSPACOSDiscoveryTaskDetailResponse,
   StartDSPADiscoveryTaskResponse,
-  CreateOrCopyStandardResponse,
   DescribeDSPALevelGroupsResponse,
   DescribeDSPAAssessmentProcessingRiskOverviewResponse,
   DescribeDSPAAssessmentRiskProcessHistoryRequest,
@@ -316,7 +295,6 @@ import {
   RiskItem,
   DescribeDSPAAssessmentRiskLevelTrendResponse,
   DescribeDSPAAssessmentRiskDealedTrendRequest,
-  ModifyLevelInfoRequest,
   DataSourceInfo,
   DspaDataCategoryDistributed,
   COSInstance,
@@ -333,7 +311,7 @@ import {
   ModifyDSPAAssessmentRiskLatestRequest,
   StopDSPADiscoveryTaskResponse,
   VerifyDSPADiscoveryRuleResponse,
-  DescribeDSPAAssessmentTemplateControlItemsRequest,
+  DeleteDSPADiscoveryTaskResultRequest,
   DescribeDSPAAssessmentRiskItemTop5Response,
   DspaDiscoveryDataRule,
   BindDSPAResourceCosBucketsResponse,
@@ -344,7 +322,6 @@ import {
   DescribeDSPALevelGroupsRequest,
   CreateDSPACOSDiscoveryTaskResponse,
   DescribeDSPADiscoveryTaskResultDetailRequest,
-  DescribeClassificationInfoResponse,
   DescribeDSPATaskResultDataSampleRequest,
   SuggestRiskLevelMatrix,
   DescribeDSPAAssessmentRiskDealedOverviewResponse,
@@ -365,7 +342,6 @@ import {
   ModifyDSPACOSTaskResultRequest,
   DescribeDSPASupportedMetasRequest,
   ExportAssetDetailDataResponse,
-  RuleEffectItem,
   CategoryRule,
   CreateDSPAMetaResourcesRequest,
   RiskCountInfo,
@@ -373,9 +349,7 @@ import {
   CreateDSPAAssessmentRiskLevelResponse,
   DescribeDSPADiscoveryTaskResultRequest,
   DescribeDSPACategoryTreeWithRulesRequest,
-  DescribeClassificationRuleCountRequest,
   DbRelationStatusItem,
-  CreateNewClassificationRequest,
   SecurityProduct,
   DescribeDSPAAssessmentRiskLevelListRequest,
   GetTrialVersionResponse,
@@ -388,7 +362,6 @@ import {
   DescribeDSPADataSourceDbInfoResponse,
   DbResourceItem,
   CreateDSPACategoryRelationRequest,
-  ModifyMergeClassificationResponse,
   CreateAssetSortingReportTaskResponse,
   GetResourceConnectionStatusResponse,
   DescribeDSPACategoryRuleStatisticRequest,
@@ -409,7 +382,6 @@ import {
   DescribeSensitiveRDBDataDistributionResponse,
   SuggestRiskLevelMatrixItem,
   DspaDiscoveryLevelDetail,
-  ModifyClassificationRuleStateResponse,
   DescribeDSPAESDataAssetDetailRequest,
   ListDSPAMetaResourcesResponse,
   CreateDSPACategoryResponse,
@@ -426,11 +398,9 @@ import {
   DescribeDSPALevelDetailResponse,
   DescribeDSPAAssessmentRiskSideDistributedResponse,
   DescribeDSPACOSDiscoveryTasksRequest,
-  ModifyMergeClassificationRequest,
   DescribeDSPAAssessmentPendingRiskOverviewResponse,
   ModifyDSPAAssessmentRiskResponse,
   AssetDBDetail,
-  ModifyClassificationRuleStateRequest,
   RiskDealedTrendItem,
 } from "./dsgc_models"
 
@@ -598,15 +568,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-编辑识别规则
-     */
-  async ModifyClassificationRule(
-    req?: ModifyClassificationRuleRequest,
-    cb?: (error: string, rep: ModifyClassificationRuleResponse) => void
-  ): Promise<ModifyClassificationRuleResponse> {
-    return this.request("ModifyClassificationRule", req, cb)
+   * 修改最新评估风险项状态
+   */
+  async ModifyDSPAAssessmentRiskLatest(
+    req: ModifyDSPAAssessmentRiskLatestRequest,
+    cb?: (error: string, rep: ModifyDSPAAssessmentRiskLatestResponse) => void
+  ): Promise<ModifyDSPAAssessmentRiskLatestResponse> {
+    return this.request("ModifyDSPAAssessmentRiskLatest", req, cb)
   }
 
   /**
@@ -630,13 +598,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取COS分类分级数据资产详情
+   * 获取分类分级任务列表
    */
-  async DescribeDSPACOSDataAssetDetail(
-    req: DescribeDSPACOSDataAssetDetailRequest,
-    cb?: (error: string, rep: DescribeDSPACOSDataAssetDetailResponse) => void
-  ): Promise<DescribeDSPACOSDataAssetDetailResponse> {
-    return this.request("DescribeDSPACOSDataAssetDetail", req, cb)
+  async DescribeDSPADiscoveryTasks(
+    req: DescribeDSPADiscoveryTasksRequest,
+    cb?: (error: string, rep: DescribeDSPADiscoveryTasksResponse) => void
+  ): Promise<DescribeDSPADiscoveryTasksResponse> {
+    return this.request("DescribeDSPADiscoveryTasks", req, cb)
   }
 
   /**
@@ -684,18 +652,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-修改分级分类模板信息
-     */
-  async ModifyStandardInfo(
-    req?: ModifyStandardInfoRequest,
-    cb?: (error: string, rep: ModifyStandardInfoResponse) => void
-  ): Promise<ModifyStandardInfoResponse> {
-    return this.request("ModifyStandardInfo", req, cb)
-  }
-
-  /**
    * 获取报表下载链接
    */
   async DescribeReportTaskDownloadUrl(
@@ -703,18 +659,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReportTaskDownloadUrlResponse) => void
   ): Promise<DescribeReportTaskDownloadUrlResponse> {
     return this.request("DescribeReportTaskDownloadUrl", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-一个分类合并到另一个分类中（分类拖拽功能）
-     */
-  async ModifyMergeClassification(
-    req?: ModifyMergeClassificationRequest,
-    cb?: (error: string, rep: ModifyMergeClassificationResponse) => void
-  ): Promise<ModifyMergeClassificationResponse> {
-    return this.request("ModifyMergeClassification", req, cb)
   }
 
   /**
@@ -892,18 +836,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-创建新分类
-     */
-  async CreateNewClassification(
-    req?: CreateNewClassificationRequest,
-    cb?: (error: string, rep: CreateNewClassificationResponse) => void
-  ): Promise<CreateNewClassificationResponse> {
-    return this.request("CreateNewClassification", req, cb)
-  }
-
-  /**
    * 风险模板---修改风险模板
    */
   async ModifyDSPAAssessmentRiskTemplate(
@@ -948,18 +880,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-创建识别规则
-     */
-  async CreateClassificationRule(
-    req?: CreateClassificationRuleRequest,
-    cb?: (error: string, rep: CreateClassificationRuleResponse) => void
-  ): Promise<CreateClassificationRuleResponse> {
-    return this.request("CreateClassificationRule", req, cb)
-  }
-
-  /**
    * 根据合规组id，去查询ES的概览页统计数据
    */
   async DescribeDSPAESDataAssetByComplianceId(
@@ -977,18 +897,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDSPAComplianceGroupsResponse) => void
   ): Promise<DescribeDSPAComplianceGroupsResponse> {
     return this.request("DescribeDSPAComplianceGroups", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-修改级别名称
-     */
-  async ModifyLevelName(
-    req?: ModifyLevelNameRequest,
-    cb?: (error: string, rep: ModifyLevelNameResponse) => void
-  ): Promise<ModifyLevelNameResponse> {
-    return this.request("ModifyLevelName", req, cb)
   }
 
   /**
@@ -1033,18 +941,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMongoAssetSensitiveDistributionResponse) => void
   ): Promise<DescribeMongoAssetSensitiveDistributionResponse> {
     return this.request("DescribeMongoAssetSensitiveDistribution", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-修改敏感级别信息
-     */
-  async ModifyLevelInfo(
-    req?: ModifyLevelInfoRequest,
-    cb?: (error: string, rep: ModifyLevelInfoResponse) => void
-  ): Promise<ModifyLevelInfoResponse> {
-    return this.request("ModifyLevelInfo", req, cb)
   }
 
   /**
@@ -1108,16 +1004,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改最新评估风险项状态
-   */
-  async ModifyDSPAAssessmentRiskLatest(
-    req: ModifyDSPAAssessmentRiskLatestRequest,
-    cb?: (error: string, rep: ModifyDSPAAssessmentRiskLatestResponse) => void
-  ): Promise<ModifyDSPAAssessmentRiskLatestResponse> {
-    return this.request("ModifyDSPAAssessmentRiskLatest", req, cb)
-  }
-
-  /**
      * 打开或者关闭分类分级规则
 注：此API同时对该规则下的RDB跟COS规则操作。
      */
@@ -1176,19 +1062,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDSPARDBDataAssetDetailResponse) => void
   ): Promise<DescribeDSPARDBDataAssetDetailResponse> {
     return this.request("DescribeDSPARDBDataAssetDetail", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-查询分类信息
-
-     */
-  async DescribeClassificationInfo(
-    req?: DescribeClassificationInfoRequest,
-    cb?: (error: string, rep: DescribeClassificationInfoResponse) => void
-  ): Promise<DescribeClassificationInfoResponse> {
-    return this.request("DescribeClassificationInfo", req, cb)
   }
 
   /**
@@ -1282,13 +1155,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取分类分级任务列表
+   * 获取COS分类分级数据资产详情
    */
-  async DescribeDSPADiscoveryTasks(
-    req: DescribeDSPADiscoveryTasksRequest,
-    cb?: (error: string, rep: DescribeDSPADiscoveryTasksResponse) => void
-  ): Promise<DescribeDSPADiscoveryTasksResponse> {
-    return this.request("DescribeDSPADiscoveryTasks", req, cb)
+  async DescribeDSPACOSDataAssetDetail(
+    req: DescribeDSPACOSDataAssetDetailRequest,
+    cb?: (error: string, rep: DescribeDSPACOSDataAssetDetailResponse) => void
+  ): Promise<DescribeDSPACOSDataAssetDetailResponse> {
+    return this.request("DescribeDSPACOSDataAssetDetail", req, cb)
   }
 
   /**
@@ -1329,18 +1202,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDSPALevelDetailResponse) => void
   ): Promise<DescribeDSPALevelDetailResponse> {
     return this.request("DescribeDSPALevelDetail", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-创建或复制分级分类模板
-     */
-  async CreateOrCopyStandard(
-    req?: CreateOrCopyStandardRequest,
-    cb?: (error: string, rep: CreateOrCopyStandardResponse) => void
-  ): Promise<CreateOrCopyStandardResponse> {
-    return this.request("CreateOrCopyStandard", req, cb)
   }
 
   /**
@@ -1434,18 +1295,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-修改识别规则状态
-     */
-  async ModifyClassificationRuleState(
-    req?: ModifyClassificationRuleStateRequest,
-    cb?: (error: string, rep: ModifyClassificationRuleStateResponse) => void
-  ): Promise<ModifyClassificationRuleStateResponse> {
-    return this.request("ModifyClassificationRuleState", req, cb)
-  }
-
-  /**
    * 修改DSPA集群信息
    */
   async ModifyDSPAClusterInfo(
@@ -1473,19 +1322,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDSPAAssessmentLatestRiskDetailInfoResponse) => void
   ): Promise<DescribeDSPAAssessmentLatestRiskDetailInfoResponse> {
     return this.request("DescribeDSPAAssessmentLatestRiskDetailInfo", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-查询分类下规则列表
-
-     */
-  async DescribeRuleList(
-    req?: DescribeRuleListRequest,
-    cb?: (error: string, rep: DescribeRuleListResponse) => void
-  ): Promise<DescribeRuleListResponse> {
-    return this.request("DescribeRuleList", req, cb)
   }
 
   /**
@@ -1690,18 +1526,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-修改分类信息
-     */
-  async ModifyNewClassification(
-    req?: ModifyNewClassificationRequest,
-    cb?: (error: string, rep: ModifyNewClassificationResponse) => void
-  ): Promise<ModifyNewClassificationResponse> {
-    return this.request("ModifyNewClassification", req, cb)
-  }
-
-  /**
    * 数据资产报告-查询cos的资产分布详情接口
    */
   async DescribeCOSAssetSensitiveDistribution(
@@ -1709,18 +1533,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCOSAssetSensitiveDistributionResponse) => void
   ): Promise<DescribeCOSAssetSensitiveDistributionResponse> {
     return this.request("DescribeCOSAssetSensitiveDistribution", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-查询标准下所有叶子节点分类
-     */
-  async DescribeLeafClassification(
-    req?: DescribeLeafClassificationRequest,
-    cb?: (error: string, rep: DescribeLeafClassificationResponse) => void
-  ): Promise<DescribeLeafClassificationResponse> {
-    return this.request("DescribeLeafClassification", req, cb)
   }
 
   /**
@@ -1784,18 +1596,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 旧版本DSGC接口下线
-
-查询标准下所有分类的识别规则数量(不算子分类下的识别规则)
-     */
-  async DescribeClassificationRuleCount(
-    req?: DescribeClassificationRuleCountRequest,
-    cb?: (error: string, rep: DescribeClassificationRuleCountResponse) => void
-  ): Promise<DescribeClassificationRuleCountResponse> {
-    return this.request("DescribeClassificationRuleCount", req, cb)
-  }
-
-  /**
    * 获取分类规则树信息
    */
   async DescribeDSPACategoryTreeWithRules(
@@ -1833,18 +1633,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDSPAAssessmentTemplateControlItemsResponse) => void
   ): Promise<DescribeDSPAAssessmentTemplateControlItemsResponse> {
     return this.request("DescribeDSPAAssessmentTemplateControlItems", req, cb)
-  }
-
-  /**
-     * 旧版本DSGC接口下线
-
-开启级别或关闭级别
-     */
-  async ModifyLevelState(
-    req?: ModifyLevelStateRequest,
-    cb?: (error: string, rep: ModifyLevelStateResponse) => void
-  ): Promise<ModifyLevelStateResponse> {
-    return this.request("ModifyLevelState", req, cb)
   }
 
   /**

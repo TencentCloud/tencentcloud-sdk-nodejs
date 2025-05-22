@@ -699,6 +699,10 @@ export interface CreateEmailIdentityRequest {
    * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
    */
   EmailIdentity: string
+  /**
+   * 生成的dkim密钥长度。0:1024，1:2048
+   */
+  DKIMOption?: number
 }
 
 /**

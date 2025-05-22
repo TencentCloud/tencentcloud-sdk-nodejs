@@ -5340,7 +5340,7 @@ export interface DescribeCloudBaseRunVersionResponse {
    */
   Remark?: string
   /**
-   * Dockefile的路径
+   * Dockerfile的路径
    */
   DockerfilePath?: string
   /**

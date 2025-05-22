@@ -16,16 +16,6 @@
  */
 
 /**
- * DescribeRuleList返回参数结构体
- */
-export interface DescribeRuleListResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 数据资产报告-涉敏top的资产
  */
 export interface TopAsset {
@@ -431,11 +421,6 @@ export interface DspaFieldResultDataSample {
 }
 
 /**
- * ModifyClassificationRule请求参数结构体
- */
-export type ModifyClassificationRuleRequest = null
-
-/**
  * DescribeDSPADiscoveryServiceStatus返回参数结构体
  */
 export interface DescribeDSPADiscoveryServiceStatusResponse {
@@ -803,11 +788,6 @@ export interface DescribeDSPAESDataAssetByComplianceIdRequest {
    */
   DataSourceType?: string
 }
-
-/**
- * ModifyLevelName请求参数结构体
- */
-export type ModifyLevelNameRequest = null
 
 /**
  * ModifyDSPAAssessmentRiskLevel返回参数结构体
@@ -1505,16 +1485,6 @@ export interface CreateDSPAAssessmentTaskResponse {
 }
 
 /**
- * DescribeClassificationRuleCount返回参数结构体
- */
-export interface DescribeClassificationRuleCountResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeDSPAESDataAssetByComplianceId返回参数结构体
  */
 export interface DescribeDSPAESDataAssetByComplianceIdResponse {
@@ -1979,16 +1949,6 @@ export interface DspaDiscoveryTaskResultDetail {
 }
 
 /**
- * DescribeLeafClassification请求参数结构体
- */
-export type DescribeLeafClassificationRequest = null
-
-/**
- * CreateClassificationRule请求参数结构体
- */
-export type CreateClassificationRuleRequest = null
-
-/**
  * DescribeDSPAAssessmentTemplates请求参数结构体
  */
 export interface DescribeDSPAAssessmentTemplatesRequest {
@@ -2132,16 +2092,6 @@ export interface DiscoveryCondition {
    * ES实例列表
    */
   ESInstances?: Array<ESInstance>
-}
-
-/**
- * ModifyStandardInfo返回参数结构体
- */
-export interface ModifyStandardInfoResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -3120,27 +3070,49 @@ export interface NOSQLInstance {
 }
 
 /**
- * DeleteDSPADiscoveryTaskResult请求参数结构体
+ * DescribeDSPAAssessmentTemplateControlItems请求参数结构体
  */
-export interface DeleteDSPADiscoveryTaskResultRequest {
+export interface DescribeDSPAAssessmentTemplateControlItemsRequest {
   /**
-   * DSPA实例ID
+   * DSPA实例Id。格式“dspa-xxxxxxxx”
    */
   DspaId: string
   /**
-   * 扫描数据库结果ID
+   * 评估模板Id。格式“template-xxxxxxxx”
    */
-  DbResultId: number
+  TemplateId: string
+  /**
+   * 偏移量。默认为0
+   */
+  Offset?: number
+  /**
+   * 结果集个数限制。默认为20，最大值为100
+   */
+  Limit?: number
+  /**
+   * 过滤项。
+支持模糊搜索：ItemId，ItemName
+支持过滤：
+Source：评估项来源，system / user
+ItemType：评估项类型，questionnaire / auto
+ItemSubType：评估项子类型
+Status：评估项启用状态，draft / launched
+   */
+  Filters?: Array<DspaAssessmentFilter>
 }
 
 /**
- * ModifyLevelInfo返回参数结构体
+ * 分类分级规则数量
  */
-export interface ModifyLevelInfoResponse {
+export interface RuleEffectItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则描述
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 规则值
+   */
+  Value?: number
 }
 
 /**
@@ -3227,16 +3199,6 @@ export interface DescribeDSPARDBDataAssetByComplianceIdResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Stats?: DspaRDBDataAssetCount
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateNewClassification返回参数结构体
- */
-export interface CreateNewClassificationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3439,16 +3401,6 @@ export interface DescribeDSPADiscoveryRulesResponse {
    * 规则集合
    */
   Items?: Array<DspaDiscoveryRuleDetail>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyLevelState返回参数结构体
- */
-export interface ModifyLevelStateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3906,16 +3858,6 @@ export interface DescribeDSPAAssessmentRisksResponse {
 }
 
 /**
- * CreateClassificationRule返回参数结构体
- */
-export interface CreateClassificationRuleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 查询绑定的db信息
  */
 export interface DbInfo {
@@ -3931,16 +3873,6 @@ export interface DbInfo {
    * 绑定的类型
    */
   BindType?: string
-}
-
-/**
- * ModifyClassificationRule返回参数结构体
- */
-export interface ModifyClassificationRuleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4436,16 +4368,6 @@ export interface DescribeDSPAAssessmentRiskLevelDetailRequest {
 }
 
 /**
- * DescribeLeafClassification返回参数结构体
- */
-export interface DescribeLeafClassificationResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeDSPAAssessmentRiskLevelTrend请求参数结构体
  */
 export interface DescribeDSPAAssessmentRiskLevelTrendRequest {
@@ -4839,16 +4761,6 @@ regex 正则
 }
 
 /**
- * ModifyLevelName返回参数结构体
- */
-export interface ModifyLevelNameResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * EnableTrialVersion返回参数结构体
  */
 export interface EnableTrialVersionResponse {
@@ -4878,11 +4790,6 @@ automatic -- 一键授权，由DSPA自动生成账户名密码并自动在实例
    */
   SupportedAuthTypes?: Array<string>
 }
-
-/**
- * ModifyStandardInfo请求参数结构体
- */
-export type ModifyStandardInfoRequest = null
 
 /**
  * DescribeDSPAComplianceGroupDetail返回参数结构体
@@ -4997,11 +4904,6 @@ export interface DspaTaskResult {
 }
 
 /**
- * DescribeRuleList请求参数结构体
- */
-export type DescribeRuleListRequest = null
-
-/**
  * DescribeDSPADataSourceDbInfo请求参数结构体
  */
 export interface DescribeDSPADataSourceDbInfoRequest {
@@ -5018,11 +4920,6 @@ export interface DescribeDSPADataSourceDbInfoRequest {
    */
   DataSourceType?: string
 }
-
-/**
- * CreateOrCopyStandard请求参数结构体
- */
-export type CreateOrCopyStandardRequest = null
 
 /**
  * 扫描任务结果，按照数据库级别展示
@@ -5394,11 +5291,6 @@ export interface AssessmentTask {
 }
 
 /**
- * DescribeClassificationInfo请求参数结构体
- */
-export type DescribeClassificationInfoRequest = null
-
-/**
  * DescribeDSPAESDataSample请求参数结构体
  */
 export interface DescribeDSPAESDataSampleRequest {
@@ -5683,11 +5575,6 @@ export interface DescribeDSPAAssessmentRiskSideListRequest {
    */
   TemplateId: number
 }
-
-/**
- * ModifyNewClassification请求参数结构体
- */
-export type ModifyNewClassificationRequest = null
 
 /**
  * DSPA用户资源元信息
@@ -6120,16 +6007,6 @@ export interface AssessmentRiskItem {
 }
 
 /**
- * ModifyNewClassification返回参数结构体
- */
-export interface ModifyNewClassificationResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * BindDSPAResourceDatabases请求参数结构体
  */
 export interface BindDSPAResourceDatabasesRequest {
@@ -6223,11 +6100,6 @@ export interface GetUserQuotaInfoRequest {
    */
   DspaId: string
 }
-
-/**
- * ModifyLevelState请求参数结构体
- */
-export type ModifyLevelStateRequest = null
 
 /**
  * ModifyDSPACOSTaskResult返回参数结构体
@@ -6407,16 +6279,6 @@ export interface StartDSPADiscoveryTaskResponse {
    * 任务扫描结果ID
    */
   ResultId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateOrCopyStandard返回参数结构体
- */
-export interface CreateOrCopyStandardResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6861,11 +6723,6 @@ export interface DescribeDSPAAssessmentRiskDealedTrendRequest {
 }
 
 /**
- * ModifyLevelInfo请求参数结构体
- */
-export type ModifyLevelInfoRequest = null
-
-/**
  * dsgc-资产梳理报表-数据源信息
  */
 export interface DataSourceInfo {
@@ -7302,35 +7159,17 @@ Failed 验证失败
 }
 
 /**
- * DescribeDSPAAssessmentTemplateControlItems请求参数结构体
+ * DeleteDSPADiscoveryTaskResult请求参数结构体
  */
-export interface DescribeDSPAAssessmentTemplateControlItemsRequest {
+export interface DeleteDSPADiscoveryTaskResultRequest {
   /**
-   * DSPA实例Id。格式“dspa-xxxxxxxx”
+   * DSPA实例ID
    */
   DspaId: string
   /**
-   * 评估模板Id。格式“template-xxxxxxxx”
+   * 扫描数据库结果ID
    */
-  TemplateId: string
-  /**
-   * 偏移量。默认为0
-   */
-  Offset?: number
-  /**
-   * 结果集个数限制。默认为20，最大值为100
-   */
-  Limit?: number
-  /**
-   * 过滤项。
-支持模糊搜索：ItemId，ItemName
-支持过滤：
-Source：评估项来源，system / user
-ItemType：评估项类型，questionnaire / auto
-ItemSubType：评估项子类型
-Status：评估项启用状态，draft / launched
-   */
-  Filters?: Array<DspaAssessmentFilter>
+  DbResultId: number
 }
 
 /**
@@ -7551,16 +7390,6 @@ export interface DescribeDSPADiscoveryTaskResultDetailRequest {
    * 多级分类的分类ID集合
    */
   CategoryIdList?: Array<number | bigint>
-}
-
-/**
- * DescribeClassificationInfo返回参数结构体
- */
-export interface DescribeClassificationInfoResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7928,20 +7757,6 @@ export interface ExportAssetDetailDataResponse {
 }
 
 /**
- * 分类分级规则数量
- */
-export interface RuleEffectItem {
-  /**
-   * 规则描述
-   */
-  Name?: string
-  /**
-   * 规则值
-   */
-  Value?: number
-}
-
-/**
  * 分类规则信息
  */
 export interface CategoryRule {
@@ -8158,11 +7973,6 @@ export interface DescribeDSPACategoryTreeWithRulesRequest {
 }
 
 /**
- * DescribeClassificationRuleCount请求参数结构体
- */
-export type DescribeClassificationRuleCountRequest = null
-
-/**
  * 数据库实例的DB绑定关系状态信息。
  */
 export interface DbRelationStatusItem {
@@ -8179,11 +7989,6 @@ export interface DbRelationStatusItem {
    */
   ValidStatus?: string
 }
-
-/**
- * CreateNewClassification请求参数结构体
- */
-export type CreateNewClassificationRequest = null
 
 /**
  * 建议使用的安全产品
@@ -8411,16 +8216,6 @@ export interface CreateDSPACategoryRelationRequest {
    * 分类模板id
    */
   ComplianceId: number
-}
-
-/**
- * ModifyMergeClassification返回参数结构体
- */
-export interface ModifyMergeClassificationResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -8847,16 +8642,6 @@ export interface DspaDiscoveryLevelDetail {
 }
 
 /**
- * ModifyClassificationRuleState返回参数结构体
- */
-export interface ModifyClassificationRuleStateResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeDSPAESDataAssetDetail请求参数结构体
  */
 export interface DescribeDSPAESDataAssetDetailRequest {
@@ -9276,11 +9061,6 @@ export interface DescribeDSPACOSDiscoveryTasksRequest {
 }
 
 /**
- * ModifyMergeClassification请求参数结构体
- */
-export type ModifyMergeClassificationRequest = null
-
-/**
  * DescribeDSPAAssessmentPendingRiskOverview返回参数结构体
  */
 export interface DescribeDSPAAssessmentPendingRiskOverviewResponse {
@@ -9349,11 +9129,6 @@ export interface AssetDBDetail {
    */
   DistributionData?: Array<Note>
 }
-
-/**
- * ModifyClassificationRuleState请求参数结构体
- */
-export type ModifyClassificationRuleStateRequest = null
 
 /**
  * 风险趋势项

@@ -40,6 +40,7 @@ import {
   CreateTasksInOrderRequest,
   CreateDatabaseRequest,
   DescribeDMSTablesResponse,
+  DependencyPackage,
   DescribeAdvancedStoreLocationResponse,
   DescribeTablesNameResponse,
   DescribeAdvancedStoreLocationRequest,

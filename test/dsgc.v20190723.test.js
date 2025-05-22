@@ -168,9 +168,9 @@ it("dsgc.v20190723.DescribeDSPAAssessmentRiskLevelList", async function () {
     }
 })
 
-it("dsgc.v20190723.ModifyClassificationRule", async function () {
+it("dsgc.v20190723.ModifyDSPAAssessmentRiskLatest", async function () {
     try {
-       const data = await client.ModifyClassificationRule({})
+       const data = await client.ModifyDSPAAssessmentRiskLatest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("dsgc.v20190723.DeleteDSPACOSDiscoveryTaskResult", async function () {
     }
 })
 
-it("dsgc.v20190723.DescribeDSPACOSDataAssetDetail", async function () {
+it("dsgc.v20190723.DescribeDSPADiscoveryTasks", async function () {
     try {
-       const data = await client.DescribeDSPACOSDataAssetDetail({})
+       const data = await client.DescribeDSPADiscoveryTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,29 +248,9 @@ it("dsgc.v20190723.DeleteCosMetaResource", async function () {
     }
 })
 
-it("dsgc.v20190723.ModifyStandardInfo", async function () {
-    try {
-       const data = await client.ModifyStandardInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.DescribeReportTaskDownloadUrl", async function () {
     try {
        const data = await client.DescribeReportTaskDownloadUrl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.ModifyMergeClassification", async function () {
-    try {
-       const data = await client.ModifyMergeClassification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,16 +428,6 @@ it("dsgc.v20190723.DescribeDSPACategories", async function () {
     }
 })
 
-it("dsgc.v20190723.CreateNewClassification", async function () {
-    try {
-       const data = await client.CreateNewClassification({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.ModifyDSPAAssessmentRiskTemplate", async function () {
     try {
        const data = await client.ModifyDSPAAssessmentRiskTemplate({})
@@ -498,16 +468,6 @@ it("dsgc.v20190723.DescribeDSPAAssessmentRiskAmountOverview", async function () 
     }
 })
 
-it("dsgc.v20190723.CreateClassificationRule", async function () {
-    try {
-       const data = await client.CreateClassificationRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.DescribeDSPAESDataAssetByComplianceId", async function () {
     try {
        const data = await client.DescribeDSPAESDataAssetByComplianceId({})
@@ -521,16 +481,6 @@ it("dsgc.v20190723.DescribeDSPAESDataAssetByComplianceId", async function () {
 it("dsgc.v20190723.DescribeDSPAComplianceGroups", async function () {
     try {
        const data = await client.DescribeDSPAComplianceGroups({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.ModifyLevelName", async function () {
-    try {
-       const data = await client.ModifyLevelName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,16 +521,6 @@ it("dsgc.v20190723.DeleteDSPACOSDiscoveryTask", async function () {
 it("dsgc.v20190723.DescribeMongoAssetSensitiveDistribution", async function () {
     try {
        const data = await client.DescribeMongoAssetSensitiveDistribution({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.ModifyLevelInfo", async function () {
-    try {
-       const data = await client.ModifyLevelInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,16 +588,6 @@ it("dsgc.v20190723.DescribeDSPAAssessmentTemplates", async function () {
     }
 })
 
-it("dsgc.v20190723.ModifyDSPAAssessmentRiskLatest", async function () {
-    try {
-       const data = await client.ModifyDSPAAssessmentRiskLatest({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.EnableDSPADiscoveryRule", async function () {
     try {
        const data = await client.EnableDSPADiscoveryRule({})
@@ -711,16 +641,6 @@ it("dsgc.v20190723.ModifyDSPAESTaskResult", async function () {
 it("dsgc.v20190723.DescribeDSPARDBDataAssetDetail", async function () {
     try {
        const data = await client.DescribeDSPARDBDataAssetDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.DescribeClassificationInfo", async function () {
-    try {
-       const data = await client.DescribeClassificationInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -818,9 +738,9 @@ it("dsgc.v20190723.DescribeDSPAAssessmentRiskTemplateVulnerableList", async func
     }
 })
 
-it("dsgc.v20190723.DescribeDSPADiscoveryTasks", async function () {
+it("dsgc.v20190723.DescribeDSPACOSDataAssetDetail", async function () {
     try {
-       const data = await client.DescribeDSPADiscoveryTasks({})
+       const data = await client.DescribeDSPACOSDataAssetDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -861,16 +781,6 @@ it("dsgc.v20190723.DescribeDSPACOSDiscoveryTasks", async function () {
 it("dsgc.v20190723.DescribeDSPALevelDetail", async function () {
     try {
        const data = await client.DescribeDSPALevelDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.CreateOrCopyStandard", async function () {
-    try {
-       const data = await client.CreateOrCopyStandard({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,16 +878,6 @@ it("dsgc.v20190723.CreateDSPAMetaResources", async function () {
     }
 })
 
-it("dsgc.v20190723.ModifyClassificationRuleState", async function () {
-    try {
-       const data = await client.ModifyClassificationRuleState({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.ModifyDSPAClusterInfo", async function () {
     try {
        const data = await client.ModifyDSPAClusterInfo({})
@@ -1001,16 +901,6 @@ it("dsgc.v20190723.DescribeDSPAAssessmentHighRiskTop10Overview", async function 
 it("dsgc.v20190723.DescribeDSPAAssessmentLatestRiskDetailInfo", async function () {
     try {
        const data = await client.DescribeDSPAAssessmentLatestRiskDetailInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.DescribeRuleList", async function () {
-    try {
-       const data = await client.DescribeRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,29 +1098,9 @@ it("dsgc.v20190723.CreateDSPADiscoveryRule", async function () {
     }
 })
 
-it("dsgc.v20190723.ModifyNewClassification", async function () {
-    try {
-       const data = await client.ModifyNewClassification({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.DescribeCOSAssetSensitiveDistribution", async function () {
     try {
        const data = await client.DescribeCOSAssetSensitiveDistribution({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.DescribeLeafClassification", async function () {
-    try {
-       const data = await client.DescribeLeafClassification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1298,16 +1168,6 @@ it("dsgc.v20190723.DescribeDSPAAssessmentRiskDistributionOverview", async functi
     }
 })
 
-it("dsgc.v20190723.DescribeClassificationRuleCount", async function () {
-    try {
-       const data = await client.DescribeClassificationRuleCount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dsgc.v20190723.DescribeDSPACategoryTreeWithRules", async function () {
     try {
        const data = await client.DescribeDSPACategoryTreeWithRules({})
@@ -1341,16 +1201,6 @@ it("dsgc.v20190723.DescribeDSPAESDataSample", async function () {
 it("dsgc.v20190723.DescribeDSPAAssessmentTemplateControlItems", async function () {
     try {
        const data = await client.DescribeDSPAAssessmentTemplateControlItems({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dsgc.v20190723.ModifyLevelState", async function () {
-    try {
-       const data = await client.ModifyLevelState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

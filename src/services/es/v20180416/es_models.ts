@@ -4656,6 +4656,10 @@ export interface LogstashNodeInfo {
    * 节点端口
    */
   Port?: number
+  /**
+   * 节点所在zone
+   */
+  Zone?: string
 }
 
 /**

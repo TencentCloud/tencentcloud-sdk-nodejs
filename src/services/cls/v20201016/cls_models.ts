@@ -1793,20 +1793,20 @@ export interface DashboardNoticeMode {
   ReceiverType: string
   /**
    * 知方式对应的值。
-<br> <li/> 当ReceiverType不是 Wecom 时，Values必填。
+<br> <li/> 当ReceiverType不是 WeCom 时，Values必填。
    */
   Values?: Array<string>
   /**
    * 仪表盘通知渠道。
 <br><li/> 支持：["Email","Sms","WeChat","Phone"]。
-<br><li/> 当ReceiverType是 Email 或 Wecom 时，ReceiverChannels不能赋值。
+<br><li/> 当ReceiverType是 Email 或 WeCom 时，ReceiverChannels不能赋值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverChannels?: Array<string>
   /**
    * 回调Url。
-<br><li/> 当ReceiverType是 Wecom 时，Url必填。
-<br><li/> 当ReceiverType不是 Wecom 时，Url不能填写。
+<br><li/> 当ReceiverType是 WeCom 时，Url必填。
+<br><li/> 当ReceiverType不是 WeCom 时，Url不能填写。
    */
   Url?: string
 }
@@ -2560,6 +2560,7 @@ export interface ModifyAlarmRequest {
   Status?: boolean
   /**
    * 该参数已废弃，请使用Status参数控制是否开启告警策略。
+   * @deprecated
    */
   Enable?: boolean
   /**
@@ -2793,7 +2794,8 @@ export interface CreateAlarmRequest {
    */
   Status?: boolean
   /**
-   * 该参数已废弃，请使用Status参数控制是否开启告警策略。
+   * 请使用Status参数控制是否开启告警策略。
+   * @deprecated
    */
   Enable?: boolean
   /**
@@ -3089,9 +3091,10 @@ export interface CreateConfigExtraRequest {
    */
   ContainerStdout?: ContainerStdoutInfo
   /**
-   * 日志格式化方式，用于容器采集场景。 - 已废弃
+   * 日志格式化方式，用于容器采集场景。
 - stdout-docker-json：用于docker容器采集场景
 - stdout-containerd：用于containerd容器采集场景
+   * @deprecated
    */
   LogFormat?: string
   /**
@@ -5102,11 +5105,13 @@ export interface WebCallback {
   UserIds?: Array<string>
   /**
    * 该参数已废弃，请使用NoticeContentId。
+   * @deprecated
    */
   Headers?: Array<string>
   /**
    * 该参数已废弃，请使用NoticeContentId。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Body?: string
   /**
@@ -7955,9 +7960,10 @@ export interface ModifyConfigExtraRequest {
    */
   LogType?: string
   /**
-   * 日志格式化方式，用于容器采集场景。目前已经废弃
+   * 日志格式化方式，用于容器采集场景。
 - stdout-docker-json：用于docker容器采集场景
 - stdout-containerd：用于containerd容器采集场景
+   * @deprecated
    */
   LogFormat?: string
   /**

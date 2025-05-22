@@ -666,6 +666,52 @@ export interface DescribeDMSTablesResponse {
 }
 
 /**
+ * 任务依赖包信息
+ */
+export interface DependencyPackage {
+  /**
+   * 依赖包类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageSource?: string
+  /**
+   * 依赖包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MavenPackage?: string
+  /**
+   * 依赖包仓库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MavenRepository?: string
+  /**
+   * maven包exclusion信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MavenExclusion?: string
+  /**
+   * pypi包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PypiPackage?: string
+  /**
+   * pypi索引地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PypiIndexUrl?: string
+  /**
+   * 文件包的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 文件包的路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackagePath?: string
+}
+
+/**
  * DescribeAdvancedStoreLocation返回参数结构体
  */
 export interface DescribeAdvancedStoreLocationResponse {
@@ -5339,6 +5385,10 @@ export interface ModifySparkAppRequest {
    * 是否使用session脚本的sql运行任务：false：否，true：是
    */
   IsSessionStarted?: boolean
+  /**
+   * 标准引擎依赖包
+   */
+  DependencyPackages?: Array<DependencyPackage>
 }
 
 /**
@@ -7274,6 +7324,10 @@ export interface CreateSparkAppRequest {
    * 是否使用session脚本的sql运行任务：false：否，true：是
    */
   IsSessionStarted?: boolean
+  /**
+   * 依赖包信息
+   */
+  DependencyPackages?: Array<DependencyPackage>
 }
 
 /**

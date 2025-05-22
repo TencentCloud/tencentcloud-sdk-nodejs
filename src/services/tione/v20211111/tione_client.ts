@@ -43,6 +43,7 @@ import {
   VolumeMount,
   ModifyNotebookTagsResponse,
   DescribeBillingResourceGroupResponse,
+  SpecUnit,
   ServiceCallInfo,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
@@ -71,6 +72,7 @@ import {
   CreateTrainingModelRequest,
   SchemaInfo,
   StartCmdInfo,
+  Event,
   DescribeModelServiceGroupsResponse,
   HTTPGetAction,
   DescribeBillingResourceInstanceRunningJobsResponse,
@@ -99,7 +101,7 @@ import {
   DeleteModelServiceGroupResponse,
   GpuDetail,
   CronScaleJob,
-  SpecUnit,
+  DescribeEventsResponse,
   InferTemplateGroup,
   DescribeModelServiceResponse,
   DatasetInfo,
@@ -132,6 +134,7 @@ import {
   DescribeNotebooksResponse,
   DatasetGroup,
   StatefulSetCondition,
+  SidecarSpec,
   TCPSocketAction,
   ResourceInfo,
   GroupResource,
@@ -190,6 +193,7 @@ import {
   DescribeTrainingTaskPodsResponse,
   ModelAccelerateTask,
   Pod,
+  DescribeEventsRequest,
   DeleteTrainingModelRequest,
   DescribeModelServiceHotUpdatedRequest,
   DescribeTrainingTaskResponse,
@@ -284,6 +288,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
   ): Promise<DescribeTrainingTasksResponse> {
     return this.request("DescribeTrainingTasks", req, cb)
+  }
+
+  /**
+   * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的事件API
+   */
+  async DescribeEvents(
+    req: DescribeEventsRequest,
+    cb?: (error: string, rep: DescribeEventsResponse) => void
+  ): Promise<DescribeEventsResponse> {
+    return this.request("DescribeEvents", req, cb)
   }
 
   /**

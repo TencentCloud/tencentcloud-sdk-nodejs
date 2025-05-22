@@ -198,6 +198,14 @@ HYBRID_PAID:
    * 健康探针
    */
   HealthProbe?: HealthProbe
+  /**
+   * 滚动更新策略
+   */
+  RollingUpdate?: RollingUpdate
+  /**
+   * sidecar配置
+   */
+  Sidecar?: SidecarSpec
 }
 
 /**
@@ -481,6 +489,11 @@ export interface NotebookSetItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceGooseFS?: GooseFS
+  /**
+   * 子用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
   /**
    * 子用户名称
    */
@@ -1023,6 +1036,20 @@ export interface DescribeBillingResourceGroupResponse {
 }
 
 /**
+ * 计费项询价单元
+ */
+export interface SpecUnit {
+  /**
+   * 计费项名称
+   */
+  SpecName: string
+  /**
+   * 计费项数量,建议不超过100万
+   */
+  SpecCount: number
+}
+
+/**
  * 服务的调用信息，服务组下唯一
  */
 export interface ServiceCallInfo {
@@ -1502,6 +1529,14 @@ HYBRID_PAID:
    * 健康探针
    */
   HealthProbe?: HealthProbe
+  /**
+   * 滚动更新策略
+   */
+  RollingUpdate?: RollingUpdate
+  /**
+   * sidecar配置
+   */
+  Sidecar?: SidecarSpec
 }
 
 /**
@@ -1645,6 +1680,16 @@ STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackUrl?: string
+  /**
+   * 任务subUin信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
+  /**
+   * 任务创建者名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUinName?: string
 }
 
 /**
@@ -1852,6 +1897,52 @@ export interface StartCmdInfo {
    * worker启动命令
    */
   WorkerStartCmd?: string
+}
+
+/**
+ * K8s的Event
+ */
+export interface Event {
+  /**
+   * 事件的id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: string
+  /**
+   * 事件的具体信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message: string
+  /**
+   * 事件第一次发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirstTimestamp: string
+  /**
+   * 事件最后一次发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastTimestamp: string
+  /**
+   * 事件发生的次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count: number
+  /**
+   * 事件的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 事件关联的资源的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceKind: string
+  /**
+   * 事件关联的资源的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName: string
 }
 
 /**
@@ -2676,17 +2767,23 @@ export interface CronScaleJob {
 }
 
 /**
- * 计费项询价单元
+ * DescribeEvents返回参数结构体
  */
-export interface SpecUnit {
+export interface DescribeEventsResponse {
   /**
-   * 计费项名称
+   * 事件的列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecName: string
+  Events?: Array<Event>
   /**
-   * 计费项数量,建议不超过100万
+   * 此次查询的事件的个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecCount: number
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3964,6 +4061,16 @@ export interface StatefulSetCondition {
 }
 
 /**
+ * sidecar容器配置
+ */
+export interface SidecarSpec {
+  /**
+   * 镜像配置
+   */
+  ImageInfo?: ImageInfo
+}
+
+/**
  * tcp socket 健康探针检查行为
  */
 export interface TCPSocketAction {
@@ -4438,6 +4545,11 @@ export interface PodInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceConfigInfo?: ResourceConfigInfo
+  /**
+   * Pod所属任务的SubUin信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: string
 }
 
 /**
@@ -5992,6 +6104,68 @@ export interface Pod {
    * 实例的状态信息
    */
   Status?: string
+}
+
+/**
+ * DescribeEvents请求参数结构体
+ */
+export interface DescribeEventsRequest {
+  /**
+   * 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测
+枚举值：
+- TRAIN
+- NOTEBOOK
+- INFER
+- BATCH
+   */
+  Service: string
+  /**
+   * 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：
+- Service类型为TRAIN：
+  调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId
+- Service类型为NOTEBOOK：
+  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName
+- Service类型为INFER：
+  调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId
+- Service类型为BATCH：
+  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId
+   */
+  ServiceId?: string
+  /**
+   * 查询事件最早发生的时间（RFC3339格式的时间字符串），默认值为当前时间的前一天
+   */
+  StartTime?: string
+  /**
+   * 查询事件最晚发生的时间（RFC3339格式的时间字符串），默认值为当前时间
+   */
+  EndTime?: string
+  /**
+   * 分页Limit，默认值为100，最大值为100
+   */
+  Limit?: number
+  /**
+   * 分页Offset，默认值为0
+   */
+  Offset?: number
+  /**
+   * 排列顺序（可选值为ASC, DESC ），默认为DESC
+   */
+  Order?: string
+  /**
+   * 排序的依据字段（可选值为FirstTimestamp, LastTimestamp），默认值为LastTimestamp
+   */
+  OrderField?: string
+  /**
+   * 过滤条件
+注意: 
+1. Filter.Name：目前支持ResourceKind（按事件关联的资源类型过滤）；Type（按事件类型过滤）
+2. Filter.Values：
+对于Name为ResourceKind，Values的可选取值为Deployment, Replicaset, Pod等K8S资源类型；
+对于Name为Type，Values的可选取值仅为Normal或者Warning；
+Values为多个的时候表示同时满足
+3. Filter. Negative和Filter. Fuzzy没有使用
+   */
+  Filters?: Array<Filter>
 }
 
 /**

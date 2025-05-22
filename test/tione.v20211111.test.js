@@ -88,6 +88,16 @@ it("tione.v20211111.DescribeTrainingTasks", async function () {
     }
 })
 
+it("tione.v20211111.DescribeEvents", async function () {
+    try {
+       const data = await client.DescribeEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeBuildInImages", async function () {
     try {
        const data = await client.DescribeBuildInImages({})
