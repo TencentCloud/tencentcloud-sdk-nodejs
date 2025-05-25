@@ -1874,10 +1874,6 @@ export interface AddRecordBatch {
    */
   RecordLineId?: string
   /**
-   * 记录权重值(暂未支持)。
-   */
-  Weight?: number
-  /**
    * 记录的 MX 记录值，非 MX 记录类型，默认为 0，MX记录则必选。
    */
   MX?: number
@@ -1885,14 +1881,6 @@ export interface AddRecordBatch {
    * 记录的 TTL 值，默认600。
    */
   TTL?: number
-  /**
-   * 记录状态(暂未支持)。0表示禁用，1表示启用。默认启用。
-   */
-  Enabled?: number
-  /**
-   * 记录备注(暂未支持)。
-   */
-  Remark?: string
 }
 
 /**

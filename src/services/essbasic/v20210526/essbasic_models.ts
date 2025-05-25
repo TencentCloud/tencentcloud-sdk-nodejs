@@ -2045,6 +2045,8 @@ export interface ChannelCreateFlowByFilesRequest {
 <li>数字控件</li>
 <li>图片控件</li>
 <li>数据表格等填写控件</li></ul>
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/e004195ee4cb98a7f9bc12eb4a0a0b77.png)
    */
   Components?: Array<Component>
   /**
@@ -3053,6 +3055,9 @@ export interface AutoSignConfig {
    * 是否回调证书信息:
 <ul><li>**false**: 不需要(默认)</li>
 <li>**true**:需要</li></ul>
+
+
+注：`该字段已经失效，请勿设置此参数。`
    */
   CertInfoCallback?: boolean
   /**
@@ -3075,7 +3080,7 @@ export interface AutoSignConfig {
   /**
    * 开通时候的身份验证方式, 取值为：
 <ul><li>**WEIXINAPP** : 微信人脸识别</li>
-<li>**INSIGHT** : 慧眼人脸认别</li>
+<li>**INSIGHT** : 慧眼人脸识别</li>
 <li>**TELECOM** : 运营商三要素验证</li></ul>
 注：
 <ul><li>如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP</li>
@@ -3086,6 +3091,8 @@ export interface AutoSignConfig {
    * 设置用户开通自动签时是否绑定个人自动签账号许可。
 
 <ul><li><b>1</b>: (默认)不绑定自动签账号许可开通，开通后一直有效,   后续使用合同份额进行合同发起</li></ul>
+
+注：`该字段已经失效，请勿设置此参数。`
    */
   LicenseType?: number
   /**
@@ -5706,6 +5713,8 @@ export interface FlowApproverInfo {
   CallbackUrl?: string
   /**
    * 使用PDF文件直接发起合同时，签署人指定的签署控件；<br/>使用模板发起合同时，指定本企业印章签署控件的印章ID: <br/>通过ComponentId或ComponenetName指定签署控件，ComponentValue为印章ID。
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/91757a7f9188ccf3057a4a8979cf3f93.png)
    */
   SignComponents?: Array<Component>
   /**
@@ -5828,8 +5837,9 @@ export interface FlowApproverInfo {
 
 具体使用说明可参考[为签署方指定填写控件](https://qian.tencent.cn/developers/partner/createFlowByFiles#为签署方指定填写控件)
 
-
 注：`此参数仅在通过文件发起合同或者合同组时生效`
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/e004195ee4cb98a7f9bc12eb4a0a0b77.png)
    */
   Components?: Array<Component>
   /**

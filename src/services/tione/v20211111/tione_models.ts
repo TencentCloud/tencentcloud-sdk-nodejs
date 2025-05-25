@@ -1690,6 +1690,10 @@ STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUinName?: string
+  /**
+   * 任务AppId
+   */
+  AppId?: string
 }
 
 /**

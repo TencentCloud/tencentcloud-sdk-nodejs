@@ -3094,6 +3094,8 @@ export interface AutoSignConfig {
    * 是否回调证书信息:
 <ul><li>**false**: 不需要(默认)</li>
 <li>**true**:需要</li></ul>
+
+注：`该字段已经失效，请勿设置此参数。`
    */
   CertInfoCallback?: boolean
   /**
@@ -3118,7 +3120,7 @@ export interface AutoSignConfig {
   /**
    * 开通时候的身份验证方式, 取值为：
 <ul><li>**WEIXINAPP** : 微信人脸识别</li>
-<li>**INSIGHT** : 慧眼人脸认别</li>
+<li>**INSIGHT** : 慧眼人脸识别</li>
 <li>**TELECOM** : 运营商三要素验证</li></ul>
 注：
 <ul><li>如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP</li>
@@ -3129,6 +3131,8 @@ export interface AutoSignConfig {
    * 设置用户自动签合同的扣费方式。
 
 <ul><li><b>1</b>: (默认)使用合同份额进行扣减</li></ul>
+
+注：`该字段已经失效，请勿设置此参数。`
    */
   LicenseType?: number
   /**
@@ -4626,6 +4630,8 @@ export interface CreateFlowByFilesRequest {
 <li> 图片控件          </li>
 <li> 水印控件等          </li>
 </ul>
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/e004195ee4cb98a7f9bc12eb4a0a0b77.png)
    */
   Components?: Array<Component>
   /**
@@ -7384,6 +7390,8 @@ export interface ApproverInfo {
 <ul><li> 个人签名/印章</li>
 <li> 企业印章</li>
 <li> 骑缝章等签署控件</li></ul>
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/91757a7f9188ccf3057a4a8979cf3f93.png)
    */
   SignComponents?: Array<Component>
   /**
@@ -7541,6 +7549,8 @@ export interface ApproverInfo {
 具体使用说明可参考[为签署方指定填写控件](https://qian.tencent.cn/developers/company/createFlowByFiles/#指定签署方填写控件)
 
 注：`此参数仅在通过文件发起合同或者合同组时生效`
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/e004195ee4cb98a7f9bc12eb4a0a0b77.png)
    */
   Components?: Array<Component>
   /**
