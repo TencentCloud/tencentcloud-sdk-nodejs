@@ -1044,6 +1044,10 @@ export interface DescribeDataPerformancePageRequest {
    * 网络状态
    */
   NetStatus?: string
+  /**
+   * 是否返回webvitals数据
+   */
+  WebVitals?: boolean
 }
 
 /**

@@ -1327,8 +1327,15 @@ export interface DBEndpointInfo {
    */
   Supplier?: string
   /**
-   * MongoDB可定义如下的参数: 	['AuthDatabase':'admin', 
-'AuthFlag': "1",	'AuthMechanism':"SCRAM-SHA-1"]
+   * 此参数为数组类型，可以传多个键值对结构对象。
+MongoDB可定义如下的参数：
+'AuthDatabase':'admin',
+'AuthFlag': "1",
+'AuthMechanism':"SCRAM-SHA-1",
+"fetchMethod":"oplog",
+"connectMode":"srv",
+"EncryptedConnProtocol":"mongo_atlas_ssl"；
+其中fetchMethod表示迁移方式，还可支持change_stream；EncryptedConnProtocol值为mongo_atlas_ssl表示使用atlas ssl连接方式。
    */
   ExtraAttr?: Array<KeyValuePairOption>
   /**
@@ -1336,7 +1343,7 @@ export interface DBEndpointInfo {
    */
   DatabaseNetEnv?: string
   /**
-   * tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，Info中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，Info中需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。对于mongodb链路，srv表示SRV连接串，为空或不传表示普通连接串，srv仅限于FetchMethod为change_stream的拉取模式
+   * tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，Info中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，Info中需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。
    */
   ConnectType?: string
 }

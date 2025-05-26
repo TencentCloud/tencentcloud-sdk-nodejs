@@ -291,11 +291,11 @@ export interface CVMAssetVO {
    */
   AssetCreateTime?: string
   /**
-   * 公网ip
+   * 公网IP
    */
   PublicIp?: string
   /**
-   * 私网ip
+   * 私网IP
    */
   PrivateIp?: string
   /**
@@ -335,11 +335,11 @@ export interface CVMAssetVO {
    */
   SubnetName?: string
   /**
-   * uuid
+   * 主机安全Agent UUID
    */
   InstanceUuid?: string
   /**
-   * qquid
+   * 云主机 CVM UUID
    */
   InstanceQUuid?: string
   /**
@@ -1283,7 +1283,7 @@ export interface IpAssetListVO {
    */
   AssetCreateTime?: string
   /**
-   * 公网ip
+   * 公网IP
    */
   PublicIp?: string
   /**
@@ -1383,7 +1383,7 @@ export interface IpAssetListVO {
    */
   AddressId?: string
   /**
-   * memberid信息
+   * MemberId信息
    */
   MemberId?: string
   /**
@@ -3246,8 +3246,7 @@ export interface WhereFilter {
  */
 export interface SubUserInfo {
   /**
-   * 主键ID，无业务意义
-仅作为唯一键
+   * 主键ID，无业务意义仅作为唯一键
    */
   ID?: number
   /**
@@ -3275,7 +3274,7 @@ export interface SubUserInfo {
    */
   OwnerNickName?: string
   /**
-   * 所属主账号memberid
+   * 所属主账号memberId信息
    */
   OwnerMemberID?: string
   /**
@@ -6108,7 +6107,7 @@ export interface DomainAssetVO {
    */
   SourceType?: string
   /**
-   * memberiD
+   * memberId信息
    */
   MemberId?: string
   /**

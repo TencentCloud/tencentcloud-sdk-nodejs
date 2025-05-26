@@ -98,9 +98,9 @@ it("wedata.v20210820.DescribeTaskScript", async function () {
     }
 })
 
-it("wedata.v20210820.ReportTaskLineage", async function () {
+it("wedata.v20210820.DescribeRealViewSchemaPage", async function () {
     try {
-       const data = await client.ReportTaskLineage({})
+       const data = await client.DescribeRealViewSchemaPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +301,16 @@ it("wedata.v20210820.BatchSuspendIntegrationTasks", async function () {
 it("wedata.v20210820.DescribeFieldBasicInfo", async function () {
     try {
        const data = await client.DescribeFieldBasicInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ReportTaskLineage", async function () {
+    try {
+       const data = await client.ReportTaskLineage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

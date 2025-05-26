@@ -1587,7 +1587,7 @@ export interface CreateCfsFileSystemRequest {
    */
   NetInterface: string
   /**
-   * 权限组 ID,pgroupbasic 是默认权限组
+   * 权限组 ID,pgroupbasic 是默认权限组，通过控制查询权限组列表接口获取[DescribeCfsPGroups](https://cloud.tencent.com/document/product/582/38157)
    */
   PGroupId: string
   /**
@@ -1599,11 +1599,13 @@ export interface CreateCfsFileSystemRequest {
    */
   StorageType?: string
   /**
-   * 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取
+   * 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取，
+[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)
    */
   VpcId?: string
   /**
-   * 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取
+   * 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取，
+[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)
    */
   SubnetId?: string
   /**
@@ -1623,7 +1625,9 @@ export interface CreateCfsFileSystemRequest {
    */
   ClientToken?: string
   /**
-   * 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取
+   * 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取，通过接口
+[DescribeCcns](https://cloud.tencent.com/document/product/215/19199)
+
    */
   CcnId?: string
   /**
@@ -1635,11 +1639,13 @@ export interface CreateCfsFileSystemRequest {
    */
   Capacity?: number
   /**
-   * 文件系统快照ID，通过查询快照列表获取该参数
+   * 文件系统快照ID，通过查询快照列表获取该参数，
+[DescribeCfsSnapshots](https://cloud.tencent.com/document/product/582/80206)
    */
   SnapshotId?: string
   /**
-   * 定期快照策略ID，通过查询快照策略信息获取
+   * 定期快照策略ID，通过查询快照策略信息获取,
+[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/product/582/38157)
    */
   AutoSnapshotPolicyId?: string
   /**
@@ -2455,7 +2461,7 @@ export interface CreateAutoSnapshotPolicyRequest {
    */
   Hour: string
   /**
-   * 策略名称
+   * 策略名称,限制64个字符数量仅支持输入中文、字母、数字、_或-
    */
   PolicyName?: string
   /**
@@ -2467,7 +2473,7 @@ export interface CreateAutoSnapshotPolicyRequest {
    */
   AliveDays?: number
   /**
-   * 快照按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照。与DayOfWeek，IntervalDays 三者选一
+   * 快照按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek，IntervalDays 三者选一
    */
   DayOfMonth?: string
   /**

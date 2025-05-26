@@ -1261,24 +1261,34 @@ export interface WorkFlowExecuteDto {
 }
 
 /**
- * 实时任务同步速度 条/s
+ * DescribeRealViewSchemaPage返回参数结构体
  */
-export interface RecordsSpeed {
+export interface DescribeRealViewSchemaPageResponse {
   /**
-   * 节点类型
+   * 数据库schema信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeType: string
+  Items?: Array<DatabaseSchemaIInfo>
   /**
-   * 节点名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页码
    */
-  NodeName: string
+  PageNumber?: number
   /**
-   * 速度值列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页记录数
    */
-  Values: Array<SpeedValue>
+  PageSize?: number
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9389,6 +9399,27 @@ export interface DescribeInstanceLogFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实时任务同步速度 条/s
+ */
+export interface RecordsSpeed {
+  /**
+   * 节点类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeType: string
+  /**
+   * 节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeName: string
+  /**
+   * 速度值列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values: Array<SpeedValue>
 }
 
 /**
@@ -21404,6 +21435,52 @@ export interface ColumnData {
 }
 
 /**
+ * DescribeRealViewSchemaPage请求参数结构体
+ */
+export interface DescribeRealViewSchemaPageRequest {
+  /**
+   * 页码
+   */
+  PageNumber: number
+  /**
+   * 每页记录数
+   */
+  PageSize: number
+  /**
+   * 数据库名称
+   */
+  DatabaseName: string
+  /**
+   * 数据源id
+   */
+  DatasourceId: string
+  /**
+   * 数据type
+   */
+  DataSourceType: string
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 环境信息
+   */
+  Env?: string
+  /**
+   * 项目model
+   */
+  Model?: string
+  /**
+   * dev的数据源Id
+   */
+  DevDatasourceId?: string
+  /**
+   * 过滤字段
+   */
+  Keyword?: string
+}
+
+/**
  * 表血缘关系对
  */
 export interface TableLineagePair {
@@ -24607,6 +24684,22 @@ export interface DescribeRuleTemplatesByPageRequest {
    * 通用过滤条件
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 数据库Schema信息
+ */
+export interface DatabaseSchemaIInfo {
+  /**
+   * schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginDatabaseName?: string
 }
 
 /**

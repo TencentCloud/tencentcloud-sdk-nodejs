@@ -216,7 +216,7 @@ export interface SelfOperation {
    */
   StuffContact: string
   /**
-   * 身份证号
+   * 证件号码
    */
   StuffIDCard: string
   /**
@@ -227,6 +227,15 @@ export interface SelfOperation {
    * 上门时间
    */
   OperationTime: string
+  /**
+   * 证件类型，非必传，默认为IDENTITY_CARD。
+对应关系如下：IDENTITY_CARD: 身份证,
+HONG_KONG_AND_MACAO_PASS: 港澳通行证',
+PASSPORT: 护照,
+DRIVING_LICENSE: 驾照,
+OTHER: 其他
+   */
+  IDCardType?: string
 }
 
 /**
@@ -1020,13 +1029,22 @@ export interface CustomerReceipt {
    */
   PickUpStuffContact: string
   /**
-   * 自提人身份证号
+   * 自提人证件号码
    */
   PickUpStuffIDCard: string
   /**
    * 自提时间
    */
   PickUpTime: string
+  /**
+   * 证件类型，非必传，默认为IDENTITY_CARD。
+对应关系如下：IDENTITY_CARD: 身份证,
+HONG_KONG_AND_MACAO_PASS: 港澳通行证',
+PASSPORT: 护照,
+DRIVING_LICENSE: 驾照,
+OTHER: 其他
+   */
+  IDCardType?: string
 }
 
 /**
@@ -2751,6 +2769,10 @@ hosting-type
    * 传入目标服务，返回允许进行此服务的机架列表；可以和Filters一起使用。允许的值：('rackPowerOn', 'rackPowerOff')
    */
   DstService?: string
+  /**
+   * 机架名称关键字实现模糊搜索
+   */
+  RackName?: string
 }
 
 /**

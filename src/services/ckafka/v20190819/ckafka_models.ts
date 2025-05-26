@@ -1253,7 +1253,7 @@ export interface CreateTopicIpWhiteListResponse {
  */
 export interface FailureParam {
   /**
-   * 类型，DLQ死信队列，IGNORE_ERROR保留，DROP废弃
+   * 类型，DLQ死信队列，IGNORE_ERROR保留，DROP丢弃
    */
   Type: string
   /**
@@ -3974,6 +3974,7 @@ export interface DescribeInstancesDetailRequest {
   Filters?: Array<Filter>
   /**
    * 已经废弃， 使用InstanceIdList
+   * @deprecated
    */
   InstanceIds?: string
   /**
@@ -6086,6 +6087,7 @@ export interface DescribeInstancesRequest {
   Limit?: number
   /**
    * 已废弃。匹配标签key值。
+   * @deprecated
    */
   TagKey?: string
   /**
@@ -8578,6 +8580,7 @@ export interface CreateDatahubTaskRequest {
   TransformParam?: TransformParam
   /**
    * 实例连接参数【已废弃】
+   * @deprecated
    */
   PrivateLinkParam?: PrivateLinkParam
   /**
@@ -8596,6 +8599,10 @@ export interface CreateDatahubTaskRequest {
    * 标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * 任务描述信息
+   */
+  Description?: string
 }
 
 /**

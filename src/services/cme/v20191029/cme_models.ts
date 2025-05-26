@@ -4544,7 +4544,7 @@ export interface HandleMediaCastProjectRequest {
   DestinationInfos?: Array<MediaCastDestinationInfo>
   /**
    * 输出媒体配置。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-当 Operation 为 ModfiyOutputSetting 时必填。
+当 Operation 为 ModifyOutputSetting 时必填。
    */
   OutputMediaSetting?: MediaCastOutputMediaSetting
   /**

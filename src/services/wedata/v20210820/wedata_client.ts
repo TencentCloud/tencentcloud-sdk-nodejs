@@ -55,7 +55,7 @@ import {
   InstanceOpsInfoPage,
   DescribeRulesResponse,
   WorkFlowExecuteDto,
-  RecordsSpeed,
+  DescribeRealViewSchemaPageResponse,
   ColumnLineageInfo,
   TriggerManualTasksRequest,
   TaskLineageInfoPair,
@@ -278,6 +278,7 @@ import {
   ManualTriggerRecordOpsDto,
   ModifyRuleResponse,
   DescribeInstanceLogFileResponse,
+  RecordsSpeed,
   PairDto,
   CosTokenResponse,
   ModifyTaskLinksRequest,
@@ -639,6 +640,7 @@ import {
   DescribeRuleGroupTableRequest,
   CheckAlarmRegularNameExistRequest,
   ColumnData,
+  DescribeRealViewSchemaPageRequest,
   TableLineagePair,
   RuleExecResult,
   Table,
@@ -756,6 +758,7 @@ import {
   EventCaseAuditLogVOCollection,
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
+  DatabaseSchemaIInfo,
   TaskOpsDto,
   RegisterDsEventResponse,
   RenewWorkflowSchedulerInfoDsRequest,
@@ -955,13 +958,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 血缘上报接口
+   * 数据集成分页获取数据库SCHEMA信息
    */
-  async ReportTaskLineage(
-    req: ReportTaskLineageRequest,
-    cb?: (error: string, rep: ReportTaskLineageResponse) => void
-  ): Promise<ReportTaskLineageResponse> {
-    return this.request("ReportTaskLineage", req, cb)
+  async DescribeRealViewSchemaPage(
+    req: DescribeRealViewSchemaPageRequest,
+    cb?: (error: string, rep: DescribeRealViewSchemaPageResponse) => void
+  ): Promise<DescribeRealViewSchemaPageResponse> {
+    return this.request("DescribeRealViewSchemaPage", req, cb)
   }
 
   /**
@@ -1166,6 +1169,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeFieldBasicInfoResponse) => void
   ): Promise<DescribeFieldBasicInfoResponse> {
     return this.request("DescribeFieldBasicInfo", req, cb)
+  }
+
+  /**
+   * 血缘上报接口
+   */
+  async ReportTaskLineage(
+    req: ReportTaskLineageRequest,
+    cb?: (error: string, rep: ReportTaskLineageResponse) => void
+  ): Promise<ReportTaskLineageResponse> {
+    return this.request("ReportTaskLineage", req, cb)
   }
 
   /**

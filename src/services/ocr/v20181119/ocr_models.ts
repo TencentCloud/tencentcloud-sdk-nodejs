@@ -6211,6 +6211,10 @@ export interface TextVehicleBack {
    * 发证机关
    */
   IssueAuthorityElectronic?: string
+  /**
+   * 车身颜色
+   */
+  CarBodyColor?: string
 }
 
 /**

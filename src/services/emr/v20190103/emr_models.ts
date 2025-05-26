@@ -379,6 +379,36 @@ export interface NodeSelector {
 }
 
 /**
+ * 用户管理中用户的简要信息
+ */
+export interface UserManagerUserBriefInfo {
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 用户所属的组
+   */
+  UserGroup?: string
+  /**
+   * Manager表示管理员、NormalUser表示普通用户
+   */
+  UserType?: string
+  /**
+   * 用户创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
+   */
+  SupportDownLoadKeyTab?: boolean
+  /**
+   * keytab文件的下载地址
+   */
+  DownLoadKeyTabUrl?: string
+}
+
+/**
  * DescribeClusterFlowStatusDetail返回参数结构体
  */
 export interface DescribeClusterFlowStatusDetailResponse {
@@ -607,23 +637,41 @@ export interface ImpalaQuery {
 }
 
 /**
- * Pod的存储设备描述信息。
+ * DescribeHiveQueries请求参数结构体
  */
-export interface PodVolume {
+export interface DescribeHiveQueriesRequest {
   /**
-   * 存储类型，可为"pvc"，"hostpath"。
+   * 集群ID
    */
-  VolumeType: string
+  InstanceId: string
   /**
-   * 当VolumeType为"pvc"时，该字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 起始时间秒
    */
-  PVCVolume?: PersistentVolumeContext
+  StartTime: number
   /**
-   * 当VolumeType为"hostpath"时，该字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
    */
-  HostVolume?: HostVolumeContext
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
+  /**
+   * 执行状态,ERROR等
+   */
+  State?: Array<string>
+  /**
+   * 结束时间大于的时间点
+   */
+  EndTimeGte?: number
+  /**
+   * 结束时间小于时间点
+   */
+  EndTimeLte?: number
 }
 
 /**
@@ -691,17 +739,17 @@ export interface TerminateTasksResponse {
 }
 
 /**
- * TerminateTasks请求参数结构体
+ * CreateGroupsSTD返回参数结构体
  */
-export interface TerminateTasksRequest {
+export interface CreateGroupsSTDResponse {
   /**
-   * 实例ID。
+   * 每个用户组的输出结果
    */
-  InstanceId: string
+  Data?: Array<ResultItem>
   /**
-   * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1110,6 +1158,40 @@ export interface RenewPriceDetail {
    * 折扣价
    */
   DiscountCost?: number
+}
+
+/**
+ * ModifyUsersOfGroupSTD请求参数结构体
+ */
+export interface ModifyUsersOfGroupSTDRequest {
+  /**
+   * 集群名称
+   */
+  InstanceId: string
+  /**
+   * 用户组名
+   */
+  Group: string
+  /**
+   * 用户列表
+   */
+  Users?: Array<string>
+  /**
+   * 用户组描述
+   */
+  Description?: string
+  /**
+   * 枚举类, ADD, DELETE, SYNC
+
+
+枚举类说明:
+- ADD: 新增的批量用户, 多次新增相同的用户不会报错
+- DELETE: 从用户组里删除的批量用户, 删除不存在的用户不会报错
+- SYNC: 用于同步整个用户组, 当列表为空时代表清空整个用户组
+默认为SYNC
+
+   */
+  OperateAction?: string
 }
 
 /**
@@ -2251,6 +2333,20 @@ export interface DescribeInstancesResponse {
 }
 
 /**
+ * 节点信息
+ */
+export interface ShortNodeInfo {
+  /**
+   * 节点类型，Master/Core/Task/Router/Common
+   */
+  NodeType?: string
+  /**
+   * 节点数量
+   */
+  NodeSize?: number
+}
+
+/**
  * ModifyYarnDeploy返回参数结构体
  */
 export interface ModifyYarnDeployResponse {
@@ -3035,41 +3131,17 @@ export interface DiffHeader {
 }
 
 /**
- * DescribeHiveQueries请求参数结构体
+ * CreateGroupsSTD请求参数结构体
  */
-export interface DescribeHiveQueriesRequest {
+export interface CreateGroupsSTDRequest {
   /**
-   * 集群ID
+   * 集群名称
    */
   InstanceId: string
   /**
-   * 起始时间秒
+   * 批量用户组信息
    */
-  StartTime: number
-  /**
-   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
-   */
-  EndTime: number
-  /**
-   * 分页起始偏移，从0开始
-   */
-  Offset: number
-  /**
-   * 分页大小，合法范围[1,100]
-   */
-  Limit: number
-  /**
-   * 执行状态,ERROR等
-   */
-  State?: Array<string>
-  /**
-   * 结束时间大于的时间点
-   */
-  EndTimeGte?: number
-  /**
-   * 结束时间小于时间点
-   */
-  EndTimeLte?: number
+  Groups: Array<GroupInfo>
 }
 
 /**
@@ -3131,18 +3203,17 @@ export interface JobResult {
 }
 
 /**
- * Serverless HBase 预付费设置
+ * 描述集群实例位置信息
  */
-export interface PrePaySetting {
+export interface Placement {
   /**
-   * 时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
    */
-  Period: Period
+  Zone: string
   /**
-   * 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费
+   * 实例所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
    */
-  AutoRenewFlag: number
+  ProjectId?: number
 }
 
 /**
@@ -3431,6 +3502,20 @@ export interface InquiryPriceCreateInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 子网信息
+ */
+export interface SubnetInfo {
+  /**
+   * 子网信息（名字）
+   */
+  SubnetName?: string
+  /**
+   * 子网信息（ID）
+   */
+  SubnetId?: string
 }
 
 /**
@@ -4033,17 +4118,21 @@ export interface AllNodeResourceSpec {
 }
 
 /**
- * 描述集群实例位置信息
+ * 用户组信息
  */
-export interface Placement {
+export interface GroupInfo {
   /**
-   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+   * 组名
    */
-  Zone: string
+  GroupName?: string
   /**
-   * 实例所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+   * 备注
    */
-  ProjectId?: number
+  Description?: string
+  /**
+   * 用户列表
+   */
+  Users?: Array<string>
 }
 
 /**
@@ -4408,6 +4497,20 @@ export interface ModifyResourceRequest {
    * 节点ID列表
    */
   ResourceIdList?: Array<string>
+}
+
+/**
+ * TerminateTasks请求参数结构体
+ */
+export interface TerminateTasksRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。
+   */
+  ResourceIds: Array<string>
 }
 
 /**
@@ -4924,6 +5027,26 @@ export interface SetNodeResourceConfigDefaultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Pod的存储设备描述信息。
+ */
+export interface PodVolume {
+  /**
+   * 存储类型，可为"pvc"，"hostpath"。
+   */
+  VolumeType: string
+  /**
+   * 当VolumeType为"pvc"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PVCVolume?: PersistentVolumeContext
+  /**
+   * 当VolumeType为"hostpath"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostVolume?: HostVolumeContext
 }
 
 /**
@@ -5477,33 +5600,21 @@ export interface CustomServiceDefine {
 }
 
 /**
- * 用户管理中用户的简要信息
+ * 用户组的输出结果
  */
-export interface UserManagerUserBriefInfo {
+export interface ResultItem {
   /**
-   * 用户名
+   * 此处为用户组名
    */
-  UserName?: string
+  Item?: string
   /**
-   * 用户所属的组
+   * 创建用户组是否成功
    */
-  UserGroup?: string
+  Result?: boolean
   /**
-   * Manager表示管理员、NormalUser表示普通用户
+   * 若是创建失败, 提供失败原因
    */
-  UserType?: string
-  /**
-   * 用户创建时间
-   */
-  CreateTime?: string
-  /**
-   * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
-   */
-  SupportDownLoadKeyTab?: boolean
-  /**
-   * keytab文件的下载地址
-   */
-  DownLoadKeyTabUrl?: string
+  Reason?: string
 }
 
 /**
@@ -5872,17 +5983,17 @@ export interface AddMetricScaleStrategyResponse {
 }
 
 /**
- * 子网信息
+ * DeleteGroupsSTD返回参数结构体
  */
-export interface SubnetInfo {
+export interface DeleteGroupsSTDResponse {
   /**
-   * 子网信息（名字）
+   * 删除返回结果
    */
-  SubnetName?: string
+  Data?: Array<ResultItem>
   /**
-   * 子网信息（ID）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SubnetId?: string
+  RequestId?: string
 }
 
 /**
@@ -6272,6 +6383,98 @@ Hadoop-Hbase
 }
 
 /**
+ * ScaleOutCluster请求参数结构体
+ */
+export interface ScaleOutClusterRequest {
+  /**
+   * 节点计费模式。取值范围：
+<li>PREPAID：预付费，即包年包月。</li>
+<li>POSTPAID_BY_HOUR：按小时后付费。</li>
+<li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
+   */
+  InstanceChargeType: string
+  /**
+   * 集群实例ID。
+   */
+  InstanceId: string
+  /**
+   * 扩容节点类型以及数量
+   */
+  ScaleOutNodeConfig: ScaleOutNodeConfig
+  /**
+   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
+   */
+  ClientToken?: string
+  /**
+   * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+   */
+  ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
+  /**
+   * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+   */
+  SoftDeployInfo?: Array<number | bigint>
+  /**
+   * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+   */
+  ServiceNodeInfo?: Array<number | bigint>
+  /**
+   * 分散置放群组ID列表，当前只支持指定一个。
+该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+   */
+  DisasterRecoverGroupIds?: Array<string>
+  /**
+   * 扩容节点绑定标签列表。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型
+   */
+  HardwareSourceType?: string
+  /**
+   * Pod相关资源信息
+   */
+  PodSpecInfo?: PodSpecInfo
+  /**
+   * 使用clickhouse集群扩容时，选择的机器分组名称
+   */
+  ClickHouseClusterName?: string
+  /**
+   * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+   */
+  ClickHouseClusterType?: string
+  /**
+   * 扩容指定 Yarn Node Label
+   */
+  YarnNodeLabel?: string
+  /**
+   * 扩容后是否启动服务，默认取值否
+<li>true：是</li>
+<li>false：否</li>
+   */
+  EnableStartServiceFlag?: boolean
+  /**
+   * 规格设置
+   */
+  ResourceSpec?: NodeResourceSpec
+  /**
+   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+   */
+  Zone?: string
+  /**
+   * 子网，默认是集群创建时的子网
+   */
+  SubnetId?: string
+  /**
+   * 扩容指定配置组
+   */
+  ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>
+}
+
+/**
  * 动态生成的变更详情条目
  */
 export interface DiffDetailItem {
@@ -6416,6 +6619,28 @@ export interface DescribeEmrOverviewMetricsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyUserGroup请求参数结构体
+ */
+export interface ModifyUserGroupRequest {
+  /**
+   * 用户信息列表
+   */
+  Users: Array<string>
+  /**
+   * 用户主组，cvm集群为必填参数，tke集群选填
+   */
+  UserGroup?: string
+  /**
+   * 用户副组
+   */
+  Groups?: Array<string>
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -7083,17 +7308,13 @@ export interface ModifyResourcePoolsResponse {
 }
 
 /**
- * 节点信息
+ * ModifyUserGroup返回参数结构体
  */
-export interface ShortNodeInfo {
+export interface ModifyUserGroupResponse {
   /**
-   * 节点类型，Master/Core/Task/Router/Common
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NodeType?: string
-  /**
-   * 节点数量
-   */
-  NodeSize?: number
+  RequestId?: string
 }
 
 /**
@@ -7767,95 +7988,17 @@ export interface ApplicationStatics {
 }
 
 /**
- * ScaleOutCluster请求参数结构体
+ * DeleteGroupsSTD请求参数结构体
  */
-export interface ScaleOutClusterRequest {
+export interface DeleteGroupsSTDRequest {
   /**
-   * 节点计费模式。取值范围：
-<li>PREPAID：预付费，即包年包月。</li>
-<li>POSTPAID_BY_HOUR：按小时后付费。</li>
-<li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
-   */
-  InstanceChargeType: string
-  /**
-   * 集群实例ID。
+   * 集群名称
    */
   InstanceId: string
   /**
-   * 扩容节点类型以及数量
+   * 用户组名称数组
    */
-  ScaleOutNodeConfig: ScaleOutNodeConfig
-  /**
-   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
-   */
-  ClientToken?: string
-  /**
-   * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-   */
-  InstanceChargePrepaid?: InstanceChargePrepaid
-  /**
-   * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
-   */
-  ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
-  /**
-   * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
-   */
-  SoftDeployInfo?: Array<number | bigint>
-  /**
-   * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
-   */
-  ServiceNodeInfo?: Array<number | bigint>
-  /**
-   * 分散置放群组ID列表，当前只支持指定一个。
-该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
-   */
-  DisasterRecoverGroupIds?: Array<string>
-  /**
-   * 扩容节点绑定标签列表。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型
-   */
-  HardwareSourceType?: string
-  /**
-   * Pod相关资源信息
-   */
-  PodSpecInfo?: PodSpecInfo
-  /**
-   * 使用clickhouse集群扩容时，选择的机器分组名称
-   */
-  ClickHouseClusterName?: string
-  /**
-   * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
-   */
-  ClickHouseClusterType?: string
-  /**
-   * 扩容指定 Yarn Node Label
-   */
-  YarnNodeLabel?: string
-  /**
-   * 扩容后是否启动服务，默认取值否
-<li>true：是</li>
-<li>false：否</li>
-   */
-  EnableStartServiceFlag?: boolean
-  /**
-   * 规格设置
-   */
-  ResourceSpec?: NodeResourceSpec
-  /**
-   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
-   */
-  Zone?: string
-  /**
-   * 子网，默认是集群创建时的子网
-   */
-  SubnetId?: string
-  /**
-   * 扩容指定配置组
-   */
-  ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>
+  GroupNames: Array<string>
 }
 
 /**
@@ -8245,6 +8388,21 @@ export interface ScriptBootstrapActionConfig {
    * 备注
    */
   Remark?: string
+}
+
+/**
+ * Serverless HBase 预付费设置
+ */
+export interface PrePaySetting {
+  /**
+   * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Period: Period
+  /**
+   * 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费
+   */
+  AutoRenewFlag: number
 }
 
 /**
@@ -8648,6 +8806,20 @@ export interface ClusterExternalServiceInfo {
    * 共用集群状态
    */
   ClusterStatus?: number
+}
+
+/**
+ * ModifyUsersOfGroupSTD返回参数结构体
+ */
+export interface ModifyUsersOfGroupSTDResponse {
+  /**
+   * 是否修改成功
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -11456,19 +11456,19 @@ export interface DescribeMonitorResourceInfoResponse {
   /**
    * 电话告警数量
    */
-  PhoneAlarmNumber: number
+  PhoneAlarmNumber?: number
   /**
    * 高级指标数量
    */
-  AdvancedMetricNumber: number
+  AdvancedMetricNumber?: number
   /**
    * API调用量
    */
-  APIUsageNumber: number
+  APIUsageNumber?: number
   /**
    * 告警短信数量
    */
-  AlarmSMSNumber: number
+  AlarmSMSNumber?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

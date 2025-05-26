@@ -28,18 +28,19 @@ import {
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
   NodeSelector,
+  UserManagerUserBriefInfo,
   DescribeClusterFlowStatusDetailResponse,
   RunJobFlowResponse,
   DynamicPodSpec,
   DescribeHDFSStorageInfoResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
-  PodVolume,
+  DescribeHiveQueriesRequest,
   ModifyPodNumResponse,
   CreateInstanceResponse,
   PersistentVolumeContext,
   TerminateTasksResponse,
-  TerminateTasksRequest,
+  CreateGroupsSTDResponse,
   HostVolumeContext,
   DescribeServiceNodeInfosRequest,
   DiskSpecInfo,
@@ -51,6 +52,7 @@ import {
   DescribeServiceNodeInfosResponse,
   EmrProductConfigDetail,
   RenewPriceDetail,
+  ModifyUsersOfGroupSTDRequest,
   ResetYarnConfigRequest,
   DayRepeatStrategy,
   DescribeTrinoQueryInfoResponse,
@@ -80,6 +82,7 @@ import {
   FlowParamsDesc,
   AttachDisksRequest,
   DescribeInstancesResponse,
+  ShortNodeInfo,
   ModifyYarnDeployResponse,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
@@ -108,11 +111,11 @@ import {
   HostPathVolumeSource,
   VPCSettings,
   DiffHeader,
-  DescribeHiveQueriesRequest,
+  CreateGroupsSTDRequest,
   DescribeInstanceRenewNodesRequest,
   DescribeSparkQueriesResponse,
   JobResult,
-  PrePaySetting,
+  Placement,
   FlowParam,
   NodeAffinity,
   DescribeAutoScaleStrategiesResponse,
@@ -125,6 +128,7 @@ import {
   DescribeJobFlowRequest,
   CloudResource,
   InquiryPriceCreateInstanceResponse,
+  SubnetInfo,
   StartStopServiceOrMonitorRequest,
   StarRocksQueryInfo,
   DescribeHDFSStorageInfoRequest,
@@ -142,7 +146,7 @@ import {
   SyncPodStateResponse,
   TerminateInstanceRequest,
   AllNodeResourceSpec,
-  Placement,
+  GroupInfo,
   DescribeGlobalConfigResponse,
   ModifyYarnDeployRequest,
   DeleteNodeResourceConfigResponse,
@@ -159,6 +163,7 @@ import {
   DescribeYarnQueueRequest,
   ConfigSetInfo,
   ModifyResourceRequest,
+  TerminateTasksRequest,
   GroupGlobalConfs,
   ServiceNodeDetailInfo,
   ScaleOutServiceConfGroupsInfo,
@@ -177,6 +182,7 @@ import {
   ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
   SetNodeResourceConfigDefaultResponse,
+  PodVolume,
   PriceDetail,
   DescribeResourceScheduleResponse,
   UserManagerFilter,
@@ -198,7 +204,7 @@ import {
   ModifySLInstanceRequest,
   DescribeInsightListResponse,
   CustomServiceDefine,
-  UserManagerUserBriefInfo,
+  ResultItem,
   StageInfoDetail,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
@@ -208,7 +214,7 @@ import {
   CreateClusterRequest,
   CreateCloudInstanceRequest,
   AddMetricScaleStrategyResponse,
-  SubnetInfo,
+  DeleteGroupsSTDResponse,
   BootstrapAction,
   NodeResource,
   DescribeClusterNodesRequest,
@@ -218,12 +224,14 @@ import {
   DescribeImpalaQueriesRequest,
   ComponentBasicRestartInfo,
   CreateInstanceRequest,
+  ScaleOutClusterRequest,
   DiffDetailItem,
   MetaDbInfo,
   Execution,
   DescribeSLInstanceListResponse,
   UpdateInstanceSettings,
   DescribeEmrOverviewMetricsResponse,
+  ModifyUserGroupRequest,
   ClusterRelationMeta,
   CapacityGlobalConfig,
   DescribeInstancesRequest,
@@ -252,7 +260,7 @@ import {
   DescribeInstancesListResponse,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
-  ShortNodeInfo,
+  ModifyUserGroupResponse,
   Period,
   DescribeEmrApplicationStaticsRequest,
   ModifyInstanceBasicRequest,
@@ -272,7 +280,7 @@ import {
   DescribeSLInstanceRequest,
   CustomMetaInfo,
   ApplicationStatics,
-  ScaleOutClusterRequest,
+  DeleteGroupsSTDRequest,
   InquiryPriceCreateInstanceRequest,
   TriggerCondition,
   DescribeSLInstanceResponse,
@@ -284,6 +292,7 @@ import {
   ModifyResourceScheduleConfigRequest,
   StrategyConfig,
   ScriptBootstrapActionConfig,
+  PrePaySetting,
   PodNewParameter,
   DescribeEmrOverviewMetricsRequest,
   PodState,
@@ -294,6 +303,7 @@ import {
   RestartPolicy,
   InquiryPriceUpdateInstanceResponse,
   ClusterExternalServiceInfo,
+  ModifyUsersOfGroupSTDResponse,
   SoftDependInfo,
   ModifyAutoScaleStrategyResponse,
   InquiryPriceScaleOutInstanceRequest,
@@ -346,6 +356,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("emr.tencentcloudapi.com", "2019-01-03", clientConfig)
+  }
+
+  /**
+   * 用户管理-修改用户组
+   */
+  async ModifyUserGroup(
+    req: ModifyUserGroupRequest,
+    cb?: (error: string, rep: ModifyUserGroupResponse) => void
+  ): Promise<ModifyUserGroupResponse> {
+    return this.request("ModifyUserGroup", req, cb)
   }
 
   /**
@@ -690,6 +710,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用户管理-批量创建用户组
+   */
+  async CreateGroupsSTD(
+    req: CreateGroupsSTDRequest,
+    cb?: (error: string, rep: CreateGroupsSTDResponse) => void
+  ): Promise<CreateGroupsSTDResponse> {
+    return this.request("CreateGroupsSTD", req, cb)
+  }
+
+  /**
    * 本接口（TerminateSLInstance）用于销毁Serverless HBase实例
    */
   async TerminateSLInstance(
@@ -894,13 +924,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询YARN资源调度的全局配置
+   * 添加扩缩容规则，按负载和时间
    */
-  async DescribeGlobalConfig(
-    req: DescribeGlobalConfigRequest,
-    cb?: (error: string, rep: DescribeGlobalConfigResponse) => void
-  ): Promise<DescribeGlobalConfigResponse> {
-    return this.request("DescribeGlobalConfig", req, cb)
+  async AddMetricScaleStrategy(
+    req: AddMetricScaleStrategyRequest,
+    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
+  ): Promise<AddMetricScaleStrategyResponse> {
+    return this.request("AddMetricScaleStrategy", req, cb)
   }
 
   /**
@@ -1016,13 +1046,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加扩缩容规则，按负载和时间
+   * 查询YARN资源调度的全局配置
    */
-  async AddMetricScaleStrategy(
-    req: AddMetricScaleStrategyRequest,
-    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
-  ): Promise<AddMetricScaleStrategyResponse> {
-    return this.request("AddMetricScaleStrategy", req, cb)
+  async DescribeGlobalConfig(
+    req: DescribeGlobalConfigRequest,
+    cb?: (error: string, rep: DescribeGlobalConfigResponse) => void
+  ): Promise<DescribeGlobalConfigResponse> {
+    return this.request("DescribeGlobalConfig", req, cb)
   }
 
   /**
@@ -1046,13 +1076,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Trino(PrestoSQL)查询信息
+   * 批量删除用户组
    */
-  async DescribeTrinoQueryInfo(
-    req: DescribeTrinoQueryInfoRequest,
-    cb?: (error: string, rep: DescribeTrinoQueryInfoResponse) => void
-  ): Promise<DescribeTrinoQueryInfoResponse> {
-    return this.request("DescribeTrinoQueryInfo", req, cb)
+  async DeleteGroupsSTD(
+    req: DeleteGroupsSTDRequest,
+    cb?: (error: string, rep: DeleteGroupsSTDResponse) => void
+  ): Promise<DeleteGroupsSTDResponse> {
+    return this.request("DeleteGroupsSTD", req, cb)
   }
 
   /**
@@ -1063,6 +1093,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesListResponse) => void
   ): Promise<DescribeInstancesListResponse> {
     return this.request("DescribeInstancesList", req, cb)
+  }
+
+  /**
+   * 查询Trino(PrestoSQL)查询信息
+   */
+  async DescribeTrinoQueryInfo(
+    req: DescribeTrinoQueryInfoRequest,
+    cb?: (error: string, rep: DescribeTrinoQueryInfoResponse) => void
+  ): Promise<DescribeTrinoQueryInfoResponse> {
+    return this.request("DescribeTrinoQueryInfo", req, cb)
   }
 
   /**
@@ -1103,6 +1143,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceBasicResponse) => void
   ): Promise<ModifyInstanceBasicResponse> {
     return this.request("ModifyInstanceBasic", req, cb)
+  }
+
+  /**
+   * 变更用户组用户信息
+   */
+  async ModifyUsersOfGroupSTD(
+    req: ModifyUsersOfGroupSTDRequest,
+    cb?: (error: string, rep: ModifyUsersOfGroupSTDResponse) => void
+  ): Promise<ModifyUsersOfGroupSTDResponse> {
+    return this.request("ModifyUsersOfGroupSTD", req, cb)
   }
 
   /**

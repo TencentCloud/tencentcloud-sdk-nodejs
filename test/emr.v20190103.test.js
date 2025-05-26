@@ -18,6 +18,16 @@ const client = new tencentcloud.emr.v20190103.Client({
 })
 describe("emr.v20190103.test.js", function () {
 
+it("emr.v20190103.ModifyUserGroup", async function () {
+    try {
+       const data = await client.ModifyUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
     try {
        const data = await client.DescribeInstanceRenewNodes({})
@@ -358,6 +368,16 @@ it("emr.v20190103.ModifySLInstanceBasic", async function () {
     }
 })
 
+it("emr.v20190103.CreateGroupsSTD", async function () {
+    try {
+       const data = await client.CreateGroupsSTD({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.TerminateSLInstance", async function () {
     try {
        const data = await client.TerminateSLInstance({})
@@ -558,9 +578,9 @@ it("emr.v20190103.InquiryPriceCreateInstance", async function () {
     }
 })
 
-it("emr.v20190103.DescribeGlobalConfig", async function () {
+it("emr.v20190103.AddMetricScaleStrategy", async function () {
     try {
-       const data = await client.DescribeGlobalConfig({})
+       const data = await client.AddMetricScaleStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +698,9 @@ it("emr.v20190103.DescribeAutoScaleStrategies", async function () {
     }
 })
 
-it("emr.v20190103.AddMetricScaleStrategy", async function () {
+it("emr.v20190103.DescribeGlobalConfig", async function () {
     try {
-       const data = await client.AddMetricScaleStrategy({})
+       const data = await client.DescribeGlobalConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,9 +728,9 @@ it("emr.v20190103.DescribeClusterNodes", async function () {
     }
 })
 
-it("emr.v20190103.DescribeTrinoQueryInfo", async function () {
+it("emr.v20190103.DeleteGroupsSTD", async function () {
     try {
-       const data = await client.DescribeTrinoQueryInfo({})
+       const data = await client.DeleteGroupsSTD({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -721,6 +741,16 @@ it("emr.v20190103.DescribeTrinoQueryInfo", async function () {
 it("emr.v20190103.DescribeInstancesList", async function () {
     try {
        const data = await client.DescribeInstancesList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeTrinoQueryInfo", async function () {
+    try {
+       const data = await client.DescribeTrinoQueryInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,6 +791,16 @@ it("emr.v20190103.DeleteNodeResourceConfig", async function () {
 it("emr.v20190103.ModifyInstanceBasic", async function () {
     try {
        const data = await client.ModifyInstanceBasic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyUsersOfGroupSTD", async function () {
+    try {
+       const data = await client.ModifyUsersOfGroupSTD({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

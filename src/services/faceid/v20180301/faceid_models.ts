@@ -575,6 +575,7 @@ export interface DetectAuthRequest {
   RedirectUrl?: string
   /**
    * 透传字段，在获取验证结果时返回。
+- 最长长度1024位。
    */
   Extra?: string
   /**
@@ -936,17 +937,19 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
  */
 export interface DetectAIFakeFacesRequest {
   /**
-   * 传入需要进行检测的带有人脸的图片或视频，使用base64编码的形式。
+   * 传入需要进行检测的带有人脸的图片或视频（当前仅支持单人脸检测），使用base64编码的形式。
 - 图片的Base64值：
 建议整体图像480x640的分辨率，脸部 大小 100X100 以上。
-Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+Base64编码后的图片数据大小建议不超过3M、最大不可超过10M，仅支持jpg、png格式。
 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
 
 - 视频的Base64值：
-Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
+Base64编码后的大小建议不超过8M、最大不可超过10M，支持mp4、avi、flv格式。
 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
 视频时长最大支持20s，建议时长2～5s。
 建议视频分辨率为480x640，帧率在25fps~30fps之间。
+
+示例值：/9j/4AAQSkZJRg.....s97n//2Q==
    */
   FaceInput?: string
   /**
@@ -1193,11 +1196,6 @@ export interface GetFaceIdResultResponse {
   /**
    * plus版：描述当前请求所在设备的风险标签。
 - 详情如下：
-01-设备疑似被Root/设备疑似越狱。
-02-设备疑似被注入。
-03-设备疑似为模拟器。
-04-设备疑似存在风险操作。
-05-摄像头疑似被劫持。
 06-疑似黑产设备。
 null-无设备风险。
 - 增强版：此字段不生效，默认为null。
@@ -1245,6 +1243,16 @@ null - 未获取到风险等级。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceInfoLevel?: string
+  /**
+   * 敏感数据加密信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Encryption?: Encryption
+  /**
+   * 加密后的数据。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptedBody?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1588,9 +1596,7 @@ export interface CheckIdCardInformationResponse {
    */
   Sim?: number
   /**
-   * 业务错误码。
-- 成功情况返回Success,。
-- 错误情况请参考下方错误码 列表中FailedOperation部分
+   * 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分
    */
   Result?: string
   /**
@@ -2139,11 +2145,11 @@ export interface MinorsVerificationResponse {
 -7: 未查询到身份信息
 -8: 权威数据源升级中，请稍后再试
    */
-  Result: string
+  Result?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 该字段的值为年龄区间。格式为[a,b)，
 [0,8)表示年龄小于8周岁区间，不包括8岁；
@@ -2151,7 +2157,7 @@ export interface MinorsVerificationResponse {
 [16,18)表示年龄16-18周岁区间，不包括18岁；
 [18,+)表示年龄大于18周岁。
    */
-  AgeRange: string
+  AgeRange?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2443,6 +2449,7 @@ export interface DetectInfoText {
     2：动作活体
     3：静默活体
     4：一闪活体（动作+光线）
+    5：远近活体
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessMode?: number
@@ -2875,6 +2882,15 @@ export interface GetFaceIdResultRequest {
 - 默认false：不需要。
    */
   IsNeedBestFrame?: boolean
+  /**
+   * 是否对回包整体进行加密。
+   */
+  IsEncryptResponse?: boolean
+  /**
+   * 是否需要对返回中的敏感信息进行加密。  
+只需指定加密算法Algorithm即可，其余字段传入默认值。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -2952,7 +2968,7 @@ BUSINESS：商业库。
    */
   UseCos?: boolean
   /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * 敏感数据加密信息。对传入信息（姓名、身份证号、自传照片）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
   /**
