@@ -302,6 +302,24 @@ export interface ListSendTasksRequest {
 }
 
 /**
+ * ListAddressUnsubscribeConfig返回参数结构体
+ */
+export interface ListAddressUnsubscribeConfigResponse {
+  /**
+   * 地址级退订配置
+   */
+  AddressUnsubscribeConfigList?: Array<AddressUnsubscribeConfigData>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetSendEmailStatus返回参数结构体
  */
 export interface GetSendEmailStatusResponse {
@@ -428,43 +446,17 @@ export interface DeleteEmailIdentityRequest {
 }
 
 /**
- * 统计数据的结构体
+ * ListAddressUnsubscribeConfig请求参数结构体
  */
-export interface Volume {
+export interface ListAddressUnsubscribeConfigRequest {
   /**
-   * 日期
-注意：此字段可能返回 null，表示取不到有效值。
+   * 偏移量
    */
-  SendDate?: string
+  Offset?: number
   /**
-   * 邮件请求数量
+   * 拉取最大条数，不超过100
    */
-  RequestCount?: number
-  /**
-   * 腾讯云通过数量
-   */
-  AcceptedCount?: number
-  /**
-   * 送达数量
-   */
-  DeliveredCount?: number
-  /**
-   * 打开邮件的用户数量，根据收件人去重
-   */
-  OpenedCount?: number
-  /**
-   * 点击了邮件中的链接数量用户数量
-   */
-  ClickedCount?: number
-  /**
-   * 退信数量
-   */
-  BounceCount?: number
-  /**
-   * 取消订阅的用户数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnsubscribeCount?: number
+  Limit?: string
 }
 
 /**
@@ -689,6 +681,24 @@ export interface UpdateCustomBlackListRequest {
    * 过期时间，为空则表示永久有效
    */
   ExpireDate?: string
+}
+
+/**
+ * 地址级退订配置
+ */
+export interface AddressUnsubscribeConfigData {
+  /**
+   * 发信地址
+   */
+  Address?: string
+  /**
+   * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
+   */
+  UnsubscribeConfig?: string
+  /**
+   * 0:关闭，1:开启
+   */
+  Status?: number
 }
 
 /**
@@ -1201,6 +1211,46 @@ export interface Simple {
    * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
    */
   Text?: string
+}
+
+/**
+ * 统计数据的结构体
+ */
+export interface Volume {
+  /**
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendDate?: string
+  /**
+   * 邮件请求数量
+   */
+  RequestCount?: number
+  /**
+   * 腾讯云通过数量
+   */
+  AcceptedCount?: number
+  /**
+   * 送达数量
+   */
+  DeliveredCount?: number
+  /**
+   * 打开邮件的用户数量，根据收件人去重
+   */
+  OpenedCount?: number
+  /**
+   * 点击了邮件中的链接数量用户数量
+   */
+  ClickedCount?: number
+  /**
+   * 退信数量
+   */
+  BounceCount?: number
+  /**
+   * 取消订阅的用户数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnsubscribeCount?: number
 }
 
 /**

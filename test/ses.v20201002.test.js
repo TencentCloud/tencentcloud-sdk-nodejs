@@ -118,6 +118,16 @@ it("ses.v20201002.ListBlackEmailAddress", async function () {
     }
 })
 
+it("ses.v20201002.ListAddressUnsubscribeConfig", async function () {
+    try {
+       const data = await client.ListAddressUnsubscribeConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.UpdateEmailTemplate", async function () {
     try {
        const data = await client.UpdateEmailTemplate({})

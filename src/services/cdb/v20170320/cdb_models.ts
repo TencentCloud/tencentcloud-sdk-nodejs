@@ -563,6 +563,24 @@ export interface ModifyDBInstanceProjectResponse {
 }
 
 /**
+ * DescribeCpuExpandHistory返回参数结构体
+ */
+export interface DescribeCpuExpandHistoryResponse {
+  /**
+   * 满足查询要求的扩容历史
+   */
+  Items?: Array<HistoryJob>
+  /**
+   * 总数出参
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataBackupOverview返回参数结构体
  */
 export interface DescribeDataBackupOverviewResponse {
@@ -800,6 +818,20 @@ export interface RemoteBackupInfo {
    * 下载地址
    */
   Url?: string
+}
+
+/**
+ * 按周期扩容策略中的所选择的周期
+ */
+export interface PeriodStrategy {
+  /**
+   * 扩容周期
+   */
+  TimeCycle?: TImeCycle
+  /**
+   * 时间间隔
+   */
+  TimeInterval?: TimeInterval
 }
 
 /**
@@ -1332,6 +1364,16 @@ export interface CreateCdbProxyAddressRequest {
 }
 
 /**
+ * DeleteRotationPassword返回参数结构体
+ */
+export interface DeleteRotationPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AnalyzeAuditLogs请求参数结构体
  */
 export interface AnalyzeAuditLogsRequest {
@@ -1383,21 +1425,21 @@ export interface DescribeInstanceParamsRequest {
 }
 
 /**
- * DescribeUploadedFiles请求参数结构体
+ * DescribeRoMinScale返回参数结构体
  */
-export interface DescribeUploadedFilesRequest {
+export interface DescribeRoMinScaleResponse {
   /**
-   * 文件路径。该字段应填用户主账号的OwnerUin信息。
+   * 内存规格大小, 单位为：MB。
    */
-  Path: string
+  Memory: number
   /**
-   * 记录偏移量，默认值为0。
+   * 磁盘规格大小, 单位为：GB。
    */
-  Offset?: number
+  Volume: number
   /**
-   * 单次请求返回的数量，默认值为20。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -2497,6 +2539,20 @@ export interface DescribeBinlogsRequest {
    * 返回binlog列表是否包含MinStartTime起始节点，默认为否
    */
   ContainsMinStartTime?: boolean
+}
+
+/**
+ * 按时间段扩容策略
+ */
+export interface TimeIntervalStrategy {
+  /**
+   * 开始扩容时间
+   */
+  StartTime?: number
+  /**
+   * 结束扩容时间
+   */
+  EndTime?: number
 }
 
 /**
@@ -4367,6 +4423,44 @@ export interface DescribeDBInstanceLogToCLSRequest {
 }
 
 /**
+ * 分析引擎节点信息
+ */
+export interface AnalysisNodeInfo {
+  /**
+   * 节点ID
+   */
+  NodeId?: string
+  /**
+   * 节点状态
+   */
+  Status?: string
+  /**
+   * 数据加载状态
+   */
+  DataStatus?: string
+  /**
+   * cpu核数，单位：核
+   */
+  Cpu?: number
+  /**
+   * 内存大小，单位: MB
+   */
+  Memory?: number
+  /**
+   * 磁盘大小，单位：GB
+   */
+  Storage?: number
+  /**
+   * 节点所在可用区
+   */
+  Zone?: string
+  /**
+   * 数据同步错误信息
+   */
+  Message?: string
+}
+
+/**
  * StartBatchRollback请求参数结构体
  */
 export interface StartBatchRollbackRequest {
@@ -4562,13 +4656,41 @@ export interface DeleteAccountsRequest {
 }
 
 /**
- * DeleteRotationPassword返回参数结构体
+ * 单条扩容历史记录
  */
-export interface DeleteRotationPasswordResponse {
+export interface HistoryJob {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 操作类型
    */
-  RequestId?: string
+  OperationType?: string
+  /**
+   * 扩容类型
+   */
+  ExpandType?: string
+  /**
+   * 扩容开始时间
+   */
+  StartTime?: number
+  /**
+   * 扩容结束时间
+   */
+  EndTime?: number
+  /**
+   * 扩容前核数
+   */
+  OldCpu?: number
+  /**
+   * 扩容后核数
+   */
+  NewCpu?: number
+  /**
+   * 增减的cpu数
+   */
+  ExtendCPUNum?: number
+  /**
+   * extend_failed操作上报
+   */
+  Error?: string
 }
 
 /**
@@ -4608,17 +4730,89 @@ export interface RollbackTimeRange {
 }
 
 /**
- * ModifyProtectMode请求参数结构体
+ * 审计日志详细信息
  */
-export interface ModifyProtectModeRequest {
+export interface AuditLog {
   /**
-   * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
+   * 影响行数。
    */
-  ProtectMode: number
+  AffectRows?: number
   /**
-   * 实例ID。
+   * 错误码。
    */
-  InstanceId: string
+  ErrCode?: number
+  /**
+   * SQL 类型。
+   */
+  SqlType?: string
+  /**
+   * 审计策略名称，逐步下线。
+   */
+  PolicyName?: string
+  /**
+   * 数据库名称。
+   */
+  DBName?: string
+  /**
+   * SQL 语句。
+   */
+  Sql?: string
+  /**
+   * 客户端地址。
+   */
+  Host?: string
+  /**
+   * 用户名。
+   */
+  User?: string
+  /**
+   * 执行时间，微秒。
+   */
+  ExecTime?: number
+  /**
+   * 时间。
+   */
+  Timestamp?: string
+  /**
+   * 返回行数。
+   */
+  SentRows?: number
+  /**
+   * 线程ID。
+   */
+  ThreadId?: number
+  /**
+   * 扫描行数。
+   */
+  CheckRows?: number
+  /**
+   * cpu执行时间，微秒。
+   */
+  CpuTime?: number
+  /**
+   * IO等待时间，微秒。
+   */
+  IoWaitTime?: number
+  /**
+   * 锁等待时间，微秒。
+   */
+  LockWaitTime?: number
+  /**
+   * 开始时间，与timestamp构成一个精确到纳秒的时间。
+   */
+  NsTime?: number
+  /**
+   * 事物持续时间，微秒。
+   */
+  TrxLivingTime?: number
+  /**
+   * 日志命中规则模板的基本信息
+   */
+  TemplateInfo?: Array<LogRuleTemplateInfo>
+  /**
+   *  事务ID
+   */
+  TrxId?: number
 }
 
 /**
@@ -6507,6 +6701,40 @@ export interface DescribeRollbackTaskDetailRequest {
 }
 
 /**
+ * DescribeCpuExpandHistory请求参数结构体
+ */
+export interface DescribeCpuExpandHistoryRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 扩容策略，值包括：all，manual，auto
+   */
+  ExpandStrategy?: string
+  /**
+   * 扩容状态，值包括：all，extend，reduce，extend_failed
+   */
+  Status?: string
+  /**
+   * 查询的开始时间。只能查看30天内的扩容历史
+   */
+  StartTime?: number
+  /**
+   * 查询的结束时间。只能查看30天内的扩容历史
+   */
+  EndTime?: number
+  /**
+   * 分页入参
+   */
+  Offset?: number
+  /**
+   * 分页入参
+   */
+  Limit?: number
+}
+
+/**
  * AdjustCdbProxy返回参数结构体
  */
 export interface AdjustCdbProxyResponse {
@@ -6647,6 +6875,24 @@ RA - 范围。
    * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系
    */
   Value?: Array<string>
+}
+
+/**
+ * DescribeUploadedFiles请求参数结构体
+ */
+export interface DescribeUploadedFilesRequest {
+  /**
+   * 文件路径。该字段应填用户主账号的OwnerUin信息。
+   */
+  Path: string
+  /**
+   * 记录偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 单次请求返回的数量，默认值为20。
+   */
+  Limit?: number
 }
 
 /**
@@ -6845,6 +7091,14 @@ export interface InstanceInfo {
    * 实例集群版节点信息
    */
   ClusterInfo?: Array<ClusterInfo>
+  /**
+   * 分析引擎节点列表
+   */
+  AnalysisNodeInfos?: Array<AnalysisNodeInfo>
+  /**
+   * 设备带宽，单位G。当DeviceClass不为空时此参数才有效。例：25-表示当前设备带宽为25G；10-表示当前设备带宽为10G。
+   */
+  DeviceBandwidth?: number
 }
 
 /**
@@ -7414,6 +7668,7 @@ export interface AccountInfo {
   ModifyPasswordTime?: string
   /**
    * 该值已废弃
+   * @deprecated
    */
   CreateTime?: string
   /**
@@ -7581,6 +7836,14 @@ export interface StartCpuExpandRequest {
    * 自动扩容策略。Type 为 auto 时必传。
    */
   AutoStrategy?: AutoStrategy
+  /**
+   * 按时间段扩容策略
+   */
+  TimeIntervalStrategy?: TimeIntervalStrategy
+  /**
+   * 按周期扩容策略
+   */
+  PeriodStrategy?: PeriodStrategy
 }
 
 /**
@@ -8139,24 +8402,6 @@ export interface DescribeInstanceAlarmEventsResponse {
 }
 
 /**
- * DescribeRoMinScale返回参数结构体
- */
-export interface DescribeRoMinScaleResponse {
-  /**
-   * 内存规格大小, 单位为：MB。
-   */
-  Memory: number
-  /**
-   * 磁盘规格大小, 单位为：GB。
-   */
-  Volume: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * RO 实例的权重值
  */
 export interface RoWeightValue {
@@ -8364,6 +8609,20 @@ export interface DeleteParamTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 时间段
+ */
+export interface TimeInterval {
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
 }
 
 /**
@@ -9306,6 +9565,40 @@ export interface DescribeDBFeaturesRequest {
 }
 
 /**
+ * 扩容的周期
+ */
+export interface TImeCycle {
+  /**
+   * 周一的扩容时间段
+   */
+  Monday?: boolean
+  /**
+   * 周二的扩容时间段
+   */
+  Tuesday?: boolean
+  /**
+   * 周三的扩容时间段
+   */
+  Wednesday?: boolean
+  /**
+   * 周四的扩容时间段
+   */
+  Thursday?: boolean
+  /**
+   * 周五的扩容时间段
+   */
+  Friday?: boolean
+  /**
+   * 周六的扩容时间段
+   */
+  Saturday?: boolean
+  /**
+   * 周日的扩容时间段
+   */
+  Sunday?: boolean
+}
+
+/**
  * DescribeBackupSummaries返回参数结构体
  */
 export interface DescribeBackupSummariesResponse {
@@ -9660,89 +9953,17 @@ export interface ModifyInstanceParamResponse {
 }
 
 /**
- * 审计日志详细信息
+ * ModifyProtectMode请求参数结构体
  */
-export interface AuditLog {
+export interface ModifyProtectModeRequest {
   /**
-   * 影响行数。
+   * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
    */
-  AffectRows?: number
+  ProtectMode: number
   /**
-   * 错误码。
+   * 实例ID。
    */
-  ErrCode?: number
-  /**
-   * SQL 类型。
-   */
-  SqlType?: string
-  /**
-   * 审计策略名称，逐步下线。
-   */
-  PolicyName?: string
-  /**
-   * 数据库名称。
-   */
-  DBName?: string
-  /**
-   * SQL 语句。
-   */
-  Sql?: string
-  /**
-   * 客户端地址。
-   */
-  Host?: string
-  /**
-   * 用户名。
-   */
-  User?: string
-  /**
-   * 执行时间，微秒。
-   */
-  ExecTime?: number
-  /**
-   * 时间。
-   */
-  Timestamp?: string
-  /**
-   * 返回行数。
-   */
-  SentRows?: number
-  /**
-   * 线程ID。
-   */
-  ThreadId?: number
-  /**
-   * 扫描行数。
-   */
-  CheckRows?: number
-  /**
-   * cpu执行时间，微秒。
-   */
-  CpuTime?: number
-  /**
-   * IO等待时间，微秒。
-   */
-  IoWaitTime?: number
-  /**
-   * 锁等待时间，微秒。
-   */
-  LockWaitTime?: number
-  /**
-   * 开始时间，与timestamp构成一个精确到纳秒的时间。
-   */
-  NsTime?: number
-  /**
-   * 事物持续时间，微秒。
-   */
-  TrxLivingTime?: number
-  /**
-   * 日志命中规则模板的基本信息
-   */
-  TemplateInfo?: Array<LogRuleTemplateInfo>
-  /**
-   *  事务ID
-   */
-  TrxId?: number
+  InstanceId: string
 }
 
 /**

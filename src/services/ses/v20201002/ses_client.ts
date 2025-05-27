@@ -33,6 +33,7 @@ import {
   Attachment,
   Template,
   ListSendTasksRequest,
+  ListAddressUnsubscribeConfigResponse,
   GetSendEmailStatusResponse,
   TemplatesMetadata,
   ReceiverDetail,
@@ -40,7 +41,7 @@ import {
   EmailSender,
   BatchSendEmailResponse,
   DeleteEmailIdentityRequest,
-  Volume,
+  ListAddressUnsubscribeConfigRequest,
   UpdateEmailIdentityRequest,
   GetEmailIdentityRequest,
   DeleteEmailIdentityResponse,
@@ -51,6 +52,7 @@ import {
   ListReceiverDetailsResponse,
   DeleteEmailTemplateResponse,
   UpdateCustomBlackListRequest,
+  AddressUnsubscribeConfigData,
   CreateEmailIdentityRequest,
   ListCustomBlacklistRequest,
   UpdateEmailSmtpPassWordRequest,
@@ -73,6 +75,7 @@ import {
   ListBlackEmailAddressResponse,
   GetSendEmailStatusRequest,
   Simple,
+  Volume,
   DeleteReceiverRequest,
   ListEmailIdentitiesResponse,
   DeleteEmailTemplateRequest,
@@ -207,6 +210,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
   ): Promise<ListBlackEmailAddressResponse> {
     return this.request("ListBlackEmailAddress", req, cb)
+  }
+
+  /**
+   * 获取地址级退订配置列表
+   */
+  async ListAddressUnsubscribeConfig(
+    req: ListAddressUnsubscribeConfigRequest,
+    cb?: (error: string, rep: ListAddressUnsubscribeConfigResponse) => void
+  ): Promise<ListAddressUnsubscribeConfigResponse> {
+    return this.request("ListAddressUnsubscribeConfig", req, cb)
   }
 
   /**

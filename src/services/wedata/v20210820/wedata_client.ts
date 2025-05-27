@@ -78,6 +78,7 @@ import {
   ColumnItem,
   RuleGroupExecResult,
   AlarmEventInfo,
+  ExtensionInfoVO,
   TriggerManualTasksResponse,
   DescribeTaskLineageRequest,
   BytesSpeed,

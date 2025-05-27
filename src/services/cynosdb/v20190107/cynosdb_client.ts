@@ -191,6 +191,7 @@ import {
   ExportInstanceSlowQueriesRequest,
   ModifyAuditServiceResponse,
   ResumeServerlessResponse,
+  GdnTaskInfo,
   SaleZone,
   SwitchProxyVpcResponse,
   StartCLSDeliveryRequest,

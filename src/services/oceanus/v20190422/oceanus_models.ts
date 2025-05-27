@@ -718,6 +718,79 @@ export interface ResultColumn {
 }
 
 /**
+ * setats类型
+ */
+export interface Setats {
+  /**
+   * setats serialId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetatsSerialId?: string
+  /**
+   * 1  // 停止
+2  // 运行中
+3  // 初始化中
+4  // 扩容中
+5  // Warehoouse未配置
+6  // Warehoouse配置中
+7  // 重启中
+-2 // 已删除(集群被销毁时更新为此状态)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * setats warehouse
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Warehouse?: Warehouse
+  /**
+   * setats master 机器规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterInfo?: SetatsCvmInfo
+  /**
+   * setats worker规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkerInfo?: SetatsCvmInfo
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenewFlag?: number
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 过期时间 秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecondsUntilExpiry?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * manager url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ManagerUrl?: string
+  /**
+   * 隔离时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsolatedTime?: string
+}
+
+/**
  * 自定义树结构出参作业列表
  */
 export interface TreeJobSets {
@@ -948,6 +1021,26 @@ export interface DescribeFolderResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * setats disk
+ */
+export interface SetatsDisk {
+  /**
+   * 磁盘类型
+CLOUD_BSSD
+CLOUD_SSD
+CLOUD_HSSD
+CLOUD_PREMIUM
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType?: string
+  /**
+   * 磁盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize?: number
 }
 
 /**
@@ -1678,6 +1771,42 @@ export interface CreateResourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源引用
+ */
+export interface ResourceRefLatest {
+  /**
+   * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: number
+  /**
+   * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 空间id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceId?: string
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
 }
 
 /**
@@ -2824,7 +2953,7 @@ export interface Cluster {
    */
   CreatorUin?: string
   /**
-   * 集群状态, 1 未初始化,，3 初始化中，2 运行中
+   * 集群状态, 1 未初始化,3 初始化中，2 运行中
    */
   Status?: number
   /**
@@ -3037,6 +3166,11 @@ export interface Cluster {
    * 运行的内存
    */
   RunningMem?: number
+  /**
+   * setats集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Setats?: Setats
 }
 
 /**
@@ -3121,6 +3255,10 @@ export interface DescribeJobsRequest {
    * 查询额外的作业信息,例如 JobEventInfo
    */
   ExtraResult?: Array<string>
+  /**
+   * 查询引用connector
+   */
+  ConnectorOptions?: string
 }
 
 /**
@@ -3713,6 +3851,57 @@ export interface DescribeFolderRequest {
 }
 
 /**
+ * Setats Warehouse结构
+ */
+export interface Warehouse {
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * location
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: string
+  /**
+   * catalogtype
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogType?: string
+  /**
+   * uri
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uri?: string
+  /**
+   * warehouse url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WarehouseUrl?: string
+  /**
+   * 认证方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Authentication?: string
+  /**
+   * 资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceRefs?: Array<ResourceRefLatest>
+  /**
+   * hive warehouse uri
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HiveUri?: string
+  /**
+   * 高级参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: Array<Property>
+}
+
+/**
  * DeleteFolders返回参数结构体
  */
 export interface DeleteFoldersResponse {
@@ -4048,6 +4237,32 @@ export interface Order {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderTime?: string
+}
+
+/**
+ * setats 机器规格
+ */
+export interface SetatsCvmInfo {
+  /**
+   * setats机器cpu
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * setats机器内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mem?: number
+  /**
+   * setats worker 并行度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultParallelism?: number
+  /**
+   * setats 机器磁盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Disk?: SetatsDisk
 }
 
 /**

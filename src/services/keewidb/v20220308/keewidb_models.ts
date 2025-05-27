@@ -150,11 +150,11 @@ KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为�
    */
   MachineMemory: number
   /**
-   * 实例所属的可用区ID。<ul><li>具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></u>
+   * 实例所属的可用区ID。<ul><li>具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></ul>
    */
   ZoneId?: number
   /**
-   * 实例所属的可用区名称。<ul><li>具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></u>
+   * 实例所属的可用区名称。<ul><li>具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></ul>
    */
   ZoneName?: string
   /**
@@ -176,7 +176,7 @@ KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为�
    */
   VPort?: number
   /**
-   * 包年包月计费的续费模式。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
+   * 包年包月计费的续费模式。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</li></ul>
    */
   AutoRenew?: number
   /**
@@ -206,7 +206,7 @@ KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为�
    */
   ProjectId?: number
   /**
-   * 数据压缩开关。<ul><li>ON：开启，默认开启压缩。</li><li>OFF：关闭。</li>
+   * 数据压缩开关。<ul><li>ON：开启，默认开启压缩。</li><li>OFF：关闭。</li></ul>
    */
   Compression?: string
 }

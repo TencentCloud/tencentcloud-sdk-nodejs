@@ -1425,8 +1425,13 @@ export interface CreateInstanceNewRequest {
   SSCCU?: number
   /**
    * 缓存盘大小
+   * @deprecated
    */
   CacheDiskSize?: string
+  /**
+   * 缓存盘大小
+   */
+  CacheDataDiskSize?: number
 }
 
 /**

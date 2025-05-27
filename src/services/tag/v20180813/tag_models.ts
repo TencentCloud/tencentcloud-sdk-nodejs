@@ -49,7 +49,6 @@ export interface TagWithDelete {
   CanDelete?: number
   /**
    * 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Category?: string
 }
@@ -546,7 +545,6 @@ export interface DescribeResourceTagsResponse {
   Offset?: number
   /**
    * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
   /**
@@ -719,12 +717,10 @@ export interface TagResource {
   TagValueMd5?: string
   /**
    * 资源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceType?: string
   /**
    * 标签类型。取值： Custom：自定义标签。 System：系统标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Category?: string
 }
@@ -767,7 +763,6 @@ export interface DescribeResourcesByTagsResponse {
   Offset?: number
   /**
    * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
   /**
@@ -930,12 +925,10 @@ export interface DescribeTagValuesResponse {
 export interface ResourceIdTag {
   /**
    * 资源唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 标签键值对
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKeyValues?: Array<Tag>
 }
@@ -994,7 +987,6 @@ export interface Tag {
   TagValue: string
   /**
    * 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Category?: string
 }
@@ -1505,27 +1497,22 @@ export interface GetTagValuesRequest {
 export interface ResourceTag {
   /**
    * 资源所在地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceRegion?: string
   /**
    * 业务类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceType?: string
   /**
    * 资源前缀
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourcePrefix?: string
   /**
    * 资源唯一标记
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
    * 资源标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
 }

@@ -37,6 +37,7 @@ import {
   DescribeBackupOverviewRequest,
   DescribeAuditInstanceListResponse,
   ModifyDBInstanceProjectResponse,
+  DescribeCpuExpandHistoryResponse,
   DescribeDataBackupOverviewResponse,
   DeleteAuditPolicyRequest,
   BackupSummaryItem,
@@ -45,6 +46,7 @@ import {
   ModifyProtectModeResponse,
   CreateParamTemplateRequest,
   RemoteBackupInfo,
+  PeriodStrategy,
   DescribeParamTemplateInfoRequest,
   ModifyCdbProxyAddressVipAndVPortResponse,
   DescribeDBInstancesRequest,
@@ -66,10 +68,11 @@ import {
   DescribeInstanceParamRecordsRequest,
   StopRollbackResponse,
   CreateCdbProxyAddressRequest,
+  DeleteRotationPasswordResponse,
   AnalyzeAuditLogsRequest,
   ModifyBackupEncryptionStatusResponse,
   DescribeInstanceParamsRequest,
-  DescribeUploadedFilesRequest,
+  DescribeRoMinScaleResponse,
   StopDBImportJobResponse,
   ProxyAllocation,
   StopCpuExpandRequest,
@@ -119,6 +122,7 @@ import {
   AuditRule,
   DescribeInstanceAlarmEventsRequest,
   DescribeBinlogsRequest,
+  TimeIntervalStrategy,
   DescribeCdbProxyInfoRequest,
   RollbackDBName,
   RuleFilters,
@@ -212,6 +216,7 @@ import {
   RuleTemplateRecordInfo,
   DescribeCloneListResponse,
   DescribeDBInstanceLogToCLSRequest,
+  AnalysisNodeInfo,
   StartBatchRollbackRequest,
   OpenDBInstanceEncryptionRequest,
   DescribeDBInstanceCharsetRequest,
@@ -226,10 +231,10 @@ import {
   DescribeBackupDownloadRestrictionRequest,
   CreateDeployGroupRequest,
   DeleteAccountsRequest,
-  DeleteRotationPasswordResponse,
+  HistoryJob,
   DescribeAccountsResponse,
   RollbackTimeRange,
-  ModifyProtectModeRequest,
+  AuditLog,
   DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
@@ -298,6 +303,7 @@ import {
   DescribeProxySupportParamResponse,
   CloseAuditServiceResponse,
   DescribeRollbackTaskDetailRequest,
+  DescribeCpuExpandHistoryRequest,
   AdjustCdbProxyResponse,
   ModifyParamTemplateResponse,
   BalanceRoGroupLoadResponse,
@@ -306,6 +312,7 @@ import {
   DeleteAuditRuleResponse,
   IsolateDBInstanceRequest,
   InstanceAuditLogFilters,
+  DescribeUploadedFilesRequest,
   InstanceInfo,
   DescribeDefaultParamsResponse,
   SwitchCDBProxyRequest,
@@ -364,7 +371,6 @@ import {
   ModifyAuditConfigRequest,
   DeviceDiskInfo,
   DescribeInstanceAlarmEventsResponse,
-  DescribeRoMinScaleResponse,
   RoWeightValue,
   DescribeSlowLogDataResponse,
   DeleteRotationPasswordRequest,
@@ -378,6 +384,7 @@ import {
   ModifyRoGroupInfoResponse,
   DeleteAuditRuleRequest,
   DeleteParamTemplateResponse,
+  TimeInterval,
   DBSwitchInfo,
   ResetPasswordResponse,
   DescribeAuditRuleTemplateModifyHistoryRequest,
@@ -409,6 +416,7 @@ import {
   OpenAuditServiceRequest,
   DescribeDBInstanceCharsetResponse,
   DescribeDBFeaturesRequest,
+  TImeCycle,
   DescribeBackupSummariesResponse,
   DescribeBinlogBackupOverviewRequest,
   InstEventInfo,
@@ -426,7 +434,7 @@ import {
   OfflineIsolatedInstancesRequest,
   InquiryPriceUpgradeInstancesRequest,
   ModifyInstanceParamResponse,
-  AuditLog,
+  ModifyProtectModeRequest,
   ColumnPrivilege,
   DescribeUploadedFilesResponse,
   DescribeDBPriceRequest,
@@ -1778,6 +1786,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（DescribeSlowLogData）用于使用条件检索实例的慢日志。只允许查看一个月之内的慢日志。
+使用时需要注意：可能存在单条慢日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
+     */
+  async DescribeSlowLogData(
+    req: DescribeSlowLogDataRequest,
+    cb?: (error: string, rep: DescribeSlowLogDataResponse) => void
+  ): Promise<DescribeSlowLogDataResponse> {
+    return this.request("DescribeSlowLogData", req, cb)
+  }
+
+  /**
    * 重新负载均衡数据库代理
    */
   async ReloadBalanceProxyNode(
@@ -1878,14 +1897,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DescribeSlowLogData）用于使用条件检索实例的慢日志。只允许查看一个月之内的慢日志。
-使用时需要注意：可能存在单条慢日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
-     */
-  async DescribeSlowLogData(
-    req: DescribeSlowLogDataRequest,
-    cb?: (error: string, rep: DescribeSlowLogDataResponse) => void
-  ): Promise<DescribeSlowLogDataResponse> {
-    return this.request("DescribeSlowLogData", req, cb)
+   * 本接口（DescribeCpuExpandHistory）用于查询扩容历史。
+   */
+  async DescribeCpuExpandHistory(
+    req: DescribeCpuExpandHistoryRequest,
+    cb?: (error: string, rep: DescribeCpuExpandHistoryResponse) => void
+  ): Promise<DescribeCpuExpandHistoryResponse> {
+    return this.request("DescribeCpuExpandHistory", req, cb)
   }
 
   /**

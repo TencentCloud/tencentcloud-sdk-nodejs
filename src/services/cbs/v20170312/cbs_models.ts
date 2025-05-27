@@ -574,7 +574,7 @@ export interface CreateDisksRequest {
    */
   DiskChargePrepaid?: DiskChargePrepaid
   /**
-   * 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过[DescribeSnapshots](document/api/362/15647)接口返回的快照详情的IsPermanent字段来判断，True表示永久快照，False表示非永久快照。
+   * 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过[DescribeSnapshots](/document/api/362/15647)接口返回的快照详情的IsPermanent字段来判断，True表示永久快照，False表示非永久快照。
    */
   DeleteSnapshot?: number
   /**
@@ -586,7 +586,7 @@ export interface CreateDisksRequest {
    */
   DiskBackupQuota?: number
   /**
-   * 创建云盘时是否开启性能突发。
+   * 创建云盘时是否开启性能突发。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）。
    */
   BurstPerformance?: boolean
   /**
@@ -1214,11 +1214,11 @@ export interface Placement {
    */
   CageId?: string
   /**
-   * 实例所属项目ID。不填为默认项目。
+   * 实例所属项目ID，可通过[DescribeProject](/document/api/651/78725)获取。不填默认为0，表示默认项目。
    */
   ProjectId?: number
   /**
-   * 实例所属项目名称。
+   * 实例所属项目名称，可通过[DescribeProject](/document/api/651/78725)获取。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string

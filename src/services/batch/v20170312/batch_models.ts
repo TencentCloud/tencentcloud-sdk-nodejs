@@ -122,7 +122,7 @@ export interface RetryJobsResponse {
  */
 export interface TerminateComputeNodeRequest {
   /**
-   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvId: string
   /**
@@ -873,7 +873,7 @@ export interface LocalDiskType {
  */
 export interface DescribeComputeEnvActivitiesRequest {
   /**
-   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvId: string
   /**
@@ -885,8 +885,7 @@ export interface DescribeComputeEnvActivitiesRequest {
    */
   Limit?: number
   /**
-   * 过滤条件
-<li> compute-node-id - String - 是否必填：否 -（过滤条件）按照计算节点ID过滤。</li>
+   * 过滤条件<li> compute-node-id - String - 是否必填：否 -（过滤条件）按照计算节点ID过滤，节点ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。</li>
    */
   Filters?: Filter
 }
@@ -967,7 +966,7 @@ TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>
  */
 export interface DeleteComputeEnvRequest {
   /**
-   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取，不能对状态处于删除中或者存在计算实例未销毁的环境发起删除动作。
    */
   EnvId: string
 }
@@ -1110,7 +1109,7 @@ export interface ComputeEnvCreateInfo {
  */
 export interface DescribeComputeEnvCreateInfosRequest {
   /**
-   * 计算环境ID列表，与Filters参数不能同时指定，最大限制100。环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID列表，与Filters参数不能同时指定，最大限制100，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvIds?: Array<string>
   /**
@@ -1132,7 +1131,7 @@ export interface DescribeComputeEnvCreateInfosRequest {
  */
 export interface DescribeComputeEnvRequest {
   /**
-   * 计算环境ID
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvId: string
 }
@@ -1491,7 +1490,7 @@ export interface LoginSettings {
  */
 export interface DetachInstancesRequest {
   /**
-   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvId: string
   /**
@@ -1505,11 +1504,11 @@ export interface DetachInstancesRequest {
  */
 export interface Instance {
   /**
-   * 实例ID
+   * 实例ID，可通过调用接口[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)获取。
    */
   InstanceId: string
   /**
-   * 镜像ID
+   * 镜像ID，可通过调用接口[DescribeImages](https://cloud.tencent.com/document/product/213/15715)获取。
    */
   ImageId?: string
   /**
@@ -2535,7 +2534,7 @@ task-instance-state     - String - 是否必填： 否 - 按照任务实例状�
  */
 export interface AttachInstancesRequest {
   /**
-   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvId: string
   /**
@@ -2549,7 +2548,7 @@ export interface AttachInstancesRequest {
  */
 export interface DescribeComputeEnvsRequest {
   /**
-   * 计算环境ID列表，与Filters参数不能同时指定。最大数量上限100，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID列表，与Filters参数不能同时指定。最大数量上限100。
    */
   EnvIds?: Array<string>
   /**
@@ -2724,7 +2723,7 @@ export type DescribeInstanceCategoriesRequest = null
  */
 export interface ModifyComputeEnvRequest {
   /**
-   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。
+   * 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。
    */
   EnvId: string
   /**

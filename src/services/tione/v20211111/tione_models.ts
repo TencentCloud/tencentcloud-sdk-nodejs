@@ -865,6 +865,11 @@ DEFAULT: 其他来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePerReplicas?: string
+  /**
+   * 用于监控查询的Source
+枚举值，部分情况下与CreateSource不同，通过该字段兼容
+   */
+  MonitorSource?: string
 }
 
 /**
@@ -4860,6 +4865,10 @@ UPDATING 更新中
    * 用于监控的创建来源字段
    */
   MonitorSource?: string
+  /**
+   * 子用户的 nickname
+   */
+  SubUinName?: string
 }
 
 /**
@@ -6108,6 +6117,14 @@ export interface Pod {
    * 实例的状态信息
    */
   Status?: string
+  /**
+   * 实例的开始调度时间
+   */
+  StartScheduleTime?: string
+  /**
+   * 实例状态的补充信息
+   */
+  Message?: string
 }
 
 /**

@@ -2262,6 +2262,10 @@ export interface ClbInstanceDetail {
    * CLB监听器列表
    */
   Listeners?: Array<ClbListener>
+  /**
+   * 负载均衡类型，0 传统型负载均衡； 1 应用型负载均衡
+   */
+  Forward?: number
 }
 
 /**

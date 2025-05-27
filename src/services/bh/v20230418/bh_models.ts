@@ -437,6 +437,14 @@ export interface DeviceAccount {
    * true-已托管私钥，false-未托管私钥
    */
   BoundPrivateKey?: boolean
+  /**
+   * 是否托管凭证, true-托管，false-未托管
+   */
+  BoundKubeconfig?: boolean
+  /**
+   * 是否为k8s资产管理账号
+   */
+  IsK8SManageAccount?: boolean
 }
 
 /**
@@ -573,6 +581,10 @@ export interface CreateResourceRequest {
    * 0非试用版，1试用版
    */
   Trial?: number
+  /**
+   * 是否共享clb，0：不共享，1：共享
+   */
+  ShareClb?: number
 }
 
 /**
@@ -1114,6 +1126,10 @@ export interface SearchCommandResult {
    * 签名值
    */
   SignValue?: string
+  /**
+   * 资产类型
+   */
+  DeviceKind?: string
 }
 
 /**
@@ -3105,6 +3121,30 @@ export interface Device {
    * IOA侧的资源ID
    */
   IOAId?: number
+  /**
+   * K8S集群托管维度。1-集群，2-命名空间，3-工作负载
+   */
+  ManageDimension?: number
+  /**
+   * K8S集群托管账号id
+   */
+  ManageAccountId?: number
+  /**
+   * K8S集群命名空间
+   */
+  Namespace?: string
+  /**
+   * K8S集群工作负载
+   */
+  Workload?: string
+  /**
+   * K8S集群pod已同步数量
+   */
+  SyncPodCount?: number
+  /**
+   * K8S集群pod总数量
+   */
+  TotalPodCount?: number
 }
 
 /**
@@ -4015,6 +4055,22 @@ export interface SessionResult {
    * 回放类型 默认0, 1-rfb 2-mp4 3-ssh
    */
   ReplayType?: number
+  /**
+   * 会话资产类型
+   */
+  DeviceKind?: string
+  /**
+   * K8S集群命名空间
+   */
+  Namespace?: string
+  /**
+   * K8S集群工作负载
+   */
+  Workload?: string
+  /**
+   * K8S集群容器名称
+   */
+  PodName?: string
 }
 
 /**
@@ -4225,6 +4281,10 @@ export interface Resource {
    *  零信任堡垒机带宽扩展包个数。一个扩展包表示4M带宽
    */
   PackageIOABandwidth?: number
+  /**
+   * 堡垒机实例对应的零信任实例id
+   */
+  IOAResourceId?: string
 }
 
 /**
@@ -4253,6 +4313,30 @@ export interface BindDeviceResourceRequest {
    * 网络域ID
    */
   DomainId?: string
+  /**
+   * K8S集群托管账号维度。1-集群，2-命名空间，3-工作负载
+   */
+  ManageDimension?: number
+  /**
+   * K8S集群托管账号id
+   */
+  ManageAccountId?: number
+  /**
+   * K8S集群托管账号名称
+   */
+  ManageAccount?: string
+  /**
+   * K8S集群托管账号凭证
+   */
+  ManageKubeconfig?: string
+  /**
+   * K8S集群托管的namespace
+   */
+  Namespace?: string
+  /**
+   * K8S集群托管的workload
+   */
+  Workload?: string
 }
 
 /**

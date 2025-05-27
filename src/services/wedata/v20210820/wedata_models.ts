@@ -2247,6 +2247,27 @@ export interface AlarmEventInfo {
 }
 
 /**
+ * key-value 键值对
+ */
+export interface ExtensionInfoVO {
+  /**
+   * key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
  * TriggerManualTasks返回参数结构体
  */
 export interface TriggerManualTasksResponse {
@@ -3816,6 +3837,14 @@ export interface DownloadLogByLineRequest {
    * log 0 code 1 result 2 custo 3
    */
   FileType?: number
+  /**
+   * 查询文件标志：0: 从执行机获取，1: 从cos获取，获取不到会再从执行机获取
+   */
+  QueryFileFlag?: number
+  /**
+   * 透传字段，如果queryFileFlag为1，则ext回作为上一页的分页标识offset
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -5956,6 +5985,16 @@ export interface InstanceLogByLine {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobLogErrorTip?: JobLogErrorTip
+  /**
+   * 执行实例的扩展属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionExtendedProps?: Array<ExtensionInfoVO>
+  /**
+   * 如果queryFileFlag为1，则ext返回当前页数据的结束行信息，下一页把这个extInfo透传过来
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -14731,6 +14770,18 @@ export interface CreateOpsMakePlanRequest {
    * 补录扩展属性
    */
   SelfWorkflowDependency?: string
+  /**
+   * 任务 TASK； 项目： PROJECT
+   */
+  MakeType?: string
+  /**
+   * 任务状态
+   */
+  StatusList?: string
+  /**
+   * 补录是否跳过事件检查
+   */
+  MakeCheckEventType?: string
 }
 
 /**
@@ -18843,7 +18894,7 @@ export interface LineageTask {
  */
 export interface CommonIdOpsDto {
   /**
-   * 返回补录计划id
+   * 返回补录计划名称_ok
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string

@@ -2489,6 +2489,10 @@ no
    */
   AutoScaleDown?: string
   /**
+   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
+   */
+  AutoArchive?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3894,7 +3898,7 @@ export interface DescribeParamTemplatesResponse {
  */
 export interface ProxyConfig {
   /**
-   * 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones)
+   * 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones
    */
   ProxyCount?: number
   /**
@@ -3906,7 +3910,7 @@ export interface ProxyConfig {
    */
   Mem?: number
   /**
-   * 连接池类型：SessionConnectionPool(会话级别连接池 )
+   * 连接池类型:SessionConnectionPool(会话级别连接池 )
    */
   ConnectionPoolType?: string
   /**
@@ -3914,7 +3918,7 @@ export interface ProxyConfig {
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阈值：单位（秒）
+   * 连接池阈值:单位（秒）
    */
   ConnectionPoolTimeOut?: number
   /**
@@ -4432,6 +4436,40 @@ export interface ResumeServerlessResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 全球数据库任务信息
+ */
+export interface GdnTaskInfo {
+  /**
+   * 全球数据库唯一标识
+   */
+  GdnId?: string
+  /**
+   * 全球数据库唯一别名
+   */
+  GdnName?: string
+  /**
+   * 主集群ID
+   */
+  PrimaryClusterId?: string
+  /**
+   * 主集群所在地域
+   */
+  PrimaryClusterRegion?: string
+  /**
+   * 从集群所在地域
+   */
+  StandbyClusterRegion?: string
+  /**
+   * 从集群ID
+   */
+  StandbyClusterId?: string
+  /**
+   * 从集群别名
+   */
+  StandbyClusterName?: string
 }
 
 /**
@@ -5643,6 +5681,10 @@ export interface BizTaskInfo {
    * 任务进度信息
    */
   TaskProgressInfo?: TaskProgressInfo
+  /**
+   * 全球数据库网络任务
+   */
+  GdnTaskInfo?: GdnTaskInfo
 }
 
 /**
@@ -6922,6 +6964,10 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 项目id
    */
   ProjectId?: number
+  /**
+   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
+   */
+  AutoArchive?: string
 }
 
 /**
@@ -8163,6 +8209,18 @@ pausing
 如为空，该字段无效
    */
   GdnRole?: string
+  /**
+   * 二级存储使用量，单位：G
+   */
+  UsedArchiveStorage?: number
+  /**
+   * 归档状态，枚举值<li>normal:正常</li><li>archiving:归档中</li><li>resuming:恢复中</li><li>archived :已归档</li>
+   */
+  ArchiveStatus?: string
+  /**
+   * 归档进度，百分比。
+   */
+  ArchiveProgress?: number
 }
 
 /**
@@ -10492,6 +10550,10 @@ export interface ModifyServerlessStrategyRequest {
    * 只读节点最大个数
    */
   MaxRoCount?: number
+  /**
+   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
+   */
+  AutoArchive?: string
 }
 
 /**
