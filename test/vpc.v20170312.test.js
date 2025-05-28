@@ -108,9 +108,9 @@ it("vpc.v20170312.ModifyIPv6AddressesAttributes", async function () {
     }
 })
 
-it("vpc.v20170312.CreatePrivateNatGateway", async function () {
+it("vpc.v20170312.AssociateHaVipInstance", async function () {
     try {
-       const data = await client.CreatePrivateNatGateway({})
+       const data = await client.AssociateHaVipInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +361,16 @@ it("vpc.v20170312.DeleteCdcLDCXList", async function () {
 it("vpc.v20170312.DescribeIp6Addresses", async function () {
     try {
        const data = await client.DescribeIp6Addresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.CreatePrivateNatGateway", async function () {
+    try {
+       const data = await client.CreatePrivateNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,9 +1038,9 @@ it("vpc.v20170312.DescribeAddressTemplates", async function () {
     }
 })
 
-it("vpc.v20170312.CreateAddressTemplate", async function () {
+it("vpc.v20170312.CreateVpnConnection", async function () {
     try {
-       const data = await client.CreateAddressTemplate({})
+       const data = await client.CreateVpnConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1311,6 +1321,16 @@ it("vpc.v20170312.DescribeCrossBorderCcnRegionBandwidthLimits", async function (
 it("vpc.v20170312.ModifySnapshotPolicies", async function () {
     try {
        const data = await client.ModifySnapshotPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DisassociateHaVipInstance", async function () {
+    try {
+       const data = await client.DisassociateHaVipInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1848,9 +1868,9 @@ it("vpc.v20170312.DescribePrivateNatGateways", async function () {
     }
 })
 
-it("vpc.v20170312.CreateVpnConnection", async function () {
+it("vpc.v20170312.CreateAddressTemplate", async function () {
     try {
-       const data = await client.CreateVpnConnection({})
+       const data = await client.CreateAddressTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

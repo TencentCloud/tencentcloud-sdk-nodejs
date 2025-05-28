@@ -11063,6 +11063,7 @@ cold：低频存储。
   ClassId?: number
   /**
    * 存储至 cos 的 bucket 桶名称。
+注：CosBucketName参数值不能包含-[appid] 部分。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosBucketName?: string

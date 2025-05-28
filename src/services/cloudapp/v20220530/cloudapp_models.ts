@@ -146,4 +146,8 @@ export interface License {
    * 授权的类型：Standard正式版/Development开发版/Trial体验版
    */
   LicenseType?: string
+  /**
+   * 授权的层级：Master 主授权；Child 子授权/增强型授权
+   */
+  LicenseLevel?: string
 }

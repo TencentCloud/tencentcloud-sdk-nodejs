@@ -1049,7 +1049,7 @@ export interface CreateSnapshotRequest {
    */
   Deadline?: string
   /**
-   * 云硬盘备份点ID。传入此参数时，将通过备份点创建快照。备份点 ID 可以通过[DescribeDiskBackups](document/product/362/80278)接口查询。
+   * 云硬盘备份点ID。传入此参数时，将通过备份点创建快照。备份点 ID 可以通过[DescribeDiskBackups](/document/product/362/80278)接口查询。
    */
   DiskBackupId?: string
   /**

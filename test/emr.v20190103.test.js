@@ -578,6 +578,16 @@ it("emr.v20190103.InquiryPriceCreateInstance", async function () {
     }
 })
 
+it("emr.v20190103.InquirePriceRenewEmr", async function () {
+    try {
+       const data = await client.InquirePriceRenewEmr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.AddMetricScaleStrategy", async function () {
     try {
        const data = await client.AddMetricScaleStrategy({})
@@ -648,9 +658,9 @@ it("emr.v20190103.AddNodeResourceConfig", async function () {
     }
 })
 
-it("emr.v20190103.InquirePriceRenewEmr", async function () {
+it("emr.v20190103.DescribeGroupsSTD", async function () {
     try {
-       const data = await client.InquirePriceRenewEmr({})
+       const data = await client.DescribeGroupsSTD({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

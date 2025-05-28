@@ -156,7 +156,7 @@ import {
   CreateVpcEndPointServiceWhiteListResponse,
   DescribeInstanceJumboResponse,
   AssociateInstancesToCcnRouteTableRequest,
-  CheckGatewayFlowMonitorRequest,
+  UnlockCcnBandwidthsRequest,
   DeleteIp6TranslatorsResponse,
   DescribeNatGatewaySourceIpTranslationNatRulesResponse,
   DescribeHighPriorityRouteTablesResponse,
@@ -282,7 +282,7 @@ import {
   DeleteSecurityGroupPoliciesRequest,
   VpnConnection,
   DescribeCcnsRequest,
-  ModifyNatGatewayAttributeResponse,
+  DisableRoutesResponse,
   DescribeNetDetectsRequest,
   CreateAddressTemplateGroupRequest,
   RouteECMPAlgorithm,
@@ -308,7 +308,6 @@ import {
   DescribeVpcResourceDashboardRequest,
   ModifyIp6RuleRequest,
   ReplaceRouteTableAssociationRequest,
-  UnlockCcnBandwidthsRequest,
   PrivateNatCrossDomainInfo,
   LocalDestinationIpPortTranslationNatRule,
   AssociateNetworkAclSubnetsRequest,
@@ -419,6 +418,7 @@ import {
   DescribeInstanceJumboRequest,
   NatGatewayFlowMonitorDetail,
   CheckGatewayFlowMonitorResponse,
+  DescribeAddressTemplatesResponse,
   InternetPrice,
   ModifyIp6AddressesBandwidthResponse,
   CreateSubnetsRequest,
@@ -601,7 +601,7 @@ import {
   ModifyTemplateMemberRequest,
   DisableCcnRoutesRequest,
   EnableSnapshotPoliciesRequest,
-  ModifyVpnGatewaySslClientCertResponse,
+  ModifyNatGatewayAttributeResponse,
   DescribeAddressesResponse,
   GatewayQos,
   DescribePrivateNatGatewayTranslationNatRulesRequest,
@@ -613,7 +613,7 @@ import {
   CcnFlowLock,
   DetachSnapshotInstancesRequest,
   ReplaceHighPriorityRouteTableAssociationResponse,
-  DeleteLocalGatewayRequest,
+  AssociateHaVipInstanceResponse,
   ResetVpnGatewayInternetMaxBandwidthResponse,
   LockCcnBandwidthsRequest,
   AddressChargePrepaid,
@@ -669,7 +669,7 @@ import {
   DescribeRouteTableAssociatedInstancesRequest,
   ReleaseIPv6AddressesRequest,
   DisassociateIPv6AddressResponse,
-  DescribeAddressTemplateGroupsResponse,
+  CheckGatewayFlowMonitorRequest,
   SetCcnRegionBandwidthLimitsRequest,
   ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
@@ -683,7 +683,7 @@ import {
   DescribeCustomerGatewaysRequest,
   ModifyReserveIpAddressResponse,
   ProductQuota,
-  DisableRoutesResponse,
+  DeleteLocalGatewayRequest,
   ModifySnapshotPoliciesRequest,
   ModifyAddressAttributeRequest,
   DhcpIp,
@@ -832,6 +832,7 @@ import {
   RefreshDirectConnectGatewayRouteToNatGatewayResponse,
   DescribeBandwidthPackagesResponse,
   DeleteRouteTableRequest,
+  AssociateHaVipInstanceRequest,
   DescribeCdcLDCXListResponse,
   SnapshotInstance,
   CreateVpnGatewayRequest,
@@ -861,6 +862,7 @@ import {
   DeleteNetworkAclEntriesResponse,
   DescribeCdcLDCXListRequest,
   UpdateTrafficMirrorDirectionRequest,
+  DisassociateHaVipInstanceResponse,
   CreateNetworkInterfaceResponse,
   DescribeAddressQuotaRequest,
   LockCcnsResponse,
@@ -912,6 +914,7 @@ import {
   ModifyCcnRouteTablesRequest,
   ResetAttachCcnInstancesRequest,
   UnlockCcnBandwidthsResponse,
+  ModifyVpnGatewaySslClientCertResponse,
   CreateDefaultSecurityGroupResponse,
   ClassicLinkInstance,
   DeleteLocalGatewayResponse,
@@ -974,7 +977,7 @@ import {
   DeleteTrafficPackagesResponse,
   DeleteCustomerGatewayRequest,
   LockCcnBandwidthsResponse,
-  DescribeAddressTemplatesResponse,
+  DescribeAddressTemplateGroupsResponse,
   Quota,
   WithdrawNotifyRoutesResponse,
   AcceptVpcPeeringConnectionRequest,
@@ -1004,6 +1007,7 @@ import {
   DeleteVpcResponse,
   InquiryPriceModifyAddressesBandwidthRequest,
   ModifyGlobalRouteECMPAlgorithmResponse,
+  DisassociateHaVipInstanceRequest,
   ReplaceCcnRouteTableInputPolicysRequest,
   InstanceChargePrepaid,
   DescribeTemplateLimitsRequest,
@@ -1126,13 +1130,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreatePrivateNatGateway）用于创建私网NAT网关。
+   * 本接口（AssociateHaVipInstance）用于HAVIP绑定子机或网卡（限制HaVip的飘移范围）。
    */
-  async CreatePrivateNatGateway(
-    req: CreatePrivateNatGatewayRequest,
-    cb?: (error: string, rep: CreatePrivateNatGatewayResponse) => void
-  ): Promise<CreatePrivateNatGatewayResponse> {
-    return this.request("CreatePrivateNatGateway", req, cb)
+  async AssociateHaVipInstance(
+    req?: AssociateHaVipInstanceRequest,
+    cb?: (error: string, rep: AssociateHaVipInstanceResponse) => void
+  ): Promise<AssociateHaVipInstanceResponse> {
+    return this.request("AssociateHaVipInstance", req, cb)
   }
 
   /**
@@ -1422,6 +1426,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIp6AddressesResponse) => void
   ): Promise<DescribeIp6AddressesResponse> {
     return this.request("DescribeIp6Addresses", req, cb)
+  }
+
+  /**
+   * 本接口（CreatePrivateNatGateway）用于创建私网NAT网关。
+   */
+  async CreatePrivateNatGateway(
+    req: CreatePrivateNatGatewayRequest,
+    cb?: (error: string, rep: CreatePrivateNatGatewayResponse) => void
+  ): Promise<CreatePrivateNatGatewayResponse> {
+    return this.request("CreatePrivateNatGateway", req, cb)
   }
 
   /**
@@ -2175,13 +2189,15 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（CreateAddressTemplate）用于创建IP地址模板。
-   */
-  async CreateAddressTemplate(
-    req: CreateAddressTemplateRequest,
-    cb?: (error: string, rep: CreateAddressTemplateResponse) => void
-  ): Promise<CreateAddressTemplateResponse> {
-    return this.request("CreateAddressTemplate", req, cb)
+     * 本接口（CreateVpnConnection）用于创建VPN通道。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
+  async CreateVpnConnection(
+    req: CreateVpnConnectionRequest,
+    cb?: (error: string, rep: CreateVpnConnectionResponse) => void
+  ): Promise<CreateVpnConnectionResponse> {
+    return this.request("CreateVpnConnection", req, cb)
   }
 
   /**
@@ -2478,6 +2494,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifySnapshotPoliciesResponse) => void
   ): Promise<ModifySnapshotPoliciesResponse> {
     return this.request("ModifySnapshotPolicies", req, cb)
+  }
+
+  /**
+   * 本接口（DisassociateHaVipInstance）用于HAVIP解绑子机或网卡（去掉HaVip飘移范围）。
+   */
+  async DisassociateHaVipInstance(
+    req: DisassociateHaVipInstanceRequest,
+    cb?: (error: string, rep: DisassociateHaVipInstanceResponse) => void
+  ): Promise<DisassociateHaVipInstanceResponse> {
+    return this.request("DisassociateHaVipInstance", req, cb)
   }
 
   /**
@@ -3066,15 +3092,13 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（CreateVpnConnection）用于创建VPN通道。
->?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
->
-     */
-  async CreateVpnConnection(
-    req: CreateVpnConnectionRequest,
-    cb?: (error: string, rep: CreateVpnConnectionResponse) => void
-  ): Promise<CreateVpnConnectionResponse> {
-    return this.request("CreateVpnConnection", req, cb)
+   * 本接口（CreateAddressTemplate）用于创建IP地址模板。
+   */
+  async CreateAddressTemplate(
+    req: CreateAddressTemplateRequest,
+    cb?: (error: string, rep: CreateAddressTemplateResponse) => void
+  ): Promise<CreateAddressTemplateResponse> {
+    return this.request("CreateAddressTemplate", req, cb)
   }
 
   /**

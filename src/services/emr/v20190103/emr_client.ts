@@ -37,6 +37,7 @@ import {
   ImpalaQuery,
   DescribeHiveQueriesRequest,
   ModifyPodNumResponse,
+  WeekRepeatStrategy,
   CreateInstanceResponse,
   PersistentVolumeContext,
   TerminateTasksResponse,
@@ -83,7 +84,7 @@ import {
   AttachDisksRequest,
   DescribeInstancesResponse,
   ShortNodeInfo,
-  ModifyYarnDeployResponse,
+  DescribeGroupsSTDRequest,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
   NodeDetailPriceResult,
@@ -133,7 +134,7 @@ import {
   StarRocksQueryInfo,
   DescribeHDFSStorageInfoRequest,
   OverviewMetricData,
-  WeekRepeatStrategy,
+  ModifyYarnDeployResponse,
   SchedulerTaskInfo,
   AutoScaleRecord,
   JobFlowResourceSpec,
@@ -161,6 +162,7 @@ import {
   DescribeHiveQueriesResponse,
   ResizeDataDisksResponse,
   DescribeYarnQueueRequest,
+  Order,
   ConfigSetInfo,
   ModifyResourceRequest,
   TerminateTasksRequest,
@@ -243,6 +245,7 @@ import {
   UserInfoForUserManager,
   DescribeAutoScaleStrategiesRequest,
   DeployYarnConfRequest,
+  DescribeGroupsSTDResponse,
   DescribeNodeDataDisksResponse,
   DescribeInstancesListRequest,
   ItemSeq,
@@ -326,7 +329,9 @@ import {
   ModifyUserManagerPwdRequest,
   InquiryPriceScaleOutInstanceResponse,
   DescribeJobFlowResponse,
+  GroupInfos,
   ModifyResourceSchedulerResponse,
+  Filter,
   VirtualPrivateCloud,
   NodeSelectorRequirement,
   ResourceDetail,
@@ -924,6 +929,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 集群续费询价。
+   */
+  async InquirePriceRenewEmr(
+    req: InquirePriceRenewEmrRequest,
+    cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void
+  ): Promise<InquirePriceRenewEmrResponse> {
+    return this.request("InquirePriceRenewEmr", req, cb)
+  }
+
+  /**
    * 添加扩缩容规则，按负载和时间
    */
   async AddMetricScaleStrategy(
@@ -994,13 +1009,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集群续费询价。
+   * 查询用户组
    */
-  async InquirePriceRenewEmr(
-    req: InquirePriceRenewEmrRequest,
-    cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void
-  ): Promise<InquirePriceRenewEmrResponse> {
-    return this.request("InquirePriceRenewEmr", req, cb)
+  async DescribeGroupsSTD(
+    req: DescribeGroupsSTDRequest,
+    cb?: (error: string, rep: DescribeGroupsSTDResponse) => void
+  ): Promise<DescribeGroupsSTDResponse> {
+    return this.request("DescribeGroupsSTD", req, cb)
   }
 
   /**

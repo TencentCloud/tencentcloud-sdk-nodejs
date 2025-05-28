@@ -1157,7 +1157,12 @@ export interface Data {
   /**
    * 项目Id
    */
-  Id: number
+  Id?: number
+  /**
+   * url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EditUrl?: string
 }
 
 /**
@@ -1842,6 +1847,26 @@ export interface Project {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerName?: string
+  /**
+   * 仪表盘页面数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NormalCount?: number
+  /**
+   * 自由画布页面数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FreeCount?: number
+  /**
+   * 即席分析页面数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdhocCount?: number
+  /**
+   * 简报页面数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefingCount?: number
 }
 
 /**
@@ -2252,6 +2277,14 @@ export interface DescribeUserRoleProjectListRequest {
    * 角色编码
    */
   RoleCode?: string
+  /**
+   * 用户id列表
+   */
+  UserIdList?: Array<string>
+  /**
+   * 搜索关键词
+   */
+  Keyword?: string
 }
 
 /**

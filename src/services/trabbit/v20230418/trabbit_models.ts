@@ -618,6 +618,10 @@ export interface RabbitMQServerlessInstance {
    * 隔离时间
    */
   IsolatedTime?: number
+  /**
+   * Serverless 扩展字段
+   */
+  ServerlessExt?: string
 }
 
 /**
@@ -1534,6 +1538,10 @@ export interface RabbitMQClusterSpecInfo {
    * 公网带宽，已废弃
    */
   PublicNetworkTps?: number
+  /**
+   * 实例对应的功能列表，true表示支持，false 表示不支持
+   */
+  Features?: string
 }
 
 /**

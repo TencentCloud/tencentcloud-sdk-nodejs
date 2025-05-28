@@ -3194,11 +3194,11 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    */
   AttrRange?: number
   /**
-   * 来源(0 源文件导入 1 网页导入)
+   * 来源（0 从本地文档导入），默认值为0
    */
   Source?: number
   /**
-   * 网页(或自定义链接)地址
+   * 自定义链接地址, IsRefer为true的时候，该值才有意义
    */
   WebUrl?: string
   /**

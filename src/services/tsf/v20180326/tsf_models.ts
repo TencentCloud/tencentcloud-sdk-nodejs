@@ -8797,6 +8797,10 @@ export interface AvailableZoneScatterScheduleRule {
    * -
    */
   IsForceSchedule?: boolean
+  /**
+   * -
+   */
+  Paths?: Array<CommonOption>
 }
 
 /**

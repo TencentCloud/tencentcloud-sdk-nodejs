@@ -2988,16 +2988,13 @@ export interface AssociateInstancesToCcnRouteTableRequest {
 }
 
 /**
- * CheckGatewayFlowMonitor请求参数结构体
+ * UnlockCcnBandwidths请求参数结构体
  */
-export interface CheckGatewayFlowMonitorRequest {
+export interface UnlockCcnBandwidthsRequest {
   /**
-   * 网关实例ID，目前我们支持的网关实例类型有，
-专线网关实例ID，形如，`dcg-ltjahce6`；
-Nat网关实例ID，形如，`nat-ltjahce6`；
-VPN网关实例ID，形如，`vpn-ltjahce6`。
+   * 带宽实例对象数组。
    */
-  GatewayId: string
+  Instances: Array<CcnFlowLock>
 }
 
 /**
@@ -5447,9 +5444,9 @@ export interface DescribeCcnsRequest {
 }
 
 /**
- * ModifyNatGatewayAttribute返回参数结构体
+ * DisableRoutes返回参数结构体
  */
-export interface ModifyNatGatewayAttributeResponse {
+export interface DisableRoutesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5910,16 +5907,6 @@ export interface ReplaceRouteTableAssociationRequest {
    * 路由表实例ID，例如：rtb-azd4dt1c。
    */
   RouteTableId: string
-}
-
-/**
- * UnlockCcnBandwidths请求参数结构体
- */
-export interface UnlockCcnBandwidthsRequest {
-  /**
-   * 带宽实例对象数组。
-   */
-  Instances: Array<CcnFlowLock>
 }
 
 /**
@@ -8118,6 +8105,24 @@ export interface CheckGatewayFlowMonitorResponse {
    * 网关的带宽。
    */
   Bandwidth: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAddressTemplates返回参数结构体
+ */
+export interface DescribeAddressTemplatesResponse {
+  /**
+   * 符合条件的实例数量。
+   */
+  TotalCount?: number
+  /**
+   * IP地址模板。
+   */
+  AddressTemplateSet?: Array<AddressTemplate>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11996,13 +12001,9 @@ export interface EnableSnapshotPoliciesRequest {
 }
 
 /**
- * ModifyVpnGatewaySslClientCert返回参数结构体
+ * ModifyNatGatewayAttribute返回参数结构体
  */
-export interface ModifyVpnGatewaySslClientCertResponse {
-  /**
-   * 异步任务ID。
-   */
-  TaskId?: number
+export interface ModifyNatGatewayAttributeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12197,21 +12198,13 @@ export interface ReplaceHighPriorityRouteTableAssociationResponse {
 }
 
 /**
- * DeleteLocalGateway请求参数结构体
+ * AssociateHaVipInstance返回参数结构体
  */
-export interface DeleteLocalGatewayRequest {
+export interface AssociateHaVipInstanceResponse {
   /**
-   * 本地网关实例ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LocalGatewayId: string
-  /**
-   * CDC实例ID。
-   */
-  CdcId: string
-  /**
-   * VPC实例ID。
-   */
-  VpcId?: string
+  RequestId?: string
 }
 
 /**
@@ -13300,21 +13293,16 @@ export interface DisassociateIPv6AddressResponse {
 }
 
 /**
- * DescribeAddressTemplateGroups返回参数结构体
+ * CheckGatewayFlowMonitor请求参数结构体
  */
-export interface DescribeAddressTemplateGroupsResponse {
+export interface CheckGatewayFlowMonitorRequest {
   /**
-   * 符合条件的实例数量。
+   * 网关实例ID，目前我们支持的网关实例类型有，
+专线网关实例ID，形如，`dcg-ltjahce6`；
+Nat网关实例ID，形如，`nat-ltjahce6`；
+VPN网关实例ID，形如，`vpn-ltjahce6`。
    */
-  TotalCount?: number
-  /**
-   * IP地址模板。
-   */
-  AddressTemplateGroupSet?: Array<AddressTemplateGroup>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  GatewayId: string
 }
 
 /**
@@ -13525,13 +13513,21 @@ export interface ProductQuota {
 }
 
 /**
- * DisableRoutes返回参数结构体
+ * DeleteLocalGateway请求参数结构体
  */
-export interface DisableRoutesResponse {
+export interface DeleteLocalGatewayRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 本地网关实例ID。
    */
-  RequestId?: string
+  LocalGatewayId: string
+  /**
+   * CDC实例ID。
+   */
+  CdcId: string
+  /**
+   * VPC实例ID。
+   */
+  VpcId?: string
 }
 
 /**
@@ -16587,6 +16583,11 @@ export interface DeleteRouteTableRequest {
 }
 
 /**
+ * AssociateHaVipInstance请求参数结构体
+ */
+export type AssociateHaVipInstanceRequest = null
+
+/**
  * DescribeCdcLDCXList返回参数结构体
  */
 export interface DescribeCdcLDCXListResponse {
@@ -17057,6 +17058,16 @@ export interface UpdateTrafficMirrorDirectionRequest {
    * 流量镜像采集方向
    */
   Direction: string
+}
+
+/**
+ * DisassociateHaVipInstance返回参数结构体
+ */
+export interface DisassociateHaVipInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18012,6 +18023,20 @@ export interface ResetAttachCcnInstancesRequest {
  * UnlockCcnBandwidths返回参数结构体
  */
 export interface UnlockCcnBandwidthsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyVpnGatewaySslClientCert返回参数结构体
+ */
+export interface ModifyVpnGatewaySslClientCertResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19210,9 +19235,9 @@ export interface LockCcnBandwidthsResponse {
 }
 
 /**
- * DescribeAddressTemplates返回参数结构体
+ * DescribeAddressTemplateGroups返回参数结构体
  */
-export interface DescribeAddressTemplatesResponse {
+export interface DescribeAddressTemplateGroupsResponse {
   /**
    * 符合条件的实例数量。
    */
@@ -19220,7 +19245,7 @@ export interface DescribeAddressTemplatesResponse {
   /**
    * IP地址模板。
    */
-  AddressTemplateSet?: Array<AddressTemplate>
+  AddressTemplateGroupSet?: Array<AddressTemplateGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19710,6 +19735,16 @@ export interface ModifyGlobalRouteECMPAlgorithmResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisassociateHaVipInstance请求参数结构体
+ */
+export interface DisassociateHaVipInstanceRequest {
+  /**
+   * HaVip解绑的子机或网卡。最多支持10个实例。
+   */
+  HaVipAssociationSet: Array<HaVipAssociation>
 }
 
 /**

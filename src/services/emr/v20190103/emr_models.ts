@@ -693,6 +693,21 @@ export interface ModifyPodNumResponse {
 }
 
 /**
+ * 定时扩容每周重复任务策略
+ */
+export interface WeekRepeatStrategy {
+  /**
+   * 重复任务执行的具体时刻，例如"01:02:00"
+   */
+  ExecuteAtTimeOfDay: string
+  /**
+   * 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DaysOfWeek: Array<number | bigint>
+}
+
+/**
  * CreateInstance返回参数结构体
  */
 export interface CreateInstanceResponse {
@@ -2347,21 +2362,29 @@ export interface ShortNodeInfo {
 }
 
 /**
- * ModifyYarnDeploy返回参数结构体
+ * DescribeGroupsSTD请求参数结构体
  */
-export interface ModifyYarnDeployResponse {
+export interface DescribeGroupsSTDRequest {
   /**
-   * 为false不点亮部署生效、重置
+   * 集群名称
    */
-  IsDraft?: boolean
+  InstanceId: string
   /**
-   * 错误信息，预留
+   * 描述键值对过滤器，用于条件过滤查询
    */
-  ErrorMsg?: string
+  Filters?: Array<Filter>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 描述排序，用于排序
    */
-  RequestId?: string
+  OrderFields?: Order
+  /**
+   * 返回数量
+   */
+  Limit?: number
+  /**
+   * 分页参数
+   */
+  Offset?: number
 }
 
 /**
@@ -3686,18 +3709,21 @@ export interface OverviewMetricData {
 }
 
 /**
- * 定时扩容每周重复任务策略
+ * ModifyYarnDeploy返回参数结构体
  */
-export interface WeekRepeatStrategy {
+export interface ModifyYarnDeployResponse {
   /**
-   * 重复任务执行的具体时刻，例如"01:02:00"
+   * 为false不点亮部署生效、重置
    */
-  ExecuteAtTimeOfDay: string
+  IsDraft?: boolean
   /**
-   * 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 错误信息，预留
    */
-  DaysOfWeek: Array<number | bigint>
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4415,6 +4441,20 @@ export interface DescribeYarnQueueRequest {
 2. fair
    */
   Scheduler: string
+}
+
+/**
+ * 描述排序，用于排序.
+ */
+export interface Order {
+  /**
+   * 排序字段。
+   */
+  Name?: string
+  /**
+   * Desc or Asc。
+   */
+  Direction?: string
 }
 
 /**
@@ -6903,6 +6943,24 @@ export interface DeployYarnConfRequest {
    * emr集群的英文id
    */
   InstanceId: string
+}
+
+/**
+ * DescribeGroupsSTD返回参数结构体
+ */
+export interface DescribeGroupsSTDResponse {
+  /**
+   * 用户组信息
+   */
+  Data?: Array<GroupInfos>
+  /**
+   * 符合条件的用户组数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9425,6 +9483,36 @@ JobFlowFinish，流程任务已完成。
 }
 
 /**
+ * 用户组信息
+ */
+export interface GroupInfos {
+  /**
+   * 用户组名称
+   */
+  GroupName?: string
+  /**
+   * 用户名称列表
+   */
+  Users?: Array<string>
+  /**
+   * 备注
+   */
+  Description?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 用户组类型
+   */
+  GroupType?: number
+  /**
+   * 用户组类型描述
+   */
+  GroupTypeDesc?: string
+}
+
+/**
  * ModifyResourceScheduler返回参数结构体
  */
 export interface ModifyResourceSchedulerResponse {
@@ -9432,6 +9520,20 @@ export interface ModifyResourceSchedulerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 键值对过滤器，用于条件过滤查询.
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段。
+   */
+  Name?: string
+  /**
+   * 字段的过滤值。
+   */
+  Values?: Array<string>
 }
 
 /**
