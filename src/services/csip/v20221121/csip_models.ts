@@ -2231,7 +2231,7 @@ export interface AssetViewVULRiskData {
    */
   EngineSource?: string
   /**
-   * 新的漏洞风险id(同全网漏洞表的riskid)
+   * 新的漏洞风险id(同全网漏洞表的RiskId)
    */
   VulRiskId?: string
   /**

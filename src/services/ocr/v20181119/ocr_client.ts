@@ -38,7 +38,7 @@ import {
   FlightInvoiceOCRRequest,
   WordItem,
   MLIDPassportOCRRequest,
-  RecognizeGeneralTextImageWarnResponse,
+  OverseasInvoice,
   ItemInfo,
   SmartStructuralOCRV2Request,
   TextDetectResponse,
@@ -78,8 +78,8 @@ import {
   SmartStructuralProRequest,
   RecognizeTableOCRResponse,
   TextEduPaper,
-  VatInvoiceItemInfo,
   QrcodeOCRResponse,
+  CustomsDeclaration,
   WaybillObj,
   WordCoordPoint,
   InvoiceDetectInfo,
@@ -186,6 +186,7 @@ import {
   RideHailingDriverLicenseOCRResponse,
   ImageEnhancementRequest,
   EnglishOCRRequest,
+  VatInvoiceItemInfo,
   VatElectronicInfo,
   RecognizeValidIDCardOCRResponse,
   DetectedWords,
@@ -207,7 +208,9 @@ import {
   AdvertiseTextDetection,
   TextTable,
   FinanBillSliceInfo,
+  VatRollInvoiceInfo,
   Encryption,
+  RecognizeGeneralTextImageWarnResponse,
   ArithmeticOCRRequest,
   NonTaxIncomeBill,
   VerifyOfdVatInvoiceOCRRequest,
@@ -224,6 +227,7 @@ import {
   FinanBillOCRResponse,
   RecognizeHealthCodeOCRRequest,
   BankSlipOCRResponse,
+  OnlineTaxiItinerary,
   RecognizeEncryptedIDCardOCRResponse,
   PassInvoiceInfo,
   QuestionObj,
@@ -303,7 +307,7 @@ import {
   Element,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
-  VatRollInvoiceInfo,
+  ShoppingReceipt,
   RecognizeOnlineTaxiItineraryOCRRequest,
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
@@ -314,6 +318,7 @@ import {
   MLIDCardOCRResponse,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
+  SaleInventory,
   PermanentResidencePermitInfo,
   BizLicenseOCRResponse,
   ResultList,
@@ -1770,6 +1775,31 @@ export class Client extends AbstractClient {
           <td> BankSlip </td>
           <td> 银行回单 </td>
           <td> 20 </td>
+        </tr>
+        <tr>
+          <td> OnlineTaxiItinerary </td>
+          <td> 网约车行程单 </td>
+          <td> 21 </td>
+        </tr>
+        <tr>
+          <td> CustomsDeclaration </td>
+          <td> 海关进/出口货物报关单 </td>
+          <td> 22 </td>
+        </tr>
+        <tr>
+          <td> OverseasInvoice </td>
+          <td> 海外发票 </td>
+          <td> 23 </td>
+        </tr>
+        <tr>
+          <td> ShoppingReceipt </td>
+          <td> 购物小票 </td>
+          <td> 24 </td>
+        </tr>
+        <tr>
+          <td> SaleInventory </td>
+          <td> 销货清单 </td>
+          <td> 25 </td>
         </tr>
         <tr>
           <td> OtherInvoice </td>

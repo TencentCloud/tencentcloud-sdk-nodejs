@@ -2109,7 +2109,7 @@ export interface McuWaterMarkImage {
  */
 export interface StartPublishCdnStreamResponse {
   /**
-   * 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskiD参数。
+   * 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskID参数。
    */
   TaskId?: string
   /**
@@ -4243,6 +4243,7 @@ export interface McuAudioParams {
   /**
    * 音频用户白名单，start时，为空或不填表示混所有主播音频，填具体值表示混指定主播音频；update时，不填表示不更新，为空表示更新为混所有主播音频，填具体值表示更新为混指定主播音频。
 使用黑白名单时，黑白名单必须同时填写。都不填写时表示不更新。同一个用户同时在黑白名单时，以黑名单为主。
+注：如果是跨房pk时，跨房混流需要指定音频白名单，否则pk主播的的音频上行会被拉到两次，产生重音。
    */
   SubscribeAudioList?: Array<McuUserInfoParams>
   /**

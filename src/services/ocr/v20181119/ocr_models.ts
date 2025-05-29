@@ -180,6 +180,10 @@ FailedOperation.UnKnowError：表示识别失败；
    * 该发票中所有字段坐标信息。包括字段英文名称、字段值所在位置四点坐标、字段所属行号，具体内容请点击左侧链接。
    */
   ItemPolygon?: Array<ItemPolygonInfo>
+  /**
+   * 二维码数据。
+   */
+  QRCode?: string
 }
 
 /**
@@ -678,33 +682,17 @@ export interface MLIDPassportOCRRequest {
 }
 
 /**
- * RecognizeGeneralTextImageWarn返回参数结构体
+ * 海外发票
  */
-export interface RecognizeGeneralTextImageWarnResponse {
+export interface OverseasInvoice {
   /**
-   * 复印告警信息
+   * 发票名称
    */
-  Copy?: GeneralWarnInfo
+  Title?: string
   /**
-   * 翻拍告警信息
+   * 识别出的字段名称(关键字)
    */
-  Reprint?: GeneralWarnInfo
-  /**
-   * 模糊告警信息
-   */
-  Blur?: GeneralWarnInfo
-  /**
-   * 反光告警信息
-   */
-  Reflection?: GeneralWarnInfo
-  /**
-   * 边框不完整告警信息
-   */
-  BorderIncomplete?: GeneralWarnInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -1991,64 +1979,6 @@ export interface TextEduPaper {
 }
 
 /**
- * 增值税发票项目信息
- */
-export interface VatInvoiceItemInfo {
-  /**
-   * 项目名称
-   */
-  Name?: string
-  /**
-   * 规格型号
-   */
-  Specification?: string
-  /**
-   * 单位
-   */
-  Unit?: string
-  /**
-   * 数量
-   */
-  Quantity?: string
-  /**
-   * 单价
-   */
-  Price?: string
-  /**
-   * 金额
-   */
-  Total?: string
-  /**
-   * 税率
-   */
-  TaxRate?: string
-  /**
-   * 税额
-   */
-  Tax?: string
-  /**
-   * 通行日期起
-   */
-  DateStart?: string
-  /**
-   * 通行日期止
-   */
-  DateEnd?: string
-  /**
-   * 车牌号
-   */
-  LicensePlate?: string
-  /**
-   * 车辆类型
-   */
-  VehicleType?: string
-  /**
-   * 序号
-   */
-  SerialNumber?: string
-}
-
-/**
  * QrcodeOCR返回参数结构体
  */
 export interface QrcodeOCRResponse {
@@ -2064,6 +1994,20 @@ export interface QrcodeOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 海关进/出口货物报关单
+ */
+export interface CustomsDeclaration {
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 识别出的字段名称(关键字)
+   */
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -3378,6 +3322,11 @@ export interface RecognizeGeneralInvoiceRequest {
 18：完税凭证
 19：海关缴款书
 20：银行回单
+21：网约车行程单
+22：海关进/出口货物报关单
+23：海外发票
+24：购物小票
+25：销货清单
 -1：其他发票
    */
   Types?: Array<number | bigint>
@@ -3405,6 +3354,10 @@ export interface RecognizeGeneralInvoiceRequest {
    * 是否打开字段坐标返回。默认为false。
    */
   EnableItemPolygon?: boolean
+  /**
+   * 是否开启二维码识别。
+   */
+  EnableQRCode?: boolean
 }
 
 /**
@@ -4407,6 +4360,31 @@ export interface SingleInvoiceItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BankSlip?: BankSlip
+  /**
+   * 网约车行程单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnlineTaxiItinerary?: OnlineTaxiItinerary
+  /**
+   * 海关进/出口货物报关单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomsDeclaration?: CustomsDeclaration
+  /**
+   * 海外发票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OverseasInvoice?: OverseasInvoice
+  /**
+   * 购物小票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShoppingReceipt?: ShoppingReceipt
+  /**
+   * 销货清单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SaleInventory?: SaleInventory
 }
 
 /**
@@ -6470,6 +6448,64 @@ export interface EnglishOCRRequest {
 }
 
 /**
+ * 增值税发票项目信息
+ */
+export interface VatInvoiceItemInfo {
+  /**
+   * 项目名称
+   */
+  Name?: string
+  /**
+   * 规格型号
+   */
+  Specification?: string
+  /**
+   * 单位
+   */
+  Unit?: string
+  /**
+   * 数量
+   */
+  Quantity?: string
+  /**
+   * 单价
+   */
+  Price?: string
+  /**
+   * 金额
+   */
+  Total?: string
+  /**
+   * 税率
+   */
+  TaxRate?: string
+  /**
+   * 税额
+   */
+  Tax?: string
+  /**
+   * 通行日期起
+   */
+  DateStart?: string
+  /**
+   * 通行日期止
+   */
+  DateEnd?: string
+  /**
+   * 车牌号
+   */
+  LicensePlate?: string
+  /**
+   * 车辆类型
+   */
+  VehicleType?: string
+  /**
+   * 序号
+   */
+  SerialNumber?: string
+}
+
+/**
  * 电子发票返回值
  */
 export interface VatElectronicInfo {
@@ -7249,6 +7285,25 @@ export interface FinanBillSliceInfo {
 }
 
 /**
+ * 增值税发票卷票信息
+ */
+export interface VatRollInvoiceInfo {
+  /**
+   * 识别出的字段名称(关键字)，支持以下字段：
+发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。
+   */
+  Name?: string
+  /**
+   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+   */
+  Value?: string
+  /**
+   * 文本行在旋转纠正之后的图像中的像素坐标。
+   */
+  Rect?: Rect
+}
+
+/**
  * 敏感数据加密
  */
 export interface Encryption {
@@ -7277,6 +7332,36 @@ export interface Encryption {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptList?: Array<string>
+}
+
+/**
+ * RecognizeGeneralTextImageWarn返回参数结构体
+ */
+export interface RecognizeGeneralTextImageWarnResponse {
+  /**
+   * 复印告警信息
+   */
+  Copy?: GeneralWarnInfo
+  /**
+   * 翻拍告警信息
+   */
+  Reprint?: GeneralWarnInfo
+  /**
+   * 模糊告警信息
+   */
+  Blur?: GeneralWarnInfo
+  /**
+   * 反光告警信息
+   */
+  Reflection?: GeneralWarnInfo
+  /**
+   * 边框不完整告警信息
+   */
+  BorderIncomplete?: GeneralWarnInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7850,6 +7935,20 @@ export interface BankSlipOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网约车行程单
+ */
+export interface OnlineTaxiItinerary {
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 识别出的字段名称(关键字)
+   */
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -10614,22 +10713,17 @@ DOUBLE 为行驶证主页正面和副页正面。
 }
 
 /**
- * 增值税发票卷票信息
+ * 购物小票
  */
-export interface VatRollInvoiceInfo {
+export interface ShoppingReceipt {
   /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。
+   * 发票名称
    */
-  Name?: string
+  Title?: string
   /**
-   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+   * 识别出的字段名称(关键字)
    */
-  Value?: string
-  /**
-   * 文本行在旋转纠正之后的图像中的像素坐标。
-   */
-  Rect?: Rect
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -10963,6 +11057,20 @@ export interface EstateCertOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
+}
+
+/**
+ * 销货清单
+ */
+export interface SaleInventory {
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 识别出的字段名称(关键字)
+   */
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**

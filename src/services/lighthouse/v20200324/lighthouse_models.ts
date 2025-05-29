@@ -4726,6 +4726,7 @@ export interface FirewallTemplateApplyRecord {
    * 应用模板的执行状态。
 
 - SUCCESS：成功
+- RUNNING：运行中
 - FAILED：失败
    */
   ApplyState?: string

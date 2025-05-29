@@ -18,89 +18,95 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  BatchSendEmailRequest,
-  GetEmailTemplateRequest,
-  ListSendTasksResponse,
-  CreateReceiverResponse,
-  CreateCustomBlacklistRequest,
-  ListEmailAddressResponse,
-  ListEmailAddressRequest,
-  UpdateCustomBlackListResponse,
-  UpdateEmailSmtpPassWordResponse,
-  ListReceiversRequest,
-  GetEmailIdentityResponse,
-  ListBlackEmailAddressRequest,
-  Attachment,
+  SendTaskData,
   Template,
-  ListSendTasksRequest,
-  ListAddressUnsubscribeConfigResponse,
-  GetSendEmailStatusResponse,
-  TemplatesMetadata,
-  ReceiverDetail,
-  DeleteBlackListRequest,
+  ListAddressUnsubscribeConfigRequest,
   EmailSender,
   BatchSendEmailResponse,
   DeleteEmailIdentityRequest,
-  ListAddressUnsubscribeConfigRequest,
-  UpdateEmailIdentityRequest,
-  GetEmailIdentityRequest,
-  DeleteEmailIdentityResponse,
-  GetStatisticsReportRequest,
   CreateCustomBlacklistResponse,
+  UpdateAddressUnsubscribeConfigResponse,
   CreateReceiverRequest,
-  SendTaskData,
-  ListReceiverDetailsResponse,
-  DeleteEmailTemplateResponse,
-  UpdateCustomBlackListRequest,
-  AddressUnsubscribeConfigData,
-  CreateEmailIdentityRequest,
-  ListCustomBlacklistRequest,
-  UpdateEmailSmtpPassWordRequest,
-  ReceiverData,
-  UpdateEmailIdentityResponse,
-  CreateEmailTemplateRequest,
-  DeleteBlackListResponse,
-  DeleteCustomBlackListRequest,
-  UpdateEmailTemplateRequest,
-  ListCustomBlacklistResponse,
-  SendEmailStatus,
-  ListEmailTemplatesRequest,
-  CreateReceiverDetailWithDataResponse,
-  ReceiverInputData,
-  CreateReceiverDetailResponse,
-  DeleteReceiverResponse,
-  ListEmailTemplatesResponse,
-  SendEmailResponse,
-  SendEmailRequest,
-  ListBlackEmailAddressResponse,
-  GetSendEmailStatusRequest,
-  Simple,
-  Volume,
-  DeleteReceiverRequest,
-  ListEmailIdentitiesResponse,
-  DeleteEmailTemplateRequest,
   TemplateContent,
-  GetStatisticsReportResponse,
-  DeleteEmailAddressRequest,
-  BlackAddressDetail,
-  EmailIdentity,
   BlackEmailAddress,
-  DeleteEmailAddressResponse,
-  CycleEmailParam,
-  CreateEmailIdentityResponse,
-  ListReceiverDetailsRequest,
+  Simple,
   CreateEmailAddressRequest,
-  DeleteCustomBlackListResponse,
   CreateReceiverDetailRequest,
-  CreateEmailTemplateResponse,
-  ListReceiversResponse,
-  CreateEmailAddressResponse,
   UpdateEmailTemplateResponse,
   CreateReceiverDetailWithDataRequest,
   TimedEmailParam,
   DNSAttributes,
   GetEmailTemplateResponse,
+  ListAddressUnsubscribeConfigResponse,
+  SendEmailRequest,
+  UpdateEmailIdentityRequest,
+  DeleteEmailIdentityResponse,
+  DeleteEmailTemplateResponse,
+  ListCustomBlacklistRequest,
+  DeleteEmailTemplateRequest,
+  SendEmailStatus,
+  ListEmailTemplatesRequest,
+  DeleteBlackListRequest,
+  ReceiverInputData,
+  ReceiverDetail,
+  ListBlackEmailAddressResponse,
+  ListEmailIdentitiesResponse,
+  UpdateCustomBlackListRequest,
+  UpdateEmailSmtpPassWordRequest,
+  DeleteCustomBlackListRequest,
+  UpdateAddressUnsubscribeConfigRequest,
   ListEmailIdentitiesRequest,
+  CreateReceiverResponse,
+  UpdateEmailSmtpPassWordResponse,
+  ListReceiversRequest,
+  GetEmailIdentityResponse,
+  Attachment,
+  ListSendTasksRequest,
+  ListReceiverDetailsResponse,
+  ListEmailTemplatesResponse,
+  GetEmailIdentityRequest,
+  GetStatisticsReportRequest,
+  GetSendEmailStatusResponse,
+  AddressUnsubscribeConfigData,
+  CreateEmailIdentityRequest,
+  UpdateEmailTemplateRequest,
+  CreateEmailTemplateRequest,
+  DeleteBlackListResponse,
+  DeleteCustomBlackListResponse,
+  DeleteAddressUnsubscribeConfigRequest,
+  CreateReceiverDetailResponse,
+  DeleteReceiverResponse,
+  SendEmailResponse,
+  TemplatesMetadata,
+  BlackAddressDetail,
+  GetStatisticsReportResponse,
+  DeleteEmailAddressResponse,
+  ListCustomBlacklistResponse,
+  ListReceiverDetailsRequest,
+  CreateEmailIdentityResponse,
+  CreateEmailAddressResponse,
+  DeleteAddressUnsubscribeConfigResponse,
+  BatchSendEmailRequest,
+  CreateCustomBlacklistRequest,
+  ListEmailAddressRequest,
+  UpdateCustomBlackListResponse,
+  ListBlackEmailAddressRequest,
+  CreateReceiverDetailWithDataResponse,
+  GetEmailTemplateRequest,
+  ListSendTasksResponse,
+  Volume,
+  ReceiverData,
+  CreateAddressUnsubscribeConfigRequest,
+  UpdateEmailIdentityResponse,
+  CreateEmailTemplateResponse,
+  GetSendEmailStatusRequest,
+  ListEmailAddressResponse,
+  DeleteEmailAddressRequest,
+  EmailIdentity,
+  DeleteReceiverRequest,
+  CycleEmailParam,
+  CreateAddressUnsubscribeConfigResponse,
+  ListReceiversResponse,
 } from "./ses_models"
 
 /**
@@ -173,16 +179,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取某个发信域名的配置详情
-   */
-  async GetEmailIdentity(
-    req: GetEmailIdentityRequest,
-    cb?: (error: string, rep: GetEmailIdentityResponse) => void
-  ): Promise<GetEmailIdentityResponse> {
-    return this.request("GetEmailIdentity", req, cb)
-  }
-
-  /**
    * 根据模板ID获取模板详情
    */
   async GetEmailTemplate(
@@ -190,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetEmailTemplateResponse) => void
   ): Promise<GetEmailTemplateResponse> {
     return this.request("GetEmailTemplate", req, cb)
+  }
+
+  /**
+   * 获取某个发信域名的配置详情
+   */
+  async GetEmailIdentity(
+    req: GetEmailIdentityRequest,
+    cb?: (error: string, rep: GetEmailIdentityResponse) => void
+  ): Promise<GetEmailIdentityResponse> {
+    return this.request("GetEmailIdentity", req, cb)
   }
 
   /**
@@ -210,6 +216,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
   ): Promise<ListBlackEmailAddressResponse> {
     return this.request("ListBlackEmailAddress", req, cb)
+  }
+
+  /**
+   * 创建地址级退订配置
+   */
+  async CreateAddressUnsubscribeConfig(
+    req: CreateAddressUnsubscribeConfigRequest,
+    cb?: (error: string, rep: CreateAddressUnsubscribeConfigResponse) => void
+  ): Promise<CreateAddressUnsubscribeConfigResponse> {
+    return this.request("CreateAddressUnsubscribeConfig", req, cb)
   }
 
   /**
@@ -304,6 +320,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于更新地址级退订配置
+   */
+  async UpdateAddressUnsubscribeConfig(
+    req: UpdateAddressUnsubscribeConfigRequest,
+    cb?: (error: string, rep: UpdateAddressUnsubscribeConfigResponse) => void
+  ): Promise<UpdateAddressUnsubscribeConfigResponse> {
+    return this.request("UpdateAddressUnsubscribeConfig", req, cb)
+  }
+
+  /**
    * 添加自定义黑名单
    */
   async CreateCustomBlacklist(
@@ -321,6 +347,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEmailTemplateResponse) => void
   ): Promise<DeleteEmailTemplateResponse> {
     return this.request("DeleteEmailTemplate", req, cb)
+  }
+
+  /**
+   * 删除地址级退订配置
+   */
+  async DeleteAddressUnsubscribeConfig(
+    req: DeleteAddressUnsubscribeConfigRequest,
+    cb?: (error: string, rep: DeleteAddressUnsubscribeConfigResponse) => void
+  ): Promise<DeleteAddressUnsubscribeConfigResponse> {
+    return this.request("DeleteAddressUnsubscribeConfig", req, cb)
   }
 
   /**

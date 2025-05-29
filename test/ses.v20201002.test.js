@@ -78,9 +78,9 @@ it("ses.v20201002.CreateReceiver", async function () {
     }
 })
 
-it("ses.v20201002.GetEmailIdentity", async function () {
+it("ses.v20201002.GetEmailTemplate", async function () {
     try {
-       const data = await client.GetEmailIdentity({})
+       const data = await client.GetEmailTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("ses.v20201002.GetEmailIdentity", async function () {
     }
 })
 
-it("ses.v20201002.GetEmailTemplate", async function () {
+it("ses.v20201002.GetEmailIdentity", async function () {
     try {
-       const data = await client.GetEmailTemplate({})
+       const data = await client.GetEmailIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("ses.v20201002.UpdateCustomBlackList", async function () {
 it("ses.v20201002.ListBlackEmailAddress", async function () {
     try {
        const data = await client.ListBlackEmailAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.CreateAddressUnsubscribeConfig", async function () {
+    try {
+       const data = await client.CreateAddressUnsubscribeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +218,16 @@ it("ses.v20201002.UpdateEmailSmtpPassWord", async function () {
     }
 })
 
+it("ses.v20201002.UpdateAddressUnsubscribeConfig", async function () {
+    try {
+       const data = await client.UpdateAddressUnsubscribeConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.CreateCustomBlacklist", async function () {
     try {
        const data = await client.CreateCustomBlacklist({})
@@ -221,6 +241,16 @@ it("ses.v20201002.CreateCustomBlacklist", async function () {
 it("ses.v20201002.DeleteEmailTemplate", async function () {
     try {
        const data = await client.DeleteEmailTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.DeleteAddressUnsubscribeConfig", async function () {
+    try {
+       const data = await client.DeleteAddressUnsubscribeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

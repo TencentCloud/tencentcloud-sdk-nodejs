@@ -964,7 +964,7 @@ export interface DescribeSecEventsTendencyResponse {
  */
 export interface DescribeAccessControlEventsExportResponse {
   /**
-   * execle下载地址
+   * excel下载地址
    */
   DownloadUrl?: string
   /**
@@ -18471,7 +18471,7 @@ export interface RunTimeTendencyInfo {
 export type DescribeContainerAssetSummaryRequest = null
 
 /**
- * ckafkal路由详情
+ * Ckafka路由详情
  */
 export interface CkafkaRouteInfo {
   /**
@@ -19628,7 +19628,7 @@ export interface NetworkClusterNamespaceInfo {
  */
 export interface DescribeReverseShellEventsExportResponse {
   /**
-   * execle下载地址
+   * excel下载地址
    */
   DownloadUrl?: string
   /**

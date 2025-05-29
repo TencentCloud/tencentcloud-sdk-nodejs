@@ -22,11 +22,14 @@ import {
   DescribeInstanceCLSLogDeliveryResponse,
   ModifyMaintainPeriodConfigRequest,
   BizTaskModifyInstanceParam,
+  ModifyClusterReadOnlyResponse,
   ModifyClusterStorageRequest,
   DescribeResourcePackageDetailResponse,
+  UpgradeInstanceRequest,
   SearchClusterTablesRequest,
   DescribeMaintainPeriodRequest,
   AccountParam,
+  DescribeProjectSecurityGroupsResponse,
   DescribeClusterDatabaseTablesRequest,
   DescribeClusterParamsResponse,
   RefundResourcePackageResponse,
@@ -49,6 +52,7 @@ import {
   OpenReadOnlyInstanceExclusiveAccessResponse,
   SearchClusterDatabasesResponse,
   CreateParamTemplateRequest,
+  DescribeBackupDownloadUserRestrictionRequest,
   DescribeClusterDetailRequest,
   ModifyResourcePackageNameRequest,
   UpgradeProxy,
@@ -67,17 +71,21 @@ import {
   ModifyBinlogSaveDaysRequest,
   ProxySpec,
   AddInstancesResponse,
+  BackupLimitClusterRestriction,
   SlowQueriesItem,
+  PolicyRule,
   ProxyGroupInfo,
   AssociateSecurityGroupsResponse,
   CreateProxyEndPointRequest,
+  ModifyBackupDownloadUserRestrictionResponse,
   AuditRuleTemplateInfo,
   DescribeParamTemplateDetailRequest,
-  ModifyAccountPrivilegesRequest,
+  OpenReadOnlyInstanceExclusiveAccessRequest,
   ExportResourcePackageDeductDetailsRequest,
   StartCLSDeliveryResponse,
   ParamItemInfo,
   UpgradeProxyResponse,
+  DescribeClusterReadOnlyResponse,
   DescribeInstanceSpecsRequest,
   DescribeProxyNodesResponse,
   ProxyNodeInfo,
@@ -91,6 +99,7 @@ import {
   DescribeProxyNodesRequest,
   DescribeAuditLogsRequest,
   InquirePriceCreateResponse,
+  DescribeClusterReadOnlyRequest,
   CreateClustersRequest,
   DescribeClusterParamLogsRequest,
   CloseProxyResponse,
@@ -101,7 +110,7 @@ import {
   DescribeClusterInstanceGrpsResponse,
   ModifyBackupConfigResponse,
   ModifyClusterDatabaseRequest,
-  DescribeServerlessStrategyResponse,
+  DescribeResourcePackageDetailRequest,
   InstanceCLSDeliveryInfo,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
@@ -139,6 +148,7 @@ import {
   DeleteParamTemplateRequest,
   RevokeAccountPrivilegesResponse,
   ServerlessSpec,
+  ModifyBackupDownloadRestrictionRequest,
   DescribeClusterDetailDatabasesResponse,
   CreateParamTemplateResponse,
   DescribeAccountAllGrantPrivilegesResponse,
@@ -153,7 +163,8 @@ import {
   InstanceParamItem,
   DescribeDBSecurityGroupsRequest,
   RollbackData,
-  UpgradeInstanceRequest,
+  UnbindClusterResourcePackagesRequest,
+  ModifyBackupDownloadUserRestrictionRequest,
   DescribeInstanceParamsResponse,
   SwitchClusterVpcResponse,
   DescribeZonesRequest,
@@ -178,20 +189,21 @@ import {
   DbInfo,
   DescribeBackupDownloadUrlRequest,
   InstanceAuditStatus,
-  CopyClusterPasswordComplexityRequest,
+  OpenWanRequest,
   DescribeClusterInstanceGroupsResponse,
   CreateProxyEndPointResponse,
   NetAddr,
-  OpenWanRequest,
+  CopyClusterPasswordComplexityRequest,
   ModifyAccountPrivilegesResponse,
   InquirePriceCreateRequest,
   ModifyAuditServiceRequest,
   ModifyClusterNameResponse,
   CrossRegionBackupItem,
   ExportInstanceSlowQueriesRequest,
-  ModifyAuditServiceResponse,
+  ParamItem,
   ResumeServerlessResponse,
   GdnTaskInfo,
+  DescribeBackupDownloadUserRestrictionResponse,
   SaleZone,
   SwitchProxyVpcResponse,
   StartCLSDeliveryRequest,
@@ -207,6 +219,7 @@ import {
   IsolateClusterRequest,
   AddInstancesRequest,
   CynosdbInstanceDetail,
+  DescribeBackupDownloadRestrictionRequest,
   RollbackTable,
   DescribeInstanceErrorLogsRequest,
   DescribeInstanceDetailRequest,
@@ -259,6 +272,7 @@ import {
   DescribeFlowResponse,
   ExportInstanceErrorLogsRequest,
   ActivateInstanceRequest,
+  DescribeBackupDownloadRestrictionResponse,
   DeleteClusterDatabaseRequest,
   CynosdbErrorLogItem,
   ModifyVipVportRequest,
@@ -311,16 +325,18 @@ import {
   CynosdbCluster,
   OpenWanResponse,
   OfflineClusterResponse,
+  ClusterTaskId,
   ModifyAccountHostRequest,
   DescribeFlowRequest,
   DescribeClusterDatabaseTablesResponse,
-  OpenReadOnlyInstanceExclusiveAccessRequest,
+  ModifyAccountPrivilegesRequest,
   CreateBackupRequest,
   CreateCLSDeliveryRequest,
   DescribeMaintainPeriodResponse,
   DescribeBackupListResponse,
-  DescribeResourcePackageDetailRequest,
+  DescribeServerlessStrategyResponse,
   ModifyClusterParamRequest,
+  ModifyClusterReadOnlyRequest,
   OfflineInstanceResponse,
   CreateAuditLogFileRequest,
   DescribeSSLStatusResponse,
@@ -331,12 +347,13 @@ import {
   CynosdbClusterDetail,
   RestartInstanceRequest,
   PackageDetail,
+  BackupLimitVpcItem,
   BinlogConfigInfo,
   DescribeAccountPrivilegesRequest,
   ModifyAccountParamsResponse,
   DescribeInstanceSpecsResponse,
   OpenSSLResponse,
-  ParamItem,
+  ModifyAuditServiceResponse,
   DescribeClusterDetailResponse,
   DescribeInstanceSlowQueriesRequest,
   ModifyResourcePackageClustersResponse,
@@ -376,7 +393,7 @@ import {
   DescribeAuditRuleTemplatesResponse,
   LogicBackupConfigInfo,
   DeleteBackupResponse,
-  DescribeProjectSecurityGroupsResponse,
+  ModifyBackupDownloadRestrictionResponse,
   ParamDetail,
   OfflineClusterRequest,
   ResetAccountPasswordResponse,
@@ -402,7 +419,7 @@ import {
   ModifyClusterParamResponse,
   SecurityGroup,
   ModifyClusterPasswordComplexityRequest,
-  UnbindClusterResourcePackagesRequest,
+  BackupLimitRestriction,
   ModifyInstanceParamResponse,
   TaskProgressInfo,
   TemplateParamInfo,
@@ -447,7 +464,7 @@ import {
   DescribeParamTemplateDetailResponse,
   ModifyBinlogSaveDaysResponse,
   DeleteAuditRuleTemplatesResponse,
-  PolicyRule,
+  ClusterReadOnlyValue,
   ZoneStockInfo,
   DeleteCLSDeliveryResponse,
   InquirePriceRenewResponse,
@@ -571,6 +588,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CopyClusterPasswordComplexityResponse) => void
   ): Promise<CopyClusterPasswordComplexityResponse> {
     return this.request("CopyClusterPasswordComplexity", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例绑定的安全组。
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**
@@ -1084,6 +1111,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用户查询当前地域用户级别设置的默认备份下载来源限制
+   */
+  async DescribeBackupDownloadUserRestriction(
+    req: DescribeBackupDownloadUserRestrictionRequest,
+    cb?: (error: string, rep: DescribeBackupDownloadUserRestrictionResponse) => void
+  ): Promise<DescribeBackupDownloadUserRestrictionResponse> {
+    return this.request("DescribeBackupDownloadUserRestriction", req, cb)
+  }
+
+  /**
    * 本接口（ModifyParamTemplate）用于修改用户参数模板。
    */
   async ModifyParamTemplate(
@@ -1151,6 +1188,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClustersResponse) => void
   ): Promise<CreateClustersResponse> {
     return this.request("CreateClusters", req, cb)
+  }
+
+  /**
+   * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
+   */
+  async ModifyBackupDownloadUserRestriction(
+    req: ModifyBackupDownloadUserRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadUserRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadUserRestrictionResponse> {
+    return this.request("ModifyBackupDownloadUserRestriction", req, cb)
   }
 
   /**
@@ -1484,13 +1531,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeBinlogConfig）用于查询binlog配置
+   * 本接口（DescribeClusterReadOnly）用于查询集群只读开关。
    */
-  async DescribeBinlogConfig(
-    req: DescribeBinlogConfigRequest,
-    cb?: (error: string, rep: DescribeBinlogConfigResponse) => void
-  ): Promise<DescribeBinlogConfigResponse> {
-    return this.request("DescribeBinlogConfig", req, cb)
+  async DescribeClusterReadOnly(
+    req: DescribeClusterReadOnlyRequest,
+    cb?: (error: string, rep: DescribeClusterReadOnlyResponse) => void
+  ): Promise<DescribeClusterReadOnlyResponse> {
+    return this.request("DescribeClusterReadOnly", req, cb)
   }
 
   /**
@@ -1614,6 +1661,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用户查询当前地域用户设置的默认备份下载来源限制
+   */
+  async DescribeBackupDownloadRestriction(
+    req: DescribeBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void
+  ): Promise<DescribeBackupDownloadRestrictionResponse> {
+    return this.request("DescribeBackupDownloadRestriction", req, cb)
+  }
+
+  /**
    * 本接口（OfflineCluster）用于销毁集群。
    */
   async OfflineCluster(
@@ -1694,6 +1751,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyClusterReadOnly）用于修改集群只读开关。
+   */
+  async ModifyClusterReadOnly(
+    req: ModifyClusterReadOnlyRequest,
+    cb?: (error: string, rep: ModifyClusterReadOnlyResponse) => void
+  ): Promise<ModifyClusterReadOnlyResponse> {
+    return this.request("ModifyClusterReadOnly", req, cb)
+  }
+
+  /**
    * 本接口（DeleteAuditLogFile）用于删除云数据库实例的审计日志文件。
    */
   async DeleteAuditLogFile(
@@ -1741,6 +1808,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeBinlogConfig）用于查询binlog配置
+   */
+  async DescribeBinlogConfig(
+    req: DescribeBinlogConfigRequest,
+    cb?: (error: string, rep: DescribeBinlogConfigResponse) => void
+  ): Promise<DescribeBinlogConfigResponse> {
+    return this.request("DescribeBinlogConfig", req, cb)
   }
 
   /**
@@ -1884,13 +1961,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例绑定的安全组。
+   * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyBackupDownloadRestriction(
+    req: ModifyBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadRestrictionResponse> {
+    return this.request("ModifyBackupDownloadRestriction", req, cb)
   }
 
   /**

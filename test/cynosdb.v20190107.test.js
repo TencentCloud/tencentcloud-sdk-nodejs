@@ -128,6 +128,16 @@ it("cynosdb.v20190107.CopyClusterPasswordComplexity", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CloseAuditService", async function () {
     try {
        const data = await client.CloseAuditService({})
@@ -638,6 +648,16 @@ it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeBackupDownloadUserRestriction", async function () {
+    try {
+       const data = await client.DescribeBackupDownloadUserRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyParamTemplate", async function () {
     try {
        const data = await client.ModifyParamTemplate({})
@@ -701,6 +721,16 @@ it("cynosdb.v20190107.ModifyClusterParam", async function () {
 it("cynosdb.v20190107.CreateClusters", async function () {
     try {
        const data = await client.CreateClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyBackupDownloadUserRestriction", async function () {
+    try {
+       const data = await client.ModifyBackupDownloadUserRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1038,9 +1068,9 @@ it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeBinlogConfig", async function () {
+it("cynosdb.v20190107.DescribeClusterReadOnly", async function () {
     try {
-       const data = await client.DescribeBinlogConfig({})
+       const data = await client.DescribeClusterReadOnly({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,6 +1198,16 @@ it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeBackupDownloadRestriction", async function () {
+    try {
+       const data = await client.DescribeBackupDownloadRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.OfflineCluster", async function () {
     try {
        const data = await client.OfflineCluster({})
@@ -1248,6 +1288,16 @@ it("cynosdb.v20190107.OpenAuditService", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyClusterReadOnly", async function () {
+    try {
+       const data = await client.ModifyClusterReadOnly({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DeleteAuditLogFile", async function () {
     try {
        const data = await client.DeleteAuditLogFile({})
@@ -1291,6 +1341,16 @@ it("cynosdb.v20190107.ModifyBackupConfig", async function () {
 it("cynosdb.v20190107.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeBinlogConfig", async function () {
+    try {
+       const data = await client.DescribeBinlogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1438,9 +1498,9 @@ it("cynosdb.v20190107.CreateProxy", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyDBInstanceSecurityGroups", async function () {
+it("cynosdb.v20190107.ModifyBackupDownloadRestriction", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.ModifyBackupDownloadRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

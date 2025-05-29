@@ -90,6 +90,20 @@ export interface BizTaskModifyInstanceParam {
 }
 
 /**
+ * ModifyClusterReadOnly返回参数结构体
+ */
+export interface ModifyClusterReadOnlyResponse {
+  /**
+   * 集群任务ID列表
+   */
+  ClusterTaskIds?: Array<ClusterTaskId>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterStorage请求参数结构体
  */
 export interface ModifyClusterStorageRequest {
@@ -127,6 +141,56 @@ export interface DescribeResourcePackageDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpgradeInstance请求参数结构体
+ */
+export interface UpgradeInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 数据库CPU
+   */
+  Cpu: number
+  /**
+   * 数据库内存，单位GB
+   */
+  Memory: number
+  /**
+   * 升级类型：upgradeImmediate，upgradeInMaintain
+   */
+  UpgradeType: string
+  /**
+   * 实例机器类型
+   */
+  DeviceType?: string
+  /**
+   * 该参数已废弃
+   */
+  StorageLimit?: number
+  /**
+   * 是否自动选择代金券 1是 0否 默认为0
+   */
+  AutoVoucher?: number
+  /**
+   * 该参数已废弃
+   */
+  DbType?: string
+  /**
+   * 交易模式 0-下单并支付 1-下单
+   */
+  DealMode?: number
+  /**
+   * NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。
+   */
+  UpgradeMode?: string
+  /**
+   * proxy同步升级
+   */
+  UpgradeProxy?: UpgradeProxy
 }
 
 /**
@@ -176,6 +240,24 @@ export interface AccountParam {
    * 参数值
    */
   ParamValue: string
+}
+
+/**
+ * DescribeProjectSecurityGroups返回参数结构体
+ */
+export interface DescribeProjectSecurityGroupsResponse {
+  /**
+   * 安全组详情
+   */
+  Groups?: Array<SecurityGroup>
+  /**
+   * 总数量
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -720,6 +802,24 @@ export interface CreateParamTemplateRequest {
    * 参数列表
    */
   ParamList?: Array<ParamItem>
+}
+
+/**
+ * DescribeBackupDownloadUserRestriction请求参数结构体
+ */
+export interface DescribeBackupDownloadUserRestrictionRequest {
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 是否只查询用户级别下载限制，true-是，false-否
+   */
+  OnlyUserRestriction?: boolean
 }
 
 /**
@@ -1372,6 +1472,20 @@ export interface AddInstancesResponse {
 }
 
 /**
+ * 备份下载集群限制参数
+ */
+export interface BackupLimitClusterRestriction {
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+  /**
+   * 下载限制配置
+   */
+  BackupLimitRestriction?: BackupLimitRestriction
+}
+
+/**
  * 实例慢查询信息
  */
 export interface SlowQueriesItem {
@@ -1454,6 +1568,44 @@ export interface SlowQueriesItem {
 数据库内核版本大于3.1.12
    */
   TrxCommitDelay?: number
+}
+
+/**
+ * 安全组规则
+ */
+export interface PolicyRule {
+  /**
+   * 策略，ACCEPT或者DROP
+   */
+  Action?: string
+  /**
+   * 来源Ip或Ip段，例如192.168.0.0/16
+   */
+  CidrIp?: string
+  /**
+   * 端口
+   */
+  PortRange?: string
+  /**
+   * 网络协议，支持udp、tcp等
+   */
+  IpProtocol?: string
+  /**
+   * 协议端口ID或者协议端口组ID。
+   */
+  ServiceModule?: string
+  /**
+   * IP地址ID或者ID地址组ID。
+   */
+  AddressModule?: string
+  /**
+   * id
+   */
+  Id?: string
+  /**
+   * 描述
+   */
+  Desc?: string
 }
 
 /**
@@ -1584,6 +1736,16 @@ nearby,balance
 }
 
 /**
+ * ModifyBackupDownloadUserRestriction返回参数结构体
+ */
+export interface ModifyBackupDownloadUserRestrictionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 审计规则模板的详情
  */
 export interface AuditRuleTemplateInfo {
@@ -1640,29 +1802,33 @@ export interface DescribeParamTemplateDetailRequest {
 }
 
 /**
- * ModifyAccountPrivileges请求参数结构体
+ * OpenReadOnlyInstanceExclusiveAccess请求参数结构体
  */
-export interface ModifyAccountPrivilegesRequest {
+export interface OpenReadOnlyInstanceExclusiveAccessRequest {
   /**
-   * 集群id
+   * 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 clusterId。
    */
   ClusterId: string
   /**
-   * 账号信息
+   * 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 instanceId。
    */
-  Account: InputAccount
+  InstanceId: string
   /**
-   * 全局权限数组
+   * 指定的 vpc ID，请使用 [查询私有网络列表](https://cloud.tencent.com/document/api/215/15778) 获取 vpc ID。
    */
-  GlobalPrivileges?: Array<string>
+  VpcId: string
   /**
-   * 数据库权限数组
+   * 指定的子网 ID，如果设置了 vpc ID，则 SubnetId 必填，请使用 [查询子网列表](https://cloud.tencent.com/document/api/215/15784) 获取 SubnetId。
    */
-  DatabasePrivileges?: Array<DatabasePrivileges>
+  SubnetId: string
   /**
-   * 表权限数组
+   * 用户自定义的端口。
    */
-  TablePrivileges?: Array<TablePrivileges>
+  Port: number
+  /**
+   * 安全组 ID，请使用 [查看安全组](https://cloud.tencent.com/document/api/215/15808) 获取 SecurityGroupId。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -1758,6 +1924,20 @@ export interface UpgradeProxyResponse {
    * 异步任务ID
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterReadOnly返回参数结构体
+ */
+export interface DescribeClusterReadOnlyResponse {
+  /**
+   * 集群只读开关列表
+   */
+  ClusterReadOnlyValues?: Array<ClusterReadOnlyValue>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2082,6 +2262,16 @@ export interface InquirePriceCreateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeClusterReadOnly请求参数结构体
+ */
+export interface DescribeClusterReadOnlyRequest {
+  /**
+   * 集群ID列表
+   */
+  ClusterIds: Array<string>
 }
 
 /**
@@ -2459,43 +2649,37 @@ export interface ModifyClusterDatabaseRequest {
 }
 
 /**
- * DescribeServerlessStrategy返回参数结构体
+ * DescribeResourcePackageDetail请求参数结构体
  */
-export interface DescribeServerlessStrategyResponse {
+export interface DescribeResourcePackageDetailRequest {
   /**
-   * cpu负载为 0 时持续多久（秒）发起自动暂停
+   * 资源包唯一ID
    */
-  AutoPauseDelay?: number
+  PackageId: string
   /**
-   * cpu负载超过当前规格核数时，持续多久（秒）发起自动扩容
+   * 集群ID
    */
-  AutoScaleUpDelay?: number
+  ClusterIds?: Array<string>
   /**
-   * cpu 负载低于低一级规格核数时，持续多久（秒）发起自动缩容
+   * 开始时间
    */
-  AutoScaleDownDelay?: number
+  StartTime?: string
   /**
-   * 是否自动暂停，可能值：
-yes
-no
+   * 结束时间
    */
-  AutoPause?: string
+  EndTime?: string
   /**
-   * 集群是否允许向上扩容，可选范围<li>yes</li><li>no</li>
+   * 偏移量
    */
-  AutoScaleUp?: string
+  Offset?: string
   /**
-   * 集群是否允许向下缩容，可选范围<li>yes</li><li>no</li>
+   * 限制
    */
-  AutoScaleDown?: string
+  Limit?: string
   /**
-   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
+   * 实例D
    */
-  AutoArchive?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceIds?: Array<string>
 }
 
 /**
@@ -3274,6 +3458,36 @@ export interface ServerlessSpec {
 }
 
 /**
+ * ModifyBackupDownloadRestriction请求参数结构体
+ */
+export interface ModifyBackupDownloadRestrictionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterIds: Array<string>
+  /**
+   * 下载限制类型，NoLimit-不限制,LimitOnlyIntranet-限制内网 ,Customize-自定义
+   */
+  LimitType: string
+  /**
+   * 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In
+   */
+  VpcComparisonSymbol?: string
+  /**
+   * In: 指定的ip可以下载； NotIn: 指定的ip不可以下载
+   */
+  IpComparisonSymbol?: string
+  /**
+   * 限制下载的vpc设置
+   */
+  LimitVpcs?: Array<BackupLimitVpcItem>
+  /**
+   * 限制下载的ip设置
+   */
+  LimitIps?: Array<string>
+}
+
+/**
  * DescribeClusterDetailDatabases返回参数结构体
  */
 export interface DescribeClusterDetailDatabasesResponse {
@@ -3561,53 +3775,43 @@ export interface RollbackData {
 }
 
 /**
- * UpgradeInstance请求参数结构体
+ * UnbindClusterResourcePackages请求参数结构体
  */
-export interface UpgradeInstanceRequest {
+export interface UnbindClusterResourcePackagesRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
-  InstanceId: string
+  ClusterId: string
   /**
-   * 数据库CPU
+   * 资源包唯一ID,如果不传，解绑该实例绑定的所有资源包
    */
-  Cpu: number
+  PackageIds?: Array<string>
+}
+
+/**
+ * ModifyBackupDownloadUserRestriction请求参数结构体
+ */
+export interface ModifyBackupDownloadUserRestrictionRequest {
   /**
-   * 数据库内存，单位GB
+   * 下载限制类型，NoLimit-不限制,LimitOnlyIntranet-限制内网 ,Customize-自定义
    */
-  Memory: number
+  LimitType: string
   /**
-   * 升级类型：upgradeImmediate，upgradeInMaintain
+   * 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In
    */
-  UpgradeType: string
+  VpcComparisonSymbol?: string
   /**
-   * 实例机器类型
+   * In: 指定的ip可以下载； NotIn: 指定的ip不可以下载
    */
-  DeviceType?: string
+  IpComparisonSymbol?: string
   /**
-   * 该参数已废弃
+   * 限制下载的vpc设置
    */
-  StorageLimit?: number
+  LimitVpcs?: Array<BackupLimitVpcItem>
   /**
-   * 是否自动选择代金券 1是 0否 默认为0
+   * 限制下载的ip设置
    */
-  AutoVoucher?: number
-  /**
-   * 该参数已废弃
-   */
-  DbType?: string
-  /**
-   * 交易模式 0-下单并支付 1-下单
-   */
-  DealMode?: number
-  /**
-   * NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。
-   */
-  UpgradeMode?: string
-  /**
-   * proxy同步升级
-   */
-  UpgradeProxy?: UpgradeProxy
+  LimitIps?: Array<string>
 }
 
 /**
@@ -4055,6 +4259,10 @@ export interface DescribeBackupDownloadUrlRequest {
    * 备份ID
    */
   BackupId: number
+  /**
+   * 备份下载来源限制条件
+   */
+  DownloadRestriction?: BackupLimitRestriction
 }
 
 /**
@@ -4124,17 +4332,22 @@ export interface InstanceAuditStatus {
 }
 
 /**
- * CopyClusterPasswordComplexity请求参数结构体
+ * OpenWan请求参数结构体
  */
-export interface CopyClusterPasswordComplexityRequest {
+export interface OpenWanRequest {
   /**
-   * 复制集群ID数组，例如["cynosdbmysql-bzxxrmtq","cynosdbmysql-qwer"]
+   * 实例组id
+   * @deprecated
    */
-  ClusterIds: Array<string>
+  InstanceGrpId?: string
   /**
-   * 集群id，例如"cynosdbmysql-bzxxrmtq"
+   * 实例ID
    */
-  SourceClusterId: string
+  InstanceId?: string
+  /**
+   * 实例组id
+   */
+  InstanceGroupId?: string
 }
 
 /**
@@ -4228,22 +4441,17 @@ export interface NetAddr {
 }
 
 /**
- * OpenWan请求参数结构体
+ * CopyClusterPasswordComplexity请求参数结构体
  */
-export interface OpenWanRequest {
+export interface CopyClusterPasswordComplexityRequest {
   /**
-   * 实例组id
-   * @deprecated
+   * 复制集群ID数组，例如["cynosdbmysql-bzxxrmtq","cynosdbmysql-qwer"]
    */
-  InstanceGrpId?: string
+  ClusterIds: Array<string>
   /**
-   * 实例ID
+   * 集群id，例如"cynosdbmysql-bzxxrmtq"
    */
-  InstanceId?: string
-  /**
-   * 实例组id
-   */
-  InstanceGroupId?: string
+  SourceClusterId: string
 }
 
 /**
@@ -4415,13 +4623,21 @@ export interface ExportInstanceSlowQueriesRequest {
 }
 
 /**
- * ModifyAuditService返回参数结构体
+ * 修改参数时，传入参数描述
  */
-export interface ModifyAuditServiceResponse {
+export interface ParamItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 参数名称
    */
-  RequestId?: string
+  ParamName: string
+  /**
+   * 当前值
+   */
+  CurrentValue: string
+  /**
+   * 原有值
+   */
+  OldValue: string
 }
 
 /**
@@ -4470,6 +4686,25 @@ export interface GdnTaskInfo {
    * 从集群别名
    */
   StandbyClusterName?: string
+}
+
+/**
+ * DescribeBackupDownloadUserRestriction返回参数结构体
+ */
+export interface DescribeBackupDownloadUserRestrictionResponse {
+  /**
+   * 集群备份下载限制信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupLimitClusterRestrictions?: Array<BackupLimitClusterRestriction>
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4979,6 +5214,16 @@ pause
    * Db类型:<li>NORMAL</li><li>SERVERLESS</li>
    */
   DbMode?: string
+}
+
+/**
+ * DescribeBackupDownloadRestriction请求参数结构体
+ */
+export interface DescribeBackupDownloadRestrictionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterIds: Array<string>
 }
 
 /**
@@ -6307,6 +6552,21 @@ export interface ActivateInstanceRequest {
 }
 
 /**
+ * DescribeBackupDownloadRestriction返回参数结构体
+ */
+export interface DescribeBackupDownloadRestrictionResponse {
+  /**
+   * 集群备份下载限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupLimitClusterRestrictions?: Array<BackupLimitClusterRestriction>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteClusterDatabase请求参数结构体
  */
 export interface DeleteClusterDatabaseRequest {
@@ -7617,6 +7877,20 @@ export interface OfflineClusterResponse {
 }
 
 /**
+ * 集群任务ID
+ */
+export interface ClusterTaskId {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+}
+
+/**
  * ModifyAccountHost请求参数结构体
  */
 export interface ModifyAccountHostRequest {
@@ -7671,33 +7945,29 @@ export interface DescribeClusterDatabaseTablesResponse {
 }
 
 /**
- * OpenReadOnlyInstanceExclusiveAccess请求参数结构体
+ * ModifyAccountPrivileges请求参数结构体
  */
-export interface OpenReadOnlyInstanceExclusiveAccessRequest {
+export interface ModifyAccountPrivilegesRequest {
   /**
-   * 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 clusterId。
+   * 集群id
    */
   ClusterId: string
   /**
-   * 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 instanceId。
+   * 账号信息
    */
-  InstanceId: string
+  Account: InputAccount
   /**
-   * 指定的 vpc ID，请使用 [查询私有网络列表](https://cloud.tencent.com/document/api/215/15778) 获取 vpc ID。
+   * 全局权限数组
    */
-  VpcId: string
+  GlobalPrivileges?: Array<string>
   /**
-   * 指定的子网 ID，如果设置了 vpc ID，则 SubnetId 必填，请使用 [查询子网列表](https://cloud.tencent.com/document/api/215/15784) 获取 SubnetId。
+   * 数据库权限数组
    */
-  SubnetId: string
+  DatabasePrivileges?: Array<DatabasePrivileges>
   /**
-   * 用户自定义的端口。
+   * 表权限数组
    */
-  Port: number
-  /**
-   * 安全组 ID，请使用 [查看安全组](https://cloud.tencent.com/document/api/215/15808) 获取 SecurityGroupId。
-   */
-  SecurityGroupIds?: Array<string>
+  TablePrivileges?: Array<TablePrivileges>
 }
 
 /**
@@ -7789,37 +8059,43 @@ export interface DescribeBackupListResponse {
 }
 
 /**
- * DescribeResourcePackageDetail请求参数结构体
+ * DescribeServerlessStrategy返回参数结构体
  */
-export interface DescribeResourcePackageDetailRequest {
+export interface DescribeServerlessStrategyResponse {
   /**
-   * 资源包唯一ID
+   * cpu负载为 0 时持续多久（秒）发起自动暂停
    */
-  PackageId: string
+  AutoPauseDelay?: number
   /**
-   * 集群ID
+   * cpu负载超过当前规格核数时，持续多久（秒）发起自动扩容
    */
-  ClusterIds?: Array<string>
+  AutoScaleUpDelay?: number
   /**
-   * 开始时间
+   * cpu 负载低于低一级规格核数时，持续多久（秒）发起自动缩容
    */
-  StartTime?: string
+  AutoScaleDownDelay?: number
   /**
-   * 结束时间
+   * 是否自动暂停，可能值：
+yes
+no
    */
-  EndTime?: string
+  AutoPause?: string
   /**
-   * 偏移量
+   * 集群是否允许向上扩容，可选范围<li>yes</li><li>no</li>
    */
-  Offset?: string
+  AutoScaleUp?: string
   /**
-   * 限制
+   * 集群是否允许向下缩容，可选范围<li>yes</li><li>no</li>
    */
-  Limit?: string
+  AutoScaleDown?: string
   /**
-   * 实例D
+   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
    */
-  InstanceIds?: Array<string>
+  AutoArchive?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7836,6 +8112,24 @@ export interface ModifyClusterParamRequest {
   ParamList: Array<ParamItem>
   /**
    * 维护期间执行-yes,立即执行-no
+   */
+  IsInMaintainPeriod?: string
+}
+
+/**
+ * ModifyClusterReadOnly请求参数结构体
+ */
+export interface ModifyClusterReadOnlyRequest {
+  /**
+   * 集群ID列表
+   */
+  ClusterIds: Array<string>
+  /**
+   * 集群只读开关，可选值：ON，OFF
+   */
+  ReadOnlyOperation: string
+  /**
+   * yes：在运维时间窗内修改，no：立即执行（默认值）
    */
   IsInMaintainPeriod?: string
 }
@@ -8272,6 +8566,20 @@ export interface PackageDetail {
 }
 
 /**
+ * 备份文件限制下载来源VPC设置项
+ */
+export interface BackupLimitVpcItem {
+  /**
+   * 限制下载来源的地域。目前仅支持当前地域
+   */
+  Region?: string
+  /**
+   * 限制下载的vpc列表
+   */
+  VpcList?: Array<string>
+}
+
+/**
  * binlog配置信息
  */
 export interface BinlogConfigInfo {
@@ -8363,21 +8671,13 @@ export interface OpenSSLResponse {
 }
 
 /**
- * 修改参数时，传入参数描述
+ * ModifyAuditService返回参数结构体
  */
-export interface ParamItem {
+export interface ModifyAuditServiceResponse {
   /**
-   * 参数名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ParamName: string
-  /**
-   * 当前值
-   */
-  CurrentValue: string
-  /**
-   * 原有值
-   */
-  OldValue: string
+  RequestId?: string
 }
 
 /**
@@ -8544,6 +8844,10 @@ export interface DescribeBinlogDownloadUrlRequest {
    * Binlog文件ID
    */
   BinlogId: number
+  /**
+   * 备份下载来源限制条件
+   */
+  DownloadRestriction?: BackupLimitRestriction
 }
 
 /**
@@ -9302,17 +9606,9 @@ export interface DeleteBackupResponse {
 }
 
 /**
- * DescribeProjectSecurityGroups返回参数结构体
+ * ModifyBackupDownloadRestriction返回参数结构体
  */
-export interface DescribeProjectSecurityGroupsResponse {
-  /**
-   * 安全组详情
-   */
-  Groups?: Array<SecurityGroup>
-  /**
-   * 总数量
-   */
-  Total?: number
+export interface ModifyBackupDownloadRestrictionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9983,17 +10279,31 @@ export interface ModifyClusterPasswordComplexityRequest {
 }
 
 /**
- * UnbindClusterResourcePackages请求参数结构体
+ * 备份下载限制参数
  */
-export interface UnbindClusterResourcePackagesRequest {
+export interface BackupLimitRestriction {
   /**
-   * 集群ID
+   * 限制类型
    */
-  ClusterId: string
+  LimitType?: string
   /**
-   * 资源包唯一ID,如果不传，解绑该实例绑定的所有资源包
+   * 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In
    */
-  PackageIds?: Array<string>
+  VpcComparisonSymbol?: string
+  /**
+   * In: 指定的ip可以下载； NotIn: 指定的ip不可以下载
+   */
+  IpComparisonSymbol?: string
+  /**
+   * 限制下载的vpc设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitVpcs?: Array<BackupLimitVpcItem>
+  /**
+   * 限制下载的ip设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitIps?: Array<string>
 }
 
 /**
@@ -10931,41 +11241,17 @@ export interface DeleteAuditRuleTemplatesResponse {
 }
 
 /**
- * 安全组规则
+ * 集群只读开关列表
  */
-export interface PolicyRule {
+export interface ClusterReadOnlyValue {
   /**
-   * 策略，ACCEPT或者DROP
+   * 集群ID
    */
-  Action?: string
+  ClusterId?: string
   /**
-   * 来源Ip或Ip段，例如192.168.0.0/16
+   * 只读开关值
    */
-  CidrIp?: string
-  /**
-   * 端口
-   */
-  PortRange?: string
-  /**
-   * 网络协议，支持udp、tcp等
-   */
-  IpProtocol?: string
-  /**
-   * 协议端口ID或者协议端口组ID。
-   */
-  ServiceModule?: string
-  /**
-   * IP地址ID或者ID地址组ID。
-   */
-  AddressModule?: string
-  /**
-   * id
-   */
-  Id?: string
-  /**
-   * 描述
-   */
-  Desc?: string
+  ReadOnlyValue?: string
 }
 
 /**
