@@ -18,6 +18,16 @@ const client = new tencentcloud.mqtt.v20240516.Client({
 })
 describe("mqtt.v20240516.test.js", function () {
 
+it("mqtt.v20240516.PublishMessage", async function () {
+    try {
+       const data = await client.PublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeUserList", async function () {
     try {
        const data = await client.DescribeUserList({})
@@ -118,9 +128,9 @@ it("mqtt.v20240516.DeleteInstance", async function () {
     }
 })
 
-it("mqtt.v20240516.PublishMessage", async function () {
+it("mqtt.v20240516.DescribeMessageByTopic", async function () {
     try {
-       const data = await client.PublishMessage({})
+       const data = await client.DescribeMessageByTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

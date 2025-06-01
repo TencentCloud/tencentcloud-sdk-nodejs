@@ -2197,7 +2197,7 @@ export interface CreateStudioProductRequest {
    */
   ProductType: number
   /**
-   * 加密类型 ，1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
+   * 加密类型 ，1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
    */
   EncryptionType: string
   /**

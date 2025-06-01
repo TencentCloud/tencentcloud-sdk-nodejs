@@ -56,7 +56,7 @@ import {
   ApplyRegistrationCodeResponse,
   ModifyInstanceResponse,
   CreateHttpAuthenticatorResponse,
-  ModifyInsPublicEndpointResponse,
+  MQTTMessage,
   MQTTMessageItem,
   ModifyJWKSAuthenticatorResponse,
   CreateInsPublicEndpointResponse,
@@ -67,10 +67,12 @@ import {
   DeactivateCaCertificateResponse,
   DeleteCaCertificateRequest,
   DeleteDeviceCertificateRequest,
+  DescribeMessageByTopicRequest,
   DescribeInsPublicEndpointsRequest,
   DeleteUserResponse,
   ActivateCaCertificateResponse,
   DeleteDeviceCertificateResponse,
+  DescribeMessageByTopicResponse,
   DeleteInstanceResponse,
   DescribeProductSKUListResponse,
   CreateJWKSAuthenticatorRequest,
@@ -98,6 +100,7 @@ import {
   DescribeTopicListRequest,
   CreateTopicResponse,
   RevokedDeviceCertificateRequest,
+  ModifyInsPublicEndpointResponse,
   CreateAuthorizationPolicyResponse,
   DescribeAuthenticatorRequest,
   RegisterCaCertificateRequest,
@@ -156,6 +159,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 发布 MQTT 消息到消息主题或客户端
+   */
+  async PublishMessage(
+    req: PublishMessageRequest,
+    cb?: (error: string, rep: PublishMessageResponse) => void
+  ): Promise<PublishMessageResponse> {
+    return this.request("PublishMessage", req, cb)
+  }
+
+  /**
      * 查询用户列表，Filter参数使用说明如下：
 
 1. Username，用户名称模糊搜索
@@ -168,7 +181,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为MQTT实例创建公网接入点
+   * 为MQTT实例创建公网接入点，未开启公网的集群可调用。
    */
   async CreateInsPublicEndpoint(
     req: CreateInsPublicEndpointRequest,
@@ -258,13 +271,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发布 MQTT 消息到消息主题或客户端
+   * 根据订阅查询消息
    */
-  async PublishMessage(
-    req: PublishMessageRequest,
-    cb?: (error: string, rep: PublishMessageResponse) => void
-  ): Promise<PublishMessageResponse> {
-    return this.request("PublishMessage", req, cb)
+  async DescribeMessageByTopic(
+    req: DescribeMessageByTopicRequest,
+    cb?: (error: string, rep: DescribeMessageByTopicResponse) => void
+  ): Promise<DescribeMessageByTopicResponse> {
+    return this.request("DescribeMessageByTopic", req, cb)
   }
 
   /**
@@ -278,7 +291,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改MQTT JWKS 认证器
+   * 修改MQTT JWKS 认证器，全量配置修改，需要提交完整的修改后配置。
    */
   async ModifyJWKSAuthenticator(
     req: ModifyJWKSAuthenticatorRequest,
@@ -547,7 +560,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改策略规则
+   * 修改策略规则，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)
    */
   async ModifyAuthorizationPolicy(
     req: ModifyAuthorizationPolicyRequest,

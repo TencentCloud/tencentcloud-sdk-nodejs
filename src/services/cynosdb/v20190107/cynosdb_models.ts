@@ -6202,13 +6202,13 @@ export interface DescribeClusterPasswordComplexityRequest {
  */
 export interface QueryFilter {
   /**
-   * 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip"
-   */
-  Names: Array<string>
-  /**
    * 搜索字符串
    */
   Values: Array<string>
+  /**
+   * 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip"
+   */
+  Names: Array<string>
   /**
    * 是否精确匹配
    */
@@ -9394,7 +9394,7 @@ export interface DescribeTasksRequest {
    */
   StartTimeEnd?: string
   /**
-   * 过滤条件
+   * 过滤条件，支持的搜索字段："ClusterId"、"ClusterName"、"InstanceId"、"InstanceName"、"Status"、"TaskId"、"TaskType"
    */
   Filters?: Array<QueryFilter>
   /**
