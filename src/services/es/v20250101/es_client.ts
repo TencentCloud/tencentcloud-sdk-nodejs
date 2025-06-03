@@ -38,13 +38,10 @@ import {
   RunRerankRequest,
   EmbeddingData,
   ChunkConfig,
-  WebSearchRequest,
-  WebPage,
   OutputMessage,
   ParseDocument,
   GetDocumentChunkResultResponse,
   ChunkDocumentAsyncResponse,
-  WebSearchResponse,
   OnlineSearchOptions,
   ParseDocumentRequest,
   Chunk,
@@ -150,16 +147,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChunkDocumentResponse) => void
   ): Promise<ChunkDocumentResponse> {
     return this.request("ChunkDocument", req, cb)
-  }
-
-  /**
-   * WebSearch API 是一个网页搜索服务，支持多种搜索引擎，可以获取网页的标题、URL、摘要和正文内容。
-   */
-  async WebSearch(
-    req: WebSearchRequest,
-    cb?: (error: string, rep: WebSearchResponse) => void
-  ): Promise<WebSearchResponse> {
-    return this.request("WebSearch", req, cb)
   }
 
   /**

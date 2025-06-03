@@ -658,16 +658,6 @@ it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
     }
 })
 
-it("postgres.v20170312.CreateDBInstances", async function () {
-    try {
-       const data = await client.CreateDBInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("postgres.v20170312.ModifyDBInstanceHAConfig", async function () {
     try {
        const data = await client.ModifyDBInstanceHAConfig({})

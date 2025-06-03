@@ -56,7 +56,9 @@ import {
   CopyAndroidInstanceRequest,
   SyncExecuteCommandOnAndroidInstancesResponse,
   RestoreAndroidInstanceFromStorageResponse,
+  DistributeFileToAndroidInstancesResponse,
   ModifyAndroidAppVersionRequest,
+  UploadFilesToAndroidInstancesRequest,
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
@@ -101,6 +103,7 @@ import {
   StopAndroidInstancesRequest,
   StartPublishStreamToCSSRequest,
   Filter,
+  DistributeFileToAndroidInstancesRequest,
   ResetAndroidInstancesResponse,
   RestartAndroidInstancesAppRequest,
   DeleteAndroidAppRequest,
@@ -134,6 +137,8 @@ import {
   DescribeAndroidInstanceAppsRequest,
   DescribeInstancesCountRequest,
   TrylockWorkerRequest,
+  AndroidInstanceUploadFile,
+  UploadFilesToAndroidInstancesResponse,
   RebootAndroidInstancesRequest,
   CreateSessionResponse,
   AndroidInstanceAppInfo,
@@ -288,6 +293,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止安卓实例应用
+   */
+  async StopAndroidInstancesApp(
+    req: StopAndroidInstancesAppRequest,
+    cb?: (error: string, rep: StopAndroidInstancesAppResponse) => void
+  ): Promise<StopAndroidInstancesAppResponse> {
+    return this.request("StopAndroidInstancesApp", req, cb)
+  }
+
+  /**
    * 创建安卓实例
    */
   async DescribeAndroidInstanceLabels(
@@ -418,6 +433,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量上传文件到安卓实例
+   */
+  async UploadFilesToAndroidInstances(
+    req: UploadFilesToAndroidInstancesRequest,
+    cb?: (error: string, rep: UploadFilesToAndroidInstancesResponse) => void
+  ): Promise<UploadFilesToAndroidInstancesResponse> {
+    return this.request("UploadFilesToAndroidInstances", req, cb)
+  }
+
+  /**
    * 同步安卓实例镜像
    */
   async SyncAndroidInstanceImage(
@@ -538,13 +563,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止安卓实例应用
+   * 分发文件到安卓实例
    */
-  async StopAndroidInstancesApp(
-    req: StopAndroidInstancesAppRequest,
-    cb?: (error: string, rep: StopAndroidInstancesAppResponse) => void
-  ): Promise<StopAndroidInstancesAppResponse> {
-    return this.request("StopAndroidInstancesApp", req, cb)
+  async DistributeFileToAndroidInstances(
+    req: DistributeFileToAndroidInstancesRequest,
+    cb?: (error: string, rep: DistributeFileToAndroidInstancesResponse) => void
+  ): Promise<DistributeFileToAndroidInstancesResponse> {
+    return this.request("DistributeFileToAndroidInstances", req, cb)
   }
 
   /**

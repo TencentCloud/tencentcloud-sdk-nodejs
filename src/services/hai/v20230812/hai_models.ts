@@ -62,8 +62,7 @@ export interface InquirePriceRunInstancesResponse {
  */
 export interface StopInstanceRequest {
   /**
-   * 实例ID
-可通过DescribeInstances获取实例ID
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
    */
   InstanceId: string
   /**
@@ -253,8 +252,7 @@ export interface DescribeApplicationsResponse {
  */
 export interface StartInstanceRequest {
   /**
-   * 实例ID
-可通过DescribeInstances获取实例ID
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
    */
   InstanceId: string
   /**
@@ -325,8 +323,7 @@ export interface Price {
  */
 export interface TerminateInstancesRequest {
   /**
-   * 实例ID列表
-可通过DescribeInstances接口获取ID列表.单次能查询100个InstanceId
+   * 实例ID列表。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID列表。单次能查询100个InstanceId。
    */
   InstanceIds: Array<string>
   /**
@@ -380,7 +377,7 @@ export interface DescribeScenesResponse {
  */
 export interface DescribeApplicationsRequest {
   /**
-   * 应用id列表
+   * 应用id列表。单次请求数量上限为100个。
    */
   ApplicationIds?: Array<string>
   /**

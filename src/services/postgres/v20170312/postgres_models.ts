@@ -16,95 +16,6 @@
  */
 
 /**
- * CreateDBInstances请求参数结构体
- */
-export interface CreateDBInstancesRequest {
-  /**
-   * 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。
-   */
-  SpecCode: string
-  /**
-   * 实例容量大小，单位：GB。
-   */
-  Storage: number
-  /**
-   * 一次性购买的实例数量。取值1-100
-   */
-  InstanceCount: number
-  /**
-   * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
-   */
-  Period: number
-  /**
-   * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
-   */
-  Zone: string
-  /**
-   * 项目ID。
-   */
-  ProjectId?: number
-  /**
-   * PostgreSQL社区大版本+小版本号。
-一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新小版本号。
-   */
-  DBVersion?: string
-  /**
-   * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。
-   */
-  InstanceChargeType?: string
-  /**
-   * 是否自动使用代金券。1（是），0（否），默认不使用。
-   */
-  AutoVoucher?: number
-  /**
-   * 代金券ID列表，目前仅支持指定一张代金券。
-   */
-  VoucherIds?: Array<string>
-  /**
-   * 私有网络ID。
-   */
-  VpcId?: string
-  /**
-   * 私有网络子网ID。
-   */
-  SubnetId?: string
-  /**
-   * 续费标记：0-正常续费（默认）；1-自动续费；
-   */
-  AutoRenewFlag?: number
-  /**
-   * 活动ID
-   */
-  ActivityId?: number
-  /**
-   * 实例名(后续支持)
-   */
-  Name?: string
-  /**
-   * 是否需要支持Ipv6，1：是，0：否
-   */
-  NeedSupportIpv6?: number
-  /**
-   * 实例需要绑定的Tag信息，默认为空
-   */
-  TagList?: Array<Tag>
-  /**
-   * 安全组id
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * PostgreSQL大版本号（该参数当前必传），版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。目前支持10，11，12，13，14，15这几个大版本，详情见[内核版本概述](https://cloud.tencent.com/document/product/409/67018)。
-输入该参数时，会基于此大版本号创建对应的最新小版本的最新内核版本号实例。
-   */
-  DBMajorVersion?: string
-  /**
-   * PostgreSQL内核版本号。
-一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新内核版本号。
-   */
-  DBKernelVersion?: string
-}
-
-/**
  * 任务的详情信息
  */
 export interface TaskDetail {
@@ -1427,37 +1338,13 @@ db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
 }
 
 /**
- * CreateBackupPlan请求参数结构体
+ * DescribeDBInstanceAttribute请求参数结构体
  */
-export interface CreateBackupPlanRequest {
+export interface DescribeDBInstanceAttributeRequest {
   /**
-   * 实例ID。
+   * 实例ID
    */
   DBInstanceId: string
-  /**
-   * 备份计划名称。
-   */
-  PlanName: string
-  /**
-   * 创建的备份计划类型，当前仅支持month创建。
-   */
-  BackupPeriodType: string
-  /**
-   * 备份的日期，示例是每个月的2号开启备份。
-   */
-  BackupPeriod: Array<string>
-  /**
-   * 备份开始时间，不传跟随默认备份计划。
-   */
-  MinBackupStartTime?: string
-  /**
-   * 备份结束时间，不传跟随默认计划。
-   */
-  MaxBackupStartTime?: string
-  /**
-   * 数据备份保留时长，week默认是7,month为30。
-   */
-  BaseBackupRetentionPeriod?: number
 }
 
 /**
@@ -2377,13 +2264,37 @@ export interface NetworkAccess {
 }
 
 /**
- * DescribeDBInstanceAttribute请求参数结构体
+ * CreateBackupPlan请求参数结构体
  */
-export interface DescribeDBInstanceAttributeRequest {
+export interface CreateBackupPlanRequest {
   /**
-   * 实例ID
+   * 实例ID。
    */
   DBInstanceId: string
+  /**
+   * 备份计划名称。
+   */
+  PlanName: string
+  /**
+   * 创建的备份计划类型，当前仅支持month创建。
+   */
+  BackupPeriodType: string
+  /**
+   * 备份的日期，示例是每个月的2号开启备份。
+   */
+  BackupPeriod: Array<string>
+  /**
+   * 备份开始时间，不传跟随默认备份计划。
+   */
+  MinBackupStartTime?: string
+  /**
+   * 备份结束时间，不传跟随默认计划。
+   */
+  MaxBackupStartTime?: string
+  /**
+   * 数据备份保留时长，week默认是7,month为30。
+   */
+  BaseBackupRetentionPeriod?: number
 }
 
 /**
@@ -6131,28 +6042,6 @@ export interface CreateReadOnlyGroupNetworkAccessResponse {
    * 流程ID。
    */
   FlowId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateDBInstances返回参数结构体
- */
-export interface CreateDBInstancesResponse {
-  /**
-   * 订单号列表。每个实例对应一个订单号。
-   */
-  DealNames?: Array<string>
-  /**
-   * 冻结流水号
-   */
-  BillId?: string
-  /**
-   * 创建成功的实例ID集合，只在后付费情景下有返回值
-   */
-  DBInstanceIdSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

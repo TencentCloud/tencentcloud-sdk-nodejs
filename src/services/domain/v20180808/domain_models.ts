@@ -3121,7 +3121,7 @@ export interface CheckBatchStatusResponse {
 export interface CreateDomainRedemptionRequest {
   /**
    * 域名ID
-可通过DescribeDomainList接口获取
+可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取
    */
   DomainId: string
 }

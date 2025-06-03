@@ -386,77 +386,6 @@ export interface ChunkConfig {
 }
 
 /**
- * WebSearch请求参数结构体
- */
-export interface WebSearchRequest {
-  /**
-   * 查询
-   */
-  Query: string
-  /**
-   * 搜索的网页数量，默认20
-   */
-  Count?: number
-  /**
-   * 指定域名，gov.cn 可匹配 *.gov.cn的域名。
-   */
-  Site?: string
-  /**
-   * 是否获取返回网页全文，默认 false。
-   */
-  FetchContent?: boolean
-  /**
-   * 域名白名单，在不指定 Site 时，只保存匹配白名单域名的网页。
-   */
-  WhiteSites?: Array<string>
-  /**
-   * 域名黑名单，在不指定 Site 和白名单时，过滤黑名单中的域名。
-   */
-  BlackSites?: Array<string>
-  /**
-   * 秒级时间戳，搜索网页的开始时间，默认不限制开始时间。
-   */
-  StartTime?: number
-  /**
-   * 秒级时间戳，搜索网页的结束时间，默认为现在。
-   */
-  EndTime?: number
-  /**
-   * 指定搜索引擎，可选混合搜索 mixed，或 bing, baidu, sogou, 默认为 sogou
-   */
-  SearchEngine?: string
-}
-
-/**
- * 网页搜索结果
- */
-export interface WebPage {
-  /**
-   * 标题
-   */
-  Title?: string
-  /**
-   * url
-   */
-  Url?: string
-  /**
-   * 网页摘要
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Summary?: string
-  /**
-   * 网页收录时间。可能为空。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Time?: string
-  /**
-   * Markdown 格式的网页正文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Content?: string
-}
-
-/**
  * 会话内容，按对话时间从旧到新在数组中排列，长度受模型窗口大小限制。
  */
 export interface OutputMessage {
@@ -529,32 +458,6 @@ export interface ChunkDocumentAsyncResponse {
    * 任务 ID
    */
   TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * WebSearch返回参数结构体
- */
-export interface WebSearchResponse {
-  /**
-   * 查询
-   */
-  Query?: string
-  /**
-   * 响应状态
-   */
-  Status?: string
-  /**
-   * 执行搜索的引擎
-   */
-  SearchEngine?: string
-  /**
-   * 搜索结果
-   */
-  Results?: Array<WebPage>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

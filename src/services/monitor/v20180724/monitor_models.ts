@@ -214,9 +214,13 @@ export interface AlarmHistoryMetric {
 }
 
 /**
- * EnableGrafanaSSO返回参数结构体
+ * DescribeExternalClusterRegisterCommand返回参数结构体
  */
-export interface EnableGrafanaSSOResponse {
+export interface DescribeExternalClusterRegisterCommandResponse {
+  /**
+   * 注册命令
+   */
+  Command?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3380,9 +3384,22 @@ export interface CreateServiceDiscoveryResponse {
 }
 
 /**
- * DescribeClusterAgentCreatingProgress请求参数结构体
+ * ModifyPrometheusAgentExternalLabels请求参数结构体
  */
-export type DescribeClusterAgentCreatingProgressRequest = null
+export interface ModifyPrometheusAgentExternalLabelsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 新的external_labels
+   */
+  ExternalLabels: Array<Label>
+}
 
 /**
  * UpdatePrometheusAlertGroup请求参数结构体
@@ -4363,6 +4380,20 @@ export interface DescribePrometheusInstanceDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeExternalClusterRegisterCommand请求参数结构体
+ */
+export interface DescribeExternalClusterRegisterCommandRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -8366,7 +8397,7 @@ export interface PrometheusClusterAgentBasic {
    */
   Region: string
   /**
-   * 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群
+   * 集群类型。可填入tke、eks、tkeedge、tdcc、external，分别代表标准集群、弹性集群、边缘集群、注册集群 和外部集群
    */
   ClusterType: string
   /**
@@ -10244,22 +10275,9 @@ export interface PrometheusAlertPolicyItem {
 }
 
 /**
- * ModifyPrometheusAgentExternalLabels请求参数结构体
+ * DescribeClusterAgentCreatingProgress请求参数结构体
  */
-export interface ModifyPrometheusAgentExternalLabelsRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 集群ID
-   */
-  ClusterId: string
-  /**
-   * 新的external_labels
-   */
-  ExternalLabels: Array<Label>
-}
+export type DescribeClusterAgentCreatingProgressRequest = null
 
 /**
  * Prometheus 抓取任务
@@ -10872,6 +10890,16 @@ export interface DescribeAlarmPoliciesRequest {
    * 是否为预设策略，1是，0否
    */
   IsPredefined?: number
+}
+
+/**
+ * EnableGrafanaSSO返回参数结构体
+ */
+export interface EnableGrafanaSSOResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

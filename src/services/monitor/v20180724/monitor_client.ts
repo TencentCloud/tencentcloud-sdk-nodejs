@@ -28,7 +28,7 @@ import {
   DescribePolicyGroupInfoCallback,
   ModifyGrafanaInstanceRequest,
   AlarmHistoryMetric,
-  EnableGrafanaSSOResponse,
+  DescribeExternalClusterRegisterCommandResponse,
   DescribePolicyGroupInfoResponse,
   PolicyTag,
   DeletePrometheusClusterAgentRequest,
@@ -155,7 +155,7 @@ import {
   NoticeContentTmplBindInfo,
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
-  DescribeClusterAgentCreatingProgressRequest,
+  ModifyPrometheusAgentExternalLabelsRequest,
   UpdatePrometheusAlertGroupRequest,
   EnableSSOCamCheckResponse,
   DescribeAccidentEventListRequest,
@@ -194,6 +194,7 @@ import {
   DescribeExporterIntegrationsRequest,
   DescribeAlarmSmsQuotaResponse,
   DescribePrometheusInstanceDetailResponse,
+  DescribeExternalClusterRegisterCommandRequest,
   Point,
   ModifyPolicyGroupEventCondition,
   Metric,
@@ -437,7 +438,7 @@ import {
   DescribePhoneAlarmFlowTotalCountRequest,
   DeletePrometheusConfigRequest,
   PrometheusAlertPolicyItem,
-  ModifyPrometheusAgentExternalLabelsRequest,
+  DescribeClusterAgentCreatingProgressRequest,
   PrometheusScrapeJob,
   PrometheusTarget,
   AlarmHierarchicalNotice,
@@ -456,6 +457,7 @@ import {
   CreateSSOAccountResponse,
   UpdatePrometheusScrapeJobResponse,
   DescribeAlarmPoliciesRequest,
+  EnableGrafanaSSOResponse,
   UpdateSSOAccountRequest,
   DescribePolicyConditionListConfigManualStatType,
   IntegrationConfiguration,
@@ -2146,6 +2148,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void
   ): Promise<ModifyPrometheusConfigResponse> {
     return this.request("ModifyPrometheusConfig", req, cb)
+  }
+
+  /**
+   * 查看外部集群注册命令
+   */
+  async DescribeExternalClusterRegisterCommand(
+    req: DescribeExternalClusterRegisterCommandRequest,
+    cb?: (error: string, rep: DescribeExternalClusterRegisterCommandResponse) => void
+  ): Promise<DescribeExternalClusterRegisterCommandResponse> {
+    return this.request("DescribeExternalClusterRegisterCommand", req, cb)
   }
 
   /**

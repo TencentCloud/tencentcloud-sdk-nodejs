@@ -640,15 +640,16 @@ export interface StorageNewFileCreatedEvent {
   /**
    * 云点播文件  Id。
    */
-  FileId: string
+  FileId?: string
   /**
    * 媒体 Id。
    */
-  MaterialId: string
+  MaterialId?: string
   /**
    * 操作者 Id。（废弃，请勿使用）
+   * @deprecated
    */
-  Operator: string
+  Operator?: string
   /**
    * 操作类型，可取值有：
 <li>Upload：本地上传；</li>
@@ -657,23 +658,23 @@ export interface StorageNewFileCreatedEvent {
 <li>LiveStreamClip：直播流剪辑；</li>
 <li>LiveStreamRecord：直播流录制。</li>
    */
-  OperationType: string
+  OperationType?: string
   /**
    * 媒体归属。
    */
-  Owner: Entity
+  Owner?: Entity
   /**
    * 媒体分类路径。
    */
-  ClassPath: string
+  ClassPath?: string
   /**
    * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
    */
-  SourceContext: string
+  SourceContext?: string
 }
 
 /**
@@ -1378,6 +1379,7 @@ export interface CreateProjectRequest {
   /**
    * 画布宽高比。
 该字段已经废弃，请使用具体项目输入中的 AspectRatio 字段。
+   * @deprecated
    */
   AspectRatio?: string
   /**
@@ -2829,6 +2831,7 @@ export interface MaterialBasicInfo {
    * 媒体绑定的标签信息列表 。
 该字段已废弃。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   TagInfoSet?: Array<MaterialTagInfo>
 }
@@ -4649,6 +4652,7 @@ export interface ExternalMediaInfo {
   MediaKey: string
   /**
    * 该字段废弃，请勿使用。
+   * @deprecated
    */
   Definition?: number
   /**

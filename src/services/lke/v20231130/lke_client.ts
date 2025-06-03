@@ -48,7 +48,6 @@ import {
   GetAnswerTypeDataCountResponse,
   DescribeQARequest,
   AttrLabelRefer,
-  CreateReconstructDocumentFlowConfig,
   DescribeUnsatisfiedReplyContextRequest,
   Procedure,
   QAQuery,
@@ -206,7 +205,6 @@ import {
   ListAppResponse,
   AppInfo,
   CateInfo,
-  CreateReconstructDocumentFlowRequest,
   RunReRankResponse,
   ProcedureDebugging,
   KnowledgeQaConfig,
@@ -299,7 +297,6 @@ import {
   DescribeRobotBizIDByAppKeyRequest,
   CreateVarRequest,
   DocumentRecognizeInfo,
-  CreateReconstructDocumentFlowResponse,
   HistorySummary,
   VerifyQAResponse,
   ReleaseConfigs,
@@ -914,19 +911,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportQAListResponse) => void
   ): Promise<ExportQAListResponse> {
     return this.request("ExportQAList", req, cb)
-  }
-
-  /**
-     * 本接口为异步接口的发起请求接口，用于发起文档解析任务。
-文档解析支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
-
-体验期间单账号限制qps仅为1，若有正式接入需要请与产研团队沟通开放。
-     */
-  async CreateReconstructDocumentFlow(
-    req: CreateReconstructDocumentFlowRequest,
-    cb?: (error: string, rep: CreateReconstructDocumentFlowResponse) => void
-  ): Promise<CreateReconstructDocumentFlowResponse> {
-    return this.request("CreateReconstructDocumentFlow", req, cb)
   }
 
   /**

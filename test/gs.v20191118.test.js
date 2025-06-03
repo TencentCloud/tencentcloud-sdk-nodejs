@@ -148,6 +148,16 @@ it("gs.v20191118.ModifyAndroidInstancesInformation", async function () {
     }
 })
 
+it("gs.v20191118.StopAndroidInstancesApp", async function () {
+    try {
+       const data = await client.StopAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DescribeAndroidInstanceLabels", async function () {
     try {
        const data = await client.DescribeAndroidInstanceLabels({})
@@ -278,6 +288,16 @@ it("gs.v20191118.DescribeAndroidInstances", async function () {
     }
 })
 
+it("gs.v20191118.UploadFilesToAndroidInstances", async function () {
+    try {
+       const data = await client.UploadFilesToAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.SyncAndroidInstanceImage", async function () {
     try {
        const data = await client.SyncAndroidInstanceImage({})
@@ -398,9 +418,9 @@ it("gs.v20191118.DescribeAndroidInstanceApps", async function () {
     }
 })
 
-it("gs.v20191118.StopAndroidInstancesApp", async function () {
+it("gs.v20191118.DistributeFileToAndroidInstances", async function () {
     try {
-       const data = await client.StopAndroidInstancesApp({})
+       const data = await client.DistributeFileToAndroidInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

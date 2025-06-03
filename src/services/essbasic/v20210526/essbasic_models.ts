@@ -397,8 +397,8 @@ ChildrenComponent结构体定义:
   LockComponentValue?: boolean
   /**
    * **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件
-<ul><li> <b>false（默认）</b> :不禁止移动和删除控件</li>
-<li> <b>true</b> : 可以移动和删除控件</li></ul>
+<ul><li> <b>false（默认）</b> :可以移动和删除控件</li>
+<li> <b>true</b> : 禁止移动和删除控件</li></ul>
    */
   ForbidMoveAndDelete?: boolean
 }

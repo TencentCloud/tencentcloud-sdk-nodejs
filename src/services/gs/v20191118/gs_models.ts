@@ -691,6 +691,20 @@ export interface RestoreAndroidInstanceFromStorageResponse {
 }
 
 /**
+ * DistributeFileToAndroidInstances返回参数结构体
+ */
+export interface DistributeFileToAndroidInstancesResponse {
+  /**
+   * 实例任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAndroidAppVersion请求参数结构体
  */
 export interface ModifyAndroidAppVersionRequest {
@@ -714,6 +728,16 @@ export interface ModifyAndroidAppVersionRequest {
    * 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   UninstallCommand?: string
+}
+
+/**
+ * UploadFilesToAndroidInstances请求参数结构体
+ */
+export interface UploadFilesToAndroidInstancesRequest {
+  /**
+   * 上传文件信息列表
+   */
+  Files?: Array<AndroidInstanceUploadFile>
 }
 
 /**
@@ -1405,6 +1429,24 @@ export interface Filter {
 }
 
 /**
+ * DistributeFileToAndroidInstances请求参数结构体
+ */
+export interface DistributeFileToAndroidInstancesRequest {
+  /**
+   * 安卓实例 ID 列表
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 文件下载 URL
+   */
+  FileURL: string
+  /**
+   * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
+   */
+  DestinationDirectory: string
+}
+
+/**
  * ResetAndroidInstances返回参数结构体
  */
 export interface ResetAndroidInstancesResponse {
@@ -2009,6 +2051,38 @@ export interface TrylockWorkerRequest {
    * 分组ID
    */
   GroupId?: string
+}
+
+/**
+ * 安卓实例上传文件信息
+ */
+export interface AndroidInstanceUploadFile {
+  /**
+   * 安卓实例 ID
+   */
+  AndroidInstanceId?: string
+  /**
+   * 文件上传 URL
+   */
+  FileURL?: string
+  /**
+   * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
+   */
+  DestinationDirectory?: string
+}
+
+/**
+ * UploadFilesToAndroidInstances返回参数结构体
+ */
+export interface UploadFilesToAndroidInstancesResponse {
+  /**
+   * 实例任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

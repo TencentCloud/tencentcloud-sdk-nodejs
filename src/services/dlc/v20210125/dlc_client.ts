@@ -59,7 +59,7 @@ import {
   DescribeUserInfoResponse,
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
-  ElasticsearchInfo,
+  CreateImportTaskRequest,
   DeleteUsersFromWorkGroupResponse,
   DescribeDLCCatalogAccessResponse,
   DeleteTableResponse,
@@ -113,6 +113,7 @@ import {
   DescribeTasksCostInfoResponse,
   AddDMSPartitionsResponse,
   CancelNotebookSessionStatementRequest,
+  DescribeTablePartitionsRequest,
   SparkMonitorMetrics,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
@@ -280,7 +281,7 @@ import {
   UnbindWorkGroupsFromUserRequest,
   ViewResponseInfo,
   NetworkConnection,
-  CreateImportTaskRequest,
+  ElasticsearchInfo,
   ModifyWorkGroupRequest,
   SmartPolicyBaseInfo,
   DescribeDatabasesResponse,
@@ -349,6 +350,7 @@ import {
   UserRole,
   DescribeUserTypeRequest,
   CheckDataEngineConfigPairsValidityRequest,
+  DescribeTablePartitionsResponse,
   CSVSerde,
   HiveInfo,
   CHDFSProductVpcInfo,
@@ -1319,6 +1321,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatasourceConnectionResponse) => void
   ): Promise<DescribeDatasourceConnectionResponse> {
     return this.request("DescribeDatasourceConnection", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTablePartitions）用于查询数据表分区信息
+   */
+  async DescribeTablePartitions(
+    req?: DescribeTablePartitionsRequest,
+    cb?: (error: string, rep: DescribeTablePartitionsResponse) => void
+  ): Promise<DescribeTablePartitionsResponse> {
+    return this.request("DescribeTablePartitions", req, cb)
   }
 
   /**

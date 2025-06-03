@@ -232,7 +232,7 @@ export interface MigrationTaskInfo {
    */
   EndTime?: number
   /**
-   * 迁移状态。0: 已完成；1: 进行中；2: 已终止
+   * 迁移状态。0: 已完成；1: 创建中；2: 运行中；3: 终止中；4: 已终止；5: 创建失败；6: 运行失败；7: 结束中；8: 删除中；9: 等待中
    */
   Status?: number
   /**
@@ -973,7 +973,6 @@ export interface DescribeBucketListRequest {
   SrcService: string
   /**
    * 数据源账号的SecretId
-
    */
   SrcSecretId: string
   /**
@@ -1358,12 +1357,12 @@ export interface BucketInfo {
   /**
    * 桶名称
    */
-  Name: string
+  Name?: string
   /**
    * 桶所在地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
 }
 
 /**
@@ -2375,7 +2374,7 @@ export interface StopMigrationTaskResponse {
    */
   TaskId?: string
   /**
-   * 迁移状态。0: 已完成；1: 进行中；2: 已终止
+   * 迁移状态。0: 已完成；1: 创建中；2: 运行中；3: 终止中；4: 已终止；5: 创建失败；6: 运行失败；7: 结束中；8: 删除中；9: 等待中
    */
   Status?: number
   /**

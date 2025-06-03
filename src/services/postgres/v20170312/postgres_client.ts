@@ -18,7 +18,6 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateDBInstancesRequest,
   TaskDetail,
   SetAutoRenewFlagRequest,
   DeleteBackupPlanResponse,
@@ -71,7 +70,7 @@ import {
   NormalQueryItem,
   Tag,
   DescribeBackupSummariesRequest,
-  CreateBackupPlanRequest,
+  DescribeDBInstanceAttributeRequest,
   ModifyDBInstancesProjectResponse,
   CreateBaseBackupResponse,
   LockAccountResponse,
@@ -109,7 +108,7 @@ import {
   SetAutoRenewFlagResponse,
   ModifyPrivilege,
   NetworkAccess,
-  DescribeDBInstanceAttributeRequest,
+  CreateBackupPlanRequest,
   ResetAccountPasswordResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
   RawSlowQuery,
@@ -273,7 +272,6 @@ import {
   DescribeBaseBackupsRequest,
   DescribeEncryptionKeysResponse,
   CreateReadOnlyGroupNetworkAccessResponse,
-  CreateDBInstancesResponse,
   DeleteAccountResponse,
 } from "./postgres_models"
 
@@ -933,18 +931,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceAttributeResponse) => void
   ): Promise<DescribeDBInstanceAttributeResponse> {
     return this.request("DescribeDBInstanceAttribute", req, cb)
-  }
-
-  /**
-     * 早期接口，不规范，已提供新接口 CreateInstances 替换
-
-本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
-     */
-  async CreateDBInstances(
-    req: CreateDBInstancesRequest,
-    cb?: (error: string, rep: CreateDBInstancesResponse) => void
-  ): Promise<CreateDBInstancesResponse> {
-    return this.request("CreateDBInstances", req, cb)
   }
 
   /**

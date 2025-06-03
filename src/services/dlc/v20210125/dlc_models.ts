@@ -111,6 +111,11 @@ export interface DescribeDatabasesRequest {
    * 排序类型：false：降序（默认）、true：升序
    */
   Asc?: boolean
+  /**
+   * 查询类型：all：全部数据（默认）、permission：有权限的数据
+注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。
+   */
+  DescribeType?: string
 }
 
 /**
@@ -1145,44 +1150,25 @@ export interface NotebookSessionStatementInfo {
 }
 
 /**
- * Elasticsearch数据源的详细信息
+ * CreateImportTask请求参数结构体
  */
-export interface ElasticsearchInfo {
+export interface CreateImportTaskRequest {
   /**
-   * 数据源ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据来源，cos
    */
-  InstanceId?: string
+  InputType: string
   /**
-   * 数据源名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 输入配置
    */
-  InstanceName?: string
+  InputConf: Array<KVPair>
   /**
-   * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 输出配置
    */
-  User?: string
+  OutputConf: Array<KVPair>
   /**
-   * 密码，需要base64编码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
    */
-  Password?: string
-  /**
-   * 数据源的VPC和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Location?: DatasourceConnectionLocation
-  /**
-   * 默认数据库名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DbName?: string
-  /**
-   * 访问Elasticsearch的ip、端口信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceInfo?: Array<IpPortPair>
+  OutputType?: string
 }
 
 /**
@@ -1876,6 +1862,11 @@ table-id - String - （过滤条件）table id形如：12342。
    * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
    */
   TableFormat?: string
+  /**
+   * 查询类型：all：全部数据（默认）、permission：有权限的数据
+注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。
+   */
+  DescribeType?: string
 }
 
 /**
@@ -2527,6 +2518,11 @@ export interface CancelNotebookSessionStatementRequest {
    */
   StatementId: string
 }
+
+/**
+ * DescribeTablePartitions请求参数结构体
+ */
+export type DescribeTablePartitionsRequest = null
 
 /**
  * Spark监控数据
@@ -6019,6 +6015,11 @@ view-id - String - （过滤条件）view id形如：12342。
    * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
    */
   EndTime?: string
+  /**
+   * 查询类型：all：全部数据（默认）、permission：有权限的数据
+注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。
+   */
+  DescribeType?: string
 }
 
 /**
@@ -6613,25 +6614,44 @@ export interface NetworkConnection {
 }
 
 /**
- * CreateImportTask请求参数结构体
+ * Elasticsearch数据源的详细信息
  */
-export interface CreateImportTaskRequest {
+export interface ElasticsearchInfo {
   /**
-   * 数据来源，cos
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputType: string
+  InstanceId?: string
   /**
-   * 输入配置
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputConf: Array<KVPair>
+  InstanceName?: string
   /**
-   * 输出配置
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputConf: Array<KVPair>
+  User?: string
   /**
-   * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
+   * 密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputType?: string
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 访问Elasticsearch的ip、端口信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceInfo?: Array<IpPortPair>
 }
 
 /**
@@ -8257,6 +8277,16 @@ export interface CheckDataEngineConfigPairsValidityRequest {
    * 引擎大版本ID，存在小版本ID时仅需传入小版本ID，不存在时会获取当前大版本下最新的小版本ID。
    */
   ImageVersionId?: string
+}
+
+/**
+ * DescribeTablePartitions返回参数结构体
+ */
+export interface DescribeTablePartitionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

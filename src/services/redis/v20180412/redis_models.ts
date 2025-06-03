@@ -450,10 +450,10 @@ export interface CreateInstancesRequest {
    */
   DryRun?: boolean
   /**
-   * 指定实例的产品版本。
-- local：本地盘版。
-- cloud：云盘版，
-- cdc：独享集群版。如果不传默认发货为本地盘版本。
+   * 指实例部署模式。
+- local：传统架构，默认为 local。
+- cdc：独享集群。
+- cloud：云原生，当前已暂停售卖。
    */
   ProductVersion?: string
   /**

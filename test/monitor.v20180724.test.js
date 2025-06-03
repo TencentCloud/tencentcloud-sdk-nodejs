@@ -1638,6 +1638,16 @@ it("monitor.v20180724.ModifyPrometheusConfig", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeExternalClusterRegisterCommand", async function () {
+    try {
+       const data = await client.DescribeExternalClusterRegisterCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeAlarmPolicy", async function () {
     try {
        const data = await client.DescribeAlarmPolicy({})
