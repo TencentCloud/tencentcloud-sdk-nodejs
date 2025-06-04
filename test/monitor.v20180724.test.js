@@ -518,6 +518,16 @@ it("monitor.v20180724.CreateConditionsTemplate", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeAlarmNoticeCallbacks", async function () {
+    try {
+       const data = await client.DescribeAlarmNoticeCallbacks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.GetPrometheusAgentManagementCommand", async function () {
     try {
        const data = await client.GetPrometheusAgentManagementCommand({})
@@ -1258,9 +1268,9 @@ it("monitor.v20180724.DescribePrometheusGlobalConfig", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePolicyGroupList", async function () {
+it("monitor.v20180724.DescribePrometheusAgents", async function () {
     try {
-       const data = await client.DescribePolicyGroupList({})
+       const data = await client.DescribePrometheusAgents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,9 +1358,9 @@ it("monitor.v20180724.DescribePrometheusAlertPolicy", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusAgents", async function () {
+it("monitor.v20180724.DescribePolicyGroupList", async function () {
     try {
-       const data = await client.DescribePrometheusAgents({})
+       const data = await client.DescribePolicyGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1381,6 +1391,16 @@ it("monitor.v20180724.DeleteAlarmPolicy", async function () {
 it("monitor.v20180724.GetMonitorData", async function () {
     try {
        const data = await client.GetMonitorData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.CreateExternalCluster", async function () {
+    try {
+       const data = await client.CreateExternalCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1508,9 +1528,9 @@ it("monitor.v20180724.DeletePrometheusTemp", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeAlarmNoticeCallbacks", async function () {
+it("monitor.v20180724.DescribeExternalClusterUninstallCommand", async function () {
     try {
-       const data = await client.DescribeAlarmNoticeCallbacks({})
+       const data = await client.DescribeExternalClusterUninstallCommand({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -682,6 +682,34 @@ export interface DeleteSpecifyPrivateZoneVpcRequest {
 }
 
 /**
+ * DescribeRecord请求参数结构体
+ */
+export interface DescribeRecordRequest {
+  /**
+   * 私有域ID
+   */
+  ZoneId: string
+  /**
+   * 记录ID
+   */
+  RecordId: string
+}
+
+/**
+ * DescribeRecord返回参数结构体
+ */
+export interface DescribeRecordResponse {
+  /**
+   * 记录信息
+   */
+  RecordInfo?: RecordInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SubscribePrivateZoneService请求参数结构体
  */
 export type SubscribePrivateZoneServiceRequest = null
@@ -756,6 +784,60 @@ export interface CreatePrivateZoneRecordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 私有域信息
+ */
+export interface RecordInfo {
+  /**
+   * 记录id
+   */
+  RecordId?: string
+  /**
+   * 私有域id: zone-xxxxxxxx
+   */
+  ZoneId?: string
+  /**
+   * 子域名
+   */
+  SubDomain?: string
+  /**
+   * 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR"
+   */
+  RecordType?: string
+  /**
+   * 记录值
+   */
+  RecordValue?: string
+  /**
+   * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
+   */
+  TTL?: number
+  /**
+   * MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50
+   */
+  MX?: number
+  /**
+   * 记录权重，值为1-100
+   */
+  Weight?: number
+  /**
+   * 记录创建时间
+   */
+  CreatedOn?: string
+  /**
+   * 记录更新时间
+   */
+  UpdatedOn?: string
+  /**
+   * 0暂停，1启用
+   */
+  Enabled?: number
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**

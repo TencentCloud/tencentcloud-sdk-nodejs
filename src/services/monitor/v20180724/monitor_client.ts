@@ -130,14 +130,14 @@ import {
   DescribeGrafanaNotificationChannelsRequest,
   CleanGrafanaInstanceRequest,
   DescribeSSOAccountRequest,
-  UpdateExporterIntegrationResponse,
+  DescribeExternalClusterUninstallCommandRequest,
   CreateAlarmNoticeRequest,
   InstanceGroups,
   UpdateGrafanaNotificationChannelResponse,
   CreateExporterIntegrationResponse,
   UnBindingAllPolicyObjectRequest,
   AlarmPolicyCondition,
-  ModifyPolicyGroupCondition,
+  DescribeGrafanaChannelsRequest,
   DescribeRemoteURLsRequest,
   DescribeGrafanaConfigRequest,
   UpdateRecordingRuleRequest,
@@ -189,6 +189,7 @@ import {
   DescribeAlertRulesResponse,
   ResumeGrafanaInstanceRequest,
   IntegrationMetricGroup,
+  UpdateExporterIntegrationResponse,
   DescribeBasicAlarmListResponse,
   ModifyAlarmReceiversRequest,
   DescribeExporterIntegrationsRequest,
@@ -262,7 +263,6 @@ import {
   DescribeAlertRulesRequest,
   DescribePrometheusInstancesResponse,
   LogFilterInfo,
-  DescribeGrafanaChannelsRequest,
   BindingPolicyTagResponse,
   DeleteServiceDiscoveryResponse,
   CreateExporterIntegrationRequest,
@@ -406,6 +406,7 @@ import {
   ModifyAlarmPolicyTasksResponse,
   MonitorTypeInfo,
   DimensionNew,
+  CreateExternalClusterResponse,
   DeleteAlertRulesResponse,
   DeletePrometheusScrapeJobsRequest,
   ModifyAlarmPolicyStatusRequest,
@@ -433,10 +434,12 @@ import {
   IntegrationMetric,
   DescribePrometheusZonesRequest,
   DescribePrometheusAlertGroupsRequest,
+  ModifyPolicyGroupCondition,
   ModifyPolicyGroupRequest,
   DescribeBaseMetricsRequest,
   DescribePhoneAlarmFlowTotalCountRequest,
   DeletePrometheusConfigRequest,
+  CreateExternalClusterRequest,
   PrometheusAlertPolicyItem,
   DescribeClusterAgentCreatingProgressRequest,
   PrometheusScrapeJob,
@@ -474,6 +477,7 @@ import {
   DeletePrometheusRecordRuleYamlRequest,
   DescribeAlarmNoticeCallbacksRequest,
   DescribeStatisticDataRequest,
+  DescribeExternalClusterUninstallCommandResponse,
   GrafanaNotificationChannel,
   CreateConditionsTemplateRequest,
   PrometheusAlertGroupSet,
@@ -1003,6 +1007,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateConditionsTemplateResponse) => void
   ): Promise<CreateConditionsTemplateResponse> {
     return this.request("CreateConditionsTemplate", req, cb)
+  }
+
+  /**
+   * 获取告警通知模板所有回调URL
+   */
+  async DescribeAlarmNoticeCallbacks(
+    req: DescribeAlarmNoticeCallbacksRequest,
+    cb?: (error: string, rep: DescribeAlarmNoticeCallbacksResponse) => void
+  ): Promise<DescribeAlarmNoticeCallbacksResponse> {
+    return this.request("DescribeAlarmNoticeCallbacks", req, cb)
   }
 
   /**
@@ -1758,13 +1772,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取基础策略告警组列表
+   * 列出 Prometheus CVM Agent
    */
-  async DescribePolicyGroupList(
-    req: DescribePolicyGroupListRequest,
-    cb?: (error: string, rep: DescribePolicyGroupListResponse) => void
-  ): Promise<DescribePolicyGroupListResponse> {
-    return this.request("DescribePolicyGroupList", req, cb)
+  async DescribePrometheusAgents(
+    req: DescribePrometheusAgentsRequest,
+    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
+  ): Promise<DescribePrometheusAgentsResponse> {
+    return this.request("DescribePrometheusAgents", req, cb)
   }
 
   /**
@@ -1848,13 +1862,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Prometheus CVM Agent
+   * 获取基础策略告警组列表
    */
-  async DescribePrometheusAgents(
-    req: DescribePrometheusAgentsRequest,
-    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
-  ): Promise<DescribePrometheusAgentsResponse> {
-    return this.request("DescribePrometheusAgents", req, cb)
+  async DescribePolicyGroupList(
+    req: DescribePolicyGroupListRequest,
+    cb?: (error: string, rep: DescribePolicyGroupListResponse) => void
+  ): Promise<DescribePolicyGroupListResponse> {
+    return this.request("DescribePolicyGroupList", req, cb)
   }
 
   /**
@@ -1894,6 +1908,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMonitorDataResponse) => void
   ): Promise<GetMonitorDataResponse> {
     return this.request("GetMonitorData", req, cb)
+  }
+
+  /**
+   * 注册外部集群到云上 TMP 实例
+   */
+  async CreateExternalCluster(
+    req: CreateExternalClusterRequest,
+    cb?: (error: string, rep: CreateExternalClusterResponse) => void
+  ): Promise<CreateExternalClusterResponse> {
+    return this.request("CreateExternalCluster", req, cb)
   }
 
   /**
@@ -2021,13 +2045,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取告警通知模板所有回调URL
+   * 查看外部集群 Agent 卸载命令
    */
-  async DescribeAlarmNoticeCallbacks(
-    req: DescribeAlarmNoticeCallbacksRequest,
-    cb?: (error: string, rep: DescribeAlarmNoticeCallbacksResponse) => void
-  ): Promise<DescribeAlarmNoticeCallbacksResponse> {
-    return this.request("DescribeAlarmNoticeCallbacks", req, cb)
+  async DescribeExternalClusterUninstallCommand(
+    req: DescribeExternalClusterUninstallCommandRequest,
+    cb?: (error: string, rep: DescribeExternalClusterUninstallCommandResponse) => void
+  ): Promise<DescribeExternalClusterUninstallCommandResponse> {
+    return this.request("DescribeExternalClusterUninstallCommand", req, cb)
   }
 
   /**

@@ -45,6 +45,7 @@ import {
   DescribeRewriteRequest,
   ModifyLoadBalancerAttributesResponse,
   DescribeTargetGroupInstancesRequest,
+  DescribeLBOperateProtectRequest,
   DescribeIdleLoadBalancersResponse,
   BindItem,
   DescribeLoadBalancersRequest,
@@ -83,6 +84,7 @@ import {
   BlockedIP,
   ModifyRuleResponse,
   DescribeClassicalLBTargetsRequest,
+  RuleOutput,
   InquiryPriceRenewLoadBalancerResponse,
   DeregisterFunctionTargetsResponse,
   DescribeCustomizedConfigListRequest,
@@ -119,6 +121,7 @@ import {
   ReplaceCertForLoadBalancersResponse,
   DescribeTargetsResponse,
   ModifyListenerRequest,
+  SetSecurityGroupForLoadbalancersResponse,
   DeregisterTargetGroupInstancesResponse,
   RegisterTargetsRequest,
   DisassociateCustomizedConfigRequest,
@@ -163,7 +166,7 @@ import {
   CreateLoadBalancerSnatIpsResponse,
   ClassicalLoadBalancerInfo,
   DescribeListenersResponse,
-  RuleOutput,
+  LBOperateProtectInfo,
   RegisterFunctionTargetsResponse,
   CreateTopicResponse,
   CreateRuleRequest,
@@ -226,7 +229,7 @@ import {
   ModifyTargetGroupInstancesPortRequest,
   BatchRegisterTargetsRequest,
   DeleteCustomizedConfigResponse,
-  SetSecurityGroupForLoadbalancersResponse,
+  DescribeLBOperateProtectResponse,
   RuleInput,
   TagInfo,
   SnatIp,
@@ -1159,6 +1162,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateListenerResponse) => void
   ): Promise<CreateListenerResponse> {
     return this.request("CreateListener", req, cb)
+  }
+
+  /**
+   * 查询负载均衡的操作保护信息。
+   */
+  async DescribeLBOperateProtect(
+    req: DescribeLBOperateProtectRequest,
+    cb?: (error: string, rep: DescribeLBOperateProtectResponse) => void
+  ): Promise<DescribeLBOperateProtectResponse> {
+    return this.request("DescribeLBOperateProtect", req, cb)
   }
 
   /**

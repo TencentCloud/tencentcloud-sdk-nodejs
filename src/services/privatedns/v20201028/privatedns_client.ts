@@ -51,11 +51,14 @@ import {
   AccountVpcInfo,
   ModifyPrivateZoneResponse,
   DeleteSpecifyPrivateZoneVpcRequest,
+  DescribeRecordRequest,
+  DescribeRecordResponse,
   SubscribePrivateZoneServiceRequest,
   DescribePrivateZoneResponse,
   CreatePrivateZoneResponse,
   DescribeDashboardResponse,
   CreatePrivateZoneRecordResponse,
+  RecordInfo,
   DescribePrivateZoneServiceResponse,
   CreatePrivateDNSAccountResponse,
   DescribeAuditLogRequest,
@@ -270,6 +273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountVpcListResponse) => void
   ): Promise<DescribeAccountVpcListResponse> {
     return this.request("DescribeAccountVpcList", req, cb)
+  }
+
+  /**
+   * 获取私有域记录
+   */
+  async DescribeRecord(
+    req: DescribeRecordRequest,
+    cb?: (error: string, rep: DescribeRecordResponse) => void
+  ): Promise<DescribeRecordResponse> {
+    return this.request("DescribeRecord", req, cb)
   }
 
   /**

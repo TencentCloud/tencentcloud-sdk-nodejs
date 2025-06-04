@@ -775,6 +775,16 @@ export interface DescribeTargetGroupInstancesRequest {
 }
 
 /**
+ * DescribeLBOperateProtect请求参数结构体
+ */
+export interface DescribeLBOperateProtectRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerIds: Array<string>
+}
+
+/**
  * DescribeIdleLoadBalancers返回参数结构体
  */
 export interface DescribeIdleLoadBalancersResponse {
@@ -1659,6 +1669,112 @@ export interface DescribeClassicalLBTargetsRequest {
    * 负载均衡实例 ID。
    */
   LoadBalancerId: string
+}
+
+/**
+ * HTTP/HTTPS监听器的转发规则（输出）
+ */
+export interface RuleOutput {
+  /**
+   * 转发规则的 ID
+   */
+  LocationId?: string
+  /**
+   * 转发规则的域名。
+   */
+  Domain?: string
+  /**
+   * 转发规则的路径。
+   */
+  Url?: string
+  /**
+   * 会话保持时间
+   */
+  SessionExpireTime?: number
+  /**
+   * 健康检查信息
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * 证书信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Certificate?: CertificateOutput
+  /**
+   * 规则的请求转发方式。
+WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
+   */
+  Scheduler?: string
+  /**
+   * 转发规则所属的监听器 ID
+   */
+  ListenerId?: string
+  /**
+   * 转发规则的重定向目标信息
+   */
+  RewriteTarget?: RewriteTarget
+  /**
+   * 是否开启gzip
+   */
+  HttpGzip?: boolean
+  /**
+   * 转发规则是否为自动创建
+   */
+  BeAutoCreated?: boolean
+  /**
+   * 是否作为默认域名
+   */
+  DefaultServer?: boolean
+  /**
+   * 是否开启Http2
+   */
+  Http2?: boolean
+  /**
+   * 负载均衡与后端服务之间的转发协议
+   */
+  ForwardType?: string
+  /**
+   * 转发规则的创建时间
+   */
+  CreateTime?: string
+  /**
+   * 后端服务器类型。NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
+   */
+  TargetType?: string
+  /**
+   * 绑定的目标组基本信息；当规则绑定目标组时，会返回该字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetGroup?: BasicTargetGroupInfo
+  /**
+   * WAF实例ID
+   */
+  WafDomainId?: string
+  /**
+   * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
+   */
+  TrpcCallee?: string
+  /**
+   * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
+   */
+  TrpcFunc?: string
+  /**
+   * QUIC状态。QUIC_ACTIVE表示开启，QUIC_INACTIVE表示未开启。注意，只有HTTPS域名才能开启QUIC。
+   */
+  QuicStatus?: string
+  /**
+   * 转发规则的域名列表。
+   */
+  Domains?: Array<string>
+  /**
+   * 绑定的目标组列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetGroupList?: Array<BasicTargetGroupInfo>
+  /**
+   * OAuth配置状态信息。
+   */
+  OAuth?: OAuth
 }
 
 /**
@@ -2586,6 +2702,16 @@ True表示发送 RST 给客户端，False表示不发送 RST 给客户端。
    * 数据压缩模式
    */
   DataCompressMode?: string
+}
+
+/**
+ * SetSecurityGroupForLoadbalancers返回参数结构体
+ */
+export interface SetSecurityGroupForLoadbalancersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3522,109 +3648,32 @@ export interface DescribeListenersResponse {
 }
 
 /**
- * HTTP/HTTPS监听器的转发规则（输出）
+ * 负载均衡的操作保护信息
  */
-export interface RuleOutput {
+export interface LBOperateProtectInfo {
   /**
-   * 转发规则的 ID
+   * 负载均衡实例 ID。
    */
-  LocationId?: string
+  LoadBalancerId: string
   /**
-   * 转发规则的域名。
+   * 保护状态，true：表示开启了操作保护，false：表示未开启操作保护。
    */
-  Domain?: string
+  ProtectState: boolean
   /**
-   * 转发规则的路径。
-   */
-  Url?: string
-  /**
-   * 会话保持时间
-   */
-  SessionExpireTime?: number
-  /**
-   * 健康检查信息
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * 证书信息
+   * 操作保护的设置uin。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Certificate?: CertificateOutput
+  OperatorUin: string
   /**
-   * 规则的请求转发方式。
-WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
-   */
-  Scheduler?: string
-  /**
-   * 转发规则所属的监听器 ID
-   */
-  ListenerId?: string
-  /**
-   * 转发规则的重定向目标信息
-   */
-  RewriteTarget?: RewriteTarget
-  /**
-   * 是否开启gzip
-   */
-  HttpGzip?: boolean
-  /**
-   * 转发规则是否为自动创建
-   */
-  BeAutoCreated?: boolean
-  /**
-   * 是否作为默认域名
-   */
-  DefaultServer?: boolean
-  /**
-   * 是否开启Http2
-   */
-  Http2?: boolean
-  /**
-   * 负载均衡与后端服务之间的转发协议
-   */
-  ForwardType?: string
-  /**
-   * 转发规则的创建时间
-   */
-  CreateTime?: string
-  /**
-   * 后端服务器类型。NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
-   */
-  TargetType?: string
-  /**
-   * 绑定的目标组基本信息；当规则绑定目标组时，会返回该字段
+   * 设置操作保护时的描述信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetGroup?: BasicTargetGroupInfo
+  Description: string
   /**
-   * WAF实例ID
-   */
-  WafDomainId?: string
-  /**
-   * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
-   */
-  TrpcCallee?: string
-  /**
-   * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
-   */
-  TrpcFunc?: string
-  /**
-   * QUIC状态。QUIC_ACTIVE表示开启，QUIC_INACTIVE表示未开启。注意，只有HTTPS域名才能开启QUIC。
-   */
-  QuicStatus?: string
-  /**
-   * 转发规则的域名列表。
-   */
-  Domains?: Array<string>
-  /**
-   * 绑定的目标组列表
+   * 最后修改时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetGroupList?: Array<BasicTargetGroupInfo>
-  /**
-   * OAuth配置状态信息。
-   */
-  OAuth?: OAuth
+  ModifyTime: string
 }
 
 /**
@@ -5127,9 +5176,13 @@ export interface DeleteCustomizedConfigResponse {
 }
 
 /**
- * SetSecurityGroupForLoadbalancers返回参数结构体
+ * DescribeLBOperateProtect返回参数结构体
  */
-export interface SetSecurityGroupForLoadbalancersResponse {
+export interface DescribeLBOperateProtectResponse {
+  /**
+   * 返回的负载均衡操作保护信息数组。
+   */
+  LoadBalancerSet: Array<LBOperateProtectInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

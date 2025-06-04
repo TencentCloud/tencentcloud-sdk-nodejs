@@ -1520,6 +1520,10 @@ export interface OverviewRow {
    * regions，点击可跳转
    */
   Operation?: string
+  /**
+   * StoreFile数量
+   */
+  StoreFileNum?: number
 }
 
 /**
@@ -4071,6 +4075,10 @@ export interface InspectionTaskSettings {
    * 是否开启监控
    */
   Enable?: string
+  /**
+   * 事件Json模板
+   */
+  SettingsJson?: string
 }
 
 /**

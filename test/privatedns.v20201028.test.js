@@ -198,6 +198,16 @@ it("privatedns.v20201028.DescribeAccountVpcList", async function () {
     }
 })
 
+it("privatedns.v20201028.DescribeRecord", async function () {
+    try {
+       const data = await client.DescribeRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.ModifyRecordsStatus", async function () {
     try {
        const data = await client.ModifyRecordsStatus({})

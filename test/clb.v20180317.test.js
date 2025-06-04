@@ -828,6 +828,16 @@ it("clb.v20180317.CreateListener", async function () {
     }
 })
 
+it("clb.v20180317.DescribeLBOperateProtect", async function () {
+    try {
+       const data = await client.DescribeLBOperateProtect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeClsLogSet", async function () {
     try {
        const data = await client.DescribeClsLogSet({})

@@ -21,17 +21,19 @@ import {
   DescribeAndroidInstanceTasksStatusResponse,
   ExecuteCommandOnAndroidInstancesResponse,
   StartPublishStreamToCSSResponse,
+  CreateAndroidInstanceADBRequest,
   FetchAndroidInstancesLogsResponse,
   CreateAndroidAppRequest,
-  CreateSessionRequest,
+  AndroidInstanceDevice,
   RestoreAndroidInstanceFromStorageRequest,
+  InstallAndroidInstancesAppWithURLResponse,
   SyncExecuteCommandOnAndroidInstancesRequest,
   RebootAndroidInstanceHostsResponse,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
   ModifyAndroidAppVersionResponse,
   DeleteAndroidAppResponse,
-  ModifyAndroidInstancesInformationRequest,
+  DescribeAndroidInstanceLabelsResponse,
   AndroidApp,
   ModifyAndroidAppRequest,
   DescribeAndroidAppsResponse,
@@ -39,11 +41,13 @@ import {
   CreateAndroidAppVersionRequest,
   ModifyAndroidInstancesLabelsRequest,
   BackUpAndroidInstanceToStorageRequest,
+  ModifyAndroidInstancesPropertiesRequest,
   SyncAndroidInstanceImage,
   AndroidInstanceLabel,
   DeleteAndroidInstanceImagesResponse,
   StartAndroidInstancesRequest,
   StartPublishStreamRequest,
+  CreateSessionRequest,
   CreateAndroidInstanceImageResponse,
   ModifyAndroidInstanceResolutionResponse,
   DeleteAndroidInstanceImagesRequest,
@@ -63,6 +67,7 @@ import {
   ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
   ModifyAndroidInstancesUserIdRequest,
+  CreateAndroidInstanceLabelResponse,
   StopPublishStreamResponse,
   StartAndroidInstancesResponse,
   DeleteAndroidInstanceLabelRequest,
@@ -76,7 +81,7 @@ import {
   StopPublishStreamRequest,
   AndroidAppCosInfo,
   SyncExecuteCommandResult,
-  DescribeAndroidInstanceLabelsResponse,
+  ModifyAndroidInstancesInformationRequest,
   RestartAndroidInstancesAppResponse,
   DescribeAndroidInstanceTasksStatusRequest,
   CreateAndroidInstancesScreenshotResponse,
@@ -100,13 +105,14 @@ import {
   DeleteAndroidAppVersionRequest,
   StartAndroidInstancesAppResponse,
   SwitchGameArchiveRequest,
+  CreateAndroidInstanceADBResponse,
   StopAndroidInstancesRequest,
   StartPublishStreamToCSSRequest,
   Filter,
   DistributeFileToAndroidInstancesRequest,
   ResetAndroidInstancesResponse,
   RestartAndroidInstancesAppRequest,
-  DeleteAndroidAppRequest,
+  ModifyAndroidInstancesResolutionRequest,
   DescribeAndroidAppsRequest,
   StopGameRequest,
   RebootAndroidInstancesResponse,
@@ -118,6 +124,7 @@ import {
   CopyAndroidInstanceResponse,
   DeleteAndroidInstanceLabelResponse,
   ModifyAndroidAppResponse,
+  AndroidInstanceProperty,
   DescribeAndroidInstanceImagesRequest,
   AndroidInstanceTaskStatus,
   UploadFileToAndroidInstancesResponse,
@@ -128,10 +135,11 @@ import {
   AndroidInstance,
   RebootAndroidInstanceHostsRequest,
   COSOptions,
+  ModifyAndroidInstancesPropertiesResponse,
   ModifyAndroidInstancesInformationResponse,
   CreateCosCredentialResponse,
   CreateAndroidInstancesRequest,
-  CreateAndroidInstanceLabelResponse,
+  InstallAndroidInstancesAppWithURLRequest,
   StartPublishStreamResponse,
   AndroidInstanceImage,
   DescribeAndroidInstanceAppsRequest,
@@ -142,7 +150,7 @@ import {
   RebootAndroidInstancesRequest,
   CreateSessionResponse,
   AndroidInstanceAppInfo,
-  ModifyAndroidInstancesResolutionRequest,
+  DeleteAndroidAppRequest,
   LabelRequirement,
   CreateAndroidAppVersionResponse,
   FetchAndroidInstancesLogsRequest,
@@ -163,7 +171,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 备份云手机到指定存储
+   * 备份云手机数据到指定存储，支持 COS 和兼容 AWS S3 协议的对象存储服务。如果是备份到 COS 时，会使用公网流量，授权 COS bucket 请在控制台中操作。
    */
   async BackUpAndroidInstanceToStorage(
     req: BackUpAndroidInstanceToStorageRequest,
@@ -180,6 +188,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAndroidInstancesUserIdResponse) => void
   ): Promise<ModifyAndroidInstancesUserIdResponse> {
     return this.request("ModifyAndroidInstancesUserId", req, cb)
+  }
+
+  /**
+   * 尝试锁定机器
+   */
+  async TrylockWorker(
+    req: TrylockWorkerRequest,
+    cb?: (error: string, rep: TrylockWorkerResponse) => void
+  ): Promise<TrylockWorkerResponse> {
+    return this.request("TrylockWorker", req, cb)
   }
 
   /**
@@ -203,7 +221,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 指定存储还原云手机
+   * 使用指定存储数据还原云手机，支持 COS 和兼容 AWS S3 协议的对象存储服务。如果还原数据来自 COS 时，会使用公网流量，授权 COS bucket 请在控制台中操作。
    */
   async RestoreAndroidInstanceFromStorage(
     req: RestoreAndroidInstanceFromStorageRequest,
@@ -213,7 +231,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建安卓实例 SSH 连接
+   * 创建安卓实例 SSH 连接信息，请将返回结果的 PrivateKey 字段保存为 pem 文件，并将 pem 文件权限设置为 600，再参考返回结果的 ConnectCommand 使用 ssh 连接实例。
    */
   async CreateAndroidInstanceSSH(
     req: CreateAndroidInstanceSSHRequest,
@@ -253,13 +271,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 尝试锁定机器
+   * 批量修改安卓实例属性
    */
-  async TrylockWorker(
-    req: TrylockWorkerRequest,
-    cb?: (error: string, rep: TrylockWorkerResponse) => void
-  ): Promise<TrylockWorkerResponse> {
-    return this.request("TrylockWorker", req, cb)
+  async ModifyAndroidInstancesProperties(
+    req: ModifyAndroidInstancesPropertiesRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesPropertiesResponse) => void
+  ): Promise<ModifyAndroidInstancesPropertiesResponse> {
+    return this.request("ModifyAndroidInstancesProperties", req, cb)
   }
 
   /**
@@ -293,13 +311,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止安卓实例应用
+   * 安装安卓实例应用
    */
-  async StopAndroidInstancesApp(
-    req: StopAndroidInstancesAppRequest,
-    cb?: (error: string, rep: StopAndroidInstancesAppResponse) => void
-  ): Promise<StopAndroidInstancesAppResponse> {
-    return this.request("StopAndroidInstancesApp", req, cb)
+  async InstallAndroidInstancesAppWithURL(
+    req: InstallAndroidInstancesAppWithURLRequest,
+    cb?: (error: string, rep: InstallAndroidInstancesAppWithURLResponse) => void
+  ): Promise<InstallAndroidInstancesAppWithURLResponse> {
+    return this.request("InstallAndroidInstancesAppWithURL", req, cb)
   }
 
   /**
@@ -393,7 +411,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传文件到安卓实例
+   * 将文件下载到指定实例列表的实例上，每个实例都会从公网下载文件。如果您需要将同一个文件分发到多个实例，建议使用 DistributeFileToAndroidInstances 接口减少公网下载的流量。如果您需要将不同的文件下载到不同的实例，可考虑使用 UploadFilesToAndroidInstances 接口批量将不同文件下载到不同的实例。
    */
   async UploadFileToAndroidInstances(
     req: UploadFileToAndroidInstancesRequest,
@@ -403,13 +421,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建安卓实例 WebShell 连接
+   * 创建安卓实例 WebShell 连接信息，返回的 ConnectUrl 可通过浏览器直接打开访问，链接有效期 1 小时，链接打开后可持续使用。
    */
   async CreateAndroidInstanceWebShell(
     req: CreateAndroidInstanceWebShellRequest,
     cb?: (error: string, rep: CreateAndroidInstanceWebShellResponse) => void
   ): Promise<CreateAndroidInstanceWebShellResponse> {
     return this.request("CreateAndroidInstanceWebShell", req, cb)
+  }
+
+  /**
+   * 停止安卓实例应用
+   */
+  async StopAndroidInstancesApp(
+    req: StopAndroidInstancesAppRequest,
+    cb?: (error: string, rep: StopAndroidInstancesAppResponse) => void
+  ): Promise<StopAndroidInstancesAppResponse> {
+    return this.request("StopAndroidInstancesApp", req, cb)
   }
 
   /**
@@ -433,7 +461,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量上传文件到安卓实例
+   * 批量将不同的文件下载到不同的实例，每个实例下载文件都是从公网下载，建议只用在文件下载使用一次的场景。如果您需要将同一个文件分发到不同实例，建议使用 DistributeFileToAndroidInstances 接口。
    */
   async UploadFilesToAndroidInstances(
     req: UploadFilesToAndroidInstancesRequest,
@@ -563,7 +591,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分发文件到安卓实例
+   * 将一个文件批量分发到多个实例，一次接口调用触发一次文件分发，一次文件分发只会从公网下载一次，然后文件会走内网分发到实例列表中的实例。
    */
   async DistributeFileToAndroidInstances(
     req: DistributeFileToAndroidInstancesRequest,
@@ -637,7 +665,7 @@ export class Client extends AbstractClient {
 
   /**
      * 复制安卓实例：
-1. 排除和包含文件只能指定/data下的文件，不指定时复制整个/data目录
+1. 排除和包含文件只能指定 /data 下的文件，不指定时复制整个 /data 目录
 2. 源实例和目的实例必须在同一区域
 3. 复制时，源实例和目的实例都会停机，复制完后实例会自动启动
 4. 复制时会产生大量内网流量，请限制并发
@@ -680,7 +708,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量获取安卓实例日志
+   * 创建云手机实例 ADB 连接信息，请将返回结果的 PrivateKey 字段保存为 pem 文件，并将 pem 文件权限设置为 600，再参考返回结果的 ConnectCommand 使用 adb 连接实例。
+   */
+  async CreateAndroidInstanceADB(
+    req: CreateAndroidInstanceADBRequest,
+    cb?: (error: string, rep: CreateAndroidInstanceADBResponse) => void
+  ): Promise<CreateAndroidInstanceADBResponse> {
+    return this.request("CreateAndroidInstanceADB", req, cb)
+  }
+
+  /**
+   * 批量将实例的 logcat 日志文件上传到您已授权的 COS bucket 中，授权 COS bucket 请在控制台中操作。
    */
   async FetchAndroidInstancesLogs(
     req: FetchAndroidInstancesLogsRequest,

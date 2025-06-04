@@ -341,6 +341,7 @@ export interface DescribeSitesRequest {
 export interface HostInfo {
   /**
    * 宿主机IP（废弃）
+   * @deprecated
    */
   HostIp?: string
   /**
@@ -849,18 +850,22 @@ export interface DedicatedClusterOrder {
   DedicatedClusterId?: string
   /**
    * 专用集群类型id（移到下一层级，已经废弃，后续将删除）
+   * @deprecated
    */
   DedicatedClusterTypeId?: string
   /**
    * 支持的存储类型列表（移到下一层级，已经废弃，后续将删除）
+   * @deprecated
    */
   SupportedStorageType?: Array<string>
   /**
    * 支持的上连交换机的链路传输速率(GiB)（移到下一层级，已经废弃，后续将删除）
+   * @deprecated
    */
   SupportedUplinkSpeed?: Array<number | bigint>
   /**
    * 支持的实例族列表（移到下一层级，已经废弃，后续将删除）
+   * @deprecated
    */
   SupportedInstanceFamily?: Array<string>
   /**

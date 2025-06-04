@@ -829,6 +829,18 @@ export interface QureyKnowledgeDocumentSet {
    * 作者
    */
   Author?: string
+  /**
+   * 文档上传状态
+   */
+  DocStatus?: string
+  /**
+   * 上传文件失败时具体的错误消息
+   */
+  ErrMsg?: string
+  /**
+   * Cos存储文件ID
+   */
+  FileId?: string
 }
 
 /**
@@ -1038,6 +1050,18 @@ export interface KnowledgeDocumentSet {
    * 作者
    */
   Author?: string
+  /**
+   * 上传文件状态
+   */
+  DocStatus?: string
+  /**
+   * 文件上传失败的具体原因
+   */
+  ErrMsg?: string
+  /**
+   * Cos存储文件ID
+   */
+  FileId?: string
 }
 
 /**

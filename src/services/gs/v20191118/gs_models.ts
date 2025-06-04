@@ -58,6 +58,16 @@ export interface StartPublishStreamToCSSResponse {
 }
 
 /**
+ * CreateAndroidInstanceADB请求参数结构体
+ */
+export interface CreateAndroidInstanceADBRequest {
+  /**
+   * 安卓实例 ID
+   */
+  AndroidInstanceId: string
+}
+
+/**
  * FetchAndroidInstancesLogs返回参数结构体
  */
 export interface FetchAndroidInstancesLogsResponse {
@@ -86,83 +96,17 @@ export interface CreateAndroidAppRequest {
 }
 
 /**
- * CreateSession请求参数结构体
+ * 安卓实例设备信息
  */
-export interface CreateSessionRequest {
+export interface AndroidInstanceDevice {
   /**
-   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
+   * 品牌
    */
-  UserId: string
+  Brand: string
   /**
-   * 【已废弃】只在TrylockWorker时生效
+   * 型号
    */
-  GameId: string
-  /**
-   * 【已废弃】只在TrylockWorker时生效
-   */
-  GameRegion?: string
-  /**
-   * 游戏参数
-   */
-  GameParas?: string
-  /**
-   * 客户端session信息，从JSSDK请求中获得。特殊的，当 RunMode 参数为 RunWithoutClient 时，该字段可以为空
-   */
-  ClientSession?: string
-  /**
-   * 分辨率,，可设置为1080p或720p或1920x1080格式
-   */
-  Resolution?: string
-  /**
-   * 背景图url，格式为png或jpeg，宽高1920*1080
-   */
-  ImageUrl?: string
-  /**
-   * 【已废弃】
-   */
-  SetNo?: number
-  /**
-   * 【已废弃】
-   */
-  Bitrate?: number
-  /**
-   * 单位Mbps，动态调整最大码率建议值，会按实际情况调整
-   */
-  MaxBitrate?: number
-  /**
-   * 单位Mbps，动态调整最小码率建议值，会按实际情况调整
-   */
-  MinBitrate?: number
-  /**
-   * 帧率，可设置为30、45、60、90、120、144
-   */
-  Fps?: number
-  /**
-   * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
-   */
-  UserIp?: string
-  /**
-   * 【已废弃】优化项，便于客户灰度开启新的优化项，默认为0
-   */
-  Optimization?: number
-  /**
-   * 【互动云游】游戏主机用户ID
-   */
-  HostUserId?: string
-  /**
-   * 【互动云游】角色；Player表示玩家；Viewer表示观察者
-   */
-  Role?: string
-  /**
-   * 游戏相关参数
-   */
-  GameContext?: string
-  /**
-   * 云端运行模式。
-RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运行
-默认值（空）：要求必须有客户端连接才会保持云端 App 运行。
-   */
-  RunMode?: string
+  Model: string
 }
 
 /**
@@ -189,6 +133,21 @@ export interface RestoreAndroidInstanceFromStorageRequest {
    * S3存储协议选项
    */
   S3Options?: S3Options
+}
+
+/**
+ * InstallAndroidInstancesAppWithURL返回参数结构体
+ */
+export interface InstallAndroidInstancesAppWithURLResponse {
+  /**
+   * 任务集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -264,13 +223,21 @@ export interface DeleteAndroidAppResponse {
 }
 
 /**
- * ModifyAndroidInstancesInformation请求参数结构体
+ * DescribeAndroidInstanceLabels返回参数结构体
  */
-export interface ModifyAndroidInstancesInformationRequest {
+export interface DescribeAndroidInstanceLabelsResponse {
   /**
-   * 安卓实例信息数据
+   * 安卓实例标签总数
    */
-  AndroidInstanceInformations: Array<AndroidInstanceInformation>
+  Total?: number
+  /**
+   * 安卓实例标签列表
+   */
+  Labels?: Array<AndroidInstanceLabel>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -377,6 +344,10 @@ export interface CreateAndroidAppVersionRequest {
    * 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   UninstallCommand?: string
+  /**
+   * 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。
+   */
+  CleanupMode?: string
 }
 
 /**
@@ -429,6 +400,24 @@ export interface BackUpAndroidInstanceToStorageRequest {
    * S3存储协议选项
    */
   S3Options?: S3Options
+}
+
+/**
+ * ModifyAndroidInstancesProperties请求参数结构体
+ */
+export interface ModifyAndroidInstancesPropertiesRequest {
+  /**
+   * 安卓实例 ID 列表
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 安卓实例设备
+   */
+  AndroidInstanceDevice?: AndroidInstanceDevice
+  /**
+   * 安卓实例其它属性列表
+   */
+  AndroidInstanceProperties?: Array<AndroidInstanceProperty>
 }
 
 /**
@@ -491,6 +480,86 @@ export interface StartPublishStreamRequest {
    * 推流地址，仅支持rtmp协议
    */
   PublishUrl: string
+}
+
+/**
+ * CreateSession请求参数结构体
+ */
+export interface CreateSessionRequest {
+  /**
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
+   */
+  UserId: string
+  /**
+   * 【已废弃】只在TrylockWorker时生效
+   */
+  GameId: string
+  /**
+   * 【已废弃】只在TrylockWorker时生效
+   */
+  GameRegion?: string
+  /**
+   * 游戏参数
+   */
+  GameParas?: string
+  /**
+   * 客户端session信息，从JSSDK请求中获得。特殊的，当 RunMode 参数为 RunWithoutClient 时，该字段可以为空
+   */
+  ClientSession?: string
+  /**
+   * 分辨率,，可设置为1080p或720p或1920x1080格式
+   */
+  Resolution?: string
+  /**
+   * 背景图url，格式为png或jpeg，宽高1920*1080
+   */
+  ImageUrl?: string
+  /**
+   * 【已废弃】
+   */
+  SetNo?: number
+  /**
+   * 【已废弃】
+   */
+  Bitrate?: number
+  /**
+   * 单位Mbps，动态调整最大码率建议值，会按实际情况调整
+   */
+  MaxBitrate?: number
+  /**
+   * 单位Mbps，动态调整最小码率建议值，会按实际情况调整
+   */
+  MinBitrate?: number
+  /**
+   * 帧率，可设置为30、45、60、90、120、144
+   */
+  Fps?: number
+  /**
+   * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
+   */
+  UserIp?: string
+  /**
+   * 【已废弃】优化项，便于客户灰度开启新的优化项，默认为0
+   */
+  Optimization?: number
+  /**
+   * 【互动云游】游戏主机用户ID
+   */
+  HostUserId?: string
+  /**
+   * 【互动云游】角色；Player表示玩家；Viewer表示观察者
+   */
+  Role?: string
+  /**
+   * 游戏相关参数
+   */
+  GameContext?: string
+  /**
+   * 云端运行模式。
+RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运行
+默认值（空）：要求必须有客户端连接才会保持云端 App 运行。
+   */
+  RunMode?: string
 }
 
 /**
@@ -793,6 +862,16 @@ export interface ModifyAndroidInstancesUserIdRequest {
 }
 
 /**
+ * CreateAndroidInstanceLabel返回参数结构体
+ */
+export interface CreateAndroidInstanceLabelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopPublishStream返回参数结构体
  */
 export interface StopPublishStreamResponse {
@@ -987,21 +1066,13 @@ export interface SyncExecuteCommandResult {
 }
 
 /**
- * DescribeAndroidInstanceLabels返回参数结构体
+ * ModifyAndroidInstancesInformation请求参数结构体
  */
-export interface DescribeAndroidInstanceLabelsResponse {
+export interface ModifyAndroidInstancesInformationRequest {
   /**
-   * 安卓实例标签总数
+   * 安卓实例信息数据
    */
-  Total?: number
-  /**
-   * 安卓实例标签列表
-   */
-  Labels?: Array<AndroidInstanceLabel>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AndroidInstanceInformations: Array<AndroidInstanceInformation>
 }
 
 /**
@@ -1342,6 +1413,10 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
    * shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   UninstallCommand?: string
+  /**
+   * 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。
+   */
+  CleanupMode?: string
 }
 
 /**
@@ -1388,6 +1463,36 @@ export interface SwitchGameArchiveRequest {
    * 游戏相关参数
    */
   GameContext?: string
+}
+
+/**
+ * CreateAndroidInstanceADB返回参数结构体
+ */
+export interface CreateAndroidInstanceADBResponse {
+  /**
+   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   */
+  PrivateKey?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 连接地址
+   */
+  HostName?: string
+  /**
+   * 连接端口
+   */
+  Port?: number
+  /**
+   * 连接参考命令
+   */
+  ConnectCommand?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1479,13 +1584,43 @@ export interface RestartAndroidInstancesAppRequest {
 }
 
 /**
- * DeleteAndroidApp请求参数结构体
+ * ModifyAndroidInstancesResolution请求参数结构体
  */
-export interface DeleteAndroidAppRequest {
+export interface ModifyAndroidInstancesResolutionRequest {
   /**
-   * 应用ID
+   * 安卓实例 ID 列表
    */
-  AndroidAppId: string
+  AndroidInstanceIds: Array<string>
+  /**
+   * 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：
+实例类型为单开（A1）：建议设置为 1080
+实例类型为双开（A2） 及以上：建议设置为 720
+   */
+  Width: number
+  /**
+   * 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：
+实例类型为单开（A1）：建议设置为 1920
+实例类型为双开（A2） 及以上：建议设置为 1280
+   */
+  Height: number
+  /**
+   * 每英寸像素点。
+分辨率为 720x1280：建议配置为 320
+分辨率为  1080x1920：建议配置为 480
+   */
+  DPI: number
+  /**
+   * 帧率。ResolutionType 为 PHYSICAL 时才会修改帧率。另外建议按照以下数值设置，避免出现性能不足问题：
+实例类型为单开（A1）：建议设置为 60
+实例类型为双开（A2） 及以上：建议设置为 30
+   */
+  FPS?: number
+  /**
+   * 修改分辨率类型。修改物理分辨率，需要重启才能生效。
+OVERRIDE：默认值，修改覆盖（显示）分辨率
+PHYSICAL：修改物理分辨率
+   */
+  ResolutionType?: string
 }
 
 /**
@@ -1644,6 +1779,20 @@ export interface ModifyAndroidAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 安卓实例属性
+ */
+export interface AndroidInstanceProperty {
+  /**
+   * 属性键
+   */
+  Key: string
+  /**
+   * 属性值
+   */
+  Value?: string
 }
 
 /**
@@ -1859,6 +2008,16 @@ export interface COSOptions {
 }
 
 /**
+ * ModifyAndroidInstancesProperties返回参数结构体
+ */
+export interface ModifyAndroidInstancesPropertiesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAndroidInstancesInformation返回参数结构体
  */
 export interface ModifyAndroidInstancesInformationResponse {
@@ -1948,13 +2107,17 @@ A6：六开
 }
 
 /**
- * CreateAndroidInstanceLabel返回参数结构体
+ * InstallAndroidInstancesAppWithURL请求参数结构体
  */
-export interface CreateAndroidInstanceLabelResponse {
+export interface InstallAndroidInstancesAppWithURLRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  AndroidInstanceIds: Array<string>
+  /**
+   * 安卓应用下载 URL
+   */
+  AndroidAppURL: string
 }
 
 /**
@@ -2148,43 +2311,13 @@ export interface AndroidInstanceAppInfo {
 }
 
 /**
- * ModifyAndroidInstancesResolution请求参数结构体
+ * DeleteAndroidApp请求参数结构体
  */
-export interface ModifyAndroidInstancesResolutionRequest {
+export interface DeleteAndroidAppRequest {
   /**
-   * 安卓实例 ID 列表
+   * 应用ID
    */
-  AndroidInstanceIds: Array<string>
-  /**
-   * 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：
-实例类型为单开（A1）：建议设置为 1080
-实例类型为双开（A2） 及以上：建议设置为 720
-   */
-  Width: number
-  /**
-   * 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：
-实例类型为单开（A1）：建议设置为 1920
-实例类型为双开（A2） 及以上：建议设置为 1280
-   */
-  Height: number
-  /**
-   * 每英寸像素点。
-分辨率为 720x1280：建议配置为 320
-分辨率为  1080x1920：建议配置为 480
-   */
-  DPI: number
-  /**
-   * 帧率。ResolutionType 为 PHYSICAL 时才会修改帧率。另外建议按照以下数值设置，避免出现性能不足问题：
-实例类型为单开（A1）：建议设置为 60
-实例类型为双开（A2） 及以上：建议设置为 30
-   */
-  FPS?: number
-  /**
-   * 修改分辨率类型。修改物理分辨率，需要重启才能生效。
-OVERRIDE：默认值，修改覆盖（显示）分辨率
-PHYSICAL：修改物理分辨率
-   */
-  ResolutionType?: string
+  AndroidAppId: string
 }
 
 /**

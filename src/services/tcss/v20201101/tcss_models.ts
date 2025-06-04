@@ -940,6 +940,10 @@ export interface DescribeAssetImageRegistryVirusListExportResponse {
    */
   DownloadUrl?: string
   /**
+   * 导出任务id
+   */
+  JobId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2051,6 +2055,14 @@ export interface DescribeAccessControlEventsResponse {
    * 访问控制事件数组
    */
   EventSet?: Array<AccessControlEventInfo>
+  /**
+   * 支持的内核版本
+   */
+  SupportCoreVersion?: string
+  /**
+   * 拦截失败可能的原因
+   */
+  InterceptionFailureTip?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3789,7 +3801,7 @@ export interface DescribeAssetImageRegistryVulListExportRequest {
   /**
    * 导出字段
    */
-  ExportField: Array<string>
+  ExportField?: Array<string>
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -4302,6 +4314,14 @@ PROCESSED:已完成
    * 任务进度(百分比)
    */
   TaskProcess?: number
+  /**
+   * 失败主机数
+   */
+  FailedHostCount?: number
+  /**
+   * 任务id
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5707,6 +5727,10 @@ VALIDATION: 参数非法
    * 集群名称
    */
   ClusterName?: string
+  /**
+   * 节点内网IP，同innerIP
+   */
+  HostIP?: string
 }
 
 /**
@@ -6928,6 +6952,10 @@ export interface ClusterInfoItem {
    * 集群审计开关失败信息
    */
   ClusterAuditFailedInfo?: string
+  /**
+   * 所有者名称
+   */
+  OwnerName?: string
 }
 
 /**
@@ -7622,6 +7650,14 @@ export interface DeleteMachineRequest {
    * 客户端Uuid
    */
   Uuid: string
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueIds?: Array<string>
+  /**
+   * uuid列表
+   */
+  UUIDs?: Array<string>
 }
 
 /**
@@ -11079,6 +11115,10 @@ export interface DescribeAssetImageRegistryVulListExportResponse {
    */
   DownloadUrl?: string
   /**
+   * 导出任务id
+   */
+  JobId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11837,7 +11877,7 @@ export interface DescribeAssetImageRegistryListExportRequest {
   /**
    * 导出字段
    */
-  ExportField: Array<string>
+  ExportField?: Array<string>
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -12380,6 +12420,14 @@ EVENT_ADD_WHITE：已加白
    * 集群名称
    */
   ClusterName?: string
+  /**
+   * 镜像ID
+   */
+  ImageId?: string
+  /**
+   * 容器ID
+   */
+  ContainerId?: string
 }
 
 /**
@@ -15086,6 +15134,10 @@ MountNamespace逃逸、
    * WorkloadType
    */
   WorkloadType?: string
+  /**
+   * 容器运行状态
+   */
+  ContainerStatus?: string
 }
 
 /**
@@ -17080,6 +17132,10 @@ export interface DescribeClusterDetailResponse {
    * 主节点的ip列表
    */
   MasterIps?: string
+  /**
+   * 所有者名称
+   */
+  OwnerName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20996,6 +21052,10 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
    */
   WorkloadType?: string
   /**
+   * 容器状态
+   */
+  ContainerStatus?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -22189,7 +22249,7 @@ export interface DescribeAssetImageRegistryVirusListExportRequest {
   /**
    * 导出字段
    */
-  ExportField: Array<string>
+  ExportField?: Array<string>
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -22302,6 +22362,10 @@ export interface DescribeAssetImageRegistryListExportResponse {
    * excel文件下载地址
    */
   DownloadUrl?: string
+  /**
+   * 导出任务id
+   */
+  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

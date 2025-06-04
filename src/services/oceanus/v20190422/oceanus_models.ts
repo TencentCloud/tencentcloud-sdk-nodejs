@@ -4383,17 +4383,22 @@ export interface DescribeJobEventsResponse {
    * 该作业指定范围内的事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Events: Array<JobEvent>
+  Events?: Array<JobEvent>
   /**
    * 该作业指定范围内运行实例 ID 数组，仅当入参没有传入 RunningOrderIds 参数时才会返回。倒序输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningOrderIds: Array<number | bigint>
+  RunningOrderIds?: Array<number | bigint>
   /**
    * 事件的总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 实例对应的版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Versions?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

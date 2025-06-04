@@ -2832,13 +2832,17 @@ export interface DescribeSSOAccountRequest {
 }
 
 /**
- * UpdateExporterIntegration返回参数结构体
+ * DescribeExternalClusterUninstallCommand请求参数结构体
  */
-export interface UpdateExporterIntegrationResponse {
+export interface DescribeExternalClusterUninstallCommandRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例 ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -2965,41 +2969,33 @@ export interface AlarmPolicyCondition {
 }
 
 /**
- * 修改告警策略组传入的指标阈值条件
+ * DescribeGrafanaChannels请求参数结构体
  */
-export interface ModifyPolicyGroupCondition {
+export interface DescribeGrafanaChannelsRequest {
   /**
-   * 指标id
+   * Grafana 实例 ID，例如：grafana-12345678
    */
-  MetricId: number
+  InstanceId: string
   /**
-   * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
+   * 偏移量
    */
-  CalcType: number
+  Offset: number
   /**
-   * 检测阈值
+   * 查询数量
    */
-  CalcValue: string
+  Limit: number
   /**
-   * 检测指标的数据周期
+   * 告警通道名称，例如：test
    */
-  CalcPeriod: number
+  ChannelName?: string
   /**
-   * 持续周期个数
+   * 告警通道 ID，例如：nchannel-abcd1234
    */
-  ContinuePeriod: number
+  ChannelIds?: Array<string>
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)
    */
-  AlarmNotifyType: number
-  /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
-   */
-  AlarmNotifyPeriod: number
-  /**
-   * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
-   */
-  RuleId?: number
+  ChannelState?: number
 }
 
 /**
@@ -4192,6 +4188,16 @@ export interface IntegrationMetricGroup {
    * 分组名称
    */
   GroupName?: string
+}
+
+/**
+ * UpdateExporterIntegration返回参数结构体
+ */
+export interface UpdateExporterIntegrationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5753,36 +5759,6 @@ export interface LogFilterInfo {
    * 字段值
    */
   Value: string
-}
-
-/**
- * DescribeGrafanaChannels请求参数结构体
- */
-export interface DescribeGrafanaChannelsRequest {
-  /**
-   * Grafana 实例 ID，例如：grafana-12345678
-   */
-  InstanceId: string
-  /**
-   * 偏移量
-   */
-  Offset: number
-  /**
-   * 查询数量
-   */
-  Limit: number
-  /**
-   * 告警通道名称，例如：test
-   */
-  ChannelName?: string
-  /**
-   * 告警通道 ID，例如：nchannel-abcd1234
-   */
-  ChannelIds?: Array<string>
-  /**
-   * 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)
-   */
-  ChannelState?: number
 }
 
 /**
@@ -9586,6 +9562,20 @@ export interface DimensionNew {
 }
 
 /**
+ * CreateExternalCluster返回参数结构体
+ */
+export interface CreateExternalClusterResponse {
+  /**
+   * 集群 ID
+   */
+  ClusterId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAlertRules返回参数结构体
  */
 export interface DeleteAlertRulesResponse {
@@ -10136,6 +10126,44 @@ export interface DescribePrometheusAlertGroupsRequest {
 }
 
 /**
+ * 修改告警策略组传入的指标阈值条件
+ */
+export interface ModifyPolicyGroupCondition {
+  /**
+   * 指标id
+   */
+  MetricId: number
+  /**
+   * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
+   */
+  CalcType: number
+  /**
+   * 检测阈值
+   */
+  CalcValue: string
+  /**
+   * 检测指标的数据周期
+   */
+  CalcPeriod: number
+  /**
+   * 持续周期个数
+   */
+  ContinuePeriod: number
+  /**
+   * 告警发送收敛类型。0连续告警，1指数告警
+   */
+  AlarmNotifyType: number
+  /**
+   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   */
+  AlarmNotifyPeriod: number
+  /**
+   * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+   */
+  RuleId?: number
+}
+
+/**
  * ModifyPolicyGroup请求参数结构体
  */
 export interface ModifyPolicyGroupRequest {
@@ -10233,6 +10261,40 @@ export interface DeletePrometheusConfigRequest {
    * 要删除的RawJobs名字列表
    */
   RawJobs?: Array<string>
+}
+
+/**
+ * CreateExternalCluster请求参数结构体
+ */
+export interface CreateExternalClusterRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 集群所在地域
+   */
+  ClusterRegion: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群 ID
+   */
+  ClusterId?: string
+  /**
+   * 外部标签
+   */
+  ExternalLabels?: Array<Label>
+  /**
+   * 是否打开预聚合规则
+   */
+  OpenDefaultRecord?: boolean
+  /**
+   * 是否开启公网
+   */
+  EnableExternal?: boolean
 }
 
 /**
@@ -11255,6 +11317,20 @@ export interface DescribeStatisticDataRequest {
    * 按指定维度groupBy
    */
   GroupBys?: Array<string>
+}
+
+/**
+ * DescribeExternalClusterUninstallCommand返回参数结构体
+ */
+export interface DescribeExternalClusterUninstallCommandResponse {
+  /**
+   * 卸载命令
+   */
+  Command?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

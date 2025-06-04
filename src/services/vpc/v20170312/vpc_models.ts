@@ -1046,7 +1046,11 @@ export interface ModifyNatGatewayAttributeRequest {
  */
 export interface DescribeLocalGatewayRequest {
   /**
-   * 支持的过滤条件如下:\n<li>vpc-id:按照VPCID过滤。</li>\n<li>local-gateway-name:本地网关名称,支持模糊查询。</li>\n<li>local-gateway-id:本地网关实例ID。</li>\n<li>cdc-id:cdc实例ID。</li>
+   * 支持的过滤条件如下:
+<li>vpc-id:按照VPCID过滤。</li>
+<li>local-gateway-name:本地网关名称,支持模糊查询。</li>
+<li>local-gateway-id:本地网关实例ID。</li>
+<li>cdc-id:cdc实例ID。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -12887,8 +12891,7 @@ export interface CreateFlowLogRequest {
   FlowLogDescription?: string
   /**
    * 流日志存储ID（cls的日志主题ID，
-可通过[DescribeTopics](https://cloud.tencent.com/document/product/614/56454)接口获取。
-）。当StorageType为cls时，CloudLogId为必选。
+可通过[DescribeTopics](https://cloud.tencent.com/document/product/614/56454)接口获取）。当StorageType为cls时，CloudLogId为必选。
    */
   CloudLogId?: string
   /**

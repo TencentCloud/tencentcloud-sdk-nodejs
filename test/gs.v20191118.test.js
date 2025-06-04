@@ -38,6 +38,16 @@ it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
     }
 })
 
+it("gs.v20191118.TrylockWorker", async function () {
+    try {
+       const data = await client.TrylockWorker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.StopGame", async function () {
     try {
        const data = await client.StopGame({})
@@ -108,9 +118,9 @@ it("gs.v20191118.CreateAndroidInstanceImage", async function () {
     }
 })
 
-it("gs.v20191118.TrylockWorker", async function () {
+it("gs.v20191118.ModifyAndroidInstancesProperties", async function () {
     try {
-       const data = await client.TrylockWorker({})
+       const data = await client.ModifyAndroidInstancesProperties({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +158,9 @@ it("gs.v20191118.ModifyAndroidInstancesInformation", async function () {
     }
 })
 
-it("gs.v20191118.StopAndroidInstancesApp", async function () {
+it("gs.v20191118.InstallAndroidInstancesAppWithURL", async function () {
     try {
-       const data = await client.StopAndroidInstancesApp({})
+       const data = await client.InstallAndroidInstancesAppWithURL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +271,16 @@ it("gs.v20191118.UploadFileToAndroidInstances", async function () {
 it("gs.v20191118.CreateAndroidInstanceWebShell", async function () {
     try {
        const data = await client.CreateAndroidInstanceWebShell({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StopAndroidInstancesApp", async function () {
+    try {
+       const data = await client.StopAndroidInstancesApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,6 +541,16 @@ it("gs.v20191118.DestroyAndroidInstances", async function () {
 it("gs.v20191118.DeleteAndroidApp", async function () {
     try {
        const data = await client.DeleteAndroidApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CreateAndroidInstanceADB", async function () {
+    try {
+       const data = await client.CreateAndroidInstanceADB({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
