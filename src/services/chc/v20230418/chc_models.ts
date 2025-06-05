@@ -999,6 +999,20 @@ export interface CreateRackOffWorkOrderRequest {
 }
 
 /**
+ * ExportCustomerWorkOrderDetail返回参数结构体
+ */
+export interface ExportCustomerWorkOrderDetailResponse {
+  /**
+   * 返回下载地址
+   */
+  DownloadUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 已通过设备型号评估的型号信息
  */
 export interface AvailableModelVersion {
@@ -1454,6 +1468,24 @@ export interface WorkOrderData {
    * 工单完成时间
    */
   FinishTime?: string
+}
+
+/**
+ * ExportCustomerWorkOrderDetail请求参数结构体
+ */
+export interface ExportCustomerWorkOrderDetailRequest {
+  /**
+   * 服务工单类型
+   */
+  WorkOrderType: Array<string>
+  /**
+   * 要导出的工单的起始时间
+   */
+  BeginDateTime: string
+  /**
+   * 要导出的工单的结束时间
+   */
+  EndDateTime: string
 }
 
 /**

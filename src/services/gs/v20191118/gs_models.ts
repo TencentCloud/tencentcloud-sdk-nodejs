@@ -48,6 +48,20 @@ export interface ExecuteCommandOnAndroidInstancesResponse {
 }
 
 /**
+ * ResetAndroidInstances返回参数结构体
+ */
+export interface ResetAndroidInstancesResponse {
+  /**
+   * 任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartPublishStreamToCSS返回参数结构体
  */
 export interface StartPublishStreamToCSSResponse {
@@ -206,6 +220,20 @@ export interface StopAndroidInstancesAppResponse {
  * ModifyAndroidAppVersion返回参数结构体
  */
 export interface ModifyAndroidAppVersionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CleanAndroidInstancesAppData返回参数结构体
+ */
+export interface CleanAndroidInstancesAppDataResponse {
+  /**
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -611,29 +639,13 @@ export interface DescribeAndroidInstanceAppsResponse {
 }
 
 /**
- * CreateAndroidInstanceSSH返回参数结构体
+ * EnableAndroidInstancesApp返回参数结构体
  */
-export interface CreateAndroidInstanceSSHResponse {
+export interface EnableAndroidInstancesAppResponse {
   /**
-   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
    */
-  PrivateKey?: string
-  /**
-   * 用户名称
-   */
-  UserName?: string
-  /**
-   * 连接地址
-   */
-  HostName?: string
-  /**
-   * 连接端口
-   */
-  Port?: number
-  /**
-   * 连接参考命令
-   */
-  ConnectCommand?: string
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -679,6 +691,34 @@ export interface UploadFileToAndroidInstancesRequest {
    * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
    */
   DestinationDirectory?: string
+}
+
+/**
+ * CleanAndroidInstancesAppData请求参数结构体
+ */
+export interface CleanAndroidInstancesAppDataRequest {
+  /**
+   * 安卓实例 ID 列表（最大100条数据）
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 应用包名
+   */
+  PackageName: string
+}
+
+/**
+ * DisableAndroidInstancesApp请求参数结构体
+ */
+export interface DisableAndroidInstancesAppRequest {
+  /**
+   * 安卓实例 ID 列表（最大100条数据）
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 应用包名
+   */
+  PackageName: string
 }
 
 /**
@@ -848,6 +888,20 @@ export interface DeleteAndroidAppVersionResponse {
 }
 
 /**
+ * 安卓实例错误信息，用于批量安卓实例操作中返回部分操作错误的情况
+ */
+export interface AndroidInstanceError {
+  /**
+   * 安卓实例 ID
+   */
+  AndroidInstanceId?: string
+  /**
+   * 错误信息
+   */
+  Error?: Error
+}
+
+/**
  * ModifyAndroidInstancesUserId请求参数结构体
  */
 export interface ModifyAndroidInstancesUserIdRequest {
@@ -938,21 +992,17 @@ export interface InstallAndroidInstancesAppRequest {
 }
 
 /**
- * UninstallAndroidInstancesApp请求参数结构体
+ * SyncAndroidInstanceImage返回参数结构体
  */
-export interface UninstallAndroidInstancesAppRequest {
+export interface SyncAndroidInstanceImageResponse {
   /**
-   * 实例ID
+   * 同步安卓实例镜像列表
    */
-  AndroidInstanceIds: Array<string>
+  SyncAndroidInstanceImages?: Array<SyncAndroidInstanceImage>
   /**
-   * 应用ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AndroidAppId?: string
-  /**
-   * 包名
-   */
-  PackageName?: string
+  RequestId?: string
 }
 
 /**
@@ -1552,17 +1602,31 @@ export interface DistributeFileToAndroidInstancesRequest {
 }
 
 /**
- * ResetAndroidInstances返回参数结构体
+ * EnableAndroidInstancesApp请求参数结构体
  */
-export interface ResetAndroidInstancesResponse {
+export interface EnableAndroidInstancesAppRequest {
   /**
-   * 任务集合
+   * 安卓实例 ID 列表（最大100条数据）
    */
-  TaskSet?: Array<AndroidInstanceTask>
+  AndroidInstanceIds: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用包名
    */
-  RequestId?: string
+  PackageName: string
+}
+
+/**
+ * 错误信息，用于批量接口中返回部分操作错误
+ */
+export interface Error {
+  /**
+   * 错误码
+   */
+  Code?: string
+  /**
+   * 错误详细信息
+   */
+  Message?: string
 }
 
 /**
@@ -1848,27 +1912,31 @@ export interface AndroidInstanceTaskStatus {
 }
 
 /**
- * UploadFileToAndroidInstances返回参数结构体
+ * UninstallAndroidInstancesApp请求参数结构体
  */
-export interface UploadFileToAndroidInstancesResponse {
+export interface UninstallAndroidInstancesAppRequest {
   /**
-   * 实例任务集合
+   * 实例ID
    */
-  TaskSet?: Array<AndroidInstanceTask>
+  AndroidInstanceIds: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用ID
    */
-  RequestId?: string
+  AndroidAppId?: string
+  /**
+   * 包名
+   */
+  PackageName?: string
 }
 
 /**
- * SyncAndroidInstanceImage返回参数结构体
+ * DisableAndroidInstancesApp返回参数结构体
  */
-export interface SyncAndroidInstanceImageResponse {
+export interface DisableAndroidInstancesAppResponse {
   /**
-   * 同步安卓实例镜像列表
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
    */
-  SyncAndroidInstanceImages?: Array<SyncAndroidInstanceImage>
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2018,6 +2086,36 @@ export interface ModifyAndroidInstancesPropertiesResponse {
 }
 
 /**
+ * CreateAndroidInstanceSSH返回参数结构体
+ */
+export interface CreateAndroidInstanceSSHResponse {
+  /**
+   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   */
+  PrivateKey?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 连接地址
+   */
+  HostName?: string
+  /**
+   * 连接端口
+   */
+  Port?: number
+  /**
+   * 连接参考命令
+   */
+  ConnectCommand?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAndroidInstancesInformation返回参数结构体
  */
 export interface ModifyAndroidInstancesInformationResponse {
@@ -2063,6 +2161,20 @@ export interface CreateCosCredentialResponse {
    * Cos 密钥的失效时间
    */
   ExpiredTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UploadFileToAndroidInstances返回参数结构体
+ */
+export interface UploadFileToAndroidInstancesResponse {
+  /**
+   * 实例任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

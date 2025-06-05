@@ -13974,7 +13974,6 @@ export interface CreateTrafficPackagesRequest {
 <li>51200: 50TB流量，有效期一个月</li>
 <li>60: 60GB流量，有效期半年</li>
 <li>300: 300GB流量，有效期半年</li>
-<li>600: 600GB流量，有效期半年</li>
 <li>3072: 3TB流量，有效期半年</li>
 <li>6144: 6TB流量，有效期半年</li>
 <li>30720: 30TB流量，有效期半年</li>
@@ -13986,6 +13985,12 @@ export interface CreateTrafficPackagesRequest {
    * 流量包数量，可选范围 1~20。
    */
   TrafficPackageCount?: number
+  /**
+   * 抵扣类型，默认为 FULL_TIME，可选值: 
+<li>FULL_TIME: 全时流量包</li>
+<li>IDLE_TIME: 闲时流量包</li>
+   */
+  DeductType?: string
 }
 
 /**

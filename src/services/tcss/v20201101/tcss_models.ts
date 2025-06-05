@@ -895,6 +895,10 @@ export interface AddAssetImageRegistryRegistryDetailRequest {
    * webhook接入token
    */
   WebhookToken?: string
+  /**
+   * tcr实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -17599,13 +17603,25 @@ export interface DescribeRiskListResponse {
  */
 export interface ModifyAssetRequest {
   /**
-   * 全部同步，俩参数必选一个 All优先
+   * 同步全部普通节点
    */
   All?: boolean
   /**
-   * 要同步的主机列表uuid ，俩参数必选一个 All优先
+   * 要同步的主机列表uuid
    */
   Hosts?: Array<string>
+  /**
+   * 同步全部超级节点
+   */
+  AllSuperHost?: boolean
+  /**
+   * 要同步的超级节点唯一id
+   */
+  NodeUniqueIds?: Array<string>
+  /**
+   * 超时时间(秒) 最低3600s
+   */
+  TimeoutSec?: number
 }
 
 /**
@@ -19659,6 +19675,10 @@ export interface ModifyAssetResponse {
    * 同步任务发送结果
    */
   Status?: string
+  /**
+   * 任务id
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21993,6 +22013,10 @@ export interface UpdateAssetImageRegistryRegistryDetailRequest {
    * 是否自动授权&扫描，选择增量同步时参数生效，包含所有新增镜像
    */
   NeedScan?: boolean
+  /**
+   * tcr实例ID
+   */
+  InstanceId?: string
 }
 
 /**

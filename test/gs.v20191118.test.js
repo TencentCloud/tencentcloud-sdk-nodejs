@@ -48,6 +48,16 @@ it("gs.v20191118.TrylockWorker", async function () {
     }
 })
 
+it("gs.v20191118.ModifyAndroidInstancesProperties", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesProperties({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.StopGame", async function () {
     try {
        const data = await client.StopGame({})
@@ -68,9 +78,29 @@ it("gs.v20191118.SyncExecuteCommandOnAndroidInstances", async function () {
     }
 })
 
+it("gs.v20191118.DisableAndroidInstancesApp", async function () {
+    try {
+       const data = await client.DisableAndroidInstancesApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.RestoreAndroidInstanceFromStorage", async function () {
     try {
        const data = await client.RestoreAndroidInstanceFromStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CleanAndroidInstancesAppData", async function () {
+    try {
+       const data = await client.CleanAndroidInstancesAppData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +148,9 @@ it("gs.v20191118.CreateAndroidInstanceImage", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesProperties", async function () {
+it("gs.v20191118.EnableAndroidInstancesApp", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesProperties({})
+       const data = await client.EnableAndroidInstancesApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -9382,6 +9382,14 @@ export interface CreateCloneInstanceRequest {
    * 集群版节点拓扑配置。
    */
   ClusterTopology?: ClusterTopology
+  /**
+   * 原实例所在地域名，当传入异地备份时为必选项，例：ap-guangzhou
+   */
+  SrcRegion?: string
+  /**
+   * 异地数据备份id
+   */
+  SpecifiedSubBackupId?: number
 }
 
 /**

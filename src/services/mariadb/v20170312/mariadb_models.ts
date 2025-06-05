@@ -2188,7 +2188,8 @@ export interface CreateDedicatedClusterDBInstanceRequest {
    */
   ClusterId: string
   /**
-   * （废弃）可用区
+   * 可用区
+   * @deprecated
    */
   Zone?: string
   /**
@@ -2196,11 +2197,13 @@ export interface CreateDedicatedClusterDBInstanceRequest {
    */
   ProjectId?: number
   /**
-   * （废弃）Pid，可通过获取独享集群售卖配置接口得到
+   * Pid，可通过获取独享集群售卖配置接口得到
+   * @deprecated
    */
   Pid?: number
   /**
-   * （废弃）机型
+   * 机型
+   * @deprecated
    */
   Machine?: string
   /**
@@ -2216,11 +2219,13 @@ export interface CreateDedicatedClusterDBInstanceRequest {
    */
   DbVersionId?: string
   /**
-   * （废弃）是否手动指定一组服务器分配, 运维使用
+   * 是否手动指定一组服务器分配, 运维使用
+   * @deprecated
    */
   Manual?: number
   /**
-   * （废弃）DeviceNo参数
+   * DeviceNo参数
+   * @deprecated
    */
   DeviceNo?: string
   /**

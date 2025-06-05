@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAndroidInstanceTasksStatusResponse,
   ExecuteCommandOnAndroidInstancesResponse,
+  ResetAndroidInstancesResponse,
   StartPublishStreamToCSSResponse,
   CreateAndroidInstanceADBRequest,
   FetchAndroidInstancesLogsResponse,
@@ -32,6 +33,7 @@ import {
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
   ModifyAndroidAppVersionResponse,
+  CleanAndroidInstancesAppDataResponse,
   DeleteAndroidAppResponse,
   DescribeAndroidInstanceLabelsResponse,
   AndroidApp,
@@ -52,9 +54,11 @@ import {
   ModifyAndroidInstanceResolutionResponse,
   DeleteAndroidInstanceImagesRequest,
   DescribeAndroidInstanceAppsResponse,
-  CreateAndroidInstanceSSHResponse,
+  EnableAndroidInstancesAppResponse,
   ResetAndroidInstancesRequest,
   UploadFileToAndroidInstancesRequest,
+  CleanAndroidInstancesAppDataRequest,
+  DisableAndroidInstancesAppRequest,
   SaveGameArchiveResponse,
   ConnectAndroidInstanceRequest,
   CopyAndroidInstanceRequest,
@@ -66,6 +70,7 @@ import {
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
+  AndroidInstanceError,
   ModifyAndroidInstancesUserIdRequest,
   CreateAndroidInstanceLabelResponse,
   StopPublishStreamResponse,
@@ -73,7 +78,7 @@ import {
   DeleteAndroidInstanceLabelRequest,
   ModifyAndroidInstancesUserIdResponse,
   InstallAndroidInstancesAppRequest,
-  UninstallAndroidInstancesAppRequest,
+  SyncAndroidInstanceImageResponse,
   DestroyAndroidInstancesRequest,
   CreateAndroidInstanceWebShellResponse,
   DescribeAndroidInstanceImagesResponse,
@@ -110,7 +115,8 @@ import {
   StartPublishStreamToCSSRequest,
   Filter,
   DistributeFileToAndroidInstancesRequest,
-  ResetAndroidInstancesResponse,
+  EnableAndroidInstancesAppRequest,
+  Error,
   RestartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionRequest,
   DescribeAndroidAppsRequest,
@@ -127,8 +133,8 @@ import {
   AndroidInstanceProperty,
   DescribeAndroidInstanceImagesRequest,
   AndroidInstanceTaskStatus,
-  UploadFileToAndroidInstancesResponse,
-  SyncAndroidInstanceImageResponse,
+  UninstallAndroidInstancesAppRequest,
+  DisableAndroidInstancesAppResponse,
   CreateAndroidInstancesResponse,
   StopGameResponse,
   CreateAndroidInstanceLabelRequest,
@@ -136,8 +142,10 @@ import {
   RebootAndroidInstanceHostsRequest,
   COSOptions,
   ModifyAndroidInstancesPropertiesResponse,
+  CreateAndroidInstanceSSHResponse,
   ModifyAndroidInstancesInformationResponse,
   CreateCosCredentialResponse,
+  UploadFileToAndroidInstancesResponse,
   CreateAndroidInstancesRequest,
   InstallAndroidInstancesAppWithURLRequest,
   StartPublishStreamResponse,
@@ -201,6 +209,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量修改安卓实例属性
+   */
+  async ModifyAndroidInstancesProperties(
+    req: ModifyAndroidInstancesPropertiesRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesPropertiesResponse) => void
+  ): Promise<ModifyAndroidInstancesPropertiesResponse> {
+    return this.request("ModifyAndroidInstancesProperties", req, cb)
+  }
+
+  /**
    * 强制退出游戏
    */
   async StopGame(
@@ -221,6 +239,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量禁用安卓实例应用
+   */
+  async DisableAndroidInstancesApp(
+    req: DisableAndroidInstancesAppRequest,
+    cb?: (error: string, rep: DisableAndroidInstancesAppResponse) => void
+  ): Promise<DisableAndroidInstancesAppResponse> {
+    return this.request("DisableAndroidInstancesApp", req, cb)
+  }
+
+  /**
    * 使用指定存储数据还原云手机，支持 COS 和兼容 AWS S3 协议的对象存储服务。如果还原数据来自 COS 时，会使用公网流量，授权 COS bucket 请在控制台中操作。
    */
   async RestoreAndroidInstanceFromStorage(
@@ -228,6 +256,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestoreAndroidInstanceFromStorageResponse) => void
   ): Promise<RestoreAndroidInstanceFromStorageResponse> {
     return this.request("RestoreAndroidInstanceFromStorage", req, cb)
+  }
+
+  /**
+   * 批量清理安卓实例应用数据
+   */
+  async CleanAndroidInstancesAppData(
+    req: CleanAndroidInstancesAppDataRequest,
+    cb?: (error: string, rep: CleanAndroidInstancesAppDataResponse) => void
+  ): Promise<CleanAndroidInstancesAppDataResponse> {
+    return this.request("CleanAndroidInstancesAppData", req, cb)
   }
 
   /**
@@ -261,7 +299,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建安卓实例镜像
+   * 使用指定的安卓实例创建镜像，创建镜像时指定的实例会关机，镜像创建完成后实例会自动开机。当镜像的 AndroidInstanceImageState 为 NORMAL 时，镜像创建完成处于可用状态。
    */
   async CreateAndroidInstanceImage(
     req: CreateAndroidInstanceImageRequest,
@@ -271,13 +309,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量修改安卓实例属性
+   * 批量启用安卓实例应用
    */
-  async ModifyAndroidInstancesProperties(
-    req: ModifyAndroidInstancesPropertiesRequest,
-    cb?: (error: string, rep: ModifyAndroidInstancesPropertiesResponse) => void
-  ): Promise<ModifyAndroidInstancesPropertiesResponse> {
-    return this.request("ModifyAndroidInstancesProperties", req, cb)
+  async EnableAndroidInstancesApp(
+    req: EnableAndroidInstancesAppRequest,
+    cb?: (error: string, rep: EnableAndroidInstancesAppResponse) => void
+  ): Promise<EnableAndroidInstancesAppResponse> {
+    return this.request("EnableAndroidInstancesApp", req, cb)
   }
 
   /**
@@ -331,7 +369,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询安卓实例镜像
+   * 查询安卓实例镜像信息，当镜像的 AndroidInstanceImageState 为 NORMAL 时，镜像处于可用状态。
    */
   async DescribeAndroidInstanceImages(
     req: DescribeAndroidInstanceImagesRequest,
@@ -471,7 +509,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步安卓实例镜像
+   * 同步安卓实例镜像到其他区域，当镜像的 AndroidInstanceImageState 为 NORMAL 时，镜像已经同步完成处于可用状态。
    */
   async SyncAndroidInstanceImage(
     req: SyncAndroidInstanceImageRequest,

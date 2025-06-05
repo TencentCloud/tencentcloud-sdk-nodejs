@@ -4218,13 +4218,17 @@ export interface VulFixStatusSnapshotInfo {
    */
   Id?: number
   /**
-   * 快照状态 0-初始状态1-快照创建成功；2-快照创建失败；
+   * 快照状态 0-初始状态1-快照创建成功；2-快照创建失败；10-不支持，11-无需创建
    */
   Status?: number
   /**
    * 快照创建失败原因
    */
   FailReason?: string
+  /**
+   * 主机类型
+   */
+  MachineType?: string
 }
 
 /**
@@ -13079,6 +13083,10 @@ export interface VulInfoHostInfo {
    * 主机InstanceId
    */
   InstanceId?: string
+  /**
+   * 主机类型
+   */
+  MachineType?: string
 }
 
 /**
@@ -21582,6 +21590,10 @@ export interface FileTamperRule {
 <li>read-write 读取修改文件</li>
    */
   FileAction?: string
+  /**
+   * 命令行参数 没有填*
+   */
+  Args?: string
 }
 
 /**
@@ -26777,6 +26789,10 @@ export interface VulInfoList {
    * 漏洞是否支持修复 0不支持，1支持
    */
   VulFixSwitch?: number
+  /**
+   * 最近修复时间
+   */
+  LatestFixTime?: string
 }
 
 /**
@@ -28591,6 +28607,26 @@ export interface VulEffectHostList {
    * 主机额外信息
    */
   MachineExtraInfo?: MachineExtraInfo
+  /**
+   * 主机类型
+   */
+  MachineType?: string
+  /**
+   * 可用区ID
+   */
+  RegionId?: number
+  /**
+   * 修复任务是否创建了快照： 0-未创建，其他-已创建
+   */
+  HasSnapshot?: number
+  /**
+   * 最后修复时间
+   */
+  LatestFixTime?: string
+  /**
+   * 说明
+   */
+  DescriptionEn?: string
 }
 
 /**

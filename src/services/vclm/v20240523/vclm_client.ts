@@ -19,14 +19,19 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CheckAnimateImageJobResponse,
-  SubmitVideoStylizationJobRequest,
+  SubmitTemplateToVideoJobRequest,
+  SubmitTemplateToVideoJobResponse,
   CheckAnimateImageJobRequest,
   DescribeVideoStylizationJobRequest,
   DescribePortraitSingJobRequest,
   DescribeImageAnimateJobResponse,
+  SubmitVideoStylizationJobRequest,
   SubmitPortraitSingJobRequest,
+  Image,
   LogoRect,
   SubmitImageAnimateJobResponse,
+  DescribeTemplateToVideoJobResponse,
+  DescribeTemplateToVideoJobRequest,
   SubmitVideoStylizationJobResponse,
   DescribeVideoStylizationJobResponse,
   SubmitImageAnimateJobRequest,
@@ -43,6 +48,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("vclm.tencentcloudapi.com", "2024-05-23", clientConfig)
+  }
+
+  /**
+   * 用于查询视频特效任务。
+   */
+  async DescribeTemplateToVideoJob(
+    req: DescribeTemplateToVideoJobRequest,
+    cb?: (error: string, rep: DescribeTemplateToVideoJobResponse) => void
+  ): Promise<DescribeTemplateToVideoJobResponse> {
+    return this.request("DescribeTemplateToVideoJob", req, cb)
   }
 
   /**
@@ -95,6 +110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitImageAnimateJobResponse) => void
   ): Promise<SubmitImageAnimateJobResponse> {
     return this.request("SubmitImageAnimateJob", req, cb)
+  }
+
+  /**
+   * 提交视频特效任务接口
+   */
+  async SubmitTemplateToVideoJob(
+    req: SubmitTemplateToVideoJobRequest,
+    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
+  ): Promise<SubmitTemplateToVideoJobResponse> {
+    return this.request("SubmitTemplateToVideoJob", req, cb)
   }
 
   /**

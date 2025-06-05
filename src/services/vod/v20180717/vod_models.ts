@@ -282,6 +282,7 @@ export interface DescribeRoundPlaysRequest {
   ScrollToken?: string
   /**
    * 分页偏移量，默认值：0。已经废弃，请根据 ScrollToken 参数进行分批次查询。
+   * @deprecated
    */
   Offset?: number
   /**
@@ -4486,6 +4487,7 @@ export interface TraceWatermarkInput {
   Switch?: string
   /**
    * 该字段已废弃，请勿使用。
+   * @deprecated
    */
   Definition?: number
 }
@@ -6603,6 +6605,7 @@ export interface AsrFullTextConfigureInfoForUpdate {
 <li>vtt：生成 WebVTT 字幕文件；</li>
 <li>srt：生成 SRT 字幕文件。</li>
 <font color='red'>注意：此字段已废弃，建议使用 SubtitleFormatsOperation。</font>
+   * @deprecated
    */
   SubtitleFormat?: string
   /**
@@ -7528,10 +7531,12 @@ export interface RestoreMediaTask {
   RestoreDay?: number
   /**
    * 该字段已废弃。
+   * @deprecated
    */
   Status?: number
   /**
    * 该字段已废弃。
+   * @deprecated
    */
   Message?: string
 }
@@ -9747,6 +9752,7 @@ export interface ExtractTraceWatermarkTaskOutput {
   Uv?: string
   /**
    * 该字段已废弃。
+   * @deprecated
    */
   Uid?: string
 }
@@ -11913,6 +11919,7 @@ military：
   AreaCoordSet?: Array<number | bigint>
   /**
    * 该字段已废弃，请使用 PicUrlExpireTime。
+   * @deprecated
    */
   PicUrlExpireTimeStamp?: number
   /**
@@ -14671,6 +14678,7 @@ export interface AsrFullTextConfigureInfo {
 <li>vtt：生成 WebVTT 字幕文件；</li>
 <li>srt：生成 SRT 字幕文件。</li>
 <font color='red'>注意：此字段已废弃，建议使用 SubtitleFormats。</font>
+   * @deprecated
    */
   SubtitleFormat?: string
   /**
@@ -16826,6 +16834,7 @@ export interface ReviewImageResponse {
   /**
    * 图片审核任务结果。
 <font color=red>注意：该字段已废弃，建议使用 MediaReviewResult。</font> 
+   * @deprecated
    */
   ReviewResultSet?: Array<ContentReviewResult>
   /**
@@ -18595,6 +18604,7 @@ export interface WeChatMiniProgramPublishResponse {
 export interface DescribeRoundPlaysResponse {
   /**
    * 符合过滤条件的轮播播单总数。已经废弃，分批次查询请请使用 ScrollToken 参数。
+   * @deprecated
    */
   TotalCount?: number
   /**

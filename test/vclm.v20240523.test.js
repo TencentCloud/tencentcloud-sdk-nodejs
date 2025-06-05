@@ -18,6 +18,16 @@ const client = new tencentcloud.vclm.v20240523.Client({
 })
 describe("vclm.v20240523.test.js", function () {
 
+it("vclm.v20240523.DescribeTemplateToVideoJob", async function () {
+    try {
+       const data = await client.DescribeTemplateToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.SubmitVideoStylizationJob", async function () {
     try {
        const data = await client.SubmitVideoStylizationJob({})
@@ -61,6 +71,16 @@ it("vclm.v20240523.DescribeImageAnimateJob", async function () {
 it("vclm.v20240523.SubmitImageAnimateJob", async function () {
     try {
        const data = await client.SubmitImageAnimateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitTemplateToVideoJob", async function () {
+    try {
+       const data = await client.SubmitTemplateToVideoJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

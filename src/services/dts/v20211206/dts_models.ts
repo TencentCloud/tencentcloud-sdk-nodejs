@@ -1836,7 +1836,7 @@ export interface CompareOptions {
    */
   SampleRate?: number
   /**
-   * 线程数，取值1-5，默认为1
+   * 线程数，取值1-8，默认为1
    */
   ThreadCount?: number
 }
@@ -2470,7 +2470,7 @@ export interface Options {
    */
   ConflictHandleOption?: ConflictHandleOption
   /**
-   * DDL同步选项，具体描述要同步那些DDL
+   * DDL同步选项，具体描述要同步哪些DDL
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DdlOptions?: Array<DdlOption>
@@ -3448,7 +3448,7 @@ export interface DynamicOptions {
    */
   OpTypes: Array<string>
   /**
-   * DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值
+   * DDL同步选项，具体描述要同步哪些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值
    */
   DdlOptions: Array<DdlOption>
   /**

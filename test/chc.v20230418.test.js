@@ -228,6 +228,16 @@ it("chc.v20230418.DescribePositionStatusSummary", async function () {
     }
 })
 
+it("chc.v20230418.ExportCustomerWorkOrderDetail", async function () {
+    try {
+       const data = await client.ExportCustomerWorkOrderDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("chc.v20230418.CreateSpeciallyQuitWorkOrder", async function () {
     try {
        const data = await client.CreateSpeciallyQuitWorkOrder({})

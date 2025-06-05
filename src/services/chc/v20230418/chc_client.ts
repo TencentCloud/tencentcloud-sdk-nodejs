@@ -59,6 +59,7 @@ import {
   DescribeModelRequest,
   ModelVersionDetail,
   CreateRackOffWorkOrderRequest,
+  ExportCustomerWorkOrderDetailResponse,
   AvailableModelVersion,
   CustomerReceipt,
   Cage,
@@ -80,6 +81,7 @@ import {
   CreateMovingWorkOrderResponse,
   Campus,
   WorkOrderData,
+  ExportCustomerWorkOrderDetailRequest,
   NetDeviceModel,
   ModelVersion,
   DescribeResourceUsageResponse,
@@ -354,6 +356,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePositionStatusSummaryResponse) => void
   ): Promise<DescribePositionStatusSummaryResponse> {
     return this.request("DescribePositionStatusSummary", req, cb)
+  }
+
+  /**
+   * 导出工单详情
+   */
+  async ExportCustomerWorkOrderDetail(
+    req: ExportCustomerWorkOrderDetailRequest,
+    cb?: (error: string, rep: ExportCustomerWorkOrderDetailResponse) => void
+  ): Promise<ExportCustomerWorkOrderDetailResponse> {
+    return this.request("ExportCustomerWorkOrderDetail", req, cb)
   }
 
   /**

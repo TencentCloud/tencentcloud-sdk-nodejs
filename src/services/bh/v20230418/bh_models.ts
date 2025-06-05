@@ -181,6 +181,10 @@ export interface SearchSessionRequest {
    * 应用资产Url
    */
   AppAssetUrl?: string
+  /**
+   * 资产类型
+   */
+  DeviceKind?: string
 }
 
 /**

@@ -343,6 +343,9 @@ export interface STTConfig {
 - "zh": 中文（简体）
 - "zh-TW": 中文（繁体）
 - "en": 英语
+- "16k_zh_edu"：中文教育
+- "16k_zh_medical"：中文医疗
+- "16k_zh_court"：中文法庭
 
 **标准版：**
 - "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.
@@ -378,8 +381,9 @@ export interface STTConfig {
    */
   Language?: string
   /**
-   * **发起模糊识别为高级版能力,默认按照高级版收费,仅支持填写基础版和高级版语言.**
-注意：不支持填写"zh-dialect"
+   * **发起模糊识别为高级版能力,默认按照高级版收费**
+注意：不支持填写"zh-dialect", "16k_zh_edu", "16k_zh_medical", "16k_zh_court", "8k_zh_large", "16k_zh_large","16k_multi_lang", "16k_zh_en"
+
    */
   AlternativeLanguage?: Array<string>
   /**
