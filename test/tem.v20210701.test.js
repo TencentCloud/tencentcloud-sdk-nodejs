@@ -198,6 +198,16 @@ it("tem.v20210701.ModifyApplicationService", async function () {
     }
 })
 
+it("tem.v20210701.ModifyGatewayIngress", async function () {
+    try {
+       const data = await client.ModifyGatewayIngress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.ModifyEnvironment", async function () {
     try {
        const data = await client.ModifyEnvironment({})

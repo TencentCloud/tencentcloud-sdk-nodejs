@@ -18047,6 +18047,7 @@ export interface MediaContentReviewSegmentItem {
   Url?: string
   /**
    * 该字段已废弃，请使用 PicUrlExpireTime。
+   * @deprecated
    */
   PicUrlExpireTimeStamp?: number
   /**

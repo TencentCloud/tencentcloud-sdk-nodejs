@@ -1281,9 +1281,13 @@ export interface DescribeApmInstancesRequest {
    */
   Tags?: Array<ApmTag>
   /**
-   * 按业务系统名过滤
+   * 按业务系统名过滤，支持模糊检索
    */
   InstanceName?: string
+  /**
+   * 按业务系统 ID 过滤，支持模糊检索
+   */
+  InstanceId?: string
   /**
    * 按业务系统 ID 过滤
    */

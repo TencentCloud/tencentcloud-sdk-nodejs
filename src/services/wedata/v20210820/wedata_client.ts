@@ -186,6 +186,7 @@ import {
   UpdateProjectUserRoleRequest,
   LineageParamRecord,
   BatchResult,
+  ExecutorResourceGroupInfo,
   GetBatchDetailErrorLogRequest,
   InstanceLogByLine,
   StartTaskInfo,
@@ -244,6 +245,7 @@ import {
   CreateTaskAlarmRegularRequest,
   ModifyRuleRequest,
   RunTasksByMultiWorkflowResponse,
+  WorkflowExtOpsDtoPage,
   DataSourceInfo,
   DescribeBaseBizCatalogsResponse,
   FindAllFolderResponse,
@@ -284,7 +286,7 @@ import {
   CosTokenResponse,
   ModifyTaskLinksRequest,
   DeleteTaskDsResponse,
-  LifecycleInfo,
+  ExecutorResourcePackageUsageInfo,
   DescribeAllByFolderNewResponse,
   DescribeDsParentFolderTreeRequest,
   DescribeDataServicePublishedApiListResp,
@@ -372,7 +374,7 @@ import {
   DescribeAlarmReceiverRequest,
   InstanceVO,
   DescribeStatisticInstanceStatusTrendOpsResponse,
-  SchedulerTaskInstanceInfo,
+  MQPackageVO,
   DescribeSchedulerTaskCntByStatusResponse,
   TaskExtInfo,
   ModifyWorkflowInfoRequest,
@@ -466,6 +468,7 @@ import {
   SubmitTaskTestRunResponse,
   UpdateProjectUserRoleResponse,
   DescribeRoleListRequest,
+  ExecutorResourcePackageInfo,
   ModifyTaskAlarmRegularResponse,
   InstanceSearchCondition,
   CreateRuleResponse,
@@ -495,6 +498,7 @@ import {
   InstanceLogList,
   ModifyMonitorStatusRequest,
   DescribeColumnLineageResponse,
+  SchedulerTaskInstanceInfo,
   DescribeIntegrationTaskRequest,
   DiagnoseRep,
   DescribeWorkflowListByProjectIdResponse,
@@ -531,6 +535,7 @@ import {
   DescribeTaskByStatusReportResponse,
   ModifyDimensionWeightRequest,
   CreateMakeDatetimeInfo,
+  ExecutorResourcePackageExtInfo,
   InstanceApiOpsRequest,
   CreateCodeTemplateResponse,
   DescribeTaskLockStatusResponse,
@@ -573,6 +578,7 @@ import {
   DescribeDutyScheduleDetailsResponse,
   TaskLineageInfo,
   DescribeTableQualityDetailsResponse,
+  DescribeExecutorGroupMetricRequest,
   DescribeProjectUsersRequest,
   LineageTask,
   CommonIdOpsDto,
@@ -816,6 +822,7 @@ import {
   CreateHiveTableByDDLRequest,
   DescribeFormVersionParamRequest,
   DatabaseInfo,
+  LifecycleInfo,
   GetIntegrationNodeColumnSchemaResponse,
   StopIntegrationTaskResponse,
   DescribeOpsWorkflowsResponse,
@@ -844,6 +851,7 @@ import {
   ListBatchDetailRequest,
   ModifyTaskNameRequest,
   DescribeTrendStatRequest,
+  ExecutorUsageTrendInfo,
   DescribeOpsInstanceLogListResponse,
   DescribeApproveTypeListResponse,
   RuleGroupExecResultPage,
@@ -854,7 +862,7 @@ import {
   DeleteProjectUsersRequest,
   BaseTenant,
   DescribeWorkflowExecuteByIdRequest,
-  WorkflowExtOpsDtoPage,
+  DescribeExecutorGroupMetricResponse,
   DescribeTableLineageResponse,
   DescribeRuleExecLogRequest,
   BatchRerunIntegrationTaskInstancesResponse,
@@ -1511,6 +1519,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeQualityScoreResponse) => void
   ): Promise<DescribeQualityScoreResponse> {
     return this.request("DescribeQualityScore", req, cb)
+  }
+
+  /**
+   * 商业化版本：根据id查询执行资源组指标
+   */
+  async DescribeExecutorGroupMetric(
+    req: DescribeExecutorGroupMetricRequest,
+    cb?: (error: string, rep: DescribeExecutorGroupMetricResponse) => void
+  ): Promise<DescribeExecutorGroupMetricResponse> {
+    return this.request("DescribeExecutorGroupMetric", req, cb)
   }
 
   /**

@@ -5924,6 +5924,116 @@ export interface BatchResult {
 }
 
 /**
+ * 资源组详情
+ */
+export interface ExecutorResourceGroupInfo {
+  /**
+   * 执行组id, 仅更新资源时需要传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupId?: string
+  /**
+   * 执行组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupName?: string
+  /**
+   * 执行组描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupDesc?: string
+  /**
+   * SCHEDULER （标准调度资源组），CUSTOM_SCHEDULER （自定义调度资源），INTEGRATION（集成资源组），DATA_SERVICE（数据服务资源组）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorResourceType?: number
+  /**
+   * 区域中文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * vpcId, 托管服务时需要传递
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * subnetId, 托管服务时需要传递
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 基础资源包，资源组至少包含一个基础资源包
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BasicResourcePackage?: ExecutorResourcePackageInfo
+  /**
+   * 增强资源包
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvanceResourcePackage?: ExecutorResourcePackageInfo
+  /**
+   * 是否自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenewFlag?: number
+  /**
+   * 区域英文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionEn?: string
+  /**
+   * 区域Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionId?: number
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 项目展示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectDisplayName?: string
+  /**
+   * 资源组关联项目数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociateProjectNums?: number
+  /**
+   * 是否锁定，false为未锁定，true为锁定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLocked?: boolean
+  /**
+   * 来源类型，0为系统默认，1为自定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: number
+  /**
+   * 队列资源包
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MQPackageVO?: MQPackageVO
+  /**
+   * 是否首选
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirstChoice?: boolean
+  /**
+   * 资源组python版本绑定详情
+   */
+  PythonSubVersions?: Array<string>
+}
+
+/**
  * GetBatchDetailErrorLog请求参数结构体
  */
 export interface GetBatchDetailErrorLogRequest {
@@ -8212,6 +8322,22 @@ export interface RunTasksByMultiWorkflowResponse {
 }
 
 /**
+ * 用户生产工作流列表分页
+ */
+export interface WorkflowExtOpsDtoPage {
+  /**
+   * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<WorkflowExtOpsDto>
+}
+
+/**
  * 数据源对象
  */
 export interface DataSourceInfo {
@@ -9583,24 +9709,127 @@ export interface DeleteTaskDsResponse {
 }
 
 /**
- * 表生命周期相关信息
+ * 执行资源包使用情况
  */
-export interface LifecycleInfo {
+export interface ExecutorResourcePackageUsageInfo {
   /**
-   * 生命周期值
+   * CPU占用百分比
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Lifecycle?: number
+  CpuUsagePercent?: number
   /**
-   * 列名
+   * 内存占用百分比
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Columns?: Array<string>
+  MemUsagePercent?: number
   /**
-   * 日期格式
+   * 资源包状态, /**
+     * 初始化中
+     * /
+    INIT(0),
+    /**
+     * 运行中
+     * /
+    RUNNING(1),
+    /**
+     * 运行异常
+     * /
+    RUNNING_FAILED(2),
+    /**
+     * 释放中
+     * /
+    DELETEING(3),
+    /**
+     * 已释放
+     * /
+    DELETED(4),
+    /**
+     * 创建中
+     * /
+    CREATING(5),
+    /**
+     * 创建失败
+     * /
+    CREATE_FAILED(6),
+    /**
+     * 更新中
+     * /
+    UPDATING(7),
+    /**
+     * 更新失败
+     * /
+    UPDATE_FAILED(8),
+    /**
+     * 已到期
+     * /
+    EXPIRED(9);
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DateFormat?: Array<string>
+  Status?: number
+  /**
+   * /**
+     * 初始化中
+     * /
+    INIT(0),
+    /**
+     * 运行中
+     * /
+    RUNNING(1),
+    /**
+     * 运行异常
+     * /
+    RUNNING_FAILED(2),
+    /**
+     * 释放中
+     * /
+    DELETEING(3),
+    /**
+     * 已释放
+     * /
+    DELETED(4),
+    /**
+     * 创建中
+     * /
+    CREATING(5),
+    /**
+     * 创建失败
+     * /
+    CREATE_FAILED(6),
+    /**
+     * 更新中
+     * /
+    UPDATING(7),
+    /**
+     * 更新失败
+     * /
+    UPDATE_FAILED(8),
+    /**
+     * 已到期
+     * /
+运行中的任务数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningTaskNum?: number
+  /**
+   * 等待中的任务数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitingTaskNum?: number
+  /**
+   * 资源使用趋势: 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsageTrendStartTime?: string
+  /**
+   * 资源使用趋势: 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsageTrendEndTime?: string
+  /**
+   * 资源使用趋势列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsageTrendList?: Array<ExecutorUsageTrendInfo>
 }
 
 /**
@@ -12647,17 +12876,79 @@ export interface DescribeStatisticInstanceStatusTrendOpsResponse {
 }
 
 /**
- * 集成离线任务实例信息
+ * MQPackageVO
  */
-export interface SchedulerTaskInstanceInfo {
+export interface MQPackageVO {
   /**
-   * 任务id
+   * ckafka消息队列
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  Type?: string
   /**
-   * 实例运行时间
+   * 实例Id/集群Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurRunDate: string
+  InstanceId?: string
+  /**
+   * 实例名称/集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 局域网Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 资源状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 资源状态描述：保存创建失败，运行异常和更新失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusDescription?: string
+  /**
+   * DataProxy规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxySpec?: string
+  /**
+   * DataProxy数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxyNum?: number
+  /**
+   * DataProxy状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxyStatus?: number
+  /**
+   * DataProxy状态描述：保存创建失败，运行异常和更新失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxyStatusDescription?: string
+  /**
+   * 计费类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingType?: string
+  /**
+   * 资源到期时间，时间戳毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
+  /**
+   * 资源生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeTime?: number
 }
 
 /**
@@ -15772,6 +16063,145 @@ export interface DescribeRoleListRequest {
 }
 
 /**
+ * 执行资源包
+ */
+export interface ExecutorResourcePackageInfo {
+  /**
+   * 资源包规格相关：资源包个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourcePackageNum: number
+  /**
+   * 资源包规格相关：cpu个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuNum: number
+  /**
+   * 资源包id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorResourcePackageId?: string
+  /**
+   * 资源包规格相关：内存大小，单位:G
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemSize?: number
+  /**
+   * 资源包状态， /**
+     * 初始化中
+     * /
+    INIT(0),
+    /**
+     * 运行中
+     * /
+    RUNNING(1),
+    /**
+     * 运行异常
+     * /
+    RUNNING_FAILED(2),
+    /**
+     * 释放中
+     * /
+    DELETEING(3),
+    /**
+     * 已释放
+     * /
+    DELETED(4),
+    /**
+     * 创建中
+     * /
+    CREATING(5),
+    /**
+     * 创建失败
+     * /
+    CREATE_FAILED(6),
+    /**
+     * 更新中
+     * /
+    UPDATING(7),
+    /**
+     * 更新失败
+     * /
+    UPDATE_FAILED(8),
+    /**
+     * 已到期
+     * /
+    EXPIRED(9);
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 资源包状态描述：保存创建失败，运行异常和更新失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusDescription?: string
+  /**
+   * 资源包到期时间，时间戳毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
+  /**
+   * 资源包额外属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtInfo?: ExecutorResourcePackageExtInfo
+  /**
+   * 绑定的项目id，可为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 资源组绑定的时间，时间戳毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectBindTime?: number
+  /**
+   * 资源包使用状态: cpu使用，内存使用及趋势
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourcePackageUsage?: ExecutorResourcePackageUsageInfo
+  /**
+   * 计费相关：产品资源id列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductResourceIdList?: Array<number | bigint>
+  /**
+   * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeTime?: number
+  /**
+   * 私有网络Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 私有网络名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcName?: string
+  /**
+   * 子网Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 子网名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetName?: string
+  /**
+   * 执行资源相关：资源规格描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceStandard?: string
+  /**
+   * 内存总数
+   */
+  TotalMemory?: number
+}
+
+/**
  * ModifyTaskAlarmRegular返回参数结构体
  */
 export interface ModifyTaskAlarmRegularResponse {
@@ -16421,6 +16851,20 @@ export interface DescribeColumnLineageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集成离线任务实例信息
+ */
+export interface SchedulerTaskInstanceInfo {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 实例运行时间
+   */
+  CurRunDate: string
 }
 
 /**
@@ -17311,6 +17755,72 @@ export interface CreateMakeDatetimeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
+}
+
+/**
+ * 执行资源包额外信息
+ */
+export interface ExecutorResourcePackageExtInfo {
+  /**
+   * 集成资源组：InLong集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InlongGroupId?: string
+  /**
+   * 集成资源组：oceanus集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OceanusClusterId?: string
+  /**
+   * 计费相关：产品资源id列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductResourceIdList?: Array<string>
+  /**
+   * 当前资源包对应订单是否发货成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingSuccess?: boolean
+  /**
+   * apigw服务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApigwServiceId?: string
+  /**
+   * apigw服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApigwServiceName?: string
+  /**
+   * 数据集成相关：dataProxy配置规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxySpec?: number
+  /**
+   * dataProxy数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxyNum?: number
+  /**
+   * dataProxy状态，同ExecutorGroupStatus
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataProxyStatus?: number
+  /**
+   * inlongManager地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InLongManagerUrl?: string
+  /**
+   * inlong版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InLongVersion?: string
+  /**
+   * 私有化资源组相关: 执行及机器ip列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorMachineIpList?: string
 }
 
 /**
@@ -18839,6 +19349,44 @@ export interface DescribeTableQualityDetailsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeExecutorGroupMetric请求参数结构体
+ */
+export interface DescribeExecutorGroupMetricRequest {
+  /**
+   * 执行资源组id
+   */
+  ExecutorGroupId: string
+  /**
+   * 使用趋势开始时间(毫秒)
+   */
+  TrendStartTime?: number
+  /**
+   * 使用趋势结束时间(毫秒)
+   */
+  TrendEndTime?: number
+  /**
+   * 执行资源组类型
+   */
+  ExecutorGroupType?: string
+  /**
+   * 执行资源类型
+   */
+  ExecutorResourceType?: string
+  /**
+   * 执行机ID
+   */
+  LoaderId?: string
+  /**
+   * 指标维度
+   */
+  MetricType?: string
+  /**
+   * 指标采集粒度
+   */
+  Granularity?: number
 }
 
 /**
@@ -26598,6 +27146,27 @@ export interface DatabaseInfo {
 }
 
 /**
+ * 表生命周期相关信息
+ */
+export interface LifecycleInfo {
+  /**
+   * 生命周期值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Lifecycle?: number
+  /**
+   * 列名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<string>
+  /**
+   * 日期格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DateFormat?: Array<string>
+}
+
+/**
  * GetIntegrationNodeColumnSchema返回参数结构体
  */
 export interface GetIntegrationNodeColumnSchemaResponse {
@@ -27511,6 +28080,37 @@ export interface DescribeTrendStatRequest {
 }
 
 /**
+ * 资源组/资源包使用趋势
+ */
+export interface ExecutorUsageTrendInfo {
+  /**
+   * 时间戳，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+  /**
+   * CPU占用百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuUsagePercent?: number
+  /**
+   * 内存占用百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemUsagePercent?: number
+  /**
+   * 当前并发度使用百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConcurrencyUsage?: number
+  /**
+   * oceanus CU使用百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OceanusCuUsage?: number
+}
+
+/**
  * DescribeOpsInstanceLogList返回参数结构体
  */
 export interface DescribeOpsInstanceLogListResponse {
@@ -27830,19 +28430,18 @@ export interface DescribeWorkflowExecuteByIdRequest {
 }
 
 /**
- * 用户生产工作流列表分页
+ * DescribeExecutorGroupMetric返回参数结构体
  */
-export interface WorkflowExtOpsDtoPage {
+export interface DescribeExecutorGroupMetricResponse {
   /**
-   * 记录总数
+   * 执行组指标信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  Data: ExecutorResourceGroupInfo
   /**
-   * 记录列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Items?: Array<WorkflowExtOpsDto>
+  RequestId?: string
 }
 
 /**

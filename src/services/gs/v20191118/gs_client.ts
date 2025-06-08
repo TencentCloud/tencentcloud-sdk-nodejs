@@ -37,10 +37,12 @@ import {
   DeleteAndroidAppResponse,
   DescribeAndroidInstanceLabelsResponse,
   AndroidApp,
+  DescribeAndroidInstancesAppBlacklistResponse,
   ModifyAndroidAppRequest,
   DescribeAndroidAppsResponse,
   StopAndroidInstancesAppRequest,
   CreateAndroidAppVersionRequest,
+  ModifyAndroidInstancesResourcesRequest,
   ModifyAndroidInstancesLabelsRequest,
   BackUpAndroidInstanceToStorageRequest,
   ModifyAndroidInstancesPropertiesRequest,
@@ -63,18 +65,21 @@ import {
   ConnectAndroidInstanceRequest,
   CopyAndroidInstanceRequest,
   SyncExecuteCommandOnAndroidInstancesResponse,
+  StartAndroidInstancesResponse,
   RestoreAndroidInstanceFromStorageResponse,
   DistributeFileToAndroidInstancesResponse,
   ModifyAndroidAppVersionRequest,
+  ModifyAndroidInstancesResourcesResponse,
   UploadFilesToAndroidInstancesRequest,
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
   AndroidInstanceError,
   ModifyAndroidInstancesUserIdRequest,
-  CreateAndroidInstanceLabelResponse,
+  InstallAndroidInstancesAppWithURLRequest,
+  RebootAndroidInstancesResponse,
   StopPublishStreamResponse,
-  StartAndroidInstancesResponse,
+  ImportAndroidInstanceImageResponse,
   DeleteAndroidInstanceLabelRequest,
   ModifyAndroidInstancesUserIdResponse,
   InstallAndroidInstancesAppRequest,
@@ -86,8 +91,10 @@ import {
   StopPublishStreamRequest,
   AndroidAppCosInfo,
   SyncExecuteCommandResult,
+  ModifyAndroidInstancesAppBlacklistRequest,
   ModifyAndroidInstancesInformationRequest,
   RestartAndroidInstancesAppResponse,
+  DescribeAndroidInstancesByAppsResponse,
   DescribeAndroidInstanceTasksStatusRequest,
   CreateAndroidInstancesScreenshotResponse,
   DescribeInstancesCountResponse,
@@ -121,21 +128,27 @@ import {
   ModifyAndroidInstancesResolutionRequest,
   DescribeAndroidAppsRequest,
   StopGameRequest,
-  RebootAndroidInstancesResponse,
+  DescribeAndroidInstancesByAppsRequest,
   TrylockWorkerResponse,
   S3Options,
+  DescribeAndroidInstancesAppBlacklistRequest,
   CreateAndroidInstanceWebShellRequest,
+  ModifyAndroidInstancesAppBlacklistResponse,
   ModifyAndroidInstancesLabelsResponse,
   DescribeAndroidInstanceLabelsRequest,
   CopyAndroidInstanceResponse,
+  SetAndroidInstancesFGAppKeepAliveRequest,
   DeleteAndroidInstanceLabelResponse,
   ModifyAndroidAppResponse,
+  SetAndroidInstancesFGAppKeepAliveResponse,
   AndroidInstanceProperty,
   DescribeAndroidInstanceImagesRequest,
   AndroidInstanceTaskStatus,
+  ImportAndroidInstanceImageRequest,
   UninstallAndroidInstancesAppRequest,
   DisableAndroidInstancesAppResponse,
   CreateAndroidInstancesResponse,
+  SetAndroidInstancesBGAppKeepAliveRequest,
   StopGameResponse,
   CreateAndroidInstanceLabelRequest,
   AndroidInstance,
@@ -146,14 +159,16 @@ import {
   ModifyAndroidInstancesInformationResponse,
   CreateCosCredentialResponse,
   UploadFileToAndroidInstancesResponse,
+  AndroidInstanceAppBlacklist,
   CreateAndroidInstancesRequest,
-  InstallAndroidInstancesAppWithURLRequest,
+  CreateAndroidInstanceLabelResponse,
   StartPublishStreamResponse,
   AndroidInstanceImage,
   DescribeAndroidInstanceAppsRequest,
   DescribeInstancesCountRequest,
   TrylockWorkerRequest,
   AndroidInstanceUploadFile,
+  SetAndroidInstancesBGAppKeepAliveResponse,
   UploadFilesToAndroidInstancesResponse,
   RebootAndroidInstancesRequest,
   CreateSessionResponse,
@@ -249,6 +264,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 将文件下载到指定实例列表的实例上，每个实例都会从公网下载文件。如果您需要将同一个文件分发到多个实例，建议使用 DistributeFileToAndroidInstances 接口减少公网下载的流量。如果您需要将不同的文件下载到不同的实例，可考虑使用 UploadFilesToAndroidInstances 接口批量将不同文件下载到不同的实例。
+   */
+  async UploadFileToAndroidInstances(
+    req: UploadFileToAndroidInstancesRequest,
+    cb?: (error: string, rep: UploadFileToAndroidInstancesResponse) => void
+  ): Promise<UploadFileToAndroidInstancesResponse> {
+    return this.request("UploadFileToAndroidInstances", req, cb)
+  }
+
+  /**
    * 使用指定存储数据还原云手机，支持 COS 和兼容 AWS S3 协议的对象存储服务。如果还原数据来自 COS 时，会使用公网流量，授权 COS bucket 请在控制台中操作。
    */
   async RestoreAndroidInstanceFromStorage(
@@ -319,6 +344,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开始云端推流
+   */
+  async StartPublishStreamToCSS(
+    req: StartPublishStreamToCSSRequest,
+    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
+  ): Promise<StartPublishStreamToCSSResponse> {
+    return this.request("StartPublishStreamToCSS", req, cb)
+  }
+
+  /**
    * 修改安卓实例的信息
    */
   async ModifyAndroidInstanceInformation(
@@ -346,6 +381,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAndroidInstancesInformationResponse) => void
   ): Promise<ModifyAndroidInstancesInformationResponse> {
     return this.request("ModifyAndroidInstancesInformation", req, cb)
+  }
+
+  /**
+   * 修改安卓实例应用黑名单
+   */
+  async ModifyAndroidInstancesAppBlacklist(
+    req: ModifyAndroidInstancesAppBlacklistRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesAppBlacklistResponse) => void
+  ): Promise<ModifyAndroidInstancesAppBlacklistResponse> {
+    return this.request("ModifyAndroidInstancesAppBlacklist", req, cb)
   }
 
   /**
@@ -449,13 +494,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将文件下载到指定实例列表的实例上，每个实例都会从公网下载文件。如果您需要将同一个文件分发到多个实例，建议使用 DistributeFileToAndroidInstances 接口减少公网下载的流量。如果您需要将不同的文件下载到不同的实例，可考虑使用 UploadFilesToAndroidInstances 接口批量将不同文件下载到不同的实例。
+   * 批量修改安卓实例资源限制
    */
-  async UploadFileToAndroidInstances(
-    req: UploadFileToAndroidInstancesRequest,
-    cb?: (error: string, rep: UploadFileToAndroidInstancesResponse) => void
-  ): Promise<UploadFileToAndroidInstancesResponse> {
-    return this.request("UploadFileToAndroidInstances", req, cb)
+  async ModifyAndroidInstancesResources(
+    req: ModifyAndroidInstancesResourcesRequest,
+    cb?: (error: string, rep: ModifyAndroidInstancesResourcesResponse) => void
+  ): Promise<ModifyAndroidInstancesResourcesResponse> {
+    return this.request("ModifyAndroidInstancesResources", req, cb)
   }
 
   /**
@@ -519,13 +564,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启安卓实例
+   * 查询安卓实例黑名单
    */
-  async RebootAndroidInstances(
-    req: RebootAndroidInstancesRequest,
-    cb?: (error: string, rep: RebootAndroidInstancesResponse) => void
-  ): Promise<RebootAndroidInstancesResponse> {
-    return this.request("RebootAndroidInstances", req, cb)
+  async DescribeAndroidInstancesAppBlacklist(
+    req: DescribeAndroidInstancesAppBlacklistRequest,
+    cb?: (error: string, rep: DescribeAndroidInstancesAppBlacklistResponse) => void
+  ): Promise<DescribeAndroidInstancesAppBlacklistResponse> {
+    return this.request("DescribeAndroidInstancesAppBlacklist", req, cb)
   }
 
   /**
@@ -692,6 +737,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量设置安卓实例应用前台保活，开启应用保活，只是降低应用被杀死或回收的优先级，并不能保证应用不会被杀死或回收（如出现内存不足等资源限制时，应用也有概率被杀死或回收）
+   */
+  async SetAndroidInstancesFGAppKeepAlive(
+    req: SetAndroidInstancesFGAppKeepAliveRequest,
+    cb?: (error: string, rep: SetAndroidInstancesFGAppKeepAliveResponse) => void
+  ): Promise<SetAndroidInstancesFGAppKeepAliveResponse> {
+    return this.request("SetAndroidInstancesFGAppKeepAlive", req, cb)
+  }
+
+  /**
    * 查询安卓应用信息
    */
   async DescribeAndroidApps(
@@ -756,6 +811,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量设置安卓实例应用后台保活，开启应用保活，只是降低应用被杀死或回收的优先级，并不能保证应用不会被杀死或回收（如出现内存不足等资源限制时，应用也有概率被杀死或回收）
+   */
+  async SetAndroidInstancesBGAppKeepAlive(
+    req: SetAndroidInstancesBGAppKeepAliveRequest,
+    cb?: (error: string, rep: SetAndroidInstancesBGAppKeepAliveResponse) => void
+  ): Promise<SetAndroidInstancesBGAppKeepAliveResponse> {
+    return this.request("SetAndroidInstancesBGAppKeepAlive", req, cb)
+  }
+
+  /**
    * 批量将实例的 logcat 日志文件上传到您已授权的 COS bucket 中，授权 COS bucket 请在控制台中操作。
    */
   async FetchAndroidInstancesLogs(
@@ -776,13 +841,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开始云端推流
+   * 重启安卓实例
    */
-  async StartPublishStreamToCSS(
-    req: StartPublishStreamToCSSRequest,
-    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
-  ): Promise<StartPublishStreamToCSSResponse> {
-    return this.request("StartPublishStreamToCSS", req, cb)
+  async RebootAndroidInstances(
+    req: RebootAndroidInstancesRequest,
+    cb?: (error: string, rep: RebootAndroidInstancesResponse) => void
+  ): Promise<RebootAndroidInstancesResponse> {
+    return this.request("RebootAndroidInstances", req, cb)
+  }
+
+  /**
+   * 导入安卓实例镜像，当镜像的 AndroidInstanceImageState 为 NORMAL 时，镜像导入完成处于可用状态。
+   */
+  async ImportAndroidInstanceImage(
+    req: ImportAndroidInstanceImageRequest,
+    cb?: (error: string, rep: ImportAndroidInstanceImageResponse) => void
+  ): Promise<ImportAndroidInstanceImageResponse> {
+    return this.request("ImportAndroidInstanceImage", req, cb)
+  }
+
+  /**
+   * 查询安装指定应用的安卓实例
+   */
+  async DescribeAndroidInstancesByApps(
+    req: DescribeAndroidInstancesByAppsRequest,
+    cb?: (error: string, rep: DescribeAndroidInstancesByAppsResponse) => void
+  ): Promise<DescribeAndroidInstancesByAppsResponse> {
+    return this.request("DescribeAndroidInstancesByApps", req, cb)
   }
 
   /**

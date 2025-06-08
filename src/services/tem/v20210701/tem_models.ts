@@ -100,18 +100,43 @@ export interface DescribeApplicationInfoResponse {
 }
 
 /**
- * ModifyIngress返回参数结构体
+ * ModifyGatewayIngress请求参数结构体
  */
-export interface ModifyIngressResponse {
+export interface ModifyGatewayIngressRequest {
   /**
-   * 创建成功
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境 ID
    */
-  Result: boolean
+  EnvironmentId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 网关名称
    */
-  RequestId?: string
+  GatewayName?: string
+  /**
+   * 网关类型，如 clb
+   */
+  GatewayType?: string
+  /**
+   * 转发配置名称
+   */
+  Name?: string
+  /**
+   * rules 配置
+   */
+  Rules?: Array<IngressRule>
+  /**
+   * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
+   */
+  Mixed?: boolean
+  /**
+   * tls 配置
+   */
+  Tls?: Array<IngressTls>
+  /**
+   * 重定向模式，可选值：
+- AUTO（自动重定向http到https）
+- NONE（不使用重定向）
+   */
+  RewriteType?: string
 }
 
 /**
@@ -2883,6 +2908,21 @@ export interface DescribeConfigDataListResponse {
 }
 
 /**
+ * ModifyGatewayIngress返回参数结构体
+ */
+export interface ModifyGatewayIngressResponse {
+  /**
+   * 是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyApplicationService请求参数结构体
  */
 export interface ModifyApplicationServiceRequest {
@@ -4057,6 +4097,21 @@ export interface ModifyLogConfigRequest {
    * 应用 ID
    */
   ApplicationId: string
+}
+
+/**
+ * ModifyIngress返回参数结构体
+ */
+export interface ModifyIngressResponse {
+  /**
+   * 创建成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

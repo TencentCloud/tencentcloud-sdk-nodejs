@@ -48,9 +48,9 @@ it("ess.v20201111.CreateUserAutoSignEnableUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowGroupSignReview", async function () {
+it("ess.v20201111.CreateContractDiffTaskWebUrl", async function () {
     try {
-       const data = await client.CreateFlowGroupSignReview({})
+       const data = await client.CreateContractDiffTaskWebUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +218,16 @@ it("ess.v20201111.CreatePersonAuthCertificateImage", async function () {
     }
 })
 
+it("ess.v20201111.CreateFlowGroupSignReview", async function () {
+    try {
+       const data = await client.CreateFlowGroupSignReview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateIntegrationUserRoles", async function () {
     try {
        const data = await client.CreateIntegrationUserRoles({})
@@ -248,9 +258,9 @@ it("ess.v20201111.CreateFlowReminds", async function () {
     }
 })
 
-it("ess.v20201111.DescribePersonCertificate", async function () {
+it("ess.v20201111.CreateUserNameChangeUrl", async function () {
     try {
-       const data = await client.DescribePersonCertificate({})
+       const data = await client.CreateUserNameChangeUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +278,19 @@ it("ess.v20201111.DisableUserAutoSign", async function () {
     }
 })
 
-it("ess.v20201111.CreateUserNameChangeUrl", async function () {
+it("ess.v20201111.DescribeContractDiffTaskWebUrl", async function () {
     try {
-       const data = await client.CreateUserNameChangeUrl({})
+       const data = await client.DescribeContractDiffTaskWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribePersonCertificate", async function () {
+    try {
+       const data = await client.DescribePersonCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

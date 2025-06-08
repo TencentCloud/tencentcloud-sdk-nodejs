@@ -313,6 +313,10 @@ export interface ScaleOutInstanceRequest {
    * 计算资源id
    */
   ComputeResourceId?: string
+  /**
+   * 计算资源高级设置
+   */
+  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams
 }
 
 /**
@@ -1664,11 +1668,11 @@ export interface ModifyPodNumRequest {
   /**
    * 角色编号
    */
-  ServiceType: number
+  ServiceType?: number
   /**
    * 期望Pod数量
    */
-  PodNum: number
+  PodNum?: number
 }
 
 /**
@@ -2213,6 +2217,28 @@ export interface KyuubiQueryInfo {
    * 提交用户
    */
   User?: string
+}
+
+/**
+ * 计算资源高级设置
+ */
+export interface ComputeResourceAdvanceParams {
+  /**
+   * 节点Label数组
+   */
+  Labels?: Array<TkeLabel>
+  /**
+   * 节点污点
+   */
+  Taints?: Array<Taint>
+  /**
+   * base64 编码的用户脚本，在初始化节点之前执行
+   */
+  PreStartUserScript?: string
+  /**
+   * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看
+   */
+  UserScript?: string
 }
 
 /**
@@ -4313,6 +4339,24 @@ export interface DescribeDAGInfoResponse {
 }
 
 /**
+ * Kubernetes Taint
+ */
+export interface Taint {
+  /**
+   * Taint Key
+   */
+  Key?: string
+  /**
+   * Taint Value
+   */
+  Value?: string
+  /**
+   * Taint Effect
+   */
+  Effect?: string
+}
+
+/**
  * 动态生成的变更详情
  */
 export interface DiffDetail {
@@ -5594,6 +5638,10 @@ export interface TimeAutoScaleStrategy {
    * 伸缩组id
    */
   GroupId?: number
+  /**
+   * 优雅缩容业务pod标签，当node不存在上述pod或超过优雅缩容时间时，缩容节点
+   */
+  GraceDownLabel?: Array<TkeLabel>
 }
 
 /**
@@ -6106,6 +6154,90 @@ export interface NodeResource {
 }
 
 /**
+ * DescribeImpalaQueries请求参数结构体
+ */
+export interface DescribeImpalaQueriesRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 起始时间秒
+   */
+  StartTime: number
+  /**
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
+   */
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
+  /**
+   * 执行状态，CREATED、INITIALIZED、COMPILED、RUNNING、FINISHED、EXCEPTION
+   */
+  State?: Array<string>
+  /**
+   * 结束时间大于的时间点
+   */
+  EndTimeGte?: number
+  /**
+   * 结束时间小于的时间点
+   */
+  EndTimeLte?: number
+}
+
+/**
+ * ModifyInstanceBasic返回参数结构体
+ */
+export interface ModifyInstanceBasicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInspectionTaskResult返回参数结构体
+ */
+export interface DescribeInspectionTaskResultResponse {
+  /**
+   * 巡检任务记录，base64编码
+   */
+  InspectionResultInfo?: string
+  /**
+   * 记录总数
+   */
+  Total?: number
+  /**
+   * 类别信息，base64编码，{"FixedTime": "定时", "RealTime": "及时"}
+   */
+  TypeInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCvmQuota请求参数结构体
+ */
+export interface DescribeCvmQuotaRequest {
+  /**
+   * EMR集群ID
+   */
+  ClusterId: string
+  /**
+   * 区ID
+   */
+  ZoneId?: number
+}
+
+/**
  * DescribeClusterNodes请求参数结构体
  */
 export interface DescribeClusterNodesRequest {
@@ -6156,90 +6288,6 @@ export interface DescribeClusterNodesRequest {
    * 是否升序，1:升序，0:降序
    */
   Asc?: number
-}
-
-/**
- * ModifyInstanceBasic返回参数结构体
- */
-export interface ModifyInstanceBasicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeInspectionTaskResult返回参数结构体
- */
-export interface DescribeInspectionTaskResultResponse {
-  /**
-   * 巡检任务记录，base64编码
-   */
-  InspectionResultInfo?: string
-  /**
-   * 记录总数
-   */
-  Total?: number
-  /**
-   * 类别信息，base64编码，{"FixedTime": "定时", "RealTime": "及时"}
-   */
-  TypeInfo?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCvmQuota请求参数结构体
- */
-export interface DescribeCvmQuotaRequest {
-  /**
-   * EMR集群ID
-   */
-  ClusterId: string
-  /**
-   * 区ID
-   */
-  ZoneId?: number
-}
-
-/**
- * DescribeImpalaQueries请求参数结构体
- */
-export interface DescribeImpalaQueriesRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 起始时间秒
-   */
-  StartTime: number
-  /**
-   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
-   */
-  EndTime: number
-  /**
-   * 分页起始偏移，从0开始
-   */
-  Offset: number
-  /**
-   * 分页大小，合法范围[1,100]
-   */
-  Limit: number
-  /**
-   * 执行状态，CREATED、INITIALIZED、COMPILED、RUNNING、FINISHED、EXCEPTION
-   */
-  State?: Array<string>
-  /**
-   * 结束时间大于的时间点
-   */
-  EndTimeGte?: number
-  /**
-   * 结束时间小于的时间点
-   */
-  EndTimeLte?: number
 }
 
 /**
@@ -6585,21 +6633,13 @@ export interface DiffDetailItem {
 }
 
 /**
- * 元数据库信息
+ * 自动伸缩组高级设置
  */
-export interface MetaDbInfo {
+export interface AutoScaleGroupAdvanceAttrs {
   /**
-   * 元数据类型。
+   * 计算资源高级设置
    */
-  MetaType: string
-  /**
-   * 统一元数据库实例ID。
-   */
-  UnifyMetaInstanceId: string
-  /**
-   * 自建元数据库信息。
-   */
-  MetaDBInfo: CustomMetaInfo
+  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams
 }
 
 /**
@@ -7090,6 +7130,24 @@ export interface AttachDisksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 元数据库信息
+ */
+export interface MetaDbInfo {
+  /**
+   * 元数据类型。
+   */
+  MetaType: string
+  /**
+   * 统一元数据库实例ID。
+   */
+  UnifyMetaInstanceId: string
+  /**
+   * 自建元数据库信息。
+   */
+  MetaDBInfo: CustomMetaInfo
 }
 
 /**
@@ -8458,6 +8516,20 @@ export interface ScriptBootstrapActionConfig {
    * 备注
    */
   Remark?: string
+}
+
+/**
+ * Kubernetes Label
+ */
+export interface TkeLabel {
+  /**
+   * Label Name
+   */
+  Name?: string
+  /**
+   * Label Value
+   */
+  Value?: string
 }
 
 /**
@@ -10171,7 +10243,7 @@ export interface AutoScaleResourceConf {
    */
   StrategyType?: number
   /**
-   * 下次能可扩容时间。
+   * 下次可扩容时间。
    */
   NextTimeCanScale?: number
   /**
@@ -10191,7 +10263,7 @@ export interface AutoScaleResourceConf {
    */
   PostPayPercentMin?: number
   /**
-   * 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；默认不勾选（0），勾选（1)
+   * 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；0表示默认不勾选（0），1表示勾选
    */
   ChangeToPod?: number
   /**
@@ -10214,6 +10286,10 @@ export interface AutoScaleResourceConf {
    * 是否支持MNode
    */
   EnableMNode?: number
+  /**
+   * 伸缩组更多设置
+   */
+  ExtraAdvanceAttrs?: AutoScaleGroupAdvanceAttrs
 }
 
 /**

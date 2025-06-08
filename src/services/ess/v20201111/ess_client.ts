@@ -31,6 +31,7 @@ import {
   CancelFlowResponse,
   DescribeExtendedServiceAuthDetailResponse,
   UpdateIntegrationEmployeesResponse,
+  CreateContractDiffTaskWebUrlRequest,
   Department,
   CreatePreparedPersonalEsignRequest,
   CreateLegalSealQrCodeResponse,
@@ -62,6 +63,7 @@ import {
   IntentionAction,
   CreateBatchInitOrganizationUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
+  CreateContractDiffTaskWebUrlResponse,
   CreateIntegrationEmployeesRequest,
   CreateFlowOption,
   CreateOrganizationAuthFileResponse,
@@ -72,7 +74,7 @@ import {
   StartFlowResponse,
   SealInfo,
   StaffRole,
-  GroupOrganization,
+  DescribeContractDiffTaskWebUrlResponse,
   OperateTemplateRequest,
   ArchiveDynamicApproverData,
   CreateOrganizationAuthUrlRequest,
@@ -262,6 +264,7 @@ import {
   CancelUserAutoSignEnableUrlResponse,
   CreatePrepareFlowGroupRequest,
   CreateFileCounterSignResponse,
+  DescribeContractDiffTaskWebUrlRequest,
   VerifyDigitFileResult,
   CreateUserNameChangeUrlResponse,
   CreateSealResponse,
@@ -299,6 +302,7 @@ import {
   CreateFlowGroupSignReviewRequest,
   DescribeBillUsageDetailRequest,
   Admin,
+  GroupOrganization,
   Caller,
   DescribeFlowTemplatesResponse,
   DescribeBatchOrganizationRegistrationUrlsResponse,
@@ -402,20 +406,19 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 提交合同组签署流程审批结果的适用场景包括：
+     * 接口（CreateContractDiffTaskWebUrl）用于创建合同对比的可嵌入web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+注：本接口生成的web页面暂不支持<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreateWebThemeConfig" target="_blank">设置本企业嵌入式页面主题配置</a>
 
-1. 在使用[通过多文件创建合同组签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByFiles)或[通过多模板创建合同组签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByTemplates)创建合同组签署流程时，若指定了以下参数 为true，则可以调用此接口提交企业内部签署审批结果。即使是自动签署也需要进行审核通过才会进行签署。
-  - [FlowGroupInfo.NeedSignReview](https://qian.tencent.com/developers/companyApis/dataTypes/#flowgroupinfo)
-  - [ApproverInfo.ApproverNeedSignReview](https://qian.tencent.com/developers/companyApis/dataTypes/#approverinfo)
-
-
-2. 同一合同组，同一签署人可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
+未跳过上传确认的嵌入页面长相如下：
+![image](https://qcloudimg.tencent-cloud.cn/raw/32f3526ad7152757202a7e4e760356db.jpg)
+跳过上传确认的嵌入页面长相如下：
+![image](https://qcloudimg.tencent-cloud.cn/raw/c68047feddbc106e261870687b6ab89d.jpg)
      */
-  async CreateFlowGroupSignReview(
-    req: CreateFlowGroupSignReviewRequest,
-    cb?: (error: string, rep: CreateFlowGroupSignReviewResponse) => void
-  ): Promise<CreateFlowGroupSignReviewResponse> {
-    return this.request("CreateFlowGroupSignReview", req, cb)
+  async CreateContractDiffTaskWebUrl(
+    req: CreateContractDiffTaskWebUrlRequest,
+    cb?: (error: string, rep: CreateContractDiffTaskWebUrlResponse) => void
+  ): Promise<CreateContractDiffTaskWebUrlResponse> {
+    return this.request("CreateContractDiffTaskWebUrl", req, cb)
   }
 
   /**
@@ -791,6 +794,23 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 提交合同组签署流程审批结果的适用场景包括：
+
+1. 在使用[通过多文件创建合同组签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByFiles)或[通过多模板创建合同组签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByTemplates)创建合同组签署流程时，若指定了以下参数 为true，则可以调用此接口提交企业内部签署审批结果。即使是自动签署也需要进行审核通过才会进行签署。
+  - [FlowGroupInfo.NeedSignReview](https://qian.tencent.com/developers/companyApis/dataTypes/#flowgroupinfo)
+  - [ApproverInfo.ApproverNeedSignReview](https://qian.tencent.com/developers/companyApis/dataTypes/#approverinfo)
+
+
+2. 同一合同组，同一签署人可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
+     */
+  async CreateFlowGroupSignReview(
+    req: CreateFlowGroupSignReviewRequest,
+    cb?: (error: string, rep: CreateFlowGroupSignReviewResponse) => void
+  ): Promise<CreateFlowGroupSignReviewResponse> {
+    return this.request("CreateFlowGroupSignReview", req, cb)
+  }
+
+  /**
    * 此接口用于赋予员工指定的角色权限，如需解绑请使用 DeleteIntegrationRoleUsers 接口。
    */
   async CreateIntegrationUserRoles(
@@ -838,13 +858,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribePersonCertificate）用于查询个人数字证书信息。<br />注：`1.目前仅用于查询开通了医疗自动签署功能的个人数字证书。`<br />`2.调用此接口需要开通白名单，使用前请联系相关人员开通白名单。`
-   */
-  async DescribePersonCertificate(
-    req: DescribePersonCertificateRequest,
-    cb?: (error: string, rep: DescribePersonCertificateResponse) => void
-  ): Promise<DescribePersonCertificateResponse> {
-    return this.request("DescribePersonCertificate", req, cb)
+     * 生成个人用户实名更名链接，个人用户点击此链接进入更名流程（若用户未完成实名认证，则直接进入实名页面实名后再进行更名）。此链接为通用链接，任何点击生成链接的用户将会被引导至小程序个人更名页面完成更名。
+
+注： 调用此接口需要购买<font color="red"><b>单独的实名套餐包</b></font>。使用前请联系对接的客户经理沟通。
+     */
+  async CreateUserNameChangeUrl(
+    req: CreateUserNameChangeUrlRequest,
+    cb?: (error: string, rep: CreateUserNameChangeUrlResponse) => void
+  ): Promise<CreateUserNameChangeUrlResponse> {
+    return this.request("CreateUserNameChangeUrl", req, cb)
   }
 
   /**
@@ -864,15 +886,27 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 生成个人用户实名更名链接，个人用户点击此链接进入更名流程（若用户未完成实名认证，则直接进入实名页面实名后再进行更名）。此链接为通用链接，任何点击生成链接的用户将会被引导至小程序个人更名页面完成更名。
+     * 接口（DescribeContractDiffTaskWebUrl）用于获取合同对比结果可嵌入的web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+注：本接口生成的web页面暂不支持<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreateWebThemeConfig" target="_blank">设置本企业嵌入式页面主题配置</a>
 
-注： 调用此接口需要购买<font color="red"><b>单独的实名套餐包</b></font>。使用前请联系对接的客户经理沟通。
+嵌入页面长相如下：
+![image](https://qcloudimg.tencent-cloud.cn/raw/c68047feddbc106e261870687b6ab89d.jpg)
      */
-  async CreateUserNameChangeUrl(
-    req: CreateUserNameChangeUrlRequest,
-    cb?: (error: string, rep: CreateUserNameChangeUrlResponse) => void
-  ): Promise<CreateUserNameChangeUrlResponse> {
-    return this.request("CreateUserNameChangeUrl", req, cb)
+  async DescribeContractDiffTaskWebUrl(
+    req: DescribeContractDiffTaskWebUrlRequest,
+    cb?: (error: string, rep: DescribeContractDiffTaskWebUrlResponse) => void
+  ): Promise<DescribeContractDiffTaskWebUrlResponse> {
+    return this.request("DescribeContractDiffTaskWebUrl", req, cb)
+  }
+
+  /**
+   * 此接口（DescribePersonCertificate）用于查询个人数字证书信息。<br />注：`1.目前仅用于查询开通了医疗自动签署功能的个人数字证书。`<br />`2.调用此接口需要开通白名单，使用前请联系相关人员开通白名单。`
+   */
+  async DescribePersonCertificate(
+    req: DescribePersonCertificateRequest,
+    cb?: (error: string, rep: DescribePersonCertificateResponse) => void
+  ): Promise<DescribePersonCertificateResponse> {
+    return this.request("DescribePersonCertificate", req, cb)
   }
 
   /**

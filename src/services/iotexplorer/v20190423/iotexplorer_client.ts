@@ -1186,7 +1186,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供删除某个项目的能力
+   * 提供删除某个项目的能力。
    */
   async DeleteProject(
     req: DeleteProjectRequest,
@@ -1420,7 +1420,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改项目
+   * 修改项目。
    */
   async ModifyProject(
     req: ModifyProjectRequest,

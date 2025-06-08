@@ -417,7 +417,6 @@ export interface ModifyUserSignatureClassResponse {
 export interface UpdateProtectionModesResponse {
   /**
    * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonRsp?: CommonRspData
   /**

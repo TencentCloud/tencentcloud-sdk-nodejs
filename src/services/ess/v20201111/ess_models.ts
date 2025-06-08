@@ -364,6 +364,32 @@ export interface UpdateIntegrationEmployeesResponse {
 }
 
 /**
+ * CreateContractDiffTaskWebUrl请求参数结构体
+ */
+export interface CreateContractDiffTaskWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 是否跳过文件上传确认页。
+当该参数值为`false`时，`OriginalFileResourceId`和`DiffFileResourceId`参数不需要传值，需要在生成的web页面中上传对比文件；
+当该参数值为`true`时，`OriginalFileResourceId`和`DiffFileResourceId`参数必填，生成的web页面将跳过上传页面显示对比结果。
+   */
+  SkipFileUpload: boolean
+  /**
+   * 需要对比的原合同文件资源ID，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
+   */
+  OriginalFileResourceId?: string
+  /**
+   * 需要对比的新合同文件资源ID，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
+   */
+  DiffFileResourceId?: string
+}
+
+/**
  * 集成版员工部门信息。
  */
 export interface Department {
@@ -1110,6 +1136,26 @@ export interface BindEmployeeUserIdWithClientOpenIdResponse {
 }
 
 /**
+ * CreateContractDiffTaskWebUrl返回参数结构体
+ */
+export interface CreateContractDiffTaskWebUrlResponse {
+  /**
+   * 接口返回的合同对比任务ID，可以调用接口<a href="https://qian.tencent.com/developers/companyApis/embedPages/DescribeContractDiffTaskWebUrl" target="_blank">获取合同对比结果web页面</a>查看对比任务的结果。
+当`SkipFileUpload`参数为`true`时才会返回值，否则为空。
+   */
+  TaskId?: string
+  /**
+   * 合同对比嵌入式web页面链接，有效期：5分钟
+链接仅能使用一次
+   */
+  WebUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationEmployees请求参数结构体
  */
 export interface CreateIntegrationEmployeesRequest {
@@ -1504,66 +1550,18 @@ export interface StaffRole {
 }
 
 /**
- * 成员企业信息
+ * DescribeContractDiffTaskWebUrl返回参数结构体
  */
-export interface GroupOrganization {
+export interface DescribeContractDiffTaskWebUrlResponse {
   /**
-   * 成员企业名
+   * 合同对比嵌入式web页面链接，有效期：5分钟
+链接仅能使用一次
    */
-  Name?: string
+  WebUrl?: string
   /**
-   * 成员企业别名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Alias?: string
-  /**
-   * 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取
-   */
-  OrganizationId?: string
-  /**
-   * 记录更新时间， unix时间戳，单位秒
-   */
-  UpdateTime?: number
-  /**
-   * 成员企业加入集团的当前状态
-<ul><li> **1**：待授权</li>
-<li> **2**：已授权待激活</li>
-<li> **3**：拒绝授权</li>
-<li> **4**：已解除</li>
-<li> **5**：已加入</li>
-</ul>
-
-   */
-  Status?: number
-  /**
-   * 是否为集团主企业
-   */
-  IsMainOrganization?: boolean
-  /**
-   * 企业社会信用代码
-   */
-  IdCardNumber?: string
-  /**
-   * 企业超管信息
-   */
-  AdminInfo?: Admin
-  /**
-   * 企业许可证Id，此字段暂时不需要关注
-   */
-  License?: string
-  /**
-   * 企业许可证过期时间，unix时间戳，单位秒
-   */
-  LicenseExpireTime?: number
-  /**
-   * 成员企业加入集团时间，unix时间戳，单位秒
-   */
-  JoinTime?: number
-  /**
-   * 是否使用自建审批流引擎（即不是企微审批流引擎）
-<ul><li> **true**：是</li>
-<li> **false**：否</li></ul>
-   */
-  FlowEngineEnable?: boolean
+  RequestId?: string
 }
 
 /**
@@ -8485,6 +8483,22 @@ export interface CreateFileCounterSignResponse {
 }
 
 /**
+ * DescribeContractDiffTaskWebUrl请求参数结构体
+ */
+export interface DescribeContractDiffTaskWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 合同对比任务ID，该参数通过调用接口<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreateContractDiffTaskWebUrl" target="_blank">创建合同对比web页面</a>获取。
+   */
+  TaskId: string
+}
+
+/**
  * 数字加签文件验签结果
  */
 export interface VerifyDigitFileResult {
@@ -10053,6 +10067,69 @@ export interface Admin {
 
    */
   Mobile?: string
+}
+
+/**
+ * 成员企业信息
+ */
+export interface GroupOrganization {
+  /**
+   * 成员企业名
+   */
+  Name?: string
+  /**
+   * 成员企业别名
+   */
+  Alias?: string
+  /**
+   * 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取
+   */
+  OrganizationId?: string
+  /**
+   * 记录更新时间， unix时间戳，单位秒
+   */
+  UpdateTime?: number
+  /**
+   * 成员企业加入集团的当前状态
+<ul><li> **1**：待授权</li>
+<li> **2**：已授权待激活</li>
+<li> **3**：拒绝授权</li>
+<li> **4**：已解除</li>
+<li> **5**：已加入</li>
+</ul>
+
+   */
+  Status?: number
+  /**
+   * 是否为集团主企业
+   */
+  IsMainOrganization?: boolean
+  /**
+   * 企业社会信用代码
+   */
+  IdCardNumber?: string
+  /**
+   * 企业超管信息
+   */
+  AdminInfo?: Admin
+  /**
+   * 企业许可证Id，此字段暂时不需要关注
+   */
+  License?: string
+  /**
+   * 企业许可证过期时间，unix时间戳，单位秒
+   */
+  LicenseExpireTime?: number
+  /**
+   * 成员企业加入集团时间，unix时间戳，单位秒
+   */
+  JoinTime?: number
+  /**
+   * 是否使用自建审批流引擎（即不是企微审批流引擎）
+<ul><li> **true**：是</li>
+<li> **false**：否</li></ul>
+   */
+  FlowEngineEnable?: boolean
 }
 
 /**

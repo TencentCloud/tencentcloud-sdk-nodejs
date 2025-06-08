@@ -157,7 +157,7 @@ FailedOperation.UnKnowError：表示识别失败；
    */
   SingleInvoiceInfos?: SingleInvoiceItem
   /**
-   * 发票处于识别图片或PDF文件中的页教，默认从1开始。
+   * 发票处于识别图片或PDF文件中的页码，默认从1开始。
    */
   Page?: number
   /**
@@ -184,6 +184,10 @@ FailedOperation.UnKnowError：表示识别失败；
    * 二维码数据。
    */
   QRCode?: string
+  /**
+   * 印章信息
+   */
+  InvoiceSealInfo?: InvoiceSealInfo
 }
 
 /**
@@ -262,53 +266,32 @@ export interface BusinessCardOCRResponse {
 }
 
 /**
- * 算式识别结果
+ * QuotaInvoiceOCR请求参数结构体
  */
-export interface TextArithmetic {
+export interface QuotaInvoiceOCRRequest {
   /**
-   * 识别出的文本行内容
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  DetectedText?: string
+  ImageBase64?: string
   /**
-   * 算式运算结果，true-正确   false-错误或非法参数
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Result?: boolean
+  ImageUrl?: string
   /**
-   * 保留字段，暂不支持
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
    */
-  Confidence?: number
+  IsPdf?: boolean
   /**
-   * 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
-  Polygon?: Array<Coord>
-  /**
-   * 保留字段，暂不支持
-   */
-  AdvancedInfo?: string
-  /**
-   * 文本行旋转纠正之后在图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
-   */
-  ItemCoord?: ItemCoord
-  /**
-   * 算式题型编号：
-‘1’: 加减乘除四则
-‘2’: 加减乘除已知结果求运算因子
-‘3’: 判断大小
-‘4’: 约等于估算
-‘5’: 带余数除法
-‘6’: 分数四则运算
-‘7’: 单位换算
-‘8’: 竖式加减法
-‘9’: 竖式乘除法
-‘10’: 脱式计算
-‘11’: 解方程
-   */
-  ExpressionType?: string
-  /**
-   * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如`1<10<7`）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
-   */
-  Answer?: string
+  PdfPageNumber?: number
 }
 
 /**
@@ -1857,6 +1840,35 @@ DOUBLE 支持自动识别驾驶证正副页单面，和正副双面同框识别
 }
 
 /**
+ * TollInvoiceOCR请求参数结构体
+ */
+export interface TollInvoiceOCRRequest {
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
+}
+
+/**
  * OtherInvoiceItem
  */
 export interface OtherInvoiceItem {
@@ -1918,6 +1930,8 @@ DispatchWeightNote -- 磅单发货单识别模板
 ReceiptWeightNote -- 磅单收货单识别模板
 ArticalRecognize -- 手写作文模版
 Table -- 表格模版
+SteelLabel -- 实物标签识别模板
+CarInsurance -- 车辆保险单识别模板
    */
   ConfigId?: string
   /**
@@ -2094,7 +2108,9 @@ export interface MainlandPermitOCRRequest {
   RetProfile?: boolean
   /**
    * 图片正反面
-FRONT：正面、BACK：反面，默认为FRONT
+FRONT：正面
+BACK：反面
+默认为FRONT
    */
   CardSide?: string
 }
@@ -3358,6 +3374,10 @@ export interface RecognizeGeneralInvoiceRequest {
    * 是否开启二维码识别。
    */
   EnableQRCode?: boolean
+  /**
+   * 是否开启印章识别，默认为false
+   */
+  EnableSeal?: boolean
 }
 
 /**
@@ -3849,32 +3869,53 @@ export interface DutyPaidProofOCRResponse {
 }
 
 /**
- * TollInvoiceOCR请求参数结构体
+ * 算式识别结果
  */
-export interface TollInvoiceOCRRequest {
+export interface TextArithmetic {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 识别出的文本行内容
    */
-  ImageBase64?: string
+  DetectedText?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 算式运算结果，true-正确   false-错误或非法参数
    */
-  ImageUrl?: string
+  Result?: boolean
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   * 保留字段，暂不支持
    */
-  IsPdf?: boolean
+  Confidence?: number
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   * 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PdfPageNumber?: number
+  Polygon?: Array<Coord>
+  /**
+   * 保留字段，暂不支持
+   */
+  AdvancedInfo?: string
+  /**
+   * 文本行旋转纠正之后在图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+   */
+  ItemCoord?: ItemCoord
+  /**
+   * 算式题型编号：
+‘1’: 加减乘除四则
+‘2’: 加减乘除已知结果求运算因子
+‘3’: 判断大小
+‘4’: 约等于估算
+‘5’: 带余数除法
+‘6’: 分数四则运算
+‘7’: 单位换算
+‘8’: 竖式加减法
+‘9’: 竖式乘除法
+‘10’: 脱式计算
+‘11’: 解方程
+   */
+  ExpressionType?: string
+  /**
+   * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如`1<10<7`）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
+   */
+  Answer?: string
 }
 
 /**
@@ -6824,15 +6865,11 @@ export interface MedicalInvoiceItem {
  */
 export interface GeneralAccurateOCRRequest {
   /**
-   * 图片的 Base64 值。
-要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片/PDF的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。
-要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
   /**
@@ -9682,7 +9719,7 @@ export interface MainlandPermitOCRResponse {
    */
   IssueNumber?: string
   /**
-   * 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
+   * 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证、往来港澳通行证。
    */
   Type?: string
   /**
@@ -11302,32 +11339,25 @@ export interface VatInvoiceOCRResponse {
 }
 
 /**
- * QuotaInvoiceOCR请求参数结构体
+ * 印章信息
  */
-export interface QuotaInvoiceOCRRequest {
+export interface InvoiceSealInfo {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 是否有公司印章（0：没有，1：有）
    */
-  ImageBase64?: string
+  CompanySealMark?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 是否有监制印章（0：没有，1：有）
    */
-  ImageUrl?: string
+  SupervisionSealMark?: string
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   * 公司印章信息
    */
-  IsPdf?: boolean
+  CompanySealMarkInfo?: Array<string>
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   * 监制印章信息
    */
-  PdfPageNumber?: number
+  SupervisionSealMarkInfo?: Array<string>
 }
 
 /**

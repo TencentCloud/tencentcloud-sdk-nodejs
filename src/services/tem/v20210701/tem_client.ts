@@ -22,7 +22,7 @@ import {
   DescribeConfigDataResponse,
   NamespacePage,
   DescribeApplicationInfoResponse,
-  ModifyIngressResponse,
+  ModifyGatewayIngressRequest,
   DeleteApplicationServiceRequest,
   RestartApplicationPodRequest,
   DestroyLogConfigResponse,
@@ -125,6 +125,7 @@ import {
   MountedSettingConf,
   CreateLogConfigResponse,
   DescribeConfigDataListResponse,
+  ModifyGatewayIngressResponse,
   ModifyApplicationServiceRequest,
   DescribePagedLogConfigListResponse,
   HealthCheckConfig,
@@ -164,6 +165,7 @@ import {
   ModifyEnvironmentResponse,
   ModifyApplicationReplicasRequest,
   ModifyLogConfigRequest,
+  ModifyIngressResponse,
   DestroyLogConfigRequest,
   EnableApplicationAutoscalerRequest,
   EksService,
@@ -362,6 +364,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApplicationServiceResponse) => void
   ): Promise<ModifyApplicationServiceResponse> {
     return this.request("ModifyApplicationService", req, cb)
+  }
+
+  /**
+   * 修改网关的转发配置
+   */
+  async ModifyGatewayIngress(
+    req: ModifyGatewayIngressRequest,
+    cb?: (error: string, rep: ModifyGatewayIngressResponse) => void
+  ): Promise<ModifyGatewayIngressResponse> {
+    return this.request("ModifyGatewayIngress", req, cb)
   }
 
   /**

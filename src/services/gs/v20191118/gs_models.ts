@@ -303,6 +303,21 @@ export interface AndroidApp {
 }
 
 /**
+ * DescribeAndroidInstancesAppBlacklist返回参数结构体
+ */
+export interface DescribeAndroidInstancesAppBlacklistResponse {
+  /**
+   * 黑名单集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppBlacklistSet?: Array<AndroidInstanceAppBlacklist>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAndroidApp请求参数结构体
  */
 export interface ModifyAndroidAppRequest {
@@ -376,6 +391,20 @@ export interface CreateAndroidAppVersionRequest {
    * 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。
    */
   CleanupMode?: string
+}
+
+/**
+ * ModifyAndroidInstancesResources请求参数结构体
+ */
+export interface ModifyAndroidInstancesResourcesRequest {
+  /**
+   * 安卓实例 ID 列表（最大100条数据）
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 内存配额（单位 MB）
+   */
+  MemoryQuota: number
 }
 
 /**
@@ -786,6 +815,20 @@ export interface SyncExecuteCommandOnAndroidInstancesResponse {
 }
 
 /**
+ * StartAndroidInstances返回参数结构体
+ */
+export interface StartAndroidInstancesResponse {
+  /**
+   * 任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestoreAndroidInstanceFromStorage返回参数结构体
  */
 export interface RestoreAndroidInstanceFromStorageResponse {
@@ -837,6 +880,20 @@ export interface ModifyAndroidAppVersionRequest {
    * 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效）
    */
   UninstallCommand?: string
+}
+
+/**
+ * ModifyAndroidInstancesResources返回参数结构体
+ */
+export interface ModifyAndroidInstancesResourcesResponse {
+  /**
+   * 任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -916,9 +973,27 @@ export interface ModifyAndroidInstancesUserIdRequest {
 }
 
 /**
- * CreateAndroidInstanceLabel返回参数结构体
+ * InstallAndroidInstancesAppWithURL请求参数结构体
  */
-export interface CreateAndroidInstanceLabelResponse {
+export interface InstallAndroidInstancesAppWithURLRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 安卓应用下载 URL
+   */
+  AndroidAppURL: string
+}
+
+/**
+ * RebootAndroidInstances返回参数结构体
+ */
+export interface RebootAndroidInstancesResponse {
+  /**
+   * 任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -936,13 +1011,13 @@ export interface StopPublishStreamResponse {
 }
 
 /**
- * StartAndroidInstances返回参数结构体
+ * ImportAndroidInstanceImage返回参数结构体
  */
-export interface StartAndroidInstancesResponse {
+export interface ImportAndroidInstanceImageResponse {
   /**
-   * 任务集合
+   * 安卓实例镜像 ID
    */
-  TaskSet?: Array<AndroidInstanceTask>
+  AndroidInstanceImageId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1116,6 +1191,24 @@ export interface SyncExecuteCommandResult {
 }
 
 /**
+ * ModifyAndroidInstancesAppBlacklist请求参数结构体
+ */
+export interface ModifyAndroidInstancesAppBlacklistRequest {
+  /**
+   * 实例ID列表，数量上限100
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 应用列表
+   */
+  AppList: Array<string>
+  /**
+   * ADD、REMOVE、CLEAR
+   */
+  Operation: string
+}
+
+/**
  * ModifyAndroidInstancesInformation请求参数结构体
  */
 export interface ModifyAndroidInstancesInformationRequest {
@@ -1129,6 +1222,24 @@ export interface ModifyAndroidInstancesInformationRequest {
  * RestartAndroidInstancesApp返回参数结构体
  */
 export interface RestartAndroidInstancesAppResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAndroidInstancesByApps返回参数结构体
+ */
+export interface DescribeAndroidInstancesByAppsResponse {
+  /**
+   * 实例总数量
+   */
+  TotalCount?: number
+  /**
+   * 实例列表
+   */
+  AndroidInstances?: Array<AndroidInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1724,17 +1835,21 @@ export interface StopGameRequest {
 }
 
 /**
- * RebootAndroidInstances返回参数结构体
+ * DescribeAndroidInstancesByApps请求参数结构体
  */
-export interface RebootAndroidInstancesResponse {
+export interface DescribeAndroidInstancesByAppsRequest {
   /**
-   * 任务集合
+   * 偏移量，默认为 0
    */
-  TaskSet?: Array<AndroidInstanceTask>
+  Offset: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 限制量，默认为20，最大值为100
    */
-  RequestId?: string
+  Limit: number
+  /**
+   * 应用 ID 列表。通过应用 ID 做集合查询
+   */
+  AndroidAppIds: Array<string>
 }
 
 /**
@@ -1770,6 +1885,16 @@ export interface S3Options {
 }
 
 /**
+ * DescribeAndroidInstancesAppBlacklist请求参数结构体
+ */
+export interface DescribeAndroidInstancesAppBlacklistRequest {
+  /**
+   * 实例 ID 列表，数量上限 100
+   */
+  AndroidInstanceIds: Array<string>
+}
+
+/**
  * CreateAndroidInstanceWebShell请求参数结构体
  */
 export interface CreateAndroidInstanceWebShellRequest {
@@ -1777,6 +1902,20 @@ export interface CreateAndroidInstanceWebShellRequest {
    * 实例 ID
    */
   AndroidInstanceId: string
+}
+
+/**
+ * ModifyAndroidInstancesAppBlacklist返回参数结构体
+ */
+export interface ModifyAndroidInstancesAppBlacklistResponse {
+  /**
+   * 任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1826,6 +1965,24 @@ export interface CopyAndroidInstanceResponse {
 }
 
 /**
+ * SetAndroidInstancesFGAppKeepAlive请求参数结构体
+ */
+export interface SetAndroidInstancesFGAppKeepAliveRequest {
+  /**
+   * 安卓实例 ID 列表（最大100条数据）
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 操作类型，取值：ENABLE 开启保活、DISABLE 关闭保活。当关闭保活时，PackageName 参数传空即可
+   */
+  Operation: string
+  /**
+   * 应用包名，开启保活时，必须传入 PackageName
+   */
+  PackageName?: string
+}
+
+/**
  * DeleteAndroidInstanceLabel返回参数结构体
  */
 export interface DeleteAndroidInstanceLabelResponse {
@@ -1839,6 +1996,20 @@ export interface DeleteAndroidInstanceLabelResponse {
  * ModifyAndroidApp返回参数结构体
  */
 export interface ModifyAndroidAppResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetAndroidInstancesFGAppKeepAlive返回参数结构体
+ */
+export interface SetAndroidInstancesFGAppKeepAliveResponse {
+  /**
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1912,6 +2083,35 @@ export interface AndroidInstanceTaskStatus {
 }
 
 /**
+ * ImportAndroidInstanceImage请求参数结构体
+ */
+export interface ImportAndroidInstanceImageRequest {
+  /**
+   * 镜像名称
+   */
+  Name: string
+  /**
+   * 镜像文件下载地址，要求是 tgz 压缩文件
+   */
+  URL: string
+  /**
+   * 镜像文件 MD5 值
+   */
+  MD5: string
+  /**
+   * 安卓版本。
+ANDROID10：默认值，安卓10
+ANDROID12：安卓12
+ANDROID14：安卓14
+   */
+  AndroidVersion?: string
+  /**
+   * 镜像可用区
+   */
+  Zone?: string
+}
+
+/**
  * UninstallAndroidInstancesApp请求参数结构体
  */
 export interface UninstallAndroidInstancesAppRequest {
@@ -1955,6 +2155,24 @@ export interface CreateAndroidInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SetAndroidInstancesBGAppKeepAlive请求参数结构体
+ */
+export interface SetAndroidInstancesBGAppKeepAliveRequest {
+  /**
+   * 安卓实例 ID 列表（最大100条数据）
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 操作类型，取值：ADD 添加应用到后台保活列表、REMOVE 从后台保活列表中移除应用、SET 全量设置后台保活列表，替换当前列表。
+   */
+  Operation: string
+  /**
+   * 应用包名列表
+   */
+  PackageNames: Array<string>
 }
 
 /**
@@ -2182,6 +2400,21 @@ export interface UploadFileToAndroidInstancesResponse {
 }
 
 /**
+ * 安卓实例应用黑名单
+ */
+export interface AndroidInstanceAppBlacklist {
+  /**
+   * 安卓实例 ID
+   */
+  AndroidInstanceId?: string
+  /**
+   * 应用黑名单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppBlacklist?: Array<string>
+}
+
+/**
  * CreateAndroidInstances请求参数结构体
  */
 export interface CreateAndroidInstancesRequest {
@@ -2219,17 +2452,13 @@ A6：六开
 }
 
 /**
- * InstallAndroidInstancesAppWithURL请求参数结构体
+ * CreateAndroidInstanceLabel返回参数结构体
  */
-export interface InstallAndroidInstancesAppWithURLRequest {
+export interface CreateAndroidInstanceLabelResponse {
   /**
-   * 实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AndroidInstanceIds: Array<string>
-  /**
-   * 安卓应用下载 URL
-   */
-  AndroidAppURL: string
+  RequestId?: string
 }
 
 /**
@@ -2344,6 +2573,20 @@ export interface AndroidInstanceUploadFile {
    * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
    */
   DestinationDirectory?: string
+}
+
+/**
+ * SetAndroidInstancesBGAppKeepAlive返回参数结构体
+ */
+export interface SetAndroidInstancesBGAppKeepAliveResponse {
+  /**
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

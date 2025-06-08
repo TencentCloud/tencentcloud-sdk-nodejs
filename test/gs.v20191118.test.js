@@ -88,6 +88,16 @@ it("gs.v20191118.DisableAndroidInstancesApp", async function () {
     }
 })
 
+it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+    try {
+       const data = await client.UploadFileToAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.RestoreAndroidInstanceFromStorage", async function () {
     try {
        const data = await client.RestoreAndroidInstanceFromStorage({})
@@ -158,6 +168,16 @@ it("gs.v20191118.EnableAndroidInstancesApp", async function () {
     }
 })
 
+it("gs.v20191118.StartPublishStreamToCSS", async function () {
+    try {
+       const data = await client.StartPublishStreamToCSS({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.ModifyAndroidInstanceInformation", async function () {
     try {
        const data = await client.ModifyAndroidInstanceInformation({})
@@ -181,6 +201,16 @@ it("gs.v20191118.DeleteAndroidInstanceImages", async function () {
 it("gs.v20191118.ModifyAndroidInstancesInformation", async function () {
     try {
        const data = await client.ModifyAndroidInstancesInformation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ModifyAndroidInstancesAppBlacklist", async function () {
+    try {
+       const data = await client.ModifyAndroidInstancesAppBlacklist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +318,9 @@ it("gs.v20191118.CreateAndroidApp", async function () {
     }
 })
 
-it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+it("gs.v20191118.ModifyAndroidInstancesResources", async function () {
     try {
-       const data = await client.UploadFileToAndroidInstances({})
+       const data = await client.ModifyAndroidInstancesResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +388,9 @@ it("gs.v20191118.SyncAndroidInstanceImage", async function () {
     }
 })
 
-it("gs.v20191118.RebootAndroidInstances", async function () {
+it("gs.v20191118.DescribeAndroidInstancesAppBlacklist", async function () {
     try {
-       const data = await client.RebootAndroidInstances({})
+       const data = await client.DescribeAndroidInstancesAppBlacklist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +558,16 @@ it("gs.v20191118.InstallAndroidInstancesApp", async function () {
     }
 })
 
+it("gs.v20191118.SetAndroidInstancesFGAppKeepAlive", async function () {
+    try {
+       const data = await client.SetAndroidInstancesFGAppKeepAlive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DescribeAndroidApps", async function () {
     try {
        const data = await client.DescribeAndroidApps({})
@@ -588,6 +628,16 @@ it("gs.v20191118.CreateAndroidInstanceADB", async function () {
     }
 })
 
+it("gs.v20191118.SetAndroidInstancesBGAppKeepAlive", async function () {
+    try {
+       const data = await client.SetAndroidInstancesBGAppKeepAlive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.FetchAndroidInstancesLogs", async function () {
     try {
        const data = await client.FetchAndroidInstancesLogs({})
@@ -608,9 +658,29 @@ it("gs.v20191118.ExecuteCommandOnAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.StartPublishStreamToCSS", async function () {
+it("gs.v20191118.RebootAndroidInstances", async function () {
     try {
-       const data = await client.StartPublishStreamToCSS({})
+       const data = await client.RebootAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.ImportAndroidInstanceImage", async function () {
+    try {
+       const data = await client.ImportAndroidInstanceImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DescribeAndroidInstancesByApps", async function () {
+    try {
+       const data = await client.DescribeAndroidInstancesByApps({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
