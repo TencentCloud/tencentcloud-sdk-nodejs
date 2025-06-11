@@ -3473,7 +3473,7 @@ export interface LoadBalancer {
    */
   Status?: string
   /**
-   * 该负载均衡实例绑的定四层层代理实例的列表。
+   * 该负载均衡实例绑的四层代理实例的列表。
    */
   L4UsedList?: Array<string>
   /**

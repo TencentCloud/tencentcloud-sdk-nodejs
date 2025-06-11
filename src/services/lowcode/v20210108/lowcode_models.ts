@@ -138,6 +138,10 @@ export interface UploadKnowledgeDocumentSetRequest {
    * 使用 regex 分割文档
    */
   Delimiter?: string
+  /**
+   * Cos存储文件ID
+   */
+  FileId?: string
 }
 
 /**
@@ -200,6 +204,7 @@ export interface DescribeKnowledgeDocumentSetListResponse {
 export interface UploadKnowledgeDocumentSetRsp {
   /**
    * 给文件分配的 ID 信息。
+   * @deprecated
    */
   DocumentSetId?: string
   /**
@@ -214,6 +219,10 @@ export interface UploadKnowledgeDocumentSetRsp {
    * 文件元信息，为jsonstring
    */
   FileMetaData?: string
+  /**
+   * Cos存储文件ID
+   */
+  FileId?: string
 }
 
 /**
@@ -372,6 +381,10 @@ export interface SearchDocInfo {
    * 文档大小
    */
   FileSize?: number
+  /**
+   * Cos存储文件ID
+   */
+  FileId?: string
 }
 
 /**
@@ -589,6 +602,10 @@ ENABLED 已启用
    * 知识库的meta信息
    */
   Meta?: string
+  /**
+   * 知识库容量,单位字节
+   */
+  TotalSize?: string
 }
 
 /**

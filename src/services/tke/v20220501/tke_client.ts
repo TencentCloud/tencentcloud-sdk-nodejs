@@ -42,6 +42,7 @@ import {
   CreateHealthCheckPolicyRequest,
   InstanceExtraArgs,
   MachineUpgradeSettings,
+  DeleteClusterMachinesResponse,
   StartMachinesRequest,
   RebootMachinesResponse,
   InstanceChargePrepaid,
@@ -54,6 +55,7 @@ import {
   DescribeClusterInstancesRequest,
   DeleteHealthCheckPolicyResponse,
   GPUParams,
+  DeleteClusterMachinesRequest,
   LifecycleConfig,
   RebootMachinesRequest,
   ModifyNodePoolResponse,
@@ -110,13 +112,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新 TKE 节点池
+   * 删除原生节点池节点
    */
-  async ModifyNodePool(
-    req: ModifyNodePoolRequest,
-    cb?: (error: string, rep: ModifyNodePoolResponse) => void
-  ): Promise<ModifyNodePoolResponse> {
-    return this.request("ModifyNodePool", req, cb)
+  async DeleteClusterMachines(
+    req: DeleteClusterMachinesRequest,
+    cb?: (error: string, rep: DeleteClusterMachinesResponse) => void
+  ): Promise<DeleteClusterMachinesResponse> {
+    return this.request("DeleteClusterMachines", req, cb)
   }
 
   /**
@@ -127,6 +129,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RebootMachinesResponse) => void
   ): Promise<RebootMachinesResponse> {
     return this.request("RebootMachines", req, cb)
+  }
+
+  /**
+   * 更新 TKE 节点池
+   */
+  async ModifyNodePool(
+    req: ModifyNodePoolRequest,
+    cb?: (error: string, rep: ModifyNodePoolResponse) => void
+  ): Promise<ModifyNodePoolResponse> {
+    return this.request("ModifyNodePool", req, cb)
   }
 
   /**

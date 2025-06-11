@@ -388,6 +388,16 @@ it("gs.v20191118.SyncAndroidInstanceImage", async function () {
     }
 })
 
+it("gs.v20191118.DistributePhotoToAndroidInstances", async function () {
+    try {
+       const data = await client.DistributePhotoToAndroidInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DescribeAndroidInstancesAppBlacklist", async function () {
     try {
        const data = await client.DescribeAndroidInstancesAppBlacklist({})

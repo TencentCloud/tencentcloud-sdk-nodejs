@@ -2694,6 +2694,10 @@ True表示发送 RST 给客户端，False表示不发送 RST 给客户端。
    */
   IdleConnectTimeout?: number
   /**
+   * TCP_SSL和QUIC是否支持PP
+   */
+  ProxyProtocol?: boolean
+  /**
    * 是否开启SNAT， True 表示开启 SNAT，False 表示不开启 SNAT。
 不传则表示不修改。
    */
@@ -4078,6 +4082,10 @@ export interface CreateListenerRequest {
    * 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。取值范围：共享型实例和独占型实例支持：300-900，性能容量型实例支持：300-1980。如需设置请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。
    */
   IdleConnectTimeout?: number
+  /**
+   * TCP_SSL和QUIC是否支持PP
+   */
+  ProxyProtocol?: boolean
   /**
    * 是否开启SNAT，True（开启）、False（关闭）。
 默认为关闭。

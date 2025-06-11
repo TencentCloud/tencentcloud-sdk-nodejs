@@ -31,6 +31,7 @@ import {
   DescribeVASStatisticRequest,
   DeleteDomainBatchResponse,
   RecordGroupInfo,
+  DescribeDomainVipListResponse,
   ModifySubdomainStatusRequest,
   DownloadSnapshotRequest,
   CreateRecordBatchResponse,
@@ -81,6 +82,7 @@ import {
   DescribeDomainAndRecordListResponse,
   ModifyDomainRemarkResponse,
   BatchRecordInfo,
+  KeyValue,
   LineGroupInfo,
   DeleteDomainRequest,
   ModifyDomainOwnerRequest,
@@ -88,10 +90,11 @@ import {
   DeleteRecordBatchDetail,
   DomainShareInfo,
   DescribeSnapshotConfigRequest,
+  VasListItem,
   LineInfo,
   DeleteLineGroupResponse,
   DescribeRecordLineListRequest,
-  DescribeRecordListResponse,
+  DescribeDomainVipListRequest,
   CreateRecordBatchRequest,
   LeftTime,
   DeleteDomainAliasRequest,
@@ -163,11 +166,12 @@ import {
   DomainAliasAnalyticsItem,
   DescribeDomainGroupListResponse,
   ModifyPackageAutoRenewRequest,
+  PackageListItem,
   CreateDomainsAnalyticsFileRequest,
   ModifyDomainRemarkRequest,
   ModifyDomainCustomLineResponse,
   BatchSearchDomainInfo,
-  KeyValue,
+  DescribeVasListRequest,
   CreateLineGroupCopyResponse,
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
@@ -195,6 +199,7 @@ import {
   CreateSnapshotRequest,
   DeleteDomainResponse,
   DescribeRecordSnapshotRollbackResultResponse,
+  DescribeVasListResponse,
   ModifySnapshotConfigRequest,
   DescribeDomainAliasListRequest,
   CreateDomainAliasRequest,
@@ -220,12 +225,14 @@ import {
   DomainCreateInfo,
   DescribeDomainCustomLineListResponse,
   ModifyRecordRemarkRequest,
+  SecurityInfo,
   DeleteRecordBatchRequest,
   DescribeDomainPurviewRequest,
   CreateDomainBatchDetail,
   ModifyDomainUnlockRequest,
   DescribeRecordSnapshotRollbackResultRequest,
   ModifyDomainLockResponse,
+  DescribeRecordListResponse,
   CreateLineGroupRequest,
   CreateDomainCustomLineRequest,
   LineItem,
@@ -655,6 +662,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取套餐列表
+   */
+  async DescribeDomainVipList(
+    req: DescribeDomainVipListRequest,
+    cb?: (error: string, rep: DescribeDomainVipListResponse) => void
+  ): Promise<DescribeDomainVipListResponse> {
+    return this.request("DescribeDomainVipList", req, cb)
+  }
+
+  /**
    * 获取域名分组列表
    */
   async DescribeDomainGroupList(
@@ -702,6 +719,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSubDomainsAnalyticsFileResponse) => void
   ): Promise<CreateSubDomainsAnalyticsFileResponse> {
     return this.request("CreateSubDomainsAnalyticsFile", req, cb)
+  }
+
+  /**
+   * 获取增值服务列表
+   */
+  async DescribeVasList(
+    req: DescribeVasListRequest,
+    cb?: (error: string, rep: DescribeVasListResponse) => void
+  ): Promise<DescribeVasListResponse> {
+    return this.request("DescribeVasList", req, cb)
   }
 
   /**

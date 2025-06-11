@@ -5736,6 +5736,10 @@ VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如�
 BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式InternetAccessible.InternetChargeType只支持按带宽包计费BANDWIDTH_PACKAGE。
    */
   ExtensiveParameters?: string
+  /**
+   * 使用已有clb开启内网或外网访问
+   */
+  ExistedLoadBalancerId?: string
 }
 
 /**
@@ -5957,6 +5961,22 @@ export interface SuperNodeResource {
    * 节点上的总 GPU 卡数
    */
   Gpu?: number
+  /**
+   * 节点资源的配额类型，exact表示精确配额，fuzzy 表示模糊配额。
+   */
+  QuotaType?: string
+  /**
+   * 配额的计费类型，PREPAID表示包月，POSTPAID_BY_HOUR表示按量。
+   */
+  ChargeType?: string
+  /**
+   * QuotaType为 exact 时，此字段有效，表示精确配额的资源类型。
+   */
+  ResourceType?: string
+  /**
+   * 置放群组 ID
+   */
+  DisasterRecoverGroupId?: string
 }
 
 /**

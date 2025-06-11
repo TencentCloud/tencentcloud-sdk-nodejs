@@ -108,9 +108,9 @@ it("ccc.v20200210.StopAutoCalloutTask", async function () {
     }
 })
 
-it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
+it("ccc.v20200210.DescribePredictiveDialingCampaign", async function () {
     try {
-       const data = await client.DisableCCCPhoneNumber({})
+       const data = await client.DescribePredictiveDialingCampaign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("ccc.v20200210.BindStaffSkillGroupList", async function () {
 it("ccc.v20200210.BindNumberCallOutSkillGroup", async function () {
     try {
        const data = await client.BindNumberCallOutSkillGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
+    try {
+       const data = await client.DisableCCCPhoneNumber({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +498,9 @@ it("ccc.v20200210.DescribeStaffInfoList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribePredictiveDialingCampaign", async function () {
+it("ccc.v20200210.BindNumberCallInInterface", async function () {
     try {
-       const data = await client.DescribePredictiveDialingCampaign({})
+       const data = await client.BindNumberCallInInterface({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

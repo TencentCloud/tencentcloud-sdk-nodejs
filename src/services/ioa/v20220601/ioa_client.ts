@@ -19,15 +19,19 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreatePrivilegeCodeRequest,
+  DescribeDeviceHardwareInfoListRspData,
   DescribeDLPFileDetectResultRequest,
   RuleItem,
   DescribeSoftCensusListByDeviceData,
   DescribeLocalAccountAccountGroupsData,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
+  DescribeSoftwareInformationResponse,
   ComplexRule,
+  DescribeDeviceHardwareInfoListResponse,
   Sort,
   DescribeRootAccountGroupResponse,
+  DescribeDeviceHardwareInfoItem,
   DescribeDLPFileDetectResultData,
   DescribeDevicesResponse,
   CreatePrivilegeCodeRspData,
@@ -35,6 +39,7 @@ import {
   DescribeAccountGroupsData,
   RuleExpression,
   DescribeRootAccountGroupRequest,
+  SoftwareInformationData,
   DescribeAccountGroupsPageResp,
   DescribeAccountGroupsRequest,
   DescribeAccountGroupsResponse,
@@ -43,6 +48,7 @@ import {
   FilterGroup,
   DescribeSoftCensusListByDevicePageData,
   DescribeLocalAccountsRequest,
+  DescribeSoftwareInformationRequest,
   CreateDeviceVirtualGroupRequest,
   DescribeDevicesRequest,
   Paging,
@@ -51,12 +57,14 @@ import {
   DescribeSoftCensusListByDeviceRequest,
   Filter,
   DescribeLocalAccountsData,
+  DescribeSoftwareInformationPageData,
   CreateDLPFileDetectionTaskResponse,
   DescribeLocalAccountsPage,
   DescribeDLPFileDetectResultResponse,
   Condition,
   CreateDLPFileDetectionTaskRequest,
   CreatePrivilegeCodeResponse,
+  DescribeDeviceHardwareInfoListRequest,
   CreateDeviceVirtualGroupRspData,
   SimpleRule,
 } from "./ioa_models"
@@ -128,6 +136,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrivilegeCodeResponse) => void
   ): Promise<CreatePrivilegeCodeResponse> {
     return this.request("CreatePrivilegeCode", req, cb)
+  }
+
+  /**
+   * 查看指定终端的软件详情列表,私有化调用path为：capi/Software/DescribeSoftwareInformation
+   */
+  async DescribeSoftwareInformation(
+    req: DescribeSoftwareInformationRequest,
+    cb?: (error: string, rep: DescribeSoftwareInformationResponse) => void
+  ): Promise<DescribeSoftwareInformationResponse> {
+    return this.request("DescribeSoftwareInformation", req, cb)
+  }
+
+  /**
+   * 查询满足条件的查询终端硬件信息列表，私有化调用path为：/capi/Assets/Device/DescribeDeviceHardwareInfoList
+   */
+  async DescribeDeviceHardwareInfoList(
+    req: DescribeDeviceHardwareInfoListRequest,
+    cb?: (error: string, rep: DescribeDeviceHardwareInfoListResponse) => void
+  ): Promise<DescribeDeviceHardwareInfoListResponse> {
+    return this.request("DescribeDeviceHardwareInfoList", req, cb)
   }
 
   /**

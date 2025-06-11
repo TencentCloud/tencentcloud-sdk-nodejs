@@ -96,6 +96,10 @@ export interface ListUsageCallDetailRequest {
    * 筛选子场景
    */
   SubScenes?: Array<string>
+  /**
+   * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
+   */
+  AppType?: string
 }
 
 /**
@@ -273,6 +277,10 @@ export interface DescribeQAResponse {
    * 问题描述
    */
   QuestionDesc?: string
+  /**
+   * 问答是否停用，false:未停用，true已停用
+   */
+  IsDisabled?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -634,6 +642,46 @@ export interface DeleteDocCateResponse {
 }
 
 /**
+ * 共享知识库配置
+ */
+export interface ShareKnowledgeBase {
+  /**
+   * 共享知识库ID
+   */
+  KnowledgeBizId?: string
+  /**
+   * 检索范围
+   */
+  SearchRange?: SearchRange
+}
+
+/**
+ * WorkflowRef详情
+ */
+export interface WorkflowRef {
+  /**
+   * 任务流ID
+   */
+  WorkflowId?: string
+  /**
+   * 任务流名称
+   */
+  WorkflowName?: string
+  /**
+   * 任务流描述
+   */
+  WorkflowDesc?: string
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * ExportAttributeLabel返回参数结构体
  */
 export interface ExportAttributeLabelResponse {
@@ -669,39 +717,22 @@ export interface KnowledgeCapacityPieGraphDetail {
 }
 
 /**
- * 工作流信息
+ * ModifyApp返回参数结构体
  */
-export interface WorkflowInfo {
+export interface ModifyAppResponse {
   /**
-   * 工作流ID
+   * 应用App
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId?: string
+  AppBizId?: string
   /**
-   * 工作流名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 更新时间
    */
-  WorkflowName?: string
+  UpdateTime?: string
   /**
-   * 工作流运行ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  WorkflowRunId?: string
-  /**
-   * 选项卡
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OptionCards?: Array<string>
-  /**
-   * 多气泡的输出结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Outputs?: Array<string>
-  /**
-   * 工作流发布时间，unix时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowReleaseTime?: string
+  RequestId?: string
 }
 
 /**
@@ -804,53 +835,21 @@ export interface ModifyDocAttrRangeResponse {
 }
 
 /**
- * GetAnswerTypeDataCount返回参数结构体
+ * CreateSharedKnowledge请求参数结构体
  */
-export interface GetAnswerTypeDataCountResponse {
+export interface CreateSharedKnowledgeRequest {
   /**
-   * 总消息数
+   * 共享知识库名称，字符数量范围：[1, 50]
    */
-  Total?: number
+  KnowledgeName: string
   /**
-   * 大模型直接回复总数
+   * 共享知识库描述，字符数量上限2000
    */
-  ModelReplyCount?: number
+  KnowledgeDescription?: string
   /**
-   * 知识型回复总数
+   * Embedding模型，字符数量上限128
    */
-  KnowledgeCount?: number
-  /**
-   * 任务流回复总数
-   */
-  TaskFlowCount?: number
-  /**
-   * 搜索引擎回复总数
-   */
-  SearchEngineCount?: number
-  /**
-   * 图片理解回复总数
-   */
-  ImageUnderstandingCount?: number
-  /**
-   * 拒答回复总数
-   */
-  RejectCount?: number
-  /**
-   * 敏感回复总数
-   */
-  SensitiveCount?: number
-  /**
-   * 并发超限回复总数
-   */
-  ConcurrentLimitCount?: number
-  /**
-   * 未知问题回复总数
-   */
-  UnknownIssuesCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EmbeddingModel?: string
 }
 
 /**
@@ -884,6 +883,16 @@ export interface AttrLabelRefer {
    * 标签值ID
    */
   LabelBizIds?: Array<string>
+}
+
+/**
+ * ReferShareKnowledge返回参数结构体
+ */
+export interface ReferShareKnowledgeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -945,68 +954,21 @@ export interface Procedure {
 }
 
 /**
- * QA查询参数
+ * GetEmbedding请求参数结构体
  */
-export interface QAQuery {
+export interface GetEmbeddingRequest {
   /**
-   * 页码
-
-
+   * 模型名称
    */
-  PageNumber: number
+  Model: string
   /**
-   * 每页数量
-
+   * 需要 embedding 的文本, 单条文本最大长度500个字符, 总条数最大7条
    */
-  PageSize: number
+  Inputs: Array<string>
   /**
-   * 应用ID
+   * 是否在线, 后台异步任务使用离线, 实时任务使用在线, 默认值: false
    */
-  BotBizId: string
-  /**
-   * 查询内容
-
-   */
-  Query?: string
-  /**
-   * 分类ID
-
-   */
-  CateBizId?: string
-  /**
-   * 校验状态
-
-   */
-  AcceptStatus?: Array<number | bigint>
-  /**
-   * 发布状态
-
-   */
-  ReleaseStatus?: Array<number | bigint>
-  /**
-   * 文档ID
-
-   */
-  DocBizId?: string
-  /**
-   * QAID
-
-   */
-  QaBizId?: string
-  /**
-   * 来源
-
-   */
-  Source?: number
-  /**
-   * 查询答案
-
-   */
-  QueryAnswer?: string
-  /**
-   * 查询类型 filename 名称、 attribute 标签
-   */
-  QueryType?: string
+  Online?: boolean
 }
 
 /**
@@ -1033,6 +995,20 @@ export interface ListAppRequest {
    * 登录用户子账号(集成商模式必填)
    */
   LoginSubAccountUin?: string
+}
+
+/**
+ * UpdateSharedKnowledge请求参数结构体
+ */
+export interface UpdateSharedKnowledgeRequest {
+  /**
+   * 共享知识库业务ID
+   */
+  KnowledgeBizId: string
+  /**
+   * 共享知识库更新信息
+   */
+  Info?: KnowledgeUpdateInfo
 }
 
 /**
@@ -1151,7 +1127,7 @@ export interface ReleaseDoc {
  */
 export interface KnowledgeQaSearch {
   /**
-   * 知识来源 doc：文档，qa：问答  taskflow：业务流程，search：搜索增强
+   * 知识来源 doc：文档，qa：问答  taskflow：业务流程，search：搜索增强，database:数据库
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
@@ -1229,6 +1205,8 @@ export interface ListQARequest {
   PageSize: number
   /**
    * 查询问题
+
+输入特定标识 lke:system:untagged  将查询所有未关联标签的问答
    */
   Query?: string
   /**
@@ -1263,6 +1241,10 @@ export interface ListQARequest {
    * 查询类型 filename 名称、 attribute 标签
    */
   QueryType?: string
+  /**
+   * 是否只展示当前分类的数据 0不是，1是
+   */
+  ShowCurrCate?: number
 }
 
 /**
@@ -1288,74 +1270,17 @@ export interface DescribeKnowledgeUsageResponse {
 }
 
 /**
- * 引用来源详情
+ * DeleteSharedKnowledge返回参数结构体
  */
-export interface ReferDetail {
+export interface DeleteSharedKnowledgeResponse {
   /**
-   * 引用ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 共享知识库业务ID
    */
-  ReferBizId?: string
+  KnowledgeBizId?: string
   /**
-   * 文档类型 (1 QA, 2 文档段)
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DocType?: number
-  /**
-   * 文档名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DocName?: string
-  /**
-   * 分片内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageContent?: string
-  /**
-   * 问题
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Question?: string
-  /**
-   * 答案
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Answer?: string
-  /**
-   * 置信度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Confidence?: number
-  /**
-   * 标记
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Mark?: number
-  /**
-   * 分片高亮内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Highlights?: Array<Highlight>
-  /**
-   * 原始内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgData?: string
-  /**
-   * 页码信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageInfos?: Array<number | bigint>
-  /**
-   * sheet信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SheetInfos?: Array<string>
-  /**
-   * 文档ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DocBizId?: string
+  RequestId?: string
 }
 
 /**
@@ -1445,21 +1370,28 @@ export interface GetLikeDataCountResponse {
 }
 
 /**
- * ListRelease请求参数结构体
+ * 共享知识库更新信息
  */
-export interface ListReleaseRequest {
+export interface KnowledgeUpdateInfo {
   /**
-   * 机器人ID
+   * 共享知识库名称
    */
-  BotBizId: string
+  KnowledgeName?: string
   /**
-   * 页码
+   * 共享知识库描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber: number
+  KnowledgeDescription?: string
   /**
-   * 每页数量
+   * Embedding模型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize: number
+  EmbeddingModel?: string
+  /**
+   * 问答提取模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QaExtractModel?: string
 }
 
 /**
@@ -1563,18 +1495,13 @@ export interface SummaryOutput {
 }
 
 /**
- * ModifyApp返回参数结构体
+ * ListReferShareKnowledge返回参数结构体
  */
-export interface ModifyAppResponse {
+export interface ListReferShareKnowledgeResponse {
   /**
-   * 应用App
-注意：此字段可能返回 null，表示取不到有效值。
+   * 共享知识库信息列表
    */
-  AppBizId?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
+  List?: Array<KnowledgeBaseInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1615,6 +1542,42 @@ export interface GetDocPreviewRequest {
    * 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline
    */
   TypeKey?: string
+}
+
+/**
+ * 工作流信息
+ */
+export interface WorkflowInfo {
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 工作流运行ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowRunId?: string
+  /**
+   * 选项卡
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionCards?: Array<string>
+  /**
+   * 多气泡的输出结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Outputs?: Array<string>
+  /**
+   * 工作流发布时间，unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowReleaseTime?: string
 }
 
 /**
@@ -2009,97 +1972,37 @@ export interface QueryRewriteResponse {
 }
 
 /**
- * 问答详情数据
+ * ListQA返回参数结构体
  */
-export interface ListQaItem {
+export interface ListQAResponse {
   /**
-   * 问答ID
+   * 问答数量
    */
-  QaBizId?: string
+  Total?: string
   /**
-   * 问题
+   * 待校验问答数量
    */
-  Question?: string
+  WaitVerifyTotal?: string
   /**
-   * 答案
+   * 未采纳问答数量
    */
-  Answer?: string
+  NotAcceptedTotal?: string
   /**
-   * 来源
+   * 已采纳问答数量
    */
-  Source?: number
+  AcceptedTotal?: string
   /**
-   * 来源描述
+   * 页码
    */
-  SourceDesc?: string
+  PageNumber?: number
   /**
-   * 更新时间
+   * 问答详情
    */
-  UpdateTime?: string
+  List?: Array<ListQaItem>
   /**
-   * 状态
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: number
-  /**
-   * 状态描述
-   */
-  StatusDesc?: string
-  /**
-   * 文档ID
-   */
-  DocBizId?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 是否允许编辑
-   */
-  IsAllowEdit?: boolean
-  /**
-   * 是否允许删除
-   */
-  IsAllowDelete?: boolean
-  /**
-   * 是否允许校验
-   */
-  IsAllowAccept?: boolean
-  /**
-   * 文档名称
-   */
-  FileName?: string
-  /**
-   * 文档类型
-   */
-  FileType?: string
-  /**
-   * 问答字符数
-   */
-  QaCharSize?: string
-  /**
-   * 有效开始时间，unix时间戳
-   */
-  ExpireStart?: string
-  /**
-   * 有效结束时间，unix时间戳，0代表永久有效
-   */
-  ExpireEnd?: string
-  /**
-   * 属性标签适用范围 1：全部，2：按条件
-   */
-  AttrRange?: number
-  /**
-   * 属性标签
-   */
-  AttrLabels?: Array<AttrLabel>
-  /**
-   * 相似问个数
-   */
-  SimilarQuestionNum?: number
-  /**
-   * 返回问答关联的相似问,联动搜索,仅展示一条
-   */
-  SimilarQuestionTips?: string
+  RequestId?: string
 }
 
 /**
@@ -2283,6 +2186,10 @@ export interface DescribeDocResponse {
    * 分类ID
    */
   CateBizId?: string
+  /**
+   * 文档是否停用，false:未停用，true:已停用
+   */
+  IsDisabled?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2476,6 +2383,27 @@ export interface ApiVarAttrInfo {
 }
 
 /**
+ * 相似问信息
+ */
+export interface SimilarQuestion {
+  /**
+   * 相似问ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimBizId?: string
+  /**
+   * 相似问内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Question?: string
+  /**
+   * 相似问审核状态，1审核失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditStatus?: number
+}
+
+/**
  * Agent的思考过程
  */
 export interface AgentThought {
@@ -2568,6 +2496,20 @@ export interface CheckAttributeLabelReferRequest {
    * 属性ID
    */
   AttributeBizId?: Array<string>
+}
+
+/**
+ * CreateSharedKnowledge返回参数结构体
+ */
+export interface CreateSharedKnowledgeResponse {
+  /**
+   * 共享知识库业务ID
+   */
+  KnowledgeBizId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3071,6 +3013,28 @@ export interface DescribeTokenUsageGraphRequest {
    * 应用id列表
    */
   AppBizIds?: Array<string>
+  /**
+   * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
+   */
+  AppType?: string
+}
+
+/**
+ * ListSharedKnowledge请求参数结构体
+ */
+export interface ListSharedKnowledgeRequest {
+  /**
+   * 分页序号，编码从1开始
+   */
+  PageNumber: number
+  /**
+   * 分页大小，有效范围为[1,200]
+   */
+  PageSize: number
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
 }
 
 /**
@@ -3291,17 +3255,13 @@ export interface DescribeAttributeLabelResponse {
 }
 
 /**
- * ModifyAttributeLabel返回参数结构体
+ * 向量
  */
-export interface ModifyAttributeLabelResponse {
+export interface EmbeddingObject {
   /**
-   * 任务ID
+   * 向量
    */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Embedding?: Array<number>
 }
 
 /**
@@ -3490,6 +3450,10 @@ export interface CreateAppRequest {
    * 应用基础配置
    */
   BaseConfig: BaseConfig
+  /**
+   * 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式
+   */
+  Pattern?: string
 }
 
 /**
@@ -3579,6 +3543,40 @@ export interface ReleaseQA {
    * 文档业务ID
    */
   DocBizId?: string
+}
+
+/**
+ * 共享知识库基础信息
+ */
+export interface KnowledgeBaseInfo {
+  /**
+   * 共享知识库业务ID
+   */
+  KnowledgeBizId?: string
+  /**
+   * 共享知识库名称
+   */
+  KnowledgeName?: string
+  /**
+   * 共享知识库描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeDescription?: string
+  /**
+   * Embedding模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmbeddingModel?: string
+  /**
+   * 问答提取模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QaExtractModel?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -3813,6 +3811,21 @@ export interface TokenStat {
 }
 
 /**
+ * 用户基础信息
+ */
+export interface UserBaseInfo {
+  /**
+   * 用户ID
+   */
+  UserBizId?: string
+  /**
+   * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+}
+
+/**
  * 文档片段
  */
 export interface DocSegment {
@@ -3949,6 +3962,10 @@ export interface DigitalHumanConfig {
    * 图像
    */
   Avatar?: string
+  /**
+   * 预览图
+   */
+  PreviewUrl?: string
 }
 
 /**
@@ -4105,6 +4122,8 @@ export interface ListDocRequest {
   PageSize: number
   /**
    * 查询内容
+
+输入特定标识 lke:system:untagged  将查询所有未关联标签的文档
    */
   Query?: string
   /**
@@ -4127,6 +4146,10 @@ export interface ListDocRequest {
    * 文档列表筛选标识位
    */
   FilterFlag?: Array<DocFilterFlag>
+  /**
+   * 是否只展示当前分类的数据 0不是，1是
+   */
+  ShowCurrCate?: number
 }
 
 /**
@@ -4156,21 +4179,53 @@ export interface ReconstructDocumentRequest {
 }
 
 /**
- * GetEmbedding请求参数结构体
+ * GetAnswerTypeDataCount返回参数结构体
  */
-export interface GetEmbeddingRequest {
+export interface GetAnswerTypeDataCountResponse {
   /**
-   * 模型名称
+   * 总消息数
    */
-  Model: string
+  Total?: number
   /**
-   * 需要 embedding 的文本, 单条文本最大长度500个字符, 总条数最大7条
+   * 大模型直接回复总数
    */
-  Inputs: Array<string>
+  ModelReplyCount?: number
   /**
-   * 是否在线, 后台异步任务使用离线, 实时任务使用在线, 默认值: false
+   * 知识型回复总数
    */
-  Online?: boolean
+  KnowledgeCount?: number
+  /**
+   * 任务流回复总数
+   */
+  TaskFlowCount?: number
+  /**
+   * 搜索引擎回复总数
+   */
+  SearchEngineCount?: number
+  /**
+   * 图片理解回复总数
+   */
+  ImageUnderstandingCount?: number
+  /**
+   * 拒答回复总数
+   */
+  RejectCount?: number
+  /**
+   * 敏感回复总数
+   */
+  SensitiveCount?: number
+  /**
+   * 并发超限回复总数
+   */
+  ConcurrentLimitCount?: number
+  /**
+   * 未知问题回复总数
+   */
+  UnknownIssuesCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4253,6 +4308,10 @@ export interface DescribeCallStatsGraphRequest {
    * 筛选子场景(文档解析场景使用)
    */
   SubScenes?: Array<string>
+  /**
+   * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
+   */
+  AppType?: string
 }
 
 /**
@@ -4308,37 +4367,13 @@ export interface GetReconstructDocumentResultRequest {
 export type DescribeKnowledgeUsageRequest = null
 
 /**
- * ListQA返回参数结构体
+ * DeleteSharedKnowledge请求参数结构体
  */
-export interface ListQAResponse {
+export interface DeleteSharedKnowledgeRequest {
   /**
-   * 问答数量
+   * 共享知识库业务ID
    */
-  Total?: string
-  /**
-   * 待校验问答数量
-   */
-  WaitVerifyTotal?: string
-  /**
-   * 未采纳问答数量
-   */
-  NotAcceptedTotal?: string
-  /**
-   * 已采纳问答数量
-   */
-  AcceptedTotal?: string
-  /**
-   * 页码
-   */
-  PageNumber?: number
-  /**
-   * 问答详情
-   */
-  List?: Array<ListQaItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  KnowledgeBizId: string
 }
 
 /**
@@ -4582,6 +4617,10 @@ export interface ListDocItem {
    * 文档的属性标记，0: 不做用户外部权限校验
    */
   AttributeFlags?: Array<number | bigint>
+  /**
+   * false:未停用，ture:已停用
+   */
+  IsDisabled?: boolean
 }
 
 /**
@@ -5042,6 +5081,20 @@ export interface GetLikeDataCountRequest {
 }
 
 /**
+ * ModifyAttributeLabel返回参数结构体
+ */
+export interface ModifyAttributeLabelResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRejectedQuestion返回参数结构体
  */
 export interface DeleteRejectedQuestionResponse {
@@ -5278,6 +5331,21 @@ export interface CateInfo {
 }
 
 /**
+ * DescribeSharedKnowledge返回参数结构体
+ */
+export interface DescribeSharedKnowledgeResponse {
+  /**
+   * 知识库列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Info?: KnowledgeDetailInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunReRank返回参数结构体
  */
 export interface RunReRankResponse {
@@ -5431,6 +5499,10 @@ export interface KnowledgeQaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiCall?: AICallConfig
+  /**
+   * 共享知识库关联配置
+   */
+  ShareKnowledgeBases?: Array<ShareKnowledgeBase>
 }
 
 /**
@@ -5646,6 +5718,10 @@ export interface ModelInfo {
    * 模型支持智能通话效果
    */
   SupportAiCallStatus?: number
+  /**
+   * 专属并发数
+   */
+  Concurrency?: number
 }
 
 /**
@@ -5829,6 +5905,28 @@ export interface TaskFLowVar {
 
    */
   VarType?: string
+  /**
+   * 自定义变量默认值
+   */
+  VarDefaultValue?: string
+  /**
+   * 自定义变量文件默认名称
+   */
+  VarDefaultFileName?: string
+}
+
+/**
+ * 标签值引用的工作流详情
+ */
+export interface AttributeLabelRefByWorkflow {
+  /**
+   * 标签值id
+   */
+  AttributeLabelBizId?: string
+  /**
+   * 标签值引用的工作流列表
+   */
+  WorkflowList?: Array<WorkflowRef>
 }
 
 /**
@@ -5861,6 +5959,104 @@ export interface QueryRewriteRequest {
    * 模型名称
    */
   Model?: string
+}
+
+/**
+ * 问答详情数据
+ */
+export interface ListQaItem {
+  /**
+   * 问答ID
+   */
+  QaBizId?: string
+  /**
+   * 问题
+   */
+  Question?: string
+  /**
+   * 答案
+   */
+  Answer?: string
+  /**
+   * 来源
+   */
+  Source?: number
+  /**
+   * 来源描述
+   */
+  SourceDesc?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 状态描述
+   */
+  StatusDesc?: string
+  /**
+   * 文档ID
+   */
+  DocBizId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否允许编辑
+   */
+  IsAllowEdit?: boolean
+  /**
+   * 是否允许删除
+   */
+  IsAllowDelete?: boolean
+  /**
+   * 是否允许校验
+   */
+  IsAllowAccept?: boolean
+  /**
+   * 文档名称
+   */
+  FileName?: string
+  /**
+   * 文档类型
+   */
+  FileType?: string
+  /**
+   * 问答字符数
+   */
+  QaCharSize?: string
+  /**
+   * 有效开始时间，unix时间戳
+   */
+  ExpireStart?: string
+  /**
+   * 有效结束时间，unix时间戳，0代表永久有效
+   */
+  ExpireEnd?: string
+  /**
+   * 属性标签适用范围 1：全部，2：按条件
+   */
+  AttrRange?: number
+  /**
+   * 属性标签
+   */
+  AttrLabels?: Array<AttrLabel>
+  /**
+   * 相似问个数
+   */
+  SimilarQuestionNum?: number
+  /**
+   * 返回问答关联的相似问,联动搜索,仅展示一条
+   */
+  SimilarQuestionTips?: string
+  /**
+   * 问答是否停用，false:未停用，ture:已停用
+   */
+  IsDisabled?: boolean
 }
 
 /**
@@ -6021,6 +6217,71 @@ export interface IntentAchievement {
 }
 
 /**
+ * 任务流程参数信息
+ */
+export interface ValueInfo {
+  /**
+   * 值ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 值类型：0:未知或者空, 1:string, 2:int, 3:float, 4:bool, 5:array(字符串数组), 6: object_array(结构体数组), 7: object(结构体)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueType?: number
+  /**
+   * string
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueStr?: string
+  /**
+   * int（避免精度丢失使用字符串返回）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueInt?: string
+  /**
+   * float
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueFloat?: number
+  /**
+   * bool
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueBool?: boolean
+  /**
+   * array
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueStrArray?: Array<string>
+}
+
+/**
+ * ListSharedKnowledge返回参数结构体
+ */
+export interface ListSharedKnowledgeResponse {
+  /**
+   * 累计数量
+   */
+  Total?: number
+  /**
+   * 知识库列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeList?: Array<KnowledgeDetailInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteQACate请求参数结构体
  */
 export interface DeleteQACateRequest {
@@ -6118,13 +6379,31 @@ export interface QACate {
 }
 
 /**
- * 向量
+ * DescribeSharedKnowledge请求参数结构体
  */
-export interface EmbeddingObject {
+export interface DescribeSharedKnowledgeRequest {
   /**
-   * 向量
+   * 共享知识库业务ID
    */
-  Embedding?: Array<number>
+  KnowledgeBizId: string
+}
+
+/**
+ * ListReferShareKnowledge请求参数结构体
+ */
+export interface ListReferShareKnowledgeRequest {
+  /**
+   * 应用业务id
+   */
+  AppBizId: string
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -6449,24 +6728,18 @@ export interface DescribeSegmentsResponse {
 }
 
 /**
- * 相似问信息
+ * 应用基础信息
  */
-export interface SimilarQuestion {
+export interface AppBaseInfo {
   /**
-   * 相似问ID
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 应用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SimBizId?: string
-  /**
-   * 相似问内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Question?: string
-  /**
-   * 相似问审核状态，1审核失败
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuditStatus?: number
+  AppName?: string
 }
 
 /**
@@ -6520,6 +6793,71 @@ export interface GroupDocResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QA查询参数
+ */
+export interface QAQuery {
+  /**
+   * 页码
+
+
+   */
+  PageNumber: number
+  /**
+   * 每页数量
+
+   */
+  PageSize: number
+  /**
+   * 应用ID
+   */
+  BotBizId: string
+  /**
+   * 查询内容
+
+   */
+  Query?: string
+  /**
+   * 分类ID
+
+   */
+  CateBizId?: string
+  /**
+   * 校验状态
+
+   */
+  AcceptStatus?: Array<number | bigint>
+  /**
+   * 发布状态
+
+   */
+  ReleaseStatus?: Array<number | bigint>
+  /**
+   * 文档ID
+
+   */
+  DocBizId?: string
+  /**
+   * QAID
+
+   */
+  QaBizId?: string
+  /**
+   * 来源
+
+   */
+  Source?: number
+  /**
+   * 查询答案
+
+   */
+  QueryAnswer?: string
+  /**
+   * 查询类型 filename 名称、 attribute 标签
+   */
+  QueryType?: string
 }
 
 /**
@@ -6601,6 +6939,81 @@ export interface ExportAttributeLabelRequest {
 }
 
 /**
+ * 引用来源详情
+ */
+export interface ReferDetail {
+  /**
+   * 引用ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReferBizId?: string
+  /**
+   * 文档类型 (1 QA, 2 文档段)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocType?: number
+  /**
+   * 文档名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocName?: string
+  /**
+   * 分片内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageContent?: string
+  /**
+   * 问题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Question?: string
+  /**
+   * 答案
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Answer?: string
+  /**
+   * 置信度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Confidence?: number
+  /**
+   * 标记
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mark?: number
+  /**
+   * 分片高亮内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Highlights?: Array<Highlight>
+  /**
+   * 原始内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgData?: string
+  /**
+   * 页码信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageInfos?: Array<number | bigint>
+  /**
+   * sheet信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SheetInfos?: Array<string>
+  /**
+   * 文档ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocBizId?: string
+  /**
+   * 知识库ID
+   */
+  KnowledgeBizId?: string
+}
+
+/**
  * DescribeTokenUsage请求参数结构体
  */
 export interface DescribeTokenUsageRequest {
@@ -6640,6 +7053,10 @@ export interface DescribeTokenUsageRequest {
    * 筛选子场景(文档解析场景使用)
    */
   SubScenes?: Array<string>
+  /**
+   * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
+   */
+  AppType?: string
 }
 
 /**
@@ -6998,49 +7415,17 @@ export interface ListAppCategoryRspOption {
 }
 
 /**
- * 任务流程参数信息
+ * UpdateSharedKnowledge返回参数结构体
  */
-export interface ValueInfo {
+export interface UpdateSharedKnowledgeResponse {
   /**
-   * 值ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 共享知识库业务ID
    */
-  Id?: string
+  KnowledgeBizId?: string
   /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 值类型：0:未知或者空, 1:string, 2:int, 3:float, 4:bool, 5:array(字符串数组), 6: object_array(结构体数组), 7: object(结构体)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueType?: number
-  /**
-   * string
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueStr?: string
-  /**
-   * int（避免精度丢失使用字符串返回）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueInt?: string
-  /**
-   * float
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueFloat?: number
-  /**
-   * bool
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueBool?: boolean
-  /**
-   * array
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueStrArray?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -7130,6 +7515,27 @@ export interface DescribeCorpResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 知识库详情信息
+ */
+export interface KnowledgeDetailInfo {
+  /**
+   * 知识库信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Knowledge?: KnowledgeBaseInfo
+  /**
+   * 应用列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppList?: Array<AppBaseInfo>
+  /**
+   * 用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: UserBaseInfo
 }
 
 /**
@@ -7416,6 +7822,11 @@ export interface CheckAttributeLabelReferResponse {
    */
   IsRefer?: boolean
   /**
+   * 引用的工作流详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<AttributeLabelRefByWorkflow>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7547,6 +7958,14 @@ export interface CreateVarRequest {
    * 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用
    */
   VarType?: string
+  /**
+   * 自定义变量默认值
+   */
+  VarDefaultValue?: string
+  /**
+   * 自定义变量文件默认名称
+   */
+  VarDefaultFileName?: string
 }
 
 /**
@@ -7611,6 +8030,20 @@ export interface HistorySummary {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
+}
+
+/**
+ * StopDocParse请求参数结构体
+ */
+export interface StopDocParseRequest {
+  /**
+   * 应用ID
+   */
+  BotBizId: string
+  /**
+   * 文档ID
+   */
+  DocBizId: string
 }
 
 /**
@@ -7779,17 +8212,21 @@ export interface IgnoreUnsatisfiedReplyResponse {
 }
 
 /**
- * StopDocParse请求参数结构体
+ * ListRelease请求参数结构体
  */
-export interface StopDocParseRequest {
+export interface ListReleaseRequest {
   /**
-   * 应用ID
+   * 机器人ID
    */
   BotBizId: string
   /**
-   * 文档ID
+   * 页码
    */
-  DocBizId: string
+  PageNumber: number
+  /**
+   * 每页数量
+   */
+  PageSize: number
 }
 
 /**
@@ -7824,6 +8261,28 @@ export interface ListModelRequest {
    * 模型类别 generate：生成模型，thought：思考模型
    */
   ModelCategory?: string
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+}
+
+/**
+ * ReferShareKnowledge请求参数结构体
+ */
+export interface ReferShareKnowledgeRequest {
+  /**
+   * 应用业务id
+   */
+  AppBizId: string
+  /**
+   * 共享知识库业务id列表
+   */
+  KnowledgeBizId: Array<string>
   /**
    * 登录用户主账号(集成商模式必填)
    */

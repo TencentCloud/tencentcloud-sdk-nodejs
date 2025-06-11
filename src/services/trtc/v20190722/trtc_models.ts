@@ -85,6 +85,14 @@ export interface AgentConfig {
 默认值为空，表示不进行过滤。
    */
   FilterBracketsContent?: number
+  /**
+   * 环境音设置
+   */
+  AmbientSound?: AmbientSound
+  /**
+   * 声纹配置
+   */
+  VoicePrint?: VoicePrint
 }
 
 /**
@@ -925,6 +933,20 @@ export interface McuTencentVod {
 }
 
 /**
+ * RegisterVoicePrint返回参数结构体
+ */
+export interface RegisterVoicePrintResponse {
+  /**
+   * 声纹信息ID
+   */
+  VoicePrintId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPicture请求参数结构体
  */
 export interface ModifyPictureRequest {
@@ -1078,13 +1100,13 @@ export interface DescribeRecordStatisticResponse {
 }
 
 /**
- * StartMCUMixTranscodeByStrRoomId返回参数结构体
+ * DeleteVoicePrint请求参数结构体
  */
-export interface StartMCUMixTranscodeByStrRoomIdResponse {
+export interface DeleteVoicePrintRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 声纹信息ID
    */
-  RequestId?: string
+  VoicePrintId: string
 }
 
 /**
@@ -1123,6 +1145,20 @@ AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using
    * 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。
    */
   FileNamePrefix?: Array<string>
+}
+
+/**
+ * 声纹配置参数
+ */
+export interface VoicePrint {
+  /**
+   * 默认为0，表示不启用声纹。1表示启用声纹，此时需要填写voiceprint id。
+   */
+  Mode?: number
+  /**
+   * VoicePrint Mode为1时需要填写，目前仅支持填写一个声纹id
+   */
+  IdList?: Array<string>
 }
 
 /**
@@ -1251,18 +1287,21 @@ export interface DescribeWebRecordRequest {
 }
 
 /**
- * DescribeTRTCRealTimeScaleData返回参数结构体
+ * 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：
+coffee_shop: 咖啡店氛围，背景中有人聊天。
+busy_office: 客服中心
+street_traffic: 户外街道
+evening_mountain: 户外山林
  */
-export interface DescribeTRTCRealTimeScaleDataResponse {
+export interface AmbientSound {
   /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境场景选择
    */
-  Data?: TRTCDataResult
+  Scene: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 控制环境音的音量。取值的范围是 [0,2]。值越低，环境音越小；值越高，环境音越响亮。如果未设置，则使用默认值 1。
    */
-  RequestId?: string
+  Volume?: number
 }
 
 /**
@@ -1368,64 +1407,18 @@ export interface CloudVod {
 }
 
 /**
- * MCU混流输出流编码参数
+ * DescribeTRTCMarketScaleMetricData返回参数结构体
  */
-export interface EncodeParams {
+export interface DescribeTRTCMarketScaleMetricDataResponse {
   /**
-   * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AudioSampleRate: number
+  Data: TRTCDataResp
   /**
-   * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AudioBitrate: number
-  /**
-   * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
-   */
-  AudioChannels: number
-  /**
-   * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
-   */
-  VideoWidth?: number
-  /**
-   * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
-   */
-  VideoHeight?: number
-  /**
-   * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
-   */
-  VideoBitrate?: number
-  /**
-   * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
-   */
-  VideoFramerate?: number
-  /**
-   * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
-   */
-  VideoGop?: number
-  /**
-   * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
-红色：0xff0000，对应的十进制整数是16724736。
-黄色：0xffff00。对应的十进制整数是16776960。
-绿色：0x33cc00。对应的十进制整数是3394560。
-蓝色：0x0066ff。对应的十进制整数是26367。
-黑色：0x000000。对应的十进制整数是0。
-白色：0xFFFFFF。对应的十进制整数是16777215。
-灰色：0x999999。对应的十进制整数是10066329。
-   */
-  BackgroundColor?: number
-  /**
-   * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
-   */
-  BackgroundImageId?: number
-  /**
-   * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
-   */
-  AudioCodec?: number
-  /**
-   * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
-   */
-  BackgroundImageUrl?: string
+  RequestId?: string
 }
 
 /**
@@ -1585,6 +1578,24 @@ export interface DescribeTRTCMarketQualityDataResponse {
 }
 
 /**
+ * DescribeVoicePrint返回参数结构体
+ */
+export interface DescribeVoicePrintResponse {
+  /**
+   * 总的条数
+   */
+  TotalCount?: number
+  /**
+   * 声纹信息
+   */
+  Data?: Array<VoicePrintInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 画中画模板中有效，代表小画面的布局参数
  */
 export interface SmallVideoLayoutParams {
@@ -1612,6 +1623,44 @@ export interface SmallVideoLayoutParams {
    * 小画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
    */
   LocationY?: number
+}
+
+/**
+ * 声纹查询数据
+ */
+export interface VoicePrintInfo {
+  /**
+   * 声纹ID
+   */
+  VoicePrintId?: string
+  /**
+   * 应用id
+   */
+  AppId?: number
+  /**
+   * 和声纹绑定的MetaInfo
+   */
+  VoicePrintMetaInfo?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 音频格式,当前只有0(代表wav)
+   */
+  AudioFormat?: number
+  /**
+   * 音频名称
+   */
+  AudioName?: string
+  /**
+   * 请求毫秒时间戳
+   */
+  ReqTimestamp?: number
 }
 
 /**
@@ -1990,6 +2039,28 @@ export interface RemoveUserByStrRoomIdResponse {
 }
 
 /**
+ * DescribeVoicePrint请求参数结构体
+ */
+export interface DescribeVoicePrintRequest {
+  /**
+   * 查询方式，0表示查询特定VoicePrintId，1表示分页查询
+   */
+  DescribeMode: number
+  /**
+   * 声纹ID
+   */
+  VoicePrintIdList?: Array<string>
+  /**
+   * 当前页码,从1开始,DescribeMode为1时填写
+   */
+  PageIndex?: number
+  /**
+   * 每页条数 最少20,DescribeMode为1时填写
+   */
+  PageSize?: number
+}
+
+/**
  * DescribeTRTCRealTimeScaleMetricData返回参数结构体
  */
 export interface DescribeTRTCRealTimeScaleMetricDataResponse {
@@ -2116,6 +2187,16 @@ export interface StartPublishCdnStreamResponse {
    * 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskID参数。
    */
   TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartMCUMixTranscodeByStrRoomId返回参数结构体
+ */
+export interface StartMCUMixTranscodeByStrRoomIdResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2258,6 +2339,16 @@ export interface StartStreamIngestRequest {
 }
 
 /**
+ * UpdateVoicePrint返回参数结构体
+ */
+export interface UpdateVoicePrintResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRecordingUsage返回参数结构体
  */
 export interface DescribeRecordingUsageResponse {
@@ -2276,17 +2367,30 @@ export interface DescribeRecordingUsageResponse {
 }
 
 /**
- * StopMCUMixTranscode请求参数结构体
+ * 自定义透传SEI
  */
-export interface StopMCUMixTranscodeRequest {
+export interface McuPassThrough {
   /**
-   * TRTC的SDKAppId。
+   * 透传SEI的payload内容。
    */
-  SdkAppId: number
+  PayloadContent: string
   /**
-   * 房间号。
+   * SEI消息的PayloadType，取值范围5、100-254（244除外，244为我们内部自定义的时间戳SEI）。
+注：部分播放器可能不支持PayloadType为5带PayloadUuid的标准类型，建议优先使用其他PayloadType。
    */
-  RoomId: number
+  PayloadType: number
+  /**
+   * PayloadType为5，PayloadUuid必须填写。PayloadType不是5时，不需要填写，填写会被后台忽略。该值必须是32长度的十六进制。
+   */
+  PayloadUuid?: string
+  /**
+   * SEI发送间隔，单位毫秒，默认值为1000。
+   */
+  Interval?: number
+  /**
+   * 取值范围[0,1]，填1：发送关键帧时会确保带SEI；填0：发送关键帧时不确保带SEI。默认值为0。
+   */
+  FollowIdr?: number
 }
 
 /**
@@ -2747,30 +2851,13 @@ Hls 格式录制此参数不生效。
 }
 
 /**
- * 自定义透传SEI
+ * DeleteVoicePrint返回参数结构体
  */
-export interface McuPassThrough {
+export interface DeleteVoicePrintResponse {
   /**
-   * 透传SEI的payload内容。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PayloadContent: string
-  /**
-   * SEI消息的PayloadType，取值范围5、100-254（244除外，244为我们内部自定义的时间戳SEI）。
-注：部分播放器可能不支持PayloadType为5带PayloadUuid的标准类型，建议优先使用其他PayloadType。
-   */
-  PayloadType: number
-  /**
-   * PayloadType为5，PayloadUuid必须填写。PayloadType不是5时，不需要填写，填写会被后台忽略。该值必须是32长度的十六进制。
-   */
-  PayloadUuid?: string
-  /**
-   * SEI发送间隔，单位毫秒，默认值为1000。
-   */
-  Interval?: number
-  /**
-   * 取值范围[0,1]，填1：发送关键帧时会确保带SEI；填0：发送关键帧时不确保带SEI。默认值为0。
-   */
-  FollowIdr?: number
+  RequestId?: string
 }
 
 /**
@@ -2987,6 +3074,9 @@ export interface RecognizeConfig {
 - "zh": 中文（简体）
 - "zh-TW": 中文（繁体）
 - "en": 英语
+- "16k_zh_edu"：中文教育
+- "16k_zh_medical"：中文医疗
+- "16k_zh_court"：中文法庭
 
 **标准版：**
 - "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.
@@ -3019,7 +3109,6 @@ export interface RecognizeConfig {
 
 **注意：**
 如果缺少满足您需求的语言，请联系我们技术人员。
-
    */
   Language?: string
   /**
@@ -3463,6 +3552,32 @@ export interface VideoParams {
 }
 
 /**
+ * RegisterVoicePrint请求参数结构体
+ */
+export interface RegisterVoicePrintRequest {
+  /**
+   * 整个wav音频文件的base64字符串,其中wav文件限定为16k或8k采样率, 16bit位深, 单声道, 8到18秒有效音频时长,编码数据大小不超过2M
+   */
+  Audio: string
+  /**
+   * 毫秒时间戳
+   */
+  ReqTimestamp: number
+  /**
+   * 音频格式,目前只支持0,代表wav
+   */
+  AudioFormat: number
+  /**
+   * 音频名称,长度不要超过32
+   */
+  AudioName: string
+  /**
+   * 和声纹绑定的MetaInfo，长度最大不超过512
+   */
+  AudioMetaInfo?: string
+}
+
+/**
  * DescribePicture返回参数结构体
  */
 export interface DescribePictureResponse {
@@ -3730,6 +3845,16 @@ TranscriptionMode为0时，需要保证一个房间内只发起一个任务，�
 }
 
 /**
+ * DismissRoom返回参数结构体
+ */
+export interface DismissRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopStreamIngest返回参数结构体
  */
 export interface StopStreamIngestResponse {
@@ -3758,9 +3883,14 @@ export interface MixUserInfo {
 }
 
 /**
- * DismissRoom返回参数结构体
+ * DescribeTRTCRealTimeScaleData返回参数结构体
  */
-export interface DismissRoomResponse {
+export interface DescribeTRTCRealTimeScaleDataResponse {
+  /**
+   * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: TRTCDataResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3996,6 +4126,32 @@ export interface McuSeiParams {
 }
 
 /**
+ * UpdateVoicePrint请求参数结构体
+ */
+export interface UpdateVoicePrintRequest {
+  /**
+   * 声纹信息ID
+   */
+  VoicePrintId: string
+  /**
+   * 毫秒时间戳
+   */
+  ReqTimestamp: number
+  /**
+   * 音频格式,目前只支持0,代表wav
+   */
+  AudioFormat?: number
+  /**
+   * 整个wav音频文件的base64字符串,其中wav文件限定为16k或8k采样率, 16bit位深, 单声道, 8到18秒有效音频时长,编码数据大小不超过2M
+   */
+  Audio?: string
+  /**
+   * 和声纹绑定的MetaInfo，长度最大不超过512
+   */
+  AudioMetaInfo?: string
+}
+
+/**
  * StopAIConversation请求参数结构体
  */
 export interface StopAIConversationRequest {
@@ -4222,18 +4378,64 @@ export interface OneSdkAppIdTranscodeTimeUsagesInfo {
 }
 
 /**
- * DescribeTRTCMarketScaleMetricData返回参数结构体
+ * MCU混流输出流编码参数
  */
-export interface DescribeTRTCMarketScaleMetricDataResponse {
+export interface EncodeParams {
   /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
+   * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
    */
-  Data: TRTCDataResp
+  AudioSampleRate: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
    */
-  RequestId?: string
+  AudioBitrate: number
+  /**
+   * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   */
+  AudioChannels: number
+  /**
+   * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
+   */
+  VideoWidth?: number
+  /**
+   * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
+   */
+  VideoHeight?: number
+  /**
+   * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
+   */
+  VideoBitrate?: number
+  /**
+   * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
+   */
+  VideoFramerate?: number
+  /**
+   * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
+   */
+  VideoGop?: number
+  /**
+   * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
+红色：0xff0000，对应的十进制整数是16724736。
+黄色：0xffff00。对应的十进制整数是16776960。
+绿色：0x33cc00。对应的十进制整数是3394560。
+蓝色：0x0066ff。对应的十进制整数是26367。
+黑色：0x000000。对应的十进制整数是0。
+白色：0xFFFFFF。对应的十进制整数是16777215。
+灰色：0x999999。对应的十进制整数是10066329。
+   */
+  BackgroundColor?: number
+  /**
+   * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
+   */
+  BackgroundImageId?: number
+  /**
+   * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]。混流任务发起过程中，为了保持CDN链接的稳定，不要修改音频参数（codec、采样率、码率、声道数）。
+   */
+  AudioCodec?: number
+  /**
+   * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
+   */
+  BackgroundImageUrl?: string
 }
 
 /**
@@ -4395,6 +4597,20 @@ export interface McuCloudVod {
    * 腾讯云点播相关参数。
    */
   McuTencentVod?: McuTencentVod
+}
+
+/**
+ * StopMCUMixTranscode请求参数结构体
+ */
+export interface StopMCUMixTranscodeRequest {
+  /**
+   * TRTC的SDKAppId。
+   */
+  SdkAppId: number
+  /**
+   * 房间号。
+   */
+  RoomId: number
 }
 
 /**

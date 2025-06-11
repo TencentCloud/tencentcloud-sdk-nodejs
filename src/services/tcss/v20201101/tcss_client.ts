@@ -625,6 +625,7 @@ import {
   DescribeNetworkFirewallPolicyDiscoverResponse,
   DescribeAssetImageSimpleListResponse,
   DescribeComplianceAssetPolicyItemListResponse,
+  ModifyRiskDnsEventStatusRequest,
   ComplianceFilters,
   ImageVirusInfo,
   ModifyEscapeWhiteListResponse,
@@ -801,6 +802,7 @@ import {
   DescribeAccessControlRulesResponse,
   ModifyEscapeRuleResponse,
   DescribeSecLogVasInfoResponse,
+  ModifyRiskDnsEventStatusResponse,
   ModifyVirusAutoIsolateSettingResponse,
   AssetSimpleImageInfo,
   DescribeCompliancePolicyItemAffectedSummaryRequest,
@@ -3575,6 +3577,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyReverseShellStatusResponse) => void
   ): Promise<ModifyReverseShellStatusResponse> {
     return this.request("ModifyReverseShellStatus", req, cb)
+  }
+
+  /**
+   * 编辑恶意请求事件状态
+   */
+  async ModifyRiskDnsEventStatus(
+    req: ModifyRiskDnsEventStatusRequest,
+    cb?: (error: string, rep: ModifyRiskDnsEventStatusResponse) => void
+  ): Promise<ModifyRiskDnsEventStatusResponse> {
+    return this.request("ModifyRiskDnsEventStatus", req, cb)
   }
 
   /**

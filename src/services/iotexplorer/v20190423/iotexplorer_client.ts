@@ -401,6 +401,7 @@ import {
   BindCloudStorageUserResponse,
   DeleteTopicPolicyResponse,
   DeviceActivationDetail,
+  DiarySHLConfig,
   UnbindDevicesResponse,
   CreateBatchProductionResponse,
   TargetInfo,
@@ -796,7 +797,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除规则
+   * 删除规则。
    */
   async DeleteTopicRule(
     req: DeleteTopicRuleRequest,
@@ -1218,7 +1219,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量解绑子产品
+   * 批量解绑子产品。
    */
   async UnbindProducts(
     req: UnbindProductsRequest,
@@ -1430,7 +1431,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量绑定子产品
+   * 批量绑定子产品。
    */
   async BindProducts(
     req: BindProductsRequest,
@@ -1510,7 +1511,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取网关可绑定或解绑的子产品
+   * 用于获取网关可绑定或解绑的子产品。
    */
   async DescribeGatewaySubProducts(
     req: DescribeGatewaySubProductsRequest,

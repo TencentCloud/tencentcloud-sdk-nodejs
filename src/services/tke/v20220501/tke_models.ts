@@ -706,6 +706,16 @@ export interface MachineUpgradeSettings {
 }
 
 /**
+ * DeleteClusterMachines返回参数结构体
+ */
+export interface DeleteClusterMachinesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartMachines请求参数结构体
  */
 export interface StartMachinesRequest {
@@ -1011,6 +1021,28 @@ export interface GPUParams {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomGPUDriver?: string
+}
+
+/**
+ * DeleteClusterMachines请求参数结构体
+ */
+export interface DeleteClusterMachinesRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 节点名列表
+   */
+  MachineNames: Array<string>
+  /**
+   * 删除节点时是否缩容节点池，true为缩容
+   */
+  EnableScaleDown?: boolean
+  /**
+   * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例）retain（仅移除，保留实例）
+   */
+  InstanceDeleteMode?: string
 }
 
 /**

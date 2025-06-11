@@ -286,6 +286,24 @@ export interface RecordGroupInfo {
 }
 
 /**
+ * DescribeDomainVipList返回参数结构体
+ */
+export interface DescribeDomainVipListResponse {
+  /**
+   * 符合筛选条件的套餐总数
+   */
+  TotalCount?: number
+  /**
+   * 套餐信息列表
+   */
+  PackageList?: Array<PackageListItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySubdomainStatus请求参数结构体
  */
 export interface ModifySubdomainStatusRequest {
@@ -1447,6 +1465,20 @@ export interface BatchRecordInfo {
 }
 
 /**
+ * 键值对
+ */
+export interface KeyValue {
+  /**
+   * 键
+   */
+  Key: string
+  /**
+   * 值
+   */
+  Value?: string
+}
+
+/**
  * 线路分组信息
  */
 export interface LineGroupInfo {
@@ -1586,6 +1618,56 @@ export interface DescribeSnapshotConfigRequest {
 }
 
 /**
+ * 增值服务信息
+ */
+export interface VasListItem {
+  /**
+   * 规格总数
+   */
+  LimitNumber: number
+  /**
+   * 购买时间
+   */
+  StartedAt: string
+  /**
+   * 到期时间
+   */
+  EndedAt: string
+  /**
+   * 资源唯一 ID
+   */
+  ResourceId: string
+  /**
+   * 自动续费标识
+   */
+  AutoRenew: string
+  /**
+   * 已绑定的域名
+   */
+  Domain: string
+  /**
+   * 绑定类型
+   */
+  BindType: string
+  /**
+   * 增值服务类型
+   */
+  Key: string
+  /**
+   * 增值服务名
+   */
+  Name: string
+  /**
+   * 是否可续费
+   */
+  CanRenew: boolean
+  /**
+   * 是否只允许付费套餐域名可购买
+   */
+  VipDomain: boolean
+}
+
+/**
  * 解析线路信息
  */
 export interface LineInfo {
@@ -1628,21 +1710,33 @@ export interface DescribeRecordLineListRequest {
 }
 
 /**
- * DescribeRecordList返回参数结构体
+ * DescribeDomainVipList请求参数结构体
  */
-export interface DescribeRecordListResponse {
+export interface DescribeDomainVipListRequest {
   /**
-   * 记录的数量统计信息
+   * 偏移量，默认值为0。
    */
-  RecordCountInfo?: RecordCountInfo
+  Offset: number
   /**
-   * 获取的记录列表
+   * 限制数量，默认值为20。
    */
-  RecordList?: Array<RecordListItem>
+  Limit: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 通过关键字搜索域名关联的套餐，默认值为空，为空时不作为筛选条件。
    */
-  RequestId?: string
+  Keyword?: string
+  /**
+   * 使用资源ID列表查询
+   */
+  ResourceIdList?: Array<string>
+  /**
+   * 需要筛选的套餐版本
+   */
+  GradeList?: Array<string>
+  /**
+   * 是否只获取未绑定域名套餐
+   */
+  GetUnbindResource?: boolean
 }
 
 /**
@@ -2732,7 +2826,7 @@ export interface DomainCountInfo {
  */
 export interface CreateSubdomainValidateTXTValueResponse {
   /**
-   * 需要添加 TXT 记录的域名。
+   * 需要添加 TXT 记录的主域名。
    */
   Domain?: string
   /**
@@ -2747,6 +2841,10 @@ export interface CreateSubdomainValidateTXTValueResponse {
    * 需要添加 TXT 记录的记录值。
    */
   Value?: string
+  /**
+   * 需要添加 TXT 记录的上级域名(可选，主域名和上级域名任选一个添加即可)。
+   */
+  ParentDomain?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3317,6 +3415,76 @@ export interface ModifyPackageAutoRenewRequest {
 }
 
 /**
+ * 套餐列表元素
+ */
+export interface PackageListItem {
+  /**
+   * 域名ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainId: number
+  /**
+   * 域名的原始格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain: string
+  /**
+   * 套餐等级代码
+   */
+  Grade: string
+  /**
+   * 套餐名称
+   */
+  GradeTitle: string
+  /**
+   * 付费套餐开通时间
+   */
+  VipStartAt: string
+  /**
+   * 付费套餐到期时间
+   */
+  VipEndAt: string
+  /**
+   * 域名是否开通VIP自动续费，是：YES，否：NO，默认：DEFAULT
+   */
+  VipAutoRenew: string
+  /**
+   * 套餐剩余换绑/绑定域名次数
+   */
+  RemainTimes: number
+  /**
+   * 套餐资源ID
+   */
+  ResourceId: string
+  /**
+   * 域名等级代号
+   */
+  GradeLevel: number
+  /**
+   * 套餐绑定的域名的状态
+   */
+  Status: string
+  /**
+   * 套餐是否处于宽限期
+   */
+  IsGracePeriod: string
+  /**
+   * 是否降级
+   */
+  Downgrade: boolean
+  /**
+   * 关联安全防护信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityInfo: SecurityInfo
+  /**
+   * 套餐绑定的域名是否为子域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSubDomain: boolean
+}
+
+/**
  * CreateDomainsAnalyticsFile请求参数结构体
  */
 export interface CreateDomainsAnalyticsFileRequest {
@@ -3391,17 +3559,29 @@ export interface BatchSearchDomainInfo {
 }
 
 /**
- * 键值对
+ * DescribeVasList请求参数结构体
  */
-export interface KeyValue {
+export interface DescribeVasListRequest {
   /**
-   * 键
+   * 偏移量，默认值为0。
    */
-  Key: string
+  Offset?: number
   /**
-   * 值
+   * 限制数量，默认值为20。
    */
-  Value?: string
+  Limit?: number
+  /**
+   * 域名ID
+   */
+  DomainId?: number
+  /**
+   * 使用资源 ID 列表查询
+   */
+  ResourceIdList?: Array<string>
+  /**
+   * 增值服务类型
+   */
+  LimitType?: string
 }
 
 /**
@@ -4109,6 +4289,24 @@ export interface DescribeRecordSnapshotRollbackResultResponse {
 }
 
 /**
+ * DescribeVasList返回参数结构体
+ */
+export interface DescribeVasListResponse {
+  /**
+   * 符合筛选条件的套餐总数
+   */
+  TotalCount?: number
+  /**
+   * 增值服务信息列表
+   */
+  VasList?: Array<VasListItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySnapshotConfig请求参数结构体
  */
 export interface ModifySnapshotConfigRequest {
@@ -4635,6 +4833,24 @@ export interface ModifyRecordRemarkRequest {
 }
 
 /**
+ * 套餐中安全防护信息
+ */
+export interface SecurityInfo {
+  /**
+   * 是否是免费赠送：yes-是；no-不是
+   */
+  IsDefendFree: string
+  /**
+   * 防护类型
+   */
+  Key: string
+  /**
+   * 资源 ID
+   */
+  ResourceId: string
+}
+
+/**
  * DeleteRecordBatch请求参数结构体
  */
 export interface DeleteRecordBatchRequest {
@@ -4737,6 +4953,24 @@ export interface ModifyDomainLockResponse {
    * 域名锁定信息
    */
   LockInfo?: LockInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRecordList返回参数结构体
+ */
+export interface DescribeRecordListResponse {
+  /**
+   * 记录的数量统计信息
+   */
+  RecordCountInfo?: RecordCountInfo
+  /**
+   * 获取的记录列表
+   */
+  RecordList?: Array<RecordListItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

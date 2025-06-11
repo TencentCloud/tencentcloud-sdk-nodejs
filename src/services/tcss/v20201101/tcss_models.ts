@@ -16191,6 +16191,43 @@ export interface DescribeComplianceAssetPolicyItemListResponse {
 }
 
 /**
+ * ModifyRiskDnsEventStatus请求参数结构体
+ */
+export interface ModifyRiskDnsEventStatusRequest {
+  /**
+   * 恶意请求事件ID数组。加白时必需，否则Filters和EventIDSet二者选其一。
+   */
+  EventIDSet: Array<number | bigint>
+  /**
+   * 标记事件的状态：
+EVENT_UNDEAL:未处理（取消忽略），
+EVENT_DEALED:已处理，
+EVENT_IGNORE:忽略，
+EVENT_DELETE：已删除
+EVENT_ADD_WHITE：加白
+EVENT_ISOLATE_CONTAINER：隔离容器
+EVENT_RESOTRE_CONTAINER：恢复容器
+   */
+  EventStatus: string
+  /**
+   * 白名单域名/IP
+   */
+  Address?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 相同的请求域名/IP事件加白处理
+   */
+  AllSameEventAddWhite?: boolean
+  /**
+   * 加白的事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP
+   */
+  AddWhiteEventType?: string
+}
+
+/**
  * 键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
  */
 export interface ComplianceFilters {
@@ -20752,6 +20789,16 @@ export interface DescribeSecLogVasInfoResponse {
    * 资源详情数组对象
    */
   ResourceDetailList?: Array<VasInfoResourceDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyRiskDnsEventStatus返回参数结构体
+ */
+export interface ModifyRiskDnsEventStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

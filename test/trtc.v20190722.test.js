@@ -138,9 +138,9 @@ it("trtc.v20190722.StartAIConversation", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeAIConversation", async function () {
+it("trtc.v20190722.DeleteVoicePrint", async function () {
     try {
-       const data = await client.DescribeAIConversation({})
+       const data = await client.DeleteVoicePrint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +298,16 @@ it("trtc.v20190722.DescribeTRTCMarketScaleData", async function () {
     }
 })
 
+it("trtc.v20190722.RegisterVoicePrint", async function () {
+    try {
+       const data = await client.RegisterVoicePrint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StopWebRecord", async function () {
     try {
        const data = await client.StopWebRecord({})
@@ -321,6 +331,16 @@ it("trtc.v20190722.StopPublishCdnStream", async function () {
 it("trtc.v20190722.CreateCloudRecording", async function () {
     try {
        const data = await client.CreateCloudRecording({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.DescribeAIConversation", async function () {
+    try {
+       const data = await client.DescribeAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +468,16 @@ it("trtc.v20190722.DescribeRecordStatistic", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeVoicePrint", async function () {
+    try {
+       const data = await client.DescribeVoicePrint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeTrtcMcuTranscodeTime", async function () {
     try {
        const data = await client.DescribeTrtcMcuTranscodeTime({})
@@ -521,6 +551,16 @@ it("trtc.v20190722.DeleteCloudRecording", async function () {
 it("trtc.v20190722.DescribePicture", async function () {
     try {
        const data = await client.DescribePicture({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.UpdateVoicePrint", async function () {
+    try {
+       const data = await client.UpdateVoicePrint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

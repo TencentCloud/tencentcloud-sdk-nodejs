@@ -78,6 +78,26 @@ it("ioa.v20220601.CreatePrivilegeCode", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeSoftwareInformation", async function () {
+    try {
+       const data = await client.DescribeSoftwareInformation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDeviceHardwareInfoList", async function () {
+    try {
+       const data = await client.DescribeDeviceHardwareInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeRootAccountGroup", async function () {
     try {
        const data = await client.DescribeRootAccountGroup({})

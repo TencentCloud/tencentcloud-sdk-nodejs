@@ -13540,6 +13540,13 @@ export interface ImageEraseLogoConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageAreaBoxes?: Array<ImageAreaBoxInfo>
+  /**
+   * 图片框选区域类型，可选值：
+<li>logo：图标；</li>
+<li>text：文字；</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectTypes?: Array<string>
 }
 
 /**

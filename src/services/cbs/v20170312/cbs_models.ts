@@ -60,7 +60,7 @@ export interface DescribeDiskBackupsRequest {
    */
   Limit?: number
   /**
-   * 输出云硬盘备份点列表的排列顺序。取值范围：<br><li>ASC：升序排列</li><br><li>DESC：降序排列。</li>
+   * 输出云硬盘备份点列表的排列顺序，默认排序：ASC。取值范围：<br><li>ASC：升序排列</li><br><li>DESC：降序排列。</li>
    */
   Order?: string
   /**
@@ -93,6 +93,7 @@ export interface CreateSnapshotGroupRequest {
 export interface AutoSnapshotPolicy {
   /**
    * 已绑定当前定期快照策略的云盘ID列表。
+DescribeDiskAssociatedAutoSnapshotPolicy场景下该字段返回为空。
    */
   DiskIdSet?: Array<string>
   /**
@@ -108,7 +109,7 @@ export interface AutoSnapshotPolicy {
    */
   AutoSnapshotPolicyState?: string
   /**
-   * 是否是跨账号复制快照快照, 1：是, 0: 不是
+   * 是否是跨账号复制快照, 1：是, 0: 不是
    */
   IsCopyToRemote?: number
   /**
@@ -586,7 +587,7 @@ export interface CreateDisksRequest {
    */
   DiskBackupQuota?: number
   /**
-   * 创建云盘时是否开启性能突发。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）。
+   * 创建云盘时是否开启性能突发。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且云盘大小不小于460GiB。
    */
   BurstPerformance?: boolean
   /**
@@ -1209,7 +1210,7 @@ export interface Placement {
    */
   Zone: string
   /**
-   * 围笼Id。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。
+   * 围笼Id，可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CageId?: string
@@ -1228,7 +1229,7 @@ export interface Placement {
    */
   CdcName?: string
   /**
-   * 实例所属的独享集群ID。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。
+   * 实例所属的独享集群ID。可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
@@ -2605,6 +2606,7 @@ export interface ApplySnapshotRequest {
   DiskId: string
   /**
    * 回滚前是否执行自动关机，仅支持回滚快照至已挂载的云硬盘时传入。
+此参数为true时，AutoStartInstance才能为true。
    */
   AutoStopInstance?: boolean
   /**

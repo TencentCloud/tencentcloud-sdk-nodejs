@@ -58,6 +58,16 @@ it("hai.v20230812.DescribeScenes", async function () {
     }
 })
 
+it("hai.v20230812.ResizeInstanceDisk", async function () {
+    try {
+       const data = await client.ResizeInstanceDisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})
@@ -88,6 +98,16 @@ it("hai.v20230812.StartInstance", async function () {
     }
 })
 
+it("hai.v20230812.TerminateInstances", async function () {
+    try {
+       const data = await client.TerminateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.CreateMuskPrompt", async function () {
     try {
        const data = await client.CreateMuskPrompt({})
@@ -98,9 +118,9 @@ it("hai.v20230812.CreateMuskPrompt", async function () {
     }
 })
 
-it("hai.v20230812.TerminateInstances", async function () {
+it("hai.v20230812.ResetInstancesPassword", async function () {
     try {
-       const data = await client.TerminateInstances({})
+       const data = await client.ResetInstancesPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2718,6 +2718,16 @@ it("tcss.v20201101.ModifyReverseShellStatus", async function () {
     }
 })
 
+it("tcss.v20201101.ModifyRiskDnsEventStatus", async function () {
+    try {
+       const data = await client.ModifyRiskDnsEventStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeSecLogJoinTypeList", async function () {
     try {
        const data = await client.DescribeSecLogJoinTypeList({})

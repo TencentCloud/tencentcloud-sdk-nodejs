@@ -10358,7 +10358,7 @@ export interface DescribeUrlViolationsResponse {
  */
 export interface DescribePurgeTasksResponse {
   /**
-   * 详细刷新记录
+   * 详细刷新纪录
    */
   PurgeLogs?: Array<PurgeTask>
   /**

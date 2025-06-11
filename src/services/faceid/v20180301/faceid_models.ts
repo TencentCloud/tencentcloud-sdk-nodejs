@@ -750,10 +750,11 @@ export interface BankCard2EVerificationResponse {
   '-13': '受限制的卡'。
   '-14': '密码错误次数超限'。
   '-15': '发卡行不支持此交易'。
+  '-18': '卡状态异常或卡号错误'。
 
 - 不计费结果码：
   '-2': '姓名校验不通过'。
-  '-3': '银行卡号码有误'。
+  '-3': '银行卡号格式有误'。
   '-16': '验证中心服务繁忙'。
   '-17': '验证次数超限，请次日重试'。
 
@@ -901,6 +902,11 @@ export interface DetectInfoVideoData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessVideo?: string
+  /**
+   * 当次token中所有用户活体视频的COS存储路径，仅当您开启数据存储服务且“IsReturnAllVideo”入参取值为true 时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LivenessVideos?: Array<VideoDetailData>
 }
 
 /**
@@ -982,11 +988,13 @@ export interface CheckBankCardInformationResponse {
 - 收费结果码：
 0: 查询成功
 -1: 未查到信息
+-5: 卡号无效
 
 - 不收费结果码：
 -2：验证中心服务繁忙
 -3：银行卡不存在
 -4：认证次数超过当日限制，请次日重试
+-6:   暂不支持该银行卡种
 
    */
   Result?: string
@@ -1471,6 +1479,22 @@ export interface DetectDetail {
 }
 
 /**
+ * 核身过程视频信息。
+ */
+export interface VideoDetailData {
+  /**
+   * 本次活体一比一请求的唯一标记。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Seq?: string
+  /**
+   * 活体视频的base64编码。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Video?: string
+}
+
+/**
  * 模版检索详细信息
  */
 export interface RetrievalLivenessExtraInfo {
@@ -1829,11 +1853,12 @@ export interface BankCard4EVerificationResponse {
 '-15': '受限制的卡'。
 '-16': '密码错误次数超限'。
 '-17': '发卡行不支持此交易'。
+'-21': '卡状态异常或卡号错误'。
 
 - 不收费结果码：
 '-2': '姓名校验不通过'。
 '-3': '身份证号码有误'。
-'-4': '银行卡号码有误'。
+'-4': '银行卡号格式有误'。
 '-5': '手机号码不合法'。
 '-18': '验证中心服务繁忙'。
 '-19': '验证次数超限，请次日重试'。
@@ -2209,11 +2234,12 @@ export interface BankCardVerificationResponse {
 '-14': '受限制的卡'。
 '-15': '密码错误次数超限'。
 '-16': '发卡行不支持此交易'。
+'-20': '卡状态异常或卡号错误'。
 
 - 不收费结果码：
 '-2': '姓名校验不通过'。
 '-3': '身份证号码有误'。
-'-4': '银行卡号码有误'。
+'-4': '银行卡号格式有误'。
 '-17': '验证中心服务繁忙'。
 '-18': '验证次数超限，请次日重试'。
 '-19': '该证件号暂不支持核验，当前仅支持二代身份证'。	
@@ -2705,6 +2731,10 @@ export interface GetDetectInfoEnhancedRequest {
    * 是否对回包整体进行加密。
    */
   IsEncryptResponse?: boolean
+  /**
+   * 是否需要返回认证中间过程的刷脸重试视频，默认不开启，多段视频需要存储到COS空间中，因此开启后还需要额外开启数据存储服务才可生效。详见[数据存储指引](https://cloud.tencent.com/document/product/1007/104229)。
+   */
+  IsReturnAllVideo?: boolean
 }
 
 /**

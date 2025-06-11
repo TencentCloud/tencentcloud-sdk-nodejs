@@ -28,9 +28,9 @@ it("tke.v20220501.DescribeNodePools", async function () {
     }
 })
 
-it("tke.v20220501.ModifyNodePool", async function () {
+it("tke.v20220501.DeleteClusterMachines", async function () {
     try {
-       const data = await client.ModifyNodePool({})
+       const data = await client.DeleteClusterMachines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -41,6 +41,16 @@ it("tke.v20220501.ModifyNodePool", async function () {
 it("tke.v20220501.RebootMachines", async function () {
     try {
        const data = await client.RebootMachines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.ModifyNodePool", async function () {
+    try {
+       const data = await client.ModifyNodePool({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

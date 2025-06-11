@@ -51,26 +51,28 @@ import {
   DescribeCallDetailInfoRequest,
   DescribeTRTCMarketScaleDataResponse,
   McuTencentVod,
+  RegisterVoicePrintResponse,
   ModifyPictureRequest,
   DescribeWebRecordResponse,
   DescribeUserInfoRequest,
   DescribeRelayUsageRequest,
   WaterMarkParams,
   DescribeRecordStatisticResponse,
-  StartMCUMixTranscodeByStrRoomIdResponse,
+  DeleteVoicePrintRequest,
   CloudStorage,
+  VoicePrint,
   DescribeTrtcUsageResponse,
   McuRecordParams,
   DismissRoomByStrRoomIdRequest,
   DescribeTRTCMarketQualityMetricDataRequest,
   DescribeWebRecordRequest,
-  DescribeTRTCRealTimeScaleDataResponse,
+  AmbientSound,
   DescribeRecordStatisticRequest,
   DescribeRoomInfoRequest,
   StorageParams,
   CreateBasicModerationRequest,
   CloudVod,
-  EncodeParams,
+  DescribeTRTCMarketScaleMetricDataResponse,
   EmulateMobileParams,
   DescribeCallDetailInfoResponse,
   DescribeTRTCRealTimeQualityDataResponse,
@@ -80,7 +82,9 @@ import {
   MixTranscodeParams,
   StopStreamIngestRequest,
   DescribeTRTCMarketQualityDataResponse,
+  DescribeVoicePrintResponse,
   SmallVideoLayoutParams,
+  VoicePrintInfo,
   SubscribeStreamUserIds,
   WaterMarkImage,
   McuUserInfoParams,
@@ -97,18 +101,21 @@ import {
   McuLayout,
   DescribeUserInfoResponse,
   RemoveUserByStrRoomIdResponse,
+  DescribeVoicePrintRequest,
   DescribeTRTCRealTimeScaleMetricDataResponse,
   UpdateStreamIngestResponse,
   StartMCUMixTranscodeRequest,
   WebRecordVideoParams,
   McuWaterMarkImage,
   StartPublishCdnStreamResponse,
+  StartMCUMixTranscodeByStrRoomIdResponse,
   TrtcUsage,
   DescribeTRTCMarketScaleMetricDataRequest,
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
+  UpdateVoicePrintResponse,
   DescribeRecordingUsageResponse,
-  StopMCUMixTranscodeRequest,
+  McuPassThrough,
   ModifyPictureResponse,
   DescribeRecordingUsageRequest,
   StorageFile,
@@ -128,7 +135,7 @@ import {
   DescribeCloudRecordingRequest,
   TencentVod,
   RecordParams,
-  McuPassThrough,
+  DeleteVoicePrintResponse,
   DescribeTRTCRealTimeQualityMetricDataResponse,
   DescribeTRTCRealTimeQualityDataRequest,
   StartWebRecordResponse,
@@ -157,6 +164,7 @@ import {
   DescribePictureRequest,
   TRTCDataResp,
   VideoParams,
+  RegisterVoicePrintRequest,
   DescribePictureResponse,
   DescribeTrtcRoomUsageRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
@@ -169,9 +177,10 @@ import {
   StartMCUMixTranscodeByStrRoomIdRequest,
   DescribeCloudRecordingResponse,
   StartAITranscriptionRequest,
+  DismissRoomResponse,
   StopStreamIngestResponse,
   MixUserInfo,
-  DismissRoomResponse,
+  DescribeTRTCRealTimeScaleDataResponse,
   DescribeTRTCMarketQualityDataRequest,
   UpdatePublishCdnStreamRequest,
   StartWebRecordRequest,
@@ -183,6 +192,7 @@ import {
   DeletePictureRequest,
   StopWebRecordRequest,
   McuSeiParams,
+  UpdateVoicePrintRequest,
   StopAIConversationRequest,
   EventMessage,
   UpdatePublishCdnStreamResponse,
@@ -193,7 +203,7 @@ import {
   DeleteBasicModerationResponse,
   DescribeStreamIngestRequest,
   OneSdkAppIdTranscodeTimeUsagesInfo,
-  DescribeTRTCMarketScaleMetricDataResponse,
+  EncodeParams,
   McuAudioParams,
   PresetLayoutConfig,
   McuPublishCdnParam,
@@ -202,6 +212,7 @@ import {
   SeriesInfo,
   WaterMarkTimestamp,
   McuCloudVod,
+  StopMCUMixTranscodeRequest,
   SingleSubscribeParams,
   PublishCdnParams,
   DescribeAITranscriptionResponse,
@@ -384,13 +395,13 @@ TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即�
   }
 
   /**
-   * 查询AI对话任务状态。
+   * 传入声纹ID，删除之前注册的声纹信息
    */
-  async DescribeAIConversation(
-    req: DescribeAIConversationRequest,
-    cb?: (error: string, rep: DescribeAIConversationResponse) => void
-  ): Promise<DescribeAIConversationResponse> {
-    return this.request("DescribeAIConversation", req, cb)
+  async DeleteVoicePrint(
+    req: DeleteVoicePrintRequest,
+    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
+  ): Promise<DeleteVoicePrintResponse> {
+    return this.request("DeleteVoicePrint", req, cb)
   }
 
   /**
@@ -612,6 +623,16 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+   * 传入音频base64串，注册声纹信息，返回声纹ID
+   */
+  async RegisterVoicePrint(
+    req: RegisterVoicePrintRequest,
+    cb?: (error: string, rep: RegisterVoicePrintResponse) => void
+  ): Promise<RegisterVoicePrintResponse> {
+    return this.request("RegisterVoicePrint", req, cb)
+  }
+
+  /**
    * 停止页面录制任务
    */
   async StopWebRecord(
@@ -651,6 +672,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: CreateCloudRecordingResponse) => void
   ): Promise<CreateCloudRecordingResponse> {
     return this.request("CreateCloudRecording", req, cb)
+  }
+
+  /**
+   * 查询AI对话任务状态。
+   */
+  async DescribeAIConversation(
+    req: DescribeAIConversationRequest,
+    cb?: (error: string, rep: DescribeAIConversationResponse) => void
+  ): Promise<DescribeAIConversationResponse> {
+    return this.request("DescribeAIConversation", req, cb)
   }
 
   /**
@@ -803,6 +834,16 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+   * 查询先前注册的声纹信息
+   */
+  async DescribeVoicePrint(
+    req: DescribeVoicePrintRequest,
+    cb?: (error: string, rep: DescribeVoicePrintResponse) => void
+  ): Promise<DescribeVoicePrintResponse> {
+    return this.request("DescribeVoicePrint", req, cb)
+  }
+
+  /**
      * 查询旁路转码计费时长。
 - 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
 - 单次查询统计区间最多不能超过31天。
@@ -892,6 +933,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DescribePictureResponse) => void
   ): Promise<DescribePictureResponse> {
     return this.request("DescribePicture", req, cb)
+  }
+
+  /**
+   * 传入声纹ID以及对应音频信息，更新对应声纹信息
+   */
+  async UpdateVoicePrint(
+    req: UpdateVoicePrintRequest,
+    cb?: (error: string, rep: UpdateVoicePrintResponse) => void
+  ): Promise<UpdateVoicePrintResponse> {
+    return this.request("UpdateVoicePrint", req, cb)
   }
 
   /**

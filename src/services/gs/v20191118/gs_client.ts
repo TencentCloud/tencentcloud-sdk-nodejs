@@ -74,6 +74,7 @@ import {
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
+  CreateAndroidInstancesRequest,
   AndroidInstanceError,
   ModifyAndroidInstancesUserIdRequest,
   InstallAndroidInstancesAppWithURLRequest,
@@ -120,7 +121,7 @@ import {
   CreateAndroidInstanceADBResponse,
   StopAndroidInstancesRequest,
   StartPublishStreamToCSSRequest,
-  Filter,
+  CreateSessionResponse,
   DistributeFileToAndroidInstancesRequest,
   EnableAndroidInstancesAppRequest,
   Error,
@@ -140,6 +141,7 @@ import {
   SetAndroidInstancesFGAppKeepAliveRequest,
   DeleteAndroidInstanceLabelResponse,
   ModifyAndroidAppResponse,
+  DistributePhotoToAndroidInstancesRequest,
   SetAndroidInstancesFGAppKeepAliveResponse,
   AndroidInstanceProperty,
   DescribeAndroidInstanceImagesRequest,
@@ -160,7 +162,7 @@ import {
   CreateCosCredentialResponse,
   UploadFileToAndroidInstancesResponse,
   AndroidInstanceAppBlacklist,
-  CreateAndroidInstancesRequest,
+  DistributePhotoToAndroidInstancesResponse,
   CreateAndroidInstanceLabelResponse,
   StartPublishStreamResponse,
   AndroidInstanceImage,
@@ -171,7 +173,7 @@ import {
   SetAndroidInstancesBGAppKeepAliveResponse,
   UploadFilesToAndroidInstancesResponse,
   RebootAndroidInstancesRequest,
-  CreateSessionResponse,
+  Filter,
   AndroidInstanceAppInfo,
   DeleteAndroidAppRequest,
   LabelRequirement,
@@ -394,7 +396,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 安装安卓实例应用
+   * 通过 URL 安装安卓实例应用
    */
   async InstallAndroidInstancesAppWithURL(
     req: InstallAndroidInstancesAppWithURLRequest,
@@ -404,7 +406,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建安卓实例
+   * 查询安卓实例标签
    */
   async DescribeAndroidInstanceLabels(
     req: DescribeAndroidInstanceLabelsRequest,
@@ -434,7 +436,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动安卓实例应用
+   * 重启安卓实例应用
    */
   async RestartAndroidInstancesApp(
     req: RestartAndroidInstancesAppRequest,
@@ -454,7 +456,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建安卓实例
+   * 删除安卓实例标签
    */
   async DeleteAndroidInstanceLabel(
     req: DeleteAndroidInstanceLabelRequest,
@@ -474,7 +476,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建安卓实例
+   * 创建安卓实例标签
    */
   async CreateAndroidInstanceLabel(
     req: CreateAndroidInstanceLabelRequest,
@@ -564,6 +566,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 将一张照片批量分发到多个实例的相册中，一次接口调用触发一次照片分发，一次照片分发只会从公网下载一次，然后照片会走内网分发到实例列表中的实例。
+   */
+  async DistributePhotoToAndroidInstances(
+    req: DistributePhotoToAndroidInstancesRequest,
+    cb?: (error: string, rep: DistributePhotoToAndroidInstancesResponse) => void
+  ): Promise<DistributePhotoToAndroidInstancesResponse> {
+    return this.request("DistributePhotoToAndroidInstances", req, cb)
+  }
+
+  /**
    * 查询安卓实例黑名单
    */
   async DescribeAndroidInstancesAppBlacklist(
@@ -574,7 +586,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启安卓实例
+   * 关机安卓实例
    */
   async StopAndroidInstances(
     req: StopAndroidInstancesRequest,
@@ -624,7 +636,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启安卓实例
+   * 开机安卓实例
    */
   async StartAndroidInstances(
     req: StartAndroidInstancesRequest,
@@ -881,7 +893,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改安卓实例分辨率。需要注意的是该接口可能导致正在运行的应用出现闪退，所以建议在实例维护时期才进行调用。
+   * 批量修改安卓实例的标签
    */
   async ModifyAndroidInstancesLabels(
     req: ModifyAndroidInstancesLabelsRequest,

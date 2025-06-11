@@ -20,22 +20,26 @@ import { ClientConfig } from "../../../common/interface"
 import {
   NetworkStatus,
   InquirePriceRunInstancesResponse,
-  StopInstanceRequest,
+  ResizeInstanceDiskResponse,
   DescribeServiceLoginSettingsResponse,
+  ResetInstancesPasswordResponse,
   DescribeInstanceNetworkStatusResponse,
   Instance,
+  TerminateInstancesRequest,
   TerminateInstancesResponse,
   DescribeApplicationsResponse,
   StartInstanceRequest,
   LoginSetting,
   RegionInfo,
+  ResizeInstanceDiskRequest,
   Price,
-  TerminateInstancesRequest,
+  StopInstanceRequest,
   DescribeMuskPromptsRequest,
   DescribeScenesResponse,
   DescribeApplicationsRequest,
   SceneInfo,
   CreateApplicationRequest,
+  ResetInstancesPasswordRequest,
   RunInstancesRequest,
   DescribeInstancesResponse,
   SystemDisk,
@@ -112,6 +116,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ResizeInstanceDisk）用于对指定HAI实例进行扩容云硬盘操作。
+   */
+  async ResizeInstanceDisk(
+    req: ResizeInstanceDiskRequest,
+    cb?: (error: string, rep: ResizeInstanceDiskResponse) => void
+  ): Promise<ResizeInstanceDiskResponse> {
+    return this.request("ResizeInstanceDisk", req, cb)
+  }
+
+  /**
    * 本接口（DescribeRegions）用于查询地域列表
    */
   async DescribeRegions(
@@ -143,6 +157,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (TerminateInstances) 用于主动退还实例。
+   */
+  async TerminateInstances(
+    req: TerminateInstancesRequest,
+    cb?: (error: string, rep: TerminateInstancesResponse) => void
+  ): Promise<TerminateInstancesResponse> {
+    return this.request("TerminateInstances", req, cb)
+  }
+
+  /**
    * 创建musk prompt 任务
    */
   async CreateMuskPrompt(
@@ -153,13 +177,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (TerminateInstances) 用于主动退还实例。
+   * 本接口 (ResetInstancesPassword) 用于重置实例的用户密码。
    */
-  async TerminateInstances(
-    req: TerminateInstancesRequest,
-    cb?: (error: string, rep: TerminateInstancesResponse) => void
-  ): Promise<TerminateInstancesResponse> {
-    return this.request("TerminateInstances", req, cb)
+  async ResetInstancesPassword(
+    req: ResetInstancesPasswordRequest,
+    cb?: (error: string, rep: ResetInstancesPasswordResponse) => void
+  ): Promise<ResetInstancesPasswordResponse> {
+    return this.request("ResetInstancesPassword", req, cb)
   }
 
   /**

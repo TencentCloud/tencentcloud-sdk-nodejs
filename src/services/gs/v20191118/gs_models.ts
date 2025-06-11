@@ -945,6 +945,43 @@ export interface DeleteAndroidAppVersionResponse {
 }
 
 /**
+ * CreateAndroidInstances请求参数结构体
+ */
+export interface CreateAndroidInstancesRequest {
+  /**
+   * 安卓实例可用区。
+ap-guangzhou-3：广州三区
+ap-shenzhen-1：深圳一区
+ap-xian-ec-1：西安一区
+ap-hangzhou-ec-1：杭州一区
+   */
+  Zone: string
+  /**
+   * 安卓实例类型。
+A1：单开
+A2：双开
+A3：三开
+A4：四开
+A5：五开
+A6：六开
+   */
+  Type: string
+  /**
+   * 当 HostSerialNumbers 不为空时，该参数表示每个宿主机要创建的安卓实例数量；
+当 HostSerialNumbers 为空时，该参数表示要创建安卓实例的总数量，最大值为 100。
+   */
+  Number: number
+  /**
+   * 宿主机 ID 列表。可以指定宿主机 ID 进行创建；也可以不指定由系统自动分配宿主机。
+   */
+  HostSerialNumbers?: Array<string>
+  /**
+   * 镜像 ID。如果不填，将使用默认的系统镜像
+   */
+  ImageId?: string
+}
+
+/**
  * 安卓实例错误信息，用于批量安卓实例操作中返回部分操作错误的情况
  */
 export interface AndroidInstanceError {
@@ -1460,6 +1497,8 @@ export interface DescribeAndroidInstancesRequest {
    * 字段过滤器。Filter 的 Name 有以下值：
 Name：实例名称
 UserId：实例用户ID
+HostSerialNumber：宿主机序列号
+HostServerSerialNumber：机箱序列号
    */
   Filters?: Array<Filter>
 }
@@ -1681,17 +1720,25 @@ export interface StartPublishStreamToCSSRequest {
 }
 
 /**
- * 过滤
+ * CreateSession返回参数结构体
  */
-export interface Filter {
+export interface CreateSessionResponse {
   /**
-   * 字段名
+   * 服务端session信息，返回给JSSDK
    */
-  Name: string
+  ServerSession?: string
   /**
-   * 字段值列表
+   * 【已废弃】
    */
-  Values: Array<string>
+  RoleNumber?: string
+  /**
+   * 【互动云游】角色；Player表示玩家；Viewer表示观察者
+   */
+  Role?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2000,6 +2047,20 @@ export interface ModifyAndroidAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DistributePhotoToAndroidInstances请求参数结构体
+ */
+export interface DistributePhotoToAndroidInstancesRequest {
+  /**
+   * 安卓实例 ID 列表
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 照片下载 URL
+   */
+  PhotoURL: string
 }
 
 /**
@@ -2415,40 +2476,17 @@ export interface AndroidInstanceAppBlacklist {
 }
 
 /**
- * CreateAndroidInstances请求参数结构体
+ * DistributePhotoToAndroidInstances返回参数结构体
  */
-export interface CreateAndroidInstancesRequest {
+export interface DistributePhotoToAndroidInstancesResponse {
   /**
-   * 安卓实例可用区。
-ap-guangzhou-3：广州三区
-ap-shenzhen-1：深圳一区
-ap-xian-ec-1：西安一区
-ap-hangzhou-ec-1：杭州一区
+   * 实例任务集合
    */
-  Zone: string
+  TaskSet?: Array<AndroidInstanceTask>
   /**
-   * 安卓实例类型。
-A1：单开
-A2：双开
-A3：三开
-A4：四开
-A5：五开
-A6：六开
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
-  /**
-   * 当 HostSerialNumbers 不为空时，该参数表示每个宿主机要创建的安卓实例数量；
-当 HostSerialNumbers 为空时，该参数表示要创建安卓实例的总数量，最大值为 100。
-   */
-  Number: number
-  /**
-   * 宿主机 ID 列表。可以指定宿主机 ID 进行创建；也可以不指定由系统自动分配宿主机。
-   */
-  HostSerialNumbers?: Array<string>
-  /**
-   * 镜像 ID。如果不填，将使用默认的系统镜像
-   */
-  ImageId?: string
+  RequestId?: string
 }
 
 /**
@@ -2614,25 +2652,17 @@ export interface RebootAndroidInstancesRequest {
 }
 
 /**
- * CreateSession返回参数结构体
+ * 过滤
  */
-export interface CreateSessionResponse {
+export interface Filter {
   /**
-   * 服务端session信息，返回给JSSDK
+   * 字段名
    */
-  ServerSession?: string
+  Name: string
   /**
-   * 【已废弃】
+   * 字段值列表
    */
-  RoleNumber?: string
-  /**
-   * 【互动云游】角色；Player表示玩家；Viewer表示观察者
-   */
-  Role?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Values: Array<string>
 }
 
 /**

@@ -4617,7 +4617,7 @@ export interface UnbindProductsResponse {
   /**
    * 绑定了待解绑的LoRa产品下的设备的网关设备列表
    */
-  GatewayDeviceNames: Array<string>
+  GatewayDeviceNames?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4860,6 +4860,7 @@ export interface ModifyCloudStorageAIServiceRequest {
    * 云存 AI 服务类型。可选值：
 - `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
+- `SimpleHighlight`：TrueX SimpleHighlight
    */
   ServiceType: string
   /**
@@ -4874,6 +4875,10 @@ export interface ModifyCloudStorageAIServiceRequest {
    * 视频分析配置参数
    */
   Config?: string
+  /**
+   * SimpleHighlight 算法配置参数
+   */
+  SHLConfig?: DiarySHLConfig
 }
 
 /**
@@ -8118,6 +8123,29 @@ export interface DeviceActivationDetail {
    * 已使用注册设备数
    */
   UsedFreeLicense?: number
+}
+
+/**
+ * Diary Simple Highlight 配置
+ */
+export interface DiarySHLConfig {
+  /**
+   * 每个视频偏移时长，单位秒
+   */
+  StartOffset?: number
+  /**
+   * 视频浓缩倍数，支持1,2,4之间
+   */
+  PlaySpeed?: number
+  /**
+   * 单个视频最小提取时长，单位秒
+   */
+  MiniExtract?: number
+  /**
+   * 每天最终输出视频时长，单位秒
+注：免费版固定10s
+   */
+  OutDuration?: number
 }
 
 /**

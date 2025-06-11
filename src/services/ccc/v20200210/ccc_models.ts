@@ -30,6 +30,20 @@ export interface DescribeExtensionRequest {
 }
 
 /**
+ * CreateCCCSkillGroup返回参数结构体
+ */
+export interface CreateCCCSkillGroupResponse {
+  /**
+   * 技能组ID
+   */
+  SkillGroupId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopAutoCalloutTask请求参数结构体
  */
 export interface StopAutoCalloutTaskRequest {
@@ -1196,6 +1210,10 @@ export interface StaffStatusMetrics {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastStatusTimestamp?: number
+  /**
+   * 客服登录的端信息
+   */
+  ClientInfo?: Array<ClientInfo>
 }
 
 /**
@@ -1705,69 +1723,25 @@ export interface UnbindNumberCallOutSkillGroupRequest {
 }
 
 /**
- * CreateAutoCalloutTask请求参数结构体
+ * CreateCarrierPrivilegeNumberApplicant请求参数结构体
  */
-export interface CreateAutoCalloutTaskRequest {
+export interface CreateCarrierPrivilegeNumberApplicantRequest {
   /**
    * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
-   * 任务起始时间戳，Unix 秒级时间戳
-   */
-  NotBefore: number
-  /**
-   * 被叫号码列表
-   */
-  Callees: Array<string>
-  /**
-   * 主叫号码列表
+   * 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码）
    */
   Callers: Array<string>
   /**
-   * 呼叫使用的 IVR Id，不填时需要填写 AIAgentId
+   * 被叫号码，必须为实例中坐席绑定的手机号码，格式为0086xxxx（暂时只支持国内号码）
    */
-  IvrId?: number
+  Callees: Array<string>
   /**
-   * 任务名
-   */
-  Name?: string
-  /**
-   * 任务描述
+   * 描述
    */
   Description?: string
-  /**
-   * 任务停止时间戳，Unix 秒级时间戳
-   */
-  NotAfter?: number
-  /**
-   * 最大尝试次数，1-3 次
-   */
-  Tries?: number
-  /**
-   * 自定义变量（仅高级版支持）
-   */
-  Variables?: Array<Variable>
-  /**
-   * UUI
-   */
-  UUI?: string
-  /**
-   * 被叫属性
-   */
-  CalleeAttributes?: Array<CalleeAttribute>
-  /**
-   * IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones
-   */
-  TimeZone?: string
-  /**
-   * 可用时间段
-   */
-  AvailableTime?: Array<TimeRange>
-  /**
-   * 智能体 ID，不填写时需要填写 IvrId
-   */
-  AIAgentId?: number
 }
 
 /**
@@ -1896,17 +1870,21 @@ export interface CreateCompanyApplyRequest {
 }
 
 /**
- * CreateCCCSkillGroup返回参数结构体
+ * BindNumberCallInInterface请求参数结构体
  */
-export interface CreateCCCSkillGroupResponse {
+export interface BindNumberCallInInterfaceRequest {
   /**
-   * 技能组ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  SkillGroupId?: number
+  SdkAppId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 待绑定的号码
    */
-  RequestId?: string
+  Number: string
+  /**
+   * 待绑定的回调地址
+   */
+  CallInInterface?: Interface
 }
 
 /**
@@ -2000,6 +1978,16 @@ export interface CreateCarrierPrivilegeNumberApplicantResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 回调接口
+ */
+export interface Interface {
+  /**
+   * 接口地址
+   */
+  URL: string
 }
 
 /**
@@ -2414,6 +2402,16 @@ export interface DescribeIvrAudioListRequest {
    * 文件ID
    */
   FileId?: Array<number | bigint>
+}
+
+/**
+ * BindNumberCallInInterface返回参数结构体
+ */
+export interface BindNumberCallInInterfaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3339,25 +3337,69 @@ export interface ResetExtensionPasswordResponse {
 }
 
 /**
- * CreateCarrierPrivilegeNumberApplicant请求参数结构体
+ * CreateAutoCalloutTask请求参数结构体
  */
-export interface CreateCarrierPrivilegeNumberApplicantRequest {
+export interface CreateAutoCalloutTaskRequest {
   /**
    * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
-   * 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码）
+   * 任务起始时间戳，Unix 秒级时间戳
    */
-  Callers: Array<string>
+  NotBefore: number
   /**
-   * 被叫号码，必须为实例中坐席绑定的手机号码，格式为0086xxxx（暂时只支持国内号码）
+   * 被叫号码列表
    */
   Callees: Array<string>
   /**
-   * 描述
+   * 主叫号码列表
+   */
+  Callers: Array<string>
+  /**
+   * 呼叫使用的 IVR Id，不填时需要填写 AIAgentId
+   */
+  IvrId?: number
+  /**
+   * 任务名
+   */
+  Name?: string
+  /**
+   * 任务描述
    */
   Description?: string
+  /**
+   * 任务停止时间戳，Unix 秒级时间戳
+   */
+  NotAfter?: number
+  /**
+   * 最大尝试次数，1-3 次
+   */
+  Tries?: number
+  /**
+   * 自定义变量（仅高级版支持）
+   */
+  Variables?: Array<Variable>
+  /**
+   * UUI
+   */
+  UUI?: string
+  /**
+   * 被叫属性
+   */
+  CalleeAttributes?: Array<CalleeAttribute>
+  /**
+   * IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones
+   */
+  TimeZone?: string
+  /**
+   * 可用时间段
+   */
+  AvailableTime?: Array<TimeRange>
+  /**
+   * 智能体 ID，不填写时需要填写 IvrId
+   */
+  AIAgentId?: number
 }
 
 /**
@@ -4256,6 +4298,20 @@ export interface HangUpCallRequest {
    * 会话ID
    */
   SessionId: string
+}
+
+/**
+ * 座席登录的终端信息
+ */
+export interface ClientInfo {
+  /**
+   * 登录的端类型，"Web"表示web工作台，"WeChatMiniProgram"表示微信小程序
+   */
+  ClientType?: string
+  /**
+   * 当前登录的端是否在前台。若登录的端是Web，则该值为true；若登录的端是WeChatMiniProgram，true表示打开着微信小程序，false表示微信小程序退到后台
+   */
+  IsConnected?: boolean
 }
 
 /**

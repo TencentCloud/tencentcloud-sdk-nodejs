@@ -55,6 +55,7 @@ import {
   IntentionVerifyData,
   LivenessCompareRequest,
   DetectDetail,
+  VideoDetailData,
   RetrievalLivenessExtraInfo,
   IntentionActionConfig,
   CheckBankCardInformationRequest,

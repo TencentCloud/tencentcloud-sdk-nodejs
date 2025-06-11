@@ -1973,7 +1973,7 @@ export interface AudioTemplateInfoForUpdate {
    */
   Codec?: string
   /**
-   * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。
+   * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
   /**
@@ -2183,7 +2183,7 @@ export interface AudioTemplateInfo {
   Codec: string
   /**
    * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
-当取值为 0，表示音频码率和原始音频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate: number
   /**
@@ -4140,7 +4140,7 @@ export interface VideoConfigureInfoForUpdate {
   ResolutionAdaptive?: string
   /**
    * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
-当取值为 0，表示视频码率和原始视频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
 }
@@ -6151,7 +6151,7 @@ export interface RebuildMediaTargetAudioStream {
   Codec?: string
   /**
    * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
-当取值为 0，表示音频码率和原始音频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
   /**
@@ -7107,7 +7107,7 @@ export interface VideoTemplateInfo {
   Fps: number
   /**
    * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
-当取值为 0，表示视频码率和原始视频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate: number
   /**
@@ -8824,7 +8824,7 @@ export interface EditMediaVideoStream {
   Codec?: string
   /**
    * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
-当取值为 0 或不填时，表示自动选择最佳视频码率。
+当取值为 0 或不填时，表示由云点播自动设置码率。
    */
   Bitrate?: number
   /**
@@ -9488,7 +9488,7 @@ export interface TEHDConfig {
   Type: string
   /**
    * 视频码率上限，当 Type 指定了极速高清类型时有效。
-不填或填0表示不设视频码率上限。
+不填或填0表示由云点播自动设置码率上限。
    */
   MaxVideoBitrate?: number
 }
@@ -10467,7 +10467,7 @@ export interface VideoConfigureInfo {
   ResolutionAdaptive?: string
   /**
    * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
-当取值为 0，表示视频码率和原始视频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
 }
@@ -12846,7 +12846,7 @@ export interface RebuildMediaTargetVideoStream {
   Codec?: string
   /**
    * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
-当取值为 0，表示视频码率和原始视频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
   /**
@@ -15634,7 +15634,7 @@ export interface VideoTemplateInfoForUpdate {
   Fps?: number
   /**
    * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
-当取值为 0，表示视频码率和原始视频保持一致。
+当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
   /**
@@ -16928,10 +16928,12 @@ export interface ProcedureTask {
   Status?: string
   /**
    * 已弃用，请使用各个具体任务的 ErrCode。
+   * @deprecated
    */
   ErrCode?: number
   /**
    * 已弃用，请使用各个具体任务的 Message。
+   * @deprecated
    */
   Message?: string
   /**
@@ -21610,7 +21612,7 @@ export interface EditMediaTEHDConfig {
   Type: string
   /**
    * 视频码率上限，当 Type 指定了极速高清类型时有效。
-不填或填0表示不设视频码率上限。
+不填或填0表示由云点播自动设置码率上限。
    */
   MaxVideoBitrate?: number
 }

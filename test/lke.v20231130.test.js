@@ -148,6 +148,16 @@ it("lke.v20231130.ConvertDocument", async function () {
     }
 })
 
+it("lke.v20231130.ListSharedKnowledge", async function () {
+    try {
+       const data = await client.ListSharedKnowledge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.DescribeAttributeLabel", async function () {
     try {
        const data = await client.DescribeAttributeLabel({})
@@ -168,9 +178,9 @@ it("lke.v20231130.ListRejectedQuestionPreview", async function () {
     }
 })
 
-it("lke.v20231130.RunReRank", async function () {
+it("lke.v20231130.DescribeSharedKnowledge", async function () {
     try {
-       const data = await client.RunReRank({})
+       const data = await client.DescribeSharedKnowledge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +261,16 @@ it("lke.v20231130.ListAttributeLabel", async function () {
 it("lke.v20231130.ListReleaseConfigPreview", async function () {
     try {
        const data = await client.ListReleaseConfigPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.ListReferShareKnowledge", async function () {
+    try {
+       const data = await client.ListReferShareKnowledge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +428,16 @@ it("lke.v20231130.DescribeCorp", async function () {
     }
 })
 
+it("lke.v20231130.CreateSharedKnowledge", async function () {
+    try {
+       const data = await client.CreateSharedKnowledge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.DescribeUnsatisfiedReplyContext", async function () {
     try {
        const data = await client.DescribeUnsatisfiedReplyContext({})
@@ -508,6 +538,16 @@ it("lke.v20231130.CreateQACate", async function () {
     }
 })
 
+it("lke.v20231130.UpdateSharedKnowledge", async function () {
+    try {
+       const data = await client.UpdateSharedKnowledge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ExportAttributeLabel", async function () {
     try {
        const data = await client.ExportAttributeLabel({})
@@ -531,6 +571,16 @@ it("lke.v20231130.DescribeRefer", async function () {
 it("lke.v20231130.DescribeKnowledgeUsage", async function () {
     try {
        const data = await client.DescribeKnowledgeUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.DeleteSharedKnowledge", async function () {
+    try {
+       const data = await client.DeleteSharedKnowledge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +688,9 @@ it("lke.v20231130.DescribeConcurrencyUsage", async function () {
     }
 })
 
-it("lke.v20231130.ModifyRejectedQuestion", async function () {
+it("lke.v20231130.CreateCorp", async function () {
     try {
-       const data = await client.ModifyRejectedQuestion({})
+       const data = await client.CreateCorp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +711,16 @@ it("lke.v20231130.IsTransferIntent", async function () {
 it("lke.v20231130.DescribeReleaseInfo", async function () {
     try {
        const data = await client.DescribeReleaseInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.ReferShareKnowledge", async function () {
+    try {
+       const data = await client.ReferShareKnowledge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,9 +918,9 @@ it("lke.v20231130.DescribeRelease", async function () {
     }
 })
 
-it("lke.v20231130.CreateCorp", async function () {
+it("lke.v20231130.ModifyRejectedQuestion", async function () {
     try {
-       const data = await client.CreateCorp({})
+       const data = await client.ModifyRejectedQuestion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -931,6 +991,16 @@ it("lke.v20231130.GroupQA", async function () {
 it("lke.v20231130.DescribeSegments", async function () {
     try {
        const data = await client.DescribeSegments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.RunReRank", async function () {
+    try {
+       const data = await client.RunReRank({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

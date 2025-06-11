@@ -718,6 +718,10 @@ null：用户上传证书（没有套餐类型），
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostingConfig?: HostingConfig
+  /**
+   * 是否是上传托管续费证书
+   */
+  IsHostingUploadRenewCert?: boolean
 }
 
 /**
@@ -779,24 +783,21 @@ export interface TeoInstanceList {
 }
 
 /**
- * 根证书
+ * 管理人预审核的域名列表
  */
-export interface RootCertificates {
+export interface ManagerPreAuditDomain {
   /**
-   * 国密签名证书
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预审核域名信息
    */
-  Sign: string
+  Domain: string
   /**
-   * 国密加密证书
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预审核域名创建时间
    */
-  Encrypt: string
+  CreateTime: string
   /**
-   * 标准证书
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预审核域名过期时间
    */
-  Standard: string
+  ExpireTime: string
 }
 
 /**
@@ -2949,6 +2950,27 @@ export interface DeleteManagerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 根证书
+ */
+export interface RootCertificates {
+  /**
+   * 国密签名证书
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sign: string
+  /**
+   * 国密加密证书
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Encrypt: string
+  /**
+   * 标准证书
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Standard: string
 }
 
 /**
@@ -5527,6 +5549,14 @@ null：用户上传证书（没有套餐类型），
    */
   CertChainInfo?: Array<CertBasicInfo>
   /**
+   * 证书域名类型， 1（单域名）；2（多域名）；3（泛域名）；4（多泛域名）
+   */
+  DomainType?: number
+  /**
+   * 证书类型，DV（域名型）；OV（企业型）；EV（增强型）
+   */
+  CertType?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6026,6 +6056,10 @@ export interface ManagerStatusInfo {
    * 过期时间
    */
   ExpireTime?: string
+  /**
+   * 管理人预审核的域名列表
+   */
+  ManagerPreAuditDomains?: Array<ManagerPreAuditDomain>
 }
 
 /**

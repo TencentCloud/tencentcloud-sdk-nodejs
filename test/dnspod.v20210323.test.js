@@ -408,6 +408,16 @@ it("dnspod.v20210323.DeleteDomain", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainVipList", async function () {
+    try {
+       const data = await client.DescribeDomainVipList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeDomainGroupList", async function () {
     try {
        const data = await client.DescribeDomainGroupList({})
@@ -451,6 +461,16 @@ it("dnspod.v20210323.DescribeSnapshotList", async function () {
 it("dnspod.v20210323.CreateSubDomainsAnalyticsFile", async function () {
     try {
        const data = await client.CreateSubDomainsAnalyticsFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.DescribeVasList", async function () {
+    try {
+       const data = await client.DescribeVasList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -58,23 +58,13 @@ export interface InquirePriceRunInstancesResponse {
 }
 
 /**
- * StopInstance请求参数结构体
+ * ResizeInstanceDisk返回参数结构体
  */
-export interface StopInstanceRequest {
+export interface ResizeInstanceDiskResponse {
   /**
-   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * hai实例关机的模式，目前仅支持关机不收费：
-STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。
-注意：默认值为STOP_CHARGE
-   */
-  StopMode?: string
-  /**
-   * 默认为False，True代表只验证接口连通性
-   */
-  DryRun?: boolean
+  RequestId?: string
 }
 
 /**
@@ -85,6 +75,20 @@ export interface DescribeServiceLoginSettingsResponse {
    * 服务登录配置详情
    */
   LoginSettings?: Array<LoginSetting>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResetInstancesPassword返回参数结构体
+ */
+export interface ResetInstancesPasswordResponse {
+  /**
+   * task任务id
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -220,6 +224,20 @@ FAILED：表示操作失败
 }
 
 /**
+ * TerminateInstances请求参数结构体
+ */
+export interface TerminateInstancesRequest {
+  /**
+   * 实例ID列表。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID列表。单次能查询100个InstanceId。
+   */
+  InstanceIds: Array<string>
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
+}
+
+/**
  * TerminateInstances返回参数结构体
  */
 export interface TerminateInstancesResponse {
@@ -301,6 +319,20 @@ NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_
 }
 
 /**
+ * ResizeInstanceDisk请求参数结构体
+ */
+export interface ResizeInstanceDiskRequest {
+  /**
+   * 需要扩容云盘的HAI实例ID
+   */
+  InstanceId: string
+  /**
+   * 扩容云硬盘大小，单位为GB，必须大于当前云硬盘大小。
+   */
+  DiskSize: number
+}
+
+/**
  * 费用数据结构体
  */
 export interface Price {
@@ -319,13 +351,19 @@ export interface Price {
 }
 
 /**
- * TerminateInstances请求参数结构体
+ * StopInstance请求参数结构体
  */
-export interface TerminateInstancesRequest {
+export interface StopInstanceRequest {
   /**
-   * 实例ID列表。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID列表。单次能查询100个InstanceId。
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
    */
-  InstanceIds: Array<string>
+  InstanceId: string
+  /**
+   * hai实例关机的模式，目前仅支持关机不收费：
+STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。
+注意：默认值为STOP_CHARGE
+   */
+  StopMode?: string
   /**
    * 默认为False，True代表只验证接口连通性
    */
@@ -434,6 +472,24 @@ export interface CreateApplicationRequest {
    * 自定义应用的描述
    */
   ApplicationDescription?: string
+}
+
+/**
+ * ResetInstancesPassword请求参数结构体
+ */
+export interface ResetInstancesPasswordRequest {
+  /**
+   * 实例ID列表
+   */
+  InstanceIds: Array<string>
+  /**
+   * 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]</li><br><li>大写字母：[A-Z]</li><br><li>数字：0-9</li><br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
+   */
+  Password: string
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
 }
 
 /**

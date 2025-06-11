@@ -1018,6 +1018,16 @@ it("wedata.v20210820.BatchStartIntegrationTasks", async function () {
     }
 })
 
+it("wedata.v20210820.GetOfflineDIInstanceList", async function () {
+    try {
+       const data = await client.GetOfflineDIInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyDimensionWeight", async function () {
     try {
        const data = await client.ModifyDimensionWeight({})
@@ -1188,9 +1198,29 @@ it("wedata.v20210820.DeleteDataSources", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeWorkflowByFordIds", async function () {
+    try {
+       const data = await client.DescribeWorkflowByFordIds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DeleteIntegrationNode", async function () {
     try {
        const data = await client.DeleteIntegrationNode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeParentTask", async function () {
+    try {
+       const data = await client.DescribeParentTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1258,9 +1288,9 @@ it("wedata.v20210820.DescribeAlarmReceiver", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTaskLockStatus", async function () {
+it("wedata.v20210820.DescribeRelatedTasksByTaskId", async function () {
     try {
-       const data = await client.DescribeTaskLockStatus({})
+       const data = await client.DescribeRelatedTasksByTaskId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1658,6 +1688,16 @@ it("wedata.v20210820.DescribeRulesByPage", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyMonitorStatus", async function () {
+    try {
+       const data = await client.ModifyMonitorStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DeleteProjectUsers", async function () {
     try {
        const data = await client.DeleteProjectUsers({})
@@ -1838,9 +1878,9 @@ it("wedata.v20210820.BatchCreateTaskVersionAsync", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyMonitorStatus", async function () {
+it("wedata.v20210820.DescribeTaskLockStatus", async function () {
     try {
-       const data = await client.ModifyMonitorStatus({})
+       const data = await client.DescribeTaskLockStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1908,9 +1948,9 @@ it("wedata.v20210820.DescribeEventCases", async function () {
     }
 })
 
-it("wedata.v20210820.GetOfflineDIInstanceList", async function () {
+it("wedata.v20210820.DeleteLink", async function () {
     try {
-       const data = await client.GetOfflineDIInstanceList({})
+       const data = await client.DeleteLink({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2041,6 +2081,16 @@ it("wedata.v20210820.DescribeTrendStat", async function () {
 it("wedata.v20210820.DescribeTableInfoList", async function () {
     try {
        const data = await client.DescribeTableInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RegisterDsEventListener", async function () {
+    try {
+       const data = await client.RegisterDsEventListener({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2521,6 +2571,16 @@ it("wedata.v20210820.DescribeFunctionKinds", async function () {
 it("wedata.v20210820.UpdateProjectUserRole", async function () {
     try {
        const data = await client.UpdateProjectUserRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTaskDetailDs", async function () {
+    try {
+       const data = await client.DescribeTaskDetailDs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

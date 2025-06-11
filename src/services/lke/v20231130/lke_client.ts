@@ -37,21 +37,25 @@ import {
   MsgRecord,
   CreateDocCateResponse,
   DeleteDocCateResponse,
+  ShareKnowledgeBase,
+  WorkflowRef,
   ExportAttributeLabelResponse,
   KnowledgeCapacityPieGraphDetail,
-  WorkflowInfo,
+  ModifyAppResponse,
   ExportQAListResponse,
   GetAppSecretResponse,
   ListRejectedQuestionRequest,
   CreateQACateResponse,
   ModifyDocAttrRangeResponse,
-  GetAnswerTypeDataCountResponse,
+  CreateSharedKnowledgeRequest,
   DescribeQARequest,
   AttrLabelRefer,
+  ReferShareKnowledgeResponse,
   DescribeUnsatisfiedReplyContextRequest,
   Procedure,
-  QAQuery,
+  GetEmbeddingRequest,
   ListAppRequest,
+  UpdateSharedKnowledgeRequest,
   AttrLabel,
   ModifyQAAttrRangeRequest,
   GetWsTokenReq_Label,
@@ -61,18 +65,19 @@ import {
   CreateCorpResponse,
   ListQARequest,
   DescribeKnowledgeUsageResponse,
-  ReferDetail,
+  DeleteSharedKnowledgeResponse,
   ListUnsatisfiedReplyRequest,
   DeleteQARequest,
   GetLikeDataCountResponse,
-  ListReleaseRequest,
+  KnowledgeUpdateInfo,
   IsTransferIntentResponse,
   CreateDocCateRequest,
   InvokeAPI,
   SummaryOutput,
-  ModifyAppResponse,
+  ListReferShareKnowledgeResponse,
   ListDocResponse,
   GetDocPreviewRequest,
+  WorkflowInfo,
   ModifyQARequest,
   TaskFlowInfo,
   ExportUnsatisfiedReplyResponse,
@@ -88,7 +93,7 @@ import {
   CreateCorpRequest,
   PluginToolReqParam,
   QueryRewriteResponse,
-  ListQaItem,
+  ListQAResponse,
   DeleteAttributeLabelRequest,
   DescribeRobotBizIDByAppKeyResponse,
   RenameDocResponse,
@@ -101,9 +106,11 @@ import {
   KnowledgeQaOutput,
   ModifyRejectedQuestionRequest,
   ApiVarAttrInfo,
+  SimilarQuestion,
   AgentThought,
   GroupDocRequest,
   CheckAttributeLabelReferRequest,
+  CreateSharedKnowledgeResponse,
   ModifyQACateRequest,
   SearchStrategy,
   ModifyAttributeLabelRequest,
@@ -126,6 +133,7 @@ import {
   DescribeDocRequest,
   AgentProcedureDebugging,
   DescribeTokenUsageGraphRequest,
+  ListSharedKnowledgeRequest,
   ConvertDocumentResponse,
   VoiceConfig,
   RetryDocAuditRequest,
@@ -135,7 +143,7 @@ import {
   ListAppKnowledgeDetailResponse,
   ModifyQACateResponse,
   DescribeAttributeLabelResponse,
-  ModifyAttributeLabelResponse,
+  EmbeddingObject,
   KnowledgeQaSingleWorkflow,
   ListQACateResponse,
   GetVarListRequest,
@@ -150,12 +158,14 @@ import {
   AppConfig,
   DescribeReleaseRequest,
   ReleaseQA,
+  KnowledgeBaseInfo,
   ListAppCategoryRequest,
   ListReleaseConfigPreviewRequest,
   CallDetail,
   DocFilterFlag,
   ListReleaseDocPreviewRequest,
   TokenStat,
+  UserBaseInfo,
   DocSegment,
   UnsatisfiedReply,
   DescribeUnsatisfiedReplyContextResponse,
@@ -168,7 +178,7 @@ import {
   Context,
   ListDocRequest,
   ReconstructDocumentRequest,
-  GetEmbeddingRequest,
+  GetAnswerTypeDataCountResponse,
   GroupQARequest,
   RateMsgRecordRequest,
   DescribeCallStatsGraphRequest,
@@ -176,7 +186,7 @@ import {
   DescribeAppRequest,
   GetReconstructDocumentResultRequest,
   DescribeKnowledgeUsageRequest,
-  ListQAResponse,
+  DeleteSharedKnowledgeRequest,
   IgnoreUnsatisfiedReplyRequest,
   DescribeReleaseResponse,
   DescribeConcurrencyUsageGraphResponse,
@@ -198,6 +208,7 @@ import {
   ModifyDocCateRequest,
   RejectedQuestion,
   GetLikeDataCountRequest,
+  ModifyAttributeLabelResponse,
   DeleteRejectedQuestionResponse,
   Credentials,
   MsgFileInfo,
@@ -205,6 +216,7 @@ import {
   ListAppResponse,
   AppInfo,
   CateInfo,
+  DescribeSharedKnowledgeResponse,
   RunReRankResponse,
   ProcedureDebugging,
   KnowledgeQaConfig,
@@ -221,8 +233,10 @@ import {
   GetDocPreviewResponse,
   DescribeConcurrencyUsageResponse,
   TaskFLowVar,
+  AttributeLabelRefByWorkflow,
   CreateReleaseResponse,
   QueryRewriteRequest,
+  ListQaItem,
   ModifyAppRequest,
   RunReRankRequest,
   KnowledgeDetail,
@@ -230,11 +244,14 @@ import {
   RetryReleaseRequest,
   KnowledgeQaPlugin,
   IntentAchievement,
+  ValueInfo,
+  ListSharedKnowledgeResponse,
   DeleteQACateRequest,
   GenerateQARequest,
   GetWsTokenRequest,
   QACate,
-  EmbeddingObject,
+  DescribeSharedKnowledgeRequest,
+  ListReferShareKnowledgeRequest,
   ModifyDocRequest,
   DescribeTokenUsageResponse,
   DeleteAppResponse,
@@ -246,13 +263,15 @@ import {
   DocumentElement,
   BaseConfig,
   DescribeSegmentsResponse,
-  SimilarQuestion,
+  AppBaseInfo,
   ClassifyConfig,
   DescribeConcurrencyUsageRequest,
   GroupDocResponse,
+  QAQuery,
   UploadAttributeLabelRequest,
   ListUsageCallDetailResponse,
   ExportAttributeLabelRequest,
+  ReferDetail,
   DescribeTokenUsageRequest,
   GetAppKnowledgeCountResponse,
   RetryReleaseResponse,
@@ -271,10 +290,11 @@ import {
   WorkFlowSummary,
   TaskParams,
   ListAppCategoryRspOption,
-  ValueInfo,
+  UpdateSharedKnowledgeResponse,
   DescribeStorageCredentialRequest,
   QAList,
   DescribeCorpResponse,
+  KnowledgeDetailInfo,
   ModifyDocCateResponse,
   ListReleaseResponse,
   ListModelResponse,
@@ -298,6 +318,7 @@ import {
   CreateVarRequest,
   DocumentRecognizeInfo,
   HistorySummary,
+  StopDocParseRequest,
   VerifyQAResponse,
   ReleaseConfigs,
   DescribeSegmentsRequest,
@@ -306,9 +327,10 @@ import {
   Filters,
   DescribeReferRequest,
   IgnoreUnsatisfiedReplyResponse,
-  StopDocParseRequest,
+  ListReleaseRequest,
   KnowledgeWorkflow,
   ListModelRequest,
+  ReferShareKnowledgeRequest,
   ListSelectDocRequest,
 } from "./lke_models"
 
@@ -454,6 +476,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列举共享知识库。
+   */
+  async ListSharedKnowledge(
+    req: ListSharedKnowledgeRequest,
+    cb?: (error: string, rep: ListSharedKnowledgeResponse) => void
+  ): Promise<ListSharedKnowledgeResponse> {
+    return this.request("ListSharedKnowledge", req, cb)
+  }
+
+  /**
    * 查询属性标签详情
    */
   async DescribeAttributeLabel(
@@ -474,13 +506,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 基于知识引擎精调模型技术的rerank模型，支持对多路召回的结果进行重排序，根据query与切片内容的相关性，按分数由高到低对切片进行排序，并输出对应的打分结果。（这个接口已下线，请使用新接口，接口文档：https://cloud.tencent.com/document/product/1772/115339）。
+   * 查询共享知识库。
    */
-  async RunReRank(
-    req: RunReRankRequest,
-    cb?: (error: string, rep: RunReRankResponse) => void
-  ): Promise<RunReRankResponse> {
-    return this.request("RunReRank", req, cb)
+  async DescribeSharedKnowledge(
+    req: DescribeSharedKnowledgeRequest,
+    cb?: (error: string, rep: DescribeSharedKnowledgeResponse) => void
+  ): Promise<DescribeSharedKnowledgeResponse> {
+    return this.request("DescribeSharedKnowledge", req, cb)
   }
 
   /**
@@ -561,6 +593,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListReleaseConfigPreviewResponse) => void
   ): Promise<ListReleaseConfigPreviewResponse> {
     return this.request("ListReleaseConfigPreview", req, cb)
+  }
+
+  /**
+   * 查看应用引用了哪些共享知识库，可以看到共享知识库的基础信息，包括名称，id等
+   */
+  async ListReferShareKnowledge(
+    req: ListReferShareKnowledgeRequest,
+    cb?: (error: string, rep: ListReferShareKnowledgeResponse) => void
+  ): Promise<ListReferShareKnowledgeResponse> {
+    return this.request("ListReferShareKnowledge", req, cb)
   }
 
   /**
@@ -714,6 +756,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建共享知识库。
+   */
+  async CreateSharedKnowledge(
+    req: CreateSharedKnowledgeRequest,
+    cb?: (error: string, rep: CreateSharedKnowledgeResponse) => void
+  ): Promise<CreateSharedKnowledgeResponse> {
+    return this.request("CreateSharedKnowledge", req, cb)
+  }
+
+  /**
    * 获取不满意回复上下文
    */
   async DescribeUnsatisfiedReplyContext(
@@ -814,6 +866,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新共享知识库。
+   */
+  async UpdateSharedKnowledge(
+    req: UpdateSharedKnowledgeRequest,
+    cb?: (error: string, rep: UpdateSharedKnowledgeResponse) => void
+  ): Promise<UpdateSharedKnowledgeResponse> {
+    return this.request("UpdateSharedKnowledge", req, cb)
+  }
+
+  /**
    * 导出属性标签
    */
   async ExportAttributeLabel(
@@ -841,6 +903,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKnowledgeUsageResponse) => void
   ): Promise<DescribeKnowledgeUsageResponse> {
     return this.request("DescribeKnowledgeUsage", req, cb)
+  }
+
+  /**
+   * 删除共享知识库。
+   */
+  async DeleteSharedKnowledge(
+    req: DeleteSharedKnowledgeRequest,
+    cb?: (error: string, rep: DeleteSharedKnowledgeResponse) => void
+  ): Promise<DeleteSharedKnowledgeResponse> {
+    return this.request("DeleteSharedKnowledge", req, cb)
   }
 
   /**
@@ -944,13 +1016,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改拒答问题
+   * 创建企业
    */
-  async ModifyRejectedQuestion(
-    req: ModifyRejectedQuestionRequest,
-    cb?: (error: string, rep: ModifyRejectedQuestionResponse) => void
-  ): Promise<ModifyRejectedQuestionResponse> {
-    return this.request("ModifyRejectedQuestion", req, cb)
+  async CreateCorp(
+    req: CreateCorpRequest,
+    cb?: (error: string, rep: CreateCorpResponse) => void
+  ): Promise<CreateCorpResponse> {
+    return this.request("CreateCorp", req, cb)
   }
 
   /**
@@ -971,6 +1043,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReleaseInfoResponse) => void
   ): Promise<DescribeReleaseInfoResponse> {
     return this.request("DescribeReleaseInfo", req, cb)
+  }
+
+  /**
+   * 应用引用共享知识库，可以引用一个或多个，每次都是全量覆盖
+   */
+  async ReferShareKnowledge(
+    req: ReferShareKnowledgeRequest,
+    cb?: (error: string, rep: ReferShareKnowledgeResponse) => void
+  ): Promise<ReferShareKnowledgeResponse> {
+    return this.request("ReferShareKnowledge", req, cb)
   }
 
   /**
@@ -1172,13 +1254,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建企业
+   * 修改拒答问题
    */
-  async CreateCorp(
-    req: CreateCorpRequest,
-    cb?: (error: string, rep: CreateCorpResponse) => void
-  ): Promise<CreateCorpResponse> {
-    return this.request("CreateCorp", req, cb)
+  async ModifyRejectedQuestion(
+    req: ModifyRejectedQuestionRequest,
+    cb?: (error: string, rep: ModifyRejectedQuestionResponse) => void
+  ): Promise<ModifyRejectedQuestionResponse> {
+    return this.request("ModifyRejectedQuestion", req, cb)
   }
 
   /**
@@ -1250,6 +1332,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSegmentsResponse) => void
   ): Promise<DescribeSegmentsResponse> {
     return this.request("DescribeSegments", req, cb)
+  }
+
+  /**
+   * 基于知识引擎精调模型技术的rerank模型，支持对多路召回的结果进行重排序，根据query与切片内容的相关性，按分数由高到低对切片进行排序，并输出对应的打分结果。（这个接口已下线，请使用新接口，接口文档：https://cloud.tencent.com/document/product/1772/115339）。
+   */
+  async RunReRank(
+    req: RunReRankRequest,
+    cb?: (error: string, rep: RunReRankResponse) => void
+  ): Promise<RunReRankResponse> {
+    return this.request("RunReRank", req, cb)
   }
 
   /**

@@ -16,6 +16,27 @@
  */
 
 /**
+ * TableOCR请求参数结构体
+ */
+export interface TableOCRRequest {
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+}
+
+/**
  * 门头照识别结果
  */
 export interface StoreInfo {
@@ -441,50 +462,69 @@ export interface CarInvoiceOCRRequest {
 }
 
 /**
- * 混贴票据单张发票识别信息
+ * ExtractDocMulti请求参数结构体
  */
-export interface MixedInvoiceItem {
+export interface ExtractDocMultiRequest {
   /**
-   * 识别结果。
-OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持识别；
-FailedOperation.UnKnowError：表示识别失败；
-其它错误码见各个票据接口的定义。
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Code?: string
+  ImageUrl?: string
   /**
-   * 识别出的图片所属的票据类型。
--1：未知类型
-0：出租车发票
-1：定额发票
-2：火车票
-3：增值税发票
-5：机票行程单
-8：通用机打发票
-9：汽车票
-10：轮船票
-11：增值税发票（卷票）
-12：购车发票
-13：过路过桥费发票
-15：非税发票
-16：全电发票
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Type?: number
+  ImageBase64?: string
   /**
-   * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。
    */
-  Rect?: Rect
+  PdfPageNumber?: number
   /**
-   * 识别出的图片在混贴票据图片中的旋转角度。
+   * 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"]
    */
-  Angle?: number
+  ItemNames?: Array<string>
   /**
-   * 识别到的内容。
+   * true：仅输出自定义字段
+flase：输出默认字段+自定义字段
+默认true
    */
-  SingleInvoiceInfos?: Array<SingleInvoiceInfo>
+  ItemNamesShowMode?: boolean
   /**
-   * 发票处于识别图片或PDF文件中的页教，默认从1开始。
+   * 是否开启全文字段识别
    */
-  Page?: number
+  ReturnFullText?: boolean
+  /**
+   * 配置id支持：
+General -- 通用场景 
+InvoiceEng -- 国际invoice模版 
+WayBillEng --海运订单模板
+CustomsDeclaration -- 进出口报关单
+WeightNote -- 磅单
+MedicalMeter -- 血压仪表识别
+BillOfLading -- 海运提单
+EntrustmentBook -- 海运托书
+WordRecognize -- 手写英文作文模版
+Statement -- 对账单识别模板
+BookingConfirmation -- 配舱通知书识别模板
+AirWayBill -- 航空运单识别模板
+DispatchWeightNote -- 磅单发货单识别模板
+ReceiptWeightNote -- 磅单收货单识别模板
+ArticalRecognize -- 手写作文模版
+Table -- 表格模版
+SteelLabel -- 实物标签识别模板
+CarInsurance -- 车辆保险单识别模板
+   */
+  ConfigId?: string
+  /**
+   * 是否开启全文字段坐标值的识别
+   */
+  EnableCoord?: boolean
+  /**
+   * 是否开启父子key识别，默认是
+   */
+  OutputParentKey?: boolean
+  /**
+   * 模版的单个属性配置
+   */
+  ConfigAdvanced?: ConfigAdvanced
 }
 
 /**
@@ -596,32 +636,54 @@ export interface EstateCertOCRResponse {
 }
 
 /**
- * FlightInvoiceOCR请求参数结构体
+ * ExtractDocMultiPro请求参数结构体
  */
-export interface FlightInvoiceOCRRequest {
+export interface ExtractDocMultiProRequest {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  IsPdf?: boolean
+  ImageBase64?: string
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。
    */
   PdfPageNumber?: number
+  /**
+   * 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"]
+   */
+  ItemNames?: Array<string>
+  /**
+   * true：仅输出自定义字段
+flase：输出默认字段+自定义字段
+默认true
+   */
+  ItemNamesShowMode?: boolean
+  /**
+   * 是否开启全文字段识别
+   */
+  ReturnFullText?: boolean
+  /**
+   * 配置id支持：
+DispatchWeightNote -- 磅单发货单识别模板
+ReceiptWeightNote -- 磅单收货单识别模板
+默认：DispatchWeightNote
+   */
+  ConfigId?: string
+  /**
+   * 是否开启全文字段坐标值的识别
+   */
+  EnableCoord?: boolean
+  /**
+   * 是否开启父子key识别，默认是
+   */
+  OutputParentKey?: boolean
+  /**
+   * 模版的单个属性配置
+   */
+  ConfigAdvanced?: ConfigAdvanced
 }
 
 /**
@@ -1384,25 +1446,32 @@ export interface QuestionSplitOCRRequest {
 }
 
 /**
- * 增值税普通发票（卷票）条目
+ * FlightInvoiceOCR请求参数结构体
  */
-export interface VatRollItem {
+export interface FlightInvoiceOCRRequest {
   /**
-   * 项目名称
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Name?: string
+  ImageBase64?: string
   /**
-   * 数量
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Quantity?: string
+  ImageUrl?: string
   /**
-   * 单价
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
    */
-  Price?: string
+  IsPdf?: boolean
   /**
-   * 金额
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
-  Total?: string
+  PdfPageNumber?: number
 }
 
 /**
@@ -2045,42 +2114,88 @@ export interface WordCoordPoint {
 }
 
 /**
- * 票据检测结果
+ * HKIDCardOCR返回参数结构体
  */
-export interface InvoiceDetectInfo {
+export interface HKIDCardOCRResponse {
   /**
-   * 识别出的图片在混贴票据图片中的旋转角度。
+   * 中文姓名
    */
-  Angle?: number
+  CnName?: string
   /**
-   * 识别出的图片所属的票据类型。
--1：未知类型
-0：出租车发票
-1：定额发票
-2：火车票
-3：增值税发票
-4：客运限额发票
-5：机票行程单
-6：酒店账单
-7：完税证明
-8：通用机打发票
-9：汽车票
-10：轮船票
-11：增值税发票（卷票 ）
-12：购车发票
-13：过路过桥费发票
-14：购物小票
+   * 英文姓名
    */
-  Type?: number
+  EnName?: string
   /**
-   * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
+   * 中文姓名对应电码
    */
-  Rect?: Rect
+  TelexCode?: string
   /**
-   * 入参 ReturnImage 为 True 时返回 Base64 编码后的图片。
+   * 性别 ：“男M”或“女F”
+   */
+  Sex?: string
+  /**
+   * 出生日期
+   */
+  Birthday?: string
+  /**
+   * 永久性居民身份证。
+0：非永久；
+1：永久；
+-1：未知。
+   */
+  Permanent?: number
+  /**
+   * 身份证号码
+   */
+  IdNum?: string
+  /**
+   * 证件符号，出生日期下的符号，例如"***AZ"
+   */
+  Symbol?: string
+  /**
+   * 首次签发日期
+   */
+  FirstIssueDate?: string
+  /**
+   * 最近领用日期
+   */
+  CurrentIssueDate?: string
+  /**
+   * 真假判断。
+0：无法判断（图像模糊、不完整、反光、过暗等导致无法判断）；
+1：假；
+2：真。
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  FakeDetectResult?: number
+  /**
+   * 人像照片Base64后的结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Image?: string
+  HeadImage?: string
+  /**
+   * 多重告警码，当身份证是翻拍、复印件时返回对应告警码。
+-9102：证照复印件告警
+-9103：证照翻拍告警
+   * @deprecated
+   */
+  WarningCode?: Array<number | bigint>
+  /**
+   * 告警码
+-9101 证件边框不完整告警
+-9102 证件复印件告警
+-9103 证件翻拍告警
+-9104 证件PS告警
+-9107 证件反光告警
+-9108 证件模糊告警
+-9109 告警能力未开通
+   */
+  WarnCardInfos?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2327,22 +2442,42 @@ export interface StructuralItem {
 }
 
 /**
- * 网约车行程单识别结果
+ * 票据检测结果
  */
-export interface OnlineTaxiItineraryInfo {
+export interface InvoiceDetectInfo {
   /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-发票代码、 机打代码、 发票号码、 发动机号码、 合格证号、 机打号码、 价税合计(小写)、 销货单位名称、 身份证号码/组织机构代码、 购买方名称、 销售方纳税人识别号、 购买方纳税人识别号、主管税务机关、 主管税务机关代码、 开票日期、 不含税价(小写)、 吨位、增值税税率或征收率、 车辆识别代号/车架号码、 增值税税额、 厂牌型号、 省、 市、 发票消费类型、 销售方电话、 销售方账号、 产地、 进口证明书号、 车辆类型、 机器编号、备注、开票人、限乘人数、商检单号、销售方地址、销售方开户银行、价税合计、发票类型。
+   * 识别出的图片在混贴票据图片中的旋转角度。
    */
-  Name?: string
+  Angle?: number
   /**
-   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
+   * 识别出的图片所属的票据类型。
+-1：未知类型
+0：出租车发票
+1：定额发票
+2：火车票
+3：增值税发票
+4：客运限额发票
+5：机票行程单
+6：酒店账单
+7：完税证明
+8：通用机打发票
+9：汽车票
+10：轮船票
+11：增值税发票（卷票 ）
+12：购车发票
+13：过路过桥费发票
+14：购物小票
    */
-  Value?: string
+  Type?: number
   /**
-   * 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1
+   * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
    */
-  Row?: number
+  Rect?: Rect
+  /**
+   * 入参 ReturnImage 为 True 时返回 Base64 编码后的图片。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Image?: string
 }
 
 /**
@@ -2737,6 +2872,53 @@ export interface BusInvoiceInfo {
 }
 
 /**
+ * 混贴票据单张发票识别信息
+ */
+export interface MixedInvoiceItem {
+  /**
+   * 识别结果。
+OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持识别；
+FailedOperation.UnKnowError：表示识别失败；
+其它错误码见各个票据接口的定义。
+   */
+  Code?: string
+  /**
+   * 识别出的图片所属的票据类型。
+-1：未知类型
+0：出租车发票
+1：定额发票
+2：火车票
+3：增值税发票
+5：机票行程单
+8：通用机打发票
+9：汽车票
+10：轮船票
+11：增值税发票（卷票）
+12：购车发票
+13：过路过桥费发票
+15：非税发票
+16：全电发票
+   */
+  Type?: number
+  /**
+   * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
+   */
+  Rect?: Rect
+  /**
+   * 识别出的图片在混贴票据图片中的旋转角度。
+   */
+  Angle?: number
+  /**
+   * 识别到的内容。
+   */
+  SingleInvoiceInfos?: Array<SingleInvoiceInfo>
+  /**
+   * 发票处于识别图片或PDF文件中的页教，默认从1开始。
+   */
+  Page?: number
+}
+
+/**
  * RecognizeEncryptedIDCardOCR请求参数结构体
  */
 export interface RecognizeEncryptedIDCardOCRRequest {
@@ -2833,6 +3015,32 @@ ItemNames=["姓名","性别"]
    * 是否开启全文字段识别，默认值为false，开启后可返回全文字段识别结果。
    */
   ReturnFullText?: boolean
+}
+
+/**
+ * ExtractDocMultiPro返回参数结构体
+ */
+export interface ExtractDocMultiProResponse {
+  /**
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
+   */
+  Angle?: number
+  /**
+   * 配置结构化文本信息
+   */
+  StructuralList?: Array<GroupInfo>
+  /**
+   * 还原文本信息
+   */
+  WordList?: Array<WordItem>
+  /**
+   * 样本识别字段数
+   */
+  TokenNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3949,88 +4157,57 @@ export interface LicensePlateOCRResponse {
 }
 
 /**
- * HKIDCardOCR返回参数结构体
+ * ExtractDocBasic请求参数结构体
  */
-export interface HKIDCardOCRResponse {
+export interface ExtractDocBasicRequest {
   /**
-   * 中文姓名
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  CnName?: string
+  ImageUrl?: string
   /**
-   * 英文姓名
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  EnName?: string
+  ImageBase64?: string
   /**
-   * 中文姓名对应电码
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
    */
-  TelexCode?: string
+  IsPdf?: boolean
   /**
-   * 性别 ：“男M”或“女F”
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
-  Sex?: string
+  PdfPageNumber?: number
   /**
-   * 出生日期
+   * 自定义结构化功能需返回的字段名称，例：
+若客户只想返回姓名、性别两个字段的识别结果，则输入
+ItemNames=["姓名","性别"]
    */
-  Birthday?: string
+  ItemNames?: Array<string>
   /**
-   * 永久性居民身份证。
-0：非永久；
-1：永久；
--1：未知。
+   * 是否开启全文字段识别
    */
-  Permanent?: number
+  ReturnFullText?: boolean
   /**
-   * 身份证号码
+   * 配置id支持：
+General -- 通用场景
+OnlineTaxiItinerary -- 网约车行程单
+RideHailingDriverLicense -- 网约车驾驶证
+RideHailingTransportLicense -- 网约车运输证
+WayBill -- 快递运单
+AccountOpeningPermit -- 银行开户许可证
+InvoiceEng -- 海外发票模版
+Coin --钱币识别模板
+OnboardingDocuments -- 入职材料识别
+PropertyOwnershipCertificate -- 房产证识别
+RealEstateCertificate --不动产权证识别
+HouseEncumbranceCertificate -- 他权证识别
+CarInsurance -- 车险保单
+MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板
    */
-  IdNum?: string
+  ConfigId?: string
   /**
-   * 证件符号，出生日期下的符号，例如"***AZ"
+   * 是否打开印章识别
    */
-  Symbol?: string
-  /**
-   * 首次签发日期
-   */
-  FirstIssueDate?: string
-  /**
-   * 最近领用日期
-   */
-  CurrentIssueDate?: string
-  /**
-   * 真假判断。
-0：无法判断（图像模糊、不完整、反光、过暗等导致无法判断）；
-1：假；
-2：真。
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  FakeDetectResult?: number
-  /**
-   * 人像照片Base64后的结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HeadImage?: string
-  /**
-   * 多重告警码，当身份证是翻拍、复印件时返回对应告警码。
--9102：证照复印件告警
--9103：证照翻拍告警
-   * @deprecated
-   */
-  WarningCode?: Array<number | bigint>
-  /**
-   * 告警码
--9101 证件边框不完整告警
--9102 证件复印件告警
--9103 证件翻拍告警
--9104 证件PS告警
--9107 证件反光告警
--9108 证件模糊告警
--9109 告警能力未开通
-   */
-  WarnCardInfos?: Array<number | bigint>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EnableSealRecognize?: boolean
 }
 
 /**
@@ -4447,232 +4624,48 @@ export interface InvoiceGeneralOCRResponse {
 }
 
 /**
- * VatInvoiceVerifyNew返回参数结构体
+ * 网约车行程单识别结果
  */
-export interface VatInvoiceVerifyNewResponse {
+export interface OnlineTaxiItineraryInfo {
   /**
-   * 增值税发票、购车发票、全电发票的基础要素字段信息。
+   * 识别出的字段名称(关键字)，支持以下字段：
+发票代码、 机打代码、 发票号码、 发动机号码、 合格证号、 机打号码、 价税合计(小写)、 销货单位名称、 身份证号码/组织机构代码、 购买方名称、 销售方纳税人识别号、 购买方纳税人识别号、主管税务机关、 主管税务机关代码、 开票日期、 不含税价(小写)、 吨位、增值税税率或征收率、 车辆识别代号/车架号码、 增值税税额、 厂牌型号、 省、 市、 发票消费类型、 销售方电话、 销售方账号、 产地、 进口证明书号、 车辆类型、 机器编号、备注、开票人、限乘人数、商检单号、销售方地址、销售方开户银行、价税合计、发票类型。
    */
-  Invoice?: VatInvoice
+  Name?: string
   /**
-   * 机动车销售统一发票详细字段信息。
+   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
    */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo
+  Value?: string
   /**
-   * 二手车销售统一发票详细字段信息。
+   * 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1
    */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
-  /**
-   * 通行费发票详细字段信息。
-   */
-  PassInvoiceInfoList?: Array<PassInvoiceInfo>
-  /**
-   * 全电发票（铁路电子客票）详细字段信息。
+  Row?: number
+}
 
-   */
-  ElectronicTrainTicket?: ElectronicTrainTicket
+/**
+ * ExtractDocMulti返回参数结构体
+ */
+export interface ExtractDocMultiResponse {
   /**
-   * 全电发票（航空运输电子客票行程单）详细字段信息。
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
    */
-  ElectronicAirTransport?: ElectronicAirTransport
+  Angle?: number
   /**
-   * 财政发票详细字段信息
+   * 配置结构化文本信息
    */
-  FinancialBill?: FinancialBill
+  StructuralList?: Array<GroupInfo>
+  /**
+   * 还原文本信息
+   */
+  WordList?: Array<WordItem>
+  /**
+   * 样本识别字段数
+   */
+  TokenNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 增值税发票返回值
- */
-export interface VatInvoiceInfo {
-  /**
-   * 校验码
-   */
-  CheckCode?: string
-  /**
-   * 发票联次
-   */
-  FormType?: string
-  /**
-   * 车船税
-   */
-  TravelTax?: string
-  /**
-   * 购买方地址电话
-   */
-  BuyerAddrTel?: string
-  /**
-   * 购买方银行账号
-   */
-  BuyerBankAccount?: string
-  /**
-   * 公司印章内容
-   */
-  CompanySealContent?: string
-  /**
-   * 税务局章内容
-   */
-  TaxSealContent?: string
-  /**
-   * 服务类型
-   */
-  ServiceName?: string
-  /**
-   * 市
-   */
-  City?: string
-  /**
-   * 是否存在二维码（0：没有，1：有）
-   */
-  QRCodeMark?: number
-  /**
-   * 是否有代开标记（0：没有，1：有）
-   */
-  AgentMark?: number
-  /**
-   * 是否有通行费标记（0：没有，1：有）
-   */
-  TransitMark?: number
-  /**
-   * 是否有成品油标记（0：没有，1：有）
-   */
-  OilMark?: number
-  /**
-   * 发票名称
-   */
-  Title?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 发票代码
-   */
-  Code?: string
-  /**
-   * 发票号码
-   */
-  Number?: string
-  /**
-   * 机打发票号码
-   */
-  NumberConfirm?: string
-  /**
-   * 开票日期
-   */
-  Date?: string
-  /**
-   * 价税合计（小写）
-   */
-  Total?: string
-  /**
-   * 价税合计（大写）
-   */
-  TotalCn?: string
-  /**
-   * 税前金额
-   */
-  PretaxAmount?: string
-  /**
-   * 合计税额
-   */
-  Tax?: string
-  /**
-   * 机器编号
-   */
-  MachineCode?: string
-  /**
-   * 密码区
-   */
-  Ciphertext?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 销售方名称
-   */
-  Seller?: string
-  /**
-   * 销售方纳税人识别号
-   */
-  SellerTaxID?: string
-  /**
-   * 销售方地址电话
-   */
-  SellerAddrTel?: string
-  /**
-   * 销售方银行账号
-   */
-  SellerBankAccount?: string
-  /**
-   * 购买方名称
-   */
-  Buyer?: string
-  /**
-   * 购买方纳税人识别号
-   */
-  BuyerTaxID?: string
-  /**
-   * 是否有公司印章（0：没有，1：有）
-   */
-  CompanySealMark?: number
-  /**
-   * 开票人
-   */
-  Issuer?: string
-  /**
-   * 复核人
-   */
-  Reviewer?: string
-  /**
-   * 省
-   */
-  Province?: string
-  /**
-   * 增值税发票项目信息
-   */
-  VatInvoiceItemInfos?: Array<VatInvoiceItemInfo>
-  /**
-   * 机打发票代码
-   */
-  CodeConfirm?: string
-  /**
-   * 收款人
-   */
-  Receiptor?: string
-  /**
-   * 是否有全电纸质票（0：没有，1：有）
-   */
-  ElectronicFullMark?: number
-  /**
-   * 全电号码
-   */
-  ElectronicFullNumber?: string
-  /**
-   * 发票联名
-   */
-  FormName?: string
-  /**
-   * 是否有区块链标记（0：没有，1：有）
-   */
-  BlockChainMark?: number
-  /**
-   * 是否有收购标记（0：没有，1：有）
-   */
-  AcquisitionMark?: number
-  /**
-   * 小计金额
-   */
-  SubTotal?: string
-  /**
-   * 小计税额
-   */
-  SubTax?: string
 }
 
 /**
@@ -6453,6 +6446,29 @@ export interface ImageEnhancementRequest {
 }
 
 /**
+ * ExtractDocBasic返回参数结构体
+ */
+export interface ExtractDocBasicResponse {
+  /**
+   * 图片旋转角度(角度制)，文本的水平方向
+为 0；顺时针为正，逆时针为负
+   */
+  Angle?: number
+  /**
+   * 配置结构化文本信息
+   */
+  StructuralList?: Array<GroupInfo>
+  /**
+   * 还原文本信息
+   */
+  WordList?: Array<WordItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnglishOCR请求参数结构体
  */
 export interface EnglishOCRRequest {
@@ -7634,6 +7650,22 @@ MainlandPermit：港澳台来往内地通行证
    */
   Reprint?: GeneralCardWarnInfo
   /**
+   * 是否截图
+   */
+  Screenshot?: GeneralCardWarnInfo
+  /**
+   * 是否遮挡
+   */
+  Cover?: GeneralCardWarnInfo
+  /**
+   * 是否重叠
+   */
+  Overlap?: GeneralCardWarnInfo
+  /**
+   * 是否水印
+   */
+  Watermark?: GeneralCardWarnInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7931,29 +7963,31 @@ export interface FinanBillOCRResponse {
 }
 
 /**
- * RecognizeHealthCodeOCR请求参数结构体
+ * HandwritingEssayOCR请求参数结构体
  */
-export interface RecognizeHealthCodeOCRRequest {
+export interface HandwritingEssayOCRRequest {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
   /**
-   * 需要识别的健康码类型列表，为空或不填表示默认为自动识别。
-0:自动识别
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Type?: number
+  ImageBase64?: string
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。
+   */
+  PdfPageNumber?: number
+  /**
+   * 配置id支持：
+ArticleRecognize -- 手写作文模版
+默认：ArticleRecognize
+   */
+  ConfigId?: string
+  /**
+   * 模版的单个属性配置
+   */
+  Scene?: string
 }
 
 /**
@@ -7989,79 +8023,26 @@ export interface OnlineTaxiItinerary {
 }
 
 /**
- * RecognizeEncryptedIDCardOCR返回参数结构体
+ * 文本的坐标，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值
  */
-export interface RecognizeEncryptedIDCardOCRResponse {
+export interface Polygon {
   /**
-   * 姓名（人像面）
+   * 左上顶点坐标
    */
-  Name?: string
+  LeftTop?: Coord
   /**
-   * 性别（人像面）
+   * 右上顶点坐标
    */
-  Sex?: string
+  RightTop?: Coord
   /**
-   * 民族（人像面）
+   * 右下顶点坐标
    */
-  Nation?: string
+  RightBottom?: Coord
   /**
-   * 出生日期（人像面）
+   * 左下顶点坐标
    */
-  Birth?: string
-  /**
-   * 地址（人像面）
-   */
-  Address?: string
-  /**
-   * 身份证号（人像面）
-   */
-  IdNum?: string
-  /**
-   * 发证机关（国徽面）
-   */
-  Authority?: string
-  /**
-   * 证件有效期（国徽面）
-   */
-  ValidDate?: string
-  /**
-   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
-IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
-Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
-
-Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
-
-WarnInfos，告警信息，Code 告警码列表和释义：
--9100 身份证有效日期不合法告警，
--9101 身份证边框不完整告警，
-
--9102 身份证复印件告警（黑白及彩色复印件）,
--9108 身份证复印件告警（仅黑白复印件），
-
--9103 身份证翻拍告警，
--9105 身份证框内遮挡告警，
--9104 临时身份证告警，
--9106 身份证疑似存在PS痕迹告警，
--9107 身份证反光告警。
-   */
-  AdvancedInfo?: string
-  /**
-   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
-   */
-  ReflectDetailInfos?: Array<ReflectDetailInfo>
-  /**
-   * 加密后的数据（Base64编码）
-   */
-  EncryptedBody?: string
-  /**
-   * 敏感数据加密信息
-   */
-  Encryption?: Encryption
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  LeftBottom?: Coord
 }
 
 /**
@@ -8987,26 +8968,21 @@ export interface RecognizeGeneralInvoiceResponse {
 }
 
 /**
- * 文本的坐标，以四个顶点坐标表示
-注意：此字段可能返回 null，表示取不到有效值
+ * HandwritingEssayOCR返回参数结构体
  */
-export interface Polygon {
+export interface HandwritingEssayOCRResponse {
   /**
-   * 左上顶点坐标
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
    */
-  LeftTop?: Coord
+  Angle?: number
   /**
-   * 右上顶点坐标
+   * 还原文本信息
    */
-  RightTop?: Coord
+  WordList?: Array<WordItem>
   /**
-   * 右下顶点坐标
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RightBottom?: Coord
-  /**
-   * 左下顶点坐标
-   */
-  LeftBottom?: Coord
+  RequestId?: string
 }
 
 /**
@@ -9638,6 +9614,196 @@ export interface BusInvoiceOCRResponse {
 }
 
 /**
+ * 增值税发票返回值
+ */
+export interface VatInvoiceInfo {
+  /**
+   * 校验码
+   */
+  CheckCode?: string
+  /**
+   * 发票联次
+   */
+  FormType?: string
+  /**
+   * 车船税
+   */
+  TravelTax?: string
+  /**
+   * 购买方地址电话
+   */
+  BuyerAddrTel?: string
+  /**
+   * 购买方银行账号
+   */
+  BuyerBankAccount?: string
+  /**
+   * 公司印章内容
+   */
+  CompanySealContent?: string
+  /**
+   * 税务局章内容
+   */
+  TaxSealContent?: string
+  /**
+   * 服务类型
+   */
+  ServiceName?: string
+  /**
+   * 市
+   */
+  City?: string
+  /**
+   * 是否存在二维码（0：没有，1：有）
+   */
+  QRCodeMark?: number
+  /**
+   * 是否有代开标记（0：没有，1：有）
+   */
+  AgentMark?: number
+  /**
+   * 是否有通行费标记（0：没有，1：有）
+   */
+  TransitMark?: number
+  /**
+   * 是否有成品油标记（0：没有，1：有）
+   */
+  OilMark?: number
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 发票代码
+   */
+  Code?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 机打发票号码
+   */
+  NumberConfirm?: string
+  /**
+   * 开票日期
+   */
+  Date?: string
+  /**
+   * 价税合计（小写）
+   */
+  Total?: string
+  /**
+   * 价税合计（大写）
+   */
+  TotalCn?: string
+  /**
+   * 税前金额
+   */
+  PretaxAmount?: string
+  /**
+   * 合计税额
+   */
+  Tax?: string
+  /**
+   * 机器编号
+   */
+  MachineCode?: string
+  /**
+   * 密码区
+   */
+  Ciphertext?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 销售方名称
+   */
+  Seller?: string
+  /**
+   * 销售方纳税人识别号
+   */
+  SellerTaxID?: string
+  /**
+   * 销售方地址电话
+   */
+  SellerAddrTel?: string
+  /**
+   * 销售方银行账号
+   */
+  SellerBankAccount?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 购买方纳税人识别号
+   */
+  BuyerTaxID?: string
+  /**
+   * 是否有公司印章（0：没有，1：有）
+   */
+  CompanySealMark?: number
+  /**
+   * 开票人
+   */
+  Issuer?: string
+  /**
+   * 复核人
+   */
+  Reviewer?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 增值税发票项目信息
+   */
+  VatInvoiceItemInfos?: Array<VatInvoiceItemInfo>
+  /**
+   * 机打发票代码
+   */
+  CodeConfirm?: string
+  /**
+   * 收款人
+   */
+  Receiptor?: string
+  /**
+   * 是否有全电纸质票（0：没有，1：有）
+   */
+  ElectronicFullMark?: number
+  /**
+   * 全电号码
+   */
+  ElectronicFullNumber?: string
+  /**
+   * 发票联名
+   */
+  FormName?: string
+  /**
+   * 是否有区块链标记（0：没有，1：有）
+   */
+  BlockChainMark?: number
+  /**
+   * 是否有收购标记（0：没有，1：有）
+   */
+  AcquisitionMark?: number
+  /**
+   * 小计金额
+   */
+  SubTotal?: string
+  /**
+   * 小计税额
+   */
+  SubTax?: string
+}
+
+/**
  * 二维码/条形码识别结果信息
  */
 export interface QrcodeResultsInfo {
@@ -9888,6 +10054,28 @@ Y: 有清单 N：无清单
    * 代开销售方税号
    */
   SellerAgentTaxID?: string
+}
+
+/**
+ * 增值税普通发票（卷票）条目
+ */
+export interface VatRollItem {
+  /**
+   * 项目名称
+   */
+  Name?: string
+  /**
+   * 数量
+   */
+  Quantity?: string
+  /**
+   * 单价
+   */
+  Price?: string
+  /**
+   * 金额
+   */
+  Total?: string
 }
 
 /**
@@ -10204,6 +10392,82 @@ export interface QuotaInvoiceOCRResponse {
 }
 
 /**
+ * RecognizeEncryptedIDCardOCR返回参数结构体
+ */
+export interface RecognizeEncryptedIDCardOCRResponse {
+  /**
+   * 姓名（人像面）
+   */
+  Name?: string
+  /**
+   * 性别（人像面）
+   */
+  Sex?: string
+  /**
+   * 民族（人像面）
+   */
+  Nation?: string
+  /**
+   * 出生日期（人像面）
+   */
+  Birth?: string
+  /**
+   * 地址（人像面）
+   */
+  Address?: string
+  /**
+   * 身份证号（人像面）
+   */
+  IdNum?: string
+  /**
+   * 发证机关（国徽面）
+   */
+  Authority?: string
+  /**
+   * 证件有效期（国徽面）
+   */
+  ValidDate?: string
+  /**
+   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
+IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
+Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
+
+Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
+BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
+
+WarnInfos，告警信息，Code 告警码列表和释义：
+-9100 身份证有效日期不合法告警，
+-9101 身份证边框不完整告警，
+
+-9102 身份证复印件告警（黑白及彩色复印件）,
+-9108 身份证复印件告警（仅黑白复印件），
+
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证疑似存在PS痕迹告警，
+-9107 身份证反光告警。
+   */
+  AdvancedInfo?: string
+  /**
+   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   */
+  ReflectDetailInfos?: Array<ReflectDetailInfo>
+  /**
+   * 加密后的数据（Base64编码）
+   */
+  EncryptedBody?: string
+  /**
+   * 敏感数据加密信息
+   */
+  Encryption?: Encryption
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 增值税发票项目明细
  */
 export interface VatInvoiceItem {
@@ -10408,6 +10672,10 @@ export interface SmartStructuralProResponse {
    * 还原文本信息
    */
   WordList?: Array<WordItem>
+  /**
+   * 识别出的token个数
+   */
+  TokenNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10844,6 +11112,7 @@ Config = {"CropIdCard":true,"CropPortrait":true}
   EnableReflectDetail?: boolean
   /**
    * 用于控制是否开启日期校验，默认值为true，打开会进行日期校验。
+   * @deprecated
    */
   EnableDateVerify?: boolean
 }
@@ -10964,6 +11233,45 @@ export interface RideHailingTransportLicenseOCRRequest {
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
+}
+
+/**
+ * VatInvoiceVerifyNew返回参数结构体
+ */
+export interface VatInvoiceVerifyNewResponse {
+  /**
+   * 增值税发票、购车发票、全电发票的基础要素字段信息。
+   */
+  Invoice?: VatInvoice
+  /**
+   * 机动车销售统一发票详细字段信息。
+   */
+  VehicleInvoiceInfo?: VehicleInvoiceInfo
+  /**
+   * 二手车销售统一发票详细字段信息。
+   */
+  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
+  /**
+   * 通行费发票详细字段信息。
+   */
+  PassInvoiceInfoList?: Array<PassInvoiceInfo>
+  /**
+   * 全电发票（铁路电子客票）详细字段信息。
+
+   */
+  ElectronicTrainTicket?: ElectronicTrainTicket
+  /**
+   * 全电发票（航空运输电子客票行程单）详细字段信息。
+   */
+  ElectronicAirTransport?: ElectronicAirTransport
+  /**
+   * 财政发票详细字段信息
+   */
+  FinancialBill?: FinancialBill
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11421,24 +11729,29 @@ export interface BankCardOCRResponse {
 }
 
 /**
- * TableOCR请求参数结构体
+ * RecognizeHealthCodeOCR请求参数结构体
  */
-export interface TableOCRRequest {
+export interface RecognizeHealthCodeOCRRequest {
   /**
    * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
   ImageBase64?: string
   /**
    * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
+  /**
+   * 需要识别的健康码类型列表，为空或不填表示默认为自动识别。
+0:自动识别
+   */
+  Type?: number
 }
 
 /**

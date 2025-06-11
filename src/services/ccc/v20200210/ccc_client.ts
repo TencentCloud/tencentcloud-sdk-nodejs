@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeExtensionRequest,
+  CreateCCCSkillGroupResponse,
   StopAutoCalloutTaskRequest,
   CreateIVRSessionRequest,
   CompanyApplyInfo,
@@ -71,7 +72,7 @@ import {
   DescribeStaffInfoListResponse,
   AILatencyStatisticsInfo,
   UnbindNumberCallOutSkillGroupRequest,
-  CreateAutoCalloutTaskRequest,
+  CreateCarrierPrivilegeNumberApplicantRequest,
   ResumePredictiveDialingCampaignResponse,
   CallInSkillGroupMetrics,
   CreateExtensionResponse,
@@ -80,11 +81,12 @@ import {
   DescribePredictiveDialingSessionsResponse,
   DeleteCCCSkillGroupRequest,
   CreateCompanyApplyRequest,
-  CreateCCCSkillGroupResponse,
+  BindNumberCallInInterfaceRequest,
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
   DescribeSkillGroupInfoListRequest,
   CreateCarrierPrivilegeNumberApplicantResponse,
+  Interface,
   AutoCalloutTaskCalleeInfo,
   SeatUserInfo,
   UpdateCCCSkillGroupResponse,
@@ -97,6 +99,7 @@ import {
   DescribeStaffInfoListRequest,
   AutoCalloutTaskInfo,
   DescribeIvrAudioListRequest,
+  BindNumberCallInInterfaceResponse,
   ForceMemberOfflineRequest,
   SkillGroupInfoItem,
   CreateAIAgentCallRequest,
@@ -142,7 +145,7 @@ import {
   CreateExtensionRequest,
   StaffSkillGroupList,
   ResetExtensionPasswordResponse,
-  CreateCarrierPrivilegeNumberApplicantRequest,
+  CreateAutoCalloutTaskRequest,
   AILatencyDetail,
   AITransferItem,
   Filter,
@@ -179,6 +182,7 @@ import {
   IMSatisfaction,
   DescribeActiveCarrierPrivilegeNumberResponse,
   HangUpCallRequest,
+  ClientInfo,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
   DeleteStaffResponse,
@@ -315,13 +319,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用号码
+   * 查询预测式外呼任务
    */
-  async DisableCCCPhoneNumber(
-    req: DisableCCCPhoneNumberRequest,
-    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
-  ): Promise<DisableCCCPhoneNumberResponse> {
-    return this.request("DisableCCCPhoneNumber", req, cb)
+  async DescribePredictiveDialingCampaign(
+    req: DescribePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: DescribePredictiveDialingCampaignResponse) => void
+  ): Promise<DescribePredictiveDialingCampaignResponse> {
+    return this.request("DescribePredictiveDialingCampaign", req, cb)
   }
 
   /**
@@ -374,6 +378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindNumberCallOutSkillGroupResponse) => void
   ): Promise<BindNumberCallOutSkillGroupResponse> {
     return this.request("BindNumberCallOutSkillGroup", req, cb)
+  }
+
+  /**
+   * 停用号码
+   */
+  async DisableCCCPhoneNumber(
+    req: DisableCCCPhoneNumberRequest,
+    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
+  ): Promise<DisableCCCPhoneNumberResponse> {
+    return this.request("DisableCCCPhoneNumber", req, cb)
   }
 
   /**
@@ -701,13 +715,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询预测式外呼任务
+   * 绑定号码呼入回调接口
    */
-  async DescribePredictiveDialingCampaign(
-    req: DescribePredictiveDialingCampaignRequest,
-    cb?: (error: string, rep: DescribePredictiveDialingCampaignResponse) => void
-  ): Promise<DescribePredictiveDialingCampaignResponse> {
-    return this.request("DescribePredictiveDialingCampaign", req, cb)
+  async BindNumberCallInInterface(
+    req: BindNumberCallInInterfaceRequest,
+    cb?: (error: string, rep: BindNumberCallInInterfaceResponse) => void
+  ): Promise<BindNumberCallInInterfaceResponse> {
+    return this.request("BindNumberCallInInterface", req, cb)
   }
 
   /**

@@ -30,6 +30,20 @@ export interface CreatePrivilegeCodeRequest {
 }
 
 /**
+ * 终端硬件信息列表响应详情
+ */
+export interface DescribeDeviceHardwareInfoListRspData {
+  /**
+   * 分页数据
+   */
+  Page?: Paging
+  /**
+   * 终端硬件信息数据数组
+   */
+  Items?: Array<DescribeDeviceHardwareInfoItem>
+}
+
+/**
  * DescribeDLPFileDetectResult请求参数结构体
  */
 export interface DescribeDLPFileDetectResultRequest {
@@ -166,6 +180,20 @@ export interface CreateDLPFileDetectionTaskData {
 }
 
 /**
+ * DescribeSoftwareInformation返回参数结构体
+ */
+export interface DescribeSoftwareInformationResponse {
+  /**
+   * 业务响应数据
+   */
+  Data?: DescribeSoftwareInformationPageData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自动划分规则数据
  */
 export interface ComplexRule {
@@ -177,6 +205,20 @@ export interface ComplexRule {
    * 表达式间逻辑关系
    */
   Relation?: string
+}
+
+/**
+ * DescribeDeviceHardwareInfoList返回参数结构体
+ */
+export interface DescribeDeviceHardwareInfoListResponse {
+  /**
+   * 分页的data数据
+   */
+  Data?: DescribeDeviceHardwareInfoListRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -205,6 +247,76 @@ export interface DescribeRootAccountGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 终端硬件信息列表Item数据
+ */
+export interface DescribeDeviceHardwareInfoItem {
+  /**
+   * 设备ID
+   */
+  Id?: number
+  /**
+   * 设备唯一标识符
+   */
+  Mid?: string
+  /**
+   * OS平台 0 Windows 1 Linux 2 macOS 4 Android 5 iOS
+   */
+  OsType?: number
+  /**
+   * 终端名
+   */
+  Name?: string
+  /**
+   * 终端用户名
+   */
+  UserName?: string
+  /**
+   * 授权状态（ 4未授权 5已授权）
+   */
+  Status?: number
+  /**
+   * 设备所属分组ID
+   */
+  GroupId?: number
+  /**
+   * 设备所属分组名
+   */
+  GroupName?: string
+  /**
+   * 设备所属分组路径
+   */
+  GroupNamePath?: string
+  /**
+   * 最近登录账户的姓名
+   */
+  AccountName?: string
+  /**
+   * 出口IP
+   */
+  Ip?: string
+  /**
+   * MAC地址
+   */
+  MacAddr?: string
+  /**
+   * CPU品牌型号
+   */
+  Cpu?: string
+  /**
+   * 内存信息
+   */
+  Memory?: string
+  /**
+   * 硬盘信息
+   */
+  HardDiskSize?: string
+  /**
+   * 显示器品牌型号
+   */
+  Monitor?: string
 }
 
 /**
@@ -374,6 +486,44 @@ export interface RuleExpression {
 export type DescribeRootAccountGroupRequest = null
 
 /**
+ * 软件详情响应对象集合
+ */
+export interface SoftwareInformationData {
+  /**
+   * 软件名称
+   */
+  Name?: string
+  /**
+   * 安装时间
+   */
+  InstallDate?: string
+  /**
+   * 软件列表id(只支持32位)
+   */
+  SoftwareId?: number
+  /**
+   * 唯一标识Mid
+   */
+  Mid?: string
+  /**
+   * 软件版本
+   */
+  Version?: string
+  /**
+   * 公司名
+   */
+  CorpName?: string
+  /**
+   * 列表Id(只支持32位)
+   */
+  Id?: number
+  /**
+   * 盗版风险（0:未支持，1:风险，2:未发现，3:未开启）
+   */
+  PiracyRisk?: number
+}
+
+/**
  * 账户分组详情响应数据
  */
 export interface DescribeAccountGroupsPageResp {
@@ -513,6 +663,21 @@ export interface DescribeLocalAccountsRequest {
    * 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户
    */
   ShowFlag?: number
+}
+
+/**
+ * DescribeSoftwareInformation请求参数结构体
+ */
+export interface DescribeSoftwareInformationRequest {
+  /**
+   * 终端唯一标识Mid
+   */
+  Mid?: string
+  /**
+   * 过滤条件、分页参数
+<li>Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。</li>
+   */
+  Condition?: Condition
 }
 
 /**
@@ -1056,6 +1221,20 @@ export interface DescribeLocalAccountsData {
 }
 
 /**
+ * 业务响应数据
+ */
+export interface DescribeSoftwareInformationPageData {
+  /**
+   * 软件详情响应对象集合
+   */
+  Items?: Array<SoftwareInformationData>
+  /**
+   * 分页公共对象
+   */
+  Page?: Paging
+}
+
+/**
  * CreateDLPFileDetectionTask返回参数结构体
  */
 export interface CreateDLPFileDetectionTaskResponse {
@@ -1164,6 +1343,28 @@ export interface CreatePrivilegeCodeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeviceHardwareInfoList请求参数结构体
+ */
+export interface DescribeDeviceHardwareInfoListRequest {
+  /**
+   * 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
+   */
+  GroupId: number
+  /**
+   * 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
+   */
+  OsType: number
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100
+   */
+  Condition?: Condition
 }
 
 /**
