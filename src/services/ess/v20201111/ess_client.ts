@@ -183,6 +183,7 @@ import {
   ApproverComponentLimitType,
   HasAuthOrganization,
   RecipientComponentInfo,
+  OperateSealsResponse,
   CreateFlowEvidenceReportResponse,
   CreatePrepareFlowGroupResponse,
   CreateIntegrationRoleResponse,
@@ -329,6 +330,7 @@ import {
   CreateFlowBlockchainEvidenceUrlRequest,
   CreateBatchQuickSignUrlRequest,
   FileUrl,
+  OperateSealsRequest,
   CreateOrganizationInfoChangeUrlRequest,
   DescribeOrganizationGroupOrganizationsResponse,
   CreateOrganizationGroupInvitationLinkResponse,
@@ -1400,6 +1402,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFileUrlsResponse) => void
   ): Promise<DescribeFileUrlsResponse> {
     return this.request("DescribeFileUrls", req, cb)
+  }
+
+  /**
+   * 修改印章状态（停用、启用）
+   */
+  async OperateSeals(
+    req: OperateSealsRequest,
+    cb?: (error: string, rep: OperateSealsResponse) => void
+  ): Promise<OperateSealsResponse> {
+    return this.request("OperateSeals", req, cb)
   }
 
   /**

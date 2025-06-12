@@ -4568,8 +4568,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消漏洞忽略
-   */
+     * 产品变动切换到了\\n切换到 AddVulIgnoreRule / ModifyVulIgnoreRule  CancelVulIgnoreRule\\n相关接口
+
+取消漏洞忽略
+     */
   async CancelIgnoreVul(
     req: CancelIgnoreVulRequest,
     cb?: (error: string, rep: CancelIgnoreVulResponse) => void
@@ -6391,8 +6393,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
-   */
+     * 产品变动切换到了\\n切换到 AddVulIgnoreRule / ModifyVulIgnoreRule  CancelVulIgnoreRule\\n相关接口
+
+本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+     */
   async IgnoreImpactedHosts(
     req: IgnoreImpactedHostsRequest,
     cb?: (error: string, rep: IgnoreImpactedHostsResponse) => void

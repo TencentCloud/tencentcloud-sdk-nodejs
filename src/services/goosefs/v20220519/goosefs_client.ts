@@ -96,8 +96,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询GooseFS集群角色
-   */
+     * 接口废弃
+
+查询GooseFS集群角色
+     */
   async DescribeClusterRoles(
     req: DescribeClusterRolesRequest,
     cb?: (error: string, rep: DescribeClusterRolesResponse) => void

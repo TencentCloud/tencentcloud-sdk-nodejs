@@ -5894,13 +5894,12 @@ FILE：手动添加域名文件验证。 需要用户手动在域名站点根目
    */
   AutoRenewFlag?: number
   /**
-   * 密钥对参数，RSA支持2048，4096。ECC仅支持prime256v1。加密算法选择ECC时，此参数必填
-国密证书类型本字段不用传
+   * 密钥对参数，RSA支持2048，4096。ECC仅支持prime256v1。当 CSR 生成方式为online的时候，此参数必填。
+
    */
   CsrKeyParameter?: string
   /**
-   * 加密算法，取值为ECC、RSA， 默认为RSA
-国密证书类型本字段不用传
+   * 加密算法，取值为ECC、RSA， 默认为RSA。当 CSR 生成方式为online的时候，此参数必填。
    */
   CsrEncryptAlgo?: string
   /**

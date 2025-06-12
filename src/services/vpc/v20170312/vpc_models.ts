@@ -12442,11 +12442,11 @@ export interface DescribeNatGatewayDirectConnectGatewayRouteRequest {
    */
   VpcId: string
   /**
-   * 0到200之间
+   * 查询NAT网关绑定的路由数量，可选值0-200，默认为10
    */
   Limit?: number
   /**
-   * 大于0
+   * 数据偏移量，默认为0
    */
   Offset?: number
 }
@@ -13685,11 +13685,11 @@ export interface DescribeNatGatewayDirectConnectGatewayRouteResponse {
   /**
    * 路由数据
    */
-  NatDirectConnectGatewayRouteSet: Array<NatDirectConnectGatewayRoute>
+  NatDirectConnectGatewayRouteSet?: Array<NatDirectConnectGatewayRoute>
   /**
    * 路由总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16555,7 +16555,7 @@ export interface RefreshDirectConnectGatewayRouteToNatGatewayResponse {
   /**
    * IDC子网信息
    */
-  DirectConnectSubnetSet: Array<DirectConnectSubnet>
+  DirectConnectSubnetSet?: Array<DirectConnectSubnet>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

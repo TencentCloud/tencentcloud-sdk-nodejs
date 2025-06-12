@@ -118,6 +118,16 @@ it("lke.v20231130.DeleteQA", async function () {
     }
 })
 
+it("lke.v20231130.StopWorkflowRun", async function () {
+    try {
+       const data = await client.StopWorkflowRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.CreateAttributeLabel", async function () {
     try {
        const data = await client.CreateAttributeLabel({})
@@ -288,9 +298,9 @@ it("lke.v20231130.DescribeSearchStatsGraph", async function () {
     }
 })
 
-it("lke.v20231130.DeleteDocCate", async function () {
+it("lke.v20231130.ListWorkflowRuns", async function () {
     try {
-       const data = await client.DeleteDocCate({})
+       const data = await client.ListWorkflowRuns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +488,26 @@ it("lke.v20231130.DescribeTokenUsage", async function () {
     }
 })
 
+it("lke.v20231130.DescribeNodeRun", async function () {
+    try {
+       const data = await client.DescribeNodeRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.DeleteDocCate", async function () {
+    try {
+       const data = await client.DeleteDocCate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ListQACate", async function () {
     try {
        const data = await client.ListQACate({})
@@ -588,9 +618,9 @@ it("lke.v20231130.DeleteSharedKnowledge", async function () {
     }
 })
 
-it("lke.v20231130.DescribeRobotBizIDByAppKey", async function () {
+it("lke.v20231130.ModifyDocCate", async function () {
     try {
-       const data = await client.DescribeRobotBizIDByAppKey({})
+       const data = await client.ModifyDocCate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +631,16 @@ it("lke.v20231130.DescribeRobotBizIDByAppKey", async function () {
 it("lke.v20231130.ListDoc", async function () {
     try {
        const data = await client.ListDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.CreateWorkflowRun", async function () {
+    try {
+       const data = await client.CreateWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +678,9 @@ it("lke.v20231130.GetLikeDataCount", async function () {
     }
 })
 
-it("lke.v20231130.ModifyDocCate", async function () {
+it("lke.v20231130.DescribeRobotBizIDByAppKey", async function () {
     try {
-       const data = await client.ModifyDocCate({})
+       const data = await client.DescribeRobotBizIDByAppKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,9 +748,9 @@ it("lke.v20231130.IsTransferIntent", async function () {
     }
 })
 
-it("lke.v20231130.DescribeReleaseInfo", async function () {
+it("lke.v20231130.IgnoreUnsatisfiedReply", async function () {
     try {
-       const data = await client.DescribeReleaseInfo({})
+       const data = await client.IgnoreUnsatisfiedReply({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,6 +938,16 @@ it("lke.v20231130.GetAnswerTypeDataCount", async function () {
     }
 })
 
+it("lke.v20231130.DescribeWorkflowRun", async function () {
+    try {
+       const data = await client.DescribeWorkflowRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ListReleaseDocPreview", async function () {
     try {
        const data = await client.ListReleaseDocPreview({})
@@ -1048,9 +1098,9 @@ it("lke.v20231130.ListAppKnowledgeDetail", async function () {
     }
 })
 
-it("lke.v20231130.IgnoreUnsatisfiedReply", async function () {
+it("lke.v20231130.DescribeReleaseInfo", async function () {
     try {
-       const data = await client.IgnoreUnsatisfiedReply({})
+       const data = await client.DescribeReleaseInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

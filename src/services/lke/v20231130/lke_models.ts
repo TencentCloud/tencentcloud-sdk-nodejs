@@ -369,6 +369,40 @@ export interface DeleteDocRequest {
 }
 
 /**
+ * CreateWorkflowRun返回参数结构体
+ */
+export interface CreateWorkflowRunResponse {
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 运行环境。0: 测试环境； 1: 正式环境
+   */
+  RunEnv?: number
+  /**
+   * 用户输入的内容
+   */
+  Query?: string
+  /**
+   * API参数配置
+   */
+  CustomVariables?: Array<CustomVariable>
+  /**
+   * 创建时间（毫秒时间戳）
+   */
+  CreateTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetAnswerTypeDataCount请求参数结构体
  */
 export interface GetAnswerTypeDataCountRequest {
@@ -772,28 +806,25 @@ export interface GetAppSecretResponse {
 }
 
 /**
- * ListRejectedQuestion请求参数结构体
+ * CreateWorkflowRun请求参数结构体
  */
-export interface ListRejectedQuestionRequest {
+export interface CreateWorkflowRunRequest {
+  /**
+   * 运行环境。0: 测试环境； 1: 正式环境
+   */
+  RunEnv?: number
   /**
    * 应用ID
    */
-  BotBizId: string
+  AppBizId?: string
   /**
-   * 页码
-
-   */
-  PageNumber: number
-  /**
-   * 每页数量
-
-   */
-  PageSize: number
-  /**
-   * 查询内容
-
+   * 用户输入的内容
    */
   Query?: string
+  /**
+   * API参数配置
+   */
+  CustomVariables?: Array<CustomVariable>
 }
 
 /**
@@ -886,13 +917,27 @@ export interface AttrLabelRefer {
 }
 
 /**
- * ReferShareKnowledge返回参数结构体
+ * DescribeWorkflowRun请求参数结构体
  */
-export interface ReferShareKnowledgeResponse {
+export interface DescribeWorkflowRunRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 工作流运行实例ID
    */
-  RequestId?: string
+  WorkflowRunId?: string
+}
+
+/**
+ * 工作流的API参数
+ */
+export interface CustomVariable {
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
+   * 参数的值
+   */
+  Value?: string
 }
 
 /**
@@ -1171,6 +1216,72 @@ export interface KnowledgeQaSearch {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceStatus?: number
+}
+
+/**
+ * 工作流运行实例详情
+ */
+export interface WorkflowRunDetail {
+  /**
+   * 运行环境。0: 测试环境； 1: 正式环境
+   */
+  RunEnv?: number
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 所属工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消
+   */
+  State?: number
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+  /**
+   * 创建时间（毫秒时间戳）
+   */
+  CreateTime?: string
+  /**
+   * 开始时间（毫秒时间戳）
+   */
+  StartTime?: string
+  /**
+   * 结束时间（毫秒时间戳）
+   */
+  EndTime?: string
+  /**
+   * 工作流画布Json
+   */
+  DialogJson?: string
+  /**
+   * 用户的输入
+   */
+  Query?: string
+  /**
+   * 主模型名称
+   */
+  MainModelName?: string
+  /**
+   * API参数配置
+   */
+  CustomVariables?: Array<CustomVariable>
 }
 
 /**
@@ -2077,6 +2188,28 @@ export interface ReconstructDocumentResponse {
 }
 
 /**
+ * IgnoreUnsatisfiedReply请求参数结构体
+ */
+export interface IgnoreUnsatisfiedReplyRequest {
+  /**
+   * 应用ID
+   */
+  BotBizId: string
+  /**
+   * 不满意回复ID
+   */
+  ReplyBizIds: Array<string>
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+}
+
+/**
  * ListDocCate请求参数结构体
  */
 export interface ListDocCateRequest {
@@ -2630,29 +2763,33 @@ export interface AttributeLabel {
 }
 
 /**
- * 下拉框选项
+ * ListWorkflowRuns请求参数结构体
  */
-export interface Option {
+export interface ListWorkflowRunsRequest {
   /**
-   * 文本
-注意：此字段可能返回 null，表示取不到有效值。
+   * 运行环境。0: 测试环境； 1: 正式环境
    */
-  Text?: string
+  RunEnv?: number
   /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用ID
    */
-  Value?: string
+  AppBizId?: string
   /**
-   * 文件字符数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页码
    */
-  CharSize?: string
+  Page?: number
   /**
-   * 文件类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页数量
    */
-  FileType?: string
+  PageSize?: number
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -2782,6 +2919,16 @@ export interface ListReleaseDocPreviewResponse {
 }
 
 /**
+ * StopWorkflowRun请求参数结构体
+ */
+export interface StopWorkflowRunRequest {
+  /**
+   * 工作流运行实例ID
+   */
+  WorkflowRunId?: string
+}
+
+/**
  * 解析为 word 文档的结果
  */
 export interface WordRecognizeInfo {
@@ -2821,6 +2968,16 @@ export interface RenameDocRequest {
    * 新文档名，需要带上后缀
    */
   NewName?: string
+}
+
+/**
+ * StopWorkflowRun返回参数结构体
+ */
+export interface StopWorkflowRunResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4247,6 +4404,17 @@ export interface GroupQARequest {
 }
 
 /**
+ * 任务参数
+ */
+export interface TaskParams {
+  /**
+   * 下载地址,需要通过cos桶临时密钥去下载
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosPath?: string
+}
+
+/**
  * RateMsgRecord请求参数结构体
  */
 export interface RateMsgRecordRequest {
@@ -4377,25 +4545,13 @@ export interface DeleteSharedKnowledgeRequest {
 }
 
 /**
- * IgnoreUnsatisfiedReply请求参数结构体
+ * DescribeNodeRun请求参数结构体
  */
-export interface IgnoreUnsatisfiedReplyRequest {
+export interface DescribeNodeRunRequest {
   /**
-   * 应用ID
+   * 节点运行实例ID
    */
-  BotBizId: string
-  /**
-   * 不满意回复ID
-   */
-  ReplyBizIds: Array<string>
-  /**
-   * 登录用户主账号(集成商模式必填)
-   */
-  LoginUin?: string
-  /**
-   * 登录用户子账号(集成商模式必填)
-   */
-  LoginSubAccountUin?: string
+  NodeRunId?: string
 }
 
 /**
@@ -4422,6 +4578,56 @@ export interface DescribeReleaseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 工作流运行实例的基本信息
+ */
+export interface WorkflowRunBase {
+  /**
+   * 运行环境。0: 测试环境； 1: 正式环境
+   */
+  RunEnv?: number
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 所属工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消
+   */
+  State?: number
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+  /**
+   * 创建时间（毫秒时间戳）
+   */
+  CreateTime?: string
+  /**
+   * 开始时间（毫秒时间戳）
+   */
+  StartTime?: string
+  /**
+   * 结束时间（毫秒时间戳）
+   */
+  EndTime?: string
 }
 
 /**
@@ -4646,26 +4852,112 @@ export interface VerifyQARequest {
 }
 
 /**
- * 文本的坐标，以四个顶点坐标表示
-注意：此字段可能返回 null，表示取不到有效值
+ * 工作流节点运行详情
  */
-export interface Polygon {
+export interface NodeRunDetail {
   /**
-   * 左上顶点坐标
+   * 节点运行的ID
    */
-  LeftTop?: Coord
+  NodeRunId?: string
   /**
-   * 右上顶点坐标
+   * 节点ID
    */
-  RightTop?: Coord
+  NodeId?: string
   /**
-   * 右下顶点坐标
+   * 工作流运行实例的ID
    */
-  RightBottom?: Coord
+  WorkflowRunId?: string
   /**
-   * 左下顶点坐标
+   * 节点名称
    */
-  LeftBottom?: Coord
+  NodeName?: string
+  /**
+   * 节点类型。
+1： 开始节点
+2：参数提取节点
+3：大模型节点
+4：知识问答节点
+5：知识检索节点
+6：标签提取节点
+7：代码执行节点
+8：工具节点
+9：逻辑判断节点
+10：回复节点
+11：选项卡节点
+12：循环节点
+13：意图识别节点
+14：工作流节点
+15：插件节点
+16：结束节点
+17: 变量聚合节点数据
+18: 批处理节点
+19: 消息队列节点
+   */
+  NodeType?: number
+  /**
+   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
+   */
+  State?: number
+  /**
+   * 错误码
+   */
+  FailCode?: string
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗时间（毫秒）
+   */
+  CostMilliseconds?: number
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+  /**
+   * 输入变量信息
+   */
+  Input?: string
+  /**
+   * 节点的输入的完整内容的链接。（当Input内容超过限制的时候此字段才有值）
+   */
+  InputRef?: string
+  /**
+   * 输出变量信息
+   */
+  Output?: string
+  /**
+   * 节点的输出的完整内容的链接。（当Output内容超过限制的时候此字段才有值）
+   */
+  OutputRef?: string
+  /**
+   * 原始输出信息。部分节点才有值，如工具节点、代码节点
+   */
+  TaskOutput?: string
+  /**
+   * 任务的原始输出的完整内容的链接。（当TaskOutput内容超过限制的时候此字段才有值）
+   */
+  TaskOutputRef?: string
+  /**
+   * 节点的日志
+   */
+  Log?: string
+  /**
+   * 节点的日志的完整内容的链接志（当Log内容超过限制的时候才有值）
+   */
+  LogRef?: string
+  /**
+   * 开始时间戳（毫秒）
+   */
+  StartTime?: string
+  /**
+   * 结束时间戳（毫秒）
+   */
+  EndTime?: string
+  /**
+   * LLM统计信息。
+   */
+  StatisticInfos?: Array<StatisticInfo>
 }
 
 /**
@@ -5001,6 +5293,16 @@ export interface ModifyDocCateRequest {
    * 分类业务ID
    */
   CateBizId: string
+}
+
+/**
+ * ReferShareKnowledge返回参数结构体
+ */
+export interface ReferShareKnowledgeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5364,48 +5666,68 @@ export interface RunReRankResponse {
 }
 
 /**
- * 调试信息
+ * 节点运行的基本信息
  */
-export interface ProcedureDebugging {
+export interface NodeRunBase {
   /**
-   * 检索query
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点运行的ID
    */
-  Content?: string
+  NodeRunId?: string
   /**
-   * 系统prompt
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点ID
    */
-  System?: string
+  NodeId?: string
   /**
-   * 多轮历史信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流运行实例的ID
    */
-  Histories?: Array<HistorySummary>
+  WorkflowRunId?: string
   /**
-   * 检索知识
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点名称
    */
-  Knowledge?: Array<KnowledgeSummary>
+  NodeName?: string
   /**
-   * 任务流程
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点类型。
+1： 开始节点
+2：参数提取节点
+3：大模型节点
+4：知识问答节点
+5：知识检索节点
+6：标签提取节点
+7：代码执行节点
+8：工具节点
+9：逻辑判断节点
+10：回复节点
+11：选项卡节点
+12：循环节点
+13：意图识别节点
+14：工作流节点
+15：插件节点
+16：结束节点
+17: 变量聚合节点数据
+18: 批处理节点
+19: 消息队列节点
    */
-  TaskFlow?: TaskFlowSummary
+  NodeType?: number
   /**
-   * 工作流调试信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
    */
-  WorkFlow?: WorkFlowSummary
+  State?: number
   /**
-   * Agent调试信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 错误码
    */
-  Agent?: AgentDebugInfo
+  FailCode?: string
   /**
-   * 自定义参数
+   * 错误信息
    */
-  CustomVariables?: Array<string>
+  FailMessage?: string
+  /**
+   * 消耗时间（毫秒）
+   */
+  CostMilliseconds?: number
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
 }
 
 /**
@@ -5739,6 +6061,29 @@ export interface DeleteRejectedQuestionRequest {
 
    */
   RejectedBizIds: Array<string>
+}
+
+/**
+ * 文本的坐标，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值
+ */
+export interface Polygon {
+  /**
+   * 左上顶点坐标
+   */
+  LeftTop?: Coord
+  /**
+   * 右上顶点坐标
+   */
+  RightTop?: Coord
+  /**
+   * 右下顶点坐标
+   */
+  RightBottom?: Coord
+  /**
+   * 左下顶点坐标
+   */
+  LeftBottom?: Coord
 }
 
 /**
@@ -6518,19 +6863,21 @@ export interface DeleteAppResponse {
 }
 
 /**
- * 检索范围配置
+ * ListWorkflowRuns返回参数结构体
  */
-export interface SearchRange {
+export interface ListWorkflowRunsResponse {
   /**
-   * 检索条件and/or
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总数
    */
-  Condition?: string
+  Total?: number
   /**
-   * 自定义变量和标签关系数据	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流运行列表
    */
-  ApiVarAttrInfos?: Array<ApiVarAttrInfo>
+  WorkflowRuns?: Array<WorkflowRunBase>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7099,6 +7446,24 @@ export interface CreateAttributeLabelResponse {
 }
 
 /**
+ * DescribeWorkflowRun返回参数结构体
+ */
+export interface DescribeWorkflowRunResponse {
+  /**
+   * 总数
+   */
+  WorkflowRun?: WorkflowRunDetail
+  /**
+   * 节点列表
+   */
+  NodeRuns?: Array<NodeRunBase>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListAppKnowledgeDetail请求参数结构体
  */
 export interface ListAppKnowledgeDetailRequest {
@@ -7194,6 +7559,51 @@ export interface ListReleaseQAPreviewRequest {
    * 发布状态(4发布成功5发布失败)
    */
   ReleaseStatus?: Array<number | bigint>
+}
+
+/**
+ * 调试信息
+ */
+export interface ProcedureDebugging {
+  /**
+   * 检索query
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 系统prompt
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  System?: string
+  /**
+   * 多轮历史信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Histories?: Array<HistorySummary>
+  /**
+   * 检索知识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Knowledge?: Array<KnowledgeSummary>
+  /**
+   * 任务流程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlow?: TaskFlowSummary
+  /**
+   * 工作流调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlow?: WorkFlowSummary
+  /**
+   * Agent调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Agent?: AgentDebugInfo
+  /**
+   * 自定义参数
+   */
+  CustomVariables?: Array<string>
 }
 
 /**
@@ -7383,14 +7793,28 @@ export interface WorkFlowSummary {
 }
 
 /**
- * 任务参数
+ * ListRejectedQuestion请求参数结构体
  */
-export interface TaskParams {
+export interface ListRejectedQuestionRequest {
   /**
-   * 下载地址,需要通过cos桶临时密钥去下载
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用ID
    */
-  CosPath?: string
+  BotBizId: string
+  /**
+   * 页码
+
+   */
+  PageNumber: number
+  /**
+   * 每页数量
+
+   */
+  PageSize: number
+  /**
+   * 查询内容
+
+   */
+  Query?: string
 }
 
 /**
@@ -7574,6 +7998,20 @@ export interface ListModelResponse {
    * 模型列表
    */
   List?: Array<ModelInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeNodeRun返回参数结构体
+ */
+export interface DescribeNodeRunResponse {
+  /**
+   * 节点运行实例详情
+   */
+  NodeRun?: NodeRunDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7910,6 +8348,32 @@ export interface ReleaseRejectedQuestion {
 }
 
 /**
+ * 下拉框选项
+ */
+export interface Option {
+  /**
+   * 文本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 文件字符数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CharSize?: string
+  /**
+   * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileType?: string
+}
+
+/**
  * CreateQACate请求参数结构体
  */
 export interface CreateQACateRequest {
@@ -7926,6 +8390,22 @@ export interface CreateQACateRequest {
 
    */
   Name: string
+}
+
+/**
+ * 检索范围配置
+ */
+export interface SearchRange {
+  /**
+   * 检索条件and/or
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Condition?: string
+  /**
+   * 自定义变量和标签关系数据	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiVarAttrInfos?: Array<ApiVarAttrInfo>
 }
 
 /**

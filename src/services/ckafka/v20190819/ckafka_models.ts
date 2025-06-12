@@ -1843,6 +1843,10 @@ export interface DatahubTaskInfo {
    * 步骤列表
    */
   StepList?: Array<string>
+  /**
+   * 任务描述信息
+   */
+  Description?: string
 }
 
 /**

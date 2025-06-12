@@ -598,6 +598,16 @@ it("ess.v20201111.DescribeFileUrls", async function () {
     }
 })
 
+it("ess.v20201111.OperateSeals", async function () {
+    try {
+       const data = await client.OperateSeals({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateIntegrationRole", async function () {
     try {
        const data = await client.CreateIntegrationRole({})

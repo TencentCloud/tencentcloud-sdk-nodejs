@@ -30,6 +30,7 @@ import {
   ListSelectDocResponse,
   DescribeReleaseInfoRequest,
   DeleteDocRequest,
+  CreateWorkflowRunResponse,
   GetAnswerTypeDataCountRequest,
   RunNodeInfo,
   AgentDebugInfo,
@@ -44,13 +45,14 @@ import {
   ModifyAppResponse,
   ExportQAListResponse,
   GetAppSecretResponse,
-  ListRejectedQuestionRequest,
+  CreateWorkflowRunRequest,
   CreateQACateResponse,
   ModifyDocAttrRangeResponse,
   CreateSharedKnowledgeRequest,
   DescribeQARequest,
   AttrLabelRefer,
-  ReferShareKnowledgeResponse,
+  DescribeWorkflowRunRequest,
+  CustomVariable,
   DescribeUnsatisfiedReplyContextRequest,
   Procedure,
   GetEmbeddingRequest,
@@ -62,6 +64,7 @@ import {
   ModifyDocResponse,
   ReleaseDoc,
   KnowledgeQaSearch,
+  WorkflowRunDetail,
   CreateCorpResponse,
   ListQARequest,
   DescribeKnowledgeUsageResponse,
@@ -98,6 +101,7 @@ import {
   DescribeRobotBizIDByAppKeyResponse,
   RenameDocResponse,
   ReconstructDocumentResponse,
+  IgnoreUnsatisfiedReplyRequest,
   ListDocCateRequest,
   DescribeDocResponse,
   CreateReleaseRequest,
@@ -116,7 +120,7 @@ import {
   ModifyAttributeLabelRequest,
   ConvertDocumentRequest,
   AttributeLabel,
-  Option,
+  ListWorkflowRunsRequest,
   Usage,
   ListUnsatisfiedReplyResponse,
   GetAppSecretRequest,
@@ -124,8 +128,10 @@ import {
   DeleteQACateResponse,
   SaveDocResponse,
   ListReleaseDocPreviewResponse,
+  StopWorkflowRunRequest,
   WordRecognizeInfo,
   RenameDocRequest,
+  StopWorkflowRunResponse,
   SummaryConfig,
   GenerateQAResponse,
   GetTaskStatusResponse,
@@ -180,6 +186,7 @@ import {
   ReconstructDocumentRequest,
   GetAnswerTypeDataCountResponse,
   GroupQARequest,
+  TaskParams,
   RateMsgRecordRequest,
   DescribeCallStatsGraphRequest,
   GetMsgRecordResponse,
@@ -187,12 +194,13 @@ import {
   GetReconstructDocumentResultRequest,
   DescribeKnowledgeUsageRequest,
   DeleteSharedKnowledgeRequest,
-  IgnoreUnsatisfiedReplyRequest,
+  DescribeNodeRunRequest,
   DescribeReleaseResponse,
+  WorkflowRunBase,
   DescribeConcurrencyUsageGraphResponse,
   ListDocItem,
   VerifyQARequest,
-  Polygon,
+  NodeRunDetail,
   AppModel,
   Stat,
   DescribeKnowledgeUsagePieGraphResponse,
@@ -206,6 +214,7 @@ import {
   RetryDocAuditResponse,
   GetReconstructDocumentResultResponse,
   ModifyDocCateRequest,
+  ReferShareKnowledgeResponse,
   RejectedQuestion,
   GetLikeDataCountRequest,
   ModifyAttributeLabelResponse,
@@ -218,7 +227,7 @@ import {
   CateInfo,
   DescribeSharedKnowledgeResponse,
   RunReRankResponse,
-  ProcedureDebugging,
+  NodeRunBase,
   KnowledgeQaConfig,
   Coord,
   MsgRecordReference,
@@ -227,6 +236,7 @@ import {
   ListReleaseConfigPreviewResponse,
   ModelInfo,
   DeleteRejectedQuestionRequest,
+  Polygon,
   Highlight,
   FileInfo,
   ExportQAListRequest,
@@ -255,7 +265,7 @@ import {
   ModifyDocRequest,
   DescribeTokenUsageResponse,
   DeleteAppResponse,
-  SearchRange,
+  ListWorkflowRunsResponse,
   ListAttributeLabelRequest,
   DeleteDocCateRequest,
   AgentReference,
@@ -276,11 +286,13 @@ import {
   GetAppKnowledgeCountResponse,
   RetryReleaseResponse,
   CreateAttributeLabelResponse,
+  DescribeWorkflowRunResponse,
   ListAppKnowledgeDetailRequest,
   CreateQAResponse,
   ReRankDataObject,
   ListQACateRequest,
   ListReleaseQAPreviewRequest,
+  ProcedureDebugging,
   DescribeReleaseInfoResponse,
   IsTransferIntentRequest,
   DescribeAppResponse,
@@ -288,7 +300,7 @@ import {
   ModifyRejectedQuestionResponse,
   GetVarListResponse,
   WorkFlowSummary,
-  TaskParams,
+  ListRejectedQuestionRequest,
   ListAppCategoryRspOption,
   UpdateSharedKnowledgeResponse,
   DescribeStorageCredentialRequest,
@@ -298,6 +310,7 @@ import {
   ModifyDocCateResponse,
   ListReleaseResponse,
   ListModelResponse,
+  DescribeNodeRunResponse,
   ListAttributeLabelResponse,
   ListReleaseItem,
   ModifyQAResponse,
@@ -313,7 +326,9 @@ import {
   CreateVarResponse,
   ModifyDocAttrRangeRequest,
   ReleaseRejectedQuestion,
+  Option,
   CreateQACateRequest,
+  SearchRange,
   DescribeRobotBizIDByAppKeyRequest,
   CreateVarRequest,
   DocumentRecognizeInfo,
@@ -441,6 +456,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteQAResponse) => void
   ): Promise<DeleteQAResponse> {
     return this.request("DeleteQA", req, cb)
+  }
+
+  /**
+   * 此接口用来停止正在进行的工作流异步运行实例。
+   */
+  async StopWorkflowRun(
+    req: StopWorkflowRunRequest,
+    cb?: (error: string, rep: StopWorkflowRunResponse) => void
+  ): Promise<StopWorkflowRunResponse> {
+    return this.request("StopWorkflowRun", req, cb)
   }
 
   /**
@@ -616,13 +641,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Doc分类删除
+   * 此接口可查询已创建的所有工作流异步运行实例。
    */
-  async DeleteDocCate(
-    req: DeleteDocCateRequest,
-    cb?: (error: string, rep: DeleteDocCateResponse) => void
-  ): Promise<DeleteDocCateResponse> {
-    return this.request("DeleteDocCate", req, cb)
+  async ListWorkflowRuns(
+    req: ListWorkflowRunsRequest,
+    cb?: (error: string, rep: ListWorkflowRunsResponse) => void
+  ): Promise<ListWorkflowRunsResponse> {
+    return this.request("ListWorkflowRuns", req, cb)
   }
 
   /**
@@ -806,6 +831,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过DescribeWorkflowRun接口获取了工作流异步运行的整体内容，其中包含了基本的节点信息，再通用本接口可查看节点的运行详情（包括输入、输出、日志等）。
+   */
+  async DescribeNodeRun(
+    req: DescribeNodeRunRequest,
+    cb?: (error: string, rep: DescribeNodeRunResponse) => void
+  ): Promise<DescribeNodeRunResponse> {
+    return this.request("DescribeNodeRun", req, cb)
+  }
+
+  /**
+   * Doc分类删除
+   */
+  async DeleteDocCate(
+    req: DeleteDocCateRequest,
+    cb?: (error: string, rep: DeleteDocCateResponse) => void
+  ): Promise<DeleteDocCateResponse> {
+    return this.request("DeleteDocCate", req, cb)
+  }
+
+  /**
    * 获取QA分类
    */
   async ListQACate(
@@ -916,13 +961,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过appKey获取应用业务ID
+   * 修改Doc分类
    */
-  async DescribeRobotBizIDByAppKey(
-    req: DescribeRobotBizIDByAppKeyRequest,
-    cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void
-  ): Promise<DescribeRobotBizIDByAppKeyResponse> {
-    return this.request("DescribeRobotBizIDByAppKey", req, cb)
+  async ModifyDocCate(
+    req: ModifyDocCateRequest,
+    cb?: (error: string, rep: ModifyDocCateResponse) => void
+  ): Promise<ModifyDocCateResponse> {
+    return this.request("ModifyDocCate", req, cb)
   }
 
   /**
@@ -933,6 +978,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListDocResponse) => void
   ): Promise<ListDocResponse> {
     return this.request("ListDoc", req, cb)
+  }
+
+  /**
+     * 本接口用来创建工作流的异步运行实例，创建成功后工作流会在后台异步运行，接口返回工作流运行实例ID（WorkflowRunId）等信息。后面可通过调用DescribeWorkflowRun接口查工作流运行的详情。
+注意：工作流的异步运行是基于应用的，需要先把对应的应用配置成“单工作流模式”，并且打开“异步调用”的开关，才能创建成功。
+     */
+  async CreateWorkflowRun(
+    req: CreateWorkflowRunRequest,
+    cb?: (error: string, rep: CreateWorkflowRunResponse) => void
+  ): Promise<CreateWorkflowRunResponse> {
+    return this.request("CreateWorkflowRun", req, cb)
   }
 
   /**
@@ -966,13 +1022,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Doc分类
+   * 通过appKey获取应用业务ID
    */
-  async ModifyDocCate(
-    req: ModifyDocCateRequest,
-    cb?: (error: string, rep: ModifyDocCateResponse) => void
-  ): Promise<ModifyDocCateResponse> {
-    return this.request("ModifyDocCate", req, cb)
+  async DescribeRobotBizIDByAppKey(
+    req: DescribeRobotBizIDByAppKeyRequest,
+    cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void
+  ): Promise<DescribeRobotBizIDByAppKeyResponse> {
+    return this.request("DescribeRobotBizIDByAppKey", req, cb)
   }
 
   /**
@@ -1036,13 +1092,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取发布按钮状态、最后发布时间
+   * 忽略不满意回复
    */
-  async DescribeReleaseInfo(
-    req: DescribeReleaseInfoRequest,
-    cb?: (error: string, rep: DescribeReleaseInfoResponse) => void
-  ): Promise<DescribeReleaseInfoResponse> {
-    return this.request("DescribeReleaseInfo", req, cb)
+  async IgnoreUnsatisfiedReply(
+    req: IgnoreUnsatisfiedReplyRequest,
+    cb?: (error: string, rep: IgnoreUnsatisfiedReplyResponse) => void
+  ): Promise<IgnoreUnsatisfiedReplyResponse> {
+    return this.request("IgnoreUnsatisfiedReply", req, cb)
   }
 
   /**
@@ -1234,6 +1290,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建了工作流的异步运行实例后，通过本接口可以查询整体的运行详情。
+   */
+  async DescribeWorkflowRun(
+    req: DescribeWorkflowRunRequest,
+    cb?: (error: string, rep: DescribeWorkflowRunResponse) => void
+  ): Promise<DescribeWorkflowRunResponse> {
+    return this.request("DescribeWorkflowRun", req, cb)
+  }
+
+  /**
    * 发布文档预览
    */
   async ListReleaseDocPreview(
@@ -1387,12 +1453,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 忽略不满意回复
+   * 拉取发布按钮状态、最后发布时间
    */
-  async IgnoreUnsatisfiedReply(
-    req: IgnoreUnsatisfiedReplyRequest,
-    cb?: (error: string, rep: IgnoreUnsatisfiedReplyResponse) => void
-  ): Promise<IgnoreUnsatisfiedReplyResponse> {
-    return this.request("IgnoreUnsatisfiedReply", req, cb)
+  async DescribeReleaseInfo(
+    req: DescribeReleaseInfoRequest,
+    cb?: (error: string, rep: DescribeReleaseInfoResponse) => void
+  ): Promise<DescribeReleaseInfoResponse> {
+    return this.request("DescribeReleaseInfo", req, cb)
   }
 }

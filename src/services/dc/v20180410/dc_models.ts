@@ -314,6 +314,14 @@ export interface DirectConnect {
    * 是否三层架构
    */
   IsThreeArch?: boolean
+  /**
+   * 是否MACsec
+   */
+  IsMacSec?: boolean
+  /**
+   * 端口规格(Mbps)
+   */
+  PortSpecification?: number
 }
 
 /**
@@ -513,6 +521,10 @@ export interface AccessPoint {
    * 接入点地址。
    */
   Address?: string
+  /**
+   * 是否MACsec
+   */
+  IsMacSec?: boolean
 }
 
 /**
@@ -1212,6 +1224,10 @@ ChinaOther：中国其他；
    * 标签键值对
    */
   Tags?: Array<Tag>
+  /**
+   * 是否MACsec需求
+   */
+  IsMacSec?: boolean
 }
 
 /**

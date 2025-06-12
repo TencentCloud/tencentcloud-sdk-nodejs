@@ -7479,7 +7479,7 @@ export interface DeleteFenceBindResponse {
  */
 export interface ActivateTWeCallLicenseRequest {
   /**
-   * TWecall类型：0-体验套餐；1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
+   * TWecall类型：0-体验套餐；1-基础版；3-高级版；
    */
   PkgType: number
   /**

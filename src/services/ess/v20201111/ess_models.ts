@@ -6078,6 +6078,16 @@ export interface RecipientComponentInfo {
 }
 
 /**
+ * OperateSeals返回参数结构体
+ */
+export interface OperateSealsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateFlowEvidenceReport返回参数结构体
  */
 export interface CreateFlowEvidenceReportResponse {
@@ -10932,6 +10942,30 @@ export interface FileUrl {
    * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
    */
   Option: string
+}
+
+/**
+ * OperateSeals请求参数结构体
+ */
+export interface OperateSealsRequest {
+  /**
+   * 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+   */
+  Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 操作类型，int，目前支持传入以下类型：
+<ul><li>1：启用印章</li></ul>
+<ul><li>2：停用印章</li></ul>
+   */
+  Act?: number
+  /**
+   * 需要操作的印章ID，数组形式，印章ID可从【web控制台->印章 】获取。
+   */
+  SealIds?: Array<string>
 }
 
 /**
