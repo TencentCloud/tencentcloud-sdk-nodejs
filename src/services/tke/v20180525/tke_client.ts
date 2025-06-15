@@ -50,6 +50,7 @@ import {
   DescribeExistedInstancesRequest,
   DeletePrometheusClusterAgentRequest,
   ClusterLevelChangeRecord,
+  ModifyMasterComponentRequest,
   ModifyPrometheusAlertRuleResponse,
   DescribeEKSContainerInstanceEventResponse,
   RouteTableInfo,
@@ -57,6 +58,7 @@ import {
   ClusterAsGroup,
   PrometheusTempModify,
   EnableClusterAuditResponse,
+  ModifyMasterComponentResponse,
   CreateBackupStorageLocationResponse,
   KubeJarvisStateDiagnostic,
   EnvironmentVariable,
@@ -113,7 +115,7 @@ import {
   Exec,
   DescribeEdgeAvailableExtraArgsResponse,
   CreatePrometheusRecordRuleYamlRequest,
-  DescribeEnableVpcCniProgressRequest,
+  DescribeMasterComponentResponse,
   Instance,
   ModifyClusterAttributeResponse,
   DescribeOSImagesRequest,
@@ -514,6 +516,7 @@ import {
   Release,
   DescribeEKSContainerInstanceRegionsRequest,
   DescribeECMInstancesRequest,
+  DescribeEnableVpcCniProgressRequest,
   DrainClusterVirtualNodeResponse,
   ECMZoneInstanceCountISP,
   DescribeVpcCniPodLimitsResponse,
@@ -558,6 +561,7 @@ import {
   FailedResource,
   UnavailableReason,
   GetUpgradeInstanceProgressRequest,
+  DescribeMasterComponentRequest,
   UpdateEKSClusterResponse,
   DescribeEdgeCVMInstancesResponse,
   DescribeRegionsRequest,
@@ -1815,6 +1819,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改master组件，支持kube-apiserver、kube-scheduler、kube-controller-manager副本数调整为0和恢复
+   */
+  async ModifyMasterComponent(
+    req: ModifyMasterComponentRequest,
+    cb?: (error: string, rep: ModifyMasterComponentResponse) => void
+  ): Promise<ModifyMasterComponentResponse> {
+    return this.request("ModifyMasterComponent", req, cb)
+  }
+
+  /**
    * 修改集群镜像
    */
   async ModifyClusterImage(
@@ -2712,6 +2726,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
   ): Promise<DescribePrometheusAlertRuleResponse> {
     return this.request("DescribePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 进行master组件停机故障演练时，获取master组件运行状态，支持kube-apiserver、kube-scheduler、kube-controller-manager
+   */
+  async DescribeMasterComponent(
+    req: DescribeMasterComponentRequest,
+    cb?: (error: string, rep: DescribeMasterComponentResponse) => void
+  ): Promise<DescribeMasterComponentResponse> {
+    return this.request("DescribeMasterComponent", req, cb)
   }
 
   /**

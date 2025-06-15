@@ -308,6 +308,16 @@ it("gs.v20191118.CreateAndroidInstanceLabel", async function () {
     }
 })
 
+it("gs.v20191118.RenewAndroidInstancesAccessToken", async function () {
+    try {
+       const data = await client.RenewAndroidInstancesAccessToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CreateAndroidApp", async function () {
     try {
        const data = await client.CreateAndroidApp({})
@@ -588,6 +598,16 @@ it("gs.v20191118.DescribeAndroidApps", async function () {
     }
 })
 
+it("gs.v20191118.CreateAndroidInstancesAccessToken", async function () {
+    try {
+       const data = await client.CreateAndroidInstancesAccessToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CopyAndroidInstance", async function () {
     try {
        const data = await client.CopyAndroidInstance({})
@@ -691,6 +711,16 @@ it("gs.v20191118.ImportAndroidInstanceImage", async function () {
 it("gs.v20191118.DescribeAndroidInstancesByApps", async function () {
     try {
        const data = await client.DescribeAndroidInstancesByApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.DeleteAndroidInstanceBackupFiles", async function () {
+    try {
+       const data = await client.DeleteAndroidInstanceBackupFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

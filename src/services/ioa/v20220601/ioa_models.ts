@@ -342,6 +342,21 @@ export interface DescribeDLPFileDetectResultData {
 }
 
 /**
+ * DescribeDeviceInfo返回参数结构体
+ */
+export interface DescribeDeviceInfoResponse {
+  /**
+   * 业务响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeDeviceInfoRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDevices返回参数结构体
  */
 export interface DescribeDevicesResponse {
@@ -364,6 +379,20 @@ export interface CreatePrivilegeCodeRspData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: string
+}
+
+/**
+ * DescribeDeviceInfo请求参数结构体
+ */
+export interface DescribeDeviceInfoRequest {
+  /**
+   * 终端id
+   */
+  Mid?: string
+  /**
+   * 查询类型  process_list network_list service_list
+   */
+  Type?: string
 }
 
 /**
@@ -636,6 +665,52 @@ export interface DescribeSoftCensusListByDevicePageData {
 }
 
 /**
+ * 分页的具体数据对象
+ */
+export interface DeviceNetworkInfo {
+  /**
+   * 本地地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalAddr?: string
+  /**
+   * 本地端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalPort?: number
+  /**
+   * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessId?: number
+  /**
+   * 进程名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessName?: string
+  /**
+   * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * 远程地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteAddr?: string
+  /**
+   * 远程端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemotePort?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+}
+
+/**
  * DescribeLocalAccounts请求参数结构体
  */
 export interface DescribeLocalAccountsRequest {
@@ -843,6 +918,16 @@ export interface Paging {
 }
 
 /**
+ * CreateDeviceTask请求参数结构体
+ */
+export interface CreateDeviceTaskRequest {
+  /**
+   * 终端id
+   */
+  Mid?: string
+}
+
+/**
  * 业务响应数据
  */
 export interface DeviceDetail {
@@ -1025,6 +1110,133 @@ export interface DeviceDetail {
 }
 
 /**
+ * 获取账号列表响应的单个对象
+ */
+export interface DescribeLocalAccountsData {
+  /**
+   * uid，数据库中唯一
+   */
+  Id?: number
+  /**
+   * 账号，登录账号
+   */
+  UserId?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 账号id，同Id字段
+   */
+  AccountId?: number
+  /**
+   * 账号所在的分组id
+   */
+  GroupId?: number
+  /**
+   * 账号所在的分组名称
+   */
+  GroupName?: string
+  /**
+   * 账号所在的分组名称路径，用英文.分割
+   */
+  NamePath?: string
+  /**
+   * 账号来源,0表示本地账号(只支持32位)
+   */
+  Source?: number
+  /**
+   * 账号状态,0禁用，1启用(只支持32位)
+   */
+  Status?: number
+  /**
+   * 账号的创建时间
+   */
+  Itime?: string
+  /**
+   * 账号的最后更新时间
+   */
+  Utime?: string
+  /**
+   * 账号的扩展信息，包含邮箱、手机号、身份证、职位等信息
+   */
+  ExtraInfo?: string
+  /**
+   * 用户风险等级，枚举：none, low, middle, high
+   */
+  RiskLevel?: string
+  /**
+   * 所属组
+   */
+  AccountGroups?: Array<DescribeLocalAccountAccountGroupsData>
+  /**
+   * 绑定手机端设备数
+   */
+  MobileBindNum?: number
+  /**
+   * 绑定Pc端设备数
+   */
+  PcBindNum?: number
+  /**
+   * 账号在线状态 1：在线 2：离线
+   */
+  OnlineStatus?: number
+  /**
+   * 账号活跃状态 1：活跃 2：非活跃
+   */
+  ActiveStatus?: number
+  /**
+   * 账号登录时间
+   */
+  LoginTime?: string
+  /**
+   * 账号登出时间
+   */
+  LogoutTime?: string
+}
+
+/**
+ * 分页的具体数据对象
+ */
+export interface DeviceServiceInfo {
+  /**
+   * 命令行
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CmdLine?: string
+  /**
+   * 内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessId?: number
+  /**
+   * 启动类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartType?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+  /**
+   * 启动用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+}
+
+/**
  * 账号分组详情响应数据
  */
 export interface GetAccountGroupData {
@@ -1135,103 +1347,70 @@ export interface Filter {
 }
 
 /**
- * 获取账号列表响应的单个对象
+ * 分页的具体数据对象
  */
-export interface DescribeLocalAccountsData {
+export interface DeviceProcessInfo {
   /**
-   * uid，数据库中唯一
+   * 命令行
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: number
+  CmdLine?: string
   /**
-   * 账号，登录账号
+   * 内存
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId?: string
+  Memory?: string
   /**
-   * 用户名
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName?: string
+  Name?: string
   /**
-   * 账号id，同Id字段
+   * 路径
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccountId?: number
+  Path?: string
   /**
-   * 账号所在的分组id
+   * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId?: number
+  ProcessId?: number
   /**
-   * 账号所在的分组名称
+   * 启动用户
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName?: string
-  /**
-   * 账号所在的分组名称路径，用英文.分割
-   */
-  NamePath?: string
-  /**
-   * 账号来源,0表示本地账号(只支持32位)
-   */
-  Source?: number
-  /**
-   * 账号状态,0禁用，1启用(只支持32位)
-   */
-  Status?: number
-  /**
-   * 账号的创建时间
-   */
-  Itime?: string
-  /**
-   * 账号的最后更新时间
-   */
-  Utime?: string
-  /**
-   * 账号的扩展信息，包含邮箱、手机号、身份证、职位等信息
-   */
-  ExtraInfo?: string
-  /**
-   * 用户风险等级，枚举：none, low, middle, high
-   */
-  RiskLevel?: string
-  /**
-   * 所属组
-   */
-  AccountGroups?: Array<DescribeLocalAccountAccountGroupsData>
-  /**
-   * 绑定手机端设备数
-   */
-  MobileBindNum?: number
-  /**
-   * 绑定Pc端设备数
-   */
-  PcBindNum?: number
-  /**
-   * 账号在线状态 1：在线 2：离线
-   */
-  OnlineStatus?: number
-  /**
-   * 账号活跃状态 1：活跃 2：非活跃
-   */
-  ActiveStatus?: number
-  /**
-   * 账号登录时间
-   */
-  LoginTime?: string
-  /**
-   * 账号登出时间
-   */
-  LogoutTime?: string
+  User?: string
 }
 
 /**
  * 业务响应数据
  */
-export interface DescribeSoftwareInformationPageData {
+export interface DescribeDeviceInfoRspData {
   /**
-   * 软件详情响应对象集合
+   * 分页的具体数据对象
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<SoftwareInformationData>
+  ProcessList?: Array<DeviceProcessInfo>
   /**
-   * 分页公共对象
+   * 分页的具体数据对象
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Page?: Paging
+  NetworkList?: Array<DeviceNetworkInfo>
+  /**
+   * 分页的具体数据对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceList?: Array<DeviceServiceInfo>
+}
+
+/**
+ * CreateDeviceTask返回参数结构体
+ */
+export interface CreateDeviceTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1260,6 +1439,20 @@ export interface DescribeLocalAccountsPage {
    * 获取账号列表响应的单个对象
    */
   Items?: Array<DescribeLocalAccountsData>
+}
+
+/**
+ * 业务响应数据
+ */
+export interface DescribeSoftwareInformationPageData {
+  /**
+   * 软件详情响应对象集合
+   */
+  Items?: Array<SoftwareInformationData>
+  /**
+   * 分页公共对象
+   */
+  Page?: Paging
 }
 
 /**

@@ -1018,7 +1018,7 @@ export interface DescribeCfwEipsRequest {
    */
   NatGatewayId: string
   /**
-   * 防火墙实例id，当前仅支持接入模式的实例
+   * 防火墙实例id，当前仅支持接入模式的实例，该字段必填
    */
   CfwInstance?: string
 }

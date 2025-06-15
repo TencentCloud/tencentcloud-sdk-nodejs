@@ -897,6 +897,20 @@ export interface ModifyAndroidInstancesResourcesResponse {
 }
 
 /**
+ * ModifyAndroidInstancesAppBlacklist返回参数结构体
+ */
+export interface ModifyAndroidInstancesAppBlacklistResponse {
+  /**
+   * 任务集合
+   */
+  TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UploadFilesToAndroidInstances请求参数结构体
  */
 export interface UploadFilesToAndroidInstancesRequest {
@@ -928,6 +942,10 @@ export interface StartAndroidInstancesAppRequest {
  * ModifyAndroidInstancesResolution返回参数结构体
  */
 export interface ModifyAndroidInstancesResolutionResponse {
+  /**
+   * 安卓实例错误列表
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1434,6 +1452,32 @@ export interface InstallAndroidInstancesAppResponse {
 }
 
 /**
+ * DeleteAndroidInstanceBackupFiles请求参数结构体
+ */
+export interface DeleteAndroidInstanceBackupFilesRequest {
+  /**
+   * 文件对象键列表
+   */
+  ObjectKeys: Array<string>
+  /**
+   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
+   */
+  StorageType: string
+  /**
+   * COS协议选项
+   */
+  COSOptions?: COSOptions
+  /**
+   * S3存储协议选项
+   */
+  S3Options?: S3Options
+  /**
+   * 安卓实例可用区。StorageType 为 S3 时，需要填写该字段；StorageType 为 COS 时，不需要填写该字段
+   */
+  AndroidInstanceZone?: string
+}
+
+/**
  * 安卓实例任务信息
  */
 export interface AndroidInstanceTask {
@@ -1720,6 +1764,20 @@ export interface StartPublishStreamToCSSRequest {
 }
 
 /**
+ * CreateAndroidInstancesAccessToken请求参数结构体
+ */
+export interface CreateAndroidInstancesAccessTokenRequest {
+  /**
+   * 实例 ID 列表。每次请求的实例的上限为 500。
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 有效期，默认为 12 小时，最大为 24 小时。支持 s（秒）、m（分）、h（小时）等单位，比如 12h 表示 12 小时，1h2m3s 表示一小时两分三秒
+   */
+  ExpirationDuration?: string
+}
+
+/**
  * CreateSession返回参数结构体
  */
 export interface CreateSessionResponse {
@@ -1952,13 +2010,21 @@ export interface CreateAndroidInstanceWebShellRequest {
 }
 
 /**
- * ModifyAndroidInstancesAppBlacklist返回参数结构体
+ * CreateAndroidInstancesAccessToken返回参数结构体
  */
-export interface ModifyAndroidInstancesAppBlacklistResponse {
+export interface CreateAndroidInstancesAccessTokenResponse {
   /**
-   * 任务集合
+   * token
    */
-  TaskSet?: Array<AndroidInstanceTask>
+  Token?: string
+  /**
+   * 访问信息
+   */
+  AccessInfo?: string
+  /**
+   * 安卓实例错误列表。列表包含有问题的安卓实例 ID，生成的 Token 对这些有问题的实例无效。
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1973,6 +2039,20 @@ export interface ModifyAndroidInstancesLabelsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RenewAndroidInstancesAccessToken请求参数结构体
+ */
+export interface RenewAndroidInstancesAccessTokenRequest {
+  /**
+   * token
+   */
+  AccessToken: string
+  /**
+   * 有效期，默认为 12 小时，最大为 24 小时。支持 s（秒）、m（分）、h（小时）等单位，比如 12h 表示 12 小时，1h2m3s 表示一小时两分三秒
+   */
+  ExpirationDuration?: string
 }
 
 /**
@@ -2359,6 +2439,10 @@ export interface COSOptions {
  */
 export interface ModifyAndroidInstancesPropertiesResponse {
   /**
+   * 安卓实例错误列表
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2398,6 +2482,16 @@ export interface CreateAndroidInstanceSSHResponse {
  * ModifyAndroidInstancesInformation返回参数结构体
  */
 export interface ModifyAndroidInstancesInformationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewAndroidInstancesAccessToken返回参数结构体
+ */
+export interface RenewAndroidInstancesAccessTokenResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2529,6 +2623,10 @@ export interface AndroidInstanceImage {
    * 镜像可用区
    */
   AndroidInstanceImageZone?: string
+  /**
+   * 安卓10
+   */
+  AndroidVersion?: string
 }
 
 /**
@@ -2765,6 +2863,16 @@ export interface FetchAndroidInstancesLogsRequest {
    * 下载最近几天的日志，默认值为 1
    */
   RecentDays?: number
+}
+
+/**
+ * DeleteAndroidInstanceBackupFiles返回参数结构体
+ */
+export interface DeleteAndroidInstanceBackupFilesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

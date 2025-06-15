@@ -10911,11 +10911,11 @@ export interface DescribeRecordTaskResponse {
   /**
    * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 Token。当该字段为空，说明已无更多数据。
    */
-  ScrollToken: string
+  ScrollToken?: string
   /**
    * 录制任务列表。当该字段为空，说明已返回所有数据。
    */
-  TaskList: Array<RecordTask>
+  TaskList?: Array<RecordTask>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

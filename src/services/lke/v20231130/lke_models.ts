@@ -73,11 +73,11 @@ export interface ListUsageCallDetailRequest {
    */
   EndTime: string
   /**
-   * 页码
+   * 页码（从1开始）
    */
   PageNumber: number
   /**
-   * 分页数量
+   * 分页数量(最大值1000)
    */
   PageSize: number
   /**
@@ -100,6 +100,10 @@ export interface ListUsageCallDetailRequest {
    * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
    */
   AppType?: string
+  /**
+   * 账单明细对应的自定义tag
+   */
+  BillingTag?: string
 }
 
 /**
@@ -3847,6 +3851,10 @@ export interface CallDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubScene?: string
+  /**
+   * 账单明细对应的自定义tag
+   */
+  BillingTag?: string
 }
 
 /**
@@ -7703,6 +7711,10 @@ export interface DescribeAppResponse {
    * 状态说明
    */
   AppStatusDesc?: string
+  /**
+   * 应用是否在复制中
+   */
+  IsCopying?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

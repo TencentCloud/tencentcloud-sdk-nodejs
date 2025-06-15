@@ -38,9 +38,9 @@ it("ioa.v20220601.DescribeLocalAccounts", async function () {
     }
 })
 
-it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
+it("ioa.v20220601.CreatePrivilegeCode", async function () {
     try {
-       const data = await client.DescribeSoftCensusListByDevice({})
+       const data = await client.CreatePrivilegeCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,19 @@ it("ioa.v20220601.CreateDLPFileDetectionTask", async function () {
     }
 })
 
-it("ioa.v20220601.CreatePrivilegeCode", async function () {
+it("ioa.v20220601.CreateDeviceTask", async function () {
     try {
-       const data = await client.CreatePrivilegeCode({})
+       const data = await client.CreateDeviceTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDeviceInfo", async function () {
+    try {
+       const data = await client.DescribeDeviceInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +121,16 @@ it("ioa.v20220601.DescribeRootAccountGroup", async function () {
 it("ioa.v20220601.DescribeDLPFileDetectResult", async function () {
     try {
        const data = await client.DescribeDLPFileDetectResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
+    try {
+       const data = await client.DescribeSoftCensusListByDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

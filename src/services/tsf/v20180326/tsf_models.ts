@@ -917,7 +917,7 @@ export interface CreateGatewayApiResponse {
   /**
    * 是否成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1011,7 +1011,7 @@ export interface DescribeGroupBindedGatewaysResponse {
   /**
    * 翻页结构体
    */
-  Result: TsfPageGatewayDeployGroup
+  Result?: TsfPageGatewayDeployGroup
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13395,7 +13395,7 @@ export interface CreateConfigTemplateResponse {
   /**
    * true：创建成功；false：创建失败
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15244,7 +15244,7 @@ export interface DescribeConfigSummaryResponse {
   /**
    * 配置项分页对象
    */
-  Result: TsfPageConfig
+  Result?: TsfPageConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

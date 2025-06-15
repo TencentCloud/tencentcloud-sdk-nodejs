@@ -765,6 +765,28 @@ export interface ClusterLevelChangeRecord {
 }
 
 /**
+ * ModifyMasterComponent请求参数结构体
+ */
+export interface ModifyMasterComponentRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * master组件名称，支持kube-apiserver、kube-scheduler、kube-controller-manager
+   */
+  Component: string
+  /**
+   * 停机或恢复，值只能为：shutdown或restore
+   */
+  Operation: string
+  /**
+   * 为true时，不真正执行停机或恢复操作
+   */
+  DryRun?: boolean
+}
+
+/**
  * ModifyPrometheusAlertRule返回参数结构体
  */
 export interface ModifyPrometheusAlertRuleResponse {
@@ -894,6 +916,16 @@ export interface PrometheusTempModify {
  * EnableClusterAudit返回参数结构体
  */
 export interface EnableClusterAuditResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyMasterComponent返回参数结构体
+ */
+export interface ModifyMasterComponentResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2085,13 +2117,21 @@ export interface CreatePrometheusRecordRuleYamlRequest {
 }
 
 /**
- * DescribeEnableVpcCniProgress请求参数结构体
+ * DescribeMasterComponent返回参数结构体
  */
-export interface DescribeEnableVpcCniProgressRequest {
+export interface DescribeMasterComponentResponse {
   /**
-   * 开启vpc-cni的集群ID
+   * master组件名称
    */
-  ClusterId: string
+  Component?: string
+  /**
+   * master组件状态，三种状态：running、updating、shutdown
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10681,6 +10721,16 @@ export interface DescribeECMInstancesRequest {
 }
 
 /**
+ * DescribeEnableVpcCniProgress请求参数结构体
+ */
+export interface DescribeEnableVpcCniProgressRequest {
+  /**
+   * 开启vpc-cni的集群ID
+   */
+  ClusterId: string
+}
+
+/**
  * DrainClusterVirtualNode返回参数结构体
  */
 export interface DrainClusterVirtualNodeResponse {
@@ -11517,6 +11567,20 @@ export interface GetUpgradeInstanceProgressRequest {
    * 从第几个节点开始获取进度
    */
   Offset?: number
+}
+
+/**
+ * DescribeMasterComponent请求参数结构体
+ */
+export interface DescribeMasterComponentRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * master组件名称，支持kube-apiserver、kube-scheduler、kube-controller-manager
+   */
+  Component: string
 }
 
 /**

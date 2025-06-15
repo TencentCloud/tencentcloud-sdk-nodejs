@@ -70,6 +70,7 @@ import {
   DistributeFileToAndroidInstancesResponse,
   ModifyAndroidAppVersionRequest,
   ModifyAndroidInstancesResourcesResponse,
+  ModifyAndroidInstancesAppBlacklistResponse,
   UploadFilesToAndroidInstancesRequest,
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionResponse,
@@ -107,6 +108,7 @@ import {
   CreateAndroidInstancesScreenshotRequest,
   CreateCosCredentialRequest,
   InstallAndroidInstancesAppResponse,
+  DeleteAndroidInstanceBackupFilesRequest,
   AndroidInstanceTask,
   ConnectAndroidInstanceResponse,
   DescribeAndroidInstancesRequest,
@@ -121,6 +123,7 @@ import {
   CreateAndroidInstanceADBResponse,
   StopAndroidInstancesRequest,
   StartPublishStreamToCSSRequest,
+  CreateAndroidInstancesAccessTokenRequest,
   CreateSessionResponse,
   DistributeFileToAndroidInstancesRequest,
   EnableAndroidInstancesAppRequest,
@@ -134,8 +137,9 @@ import {
   S3Options,
   DescribeAndroidInstancesAppBlacklistRequest,
   CreateAndroidInstanceWebShellRequest,
-  ModifyAndroidInstancesAppBlacklistResponse,
+  CreateAndroidInstancesAccessTokenResponse,
   ModifyAndroidInstancesLabelsResponse,
+  RenewAndroidInstancesAccessTokenRequest,
   DescribeAndroidInstanceLabelsRequest,
   CopyAndroidInstanceResponse,
   SetAndroidInstancesFGAppKeepAliveRequest,
@@ -159,6 +163,7 @@ import {
   ModifyAndroidInstancesPropertiesResponse,
   CreateAndroidInstanceSSHResponse,
   ModifyAndroidInstancesInformationResponse,
+  RenewAndroidInstancesAccessTokenResponse,
   CreateCosCredentialResponse,
   UploadFileToAndroidInstancesResponse,
   AndroidInstanceAppBlacklist,
@@ -179,6 +184,7 @@ import {
   LabelRequirement,
   CreateAndroidAppVersionResponse,
   FetchAndroidInstancesLogsRequest,
+  DeleteAndroidInstanceBackupFilesResponse,
   BackUpAndroidInstanceToStorageResponse,
   CreateAndroidInstanceSSHRequest,
   CreateAndroidAppResponse,
@@ -486,6 +492,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 续期安卓实例访问Token
+   */
+  async RenewAndroidInstancesAccessToken(
+    req: RenewAndroidInstancesAccessTokenRequest,
+    cb?: (error: string, rep: RenewAndroidInstancesAccessTokenResponse) => void
+  ): Promise<RenewAndroidInstancesAccessTokenResponse> {
+    return this.request("RenewAndroidInstancesAccessToken", req, cb)
+  }
+
+  /**
    * 创建安卓应用
    */
   async CreateAndroidApp(
@@ -769,6 +785,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建安卓实例访问Token
+   */
+  async CreateAndroidInstancesAccessToken(
+    req: CreateAndroidInstancesAccessTokenRequest,
+    cb?: (error: string, rep: CreateAndroidInstancesAccessTokenResponse) => void
+  ): Promise<CreateAndroidInstancesAccessTokenResponse> {
+    return this.request("CreateAndroidInstancesAccessToken", req, cb)
+  }
+
+  /**
      * 复制安卓实例：
 1. 排除和包含文件只能指定 /data 下的文件，不指定时复制整个 /data 目录
 2. 源实例和目的实例必须在同一区域
@@ -880,6 +906,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAndroidInstancesByAppsResponse) => void
   ): Promise<DescribeAndroidInstancesByAppsResponse> {
     return this.request("DescribeAndroidInstancesByApps", req, cb)
+  }
+
+  /**
+   * 删除安卓实例备份文件
+   */
+  async DeleteAndroidInstanceBackupFiles(
+    req: DeleteAndroidInstanceBackupFilesRequest,
+    cb?: (error: string, rep: DeleteAndroidInstanceBackupFilesResponse) => void
+  ): Promise<DeleteAndroidInstanceBackupFilesResponse> {
+    return this.request("DeleteAndroidInstanceBackupFiles", req, cb)
   }
 
   /**

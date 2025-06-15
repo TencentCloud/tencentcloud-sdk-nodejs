@@ -1168,6 +1168,16 @@ it("tke.v20180525.ModifyNodePoolInstanceTypes", async function () {
     }
 })
 
+it("tke.v20180525.ModifyMasterComponent", async function () {
+    try {
+       const data = await client.ModifyMasterComponent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.ModifyClusterImage", async function () {
     try {
        const data = await client.ModifyClusterImage({})
@@ -2061,6 +2071,16 @@ it("tke.v20180525.DescribeEnableVpcCniProgress", async function () {
 it("tke.v20180525.DescribePrometheusAlertRule", async function () {
     try {
        const data = await client.DescribePrometheusAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeMasterComponent", async function () {
+    try {
+       const data = await client.DescribeMasterComponent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

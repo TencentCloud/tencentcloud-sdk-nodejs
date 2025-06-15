@@ -608,7 +608,6 @@ export class Client extends AbstractClient {
 - 使用前提
 1. 仅用于查询由 CreateRecordTask 接口创建的录制任务。
 2. 不能查询被 DeleteRecordTask 接口删除以及已过期（平台侧保留3个月）的录制任务。
-
      */
   async DescribeRecordTask(
     req: DescribeRecordTaskRequest,

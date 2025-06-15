@@ -33,8 +33,10 @@ import {
   DescribeRootAccountGroupResponse,
   DescribeDeviceHardwareInfoItem,
   DescribeDLPFileDetectResultData,
+  DescribeDeviceInfoResponse,
   DescribeDevicesResponse,
   CreatePrivilegeCodeRspData,
+  DescribeDeviceInfoRequest,
   DescribeLocalAccountsResponse,
   DescribeAccountGroupsData,
   RuleExpression,
@@ -47,19 +49,25 @@ import {
   DescribeSoftCensusListByDeviceResponse,
   FilterGroup,
   DescribeSoftCensusListByDevicePageData,
+  DeviceNetworkInfo,
   DescribeLocalAccountsRequest,
   DescribeSoftwareInformationRequest,
   CreateDeviceVirtualGroupRequest,
   DescribeDevicesRequest,
   Paging,
+  CreateDeviceTaskRequest,
   DeviceDetail,
+  DescribeLocalAccountsData,
+  DeviceServiceInfo,
   GetAccountGroupData,
   DescribeSoftCensusListByDeviceRequest,
   Filter,
-  DescribeLocalAccountsData,
-  DescribeSoftwareInformationPageData,
+  DeviceProcessInfo,
+  DescribeDeviceInfoRspData,
+  CreateDeviceTaskResponse,
   CreateDLPFileDetectionTaskResponse,
   DescribeLocalAccountsPage,
+  DescribeSoftwareInformationPageData,
   DescribeDLPFileDetectResultResponse,
   Condition,
   CreateDLPFileDetectionTaskRequest,
@@ -99,13 +107,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看终端树下的软件列表,私有化调用path为：capi/Software/DescribeSoftCensusListByDevice
+   * 生成特权码，私有化调用path为：capi/Assets/Device/CreatePrivilegeCode，生成的特权码、卸载码，仅对该设备当天有效
    */
-  async DescribeSoftCensusListByDevice(
-    req: DescribeSoftCensusListByDeviceRequest,
-    cb?: (error: string, rep: DescribeSoftCensusListByDeviceResponse) => void
-  ): Promise<DescribeSoftCensusListByDeviceResponse> {
-    return this.request("DescribeSoftCensusListByDevice", req, cb)
+  async CreatePrivilegeCode(
+    req: CreatePrivilegeCodeRequest,
+    cb?: (error: string, rep: CreatePrivilegeCodeResponse) => void
+  ): Promise<CreatePrivilegeCodeResponse> {
+    return this.request("CreatePrivilegeCode", req, cb)
   }
 
   /**
@@ -129,13 +137,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成特权码，私有化调用path为：capi/Assets/Device/CreatePrivilegeCode，生成的特权码、卸载码，仅对该设备当天有效
+   * 创建获取终端进程网络服务信息任务，私有化调用path为：capi/Assets/Device/DescribeDeviceInfo
    */
-  async CreatePrivilegeCode(
-    req: CreatePrivilegeCodeRequest,
-    cb?: (error: string, rep: CreatePrivilegeCodeResponse) => void
-  ): Promise<CreatePrivilegeCodeResponse> {
-    return this.request("CreatePrivilegeCode", req, cb)
+  async CreateDeviceTask(
+    req: CreateDeviceTaskRequest,
+    cb?: (error: string, rep: CreateDeviceTaskResponse) => void
+  ): Promise<CreateDeviceTaskResponse> {
+    return this.request("CreateDeviceTask", req, cb)
+  }
+
+  /**
+   * 获取终端进程网络服务信息，私有化调用path为：capi/Assets/Device/DescribeDeviceInfo
+   */
+  async DescribeDeviceInfo(
+    req: DescribeDeviceInfoRequest,
+    cb?: (error: string, rep: DescribeDeviceInfoResponse) => void
+  ): Promise<DescribeDeviceInfoResponse> {
+    return this.request("DescribeDeviceInfo", req, cb)
   }
 
   /**
@@ -176,6 +194,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDLPFileDetectResultResponse) => void
   ): Promise<DescribeDLPFileDetectResultResponse> {
     return this.request("DescribeDLPFileDetectResult", req, cb)
+  }
+
+  /**
+   * 查看终端树下的软件列表,私有化调用path为：capi/Software/DescribeSoftCensusListByDevice
+   */
+  async DescribeSoftCensusListByDevice(
+    req: DescribeSoftCensusListByDeviceRequest,
+    cb?: (error: string, rep: DescribeSoftCensusListByDeviceResponse) => void
+  ): Promise<DescribeSoftCensusListByDeviceResponse> {
+    return this.request("DescribeSoftCensusListByDevice", req, cb)
   }
 
   /**

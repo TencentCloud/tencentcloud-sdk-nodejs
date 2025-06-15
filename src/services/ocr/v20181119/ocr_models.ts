@@ -7244,15 +7244,15 @@ export interface TextVehicleFront {
    */
   Seal?: string
   /**
-   * 状态
+   * 状态，该字段仅支持电子行驶证返回
    */
   StateElectronic?: string
   /**
-   * 检验有效期
+   * 检验有效期，该字段仅支持电子行驶证返回
    */
   InspectionValidityTimeElectronic?: string
   /**
-   * 生成时间
+   * 生成时间，该字段仅支持电子行驶证返回
    */
   GenerationTimeElectronic?: string
 }

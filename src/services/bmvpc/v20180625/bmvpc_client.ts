@@ -173,8 +173,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DownloadCustomerGatewayConfiguration)用于下载VPN通道配置。
-   */
+     * 90天无调用
+
+本接口(DownloadCustomerGatewayConfiguration)用于下载VPN通道配置。
+     */
   async DownloadCustomerGatewayConfiguration(
     req: DownloadCustomerGatewayConfigurationRequest,
     cb?: (error: string, rep: DownloadCustomerGatewayConfigurationResponse) => void
@@ -193,8 +195,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建对等连接
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+创建对等连接
+     */
   async CreateVpcPeerConnection(
     req: CreateVpcPeerConnectionRequest,
     cb?: (error: string, rep: CreateVpcPeerConnectionResponse) => void
@@ -203,8 +207,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量注册虚拟IP，异步接口。通过接口来查询任务进度。每次请求最多注册256个IP
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+批量注册虚拟IP，异步接口。通过接口来查询任务进度。每次请求最多注册256个IP
+     */
   async AsyncRegisterIps(
     req: AsyncRegisterIpsRequest,
     cb?: (error: string, rep: AsyncRegisterIpsResponse) => void
@@ -254,8 +260,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建黑石私有网络
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+创建黑石私有网络
+     */
   async CreateVpc(
     req: CreateVpcRequest,
     cb?: (error: string, rep: CreateVpcResponse) => void
@@ -264,8 +272,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建NAT网关接口，可针对网段方式、子网全部IP、子网部分IP这三种方式创建NAT网关
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+创建NAT网关接口，可针对网段方式、子网全部IP、子网部分IP这三种方式创建NAT网关
+     */
   async CreateNatGateway(
     req: CreateNatGatewayRequest,
     cb?: (error: string, rep: CreateNatGatewayResponse) => void
@@ -318,8 +328,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注销私有网络IP为空闲
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+注销私有网络IP为空闲
+     */
   async DeregisterIps(
     req: DeregisterIpsRequest,
     cb?: (error: string, rep: DeregisterIpsResponse) => void
@@ -328,8 +340,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改自定义路由
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+修改自定义路由
+     */
   async ModifyRoutePolicy(
     req: ModifyRoutePolicyRequest,
     cb?: (error: string, rep: ModifyRoutePolicyResponse) => void
@@ -358,8 +372,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除黑石路由表路由规则
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+删除黑石路由表路由规则
+     */
   async DeleteRoutePolicy(
     req: DeleteRoutePolicyRequest,
     cb?: (error: string, rep: DeleteRoutePolicyResponse) => void
@@ -398,8 +414,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可用于将子网的部分IP绑定到NAT网关
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+可用于将子网的部分IP绑定到NAT网关
+     */
   async BindIpsToNatGateway(
     req: BindIpsToNatGatewayRequest,
     cb?: (error: string, rep: BindIpsToNatGatewayResponse) => void
@@ -418,8 +436,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * NAT网关解绑IP接口，可将子网的部分IP从NAT网关中解绑
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+NAT网关解绑IP接口，可将子网的部分IP从NAT网关中解绑
+     */
   async UnbindIpsFromNatGateway(
     req: UnbindIpsFromNatGatewayRequest,
     cb?: (error: string, rep: UnbindIpsFromNatGatewayResponse) => void
@@ -499,8 +519,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改路由表
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+修改路由表
+     */
   async ModifyRouteTable(
     req: ModifyRouteTableRequest,
     cb?: (error: string, rep: ModifyRouteTableResponse) => void
@@ -539,8 +561,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCustomerGateway）用于创建对端网关。
-   */
+     * 90天无调用
+
+本接口（CreateCustomerGateway）用于创建对端网关。
+     */
   async CreateCustomerGateway(
     req: CreateCustomerGatewayRequest,
     cb?: (error: string, rep: CreateCustomerGatewayResponse) => void
@@ -569,7 +593,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 升级NAT网关接口，可NAT网关修改为小型NAT网关、中型NAT网关、以及大型NAT网关
+     * 黑石1.0接口，业务已下线，90天无调用
+
+升级NAT网关接口，可NAT网关修改为小型NAT网关、中型NAT网关、以及大型NAT网关
 
      */
   async UpgradeNatGateway(
@@ -580,8 +606,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建黑石路由表的路由规则
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+创建黑石路由表的路由规则
+     */
   async CreateRoutePolicies(
     req: CreateRoutePoliciesRequest,
     cb?: (error: string, rep: CreateRoutePoliciesResponse) => void
@@ -600,8 +628,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * NAT网关解绑子网接口，可将子网解绑NAT网关
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+NAT网关解绑子网接口，可将子网解绑NAT网关
+     */
   async UnbindSubnetsFromNatGateway(
     req: UnbindSubnetsFromNatGatewayRequest,
     cb?: (error: string, rep: UnbindSubnetsFromNatGatewayResponse) => void
@@ -670,8 +700,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * NAT网关绑定子网后，该子网内全部IP可出公网
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+NAT网关绑定子网后，该子网内全部IP可出公网
+     */
   async BindSubnetsToNatGateway(
     req: BindSubnetsToNatGatewayRequest,
     cb?: (error: string, rep: BindSubnetsToNatGatewayResponse) => void
@@ -690,7 +722,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（CreateHostedInterface）用于黑石托管机器加入带VLANID不为5的子网。
+     * 黑石1.0接口，业务已下线，90天无调用
+
+本接口（CreateHostedInterface）用于黑石托管机器加入带VLANID不为5的子网。
 
 1) 不能加入vlanId 为5的子网，只能加入VLANID范围为2000-2999的子网。
 2) 每台托管机器最多可以加入20个子网。
@@ -765,8 +799,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除NAT网关
-   */
+     * 黑石1.0接口，业务已下线，90天无调用
+
+删除NAT网关
+     */
   async DeleteNatGateway(
     req: DeleteNatGatewayRequest,
     cb?: (error: string, rep: DeleteNatGatewayResponse) => void
