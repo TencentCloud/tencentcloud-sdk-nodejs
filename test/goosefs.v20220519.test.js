@@ -98,6 +98,16 @@ it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
     }
 })
 
+it("goosefs.v20220519.BuildClientNodeMountCommand", async function () {
+    try {
+       const data = await client.BuildClientNodeMountCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.DeleteFileSystem", async function () {
     try {
        const data = await client.DeleteFileSystem({})

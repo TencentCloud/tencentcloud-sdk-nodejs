@@ -180,9 +180,9 @@ export interface DescribeFilesetGeneralConfigResponse {
 }
 
 /**
- * ExpandCapacity返回参数结构体
+ * DetachFileSystemBucket返回参数结构体
  */
-export interface ExpandCapacityResponse {
+export interface DetachFileSystemBucketResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -492,25 +492,27 @@ export interface CreateFileSystemRequest {
 }
 
 /**
- * ClusterRole
+ * DeleteCrossVpcSubnetSupportForClientNode返回参数结构体
  */
-export interface ClusterRole {
+export interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
   /**
-   * 集群ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId?: string
+  RequestId?: string
+}
+
+/**
+ * BuildClientNodeMountCommand请求参数结构体
+ */
+export interface BuildClientNodeMountCommandRequest {
   /**
-   * 角色名
+   * 文件系统ID
    */
-  RoleName?: string
+  FileSystemId: string
   /**
-   * 描述
+   * 自定义挂载目录的绝对路径, 如果未指定, 则会使用默认值, 格式/goosefsx/${fs_id}-proxy. 比如/goosefsx/x-c60-a2b3d4-proxy
    */
-  Description?: string
-  /**
-   * 目录列表
-   */
-  DirectoryList?: Array<string>
+  CustomMountDir?: string
 }
 
 /**
@@ -726,9 +728,9 @@ export interface FilesetInfo {
 }
 
 /**
- * UpdateFileset返回参数结构体
+ * ExpandCapacity返回参数结构体
  */
-export interface UpdateFilesetResponse {
+export interface ExpandCapacityResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -814,6 +816,16 @@ export interface QueryCrossVpcSubnetSupportForClientNodeResponse {
 }
 
 /**
+ * UpdateFileset返回参数结构体
+ */
+export interface UpdateFilesetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFileSystems请求参数结构体
  */
 export interface DescribeFileSystemsRequest {
@@ -890,13 +902,25 @@ export interface DescribeClusterRolesResponse {
 }
 
 /**
- * DeleteCrossVpcSubnetSupportForClientNode返回参数结构体
+ * ClusterRole
  */
-export interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
+export interface ClusterRole {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId?: string
+  /**
+   * 角色名
+   */
+  RoleName?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 目录列表
+   */
+  DirectoryList?: Array<string>
 }
 
 /**
@@ -968,13 +992,17 @@ export interface AddCrossVpcSubnetSupportForClientNodeRequest {
 }
 
 /**
- * DetachFileSystemBucket返回参数结构体
+ * DescribeDataRepositoryTaskStatus请求参数结构体
  */
-export interface DetachFileSystemBucketResponse {
+export interface DescribeDataRepositoryTaskStatusRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * task id
    */
-  RequestId?: string
+  TaskId: string
+  /**
+   * file system id
+   */
+  FileSystemId: string
 }
 
 /**
@@ -1106,17 +1134,17 @@ export interface DescribeClientNodesResponse {
 }
 
 /**
- * DescribeDataRepositoryTaskStatus请求参数结构体
+ * BuildClientNodeMountCommand返回参数结构体
  */
-export interface DescribeDataRepositoryTaskStatusRequest {
+export interface BuildClientNodeMountCommandResponse {
   /**
-   * task id
+   * 挂载命令
    */
-  TaskId: string
+  Command?: string
   /**
-   * file system id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileSystemId: string
+  RequestId?: string
 }
 
 /**

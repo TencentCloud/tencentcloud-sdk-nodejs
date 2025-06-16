@@ -80,6 +80,7 @@ import {
   Timeline,
   File3Ds,
   Delta,
+  Processes,
   TextToImageLiteResponse,
   TextToImageLiteRequest,
   QueryHunyuanImageJobResponse,

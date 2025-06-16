@@ -28,10 +28,10 @@ import {
   ModifyUebaRuleSwitchResponse,
   FilterDataObject,
   ReportItemKey,
-  TaskAdvanceCFG,
+  DescribeSubnetAssetsRequest,
   CVMAssetVO,
   AssetViewCFGRisk,
-  DescribeSubnetAssetsRequest,
+  DescribeSubUserInfoRequest,
   DescribeScanReportListRequest,
   AlertInfo,
   KeyValue,
@@ -74,6 +74,7 @@ import {
   NICAsset,
   OrganizationInfo,
   DescribeListenerListResponse,
+  TaskAdvanceCFG,
   DBAssetVO,
   AssetInfoDetail,
   SubnetAsset,
@@ -145,6 +146,7 @@ import {
   ReportTaskIdList,
   UebaRule,
   AddNewBindRoleUserResponse,
+  ExposesItem,
   RelatedEvent,
   VULViewVULRiskData,
   DescribeAlertListResponse,
@@ -154,6 +156,7 @@ import {
   DescribeVULRiskAdvanceCFGListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   TaskCenterCFGRiskInputParam,
+  DescribeExposuresRequest,
   DescribeAlertListRequest,
   CreateDomainAndIpRequest,
   DomainAssetVO,
@@ -170,6 +173,7 @@ import {
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
   DescribeTaskLogListRequest,
+  Filters,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
   Element,
@@ -181,7 +185,7 @@ import {
   AssetCluster,
   CreateDomainAndIpResponse,
   DescribeTaskLogListResponse,
-  DescribeSubUserInfoRequest,
+  DescribeExposuresResponse,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeTaskLogURLRequest,
   AddNewBindRoleUserRequest,
@@ -614,6 +618,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVULRiskAdvanceCFGListResponse) => void
   ): Promise<DescribeVULRiskAdvanceCFGListResponse> {
     return this.request("DescribeVULRiskAdvanceCFGList", req, cb)
+  }
+
+  /**
+   * 互联网暴露资产列表
+   */
+  async DescribeExposures(
+    req: DescribeExposuresRequest,
+    cb?: (error: string, rep: DescribeExposuresResponse) => void
+  ): Promise<DescribeExposuresResponse> {
+    return this.request("DescribeExposures", req, cb)
   }
 
   /**

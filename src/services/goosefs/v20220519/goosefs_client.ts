@@ -26,7 +26,7 @@ import {
   DescribeClusterRoleTokenRequest,
   DescribeFileSystemsResponse,
   DescribeFilesetGeneralConfigResponse,
-  ExpandCapacityResponse,
+  DetachFileSystemBucketResponse,
   DeleteFilesetRequest,
   FSAttribute,
   DescribeFilesetsResponse,
@@ -44,7 +44,8 @@ import {
   AttachFileSystemBucketResponse,
   DescribeFilesetGeneralConfigRequest,
   CreateFileSystemRequest,
-  ClusterRole,
+  DeleteCrossVpcSubnetSupportForClientNodeResponse,
+  BuildClientNodeMountCommandRequest,
   DeleteFileSystemResponse,
   ExpandCapacityRequest,
   DetachFileSystemBucketRequest,
@@ -55,24 +56,25 @@ import {
   QueryDataRepositoryBandwidthRequest,
   ClientClusterManagerNodeInfo,
   FilesetInfo,
-  UpdateFilesetResponse,
+  ExpandCapacityResponse,
   LinuxNodeAttribute,
   BatchDeleteClientNodesRequest,
   DescribeFileSystemBucketsRequest,
   UpdateFilesetGeneralConfigResponse,
   QueryCrossVpcSubnetSupportForClientNodeResponse,
+  UpdateFilesetResponse,
   DescribeFileSystemsRequest,
   UpdateFilesetGeneralConfigRequest,
   DescribeClusterClientTokenRequest,
   AddCrossVpcSubnetSupportForClientNodeResponse,
   CreateDataRepositoryTaskResponse,
   DescribeClusterRolesResponse,
-  DeleteCrossVpcSubnetSupportForClientNodeResponse,
+  ClusterRole,
   DeleteFilesetResponse,
   DescribeDataRepositoryTaskStatusResponse,
   BatchAddClientNodesRequest,
   AddCrossVpcSubnetSupportForClientNodeRequest,
-  DetachFileSystemBucketResponse,
+  DescribeDataRepositoryTaskStatusRequest,
   RoleToken,
   DescribeFileSystemBucketsResponse,
   DescribeClientNodesRequest,
@@ -81,7 +83,7 @@ import {
   DescribeClusterRolesRequest,
   CreateDataRepositoryTaskRequest,
   DescribeClientNodesResponse,
-  DescribeDataRepositoryTaskStatusRequest,
+  BuildClientNodeMountCommandResponse,
   DescribeClusterClientTokenResponse,
   MappedBucket,
 } from "./goosefs_models"
@@ -175,6 +177,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDataRepositoryTaskResponse) => void
   ): Promise<CreateDataRepositoryTaskResponse> {
     return this.request("CreateDataRepositoryTask", req, cb)
+  }
+
+  /**
+   * 生成客户端的挂载命令
+   */
+  async BuildClientNodeMountCommand(
+    req: BuildClientNodeMountCommandRequest,
+    cb?: (error: string, rep: BuildClientNodeMountCommandResponse) => void
+  ): Promise<BuildClientNodeMountCommandResponse> {
+    return this.request("BuildClientNodeMountCommand", req, cb)
   }
 
   /**

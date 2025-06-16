@@ -187,6 +187,7 @@ import {
   MaxVideoUser,
   AuditStorageParams,
   AgentParams,
+  TurnDetection,
   UpdateStreamIngestRequest,
   StopWebRecordResponse,
   DeletePictureRequest,

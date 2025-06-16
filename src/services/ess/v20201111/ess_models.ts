@@ -1592,6 +1592,11 @@ export interface OperateTemplateRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+  /**
+   * 模板名称，长度不超过64字符。<br>
+模板复制时指定有效，若为空，则复制后模板名称为 **原模板名称_副本**。
+   */
+  TemplateName?: string
 }
 
 /**
@@ -6186,6 +6191,14 @@ export interface DescribeFlowComponentsRequest {
  */
 export interface OperateTemplateResponse {
   /**
+   * 模板ID，为32位字符串，模板复制新建时返回
+   */
+  TemplateId?: string
+  /**
+   * 模板名称，模板复制新建时返回
+   */
+  TemplateName?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9523,7 +9536,7 @@ export interface CreateBatchSignUrlRequest {
    */
   NotifyType?: string
   /**
-   * 批量签署的合同流程ID数组。
+   * 批量签署的合同流程ID数组，<font color="red">此参数必传。</font>
 注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。`
    */
   FlowIds?: Array<string>
@@ -9557,7 +9570,7 @@ export interface CreateBatchSignUrlRequest {
 注: 
 1. 该参数<font color="red">只针对APP类型（电子签小程序跳转贵方小程序）场景</font> 的签署链接有效
 2. <font color="red">手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑</font>, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)
-3. <font color="red">电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制）</font> 
+3. <font color="red">电子签小程序跳转贵方APP，不支持自动跳转，必须用户手动点击完成按钮（微信的限制）</font> 
    */
   AutoJumpBack?: boolean
   /**
@@ -9572,7 +9585,8 @@ export interface CreateBatchSignUrlRequest {
    */
   CanBatchReject?: boolean
   /**
-   * 是否允许此链接中签署方批量确认已读文件。 <ul><li>false (默认): 不允许批量确认已读文件。</li> <li>true : 允许批量确认已读文件。</li></ul>注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果有签名控件，则会使用用户首次选择的签名类型签署所有含有签名控件的合同。`
+   * 是否允许此链接中签署方批量确认已读文件。 <ul><li>false (默认): 不允许批量确认已读文件。</li> <li>true : 允许批量确认已读文件。</li></ul>
+注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果对印章/签名控件有限制要求，需要保证所有印章/签名签署控件限制要求(印章id或印章/签名类型限制)一致，否则无法使用此功能。`
    */
   CanSkipReadFlow?: boolean
 }

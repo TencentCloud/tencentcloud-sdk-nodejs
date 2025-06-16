@@ -232,25 +232,17 @@ export interface ReportItemKey {
 }
 
 /**
- * 任务高级配置
+ * DescribeSubnetAssets请求参数结构体
  */
-export interface TaskAdvanceCFG {
+export interface DescribeSubnetAssetsRequest {
   /**
-   * 端口风险高级配置
+   * 集团账号的成员id
    */
-  PortRisk?: Array<PortRiskAdvanceCFGParamItem>
+  MemberId?: Array<string>
   /**
-   * 漏洞风险高级配置
+   * 过滤参数
    */
-  VulRisk?: Array<TaskCenterVulRiskInputParam>
-  /**
-   * 弱口令风险高级配置
-   */
-  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
-  /**
-   * 配置风险高级配置
-   */
-  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+  Filter?: Filter
 }
 
 /**
@@ -634,15 +626,15 @@ export interface AssetViewCFGRisk {
 }
 
 /**
- * DescribeSubnetAssets请求参数结构体
+ * DescribeSubUserInfo请求参数结构体
  */
-export interface DescribeSubnetAssetsRequest {
+export interface DescribeSubUserInfoRequest {
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
   /**
-   * 过滤参数
+   * 过滤内容
    */
   Filter?: Filter
 }
@@ -2513,6 +2505,28 @@ export interface DescribeListenerListResponse {
 }
 
 /**
+ * 任务高级配置
+ */
+export interface TaskAdvanceCFG {
+  /**
+   * 端口风险高级配置
+   */
+  PortRisk?: Array<PortRiskAdvanceCFGParamItem>
+  /**
+   * 漏洞风险高级配置
+   */
+  VulRisk?: Array<TaskCenterVulRiskInputParam>
+  /**
+   * 弱口令风险高级配置
+   */
+  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
+  /**
+   * 配置风险高级配置
+   */
+  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+}
+
+/**
  * db资产输出字段
  */
 export interface DBAssetVO {
@@ -3015,6 +3029,18 @@ export interface PublicIpDomainListKey {
  */
 export interface DescribeTopAttackInfoRequest {
   /**
+   * 起始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 1:攻击类型 2:攻击者
+   */
+  QueryType: number
+  /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
@@ -3022,6 +3048,14 @@ export interface DescribeTopAttackInfoRequest {
    * 被调用的集团账号的成员id
    */
   OperatedMemberId?: Array<string>
+  /**
+   * 资产名称
+   */
+  AssetName?: string
+  /**
+   * 0: 默认全部 1:资产ID 2:域名
+   */
+  AssetType?: number
 }
 
 /**
@@ -5461,6 +5495,124 @@ export interface AddNewBindRoleUserResponse {
 }
 
 /**
+ * 暴露资产
+ */
+export interface ExposesItem {
+  /**
+   * 云厂商
+   */
+  Provider?: string
+  /**
+   * 云账号名称
+   */
+  CloudAccountName?: string
+  /**
+   * 云账号
+   */
+  CloudAccountId?: string
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * IP
+   */
+  Ip?: string
+  /**
+   * 端口或者端口范围
+   */
+  Port?: string
+  /**
+   * 开放
+   */
+  Status?: string
+  /**
+   * 风险类型
+   */
+  RiskType?: string
+  /**
+   * acl类型
+   */
+  AclType?: string
+  /**
+   * acl列表
+   */
+  AclList?: string
+  /**
+   * 资产ID
+   */
+  AssetId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 资产类型
+   */
+  AssetType?: string
+  /**
+   * 端口服务数量
+   */
+  PortServiceCount?: number
+  /**
+   * 高危端口数量
+   */
+  HighRiskPortServiceCount?: number
+  /**
+   * web应用数量
+   */
+  WebAppCount?: number
+  /**
+   * 有风险web应用数量
+   */
+  RiskWebAppCount?: number
+  /**
+   * 弱口令数量
+   */
+  WeakPasswordCount?: number
+  /**
+   * 漏洞数量
+   */
+  VulCount?: number
+  /**
+   * 首次发现时间
+   */
+  CreateTime?: string
+  /**
+   * 最近更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 实例类型名称
+   */
+  AssetTypeName?: string
+  /**
+   * 开放状态
+   */
+  DisplayStatus?: string
+  /**
+   * 端口状态
+   */
+  DisplayRiskType?: string
+  /**
+   * 扫描任务状态
+   */
+  ScanTaskStatus?: string
+  /**
+   * uuid
+   */
+  Uuid?: string
+  /**
+   * 是否进行过安全体检
+   */
+  HasScan?: string
+  /**
+   * 租户ID
+   */
+  AppId?: number
+}
+
+/**
  * 相关攻击事件结构
  */
 export interface RelatedEvent {
@@ -5940,6 +6092,36 @@ export interface TaskCenterCFGRiskInputParam {
    * 资源类型
    */
   ResourceType: string
+}
+
+/**
+ * DescribeExposures请求参数结构体
+ */
+export interface DescribeExposuresRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filters?: Array<Filters>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序类型
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
 }
 
 /**
@@ -6543,6 +6725,27 @@ export interface DescribeTaskLogListRequest {
 }
 
 /**
+ * filter过滤条件
+ */
+export interface Filters {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
+  /**
+   * 模糊匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExactMatch?: string
+}
+
+/**
  * ModifyRiskCenterScanTask请求参数结构体
  */
 export interface ModifyRiskCenterScanTaskRequest {
@@ -6908,17 +7111,21 @@ export interface DescribeTaskLogListResponse {
 }
 
 /**
- * DescribeSubUserInfo请求参数结构体
+ * DescribeExposures返回参数结构体
  */
-export interface DescribeSubUserInfoRequest {
+export interface DescribeExposuresResponse {
   /**
-   * 集团账号的成员id
+   * 互联网暴露资产数量
    */
-  MemberId?: Array<string>
+  TotalCount?: number
   /**
-   * 过滤内容
+   * 互联网暴露资产列表
    */
-  Filter?: Filter
+  ExposeList?: Array<ExposesItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

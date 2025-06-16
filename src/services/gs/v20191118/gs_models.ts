@@ -1661,6 +1661,10 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
    * 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。
    */
   CleanupMode?: string
+  /**
+   * 安卓应用版本名称
+   */
+  AndroidAppVersionName?: string
 }
 
 /**
@@ -1920,7 +1924,7 @@ export interface DescribeAndroidAppsRequest {
    */
   AndroidAppIds?: Array<string>
   /**
-   * 过滤条件
+   * 过滤条件，支持过滤的字段有：UserId
    */
   Filters?: Array<Filter>
 }
