@@ -3311,6 +3311,11 @@ export interface ImageTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EraseConfig?: ImageEraseConfig
+  /**
+   * 盲水印配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlindWatermarkConfig?: BlindWatermarkConfig
 }
 
 /**
@@ -7561,6 +7566,25 @@ export interface DescribeOutputHLSPullSettings {
 }
 
 /**
+ * 增加盲水印配置
+ */
+export interface AddBlindWatermarkConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
+  /**
+   * 盲水印嵌入数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmbedInfo?: BlindWatermarkEmbedInfo
+}
+
+/**
  * 翻译的输入。
  */
 export interface AiRecognitionTaskTransTextResultInput {
@@ -8336,6 +8360,17 @@ export interface DescribeContentReviewTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 嵌入盲水印配置
+ */
+export interface BlindWatermarkEmbedInfo {
+  /**
+   * 盲水印文字，需要经过 URL 安全的 Base64 编码。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmbedText?: string
 }
 
 /**
@@ -10893,6 +10928,27 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
 }
 
 /**
+ * 盲水印配置
+ */
+export interface BlindWatermarkConfig {
+  /**
+   * 增加盲水印
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddBlindWatermark?: AddBlindWatermarkConfig
+  /**
+   * 提取盲水印
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtractBlindWatermark?: ExtractBlindWatermarkConfig
+  /**
+   * 移除盲水印
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveBlindWatermark?: RemoveBlindWatermarkConfig
+}
+
+/**
  * DeleteAsrHotwords返回参数结构体
  */
 export interface DeleteAsrHotwordsResponse {
@@ -12355,6 +12411,20 @@ export interface ParseNotificationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 移除盲水印配置
+ */
+export interface RemoveBlindWatermarkConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
 }
 
 /**
@@ -16584,6 +16654,20 @@ export interface AiAnalysisTaskHeadTailOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TailTimeOffset?: number
+}
+
+/**
+ * 提取盲水印配置
+ */
+export interface ExtractBlindWatermarkConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
 }
 
 /**

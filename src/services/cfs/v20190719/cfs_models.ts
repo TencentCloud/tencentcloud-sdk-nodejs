@@ -1221,7 +1221,7 @@ export interface ModifyFileSystemAutoScaleUpRuleResponse {
    */
   ScaleUpThreshold?: number
   /**
-   * 扩容后达到阈值,范围[10-90]
+   * 扩容后达到阈值,范围[1-90]
    */
   TargetThreshold?: number
   /**

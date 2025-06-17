@@ -1399,6 +1399,32 @@ export interface ModifyCertificatesExpiringNotificationSwitchResponse {
 }
 
 /**
+ * UploadUpdateCertificateInstance请求参数结构体
+ */
+export interface UploadUpdateCertificateInstanceRequest {
+  /**
+   * 一键更新的旧证书ID。 通过查询该证书ID绑定的云资源，然后使用新证书对这些云资源进行更新
+   */
+  OldCertificateId: string
+  /**
+   * 需要部署的资源类型，参数值可选（小写）：clb
+   */
+  ResourceTypes: Array<string>
+  /**
+   * 公钥证书
+   */
+  CertificatePublicKey: string
+  /**
+   * 私钥证书
+   */
+  CertificatePrivateKey: string
+  /**
+   * 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb
+   */
+  ResourceTypesRegions?: Array<ResourceTypeRegions>
+}
+
+/**
  * 权益包基本信息
  */
 export interface PackageInfo {
@@ -3868,6 +3894,29 @@ export interface CheckCertificateDomainVerificationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VerificationResults?: Array<DomainValidationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UploadUpdateCertificateInstance返回参数结构体
+ */
+export interface UploadUpdateCertificateInstanceResponse {
+  /**
+   * 云资源更新任务ID， DeployRecordId为0表示任务进行中， 重复请求这个接口， 当返回DeployRecordId大于0则表示任务创建成功。 未创建成功则会抛出异常
+   */
+  DeployRecordId?: number
+  /**
+   * 更新任务创建状态；1表示创建成功； 0表示当前存在更新中的任务，未创建新的更新任务；返回值DeployRecordId为更新中的任务ID
+   */
+  DeployStatus?: number
+  /**
+   * 更新异步创建任务进度详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateSyncProgress?: Array<UpdateSyncProgress>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

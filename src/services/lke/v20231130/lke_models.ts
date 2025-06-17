@@ -4431,7 +4431,7 @@ export interface RateMsgRecordRequest {
    */
   BotAppKey: string
   /**
-   * 消息ID
+   * 消息ID 【大模型回复答案的RecordID】
    */
   RecordId: string
   /**

@@ -757,60 +757,6 @@ export interface ItemInfo {
 }
 
 /**
- * SmartStructuralOCRV2请求参数结构体
- */
-export interface SmartStructuralOCRV2Request {
-  /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
-   */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
-  /**
-   * 自定义结构化功能需返回的字段名称，例：
-若客户只想返回姓名、性别两个字段的识别结果，则输入
-ItemNames=["姓名","性别"]
-   */
-  ItemNames?: Array<string>
-  /**
-   * 是否开启全文字段识别
-   */
-  ReturnFullText?: boolean
-  /**
-   * 配置id支持：
-General -- 通用场景
-OnlineTaxiItinerary -- 网约车行程单
-RideHailingDriverLicense -- 网约车驾驶证
-RideHailingTransportLicense -- 网约车运输证
-WayBill -- 快递运单
-AccountOpeningPermit -- 银行开户许可证
-InvoiceEng -- 海外发票模版
-Coin --钱币识别模板
-OnboardingDocuments -- 入职材料识别
-PropertyOwnershipCertificate -- 房产证识别
-RealEstateCertificate --不动产权证识别
-HouseEncumbranceCertificate -- 他权证识别
-CarInsurance -- 车险保单
-MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板
-   */
-  ConfigId?: string
-  /**
-   * 是否打开印章识别
-   */
-  EnableSealRecognize?: boolean
-}
-
-/**
  * TextDetect返回参数结构体
  */
 export interface TextDetectResponse {
@@ -1952,69 +1898,39 @@ export interface OtherInvoiceItem {
 }
 
 /**
- * SmartStructuralPro请求参数结构体
+ * 文字识别结果
  */
-export interface SmartStructuralProRequest {
+export interface TextDetection {
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 识别出的文本行内容
    */
-  ImageUrl?: string
+  DetectedText: string
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 置信度 0 ~100
    */
-  ImageBase64?: string
+  Confidence: number
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。
+   * 文本行坐标，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PdfPageNumber?: number
+  Polygon: Array<Coord>
   /**
-   * 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"]
+   * 此字段为扩展字段。
+GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
    */
-  ItemNames?: Array<string>
+  AdvancedInfo: string
   /**
-   * true：仅输出自定义字段
-flase：输出默认字段+自定义字段
-默认true
+   * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
    */
-  ItemNamesShowMode?: boolean
+  ItemPolygon: ItemCoord
   /**
-   * 是否开启全文字段识别
+   * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
    */
-  ReturnFullText?: boolean
+  Words: Array<DetectedWords>
   /**
-   * 配置id支持：
-General -- 通用场景 
-InvoiceEng -- 国际invoice模版 
-WayBillEng --海运订单模板
-CustomsDeclaration -- 进出口报关单
-WeightNote -- 磅单
-MedicalMeter -- 血压仪表识别
-BillOfLading -- 海运提单
-EntrustmentBook -- 海运托书
-WordRecognize -- 手写英文作文模版
-Statement -- 对账单识别模板
-BookingConfirmation -- 配舱通知书识别模板
-AirWayBill -- 航空运单识别模板
-DispatchWeightNote -- 磅单发货单识别模板
-ReceiptWeightNote -- 磅单收货单识别模板
-ArticalRecognize -- 手写作文模版
-Table -- 表格模版
-SteelLabel -- 实物标签识别模板
-CarInsurance -- 车辆保险单识别模板
+   * 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
    */
-  ConfigId?: string
-  /**
-   * 是否开启全文字段坐标值的识别
-   */
-  EnableCoord?: boolean
-  /**
-   * 是否开启父子key识别，默认是
-   */
-  OutputParentKey?: boolean
-  /**
-   * 模版的单个属性配置
-   */
-  ConfigAdvanced?: ConfigAdvanced
+  WordCoordPoint: Array<DetectedWordCoordPoint>
 }
 
 /**
@@ -2321,26 +2237,17 @@ export interface VatElectronicItemInfo {
 }
 
 /**
- * SmartStructuralOCRV2返回参数结构体
+ * 单词坐标信息
  */
-export interface SmartStructuralOCRV2Response {
+export interface WordPolygon {
   /**
-   * 图片旋转角度(角度制)，文本的水平方向
-为 0；顺时针为正，逆时针为负
+   * 文本块内容
    */
-  Angle?: number
+  DetectedText?: string
   /**
-   * 配置结构化文本信息
+   * 四点坐标
    */
-  StructuralList?: Array<GroupInfo>
-  /**
-   * 还原文本信息
-   */
-  WordList?: Array<WordItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Coord?: Polygon
 }
 
 /**
@@ -2528,42 +2435,6 @@ export interface FlightItemInfo {
    * 有效截止日期
    */
   DateEnd?: string
-}
-
-/**
- * 文字识别结果
- */
-export interface TextDetection {
-  /**
-   * 识别出的文本行内容
-   */
-  DetectedText: string
-  /**
-   * 置信度 0 ~100
-   */
-  Confidence: number
-  /**
-   * 文本行坐标，以四个顶点坐标表示
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Polygon: Array<Coord>
-  /**
-   * 此字段为扩展字段。
-GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
-   */
-  AdvancedInfo: string
-  /**
-   * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
-   */
-  ItemPolygon: ItemCoord
-  /**
-   * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
-   */
-  Words: Array<DetectedWords>
-  /**
-   * 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
-   */
-  WordCoordPoint: Array<DetectedWordCoordPoint>
 }
 
 /**
@@ -10657,32 +10528,6 @@ export interface EnterpriseLicenseInfo {
 }
 
 /**
- * SmartStructuralPro返回参数结构体
- */
-export interface SmartStructuralProResponse {
-  /**
-   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
-   */
-  Angle?: number
-  /**
-   * 配置结构化文本信息
-   */
-  StructuralList?: Array<GroupInfo>
-  /**
-   * 还原文本信息
-   */
-  WordList?: Array<WordItem>
-  /**
-   * 识别出的token个数
-   */
-  TokenNum?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * PermitOCR返回参数结构体
  */
 export interface PermitOCRResponse {
@@ -10905,20 +10750,6 @@ export interface LicensePlateInfo {
    * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
    */
   Color?: string
-}
-
-/**
- * 单词坐标信息
- */
-export interface WordPolygon {
-  /**
-   * 文本块内容
-   */
-  DetectedText?: string
-  /**
-   * 四点坐标
-   */
-  Coord?: Polygon
 }
 
 /**

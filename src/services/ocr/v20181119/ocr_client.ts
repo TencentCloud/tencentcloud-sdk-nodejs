@@ -41,7 +41,6 @@ import {
   MLIDPassportOCRRequest,
   OverseasInvoice,
   ItemInfo,
-  SmartStructuralOCRV2Request,
   TextDetectResponse,
   RailwayTicketInfo,
   TollInvoiceOCRResponse,
@@ -77,7 +76,7 @@ import {
   DriverLicenseOCRRequest,
   TollInvoiceOCRRequest,
   OtherInvoiceItem,
-  SmartStructuralProRequest,
+  TextDetection,
   RecognizeTableOCRResponse,
   TextEduPaper,
   QrcodeOCRResponse,
@@ -87,7 +86,7 @@ import {
   HKIDCardOCRResponse,
   MainlandPermitOCRRequest,
   VatElectronicItemInfo,
-  SmartStructuralOCRV2Response,
+  WordPolygon,
   EnterpriseLicenseOCRRequest,
   QuestionSplitOCRResponse,
   TableOCRResponse,
@@ -95,7 +94,6 @@ import {
   StructuralItem,
   InvoiceDetectInfo,
   FlightItemInfo,
-  TextDetection,
   PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
@@ -301,7 +299,6 @@ import {
   CandWord,
   RecognizeContainerOCRResponse,
   EnterpriseLicenseInfo,
-  SmartStructuralProResponse,
   PermitOCRResponse,
   QuotaInvoice,
   InsuranceBillOCRRequest,
@@ -309,7 +306,6 @@ import {
   IDCardResult,
   TableCell,
   LicensePlateInfo,
-  WordPolygon,
   DetectedWordCoordPoint,
   QuestionBlockObj,
   Element,
@@ -724,19 +720,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-
-默认接口请求频率限制：10次/秒
-     */
-  async RecognizeThaiIDCardOCR(
-    req: RecognizeThaiIDCardOCRRequest,
-    cb?: (error: string, rep: RecognizeThaiIDCardOCRResponse) => void
-  ): Promise<RecognizeThaiIDCardOCRResponse> {
-    return this.request("RecognizeThaiIDCardOCR", req, cb)
-  }
-
-  /**
      * 本接口支持 PDF多页（最多30页）、一页中单张、多张、类型票据的混合识别，同时支持单选识别某类票据，已支持票种包括：增值税发票（专票、普票、卷票、区块链发票、通行费发票）、全电发票（专票、普票）、非税发票（通用票据、统一缴纳书）、定额发票、通用机打发票、购车发票（机动车销售发票、二手车发票）、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票等常用标准报销发票，支持OFD格式的 增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（机票行程单）、电子发票（铁路电子客票）的第一页识别，并支持非上述类型的其他发票的智能识别，点击[立即试用](https://cloud.tencent.com/product/ocr)。
 
 默认接口请求频率限制：5次/秒。
@@ -1087,15 +1070,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码、首次领用日期、签发日期等字段。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
 
-默认接口请求频率限制：5次/秒。
+默认接口请求频率限制：10次/秒
      */
-  async MixedInvoiceOCR(
-    req: MixedInvoiceOCRRequest,
-    cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
-  ): Promise<MixedInvoiceOCRResponse> {
-    return this.request("MixedInvoiceOCR", req, cb)
+  async RecognizeThaiIDCardOCR(
+    req: RecognizeThaiIDCardOCRRequest,
+    cb?: (error: string, rep: RecognizeThaiIDCardOCRResponse) => void
+  ): Promise<RecognizeThaiIDCardOCRResponse> {
+    return this.request("RecognizeThaiIDCardOCR", req, cb)
   }
 
   /**
@@ -1294,18 +1278,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InstitutionOCRResponse) => void
   ): Promise<InstitutionOCRResponse> {
     return this.request("InstitutionOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持识别并提取制式卡证、票据、表单等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。点击[立即体验](https://ocrdemo.cloud.tencent.com/)。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async SmartStructuralOCRV2(
-    req: SmartStructuralOCRV2Request,
-    cb?: (error: string, rep: SmartStructuralOCRV2Response) => void
-  ): Promise<SmartStructuralOCRV2Response> {
-    return this.request("SmartStructuralOCRV2", req, cb)
   }
 
   /**
@@ -1568,15 +1540,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持识别并提取场景复杂、版式多等结构化场景的字段信息。重点场景包括：金融、医疗、交通、出行、保险。点击[立即体验](https://ocrdemo.cloud.tencent.com/)。
+     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
 
 默认接口请求频率限制：5次/秒。
      */
-  async SmartStructuralPro(
-    req: SmartStructuralProRequest,
-    cb?: (error: string, rep: SmartStructuralProResponse) => void
-  ): Promise<SmartStructuralProResponse> {
-    return this.request("SmartStructuralPro", req, cb)
+  async MixedInvoiceOCR(
+    req: MixedInvoiceOCRRequest,
+    cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
+  ): Promise<MixedInvoiceOCRResponse> {
+    return this.request("MixedInvoiceOCR", req, cb)
   }
 
   /**

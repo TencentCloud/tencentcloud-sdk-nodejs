@@ -268,6 +268,16 @@ it("ssl.v20191205.CompleteCertificate", async function () {
     }
 })
 
+it("ssl.v20191205.UploadUpdateCertificateInstance", async function () {
+    try {
+       const data = await client.UploadUpdateCertificateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.UpdateCertificateInstance", async function () {
     try {
        const data = await client.UpdateCertificateInstance({})

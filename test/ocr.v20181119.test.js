@@ -238,16 +238,6 @@ it("ocr.v20181119.FlightInvoiceOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
-    try {
-       const data = await client.RecognizeThaiIDCardOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.RecognizeGeneralInvoice", async function () {
     try {
        const data = await client.RecognizeGeneralInvoice({})
@@ -328,9 +318,9 @@ it("ocr.v20181119.GeneralBasicOCR", async function () {
     }
 })
 
-it("ocr.v20181119.MixedInvoiceOCR", async function () {
+it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
     try {
-       const data = await client.MixedInvoiceOCR({})
+       const data = await client.RecognizeThaiIDCardOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,16 +451,6 @@ it("ocr.v20181119.RecognizeGeneralTextImageWarn", async function () {
 it("ocr.v20181119.InstitutionOCR", async function () {
     try {
        const data = await client.InstitutionOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.SmartStructuralOCRV2", async function () {
-    try {
-       const data = await client.SmartStructuralOCRV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +668,9 @@ it("ocr.v20181119.FinanBillOCR", async function () {
     }
 })
 
-it("ocr.v20181119.SmartStructuralPro", async function () {
+it("ocr.v20181119.MixedInvoiceOCR", async function () {
     try {
-       const data = await client.SmartStructuralPro({})
+       const data = await client.MixedInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
