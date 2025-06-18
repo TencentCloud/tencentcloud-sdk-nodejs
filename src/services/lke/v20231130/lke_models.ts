@@ -6490,6 +6490,11 @@ export interface KnowledgeDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceedCharSize?: string
+  /**
+   * 是否共享知识库类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSharedKnowledge?: boolean
 }
 
 /**
@@ -6776,7 +6781,7 @@ export interface ModifyDocRequest {
    */
   IsRefer: boolean
   /**
-   * 标签适用范围 1：全部，2：按条件
+   * 标签适用范围，需要传参为1
    */
   AttrRange: number
   /**
@@ -6812,6 +6817,10 @@ export interface ModifyDocRequest {
    * 分类ID
    */
   CateBizId?: string
+  /**
+   * 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义
+   */
+  IsDownload?: boolean
 }
 
 /**

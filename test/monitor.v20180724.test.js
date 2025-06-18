@@ -978,6 +978,16 @@ it("monitor.v20180724.UnbindPrometheusManagedGrafana", async function () {
     }
 })
 
+it("monitor.v20180724.DeleteAlarmShields", async function () {
+    try {
+       const data = await client.DeleteAlarmShields({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.RunPrometheusInstance", async function () {
     try {
        const data = await client.RunPrometheusInstance({})

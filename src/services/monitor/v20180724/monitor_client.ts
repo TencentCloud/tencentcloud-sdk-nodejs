@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DeleteAlarmShieldsRequest,
   ModifyAlarmPolicyInfoRequest,
   AlarmPolicyTriggerTask,
   GetTopNMonitorDataRequest,
@@ -67,6 +68,7 @@ import {
   CreateGrafanaIntegrationRequest,
   Dimension,
   DescribeBindingPolicyObjectListResponse,
+  UpdateAlertRuleStateRequest,
   DescribeAlarmSmsQuotaRequest,
   DescribePrometheusInstanceInitStatusResponse,
   DescribeProductEventListResponse,
@@ -489,7 +491,7 @@ import {
   DescribeMonitorResourceInfoResponse,
   UpdateSSOAccountResponse,
   RunPrometheusInstanceRequest,
-  UpdateAlertRuleStateRequest,
+  DeleteAlarmShieldsResponse,
   SetDefaultAlarmPolicyResponse,
   BindingPolicyObjectResponse,
 } from "./monitor_models"
@@ -1472,6 +1474,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindPrometheusManagedGrafanaResponse) => void
   ): Promise<UnbindPrometheusManagedGrafanaResponse> {
     return this.request("UnbindPrometheusManagedGrafana", req, cb)
+  }
+
+  /**
+   * 删除告警屏蔽规则
+   */
+  async DeleteAlarmShields(
+    req: DeleteAlarmShieldsRequest,
+    cb?: (error: string, rep: DeleteAlarmShieldsResponse) => void
+  ): Promise<DeleteAlarmShieldsResponse> {
+    return this.request("DeleteAlarmShields", req, cb)
   }
 
   /**

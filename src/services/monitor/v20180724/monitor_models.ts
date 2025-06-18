@@ -16,6 +16,20 @@
  */
 
 /**
+ * DeleteAlarmShields请求参数结构体
+ */
+export interface DeleteAlarmShieldsRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+  /**
+   * 屏蔽策略Id列表
+   */
+  Shields: Array<string>
+}
+
+/**
  * ModifyAlarmPolicyInfo请求参数结构体
  */
 export interface ModifyAlarmPolicyInfoRequest {
@@ -1472,6 +1486,27 @@ export interface DescribeBindingPolicyObjectListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateAlertRuleState请求参数结构体
+ */
+export interface UpdateAlertRuleStateRequest {
+  /**
+   * 规则 ID 列表
+   */
+  RuleIds: Array<string>
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 规则状态码，取值如下：
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+默认状态码为 2 启用。
+   */
+  RuleState: number
 }
 
 /**
@@ -11604,24 +11639,13 @@ export interface RunPrometheusInstanceRequest {
 }
 
 /**
- * UpdateAlertRuleState请求参数结构体
+ * DeleteAlarmShields返回参数结构体
  */
-export interface UpdateAlertRuleStateRequest {
+export interface DeleteAlarmShieldsResponse {
   /**
-   * 规则 ID 列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RuleIds: Array<string>
-  /**
-   * Prometheus 实例 ID
-   */
-  InstanceId: string
-  /**
-   * 规则状态码，取值如下：
-<li>2=RuleEnabled</li>
-<li>3=RuleDisabled</li>
-默认状态码为 2 启用。
-   */
-  RuleState: number
+  RequestId?: string
 }
 
 /**

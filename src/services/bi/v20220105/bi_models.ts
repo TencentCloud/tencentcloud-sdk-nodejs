@@ -739,6 +739,47 @@ export interface CreateUserRoleRequest {
 }
 
 /**
+ * 用户组
+ */
+export interface UserGroupDTO {
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 用户组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 父节点id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: number
+  /**
+   * 是否为默认
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefault?: number
+  /**
+   * 管理员用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminUserId?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 定位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: number
+}
+
+/**
  * ModifyUserRole请求参数结构体
  */
 export interface ModifyUserRoleRequest {
@@ -1701,6 +1742,11 @@ export interface UserRoleListDataUserRoleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EmailActivationStatus?: number
+  /**
+   * 用户组信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserGroupList?: Array<UserGroupDTO>
 }
 
 /**

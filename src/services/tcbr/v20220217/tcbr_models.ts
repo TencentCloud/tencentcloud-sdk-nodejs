@@ -650,6 +650,14 @@ export interface ServerBaseConfig {
    * 定时扩缩容配置
    */
   TimerScale?: Array<TimerScale>
+  /**
+   * Dockerfile EntryPoint 参数
+   */
+  EntryPoint?: Array<string>
+  /**
+   * Dockerfile Cmd 参数
+   */
+  Cmd?: Array<string>
 }
 
 /**

@@ -41,6 +41,7 @@ import {
   ProjectConfigList,
   DeleteUserRoleRequest,
   CreateUserRoleRequest,
+  UserGroupDTO,
   ModifyUserRoleRequest,
   DatasourceInfoData,
   DescribeProjectListResponse,

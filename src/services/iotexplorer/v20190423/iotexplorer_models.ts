@@ -936,6 +936,16 @@ export interface DescribeFenceEventListRequest {
 }
 
 /**
+ * DescribeAISearchTaskAsync请求参数结构体
+ */
+export interface DescribeAISearchTaskAsyncRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * ActivateTWeCallLicense返回参数结构体
  */
 export interface ActivateTWeCallLicenseResponse {
@@ -1383,29 +1393,13 @@ export interface DescribeDeviceBindGatewayRequest {
 }
 
 /**
- * 项目详情
+ * DeleteDevices请求参数结构体
  */
-export interface ProjectEntry {
+export interface DeleteDevicesRequest {
   /**
-   * 项目ID
+   * 多个设备标识
    */
-  ProjectId?: string
-  /**
-   * 项目名称
-   */
-  ProjectName?: string
-  /**
-   * 项目描述
-   */
-  ProjectDesc?: string
-  /**
-   * 创建时间，unix时间戳
-   */
-  CreateTime?: number
-  /**
-   * 更新时间，unix时间戳
-   */
-  UpdateTime?: number
+  DevicesItems: Array<DevicesItem>
 }
 
 /**
@@ -1966,13 +1960,29 @@ export interface DescribeDeviceFirmwaresRequest {
 }
 
 /**
- * DeleteDevices请求参数结构体
+ * 项目详情
  */
-export interface DeleteDevicesRequest {
+export interface ProjectEntry {
   /**
-   * 多个设备标识
+   * 项目ID
    */
-  DevicesItems: Array<DevicesItem>
+  ProjectId?: string
+  /**
+   * 项目名称
+   */
+  ProjectName?: string
+  /**
+   * 项目描述
+   */
+  ProjectDesc?: string
+  /**
+   * 创建时间，unix时间戳
+   */
+  CreateTime?: number
+  /**
+   * 更新时间，unix时间戳
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -2309,6 +2319,32 @@ export interface ListTopicPolicyResponse {
 }
 
 /**
+ * CreateAISearchTaskAsync请求参数结构体
+ */
+export interface CreateAISearchTaskAsyncRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 自然语言查询
+   */
+  Query: string
+  /**
+   * 搜索结果总结的语言类型，支持的类型有：en-US、zh-CN、id-ID、th-TH
+   */
+  SummaryLang?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
+}
+
+/**
  * GenSingleDeviceSignatureOfPublic返回参数结构体
  */
 export interface GenSingleDeviceSignatureOfPublicResponse {
@@ -2578,6 +2614,20 @@ export interface ModifyTopicRuleRequest {
    * 替换的规则包体
    */
   TopicRulePayload: TopicRulePayload
+}
+
+/**
+ * CreateAISearchTaskAsync返回参数结构体
+ */
+export interface CreateAISearchTaskAsyncResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3231,6 +3281,24 @@ export interface CreatePositionSpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI视频搜索结果结构体。
+ */
+export interface AISearchInfo {
+  /**
+   * 基于搜索结果的总结
+   */
+  Summary?: string
+  /**
+   * 视频结果集
+   */
+  Targets?: Array<TargetInfo>
+  /**
+   * 视频回放URL
+   */
+  VideoURL?: string
 }
 
 /**
@@ -7491,6 +7559,24 @@ export interface ActivateTWeCallLicenseRequest {
    * 设备列表
    */
   DeviceList?: Array<TWeCallInfo>
+}
+
+/**
+ * DescribeAISearchTaskAsync返回参数结构体
+ */
+export interface DescribeAISearchTaskAsyncResponse {
+  /**
+   * 状态。0-初始状态；1-正在处理；2-处理失败；3-成功
+   */
+  Status?: number
+  /**
+   * 任务处理结果数据
+   */
+  Data?: AISearchInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

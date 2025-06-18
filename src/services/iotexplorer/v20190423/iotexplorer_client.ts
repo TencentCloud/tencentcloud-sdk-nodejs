@@ -66,6 +66,7 @@ import {
   GetTWeCallActiveStatusRequest,
   GetAuthMiniProgramAppListRequest,
   DescribeFenceEventListRequest,
+  DescribeAISearchTaskAsyncRequest,
   ActivateTWeCallLicenseResponse,
   DeleteTopicPolicyRequest,
   ResetCloudStorageEventRequest,
@@ -87,7 +88,7 @@ import {
   GetProjectListRequest,
   ModifyPositionSpaceRequest,
   DescribeDeviceBindGatewayRequest,
-  ProjectEntry,
+  DeleteDevicesRequest,
   ModifyProjectResponse,
   DescribeCloudStorageThumbnailRequest,
   ModifyProductCloudStorageAIServiceRequest,
@@ -112,7 +113,7 @@ import {
   DescribeCloudStorageDateRequest,
   DescribeTopicPolicyRequest,
   DescribeDeviceFirmwaresRequest,
-  DeleteDevicesRequest,
+  ProjectEntry,
   UnbindDevicesRequest,
   DeleteCloudStorageEventResponse,
   DescribeCloudStorageTimeResponse,
@@ -130,6 +131,7 @@ import {
   DescribeFirmwareRequest,
   DescribeP2PRouteResponse,
   ListTopicPolicyResponse,
+  CreateAISearchTaskAsyncRequest,
   GenSingleDeviceSignatureOfPublicResponse,
   FenceBindDeviceItem,
   DescribeBatchProductionResponse,
@@ -142,6 +144,7 @@ import {
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
   ModifyTopicRuleRequest,
+  CreateAISearchTaskAsyncResponse,
   DescribeFenceBindListResponse,
   TransferTWeCallDeviceRequest,
   PackageConsumeTask,
@@ -179,6 +182,7 @@ import {
   ControlDeviceDataResponse,
   EventHistoryItem,
   CreatePositionSpaceResponse,
+  AISearchInfo,
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
@@ -378,6 +382,7 @@ import {
   DescribeCloudStoragePackageConsumeStatsRequest,
   DeleteFenceBindResponse,
   ActivateTWeCallLicenseRequest,
+  DescribeAISearchTaskAsyncResponse,
   IotApplication,
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
@@ -475,13 +480,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查看某个设备的详细信息
+   * 获取视频语义异步搜索任务详情
    */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
+  async DescribeAISearchTaskAsync(
+    req: DescribeAISearchTaskAsyncRequest,
+    cb?: (error: string, rep: DescribeAISearchTaskAsyncResponse) => void
+  ): Promise<DescribeAISearchTaskAsyncResponse> {
+    return this.request("DescribeAISearchTaskAsync", req, cb)
   }
 
   /**
@@ -764,6 +769,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLoRaGatewayResponse) => void
   ): Promise<ModifyLoRaGatewayResponse> {
     return this.request("ModifyLoRaGateway", req, cb)
+  }
+
+  /**
+   * 用于查看某个设备的详细信息
+   */
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
   }
 
   /**
@@ -1177,13 +1192,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取设备统计汇总数据
+   * 创建视频语义异步搜索任务
    */
-  async GetDeviceSumStatistics(
-    req: GetDeviceSumStatisticsRequest,
-    cb?: (error: string, rep: GetDeviceSumStatisticsResponse) => void
-  ): Promise<GetDeviceSumStatisticsResponse> {
-    return this.request("GetDeviceSumStatistics", req, cb)
+  async CreateAISearchTaskAsync(
+    req: CreateAISearchTaskAsyncRequest,
+    cb?: (error: string, rep: CreateAISearchTaskAsyncResponse) => void
+  ): Promise<CreateAISearchTaskAsyncResponse> {
+    return this.request("CreateAISearchTaskAsync", req, cb)
   }
 
   /**
@@ -1808,6 +1823,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDeviceResponse) => void
   ): Promise<DeleteDeviceResponse> {
     return this.request("DeleteDevice", req, cb)
+  }
+
+  /**
+   * 拉取设备统计汇总数据
+   */
+  async GetDeviceSumStatistics(
+    req: GetDeviceSumStatisticsRequest,
+    cb?: (error: string, rep: GetDeviceSumStatisticsResponse) => void
+  ): Promise<GetDeviceSumStatisticsResponse> {
+    return this.request("GetDeviceSumStatistics", req, cb)
   }
 
   /**

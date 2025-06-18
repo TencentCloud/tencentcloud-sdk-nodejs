@@ -58,9 +58,9 @@ it("iotexplorer.v20190423.DescribeFirmwareUpdateStatus", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDevice", async function () {
+it("iotexplorer.v20190423.DescribeAISearchTaskAsync", async function () {
     try {
-       const data = await client.DescribeDevice({})
+       const data = await client.DescribeAISearchTaskAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +341,16 @@ it("iotexplorer.v20190423.DescribeBindedProducts", async function () {
 it("iotexplorer.v20190423.ModifyLoRaGateway", async function () {
     try {
        const data = await client.ModifyLoRaGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeDevice", async function () {
+    try {
+       const data = await client.DescribeDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +768,9 @@ it("iotexplorer.v20190423.ModifyLoRaFrequency", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetDeviceSumStatistics", async function () {
+it("iotexplorer.v20190423.CreateAISearchTaskAsync", async function () {
     try {
-       const data = await client.GetDeviceSumStatistics({})
+       const data = await client.CreateAISearchTaskAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1381,6 +1391,16 @@ it("iotexplorer.v20190423.InvokeTWeSeeRecognitionTask", async function () {
 it("iotexplorer.v20190423.DeleteDevice", async function () {
     try {
        const data = await client.DeleteDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetDeviceSumStatistics", async function () {
+    try {
+       const data = await client.GetDeviceSumStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
