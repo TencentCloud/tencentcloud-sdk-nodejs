@@ -2148,6 +2148,10 @@ export interface CreateAlertCenterOmitRequest {
 AlertTable 告警中心  InterceptionTable拦截列表
    */
   TableType: string
+  /**
+   * 处置对象,事件ID列表
+   */
+  HandleEventIdList?: Array<string>
 }
 
 /**

@@ -624,7 +624,7 @@ export interface DescribeListBGPInstancesRequest {
    */
   FilterTransRegionFlag?: number
   /**
-   * zoenid列表
+   * ZoneID列表
    */
   FilterZoneIdList?: Array<number | bigint>
 }
@@ -5358,7 +5358,7 @@ export interface DescribeBizTrendRequest {
    */
   ProtoInfo?: Array<ProtocolPort>
   /**
-   * 业务类型可取值domain, port
+   * 业务类型：</br>
 port：端口业务
 domain：域名业务
    */

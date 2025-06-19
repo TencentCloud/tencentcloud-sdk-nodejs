@@ -18,109 +18,19 @@ const client = new tencentcloud.tiia.v20190529.Client({
 })
 describe("tiia.v20190529.test.js", function () {
 
-it("tiia.v20190529.DetectEnvelope", async function () {
-    try {
-       const data = await client.DetectEnvelope({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DescribeImages", async function () {
-    try {
-       const data = await client.DescribeImages({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DetectPet", async function () {
-    try {
-       const data = await client.DetectPet({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.CreateGroup", async function () {
-    try {
-       const data = await client.CreateGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.RecognizeCarPro", async function () {
-    try {
-       const data = await client.RecognizeCarPro({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DetectLabel", async function () {
-    try {
-       const data = await client.DetectLabel({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DetectChefDress", async function () {
-    try {
-       const data = await client.DetectChefDress({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DeleteImages", async function () {
-    try {
-       const data = await client.DeleteImages({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.CropImage", async function () {
-    try {
-       const data = await client.CropImage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.EnhanceImage", async function () {
-    try {
-       const data = await client.EnhanceImage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tiia.v20190529.CreateImage", async function () {
     try {
        const data = await client.CreateImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.UpdateImage", async function () {
+    try {
+       const data = await client.UpdateImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +48,39 @@ it("tiia.v20190529.DetectLabelPro", async function () {
     }
 })
 
+it("tiia.v20190529.RecognizeCar", async function () {
+    try {
+       const data = await client.RecognizeCar({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectLabel", async function () {
+    try {
+       const data = await client.DetectLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiia.v20190529.AssessQuality", async function () {
     try {
        const data = await client.AssessQuality({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectChefDress", async function () {
+    try {
+       const data = await client.DetectChefDress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +108,9 @@ it("tiia.v20190529.DescribeGroups", async function () {
     }
 })
 
-it("tiia.v20190529.DetectMisbehavior", async function () {
+it("tiia.v20190529.DeleteImages", async function () {
     try {
-       const data = await client.DetectMisbehavior({})
+       const data = await client.DeleteImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,39 +118,9 @@ it("tiia.v20190529.DetectMisbehavior", async function () {
     }
 })
 
-it("tiia.v20190529.DetectProduct", async function () {
+it("tiia.v20190529.CropImage", async function () {
     try {
-       const data = await client.DetectProduct({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DetectSecurity", async function () {
-    try {
-       const data = await client.DetectSecurity({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.RecognizeCar", async function () {
-    try {
-       const data = await client.RecognizeCar({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DetectLabelBeta", async function () {
-    try {
-       const data = await client.DetectLabelBeta({})
+       const data = await client.CropImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +138,89 @@ it("tiia.v20190529.SearchImage", async function () {
     }
 })
 
-it("tiia.v20190529.UpdateImage", async function () {
+it("tiia.v20190529.DescribeImages", async function () {
     try {
-       const data = await client.UpdateImage({})
+       const data = await client.DescribeImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectMisbehavior", async function () {
+    try {
+       const data = await client.DetectMisbehavior({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.CreateGroup", async function () {
+    try {
+       const data = await client.CreateGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectProduct", async function () {
+    try {
+       const data = await client.DetectProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.RecognizeCarPro", async function () {
+    try {
+       const data = await client.RecognizeCarPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.EnhanceImage", async function () {
+    try {
+       const data = await client.EnhanceImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectEnvelope", async function () {
+    try {
+       const data = await client.DetectEnvelope({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectSecurity", async function () {
+    try {
+       const data = await client.DetectSecurity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiia.v20190529.DetectPet", async function () {
+    try {
+       const data = await client.DetectPet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

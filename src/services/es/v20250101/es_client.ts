@@ -27,6 +27,7 @@ import {
   RerankResult,
   GetDocumentParseResultRequest,
   Usage,
+  DocumentParseConfig,
   ParseDocumentResponse,
   Document,
   GetTextEmbeddingRequest,

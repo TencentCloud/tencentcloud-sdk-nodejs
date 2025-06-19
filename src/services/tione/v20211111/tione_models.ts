@@ -2417,45 +2417,21 @@ export interface Choice {
 }
 
 /**
- * 资源组
+ * ModifyModelServiceAuthToken请求参数结构体
  */
-export interface ResourceGroup {
+export interface ModifyModelServiceAuthTokenRequest {
   /**
-   * 资源组id
+   * 服务组 id
    */
-  ResourceGroupId?: string
+  ServiceGroupId: string
   /**
-   * 资源组名称
+   * 是否需要重置，如果为 true，重置 token 值
    */
-  ResourceGroupName?: string
+  NeedReset?: boolean
   /**
-   * 可用节点个数(运行中的节点)
+   * AuthToken 数据
    */
-  FreeInstance?: number
-  /**
-   * 总节点个数(所有节点)
-   */
-  TotalInstance?: number
-  /**
-   * 资资源组已用的资源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsedResource?: GroupResource
-  /**
-   * 资源组总资源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalResource?: GroupResource
-  /**
-   * 节点信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceSet?: Array<Instance>
-  /**
-   * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagSet?: Array<Tag>
+  AuthToken?: AuthToken
 }
 
 /**
@@ -2680,38 +2656,17 @@ export interface InferCodeInfo {
 export type DescribeInferTemplatesRequest = null
 
 /**
- * 私有连接信息
+ * ModifyModelServiceAuthorization请求参数结构体
  */
-export interface PrivateLinkInfo {
+export interface ModifyModelServiceAuthorizationRequest {
   /**
-   * 私有连接所在的VPCID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务组Id
    */
-  VpcId?: string
+  ServiceGroupId: string
   /**
-   * 私有连接所在的子网ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启鉴权,true表示开启
    */
-  SubnetId?: string
-  /**
-   * HTTP内网调用地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerHttpAddr?: Array<string>
-  /**
-   * HTTPS内网调用地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InnerHttpsAddr?: Array<string>
-  /**
-   * 私有连接状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  State?: string
-  /**
-   * grpc内网调用地址
-   */
-  InnerGrpcAddr?: Array<string>
+  AuthorizationEnable?: boolean
 }
 
 /**
@@ -2776,17 +2731,50 @@ export interface CronScaleJob {
 }
 
 /**
- * DescribeEvents返回参数结构体
+ * 私有连接信息
  */
-export interface DescribeEventsResponse {
+export interface PrivateLinkInfo {
   /**
-   * 事件的列表
+   * 私有连接所在的VPCID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Events?: Array<Event>
+  VpcId?: string
   /**
-   * 此次查询的事件的个数
+   * 私有连接所在的子网ID
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * HTTP内网调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerHttpAddr?: Array<string>
+  /**
+   * HTTPS内网调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerHttpsAddr?: Array<string>
+  /**
+   * 私有连接状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * grpc内网调用地址
+   */
+  InnerGrpcAddr?: Array<string>
+}
+
+/**
+ * DescribeNotebooks返回参数结构体
+ */
+export interface DescribeNotebooksResponse {
+  /**
+   * 详情
+   */
+  NotebookSet?: Array<NotebookSetItem>
+  /**
+   * 总条数
    */
   TotalCount?: number
   /**
@@ -3364,6 +3352,26 @@ export interface CreateTrainingTaskResponse {
 }
 
 /**
+ * ModifyModelServiceAuthToken返回参数结构体
+ */
+export interface ModifyModelServiceAuthTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyModelServiceAuthorization返回参数结构体
+ */
+export interface ModifyModelServiceAuthorizationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteModelService请求参数结构体
  */
 export interface DeleteModelServiceRequest {
@@ -3840,15 +3848,17 @@ export interface AuthToken {
 }
 
 /**
- * DescribeNotebooks返回参数结构体
+ * DescribeEvents返回参数结构体
  */
-export interface DescribeNotebooksResponse {
+export interface DescribeEventsResponse {
   /**
-   * 详情
+   * 事件的列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotebookSet?: Array<NotebookSetItem>
+  Events?: Array<Event>
   /**
-   * 总条数
+   * 此次查询的事件的个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -4278,6 +4288,16 @@ export interface DeleteTrainingTaskRequest {
 }
 
 /**
+ * CreateModelServiceAuthToken返回参数结构体
+ */
+export interface CreateModelServiceAuthTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 类型NotebookDetail
  */
 export interface NotebookDetail {
@@ -4581,6 +4601,16 @@ export interface ProbeAction {
    * 探针类型，默认 HTTPGet，可选值：HTTPGet、Exec、TCPSocket
    */
   ActionType?: string
+}
+
+/**
+ * DeleteModelServiceAuthToken返回参数结构体
+ */
+export interface DeleteModelServiceAuthTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4920,6 +4950,48 @@ export interface DescribeNotebookResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源组
+ */
+export interface ResourceGroup {
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * 资源组名称
+   */
+  ResourceGroupName?: string
+  /**
+   * 可用节点个数(运行中的节点)
+   */
+  FreeInstance?: number
+  /**
+   * 总节点个数(所有节点)
+   */
+  TotalInstance?: number
+  /**
+   * 资资源组已用的资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedResource?: GroupResource
+  /**
+   * 资源组总资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalResource?: GroupResource
+  /**
+   * 节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceSet?: Array<Instance>
+  /**
+   * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -5532,6 +5604,24 @@ STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING�
 }
 
 /**
+ * CreateModelServiceAuthToken请求参数结构体
+ */
+export interface CreateModelServiceAuthTokenRequest {
+  /**
+   * 服务组 id
+   */
+  ServiceGroupId: string
+  /**
+   * token 名称
+   */
+  Name?: string
+  /**
+   * Description 描述
+   */
+  Description?: string
+}
+
+/**
  * V2版本的服务调用信息
  */
 export interface ServiceCallInfoV2 {
@@ -5821,6 +5911,20 @@ TI.GN7.20XLARGE320.POST: 80C320G T4*4
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
+}
+
+/**
+ * DeleteModelServiceAuthToken请求参数结构体
+ */
+export interface DeleteModelServiceAuthTokenRequest {
+  /**
+   * 服务组 id
+   */
+  ServiceGroupId: string
+  /**
+   * token 值
+   */
+  AuthTokenValue?: string
 }
 
 /**

@@ -78,9 +78,9 @@ it("tione.v20211111.DescribeModelServiceCallInfo", async function () {
     }
 })
 
-it("tione.v20211111.DescribeTrainingTasks", async function () {
+it("tione.v20211111.DescribeTrainingTask", async function () {
     try {
-       const data = await client.DescribeTrainingTasks({})
+       const data = await client.DescribeTrainingTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +138,16 @@ it("tione.v20211111.CreateTrainingTask", async function () {
     }
 })
 
+it("tione.v20211111.ModifyModelServiceAuthorization", async function () {
+    try {
+       const data = await client.ModifyModelServiceAuthorization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteNotebook", async function () {
     try {
        const data = await client.DeleteNotebook({})
@@ -148,9 +158,9 @@ it("tione.v20211111.DeleteNotebook", async function () {
     }
 })
 
-it("tione.v20211111.DescribeTrainingTask", async function () {
+it("tione.v20211111.DeleteModelServiceAuthToken", async function () {
     try {
-       const data = await client.DescribeTrainingTask({})
+       const data = await client.DeleteModelServiceAuthToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +308,16 @@ it("tione.v20211111.DescribeTrainingModelVersions", async function () {
     }
 })
 
+it("tione.v20211111.ModifyModelServiceAuthToken", async function () {
+    try {
+       const data = await client.ModifyModelServiceAuthToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.CreateModelService", async function () {
     try {
        const data = await client.CreateModelService({})
@@ -348,9 +368,29 @@ it("tione.v20211111.DescribeDatasets", async function () {
     }
 })
 
+it("tione.v20211111.CreateModelServiceAuthToken", async function () {
+    try {
+       const data = await client.CreateModelServiceAuthToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeBillingResourceInstanceRunningJobs", async function () {
     try {
        const data = await client.DescribeBillingResourceInstanceRunningJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeTrainingTasks", async function () {
+    try {
+       const data = await client.DescribeTrainingTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

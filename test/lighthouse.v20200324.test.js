@@ -468,6 +468,16 @@ it("lighthouse.v20200324.DescribeDockerContainers", async function () {
     }
 })
 
+it("lighthouse.v20200324.SyncBlueprint", async function () {
+    try {
+       const data = await client.SyncBlueprint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.TerminateDisks", async function () {
     try {
        const data = await client.TerminateDisks({})

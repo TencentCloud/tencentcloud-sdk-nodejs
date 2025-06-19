@@ -814,11 +814,11 @@ export interface RabbitMQVirtualHostStatistics {
  */
 export interface DescribeRabbitMQQueuesResponse {
   /**
-   * 列表信息
+   * 队列列表信息
    */
   QueueInfoList?: Array<RabbitMQQueueListInfo>
   /**
-   * 数量
+   * 队列数量
    */
   TotalCount?: number
   /**
@@ -1119,15 +1119,15 @@ export interface DescribeRabbitMQVirtualHostResponse {
  */
 export interface RabbitMQPermission {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId?: string
   /**
-   * 用户名，权限关联的用户
+   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
    */
   User?: string
   /**
-   * vhost名
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到 Vhost 名称。
    */
   VirtualHost?: string
   /**
@@ -1150,6 +1150,14 @@ export interface RabbitMQPermission {
    * 修改时间
    */
   ModifyTime?: string
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
 }
 
 /**
@@ -3958,6 +3966,14 @@ export interface RabbitMQQueueListInfo {
    * 是否独占队列
    */
   Exclusive?: boolean
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
 }
 
 /**
@@ -5419,11 +5435,11 @@ export interface VerifyRocketMQConsumeRequest {
  */
 export interface DescribeRabbitMQQueueDetailRequest {
   /**
-   * 实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询
    */
   InstanceId: string
   /**
-   * Vhost参数
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到 Vhost 名称
    */
   VirtualHost: string
   /**
@@ -6307,7 +6323,7 @@ export interface DescribePublishersRequest {
 }
 
 /**
- * Rabbitmq路由关系列表成员
+ * RabbitMQ 路由关系列表成员
  */
 export interface RabbitMQBindingListInfo {
   /**
@@ -6315,7 +6331,7 @@ export interface RabbitMQBindingListInfo {
    */
   BindingId?: number
   /**
-   * Vhost参数
+   * VhostName
    */
   VirtualHost?: string
   /**
@@ -6346,6 +6362,14 @@ export interface RabbitMQBindingListInfo {
    * 修改时间
    */
   ModifyTime?: string
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
 }
 
 /**
@@ -6923,6 +6947,14 @@ export interface DescribeRabbitMQQueueDetailResponse {
    * 扩展参数 key-value
    */
   Arguments?: string
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7778,19 +7810,19 @@ export interface TraceResult {
  */
 export interface DescribeRabbitMQQueuesRequest {
   /**
-   * 实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * Vhost参数
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost?: string
   /**
-   * 分页Offset
+   * 分页 Offset，默认 0
    */
   Offset?: number
   /**
-   * 分页Limit
+   * 分页 Limit，默认 20
    */
   Limit?: number
   /**
@@ -7798,7 +7830,7 @@ export interface DescribeRabbitMQQueuesRequest {
    */
   SearchWord?: string
   /**
-   * 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列
+   * 队列类型筛选，不填或 "all"：筛选普通队列 和 quorum 队列；"classic"：筛选 classic(普通) 队列；"quorum"：筛选 quorum 队列
    */
   QueueType?: string
   /**
@@ -7812,6 +7844,8 @@ MessageRateOut - 消费速率；
   SortElement?: string
   /**
    * 排序顺序，ascend 或 descend
+ascend：升序
+descend：降序
    */
   SortOrder?: string
 }
@@ -8705,6 +8739,14 @@ export interface RabbitMQVirtualHostInfo {
    * 是否存在镜像队列策略，true 为存在，false 为不存
    */
   MirrorQueuePolicyFlag?: boolean
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
 }
 
 /**
@@ -9426,7 +9468,7 @@ FilterType = 2表示用户使用 BindingKey 过滤。
  */
 export interface RabbitMQExchangeListInfo {
   /**
-   * exchange 名
+   * exchange 名称
    */
   ExchangeName?: string
   /**
@@ -9439,7 +9481,7 @@ export interface RabbitMQExchangeListInfo {
    */
   ExchangeType?: string
   /**
-   * VHost参数
+   * 交换机所属 Virtual Host 名称
    */
   VirtualHost?: string
   /**
@@ -9494,6 +9536,14 @@ export interface RabbitMQExchangeListInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessagesDelayed?: number
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
 }
 
 /**
@@ -9831,7 +9881,7 @@ export interface ResetRocketMQConsumerOffSetResponse {
  */
 export interface RabbitMQUser {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId?: string
   /**
@@ -9872,6 +9922,14 @@ export interface RabbitMQUser {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxChannels?: number
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
 }
 
 /**

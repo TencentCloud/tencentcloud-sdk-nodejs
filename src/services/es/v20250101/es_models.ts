@@ -186,6 +186,17 @@ export interface Usage {
 }
 
 /**
+ * 文档解析配置
+ */
+export interface DocumentParseConfig {
+  /**
+   * 0:图片以链接形式返回
+1:返回图片中提取的文本内容
+   */
+  ImageResponseType?: number
+}
+
+/**
  * ParseDocument返回参数结构体
  */
 export interface ParseDocumentResponse {
@@ -426,6 +437,18 @@ export interface ParseDocument {
 支持的图片像素：单边介于20-10000px之间。
    */
   FileContent?: string
+  /**
+   * 文档解析配置
+   */
+  DocumentParseConfig?: DocumentParseConfig
+  /**
+   * 文档的起始页码
+   */
+  FileStartPageNumber?: number
+  /**
+   * 文档的结束页码
+   */
+  FileEndPageNumber?: number
 }
 
 /**

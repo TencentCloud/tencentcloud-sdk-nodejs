@@ -87,7 +87,7 @@ import {
   Option,
   DefaultInnerCallInfo,
   Choice,
-  ResourceGroup,
+  ModifyModelServiceAuthTokenRequest,
   LogIdentity,
   DescribeDatasetsRequest,
   ModelAccelerateVersion,
@@ -97,11 +97,12 @@ import {
   RDMAConfig,
   InferCodeInfo,
   DescribeInferTemplatesRequest,
-  PrivateLinkInfo,
+  ModifyModelServiceAuthorizationRequest,
   DeleteModelServiceGroupResponse,
   GpuDetail,
   CronScaleJob,
-  DescribeEventsResponse,
+  PrivateLinkInfo,
+  DescribeNotebooksResponse,
   InferTemplateGroup,
   DescribeModelServiceResponse,
   DatasetInfo,
@@ -113,6 +114,8 @@ import {
   ServiceInfo,
   DescribeModelServiceRequest,
   CreateTrainingTaskResponse,
+  ModifyModelServiceAuthTokenResponse,
+  ModifyModelServiceAuthorizationResponse,
   DeleteModelServiceRequest,
   DescribeModelServiceGroupRequest,
   CreateTrainingTaskRequest,
@@ -131,7 +134,7 @@ import {
   DescribeBillingSpecsResponse,
   DeleteTrainingTaskResponse,
   AuthToken,
-  DescribeNotebooksResponse,
+  DescribeEventsResponse,
   DatasetGroup,
   StatefulSetCondition,
   SidecarSpec,
@@ -144,11 +147,13 @@ import {
   DescribeNotebooksRequest,
   DeleteNotebookResponse,
   DeleteTrainingTaskRequest,
+  CreateModelServiceAuthTokenResponse,
   NotebookDetail,
   DescribeBillingResourceInstanceRunningJobsRequest,
   ModifyModelServiceResponse,
   PodInfo,
   ProbeAction,
+  DeleteModelServiceAuthTokenResponse,
   ModelInfo,
   CreateDatasetRequest,
   CreateModelServiceResponse,
@@ -156,6 +161,7 @@ import {
   ServiceLimit,
   DescribeModelServiceGroupResponse,
   DescribeNotebookResponse,
+  ResourceGroup,
   AuthTokenLimit,
   CreateTrainingModelResponse,
   HostPath,
@@ -175,6 +181,7 @@ import {
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
+  CreateModelServiceAuthTokenRequest,
   ServiceCallInfoV2,
   DescribeBillingResourceGroupRequest,
   DescribeTrainingTaskRequest,
@@ -186,6 +193,7 @@ import {
   DeleteDatasetRequest,
   DataConfig,
   ResourceConf,
+  DeleteModelServiceAuthTokenRequest,
   PushTrainingMetricsResponse,
   StopTrainingTaskResponse,
   HealthProbe,
@@ -281,13 +289,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 训练任务列表
+   * 训练任务详情
    */
-  async DescribeTrainingTasks(
-    req: DescribeTrainingTasksRequest,
-    cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
-  ): Promise<DescribeTrainingTasksResponse> {
-    return this.request("DescribeTrainingTasks", req, cb)
+  async DescribeTrainingTask(
+    req: DescribeTrainingTaskRequest,
+    cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
+  ): Promise<DescribeTrainingTaskResponse> {
+    return this.request("DescribeTrainingTask", req, cb)
   }
 
   /**
@@ -341,6 +349,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改服务鉴权配置
+   */
+  async ModifyModelServiceAuthorization(
+    req: ModifyModelServiceAuthorizationRequest,
+    cb?: (error: string, rep: ModifyModelServiceAuthorizationResponse) => void
+  ): Promise<ModifyModelServiceAuthorizationResponse> {
+    return this.request("ModifyModelServiceAuthorization", req, cb)
+  }
+
+  /**
    * 删除Notebook
    */
   async DeleteNotebook(
@@ -351,13 +369,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 训练任务详情
+   * 删除一个 AuthToken
    */
-  async DescribeTrainingTask(
-    req: DescribeTrainingTaskRequest,
-    cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
-  ): Promise<DescribeTrainingTaskResponse> {
-    return this.request("DescribeTrainingTask", req, cb)
+  async DeleteModelServiceAuthToken(
+    req: DeleteModelServiceAuthTokenRequest,
+    cb?: (error: string, rep: DeleteModelServiceAuthTokenResponse) => void
+  ): Promise<DeleteModelServiceAuthTokenResponse> {
+    return this.request("DeleteModelServiceAuthToken", req, cb)
   }
 
   /**
@@ -504,6 +522,16 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
+   * 修改一个 AuthToken
+   */
+  async ModifyModelServiceAuthToken(
+    req: ModifyModelServiceAuthTokenRequest,
+    cb?: (error: string, rep: ModifyModelServiceAuthTokenResponse) => void
+  ): Promise<ModifyModelServiceAuthTokenResponse> {
+    return this.request("ModifyModelServiceAuthToken", req, cb)
+  }
+
+  /**
    * 用于创建、发布一个新的模型服务
    */
   async CreateModelService(
@@ -554,6 +582,16 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
+   * 创建一个 AuthToken
+   */
+  async CreateModelServiceAuthToken(
+    req: CreateModelServiceAuthTokenRequest,
+    cb?: (error: string, rep: CreateModelServiceAuthTokenResponse) => void
+  ): Promise<CreateModelServiceAuthTokenResponse> {
+    return this.request("CreateModelServiceAuthToken", req, cb)
+  }
+
+  /**
    * 查询资源组节点运行中的任务
    */
   async DescribeBillingResourceInstanceRunningJobs(
@@ -561,6 +599,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DescribeBillingResourceInstanceRunningJobsResponse) => void
   ): Promise<DescribeBillingResourceInstanceRunningJobsResponse> {
     return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb)
+  }
+
+  /**
+   * 训练任务列表
+   */
+  async DescribeTrainingTasks(
+    req: DescribeTrainingTasksRequest,
+    cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
+  ): Promise<DescribeTrainingTasksResponse> {
+    return this.request("DescribeTrainingTasks", req, cb)
   }
 
   /**

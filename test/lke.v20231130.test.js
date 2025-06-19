@@ -758,6 +758,16 @@ it("lke.v20231130.IgnoreUnsatisfiedReply", async function () {
     }
 })
 
+it("lke.v20231130.UpdateVar", async function () {
+    try {
+       const data = await client.UpdateVar({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ReferShareKnowledge", async function () {
     try {
        const data = await client.ReferShareKnowledge({})
@@ -878,9 +888,9 @@ it("lke.v20231130.QueryRewrite", async function () {
     }
 })
 
-it("lke.v20231130.RetryDocAudit", async function () {
+it("lke.v20231130.DeleteVar", async function () {
     try {
-       const data = await client.RetryDocAudit({})
+       const data = await client.DeleteVar({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -941,6 +951,16 @@ it("lke.v20231130.GetAnswerTypeDataCount", async function () {
 it("lke.v20231130.DescribeWorkflowRun", async function () {
     try {
        const data = await client.DescribeWorkflowRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.RetryDocAudit", async function () {
+    try {
+       const data = await client.RetryDocAudit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

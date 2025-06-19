@@ -300,6 +300,10 @@ export interface AndroidApp {
    * 应用模式（NORMAL : 普通模式；ADVANCED : 高级模式）
    */
   AppMode?: string
+  /**
+   * 应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、NORMAL 默认状态
+   */
+  UpdateState?: string
 }
 
 /**
@@ -1924,7 +1928,7 @@ export interface DescribeAndroidAppsRequest {
    */
   AndroidAppIds?: Array<string>
   /**
-   * 过滤条件，支持过滤的字段有：UserId
+   * 过滤条件，支持过滤的字段有：UserId、State、UpdateState、Name、AppMode 。其中 Name 为模糊匹配，其他参数为精确匹配。
    */
   Filters?: Array<Filter>
 }

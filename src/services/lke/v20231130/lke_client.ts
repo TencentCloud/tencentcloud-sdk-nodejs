@@ -54,7 +54,7 @@ import {
   DescribeWorkflowRunRequest,
   CustomVariable,
   DescribeUnsatisfiedReplyContextRequest,
-  Procedure,
+  NodeRunBase,
   GetEmbeddingRequest,
   ListAppRequest,
   UpdateSharedKnowledgeRequest,
@@ -116,6 +116,7 @@ import {
   CheckAttributeLabelReferRequest,
   CreateSharedKnowledgeResponse,
   ModifyQACateRequest,
+  UpdateVarResponse,
   SearchStrategy,
   ModifyAttributeLabelRequest,
   ConvertDocumentRequest,
@@ -149,7 +150,7 @@ import {
   ListAppKnowledgeDetailResponse,
   ModifyQACateResponse,
   DescribeAttributeLabelResponse,
-  EmbeddingObject,
+  DescribeSharedKnowledgeRequest,
   KnowledgeQaSingleWorkflow,
   ListQACateResponse,
   GetVarListRequest,
@@ -227,7 +228,7 @@ import {
   CateInfo,
   DescribeSharedKnowledgeResponse,
   RunReRankResponse,
-  NodeRunBase,
+  DeleteVarRequest,
   KnowledgeQaConfig,
   Coord,
   MsgRecordReference,
@@ -253,6 +254,7 @@ import {
   DeleteAttributeLabelResponse,
   RetryReleaseRequest,
   KnowledgeQaPlugin,
+  UpdateVarRequest,
   IntentAchievement,
   ValueInfo,
   ListSharedKnowledgeResponse,
@@ -260,11 +262,12 @@ import {
   GenerateQARequest,
   GetWsTokenRequest,
   QACate,
-  DescribeSharedKnowledgeRequest,
+  DeleteVarResponse,
   ListReferShareKnowledgeRequest,
   ModifyDocRequest,
   DescribeTokenUsageResponse,
   DeleteAppResponse,
+  Procedure,
   ListWorkflowRunsResponse,
   ListAttributeLabelRequest,
   DeleteDocCateRequest,
@@ -296,6 +299,7 @@ import {
   DescribeReleaseInfoResponse,
   IsTransferIntentRequest,
   DescribeAppResponse,
+  EmbeddingObject,
   DeleteAppRequest,
   ModifyRejectedQuestionResponse,
   GetVarListResponse,
@@ -1102,6 +1106,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新变量
+   */
+  async UpdateVar(
+    req: UpdateVarRequest,
+    cb?: (error: string, rep: UpdateVarResponse) => void
+  ): Promise<UpdateVarResponse> {
+    return this.request("UpdateVar", req, cb)
+  }
+
+  /**
    * 应用引用共享知识库，可以引用一个或多个，每次都是全量覆盖
    */
   async ReferShareKnowledge(
@@ -1228,13 +1242,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档解析重试
+   * 删除变量
    */
-  async RetryDocAudit(
-    req: RetryDocAuditRequest,
-    cb?: (error: string, rep: RetryDocAuditResponse) => void
-  ): Promise<RetryDocAuditResponse> {
-    return this.request("RetryDocAudit", req, cb)
+  async DeleteVar(
+    req: DeleteVarRequest,
+    cb?: (error: string, rep: DeleteVarResponse) => void
+  ): Promise<DeleteVarResponse> {
+    return this.request("DeleteVar", req, cb)
   }
 
   /**
@@ -1297,6 +1311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWorkflowRunResponse) => void
   ): Promise<DescribeWorkflowRunResponse> {
     return this.request("DescribeWorkflowRun", req, cb)
+  }
+
+  /**
+   * 文档解析重试
+   */
+  async RetryDocAudit(
+    req: RetryDocAuditRequest,
+    cb?: (error: string, rep: RetryDocAuditResponse) => void
+  ): Promise<RetryDocAuditResponse> {
+    return this.request("RetryDocAudit", req, cb)
   }
 
   /**

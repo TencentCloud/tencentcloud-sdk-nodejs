@@ -5610,6 +5610,10 @@ export interface ExposesItem {
    * 租户ID
    */
   AppId?: number
+  /**
+   * 租户ID字符串
+   */
+  AppIdStr?: string
 }
 
 /**

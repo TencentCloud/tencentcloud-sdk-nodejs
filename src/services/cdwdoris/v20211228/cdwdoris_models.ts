@@ -683,7 +683,7 @@ export interface ZoneInfo {
    */
   ZoneId?: number
   /**
-   * Encryptid
+   * Encrypted
    */
   Encrypt?: number
   /**
@@ -2924,7 +2924,7 @@ export interface BackupStatus {
    */
   BackupJobId?: number
   /**
-   * 实例对应snapshoit的id
+   * 实例对应Snapshot的id
    */
   TaskId?: number
 }

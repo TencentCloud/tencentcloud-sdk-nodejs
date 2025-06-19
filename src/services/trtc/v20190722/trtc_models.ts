@@ -1292,7 +1292,7 @@ export interface DescribeWebRecordRequest {
 
 /**
  * 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：
-coffee_shop: 咖啡店氛围，背景中有人聊天。
+coffee_shops: 咖啡店氛围，背景中有人聊天。
 busy_office: 客服中心
 street_traffic: 户外街道
 evening_mountain: 户外山林

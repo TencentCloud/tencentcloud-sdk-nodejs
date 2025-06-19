@@ -479,6 +479,10 @@ export interface CreateOutputSRTSettings {
    * SRT模式，可选[LISTENER|CALLER]，默认为CALLER。
    */
   Mode?: string
+  /**
+   * SRT FEC 设置
+   */
+  FEC?: SRTFECFullOptions
 }
 
 /**
@@ -2240,6 +2244,32 @@ export interface CreateOutputRTPSettingsDestinations {
 }
 
 /**
+ * SRT FEC 高级配置
+ */
+export interface SRTFECFullOptions {
+  /**
+   * 是否开启 FEC
+   */
+  Enable?: boolean
+  /**
+   * FEC 数据包 Layout 列数量. 取值范围>0
+   */
+  Cols?: number
+  /**
+   * FEC 数据包 Layout 行数量. 取值范围 >=2 或者 <=-2
+   */
+  Rows?: number
+  /**
+   * FEC 开启的情况下，ARQ的策略。取值 "always", "onreq", "never"
+   */
+  ARQ?: string
+  /**
+   * FEC 数据包 Layout 组织形式，取值 "even", "staircase"
+   */
+  Layout?: string
+}
+
+/**
  * 智能分类任务控制参数
  */
 export interface ClassificationConfigureInfo {
@@ -3556,6 +3586,10 @@ export interface DescribeInputSRTSettings {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceAddresses?: Array<SRTSourceAddressResp>
+  /**
+   * FEC  设置
+   */
+  FEC?: SRTFECSimpleOptions
 }
 
 /**
@@ -5643,29 +5677,13 @@ export interface ImageWatermarkInput {
 }
 
 /**
- * 音轨信息
+ * SRT FEC 设置
  */
-export interface TrackInfo {
+export interface SRTFECSimpleOptions {
   /**
-   * 音轨和声道数字，说明：
-当：SelectType值为track，此值为整数类型，例如：1；
-当：SelectType值为track_channel，此值为小数类型，例如：1.0；
-默认值：1.0
-注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启 FEC
    */
-  TrackNum?: string
-  /**
-   * 声道音量大小，说明：
-当：AudioChannel的值为1时，此数组长度为1，例如：[6]；
-当：AudioChannel的值为2时，此数组长度为2，例如：[0,6]；
-当：AudioChannel的值为6时，此数组长度大于2小于16，例如：[-60,0,0,6]。
-此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。
-注意：支持3位小数。
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChannelVolume?: Array<number>
+  Enable?: boolean
 }
 
 /**
@@ -8245,6 +8263,10 @@ export interface CreateInputSRTSettings {
    * SRT对端地址，当Mode为CALLER时必填，且只能填1组。
    */
   SourceAddresses?: Array<SRTSourceAddressReq>
+  /**
+   * SRT FEC 设置
+   */
+  FEC?: SRTFECSimpleOptions
 }
 
 /**
@@ -8367,7 +8389,7 @@ export interface DescribeContentReviewTemplatesResponse {
  */
 export interface BlindWatermarkEmbedInfo {
   /**
-   * 盲水印文字，需要经过 URL 安全的 Base64 编码。
+   * 盲水印文字，经过URL安全的Base64编码的4Byte数据。Base64解码之后，少于4Byte将会填充0x00到4Byte，超过4Byte将会截断为4Byte。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EmbedText?: string
@@ -14636,6 +14658,10 @@ export interface DescribeOutputSRTSettings {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceAddresses?: Array<OutputSRTSourceAddressResp>
+  /**
+   * FEC 配置
+   */
+  FEC?: SRTFECFullOptions
 }
 
 /**
@@ -18008,6 +18034,32 @@ export interface SampleSnapshotTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectNumberFormat?: NumberFormat
+}
+
+/**
+ * 音轨信息
+ */
+export interface TrackInfo {
+  /**
+   * 音轨和声道数字，说明：
+当：SelectType值为track，此值为整数类型，例如：1；
+当：SelectType值为track_channel，此值为小数类型，例如：1.0；
+默认值：1.0
+注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrackNum?: string
+  /**
+   * 声道音量大小，说明：
+当：AudioChannel的值为1时，此数组长度为1，例如：[6]；
+当：AudioChannel的值为2时，此数组长度为2，例如：[0,6]；
+当：AudioChannel的值为6时，此数组长度大于2小于16，例如：[-60,0,0,6]。
+此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。
+注意：支持3位小数。
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelVolume?: Array<number>
 }
 
 /**

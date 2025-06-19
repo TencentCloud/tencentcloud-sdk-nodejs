@@ -7628,10 +7628,12 @@ export interface CreateApplicationRequest {
   ApplicationDesc?: string
   /**
    * 应用日志配置项，废弃参数
+   * @deprecated
    */
   ApplicationLogConfig?: string
   /**
    * 应用资源类型，废弃参数
+   * @deprecated
    */
   ApplicationResourceType?: string
   /**

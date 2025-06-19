@@ -358,6 +358,16 @@ it("trocket.v20230308.ModifyMQTTInsPublicEndpoint", async function () {
     }
 })
 
+it("trocket.v20230308.ModifyInstance", async function () {
+    try {
+       const data = await client.ModifyInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeConsumerGroup", async function () {
     try {
        const data = await client.DescribeConsumerGroup({})
@@ -608,9 +618,9 @@ it("trocket.v20230308.DescribeTopic", async function () {
     }
 })
 
-it("trocket.v20230308.ModifyInstance", async function () {
+it("trocket.v20230308.DescribeMigrationTaskList", async function () {
     try {
-       const data = await client.ModifyInstance({})
+       const data = await client.DescribeMigrationTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

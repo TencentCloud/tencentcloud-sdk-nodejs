@@ -967,39 +967,68 @@ export interface DescribeUnsatisfiedReplyContextRequest {
 }
 
 /**
- * 执行过程信息记录
+ * 节点运行的基本信息
  */
-export interface Procedure {
+export interface NodeRunBase {
   /**
-   * 执行过程英语名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点运行的ID
    */
-  Name?: string
+  NodeRunId?: string
   /**
-   * 中文名, 用于展示
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点ID
    */
-  Title?: string
+  NodeId?: string
   /**
-   * 状态常量: 使用中: processing, 成功: success, 失败: failed
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流运行实例的ID
    */
-  Status?: string
+  WorkflowRunId?: string
   /**
-   * 消耗 token 数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点名称
    */
-  Count?: number
+  NodeName?: string
   /**
-   * 调试信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点类型。
+1： 开始节点
+2：参数提取节点
+3：大模型节点
+4：知识问答节点
+5：知识检索节点
+6：标签提取节点
+7：代码执行节点
+8：工具节点
+9：逻辑判断节点
+10：回复节点
+11：选项卡节点
+12：循环节点
+13：意图识别节点
+14：工作流节点
+15：插件节点
+16：结束节点
+17: 变量聚合节点数据
+18: 批处理节点
+19: 消息队列节点
    */
-  Debugging?: ProcedureDebugging
+  NodeType?: number
   /**
-   * 计费资源状态，1：可用，2：不可用
-注意：此字段可能返回 null，表示取不到有效值。
+   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
    */
-  ResourceStatus?: number
+  State?: number
+  /**
+   * 错误码
+   */
+  FailCode?: string
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗时间（毫秒）
+   */
+  CostMilliseconds?: number
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
 }
 
 /**
@@ -2669,6 +2698,20 @@ export interface ModifyQACateRequest {
 }
 
 /**
+ * UpdateVar返回参数结构体
+ */
+export interface UpdateVarResponse {
+  /**
+   * 变量ID
+   */
+  VarId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 知识库检索策略
  */
 export interface SearchStrategy {
@@ -3416,13 +3459,13 @@ export interface DescribeAttributeLabelResponse {
 }
 
 /**
- * 向量
+ * DescribeSharedKnowledge请求参数结构体
  */
-export interface EmbeddingObject {
+export interface DescribeSharedKnowledgeRequest {
   /**
-   * 向量
+   * 共享知识库业务ID
    */
-  Embedding?: Array<number>
+  KnowledgeBizId: string
 }
 
 /**
@@ -5674,68 +5717,17 @@ export interface RunReRankResponse {
 }
 
 /**
- * 节点运行的基本信息
+ * DeleteVar请求参数结构体
  */
-export interface NodeRunBase {
+export interface DeleteVarRequest {
   /**
-   * 节点运行的ID
+   * 应用ID
    */
-  NodeRunId?: string
+  AppBizId: string
   /**
-   * 节点ID
+   * 变量ID
    */
-  NodeId?: string
-  /**
-   * 工作流运行实例的ID
-   */
-  WorkflowRunId?: string
-  /**
-   * 节点名称
-   */
-  NodeName?: string
-  /**
-   * 节点类型。
-1： 开始节点
-2：参数提取节点
-3：大模型节点
-4：知识问答节点
-5：知识检索节点
-6：标签提取节点
-7：代码执行节点
-8：工具节点
-9：逻辑判断节点
-10：回复节点
-11：选项卡节点
-12：循环节点
-13：意图识别节点
-14：工作流节点
-15：插件节点
-16：结束节点
-17: 变量聚合节点数据
-18: 批处理节点
-19: 消息队列节点
-   */
-  NodeType?: number
-  /**
-   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
-   */
-  State?: number
-  /**
-   * 错误码
-   */
-  FailCode?: string
-  /**
-   * 错误信息
-   */
-  FailMessage?: string
-  /**
-   * 消耗时间（毫秒）
-   */
-  CostMilliseconds?: number
-  /**
-   * 消耗的token总数
-   */
-  TotalTokens?: number
+  VarId: string
 }
 
 /**
@@ -6561,6 +6553,40 @@ export interface KnowledgeQaPlugin {
 }
 
 /**
+ * UpdateVar请求参数结构体
+ */
+export interface UpdateVarRequest {
+  /**
+   * 应用ID
+   */
+  AppBizId: string
+  /**
+   * 变量ID
+   */
+  VarId: string
+  /**
+   * 变量名称，最大支持50个字符
+   */
+  VarName: string
+  /**
+   * 参数描述
+   */
+  VarDesc?: string
+  /**
+   * 参数类型
+   */
+  VarType?: string
+  /**
+   * 自定义变量默认值
+   */
+  VarDefaultValue?: string
+  /**
+   * 自定义变量文件默认名称
+   */
+  VarDefaultFileName?: string
+}
+
+/**
  * 意图达成方式
  */
 export interface IntentAchievement {
@@ -6737,13 +6763,13 @@ export interface QACate {
 }
 
 /**
- * DescribeSharedKnowledge请求参数结构体
+ * DeleteVar返回参数结构体
  */
-export interface DescribeSharedKnowledgeRequest {
+export interface DeleteVarResponse {
   /**
-   * 共享知识库业务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  KnowledgeBizId: string
+  RequestId?: string
 }
 
 /**
@@ -6877,6 +6903,42 @@ export interface DeleteAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 执行过程信息记录
+ */
+export interface Procedure {
+  /**
+   * 执行过程英语名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 中文名, 用于展示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
+  /**
+   * 状态常量: 使用中: processing, 成功: success, 失败: failed
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 消耗 token 数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
+  /**
+   * 调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Debugging?: ProcedureDebugging
+  /**
+   * 计费资源状态，1：可用，2：不可用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceStatus?: number
 }
 
 /**
@@ -7728,6 +7790,16 @@ export interface DescribeAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 向量
+ */
+export interface EmbeddingObject {
+  /**
+   * 向量
+   */
+  Embedding?: Array<number>
 }
 
 /**

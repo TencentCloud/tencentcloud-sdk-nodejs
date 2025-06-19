@@ -41,6 +41,7 @@ import {
   DetachCcnResponse,
   ShareBlueprintAcrossAccountsRequest,
   BlueprintPrice,
+  SyncBlueprintRequest,
   DescribeScenesResponse,
   InquirePriceRenewInstancesResponse,
   DeleteFirewallRulesResponse,
@@ -157,6 +158,7 @@ import {
   DescribeBlueprintsResponse,
   DescribeKeyPairsRequest,
   DescribeCcnAttachedInstancesRequest,
+  SyncBlueprintResponse,
   SupportIpv6Detail,
   ApplyDiskBackupRequest,
   ResetInstancesPasswordResponse,
@@ -814,6 +816,22 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDockerContainersResponse) => void
   ): Promise<DescribeDockerContainersResponse> {
     return this.request("DescribeDockerContainers", req, cb)
+  }
+
+  /**
+     * 本接口 (SyncBlueprint) 用于将自定义镜像同步到其它地域。
+
+* 支持向多个地域同步。最多10个地域。
+* 不支持向源地域同步。
+* 只支持NORMAL状态的镜像进行同步。
+* 不支持中国大陆地域和非中国大陆地域之间同步。
+* 可以通过[DescribeBlueprints](https://cloud.tencent.com/document/api/1207/47689)查询镜像状态，当镜像状态为NORMAL时表示源地域同步结束。
+     */
+  async SyncBlueprint(
+    req: SyncBlueprintRequest,
+    cb?: (error: string, rep: SyncBlueprintResponse) => void
+  ): Promise<SyncBlueprintResponse> {
+    return this.request("SyncBlueprint", req, cb)
   }
 
   /**

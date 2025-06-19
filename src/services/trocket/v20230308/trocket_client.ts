@@ -31,6 +31,7 @@ import {
   DescribeMessageListRequest,
   DeleteMQTTInsPublicEndpointRequest,
   ModifyInstanceRequest,
+  MigrationTaskItem,
   FusionInstanceItem,
   InstanceItemExtraInfo,
   CreateMQTTInsPublicEndpointResponse,
@@ -39,6 +40,7 @@ import {
   DeleteTopicRequest,
   MigratingTopic,
   ModifyMQTTInstanceRequest,
+  DescribeMigrationTaskListResponse,
   PublicAccessRule,
   VpcInfo,
   DescribeMQTTProductSKUListResponse,
@@ -67,6 +69,7 @@ import {
   DescribeInstanceListRequest,
   ResendDeadLetterMessageResponse,
   MQTTMessageItem,
+  DescribeMigrationTaskListRequest,
   DeleteMQTTUserRequest,
   ModifyMQTTInstanceCertBindingRequest,
   CreateMQTTTopicResponse,
@@ -555,6 +558,16 @@ Namespace，命名空间
   }
 
   /**
+   * 修改 RocketMQ 5.x 集群属性。
+   */
+  async ModifyInstance(
+    req: ModifyInstanceRequest,
+    cb?: (error: string, rep: ModifyInstanceResponse) => void
+  ): Promise<ModifyInstanceResponse> {
+    return this.request("ModifyInstance", req, cb)
+  }
+
+  /**
    * 查询消费组详情
    */
   async DescribeConsumerGroup(
@@ -832,13 +845,17 @@ ConsumerGroup，消费组名称过滤
   }
 
   /**
-   * 修改 RocketMQ 5.x 集群属性。
-   */
-  async ModifyInstance(
-    req: ModifyInstanceRequest,
-    cb?: (error: string, rep: ModifyInstanceResponse) => void
-  ): Promise<ModifyInstanceResponse> {
-    return this.request("ModifyInstance", req, cb)
+     * 获取数据迁移任务列表，Filter参数使用说明如下：
+
+TaskId，根据任务ID精确查找
+InstanceId，根据实例ID精确查找
+Type，根据任务类型精确查找
+     */
+  async DescribeMigrationTaskList(
+    req: DescribeMigrationTaskListRequest,
+    cb?: (error: string, rep: DescribeMigrationTaskListResponse) => void
+  ): Promise<DescribeMigrationTaskListResponse> {
+    return this.request("DescribeMigrationTaskList", req, cb)
   }
 
   /**
