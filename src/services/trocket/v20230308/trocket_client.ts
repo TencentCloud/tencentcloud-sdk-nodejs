@@ -21,9 +21,11 @@ import {
   DetailedRolePerm,
   DescribeProductSKUsRequest,
   ResetConsumerGroupOffsetResponse,
+  DescribeSmoothMigrationTaskListRequest,
   ProductSKU,
   DescribeRoleListResponse,
   DeleteMQTTTopicRequest,
+  SmoothMigrationTaskItem,
   CreateInstanceResponse,
   SourceClusterTopicConfig,
   ConsumeGroupItem,
@@ -39,7 +41,7 @@ import {
   TopicStageChangeResult,
   DeleteTopicRequest,
   MigratingTopic,
-  ModifyMQTTInstanceRequest,
+  DescribeSmoothMigrationTaskListResponse,
   DescribeMigrationTaskListResponse,
   PublicAccessRule,
   VpcInfo,
@@ -163,6 +165,7 @@ import {
   ModifyInstanceEndpointRequest,
   ChangeMigratingTopicToNextStageRequest,
   DescribeMQTTUserListRequest,
+  ModifyMQTTInstanceRequest,
   ModifyMQTTInstanceResponse,
   CreateMQTTInstanceRequest,
   DescribeTopicListResponse,
@@ -324,6 +327,22 @@ TopicName，主题名称过滤
     cb?: (error: string, rep: ImportSourceClusterConsumerGroupsResponse) => void
   ): Promise<ImportSourceClusterConsumerGroupsResponse> {
     return this.request("ImportSourceClusterConsumerGroups", req, cb)
+  }
+
+  /**
+     * 用于查询平滑迁移任务列表
+
+查询参数Filters， 支持的字段如下：
+TaskStatus, 支持多选 
+ConnectionType，支持多选 
+InstanceId，精确搜索 
+TaskName，支持模糊搜索
+     */
+  async DescribeSmoothMigrationTaskList(
+    req: DescribeSmoothMigrationTaskListRequest,
+    cb?: (error: string, rep: DescribeSmoothMigrationTaskListResponse) => void
+  ): Promise<DescribeSmoothMigrationTaskListResponse> {
+    return this.request("DescribeSmoothMigrationTaskList", req, cb)
   }
 
   /**

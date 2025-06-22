@@ -517,7 +517,7 @@ export interface ModifyFileSystemAutoScaleUpRuleRequest {
    */
   ScaleUpThreshold: number
   /**
-   * 扩容后目标阈值，范围[1-90]，该值要小于 ScaleUpThreshold
+   * 扩容后目标阈值，范围[10-90]，该值要小于 ScaleUpThreshold
    */
   TargetThreshold: number
   /**
@@ -1221,7 +1221,7 @@ export interface ModifyFileSystemAutoScaleUpRuleResponse {
    */
   ScaleUpThreshold?: number
   /**
-   * 扩容后达到阈值，范围[1-90]
+   * 扩容后达到阈值，范围[10-90]
    */
   TargetThreshold?: number
   /**
@@ -1466,7 +1466,7 @@ export interface AutoScaleUpRule {
    */
   ScaleThreshold?: number
   /**
-   * 扩容后使用量跟集群总量比例,范围[1-90]
+   * 扩容后使用量跟集群总量比例,范围[10-90]
    */
   TargetThreshold?: number
 }

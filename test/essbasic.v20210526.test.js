@@ -228,6 +228,16 @@ it("essbasic.v20210526.CreateSealByImage", async function () {
     }
 })
 
+it("essbasic.v20210526.DescribeBatchOrganizationRegistrationTasks", async function () {
+    try {
+       const data = await client.DescribeBatchOrganizationRegistrationTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateConvertTaskApi", async function () {
     try {
        const data = await client.ChannelCreateConvertTaskApi({})
@@ -651,6 +661,16 @@ it("essbasic.v20210526.DescribeUserFlowType", async function () {
 it("essbasic.v20210526.ChannelCreateFlowGroupByFiles", async function () {
     try {
        const data = await client.ChannelCreateFlowGroupByFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateModifyAdminAuthorizationUrl", async function () {
+    try {
+       const data = await client.CreateModifyAdminAuthorizationUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -284,6 +284,10 @@ export interface ChunkDocumentResponse {
    */
   Chunks?: Array<Chunk>
   /**
+   * token消耗量
+   */
+  Usage?: Usage
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -394,6 +398,10 @@ export interface ChunkConfig {
    * 分隔符列表
    */
   Delimiters?: Array<string>
+  /**
+   * 相邻切片重合字符数，需要小于分片长度
+   */
+  ChunkOverlap?: number
 }
 
 /**

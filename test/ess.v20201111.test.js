@@ -88,6 +88,16 @@ it("ess.v20201111.DescribeBatchOrganizationRegistrationUrls", async function () 
     }
 })
 
+it("ess.v20201111.DescribeBatchOrganizationRegistrationTasks", async function () {
+    try {
+       const data = await client.DescribeBatchOrganizationRegistrationTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreatePreparedPersonalEsign", async function () {
     try {
        const data = await client.CreatePreparedPersonalEsign({})
@@ -811,6 +821,16 @@ it("ess.v20201111.CreateDynamicFlowApprover", async function () {
 it("ess.v20201111.DescribeUserFlowType", async function () {
     try {
        const data = await client.DescribeUserFlowType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateModifyAdminAuthorizationUrl", async function () {
+    try {
+       const data = await client.CreateModifyAdminAuthorizationUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

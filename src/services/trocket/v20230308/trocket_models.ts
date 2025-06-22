@@ -57,6 +57,24 @@ export interface ResetConsumerGroupOffsetResponse {
 }
 
 /**
+ * DescribeSmoothMigrationTaskList请求参数结构体
+ */
+export interface DescribeSmoothMigrationTaskListRequest {
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 商品售卖信息
  */
 export interface ProductSKU {
@@ -157,6 +175,57 @@ export interface DeleteMQTTTopicRequest {
    * 主题名称
    */
   Topic: string
+}
+
+/**
+ * 平滑迁移任务
+ */
+export interface SmoothMigrationTaskItem {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名称	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 源集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceClusterName?: string
+  /**
+   * 目标集群实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 网络连接类型， 
+PUBLIC 公网 
+VPC 私有网络 
+OTHER 其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionType?: string
+  /**
+   * 源集群NameServer地址	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceNameServer?: string
+  /**
+   * 任务状态 Configuration 迁移配置 SourceConnecting 连接源集群中 MetaDataImport 元数据导入 EndpointSetup 切换接入点 ServiceMigration 切流中 Completed 已完成 Cancelled 已取消
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStatus?: string
+  /**
+   * 目标集群实例版本，
+4 表示4.x版本
+5 表示5.x版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceVersion?: string
 }
 
 /**
@@ -725,21 +794,23 @@ S_NA_D_RW 目标集群读写
 }
 
 /**
- * ModifyMQTTInstance请求参数结构体
+ * DescribeSmoothMigrationTaskList返回参数结构体
  */
-export interface ModifyMQTTInstanceRequest {
+export interface DescribeSmoothMigrationTaskListResponse {
   /**
-   * 集群ID
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  TotalCount?: number
   /**
-   * 实例名称
+   * 任务列表	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Data?: Array<SmoothMigrationTaskItem>
   /**
-   * 备注信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Remark?: string
+  RequestId?: string
 }
 
 /**
@@ -3742,6 +3813,24 @@ export interface DescribeMQTTUserListRequest {
    * 查询结果限制数量
    */
   Limit?: number
+}
+
+/**
+ * ModifyMQTTInstance请求参数结构体
+ */
+export interface ModifyMQTTInstanceRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 实例名称
+   */
+  Name?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
 }
 
 /**

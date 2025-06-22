@@ -198,6 +198,16 @@ it("live.v20180801.DescribeLiveSnapshotRules", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveCloudEffectList", async function () {
+    try {
+       const data = await client.DescribeLiveCloudEffectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ReleaseCaster", async function () {
     try {
        const data = await client.ReleaseCaster({})
@@ -648,6 +658,16 @@ it("live.v20180801.DescribeLiveStreamMonitor", async function () {
     }
 })
 
+it("live.v20180801.SendLiveCloudEffect", async function () {
+    try {
+       const data = await client.SendLiveCloudEffect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveWatermark", async function () {
     try {
        const data = await client.DeleteLiveWatermark({})
@@ -718,9 +738,9 @@ it("live.v20180801.DescribeStreamDayPlayInfoList", async function () {
     }
 })
 
-it("live.v20180801.ModifyLivePushAuthKey", async function () {
+it("live.v20180801.DescribeLivePadStreamList", async function () {
     try {
-       const data = await client.ModifyLivePushAuthKey({})
+       const data = await client.DescribeLivePadStreamList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1468,6 +1488,16 @@ it("live.v20180801.DescribeCallbackRecordsList", async function () {
     }
 })
 
+it("live.v20180801.StopLivePadStream", async function () {
+    try {
+       const data = await client.StopLivePadStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateLiveRecordRule", async function () {
     try {
        const data = await client.CreateLiveRecordRule({})
@@ -1561,6 +1591,16 @@ it("live.v20180801.RestartLivePullStreamTask", async function () {
 it("live.v20180801.DescribeLivePadTemplates", async function () {
     try {
        const data = await client.DescribeLivePadTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLivePushAuthKey", async function () {
+    try {
+       const data = await client.ModifyLivePushAuthKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1951,6 +1991,16 @@ it("live.v20180801.DescribeTranscodeTaskNum", async function () {
 it("live.v20180801.DescribeLiveStreamPushInfoList", async function () {
     try {
        const data = await client.DescribeLiveStreamPushInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.StartLivePadStream", async function () {
+    try {
+       const data = await client.StartLivePadStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -75,6 +75,7 @@ import {
   DownloadFlowInfo,
   FlowApproverUrlInfo,
   ChannelCreateWebThemeConfigRequest,
+  TaskInfo,
   NeedReviewApproverInfo,
   CreateFlowGroupSignReviewResponse,
   ChannelCreateConvertTaskApiRequest,
@@ -90,7 +91,7 @@ import {
   CreateChannelSubOrganizationActiveRequest,
   ChannelRenewAutoSignLicenseResponse,
   ApproverItem,
-  DescribeFlowDetailInfoResponse,
+  BatchOrganizationRegistrationTasksDetails,
   RecipientComponentInfo,
   CancelFailureFlow,
   ChannelDescribeRolesRequest,
@@ -135,6 +136,7 @@ import {
   IntentionActionResultDetail,
   CreateEmployeeQualificationSealQrCodeRequest,
   ChannelArchiveDynamicApproverData,
+  DescribeBatchOrganizationRegistrationTasksRequest,
   ChannelCreateUserAutoSignSealUrlRequest,
   FlowForwardResult,
   PdfVerifyResult,
@@ -153,7 +155,7 @@ import {
   FlowInfo,
   ChannelCreateDynamicFlowApproverRequest,
   ModifyFlowDeadlineResponse,
-  TaskInfo,
+  DescribeFlowDetailInfoResponse,
   ChannelCreateBoundFlowsResponse,
   ChannelCreateUserAutoSignSealUrlResponse,
   ApproverComponentLimitType,
@@ -197,7 +199,7 @@ import {
   FailedCreateRoleData,
   CreateEmployeeChangeUrlRequest,
   ChannelDescribeUserAutoSignStatusRequest,
-  FlowResourceUrlInfo,
+  CreateModifyAdminAuthorizationUrlRequest,
   UploadFile,
   ExtentServiceAuthInfo,
   ChannelModifyRoleResponse,
@@ -212,6 +214,7 @@ import {
   ChannelCreateBatchQuickSignUrlResponse,
   CreateBatchOrganizationAuthorizationUrlResponse,
   CreatePartnerAutoSignAuthUrlRequest,
+  DescribeBatchOrganizationRegistrationTasksResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
   ChannelDescribeAccountBillDetailResponse,
   PresetApproverInfo,
@@ -236,6 +239,7 @@ import {
   ApproverOption,
   ChannelCreatePrepareFlowGroupResponse,
   DescribeCancelFlowsTaskRequest,
+  FlowResourceUrlInfo,
   ChannelDescribeUserAutoSignStatusResponse,
   ProxyOrganizationOperator,
   ModifyExtendedServiceResponse,
@@ -279,6 +283,7 @@ import {
   CreateChannelFlowEvidenceReportResponse,
   ChannelDescribeAccountBillDetailRequest,
   ChannelDescribeEmployeesResponse,
+  CreateModifyAdminAuthorizationUrlResponse,
   ChannelDeleteRoleResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
@@ -718,6 +723,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeBatchOrganizationRegistrationTasks）用于查询企业批量认证任务状态。
+   */
+  async DescribeBatchOrganizationRegistrationTasks(
+    req: DescribeBatchOrganizationRegistrationTasksRequest,
+    cb?: (error: string, rep: DescribeBatchOrganizationRegistrationTasksResponse) => void
+  ): Promise<DescribeBatchOrganizationRegistrationTasksResponse> {
+    return this.request("DescribeBatchOrganizationRegistrationTasks", req, cb)
+  }
+
+  /**
      * 此接口（ChannelCreateConvertTaskApi）用来将word、excel、html、图片、txt类型文件转换为PDF文件。<br />
 前提条件：源文件已经通过 <a href="https://qian.tencent.com/developers/partnerApis/files/UploadFiles" target="_blank">文件上传接口</a>完成上传，并得到了源文件的资源Id。<br />
 适用场景1：已经上传了一个word文件，希望将该word文件转换成pdf文件后发起合同
@@ -973,7 +988,9 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
   }
 
   /**
-     * 该接口 (PrepareFlows) 用于创建待发起文件
+     * 已经不再使用
+
+该接口 (PrepareFlows) 用于创建待发起文件
 用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
 目前该接口只支持B2C，<font color='red'> **不建议使用**</font>。
      */
@@ -1670,6 +1687,19 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: ChannelCreateFlowGroupByFilesResponse) => void
   ): Promise<ChannelCreateFlowGroupByFilesResponse> {
     return this.request("ChannelCreateFlowGroupByFiles", req, cb)
+  }
+
+  /**
+     * 本接口（CreateModifyAdminAuthorizationUrl）用于重新上传超管授权书。
+
+注意:
+1. 重新上传超管授权书，必须是审核失败的情况下才能重新上传,可以通过回调[!授权书审核结果回调](https://qian.tencent.com/developers/partner/callback_types_staffs#%E5%9B%9B-%E6%8E%88%E6%9D%83%E4%B9%A6%E5%AE%A1%E6%A0%B8%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83)得到
+     */
+  async CreateModifyAdminAuthorizationUrl(
+    req: CreateModifyAdminAuthorizationUrlRequest,
+    cb?: (error: string, rep: CreateModifyAdminAuthorizationUrlResponse) => void
+  ): Promise<CreateModifyAdminAuthorizationUrlResponse> {
+    return this.request("CreateModifyAdminAuthorizationUrl", req, cb)
   }
 
   /**

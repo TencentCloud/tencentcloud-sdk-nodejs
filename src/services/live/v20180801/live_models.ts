@@ -762,6 +762,47 @@ export interface CreateCasterPgmRequest {
 }
 
 /**
+ * SendLiveCloudEffect请求参数结构体
+ */
+export interface SendLiveCloudEffectRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+  /**
+   * 您的推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 云端特效 ID。
+   */
+  Id: string
+  /**
+   * 操作人备注信息。
+   */
+  Operator?: string
+  /**
+   * 缩小比例，默认0 不缩放。
+可选值：0-9， 值越大，越缩小。
+   */
+  ZoomFactor?: number
+  /**
+   * 指定云端特效渲染位置百分比。默认居中显示。
+原点为画面左上角，该参数指定特效渲染离原点的横向比例，可选值 0 - 100。
+   */
+  XPosition?: string
+  /**
+   * 指定云端特效渲染位置百分比。默认居中显示。
+原点为画面左上角，该参数指定特效渲染离原点的纵向比例，可选值 0 - 100。
+   */
+  YPosition?: string
+}
+
+/**
  * DescribeCasterPlayUrl返回参数结构体
  */
 export interface DescribeCasterPlayUrlResponse {
@@ -1344,6 +1385,16 @@ export interface DescribeVisitTopSumInfoListRequest {
    * 排序指标，可选值包括” AvgFluxPerSecond”，”TotalRequest”（默认）,“TotalFlux”。
    */
   OrderParam?: string
+}
+
+/**
+ * StopLivePadStream返回参数结构体
+ */
+export interface StopLivePadStreamResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3134,6 +3185,20 @@ export interface CreateCasterInputPushUrlRequest {
 }
 
 /**
+ * DescribeLiveCloudEffectList返回参数结构体
+ */
+export interface DescribeLiveCloudEffectListResponse {
+  /**
+   * 云端特效信息列表。
+   */
+  InfoList?: Array<CloudEffectInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCasterMarkWordInfos请求参数结构体
  */
 export interface DescribeCasterMarkWordInfosRequest {
@@ -3144,71 +3209,33 @@ export interface DescribeCasterMarkWordInfosRequest {
 }
 
 /**
- * 直播域名信息
+ * CreateCasterPgmFromPvw返回参数结构体
  */
-export interface DomainInfo {
+export interface CreateCasterPgmFromPvwResponse {
   /**
-   * 直播域名。
+   * 主监任务的rtmp协议预览地址。 
+注：该地址仅供预览，不可分发。
    */
-  Name?: string
+  PgmPlayUrl?: string
   /**
-   * 域名类型:
-0: 推流。
-1: 播放。
+   * 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址
    */
-  Type?: number
+  CdnPlayUrl?: string
   /**
-   * 域名状态:
-0: 停用。
-1: 启用。
+   * 主监任务在腾讯云直播侧的流ID。
    */
-  Status?: number
+  CdnStreamId?: string
   /**
-   * 添加时间。
-注：此字段为北京时间（UTC+8时区）。
+   * 主监任务的webrtc协议播放地址。 
+注：
+1.该预览地址仅作为预览，不可分发。
+2.webrtc播放地址需配合腾讯云快直播播放sdk使用。
    */
-  CreateTime?: string
+  PgmWebRTCPlayUrl?: string
   /**
-   * 是否有 CName 到固定规则域名:
-0: 否。
-1: 是。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BCName?: number
-  /**
-   * cname 对应的域名。
-   */
-  TargetDomain?: string
-  /**
-   * 播放区域，只在 Type=1 时该参数有意义。
-1: 国内。
-2: 全球。
-3: 海外。
-   */
-  PlayType?: number
-  /**
-   * 是否慢直播:
-0: 普通直播。
-1: 慢直播。
-   */
-  IsDelayLive?: number
-  /**
-   * 当前客户使用的 cname 信息。
-   */
-  CurrentCName?: string
-  /**
-   * 失效参数，可忽略。
-   */
-  RentTag?: number
-  /**
-   * 失效参数，可忽略。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  RentExpireTime?: string
-  /**
-   * 0: 标准直播。
-1: 小程序直播。
-   */
-  IsMiniProgramLive?: number
+  RequestId?: string
 }
 
 /**
@@ -3643,6 +3670,32 @@ export interface DeleteLiveRecordResponse {
 }
 
 /**
+ * DescribeLivePadStreamList请求参数结构体
+ */
+export interface DescribeLivePadStreamListRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName?: string
+  /**
+   * 您的推流域名。
+   */
+  DomainName?: string
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+  /**
+   * 分页页数。
+   */
+  PageNum?: number
+  /**
+   * 每页个数。
+   */
+  PageSize?: number
+}
+
+/**
  * DescribeDeliverLogDownList返回参数结构体
  */
 export interface DescribeDeliverLogDownListResponse {
@@ -4002,6 +4055,36 @@ export interface BackupStreamGroupInfo {
    * 域名分组的分组名称。
    */
   HostGroupName?: string
+}
+
+/**
+ * DescribeLivePadStreamList返回参数结构体
+ */
+export interface DescribeLivePadStreamListResponse {
+  /**
+   * 当前正在拉取垫片的流信息列表。
+   */
+  StreamInfoList?: Array<PadStreamInfo>
+  /**
+   * 传入的分页页数。
+   */
+  PageNum?: number
+  /**
+   * 传入的分页个数。
+   */
+  PageSize?: number
+  /**
+   * 查询到的总个数。
+   */
+  TotalNum?: number
+  /**
+   * 可以分的总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4737,6 +4820,28 @@ export interface SwitchBackupStreamRequest {
    * 查询接口获取到该流所有在推的上行 Sequence。指定要切到的目标上行 Sequence。
    */
   UpstreamSequence: string
+}
+
+/**
+ * StartLivePadStream请求参数结构体
+ */
+export interface StartLivePadStreamRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+  /**
+   * 您的推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 操作人备注信息。
+   */
+  Operator?: string
 }
 
 /**
@@ -7977,6 +8082,28 @@ export interface DescribePullTransformPushInfoResponse {
 }
 
 /**
+ * DescribeLiveCloudEffectList请求参数结构体
+ */
+export interface DescribeLiveCloudEffectListRequest {
+  /**
+   * 云端特效ID。
+   */
+  Id?: string
+  /**
+   * 云端特效描述词。由用户原始输入的描述词。
+   */
+  Prompt?: string
+  /**
+   * 云端特效标签。对云端特效进行分类标签，可用于分类搜索。
+   */
+  Flag?: string
+  /**
+   * 云端特效类型, 默认不填，返回全部。PGC: 特效库中的特效；AICG : AI生成的特效；UGC：用户自定义上传的特效；
+   */
+  Type?: string
+}
+
+/**
  * DescribeLiveStreamState请求参数结构体
  */
 export interface DescribeLiveStreamStateRequest {
@@ -8318,33 +8445,71 @@ export interface ModifyLiveDomainRefererRequest {
 }
 
 /**
- * CreateCasterPgmFromPvw返回参数结构体
+ * 直播域名信息
  */
-export interface CreateCasterPgmFromPvwResponse {
+export interface DomainInfo {
   /**
-   * 主监任务的rtmp协议预览地址。 
-注：该地址仅供预览，不可分发。
+   * 直播域名。
    */
-  PgmPlayUrl?: string
+  Name?: string
   /**
-   * 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址
+   * 域名类型:
+0: 推流。
+1: 播放。
    */
-  CdnPlayUrl?: string
+  Type?: number
   /**
-   * 主监任务在腾讯云直播侧的流ID。
+   * 域名状态:
+0: 停用。
+1: 启用。
    */
-  CdnStreamId?: string
+  Status?: number
   /**
-   * 主监任务的webrtc协议播放地址。 
-注：
-1.该预览地址仅作为预览，不可分发。
-2.webrtc播放地址需配合腾讯云快直播播放sdk使用。
+   * 添加时间。
+注：此字段为北京时间（UTC+8时区）。
    */
-  PgmWebRTCPlayUrl?: string
+  CreateTime?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否有 CName 到固定规则域名:
+0: 否。
+1: 是。
    */
-  RequestId?: string
+  BCName?: number
+  /**
+   * cname 对应的域名。
+   */
+  TargetDomain?: string
+  /**
+   * 播放区域，只在 Type=1 时该参数有意义。
+1: 国内。
+2: 全球。
+3: 海外。
+   */
+  PlayType?: number
+  /**
+   * 是否慢直播:
+0: 普通直播。
+1: 慢直播。
+   */
+  IsDelayLive?: number
+  /**
+   * 当前客户使用的 cname 信息。
+   */
+  CurrentCName?: string
+  /**
+   * 失效参数，可忽略。
+   */
+  RentTag?: number
+  /**
+   * 失效参数，可忽略。
+注：此字段为北京时间（UTC+8时区）。
+   */
+  RentExpireTime?: string
+  /**
+   * 0: 标准直播。
+1: 小程序直播。
+   */
+  IsMiniProgramLive?: number
 }
 
 /**
@@ -9568,6 +9733,43 @@ export interface DescribeConcurrentRecordStreamNumResponse {
 }
 
 /**
+ * 云端特效信息。
+ */
+export interface CloudEffectInfo {
+  /**
+   * 云端特效 ID。
+   */
+  Id?: string
+  /**
+   * 云端特效描述词。
+   */
+  Prompt?: string
+  /**
+   * 云端特效标签。
+   */
+  Flag?: string
+  /**
+   * 云端特效预览图片。
+   */
+  PreviewImageUrl?: string
+  /**
+   * 云端特效类型。
+PGC : 官方精品特效。
+AIGC : AI生成的特效。
+UGC : 用户上传特效。
+   */
+  Type?: string
+  /**
+   * 云端特效创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 云端特效更新时间。
+   */
+  UpdateTime?: string
+}
+
+/**
  * DeleteLiveRecordTemplate返回参数结构体
  */
 export interface DeleteLiveRecordTemplateResponse {
@@ -10315,6 +10517,28 @@ export interface ModifyLiveRecordTemplateResponse {
 }
 
 /**
+ * StopLivePadStream请求参数结构体
+ */
+export interface StopLivePadStreamRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+  /**
+   * 您的推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 操作人备注信息。
+   */
+  Operator?: string
+}
+
+/**
  * AddLiveDomain请求参数结构体
  */
 export interface AddLiveDomainRequest {
@@ -10729,6 +10953,16 @@ export interface DescribeLiveForbidStreamListRequest {
    * 按流名称查询。
    */
   StreamName?: string
+}
+
+/**
+ * StartLivePadStream返回参数结构体
+ */
+export interface StartLivePadStreamResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11251,6 +11485,16 @@ export interface DescribeLiveTranscodeTotalInfoResponse {
 }
 
 /**
+ * SendLiveCloudEffect返回参数结构体
+ */
+export interface SendLiveCloudEffectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveEnhanceInfoList返回参数结构体
  */
 export interface DescribeLiveEnhanceInfoListResponse {
@@ -11669,4 +11913,32 @@ export interface AddCasterMarkPicInfoRequest {
    * 图片水印详细参数。
    */
   MarkPicInfo: CasterMarkPicInfo
+}
+
+/**
+ * 查询当前垫片流的信息
+ */
+export interface PadStreamInfo {
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+  /**
+   * 应用名称。
+   */
+  AppName?: string
+  /**
+   * 推流域名。
+   */
+  DomainName?: string
+  /**
+   * 垫片流类型。
+0-自动垫片；
+1-手动切入垫片。
+   */
+  PadStreamType?: string
+  /**
+   * 垫片流开始时间。UTC时间，示例：2025-04-10T00:01:00Z。注意：该时间与北京时间相差八小时。
+   */
+  PublishTime?: string
 }

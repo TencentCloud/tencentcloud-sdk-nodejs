@@ -51,6 +51,7 @@ import {
   ModifyLiveDomainCertBindingsRequest,
   StopCasterPgmResponse,
   CreateCasterPgmRequest,
+  SendLiveCloudEffectRequest,
   DescribeCasterPlayUrlResponse,
   CancelCommonMixStreamResponse,
   DescribeLiveCertsResponse,
@@ -76,6 +77,7 @@ import {
   DescribeLiveCertsRequest,
   DescribeLiveCertResponse,
   DescribeVisitTopSumInfoListRequest,
+  StopLivePadStreamResponse,
   DescribePushBandwidthAndFluxListResponse,
   DescribeLiveStreamOnlineListResponse,
   DescribeCasterMarkWordInfosResponse,
@@ -155,8 +157,9 @@ import {
   CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
   CreateCasterInputPushUrlRequest,
+  DescribeLiveCloudEffectListResponse,
   DescribeCasterMarkWordInfosRequest,
-  DomainInfo,
+  CreateCasterPgmFromPvwResponse,
   DescribeLiveTranscodeRulesRequest,
   PlayDataInfoByStream,
   LiveStreamMonitorInputInfo,
@@ -177,6 +180,7 @@ import {
   CallBackTemplateInfo,
   StopCasterPvwRequest,
   DeleteLiveRecordResponse,
+  DescribeLivePadStreamListRequest,
   DescribeDeliverLogDownListResponse,
   PadTemplate,
   PullStreamConfig,
@@ -193,6 +197,7 @@ import {
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
   BackupStreamGroupInfo,
+  DescribeLivePadStreamListResponse,
   ScreenshotTask,
   DeletePullStreamConfigResponse,
   ModifyLivePlayDomainRequest,
@@ -223,6 +228,7 @@ import {
   CancelCommonMixStreamRequest,
   TimeShiftWriteSizeData,
   SwitchBackupStreamRequest,
+  StartLivePadStreamRequest,
   DeleteLiveStreamMonitorRequest,
   DescribeLiveDelayInfoListResponse,
   ClientIpPlaySumInfo,
@@ -349,6 +355,7 @@ import {
   DeleteCasterInputInfoRequest,
   DeleteScreenshotTaskResponse,
   DescribePullTransformPushInfoResponse,
+  DescribeLiveCloudEffectListRequest,
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
   StopLivePadProcessorResponse,
@@ -369,7 +376,7 @@ import {
   DeleteLiveSnapshotTemplateResponse,
   CreateCommonMixStreamResponse,
   ModifyLiveDomainRefererRequest,
-  CreateCasterPgmFromPvwResponse,
+  DomainInfo,
   DescribeLiveTimeShiftWriteSizeInfoListRequest,
   PlayStatInfo,
   DescribeCasterUserStatusResponse,
@@ -419,6 +426,7 @@ import {
   ForbidLiveStreamRequest,
   ModifyCasterMarkWordInfoRequest,
   DescribeConcurrentRecordStreamNumResponse,
+  CloudEffectInfo,
   DeleteLiveRecordTemplateResponse,
   CasterOutputInfo,
   DescribePullStreamConfigsRequest,
@@ -447,6 +455,7 @@ import {
   TranscodeDetailInfo,
   DeleteCasterMarkWordInfoRequest,
   ModifyLiveRecordTemplateResponse,
+  StopLivePadStreamRequest,
   AddLiveDomainRequest,
   StreamName,
   DescribeLivePackageInfoRequest,
@@ -465,6 +474,7 @@ import {
   DescribeLiveStreamPushInfoListRequest,
   ModifyCasterInputInfoResponse,
   DescribeLiveForbidStreamListRequest,
+  StartLivePadStreamResponse,
   LiveStreamMonitorNotifyPolicy,
   LiveStreamMonitorInfo,
   RecentPullInfo,
@@ -488,6 +498,7 @@ import {
   DescribeLivePadTemplatesRequest,
   EnableLiveDomainRequest,
   DescribeLiveTranscodeTotalInfoResponse,
+  SendLiveCloudEffectResponse,
   DescribeLiveEnhanceInfoListResponse,
   CreateLiveTranscodeRuleResponse,
   CreateLiveTranscodeTemplateResponse,
@@ -506,6 +517,7 @@ import {
   DescribeTimeShiftRecordDetailResponse,
   DeleteLiveDomainResponse,
   AddCasterMarkPicInfoRequest,
+  PadStreamInfo,
 } from "./live_models"
 
 /**
@@ -724,6 +736,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveSnapshotRulesResponse) => void
   ): Promise<DescribeLiveSnapshotRulesResponse> {
     return this.request("DescribeLiveSnapshotRules", req, cb)
+  }
+
+  /**
+   * 使用该接口查询云端特效列表，特效列表中包含一部分官方精品特效，同时包含用户自定义生成的特效。
+   */
+  async DescribeLiveCloudEffectList(
+    req: DescribeLiveCloudEffectListRequest,
+    cb?: (error: string, rep: DescribeLiveCloudEffectListResponse) => void
+  ): Promise<DescribeLiveCloudEffectListResponse> {
+    return this.request("DescribeLiveCloudEffectList", req, cb)
   }
 
   /**
@@ -1195,6 +1217,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 使用该接口发送云端特效到线上正活跃的直播流，观众可在播放端看到特效从直播流画面中展示。
+   */
+  async SendLiveCloudEffect(
+    req: SendLiveCloudEffectRequest,
+    cb?: (error: string, rep: SendLiveCloudEffectResponse) => void
+  ): Promise<SendLiveCloudEffectResponse> {
+    return this.request("SendLiveCloudEffect", req, cb)
+  }
+
+  /**
    * 删除水印。
    */
   async DeleteLiveWatermark(
@@ -1269,13 +1301,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改直播推流鉴权key
+   * 使用该接口查询垫片流列表。垫片流状态更新存在一定延迟，可间隔30秒以上查询，避免频繁查询该接口。
    */
-  async ModifyLivePushAuthKey(
-    req: ModifyLivePushAuthKeyRequest,
-    cb?: (error: string, rep: ModifyLivePushAuthKeyResponse) => void
-  ): Promise<ModifyLivePushAuthKeyResponse> {
-    return this.request("ModifyLivePushAuthKey", req, cb)
+  async DescribeLivePadStreamList(
+    req: DescribeLivePadStreamListRequest,
+    cb?: (error: string, rep: DescribeLivePadStreamListResponse) => void
+  ): Promise<DescribeLivePadStreamListResponse> {
+    return this.request("DescribeLivePadStreamList", req, cb)
   }
 
   /**
@@ -2052,6 +2084,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 使用该接口将直播流停止切入垫片。
+   */
+  async StopLivePadStream(
+    req: StopLivePadStreamRequest,
+    cb?: (error: string, rep: StopLivePadStreamResponse) => void
+  ): Promise<StopLivePadStreamResponse> {
+    return this.request("StopLivePadStream", req, cb)
+  }
+
+  /**
      * 创建录制规则，需要先调用[CreateLiveRecordTemplate](/document/product/267/32614)接口创建录制模板，将返回的模板id绑定到流使用。
 <br>录制相关文档：[直播录制](/document/product/267/32739)。
      */
@@ -2162,6 +2204,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLivePadTemplatesResponse) => void
   ): Promise<DescribeLivePadTemplatesResponse> {
     return this.request("DescribeLivePadTemplates", req, cb)
+  }
+
+  /**
+   * 修改直播推流鉴权key
+   */
+  async ModifyLivePushAuthKey(
+    req: ModifyLivePushAuthKeyRequest,
+    cb?: (error: string, rep: ModifyLivePushAuthKeyResponse) => void
+  ): Promise<ModifyLivePushAuthKeyResponse> {
+    return this.request("ModifyLivePushAuthKey", req, cb)
   }
 
   /**
@@ -2589,6 +2641,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveStreamPushInfoListResponse) => void
   ): Promise<DescribeLiveStreamPushInfoListResponse> {
     return this.request("DescribeLiveStreamPushInfoList", req, cb)
+  }
+
+  /**
+   * 使用该接口将直播流开始切入垫片。
+   */
+  async StartLivePadStream(
+    req: StartLivePadStreamRequest,
+    cb?: (error: string, rep: StartLivePadStreamResponse) => void
+  ): Promise<StartLivePadStreamResponse> {
+    return this.request("StartLivePadStream", req, cb)
   }
 
   /**
