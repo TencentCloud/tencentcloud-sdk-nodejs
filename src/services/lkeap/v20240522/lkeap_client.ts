@@ -55,7 +55,6 @@ import {
   CreateReconstructDocumentFlowConfig,
   RunRerankRequest,
   ChatUsage,
-  RetrieveKnowledgeRealtimeResponse,
   GetSplitDocumentResultRequest,
   Delta,
   ReconstructDocumentSSERequest,
@@ -72,7 +71,6 @@ import {
   GetSplitDocumentResultResponse,
   ModifyQAResponse,
   ReconstructDocumentFailedPage,
-  RetrieveKnowledgeRealtimeRequest,
   SplitDocumentFailedPage,
   ModifyAttributeLabelResponse,
   QueryRewriteResponse,
@@ -134,16 +132,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetReconstructDocumentResultResponse) => void
   ): Promise<GetReconstructDocumentResultResponse> {
     return this.request("GetReconstructDocumentResult", req, cb)
-  }
-
-  /**
-   * 用于实时检索在UploadDocRealtime接口上传的实时文档内容。 使用场景：适用于在会话中对文档进行问答的场景
-   */
-  async RetrieveKnowledgeRealtime(
-    req: RetrieveKnowledgeRealtimeRequest,
-    cb?: (error: string, rep: RetrieveKnowledgeRealtimeResponse) => void
-  ): Promise<RetrieveKnowledgeRealtimeResponse> {
-    return this.request("RetrieveKnowledgeRealtime", req, cb)
   }
 
   /**

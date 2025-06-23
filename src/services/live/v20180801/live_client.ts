@@ -97,12 +97,11 @@ import {
   BandwidthInfo,
   LiveStreamMonitorOutputInfo,
   DeleteLiveTranscodeTemplateRequest,
-  StopLivePadProcessorRequest,
   StopRecordTaskResponse,
   CommonMixControlParams,
   DescribeTranscodeTaskNumResponse,
   DescribeLivePullStreamTaskStatusResponse,
-  DescribeLivePadProcessorListResponse,
+  ModifyLiveTranscodeTemplateRequest,
   DeleteLivePadRuleResponse,
   DescribeLiveRecordTemplateRequest,
   HttpStatusInfo,
@@ -278,7 +277,6 @@ import {
   DescribeBillBandwidthAndFluxListRequest,
   AddCasterLayoutInfoRequest,
   FlvSpecialParam,
-  ModifyLiveTranscodeTemplateRequest,
   ModifyCasterLayoutInfoRequest,
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
@@ -350,7 +348,6 @@ import {
   CertInfo,
   DescribeLiveCallbackRulesRequest,
   CasterInfo,
-  DescribeLivePadProcessorListRequest,
   DescribeConcurrentRecordStreamNumRequest,
   DeleteCasterInputInfoRequest,
   DeleteScreenshotTaskResponse,
@@ -358,7 +355,6 @@ import {
   DescribeLiveCloudEffectListRequest,
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
-  StopLivePadProcessorResponse,
   AddCasterMarkWordInfoRequest,
   ModifyLivePlayAuthKeyResponse,
   DescribeLiveTimeShiftRulesResponse,
@@ -1966,16 +1962,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 使用该接口查询垫片流。垫片流状态更新存在一定延迟，可间隔30秒以上查询，避免频繁查询该接口。
-   */
-  async DescribeLivePadProcessorList(
-    req: DescribeLivePadProcessorListRequest,
-    cb?: (error: string, rep: DescribeLivePadProcessorListResponse) => void
-  ): Promise<DescribeLivePadProcessorListResponse> {
-    return this.request("DescribeLivePadProcessorList", req, cb)
-  }
-
-  /**
      * 直播推流带宽和流量数据查询。
 推流计费会先取全球推流用量和全球播放用量进行比较，满足计费条件后再按各地区用量出账。详情参见[计费文档](https://cloud.tencent.com/document/product/267/34175)。
      */
@@ -2585,16 +2571,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CancelCommonMixStreamResponse) => void
   ): Promise<CancelCommonMixStreamResponse> {
     return this.request("CancelCommonMixStream", req, cb)
-  }
-
-  /**
-   * 使用该接口停止垫片流。
-   */
-  async StopLivePadProcessor(
-    req: StopLivePadProcessorRequest,
-    cb?: (error: string, rep: StopLivePadProcessorResponse) => void
-  ): Promise<StopLivePadProcessorResponse> {
-    return this.request("StopLivePadProcessor", req, cb)
   }
 
   /**

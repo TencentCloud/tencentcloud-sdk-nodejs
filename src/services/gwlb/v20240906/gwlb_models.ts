@@ -660,7 +660,7 @@ export interface DescribeTargetGroupInstancesRequest {
    */
   Filters: Array<Filter>
   /**
-   * 显示数量限制，默认20，最大1000。
+   * 显示数量限制，默认20，最大100。
    */
   Limit?: number
   /**

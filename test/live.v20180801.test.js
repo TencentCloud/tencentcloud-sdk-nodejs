@@ -1378,16 +1378,6 @@ it("live.v20180801.DescribeScreenshotTask", async function () {
     }
 })
 
-it("live.v20180801.DescribeLivePadProcessorList", async function () {
-    try {
-       const data = await client.DescribeLivePadProcessorList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("live.v20180801.DescribePushBandwidthAndFluxList", async function () {
     try {
        const data = await client.DescribePushBandwidthAndFluxList({})
@@ -1941,16 +1931,6 @@ it("live.v20180801.EnableLiveDomain", async function () {
 it("live.v20180801.CancelCommonMixStream", async function () {
     try {
        const data = await client.CancelCommonMixStream({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("live.v20180801.StopLivePadProcessor", async function () {
-    try {
-       const data = await client.StopLivePadProcessor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

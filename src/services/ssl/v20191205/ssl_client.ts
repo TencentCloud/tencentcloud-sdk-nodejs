@@ -22,6 +22,7 @@ import {
   GatewayCertificate,
   DescribeHostDdosInstanceListRequest,
   CompleteCertificateRequest,
+  UploadUpdateCertificateRecordRetryRequest,
   DownloadCertificateResponse,
   ManagerInfo,
   DescribeHostDeployRecordDetailResponse,
@@ -33,13 +34,16 @@ import {
   CertificateExtra,
   TeoInstanceList,
   ManagerPreAuditDomain,
+  DescribeHostUploadUpdateRecordDetailResponse,
   CdnInstanceDetail,
+  DeployRecordItem,
   VerifyManagerResponse,
   DescribeCertificateDetailRequest,
   TkeNameSpaceDetail,
   CreateCertificateBindResourceSyncTaskResponse,
   TkeInstanceList,
   DescribeDeployedResourcesRequest,
+  UploadCertificateRequest,
   TCBHostInstance,
   UploadRevokeLetterRequest,
   ClbListener,
@@ -54,6 +58,7 @@ import {
   ClbListenerRule,
   LighthouseInstanceDetail,
   SubmitCertificateInformationRequest,
+  UploadUpdateRecordInfo,
   DescribeCertificateOperateLogsRequest,
   CancelCertificateOrderResponse,
   ModifyCertificatesExpiringNotificationSwitchResponse,
@@ -67,6 +72,7 @@ import {
   SupportDownloadType,
   DescribeCertificateResponse,
   DownloadCertificateRequest,
+  UploadUpdateCertificateRecordRollbackRequest,
   DescribeHostTkeInstanceListResponse,
   DescribeCertificateBindResourceTaskResultRequest,
   UpdateRecordDetail,
@@ -124,7 +130,7 @@ import {
   RevokeCertificateRequest,
   PreAuditInfo,
   DescribeManagerDetailResponse,
-  UploadCertificateRequest,
+  ModifyCertificateProjectRequest,
   Certificate,
   CreateCertificateByPackageRequest,
   CommitCertificateInformationRequest,
@@ -144,18 +150,21 @@ import {
   DeleteCertificateResponse,
   RevokeCertificateResponse,
   DeployedResources,
-  ModifyCertificateProjectRequest,
+  DeployRecord,
   DescribePackagesRequest,
-  DeleteCertificatesRequest,
+  UploadUpdateCertificateRecordRetryResponse,
+  DescribeCertificateRequest,
   DescribeHostVodInstanceListResponse,
   WafInstanceList,
   ModifyCertificatesExpiringNotificationSwitchRequest,
   Filter,
   RevokeDomainValidateAuths,
+  DescribeHostUploadUpdateRecordDetailRequest,
   DescribeHostUpdateRecordDetailResponse,
   DescribeDeleteCertificatesTaskResultRequest,
   DescribeHostUpdateRecordRequest,
   DescribeHostClbInstanceListRequest,
+  DeployRecordList,
   VerifyManagerRequest,
   CertTaskId,
   DescribeHostLiveInstanceListResponse,
@@ -186,10 +195,11 @@ import {
   ModifyCertificateResubmitResponse,
   SubmitAuditManagerResponse,
   UpdateCertificateInstanceResponse,
-  DescribeCertificateRequest,
+  DeleteCertificatesRequest,
   OperationLog,
   ModifyCertificateAliasResponse,
   ApplyCertificateRequest,
+  DescribeHostUploadUpdateRecordRequest,
   CreateCertificateResponse,
   Error,
   DomainValidationResult,
@@ -197,6 +207,8 @@ import {
   DescribeHostApiGatewayInstanceListResponse,
   DescribeCertificateDetailResponse,
   DescribeCertificateBindResourceTaskResultResponse,
+  DescribeManagersRequest,
+  UploadUpdateCertificateRecordRollbackResponse,
   ProjectInfo,
   DescribeHostTeoInstanceListRequest,
   BindResourceRegionResult,
@@ -216,7 +228,7 @@ import {
   CancelAuditCertificateResponse,
   DeployRecordInfo,
   DescribePackagesResponse,
-  DescribeManagersRequest,
+  DescribeHostUploadUpdateRecordResponse,
   TSEInstanceList,
   DescribeHostLighthouseInstanceListResponse,
   CompleteCertificateResponse,
@@ -300,6 +312,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostDeployRecordResponse) => void
   ): Promise<DescribeHostDeployRecordResponse> {
     return this.request("DescribeHostDeployRecord", req, cb)
+  }
+
+  /**
+   * 查询证书云资源更新（证书ID不变）记录列表
+   */
+  async DescribeHostUploadUpdateRecord(
+    req: DescribeHostUploadUpdateRecordRequest,
+    cb?: (error: string, rep: DescribeHostUploadUpdateRecordResponse) => void
+  ): Promise<DescribeHostUploadUpdateRecordResponse> {
+    return this.request("DescribeHostUploadUpdateRecord", req, cb)
+  }
+
+  /**
+   * 云资源更新（证书ID不变）重试部署记录
+   */
+  async UploadUpdateCertificateRecordRetry(
+    req: UploadUpdateCertificateRecordRetryRequest,
+    cb?: (error: string, rep: UploadUpdateCertificateRecordRetryResponse) => void
+  ): Promise<UploadUpdateCertificateRecordRetryResponse> {
+    return this.request("UploadUpdateCertificateRecordRetry", req, cb)
+  }
+
+  /**
+   * 云资源更新成功（证书ID不变）记录回滚， 会对全量任务进行回滚
+   */
+  async UploadUpdateCertificateRecordRollback(
+    req: UploadUpdateCertificateRecordRollbackRequest,
+    cb?: (error: string, rep: UploadUpdateCertificateRecordRollbackResponse) => void
+  ): Promise<UploadUpdateCertificateRecordRollbackResponse> {
+    return this.request("UploadUpdateCertificateRecordRollback", req, cb)
   }
 
   /**
@@ -667,6 +709,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckCertificateExistResponse) => void
   ): Promise<CheckCertificateExistResponse> {
     return this.request("CheckCertificateExist", req, cb)
+  }
+
+  /**
+   * 查询证书更新（证书ID不变）部署记录详情
+   */
+  async DescribeHostUploadUpdateRecordDetail(
+    req: DescribeHostUploadUpdateRecordDetailRequest,
+    cb?: (error: string, rep: DescribeHostUploadUpdateRecordDetailResponse) => void
+  ): Promise<DescribeHostUploadUpdateRecordDetailResponse> {
+    return this.request("DescribeHostUploadUpdateRecordDetail", req, cb)
   }
 
   /**

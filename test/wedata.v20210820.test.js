@@ -2338,6 +2338,16 @@ it("wedata.v20210820.DescribeWorkflowTaskCount", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyTaskInfoDs", async function () {
+    try {
+       const data = await client.ModifyTaskInfoDs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CountOpsInstanceState", async function () {
     try {
        const data = await client.CountOpsInstanceState({})
@@ -2671,6 +2681,16 @@ it("wedata.v20210820.DescribeTableMeta", async function () {
 it("wedata.v20210820.CreateDataModel", async function () {
     try {
        const data = await client.CreateDataModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeManualTriggerRecordPage", async function () {
+    try {
+       const data = await client.DescribeManualTriggerRecordPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

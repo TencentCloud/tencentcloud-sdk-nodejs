@@ -658,6 +658,11 @@ export interface ServerBaseConfig {
    * Dockerfile Cmd 参数
    */
   Cmd?: Array<string>
+  /**
+   * 会话亲和性开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionAffinity?: string
 }
 
 /**

@@ -48,6 +48,16 @@ it("csip.v20221121.DeleteDomainAndIp", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskRuleDetail", async function () {
+    try {
+       const data = await client.DescribeRiskRuleDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeDbAssetInfo", async function () {
     try {
        const data = await client.DescribeDbAssetInfo({})
@@ -108,6 +118,26 @@ it("csip.v20221121.AddNewBindRoleUser", async function () {
     }
 })
 
+it("csip.v20221121.DescribeVULList", async function () {
+    try {
+       const data = await client.DescribeVULList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeOtherCloudAssets", async function () {
+    try {
+       const data = await client.DescribeOtherCloudAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeListenerList", async function () {
     try {
        const data = await client.DescribeListenerList({})
@@ -121,6 +151,16 @@ it("csip.v20221121.DescribeListenerList", async function () {
 it("csip.v20221121.StopRiskCenterTask", async function () {
     try {
        const data = await client.StopRiskCenterTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeVULRiskDetail", async function () {
+    try {
+       const data = await client.DescribeVULRiskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +258,9 @@ it("csip.v20221121.ModifyRiskCenterScanTask", async function () {
     }
 })
 
-it("csip.v20221121.DescribeCFWAssetStatistics", async function () {
+it("csip.v20221121.DescribeOrganizationInfo", async function () {
     try {
-       const data = await client.DescribeCFWAssetStatistics({})
+       const data = await client.DescribeOrganizationInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +278,19 @@ it("csip.v20221121.DescribeAssetViewVulRiskList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeVULRiskDetail", async function () {
+it("csip.v20221121.DescribeTaskLogURL", async function () {
     try {
-       const data = await client.DescribeVULRiskDetail({})
+       const data = await client.DescribeTaskLogURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeCheckViewRisks", async function () {
+    try {
+       const data = await client.DescribeCheckViewRisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +308,9 @@ it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeOrganizationInfo", async function () {
+it("csip.v20221121.DescribeCFWAssetStatistics", async function () {
     try {
-       const data = await client.DescribeOrganizationInfo({})
+       const data = await client.DescribeCFWAssetStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +318,9 @@ it("csip.v20221121.DescribeOrganizationInfo", async function () {
     }
 })
 
-it("csip.v20221121.DescribeTaskLogURL", async function () {
+it("csip.v20221121.DescribeRiskRules", async function () {
     try {
-       const data = await client.DescribeTaskLogURL({})
+       const data = await client.DescribeRiskRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +328,19 @@ it("csip.v20221121.DescribeTaskLogURL", async function () {
     }
 })
 
-it("csip.v20221121.ModifyUebaRuleSwitch", async function () {
+it("csip.v20221121.DescribeAssetRiskList", async function () {
     try {
-       const data = await client.ModifyUebaRuleSwitch({})
+       const data = await client.DescribeAssetRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeRepositoryImageAssets", async function () {
+    try {
+       const data = await client.DescribeRepositoryImageAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +351,16 @@ it("csip.v20221121.ModifyUebaRuleSwitch", async function () {
 it("csip.v20221121.CreateRiskCenterScanTask", async function () {
     try {
        const data = await client.CreateRiskCenterScanTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeExposePath", async function () {
+    try {
+       const data = await client.DescribeExposePath({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +448,26 @@ it("csip.v20221121.DescribeAlertList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeScanTaskList", async function () {
+    try {
+       const data = await client.DescribeScanTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyUebaRuleSwitch", async function () {
+    try {
+       const data = await client.ModifyUebaRuleSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.UpdateAlertStatusList", async function () {
     try {
        const data = await client.UpdateAlertStatusList({})
@@ -388,9 +478,29 @@ it("csip.v20221121.UpdateAlertStatusList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeScanTaskList", async function () {
+it("csip.v20221121.DescribeScanStatistic", async function () {
     try {
-       const data = await client.DescribeScanTaskList({})
+       const data = await client.DescribeScanStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeExposeAssetCategory", async function () {
+    try {
+       const data = await client.DescribeExposeAssetCategory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeRiskDetailList", async function () {
+    try {
+       const data = await client.DescribeRiskDetailList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,6 +578,16 @@ it("csip.v20221121.ModifyOrganizationAccountStatus", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskCenterCFGViewCFGRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterCFGViewCFGRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeOrganizationUserInfo", async function () {
     try {
        const data = await client.DescribeOrganizationUserInfo({})
@@ -491,6 +611,16 @@ it("csip.v20221121.DescribeClusterAssets", async function () {
 it("csip.v20221121.DescribeSubnetAssets", async function () {
     try {
        const data = await client.DescribeSubnetAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeCSIPRiskStatistics", async function () {
+    try {
+       const data = await client.DescribeCSIPRiskStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

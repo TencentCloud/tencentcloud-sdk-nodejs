@@ -1868,28 +1868,6 @@ export interface DeleteLiveTranscodeTemplateRequest {
 }
 
 /**
- * StopLivePadProcessor请求参数结构体
- */
-export interface StopLivePadProcessorRequest {
-  /**
-   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-   */
-  AppName: string
-  /**
-   * 您的推流域名。
-   */
-  PushDomainName: string
-  /**
-   * 流名称。
-   */
-  StreamName: string
-  /**
-   * 操作人备注信息。
-   */
-  Operator?: string
-}
-
-/**
  * StopRecordTask返回参数结构体
  */
 export interface StopRecordTaskResponse {
@@ -1954,17 +1932,116 @@ export interface DescribeLivePullStreamTaskStatusResponse {
 }
 
 /**
- * DescribeLivePadProcessorList返回参数结构体
+ * ModifyLiveTranscodeTemplate请求参数结构体
  */
-export interface DescribeLivePadProcessorListResponse {
+export interface ModifyLiveTranscodeTemplateRequest {
   /**
-   * 当前正在拉取垫片的流名称列表。
+   * 模板 Id。
    */
-  StreamNameList?: Array<string>
+  TemplateId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 视频编码：h264/h265/origin，默认origin。
+
+origin: 保持原始编码格式
    */
-  RequestId?: string
+  Vcodec?: string
+  /**
+   * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
+   */
+  Acodec?: string
+  /**
+   * 音频码率，默认0。
+范围：0-500。
+   */
+  AudioBitrate?: number
+  /**
+   * 模板描述。
+   */
+  Description?: string
+  /**
+   * 视频码率。范围：0kbps - 8000kbps。
+0为保持原始码率。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+   */
+  VideoBitrate?: number
+  /**
+   * 宽。0-3000。
+数值必须是2的倍数，0是原始宽度
+   */
+  Width?: number
+  /**
+   * 是否保留视频，0：否，1：是。默认1。
+   */
+  NeedVideo?: number
+  /**
+   * 是否保留音频，0：否，1：是。默认1。
+   */
+  NeedAudio?: number
+  /**
+   * 高。0-3000。
+数值必须是2的倍数，0是原始宽度
+   */
+  Height?: number
+  /**
+   * 帧率，默认0。
+范围0-60
+   */
+  Fps?: number
+  /**
+   * 关键帧间隔，单位：秒。
+范围2-6
+   */
+  Gop?: number
+  /**
+   * 旋转角度，默认0。
+可取值：0，90，180，270
+   */
+  Rotate?: number
+  /**
+   * 编码质量：
+baseline/main/high。
+   */
+  Profile?: string
+  /**
+   * 当设置的码率>原始码率时，是否以原始码率为准。
+0：否， 1：是
+默认 0。
+   */
+  BitrateToOrig?: number
+  /**
+   * 当设置的高度>原始高度时，是否以原始高度为准。
+0：否， 1：是
+默认 0。
+   */
+  HeightToOrig?: number
+  /**
+   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
+0：否， 1：是
+默认 0。
+   */
+  FpsToOrig?: number
+  /**
+   * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
+   */
+  AdaptBitratePercent?: number
+  /**
+   * 是否以短边作为高度，0：否，1：是。默认0。
+   */
+  ShortEdgeAsHeight?: number
+  /**
+   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
+不传递或者为空字符串，清空之前的DRM配置。
+   */
+  DRMType?: string
+  /**
+   * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
+不传递或者为空字符串，清空之前的DRM配置。
+   */
+  DRMTracks?: string
 }
 
 /**
@@ -5902,119 +5979,6 @@ export interface FlvSpecialParam {
 }
 
 /**
- * ModifyLiveTranscodeTemplate请求参数结构体
- */
-export interface ModifyLiveTranscodeTemplateRequest {
-  /**
-   * 模板 Id。
-   */
-  TemplateId: number
-  /**
-   * 视频编码：h264/h265/origin，默认origin。
-
-origin: 保持原始编码格式
-   */
-  Vcodec?: string
-  /**
-   * 音频编码：aac，默认aac。
-注意：当前该参数未生效，待后续支持！
-   */
-  Acodec?: string
-  /**
-   * 音频码率，默认0。
-范围：0-500。
-   */
-  AudioBitrate?: number
-  /**
-   * 模板描述。
-   */
-  Description?: string
-  /**
-   * 视频码率。范围：0kbps - 8000kbps。
-0为保持原始码率。
-注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
-   */
-  VideoBitrate?: number
-  /**
-   * 宽。0-3000。
-数值必须是2的倍数，0是原始宽度
-   */
-  Width?: number
-  /**
-   * 是否保留视频，0：否，1：是。默认1。
-   */
-  NeedVideo?: number
-  /**
-   * 是否保留音频，0：否，1：是。默认1。
-   */
-  NeedAudio?: number
-  /**
-   * 高。0-3000。
-数值必须是2的倍数，0是原始宽度
-   */
-  Height?: number
-  /**
-   * 帧率，默认0。
-范围0-60
-   */
-  Fps?: number
-  /**
-   * 关键帧间隔，单位：秒。
-范围2-6
-   */
-  Gop?: number
-  /**
-   * 旋转角度，默认0。
-可取值：0，90，180，270
-   */
-  Rotate?: number
-  /**
-   * 编码质量：
-baseline/main/high。
-   */
-  Profile?: string
-  /**
-   * 当设置的码率>原始码率时，是否以原始码率为准。
-0：否， 1：是
-默认 0。
-   */
-  BitrateToOrig?: number
-  /**
-   * 当设置的高度>原始高度时，是否以原始高度为准。
-0：否， 1：是
-默认 0。
-   */
-  HeightToOrig?: number
-  /**
-   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-0：否， 1：是
-默认 0。
-   */
-  FpsToOrig?: number
-  /**
-   * 极速高清视频码率压缩比。
-极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-
-取值范围：0.0到0.5
-   */
-  AdaptBitratePercent?: number
-  /**
-   * 是否以短边作为高度，0：否，1：是。默认0。
-   */
-  ShortEdgeAsHeight?: number
-  /**
-   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
-不传递或者为空字符串，清空之前的DRM配置。
-   */
-  DRMType?: string
-  /**
-   * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
-不传递或者为空字符串，清空之前的DRM配置。
-   */
-  DRMTracks?: string
-}
-
-/**
  * ModifyCasterLayoutInfo请求参数结构体
  */
 export interface ModifyCasterLayoutInfoRequest {
@@ -7987,20 +7951,6 @@ export interface CasterInfo {
 }
 
 /**
- * DescribeLivePadProcessorList请求参数结构体
- */
-export interface DescribeLivePadProcessorListRequest {
-  /**
-   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-   */
-  AppName: string
-  /**
-   * 您的推流域名。
-   */
-  PushDomainName: string
-}
-
-/**
  * DescribeConcurrentRecordStreamNum请求参数结构体
  */
 export interface DescribeConcurrentRecordStreamNumRequest {
@@ -8129,20 +8079,6 @@ export interface CreateLiveRecordTemplateResponse {
    * 模板Id。
    */
   TemplateId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StopLivePadProcessor返回参数结构体
- */
-export interface StopLivePadProcessorResponse {
-  /**
-   * 处理结果信息。
-   */
-  ResultMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8976,39 +8912,32 @@ pause：暂停中。
    * 备源类型：
 PullLivePushLive -直播，
 PullVodPushLive -点播。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupSourceType?: string
   /**
    * 备源URL。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupSourceUrl?: string
   /**
    * 水印信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WatermarkList?: Array<PullPushWatermarkInfo>
   /**
    * 点播源是否启用本地推流模式，默认0，不启用。
 0 - 不启用。
 1 - 启用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VodLocalMode?: number
   /**
    * 录制模板 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordTemplateId?: string
   /**
    * 新增的推流地址。用于单任务推两路场景。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupToUrl?: string
   /**
    * 直播转码模板。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeTemplateName?: string
 }

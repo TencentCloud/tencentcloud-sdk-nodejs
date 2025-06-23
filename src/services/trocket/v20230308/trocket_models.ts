@@ -61,15 +61,15 @@ export interface ResetConsumerGroupOffsetResponse {
  */
 export interface DescribeSmoothMigrationTaskListRequest {
   /**
-   * 查询起始位置
+   * 查询结果限制数量，默认20。
    */
-  Offset: number
+  Limit?: number
   /**
-   * 查询结果限制数量
+   * 查询起始位置，默认为0。
    */
-  Limit: number
+  Offset?: number
   /**
-   * 查询条件列表
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
   Filters?: Array<Filter>
 }
@@ -215,7 +215,14 @@ OTHER 其他
    */
   SourceNameServer?: string
   /**
-   * 任务状态 Configuration 迁移配置 SourceConnecting 连接源集群中 MetaDataImport 元数据导入 EndpointSetup 切换接入点 ServiceMigration 切流中 Completed 已完成 Cancelled 已取消
+   * 任务状态:
+Configuration 迁移配置,
+SourceConnecting 连接源集群中,
+ MetaDataImport 元数据导入,
+EndpointSetup 切换接入点,
+ServiceMigration 切流中,
+Completed 已完成,
+Cancelled 已取消
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskStatus?: string
@@ -247,7 +254,7 @@ export interface CreateInstanceResponse {
  */
 export interface SourceClusterTopicConfig {
   /**
-   * 主题名称
+   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   TopicName: string
   /**
@@ -289,6 +296,8 @@ Unknown 未知，
 AlreadyExists 已存在，
 Success 成功，
 Failure 失败
+
+仅作为出参可用
    */
   ImportStatus?: string
   /**
@@ -478,6 +487,10 @@ export interface ModifyInstanceRequest {
    * 免费额度之外的主题个数
    */
   ExtraTopicNum?: string
+  /**
+   * 是否开启删除保护
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**
@@ -634,6 +647,10 @@ PREPAID，包年包月
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneIds?: Array<number | bigint>
+  /**
+   * 是否开启删除保护
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**
@@ -799,7 +816,6 @@ S_NA_D_RW 目标集群读写
 export interface DescribeSmoothMigrationTaskListResponse {
   /**
    * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1049,15 +1065,16 @@ export interface DescribeConsumerLagRequest {
  */
 export interface DescribeMigratingGroupStatsRequest {
   /**
-   * 迁移任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
    */
   TaskId: string
   /**
-   * 消费组名称
+   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)或控制台中获取。
+
    */
   GroupName: string
   /**
-   * 命名空间
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)或控制台中获取。
    */
   Namespace?: string
 }
@@ -1160,7 +1177,8 @@ export interface DescribeMQTTMessageResponse {
  */
 export interface DeleteSmoothMigrationTaskRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
 }
@@ -1362,21 +1380,22 @@ export interface DescribeMQTTClientRequest {
  */
 export interface DescribeSourceClusterGroupListRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
-   * 查询条件列表
+   * 查询结果限制数量，默认20。
    */
-  Filters?: Array<Filter>
+  Limit?: number
   /**
-   * 查询起始位置
+   * 查询起始位置，默认为0。
    */
   Offset?: number
   /**
-   * 查询结果限制数量
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
-  Limit?: number
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1599,7 +1618,8 @@ export interface DescribeMQTTInstanceRequest {
  */
 export interface ImportSourceClusterTopicsRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
@@ -1623,7 +1643,7 @@ export interface CreateMQTTUserResponse {
  */
 export interface SourceClusterGroupConfig {
   /**
-   * 消费组名称
+   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)数据中获取。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName: string
@@ -1648,6 +1668,8 @@ Unknown 未知
 Success 成功
 Failure 失败
 AlreadyExists 已存在
+
+仅作为出参时使用
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImportStatus?: string
@@ -1983,15 +2005,17 @@ export interface DescribeMQTTInstanceListResponse {
  */
 export interface DescribeMigratingTopicStatsRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
-   * 主题名称
+   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
    */
   TopicName: string
   /**
-   * 命名空间，仅4.x集群有效
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   Namespace?: string
 }
@@ -2047,15 +2071,17 @@ export interface CreateConsumerGroupResponse {
  */
 export interface RollbackMigratingTopicStageRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
-   * 主题名称
+   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
    */
   TopicName: string
   /**
-   * 命名空间，仅4.x集群有效
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   Namespace?: string
 }
@@ -2090,15 +2116,15 @@ export interface ModifyMQTTUserResponse {
 }
 
 /**
- * 价格标签信息
+ * 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。
  */
 export interface PriceTag {
   /**
-   * 计价名称
+   * 计价名称（枚举值：tps：TPS基础价；stepTps：TPS步长）
    */
   Name?: string
   /**
-   * 步长
+   * 计费项对应的步长数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Step?: number
@@ -2146,19 +2172,21 @@ export interface DescribeMessageTraceResponse {
  */
 export interface DoHealthCheckOnMigratingTopicRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
-   * 主题名称
+   * 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
    */
   TopicName: string
   /**
-   * 是否忽略当前检查
+   * 必填，是否忽略当前检查
    */
   IgnoreCheck?: boolean
   /**
-   * 命名空间，仅4.x集群有效
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   Namespace?: string
 }
@@ -2554,7 +2582,8 @@ PLATINUM 铂金版
  */
 export interface ImportSourceClusterConsumerGroupsRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
@@ -2609,15 +2638,15 @@ export interface MQTTEndpointItem {
  */
 export interface RemoveMigratingTopicRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
    */
   TaskId: string
   /**
-   * 主题名称
+   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)或控制台中获取。
    */
   TopicName: string
   /**
-   * 命名空间，仅迁移至4.x集群有效
+   * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   Namespace?: string
 }
@@ -2677,7 +2706,18 @@ export interface DoHealthCheckOnMigratingTopicResponse {
   Passed?: boolean
   /**
    * 健康检查返回的错误信息
-NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
+NotChecked 未执行检查， 
+Unknown 未知错误, 
+TopicNotImported 主题未导入,
+TopicNotExistsInSourceCluster 主题在源集群中不存在, 
+TopicNotExistsInTargetCluster 主题在目标集群中不存在, 
+ConsumerConnectedOnTarget 目标集群上存在消费者连接, 
+SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, 
+TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, 
+SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, 
+TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, 
+ConsumerGroupCountNotMatch 订阅组数量不一致, 
+SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
@@ -3211,21 +3251,22 @@ export interface DescribeTopicListByGroupRequest {
  */
 export interface DescribeMigratingTopicListRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
-   * 查询条件列表
+   * 查询结果限制数量，默认20。
    */
-  Filters?: Array<Filter>
+  Limit?: number
   /**
-   * 查询起始位置
+   * 查询起始位置，默认为0。
    */
   Offset?: number
   /**
-   * 查询结果限制数量
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
-  Limit?: number
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3780,15 +3821,17 @@ PUBLIC 公网
  */
 export interface ChangeMigratingTopicToNextStageRequest {
   /**
-   * 任务ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
   TaskId: string
   /**
-   * 主题名称列表
+   * 主题名称列表，主题名称可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
    */
   TopicNameList: Array<string>
   /**
-   * 命名空间列表，仅4.x集群有效，与TopicNameList一一对应
+   * 命名空间列表，仅4.x集群有效，与TopicNameList一一对应，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   NamespaceList?: Array<string>
 }

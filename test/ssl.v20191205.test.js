@@ -88,6 +88,36 @@ it("ssl.v20191205.DescribeHostDeployRecord", async function () {
     }
 })
 
+it("ssl.v20191205.DescribeHostUploadUpdateRecord", async function () {
+    try {
+       const data = await client.DescribeHostUploadUpdateRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.UploadUpdateCertificateRecordRetry", async function () {
+    try {
+       const data = await client.UploadUpdateCertificateRecordRetry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.UploadUpdateCertificateRecordRollback", async function () {
+    try {
+       const data = await client.UploadUpdateCertificateRecordRollback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DeleteManager", async function () {
     try {
        const data = await client.DeleteManager({})
@@ -441,6 +471,16 @@ it("ssl.v20191205.CheckCertificateDomainVerification", async function () {
 it("ssl.v20191205.CheckCertificateExist", async function () {
     try {
        const data = await client.CheckCertificateExist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostUploadUpdateRecordDetail", async function () {
+    try {
+       const data = await client.DescribeHostUploadUpdateRecordDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

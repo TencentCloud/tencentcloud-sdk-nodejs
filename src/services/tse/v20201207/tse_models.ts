@@ -707,6 +707,10 @@ export interface DescribeCloudNativeAPIGatewayResult {
    * 公网IP地址列表
    */
   PublicIpAddresses?: Array<string>
+  /**
+   * 是否开启删除保护
+   */
+  DeleteProtect?: boolean
 }
 
 /**
@@ -6178,6 +6182,10 @@ export interface ModifyCloudNativeAPIGatewayRequest {
    * 公网计费模式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。
    */
   InternetPayMode?: string
+  /**
+   * 是否开启实例删除保护,默认false
+   */
+  DeleteProtect?: boolean
 }
 
 /**

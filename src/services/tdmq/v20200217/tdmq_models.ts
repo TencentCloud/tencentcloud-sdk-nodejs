@@ -580,11 +580,11 @@ export interface CreateSubscriptionRequest {
 }
 
 /**
- * RabbitMQ专享实例信息
+ * RabbitMQ 托管版实例信息
  */
 export interface RabbitMQVipInstance {
   /**
-   * 实例id
+   * 实例 ID
    */
   InstanceId?: string
   /**
@@ -620,7 +620,7 @@ export interface RabbitMQVipInstance {
    */
   MaxStorage?: number
   /**
-   * 实例到期时间，毫秒为单位
+   * 实例到期时间，按量付费的资源该值为 0，毫秒为单位。unix 时间戳
    */
   ExpireTime?: number
   /**
@@ -628,7 +628,7 @@ export interface RabbitMQVipInstance {
    */
   AutoRenewFlag?: number
   /**
-   * 0-后付费，1-预付费
+   * 1 表示预付费，0 表示后付费
    */
   PayMode?: number
   /**
@@ -636,11 +636,20 @@ export interface RabbitMQVipInstance {
    */
   Remark?: string
   /**
-   * 实例配置ID
+   * 集群的节点规格，需要输入对应的规格标识：
+2C8G：rabbit-vip-basic-2c8g
+4C16G：rabbit-vip-basic-4c16g
+8C32G：rabbit-vip-basic-8c32g
+16C32G：rabbit-vip-basic-4
+16C64G：rabbit-vip-basic-16c64g
+2C4G：rabbit-vip-basic-5
+4C8G：rabbit-vip-basic-1
+8C16G（已售罄）：rabbit-vip-basic-2
+不传默认为4C8G：rabbit-vip-basic-1
    */
   SpecName?: string
   /**
-   * 集群异常。
+   * 集群异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptionInformation?: string
@@ -659,7 +668,7 @@ export interface RabbitMQVipInstance {
    */
   Vpcs?: Array<VpcEndpointInfo>
   /**
-   * 创建时间，毫秒为单位
+   * 创建时间，毫秒为单位。unix 时间戳
    */
   CreateTime?: number
   /**
@@ -673,11 +682,11 @@ export interface RabbitMQVipInstance {
 }
 
 /**
- * RabbiteMQ集群基本信息
+ * RabbitMQ 集群基本信息
  */
 export interface RabbitMQClusterInfo {
   /**
-   * 集群ID
+   * 集群 ID
    */
   ClusterId?: string
   /**
@@ -689,7 +698,7 @@ export interface RabbitMQClusterInfo {
    */
   Region?: string
   /**
-   * 创建时间，毫秒为单位
+   * 创建时间，毫秒为单位。unix 时间戳
    */
   CreateTime?: number
   /**
@@ -721,7 +730,7 @@ export interface RabbitMQClusterInfo {
    */
   MessageStackNumber?: number
   /**
-   * 过期时间
+   * 实例到期时间，按量付费的资源该值为 0，毫秒为单位。unix 时间戳
    */
   ExpireTime?: number
   /**
@@ -774,7 +783,7 @@ export interface RabbitMQClusterInfo {
    */
   InstanceType?: number
   /**
-   * 开始隔离时间
+   * 开始隔离时间。unix 时间戳
    */
   IsolatedTime?: number
   /**
@@ -2029,7 +2038,7 @@ export interface PulsarNetworkAccessPointInfo {
  */
 export interface DescribeRabbitMQVipInstanceRequest {
   /**
-   * 集群ID
+   * 集群 ID
    */
   ClusterId: string
 }
@@ -2039,19 +2048,19 @@ export interface DescribeRabbitMQVipInstanceRequest {
  */
 export interface DescribeRabbitMQExchangesRequest {
   /**
-   * 实例 id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * vhost 参数
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
   /**
-   * 分页 offset
+   * 分页 offset，默认 0
    */
   Offset?: number
   /**
-   * 分页 limit
+   * 分页 limit，默认 20
    */
   Limit?: number
   /**
@@ -2059,7 +2068,7 @@ export interface DescribeRabbitMQExchangesRequest {
    */
   SearchWord?: string
   /**
-   * 筛选 exchange 类型, 数组中每个元素为选中的过滤类型
+   * 筛选 exchange 类型, 数组中每个元素为选中的过滤类型，仅支持 direct、fanout、topic、header
    */
   ExchangeTypeFilters?: Array<string>
   /**
@@ -2079,6 +2088,8 @@ MessageRateOut - 消费速率；
   SortElement?: string
   /**
    * 排序顺序，ascend 或 descend
+ascend：升序
+descend：降序
    */
   SortOrder?: string
 }
@@ -4056,6 +4067,10 @@ export interface ModifyRocketMQInstanceRequest {
    * 实例消息保留时间，小时为单位
    */
   MessageRetention?: number
+  /**
+   * 是否开启删除保护
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**
@@ -4243,7 +4258,7 @@ export interface DescribeRabbitMQBindingsResponse {
    */
   BindingInfoList?: Array<RabbitMQBindingListInfo>
   /**
-   * 数量
+   * 路由关系数量
    */
   TotalCount?: number
   /**
@@ -5708,23 +5723,23 @@ export interface DescribeRolesResponse {
  */
 export interface DescribeRabbitMQPermissionRequest {
   /**
-   * 集群实例id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * 用户名，用于查询过滤，不传则查询全部
+   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
    */
   User?: string
   /**
-   * vhost名，用于查询过滤，不传则查询全部
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到 Vhost 名称。
    */
   VirtualHost?: string
   /**
-   * 分页Offset
+   * 分页 Offset，默认 0
    */
   Offset?: number
   /**
-   * 分页Limit
+   * 分页 Limit，默认 20
    */
   Limit?: number
 }
@@ -7103,19 +7118,19 @@ export interface RetryRocketMQDlqMessageResponse {
  */
 export interface DescribeRabbitMQBindingsRequest {
   /**
-   * 实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
-   * Vhost名称
+   * VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。
    */
   VirtualHost: string
   /**
-   * 分页offset
+   * 分页 offset，默认 0
    */
   Offset?: number
   /**
-   * 分页limit
+   * 分页 limit，默认 20
    */
   Limit?: number
   /**
@@ -7127,7 +7142,7 @@ export interface DescribeRabbitMQBindingsRequest {
    */
   SourceExchange?: string
   /**
-   * 根据目标QueueName精准搜索过滤，和DestinationExchange过滤不可同时设置
+   * 根据目标队列名精准搜索过滤，和 DestinationExchange 过滤不可同时设置
    */
   QueueName?: string
   /**
@@ -8253,11 +8268,11 @@ export interface DescribeRabbitMQVipInstancesRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 查询数目上限，默认20
+   * 查询数目上限，默认 20
    */
   Limit?: number
   /**
-   * 查询起始位置
+   * 查询起始位置，默认 0
    */
   Offset?: number
 }
@@ -9616,7 +9631,7 @@ export interface DescribeEnvironmentRolesRequest {
  */
 export interface DescribeRabbitMQUserRequest {
   /**
-   * 集群实例Id
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   InstanceId: string
   /**
@@ -9624,11 +9639,11 @@ export interface DescribeRabbitMQUserRequest {
    */
   SearchUser?: string
   /**
-   * 分页Offset
+   * 分页 Offset，默认 0
    */
   Offset?: number
   /**
-   * 分页Limit
+   * 分页 Limit，默认 20
    */
   Limit?: number
   /**
@@ -9636,7 +9651,8 @@ export interface DescribeRabbitMQUserRequest {
    */
   User?: string
   /**
-   * 用户标签，根据标签过滤列表
+   * 用户标签，用于决定改用户访问 RabbitMQ Management 的权限范围
+management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户
    */
   Tags?: Array<string>
 }

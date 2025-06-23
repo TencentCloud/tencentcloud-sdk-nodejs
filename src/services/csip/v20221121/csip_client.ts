@@ -18,31 +18,39 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeRiskCenterPortViewPortRiskListRequest,
   DescribeDbAssetInfoResponse,
   DeleteRiskScanTaskRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
+  BugInfoDetail,
+  CsipRiskCenterStatistics,
   DescribeVULRiskAdvanceCFGListResponse,
   TaskCenterWeakPwdRiskInputParam,
   DescribeAssetViewVulRiskListResponse,
+  DescribeRepositoryImageAssetsRequest,
   DescribeOrganizationUserInfoRequest,
   ModifyUebaRuleSwitchResponse,
   FilterDataObject,
   ReportItemKey,
   DescribeSubnetAssetsRequest,
-  CVMAssetVO,
+  AssetViewVULRiskData,
+  DescribeCheckViewRisksRequest,
+  VULBaseInfo,
   AssetViewCFGRisk,
   DescribeSubUserInfoRequest,
-  DescribeScanReportListRequest,
+  DescribeRiskCenterAssetViewCFGRiskListResponse,
   AlertInfo,
   KeyValue,
   Vpc,
   PortRiskAdvanceCFGParamItem,
   StatisticalFilter,
   AssetBaseInfoResponse,
-  DescribeVULRiskDetailRequest,
+  DescribeRepositoryImageAssetsResponse,
   DataSearchBug,
   OrganizationUserInfo,
   AssetTag,
+  DescribeCheckViewRisksResponse,
+  DescribeScanReportListRequest,
   NewAlertKey,
   IpAssetListVO,
   UebaCustomRule,
@@ -51,14 +59,16 @@ import {
   DescribeVULRiskDetailResponse,
   DescribeDomainAssetsRequest,
   ModifyRiskCenterScanTaskResponse,
-  DescribeRiskCenterAssetViewCFGRiskListRequest,
+  DescribeNICAssetsRequest,
   DescribeRiskCenterWebsiteRiskListResponse,
   Tag,
-  ModifyRiskCenterRiskStatusResponse,
-  UpdateAlertStatusListResponse,
+  RiskRuleItem,
+  DescribeRiskCenterCFGViewCFGRiskListRequest,
+  DescribeCSIPRiskStatisticsResponse,
+  AssetRiskItem,
   DeleteDomainAndIpRequest,
-  DescribeNICAssetsRequest,
-  DescribeScanTaskListRequest,
+  DescribeRiskDetailListRequest,
+  DescribeRiskRuleDetailRequest,
   DescribeOrganizationInfoRequest,
   TaskIdListKey,
   RoleInfo,
@@ -69,7 +79,8 @@ import {
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
   TaskLogURL,
-  AssetViewVULRiskData,
+  CheckViewRiskItem,
+  AddNewBindRoleUserRequest,
   DescribeOrganizationUserInfoResponse,
   NICAsset,
   OrganizationInfo,
@@ -87,70 +98,88 @@ import {
   TaskAssetObject,
   DbAssetInfo,
   ModifyRiskCenterRiskStatusRequest,
+  DescribeExposePathRequest,
   RiskCenterStatusKey,
+  ExposesItem,
   DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
   DescribeTopAttackInfoRequest,
   ProductSupport,
   DescribeCVMAssetsResponse,
   VulImpactComponentInfo,
-  VULRiskAdvanceCFGList,
+  AttributeOptionSet,
   WhereFilter,
+  CVMAssetVO,
   SubUserInfo,
   CloudCountDesc,
   DescribePublicIpAssetsRequest,
   AssetClusterPod,
   DescribeCVMAssetInfoRequest,
-  AssetViewWeakPassRisk,
+  DescribeOtherCloudAssetsResponse,
   WebsiteRisk,
+  CFGViewCFGRisk,
   ServiceSupport,
   CreateRiskCenterScanTaskRequest,
-  DescribeRiskCenterAssetViewCFGRiskListResponse,
+  UpdateAlertStatusListResponse,
+  DescribeAssetRiskListResponse,
   DescribeRiskCenterVULViewVULRiskListResponse,
   DescribeRiskCenterVULViewVULRiskListRequest,
+  VULRiskAdvanceCFGList,
   UpdateAlertStatusListRequest,
   TaskCenterVulRiskInputParam,
   StopRiskCenterTaskRequest,
   DescribeScanTaskListResponse,
+  DescribeScanTaskListRequest,
   ScanTaskInfo,
   AssetInstanceTypeMap,
   Tags,
+  ModifyRiskCenterRiskStatusResponse,
   VULViewVULRisk,
   PortViewPortRisk,
   VULRiskInfo,
   DescribeClusterPodAssetsRequest,
+  RiskDetailItem,
   DescribeCVMAssetInfoResponse,
   DescribePublicIpAssetsResponse,
   DescribeVulViewVulRiskListRequest,
+  DescribeAssetRiskListRequest,
+  DescribeRiskRulesRequest,
   DescribeTaskLogURLResponse,
   VulTrend,
   ModifyOrganizationAccountStatusResponse,
   AlertExtraInfo,
+  UebaRule,
   DescribeDbAssetInfoRequest,
+  RelatedEvent,
   DescribeAssetViewVulRiskListRequest,
   DescribeUebaRuleRequest,
   DescribeVulViewVulRiskListResponse,
   Filter,
   DescribeRiskCenterWebsiteRiskListRequest,
+  RepositoryImageVO,
   ServerRiskSuggestion,
   AssetViewVULRisk,
   DescribeClusterPodAssetsResponse,
   DescribeCFWAssetStatisticsResponse,
   DescribeGatewayAssetsResponse,
   AssetViewPortRisk,
-  DescribeRiskCenterPortViewPortRiskListRequest,
+  DescribeRiskCenterAssetViewCFGRiskListRequest,
+  DescribeRiskRuleDetailResponse,
   DescribeVpcAssetsResponse,
   DescribeRiskCenterPortViewPortRiskListResponse,
   DeleteDomainAndIpResponse,
   ServerRisk,
   ReportTaskIdList,
-  UebaRule,
+  DescribeExposeAssetCategoryResponse,
   AddNewBindRoleUserResponse,
-  ExposesItem,
-  RelatedEvent,
+  DomainAssetVO,
+  DescribeRiskRulesResponse,
   VULViewVULRiskData,
+  ExposeAssetTypeItem,
   DescribeAlertListResponse,
+  DescribeRiskDetailListResponse,
   ScanTaskInfoList,
+  DescribeExposePathResponse,
   DescribeDbAssetsRequest,
   TaskLogInfo,
   DescribeVULRiskAdvanceCFGListRequest,
@@ -159,12 +188,16 @@ import {
   DescribeExposuresRequest,
   DescribeAlertListRequest,
   CreateDomainAndIpRequest,
-  DomainAssetVO,
+  DescribeRiskCenterCFGViewCFGRiskListResponse,
   DescribeSearchBugInfoResponse,
+  DescribeVULRiskDetailRequest,
   ModifyOrganizationAccountStatusRequest,
   DescribeClusterAssetsResponse,
+  DescribeVULListResponse,
+  DescribeExposeAssetCategoryRequest,
   DescribeSubUserInfoResponse,
-  BugInfoDetail,
+  DescribeCSIPRiskStatisticsRequest,
+  DescribeScanStatisticResponse,
   TagCount,
   DescribeDomainAssetsResponse,
   DescribeDbAssetsResponse,
@@ -174,21 +207,24 @@ import {
   DescribeRiskCenterServerRiskListRequest,
   DescribeTaskLogListRequest,
   Filters,
+  DescribeOtherCloudAssetsRequest,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
   Element,
   DescribeRiskCenterServerRiskListResponse,
   DescribeListenerListRequest,
+  DescribeVULListRequest,
   DeleteRiskScanTaskResponse,
+  DescribeScanStatisticRequest,
   DescribeGatewayAssetsRequest,
   DescribeCFWAssetStatisticsRequest,
+  AssetViewWeakPassRisk,
   AssetCluster,
   CreateDomainAndIpResponse,
   DescribeTaskLogListResponse,
   DescribeExposuresResponse,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeTaskLogURLRequest,
-  AddNewBindRoleUserRequest,
 } from "./csip_models"
 
 /**
@@ -228,6 +264,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDomainAndIpResponse) => void
   ): Promise<DeleteDomainAndIpResponse> {
     return this.request("DeleteDomainAndIp", req, cb)
+  }
+
+  /**
+   * 查询风险规则详情示例
+   */
+  async DescribeRiskRuleDetail(
+    req: DescribeRiskRuleDetailRequest,
+    cb?: (error: string, rep: DescribeRiskRuleDetailResponse) => void
+  ): Promise<DescribeRiskRuleDetailResponse> {
+    return this.request("DescribeRiskRuleDetail", req, cb)
   }
 
   /**
@@ -291,6 +337,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新安全中心风险中心-漏洞列表
+   */
+  async DescribeVULList(
+    req: DescribeVULListRequest,
+    cb?: (error: string, rep: DescribeVULListResponse) => void
+  ): Promise<DescribeVULListResponse> {
+    return this.request("DescribeVULList", req, cb)
+  }
+
+  /**
+   * 资产列表
+   */
+  async DescribeOtherCloudAssets(
+    req: DescribeOtherCloudAssetsRequest,
+    cb?: (error: string, rep: DescribeOtherCloudAssetsResponse) => void
+  ): Promise<DescribeOtherCloudAssetsResponse> {
+    return this.request("DescribeOtherCloudAssets", req, cb)
+  }
+
+  /**
    * 查询clb监听器列表
    */
   async DescribeListenerList(
@@ -308,6 +374,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopRiskCenterTaskResponse) => void
   ): Promise<StopRiskCenterTaskResponse> {
     return this.request("StopRiskCenterTask", req, cb)
+  }
+
+  /**
+   * 获取漏洞展开详情
+   */
+  async DescribeVULRiskDetail(
+    req: DescribeVULRiskDetailRequest,
+    cb?: (error: string, rep: DescribeVULRiskDetailResponse) => void
+  ): Promise<DescribeVULRiskDetailResponse> {
+    return this.request("DescribeVULRiskDetail", req, cb)
   }
 
   /**
@@ -401,13 +477,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云防资产中心统计数据
+   * 查询集团账号详情
    */
-  async DescribeCFWAssetStatistics(
-    req?: DescribeCFWAssetStatisticsRequest,
-    cb?: (error: string, rep: DescribeCFWAssetStatisticsResponse) => void
-  ): Promise<DescribeCFWAssetStatisticsResponse> {
-    return this.request("DescribeCFWAssetStatistics", req, cb)
+  async DescribeOrganizationInfo(
+    req: DescribeOrganizationInfoRequest,
+    cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void
+  ): Promise<DescribeOrganizationInfoResponse> {
+    return this.request("DescribeOrganizationInfo", req, cb)
   }
 
   /**
@@ -421,13 +497,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取漏洞展开详情
+   * 获取报告下载的临时链接
    */
-  async DescribeVULRiskDetail(
-    req: DescribeVULRiskDetailRequest,
-    cb?: (error: string, rep: DescribeVULRiskDetailResponse) => void
-  ): Promise<DescribeVULRiskDetailResponse> {
-    return this.request("DescribeVULRiskDetail", req, cb)
+  async DescribeTaskLogURL(
+    req: DescribeTaskLogURLRequest,
+    cb?: (error: string, rep: DescribeTaskLogURLResponse) => void
+  ): Promise<DescribeTaskLogURLResponse> {
+    return this.request("DescribeTaskLogURL", req, cb)
+  }
+
+  /**
+   * 检查视角下云资源配置风险列表示例
+   */
+  async DescribeCheckViewRisks(
+    req: DescribeCheckViewRisksRequest,
+    cb?: (error: string, rep: DescribeCheckViewRisksResponse) => void
+  ): Promise<DescribeCheckViewRisksResponse> {
+    return this.request("DescribeCheckViewRisks", req, cb)
   }
 
   /**
@@ -441,33 +527,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集团账号详情
+   * 云防资产中心统计数据
    */
-  async DescribeOrganizationInfo(
-    req: DescribeOrganizationInfoRequest,
-    cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void
-  ): Promise<DescribeOrganizationInfoResponse> {
-    return this.request("DescribeOrganizationInfo", req, cb)
+  async DescribeCFWAssetStatistics(
+    req?: DescribeCFWAssetStatisticsRequest,
+    cb?: (error: string, rep: DescribeCFWAssetStatisticsResponse) => void
+  ): Promise<DescribeCFWAssetStatisticsResponse> {
+    return this.request("DescribeCFWAssetStatistics", req, cb)
   }
 
   /**
-   * 获取报告下载的临时链接
+   * 高级配置风险规则列表示例
    */
-  async DescribeTaskLogURL(
-    req: DescribeTaskLogURLRequest,
-    cb?: (error: string, rep: DescribeTaskLogURLResponse) => void
-  ): Promise<DescribeTaskLogURLResponse> {
-    return this.request("DescribeTaskLogURL", req, cb)
+  async DescribeRiskRules(
+    req: DescribeRiskRulesRequest,
+    cb?: (error: string, rep: DescribeRiskRulesResponse) => void
+  ): Promise<DescribeRiskRulesResponse> {
+    return this.request("DescribeRiskRules", req, cb)
   }
 
   /**
-   * 更新自定义策略的开关
+   * 资产视角下云资源配置风险列表
    */
-  async ModifyUebaRuleSwitch(
-    req: ModifyUebaRuleSwitchRequest,
-    cb?: (error: string, rep: ModifyUebaRuleSwitchResponse) => void
-  ): Promise<ModifyUebaRuleSwitchResponse> {
-    return this.request("ModifyUebaRuleSwitch", req, cb)
+  async DescribeAssetRiskList(
+    req: DescribeAssetRiskListRequest,
+    cb?: (error: string, rep: DescribeAssetRiskListResponse) => void
+  ): Promise<DescribeAssetRiskListResponse> {
+    return this.request("DescribeAssetRiskList", req, cb)
+  }
+
+  /**
+   * 仓库镜像列表
+   */
+  async DescribeRepositoryImageAssets(
+    req: DescribeRepositoryImageAssetsRequest,
+    cb?: (error: string, rep: DescribeRepositoryImageAssetsResponse) => void
+  ): Promise<DescribeRepositoryImageAssetsResponse> {
+    return this.request("DescribeRepositoryImageAssets", req, cb)
   }
 
   /**
@@ -478,6 +574,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void
   ): Promise<CreateRiskCenterScanTaskResponse> {
     return this.request("CreateRiskCenterScanTask", req, cb)
+  }
+
+  /**
+   * 查询互联网暴露节点
+   */
+  async DescribeExposePath(
+    req: DescribeExposePathRequest,
+    cb?: (error: string, rep: DescribeExposePathResponse) => void
+  ): Promise<DescribeExposePathResponse> {
+    return this.request("DescribeExposePath", req, cb)
   }
 
   /**
@@ -561,6 +667,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取扫描任务列表
+   */
+  async DescribeScanTaskList(
+    req: DescribeScanTaskListRequest,
+    cb?: (error: string, rep: DescribeScanTaskListResponse) => void
+  ): Promise<DescribeScanTaskListResponse> {
+    return this.request("DescribeScanTaskList", req, cb)
+  }
+
+  /**
+   * 更新自定义策略的开关
+   */
+  async ModifyUebaRuleSwitch(
+    req: ModifyUebaRuleSwitchRequest,
+    cb?: (error: string, rep: ModifyUebaRuleSwitchResponse) => void
+  ): Promise<ModifyUebaRuleSwitchResponse> {
+    return this.request("ModifyUebaRuleSwitch", req, cb)
+  }
+
+  /**
    * 批量告警状态处理接口
    */
   async UpdateAlertStatusList(
@@ -571,13 +697,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取扫描任务列表
+   * 查询互联网暴露扫描结果统计信息
    */
-  async DescribeScanTaskList(
-    req: DescribeScanTaskListRequest,
-    cb?: (error: string, rep: DescribeScanTaskListResponse) => void
-  ): Promise<DescribeScanTaskListResponse> {
-    return this.request("DescribeScanTaskList", req, cb)
+  async DescribeScanStatistic(
+    req: DescribeScanStatisticRequest,
+    cb?: (error: string, rep: DescribeScanStatisticResponse) => void
+  ): Promise<DescribeScanStatisticResponse> {
+    return this.request("DescribeScanStatistic", req, cb)
+  }
+
+  /**
+   * 暴露面资产分类
+   */
+  async DescribeExposeAssetCategory(
+    req: DescribeExposeAssetCategoryRequest,
+    cb?: (error: string, rep: DescribeExposeAssetCategoryResponse) => void
+  ): Promise<DescribeExposeAssetCategoryResponse> {
+    return this.request("DescribeExposeAssetCategory", req, cb)
+  }
+
+  /**
+   * 风险详情列表示例
+   */
+  async DescribeRiskDetailList(
+    req: DescribeRiskDetailListRequest,
+    cb?: (error: string, rep: DescribeRiskDetailListResponse) => void
+  ): Promise<DescribeRiskDetailListResponse> {
+    return this.request("DescribeRiskDetailList", req, cb)
   }
 
   /**
@@ -651,6 +797,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取配置视角的配置风险列表
+   */
+  async DescribeRiskCenterCFGViewCFGRiskList(
+    req: DescribeRiskCenterCFGViewCFGRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterCFGViewCFGRiskListResponse) => void
+  ): Promise<DescribeRiskCenterCFGViewCFGRiskListResponse> {
+    return this.request("DescribeRiskCenterCFGViewCFGRiskList", req, cb)
+  }
+
+  /**
    * 查询集团账号用户列表
    */
   async DescribeOrganizationUserInfo(
@@ -678,6 +834,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSubnetAssetsResponse) => void
   ): Promise<DescribeSubnetAssetsResponse> {
     return this.request("DescribeSubnetAssets", req, cb)
+  }
+
+  /**
+   * 获取风险中心风险概况示例
+   */
+  async DescribeCSIPRiskStatistics(
+    req: DescribeCSIPRiskStatisticsRequest,
+    cb?: (error: string, rep: DescribeCSIPRiskStatisticsResponse) => void
+  ): Promise<DescribeCSIPRiskStatisticsResponse> {
+    return this.request("DescribeCSIPRiskStatistics", req, cb)
   }
 
   /**

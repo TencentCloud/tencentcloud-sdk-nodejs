@@ -323,6 +323,10 @@ export interface ApmInstanceDetail {
    * traceId的索引key: 当CLS索引类型为键值索引时生效
    */
   LogTraceIdKey?: string
+  /**
+   * 业务系统鉴权 token
+   */
+  Token?: string
 }
 
 /**

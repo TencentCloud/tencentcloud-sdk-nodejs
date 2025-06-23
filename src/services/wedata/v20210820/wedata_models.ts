@@ -1085,6 +1085,44 @@ export interface CreateDsFolderResponse {
 }
 
 /**
+ * DescribeManualTriggerRecordPage请求参数结构体
+ */
+export interface DescribeManualTriggerRecordPageRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 触发运行名称
+   */
+  TriggerName?: string
+  /**
+   * 工作流过滤关键字，工作流名称 or 工作流ID
+   */
+  WorkflowKeyword?: string
+  /**
+   * 触发运行提交人过滤，多个提交人用英文逗号分割
+   */
+  Creator?: string
+  /**
+   * 触发提交创建时间过滤，起始时间
+   */
+  TriggerStartTime?: string
+  /**
+   * 触发提交创建时间过滤，结束时间
+   */
+  TriggerEndTime?: string
+  /**
+   * 页码，整型
+   */
+  PageNumber?: number
+  /**
+   * 每页数目，整型
+   */
+  PageSize?: number
+}
+
+/**
  * 开发空间-获取数据开发脚本信息响应体
  */
 export interface UserFileInfo {
@@ -1645,7 +1683,110 @@ export interface DescribeTableMetasRequest {
    */
   PageSize?: number
   /**
-   * 过滤字段
+   * 过滤字段:
+dbName-数据库名称
+bizCatalogIds-资产目录ID
+DataLayerUuid-数仓分层ID
+ownerAccount-负责人ID
+assetStatus-资产状态：1-已上架 0-未上架
+assetLevel-资产等级：40-核心30-重要 20-一般 10-临时 
+msTypes-数据源类型：例如TENCENT_MYSQL-腾讯云MySQL，数据源类型ID可参考
+[
+  {
+    "DisplayName": "TCHouse-P",
+    "Id": "TCHOUSE_P"
+  },
+  {
+    "DisplayName": "Iceberg",
+    "Id": "ICEBERG"
+  },
+  {
+    "DisplayName": "Hive",
+    "Id": "HIVE"
+  },
+  {
+    "DisplayName": "HBase",
+    "Id": "HBASE"
+  },
+  {
+    "DisplayName": "DLC",
+    "Id": "DLC"
+  },
+  {
+    "DisplayName": "腾讯云MySQL",
+    "Id": "TENCENT_MYSQL"
+  },
+  {
+    "DisplayName": "TCHouse-D",
+    "Id": "TCHOUSE_D"
+  },
+  {
+    "DisplayName": "TCHouse-C",
+    "Id": "TCHOUSE_C"
+  },
+  {
+    "DisplayName": "EMR StarRocks",
+    "Id": "EMR_STARROCKS"
+  },
+  {
+    "DisplayName": "Doris",
+    "Id": "DORIS"
+  },
+  {
+    "DisplayName": "MySQL",
+    "Id": "MYSQL"
+  },
+  {
+    "DisplayName": "Oracle",
+    "Id": "ORACLE"
+  },
+  {
+    "DisplayName": "PostgreSQL",
+    "Id": "POSTGRE"
+  },
+  {
+    "DisplayName": "SQL Server",
+    "Id": "SQLSERVER"
+  },
+  {
+    "DisplayName": "TDSQL PostgreSQL",
+    "Id": "TDSQL_POSTGRE"
+  },
+  {
+    "DisplayName": "Greenplum",
+    "Id": "GREENPLUM"
+  },
+  {
+    "DisplayName": "StarRocks",
+    "Id": "STARROCKS"
+  },
+  {
+    "DisplayName": "ClickHouse",
+    "Id": "CLICKHOUSE"
+  },
+  {
+    "DisplayName": "INFLUXDB",
+    "Id": "INFLUXDB"
+  },
+  {
+    "DisplayName": "达梦DM",
+    "Id": "DM"
+  },
+  {
+    "DisplayName": "OceanBase",
+    "Id": "OCEANBASE"
+  },
+  {
+    "DisplayName": "TDSQL MySQL",
+    "Id": "TDSQL_MYSQL"
+  },
+  {
+    "DisplayName": "GaussDB",
+    "Id": "GAUSSDB"
+  }
+]
+projectIds-归属项目ID
+keyword-关键字，支持表名/表中文名/数据库名
    */
   Filters?: Array<Filter>
   /**
@@ -3389,6 +3530,42 @@ export interface EventCaseDTO {
 }
 
 /**
+ * 手动工作流触发运行记录分页查询
+ */
+export interface ManualTriggerRecordOpsDtoPage {
+  /**
+   * 页号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 手动工作流触发运行记录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ManualTriggerRecordOpsDto>
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPage?: number
+  /**
+   * 页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageCount?: number
+  /**
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+}
+
+/**
  * 表评分统计信息
  */
 export interface TableScoreStatisticsInfo {
@@ -4791,12 +4968,12 @@ export interface DescribeTableMetasResponse {
    * 表元数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableMetas: Array<TableMeta>
+  TableMetas?: Array<TableMeta>
   /**
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20563,6 +20740,11 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmMessageRule?: string
+  /**
+   *  0- wedata, 1-inlong
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportTarget?: number
 }
 
 /**
@@ -21537,6 +21719,26 @@ export interface CheckAlarmRegularNameExistResponse {
    * 是否重名
    */
   Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeManualTriggerRecordPage返回参数结构体
+ */
+export interface DescribeManualTriggerRecordPageResponse {
+  /**
+   * 请求来源，WEB 前端；CLIENT 客户端
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestFromSource?: string
+  /**
+   * 详情结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ManualTriggerRecordOpsDtoPage
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -24574,6 +24776,32 @@ export interface CompareResultItem {
 }
 
 /**
+ * RegisterDsEventPublisher注册事件发布者参数
+ */
+export interface RegisterDsEventPublisherReq {
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 任务id
+   */
+  Key?: string
+  /**
+   * 类型 REST_API、KAFKA
+   */
+  Type?: string
+  /**
+   * 配置信息
+   */
+  Properties?: Array<ParamInfoDs>
+  /**
+   * 描述信息
+   */
+  Description?: string
+}
+
+/**
  * 依赖配置
  */
 export interface DependencyConfigDsDTO {
@@ -26091,6 +26319,156 @@ export interface DescribeRuleRequest {
    * 项目ID
    */
   ProjectId?: string
+}
+
+/**
+ * ModifyTaskInfoDs请求参数结构体
+ */
+export interface ModifyTaskInfoDsRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 执行时间，单位分钟，天/周/月/年调度才有。比如天调度，每天的02:00点执行一次，delayTime就是120分钟
+   */
+  DelayTime?: number
+  /**
+   * 启动时间：该字段已废弃，无需填写
+   */
+  StartupTime?: number
+  /**
+   * 自依赖类型  1:有序串行 一次一个 排队  2: 无序串行 一次一个 不排队 3:并行 一次多个；暂不支持其他值
+   */
+  SelfDepend?: number
+  /**
+   * 生效开始时间，格式 yyyy-MM-dd HH:mm:ss
+   */
+  StartTime?: string
+  /**
+   * 生效结束时间，格式 yyyy-MM-dd HH:mm:ss
+   */
+  EndTime?: string
+  /**
+   * 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为 0,3,4。设置该值时，请把CycleStep字段设置为1（如果原始值不为1）。
+   */
+  TaskAction?: string
+  /**
+   * 周期类型  0:crontab类型, 1:分钟，2:小时，3:天，4:周，5:月，6:一次性，7:用户驱动，10:弹性周期 周,11:弹性周期 月,12:年,13:即时触发Instant类型，与正常周期调度任务逻辑隔离
+   */
+  CycleType?: number
+  /**
+   * 小时和分钟任务才有；分钟任务：5、10、15、20、30，表示每隔5【或其他值】分钟执行一次；小时任务：1、2、3、4、5、6、7、8、9、10、11、12，表示每隔1【或其他值】小时执行一次。该值大于1时，请把TaskAction字段设置为空字符串。
+   */
+  CycleStep?: number
+  /**
+   * cron表达式  周期类型为crontab调度才需要
+   */
+  CrontabExpression?: string
+  /**
+   * 执行时间左闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
+   */
+  ExecutionStartTime?: string
+  /**
+   * 执行时间右闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
+   */
+  ExecutionEndTime?: string
+  /**
+   * 任务名，该字段废弃，请勿使用该字段重命名任务
+   */
+  TaskName?: string
+  /**
+   * 失败重试间隔,单位分钟，创建任务的时候已经给了默认值
+   */
+  RetryWait?: number
+  /**
+   * 失败重试次数，创建任务的时候已经给了默认值
+   */
+  TryLimit?: number
+  /**
+   * 是否可重试，0代码不可重试，1代表可以重试；暂不支持其他值
+   */
+  Retriable?: number
+  /**
+   * 运行优先级，4高 5中 6低；暂不支持其他值
+   */
+  RunPriority?: number
+  /**
+   * 任务的扩展配置
+   */
+  TaskExt?: Array<TaskExtInfo>
+  /**
+   * 执行资源组Id，需要去资源管理服务上创建调度资源组，并且绑定cvm机器
+   */
+  ResourceGroup?: string
+  /**
+   * 资源池队列名称
+   */
+  YarnQueue?: string
+  /**
+   * 资源组下具体执行机，any 表示可以跑在任意一台。
+   */
+  BrokerIp?: string
+  /**
+   * 责任人，多个责任人请用分号隔开
+   */
+  InCharge?: string
+  /**
+   * 任务备注
+   */
+  Notes?: string
+  /**
+   * 任务参数
+   */
+  TaskParamInfos?: Array<ParamInfo>
+  /**
+   * 源数据源Id
+   */
+  SourceServer?: string
+  /**
+   * 目标数据源Id
+   */
+  TargetServer?: string
+  /**
+   * 是否支持工作流依赖 yes / no 默认 no
+   */
+  DependencyWorkflow?: string
+  /**
+   * 依赖配置,仅可修改上游任务实例配置方法
+   */
+  DependencyConfigDTOs?: Array<DependencyConfig>
+  /**
+   * 运行耗时超时时间分钟数
+   */
+  ExecutionTTL?: number
+  /**
+   * 脚本是否改变
+   */
+  ScriptChange?: boolean
+  /**
+   * 任务时区，仅支持整数时区配置
+   */
+  ScheduleTimeZone?: string
+  /**
+   * 0 正常调度 1 空跑调度；暂不支持其他值
+   */
+  ScheduleRunType?: number
+  /**
+   * 0 并发度达到上限时，本次排队等待 1 并发度达到上限时，本次不执行，直接kill；暂不支持其他值
+   */
+  ConcurrentStrategy?: number
+  /**
+   * shell任务发布事件
+   */
+  RegisterDsEventPublisherRequest?: RegisterDsEventPublisherReq
+  /**
+   * base64编码后脚本内容
+   */
+  Content?: string
 }
 
 /**
@@ -30245,6 +30623,20 @@ export interface WorkflowDsDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowType?: string
+}
+
+/**
+ * ModifyTaskInfoDs返回参数结构体
+ */
+export interface ModifyTaskInfoDsResponse {
+  /**
+   * 执行结果
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

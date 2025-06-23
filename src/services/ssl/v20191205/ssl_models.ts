@@ -124,6 +124,20 @@ export interface CompleteCertificateRequest {
 }
 
 /**
+ * UploadUpdateCertificateRecordRetry请求参数结构体
+ */
+export interface UploadUpdateCertificateRecordRetryRequest {
+  /**
+   * 待重试部署记录ID,通过UpdateCertificateInstance得到部署记录ID。 本参数不传的话，则DeployRecordDetailId必传
+   */
+  DeployRecordId?: number
+  /**
+   * 待重试部署记录详情ID,通过DescribeHostUpdateRecordDetail接口获得， 本参数不传的话， 则DeployRecordId必传
+   */
+  DeployRecordDetailId?: number
+}
+
+/**
  * DownloadCertificate返回参数结构体
  */
 export interface DownloadCertificateResponse {
@@ -801,6 +815,20 @@ export interface ManagerPreAuditDomain {
 }
 
 /**
+ * DescribeHostUploadUpdateRecordDetail返回参数结构体
+ */
+export interface DescribeHostUploadUpdateRecordDetailResponse {
+  /**
+   * 托管记录详情列表
+   */
+  DeployRecordDetail?: Array<DeployRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CDN实例详情
  */
 export interface CdnInstanceDetail {
@@ -820,6 +848,96 @@ export interface CdnInstanceDetail {
    * 域名计费状态，on表示开启，off表示关闭。
    */
   HttpsBillingSwitch?: string
+}
+
+/**
+ * 部署记录详情
+ */
+export interface DeployRecordItem {
+  /**
+   * 部署记录详情ID
+   */
+  Id?: number
+  /**
+   * 原绑定证书ID
+   */
+  OldCertId?: string
+  /**
+   * 部署实例ID
+   */
+  InstanceId?: string
+  /**
+   * 部署实例名称
+   */
+  InstanceName?: string
+  /**
+   * 部署监听器ID
+   */
+  ListenerId?: string
+  /**
+   * 部署域名列表
+   */
+  Domains?: Array<string>
+  /**
+   * 部署监听器协议
+   */
+  Protocol?: string
+  /**
+   * 部署状态
+   */
+  Status?: number
+  /**
+   * 部署错误信息
+   */
+  ErrorMsg?: string
+  /**
+   * 部署记录详情创建时间
+   */
+  CreateTime?: string
+  /**
+   * 部署记录详情最后一次更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 部署监听器名称
+   */
+  ListenerName?: string
+  /**
+   * 是否开启SNI
+   */
+  SniSwitch?: number
+  /**
+   * COS存储桶名称
+   */
+  Bucket?: string
+  /**
+   * 命名空间名称
+   */
+  Namespace?: string
+  /**
+   * secret名称
+   */
+  SecretName?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 部署的TCB地域
+   */
+  Region?: string
+  /**
+   * 负载均衡类型，0 传统型负载均衡； 1 应用型负载均衡
+   */
+  Forward?: number
+  /**
+   * 证书认证模式：UNIDIRECTIONAL单向认证，MUTUAL双向认证
+   */
+  SSLMode?: string
+  /**
+   * 部署资源类型
+   */
+  ResourceType?: string
 }
 
 /**
@@ -910,6 +1028,44 @@ export interface DescribeDeployedResourcesRequest {
    * 资源类型:clb,cdn,live,waf,antiddos,teo
    */
   ResourceType: string
+}
+
+/**
+ * UploadCertificate请求参数结构体
+ */
+export interface UploadCertificateRequest {
+  /**
+   * 证书内容。
+   */
+  CertificatePublicKey: string
+  /**
+   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+   */
+  CertificatePrivateKey?: string
+  /**
+   * 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。
+   */
+  CertificateType?: string
+  /**
+   * 备注名称。
+   */
+  Alias?: string
+  /**
+   * 项目 ID。
+   */
+  ProjectId?: number
+  /**
+   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
+   */
+  CertificateUse?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tags>
+  /**
+   * 相同的证书是否允许重复上传； true：允许上传相同指纹的证书；  false：不允许上传相同指纹的证书； 默认值：true
+   */
+  Repeatable?: boolean
 }
 
 /**
@@ -1346,6 +1502,36 @@ parse：自行生成CSR和私钥， 并通过上传CSR申请证书
    * 是否DV证书。默认false
    */
   IsDV?: boolean
+}
+
+/**
+ * 部署记录列表信息
+ */
+export interface UploadUpdateRecordInfo {
+  /**
+   * 记录ID
+   */
+  Id?: number
+  /**
+   * 原证书ID
+   */
+  OldCertId?: string
+  /**
+   * 部署资源类型列表
+   */
+  ResourceTypes?: Array<string>
+  /**
+   * 部署状态
+   */
+  Status?: number
+  /**
+   * 部署时间
+   */
+  CreateTime?: string
+  /**
+   * 最后一次更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -1907,6 +2093,16 @@ export interface DownloadCertificateRequest {
    * 证书 ID。
    */
   CertificateId: string
+}
+
+/**
+ * UploadUpdateCertificateRecordRollback请求参数结构体
+ */
+export interface UploadUpdateCertificateRecordRollbackRequest {
+  /**
+   * 更新证书待回滚的记录ID, 通过UpdateCertificateInstance获得
+   */
+  DeployRecordId: number
 }
 
 /**
@@ -3412,41 +3608,17 @@ export interface DescribeManagerDetailResponse {
 }
 
 /**
- * UploadCertificate请求参数结构体
+ * ModifyCertificateProject请求参数结构体
  */
-export interface UploadCertificateRequest {
+export interface ModifyCertificateProjectRequest {
   /**
-   * 证书内容。
+   * 需要修改所属项目的证书 ID 集合，最多100个证书。
    */
-  CertificatePublicKey: string
-  /**
-   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
-   */
-  CertificatePrivateKey?: string
-  /**
-   * 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。
-   */
-  CertificateType?: string
-  /**
-   * 备注名称。
-   */
-  Alias?: string
+  CertificateIdList: Array<string>
   /**
    * 项目 ID。
    */
-  ProjectId?: number
-  /**
-   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
-   */
-  CertificateUse?: string
-  /**
-   * 标签列表
-   */
-  Tags?: Array<Tags>
-  /**
-   * 相同的证书是否允许重复上传； true：允许上传相同指纹的证书；  false：不允许上传相同指纹的证书； 默认值：true
-   */
-  Repeatable?: boolean
+  ProjectId: number
 }
 
 /**
@@ -4059,17 +4231,41 @@ export interface DeployedResources {
 }
 
 /**
- * ModifyCertificateProject请求参数结构体
+ * 托管记录
  */
-export interface ModifyCertificateProjectRequest {
+export interface DeployRecord {
   /**
-   * 需要修改所属项目的证书 ID 集合，最多100个证书。
+   * 总数
    */
-  CertificateIdList: Array<string>
+  TotalCount?: number
   /**
-   * 项目 ID。
+   * 成功总数
    */
-  ProjectId: number
+  SuccessTotalCount?: number
+  /**
+   * 失败总数
+   */
+  FailedTotalCount?: number
+  /**
+   * 部署中总数
+   */
+  RunningTotalCount?: number
+  /**
+   * 部署记录类型 0 为部署， 1 为回滚
+   */
+  Type?: number
+  /**
+   * 部署记录详情列表
+   */
+  RecordDetailList?: Array<DeployRecordList>
+  /**
+   * 托管资源部署状态：0 等待部署， 1 部署成功， 2 部署失败 3 部署中， 4 回滚成功， 5 回滚失败
+   */
+  Status?: number
+  /**
+   * 托管资源创建时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -4108,17 +4304,23 @@ export interface DescribePackagesRequest {
 }
 
 /**
- * DeleteCertificates请求参数结构体
+ * UploadUpdateCertificateRecordRetry返回参数结构体
  */
-export interface DeleteCertificatesRequest {
+export interface UploadUpdateCertificateRecordRetryResponse {
   /**
-   * 要删除的证书ID。单次最多100个
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CertificateIds: Array<string>
+  RequestId?: string
+}
+
+/**
+ * DescribeCertificate请求参数结构体
+ */
+export interface DescribeCertificateRequest {
   /**
-   * 删除时是否检查证书关联了云资源。默认不检查。如需要检查关联云资源 (需授权服务角色SSL_QCSLinkedRoleInReplaceLoadCertificate)，完成授权后且该参数传true，删除将变成异步任务，接口会返回异步任务ID。需搭配 DescribeDeleteCertificatesTaskResult接口使用，查询删除任务是否成功。
+   * 证书 ID。
    */
-  IsSync?: boolean
+  CertificateId: string
 }
 
 /**
@@ -4211,6 +4413,24 @@ export interface RevokeDomainValidateAuths {
    * DV 认证域名。
    */
   DomainValidateAuthDomain?: string
+}
+
+/**
+ * DescribeHostUploadUpdateRecordDetail请求参数结构体
+ */
+export interface DescribeHostUploadUpdateRecordDetailRequest {
+  /**
+   * 托管记录ID
+   */
+  DeployRecordId: number
+  /**
+   * 每页数量，默认为10，最大为200， 超过200则为200
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
 }
 
 /**
@@ -4307,6 +4527,25 @@ export interface DescribeHostClbInstanceListRequest {
    * 原证书ID
    */
   OldCertificateId?: string
+}
+
+/**
+ * 托管记录详情信息
+ */
+export interface DeployRecordList {
+  /**
+   * 部署资源类型
+   */
+  ResourceType?: string
+  /**
+   * 部署资源详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<DeployRecordItem>
+  /**
+   * 该部署资源总数
+   */
+  TotalCount?: number
 }
 
 /**
@@ -5048,13 +5287,17 @@ export interface UpdateCertificateInstanceResponse {
 }
 
 /**
- * DescribeCertificate请求参数结构体
+ * DeleteCertificates请求参数结构体
  */
-export interface DescribeCertificateRequest {
+export interface DeleteCertificatesRequest {
   /**
-   * 证书 ID。
+   * 要删除的证书ID。单次最多100个
    */
-  CertificateId: string
+  CertificateIds: Array<string>
+  /**
+   * 删除时是否检查证书关联了云资源。默认不检查。如需要检查关联云资源 (需授权服务角色SSL_QCSLinkedRoleInReplaceLoadCertificate)，完成授权后且该参数传true，删除将变成异步任务，接口会返回异步任务ID。需搭配 DescribeDeleteCertificatesTaskResult接口使用，查询删除任务是否成功。
+   */
+  IsSync?: boolean
 }
 
 /**
@@ -5194,6 +5437,24 @@ FILE：手动添加域名文件验证。 需要用户手动在域名站点根目
    * 证书绑定的其他域名，待开放。目前不支持此参数
    */
   DnsNames?: Array<string>
+}
+
+/**
+ * DescribeHostUploadUpdateRecord请求参数结构体
+ */
+export interface DescribeHostUploadUpdateRecordRequest {
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+  /**
+   * 原证书ID
+   */
+  OldCertificateId?: string
 }
 
 /**
@@ -5619,6 +5880,57 @@ export interface DescribeCertificateBindResourceTaskResultResponse {
    * 异步任务绑定关联云资源结果列表
    */
   SyncTaskBindResourceResult?: Array<SyncTaskBindResourceResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeManagers请求参数结构体
+ */
+export interface DescribeManagersRequest {
+  /**
+   * 公司ID,可以从DescribeCompanies接口获取
+   */
+  CompanyId: number
+  /**
+   * 分页偏移量，如果不传默认值为0
+   */
+  Offset?: number
+  /**
+   * 分页每页数量，如果不传默认值为10，最大值为1000
+   */
+  Limit?: number
+  /**
+   * 管理人姓名（将废弃），请使用SearchKey
+   */
+  ManagerName?: string
+  /**
+   * 模糊查询管理人邮箱（将废弃），请使用SearchKey
+   */
+  ManagerMail?: string
+  /**
+   * 根据管理人状态进行筛选，取值有
+'none' 未提交审核
+'audit', 亚信审核中
+'CAaudit' CA审核中
+'ok' 已审核
+'invalid'  审核失败
+'expiring'  即将过期
+'expired' 已过期
+   */
+  Status?: string
+  /**
+   * 根据这样的格式:管理人姓|管理人名|邮箱|部门 ,进行精准匹配
+   */
+  SearchKey?: string
+}
+
+/**
+ * UploadUpdateCertificateRecordRollback返回参数结构体
+ */
+export interface UploadUpdateCertificateRecordRollbackResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6181,44 +6493,21 @@ export interface DescribePackagesResponse {
 }
 
 /**
- * DescribeManagers请求参数结构体
+ * DescribeHostUploadUpdateRecord返回参数结构体
  */
-export interface DescribeManagersRequest {
+export interface DescribeHostUploadUpdateRecordResponse {
   /**
-   * 公司ID,可以从DescribeCompanies接口获取
+   * 总数
    */
-  CompanyId: number
+  TotalCount?: number
   /**
-   * 分页偏移量，如果不传默认值为0
+   * 证书部署记录列表
    */
-  Offset?: number
+  DeployRecordList?: Array<UploadUpdateRecordInfo>
   /**
-   * 分页每页数量，如果不传默认值为10，最大值为1000
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 管理人姓名（将废弃），请使用SearchKey
-   */
-  ManagerName?: string
-  /**
-   * 模糊查询管理人邮箱（将废弃），请使用SearchKey
-   */
-  ManagerMail?: string
-  /**
-   * 根据管理人状态进行筛选，取值有
-'none' 未提交审核
-'audit', 亚信审核中
-'CAaudit' CA审核中
-'ok' 已审核
-'invalid'  审核失败
-'expiring'  即将过期
-'expired' 已过期
-   */
-  Status?: string
-  /**
-   * 根据这样的格式:管理人姓|管理人名|邮箱|部门 ,进行精准匹配
-   */
-  SearchKey?: string
+  RequestId?: string
 }
 
 /**

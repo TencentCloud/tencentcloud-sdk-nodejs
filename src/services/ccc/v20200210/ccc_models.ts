@@ -44,6 +44,24 @@ export interface CreateCCCSkillGroupResponse {
 }
 
 /**
+ * ModifyStaffPassword请求参数结构体
+ */
+export interface ModifyStaffPasswordRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 座席邮箱
+   */
+  Email: string
+  /**
+   * 设置的密码
+   */
+  Password: string
+}
+
+/**
  * StopAutoCalloutTask请求参数结构体
  */
 export interface StopAutoCalloutTaskRequest {
@@ -703,8 +721,7 @@ export interface StaffInfo {
    */
   StaffNumber?: string
   /**
-   * 用户角色id
-一个用户绑定了多个角色时以RoleIdList为准
+   * 用户角色 ID，一个用户绑定了多个角色时以RoleIdList为准
    * @deprecated
    */
   RoleId?: number
@@ -729,6 +746,10 @@ export interface StaffInfo {
    * 座席分机号（1 到 8 打头，4 - 6 位）
    */
   ExtensionNumber?: string
+  /**
+   * 呼叫转移配置
+   */
+  ForwardingConfig?: ForwardingConfig
 }
 
 /**
@@ -2560,21 +2581,21 @@ export interface TimeRange {
 }
 
 /**
- * ModifyStaffPassword请求参数结构体
+ * 呼转配置
  */
-export interface ModifyStaffPasswordRequest {
+export interface ForwardingConfig {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * 是否启用
    */
-  SdkAppId: number
+  Enabled?: boolean
   /**
-   * 座席邮箱
+   * 1 无条件呼转 2 有条件呼转
    */
-  Email: string
+  Condition?: number
   /**
-   * 设置的密码
+   * 呼转目标
    */
-  Password: string
+  Target?: ForwardingTarget
 }
 
 /**
@@ -3334,6 +3355,28 @@ export interface ResetExtensionPasswordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 呼转目标
+ */
+export interface ForwardingTarget {
+  /**
+   * 呼转目标类型 1 座席 2 技能组 3 分机
+   */
+  Type?: number
+  /**
+   * 呼转目标为座席的账号 Type 为 1 时填写
+   */
+  StaffUserId?: string
+  /**
+   * 呼转目标为技能组的 ID，Type 为 2 时填写
+   */
+  SkillGroupId?: number
+  /**
+   * 呼转目标为分机的账号，Type 为 3 时填写
+   */
+  Extension?: string
 }
 
 /**

@@ -123,6 +123,7 @@ import {
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
   DescribeFreeCloudStorageNumRequest,
+  InvokeVideosKeywordsAnalyzerResponse,
   DescribeDevicePositionListRequest,
   InvokeExternalSourceAIServiceTaskResponse,
   CreateStudioProductRequest,
@@ -270,7 +271,7 @@ import {
   DescribeCloudStorageAIServiceTasksRequest,
   ListFirmwaresRequest,
   PublishMessageRequest,
-  PositionFenceItem,
+  ModifySpacePropertyRequest,
   VideoLicenseEntity,
   GetCOSURLResponse,
   GetTopicRuleListResponse,
@@ -327,7 +328,7 @@ import {
   CloudStorageAIServiceTaskFileInfo,
   DescribeTWeSeeConfigResponse,
   ModifyPositionFenceRequest,
-  ModifySpacePropertyRequest,
+  PositionFenceItem,
   DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
   TransferCloudStorageResponse,
@@ -355,6 +356,7 @@ import {
   CloudStorageAIServiceTask,
   ListTopicPolicyRequest,
   DeleteLoRaFrequencyRequest,
+  InvokeVideosKeywordsAnalyzerRequest,
   InvokeExternalSourceAIServiceTaskRequest,
   DescribeProductCloudStorageAIServiceRequest,
   DeleteLoRaGatewayRequest,
@@ -682,7 +684,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新围栏绑定信息
+   * 更新围栏绑定信息。
    */
   async ModifyFenceBind(
     req: ModifyFenceBindRequest,
@@ -732,7 +734,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除位置空间
+   * 删除位置空间。
    */
   async DeletePositionSpace(
     req: DeletePositionSpaceRequest,
@@ -782,7 +784,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取围栏告警事件列表
+   * 获取围栏告警事件列表。
    */
   async DescribeFenceEventList(
     req: DescribeFenceEventListRequest,
@@ -832,7 +834,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取围栏绑定信息列表
+   * 获取围栏绑定信息列表。
    */
   async DescribeFenceBindList(
     req: DescribeFenceBindListRequest,
@@ -1032,7 +1034,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除围栏绑定信息
+   * 删除围栏绑定信息。
    */
   async DeleteFenceBind(
     req: DeleteFenceBindRequest,
@@ -1102,7 +1104,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新位置空间
+   * 更新位置空间。
    */
   async ModifyPositionSpace(
     req: ModifyPositionSpaceRequest,
@@ -1294,7 +1296,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建围栏
+   * 创建围栏。
    */
   async CreatePositionFence(
     req: CreatePositionFenceRequest,
@@ -1496,7 +1498,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取位置空间中围栏告警事件列表
+   * 获取位置空间中围栏告警事件列表。
    */
   async DescribeSpaceFenceEventList(
     req: DescribeSpaceFenceEventListRequest,
@@ -1796,7 +1798,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新围栏
+   * 更新围栏。
    */
   async ModifyPositionFence(
     req?: ModifyPositionFenceRequest,
@@ -1936,6 +1938,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取某个时间段的视频内容关键字
+   */
+  async InvokeVideosKeywordsAnalyzer(
+    req: InvokeVideosKeywordsAnalyzerRequest,
+    cb?: (error: string, rep: InvokeVideosKeywordsAnalyzerResponse) => void
+  ): Promise<InvokeVideosKeywordsAnalyzerResponse> {
+    return this.request("InvokeVideosKeywordsAnalyzer", req, cb)
+  }
+
+  /**
    * 公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效
    */
   async DescribeInstance(
@@ -1976,7 +1988,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除围栏
+   * 删除围栏。
    */
   async DeletePositionFence(
     req: DeletePositionFenceRequest,
@@ -2106,7 +2118,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建围栏绑定信息
+   * > 创建围栏绑定信息。
    */
   async CreateFenceBind(
     req: CreateFenceBindRequest,

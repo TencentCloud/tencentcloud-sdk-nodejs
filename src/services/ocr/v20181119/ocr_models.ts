@@ -4470,6 +4470,16 @@ export interface SingleInvoiceItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SaleInventory?: SaleInventory
+  /**
+   * 机动车销售统一发票（电子）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MotorVehicleSaleInvoiceElectronic?: MotorVehicleSaleInvoice
+  /**
+   * 二手车销售统一发票（电子）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedCarPurchaseInvoiceElectronic?: UsedCarPurchaseInvoice
 }
 
 /**

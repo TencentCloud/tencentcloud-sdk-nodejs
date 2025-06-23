@@ -2067,6 +2067,10 @@ export interface InstanceAttributesResponse {
    * 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭
    */
   UncleanLeaderElectionEnable?: number
+  /**
+   * 实例删除保护开关: 1 开启 0 关闭
+   */
+  DeleteProtectionEnable?: number
 }
 
 /**
@@ -3733,6 +3737,10 @@ export interface ModifyInstanceAttributesRequest {
    * 集群topic默认 unclean.leader.election.enable配置: 1 开启  0 关闭
    */
   UncleanLeaderElectionEnable?: number
+  /**
+   * 实例删除保护开关: 1 开启  0 关闭
+   */
+  DeleteProtectionEnable?: number
 }
 
 /**

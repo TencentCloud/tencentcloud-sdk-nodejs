@@ -50,6 +50,7 @@ import {
   TaskInnerInfo,
   GetCosTokenResponse,
   CreateDsFolderResponse,
+  DescribeManualTriggerRecordPageRequest,
   UserFileInfo,
   FreezeOpsTasksRequest,
   InstanceOpsInfoPage,
@@ -109,6 +110,7 @@ import {
   DescribeRuleExecResultsRequest,
   InstanceDownloadLogInfo,
   EventCaseDTO,
+  ManualTriggerRecordOpsDtoPage,
   TableScoreStatisticsInfo,
   InstanceOpsDto,
   DescribeDutyScheduleDetailsRequest,
@@ -627,6 +629,7 @@ import {
   DescribeAlarmEventsRequest,
   CompareResult,
   CheckAlarmRegularNameExistResponse,
+  DescribeManualTriggerRecordPageResponse,
   UploadResourceRequestInfo,
   DeleteProjectParamDsRequest,
   Content,
@@ -698,6 +701,7 @@ import {
   DeleteIntegrationTaskRequest,
   SubmitSqlTaskRequest,
   CompareResultItem,
+  RegisterDsEventPublisherReq,
   DependencyConfigDsDTO,
   CreateIntegrationNodeRequest,
   CreateCodeTemplateVersionRequest,
@@ -759,6 +763,7 @@ import {
   ModifyTaskLinksDsResponse,
   SchemaDetail,
   DescribeRuleRequest,
+  ModifyTaskInfoDsRequest,
   BatchOpsDTO,
   TaskExtDsVO,
   GetBatchDetailErrorLogResponse,
@@ -893,6 +898,7 @@ import {
   DescribeWorkflowExecuteByIdRequest,
   DescribeExecutorGroupMetricResponse,
   WorkflowDsDTO,
+  ModifyTaskInfoDsResponse,
   DescribeTableLineageResponse,
   DescribeRuleExecLogRequest,
   BatchRerunIntegrationTaskInstancesResponse,
@@ -3249,6 +3255,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 更新任务Ds
+   */
+  async ModifyTaskInfoDs(
+    req: ModifyTaskInfoDsRequest,
+    cb?: (error: string, rep: ModifyTaskInfoDsResponse) => void
+  ): Promise<ModifyTaskInfoDsResponse> {
+    return this.request("ModifyTaskInfoDs", req, cb)
+  }
+
+  /**
    * 统计任务实例状态
    */
   async CountOpsInstanceState(
@@ -3590,6 +3606,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: CreateDataModelResponse) => void
   ): Promise<CreateDataModelResponse> {
     return this.request("CreateDataModel", req, cb)
+  }
+
+  /**
+   * 查询手动任务触发记录
+   */
+  async DescribeManualTriggerRecordPage(
+    req: DescribeManualTriggerRecordPageRequest,
+    cb?: (error: string, rep: DescribeManualTriggerRecordPageResponse) => void
+  ): Promise<DescribeManualTriggerRecordPageResponse> {
+    return this.request("DescribeManualTriggerRecordPage", req, cb)
   }
 
   /**

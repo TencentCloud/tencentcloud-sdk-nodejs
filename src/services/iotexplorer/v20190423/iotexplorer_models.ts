@@ -547,11 +547,11 @@ export interface DescribeSpaceFenceEventListResponse {
    * 围栏告警事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<FenceEventItem>
+  List?: Array<FenceEventItem>
   /**
    * 围栏告警事件总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2147,6 +2147,20 @@ export interface BindProductInfo {
 export type DescribeFreeCloudStorageNumRequest = null
 
 /**
+ * InvokeVideosKeywordsAnalyzer返回参数结构体
+ */
+export interface InvokeVideosKeywordsAnalyzerResponse {
+  /**
+   * 基于搜索结果的总结
+   */
+  Keywords?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDevicePositionList请求参数结构体
  */
 export interface DescribeDevicePositionListRequest {
@@ -2637,11 +2651,11 @@ export interface DescribeFenceBindListResponse {
   /**
    * 围栏绑定的产品设备列表
    */
-  List: Array<FenceBindProductItem>
+  List?: Array<FenceBindProductItem>
   /**
    * 围栏绑定的设备总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3888,6 +3902,10 @@ export interface DescribeCloudStorageAIServiceResponse {
    */
   ROI?: string
   /**
+   * 云存 AI 套餐 ID
+   */
+  PackageId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3917,6 +3935,36 @@ export interface InvokeAISearchServiceRequest {
    * 通道ID
    */
   ChannelId?: number
+  /**
+   * 是否需要返回总结，默认为False；  开启后会加大接口响应时长
+   */
+  EnableSummary?: boolean
+  /**
+   * 开始时间。
+
+注：
+1. 单位为毫秒（ms）
+2. 如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后7天内的数据， 反之EndTimeMs也一样）
+3. 只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为"过去三天关于猫咪的视频"， 则会将"过去三天忽略"）
+   */
+  StartTimeMs?: number
+  /**
+   * 结束时间。
+
+注：
+1. 单位为毫秒（ms）
+2. 如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后7天内的数据， 反之EndTimeMs也一样）
+3. 只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为"过去三天关于猫咪的视频"， 则会将"过去三天忽略"）
+   */
+  EndTimeMs?: number
+  /**
+   * 时区。默认值：Asia/Shanghai
+
+注：
+符合iana标准 https://www.iana.org/time-zones，例如Asia/Shanghai、Asia/Bangkok
+
+   */
+  TimeZone?: string
 }
 
 /**
@@ -4839,11 +4887,11 @@ export interface DescribeFenceEventListResponse {
   /**
    * 围栏告警事件列表
    */
-  List: Array<FenceEventItem>
+  List?: Array<FenceEventItem>
   /**
    * 围栏告警事件总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5190,29 +5238,21 @@ export interface PublishMessageRequest {
 }
 
 /**
- * 围栏信息
+ * ModifySpaceProperty请求参数结构体
  */
-export interface PositionFenceItem {
-  /**
-   * 围栏Id
-   */
-  FenceId?: number
+export interface ModifySpacePropertyRequest {
   /**
    * 位置空间Id
    */
-  SpaceId?: string
+  SpaceId: string
   /**
-   * 围栏名称
+   * 产品Id
    */
-  FenceName?: string
+  ProductId: string
   /**
-   * 围栏描述
+   * 产品属性
    */
-  FenceDesc?: string
-  /**
-   * 围栏区域信息，采用 GeoJSON 格式
-   */
-  FenceArea?: string
+  Data: string
 }
 
 /**
@@ -6398,21 +6438,29 @@ export interface DescribeTWeSeeConfigResponse {
 export type ModifyPositionFenceRequest = null
 
 /**
- * ModifySpaceProperty请求参数结构体
+ * 围栏信息
  */
-export interface ModifySpacePropertyRequest {
+export interface PositionFenceItem {
+  /**
+   * 围栏Id
+   */
+  FenceId?: number
   /**
    * 位置空间Id
    */
-  SpaceId: string
+  SpaceId?: string
   /**
-   * 产品Id
+   * 围栏名称
    */
-  ProductId: string
+  FenceName?: string
   /**
-   * 产品属性
+   * 围栏描述
    */
-  Data: string
+  FenceDesc?: string
+  /**
+   * 围栏区域信息，采用 GeoJSON 格式
+   */
+  FenceArea?: string
 }
 
 /**
@@ -6748,11 +6796,11 @@ export interface DescribeDevicePositionListResponse {
   /**
    * 产品设备位置信息列表
    */
-  Positions: Array<ProductDevicesPositionItem>
+  Positions?: Array<ProductDevicesPositionItem>
   /**
    * 产品设备位置信息的数目
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6996,6 +7044,40 @@ export interface DeleteLoRaFrequencyRequest {
    * 频点唯一ID
    */
   FreqId?: string
+}
+
+/**
+ * InvokeVideosKeywordsAnalyzer请求参数结构体
+ */
+export interface InvokeVideosKeywordsAnalyzerRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 开始时间。
+
+注：
+1. 单位为毫秒（ms）
+2. 时间区间必须控制在某一个自然天内，不支持跨天
+   */
+  StartTimeMs: number
+  /**
+   * 结束时间。
+
+注：
+1. 单位为毫秒（ms）
+2. 时间区间必须控制在某一个自然天内，不支持跨天
+   */
+  EndTimeMs: number
+  /**
+   * 返回的关键字最大数量，默认为5；最大不能超过10
+   */
+  KeywordsMaxNum?: number
 }
 
 /**

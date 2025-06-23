@@ -2915,6 +2915,22 @@ export interface CosBackup {
    * 自动备份执行时间（精确到小时）, e.g. "22:00"
    */
   BackupTime: string
+  /**
+   * 0 腾讯云仓库; 1 客户仓库
+   */
+  EsRepositoryType?: number
+  /**
+   * 客户快照仓库名称
+   */
+  UserEsRepository?: string
+  /**
+   * 快照存储周期 单位天
+   */
+  StorageDuration?: number
+  /**
+   * 自动备份频率单位小时
+   */
+  AutoBackupInterval?: number
 }
 
 /**
@@ -4233,6 +4249,11 @@ export interface Snapshots {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uuid?: string
+  /**
+   * 仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Repository?: string
   /**
    * 该快照所属集群的版本号
 注意：此字段可能返回 null，表示取不到有效值。

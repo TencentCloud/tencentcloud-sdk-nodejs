@@ -2555,11 +2555,11 @@ export interface MixLayoutParams {
    */
   BackgroundImageUrl?: string
   /**
-   * 设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+   * 设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行音视频时可显示对应的占位图。
    */
   PlaceHolderMode?: number
   /**
-   * 背景画面宽高比不一致的时候处理方案，与MixLayoufList定义的RenderMode一致。
+   * 背景画面宽高比不一致的时候处理方案，与MixLayoutList定义的RenderMode一致。
    */
   BackgroundImageRenderMode?: number
   /**
@@ -2571,7 +2571,7 @@ export interface MixLayoutParams {
    */
   WaterMarkList?: Array<WaterMark>
   /**
-   * 模板布局下，背景画面宽高比不一致的时候处理方案。自定义布局不生效，与MixLayoufList定义的RenderMode一致。
+   * 模板布局下，背景画面宽高比不一致的时候处理方案。自定义布局不生效，与MixLayoutList定义的RenderMode一致。
    */
   RenderMode?: number
   /**

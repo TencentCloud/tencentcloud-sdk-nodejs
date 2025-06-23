@@ -1508,6 +1508,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageAIServiceTask", async function () 
     }
 })
 
+it("iotexplorer.v20190423.InvokeVideosKeywordsAnalyzer", async function () {
+    try {
+       const data = await client.InvokeVideosKeywordsAnalyzer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeInstance", async function () {
     try {
        const data = await client.DescribeInstance({})

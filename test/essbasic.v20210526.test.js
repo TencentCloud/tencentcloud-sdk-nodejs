@@ -588,6 +588,16 @@ it("essbasic.v20210526.CreateChannelSubOrganizationActive", async function () {
     }
 })
 
+it("essbasic.v20210526.ModifyPartnerAutoSignAuthUrl", async function () {
+    try {
+       const data = await client.ModifyPartnerAutoSignAuthUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.DescribeTemplates", async function () {
     try {
        const data = await client.DescribeTemplates({})

@@ -48,16 +48,6 @@ it("lkeap.v20240522.GetReconstructDocumentResult", async function () {
     }
 })
 
-it("lkeap.v20240522.RetrieveKnowledgeRealtime", async function () {
-    try {
-       const data = await client.RetrieveKnowledgeRealtime({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lkeap.v20240522.GetSplitDocumentResult", async function () {
     try {
        const data = await client.GetSplitDocumentResult({})

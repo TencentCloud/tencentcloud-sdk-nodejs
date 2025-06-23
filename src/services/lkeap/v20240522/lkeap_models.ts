@@ -827,24 +827,6 @@ export interface ChatUsage {
 }
 
 /**
- * RetrieveKnowledgeRealtime返回参数结构体
- */
-export interface RetrieveKnowledgeRealtimeResponse {
-  /**
-   * 检索结果
-   */
-  Records?: Array<RetrievalRecord>
-  /**
-   * 检索结果数量
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * GetSplitDocumentResult请求参数结构体
  */
 export interface GetSplitDocumentResultRequest {
@@ -1170,35 +1152,6 @@ export interface ReconstructDocumentFailedPage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
-}
-
-/**
- * RetrieveKnowledgeRealtime请求参数结构体
- */
-export interface RetrieveKnowledgeRealtimeRequest {
-  /**
-   * 知识库ID。
-   */
-  KnowledgeBaseId: string
-  /**
-   * 用于检索的文本。
-   */
-  Query: string
-  /**
-   * 实时文件ID列表。
-   */
-  DocIds?: Array<string>
-  /**
-   * 检索方法，默认使用`HYBRID`混合检索。
-- `SEMANTIC`：语义检索
-- `FULL_TEXT`：全文检索
-- `HYBRID`：混合检索
-   */
-  RetrievalMethod?: string
-  /**
-   * 检索设置。
-   */
-  RetrievalSetting?: RetrievalSetting
 }
 
 /**
