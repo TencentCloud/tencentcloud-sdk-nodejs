@@ -2776,7 +2776,7 @@ export interface DescribeIntegrationEmployeesRequest {
   /**
    * 指定分页每页返回的数据条数，单页最大支持 20。
    */
-  Limit: number
+  Limit?: number
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。

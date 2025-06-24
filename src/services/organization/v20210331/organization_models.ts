@@ -3157,6 +3157,10 @@ export interface UserInfo {
    * 是否选中
    */
   IsSelected?: boolean
+  /**
+   * 用户密码
+   */
+  Password?: string
 }
 
 /**

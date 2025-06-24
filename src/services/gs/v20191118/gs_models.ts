@@ -2188,6 +2188,10 @@ export interface DescribeAndroidInstanceImagesRequest {
    */
   AndroidInstanceImageIds?: Array<string>
   /**
+   * 镜像可用区列表
+   */
+  AndroidInstanceImageZones?: Array<string>
+  /**
    * 偏移量，默认为0
    */
   Offset?: number

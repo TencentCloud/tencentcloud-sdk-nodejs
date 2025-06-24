@@ -356,6 +356,10 @@ export interface DescribeAssetViewVulRiskListResponse {
  */
 export interface DescribeRepositoryImageAssetsRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * filter过滤条件
    */
   Filter?: Filter
@@ -1962,6 +1966,10 @@ export interface RiskRuleItem {
  * DescribeRiskCenterCFGViewCFGRiskList请求参数结构体
  */
 export interface DescribeRiskCenterCFGViewCFGRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤内容
    */
@@ -6331,7 +6339,6 @@ export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
 export interface DescribeRiskRuleDetailResponse {
   /**
    * 风险规则ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskRuleId?: string
   /**
@@ -7146,7 +7153,6 @@ export interface ScanTaskInfoList {
 export interface DescribeExposePathResponse {
   /**
    * 暴露路径节点内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
   /**
@@ -7864,6 +7870,10 @@ export interface Filters {
  * DescribeOtherCloudAssets请求参数结构体
  */
 export interface DescribeOtherCloudAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * -
    */

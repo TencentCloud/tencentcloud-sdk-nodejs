@@ -359,6 +359,10 @@ export interface ChangePwdTaskInfo {
    * 下次执行时间
    */
   NextTime?: string
+  /**
+   * 上次执行时间
+   */
+  LastTime?: string
 }
 
 /**

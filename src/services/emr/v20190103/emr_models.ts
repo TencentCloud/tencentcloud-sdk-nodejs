@@ -62,18 +62,21 @@ export interface AddNodeResourceConfigRequest {
 }
 
 /**
- * 定时伸缩每月重复任务策略
+ * DescribeSparkApplications返回参数结构体
  */
-export interface MonthRepeatStrategy {
+export interface DescribeSparkApplicationsResponse {
   /**
-   * 重复任务执行的具体时刻，例如"01:02:00"
+   * 返回数量
    */
-  ExecuteAtTimeOfDay: string
+  TotalCount?: number
   /**
-   * 每月中的天数时间段描述，长度只能为2，例如[2,10]表示每月2-10号。
-注意：此字段可能返回 null，表示取不到有效值。
+   * spark应用列表
    */
-  DaysOfMonthRange: Array<number | bigint>
+  ResultList?: Array<SparkApplicationsList>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2546,17 +2549,63 @@ export interface NodeDetailPriceResult {
 }
 
 /**
- * 容器集群用户组信息
+ * 询价资源
  */
-export interface UserAndGroup {
+export interface PriceResource {
   /**
-   * 用户名
+   * 需要的规格
    */
-  UserName: string
+  Spec?: string
   /**
-   * 用户组
+   * 硬盘类型
    */
-  UserGroup: string
+  StorageType?: number
+  /**
+   * 硬盘类型
+   */
+  DiskType?: string
+  /**
+   * 系统盘大小
+   */
+  RootSize?: number
+  /**
+   * 内存大小
+   */
+  MemSize?: number
+  /**
+   * 核心数量
+   */
+  Cpu?: number
+  /**
+   * 硬盘大小
+   */
+  DiskSize?: number
+  /**
+   * 云盘列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MultiDisks?: Array<MultiDisk>
+  /**
+   * 磁盘数量
+   */
+  DiskCnt?: number
+  /**
+   * 规格
+   */
+  InstanceType?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 磁盘数量
+   */
+  DiskNum?: number
+  /**
+   * 本地盘的数量
+   */
+  LocalDiskNum?: number
 }
 
 /**
@@ -3916,6 +3965,32 @@ export interface HealthStatus {
    * 运行正常
    */
   Desc: string
+}
+
+/**
+ * DescribeSparkApplications请求参数结构体
+ */
+export interface DescribeSparkApplicationsRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 查询开始时间
+   */
+  StartTime: number
+  /**
+   * 查询结束时间
+   */
+  EndTime: number
+  /**
+   * 每一页条数
+   */
+  PageSize: number
+  /**
+   * 第几页
+   */
+  Page: number
 }
 
 /**
@@ -5379,34 +5454,53 @@ export interface ModifyResourceSchedulerRequest {
 }
 
 /**
- * 表格schema信息
+ * spark任务列表
  */
-export interface TableSchemaItem {
+export interface SparkApplicationsList {
   /**
-   * 列标识
+   * 应用id
+   */
+  ID?: string
+  /**
+   * 应用名称
    */
   Name?: string
   /**
-   * 是否可按该列排序
+   * 用户
    */
-  Sortable?: boolean
+  User?: string
   /**
-   * 是否可筛选
+   * 起始时间
    */
-  WithFilter?: boolean
+  StartTime?: number
   /**
-   * 筛选的候选集
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结束时间
    */
-  Candidates?: Array<string>
+  EndTime?: number
   /**
-   * 是否可点击
+   * 持续时间
    */
-  Clickable?: boolean
+  Duration?: number
   /**
-   * 展示的名字
+   * 状态
    */
-  Title?: string
+  State?: string
+  /**
+   * 类型
+   */
+  ApplicationType?: string
+  /**
+   * 核数*秒
+   */
+  CoreSeconds?: number
+  /**
+   * 内存MB*秒
+   */
+  MemorySeconds?: string
+  /**
+   * 洞察结果
+   */
+  Insight?: string
 }
 
 /**
@@ -5468,63 +5562,18 @@ export interface DescribeKyuubiQueryInfoRequest {
 }
 
 /**
- * 询价资源
+ * 定时伸缩每月重复任务策略
  */
-export interface PriceResource {
+export interface MonthRepeatStrategy {
   /**
-   * 需要的规格
+   * 重复任务执行的具体时刻，例如"01:02:00"
    */
-  Spec?: string
+  ExecuteAtTimeOfDay: string
   /**
-   * 硬盘类型
-   */
-  StorageType?: number
-  /**
-   * 硬盘类型
-   */
-  DiskType?: string
-  /**
-   * 系统盘大小
-   */
-  RootSize?: number
-  /**
-   * 内存大小
-   */
-  MemSize?: number
-  /**
-   * 核心数量
-   */
-  Cpu?: number
-  /**
-   * 硬盘大小
-   */
-  DiskSize?: number
-  /**
-   * 云盘列表
+   * 每月中的天数时间段描述，长度只能为2，例如[2,10]表示每月2-10号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MultiDisks?: Array<MultiDisk>
-  /**
-   * 磁盘数量
-   */
-  DiskCnt?: number
-  /**
-   * 规格
-   */
-  InstanceType?: string
-  /**
-   * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 磁盘数量
-   */
-  DiskNum?: number
-  /**
-   * 本地盘的数量
-   */
-  LocalDiskNum?: number
+  DaysOfMonthRange: Array<number | bigint>
 }
 
 /**
@@ -7175,6 +7224,37 @@ export interface QuotaEntity {
    * 可用区
    */
   Zone?: string
+}
+
+/**
+ * 表格schema信息
+ */
+export interface TableSchemaItem {
+  /**
+   * 列标识
+   */
+  Name?: string
+  /**
+   * 是否可按该列排序
+   */
+  Sortable?: boolean
+  /**
+   * 是否可筛选
+   */
+  WithFilter?: boolean
+  /**
+   * 筛选的候选集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Candidates?: Array<string>
+  /**
+   * 是否可点击
+   */
+  Clickable?: boolean
+  /**
+   * 展示的名字
+   */
+  Title?: string
 }
 
 /**
@@ -9755,6 +9835,20 @@ export interface DescribeTrinoQueryInfoRequest {
    * 分页查询时的页号，从1开始
    */
   Page: number
+}
+
+/**
+ * 容器集群用户组信息
+ */
+export interface UserAndGroup {
+  /**
+   * 用户名
+   */
+  UserName: string
+  /**
+   * 用户组
+   */
+  UserGroup: string
 }
 
 /**

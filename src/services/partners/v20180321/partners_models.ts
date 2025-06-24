@@ -1023,11 +1023,11 @@ export interface DescribeAgentDealsByCacheRequest {
    */
   Limit: number
   /**
-   * 下单时间范围起始点【请保持时间范围最大90天】
+   * 下单时间范围起始点【*请必传并控制时间范围最大90天，避免出现超时】
    */
   CreatTimeRangeStart?: string
   /**
-   * 下单时间范围终止点【请保持时间范围最大90天】
+   * 下单时间范围终止点【*请必传并控制时间范围最大90天，避免出现超时】
    */
   CreatTimeRangeEnd?: string
   /**
