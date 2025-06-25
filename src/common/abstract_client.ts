@@ -14,11 +14,22 @@ import { Response } from "node-fetch"
 import { SSEResponseModel } from "./sse_response_model"
 import { v4 as uuidv4 } from "uuid"
 
+/**
+ * Callback function type for API responses
+ * @template TReuslt Type of the response data
+ */
 export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
+
+/**
+ * Options for HTTP requests
+ */
 export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
+  /**
+   * Whether the request is multipart
+   */
   multipart?: boolean
   /**
-   * 中止请求信号
+   * Abort request signal
    */
   signal?: AbortSignal
 }
@@ -39,23 +50,66 @@ interface RequestData {
 type ResponseData = any
 
 /**
- * @inner
+ * Abstract base client for Tencent Cloud SDK
+ * 
+ * This class provides common functionality for making API requests to Tencent Cloud services,
+ * including request signing, error handling, and response parsing.
  */
 export class AbstractClient {
-  sdkVersion: string
-  path: string
-  credential: Credential | DynamicCredential
-  region: string
-  apiVersion: string
-  endpoint: string
-  profile: ClientProfile
   /**
-   * 实例化client对象
-   * @param {string} endpoint 接入点域名
-   * @param {string} version 产品版本
-   * @param {Credential} credential 认证信息实例
-   * @param {string} region 产品地域
-   * @param {ClientProfile} profile 可选配置实例
+   * SDK version string
+   */
+  sdkVersion: string
+  /**
+   * API request path (usually "/")
+   */
+  path: string
+  /**
+   * User's security credentials (SecretId, SecretKey, Token)
+   */
+  credential: Credential | DynamicCredential
+  /**
+   * The region of the service (e.g. "ap-shanghai")
+   */
+  region: string
+  /**
+   * The API version of the service (e.g. "2017-03-12")
+   */
+  apiVersion: string
+  /**
+   * The service endpoint URL (e.g. "cvm.tencentcloudapi.com")
+   */
+  endpoint: string
+  /**
+   * Optional configuration instance
+   */
+  profile: ClientProfile
+
+  /**
+   * Constructs a new AbstractClient instance
+   * 
+   * @param {string} endpoint - The service endpoint URL (e.g. "cvm.tencentcloudapi.com")
+   * @param {string} version - The API version of the service (e.g. "2017-03-12")
+   * @param {ClientConfig} config - Configuration object containing:
+   * @param {Credential|DynamicCredential} config.credential - Credentials for authentication
+   * @param {string} [config.region] - The region of the service (e.g. "ap-shanghai")
+   * @param {ClientProfile} [config.profile={}] - Optional client configuration profile
+   * 
+   * @throws {TencentCloudSDKHttpException} If invalid language is specified in profile
+   * 
+   * @example
+   * const client = new AbstractClient(
+   *   "cvm.tencentcloudapi.com",
+   *   "2017-03-12",
+   *   {
+   *     credential: {
+   *       secretId: process.env.secretId,
+   *       secretKey: process.env.secretKey,
+   *     },
+   *     region: "ap-shanghai",
+   *     profile: {}
+   *   }
+   * );
    */
   constructor(
     endpoint: string,
@@ -65,7 +119,7 @@ export class AbstractClient {
     this.path = "/"
 
     /**
-     * 认证信息实例
+     * Credential instance
      */
     if (credential && "getCredential" in credential) {
       this.credential = credential
@@ -81,7 +135,7 @@ export class AbstractClient {
     }
 
     /**
-     * 产品地域
+     * The region of the service
      */
     this.region = region || null
     this.sdkVersion = "SDK_NODEJS_" + sdkVersion
@@ -89,7 +143,7 @@ export class AbstractClient {
     this.endpoint = (profile && profile.httpProfile && profile.httpProfile.endpoint) || endpoint
 
     /**
-     * 可选配置实例
+     * Optional configuration instance
      * @type {ClientProfile}
      */
     this.profile = {
@@ -113,6 +167,10 @@ export class AbstractClient {
     }
   }
 
+  /**
+   * Get credential information
+   * @returns {Promise<Credential>} Promise that resolves with credential information
+   */
   async getCredential(): Promise<Credential> {
     if ("getCredential" in this.credential) {
       return await this.credential.getCredential()
@@ -121,7 +179,30 @@ export class AbstractClient {
   }
 
   /**
-   * @inner
+   * Make an API request to Tencent Cloud service
+   * 
+   * @param {string} action - The API action name to call
+   * @param {any} req - The request payload/parameters
+   * @param {ResponseCallback|RequestOptions} [options] - Either request options or callback function
+   * @param {ResponseCallback} [cb] - Optional callback function for async operation
+   * @returns {Promise<ResponseData>} Promise that resolves with the API response data
+   * 
+   * @example
+   * // Using promise
+   * client.request('DescribeInstances', {Limit: 10})
+   *   .then(data => console.log(data))
+   *   .catch(err => console.error(err));
+   * 
+   * // Using callback
+   * client.request('DescribeInstances', {Limit: 10}, (err, data) => {
+   *   if (err) console.error(err);
+   *   else console.log(data);
+   * });
+   * 
+   * // With options
+   * client.request('DescribeInstances', {Limit: 10}, {signal: abortController.signal})
+   *   .then(data => console.log(data))
+   *   .catch(err => console.error(err));
    */
   async request(
     action: string,
@@ -144,7 +225,12 @@ export class AbstractClient {
   }
 
   /**
-   * @inner
+   * Make a request with octet-stream content type
+   * @param {string} action API action name
+   * @param {any} req Request data
+   * @param {ResponseCallback|RequestOptions} [options] Request options or callback
+   * @param {ResponseCallback} [cb] Callback function
+   * @returns {Promise<any>} Promise that resolves with response data
    */
   async requestOctetStream(
     action: string,
@@ -270,6 +356,12 @@ export class AbstractClient {
     return this.parseResponse(res)
   }
 
+  /**
+   * Parse HTTP response
+   * @param {Response} res HTTP response object
+   * @returns {Promise<ResponseData>} Promise that resolves with parsed response data
+   * @throws {TencentCloudSDKHttpException} If response contains error
+   */
   private async parseResponse(res: Response): Promise<ResponseData> {
     const traceId = res.headers.get("x-tc-traceid")
     if (res.status !== 200) {
@@ -297,7 +389,10 @@ export class AbstractClient {
   }
 
   /**
-   * @inner
+   * Merge nested data into flat structure
+   * @param {any} data Input data
+   * @param {string} [prefix=""] Key prefix
+   * @returns {any} Flattened data object
    */
   private mergeData(data: any, prefix = "") {
     const ret: any = {}
@@ -315,7 +410,10 @@ export class AbstractClient {
   }
 
   /**
-   * @inner
+   * Format request data with required fields and signature
+   * @param {string} action API action name
+   * @param {RequestData} params Request parameters
+   * @returns {Promise<RequestData>} Promise that resolves with formatted request data
    */
   private async formatRequestData(action: string, params: RequestData): Promise<RequestData> {
     params.Action = action
@@ -352,7 +450,9 @@ export class AbstractClient {
   }
 
   /**
-   * @inner
+   * Format string for signature calculation
+   * @param {RequestData} params Request parameters
+   * @returns {string} String to be signed
    */
   private formatSignString(params: RequestData): string {
     let strParam = ""

@@ -89,8 +89,7 @@ export class HttpConnection {
     proxy?: string
     signal?: AbortSignal
   }): Promise<Response> {
-    // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
-    // 所以这里把 readStream 转为 Buffer
+    // Convert readStream to Buffer to calculate the hash of the entire body
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await convertReadStreamToBuffer(data)
 

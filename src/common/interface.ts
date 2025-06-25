@@ -1,120 +1,119 @@
 import { Agent } from "http"
 /**
- * 初始化client对象参数类型
+ * Configuration type for initializing client object
  */
 export interface ClientConfig {
   /**
-   * @param {Credential} credential 认证信息
-   * 必选
+   * @param {Credential} credential Authentication information
    */
   credential: Credential | DynamicCredential
   /**
-   * @param {string} region 产品地域
-   * 对于要求区分地域的产品，此参数必选（如 cvm）；对于不区分地域的产品（如 sms），无需传入。
+   * @param {string} region Product region
+   * Required for region-specific products (e.g. CVM), optional for non-region products (e.g. SMS)
    */
   region?: string
   /**
-   * @param {ClientProfile} profile 可选配置实例
-   * 可选，没有特殊需求可以跳过。
+   * @param {ClientProfile} profile Optional configuration instance
+   * Optional, can be skipped if no special requirements
    */
   profile?: ClientProfile
 }
 
 /**
- * 可选配置实例
+ * Optional configuration instance
  */
 export interface ClientProfile {
   /**
-   * 签名方法 (TC3-HMAC-SHA256 HmacSHA1 HmacSHA256)
+   * Signature method (TC3-HMAC-SHA256 HmacSHA1 HmacSHA256)
    * @type {string}
-   * 非必选
+   * Optional
    */
   signMethod?: "TC3-HMAC-SHA256" | "HmacSHA256" | "HmacSHA1"
   /**
-   * http相关选项实例
+   * HTTP related options instance
    * @type {HttpProfile}
-   * 非必选
+   * Optional
    */
   httpProfile?: HttpProfile
   /**
-   * api请求时附带的 language 字段
+   * Language field attached to API requests
    * @type {"zh-CN" | "en-US"}
-   * 非必选
+   * Optional
    */
   language?: "zh-CN" | "en-US"
 }
 
 export interface HttpProfile {
   /**
-   * 请求方法
+   * Request method
    * @type {"POST" | "GET"}
-   * 非必选
+   * Optional
    */
   reqMethod?: "POST" | "GET"
   /**
-   * 接入点域名，形如（cvm.ap-shanghai.tencentcloud.com）
+   * The service endpoint URL (e.g. "cvm.tencentcloudapi.com")
    * @type {string}
-   * 非必选
+   * Optional
    */
   endpoint?: string
   /**
-   * 协议，目前支持（https://）
+   * Protocol, currently supports "https://"
    * @type {string}
-   * 非必选
+   * Optional
    */
   protocol?: string
   /**
-   *  请求超时时间，默认60s
+   * Request timeout in seconds, default 60s
    * @type {number}
-   * 非必选
+   * Optional
    */
   reqTimeout?: number
   /**
-   * 自定义请求头，例如 { "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca" }
+   * Custom headers, e.g. { "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca" }
    * @type {Record<string, string>}
-   * 非必选
+   * Optional
    */
   headers?: Record<string, string>
   /**
-   * 高级请求代理，例如 new HttpsProxyAgent("http://127.0.0.1:8899")
+   * Advanced request agent, e.g. new HttpsProxyAgent("http://127.0.0.1:8899")
    *
-   * 优先级高于 proxy 配置
+   * Higher priority than proxy configuration
    */
   agent?: Agent
   /**
-   * http请求代理，例如 "http://127.0.0.1:8899"
+   * HTTP request proxy, e.g. "http://127.0.0.1:8899"
    */
   proxy?: string
 }
 
 /**
- * ClientProfile.language 属性支持的取值列表
+ * Supported values for ClientProfile.language property
  */
 export const SUPPORT_LANGUAGE_LIST = ["zh-CN", "en-US"]
 
 /**
- * 认证信息类
+ * Credential information class
  */
 export interface Credential {
   /**
-   * 腾讯云账户secretId，secretKey
-   * 非必选，和 token 二选一
+   * Tencent Cloud account secretId and secretKey
+   * Optional, mutually exclusive with token
    */
   secretId?: string
   /**
-   * 腾讯云账户secretKey
-   * 非必选，和 token 二选一
+   * Tencent Cloud account secretKey
+   * Optional, mutually exclusive with token
    */
   secretKey?: string
   /**
-   * 腾讯云账户token
-   * 非必选，和 secretId 二选一
+   * Tencent Cloud account token
+   * Optional, mutually exclusive with secretId
    */
   token?: string
 }
 
 /**
- * 动态认证信息
+ * Dynamic credential information
  */
 export interface DynamicCredential {
   getCredential(): Promise<Credential>

@@ -13,9 +13,18 @@ interface CvmRoleCredentialResult {
   Token: string
   Code: string
 }
+
+/**
+ * Tencent Cloud Credential via CVM role
+ * 
+ * Automatically generates temporary credentials when binding a service role to instance.
+ * @see {@link https://cloud.tencent.com/document/product/598/85616} for more information.
+ */
 export default class CvmRoleCredential implements DynamicCredential {
   protected roleNameTask: Promise<string> | null
   protected credentialTask: Promise<CvmRoleCredentialResult> | null
+
+  // Method to fetch the role name from the metadata server
   protected async getRoleName() {
     const response = await fetch(ROLE_URL, {})
     if (!response.ok) {
@@ -23,6 +32,8 @@ export default class CvmRoleCredential implements DynamicCredential {
     }
     return await response.text()
   }
+
+  // Method to fetch credentials for a given role name
   protected async getRoleCredential(roleName: string): Promise<CvmRoleCredentialResult> {
     const response = await fetch(ROLE_URL + roleName, {})
     if (!response.ok) {
@@ -38,6 +49,8 @@ export default class CvmRoleCredential implements DynamicCredential {
     }
     return json
   }
+
+  // Method to get the current credential, refreshing if expired
   async getCredential(): Promise<Credential> {
     if (!this.roleNameTask) {
       this.roleNameTask = this.getRoleName()
@@ -47,7 +60,7 @@ export default class CvmRoleCredential implements DynamicCredential {
       this.credentialTask = this.getRoleCredential(roleName)
     }
     const credential = await this.credentialTask
-    // expired
+    // Check if the credential is expired
     if (credential.ExpiredTime * 1000 - EXPIRE_BUFFER <= Date.now()) {
       this.credentialTask = null
       return this.getCredential()
