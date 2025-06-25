@@ -27,15 +27,20 @@ import {
   DisableWhiteBoxKeyResponse,
   DisableKeyResponse,
   DescribeWhiteBoxServiceStatusRequest,
-  VerifyByAsymmetricKeyRequest,
+  UpdateDataKeyDescriptionRequest,
+  DescribeDataKeyResponse,
+  DisableDataKeyResponse,
   DescribeKeyRequest,
   WhiteboxKeyInfo,
+  DescribeDataKeysRequest,
   ListAlgorithmsResponse,
   DisableKeysResponse,
+  EnableDataKeyResponse,
   DescribeWhiteBoxKeyResponse,
   UpdateKeyDescriptionResponse,
   DescribeWhiteBoxServiceStatusResponse,
-  ImportKeyMaterialRequest,
+  Key,
+  ScheduleDataKeyDeletionResponse,
   EnableKeyRequest,
   GetKeyRotationStatusRequest,
   ListAlgorithmsRequest,
@@ -46,35 +51,52 @@ import {
   ScheduleKeyDeletionResponse,
   PostQuantumCryptoVerifyRequest,
   GenerateRandomResponse,
+  UpdateDataKeyNameRequest,
+  ScheduleDataKeyDeletionRequest,
   DescribeKeysRequest,
   GetPublicKeyRequest,
   GetServiceStatusRequest,
   EnableWhiteBoxKeysResponse,
   ArchiveKeyResponse,
   VerifyByAsymmetricKeyResponse,
+  DescribeDataKeysResponse,
   DescribeWhiteBoxKeyRequest,
   GetParametersForImportResponse,
   DecryptResponse,
+  ListDataKeyDetailResponse,
   CreateWhiteBoxKeyResponse,
-  Key,
+  ImportKeyMaterialRequest,
   DeleteImportedKeyMaterialResponse,
   EnableKeysRequest,
   EnableWhiteBoxKeysRequest,
   EncryptByWhiteBoxResponse,
+  UpdateDataKeyNameResponse,
   DescribeKeysResponse,
   EnableWhiteBoxKeyResponse,
+  ListDataKeysResponse,
   ReEncryptRequest,
   ListKeysResponse,
+  TagFilter,
+  DescribeDataKeyRequest,
   AsymmetricSm2DecryptResponse,
   DisableKeyRotationResponse,
+  DataKeyMetadata,
+  VerifyByAsymmetricKeyRequest,
   DisableWhiteBoxKeysRequest,
+  ImportDataKeyRequest,
   ListKeyDetailRequest,
   DeleteWhiteBoxKeyRequest,
   AlgorithmInfo,
   GetRegionsResponse,
+  UpdateDataKeyDescriptionResponse,
   ExclusiveHSM,
+  CancelKeyDeletionRequest,
+  EnableDataKeysResponse,
   GenerateDataKeyResponse,
+  EnableDataKeysRequest,
   CreateWhiteBoxKeyRequest,
+  GetDataKeyPlaintextResponse,
+  DisableDataKeyRequest,
   OverwriteWhiteBoxDeviceFingerprintsResponse,
   DisableWhiteBoxKeysResponse,
   ArchiveKeyRequest,
@@ -82,19 +104,26 @@ import {
   CreateKeyResponse,
   ReEncryptResponse,
   EncryptResponse,
-  CancelKeyDeletionRequest,
+  GetDataKeyPlaintextRequest,
+  GetDataKeyCiphertextBlobRequest,
   DeleteImportedKeyMaterialRequest,
   EnableKeyResponse,
+  ImportDataKeyResponse,
   GetServiceStatusResponse,
   DeviceFingerprint,
   GetKeyRotationStatusResponse,
   EncryptRequest,
   AsymmetricSm2DecryptRequest,
+  ListDataKeysRequest,
   DeleteWhiteBoxKeyResponse,
+  ListDataKeyDetailRequest,
+  CancelDataKeyDeletionResponse,
   ListKeysRequest,
   DescribeWhiteBoxDecryptKeyRequest,
+  DataKey,
   KeyMetadata,
   CancelKeyArchiveResponse,
+  GetPublicKeyResponse,
   DecryptRequest,
   DescribeWhiteBoxKeyDetailsRequest,
   PostQuantumCryptoSignRequest,
@@ -114,19 +143,22 @@ import {
   PostQuantumCryptoEncryptResponse,
   EncryptByWhiteBoxRequest,
   GenerateRandomRequest,
+  DisableDataKeysResponse,
   ScheduleKeyDeletionRequest,
+  CancelDataKeyDeletionRequest,
   PostQuantumCryptoEncryptRequest,
   DisableKeyRequest,
   ImportKeyMaterialResponse,
-  GetPublicKeyResponse,
+  EnableDataKeyRequest,
   BindCloudResourceRequest,
-  TagFilter,
+  GetDataKeyCiphertextBlobResponse,
   PostQuantumCryptoSignResponse,
   SignByAsymmetricKeyResponse,
   PostQuantumCryptoVerifyResponse,
   DescribeWhiteBoxDecryptKeyResponse,
   DescribeWhiteBoxDeviceFingerprintsResponse,
   PostQuantumCryptoDecryptResponse,
+  DisableDataKeysRequest,
   UpdateKeyDescriptionRequest,
   UnbindCloudResourceResponse,
   DescribeKeyResponse,
@@ -141,6 +173,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("kms.tencentcloudapi.com", "2019-01-18", clientConfig)
+  }
+
+  /**
+   * 用于查询数据密钥的列表
+   */
+  async ListDataKeys(
+    req: ListDataKeysRequest,
+    cb?: (error: string, rep: ListDataKeysResponse) => void
+  ): Promise<ListDataKeysResponse> {
+    return this.request("ListDataKeys", req, cb)
   }
 
   /**
@@ -205,6 +247,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取数据密钥的详情
+   */
+  async DescribeDataKey(
+    req: DescribeDataKeyRequest,
+    cb?: (error: string, rep: DescribeDataKeyResponse) => void
+  ): Promise<DescribeDataKeyResponse> {
+    return this.request("DescribeDataKey", req, cb)
+  }
+
+  /**
    * 该接口用于获取非对称密钥的公钥信息，可用于本地数据加密或验签。只有处于Enabled状态的非对称密钥才可能获取公钥。
    */
   async GetPublicKey(
@@ -245,6 +297,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取数据密钥明文
+   */
+  async GetDataKeyPlaintext(
+    req: GetDataKeyPlaintextRequest,
+    cb?: (error: string, rep: GetDataKeyPlaintextResponse) => void
+  ): Promise<GetDataKeyPlaintextResponse> {
+    return this.request("GetDataKeyPlaintext", req, cb)
+  }
+
+  /**
    * 使用指定的SM2非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。传入的密文的长度不能超过256字节。
    */
   async AsymmetricSm2Decrypt(
@@ -255,14 +317,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 非对称密钥签名。
-注意：只有 KeyUsage 为 ASYMMETRIC_SIGN_VERIFY_SM2、ASYMMETRIC_SIGN_VERIFY_ECC 或其他支持的 ASYMMETRIC_SIGN_VERIFY_${ALGORITHM} 的密钥才可以使用签名功能。
-     */
-  async SignByAsymmetricKey(
-    req: SignByAsymmetricKeyRequest,
-    cb?: (error: string, rep: SignByAsymmetricKeyResponse) => void
-  ): Promise<SignByAsymmetricKeyResponse> {
-    return this.request("SignByAsymmetricKey", req, cb)
+   * 本接口使用后量子密码算法密钥，可加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作。
+   */
+  async PostQuantumCryptoEncrypt(
+    req: PostQuantumCryptoEncryptRequest,
+    cb?: (error: string, rep: PostQuantumCryptoEncryptResponse) => void
+  ): Promise<PostQuantumCryptoEncryptResponse> {
+    return this.request("PostQuantumCryptoEncrypt", req, cb)
   }
 
   /**
@@ -286,6 +347,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 计划删除数据密钥
+   */
+  async ScheduleDataKeyDeletion(
+    req: ScheduleDataKeyDeletionRequest,
+    cb?: (error: string, rep: ScheduleDataKeyDeletionResponse) => void
+  ): Promise<ScheduleDataKeyDeletionResponse> {
+    return this.request("ScheduleDataKeyDeletion", req, cb)
+  }
+
+  /**
    * 获取白盒密钥列表
    */
   async DescribeWhiteBoxKeyDetails(
@@ -306,6 +377,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 覆盖指定密钥的设备指纹信息
+   */
+  async OverwriteWhiteBoxDeviceFingerprints(
+    req: OverwriteWhiteBoxDeviceFingerprintsRequest,
+    cb?: (error: string, rep: OverwriteWhiteBoxDeviceFingerprintsResponse) => void
+  ): Promise<OverwriteWhiteBoxDeviceFingerprintsResponse> {
+    return this.request("OverwriteWhiteBoxDeviceFingerprints", req, cb)
+  }
+
+  /**
    * 对密钥进行归档，被归档的密钥只能用于解密，不能加密
    */
   async ArchiveKey(
@@ -316,13 +397,54 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消密钥归档，取消后密钥的状态变为Enabled。
+   * 修改数据密钥描述
    */
-  async CancelKeyArchive(
-    req: CancelKeyArchiveRequest,
-    cb?: (error: string, rep: CancelKeyArchiveResponse) => void
-  ): Promise<CancelKeyArchiveResponse> {
-    return this.request("CancelKeyArchive", req, cb)
+  async UpdateDataKeyDescription(
+    req: UpdateDataKeyDescriptionRequest,
+    cb?: (error: string, rep: UpdateDataKeyDescriptionResponse) => void
+  ): Promise<UpdateDataKeyDescriptionResponse> {
+    return this.request("UpdateDataKeyDescription", req, cb)
+  }
+
+  /**
+   * 修改数据密钥名称
+   */
+  async UpdateDataKeyName(
+    req: UpdateDataKeyNameRequest,
+    cb?: (error: string, rep: UpdateDataKeyNameResponse) => void
+  ): Promise<UpdateDataKeyNameResponse> {
+    return this.request("UpdateDataKeyName", req, cb)
+  }
+
+  /**
+     * 非对称密钥签名。
+注意：只有 KeyUsage 为 ASYMMETRIC_SIGN_VERIFY_SM2、ASYMMETRIC_SIGN_VERIFY_ECC 或其他支持的 ASYMMETRIC_SIGN_VERIFY_${ALGORITHM} 的密钥才可以使用签名功能。
+     */
+  async SignByAsymmetricKey(
+    req: SignByAsymmetricKeyRequest,
+    cb?: (error: string, rep: SignByAsymmetricKeyResponse) => void
+  ): Promise<SignByAsymmetricKeyResponse> {
+    return this.request("SignByAsymmetricKey", req, cb)
+  }
+
+  /**
+   * 该接口用于批量禁止CMK的使用。
+   */
+  async DisableKeys(
+    req: DisableKeysRequest,
+    cb?: (error: string, rep: DisableKeysResponse) => void
+  ): Promise<DisableKeysResponse> {
+    return this.request("DisableKeys", req, cb)
+  }
+
+  /**
+   * 取消计划删除数据密钥
+   */
+  async CancelDataKeyDeletion(
+    req: CancelDataKeyDeletionRequest,
+    cb?: (error: string, rep: CancelDataKeyDeletionResponse) => void
+  ): Promise<CancelDataKeyDeletionResponse> {
+    return this.request("CancelDataKeyDeletion", req, cb)
   }
 
   /**
@@ -386,6 +508,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 下载数据密钥密文
+   */
+  async GetDataKeyCiphertextBlob(
+    req: GetDataKeyCiphertextBlobRequest,
+    cb?: (error: string, rep: GetDataKeyCiphertextBlobResponse) => void
+  ): Promise<GetDataKeyCiphertextBlobResponse> {
+    return this.request("GetDataKeyCiphertextBlob", req, cb)
+  }
+
+  /**
    * 本接口使用后量子密码算法密钥，解密密文，并得到明文数据。
    */
   async PostQuantumCryptoDecrypt(
@@ -396,13 +528,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 覆盖指定密钥的设备指纹信息
+   * 使用非对称密钥验签
    */
-  async OverwriteWhiteBoxDeviceFingerprints(
-    req: OverwriteWhiteBoxDeviceFingerprintsRequest,
-    cb?: (error: string, rep: OverwriteWhiteBoxDeviceFingerprintsResponse) => void
-  ): Promise<OverwriteWhiteBoxDeviceFingerprintsResponse> {
-    return this.request("OverwriteWhiteBoxDeviceFingerprints", req, cb)
+  async VerifyByAsymmetricKey(
+    req: VerifyByAsymmetricKeyRequest,
+    cb?: (error: string, rep: VerifyByAsymmetricKeyResponse) => void
+  ): Promise<VerifyByAsymmetricKeyResponse> {
+    return this.request("VerifyByAsymmetricKey", req, cb)
+  }
+
+  /**
+   * 批量启用数据密钥
+   */
+  async EnableDataKeys(
+    req: EnableDataKeysRequest,
+    cb?: (error: string, rep: EnableDataKeysResponse) => void
+  ): Promise<EnableDataKeysResponse> {
+    return this.request("EnableDataKeys", req, cb)
+  }
+
+  /**
+   * 数据密钥导入接口，并托管到KMS
+   */
+  async ImportDataKey(
+    req: ImportDataKeyRequest,
+    cb?: (error: string, rep: ImportDataKeyResponse) => void
+  ): Promise<ImportDataKeyResponse> {
+    return this.request("ImportDataKey", req, cb)
   }
 
   /**
@@ -456,13 +608,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据指定Offset和Limit获取主密钥列表详情。
+   * 禁用数据密钥
    */
-  async ListKeyDetail(
-    req: ListKeyDetailRequest,
-    cb?: (error: string, rep: ListKeyDetailResponse) => void
-  ): Promise<ListKeyDetailResponse> {
-    return this.request("ListKeyDetail", req, cb)
+  async DisableDataKey(
+    req: DisableDataKeyRequest,
+    cb?: (error: string, rep: DisableDataKeyResponse) => void
+  ): Promise<DisableDataKeyResponse> {
+    return this.request("DisableDataKey", req, cb)
+  }
+
+  /**
+   * 返回数据密钥属性信息列表
+   */
+  async DescribeDataKeys(
+    req: DescribeDataKeysRequest,
+    cb?: (error: string, rep: DescribeDataKeysResponse) => void
+  ): Promise<DescribeDataKeysResponse> {
+    return this.request("DescribeDataKeys", req, cb)
   }
 
   /**
@@ -473,6 +635,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableKeyRotationResponse) => void
   ): Promise<DisableKeyRotationResponse> {
     return this.request("DisableKeyRotation", req, cb)
+  }
+
+  /**
+   * 根据指定Offset和Limit获取主密钥列表详情。
+   */
+  async ListKeyDetail(
+    req: ListKeyDetailRequest,
+    cb?: (error: string, rep: ListKeyDetailResponse) => void
+  ): Promise<ListKeyDetailResponse> {
+    return this.request("ListKeyDetail", req, cb)
   }
 
   /**
@@ -556,13 +728,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口使用后量子密码算法密钥，可加密最多为4KB任意数据，可用于加密数据库密码，RSA Key，或其它较小的敏感信息。对于应用的数据加密，使用GenerateDataKey生成的DataKey进行本地数据的加解密操作。
+   * 启用数据密钥
    */
-  async PostQuantumCryptoEncrypt(
-    req: PostQuantumCryptoEncryptRequest,
-    cb?: (error: string, rep: PostQuantumCryptoEncryptResponse) => void
-  ): Promise<PostQuantumCryptoEncryptResponse> {
-    return this.request("PostQuantumCryptoEncrypt", req, cb)
+  async EnableDataKey(
+    req: EnableDataKeyRequest,
+    cb?: (error: string, rep: EnableDataKeyResponse) => void
+  ): Promise<EnableDataKeyResponse> {
+    return this.request("EnableDataKey", req, cb)
   }
 
   /**
@@ -626,13 +798,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量禁止CMK的使用。
+   * 取消密钥归档，取消后密钥的状态变为Enabled。
    */
-  async DisableKeys(
-    req: DisableKeysRequest,
-    cb?: (error: string, rep: DisableKeysResponse) => void
-  ): Promise<DisableKeysResponse> {
-    return this.request("DisableKeys", req, cb)
+  async CancelKeyArchive(
+    req: CancelKeyArchiveRequest,
+    cb?: (error: string, rep: CancelKeyArchiveResponse) => void
+  ): Promise<CancelKeyArchiveResponse> {
+    return this.request("CancelKeyArchive", req, cb)
   }
 
   /**
@@ -666,12 +838,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用非对称密钥验签
+   * 根据指定Offset和Limit获取数据密钥列表详情。
    */
-  async VerifyByAsymmetricKey(
-    req: VerifyByAsymmetricKeyRequest,
-    cb?: (error: string, rep: VerifyByAsymmetricKeyResponse) => void
-  ): Promise<VerifyByAsymmetricKeyResponse> {
-    return this.request("VerifyByAsymmetricKey", req, cb)
+  async ListDataKeyDetail(
+    req: ListDataKeyDetailRequest,
+    cb?: (error: string, rep: ListDataKeyDetailResponse) => void
+  ): Promise<ListDataKeyDetailResponse> {
+    return this.request("ListDataKeyDetail", req, cb)
+  }
+
+  /**
+   * 批量禁用数据密钥
+   */
+  async DisableDataKeys(
+    req: DisableDataKeysRequest,
+    cb?: (error: string, rep: DisableDataKeysResponse) => void
+  ): Promise<DisableDataKeysResponse> {
+    return this.request("DisableDataKeys", req, cb)
   }
 }

@@ -51,7 +51,7 @@ type ResponseData = any
 
 /**
  * Abstract base client for Tencent Cloud SDK
- * 
+ *
  * This class provides common functionality for making API requests to Tencent Cloud services,
  * including request signing, error handling, and response parsing.
  */
@@ -87,16 +87,16 @@ export class AbstractClient {
 
   /**
    * Constructs a new AbstractClient instance
-   * 
+   *
    * @param {string} endpoint - The service endpoint URL (e.g. "cvm.tencentcloudapi.com")
    * @param {string} version - The API version of the service (e.g. "2017-03-12")
    * @param {ClientConfig} config - Configuration object containing:
    * @param {Credential|DynamicCredential} config.credential - Credentials for authentication
    * @param {string} [config.region] - The region of the service (e.g. "ap-shanghai")
    * @param {ClientProfile} [config.profile={}] - Optional client configuration profile
-   * 
+   *
    * @throws {TencentCloudSDKHttpException} If invalid language is specified in profile
-   * 
+   *
    * @example
    * const client = new AbstractClient(
    *   "cvm.tencentcloudapi.com",
@@ -180,25 +180,25 @@ export class AbstractClient {
 
   /**
    * Make an API request to Tencent Cloud service
-   * 
+   *
    * @param {string} action - The API action name to call
    * @param {any} req - The request payload/parameters
    * @param {ResponseCallback|RequestOptions} [options] - Either request options or callback function
    * @param {ResponseCallback} [cb] - Optional callback function for async operation
    * @returns {Promise<ResponseData>} Promise that resolves with the API response data
-   * 
+   *
    * @example
    * // Using promise
    * client.request('DescribeInstances', {Limit: 10})
    *   .then(data => console.log(data))
    *   .catch(err => console.error(err));
-   * 
+   *
    * // Using callback
    * client.request('DescribeInstances', {Limit: 10}, (err, data) => {
    *   if (err) console.error(err);
    *   else console.log(data);
    * });
-   * 
+   *
    * // With options
    * client.request('DescribeInstances', {Limit: 10}, {signal: abortController.signal})
    *   .then(data => console.log(data))

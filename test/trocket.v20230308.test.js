@@ -338,6 +338,16 @@ it("trocket.v20230308.DescribeMQTTMessage", async function () {
     }
 })
 
+it("trocket.v20230308.ChangeMigratingTopicToNextStage", async function () {
+    try {
+       const data = await client.ChangeMigratingTopicToNextStage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeConsumerLag", async function () {
     try {
        const data = await client.DescribeConsumerLag({})
@@ -638,9 +648,9 @@ it("trocket.v20230308.DescribeMigrationTaskList", async function () {
     }
 })
 
-it("trocket.v20230308.ChangeMigratingTopicToNextStage", async function () {
+it("trocket.v20230308.DescribeConsumerClientList", async function () {
     try {
-       const data = await client.ChangeMigratingTopicToNextStage({})
+       const data = await client.DescribeConsumerClientList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

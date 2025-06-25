@@ -2379,7 +2379,8 @@ https：使用https协议回源
    */
   LoadBalance?: number
   /**
-   * 待废弃，可不填。是否开启灰度，0表示不开启灰度。
+   * 是否开启灰度，0表示不开启灰度。
+   * @deprecated
    */
   IsGray?: number
   /**
@@ -2395,7 +2396,8 @@ https：使用https协议回源
    */
   IsKeepAlive?: string
   /**
-   * 待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
+   * 目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
+   * @deprecated
    */
   Anycast?: number
   /**
@@ -2498,6 +2500,10 @@ https：使用https协议回源
    * 分流回源时生效，分流回源的规则。
    */
   UpstreamRules?: Array<UpstreamRule>
+  /**
+   * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
+   */
+  UseCase?: number
 }
 
 /**
@@ -3329,7 +3335,7 @@ public：公有云域名
    */
   SgID?: string
   /**
-   * clbwaf接入状态
+   * clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中”
    */
   AccessStatus?: number
   /**
@@ -10016,7 +10022,8 @@ export interface DomainsPartInfo {
    */
   IsCdn?: number
   /**
-   * 是否开启灰度，已废弃。
+   * 是否开启灰度。
+   * @deprecated
    */
   IsGray?: number
   /**
@@ -10217,6 +10224,10 @@ https：使用https协议回源
    * 分流回源策略
    */
   UpstreamRules?: Array<UpstreamRule>
+  /**
+   * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
+   */
+  UseCase?: number
 }
 
 /**
@@ -10347,7 +10358,8 @@ UpstreamProtocol：与Protocol相同
    */
   SSLId?: string
   /**
-   * 待废弃，可不填。Waf的资源ID。
+   * Waf的资源ID。
+   * @deprecated
    */
   ResourceId?: string
   /**
@@ -10365,11 +10377,13 @@ https：使用https协议回源
    */
   HttpsUpstreamPort?: string
   /**
-   * 待废弃，可不填。是否开启灰度，0表示不开启灰度。
+   * 是否开启灰度，0表示不开启灰度。
+   * @deprecated
    */
   IsGray?: number
   /**
-   * 待废弃，可不填。灰度的地区
+   * 灰度的地区
+   * @deprecated
    */
   GrayAreas?: Array<string>
   /**
@@ -10393,14 +10407,16 @@ https：使用https协议回源
    */
   IsHttp2?: number
   /**
-   * 待废弃，可不填。WAF实例类型。
+   * WAF实例类型。
 sparta-waf：SAAS型WAF
 clb-waf：负载均衡型WAF
 cdn-waf：CDN上的Web防护能力
+   * @deprecated
    */
   Edition?: string
   /**
-   * 待废弃，目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
+   * 目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
+   * @deprecated
    */
   Anycast?: number
   /**
@@ -10505,6 +10521,10 @@ cdn-waf：CDN上的Web防护能力
    * 分流回源时生效，分流回源的规则。
    */
   UpstreamRules?: Array<UpstreamRule>
+  /**
+   * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
+   */
+  UseCase?: number
 }
 
 /**
@@ -11862,6 +11882,10 @@ export interface ClbDomainsInfo {
    * 域名标签
    */
   Labels?: Array<string>
+  /**
+   * clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中”
+   */
+  AccessStatus?: number
 }
 
 /**

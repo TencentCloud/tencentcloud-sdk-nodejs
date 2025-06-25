@@ -1477,6 +1477,10 @@ export interface DescribeVulInfoCvssResponse {
    */
   FixSwitch?: number
   /**
+   * 是否支持防御： 0-不支持 1-支持
+   */
+  SupportDefence?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -13330,6 +13334,14 @@ MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
+  /**
+   * 排序，大小写无关：asc 升序，desc降序
+   */
+  Order?: string
+  /**
+   * 排序列，严格相等：最近检测时间RecentFoundTime
+   */
+  By?: string
 }
 
 /**
@@ -13732,6 +13744,14 @@ export interface ModifyAutoOpenProVersionConfigRequest {
    * 手动购买的订单是否自动续费,默认0, 0关闭 ,1 开启
    */
   RepurchaseRenewSwitch?: number
+  /**
+   * 新增机器自动绑定rasp,0 关闭 1开启
+   */
+  AutoBindRaspSwitch?: number
+  /**
+   * 新增机器自动开启rasp防护,默认关闭,0 关闭 1开启
+   */
+  AutoOpenRaspSwitch?: number
 }
 
 /**
@@ -14932,6 +14952,14 @@ MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，
    * 导出字段
    */
   Where?: Array<string>
+  /**
+   * 排序，大小写无关：asc 升序，desc降序
+   */
+  Order?: string
+  /**
+   * 排序列，严格相等：最近检测时间RecentFoundTime
+   */
+  By?: string
 }
 
 /**
@@ -24412,6 +24440,14 @@ export interface DescribeLicenseGeneralResponse {
    */
   RepurchaseRenewSwitch?: boolean
   /**
+   * 是否自动新增机器绑定rasp防护,false 关闭 true 开启
+   */
+  AutoBindRaspSwitch?: boolean
+  /**
+   * 是否自动新增机器开启rasp防护,false 关闭 true 开启
+   */
+  AutoOpenRaspSwitch?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -29920,6 +29956,14 @@ export interface VulEmergentMsgInfo {
    * 漏洞名,英文描述
    */
   NameEn?: string
+  /**
+   * 是否支持自动修复 0:不支持 >0: 支持
+   */
+  SupportFix?: number
+  /**
+   * 是否支持自动防御 0:不支持 1:支持
+   */
+  SupportDefense?: number
 }
 
 /**

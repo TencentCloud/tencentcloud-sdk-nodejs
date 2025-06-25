@@ -128,6 +128,16 @@ it("lke.v20231130.StopWorkflowRun", async function () {
     }
 })
 
+it("lke.v20231130.ModifyAgent", async function () {
+    try {
+       const data = await client.ModifyAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.CreateAttributeLabel", async function () {
     try {
        const data = await client.CreateAttributeLabel({})
@@ -298,9 +308,9 @@ it("lke.v20231130.DescribeSearchStatsGraph", async function () {
     }
 })
 
-it("lke.v20231130.ListWorkflowRuns", async function () {
+it("lke.v20231130.DeleteDocCate", async function () {
     try {
-       const data = await client.ListWorkflowRuns({})
+       const data = await client.DeleteDocCate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +508,9 @@ it("lke.v20231130.DescribeNodeRun", async function () {
     }
 })
 
-it("lke.v20231130.DeleteDocCate", async function () {
+it("lke.v20231130.ListWorkflowRuns", async function () {
     try {
-       const data = await client.DeleteDocCate({})
+       const data = await client.ListWorkflowRuns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +561,16 @@ it("lke.v20231130.CreateApp", async function () {
 it("lke.v20231130.ModifyDoc", async function () {
     try {
        const data = await client.ModifyDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.DeleteAgent", async function () {
+    try {
+       const data = await client.DeleteAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +711,16 @@ it("lke.v20231130.DescribeRobotBizIDByAppKey", async function () {
 it("lke.v20231130.ExportQAList", async function () {
     try {
        const data = await client.ExportQAList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.CreateAgent", async function () {
+    try {
+       const data = await client.CreateAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -951,6 +981,16 @@ it("lke.v20231130.GetAnswerTypeDataCount", async function () {
 it("lke.v20231130.DescribeWorkflowRun", async function () {
     try {
        const data = await client.DescribeWorkflowRun({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.DescribeAppAgentList", async function () {
+    try {
+       const data = await client.DescribeAppAgentList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

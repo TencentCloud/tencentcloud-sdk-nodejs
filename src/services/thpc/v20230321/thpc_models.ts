@@ -90,6 +90,10 @@ export interface ClusterOverview {
  */
 export interface NodeOverview {
   /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
    * 节点实例ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -133,6 +137,14 @@ export interface NodeOverview {
    * 节点的工作状态
    */
   NodeAllocateState?: string
+  /**
+   * 节点的名称
+   */
+  NodeName?: string
+  /**
+   * 节点的创建时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -1625,7 +1637,7 @@ export interface DescribeNodesRequest {
   /**
    * 集群ID。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * <ul>
     <li><strong>queue-name</strong>
@@ -1800,7 +1812,7 @@ export interface CreateWorkspacesRequest {
    */
   InternetAccessible?: SpaceInternetAccessible
   /**
-   * 购买工作空间数量
+   * 购买工作空间实例的数量
    */
   SpaceCount?: number
   /**

@@ -1418,6 +1418,16 @@ it("wedata.v20210820.DescribeDatabaseInfoList", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyRuleTemplate", async function () {
+    try {
+       const data = await client.ModifyRuleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeDependOpsTasks", async function () {
     try {
        const data = await client.DescribeDependOpsTasks({})
@@ -1548,9 +1558,9 @@ it("wedata.v20210820.CreateRule", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyRuleTemplate", async function () {
+it("wedata.v20210820.DescribeRuleGroupSubscription", async function () {
     try {
-       const data = await client.ModifyRuleTemplate({})
+       const data = await client.DescribeRuleGroupSubscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1731,6 +1741,16 @@ it("wedata.v20210820.BatchMakeUpIntegrationTasks", async function () {
 it("wedata.v20210820.UploadContent", async function () {
     try {
        const data = await client.UploadContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeDsTaskVersionList", async function () {
+    try {
+       const data = await client.DescribeDsTaskVersionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2098,9 +2118,9 @@ it("wedata.v20210820.RegisterDsEventListener", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeRuleGroupSubscription", async function () {
+it("wedata.v20210820.DescribeDsTaskVersionInfo", async function () {
     try {
-       const data = await client.DescribeRuleGroupSubscription({})
+       const data = await client.DescribeDsTaskVersionInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

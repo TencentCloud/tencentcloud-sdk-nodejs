@@ -1582,6 +1582,10 @@ export interface DspaDiscoveryTaskDetail {
    * 定时开始时间
    */
   TimingStartTime?: string
+  /**
+   * full:全量扫描 incre:变更扫描
+   */
+  ScanRange?: string
 }
 
 /**
@@ -1728,6 +1732,10 @@ cynosdbmysql 表示TDSQL-C MySQL版,
 selfbuilt-db 表示自建数据库
    */
   DataSourceType?: string
+  /**
+   * 	full:全量扫描 incre:变更扫描
+   */
+  ScanRange?: string
 }
 
 /**
@@ -2698,6 +2706,10 @@ selfbuilt-db 表示自建数据库
    * 抽样的排序字段
    */
   GlobalOrderField?: string
+  /**
+   * full:全量扫描 incre:变更扫描
+   */
+  ScanRange?: string
 }
 
 /**
@@ -3003,6 +3015,10 @@ export interface DspaDiscoveryTask {
    * 关联模板是否更新
    */
   ComplianceUpdate?: boolean
+  /**
+   * 	full:全量扫描 incre:变更扫描
+   */
+  ScanRange?: string
 }
 
 /**
@@ -3686,8 +3702,13 @@ export interface DescribeDSPACOSDiscoveryTaskFilesRequest {
   TaskId: number
   /**
    * 扫描Bucket任务结果ID
+   * @deprecated
    */
-  BucketResultId: number
+  BucketResultId?: number
+  /**
+   * 扫描结果id
+   */
+  ScanResultId?: number
 }
 
 /**
@@ -4985,6 +5006,18 @@ export interface DspaDiscoveryTaskDbResult {
    * 总的字段数
    */
   TotalField?: number
+  /**
+   * 任务实例id
+   */
+  TaskInstanceId?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 扫描范围（full:全量扫描 incre：变更扫描）
+   */
+  ScanRange?: string
 }
 
 /**
@@ -5959,6 +5992,10 @@ export interface DescribeDSPADiscoveryTaskResultResponse {
    */
   TotalCount?: number
   /**
+   * 最大展示扫描结果次数
+   */
+  MaxCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6151,6 +6188,18 @@ ResourceRegion：资源所在地域
 每项过滤条件最多支持5个。
    */
   Filters?: Array<Filter>
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 是否查询历史结果
+   */
+  FetchHistory?: boolean
 }
 
 /**
@@ -6920,6 +6969,14 @@ export interface DspaCOSDiscoveryTaskResult {
    * 是否超额
    */
   OverSize?: string
+  /**
+   * 任务实例id
+   */
+  TaskInstanceId?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
 }
 
 /**
@@ -7390,6 +7447,10 @@ export interface DescribeDSPADiscoveryTaskResultDetailRequest {
    * 多级分类的分类ID集合
    */
   CategoryIdList?: Array<number | bigint>
+  /**
+   * 任务扫描id
+   */
+  ScanResultId?: number
 }
 
 /**
@@ -7516,12 +7577,17 @@ export interface DescribeDSPADiscoveryTaskTablesRequest {
   TaskId: number
   /**
    * 数据库扫描结果ID
+   * @deprecated
    */
-  DbResultId: number
+  DbResultId?: number
   /**
    * db名称
    */
   DbName?: string
+  /**
+   * 任务扫描id
+   */
+  ScanResultId?: number
 }
 
 /**
@@ -7952,6 +8018,18 @@ selfbuilt-db 表示自建数据库
    * 资源所在地域
    */
   ResourceRegion?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 是否查询历史结果
+   */
+  FetchHistory?: boolean
 }
 
 /**
@@ -8422,6 +8500,10 @@ export interface DescribeDSPACOSDiscoveryTaskResultResponse {
    * 符合条件的数据结果数目
    */
   TotalCount?: number
+  /**
+   * 最大展示扫描结果次数
+   */
+  MaxCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8959,13 +9041,14 @@ export interface DescribeDSPACOSTaskResultDetailRequest {
    */
   TaskId: number
   /**
-   * 扫描Bucket结果ID
-   */
-  BucketResultId: number
-  /**
    * 合规组ID
    */
   ComplianceId: number
+  /**
+   * 扫描Bucket结果ID
+   * @deprecated
+   */
+  BucketResultId?: number
   /**
    * 文件名
    */
@@ -8994,6 +9077,10 @@ export interface DescribeDSPACOSTaskResultDetailRequest {
    * 多级分类的分类ID集合
    */
   CategoryIdList?: Array<number | bigint>
+  /**
+   * 扫描结果id
+   */
+  ScanResultId?: number
 }
 
 /**

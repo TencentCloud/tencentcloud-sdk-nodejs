@@ -311,6 +311,37 @@ export interface DescribeStreamTaskLogListRequest {
 }
 
 /**
+ * 事件发布者信息
+ */
+export interface EventPublisherDTO {
+  /**
+   * 关键字，一般为任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * REST_API、KAFKA
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreationTs: string
+  /**
+   * 配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PropertiesList: Array<ParamInfoDs>
+  /**
+   * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+}
+
+/**
  * 数据源信息
  */
 export interface GovDatasourceInfo {
@@ -1040,29 +1071,14 @@ export interface TaskInnerInfo {
 }
 
 /**
- * GetCosToken返回参数结构体
+ * DescribeDsTaskVersionInfo返回参数结构体
  */
-export interface GetCosTokenResponse {
+export interface DescribeDsTaskVersionInfoResponse {
   /**
-   * cos地域
+   * 任务版本详情信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region?: string
-  /**
-   * Token信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Token?: CosTokenResponse
-  /**
-   * 桶名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Bucket?: string
-  /**
-   * 终止点（针对私有云环境）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndPoint?: string
+  Data?: TaskVersionDsDTO
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6232,7 +6248,7 @@ export interface DimensionScoreInfo {
  */
 export interface DescribeTaskScriptResponse {
   /**
-   * 任务脚本内容
+   * 任务脚本内容，BASE64编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: TaskScriptContent
@@ -6474,6 +6490,36 @@ export interface TableLineageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CollectJobId?: string
+}
+
+/**
+ * GetCosToken返回参数结构体
+ */
+export interface GetCosTokenResponse {
+  /**
+   * cos地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * Token信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Token?: CosTokenResponse
+  /**
+   * 桶名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bucket?: string
+  /**
+   * 终止点（针对私有云环境）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndPoint?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13524,6 +13570,24 @@ export interface BatchModifyOpsOwnersResponse {
 }
 
 /**
+ * DescribeDsTaskVersionList请求参数结构体
+ */
+export interface DescribeDsTaskVersionListRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+  /**
+   * 是否仅返回当前编辑版本
+   */
+  IsOnlyCurrentEditingVersion?: boolean
+}
+
+/**
  * CreateTaskAlarmRegular返回参数结构体
  */
 export interface CreateTaskAlarmRegularResponse {
@@ -15552,6 +15616,117 @@ export interface ListInstancesRequest {
 timeZone, 默认UTC+8
    */
   ScheduleTimeZone?: string
+}
+
+/**
+ * TaskVersionVO
+ */
+export interface TaskVersionDsDTO {
+  /**
+   * 版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionNum?: string
+  /**
+   * 版本备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionRemark?: string
+  /**
+   * 版本创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
+  /**
+   * 版本创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 版本更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 最新调度计划变更时间 生产态存储
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastSchedulerCommitTime?: string
+  /**
+   * 版本是否正在使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedVersion?: number
+  /**
+   * 任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskInfo?: TaskDsDTO
+  /**
+   * 任务参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskParaInfo?: Array<ParameterTaskDsDto>
+  /**
+   * TaskInputParam输入参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskInputParam?: Array<ParameterTaskInDsDto>
+  /**
+   * TaskOutputParam输出参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskOutputParam?: Array<ParameterTaskOutDsDto>
+  /**
+   * 任务上游依赖信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskLinkInfo?: Array<TaskLinkDsDTO>
+  /**
+   * 审批状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveStatus?: string
+  /**
+   * 审批人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveName?: string
+  /**
+   * 任务事件绑定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskEventPublisher?: Array<EventPublisherDTO>
+  /**
+   * 任务产出登记信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRegisterOutputTable?: Array<TaskDataRegistryDTO>
+  /**
+   * 循环依赖信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskCycleLinkInfo?: Array<TaskCycleLinkDTO>
+  /**
+   * 事件监听信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskEventListener?: Array<EventListenerDTO>
+  /**
+   * 审批时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveTime?: string
 }
 
 /**
@@ -19195,7 +19370,7 @@ export interface ModifyTaskScriptRequest {
    */
   TaskId: string
   /**
-   * 脚本内容 base64编码
+   * 必填，脚本内容 base64编码
    */
   ScriptContent?: string
   /**
@@ -20231,18 +20406,14 @@ export interface IntegrationNodeSchema {
 }
 
 /**
- * DescribeColumnsMeta返回参数结构体
+ * DescribeOpsWorkflows返回参数结构体
  */
-export interface DescribeColumnsMetaResponse {
+export interface DescribeOpsWorkflowsResponse {
   /**
-   * 分页返回的
+   * 工作流列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColumnMetaSet?: Array<ColumnMeta>
-  /**
-   * 总记录数
-   */
-  TotalCount?: number
+  Data?: WorkflowExtOpsDtoPage
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20424,6 +20595,24 @@ export interface ResumeIntegrationTaskRequest {
    * 前端操作类型描述
    */
   EventDesc?: string
+}
+
+/**
+ * SuspendIntegrationTask请求参数结构体
+ */
+export interface SuspendIntegrationTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
+   */
+  Event?: string
 }
 
 /**
@@ -28341,21 +28530,22 @@ export interface DailyScoreInfo {
 }
 
 /**
- * SuspendIntegrationTask请求参数结构体
+ * DescribeColumnsMeta返回参数结构体
  */
-export interface SuspendIntegrationTaskRequest {
+export interface DescribeColumnsMetaResponse {
   /**
-   * 任务id
+   * 分页返回的
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  ColumnMetaSet?: Array<ColumnMeta>
   /**
-   * 项目id
+   * 总记录数
    */
-  ProjectId: string
+  TotalCount?: number
   /**
-   * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Event?: string
+  RequestId?: string
 }
 
 /**
@@ -29019,6 +29209,24 @@ export interface DescribeDatabaseInfoListRequest {
 }
 
 /**
+ * DescribeRuleExecLog请求参数结构体
+ */
+export interface DescribeRuleExecLogRequest {
+  /**
+   * 规则执行Id
+   */
+  RuleExecId: number
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 规则组执行id
+   */
+  RuleGroupExecId: number
+}
+
+/**
  * DescribeIntegrationTask返回参数结构体
  */
 export interface DescribeIntegrationTaskResponse {
@@ -29298,18 +29506,21 @@ export interface StopIntegrationTaskResponse {
 }
 
 /**
- * DescribeOpsWorkflows返回参数结构体
+ * DescribeDsTaskVersionInfo请求参数结构体
  */
-export interface DescribeOpsWorkflowsResponse {
+export interface DescribeDsTaskVersionInfoRequest {
   /**
-   * 工作流列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务ID
    */
-  Data?: WorkflowExtOpsDtoPage
+  TaskId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 版本
    */
-  RequestId?: string
+  TaskVersion: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
 }
 
 /**
@@ -30655,21 +30866,18 @@ export interface DescribeTableLineageResponse {
 }
 
 /**
- * DescribeRuleExecLog请求参数结构体
+ * DescribeDsTaskVersionList返回参数结构体
  */
-export interface DescribeRuleExecLogRequest {
+export interface DescribeDsTaskVersionListResponse {
   /**
-   * 规则执行Id
+   * 版本列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleExecId: number
+  Data?: Array<TaskVersionDsDTO>
   /**
-   * 项目id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ProjectId: string
-  /**
-   * 规则组执行id
-   */
-  RuleGroupExecId: number
+  RequestId?: string
 }
 
 /**

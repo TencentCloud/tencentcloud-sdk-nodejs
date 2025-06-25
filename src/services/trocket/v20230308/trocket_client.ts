@@ -60,6 +60,7 @@ import {
   DeleteSmoothMigrationTaskRequest,
   MQTTInstanceItem,
   DescribeInstanceListResponse,
+  DescribeConsumerClientListResponse,
   ModifyInstanceResponse,
   CreateConsumerGroupRequest,
   ClientSubscriptionInfo,
@@ -169,6 +170,7 @@ import {
   ModifyMQTTInstanceResponse,
   CreateMQTTInstanceRequest,
   DescribeTopicListResponse,
+  DescribeConsumerClientListRequest,
   TopicConsumeStats,
   DescribeMQTTTopicRequest,
   CreateRoleRequest,
@@ -226,7 +228,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改 RocketMQ 5.x 集群接入点。
+   * 修改 RocketMQ 5.x 集群接入点，操作前请先确认接入点已存在。
    */
   async ModifyInstanceEndpoint(
     req: ModifyInstanceEndpointRequest,
@@ -361,7 +363,7 @@ Filters示例：
   }
 
   /**
-   * 删除 RocketMQ 5.x 集群。
+   * 删除 RocketMQ 5.x 集群，删除前请先删除正在使用的主题、消费组和角色信息。
    */
   async DeleteInstance(
     req: DeleteInstanceRequest,
@@ -568,6 +570,16 @@ Filters示例：
   }
 
   /**
+   * 修改迁移中的Topic状态进入下一步
+   */
+  async ChangeMigratingTopicToNextStage(
+    req: ChangeMigratingTopicToNextStageRequest,
+    cb?: (error: string, rep: ChangeMigratingTopicToNextStageResponse) => void
+  ): Promise<ChangeMigratingTopicToNextStageResponse> {
+    return this.request("ChangeMigratingTopicToNextStage", req, cb)
+  }
+
+  /**
    * 查询指定消费组堆积数。
    */
   async DescribeConsumerLag(
@@ -598,7 +610,7 @@ Filters示例：
   }
 
   /**
-   * 修改 RocketMQ 5.x 集群属性。
+   * 修改 RocketMQ 5.x 集群属性，仅支持修改运行中的集群。
    */
   async ModifyInstance(
     req: ModifyInstanceRequest,
@@ -899,13 +911,13 @@ Type，根据任务类型精确查找
   }
 
   /**
-   * 修改迁移中的Topic状态进入下一步
+   * 查询消费组下的客户端连接列表。
    */
-  async ChangeMigratingTopicToNextStage(
-    req: ChangeMigratingTopicToNextStageRequest,
-    cb?: (error: string, rep: ChangeMigratingTopicToNextStageResponse) => void
-  ): Promise<ChangeMigratingTopicToNextStageResponse> {
-    return this.request("ChangeMigratingTopicToNextStage", req, cb)
+  async DescribeConsumerClientList(
+    req: DescribeConsumerClientListRequest,
+    cb?: (error: string, rep: DescribeConsumerClientListResponse) => void
+  ): Promise<DescribeConsumerClientListResponse> {
+    return this.request("DescribeConsumerClientList", req, cb)
   }
 
   /**

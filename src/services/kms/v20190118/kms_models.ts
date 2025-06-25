@@ -145,29 +145,41 @@ export interface DisableKeyResponse {
 export type DescribeWhiteBoxServiceStatusRequest = null
 
 /**
- * VerifyByAsymmetricKey请求参数结构体
+ * UpdateDataKeyDescription请求参数结构体
  */
-export interface VerifyByAsymmetricKeyRequest {
+export interface UpdateDataKeyDescriptionRequest {
   /**
-   * 密钥的唯一标识
+   * 数据密钥的唯一标志符
    */
-  KeyId: string
+  DataKeyId: string
   /**
-   * 签名值，通过调用KMS签名接口生成
+   * 数据密钥 的描述，最大100字节
    */
-  SignatureValue: string
+  Description: string
+}
+
+/**
+ * DescribeDataKey返回参数结构体
+ */
+export interface DescribeDataKeyResponse {
   /**
-   * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
+   * 数据密钥属性信息
    */
-  Message: string
+  DataKeyMetadata?: DataKeyMetadata
   /**
-   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Algorithm: string
+  RequestId?: string
+}
+
+/**
+ * DisableDataKey返回参数结构体
+ */
+export interface DisableDataKeyResponse {
   /**
-   * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MessageType?: string
+  RequestId?: string
 }
 
 /**
@@ -235,6 +247,16 @@ export interface WhiteboxKeyInfo {
 }
 
 /**
+ * DescribeDataKeys请求参数结构体
+ */
+export interface DescribeDataKeysRequest {
+  /**
+   * 查询DataKey的ID列表，批量查询一次最多支持100个DataKeyId
+   */
+  DataKeyIds: Array<string>
+}
+
+/**
  * ListAlgorithms返回参数结构体
  */
 export interface ListAlgorithmsResponse {
@@ -260,6 +282,16 @@ export interface ListAlgorithmsResponse {
  * DisableKeys返回参数结构体
  */
 export interface DisableKeysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EnableDataKey返回参数结构体
+ */
+export interface EnableDataKeyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -305,25 +337,31 @@ export interface DescribeWhiteBoxServiceStatusResponse {
 }
 
 /**
- * ImportKeyMaterial请求参数结构体
+ * 返回CMK列表信息
  */
-export interface ImportKeyMaterialRequest {
+export interface Key {
   /**
-   * 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS版本region的KMS， 导入的密钥材料长度要求为 256 bit。
+   * CMK的全局唯一标识。
    */
-  EncryptedKeyMaterial: string
+  KeyId?: string
+}
+
+/**
+ * ScheduleDataKeyDeletion返回参数结构体
+ */
+export interface ScheduleDataKeyDeletionResponse {
   /**
-   * 通过调用GetParametersForImport获得的导入令牌。
+   * 计划删除执行时间
    */
-  ImportToken: string
+  DeletionDate?: number
   /**
-   * 指定导入密钥材料的CMK，需要和GetParametersForImport 指定的CMK相同。
+   * 唯一标志被计划删除的数据密钥
    */
-  KeyId: string
+  DataKeyId?: string
   /**
-   * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点，最大支持 2147443200。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ValidTo?: number
+  RequestId?: string
 }
 
 /**
@@ -411,6 +449,24 @@ export interface GenerateDataKeyRequest {
    * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
    */
   EncryptionAlgorithm?: string
+  /**
+   * 表示生成的数据密钥是否被KMS托管。1:表示被KMS托管保存,0:表示KMS不托管。表示生成的数据密钥是否被KMS托管。1:表示被KMS托管保存,0:表示KMS不托管。
+   */
+  IsHostedByKms?: number
+  /**
+   * 数据密钥的名称，当IsHostedByKms为1时,必须填写。当IsHostedByKms为0时,可以不填，KMS不托管。
+   */
+  DataKeyName?: string
+  /**
+   * 数据密钥 的描述，最大100字节
+   */
+  Description?: string
+  /**
+   * KMS 独享版对应的 HSM 集群 ID。
+当KeyId 没有传入时有效，如果指定HsmClusterId,会默认在此集群下生成根密钥，然后利用创建的根密钥产生数据密钥。
+如果没有指定HsmClusterId，则会在公有云共享集群下创建一个根密钥，然后利用创建的根密钥产生数据密钥。
+   */
+  HsmClusterId?: string
 }
 
 /**
@@ -474,6 +530,34 @@ export interface GenerateRandomResponse {
 }
 
 /**
+ * UpdateDataKeyName请求参数结构体
+ */
+export interface UpdateDataKeyNameRequest {
+  /**
+   * 数据密钥的唯一标志符
+   */
+  DataKeyId: string
+  /**
+   * 数据密钥的名称
+   */
+  DataKeyName: string
+}
+
+/**
+ * ScheduleDataKeyDeletion请求参数结构体
+ */
+export interface ScheduleDataKeyDeletionRequest {
+  /**
+   * 数据密钥的唯一标志符
+   */
+  DataKeyId: string
+  /**
+   * 计划删除时间区间[7,30]
+   */
+  PendingWindowInDays: number
+}
+
+/**
  * DescribeKeys请求参数结构体
  */
 export interface DescribeKeysRequest {
@@ -526,6 +610,20 @@ export interface VerifyByAsymmetricKeyResponse {
    * 签名是否有效。true：签名有效，false：签名无效。
    */
   SignatureValid?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataKeys返回参数结构体
+ */
+export interface DescribeDataKeysResponse {
+  /**
+   * 返回数据密钥属性信息列表
+   */
+  DataKeyMetadatas?: Array<DataKeyMetadata>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -588,6 +686,24 @@ export interface DecryptResponse {
 }
 
 /**
+ * ListDataKeyDetail返回参数结构体
+ */
+export interface ListDataKeyDetailResponse {
+  /**
+   * 返回的属性信息列表。
+   */
+  DataKeyMetadatas?: Array<DataKeyMetadata>
+  /**
+   * DataKey的总数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateWhiteBoxKey返回参数结构体
  */
 export interface CreateWhiteBoxKeyResponse {
@@ -618,13 +734,25 @@ export interface CreateWhiteBoxKeyResponse {
 }
 
 /**
- * 返回CMK列表信息
+ * ImportKeyMaterial请求参数结构体
  */
-export interface Key {
+export interface ImportKeyMaterialRequest {
   /**
-   * CMK的全局唯一标识。
+   * 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS版本region的KMS， 导入的密钥材料长度要求为 256 bit。
    */
-  KeyId?: string
+  EncryptedKeyMaterial: string
+  /**
+   * 通过调用GetParametersForImport获得的导入令牌。
+   */
+  ImportToken: string
+  /**
+   * 指定导入密钥材料的CMK，需要和GetParametersForImport 指定的CMK相同。
+   */
+  KeyId: string
+  /**
+   * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点，最大支持 2147443200。
+   */
+  ValidTo?: number
 }
 
 /**
@@ -676,6 +804,16 @@ export interface EncryptByWhiteBoxResponse {
 }
 
 /**
+ * UpdateDataKeyName返回参数结构体
+ */
+export interface UpdateDataKeyNameResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeKeys返回参数结构体
  */
 export interface DescribeKeysResponse {
@@ -693,6 +831,24 @@ export interface DescribeKeysResponse {
  * EnableWhiteBoxKey返回参数结构体
  */
 export interface EnableWhiteBoxKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListDataKeys返回参数结构体
+ */
+export interface ListDataKeysResponse {
+  /**
+   * 数据密钥Id列表数组
+   */
+  DataKeys?: Array<DataKey>
+  /**
+   * 数据密钥的总数量
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -740,6 +896,30 @@ export interface ListKeysResponse {
 }
 
 /**
+ * 标签过滤器
+ */
+export interface TagFilter {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue?: Array<string>
+}
+
+/**
+ * DescribeDataKey请求参数结构体
+ */
+export interface DescribeDataKeyRequest {
+  /**
+   * 数据密钥全局唯一标识符
+   */
+  DataKeyId: string
+}
+
+/**
  * AsymmetricSm2Decrypt返回参数结构体
  */
 export interface AsymmetricSm2DecryptResponse {
@@ -768,6 +948,90 @@ export interface DisableKeyRotationResponse {
 }
 
 /**
+ * 数据密钥属性信息
+ */
+export interface DataKeyMetadata {
+  /**
+   * DataKey的全局唯一标识
+   */
+  DataKeyId?: string
+  /**
+   * CMK的全局唯一标识
+   */
+  KeyId?: string
+  /**
+   * 作为密钥更容易辨识，更容易被人看懂的数据密钥名称
+   */
+  DataKeyName?: string
+  /**
+   * 数据密钥的长度,单位字节
+   */
+  NumberOfBytes?: number
+  /**
+   * 密钥创建时间
+   */
+  CreateTime?: number
+  /**
+   * DataKey的描述
+   */
+  Description?: string
+  /**
+   * DataKey的状态， 取值为：Enabled | Disabled | PendingDelete
+   */
+  KeyState?: string
+  /**
+   * 创建者
+   */
+  CreatorUin?: number
+  /**
+   * 数据密钥的创建者，用户创建的为 user，授权各云产品自动创建的为对应的产品名
+   */
+  Owner?: string
+  /**
+   * 计划删除的时间
+   */
+  DeletionDate?: number
+  /**
+   * DataKey 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL
+   */
+  Origin?: string
+  /**
+   * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+   */
+  HsmClusterId?: string
+  /**
+   * 资源ID，格式：creatorUin/$creatorUin/$dataKeyId
+   */
+  ResourceId?: string
+}
+
+/**
+ * VerifyByAsymmetricKey请求参数结构体
+ */
+export interface VerifyByAsymmetricKeyRequest {
+  /**
+   * 密钥的唯一标识
+   */
+  KeyId: string
+  /**
+   * 签名值，通过调用KMS签名接口生成
+   */
+  SignatureValue: string
+  /**
+   * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
+   */
+  Message: string
+  /**
+   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
+   */
+  Algorithm: string
+  /**
+   * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+   */
+  MessageType?: string
+}
+
+/**
  * DisableWhiteBoxKeys请求参数结构体
  */
 export interface DisableWhiteBoxKeysRequest {
@@ -775,6 +1039,41 @@ export interface DisableWhiteBoxKeysRequest {
    * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
    */
   KeyIds: Array<string>
+}
+
+/**
+ * ImportDataKey请求参数结构体
+ */
+export interface ImportDataKeyRequest {
+  /**
+   * 数据密钥的名称
+   */
+  DataKeyName: string
+  /**
+   * 如果导入的是明文数据密钥，则是base64 转换后的明文数据密钥，  如果导入的是密文数据密钥，则是由KMS GenerateDataKey接口生成的密文数据密钥。
+   */
+  ImportKeyMaterial: string
+  /**
+   * 1:密文导入(由KMS接口生成的密文数据密钥)，2:明文导入。
+   */
+  ImportType: number
+  /**
+   * 数据密钥 的描述，最大100字节
+   */
+  Description?: string
+  /**
+   * 当导入密文数据密钥时，无需传入根密钥,如果传入也会忽略。
+当KeyId 为空，如果指定了独享集群HsmClusterId，则会在独享集群下创建一个根密钥，根据生成的根密钥加密数据密钥。
+如果没有指定独享集群HsmClusterId,则会在公有云共享集群下创建一个根密钥，根据生成的根密钥加密数据密钥。
+如果KeyId 不为空，根据指定的根密钥加密数据密钥。
+   */
+  KeyId?: string
+  /**
+   * KMS 独享版对应的 HSM 集群 ID。
+当KeyId 没有传入时有效，如果指定了独享集群HsmClusterId，则会在独享集群下创建一个根密钥，根据产生的根密钥加密数据密钥。
+如果没有指定独享集群HsmClusterId,则会在公有云共享集群下创建一个根密钥，根据产生的根密钥加密数据密钥。
+   */
+  HsmClusterId?: string
 }
 
 /**
@@ -862,6 +1161,16 @@ export interface GetRegionsResponse {
 }
 
 /**
+ * UpdateDataKeyDescription返回参数结构体
+ */
+export interface UpdateDataKeyDescriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 独享版集群
  */
 export interface ExclusiveHSM {
@@ -873,6 +1182,26 @@ export interface ExclusiveHSM {
    * 独享集群名称
    */
   HsmClusterName?: string
+}
+
+/**
+ * CancelKeyDeletion请求参数结构体
+ */
+export interface CancelKeyDeletionRequest {
+  /**
+   * 需要被取消删除的CMK的唯一标志
+   */
+  KeyId: string
+}
+
+/**
+ * EnableDataKeys返回参数结构体
+ */
+export interface EnableDataKeysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -893,9 +1222,23 @@ export interface GenerateDataKeyResponse {
    */
   CiphertextBlob?: string
   /**
+   * DataKey的全局唯一标识,当KMS托管数据密钥时返回。
+   */
+  DataKeyId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableDataKeys请求参数结构体
+ */
+export interface EnableDataKeysRequest {
+  /**
+   * 需要批量启用的DataKey Id 列表， 数据密钥数量最大支持100
+   */
+  DataKeyIds: Array<string>
 }
 
 /**
@@ -918,6 +1261,30 @@ export interface CreateWhiteBoxKeyRequest {
    * 标签列表
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * GetDataKeyPlaintext返回参数结构体
+ */
+export interface GetDataKeyPlaintextResponse {
+  /**
+   * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。 若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
+   */
+  Plaintext?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisableDataKey请求参数结构体
+ */
+export interface DisableDataKeyRequest {
+  /**
+   * 数据密钥唯一标识符
+   */
+  DataKeyId: string
 }
 
 /**
@@ -1059,13 +1426,31 @@ export interface EncryptResponse {
 }
 
 /**
- * CancelKeyDeletion请求参数结构体
+ * GetDataKeyPlaintext请求参数结构体
  */
-export interface CancelKeyDeletionRequest {
+export interface GetDataKeyPlaintextRequest {
   /**
-   * 需要被取消删除的CMK的唯一标志
+   * 数据密钥的唯一标志符
    */
-  KeyId: string
+  DataKeyId: string
+  /**
+   * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+   */
+  EncryptionPublicKey?: string
+  /**
+   * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（以 C1C3C2 格式返回密文），SM2_C1C3C2_ASN1 （以 C1C3C2 ASN1 格式返回密文），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+   */
+  EncryptionAlgorithm?: string
+}
+
+/**
+ * GetDataKeyCiphertextBlob请求参数结构体
+ */
+export interface GetDataKeyCiphertextBlobRequest {
+  /**
+   * 数据密钥的唯一标志符
+   */
+  DataKeyId: string
 }
 
 /**
@@ -1082,6 +1467,24 @@ export interface DeleteImportedKeyMaterialRequest {
  * EnableKey返回参数结构体
  */
 export interface EnableKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ImportDataKey返回参数结构体
+ */
+export interface ImportDataKeyResponse {
+  /**
+   * CMK的全局唯一标识
+   */
+  KeyId?: string
+  /**
+   * DataKey的全局唯一标识  否  官网/国内&国际站展示
+   */
+  DataKeyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1113,7 +1516,7 @@ export interface GetServiceStatusResponse {
    */
   ProRenewFlag?: number
   /**
-   * 旗舰版购买记录的唯一性标识。如果为开通旗舰版，则返回值为空
+   * 旗舰版购买记录的唯一性标识。如果未开通旗舰版，则返回值为空
    */
   ProResourceId?: string
   /**
@@ -1140,6 +1543,22 @@ export interface GetServiceStatusResponse {
    * 返回独享集群组
    */
   ExclusiveHSMList?: Array<ExclusiveHSM>
+  /**
+   * 是否支持数据密钥托管。1:支持，0:不支持。
+   */
+  IsAllowedDataKeyHosted?: boolean
+  /**
+   * IsAllowedDataKeyHosted为1时有效，数据密钥的购买额度
+   */
+  DataKeyLimit?: number
+  /**
+   * IsAllowedDataKeyHosted为1时有效，数据密钥免费额度。
+   */
+  FreeDataKeyLimit?: number
+  /**
+   * IsAllowedDataKeyHosted为1时有效，已使用的数据密钥数量。
+   */
+  DataKeyUsedCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1207,9 +1626,91 @@ export interface AsymmetricSm2DecryptRequest {
 }
 
 /**
+ * ListDataKeys请求参数结构体
+ */
+export interface ListDataKeysRequest {
+  /**
+   * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+   */
+  Offset?: number
+  /**
+   * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为10，最大值为200
+   */
+  Limit?: number
+  /**
+   * 根据创建者角色筛选，默认 0 表示用户自己创建的数据密钥， 1 表示授权其它云产品自动创建的数据密钥
+   */
+  Role?: number
+  /**
+   * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+   */
+  HsmClusterId?: string
+}
+
+/**
  * DeleteWhiteBoxKey返回参数结构体
  */
 export interface DeleteWhiteBoxKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListDataKeyDetail请求参数结构体
+ */
+export interface ListDataKeyDetailRequest {
+  /**
+   * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+   */
+  Offset?: number
+  /**
+   * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为10，最大值为200
+   */
+  Limit?: number
+  /**
+   * 根据创建者角色筛选，默认 0 表示用户自己创建的数据密钥， 1 表示授权其它云产品自动创建的数据密钥
+   */
+  Role?: number
+  /**
+   * 根据DataKey创建时间排序， 0 表示按照降序排序，1表示按照升序排序
+   */
+  OrderType?: number
+  /**
+   * 根据DataKey状态筛选， 0表示全部DataKey， 1 表示仅查询Enabled DataKey， 2 表示仅查询Disabled DataKey，3 表示查询PendingDelete 状态的DataKey(处于计划删除状态的Key)。
+   */
+  KeyState?: number
+  /**
+   * 根据DataKeyId或者DataKeyName进行模糊匹配查询
+   */
+  SearchKeyAlias?: string
+  /**
+   * 根据DateKey类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的数据密钥， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型数据密钥，"ALL" 或者不设置表示两种类型都查询，大小写敏感。
+   */
+  Origin?: string
+  /**
+   * KMS 高级版对应的 HSM 集群 ID。
+   */
+  HsmClusterId?: string
+  /**
+   * 根密钥全局唯一标识符
+   */
+  KeyId?: string
+  /**
+   * 数据密钥的长度
+   */
+  DataKeyLen?: number
+}
+
+/**
+ * CancelDataKeyDeletion返回参数结构体
+ */
+export interface CancelDataKeyDeletionResponse {
+  /**
+   * 唯一标志被计划删除的数据密钥
+   */
+  DataKeyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1246,6 +1747,16 @@ export interface DescribeWhiteBoxDecryptKeyRequest {
    * 白盒密钥的全局唯一标识符
    */
   KeyId: string
+}
+
+/**
+ * 数据密钥属性
+ */
+export interface DataKey {
+  /**
+   * DataKey的全局唯一标识。
+   */
+  DataKeyId?: string
 }
 
 /**
@@ -1330,6 +1841,28 @@ export interface KeyMetadata {
  * CancelKeyArchive返回参数结构体
  */
 export interface CancelKeyArchiveResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetPublicKey返回参数结构体
+ */
+export interface GetPublicKeyResponse {
+  /**
+   * CMK的唯一标识。
+   */
+  KeyId: string
+  /**
+   * 经过base64编码的公钥内容。
+   */
+  PublicKey: string
+  /**
+   * PEM格式的公钥内容。
+   */
+  PublicKeyPem: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1610,6 +2143,16 @@ export interface GenerateRandomRequest {
 }
 
 /**
+ * DisableDataKeys返回参数结构体
+ */
+export interface DisableDataKeysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ScheduleKeyDeletion请求参数结构体
  */
 export interface ScheduleKeyDeletionRequest {
@@ -1621,6 +2164,16 @@ export interface ScheduleKeyDeletionRequest {
    * 计划删除时间区间[7,30]
    */
   PendingWindowInDays: number
+}
+
+/**
+ * CancelDataKeyDeletion请求参数结构体
+ */
+export interface CancelDataKeyDeletionRequest {
+  /**
+   * 数据密钥的唯一标志符
+   */
+  DataKeyId: string
 }
 
 /**
@@ -1658,25 +2211,13 @@ export interface ImportKeyMaterialResponse {
 }
 
 /**
- * GetPublicKey返回参数结构体
+ * EnableDataKey请求参数结构体
  */
-export interface GetPublicKeyResponse {
+export interface EnableDataKeyRequest {
   /**
-   * CMK的唯一标识。
+   * 数据密钥唯一标识符
    */
-  KeyId: string
-  /**
-   * 经过base64编码的公钥内容。
-   */
-  PublicKey: string
-  /**
-   * PEM格式的公钥内容。
-   */
-  PublicKeyPem: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DataKeyId: string
 }
 
 /**
@@ -1698,17 +2239,17 @@ export interface BindCloudResourceRequest {
 }
 
 /**
- * 标签过滤器
+ * GetDataKeyCiphertextBlob返回参数结构体
  */
-export interface TagFilter {
+export interface GetDataKeyCiphertextBlobResponse {
   /**
-   * 标签键
+   * 数据密钥的密文
    */
-  TagKey: string
+  CiphertextBlob?: string
   /**
-   * 标签值
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TagValue?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1798,6 +2339,16 @@ export interface PostQuantumCryptoDecryptResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisableDataKeys请求参数结构体
+ */
+export interface DisableDataKeysRequest {
+  /**
+   * 需要批量禁用的DataKey Id 列表，数据密钥数量最大支持100
+   */
+  DataKeyIds: Array<string>
 }
 
 /**

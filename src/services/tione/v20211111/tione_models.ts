@@ -6229,6 +6229,10 @@ export interface Pod {
    * 实例状态的补充信息
    */
   Message?: string
+  /**
+   * 当前实例所在的节点 IP
+   */
+  NodeIP?: string
 }
 
 /**

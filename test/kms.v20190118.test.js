@@ -18,6 +18,16 @@ const client = new tencentcloud.kms.v20190118.Client({
 })
 describe("kms.v20190118.test.js", function () {
 
+it("kms.v20190118.ListDataKeys", async function () {
+    try {
+       const data = await client.ListDataKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.PostQuantumCryptoVerify", async function () {
     try {
        const data = await client.PostQuantumCryptoVerify({})
@@ -78,6 +88,16 @@ it("kms.v20190118.ImportKeyMaterial", async function () {
     }
 })
 
+it("kms.v20190118.DescribeDataKey", async function () {
+    try {
+       const data = await client.DescribeDataKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.GetPublicKey", async function () {
     try {
        const data = await client.GetPublicKey({})
@@ -118,6 +138,16 @@ it("kms.v20190118.GetServiceStatus", async function () {
     }
 })
 
+it("kms.v20190118.GetDataKeyPlaintext", async function () {
+    try {
+       const data = await client.GetDataKeyPlaintext({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.AsymmetricSm2Decrypt", async function () {
     try {
        const data = await client.AsymmetricSm2Decrypt({})
@@ -128,9 +158,9 @@ it("kms.v20190118.AsymmetricSm2Decrypt", async function () {
     }
 })
 
-it("kms.v20190118.SignByAsymmetricKey", async function () {
+it("kms.v20190118.PostQuantumCryptoEncrypt", async function () {
     try {
-       const data = await client.SignByAsymmetricKey({})
+       const data = await client.PostQuantumCryptoEncrypt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +188,16 @@ it("kms.v20190118.GetKeyRotationStatus", async function () {
     }
 })
 
+it("kms.v20190118.ScheduleDataKeyDeletion", async function () {
+    try {
+       const data = await client.ScheduleDataKeyDeletion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.DescribeWhiteBoxKeyDetails", async function () {
     try {
        const data = await client.DescribeWhiteBoxKeyDetails({})
@@ -178,6 +218,16 @@ it("kms.v20190118.BindCloudResource", async function () {
     }
 })
 
+it("kms.v20190118.OverwriteWhiteBoxDeviceFingerprints", async function () {
+    try {
+       const data = await client.OverwriteWhiteBoxDeviceFingerprints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.ArchiveKey", async function () {
     try {
        const data = await client.ArchiveKey({})
@@ -188,9 +238,49 @@ it("kms.v20190118.ArchiveKey", async function () {
     }
 })
 
-it("kms.v20190118.CancelKeyArchive", async function () {
+it("kms.v20190118.UpdateDataKeyDescription", async function () {
     try {
-       const data = await client.CancelKeyArchive({})
+       const data = await client.UpdateDataKeyDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.UpdateDataKeyName", async function () {
+    try {
+       const data = await client.UpdateDataKeyName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.SignByAsymmetricKey", async function () {
+    try {
+       const data = await client.SignByAsymmetricKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.DisableKeys", async function () {
+    try {
+       const data = await client.DisableKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.CancelDataKeyDeletion", async function () {
+    try {
+       const data = await client.CancelDataKeyDeletion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +348,16 @@ it("kms.v20190118.GenerateRandom", async function () {
     }
 })
 
+it("kms.v20190118.GetDataKeyCiphertextBlob", async function () {
+    try {
+       const data = await client.GetDataKeyCiphertextBlob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.PostQuantumCryptoDecrypt", async function () {
     try {
        const data = await client.PostQuantumCryptoDecrypt({})
@@ -268,9 +368,29 @@ it("kms.v20190118.PostQuantumCryptoDecrypt", async function () {
     }
 })
 
-it("kms.v20190118.OverwriteWhiteBoxDeviceFingerprints", async function () {
+it("kms.v20190118.VerifyByAsymmetricKey", async function () {
     try {
-       const data = await client.OverwriteWhiteBoxDeviceFingerprints({})
+       const data = await client.VerifyByAsymmetricKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.EnableDataKeys", async function () {
+    try {
+       const data = await client.EnableDataKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.ImportDataKey", async function () {
+    try {
+       const data = await client.ImportDataKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +448,19 @@ it("kms.v20190118.DisableWhiteBoxKeys", async function () {
     }
 })
 
-it("kms.v20190118.ListKeyDetail", async function () {
+it("kms.v20190118.DisableDataKey", async function () {
     try {
-       const data = await client.ListKeyDetail({})
+       const data = await client.DisableDataKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.DescribeDataKeys", async function () {
+    try {
+       const data = await client.DescribeDataKeys({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +471,16 @@ it("kms.v20190118.ListKeyDetail", async function () {
 it("kms.v20190118.DisableKeyRotation", async function () {
     try {
        const data = await client.DisableKeyRotation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.ListKeyDetail", async function () {
+    try {
+       const data = await client.ListKeyDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +568,9 @@ it("kms.v20190118.CreateWhiteBoxKey", async function () {
     }
 })
 
-it("kms.v20190118.PostQuantumCryptoEncrypt", async function () {
+it("kms.v20190118.EnableDataKey", async function () {
     try {
-       const data = await client.PostQuantumCryptoEncrypt({})
+       const data = await client.EnableDataKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +638,9 @@ it("kms.v20190118.UpdateKeyDescription", async function () {
     }
 })
 
-it("kms.v20190118.DisableKeys", async function () {
+it("kms.v20190118.CancelKeyArchive", async function () {
     try {
-       const data = await client.DisableKeys({})
+       const data = await client.CancelKeyArchive({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +678,19 @@ it("kms.v20190118.GetRegions", async function () {
     }
 })
 
-it("kms.v20190118.VerifyByAsymmetricKey", async function () {
+it("kms.v20190118.ListDataKeyDetail", async function () {
     try {
-       const data = await client.VerifyByAsymmetricKey({})
+       const data = await client.ListDataKeyDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.DisableDataKeys", async function () {
+    try {
+       const data = await client.DisableDataKeys({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

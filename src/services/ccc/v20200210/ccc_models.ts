@@ -517,7 +517,7 @@ HoaiMy
    */
   WelcomeType?: number
   /**
-   * 0: 默认可打断， 1：高优先不可打断
+   * 0: 默认可打断， 2：高优先不可打断
    */
   WelcomeMessagePriority?: number
   /**

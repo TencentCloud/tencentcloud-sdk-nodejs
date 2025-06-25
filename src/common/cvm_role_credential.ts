@@ -16,7 +16,7 @@ interface CvmRoleCredentialResult {
 
 /**
  * Tencent Cloud Credential via CVM role
- * 
+ *
  * Automatically generates temporary credentials when binding a service role to instance.
  * @see {@link https://cloud.tencent.com/document/product/598/85616} for more information.
  */

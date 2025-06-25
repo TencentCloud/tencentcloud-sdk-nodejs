@@ -27,6 +27,7 @@ import {
   UnlockIntegrationTaskResponse,
   DescribeReportTaskListRequest,
   DescribeStreamTaskLogListRequest,
+  EventPublisherDTO,
   GovDatasourceInfo,
   DescribeIntegrationNodeResponse,
   LogContentInfo,
@@ -48,7 +49,7 @@ import {
   CreateAndDDLSupport,
   CreateIntegrationNodeResponse,
   TaskInnerInfo,
-  GetCosTokenResponse,
+  DescribeDsTaskVersionInfoResponse,
   CreateDsFolderResponse,
   DescribeManualTriggerRecordPageRequest,
   UserFileInfo,
@@ -182,6 +183,7 @@ import {
   CollectionInstanceOpsDto,
   DrInstanceOpsDtoPage,
   TableLineageInfo,
+  GetCosTokenResponse,
   DescribeSchedulerInstanceStatusResponse,
   CountOpsInstanceStateRequest,
   DescribeThirdTaskRunLogResponse,
@@ -375,6 +377,7 @@ import {
   BatchCreateTaskVersionAsyncRequest,
   TaskTypeOpsDto,
   BatchModifyOpsOwnersResponse,
+  DescribeDsTaskVersionListRequest,
   CreateTaskAlarmRegularResponse,
   DeleteRuleTemplateRequest,
   DescribeOpsMakePlanTasksRequest,
@@ -429,6 +432,7 @@ import {
   RuleExecConfig,
   SuspendIntegrationTaskResponse,
   ListInstancesRequest,
+  TaskVersionDsDTO,
   RenewWorkflowOwnerDsRequest,
   DescribeSchedulerRunTimeInstanceCntByStatusResponse,
   CreateTaskFolderResponse,
@@ -582,12 +586,13 @@ import {
   DataCheckStat,
   CreateRuleRequest,
   IntegrationNodeSchema,
-  DescribeColumnsMetaResponse,
+  DescribeOpsWorkflowsResponse,
   DescribeRuleExecResultsResponse,
   QualityScoreTrend,
   RuleTemplate,
   DeleteFileResponse,
   ResumeIntegrationTaskRequest,
+  SuspendIntegrationTaskRequest,
   DeleteCodeTemplateResponse,
   TriggerDsEventRequest,
   DescribeRelatedTasksByTaskIdResp,
@@ -817,7 +822,7 @@ import {
   DescribeWorkflowSchedulerInfoDsResponse,
   DescribeRuleGroupTableResponse,
   DailyScoreInfo,
-  SuspendIntegrationTaskRequest,
+  DescribeColumnsMetaResponse,
   TaskSubmitPreCheckDetailInfo,
   DescribeDependOpsTasksResponse,
   DeleteRuleTemplateResponse,
@@ -849,6 +854,7 @@ import {
   ParamMapDsDto,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
+  DescribeRuleExecLogRequest,
   DescribeIntegrationTaskResponse,
   CreateDataModelRequest,
   DescribeCodeTemplateDetailResponse,
@@ -859,7 +865,7 @@ import {
   LifecycleInfo,
   GetIntegrationNodeColumnSchemaResponse,
   StopIntegrationTaskResponse,
-  DescribeOpsWorkflowsResponse,
+  DescribeDsTaskVersionInfoRequest,
   OpsTaskCanvasDto,
   DescribeRuleTemplatesRequest,
   DescribeDataCheckStatResponse,
@@ -900,7 +906,7 @@ import {
   WorkflowDsDTO,
   ModifyTaskInfoDsResponse,
   DescribeTableLineageResponse,
-  DescribeRuleExecLogRequest,
+  DescribeDsTaskVersionListResponse,
   BatchRerunIntegrationTaskInstancesResponse,
   RuleGroupPage,
   DeleteDataModelRequest,
@@ -993,7 +999,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务脚本
+   * 查询任务脚本。本接口已废弃，请使用接口GetPaginationTaskScript。
    */
   async DescribeTaskScript(
     req: DescribeTaskScriptRequest,
@@ -2290,7 +2296,7 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
 
   /**
      * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本
+修改任务脚本。本接口已废弃，请使用接口ModifyTaskInfoDs。
      */
   async ModifyTaskScript(
     req: ModifyTaskScriptRequest,
@@ -2327,6 +2333,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeDatabaseInfoListResponse) => void
   ): Promise<DescribeDatabaseInfoListResponse> {
     return this.request("DescribeDatabaseInfoList", req, cb)
+  }
+
+  /**
+   * 编辑规则模板
+   */
+  async ModifyRuleTemplate(
+    req: ModifyRuleTemplateRequest,
+    cb?: (error: string, rep: ModifyRuleTemplateResponse) => void
+  ): Promise<ModifyRuleTemplateResponse> {
+    return this.request("ModifyRuleTemplate", req, cb)
   }
 
   /**
@@ -2460,13 +2476,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 编辑规则模板
+   * 查询规则组订阅信息
    */
-  async ModifyRuleTemplate(
-    req: ModifyRuleTemplateRequest,
-    cb?: (error: string, rep: ModifyRuleTemplateResponse) => void
-  ): Promise<ModifyRuleTemplateResponse> {
-    return this.request("ModifyRuleTemplate", req, cb)
+  async DescribeRuleGroupSubscription(
+    req: DescribeRuleGroupSubscriptionRequest,
+    cb?: (error: string, rep: DescribeRuleGroupSubscriptionResponse) => void
+  ): Promise<DescribeRuleGroupSubscriptionResponse> {
+    return this.request("DescribeRuleGroupSubscription", req, cb)
   }
 
   /**
@@ -2651,6 +2667,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: UploadContentResponse) => void
   ): Promise<UploadContentResponse> {
     return this.request("UploadContent", req, cb)
+  }
+
+  /**
+   * 拉取任务版本列表
+   */
+  async DescribeDsTaskVersionList(
+    req: DescribeDsTaskVersionListRequest,
+    cb?: (error: string, rep: DescribeDsTaskVersionListResponse) => void
+  ): Promise<DescribeDsTaskVersionListResponse> {
+    return this.request("DescribeDsTaskVersionList", req, cb)
   }
 
   /**
@@ -3014,13 +3040,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 查询规则组订阅信息
+   * 查看任务版本详细信息
    */
-  async DescribeRuleGroupSubscription(
-    req: DescribeRuleGroupSubscriptionRequest,
-    cb?: (error: string, rep: DescribeRuleGroupSubscriptionResponse) => void
-  ): Promise<DescribeRuleGroupSubscriptionResponse> {
-    return this.request("DescribeRuleGroupSubscription", req, cb)
+  async DescribeDsTaskVersionInfo(
+    req: DescribeDsTaskVersionInfoRequest,
+    cb?: (error: string, rep: DescribeDsTaskVersionInfoResponse) => void
+  ): Promise<DescribeDsTaskVersionInfoResponse> {
+    return this.request("DescribeDsTaskVersionInfo", req, cb)
   }
 
   /**

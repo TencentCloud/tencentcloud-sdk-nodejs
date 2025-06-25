@@ -2472,6 +2472,14 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 数据库代理配置
    */
   ProxyConfig?: ProxyConfig
+  /**
+   * 是否自动归档
+   */
+  AutoArchive?: string
+  /**
+   * 暂停后的归档处理时间
+   */
+  AutoArchiveDelayHours?: number
 }
 
 /**
@@ -7537,6 +7545,10 @@ offlined 已下线
    * 实例id列表
    */
   InstanceIds?: Array<string>
+  /**
+   * 集群类型，取值范围<li> CYNOSDB：事务集群 </li><li> LIBRADB：分析集群 </li><li> ALL：全部 </li>，缺省为 ALL
+   */
+  ClusterType?: string
 }
 
 /**

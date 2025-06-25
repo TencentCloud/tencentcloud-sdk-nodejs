@@ -5524,6 +5524,10 @@ export interface AssociateIPv6AddressRequest {
    */
   IPv6AddressId: string
   /**
+   * 要绑定的实例 ID。实例 ID 形如：ins-djflxkvi。可通过登录控制台查询，也可通过 DescribeInstances 接口返回值中的InstanceId获取。
+   */
+  InstanceId?: string
+  /**
    * 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni?rid=1)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的networkInterfaceId获取。
    */
   NetworkInterfaceId?: string

@@ -4985,7 +4985,7 @@ export interface CreateFlowSignUrlResponse {
  */
 export interface RegisterInfo {
   /**
-   * 法人姓名
+   * <font color="red">字段不再使用</font>，法人姓名
    */
   LegalName: string
   /**
@@ -4995,7 +4995,7 @@ export interface RegisterInfo {
    */
   Uscc?: string
   /**
-   * 社会统一信用代码
+   * <font color="red">字段不再使用</font>，社会统一信用代码
    */
   UnifiedSocialCreditCode?: string
   /**
@@ -5005,8 +5005,18 @@ export interface RegisterInfo {
 <li><strong>2</strong>: 法人授权方式</li>
 <li><strong>5</strong>: 授权书+对公打款方式</li>
 </ul>
+   * @deprecated
    */
   AuthorizationTypes?: Array<number | bigint>
+  /**
+   * 指定企业认证的授权方式 支持多选:
+
+<ul>
+<li><strong>2</strong>: 法人授权方式</li>
+<li><strong>5</strong>: 授权书+对公打款方式</li>
+</ul>
+   */
+  AuthorizationType?: number
 }
 
 /**

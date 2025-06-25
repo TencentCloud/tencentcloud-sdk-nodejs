@@ -65,7 +65,6 @@ export interface SendTaskData {
   Subject?: string
   /**
    * 模板和模板数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Template?: Template
   /**
@@ -80,7 +79,6 @@ export interface SendTaskData {
   TimedParam?: TimedEmailParam
   /**
    * 任务异常信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMsg?: string
   /**
@@ -1480,7 +1478,6 @@ export interface ListSendTasksResponse {
 export interface Volume {
   /**
    * 日期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SendDate?: string
   /**
@@ -1509,7 +1506,6 @@ export interface Volume {
   BounceCount?: number
   /**
    * 取消订阅的用户数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnsubscribeCount?: number
 }

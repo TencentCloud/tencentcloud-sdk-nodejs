@@ -57,13 +57,16 @@ import {
   DescribeResourcesRequest,
   BindDeviceResourceResponse,
   ResetDeviceAccountPrivateKeyResponse,
+  SetLDAPSyncFlagResponse,
   DeleteUserGroupMembersResponse,
   CmdTemplate,
   SearchCommandResult,
+  DescribeLDAPUnitSetRequest,
   SearchSubtaskResultByIdResponse,
   ModifyOAuthSettingRequest,
   CreateUserGroupRequest,
   SearchFileTypeFilter,
+  ReplaySessionRequest,
   BindDeviceAccountPrivateKeyResponse,
   IOAUserGroup,
   SearchCommandBySidRequest,
@@ -113,9 +116,11 @@ import {
   DescribeDeviceGroupsRequest,
   CreateAssetSyncJobResponse,
   BindDeviceAccountPrivateKeyRequest,
+  ModifyLDAPSettingRequest,
   ModifyChangePwdTaskRequest,
   CreateAssetSyncJobRequest,
   Group,
+  UnlockUserResponse,
   DescribeAssetSyncStatusRequest,
   Clb,
   AccessDevicesResponse,
@@ -127,14 +132,16 @@ import {
   ModifyDeviceGroupResponse,
   ModifyOAuthSettingResponse,
   DescribeOperationTaskRequest,
+  DescribeLDAPUnitSetResponse,
   DescribeUserGroupMembersResponse,
   ImportExternalDeviceResponse,
   SearchSessionCommandResponse,
   DeleteAccessWhiteListRulesRequest,
-  DeleteUserGroupsRequest,
+  CheckLDAPConnectionRequest,
   User,
   ResetUserRequest,
   Device,
+  DeleteUserGroupsRequest,
   CreateDeviceAccountResponse,
   ExternalDevice,
   ModifyDeviceGroupRequest,
@@ -146,12 +153,14 @@ import {
   DescribeChangePwdTaskRequest,
   SearchFileBySidResponse,
   DescribeOperationEventRequest,
+  SetLDAPSyncFlagRequest,
   ModifyDeviceResponse,
   ModifyUserResponse,
   ChangePwdTaskDetail,
   ModifyCmdTemplateRequest,
   CreateOperationTaskRequest,
   DescribeCmdTemplatesResponse,
+  UnlockUserRequest,
   CreateDeviceAccountRequest,
   AddDeviceGroupMembersResponse,
   DeleteCmdTemplatesRequest,
@@ -170,7 +179,7 @@ import {
   DescribeDomainsRequest,
   DescribeCmdTemplatesRequest,
   ModifyAclResponse,
-  DeleteDeviceGroupsResponse,
+  DescribeAclsRequest,
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
@@ -178,6 +187,7 @@ import {
   Resource,
   RunChangePwdTaskResponse,
   BindDeviceResourceRequest,
+  CheckLDAPConnectionResponse,
   RunOperationTaskRequest,
   Acl,
   TagFilter,
@@ -188,10 +198,12 @@ import {
   SearchFileBySidRequest,
   DescribeOperationEventResponse,
   DescribeDomainsResponse,
+  ModifyLDAPSettingResponse,
   SearchFileResult,
+  ReplaySessionResponse,
   DeleteAclsResponse,
   DescribeDeviceGroupMembersRequest,
-  DescribeAclsRequest,
+  DeleteDeviceGroupsResponse,
   AddDeviceGroupMembersRequest,
   DeleteDeviceAccountsResponse,
   DeleteAccessWhiteListRulesResponse,
@@ -278,6 +290,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 测试LDAP连接
+   */
+  async CheckLDAPConnection(
+    req: CheckLDAPConnectionRequest,
+    cb?: (error: string, rep: CheckLDAPConnectionResponse) => void
+  ): Promise<CheckLDAPConnectionResponse> {
+    return this.request("CheckLDAPConnection", req, cb)
+  }
+
+  /**
    * 重置用户
    */
   async ResetUser(
@@ -305,6 +327,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateChangePwdTaskResponse) => void
   ): Promise<CreateChangePwdTaskResponse> {
     return this.request("CreateChangePwdTask", req, cb)
+  }
+
+  /**
+   * 设置LDAP 立即同步标记
+   */
+  async SetLDAPSyncFlag(
+    req?: SetLDAPSyncFlagRequest,
+    cb?: (error: string, rep: SetLDAPSyncFlagResponse) => void
+  ): Promise<SetLDAPSyncFlagResponse> {
+    return this.request("SetLDAPSyncFlag", req, cb)
   }
 
   /**
@@ -368,13 +400,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 搜索文件传输会话下文件操作列表
+   * 获取LDAP ou 列表
    */
-  async SearchFileBySid(
-    req: SearchFileBySidRequest,
-    cb?: (error: string, rep: SearchFileBySidResponse) => void
-  ): Promise<SearchFileBySidResponse> {
-    return this.request("SearchFileBySid", req, cb)
+  async DescribeLDAPUnitSet(
+    req: DescribeLDAPUnitSetRequest,
+    cb?: (error: string, rep: DescribeLDAPUnitSetResponse) => void
+  ): Promise<DescribeLDAPUnitSetResponse> {
+    return this.request("DescribeLDAPUnitSet", req, cb)
   }
 
   /**
@@ -568,6 +600,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解锁用户
+   */
+  async UnlockUser(
+    req: UnlockUserRequest,
+    cb?: (error: string, rep: UnlockUserResponse) => void
+  ): Promise<UnlockUserResponse> {
+    return this.request("UnlockUser", req, cb)
+  }
+
+  /**
+   * 搜索文件传输会话下文件操作列表
+   */
+  async SearchFileBySid(
+    req: SearchFileBySidRequest,
+    cb?: (error: string, rep: SearchFileBySidResponse) => void
+  ): Promise<SearchFileBySidResponse> {
+    return this.request("SearchFileBySid", req, cb)
+  }
+
+  /**
    * 清除设备账号绑定的密钥
    */
   async ResetDeviceAccountPrivateKey(
@@ -655,6 +707,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyOperationTaskResponse) => void
   ): Promise<ModifyOperationTaskResponse> {
     return this.request("ModifyOperationTask", req, cb)
+  }
+
+  /**
+   * 修改LDAP配置信息
+   */
+  async ModifyLDAPSetting(
+    req: ModifyLDAPSettingRequest,
+    cb?: (error: string, rep: ModifyLDAPSettingResponse) => void
+  ): Promise<ModifyLDAPSettingResponse> {
+    return this.request("ModifyLDAPSetting", req, cb)
   }
 
   /**
@@ -805,6 +867,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupMembersResponse) => void
   ): Promise<DescribeUserGroupMembersResponse> {
     return this.request("DescribeUserGroupMembers", req, cb)
+  }
+
+  /**
+   * 会话回放
+   */
+  async ReplaySession(
+    req: ReplaySessionRequest,
+    cb?: (error: string, rep: ReplaySessionResponse) => void
+  ): Promise<ReplaySessionResponse> {
+    return this.request("ReplaySession", req, cb)
   }
 
   /**

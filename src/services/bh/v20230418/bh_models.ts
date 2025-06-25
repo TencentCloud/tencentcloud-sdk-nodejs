@@ -1011,6 +1011,16 @@ export interface ResetDeviceAccountPrivateKeyResponse {
 }
 
 /**
+ * SetLDAPSyncFlag返回参数结构体
+ */
+export interface SetLDAPSyncFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUserGroupMembers返回参数结构体
  */
 export interface DeleteUserGroupMembersResponse {
@@ -1141,6 +1151,56 @@ export interface SearchCommandResult {
 }
 
 /**
+ * DescribeLDAPUnitSet请求参数结构体
+ */
+export interface DescribeLDAPUnitSetRequest {
+  /**
+   * 是否开启LDAP认证，true-开启
+   */
+  Enable: boolean
+  /**
+   * 服务器地址
+   */
+  Ip: string
+  /**
+   * 服务端口
+   */
+  Port: number
+  /**
+   * 是否开启SSL，false-不开启，true-开启
+   */
+  EnableSSL: boolean
+  /**
+   * Base DN
+   */
+  BaseDN: string
+  /**
+   * 管理员账号
+   */
+  AdminAccount: string
+  /**
+   * 管理员密码
+   */
+  AdminPassword: string
+  /**
+   * 用户名映射属性
+   */
+  AttributeUserName: string
+  /**
+   * 部门过滤
+   */
+  AttributeUnit: string
+  /**
+   * 备用服务器地址
+   */
+  IpBackup?: string
+  /**
+   * 网络域Id
+   */
+  DomainId?: string
+}
+
+/**
  * SearchSubtaskResultById返回参数结构体
  */
 export interface SearchSubtaskResultByIdResponse {
@@ -1218,6 +1278,16 @@ export interface SearchFileTypeFilter {
    * 在当前指定的protocol下进一步过滤具体操作类型,如剪贴板文件上传，剪贴板文件下载等
    */
   Method?: Array<number | bigint>
+}
+
+/**
+ * ReplaySession请求参数结构体
+ */
+export interface ReplaySessionRequest {
+  /**
+   * 会话Sid
+   */
+  Sid: string
 }
 
 /**
@@ -2567,6 +2637,92 @@ export interface BindDeviceAccountPrivateKeyRequest {
 }
 
 /**
+ * ModifyLDAPSetting请求参数结构体
+ */
+export interface ModifyLDAPSettingRequest {
+  /**
+   * 是否开启LDAP认证，false-不开启，true-开启
+   */
+  Enable: boolean
+  /**
+   * 服务器地址
+   */
+  Ip?: string
+  /**
+   * 备用服务器地址
+   */
+  IpBackup?: string
+  /**
+   * 服务端口
+   */
+  Port?: number
+  /**
+   * 是否开启SSL，false-不开启，true-开启
+   */
+  EnableSSL?: boolean
+  /**
+   * Base DN
+   */
+  BaseDN?: string
+  /**
+   * 管理员账号
+   */
+  AdminAccount?: string
+  /**
+   * 管理员密码
+   */
+  AdminPassword?: string
+  /**
+   * 用户属性
+   */
+  AttributeUser?: string
+  /**
+   * 用户名属性
+   */
+  AttributeUserName?: string
+  /**
+   * 自动同步，false-不开启，true-开启
+   */
+  AutoSync?: boolean
+  /**
+   * 覆盖用户信息，false-不开启，true-开启
+   */
+  Overwrite?: boolean
+  /**
+   * 同步周期，30～60000之间的整数
+   */
+  SyncPeriod?: number
+  /**
+   * 是否同步全部，false-不开启，true-开启
+   */
+  SyncAll?: boolean
+  /**
+   * 同步OU列表，SyncAll为false时必传
+   */
+  SyncUnitSet?: Array<string>
+  /**
+   * 组织单元属性
+   */
+  AttributeUnit?: string
+  /**
+   * 用户姓名属性
+   */
+  AttributeRealName?: string
+  /**
+   * 手机号属性
+   */
+  AttributePhone?: string
+  /**
+   * 邮箱属性
+   */
+  AttributeEmail?: string
+  /**
+   * 网络域Id
+   */
+  DomainId?: string
+}
+
+/**
  * ModifyChangePwdTask请求参数结构体
  */
 export interface ModifyChangePwdTaskRequest {
@@ -2686,6 +2842,16 @@ export interface Group {
    * 个数
    */
   Count?: number
+}
+
+/**
+ * UnlockUser返回参数结构体
+ */
+export interface UnlockUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2882,6 +3048,20 @@ export interface DescribeOperationTaskRequest {
 }
 
 /**
+ * DescribeLDAPUnitSet返回参数结构体
+ */
+export interface DescribeLDAPUnitSetResponse {
+  /**
+   * ou 列表
+   */
+  UnitSet?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUserGroupMembers返回参数结构体
  */
 export interface DescribeUserGroupMembersResponse {
@@ -2938,13 +3118,45 @@ export interface DeleteAccessWhiteListRulesRequest {
 }
 
 /**
- * DeleteUserGroups请求参数结构体
+ * CheckLDAPConnection请求参数结构体
  */
-export interface DeleteUserGroupsRequest {
+export interface CheckLDAPConnectionRequest {
   /**
-   * 待删除的用户组ID集合
+   * 是否开启LDAP认证，必须为true
    */
-  IdSet: Array<number | bigint>
+  Enable: boolean
+  /**
+   * 服务器地址
+   */
+  Ip: string
+  /**
+   * 服务端口
+   */
+  Port: number
+  /**
+   * 是否开启SSL，false-不开启，true-开启
+   */
+  EnableSSL: boolean
+  /**
+   * Base DN
+   */
+  BaseDN: string
+  /**
+   * 管理员账号
+   */
+  AdminAccount: string
+  /**
+   * 管理员密码
+   */
+  AdminPassword: string
+  /**
+   * 备用服务器地址
+   */
+  IpBackup?: string
+  /**
+   * 网络域id
+   */
+  DomainId?: string
 }
 
 /**
@@ -3153,6 +3365,16 @@ export interface Device {
    * K8S集群pod总数量
    */
   TotalPodCount?: number
+}
+
+/**
+ * DeleteUserGroups请求参数结构体
+ */
+export interface DeleteUserGroupsRequest {
+  /**
+   * 待删除的用户组ID集合
+   */
+  IdSet: Array<number | bigint>
 }
 
 /**
@@ -3446,6 +3668,11 @@ export interface DescribeOperationEventRequest {
 }
 
 /**
+ * SetLDAPSyncFlag请求参数结构体
+ */
+export type SetLDAPSyncFlagRequest = null
+
+/**
  * ModifyDevice返回参数结构体
  */
 export interface ModifyDeviceResponse {
@@ -3568,6 +3795,16 @@ export interface DescribeCmdTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnlockUser请求参数结构体
+ */
+export interface UnlockUserRequest {
+  /**
+   * 用户id
+   */
+  IdSet: Array<number | bigint>
 }
 
 /**
@@ -3924,13 +4161,57 @@ export interface ModifyAclResponse {
 }
 
 /**
- * DeleteDeviceGroups返回参数结构体
+ * DescribeAcls请求参数结构体
  */
-export interface DeleteDeviceGroupsResponse {
+export interface DescribeAclsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 访问权限ID集合
    */
-  RequestId?: string
+  IdSet?: Array<number | bigint>
+  /**
+   * 访问权限名称，模糊查询，最长64字符
+   */
+  Name?: string
+  /**
+   * 分页偏移位置，默认值为0
+   */
+  Offset?: number
+  /**
+   * 每页条目数量，默认20，最大500
+   */
+  Limit?: number
+  /**
+   * 是否根据Name进行精确查询，默认值false
+   */
+  Exact?: boolean
+  /**
+   * 有访问权限的用户ID集合
+   */
+  AuthorizedUserIdSet?: Array<number | bigint>
+  /**
+   * 有访问权限的资产ID集合
+   */
+  AuthorizedDeviceIdSet?: Array<number | bigint>
+  /**
+   * 有访问权限的应用资产ID集合
+   */
+  AuthorizedAppAssetIdSet?: Array<number | bigint>
+  /**
+   * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
+   */
+  Status?: number
+  /**
+   * 部门ID，用于过滤属于某个部门的访问权限
+   */
+  DepartmentId?: string
+  /**
+   * 是否根据AuthorizedDeviceIdSet,对资产账号进行精确匹配，默认false, 设置true时，确保AuthorizedDeviceIdSet只有一个元素
+   */
+  ExactAccount?: boolean
+  /**
+   * 过滤数组
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -4348,6 +4629,16 @@ export interface BindDeviceResourceRequest {
 }
 
 /**
+ * CheckLDAPConnection返回参数结构体
+ */
+export interface CheckLDAPConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunOperationTask请求参数结构体
  */
 export interface RunOperationTaskRequest {
@@ -4704,6 +4995,16 @@ export interface DescribeDomainsResponse {
 }
 
 /**
+ * ModifyLDAPSetting返回参数结构体
+ */
+export interface ModifyLDAPSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文件传输检索结果
  */
 export interface SearchFileResult {
@@ -4798,6 +5099,16 @@ export interface SearchFileResult {
 }
 
 /**
+ * ReplaySession返回参数结构体
+ */
+export interface ReplaySessionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAcls返回参数结构体
  */
 export interface DeleteAclsResponse {
@@ -4854,57 +5165,13 @@ export interface DescribeDeviceGroupMembersRequest {
 }
 
 /**
- * DescribeAcls请求参数结构体
+ * DeleteDeviceGroups返回参数结构体
  */
-export interface DescribeAclsRequest {
+export interface DeleteDeviceGroupsResponse {
   /**
-   * 访问权限ID集合
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdSet?: Array<number | bigint>
-  /**
-   * 访问权限名称，模糊查询，最长64字符
-   */
-  Name?: string
-  /**
-   * 分页偏移位置，默认值为0
-   */
-  Offset?: number
-  /**
-   * 每页条目数量，默认20，最大500
-   */
-  Limit?: number
-  /**
-   * 是否根据Name进行精确查询，默认值false
-   */
-  Exact?: boolean
-  /**
-   * 有访问权限的用户ID集合
-   */
-  AuthorizedUserIdSet?: Array<number | bigint>
-  /**
-   * 有访问权限的资产ID集合
-   */
-  AuthorizedDeviceIdSet?: Array<number | bigint>
-  /**
-   * 有访问权限的应用资产ID集合
-   */
-  AuthorizedAppAssetIdSet?: Array<number | bigint>
-  /**
-   * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
-   */
-  Status?: number
-  /**
-   * 部门ID，用于过滤属于某个部门的访问权限
-   */
-  DepartmentId?: string
-  /**
-   * 是否根据AuthorizedDeviceIdSet,对资产账号进行精确匹配，默认false, 设置true时，确保AuthorizedDeviceIdSet只有一个元素
-   */
-  ExactAccount?: boolean
-  /**
-   * 过滤数组
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**

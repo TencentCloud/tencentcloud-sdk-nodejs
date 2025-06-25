@@ -88,6 +88,16 @@ it("bh.v20230418.DescribeDeviceAccounts", async function () {
     }
 })
 
+it("bh.v20230418.CheckLDAPConnection", async function () {
+    try {
+       const data = await client.CheckLDAPConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ResetUser", async function () {
     try {
        const data = await client.ResetUser({})
@@ -111,6 +121,16 @@ it("bh.v20230418.CreateOperationTask", async function () {
 it("bh.v20230418.CreateChangePwdTask", async function () {
     try {
        const data = await client.CreateChangePwdTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SetLDAPSyncFlag", async function () {
+    try {
+       const data = await client.SetLDAPSyncFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,9 @@ it("bh.v20230418.BindDeviceAccountPassword", async function () {
     }
 })
 
-it("bh.v20230418.SearchFileBySid", async function () {
+it("bh.v20230418.DescribeLDAPUnitSet", async function () {
     try {
-       const data = await client.SearchFileBySid({})
+       const data = await client.DescribeLDAPUnitSet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +398,26 @@ it("bh.v20230418.SearchCommandBySid", async function () {
     }
 })
 
+it("bh.v20230418.UnlockUser", async function () {
+    try {
+       const data = await client.UnlockUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchFileBySid", async function () {
+    try {
+       const data = await client.SearchFileBySid({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ResetDeviceAccountPrivateKey", async function () {
     try {
        const data = await client.ResetDeviceAccountPrivateKey({})
@@ -461,6 +501,16 @@ it("bh.v20230418.DeleteDevices", async function () {
 it("bh.v20230418.ModifyOperationTask", async function () {
     try {
        const data = await client.ModifyOperationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyLDAPSetting", async function () {
+    try {
+       const data = await client.ModifyLDAPSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +661,16 @@ it("bh.v20230418.DescribeDevices", async function () {
 it("bh.v20230418.DescribeUserGroupMembers", async function () {
     try {
        const data = await client.DescribeUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ReplaySession", async function () {
+    try {
+       const data = await client.ReplaySession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
