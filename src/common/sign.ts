@@ -52,7 +52,7 @@ export default class Sign {
     const urlObj = new URL(url)
     const contentType = configHeaders["Content-Type"]
 
-    // 通用头部
+    // general headers
     let headers = ""
     let signedHeaders = ""
     if (method === "GET") {

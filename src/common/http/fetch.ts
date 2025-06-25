@@ -4,7 +4,7 @@ import HttpsProxyAgent from "https-proxy-agent"
 export interface FetchOptions extends Omit<RequestInit, "signal"> {
   proxy?: string
   headers?: Record<string, string>
-  // node-fetch中的signal声明与ts自带的有点冲突，以ts的为准
+  // The signal declaration in node-fetch conflicts with TypeScript's built-in type; use TypeScript's definition as the standard.
   signal?: AbortSignal
 }
 export default function (url: string, options: FetchOptions): Promise<Response> {

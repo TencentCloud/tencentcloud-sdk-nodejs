@@ -12,13 +12,22 @@ interface EventSourceMessage {
   retry?: number
 }
 
+// Custom EventEmitter for handling SSE events
 class SSEEventEmitter extends EventEmitter {}
 
+/**
+ * Class to handle Server-Sent Events (SSE) responses.
+ * Parses SSE data from a readable stream and emits events for messages, errors, and stream closure.
+ */
 export class SSEResponseModel {
   private stream: NodeJS.ReadableStream
   private readline: ReadLine
   private eventSource: SSEEventEmitter
 
+  /**
+   * Constructs an SSEResponseModel instance.
+   * @param stream - The readable stream containing SSE data.
+   */
   constructor(stream: NodeJS.ReadableStream) {
     this.stream = stream
     this.readline = createInterface({
@@ -30,7 +39,7 @@ export class SSEResponseModel {
   }
 
   /**
-   * @inner
+   * Initializes the SSE parser by setting up event listeners for the stream and readline.
    */
   private init() {
     const { stream, readline, eventSource } = this
@@ -59,7 +68,9 @@ export class SSEResponseModel {
   }
 
   /**
-   * @inner
+   * Parses raw SSE lines into an EventSourceMessage object.
+   * @param lines - An array of raw SSE lines.
+   * @returns The parsed EventSourceMessage.
    */
   private parseSSEMessage(lines: string[]) {
     const message: EventSourceMessage = {
@@ -100,6 +111,11 @@ export class SSEResponseModel {
     return message
   }
 
+  /**
+   * Registers an event listener for SSE messages.
+   * @param event - The event type ("message", "close", or "error").
+   * @param listener - The callback function.
+   */
   on(event: "message", listener: (message: EventSourceMessage) => void): this
   on(event: "close", listener: () => void): this
   on(event: "error", listener: (err: Error) => void): this
@@ -108,6 +124,11 @@ export class SSEResponseModel {
     return this
   }
 
+  /**
+   * Removes an event listener for SSE messages.
+   * @param event - The event type ("message", "close", or "error").
+   * @param listener - The callback function.
+   */
   removeListener(event: "message", listener: (message: EventSourceMessage) => void): this
   removeListener(event: "close", listener: () => void): this
   removeListener(event: "error", listener: (err: Error) => void): this
@@ -116,6 +137,10 @@ export class SSEResponseModel {
     return this
   }
 
+  /**
+   * Provides an async iterator for consuming SSE messages.
+   * @returns An async iterator yielding parsed EventSourceMessage objects.
+   */
   async *[Symbol.asyncIterator](): AsyncIterableIterator<EventSourceMessage> {
     let lines: string[] = []
     for await (const line of this.readline) {
