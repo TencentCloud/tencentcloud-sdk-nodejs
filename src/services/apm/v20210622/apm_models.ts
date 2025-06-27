@@ -731,6 +731,10 @@ export interface Line {
    * 维度列表
    */
   Tags?: Array<ApmTag>
+  /**
+   * 指标数据单位
+   */
+  MetricUnit?: string
 }
 
 /**

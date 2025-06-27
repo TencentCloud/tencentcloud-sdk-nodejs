@@ -3936,7 +3936,7 @@ export interface InvokeAISearchServiceRequest {
    */
   ChannelId?: number
   /**
-   * 是否需要返回总结，默认为False；  开启后会加大接口响应时长
+   * 是否需要返回总结，默认为True；  开启后会加大接口响应时长
    */
   EnableSummary?: boolean
   /**
@@ -5006,7 +5006,7 @@ export interface GenerateSignedVideoURLRequest {
    */
   VideoURL: string
   /**
-   * 播放链接过期时间
+   * 播放链接过期时间（时间戳，单位秒）
    */
   ExpireTime: number
   /**

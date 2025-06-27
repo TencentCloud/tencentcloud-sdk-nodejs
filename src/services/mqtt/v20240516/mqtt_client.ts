@@ -43,6 +43,8 @@ import {
   ProductSkuItem,
   ModifyJWKSAuthenticatorRequest,
   RegisterCaCertificateResponse,
+  UserProperty,
+  DescribeMessageDetailsRequest,
   DeleteInstanceRequest,
   ModifyInstanceRequest,
   RegisterDeviceCertificateResponse,
@@ -83,6 +85,7 @@ import {
   CreateTopicRequest,
   DeleteCaCertificateResponse,
   TagFilter,
+  DescribeMessageDetailsResponse,
   DescribeUserListResponse,
   ModifyTopicResponse,
   DeactivateDeviceCertificateResponse,
@@ -507,6 +510,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceResponse) => void
   ): Promise<DescribeInstanceResponse> {
     return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 查询MQTT消息详情
+   */
+  async DescribeMessageDetails(
+    req: DescribeMessageDetailsRequest,
+    cb?: (error: string, rep: DescribeMessageDetailsResponse) => void
+  ): Promise<DescribeMessageDetailsResponse> {
+    return this.request("DescribeMessageDetails", req, cb)
   }
 
   /**

@@ -607,6 +607,38 @@ export interface RegisterCaCertificateResponse {
 }
 
 /**
+ * map结构返回
+ */
+export interface UserProperty {
+  /**
+   * key
+   */
+  Key?: string
+  /**
+   * value
+   */
+  Value?: string
+}
+
+/**
+ * DescribeMessageDetails请求参数结构体
+ */
+export interface DescribeMessageDetailsRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 消息ID
+   */
+  MessageId: string
+  /**
+   * 订阅表达式
+   */
+  Subscription?: string
+}
+
+/**
  * DeleteInstance请求参数结构体
  */
 export interface DeleteInstanceRequest {
@@ -1453,6 +1485,44 @@ export interface TagFilter {
    * 标签键名称
    */
   TagValues?: Array<string>
+}
+
+/**
+ * DescribeMessageDetails返回参数结构体
+ */
+export interface DescribeMessageDetailsResponse {
+  /**
+   * 消息体
+   */
+  Body?: string
+  /**
+   * 用户自定义属性
+   */
+  UserProperties?: Array<UserProperty>
+  /**
+   * 消息存储时间，毫秒级时间戳。
+   */
+  StoreTimestamp?: number
+  /**
+   * 消息ID
+   */
+  MessageId?: string
+  /**
+   * 生产者地址
+   */
+  ClientId?: string
+  /**
+   * Topic
+   */
+  Qos?: string
+  /**
+   * 源topic
+   */
+  OriginTopic?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

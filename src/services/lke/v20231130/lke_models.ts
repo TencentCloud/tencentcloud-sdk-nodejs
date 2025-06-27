@@ -2041,10 +2041,14 @@ export interface KnowledgeDetail {
    */
   ExceedCharSize?: string
   /**
-   * 是否共享知识库类型
+   * 废弃
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSharedKnowledge?: boolean
+  /**
+   * 知识库类型:0默认1共享
+   */
+  KnowledgeType?: number
 }
 
 /**
@@ -8462,6 +8466,10 @@ export interface KnowledgeCapacityPieGraphDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Proportion?: number
+  /**
+   * 知识库类型:0默认1共享
+   */
+  KnowledgeType?: number
 }
 
 /**

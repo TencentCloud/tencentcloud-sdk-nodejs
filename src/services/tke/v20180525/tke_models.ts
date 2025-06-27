@@ -10938,6 +10938,12 @@ export interface ClusterNetworkSettings {
 - clusterIP
    */
   CiliumMode?: string
+  /**
+   * 控制面子网信息，仅在以下场景返回。
+- 容器网络插件为CiliumOverlay。
+- 支持CDC的托管集群，且网络插件为VPC-CNI。
+   */
+  SubnetId?: string
 }
 
 /**

@@ -64,12 +64,10 @@ export interface ImageModerationRequest {
 export interface RecognitionResult {
   /**
    * 当前可能的取值：Scene（图片场景模型）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Label?: string
   /**
    * Label对应模型下的识别标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<RecognitionTag>
 }
@@ -122,13 +120,11 @@ export interface ObjectResult {
   Score?: number
   /**
    * 该标签用于返回所识别出的实体名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Names?: Array<string>
   /**
    * 该标签用于返回所识别出实体的详细信息，如：序号、命中标签名称、位置坐标等信息，详细返回内容敬请参考相应数据结构（[ObjectDetail
 ](https://cloud.tencent.com/document/api/1125/53274#ObjectDetail)）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: Array<ObjectDetail>
 }
@@ -199,17 +195,14 @@ export interface CreateImageModerationAsyncTaskResponse {
 export interface RecognitionTag {
   /**
    * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 置信分：0～100，数值越大表示置信度越高
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Score?: number
   /**
    * 标签位置信息，若模型无位置信息，则可能为零值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: Location
 }
@@ -244,7 +237,6 @@ export interface ObjectDetail {
   SubLabel?: string
   /**
    * 该参数用于返回命中的人脸id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectId?: string
 }
@@ -314,7 +306,6 @@ export interface OcrResult {
   Score?: number
   /**
    * 该字段用于返回OCR识别出的结果的详细内容，如：文本内容、对应标签、识别框位置等信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: Array<OcrTextDetail>
   /**
@@ -411,7 +402,6 @@ export interface LabelResult {
   Score?: number
   /**
    * 该字段用于返回分类模型命中子标签的详细信息，如：序号、命中标签名称、分数等信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: Array<LabelDetailItem>
 }
@@ -422,17 +412,14 @@ export interface LabelResult {
 export interface LabelDetailItem {
   /**
    * 该字段用于返回识别对象的ID以方便识别和区分。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
-   * 该字段用于返回识命中的子标签名称。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 该字段用于返回时命中的子标签名称。
    */
   Name?: string
   /**
    * 该字段用于返回对应子标签命中的分值，取值为**0-100**，如：*Porn-SexBehavior 99* 则代表相应识别内容命中色情-性行为标签的分值为99。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Score?: number
 }
@@ -506,7 +493,6 @@ export interface LibResult {
   Score?: number
   /**
    * 该字段用于返回黑白库比对结果的详细信息，如：序号、库名称、恶意标签等信息；详细返回信息敬请参考对应数据结构（[LibDetail](https://cloud.tencent.com/document/product/1125/53274#LibDetail)）的描述文档
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: Array<LibDetail>
 }

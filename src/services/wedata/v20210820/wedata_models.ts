@@ -13570,6 +13570,42 @@ export interface BatchModifyOpsOwnersResponse {
 }
 
 /**
+ * 获取任务脚本内容返回体
+ */
+export interface GetPaginationTaskScriptResponseInfo {
+  /**
+   * 项目编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 任务编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 页内尺寸
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNum?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageTotal?: number
+  /**
+   * 分页内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Base64ScriptContent?: string
+}
+
+/**
  * DescribeDsTaskVersionList请求参数结构体
  */
 export interface DescribeDsTaskVersionListRequest {
@@ -20113,6 +20149,24 @@ export interface RobAndLockIntegrationTaskRequest {
    * 任务类型：201. stream,   202. offline
    */
   TaskType: number
+}
+
+/**
+ * GetPaginationTaskScript请求参数结构体
+ */
+export interface GetPaginationTaskScriptRequest {
+  /**
+   * 项目编号
+   */
+  ProjectId: string
+  /**
+   * 任务编号
+   */
+  TaskId: string
+  /**
+   * 页码（从1开始）
+   */
+  PageNum?: number
 }
 
 /**
@@ -30116,6 +30170,21 @@ export interface DescribeRuleExecStatRequest {
    * 结束时间，时间戳到秒
    */
   EndDate: string
+}
+
+/**
+ * GetPaginationTaskScript返回参数结构体
+ */
+export interface GetPaginationTaskScriptResponse {
+  /**
+   * 返回数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<GetPaginationTaskScriptResponseInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

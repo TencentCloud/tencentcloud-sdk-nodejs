@@ -2361,7 +2361,7 @@ export interface DescribeRollbackRangeTimeResponse {
  */
 export interface ModifyRoGroupInfoRequest {
   /**
-   * RO 组的 ID。
+   * RO 组的 ID。可通过 [DescribeRoGroups](https://cloud.tencent.com/document/api/236/40939) 接口获取。
    */
   RoGroupId: string
   /**
@@ -2369,7 +2369,7 @@ export interface ModifyRoGroupInfoRequest {
    */
   RoGroupInfo?: RoGroupAttr
   /**
-   * RO 组内实例的权重。若修改 RO 组的权重模式为用户自定义模式（custom），则必须设置该参数，且需要设置每个 RO 实例的权重值。
+   * RO 组内实例的权重。若修改 RO 组的权重模式为用户自定义模式（custom），则必须设置该参数，且需要设置每个 RO 实例的权重值。RO 实例 ID 可通过 [DescribeRoGroups](https://cloud.tencent.com/document/api/236/40939) 接口获取。
    */
   RoWeightValues?: Array<RoWeightValue>
   /**
@@ -6121,10 +6121,14 @@ export interface CreateAccountsRequest {
   Accounts: Array<Account>
   /**
    * 新账户的密码。
+说明：
+1. 在8 ～ 64位字符数以内（推荐12位以上）。
+2. 至少包含其中两项：小写字母 a ~ z 或 大写字母 A ～ Z。数字0 ～ 9。_+-,&=!@#$%^*().|。
+3. 不能包含非法字符。
    */
   Password: string
   /**
-   * 备注信息。
+   * 备注信息。最多支持输入255个字符。
    */
   Description?: string
   /**
@@ -7623,7 +7627,7 @@ export interface ModifyAccountPrivilegesRequest {
    */
   InstanceId: string
   /**
-   * 数据库的账号，包括用户名和域名。
+   * 数据库的账号，包括用户名和域名。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。
    */
   Accounts: Array<Account>
   /**
@@ -8969,7 +8973,7 @@ export interface CommonTimeWindow {
  */
 export interface ModifyAccountMaxUserConnectionsRequest {
   /**
-   * 云数据库账号。
+   * 云数据库账号。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。
    */
   Accounts: Array<Account>
   /**
@@ -10292,7 +10296,7 @@ export interface ModifyAccountPasswordRequest {
    */
   NewPassword: string
   /**
-   * 云数据库账号。
+   * 云数据库账号。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。
    */
   Accounts: Array<Account>
 }

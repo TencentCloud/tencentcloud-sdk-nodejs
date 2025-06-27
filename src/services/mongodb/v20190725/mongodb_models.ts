@@ -478,6 +478,10 @@ export interface SlowLogPattern {
    */
   Pattern?: string
   /**
+   * queryHash
+   */
+  QueryHash?: string
+  /**
    * 最大执行时间
    */
   MaxTime?: number

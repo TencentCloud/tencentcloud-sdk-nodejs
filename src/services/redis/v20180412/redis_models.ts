@@ -722,7 +722,7 @@ export interface DescribeSlowLogResponse {
    */
   InstanceSlowlogDetail?: Array<InstanceSlowlogDetail>
   /**
-   * 慢查询详情。
+   * 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。
    */
   InstanceSlowLogDetail?: Array<InstanceSlowlogDetail>
   /**
@@ -2202,7 +2202,7 @@ export interface DescribeTendisSlowLogResponse {
    */
   TotalCount?: number
   /**
-   * 慢查询详情
+   * 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。
    */
   TendisSlowLogDetail?: Array<TendisSlowLogDetail>
   /**
@@ -5896,7 +5896,7 @@ export interface DescribeProxySlowLogResponse {
    */
   TotalCount?: number
   /**
-   * 慢查询详情。
+   * 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。
    */
   InstanceProxySlowLogDetail?: Array<InstanceProxySlowlogDetail>
   /**

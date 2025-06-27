@@ -3309,7 +3309,7 @@ export interface GenerateSignedVideoURLRequest {
    */
   VideoURL: string
   /**
-   * 播放链接过期时间
+   * 播放链接过期时间（时间戳，单位秒）
    */
   ExpireTime: number
   /**

@@ -358,6 +358,16 @@ it("mqtt.v20240516.DescribeInstance", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeMessageDetails", async function () {
+    try {
+       const data = await client.DescribeMessageDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DeleteTopic", async function () {
     try {
        const data = await client.DeleteTopic({})

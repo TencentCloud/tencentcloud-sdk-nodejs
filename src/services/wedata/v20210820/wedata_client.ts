@@ -377,6 +377,7 @@ import {
   BatchCreateTaskVersionAsyncRequest,
   TaskTypeOpsDto,
   BatchModifyOpsOwnersResponse,
+  GetPaginationTaskScriptResponseInfo,
   DescribeDsTaskVersionListRequest,
   CreateTaskAlarmRegularResponse,
   DeleteRuleTemplateRequest,
@@ -581,6 +582,7 @@ import {
   RunRerunScheduleInstancesResponse,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
+  GetPaginationTaskScriptRequest,
   InstanceLogVO,
   ModifyTaskInfoResponse,
   DataCheckStat,
@@ -880,6 +882,7 @@ import {
   FolderOpsDto,
   DescribeTaskLockStatusRequest,
   DescribeRuleExecStatRequest,
+  GetPaginationTaskScriptResponse,
   GetInstanceLogRequest,
   RuleConfig,
   LogContent,
@@ -3512,6 +3515,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeDataSourceInfoListResponse) => void
   ): Promise<DescribeDataSourceInfoListResponse> {
     return this.request("DescribeDataSourceInfoList", req, cb)
+  }
+
+  /**
+   * 获取带分页的任务脚本
+   */
+  async GetPaginationTaskScript(
+    req: GetPaginationTaskScriptRequest,
+    cb?: (error: string, rep: GetPaginationTaskScriptResponse) => void
+  ): Promise<GetPaginationTaskScriptResponse> {
+    return this.request("GetPaginationTaskScript", req, cb)
   }
 
   /**
