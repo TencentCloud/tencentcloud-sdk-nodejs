@@ -267,6 +267,30 @@ export interface OriginRecord {
 }
 
 /**
+ * 需要配置特定回源 IP 网段回源的实例。
+ */
+export interface OriginACLEntity {
+  /**
+   * 实例类型，取值有：
+- l7：七层加速域名；
+- l4：四层代理实例。
+   */
+  Type: string
+  /**
+   * 实例详情，取值有：
+- 当 Type = l7 时，请填写七层加速域名；
+- 当 Type = l4 时，请填写四层代理实例 ID。
+   */
+  Instances: Array<string>
+  /**
+   * 操作模式，取值有：
+<li>enable：启用；</li>
+<li>disable：停用。</li>
+   */
+  OperationMode: string
+}
+
+/**
  * 智能压缩配置。
  */
 export interface CompressionParameters {
@@ -969,36 +993,13 @@ export interface ModifyAccelerationDomainStatusesResponse {
 }
 
 /**
- * 配置组版本发布记录详情。
+ * DescribeOriginACL请求参数结构体
  */
-export interface DeployRecord {
+export interface DescribeOriginACLRequest {
   /**
-   * 发布版本的详细信息。
+   * 站点 ID。
    */
-  ConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>
-  /**
-   * 发布时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
-   */
-  DeployTime?: string
-  /**
-   * 发布状态，取值有：
-<li> deploying ：发布中；</li>
-<li>failure ：发布失败；</li>
-<li>success： 发布成功。</li>
-   */
-  Status?: string
-  /**
-   * 发布结果信息。
-   */
-  Message?: string
-  /**
-   * 发布记录 ID。
-   */
-  RecordId?: string
-  /**
-   * 变更说明。
-   */
-  Description?: string
+  ZoneId: string
 }
 
 /**
@@ -1551,6 +1552,16 @@ export interface RuleBranch {
 }
 
 /**
+ * ConfirmOriginACLUpdate返回参数结构体
+ */
+export interface ConfirmOriginACLUpdateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAliasDomains返回参数结构体
  */
 export interface DescribeAliasDomainsResponse {
@@ -1856,6 +1867,16 @@ export interface DescribeDDoSAttackEventResponse {
 }
 
 /**
+ * DisableOriginACL请求参数结构体
+ */
+export interface DisableOriginACLRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+}
+
+/**
  * DeleteL4ProxyRules返回参数结构体
  */
 export interface DeleteL4ProxyRulesResponse {
@@ -1925,6 +1946,37 @@ export interface CachePrefresh {
    * 缓存预刷新百分比，取值范围：1-99。
    */
   Percent?: number
+}
+
+/**
+ * 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。
+ */
+export interface OriginACLInfo {
+  /**
+   * 启用了特定回源 IP 网段回源的七层加速域名列表。源站防护未开启时为空。
+   */
+  L7Hosts?: Array<string>
+  /**
+   * 启用了特定回源 IP 网段回源的四层代理实例列表。源站防护未开启时为空。
+   */
+  L4ProxyIds?: Array<string>
+  /**
+   * 当前生效的回源 IP 网段。源站防护未开启时为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentOriginACL?: CurrentOriginACL
+  /**
+   * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前回源 IP 网段的对比。无更新或者源站防护未开启时该字段为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextOriginACL?: NextOriginACL
+  /**
+   * 源站防护状态，取值有：
+<li>online：已生效；</li>
+<li>offline：已停用；</li>
+<li>updating: 配置部署中。</li>
+   */
+  Status?: string
 }
 
 /**
@@ -2815,6 +2867,34 @@ export interface BotManagedRule {
 }
 
 /**
+ * 当前生效的回源 IP 网段。
+ */
+export interface CurrentOriginACL {
+  /**
+   * 回源 IP 网段详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EntireAddresses?: Addresses
+  /**
+   * 版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 版本生效时间，时间是北京时间 UTC+8， 遵循 ISO 8601 标准的日期和时间格式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActiveTime?: string
+  /**
+   * 本参数用于记录当前版本生效前是否完成「我已更新至最新回源 IP 网段」的确认。取值有：
+<li>true：版本生效时，已完成更新至最新回源 IP 的确认；</li>
+<li>false：版本生效时，仍未完成已更新至最新回源 IP 的确认，回源 IP 网段由后台强制更新至最新版本。</li>注意：本参数返回 false 时，请及时确认您的源站防火墙配置是否已更新至最新的回源 IP 网段，以避免出现回源失败。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPlaned?: string
+}
+
+/**
  * Web安全配置
  */
 export interface SecurityConfig {
@@ -2976,32 +3056,27 @@ export interface SmartRoutingParameters {
 }
 
 /**
- * ModifyAliasDomain请求参数结构体
+ * DisableOriginACL返回参数结构体
  */
-export interface ModifyAliasDomainRequest {
+export interface DisableOriginACLResponse {
   /**
-   * 站点 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
+  RequestId?: string
+}
+
+/**
+ * DescribeOriginACL返回参数结构体
+ */
+export interface DescribeOriginACLResponse {
   /**
-   * 别称域名名称。
+   * 七层加速域名/四层代理实例与回源 IP 网段的绑定关系详情。
    */
-  AliasName: string
+  OriginACLInfo?: OriginACLInfo
   /**
-   * 目标域名名称。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TargetName: string
-  /**
-   * 证书配置，取值有：
-<li> none：不配置；</li>
-<li> hosting：SSL托管证书；</li>
-<li> apply：申请免费证书。</li>不填写保持原有配置。
-   */
-  CertType?: string
-  /**
-   * 当 CertType 取值为 hosting 时填入相应证书 ID。
-   */
-  CertId?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -3798,6 +3873,36 @@ export interface ManagedRuleDetail {
    * 规则所属版本。
    */
   RuleVersion?: string
+}
+
+/**
+ * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。
+ */
+export interface NextOriginACL {
+  /**
+   * 版本号。
+   */
+  Version?: string
+  /**
+   * 版本生效时间，时间是北京时间 UTC+8， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  PlannedActiveTime?: string
+  /**
+   * 回源 IP 网段详情。
+   */
+  EntireAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段新增的部分。
+   */
+  AddedAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段删减的部分。
+   */
+  RemovedAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段无变化的部分。
+   */
+  NoChangeAddresses?: Addresses
 }
 
 /**
@@ -5447,6 +5552,16 @@ export interface CreateConfigGroupVersionResponse {
 }
 
 /**
+ * ConfirmOriginACLUpdate请求参数结构体
+ */
+export interface ConfirmOriginACLUpdateRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+}
+
+/**
  * DownloadL7Logs请求参数结构体
  */
 export interface DownloadL7LogsRequest {
@@ -6000,6 +6115,39 @@ export interface RateLimitUserRule {
    * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
    */
   RedirectUrl?: string
+}
+
+/**
+ * 配置组版本发布记录详情。
+ */
+export interface DeployRecord {
+  /**
+   * 发布版本的详细信息。
+   */
+  ConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>
+  /**
+   * 发布时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  DeployTime?: string
+  /**
+   * 发布状态，取值有：
+<li> deploying ：发布中；</li>
+<li>failure ：发布失败；</li>
+<li>success： 发布成功。</li>
+   */
+  Status?: string
+  /**
+   * 发布结果信息。
+   */
+  Message?: string
+  /**
+   * 发布记录 ID。
+   */
+  RecordId?: string
+  /**
+   * 变更说明。
+   */
+  Description?: string
 }
 
 /**
@@ -7143,6 +7291,16 @@ export interface CustomEndpoint {
 }
 
 /**
+ * ModifyOriginACL返回参数结构体
+ */
+export interface ModifyOriginACLResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * VerifyOwnership请求参数结构体
  */
 export interface VerifyOwnershipRequest {
@@ -7576,6 +7734,35 @@ export interface DescribeL7AccSettingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyAliasDomain请求参数结构体
+ */
+export interface ModifyAliasDomainRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 别称域名名称。
+   */
+  AliasName: string
+  /**
+   * 目标域名名称。
+   */
+  TargetName: string
+  /**
+   * 证书配置，取值有：
+<li> none：不配置；</li>
+<li> hosting：SSL托管证书；</li>
+<li> apply：申请免费证书。</li>不填写保持原有配置。
+   */
+  CertType?: string
+  /**
+   * 当 CertType 取值为 hosting 时填入相应证书 ID。
+   */
+  CertId?: Array<string>
 }
 
 /**
@@ -8565,6 +8752,20 @@ export interface OriginGroupHealthStatusDetail {
    * 各个健康检查区域下源站的健康状态。
    */
   CheckRegionHealthStatus?: Array<CheckRegionHealthStatus>
+}
+
+/**
+ * ModifyOriginACL请求参数结构体
+ */
+export interface ModifyOriginACLRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 需要启用/关闭特定回源 IP 网段回源的实例。
+   */
+  OriginACLEntities?: Array<OriginACLEntity>
 }
 
 /**
@@ -10476,6 +10677,16 @@ export interface UpstreamHttp2 {
 }
 
 /**
+ * EnableOriginACL返回参数结构体
+ */
+export interface EnableOriginACLResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAliasDomain返回参数结构体
  */
 export interface DeleteAliasDomainResponse {
@@ -10519,6 +10730,38 @@ export interface BotConfig {
    * Bot托管定制策略，入参可不填，仅出参使用。
    */
   Customizes?: Array<BotUserRule>
+}
+
+/**
+ * EnableOriginACL请求参数结构体
+ */
+export interface EnableOriginACLRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 七层加速域名开启回源白名单的模式。
+<li>all：为站点下的所有七层加速域名开启回源白名单。</li>
+<li>specific：为站点下指定的七层加速域名开启回源白名单。</li>
+当参数为空时，默认为specific。
+   */
+  L7EnableMode?: string
+  /**
+   * 开启回源白名单的七层加速域名列表，当请求参数 L7EnableMode 为 all 时必须为空。
+   */
+  L7Hosts?: Array<string>
+  /**
+   * 四层代理 ID 开启回源白名单的模式。
+<li>all：为站点下的所有四层代理开启回源白名单。</li>
+<li>specific：为站点下指定的四层代理 ID 开启回源白名单。</li>
+当参数为空时，默认为specific。
+   */
+  L4EnableMode?: string
+  /**
+   * 开启回源白名单的四层代理 ID 列表，当请求参数 L4EnableMode 为 all 时必须为空。单次最多支持 200 个实例。
+   */
+  L4ProxyIds?: Array<string>
 }
 
 /**
@@ -13396,6 +13639,20 @@ export interface DeployConfigGroupVersionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IP 网段详情。
+ */
+export interface Addresses {
+  /**
+   * IPv4 网段列表。
+   */
+  IPv4?: Array<string>
+  /**
+   * IPv6 网段列表。
+   */
+  IPv6?: Array<string>
 }
 
 /**

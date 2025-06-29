@@ -18,6 +18,16 @@ const client = new tencentcloud.apm.v20210622.Client({
 })
 describe("apm.v20210622.test.js", function () {
 
+it("apm.v20210622.CreateProfileTask", async function () {
+    try {
+       const data = await client.CreateProfileTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeGeneralApmApplicationConfig", async function () {
     try {
        const data = await client.DescribeGeneralApmApplicationConfig({})

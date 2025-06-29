@@ -958,6 +958,60 @@ export interface SpecItem {
 }
 
 /**
+ * DescribeDetailedSlowLogs请求参数结构体
+ */
+export interface DescribeDetailedSlowLogsRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 待查询慢日志的开始时间
+   */
+  StartTime: string
+  /**
+   * 待慢日志的结束时间
+   */
+  EndTime: string
+  /**
+   * 过滤执行时间大于此值的慢日志，单位ms，默认值100
+   */
+  ExecTime?: number
+  /**
+   * 过滤慢日志的命令类型
+   */
+  Commands?: Array<string>
+  /**
+   * 全文搜索关键字，多个关键字间为或关系
+   */
+  Texts?: Array<string>
+  /**
+   * 根据节点名过滤
+   */
+  NodeNames?: Array<string>
+  /**
+   * 根据queryHash过滤
+   */
+  QueryHash?: Array<string>
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+  /**
+   * 返回条数
+   */
+  Limit?: number
+  /**
+   * 排序条件，只支持StartTime(按慢日志生成时间)和ExecTime(慢日志执行时间)
+   */
+  OrderBy?: string
+  /**
+   * 排序。desc倒排，asc正排
+   */
+  OrderByType?: string
+}
+
+/**
  * ModifyDBInstanceNetworkAddress返回参数结构体
  */
 export interface ModifyDBInstanceNetworkAddressResponse {
@@ -2239,6 +2293,24 @@ export interface DescribeClientConnectionsRequest {
 }
 
 /**
+ * DescribeDetailedSlowLogs返回参数结构体
+ */
+export interface DescribeDetailedSlowLogsResponse {
+  /**
+   * 满足条件的慢日志数量
+   */
+  TotalCount?: number
+  /**
+   * 慢日志详情
+   */
+  DetailedSlowLogs?: Array<SlowLogItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例分片详情
  */
 export interface ShardInfo {
@@ -2791,6 +2863,24 @@ export interface DbURL {
    * 实例 URI 形式的连接串访问地址示例。
    */
   Address?: string
+}
+
+/**
+ * 慢日志详情
+ */
+export interface SlowLogItem {
+  /**
+   * 慢日志
+   */
+  Log?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * queryHash
+   */
+  QueryHash?: string
 }
 
 /**

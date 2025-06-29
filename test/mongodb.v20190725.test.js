@@ -138,9 +138,9 @@ it("mongodb.v20190725.DescribeDBBackups", async function () {
     }
 })
 
-it("mongodb.v20190725.IsolateDBInstance", async function () {
+it("mongodb.v20190725.DescribeDetailedSlowLogs", async function () {
     try {
-       const data = await client.IsolateDBInstance({})
+       const data = await client.DescribeDetailedSlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +268,16 @@ it("mongodb.v20190725.DropDBInstanceParamTpl", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyDBInstanceSpec", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.RenewDBInstances", async function () {
     try {
        const data = await client.RenewDBInstances({})
@@ -358,9 +368,9 @@ it("mongodb.v20190725.CreateDBInstance", async function () {
     }
 })
 
-it("mongodb.v20190725.ModifyDBInstanceSpec", async function () {
+it("mongodb.v20190725.IsolateDBInstance", async function () {
     try {
-       const data = await client.ModifyDBInstanceSpec({})
+       const data = await client.IsolateDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

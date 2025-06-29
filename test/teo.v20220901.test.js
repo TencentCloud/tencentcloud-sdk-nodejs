@@ -268,9 +268,9 @@ it("teo.v20220901.DescribeEnvironments", async function () {
     }
 })
 
-it("teo.v20220901.IncreasePlanQuota", async function () {
+it("teo.v20220901.DescribeOriginACL", async function () {
     try {
-       const data = await client.IncreasePlanQuota({})
+       const data = await client.DescribeOriginACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +371,16 @@ it("teo.v20220901.DescribeL7AccRules", async function () {
 it("teo.v20220901.BindSecurityTemplateToEntity", async function () {
     try {
        const data = await client.BindSecurityTemplateToEntity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyOriginACL", async function () {
+    try {
+       const data = await client.ModifyOriginACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,6 +728,16 @@ it("teo.v20220901.CreateL4Proxy", async function () {
     }
 })
 
+it("teo.v20220901.IncreasePlanQuota", async function () {
+    try {
+       const data = await client.IncreasePlanQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyApplicationProxyStatus", async function () {
     try {
        const data = await client.ModifyApplicationProxyStatus({})
@@ -881,6 +901,16 @@ it("teo.v20220901.DescribePlans", async function () {
 it("teo.v20220901.DeleteLoadBalancer", async function () {
     try {
        const data = await client.DeleteLoadBalancer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DisableOriginACL", async function () {
+    try {
+       const data = await client.DisableOriginACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1098,6 +1128,16 @@ it("teo.v20220901.CreateCLSIndex", async function () {
     }
 })
 
+it("teo.v20220901.ConfirmOriginACLUpdate", async function () {
+    try {
+       const data = await client.ConfirmOriginACLUpdate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateApplicationProxy", async function () {
     try {
        const data = await client.CreateApplicationProxy({})
@@ -1111,6 +1151,16 @@ it("teo.v20220901.CreateApplicationProxy", async function () {
 it("teo.v20220901.DescribeOriginGroup", async function () {
     try {
        const data = await client.DescribeOriginGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.EnableOriginACL", async function () {
+    try {
+       const data = await client.EnableOriginACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

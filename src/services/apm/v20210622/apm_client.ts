@@ -31,20 +31,21 @@ import {
   DescribeTagValuesResponse,
   Span,
   ApmAgentInfo,
-  DescribeGeneralSpanListResponse,
+  ApmApplicationConfigView,
   ApmMetricRecord,
   DescribeServiceOverviewRequest,
   DescribeApmAgentResponse,
   DescribeTagValuesRequest,
   ApmField,
   Line,
-  ApmApplicationConfigView,
-  ApmTag,
+  DescribeGeneralSpanListResponse,
+  CreateProfileTaskResponse,
+  DescribeGeneralSpanListRequest,
   APMKVItem,
   OrderBy,
   DescribeMetricRecordsResponse,
   DescribeGeneralOTSpanListResponse,
-  DescribeGeneralSpanListRequest,
+  ApmTag,
   Filter,
   APMKV,
   DescribeGeneralOTSpanListRequest,
@@ -54,6 +55,7 @@ import {
   DescribeGeneralMetricDataRequest,
   CreateApmInstanceResponse,
   SpanReference,
+  CreateProfileTaskRequest,
   SpanProcess,
   DescribeGeneralApmApplicationConfigRequest,
   ModifyApmInstanceResponse,
@@ -72,6 +74,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("apm.tencentcloudapi.com", "2021-06-22", clientConfig)
+  }
+
+  /**
+   * 创建事件任务
+   */
+  async CreateProfileTask(
+    req: CreateProfileTaskRequest,
+    cb?: (error: string, rep: CreateProfileTaskResponse) => void
+  ): Promise<CreateProfileTaskResponse> {
+    return this.request("CreateProfileTask", req, cb)
   }
 
   /**

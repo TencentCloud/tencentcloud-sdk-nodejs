@@ -21,17 +21,14 @@
 export interface SentimentAnalysis {
   /**
    * 情感标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Label?: string
   /**
    * 标签分数，取值范围0到100
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Score?: number
   /**
    * 情感分析明细
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Detail?: SentimentDetail
   /**
@@ -40,7 +37,6 @@ export interface SentimentAnalysis {
   Code?: string
   /**
    * 异常信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
 }
@@ -51,14 +47,12 @@ export interface SentimentAnalysis {
 export interface Positions {
   /**
    * 关键词起始位置
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Start: number
+  Start?: number
   /**
    * 关键词结束位置
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  End: number
+  End?: number
 }
 
 /**
@@ -84,7 +78,7 @@ export interface TextModerationRequest {
    */
   Content: string
   /**
-   * 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](#https://console.cloud.tencent.com/cms/clouds/manage)中配置，控制台访问地址：。
+   * 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中配置，控制台访问地址：。
 备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
    */
   BizType?: string
@@ -101,11 +95,11 @@ export interface TextModerationRequest {
    */
   Device?: Device
   /**
-   * 表示Content的原始语种，枚举值包括 "en" 和 "zh"。其中，"en" 表示英文，"zh" 表示中文。非中文场景的处理耗时较高，具体情况取决于送审文本长度，非中文场景需[反馈工单](#https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认。
+   * 表示Content的原始语种，枚举值包括 "en" 和 "zh"。其中，"en" 表示英文，"zh" 表示中文。非中文场景的处理耗时较高，具体情况取决于送审文本长度，非中文场景需[反馈工单](https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认。
    */
   SourceLanguage?: string
   /**
-   * 审核的业务类型，枚举值包括 "TEXT" 和 "TEXT_AIGC"。"TEXT" 表示传统文本审核，"TEXT_AIGC" 表示文本AIGC审核。
+   * 审核的业务类型，枚举值包括"TEXT"和"TEXT_AIGC"。其中"TEXT"表示传统文本审核，"TEXT_AIGC”表示AI生成检测（生成检测能力具体能力了解可[参见文档](https://cloud.tencent.com/document/product/1124/118694)）。
    */
   Type?: string
 }
@@ -120,37 +114,30 @@ export interface DetailResults {
   Label?: string
   /**
    * 该字段用于返回对应当前标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Suggestion?: string
   /**
    * 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：*加我微信*）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Keywords?: Array<string>
   /**
    * 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Score?: number
   /**
    * 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LibType?: number
   /**
    * 该字段用于返回自定义库的ID，以方便自定义库管理和配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LibId?: string
   /**
    * 该字段用于返回自定义库的名称,以方便自定义库管理和配置。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LibName?: string
   /**
    * 该字段用于返回当前标签（Label）下的二级标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubLabel?: string
   /**
@@ -160,7 +147,6 @@ export interface DetailResults {
   Tags?: Array<Tag>
   /**
    * 该字段用于返回违规文本命中信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HitInfos?: Array<HitInfo>
 }
@@ -171,22 +157,18 @@ export interface DetailResults {
 export interface HitInfo {
   /**
    * 标识模型命中还是关键词命中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 命中关键词
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Keyword?: string
   /**
    * 自定义词库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LibName?: string
   /**
    * 位置信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Positions?: Array<Positions>
 }
@@ -197,17 +179,14 @@ export interface HitInfo {
 export interface Tag {
   /**
    * 该字段用于返回命中的关键词
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Keyword?: string
   /**
    * 该字段用于返回子标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubLabel?: string
   /**
    * 该字段用于返回子标签对应的分数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Score?: number
 }
@@ -315,12 +294,10 @@ export interface Device {
 export interface SentimentDetail {
   /**
    * 正向分数，取值范围0到100
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Positive?: number
   /**
    * 负向分数，取值范围0到100
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Negative?: number
 }
@@ -362,22 +339,18 @@ export interface TextModerationResponse {
   RiskDetails?: Array<RiskDetails>
   /**
    * 该字段用于返回根据您的需求配置的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
    * 该字段用于返回检测对象对应请求参数中的DataId，与输入的DataId字段中的内容对应
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataId?: string
   /**
    * 该字段用于返回当前标签（Label）下的二级标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubLabel?: string
   /**
    * 该字段用于返回上下文关联文本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContextText?: string
   /**

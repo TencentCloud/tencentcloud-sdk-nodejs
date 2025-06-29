@@ -58,6 +58,7 @@ import {
   EnableTransparentDataEncryptionRequest,
   DeleteAccountUserRequest,
   SpecItem,
+  DescribeDetailedSlowLogsRequest,
   ModifyDBInstanceNetworkAddressResponse,
   DropDBInstanceParamTplRequest,
   CreateAccountUserResponse,
@@ -114,6 +115,7 @@ import {
   BackupDownloadTask,
   DescribeDBBackupsRequest,
   DescribeClientConnectionsRequest,
+  DescribeDetailedSlowLogsResponse,
   ShardInfo,
   SetBackupRulesResponse,
   DescribeDBInstanceNodePropertyRequest,
@@ -134,6 +136,7 @@ import {
   ModifyInstanceParamsRequest,
   CreateBackupDownloadTaskResponse,
   DbURL,
+  SlowLogItem,
   SpecificationInfo,
   DescribeSlowLogPatternsRequest,
   FlashbackCollection,
@@ -291,13 +294,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(IsolateDBInstance)用于隔离MongoDB云数据库按量计费实例。隔离后实例保留在回收站中，不能再写入数据。隔离一定时间后，实例会彻底删除，回收站保存时间请参考按量计费的服务条款。在隔离中的按量计费实例无法恢复，请谨慎操作。
+   * 查询实例慢日志详情
    */
-  async IsolateDBInstance(
-    req: IsolateDBInstanceRequest,
-    cb?: (error: string, rep: IsolateDBInstanceResponse) => void
-  ): Promise<IsolateDBInstanceResponse> {
-    return this.request("IsolateDBInstance", req, cb)
+  async DescribeDetailedSlowLogs(
+    req: DescribeDetailedSlowLogsRequest,
+    cb?: (error: string, rep: DescribeDetailedSlowLogsResponse) => void
+  ): Promise<DescribeDetailedSlowLogsResponse> {
+    return this.request("DescribeDetailedSlowLogs", req, cb)
   }
 
   /**
@@ -424,6 +427,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyDBInstanceSpec）用于调整MongoDB云数据库实例配置。接口支持的售卖规格，可从查询云数据库的售卖规格（DescribeSpecInfo）获取。
+   */
+  async ModifyDBInstanceSpec(
+    req: ModifyDBInstanceSpecRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSpecResponse) => void
+  ): Promise<ModifyDBInstanceSpecResponse> {
+    return this.request("ModifyDBInstanceSpec", req, cb)
+  }
+
+  /**
    * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
    */
   async RenewDBInstances(
@@ -515,13 +528,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSpec）用于调整MongoDB云数据库实例配置。接口支持的售卖规格，可从查询云数据库的售卖规格（DescribeSpecInfo）获取。
+   * 本接口(IsolateDBInstance)用于隔离MongoDB云数据库按量计费实例。隔离后实例保留在回收站中，不能再写入数据。隔离一定时间后，实例会彻底删除，回收站保存时间请参考按量计费的服务条款。在隔离中的按量计费实例无法恢复，请谨慎操作。
    */
-  async ModifyDBInstanceSpec(
-    req: ModifyDBInstanceSpecRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSpecResponse) => void
-  ): Promise<ModifyDBInstanceSpecResponse> {
-    return this.request("ModifyDBInstanceSpec", req, cb)
+  async IsolateDBInstance(
+    req: IsolateDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDBInstanceResponse) => void
+  ): Promise<IsolateDBInstanceResponse> {
+    return this.request("IsolateDBInstance", req, cb)
   }
 
   /**

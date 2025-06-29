@@ -551,21 +551,85 @@ export interface ApmAgentInfo {
 }
 
 /**
- * DescribeGeneralSpanList返回参数结构体
+ * 应用相关的配置列表项
  */
-export interface DescribeGeneralSpanListResponse {
+export interface ApmApplicationConfigView {
   /**
-   * 总数量
+   * 业务系统 ID
    */
-  TotalCount?: number
+  InstanceKey?: string
   /**
-   * Span 分页列表
+   * 应用名
    */
-  Spans?: Array<Span>
+  ServiceName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 接口过滤
    */
-  RequestId?: string
+  OperationNameFilter?: string
+  /**
+   * 错误类型过滤
+   */
+  ExceptionFilter?: string
+  /**
+   * HTTP 状态码过滤
+   */
+  ErrorCodeFilter?: string
+  /**
+   * 应用诊断开关（已废弃）
+   */
+  EventEnable?: boolean
+  /**
+   * URL 收敛开关 0 关 1 开
+   */
+  UrlConvergenceSwitch?: number
+  /**
+   * URL 收敛阈值
+   */
+  UrlConvergenceThreshold?: number
+  /**
+   * URL 收敛规则正则
+   */
+  UrlConvergence?: string
+  /**
+   * URL 排除规则正则
+   */
+  UrlExclude?: string
+  /**
+   * 是否开启日志 0 关 1 开
+   */
+  IsRelatedLog?: number
+  /**
+   * 日志源
+   */
+  LogSource?: string
+  /**
+   * 日志集
+   */
+  LogSet?: string
+  /**
+   * 日志主题
+   */
+  LogTopicID?: string
+  /**
+   * 方法栈快照开关 true 开启 false 关闭
+   */
+  SnapshotEnable?: boolean
+  /**
+   * 慢调用监听触发阈值
+   */
+  SnapshotTimeout?: number
+  /**
+   * 探针总开关
+   */
+  AgentEnable?: boolean
+  /**
+   * 组件列表开关（已废弃）
+   */
+  InstrumentList?: Array<Instrument>
+  /**
+   * 链路压缩开关（已废弃）
+   */
+  TraceSquash?: boolean
 }
 
 /**
@@ -738,99 +802,83 @@ export interface Line {
 }
 
 /**
- * 应用相关的配置列表项
+ * DescribeGeneralSpanList返回参数结构体
  */
-export interface ApmApplicationConfigView {
+export interface DescribeGeneralSpanListResponse {
   /**
-   * 业务系统 ID
+   * 总数量
    */
-  InstanceKey?: string
+  TotalCount?: number
   /**
-   * 应用名
+   * Span 分页列表
    */
-  ServiceName?: string
+  Spans?: Array<Span>
   /**
-   * 接口过滤
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OperationNameFilter?: string
-  /**
-   * 错误类型过滤
-   */
-  ExceptionFilter?: string
-  /**
-   * HTTP 状态码过滤
-   */
-  ErrorCodeFilter?: string
-  /**
-   * 应用诊断开关（已废弃）
-   */
-  EventEnable?: boolean
-  /**
-   * URL 收敛开关 0 关 1 开
-   */
-  UrlConvergenceSwitch?: number
-  /**
-   * URL 收敛阈值
-   */
-  UrlConvergenceThreshold?: number
-  /**
-   * URL 收敛规则正则
-   */
-  UrlConvergence?: string
-  /**
-   * URL 排除规则正则
-   */
-  UrlExclude?: string
-  /**
-   * 是否开启日志 0 关 1 开
-   */
-  IsRelatedLog?: number
-  /**
-   * 日志源
-   */
-  LogSource?: string
-  /**
-   * 日志集
-   */
-  LogSet?: string
-  /**
-   * 日志主题
-   */
-  LogTopicID?: string
-  /**
-   * 方法栈快照开关 true 开启 false 关闭
-   */
-  SnapshotEnable?: boolean
-  /**
-   * 慢调用监听触发阈值
-   */
-  SnapshotTimeout?: number
-  /**
-   * 探针总开关
-   */
-  AgentEnable?: boolean
-  /**
-   * 组件列表开关（已废弃）
-   */
-  InstrumentList?: Array<Instrument>
-  /**
-   * 链路压缩开关（已废弃）
-   */
-  TraceSquash?: boolean
+  RequestId?: string
 }
 
 /**
- * 维度（标签）对象
+ * CreateProfileTask返回参数结构体
  */
-export interface ApmTag {
+export interface CreateProfileTaskResponse {
   /**
-   * 维度Key(列名，标签Key)
+   * 任务ID
    */
-  Key: string
+  TaskId?: number
   /**
-   * 维度值（标签值）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: string
+  RequestId?: string
+}
+
+/**
+ * DescribeGeneralSpanList请求参数结构体
+ */
+export interface DescribeGeneralSpanListRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * Span 查询开始时间戳（单位：秒）
+   */
+  StartTime: number
+  /**
+   * Span 查询结束时间戳（单位：秒）
+   */
+  EndTime: number
+  /**
+   * 通用过滤参数
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序
+现支持的 Key 有：
+
+- startTime(开始时间)
+- endTime(结束时间)
+- duration(响应时间)
+
+现支持的 Value 有：
+
+- desc(降序排序)
+- asc(升序排序)
+   */
+  OrderBy?: OrderBy
+  /**
+   * 业务自身服务名，控制台用户请填写taw
+   */
+  BusinessName?: string
+  /**
+   * 单页项目个数，默认为10000，合法取值范围为0～10000
+   */
+  Limit?: number
+  /**
+   * 分页
+   */
+  Offset?: number
 }
 
 /**
@@ -902,51 +950,17 @@ export interface DescribeGeneralOTSpanListResponse {
 }
 
 /**
- * DescribeGeneralSpanList请求参数结构体
+ * 维度（标签）对象
  */
-export interface DescribeGeneralSpanListRequest {
+export interface ApmTag {
   /**
-   * 业务系统 ID
+   * 维度Key(列名，标签Key)
    */
-  InstanceId: string
+  Key: string
   /**
-   * Span 查询开始时间戳（单位：秒）
+   * 维度值（标签值）
    */
-  StartTime: number
-  /**
-   * Span 查询结束时间戳（单位：秒）
-   */
-  EndTime: number
-  /**
-   * 通用过滤参数
-   */
-  Filters?: Array<Filter>
-  /**
-   * 排序
-现支持的 Key 有：
-
-- startTime(开始时间)
-- endTime(结束时间)
-- duration(响应时间)
-
-现支持的 Value 有：
-
-- desc(降序排序)
-- asc(升序排序)
-   */
-  OrderBy?: OrderBy
-  /**
-   * 业务自身服务名，控制台用户请填写taw
-   */
-  BusinessName?: string
-  /**
-   * 单页项目个数，默认为10000，合法取值范围为0～10000
-   */
-  Limit?: number
-  /**
-   * 分页
-   */
-  Offset?: number
+  Value: string
 }
 
 /**
@@ -1226,6 +1240,44 @@ export interface SpanReference {
    * Trace ID
    */
   TraceID: string
+}
+
+/**
+ * CreateProfileTask请求参数结构体
+ */
+export interface CreateProfileTaskRequest {
+  /**
+   * 应用名称
+   */
+  ServiceName: string
+  /**
+   * APM业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 应用实例（在线）
+   */
+  ServiceInstance: string
+  /**
+   * 事件类型（cpu、alloc）
+   */
+  Event: string
+  /**
+   * 任务持续时长(单位：毫秒)，范围限制在5~180秒
+   */
+  Duration: number
+  /**
+   * 执行次数，范围限制在1~100次
+   */
+  AllTimes: number
+  /**
+   * 开始时间戳，0代表从当前开始(单位：秒)
+   */
+  StartTime?: number
+  /**
+   * 任务执行间隔(单位：毫秒)，范围限制在10~600秒，不可小于1.5倍的Duration
+   */
+  TaskInterval?: number
 }
 
 /**
