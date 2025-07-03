@@ -28,6 +28,7 @@ import {
   ModifyStaffRequest,
   DescribeIvrAudioListResponse,
   DescribePredictiveDialingCampaignsElement,
+  ServerPushText,
   ResetExtensionPasswordRequest,
   DisableCCCPhoneNumberResponse,
   DescribeProtectedTelCdrResponse,
@@ -42,6 +43,7 @@ import {
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
   ModifyStaffPasswordResponse,
+  ControlAIConversationResponse,
   TransferToManualRequest,
   CreatePredictiveDialingCampaignRequest,
   RestoreMemberOnlineResponse,
@@ -95,6 +97,7 @@ import {
   CarrierPrivilegeNumberApplicant,
   ErrStaffItem,
   PausePredictiveDialingCampaignResponse,
+  ResumePredictiveDialingCampaignRequest,
   PSTNSession,
   UpdatePredictiveDialingCampaignRequest,
   DescribeStaffInfoListRequest,
@@ -167,7 +170,7 @@ import {
   DescribeCCCBuyInfoListResponse,
   ActiveCarrierPrivilegeNumber,
   UnbindStaffSkillGroupListResponse,
-  ResumePredictiveDialingCampaignRequest,
+  ControlAIConversationRequest,
   UploadAudioInfo,
   CompanyStateInfo,
   DeleteExtensionResponse,
@@ -226,6 +229,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
+  }
+
+  /**
+   * 特定场景下讲会话转接到人工坐席
+   */
+  async TransferToManual(
+    req: TransferToManualRequest,
+    cb?: (error: string, rep: TransferToManualResponse) => void
+  ): Promise<TransferToManualResponse> {
+    return this.request("TransferToManual", req, cb)
   }
 
   /**
@@ -557,6 +570,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提供服务端控制机器人的功能
+   */
+  async ControlAIConversation(
+    req: ControlAIConversationRequest,
+    cb?: (error: string, rep: ControlAIConversationResponse) => void
+  ): Promise<ControlAIConversationResponse> {
+    return this.request("ControlAIConversation", req, cb)
+  }
+
+  /**
    * 获取电话服务记录与录音
    */
   async DescribeTelCdr(
@@ -564,16 +587,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTelCdrResponse) => void
   ): Promise<DescribeTelCdrResponse> {
     return this.request("DescribeTelCdr", req, cb)
-  }
-
-  /**
-   * 特定场景下讲会话转接到人工坐席
-   */
-  async TransferToManual(
-    req: TransferToManualRequest,
-    cb?: (error: string, rep: TransferToManualResponse) => void
-  ): Promise<TransferToManualResponse> {
-    return this.request("TransferToManual", req, cb)
   }
 
   /**

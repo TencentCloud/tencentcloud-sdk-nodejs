@@ -894,6 +894,7 @@ export interface FlowBrief {
   FlowDescription?: string
   /**
    * 合同流程的类别分类（如销售合同/入职合同等）。
+该字段将被废弃，不建议使用。	请使用 UserFlowType。
    */
   FlowType?: string
   /**
@@ -928,6 +929,17 @@ export interface FlowBrief {
    * 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。
    */
   Deadline?: number
+  /**
+   * 用户合同的自定义分类。
+
+自定义合同类型的位置，在下图所示地方:
+![image](https://qcloudimg.tencent-cloud.cn/raw/00d72934c31bd49115a566e4e1a4530d.png)
+   */
+  UserFlowType?: UserFlowType
+  /**
+   * 发起模板时,使用的模板Id
+   */
+  TemplateId?: string
 }
 
 /**
@@ -7207,6 +7219,7 @@ export interface FlowDetailInfo {
   FlowName?: string
   /**
    * 合同流程的类别分类（如销售合同/入职合同等）。
+该字段将被废弃，不建议使用。	
    */
   FlowType?: string
   /**
@@ -7237,6 +7250,17 @@ export interface FlowDetailInfo {
    * 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。
    */
   Creator?: string
+  /**
+   * 用户合同的自定义分类。
+
+自定义合同类型的位置，在下图所示地方:
+![image](https://qcloudimg.tencent-cloud.cn/raw/00d72934c31bd49115a566e4e1a4530d.png)
+   */
+  UserFlowType?: UserFlowType
+  /**
+   * 发起模板时,使用的模板Id
+   */
+  TemplateId?: string
 }
 
 /**

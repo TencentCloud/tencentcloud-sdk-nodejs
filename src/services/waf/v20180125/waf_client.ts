@@ -354,6 +354,7 @@ import {
   Goods,
   UpsertIpAccessControlResponse,
   DescribeAccessHistogramRequest,
+  NetworkConfig,
   BotScoreRuleEntry,
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessExportsResponse,

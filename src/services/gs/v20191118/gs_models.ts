@@ -510,7 +510,7 @@ export interface AndroidInstanceLabel {
   /**
    * 标签值
    */
-  Value: string
+  Value?: string
 }
 
 /**

@@ -18,6 +18,16 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
+it("ccc.v20200210.TransferToManual", async function () {
+    try {
+       const data = await client.TransferToManual({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.ModifyStaff", async function () {
     try {
        const data = await client.ModifyStaff({})
@@ -338,9 +348,9 @@ it("ccc.v20200210.CreateCompanyApply", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelCdr", async function () {
+it("ccc.v20200210.ControlAIConversation", async function () {
     try {
-       const data = await client.DescribeTelCdr({})
+       const data = await client.ControlAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +358,9 @@ it("ccc.v20200210.DescribeTelCdr", async function () {
     }
 })
 
-it("ccc.v20200210.TransferToManual", async function () {
+it("ccc.v20200210.DescribeTelCdr", async function () {
     try {
-       const data = await client.TransferToManual({})
+       const data = await client.DescribeTelCdr({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

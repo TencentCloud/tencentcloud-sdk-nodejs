@@ -7352,6 +7352,10 @@ export interface Resource {
    * 本地盘数量，如2
    */
   DiskNum?: number
+  /**
+   * GPU信息
+   */
+  GpuDesc?: string
 }
 
 /**
@@ -9429,6 +9433,10 @@ export interface PriceResource {
    * 本地盘的数量
    */
   LocalDiskNum?: number
+  /**
+   * GPU信息
+   */
+  GpuDesc?: string
 }
 
 /**

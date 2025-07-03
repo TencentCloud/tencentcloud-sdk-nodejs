@@ -378,6 +378,18 @@ export interface CreateJobConfigRequest {
    * TaskManager 内存
    */
   TaskManagerMem?: number
+  /**
+   * 0=默认使用老的 1=使用新的
+   */
+  UseOldSystemConnector?: number
+  /**
+   * 压缩参数
+   */
+  ProgramArgsAfterGzip?: string
+  /**
+   * checkpoint 超时时间
+   */
+  CheckpointTimeoutSecond?: number
 }
 
 /**
@@ -2217,6 +2229,46 @@ export interface DeleteWorkSpaceResponse {
 }
 
 /**
+ * hadoopYarn资源信息
+ */
+export interface HadoopYarnItem {
+  /**
+   * ClusterGroupSerialId
+   */
+  ClusterGroupSerialId: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
+  /**
+   * cpu
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: number
+  /**
+   * mem
+   */
+  Mem?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 配置文件内容
+   */
+  Config?: string
+  /**
+   * CreatorUin
+   */
+  CreatorUin?: string
+}
+
+/**
  * TriggerJobSavepoint返回参数结构体
  */
 export interface TriggerJobSavepointResponse {
@@ -2874,6 +2926,10 @@ export interface ModifyJobRequest {
    * 作业描述
    */
   Description?: string
+  /**
+   * 停止持续告警
+   */
+  ContinueAlarm?: number
 }
 
 /**
@@ -3171,6 +3227,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Setats?: Setats
+  /**
+   * []
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Yarns?: Array<HadoopYarnItem>
 }
 
 /**
@@ -3461,6 +3522,10 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgressDesc?: string
+  /**
+   * 停止持续告警
+   */
+  ContinueAlarm?: number
 }
 
 /**
@@ -3654,6 +3719,10 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobConfigItem?: JobConfig
+  /**
+   * checkpoint 超时时间
+   */
+  CheckpointTimeoutSecond?: number
 }
 
 /**

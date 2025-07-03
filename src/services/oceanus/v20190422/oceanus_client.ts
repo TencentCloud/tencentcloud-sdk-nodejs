@@ -100,6 +100,7 @@ import {
   TraceModeConfiguration,
   RunJobsRequest,
   DeleteWorkSpaceResponse,
+  HadoopYarnItem,
   TriggerJobSavepointResponse,
   DeleteJobsResponse,
   Property,

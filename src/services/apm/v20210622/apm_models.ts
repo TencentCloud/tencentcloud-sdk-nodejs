@@ -147,6 +147,54 @@ export interface ModifyApmInstanceRequest {
    * traceId的索引key: 当CLS索引类型为键值索引时生效
    */
   LogTraceIdKey?: string
+  /**
+   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   */
+  IsDeleteAnyFileAnalysis?: number
+  /**
+   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   */
+  IsReadAnyFileAnalysis?: number
+  /**
+   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   */
+  IsUploadAnyFileAnalysis?: number
+  /**
+   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   */
+  IsIncludeAnyFileAnalysis?: number
+  /**
+   * 是否开启目录遍历检测（0-关闭，1-开启）
+   */
+  IsDirectoryTraversalAnalysis?: number
+  /**
+   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   */
+  IsTemplateEngineInjectionAnalysis?: number
+  /**
+   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   */
+  IsScriptEngineInjectionAnalysis?: number
+  /**
+   * 是否开启表达式注入检测（0-关闭，1-开启）
+   */
+  IsExpressionInjectionAnalysis?: number
+  /**
+   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   */
+  IsJNDIInjectionAnalysis?: number
+  /**
+   * 是否开启JNI注入检测（0-关闭，1-开启）
+   */
+  IsJNIInjectionAnalysis?: number
+  /**
+   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   */
+  IsWebshellBackdoorAnalysis?: number
+  /**
+   * 是否开启反序列化检测（0-关闭，1-开启）
+   */
+  IsDeserializationAnalysis?: number
 }
 
 /**
@@ -323,6 +371,54 @@ export interface ApmInstanceDetail {
    * traceId的索引key: 当CLS索引类型为键值索引时生效
    */
   LogTraceIdKey?: string
+  /**
+   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   */
+  IsDeleteAnyFileAnalysis?: number
+  /**
+   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   */
+  IsReadAnyFileAnalysis?: number
+  /**
+   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   */
+  IsUploadAnyFileAnalysis?: number
+  /**
+   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   */
+  IsIncludeAnyFileAnalysis?: number
+  /**
+   * 是否开启目录遍历检测（0-关闭，1-开启）
+   */
+  IsDirectoryTraversalAnalysis?: number
+  /**
+   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   */
+  IsTemplateEngineInjectionAnalysis?: number
+  /**
+   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   */
+  IsScriptEngineInjectionAnalysis?: number
+  /**
+   * 是否开启表达式注入检测（0-关闭，1-开启）
+   */
+  IsExpressionInjectionAnalysis?: number
+  /**
+   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   */
+  IsJNDIInjectionAnalysis?: number
+  /**
+   * 是否开启JNI注入检测（0-关闭，1-开启）
+   */
+  IsJNIInjectionAnalysis?: number
+  /**
+   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   */
+  IsWebshellBackdoorAnalysis?: number
+  /**
+   * 是否开启反序列化检测（0-关闭，1-开启）
+   */
+  IsDeserializationAnalysis?: number
   /**
    * 业务系统鉴权 token
    */

@@ -128,9 +128,9 @@ it("csip.v20221121.DescribeVULList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeOtherCloudAssets", async function () {
+it("csip.v20221121.DescribeCallRecord", async function () {
     try {
-       const data = await client.DescribeOtherCloudAssets({})
+       const data = await client.DescribeCallRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +218,16 @@ it("csip.v20221121.DescribeClusterPodAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeOtherCloudAssets", async function () {
+    try {
+       const data = await client.DescribeOtherCloudAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterAssetViewCFGRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterAssetViewCFGRiskList({})
@@ -231,6 +241,16 @@ it("csip.v20221121.DescribeRiskCenterAssetViewCFGRiskList", async function () {
 it("csip.v20221121.DescribeVpcAssets", async function () {
     try {
        const data = await client.DescribeVpcAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSourceIPAsset", async function () {
+    try {
+       const data = await client.DescribeSourceIPAsset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +671,16 @@ it("csip.v20221121.DescribeSubnetAssets", async function () {
 it("csip.v20221121.DescribeCSIPRiskStatistics", async function () {
     try {
        const data = await client.DescribeCSIPRiskStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeAccessKeyAsset", async function () {
+    try {
+       const data = await client.DescribeAccessKeyAsset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
