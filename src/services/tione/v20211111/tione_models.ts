@@ -1730,6 +1730,20 @@ export interface DataPoint {
 }
 
 /**
+ * DescribeNotebook返回参数结构体
+ */
+export interface DescribeNotebookResponse {
+  /**
+   * 详情
+   */
+  NotebookDetail?: NotebookDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 太极服务的调用信息
  */
 export interface TJCallInfo {
@@ -2810,13 +2824,13 @@ export interface InferTemplateGroup {
 }
 
 /**
- * DescribeModelService返回参数结构体
+ * DescribeModelServiceHotUpdated返回参数结构体
  */
-export interface DescribeModelServiceResponse {
+export interface DescribeModelServiceHotUpdatedResponse {
   /**
-   * 服务信息
+   * 模型加速标志位.Allowed 允许模型加速. Forbidden 禁止模型加速
    */
-  Service?: Service
+  ModelTurboFlag?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3541,13 +3555,13 @@ export interface StopNotebookResponse {
 }
 
 /**
- * DescribeModelServiceHotUpdated返回参数结构体
+ * DescribeModelService返回参数结构体
  */
-export interface DescribeModelServiceHotUpdatedResponse {
+export interface DescribeModelServiceResponse {
   /**
-   * 模型加速标志位.Allowed 允许模型加速. Forbidden 禁止模型加速
+   * 服务信息
    */
-  ModelTurboFlag?: string
+  Service?: Service
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3748,9 +3762,10 @@ export interface Instance {
 DEPLOYING: 部署中
 RUNNING: 运行中 
 DEPLOY_FAILED: 部署失败
- RELEASING 释放中 
+RELEASING 释放中 
 RELEASED：已释放 
 EXCEPTION：异常
+DEBT_OR_EXPIRED: 欠费过期
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStatus?: string
@@ -4939,17 +4954,29 @@ export interface DescribeModelServiceGroupResponse {
 }
 
 /**
- * DescribeNotebook返回参数结构体
+ * 镜像属性
  */
-export interface DescribeNotebookResponse {
+export interface Attribute {
   /**
-   * 详情
+   * 为‘List’时属性值取Values 否则取Value
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotebookDetail?: NotebookDetail
+  Type?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 属性key
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Key?: string
+  /**
+   * 属性值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 属性值列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -5746,6 +5773,24 @@ export interface GooseFSx {
 }
 
 /**
+ * DescribePlatformImages返回参数结构体
+ */
+export interface DescribePlatformImagesResponse {
+  /**
+   * 数量
+   */
+  TotalCount?: number
+  /**
+   * 镜像列表
+   */
+  PlatformImageInfos?: Array<PlatformImageInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTrainingTaskPods请求参数结构体
  */
 export interface DescribeTrainingTaskPodsRequest {
@@ -6345,6 +6390,100 @@ export interface DescribeTrainingTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 平台镜像信息详情
+ */
+export interface PlatformImageInfo {
+  /**
+   * 框架名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Framework?: string
+  /**
+   * 镜像类型: ccr or tcr
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageType?: string
+  /**
+   * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageUrl?: string
+  /**
+   * TCR镜像示例所属地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryRegion?: string
+  /**
+   * TCR镜像所属实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryId?: string
+  /**
+   * 镜像名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageName?: string
+  /**
+   * 镜像Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageId?: string
+  /**
+   * 框架版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameworkVersion?: string
+  /**
+   * 支持的gpu列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportGpuList?: Array<string>
+  /**
+   * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 业务属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraAttributes?: Array<Attribute>
+  /**
+   * 镜像适用场景Train/Inference/Notebook
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageRange?: Array<string>
+  /**
+   * 是否支持分布式部署
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportDistributedDeploy?: boolean
+  /**
+   * 支持的地域 all(所有地域)/autonomous(自动驾驶地域)/general(通用地域)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionScope?: string
+}
+
+/**
+ * DescribePlatformImages请求参数结构体
+ */
+export interface DescribePlatformImagesRequest {
+  /**
+   * 过滤器,  Name支持ImageId/ImageName/SupportDataPipeline/AllowSaveAllContent/ImageRange，其中ImageRange支持枚举值Train,Inference,Notebook
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移信息
+   */
+  Offset?: number
+  /**
+   * 返回数量, 默认100
+   */
+  Limit?: number
 }
 
 /**

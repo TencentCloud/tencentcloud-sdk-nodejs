@@ -1272,7 +1272,7 @@ export interface DescribeTopL7AnalysisDataRequest {
    */
   StartTime: string
   /**
-   * 结束时间。
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
    */
   EndTime: string
   /**
@@ -1306,7 +1306,7 @@ export interface DescribeTopL7AnalysisDataRequest {
    */
   MetricName: string
   /**
-   * 站点 ID 集合，此参数必填。
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -6966,7 +6966,7 @@ export interface DescribeDDoSAttackEventRequest {
    */
   StartTime: string
   /**
-   * 结束时间，时间范围为 30 天。
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
    */
   EndTime: string
   /**
@@ -6974,7 +6974,7 @@ export interface DescribeDDoSAttackEventRequest {
    */
   PolicyIds?: Array<number | bigint>
   /**
-   * 站点集合，此参数必填。
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -8527,7 +8527,7 @@ export interface DescribeTimingL7AnalysisDataRequest {
    */
   StartTime: string
   /**
-   * 结束时间。
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
    */
   EndTime: string
   /**
@@ -8544,7 +8544,7 @@ export interface DescribeTimingL7AnalysisDataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点 ID 集合，此参数必填。
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -8895,7 +8895,7 @@ export interface DescribeDDoSAttackDataRequest {
    */
   StartTime: string
   /**
-   * 结束时间。
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
    */
   EndTime: string
   /**
@@ -8907,7 +8907,7 @@ export interface DescribeDDoSAttackDataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点集合，此参数必填。
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -9150,10 +9150,16 @@ export interface Plan {
   /**
    * 服务区域，取值有：
 <li>mainland: 中国大陆；</li>
-<li>overseas: 全球（不包括中国大陆)；</li>
-<li>global: 全球（包括中国大陆)。</li>
+<li>overseas: 全球（不包括中国大陆）；</li>
+<li>global: 全球（包括中国大陆）。</li>
    */
   Area?: string
+  /**
+   * 自动续费开关。取值有：
+<li>true: 已开启自动续费；</li>
+<li>false: 未开启自动续费。</li>
+   */
+  AutoRenewal?: boolean
   /**
    * 套餐状态，取值有：
 <li>normal：正常状态；</li>
@@ -10737,29 +10743,27 @@ export interface BotConfig {
  */
 export interface EnableOriginACLRequest {
   /**
-   * 站点ID。
+   * 站点 ID。
    */
   ZoneId: string
   /**
-   * 七层加速域名开启回源白名单的模式。
-<li>all：为站点下的所有七层加速域名开启回源白名单。</li>
-<li>specific：为站点下指定的七层加速域名开启回源白名单。</li>
-当参数为空时，默认为specific。
+   * 七层加速域名开启源站防护的模式。
+<li>all：针对站点下的所有七层加速域名开启。</li>
+<li>specific：针对站点下指定的七层加速域名开启。</li>当参数为空时，默认为 specific。
    */
   L7EnableMode?: string
   /**
-   * 开启回源白名单的七层加速域名列表，当请求参数 L7EnableMode 为 all 时必须为空。
+   * 开启源站防护的七层加速域名列表，仅当参数 L7EnableMode 为 specific 时生效。L7EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 200 个七层加速域名。
    */
   L7Hosts?: Array<string>
   /**
-   * 四层代理 ID 开启回源白名单的模式。
-<li>all：为站点下的所有四层代理开启回源白名单。</li>
-<li>specific：为站点下指定的四层代理 ID 开启回源白名单。</li>
-当参数为空时，默认为specific。
+   * 四层代理实例开启源站防护的模式。
+<li>all：针对站点下的所有四层代理实例开启。</li>
+<li>specific：针对站点下指定的四层代理实例开启。</li>当参数为空时，默认为 specific。
    */
   L4EnableMode?: string
   /**
-   * 开启回源白名单的四层代理 ID 列表，当请求参数 L4EnableMode 为 all 时必须为空。单次最多支持 200 个实例。
+   * 开启源站防护的四层代理实例列表，仅当参数 L4EnableMode 为 specific 时生效。L4EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 100 个四层代理实例。
    */
   L4ProxyIds?: Array<string>
 }
@@ -11366,44 +11370,44 @@ export interface OriginProtectionInfo {
   /**
    * 站点ID。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 域名列表。
    */
-  Hosts: Array<string>
+  Hosts?: Array<string>
   /**
    * 代理ID列表。
    */
-  ProxyIds: Array<string>
+  ProxyIds?: Array<string>
   /**
    * 当前版本的IP白名单。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentIPWhitelist: IPWhitelist
+  CurrentIPWhitelist?: IPWhitelist
   /**
    * 该站点是否需要更新源站白名单，取值有：
 <li>true ：需要更新IP白名单 ；</li>
 <li>false ：无需更新IP白名单。</li>
    */
-  NeedUpdate: boolean
+  NeedUpdate?: boolean
   /**
    * 源站防护状态，取值有：
 <li>online ：源站防护启用中 ；</li>
 <li>offline ：源站防护已停用 ；</li>
 <li>nonactivate ：源站防护未激活，仅在从未使用过源站防护功能的站点调用中返回。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 站点套餐是否支持源站防护，取值有：
 <li>true ：支持 ；</li>
 <li>false ：不支持。</li>
    */
-  PlanSupport: boolean
+  PlanSupport?: boolean
   /**
    * 最新IP白名单与当前IP白名单的对比。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiffIPWhitelist: DiffIPWhitelist
+  DiffIPWhitelist?: DiffIPWhitelist
 }
 
 /**
@@ -11697,7 +11701,7 @@ export interface DescribeDDoSAttackTopDataRequest {
    */
   StartTime: string
   /**
-   * 结束时间。
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
    */
   EndTime: string
   /**
@@ -11711,7 +11715,7 @@ export interface DescribeDDoSAttackTopDataRequest {
    */
   MetricName: string
   /**
-   * 站点ID集合，此参数必填。
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -13786,7 +13790,7 @@ export interface DescribeTimingL4DataRequest {
    */
   StartTime: string
   /**
-   * 结束时间。
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
    */
   EndTime: string
   /**
@@ -13800,7 +13804,7 @@ export interface DescribeTimingL4DataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点 ID 集合，此参数必填。
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**

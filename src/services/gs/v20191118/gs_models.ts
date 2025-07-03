@@ -304,6 +304,10 @@ export interface AndroidApp {
    * 应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、NORMAL 默认状态
    */
   UpdateState?: string
+  /**
+   * 安卓应用包名
+   */
+  PackageName?: string
 }
 
 /**
@@ -1666,9 +1670,17 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
    */
   CleanupMode?: string
   /**
-   * 安卓应用版本名称
+   * 安卓应用版本名称（版本描述、备注）
    */
   AndroidAppVersionName?: string
+  /**
+   * 安卓应用启动页
+   */
+  Activity?: string
+  /**
+   * 应用版本号（Version Name）
+   */
+  VersionName?: string
 }
 
 /**
@@ -1963,6 +1975,10 @@ export interface DescribeAndroidInstancesByAppsRequest {
    * 应用 ID 列表。通过应用 ID 做集合查询
    */
   AndroidAppIds: Array<string>
+  /**
+   * 字段过滤器。Filter 的 Name 有以下值： AndroidInstanceId：实例 ID
+   */
+  Filters?: Array<Filter>
 }
 
 /**

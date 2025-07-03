@@ -138,6 +138,16 @@ it("csip.v20221121.DescribeOtherCloudAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeVulRiskList", async function () {
+    try {
+       const data = await client.DescribeVulRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeListenerList", async function () {
     try {
        const data = await client.DescribeListenerList({})
@@ -418,6 +428,16 @@ it("csip.v20221121.DescribeVulViewVulRiskList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeHighBaseLineRiskList", async function () {
+    try {
+       const data = await client.DescribeHighBaseLineRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeScanReportList", async function () {
     try {
        const data = await client.DescribeScanReportList({})
@@ -501,6 +521,16 @@ it("csip.v20221121.DescribeExposeAssetCategory", async function () {
 it("csip.v20221121.DescribeRiskDetailList", async function () {
     try {
        const data = await client.DescribeRiskDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeAssetProcessList", async function () {
+    try {
+       const data = await client.DescribeAssetProcessList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

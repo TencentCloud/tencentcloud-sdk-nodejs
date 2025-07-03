@@ -1648,11 +1648,11 @@ export interface DescribeEncryptionStatusRequest {
  */
 export interface DeleteClusterVirtualNodePoolRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
-   * 超级节点池ID列表
+   * 节点池ID，通过DescribeNodePools接口获取
    */
   NodePoolIds: Array<string>
   /**
@@ -2553,6 +2553,9 @@ export interface VirtualNodePool {
   Name?: string
   /**
    * 节点池生命周期
+- creating：创建中
+- normal：正常
+- updating：更新中
    */
   LifeState?: string
   /**
@@ -2955,11 +2958,11 @@ export interface DeleteClusterEndpointRequest {
  */
 export interface DeleteClusterVirtualNodeRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
-   * 虚拟节点列表
+   * 虚拟节点ID列表
    */
   NodeNames: Array<string>
   /**
@@ -4366,23 +4369,23 @@ export interface ResourceUsage {
  */
 export interface CreateClusterVirtualNodeRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
-   * 虚拟节点所属节点池
+   * 虚拟节点所属节点池，通过DescribeNodePools接口获取
    */
   NodePoolId: string
   /**
-   * 虚拟节点所属子网
+   * 虚拟节点所属子网，SubnetId、SubnetIds、VirtualNodes必选一个。
    */
   SubnetId?: string
   /**
-   * 虚拟节点子网ID列表，和参数SubnetId互斥
+   * 虚拟节点子网ID列表，SubnetId、SubnetIds、VirtualNodes必选一个。
    */
   SubnetIds?: Array<string>
   /**
-   * 虚拟节点列表
+   * 虚拟节点列表，SubnetId、SubnetIds、VirtualNodes必选一个。
    */
   VirtualNodes?: Array<VirtualNodeSpec>
 }
@@ -4856,6 +4859,10 @@ export interface CreateClusterRequest {
    * 本地专用集群Id
    */
   CdcId?: string
+  /**
+   * 屏蔽安装指定Addon组件，填写相应的AddonName
+   */
+  DisableAddons?: Array<string>
 }
 
 /**
@@ -6884,7 +6891,7 @@ pending 还未开始
  */
 export interface DescribeClusterVirtualNodePoolsRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
 }
@@ -7101,15 +7108,15 @@ export interface DNSConfigOption {
  */
 export interface DescribeClusterVirtualNodeRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
-   * 节点池ID
+   * 节点池ID，通过DescribeNodePools接口获取
    */
   NodePoolId?: string
   /**
-   * 节点名称
+   * 节点名称，可搜索DescribeClusterVirtualNode接口节点
    */
   NodeNames?: Array<string>
 }
@@ -7438,7 +7445,7 @@ export interface ForwardTKEEdgeApplicationRequestV3Response {
  */
 export interface CreateClusterVirtualNodePoolRequest {
   /**
-   * 集群Id
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
@@ -7450,7 +7457,7 @@ export interface CreateClusterVirtualNodePoolRequest {
    */
   SubnetIds?: Array<string>
   /**
-   * 安全组ID列表
+   * 安全组ID列表，必选参数
    */
   SecurityGroupIds?: Array<string>
   /**
@@ -7466,7 +7473,7 @@ export interface CreateClusterVirtualNodePoolRequest {
    */
   VirtualNodes?: Array<VirtualNodeSpec>
   /**
-   * 删除保护开关
+   * 删除保护开关，默认关闭
    */
   DeletionProtection?: boolean
   /**
@@ -8127,11 +8134,11 @@ export interface RestartEKSContainerInstancesRequest {
  */
 export interface DrainClusterVirtualNodeRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
-   * 节点名
+   * 节点ID
    */
   NodeName: string
 }
@@ -10601,31 +10608,31 @@ export interface UpdateAddonRequest {
  */
 export interface ModifyClusterVirtualNodePoolRequest {
   /**
-   * 集群ID
+   * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
   /**
-   * 节点池ID
+   * 节点池ID，通过DescribeNodePools接口获取
    */
   NodePoolId: string
   /**
-   * 节点池名称
+   * 节点池名称，必须修改至少一个参数
    */
   Name?: string
   /**
-   * 安全组ID列表
+   * 安全组ID列表，必须修改至少一个参数
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 虚拟节点label
+   * 虚拟节点label，必须修改至少一个参数
    */
   Labels?: Array<Label>
   /**
-   * 虚拟节点taint
+   * 虚拟节点taint，必须修改至少一个参数
    */
   Taints?: Array<Taint>
   /**
-   * 删除保护开关
+   * 删除保护开关，必须修改至少一个参数
    */
   DeletionProtection?: boolean
 }
@@ -10863,7 +10870,7 @@ export interface EnableEventPersistenceResponse {
  */
 export interface VirtualNodeSpec {
   /**
-   * 节点展示名称
+   * 节点展示名称，建议不超过20个字符
    */
   DisplayName: string
   /**
@@ -11169,7 +11176,9 @@ export interface ClusterBasicSettings {
    */
   NeedWorkSecurityGroup?: boolean
   /**
-   * 当选择Cilium Overlay网络插件时，TKE会从该子网获取2个IP用来创建内网负载均衡
+   * 控制面子网信息，仅在以下场景使用时要求必填。
+- 容器网络插件为CiliumOverlay时，TKE会从该子网获取2个IP用来创建内网负载均衡。
+- 创建支持CDC的托管集群，且网络插件为VPC-CNI时，要求预留至少12个IP。
    */
   SubnetId?: string
   /**

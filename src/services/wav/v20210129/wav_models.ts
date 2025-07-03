@@ -237,15 +237,15 @@ export interface DealerInfo {
  */
 export interface QueryCrmStatisticsResponse {
   /**
-   * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+   * 分页游标，在下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextCursor: string
+  NextCursor?: string
   /**
    * CRM统计响应数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageData: Array<CrmStatisticsData>
+  PageData?: Array<CrmStatisticsData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1139,7 +1139,7 @@ export interface QueryLicenseInfoResponse {
    * license响应信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LicenseInfo: LicenseInfo
+  LicenseInfo?: LicenseInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2004,15 +2004,15 @@ export interface LicenseInfo {
  */
 export interface QueryCustomerEventDetailStatisticsResponse {
   /**
-   * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+   * 分页游标，在下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextCursor: string
+  NextCursor?: string
   /**
    * 外部联系人SaaS使用明细统计响应数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageData: Array<CustomerActionEventDetail>
+  PageData?: Array<CustomerActionEventDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2024,15 +2024,15 @@ export interface QueryCustomerEventDetailStatisticsResponse {
  */
 export interface QueryStaffEventDetailStatisticsResponse {
   /**
-   * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+   * 分页游标，在下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextCursor: string
+  NextCursor?: string
   /**
    * 企业成员SaaS使用明细统计响应数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageData: Array<SalesActionEventDetail>
+  PageData?: Array<SalesActionEventDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -38,9 +38,9 @@ it("tsf.v20180326.DeletePublicConfig", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeConfig", async function () {
+it("tsf.v20180326.CreateCluster", async function () {
     try {
-       const data = await client.DescribeConfig({})
+       const data = await client.CreateCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +228,9 @@ it("tsf.v20180326.RevocationPublicConfig", async function () {
     }
 })
 
-it("tsf.v20180326.CreateCluster", async function () {
+it("tsf.v20180326.DescribeConfig", async function () {
     try {
-       const data = await client.CreateCluster({})
+       const data = await client.DescribeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1161,6 +1161,16 @@ it("tsf.v20180326.DescribeInvocationMetricScatterPlot", async function () {
 it("tsf.v20180326.CreateFileConfig", async function () {
     try {
        const data = await client.CreateFileConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DeployContainerApplication", async function () {
+    try {
+       const data = await client.DeployContainerApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

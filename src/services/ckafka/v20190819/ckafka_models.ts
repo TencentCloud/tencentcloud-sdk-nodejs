@@ -1287,7 +1287,7 @@ export interface CreateTopicRequest {
    */
   InstanceId: string
   /**
-   * 主题名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * 只能包含字母、数字、下划线、“-”、“.”
    */
   TopicName: string
   /**
@@ -4686,6 +4686,14 @@ export interface DescribeDatahubTaskRes {
    * 任务标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * 任务描述信息
+   */
+  Description?: string
+  /**
+   * 1:正常 2:隔离中
+   */
+  IsolateStatus?: number
 }
 
 /**

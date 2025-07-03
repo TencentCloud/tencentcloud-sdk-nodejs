@@ -47,6 +47,7 @@ import {
   DescribeCloudRunServerDetailResponse,
   CreateCloudRunEnvResponse,
   EnvBaseInfo,
+  VpcConf,
   ServerBaseInfo,
   TimerScale,
   EnvInfo,

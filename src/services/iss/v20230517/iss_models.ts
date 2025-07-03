@@ -4734,7 +4734,7 @@ export interface ListVideoDownloadTaskRequest {
    */
   Status?: number
   /**
-   * 排序规则（仅支持 StartTime，EndTime，倒序为-StartTime，-EndTime）
+   * 排序规则（仅支持 StartTime，倒序为-StartTime）
    */
   SortRule?: string
   /**
@@ -4757,6 +4757,10 @@ export interface ListVideoDownloadTaskRequest {
    * 下载地址过期时间，单位秒，最大为 1 天， 86400秒
    */
   UrlExpires?: number
+  /**
+   * 任务日期，默认当天
+   */
+  Date?: string
 }
 
 /**

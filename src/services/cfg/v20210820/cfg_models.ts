@@ -699,6 +699,29 @@ export interface PolicyTriggerLog {
 }
 
 /**
+ * 演练目标
+ */
+export interface TaskTarget {
+  /**
+   * 目标标签ID
+   */
+  TargetId?: number
+  /**
+   * 目标描述
+   */
+  TargetDesc?: string
+  /**
+   * 1:演练场景
+2:演练目标
+   */
+  Type?: number
+  /**
+   * 1:平台 2:用户个人
+   */
+  Source?: number
+}
+
+/**
  * ModifyTaskRunStatus返回参数结构体
  */
 export interface ModifyTaskRunStatusResponse {
@@ -1193,6 +1216,14 @@ export interface Task {
    * 架构ID
    */
   TaskArchId?: string
+  /**
+   * 演练场景
+   */
+  TaskScenario?: Array<TaskTarget>
+  /**
+   * 演练目的
+   */
+  TaskPurpose?: Array<TaskTarget>
 }
 
 /**

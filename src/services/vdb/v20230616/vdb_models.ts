@@ -610,6 +610,18 @@ export interface InstanceInfo {
    */
   IsNoExpired?: boolean
   /**
+   * 产品版本，0-标准版，1-容量增强版
+   */
+  ProductType?: number
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+  /**
    * 外网地址。
    */
   WanAddress?: string
@@ -625,6 +637,10 @@ export interface InstanceInfo {
    * 任务状态：0-无任务；1-待执行任务；2-密钥更新中；3-网络变更中；4-参数变更中；5-embedding变更中；6-ai套件变更中；7-滚动升级中；8-纵向扩容中；9-纵向缩容中；10-横向扩容中；11-横向缩容中
    */
   TaskStatus?: number
+  /**
+   * 绑定的安全组id
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -721,6 +737,10 @@ export interface DescribeInstancesRequest {
    * 任务状态：1-待执行任务；2-密钥更新中；3-网络变更中；4-参数变更中；5-embedding变更中；6-ai套件变更中；7-滚动升级中；8-纵向扩容中；9-纵向缩容中；10-横向扩容中；11-横向缩容中
    */
   TaskStatus?: Array<number | bigint>
+  /**
+   * 根据实例vip搜索实例
+   */
+  Networks?: Array<string>
 }
 
 /**

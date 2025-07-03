@@ -26,6 +26,8 @@ import {
   DescribeLocalAccountAccountGroupsData,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
+  ModifyVirtualDeviceGroupsReqItem,
+  ModifyVirtualDeviceGroupsRequest,
   DescribeSoftwareInformationResponse,
   ComplexRule,
   DescribeDeviceHardwareInfoListResponse,
@@ -33,13 +35,15 @@ import {
   DescribeRootAccountGroupResponse,
   DescribeDeviceHardwareInfoItem,
   DescribeDLPFileDetectResultData,
+  DescribeVirtualDevicesRequest,
   DescribeDeviceInfoResponse,
   DescribeDevicesResponse,
   CreatePrivilegeCodeRspData,
   DescribeDeviceInfoRequest,
+  ModifyVirtualDeviceGroupsResponse,
   DescribeLocalAccountsResponse,
   DescribeAccountGroupsData,
-  RuleExpression,
+  DescribeVirtualDevicesPageRsp,
   DescribeRootAccountGroupRequest,
   SoftwareInformationData,
   DescribeAccountGroupsPageResp,
@@ -47,6 +51,7 @@ import {
   DescribeAccountGroupsResponse,
   DescribeDevicesPageRsp,
   DescribeSoftCensusListByDeviceResponse,
+  SimpleRule,
   FilterGroup,
   DescribeSoftCensusListByDevicePageData,
   DeviceNetworkInfo,
@@ -61,6 +66,7 @@ import {
   DeviceServiceInfo,
   GetAccountGroupData,
   DescribeSoftCensusListByDeviceRequest,
+  RuleExpression,
   Filter,
   DeviceProcessInfo,
   DescribeDeviceInfoRspData,
@@ -74,7 +80,7 @@ import {
   CreatePrivilegeCodeResponse,
   DescribeDeviceHardwareInfoListRequest,
   CreateDeviceVirtualGroupRspData,
-  SimpleRule,
+  DescribeVirtualDevicesResponse,
 } from "./ioa_models"
 
 /**
@@ -114,6 +120,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrivilegeCodeResponse) => void
   ): Promise<CreatePrivilegeCodeResponse> {
     return this.request("CreatePrivilegeCode", req, cb)
+  }
+
+  /**
+   * 展示自定义分组终端列表，私有化调用path为：/capi/Assets/DescribeVirtualDevices
+   */
+  async DescribeVirtualDevices(
+    req: DescribeVirtualDevicesRequest,
+    cb?: (error: string, rep: DescribeVirtualDevicesResponse) => void
+  ): Promise<DescribeVirtualDevicesResponse> {
+    return this.request("DescribeVirtualDevices", req, cb)
   }
 
   /**
@@ -174,6 +190,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceHardwareInfoListResponse) => void
   ): Promise<DescribeDeviceHardwareInfoListResponse> {
     return this.request("DescribeDeviceHardwareInfoList", req, cb)
+  }
+
+  /**
+   * 终端自定义分组增减终端，私有化调用path为：/capi/Assets/Device/ModifyVirtualDeviceGroups
+   */
+  async ModifyVirtualDeviceGroups(
+    req: ModifyVirtualDeviceGroupsRequest,
+    cb?: (error: string, rep: ModifyVirtualDeviceGroupsResponse) => void
+  ): Promise<ModifyVirtualDeviceGroupsResponse> {
+    return this.request("ModifyVirtualDeviceGroups", req, cb)
   }
 
   /**

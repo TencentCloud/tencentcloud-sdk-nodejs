@@ -39,6 +39,7 @@ import {
   DescribePolicy,
   ActionFilter,
   PolicyTriggerLog,
+  TaskTarget,
   ModifyTaskRunStatusResponse,
   DescribeTemplateRequest,
   ExecuteTaskInstanceRequest,

@@ -48,6 +48,16 @@ it("ioa.v20220601.CreatePrivilegeCode", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeVirtualDevices", async function () {
+    try {
+       const data = await client.DescribeVirtualDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
@@ -101,6 +111,16 @@ it("ioa.v20220601.DescribeSoftwareInformation", async function () {
 it("ioa.v20220601.DescribeDeviceHardwareInfoList", async function () {
     try {
        const data = await client.DescribeDeviceHardwareInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.ModifyVirtualDeviceGroups", async function () {
+    try {
+       const data = await client.ModifyVirtualDeviceGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

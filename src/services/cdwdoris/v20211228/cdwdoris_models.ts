@@ -222,6 +222,8 @@ export interface ScheduleInfo {
 Day-天
 Week-周
 Month-月
+Quarter-季度
+Year-年
 Once-单次
 
    */
@@ -2447,7 +2449,7 @@ Modify 集群变更中；
    */
   CoreSummary?: NodesSummary
   /**
-   * 高可用，“true" "false"
+   * 高可用，"true" "false"
    */
   HA?: string
   /**
@@ -2612,6 +2614,14 @@ Modify 集群变更中；
    * 计算组个数
    */
   ComputeGroupCount?: number
+  /**
+   * 存算分离cos存储数据
+   */
+  CosStorageSize?: number
+  /**
+   * 存算分离的指标 当是true 不支持新建计算组
+   */
+  IsMasterNonVM?: boolean
 }
 
 /**

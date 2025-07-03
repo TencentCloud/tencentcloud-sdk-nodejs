@@ -25,6 +25,7 @@ import {
   BugInfoDetail,
   CsipRiskCenterStatistics,
   DescribeVULRiskAdvanceCFGListResponse,
+  HighBaseLineRiskItem,
   TaskCenterWeakPwdRiskInputParam,
   DescribeAssetViewVulRiskListResponse,
   DescribeRepositoryImageAssetsRequest,
@@ -60,10 +61,13 @@ import {
   DescribeDomainAssetsRequest,
   ModifyRiskCenterScanTaskResponse,
   DescribeNICAssetsRequest,
+  UebaRule,
   DescribeRiskCenterWebsiteRiskListResponse,
   Tag,
   RiskRuleItem,
   DescribeRiskCenterCFGViewCFGRiskListRequest,
+  DescribeAssetProcessListRequest,
+  DescribeAssetProcessListResponse,
   DescribeCSIPRiskStatisticsResponse,
   AssetRiskItem,
   DeleteDomainAndIpRequest,
@@ -86,6 +90,7 @@ import {
   OrganizationInfo,
   DescribeListenerListResponse,
   TaskAdvanceCFG,
+  AssetProcessItem,
   DBAssetVO,
   AssetInfoDetail,
   SubnetAsset,
@@ -147,8 +152,9 @@ import {
   DescribeTaskLogURLResponse,
   VulTrend,
   ModifyOrganizationAccountStatusResponse,
+  DescribeVulRiskListRequest,
   AlertExtraInfo,
-  UebaRule,
+  DescribeVulRiskListResponse,
   DescribeDbAssetInfoRequest,
   RelatedEvent,
   DescribeAssetViewVulRiskListRequest,
@@ -156,6 +162,7 @@ import {
   DescribeVulViewVulRiskListResponse,
   Filter,
   DescribeRiskCenterWebsiteRiskListRequest,
+  VulRiskItem,
   RepositoryImageVO,
   ServerRiskSuggestion,
   AssetViewVULRisk,
@@ -166,6 +173,7 @@ import {
   DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeRiskRuleDetailResponse,
   DescribeVpcAssetsResponse,
+  DescribeHighBaseLineRiskListResponse,
   DescribeRiskCenterPortViewPortRiskListResponse,
   DeleteDomainAndIpResponse,
   ServerRisk,
@@ -224,6 +232,7 @@ import {
   DescribeTaskLogListResponse,
   DescribeExposuresResponse,
   DescribeRiskCenterAssetViewPortRiskListResponse,
+  DescribeHighBaseLineRiskListRequest,
   DescribeTaskLogURLRequest,
 } from "./csip_models"
 
@@ -354,6 +363,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOtherCloudAssetsResponse) => void
   ): Promise<DescribeOtherCloudAssetsResponse> {
     return this.request("DescribeOtherCloudAssets", req, cb)
+  }
+
+  /**
+   * 查询云边界分析-暴露路径下主机节点的漏洞列表
+   */
+  async DescribeVulRiskList(
+    req: DescribeVulRiskListRequest,
+    cb?: (error: string, rep: DescribeVulRiskListResponse) => void
+  ): Promise<DescribeVulRiskListResponse> {
+    return this.request("DescribeVulRiskList", req, cb)
   }
 
   /**
@@ -577,7 +596,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询互联网暴露节点
+   * 查询云边界分析路径节点
    */
   async DescribeExposePath(
     req: DescribeExposePathRequest,
@@ -634,6 +653,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulViewVulRiskListResponse) => void
   ): Promise<DescribeVulViewVulRiskListResponse> {
     return this.request("DescribeVulViewVulRiskList", req, cb)
+  }
+
+  /**
+   * 查询云边界分析-暴露路径下主机节点的高危基线风险列表
+   */
+  async DescribeHighBaseLineRiskList(
+    req: DescribeHighBaseLineRiskListRequest,
+    cb?: (error: string, rep: DescribeHighBaseLineRiskListResponse) => void
+  ): Promise<DescribeHighBaseLineRiskListResponse> {
+    return this.request("DescribeHighBaseLineRiskList", req, cb)
   }
 
   /**
@@ -697,7 +726,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询互联网暴露扫描结果统计信息
+   * 查询云边界分析扫描结果统计信息
    */
   async DescribeScanStatistic(
     req: DescribeScanStatisticRequest,
@@ -707,7 +736,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暴露面资产分类
+   * 云边界分析资产分类
    */
   async DescribeExposeAssetCategory(
     req: DescribeExposeAssetCategoryRequest,
@@ -724,6 +753,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskDetailListResponse) => void
   ): Promise<DescribeRiskDetailListResponse> {
     return this.request("DescribeRiskDetailList", req, cb)
+  }
+
+  /**
+   * 查询云边界分析-暴露路径下主机节点的进程列表
+   */
+  async DescribeAssetProcessList(
+    req: DescribeAssetProcessListRequest,
+    cb?: (error: string, rep: DescribeAssetProcessListResponse) => void
+  ): Promise<DescribeAssetProcessListResponse> {
+    return this.request("DescribeAssetProcessList", req, cb)
   }
 
   /**
@@ -767,7 +806,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 互联网暴露资产列表
+   * 云边界分析资产列表
    */
   async DescribeExposures(
     req: DescribeExposuresRequest,

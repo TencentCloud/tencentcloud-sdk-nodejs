@@ -603,13 +603,17 @@ export interface DescribeConfigTemplateResponse {
 }
 
 /**
- * ContinueRunFailedTaskBatch请求参数结构体
+ * 分页的 ContainerEvent
  */
-export interface ContinueRunFailedTaskBatchRequest {
+export interface TsfPageContainerEvent {
   /**
-   * 批次ID。
+   * 返回个数
    */
-  BatchId: string
+  TotalCount: number
+  /**
+   * events 数组
+   */
+  Content: Array<ContainerEvent>
 }
 
 /**
@@ -699,17 +703,13 @@ export interface SimpleApplication {
 }
 
 /**
- * DescribeSimpleNamespaces返回参数结构体
+ * ContinueRunFailedTaskBatch请求参数结构体
  */
-export interface DescribeSimpleNamespacesResponse {
+export interface ContinueRunFailedTaskBatchRequest {
   /**
-   * 命名空间分页列表
+   * 批次ID。
    */
-  Result?: TsfPageNamespace
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  BatchId: string
 }
 
 /**
@@ -1672,6 +1672,23 @@ export interface DescribeGatewayAllGroupApisResponse {
 }
 
 /**
+ * DeployContainerApplication返回参数结构体
+ */
+export interface DeployContainerApplicationResponse {
+  /**
+   * 部署容器应用是否成功。
+true：成功。
+false：失败。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DeployContainerApplicationResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 泳道规则
  */
 export interface LaneRule {
@@ -1861,6 +1878,32 @@ export interface MsInstance {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaJson?: string
+}
+
+/**
+ * HttpGet 执行内容
+ */
+export interface HttpGetOption {
+  /**
+   * 主机地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: string
+  /**
+   * 协议：HTTP｜HTTPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scheme?: string
 }
 
 /**
@@ -2504,6 +2547,22 @@ export interface DescribeDownloadInfoRequest {
    * 程序包仓库类型
    */
   RepositoryType?: string
+}
+
+/**
+ * 可观测配置
+ */
+export interface ContainerGroupObservabilityConfig {
+  /**
+   * 日志配置项ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessLogConfigIdList?: Array<string>
+  /**
+   * 投递配置项ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessLogDeliveryConfigIdList?: Array<string>
 }
 
 /**
@@ -4175,6 +4234,32 @@ export interface DescribeUploadInfoResponse {
 }
 
 /**
+ * LifeCycleHook
+ */
+export interface LifeCycleHook {
+  /**
+   * 生命周期函数类型：PostStart|PreStop
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HookType?: string
+  /**
+   * 函数执行方式：execCommand|httpGet|none
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecMode?: string
+  /**
+   * execCommand函数执行内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecCommandContent?: string
+  /**
+   * HttpGet执行内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpGetOption?: HttpGetOption
+}
+
+/**
  * DescribeMsApiList返回参数结构体
  */
 export interface DescribeMsApiListResponse {
@@ -5419,21 +5504,17 @@ export interface DescribeFlowLastBatchStateRequest {
 }
 
 /**
- * 指标监控数据曲线
+ * DescribeSimpleNamespaces返回参数结构体
  */
-export interface MetricDataCurve {
+export interface DescribeSimpleNamespacesResponse {
   /**
-   * 指标名称
+   * 命名空间分页列表
    */
-  MetricName?: string
+  Result?: TsfPageNamespace
   /**
-   * 指标计算方式
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MetricFunction?: string
-  /**
-   * 指标数据点集合
-   */
-  MetricDataPoints?: Array<MetricDataPoint>
+  RequestId?: string
 }
 
 /**
@@ -6955,17 +7036,19 @@ export interface GroupContainerInfo {
 }
 
 /**
- * CreateUnitRuleWithDetailResp返回参数结构体
+ * 部署后返回的结构体
  */
-export interface CreateUnitRuleWithDetailRespResponse {
+export interface DeployContainerApplicationResp {
   /**
-   * 单元化规则信息
+   * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result?: UnitRule
+  GroupId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  TaskId?: string
 }
 
 /**
@@ -9196,6 +9279,20 @@ export interface PathRewrite {
 }
 
 /**
+ * CreateUnitRuleWithDetailResp返回参数结构体
+ */
+export interface CreateUnitRuleWithDetailRespResponse {
+  /**
+   * 单元化规则信息
+   */
+  Result?: UnitRule
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnableTaskFlow返回参数结构体
  */
 export interface EnableTaskFlowResponse {
@@ -9449,20 +9546,6 @@ export interface TsfPageUnitNamespace {
    * 记录实体列表
    */
   Content?: Array<UnitNamespace>
-}
-
-/**
- * 分页的 ContainerEvent
- */
-export interface TsfPageContainerEvent {
-  /**
-   * 返回个数
-   */
-  TotalCount: number
-  /**
-   * events 数组
-   */
-  Content: Array<ContainerEvent>
 }
 
 /**
@@ -12519,6 +12602,24 @@ export interface DescribeUnitRulesRequest {
 }
 
 /**
+ * 指标监控数据曲线
+ */
+export interface MetricDataCurve {
+  /**
+   * 指标名称
+   */
+  MetricName?: string
+  /**
+   * 指标计算方式
+   */
+  MetricFunction?: string
+  /**
+   * 指标数据点集合
+   */
+  MetricDataPoints?: Array<MetricDataPoint>
+}
+
+/**
  * UpdateConfigTemplate请求参数结构体
  */
 export interface UpdateConfigTemplateRequest {
@@ -14045,6 +14146,240 @@ export interface ApiRateLimitRule {
 }
 
 /**
+ * DeployContainerApplication请求参数结构体
+ */
+export interface DeployContainerApplicationRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
+  /**
+   * 可观测配置
+   */
+  ObservabilityConfig?: ContainerGroupObservabilityConfig
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 部署组ID，分组唯一标识
+   */
+  GroupId?: string
+  /**
+   * 业务容器的环境变量参数
+   */
+  Envs?: Array<Env>
+  /**
+   * 业务容器的挂载信息
+   */
+  VolumeMountInfoList?: Array<VolumeMountInfo>
+  /**
+   * 业务主容器生命周期钩子列表
+   */
+  LifeCycleHookList?: Array<LifeCycleHook>
+  /**
+   * 附属容器列表
+   */
+  AdditionalContainerList?: Array<ContainerInfo>
+  /**
+   * 容器卷信息
+   */
+  VolumeInfoList?: Array<VolumeInfo>
+  /**
+   * Service访问配置列表
+   */
+  ServiceSettingList?: Array<ServiceSetting>
+  /**
+   * 备注
+   */
+  Alias?: string
+  /**
+   * 部署组名称
+   */
+  GroupName?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
+  /**
+   * 容器类型
+   */
+  ContainerKind?: string
+  /**
+   * 业务容器的 镜像Server ccr.ccs.tencentyun.com
+   */
+  Server?: string
+  /**
+   * 业务容器的镜像名
+   */
+  RepoName?: string
+  /**
+   * 仓库类型
+   */
+  RepoType?: string
+  /**
+   * TCR仓库信息
+   */
+  TcrRepoInfo?: TcrRepoInfo
+  /**
+   * 容器访问凭证名称
+   */
+  SecretName?: string
+  /**
+   * 业务容器的镜像版本号
+   */
+  TagName?: string
+  /**
+   * 健康检查
+   */
+  HealthCheckSettings?: HealthCheckSettings
+  /**
+   * 业务容器的 cpu  request
+   */
+  CpuRequest?: string
+  /**
+   * 业务容器的 cpu limit
+   */
+  CpuLimit?: string
+  /**
+   * 业务容器的 mem request
+   */
+  MemRequest?: string
+  /**
+   * 业务容器的 mem limit
+   */
+  MemLimit?: string
+  /**
+   * 业务容器的 jvm 参数
+   */
+  JvmOpts?: string
+  /**
+   * 是否为初始化容器 业务主容器不能为初始化容
+   */
+  InitContainerEnable?: boolean
+  /**
+   * 业务主容器是否为特权容器
+   */
+  PrivilegeContainerEnable?: boolean
+  /**
+   * 业务主容器运行命令(转base64)
+   */
+  RunCommand?: string
+  /**
+   * 业务主容器运行参数(转base64)
+   */
+  RunArg?: string
+  /**
+   * 实例数量
+   */
+  InstanceNum?: number
+  /**
+   * 调度策略
+   */
+  SchedulingStrategy?: SchedulingStrategy
+  /**
+   * 重启策略
+   */
+  RestartPolicy?: string
+  /**
+   * 服务治理配置
+   */
+  ServiceSpecEncode?: string
+  /**
+   * istio容器的 mem Request
+   */
+  IstioMemRequest?: string
+  /**
+   *  istio容器的 cpu Request
+   */
+  IstioCpuRequest?: string
+  /**
+   * istio容器的 mem Limit
+   */
+  IstioMemLimit?: string
+  /**
+   * istio容器的 cpu Limit
+   */
+  IstioCpuLimit?: string
+  /**
+   * 服务治理配置
+   */
+  ServiceGovernanceConfig?: ContainerGroupServiceGovernanceConfig
+  /**
+   * agent容器的 mem Request
+   */
+  AgentMemRequest?: string
+  /**
+   * agent容器的 cpu Request
+   */
+  AgentCpuRequest?: string
+  /**
+   * agent容器的 mem Limit
+   */
+  AgentMemLimit?: string
+  /**
+   * agent容器的 cpu Limit
+   */
+  AgentCpuLimit?: string
+  /**
+   * 发布策略(0表示快速更新，1表示滚动更新。默认值为0)
+   */
+  UpdateType?: number
+  /**
+   * 更新间隔,单位秒
+   */
+  UpdateIvl?: number
+  /**
+   * 对应更新策略和策略配置参数
+   */
+  MaxSurge?: string
+  /**
+   * 对应更新策略和策略配置参数
+   */
+  MaxUnavailable?: string
+  /**
+   * 预热参数配置
+   */
+  WarmupSetting?: WarmupSetting
+  /**
+   * 配置模版ID
+   */
+  ConfigTemplateId?: string
+  /**
+   * 配置模版Version
+   */
+  ConfigTemplateVersion?: number
+  /**
+   * 是否清除数据卷信息
+   */
+  VolumeClean?: boolean
+  /**
+   * 命名空间Id
+   */
+  NamespaceId?: string
+  /**
+   * 是否部署agent容器
+   */
+  DeployAgent?: boolean
+  /**
+   * javaagent信息: SERVICE_AGENT/OT_AGENT
+   */
+  AgentProfileList?: Array<AgentProfile>
+  /**
+   * 是否清除Service信息
+   */
+  ServiceClean?: boolean
+  /**
+   * 是否清除Env信息
+   */
+  EnvClean?: boolean
+  /**
+   * 本次部署的描述信息
+   */
+  DeployDesc?: string
+}
+
+/**
  * 用于请求参数中的条件过滤字段
  */
 export interface Filter {
@@ -14978,6 +15313,147 @@ export interface DeleteNamespaceRequest {
 }
 
 /**
+ * 容器详细信息
+ */
+export interface ContainerInfo {
+  /**
+   * 容器名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 容器ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerId?: string
+  /**
+   * 容器状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 容器的Reason
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
+  /**
+   * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Image?: string
+  /**
+   * 是否为业务主容器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsBusinessMainContainer?: boolean
+  /**
+   * 镜像Server
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Server?: string
+  /**
+   * 镜像名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoName?: string
+  /**
+   * 仓库类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoType?: string
+  /**
+   * TCR 仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TcrRepoInfo?: TcrRepoInfo
+  /**
+   * 容器访问凭证名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretName?: string
+  /**
+   * 镜像版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagName?: string
+  /**
+   * 健康检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckSettings?: HealthCheckSettings
+  /**
+   * 容器Cpu request
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuRequest?: string
+  /**
+   * 容器Cpu limit
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuLimit?: string
+  /**
+   * 容器Mem request
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemRequest?: string
+  /**
+   * 容器Mem Limit
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemLimit?: string
+  /**
+   * 环境变量参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Envs?: Array<Env>
+  /**
+   * 环境变量参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserEnvs?: Array<Env>
+  /**
+   * JVM参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JvmOpts?: string
+  /**
+   * 挂载信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeMountInfoList?: Array<VolumeMountInfo>
+  /**
+   * 是否为初始化容器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InitContainerEnable?: boolean
+  /**
+   * 生命周期钩子
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeCycleHookList?: Array<LifeCycleHook>
+  /**
+   * 是否为特权容器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegeContainerEnable?: boolean
+  /**
+   * 运行命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunCommand?: string
+  /**
+   * 运行参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunArg?: string
+  /**
+   * 容器名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerName?: string
+}
+
+/**
  * SearchStdoutLog请求参数结构体
  */
 export interface SearchStdoutLogRequest {
@@ -15459,6 +15935,32 @@ export interface DeleteLaneRequest {
    * 泳道Idl
    */
   LaneId: string
+}
+
+/**
+ * 服务治理相关配置项
+ */
+export interface ContainerGroupServiceGovernanceConfig {
+  /**
+   * 是否开启服务治理
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableGovernance?: boolean
+  /**
+   * 控制台场景使用 mesh服务配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceConfigList?: Array<ServiceConfig>
+  /**
+   * 注册服务治理实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExclusiveInstances?: Array<ExclusiveInstance>
+  /**
+   * 服务治理类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GovernanceType?: string
 }
 
 /**

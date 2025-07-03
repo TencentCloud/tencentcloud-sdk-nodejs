@@ -296,6 +296,76 @@ export interface DescribeVULRiskAdvanceCFGListResponse {
 }
 
 /**
+ * 高危基线风险内容
+ */
+export interface HighBaseLineRiskItem {
+  /**
+   * 云账号ID
+   */
+  CloudAccountID?: string
+  /**
+   * 实例ID
+   */
+  AssetID?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 风险名称
+   */
+  RiskName?: string
+  /**
+   * 风险分类
+   */
+  RiskCategory?: string
+  /**
+   * 风险等级
+   */
+  RiskLevel?: string
+  /**
+   * 风险描述
+   */
+  RiskDesc?: string
+  /**
+   * 风险结果
+   */
+  RiskResult?: string
+  /**
+   * 修复建议
+   */
+  FixAdvice?: string
+  /**
+   * Linux漏洞
+   */
+  RiskCategoryName?: string
+  /**
+   * 风险等级名称
+   */
+  RiskLevelName?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatusName?: string
+  /**
+   * 首次发现时间
+   */
+  CreateTime?: string
+  /**
+   * 最近发现时间
+   */
+  UpdateTime?: string
+  /**
+   * 租户ID
+   */
+  AppID?: number
+}
+
+/**
  * 弱口令风险高级配置
  */
 export interface TaskCenterWeakPwdRiskInputParam {
@@ -1306,7 +1376,6 @@ export interface AssetBaseInfoResponse {
 export interface DescribeRepositoryImageAssetsResponse {
   /**
    * 仓库镜像列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<RepositoryImageVO>
   /**
@@ -1877,6 +1946,73 @@ export interface DescribeNICAssetsRequest {
 }
 
 /**
+ * 用户行为分析策略
+ */
+export interface UebaRule {
+  /**
+   * 策略id
+   */
+  RuleID?: string
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 策略类型
+0:系统策略
+1:自定义策略
+   */
+  RuleType?: number
+  /**
+   * 策略等级
+0:提示
+1:低危
+2:中危
+3:高危
+4:严重
+   */
+  RuleLevel?: number
+  /**
+   * 策略内容
+   */
+  RuleContent?: string
+  /**
+   * 策略开关
+   */
+  RuleStatus?: boolean
+  /**
+   * 命中次数
+   */
+  HitCount?: number
+  /**
+   * 所属账号Appid
+   */
+  AppID?: string
+  /**
+   * 多账号，成员ID
+   */
+  MemberID?: string
+  /**
+   * Uin
+   */
+  Uin?: string
+  /**
+   * 昵称
+   */
+  Nickname?: string
+  /**
+   * 自定义规则具体内容
+   */
+  CustomRuleDetail?: UebaCustomRule
+  /**
+   * 云类型
+腾讯云：0
+aws：1
+   */
+  CloudType?: number
+}
+
+/**
  * DescribeRiskCenterWebsiteRiskList返回参数结构体
  */
 export interface DescribeRiskCenterWebsiteRiskListResponse {
@@ -1974,6 +2110,58 @@ export interface DescribeRiskCenterCFGViewCFGRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeAssetProcessList请求参数结构体
+ */
+export interface DescribeAssetProcessListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filters?: Array<Filters>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序类型
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 云厂商
+   */
+  Provider?: string
+}
+
+/**
+ * DescribeAssetProcessList返回参数结构体
+ */
+export interface DescribeAssetProcessListResponse {
+  /**
+   * 进程数量
+   */
+  TotalCount?: number
+  /**
+   * 进程列表
+   */
+  AssetProcessList?: Array<AssetProcessItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2840,6 +3028,56 @@ export interface TaskAdvanceCFG {
    * 配置风险高级配置
    */
   CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+}
+
+/**
+ * 主机进程内容
+ */
+export interface AssetProcessItem {
+  /**
+   * 云账号ID
+   */
+  CloudAccountID?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 租户ID
+   */
+  AppID?: number
+  /**
+   * 云账号名称
+   */
+  CloudAccountName?: string
+  /**
+   * 实例ID
+   */
+  InstanceID?: string
+  /**
+   * 公网IP
+   */
+  PublicIp?: string
+  /**
+   * 内网IP
+   */
+  PrivateIp?: string
+  /**
+   * 进程ID
+   */
+  ProcessID?: string
+  /**
+   * 进程名称
+   */
+  ProcessName?: string
+  /**
+   * 命令行
+   */
+  CmdLine?: string
+  /**
+   * 监听端口列表
+   */
+  Port?: string
 }
 
 /**
@@ -4174,32 +4412,26 @@ export interface DescribeCVMAssetInfoRequest {
 export interface DescribeOtherCloudAssetsResponse {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 资产总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<DBAssetVO>
   /**
    * 地域枚举
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionList?: Array<FilterDataObject>
   /**
    * 资产类型枚举
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssetTypeList?: Array<FilterDataObject>
   /**
    * Vpc枚举
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcList?: Array<FilterDataObject>
   /**
    * Appid枚举
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppIdList?: Array<FilterDataObject>
   /**
@@ -5269,6 +5501,44 @@ export interface ModifyOrganizationAccountStatusResponse {
 }
 
 /**
+ * DescribeVulRiskList请求参数结构体
+ */
+export interface DescribeVulRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filters?: Array<Filters>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序类型
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 云账号ID
+   */
+  CloudAccountID?: string
+  /**
+   * 云厂商
+   */
+  Provider?: string
+}
+
+/**
  * 告警下拉字段
  */
 export interface AlertExtraInfo {
@@ -5637,70 +5907,21 @@ export interface AlertExtraInfo {
 }
 
 /**
- * 用户行为分析策略
+ * DescribeVulRiskList返回参数结构体
  */
-export interface UebaRule {
+export interface DescribeVulRiskListResponse {
   /**
-   * 策略id
+   * 漏洞数量
    */
-  RuleID?: string
+  TotalCount?: number
   /**
-   * 规则名称
+   * 漏洞列表
    */
-  RuleName?: string
+  VulRiskList?: Array<VulRiskItem>
   /**
-   * 策略类型
-0:系统策略
-1:自定义策略
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RuleType?: number
-  /**
-   * 策略等级
-0:提示
-1:低危
-2:中危
-3:高危
-4:严重
-   */
-  RuleLevel?: number
-  /**
-   * 策略内容
-   */
-  RuleContent?: string
-  /**
-   * 策略开关
-   */
-  RuleStatus?: boolean
-  /**
-   * 命中次数
-   */
-  HitCount?: number
-  /**
-   * 所属账号Appid
-   */
-  AppID?: string
-  /**
-   * 多账号，成员ID
-   */
-  MemberID?: string
-  /**
-   * Uin
-   */
-  Uin?: string
-  /**
-   * 昵称
-   */
-  Nickname?: string
-  /**
-   * 自定义规则具体内容
-   */
-  CustomRuleDetail?: UebaCustomRule
-  /**
-   * 云类型
-腾讯云：0
-aws：1
-   */
-  CloudType?: number
+  RequestId?: string
 }
 
 /**
@@ -5850,102 +6071,157 @@ export interface DescribeRiskCenterWebsiteRiskListRequest {
 }
 
 /**
+ * 主机漏洞风险内容
+ */
+export interface VulRiskItem {
+  /**
+   * 云账号ID
+   */
+  CloudAccountID?: string
+  /**
+   * 实例ID
+   */
+  AssetID?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * 漏洞类型
+   */
+  VulCategory?: string
+  /**
+   * 漏洞等级
+   */
+  VulLevel?: string
+  /**
+   * CVE编号
+   */
+  CveID?: string
+  /**
+   * 漏洞描述
+   */
+  Description?: string
+  /**
+   * 容器ID
+   */
+  ContainerID?: string
+  /**
+   * 漏洞风险修复建议
+   */
+  Fix?: string
+  /**
+   * Linux漏洞
+   */
+  VulCategoryName?: string
+  /**
+   * 漏洞等级名称
+   */
+  VulLevelName?: string
+  /**
+   * 实例状态中文信息
+   */
+  InstanceStatusName?: string
+  /**
+   * 租户ID
+   */
+  AppID?: number
+}
+
+/**
  * 仓库镜像列表
  */
 export interface RepositoryImageVO {
   /**
    * 用户appid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
    * 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NickName?: string
   /**
    * 镜像id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 镜像名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 镜像创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCreateTime?: string
   /**
    * 镜像大小带单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceSize?: string
   /**
    * 构建次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildCount?: number
   /**
    * 镜像类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * 授权状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthStatus?: number
   /**
    * 镜像版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceVersion?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 仓库地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepositoryUrl?: string
   /**
    * 仓库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepositoryName?: string
   /**
    * 是否核心
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCore?: number
   /**
    * 漏洞风险
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VulRisk?: number
   /**
    * 检查任务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckCount?: number
   /**
    * 体检时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckTime?: string
   /**
    * 是否新资产 1新
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNewAsset?: number
 }
@@ -6394,6 +6670,24 @@ export interface DescribeVpcAssetsResponse {
 }
 
 /**
+ * DescribeHighBaseLineRiskList返回参数结构体
+ */
+export interface DescribeHighBaseLineRiskListResponse {
+  /**
+   * 高危基线风险数量
+   */
+  TotalCount?: number
+  /**
+   * 高危基线风险列表
+   */
+  HighBaseLineRiskList?: Array<HighBaseLineRiskItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRiskCenterPortViewPortRiskList返回参数结构体
  */
 export interface DescribeRiskCenterPortViewPortRiskListResponse {
@@ -6570,7 +6864,7 @@ export interface ReportTaskIdList {
  */
 export interface DescribeExposeAssetCategoryResponse {
   /**
-   * 暴露资产分类列表
+   * 云边界分析资产分类列表
    */
   ExposeAssetTypeList?: Array<ExposeAssetTypeItem>
   /**
@@ -7152,7 +7446,7 @@ export interface ScanTaskInfoList {
  */
 export interface DescribeExposePathResponse {
   /**
-   * 暴露路径节点内容
+   * 云边界分析路径节点内容
    */
   Content?: string
   /**
@@ -7850,12 +8144,12 @@ export interface DescribeTaskLogListRequest {
  */
 export interface Filters {
   /**
-   * 无
+   * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 无
+   * 实例ID内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
@@ -8376,11 +8670,11 @@ export interface DescribeTaskLogListResponse {
  */
 export interface DescribeExposuresResponse {
   /**
-   * 互联网暴露资产数量
+   * 云边界分析资产数量
    */
   TotalCount?: number
   /**
-   * 互联网暴露资产列表
+   * 云边界分析资产列表
    */
   ExposeList?: Array<ExposesItem>
   /**
@@ -8425,6 +8719,44 @@ export interface DescribeRiskCenterAssetViewPortRiskListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeHighBaseLineRiskList请求参数结构体
+ */
+export interface DescribeHighBaseLineRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filters?: Array<Filters>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序类型
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 云账号ID
+   */
+  CloudAccountID?: string
+  /**
+   * 云厂商
+   */
+  Provider?: string
 }
 
 /**

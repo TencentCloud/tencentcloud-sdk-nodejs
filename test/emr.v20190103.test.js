@@ -18,9 +18,9 @@ const client = new tencentcloud.emr.v20190103.Client({
 })
 describe("emr.v20190103.test.js", function () {
 
-it("emr.v20190103.TerminateInstance", async function () {
+it("emr.v20190103.ModifyUserManagerPwd", async function () {
     try {
-       const data = await client.TerminateInstance({})
+       const data = await client.ModifyUserManagerPwd({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("emr.v20190103.DescribeCvmQuota", async function () {
     }
 })
 
-it("emr.v20190103.ModifyUserManagerPwd", async function () {
+it("emr.v20190103.TerminateInstance", async function () {
     try {
-       const data = await client.ModifyUserManagerPwd({})
+       const data = await client.TerminateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +101,16 @@ it("emr.v20190103.DescribeServiceNodeInfos", async function () {
 it("emr.v20190103.ModifyYarnDeploy", async function () {
     try {
        const data = await client.ModifyYarnDeploy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeNodeSpec", async function () {
+    try {
+       const data = await client.DescribeNodeSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +331,16 @@ it("emr.v20190103.DescribeDAGInfo", async function () {
 it("emr.v20190103.DeleteUserManagerUserList", async function () {
     try {
        const data = await client.DeleteUserManagerUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ConvertPreToPostCluster", async function () {
+    try {
+       const data = await client.ConvertPreToPostCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +681,16 @@ it("emr.v20190103.DescribeAutoScaleStrategies", async function () {
 it("emr.v20190103.DescribeAutoScaleGroupGlobalConf", async function () {
     try {
        const data = await client.DescribeAutoScaleGroupGlobalConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeServiceConfGroupInfos", async function () {
+    try {
+       const data = await client.DescribeServiceConfGroupInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

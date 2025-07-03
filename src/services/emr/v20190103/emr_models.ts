@@ -173,6 +173,29 @@ export interface Step {
 }
 
 /**
+ * 节点机型列族
+ */
+export interface NodeSpecFamily {
+  /**
+   * 机型
+   */
+  InstanceFamily: string
+  /**
+   * 机型名称
+   */
+  FamilyName: string
+  /**
+   * 排序
+   */
+  Order?: number
+  /**
+   * InstanceType的列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceTypes?: Array<NodeSpecInstanceType>
+}
+
+/**
  * 键值对，主要用来做Filter
  */
 export interface KeyValue {
@@ -450,6 +473,14 @@ ALIGN_DEADLINE：自动对其到期时间
    * 新挂磁盘时可支持配置的服务名称列表
    */
   SelectiveConfServices?: Array<string>
+  /**
+   * 磁盘计费类型（1包月、3包销）
+   */
+  ChargeType?: number
+  /**
+   * 磁盘包销购买时长（仅支持12、24、36、48、60）
+   */
+  UnderWriteDuration?: number
 }
 
 /**
@@ -1159,6 +1190,28 @@ export interface MultiDisk {
 }
 
 /**
+ * 节点磁盘类型
+ */
+export interface NodeSpecDisk {
+  /**
+   * 数量
+   */
+  Count?: number
+  /**
+   * 名字
+   */
+  Name?: string
+  /**
+   * 磁盘类型
+   */
+  DiskType?: string
+  /**
+   * 指定磁盘大小
+   */
+  DefaultDiskSize?: number
+}
+
+/**
  * RunJobFlow请求参数结构体
  */
 export interface RunJobFlowRequest {
@@ -1624,6 +1677,32 @@ export interface DescribeSLInstanceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeServiceConfGroupInfos请求参数结构体
+ */
+export interface DescribeServiceConfGroupInfosRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 组件名
+   */
+  ServiceName: string
+  /**
+   * 配置组名称
+   */
+  ConfGroupName: string
+  /**
+   * 页码，从1开始
+   */
+  PageNo: number
+  /**
+   * 页大小
+   */
+  PageSize: number
 }
 
 /**
@@ -3528,6 +3607,24 @@ export interface HostPathVolumeSource {
 }
 
 /**
+ * DescribeServiceConfGroupInfos返回参数结构体
+ */
+export interface DescribeServiceConfGroupInfosResponse {
+  /**
+   * 列表大小
+   */
+  TotalCount?: number
+  /**
+   * 配置项key value列表
+   */
+  ConfItemKVList?: Array<ConfigurationItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 扩容容器资源时的资源描述
  */
 export interface PodSpec {
@@ -4247,6 +4344,10 @@ Hadoop-Hbase
    * 节点标识信息，目前只提供给tf平台使用
    */
   NodeMarks?: Array<NodeMark>
+  /**
+   * CLB id
+   */
+  LoadBalancerId?: string
 }
 
 /**
@@ -4527,6 +4628,16 @@ export interface ModifyResourcePoolsResponse {
 }
 
 /**
+ * DescribeInstanceRenewNodes请求参数结构体
+ */
+export interface DescribeInstanceRenewNodesRequest {
+  /**
+   * 集群实例ID,实例ID形如: emr-xxxxxxxx
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeYarnApplications返回参数结构体
  */
 export interface DescribeYarnApplicationsResponse {
@@ -4782,6 +4893,24 @@ export interface NotRepeatStrategy {
    * 该次任务执行的具体完整时间，格式为"2020-07-13 00:00:00"
    */
   ExecuteAt: string
+}
+
+/**
+ * 配置项（配置管理页）
+ */
+export interface ConfigurationItem {
+  /**
+   * 配置项名称
+   */
+  Name: string
+  /**
+   * 配置项值
+   */
+  Value: string
+  /**
+   * 所在的配置文件名
+   */
+  InFile?: string
 }
 
 /**
@@ -5763,13 +5892,17 @@ export interface CreateGroupsSTDRequest {
 }
 
 /**
- * DescribeInstanceRenewNodes请求参数结构体
+ * ConvertPreToPostCluster请求参数结构体
  */
-export interface DescribeInstanceRenewNodesRequest {
+export interface ConvertPreToPostClusterRequest {
   /**
-   * 集群实例ID,实例ID形如: emr-xxxxxxxx
+   * 集群实例ID。
    */
   InstanceId: string
+  /**
+   * 5min内不可重入标识，订单标识
+   */
+  ClientToken?: string
 }
 
 /**
@@ -6022,6 +6155,36 @@ export interface ModifyYarnDeployResponse {
 }
 
 /**
+ * 用户管理中用户的简要信息
+ */
+export interface UserManagerUserBriefInfo {
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 用户所属的组
+   */
+  UserGroup?: string
+  /**
+   * Manager表示管理员、NormalUser表示普通用户
+   */
+  UserType?: string
+  /**
+   * 用户创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
+   */
+  SupportDownLoadKeyTab?: boolean
+  /**
+   * keytab文件的下载地址
+   */
+  DownLoadKeyTabUrl?: string
+}
+
+/**
  * 描述集群实例位置信息
  */
 export interface Placement {
@@ -6238,6 +6401,100 @@ export interface DescribeYarnScheduleHistoryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeNodeSpec请求参数结构体
+ */
+export interface DescribeNodeSpecRequest {
+  /**
+   * 可用区Id，可以通过https://document.capi.woa.com/document/api/1605/76892查询相关信息
+   */
+  ZoneId: number
+  /**
+   * 0,按量，1包年包月，99按量+包年包月，错填将不会展示费用信息
+   */
+  CvmPayMode: number
+  /**
+   * 节点类型,Master,Core,Task,Router,All
+   */
+  NodeType: string
+  /**
+   * 0:旧计费页面,1:新计费页面。 错填，默认为旧计费
+   */
+  TradeType: number
+  /**
+   * 产品Id，不填为0，则表示所有productId，前台使用必填
+
+44	EMR	V3.5.0
+43	EMR	V3.4.0.tlinux
+42	EMR	V2.7.0.tlinux
+41	DRUID	V1.1.0
+67	STARROCKS	V2.2.0
+45	DRUID	V1.1.0.tlinux
+40	EMRCLOUD	v3.2.0
+47	EMR	V4.0.0
+48	STARROCKS	V1.2.0
+49	STARROCKS	V1.3.0
+50	KAFKA	V2.0.0
+51	STARROCKS	V1.4.0
+52	EMR-TKE	V1.0.0
+53	EMR	V3.6.0
+54	STARROCKS	V2.0.0
+55	EMR-TKE	V1.0.1
+56	EMR-TKE	DLCV1.0.0
+57	EMR	V2.8.0
+58	EMR	V3.6.1
+59	SERVERLESS	V1.0.0
+60	EMR-TKE	V1.1.0
+62	STARROCKS	V2.1.1
+63	STARROCKS	V2.1.1.tlinux
+64	EMR-TKE	TCCV1.0.0
+65	EMR-TKE-AI	V1.0.0
+66	RSS	V1.0.0
+24	EMR	TianQiong-V1.0.0
+3	EMR	V2.0.1.tlinux
+4	EMR	V2.1.0
+7	EMR	V3.0.0
+8	EMR	V3.0.0.tlinux
+9	EMR	V2.2.0
+11	CLICKHOUSE	V1.0.0
+12	CLICKHOUSE	V1.0.0.tlinux
+16	EMR	V2.3.0
+17	CLICKHOUSE	V1.1.0
+18	CLICKHOUSE	V1.1.0.tlinux
+19	EMR	V2.4.0
+20	EMR	V2.5.0
+21	USERCUSTOM	V1.0.0
+22	CLICKHOUSE	V1.2.0
+39	STARROCKS	V1.1.0
+25	EMR	V3.1.0
+26	DORIS	V1.0.0
+27	KAFKA	V1.0.0
+28	EMR	V3.2.0
+29	EMR	V2.5.1
+30	EMR	V2.6.0
+32	DORIS	V1.1.0
+33	EMR	V3.2.1
+34	EMR	V3.3.0
+35	DORIS	V1.2.0
+36	STARROCKS	V1.0.0
+37	EMR	V3.4.0
+38	EMR	V2.7.0
+   */
+  ProductId: number
+  /**
+   * 场景名
+   */
+  SceneName: string
+  /**
+   * 类型为ComputeResource和EMR以及默认，默认为EMR
+   */
+  ResourceBaseType?: string
+  /**
+   * 计算资源id
+   */
+  ComputeResourceId?: string
 }
 
 /**
@@ -6992,6 +7249,20 @@ export interface TerminateSLInstanceRequest {
 }
 
 /**
+ * DescribeNodeSpec返回参数结构体
+ */
+export interface DescribeNodeSpecResponse {
+  /**
+   * 节点规格类型
+   */
+  NodeSpecs?: Array<DescribeNodeSpec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStarRocksQueryInfo请求参数结构体
  */
 export interface DescribeStarRocksQueryInfoRequest {
@@ -7596,6 +7867,30 @@ export interface SyncPodStateResponse {
 }
 
 /**
+ * 节点规格
+ */
+export interface DescribeNodeSpec {
+  /**
+   * 节点类型
+   */
+  NodeType: string
+  /**
+   * 节点类型名称
+   */
+  NodeName: string
+  /**
+   * Types数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Types?: Array<NodeSpecType>
+  /**
+   * 云托管节点机型规格列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CmnTypes?: Array<NodeSpecType>
+}
+
+/**
  * 磁盘描述。
  */
 export interface DiskSpec {
@@ -7941,6 +8236,10 @@ export interface ClusterInstancesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterRelationInfoList?: Array<ClusterRelationMeta>
+  /**
+   * Redis信息
+   */
+  RedisId?: string
 }
 
 /**
@@ -7981,6 +8280,100 @@ export interface DescribeHBaseTableOverviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点规格类型
+ */
+export interface NodeSpecInstanceType {
+  /**
+   * 规格
+   */
+  InstanceType: string
+  /**
+   * 4
+   */
+  Cpu: number
+  /**
+   * 8，单位G
+   */
+  Memory: number
+  /**
+   * 排序，越小排的越前
+   */
+  Order?: number
+  /**
+   * 数量
+   */
+  Num?: number
+  /**
+   * 售罄原因
+   */
+  SellOutReason?: string
+  /**
+   * 系统盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystemDisk?: Array<NodeSpecDisk>
+  /**
+   * 数据盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataDisk?: Array<NodeSpecDisk>
+  /**
+   * 本地数据盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalDataDisk?: Array<NodeSpecDisk>
+  /**
+   * 售罄原因
+   */
+  SoldOutReason?: string
+  /**
+   * 机型类别
+   */
+  InstanceFamily?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+  /**
+   * 类别
+   */
+  Type?: string
+  /**
+   * 类别名称
+   */
+  TypeName?: string
+  /**
+   * 类别分类
+   */
+  FamilyName?: string
+  /**
+   * cpu类型
+   */
+  CpuType?: string
+  /**
+   * 售罄 RunOut、库存少 Less、充足 Enough
+   */
+  Remark?: string
+  /**
+   * 原价
+   */
+  OriginPrice?: number
+  /**
+   * 包销计费机型支持的购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrepaidUnderwritePeriods?: Array<number | bigint>
+  /**
+   * GPU信息
+   */
+  GpuDesc?: string
 }
 
 /**
@@ -8464,6 +8857,16 @@ export interface DescribeResourceScheduleRequest {
  * DeleteNodeResourceConfig返回参数结构体
  */
 export interface DeleteNodeResourceConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ConvertPreToPostCluster返回参数结构体
+ */
+export interface ConvertPreToPostClusterResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9750,6 +10153,10 @@ export interface CBSInstance {
    * emr节点ID
    */
   EmrResourceId?: string
+  /**
+   * 包销到期时间
+   */
+  UnderwriteExpiredTime?: string
 }
 
 /**
@@ -9918,6 +10325,11 @@ export interface LoadMetricsConditions {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadMetrics?: Array<LoadMetricsCondition>
+  /**
+   * 0:所有条件满足
+1：满足任意一个
+   */
+  Match?: number
 }
 
 /**
@@ -9983,33 +10395,26 @@ export interface InquirePriceRenewEmrRequest {
 }
 
 /**
- * 用户管理中用户的简要信息
+ * 节点机型类型
  */
-export interface UserManagerUserBriefInfo {
+export interface NodeSpecType {
   /**
-   * 用户名
+   * 机型序列
    */
-  UserName?: string
+  Type: string
   /**
-   * 用户所属的组
+   * 机型序列名字
    */
-  UserGroup?: string
+  TypeName: string
   /**
-   * Manager表示管理员、NormalUser表示普通用户
+   * 排序
    */
-  UserType?: string
+  Order?: number
   /**
-   * 用户创建时间
+   * InstanceFamily数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: string
-  /**
-   * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
-   */
-  SupportDownLoadKeyTab?: boolean
-  /**
-   * keytab文件的下载地址
-   */
-  DownLoadKeyTabUrl?: string
+  InstanceFamilies?: Array<NodeSpecFamily>
 }
 
 /**
@@ -10385,6 +10790,14 @@ export interface NodeHardwareInfo {
    * 节点标注信息，目前只提供给tf平台使用
    */
   NodeMark?: string
+  /**
+   * 包销资源是否支持设置自动续费
+   */
+  UnderwriteSetAutoRenew?: boolean
+  /**
+   * Gpu信息
+   */
+  GpuDesc?: string
 }
 
 /**

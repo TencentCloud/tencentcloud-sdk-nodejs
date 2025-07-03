@@ -39,11 +39,11 @@ import {
   DeleteLaneResponse,
   DescribeGroupReleaseRequest,
   DescribeConfigTemplateResponse,
-  ContinueRunFailedTaskBatchRequest,
+  TsfPageContainerEvent,
   DescribeDeliveryConfigResponse,
   ForceSchedule,
   SimpleApplication,
-  DescribeSimpleNamespacesResponse,
+  ContinueRunFailedTaskBatchRequest,
   DescribeSimpleClustersResponse,
   DeleteRepositoryResponse,
   DeleteApplicationResponse,
@@ -101,8 +101,10 @@ import {
   DescribeGroupGatewaysRequest,
   UpdateApiRateLimitRuleResponse,
   DescribeGatewayAllGroupApisResponse,
+  DeployContainerApplicationResponse,
   LaneRule,
   MsInstance,
+  HttpGetOption,
   GatewayPluginBoundParam,
   ModifyNamespaceResponse,
   ModifyLaneRuleRequest,
@@ -126,6 +128,7 @@ import {
   StartGroupRequest,
   CreateNamespaceRequest,
   DescribeDownloadInfoRequest,
+  ContainerGroupObservabilityConfig,
   DescribeClusterInstancesRequest,
   DescribeGroupBindedGatewaysRequest,
   DescribeRepositoryRequest,
@@ -199,6 +202,7 @@ import {
   DescribeGroupInstancesRequest,
   DescribeMsApiListRequest,
   DescribeUploadInfoResponse,
+  LifeCycleHook,
   DescribeMsApiListResponse,
   EnableTaskRequest,
   BusinessLogV2,
@@ -253,7 +257,7 @@ import {
   DeletePublicConfigResponse,
   DescribePathRewriteResponse,
   DescribeFlowLastBatchStateRequest,
-  MetricDataCurve,
+  DescribeSimpleNamespacesResponse,
   GroupInfo,
   TerminateTaskFlowBatchResponse,
   DisassociateKafkaConfigResponse,
@@ -309,7 +313,7 @@ import {
   DeleteLaneRuleRequest,
   MetricDimension,
   GroupContainerInfo,
-  CreateUnitRuleWithDetailRespResponse,
+  DeployContainerApplicationResp,
   GatewayDeployGroup,
   PkgList,
   CreateProgramResponse,
@@ -398,6 +402,7 @@ import {
   CreatePublicConfigRequest,
   CreateAllGatewayApiAsyncRequest,
   PathRewrite,
+  CreateUnitRuleWithDetailRespResponse,
   EnableTaskFlowResponse,
   ApiDetailInfo,
   DeleteUnitRuleResponse,
@@ -408,7 +413,6 @@ import {
   BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
-  TsfPageContainerEvent,
   CreateMicroserviceWithDetailRespRequest,
   BusinessLogConfigSchema,
   MetricDataSingleValue,
@@ -541,6 +545,7 @@ import {
   OperateApplicationTcrBindingResponse,
   DisableUnitRouteRequest,
   DescribeUnitRulesRequest,
+  MetricDataCurve,
   UpdateConfigTemplateRequest,
   DescribeGatewayAllGroupApisRequest,
   DeleteGroupRequest,
@@ -594,6 +599,7 @@ import {
   StopContainerGroupRequest,
   UpdateHealthCheckSettingsResponse,
   ApiRateLimitRule,
+  DeployContainerApplicationRequest,
   Filter,
   DescribeInvocationMetricDataPointResponse,
   ServiceGovernanceConfig,
@@ -635,6 +641,7 @@ import {
   OperationInfoDetail,
   CreateRepositoryRequest,
   DeleteNamespaceRequest,
+  ContainerInfo,
   SearchStdoutLogRequest,
   RedoTaskBatchResponse,
   DescribeStatisticsRequest,
@@ -652,6 +659,7 @@ import {
   DraftApiGroupResponse,
   DescribeConfigSummaryRequest,
   DeleteLaneRequest,
+  ContainerGroupServiceGovernanceConfig,
   TsfPageApiGroupInfo,
   ReleasePublicConfigRequest,
   TaskFlowEdge,
@@ -690,13 +698,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询配置
+   * 创建集群
    */
-  async DescribeConfig(
-    req: DescribeConfigRequest,
-    cb?: (error: string, rep: DescribeConfigResponse) => void
-  ): Promise<DescribeConfigResponse> {
-    return this.request("DescribeConfig", req, cb)
+  async CreateCluster(
+    req: CreateClusterRequest,
+    cb?: (error: string, rep: CreateClusterResponse) => void
+  ): Promise<CreateClusterResponse> {
+    return this.request("CreateCluster", req, cb)
   }
 
   /**
@@ -880,13 +888,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建集群
+   * 查询配置
    */
-  async CreateCluster(
-    req: CreateClusterRequest,
-    cb?: (error: string, rep: CreateClusterResponse) => void
-  ): Promise<CreateClusterResponse> {
-    return this.request("CreateCluster", req, cb)
+  async DescribeConfig(
+    req: DescribeConfigRequest,
+    cb?: (error: string, rep: DescribeConfigResponse) => void
+  ): Promise<DescribeConfigResponse> {
+    return this.request("DescribeConfig", req, cb)
   }
 
   /**
@@ -1823,6 +1831,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: CreateFileConfigResponse) => void
   ): Promise<CreateFileConfigResponse> {
     return this.request("CreateFileConfig", req, cb)
+  }
+
+  /**
+   * 部署容器应用-更新
+   */
+  async DeployContainerApplication(
+    req: DeployContainerApplicationRequest,
+    cb?: (error: string, rep: DeployContainerApplicationResponse) => void
+  ): Promise<DeployContainerApplicationResponse> {
+    return this.request("DeployContainerApplication", req, cb)
   }
 
   /**

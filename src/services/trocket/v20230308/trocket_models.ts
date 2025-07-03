@@ -21,8 +21,8 @@
 export interface DetailedRolePerm {
   /**
    * 权限对应的资源
-可以是主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
-可以是消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+可以是主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
+可以是消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   Resource: string
   /**
@@ -373,11 +373,11 @@ export interface ModifyRoleResponse {
  */
 export interface DescribeMessageListRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
@@ -401,15 +401,15 @@ export interface DescribeMessageListRequest {
    */
   Limit?: number
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
   /**
-   * 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。
+   * 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
    */
   MsgId?: string
   /**
-   * 消息 Key，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。
+   * 消息 Key，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
    */
   MsgKey?: string
   /**
@@ -421,7 +421,7 @@ export interface DescribeMessageListRequest {
    */
   QueryDeadLetterMessage?: boolean
   /**
-   * 消息 Tag，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。
+   * 消息 Tag，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
    */
   Tag?: string
 }
@@ -441,7 +441,7 @@ export interface DeleteMQTTInsPublicEndpointRequest {
  */
 export interface ModifyInstanceRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -461,7 +461,7 @@ export interface ModifyInstanceRequest {
    */
   SkuCode?: string
   /**
-   * 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：
+   * 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031#ProductSKU) 出参：
 
 - 默认值：DefaultRetention 参数
 - 最小值：RetentionLowerLimit 参数
@@ -477,14 +477,14 @@ export interface ModifyInstanceRequest {
    */
   AclEnabled?: boolean
   /**
-   * 最大可创建主题数，取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：
+   * 最大可创建主题数，取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031#ProductSKU) 出参：
 
 - 最小值和默认值：TopicNumLimit 参数
 - 最大值：TopicNumUpperLimit 参数
    */
   MaxTopicNum?: number
   /**
-   * 免费额度之外的主题个数，免费额度参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参中的 TopicNumLimit 参数。
+   * 免费额度之外的主题个数，免费额度参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031#ProductSKU) 出参中的 TopicNumLimit 参数。
    */
   ExtraTopicNum?: string
   /**
@@ -644,7 +644,7 @@ DELETING，删除中
    */
   DestroyTime?: number
   /**
-   * 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口。
+   * 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口返回中的 [ZoneInfo](https://cloud.tencent.com/document/api/1596/77932#ZoneInfo) 数据结构。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneIds?: Array<number | bigint>
@@ -752,11 +752,11 @@ export interface TopicStageChangeResult {
  */
 export interface DeleteTopicRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
 }
@@ -909,7 +909,7 @@ export interface DescribeMQTTProductSKUListResponse {
  */
 export interface DescribeRoleListRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -1044,19 +1044,19 @@ export type DescribeMQTTProductSKUListRequest = null
  */
 export interface DescribeConsumerLagRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
   /**
-   * 命名空间，4.x集群必填，从 [DescribeRocketMQNamespaces](https://cloud.tencent.com/document/api/1179/63419) 接口或控制台获得。
+   * 命名空间，4.x集群必填，从 [DescribeRocketMQNamespaces](https://cloud.tencent.com/document/api/1179/63419) 接口返回的 [RocketMQNamespace](https://cloud.tencent.com/document/api/1179/46089#RocketMQNamespace) 或控制台获得。
    */
   Namespace?: string
   /**
-   * 订阅主题，不为空则查询订阅了该主题的消费组的堆积，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 订阅主题，不为空则查询订阅了该主题的消费组的堆积，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   SubscribeTopic?: string
 }
@@ -1310,7 +1310,7 @@ export interface ModifyInstanceResponse {
  */
 export interface CreateConsumerGroupRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -1327,7 +1327,7 @@ export interface CreateConsumerGroupRequest {
    */
   ConsumeMessageOrderly: boolean
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
   /**
@@ -1750,11 +1750,11 @@ TRANSACTION:事务消息
    */
   Remark?: string
   /**
-   * 创建时间，秒为单位
+   * 创建时间，**Unix时间戳（毫秒）**
    */
   CreatedTime?: number
   /**
-   * 最后写入时间，秒为单位
+   * 最后写入时间，**Unix时间戳（毫秒）**
    */
   LastUpdateTime?: number
   /**
@@ -1766,7 +1766,7 @@ TRANSACTION:事务消息
    */
   SubscriptionData?: Array<SubscriptionData>
   /**
-   * 消息保留时长
+   * 消息保留时长，单位：小时
    */
   MsgTTL?: number
   /**
@@ -1790,7 +1790,7 @@ export interface DeleteMQTTInsPublicEndpointResponse {
  */
 export interface DeleteInstanceRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
 }
@@ -1800,11 +1800,11 @@ export interface DeleteInstanceRequest {
  */
 export interface ModifyRoleRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 角色名称，从 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862) 接口或控制台获得。
+   * 角色名称，从 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862) 接口中返回的 [RoleItem](https://cloud.tencent.com/document/api/1493/96031#RoleItem) 或控制台获得。
    */
   Role: string
   /**
@@ -1862,20 +1862,20 @@ export interface DescribeFusionInstanceListResponse {
  */
 export interface CreateTopicRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
-   * 主题类型
-UNSPECIFIED:未指定,
-NORMAL:普通消息,
-FIFO:顺序消息,
-DELAY:延时消息,
-TRANSACTION:事务消息
+   * 主题类型，枚举值如下：
+
+- NORMAL: 普通消息
+- FIFO: 顺序消息
+- DELAY: 延时消息
+- TRANSACTION: 事务消息
    */
   TopicType: string
   /**
@@ -1883,7 +1883,7 @@ TRANSACTION:事务消息
    */
   QueueNum: number
   /**
-   * 备注，最多 128 字符
+   * 备注信息，最多 128 个字符
    */
   Remark?: string
   /**
@@ -1901,11 +1901,11 @@ TRANSACTION:事务消息
  */
 export interface DescribeMessageRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
@@ -1935,11 +1935,11 @@ export interface DescribeMessageRequest {
  */
 export interface DeleteRoleRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 角色名称，从 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862) 接口或控制台获得。
+   * 角色名称，从 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862) 接口响应中的 [RoleItem](https://cloud.tencent.com/document/api/1493/96031#RoleItem) 或控制台获得。
    */
   Role: string
 }
@@ -2058,11 +2058,11 @@ export interface TagFilter {
  */
 export interface DeleteConsumerGroupRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
 }
@@ -2374,11 +2374,11 @@ export interface DeleteMQTTInstanceResponse {
  */
 export interface DescribeTopicRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
@@ -2410,15 +2410,15 @@ export interface DeleteMQTTInstanceRequest {
  */
 export interface DescribeMessageTraceRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
-   * 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。
+   * 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
    */
   MsgId: string
   /**
@@ -2774,7 +2774,7 @@ export interface ImportSourceClusterTopicsResponse {
  */
 export interface DescribeTopicListRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -2796,11 +2796,11 @@ export interface DescribeTopicListRequest {
  */
 export interface ModifyConsumerGroupRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
   /**
@@ -2827,11 +2827,11 @@ export interface ModifyConsumerGroupRequest {
  */
 export interface DescribeConsumerGroupRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
 }
@@ -2841,7 +2841,7 @@ export interface DescribeConsumerGroupRequest {
  */
 export interface DescribeConsumerGroupListRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -2983,7 +2983,7 @@ export interface SubscriptionData {
    */
   ConsumerLag?: number
   /**
-   * 最后消费进度更新时间，秒为单位
+   * 最后消费进度更新时间，**Unix时间戳（毫秒）**
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdateTime?: number
@@ -3032,7 +3032,7 @@ export interface CreateInstanceRequest {
    */
   Name: string
   /**
-   * 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参获得。
+   * 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031#ProductSKU) 出参获得。
    */
   SkuCode: string
   /**
@@ -3064,7 +3064,7 @@ export interface CreateInstanceRequest {
    */
   IpRules?: Array<IpRule>
   /**
-   * 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：
+   * 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031#ProductSKU) 出参：
 
 - 默认值：DefaultRetention 参数
 - 最小值：RetentionLowerLimit 参数
@@ -3084,14 +3084,14 @@ export interface CreateInstanceRequest {
    */
   TimeSpan?: number
   /**
-   * 最大可创建主题数，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：
+   * 最大可创建主题数，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031#ProductSKU) 出参：
 
 - 默认值和最小值：TopicNumLimit 参数
 - 最大值：TopicNumUpperLimit 参数
    */
   MaxTopicNum?: number
   /**
-   * 部署可用区列表，从 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口获得。
+   * 部署可用区列表，从 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口返回中的 [ZoneInfo](https://cloud.tencent.com/document/api/1596/77932#ZoneInfo) 数据结构中获得。
    */
   ZoneIds?: Array<number | bigint>
 }
@@ -3194,7 +3194,7 @@ CLUSTERING 集群模式
  */
 export interface DescribeConsumerClientRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -3214,7 +3214,7 @@ export interface DescribeConsumerClientRequest {
    */
   Limit?: number
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
 }
@@ -3268,7 +3268,7 @@ export interface DeleteRoleResponse {
  */
 export interface DescribeTopicListByGroupRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -3280,7 +3280,7 @@ export interface DescribeTopicListByGroupRequest {
    */
   Limit?: number
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
   /**
@@ -3399,11 +3399,11 @@ export interface MessageTraceItem {
  */
 export interface ModifyTopicRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
@@ -3570,7 +3570,7 @@ PLATINUM 铂金版
    */
   TopicNumUpperLimit?: number
   /**
-   * 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口。
+   * 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口返回中的 [ZoneInfo](https://cloud.tencent.com/document/api/1596/77932#ZoneInfo) 数据结构。
    */
   ZoneIds?: Array<number | bigint>
   /**
@@ -3678,7 +3678,7 @@ export interface ModifyMQTTInsPublicEndpointResponse {
  */
 export interface ResendDeadLetterMessageRequest {
   /**
-   * 集群ID
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -3686,7 +3686,7 @@ export interface ResendDeadLetterMessageRequest {
    */
   MessageIds: Array<string>
   /**
-   * 消费组名称
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
 }
@@ -3859,7 +3859,7 @@ export interface MQTTUserItem {
  */
 export interface ModifyInstanceEndpointRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
@@ -4029,11 +4029,11 @@ export interface DescribeTopicListResponse {
  */
 export interface DescribeConsumerClientListRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
   /**
@@ -4061,10 +4061,11 @@ export interface TopicConsumeStats {
   /**
    * 主题类型，枚举值如下：
 
-- NORMAL：普通消息主题
-- FIFO：顺序消息主题
-- DELAY：延迟消息主题
-- TRANSACTION：事务消息主题
+- UNSPECIFIED：未指定
+- NORMAL：普通消息
+- FIFO：顺序消息
+- DELAY：延时消息
+- TRANSACTION：事务消息
    */
   TopicType?: string
   /**
@@ -4104,11 +4105,11 @@ export interface DescribeMQTTTopicRequest {
  */
 export interface CreateRoleRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 角色名称
+   * 角色名称，不能为空，只支持数字 大小写字母 分隔符("_","-")，不能超过 32 个字符
    */
   Role: string
   /**
@@ -4518,7 +4519,7 @@ export interface ModifyInstanceEndpointResponse {
  */
 export interface DescribeInstanceRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
 }
@@ -4587,11 +4588,11 @@ export interface DescribeMQTTMessageListRequest {
  */
 export interface ResetConsumerGroupOffsetRequest {
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
@@ -4599,7 +4600,7 @@ export interface ResetConsumerGroupOffsetRequest {
    */
   ResetTimestamp: number
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
 }

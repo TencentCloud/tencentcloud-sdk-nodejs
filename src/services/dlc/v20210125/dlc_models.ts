@@ -2819,6 +2819,20 @@ export interface VpcInfo {
 }
 
 /**
+ * 自定义参数
+ */
+export interface CustomConfig {
+  /**
+   * 自定义参数名
+   */
+  ConfigKey?: string
+  /**
+   * 自定义参数值
+   */
+  ConfigValue?: string
+}
+
+/**
  * notebook session列表信息。
  */
 export interface NotebookSessions {
@@ -6232,6 +6246,14 @@ export interface DatasourceConnectionInfo {
    * 连通性测试提示信息
    */
   ConnectivityTips?: string
+  /**
+   * 自定义参数
+   */
+  CustomConfig?: Array<CustomConfig>
+  /**
+   * 是否允许回退
+   */
+  AllowRollback?: boolean
 }
 
 /**
@@ -6616,6 +6638,10 @@ export interface NetworkConnection {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceConnectionSubnetCidrBlock?: string
+  /**
+   * 支持 eg
+   */
+  EGSupport?: number
 }
 
 /**

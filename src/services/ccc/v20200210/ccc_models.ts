@@ -269,6 +269,10 @@ export interface ModifyStaffRequest {
    * 座席分机号（1 到 8 打头，4 - 6 位）
    */
   ExtensionNumber?: string
+  /**
+   * 呼叫转移配置
+   */
+  ForwardingConfig?: ForwardingConfig
 }
 
 /**

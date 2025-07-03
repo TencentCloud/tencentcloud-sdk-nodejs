@@ -18,6 +18,16 @@ const client = new tencentcloud.batch.v20170312.Client({
 })
 describe("batch.v20170312.test.js", function () {
 
+it("batch.v20170312.DescribeJobMonitorData", async function () {
+    try {
+       const data = await client.DescribeJobMonitorData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("batch.v20170312.DescribeComputeEnv", async function () {
     try {
        const data = await client.DescribeComputeEnv({})

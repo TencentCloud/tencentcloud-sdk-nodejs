@@ -154,13 +154,17 @@ export interface ModifyRabbitMQVipInstanceRequest {
    */
   InstanceId: string
   /**
-   * 集群名称
+   * 集群名称，不填则不修改。非空字符串时必须 3-64 个字符，只能包含数字、字母、“-”和“_”
    */
   ClusterName?: string
   /**
-   * 备注
+   * 备注，不填则不修改
    */
   Remark?: string
+  /**
+   * 是否开启删除保护，不填则不修改
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**
@@ -279,6 +283,37 @@ export interface DescribeAllTenantsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 消费者详情中的主题信息
+ */
+export interface RocketMQConsumerTopic {
+  /**
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 主题类型，Normal表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
+   */
+  Type?: string
+  /**
+   * 分区数
+   */
+  PartitionNum?: number
+  /**
+   * 消息堆积数
+   */
+  Accumulative?: number
+  /**
+   * 最后消费时间，以毫秒为单位
+   */
+  LastConsumptionTime?: number
+  /**
+   * 订阅规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubRule?: string
 }
 
 /**
@@ -672,13 +707,21 @@ export interface RabbitMQVipInstance {
    */
   CreateTime?: number
   /**
-   * 实例类型，0 专享版、1 Serverless 版
+   * 实例类型，0 托管版、1 Serverless 版
    */
   InstanceType?: number
   /**
-   * 隔离时间，毫秒为单位
+   * 隔离时间，毫秒为单位。unix 时间戳
    */
   IsolatedTime?: number
+  /**
+   * 是否已开启删除保护
+   */
+  EnableDeletionProtection?: boolean
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -790,6 +833,14 @@ export interface RabbitMQClusterInfo {
    * 是否为容器实例，默认 true
    */
   Container?: boolean
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
+  /**
+   * 是否已开启删除保护
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**
@@ -2031,6 +2082,14 @@ export interface PulsarNetworkAccessPointInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneName?: string
+  /**
+   * 是否开启TLS加密
+   */
+  Tls?: boolean
+  /**
+   * 接入点自定义域名
+   */
+  CustomUrl?: string
 }
 
 /**
@@ -2038,7 +2097,7 @@ export interface PulsarNetworkAccessPointInfo {
  */
 export interface DescribeRabbitMQVipInstanceRequest {
   /**
-   * 集群 ID
+   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
    */
   ClusterId: string
 }
@@ -2409,6 +2468,10 @@ export interface VpcEndpointInfo {
    * vpc接入点状态 OFF/ON/CREATING/DELETING
    */
   VpcDataStreamEndpointStatus?: string
+  /**
+   * TLS加密的数据流接入点
+   */
+  VpcTlsEndpoint?: string
 }
 
 /**
@@ -3063,6 +3126,10 @@ OFF/ON/CREATING/DELETING
    * 控制面所使用的VPC信息
    */
   ControlPlaneEndpointInfo?: VpcEndpointInfo
+  /**
+   * TLS加密的数据流公网接入点
+   */
+  PublicTlsAccessEndpoint?: string
 }
 
 /**
@@ -3242,6 +3309,10 @@ export interface CreateRabbitMQVipInstanceRequest {
    * 是否打开公网接入，不传默认为false
    */
   EnablePublicAccess?: boolean
+  /**
+   * 是否打开集群删除保护，不传默认为 false
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**
@@ -4531,6 +4602,10 @@ export interface PulsarProInstance {
    * 自定义租户
    */
   Tenant?: string
+  /**
+   * 集群的证书列表
+   */
+  CertificateList?: Array<CertificateInfo>
 }
 
 /**
@@ -5380,14 +5455,9 @@ Cancelled 已取消
 }
 
 /**
- * DeleteRabbitMQVirtualHost返回参数结构体
+ * DescribeBindClusters请求参数结构体
  */
-export interface DeleteRabbitMQVirtualHostResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeBindClustersRequest = null
 
 /**
  * CreateRabbitMQVirtualHost请求参数结构体
@@ -5934,6 +6004,20 @@ export interface SendCmqMsgRequest {
 }
 
 /**
+ * RabbitMQ 实例用户配额信息
+ */
+export interface RabbitMQUserQuota {
+  /**
+   * 最大可创建用户数
+   */
+  MaxUser?: number
+  /**
+   * 已使用用户数
+   */
+  UsedUser?: number
+}
+
+/**
  * CreateRabbitMQVirtualHost返回参数结构体
  */
 export interface CreateRabbitMQVirtualHostResponse {
@@ -6273,34 +6357,13 @@ export interface ModifyPublicNetworkSecurityPolicyResponse {
 }
 
 /**
- * 消费者详情中的主题信息
+ * DeleteRabbitMQVirtualHost返回参数结构体
  */
-export interface RocketMQConsumerTopic {
+export interface DeleteRabbitMQVirtualHostResponse {
   /**
-   * 主题名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Topic?: string
-  /**
-   * 主题类型，Normal表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
-   */
-  Type?: string
-  /**
-   * 分区数
-   */
-  PartitionNum?: number
-  /**
-   * 消息堆积数
-   */
-  Accumulative?: number
-  /**
-   * 最后消费时间，以毫秒为单位
-   */
-  LastConsumptionTime?: number
-  /**
-   * 订阅规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubRule?: string
+  RequestId?: string
 }
 
 /**
@@ -7506,6 +7569,10 @@ export interface DescribeRabbitMQVipInstanceResponse {
    */
   QueueQuota?: QueueQuota
   /**
+   * 用户配额信息
+   */
+  UserQuota?: RabbitMQUserQuota
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7573,6 +7640,56 @@ export interface VirtualHostQuota {
    * 已创建vhost数
    */
   UsedVirtualHost?: number
+  /**
+   * 单个 vhost 下允许的最大连接数
+   */
+  MaxConnectionPerVhost?: number
+  /**
+   * 单个 vhost 下允许的最大交换机数
+   */
+  MaxExchangePerVhost?: number
+  /**
+   * 单个 vhost 下允许的最大队列机数
+   */
+  MaxQueuePerVhost?: number
+}
+
+/**
+ * Pulsar集群TLS证书信息
+ */
+export interface CertificateInfo {
+  /**
+   * SSL证书管理中的id
+   */
+  CertificateId: string
+  /**
+   * 证书到期时间
+   */
+  ExpireTime: string
+  /**
+   * 证书绑定的域名
+   */
+  DomainName: string
+  /**
+   * 证书状态：0 已签发
+1 即将过期
+2 未启用
+3 已过期
+4 不可用
+   */
+  Status: string
+  /**
+   * 证书类型：0：根证书，1：服务端证书
+   */
+  Type: string
+  /**
+   * TencentCloud：SSL证书；Default：TDMQ官方默认证书
+   */
+  Origin: string
+  /**
+   * 证书添加/更新时间
+   */
+  ModifyTime: string
 }
 
 /**
@@ -8022,11 +8139,6 @@ export interface DescribeMqMsgTraceResponse {
    */
   RequestId?: string
 }
-
-/**
- * DescribeBindClusters请求参数结构体
- */
-export type DescribeBindClustersRequest = null
 
 /**
  * CreateRabbitMQUser请求参数结构体

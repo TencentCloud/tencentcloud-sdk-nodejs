@@ -23,6 +23,7 @@ import {
   TerminateTasksRequest,
   DiskSpecInfo,
   Step,
+  NodeSpecFamily,
   KeyValue,
   DescribeEmrApplicationStaticsRequest,
   DescribeTrinoQueryInfoResponse,
@@ -53,6 +54,7 @@ import {
   RenewInstancesInfo,
   ModifyResourceRequest,
   MultiDisk,
+  NodeSpecDisk,
   RunJobFlowRequest,
   ScaleOutClusterRequest,
   DescribeHiveQueriesRequest,
@@ -66,6 +68,7 @@ import {
   InsightResult,
   SyncPodStateRequest,
   DescribeSLInstanceListResponse,
+  DescribeServiceConfGroupInfosRequest,
   InquiryPriceUpdateInstanceRequest,
   AttachDisksResponse,
   WeekRepeatStrategy,
@@ -131,6 +134,7 @@ import {
   TimeAutoScaleStrategy,
   EmrProductConfigOutter,
   HostPathVolumeSource,
+  DescribeServiceConfGroupInfosResponse,
   PodSpec,
   InspectionTaskSettings,
   GroupInfo,
@@ -168,10 +172,12 @@ import {
   DeleteAutoScaleStrategyRequest,
   DescribeInstancesListResponse,
   ModifyResourcePoolsResponse,
+  DescribeInstanceRenewNodesRequest,
   DescribeYarnApplicationsResponse,
   YarnApplication,
   ZoneResourceConfiguration,
   NotRepeatStrategy,
+  ConfigurationItem,
   InquiryPriceCreateInstanceRequest,
   DescribeSLInstanceResponse,
   ModifySLInstanceResponse,
@@ -205,7 +211,7 @@ import {
   DescribeResourceScheduleDiffDetailResponse,
   DescribeYarnQueueResponse,
   CreateGroupsSTDRequest,
-  DescribeInstanceRenewNodesRequest,
+  ConvertPreToPostClusterRequest,
   DescribeNodeDataDisksRequest,
   StopParams,
   DependService,
@@ -215,6 +221,7 @@ import {
   PodVolume,
   FlowParamsDesc,
   ModifyYarnDeployResponse,
+  UserManagerUserBriefInfo,
   Placement,
   DescribeUsersForUserManagerRequest,
   ConfigSetInfo,
@@ -224,6 +231,7 @@ import {
   DescribeYarnQueueRequest,
   ModifyAutoRenewFlagResponse,
   DescribeYarnScheduleHistoryResponse,
+  DescribeNodeSpecRequest,
   TerminateInstanceRequest,
   PersistentVolumeContext,
   ScaleOutNodeConfig,
@@ -256,6 +264,7 @@ import {
   ServiceProcessFunctionInfo,
   PreExecuteFileSettings,
   TerminateSLInstanceRequest,
+  DescribeNodeSpecResponse,
   DescribeStarRocksQueryInfoRequest,
   Resource,
   ResizeDataDisksResponse,
@@ -276,12 +285,14 @@ import {
   DescribeClusterFlowStatusDetailResponse,
   DescribeSparkApplicationsRequest,
   SyncPodStateResponse,
+  DescribeNodeSpec,
   DiskSpec,
   SLInstanceInfo,
   ModifyUserManagerPwdRequest,
   ClusterInstancesInfo,
   ModifyInspectionSettingsResponse,
   DescribeHBaseTableOverviewResponse,
+  NodeSpecInstanceType,
   NodeResourceSpec,
   TopologyInfo,
   HealthStatus,
@@ -300,6 +311,7 @@ import {
   Configuration,
   DescribeResourceScheduleRequest,
   DeleteNodeResourceConfigResponse,
+  ConvertPreToPostClusterResponse,
   DAGInfo,
   PodNewParameter,
   ModifyResourcesTagsResponse,
@@ -349,7 +361,7 @@ import {
   LoadMetricsConditions,
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
-  UserManagerUserBriefInfo,
+  NodeSpecType,
   SparkApplicationsList,
   InquiryPriceScaleOutInstanceResponse,
   NodeSelectorRequirement,
@@ -372,13 +384,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   * 修改用户密码（用户管理）
    */
-  async TerminateInstance(
-    req: TerminateInstanceRequest,
-    cb?: (error: string, rep: TerminateInstanceResponse) => void
-  ): Promise<TerminateInstanceResponse> {
-    return this.request("TerminateInstance", req, cb)
+  async ModifyUserManagerPwd(
+    req: ModifyUserManagerPwdRequest,
+    cb?: (error: string, rep: ModifyUserManagerPwdResponse) => void
+  ): Promise<ModifyUserManagerPwdResponse> {
+    return this.request("ModifyUserManagerPwd", req, cb)
   }
 
   /**
@@ -422,13 +434,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户密码（用户管理）
+   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
    */
-  async ModifyUserManagerPwd(
-    req: ModifyUserManagerPwdRequest,
-    cb?: (error: string, rep: ModifyUserManagerPwdResponse) => void
-  ): Promise<ModifyUserManagerPwdResponse> {
-    return this.request("ModifyUserManagerPwd", req, cb)
+  async TerminateInstance(
+    req: TerminateInstanceRequest,
+    cb?: (error: string, rep: TerminateInstanceResponse) => void
+  ): Promise<TerminateInstanceResponse> {
+    return this.request("TerminateInstance", req, cb)
   }
 
   /**
@@ -461,6 +473,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyYarnDeployResponse) => void
   ): Promise<ModifyYarnDeployResponse> {
     return this.request("ModifyYarnDeploy", req, cb)
+  }
+
+  /**
+   * 查询节点规格
+   */
+  async DescribeNodeSpec(
+    req: DescribeNodeSpecRequest,
+    cb?: (error: string, rep: DescribeNodeSpecResponse) => void
+  ): Promise<DescribeNodeSpecResponse> {
+    return this.request("DescribeNodeSpec", req, cb)
   }
 
   /**
@@ -681,6 +703,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserManagerUserListResponse) => void
   ): Promise<DeleteUserManagerUserListResponse> {
     return this.request("DeleteUserManagerUserList", req, cb)
+  }
+
+  /**
+   * 包月集群转按量集群（不含cdb）
+   */
+  async ConvertPreToPostCluster(
+    req: ConvertPreToPostClusterRequest,
+    cb?: (error: string, rep: ConvertPreToPostClusterResponse) => void
+  ): Promise<ConvertPreToPostClusterResponse> {
+    return this.request("ConvertPreToPostCluster", req, cb)
   }
 
   /**
@@ -1025,6 +1057,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAutoScaleGroupGlobalConfResponse) => void
   ): Promise<DescribeAutoScaleGroupGlobalConfResponse> {
     return this.request("DescribeAutoScaleGroupGlobalConf", req, cb)
+  }
+
+  /**
+   * 描述服务配置组信息
+   */
+  async DescribeServiceConfGroupInfos(
+    req: DescribeServiceConfGroupInfosRequest,
+    cb?: (error: string, rep: DescribeServiceConfGroupInfosResponse) => void
+  ): Promise<DescribeServiceConfGroupInfosResponse> {
+    return this.request("DescribeServiceConfGroupInfos", req, cb)
   }
 
   /**

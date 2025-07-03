@@ -923,11 +923,12 @@ export interface DescribeDBInstancesRequest {
    */
   OrderBy?: string
   /**
-   * 返回结果集排序方式，目前支持："ASC" 或者 "DESC"。
+   * 返回结果集排序方式。目前支持值："ASC" - 表示升序，"DESC" - 表示降序，默认为 "DESC"。
    */
   OrderDirection?: string
   /**
    * 是否以安全组 ID 为过滤条件。
+说明：0表示否，1表示是。
    */
   WithSecurityGroup?: number
   /**
@@ -996,11 +997,11 @@ export interface DescribeDBInstancesRequest {
    */
   ProxyIds?: Array<string>
   /**
-   * 数据库引擎类型。
+   * 数据库引擎类型。可选值为：InnoDB、RocksDB。
    */
   EngineTypes?: Array<string>
   /**
-   * 是否获取集群版实例节点信息，可填：true或false
+   * 是否获取集群版实例节点信息，可填：true 或 false。默认为 false。
    */
   QueryClusterInfo?: boolean
 }
@@ -1489,7 +1490,7 @@ export interface ModifyDBInstanceNameRequest {
    */
   InstanceId: string
   /**
-   * 修改后的实例名称。
+   * 修改后的实例名称，仅支持数字,英文大小写字母、中文以及特殊字符-_./()[]（）+=:：@ 且长度不能超过60。
    */
   InstanceName: string
 }
@@ -1731,11 +1732,11 @@ export interface ProxyNode {
    */
   Cpu?: number
   /**
-   * 内存大小
+   * 内存大小，单位为 MB。
    */
   Mem?: number
   /**
-   * 节点状态
+   * 节点状态，0 - 初始化中，1 - 在线中，2 - 下线中，3 - 销毁中，4 - 故障恢复中，5 - 节点故障，6 - 切换中。
    */
   Status?: string
   /**
@@ -2485,7 +2486,7 @@ export interface AuditRule {
  */
 export interface DescribeInstanceAlarmEventsRequest {
   /**
-   * 实例 ID。
+   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
@@ -2509,7 +2510,7 @@ export interface DescribeInstanceAlarmEventsRequest {
    */
   Order?: string
   /**
-   * 事件展示数量。
+   * 事件展示数量。默认为100，最大为200。
    */
   Limit?: string
   /**
@@ -3263,15 +3264,15 @@ export interface AddTimeWindowRequest {
  */
 export interface ImportRecord {
   /**
-   * 状态值
+   * 状态值。0 - 初始化中，1 - 运行中，2 - 运行成功，3 - 运行失败。
    */
   Status?: number
   /**
-   * 状态值
+   * 状态值，为负数时任务异常。
    */
   Code?: number
   /**
-   * 执行时间
+   * 执行时间，单位：秒。
    */
   CostTime?: number
   /**
@@ -3287,7 +3288,7 @@ export interface ImportRecord {
    */
   FileName?: string
   /**
-   * 执行进度
+   * 执行进度，单位：百分比。
    */
   Process?: number
   /**
@@ -3295,7 +3296,7 @@ export interface ImportRecord {
    */
   CreateTime?: string
   /**
-   * 文件大小
+   * 文件大小，单位：byte。
    */
   FileSize?: string
   /**
@@ -4584,10 +4585,12 @@ export interface DescribeRemoteBackupConfigRequest {
 export interface ClusterTopology {
   /**
    * RW 节点拓扑。
+说明：NodeId 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 获取。
    */
   ReadWriteNode?: ReadWriteNode
   /**
    * RO 节点拓扑。
+说明：NodeId 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 获取。
    */
   ReadOnlyNodes?: Array<ReadonlyNode>
 }
@@ -5026,11 +5029,11 @@ export interface InquiryPriceUpgradeInstancesResponse {
   /**
    * 实例价格，单位：分（人民币）。
    */
-  Price: number
+  Price?: number
   /**
    * 实例原价，单位：分（人民币）。
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7843,7 +7846,7 @@ export interface CreateDBImportJobResponse {
  */
 export interface DescribeTagsOfInstanceIdsRequest {
   /**
-   * 实例列表。
+   * 实例列表。实例 ID 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。可传入的数组长度暂无限制。
    */
   InstanceIds: Array<string>
   /**
@@ -7851,7 +7854,7 @@ export interface DescribeTagsOfInstanceIdsRequest {
    */
   Offset?: number
   /**
-   * 分页大小。
+   * 分页大小。默认为15。
    */
   Limit?: number
 }
@@ -7923,7 +7926,8 @@ export interface UpgradeDBInstanceEngineVersionRequest {
    */
   InstanceId: string
   /**
-   * 主实例数据库引擎版本，支持值包括：5.6 和 5.7。
+   * 主实例数据库引擎版本，支持值包括：5.6、5.7、8.0。
+说明：不支持越级升级，升级后不支持降级。
    */
   EngineVersion: string
   /**
@@ -7931,15 +7935,15 @@ export interface UpgradeDBInstanceEngineVersionRequest {
    */
   WaitSwitch?: number
   /**
-   * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。
+   * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。无默认值，请指定要升级的版本类型。
    */
   UpgradeSubversion?: number
   /**
-   * 延迟阈值。取值范围1~10
+   * 延迟阈值。取值范围：1 - 10。无默认值，不传此参数时，延迟阈值为0，表示延迟阈值不做设置。
    */
   MaxDelayTime?: number
   /**
-   * 5.7升级8.0是否忽略关键字错误，取值范围[0,1]，1表示忽略，0表示不忽略
+   * 5.7升级8.0是否忽略关键字错误，取值范围[0,1]，1表示忽略，0表示不忽略。无默认值，不传此参数表示不做处理。
    */
   IgnoreErrKeyword?: number
   /**
@@ -10306,11 +10310,11 @@ export interface ModifyAccountPasswordRequest {
  */
 export interface InstanceRebootTime {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId?: string
   /**
-   * 预期重启时间
+   * 预期重启时间，单位：秒。
    */
   TimeInSeconds?: number
 }

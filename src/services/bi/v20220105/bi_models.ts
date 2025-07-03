@@ -736,6 +736,10 @@ export interface CreateUserRoleRequest {
    * 用户列表（新）
    */
   UserInfoList?: Array<UserInfo>
+  /**
+   * 用户组id列表
+   */
+  UserGroups?: Array<number | bigint>
 }
 
 /**

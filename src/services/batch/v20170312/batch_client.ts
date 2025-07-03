@@ -35,6 +35,7 @@ import {
   Task,
   InstanceTypeConfig,
   CommandLine,
+  DescribeJobMonitorDataResponse,
   Externals,
   TerminateComputeNodesResponse,
   DescribeComputeEnvActivitiesResponse,
@@ -43,6 +44,7 @@ import {
   MountDataDisk,
   TaskView,
   Tag,
+  EnhancedService,
   DescribeComputeEnvResponse,
   TerminateJobRequest,
   DetachInstancesResponse,
@@ -62,6 +64,7 @@ import {
   TerminateJobResponse,
   ComputeEnvCreateInfo,
   DescribeComputeEnvCreateInfosRequest,
+  DataPointView,
   DescribeComputeEnvRequest,
   InstanceMarketOptionsRequest,
   DescribeTaskTemplatesResponse,
@@ -80,7 +83,7 @@ import {
   DetachInstancesRequest,
   Instance,
   OutputMapping,
-  EnhancedService,
+  DescribeJobMonitorDataRequest,
   RunAutomationServiceEnabled,
   DescribeJobSubmitInfoResponse,
   DescribeComputeEnvCreateInfosResponse,
@@ -143,6 +146,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("batch.tencentcloudapi.com", "2017-03-12", clientConfig)
+  }
+
+  /**
+   * 查询作业任务实例的资源使用监控信息。当前只支持查询弹性节点任务并且Job未删除；暂不支持计算环境类任务；该接口只支持查询作业实例时间范围之内的资源使用情况。
+   */
+  async DescribeJobMonitorData(
+    req: DescribeJobMonitorDataRequest,
+    cb?: (error: string, rep: DescribeJobMonitorDataResponse) => void
+  ): Promise<DescribeJobMonitorDataResponse> {
+    return this.request("DescribeJobMonitorData", req, cb)
   }
 
   /**

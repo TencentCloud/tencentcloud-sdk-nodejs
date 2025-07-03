@@ -288,6 +288,16 @@ it("cdwch.v20200915.ModifyUserNewPrivilege", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeCNInstances", async function () {
+    try {
+       const data = await client.DescribeCNInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.ResizeDisk", async function () {
     try {
        const data = await client.ResizeDisk({})

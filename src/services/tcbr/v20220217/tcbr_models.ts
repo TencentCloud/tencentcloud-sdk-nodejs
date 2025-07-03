@@ -367,6 +367,10 @@ export interface UpdateCloudRunServerRequest {
    * 服务配置信息
    */
   ServerConfig: ServerBaseConfig
+  /**
+   * 业务类型，默认tcr
+   */
+  Business?: string
 }
 
 /**
@@ -663,6 +667,10 @@ export interface ServerBaseConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionAffinity?: string
+  /**
+   * Vpc 配置参数
+   */
+  VpcConf?: VpcConf
 }
 
 /**
@@ -745,6 +753,28 @@ export interface EnvBaseInfo {
    * 子网id
    */
   SubnetIds?: string
+}
+
+/**
+ * 云托管服务 Vpc 配置
+ */
+export interface VpcConf {
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc 网段
+   */
+  VpcCIDR?: string
+  /**
+   * subnet id
+   */
+  SubnetId?: string
+  /**
+   * subnet 网段
+   */
+  SubnetCIDR?: string
 }
 
 /**

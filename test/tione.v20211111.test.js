@@ -448,6 +448,16 @@ it("tione.v20211111.StopModelAccelerateTask", async function () {
     }
 })
 
+it("tione.v20211111.DescribePlatformImages", async function () {
+    try {
+       const data = await client.DescribePlatformImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeBillingResourceGroup", async function () {
     try {
        const data = await client.DescribeBillingResourceGroup({})

@@ -67,6 +67,7 @@ import {
   TrainingTaskSetItem,
   DescribeModelServiceCallInfoRequest,
   DataPoint,
+  DescribeNotebookResponse,
   TJCallInfo,
   CBSConfig,
   CreateTrainingModelRequest,
@@ -104,7 +105,7 @@ import {
   PrivateLinkInfo,
   DescribeNotebooksResponse,
   InferTemplateGroup,
-  DescribeModelServiceResponse,
+  DescribeModelServiceHotUpdatedResponse,
   DatasetInfo,
   DescribeModelAccelerateTaskResponse,
   TagFilter,
@@ -122,7 +123,7 @@ import {
   Message,
   CreatePresignedNotebookUrlRequest,
   StopNotebookResponse,
-  DescribeModelServiceHotUpdatedResponse,
+  DescribeModelServiceResponse,
   DescribeBuildInImagesResponse,
   DescribeDatasetsResponse,
   ImageUrl,
@@ -160,7 +161,7 @@ import {
   ServiceGroup,
   ServiceLimit,
   DescribeModelServiceGroupResponse,
-  DescribeNotebookResponse,
+  Attribute,
   ResourceGroup,
   AuthTokenLimit,
   CreateTrainingModelResponse,
@@ -187,6 +188,7 @@ import {
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,
   GooseFSx,
+  DescribePlatformImagesResponse,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
   ModelInputInfo,
@@ -205,6 +207,8 @@ import {
   DeleteTrainingModelRequest,
   DescribeModelServiceHotUpdatedRequest,
   DescribeTrainingTaskResponse,
+  PlatformImageInfo,
+  DescribePlatformImagesRequest,
   Probe,
   DeleteModelServiceResponse,
   MetricData,
@@ -659,6 +663,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void
   ): Promise<StopModelAccelerateTaskResponse> {
     return this.request("StopModelAccelerateTask", req, cb)
+  }
+
+  /**
+   * 查询平台镜像信息
+   */
+  async DescribePlatformImages(
+    req: DescribePlatformImagesRequest,
+    cb?: (error: string, rep: DescribePlatformImagesResponse) => void
+  ): Promise<DescribePlatformImagesResponse> {
+    return this.request("DescribePlatformImages", req, cb)
   }
 
   /**

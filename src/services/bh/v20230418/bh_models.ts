@@ -2130,6 +2130,88 @@ export interface DeleteOperationTasksResponse {
 }
 
 /**
+ * 命令集合
+ */
+export interface Command {
+  /**
+   * 命令
+   */
+  Cmd?: string
+  /**
+   * 命令输入的时间
+   */
+  Time?: string
+  /**
+   * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
+   */
+  TimeOffset?: number
+  /**
+   * 命令执行情况，1--允许，2--拒绝，3--确认
+   */
+  Action?: number
+  /**
+   * 会话id
+   */
+  Sid?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 设备account
+   */
+  Account?: string
+  /**
+   * 设备ip
+   */
+  InstanceId?: string
+  /**
+   * source ip
+   */
+  FromIp?: string
+  /**
+   * 该命令所属会话的会话开始时间
+   */
+  SessTime?: string
+  /**
+   * 该命令所属会话的会话开始时间
+   */
+  SessionTime?: string
+  /**
+   * 复核时间
+   */
+  ConfirmTime?: string
+  /**
+   * 用户部门id
+   */
+  UserDepartmentId?: string
+  /**
+   * 用户部门name
+   */
+  UserDepartmentName?: string
+  /**
+   * 设备部门id
+   */
+  DeviceDepartmentId?: string
+  /**
+   * 设备部门name
+   */
+  DeviceDepartmentName?: string
+  /**
+   * 会话大小
+   */
+  Size?: number
+  /**
+   * 签名值
+   */
+  SignValue?: string
+  /**
+   * 资产类型
+   */
+  DeviceKind?: string
+}
+
+/**
  * ModifyAcl请求参数结构体
  */
 export interface ModifyAclRequest {
@@ -2350,6 +2432,10 @@ export interface SearchCommandBySidResponse {
    * 总记录数
    */
   TotalCount?: number
+  /**
+   * 命令列表
+   */
+  CommandSet?: Array<Command>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3808,6 +3894,28 @@ export interface UnlockUserRequest {
 }
 
 /**
+ * 回放所需字段信息
+ */
+export interface ReplayInformation {
+  /**
+   * 令牌
+   */
+  Token?: string
+  /**
+   * 会话开始时间
+   */
+  StartTime?: string
+  /**
+   * 回放链接
+   */
+  Address?: string
+  /**
+   * 回放类型 ，默认0， 1-rfb 2-mp4 3-ssh
+   */
+  ReplayType?: number
+}
+
+/**
  * CreateDeviceAccount请求参数结构体
  */
 export interface CreateDeviceAccountRequest {
@@ -5102,6 +5210,10 @@ export interface SearchFileResult {
  * ReplaySession返回参数结构体
  */
 export interface ReplaySessionResponse {
+  /**
+   * 回放所需信息
+   */
+  ReplayInfo?: ReplayInformation
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -128,6 +128,7 @@ import {
   DataEngineConfigInstanceInfo,
   CrontabResumeSuspendStrategy,
   VpcInfo,
+  CustomConfig,
   NotebookSessions,
   CreateNotebookSessionStatementSupportBatchSQLRequest,
   DetachWorkGroupPolicyResponse,
