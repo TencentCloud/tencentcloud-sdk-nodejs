@@ -370,6 +370,10 @@ export interface ServerPushText {
 
    */
   Priority?: number
+  /**
+   * 是否将文本加入到llm历史上下文中
+   */
+  AddHistory?: boolean
 }
 
 /**

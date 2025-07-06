@@ -2249,6 +2249,20 @@ export interface CancelSparkSessionBatchSQLRequest {
 }
 
 /**
+ * CancelTasks请求参数结构体
+ */
+export interface CancelTasksRequest {
+  /**
+   * 任务Id数组，全局唯一
+   */
+  TaskId: Array<string>
+  /**
+   * 配置信息，key-value数组，对外不可见。key1：AuthorityRole（鉴权角色，默认传SubUin，base64加密，仅在jdbc提交任务时使用）
+   */
+  Config?: Array<KVPair>
+}
+
+/**
  * 任务概览
  */
 export interface TasksOverview {
@@ -9786,6 +9800,16 @@ export interface DatabaseInfo {
    * 数据库cos路径
    */
   Location?: string
+}
+
+/**
+ * CancelTasks返回参数结构体
+ */
+export interface CancelTasksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -193,6 +193,20 @@ export interface RebootAndroidInstanceHostsResponse {
 }
 
 /**
+ * SetAndroidInstancesBGAppKeepAlive返回参数结构体
+ */
+export interface SetAndroidInstancesBGAppKeepAliveResponse {
+  /**
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UninstallAndroidInstancesApp返回参数结构体
  */
 export interface UninstallAndroidInstancesAppResponse {
@@ -260,8 +274,13 @@ export interface DescribeAndroidInstanceLabelsResponse {
   Total?: number
   /**
    * 安卓实例标签列表
+   * @deprecated
    */
   Labels?: Array<AndroidInstanceLabel>
+  /**
+   * 安卓实例标签详情列表
+   */
+  AndroidInstanceLabels?: Array<AndroidInstanceLabelDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -424,13 +443,13 @@ export interface ModifyAndroidInstancesLabelsRequest {
    */
   AndroidInstanceIds: Array<string>
   /**
-   * 安卓实例标签列表
-   */
-  AndroidInstanceLabels: Array<AndroidInstanceLabel>
-  /**
    * 操作类型。ADD：标签键不存在的添加新标签，标签键存在的将覆盖原有标签REMOVE：根据标签键删除标签REPLACE：使用请求标签列表替换原来所有标签CLEAR：清除所有标签
    */
   Operation: string
+  /**
+   * 安卓实例标签列表
+   */
+  AndroidInstanceLabels?: Array<AndroidInstanceLabel>
 }
 
 /**
@@ -676,13 +695,29 @@ export interface DescribeAndroidInstanceAppsResponse {
 }
 
 /**
- * EnableAndroidInstancesApp返回参数结构体
+ * CreateAndroidInstanceSSH返回参数结构体
  */
-export interface EnableAndroidInstancesAppResponse {
+export interface CreateAndroidInstanceSSHResponse {
   /**
-   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   * 连接私钥，需要保存为文件形式，例如 private_key.pem
    */
-  AndroidInstanceErrors?: Array<AndroidInstanceError>
+  PrivateKey?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 连接地址
+   */
+  HostName?: string
+  /**
+   * 连接端口
+   */
+  Port?: number
+  /**
+   * 连接参考命令
+   */
+  ConnectCommand?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -759,9 +794,13 @@ export interface DisableAndroidInstancesAppRequest {
 }
 
 /**
- * SaveGameArchive返回参数结构体
+ * EnableAndroidInstancesApp返回参数结构体
  */
-export interface SaveGameArchiveResponse {
+export interface EnableAndroidInstancesAppResponse {
+  /**
+   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -858,6 +897,16 @@ export interface DistributeFileToAndroidInstancesResponse {
    * 实例任务集合
    */
   TaskSet?: Array<AndroidInstanceTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SaveGameArchive返回参数结构体
+ */
+export interface SaveGameArchiveResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1005,6 +1054,10 @@ A6：六开
    * 镜像 ID。如果不填，将使用默认的系统镜像
    */
   ImageId?: string
+  /**
+   * 安卓实例标签列表
+   */
+  Labels?: Array<AndroidInstanceLabel>
 }
 
 /**
@@ -1968,15 +2021,15 @@ export interface DescribeAndroidInstancesByAppsRequest {
    */
   Offset: number
   /**
-   * 限制量，默认为20，最大值为100
+   * 限制量，默认为 20，最大值为 500
    */
   Limit: number
   /**
-   * 应用 ID 列表。通过应用 ID 做集合查询
+   * 应用 ID 列表。当 AndroidIds 为多条数据时（例如 app1, app2），返回的实例列表为：安装了 app1 应用的实例和安装了 app2 应用的实例集合（并集）。
    */
   AndroidAppIds: Array<string>
   /**
-   * 字段过滤器。Filter 的 Name 有以下值： AndroidInstanceId：实例 ID
+   * 字段过滤器，Filter 的 Name 有以下值： AndroidInstanceId：实例 Id
    */
   Filters?: Array<Filter>
 }
@@ -2363,9 +2416,13 @@ export interface CreateAndroidInstanceLabelRequest {
    */
   Key: string
   /**
-   * 标签值
+   * 标签值。普通场景下，该值不需要填写；高级场景下，需要两个层级进行分组时才填写。
    */
   Value?: string
+  /**
+   * 标签描述
+   */
+  Description?: string
 }
 
 /**
@@ -2470,36 +2527,6 @@ export interface ModifyAndroidInstancesPropertiesResponse {
    * 安卓实例错误列表
    */
   AndroidInstanceErrors?: Array<AndroidInstanceError>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateAndroidInstanceSSH返回参数结构体
- */
-export interface CreateAndroidInstanceSSHResponse {
-  /**
-   * 连接私钥，需要保存为文件形式，例如 private_key.pem
-   */
-  PrivateKey?: string
-  /**
-   * 用户名称
-   */
-  UserName?: string
-  /**
-   * 连接地址
-   */
-  HostName?: string
-  /**
-   * 连接端口
-   */
-  Port?: number
-  /**
-   * 连接参考命令
-   */
-  ConnectCommand?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2740,17 +2767,21 @@ export interface AndroidInstanceUploadFile {
 }
 
 /**
- * SetAndroidInstancesBGAppKeepAlive返回参数结构体
+ * 安卓实例标签详情
  */
-export interface SetAndroidInstancesBGAppKeepAliveResponse {
+export interface AndroidInstanceLabelDetail {
   /**
-   * 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息
+   * 标签
    */
-  AndroidInstanceErrors?: Array<AndroidInstanceError>
+  Label?: AndroidInstanceLabel
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 标签描述
    */
-  RequestId?: string
+  Description?: string
+  /**
+   * 标签创建时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -2813,12 +2844,17 @@ export interface AndroidInstanceAppInfo {
   PackageName?: string
   /**
    * 应用包版本
+   * @deprecated
    */
   PackageVersion?: string
   /**
    * 应用包标签
    */
   PackageLabel?: string
+  /**
+   * 应用包版本号
+   */
+  VersionName?: string
 }
 
 /**

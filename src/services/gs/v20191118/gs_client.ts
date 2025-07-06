@@ -30,6 +30,7 @@ import {
   InstallAndroidInstancesAppWithURLResponse,
   SyncExecuteCommandOnAndroidInstancesRequest,
   RebootAndroidInstanceHostsResponse,
+  SetAndroidInstancesBGAppKeepAliveResponse,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
   ModifyAndroidAppVersionResponse,
@@ -56,18 +57,19 @@ import {
   ModifyAndroidInstanceResolutionResponse,
   DeleteAndroidInstanceImagesRequest,
   DescribeAndroidInstanceAppsResponse,
-  EnableAndroidInstancesAppResponse,
+  CreateAndroidInstanceSSHResponse,
   ResetAndroidInstancesRequest,
   UploadFileToAndroidInstancesRequest,
   CleanAndroidInstancesAppDataRequest,
   DisableAndroidInstancesAppRequest,
-  SaveGameArchiveResponse,
+  EnableAndroidInstancesAppResponse,
   ConnectAndroidInstanceRequest,
   CopyAndroidInstanceRequest,
   SyncExecuteCommandOnAndroidInstancesResponse,
   StartAndroidInstancesResponse,
   RestoreAndroidInstanceFromStorageResponse,
   DistributeFileToAndroidInstancesResponse,
+  SaveGameArchiveResponse,
   ModifyAndroidAppVersionRequest,
   ModifyAndroidInstancesResourcesResponse,
   ModifyAndroidInstancesAppBlacklistResponse,
@@ -161,7 +163,6 @@ import {
   RebootAndroidInstanceHostsRequest,
   COSOptions,
   ModifyAndroidInstancesPropertiesResponse,
-  CreateAndroidInstanceSSHResponse,
   ModifyAndroidInstancesInformationResponse,
   RenewAndroidInstancesAccessTokenResponse,
   CreateCosCredentialResponse,
@@ -175,7 +176,7 @@ import {
   DescribeInstancesCountRequest,
   TrylockWorkerRequest,
   AndroidInstanceUploadFile,
-  SetAndroidInstancesBGAppKeepAliveResponse,
+  AndroidInstanceLabelDetail,
   UploadFilesToAndroidInstancesResponse,
   RebootAndroidInstancesRequest,
   Filter,
@@ -899,7 +900,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询安装指定应用的安卓实例
+   * 批量查询安装指定应用的安卓实例
    */
   async DescribeAndroidInstancesByApps(
     req: DescribeAndroidInstancesByAppsRequest,

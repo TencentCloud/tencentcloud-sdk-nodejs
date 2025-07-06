@@ -26,8 +26,9 @@ import {
   DescribeLocalAccountAccountGroupsData,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
+  DescribeDeviceVirtualGroupsPageRsp,
   ModifyVirtualDeviceGroupsReqItem,
-  ModifyVirtualDeviceGroupsRequest,
+  DescribeSoftCensusListByDeviceResponse,
   DescribeSoftwareInformationResponse,
   ComplexRule,
   DescribeDeviceHardwareInfoListResponse,
@@ -35,12 +36,14 @@ import {
   DescribeRootAccountGroupResponse,
   DescribeDeviceHardwareInfoItem,
   DescribeDLPFileDetectResultData,
+  DescribeDeviceVirtualGroupsRequest,
   DescribeVirtualDevicesRequest,
   DescribeDeviceInfoResponse,
   DescribeDevicesResponse,
   CreatePrivilegeCodeRspData,
   DescribeDeviceInfoRequest,
   ModifyVirtualDeviceGroupsResponse,
+  DeviceVirtualDeviceGroupsDetail,
   DescribeLocalAccountsResponse,
   DescribeAccountGroupsData,
   DescribeVirtualDevicesPageRsp,
@@ -50,7 +53,7 @@ import {
   DescribeAccountGroupsRequest,
   DescribeAccountGroupsResponse,
   DescribeDevicesPageRsp,
-  DescribeSoftCensusListByDeviceResponse,
+  DescribeDeviceVirtualGroupsResponse,
   SimpleRule,
   FilterGroup,
   DescribeSoftCensusListByDevicePageData,
@@ -67,6 +70,7 @@ import {
   GetAccountGroupData,
   DescribeSoftCensusListByDeviceRequest,
   RuleExpression,
+  ModifyVirtualDeviceGroupsRequest,
   Filter,
   DeviceProcessInfo,
   DescribeDeviceInfoRspData,
@@ -140,6 +144,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicesResponse) => void
   ): Promise<DescribeDevicesResponse> {
     return this.request("DescribeDevices", req, cb)
+  }
+
+  /**
+   * 查询终端自定义分组列表，私有化调用path为：/capi/Assets/Device/DescribeDeviceVirtualGroups
+   */
+  async DescribeDeviceVirtualGroups(
+    req: DescribeDeviceVirtualGroupsRequest,
+    cb?: (error: string, rep: DescribeDeviceVirtualGroupsResponse) => void
+  ): Promise<DescribeDeviceVirtualGroupsResponse> {
+    return this.request("DescribeDeviceVirtualGroups", req, cb)
   }
 
   /**

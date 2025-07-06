@@ -100,6 +100,7 @@ import {
   ModifyUserTypeResponse,
   DescribeDataEnginePythonSparkImagesRequest,
   CancelSparkSessionBatchSQLRequest,
+  CancelTasksRequest,
   TasksOverview,
   CreateDatabaseResponse,
   DropDMSPartitionsResponse,
@@ -406,6 +407,7 @@ import {
   DescribeNotebookSessionStatementsResponse,
   CancelSparkSessionBatchSQLResponse,
   DatabaseInfo,
+  CancelTasksResponse,
   DescribeDataEnginesRequest,
   JobLogResult,
   DropDMSDatabaseResponse,
@@ -935,13 +937,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分配原生表表属性
+   * 本接口（DescribeSparkSessionBatchSQLCost）用于查询Spark SQL批任务消耗
    */
-  async AssignMangedTableProperties(
-    req: AssignMangedTablePropertiesRequest,
-    cb?: (error: string, rep: AssignMangedTablePropertiesResponse) => void
-  ): Promise<AssignMangedTablePropertiesResponse> {
-    return this.request("AssignMangedTableProperties", req, cb)
+  async DescribeSparkSessionBatchSQLCost(
+    req: DescribeSparkSessionBatchSQLCostRequest,
+    cb?: (error: string, rep: DescribeSparkSessionBatchSQLCostResponse) => void
+  ): Promise<DescribeSparkSessionBatchSQLCostResponse> {
+    return this.request("DescribeSparkSessionBatchSQLCost", req, cb)
   }
 
   /**
@@ -1517,13 +1519,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeSparkSessionBatchSQLCost）用于查询Spark SQL批任务消耗
+   * 分配原生表表属性
    */
-  async DescribeSparkSessionBatchSQLCost(
-    req: DescribeSparkSessionBatchSQLCostRequest,
-    cb?: (error: string, rep: DescribeSparkSessionBatchSQLCostResponse) => void
-  ): Promise<DescribeSparkSessionBatchSQLCostResponse> {
-    return this.request("DescribeSparkSessionBatchSQLCost", req, cb)
+  async AssignMangedTableProperties(
+    req: AssignMangedTablePropertiesRequest,
+    cb?: (error: string, rep: AssignMangedTablePropertiesResponse) => void
+  ): Promise<AssignMangedTablePropertiesResponse> {
+    return this.request("AssignMangedTableProperties", req, cb)
   }
 
   /**
@@ -1604,6 +1606,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateImportTaskResponse) => void
   ): Promise<CreateImportTaskResponse> {
     return this.request("CreateImportTask", req, cb)
+  }
+
+  /**
+   * 批量取消任务
+   */
+  async CancelTasks(
+    req: CancelTasksRequest,
+    cb?: (error: string, rep: CancelTasksResponse) => void
+  ): Promise<CancelTasksResponse> {
+    return this.request("CancelTasks", req, cb)
   }
 
   /**

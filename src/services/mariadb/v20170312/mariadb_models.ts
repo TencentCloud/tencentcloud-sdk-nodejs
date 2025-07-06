@@ -2871,6 +2871,18 @@ export interface UpgradeDBInstanceRequest {
    * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
    */
   Zones?: Array<string>
+  /**
+   * 切换开始时间，格式如: "2019-12-12 07:00:00"。开始时间必须在当前时间一个小时以后，3天以内。
+   */
+  SwitchStartTime?: string
+  /**
+   * 切换结束时间, 格式如: "2019-12-12 07:15:00"，结束时间必须大于开始时间。
+   */
+  SwitchEndTime?: string
+  /**
+   * 是否自动重试。 0：不自动重试 1：自动重试
+   */
+  SwitchAutoRetry?: number
 }
 
 /**

@@ -68,6 +68,16 @@ it("ioa.v20220601.DescribeDevices", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeDeviceVirtualGroups", async function () {
+    try {
+       const data = await client.DescribeDeviceVirtualGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.CreateDLPFileDetectionTask", async function () {
     try {
        const data = await client.CreateDLPFileDetectionTask({})

@@ -180,6 +180,20 @@ export interface CreateDLPFileDetectionTaskData {
 }
 
 /**
+ * 查询返回终端自定义分组的Data数据
+ */
+export interface DescribeDeviceVirtualGroupsPageRsp {
+  /**
+   * 分页公共对象
+   */
+  Page?: Paging
+  /**
+   * 终端自定义分组列表数据
+   */
+  Items?: Array<DeviceVirtualDeviceGroupsDetail>
+}
+
+/**
  * 操作的设备列表
  */
 export interface ModifyVirtualDeviceGroupsReqItem {
@@ -194,29 +208,18 @@ export interface ModifyVirtualDeviceGroupsReqItem {
 }
 
 /**
- * ModifyVirtualDeviceGroups请求参数结构体
+ * DescribeSoftCensusListByDevice返回参数结构体
  */
-export interface ModifyVirtualDeviceGroupsRequest {
+export interface DescribeSoftCensusListByDeviceResponse {
   /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   * 业务响应数据
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainInstanceId?: string
+  Data?: DescribeSoftCensusListByDevicePageData
   /**
-   * 添加到的终端自定义分组id。和DeviceVirtualGroupIds互斥，必填其一，优先使用本参数
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DeviceVirtualGroupId?: number
-  /**
-   * 必填，操作的设备列表数据
-   */
-  DeviceList?: Array<ModifyVirtualDeviceGroupsReqItem>
-  /**
-   * 要添加的终端自定义分组id列表
-   */
-  DeviceVirtualGroupIds?: Array<number | bigint>
-  /**
-   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
-   */
-  OsType?: number
+  RequestId?: string
 }
 
 /**
@@ -382,6 +385,28 @@ export interface DescribeDLPFileDetectResultData {
 }
 
 /**
+ * DescribeDeviceVirtualGroups请求参数结构体
+ */
+export interface DescribeDeviceVirtualGroupsRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 滤条件、分页参数 <li>Name - String - 是否必填：否 - 操作符: like  - 排序支持：否- 按终端自定义分组过滤。</li> <li>DeviceVirtualGroupName - String - 是否必填：否 - 操作符: like  - 排序支持：否- 按终端自定义分组过滤。</li>
+   */
+  Condition?: Condition
+  /**
+   * 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
+   */
+  OsType?: number
+  /**
+   * 非必填，自定义分组ids
+   */
+  VirtualGroupIds?: Array<number | bigint>
+}
+
+/**
  * DescribeVirtualDevices请求参数结构体
  */
 export interface DescribeVirtualDevicesRequest {
@@ -469,6 +494,36 @@ export interface ModifyVirtualDeviceGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 终端自定义分组列表数据
+ */
+export interface DeviceVirtualDeviceGroupsDetail {
+  /**
+   * 终端自定义分组id
+   */
+  Id?: number
+  /**
+   * 自定义分组名称
+   */
+  DeviceVirtualGroupName?: string
+  /**
+   * 设备数
+   */
+  DeviceCount?: number
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios  ）
+   */
+  OsType?: number
+  /**
+   * 创建时间
+   */
+  Itime?: string
+  /**
+   * 更新时间
+   */
+  Utime?: string
 }
 
 /**
@@ -700,14 +755,13 @@ export interface DescribeDevicesPageRsp {
 }
 
 /**
- * DescribeSoftCensusListByDevice返回参数结构体
+ * DescribeDeviceVirtualGroups返回参数结构体
  */
-export interface DescribeSoftCensusListByDeviceResponse {
+export interface DescribeDeviceVirtualGroupsResponse {
   /**
-   * 业务响应数据
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询终端自定义分组的Data数据
    */
-  Data?: DescribeSoftCensusListByDevicePageData
+  Data?: DescribeDeviceVirtualGroupsPageRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1454,6 +1508,32 @@ export interface RuleExpression {
    * 关系
    */
   Relation?: string
+}
+
+/**
+ * ModifyVirtualDeviceGroups请求参数结构体
+ */
+export interface ModifyVirtualDeviceGroupsRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 添加到的终端自定义分组id。和DeviceVirtualGroupIds互斥，必填其一，优先使用本参数
+   */
+  DeviceVirtualGroupId?: number
+  /**
+   * 必填，操作的设备列表数据
+   */
+  DeviceList?: Array<ModifyVirtualDeviceGroupsReqItem>
+  /**
+   * 要添加的终端自定义分组id列表
+   */
+  DeviceVirtualGroupIds?: Array<number | bigint>
+  /**
+   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
+   */
+  OsType?: number
 }
 
 /**

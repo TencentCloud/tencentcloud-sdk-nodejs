@@ -19359,6 +19359,11 @@ export interface BizCatalogsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Position: number
+  /**
+   * 类目名称英文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NameEn?: string
 }
 
 /**

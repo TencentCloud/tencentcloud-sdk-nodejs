@@ -508,9 +508,9 @@ it("dlc.v20210125.ReportHeartbeatMetaData", async function () {
     }
 })
 
-it("dlc.v20210125.AssignMangedTableProperties", async function () {
+it("dlc.v20210125.DescribeSparkSessionBatchSQLCost", async function () {
     try {
-       const data = await client.AssignMangedTableProperties({})
+       const data = await client.DescribeSparkSessionBatchSQLCost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1088,9 +1088,9 @@ it("dlc.v20210125.CreateDMSTable", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeSparkSessionBatchSQLCost", async function () {
+it("dlc.v20210125.AssignMangedTableProperties", async function () {
     try {
-       const data = await client.DescribeSparkSessionBatchSQLCost({})
+       const data = await client.AssignMangedTableProperties({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1171,6 +1171,16 @@ it("dlc.v20210125.CheckLockMetaData", async function () {
 it("dlc.v20210125.CreateImportTask", async function () {
     try {
        const data = await client.CreateImportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CancelTasks", async function () {
+    try {
+       const data = await client.CancelTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
