@@ -491,6 +491,9 @@ AirWayBill -- 航空运单识别模板
 Table -- 表格模版
 SteelLabel -- 实物标签识别模板
 CarInsurance -- 车辆保险单识别模板
+MultiRealEstateCertificate -- 房产材料识别模板
+MultiRealEstateMaterial -- 房产证明识别模板
+HongKongUtilityBill -- 香港水电煤单识别模板
    */
   ConfigId?: string
   /**
@@ -3564,6 +3567,10 @@ export interface RecognizeValidIDCardOCRRequest {
    * 默认值为false，打开返回字段级反光和字段级完整性告警。类型为：临时、港澳台居住证、外国人居住证失效
    */
   EnableWordCheck?: boolean
+  /**
+   * 默认值为false，打开返回证件是否模糊。
+   */
+  EnableQualityCheck?: boolean
 }
 
 /**
@@ -5607,6 +5614,16 @@ export interface CardWarnInfo {
 1：有PS
    */
   PSCheck?: number
+  /**
+   * 是否模糊：
+0:正常
+1:模糊
+   */
+  BlurCheck?: number
+  /**
+   * 模糊分数， 范围：0.0-1.0，分数越高越模糊，建议阈值为0.5
+   */
+  BlurScore?: number
 }
 
 /**
