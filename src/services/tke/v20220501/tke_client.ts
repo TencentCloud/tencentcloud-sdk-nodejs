@@ -50,10 +50,12 @@ import {
   Tag,
   MachineSetScaling,
   ModifyNodePoolRequest,
+  SuperNodeInfo,
   UpdateNativeNodePoolParam,
   Annotation,
   DescribeClusterInstancesRequest,
   DeleteHealthCheckPolicyResponse,
+  SetMachineLoginRequest,
   GPUParams,
   DeleteClusterMachinesRequest,
   LifecycleConfig,
@@ -81,7 +83,7 @@ import {
   HealthCheckTemplate,
   InternetAccessible,
   ModifyHealthCheckPolicyRequest,
-  SuperNodeInfo,
+  SetMachineLoginResponse,
   ManuallyAdded,
   ManagementConfig,
   ModifyHealthCheckPolicyResponse,
@@ -139,6 +141,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNodePoolResponse) => void
   ): Promise<ModifyNodePoolResponse> {
     return this.request("ModifyNodePool", req, cb)
+  }
+
+  /**
+   * 设置是否开启节点登录
+   */
+  async SetMachineLogin(
+    req: SetMachineLoginRequest,
+    cb?: (error: string, rep: SetMachineLoginResponse) => void
+  ): Promise<SetMachineLoginResponse> {
+    return this.request("SetMachineLogin", req, cb)
   }
 
   /**

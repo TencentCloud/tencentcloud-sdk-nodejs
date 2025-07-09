@@ -43,7 +43,7 @@ import {
   ModifyAccelerationDomainResponse,
   TopEntryValue,
   DescribeHostsSettingResponse,
-  DescribeTimingL4DataResponse,
+  Origin,
   DescribeRulesResponse,
   TimingDataRecord,
   CreateCLSIndexResponse,
@@ -139,7 +139,7 @@ import {
   SecurityConfig,
   CreateSecurityIPGroupRequest,
   ModifyPlanRequest,
-  HostName,
+  ExceptUserRuleScope,
   DDoS,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
@@ -158,7 +158,7 @@ import {
   DescribeAvailablePlansResponse,
   RateLimitTemplate,
   ModifyRealtimeLogDeliveryTaskResponse,
-  AccelerationDomainCertificate,
+  DeviceProfile,
   DescribeSecurityTemplateBindingsRequest,
   L4ProxyRemoteAuth,
   AlgDetectResult,
@@ -168,6 +168,7 @@ import {
   CreateL4ProxyRulesRequest,
   DescribeDDoSAttackTopDataResponse,
   LoadBalancer,
+  HostName,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
   ModifyL7AccRuleRequest,
@@ -192,7 +193,6 @@ import {
   SmartRouting,
   CreateApplicationProxyResponse,
   BotUserRule,
-  Origin,
   Task,
   DescribeL4ProxyRulesResponse,
   OriginHealthStatus,
@@ -273,6 +273,7 @@ import {
   RateLimitUserRule,
   DeployRecord,
   CreatePlanForZoneRequest,
+  AccelerationDomainCertificate,
   CreateL4ProxyRulesResponse,
   ModifyCustomErrorPageRequest,
   ModifyFunctionRuleResponse,
@@ -297,6 +298,7 @@ import {
   ModifyDnsRecordsRequest,
   IdentifyZoneRequest,
   CacheConfig,
+  ClientAttestationRules,
   DescribeL7AccSettingRequest,
   UpgradePlanResponse,
   AclConfig,
@@ -321,10 +323,12 @@ import {
   ModifyL4ProxyRulesStatusResponse,
   CheckCnameStatusResponse,
   ImportZoneConfigResponse,
+  ClientAttestationRule,
   CustomEndpoint,
   ModifyOriginACLResponse,
   VerifyOwnershipRequest,
   ResponseSpeedLimitParameters,
+  BotManagement,
   DeleteL4ProxyRequest,
   DeleteApplicationProxyRequest,
   AccelerateMainlandParameters,
@@ -400,6 +404,7 @@ import {
   CreatePlanResponse,
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
+  AllowActionParameters,
   Hsts,
   OwnershipVerification,
   CreateRuleRequest,
@@ -425,7 +430,6 @@ import {
   RuleAndConditions,
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
-  ExceptUserRuleScope,
   PartialModule,
   DescribeZoneConfigImportResultRequest,
   ModifyApplicationProxyRuleStatusRequest,
@@ -585,6 +589,7 @@ import {
   CreatePurgeTaskRequest,
   DeleteDnsRecordsResponse,
   DescribePurgeTasksResponse,
+  HttpDDoSProtection,
   HTTPResponseParameters,
   DescribeFunctionRulesRequest,
   DeployConfigGroupVersionResponse,
@@ -595,7 +600,7 @@ import {
   DescribeAccelerationDomainsRequest,
   CreateDnsRecordResponse,
   DescribeTimingL4DataRequest,
-  HttpDDoSProtection,
+  DescribeTimingL4DataResponse,
   VanityNameServersIps,
 } from "./teo_models"
 
@@ -1178,7 +1183,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
+   * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。本接口的查询结果中，每个 IP 组最多只返回 2000 个 IP / 网段。如果存在超过 2000 个 IP / 网段的超大 IP 组，请调用 DescribeSecurityIPGroupContent 进行分页查询。
    */
   async DescribeSecurityIPGroup(
     req: DescribeSecurityIPGroupRequest,

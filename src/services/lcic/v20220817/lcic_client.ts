@@ -118,6 +118,7 @@ import {
   BatchUserInfo,
   BatchAddGroupMemberRequest,
   TransferItem,
+  DescribeUserDetailResponse,
   DescribeRoomResponse,
   DescribeRecordStreamResponse,
   DescribeCurrentMemberListRequest,
@@ -157,7 +158,7 @@ import {
   DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
   DescribeQuestionListResponse,
-  DescribeWhiteBoardSnapshotResponse,
+  DescribeUserDetailRequest,
   GetRoomsResponse,
   SetMarqueeResponse,
   QuestionInfo,
@@ -172,6 +173,7 @@ import {
   BatchDescribeDocumentResponse,
   DeleteGroupResponse,
   CreateRoomResponse,
+  DescribeWhiteBoardSnapshotResponse,
   DescribeSdkAppIdUsersRequest,
   AddGroupMemberResponse,
   MsgBody,
@@ -532,6 +534,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoomResponse) => void
   ): Promise<DescribeRoomResponse> {
     return this.request("DescribeRoom", req, cb)
+  }
+
+  /**
+   * 获取用户信息
+   */
+  async DescribeUserDetail(
+    req: DescribeUserDetailRequest,
+    cb?: (error: string, rep: DescribeUserDetailResponse) => void
+  ): Promise<DescribeUserDetailResponse> {
+    return this.request("DescribeUserDetail", req, cb)
   }
 
   /**

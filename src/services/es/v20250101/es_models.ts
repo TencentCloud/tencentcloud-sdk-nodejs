@@ -245,6 +245,14 @@ export interface Document {
    * 文件名称，当使用 base64上传的时候使用。
    */
   FileName?: string
+  /**
+   * 文档的起始页码
+   */
+  FileStartPageNumber?: number
+  /**
+   * 文档的结束页码
+   */
+  FileEndPageNumber?: number
 }
 
 /**

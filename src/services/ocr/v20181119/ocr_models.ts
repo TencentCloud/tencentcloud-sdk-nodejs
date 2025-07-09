@@ -2948,6 +2948,10 @@ export interface BizLicenseOCRRequest {
    * 是否返回自动拼接的有效期，默认为true
    */
   EnablePeriodComplete?: boolean
+  /**
+   * 是否支持营业类证件识别（包括营业执照和非营业执照的其他证件），默认为false
+   */
+  EnableBusinessCertificate?: boolean
 }
 
 /**
@@ -7325,6 +7329,20 @@ export interface VerifyOfdVatInvoiceOCRRequest {
 }
 
 /**
+ * GetOCRToken请求参数结构体
+ */
+export interface GetOCRTokenRequest {
+  /**
+   * 业务类型，如身份证识别为IDCardOCR
+   */
+  Type: string
+  /**
+   * 身份证配置信息
+   */
+  IDCardConfig?: IDCardConfig
+}
+
+/**
  * FinanBillSliceOCR请求参数结构体
  */
 export interface FinanBillSliceOCRRequest {
@@ -10805,17 +10823,21 @@ export interface RecognizeStoreNameResponse {
 }
 
 /**
- * GetOCRToken请求参数结构体
+ * 非营业执照的营业类证件识别结果，将以结构化形式呈现。
  */
-export interface GetOCRTokenRequest {
+export interface BusinessCertificateInfo {
   /**
-   * 业务类型，如身份证识别为IDCardOCR
+   * 识别出的名称
    */
-  Type: string
+  Name?: string
   /**
-   * 身份证配置信息
+   * 识别出的字段名称对应的值
    */
-  IDCardConfig?: IDCardConfig
+  Value?: string
+  /**
+   * 坐标
+   */
+  Rect?: Rect
 }
 
 /**
@@ -11164,6 +11186,10 @@ WARN_RESHOOT_CARD翻拍件告警
    * 是否是电子营业执照。false为没有，true为有。
    */
   Electronic?: boolean
+  /**
+   * 非营业执照的营业类证件识别结果，将以结构化形式呈现。
+   */
+  BusinessCertificate?: Array<BusinessCertificateInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

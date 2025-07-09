@@ -848,6 +848,82 @@ export interface ModifyNodePoolRequest {
 }
 
 /**
+ * 超级节点信息
+ */
+export interface SuperNodeInfo {
+  /**
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 自动续费标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenewFlag?: number
+  /**
+   * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType?: string
+  /**
+   * 节点的 CPU 规格，单位：核。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CPU?: number
+  /**
+   * 节点上 Pod 的 CPU总和，单位：核。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedCPU?: number
+  /**
+   * 节点的内存规格，单位：Gi。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
+  /**
+   * 节点上 Pod 的内存总和，单位：Gi。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedMemory?: number
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * VPC 唯一 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网唯一 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 生效时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActiveAt?: string
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireAt?: string
+  /**
+   * 可调度的单 Pod 最大 CPU 规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxCPUScheduledPod?: number
+  /**
+   * 实例属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceAttribute?: string
+}
+
+/**
  * 修改原生节点池参数
  */
 export interface UpdateNativeNodePoolParam {
@@ -985,6 +1061,24 @@ export interface DeleteHealthCheckPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SetMachineLogin请求参数结构体
+ */
+export interface SetMachineLoginRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 节点名称
+   */
+  MachineName: string
+  /**
+   * 密钥 ID 列表
+   */
+  KeyIds?: Array<string>
 }
 
 /**
@@ -1692,79 +1786,13 @@ export interface ModifyHealthCheckPolicyRequest {
 }
 
 /**
- * 超级节点信息
+ * SetMachineLogin返回参数结构体
  */
-export interface SuperNodeInfo {
+export interface SetMachineLoginResponse {
   /**
-   * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 自动续费标识
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AutoRenewFlag?: number
-  /**
-   * 资源类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceType?: string
-  /**
-   * 节点的 CPU 规格，单位：核。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CPU?: number
-  /**
-   * 节点上 Pod 的 CPU总和，单位：核。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsedCPU?: number
-  /**
-   * 节点的内存规格，单位：Gi。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Memory?: number
-  /**
-   * 节点上 Pod 的内存总和，单位：Gi。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsedMemory?: number
-  /**
-   * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * VPC 唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
-  /**
-   * 子网唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId?: string
-  /**
-   * 生效时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ActiveAt?: string
-  /**
-   * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExpireAt?: string
-  /**
-   * 可调度的单 Pod 最大 CPU 规格
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxCPUScheduledPod?: number
-  /**
-   * 实例属性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceAttribute?: string
+  RequestId?: string
 }
 
 /**

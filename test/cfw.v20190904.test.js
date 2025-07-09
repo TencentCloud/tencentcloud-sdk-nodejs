@@ -848,6 +848,16 @@ it("cfw.v20190904.DescribeAcLists", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeLogStorageStatistic", async function () {
+    try {
+       const data = await client.DescribeLogStorageStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ExpandCfwVertical", async function () {
     try {
        const data = await client.ExpandCfwVertical({})

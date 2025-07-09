@@ -330,7 +330,7 @@ export interface UpgradeInstanceVersionResponse {
 export interface CreateInstancesRequest {
   /**
    * 实例类型。
-<ul><li>2：Redis 2.8 内存版（标准架构）。</li><li>3：CKV 3.2 内存版（标准架构）。</li><li>4：CKV 3.2 内存版（集群架构）。</li><li>6：Redis 4.0 内存版（标准架构）。</li><li>7：Redis 4.0 内存版（集群架构）。</li><li>8：Redis 5.0 内存版（标准架构）。</li><li>9：Redis 5.0 内存版（集群架构）。</li><li>15：Redis 6.2 内存版（标准架构）。</li><li>16：Redis 6.2 内存版（集群架构）。</li><li>17：Redis 7.0 内存版（标准架构）。</li><li>18：Redis 7.0 内存版（集群架构）。</li>说明：CKV 版本当前有存量用户使用，暂时保留。</ul>
+<ul><li>2：Redis 2.8 内存版（标准架构）。</li><li>3：CKV 3.2 内存版（标准架构）。</li><li>4：CKV 3.2 内存版（集群架构）。</li><li>6：Redis 4.0 内存版（标准架构）。</li><li>7：Redis 4.0 内存版（集群架构）。</li><li>8：Redis 5.0 内存版（标准架构）。</li><li>9：Redis 5.0 内存版（集群架构）。</li><li>15：Redis 6.2 内存版（标准架构）。</li><li>16：Redis 6.2 内存版（集群架构）。</li><li>17：Redis 7.0 内存版（标准架构）。</li><li>18：Redis 7.0 内存版（集群架构）。</li><li>200：Memcached 1.6 内存版（集群架构）。</li>说明：CKV 版本当前有存量用户使用，暂时保留。</ul>
    */
   TypeId: number
   /**
@@ -954,7 +954,7 @@ export interface TaskInfoDetail {
 - FLOW_AUTOBACKUP："017"，自动备份实例。
 - FLOW_MIGRATECHECK： "022"，迁移参数校验。
 - FLOW_MIGRATETASK："023"，数据迁移中。
-- FLOW_CLEANDB："025"，清空某个数据库。
+- FLOW_CLEANDB："025"，清空数据库。
 - FLOW_CLONEBACKUP："026"，克隆备份。
 - FLOW_CHANGEVIP： "027"，改变vip地址。
 - FLOW_EXPORSHR ："028"，扩缩容。
@@ -964,7 +964,7 @@ export interface TaskInfoDetail {
 - FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。
 - FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。
 - FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。
-- FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。
+- FLOW_MODIFYINSTANCEACCOUNT："037"，实例账号变更。
 - FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。
 - FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。
 - FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。
@@ -979,16 +979,16 @@ export interface TaskInfoDetail {
 - FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。
 - FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。
 - FLOW_OPEN_WAN："052"，开通外网。
-- FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。
+- FLOW_CLOSE_WAN："053"，关闭外网
 - FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。
 - FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。
 - FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。
 - FLOW_MIGRATE_NODE："058"，迁移节点。
 - FLOW_SWITCH_NODE："059"，切换节点。
-- FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。
+- FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redis版本。
 - FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。
 - FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。
-- FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。
+- FLOW_MIGRATE_PROXY_NODE："063"，迁移 proxy节点。
 - FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。
 - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。
 - FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。
@@ -4584,6 +4584,7 @@ export interface DescribeInstancesRequest {
 - 16：Redis 6.2 内存版（集群架构）。
 - 17：Redis 7.0 内存版（标准架构）。
 - 18：Redis 7.0 内存版（集群架构）。
+- 200:Memcached 1.6 内存版（集群架构）。
    */
   Type?: number
   /**
@@ -5063,6 +5064,7 @@ export interface InstanceSet {
 - 16：Redis 6.2 内存版（集群架构）。
 - 17：Redis 7.0 内存版（标准架构）。
 - 18：Redis 7.0 内存版（集群架构）。
+- 200:Memcached 1.6 内存版（集群架构）。
    */
   Type?: number
   /**
@@ -5201,6 +5203,7 @@ export interface InstanceSet {
   ClientLimitMax?: number
   /**
    * 实例的节点详细信息。
+只有多可用区实例会返回。
    */
   NodeSet?: Array<RedisNodeInfo>
   /**
@@ -5431,6 +5434,7 @@ export interface InquiryPriceCreateInstanceRequest {
 - 16：Redis 6.2 内存版（集群架构）。
 - 17：Redis 7.0 内存版（标准架构）。
 - 18：Redis 7.0 内存版（集群架构）。
+- 200:Memcached 1.6 内存版（集群架构）。
    */
   TypeId: number
   /**

@@ -611,22 +611,30 @@ export interface DescribeHostsSettingResponse {
 }
 
 /**
- * DescribeTimingL4Data返回参数结构体
+ * 源站配置。
  */
-export interface DescribeTimingL4DataResponse {
+export interface Origin {
   /**
-   * 查询结果的总条数。
+   * 主源站列表。
    */
-  TotalCount?: number
+  Origins?: Array<string>
   /**
-   * 四层时序流量数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 备源站列表。
    */
-  Data?: Array<TimingDataRecord>
+  BackupOrigins?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 回源协议配置，取值有：
+<li>http：强制 http 回源；</li>
+<li>follow：协议跟随回源；</li>
+<li>https：强制 https 回源。</li>
    */
-  RequestId?: string
+  OriginPullProtocol?: string
+  /**
+   * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
+<li>on：私有访问；</li>
+<li>off：公共访问。</li>
+   */
+  CosPrivateAccess?: string
 }
 
 /**
@@ -2485,6 +2493,10 @@ export interface SecurityAction {
    */
   RedirectActionParameters?: RedirectActionParameters
   /**
+   * 当 Name 为 Allow 时的附加参数。
+   */
+  AllowActionParameters?: AllowActionParameters
+  /**
    * 当 Name 为 Challenge 时的附加参数。
    */
   ChallengeActionParameters?: ChallengeActionParameters
@@ -2973,19 +2985,32 @@ export interface ModifyPlanRequest {
 }
 
 /**
- * 访问 URL 重定向 HostName 配置参数。
+ * 例外规则的生效范围。
  */
-export interface HostName {
+export interface ExceptUserRuleScope {
   /**
-   * 目标 HostName 配置，取值有：
-<li>follow：跟随请求；</li>
-<li>custom：自定义。</li>
+   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+<li>complete：完全跳过模式；</li>
+<li>partial：部分跳过模式。</li>
    */
-  Action?: string
+  Type?: string
   /**
-   * 目标 HostName 自定义取值，最大长度 1024。<br>注意：当 Action 为 custom 时，此字段必填；当 Action 为 follow 时，此字段不生效。
+   * 生效的模块，该字段取值有：
+<li>waf：托管规则；</li>
+<li>rate：速率限制；</li>
+<li>acl：自定义规则；</li>
+<li>cc：cc攻击防护；</li>
+<li>bot：Bot防护。</li>
    */
-  Value?: string
+  Modules?: Array<string>
+  /**
+   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+   */
+  PartialModules?: Array<PartialModule>
+  /**
+   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+   */
+  SkipConditions?: Array<SkipCondition>
 }
 
 /**
@@ -3283,26 +3308,29 @@ export interface ModifyRealtimeLogDeliveryTaskResponse {
 }
 
 /**
- * 加速域名所对应的证书信息。
+ * 客户端设备配置
  */
-export interface AccelerationDomainCertificate {
+export interface DeviceProfile {
   /**
-   * 配置证书的模式，取值有： <li>disable：不配置证书；</li> <li>eofreecert：配置 EdgeOne 免费证书；</li> <li>sslcert：配置 SSL 证书。</li>
+   * 客户端设备类型。取值有：<li>iOS；</li><li>Android；</li><li>WebView。</li>
    */
-  Mode?: string
+  ClientType: string
   /**
-   * 服务端证书列表，相关证书部署在 EO 的入口侧。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 判定请求为高风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 50，对应含义 51～100 为高风险。
    */
-  List?: Array<CertificateInfo>
+  HighRiskMinScore?: number
   /**
-   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。
+   * 高风险请求的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
    */
-  ClientCertInfo?: MutualTLS
+  HighRiskRequestAction?: SecurityAction
   /**
-   * 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。
+   * 判定请求为中风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 15，对应含义 16～50 为中风险。
    */
-  UpstreamCertInfo?: UpstreamCertInfo
+  MediumRiskMinScore?: number
+  /**
+   * 中风险请求的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
+   */
+  MediumRiskRequestAction?: SecurityAction
 }
 
 /**
@@ -3555,6 +3583,22 @@ export interface LoadBalancer {
    * 该负载均衡实例绑定的七层域名列表。
    */
   L7UsedList?: Array<string>
+}
+
+/**
+ * 访问 URL 重定向 HostName 配置参数。
+ */
+export interface HostName {
+  /**
+   * 目标 HostName 配置，取值有：
+<li>follow：跟随请求；</li>
+<li>custom：自定义。</li>
+   */
+  Action?: string
+  /**
+   * 目标 HostName 自定义取值，最大长度 1024。<br>注意：当 Action 为 custom 时，此字段必填；当 Action 为 follow 时，此字段不生效。
+   */
+  Value?: string
 }
 
 /**
@@ -4087,33 +4131,6 @@ export interface BotUserRule {
    * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
    */
   RedirectUrl?: string
-}
-
-/**
- * 源站配置。
- */
-export interface Origin {
-  /**
-   * 主源站列表。
-   */
-  Origins?: Array<string>
-  /**
-   * 备源站列表。
-   */
-  BackupOrigins?: Array<string>
-  /**
-   * 回源协议配置，取值有：
-<li>http：强制 http 回源；</li>
-<li>follow：协议跟随回源；</li>
-<li>https：强制 https 回源。</li>
-   */
-  OriginPullProtocol?: string
-  /**
-   * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
-<li>on：私有访问；</li>
-<li>off：公共访问。</li>
-   */
-  CosPrivateAccess?: string
 }
 
 /**
@@ -5391,8 +5408,12 @@ export interface IPGroup {
    */
   Content: Array<string>
   /**
+   * IP 组中正在生效的 IP 或网段个数。作为出参时有效，作为入参时无需填写该字段。
+   */
+  IPTotalCount?: number
+  /**
    * IP 定时过期信息。
-作为入参：用于为指定的 IP 地址或网段配置定时过期时间。
+作为入参，用于为指定的 IP 地址或网段配置定时过期时间。
 作为出参，包含以下两类信息：
 <li>当前未到期的定时过期信息：尚未触发的过期配置。</li>
 <li>一周内已到期的定时过期信息：已触发的过期配置。</li>
@@ -6177,6 +6198,29 @@ export interface CreatePlanForZoneRequest {
 }
 
 /**
+ * 加速域名所对应的证书信息。
+ */
+export interface AccelerationDomainCertificate {
+  /**
+   * 配置证书的模式，取值有： <li>disable：不配置证书；</li> <li>eofreecert：配置 EdgeOne 免费证书；</li> <li>sslcert：配置 SSL 证书。</li>
+   */
+  Mode?: string
+  /**
+   * 服务端证书列表，相关证书部署在 EO 的入口侧。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<CertificateInfo>
+  /**
+   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。
+   */
+  ClientCertInfo?: MutualTLS
+  /**
+   * 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。
+   */
+  UpstreamCertInfo?: UpstreamCertInfo
+}
+
+/**
  * CreateL4ProxyRules返回参数结构体
  */
 export interface CreateL4ProxyRulesResponse {
@@ -6690,6 +6734,16 @@ export interface CacheConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FollowOrigin?: FollowOrigin
+}
+
+/**
+ * 客户端认证的配置。
+ */
+export interface ClientAttestationRules {
+  /**
+   * 客户端认证的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时：<li>  若未指定 SecurityPolicy.BotManagement.ClientAttestationRules 中的 Rules 参数，或 Rules 参数长度为零：清空所有客户端认证规则配置。</li> <li> 若 SecurityPolicy.BotManagement 参数中，未指定 ClientAttestationRules 参数值：保持已有客户端认证规则配置，不做修改。</li>
+   */
+  Rules?: Array<ClientAttestationRule>
 }
 
 /**
@@ -7259,6 +7313,44 @@ export interface ImportZoneConfigResponse {
 }
 
 /**
+ * 客户端认证规则
+ */
+export interface ClientAttestationRule {
+  /**
+   * 客户端认证规则的 ID。<br>通过规则 ID 可支持不同的规则配置操作：<br> <li> <b>增加</b>新规则：ID 为空或不指定 ID 参数；</li><li> <b>修改</b>已有规则：指定需要更新/修改的规则 ID；</li><li> <b>删除</b>已有规则：BotManagement 参数中，ClientAttestationRule 列表中未包含的已有规则将被删除。</li>
+   */
+  Id?: string
+  /**
+   * 客户端认证规则的名称。
+   */
+  Name?: string
+  /**
+   * 规则是否开启。取值有：<li>on：开启；</li><li>off：关闭。</li>
+   */
+  Enabled?: string
+  /**
+   * 规则的优先级，数值越小越优先执行，范围是 0 ~ 100，默认为 0。
+   */
+  Priority?: number
+  /**
+   * 规则的具体内容，需符合表达式语法，详细规范参见产品文档。
+   */
+  Condition?: string
+  /**
+   * 客户端认证选项 ID。
+   */
+  AttesterId?: string
+  /**
+   * 客户端设备配置。若 ClientAttestationRules 参数中，未指定 DeviceProfiles 参数值：保持已有客户端设备配置，不做修改。
+   */
+  DeviceProfiles?: Array<DeviceProfile>
+  /**
+   * 客户端认证未通过的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
+   */
+  InvalidAttestationAction?: SecurityAction
+}
+
+/**
  * 实时日志投递到自定义 HTTP(S) 接口的配置信息。
  */
 export interface CustomEndpoint {
@@ -7334,6 +7426,16 @@ export interface ResponseSpeedLimitParameters {
 
    */
   StartAt?: string
+}
+
+/**
+ * Web 安全的 BOT 规则结构。
+ */
+export interface BotManagement {
+  /**
+   * 客户端认证规则的定义列表。该功能内测中，如需使用，请提工单或联系智能客服。
+   */
+  ClientAttestationRules?: ClientAttestationRules
 }
 
 /**
@@ -8705,7 +8807,7 @@ export interface SecurityPolicy {
    */
   ManagedRules?: ManagedRules
   /**
-   * HTTP DDOS防护配置。
+   * HTTP DDOS 防护配置。
    */
   HttpDDoSProtection?: HttpDDoSProtection
   /**
@@ -8716,6 +8818,10 @@ export interface SecurityPolicy {
    * 例外规则配置。
    */
   ExceptionRules?: ExceptionRules
+  /**
+   * Bot 管理配置。
+   */
+  BotManagement?: BotManagement
 }
 
 /**
@@ -9027,6 +9133,20 @@ export interface DescribeContentQuotaRequest {
    * 站点 ID。
    */
   ZoneId: string
+}
+
+/**
+ * Web 安全 Allow 的附加参数
+ */
+export interface AllowActionParameters {
+  /**
+   * 最小延迟响应时间，当配置为 0s 时，表示不延迟直接响应。支持的单位有：<li>s：秒，取值范围 0～5。</li>
+   */
+  MinDelayTime?: string
+  /**
+   * 最大延迟响应时间，支持的单位有：<li>s：秒，取值范围 5～10。</li>
+   */
+  MaxDelayTime?: string
 }
 
 /**
@@ -9905,41 +10025,14 @@ export interface DescribeSecurityIPGroupInfoRequest {
 }
 
 /**
- * 例外规则的生效范围。
- */
-export interface ExceptUserRuleScope {
-  /**
-   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
-<li>complete：完全跳过模式；</li>
-<li>partial：部分跳过模式。</li>
-   */
-  Type?: string
-  /**
-   * 生效的模块，该字段取值有：
-<li>waf：托管规则；</li>
-<li>rate：速率限制；</li>
-<li>acl：自定义规则；</li>
-<li>cc：cc攻击防护；</li>
-<li>bot：Bot防护。</li>
-   */
-  Modules?: Array<string>
-  /**
-   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
-   */
-  PartialModules?: Array<PartialModule>
-  /**
-   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
-   */
-  SkipConditions?: Array<SkipCondition>
-}
-
-/**
  * 例外规则的详细模块配置。
  */
 export interface PartialModule {
   /**
    * 模块名称，取值为：
-<li>waf：托管规则。</li>
+<li>managed-rule：托管规则 Id；</li>
+<li>managed-group：托管规则组；</li>
+<li>waf：待废弃，托管规则。</li>
    */
   Module?: string
   /**
@@ -13507,7 +13600,7 @@ export interface DescribeContentQuotaResponse {
  */
 export interface DescribeSecurityIPGroupResponse {
   /**
-   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、 IP / 网段列表信息和过期时间信息。
+   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、IP / 网段总数量、 IP / 网段列表信息和过期时间信息。
    */
   IPGroups?: Array<IPGroup>
   /**
@@ -13598,6 +13691,28 @@ export interface DescribePurgeTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * HTTP DDOS防护配置。
+ */
+export interface HttpDDoSProtection {
+  /**
+   * 自适应频控的具体配置。
+   */
+  AdaptiveFrequencyControl?: AdaptiveFrequencyControl
+  /**
+   * 智能客户端过滤的具体配置。
+   */
+  ClientFiltering?: ClientFiltering
+  /**
+   * 流量防盗刷的具体配置。
+   */
+  BandwidthAbuseDefense?: BandwidthAbuseDefense
+  /**
+   * 慢速攻击防护的具体配置。
+   */
+  SlowAttackDefense?: SlowAttackDefense
 }
 
 /**
@@ -13832,25 +13947,22 @@ export interface DescribeTimingL4DataRequest {
 }
 
 /**
- * HTTP DDOS防护配置。
+ * DescribeTimingL4Data返回参数结构体
  */
-export interface HttpDDoSProtection {
+export interface DescribeTimingL4DataResponse {
   /**
-   * 自适应频控的具体配置。
+   * 查询结果的总条数。
    */
-  AdaptiveFrequencyControl?: AdaptiveFrequencyControl
+  TotalCount?: number
   /**
-   * 智能客户端过滤的具体配置。
+   * 四层时序流量数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientFiltering?: ClientFiltering
+  Data?: Array<TimingDataRecord>
   /**
-   * 流量防盗刷的具体配置。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BandwidthAbuseDefense?: BandwidthAbuseDefense
-  /**
-   * 慢速攻击防护的具体配置。
-   */
-  SlowAttackDefense?: SlowAttackDefense
+  RequestId?: string
 }
 
 /**

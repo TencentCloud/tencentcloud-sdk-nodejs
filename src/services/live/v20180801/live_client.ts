@@ -87,6 +87,7 @@ import {
   DescribeLiveDomainPlayInfoListRequest,
   CasterInputInfo,
   DeleteLiveWatermarkRuleResponse,
+  ChildTemplateInfo,
   DeleteCasterMarkWordInfoResponse,
   DescribeLogDownloadListResponse,
   ReleaseCasterRequest,

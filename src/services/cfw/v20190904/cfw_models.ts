@@ -2439,6 +2439,72 @@ export interface SetNatFwEipResponse {
 }
 
 /**
+ * DescribeLogStorageStatistic返回参数结构体
+ */
+export interface DescribeLogStorageStatisticResponse {
+  /**
+   * 返回状态码 0 成功 非0不成功
+   */
+  ReturnCode?: number
+  /**
+   * 返回信息  success 成功 其他 不成功
+   */
+  ReturnMsg?: string
+  /**
+   * 已使用存储量，单位B
+   */
+  UsedSize?: number
+  /**
+   * 配额存储总量，单位B
+   */
+  TotalSize?: number
+  /**
+   * 存储天数
+   */
+  StorageDay?: number
+  /**
+   * 访问控制日志存储量，单位B
+   */
+  AclSize?: number
+  /**
+   * 入侵防御日志存储量，单位B
+   */
+  IdsSize?: number
+  /**
+   * 流量日志存储量，单位B
+   */
+  NetFlowSize?: number
+  /**
+   * 操作日志存储量，单位B
+   */
+  OperateSize?: number
+  /**
+   * 剩余存储量，单位B
+   */
+  LeftSize?: number
+  /**
+   * 计费模式，0后付费，1预付费
+   */
+  PayMode?: number
+  /**
+   * 每日增加日志存储量柱状图
+   */
+  TimeHistogram?: Array<StorageHistogram>
+  /**
+   * 柱形图格式数据
+   */
+  TimeHistogramShow?: StorageHistogramShow
+  /**
+   * 后付费模式存储状态，0正常，1欠费停止写入
+   */
+  ArrearsStopWriting?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSecurityGroupRule返回参数结构体
  */
 export interface DeleteSecurityGroupRuleResponse {
@@ -2647,21 +2713,21 @@ export interface AcListsData {
 }
 
 /**
- * ModifySecurityGroupItemRuleStatus请求参数结构体
+ * DescribeNatFwInstancesInfo请求参数结构体
  */
-export interface ModifySecurityGroupItemRuleStatusRequest {
+export interface DescribeNatFwInstancesInfoRequest {
   /**
-   * 方向，0：出站，1：入站，默认1
+   * 获取实例列表过滤字段
    */
-  Direction: number
+  Filter?: Array<NatFwFilter>
   /**
-   * 是否开关开启，0：未开启，1：开启
+   * 第几页
    */
-  Status: number
+  Offset?: number
   /**
-   * 更改的企业安全组规则的执行顺序
+   * 每页长度
    */
-  RuleSequence: number
+  Limit?: number
 }
 
 /**
@@ -2958,6 +3024,27 @@ export interface RuleChangeItem {
 }
 
 /**
+ * 前端图表使用日志存储统计柱形图数据
+ */
+export interface StorageHistogramShow {
+  /**
+   * 存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType?: Array<string>
+  /**
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dates?: Array<string>
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<IntArray>
+}
+
+/**
  * 多日志主题检索错误信息
  */
 export interface SearchLogErrors {
@@ -3071,22 +3158,9 @@ enum FilterOperatorType {
 }
 
 /**
- * DescribeNatFwInstancesInfo请求参数结构体
+ * DescribeLogStorageStatistic请求参数结构体
  */
-export interface DescribeNatFwInstancesInfoRequest {
-  /**
-   * 获取实例列表过滤字段
-   */
-  Filter?: Array<NatFwFilter>
-  /**
-   * 第几页
-   */
-  Offset?: number
-  /**
-   * 每页长度
-   */
-  Limit?: number
-}
+export type DescribeLogStorageStatisticRequest = null
 
 /**
  * AddVpcAcRule请求参数结构体
@@ -6230,6 +6304,24 @@ export interface ModifyVpcFwSequenceRulesRequest {
 }
 
 /**
+ * ModifySecurityGroupItemRuleStatus请求参数结构体
+ */
+export interface ModifySecurityGroupItemRuleStatusRequest {
+  /**
+   * 方向，0：出站，1：入站，默认1
+   */
+  Direction: number
+  /**
+   * 是否开关开启，0：未开启，1：开启
+   */
+  Status: number
+  /**
+   * 更改的企业安全组规则的执行顺序
+   */
+  RuleSequence: number
+}
+
+/**
  * ModifyStorageSetting请求参数结构体
  */
 export type ModifyStorageSettingRequest = null
@@ -7209,6 +7301,17 @@ export interface RemoveVpcAcRuleResponse {
 }
 
 /**
+ * 用于构造二维数组
+ */
+export interface IntArray {
+  /**
+   * 数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<number | bigint>
+}
+
+/**
  * DescribeNatFwInstancesInfo返回参数结构体
  */
 export interface DescribeNatFwInstancesInfoResponse {
@@ -7635,6 +7738,37 @@ export interface DescribeGuideScanInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志存储统计柱形图
+ */
+export interface StorageHistogram {
+  /**
+   * 访问控制日志存储量，单位B
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AclSize?: number
+  /**
+   * 入侵防御日志存储量，单位B
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdsSize?: number
+  /**
+   * 流量日志存储量，单位B
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetFlowSize?: number
+  /**
+   * 操作日志存储量，单位B
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateSize?: number
+  /**
+   * 统计时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Time?: string
 }
 
 /**

@@ -504,17 +504,13 @@ export interface ReportItemKey {
 }
 
 /**
- * DescribeSubnetAssets请求参数结构体
+ * CreateAccessKeySyncTask请求参数结构体
  */
-export interface DescribeSubnetAssetsRequest {
+export interface CreateAccessKeySyncTaskRequest {
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
-  /**
-   * 过滤参数
-   */
-  Filter?: Filter
 }
 
 /**
@@ -1005,6 +1001,40 @@ export interface KeyValue {
 }
 
 /**
+ * DescribeClusterPodAssets返回参数结构体
+ */
+export interface DescribeClusterPodAssetsResponse {
+  /**
+   * 列表
+   */
+  Data?: Array<AssetClusterPod>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 集群pod状态枚举
+   */
+  PodStatusList?: Array<FilterDataObject>
+  /**
+   * 命名空间枚举
+   */
+  NamespaceList?: Array<FilterDataObject>
+  /**
+   * 地域枚举
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 租户枚举
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * vpc列表数据
  */
 export interface Vpc {
@@ -1436,6 +1466,24 @@ export interface DescribeCheckViewRisksResponse {
 }
 
 /**
+ * DescribeRiskCallRecord返回参数结构体
+ */
+export interface DescribeRiskCallRecordResponse {
+  /**
+   * 风险调用记录列表
+   */
+  Data?: Array<RiskCallRecord>
+  /**
+   * 调用记录总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeScanReportList请求参数结构体
  */
 export interface DescribeScanReportListRequest {
@@ -1709,6 +1757,20 @@ export interface DescribeClusterAssetsRequest {
 }
 
 /**
+ * DescribeSubnetAssets请求参数结构体
+ */
+export interface DescribeSubnetAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤参数
+   */
+  Filter?: Filter
+}
+
+/**
  * DescribeTopAttackInfo返回参数结构体
  */
 export interface DescribeTopAttackInfoResponse {
@@ -1936,6 +1998,24 @@ export interface Tag {
 }
 
 /**
+ * 访问密钥告警数量
+ */
+export interface AccessKeyAlarmCount {
+  /**
+   * 访问密钥的ID
+   */
+  ID?: number
+  /**
+   * 访问密钥
+   */
+  AccessKey?: string
+  /**
+   * 告警数量
+   */
+  AlarmCount?: number
+}
+
+/**
  * 风险规则
  */
 export interface RiskRuleItem {
@@ -2040,6 +2120,54 @@ export interface DescribeAssetProcessListResponse {
 }
 
 /**
+ * DescribeAbnormalCallRecord请求参数结构体
+ */
+export interface DescribeAbnormalCallRecordRequest {
+  /**
+   * 告警规则ID
+   */
+  AlarmRuleID: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 访问密钥
+   */
+  AccessKey?: string
+  /**
+   * 调用源IP
+   */
+  SourceIP?: string
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
+}
+
+/**
+ * UpdateAccessKeyAlarmStatus请求参数结构体
+ */
+export interface UpdateAccessKeyAlarmStatusRequest {
+  /**
+   * 状态  0:未处理 1:已处理 2:已忽略
+   */
+  Status: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 告警ID列表
+   */
+  AlarmIDList?: Array<number | bigint>
+  /**
+   * 风险ID列表
+   */
+  RiskIDList?: Array<number | bigint>
+}
+
+/**
  * DescribeCSIPRiskStatistics返回参数结构体
  */
 export interface DescribeCSIPRiskStatisticsResponse {
@@ -2051,6 +2179,20 @@ export interface DescribeCSIPRiskStatisticsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAccessKeyUserList请求参数结构体
+ */
+export interface DescribeAccessKeyUserListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
 }
 
 /**
@@ -2184,6 +2326,88 @@ export interface DescribeRiskDetailListRequest {
 }
 
 /**
+ * 网站风险对象
+ */
+export interface WebsiteRisk {
+  /**
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+   */
+  Level?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * ID,处理风险使用
+   */
+  Id?: string
+  /**
+   * 前端索引
+   */
+  Index?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
+   */
+  Nick?: string
+  /**
+   * 用户uin
+   */
+  Uin?: string
+  /**
+   * 风险链接
+   */
+  URL?: string
+  /**
+   * 风险文件地址
+   */
+  URLPath?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 类型
+   */
+  DetectEngine?: string
+  /**
+   * 结果描述
+   */
+  ResultDescribe?: string
+  /**
+   * 源地址url
+   */
+  SourceURL?: string
+  /**
+   * 源文件地址
+   */
+  SourceURLPath?: string
+}
+
+/**
  * DescribeRiskRuleDetail请求参数结构体
  */
 export interface DescribeRiskRuleDetailRequest {
@@ -2191,6 +2415,20 @@ export interface DescribeRiskRuleDetailRequest {
    * 风险规则ID
    */
   RiskRuleId: string
+}
+
+/**
+ * 漏洞影响组件信息
+ */
+export interface VulImpactComponentInfo {
+  /**
+   * 组件名称
+   */
+  Component?: string
+  /**
+   * 版本名称
+   */
+  Version?: string
 }
 
 /**
@@ -2224,6 +2462,106 @@ export interface DescribeRiskCenterPortViewPortRiskListResponse {
 }
 
 /**
+ * CreateAccessKeyCheckTask返回参数结构体
+ */
+export interface CreateAccessKeyCheckTaskResponse {
+  /**
+   * 0表示成功 1表示失败
+   */
+  Code?: number
+  /**
+   * 错误信息
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 子网资产
+ */
+export interface SubnetAsset {
+  /**
+   * appid
+   */
+  AppId?: string
+  /**
+   * uin
+   */
+  Uin?: string
+  /**
+   * 资产ID
+   */
+  AssetId?: string
+  /**
+   * 资产名
+   */
+  AssetName?: string
+  /**
+   * 区域
+   */
+  Region?: string
+  /**
+   * 私有网络id
+   */
+  VpcId?: string
+  /**
+   * 私有网络名
+   */
+  VpcName?: string
+  /**
+   * 标签
+   */
+  Tag?: Array<Tag>
+  /**
+   * 昵称
+   */
+  Nick?: string
+  /**
+   * cidr
+   */
+  CIDR?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * cvm数
+   */
+  CVM?: number
+  /**
+   * 可用ip数
+   */
+  AvailableIp?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 配置风险
+   */
+  ConfigureRisk?: number
+  /**
+   * 任务数
+   */
+  ScanTask?: number
+  /**
+   * 最后扫描时间
+   */
+  LastScanTime?: string
+  /**
+   * 是否核心
+   */
+  IsCore?: number
+  /**
+   * 是否新资产 1新
+   */
+  IsNewAsset?: number
+}
+
+/**
  * DescribeOrganizationInfo请求参数结构体
  */
 export interface DescribeOrganizationInfoRequest {
@@ -2241,6 +2579,63 @@ export interface TaskIdListKey {
    * 任务ID
    */
   TaskId: string
+}
+
+/**
+ * 调用记录详情
+ */
+export interface UserCallRecord {
+  /**
+   * 调用源IP
+   */
+  SourceIP?: string
+  /**
+   * 调用类型
+0:控制台调用
+1:API
+   */
+  EventType?: number
+  /**
+   * 调用次数
+   */
+  CallCount?: number
+  /**
+   * 调用错误码
+0表示成功
+   */
+  Code?: number
+  /**
+   * 首次调用时间
+   */
+  FirstCallTime?: string
+  /**
+   * 最后调用时间
+   */
+  LastCallTime?: string
+  /**
+   * 调用源IP备注
+   */
+  SourceIPRemark?: string
+  /**
+   * 调用源IP地域
+   */
+  Region?: string
+  /**
+   * 用户/角色名称
+   */
+  UserName?: string
+  /**
+   * 聚合日期
+   */
+  Date?: string
+  /**
+   * appid
+   */
+  AppID?: number
+  /**
+   * 运营商
+   */
+  ISP?: string
 }
 
 /**
@@ -2511,21 +2906,25 @@ export interface GateWayAsset {
 }
 
 /**
- * ModifyUebaRuleSwitch请求参数结构体
+ * CreateAccessKeySyncTask返回参数结构体
  */
-export interface ModifyUebaRuleSwitchRequest {
+export interface CreateAccessKeySyncTaskResponse {
   /**
-   * 策略ID
+   * 发起同步任务
    */
-  RuleID: string
+  TaskID?: number
   /**
-   * 开关状态
+   * 0成功 1失败
    */
-  Status: boolean
+  Code?: number
   /**
-   * 集团账号的成员id
+   * 错误信息
    */
-  MemberId?: Array<string>
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2859,6 +3258,24 @@ export interface DescribeOrganizationUserInfoResponse {
 }
 
 /**
+ * DescribeVULRiskDetail请求参数结构体
+ */
+export interface DescribeVULRiskDetailRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 风险id
+   */
+  RiskId?: string
+  /**
+   * pcMgrId
+   */
+  PCMGRId?: string
+}
+
+/**
  * 网卡资产
  */
 export interface NICAsset {
@@ -2962,6 +3379,99 @@ export interface NICAsset {
    * 是否新资产 1新
    */
   IsNewAsset?: number
+}
+
+/**
+ * 访问密钥风险记录
+ */
+export interface AccessKeyRisk {
+  /**
+   * 风险名称
+   */
+  Name?: string
+  /**
+   * 风险等级
+0-无效 1-提示 2-低危 3-中危 4-高危 5-严重
+   */
+  Level?: number
+  /**
+   * 风险记录ID
+   */
+  ID?: number
+  /**
+   * 风险规则ID
+   */
+  RiskRuleID?: number
+  /**
+   * 风险类型
+0-配置风险
+   */
+  RiskType?: number
+  /**
+   * 访问密钥
+   */
+  AccessKey?: string
+  /**
+   * 访问密钥ID
+   */
+  AccessKeyID?: number
+  /**
+   * 访问密钥备注
+   */
+  AccessKeyRemark?: string
+  /**
+   * 风险检出时间
+   */
+  RiskTime?: string
+  /**
+   * 风险状态
+0-未处理 2-已忽略 3-已收敛
+   */
+  Status?: number
+  /**
+   * 风险标签
+   */
+  Tag?: Array<string>
+  /**
+   * 风险证据
+   */
+  Evidence?: string
+  /**
+   * 风险描述
+   */
+  Description?: string
+  /**
+   * 所属主账号Uin
+   */
+  Uin?: string
+  /**
+   * 所属主账号昵称
+   */
+  Nickname?: string
+  /**
+   * 所属子账号Uin
+   */
+  SubUin?: string
+  /**
+   * 所属子账号昵称
+   */
+  SubNickname?: string
+  /**
+   * 账号类型
+0 主账号AK 1子账号AK
+2 临时密钥
+   */
+  Type?: number
+  /**
+   * 检测状态
+0表示 已检测
+1表示 检测中
+   */
+  CheckStatus?: number
+  /**
+   * 所属appid
+   */
+  AppID?: number
 }
 
 /**
@@ -3331,85 +3841,41 @@ export interface DescribeAccessKeyAssetResponse {
 }
 
 /**
- * 子网资产
+ * DescribeAccessKeyRiskDetail返回参数结构体
  */
-export interface SubnetAsset {
+export interface DescribeAccessKeyRiskDetailResponse {
   /**
-   * appid
+   * 风险列表
    */
-  AppId?: string
+  RiskInfo?: AccessKeyRisk
   /**
-   * uin
+   * CAM策略总数
    */
-  Uin?: string
+  CamCount?: number
   /**
-   * 资产ID
+   * 账号关联告警数量
    */
-  AssetId?: string
+  AlarmCount?: number
   /**
-   * 资产名
+   * 访问方式 0 API 1 控制台与API
    */
-  AssetName?: string
+  AccessType?: number
   /**
-   * 区域
+   * 访问密钥告警数量列表
    */
-  Region?: string
+  AccessKeyAlarmCount?: Array<AccessKeyAlarmCount>
   /**
-   * 私有网络id
+   * 操作保护是否开启 0 未开启 1 已开启
    */
-  VpcId?: string
+  ActionFlag?: number
   /**
-   * 私有网络名
+   * 登录保护是否开启 0 未开启 1 已开启
    */
-  VpcName?: string
+  LoginFlag?: number
   /**
-   * 标签
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Tag?: Array<Tag>
-  /**
-   * 昵称
-   */
-  Nick?: string
-  /**
-   * cidr
-   */
-  CIDR?: string
-  /**
-   * 可用区
-   */
-  Zone?: string
-  /**
-   * cvm数
-   */
-  CVM?: number
-  /**
-   * 可用ip数
-   */
-  AvailableIp?: number
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 配置风险
-   */
-  ConfigureRisk?: number
-  /**
-   * 任务数
-   */
-  ScanTask?: number
-  /**
-   * 最后扫描时间
-   */
-  LastScanTime?: string
-  /**
-   * 是否核心
-   */
-  IsCore?: number
-  /**
-   * 是否新资产 1新
-   */
-  IsNewAsset?: number
+  RequestId?: string
 }
 
 /**
@@ -3805,6 +4271,28 @@ export interface ExposesItem {
 }
 
 /**
+ * DescribeAccessKeyRisk请求参数结构体
+ */
+export interface DescribeAccessKeyRiskRequest {
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 访问密钥的ID
+   */
+  AccessKeyID?: number
+  /**
+   * 账号uin
+   */
+  SubUin?: string
+}
+
+/**
  * DescribeRiskCenterAssetViewWeakPasswordRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
@@ -3830,6 +4318,24 @@ export interface PublicIpDomainListKey {
    * 资产值
    */
   Asset: string
+}
+
+/**
+ * DescribeUserCallRecord请求参数结构体
+ */
+export interface DescribeUserCallRecordRequest {
+  /**
+   * 账号uin
+   */
+  SubUin: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
 }
 
 /**
@@ -3963,17 +4469,21 @@ export interface DescribeCVMAssetsResponse {
 }
 
 /**
- * 漏洞影响组件信息
+ * UpdateAccessKeyRemark返回参数结构体
  */
-export interface VulImpactComponentInfo {
+export interface UpdateAccessKeyRemarkResponse {
   /**
-   * 组件名称
+   * 0:成功 1:失败
    */
-  Component?: string
+  Code?: number
   /**
-   * 版本名称
+   * 错误信息
    */
-  Version?: string
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4302,81 +4812,90 @@ export interface CVMAssetVO {
 }
 
 /**
- * 子账号详情
+ * 访问密钥告警记录
  */
-export interface SubUserInfo {
+export interface AccessKeyAlarm {
   /**
-   * 主键ID，无业务意义仅作为唯一键
+   * 告警名称
+   */
+  Name?: string
+  /**
+   * 告警等级
+0-无效 1-提示 2-低危 3-中危 4-高危 5-严重
+   */
+  Level?: number
+  /**
+   * 告警记录ID
    */
   ID?: number
   /**
-   * 子账号Appid
+   * 告警规则ID
    */
-  AppID?: string
+  AlarmRuleID?: number
   /**
-   * 子账号UIn
+   * 告警类型
+0 异常调用
+1 泄漏监测
+   */
+  AlarmType?: number
+  /**
+   * 访问密钥
+   */
+  AccessKey?: string
+  /**
+   * 访问密钥ID
+   */
+  AccessKeyID?: number
+  /**
+   * 访问密钥备注
+   */
+  AccessKeyRemark?: string
+  /**
+   * 最后告警时间
+   */
+  LastAlarmTime?: string
+  /**
+   * 告警状态
+0-未处理 1-已处理 2-已忽略
+   */
+  Status?: number
+  /**
+   * 聚合日期
+   */
+  Date?: string
+  /**
+   * 告警标签
+   */
+  Tag?: Array<string>
+  /**
+   * 所属主账号Uin
    */
   Uin?: string
   /**
-   * 子账号名称
+   * 所属主账号昵称
    */
-  NickName?: string
+  Nickname?: string
   /**
-   * 主账号Appid
+   * 所属子账号Uin
    */
-  OwnerAppID?: string
+  SubUin?: string
   /**
-   * 主账号Uin
+   * 所属子账号昵称
    */
-  OwnerUin?: string
+  SubNickname?: string
   /**
-   * 主账号名称
+   * 账号类型
+0 主账号AK 1 子账号AK 2 临时密钥
    */
-  OwnerNickName?: string
+  Type?: number
   /**
-   * 所属主账号memberId信息
+   * 所属appid
    */
-  OwnerMemberID?: string
+  AppID?: number
   /**
-   * 账户类型，0为腾讯云账户，1为AWS账户
+   * 泄漏证据
    */
-  CloudType?: number
-  /**
-   * 可访问服务数量
-   */
-  ServiceCount?: number
-  /**
-   * 可访问接口数量
-   */
-  InterfaceCount?: number
-  /**
-   * 可访问资源数量
-   */
-  AssetCount?: number
-  /**
-   * 访问/行为日志数量
-   */
-  LogCount?: number
-  /**
-   * 权限配置风险
-   */
-  ConfigRiskCount?: number
-  /**
-   * 危险行为告警
-   */
-  ActionRiskCount?: number
-  /**
-   * 是否接入云审计日志
-   */
-  IsAccessCloudAudit?: boolean
-  /**
-   * 是否配置风险的安全体检
-   */
-  IsAccessCheck?: boolean
-  /**
-   * 是否配置用户行为管理策略
-   */
-  IsAccessUeba?: boolean
+  LeakEvidence?: Array<string>
 }
 
 /**
@@ -4607,85 +5126,21 @@ export interface AssetViewWeakPassRisk {
 }
 
 /**
- * 网站风险对象
+ * UpdateAccessKeyAlarmStatus返回参数结构体
  */
-export interface WebsiteRisk {
+export interface UpdateAccessKeyAlarmStatusResponse {
   /**
-   * 影响资产
+   * 0成功，1失败
    */
-  AffectAsset?: string
+  Code?: number
   /**
-   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+   * 错误信息
    */
-  Level?: string
+  Msg?: string
   /**
-   * 最近识别时间
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RecentTime?: string
-  /**
-   * 首次识别时间
-   */
-  FirstTime?: string
-  /**
-   * 状态，0未处理、1已处置、2已忽略
-   */
-  Status?: number
-  /**
-   * ID,处理风险使用
-   */
-  Id?: string
-  /**
-   * 前端索引
-   */
-  Index?: string
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 实例名
-   */
-  InstanceName?: string
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * 用户昵称
-   */
-  Nick?: string
-  /**
-   * 用户uin
-   */
-  Uin?: string
-  /**
-   * 风险链接
-   */
-  URL?: string
-  /**
-   * 风险文件地址
-   */
-  URLPath?: string
-  /**
-   * 实例类型
-   */
-  InstanceType?: string
-  /**
-   * 类型
-   */
-  DetectEngine?: string
-  /**
-   * 结果描述
-   */
-  ResultDescribe?: string
-  /**
-   * 源地址url
-   */
-  SourceURL?: string
-  /**
-   * 源文件地址
-   */
-  SourceURLPath?: string
+  RequestId?: string
 }
 
 /**
@@ -5204,6 +5659,20 @@ export interface AssetInstanceTypeMap {
    * 资产类型和实例类型映射关系
    */
   InstanceTypeList?: Array<FilterDataObject>
+}
+
+/**
+ * DescribeAccessKeyAlarmDetail请求参数结构体
+ */
+export interface DescribeAccessKeyAlarmDetailRequest {
+  /**
+   * 告警记录ID
+   */
+  ID: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -6087,17 +6556,17 @@ export interface AlertExtraInfo {
 }
 
 /**
- * DescribeVulRiskList返回参数结构体
+ * DescribeAccessKeyRisk返回参数结构体
  */
-export interface DescribeVulRiskListResponse {
+export interface DescribeAccessKeyRiskResponse {
   /**
-   * 漏洞数量
+   * 风险列表
    */
-  TotalCount?: number
+  Data?: Array<AccessKeyRisk>
   /**
-   * 漏洞列表
+   * 总数
    */
-  VulRiskList?: Array<VulRiskItem>
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6199,6 +6668,28 @@ export interface DescribeVulViewVulRiskListResponse {
 }
 
 /**
+ * CreateAccessKeyCheckTask请求参数结构体
+ */
+export interface CreateAccessKeyCheckTaskRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 风险列表
+   */
+  RiskIDList?: Array<number | bigint>
+  /**
+   * 访问密钥列表
+   */
+  AccessKeyList?: Array<string>
+  /**
+   * 账号uin列表
+   */
+  SubUinList?: Array<string>
+}
+
+/**
  * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
  */
 export interface Filter {
@@ -6230,6 +6721,88 @@ export interface Filter {
    * 可填无， 日志使用查询时间
    */
   EndTime?: string
+}
+
+/**
+ * 访问密钥资产信息
+ */
+export interface AccessKeyAsset {
+  /**
+   * AK 的id
+   */
+  ID?: number
+  /**
+   * AK名称
+   */
+  Name?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 账号所属APPID
+   */
+  AppID?: number
+  /**
+   * 所属主账号Uin
+   */
+  Uin?: string
+  /**
+   * 主账号昵称
+   */
+  Nickname?: string
+  /**
+   * 所属子账号Uin
+   */
+  SubUin?: string
+  /**
+   * 所属子账号昵称
+   */
+  SubNickname?: string
+  /**
+   * 0 主账号AK
+1 子账号AK
+2 临时密钥
+   */
+  Type?: number
+  /**
+   * 安全建议 枚举
+0 正常
+1 立即处理
+2 建议加固
+   */
+  Advice?: number
+  /**
+   * 告警信息列表
+   */
+  AccessKeyAlarmList?: Array<AccessKeyAlarmInfo>
+  /**
+   * 风险信息列表
+   */
+  AccessKeyRiskList?: Array<AccessKeyAlarmInfo>
+  /**
+   * 源IP数量
+   */
+  IPCount?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 最近访问时间
+   */
+  LastAccessTime?: string
+  /**
+   * AK状态 
+0:禁用
+1:已启用
+   */
+  Status?: number
+  /**
+   * 0 表示已检测
+1 表示检测中
+   */
+  CheckStatus?: number
 }
 
 /**
@@ -6582,33 +7155,17 @@ export interface AssetViewVULRisk {
 }
 
 /**
- * DescribeClusterPodAssets返回参数结构体
+ * DescribeAccessKeyAlarm返回参数结构体
  */
-export interface DescribeClusterPodAssetsResponse {
+export interface DescribeAccessKeyAlarmResponse {
   /**
-   * 列表
+   * 告警列表
    */
-  Data?: Array<AssetClusterPod>
+  Data?: Array<AccessKeyAlarm>
   /**
    * 总数
    */
-  TotalCount?: number
-  /**
-   * 集群pod状态枚举
-   */
-  PodStatusList?: Array<FilterDataObject>
-  /**
-   * 命名空间枚举
-   */
-  NamespaceList?: Array<FilterDataObject>
-  /**
-   * 地域枚举
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * 租户枚举
-   */
-  AppIdList?: Array<FilterDataObject>
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6794,6 +7351,84 @@ export interface AssetViewPortRisk {
 }
 
 /**
+ * 子账号详情
+ */
+export interface SubUserInfo {
+  /**
+   * 主键ID，无业务意义仅作为唯一键
+   */
+  ID?: number
+  /**
+   * 子账号Appid
+   */
+  AppID?: string
+  /**
+   * 子账号UIn
+   */
+  Uin?: string
+  /**
+   * 子账号名称
+   */
+  NickName?: string
+  /**
+   * 主账号Appid
+   */
+  OwnerAppID?: string
+  /**
+   * 主账号Uin
+   */
+  OwnerUin?: string
+  /**
+   * 主账号名称
+   */
+  OwnerNickName?: string
+  /**
+   * 所属主账号memberId信息
+   */
+  OwnerMemberID?: string
+  /**
+   * 账户类型，0为腾讯云账户，1为AWS账户
+   */
+  CloudType?: number
+  /**
+   * 可访问服务数量
+   */
+  ServiceCount?: number
+  /**
+   * 可访问接口数量
+   */
+  InterfaceCount?: number
+  /**
+   * 可访问资源数量
+   */
+  AssetCount?: number
+  /**
+   * 访问/行为日志数量
+   */
+  LogCount?: number
+  /**
+   * 权限配置风险
+   */
+  ConfigRiskCount?: number
+  /**
+   * 危险行为告警
+   */
+  ActionRiskCount?: number
+  /**
+   * 是否接入云审计日志
+   */
+  IsAccessCloudAudit?: boolean
+  /**
+   * 是否配置风险的安全体检
+   */
+  IsAccessCheck?: boolean
+  /**
+   * 是否配置用户行为管理策略
+   */
+  IsAccessUeba?: boolean
+}
+
+/**
  * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
@@ -6839,6 +7474,20 @@ export interface DescribeRiskRuleDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAccessKeyUserDetail请求参数结构体
+ */
+export interface DescribeAccessKeyUserDetailRequest {
+  /**
+   * 账号自身uin
+   */
+  SubUin: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -7852,21 +8501,29 @@ export interface TaskLogInfo {
 }
 
 /**
- * DescribeVULRiskAdvanceCFGList请求参数结构体
+ * DescribeAccessKeyAlarm请求参数结构体
  */
-export interface DescribeVULRiskAdvanceCFGListRequest {
+export interface DescribeAccessKeyAlarmRequest {
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
   /**
-   * 任务ID
+   * 访问密钥的ID
    */
-  TaskId?: string
+  AccessKeyID?: number
   /**
-   * 过滤条件
+   * 源IP的ID
    */
-  Filter?: Filter
+  SourceIPID?: number
+  /**
+   * 账号uin
+   */
+  SubUin?: string
 }
 
 /**
@@ -8098,6 +8755,20 @@ export interface DescribeRiskCenterCFGViewCFGRiskListResponse {
 }
 
 /**
+ * DescribeAccessKeyUserDetail返回参数结构体
+ */
+export interface DescribeAccessKeyUserDetailResponse {
+  /**
+   * 账号详情信息
+   */
+  User?: AccessKeyUser
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSearchBugInfo返回参数结构体
  */
 export interface DescribeSearchBugInfoResponse {
@@ -8120,21 +8791,17 @@ export interface DescribeSearchBugInfoResponse {
 }
 
 /**
- * DescribeVULRiskDetail请求参数结构体
+ * DescribeAccessKeyRiskDetail请求参数结构体
  */
-export interface DescribeVULRiskDetailRequest {
+export interface DescribeAccessKeyRiskDetailRequest {
+  /**
+   * 风险记录ID
+   */
+  ID: number
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
-  /**
-   * 风险id
-   */
-  RiskId?: string
-  /**
-   * pcMgrId
-   */
-  PCMGRId?: string
 }
 
 /**
@@ -8250,6 +8917,24 @@ export interface DescribeExposeAssetCategoryRequest {
 }
 
 /**
+ * DescribeAbnormalCallRecord返回参数结构体
+ */
+export interface DescribeAbnormalCallRecordResponse {
+  /**
+   * 调用记录列表
+   */
+  Data?: Array<CallRecord>
+  /**
+   * 调用记录总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSubUserInfo返回参数结构体
  */
 export interface DescribeSubUserInfoResponse {
@@ -8269,6 +8954,24 @@ export interface DescribeSubUserInfoResponse {
    * 所属主账号appid枚举
    */
   OwnerAppIDLst?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVulRiskList返回参数结构体
+ */
+export interface DescribeVulRiskListResponse {
+  /**
+   * 漏洞数量
+   */
+  TotalCount?: number
+  /**
+   * 漏洞列表
+   */
+  VulRiskList?: Array<VulRiskItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8380,37 +9083,17 @@ export interface DescribeDomainAssetsResponse {
 }
 
 /**
- * DescribeDbAssets返回参数结构体
+ * DescribeExposures返回参数结构体
  */
-export interface DescribeDbAssetsResponse {
+export interface DescribeExposuresResponse {
   /**
-   * 总数
+   * 云边界分析资产数量
    */
-  Total?: number
+  TotalCount?: number
   /**
-   * 资产总数
+   * 云边界分析资产列表
    */
-  Data?: Array<DBAssetVO>
-  /**
-   * 地域枚举
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * 资产类型枚举
-   */
-  AssetTypeList?: Array<FilterDataObject>
-  /**
-   * Vpc枚举
-   */
-  VpcList?: Array<FilterDataObject>
-  /**
-   * Appid枚举
-   */
-  AppIdList?: Array<FilterDataObject>
-  /**
-   * 公网内网枚举
-   */
-  PublicPrivateAttr?: Array<FilterDataObject>
+  ExposeList?: Array<ExposesItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8522,6 +9205,24 @@ export interface DescribeRiskCenterServerRiskListRequest {
 }
 
 /**
+ * DescribeUserCallRecord返回参数结构体
+ */
+export interface DescribeUserCallRecordResponse {
+  /**
+   * 账号调用记录列表
+   */
+  Data?: Array<UserCallRecord>
+  /**
+   * 调用记录总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskLogList请求参数结构体
  */
 export interface DescribeTaskLogListRequest {
@@ -8533,6 +9234,32 @@ export interface DescribeTaskLogListRequest {
    * 过滤内容
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeAccessKeyAlarmDetail返回参数结构体
+ */
+export interface DescribeAccessKeyAlarmDetailResponse {
+  /**
+   * 告警信息
+   */
+  AlarmInfo?: AccessKeyAlarm
+  /**
+   * 所属账号CAM策略数量
+   */
+  CamCount?: number
+  /**
+   * AK风险数量
+   */
+  RiskCount?: number
+  /**
+   * 告警策略描述
+   */
+  AlarmDesc?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8554,6 +9281,20 @@ export interface Filters {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExactMatch?: string
+}
+
+/**
+ * 统计条目
+ */
+export interface Element {
+  /**
+   * 统计类型
+   */
+  Key?: string
+  /**
+   * 统计对象
+   */
+  Value?: string
 }
 
 /**
@@ -8687,17 +9428,91 @@ export interface ClbListenerListInfo {
 }
 
 /**
- * 统计条目
+ * 访问密钥账号信息
  */
-export interface Element {
+export interface AccessKeyUser {
   /**
-   * 统计类型
+   * 账号ID
    */
-  Key?: string
+  ID?: number
   /**
-   * 统计对象
+   * 账号名称
    */
-  Value?: string
+  Name?: string
+  /**
+   * 0 主账号 1子账号
+   */
+  Type?: number
+  /**
+   * 访问方式
+0 API
+1 控制台与API
+   */
+  AccessType?: number
+  /**
+   * 安全建议 枚举 0 正常 1 立即处理 2 建议加固
+   */
+  Advice?: number
+  /**
+   * 告警信息列表
+   */
+  AccessKeyAlarmList?: Array<AccessKeyAlarmInfo>
+  /**
+   * 风险信息列表
+   */
+  AccessKeyRiskList?: Array<AccessKeyAlarmInfo>
+  /**
+   * 账号所属APPID
+   */
+  AppID?: number
+  /**
+   * 主账号昵称
+   */
+  Nickname?: string
+  /**
+   * 子账号昵称
+   */
+  SubNickname?: string
+  /**
+   * 账号所属主账号Uin
+   */
+  Uin?: string
+  /**
+   * 账号自身uin，主账号时与主账号uin一致
+   */
+  SubUin?: string
+  /**
+   * 登录IP
+   */
+  LoginIP?: string
+  /**
+   * 登录地址
+   */
+  LoginLocation?: string
+  /**
+   * 登录时间
+   */
+  LoginTime?: string
+  /**
+   * 运营商名称
+   */
+  ISP?: string
+  /**
+   * 操作保护是否开启
+0 未开启
+1 已开启
+   */
+  ActionFlag?: number
+  /**
+   * 登录保护是否开启
+0 未开启
+1 已开启
+   */
+  LoginFlag?: number
+  /**
+   * 0 表示已检测 1 表示检测中
+   */
+  CheckStatus?: number
 }
 
 /**
@@ -8734,6 +9549,24 @@ export interface DescribeListenerListRequest {
    * 过滤器参数
    */
   Filter?: Filter
+}
+
+/**
+ * ModifyUebaRuleSwitch请求参数结构体
+ */
+export interface ModifyUebaRuleSwitchRequest {
+  /**
+   * 策略ID
+   */
+  RuleID: string
+  /**
+   * 开关状态
+   */
+  Status: boolean
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -8794,85 +9627,39 @@ export interface DescribeGatewayAssetsRequest {
 export type DescribeCFWAssetStatisticsRequest = null
 
 /**
- * 访问密钥资产信息
+ * DescribeAccessKeyUserList返回参数结构体
  */
-export interface AccessKeyAsset {
+export interface DescribeAccessKeyUserListResponse {
   /**
-   * AK 的id
+   * 账号列表
    */
-  ID?: number
+  Data?: Array<AccessKeyUser>
   /**
-   * AK名称
+   * 总数
    */
-  Name?: string
+  Total?: number
   /**
-   * 备注
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Remark?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeRiskCallRecord请求参数结构体
+ */
+export interface DescribeRiskCallRecordRequest {
   /**
-   * 账号所属APPID
+   * 风险记录ID
    */
-  AppID?: number
+  RiskID: number
   /**
-   * 所属主账号Uin
+   * 集团账号的成员id
    */
-  Uin?: string
+  MemberId?: Array<string>
   /**
-   * 主账号昵称
+   * 过滤器
    */
-  Nickname?: string
-  /**
-   * 所属子账号Uin
-   */
-  SubUin?: string
-  /**
-   * 所属子账号昵称
-   */
-  SubNickname?: string
-  /**
-   * 0 主账号AK
-1 子账号AK
-2 临时密钥
-   */
-  Type?: number
-  /**
-   * 安全建议 枚举
-0 正常
-1 立即处理
-2 建议加固
-   */
-  Advice?: number
-  /**
-   * 告警信息列表
-   */
-  AccessKeyAlarmList?: Array<AccessKeyAlarmInfo>
-  /**
-   * 风险信息列表
-   */
-  AccessKeyRiskList?: Array<AccessKeyAlarmInfo>
-  /**
-   * 源IP数量
-   */
-  IPCount?: number
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 最近访问时间
-   */
-  LastAccessTime?: string
-  /**
-   * AK状态 
-0:禁用
-1:已启用
-   */
-  Status?: number
-  /**
-   * 0 表示已检测
-1 表示检测中
-   */
-  CheckStatus?: number
+  Filter?: Filter
 }
 
 /**
@@ -9058,6 +9845,36 @@ export interface CreateDomainAndIpResponse {
 }
 
 /**
+ * UpdateAccessKeyRemark请求参数结构体
+ */
+export interface UpdateAccessKeyRemarkRequest {
+  /**
+   * 备注
+   */
+  Remark: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 源IP 名称
+   */
+  SourceIPList?: Array<string>
+  /**
+   * ak名称
+   */
+  AccessKeyList?: Array<string>
+  /**
+   * 源IP的ID
+   */
+  SourceIPIDList?: Array<number | bigint>
+  /**
+   * AK的ID
+   */
+  AccessKeyIDList?: Array<number | bigint>
+}
+
+/**
  * DescribeTaskLogList返回参数结构体
  */
 export interface DescribeTaskLogListResponse {
@@ -9084,21 +9901,71 @@ export interface DescribeTaskLogListResponse {
 }
 
 /**
- * DescribeExposures返回参数结构体
+ * DescribeDbAssets返回参数结构体
  */
-export interface DescribeExposuresResponse {
+export interface DescribeDbAssetsResponse {
   /**
-   * 云边界分析资产数量
+   * 总数
    */
-  TotalCount?: number
+  Total?: number
   /**
-   * 云边界分析资产列表
+   * 资产总数
    */
-  ExposeList?: Array<ExposesItem>
+  Data?: Array<DBAssetVO>
+  /**
+   * 地域枚举
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 资产类型枚举
+   */
+  AssetTypeList?: Array<FilterDataObject>
+  /**
+   * Vpc枚举
+   */
+  VpcList?: Array<FilterDataObject>
+  /**
+   * Appid枚举
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 公网内网枚举
+   */
+  PublicPrivateAttr?: Array<FilterDataObject>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 风险调用记录详情
+ */
+export interface RiskCallRecord {
+  /**
+   * 接口名称
+   */
+  EventName?: string
+  /**
+   * 接口中文描述
+   */
+  EventDescCN?: string
+  /**
+   * 接口英文描述
+   */
+  EventDescEN?: string
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 产品中文名称
+   */
+  ProductNameCN?: string
+  /**
+   * 调用次数
+   */
+  CallCount?: number
 }
 
 /**
@@ -9137,6 +10004,24 @@ export interface DescribeRiskCenterAssetViewPortRiskListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeVULRiskAdvanceCFGList请求参数结构体
+ */
+export interface DescribeVULRiskAdvanceCFGListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 过滤条件
+   */
+  Filter?: Filter
 }
 
 /**

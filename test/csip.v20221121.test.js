@@ -48,6 +48,16 @@ it("csip.v20221121.DeleteDomainAndIp", async function () {
     }
 })
 
+it("csip.v20221121.DescribeVulRiskList", async function () {
+    try {
+       const data = await client.DescribeVulRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskRuleDetail", async function () {
     try {
        const data = await client.DescribeRiskRuleDetail({})
@@ -78,6 +88,16 @@ it("csip.v20221121.DescribeNICAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeAbnormalCallRecord", async function () {
+    try {
+       const data = await client.DescribeAbnormalCallRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterVULViewVULRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterVULViewVULRiskList({})
@@ -91,6 +111,16 @@ it("csip.v20221121.DescribeRiskCenterVULViewVULRiskList", async function () {
 it("csip.v20221121.DescribeDomainAssets", async function () {
     try {
        const data = await client.DescribeDomainAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.UpdateAccessKeyRemark", async function () {
+    try {
+       const data = await client.UpdateAccessKeyRemark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +168,9 @@ it("csip.v20221121.DescribeCallRecord", async function () {
     }
 })
 
-it("csip.v20221121.DescribeVulRiskList", async function () {
+it("csip.v20221121.DescribeAccessKeyUserList", async function () {
     try {
-       const data = await client.DescribeVulRiskList({})
+       const data = await client.DescribeAccessKeyUserList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +198,19 @@ it("csip.v20221121.StopRiskCenterTask", async function () {
     }
 })
 
-it("csip.v20221121.DescribeVULRiskDetail", async function () {
+it("csip.v20221121.DescribeAccessKeyUserDetail", async function () {
     try {
-       const data = await client.DescribeVULRiskDetail({})
+       const data = await client.DescribeAccessKeyUserDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeRiskDetailList", async function () {
+    try {
+       const data = await client.DescribeRiskDetailList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +328,9 @@ it("csip.v20221121.ModifyRiskCenterScanTask", async function () {
     }
 })
 
-it("csip.v20221121.DescribeOrganizationInfo", async function () {
+it("csip.v20221121.CreateAccessKeyCheckTask", async function () {
     try {
-       const data = await client.DescribeOrganizationInfo({})
+       const data = await client.CreateAccessKeyCheckTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +468,19 @@ it("csip.v20221121.DescribeSearchBugInfo", async function () {
     }
 })
 
-it("csip.v20221121.DescribeSubUserInfo", async function () {
+it("csip.v20221121.DescribeVULRiskDetail", async function () {
     try {
-       const data = await client.DescribeSubUserInfo({})
+       const data = await client.DescribeVULRiskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeAccessKeyAlarm", async function () {
+    try {
+       const data = await client.DescribeAccessKeyAlarm({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -441,6 +491,16 @@ it("csip.v20221121.DescribeSubUserInfo", async function () {
 it("csip.v20221121.DescribeVulViewVulRiskList", async function () {
     try {
        const data = await client.DescribeVulViewVulRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeUserCallRecord", async function () {
+    try {
+       const data = await client.DescribeUserCallRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,6 +558,16 @@ it("csip.v20221121.DescribeScanTaskList", async function () {
     }
 })
 
+it("csip.v20221121.UpdateAccessKeyAlarmStatus", async function () {
+    try {
+       const data = await client.UpdateAccessKeyAlarmStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.ModifyUebaRuleSwitch", async function () {
     try {
        const data = await client.ModifyUebaRuleSwitch({})
@@ -538,9 +608,9 @@ it("csip.v20221121.DescribeExposeAssetCategory", async function () {
     }
 })
 
-it("csip.v20221121.DescribeRiskDetailList", async function () {
+it("csip.v20221121.DescribeOrganizationUserInfo", async function () {
     try {
-       const data = await client.DescribeRiskDetailList({})
+       const data = await client.DescribeOrganizationUserInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +628,9 @@ it("csip.v20221121.DescribeAssetProcessList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeDbAssets", async function () {
+it("csip.v20221121.CreateAccessKeySyncTask", async function () {
     try {
-       const data = await client.DescribeDbAssets({})
+       const data = await client.CreateAccessKeySyncTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +641,16 @@ it("csip.v20221121.DescribeDbAssets", async function () {
 it("csip.v20221121.DescribeRiskCenterPortViewPortRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterPortViewPortRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSubUserInfo", async function () {
+    try {
+       const data = await client.DescribeSubUserInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +671,16 @@ it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
 it("csip.v20221121.DescribeVULRiskAdvanceCFGList", async function () {
     try {
        const data = await client.DescribeVULRiskAdvanceCFGList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeOrganizationInfo", async function () {
+    try {
+       const data = await client.DescribeOrganizationInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +718,16 @@ it("csip.v20221121.ModifyOrganizationAccountStatus", async function () {
     }
 })
 
+it("csip.v20221121.DescribeAccessKeyAlarmDetail", async function () {
+    try {
+       const data = await client.DescribeAccessKeyAlarmDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterCFGViewCFGRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterCFGViewCFGRiskList({})
@@ -638,9 +738,9 @@ it("csip.v20221121.DescribeRiskCenterCFGViewCFGRiskList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeOrganizationUserInfo", async function () {
+it("csip.v20221121.DescribeDbAssets", async function () {
     try {
-       const data = await client.DescribeOrganizationUserInfo({})
+       const data = await client.DescribeDbAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +751,16 @@ it("csip.v20221121.DescribeOrganizationUserInfo", async function () {
 it("csip.v20221121.DescribeClusterAssets", async function () {
     try {
        const data = await client.DescribeClusterAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeAccessKeyRisk", async function () {
+    try {
+       const data = await client.DescribeAccessKeyRisk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +788,29 @@ it("csip.v20221121.DescribeCSIPRiskStatistics", async function () {
     }
 })
 
+it("csip.v20221121.DescribeAccessKeyRiskDetail", async function () {
+    try {
+       const data = await client.DescribeAccessKeyRiskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeAccessKeyAsset", async function () {
     try {
        const data = await client.DescribeAccessKeyAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeRiskCallRecord", async function () {
+    try {
+       const data = await client.DescribeRiskCallRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

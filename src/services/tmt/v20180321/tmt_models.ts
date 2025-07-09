@@ -450,11 +450,11 @@ hi：印地语
    */
   UntranslatedText?: string
   /**
-   * 需要使用的术语库列表
+   * 需要使用的术语库列表，通过 [术语库操作指南](https://cloud.tencent.com/document/product/551/107926) 自行创建术语库获取。
    */
   TermRepoIDList?: Array<string>
   /**
-   * 需要使用的例句库列表
+   * 需要使用的例句库列表，通过 [例句库操作指南](https://cloud.tencent.com/document/product/551/107927) 自行创建例句库获取。
    */
   SentRepoIDList?: Array<string>
 }
@@ -518,11 +518,11 @@ hi：印地语
    */
   SourceTextList: Array<string>
   /**
-   * 需要使用的术语库列表
+   * 需要使用的术语库列表，通过 [术语库操作指南](https://cloud.tencent.com/document/product/551/107926) 自行创建术语库获取。
    */
   TermRepoIDList?: Array<string>
   /**
-   * 需要使用的例句库列表
+   * 需要使用的例句库列表，通过 [例句库操作指南](https://cloud.tencent.com/document/product/551/107927) 自行创建例句库获取。
    */
   SentRepoIDList?: Array<string>
 }

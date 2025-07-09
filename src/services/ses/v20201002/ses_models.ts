@@ -596,8 +596,13 @@ export interface SendEmailStatus {
   UserUnsubscribed?: boolean
   /**
    * 用户是否举报该发送者
+   * @deprecated
    */
   UserComplainted?: boolean
+  /**
+   * 用户是否举报该发送者
+   */
+  UserComplained?: boolean
 }
 
 /**

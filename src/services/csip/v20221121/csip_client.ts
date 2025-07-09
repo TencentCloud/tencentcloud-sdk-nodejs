@@ -33,7 +33,7 @@ import {
   ModifyUebaRuleSwitchResponse,
   FilterDataObject,
   ReportItemKey,
-  DescribeSubnetAssetsRequest,
+  CreateAccessKeySyncTaskRequest,
   AddNewBindRoleUserRequest,
   DescribeCheckViewRisksRequest,
   VULBaseInfo,
@@ -43,6 +43,7 @@ import {
   DescribeRiskCenterAssetViewCFGRiskListResponse,
   AlertInfo,
   KeyValue,
+  DescribeClusterPodAssetsResponse,
   Vpc,
   PortRiskAdvanceCFGParamItem,
   StatisticalFilter,
@@ -52,11 +53,13 @@ import {
   OrganizationUserInfo,
   AssetTag,
   DescribeCheckViewRisksResponse,
+  DescribeRiskCallRecordResponse,
   DescribeScanReportListRequest,
   NewAlertKey,
   IpAssetListVO,
   UebaCustomRule,
   DescribeClusterAssetsRequest,
+  DescribeSubnetAssetsRequest,
   DescribeTopAttackInfoResponse,
   TaskCenterWeakPwdRiskInputParam,
   DescribeVULRiskDetailResponse,
@@ -66,23 +69,32 @@ import {
   UebaRule,
   DescribeRiskCenterWebsiteRiskListResponse,
   Tag,
+  AccessKeyAlarmCount,
   RiskRuleItem,
   DescribeRiskCenterCFGViewCFGRiskListRequest,
   DescribeAssetProcessListRequest,
   DescribeAssetProcessListResponse,
+  DescribeAbnormalCallRecordRequest,
+  UpdateAccessKeyAlarmStatusRequest,
   DescribeCSIPRiskStatisticsResponse,
+  DescribeAccessKeyUserListRequest,
   AssetRiskItem,
   DeleteDomainAndIpRequest,
   DescribeRiskDetailListRequest,
+  WebsiteRisk,
   DescribeRiskRuleDetailRequest,
+  VulImpactComponentInfo,
   DescribeRiskCenterPortViewPortRiskListResponse,
+  CreateAccessKeyCheckTaskResponse,
+  SubnetAsset,
   DescribeOrganizationInfoRequest,
   TaskIdListKey,
+  UserCallRecord,
   RoleInfo,
   DescribeUebaRuleResponse,
   UebaEventContent,
   GateWayAsset,
-  ModifyUebaRuleSwitchRequest,
+  CreateAccessKeySyncTaskResponse,
   DescribeSourceIPAssetResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
@@ -90,7 +102,9 @@ import {
   CheckViewRiskItem,
   AssetViewVULRiskData,
   DescribeOrganizationUserInfoResponse,
+  DescribeVULRiskDetailRequest,
   NICAsset,
+  AccessKeyRisk,
   OrganizationInfo,
   DescribeListenerListResponse,
   TaskAdvanceCFG,
@@ -98,7 +112,7 @@ import {
   DBAssetVO,
   AssetInfoDetail,
   DescribeAccessKeyAssetResponse,
-  SubnetAsset,
+  DescribeAccessKeyRiskDetailResponse,
   CreateRiskCenterScanTaskResponse,
   DescribeSubnetAssetsResponse,
   DescribeRiskCenterAssetViewPortRiskListRequest,
@@ -111,22 +125,24 @@ import {
   DescribeExposePathRequest,
   RiskCenterStatusKey,
   ExposesItem,
+  DescribeAccessKeyRiskRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
+  DescribeUserCallRecordRequest,
   DescribeTopAttackInfoRequest,
   ProductSupport,
   DescribeCVMAssetsResponse,
-  VulImpactComponentInfo,
+  UpdateAccessKeyRemarkResponse,
   AttributeOptionSet,
   WhereFilter,
   CVMAssetVO,
-  SubUserInfo,
+  AccessKeyAlarm,
   CloudCountDesc,
   DescribePublicIpAssetsRequest,
   AssetClusterPod,
   DescribeCVMAssetInfoRequest,
   AssetViewWeakPassRisk,
-  WebsiteRisk,
+  UpdateAccessKeyAlarmStatusResponse,
   CFGViewCFGRisk,
   ServiceSupport,
   CreateRiskCenterScanTaskRequest,
@@ -143,6 +159,7 @@ import {
   DescribeScanTaskListRequest,
   ScanTaskInfo,
   AssetInstanceTypeMap,
+  DescribeAccessKeyAlarmDetailRequest,
   Tags,
   ModifyRiskCenterRiskStatusResponse,
   VULViewVULRisk,
@@ -160,25 +177,29 @@ import {
   DescribeSourceIPAssetRequest,
   DescribeVulRiskListRequest,
   AlertExtraInfo,
-  DescribeVulRiskListResponse,
+  DescribeAccessKeyRiskResponse,
   DescribeDbAssetInfoRequest,
   RelatedEvent,
   DescribeAssetViewVulRiskListRequest,
   DescribeUebaRuleRequest,
   DescribeVulViewVulRiskListResponse,
+  CreateAccessKeyCheckTaskRequest,
   Filter,
+  AccessKeyAsset,
   DescribeRiskCenterWebsiteRiskListRequest,
   DescribeCallRecordRequest,
   VulRiskItem,
   RepositoryImageVO,
   ServerRiskSuggestion,
   AssetViewVULRisk,
-  DescribeClusterPodAssetsResponse,
+  DescribeAccessKeyAlarmResponse,
   DescribeCFWAssetStatisticsResponse,
   DescribeGatewayAssetsResponse,
   AssetViewPortRisk,
+  SubUserInfo,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeRiskRuleDetailResponse,
+  DescribeAccessKeyUserDetailRequest,
   DescribeVpcAssetsResponse,
   CallRecord,
   DescribeHighBaseLineRiskListResponse,
@@ -199,7 +220,7 @@ import {
   DescribeExposePathResponse,
   DescribeDbAssetsRequest,
   TaskLogInfo,
-  DescribeVULRiskAdvanceCFGListRequest,
+  DescribeAccessKeyAlarmRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   TaskCenterCFGRiskInputParam,
   DescribeExposuresRequest,
@@ -207,42 +228,53 @@ import {
   DescribeAlertListRequest,
   CreateDomainAndIpRequest,
   DescribeRiskCenterCFGViewCFGRiskListResponse,
+  DescribeAccessKeyUserDetailResponse,
   DescribeSearchBugInfoResponse,
-  DescribeVULRiskDetailRequest,
+  DescribeAccessKeyRiskDetailRequest,
   ModifyOrganizationAccountStatusRequest,
   DescribeClusterAssetsResponse,
   DescribeVULListResponse,
   DescribeExposeAssetCategoryRequest,
+  DescribeAbnormalCallRecordResponse,
   DescribeSubUserInfoResponse,
+  DescribeVulRiskListResponse,
   DescribeCSIPRiskStatisticsRequest,
   DescribeScanStatisticResponse,
   TagCount,
   DescribeDomainAssetsResponse,
-  DescribeDbAssetsResponse,
+  DescribeExposuresResponse,
   DescribeNICAssetsResponse,
   DescribeRiskCenterAssetViewVULRiskListResponse,
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
+  DescribeUserCallRecordResponse,
   DescribeTaskLogListRequest,
+  DescribeAccessKeyAlarmDetailResponse,
   Filters,
+  Element,
   DescribeOtherCloudAssetsRequest,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
-  Element,
+  AccessKeyUser,
   DescribeRiskCenterServerRiskListResponse,
   DescribeListenerListRequest,
+  ModifyUebaRuleSwitchRequest,
   DescribeVULListRequest,
   DeleteRiskScanTaskResponse,
   DescribeScanStatisticRequest,
   DescribeGatewayAssetsRequest,
   DescribeCFWAssetStatisticsRequest,
-  AccessKeyAsset,
+  DescribeAccessKeyUserListResponse,
+  DescribeRiskCallRecordRequest,
   DescribeOtherCloudAssetsResponse,
   AssetCluster,
   CreateDomainAndIpResponse,
+  UpdateAccessKeyRemarkRequest,
   DescribeTaskLogListResponse,
-  DescribeExposuresResponse,
+  DescribeDbAssetsResponse,
+  RiskCallRecord,
   DescribeRiskCenterAssetViewPortRiskListResponse,
+  DescribeVULRiskAdvanceCFGListRequest,
   DescribeHighBaseLineRiskListRequest,
   DescribeTaskLogURLRequest,
 } from "./csip_models"
@@ -287,6 +319,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云边界分析-暴露路径下主机节点的漏洞列表
+   */
+  async DescribeVulRiskList(
+    req: DescribeVulRiskListRequest,
+    cb?: (error: string, rep: DescribeVulRiskListResponse) => void
+  ): Promise<DescribeVulRiskListResponse> {
+    return this.request("DescribeVulRiskList", req, cb)
+  }
+
+  /**
    * 查询风险规则详情示例
    */
   async DescribeRiskRuleDetail(
@@ -317,6 +359,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取调用记录列表
+   */
+  async DescribeAbnormalCallRecord(
+    req: DescribeAbnormalCallRecordRequest,
+    cb?: (error: string, rep: DescribeAbnormalCallRecordResponse) => void
+  ): Promise<DescribeAbnormalCallRecordResponse> {
+    return this.request("DescribeAbnormalCallRecord", req, cb)
+  }
+
+  /**
    * 获取漏洞视角的漏洞风险列表
    */
   async DescribeRiskCenterVULViewVULRiskList(
@@ -334,6 +386,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainAssetsResponse) => void
   ): Promise<DescribeDomainAssetsResponse> {
     return this.request("DescribeDomainAssets", req, cb)
+  }
+
+  /**
+   * 编辑访问密钥/源IP备注
+   */
+  async UpdateAccessKeyRemark(
+    req: UpdateAccessKeyRemarkRequest,
+    cb?: (error: string, rep: UpdateAccessKeyRemarkResponse) => void
+  ): Promise<UpdateAccessKeyRemarkResponse> {
+    return this.request("UpdateAccessKeyRemark", req, cb)
   }
 
   /**
@@ -377,13 +439,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云边界分析-暴露路径下主机节点的漏洞列表
+   * 查询用户的账号列表
    */
-  async DescribeVulRiskList(
-    req: DescribeVulRiskListRequest,
-    cb?: (error: string, rep: DescribeVulRiskListResponse) => void
-  ): Promise<DescribeVulRiskListResponse> {
-    return this.request("DescribeVulRiskList", req, cb)
+  async DescribeAccessKeyUserList(
+    req: DescribeAccessKeyUserListRequest,
+    cb?: (error: string, rep: DescribeAccessKeyUserListResponse) => void
+  ): Promise<DescribeAccessKeyUserListResponse> {
+    return this.request("DescribeAccessKeyUserList", req, cb)
   }
 
   /**
@@ -407,13 +469,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取漏洞展开详情
+   * 查询用户的账号详情
    */
-  async DescribeVULRiskDetail(
-    req: DescribeVULRiskDetailRequest,
-    cb?: (error: string, rep: DescribeVULRiskDetailResponse) => void
-  ): Promise<DescribeVULRiskDetailResponse> {
-    return this.request("DescribeVULRiskDetail", req, cb)
+  async DescribeAccessKeyUserDetail(
+    req: DescribeAccessKeyUserDetailRequest,
+    cb?: (error: string, rep: DescribeAccessKeyUserDetailResponse) => void
+  ): Promise<DescribeAccessKeyUserDetailResponse> {
+    return this.request("DescribeAccessKeyUserDetail", req, cb)
+  }
+
+  /**
+   * 风险详情列表示例
+   */
+  async DescribeRiskDetailList(
+    req: DescribeRiskDetailListRequest,
+    cb?: (error: string, rep: DescribeRiskDetailListResponse) => void
+  ): Promise<DescribeRiskDetailListResponse> {
+    return this.request("DescribeRiskDetailList", req, cb)
   }
 
   /**
@@ -527,13 +599,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集团账号详情
+   * 检测AK 异步任务
    */
-  async DescribeOrganizationInfo(
-    req: DescribeOrganizationInfoRequest,
-    cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void
-  ): Promise<DescribeOrganizationInfoResponse> {
-    return this.request("DescribeOrganizationInfo", req, cb)
+  async CreateAccessKeyCheckTask(
+    req: CreateAccessKeyCheckTaskRequest,
+    cb?: (error: string, rep: CreateAccessKeyCheckTaskResponse) => void
+  ): Promise<CreateAccessKeyCheckTaskResponse> {
+    return this.request("CreateAccessKeyCheckTask", req, cb)
   }
 
   /**
@@ -667,13 +739,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集团的子账号列表
+   * 获取漏洞展开详情
    */
-  async DescribeSubUserInfo(
-    req: DescribeSubUserInfoRequest,
-    cb?: (error: string, rep: DescribeSubUserInfoResponse) => void
-  ): Promise<DescribeSubUserInfoResponse> {
-    return this.request("DescribeSubUserInfo", req, cb)
+  async DescribeVULRiskDetail(
+    req: DescribeVULRiskDetailRequest,
+    cb?: (error: string, rep: DescribeVULRiskDetailResponse) => void
+  ): Promise<DescribeVULRiskDetailResponse> {
+    return this.request("DescribeVULRiskDetail", req, cb)
+  }
+
+  /**
+   * 访问密钥告警记录列表
+   */
+  async DescribeAccessKeyAlarm(
+    req: DescribeAccessKeyAlarmRequest,
+    cb?: (error: string, rep: DescribeAccessKeyAlarmResponse) => void
+  ): Promise<DescribeAccessKeyAlarmResponse> {
+    return this.request("DescribeAccessKeyAlarm", req, cb)
   }
 
   /**
@@ -684,6 +766,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulViewVulRiskListResponse) => void
   ): Promise<DescribeVulViewVulRiskListResponse> {
     return this.request("DescribeVulViewVulRiskList", req, cb)
+  }
+
+  /**
+   * 获取账号调用记录列表
+   */
+  async DescribeUserCallRecord(
+    req: DescribeUserCallRecordRequest,
+    cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
+  ): Promise<DescribeUserCallRecordResponse> {
+    return this.request("DescribeUserCallRecord", req, cb)
   }
 
   /**
@@ -737,6 +829,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 标记风险或者告警为 已处置/已忽略
+   */
+  async UpdateAccessKeyAlarmStatus(
+    req: UpdateAccessKeyAlarmStatusRequest,
+    cb?: (error: string, rep: UpdateAccessKeyAlarmStatusResponse) => void
+  ): Promise<UpdateAccessKeyAlarmStatusResponse> {
+    return this.request("UpdateAccessKeyAlarmStatus", req, cb)
+  }
+
+  /**
    * 更新自定义策略的开关
    */
   async ModifyUebaRuleSwitch(
@@ -777,13 +879,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 风险详情列表示例
+   * 查询集团账号用户列表
    */
-  async DescribeRiskDetailList(
-    req: DescribeRiskDetailListRequest,
-    cb?: (error: string, rep: DescribeRiskDetailListResponse) => void
-  ): Promise<DescribeRiskDetailListResponse> {
-    return this.request("DescribeRiskDetailList", req, cb)
+  async DescribeOrganizationUserInfo(
+    req: DescribeOrganizationUserInfoRequest,
+    cb?: (error: string, rep: DescribeOrganizationUserInfoResponse) => void
+  ): Promise<DescribeOrganizationUserInfoResponse> {
+    return this.request("DescribeOrganizationUserInfo", req, cb)
   }
 
   /**
@@ -797,13 +899,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 数据库资产列表
+   * 发起AK资产同步任务
    */
-  async DescribeDbAssets(
-    req: DescribeDbAssetsRequest,
-    cb?: (error: string, rep: DescribeDbAssetsResponse) => void
-  ): Promise<DescribeDbAssetsResponse> {
-    return this.request("DescribeDbAssets", req, cb)
+  async CreateAccessKeySyncTask(
+    req: CreateAccessKeySyncTaskRequest,
+    cb?: (error: string, rep: CreateAccessKeySyncTaskResponse) => void
+  ): Promise<CreateAccessKeySyncTaskResponse> {
+    return this.request("CreateAccessKeySyncTask", req, cb)
   }
 
   /**
@@ -814,6 +916,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterPortViewPortRiskListResponse) => void
   ): Promise<DescribeRiskCenterPortViewPortRiskListResponse> {
     return this.request("DescribeRiskCenterPortViewPortRiskList", req, cb)
+  }
+
+  /**
+   * 查询集团的子账号列表
+   */
+  async DescribeSubUserInfo(
+    req: DescribeSubUserInfoRequest,
+    cb?: (error: string, rep: DescribeSubUserInfoResponse) => void
+  ): Promise<DescribeSubUserInfoResponse> {
+    return this.request("DescribeSubUserInfo", req, cb)
   }
 
   /**
@@ -834,6 +946,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVULRiskAdvanceCFGListResponse) => void
   ): Promise<DescribeVULRiskAdvanceCFGListResponse> {
     return this.request("DescribeVULRiskAdvanceCFGList", req, cb)
+  }
+
+  /**
+   * 查询集团账号详情
+   */
+  async DescribeOrganizationInfo(
+    req: DescribeOrganizationInfoRequest,
+    cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void
+  ): Promise<DescribeOrganizationInfoResponse> {
+    return this.request("DescribeOrganizationInfo", req, cb)
   }
 
   /**
@@ -867,6 +989,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 访问密钥告警记录详情
+   */
+  async DescribeAccessKeyAlarmDetail(
+    req: DescribeAccessKeyAlarmDetailRequest,
+    cb?: (error: string, rep: DescribeAccessKeyAlarmDetailResponse) => void
+  ): Promise<DescribeAccessKeyAlarmDetailResponse> {
+    return this.request("DescribeAccessKeyAlarmDetail", req, cb)
+  }
+
+  /**
    * 获取配置视角的配置风险列表
    */
   async DescribeRiskCenterCFGViewCFGRiskList(
@@ -877,13 +1009,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集团账号用户列表
+   * 数据库资产列表
    */
-  async DescribeOrganizationUserInfo(
-    req: DescribeOrganizationUserInfoRequest,
-    cb?: (error: string, rep: DescribeOrganizationUserInfoResponse) => void
-  ): Promise<DescribeOrganizationUserInfoResponse> {
-    return this.request("DescribeOrganizationUserInfo", req, cb)
+  async DescribeDbAssets(
+    req: DescribeDbAssetsRequest,
+    cb?: (error: string, rep: DescribeDbAssetsResponse) => void
+  ): Promise<DescribeDbAssetsResponse> {
+    return this.request("DescribeDbAssets", req, cb)
   }
 
   /**
@@ -894,6 +1026,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterAssetsResponse) => void
   ): Promise<DescribeClusterAssetsResponse> {
     return this.request("DescribeClusterAssets", req, cb)
+  }
+
+  /**
+   * 访问密钥风险记录列表
+   */
+  async DescribeAccessKeyRisk(
+    req: DescribeAccessKeyRiskRequest,
+    cb?: (error: string, rep: DescribeAccessKeyRiskResponse) => void
+  ): Promise<DescribeAccessKeyRiskResponse> {
+    return this.request("DescribeAccessKeyRisk", req, cb)
   }
 
   /**
@@ -917,6 +1059,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 访问密钥风险记录详情
+   */
+  async DescribeAccessKeyRiskDetail(
+    req: DescribeAccessKeyRiskDetailRequest,
+    cb?: (error: string, rep: DescribeAccessKeyRiskDetailResponse) => void
+  ): Promise<DescribeAccessKeyRiskDetailResponse> {
+    return this.request("DescribeAccessKeyRiskDetail", req, cb)
+  }
+
+  /**
    * 获取用户访问密钥资产列表
    */
   async DescribeAccessKeyAsset(
@@ -924,6 +1076,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessKeyAssetResponse) => void
   ): Promise<DescribeAccessKeyAssetResponse> {
     return this.request("DescribeAccessKeyAsset", req, cb)
+  }
+
+  /**
+   * 获取风险调用记录列表
+   */
+  async DescribeRiskCallRecord(
+    req: DescribeRiskCallRecordRequest,
+    cb?: (error: string, rep: DescribeRiskCallRecordResponse) => void
+  ): Promise<DescribeRiskCallRecordResponse> {
+    return this.request("DescribeRiskCallRecord", req, cb)
   }
 
   /**

@@ -110,12 +110,13 @@ import {
   RemoveVpcAcRuleRequest,
   DeleteRemoteAccessDomainRequest,
   SetNatFwEipResponse,
+  DescribeLogStorageStatisticResponse,
   DeleteSecurityGroupRuleResponse,
   LogItems,
   CreateNatRuleItem,
   ModifyStorageSettingResponse,
   AcListsData,
-  ModifySecurityGroupItemRuleStatusRequest,
+  DescribeNatFwInstancesInfoRequest,
   ModifyBlockIgnoreRuleNewResponse,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
@@ -128,11 +129,12 @@ import {
   EdgeIpInfo,
   AssetZone,
   RuleChangeItem,
+  StorageHistogramShow,
   SearchLogErrors,
   IntrusionDefenseRule,
   DescribeTLogIpListRequest,
   CommonFilter,
-  DescribeNatFwInstancesInfoRequest,
+  DescribeLogStorageStatisticRequest,
   AddVpcAcRuleRequest,
   DescribeTableStatusRequest,
   ModifyNatSequenceRulesResponse,
@@ -262,6 +264,7 @@ import {
   RemoveAclRuleResponse,
   DescribeBlockByIpTimesListResponse,
   ModifyVpcFwSequenceRulesRequest,
+  ModifySecurityGroupItemRuleStatusRequest,
   ModifyStorageSettingRequest,
   DescribeIdsWhiteRuleRequest,
   ModifyAssetSyncRequest,
@@ -299,6 +302,7 @@ import {
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
   RemoveVpcAcRuleResponse,
+  IntArray,
   DescribeNatFwInstancesInfoResponse,
   AddNatAcRuleResponse,
   ModifyBlockIgnoreListResponse,
@@ -316,6 +320,7 @@ import {
   ModifyTableStatusResponse,
   DescribeBlockStaticListResponse,
   DescribeGuideScanInfoResponse,
+  StorageHistogram,
   VpcFwInstance,
   CreateAlertCenterRuleResponse,
   DescribeAddressTemplateListResponse,
@@ -1167,6 +1172,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeAcListsResponse) => void
   ): Promise<DescribeAcListsResponse> {
     return this.request("DescribeAcLists", req, cb)
+  }
+
+  /**
+   * 租户日志存储统计
+   */
+  async DescribeLogStorageStatistic(
+    req?: DescribeLogStorageStatisticRequest,
+    cb?: (error: string, rep: DescribeLogStorageStatisticResponse) => void
+  ): Promise<DescribeLogStorageStatisticResponse> {
+    return this.request("DescribeLogStorageStatistic", req, cb)
   }
 
   /**

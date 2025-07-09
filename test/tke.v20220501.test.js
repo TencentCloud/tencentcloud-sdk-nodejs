@@ -58,6 +58,16 @@ it("tke.v20220501.ModifyNodePool", async function () {
     }
 })
 
+it("tke.v20220501.SetMachineLogin", async function () {
+    try {
+       const data = await client.SetMachineLogin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.DeleteHealthCheckPolicy", async function () {
     try {
        const data = await client.DeleteHealthCheckPolicy({})

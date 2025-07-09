@@ -348,6 +348,16 @@ it("lcic.v20220817.DescribeRoom", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeUserDetail", async function () {
+    try {
+       const data = await client.DescribeUserDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DeleteRecord", async function () {
     try {
        const data = await client.DeleteRecord({})
