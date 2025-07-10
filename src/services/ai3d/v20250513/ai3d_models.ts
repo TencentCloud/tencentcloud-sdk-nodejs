@@ -59,7 +59,7 @@ export interface SubmitHunyuanTo3DJobResponse {
  */
 export interface File3D {
   /**
-   * 3D文件的格式。取值范围：OBJ
+   * 文件格式
    */
   Type?: string
   /**

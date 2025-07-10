@@ -2273,50 +2273,9 @@ TI.GN7.20XLARGE320.POST: 80C32
 }
 
 /**
- * 计费项内容
+ * 公有云数据源结构
  */
-export interface Spec {
-  /**
-   * 计费项标签
-   */
-  SpecId?: string
-  /**
-   * 计费项名称
-   */
-  SpecName?: string
-  /**
-   * 计费项显示名称
-   */
-  SpecAlias?: string
-  /**
-   * 是否售罄
-   */
-  Available?: boolean
-  /**
-   * 当前资源售罄时，可用的区域有哪些
-   */
-  AvailableRegion?: Array<string>
-  /**
-   * 当前计费项支持的特性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpecFeatures?: Array<string>
-  /**
-   * 计费项类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpecType?: string
-  /**
-   * GPU类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GpuType?: string
-  /**
-   * 计费项CategoryId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CategoryId?: string
-}
+export type PublicDataSourceFS = null
 
 /**
  * 配置GooseFS参数
@@ -4685,6 +4644,10 @@ export interface ModelInfo {
    * 模型的类别 多模态MultiModal, 文本大模型 LLM
    */
   ModelCategory?: string
+  /**
+   * 数据源的配置
+   */
+  PublicDataSource?: PublicDataSourceFS
 }
 
 /**
@@ -5646,6 +5609,52 @@ export interface CreateModelServiceAuthTokenRequest {
    * Description 描述
    */
   Description?: string
+}
+
+/**
+ * 计费项内容
+ */
+export interface Spec {
+  /**
+   * 计费项标签
+   */
+  SpecId?: string
+  /**
+   * 计费项名称
+   */
+  SpecName?: string
+  /**
+   * 计费项显示名称
+   */
+  SpecAlias?: string
+  /**
+   * 是否售罄
+   */
+  Available?: boolean
+  /**
+   * 当前资源售罄时，可用的区域有哪些
+   */
+  AvailableRegion?: Array<string>
+  /**
+   * 当前计费项支持的特性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecFeatures?: Array<string>
+  /**
+   * 计费项类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecType?: string
+  /**
+   * GPU类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuType?: string
+  /**
+   * 计费项CategoryId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryId?: string
 }
 
 /**

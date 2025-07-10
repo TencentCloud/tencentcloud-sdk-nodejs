@@ -304,7 +304,9 @@ export interface WeChatMiniProgramPublishRequest {
    */
   SubAppId?: number
   /**
-   * 发布视频所对应的转码模板 ID，为0代表原始视频。
+   * 发布视频所对应的转码模板 ID，为 0 代表原始视频。支持的视频格式：
+<li>当 SourceDefinition 为 0 时，视频格式支持 MP4、3GP 格式；</li>
+<li>当 SourceDefinition 大于 0 时，视频格式支持 MP4、3GP 及 M3U8 格式。</li>不填默认值为 0。
    */
   SourceDefinition?: number
 }
@@ -4722,7 +4724,7 @@ export interface CdnLogInfo {
   Date?: string
   /**
    * 日志名称，格式为：日期小时-域名
-如 2018120101-test.vod2.mqcloud.com。
+如 example.com。
    */
   Name?: string
   /**

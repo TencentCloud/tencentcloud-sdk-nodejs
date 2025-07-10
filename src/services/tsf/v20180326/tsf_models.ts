@@ -3094,6 +3094,7 @@ export interface ImageRepository {
   ApplicationId?: string
   /**
    * ApplicationName值（废弃）
+   * @deprecated
    */
   ApplicationName?: ScalableRule
   /**
@@ -3780,10 +3781,12 @@ export interface DeployContainerGroupRequest {
   RepoType?: string
   /**
    * 数据卷信息-废弃，请用VolumeInfoList参数
+   * @deprecated
    */
   VolumeInfos?: VolumeInfo
   /**
    * 数据卷挂载点信息-废弃，请用VolumeMountInfoList参数
+   * @deprecated
    */
   VolumeMountInfos?: VolumeMountInfo
   /**
@@ -9941,6 +9944,7 @@ export interface ThreadPicture {
   ThreadActive?: Array<CurvePoint>
   /**
    * 守护线程数 拼写错误，废弃
+   * @deprecated
    */
   DeamonThreadCount?: Array<CurvePoint>
   /**

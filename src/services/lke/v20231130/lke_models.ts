@@ -1576,6 +1576,10 @@ export interface ListDocItem {
    * false:未停用，ture:已停用
    */
   IsDisabled?: boolean
+  /**
+   * 员工名称
+   */
+  StaffName?: string
 }
 
 /**
@@ -2301,6 +2305,32 @@ export interface CreateQAResponse {
 }
 
 /**
+ * 背景图相关配置
+ */
+export interface BackgroundImageConfig {
+  /**
+   * 横图(pc)
+   */
+  LandscapeImageUrl?: string
+  /**
+   * 原始图
+   */
+  OriginalImageUrl?: string
+  /**
+   * 长图(手机)
+   */
+  PortraitImageUrl?: string
+  /**
+   * 主题色
+   */
+  ThemeColor?: string
+  /**
+   * 亮度值
+   */
+  Brightness?: number
+}
+
+/**
  * DescribeReleaseInfo返回参数结构体
  */
 export interface DescribeReleaseInfoResponse {
@@ -2926,6 +2956,10 @@ export interface ListQaItem {
    * 问答是否停用，false:未停用，ture:已停用
    */
   IsDisabled?: boolean
+  /**
+   * 员工名称
+   */
+  StaffName?: string
 }
 
 /**
@@ -3400,6 +3434,40 @@ export interface CheckAttributeLabelReferRequest {
 }
 
 /**
+ * Agent 知识库检索插件支持多知识库搜索
+ */
+export interface AgentKnowledge {
+  /**
+   * 知识库id
+   */
+  KnowledgeBizId?: string
+  /**
+   * 0-应用内知识库
+1-共享知识库
+   */
+  KnowledgeType?: number
+  /**
+   * 0-全部知识
+1-按文档和问答
+2-按标签
+   */
+  Filter?: number
+  /**
+   * 文档id
+   */
+  DocBizIds?: Array<string>
+  /**
+   * true:包含所有问答
+false:不包含问答
+   */
+  AllQa?: boolean
+  /**
+   * 文档标签过滤器
+   */
+  Tag?: AgentKnowledgeFilterTag
+}
+
+/**
  * UpdateVar返回参数结构体
  */
 export interface UpdateVarResponse {
@@ -3732,6 +3800,14 @@ export interface AgentKnowledgeFilter {
    * 标签过滤器
    */
   Tag?: AgentKnowledgeFilterTag
+  /**
+   * 知识库列表
+   */
+  KnowledgeList?: Array<AgentKnowledge>
+  /**
+   * 是否检索全部知识
+   */
+  AllKnowledge?: boolean
 }
 
 /**
@@ -4205,7 +4281,7 @@ export interface ModifyAppRequest {
    */
   AppBizId: string
   /**
-   * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
+   * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classify-知识标签提取
    */
   AppType: string
   /**
@@ -4433,6 +4509,10 @@ export interface DescribeAppResponse {
    * 应用是否在复制中
    */
   IsCopying?: boolean
+  /**
+   * 智能体类型 dialogue 对话式智能体，wechat 公众号智能体
+   */
+  AgentType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5558,6 +5638,10 @@ export interface CreateReleaseRequest {
    * 发布描述
    */
   Desc?: string
+  /**
+   * 渠道业务ID
+   */
+  ChannelBizIds?: Array<string>
 }
 
 /**
@@ -6387,6 +6471,16 @@ export interface KnowledgeQaConfig {
    * 共享知识库关联配置
    */
   ShareKnowledgeBases?: Array<ShareKnowledgeBase>
+  /**
+   * 背景图相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackgroundImage?: BackgroundImageConfig
+  /**
+   * 开场问题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpeningQuestions?: Array<string>
 }
 
 /**
@@ -7693,6 +7787,10 @@ export interface AgentModelInfo {
    * 指令长度字符限制
    */
   InstructionsWordsLimit?: number
+  /**
+   * 单次会话最大推理轮数
+   */
+  MaxReasoningRound?: number
 }
 
 /**
@@ -8158,6 +8256,10 @@ export interface GetVarListRequest {
    * 按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO)
    */
   VarType?: string
+  /**
+   * 是否需要内部变量(默认false)
+   */
+  NeedInternalVar?: boolean
 }
 
 /**
@@ -8370,6 +8472,10 @@ export interface DocSegment {
    * 文档的自定义链接
    */
   WebUrl?: string
+  /**
+   * 页码信息
+   */
+  PageInfos?: Array<number | bigint>
 }
 
 /**

@@ -1408,7 +1408,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开通免费云存服务
+   * 开通云存卡服务
    */
   async CreateFreeCloudStorage(
     req: CreateFreeCloudStorageRequest,

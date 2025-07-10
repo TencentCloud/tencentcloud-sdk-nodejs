@@ -6249,7 +6249,7 @@ https://cloud.tencent.com/document/product/267/56208
    */
   SpecifyTaskId?: string
   /**
-   * 任务描述，限制 512 字节。
+   * 任务描述，限制 512 字节。不可以使用特殊字符，如Unicode的特殊字符集。
    */
   Comment?: string
   /**

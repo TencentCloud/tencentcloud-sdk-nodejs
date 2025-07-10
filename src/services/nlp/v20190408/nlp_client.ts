@@ -19,37 +19,22 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   Category,
-  TextEmbellishRequest,
-  EvaluateWordSimilarityResponse,
-  RetrieveSimilarWordsRequest,
-  ClassifyContentResponse,
-  ParseWordsResponse,
-  BasicParticiple,
-  ComposePoetryResponse,
-  ClassifyContentRequest,
-  RetrieveSimilarWordsResponse,
-  EvaluateSentenceSimilarityResponse,
-  Embellish,
-  EvaluateWordSimilarityRequest,
-  CompoundParticiple,
-  TextWritingResponse,
-  AnalyzeSentimentResponse,
-  ParseWordsRequest,
-  Writing,
-  SentenceCorrectionResponse,
-  SentencePair,
-  KeywordSentence,
   ComposeCoupletRequest,
   EvaluateSentenceSimilarityRequest,
-  TextWritingRequest,
-  GenerateKeywordSentenceResponse,
+  SentencePair,
+  SentenceCorrectionResponse,
+  ClassifyContentRequest,
   Entity,
-  ComposePoetryRequest,
+  EvaluateSentenceSimilarityResponse,
+  ClassifyContentResponse,
   SentenceCorrectionRequest,
-  TextEmbellishResponse,
   AnalyzeSentimentRequest,
+  AnalyzeSentimentResponse,
+  ParseWordsResponse,
+  BasicParticiple,
   CorrectionItem,
-  GenerateKeywordSentenceRequest,
+  CompoundParticiple,
+  ParseWordsRequest,
   ComposeCoupletResponse,
 } from "./nlp_models"
 
@@ -60,16 +45,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("nlp.tencentcloudapi.com", "2019-04-08", clientConfig)
-  }
-
-  /**
-   * 运用先进的自然语言处理技术，对原始文本进行优化润色，提升文本的通顺性、表达力和语言质量。
-   */
-  async TextEmbellish(
-    req: TextEmbellishRequest,
-    cb?: (error: string, rep: TextEmbellishResponse) => void
-  ): Promise<TextEmbellishResponse> {
-    return this.request("TextEmbellish", req, cb)
   }
 
   /**
@@ -93,26 +68,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 诗词生成接口利用现代的自然语言处理和深度学习技术，模仿了古代著名诗人的风格，为用户产生独特的诗词。用户只需输入的命题关键词，接口就能自动生成一首七言律诗或五言律诗。
-   */
-  async ComposePoetry(
-    req: ComposePoetryRequest,
-    cb?: (error: string, rep: ComposePoetryResponse) => void
-  ): Promise<ComposePoetryResponse> {
-    return this.request("ComposePoetry", req, cb)
-  }
-
-  /**
-   * 基于大数据和深度学习技术，可以快速地找到与给定词语高度相似的其他词语，有助于提高搜索和推荐的准确性。（目前仅支持中文）
-   */
-  async RetrieveSimilarWords(
-    req: RetrieveSimilarWordsRequest,
-    cb?: (error: string, rep: RetrieveSimilarWordsResponse) => void
-  ): Promise<RetrieveSimilarWordsResponse> {
-    return this.request("RetrieveSimilarWords", req, cb)
-  }
-
-  /**
    * 通过计算句子间的语义相似性，帮助您快速找到文本中重复或相似的句子，用于文本聚类、相似问题检索等应用场景。
    */
   async EvaluateSentenceSimilarity(
@@ -120,36 +75,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EvaluateSentenceSimilarityResponse) => void
   ): Promise<EvaluateSentenceSimilarityResponse> {
     return this.request("EvaluateSentenceSimilarity", req, cb)
-  }
-
-  /**
-   * 根据提供的关键词，生成简洁明了的关键句子，便于用户快速获取核心观点。
-   */
-  async GenerateKeywordSentence(
-    req: GenerateKeywordSentenceRequest,
-    cb?: (error: string, rep: GenerateKeywordSentenceResponse) => void
-  ): Promise<GenerateKeywordSentenceResponse> {
-    return this.request("GenerateKeywordSentence", req, cb)
-  }
-
-  /**
-   * 通过自动补全文本片段，帮助用户快速生成高质量、连贯的完整文本，提高创作效率。
-   */
-  async TextWriting(
-    req: TextWritingRequest,
-    cb?: (error: string, rep: TextWritingResponse) => void
-  ): Promise<TextWritingResponse> {
-    return this.request("TextWriting", req, cb)
-  }
-
-  /**
-   * 评估两个词语在语义空间的相似程度，为您的场景应用提供有力支持，如关键词过滤、热门话题挖掘等。（目前仅支持中文）
-   */
-  async EvaluateWordSimilarity(
-    req: EvaluateWordSimilarityRequest,
-    cb?: (error: string, rep: EvaluateWordSimilarityResponse) => void
-  ): Promise<EvaluateWordSimilarityResponse> {
-    return this.request("EvaluateWordSimilarity", req, cb)
   }
 
   /**

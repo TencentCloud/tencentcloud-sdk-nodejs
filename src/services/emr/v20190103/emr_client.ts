@@ -146,6 +146,7 @@ import {
   DescribeHiveQueriesResponse,
   DescribeInstanceRenewNodesResponse,
   CreateSLInstanceResponse,
+  SLInstance,
   DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
   DiskGroup,

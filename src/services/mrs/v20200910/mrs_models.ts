@@ -7159,6 +7159,10 @@ export interface IndicatorItem {
    * 标本
    */
   Sample?: string
+  /**
+   * 检测方法
+   */
+  Method?: string
 }
 
 /**

@@ -627,11 +627,11 @@ export interface PodDeductionRate {
    */
   Cpu?: number
   /**
-   * Pod 的内存
+   * Pod 的内存，单位：GiB
    */
   Memory?: number
   /**
-   *  Pod 的类型
+   *  Pod 的类型， intel，amd，windows-common，windows-amd，sa4，sa5，s7，s8，t4，v100，l20，l40，a10\*gnv4，a10\*gnv4v，a10\*pnv4
    */
   Type?: string
   /**
@@ -3704,7 +3704,7 @@ export interface RIUtilizationDetail {
    */
   Namespace?: string
   /**
-   * 工作负载类型
+   * 工作负载类型，如 deployment、statefulset和pod等。
    */
   Kind?: string
   /**
@@ -4711,11 +4711,11 @@ export interface ReservedInstanceUtilizationRate {
    */
   CPU?: number
   /**
-   * 内存
+   * 内存，单位：GiB
    */
   Memory?: number
   /**
-   *  预留券类型
+   *  预留券类型, common：CPU通用，amd：AMD专用，windows-common: Windows容器 CPU通用，windows-amd：Windows容器 AMD专用，sa4，sa5，s7，s8，t4，v100，l20，l40，a10\*gnv4，a10\*gnv4v，a10\*pnv4
    */
   Type?: string
   /**
@@ -4731,7 +4731,7 @@ export interface ReservedInstanceUtilizationRate {
    */
   ClusterId?: string
   /**
-   * 节点名称
+   * 节点 ID
    */
   NodeName?: string
   /**
@@ -5283,7 +5283,7 @@ export interface ReservedInstanceScope {
    */
   ClusterId?: string
   /**
-   *  节点名称
+   * 节点 ID
    */
   NodeName?: string
 }
@@ -6669,7 +6669,7 @@ export interface DescribeReservedInstanceUtilizationRateRequest {
    */
   ClusterId?: string
   /**
-   *  节点名称
+   * 节点 ID
    */
   NodeName?: string
 }
@@ -7182,7 +7182,7 @@ export interface CreateReservedInstancesRequest {
    */
   InstanceChargePrepaid: InstanceChargePrepaid
   /**
-   * 预留券名称。
+   * 预留券名称，名称不得超过60个字符。
    */
   InstanceName?: string
   /**
@@ -7387,7 +7387,7 @@ export interface PodNodeInfo {
    */
   ClusterId?: string
   /**
-   *  节点名称
+   * 节点 ID
    */
   NodeName?: string
   /**
@@ -7409,7 +7409,7 @@ export interface PodNodeInfo {
  */
 export interface DescribePodChargeInfoRequest {
   /**
-   * 集群ID
+   * 集群 ID。TKE 集群可通过 [DescribeClusters](https://cloud.tencent.com/document/api/457/31862) 接口返回值中的ClusterId获取。
    */
   ClusterId: string
   /**
@@ -7421,7 +7421,7 @@ export interface DescribePodChargeInfoRequest {
    */
   Name?: string
   /**
-   * Pod的Uid
+   * Pod的Uid，可以通过Uids 来批量查询，也可以通过 Namespace 和 Name 来查询某个 Pod 的计费信息。Uids 不传时，Namespace 和 Name 必须同时传。
    */
   Uids?: Array<string>
 }
@@ -7766,7 +7766,7 @@ export interface DeleteEKSClusterResponse {
  */
 export interface RenewReservedInstancesRequest {
   /**
-   * 预留券实例ID，每次请求实例的上限为100。
+   * 预留券实例ID。可通过 [DescribeReservedInstances](https://cloud.tencent.com/document/product/457/99162) 接口返回值中的ReservedInstanceId获取，每次请求实例的上限为100。
    */
   ReservedInstanceIds: Array<string>
   /**
@@ -11491,7 +11491,7 @@ export interface UpdateClusterKubeconfigRequest {
  */
 export interface DeleteReservedInstancesRequest {
   /**
-   * 预留券实例ID。
+   * 预留券实例ID。可通过 [DescribeReservedInstances](https://cloud.tencent.com/document/product/457/99162) 接口返回值中的ReservedInstanceId获取。
    */
   ReservedInstanceIds: Array<string>
 }
@@ -11714,7 +11714,7 @@ export interface ReservedInstance {
    */
   NodeName?: string
   /**
-   *  上个周期预留券的抵扣状态，Deduct、NotDeduct
+   *  上个周期预留券的抵扣状态，Deduct：已抵扣、NotDeduct：未抵扣
    */
   DeductStatus?: string
 }
@@ -12225,7 +12225,7 @@ export interface DescribePodDeductionRateRequest {
    */
   ClusterId?: string
   /**
-   *  节点名称
+   * 节点 ID
    */
   NodeName?: string
 }
@@ -12401,7 +12401,7 @@ export interface ReservedInstanceSpec {
    */
   Cpu: number
   /**
-   * 内存
+   * 内存，单位：GiB
    */
   Memory: number
   /**
@@ -12617,7 +12617,7 @@ export interface DescribeReservedInstancesRequest {
   Limit?: number
   /**
    * status
-按照**【状态**】进行过滤。状态：Creating、Active、Expired、Refunded。
+按照**【状态**】进行过滤。状态：Creating：创建中、Active：生效中、Expired：已过期、Refunded：已退还。
 类型：String
 必选：否
 
@@ -12694,11 +12694,11 @@ export interface DescribePodsBySpecRequest {
    */
   Cpu: number
   /**
-   * 内存
+   * 内存，单位：GiB
    */
   Memory: number
   /**
-   * 卡数，有0.25、0.5、1、2、4等
+   * 卡数，有0.25、0.5、1、2、4和8
    */
   GpuNum?: string
   /**
@@ -12710,7 +12710,7 @@ export interface DescribePodsBySpecRequest {
    */
   ClusterId?: string
   /**
-   * 节点名称
+   * 节点 ID
    */
   NodeName?: string
   /**
@@ -13417,7 +13417,7 @@ export interface DeleteLogConfigsResponse {
  */
 export interface ModifyReservedInstanceScopeRequest {
   /**
-   * 预留券唯一 ID
+   * 预留券实例ID。可通过 [DescribeReservedInstances](https://cloud.tencent.com/document/product/457/99162) 接口返回值中的ReservedInstanceId获取。
    */
   ReservedInstanceIds: Array<string>
   /**
@@ -13583,7 +13583,7 @@ export interface DescribeBackupStorageLocationsRequest {
  */
 export interface InstanceChargePrepaid {
   /**
-   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
    */
   Period: number
   /**

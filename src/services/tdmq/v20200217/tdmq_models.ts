@@ -2211,6 +2211,10 @@ export interface DescribeNamespaceBundlesOptRequest {
    * bundle 所属的 broker IP 地址，支持模糊查询
    */
   OwnerBroker?: string
+  /**
+   * 租户(如果没有自定义租户名称，和 tenantId 相同；如果有配置自定义租户名称，则为自定义租户名 user_tenant)
+   */
+  Tenant?: string
 }
 
 /**
