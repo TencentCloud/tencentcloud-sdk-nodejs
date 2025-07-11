@@ -396,18 +396,100 @@ export interface Source {
 }
 
 /**
- * ModifyAddressPool返回参数结构体
+ * 返回实例
  */
-export interface ModifyAddressPoolResponse {
+export interface InstanceDetail {
   /**
-   * 是否修改成功
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 业务域名
+   */
+  Domain?: string
+  /**
+   * Cname域名接入方式
+CUSTOM: 自定义接入域名
+SYSTEM: 系统接入域名
+   */
+  AccessType?: string
+  /**
+   * 接入子域名
+   */
+  AccessSubDomain?: string
+  /**
+   * 接入域名
+   */
+  AccessDomain?: string
+  /**
+   * 解析生效时间
+   */
+  GlobalTtl?: number
+  /**
+   * 套餐类型
+FREE: 免费版
+STANDARD：标准版
+ULTIMATE：旗舰版
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Msg?: string
+  PackageType?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例运行状态
+NORMAL: 健康
+FAULTY: 有风险
+DOWN: 宕机
+UNKNOWN: 未知
    */
-  RequestId?: string
+  WorkingStatus?: string
+  /**
+   * 实例状态
+ENABLED: 正常
+DISABLED: 禁用
+   */
+  Status?: string
+  /**
+   * cname是否接入：true已接入；false未接入
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCnameConfigured?: boolean
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 策略数量
+   */
+  StrategyNum?: number
+  /**
+   * 绑定地址池个数
+   */
+  AddressPoolNum?: number
+  /**
+   * 绑定监控器数量
+   */
+  MonitorNum?: number
+  /**
+   * 实例绑定套餐资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 订阅事件列表
+   */
+  NotifyEventSet?: Array<string>
+  /**
+   * 实例创建时间
+   */
+  CreatedOn?: string
+  /**
+   * 实例更新时间
+   */
+  UpdatedOn?: string
 }
 
 /**
@@ -424,6 +506,62 @@ export interface AddressLocation {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
+}
+
+/**
+ * 探测任务套餐
+ */
+export interface DetectTaskPackage {
+  /**
+   * 资源id
+   */
+  ResourceId?: string
+  /**
+   * 资源类型
+TASK 探测任务
+   */
+  ResourceType?: string
+  /**
+   * 额度
+   */
+  Quota?: number
+  /**
+   * 套餐过期时间
+   */
+  CurrentDeadline?: string
+  /**
+   * 套餐创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否过期0否1是
+   */
+  IsExpire?: number
+  /**
+   * 状态
+ENABLED: 正常
+ISOLATED: 隔离
+DESTROYED：销毁
+REFUNDED：已退款
+   */
+  Status?: string
+  /**
+   * 是否自动续费0不1是
+   */
+  AutoRenewFlag?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 计费项
+   */
+  CostItemList?: Array<CostItem>
+  /**
+   * 探测任务类型：100系统设定；200计费；300管理系统；110D监控迁移的免费任务；120容灾切换任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: number
 }
 
 /**
@@ -446,6 +584,24 @@ export interface CreateAddressPoolRequest {
    * 监控器id
    */
   MonitorId?: number
+}
+
+/**
+ * DescribeDetectTaskPackageList返回参数结构体
+ */
+export interface DescribeDetectTaskPackageListResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 探测任务套餐列表
+   */
+  TaskPackageSet?: Array<DetectTaskPackage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -644,6 +800,131 @@ export interface ModifyMonitorRequest {
 }
 
 /**
+ * DescribeInstancePackageList返回参数结构体
+ */
+export interface DescribeInstancePackageListResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 实例套餐列表
+   */
+  InstanceSet?: Array<InstancePackage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 返回实例
+ */
+export interface Instance {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 资源 id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 业务域名
+   */
+  Domain?: string
+  /**
+   * Cname域名接入方式
+CUSTOM: 自定义接入域名
+SYSTEM: 系统接入域名
+   */
+  AccessType?: string
+  /**
+   * 接入域名
+   */
+  AccessDomain?: string
+  /**
+   * 接入子域名
+   */
+  AccessSubDomain?: string
+  /**
+   * 全局记录过期时间
+   */
+  GlobalTtl?: number
+  /**
+   * 套餐类型
+FREE: 免费版
+STANDARD：标准版
+ULTIMATE：旗舰版
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 实例运行状态
+NORMAL: 健康
+FAULTY: 有风险
+DOWN: 宕机
+UNKNOWN: 未知
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkingStatus?: string
+  /**
+   * 实例状态
+ENABLED: 正常
+DISABLED: 禁用
+   */
+  Status?: string
+  /**
+   * 是否cname接入：true已接入；false未接入
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCnameConfigured?: boolean
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 策略数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyNum?: number
+  /**
+   * 绑定地址池个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressPoolNum?: number
+  /**
+   * 绑定监控器数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorNum?: number
+  /**
+   * 地址池id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PoolId?: number
+  /**
+   * 地址池名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PoolName?: string
+  /**
+   * 实例创建时间
+   */
+  CreatedOn?: string
+  /**
+   * 实例更新时间
+   */
+  UpdatedOn?: string
+}
+
+/**
  * ModifyStrategy请求参数结构体
  */
 export interface ModifyStrategyRequest {
@@ -832,6 +1113,20 @@ export interface CreateMonitorRequest {
    * 持续周期数，可选值1-5
    */
   ContinuePeriod?: number
+}
+
+/**
+ * DescribeDetectTaskPackageList请求参数结构体
+ */
+export interface DescribeDetectTaskPackageListRequest {
+  /**
+   * 每页条数
+   */
+  Limit?: number
+  /**
+   * 探测任务过滤条件：ResourceId 探测任务的资源id，PeriodStart 最小过期时间,PeriodEnd 最大过期时间
+   */
+  Filters?: Array<ResourceFilter>
 }
 
 /**
@@ -1067,13 +1362,13 @@ export interface DetectorGroup {
 }
 
 /**
- * ModifyInstanceConfig请求参数结构体
+ * DescribeDetectPackageDetail请求参数结构体
  */
-export interface ModifyInstanceConfigRequest {
+export interface DescribeDetectPackageDetailRequest {
   /**
-   * 实例配置详情
+   * 资源id
    */
-  InstanceConfig?: InstanceConfig
+  ResourceId: string
 }
 
 /**
@@ -1093,6 +1388,21 @@ export interface MainPoolWeight {
 }
 
 /**
+ * ModifyAddressPool返回参数结构体
+ */
+export interface ModifyAddressPoolResponse {
+  /**
+   * 是否修改成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAddressPool返回参数结构体
  */
 export interface CreateAddressPoolResponse {
@@ -1107,19 +1417,21 @@ export interface CreateAddressPoolResponse {
 }
 
 /**
- * 实例相关信息
+ * DescribeInstancePackageList请求参数结构体
  */
-export interface InstanceInfo {
+export interface DescribeInstancePackageListRequest {
   /**
-   * 实例id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页条数
    */
-  InstanceId?: string
+  Limit?: number
   /**
-   * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * InstanceId实例Id，InstanceName实例名称，ResourceId套餐Id，PackageType套餐类型
    */
-  InstanceName?: string
+  Filters?: Array<ResourceFilter>
+  /**
+   * 是否使用：0未使用1已使用
+   */
+  IsUsed?: number
 }
 
 /**
@@ -1170,39 +1482,17 @@ export interface ModifyMonitorResponse {
 }
 
 /**
- * 实例配置详情
+ * 计费项
  */
-export interface InstanceConfig {
+export interface CostItem {
   /**
-   * 实例名称
+   * 计费项名称
    */
-  InstanceName: string
+  CostName?: string
   /**
-   * 业务域名
+   * 计费项值
    */
-  Domain: string
-  /**
-   * CUSTOM: 自定义接入域名
-SYSTEM: 系统接入域名
-   */
-  AccessType: string
-  /**
-   * 备注
-   */
-  Remark: string
-  /**
-   * 全局记录过期时间
-   */
-  GlobalTtl: number
-  /**
-   * 接入主域名，自定义接入域名时必填
-
-   */
-  AccessDomain?: string
-  /**
-   * 接入子域名，自定义接入域名时必填
-   */
-  AccessSubDomain?: string
+  CostValue?: number
 }
 
 /**
@@ -1248,110 +1538,57 @@ export interface DescribeMonitorDetailRequest {
 }
 
 /**
- * 返回实例
+ * DescribeDetectPackageDetail返回参数结构体
  */
-export interface Instance {
+export interface DescribeDetectPackageDetailResponse {
   /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 实例名
-   */
-  InstanceName?: string
-  /**
-   * 资源 id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源id
    */
   ResourceId?: string
   /**
-   * 业务域名
+   * 资源类型 TASK 探测任务
    */
-  Domain?: string
+  ResourceType?: string
   /**
-   * Cname域名接入方式
-CUSTOM: 自定义接入域名
-SYSTEM: 系统接入域名
+   * 额度
    */
-  AccessType?: string
+  Quota?: number
   /**
-   * 接入域名
+   * 过期时间
    */
-  AccessDomain?: string
+  CurrentDeadline?: string
   /**
-   * 接入子域名
+   * 创建时间
    */
-  AccessSubDomain?: string
+  CreateTime?: string
   /**
-   * 全局记录过期时间
+   * 是否过期
    */
-  GlobalTtl?: number
+  IsExpire?: number
   /**
-   * 套餐类型
-FREE: 免费版
-STANDARD：标准版
-ULTIMATE：旗舰版
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageType?: string
-  /**
-   * 实例运行状态
-NORMAL: 健康
-FAULTY: 有风险
-DOWN: 宕机
-UNKNOWN: 未知
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkingStatus?: string
-  /**
-   * 实例状态
-ENABLED: 正常
-DISABLED: 禁用
+   * 状态 ENABLED: 正常 ISOLATED: 隔离 DESTROYED：销毁 REFUNDED：已退款
    */
   Status?: string
   /**
-   * 是否cname接入：true已接入；false未接入
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否自动续费0不1是
    */
-  IsCnameConfigured?: boolean
+  AutoRenewFlag?: number
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 策略数量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 计费项
    */
-  StrategyNum?: number
+  CostItemList?: Array<CostItem>
   /**
-   * 绑定地址池个数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 使用数量
    */
-  AddressPoolNum?: number
+  UsedNum?: number
   /**
-   * 绑定监控器数量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MonitorNum?: number
-  /**
-   * 地址池id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PoolId?: number
-  /**
-   * 地址池名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PoolName?: string
-  /**
-   * 实例创建时间
-   */
-  CreatedOn?: string
-  /**
-   * 实例更新时间
-   */
-  UpdatedOn?: string
+  RequestId?: string
 }
 
 /**
@@ -1507,6 +1744,94 @@ export interface CreateMonitorResponse {
 }
 
 /**
+ * 实例相关信息
+ */
+export interface InstanceInfo {
+  /**
+   * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+}
+
+/**
+ * 实例套餐
+ */
+export interface InstancePackage {
+  /**
+   * 实例套餐资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 套餐类型
+FREE: 免费版
+STANDARD：标准版
+ULTIMATE：旗舰版
+   */
+  PackageType?: string
+  /**
+   * 套餐过期时间
+   */
+  CurrentDeadline?: string
+  /**
+   * 套餐创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否过期0否1是
+   */
+  IsExpire?: number
+  /**
+   * 实例状态
+ENABLED: 正常
+DISABLED: 禁用
+   */
+  Status?: string
+  /**
+   * 是否自动续费0不1是
+   */
+  AutoRenewFlag?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 计费项
+   */
+  CostItemList?: Array<CostItem>
+  /**
+   * 最小检查间隔时间s
+   */
+  MinCheckInterval?: number
+  /**
+   * 最小TTL s
+   */
+  MinGlobalTtl?: number
+  /**
+   * 流量策略类型：ALL返回全部，WEIGHT权重
+   */
+  TrafficStrategy?: Array<string>
+  /**
+   * 策略类型：LOCATION按地理位置调度，DELAY按延迟调度
+   */
+  ScheduleStrategy?: Array<string>
+}
+
+/**
  * DeleteStrategy返回参数结构体
  */
 export interface DeleteStrategyResponse {
@@ -1548,100 +1873,39 @@ export interface ModifyAddressPoolRequest {
 }
 
 /**
- * 返回实例
+ * 实例配置详情
  */
-export interface InstanceDetail {
+export interface InstanceConfig {
   /**
-   * 实例id
+   * 实例名称
    */
-  InstanceId?: string
-  /**
-   * 实例名
-   */
-  InstanceName?: string
+  InstanceName: string
   /**
    * 业务域名
    */
-  Domain?: string
+  Domain: string
   /**
-   * Cname域名接入方式
-CUSTOM: 自定义接入域名
+   * CUSTOM: 自定义接入域名
 SYSTEM: 系统接入域名
    */
-  AccessType?: string
+  AccessType: string
   /**
-   * 接入子域名
+   * 备注
    */
-  AccessSubDomain?: string
+  Remark: string
   /**
-   * 接入域名
+   * 全局记录过期时间
+   */
+  GlobalTtl: number
+  /**
+   * 接入主域名，自定义接入域名时必填
+
    */
   AccessDomain?: string
   /**
-   * 解析生效时间
+   * 接入子域名，自定义接入域名时必填
    */
-  GlobalTtl?: number
-  /**
-   * 套餐类型
-FREE: 免费版
-STANDARD：标准版
-ULTIMATE：旗舰版
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageType?: string
-  /**
-   * 实例运行状态
-NORMAL: 健康
-FAULTY: 有风险
-DOWN: 宕机
-UNKNOWN: 未知
-   */
-  WorkingStatus?: string
-  /**
-   * 实例状态
-ENABLED: 正常
-DISABLED: 禁用
-   */
-  Status?: string
-  /**
-   * cname是否接入：true已接入；false未接入
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsCnameConfigured?: boolean
-  /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 策略数量
-   */
-  StrategyNum?: number
-  /**
-   * 绑定地址池个数
-   */
-  AddressPoolNum?: number
-  /**
-   * 绑定监控器数量
-   */
-  MonitorNum?: number
-  /**
-   * 实例绑定套餐资源id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceId?: string
-  /**
-   * 订阅事件列表
-   */
-  NotifyEventSet?: Array<string>
-  /**
-   * 实例创建时间
-   */
-  CreatedOn?: string
-  /**
-   * 实例更新时间
-   */
-  UpdatedOn?: string
+  AccessSubDomain?: string
 }
 
 /**
@@ -1718,6 +1982,16 @@ export interface DescribeQuotasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstanceConfig请求参数结构体
+ */
+export interface ModifyInstanceConfigRequest {
+  /**
+   * 实例配置详情
+   */
+  InstanceConfig?: InstanceConfig
 }
 
 /**

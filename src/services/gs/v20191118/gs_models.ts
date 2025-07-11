@@ -2268,6 +2268,13 @@ export interface DescribeAndroidInstanceImagesRequest {
    * 限制量，默认为20，最大值为100
    */
   Limit?: number
+  /**
+   * 字段过滤器。Filter 的 Name 有以下值：
+ImageName：镜像名称
+ImageState：镜像状态
+AndroidVersion：安卓版本
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2679,9 +2686,17 @@ export interface AndroidInstanceImage {
    */
   AndroidInstanceImageZone?: string
   /**
+   * 镜像描述
+   */
+  AndroidInstanceImageDescription?: string
+  /**
    * 安卓10
    */
   AndroidVersion?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -3007,4 +3022,8 @@ export interface CreateAndroidInstanceImageRequest {
    * 安卓实例 ID
    */
   AndroidInstanceId: string
+  /**
+   * 安卓实例镜像描述
+   */
+  AndroidInstanceImageDescription?: string
 }

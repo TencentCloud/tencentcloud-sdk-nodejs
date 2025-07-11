@@ -34,20 +34,25 @@ import {
   DescribeDnsLineListRequest,
   DescribeInstanceListRequest,
   Source,
-  ModifyAddressPoolResponse,
+  InstanceDetail,
   AddressLocation,
+  DetectTaskPackage,
   CreateAddressPoolRequest,
+  DescribeDetectTaskPackageListResponse,
   DescribeAddressPoolDetailResponse,
   DescribeQuotasRequest,
   MainAddressPool,
   Quota,
   ModifyMonitorRequest,
+  DescribeInstancePackageListResponse,
+  Instance,
   ModifyStrategyRequest,
   DescribeDetectorsRequest,
   DeleteStrategyRequest,
   CreateInstanceRequest,
   DescribeAddressPoolDetailRequest,
   CreateMonitorRequest,
+  DescribeDetectTaskPackageListRequest,
   DescribeStrategyListResponse,
   CreateStrategyRequest,
   DescribeDnsLineListResponse,
@@ -58,26 +63,30 @@ import {
   Address,
   CreateInstanceResponse,
   DetectorGroup,
-  ModifyInstanceConfigRequest,
+  DescribeDetectPackageDetailRequest,
   MainPoolWeight,
+  ModifyAddressPoolResponse,
   CreateAddressPoolResponse,
-  InstanceInfo,
+  DescribeInstancePackageListRequest,
   DescribeStrategyDetailResponse,
   DescribeMonitorsRequest,
   ModifyMonitorResponse,
-  InstanceConfig,
+  CostItem,
   DescribeAddressLocationRequest,
   DescribeStrategyListRequest,
   DescribeMonitorDetailRequest,
-  Instance,
+  DescribeDetectPackageDetailResponse,
   MonitorDetail,
   DescribeAddressPoolListResponse,
   CreateMonitorResponse,
+  InstanceInfo,
+  InstancePackage,
   DeleteStrategyResponse,
   ModifyAddressPoolRequest,
-  InstanceDetail,
+  InstanceConfig,
   StrategyDetail,
   DescribeQuotasResponse,
+  ModifyInstanceConfigRequest,
   DescribeAddressLocationResponse,
   DescribeInstanceListResponse,
   ResourceFilter,
@@ -121,6 +130,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceConfigResponse) => void
   ): Promise<ModifyInstanceConfigResponse> {
     return this.request("ModifyInstanceConfig", req, cb)
+  }
+
+  /**
+   * 探测任务包详情
+   */
+  async DescribeDetectPackageDetail(
+    req: DescribeDetectPackageDetailRequest,
+    cb?: (error: string, rep: DescribeDetectPackageDetailResponse) => void
+  ): Promise<DescribeDetectPackageDetailResponse> {
+    return this.request("DescribeDetectPackageDetail", req, cb)
   }
 
   /**
@@ -264,6 +283,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 探测任务套餐列表
+   */
+  async DescribeDetectTaskPackageList(
+    req: DescribeDetectTaskPackageListRequest,
+    cb?: (error: string, rep: DescribeDetectTaskPackageListResponse) => void
+  ): Promise<DescribeDetectTaskPackageListResponse> {
+    return this.request("DescribeDetectTaskPackageList", req, cb)
+  }
+
+  /**
    * 策略列表接口
    */
   async DescribeStrategyList(
@@ -321,5 +350,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStrategyDetailResponse) => void
   ): Promise<DescribeStrategyDetailResponse> {
     return this.request("DescribeStrategyDetail", req, cb)
+  }
+
+  /**
+   * 实例套餐列表
+   */
+  async DescribeInstancePackageList(
+    req: DescribeInstancePackageListRequest,
+    cb?: (error: string, rep: DescribeInstancePackageListResponse) => void
+  ): Promise<DescribeInstancePackageListResponse> {
+    return this.request("DescribeInstancePackageList", req, cb)
   }
 }

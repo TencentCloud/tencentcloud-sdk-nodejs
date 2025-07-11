@@ -28,6 +28,7 @@ import {
   DescribeSecurityIPGroupInfoResponse,
   AdaptiveFrequencyControl,
   SlowPostConfig,
+  DescribeWebSecurityTemplatesRequest,
   RateLimitingRules,
   OriginRecord,
   OriginACLEntity,
@@ -41,8 +42,10 @@ import {
   AccessURLRedirectQueryString,
   ModifyFunctionRulePriorityRequest,
   ModifyAccelerationDomainResponse,
+  UpstreamHTTP2Parameters,
   TopEntryValue,
   DescribeHostsSettingResponse,
+  DescribeWebSecurityTemplateResponse,
   Origin,
   DescribeRulesResponse,
   TimingDataRecord,
@@ -107,6 +110,7 @@ import {
   OriginGroupReference,
   DeleteLoadBalancerRequest,
   CacheKeyCookie,
+  SecurityPolicyTemplateInfo,
   ExceptUserRule,
   SecEntry,
   ModifyCustomErrorPageResponse,
@@ -171,6 +175,7 @@ import {
   HostName,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
+  DeleteWebSecurityTemplateResponse,
   ModifyL7AccRuleRequest,
   MaxAge,
   DescribeCustomErrorPagesResponse,
@@ -188,6 +193,7 @@ import {
   DescribeZoneSettingRequest,
   ModifyL4ProxyStatusResponse,
   FileVerification,
+  ModifyWebSecurityTemplateResponse,
   ModifySecurityPolicyRequest,
   DeleteL7AccRulesRequest,
   SmartRouting,
@@ -236,7 +242,7 @@ import {
   DeleteSharedCNAMERequest,
   CustomRules,
   ModifyRealtimeLogDeliveryTaskRequest,
-  DescribeHostsSettingRequest,
+  HandleFunctionRuntimeEnvironmentResponse,
   DestroyPlanRequest,
   BlockIPActionParameters,
   CreatePlanRequest,
@@ -318,11 +324,14 @@ import {
   ModifyFunctionResponse,
   DescribeOriginGroupRequest,
   DescribeIPRegionRequest,
+  BindDomainInfo,
   TimingTypeValue,
   CreatePlanForZoneResponse,
   ModifyL4ProxyRulesStatusResponse,
   CheckCnameStatusResponse,
   ImportZoneConfigResponse,
+  ModifyWebSecurityTemplateRequest,
+  DescribeWebSecurityTemplateRequest,
   ClientAttestationRule,
   CustomEndpoint,
   ModifyOriginACLResponse,
@@ -349,7 +358,7 @@ import {
   ModifyL7AccSettingResponse,
   ReturnCustomPageActionParameters,
   BindZoneToPlanResponse,
-  UpstreamHTTP2Parameters,
+  DeleteWebSecurityTemplateRequest,
   DescribeL7AccSettingResponse,
   ModifyAliasDomainRequest,
   OriginInfo,
@@ -399,7 +408,7 @@ import {
   Waf,
   CreateApplicationProxyRuleRequest,
   DescribeDnsRecordsResponse,
-  DescribeDDoSAttackDataRequest,
+  CreateWebSecurityTemplateRequest,
   CreateL4ProxyRequest,
   CreatePlanResponse,
   DescribeApplicationProxiesRequest,
@@ -456,7 +465,7 @@ import {
   ModifyResponseHeaderParameters,
   DescribeOriginProtectionRequest,
   DeleteContentIdentifierResponse,
-  HandleFunctionRuntimeEnvironmentResponse,
+  DescribeHostsSettingRequest,
   DeleteRulesResponse,
   OriginGroup,
   ModifySecurityIPGroupRequest,
@@ -509,6 +518,7 @@ import {
   UpstreamRequestCookie,
   DescribeDDoSAttackTopDataRequest,
   Quic,
+  DescribeDDoSAttackDataRequest,
   SlowAttackDefense,
   CreateCLSIndexRequest,
   DescribeRulesRequest,
@@ -543,7 +553,7 @@ import {
   ModifyApplicationProxyStatusResponse,
   Identification,
   OriginGroupInLoadBalancer,
-  CheckRegionHealthStatus,
+  HTTPResponseParameters,
   UpstreamRequestParameters,
   TopEntry,
   NsVerification,
@@ -581,6 +591,7 @@ import {
   DescribeL4ProxyRulesRequest,
   AiRule,
   Function,
+  DescribeWebSecurityTemplatesResponse,
   Quota,
   CheckCnameStatusRequest,
   DescribeContentQuotaResponse,
@@ -588,9 +599,10 @@ import {
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DeleteDnsRecordsResponse,
+  CreateWebSecurityTemplateResponse,
   DescribePurgeTasksResponse,
   HttpDDoSProtection,
-  HTTPResponseParameters,
+  CheckRegionHealthStatus,
   DescribeFunctionRulesRequest,
   DeployConfigGroupVersionResponse,
   Addresses,
@@ -693,13 +705,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribePrefetchTasks 用于查询预热任务提交历史记录及执行进度，通过 CreatePrefetchTasks 接口提交的任务可通过此接口进行查询。
+   * 为未购买套餐的站点购买套餐
    */
-  async DescribePrefetchTasks(
-    req: DescribePrefetchTasksRequest,
-    cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
-  ): Promise<DescribePrefetchTasksResponse> {
-    return this.request("DescribePrefetchTasks", req, cb)
+  async CreatePlanForZone(
+    req: CreatePlanForZoneRequest,
+    cb?: (error: string, rep: CreatePlanForZoneResponse) => void
+  ): Promise<CreatePlanForZoneResponse> {
+    return this.request("CreatePlanForZone", req, cb)
   }
 
   /**
@@ -713,13 +725,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询站点的验证信息。
+   * 创建安全策略配置模板
    */
-  async DescribeIdentifications(
-    req: DescribeIdentificationsRequest,
-    cb?: (error: string, rep: DescribeIdentificationsResponse) => void
-  ): Promise<DescribeIdentificationsResponse> {
-    return this.request("DescribeIdentifications", req, cb)
+  async CreateWebSecurityTemplate(
+    req: CreateWebSecurityTemplateRequest,
+    cb?: (error: string, rep: CreateWebSecurityTemplateResponse) => void
+  ): Promise<CreateWebSecurityTemplateResponse> {
+    return this.request("CreateWebSecurityTemplate", req, cb)
   }
 
   /**
@@ -742,6 +754,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyOwnershipResponse) => void
   ): Promise<VerifyOwnershipResponse> {
     return this.request("VerifyOwnership", req, cb)
+  }
+
+  /**
+   * 查询安全策略配置模板详情
+   */
+  async DescribeWebSecurityTemplate(
+    req: DescribeWebSecurityTemplateRequest,
+    cb?: (error: string, rep: DescribeWebSecurityTemplateResponse) => void
+  ): Promise<DescribeWebSecurityTemplateResponse> {
+    return this.request("DescribeWebSecurityTemplate", req, cb)
   }
 
   /**
@@ -1010,13 +1032,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 为未购买套餐的站点购买套餐
+   * DescribePrefetchTasks 用于查询预热任务提交历史记录及执行进度，通过 CreatePrefetchTasks 接口提交的任务可通过此接口进行查询。
    */
-  async CreatePlanForZone(
-    req: CreatePlanForZoneRequest,
-    cb?: (error: string, rep: CreatePlanForZoneResponse) => void
-  ): Promise<CreatePlanForZoneResponse> {
-    return this.request("CreatePlanForZone", req, cb)
+  async DescribePrefetchTasks(
+    req: DescribePrefetchTasksRequest,
+    cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
+  ): Promise<DescribePrefetchTasksResponse> {
+    return this.request("DescribePrefetchTasks", req, cb)
   }
 
   /**
@@ -1111,6 +1133,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询站点的验证信息。
+   */
+  async DescribeIdentifications(
+    req: DescribeIdentificationsRequest,
+    cb?: (error: string, rep: DescribeIdentificationsResponse) => void
+  ): Promise<DescribeIdentificationsResponse> {
+    return this.request("DescribeIdentifications", req, cb)
+  }
+
+  /**
    * 您可以通过本接口批量修改 DNS 记录。
    */
   async ModifyDnsRecords(
@@ -1131,6 +1163,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 修改边缘函数触发规则，支持修改规则条件、执行函数以及描述信息。
+   */
+  async ModifyFunctionRule(
+    req: ModifyFunctionRuleRequest,
+    cb?: (error: string, rep: ModifyFunctionRuleResponse) => void
+  ): Promise<ModifyFunctionRuleResponse> {
+    return this.request("ModifyFunctionRule", req, cb)
+  }
+
+  /**
    * 在版本管理模式下，用于查询指定配置组的版本列表。版本管理功能内测中，当前仅白名单开放。
    */
   async DescribeConfigGroupVersions(
@@ -1138,6 +1180,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeConfigGroupVersionsResponse) => void
   ): Promise<DescribeConfigGroupVersionsResponse> {
     return this.request("DescribeConfigGroupVersions", req, cb)
+  }
+
+  /**
+   * 修改安全策略配置模板
+   */
+  async ModifyWebSecurityTemplate(
+    req: ModifyWebSecurityTemplateRequest,
+    cb?: (error: string, rep: ModifyWebSecurityTemplateResponse) => void
+  ): Promise<ModifyWebSecurityTemplateResponse> {
+    return this.request("ModifyWebSecurityTemplate", req, cb)
   }
 
   /**
@@ -1480,13 +1532,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改边缘函数触发规则，支持修改规则条件、执行函数以及描述信息。
+   * 查询安全策略配置模板列表
    */
-  async ModifyFunctionRule(
-    req: ModifyFunctionRuleRequest,
-    cb?: (error: string, rep: ModifyFunctionRuleResponse) => void
-  ): Promise<ModifyFunctionRuleResponse> {
-    return this.request("ModifyFunctionRule", req, cb)
+  async DescribeWebSecurityTemplates(
+    req: DescribeWebSecurityTemplatesRequest,
+    cb?: (error: string, rep: DescribeWebSecurityTemplatesResponse) => void
+  ): Promise<DescribeWebSecurityTemplatesResponse> {
+    return this.request("DescribeWebSecurityTemplates", req, cb)
   }
 
   /**
@@ -1689,6 +1741,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyContentIdentifierResponse) => void
   ): Promise<ModifyContentIdentifierResponse> {
     return this.request("ModifyContentIdentifier", req, cb)
+  }
+
+  /**
+   * 删除安全策略配置模板
+   */
+  async DeleteWebSecurityTemplate(
+    req: DeleteWebSecurityTemplateRequest,
+    cb?: (error: string, rep: DeleteWebSecurityTemplateResponse) => void
+  ): Promise<DeleteWebSecurityTemplateResponse> {
+    return this.request("DeleteWebSecurityTemplate", req, cb)
   }
 
   /**

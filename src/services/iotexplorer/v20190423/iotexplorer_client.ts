@@ -864,8 +864,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消分配
-   */
+     * 业务已下线
+
+取消分配
+     */
   async CancelAssignTWeCallLicense(
     req: CancelAssignTWeCallLicenseRequest,
     cb?: (error: string, rep: CancelAssignTWeCallLicenseResponse) => void

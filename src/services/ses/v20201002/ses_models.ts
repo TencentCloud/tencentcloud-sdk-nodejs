@@ -699,15 +699,19 @@ export interface ListEmailIdentitiesResponse {
   /**
    * 发信域名列表
    */
-  EmailIdentities: Array<EmailIdentity>
+  EmailIdentities?: Array<EmailIdentity>
   /**
    * 最大信誉等级
    */
-  MaxReputationLevel: number
+  MaxReputationLevel?: number
   /**
    * 单域名最高日发送量
    */
-  MaxDailyQuota: number
+  MaxDailyQuota?: number
+  /**
+   * 总数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -777,7 +781,20 @@ export interface UpdateAddressUnsubscribeConfigRequest {
 /**
  * ListEmailIdentities请求参数结构体
  */
-export type ListEmailIdentitiesRequest = null
+export interface ListEmailIdentitiesRequest {
+  /**
+   * tag 标签
+   */
+  TagList?: Array<TagList>
+  /**
+   * 分页 limit
+   */
+  Limit?: number
+  /**
+   * 分页 offset
+   */
+  Offset?: number
+}
 
 /**
  * CreateReceiver返回参数结构体
@@ -1011,6 +1028,10 @@ export interface CreateEmailIdentityRequest {
    * 生成的dkim密钥长度。0:1024，1:2048
    */
   DKIMOption?: number
+  /**
+   * tag 标签
+   */
+  TagList?: Array<TagList>
 }
 
 /**
@@ -1681,6 +1702,10 @@ export interface EmailIdentity {
    * 域名配置的独立ip
    */
   SendIp?: Array<string>
+  /**
+   * tag 标签
+   */
+  TagList?: Array<TagList>
 }
 
 /**
@@ -1737,4 +1762,18 @@ export interface ListReceiversResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface TagList {
+  /**
+   * 产品
+   */
+  TagKey: string
+  /**
+   * ses
+   */
+  TagValue: string
 }

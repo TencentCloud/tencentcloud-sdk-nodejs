@@ -355,7 +355,7 @@ off：关闭
    */
   Switch: string
   /**
-   * UA黑白名单生效规则列表
+   * UA黑白名单生效规则列表，不能超过10条规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterRules?: Array<UserAgentFilterRule>
@@ -9029,7 +9029,7 @@ path: 根据完整访问路径生效
    */
   RulePaths: Array<string>
   /**
-   * UserAgent列表
+   * UserAgent列表，UserAgent 个数不能超过 10个
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAgents: Array<string>

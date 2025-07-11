@@ -107,6 +107,7 @@ import {
   CycleEmailParam,
   CreateAddressUnsubscribeConfigResponse,
   ListReceiversResponse,
+  TagList,
 } from "./ses_models"
 
 /**
@@ -122,7 +123,7 @@ export class Client extends AbstractClient {
    * 获取当前发信域名列表，包含已验证通过与未验证的域名
    */
   async ListEmailIdentities(
-    req?: ListEmailIdentitiesRequest,
+    req: ListEmailIdentitiesRequest,
     cb?: (error: string, rep: ListEmailIdentitiesResponse) => void
   ): Promise<ListEmailIdentitiesResponse> {
     return this.request("ListEmailIdentities", req, cb)

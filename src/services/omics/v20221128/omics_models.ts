@@ -817,6 +817,14 @@ export interface ClusterOption {
    * 限制范围。
    */
   LimitRange?: LimitRange
+  /**
+   * 系统节点池实例规格。
+   */
+  SystemNodeInstanceType?: string
+  /**
+   * 系统节点池实例数量。
+   */
+  SystemNodeCount?: number
 }
 
 /**
@@ -1167,6 +1175,14 @@ export interface ResourceIds {
    * 弹性容器集群ID。
    */
   EKSId?: string
+  /**
+   * TKE容器集群ID。
+   */
+  TKEId?: string
+  /**
+   * TKE系统节点池ID。
+   */
+  TKESystemNodePoolId?: string
 }
 
 /**

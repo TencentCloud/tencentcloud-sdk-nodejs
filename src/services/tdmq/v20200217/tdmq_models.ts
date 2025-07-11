@@ -2968,6 +2968,10 @@ true就是开启了，false是关闭
 
    */
   Tenant?: string
+  /**
+   * 删除保护开关标识
+   */
+  DeleteProtection?: number
 }
 
 /**

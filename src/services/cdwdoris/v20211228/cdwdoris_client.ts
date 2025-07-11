@@ -121,6 +121,7 @@ import {
   DescribeBackUpSchedulesRequest,
   DescribeClusterConfigsRequest,
   CreateCoolDownPolicyResponse,
+  SnapshotRemainPolicy,
   ModifyWorkloadGroupResponse,
   DescribeRestoreTaskDetailRequest,
   CreateBackUpScheduleResponse,

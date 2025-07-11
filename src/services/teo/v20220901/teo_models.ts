@@ -220,6 +220,16 @@ export interface SlowPostConfig {
 }
 
 /**
+ * DescribeWebSecurityTemplates请求参数结构体
+ */
+export interface DescribeWebSecurityTemplatesRequest {
+  /**
+   * 站点 ID 列表。单次查询最多传入 100 个站点。
+   */
+  ZoneIds: Array<string>
+}
+
+/**
  * 精准速率限制的配置
  */
 export interface RateLimitingRules {
@@ -579,6 +589,18 @@ export interface ModifyAccelerationDomainResponse {
 }
 
 /**
+ * HTTP2 回源配置。
+ */
+export interface UpstreamHTTP2Parameters {
+  /**
+   * HTTP2 回源配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * TopN数据Entry
  */
 export interface TopEntryValue {
@@ -604,6 +626,20 @@ export interface DescribeHostsSettingResponse {
    * 域名数量。
    */
   TotalNumber?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWebSecurityTemplate返回参数结构体
+ */
+export interface DescribeWebSecurityTemplateResponse {
+  /**
+   * 安全策略模板配置内容，Bot 配置暂不支持，正在开发中。
+   */
+  SecurityPolicy?: SecurityPolicy
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2193,6 +2229,28 @@ export interface CacheKeyCookie {
 }
 
 /**
+ * 策略模板信息
+ */
+export interface SecurityPolicyTemplateInfo {
+  /**
+   * 策略模板所属的站点 ID。
+   */
+  ZoneId?: string
+  /**
+   * 策略模板 ID。
+   */
+  TemplateId?: string
+  /**
+   * 策略模板名称。
+   */
+  TemplateName?: string
+  /**
+   * 策略模板绑定的域名信息。
+   */
+  BindDomains?: Array<BindDomainInfo>
+}
+
+/**
  * 例外规则的配置，包含生效的条件，生效的范围。
  */
 export interface ExceptUserRule {
@@ -3665,6 +3723,16 @@ export interface ExceptUserRuleCondition {
 }
 
 /**
+ * DeleteWebSecurityTemplate返回参数结构体
+ */
+export interface DeleteWebSecurityTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyL7AccRule请求参数结构体
  */
 export interface ModifyL7AccRuleRequest {
@@ -3981,6 +4049,16 @@ export interface FileVerification {
    * 验证文件的内容。该字段的内容需要您填写至 Path 字段返回的 txt 文件中。
    */
   Content?: string
+}
+
+/**
+ * ModifyWebSecurityTemplate返回参数结构体
+ */
+export interface ModifyWebSecurityTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5303,26 +5381,13 @@ export interface ModifyRealtimeLogDeliveryTaskRequest {
 }
 
 /**
- * DescribeHostsSetting请求参数结构体
+ * HandleFunctionRuntimeEnvironment返回参数结构体
  */
-export interface DescribeHostsSettingRequest {
+export interface HandleFunctionRuntimeEnvironmentResponse {
   /**
-   * 站点ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-  /**
-   * 分页查询偏移量。默认值： 0，最小值：0。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目。默认值： 100，最大值：1000。
-   */
-  Limit?: number
-  /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>host：按照域名进行过滤。</li>
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**
@@ -7230,6 +7295,27 @@ export interface DescribeIPRegionRequest {
 }
 
 /**
+ * 策略模板绑定的域名信息
+ */
+export interface BindDomainInfo {
+  /**
+   * 域名。
+   */
+  Domain?: string
+  /**
+   * 域名所属的站点 ID。
+   */
+  ZoneId?: string
+  /**
+   * 绑定状态，取值有: 
+<li>process：绑定中；</li>
+<li>online：绑定成功；</li>
+<li>fail：绑定失败。</li>
+   */
+  Status?: string
+}
+
+/**
  * 时序类型详细数据
  */
 export interface TimingTypeValue {
@@ -7310,6 +7396,43 @@ export interface ImportZoneConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyWebSecurityTemplate请求参数结构体
+ */
+export interface ModifyWebSecurityTemplateRequest {
+  /**
+   * 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。
+   */
+  ZoneId: string
+  /**
+   * 策略模板 ID。
+   */
+  TemplateId: string
+  /**
+   * 修改后的策略模板名称。由中文、英文、数字和下划线组成，不能以下划线开头，且长度不能超过32个字符。字段为空时则不修改。
+   */
+  TemplateName?: string
+  /**
+   * 安全策略模板配置内容。值为空时不修改；没有传入的子模块结构不会被修改。目前支持 Web 防护模块中的例外规则、自定义规则、速率限制规则和托管规则配置，通过表达式语法对安全策略进行配置。 Bot 管理规则配置暂不支持，正在开发中。
+特别说明：当入参某个子模块结构时，请确保携带所有需要保留的规则内容，未传入规则内容视为删除。
+   */
+  SecurityPolicy?: SecurityPolicy
+}
+
+/**
+ * DescribeWebSecurityTemplate请求参数结构体
+ */
+export interface DescribeWebSecurityTemplateRequest {
+  /**
+   * 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。
+   */
+  ZoneId: string
+  /**
+   * 策略模板 ID。
+   */
+  TemplateId: string
 }
 
 /**
@@ -7812,15 +7935,17 @@ export interface BindZoneToPlanResponse {
 }
 
 /**
- * HTTP2 回源配置。
+ * DeleteWebSecurityTemplate请求参数结构体
  */
-export interface UpstreamHTTP2Parameters {
+export interface DeleteWebSecurityTemplateRequest {
   /**
-   * HTTP2 回源配置开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。
    */
-  Switch?: string
+  ZoneId: string
+  /**
+   * 策略模板 ID。
+   */
+  TemplateId: string
 }
 
 /**
@@ -8769,7 +8894,10 @@ export interface CreateZoneRequest {
    */
   Area?: string
   /**
-   * 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，请前往控制台购买套餐完成站点创建。
+   * 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，可通过 [CreatePlan](https://cloud.tencent.com/document/product/1552/105771) 购买套餐。
+注意：如果不填写此参数，将创建一个处于“init”状态的站点，该站点为未激活状态，并不会显示在控制台上。您可以通过访问 [BindZoneToPlan](https://cloud.tencent.com/document/product/1552/83042) 来绑定套餐并激活站点，激活后站点可以正常提供服务。
+
+
    */
   PlanId?: string
   /**
@@ -8993,48 +9121,21 @@ export interface DescribeDnsRecordsResponse {
 }
 
 /**
- * DescribeDDoSAttackData请求参数结构体
+ * CreateWebSecurityTemplate请求参数结构体
  */
-export interface DescribeDDoSAttackDataRequest {
+export interface CreateWebSecurityTemplateRequest {
   /**
-   * 开始时间。
+   * 站点 ID。该参数明确策略模板在访问权限上归属的站点。
    */
-  StartTime: string
+  ZoneId: string
   /**
-   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
+   * 策略模板名称。由中文、英文、数字和下划线组成，不能以下划线开头，且长度不能超过 32 个字符。
    */
-  EndTime: string
+  TemplateName: string
   /**
-   * 统计指标列表，取值有：
-<li>ddos_attackMaxBandwidth：攻击带宽峰值；</li>
-<li>ddos_attackMaxPackageRate：攻击包速率峰值 ；</li>
-<li>ddos_attackBandwidth：攻击带宽曲线；</li>
-<li>ddos_attackPackageRate：攻击包速率曲线。</li>
+   * 安全策略模板配置内容，字段为空时生成默认配置。目前支持 Web 防护模块中的例外规则、自定义规则、速率限制规则和托管规则配置，通过表达式语法对安全策略进行配置。 Bot 管理规则配置暂不支持，正在开发中。
    */
-  MetricNames: Array<string>
-  /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * DDoS策略组ID列表，不填默认选择全部策略ID。
-   */
-  PolicyIds?: Array<number | bigint>
-  /**
-   * 查询时间粒度，取值有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天。</li>不填将根据开始时间与结束时间的间隔自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据；</li>
-<li>global：全球数据。</li>不填默认取值为global。
-   */
-  Area?: string
+  SecurityPolicy?: SecurityPolicy
 }
 
 /**
@@ -10533,13 +10634,26 @@ export interface DeleteContentIdentifierResponse {
 }
 
 /**
- * HandleFunctionRuntimeEnvironment返回参数结构体
+ * DescribeHostsSetting请求参数结构体
  */
-export interface HandleFunctionRuntimeEnvironmentResponse {
+export interface DescribeHostsSettingRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 站点ID。
    */
-  RequestId?: string
+  ZoneId: string
+  /**
+   * 分页查询偏移量。默认值： 0，最小值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值： 100，最大值：1000。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>host：按照域名进行过滤。</li>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -11858,6 +11972,51 @@ export interface Quic {
 }
 
 /**
+ * DescribeDDoSAttackData请求参数结构体
+ */
+export interface DescribeDDoSAttackDataRequest {
+  /**
+   * 开始时间。
+   */
+  StartTime: string
+  /**
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
+   */
+  EndTime: string
+  /**
+   * 统计指标列表，取值有：
+<li>ddos_attackMaxBandwidth：攻击带宽峰值；</li>
+<li>ddos_attackMaxPackageRate：攻击包速率峰值 ；</li>
+<li>ddos_attackBandwidth：攻击带宽曲线；</li>
+<li>ddos_attackPackageRate：攻击包速率曲线。</li>
+   */
+  MetricNames: Array<string>
+  /**
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   */
+  ZoneIds?: Array<string>
+  /**
+   * DDoS策略组ID列表，不填默认选择全部策略ID。
+   */
+  PolicyIds?: Array<number | bigint>
+  /**
+   * 查询时间粒度，取值有：
+<li>min：1分钟；</li>
+<li>5min：5分钟；</li>
+<li>hour：1小时；</li>
+<li>day：1天。</li>不填将根据开始时间与结束时间的间隔自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。
+   */
+  Interval?: string
+  /**
+   * 数据归属地区，取值有：
+<li>overseas：全球（除中国大陆地区）数据；</li>
+<li>mainland：中国大陆地区数据；</li>
+<li>global：全球数据。</li>不填默认取值为global。
+   */
+  Area?: string
+}
+
+/**
  * 慢速攻击防护的具体配置。
  */
 export interface SlowAttackDefense {
@@ -12820,24 +12979,17 @@ export interface OriginGroupInLoadBalancer {
 }
 
 /**
- * 各个健康检查区域下源站的健康状态。
+ * HTTP 应答配置参数。
  */
-export interface CheckRegionHealthStatus {
+export interface HTTPResponseParameters {
   /**
-   * 健康检查区域，ISO-3166-1 两位字母代码。
+   * 响应状态码。支持 2XX、4XX、5XX，不包括 499、514、101、301、302、303、509、520-599。
    */
-  Region?: string
+  StatusCode?: number
   /**
-   * 单健康检查区域下探测源站的健康状态，取值有：
-<li>Healthy：健康；</li>
-<li>Unhealthy：不健康；</li>
-<li> Undetected：未探测到数据。</li>说明：单健康检查区域下所有源站为健康，则状态为健康，否则为不健康。
+   * 响应页面 ID。
    */
-  Healthy?: string
-  /**
-   * 源站健康状态。
-   */
-  OriginHealthStatus?: Array<OriginHealthStatus>
+  ResponsePage?: string
 }
 
 /**
@@ -13535,6 +13687,24 @@ export interface Function {
 }
 
 /**
+ * DescribeWebSecurityTemplates返回参数结构体
+ */
+export interface DescribeWebSecurityTemplatesResponse {
+  /**
+   * 策略模板总数。
+   */
+  TotalCount?: number
+  /**
+   * 策略模板列表。
+   */
+  SecurityPolicyTemplates?: Array<SecurityPolicyTemplateInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 刷新/预热 可用量及配额
  */
 export interface Quota {
@@ -13676,6 +13846,20 @@ export interface DeleteDnsRecordsResponse {
 }
 
 /**
+ * CreateWebSecurityTemplate返回参数结构体
+ */
+export interface CreateWebSecurityTemplateResponse {
+  /**
+   * 策略模板 ID。
+   */
+  TemplateId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePurgeTasks返回参数结构体
  */
 export interface DescribePurgeTasksResponse {
@@ -13716,17 +13900,24 @@ export interface HttpDDoSProtection {
 }
 
 /**
- * HTTP 应答配置参数。
+ * 各个健康检查区域下源站的健康状态。
  */
-export interface HTTPResponseParameters {
+export interface CheckRegionHealthStatus {
   /**
-   * 响应状态码。支持 2XX、4XX、5XX，不包括 499、514、101、301、302、303、509、520-599。
+   * 健康检查区域，ISO-3166-1 两位字母代码。
    */
-  StatusCode?: number
+  Region?: string
   /**
-   * 响应页面 ID。
+   * 单健康检查区域下探测源站的健康状态，取值有：
+<li>Healthy：健康；</li>
+<li>Unhealthy：不健康；</li>
+<li> Undetected：未探测到数据。</li>说明：单健康检查区域下所有源站为健康，则状态为健康，否则为不健康。
    */
-  ResponsePage?: string
+  Healthy?: string
+  /**
+   * 源站健康状态。
+   */
+  OriginHealthStatus?: Array<OriginHealthStatus>
 }
 
 /**

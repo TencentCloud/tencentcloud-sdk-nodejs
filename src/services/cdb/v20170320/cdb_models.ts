@@ -6159,7 +6159,7 @@ export interface CreateAccountsRequest {
  */
 export interface DeleteAuditRuleTemplatesRequest {
   /**
-   * 审计规则模板ID,可通过[DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811)接口获取，单次允许最多删除5个规则模板。
+   * 审计规则模板 ID，可通过 [DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811) 接口获取，单次允许最多删除5个规则模板。
    */
   RuleTemplateIds: Array<string>
 }
@@ -6421,15 +6421,15 @@ export interface DescribeCloneListRequest {
  */
 export interface ModifyInstanceTagRequest {
   /**
-   * 实例 ID。
+   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
-   * 要增加或修改的标签。
+   * 要增加或修改的标签。ReplaceTags 和 DeleteTags 必填一个。
    */
   ReplaceTags?: Array<TagInfo>
   /**
-   * 要删除的标签。
+   * 要删除的标签。ReplaceTags 和 DeleteTags 必填一个。
    */
   DeleteTags?: Array<TagInfo>
 }

@@ -190,13 +190,17 @@ export interface ModifyUserPrivilegesV3Request {
    */
   WhiteHost?: string
   /**
-   * 更新类型，默认0，1为更新绑定计算组
+   * 更新类型，默认0，1为更新绑定计算组，2为更新默认计算组
    */
   UpdateType?: number
   /**
    * 需绑定计算组列表
    */
   UpdateComputeGroups?: Array<string>
+  /**
+   * 默认计算组
+   */
+  DefaultComputeGroup?: string
 }
 
 /**
@@ -1325,6 +1329,10 @@ GetCatalog：获取Catalog列表；
    * 表名
    */
   TableName?: string
+  /**
+   * 用户名列表
+   */
+  UserNames?: Array<string>
 }
 
 /**
@@ -1742,26 +1750,31 @@ export interface CreateBackUpScheduleRequest {
   BackUpTables?: Array<BackupTableContent>
   /**
    * 0为默认。1时是对远端的doris进行备份，不周期，一次性
+   * @deprecated
    */
   BackupType?: number
   /**
    * 远端doris集群的连接信息
+   * @deprecated
    */
   DorisSourceInfo?: DorisSourceInfo
   /**
-   * 0为默认。1时是一次性备份。2时是远端备份
+   * 0为周期备份。1时是立即备份。3时是定时备份。
    */
   BackupTimeType?: number
   /**
    * 0为默认。1时是备份完成后立即恢复
+   * @deprecated
    */
   RestoreType?: number
   /**
    * 0为默认。1时是提供自定义的secret连接cos
+   * @deprecated
    */
   AuthType?: number
   /**
    * cos认证的信息
+   * @deprecated
    */
   CosSourceInfo?: CosSourceInfo
   /**
@@ -1783,6 +1796,14 @@ export interface CreateBackUpScheduleRequest {
    * 当前任务的cos桶信息
    */
   CosBucket?: string
+  /**
+   * 快照保留策略
+   */
+  SnapshotRemainPolicy?: SnapshotRemainPolicy
+  /**
+   * 备份数据所在地域，当前地域应该为空
+   */
+  DataRemoteRegion?: string
 }
 
 /**
@@ -2265,6 +2286,10 @@ export interface InstanceNode {
    */
   Zone?: string
   /**
+   * 虚拟可用区
+   */
+  VirtualZone?: string
+  /**
    * 创建时间
    */
   CreateTime?: string
@@ -2351,6 +2376,10 @@ export interface NodeInfo {
    * 创建时间
    */
   CreateTime?: string
+  /**
+   * 虚拟可用区
+   */
+  VirtualZone?: string
 }
 
 /**
@@ -2745,6 +2774,24 @@ export interface CreateCoolDownPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 备份快照保留策略
+ */
+export interface SnapshotRemainPolicy {
+  /**
+   * 0-不主动删除；1-超过指定时间周期自动删除；2-保留指定数据快照
+   */
+  Type?: number
+  /**
+   * 保留快照的时间
+   */
+  RemainDays?: number
+  /**
+   * 保留最新快照的数量
+   */
+  RemainLatestNum?: number
 }
 
 /**
@@ -3255,6 +3302,10 @@ export interface BackupCosInfo {
    * 备份文件名称
    */
   SnapShotPath?: string
+  /**
+   * cos桶所在地域
+   */
+  Region?: string
 }
 
 /**
@@ -3723,6 +3774,10 @@ export interface RestoreStatus {
    * 实例对应snapshot的id
    */
   TaskId?: number
+  /**
+   * 恢复任务id
+   */
+  ID?: number
 }
 
 /**
@@ -3837,6 +3892,10 @@ export interface BackUpJobDisplay {
    * 错误原因
    */
   ErrorReason?: string
+  /**
+   * 快照保留策略
+   */
+  SnapshotRemainPolicy?: SnapshotRemainPolicy
 }
 
 /**
@@ -4280,6 +4339,10 @@ export interface NodeInfos {
    * rip
    */
   RIp?: string
+  /**
+   * 虚拟可用区
+   */
+  VirtualZone?: string
 }
 
 /**

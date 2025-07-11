@@ -48,6 +48,16 @@ it("igtm.v20231024.ModifyInstanceConfig", async function () {
     }
 })
 
+it("igtm.v20231024.DescribeDetectPackageDetail", async function () {
+    try {
+       const data = await client.DescribeDetectPackageDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("igtm.v20231024.CreateAddressPool", async function () {
     try {
        const data = await client.CreateAddressPool({})
@@ -188,6 +198,16 @@ it("igtm.v20231024.DescribeMonitorDetail", async function () {
     }
 })
 
+it("igtm.v20231024.DescribeDetectTaskPackageList", async function () {
+    try {
+       const data = await client.DescribeDetectTaskPackageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("igtm.v20231024.DescribeStrategyList", async function () {
     try {
        const data = await client.DescribeStrategyList({})
@@ -241,6 +261,16 @@ it("igtm.v20231024.DeleteAddressPool", async function () {
 it("igtm.v20231024.DescribeStrategyDetail", async function () {
     try {
        const data = await client.DescribeStrategyDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("igtm.v20231024.DescribeInstancePackageList", async function () {
+    try {
+       const data = await client.DescribeInstancePackageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
