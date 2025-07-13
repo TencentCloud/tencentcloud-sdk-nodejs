@@ -113,7 +113,6 @@ import {
   DescribeTopicDetailResponse,
   SecurityGroupRouteResp,
   DeleteAclRequest,
-  CreateInstancePostResponse,
   RouteDTO,
   DescribeDatahubTaskResponse,
   FetchLatestDatahubMessageListRequest,
@@ -256,7 +255,6 @@ import {
   ConsumerGroupTopic,
   TransformsParam,
   DescribeInstancesRequest,
-  CreateInstancePostRequest,
   DescribeCkafkaZoneResponse,
   ModifyInstancePreResponse,
   CreateUserRequest,
@@ -401,16 +399,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCvmInfoResponse) => void
   ): Promise<DescribeCvmInfoResponse> {
     return this.request("DescribeCvmInfo", req, cb)
-  }
-
-  /**
-   * 由于出参需要更新，建议用户迁移使用 CreatePostPaidInstance 接口。创建按量计费实例。通常用于 SDK 或云 API 控制台调用接口，创建后付费 CKafka 实例。调用接口与在 CKafka 控制台购买按量付费实例效果相同。
-   */
-  async CreateInstancePost(
-    req: CreateInstancePostRequest,
-    cb?: (error: string, rep: CreateInstancePostResponse) => void
-  ): Promise<CreateInstancePostResponse> {
-    return this.request("CreateInstancePost", req, cb)
   }
 
   /**

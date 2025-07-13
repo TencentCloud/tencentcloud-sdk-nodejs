@@ -1040,7 +1040,7 @@ export interface RunGroup {
    */
   InputCosUri?: string
   /**
-   * 输入模版ID。
+   * 输入模板ID。
    */
   InputTemplateId?: string
   /**

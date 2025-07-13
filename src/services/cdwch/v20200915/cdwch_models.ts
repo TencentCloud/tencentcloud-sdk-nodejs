@@ -1314,7 +1314,7 @@ Modify 集群变更中；
    */
   CommonSummary?: NodesSummary
   /**
-   * 高可用，“true" "false"
+   * 高可用,"true" "false"
    */
   HA?: string
   /**
@@ -1473,6 +1473,10 @@ Modify 集群变更中；
    * 是否开启公网clb
    */
   HasPublicCloudClb?: boolean
+  /**
+   * 可升级的zk版本
+   */
+  UpgradeZkVersions?: string
 }
 
 /**

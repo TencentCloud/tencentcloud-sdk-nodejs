@@ -38,16 +38,6 @@ it("ckafka.v20190819.DescribeCvmInfo", async function () {
     }
 })
 
-it("ckafka.v20190819.CreateInstancePost", async function () {
-    try {
-       const data = await client.CreateInstancePost({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ckafka.v20190819.ModifyInstancePre", async function () {
     try {
        const data = await client.ModifyInstancePre({})

@@ -303,6 +303,10 @@ export interface DifferenceItem {
    */
   Db?: string
   /**
+   * schema
+   */
+  Schema?: string
+  /**
    * 表名
    */
   Table?: string
@@ -3138,7 +3142,7 @@ export interface SyncDetailInfo {
    */
   StepInfos?: Array<StepInfo>
   /**
-   * 不能发起一致性校验的原因
+   * 不能发起内置校验的原因
    */
   CauseOfCompareDisable?: string
   /**
@@ -4829,6 +4833,10 @@ export interface SkippedItem {
    * 数据库名
    */
   Db?: string
+  /**
+   * schema名
+   */
+  Schema?: string
   /**
    * 表名
    */

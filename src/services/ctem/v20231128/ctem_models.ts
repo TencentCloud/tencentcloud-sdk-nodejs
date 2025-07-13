@@ -2262,6 +2262,14 @@ export interface DisplayWeakPassword {
    * 截图
    */
   ScreenshotUrl?: string
+  /**
+   * 状态：unrepaired:未修复，repaired:已修复, offline:资产已下线, ignore:已忽略, checking:复测中
+   */
+  Status?: string
+  /**
+   * 上次复测时间
+   */
+  LastCheckTime?: string
 }
 
 /**

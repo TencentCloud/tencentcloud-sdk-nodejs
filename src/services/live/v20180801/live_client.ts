@@ -31,6 +31,7 @@ import {
   DescribePlayErrorCodeDetailInfoListRequest,
   PublishTime,
   CommonMixOutputParams,
+  DescribeAuditKeywordsResponse,
   DescribeCasterOutputInfosResponse,
   DescribeLiveStreamPublishedListRequest,
   DescribeGroupProIspPlayInfoListResponse,
@@ -70,7 +71,7 @@ import {
   ProIspPlaySumInfo,
   ModifyLiveTranscodeTemplateResponse,
   DescribeStreamDayPlayInfoListRequest,
-  DeleteLiveTimeShiftRuleResponse,
+  DeleteCasterLayoutInfoResponse,
   TimeShiftStreamInfo,
   DescribeLivePadRulesResponse,
   CreatePullStreamConfigRequest,
@@ -158,13 +159,14 @@ import {
   DeleteLiveTranscodeRuleResponse,
   CreateCasterInputPushUrlRequest,
   DescribeLiveCloudEffectListResponse,
-  DescribeCasterMarkWordInfosRequest,
+  DescribeLivePadTemplatesResponse,
   CreateCasterPgmFromPvwResponse,
   DescribeLiveTranscodeRulesRequest,
   PlayDataInfoByStream,
   LiveStreamMonitorInputInfo,
   DeleteLivePullStreamTaskRequest,
   DescribeCasterMarkPicInfosResponse,
+  CreateAuditKeywordsRequest,
   CopyCasterResponse,
   RestartLivePullStreamTaskResponse,
   StopLiveRecordResponse,
@@ -202,12 +204,13 @@ import {
   DeletePullStreamConfigResponse,
   ModifyLivePlayDomainRequest,
   LiveEnhanceInfo,
-  DeleteCasterLayoutInfoResponse,
+  DeleteLiveTimeShiftRuleResponse,
   PullPushWatermarkInfo,
   DescribeGroupProIspPlayInfoListRequest,
   CreateCasterPgmResponse,
   ReleaseCasterResponse,
   DescribeLiveTranscodeRulesResponse,
+  DeleteAuditKeywordsRequest,
   CreateCasterPvwRequest,
   AddCasterLayoutInfoResponse,
   DeleteLivePullStreamTaskResponse,
@@ -247,6 +250,7 @@ import {
   BatchDomainOperateErrors,
   CreateLivePadTemplateRequest,
   CopyCasterRequest,
+  CreateAuditKeywordsResponse,
   DescribeLivePullStreamTasksResponse,
   CreateLiveCallbackRuleResponse,
   DescribeAreaBillBandwidthAndFluxListRequest,
@@ -364,7 +368,7 @@ import {
   DescribeAllStreamPlayInfoListResponse,
   TaskStatusInfo,
   DescribeCasterInputInfosRequest,
-  DescribeLivePadTemplatesResponse,
+  DescribeCasterMarkWordInfosRequest,
   DescribeVisitTopSumInfoListResponse,
   TimeShiftBillData,
   HlsSpecialParam,
@@ -381,6 +385,7 @@ import {
   DescribeLogDownloadListRequest,
   DeleteLiveWatermarkResponse,
   DropLiveStreamResponse,
+  DescribeAuditKeywordsRequest,
   DescribeLiveRecordTemplatesRequest,
   DescribeTimeShiftRecordDetailRequest,
   PullStreamTaskInfo,
@@ -448,6 +453,7 @@ import {
   ModifyCasterMarkPicInfoResponse,
   PlaySumStatInfo,
   DescribeDeliverBandwidthListRequest,
+  DeleteAuditKeywordsResponse,
   RefererAuthConfig,
   TranscodeDetailInfo,
   DeleteCasterMarkWordInfoRequest,
@@ -1254,6 +1260,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 创建直播时移规则，需要先调用[CreateLiveTimeShiftTemplate](/document/product/267/86169)接口创建直播时移模板，将返回的模板id绑定到流使用。
+<br>直播时移相关文档：[直播时移](/document/product/267/86134)。
+     */
+  async CreateLiveTimeShiftRule(
+    req: CreateLiveTimeShiftRuleRequest,
+    cb?: (error: string, rep: CreateLiveTimeShiftRuleResponse) => void
+  ): Promise<CreateLiveTimeShiftRuleResponse> {
+    return this.request("CreateLiveTimeShiftRule", req, cb)
+  }
+
+  /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
 查询下行播放错误码信息。
      */
@@ -1481,6 +1498,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 删除关键词信息。
+   */
+  async DeleteAuditKeywords(
+    req?: DeleteAuditKeywordsRequest,
+    cb?: (error: string, rep: DeleteAuditKeywordsResponse) => void
+  ): Promise<DeleteAuditKeywordsResponse> {
+    return this.request("DeleteAuditKeywords", req, cb)
+  }
+
+  /**
    * 根据域名状态、类型等信息查询用户的域名信息。
    */
   async DescribeLiveDomains(
@@ -1604,13 +1631,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 该接口用来创建新的导播台
+   * 本接口用来查询当前APPID导播台业务状态
    */
-  async CreateCaster(
-    req: CreateCasterRequest,
-    cb?: (error: string, rep: CreateCasterResponse) => void
-  ): Promise<CreateCasterResponse> {
-    return this.request("CreateCaster", req, cb)
+  async DescribeCasterUserStatus(
+    req?: DescribeCasterUserStatusRequest,
+    cb?: (error: string, rep: DescribeCasterUserStatusResponse) => void
+  ): Promise<DescribeCasterUserStatusResponse> {
+    return this.request("DescribeCasterUserStatus", req, cb)
   }
 
   /**
@@ -2049,14 +2076,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 创建直播时移规则，需要先调用[CreateLiveTimeShiftTemplate](/document/product/267/86169)接口创建直播时移模板，将返回的模板id绑定到流使用。
-<br>直播时移相关文档：[直播时移](/document/product/267/86134)。
-     */
-  async CreateLiveTimeShiftRule(
-    req: CreateLiveTimeShiftRuleRequest,
-    cb?: (error: string, rep: CreateLiveTimeShiftRuleResponse) => void
-  ): Promise<CreateLiveTimeShiftRuleResponse> {
-    return this.request("CreateLiveTimeShiftRule", req, cb)
+   * 创建关键词，并关联到关键词库。
+   */
+  async CreateAuditKeywords(
+    req?: CreateAuditKeywordsRequest,
+    cb?: (error: string, rep: CreateAuditKeywordsResponse) => void
+  ): Promise<CreateAuditKeywordsResponse> {
+    return this.request("CreateAuditKeywords", req, cb)
   }
 
   /**
@@ -2286,13 +2312,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询导播台信息接口，用来查询导播台状态、描述、输出长、宽等信息
+   * 获取关键词信息。
    */
-  async DescribeCaster(
-    req: DescribeCasterRequest,
-    cb?: (error: string, rep: DescribeCasterResponse) => void
-  ): Promise<DescribeCasterResponse> {
-    return this.request("DescribeCaster", req, cb)
+  async DescribeAuditKeywords(
+    req?: DescribeAuditKeywordsRequest,
+    cb?: (error: string, rep: DescribeAuditKeywordsResponse) => void
+  ): Promise<DescribeAuditKeywordsResponse> {
+    return this.request("DescribeAuditKeywords", req, cb)
   }
 
   /**
@@ -2391,13 +2417,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 本接口用来查询当前APPID导播台业务状态
+   * 该接口用来创建新的导播台
    */
-  async DescribeCasterUserStatus(
-    req?: DescribeCasterUserStatusRequest,
-    cb?: (error: string, rep: DescribeCasterUserStatusResponse) => void
-  ): Promise<DescribeCasterUserStatusResponse> {
-    return this.request("DescribeCasterUserStatus", req, cb)
+  async CreateCaster(
+    req: CreateCasterRequest,
+    cb?: (error: string, rep: CreateCasterResponse) => void
+  ): Promise<CreateCasterResponse> {
+    return this.request("CreateCaster", req, cb)
   }
 
   /**
@@ -2572,6 +2598,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CancelCommonMixStreamResponse) => void
   ): Promise<CancelCommonMixStreamResponse> {
     return this.request("CancelCommonMixStream", req, cb)
+  }
+
+  /**
+   * 查询导播台信息接口，用来查询导播台状态、描述、输出长、宽等信息
+   */
+  async DescribeCaster(
+    req: DescribeCasterRequest,
+    cb?: (error: string, rep: DescribeCasterResponse) => void
+  ): Promise<DescribeCasterResponse> {
+    return this.request("DescribeCaster", req, cb)
   }
 
   /**

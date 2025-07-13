@@ -299,6 +299,16 @@ export interface CommonMixOutputParams {
 }
 
 /**
+ * DescribeAuditKeywords返回参数结构体
+ */
+export interface DescribeAuditKeywordsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCasterOutputInfos返回参数结构体
  */
 export interface DescribeCasterOutputInfosResponse {
@@ -1207,9 +1217,9 @@ Oversea：则查询国外数据，
 }
 
 /**
- * DeleteLiveTimeShiftRule返回参数结构体
+ * DeleteCasterLayoutInfo返回参数结构体
  */
-export interface DeleteLiveTimeShiftRuleResponse {
+export interface DeleteCasterLayoutInfoResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3389,13 +3399,17 @@ export interface DescribeLiveCloudEffectListResponse {
 }
 
 /**
- * DescribeCasterMarkWordInfos请求参数结构体
+ * DescribeLivePadTemplates返回参数结构体
  */
-export interface DescribeCasterMarkWordInfosRequest {
+export interface DescribeLivePadTemplatesResponse {
   /**
-   * 导播台ID。
+   * 直播垫片模板信息。
    */
-  CasterId: number
+  Templates?: Array<PadTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3525,6 +3539,11 @@ export interface DescribeCasterMarkPicInfosResponse {
    */
   RequestId?: string
 }
+
+/**
+ * CreateAuditKeywords请求参数结构体
+ */
+export type CreateAuditKeywordsRequest = null
 
 /**
  * CopyCaster返回参数结构体
@@ -4370,9 +4389,9 @@ export interface LiveEnhanceInfo {
 }
 
 /**
- * DeleteCasterLayoutInfo返回参数结构体
+ * DeleteLiveTimeShiftRule返回参数结构体
  */
-export interface DeleteCasterLayoutInfoResponse {
+export interface DeleteLiveTimeShiftRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4505,6 +4524,11 @@ export interface DescribeLiveTranscodeRulesResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DeleteAuditKeywords请求参数结构体
+ */
+export type DeleteAuditKeywordsRequest = null
 
 /**
  * CreateCasterPvw请求参数结构体
@@ -5477,6 +5501,16 @@ export interface CopyCasterRequest {
 注意：该流id不能与云直播中的流id重复
    */
   OutputStreamId?: string
+}
+
+/**
+ * CreateAuditKeywords返回参数结构体
+ */
+export interface CreateAuditKeywordsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8343,17 +8377,13 @@ export interface DescribeCasterInputInfosRequest {
 }
 
 /**
- * DescribeLivePadTemplates返回参数结构体
+ * DescribeCasterMarkWordInfos请求参数结构体
  */
-export interface DescribeLivePadTemplatesResponse {
+export interface DescribeCasterMarkWordInfosRequest {
   /**
-   * 直播垫片模板信息。
+   * 导播台ID。
    */
-  Templates?: Array<PadTemplate>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CasterId: number
 }
 
 /**
@@ -8835,6 +8865,11 @@ export interface DropLiveStreamResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeAuditKeywords请求参数结构体
+ */
+export type DescribeAuditKeywordsRequest = null
 
 /**
  * DescribeLiveRecordTemplates请求参数结构体
@@ -10463,6 +10498,16 @@ export interface DescribeDeliverBandwidthListRequest {
 支持最近三个月的数据查询，时间跨度最大是1个月。
    */
   EndTime: string
+}
+
+/**
+ * DeleteAuditKeywords返回参数结构体
+ */
+export interface DeleteAuditKeywordsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
