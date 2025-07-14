@@ -38,6 +38,16 @@ it("ctem.v20231128.DescribeManages", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeLeakageDatas", async function () {
+    try {
+       const data = await client.DescribeLeakageDatas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.ModifyCustomer", async function () {
     try {
        const data = await client.ModifyCustomer({})
@@ -111,6 +121,16 @@ it("ctem.v20231128.DescribeSubDomains", async function () {
 it("ctem.v20231128.DescribeCustomers", async function () {
     try {
        const data = await client.DescribeCustomers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeLeakageEmails", async function () {
+    try {
+       const data = await client.DescribeLeakageEmails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +221,16 @@ it("ctem.v20231128.DescribeAssets", async function () {
 it("ctem.v20231128.DescribeDarkWebs", async function () {
     try {
        const data = await client.DescribeDarkWebs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeLeakageCodes", async function () {
+    try {
+       const data = await client.DescribeLeakageCodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

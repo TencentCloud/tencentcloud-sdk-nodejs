@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyCustomerResponse,
   DisplayWechatOfficialAccount,
+  DisplayGithub,
   ModifyCustomerRequest,
   DescribeWechatAppletsResponse,
   DescribeManagesRequest,
@@ -30,7 +31,7 @@ import {
   DisplayJobRecord,
   DescribeAppsRequest,
   DescribeDarkWebsRequest,
-  DisplayNetDisk,
+  DisplayLeakageEmail,
   DescribeHttpsRequest,
   DescribeEnterprisesResponse,
   DescribeSuspiciousAssetsResponse,
@@ -39,18 +40,22 @@ import {
   DescribeSensitiveInfosRequest,
   DescribeNetDisksRequest,
   DescribeAssetsRequest,
+  DisplayLeakageData,
+  DescribeLeakageDatasRequest,
   DescribeJobRecordDetailsRequest,
   DescribeJobRecordDetailsResponse,
   DescribeSubDomainsRequest,
   DescribeCustomersRequest,
   DisplayJobRecordDetail,
-  DisplayGithub,
+  DisplayPort,
+  DescribeLeakageCodesRequest,
   DisplayAsset,
   DisplayApp,
   DescribeVulsResponse,
   DisplaySubDomain,
-  DisplayToolCommon,
+  DescribeWechatAppletsRequest,
   DescribeGithubsResponse,
+  DescribeLeakageEmailsResponse,
   DescribeAssetsResponse,
   Customer,
   DescribeWechatOfficialAccountsResponse,
@@ -65,16 +70,19 @@ import {
   DescribeSubDomainsResponse,
   DescribeCustomersResponse,
   DescribeDomainsResponse,
-  DisplayPort,
+  DisplayNetDisk,
   DescribeEnterprisesRequest,
-  DescribeWechatAppletsRequest,
+  DescribeLeakageDatasResponse,
   DescribeConfigsRequest,
+  DisplayToolCommon,
+  DisplayLeakageCode,
   DescribeAppsResponse,
   DescribeWeakPasswordsResponse,
   DescribePortsResponse,
   DisplaySuspiciousAsset,
   Filter,
   DisplayWeakPassword,
+  DescribeLeakageEmailsRequest,
   IdndValue,
   CreateCustomerResponse,
   DescribeHttpsResponse,
@@ -83,6 +91,7 @@ import {
   DescribeSensitiveInfosResponse,
   DescribeJobRecordsRequest,
   DisplayDarkWeb,
+  DescribeLeakageCodesResponse,
   DescribeManagesResponse,
   DescribeDomainsRequest,
   JobRecordProgress,
@@ -122,6 +131,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeManagesResponse) => void
   ): Promise<DescribeManagesResponse> {
     return this.request("DescribeManages", req, cb)
+  }
+
+  /**
+   * 获取数据泄露事件
+   */
+  async DescribeLeakageDatas(
+    req: DescribeLeakageDatasRequest,
+    cb?: (error: string, rep: DescribeLeakageDatasResponse) => void
+  ): Promise<DescribeLeakageDatasResponse> {
+    return this.request("DescribeLeakageDatas", req, cb)
   }
 
   /**
@@ -202,6 +221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCustomersResponse) => void
   ): Promise<DescribeCustomersResponse> {
     return this.request("DescribeCustomers", req, cb)
+  }
+
+  /**
+   * 获取邮箱泄露数据
+   */
+  async DescribeLeakageEmails(
+    req: DescribeLeakageEmailsRequest,
+    cb?: (error: string, rep: DescribeLeakageEmailsResponse) => void
+  ): Promise<DescribeLeakageEmailsResponse> {
+    return this.request("DescribeLeakageEmails", req, cb)
   }
 
   /**
@@ -292,6 +321,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDarkWebsResponse) => void
   ): Promise<DescribeDarkWebsResponse> {
     return this.request("DescribeDarkWebs", req, cb)
+  }
+
+  /**
+   * 获取代码泄露数据
+   */
+  async DescribeLeakageCodes(
+    req: DescribeLeakageCodesRequest,
+    cb?: (error: string, rep: DescribeLeakageCodesResponse) => void
+  ): Promise<DescribeLeakageCodesResponse> {
+    return this.request("DescribeLeakageCodes", req, cb)
   }
 
   /**

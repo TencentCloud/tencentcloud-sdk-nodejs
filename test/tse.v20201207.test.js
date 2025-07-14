@@ -148,9 +148,9 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayServices", async function () {
     }
 })
 
-it("tse.v20201207.ModifyCloudNativeAPIGatewayRouteRateLimit", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewayServicesLight", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayRouteRateLimit({})
+       const data = await client.DescribeCloudNativeAPIGatewayServicesLight({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayCanaryRule", async function () {
     }
 })
 
-it("tse.v20201207.DescribeWafDomains", async function () {
+it("tse.v20201207.DeleteNativeGatewayServiceSource", async function () {
     try {
-       const data = await client.DescribeWafDomains({})
+       const data = await client.DeleteNativeGatewayServiceSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +311,16 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayServiceRateLimit", async function (
 it("tse.v20201207.DescribeZookeeperServerInterfaces", async function () {
     try {
        const data = await client.DescribeZookeeperServerInterfaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeWafDomains", async function () {
+    try {
+       const data = await client.DescribeWafDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +468,9 @@ it("tse.v20201207.DescribeGovernanceNamespaces", async function () {
     }
 })
 
-it("tse.v20201207.DeleteGovernanceInstancesByHost", async function () {
+it("tse.v20201207.UpdateUpstreamTargets", async function () {
     try {
-       const data = await client.DeleteGovernanceInstancesByHost({})
+       const data = await client.UpdateUpstreamTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,6 +738,16 @@ it("tse.v20201207.UnbindAutoScalerResourceStrategyFromGroups", async function ()
     }
 })
 
+it("tse.v20201207.ModifyCloudNativeAPIGatewayRouteRateLimit", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayRouteRateLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeConfigFileReleaseVersions", async function () {
     try {
        const data = await client.DescribeConfigFileReleaseVersions({})
@@ -791,16 +811,6 @@ it("tse.v20201207.CreateGovernanceNamespaces", async function () {
 it("tse.v20201207.DescribeGovernanceServiceContractVersions", async function () {
     try {
        const data = await client.DescribeGovernanceServiceContractVersions({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tse.v20201207.UpdateUpstreamTargets", async function () {
-    try {
-       const data = await client.UpdateUpstreamTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,9 +1178,9 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayServiceRateLimit", async function (
     }
 })
 
-it("tse.v20201207.DeleteNativeGatewayServiceSource", async function () {
+it("tse.v20201207.DeleteGovernanceInstancesByHost", async function () {
     try {
-       const data = await client.DeleteNativeGatewayServiceSource({})
+       const data = await client.DeleteGovernanceInstancesByHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

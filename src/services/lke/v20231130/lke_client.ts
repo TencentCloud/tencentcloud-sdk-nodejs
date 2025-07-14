@@ -18,364 +18,337 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyQAAttrRangeResponse,
+  DeleteAgentRequest,
   GetWsTokenResponse,
-  GetAppSecretRequest,
+  ListUsageCallDetailRequest,
+  CheckAttributeLabelExistRequest,
+  DescribeAppAgentListResponse,
+  AttributeFilters,
+  DescribeQAResponse,
   ExtraInfo,
+  GetAppKnowledgeCountRequest,
+  StopDocParseResponse,
   ListSelectDocResponse,
+  DescribeReleaseInfoRequest,
   DeleteDocRequest,
-  WorkflowInfo,
-  GetAppSecretResponse,
+  CreateWorkflowRunResponse,
+  GetAnswerTypeDataCountRequest,
+  RunNodeInfo,
+  DescribeAppResponse,
   UploadAttributeLabelResponse,
+  MsgRecord,
+  CreateDocCateResponse,
+  DeleteDocCateResponse,
+  ReleaseQA,
+  WorkflowRef,
+  ExportAttributeLabelResponse,
+  KnowledgeCapacityPieGraphDetail,
+  ModifyAppResponse,
+  ExportQAListResponse,
+  GetAppSecretResponse,
+  CreateWorkflowRunRequest,
+  CreateQACateResponse,
+  ModifyDocAttrRangeResponse,
   CreateSharedKnowledgeRequest,
+  DescribeQARequest,
   AttrLabelRefer,
+  DescribeWorkflowRunRequest,
   CustomVariable,
-  Procedure,
+  DescribeUnsatisfiedReplyContextRequest,
+  NodeRunBase,
+  QAQuery,
+  AgentModelInfo,
+  ListAppRequest,
+  UpdateSharedKnowledgeRequest,
   AttrLabel,
+  ModifyQAAttrRangeRequest,
+  TokenStat,
+  GetWsTokenReq_Label,
+  AgentKnowledgeQAPlugin,
   ReleaseDoc,
-  CreateCorpResponse,
+  KnowledgeQaSearch,
+  WorkflowRunDetail,
+  ListQARequest,
   DescribeKnowledgeUsageResponse,
   DeleteSharedKnowledgeResponse,
   ListUnsatisfiedReplyRequest,
   DeleteQARequest,
-  CreateDocCateRequest,
-  ListRejectedQuestionPreviewResponse,
-  CreateCorpRequest,
-  QueryRewriteResponse,
-  DeleteAttributeLabelRequest,
-  DescribeRobotBizIDByAppKeyResponse,
-  ListDocCateRequest,
-  DescribeDocResponse,
-  Label,
-  DeleteVarResponse,
-  ListQACateResponse,
-  CreateSharedKnowledgeResponse,
-  QAList,
-  AttributeLabel,
-  AgentToolInfo,
-  RenameDocRequest,
-  StopWorkflowRunResponse,
-  TaskFlowInfo,
-  GenerateQAResponse,
-  SaveDocRequest,
-  ListSharedKnowledgeResponse,
-  DescribeAttributeLabelResponse,
-  ModifyAttributeLabelResponse,
-  KnowledgeQaSingleWorkflow,
-  RetryDocParseResponse,
-  DeleteAgentResponse,
-  GetEmbeddingResponse,
-  GroupQAResponse,
-  RetryReleaseRequest,
-  AppConfig,
-  ListAppCategoryRequest,
-  AgentToolReqParam,
-  AttrLabelDetail,
-  ReconstructDocumentResponse,
-  QAQuery,
-  DescribeKnowledgeUsageRequest,
-  DeleteSharedKnowledgeRequest,
-  TaskParams,
-  ListDocItem,
-  ModifyAgentRequest,
-  NodeRunDetail,
-  Stat,
-  ReconstructDocumentRequest,
-  StatisticInfo,
-  CreateAttributeLabelRequest,
-  ListAppResponse,
-  ValueInfo,
-  RejectedQuestion,
-  ExportQAListRequest,
-  GetDocPreviewResponse,
-  CreateReleaseResponse,
-  QueryRewriteRequest,
-  KnowledgeDetail,
-  GenerateQARequest,
-  ListReferShareKnowledgeRequest,
-  ListAttributeLabelRequest,
-  AgentReference,
-  DeleteDocResponse,
-  DocumentElement,
-  DescribeSegmentsResponse,
-  UploadAttributeLabelRequest,
-  DescribeAppAgentListRequest,
-  CreateQAResponse,
-  BackgroundImageConfig,
-  DescribeReleaseInfoResponse,
-  ModifyRejectedQuestionRequest,
-  DescribeWorkflowRunResponse,
-  ListReleaseDocPreviewRequest,
-  AgentPluginHeader,
-  ListRejectedQuestionResponse,
-  SearchStrategy,
-  ListReleaseResponse,
-  ListModelResponse,
-  DocFilterFlag,
-  CreateVarResponse,
-  Message,
-  CreateQACateRequest,
-  ShareKnowledgeBase,
-  DocumentRecognizeInfo,
-  HistorySummary,
-  DescribeSearchStatsGraphRequest,
-  RateMsgRecordResponse,
-  DescribeReferRequest,
-  ReconstructDocumentConfig,
-  ReferShareKnowledgeRequest,
-  GetAppKnowledgeCountRequest,
-  CreateWorkflowRunResponse,
-  GetAnswerTypeDataCountRequest,
-  ListQaItem,
-  Usage,
-  ListUnsatisfiedReplyResponse,
-  CreateWorkflowRunRequest,
-  DescribeQARequest,
-  ListQARequest,
+  GetLikeDataCountResponse,
+  KnowledgeUpdateInfo,
   IsTransferIntentResponse,
-  ModelParameter,
+  CreateDocCateRequest,
   InvokeAPI,
   AgentMCPServerInfo,
-  ModifyAppResponse,
-  ListAppCategoryResponse,
-  DescribeStorageCredentialRequest,
-  IgnoreUnsatisfiedReplyRequest,
-  ListReleaseConfigPreviewResponse,
-  DescribeReleaseResponse,
-  AgentKnowledgeFilterTag,
-  ApiVarAttrInfo,
-  AgentThought,
-  CheckAttributeLabelReferRequest,
-  AgentKnowledge,
-  UpdateVarResponse,
-  ConvertDocumentRequest,
-  ListWorkflowRunsRequest,
-  ListReleaseDocPreviewResponse,
-  TaskFlowSummary,
-  AttributeLabelRefByWorkflow,
-  RetryDocAuditRequest,
-  ExportUnsatisfiedReplyRequest,
-  TokenStat,
-  DigitalHumanConfig,
-  ExportUnsatisfiedReplyResponse,
-  DescribeReferResponse,
-  WorkflowRef,
-  ListDocCateResponse,
-  AgentKnowledgeFilter,
-  KnowledgeQaOutput,
-  WorkflowRunBase,
-  AppModel,
-  WorkflowRunNodeInfo,
-  GetReconstructDocumentResultResponse,
-  GetLikeDataCountRequest,
-  ListAttributeLabelResponse,
-  ModifyQAAttrRangeRequest,
-  CateInfo,
-  Coord,
-  DeleteRejectedQuestionResponse,
-  ListRejectedQuestionPreviewRequest,
-  ListSelectDocRequest,
-  FileInfo,
-  ModifyAppRequest,
-  StrValue,
-  AgentInputUserInputValue,
-  SearchRange,
-  DeleteDocCateRequest,
-  ClassifyConfig,
-  DescribeConcurrencyUsageRequest,
-  ListQACateRequest,
-  ListReleaseQAPreviewRequest,
-  DescribeAppResponse,
-  DeleteAppRequest,
-  GetVarListResponse,
-  WorkFlowSummary,
-  DescribeCorpResponse,
-  DescribeNodeRunResponse,
-  ModifyQAResponse,
-  DeleteQAResponse,
-  ProcedureDebugging,
-  GetMsgRecordRequest,
-  KnowledgeWorkflow,
-  ReleaseConfigs,
-  DescribeSearchStatsGraphResponse,
-  ModifyAgentResponse,
-  ModifyQAAttrRangeResponse,
-  StopDocParseResponse,
-  DescribeAppAgentListResponse,
-  DescribeQAResponse,
-  DescribeReleaseInfoRequest,
-  ModifyQARequest,
-  MsgRecord,
-  DeleteDocCateResponse,
-  ExportAttributeLabelResponse,
-  DescribeWorkflowRunRequest,
-  DescribeUnsatisfiedReplyContextRequest,
-  StopWorkflowRunRequest,
-  KnowledgeQaSearch,
-  ListReleaseRequest,
-  ListModelRequest,
-  SummaryOutput,
+  ListReferShareKnowledgeResponse,
   ListDocResponse,
+  WorkflowInfo,
+  ModifyQARequest,
+  TaskFlowInfo,
+  GetDocPreviewRequest,
+  ListDocCateResponse,
+  ListRejectedQuestionPreviewResponse,
+  ListAppCategoryResponse,
   CreateAppResponse,
   Agent,
+  DescribeAttributeLabelRequest,
   CreateQARequest,
-  RateMsgRecordRequest,
+  KnowledgeSummary,
+  ListSharedKnowledgeRequest,
+  PluginToolReqParam,
+  ListQAResponse,
+  DeleteAttributeLabelRequest,
+  DescribeRobotBizIDByAppKeyResponse,
   RenameDocResponse,
-  MsgRecordReference,
+  DescribeNodeRunRequest,
+  ListDocCateRequest,
+  DescribeDocResponse,
   CreateReleaseRequest,
+  Label,
   AgentProcedure,
-  ExportAttributeLabelRequest,
-  ModifyQACateRequest,
+  KnowledgeQaOutput,
+  AgentKnowledgeFilterTag,
+  ApiVarAttrInfo,
+  SimilarQuestion,
+  AgentThought,
+  GroupDocRequest,
+  CheckAttributeLabelReferRequest,
+  CreateSharedKnowledgeResponse,
+  AgentKnowledge,
   CreateAgentRequest,
-  UpdateSharedKnowledgeRequest,
-  StopDocParseRequest,
+  UpdateVarResponse,
+  SearchStrategy,
+  ModifyAttributeLabelRequest,
+  ProcedureDebugging,
+  AttributeLabel,
+  ListWorkflowRunsRequest,
+  ListUnsatisfiedReplyResponse,
+  GetAppSecretRequest,
+  ModelParameter,
   DeleteQACateResponse,
-  WordRecognizeInfo,
-  DescribeDocRequest,
+  AgentToolInfo,
+  ListReleaseDocPreviewResponse,
+  StopWorkflowRunRequest,
+  RenameDocRequest,
+  StopWorkflowRunResponse,
+  SummaryConfig,
+  GenerateQAResponse,
+  GetTaskStatusResponse,
+  TaskFlowSummary,
+  DescribeConcurrencyUsageGraphRequest,
   AgentProcedureDebugging,
   DescribeTokenUsageGraphRequest,
-  ReconstructDocumentFailedPage,
-  DescribeConcurrencyUsageGraphRequest,
-  DescribeReleaseRequest,
-  ReleaseQA,
-  UnsatisfiedReply,
-  AgentToolRspParam,
-  CreateRejectedQuestionRequest,
-  ModifyDocAttrRangeResponse,
-  DescribeCallStatsGraphRequest,
-  GetReconstructDocumentResultRequest,
-  ListQAResponse,
-  VerifyQARequest,
+  VerifyQAResponse,
+  RetryDocAuditRequest,
+  VoiceConfig,
+  TaskFLowVar,
+  SaveDocRequest,
+  RetryDocParseRequest,
   ListAppKnowledgeDetailResponse,
+  ModifyQACateResponse,
+  DescribeAttributeLabelResponse,
+  DescribeSharedKnowledgeRequest,
+  KnowledgeQaSingleWorkflow,
+  ListQACateResponse,
+  GetVarListRequest,
+  RetryDocParseResponse,
+  DeleteAgentResponse,
   CreateRejectedQuestionResponse,
+  ListReleaseQAPreviewResponse,
+  ExportUnsatisfiedReplyRequest,
+  GroupQAResponse,
+  QuoteInfo,
+  CreateAppRequest,
+  AppConfig,
+  DescribeReleaseRequest,
+  DescribeDocRequest,
+  KnowledgeBaseInfo,
+  ListAppCategoryRequest,
+  ListReleaseConfigPreviewRequest,
+  CallDetail,
+  AgentToolReqParam,
+  ListReleaseDocPreviewRequest,
+  DocFilterFlag,
+  UserBaseInfo,
+  DocSegment,
+  UnsatisfiedReply,
+  DescribeUnsatisfiedReplyContextResponse,
+  AgentToolRspParam,
+  DigitalHumanConfig,
+  CreateRejectedQuestionRequest,
+  DescribeKnowledgeUsagePieGraphRequest,
+  AttrLabelDetail,
+  DescribeReferResponse,
+  Context,
+  ListDocRequest,
+  GetAnswerTypeDataCountResponse,
+  GroupQARequest,
+  TaskParams,
+  RateMsgRecordRequest,
+  DescribeCallStatsGraphRequest,
+  GetMsgRecordResponse,
+  DescribeAppRequest,
+  DescribeKnowledgeUsageRequest,
+  DeleteSharedKnowledgeRequest,
+  AgentKnowledgeFilter,
+  DescribeReleaseResponse,
+  WorkflowRunBase,
+  DescribeConcurrencyUsageGraphResponse,
+  ListDocItem,
+  AgentPluginInfo,
+  ModifyAgentRequest,
+  ModifyRejectedQuestionRequest,
+  AppModel,
+  Stat,
+  DescribeKnowledgeUsagePieGraphResponse,
+  ListRejectedQuestionResponse,
+  ClassifyLabel,
   DescribeTokenUsageGraphResponse,
   SimilarQuestionModify,
+  WorkflowRunNodeInfo,
+  StatisticInfo,
+  ModifyAttributeLabelResponse,
+  RetryDocAuditResponse,
   ModifyDocCateRequest,
+  ReferShareKnowledgeResponse,
+  RetryReleaseResponse,
+  ModifyDocRequest,
+  GetLikeDataCountRequest,
   AgentInput,
+  DeleteRejectedQuestionResponse,
+  Credentials,
+  MsgFileInfo,
+  CreateAttributeLabelRequest,
+  ListAppResponse,
+  AppInfo,
+  CateInfo,
+  DescribeSharedKnowledgeResponse,
+  ValueInfo,
   DeleteVarRequest,
   KnowledgeQaConfig,
+  RejectedQuestion,
+  MsgRecordReference,
+  AICallConfig,
+  ListRejectedQuestionPreviewRequest,
+  ListReleaseConfigPreviewResponse,
   ModelInfo,
   DeleteRejectedQuestionRequest,
   Highlight,
-  TaskFLowVar,
-  KnowledgeBaseInfo,
-  GetLikeDataCountResponse,
-  DeleteAttributeLabelResponse,
-  IntentAchievement,
-  VerifyQAResponse,
-  DescribeSharedKnowledgeRequest,
-  ModifyDocRequest,
-  ListWorkflowRunsResponse,
-  Polygon,
-  BaseConfig,
-  SimilarQuestion,
-  MsgFileInfo,
-  RunReRankRequest,
-  DescribeTokenUsageRequest,
-  AgentKnowledgeFilterDocAndAnswer,
-  CreateAttributeLabelResponse,
-  ListAppCategoryRspOption,
-  CreateAgentResponse,
-  IsTransferIntentRequest,
-  ModifyRejectedQuestionResponse,
-  ModifyDocCateResponse,
-  QuoteInfo,
-  DescribeCallStatsGraphResponse,
-  DescribeStorageCredentialResponse,
-  CheckAttributeLabelExistResponse,
-  GetTaskStatusRequest,
-  DescribeRobotBizIDByAppKeyRequest,
-  CreateVarRequest,
-  QACate,
-  ListRejectedQuestionRequest,
-  ModifyDocResponse,
-  AgentKnowledgeAttrLabel,
-  PluginToolReqParam,
-  UpdateSharedKnowledgeResponse,
-  DeleteAgentRequest,
-  CheckAttributeLabelExistRequest,
-  ListAppRequest,
-  GetWsTokenReq_Label,
-  ListReferShareKnowledgeResponse,
-  RunNodeInfo,
-  AgentDebugInfo,
-  CreateDocCateResponse,
-  ExportQAListResponse,
-  CreateQACateResponse,
-  ListDocRequest,
-  GetAnswerTypeDataCountResponse,
-  GetMsgRecordResponse,
-  ReferShareKnowledgeResponse,
-  AgentModelInfo,
-  AgentKnowledgeQAPlugin,
-  ReferDetail,
-  KnowledgeUpdateInfo,
-  GetDocPreviewRequest,
-  DescribeCorpRequest,
-  DescribeAttributeLabelRequest,
-  KnowledgeSummary,
-  ListSharedKnowledgeRequest,
-  RetryDocParseRequest,
-  GroupDocRequest,
-  GroupQARequest,
-  ModifyAttributeLabelRequest,
-  Option,
-  ListUsageCallDetailRequest,
-  GetTaskStatusResponse,
-  ConvertDocumentResponse,
-  DescribeKnowledgeUsagePieGraphResponse,
-  GetVarListRequest,
-  ClassifyLabel,
-  ListReleaseQAPreviewResponse,
-  CreateAppRequest,
-  DeleteAppResponse,
-  CallDetail,
-  UserBaseInfo,
-  DocSegment,
-  DescribeUnsatisfiedReplyContextResponse,
-  ModifyDocAttrRangeRequest,
-  DescribeKnowledgeUsagePieGraphRequest,
-  AttributeFilters,
-  GetEmbeddingRequest,
-  KnowledgeCapacityPieGraphDetail,
-  DescribeAppRequest,
-  DescribeNodeRunRequest,
-  DescribeConcurrencyUsageGraphResponse,
-  AgentPluginInfo,
-  SummaryConfig,
-  RetryDocAuditResponse,
-  RetryReleaseResponse,
-  NodeRunBase,
-  AICallConfig,
-  Credentials,
-  AppInfo,
-  DescribeSharedKnowledgeResponse,
-  RunReRankResponse,
-  ListReleaseItem,
+  FileInfo,
+  ExportQAListRequest,
+  GetDocPreviewResponse,
   DescribeConcurrencyUsageResponse,
+  ListUsageCallDetailResponse,
+  AttributeLabelRefByWorkflow,
+  CreateReleaseResponse,
+  ReferDetail,
+  ListQaItem,
+  ModifyAppRequest,
+  KnowledgeDetail,
+  DeleteAttributeLabelResponse,
+  RetryReleaseRequest,
   KnowledgeQaPlugin,
   UpdateVarRequest,
+  IntentAchievement,
+  VerifyQARequest,
   DeleteQACateRequest,
+  GenerateQARequest,
   GetWsTokenRequest,
-  VoiceConfig,
-  EmbeddingObject,
+  QACate,
+  DeleteVarResponse,
+  ListReferShareKnowledgeRequest,
+  AgentInputUserInputValue,
   DescribeTokenUsageResponse,
-  ListReleaseConfigPreviewRequest,
+  DeleteAppResponse,
+  Procedure,
+  ListWorkflowRunsResponse,
+  ListAttributeLabelRequest,
+  DeleteDocCateRequest,
+  AgentReference,
+  DeleteDocResponse,
+  ListSharedKnowledgeResponse,
+  BaseConfig,
+  DescribeSegmentsResponse,
   AppBaseInfo,
+  ClassifyConfig,
+  DescribeConcurrencyUsageRequest,
   GroupDocResponse,
-  ListUsageCallDetailResponse,
+  UploadAttributeLabelRequest,
+  IgnoreUnsatisfiedReplyRequest,
+  ExportAttributeLabelRequest,
+  DescribeTokenUsageRequest,
   GetAppKnowledgeCountResponse,
+  AgentKnowledgeFilterDocAndAnswer,
+  CreateAttributeLabelResponse,
+  DescribeAppAgentListRequest,
   ListAppKnowledgeDetailRequest,
-  ReRankDataObject,
-  WorkflowRunDetail,
+  CreateQAResponse,
+  CreateAgentResponse,
+  ModifyQACateRequest,
+  BackgroundImageConfig,
+  ListQACateRequest,
+  ListReleaseQAPreviewRequest,
+  DescribeReleaseInfoResponse,
+  IsTransferIntentRequest,
+  AgentDebugInfo,
+  DescribeWorkflowRunResponse,
+  DeleteAppRequest,
+  ModifyRejectedQuestionResponse,
+  GetVarListResponse,
+  WorkFlowSummary,
+  ListRejectedQuestionRequest,
+  ListAppCategoryRspOption,
+  AgentPluginHeader,
+  UpdateSharedKnowledgeResponse,
+  DescribeSearchStatsGraphResponse,
+  DescribeStorageCredentialRequest,
+  QAList,
+  ShareKnowledgeBase,
   KnowledgeDetailInfo,
+  ModifyDocCateResponse,
   SaveDocResponse,
-  Context,
-  ModifyQACateResponse,
+  ListReleaseResponse,
+  ListModelResponse,
+  DescribeNodeRunResponse,
+  ListAttributeLabelResponse,
+  SummaryOutput,
+  ListReleaseItem,
+  ModifyQAResponse,
+  DeleteQAResponse,
+  DescribeCallStatsGraphResponse,
+  GetMsgRecordRequest,
+  DescribeStorageCredentialResponse,
+  CheckAttributeLabelExistResponse,
+  StrValue,
+  GetTaskStatusRequest,
   CheckAttributeLabelReferResponse,
+  RateMsgRecordResponse,
+  CreateVarResponse,
+  NodeRunDetail,
+  ModifyDocAttrRangeRequest,
   ReleaseRejectedQuestion,
+  Option,
+  CreateQACateRequest,
+  SearchRange,
+  DescribeRobotBizIDByAppKeyRequest,
+  CreateVarRequest,
+  ExportUnsatisfiedReplyResponse,
+  HistorySummary,
+  StopDocParseRequest,
+  ModifyDocResponse,
+  ReleaseConfigs,
   DescribeSegmentsRequest,
+  DescribeSearchStatsGraphRequest,
+  AgentKnowledgeAttrLabel,
   Filters,
+  DescribeReferRequest,
   IgnoreUnsatisfiedReplyResponse,
+  ListReleaseRequest,
+  KnowledgeWorkflow,
+  ModifyAgentResponse,
+  ListModelRequest,
+  ReferShareKnowledgeRequest,
+  ListSelectDocRequest,
 } from "./lke_models"
 
 /**
@@ -435,16 +408,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyQAAttrRangeResponse) => void
   ): Promise<ModifyQAAttrRangeResponse> {
     return this.request("ModifyQAAttrRange", req, cb)
-  }
-
-  /**
-   * 本接口为异步接口的查询结果接口，用于获取文档解析处理结果。
-   */
-  async GetReconstructDocumentResult(
-    req: GetReconstructDocumentResultRequest,
-    cb?: (error: string, rep: GetReconstructDocumentResultResponse) => void
-  ): Promise<GetReconstructDocumentResultResponse> {
-    return this.request("GetReconstructDocumentResult", req, cb)
   }
 
   /**
@@ -525,18 +488,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListDocCateResponse) => void
   ): Promise<ListDocCateResponse> {
     return this.request("ListDocCate", req, cb)
-  }
-
-  /**
-     * 产品规划
-
-接口支持图片和PDF转可编辑word格式文件，将文件中的图片、文本、表格等元素识别，并根据位置进行还原。
-     */
-  async ConvertDocument(
-    req: ConvertDocumentRequest,
-    cb?: (error: string, rep: ConvertDocumentResponse) => void
-  ): Promise<ConvertDocumentResponse> {
-    return this.request("ConvertDocument", req, cb)
   }
 
   /**
@@ -680,13 +631,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Doc分类删除
+   * 此接口可查询已创建的所有工作流异步运行实例。
    */
-  async DeleteDocCate(
-    req: DeleteDocCateRequest,
-    cb?: (error: string, rep: DeleteDocCateResponse) => void
-  ): Promise<DeleteDocCateResponse> {
-    return this.request("DeleteDocCate", req, cb)
+  async ListWorkflowRuns(
+    req: ListWorkflowRunsRequest,
+    cb?: (error: string, rep: ListWorkflowRunsResponse) => void
+  ): Promise<ListWorkflowRunsResponse> {
+    return this.request("ListWorkflowRuns", req, cb)
   }
 
   /**
@@ -810,16 +761,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 企业详情
-   */
-  async DescribeCorp(
-    req?: DescribeCorpRequest,
-    cb?: (error: string, rep: DescribeCorpResponse) => void
-  ): Promise<DescribeCorpResponse> {
-    return this.request("DescribeCorp", req, cb)
-  }
-
-  /**
    * 创建共享知识库。
    */
   async CreateSharedKnowledge(
@@ -880,13 +821,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口可查询已创建的所有工作流异步运行实例。
+   * Doc分类删除
    */
-  async ListWorkflowRuns(
-    req: ListWorkflowRunsRequest,
-    cb?: (error: string, rep: ListWorkflowRunsResponse) => void
-  ): Promise<ListWorkflowRunsResponse> {
-    return this.request("ListWorkflowRuns", req, cb)
+  async DeleteDocCate(
+    req: DeleteDocCateRequest,
+    cb?: (error: string, rep: DeleteDocCateResponse) => void
+  ): Promise<DeleteDocCateResponse> {
+    return this.request("DeleteDocCate", req, cb)
   }
 
   /**
@@ -1131,13 +1072,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建企业
+   * 修改拒答问题
    */
-  async CreateCorp(
-    req: CreateCorpRequest,
-    cb?: (error: string, rep: CreateCorpResponse) => void
-  ): Promise<CreateCorpResponse> {
-    return this.request("CreateCorp", req, cb)
+  async ModifyRejectedQuestion(
+    req: ModifyRejectedQuestionRequest,
+    cb?: (error: string, rep: ModifyRejectedQuestionResponse) => void
+  ): Promise<ModifyRejectedQuestionResponse> {
+    return this.request("ModifyRejectedQuestion", req, cb)
   }
 
   /**
@@ -1286,17 +1227,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 多轮改写（QueryRewrite）主要用于多轮对话中，进行指代消解和省略补全。使用本接口，无需输入prompt描述，根据对话历史即可生成更精确的用户查询。在应用场景上，本接口可应用于智能问答、对话式搜索等多种场景。
-开通[产品体验](https://lke.cloud.tencent.com/lke/#/trialProduct)后可获得50wtoken体验额度。本接口（QueryRewrite）有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
-     */
-  async QueryRewrite(
-    req: QueryRewriteRequest,
-    cb?: (error: string, rep: QueryRewriteResponse) => void
-  ): Promise<QueryRewriteResponse> {
-    return this.request("QueryRewrite", req, cb)
-  }
-
-  /**
    * 删除变量
    */
   async DeleteVar(
@@ -1314,18 +1244,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAppResponse) => void
   ): Promise<ModifyAppResponse> {
     return this.request("ModifyApp", req, cb)
-  }
-
-  /**
-     * 本接口（GetEmbedding）调用文本表示模型，将文本转化为用数值表示的向量形式，可用于文本检索、信息推荐、知识挖掘等场景。
-开通[产品体验](https://lke.cloud.tencent.com/lke/#/trialProduct)后可获得50wtoken体验额度。
-本接口（GetEmbedding）有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
-     */
-  async GetEmbedding(
-    req: GetEmbeddingRequest,
-    cb?: (error: string, rep: GetEmbeddingResponse) => void
-  ): Promise<GetEmbeddingResponse> {
-    return this.request("GetEmbedding", req, cb)
   }
 
   /**
@@ -1409,16 +1327,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改拒答问题
-   */
-  async ModifyRejectedQuestion(
-    req: ModifyRejectedQuestionRequest,
-    cb?: (error: string, rep: ModifyRejectedQuestionResponse) => void
-  ): Promise<ModifyRejectedQuestionResponse> {
-    return this.request("ModifyRejectedQuestion", req, cb)
-  }
-
-  /**
    * 获取模型列表
    */
   async GetAppKnowledgeCount(
@@ -1490,16 +1398,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 基于知识引擎精调模型技术的rerank模型，支持对多路召回的结果进行重排序，根据query与切片内容的相关性，按分数由高到低对切片进行排序，并输出对应的打分结果。（这个接口已下线，请使用新接口，接口文档：https://cloud.tencent.com/document/product/1772/115339）。
-   */
-  async RunReRank(
-    req: RunReRankRequest,
-    cb?: (error: string, rep: RunReRankResponse) => void
-  ): Promise<RunReRankResponse> {
-    return this.request("RunReRank", req, cb)
-  }
-
-  /**
    * 获取任务状态
    */
   async GetTaskStatus(
@@ -1507,18 +1405,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTaskStatusResponse) => void
   ): Promise<GetTaskStatusResponse> {
     return this.request("GetTaskStatus", req, cb)
-  }
-
-  /**
-     * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
-
-体验期间单账号限制qps仅为1，若有正式接入需要请与产研团队沟通开放。
-     */
-  async ReconstructDocument(
-    req: ReconstructDocumentRequest,
-    cb?: (error: string, rep: ReconstructDocumentResponse) => void
-  ): Promise<ReconstructDocumentResponse> {
-    return this.request("ReconstructDocument", req, cb)
   }
 
   /**

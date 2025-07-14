@@ -337,13 +337,21 @@ export interface DescribeWhiteBoxServiceStatusResponse {
 }
 
 /**
- * 返回CMK列表信息
+ * AsymmetricRsaDecrypt返回参数结构体
  */
-export interface Key {
+export interface AsymmetricRsaDecryptResponse {
   /**
-   * CMK的全局唯一标识。
+   * CMK的唯一标识
    */
   KeyId?: string
+  /**
+   * 解密后的明文，base64编码
+   */
+  Plaintext?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1001,6 +1009,34 @@ export interface DataKeyMetadata {
    * 资源ID，格式：creatorUin/$creatorUin/$dataKeyId
    */
   ResourceId?: string
+  /**
+   * 密钥是否是主副本。0:主本，1:同步副本。
+   */
+  IsSyncReplica?: number
+  /**
+   * 同步的原始地域
+   */
+  SourceRegion?: string
+  /**
+   * 密钥同步的状态，0:未同步，1:同步成功，2:同步失败，3:同步中。
+   */
+  SyncStatus?: number
+  /**
+   * 同步的结果描述
+   */
+  SyncMessages?: string
+  /**
+   * 同步的开始时间
+   */
+  SyncStartTime?: number
+  /**
+   * 同步的结束时间
+   */
+  SyncEndTime?: number
+  /**
+   * 同步的原始集群，如果为空，是公有云公共集群
+   */
+  SourceHsmClusterId?: string
 }
 
 /**
@@ -1554,6 +1590,14 @@ export interface GetServiceStatusResponse {
    */
   DataKeyUsedCount?: number
   /**
+   * 同步任务的目标地域信息
+   */
+  SyncTaskList?: Array<DestinationSyncConfig>
+  /**
+   * 是否支持同步任务。true:支持，false:不支持。
+   */
+  IsAllowedSync?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1829,6 +1873,34 @@ export interface KeyMetadata {
    * 上次乱转时间（Unix timestamp）
    */
   LastRotateTime?: number
+  /**
+   *  密钥是否是主副本。0:主本，1:同步副本。
+   */
+  IsSyncReplica?: number
+  /**
+   * 同步的原始地域
+   */
+  SourceRegion?: string
+  /**
+   * 密钥同步的状态，0:未同步,1:同步成功,2:同步失败,3:同步中。
+   */
+  SyncStatus?: number
+  /**
+   * 同步的结果描述
+   */
+  SyncMessages?: string
+  /**
+   * 同步的开始时间
+   */
+  SyncStartTime?: number
+  /**
+   * 同步的结束时间
+   */
+  SyncEndTime?: number
+  /**
+   * 同步的原始集群，如果为空，是公有云公共集群
+   */
+  SourceHsmClusterId?: string
 }
 
 /**
@@ -1940,21 +2012,17 @@ export interface PostQuantumCryptoDecryptRequest {
 }
 
 /**
- * AsymmetricRsaDecrypt返回参数结构体
+ * 同步任务的目标地域列表，包括地域和集群信息。如果集群为空，表示公有云共享集群，如果集群不为空，表示独享集群。
  */
-export interface AsymmetricRsaDecryptResponse {
+export interface DestinationSyncConfig {
   /**
-   * CMK的唯一标识
+   * 同步任务的目标地域
    */
-  KeyId?: string
+  DestinationRegion?: string
   /**
-   * 解密后的明文，base64编码
+   * HsmClusterId为空表示公有云共享版，如果不为空表示地域下独享版集群。
    */
-  Plaintext?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  HsmClusterId?: string
 }
 
 /**
@@ -2134,6 +2202,16 @@ export interface GenerateRandomRequest {
    * 生成的随机数的长度。最小值为1， 最大值为1024。
    */
   NumberOfBytes: number
+}
+
+/**
+ * 返回CMK列表信息
+ */
+export interface Key {
+  /**
+   * CMK的全局唯一标识。
+   */
+  KeyId?: string
 }
 
 /**

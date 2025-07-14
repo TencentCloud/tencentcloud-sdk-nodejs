@@ -15002,23 +15002,23 @@ export interface LiveStreamAiReviewResultItem {
 <li>ImagePolitical：图片涉敏</li>
 <li>VoicePorn：声音违规</li>
    */
-  Type: string
+  Type?: string
   /**
    * 图片鉴黄的结果，当 Type 为 ImagePorn 时有效。
    */
-  ImagePornResultSet: Array<LiveStreamAiReviewImagePornResult>
+  ImagePornResultSet?: Array<LiveStreamAiReviewImagePornResult>
   /**
    * 图片涉敏的结果，当 Type 为 ImageTerrorism 时有效。
    */
-  ImageTerrorismResultSet: Array<LiveStreamAiReviewImageTerrorismResult>
+  ImageTerrorismResultSet?: Array<LiveStreamAiReviewImageTerrorismResult>
   /**
    * 图片涉敏的结果，当 Type 为 ImagePolitical 时有效。
    */
-  ImagePoliticalResultSet: Array<LiveStreamAiReviewImagePoliticalResult>
+  ImagePoliticalResultSet?: Array<LiveStreamAiReviewImagePoliticalResult>
   /**
    * 声音违规的结果，当 Type 为 VoicePorn 时有效。
    */
-  VoicePornResultSet: Array<LiveStreamAiReviewVoicePornResult>
+  VoicePornResultSet?: Array<LiveStreamAiReviewVoicePornResult>
 }
 
 /**

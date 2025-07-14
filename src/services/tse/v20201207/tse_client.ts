@@ -173,8 +173,10 @@ import {
   DescribeConfigFileResponse,
   AccurateQpsThreshold,
   ZookeeperRegionMyIdInfo,
+  GatewayServices,
   UpdateCloudNativeAPIGatewaySpecResponse,
   CloudNativeAPIGatewayConfig,
+  KongServiceLightPreview,
   DescribeNativeGatewayServerGroupsRequest,
   RouteWafStatus,
   DescribePublicNetworkRequest,
@@ -197,6 +199,7 @@ import {
   RollbackConfigFileReleasesRequest,
   DescribeCloudNativeAPIGatewayInfoByIpResponse,
   CloudNativeAPIGatewayCanaryRule,
+  DescribeCloudNativeAPIGatewayServicesLightRequest,
   PublishConfigFilesResponse,
   UpdateCloudNativeAPIGatewayCertificateInfoRequest,
   BoundK8SInfo,
@@ -351,6 +354,7 @@ import {
   CreateOrUpdateConfigFileAndReleaseResponse,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
   DeleteNativeGatewayServiceSourceRequest,
+  DescribeCloudNativeAPIGatewayServicesLightResponse,
   RestartSREInstanceResponse,
   DescribeZookeeperServerInterfacesRequest,
   DeleteGovernanceServicesRequest,
@@ -521,13 +525,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关限流插件(路由)
+   * 轻量查询云原生网关服务列表
    */
-  async ModifyCloudNativeAPIGatewayRouteRateLimit(
-    req: ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteRateLimitResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayRouteRateLimitResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayRouteRateLimit", req, cb)
+  async DescribeCloudNativeAPIGatewayServicesLight(
+    req: DescribeCloudNativeAPIGatewayServicesLightRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayServicesLightResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayServicesLightResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayServicesLight", req, cb)
   }
 
   /**
@@ -571,13 +575,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取 WAF 防护域名
+   * 删除网关服务来源实例
    */
-  async DescribeWafDomains(
-    req: DescribeWafDomainsRequest,
-    cb?: (error: string, rep: DescribeWafDomainsResponse) => void
-  ): Promise<DescribeWafDomainsResponse> {
-    return this.request("DescribeWafDomains", req, cb)
+  async DeleteNativeGatewayServiceSource(
+    req: DeleteNativeGatewayServiceSourceRequest,
+    cb?: (error: string, rep: DeleteNativeGatewayServiceSourceResponse) => void
+  ): Promise<DeleteNativeGatewayServiceSourceResponse> {
+    return this.request("DeleteNativeGatewayServiceSource", req, cb)
   }
 
   /**
@@ -688,6 +692,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeZookeeperServerInterfacesResponse) => void
   ): Promise<DescribeZookeeperServerInterfacesResponse> {
     return this.request("DescribeZookeeperServerInterfaces", req, cb)
+  }
+
+  /**
+   * 获取 WAF 防护域名
+   */
+  async DescribeWafDomains(
+    req: DescribeWafDomainsRequest,
+    cb?: (error: string, rep: DescribeWafDomainsResponse) => void
+  ): Promise<DescribeWafDomainsResponse> {
+    return this.request("DescribeWafDomains", req, cb)
   }
 
   /**
@@ -831,13 +845,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除治理中心服务实例
+   * 更新网关上游实例列表，仅支持IPList服务类型
    */
-  async DeleteGovernanceInstancesByHost(
-    req: DeleteGovernanceInstancesByHostRequest,
-    cb?: (error: string, rep: DeleteGovernanceInstancesByHostResponse) => void
-  ): Promise<DeleteGovernanceInstancesByHostResponse> {
-    return this.request("DeleteGovernanceInstancesByHost", req, cb)
+  async UpdateUpstreamTargets(
+    req: UpdateUpstreamTargetsRequest,
+    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
+  ): Promise<UpdateUpstreamTargetsResponse> {
+    return this.request("UpdateUpstreamTargets", req, cb)
   }
 
   /**
@@ -1101,6 +1115,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生网关限流插件(路由)
+   */
+  async ModifyCloudNativeAPIGatewayRouteRateLimit(
+    req: ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteRateLimitResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayRouteRateLimitResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayRouteRateLimit", req, cb)
+  }
+
+  /**
    * 查询某个配置所有版本信息
    */
   async DescribeConfigFileReleaseVersions(
@@ -1168,16 +1192,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGovernanceServiceContractVersionsResponse) => void
   ): Promise<DescribeGovernanceServiceContractVersionsResponse> {
     return this.request("DescribeGovernanceServiceContractVersions", req, cb)
-  }
-
-  /**
-   * 更新网关上游实例列表，仅支持IPList服务类型
-   */
-  async UpdateUpstreamTargets(
-    req: UpdateUpstreamTargetsRequest,
-    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
-  ): Promise<UpdateUpstreamTargetsResponse> {
-    return this.request("UpdateUpstreamTargets", req, cb)
   }
 
   /**
@@ -1541,13 +1555,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除网关服务来源实例
+   * 删除治理中心服务实例
    */
-  async DeleteNativeGatewayServiceSource(
-    req: DeleteNativeGatewayServiceSourceRequest,
-    cb?: (error: string, rep: DeleteNativeGatewayServiceSourceResponse) => void
-  ): Promise<DeleteNativeGatewayServiceSourceResponse> {
-    return this.request("DeleteNativeGatewayServiceSource", req, cb)
+  async DeleteGovernanceInstancesByHost(
+    req: DeleteGovernanceInstancesByHostRequest,
+    cb?: (error: string, rep: DeleteGovernanceInstancesByHostResponse) => void
+  ): Promise<DeleteGovernanceInstancesByHostResponse> {
+    return this.request("DeleteGovernanceInstancesByHost", req, cb)
   }
 
   /**

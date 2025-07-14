@@ -64,6 +64,36 @@ export interface DisplayWechatOfficialAccount {
 }
 
 /**
+ * Github泄露详情
+ */
+export interface DisplayGithub {
+  /**
+   * 主键ID
+   */
+  Id?: number
+  /**
+   * 内容
+   */
+  Content?: string
+  /**
+   * 命中关键字
+   */
+  MatchedKeywords?: string
+  /**
+   * 泄露地址
+   */
+  Url?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 公共字段
+   */
+  DisplayToolCommon?: DisplayToolCommon
+}
+
+/**
  * ModifyCustomer请求参数结构体
  */
 export interface ModifyCustomerRequest {
@@ -536,37 +566,17 @@ export interface DescribeDarkWebsRequest {
 }
 
 /**
- * 网盘泄露详情
+ * 邮箱泄露详情
  */
-export interface DisplayNetDisk {
+export interface DisplayLeakageEmail {
   /**
    * 主键ID
    */
   Id?: number
   /**
-   * 内容
+   * 邮箱
    */
-  Content?: string
-  /**
-   * 命中关键字
-   */
-  MatchedKeywords?: string
-  /**
-   * 泄露地址
-   */
-  Url?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 公共字段
-   */
-  DisplayToolCommon?: DisplayToolCommon
-  /**
-   * 泄露平台
-   */
-  Platform?: string
+  Email?: string
 }
 
 /**
@@ -970,6 +980,78 @@ export interface DescribeAssetsRequest {
 }
 
 /**
+ * 数据泄露详情
+ */
+export interface DisplayLeakageData {
+  /**
+   * 主键ID
+   */
+  Id?: number
+  /**
+   * 链接
+   */
+  Url?: string
+}
+
+/**
+ * DescribeLeakageDatas请求参数结构体
+ */
+export interface DescribeLeakageDatasRequest {
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 是否新增数据
+   */
+  IsNew?: boolean
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 子公司ID列表
+   */
+  EnterpriseUidList?: Array<string>
+  /**
+   * 数据输出格式：json、file，默认不填为json
+   */
+  Format?: string
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
+}
+
+/**
  * DescribeJobRecordDetails请求参数结构体
  */
 export interface DescribeJobRecordDetailsRequest {
@@ -1117,33 +1199,111 @@ export interface DisplayJobRecordDetail {
 }
 
 /**
- * Github泄露详情
+ * 端口详情
  */
-export interface DisplayGithub {
+export interface DisplayPort {
   /**
    * 主键ID
    */
   Id?: number
   /**
-   * 内容
-   */
-  Content?: string
-  /**
-   * 命中关键字
-   */
-  MatchedKeywords?: string
-  /**
-   * 泄露地址
-   */
-  Url?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+  /**
+   * IP或域名地址
+   */
+  Asset?: string
+  /**
+   * 解析的IP
+   */
+  Ip?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 是否高危
+   */
+  IsHighRisk?: boolean
+  /**
+   * 组件名称
+   */
+  App?: string
+  /**
+   * 服务名称
+   */
+  Service?: string
+  /**
+   * 端口响应详情
+   */
+  Banner?: string
+  /**
+   * 上次检测时间
+   */
+  LastCheckTime?: string
+  /**
+   * 状态，close:连接超时，端口可能已关闭，open:端口开放, checking:复测中, ignore:已忽略
+   */
+  Status?: string
+}
+
+/**
+ * DescribeLeakageCodes请求参数结构体
+ */
+export interface DescribeLeakageCodesRequest {
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 是否新增数据
+   */
+  IsNew?: boolean
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 子公司ID列表
+   */
+  EnterpriseUidList?: Array<string>
+  /**
+   * 数据输出格式：json、file，默认不填为json
+   */
+  Format?: string
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
 }
 
 /**
@@ -1291,61 +1451,57 @@ export interface DisplaySubDomain {
 }
 
 /**
- * 数据管理公共字段
+ * DescribeWechatApplets请求参数结构体
  */
-export interface DisplayToolCommon {
-  /**
-   * 子公司ID
-   */
-  EnterpriseUid?: string
-  /**
-   * 子公司名称
-   */
-  EnterpriseName?: string
-  /**
-   * 主任务ID
-   */
-  JobId?: number
-  /**
-   * 单任务ID
-   */
-  JobStageId?: number
-  /**
-   * 是否忽略
-   */
-  Ignored?: boolean
-  /**
-   * 子任务ID
-   */
-  JobRecordId?: number
+export interface DescribeWechatAppletsRequest {
   /**
    * 企业ID
    */
   CustomerId?: number
   /**
-   * 企业名称
+   * 是否新增数据
    */
-  CustomerName?: string
+  IsNew?: boolean
   /**
-   * 详情
+   * 分页大小
    */
-  Detail?: string
+  Limit?: number
   /**
-   * Md5值
+   * 分页偏移
    */
-  Md5?: string
+  Offset?: number
   /**
-   * 创建时间
+   * 子公司ID列表
    */
-  CreateAt?: string
+  EnterpriseUidList?: Array<string>
   /**
-   * 更新时间
+   * 数据输出格式：json、file，默认不填为json
    */
-  UpdateAt?: string
+  Format?: string
   /**
-   * 标签列表，json格式：{\"tag1\":[\"责任人xxx\"],\"tag2\":[\"测试站\"]}
+   * 创建时间-开始
    */
-  Labels?: string
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
 }
 
 /**
@@ -1360,6 +1516,25 @@ export interface DescribeGithubsResponse {
    * 数组
    */
   List?: Array<DisplayGithub>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLeakageEmails返回参数结构体
+ */
+export interface DescribeLeakageEmailsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<DisplayLeakageEmail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1853,53 +2028,37 @@ export interface DescribeDomainsResponse {
 }
 
 /**
- * 端口详情
+ * 网盘泄露详情
  */
-export interface DisplayPort {
+export interface DisplayNetDisk {
   /**
    * 主键ID
    */
   Id?: number
   /**
+   * 内容
+   */
+  Content?: string
+  /**
+   * 命中关键字
+   */
+  MatchedKeywords?: string
+  /**
+   * 泄露地址
+   */
+  Url?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * IP或域名地址
+   * 泄露平台
    */
-  Asset?: string
-  /**
-   * 解析的IP
-   */
-  Ip?: string
-  /**
-   * 端口
-   */
-  Port?: number
-  /**
-   * 是否高危
-   */
-  IsHighRisk?: boolean
-  /**
-   * 组件名称
-   */
-  App?: string
-  /**
-   * 服务名称
-   */
-  Service?: string
-  /**
-   * 端口响应详情
-   */
-  Banner?: string
-  /**
-   * 上次检测时间
-   */
-  LastCheckTime?: string
-  /**
-   * 状态，close:连接超时，端口可能已关闭，open:端口开放, checking:复测中, ignore:已忽略
-   */
-  Status?: string
+  Platform?: string
 }
 
 /**
@@ -1961,57 +2120,22 @@ export interface DescribeEnterprisesRequest {
 }
 
 /**
- * DescribeWechatApplets请求参数结构体
+ * DescribeLeakageDatas返回参数结构体
  */
-export interface DescribeWechatAppletsRequest {
+export interface DescribeLeakageDatasResponse {
   /**
-   * 企业ID
+   * 总数
    */
-  CustomerId?: number
+  Total?: number
   /**
-   * 是否新增数据
+   * 数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsNew?: boolean
+  List?: Array<DisplayLeakageData>
   /**
-   * 分页大小
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 分页偏移
-   */
-  Offset?: number
-  /**
-   * 子公司ID列表
-   */
-  EnterpriseUidList?: Array<string>
-  /**
-   * 数据输出格式：json、file，默认不填为json
-   */
-  Format?: string
-  /**
-   * 创建时间-开始
-   */
-  CreateAtStart?: string
-  /**
-   * 创建时间-结束
-   */
-  CreateAtEnd?: string
-  /**
-   * 更新时间-开始
-   */
-  UpdateAtStart?: string
-  /**
-   * 更新时间-结束
-   */
-  UpdateAtEnd?: string
-  /**
-   * 查询数组
-   */
-  Filters?: Array<Filter>
-  /**
-   * 是否显示被忽略的数据
-   */
-  Ignored?: boolean
+  RequestId?: string
 }
 
 /**
@@ -2070,6 +2194,78 @@ export interface DescribeConfigsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * 数据管理公共字段
+ */
+export interface DisplayToolCommon {
+  /**
+   * 子公司ID
+   */
+  EnterpriseUid?: string
+  /**
+   * 子公司名称
+   */
+  EnterpriseName?: string
+  /**
+   * 主任务ID
+   */
+  JobId?: number
+  /**
+   * 单任务ID
+   */
+  JobStageId?: number
+  /**
+   * 是否忽略
+   */
+  Ignored?: boolean
+  /**
+   * 子任务ID
+   */
+  JobRecordId?: number
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 企业名称
+   */
+  CustomerName?: string
+  /**
+   * 详情
+   */
+  Detail?: string
+  /**
+   * Md5值
+   */
+  Md5?: string
+  /**
+   * 创建时间
+   */
+  CreateAt?: string
+  /**
+   * 更新时间
+   */
+  UpdateAt?: string
+  /**
+   * 标签列表，json格式：{\"tag1\":[\"责任人xxx\"],\"tag2\":[\"测试站\"]}
+   */
+  Labels?: string
+}
+
+/**
+ * 代码泄露详情
+ */
+export interface DisplayLeakageCode {
+  /**
+   * 主键ID
+   */
+  Id?: number
+  /**
+   * 链接
+   */
+  Url?: string
 }
 
 /**
@@ -2273,6 +2469,64 @@ export interface DisplayWeakPassword {
 }
 
 /**
+ * DescribeLeakageEmails请求参数结构体
+ */
+export interface DescribeLeakageEmailsRequest {
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 是否新增数据
+   */
+  IsNew?: boolean
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 子公司ID列表
+   */
+  EnterpriseUidList?: Array<string>
+  /**
+   * 数据输出格式：json、file，默认不填为json
+   */
+  Format?: string
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
+}
+
+/**
  * 链路详情扫描目标和ID
  */
 export interface IdndValue {
@@ -2465,6 +2719,25 @@ export interface DisplayDarkWeb {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+}
+
+/**
+ * DescribeLeakageCodes返回参数结构体
+ */
+export interface DescribeLeakageCodesResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<DisplayLeakageCode>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

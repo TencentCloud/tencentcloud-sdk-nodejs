@@ -68,16 +68,6 @@ it("lke.v20231130.ModifyQAAttrRange", async function () {
     }
 })
 
-it("lke.v20231130.GetReconstructDocumentResult", async function () {
-    try {
-       const data = await client.GetReconstructDocumentResult({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.ListSelectDoc", async function () {
     try {
        const data = await client.ListSelectDoc({})
@@ -151,16 +141,6 @@ it("lke.v20231130.CreateAttributeLabel", async function () {
 it("lke.v20231130.ListDocCate", async function () {
     try {
        const data = await client.ListDocCate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lke.v20231130.ConvertDocument", async function () {
-    try {
-       const data = await client.ConvertDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +288,9 @@ it("lke.v20231130.DescribeSearchStatsGraph", async function () {
     }
 })
 
-it("lke.v20231130.DeleteDocCate", async function () {
+it("lke.v20231130.ListWorkflowRuns", async function () {
     try {
-       const data = await client.DeleteDocCate({})
+       const data = await client.ListWorkflowRuns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,16 +418,6 @@ it("lke.v20231130.CheckAttributeLabelRefer", async function () {
     }
 })
 
-it("lke.v20231130.DescribeCorp", async function () {
-    try {
-       const data = await client.DescribeCorp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.CreateSharedKnowledge", async function () {
     try {
        const data = await client.CreateSharedKnowledge({})
@@ -508,9 +478,9 @@ it("lke.v20231130.DescribeNodeRun", async function () {
     }
 })
 
-it("lke.v20231130.ListWorkflowRuns", async function () {
+it("lke.v20231130.DeleteDocCate", async function () {
     try {
-       const data = await client.ListWorkflowRuns({})
+       const data = await client.DeleteDocCate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +728,9 @@ it("lke.v20231130.DescribeConcurrencyUsage", async function () {
     }
 })
 
-it("lke.v20231130.CreateCorp", async function () {
+it("lke.v20231130.ModifyRejectedQuestion", async function () {
     try {
-       const data = await client.CreateCorp({})
+       const data = await client.ModifyRejectedQuestion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,16 +878,6 @@ it("lke.v20231130.DeleteRejectedQuestion", async function () {
     }
 })
 
-it("lke.v20231130.QueryRewrite", async function () {
-    try {
-       const data = await client.QueryRewrite({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.DeleteVar", async function () {
     try {
        const data = await client.DeleteVar({})
@@ -931,16 +891,6 @@ it("lke.v20231130.DeleteVar", async function () {
 it("lke.v20231130.ModifyApp", async function () {
     try {
        const data = await client.ModifyApp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lke.v20231130.GetEmbedding", async function () {
-    try {
-       const data = await client.GetEmbedding({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,16 +978,6 @@ it("lke.v20231130.DescribeRelease", async function () {
     }
 })
 
-it("lke.v20231130.ModifyRejectedQuestion", async function () {
-    try {
-       const data = await client.ModifyRejectedQuestion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.GetAppKnowledgeCount", async function () {
     try {
        const data = await client.GetAppKnowledgeCount({})
@@ -1108,29 +1048,9 @@ it("lke.v20231130.DescribeSegments", async function () {
     }
 })
 
-it("lke.v20231130.RunReRank", async function () {
-    try {
-       const data = await client.RunReRank({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.GetTaskStatus", async function () {
     try {
        const data = await client.GetTaskStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lke.v20231130.ReconstructDocument", async function () {
-    try {
-       const data = await client.ReconstructDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

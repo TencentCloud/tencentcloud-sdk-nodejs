@@ -1087,6 +1087,22 @@ export interface ApplicationDataStatistics {
    * 大陆和海外地区Pcu统计数据汇总，单位人
    */
   PcuDataSum?: Array<StatisticsItem>
+  /**
+   * 小游戏时长统计项数目
+   */
+  MiniGameDataNum?: number
+  /**
+   * 大陆地区小游戏时长统计数据，单位分钟
+   */
+  MiniGameDataMainland?: Array<StatisticsItem>
+  /**
+   * 海外地区小游戏时长统计数据，单位分钟
+   */
+  MiniGameDataOversea?: Array<StatisticsItem>
+  /**
+   * 大陆和海外地区小游戏时长统计数据汇总，单位分钟
+   */
+  MiniGameDataSum?: Array<StatisticsItem>
 }
 
 /**

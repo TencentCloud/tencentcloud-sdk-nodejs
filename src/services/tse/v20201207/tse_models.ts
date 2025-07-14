@@ -3792,6 +3792,20 @@ export interface ZookeeperRegionMyIdInfo {
 }
 
 /**
+ * 轻量查询网关服务列表出参
+ */
+export interface GatewayServices {
+  /**
+   * 服务列表
+   */
+  ServiceList?: Array<KongServiceLightPreview>
+  /**
+   * 结果总数
+   */
+  TotalCount?: number
+}
+
+/**
  * UpdateCloudNativeAPIGatewaySpec返回参数结构体
  */
 export interface UpdateCloudNativeAPIGatewaySpecResponse {
@@ -3898,6 +3912,49 @@ export interface CloudNativeAPIGatewayConfig {
    * 是否为新 ipv6 CLB
    */
   IPV6FullChain?: boolean
+}
+
+/**
+ * 云原生网关服务简洁预览信息
+ */
+export interface KongServiceLightPreview {
+  /**
+   * 服务ID
+   */
+  ID?: string
+  /**
+   * 服务名字
+   */
+  Name?: string
+  /**
+   * 后端配置
+   */
+  UpstreamInfo?: KongUpstreamInfo
+  /**
+   * 后端类型
+   */
+  UpstreamType?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 请求路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 后端协议
+   */
+  Protocol?: string
+  /**
+   * 重试次数
+   */
+  Retries?: number
+  /**
+   * 后端延时，单位ms
+   */
+  Timeout?: number
 }
 
 /**
@@ -4346,6 +4403,28 @@ Standard｜Lane
    * 泳道标签
    */
   LaneTag?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayServicesLight请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayServicesLightRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 列表数量
+   */
+  Limit?: number
+  /**
+   * 列表 offset
+   */
+  Offset?: number
+  /**
+   * 过滤条件，多个过滤条件之间是与的关系，支持 id、name、upstreamType
+   */
+  Filters?: Array<ListFilter>
 }
 
 /**
@@ -7842,6 +7921,20 @@ export interface DeleteNativeGatewayServiceSourceRequest {
    * 服务来源实例 ID
    */
   SourceID: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayServicesLight返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayServicesLightResponse {
+  /**
+   * 无
+   */
+  Result?: GatewayServices
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

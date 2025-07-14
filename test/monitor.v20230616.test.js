@@ -18,9 +18,9 @@ const client = new tencentcloud.monitor.v20230616.Client({
 })
 describe("monitor.v20230616.test.js", function () {
 
-it("monitor.v20230616.GetMonitorData", async function () {
+it("monitor.v20230616.DescribeAlarmNotifyHistories", async function () {
     try {
-       const data = await client.GetMonitorData({})
+       const data = await client.DescribeAlarmNotifyHistories({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
