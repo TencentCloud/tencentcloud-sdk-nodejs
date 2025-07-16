@@ -3456,7 +3456,7 @@ export interface UpdatePrometheusAlertGroupRequest {
    */
   GroupState?: number
   /**
-   * 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx
+   * 腾讯云可观测平台告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx
    */
   AMPReceivers?: Array<string>
   /**
@@ -6659,7 +6659,7 @@ export interface CreatePrometheusAlertGroupRequest {
    */
   GroupState?: number
   /**
-   * 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx
+   * 腾讯云可观测平台告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx
    */
   AMPReceivers?: Array<string>
   /**
@@ -9239,20 +9239,32 @@ export interface UpdateGrafanaWhiteListRequest {
 export interface ModifyConditionsTemplateRequestEventCondition {
   /**
    * 告警通知周期
+   * @deprecated
    */
-  AlarmNotifyPeriod: string
+  AlarmNotifyPeriod?: string
   /**
    * 告警通知方式
+   * @deprecated
    */
-  AlarmNotifyType: string
+  AlarmNotifyType?: string
   /**
    * 事件ID
+   * @deprecated
    */
-  EventID: string
+  EventID?: string
   /**
    * 规则ID
+   * @deprecated
    */
   RuleID?: number
+  /**
+   * 重构后的eventType
+   */
+  MetricName?: string
+  /**
+   * 事件描述信息
+   */
+  Description?: string
 }
 
 /**
@@ -11474,7 +11486,7 @@ export interface PrometheusAlertGroupSet {
    */
   GroupName?: string
   /**
-   * 云监控告警模板ID ，返回告警模板转换后的notice ID。
+   * 腾讯云可观测平台告警模板ID ，返回告警模板转换后的notice ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AMPReceivers?: Array<string>

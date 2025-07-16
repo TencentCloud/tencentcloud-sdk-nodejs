@@ -30,7 +30,7 @@ import {
   SlowPostConfig,
   DescribeWebSecurityTemplatesRequest,
   RateLimitingRules,
-  OriginRecord,
+  DescribeMultiPathGatewayLineRequest,
   OriginACLEntity,
   CompressionParameters,
   DescribeConfigGroupVersionDetailResponse,
@@ -55,6 +55,7 @@ import {
   DescribeBillingDataRequest,
   LogFormat,
   DescribeEnvironmentsRequest,
+  MultiPathGateway,
   DescribeAliasDomainsRequest,
   QUICParameters,
   ManagedRuleGroupMeta,
@@ -67,13 +68,14 @@ import {
   WebSocket,
   ModifyAccelerationDomainRequest,
   ModifyContentIdentifierResponse,
-  WafConfig,
+  Header,
   CreateAliasDomainRequest,
   CLSTopic,
   CreatePrefetchTaskRequest,
   DescribeApplicationProxiesResponse,
   VanityNameServers,
   DescribeTopL7AnalysisDataRequest,
+  CreateMultiPathGatewaySecretKeyResponse,
   DescribeAccelerationDomainsResponse,
   SwitchConfig,
   IdentifyZoneResponse,
@@ -98,6 +100,7 @@ import {
   DeleteL4ProxyRulesResponse,
   ForceRedirect,
   CodeAction,
+  ZoneConfigParameters,
   CreateL7AccRulesResponse,
   CachePrefresh,
   OriginACLInfo,
@@ -132,7 +135,7 @@ import {
   DeleteCustomErrorPageResponse,
   DescribeTimingL7CacheDataResponse,
   DescribeZonesResponse,
-  Header,
+  DeleteMultiPathGatewayRequest,
   DeleteCustomErrorPageRequest,
   CustomField,
   CacheKeyHeader,
@@ -143,22 +146,24 @@ import {
   SecurityConfig,
   CreateSecurityIPGroupRequest,
   ModifyPlanRequest,
-  ExceptUserRuleScope,
-  DDoS,
+  DescribeOriginACLResponse,
+  FailReason,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
   EntityStatus,
   SmartRoutingParameters,
   DisableOriginACLResponse,
-  DescribeOriginACLResponse,
   CreateFunctionRuleResponse,
+  CreateMultiPathGatewaySecretKeyRequest,
   HTTPUpstreamTimeoutParameters,
+  DescribeMultiPathGatewayRequest,
   PrivateParameter,
   L4OfflineLog,
   CreateOriginGroupRequest,
   TopDataRecord,
   CreateSecurityIPGroupResponse,
   CreateSharedCNAMEResponse,
+  DeleteMultiPathGatewayResponse,
   DescribeAvailablePlansResponse,
   RateLimitTemplate,
   ModifyRealtimeLogDeliveryTaskResponse,
@@ -171,6 +176,7 @@ import {
   OCSPStaplingParameters,
   CreateL4ProxyRulesRequest,
   DescribeDDoSAttackTopDataResponse,
+  ModifyMultiPathGatewayRequest,
   LoadBalancer,
   HostName,
   DeleteRulesRequest,
@@ -190,6 +196,7 @@ import {
   DescribePrefetchTasksResponse,
   ManagedRuleDetail,
   NextOriginACL,
+  DescribeMultiPathGatewayRegionsRequest,
   DescribeZoneSettingRequest,
   ModifyL4ProxyStatusResponse,
   FileVerification,
@@ -217,6 +224,7 @@ import {
   RedirectActionParameters,
   DeleteOriginGroupRequest,
   AclCondition,
+  Identification,
   RequestBodyTransferTimeout,
   L7OfflineLog,
   ModifyRuleResponse,
@@ -229,10 +237,12 @@ import {
   BindSecurityTemplateToEntityResponse,
   ModifyL4ProxyRulesResponse,
   DDoSAttackEvent,
+  ClientIpHeader,
   DescribeConfigGroupVersionDetailRequest,
   ModifyPlanResponse,
   DropPageDetail,
   CnameStatus,
+  WafConfig,
   BandwidthAbuseDefense,
   ServerCertInfo,
   DescribeZonesRequest,
@@ -252,9 +262,10 @@ import {
   DescribeDnsRecordsRequest,
   CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
+  DescribeMultiPathGatewaysResponse,
   MaxAgeParameters,
   ModifyApplicationProxyRuleResponse,
-  FailReason,
+  DDoS,
   ModifyL7AccRulePriorityResponse,
   ModifyRequestHeaderParameters,
   CreateConfigGroupVersionResponse,
@@ -292,6 +303,7 @@ import {
   ModifyApplicationProxyStatusRequest,
   DeleteOriginGroupResponse,
   ModifyOriginParameters,
+  DescribeMultiPathGatewayRegionsResponse,
   DescribeL4ProxyRequest,
   DescribeIdentificationsRequest,
   ModifyHostsCertificateResponse,
@@ -300,6 +312,7 @@ import {
   DenyActionParameters,
   TopDetailData,
   DescribeZoneSettingResponse,
+  CreateMultiPathGatewayResponse,
   DescribePurgeTasksRequest,
   ModifyDnsRecordsRequest,
   IdentifyZoneRequest,
@@ -319,7 +332,7 @@ import {
   AccessURLRedirectParameters,
   DescribeDDoSAttackEventRequest,
   CacheConfigParameters,
-  FunctionRuleCondition,
+  CreateL4ProxyResponse,
   CacheKeyParameters,
   ModifyFunctionResponse,
   DescribeOriginGroupRequest,
@@ -336,7 +349,9 @@ import {
   CustomEndpoint,
   ModifyOriginACLResponse,
   VerifyOwnershipRequest,
+  MultiPathGatewayLine,
   ResponseSpeedLimitParameters,
+  ModifyMultiPathGatewayResponse,
   BotManagement,
   DeleteL4ProxyRequest,
   DeleteApplicationProxyRequest,
@@ -350,9 +365,11 @@ import {
   RenewPlanResponse,
   CustomErrorPage,
   DescribeDeployHistoryRequest,
+  CreateMultiPathGatewayLineResponse,
   BillingData,
   DescribePlansRequest,
   ModifyOriginGroupRequest,
+  RefreshMultiPathGatewaySecretKeyResponse,
   DeleteZoneResponse,
   CreateRuleResponse,
   ModifyL7AccSettingResponse,
@@ -418,6 +435,7 @@ import {
   OwnershipVerification,
   CreateRuleRequest,
   ModifyL4ProxyStatusRequest,
+  CreateMultiPathGatewayLineRequest,
   Plan,
   CreateApplicationProxyRuleResponse,
   RateLimitingRule,
@@ -427,8 +445,10 @@ import {
   HandleFunctionRuntimeEnvironmentRequest,
   ModifyL4ProxyRulesStatusRequest,
   DescribeCustomErrorPagesRequest,
+  GatewayRegion,
   CachePrefreshParameters,
   Action,
+  OriginRecord,
   UpstreamFollowRedirectParameters,
   ApplicationProxy,
   ModifyApplicationProxyResponse,
@@ -439,6 +459,7 @@ import {
   RuleAndConditions,
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
+  ExceptUserRuleScope,
   PartialModule,
   DescribeZoneConfigImportResultRequest,
   ModifyApplicationProxyRuleStatusRequest,
@@ -446,6 +467,7 @@ import {
   DeliveryCondition,
   ExceptionRule,
   FollowOrigin,
+  DescribeMultiPathGatewayResponse,
   IPRegionInfo,
   DestroyPlanResponse,
   CacheKeyConfigParameters,
@@ -460,7 +482,7 @@ import {
   DeleteFunctionRulesResponse,
   DescribeTopL7AnalysisDataResponse,
   ModifyContentIdentifierRequest,
-  ClientIpHeader,
+  DeleteMultiPathGatewayLineRequest,
   Resource,
   ModifyResponseHeaderParameters,
   DescribeOriginProtectionRequest,
@@ -479,6 +501,7 @@ import {
   BotConfig,
   EnableOriginACLRequest,
   ModifyZoneResponse,
+  DeleteMultiPathGatewayLineResponse,
   ClientFiltering,
   DescribeTopL7CacheDataRequest,
   CreateLoadBalancerRequest,
@@ -504,6 +527,7 @@ import {
   AlgDetectSession,
   ModifyZoneStatusResponse,
   DeleteContentIdentifierRequest,
+  RefreshMultiPathGatewaySecretKeyRequest,
   CreateContentIdentifierRequest,
   OriginProtectionInfo,
   ModifyDnsRecordsStatusResponse,
@@ -535,10 +559,14 @@ import {
   ErrorPage,
   HTTP2Parameters,
   DescribeOverviewL7DataRequest,
+  CreateMultiPathGatewayRequest,
   DeleteSharedCNAMEResponse,
+  ModifyMultiPathGatewaySecretKeyResponse,
+  DescribeMultiPathGatewaySecretKeyRequest,
   DDoSBlockData,
+  DescribeMultiPathGatewaysRequest,
   DescribePrefetchTasksRequest,
-  ZoneConfigParameters,
+  ModifyMultiPathGatewaySecretKeyRequest,
   DnsRecord,
   OriginPrivateParameters,
   HSTSParameters,
@@ -551,7 +579,7 @@ import {
   URLPath,
   DescribeSecurityIPGroupRequest,
   ModifyApplicationProxyStatusResponse,
-  Identification,
+  DescribeMultiPathGatewayLineResponse,
   OriginGroupInLoadBalancer,
   HTTPResponseParameters,
   UpstreamRequestParameters,
@@ -572,7 +600,7 @@ import {
   CreateAccelerationDomainResponse,
   ModifyAccelerationDomainStatusesRequest,
   CreateZoneResponse,
-  CreateL4ProxyResponse,
+  FunctionRuleCondition,
   ModifySecurityPolicyResponse,
   DeleteLoadBalancerResponse,
   DeleteL7AccRulesResponse,
@@ -581,7 +609,9 @@ import {
   CacheConfigCustomTime,
   ManagedRules,
   SecurityTemplateBinding,
+  DescribeMultiPathGatewaySecretKeyResponse,
   CacheTag,
+  ModifyMultiPathGatewayLineResponse,
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
   DescribeSecurityPolicyResponse,
@@ -603,6 +633,7 @@ import {
   DescribePurgeTasksResponse,
   HttpDDoSProtection,
   CheckRegionHealthStatus,
+  ModifyMultiPathGatewayLineRequest,
   DescribeFunctionRulesRequest,
   DeployConfigGroupVersionResponse,
   Addresses,
@@ -695,6 +726,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过本接口查询用户创建的多通道安全加速网关（云上网关）的可用地域列表。
+   */
+  async DescribeMultiPathGatewayRegions(
+    req: DescribeMultiPathGatewayRegionsRequest,
+    cb?: (error: string, rep: DescribeMultiPathGatewayRegionsResponse) => void
+  ): Promise<DescribeMultiPathGatewayRegionsResponse> {
+    return this.request("DescribeMultiPathGatewayRegions", req, cb)
+  }
+
+  /**
    * 本接口（DownloadL4Logs）用于下载四层离线日志。
    */
   async DownloadL4Logs(
@@ -745,15 +786,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 在 CNAME 接入模式下，您需要对站点或者域名的归属权进行验证，可以通过本接口触发验证。若站点通过归属权验证后，后续添加域名无需再验证。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。
-
-在 NS 接入模式下，您也可以通过本接口来查询 NS 服务器是否切换成功，详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
-     */
-  async VerifyOwnership(
-    req: VerifyOwnershipRequest,
-    cb?: (error: string, rep: VerifyOwnershipResponse) => void
-  ): Promise<VerifyOwnershipResponse> {
-    return this.request("VerifyOwnership", req, cb)
+   * 修改站点信息。
+   */
+  async ModifyZone(
+    req: ModifyZoneRequest,
+    cb?: (error: string, rep: ModifyZoneResponse) => void
+  ): Promise<ModifyZoneResponse> {
+    return this.request("ModifyZone", req, cb)
   }
 
   /**
@@ -868,6 +907,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过本接口修改接入多通道安全加速网关的线路，包括 EdgeOne 四层代理线路、自定义线路。
+   */
+  async ModifyMultiPathGatewayLine(
+    req: ModifyMultiPathGatewayLineRequest,
+    cb?: (error: string, rep: ModifyMultiPathGatewayLineResponse) => void
+  ): Promise<ModifyMultiPathGatewayLineResponse> {
+    return this.request("ModifyMultiPathGatewayLine", req, cb)
+  }
+
+  /**
    * 用于启用/停用四层代理实例。
    */
   async ModifyL4ProxyStatus(
@@ -928,13 +977,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改站点信息。
+   * 通过本接口创建多通道安全加速网关，包括云上网关（腾讯云创建和管理的网关）和自有网关（用户部署的私有网关），需要通过接口 DescribeMultiPathGateway，查询状态为 online 即创建成功。
    */
-  async ModifyZone(
-    req: ModifyZoneRequest,
-    cb?: (error: string, rep: ModifyZoneResponse) => void
-  ): Promise<ModifyZoneResponse> {
-    return this.request("ModifyZone", req, cb)
+  async CreateMultiPathGateway(
+    req: CreateMultiPathGatewayRequest,
+    cb?: (error: string, rep: CreateMultiPathGatewayResponse) => void
+  ): Promise<CreateMultiPathGatewayResponse> {
+    return this.request("CreateMultiPathGateway", req, cb)
   }
 
   /**
@@ -978,6 +1027,26 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateAccelerationDomainResponse) => void
   ): Promise<CreateAccelerationDomainResponse> {
     return this.request("CreateAccelerationDomain", req, cb)
+  }
+
+  /**
+   * 通过本接口创建接入多通道安全加速网关的线路。包括 EdgeOne 四层代理线路、自定义线路。
+   */
+  async CreateMultiPathGatewayLine(
+    req: CreateMultiPathGatewayLineRequest,
+    cb?: (error: string, rep: CreateMultiPathGatewayLineResponse) => void
+  ): Promise<CreateMultiPathGatewayLineResponse> {
+    return this.request("CreateMultiPathGatewayLine", req, cb)
+  }
+
+  /**
+   * 该接口用于查询您有权限的站点信息。可根据不同查询条件筛选站点。
+   */
+  async DescribeZones(
+    req: DescribeZonesRequest,
+    cb?: (error: string, rep: DescribeZonesResponse) => void
+  ): Promise<DescribeZonesResponse> {
+    return this.request("DescribeZones", req, cb)
   }
 
   /**
@@ -1102,6 +1171,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 通过本接口刷新多通道安全加速网关的密钥。客户基于接入密钥签名接入多通道安全加速网关。每个站点下只有一个密钥，可用于接入该站点下的所有网关，刷新密钥后，原始密钥会失效。
+   */
+  async RefreshMultiPathGatewaySecretKey(
+    req: RefreshMultiPathGatewaySecretKeyRequest,
+    cb?: (error: string, rep: RefreshMultiPathGatewaySecretKeyResponse) => void
+  ): Promise<RefreshMultiPathGatewaySecretKeyResponse> {
+    return this.request("RefreshMultiPathGatewaySecretKey", req, cb)
+  }
+
+  /**
      * 通过本接口创建实时日志投递任务。本接口有如下限制：
 同一个实体（七层域名或者四层代理实例）在同种数据投递类型（LogType）和数据投递区域（Area）的组合下，只能被添加到一个实时日志投递任务中。建议先通过 [DescribeRealtimeLogDeliveryTasks](https://cloud.tencent.com/document/product/1552/104110)  接口根据实体查询实时日志投递任务列表，检查实体是否已经被添加到另一实时日志投递任务中。
      */
@@ -1160,6 +1239,18 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeTimingL7CacheDataResponse) => void
   ): Promise<DescribeTimingL7CacheDataResponse> {
     return this.request("DescribeTimingL7CacheData", req, cb)
+  }
+
+  /**
+     * 在 CNAME 接入模式下，您需要对站点或者域名的归属权进行验证，可以通过本接口触发验证。若站点通过归属权验证后，后续添加域名无需再验证。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。
+
+在 NS 接入模式下，您也可以通过本接口来查询 NS 服务器是否切换成功，详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
+     */
+  async VerifyOwnership(
+    req: VerifyOwnershipRequest,
+    cb?: (error: string, rep: VerifyOwnershipResponse) => void
+  ): Promise<VerifyOwnershipResponse> {
+    return this.request("VerifyOwnership", req, cb)
   }
 
   /**
@@ -1286,6 +1377,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 通过本接口查询用户创建的多通道安全加速网关列表。支持翻页。
+   */
+  async DescribeMultiPathGateways(
+    req: DescribeMultiPathGatewaysRequest,
+    cb?: (error: string, rep: DescribeMultiPathGatewaysResponse) => void
+  ): Promise<DescribeMultiPathGatewaysResponse> {
+    return this.request("DescribeMultiPathGateways", req, cb)
+  }
+
+  /**
    * 本接口用于查询七层域名业务按照指定维度的 topN 数据。请注意本接口查询数据有 10 分钟左右延迟，建议拉取当前时间 10 分钟以前的数据。
    */
   async DescribeTopL7AnalysisData(
@@ -1316,13 +1417,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改套餐配置。目前仅支持修改预付费套餐的自动续费开关。
+   * 通过本接口查询接入多通道安全加速网关的线路。包括直连、EdgeOne 四层代理线路、自定义线路。
    */
-  async ModifyPlan(
-    req: ModifyPlanRequest,
-    cb?: (error: string, rep: ModifyPlanResponse) => void
-  ): Promise<ModifyPlanResponse> {
-    return this.request("ModifyPlan", req, cb)
+  async DescribeMultiPathGatewayLine(
+    req: DescribeMultiPathGatewayLineRequest,
+    cb?: (error: string, rep: DescribeMultiPathGatewayLineResponse) => void
+  ): Promise<DescribeMultiPathGatewayLineResponse> {
+    return this.request("DescribeMultiPathGatewayLine", req, cb)
   }
 
   /**
@@ -1346,13 +1447,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
    */
-  async DescribeOriginGroupHealthStatus(
-    req: DescribeOriginGroupHealthStatusRequest,
-    cb?: (error: string, rep: DescribeOriginGroupHealthStatusResponse) => void
-  ): Promise<DescribeOriginGroupHealthStatusResponse> {
-    return this.request("DescribeOriginGroupHealthStatus", req, cb)
+  async DescribeDDoSAttackEvent(
+    req: DescribeDDoSAttackEventRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
+  ): Promise<DescribeDDoSAttackEventResponse> {
+    return this.request("DescribeDDoSAttackEvent", req, cb)
   }
 
   /**
@@ -1455,6 +1556,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeApplicationProxiesResponse) => void
   ): Promise<DescribeApplicationProxiesResponse> {
     return this.request("DescribeApplicationProxies", req, cb)
+  }
+
+  /**
+   * 通过本接口修改多通道安全加速网关信息，如名称、网关 ID、IP、端口等。
+   */
+  async ModifyMultiPathGateway(
+    req: ModifyMultiPathGatewayRequest,
+    cb?: (error: string, rep: ModifyMultiPathGatewayResponse) => void
+  ): Promise<ModifyMultiPathGatewayResponse> {
+    return this.request("ModifyMultiPathGateway", req, cb)
   }
 
   /**
@@ -1592,6 +1703,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 修改套餐配置。目前仅支持修改预付费套餐的自动续费开关。
+   */
+  async ModifyPlan(
+    req: ModifyPlanRequest,
+    cb?: (error: string, rep: ModifyPlanResponse) => void
+  ): Promise<ModifyPlanResponse> {
+    return this.request("ModifyPlan", req, cb)
+  }
+
+  /**
    * 删除指定的内容标识符。该功能仅白名单开放。
    */
   async DeleteContentIdentifier(
@@ -1682,6 +1803,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 通过本接口查询多通道安全加速网关详情。如名称、网关 ID、IP、端口、类型等。
+   */
+  async DescribeMultiPathGateway(
+    req: DescribeMultiPathGatewayRequest,
+    cb?: (error: string, rep: DescribeMultiPathGatewayResponse) => void
+  ): Promise<DescribeMultiPathGatewayResponse> {
+    return this.request("DescribeMultiPathGateway", req, cb)
+  }
+
+  /**
      * 本接口为旧版本删除规则引擎接口，EdgeOne 于 2025 年 1 月 21 日已对规则引擎相关接口全面升级，新版本删除七层加速规则接口详情请参考 [DeleteL7AccRules](https://cloud.tencent.com/document/product/1552/115821)。
 <p style="color: red;">注意：自 2025 年 1 月 21 日起，旧版接口停止更新迭代，后续新增功能将仅在新版接口中提供，旧版接口支持的原有能力将不受影响。为避免在使用旧版接口时出现数据字段冲突，建议您尽早迁移到新版规则引擎接口。</p>
      */
@@ -1703,13 +1834,23 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 删除自定义错误页面。
+   * 通过本接口删除多通道安全加速网关，包括自有网关和云上网关。
    */
-  async DeleteCustomErrorPage(
-    req: DeleteCustomErrorPageRequest,
-    cb?: (error: string, rep: DeleteCustomErrorPageResponse) => void
-  ): Promise<DeleteCustomErrorPageResponse> {
-    return this.request("DeleteCustomErrorPage", req, cb)
+  async DeleteMultiPathGateway(
+    req: DeleteMultiPathGatewayRequest,
+    cb?: (error: string, rep: DeleteMultiPathGatewayResponse) => void
+  ): Promise<DeleteMultiPathGatewayResponse> {
+    return this.request("DeleteMultiPathGateway", req, cb)
+  }
+
+  /**
+   * 用于查询四层代理实例列表。
+   */
+  async DescribeL4Proxy(
+    req: DescribeL4ProxyRequest,
+    cb?: (error: string, rep: DescribeL4ProxyResponse) => void
+  ): Promise<DescribeL4ProxyResponse> {
+    return this.request("DescribeL4Proxy", req, cb)
   }
 
   /**
@@ -1721,16 +1862,6 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: HandleFunctionRuntimeEnvironmentResponse) => void
   ): Promise<HandleFunctionRuntimeEnvironmentResponse> {
     return this.request("HandleFunctionRuntimeEnvironment", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
-   */
-  async DescribeDDoSAttackEvent(
-    req: DescribeDDoSAttackEventRequest,
-    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
-  ): Promise<DescribeDDoSAttackEventResponse> {
-    return this.request("DescribeDDoSAttackEvent", req, cb)
   }
 
   /**
@@ -1794,6 +1925,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifySecurityIPGroupResponse) => void
   ): Promise<ModifySecurityIPGroupResponse> {
     return this.request("ModifySecurityIPGroup", req, cb)
+  }
+
+  /**
+   * 通过本接口修改接入多通道安全加速网关的密钥，客户基于接入密钥签名接入多通道安全加速网关，修改后原密钥失效。
+   */
+  async ModifyMultiPathGatewaySecretKey(
+    req: ModifyMultiPathGatewaySecretKeyRequest,
+    cb?: (error: string, rep: ModifyMultiPathGatewaySecretKeyResponse) => void
+  ): Promise<ModifyMultiPathGatewaySecretKeyResponse> {
+    return this.request("ModifyMultiPathGatewaySecretKey", req, cb)
   }
 
   /**
@@ -2080,13 +2221,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 该接口用于查询您有权限的站点信息。可根据不同查询条件筛选站点。
+   * 通过本接口查询接入多通道安全加速网关的密钥，客户基于接入密钥签名接入多通道安全加速网关。
    */
-  async DescribeZones(
-    req: DescribeZonesRequest,
-    cb?: (error: string, rep: DescribeZonesResponse) => void
-  ): Promise<DescribeZonesResponse> {
-    return this.request("DescribeZones", req, cb)
+  async DescribeMultiPathGatewaySecretKey(
+    req: DescribeMultiPathGatewaySecretKeyRequest,
+    cb?: (error: string, rep: DescribeMultiPathGatewaySecretKeyResponse) => void
+  ): Promise<DescribeMultiPathGatewaySecretKeyResponse> {
+    return this.request("DescribeMultiPathGatewaySecretKey", req, cb)
   }
 
   /**
@@ -2143,6 +2284,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 通过本接口创建接入多通道安全加速网关的密钥，客户基于接入密钥签名接入多通道安全加速网关。每个站点下只有一个密钥，可用于接入该站点下的所有网关，可通过接口 DescribeMultiPathGatewaySecretKey 查询。
+   */
+  async CreateMultiPathGatewaySecretKey(
+    req: CreateMultiPathGatewaySecretKeyRequest,
+    cb?: (error: string, rep: CreateMultiPathGatewaySecretKeyResponse) => void
+  ): Promise<CreateMultiPathGatewaySecretKeyResponse> {
+    return this.request("CreateMultiPathGatewaySecretKey", req, cb)
+  }
+
+  /**
    * 修改自定义错误页面。
    */
   async ModifyCustomErrorPage(
@@ -2184,13 +2335,23 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于查询四层代理实例列表。
+   * 删除自定义错误页面。
    */
-  async DescribeL4Proxy(
-    req: DescribeL4ProxyRequest,
-    cb?: (error: string, rep: DescribeL4ProxyResponse) => void
-  ): Promise<DescribeL4ProxyResponse> {
-    return this.request("DescribeL4Proxy", req, cb)
+  async DeleteCustomErrorPage(
+    req: DeleteCustomErrorPageRequest,
+    cb?: (error: string, rep: DeleteCustomErrorPageResponse) => void
+  ): Promise<DeleteCustomErrorPageResponse> {
+    return this.request("DeleteCustomErrorPage", req, cb)
+  }
+
+  /**
+   * 通过本接口删除接入多通道安全加速网关的线路，仅自定义线路支持删除。
+   */
+  async DeleteMultiPathGatewayLine(
+    req: DeleteMultiPathGatewayLineRequest,
+    cb?: (error: string, rep: DeleteMultiPathGatewayLineResponse) => void
+  ): Promise<DeleteMultiPathGatewayLineResponse> {
+    return this.request("DeleteMultiPathGatewayLine", req, cb)
   }
 
   /**
@@ -2201,5 +2362,15 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeBillingDataResponse) => void
   ): Promise<DescribeBillingDataResponse> {
     return this.request("DescribeBillingData", req, cb)
+  }
+
+  /**
+   * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async DescribeOriginGroupHealthStatus(
+    req: DescribeOriginGroupHealthStatusRequest,
+    cb?: (error: string, rep: DescribeOriginGroupHealthStatusResponse) => void
+  ): Promise<DescribeOriginGroupHealthStatusResponse> {
+    return this.request("DescribeOriginGroupHealthStatus", req, cb)
   }
 }

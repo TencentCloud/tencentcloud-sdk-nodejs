@@ -21641,6 +21641,10 @@ export interface Machine {
    * 备注信息
    */
   Remark?: string
+  /**
+   * 主机安全agent版本
+   */
+  AgentVersion?: string
 }
 
 /**

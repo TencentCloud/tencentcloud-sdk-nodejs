@@ -23,6 +23,7 @@ import {
   FlowBatchUrlInfo,
   BillUsageDetail,
   DescribeCancelFlowsTaskResponse,
+  ExtractionField,
   IntentionActionResult,
   DescribeUserFlowTypeResponse,
   DescribeFileCounterSignResultRequest,
@@ -41,6 +42,7 @@ import {
   DescribeOrganizationVerifyStatusResponse,
   DeleteExtendedServiceAuthInfosResponse,
   CreateFlowForwardsRequest,
+  DescribeInformationExtractionTaskRequest,
   CreateDynamicFlowApproverRequest,
   CreateFlowApproversResponse,
   DescribeFileUrlsResponse,
@@ -150,7 +152,7 @@ import {
   DescribeBatchOrganizationRegistrationTasksRequest,
   CreatePersonAuthCertificateImageResponse,
   FailedDeleteStaffData,
-  FlowForwardResult,
+  DescribeInformationExtractionTaskResponse,
   CreateBatchCancelFlowUrlResponse,
   UserThreeFactor,
   OrganizationAuthUrl,
@@ -166,7 +168,7 @@ import {
   CreateFlowSignReviewRequest,
   CreateOrganizationAuthUrlResponse,
   DescribeOrganizationAuthStatusRequest,
-  CreateSchemeUrlResponse,
+  CreateBatchInformationExtractionTaskRequest,
   CreateFlowByFilesRequest,
   FlowGroupInfo,
   TemplateUserFlowType,
@@ -246,9 +248,10 @@ import {
   StartFlowRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
   CreateUserVerifyUrlRequest,
+  FailedCreateStaffData,
   CreatePartnerAutoSignAuthUrlRequest,
   DescribeBatchOrganizationRegistrationTasksResponse,
-  FailedCreateStaffData,
+  CreateSchemeUrlResponse,
   CreateExtendedServiceAuthInfosResponse,
   SubOrgBillUsage,
   ApproverRestriction,
@@ -285,6 +288,7 @@ import {
   DescribeFileCounterSignResultResponse,
   PermissionGroup,
   CancelFlowRequest,
+  FlowForwardResult,
   UploadFile,
   Component,
   IntegrationDepartment,
@@ -293,6 +297,7 @@ import {
   CreateBatchSignUrlRequest,
   CreateExtendedServiceAuthInfosRequest,
   VerifyDigitFileRequest,
+  CreateBatchInformationExtractionTaskResponse,
   UpdateIntegrationEmployeesRequest,
   FlowGroupApprovers,
   DescribeFlowBriefsRequest,
@@ -702,57 +707,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。<br/>
-适用场景：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。<br/>
-
-<table>
-	<thead>
-		<tr>
-			<th>签署人类别</th>
-			<th>需要提前准备的信息</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>自己企业的员工签署（未认证加入或已认证加入）</td>
-			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
-		</tr>
-		<tr>
-			<td>自己企业的员工签署（已认证加入）</td>
-			<td>签署企业的名字、员工在电子签平台的ID（UserId）</td>
-		</tr>
-		<tr>
-			<td>其他企业的员工签署</td>
-			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
-		</tr>
-		<tr>
-			<td>个人（自然人）签署</td>
-			<td>个人的真实名字、个人的触达手机号、个人的身份证（证件号非必传）</td>
-		</tr>
-	</tbody>
-</table>
-
-
-
-该接口需要依赖[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口生成pdf资源编号（FileIds）进行使用。（如果非pdf文件需要调用[创建文件转换任务](https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi)接口转换成pdf资源）<br/>
-
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/f097a74b289e3e1acd740936bdfe9843.png)
-
-注：
--  合同**发起后就会扣减合同的额度**, 只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。（**过期，拒签，签署完成，解除完成等状态不会返还额度**）
-- **静默（自动）签署不支持合同签署方存在填写**功能
-
-
-<font color="red">相关视频指引</font> <br>
-1. <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess_uploadfiles.mp4" target="_blank">上传用于合同发起的PDF文件代码编写示例</a><br>
-2.  <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess-CreateFlowByFiles.mp4" target="_blank">用PDF文件创建签署流程编写示例</a><br>
-     */
-  async CreateFlowByFiles(
-    req: CreateFlowByFilesRequest,
-    cb?: (error: string, rep: CreateFlowByFilesResponse) => void
-  ): Promise<CreateFlowByFilesResponse> {
-    return this.request("CreateFlowByFiles", req, cb)
+   * 本接口（DeleteSealPolicies）用于撤销企业员工持有的印章权限
+   */
+  async DeleteSealPolicies(
+    req: DeleteSealPoliciesRequest,
+    cb?: (error: string, rep: DeleteSealPoliciesResponse) => void
+  ): Promise<DeleteSealPoliciesResponse> {
+    return this.request("DeleteSealPolicies", req, cb)
   }
 
   /**
@@ -855,6 +816,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBatchSignUrlResponse) => void
   ): Promise<CreateBatchSignUrlResponse> {
     return this.request("CreateBatchSignUrl", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInformationExtractionTask）用于获取合同智能提取任务详情，包括任务的状态和提取的字段结果信息。
+   */
+  async DescribeInformationExtractionTask(
+    req: DescribeInformationExtractionTaskRequest,
+    cb?: (error: string, rep: DescribeInformationExtractionTaskResponse) => void
+  ): Promise<DescribeInformationExtractionTaskResponse> {
+    return this.request("DescribeInformationExtractionTask", req, cb)
   }
 
   /**
@@ -991,6 +962,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewAutoSignLicenseResponse) => void
   ): Promise<RenewAutoSignLicenseResponse> {
     return this.request("RenewAutoSignLicense", req, cb)
+  }
+
+  /**
+     * 用来设置本企业嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），设置后获取的web签署界面都会使用此配置进行展示。
+
+如果多次调用，会以最后一次的配置为准
+     */
+  async CreateWebThemeConfig(
+    req: CreateWebThemeConfigRequest,
+    cb?: (error: string, rep: CreateWebThemeConfigResponse) => void
+  ): Promise<CreateWebThemeConfigResponse> {
+    return this.request("CreateWebThemeConfig", req, cb)
   }
 
   /**
@@ -1392,13 +1375,19 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteSealPolicies）用于撤销企业员工持有的印章权限
-   */
-  async DeleteSealPolicies(
-    req: DeleteSealPoliciesRequest,
-    cb?: (error: string, rep: DeleteSealPoliciesResponse) => void
-  ): Promise<DeleteSealPoliciesResponse> {
-    return this.request("DeleteSealPolicies", req, cb)
+     * 此接口（CreateBatchInformationExtractionTask）用来通过上传后的PDF资源编号来批量创建合同智能审查任务。<br/>
+
+适用场景：根据合同关键词（字段名称）来提取PDF合同文件的字段结果信息。
+
+注: 
+1. PDF格式限制大小为10M以下
+2. 仅支持5个PDF文件批量发起
+     */
+  async CreateBatchInformationExtractionTask(
+    req: CreateBatchInformationExtractionTaskRequest,
+    cb?: (error: string, rep: CreateBatchInformationExtractionTaskResponse) => void
+  ): Promise<CreateBatchInformationExtractionTaskResponse> {
+    return this.request("CreateBatchInformationExtractionTask", req, cb)
   }
 
   /**
@@ -1845,15 +1834,57 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 用来设置本企业嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），设置后获取的web签署界面都会使用此配置进行展示。
+     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。<br/>
+适用场景：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。<br/>
 
-如果多次调用，会以最后一次的配置为准
+<table>
+	<thead>
+		<tr>
+			<th>签署人类别</th>
+			<th>需要提前准备的信息</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>自己企业的员工签署（未认证加入或已认证加入）</td>
+			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
+		</tr>
+		<tr>
+			<td>自己企业的员工签署（已认证加入）</td>
+			<td>签署企业的名字、员工在电子签平台的ID（UserId）</td>
+		</tr>
+		<tr>
+			<td>其他企业的员工签署</td>
+			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
+		</tr>
+		<tr>
+			<td>个人（自然人）签署</td>
+			<td>个人的真实名字、个人的触达手机号、个人的身份证（证件号非必传）</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+该接口需要依赖[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口生成pdf资源编号（FileIds）进行使用。（如果非pdf文件需要调用[创建文件转换任务](https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi)接口转换成pdf资源）<br/>
+
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/f097a74b289e3e1acd740936bdfe9843.png)
+
+注：
+-  合同**发起后就会扣减合同的额度**, 只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。（**过期，拒签，签署完成，解除完成等状态不会返还额度**）
+- **静默（自动）签署不支持合同签署方存在填写**功能
+
+
+<font color="red">相关视频指引</font> <br>
+1. <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess_uploadfiles.mp4" target="_blank">上传用于合同发起的PDF文件代码编写示例</a><br>
+2.  <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess-CreateFlowByFiles.mp4" target="_blank">用PDF文件创建签署流程编写示例</a><br>
      */
-  async CreateWebThemeConfig(
-    req: CreateWebThemeConfigRequest,
-    cb?: (error: string, rep: CreateWebThemeConfigResponse) => void
-  ): Promise<CreateWebThemeConfigResponse> {
-    return this.request("CreateWebThemeConfig", req, cb)
+  async CreateFlowByFiles(
+    req: CreateFlowByFilesRequest,
+    cb?: (error: string, rep: CreateFlowByFilesResponse) => void
+  ): Promise<CreateFlowByFilesResponse> {
+    return this.request("CreateFlowByFiles", req, cb)
   }
 
   /**

@@ -9813,11 +9813,11 @@ export interface AutoStrategy {
    */
   ShrinkPeriod?: number
   /**
-   * 弹性扩容观测周期（秒级），可取值为：5，30，45，60，180，300，600，900，1800。
+   * 弹性扩容观测周期（秒级），可取值为：15，30，45，60，180，300，600，900，1800。
    */
   ExpandSecondPeriod?: number
   /**
-   * 缩容观测周期（秒级），可取值为：300。
+   * 缩容观测周期（秒级），可取值为：300、600、900、1800。
    */
   ShrinkSecondPeriod?: number
 }

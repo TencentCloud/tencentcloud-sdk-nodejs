@@ -2946,7 +2946,7 @@ export interface UpdateAITaskRequest {
    */
   ChannelList?: Array<string>
   /**
-   * AI 结果回调地址。类似 "http://ip:port/***或者https://domain/***
+   * AI 结果回调地址
    */
   CallbackUrl?: string
   /**
@@ -3565,7 +3565,7 @@ export interface AddAITaskRequest {
    */
   Desc?: string
   /**
-   * AI 结果回调地址。类似 "http://ip:port/***或者https://domain/***
+   * AI 结果回调地址
    */
   CallbackUrl?: string
   /**
@@ -4640,7 +4640,6 @@ export type ListRecordBackupTemplatesRequest = null
 export interface AddAITaskResponse {
   /**
    * AI任务信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: AITaskInfo
   /**
@@ -5094,7 +5093,6 @@ export interface UpdateGatewayRequest {
 export interface UpdateAITaskResponse {
   /**
    * AI任务信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: AITaskInfo
   /**

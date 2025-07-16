@@ -240,40 +240,21 @@ export interface RateLimitingRules {
 }
 
 /**
- * 源站组记录
+ * DescribeMultiPathGatewayLine请求参数结构体
  */
-export interface OriginRecord {
+export interface DescribeMultiPathGatewayLineRequest {
   /**
-   * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+   * 站点 ID。
    */
-  Record: string
+  ZoneId: string
   /**
-   * 源站类型，取值有：
-<li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
-<li>COS：COS源。</li>
-<li>AWS_S3：AWS S3对象存储源站。</li>
+   * 网关 ID。
    */
-  Type?: string
+  GatewayId: string
   /**
-   * 源站记录ID。
+   * 线路 ID。
    */
-  RecordId?: string
-  /**
-   * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: number
-  /**
-   * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
-<li>true：使用私有鉴权；</li>
-<li>false：不使用私有鉴权。</li>不填写，默认值为：false。
-
-   */
-  Private?: boolean
-  /**
-   * 私有鉴权参数，当源站类型Private=true时有效。
-   */
-  PrivateParameters?: Array<PrivateParameter>
+  LineId: string
 }
 
 /**
@@ -868,6 +849,50 @@ export interface DescribeEnvironmentsRequest {
 }
 
 /**
+ * 多通道安全网关详情
+ */
+export interface MultiPathGateway {
+  /**
+   * 网关 ID。
+   */
+  GatewayId?: string
+  /**
+   * 网关名。
+   */
+  GatewayName?: string
+  /**
+   * 网关类型，取值有：
+<li> cloud：云上网关，腾讯云创建和管理的网关。</li>
+<li> private：自有网关，用户部署的私有网关。</li>
+   */
+  GatewayType?: string
+  /**
+   * 网关端口，范围 1～65535（除去 8888 ）。
+   */
+  GatewayPort?: number
+  /**
+   * 网关状态，取值有：
+<li> creating : 创建中；</li>
+<li> online : 在线；</li>
+<li> offline : 离线；</li>
+<li> disable : 已停用。</li>
+   */
+  Status?: string
+  /**
+   * 网关 IP， 格式为 IPv4。
+   */
+  GatewayIP?: string
+  /**
+   * 网关地域 Id，可以从接口 DescribeMultiPathGatewayRegions 获取 RegionId 列表。
+   */
+  RegionId?: string
+  /**
+   * 线路信息，当查询网关信息详情 DescribeMultiPathGateway 的时候会返回，当查询网关列表 DescribeMultiPathGateways 的时候不会返回。
+   */
+  Lines?: Array<MultiPathGatewayLine>
+}
+
+/**
  * DescribeAliasDomains请求参数结构体
  */
 export interface DescribeAliasDomainsRequest {
@@ -1153,38 +1178,17 @@ export interface ModifyContentIdentifierResponse {
 }
 
 /**
- * Waf配置。
+ * 刷新预热附带的头部信息
  */
-export interface WafConfig {
+export interface Header {
   /**
-   * WafConfig开关，取值有：
-<li> on：开启；</li>
-<li> off：关闭。</li>开关仅与配置是否生效有关，即使为off（关闭），也可以正常修改配置的内容。
+   * HTTP头部名称。
    */
-  Switch: string
+  Name: string
   /**
-   * 上一次设置的防护级别，取值有：
-<li> loose：宽松；</li>
-<li> normal：正常；</li>
-<li> strict：严格；</li>
-<li> stricter：超严格；</li>
-<li> custom：自定义。</li>
+   * HTTP头部值。
    */
-  Level: string
-  /**
-   * 全局WAF模式，取值有：
-<li> block：阻断（全局阻断，但可对详细规则配置观察）；</li>
-<li> observe：观察（无论详细规则配置什么，都为观察）。</li>
-   */
-  Mode: string
-  /**
-   * 托管规则详细配置。如果为null，默认使用历史配置。
-   */
-  WafRule?: WafRule
-  /**
-   * AI规则引擎防护配置。如果为null，默认使用历史配置。
-   */
-  AiRule?: AiRule
+  Value: string
 }
 
 /**
@@ -1391,6 +1395,16 @@ export interface DescribeTopL7AnalysisDataRequest {
    * 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。
    */
   Area?: string
+}
+
+/**
+ * CreateMultiPathGatewaySecretKey返回参数结构体
+ */
+export interface CreateMultiPathGatewaySecretKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1960,6 +1974,21 @@ export interface CodeAction {
    * 操作参数。
    */
   Parameters: Array<RuleCodeActionParams>
+}
+
+/**
+ * 站点配置相关信息。
+ */
+export interface ZoneConfigParameters {
+  /**
+   * 站点名称。
+   */
+  ZoneName?: string
+  /**
+   * 站点配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneConfig?: ZoneConfig
 }
 
 /**
@@ -2809,17 +2838,17 @@ export interface DescribeZonesResponse {
 }
 
 /**
- * 刷新预热附带的头部信息
+ * DeleteMultiPathGateway请求参数结构体
  */
-export interface Header {
+export interface DeleteMultiPathGatewayRequest {
   /**
-   * HTTP头部名称。
+   * 站点 ID。
    */
-  Name: string
+  ZoneId: string
   /**
-   * HTTP头部值。
+   * 网关 ID。
    */
-  Value: string
+  GatewayId: string
 }
 
 /**
@@ -3043,44 +3072,31 @@ export interface ModifyPlanRequest {
 }
 
 /**
- * 例外规则的生效范围。
+ * DescribeOriginACL返回参数结构体
  */
-export interface ExceptUserRuleScope {
+export interface DescribeOriginACLResponse {
   /**
-   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
-<li>complete：完全跳过模式；</li>
-<li>partial：部分跳过模式。</li>
+   * 七层加速域名/四层代理实例与回源 IP 网段的绑定关系详情。
    */
-  Type?: string
+  OriginACLInfo?: OriginACLInfo
   /**
-   * 生效的模块，该字段取值有：
-<li>waf：托管规则；</li>
-<li>rate：速率限制；</li>
-<li>acl：自定义规则；</li>
-<li>cc：cc攻击防护；</li>
-<li>bot：Bot防护。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Modules?: Array<string>
-  /**
-   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
-   */
-  PartialModules?: Array<PartialModule>
-  /**
-   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
-   */
-  SkipConditions?: Array<SkipCondition>
+  RequestId?: string
 }
 
 /**
- * DDoS配置
+ * 失败原因
  */
-export interface DDoS {
+export interface FailReason {
   /**
-   * 开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 失败原因。
    */
-  Switch: string
+  Reason: string
+  /**
+   * 处理失败的资源列表。
+   */
+  Targets: Array<string>
 }
 
 /**
@@ -3149,20 +3165,6 @@ export interface DisableOriginACLResponse {
 }
 
 /**
- * DescribeOriginACL返回参数结构体
- */
-export interface DescribeOriginACLResponse {
-  /**
-   * 七层加速域名/四层代理实例与回源 IP 网段的绑定关系详情。
-   */
-  OriginACLInfo?: OriginACLInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateFunctionRule返回参数结构体
  */
 export interface CreateFunctionRuleResponse {
@@ -3177,6 +3179,20 @@ export interface CreateFunctionRuleResponse {
 }
 
 /**
+ * CreateMultiPathGatewaySecretKey请求参数结构体
+ */
+export interface CreateMultiPathGatewaySecretKeyRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 多通道安全加速网关接入密钥，base64字符串，编码前字符串长度为 32-48 个字符，非必填，不填系统自动生成，可通过接口 DescribeMultiPathGatewaySecretKey 查询。
+   */
+  SecretKey?: string
+}
+
+/**
  * 七层回源超时配置。
  */
 export interface HTTPUpstreamTimeoutParameters {
@@ -3184,6 +3200,20 @@ export interface HTTPUpstreamTimeoutParameters {
    * HTTP 应答超时时间，单位为秒，取值：5～600。
    */
   ResponseTimeout?: number
+}
+
+/**
+ * DescribeMultiPathGateway请求参数结构体
+ */
+export interface DescribeMultiPathGatewayRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 网关 ID。
+   */
+  GatewayId: string
 }
 
 /**
@@ -3308,6 +3338,16 @@ export interface CreateSharedCNAMEResponse {
    * 共享 CNAME。格式为：`<自定义前缀>+<ZoneId中的12位随机字符串>+share.dnse[0-5].com`。
    */
   SharedCNAME?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMultiPathGateway返回参数结构体
+ */
+export interface DeleteMultiPathGatewayResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3587,6 +3627,32 @@ export interface DescribeDDoSAttackTopDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyMultiPathGateway请求参数结构体
+ */
+export interface ModifyMultiPathGatewayRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 网关 ID。
+   */
+  GatewayId: string
+  /**
+   * 网关名称，16 个字符以内，可用字符（a-z,A-Z,0-9,-,_）。
+   */
+  GatewayName?: string
+  /**
+   * 网关地址，GatewayType 取值为 private（自有网关）可填入进行修改，使用该地址时，请确保该地址已录入腾讯云多通道安全加速网关系统。如未录入，需要在本接口调用前通过工单或者联系架构师把网关 IP 地址提前录入腾讯云多通道安全加速网关系统。
+   */
+  GatewayIP?: string
+  /**
+   * 网关端口，范围 1～65535（除去 8888 ），只支持修改 GatewayType 取值为 private 的自有网关。
+   */
+  GatewayPort?: number
 }
 
 /**
@@ -4015,6 +4081,16 @@ export interface NextOriginACL {
    * 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段无变化的部分。
    */
   NoChangeAddresses?: Addresses
+}
+
+/**
+ * DescribeMultiPathGatewayRegions请求参数结构体
+ */
+export interface DescribeMultiPathGatewayRegionsRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
 }
 
 /**
@@ -4701,6 +4777,38 @@ export interface AclCondition {
 }
 
 /**
+ * 站点验证信息
+ */
+export interface Identification {
+  /**
+   * 站点名称。
+   */
+  ZoneName?: string
+  /**
+   * 验证子域名。验证站点时，该值为空。验证子域名是为具体子域名。
+   */
+  Domain?: string
+  /**
+   * 验证状态，取值有：
+<li> pending：验证中；</li>
+<li> finished：验证完成。</li>
+   */
+  Status?: string
+  /**
+   * 站点归属权校验：Dns校验信息。
+   */
+  Ascription?: AscriptionInfo
+  /**
+   * 域名当前的 NS 记录。
+   */
+  OriginalNameServers?: Array<string>
+  /**
+   * 站点归属权校验：文件校验信息。
+   */
+  FileAscription?: FileAscriptionInfo
+}
+
+/**
  * 正文传输超时时长的具体配置。
  */
 export interface RequestBodyTransferTimeout {
@@ -5081,6 +5189,22 @@ export interface DDoSAttackEvent {
 }
 
 /**
+ * 存储客户端请求IP的头部信息配置
+ */
+export interface ClientIpHeader {
+  /**
+   * 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。
+   */
+  HeaderName?: string
+}
+
+/**
  * DescribeConfigGroupVersionDetail请求参数结构体
  */
 export interface DescribeConfigGroupVersionDetailRequest {
@@ -5152,6 +5276,41 @@ export interface CnameStatus {
 <li>moved：不生效；</li>
    */
   Status?: string
+}
+
+/**
+ * Waf配置。
+ */
+export interface WafConfig {
+  /**
+   * WafConfig开关，取值有：
+<li> on：开启；</li>
+<li> off：关闭。</li>开关仅与配置是否生效有关，即使为off（关闭），也可以正常修改配置的内容。
+   */
+  Switch: string
+  /**
+   * 上一次设置的防护级别，取值有：
+<li> loose：宽松；</li>
+<li> normal：正常；</li>
+<li> strict：严格；</li>
+<li> stricter：超严格；</li>
+<li> custom：自定义。</li>
+   */
+  Level: string
+  /**
+   * 全局WAF模式，取值有：
+<li> block：阻断（全局阻断，但可对详细规则配置观察）；</li>
+<li> observe：观察（无论详细规则配置什么，都为观察）。</li>
+   */
+  Mode: string
+  /**
+   * 托管规则详细配置。如果为null，默认使用历史配置。
+   */
+  WafRule?: WafRule
+  /**
+   * AI规则引擎防护配置。如果为null，默认使用历史配置。
+   */
+  AiRule?: AiRule
 }
 
 /**
@@ -5563,6 +5722,24 @@ export interface DescribeDefaultCertificatesRequest {
 }
 
 /**
+ * DescribeMultiPathGateways返回参数结构体
+ */
+export interface DescribeMultiPathGatewaysResponse {
+  /**
+   * 网关详情。
+   */
+  Gateways?: Array<MultiPathGateway>
+  /**
+   * 总条数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 浏览器缓存 TTL 配置参数。
  */
 export interface MaxAgeParameters {
@@ -5589,17 +5766,15 @@ export interface ModifyApplicationProxyRuleResponse {
 }
 
 /**
- * 失败原因
+ * DDoS配置
  */
-export interface FailReason {
+export interface DDoS {
   /**
-   * 失败原因。
+   * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  Reason: string
-  /**
-   * 处理失败的资源列表。
-   */
-  Targets: Array<string>
+  Switch: string
 }
 
 /**
@@ -6534,6 +6709,20 @@ export interface ModifyOriginParameters {
 }
 
 /**
+ * DescribeMultiPathGatewayRegions返回参数结构体
+ */
+export interface DescribeMultiPathGatewayRegionsResponse {
+  /**
+   * 网关可用地域列表。
+   */
+  GatewayRegions?: Array<GatewayRegion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeL4Proxy请求参数结构体
  */
 export interface DescribeL4ProxyRequest {
@@ -6710,6 +6899,20 @@ export interface DescribeZoneSettingResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneSetting?: ZoneSetting
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateMultiPathGateway返回参数结构体
+ */
+export interface CreateMultiPathGatewayResponse {
+  /**
+   * 网关 ID。
+   */
+  GatewayId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7151,13 +7354,17 @@ export interface CacheConfigParameters {
 }
 
 /**
- * 边缘函数触发规则条件。
+ * CreateL4Proxy返回参数结构体
  */
-export interface FunctionRuleCondition {
+export interface CreateL4ProxyResponse {
   /**
-   * 边缘函数触发规则条件，该列表内所有项全部满足即判断该条件满足。
+   * 四层实例 ID。
    */
-  RuleConditions: Array<RuleCondition>
+  ProxyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7526,6 +7733,38 @@ export interface VerifyOwnershipRequest {
 }
 
 /**
+ * 多通道安全网关线路信息
+ */
+export interface MultiPathGatewayLine {
+  /**
+   * 线路 ID ， 其中 line-0 和 line-1 为系统内置线路 ID，取值有:
+<li> line-0：直连线路，不支持添加、编辑和删除；</li>
+<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
+<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   */
+  LineId?: string
+  /**
+   * 线路类型，取值有：
+<li>direct ：直连线路，不支持编辑、不支持删除；</li>
+<li>proxy ：EdgeOne 四层代理线路，支持编辑修改实例和规则，不支持删除；</li>
+<li>custom ：自定义线路，支持编辑、支持删除。</li>
+   */
+  LineType?: string
+  /**
+   * 线路地址，格式为 host:port 。
+   */
+  LineAddress?: string
+  /**
+   * 四层代理实例 ID  ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。
+   */
+  RuleId?: string
+}
+
+/**
  * 单连接下载限速配置参数。
  */
 export interface ResponseSpeedLimitParameters {
@@ -7549,6 +7788,16 @@ export interface ResponseSpeedLimitParameters {
 
    */
   StartAt?: string
+}
+
+/**
+ * ModifyMultiPathGateway返回参数结构体
+ */
+export interface ModifyMultiPathGatewayResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7801,6 +8050,22 @@ export interface DescribeDeployHistoryRequest {
 }
 
 /**
+ * CreateMultiPathGatewayLine返回参数结构体
+ */
+export interface CreateMultiPathGatewayLineResponse {
+  /**
+   * 线路 ID ， 取值有:
+<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
+<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   */
+  LineId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 计费数据项
  */
 export interface BillingData {
@@ -7874,6 +8139,20 @@ export interface ModifyOriginGroupRequest {
    * 回源 Host Header，仅 Type = HTTP 时生效， 不填或者填空表示不配置回源Host，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。
    */
   HostHeader?: string
+}
+
+/**
+ * RefreshMultiPathGatewaySecretKey返回参数结构体
+ */
+export interface RefreshMultiPathGatewaySecretKeyResponse {
+  /**
+   * 多通道安全加速网关接入密钥。
+   */
+  SecretKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9350,6 +9629,37 @@ export interface ModifyL4ProxyStatusRequest {
 }
 
 /**
+ * CreateMultiPathGatewayLine请求参数结构体
+ */
+export interface CreateMultiPathGatewayLineRequest {
+  /**
+   * 站点 ID 。
+   */
+  ZoneId: string
+  /**
+   * 多通道安全网关 ID 。
+   */
+  GatewayId: string
+  /**
+   * 线路类型，取值有：
+ <li>direct ：直连线路，不支持修改和删除。</li> <li>proxy ：EdgeOne 四层代理线路，支持修改实例 ID 和规则 ID，不支持删除。</li> <li>custom ：自定义线路，支持修改、删除实例 ID 和规则 ID。</li>
+   */
+  LineType: string
+  /**
+   * 线路地址，格式为 ip:port。
+   */
+  LineAddress: string
+  /**
+   * 四层代理实例 ID，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可由接口 [DescribeL4Proxy](https://cloud.tencent.com/document/api/1552/103413) 获取。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可以从接口 [DescribeL4ProxyRules](https://cloud.tencent.com/document/api/1552/103412) 获取。
+   */
+  RuleId?: string
+}
+
+/**
  * 套餐信息
  */
 export interface Plan {
@@ -9707,6 +10017,24 @@ export interface DescribeCustomErrorPagesRequest {
 }
 
 /**
+ * 多通道安全网关可用地域
+ */
+export interface GatewayRegion {
+  /**
+   * 地域 ID 。
+   */
+  RegionId?: string
+  /**
+   * 中文地域名称。
+   */
+  CNName?: string
+  /**
+   * 英文地域名称。
+   */
+  ENName?: string
+}
+
+/**
  * 缓存预刷新 配置参数。
  */
 export interface CachePrefreshParameters {
@@ -9773,6 +10101,43 @@ export interface Action {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeAction?: CodeAction
+}
+
+/**
+ * 源站组记录
+ */
+export interface OriginRecord {
+  /**
+   * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+   */
+  Record: string
+  /**
+   * 源站类型，取值有：
+<li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
+<li>COS：COS源。</li>
+<li>AWS_S3：AWS S3对象存储源站。</li>
+   */
+  Type?: string
+  /**
+   * 源站记录ID。
+   */
+  RecordId?: string
+  /**
+   * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
+<li>true：使用私有鉴权；</li>
+<li>false：不使用私有鉴权。</li>不填写，默认值为：false。
+
+   */
+  Private?: boolean
+  /**
+   * 私有鉴权参数，当源站类型Private=true时有效。
+   */
+  PrivateParameters?: Array<PrivateParameter>
 }
 
 /**
@@ -10126,6 +10491,35 @@ export interface DescribeSecurityIPGroupInfoRequest {
 }
 
 /**
+ * 例外规则的生效范围。
+ */
+export interface ExceptUserRuleScope {
+  /**
+   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+<li>complete：完全跳过模式；</li>
+<li>partial：部分跳过模式。</li>
+   */
+  Type?: string
+  /**
+   * 生效的模块，该字段取值有：
+<li>waf：托管规则；</li>
+<li>rate：速率限制；</li>
+<li>acl：自定义规则；</li>
+<li>cc：cc攻击防护；</li>
+<li>bot：Bot防护。</li>
+   */
+  Modules?: Array<string>
+  /**
+   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+   */
+  PartialModules?: Array<PartialModule>
+  /**
+   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+   */
+  SkipConditions?: Array<SkipCondition>
+}
+
+/**
  * 例外规则的详细模块配置。
  */
 export interface PartialModule {
@@ -10278,6 +10672,20 @@ export interface FollowOrigin {
    * 源站未返回 Cache-Control 头时，表示默认的缓存时间，单位为秒，取值：0-315360000。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheStrategy 为 on 时， 此字段必须为 0。
    */
   DefaultCacheTime?: number
+}
+
+/**
+ * DescribeMultiPathGateway返回参数结构体
+ */
+export interface DescribeMultiPathGatewayResponse {
+  /**
+   * 网关详情。
+   */
+  GatewayDetail?: MultiPathGateway
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10499,19 +10907,21 @@ export interface ModifyContentIdentifierRequest {
 }
 
 /**
- * 存储客户端请求IP的头部信息配置
+ * DeleteMultiPathGatewayLine请求参数结构体
  */
-export interface ClientIpHeader {
+export interface DeleteMultiPathGatewayLineRequest {
   /**
-   * 配置开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 站点 ID。
    */
-  Switch: string
+  ZoneId: string
   /**
-   * 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。
+   * 网关 ID。
    */
-  HeaderName?: string
+  GatewayId: string
+  /**
+   * 线路 ID。
+   */
+  LineId: string
 }
 
 /**
@@ -10979,6 +11389,16 @@ export interface EnableOriginACLRequest {
  * ModifyZone返回参数结构体
  */
 export interface ModifyZoneResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMultiPathGatewayLine返回参数结构体
+ */
+export interface DeleteMultiPathGatewayLineResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11550,6 +11970,16 @@ export interface DeleteContentIdentifierRequest {
    * 内容标识符 ID。
    */
   ContentId: string
+}
+
+/**
+ * RefreshMultiPathGatewaySecretKey请求参数结构体
+ */
+export interface RefreshMultiPathGatewaySecretKeyRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
 }
 
 /**
@@ -12608,6 +13038,38 @@ export interface DescribeOverviewL7DataRequest {
 }
 
 /**
+ * CreateMultiPathGateway请求参数结构体
+ */
+export interface CreateMultiPathGatewayRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 网关类型，取值有：
+<li> cloud：云上网关，腾讯云创建和管理的网关；</li>
+<li> private：自有网关，用户部署的私有网关。</li>
+   */
+  GatewayType: string
+  /**
+   * 网关名称，16 个字符以内，可用字符（a-z,A-Z,0-9,-,_）。
+   */
+  GatewayName: string
+  /**
+   * 网关端口，范围 1～65535（除去 8888 ）。
+   */
+  GatewayPort: number
+  /**
+   * 网关地域，GatewayType 取值为 cloud（云上网关）必填。可以从接口 DescribeMultiPathGatewayRegions 获取 RegionId 列表。
+   */
+  RegionId?: string
+  /**
+   * 网关地址，GatewayType 取值为 private（自有网关）必填，使用该地址时，请确保该地址已录入腾讯云多通道安全加速网关系统。如未录入，需要在本接口调用前通过工单或者联系架构师把网关 IP 地址提前录入腾讯云多通道安全加速网关系统。
+   */
+  GatewayIP?: string
+}
+
+/**
  * DeleteSharedCNAME返回参数结构体
  */
 export interface DeleteSharedCNAMEResponse {
@@ -12615,6 +13077,26 @@ export interface DeleteSharedCNAMEResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyMultiPathGatewaySecretKey返回参数结构体
+ */
+export interface ModifyMultiPathGatewaySecretKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMultiPathGatewaySecretKey请求参数结构体
+ */
+export interface DescribeMultiPathGatewaySecretKeyRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
 }
 
 /**
@@ -12633,6 +13115,30 @@ export interface DDoSBlockData {
    * 封禁受影响区域。
    */
   BlockArea: string
+}
+
+/**
+ * DescribeMultiPathGateways请求参数结构体
+ */
+export interface DescribeMultiPathGatewaysRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值：20，最大值：1000。
+   */
+  Limit?: number
+  /**
+   * 网关列表的过滤字段，该参数不填写时，返回当前 appid 下所有网关信息，详细的过滤条件如下：
+<li> gateway-type：按照网关类型进行过滤，支持取值 cloud 和 private，分别代表过滤云上网关和自由网关；</li>
+<li> keyword：按照网关名的关键字进行过滤。</li>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -12666,18 +13172,17 @@ export interface DescribePrefetchTasksRequest {
 }
 
 /**
- * 站点配置相关信息。
+ * ModifyMultiPathGatewaySecretKey请求参数结构体
  */
-export interface ZoneConfigParameters {
+export interface ModifyMultiPathGatewaySecretKeyRequest {
   /**
-   * 站点名称。
+   * 站点 ID。
    */
-  ZoneName?: string
+  ZoneId: string
   /**
-   * 站点配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 多通道安全加速网关接入密钥，base64 字符串，编码前字符串长度为 32-48 个字符。
    */
-  ZoneConfig?: ZoneConfig
+  SecretKey: string
 }
 
 /**
@@ -12930,35 +13435,17 @@ export interface ModifyApplicationProxyStatusResponse {
 }
 
 /**
- * 站点验证信息
+ * DescribeMultiPathGatewayLine返回参数结构体
  */
-export interface Identification {
+export interface DescribeMultiPathGatewayLineResponse {
   /**
-   * 站点名称。
+   * 线路信息。
    */
-  ZoneName?: string
+  Line?: MultiPathGatewayLine
   /**
-   * 验证子域名。验证站点时，该值为空。验证子域名是为具体子域名。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain?: string
-  /**
-   * 验证状态，取值有：
-<li> pending：验证中；</li>
-<li> finished：验证完成。</li>
-   */
-  Status?: string
-  /**
-   * 站点归属权校验：Dns校验信息。
-   */
-  Ascription?: AscriptionInfo
-  /**
-   * 域名当前的 NS 记录。
-   */
-  OriginalNameServers?: Array<string>
-  /**
-   * 站点归属权校验：文件校验信息。
-   */
-  FileAscription?: FileAscriptionInfo
+  RequestId?: string
 }
 
 /**
@@ -13364,17 +13851,13 @@ Type = noDomainAccess 时，该值为空，不需要进行任何操作。
 }
 
 /**
- * CreateL4Proxy返回参数结构体
+ * 边缘函数触发规则条件。
  */
-export interface CreateL4ProxyResponse {
+export interface FunctionRuleCondition {
   /**
-   * 四层实例 ID。
+   * 边缘函数触发规则条件，该列表内所有项全部满足即判断该条件满足。
    */
-  ProxyId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RuleConditions: Array<RuleCondition>
 }
 
 /**
@@ -13496,6 +13979,20 @@ export interface SecurityTemplateBinding {
 }
 
 /**
+ * DescribeMultiPathGatewaySecretKey返回参数结构体
+ */
+export interface DescribeMultiPathGatewaySecretKeyResponse {
+  /**
+   * 接入密钥。
+   */
+  SecretKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。
  */
 export interface CacheTag {
@@ -13503,6 +14000,16 @@ export interface CacheTag {
    * 待清除缓存的域名列表。
    */
   Domains: Array<string>
+}
+
+/**
+ * ModifyMultiPathGatewayLine返回参数结构体
+ */
+export interface ModifyMultiPathGatewayLineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13918,6 +14425,44 @@ export interface CheckRegionHealthStatus {
    * 源站健康状态。
    */
   OriginHealthStatus?: Array<OriginHealthStatus>
+}
+
+/**
+ * ModifyMultiPathGatewayLine请求参数结构体
+ */
+export interface ModifyMultiPathGatewayLineRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 多通道安全加速网关 ID 。
+   */
+  GatewayId: string
+  /**
+   * 线路 ID ， 取值有:
+<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
+<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   */
+  LineId: string
+  /**
+   * 线路类型，取值有： 
+<li>proxy ：EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li> 
+<li>custom ：自定义线路，支持编辑、删除实例和规则。</li>
+   */
+  LineType?: string
+  /**
+   * 线路地址，格式为 host:port，直连线路（ LineType 取值为 direct ）不允许修改，其余类型支持修改。
+   */
+  LineAddress?: string
+  /**
+   * 四层代理实例 ID  ，当线路类型 LineType  取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   */
+  RuleId?: string
 }
 
 /**

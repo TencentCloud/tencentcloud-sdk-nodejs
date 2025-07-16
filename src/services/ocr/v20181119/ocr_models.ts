@@ -225,17 +225,11 @@ export interface HKIDCardOCRRequest {
    */
   DetectFake?: boolean
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
 }
@@ -2032,14 +2026,18 @@ export interface HKIDCardOCRResponse {
    */
   FakeDetectResult?: number
   /**
-   * 人像照片Base64后的结果
+   * Base64编码的证件左侧人像大图
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HeadImage?: string
   /**
-   * 多重告警码，当身份证是翻拍、复印件时返回对应告警码。
--9102：证照复印件告警
--9103：证照翻拍告警
+   * Base64编码的证件右侧人像小图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmallHeadImage?: string
+  /**
+   * 该字段已废弃， 将固定返回空数组，不建议使用。
+This field is deprecated and will always return an empty array. Usage is not recommended.
    * @deprecated
    */
   WarningCode?: Array<number | bigint>
@@ -2054,6 +2052,10 @@ export interface HKIDCardOCRResponse {
 -9109 告警能力未开通
    */
   WarnCardInfos?: Array<number | bigint>
+  /**
+   * 证件透明视窗内的文本信息
+   */
+  WindowEmbeddedText?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -77,6 +77,7 @@ import {
   CreatePullStreamConfigRequest,
   DescribeLiveCertsRequest,
   DescribeLiveCertResponse,
+  AuditKeywordInfo,
   DescribeVisitTopSumInfoListRequest,
   StopLivePadStreamResponse,
   DescribePushBandwidthAndFluxListResponse,
@@ -195,6 +196,7 @@ import {
   ModifyLivePlayDomainResponse,
   CreateLiveRecordRuleResponse,
   DescribeLiveDomainCertBindingsResponse,
+  StopScreenshotTaskResponse,
   CreateLivePadTemplateResponse,
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
@@ -375,6 +377,7 @@ import {
   DescribeLiveRecordRulesResponse,
   StopLiveStreamMonitorRequest,
   DeleteLiveSnapshotTemplateResponse,
+  AuditKeyword,
   CreateCommonMixStreamResponse,
   ModifyLiveDomainRefererRequest,
   DomainInfo,
@@ -497,7 +500,7 @@ import {
   HttpCodeInfo,
   DescribeLiveStreamPublishedListResponse,
   AddDelayLiveStreamResponse,
-  StopScreenshotTaskResponse,
+  AuditKeywordDeleteDetail,
   DescribeLivePadTemplatesRequest,
   EnableLiveDomainRequest,
   DescribeLiveTranscodeTotalInfoResponse,
@@ -1501,7 +1504,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
    * 删除关键词信息。
    */
   async DeleteAuditKeywords(
-    req?: DeleteAuditKeywordsRequest,
+    req: DeleteAuditKeywordsRequest,
     cb?: (error: string, rep: DeleteAuditKeywordsResponse) => void
   ): Promise<DeleteAuditKeywordsResponse> {
     return this.request("DeleteAuditKeywords", req, cb)
@@ -2079,7 +2082,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
    * 创建关键词，并关联到关键词库。
    */
   async CreateAuditKeywords(
-    req?: CreateAuditKeywordsRequest,
+    req: CreateAuditKeywordsRequest,
     cb?: (error: string, rep: CreateAuditKeywordsResponse) => void
   ): Promise<CreateAuditKeywordsResponse> {
     return this.request("CreateAuditKeywords", req, cb)
@@ -2315,7 +2318,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
    * 获取关键词信息。
    */
   async DescribeAuditKeywords(
-    req?: DescribeAuditKeywordsRequest,
+    req: DescribeAuditKeywordsRequest,
     cb?: (error: string, rep: DescribeAuditKeywordsResponse) => void
   ): Promise<DescribeAuditKeywordsResponse> {
     return this.request("DescribeAuditKeywords", req, cb)

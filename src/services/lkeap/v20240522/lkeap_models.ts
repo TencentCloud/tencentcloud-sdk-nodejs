@@ -153,7 +153,7 @@ export interface ReconstructDocumentSSEResponse {
    */
   TaskId?: string
   /**
-   * 响应类型。1：返回进度信息，2：返回解析结果
+   * 响应类型。1：返回进度信息， 2：返回解析结果
    */
   ResponseType?: string
   /**
@@ -165,9 +165,7 @@ export interface ReconstructDocumentSSEResponse {
    */
   ProgressMessage?: string
   /**
-   * 文档解析结果的临时下载地址。
-文件类型为zip压缩包，下载链接有效期30分钟。
-压缩包内包含*.md、*.json以及images文件夹。
+   * 文档解析结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟。压缩包内包含*.md、*.json以及images文件夹。
 
    */
   DocumentRecognizeResultUrl?: string
@@ -175,6 +173,14 @@ export interface ReconstructDocumentSSEResponse {
    * 文档解析失败的页码。
    */
   FailedPages?: Array<ReconstructDocumentFailedPage>
+  /**
+   * 文档解析失败页数
+   */
+  FailPageNum?: number
+  /**
+   * 文档解析成功页数
+   */
+  SuccessPageNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
    */
@@ -382,7 +388,8 @@ export interface Usage {
  */
 export interface GetReconstructDocumentResultRequest {
   /**
-   * 解析任务ID
+   * 说明：解析任务ID
+备注：仅支持单个任务ID
    */
   TaskId: string
 }
@@ -570,6 +577,10 @@ export interface GetReconstructDocumentResultResponse {
    */
   FailedPages?: Array<ReconstructDocumentFailedPage>
   /**
+   * 文档拆分任务的用量
+   */
+  Usage?: DocumentUsage
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -601,6 +612,10 @@ export interface ReconstructDocumentSSEConfig {
    * 自定义输出页码样式,{{p}}为页码占位符，开启ReturnPageFormat生效。未填默认样式:<page_num>page {{p}}</page_num>
    */
   PageFormat?: string
+  /**
+   * 是否忽略失败页，返回已成功的页数据
+   */
+  IgnoreFailedPage?: boolean
 }
 
 /**
@@ -646,6 +661,14 @@ export interface DocumentUsage {
    * mllm消耗的token数
    */
   MllmTokens?: number
+  /**
+   * 解析成功页数
+   */
+  SuccessPageNum?: number
+  /**
+   * 解析失败页数
+   */
+  FailPageNum?: number
 }
 
 /**
@@ -788,6 +811,10 @@ export interface CreateReconstructDocumentFlowConfig {
 默认值为0
    */
   ResultType?: string
+  /**
+   * 是否忽略失败页，返回已成功的页数据。默认为true。
+   */
+  IgnoreFailedPage?: boolean
 }
 
 /**
@@ -859,7 +886,7 @@ export interface Delta {
  */
 export interface ReconstructDocumentSSERequest {
   /**
-   * 文件类型。
+   * 支持解析的文件类型。
 **支持的文件类型**：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2
 **支持的文件大小**：
 - PDF、DOC、DOCX、PPT、PPTX 支持100M
@@ -869,30 +896,37 @@ export interface ReconstructDocumentSSERequest {
    */
   FileType: string
   /**
-   * 文件的 URL 地址。
-文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。
+   * 文件的 URL 地址。文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
 参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749)
+
+默认值：无
    */
   FileUrl?: string
   /**
-   * 文件的 Base64 值。
-支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
+   * 说明：文件的 Base64 值。
+备注：支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。
+支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
+
+默认值：无
    */
   FileBase64?: string
   /**
-   * 文档的起始页码。
-当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的起始页码，识别的页码包含当前值。
+   * 说明：文档的起始页码。
+备注：当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的起始页码，识别的页码包含当前值。
+默认值：无
    */
   FileStartPageNumber?: number
   /**
-   * 文档的结束页码。
-当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值。
+   * 说明：文档的结束页码。
+备注：当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值。
+默认值：无
    */
   FileEndPageNumber?: number
   /**
-   * 文档解析配置信息
+   * 说明：文档解析配置信息	
+备注：可设置返回markdown结果的格式
+默认值：无
+
    */
   Config?: ReconstructDocumentSSEConfig
 }
@@ -1061,8 +1095,8 @@ export interface CreateReconstructDocumentFlowRequest {
    */
   FileType: string
   /**
-   * 文件的 URL 地址。
-文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。
+   * 说明：文件的 URL 地址。
+备注：文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。
 参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749)
    */
   FileUrl?: string
@@ -1075,17 +1109,21 @@ export interface CreateReconstructDocumentFlowRequest {
    */
   FileBase64?: string
   /**
-   * 文档的起始页码。
-当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的起始页码，识别的页码包含当前值。
+   * 说明：文档的起始页码。
+备注：当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的起始页码，识别的页码包含当前值。
+默认值：无
    */
   FileStartPageNumber?: number
   /**
-   * 文档的结束页码。
-当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值。
+   * 说明：文档的结束页码。
+备注：当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值。
+默认值：无
    */
   FileEndPageNumber?: number
   /**
-   * 创建文档解析任务配置信息。
+   * 说明：创建文档解析任务配置信息。
+备注：可设置结果的返回格式
+默认值：无
    */
   Config?: CreateReconstructDocumentFlowConfig
 }
@@ -1365,6 +1403,10 @@ export interface CreateSplitDocumentFlowConfig {
    * 最大分片长度
    */
   MaxChunkSize?: number
+  /**
+   * 是否忽略返回失败页码
+   */
+  IgnoreFailedPage?: boolean
 }
 
 /**

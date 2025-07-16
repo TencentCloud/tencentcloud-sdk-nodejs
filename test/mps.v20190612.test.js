@@ -528,6 +528,16 @@ it("mps.v20190612.DeleteWorkflow", async function () {
     }
 })
 
+it("mps.v20190612.CreateMediaEvaluation", async function () {
+    try {
+       const data = await client.CreateMediaEvaluation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateQualityControlTemplate", async function () {
     try {
        const data = await client.CreateQualityControlTemplate({})

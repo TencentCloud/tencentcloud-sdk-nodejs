@@ -825,6 +825,10 @@ export interface ClusterOption {
    * 系统节点池实例数量。
    */
   SystemNodeCount?: number
+  /**
+   * 纳管环境自动升配
+   */
+  AutoUpgradeClusterLevel?: boolean
 }
 
 /**

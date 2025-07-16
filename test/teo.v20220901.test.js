@@ -78,6 +78,16 @@ it("teo.v20220901.CreatePurgeTask", async function () {
     }
 })
 
+it("teo.v20220901.DescribeMultiPathGatewayRegions", async function () {
+    try {
+       const data = await client.DescribeMultiPathGatewayRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DownloadL4Logs", async function () {
     try {
        const data = await client.DownloadL4Logs({})
@@ -128,9 +138,9 @@ it("teo.v20220901.DescribeRealtimeLogDeliveryTasks", async function () {
     }
 })
 
-it("teo.v20220901.VerifyOwnership", async function () {
+it("teo.v20220901.ModifyZone", async function () {
     try {
-       const data = await client.VerifyOwnership({})
+       const data = await client.ModifyZone({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,6 +258,16 @@ it("teo.v20220901.ModifyL7AccSetting", async function () {
     }
 })
 
+it("teo.v20220901.ModifyMultiPathGatewayLine", async function () {
+    try {
+       const data = await client.ModifyMultiPathGatewayLine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyL4ProxyStatus", async function () {
     try {
        const data = await client.ModifyL4ProxyStatus({})
@@ -308,9 +328,9 @@ it("teo.v20220901.CheckCnameStatus", async function () {
     }
 })
 
-it("teo.v20220901.ModifyZone", async function () {
+it("teo.v20220901.CreateMultiPathGateway", async function () {
     try {
-       const data = await client.ModifyZone({})
+       const data = await client.CreateMultiPathGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +371,26 @@ it("teo.v20220901.DescribeOverviewL7Data", async function () {
 it("teo.v20220901.CreateAccelerationDomain", async function () {
     try {
        const data = await client.CreateAccelerationDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreateMultiPathGatewayLine", async function () {
+    try {
+       const data = await client.CreateMultiPathGatewayLine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeZones", async function () {
+    try {
+       const data = await client.DescribeZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +518,16 @@ it("teo.v20220901.DeleteAccelerationDomains", async function () {
     }
 })
 
+it("teo.v20220901.RefreshMultiPathGatewaySecretKey", async function () {
+    try {
+       const data = await client.RefreshMultiPathGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateRealtimeLogDeliveryTask", async function () {
     try {
        const data = await client.CreateRealtimeLogDeliveryTask({})
@@ -531,6 +581,16 @@ it("teo.v20220901.ModifyDnsRecords", async function () {
 it("teo.v20220901.DescribeTimingL7CacheData", async function () {
     try {
        const data = await client.DescribeTimingL7CacheData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.VerifyOwnership", async function () {
+    try {
+       const data = await client.VerifyOwnership({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,6 +718,16 @@ it("teo.v20220901.ModifyRule", async function () {
     }
 })
 
+it("teo.v20220901.DescribeMultiPathGateways", async function () {
+    try {
+       const data = await client.DescribeMultiPathGateways({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeTopL7AnalysisData", async function () {
     try {
        const data = await client.DescribeTopL7AnalysisData({})
@@ -688,9 +758,9 @@ it("teo.v20220901.ModifySecurityPolicy", async function () {
     }
 })
 
-it("teo.v20220901.ModifyPlan", async function () {
+it("teo.v20220901.DescribeMultiPathGatewayLine", async function () {
     try {
-       const data = await client.ModifyPlan({})
+       const data = await client.DescribeMultiPathGatewayLine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +788,9 @@ it("teo.v20220901.BindZoneToPlan", async function () {
     }
 })
 
-it("teo.v20220901.DescribeOriginGroupHealthStatus", async function () {
+it("teo.v20220901.DescribeDDoSAttackEvent", async function () {
     try {
-       const data = await client.DescribeOriginGroupHealthStatus({})
+       const data = await client.DescribeDDoSAttackEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -821,6 +891,16 @@ it("teo.v20220901.CreateFunction", async function () {
 it("teo.v20220901.DescribeApplicationProxies", async function () {
     try {
        const data = await client.DescribeApplicationProxies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyMultiPathGateway", async function () {
+    try {
+       const data = await client.ModifyMultiPathGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,6 +1038,16 @@ it("teo.v20220901.DisableOriginACL", async function () {
     }
 })
 
+it("teo.v20220901.ModifyPlan", async function () {
+    try {
+       const data = await client.ModifyPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteContentIdentifier", async function () {
     try {
        const data = await client.DeleteContentIdentifier({})
@@ -1048,6 +1138,16 @@ it("teo.v20220901.DescribePurgeTasks", async function () {
     }
 })
 
+it("teo.v20220901.DescribeMultiPathGateway", async function () {
+    try {
+       const data = await client.DescribeMultiPathGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteRules", async function () {
     try {
        const data = await client.DeleteRules({})
@@ -1068,9 +1168,19 @@ it("teo.v20220901.DescribeL4ProxyRules", async function () {
     }
 })
 
-it("teo.v20220901.DeleteCustomErrorPage", async function () {
+it("teo.v20220901.DeleteMultiPathGateway", async function () {
     try {
-       const data = await client.DeleteCustomErrorPage({})
+       const data = await client.DeleteMultiPathGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeL4Proxy", async function () {
+    try {
+       const data = await client.DescribeL4Proxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1081,16 +1191,6 @@ it("teo.v20220901.DeleteCustomErrorPage", async function () {
 it("teo.v20220901.HandleFunctionRuntimeEnvironment", async function () {
     try {
        const data = await client.HandleFunctionRuntimeEnvironment({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("teo.v20220901.DescribeDDoSAttackEvent", async function () {
-    try {
-       const data = await client.DescribeDDoSAttackEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1151,6 +1251,16 @@ it("teo.v20220901.ModifyFunctionRulePriority", async function () {
 it("teo.v20220901.ModifySecurityIPGroup", async function () {
     try {
        const data = await client.ModifySecurityIPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyMultiPathGatewaySecretKey", async function () {
+    try {
+       const data = await client.ModifyMultiPathGatewaySecretKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,9 +1538,9 @@ it("teo.v20220901.CreateApplicationProxyRule", async function () {
     }
 })
 
-it("teo.v20220901.DescribeZones", async function () {
+it("teo.v20220901.DescribeMultiPathGatewaySecretKey", async function () {
     try {
-       const data = await client.DescribeZones({})
+       const data = await client.DescribeMultiPathGatewaySecretKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1488,6 +1598,16 @@ it("teo.v20220901.ImportZoneConfig", async function () {
     }
 })
 
+it("teo.v20220901.CreateMultiPathGatewaySecretKey", async function () {
+    try {
+       const data = await client.CreateMultiPathGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyCustomErrorPage", async function () {
     try {
        const data = await client.ModifyCustomErrorPage({})
@@ -1528,9 +1648,19 @@ it("teo.v20220901.DescribeAliasDomains", async function () {
     }
 })
 
-it("teo.v20220901.DescribeL4Proxy", async function () {
+it("teo.v20220901.DeleteCustomErrorPage", async function () {
     try {
-       const data = await client.DescribeL4Proxy({})
+       const data = await client.DeleteCustomErrorPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DeleteMultiPathGatewayLine", async function () {
+    try {
+       const data = await client.DeleteMultiPathGatewayLine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1541,6 +1671,16 @@ it("teo.v20220901.DescribeL4Proxy", async function () {
 it("teo.v20220901.DescribeBillingData", async function () {
     try {
        const data = await client.DescribeBillingData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeOriginGroupHealthStatus", async function () {
+    try {
+       const data = await client.DescribeOriginGroupHealthStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

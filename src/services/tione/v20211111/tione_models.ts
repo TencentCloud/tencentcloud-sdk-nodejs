@@ -1542,6 +1542,10 @@ HYBRID_PAID:
    * sidecar配置
    */
   Sidecar?: SidecarSpec
+  /**
+   * 资源组 id
+   */
+  ResourceGroupId?: string
 }
 
 /**

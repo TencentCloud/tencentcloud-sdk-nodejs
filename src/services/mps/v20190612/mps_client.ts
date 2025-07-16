@@ -196,6 +196,7 @@ import {
   WithdrawsWatermarkRequest,
   ImageProcessTaskOutput,
   ComposeTargetInfo,
+  EvaluationTaskInput,
   DescribeInputRTMPPullSettings,
   MediaProcessTaskInput,
   DisableScheduleRequest,
@@ -290,6 +291,7 @@ import {
   ModifyWordSampleRequest,
   EditMediaTask,
   AiRecognitionTaskFaceSegmentItem,
+  CreateMediaEvaluationResponse,
   AiAnalysisTaskTagResult,
   AiAnalysisTaskDelLogoInput,
   SmartSubtitleTaskBatchOutput,
@@ -354,6 +356,7 @@ import {
   CreateOutputRTMPSettings,
   WorkflowTrigger,
   HLSPullSourceAddress,
+  EvaluationMediaInputInfo,
   LiveStreamAiRecognitionResultInfo,
   ActivityPara,
   ModifyAsrHotwordsResponse,
@@ -363,7 +366,7 @@ import {
   CreateWatermarkTemplateRequest,
   ScheduleAnalysisTaskResult,
   ComposeMediaItem,
-  CreateStreamLinkInputRequest,
+  CreateMediaEvaluationRequest,
   ScheduleQualityControlTaskResult,
   TerrorismConfigureInfoForUpdate,
   DescribePersonSamplesRequest,
@@ -626,6 +629,7 @@ import {
   AddOnSubtitle,
   AwsSQS,
   MediaSampleSnapshotItem,
+  EvaluationTemplateInputInfo,
   DeleteAsrHotwordsRequest,
   CreateSmartSubtitleTemplateRequest,
   LiveStreamProcessTask,
@@ -695,6 +699,7 @@ import {
   PornImgReviewTemplateInfo,
   AiReviewPoliticalOcrTaskOutput,
   OcrFullTextConfigureInfo,
+  CreateStreamLinkInputRequest,
   ModifyStreamLinkSecurityGroupResponse,
   ModifyLiveRecordTemplateRequest,
   ModifySmartSubtitleTemplateRequest,
@@ -1295,6 +1300,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWorkflowResponse) => void
   ): Promise<DeleteWorkflowResponse> {
     return this.request("DeleteWorkflow", req, cb)
+  }
+
+  /**
+     * 发起视频评测任务，功能包括：
+
+1. 对一个原视频和多个转码后的视频进行评分。
+2. 计算不同转码方式的 BD-Rate。
+     */
+  async CreateMediaEvaluation(
+    req: CreateMediaEvaluationRequest,
+    cb?: (error: string, rep: CreateMediaEvaluationResponse) => void
+  ): Promise<CreateMediaEvaluationResponse> {
+    return this.request("CreateMediaEvaluation", req, cb)
   }
 
   /**

@@ -303,6 +303,14 @@ export interface CommonMixOutputParams {
  */
 export interface DescribeAuditKeywordsResponse {
   /**
+   * 关键词总条数。
+   */
+  Total?: number
+  /**
+   * 关键词详情列表。
+   */
+  Infos?: Array<AuditKeywordInfo>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1364,6 +1372,31 @@ export interface DescribeLiveCertResponse {
 }
 
 /**
+ * 直播审核关键词查询信息。
+ */
+export interface AuditKeywordInfo {
+  /**
+   * 关键词 Id。
+   */
+  KeywordId?: string
+  /**
+   * 关键词内容。
+   */
+  Content?: string
+  /**
+   * 关键词标签。
+可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。
+   */
+  Label?: string
+  /**
+   * 创建时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示。
+   */
+  CreateTime?: string
+}
+
+/**
  * DescribeVisitTopSumInfoList请求参数结构体
  */
 export interface DescribeVisitTopSumInfoListRequest {
@@ -2165,6 +2198,16 @@ baseline/main/high。
 不传递或者为空字符串，清空之前的DRM配置。
    */
   DRMTracks?: string
+  /**
+   * 是否创建自适应码率，默认值 0。
+0：否。
+1：是。
+   */
+  IsAdaptiveBitRate?: number
+  /**
+   * 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。
+   */
+  AdaptiveChildren?: Array<ChildTemplateInfo>
 }
 
 /**
@@ -2323,6 +2366,16 @@ baseline/main/high。默认baseline
 不传递或者为空字符串，清空之前的DRM配置。
    */
   DRMTracks?: string
+  /**
+   * 是否创建自适应码率，默认值 0。
+0：否。
+1：是。
+   */
+  IsAdaptiveBitRate?: number
+  /**
+   * 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。
+   */
+  AdaptiveChildren?: Array<ChildTemplateInfo>
 }
 
 /**
@@ -3543,7 +3596,16 @@ export interface DescribeCasterMarkPicInfosResponse {
 /**
  * CreateAuditKeywords请求参数结构体
  */
-export type CreateAuditKeywordsRequest = null
+export interface CreateAuditKeywordsRequest {
+  /**
+   * 关键词列表。
+   */
+  Keywords: Array<AuditKeyword>
+  /**
+   * 直播审核词库Id。
+   */
+  LibId: string
+}
 
 /**
  * CopyCaster返回参数结构体
@@ -4185,6 +4247,16 @@ export interface DescribeLiveDomainCertBindingsResponse {
 }
 
 /**
+ * StopScreenshotTask返回参数结构体
+ */
+export interface StopScreenshotTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLivePadTemplate返回参数结构体
  */
 export interface CreateLivePadTemplateResponse {
@@ -4528,7 +4600,16 @@ export interface DescribeLiveTranscodeRulesResponse {
 /**
  * DeleteAuditKeywords请求参数结构体
  */
-export type DeleteAuditKeywordsRequest = null
+export interface DeleteAuditKeywordsRequest {
+  /**
+   * 要删除的关键词 Id 列表。
+   */
+  KeywordIds: Array<string>
+  /**
+   * 关键词库 Id。
+   */
+  LibId: string
+}
 
 /**
  * CreateCasterPvw请求参数结构体
@@ -5507,6 +5588,14 @@ export interface CopyCasterRequest {
  * CreateAuditKeywords返回参数结构体
  */
 export interface CreateAuditKeywordsResponse {
+  /**
+   * 添加成功的关键词 Id 列表。
+   */
+  KeywordIds?: Array<string>
+  /**
+   * 重复关键词列表。
+   */
+  DupInfos?: Array<AuditKeywordInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8500,6 +8589,21 @@ export interface DeleteLiveSnapshotTemplateResponse {
 }
 
 /**
+ * 直播审核关键词信息
+ */
+export interface AuditKeyword {
+  /**
+   * 关键词内容。
+   */
+  Content: string
+  /**
+   * 关键词标签。
+可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。
+   */
+  Label: string
+}
+
+/**
  * CreateCommonMixStream返回参数结构体
  */
 export interface CreateCommonMixStreamResponse {
@@ -8869,7 +8973,29 @@ export interface DropLiveStreamResponse {
 /**
  * DescribeAuditKeywords请求参数结构体
  */
-export type DescribeAuditKeywordsRequest = null
+export interface DescribeAuditKeywordsRequest {
+  /**
+   * 获取偏移量。
+   */
+  Offset: number
+  /**
+   * 单页条数，最大为100条，超过则按100条返回。
+   */
+  Limit: number
+  /**
+   * 关键词库 Id。
+   */
+  LibId: string
+  /**
+   * 关键词搜索字段。
+为空字符串时忽略。
+   */
+  Content: string
+  /**
+   * 标签类别搜索。
+   */
+  Labels?: Array<number | bigint>
+}
 
 /**
  * DescribeLiveRecordTemplates请求参数结构体
@@ -10505,6 +10631,14 @@ export interface DescribeDeliverBandwidthListRequest {
  */
 export interface DeleteAuditKeywordsResponse {
   /**
+   * 成功删除关键词的数量。
+   */
+  SuccessCount?: number
+  /**
+   * 关键词详情列表。
+   */
+  Infos?: Array<AuditKeywordDeleteDetail>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11545,13 +11679,25 @@ export interface AddDelayLiveStreamResponse {
 }
 
 /**
- * StopScreenshotTask返回参数结构体
+ * 直播审核删除关键词结果详情。
  */
-export interface StopScreenshotTaskResponse {
+export interface AuditKeywordDeleteDetail {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 关键词 Id。
    */
-  RequestId?: string
+  KeywordId?: string
+  /**
+   * 关键词内容。
+   */
+  Content?: string
+  /**
+   * 是否删除成功。
+   */
+  Deleted?: boolean
+  /**
+   * 如果删除失败，错误信息。
+   */
+  Error?: string
 }
 
 /**

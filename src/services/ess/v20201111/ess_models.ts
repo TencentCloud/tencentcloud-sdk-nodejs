@@ -169,6 +169,40 @@ export interface DescribeCancelFlowsTaskResponse {
 }
 
 /**
+ * 合同智能提取字段信息
+ */
+export interface ExtractionField {
+  /**
+   * 用于合同智能提取的字段名称。
+
+注意: `长度不能超过30个字符`
+   */
+  Name: string
+  /**
+   * 指定合同智能提取的字段类型，目前仅支持`TEXT`、`DATE`、`NUMBER`、`OPTION`类型。
+
+类型支持如下：
+1、TEXT（文本）
+2、DATE（日期）
+3、NUMBER（数字）
+4、OPTION（选项值）
+   */
+  Type: string
+  /**
+   * 用于描述字段信息。
+
+注意：
+1、`如果Type值为OPTION时，需要在字段描述中填写选项值，用,分隔`
+2、描述字段不能超过100个字符
+   */
+  Description?: string
+  /**
+   * 提取出合同中的字段信息。
+   */
+  Values?: Array<string>
+}
+
+/**
  * 意愿核身点头确认模式结果
  */
 export interface IntentionActionResult {
@@ -625,6 +659,26 @@ export interface CreateFlowForwardsRequest {
    * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * DescribeInformationExtractionTask请求参数结构体
+ */
+export interface DescribeInformationExtractionTaskRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 批量创建合同智能提取任务接口返回的合同智能提取任务ID。
+   */
+  TaskId?: string
 }
 
 /**
@@ -4294,17 +4348,35 @@ export interface FailedDeleteStaffData {
 }
 
 /**
- * 转交合同结果
+ * DescribeInformationExtractionTask返回参数结构体
  */
-export interface FlowForwardResult {
+export interface DescribeInformationExtractionTaskResponse {
   /**
-   * 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)。
+   * 信息提取任务结果
    */
-  FlowId?: string
+  Fields?: Array<ExtractionField>
   /**
-   * 如果失败，返回的错误细节。
+   * 合同智能提取任务状态。
+状态如下：
+<ul>
+    <li>**0** - 任务创建成功（还未执行）</li> 
+    <li>**1** - 排队中（等待执行）</li>   
+    <li>**2** - 提取中（正在执行）</li>  
+    <li>**3** - 提取成功</li>   
+    <li>**4** - 提取失败</li>
+</ul>
    */
-  ErrorDetail?: string
+  Status?: number
+  /**
+   * 合同智能提取结果下载，文件格式为`xlsx`。
+
+注意：`链接有效期为5分钟，过期后可重新获取`
+   */
+  Url?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4698,28 +4770,36 @@ export interface DescribeOrganizationAuthStatusRequest {
 }
 
 /**
- * CreateSchemeUrl返回参数结构体
+ * CreateBatchInformationExtractionTask请求参数结构体
  */
-export interface CreateSchemeUrlResponse {
+export interface CreateBatchInformationExtractionTaskRequest {
   /**
-   * 腾讯电子签小程序的签署链接。
-
-<ul><li>如果EndPoint是**APP**，得到的链接类似于`pages/guide?from=default&where=mini&id=yDwJSUUirqauh***7jNSxwdirTSGuH&to=CONTRACT_DETAIL&name=&phone=&shortKey=yDw***k1xFc5`, 用法可以参加接口描述中的"跳转到小程序的实现"</li>
-<li>如果EndPoint是**HTTP**，得到的链接类似于 `https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?where=mini&from=SFY&id=yDwfEUUw**4rV6Avz&to=MVP_CONTRACT_COVER&name=%E9%83%**5%86%9B`，点击后会跳转到腾讯电子签小程序进行签署</li>
-<li>如果EndPoint是**HTTP_SHORT_URL**，得到的链接类似于 `https://essurl.cn/2n**42Nd`，点击后会跳转到腾讯电子签小程序进行签署</li></ul>
-
-
-注： <font color="red">生成的链路后面不能再增加参数</font>
+   * 执行合同智能提取的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  SchemeUrl?: string
+  Operator: UserInfo
   /**
-   * 二维码，在生成动态签署人跳转封面页链接时返回  注：`此二维码下载链接有效期为5分钟，可下载二维码后本地保存。`
+   * 合同智能提取的PDF文件资源编号列表，通过[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获取PDF文件资源编号。  注:  `目前，此接口仅支持5个文件发起。每个文件限制在10M以下`
    */
-  SchemeQrcodeUrl?: string
+  ResourceIds: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
-  RequestId?: string
+  Agent?: Agent
+  /**
+   * 用户配置的合同智能提取字段模板ID，会基于此模板批量创建合同智能提取任务，为32位字符串。
+[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/99008608577532423ea437c7fdbedca1.png)
+
+注:  `此配置优先级最高，设置了模板ID后Fields配置就会无效`
+   */
+  FieldTemplateId?: string
+  /**
+   * 用于合同智能提取的字段信息。
+
+注意：`字段模板优先级最高，如果设置了FieldTemplateId值，此配置就无效`
+   */
+  Fields?: Array<ExtractionField>
 }
 
 /**
@@ -8176,6 +8256,28 @@ export interface CreateUserVerifyUrlRequest {
 }
 
 /**
+ * 创建员工的失败数据
+ */
+export interface FailedCreateStaffData {
+  /**
+   * 员工名
+   */
+  DisplayName?: string
+  /**
+   * 员工手机号
+   */
+  Mobile?: string
+  /**
+   * 传入的企微账号id
+   */
+  WeworkOpenId?: string
+  /**
+   * 失败原因
+   */
+  Reason?: string
+}
+
+/**
  * CreatePartnerAutoSignAuthUrl请求参数结构体
  */
 export interface CreatePartnerAutoSignAuthUrlRequest {
@@ -8232,25 +8334,28 @@ export interface DescribeBatchOrganizationRegistrationTasksResponse {
 }
 
 /**
- * 创建员工的失败数据
+ * CreateSchemeUrl返回参数结构体
  */
-export interface FailedCreateStaffData {
+export interface CreateSchemeUrlResponse {
   /**
-   * 员工名
+   * 腾讯电子签小程序的签署链接。
+
+<ul><li>如果EndPoint是**APP**，得到的链接类似于`pages/guide?from=default&where=mini&id=yDwJSUUirqauh***7jNSxwdirTSGuH&to=CONTRACT_DETAIL&name=&phone=&shortKey=yDw***k1xFc5`, 用法可以参加接口描述中的"跳转到小程序的实现"</li>
+<li>如果EndPoint是**HTTP**，得到的链接类似于 `https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?where=mini&from=SFY&id=yDwfEUUw**4rV6Avz&to=MVP_CONTRACT_COVER&name=%E9%83%**5%86%9B`，点击后会跳转到腾讯电子签小程序进行签署</li>
+<li>如果EndPoint是**HTTP_SHORT_URL**，得到的链接类似于 `https://essurl.cn/2n**42Nd`，点击后会跳转到腾讯电子签小程序进行签署</li></ul>
+
+
+注： <font color="red">生成的链路后面不能再增加参数</font>
    */
-  DisplayName?: string
+  SchemeUrl?: string
   /**
-   * 员工手机号
+   * 二维码，在生成动态签署人跳转封面页链接时返回  注：`此二维码下载链接有效期为5分钟，可下载二维码后本地保存。`
    */
-  Mobile?: string
+  SchemeQrcodeUrl?: string
   /**
-   * 传入的企微账号id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  WeworkOpenId?: string
-  /**
-   * 失败原因
-   */
-  Reason?: string
+  RequestId?: string
 }
 
 /**
@@ -9227,6 +9332,20 @@ export interface CancelFlowRequest {
 }
 
 /**
+ * 转交合同结果
+ */
+export interface FlowForwardResult {
+  /**
+   * 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)。
+   */
+  FlowId?: string
+  /**
+   * 如果失败，返回的错误细节。
+   */
+  ErrorDetail?: string
+}
+
+/**
  * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
  */
 export interface UploadFile {
@@ -9851,6 +9970,23 @@ export interface VerifyDigitFileRequest {
    * 加签接口返回的文件Id
    */
   FileId?: string
+}
+
+/**
+ * CreateBatchInformationExtractionTask返回参数结构体
+ */
+export interface CreateBatchInformationExtractionTaskResponse {
+  /**
+   * 合同智能提取的任务ID列表，每个任务ID为32位字符串。
+建议开发者保存此任务ID，后续查询合同智能提取详情需要此任务ID。
+
+注意：`返回的索引和ResourceIds数组一致`
+   */
+  TaskIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

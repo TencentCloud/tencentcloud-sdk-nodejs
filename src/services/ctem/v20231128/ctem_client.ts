@@ -18,89 +18,101 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ModifyCustomerResponse,
-  DisplayWechatOfficialAccount,
-  DisplayGithub,
-  ModifyCustomerRequest,
-  DescribeWechatAppletsResponse,
+  DescribeFakeWechatOfficialsResponse,
   DescribeManagesRequest,
-  CreateJobRecordRequest,
-  DescribeWechatOfficialAccountsRequest,
+  DescribeFakeAppsRequest,
   DescribeJobRecordsResponse,
-  DescribeVulsRequest,
-  DisplayJobRecord,
+  DisplayLeakageCode,
   DescribeAppsRequest,
-  DescribeDarkWebsRequest,
-  DisplayLeakageEmail,
-  DescribeHttpsRequest,
-  DescribeEnterprisesResponse,
-  DescribeSuspiciousAssetsResponse,
-  CreateCustomerRequest,
-  DisplayVul,
   DescribeSensitiveInfosRequest,
-  DescribeNetDisksRequest,
-  DescribeAssetsRequest,
-  DisplayLeakageData,
-  DescribeLeakageDatasRequest,
-  DescribeJobRecordDetailsRequest,
-  DescribeJobRecordDetailsResponse,
-  DescribeSubDomainsRequest,
-  DescribeCustomersRequest,
-  DisplayJobRecordDetail,
-  DisplayPort,
-  DescribeLeakageCodesRequest,
   DisplayAsset,
-  DisplayApp,
+  DescribeWechatAppletsResponse,
+  DescribeCustomersRequest,
+  DisplayLeakageData,
+  DescribeFakeWebsitesResponse,
+  DisplayWechatOfficialAccount,
+  DisplayConfig,
+  DescribeNetDisksResponse,
+  CreateJobRecordResponse,
+  DescribeCustomersResponse,
+  DescribeDomainsResponse,
+  DisplayDarkWeb,
+  DescribePortsResponse,
+  DescribeSensitiveInfosResponse,
+  DescribeConfigsResponse,
+  IdndValue,
+  DisplayLeakageEmail,
+  DescribeFakeWebsitesRequest,
+  ModifyCustomerResponse,
+  CreateJobRecordRequest,
+  DescribeSuspiciousAssetsResponse,
+  DisplayJobRecordDetail,
+  DescribeAssetsRequest,
+  DescribeJobRecordDetailsRequest,
+  DescribeSubDomainsRequest,
+  DisplayFakeWebsite,
   DescribeVulsResponse,
-  DisplaySubDomain,
-  DescribeWechatAppletsRequest,
   DescribeGithubsResponse,
   DescribeLeakageEmailsResponse,
   DescribeAssetsResponse,
-  Customer,
-  DescribeWechatOfficialAccountsResponse,
-  DisplayManage,
-  DescribeSuspiciousAssetsRequest,
-  DisplayConfig,
   DisplayEnterprise,
   StopJobRecordRequest,
   DisplaySensitiveInfo,
-  DescribeNetDisksResponse,
-  CreateJobRecordResponse,
-  DescribeSubDomainsResponse,
-  DescribeCustomersResponse,
-  DescribeDomainsResponse,
-  DisplayNetDisk,
   DescribeEnterprisesRequest,
-  DescribeLeakageDatasResponse,
-  DescribeConfigsRequest,
-  DisplayToolCommon,
-  DisplayLeakageCode,
-  DescribeAppsResponse,
-  DescribeWeakPasswordsResponse,
-  DescribePortsResponse,
-  DisplaySuspiciousAsset,
-  Filter,
-  DisplayWeakPassword,
-  DescribeLeakageEmailsRequest,
-  IdndValue,
-  CreateCustomerResponse,
-  DescribeHttpsResponse,
+  DescribeLeakageCodesRequest,
+  DisplayFakeMiniProgram,
+  DisplayFakeWechatOfficial,
   DisplayHttp,
-  DescribeConfigsResponse,
-  DescribeSensitiveInfosResponse,
-  DescribeJobRecordsRequest,
-  DisplayDarkWeb,
-  DescribeLeakageCodesResponse,
-  DescribeManagesResponse,
-  DescribeDomainsRequest,
-  JobRecordProgress,
-  DescribeWeakPasswordsRequest,
-  DisplayDomain,
   DescribePortsRequest,
-  StopJobRecordResponse,
   DisplayWechatApplet,
   DescribeGithubsRequest,
+  DescribeWechatOfficialAccountsResponse,
+  DescribeWechatOfficialAccountsRequest,
+  DisplayFakeApp,
+  DescribeDarkWebsRequest,
+  DescribeHttpsRequest,
+  DescribeEnterprisesResponse,
+  DescribeNetDisksRequest,
+  ModifyCustomerRequest,
+  DisplayApp,
+  DisplayNetDisk,
+  DisplaySubDomain,
+  DescribeSuspiciousAssetsRequest,
+  Filter,
+  DisplayVul,
+  DescribeWechatAppletsRequest,
+  DescribeFakeAppsResponse,
+  DisplayWeakPassword,
+  DescribeLeakageEmailsRequest,
+  CreateCustomerResponse,
+  DescribeManagesResponse,
+  DescribeConfigsRequest,
+  DescribeWeakPasswordsRequest,
+  DisplayPort,
+  StopJobRecordResponse,
+  DescribeFakeMiniProgramsRequest,
+  DisplayJobRecord,
+  CreateCustomerRequest,
+  DescribeLeakageDatasRequest,
+  DescribeJobRecordDetailsResponse,
+  DescribeVulsRequest,
+  DisplayGithub,
+  DisplayToolCommon,
+  Customer,
+  DisplayManage,
+  DisplayDomain,
+  DescribeFakeMiniProgramsResponse,
+  DescribeSubDomainsResponse,
+  DescribeHttpsResponse,
+  DescribeLeakageDatasResponse,
+  DescribeAppsResponse,
+  DescribeWeakPasswordsResponse,
+  DescribeFakeWechatOfficialsRequest,
+  DisplaySuspiciousAsset,
+  DescribeJobRecordsRequest,
+  DescribeLeakageCodesResponse,
+  DescribeDomainsRequest,
+  JobRecordProgress,
   DescribeDarkWebsResponse,
 } from "./ctem_models"
 
@@ -194,6 +206,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询仿冒网站
+   */
+  async DescribeFakeWebsites(
+    req: DescribeFakeWebsitesRequest,
+    cb?: (error: string, rep: DescribeFakeWebsitesResponse) => void
+  ): Promise<DescribeFakeWebsitesResponse> {
+    return this.request("DescribeFakeWebsites", req, cb)
+  }
+
+  /**
    * 查看敏感信息泄露数据
    */
   async DescribeSensitiveInfos(
@@ -201,6 +223,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSensitiveInfosResponse) => void
   ): Promise<DescribeSensitiveInfosResponse> {
     return this.request("DescribeSensitiveInfos", req, cb)
+  }
+
+  /**
+   * 查询仿冒小程序
+   */
+  async DescribeFakeMiniPrograms(
+    req: DescribeFakeMiniProgramsRequest,
+    cb?: (error: string, rep: DescribeFakeMiniProgramsResponse) => void
+  ): Promise<DescribeFakeMiniProgramsResponse> {
+    return this.request("DescribeFakeMiniPrograms", req, cb)
   }
 
   /**
@@ -214,13 +246,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看企业列表
+   * 查询仿冒公众号
    */
-  async DescribeCustomers(
-    req: DescribeCustomersRequest,
-    cb?: (error: string, rep: DescribeCustomersResponse) => void
-  ): Promise<DescribeCustomersResponse> {
-    return this.request("DescribeCustomers", req, cb)
+  async DescribeFakeWechatOfficials(
+    req: DescribeFakeWechatOfficialsRequest,
+    cb?: (error: string, rep: DescribeFakeWechatOfficialsResponse) => void
+  ): Promise<DescribeFakeWechatOfficialsResponse> {
+    return this.request("DescribeFakeWechatOfficials", req, cb)
   }
 
   /**
@@ -234,6 +266,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询仿冒应用
+   */
+  async DescribeFakeApps(
+    req: DescribeFakeAppsRequest,
+    cb?: (error: string, rep: DescribeFakeAppsResponse) => void
+  ): Promise<DescribeFakeAppsResponse> {
+    return this.request("DescribeFakeApps", req, cb)
+  }
+
+  /**
    * 查看移动端资产
    */
   async DescribeApps(
@@ -241,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppsResponse) => void
   ): Promise<DescribeAppsResponse> {
     return this.request("DescribeApps", req, cb)
+  }
+
+  /**
+   * 查看企业列表
+   */
+  async DescribeCustomers(
+    req: DescribeCustomersRequest,
+    cb?: (error: string, rep: DescribeCustomersResponse) => void
+  ): Promise<DescribeCustomersResponse> {
+    return this.request("DescribeCustomers", req, cb)
   }
 
   /**

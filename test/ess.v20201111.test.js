@@ -178,9 +178,9 @@ it("ess.v20201111.CreatePartnerAutoSignAuthUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateFlowByFiles", async function () {
+it("ess.v20201111.DeleteSealPolicies", async function () {
     try {
-       const data = await client.CreateFlowByFiles({})
+       const data = await client.DeleteSealPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +251,16 @@ it("ess.v20201111.CreateIntegrationUserRoles", async function () {
 it("ess.v20201111.CreateBatchSignUrl", async function () {
     try {
        const data = await client.CreateBatchSignUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeInformationExtractionTask", async function () {
+    try {
+       const data = await client.DescribeInformationExtractionTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +351,16 @@ it("ess.v20201111.DescribeOrganizationAuthStatus", async function () {
 it("ess.v20201111.RenewAutoSignLicense", async function () {
     try {
        const data = await client.RenewAutoSignLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateWebThemeConfig", async function () {
+    try {
+       const data = await client.CreateWebThemeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +608,9 @@ it("ess.v20201111.CreateUserMobileChangeUrl", async function () {
     }
 })
 
-it("ess.v20201111.DeleteSealPolicies", async function () {
+it("ess.v20201111.CreateBatchInformationExtractionTask", async function () {
     try {
-       const data = await client.DeleteSealPolicies({})
+       const data = await client.CreateBatchInformationExtractionTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +828,9 @@ it("ess.v20201111.DescribeFlowComponents", async function () {
     }
 })
 
-it("ess.v20201111.CreateWebThemeConfig", async function () {
+it("ess.v20201111.CreateFlowByFiles", async function () {
     try {
-       const data = await client.CreateWebThemeConfig({})
+       const data = await client.CreateFlowByFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

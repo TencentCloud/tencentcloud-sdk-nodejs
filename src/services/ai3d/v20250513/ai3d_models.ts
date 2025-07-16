@@ -104,7 +104,7 @@ export interface QueryHunyuanTo3DJobResponse {
 export interface SubmitHunyuanTo3DJobRequest {
   /**
    * 文生3D，3D内容的描述，中文正向提示词。
-最多支持200个 utf-8 字符。
+最多支持1024个 utf-8 字符。
 文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。
    */
   Prompt?: string

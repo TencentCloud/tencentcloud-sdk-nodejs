@@ -14525,28 +14525,28 @@ export interface ComposeMediaTaskOutput {
   /**
    * 文件类型，例如 mp4、mp3 等。
    */
-  FileType: string
+  FileType?: string
   /**
    * 媒体文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 媒体文件播放地址。
    */
-  FileUrl: string
+  FileUrl?: string
   /**
    * 文件名称，最长 64 个字符。
    */
-  MediaName: string
+  MediaName?: string
   /**
    * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
 <li>默认值：0，表示其他分类。</li>
    */
-  ClassId: number
+  ClassId?: number
   /**
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -21329,28 +21329,28 @@ export interface EditMediaTaskOutput {
   /**
    * 文件类型，例如 mp4、flv 等。
    */
-  FileType: string
+  FileType?: string
   /**
    * 媒体文件播放地址。
    */
-  FileUrl: string
+  FileUrl?: string
   /**
    * 媒体文件 ID。
    */
-  FileId: string
+  FileId?: string
   /**
    * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
    */
-  MediaName: string
+  MediaName?: string
   /**
    * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
 <li>默认值：0，表示其他分类。</li>
    */
-  ClassId: number
+  ClassId?: number
   /**
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**

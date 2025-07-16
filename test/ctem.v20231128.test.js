@@ -98,9 +98,29 @@ it("ctem.v20231128.DescribeWechatApplets", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeFakeWebsites", async function () {
+    try {
+       const data = await client.DescribeFakeWebsites({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeSensitiveInfos", async function () {
     try {
        const data = await client.DescribeSensitiveInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeFakeMiniPrograms", async function () {
+    try {
+       const data = await client.DescribeFakeMiniPrograms({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +138,9 @@ it("ctem.v20231128.DescribeSubDomains", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeCustomers", async function () {
+it("ctem.v20231128.DescribeFakeWechatOfficials", async function () {
     try {
-       const data = await client.DescribeCustomers({})
+       const data = await client.DescribeFakeWechatOfficials({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +158,29 @@ it("ctem.v20231128.DescribeLeakageEmails", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeFakeApps", async function () {
+    try {
+       const data = await client.DescribeFakeApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeApps", async function () {
     try {
        const data = await client.DescribeApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeCustomers", async function () {
+    try {
+       const data = await client.DescribeCustomers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
