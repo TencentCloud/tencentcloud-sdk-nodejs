@@ -775,16 +775,16 @@ export interface DetectLiveFaceResponse {
    * 活体打分，取值范围 [0,100]，分数一般落于[80, 100]区间内，0分也为常见值。推荐相大于 87 时可判断为活体。可根据具体场景自行调整阈值。
 本字段当且仅当FaceModelVersion为2.0时才具备参考意义。
    */
-  Score: number
+  Score?: number
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 活体检测是否通过。
 本字段只有FaceModelVersion为3.0时才具备参考意义。
    */
-  IsLiveness: boolean
+  IsLiveness?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

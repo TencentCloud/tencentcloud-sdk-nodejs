@@ -95,6 +95,7 @@ import {
   UnbindAutoSnapshotPolicyRequest,
   UnbindAutoSnapshotPolicyResponse,
   DescribeCfsServiceStatusResponse,
+  ExstraPerformanceInfo,
   PGroupRuleInfo,
   DescribeCfsSnapshotsRequest,
   UpdateCfsFileSystemSizeLimitResponse,

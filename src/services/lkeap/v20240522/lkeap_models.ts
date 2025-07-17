@@ -55,17 +55,7 @@ export interface ChatCompletionsRequest {
  */
 export interface CreateSplitDocumentFlowRequest {
   /**
-   * 文件类型。
-
-**支持的文件类型：**
-- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`
-
-**支持的文件大小：**
- - `PDF` 最大300M
- - `DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M
- - `TXT`、`MD` 最大10M
- - 其他 最大20M
-
+   * 文件类型。**支持的文件类型：**- `WPS`、`PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`**支持的文件大小：** - `PDF` 最大300M - `WPS`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M
    */
   FileType: string
   /**
@@ -886,13 +876,7 @@ export interface Delta {
  */
 export interface ReconstructDocumentSSERequest {
   /**
-   * 支持解析的文件类型。
-**支持的文件类型**：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2
-**支持的文件大小**：
-- PDF、DOC、DOCX、PPT、PPTX 支持100M
-- MD、TXT、XLS、XLSX、CSV 支持10M
-- 其他支持20M
-
+   * 支持解析的文件类型。**支持的文件类型**：WPS、PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2**支持的文件大小**：- WPS、PDF、DOC、DOCX、PPT、PPTX 支持100M- MD、TXT、XLS、XLSX、CSV 支持10M- 其他支持20M
    */
   FileType: string
   /**
@@ -1081,17 +1065,7 @@ export interface LabelItem {
  */
 export interface CreateReconstructDocumentFlowRequest {
   /**
-   * 文件类型。
-
-**支持的文件类型：**
-- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`、`BMP`、`GIF`、`WEBP`、`HEIC`、`EPS`、`ICNS`、`IM`、`PCX`、`PPM`、`TIFF`、`XBM`、`HEIF`、`JP2`
-
-**支持的文件大小：**
- - `PDF` 最大300M
- - `DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M
- - `TXT`、`MD` 最大10M
- - 其他 最大20M
-
+   * 文件类型。**支持的文件类型：**- `WPS、PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`、`BMP`、`GIF`、`WEBP`、`HEIC`、`EPS`、`ICNS`、`IM`、`PCX`、`PPM`、`TIFF`、`XBM`、`HEIF`、`JP2`**支持的文件大小：** - `PDF` 最大300M - `WPS`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M
    */
   FileType: string
   /**

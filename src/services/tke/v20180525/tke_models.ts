@@ -1026,6 +1026,10 @@ export interface UpdateImageCacheRequest {
    * 安全组Id
    */
   SecurityGroupIds?: Array<string>
+  /**
+   * 腾讯云标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2334,6 +2338,18 @@ UpdateFailed：更新失败
 只有状态为Ready时，才能正常使用镜像缓存
    */
   Status?: string
+  /**
+   * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
+   */
+  RetentionDays?: number
+  /**
+   * 镜像拉取凭证
+   */
+  ImageRegistryCredentials?: Array<ImageRegistryCredential>
+  /**
+   * 腾讯云标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3316,6 +3332,10 @@ export interface CreateImageCacheRequest {
 "nameserver 4.4.4.4\nnameserver 8.8.8.8"
    */
   ResolveConfig?: string
+  /**
+   * 腾讯云标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**

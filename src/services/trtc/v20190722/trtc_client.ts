@@ -18,9 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyCloudSliceTaskResponse,
   TimeValue,
+  DescribeCloudModerationResponse,
   AgentConfig,
   CreatePictureRequest,
+  SubscribeModerationUserIds,
   AudioEncodeParams,
   ServerPushText,
   DescribeTRTCMarketQualityMetricDataResponse,
@@ -31,12 +34,15 @@ import {
   STTConfig,
   DescribeTRTCMarketScaleDataRequest,
   McuLayoutVolume,
+  SliceParams,
   DescribeUserEventRequest,
+  DeleteCloudModerationRequest,
   McuBackgroundCustomRender,
   WaterMarkChar,
   DescribeTrtcRoomUsageResponse,
   StopPublishCdnStreamResponse,
   AbnormalEvent,
+  DeleteCloudSliceTaskRequest,
   ScaleInfomation,
   DescribeTRTCRealTimeScaleMetricDataRequest,
   ControlAIConversationResponse,
@@ -49,13 +55,17 @@ import {
   StopMCUMixTranscodeByStrRoomIdResponse,
   PictureInfo,
   DescribeCallDetailInfoRequest,
+  CreateCloudModerationResponse,
   DescribeTRTCMarketScaleDataResponse,
   McuTencentVod,
   RegisterVoicePrintResponse,
   ModifyPictureRequest,
+  WebRecordVideoParams,
   DescribeWebRecordResponse,
   DescribeUserInfoRequest,
+  DeleteCloudModerationResponse,
   DescribeRelayUsageRequest,
+  DismissRoomResponse,
   WaterMarkParams,
   DescribeRecordStatisticResponse,
   DeleteVoicePrintRequest,
@@ -63,7 +73,7 @@ import {
   VoicePrint,
   DescribeTrtcUsageResponse,
   McuRecordParams,
-  DismissRoomByStrRoomIdRequest,
+  CreateCloudRecordingResponse,
   DescribeTRTCMarketQualityMetricDataRequest,
   DescribeWebRecordRequest,
   AmbientSound,
@@ -72,12 +82,14 @@ import {
   StorageParams,
   CreateBasicModerationRequest,
   CloudVod,
+  CloudSliceStorage,
   DescribeTRTCMarketScaleMetricDataResponse,
   EmulateMobileParams,
   DescribeCallDetailInfoResponse,
   DescribeTRTCRealTimeQualityDataResponse,
   McuCustomCrop,
   DescribeMixTranscodingUsageRequest,
+  DescribeTRTCRealTimeQualityDataRequest,
   DescribeStreamIngestResponse,
   MixTranscodeParams,
   StopStreamIngestRequest,
@@ -85,6 +97,7 @@ import {
   DescribeVoicePrintResponse,
   SmallVideoLayoutParams,
   VoicePrintInfo,
+  StorageFile,
   SubscribeStreamUserIds,
   WaterMarkImage,
   McuUserInfoParams,
@@ -93,6 +106,7 @@ import {
   DescribeTrtcUsageRequest,
   DescribeRoomInfoResponse,
   McuLayoutParams,
+  StartWebRecordRequest,
   DescribeTRTCRealTimeQualityMetricDataRequest,
   DescribeAITranscriptionRequest,
   CreateBasicModerationResponse,
@@ -105,24 +119,26 @@ import {
   DescribeTRTCRealTimeScaleMetricDataResponse,
   UpdateStreamIngestResponse,
   StartMCUMixTranscodeRequest,
-  WebRecordVideoParams,
+  CloudModerationStorage,
   McuWaterMarkImage,
   StartPublishCdnStreamResponse,
   StartMCUMixTranscodeByStrRoomIdResponse,
   TrtcUsage,
+  DeleteCloudSliceTaskResponse,
   DescribeTRTCMarketScaleMetricDataRequest,
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
   UpdateVoicePrintResponse,
   DescribeRecordingUsageResponse,
   McuPassThrough,
-  ModifyPictureResponse,
+  ModerationSupplierParam,
   DescribeRecordingUsageRequest,
-  StorageFile,
+  ModifyPictureResponse,
   WaterMark,
   McuStorageParams,
   DescribeScaleInfoResponse,
   MixLayoutParams,
+  ModifyCloudSliceTaskRequest,
   StopMCUMixTranscodeResponse,
   DescribeMixTranscodingUsageResponse,
   McuFeedBackRoomParams,
@@ -136,18 +152,20 @@ import {
   TencentVod,
   RecordParams,
   DeleteVoicePrintResponse,
-  DescribeTRTCRealTimeQualityMetricDataResponse,
-  DescribeTRTCRealTimeQualityDataRequest,
   StartWebRecordResponse,
+  DescribeTRTCRealTimeQualityMetricDataResponse,
+  DescribeCloudRecordingResponse,
+  ModifyCloudModerationRequest,
   RecordUsage,
   CreateCloudRecordingRequest,
   OutputParams,
   DeleteBasicModerationRequest,
   DeleteCloudRecordingResponse,
+  StartAITranscriptionRequest,
   StopMCUMixTranscodeByStrRoomIdRequest,
   RecognizeConfig,
   QualityData,
-  StopPublishCdnStreamRequest,
+  ModerationStorageParams,
   StartAIConversationRequest,
   DeletePictureResponse,
   ModifyCloudRecordingRequest,
@@ -156,34 +174,39 @@ import {
   DescribeAIConversationRequest,
   RowValues,
   CloudAuditStorage,
-  CreateCloudRecordingResponse,
+  DismissRoomByStrRoomIdRequest,
   StartStreamIngestResponse,
+  CreateCloudSliceTaskResponse,
   StartMCUMixTranscodeResponse,
   DescribeTrtcMcuTranscodeTimeResponse,
   DeleteCloudRecordingRequest,
   DescribePictureRequest,
+  ModifyCloudModerationResponse,
   TRTCDataResp,
   VideoParams,
   RegisterVoicePrintRequest,
   DescribePictureResponse,
   DescribeTrtcRoomUsageRequest,
+  CreateCloudModerationRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
+  StopStreamIngestResponse,
   UserInformation,
   DescribeScaleInfoRequest,
   ControlAIConversationRequest,
   DismissRoomByStrRoomIdResponse,
   DescribeUnusualEventResponse,
   ModifyCloudRecordingResponse,
+  SingleSubscribeParams,
   StartMCUMixTranscodeByStrRoomIdRequest,
-  DescribeCloudRecordingResponse,
-  StartAITranscriptionRequest,
-  DismissRoomResponse,
-  StopStreamIngestResponse,
+  CreateCloudSliceTaskRequest,
+  ModerationParams,
+  DescribeCloudSliceTaskRequest,
+  StopPublishCdnStreamRequest,
   MixUserInfo,
   DescribeTRTCRealTimeScaleDataResponse,
   DescribeTRTCMarketQualityDataRequest,
   UpdatePublishCdnStreamRequest,
-  StartWebRecordRequest,
+  SliceStorageParams,
   MaxVideoUser,
   AuditStorageParams,
   AgentParams,
@@ -196,6 +219,7 @@ import {
   UpdateVoicePrintRequest,
   StopAIConversationRequest,
   EventMessage,
+  UpdateAIConversationRequest,
   UpdatePublishCdnStreamResponse,
   McuWaterMarkText,
   TranscriptionParams,
@@ -214,12 +238,12 @@ import {
   WaterMarkTimestamp,
   McuCloudVod,
   StopMCUMixTranscodeRequest,
-  SingleSubscribeParams,
+  DescribeCloudModerationRequest,
   PublishCdnParams,
   DescribeAITranscriptionResponse,
   McuWaterMarkParams,
   AbnormalExperience,
-  UpdateAIConversationRequest,
+  DescribeCloudSliceTaskResponse,
   RoomState,
   CreatePictureResponse,
   StartAITranscriptionResponse,
@@ -236,18 +260,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。最大可查询14天内的数据。（同老接口DescribeRoomInformation）
-**注意**：
-1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
-2.该接口自2024年4月1日起正式商业化，需订阅套餐解锁调用能力，提供以下两种解锁方式，可任意其一解锁：
-方式一：通过订阅[包月套餐](https://cloud.tencent.com/document/product/647/85386)「尊享版」（可查近7天）和「旗舰版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc?trtcversion=top)。
-方式二：通过订阅[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)商业套餐包「基础版」（可查近7天）和「进阶版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc_monitor)。
+     * 接口说明：
+启动云端审核功能，完成房间内的音视频切片，视频截帧，或者录制音频流，送审到指定的审核商，完成审核。
+
+您可以通过此接口实现如下目标：
+* 指定审核参数（ModerationParams）来指定审核需要的详细参数。
+* 指定存储参数（ModerationStorageParams）将命中的审核文件指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）和第三方AWS
      */
-  async DescribeRoomInfo(
-    req: DescribeRoomInfoRequest,
-    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
-  ): Promise<DescribeRoomInfoResponse> {
-    return this.request("DescribeRoomInfo", req, cb)
+  async CreateCloudModeration(
+    req: CreateCloudModerationRequest,
+    cb?: (error: string, rep: CreateCloudModerationResponse) => void
+  ): Promise<CreateCloudModerationResponse> {
+    return this.request("CreateCloudModeration", req, cb)
+  }
+
+  /**
+     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
+-视频卡顿率
+-音频卡顿率
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     */
+  async DescribeTRTCRealTimeQualityData(
+    req: DescribeTRTCRealTimeQualityDataRequest,
+    cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void
+  ): Promise<DescribeTRTCRealTimeQualityDataResponse> {
+    return this.request("DescribeTRTCRealTimeQualityData", req, cb)
+  }
+
+  /**
+   * 停止页面录制任务
+   */
+  async StopWebRecord(
+    req: StopWebRecordRequest,
+    cb?: (error: string, rep: StopWebRecordResponse) => void
+  ): Promise<StopWebRecordResponse> {
+    return this.request("StopWebRecord", req, cb)
   }
 
   /**
@@ -287,13 +336,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止AI对话任务
-   */
-  async StopAIConversation(
-    req: StopAIConversationRequest,
-    cb?: (error: string, rep: StopAIConversationResponse) => void
-  ): Promise<StopAIConversationResponse> {
-    return this.request("StopAIConversation", req, cb)
+     * 查询SdkAppId下的房间列表。默认返回10条通话，一次最多返回100条通话。最大可查询14天内的数据。（同老接口DescribeRoomInformation）
+**注意**：
+1.该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
+2.该接口自2024年4月1日起正式商业化，需订阅套餐解锁调用能力，提供以下两种解锁方式，可任意其一解锁：
+方式一：通过订阅[包月套餐](https://cloud.tencent.com/document/product/647/85386)「尊享版」（可查近7天）和「旗舰版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc?trtcversion=top)。
+方式二：通过订阅[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)商业套餐包「基础版」（可查近7天）和「进阶版」（可查近14天），[前往订阅](https://buy.cloud.tencent.com/trtc_monitor)。
+     */
+  async DescribeRoomInfo(
+    req: DescribeRoomInfoRequest,
+    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
+  ): Promise<DescribeRoomInfoResponse> {
+    return this.request("DescribeRoomInfo", req, cb)
   }
 
   /**
@@ -384,6 +438,21 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeRecordStatistic(
+    req: DescribeRecordStatisticRequest,
+    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
+  ): Promise<DescribeRecordStatisticResponse> {
+    return this.request("DescribeRecordStatistic", req, cb)
+  }
+
+  /**
      * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
 
 TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
@@ -396,13 +465,13 @@ TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即�
   }
 
   /**
-   * 传入声纹ID，删除之前注册的声纹信息
+   * 查询AI对话任务状态。
    */
-  async DeleteVoicePrint(
-    req: DeleteVoicePrintRequest,
-    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
-  ): Promise<DeleteVoicePrintResponse> {
-    return this.request("DeleteVoicePrint", req, cb)
+  async DescribeAIConversation(
+    req: DescribeAIConversationRequest,
+    cb?: (error: string, rep: DescribeAIConversationResponse) => void
+  ): Promise<DescribeAIConversationResponse> {
+    return this.request("DescribeAIConversation", req, cb)
   }
 
   /**
@@ -504,6 +573,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeTRTCRealTimeScaleDataResponse) => void
   ): Promise<DescribeTRTCRealTimeScaleDataResponse> {
     return this.request("DescribeTRTCRealTimeScaleData", req, cb)
+  }
+
+  /**
+   * 传入声纹ID以及对应音频信息，更新对应声纹信息
+   */
+  async UpdateVoicePrint(
+    req: UpdateVoicePrintRequest,
+    cb?: (error: string, rep: UpdateVoicePrintResponse) => void
+  ): Promise<UpdateVoicePrintResponse> {
+    return this.request("UpdateVoicePrint", req, cb)
   }
 
   /**
@@ -634,13 +713,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 停止页面录制任务
+   * 成功开启云端审核任务后，可以使用此接口来更新订阅黑白名单。
    */
-  async StopWebRecord(
-    req: StopWebRecordRequest,
-    cb?: (error: string, rep: StopWebRecordResponse) => void
-  ): Promise<StopWebRecordResponse> {
-    return this.request("StopWebRecord", req, cb)
+  async ModifyCloudModeration(
+    req: ModifyCloudModerationRequest,
+    cb?: (error: string, rep: ModifyCloudModerationResponse) => void
+  ): Promise<ModifyCloudModerationResponse> {
+    return this.request("ModifyCloudModeration", req, cb)
   }
 
   /**
@@ -652,6 +731,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: StopPublishCdnStreamResponse) => void
   ): Promise<StopPublishCdnStreamResponse> {
     return this.request("StopPublishCdnStream", req, cb)
+  }
+
+  /**
+   * 成功开启切片后，可以使用此接口来查询切片任务状态。仅在任务进行时有效，任务退出后查询将会返回错误。
+   */
+  async DescribeCloudSliceTask(
+    req: DescribeCloudSliceTaskRequest,
+    cb?: (error: string, rep: DescribeCloudSliceTaskResponse) => void
+  ): Promise<DescribeCloudSliceTaskResponse> {
+    return this.request("DescribeCloudSliceTask", req, cb)
   }
 
   /**
@@ -676,13 +765,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 查询AI对话任务状态。
+   * 成功开启云端审核任务后，可以使用此接口来停止送审。
    */
-  async DescribeAIConversation(
-    req: DescribeAIConversationRequest,
-    cb?: (error: string, rep: DescribeAIConversationResponse) => void
-  ): Promise<DescribeAIConversationResponse> {
-    return this.request("DescribeAIConversation", req, cb)
+  async DeleteCloudModeration(
+    req: DeleteCloudModerationRequest,
+    cb?: (error: string, rep: DeleteCloudModerationResponse) => void
+  ): Promise<DeleteCloudModerationResponse> {
+    return this.request("DeleteCloudModeration", req, cb)
   }
 
   /**
@@ -693,6 +782,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DescribeScaleInfoResponse) => void
   ): Promise<DescribeScaleInfoResponse> {
     return this.request("DescribeScaleInfo", req, cb)
+  }
+
+  /**
+   * 停止AI对话任务
+   */
+  async StopAIConversation(
+    req: StopAIConversationRequest,
+    cb?: (error: string, rep: StopAIConversationResponse) => void
+  ): Promise<StopAIConversationResponse> {
+    return this.request("StopAIConversation", req, cb)
   }
 
   /**
@@ -733,6 +832,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DismissRoomByStrRoomIdResponse) => void
   ): Promise<DismissRoomByStrRoomIdResponse> {
     return this.request("DismissRoomByStrRoomId", req, cb)
+  }
+
+  /**
+   * 成功开启切片任务后，可以使用此接口来更新任务。用于更新指定订阅流白名单或者黑名单。
+   */
+  async ModifyCloudSliceTask(
+    req: ModifyCloudSliceTaskRequest,
+    cb?: (error: string, rep: ModifyCloudSliceTaskResponse) => void
+  ): Promise<ModifyCloudSliceTaskResponse> {
+    return this.request("ModifyCloudSliceTask", req, cb)
   }
 
   /**
@@ -820,18 +929,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 查询云端录制计费时长。
-
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-  async DescribeRecordStatistic(
-    req: DescribeRecordStatisticRequest,
-    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
-  ): Promise<DescribeRecordStatisticResponse> {
-    return this.request("DescribeRecordStatistic", req, cb)
+   * 成功开启切片任务后，可以使用此接口来停止任务。停止切片成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
+   */
+  async DeleteCloudSliceTask(
+    req: DeleteCloudSliceTaskRequest,
+    cb?: (error: string, rep: DeleteCloudSliceTaskResponse) => void
+  ): Promise<DeleteCloudSliceTaskResponse> {
+    return this.request("DeleteCloudSliceTask", req, cb)
   }
 
   /**
@@ -902,18 +1006,28 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
--视频卡顿率
--音频卡顿率
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+   * 传入声纹ID，删除之前注册的声纹信息
+   */
+  async DeleteVoicePrint(
+    req: DeleteVoicePrintRequest,
+    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
+  ): Promise<DeleteVoicePrintResponse> {
+    return this.request("DeleteVoicePrint", req, cb)
+  }
+
+  /**
+     * 接口说明：
+启动云端切片功能，完成房间内的音视频切片，并上传到指定的云存储。
+
+您可以通过此接口实现如下目标：
+* 指定切片参数（SliceParams）来指定需要切片的主播的黑名单或者白名单。
+* 指定存储参数（SliceStorageParams）来指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）和第三方AWS
      */
-  async DescribeTRTCRealTimeQualityData(
-    req: DescribeTRTCRealTimeQualityDataRequest,
-    cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void
-  ): Promise<DescribeTRTCRealTimeQualityDataResponse> {
-    return this.request("DescribeTRTCRealTimeQualityData", req, cb)
+  async CreateCloudSliceTask(
+    req: CreateCloudSliceTaskRequest,
+    cb?: (error: string, rep: CreateCloudSliceTaskResponse) => void
+  ): Promise<CreateCloudSliceTaskResponse> {
+    return this.request("CreateCloudSliceTask", req, cb)
   }
 
   /**
@@ -937,13 +1051,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 传入声纹ID以及对应音频信息，更新对应声纹信息
+   * 成功开启审核任务后，可以使用此接口来查询审核任务状态和订阅的黑白名单信息。仅在任务进行时有效，任务退出后查询将会返回错误。
    */
-  async UpdateVoicePrint(
-    req: UpdateVoicePrintRequest,
-    cb?: (error: string, rep: UpdateVoicePrintResponse) => void
-  ): Promise<UpdateVoicePrintResponse> {
-    return this.request("UpdateVoicePrint", req, cb)
+  async DescribeCloudModeration(
+    req: DescribeCloudModerationRequest,
+    cb?: (error: string, rep: DescribeCloudModerationResponse) => void
+  ): Promise<DescribeCloudModerationResponse> {
+    return this.request("DescribeCloudModeration", req, cb)
   }
 
   /**

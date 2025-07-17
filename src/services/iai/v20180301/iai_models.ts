@@ -21,24 +21,24 @@
 export interface Eye {
   /**
    * 识别是否佩戴眼镜。
-AttributeItem对应的Type为 —— 0：无眼镜，1：普通眼镜，2：墨镜
+- AttributeItem对应的Type为 —— 0：无眼镜，1：普通眼镜，2：墨镜。
    */
-  Glass: AttributeItem
+  Glass?: AttributeItem
   /**
    * 识别眼睛的睁开、闭合状态。
-AttributeItem对应的Type为 —— 0：睁开，1：闭眼
+- AttributeItem对应的Type为 —— 0：睁开，1：闭眼。
    */
-  EyeOpen: AttributeItem
+  EyeOpen?: AttributeItem
   /**
    * 识别是否双眼皮。
-AttributeItem对应的Type为 —— 0：无，1：有。
+- AttributeItem对应的Type为 —— 0：无，1：有。
    */
-  EyelidType: AttributeItem
+  EyelidType?: AttributeItem
   /**
    * 眼睛大小。
-AttributeItem对应的Type为 —— 0：小眼睛，1：普通眼睛，2：大眼睛。
+- AttributeItem对应的Type为 —— 0：小眼睛，1：普通眼睛，2：大眼睛。
    */
-  EyeSize: AttributeItem
+  EyeSize?: AttributeItem
 }
 
 /**
@@ -48,11 +48,11 @@ export interface Candidate {
   /**
    * 人员ID
    */
-  PersonId: string
+  PersonId?: string
   /**
    * 人脸ID，仅在SearchFaces/SearchFacesReturnsByGroup接口返回时有效。人员搜索类接口采用融合特征方式检索，该字段无意义
    */
-  FaceId: string
+  FaceId?: string
   /**
    * 候选者的匹配得分。 
 
@@ -62,22 +62,22 @@ export interface Candidate {
 
 一般80分左右可适用大部分场景，建议分数不要超过90分。您可以根据实际情况选择合适的分数。
    */
-  Score: number
+  Score?: number
   /**
    * 人员名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PersonName: string
+  PersonName?: string
   /**
    * 人员性别
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Gender: number
+  Gender?: number
   /**
    * 包含此人员的人员库及描述字段内容列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PersonGroupInfos: Array<PersonGroupInfo>
+  PersonGroupInfos?: Array<PersonGroupInfo>
 }
 
 /**
@@ -87,19 +87,19 @@ export interface DetectFaceAttributesResponse {
   /**
    * 请求的图片宽度。
    */
-  ImageWidth: number
+  ImageWidth?: number
   /**
    * 请求的图片高度。
    */
-  ImageHeight: number
+  ImageHeight?: number
   /**
    * 人脸信息列表。
    */
-  FaceDetailInfos: Array<FaceDetailInfo>
+  FaceDetailInfos?: Array<FaceDetailInfo>
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -135,11 +135,11 @@ export interface PersonGroupInfo {
   /**
    * 包含此人员的人员库ID
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 人员描述字段内容
    */
-  PersonExDescriptions: Array<string>
+  PersonExDescriptions?: Array<string>
 }
 
 /**
@@ -148,12 +148,12 @@ export interface PersonGroupInfo {
 export interface Hat {
   /**
    * 帽子佩戴状态信息。
-AttributeItem对应的Type为 —— 0：不戴帽子，1：普通帽子，2：头盔，3：保安帽。
+- AttributeItem对应的Type为 —— 0：不戴帽子，1：普通帽子，2：头盔，3：保安帽。
    */
   Style?: AttributeItem
   /**
    * 帽子颜色。
-AttributeItem对应的Type为 —— 0：不戴帽子，1：红色系，2：黄色系，3：蓝色系，4：黑色系，5：灰白色系，6：混色系。
+- AttributeItem对应的Type为 —— 0：不戴帽子，1：红色系，2：黄色系，3：蓝色系，4：黑色系，5：灰白色系，6：混色系。
    */
   Color?: AttributeItem
 }
@@ -427,19 +427,19 @@ export interface FaceInfo {
 export interface Eyebrow {
   /**
    * 眉毛浓密。
-AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
+- AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
    */
-  EyebrowDensity: AttributeItem
+  EyebrowDensity?: AttributeItem
   /**
    * 眉毛弯曲。
-AttributeItem对应的Type为 —— 0：不弯，1：弯眉。
+- AttributeItem对应的Type为  —— 0：不弯，1：弯眉。
    */
-  EyebrowCurve: AttributeItem
+  EyebrowCurve?: AttributeItem
   /**
    * 眉毛长短。
-AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
+- AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
    */
-  EyebrowLength: AttributeItem
+  EyebrowLength?: AttributeItem
 }
 
 /**
@@ -721,16 +721,16 @@ export interface DetectLiveFaceResponse {
    * 活体打分，取值范围 [0,100]，分数一般落于[80, 100]区间内，0分也为常见值。推荐相大于 87 时可判断为活体。可根据具体场景自行调整阈值。
 本字段当且仅当FaceModelVersion为2.0时才具备参考意义。
    */
-  Score: number
+  Score?: number
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 活体检测是否通过。
 本字段只有FaceModelVersion为3.0时才具备参考意义。
    */
-  IsLiveness: boolean
+  IsLiveness?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -858,16 +858,16 @@ export interface SearchPersonsResponse {
   /**
    * 识别结果。
    */
-  Results: Array<Result>
+  Results?: Array<Result>
   /**
    * 搜索的人员库中包含的人员数。若输入图片中所有人脸均不符合质量要求，则返回0。
    */
-  PersonNum: number
+  PersonNum?: number
   /**
    * 人脸识别所用的算法模型版本。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -959,15 +959,15 @@ export interface SearchFacesReturnsByGroupResponse {
   /**
    * 搜索的人员库中包含的人脸数。
    */
-  FaceNum: number
+  FaceNum?: number
   /**
    * 识别结果。
    */
-  ResultsReturnsByGroup: Array<ResultsReturnsByGroup>
+  ResultsReturnsByGroup?: Array<ResultsReturnsByGroup>
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1278,19 +1278,19 @@ export interface GetPersonListResponse {
 export interface Hair {
   /**
    * 头发长度信息。
-AttributeItem对应的Type为 —— 0：光头，1：短发，2：中发，3：长发，4：绑发。
+- AttributeItem对应的Type为 —— 0：光头，1：短发，2：中发，3：长发，4：绑发。
    */
-  Length: AttributeItem
+  Length?: AttributeItem
   /**
    * 刘海信息。
-AttributeItem对应的Type为 —— 0：无刘海，1：有刘海。
+- AttributeItem对应的Type为 —— 0：无刘海，1：有刘海。
    */
-  Bang: AttributeItem
+  Bang?: AttributeItem
   /**
    * 头发颜色信息。
-AttributeItem对应的Type为 —— 0：黑色，1：金色，2：棕色，3：灰白色。
+- AttributeItem对应的Type为 —— 0：黑色，1：金色，2：棕色，3：灰白色。
    */
-  Color: AttributeItem
+  Color?: AttributeItem
 }
 
 /**
@@ -1300,16 +1300,16 @@ export interface Result {
   /**
    * 识别出的最相似候选人
    */
-  Candidates: Array<Candidate>
+  Candidates?: Array<Candidate>
   /**
    * 检测出的人脸框位置
    */
-  FaceRect: FaceRect
+  FaceRect?: FaceRect
   /**
    * 检测出的人脸图片状态返回码。0 表示正常。 
 -1601代表不符合图片质量控制要求，此时Candidate内容为空。
    */
-  RetCode: number
+  RetCode?: number
 }
 
 /**
@@ -1989,17 +1989,20 @@ export interface GetUpgradeGroupFaceModelVersionJobListResponse {
  */
 export interface HeadPose {
   /**
-   * 上下偏移[-30,30]。
+   * 上下偏移。
+- 取值范围：[-30,30]。
    */
-  Pitch: number
+  Pitch?: number
   /**
-   * 左右偏移[-30,30]。
+   * 左右偏移。
+- 取值范围：[-30,30]。
    */
-  Yaw: number
+  Yaw?: number
   /**
-   * 平面旋转[-180,180]。
+   * 平面旋转。
+- 取值范围：[-180,180]。
    */
-  Roll: number
+  Roll?: number
 }
 
 /**
@@ -2027,24 +2030,25 @@ export interface GetGroupListResponse {
 export interface DetectFaceAttributesRequest {
   /**
    * 最多处理的人脸数目。 
-默认值为1（仅检测图片中面积最大的那张人脸），最大值为120。 
-此参数用于控制处理待检测图片中的人脸个数，值越小，处理速度越快。
+- 默认值为1（仅检测图片中面积最大的那张人脸），最大值为120。 
+- 此参数用于控制处理待检测图片中的人脸个数，值越小，处理速度越快。
    */
   MaxFaceNum?: number
   /**
-   * 图片 base64 数据，base64 编码后大小不可超过5M。 
-jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+   * 图片 base64 数据。
+- base64 编码后大小不可超过5M。 
+- jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+- 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
    */
   Image?: string
   /**
    * 图片的 Url 。 
-对应图片 base64 编码后大小不可超过5M。
-jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
-Url、Image必须提供一个，如果都提供，只使用 Url。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+- 对应图片 base64 编码后大小不可超过5M。
+- jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
+- Url、Image必须提供一个，如果都提供，只使用 Url。 
+- 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+- 非腾讯云存储的Url速度和稳定性可能受一定影响。 
+- 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
    */
   Url?: string
   /**
@@ -2058,7 +2062,11 @@ None为不需要返回。默认为 None。即FaceAttributesType属性为空时�
    */
   FaceAttributesType?: string
   /**
-   * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+   * 是否开启图片旋转识别支持。
+- 0为不开启，1为开启。
+- 默认为0。
+- 本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。
+- 若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
    */
   NeedRotateDetection?: number
   /**
@@ -2128,10 +2136,11 @@ export interface CompareFaceResponse {
  */
 export interface Mouth {
   /**
-   * 是否张嘴信息。
-AttributeItem对应的Type为 —— 0：不张嘴，1：张嘴。
+   * 是否张嘴信息。 
+
+- AttributeItem对应的Type为 —— 0：不张嘴，1：张嘴。
    */
-  MouthOpen: AttributeItem
+  MouthOpen?: AttributeItem
 }
 
 /**
@@ -2402,90 +2411,100 @@ export interface GetPersonListRequest {
  */
 export interface FaceDetailAttributesInfo {
   /**
-   * 年龄 [0,65]，其中65代表“65岁及以上”。 
-FaceAttributesType 不含Age 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 年龄。
+- 取值范围：[0,65]，其中65代表“65岁及以上”。 
+- FaceAttributesType 不含Age 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Age?: number
   /**
-   * 美丑打分[0,100]。 
-FaceAttributesType 不含 Beauty 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 美丑打分。
+- 取值范围：[0,100]。 
+- FaceAttributesType不含 Beauty或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Beauty?: number
   /**
    * 情绪，可识别自然、高兴、惊讶、生气、悲伤、厌恶、害怕。 
-AttributeItem对应的Type为 —— 0：自然，1：高兴，2：惊讶，3：生气，4：悲伤，5：厌恶，6：害怕
-FaceAttributesType 不含Emotion 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 —— 0：自然，1：高兴，2：惊讶，3：生气，4：悲伤，5：厌恶，6：害怕。
+- FaceAttributesType 不含Emotion 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Emotion?: AttributeItem
   /**
-   * 眼睛相关信息，可识别是否戴眼镜、是否闭眼、是否双眼皮和眼睛大小。 
-FaceAttributesType 不含Eye 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 眼睛相关信息。
+- 可识别是否戴眼镜、是否闭眼、是否双眼皮和眼睛大小。
+- FaceAttributesType 不含Eye 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Eye?: Eye
   /**
-   * 眉毛相关信息，可识别眉毛浓密、弯曲、长短信息。 
-FaceAttributesType 不含Eyebrow 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 眉毛相关信息。
+- 可识别眉毛浓密、弯曲、长短信息。
+- FaceAttributesType 不含Eyebrow 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Eyebrow?: Eyebrow
   /**
    * 性别信息。 
-AttributeItem对应的Type为 —— 	0：男性，1：女性。
-FaceAttributesType 不含Gender 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 —— 0：男性，1：女性。
+- FaceAttributesType 不含Gender 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Gender?: AttributeItem
   /**
-   * 头发信息，包含头发长度、有无刘海、头发颜色。 
-FaceAttributesType 不含Hair 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 头发信息。
+- 包含头发长度、有无刘海、头发颜色。 
+- FaceAttributesType 不含Hair 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Hair?: Hair
   /**
-   * 帽子信息，可识别是否佩戴帽子、帽子款式、帽子颜色。 
-FaceAttributesType 不含Hat 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 帽子信息。
+
+- 可识别是否佩戴帽子、帽子款式、帽子颜色。
+- FaceAttributesType 不含Hat 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Hat?: Hat
   /**
-   * 姿态信息，包含人脸的上下偏移、左右偏移、平面旋转信息。 
-FaceAttributesType 不含Headpose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 姿态信息。
+- 包含人脸的上下偏移、左右偏移、平面旋转信息。 
+- FaceAttributesType 不含Headpose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   HeadPose?: HeadPose
   /**
    * 口罩佩戴信息。 
-AttributeItem对应的Type为 —— 0: 无口罩， 1: 有口罩不遮脸，2: 有口罩遮下巴，3: 有口罩遮嘴，4: 正确佩戴口罩。
-FaceAttributesType 不含Mask 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 —— 0: 无口罩， 1: 有口罩不遮脸，2: 有口罩遮下巴，3: 有口罩遮嘴，4: 正确佩戴口罩。
+- FaceAttributesType 不含Mask 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Mask?: AttributeItem
   /**
-   * 嘴巴信息，可识别是否张嘴、嘴唇厚度。 
-FaceAttributesType 不含 Mouth 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 嘴巴信息。
+- 可识别是否张嘴、嘴唇厚度。
+- FaceAttributesType 不含 Mouth 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Mouth?: Mouth
   /**
    * 胡子信息。
-AttributeItem对应的Type为 —— 0：无胡子，1：有胡子。 
-FaceAttributesType 不含 Moustache 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 —— 0：无胡子，1：有胡子。 
+- FaceAttributesType 不含 Moustache 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Moustache?: AttributeItem
   /**
    * 鼻子信息。 
-AttributeItem对应的Type为 —— 0：朝天鼻，1：鹰钩鼻，2：普通，3：圆鼻头
-FaceAttributesType 不含 Nose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 —— 0：朝天鼻，1：鹰钩鼻，2：普通，3：圆鼻头。
+- FaceAttributesType 不含 Nose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Nose?: AttributeItem
   /**
    * 脸型信息。 
-AttributeItem对应的Type为 —— 0：方脸，1：三角脸，2：鹅蛋脸，3：心形脸，4：圆脸。
-FaceAttributesType 不含 Shape 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 —— 0：方脸，1：三角脸，2：鹅蛋脸，3：心形脸，4：圆脸。
+- FaceAttributesType 不含 Shape 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Shape?: AttributeItem
   /**
    * 肤色信息。 
-AttributeItem对应的Type为 —— 0：黄色皮肤，1：棕色皮肤，2：黑色皮肤，3：白色皮肤。
-FaceAttributesType 不含 Skin 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+- AttributeItem对应的Type为 ——  0：黄色皮肤，1：棕色皮肤，2：黑色皮肤，3：白色皮肤。
+- FaceAttributesType 不含 Skin 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Skin?: AttributeItem
   /**
-   * 微笑程度，[0,100]。 
-FaceAttributesType 不含 Smile 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+   * 微笑程度。
+- 取值范围：[0,100]。 
+- FaceAttributesType 不含 Smile 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
   Smile?: number
 }
@@ -2495,11 +2514,13 @@ FaceAttributesType 不含 Smile 或检测超过 5 张人脸时，此参数仍返
  */
 export interface AttributeItem {
   /**
-   * 属性值
+   * 属性值。
    */
   Type?: number
   /**
-   * Type识别概率值,[0,1],代表判断正确的概率。
+   * Type识别概率值。
+- 取值范围：[0,1]。
+- 代表判断正确的概率。
    */
   Probability?: number
 }

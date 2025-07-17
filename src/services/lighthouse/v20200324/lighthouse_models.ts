@@ -3292,6 +3292,10 @@ export interface Bundle {
 "CAREFREE": 无忧套餐
    */
   BundleDisplayLabel?: string
+  /**
+   * 流量是否无上限。
+   */
+  TrafficUnlimited?: boolean
 }
 
 /**

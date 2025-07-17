@@ -488,6 +488,16 @@ Available:可用
    * 文件系统版本
    */
   Version?: string
+  /**
+   * 额外性能信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExstraPerformanceInfo?: Array<ExstraPerformanceInfo>
+  /**
+   * basic：标准版元数据类型
+enhanced：增项版元数据类型
+   */
+  MetaType?: string
 }
 
 /**
@@ -1764,6 +1774,20 @@ export interface DescribeCfsServiceStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 购买完额外性能之后的值
+ */
+export interface ExstraPerformanceInfo {
+  /**
+   * fixed: 最终值固定
+   */
+  Type?: string
+  /**
+   * 额外购买的CFS性能值，单位MB/s。
+   */
+  Performance?: number
 }
 
 /**

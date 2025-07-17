@@ -52,7 +52,7 @@ export interface DescribeDbAssetInfoResponse {
  */
 export interface DeleteRiskScanTaskRequest {
   /**
-   * 任务id 列表
+   * 任务id 和目标AppID列表
    */
   TaskIdList: Array<TaskIdListKey>
   /**
@@ -2579,6 +2579,10 @@ export interface TaskIdListKey {
    * 任务ID
    */
   TaskId: string
+  /**
+   * APP ID
+   */
+  TargetAppId?: string
 }
 
 /**
@@ -6687,6 +6691,10 @@ export interface CreateAccessKeyCheckTaskRequest {
    * 账号uin列表
    */
   SubUinList?: Array<string>
+  /**
+   * 风险规则id列表
+   */
+  RiskRuleIDList?: Array<number | bigint>
 }
 
 /**

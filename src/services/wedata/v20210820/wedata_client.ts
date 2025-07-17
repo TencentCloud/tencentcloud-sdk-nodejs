@@ -62,6 +62,7 @@ import {
   ColumnLineageInfo,
   TriggerManualTasksRequest,
   TaskLineageInfoPair,
+  BindProjectExecutorResourceRequest,
   JudgeResourceFileResponse,
   DataServicePublishedApiListFilter,
   SubmitTaskRequest,
@@ -80,6 +81,7 @@ import {
   DescribeFieldBasicInfoResponse,
   ColumnItem,
   RuleGroupExecResult,
+  TableNameFilter,
   TableMeta,
   AlarmEventInfo,
   ExtensionInfoVO,
@@ -106,12 +108,13 @@ import {
   DiagnoseProRequest,
   DescribeQualityScoreTrendResponse,
   TaskTypeMap,
+  DeleteTaskLineageResponse,
   InstanceLifeDetailDto,
   Workflow,
   DescribeRuleExecResultsRequest,
   InstanceDownloadLogInfo,
   EventCaseDTO,
-  ManualTriggerRecordOpsDtoPage,
+  DescribeOpsWorkflowsResponse,
   TableScoreStatisticsInfo,
   InstanceOpsDto,
   DescribeDutyScheduleDetailsRequest,
@@ -129,6 +132,7 @@ import {
   DescribeIntegrationStatisticsTaskStatusTrendResponse,
   DeleteResourceFileRequest,
   SaveCustomFunctionRequest,
+  BindProjectExecutorResourceResponse,
   DescribeSchedulerTaskTypeCntRequest,
   MakePlanTaskOpsDto,
   ProjectUserRole,
@@ -245,6 +249,7 @@ import {
   TaskInfoVo,
   DependencyStrategyDs,
   DescribeInstanceLogListResponse,
+  ModifyTaskInfoRequest,
   RuleGroup,
   DescribeTableQualityDetailsRequest,
   DescribeScheduleInstancesResponse,
@@ -308,7 +313,7 @@ import {
   DescribeDataServicePublishedApiListResp,
   KillScheduleInstancesResponse,
   TablePartition,
-  ProjectPage,
+  ModifyProjectRequest,
   DescribeWorkflowTaskCountRequest,
   DescribeInstanceListRequest,
   GetOfflineInstanceListResponse,
@@ -355,6 +360,7 @@ import {
   IntegrationNodeDetail,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
+  ResourcePoolInfo,
   GenHiveTableDDLSqlRequest,
   BatchCreateIntegrationTaskAlarmsRequest,
   QualityScore,
@@ -406,6 +412,7 @@ import {
   DeleteTaskAlarmRegularResponse,
   DeleteWorkflowByIdRequest,
   ProjectBaseInfoOpsRequest,
+  EnableProjectRequest,
   DescribeEventCasesRequest,
   DeleteRuleResponse,
   UpdateWorkflowInfoRequest,
@@ -420,6 +427,8 @@ import {
   EventListenerTaskInfo,
   DescribeApproveTypeListRequest,
   DeleteIntegrationNodeResponse,
+  CreateBaseProjectResponse,
+  DisableProjectRequest,
   DescribeDataSourceInfoListRequest,
   ParameterTaskOutDsDto,
   TaskTableMetricInfo,
@@ -461,6 +470,7 @@ import {
   FreezeTasksByWorkflowIdsRequest,
   DescribeTaskByCycleReportResponse,
   BatchDeleteOpsTasksResponse,
+  ModifyProjectResponse,
   CheckIntegrationTaskNameExistsResponse,
   BatchOperateResultOpsDto,
   RegisterDsEventListenerRequest,
@@ -468,7 +478,7 @@ import {
   ApproveType,
   TaskFormParams,
   SubmitCustomFunctionResponse,
-  TableNameFilter,
+  EnableProjectResponse,
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
   DescribeFieldBasicInfoRequest,
@@ -539,6 +549,7 @@ import {
   DescribeDataServicePublishedApiDetailRequest,
   DescribeTaskTableMetricOverviewRequest,
   ColumnLineage,
+  UnboundProjectExecutorResourceRequest,
   SourceFieldInfo,
   GetTaskInstanceRequest,
   DeleteDsFolderRequest,
@@ -588,13 +599,12 @@ import {
   DataCheckStat,
   CreateRuleRequest,
   IntegrationNodeSchema,
-  DescribeOpsWorkflowsResponse,
+  DescribeColumnsMetaResponse,
   DescribeRuleExecResultsResponse,
   QualityScoreTrend,
   RuleTemplate,
   DeleteFileResponse,
   ResumeIntegrationTaskRequest,
-  SuspendIntegrationTaskRequest,
   DeleteCodeTemplateResponse,
   TriggerDsEventRequest,
   DescribeRelatedTasksByTaskIdResp,
@@ -646,11 +656,12 @@ import {
   RuleExecDateStat,
   DescribeTenantProjectsResponse,
   DescribeTaskAlarmRegulationsRequest,
+  UnboundProjectExecutorResourceResponse,
   OrderCondition,
   CreateCustomFunctionResponse,
   UpdateCodeTemplateRequest,
   ScreenInstanceInfo,
-  ModifyTaskInfoRequest,
+  ManualTriggerRecordOpsDtoPage,
   DescribeOperateOpsTasksRequest,
   DescribeBatchOperateTaskRequest,
   DescribeTableMetaResponse,
@@ -671,6 +682,7 @@ import {
   RuleGroupSubscribe,
   EventListenerDTO,
   DutyPerson,
+  DeleteTaskLineageRequest,
   DeleteOfflineTaskResponse,
   IntegrationInstanceLog,
   EventDsDto,
@@ -790,6 +802,7 @@ import {
   BatchStartIntegrationTasksResponse,
   DescribeIntegrationVersionNodesInfoRequest,
   DeleteCodeTemplateRequest,
+  DisableProjectResponse,
   DescribeSuccessorOpsTaskInfosRequest,
   DescribeSchedulerInstanceStatusRequest,
   DescribeScheduleInstancesRequest,
@@ -824,7 +837,7 @@ import {
   DescribeWorkflowSchedulerInfoDsResponse,
   DescribeRuleGroupTableResponse,
   DailyScoreInfo,
-  DescribeColumnsMetaResponse,
+  SuspendIntegrationTaskRequest,
   TaskSubmitPreCheckDetailInfo,
   DescribeDependOpsTasksResponse,
   DeleteRuleTemplateResponse,
@@ -856,6 +869,7 @@ import {
   ParamMapDsDto,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
+  CreateBaseProjectRequest,
   DescribeRuleExecLogRequest,
   DescribeIntegrationTaskResponse,
   CreateDataModelRequest,
@@ -873,6 +887,7 @@ import {
   DescribeDataCheckStatResponse,
   DescribeInstanceDetailInfoRequest,
   DescribeIntegrationStatisticsInstanceTrendRequest,
+  ProjectPage,
   DescribeDsFolderTreeResponse,
   PathNodeDsVO,
   DescribeWorkflowCanvasInfoRequest,
@@ -1213,6 +1228,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: BatchSuspendIntegrationTasksResponse) => void
   ): Promise<BatchSuspendIntegrationTasksResponse> {
     return this.request("BatchSuspendIntegrationTasks", req, cb)
+  }
+
+  /**
+   * 提交工作流。本接口已废弃，请使用接口BatchCreateTaskVersionAsync。
+   */
+  async SubmitWorkflow(
+    req: SubmitWorkflowRequest,
+    cb?: (error: string, rep: SubmitWorkflowResponse) => void
+  ): Promise<SubmitWorkflowResponse> {
+    return this.request("SubmitWorkflow", req, cb)
   }
 
   /**
@@ -1678,6 +1703,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 商业化版本：执行资源组/资源包解除绑定项目
+   */
+  async UnboundProjectExecutorResource(
+    req: UnboundProjectExecutorResourceRequest,
+    cb?: (error: string, rep: UnboundProjectExecutorResourceResponse) => void
+  ): Promise<UnboundProjectExecutorResourceResponse> {
+    return this.request("UnboundProjectExecutorResource", req, cb)
+  }
+
+  /**
    * 查询目录树
    */
   async DescribeDsFolderTree(
@@ -1938,13 +1973,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 获取离线任务实例列表(新)
+   * 禁用项目
    */
-  async GetOfflineDIInstanceList(
-    req: GetOfflineDIInstanceListRequest,
-    cb?: (error: string, rep: GetOfflineDIInstanceListResponse) => void
-  ): Promise<GetOfflineDIInstanceListResponse> {
-    return this.request("GetOfflineDIInstanceList", req, cb)
+  async DisableProject(
+    req: DisableProjectRequest,
+    cb?: (error: string, rep: DisableProjectResponse) => void
+  ): Promise<DisableProjectResponse> {
+    return this.request("DisableProject", req, cb)
   }
 
   /**
@@ -2058,6 +2093,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 商业化版本：执行资源组-资源包绑定项目
+   */
+  async BindProjectExecutorResource(
+    req: BindProjectExecutorResourceRequest,
+    cb?: (error: string, rep: BindProjectExecutorResourceResponse) => void
+  ): Promise<BindProjectExecutorResourceResponse> {
+    return this.request("BindProjectExecutorResource", req, cb)
+  }
+
+  /**
    * 更新工作流调度。本接口已废弃，请使用接口RenewWorkflowSchedulerInfoDs。
    */
   async ModifyWorkflowSchedule(
@@ -2098,13 +2143,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 提交工作流。本接口已废弃，请使用接口BatchCreateTaskVersionAsync。
+   * 启用项目
    */
-  async SubmitWorkflow(
-    req: SubmitWorkflowRequest,
-    cb?: (error: string, rep: SubmitWorkflowResponse) => void
-  ): Promise<SubmitWorkflowResponse> {
-    return this.request("SubmitWorkflow", req, cb)
+  async EnableProject(
+    req: EnableProjectRequest,
+    cb?: (error: string, rep: EnableProjectResponse) => void
+  ): Promise<EnableProjectResponse> {
+    return this.request("EnableProject", req, cb)
   }
 
   /**
@@ -2509,6 +2554,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 创建项目 仅项目本身，不包含集群等信息
+   */
+  async CreateBaseProject(
+    req?: CreateBaseProjectRequest,
+    cb?: (error: string, rep: CreateBaseProjectResponse) => void
+  ): Promise<CreateBaseProjectResponse> {
+    return this.request("CreateBaseProject", req, cb)
+  }
+
+  /**
    * 质量报告-查询表质量详情
    */
   async DescribeTableQualityDetails(
@@ -2620,6 +2675,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeRulesByPageResponse) => void
   ): Promise<DescribeRulesByPageResponse> {
     return this.request("DescribeRulesByPage", req, cb)
+  }
+
+  /**
+   * 修改项目基础信息。
+   */
+  async ModifyProject(
+    req: ModifyProjectRequest,
+    cb?: (error: string, rep: ModifyProjectResponse) => void
+  ): Promise<ModifyProjectResponse> {
+    return this.request("ModifyProject", req, cb)
   }
 
   /**
@@ -2830,6 +2895,17 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeTaskLockStatusResponse) => void
   ): Promise<DescribeTaskLockStatusResponse> {
     return this.request("DescribeTaskLockStatus", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+触发事件。本接口已废弃，请使用接口TriggerDsEvent。
+     */
+  async TriggerEvent(
+    req: TriggerEventRequest,
+    cb?: (error: string, rep: TriggerEventResponse) => void
+  ): Promise<TriggerEventResponse> {
+    return this.request("TriggerEvent", req, cb)
   }
 
   /**
@@ -3103,14 +3179,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-触发事件。本接口已废弃，请使用接口TriggerDsEvent。
-     */
-  async TriggerEvent(
-    req: TriggerEventRequest,
-    cb?: (error: string, rep: TriggerEventResponse) => void
-  ): Promise<TriggerEventResponse> {
-    return this.request("TriggerEvent", req, cb)
+   * 删除任务血缘信息
+   */
+  async DeleteTaskLineage(
+    req: DeleteTaskLineageRequest,
+    cb?: (error: string, rep: DeleteTaskLineageResponse) => void
+  ): Promise<DeleteTaskLineageResponse> {
+    return this.request("DeleteTaskLineage", req, cb)
   }
 
   /**
@@ -3595,6 +3670,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: UpdateWorkflowOwnerResponse) => void
   ): Promise<UpdateWorkflowOwnerResponse> {
     return this.request("UpdateWorkflowOwner", req, cb)
+  }
+
+  /**
+   * 获取离线任务实例列表(新)
+   */
+  async GetOfflineDIInstanceList(
+    req: GetOfflineDIInstanceListRequest,
+    cb?: (error: string, rep: GetOfflineDIInstanceListResponse) => void
+  ): Promise<GetOfflineDIInstanceListResponse> {
+    return this.request("GetOfflineDIInstanceList", req, cb)
   }
 
   /**

@@ -16,6 +16,20 @@
  */
 
 /**
+ * ModifyCloudSliceTask返回参数结构体
+ */
+export interface ModifyCloudSliceTaskResponse {
+  /**
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 返回的质量数据，时间:值
  */
 export interface TimeValue {
@@ -27,6 +41,28 @@ export interface TimeValue {
    * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
    */
   Value?: number
+}
+
+/**
+ * DescribeCloudModeration返回参数结构体
+ */
+export interface DescribeCloudModerationResponse {
+  /**
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId?: string
+  /**
+   * 云端切片任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。
+   */
+  Status?: string
+  /**
+   * 订阅黑白名单
+   */
+  SubscribeStreamUserIds?: SubscribeModerationUserIds
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -131,6 +167,32 @@ export interface CreatePictureRequest {
    * 显示位置y轴方向
    */
   YPosition: number
+}
+
+/**
+ * 指定订阅流白名单或者黑名单，音频的白名单和音频黑名单不能同时设置，视频亦然。同时实际并发订阅的媒体流路数最大支持25路流，混流场景下视频的多画面最大支持24画面。支持通过设置".*$"通配符，来前缀匹配黑白名单的UserId，注意房间里不能有和通配符规则相同的用户，否则将视为订阅具体用户，前缀规则会失效。
+ */
+export interface SubscribeModerationUserIds {
+  /**
+   * 订阅音频流白名单，指定订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表订阅UserId 1，2，3的音频流；["1.*$"], 代表订阅UserId前缀为1的音频流。默认不填订阅房间内所有的音频流，订阅列表用户数不超过32。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeAudioUserIds?: Array<string>
+  /**
+   * 订阅音频流黑名单，指定不订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表不订阅UserId 1，2，3的音频流；["1.*$"], 代表不订阅UserId前缀为1的音频流。默认不填订阅房间内所有音频流，订阅列表用户数不超过32。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnSubscribeAudioUserIds?: Array<string>
+  /**
+   * 订阅视频流白名单，指定订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表订阅UserId  1，2，3的视频流；["1.*$"], 代表订阅UserId前缀为1的视频流。默认不填订阅房间内所有视频流，订阅列表用户数不超过32。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeVideoUserIds?: Array<string>
+  /**
+   * 订阅视频流黑名单，指定不订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表不订阅UserId  1，2，3的视频流；["1.*$"], 代表不订阅UserId前缀为1的视频流。默认不填订阅房间内所有视频流，订阅列表用户数不超过32。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnSubscribeVideoUserIds?: Array<string>
 }
 
 /**
@@ -469,6 +531,41 @@ export interface McuLayoutVolume {
 }
 
 /**
+ * 云端切片的控制参数。
+ */
+export interface SliceParams {
+  /**
+   * 切片任务类型:
+1:音频切片；
+2:视频截帧；
+3:音视切片+视频截帧
+示例值：1 
+   */
+  SliceType?: number
+  /**
+   * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
+示例值：30
+   */
+  MaxIdleTime?: number
+  /**
+   * 音频切片时长，默认15s 示例值：15
+   */
+  SliceAudio?: number
+  /**
+   * 视频截帧间隔时长，默认5s， 示例值：5
+   */
+  SliceVideo?: number
+  /**
+   * 指定订阅流白名单或者黑名单。
+   */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds
+  /**
+   * 已废弃，从控制台配置回调url
+   */
+  SliceCallbackUrl?: string
+}
+
+/**
  * DescribeUserEvent请求参数结构体
  */
 export interface DescribeUserEventRequest {
@@ -498,6 +595,20 @@ export interface DescribeUserEventRequest {
    * 用户SdkAppId（如：1400xxxxxx）
    */
   SdkAppId: number
+}
+
+/**
+ * DeleteCloudModeration请求参数结构体
+ */
+export interface DeleteCloudModerationRequest {
+  /**
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 审核任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId: string
 }
 
 /**
@@ -602,6 +713,20 @@ export interface AbnormalEvent {
    * 远端用户ID,""：表示异常事件不是由远端用户产生
    */
   PeerId?: string
+}
+
+/**
+ * DeleteCloudSliceTask请求参数结构体
+ */
+export interface DeleteCloudSliceTaskRequest {
+  /**
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId: string
 }
 
 /**
@@ -895,6 +1020,20 @@ DataType 为null，UserIds长度不超过100，PageSize最大不超过100。
 }
 
 /**
+ * CreateCloudModeration返回参数结构体
+ */
+export interface CreateCloudModerationResponse {
+  /**
+   * 云端审核服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTRTCMarketScaleData返回参数结构体
  */
 export interface DescribeTRTCMarketScaleDataResponse {
@@ -989,6 +1128,31 @@ export interface ModifyPictureRequest {
 }
 
 /**
+ * 页面录制控制参数
+ */
+export interface WebRecordVideoParams {
+  /**
+   * 录制画面宽度，默认为1280，取值范围[0, 1920]
+   */
+  Width?: number
+  /**
+   * 录制画面高度，默认为720，取值范围[0, 1080]
+   */
+  Height?: number
+  /**
+   * 指定输出格式，可选hls,mp4。存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
+
+   */
+  Format?: string
+  /**
+   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
+Hls 格式录制此参数不生效。
+示例值：1440
+   */
+  MaxMediaFileDuration?: number
+}
+
+/**
  * DescribeWebRecord返回参数结构体
  */
 export interface DescribeWebRecordResponse {
@@ -1049,6 +1213,20 @@ export interface DescribeUserInfoRequest {
 }
 
 /**
+ * DeleteCloudModeration返回参数结构体
+ */
+export interface DeleteCloudModerationResponse {
+  /**
+   * 审核任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRelayUsage请求参数结构体
  */
 export interface DescribeRelayUsageRequest {
@@ -1065,6 +1243,16 @@ export interface DescribeRelayUsageRequest {
    * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
    */
   SdkAppId?: number
+}
+
+/**
+ * DismissRoom返回参数结构体
+ */
+export interface DismissRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1242,18 +1430,17 @@ export interface McuRecordParams {
 }
 
 /**
- * DismissRoomByStrRoomId请求参数结构体
+ * CreateCloudRecording返回参数结构体
  */
-export interface DismissRoomByStrRoomIdRequest {
+export interface CreateCloudRecordingResponse {
   /**
-   * TRTC的SDKAppId。
+   * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。
    */
-  SdkAppId: number
+  TaskId?: string
   /**
-   * 字符串类型房间号。
-本接口仅支持解散字符串类型房间号，如需解散数字类型房间号，请使用：DismissRoom
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RoomId: string
+  RequestId?: string
 }
 
 /**
@@ -1419,6 +1606,48 @@ export interface CloudVod {
 }
 
 /**
+ * 腾讯云对象存储COS以及第三方云存储的账号信息
+ */
+export interface CloudSliceStorage {
+  /**
+   * 腾讯云对象存储COS以及第三方云存储账号信息
+0：腾讯云对象存储 COS
+1：AWS S3
+2: 阿里云 OSS
+示例值：0
+   */
+  Vendor: number
+  /**
+   * 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224#.E5.9C.B0.E5.9F.9F）。
+示例值：cn-shanghai-1
+
+AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions）
+示例值：ap-southeast-3	
+   */
+  Region: string
+  /**
+   * 云存储桶名称。
+   */
+  Bucket: string
+  /**
+   * 云存储的access_key账号信息。
+若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。
+示例值：test-accesskey
+   */
+  AccessKey: string
+  /**
+   * 云存储的secret_key账号信息。
+若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。
+示例值：test-secretkey
+   */
+  SecretKey: string
+  /**
+   * 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，切片文件xxx.mp3在 ["prefix1", "prefix2"]作用下，音频切片文件会变成prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC时间}.ogg，视频截帧会变成prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC时间}.png
+   */
+  FileNamePrefix?: Array<string>
+}
+
+/**
  * DescribeTRTCMarketScaleMetricData返回参数结构体
  */
 export interface DescribeTRTCMarketScaleMetricDataResponse {
@@ -1527,6 +1756,28 @@ export interface DescribeMixTranscodingUsageRequest {
    * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
    */
   SdkAppId?: number
+}
+
+/**
+ * DescribeTRTCRealTimeQualityData请求参数结构体
+ */
+export interface DescribeTRTCRealTimeQualityDataRequest {
+  /**
+   * 用户SdkAppId（如：1400xxxxxx）
+   */
+  SdkAppId: string
+  /**
+   * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+   */
+  StartTime: number
+  /**
+   * 结束时间，unix时间戳，单位：秒
+   */
+  EndTime: number
+  /**
+   * 房间ID
+   */
+  RoomId?: string
 }
 
 /**
@@ -1673,6 +1924,33 @@ export interface VoicePrintInfo {
    * 请求毫秒时间戳
    */
   ReqTimestamp?: number
+}
+
+/**
+ * 云端录制查询接口，录制文件的信息
+ */
+export interface StorageFile {
+  /**
+   * 录制文件对应的UserId，如果是混流的话的这里返回的是空串。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 录制索引文件名。
+   */
+  FileName?: string
+  /**
+   * 录制文件流信息。
+video：视频录制文件
+audio：音频录制文件
+audio_video：音视频录制文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrackType?: string
+  /**
+   * 录制文件开始Unix时间戳。
+   */
+  BeginTimeStamp?: number
 }
 
 /**
@@ -1827,6 +2105,51 @@ export interface McuLayoutParams {
    * 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底
    */
   RenderMode?: number
+}
+
+/**
+ * StartWebRecord请求参数结构体
+ */
+export interface StartWebRecordRequest {
+  /**
+   * 需要录制的网页URL
+
+   */
+  RecordUrl: string
+  /**
+   * 录制最大时长限制， 单位 s, 合法取值范围[1800, 36000], 默认 36000s(10 小时)
+
+   */
+  MaxDurationLimit?: number
+  /**
+   * 【必填】云存储相关的参数，目前支持腾讯云对象存储以及腾讯云云点播VOD，不支持第三方云存储；输出文件的存储格式仅支持hls或mp4
+   */
+  StorageParams?: StorageParams
+  /**
+   * 页面录制视频参数
+   */
+  WebRecordVideoParams?: WebRecordVideoParams
+  /**
+   * 【必填】TRTC的SdkAppId
+   */
+  SdkAppId?: number
+  /**
+   * 当对重复任务敏感时，请关注此值： 为了避免任务在短时间内重复发起，导致任务重复
+传入录制RecordId来标识此次任务， 小于32字节，若携带RecordId发起两次以上的开始录制请求，任务只会启动一个，第二个报错FailedOperation.TaskExist。注意StartWebRecord调用失败时而非FailedOperation.TaskExist错误，请更换RecordId重新发起。
+   */
+  RecordId?: string
+  /**
+   * 若您想要推流到CDN，可以使用PublishCdnParams.N参数设置，支持最多同时推流到10个CDN地址。若转推地址是腾讯云CDN时，请将IsTencentCdn明确设置为1
+   */
+  PublishCdnParams?: Array<McuPublishCdnParam>
+  /**
+   * 录制页面资源加载的超时时间，单位：秒。默认值为 0 秒，该值需大于等于 0秒，且小于等于 60秒。录制页面未启用页面加载超时检测时，请勿设置此参数。
+   */
+  ReadyTimeout?: number
+  /**
+   * 渲染移动模式参数；不准备渲染移动模式页面时，请勿设置此参数。
+   */
+  EmulateMobileParams?: EmulateMobileParams
 }
 
 /**
@@ -2132,28 +2455,45 @@ export interface StartMCUMixTranscodeRequest {
 }
 
 /**
- * 页面录制控制参数
+ * 腾讯云对象存储COS以及第三方云存储的账号信息
  */
-export interface WebRecordVideoParams {
+export interface CloudModerationStorage {
   /**
-   * 录制画面宽度，默认为1280，取值范围[0, 1920]
+   * 腾讯云对象存储COS以及第三方云存储账号信息
+0：腾讯云对象存储 COS
+1：AWS S3
+2: 阿里云 OSS
+示例值：0
    */
-  Width?: number
+  Vendor: number
   /**
-   * 录制画面高度，默认为720，取值范围[0, 1080]
-   */
-  Height?: number
-  /**
-   * 指定输出格式，可选hls,mp4。存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
+   * 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224#.E5.9C.B0.E5.9F.9F）。
+示例值：cn-shanghai-1
 
+AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions）
+示例值：ap-southeast-3	
    */
-  Format?: string
+  Region: string
   /**
-   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
-Hls 格式录制此参数不生效。
-示例值：1440
+   * 云存储桶名称。
    */
-  MaxMediaFileDuration?: number
+  Bucket: string
+  /**
+   * 云存储的access_key账号信息。
+若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。
+示例值：test-accesskey
+   */
+  AccessKey: string
+  /**
+   * 云存储的secret_key账号信息。
+若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。
+示例值：test-secretkey
+   */
+  SecretKey: string
+  /**
+   * 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，切片文件xxx.mp3在 ["prefix1", "prefix2"]作用下，音频切片文件会变成prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC时间}.ogg，视频截帧会变成prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC时间}.png
+   */
+  FileNamePrefix?: Array<string>
 }
 
 /**
@@ -2231,6 +2571,20 @@ export interface TrtcUsage {
    * 用量数组。每个数值含义与UsageKey对应。单位:分钟。
    */
   UsageValue?: Array<number>
+}
+
+/**
+ * DeleteCloudSliceTask返回参数结构体
+ */
+export interface DeleteCloudSliceTaskResponse {
+  /**
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2406,13 +2760,29 @@ export interface McuPassThrough {
 }
 
 /**
- * ModifyPicture返回参数结构体
+ * 送审到第三方审核供应商需要参数
  */
-export interface ModifyPictureResponse {
+export interface ModerationSupplierParam {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 供应审核商账号id，数美天御不为空，易盾为空
    */
-  RequestId?: string
+  AppID?: string
+  /**
+   * 供应审核商秘钥id
+   */
+  SecretId?: string
+  /**
+   * 供应审核商秘钥key
+   */
+  SecretKey?: string
+  /**
+   * 音频场景，策略id或者businessId
+   */
+  AudioBizType?: string
+  /**
+   * 图片场景，策略id或者businessId
+   */
+  ImageBizType?: string
 }
 
 /**
@@ -2439,30 +2809,13 @@ export interface DescribeRecordingUsageRequest {
 }
 
 /**
- * 云端录制查询接口，录制文件的信息
+ * ModifyPicture返回参数结构体
  */
-export interface StorageFile {
+export interface ModifyPictureResponse {
   /**
-   * 录制文件对应的UserId，如果是混流的话的这里返回的是空串。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserId?: string
-  /**
-   * 录制索引文件名。
-   */
-  FileName?: string
-  /**
-   * 录制文件流信息。
-video：视频录制文件
-audio：音频录制文件
-audio_video：音视频录制文件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrackType?: string
-  /**
-   * 录制文件开始Unix时间戳。
-   */
-  BeginTimeStamp?: number
+  RequestId?: string
 }
 
 /**
@@ -2586,6 +2939,24 @@ export interface MixLayoutParams {
    * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
    */
   MaxResolutionUserAlign?: number
+}
+
+/**
+ * ModifyCloudSliceTask请求参数结构体
+ */
+export interface ModifyCloudSliceTaskRequest {
+  /**
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId: string
+  /**
+   * 指定订阅流白名单或者黑名单。
+   */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds
 }
 
 /**
@@ -2873,6 +3244,20 @@ export interface DeleteVoicePrintResponse {
 }
 
 /**
+ * StartWebRecord返回参数结构体
+ */
+export interface StartWebRecordResponse {
+  /**
+   * 录制任务的唯一Id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTRTCRealTimeQualityMetricData返回参数结构体
  */
 export interface DescribeTRTCRealTimeQualityMetricDataResponse {
@@ -2888,39 +3273,50 @@ export interface DescribeTRTCRealTimeQualityMetricDataResponse {
 }
 
 /**
- * DescribeTRTCRealTimeQualityData请求参数结构体
+ * DescribeCloudRecording返回参数结构体
  */
-export interface DescribeTRTCRealTimeQualityDataRequest {
+export interface DescribeCloudRecordingResponse {
   /**
-   * 用户SdkAppId（如：1400xxxxxx）
-   */
-  SdkAppId: string
-  /**
-   * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
-   */
-  StartTime: number
-  /**
-   * 结束时间，unix时间戳，单位：秒
-   */
-  EndTime: number
-  /**
-   * 房间ID
-   */
-  RoomId?: string
-}
-
-/**
- * StartWebRecord返回参数结构体
- */
-export interface StartWebRecordResponse {
-  /**
-   * 录制任务的唯一Id
+   * 录制任务的唯一Id。
    */
   TaskId?: string
+  /**
+   * 云端录制任务的状态信息。
+Idle：表示当前录制任务空闲中
+InProgress：表示当前录制任务正在进行中。
+Exited：表示当前录制任务正在退出的过程中。
+   */
+  Status?: string
+  /**
+   * 录制文件信息。
+   */
+  StorageFileList?: Array<StorageFile>
+  /**
+   * 转推录制任务发起时所填，标识一次录制
+   */
+  RecorderKey?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyCloudModeration请求参数结构体
+ */
+export interface ModifyCloudModerationRequest {
+  /**
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 审核任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId: string
+  /**
+   * 指定订阅流白名单或者黑名单。
+   */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds
 }
 
 /**
@@ -3054,6 +3450,38 @@ export interface DeleteCloudRecordingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StartAITranscription请求参数结构体
+ */
+export interface StartAITranscriptionRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和开启转录任务的房间使用的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，表示开启转录任务的房间号。
+   */
+  RoomId: string
+  /**
+   * 转录机器人的参数。
+   */
+  TranscriptionParams: TranscriptionParams
+  /**
+   * 调用方传入的唯一Id，服务端用来任务去重，重复的任务会发起失败。服务端固定使用SdkAppId+RoomId+RoomIdType+RobotUserId来去重，如果传入了SessionId，也会使用SessionId去重。
+注意：
+TranscriptionMode为0时，需要保证一个房间内只发起一个任务，如果发起多个任务，则机器人之间会相互订阅，除非主动停止任务，否则只有10小时后任务才会超时退出，这种情况下建议填写SessionId，保证后续重复发起的任务失败。
+   */
+  SessionId?: string
+  /**
+   * TRTC房间号的类型，0代表数字房间号，1代表字符串房间号。不填默认是数字房间号。
+   */
+  RoomIdType?: number
+  /**
+   * 语音识别配置。
+   */
+  RecognizeConfig?: RecognizeConfig
 }
 
 /**
@@ -3192,23 +3620,13 @@ export interface QualityData {
 }
 
 /**
- * StopPublishCdnStream请求参数结构体
+ * 审核存储参数
  */
-export interface StopPublishCdnStreamRequest {
+export interface ModerationStorageParams {
   /**
-   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
+   * 腾讯云对象存储COS以及第三方云存储的账号信息
    */
-  SdkAppId: number
-  /**
-   * 唯一标识转推任务。
-   */
-  TaskId: string
-  /**
-   * 录制任务 key，标识一个录制任务，对应转推任务发起时指定 RecordKey；
-如果填写该参数，表示调用者希望立即结束该录制任务。当RecordKey 指定的录制任务正在录制当前转推任务时，录制任务立即结束，否则录制任务不受影响。
-如果没有填写该参数，但是转推任务发起时填写了 RecordKey，则表示在续录等待时间结束后才结束录制任务，续录等待期间可以使用相同的 RecordKey 发起新的转推任务，和当前转推任务录制到同一文件。
-   */
-  RecordKey?: string
+  CloudModerationStorage?: CloudModerationStorage
 }
 
 /**
@@ -3429,11 +3847,26 @@ AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using
 }
 
 /**
- * CreateCloudRecording返回参数结构体
+ * DismissRoomByStrRoomId请求参数结构体
  */
-export interface CreateCloudRecordingResponse {
+export interface DismissRoomByStrRoomIdRequest {
   /**
-   * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。
+   * TRTC的SDKAppId。
+   */
+  SdkAppId: number
+  /**
+   * 字符串类型房间号。
+本接口仅支持解散字符串类型房间号，如需解散数字类型房间号，请使用：DismissRoom
+   */
+  RoomId: string
+}
+
+/**
+ * StartStreamIngest返回参数结构体
+ */
+export interface StartStreamIngestResponse {
+  /**
+   * 输入在线媒体流的任务 ID。任务 ID 是对一次输入在线媒体流生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
    */
   TaskId?: string
   /**
@@ -3443,11 +3876,11 @@ export interface CreateCloudRecordingResponse {
 }
 
 /**
- * StartStreamIngest返回参数结构体
+ * CreateCloudSliceTask返回参数结构体
  */
-export interface StartStreamIngestResponse {
+export interface CreateCloudSliceTaskResponse {
   /**
-   * 输入在线媒体流的任务 ID。任务 ID 是对一次输入在线媒体流生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
+   * 云端切片服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数
    */
   TaskId?: string
   /**
@@ -3514,6 +3947,20 @@ export interface DescribePictureRequest {
    * 页码，不填时默认为1
    */
   PageNo?: number
+}
+
+/**
+ * ModifyCloudModeration返回参数结构体
+ */
+export interface ModifyCloudModerationResponse {
+  /**
+   * 审核任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3626,6 +4073,44 @@ export interface DescribeTrtcRoomUsageRequest {
 }
 
 /**
+ * CreateCloudModeration请求参数结构体
+ */
+export interface CreateCloudModerationRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
+   */
+  RoomId: string
+  /**
+   * 机器人的UserId，用于进房发起审核任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。
+   */
+  UserId: string
+  /**
+   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
+   */
+  UserSig: string
+  /**
+   * 云端审核控制参数。
+   */
+  ModerationParams: ModerationParams
+  /**
+   * 云端审核文件上传到云存储的参数
+   */
+  ModerationStorageParams: ModerationStorageParams
+  /**
+   * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
+   */
+  RoomIdType?: number
+  /**
+   * 任务ID可以调用的时效性，从成功开启任务并获得TaskID后开始计算，超时后无法调用查询、更新和停止等接口，但是切片任务不会停止。 参数的单位是小时，默认24小时（1天），最大可设置72小时（3天），最小设置6小时。举例说明：如果不设置该参数，那么开始切片成功后，查询、更新和停止切片的调用时效为24个小时。
+   */
+  ResourceExpiredHour?: number
+}
+
+/**
  * DescribeTrtcMcuTranscodeTime请求参数结构体
  */
 export interface DescribeTrtcMcuTranscodeTimeRequest {
@@ -3642,6 +4127,16 @@ export interface DescribeTrtcMcuTranscodeTimeRequest {
    * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
    */
   SdkAppId?: number
+}
+
+/**
+ * StopStreamIngest返回参数结构体
+ */
+export interface StopStreamIngestResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3766,6 +4261,16 @@ export interface ModifyCloudRecordingResponse {
 }
 
 /**
+ * 单流旁路转推的用户上行信息。
+ */
+export interface SingleSubscribeParams {
+  /**
+   * 用户媒体流参数。
+   */
+  UserMediaStream: UserMediaStream
+}
+
+/**
  * StartMCUMixTranscodeByStrRoomId请求参数结构体
  */
 export interface StartMCUMixTranscodeByStrRoomIdRequest {
@@ -3796,84 +4301,125 @@ export interface StartMCUMixTranscodeByStrRoomIdRequest {
 }
 
 /**
- * DescribeCloudRecording返回参数结构体
+ * CreateCloudSliceTask请求参数结构体
  */
-export interface DescribeCloudRecordingResponse {
+export interface CreateCloudSliceTaskRequest {
   /**
-   * 录制任务的唯一Id。
-   */
-  TaskId?: string
-  /**
-   * 云端录制任务的状态信息。
-Idle：表示当前录制任务空闲中
-InProgress：表示当前录制任务正在进行中。
-Exited：表示当前录制任务正在退出的过程中。
-   */
-  Status?: string
-  /**
-   * 录制文件信息。
-   */
-  StorageFileList?: Array<StorageFile>
-  /**
-   * 转推录制任务发起时所填，标识一次录制
-   */
-  RecorderKey?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StartAITranscription请求参数结构体
- */
-export interface StartAITranscriptionRequest {
-  /**
-   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和开启转录任务的房间使用的SdkAppId相同。
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
    */
   SdkAppId: number
   /**
-   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，表示开启转录任务的房间号。
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
    */
   RoomId: string
   /**
-   * 转录机器人的参数。
+   * 机器人的UserId，用于进房发起切片任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。
    */
-  TranscriptionParams: TranscriptionParams
+  UserId: string
   /**
-   * 调用方传入的唯一Id，服务端用来任务去重，重复的任务会发起失败。服务端固定使用SdkAppId+RoomId+RoomIdType+RobotUserId来去重，如果传入了SessionId，也会使用SessionId去重。
-注意：
-TranscriptionMode为0时，需要保证一个房间内只发起一个任务，如果发起多个任务，则机器人之间会相互订阅，除非主动停止任务，否则只有10小时后任务才会超时退出，这种情况下建议填写SessionId，保证后续重复发起的任务失败。
+   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
    */
-  SessionId?: string
+  UserSig: string
   /**
-   * TRTC房间号的类型，0代表数字房间号，1代表字符串房间号。不填默认是数字房间号。
+   * 云端切片控制参数。
+   */
+  SliceParams: SliceParams
+  /**
+   * 云端切片文件上传到云存储的参数
+   */
+  SliceStorageParams: SliceStorageParams
+  /**
+   * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
    */
   RoomIdType?: number
   /**
-   * 语音识别配置。
+   * 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。 示例值：24
    */
-  RecognizeConfig?: RecognizeConfig
+  ResourceExpiredHour?: number
+  /**
+   * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 示例值：eJw1jcEKgkAURX9FZlvY****fL9rfNX4_
+   */
+  PrivateMapKey?: string
 }
 
 /**
- * DismissRoom返回参数结构体
+ * 云端审核的控制参数。
  */
-export interface DismissRoomResponse {
+export interface ModerationParams {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 审核任务类型， 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核4:音频流式审核 5:音频流式+视频截帧审核  默认值1 （流式审核需要供应商支持才生效）
    */
-  RequestId?: string
+  ModerationType?: number
+  /**
+   * 房间内持续没有用户（主播）上行推流的状态超过MaxIdleTime的时长，自动停止切片，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于1800秒(0.5小时)。示例值：30
+   */
+  MaxIdleTime?: number
+  /**
+   * 音频切片时长，默认15s 示例值：15
+   */
+  SliceAudio?: number
+  /**
+   * 视频截帧间隔时长，默认5s
+   */
+  SliceVideo?: number
+  /**
+   * 供应商枚举，
+tianyu : 天御内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
+ace  : ACE内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
+shumei : 数美审核（支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
+yidun : 网易易盾审核 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
+   */
+  ModerationSupplier?: string
+  /**
+   * 第三方审核商送审需要配置信息
+   */
+  ModerationSupplierParam?: ModerationSupplierParam
+  /**
+   * 是否保存命中文件 0 默认不保存  1 保存命中文件
+   */
+  SaveModerationFile?: number
+  /**
+   * 是否回调所有审核结果:0 默认回调所有结果 1 仅回调命中结果
+   */
+  CallbackAllResults?: number
+  /**
+   * 指定订阅流白名单或者黑名单。
+   */
+  SubscribeStreamUserIds?: SubscribeModerationUserIds
 }
 
 /**
- * StopStreamIngest返回参数结构体
+ * DescribeCloudSliceTask请求参数结构体
  */
-export interface StopStreamIngestResponse {
+export interface DescribeCloudSliceTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。
    */
-  RequestId?: string
+  SdkAppId: number
+  /**
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId: string
+}
+
+/**
+ * StopPublishCdnStream请求参数结构体
+ */
+export interface StopPublishCdnStreamRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 唯一标识转推任务。
+   */
+  TaskId: string
+  /**
+   * 录制任务 key，标识一个录制任务，对应转推任务发起时指定 RecordKey；
+如果填写该参数，表示调用者希望立即结束该录制任务。当RecordKey 指定的录制任务正在录制当前转推任务时，录制任务立即结束，否则录制任务不受影响。
+如果没有填写该参数，但是转推任务发起时填写了 RecordKey，则表示在续录等待时间结束后才结束录制任务，续录等待期间可以使用相同的 RecordKey 发起新的转推任务，和当前转推任务录制到同一文件。
+   */
+  RecordKey?: string
 }
 
 /**
@@ -3981,48 +4527,13 @@ export interface UpdatePublishCdnStreamRequest {
 }
 
 /**
- * StartWebRecord请求参数结构体
+ * 切片存储参数
  */
-export interface StartWebRecordRequest {
+export interface SliceStorageParams {
   /**
-   * 需要录制的网页URL
-
+   * 腾讯云对象存储COS以及第三方云存储的账号信息
    */
-  RecordUrl: string
-  /**
-   * 录制最大时长限制， 单位 s, 合法取值范围[1800, 36000], 默认 36000s(10 小时)
-
-   */
-  MaxDurationLimit?: number
-  /**
-   * 【必填】云存储相关的参数，目前支持腾讯云对象存储以及腾讯云云点播VOD，不支持第三方云存储；输出文件的存储格式仅支持hls或mp4
-   */
-  StorageParams?: StorageParams
-  /**
-   * 页面录制视频参数
-   */
-  WebRecordVideoParams?: WebRecordVideoParams
-  /**
-   * 【必填】TRTC的SdkAppId
-   */
-  SdkAppId?: number
-  /**
-   * 当对重复任务敏感时，请关注此值： 为了避免任务在短时间内重复发起，导致任务重复
-传入录制RecordId来标识此次任务， 小于32字节，若携带RecordId发起两次以上的开始录制请求，任务只会启动一个，第二个报错FailedOperation.TaskExist。注意StartWebRecord调用失败时而非FailedOperation.TaskExist错误，请更换RecordId重新发起。
-   */
-  RecordId?: string
-  /**
-   * 若您想要推流到CDN，可以使用PublishCdnParams.N参数设置，支持最多同时推流到10个CDN地址。若转推地址是腾讯云CDN时，请将IsTencentCdn明确设置为1
-   */
-  PublishCdnParams?: Array<McuPublishCdnParam>
-  /**
-   * 录制页面资源加载的超时时间，单位：秒。默认值为 0 秒，该值需大于等于 0秒，且小于等于 60秒。录制页面未启用页面加载超时检测时，请勿设置此参数。
-   */
-  ReadyTimeout?: number
-  /**
-   * 渲染移动模式参数；不准备渲染移动模式页面时，请勿设置此参数。
-   */
-  EmulateMobileParams?: EmulateMobileParams
+  CloudSliceStorage?: CloudSliceStorage
 }
 
 /**
@@ -4228,6 +4739,36 @@ export interface EventMessage {
    * 事件的第二个参数，如视频分辨率高
    */
   ParamTwo?: number
+}
+
+/**
+ * UpdateAIConversation请求参数结构体
+ */
+export interface UpdateAIConversationRequest {
+  /**
+   * 唯一标识一个任务
+   */
+  TaskId: string
+  /**
+   * 不填写则不进行更新，机器人的欢迎语
+   */
+  WelcomeMessage?: string
+  /**
+   * 不填写则不进行更新。智能打断模式，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
+   */
+  InterruptMode?: number
+  /**
+   * 不填写则不进行更新。InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断
+   */
+  InterruptSpeechDuration?: number
+  /**
+   * 不填写则不进行更新，LLM配置，详情见StartAIConversation接口
+   */
+  LLMConfig?: string
+  /**
+   * 不填写则不进行更新，TTS配置，详情见StartAIConversation接口
+   */
+  TTSConfig?: string
 }
 
 /**
@@ -4657,13 +5198,17 @@ export interface StopMCUMixTranscodeRequest {
 }
 
 /**
- * 单流旁路转推的用户上行信息。
+ * DescribeCloudModeration请求参数结构体
  */
-export interface SingleSubscribeParams {
+export interface DescribeCloudModerationRequest {
   /**
-   * 用户媒体流参数。
+   * TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。
    */
-  UserMediaStream: UserMediaStream
+  SdkAppId: number
+  /**
+   * 云端审核任务的唯一Id，在启动切片任务成功后会返回。
+   */
+  TaskId: string
 }
 
 /**
@@ -4756,33 +5301,21 @@ export interface AbnormalExperience {
 }
 
 /**
- * UpdateAIConversation请求参数结构体
+ * DescribeCloudSliceTask返回参数结构体
  */
-export interface UpdateAIConversationRequest {
+export interface DescribeCloudSliceTaskResponse {
   /**
-   * 唯一标识一个任务
+   * 切片任务的唯一Id，在启动切片任务成功后会返回。
    */
-  TaskId: string
+  TaskId?: string
   /**
-   * 不填写则不进行更新，机器人的欢迎语
+   * 云端切片任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。
    */
-  WelcomeMessage?: string
+  Status?: string
   /**
-   * 不填写则不进行更新。智能打断模式，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InterruptMode?: number
-  /**
-   * 不填写则不进行更新。InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断
-   */
-  InterruptSpeechDuration?: number
-  /**
-   * 不填写则不进行更新，LLM配置，详情见StartAIConversation接口
-   */
-  LLMConfig?: string
-  /**
-   * 不填写则不进行更新，TTS配置，详情见StartAIConversation接口
-   */
-  TTSConfig?: string
+  RequestId?: string
 }
 
 /**

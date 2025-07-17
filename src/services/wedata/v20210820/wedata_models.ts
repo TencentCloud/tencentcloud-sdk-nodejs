@@ -1611,6 +1611,28 @@ export interface TaskLineageInfoPair {
 }
 
 /**
+ * BindProjectExecutorResource请求参数结构体
+ */
+export interface BindProjectExecutorResourceRequest {
+  /**
+   * 执行资源组id
+   */
+  ExecutorGroupId: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 需要绑定项目的资源包id集合，为空则绑定整个资源组
+   */
+  ExecutorResourcePackageIds?: Array<string>
+  /**
+   * 可选: 需要绑定的多个项目id, 若申明将带上ProjectId一起绑定
+   */
+  ProjectIdList?: Array<string>
+}
+
+/**
  * JudgeResourceFile返回参数结构体
  */
 export interface JudgeResourceFileResponse {
@@ -2272,6 +2294,32 @@ export interface RuleGroupExecResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupExist?: string
+}
+
+/**
+ * 按表名查询的查询条件
+ */
+export interface TableNameFilter {
+  /**
+   * 数据源类型
+   */
+  MsType?: string
+  /**
+   * 数据源id
+   */
+  DatasourceId?: number
+  /**
+   * 数据库名称
+   */
+  DatabaseName?: string
+  /**
+   * schema
+   */
+  SchemaName?: string
+  /**
+   * 表名
+   */
+  Name?: string
 }
 
 /**
@@ -3388,6 +3436,20 @@ export interface TaskTypeMap {
 }
 
 /**
+ * DeleteTaskLineage返回参数结构体
+ */
+export interface DeleteTaskLineageResponse {
+  /**
+   * 操作结果
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例生命周期detail
  */
 export interface InstanceLifeDetailDto {
@@ -3546,39 +3608,18 @@ export interface EventCaseDTO {
 }
 
 /**
- * 手动工作流触发运行记录分页查询
+ * DescribeOpsWorkflows返回参数结构体
  */
-export interface ManualTriggerRecordOpsDtoPage {
+export interface DescribeOpsWorkflowsResponse {
   /**
-   * 页号
+   * 工作流列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber?: number
+  Data?: WorkflowExtOpsDtoPage
   /**
-   * 页大小
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageSize?: number
-  /**
-   * 手动工作流触发运行记录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<ManualTriggerRecordOpsDto>
-  /**
-   * 总页数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalPage?: number
-  /**
-   * 页数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageCount?: number
-  /**
-   * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
+  RequestId?: string
 }
 
 /**
@@ -4413,6 +4454,20 @@ export interface SaveCustomFunctionRequest {
    * 函数名称，不支持修改，dlc侧创建函数保存时用
    */
   Name?: string
+}
+
+/**
+ * BindProjectExecutorResource返回参数结构体
+ */
+export interface BindProjectExecutorResourceResponse {
+  /**
+   * 绑定成功为true，其他为异常信息
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8690,6 +8745,141 @@ export interface DescribeInstanceLogListResponse {
 }
 
 /**
+ * ModifyTaskInfo请求参数结构体
+ */
+export interface ModifyTaskInfoRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 执行时间，单位分钟，天/周/月/年调度才有。比如天调度，每天的02:00点执行一次，delayTime就是120分钟
+   */
+  DelayTime?: number
+  /**
+   * 启动时间
+   */
+  StartupTime?: number
+  /**
+   * 自依赖类型  1:有序串行 一次一个 排队, 2: 无序串行 一次一个 不排队， 3:并行 一次多个
+   */
+  SelfDepend?: number
+  /**
+   * 生效开始时间，格式 yyyy-MM-dd HH:mm:ss
+   */
+  StartTime?: string
+  /**
+   * 生效结束时间，格式 yyyy-MM-dd HH:mm:ss
+   */
+  EndTime?: string
+  /**
+   * 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为'0,3,4'。
+   */
+  TaskAction?: string
+  /**
+   * "周期类型  0:crontab类型, 1:分钟，2:小时，3:天，4:周，5:月，6:一次性，7:用户驱动，10:弹性周期 周,11:弹性周期 月,12:年,13:即时触发Instant类型，与正常周期调度任务逻辑隔离
+   */
+  CycleType?: number
+  /**
+   * 步长，间隔时间，最小1
+   */
+  CycleStep?: number
+  /**
+   * cron表达式  周期类型为crontab调度才需要
+   */
+  CrontabExpression?: string
+  /**
+   * 执行时间左闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
+   */
+  ExecutionStartTime?: string
+  /**
+   * 执行时间右闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
+   */
+  ExecutionEndTime?: string
+  /**
+   * 新的任务名
+   */
+  TaskName?: string
+  /**
+   * 失败重试间隔,单位分钟，创建任务的时候已经给了默认值
+   */
+  RetryWait?: number
+  /**
+   * 失败重试次数，创建任务的时候已经给了默认值
+   */
+  TryLimit?: number
+  /**
+   * 是否可重试，1代表可以重试
+   */
+  Retriable?: number
+  /**
+   * 运行优先级，4高 5中 6低
+   */
+  RunPriority?: number
+  /**
+   * 任务的扩展配置
+   */
+  TaskExt?: Array<TaskExtInfo>
+  /**
+   * 执行资源组id，需要去资源管理服务上创建调度资源组，并且绑定cvm机器
+   */
+  ResourceGroup?: string
+  /**
+   * 资源池队列名称
+   */
+  YarnQueue?: string
+  /**
+   * 资源组下具体执行机，any 表示可以跑在任意一台。
+   */
+  BrokerIp?: string
+  /**
+   * 责任人
+   * @deprecated
+   */
+  InCharge?: string
+  /**
+   * 任务备注
+   */
+  Notes?: string
+  /**
+   * 任务参数
+   */
+  TaskParamInfos?: Array<ParamInfo>
+  /**
+   * 源数据源
+   */
+  SourceServer?: string
+  /**
+   * 目标数据源
+   */
+  TargetServer?: string
+  /**
+   * 是否支持工作流依赖 yes / no 默认 no
+   */
+  DependencyWorkflow?: string
+  /**
+   * 依赖配置
+   */
+  DependencyConfigDTOs?: Array<DependencyConfig>
+  /**
+   * 执行耗时
+   */
+  ExecutionTTL?: number
+  /**
+   * 脚本是否改变
+   */
+  ScriptChange?: boolean
+  /**
+   * 责任人id
+   */
+  InChargeIds?: Array<string>
+}
+
+/**
  * 数据质量规则组
  */
 export interface RuleGroup {
@@ -11169,34 +11359,41 @@ export interface TablePartition {
 }
 
 /**
- * 查询数据源分页列表
+ * ModifyProject请求参数结构体
  */
-export interface ProjectPage {
+export interface ModifyProjectRequest {
   /**
-   * 分页页码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 目标修改的项目ID
    */
-  PageNumber: number
+  ProjectId: string
   /**
-   * 分页大小
-注意：此字段可能返回 null，表示取不到有效值。
+   * true/false则修改，不带该参数不修改。
    */
-  PageSize: number
+  TaskSubmitApproval?: boolean
   /**
-   * 数据源列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源池信息
    */
-  Rows: Array<Project>
+  ResourcePoolInfo?: ResourcePoolInfo
   /**
-   * 总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目管理员
    */
-  TotalCount: number
+  ProjectManagers?: Array<string>
   /**
-   * 总分页页码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 调度任务严格模式
    */
-  TotalPageNumber: number
+  TaskStrictMode?: boolean
+  /**
+   * 以后新增选项可以直接通过前端的json格式写入去实现
+   */
+  ExtraOptions?: string
+  /**
+   * 项目类型，SIMPLE：简单模式 STANDARD：标准模式
+   */
+  Model?: string
+  /**
+   * 项目负责人
+   */
+  ProjectOwner?: Array<string>
 }
 
 /**
@@ -12633,9 +12830,13 @@ export interface CreateCodeTemplateRequest {
    */
   FolderId?: string
   /**
-   * 指定脚本内容
+   * Base64转化的脚本内容
    */
   Content?: string
+  /**
+   * 代码模板类型
+   */
+  ProductName?: string
 }
 
 /**
@@ -12968,6 +13169,32 @@ export interface DescribeOpsMakePlanInstancesRequest {
    * 实例状态列表
    */
   StateList?: Array<number | bigint>
+}
+
+/**
+ * 资源池信息
+ */
+export interface ResourcePoolInfo {
+  /**
+   * 资源池id
+   */
+  ResourcePools?: Array<string>
+  /**
+   * 存储空间大小，单位 MB
+   */
+  StorageSize?: number
+  /**
+   * 存储文件数大小
+   */
+  StorageFileNum?: number
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+  /**
+   * 存储类型，0 代表HDFS，1 代表OZONE
+   */
+  StorageType?: string
 }
 
 /**
@@ -14565,6 +14792,20 @@ export interface ProjectBaseInfoOpsRequest {
 }
 
 /**
+ * EnableProject请求参数结构体
+ */
+export interface EnableProjectRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 模块名称
+   */
+  ModuleKey?: string
+}
+
+/**
  * DescribeEventCases请求参数结构体
  */
 export interface DescribeEventCasesRequest {
@@ -15132,6 +15373,30 @@ export interface DeleteIntegrationNodeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateBaseProject返回参数结构体
+ */
+export interface CreateBaseProjectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisableProject请求参数结构体
+ */
+export interface DisableProjectRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 模块名称
+   */
+  ModuleKey?: string
 }
 
 /**
@@ -16715,6 +16980,16 @@ export interface BatchDeleteOpsTasksResponse {
 }
 
 /**
+ * ModifyProject返回参数结构体
+ */
+export interface ModifyProjectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckIntegrationTaskNameExists返回参数结构体
  */
 export interface CheckIntegrationTaskNameExistsResponse {
@@ -16903,29 +17178,17 @@ export interface SubmitCustomFunctionResponse {
 }
 
 /**
- * 按表名查询的查询条件
+ * EnableProject返回参数结构体
  */
-export interface TableNameFilter {
+export interface EnableProjectResponse {
   /**
-   * 数据源类型
+   * 无
    */
-  MsType?: string
+  Data?: boolean
   /**
-   * 数据源id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DatasourceId?: number
-  /**
-   * 数据库名称
-   */
-  DatabaseName?: string
-  /**
-   * schema
-   */
-  SchemaName?: string
-  /**
-   * 表名
-   */
-  Name?: string
+  RequestId?: string
 }
 
 /**
@@ -18870,6 +19133,28 @@ export interface ColumnLineage {
 }
 
 /**
+ * UnboundProjectExecutorResource请求参数结构体
+ */
+export interface UnboundProjectExecutorResourceRequest {
+  /**
+   * 执行资源组id
+   */
+  ExecutorGroupId: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 可选: 需要绑定的多个项目id, 若申明将带上ProjectId一起绑定
+   */
+  ProjectIdList?: Array<string>
+  /**
+   * 需要绑定项目的资源包id集合，为空则绑定整个资源组
+   */
+  ExecutorResourcePackageIds?: Array<string>
+}
+
+/**
  * 上游节点字段信息
  */
 export interface SourceFieldInfo {
@@ -20469,14 +20754,18 @@ export interface IntegrationNodeSchema {
 }
 
 /**
- * DescribeOpsWorkflows返回参数结构体
+ * DescribeColumnsMeta返回参数结构体
  */
-export interface DescribeOpsWorkflowsResponse {
+export interface DescribeColumnsMetaResponse {
   /**
-   * 工作流列表
+   * 分页返回的
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: WorkflowExtOpsDtoPage
+  ColumnMetaSet?: Array<ColumnMeta>
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20658,24 +20947,6 @@ export interface ResumeIntegrationTaskRequest {
    * 前端操作类型描述
    */
   EventDesc?: string
-}
-
-/**
- * SuspendIntegrationTask请求参数结构体
- */
-export interface SuspendIntegrationTaskRequest {
-  /**
-   * 任务id
-   */
-  TaskId: string
-  /**
-   * 项目id
-   */
-  ProjectId: string
-  /**
-   * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
-   */
-  Event?: string
 }
 
 /**
@@ -21893,6 +22164,10 @@ export interface SubmitTaskTestRunRequest {
    * 版本号
    */
   VersionId?: string
+  /**
+   * 提交任务测试运行类型
+   */
+  SubmitTaskTestRunType?: string
 }
 
 /**
@@ -22219,6 +22494,20 @@ export interface DescribeTaskAlarmRegulationsRequest {
 }
 
 /**
+ * UnboundProjectExecutorResource返回参数结构体
+ */
+export interface UnboundProjectExecutorResourceResponse {
+  /**
+   * 是否绑定成功，失败返回异常
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 通用排序字段名和排序方向
  */
 export interface OrderCondition {
@@ -22364,138 +22653,39 @@ export interface ScreenInstanceInfo {
 }
 
 /**
- * ModifyTaskInfo请求参数结构体
+ * 手动工作流触发运行记录分页查询
  */
-export interface ModifyTaskInfoRequest {
+export interface ManualTriggerRecordOpsDtoPage {
   /**
-   * 项目Id
+   * 页号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  PageNumber?: number
   /**
-   * 任务ID
+   * 页大小
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  PageSize?: number
   /**
-   * 执行时间，单位分钟，天/周/月/年调度才有。比如天调度，每天的02:00点执行一次，delayTime就是120分钟
+   * 手动工作流触发运行记录
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DelayTime?: number
+  Items?: Array<ManualTriggerRecordOpsDto>
   /**
-   * 启动时间
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartupTime?: number
+  TotalPage?: number
   /**
-   * 自依赖类型  1:有序串行 一次一个 排队, 2: 无序串行 一次一个 不排队， 3:并行 一次多个
+   * 页数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SelfDepend?: number
+  PageCount?: number
   /**
-   * 生效开始时间，格式 yyyy-MM-dd HH:mm:ss
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
-  /**
-   * 生效结束时间，格式 yyyy-MM-dd HH:mm:ss
-   */
-  EndTime?: string
-  /**
-   * 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为'0,3,4'。
-   */
-  TaskAction?: string
-  /**
-   * "周期类型  0:crontab类型, 1:分钟，2:小时，3:天，4:周，5:月，6:一次性，7:用户驱动，10:弹性周期 周,11:弹性周期 月,12:年,13:即时触发Instant类型，与正常周期调度任务逻辑隔离
-   */
-  CycleType?: number
-  /**
-   * 步长，间隔时间，最小1
-   */
-  CycleStep?: number
-  /**
-   * cron表达式  周期类型为crontab调度才需要
-   */
-  CrontabExpression?: string
-  /**
-   * 执行时间左闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
-   */
-  ExecutionStartTime?: string
-  /**
-   * 执行时间右闭区间，格式：HH:mm  小时调度才有，例如小时任务, 每日固定区间生效
-   */
-  ExecutionEndTime?: string
-  /**
-   * 新的任务名
-   */
-  TaskName?: string
-  /**
-   * 失败重试间隔,单位分钟，创建任务的时候已经给了默认值
-   */
-  RetryWait?: number
-  /**
-   * 失败重试次数，创建任务的时候已经给了默认值
-   */
-  TryLimit?: number
-  /**
-   * 是否可重试，1代表可以重试
-   */
-  Retriable?: number
-  /**
-   * 运行优先级，4高 5中 6低
-   */
-  RunPriority?: number
-  /**
-   * 任务的扩展配置
-   */
-  TaskExt?: Array<TaskExtInfo>
-  /**
-   * 执行资源组id，需要去资源管理服务上创建调度资源组，并且绑定cvm机器
-   */
-  ResourceGroup?: string
-  /**
-   * 资源池队列名称
-   */
-  YarnQueue?: string
-  /**
-   * 资源组下具体执行机，any 表示可以跑在任意一台。
-   */
-  BrokerIp?: string
-  /**
-   * 责任人
-   * @deprecated
-   */
-  InCharge?: string
-  /**
-   * 任务备注
-   */
-  Notes?: string
-  /**
-   * 任务参数
-   */
-  TaskParamInfos?: Array<ParamInfo>
-  /**
-   * 源数据源
-   */
-  SourceServer?: string
-  /**
-   * 目标数据源
-   */
-  TargetServer?: string
-  /**
-   * 是否支持工作流依赖 yes / no 默认 no
-   */
-  DependencyWorkflow?: string
-  /**
-   * 依赖配置
-   */
-  DependencyConfigDTOs?: Array<DependencyConfig>
-  /**
-   * 执行耗时
-   */
-  ExecutionTTL?: number
-  /**
-   * 脚本是否改变
-   */
-  ScriptChange?: boolean
-  /**
-   * 责任人id
-   */
-  InChargeIds?: Array<string>
+  TotalCount?: number
 }
 
 /**
@@ -23216,6 +23406,20 @@ export interface DutyPerson {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Params?: string
+}
+
+/**
+ * DeleteTaskLineage请求参数结构体
+ */
+export interface DeleteTaskLineageRequest {
+  /**
+   * 任务信息
+   */
+  Task: LineageTask
+  /**
+   * wedata内部任务默认SQL
+   */
+  ChannelType: string
 }
 
 /**
@@ -27131,6 +27335,20 @@ export interface DeleteCodeTemplateRequest {
 }
 
 /**
+ * DisableProject返回参数结构体
+ */
+export interface DisableProjectResponse {
+  /**
+   * 无
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSuccessorOpsTaskInfos请求参数结构体
  */
 export interface DescribeSuccessorOpsTaskInfosRequest {
@@ -28593,22 +28811,21 @@ export interface DailyScoreInfo {
 }
 
 /**
- * DescribeColumnsMeta返回参数结构体
+ * SuspendIntegrationTask请求参数结构体
  */
-export interface DescribeColumnsMetaResponse {
+export interface SuspendIntegrationTaskRequest {
   /**
-   * 分页返回的
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务id
    */
-  ColumnMetaSet?: Array<ColumnMeta>
+  TaskId: string
   /**
-   * 总记录数
+   * 项目id
    */
-  TotalCount?: number
+  ProjectId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
    */
-  RequestId?: string
+  Event?: string
 }
 
 /**
@@ -29272,6 +29489,11 @@ export interface DescribeDatabaseInfoListRequest {
 }
 
 /**
+ * CreateBaseProject请求参数结构体
+ */
+export type CreateBaseProjectRequest = null
+
+/**
  * DescribeRuleExecLog请求参数结构体
  */
 export interface DescribeRuleExecLogRequest {
@@ -29891,6 +30113,37 @@ export interface DescribeIntegrationStatisticsInstanceTrendRequest {
    * 资源组id
    */
   ExecutorGroupId?: string
+}
+
+/**
+ * 查询数据源分页列表
+ */
+export interface ProjectPage {
+  /**
+   * 分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber: number
+  /**
+   * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize: number
+  /**
+   * 数据源列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rows: Array<Project>
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 总分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber: number
 }
 
 /**

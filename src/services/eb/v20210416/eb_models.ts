@@ -535,7 +535,7 @@ export interface UpdateRuleRequest {
    */
   Enable?: boolean
   /**
-   * 规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符
+   * 事件规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符
    */
   Description?: string
   /**
@@ -751,7 +751,7 @@ export interface DeleteEventBusRequest {
  */
 export interface ListEventBusesRequest {
   /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
+   * 根据哪个字段进行返回结果排序,支持以下字段：created_at（创建时间）, updated_at（修改时间）
    */
   OrderBy?: string
   /**
@@ -1063,7 +1063,7 @@ export interface CreateRuleRequest {
    */
   EventBusId: string
   /**
-   * 事件集名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符
+   * 事件规则名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符
    */
   RuleName: string
   /**
@@ -1071,7 +1071,7 @@ export interface CreateRuleRequest {
    */
   Enable?: boolean
   /**
-   * 事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符
+   * 事件规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符
    */
   Description?: string
 }
