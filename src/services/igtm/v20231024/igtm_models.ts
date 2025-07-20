@@ -21,22 +21,18 @@
 export interface AddressPool {
   /**
    * 地址池 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PoolId?: number
   /**
    * 地址池名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PoolName?: string
   /**
    * 地址池地址类型：IPV4、IPV6、DOMAIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddrType?: string
   /**
    * 流量策略: WEIGHT负载均衡，ALL解析全部
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrafficStrategy?: string
   /**
@@ -46,22 +42,18 @@ export interface AddressPool {
   MonitorId?: number
   /**
    * OK正常，DOWN故障，WARN风险，UNKNOWN未知
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 地址数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressNum?: number
   /**
    * 探点数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorGroupNum?: number
   /**
    * 探测任务数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorTaskNum?: number
   /**
@@ -76,12 +68,10 @@ export interface AddressPool {
   AddressSet?: Array<Address>
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedOn?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedOn?: string
 }
@@ -175,12 +165,10 @@ export interface DeleteAddressPoolResponse {
 export interface Strategy {
   /**
    * 实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
   /**
    * 策略名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
@@ -190,12 +178,10 @@ export interface Strategy {
   Source: Array<Source>
   /**
    * 策略id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyId?: number
   /**
    * 健康状态：ok健康、warn风险、down故障
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -210,42 +196,34 @@ export interface Strategy {
   ActivateLevel?: number
   /**
    * 当前生效地址池集合类型：main主力；fallback兜底
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivePoolType?: string
   /**
    * 当前生效地址池流量策略：all解析所有；weight负载均衡
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActiveTrafficStrategy?: string
   /**
    * 监控器数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorNum?: number
   /**
    * 是否开启：ENABLED开启；DISABLED关闭
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsEnabled?: string
   /**
    * 是否保留线路：enabled保留，disabled不保留，只保留默认线路
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeepDomainRecords?: string
   /**
    * 调度模式：AUTO默认；PAUSE仅暂停不切换
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SwitchPoolType?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedOn?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedOn?: string
 }
@@ -384,7 +362,6 @@ export interface Source {
   DnsLineId: number
   /**
    * 解析请求来源线路名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
 }
@@ -631,17 +608,14 @@ export interface MainAddressPool {
   AddressPools: Array<MainPoolWeight>
   /**
    * 地址池集合id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MainAddressPoolId?: number
   /**
    * 切换阀值，不能大于主力集合内地址总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinSurviveNum?: number
   /**
    * 切换策略:ALL解析所有地址；WEIGHT：负载均衡。当为ALL时，解析地址的权重值为1；当为WEIGHT时；权重为地址池权重*地址权重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TrafficStrategy?: string
 }
@@ -652,57 +626,46 @@ export interface MainAddressPool {
 export interface Quota {
   /**
    * 探测任务配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskQuota?: number
   /**
    * 地址池配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PoolQuota?: number
   /**
    * 地址配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressQuota?: number
   /**
    * 探点资源数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorQuota?: number
   /**
    * 消息资源数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageQuota?: number
   /**
    * 已使用探测任务数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedTaskQuota?: number
   /**
    * 已使用体验实例数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedFreeInstanceNum?: number
   /**
    * 已使用付费实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedBillInstanceNum?: number
   /**
    * 体验套餐总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreePackageNum?: number
   /**
    * 已使用付费套餐数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedBillPackageNum?: number
   /**
    * 付费套餐总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillPackageNum?: number
 }
@@ -1191,7 +1154,6 @@ export interface DescribeInstanceDetailResponse {
 export interface DescribeMonitorDetailResponse {
   /**
    * 探测规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorDetail?: MonitorDetail
   /**
@@ -1528,7 +1490,7 @@ export interface DescribeDetectPackageDetailResponse {
    */
   Status?: string
   /**
-   * 是否自动续费0不1是
+   * 是否自动续费：0否1是
    */
   AutoRenewFlag?: number
   /**
@@ -1847,17 +1809,14 @@ export interface InstanceConfig {
 export interface StrategyDetail {
   /**
    * 实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
   /**
    * 策略id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyId: number
   /**
    * 策略名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
@@ -1877,7 +1836,6 @@ export interface StrategyDetail {
   FallbackAddressPoolSet: Array<MainAddressPool>
   /**
    * 是否保留线路：enabled保留，disabled不保留，只保留默认线路
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeepDomainRecords?: string
   /**
@@ -1887,17 +1845,14 @@ export interface StrategyDetail {
   ActivateMainPoolId?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedOn?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedOn?: string
   /**
    * 调度模式：AUTO默认；PAUSE仅暂停不切换
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SwitchPoolType?: string
 }
@@ -1908,7 +1863,6 @@ export interface StrategyDetail {
 export interface DescribeQuotasResponse {
   /**
    * 配额id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Quotas?: Quota
   /**

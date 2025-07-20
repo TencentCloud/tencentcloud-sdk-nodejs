@@ -2562,6 +2562,10 @@ export interface SkillGroupInfoItem {
    * 技能组内线号码
    */
   Alias?: string
+  /**
+   * 是否同振
+   */
+  RingAll?: boolean
 }
 
 /**

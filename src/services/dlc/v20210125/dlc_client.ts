@@ -68,6 +68,7 @@ import {
   CreateDMSTableRequest,
   DMSTable,
   ModifyAdvancedStoreLocationResponse,
+  DescribeUserRegisterTimeRequest,
   DMSSds,
   OpendThirdAccessUserInfo,
   DescribeDataEnginesScaleDetailResponse,
@@ -228,6 +229,7 @@ import {
   SwitchDataEngineImageResponse,
   DescribeSparkAppTasksResponse,
   CreateCHDFSBindingProductRequest,
+  DescribeUserRegisterTimeResponse,
   NotebookSessionInfo,
   DataEngineBasicInfo,
   ModifySparkAppRequest,
@@ -614,6 +616,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataEnginesResponse) => void
   ): Promise<DescribeDataEnginesResponse> {
     return this.request("DescribeDataEngines", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeUserRegisterTime）用于查询当前用户注册时间，并判断是否是老用户。
+   */
+  async DescribeUserRegisterTime(
+    req?: DescribeUserRegisterTimeRequest,
+    cb?: (error: string, rep: DescribeUserRegisterTimeResponse) => void
+  ): Promise<DescribeUserRegisterTimeResponse> {
+    return this.request("DescribeUserRegisterTime", req, cb)
   }
 
   /**

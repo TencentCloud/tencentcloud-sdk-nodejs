@@ -1425,6 +1425,11 @@ export interface ModifyAdvancedStoreLocationResponse {
 }
 
 /**
+ * DescribeUserRegisterTime请求参数结构体
+ */
+export type DescribeUserRegisterTimeRequest = null
+
+/**
  * 元数据存储描述属性
  */
 export interface DMSSds {
@@ -5130,6 +5135,24 @@ export interface CreateCHDFSBindingProductRequest {
    * vpc信息，产品名称为other时必传此参数
    */
   VpcInfo?: Array<VpcInfo>
+}
+
+/**
+ * DescribeUserRegisterTime返回参数结构体
+ */
+export interface DescribeUserRegisterTimeResponse {
+  /**
+   * 用户注册时间
+   */
+  RegisterTime?: number
+  /**
+   * 是否时老用户
+   */
+  IsOldUser?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

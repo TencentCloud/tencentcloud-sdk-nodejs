@@ -320,7 +320,7 @@ export interface AndroidApp {
    */
   AppMode?: string
   /**
-   * 应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、NORMAL 默认状态
+   * 应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、PACKAGE_NAME_MISMATCH 包名不匹配、VERSION_ALREADY_EXISTS 版本已存在、APP_PARSE_FAIL app 解析失败、APP_EXISTS_SECURITY_RISK app 存在安全风险、NORMAL 默认状态
    */
   UpdateState?: string
   /**
@@ -1701,9 +1701,7 @@ export interface AndroidAppVersionInfo {
    */
   AndroidAppVersion?: string
   /**
-   * 安卓应用版本创建状态（NORMAL：无、UPLOADING：上传中、
-CREATING： 创建中、
-CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
+   * 安卓应用版本创建状态，取值：NORMAL：无（默认）、UPLOADING：上传中、CREATING： 创建中、CREATE_FAIL：创建失败、PACKAGE_NAME_MISMATCH：包名不匹配、VERSION_ALREADY_EXISTS：版本已存在、APP_PARSE_FAIL： app 解析失败、APP_EXISTS_SECURITY_RISK：app 存在安全风险、CREATE_SUCCESS：创建成功
    */
   State?: string
   /**
@@ -1734,6 +1732,18 @@ CREATE_FAIL：创建失败、CREATE_SUCCESS：创建成功）
    * 应用版本号（Version Name）
    */
   VersionName?: string
+  /**
+   * 应用包 MD5
+   */
+  MD5?: string
+  /**
+   * 应用包文件大小（字节）
+   */
+  FileSize?: number
+  /**
+   * 安卓应用包名
+   */
+  PackageName?: string
 }
 
 /**

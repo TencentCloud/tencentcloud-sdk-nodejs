@@ -188,6 +188,16 @@ it("dlc.v20210125.DescribeDataEngines", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeUserRegisterTime", async function () {
+    try {
+       const data = await client.DescribeUserRegisterTime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeDMSPartitions", async function () {
     try {
        const data = await client.DescribeDMSPartitions({})

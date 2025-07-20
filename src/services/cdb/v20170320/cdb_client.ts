@@ -238,6 +238,7 @@ import {
   DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
+  DiskTypeConfigItem,
   DisassociateSecurityGroupsResponse,
   DeployGroupInfo,
   LocalBinlogConfig,
@@ -1494,7 +1495,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteBackup)用于删除数据库备份。本接口只支持删除手动发起的备份。
+   * 本接口（DeleteBackup）用于删除数据库备份。本接口只支持删除手动发起的备份。
    */
   async DeleteBackup(
     req: DeleteBackupRequest,
