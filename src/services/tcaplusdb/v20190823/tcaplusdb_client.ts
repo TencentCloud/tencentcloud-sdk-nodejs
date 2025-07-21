@@ -286,8 +286,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 表格数据回档
-   */
+     * 不再使用
+
+表格数据回档
+     */
   async RollbackTables(
     req: RollbackTablesRequest,
     cb?: (error: string, rep: RollbackTablesResponse) => void

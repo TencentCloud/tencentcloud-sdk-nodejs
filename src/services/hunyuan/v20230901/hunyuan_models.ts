@@ -1438,12 +1438,32 @@ export interface Multimedia {
    */
   Url?: string
   /**
+   * 如果Url为图片地址，标识图片宽度。
+   */
+  Width?: number
+  /**
+   * 如果Url为图片地址，标识图片高度。
+   */
+  Height?: number
+  /**
    * 多媒体详情地址。
 说明：
 1. 仅 type 为 image 时，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JumpUrl?: string
+  /**
+   * 缩略图地址。
+   */
+  ThumbURL?: string
+  /**
+   * 缩略图宽度
+   */
+  ThumbWidth?: number
+  /**
+   * 缩略图高度
+   */
+  ThumbHeight?: number
   /**
    * 名称。
 说明：
@@ -1470,6 +1490,18 @@ export interface Multimedia {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ext?: SongExt
+  /**
+   * 发布时间。
+   */
+  PublishTime?: string
+  /**
+   * 站点名称
+   */
+  SiteName?: string
+  /**
+   * 站点图标
+   */
+  SiteIcon?: string
 }
 
 /**

@@ -86,6 +86,7 @@ export class Client extends AbstractClient {
 精品音色和标准音色：默认20并发
 大模型音色：默认20并发
 超自然大模型音色：暂不支持
+一句话复刻音色：默认10并发
      */
   async TextToVoice(
     req: TextToVoiceRequest,

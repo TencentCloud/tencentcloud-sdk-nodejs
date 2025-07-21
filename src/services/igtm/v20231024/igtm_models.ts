@@ -117,7 +117,6 @@ export interface AddressPoolDetail {
 export interface DescribeMonitorsResponse {
   /**
    * 监控器列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorDataSet?: Array<MonitorDetail>
   /**
@@ -150,7 +149,6 @@ export interface DescribeDetectorsResponse {
 export interface DeleteAddressPoolResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
@@ -234,7 +232,6 @@ export interface Strategy {
 export interface CreateStrategyResponse {
   /**
    * 新增策略id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyId?: number
   /**
@@ -315,7 +312,6 @@ export interface DescribeAddressPoolListRequest {
 export interface ModifyStrategyResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
@@ -573,12 +569,10 @@ export interface DescribeDetectTaskPackageListResponse {
 export interface DescribeAddressPoolDetailResponse {
   /**
    * 资源组详情描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressPool?: AddressPoolDetail
   /**
    * 资源组中的资源列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressSet?: Array<Address>
   /**
@@ -1072,12 +1066,10 @@ export interface DescribeDetectTaskPackageListRequest {
 export interface DescribeStrategyListResponse {
   /**
    * 策略列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategySet?: Array<Strategy>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1313,7 +1305,6 @@ export interface MainPoolWeight {
 export interface ModifyAddressPoolResponse {
   /**
    * 是否修改成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
@@ -1392,7 +1383,6 @@ export interface DescribeMonitorsRequest {
 export interface ModifyMonitorResponse {
   /**
    * success 为修改成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
@@ -1613,12 +1603,10 @@ AUTO INTERNAL OVERSEAS IPV6 ALL
 export interface DescribeAddressPoolListResponse {
   /**
    * 资源组列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressPoolSet?: Array<AddressPool>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1633,7 +1621,6 @@ export interface DescribeAddressPoolListResponse {
 export interface CreateMonitorResponse {
   /**
    * 监控器id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorId?: number
   /**
@@ -1734,7 +1721,6 @@ DISABLED: 禁用
 export interface DeleteStrategyResponse {
   /**
    * 是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
@@ -1756,7 +1742,7 @@ export interface ModifyAddressPoolRequest {
    */
   PoolName?: string
   /**
-   * 流量策略: WEIGHT负载均衡，ALl解析全部
+   * 流量策略: WEIGHT负载均衡，ALL解析全部
    */
   TrafficStrategy?: string
   /**
@@ -1887,7 +1873,6 @@ export interface ModifyInstanceConfigRequest {
 export interface DescribeAddressLocationResponse {
   /**
    * 所属地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressLocation?: Array<AddressLocation>
   /**
@@ -1902,17 +1887,14 @@ export interface DescribeAddressLocationResponse {
 export interface DescribeInstanceListResponse {
   /**
    * 实例列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceSet?: Array<Instance>
   /**
    * 列表总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 是否支持系统域名接入：true支持；false不支持
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemAccessEnabled?: boolean
   /**
@@ -1949,7 +1931,6 @@ export interface ResourceFilter {
 export interface DeleteMonitorResponse {
   /**
    * 成功返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**

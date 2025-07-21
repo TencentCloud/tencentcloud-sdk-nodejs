@@ -389,6 +389,14 @@ export interface DeployRecordDetail {
    * 部署CLB监听器的Url
    */
   Url?: Array<string>
+  /**
+   * 当前部署证书加密算法
+   */
+  Algorithm?: string
+  /**
+   * 原证书加密算法
+   */
+  OldAlgorithm?: string
 }
 
 /**
@@ -2277,6 +2285,14 @@ export interface UpdateRecordDetail {
    * 监听器Url(clb专属)
    */
   Url?: string
+  /**
+   * 新证书加密算法
+   */
+  Algorithm?: string
+  /**
+   * 旧证书加密算法
+   */
+  OldAlgorithm?: string
 }
 
 /**
@@ -3458,6 +3474,10 @@ failed：申请失败；
 issued：绑定失败。
    */
   Status?: string
+  /**
+   * 证书加密算法
+   */
+  Algorithm?: string
 }
 
 /**

@@ -316,42 +316,34 @@ export interface DeleteBackUpDataRequest {
 export interface CnInstanceInfo {
   /**
    * ID值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: number
   /**
    * cdwch-cn或者其他
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * cdwch-cn或者其他
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * Running
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 运行中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStateInfo?: InstanceStateInfo
   /**
    * -
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceID?: string
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources?: Array<CNResource>
 }
@@ -935,85 +927,85 @@ export interface ResizeDiskRequest {
  */
 export interface CNResource {
   /**
-   * 无
+   * 资源id
    */
-  ID: number
+  ID?: number
   /**
-   * 无
+   * 集群的id
    */
-  InstanceID: string
+  InstanceID?: string
   /**
-   * 无
+   * 用户appid
    */
-  AppID: number
+  AppID?: number
   /**
-   * 无
+   * 用户uin
    */
-  Uin: string
+  Uin?: string
   /**
-   * 无
+   * 组件
    */
-  Component: string
+  Component?: string
   /**
-   * 无
+   * 部署模式
    */
-  DeployMode: number
+  DeployMode?: number
   /**
-   * 无
+   * 规格名称
    */
-  SpecName: string
+  SpecName?: string
   /**
-   * 无
+   * 资源id
    */
-  ResourceID: string
+  ResourceID?: string
   /**
-   * 无
+   * 资源的状态
    */
-  Status: number
+  Status?: number
   /**
-   * 无
+   * 私有网络ip
    */
-  IP: string
+  IP?: string
   /**
-   * 无
+   * 核数
    */
-  CPU: number
+  CPU?: number
   /**
-   * 无
+   * 内存
    */
-  Memory: number
+  Memory?: number
   /**
-   * 无
+   * 存储大小
    */
-  Storage: number
+  Storage?: number
   /**
-   * 无
+   * 服务器ID
    */
-  UUID: string
+  UUID?: string
   /**
-   * 无
+   * 地域
    */
-  Region: string
+  Region?: string
   /**
-   * 无
+   * 地区
    */
-  Zone: string
+  Zone?: string
   /**
-   * 无
+   * 详细信息
    */
-  Details: string
+  Details?: string
   /**
-   * 无
+   * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
-   * 无
+   * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
-   * 无
+   * 过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -1900,17 +1892,14 @@ export interface DescribeInstanceClustersRequest {
 export interface DescribeCNInstancesResponse {
   /**
    * 实例总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 实例数组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancesList?: Array<CnInstanceInfo>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**

@@ -743,6 +743,18 @@ HoaiMy
 3.  dify-inputs-conversation_id 为dify的conversation_id值
    */
   Variables?: Array<Variable>
+  /**
+   * 模型topP
+   */
+  TopP?: number
+  /**
+   * vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。
+   */
+  VadLevel?: number
+  /**
+   * 衔接语
+   */
+  ToneWord?: ToneWordInfo
 }
 
 /**
@@ -1718,6 +1730,24 @@ export interface DescribeNumbersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 承接语气词
+ */
+export interface ZHToneWordsInfo {
+  /**
+   * 中性词列表
+   */
+  Neutral?: Array<string>
+  /**
+   * 正面词列表
+   */
+  Positive?: Array<string>
+  /**
+   * 负面词列表
+   */
+  Negative?: Array<string>
 }
 
 /**
@@ -3674,6 +3704,20 @@ export interface AbortPredictiveDialingCampaignRequest {
    * 任务 ID
    */
   CampaignId: number
+}
+
+/**
+ * 承接语气词信息
+ */
+export interface ToneWordInfo {
+  /**
+   * 首句超时时间，单位秒
+   */
+  FirstSentenceTimeout?: number
+  /**
+   * 承接语气词
+   */
+  ZHToneWords?: ZHToneWordsInfo
 }
 
 /**
