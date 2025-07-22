@@ -5536,7 +5536,7 @@ export interface DescribeCostDetailRequest {
    */
   Month?: string
   /**
-   * 查询指定产品信息（暂时未开放获取）
+   * 查询指定产品信息
    */
   ProductCode?: string
   /**

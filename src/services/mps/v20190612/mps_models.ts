@@ -14066,6 +14066,11 @@ Common：音视频类型
 PureAudio：纯音频类型
    */
   DefinitionType?: string
+  /**
+   * 字幕参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitleTemplate?: SubtitleTemplate
 }
 
 /**

@@ -309,6 +309,7 @@ import {
   ModifyParamTemplateResponse,
   BalanceRoGroupLoadResponse,
   DeviceNetInfo,
+  ModifyRoGroupVipVportResponse,
   ModifyDBInstanceVipVportResponse,
   DeleteAuditRuleResponse,
   IsolateDBInstanceRequest,
@@ -414,6 +415,7 @@ import {
   DescribeBackupSummariesRequest,
   AnalyzeAuditLogsResponse,
   CreateDBInstanceResponse,
+  ModifyRoGroupVipVportRequest,
   OpenAuditServiceRequest,
   DescribeDBInstanceCharsetResponse,
   DescribeDBFeaturesRequest,
@@ -581,6 +583,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateDBInstanceResponse) => void
   ): Promise<IsolateDBInstanceResponse> {
     return this.request("IsolateDBInstance", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyRoGroupVipVport）用于修改Ro组的vip和vport。
+   */
+  async ModifyRoGroupVipVport(
+    req: ModifyRoGroupVipVportRequest,
+    cb?: (error: string, rep: ModifyRoGroupVipVportResponse) => void
+  ): Promise<ModifyRoGroupVipVportResponse> {
+    return this.request("ModifyRoGroupVipVport", req, cb)
   }
 
   /**

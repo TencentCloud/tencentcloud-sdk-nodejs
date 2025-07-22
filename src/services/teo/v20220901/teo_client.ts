@@ -161,6 +161,7 @@ import {
   L4OfflineLog,
   CreateOriginGroupRequest,
   TopDataRecord,
+  DescribeDDoSProtectionResponse,
   CreateSecurityIPGroupResponse,
   CreateSharedCNAMEResponse,
   DeleteMultiPathGatewayResponse,
@@ -211,6 +212,7 @@ import {
   OriginHealthStatus,
   ZoneConfig,
   CustomizedHeader,
+  ModifyDDoSProtectionResponse,
   DescribeFunctionsRequest,
   ModifyDnsRecordsStatusRequest,
   ModifyZoneRequest,
@@ -223,6 +225,7 @@ import {
   ExceptConfig,
   RedirectActionParameters,
   DeleteOriginGroupRequest,
+  DescribeDDoSProtectionRequest,
   AclCondition,
   Identification,
   RequestBodyTransferTimeout,
@@ -382,6 +385,7 @@ import {
   CreateDnsRecordRequest,
   WafRule,
   ModifyApplicationProxyRequest,
+  DomainDDoSProtection,
   ModifyAliasDomainStatusRequest,
   DeleteFunctionRequest,
   BindSharedCNAMEMap,
@@ -484,6 +488,7 @@ import {
   ModifyContentIdentifierRequest,
   DeleteMultiPathGatewayLineRequest,
   Resource,
+  DDoSProtection,
   ModifyResponseHeaderParameters,
   DescribeOriginProtectionRequest,
   DeleteContentIdentifierResponse,
@@ -573,6 +578,7 @@ import {
   BindZoneToPlanRequest,
   DeleteFunctionResponse,
   IPWhitelist,
+  ModifyDDoSProtectionRequest,
   ModifyL7AccSettingRequest,
   ModifyFunctionRulePriorityResponse,
   CreateCustomizeErrorPageRequest,
@@ -723,6 +729,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePurgeTaskResponse) => void
   ): Promise<CreatePurgeTaskResponse> {
     return this.request("CreatePurgeTask", req, cb)
+  }
+
+  /**
+   * 获取站点的独立 DDoS 防护信息。
+   */
+  async DescribeDDoSProtection(
+    req: DescribeDDoSProtectionRequest,
+    cb?: (error: string, rep: DescribeDDoSProtectionResponse) => void
+  ): Promise<DescribeDDoSProtectionResponse> {
+    return this.request("DescribeDDoSProtection", req, cb)
   }
 
   /**
@@ -2271,6 +2287,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeDnsRecordsResponse) => void
   ): Promise<DescribeDnsRecordsResponse> {
     return this.request("DescribeDnsRecords", req, cb)
+  }
+
+  /**
+   * 修改站点的独立 DDoS 防护。
+   */
+  async ModifyDDoSProtection(
+    req: ModifyDDoSProtectionRequest,
+    cb?: (error: string, rep: ModifyDDoSProtectionResponse) => void
+  ): Promise<ModifyDDoSProtectionResponse> {
+    return this.request("ModifyDDoSProtection", req, cb)
   }
 
   /**

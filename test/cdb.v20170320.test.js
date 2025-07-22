@@ -108,6 +108,16 @@ it("cdb.v20170320.IsolateDBInstance", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyRoGroupVipVport", async function () {
+    try {
+       const data = await client.ModifyRoGroupVipVport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.RestartDBInstances", async function () {
     try {
        const data = await client.RestartDBInstances({})

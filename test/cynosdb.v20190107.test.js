@@ -48,6 +48,16 @@ it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.ReplayInstanceAuditLog", async function () {
+    try {
+       const data = await client.ReplayInstanceAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyBinlogConfig", async function () {
     try {
        const data = await client.ModifyBinlogConfig({})

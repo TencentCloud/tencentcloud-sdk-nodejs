@@ -502,6 +502,11 @@ HongKongUtilityBill -- 香港水电煤单识别模板
    * 模版的单个属性配置
    */
   ConfigAdvanced?: ConfigAdvanced
+  /**
+   * cn时，添加的key为中文  
+en时，添加的key为英语
+   */
+  OutputLanguage?: string
 }
 
 /**

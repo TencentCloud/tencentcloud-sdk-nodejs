@@ -2843,19 +2843,19 @@ export interface WeChatBillDetail {
   /**
    * token
    */
-  BizToken: string
+  BizToken?: string
   /**
    * 本token收费次数
    */
-  ChargeCount: number
+  ChargeCount?: number
   /**
    * 本token计费详情
    */
-  ChargeDetails: Array<ChargeDetail>
+  ChargeDetails?: Array<ChargeDetail>
   /**
    * 业务RuleId
    */
-  RuleId: string
+  RuleId?: string
 }
 
 /**

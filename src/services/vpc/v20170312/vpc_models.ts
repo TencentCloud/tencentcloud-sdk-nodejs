@@ -3321,15 +3321,15 @@ export interface DisassociateVpcEndPointSecurityGroupsRequest {
  */
 export interface IKEOptionsSpecification {
   /**
-   * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
+   * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
    */
   PropoEncryAlgorithm?: string
   /**
-   * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5
+   * 认证算法：可选值：'MD5'，'SHA'，'SHA-256'，'SHA-512'， 默认为SHA。
    */
   PropoAuthenAlgorithm?: string
   /**
-   * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
+   * 协商模式：可选值：'AGGRESSIVE'， 'MAIN'，默认为MAIN。
    */
   ExchangeMode?: string
   /**
@@ -3357,7 +3357,7 @@ export interface IKEOptionsSpecification {
    */
   RemoteFqdnName?: string
   /**
-   * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
+   * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，默认是GROUP1。
    */
   DhGroupName?: string
   /**

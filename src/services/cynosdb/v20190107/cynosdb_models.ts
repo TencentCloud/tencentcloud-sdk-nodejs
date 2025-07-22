@@ -4463,6 +4463,45 @@ export interface CopyClusterPasswordComplexityRequest {
 }
 
 /**
+ * ReplayInstanceAuditLog请求参数结构体
+ */
+export interface ReplayInstanceAuditLogRequest {
+  /**
+   * 源集群id
+   */
+  SourceClusterId: string
+  /**
+   * 源实例id
+   */
+  SourceInstanceId: string
+  /**
+   * 目标集群id
+目标集群必须为原始集群三天内克隆出的集群。
+   */
+  TargetClusterId: string
+  /**
+   * 目标实例id
+   */
+  TargetInstanceId: string
+  /**
+   * 用户名.需要host为%的用户名
+   */
+  TargetUserName: string
+  /**
+   * 密码
+   */
+  TargetPassword: string
+  /**
+   * 开始时间。时间格式为：yyyy-DD-mm hh:mm:ss
+   */
+  StartTime: string
+  /**
+   * 结束时间。时间格式为：yyyy-DD-mm hh:mm:ss
+   */
+  EndTime: string
+}
+
+/**
  * ModifyAccountPrivileges返回参数结构体
  */
 export interface ModifyAccountPrivilegesResponse {
@@ -9531,6 +9570,20 @@ export interface ModifyAccountParamsRequest {
    * 数据库表权限数组,当前仅支持参数：max_user_connections，max_user_connections不能大于10240
    */
   AccountParams: Array<AccountParam>
+}
+
+/**
+ * ReplayInstanceAuditLog返回参数结构体
+ */
+export interface ReplayInstanceAuditLogResponse {
+  /**
+   * 任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

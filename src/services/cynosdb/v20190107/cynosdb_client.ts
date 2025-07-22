@@ -194,6 +194,7 @@ import {
   CreateProxyEndPointResponse,
   NetAddr,
   CopyClusterPasswordComplexityRequest,
+  ReplayInstanceAuditLogRequest,
   ModifyAccountPrivilegesResponse,
   InquirePriceCreateRequest,
   ModifyAuditServiceRequest,
@@ -389,6 +390,7 @@ import {
   CloseClusterPasswordComplexityRequest,
   DescribeIsolatedInstancesRequest,
   ModifyAccountParamsRequest,
+  ReplayInstanceAuditLogResponse,
   AuditLogFile,
   DescribeAuditRuleTemplatesResponse,
   LogicBackupConfigInfo,
@@ -508,6 +510,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupConfigResponse) => void
   ): Promise<DescribeBackupConfigResponse> {
     return this.request("DescribeBackupConfig", req, cb)
+  }
+
+  /**
+   * 回放实例审计日志
+   */
+  async ReplayInstanceAuditLog(
+    req: ReplayInstanceAuditLogRequest,
+    cb?: (error: string, rep: ReplayInstanceAuditLogResponse) => void
+  ): Promise<ReplayInstanceAuditLogResponse> {
+    return this.request("ReplayInstanceAuditLog", req, cb)
   }
 
   /**

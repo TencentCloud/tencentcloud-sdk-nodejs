@@ -361,7 +361,7 @@ OPEN：公网属性， INTERNAL：内网属性。
    */
   EipAddressId?: string
   /**
-   * Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。
+   * Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。IPv6 CLB安全组默认放通，不需要传此参数。
    */
   LoadBalancerPassToTarget?: boolean
   /**
