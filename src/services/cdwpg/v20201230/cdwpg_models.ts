@@ -1528,6 +1528,7 @@ export interface CreateInstanceByApiRequest {
   Resources: Array<ResourceSpecNew>
   /**
    * 废弃，用TagItems
+   * @deprecated
    */
   Tags?: Tag
   /**

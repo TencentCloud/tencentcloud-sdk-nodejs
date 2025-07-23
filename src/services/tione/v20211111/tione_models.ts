@@ -2197,6 +2197,14 @@ export interface HorizontalPodAutoscaler {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HpaMetrics: Array<Option>
+  /**
+   * 扩容观察期，单位秒
+   */
+  ScaleUpStabilizationWindowSeconds?: number
+  /**
+   * 缩容观察期，单位秒
+   */
+  ScaleDownStabilizationWindowSeconds?: number
 }
 
 /**

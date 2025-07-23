@@ -1271,6 +1271,10 @@ export interface DiseaseMedicalHistory {
    * 输血史
    */
   TransfusionHistory?: string
+  /**
+   * 现病史
+   */
+  DiseasePresent?: string
 }
 
 /**
@@ -6897,6 +6901,7 @@ export interface TreatmentRecord {
   ChiefComplaint?: string
   /**
    * 现病史
+   * @deprecated
    */
   DiseasePresent?: string
   /**

@@ -358,25 +358,33 @@ export interface SwitchInfo {
    */
   Enable?: boolean
   /**
+   * 获取日志状态失败时，返回错误信息
+   */
+  ErrorMsg?: string
+  /**
    * CLS日志集ID
    */
   LogsetId?: string
+  /**
+   * 日志主题状态，opened表示已开启，opening开启中，closed表示已关闭，closing 表示关闭中
+   */
+  Status?: string
   /**
    * CLS日志主题ID
    */
   TopicId?: string
   /**
-   * 当前log-agent版本
+   * CLS日志主题所属region
    */
-  Version?: string
+  TopicRegion?: string
   /**
    * 是否可升级
    */
   UpgradeAble?: boolean
   /**
-   * CLS日志主题所属region
+   * 当前log-agent版本
    */
-  TopicRegion?: string
+  Version?: string
 }
 
 /**
@@ -9022,13 +9030,13 @@ open  = 已开启外网访问
  */
 export interface Switch {
   /**
-   * 集群ID
-   */
-  ClusterId?: string
-  /**
    * 审计开关的详细信息
    */
   Audit?: SwitchInfo
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
   /**
    * 事件开关的详细信息
    */
