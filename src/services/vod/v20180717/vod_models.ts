@@ -1780,6 +1780,11 @@ export interface ResetProcedureTemplateRequest {
   /**
    * AI 内容识别类型任务参数。
    */
+  AiRecognitionTaskSet?: Array<AiRecognitionTaskInput>
+  /**
+   * 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。
+   * @deprecated
+   */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
    * 音视频审核类型任务参数。
@@ -3010,6 +3015,11 @@ export interface CreateProcedureTemplateRequest {
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
    * AI 内容识别类型任务参数。
+   */
+  AiRecognitionTaskSet?: Array<AiRecognitionTaskInput>
+  /**
+   * 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。
+   * @deprecated
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
@@ -11636,7 +11646,12 @@ export interface ProcedureTemplate {
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
    * AI 内容识别类型任务参数。
+   */
+  AiRecognitionTaskSet?: Array<AiRecognitionTaskInput>
+  /**
+   * 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**

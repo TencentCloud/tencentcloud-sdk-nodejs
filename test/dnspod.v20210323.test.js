@@ -858,6 +858,16 @@ it("dnspod.v20210323.ModifyDomainRemark", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeResolveCount", async function () {
+    try {
+       const data = await client.DescribeResolveCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeSubdomainValidateStatus", async function () {
     try {
        const data = await client.DescribeSubdomainValidateStatus({})

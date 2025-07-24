@@ -2225,6 +2225,36 @@ export interface RecordInfo {
 }
 
 /**
+ * 域名解析量统计信息
+ */
+export interface ResolveCountInfo {
+  /**
+   * 当前统计周期解析量总计
+   */
+  DnsTotal?: number
+  /**
+   * 当前查询的域名
+   */
+  Domain?: string
+  /**
+   * 当前统计周期开始时间
+   */
+  StartDate?: string
+  /**
+   * 当前统计周期结束时间
+   */
+  EndDate?: string
+  /**
+   * 当前统计的子域名
+   */
+  SubDomain?: string
+  /**
+   * 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据
+   */
+  DnsFormat?: string
+}
+
+/**
  * DescribeSnapshotRollbackTask请求参数结构体
  */
 export interface DescribeSnapshotRollbackTaskRequest {
@@ -4325,6 +4355,32 @@ export interface ModifySnapshotConfigRequest {
 }
 
 /**
+ * DescribeResolveCount请求参数结构体
+ */
+export interface DescribeResolveCountRequest {
+  /**
+   * 要查询解析量的域名
+   */
+  Domain: string
+  /**
+   * 查询的开始时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。
+   */
+  StartDate: string
+  /**
+   * 查询的结束时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。
+   */
+  EndDate: string
+  /**
+   * 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据
+   */
+  DnsFormat: string
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
+}
+
+/**
  * DescribeDomainAliasList请求参数结构体
  */
 export interface DescribeDomainAliasListRequest {
@@ -4612,6 +4668,20 @@ SPAM：封禁
 }
 
 /**
+ * 解析量小计
+ */
+export interface ResolveCountDataItem {
+  /**
+   * 解析量
+   */
+  Num?: number
+  /**
+   * 统计的时间点
+   */
+  DateKey?: string
+}
+
+/**
  * 域名权限项
  */
 export interface PurviewInfo {
@@ -4697,6 +4767,20 @@ export interface RollbackRecordSnapshotResponse {
  * DescribeUserDetail请求参数结构体
  */
 export type DescribeUserDetailRequest = null
+
+/**
+ * 域名别名解析量统计信息
+ */
+export interface ResolveCountAliasItem {
+  /**
+   * 域名解析量统计信息
+   */
+  Info?: ResolveCountInfo
+  /**
+   * 解析量明细
+   */
+  Data?: Array<ResolveCountDataItem>
+}
 
 /**
  * DescribeFileInfoByJobId返回参数结构体
@@ -5174,6 +5258,28 @@ export interface WhoisInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Dnssec?: string
+}
+
+/**
+ * DescribeResolveCount返回参数结构体
+ */
+export interface DescribeResolveCountResponse {
+  /**
+   * 解析量明细
+   */
+  Data?: Array<ResolveCountDataItem>
+  /**
+   * 解析量统计信息
+   */
+  Info?: ResolveCountInfo
+  /**
+   * 别名解析量明细
+   */
+  AliasData?: Array<ResolveCountAliasItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

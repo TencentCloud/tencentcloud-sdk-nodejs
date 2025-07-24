@@ -68,7 +68,7 @@ import {
   CreateContractDiffTaskWebUrlResponse,
   CreateIntegrationEmployeesRequest,
   CreateFlowOption,
-  CreateOrganizationAuthFileResponse,
+  CreateMiniAppPrepareFlowResponse,
   FilledComponent,
   DescribeIntegrationRolesRequest,
   FlowBatchApproverInfo,
@@ -125,6 +125,7 @@ import {
   CreateReleaseFlowResponse,
   CreateBatchInitOrganizationUrlRequest,
   CreateWebThemeConfigResponse,
+  ModifyIntegrationRoleResponse,
   BindEmployeeUserIdWithClientOpenIdRequest,
   CreateOrganizationInfoChangeUrlResponse,
   DeleteOrganizationAuthorizationsResponse,
@@ -148,6 +149,7 @@ import {
   OccupiedSeal,
   IntentionActionResultDetail,
   ModifyPartnerAutoSignAuthUrlRequest,
+  CreateUserMobileChangeUrlResponse,
   CreateEmployeeQualificationSealQrCodeRequest,
   DescribeBatchOrganizationRegistrationTasksRequest,
   CreatePersonAuthCertificateImageResponse,
@@ -193,6 +195,7 @@ import {
   CreatePrepareFlowGroupResponse,
   CreateIntegrationRoleResponse,
   DetectInfoVideoData,
+  CreateMiniAppPrepareFlowRequest,
   DescribeFlowComponentsRequest,
   OperateTemplateResponse,
   CreateIntegrationDepartmentRequest,
@@ -258,6 +261,7 @@ import {
   CreateFlowForwardsResponse,
   ApproverItem,
   CreateOrganizationBatchSignUrlRequest,
+  MiniAppCreateFlowPageOption,
   FlowForwardInfo,
   IntegrateRole,
   CreatePrepareFlowResponse,
@@ -277,6 +281,7 @@ import {
   VerifyDigitFileResult,
   CreateUserNameChangeUrlResponse,
   CreateSealResponse,
+  MiniAppCreateFlowOption,
   CreatePrepareFlowRequest,
   DescribeUserFlowTypeRequest,
   ApproverOption,
@@ -303,11 +308,11 @@ import {
   DescribeFlowBriefsRequest,
   CreateSealPolicyRequest,
   DescribeBillUsageDetailResponse,
-  CreateUserMobileChangeUrlResponse,
+  CreateOrganizationAuthFileResponse,
   CreateUserAutoSignEnableUrlResponse,
   DescribeSignFaceVideoResponse,
   SignUrl,
-  ModifyIntegrationRoleResponse,
+  MiniAppCreateApproverInfo,
   VerifyPdfResponse,
   ReleasedApprover,
   CreateFlowGroupSignReviewRequest,
@@ -965,18 +970,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用来设置本企业嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），设置后获取的web签署界面都会使用此配置进行展示。
-
-如果多次调用，会以最后一次的配置为准
-     */
-  async CreateWebThemeConfig(
-    req: CreateWebThemeConfigRequest,
-    cb?: (error: string, rep: CreateWebThemeConfigResponse) => void
-  ): Promise<CreateWebThemeConfigResponse> {
-    return this.request("CreateWebThemeConfig", req, cb)
-  }
-
-  /**
      * 对合同流程文件进行数字签名验证，判断数字签名是否有效，合同文件内容是否被篡改。
 
 
@@ -1235,6 +1228,37 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 此接口（CreateOrganizationInfoChangeUrl）用于创建企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
+
+ 需要企业的<font color="red">现有的超级管理员、法人来点击</font>链接执行变动操作。
+
+### 2. 企业基础信息
+#### A. 可变动的信息
+- **企业名称**
+- **法定代表人姓名**（新法人将收到邀请链接）
+- **企业地址和所在地**
+- **企业超级管理员变更** （此变更将企业超级管理员的职责转移给企业的其他员工）
+
+#### B. 不可变动的信息
+- **统一社会信用代码**
+- **企业主体类型**
+
+### 3.变更影响
+
+如果企业的名字变更将导致下面的影响：
+
+- **合同**：已存在的合同将保持不变。新发起的合同需使用新的企业名称作为签署方，否则无法签署。
+- **印章**：所有现有的机构公章和合同专用章将被删除，并将根据新的企业名称重新生成。法人章、财务专用章和人事专用章将不做处理。
+- **证书**：企业证书将重新由CA机构使用新的企业名称生成。
+     */
+  async CreateOrganizationInfoChangeUrl(
+    req: CreateOrganizationInfoChangeUrlRequest,
+    cb?: (error: string, rep: CreateOrganizationInfoChangeUrlResponse) => void
+  ): Promise<CreateOrganizationInfoChangeUrlResponse> {
+    return this.request("CreateOrganizationInfoChangeUrl", req, cb)
+  }
+
+  /**
      * 此接口（CancelMultiFlowSignQRCode）用于废除一码多签签署码。
 该接口所需的二维码ID，源自[创建一码多签签署码](https://qian.tencent.com/developers/companyApis/startFlows/CreateMultiFlowSignQRCode)生成的。
 如果该签署码尚处于有效期内，可通过本接口将其设置为失效状态。
@@ -1272,6 +1296,60 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSignFaceVideoResponse) => void
   ): Promise<DescribeSignFaceVideoResponse> {
     return this.request("DescribeSignFaceVideo", req, cb)
+  }
+
+  /**
+     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。<br/>
+适用场景：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。<br/>
+
+<table>
+	<thead>
+		<tr>
+			<th>签署人类别</th>
+			<th>需要提前准备的信息</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>自己企业的员工签署（未认证加入或已认证加入）</td>
+			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
+		</tr>
+		<tr>
+			<td>自己企业的员工签署（已认证加入）</td>
+			<td>签署企业的名字、员工在电子签平台的ID（UserId）</td>
+		</tr>
+		<tr>
+			<td>其他企业的员工签署</td>
+			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
+		</tr>
+		<tr>
+			<td>个人（自然人）签署</td>
+			<td>个人的真实名字、个人的触达手机号、个人的身份证（证件号非必传）</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+该接口需要依赖[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口生成pdf资源编号（FileIds）进行使用。（如果非pdf文件需要调用[创建文件转换任务](https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi)接口转换成pdf资源）<br/>
+
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/f097a74b289e3e1acd740936bdfe9843.png)
+
+注：
+-  合同**发起后就会扣减合同的额度**, 只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。（**过期，拒签，签署完成，解除完成等状态不会返还额度**）
+- **静默（自动）签署不支持合同签署方存在填写**功能
+
+
+<font color="red">相关视频指引</font> <br>
+1. <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess_uploadfiles.mp4" target="_blank">上传用于合同发起的PDF文件代码编写示例</a><br>
+2.  <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess-CreateFlowByFiles.mp4" target="_blank">用PDF文件创建签署流程编写示例</a><br>
+     */
+  async CreateFlowByFiles(
+    req: CreateFlowByFilesRequest,
+    cb?: (error: string, rep: CreateFlowByFilesResponse) => void
+  ): Promise<CreateFlowByFilesResponse> {
+    return this.request("CreateFlowByFiles", req, cb)
   }
 
   /**
@@ -1666,34 +1744,32 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（CreateOrganizationInfoChangeUrl）用于创建企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
+     * 创建小程序发起流程链接，在小程序页面上完成签署人等信息的编辑与确认后，可快速发起流程。
+ <br/>
+适用场景：如果需要签署人在自己的APP、小程序、H5应用中发起合同，可在收集合同信息，签署人等信息后（非必选），通过此接口获取跳转腾讯电子签小程序的合同发起跳转链接，跳转到腾讯电子签小程序继续合同的发起。
 
- 需要企业的<font color="red">现有的超级管理员、法人来点击</font>链接执行变动操作。
+跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
 
-### 2. 企业基础信息
-#### A. 可变动的信息
-- **企业名称**
-- **法定代表人姓名**（新法人将收到邀请链接）
-- **企业地址和所在地**
-- **企业超级管理员变更** （此变更将企业超级管理员的职责转移给企业的其他员工）
+注：
+<ul>
+<li>1. 签署链接的有效期为<font color="red">90天</font>，超过有效期链接不可用</li>
+<li>2. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）</li>
+ <li>3. 调用接口后，<font color="red">流程不会立即发起，需使用链接跳转到小程序上继续发起流程操作</font>。</li>
+<li>4. <font color="red">使用链接成功发起一份合同后，链接立即失效</font></li>
+</ul>
 
-#### B. 不可变动的信息
-- **统一社会信用代码**
-- **企业主体类型**
+其中小程序的原始Id如下，或者查看小程序信息自助获取。
 
-### 3.变更影响
-
-如果企业的名字变更将导致下面的影响：
-
-- **合同**：已存在的合同将保持不变。新发起的合同需使用新的企业名称作为签署方，否则无法签署。
-- **印章**：所有现有的机构公章和合同专用章将被删除，并将根据新的企业名称重新生成。法人章、财务专用章和人事专用章将不做处理。
-- **证书**：企业证书将重新由CA机构使用新的企业名称生成。
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
      */
-  async CreateOrganizationInfoChangeUrl(
-    req: CreateOrganizationInfoChangeUrlRequest,
-    cb?: (error: string, rep: CreateOrganizationInfoChangeUrlResponse) => void
-  ): Promise<CreateOrganizationInfoChangeUrlResponse> {
-    return this.request("CreateOrganizationInfoChangeUrl", req, cb)
+  async CreateMiniAppPrepareFlow(
+    req: CreateMiniAppPrepareFlowRequest,
+    cb?: (error: string, rep: CreateMiniAppPrepareFlowResponse) => void
+  ): Promise<CreateMiniAppPrepareFlowResponse> {
+    return this.request("CreateMiniAppPrepareFlow", req, cb)
   }
 
   /**
@@ -1834,57 +1910,15 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。<br/>
-适用场景：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。<br/>
+     * 用来设置本企业嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），设置后获取的web签署界面都会使用此配置进行展示。
 
-<table>
-	<thead>
-		<tr>
-			<th>签署人类别</th>
-			<th>需要提前准备的信息</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>自己企业的员工签署（未认证加入或已认证加入）</td>
-			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
-		</tr>
-		<tr>
-			<td>自己企业的员工签署（已认证加入）</td>
-			<td>签署企业的名字、员工在电子签平台的ID（UserId）</td>
-		</tr>
-		<tr>
-			<td>其他企业的员工签署</td>
-			<td>签署企业的名字、员工的真实名字、员工的触达手机号、员工的证件号（证件号非必传）</td>
-		</tr>
-		<tr>
-			<td>个人（自然人）签署</td>
-			<td>个人的真实名字、个人的触达手机号、个人的身份证（证件号非必传）</td>
-		</tr>
-	</tbody>
-</table>
-
-
-
-该接口需要依赖[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口生成pdf资源编号（FileIds）进行使用。（如果非pdf文件需要调用[创建文件转换任务](https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi)接口转换成pdf资源）<br/>
-
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/f097a74b289e3e1acd740936bdfe9843.png)
-
-注：
--  合同**发起后就会扣减合同的额度**, 只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。（**过期，拒签，签署完成，解除完成等状态不会返还额度**）
-- **静默（自动）签署不支持合同签署方存在填写**功能
-
-
-<font color="red">相关视频指引</font> <br>
-1. <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess_uploadfiles.mp4" target="_blank">上传用于合同发起的PDF文件代码编写示例</a><br>
-2.  <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess-CreateFlowByFiles.mp4" target="_blank">用PDF文件创建签署流程编写示例</a><br>
+如果多次调用，会以最后一次的配置为准
      */
-  async CreateFlowByFiles(
-    req: CreateFlowByFilesRequest,
-    cb?: (error: string, rep: CreateFlowByFilesResponse) => void
-  ): Promise<CreateFlowByFilesResponse> {
-    return this.request("CreateFlowByFiles", req, cb)
+  async CreateWebThemeConfig(
+    req: CreateWebThemeConfigRequest,
+    cb?: (error: string, rep: CreateWebThemeConfigResponse) => void
+  ): Promise<CreateWebThemeConfigResponse> {
+    return this.request("CreateWebThemeConfig", req, cb)
   }
 
   /**

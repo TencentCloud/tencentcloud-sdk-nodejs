@@ -306,6 +306,10 @@ export interface Invocation {
    */
   CommandId?: string
   /**
+   * 执行的命令的名称
+   */
+  CommandName?: string
+  /**
    * 执行任务状态。取值范围：
 
 - PENDING：等待下发

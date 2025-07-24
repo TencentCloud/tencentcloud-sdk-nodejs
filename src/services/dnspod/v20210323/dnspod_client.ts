@@ -116,6 +116,7 @@ import {
   CreateRecordResponse,
   DeleteRecordGroupResponse,
   RecordInfo,
+  ResolveCountInfo,
   DescribeSnapshotRollbackTaskRequest,
   CheckRecordSnapshotRollbackResponse,
   UserInfo,
@@ -201,6 +202,7 @@ import {
   DescribeRecordSnapshotRollbackResultResponse,
   DescribeVasListResponse,
   ModifySnapshotConfigRequest,
+  DescribeResolveCountRequest,
   DescribeDomainAliasListRequest,
   CreateDomainAliasRequest,
   DeleteShareDomainRequest,
@@ -212,12 +214,14 @@ import {
   SubdomainAliasAnalyticsItem,
   LineGroupSum,
   DescribeDomainFilterListRequest,
+  ResolveCountDataItem,
   PurviewInfo,
   CreateSubDomainsAnalyticsFileRequest,
   DescribeRecordExistExceptDefaultNSRequest,
   ModifySnapshotConfigResponse,
   RollbackRecordSnapshotResponse,
   DescribeUserDetailRequest,
+  ResolveCountAliasItem,
   DescribeFileInfoByJobIdResponse,
   ModifyDomainStatusRequest,
   ModifyRecordRemarkResponse,
@@ -241,6 +245,7 @@ import {
   ModifyTXTRecordResponse,
   ModifyVasAutoRenewStatusRequest,
   WhoisInfo,
+  DescribeResolveCountResponse,
   DownloadSnapshotResponse,
   PreviewDetail,
   DomainShareUserInfo,
@@ -1117,6 +1122,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDomainRemarkResponse) => void
   ): Promise<ModifyDomainRemarkResponse> {
     return this.request("ModifyDomainRemark", req, cb)
+  }
+
+  /**
+   * 查看域名的解析量
+   */
+  async DescribeResolveCount(
+    req: DescribeResolveCountRequest,
+    cb?: (error: string, rep: DescribeResolveCountResponse) => void
+  ): Promise<DescribeResolveCountResponse> {
+    return this.request("DescribeResolveCount", req, cb)
   }
 
   /**

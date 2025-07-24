@@ -369,6 +369,32 @@ export interface DescribeCustomersRequest {
 }
 
 /**
+ * ModifyLabel请求参数结构体
+ */
+export interface ModifyLabelRequest {
+  /**
+   * 资产或风险主键ID
+   */
+  Id: number
+  /**
+   * 企业ID，在企业管理页面查看
+   */
+  CustomerId: number
+  /**
+   * 模块，包括：enterprise：企业架构，domain：主域名，sub_domain：子域名，asset：IP资产，port：端口服务，http：HTTP资产，vul：漏洞信息，app：APP，wechat_applet：微信小程序，wechat_official_account：微信公众号，github：Github信息泄露，manage：管理后台暴露，config：目录爆破，dark_web：暗网泄露，net_disk：文库网盘泄露，supply_chain：供应链，weak_password：弱口令，sensitive_info：敏感信息泄露
+   */
+  Module: string
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 标签详情
+   */
+  Labels?: string
+}
+
+/**
  * 数据泄露详情
  */
 export interface DisplayLeakageData {
@@ -1167,6 +1193,16 @@ export interface DisplaySensitiveInfo {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+}
+
+/**
+ * ModifyLabel返回参数结构体
+ */
+export interface ModifyLabelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

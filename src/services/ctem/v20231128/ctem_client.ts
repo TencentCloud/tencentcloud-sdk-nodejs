@@ -28,6 +28,7 @@ import {
   DisplayAsset,
   DescribeWechatAppletsResponse,
   DescribeCustomersRequest,
+  ModifyLabelRequest,
   DisplayLeakageData,
   DescribeFakeWebsitesResponse,
   DisplayWechatOfficialAccount,
@@ -58,6 +59,7 @@ import {
   DisplayEnterprise,
   StopJobRecordRequest,
   DisplaySensitiveInfo,
+  ModifyLabelResponse,
   DescribeEnterprisesRequest,
   DescribeLeakageCodesRequest,
   DisplayFakeMiniProgram,
@@ -273,6 +275,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFakeAppsResponse) => void
   ): Promise<DescribeFakeAppsResponse> {
     return this.request("DescribeFakeApps", req, cb)
+  }
+
+  /**
+   * 修改标签
+   */
+  async ModifyLabel(
+    req: ModifyLabelRequest,
+    cb?: (error: string, rep: ModifyLabelResponse) => void
+  ): Promise<ModifyLabelResponse> {
+    return this.request("ModifyLabel", req, cb)
   }
 
   /**

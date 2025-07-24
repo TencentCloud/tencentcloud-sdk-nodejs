@@ -2331,6 +2331,10 @@ export interface StageInfoDetail {
    * 步骤耗时
    */
   TimeConsuming?: string
+  /**
+   * id，前端用
+   */
+  Id?: number
 }
 
 /**

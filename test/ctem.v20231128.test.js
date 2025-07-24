@@ -168,6 +168,16 @@ it("ctem.v20231128.DescribeFakeApps", async function () {
     }
 })
 
+it("ctem.v20231128.ModifyLabel", async function () {
+    try {
+       const data = await client.ModifyLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeApps", async function () {
     try {
        const data = await client.DescribeApps({})

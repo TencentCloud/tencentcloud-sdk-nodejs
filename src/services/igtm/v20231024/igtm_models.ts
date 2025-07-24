@@ -957,7 +957,7 @@ ULTIMATE：旗舰版
    */
   Remark?: string
   /**
-   * 套餐资源id，必填
+   * 套餐资源id
    */
   ResourceId?: string
 }

@@ -1431,13 +1431,38 @@ export interface CreateFlowOption {
 }
 
 /**
- * CreateOrganizationAuthFile返回参数结构体
+ * CreateMiniAppPrepareFlow返回参数结构体
  */
-export interface CreateOrganizationAuthFileResponse {
+export interface CreateMiniAppPrepareFlowResponse {
   /**
-   * 授权书链接，有效期5分钟。
+   * H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序
    */
-  FileUrl?: string
+  LongUrl?: string
+  /**
+   * H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序
+   */
+  ShortUrl?: string
+  /**
+   * APP或小程序跳转电子签小程序链接, 一般用于客户小程序或者APP跳转过来, 打开后进入腾讯电子签小程序
+   */
+  MiniAppPath?: string
+  /**
+   * 创建的合同id（还未实际发起，也未扣费），每次调用会生成新的id，用户可以记录此字段对应后续在小程序发起的合同，若在小程序上未成功发起，则此字段无效。
+   */
+  FlowId?: string
+  /**
+   * 跳转至电子签小程序的二维码链接
+   */
+  QrcodeUrl?: string
+  /**
+   * 直接跳转至电子签小程序的二维码链接，无需通过中转页。需要自行将其转换为二维码，使用微信扫码后可直接进入。
+   */
+  WeixinQrcodeUrl?: string
+  /**
+   * 链接过期时间，精确到秒，若在此过期时间前未使用，则链接失效。
+
+   */
+  ExpiredOn?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3397,6 +3422,20 @@ export interface CreateWebThemeConfigResponse {
 }
 
 /**
+ * ModifyIntegrationRole返回参数结构体
+ */
+export interface ModifyIntegrationRoleResponse {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindEmployeeUserIdWithClientOpenId请求参数结构体
  */
 export interface BindEmployeeUserIdWithClientOpenIdRequest {
@@ -4252,6 +4291,41 @@ export interface ModifyPartnerAutoSignAuthUrlRequest {
 </ul>
    */
   AuthToMe?: boolean
+}
+
+/**
+ * CreateUserMobileChangeUrl返回参数结构体
+ */
+export interface CreateUserMobileChangeUrlResponse {
+  /**
+   * 腾讯电子签小程序的实名认证链接。 如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。
+
+<b>1.如果EndPoint是APP</b>，
+得到的链接类似于<a href="">pages/guide/index?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcExAlcOvNod0</a>, 用法可以参考描述中的"跳转到小程序的实现"
+
+<b>2.如果EndPoint是HTTP</b>，
+得到的链接类似于<a href="">https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcChrfpaswT0d</a>，点击后会跳转到腾讯电子签小程序进行签署
+
+<b>3.如果EndPoint是HTTP_SHORT_URL</b>，
+得到的链接类似于<a href="">https://essurl.cn/2n**42Nd</a>，点击后会跳转到腾讯电子签小程序进行签署
+
+注： <font color="red">生成的链路后面不能再增加参数</font>
+
+   */
+  Url?: string
+  /**
+   * 链接失效期限，为Unix时间戳（单位秒），有如下规则：
+
+<ul>
+<li>如果指定更换绑定手机号的用户(指定用户ID或姓名等信息)，则设定的链接失效期限为7天后。</li>
+<li>如果没有指定更换绑定手机号的用户，则生成通用跳转到个人换手机号的界面，链接不会过期。</li>
+</ul>
+   */
+  ExpireTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6395,6 +6469,88 @@ export interface DetectInfoVideoData {
 }
 
 /**
+ * CreateMiniAppPrepareFlow请求参数结构体
+ */
+export interface CreateMiniAppPrepareFlowRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+支持填入集团子公司经办人 userId 代发合同。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 资源类型，取值有：
+<ul><li> **1**：模板</li>
+<li> **2**：文件 </li></ul>
+   */
+  ResourceType: number
+  /**
+   * 资源id，与ResourceType相对应，取值范围：
+<ul>
+<li>文件Id（通过UploadFiles获取文件资源Id）</li>
+<li>模板Id（通过控制台创建模板后获取模板Id）</li>
+</ul>
+注意：需要同时设置 ResourceType 参数指定资源类型
+   */
+  ResourceId: string
+  /**
+   * 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&)、（+）组成。
+
+该名称还将用于合同签署完成后文件下载的默认文件名称。
+   */
+  FlowName: string
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息。
+   */
+  Approvers?: Array<MiniAppCreateApproverInfo>
+  /**
+   * 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。
+
+**注：暂不支持通过NotifyType参数控制抄送人通知方式**
+   */
+  CcInfos?: Array<CcInfo>
+  /**
+   * 合同流程的签署顺序类型：
+<ul><li> **false**：(默认)有序签署, 本合同多个参与人需要依次签署 </li>
+<li> **true**：无序签署, 本合同多个参与人没有先后签署限制</li></ul>
+
+**注：仅在文件发起模式下设置有效，模板发起以模板配置为准**
+   */
+  Unordered?: boolean
+  /**
+   * 合同发起后经过多少天截止（1-30天可选），默认7天
+   */
+  DeadlineAfterStartDays?: number
+  /**
+   * 用户自定义合同类型Id  该id为电子签企业内的合同类型id， 可以在控制台-合同-自定义合同类型处获取
+   */
+  UserFlowTypeId?: string
+  /**
+   * 发起合同个性化参数
+用于满足小程序合同创建的个性化要求
+具体定制化内容详见数据接口说明
+   */
+  FlowOption?: MiniAppCreateFlowOption
+  /**
+   * 发起合同小程序页面个性化参数 
+用于满足小程序合同创建页面的个性化要求 具体定制化内容详见数据接口说明
+   */
+  PageOption?: MiniAppCreateFlowPageOption
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1000 长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
+   */
+  UserData?: string
+}
+
+/**
  * DescribeFlowComponents请求参数结构体
  */
 export interface DescribeFlowComponentsRequest {
@@ -8513,6 +8669,16 @@ UserId必须是传入合同（FlowId）中的签署人。
 }
 
 /**
+ * 小程序发起页面个性化配置参数
+ */
+export interface MiniAppCreateFlowPageOption {
+  /**
+   * 发起后隐藏签署码
+   */
+  HideSignCodeAfterStart?: boolean
+}
+
+/**
  * 合同转交相关信息
  */
 export interface FlowForwardInfo {
@@ -8928,6 +9094,24 @@ export interface CreateSealResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 小程序发起合同可选项
+ */
+export interface MiniAppCreateFlowOption {
+  /**
+   * 到期提醒日（linux时间戳） 精确到天
+   */
+  RemindedOn?: number
+  /**
+   * 是否需要发起前进行审批
+   */
+  NeedCreateReview?: boolean
+  /**
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   */
+  FlowDisplayType?: number
 }
 
 /**
@@ -10119,34 +10303,13 @@ export interface DescribeBillUsageDetailResponse {
 }
 
 /**
- * CreateUserMobileChangeUrl返回参数结构体
+ * CreateOrganizationAuthFile返回参数结构体
  */
-export interface CreateUserMobileChangeUrlResponse {
+export interface CreateOrganizationAuthFileResponse {
   /**
-   * 腾讯电子签小程序的实名认证链接。 如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。
-
-<b>1.如果EndPoint是APP</b>，
-得到的链接类似于<a href="">pages/guide/index?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcExAlcOvNod0</a>, 用法可以参考描述中的"跳转到小程序的实现"
-
-<b>2.如果EndPoint是HTTP</b>，
-得到的链接类似于<a href="">https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=MOBILE_CHANGE_INTENTION&shortKey=yDCZHUyOcChrfpaswT0d</a>，点击后会跳转到腾讯电子签小程序进行签署
-
-<b>3.如果EndPoint是HTTP_SHORT_URL</b>，
-得到的链接类似于<a href="">https://essurl.cn/2n**42Nd</a>，点击后会跳转到腾讯电子签小程序进行签署
-
-注： <font color="red">生成的链路后面不能再增加参数</font>
-
+   * 授权书链接，有效期5分钟。
    */
-  Url?: string
-  /**
-   * 链接失效期限，为Unix时间戳（单位秒），有如下规则：
-
-<ul>
-<li>如果指定更换绑定手机号的用户(指定用户ID或姓名等信息)，则设定的链接失效期限为7天后。</li>
-<li>如果没有指定更换绑定手机号的用户，则生成通用跳转到个人换手机号的界面，链接不会过期。</li>
-</ul>
-   */
-  ExpireTime?: number
+  FileUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10242,17 +10405,65 @@ export interface SignUrl {
 }
 
 /**
- * ModifyIntegrationRole返回参数结构体
+ * 创建流程的签署方信息
  */
-export interface ModifyIntegrationRoleResponse {
+export interface MiniAppCreateApproverInfo {
   /**
-   * 角色id
+   * 在指定签署方时，可以选择企业B端或个人C端等不同的参与者类型，可选类型如下：
+
+<ul><li> <b>0</b> :企业B端。</li>
+<li> <b>1</b> :个人C端。</li>
+<li> <b>3</b> :企业B端静默（自动）签署，无需签署人参与，自动签署可以参考<a href="https://qian.tencent.com/developers/company/autosign_guide" target="_blank" rel="noopener noreferrer">自动签署使用说明</a>文档。</li>
+<li> <b>7</b> :个人C端自动签署，适用于个人自动签场景。注: <b>个人自动签场景为白名单功能，使用前请联系对接的客户经理沟通。</b> </li></ul>
    */
-  RoleId?: string
+  ApproverType: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 组织机构名称。
+请确认该名称与企业营业执照中注册的名称一致。
+如果名称中包含英文括号()，请使用中文括号（）代替。
+
+注: `当approverType=0(企业签署方) 或 approverType=3(企业静默签署)时，必须指定`
+
+
    */
-  RequestId?: string
+  OrganizationName?: string
+  /**
+   * 签署方经办人的姓名。
+经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
+
+在未指定签署人电子签UserId情况下，为必填参数
+   */
+  ApproverName?: string
+  /**
+   * 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 此手机号用于通知和用户的实名认证等环境，请确认手机号所有方为此合同签署方。
+
+注：`在未指定签署人电子签UserId情况下，为必填参数`
+
+   */
+  ApproverMobile?: string
+  /**
+   * 证件类型，支持以下类型
+<ul><li><b>ID_CARD</b>: 居民身份证 (默认值)</li>
+<li><b>HONGKONG_AND_MACAO</b> : 港澳居民来往内地通行证</li>
+<li><b>HONGKONG_MACAO_AND_TAIWAN</b> : 港澳台居民居住证(格式同居民身份证)</li></ul>
+   */
+  ApproverIdCardType?: string
+  /**
+   * 证件号码，应符合以下规则
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   */
+  ApproverIdCardNumber?: string
+  /**
+   * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
+
+<b>模板发起合同时，该参数为必填项，可以通过[查询模板信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。</b>
+<b>文件发起合同时，该参数无需传值。</b>
+
+如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。
+   */
+  RecipientId?: string
 }
 
 /**
