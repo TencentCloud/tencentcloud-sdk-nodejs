@@ -249,7 +249,7 @@ export interface DescribeDatabasesRequest {
    */
   Offset?: number
   /**
-   * 单次请求数量，默认值为20，最小值为1，最大值为100。
+   * 单次请求数量，默认值为20，最小值为1，最大值为5000。
    */
   Limit?: number
   /**
@@ -551,7 +551,7 @@ export interface DescribeRollbackRangeTimeRequest {
  */
 export interface DescribeBackupOverviewRequest {
   /**
-   * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+   * 需要查询备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
    */
   Product: string
 }
@@ -610,51 +610,51 @@ export interface DescribeDataBackupOverviewResponse {
   /**
    * 当前地域的数据备份总容量（包含自动备份和手动备份，单位为字节）。
    */
-  DataBackupVolume: number
+  DataBackupVolume?: number
   /**
    * 当前地域的数据备份总个数。
    */
-  DataBackupCount: number
+  DataBackupCount?: number
   /**
    * 当前地域的自动备份总容量。
    */
-  AutoBackupVolume: number
+  AutoBackupVolume?: number
   /**
    * 当前地域的自动备份总个数。
    */
-  AutoBackupCount: number
+  AutoBackupCount?: number
   /**
    * 当前地域的手动备份总容量。
    */
-  ManualBackupVolume: number
+  ManualBackupVolume?: number
   /**
    * 当前地域的手动备份总个数。
    */
-  ManualBackupCount: number
+  ManualBackupCount?: number
   /**
    * 异地备份总容量。
    */
-  RemoteBackupVolume: number
+  RemoteBackupVolume?: number
   /**
    * 异地备份总个数。
    */
-  RemoteBackupCount: number
+  RemoteBackupCount?: number
   /**
    * 当前地域归档备份总容量。
    */
-  DataBackupArchiveVolume: number
+  DataBackupArchiveVolume?: number
   /**
    * 当前地域归档备份总个数。
    */
-  DataBackupArchiveCount: number
+  DataBackupArchiveCount?: number
   /**
    * 当前地域标准存储备份总容量。
    */
-  DataBackupStandbyVolume: number
+  DataBackupStandbyVolume?: number
   /**
    * 当前地域标准存储备份总个数。
    */
-  DataBackupStandbyCount: number
+  DataBackupStandbyCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -784,7 +784,7 @@ export interface ModifyProtectModeResponse {
  */
 export interface CreateParamTemplateRequest {
   /**
-   * 参数模板名称。
+   * 参数模板名称。支持输入最大60个字符。
    */
   Name: string
   /**
@@ -792,11 +792,11 @@ export interface CreateParamTemplateRequest {
    */
   Description?: string
   /**
-   * MySQL 版本号。
+   * MySQL 版本号。可选值：5.6、5.7、8.0。
    */
   EngineVersion?: string
   /**
-   * 源参数模板 ID。
+   * 源参数模板 ID。可通过 [DescribeParamTemplates](https://cloud.tencent.com/document/api/236/32659) 接口获取。
    */
   TemplateId?: number
   /**
@@ -809,6 +809,7 @@ export interface CreateParamTemplateRequest {
   TemplateType?: string
   /**
    * 实例引擎类型，默认为"InnoDB"，支持值包括："InnoDB"，"RocksDB"。
+说明：数据库版本 MySQL 5.7、MySQL 8.0才支持 RocksDB。
    */
   EngineType?: string
 }
@@ -1280,7 +1281,7 @@ export interface DescribeInstanceParamRecordsRequest {
    */
   Offset?: number
   /**
-   * 分页大小，默认值：20。
+   * 分页大小，默认值：20，最大值为100。
    */
   Limit?: number
 }
@@ -1583,7 +1584,7 @@ export interface UpgradeDBInstanceEngineVersionResponse {
  */
 export interface ErrlogItem {
   /**
-   * 错误发生时间。
+   * 错误发生时间。时间戳，秒级
    */
   Timestamp?: number
   /**
@@ -1825,7 +1826,7 @@ export interface DescribeTablesRequest {
    */
   Offset?: number
   /**
-   * 单次请求返回的数量，默认值为20，最大值为2000。
+   * 单次请求返回的数量，默认值为20，最大值为5000。
    */
   Limit?: number
   /**
@@ -1935,11 +1936,11 @@ export interface UpgradeDBInstanceRequest {
  */
 export interface ModifyParamTemplateRequest {
   /**
-   * 模板 ID。
+   * 模板 ID。可通过 [DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/236/32660) 接口获取。
    */
   TemplateId: number
   /**
-   * 模板名称，长度不超过64。
+   * 模板名称，仅支持数字、英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@,且长度不能超过60。
    */
   Name?: string
   /**
@@ -1969,35 +1970,35 @@ export interface DescribeBinlogBackupOverviewResponse {
   /**
    * 总的日志备份容量，包含异地日志备份（单位为字节）。
    */
-  BinlogBackupVolume: number
+  BinlogBackupVolume?: number
   /**
    * 总的日志备份个数，包含异地日志备份。
    */
-  BinlogBackupCount: number
+  BinlogBackupCount?: number
   /**
    * 异地日志备份容量（单位为字节）。
    */
-  RemoteBinlogVolume: number
+  RemoteBinlogVolume?: number
   /**
    * 异地日志备份个数。
    */
-  RemoteBinlogCount: number
+  RemoteBinlogCount?: number
   /**
    * 归档日志备份容量（单位为字节）。
    */
-  BinlogArchiveVolume: number
+  BinlogArchiveVolume?: number
   /**
    * 归档日志备份个数。
    */
-  BinlogArchiveCount: number
+  BinlogArchiveCount?: number
   /**
    * 标准存储日志备份容量（单位为字节）。
    */
-  BinlogStandbyVolume: number
+  BinlogStandbyVolume?: number
   /**
    * 标准存储日志备份个数。
    */
-  BinlogStandbyCount: number
+  BinlogStandbyCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2234,11 +2235,11 @@ export interface DescribeInstanceParamsResponse {
   /**
    * 实例的参数总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 参数详情。
    */
-  Items: Array<ParameterDetail>
+  Items?: Array<ParameterDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2321,15 +2322,19 @@ export interface SubmitInstanceUpgradeCheckJobRequest {
  */
 export interface ModifyLocalBinlogConfigRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
-   * 本地binlog保留时长，可取值范围：[72,168]，当实例存在灾备实例时，可取值范围：[120,168]。
+   * 本地 binlog 保留时长。不同实例的可取值如下：
+1. 云盘版实例、双节点实例、三节点实例的本地 binlog 保留时长（小时）默认为120，范围：6 - 168。
+2. 灾备实例的本地 binlog 保留时长（小时）默认为120，范围：120 - 168。
+3. 单节点云盘实例的本地 binlog 保留时长（小时）默认为120，范围：0 - 168。
+4. 若双节点实例、三节点实例下无灾备实例，则该主实例的本地 binlog 保留时长（小时）范围是：6 - 168；若双节点实例、三节点实例下有灾备实例，或者要为双节点实例、三节点实例添加灾备实例，为避免同步异常，该主实例的本地 binlog 保留时长（小时）不能设置低于120小时，范围是：120 - 168。
    */
   SaveHours: number
   /**
-   * 本地binlog空间使用率，可取值范围：[30,50]。
+   * 本地 binlog 空间使用率，可取值范围：[30,50]。
    */
   MaxUsage: number
 }
@@ -2890,15 +2895,16 @@ export interface DescribeRoMinScaleRequest {
  */
 export interface DescribeDefaultParamsRequest {
   /**
-   * 引擎版本，目前支持 ["5.1", "5.5", "5.6", "5.7", "8.0"]
+   * 引擎版本，目前支持 ["5.1", "5.5", "5.6", "5.7", "8.0"]。
+说明：引擎版本为必填。
    */
   EngineVersion?: string
   /**
-   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
+   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。默认值为：HIGH_STABILITY。
    */
   TemplateType?: string
   /**
-   * 参数模板引擎，默认值：InnoDB
+   * 参数模板引擎，默认值：InnoDB，可取值：InnoDB、RocksDB。
    */
   EngineType?: string
 }
@@ -2990,11 +2996,11 @@ export interface DescribeInstanceParamRecordsResponse {
   /**
    * 符合条件的记录数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 参数修改记录。
    */
-  Items: Array<ParamRecord>
+  Items?: Array<ParamRecord>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3020,7 +3026,7 @@ export interface DescribeDBInstanceGTIDResponse {
  */
 export interface DeleteParamTemplateRequest {
   /**
-   * 参数模板ID。
+   * 参数模板 ID。可通过 [DescribeParamTemplates](https://cloud.tencent.com/document/api/236/32659) 接口获取。
    */
   TemplateId: number
 }
@@ -3608,43 +3614,45 @@ export interface ModifyCdbProxyAddressDescResponse {
  */
 export interface ModifyDBInstanceLogToCLSRequest {
   /**
-   * 实例ID
+   * 实例 ID，可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
-   * 日志类型：error/slowlog
+   * 日志类型。error：错误日志，slowlog：慢日志。
    */
   LogType: string
   /**
-   * 投递状态：ON/OFF
+   * 投递状态。ON：开启，OFF：关闭。
    */
   Status: string
   /**
-   * 是否需要创建日志集
+   * 是否需要创建日志集。默认为 false。
    */
   CreateLogset?: boolean
   /**
-   * 需要创建日志集时为日志集名称；选择已有日志集时，为日志集ID
+   * 需要创建日志集时为日志集名称；选择已有日志集时，为日志集 ID。默认为空。
+说明：当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。
    */
   Logset?: string
   /**
-   * 是否需要创建日志主题
+   * 是否需要创建日志主题。默认为 false。
    */
   CreateLogTopic?: boolean
   /**
-   * 需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题ID
+   * 需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题 ID。默认为空。
+说明：当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。
    */
   LogTopic?: string
   /**
-   * 日志主题有效期，不填写时，默认30天
+   * 日志主题有效期，不填写时，默认30天，最大值3600。
    */
   Period?: number
   /**
-   * 创建日志主题时，是否创建索引
+   * 创建日志主题时，是否创建索引，默认为 false。
    */
   CreateIndex?: boolean
   /**
-   * CLS所在地域
+   * CLS 所在地域，不填择默认为 Region 的参数值。
    */
   ClsRegion?: string
 }
@@ -4312,11 +4320,11 @@ export interface ClusterNodeInfo {
  */
 export interface DescribeTableColumnsRequest {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
   /**
-   * 数据库名称，可使用[查询数据库](https://cloud.tencent.com/document/api/236/17493)接口获得。
+   * 数据库名称，可使用 [查询数据库](https://cloud.tencent.com/document/api/236/17493) 接口获得。
    */
   Database: string
   /**
@@ -4448,7 +4456,7 @@ export interface DescribeCloneListResponse {
  */
 export interface DescribeDBInstanceLogToCLSRequest {
   /**
-   * 实例ID
+   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
@@ -4899,11 +4907,13 @@ export interface DescribeAuditLogFilesRequest {
  */
 export interface ModifyBackupConfigRequest {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
-   * 备份文件的保留时间，单位为天。最小值为7天，最大值为1830天。
+   * 数据备份文件的保留时间，单位为天。
+1. MySQL 双节点、三节点、云盘版数据备份文件可以保留7天 - 1830天。
+2. MySQL 单节点（云盘）数据备份文件可以保留7天 - 30天。
    */
   ExpireDays?: number
   /**
@@ -4915,7 +4925,9 @@ export interface ModifyBackupConfigRequest {
    */
   BackupMethod?: string
   /**
-   * binlog的保留时间，单位为天。最小值为7天，最大值为1830天。该值的设置不能大于备份文件的保留时间。
+   * binlog 的保留时间，单位为天。
+1. MySQL 双节点、三节点、云盘版日志备份文件可以保留7天 - 3650天。
+2. MySQL 单节点（云盘）日志备份文件可以保留7天 - 30天。
    */
   BinlogExpireDays?: number
   /**
@@ -4923,7 +4935,7 @@ export interface ModifyBackupConfigRequest {
    */
   BackupTimeWindow?: CommonTimeWindow
   /**
-   * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off。首次开启定期保留策略时，BackupPeriodSaveDays，BackupPeriodSaveInterval，BackupPeriodSaveCount，StartBackupPeriodSaveDate参数为必填项，否则定期保留策略不会生效
+   * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off。
    */
   EnableBackupPeriodSave?: string
   /**
@@ -6077,15 +6089,15 @@ export interface DescribeBackupDownloadRestrictionResponse {
  */
 export interface DescribeBackupDecryptionKeyRequest {
   /**
-   * 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。
+   * 实例 ID，格式如：cdb-fybaegd8。与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
-   * 实例的备份ID，可通过DescribeBackups接口查询备份的ID。
+   * 实例的备份 ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/api/236/15842) 接口查询备份的 ID。
    */
   BackupId: number
   /**
-   * 备份类型 data: 数据备份 binlog:日志备份，默认为data
+   * 备份类型。data-数据备份，binlog-日志备份，默认为 data。
    */
   BackupType?: string
 }
@@ -6425,7 +6437,7 @@ export interface DescribeInstanceUpgradeCheckJobResponse {
  */
 export interface DescribeCloneListRequest {
   /**
-   * 查询指定源实例的克隆任务列表。
+   * 查询指定源实例的克隆任务列表。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) 接口获取实例 ID。
    */
   InstanceId: string
   /**
@@ -6433,7 +6445,7 @@ export interface DescribeCloneListRequest {
    */
   Offset?: number
   /**
-   * 分页查询时的每页条目数，默认值为20。
+   * 分页查询时的每页条目数，默认值为20，建议最大取值100。
    */
   Limit?: number
 }
@@ -6770,7 +6782,7 @@ export interface DescribeRollbackTaskDetailRequest {
    */
   AsyncRequestId?: string
   /**
-   * 分页参数，每次请求返回的记录数。默认值为 20，最大值为 100。
+   * 分页参数，每次请求返回的记录数。默认值为20，建议最大取值为100。
    */
   Limit?: number
   /**
@@ -7435,7 +7447,7 @@ export interface DescribeDatabasesResponse {
    */
   TotalCount?: number
   /**
-   * 返回的实例信息。
+   * 实例中的数据库名称列表。
    */
   Items?: Array<string>
   /**
@@ -7723,11 +7735,11 @@ export interface CreateBackupRequest {
    */
   BackupDBTableList?: Array<BackupItem>
   /**
-   * 手动备份别名
+   * 手动备份别名，输入长度请在60个字符内。
    */
   ManualBackupName?: string
   /**
-   * 是否需要加密物理备份， 当BackupMethod为physical 时，该值才有意义。 不指定则使用实例备份默认加密策略。
+   * 是否需要加密物理备份，可选值为：on - 是，off - 否。当 BackupMethod 为 physical 时，该值才有意义。不指定则使用实例备份默认加密策略，这里的默认加密策略指通过 [DescribeBackupEncryptionStatus](https://cloud.tencent.com/document/product/236/86508) 接口查询出的实例当前加密策略。
    */
   EncryptionFlag?: string
 }
@@ -8003,7 +8015,7 @@ export interface UpgradeDBInstanceEngineVersionRequest {
  */
 export interface DescribeDataBackupOverviewRequest {
   /**
-   * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+   * 需要查询数据备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
    */
   Product: string
 }
@@ -8208,7 +8220,7 @@ export interface CheckMigrateResult {
  */
 export interface SlowLogItem {
   /**
-   * Sql的执行时间。
+   * Sql的执行时间。秒级时间戳。
    */
   Timestamp?: number
   /**
@@ -9375,7 +9387,7 @@ export interface ModifyDBInstanceReadOnlyStatusRequest {
  */
 export interface CreateCloneInstanceRequest {
   /**
-   * 克隆源实例Id。
+   * 克隆源实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) 接口获取。
    */
   InstanceId: string
   /**
@@ -9405,7 +9417,7 @@ export interface CreateCloneInstanceRequest {
    */
   Volume?: number
   /**
-   * 新产生的克隆实例名称。
+   * 新产生的克隆实例名称。支持输入最大60个字符。
    */
   InstanceName?: string
   /**
@@ -9551,7 +9563,7 @@ export interface DescribeProjectSecurityGroupsResponse {
  */
 export interface DescribeBackupSummariesRequest {
   /**
-   * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+   * 需要查询备份实时统计的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
    */
   Product: string
   /**
@@ -9760,7 +9772,7 @@ export interface DescribeBackupSummariesResponse {
  */
 export interface DescribeBinlogBackupOverviewRequest {
   /**
-   * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+   * 需要查询日志备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
    */
   Product: string
 }
@@ -10798,23 +10810,23 @@ export interface Parameter {
  */
 export interface RollbackInstancesInfo {
   /**
-   * 云数据库实例ID
+   * 云数据库实例 ID。
    */
   InstanceId: string
   /**
-   * 回档策略。可选值为：table、db、full；默认值为full。table - 极速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。
+   * 回档策略。可选值为：table、db、full。table - 极速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和 binlog，速度较慢。
    */
   Strategy: string
   /**
-   * 数据库回档时间，时间格式为：yyyy-mm-dd hh:mm:ss
+   * 数据库回档时间，时间格式为：yyyy-mm-dd hh:mm:ss。
    */
   RollbackTime: string
   /**
-   * 待回档的数据库信息，表示整库回档
+   * 待回档的数据库信息，表示整库回档。
    */
   Databases?: Array<RollbackDBName>
   /**
-   * 待回档的数据库表信息，表示按表回档
+   * 待回档的数据库表信息，表示按表回档。
    */
   Tables?: Array<RollbackTables>
 }

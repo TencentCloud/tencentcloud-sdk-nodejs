@@ -4000,7 +4000,7 @@ export interface ReplaceCertificateRequest {
    */
   ValidType: string
   /**
-   * 类型，默认 Original。可选项：Original = 原证书 CSR，Upload = 手动上传，Online = 在线生成。
+   * 类型，默认 original。可选项：original = 原证书 CSR，upload = 手动上传，online = 在线生成。
    */
   CsrType?: string
   /**
@@ -4024,6 +4024,10 @@ export interface ReplaceCertificateRequest {
    * CSR加密参数，CsrEncryptAlgo为RSA时， 可选2048、4096等默认为2048；CsrEncryptAlgo为ECC时，可选prime256v1，secp384r1等，默认为prime256v1;
    */
   CertCSRKeyParameter?: string
+  /**
+   * 签名算法
+   */
+  SignAlgo?: string
 }
 
 /**
@@ -6320,6 +6324,10 @@ FILE：手动添加域名文件验证。 需要用户手动在域名站点根目
    * 只针对Dnspod系列证书有效，ca机构类型可为sectigo和digicert
    */
   CaType?: string
+  /**
+   * 签名算法
+   */
+  SignAlgo?: string
 }
 
 /**

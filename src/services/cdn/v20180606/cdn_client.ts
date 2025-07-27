@@ -521,7 +521,9 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
   }
 
   /**
-     * ### <font color=red>**该接口已废弃** </font><br>
+     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
+
+### <font color=red>**该接口已废弃** </font><br>
 GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
      */
   async GetDisableRecords(
@@ -622,7 +624,9 @@ CC统计数据查询
   }
 
   /**
-     * ### <font color=red>**该接口已废弃** </font><br>
+     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
+
+### <font color=red>**该接口已废弃** </font><br>
 CreateDiagnoseUrl 用于添加域名诊断任务URL。
      */
   async CreateDiagnoseUrl(
@@ -665,7 +669,9 @@ StopScdnDomain 用于关闭域名的安全防护配置
   }
 
   /**
-     * ### <font color=red>**该接口已废弃** </font><br>
+     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
+
+### <font color=red>**该接口已废弃** </font><br>
 DescribeDiagnoseReport 用于获取指定报告id的内容。
      */
   async DescribeDiagnoseReport(
@@ -699,7 +705,9 @@ DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中�
   }
 
   /**
-     * ### <font color=red>**该接口已废弃** </font><br>
+     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
+
+### <font color=red>**该接口已废弃** </font><br>
 ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
      */
   async ListDiagnoseReport(

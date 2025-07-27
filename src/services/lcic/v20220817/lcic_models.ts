@@ -321,7 +321,7 @@ export interface DeleteUserResponse {
  */
 export interface DeleteWhiteBoardSnapshotRequest {
   /**
-   * 房间ID
+   * 课堂ID
    */
   RoomId?: number
 }
@@ -1191,7 +1191,7 @@ export interface DeleteGroupRequest {
  */
 export interface StartRoomRequest {
   /**
-   * 房间ID。
+   * 课堂ID
    */
   RoomId: number
 }
@@ -1762,7 +1762,7 @@ export interface ForbidSendMsgRequest {
    */
   SdkAppId: number
   /**
-   * 房间ID。
+   * 课堂ID
    */
   RoomId: number
   /**
@@ -2721,7 +2721,7 @@ export interface GetWatermarkRequest {
  */
 export interface EndRoomRequest {
   /**
-   * 房间ID。
+   * 课堂ID
    */
   RoomId: number
 }
@@ -2875,7 +2875,7 @@ export interface StopRecordRequest {
    */
   SdkAppId: number
   /**
-   * 房间ID
+   * 课堂ID
    */
   RoomId: number
   /**

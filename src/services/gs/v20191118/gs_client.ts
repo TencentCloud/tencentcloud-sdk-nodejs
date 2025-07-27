@@ -33,6 +33,7 @@ import {
   SetAndroidInstancesBGAppKeepAliveResponse,
   UninstallAndroidInstancesAppResponse,
   StopAndroidInstancesAppResponse,
+  FileCosInfo,
   ModifyAndroidAppVersionResponse,
   CleanAndroidInstancesAppDataResponse,
   DeleteAndroidAppResponse,

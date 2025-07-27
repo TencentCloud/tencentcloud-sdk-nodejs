@@ -728,6 +728,16 @@ it("ocr.v20181119.RecognizeMedicalInvoiceOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeTableMultiOCR", async function () {
+    try {
+       const data = await client.RecognizeTableMultiOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.GeneralFastOCR", async function () {
     try {
        const data = await client.GeneralFastOCR({})

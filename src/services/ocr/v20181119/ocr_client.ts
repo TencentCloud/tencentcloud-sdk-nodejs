@@ -181,11 +181,12 @@ import {
   FinancialBill,
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
-  TextVehicleBack,
+  RecognizeTableMultiOCRRequest,
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
   AirTicketInfo,
   RideHailingDriverLicenseOCRResponse,
+  TextVehicleBack,
   ImageEnhancementRequest,
   ExtractDocBasicResponse,
   EnglishOCRRequest,
@@ -205,6 +206,7 @@ import {
   VatInvoiceVerifyNewRequest,
   InstitutionOCRRequest,
   CarInvoiceInfo,
+  RecognizeTableMultiOCRResponse,
   FlightInvoiceInfo,
   DetailInformationOfAirTicketTupleList,
   TextVehicleFront,
@@ -1621,6 +1623,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void
   ): Promise<RecognizeMedicalInvoiceOCRResponse> {
     return this.request("RecognizeMedicalInvoiceOCR", req, cb)
+  }
+
+  /**
+     * 基于MLLM(多模态大语言模型)的表格识别能力，针对复杂表格的算法识别效果更佳，适配财务报表识别场景，并可输出直接对接业务系统的Excel数据。
+
+默认接口请求频率限制：1次/秒。
+     */
+  async RecognizeTableMultiOCR(
+    req: RecognizeTableMultiOCRRequest,
+    cb?: (error: string, rep: RecognizeTableMultiOCRResponse) => void
+  ): Promise<RecognizeTableMultiOCRResponse> {
+    return this.request("RecognizeTableMultiOCR", req, cb)
   }
 
   /**

@@ -1448,6 +1448,16 @@ export interface DescribeTreeJobsRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestId?: string
+  /**
+   * attach-000
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageAttach?: string
+  /**
+   * bool
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasMore?: boolean
 }
 
 /**
@@ -4369,7 +4379,7 @@ export interface CopyJobItem {
  */
 export interface DescribeTreeJobsRequest {
   /**
-   * 筛选条件字段
+   * 筛选条件字段，使用了筛选字段后不支持分页，最多返回2000条记录
    */
   Filters?: Array<Filter>
   /**

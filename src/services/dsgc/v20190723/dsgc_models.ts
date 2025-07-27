@@ -2686,7 +2686,7 @@ selfbuilt-db 表示自建数据库
    */
   Condition?: string
   /**
-   * 合规组ID列表，最多支持添加5个
+   * 此参数必选。合规组ID列表，最多支持添加5个
    */
   ComplianceGroupIds?: Array<number | bigint>
   /**

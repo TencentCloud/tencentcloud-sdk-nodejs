@@ -5911,82 +5911,32 @@ ara：阿拉伯语
 }
 
 /**
- * 行驶证副页正面的识别结果
+ * RecognizeTableMultiOCR请求参数结构体
  */
-export interface TextVehicleBack {
+export interface RecognizeTableMultiOCRRequest {
   /**
-   * 号牌号码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  PlateNo?: string
+  ImageBase64?: string
   /**
-   * 档案编号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  FileNo?: string
+  ImageUrl?: string
   /**
-   * 核定人数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 文档的起始页码。  当传入文件是PDF型时，用来指定识别的起始页码，识别的页码包含当前值。
    */
-  AllowNum?: string
+  PdfStartPageNumber?: number
   /**
-   * 总质量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 文档的结束页码。 当传入文件是PDF类型时，用来指定识别的结束页码，识别的页码包含当前值。单次调用最多支持识别3页内容，即PdfEndPageNumber-PdfStartPageNumber需要不大于3。
    */
-  TotalMass?: string
+  PdfEndPageNumber?: number
   /**
-   * 整备质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CurbWeight?: string
-  /**
-   * 核定载质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadQuality?: string
-  /**
-   * 外廓尺寸
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExternalSize?: string
-  /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Marks?: string
-  /**
-   * 检验记录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Record?: string
-  /**
-   * 准牵引总质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalQuasiMass?: string
-  /**
-   * 副页编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubPageCode?: string
-  /**
-   * 燃料种类
+   * 配置选项，支持配置输出数据格式。
 
-注意：此字段可能返回 null，表示取不到有效值。
+* **Mdbase64** 返回 base64 编码的 markdown 格式文本。
+* **Excelbase64** 返回 base64 编码的 excel 文件。
    */
-  FuelType?: string
-  /**
-   * 住址
-   */
-  AddressElectronic?: string
-  /**
-   * 发证机关
-   */
-  IssueAuthorityElectronic?: string
-  /**
-   * 车身颜色
-   */
-  CarBodyColor?: string
+  DataFormat?: string
 }
 
 /**
@@ -6155,6 +6105,85 @@ export interface RideHailingDriverLicenseOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 行驶证副页正面的识别结果
+ */
+export interface TextVehicleBack {
+  /**
+   * 号牌号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlateNo?: string
+  /**
+   * 档案编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileNo?: string
+  /**
+   * 核定人数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowNum?: string
+  /**
+   * 总质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalMass?: string
+  /**
+   * 整备质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurbWeight?: string
+  /**
+   * 核定载质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadQuality?: string
+  /**
+   * 外廓尺寸
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalSize?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Marks?: string
+  /**
+   * 检验记录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Record?: string
+  /**
+   * 准牵引总质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalQuasiMass?: string
+  /**
+   * 副页编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubPageCode?: string
+  /**
+   * 燃料种类
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FuelType?: string
+  /**
+   * 住址
+   */
+  AddressElectronic?: string
+  /**
+   * 发证机关
+   */
+  IssueAuthorityElectronic?: string
+  /**
+   * 车身颜色
+   */
+  CarBodyColor?: string
 }
 
 /**
@@ -6844,6 +6873,21 @@ export interface CarInvoiceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Polygon?: Polygon
+}
+
+/**
+ * RecognizeTableMultiOCR返回参数结构体
+ */
+export interface RecognizeTableMultiOCRResponse {
+  /**
+   * Base64 编码后的 Excel 数据或 Markdown 数据。  注意：此字段可能返回空，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataBase64?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

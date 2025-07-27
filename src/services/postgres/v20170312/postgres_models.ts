@@ -58,7 +58,7 @@ export interface TaskDetail {
  */
 export interface SetAutoRenewFlagRequest {
   /**
-   * 实例ID集合。注意：当前已不支持同时操作多个实例，这里只能传入单个实例ID。
+   * 实例ID集合。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。仅支持预付费（包年包月）的实例。支持同时操作多个实例。
    */
   DBInstanceIdSet: Array<string>
   /**
@@ -144,7 +144,7 @@ export interface DescribeDBXlogsRequest {
  */
 export interface DescribeMaintainTimeWindowRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -194,11 +194,12 @@ export interface DeleteReadOnlyGroupResponse {
  */
 export interface OpenDBExtranetAccessRequest {
   /**
-   * 实例ID，形如postgres-hez4fh0v
+   * 实例ID，形如postgres-hez4fh0v。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。
    */
   DBInstanceId: string
   /**
    * 是否开通Ipv6外网，1：是，0：否
+默认值：0
    */
   IsIpv6?: number
 }
@@ -217,7 +218,7 @@ export interface CreateInstancesRequest {
    */
   SpecCode: string
   /**
-   * 实例容量大小，单位：GB。
+   * 实例磁盘容量大小，单位：GB。该参数的设置步长为10。
    */
   Storage: number
   /**
@@ -307,7 +308,7 @@ export interface CreateInstancesRequest {
    */
   VoucherIds?: Array<string>
   /**
-   * 项目ID。
+   * 项目ID。默认取之为0，表示归属默认项目。
    */
   ProjectId?: number
   /**
@@ -596,7 +597,7 @@ export interface BackupPlan {
    */
   BackupPeriod?: string
   /**
-   * 数据备份保留时长
+   * 数据备份保留时长。单位：天
    */
   BaseBackupRetentionPeriod?: number
   /**
@@ -616,7 +617,7 @@ export interface BackupPlan {
    */
   PlanName?: string
   /**
-   * 日志备份保留时长。
+   * 日志备份保留时长。单位：天
    */
   LogBackupRetentionPeriod?: number
   /**
@@ -670,20 +671,20 @@ export interface SlowlogDetail {
  */
 export interface SwitchDBInstancePrimaryRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
    * 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。
-<li>默认：false
+<li>默认：false</li>
    */
   Force?: boolean
   /**
    * 指定实例配置完成变更后的切换时间。
-<li>0：立即切换 
-<li>1：指定时间切换
-<li>2：维护时间窗口内切换
-<li>默认值：0 
+<li>0：立即切换 </li>
+<li>1：指定时间切换</li>
+<li>2：维护时间窗口内切换</li>
+默认值：0 
    */
   SwitchTag?: number
   /**
@@ -725,11 +726,11 @@ export interface DeleteLogBackupResponse {
  */
 export interface ModifyReadOnlyGroupConfigRequest {
   /**
-   * 只读组ID
+   * 只读组ID。
    */
   ReadOnlyGroupId: string
   /**
-   * 只读组名称
+   * 只读组名称。仅支持长度小于60的中文/英文/数字/"_"/"-"
    */
   ReadOnlyGroupName?: string
   /**
@@ -741,11 +742,11 @@ export interface ModifyReadOnlyGroupConfigRequest {
    */
   ReplayLatencyEliminate?: number
   /**
-   * 延迟日志大小阈值，单位MB
+   * 延迟日志大小阈值，单位MB。当开启延迟日志大小配置，应输入正整数
    */
   MaxReplayLatency?: number
   /**
-   * 延迟时间大小阈值，单位ms
+   * 延迟时间大小阈值，单位s。当开启延迟时间配置时，应输入正整数。
    */
   MaxReplayLag?: number
   /**
@@ -753,7 +754,7 @@ export interface ModifyReadOnlyGroupConfigRequest {
    */
   Rebalance?: number
   /**
-   * 延迟剔除最小保留实例数
+   * 延迟剔除最小保留实例数。取值范围[0,100]
    */
   MinDelayEliminateReserve?: number
 }
@@ -805,11 +806,11 @@ export interface BackupSummary {
  */
 export interface AddDBInstanceToReadOnlyGroupRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 只读组ID
+   * 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
   ReadOnlyGroupId: string
 }
@@ -836,11 +837,11 @@ export interface DescribeProductConfigRequest {
  */
 export interface RemoveDBInstanceFromReadOnlyGroupRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 只读组ID
+   * 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
   ReadOnlyGroupId: string
 }
@@ -920,7 +921,7 @@ export interface DescribeMaintainTimeWindowResponse {
  */
 export interface DescribeDefaultParametersRequest {
   /**
-   * 数据库版本，大版本号，例如11，12，13
+   * 数据库版本，大版本号，例如11，12，13。可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)接口获取
    */
   DBMajorVersion: string
   /**
@@ -948,13 +949,12 @@ export interface DescribeDedicatedClustersResponse {
  */
 export interface RenewInstanceRequest {
   /**
-   * 实例ID，形如postgres-6fego161
+   * 实例ID，形如postgres-6fego161。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。仅支持预付费（包年包月）实例。
    */
   DBInstanceId: string
   /**
    * 购买时长，单位：月。
 <li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36</li>
-<li>后付费：只支持1</li>
    */
   Period: number
   /**
@@ -1084,7 +1084,7 @@ export interface DBInstanceNetInfo {
  */
 export interface BackupDownloadRestriction {
   /**
-   * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。
+   * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。当该参数取值为CUSTOMIZE 时，vpc或ip信息至少填写一项
    */
   RestrictionType?: string
   /**
@@ -1110,7 +1110,7 @@ export interface BackupDownloadRestriction {
  */
 export interface ModifyDBInstanceDeploymentRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -1123,7 +1123,7 @@ export interface ModifyDBInstanceDeploymentRequest {
 <li>0：立即切换 </li>
 <li>1：指定时间切换</li>
 <li>2：维护时间窗口内切换</li>
-默认值：0 
+
    */
   SwitchTag: number
   /**
@@ -1203,19 +1203,22 @@ SUPPORTMODIFYONLY：支持变配。
  */
 export interface CreateDatabaseRequest {
   /**
-   * 实例ID，形如postgres-6fego161
+   * 实例ID，形如postgres-6fego161。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 创建的数据库名
+   * 创建的数据库名。
+名称规范：由字母（a-z, A-Z）、数字（0-9）、下划线（_）组成，以字母或（_）开头，最多63个字符。不能使用系统保留关键字，不能为postgres。
    */
   DatabaseName: string
   /**
-   * 数据库的所有者
+   * 数据库的所有者。可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
   DatabaseOwner: string
   /**
-   * 数据库的字符编码
+   * 数据库的字符编码。
+支持的常用字符集包括：UTF8、LATIN1、LATIN2、WIN1250、WIN1251、WIN1252、KOI8R、EUC_JP、EUC_KR
+默认值：UTF8
    */
   Encoding?: string
   /**
@@ -1412,7 +1415,7 @@ export interface CloneDBInstanceResponse {
  */
 export interface ModifyDBInstanceReadOnlyGroupRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -1490,15 +1493,15 @@ export interface BaseBackup {
    */
   Name?: string
   /**
-   * 备份方式：物理备份、逻辑备份。
+   * 备份方式：physical - 物理备份、logical - 逻辑备份。
    */
   BackupMethod?: string
   /**
-   * 备份模式：自动备份、手动备份。
+   * 备份模式：automatic - 自动备份、manual - 手动备份。
    */
   BackupMode?: string
   /**
-   * 备份任务状态。
+   * 备份任务状态。枚举值：init、running、finished、failed、canceled
    */
   State?: string
   /**
@@ -1546,7 +1549,7 @@ export interface CreateReadOnlyDBInstanceResponse {
  */
 export interface DescribeAvailableRecoveryTimeRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -1594,7 +1597,7 @@ export interface DescribeTasksRequest {
  */
 export interface DescribeDBInstanceParametersRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -1712,7 +1715,7 @@ DEPRECATED：已弃用。
  */
 export interface CreateDBInstanceNetworkAccessRequest {
   /**
-   * 实例ID，形如：postgres-6bwgamo3。
+   * 实例ID，形如：postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -1728,7 +1731,7 @@ export interface CreateDBInstanceNetworkAccessRequest {
    */
   IsAssignVip: boolean
   /**
-   * 目标VIP地址。
+   * 目标VIP地址。当不指定该参数，且IsAssignVip为true时，默认自动分配Vip。
    */
   Vip?: string
 }
@@ -1786,15 +1789,15 @@ export interface TaskSet {
  */
 export interface InquiryPriceCreateDBInstancesRequest {
   /**
-   * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+   * 可用区名称。该参数可以通过调用[ DescribeZones](https://cloud.tencent.com/document/product/409/16769) 接口的返回值中的Zone字段来获取。
    */
   Zone: string
   /**
-   * 规格ID。该参数可以通过调用DescribeClasses接口的返回值中的SpecCode字段来获取。
+   * 规格ID。该参数可以通过调用[DescribeClasses](https://cloud.tencent.com/document/product/409/89019)接口的返回值中的SpecCode字段来获取。
    */
   SpecCode: string
   /**
-   * 存储容量大小，单位：GB。
+   * 存储容量大小，单位：GB。该参数的设置步长为10。
    */
   Storage: number
   /**
@@ -1810,7 +1813,8 @@ export interface InquiryPriceCreateDBInstancesRequest {
    */
   Pid?: number
   /**
-   * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
+   * 实例计费类型。目前支持：PREPAID（预付费，即包年包月）和 POSTPAID（按量计费）。
+默认值：PREPAID
    */
   InstanceChargeType?: string
   /**
@@ -2004,7 +2008,7 @@ export interface ReadOnlyGroup {
  */
 export interface ModifyDBInstanceSpecRequest {
   /**
-   * 实例ID，形如：postgres-6bwgamo3。
+   * 实例ID，形如：postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -2012,7 +2016,7 @@ export interface ModifyDBInstanceSpecRequest {
    */
   Memory: number
   /**
-   * 修改后的实例磁盘大小，单位GiB。
+   * 修改后的实例磁盘大小，单位GiB。该参数的设置步长为10。
    */
   Storage: number
   /**
@@ -2047,7 +2051,7 @@ export interface ModifyDBInstanceSpecRequest {
    */
   SwitchEndTime?: string
   /**
-   * 修改后的实例CPU大小，单位Core。
+   * 修改后的实例CPU大小，单位Core。不填写该参数时，默认根据Memory确定Cpu大小。如Memory为2，支持的规格有1核2GiB，则不传入Cpu时，Cpu默认为1。
    */
   Cpu?: number
 }
@@ -2094,7 +2098,7 @@ export interface SpecInfo {
  */
 export interface ModifyMaintainTimeWindowRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -2102,7 +2106,7 @@ export interface ModifyMaintainTimeWindowRequest {
    */
   MaintainStartTime?: string
   /**
-   * 维护持续时间。单位：小时
+   * 维护持续时间。单位：小时。取值范围：[1,4]
    */
   MaintainDuration?: number
   /**
@@ -2201,7 +2205,7 @@ export interface SetAutoRenewFlagResponse {
   /**
    * 设置成功的实例个数
    */
-  Count: number
+  Count?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2357,7 +2361,7 @@ export interface RawSlowQuery {
  */
 export interface DescribeDatabaseObjectsRequest {
   /**
-   * 实例ID。
+   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -2470,7 +2474,7 @@ export interface DatabaseObject {
  */
 export interface UpgradeDBInstanceKernelVersionRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -2480,9 +2484,9 @@ export interface UpgradeDBInstanceKernelVersionRequest {
   TargetDBKernelVersion: string
   /**
    * 指定实例升级内核版本号完成后的切换时间。可选值:
-<li>0：立即切换
-<li>1：指定时间切换
-<li>2：维护时间窗口内切换
+<li>0：立即切换</li>
+<li>1：指定时间切换</li>
+<li>2：维护时间窗口内切换</li>
 默认值：0 
    */
   SwitchTag?: number
@@ -2496,8 +2500,8 @@ export interface UpgradeDBInstanceKernelVersionRequest {
   SwitchEndTime?: string
   /**
    * 是否对本次升级实例内核版本号操作执行预检查。
-<li>true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
-<li>false：发送正常请求（默认值），通过检查后直接升级内核版本号。
+<li>true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。</li>
+<li>false：发送正常请求（默认值），通过检查后直接升级内核版本号。</li>
 默认值：false
    */
   DryRun?: boolean
@@ -2528,26 +2532,26 @@ export interface ModifyReadOnlyDBInstanceWeightResponse {
  */
 export interface ModifyDBInstanceHAConfigRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
    * 主从同步方式：
-<li>Semi-sync：半同步
-<li>Async：异步
+<li>Semi-sync：半同步</li>
+<li>Async：异步</li>
 
    */
   SyncMode: string
   /**
    * 高可用备机最大延迟数据量。备节点延迟数据量小于等于该值，且备节点延迟时间小于等于MaxStandbyLag时，可以切换为主节点。
-<li>单位：byte
-<li>参数范围：[1073741824, 322122547200]
+<li>单位：byte</li>
+<li>参数范围：[1073741824, 322122547200]</li>
    */
   MaxStandbyLatency: number
   /**
    * 高可用备机最大延迟时间。备节点延迟时间小于等于该值，且备节点延迟数据量小于等于MaxStandbyLatency时，可以切换为主节点。
-<li>单位：s
-<li>参数范围：[5, 10]
+<li>单位：s</li>
+<li>参数范围：[5, 10]</li>
    */
   MaxStandbyLag: number
   /**
@@ -2633,7 +2637,7 @@ export interface DescribeBackupSummariesResponse {
  */
 export interface DescribeDBErrlogsRequest {
   /**
-   * 实例ID。
+   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -2860,7 +2864,7 @@ export interface CloneDBInstanceRequest {
  */
 export interface DeleteParameterTemplateRequest {
   /**
-   * 参数模板ID，用于唯一确认待操作的参数模板
+   * 参数模板ID，用于唯一确认待操作的参数模板。可通过[DescribeParameterTemplates](https://cloud.tencent.com/document/api/409/84067)接口获取
    */
   TemplateId: string
 }
@@ -2870,7 +2874,7 @@ export interface DeleteParameterTemplateRequest {
  */
 export interface DescribeClassesRequest {
   /**
-   * 可用区ID。可以通过接口DescribeZones获取。
+   * 可用区名称。可以通过接口[DescribeZones](https://cloud.tencent.com/document/product/409/16769)获取。
    */
   Zone: string
   /**
@@ -2880,7 +2884,7 @@ export interface DescribeClassesRequest {
    */
   DBEngine: string
   /**
-   * 数据库主版本号。例如12，13，可以通过接口DescribeDBVersions获取。
+   * 数据库主版本号。例如12，13，可以通过接口[DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取。
    */
   DBMajorVersion: string
 }
@@ -2890,7 +2894,7 @@ export interface DescribeClassesRequest {
  */
 export interface DescribeParamsEventRequest {
   /**
-   * 实例DB ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -2920,7 +2924,7 @@ export interface EventInfo {
    */
   EffectiveTime?: string
   /**
-   * 修改状态
+   * 修改状态。枚举值：in progress、success、paused
    */
   State?: string
   /**
@@ -2962,55 +2966,55 @@ export interface AnalysisItems {
   /**
    * 慢SQL查询的数据库名
    */
-  DatabaseName: string
+  DatabaseName?: string
   /**
    * 慢SQL执行的用户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 抽象参数之后的慢SQL
    */
-  NormalQuery: string
+  NormalQuery?: string
   /**
    * 慢SQL执行的客户端地址
    */
-  ClientAddr: string
+  ClientAddr?: string
   /**
    * 在选定时间范围内慢SQL语句执行的次数
    */
-  CallNum: number
+  CallNum?: number
   /**
-   * 在选定时间范围内，慢SQL语句执行的次数占所有慢SQL的比例（小数返回）
+   * 在选定时间范围内，慢SQL语句执行的次数占所有慢SQL的百分比。
    */
-  CallPercent: number
+  CallPercent?: number
   /**
    * 在选定时间范围内，慢SQL执行的总时间
    */
-  CostTime: number
+  CostTime?: number
   /**
    * 在选定时间范围内，慢SQL语句执行的总时间占所有慢SQL的比例（小数返回）
    */
-  CostPercent: number
+  CostPercent?: number
   /**
    * 在选定时间范围内，慢SQL语句执行的耗时最短的时间（单位：ms）
    */
-  MinCostTime: number
+  MinCostTime?: number
   /**
    * 在选定时间范围内，慢SQL语句执行的耗时最长的时间（单位：ms）
    */
-  MaxCostTime: number
+  MaxCostTime?: number
   /**
    * 在选定时间范围内，慢SQL语句执行的耗时平均时间（单位：ms）
    */
-  AvgCostTime: number
+  AvgCostTime?: number
   /**
-   * 在选定时间范围内，慢SQL第一条开始执行的时间戳
+   * 在选定时间范围内，慢SQL第一条开始执行的时间
    */
-  FirstTime: string
+  FirstTime?: string
   /**
-   * 在选定时间范围内，慢SQL最后一条开始执行的时间戳
+   * 在选定时间范围内，慢SQL最后一条开始执行的时间
    */
-  LastTime: string
+  LastTime?: string
 }
 
 /**
@@ -3199,43 +3203,43 @@ export interface ServerlessDBInstance {
  */
 export interface CreateReadOnlyGroupRequest {
   /**
-   * 主实例ID
+   * 主实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   MasterDBInstanceId: string
   /**
-   * 只读组名称
+   * 只读组名称。仅支持长度小于60的中文/英文/数字/"_"/"-"。
    */
   Name: string
   /**
-   * 项目ID
+   * 项目ID。默认值为0，表示归属于默认项目。
    */
   ProjectId?: number
   /**
-   * 私有网络ID
+   * 私有网络ID。注：默认使用基础网络，当前不支持基础网络，故该参数必填。
    */
   VpcId?: string
   /**
-   * 子网ID
+   * 子网ID。注：默认使用基础网络，当前不支持基础网络，故该参数必填。
    */
   SubnetId?: string
   /**
-   * 延迟时间大小开关：0关、1开
+   * 延迟时间大小开关：0关、1开。该参数必填。
    */
   ReplayLagEliminate?: number
   /**
-   * 延迟空间大小开关： 0关、1开
+   * 延迟空间大小开关： 0关、1开。该参数的填写需要与ReplayLagEliminate一致。
    */
   ReplayLatencyEliminate?: number
   /**
-   * 延迟时间大小阈值，单位ms
+   * 延迟时间大小阈值，取值为正整数，单位s。当ReplayLagEliminate为1时，该参数必填；当ReplayLagEliminate为0时，该参数需填0。
    */
   MaxReplayLag?: number
   /**
-   * 延迟空间大小阈值，单位MB
+   * 延迟空间大小阈值，取值为正整数，单位MB。当ReplayLatencyEliminate为1时，该参数必填；当ReplayLatencyEliminate为0时，该参数需填0。
    */
   MaxReplayLatency?: number
   /**
-   * 延迟剔除最小保留实例数
+   * 延迟剔除最小保留实例数。取值范围[0,100]。当ReplayLatencyEliminate为1时，该参数必填；当ReplayLagEliminate为0时，该参数无效。
    */
   MinDelayEliminateReserve?: number
   /**
@@ -3312,7 +3316,7 @@ dedicated-cluster-id: 按照专属集群ID筛选，类型为string
  */
 export interface CreateReadOnlyGroupNetworkAccessRequest {
   /**
-   * RO组ID，形如：pgro-4t9c6g7k。
+   * RO组ID，形如：pgrogrp-4t9c6g7k。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
   ReadOnlyGroupId: string
   /**
@@ -3328,7 +3332,7 @@ export interface CreateReadOnlyGroupNetworkAccessRequest {
    */
   IsAssignVip: boolean
   /**
-   * 目标VIP地址。
+   * 目标VIP地址。当不指定该参数，且IsAssignVip为true时，默认自动分配Vip。
    */
   Vip?: string
 }
@@ -3356,7 +3360,7 @@ export interface EventItem {
  */
 export interface RestartDBInstanceRequest {
   /**
-   * 实例ID，形如postgres-6r233v55
+   * 实例ID，形如postgres-6r233v55。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -3584,7 +3588,7 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
    */
   Memory: number
   /**
-   * 实例ID，形如postgres-hez4fh0v
+   * 实例ID，形如postgres-hez4fh0v。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -3593,7 +3597,8 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
    */
   InstanceChargeType?: string
   /**
-   * 实例的Cpu大小，单位Core
+   * 实例的Cpu大小，单位Core。
+不传入此参数时，默认根据Memory确定的售卖规格所对应的Cpu进行设置。如Memory为2，支持的售卖规格有1核2GiB，则不传入Cpu时，Cpu默认为1。
    */
   Cpu?: number
 }
@@ -3666,7 +3671,7 @@ export interface DescribeDatabaseObjectsResponse {
  */
 export interface IsolateDBInstancesRequest {
   /**
-   * 实例ID集合。注意：当前已不支持同时隔离多个实例，这里只能传入单个实例ID。
+   * 实例ID集合。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。注意：当前已不支持同时隔离多个实例，这里只能传入单个实例ID。
    */
   DBInstanceIdSet: Array<string>
 }
@@ -3676,11 +3681,11 @@ export interface IsolateDBInstancesRequest {
  */
 export interface ModifyDBInstanceNameRequest {
   /**
-   * 数据库实例ID，形如postgres-6fego161
+   * 数据库实例ID，形如postgres-6fego161。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 实例名称，仅支持长度小于60的中文/英文/数字/"_"/"-"，不指定实例名称则默认显示"未命名"。
+   * 实例名称，仅支持长度小于60的中文/英文/数字/"_"/"-"。
 
    */
   InstanceName: string
@@ -3713,11 +3718,11 @@ export interface DescribeDBInstanceSSLConfigResponse {
  */
 export interface DeleteAccountRequest {
   /**
-   * 实例ID。
+   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 删除的账号名称。
+   * 删除的账号名称。	可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
   UserName: string
 }
@@ -3759,7 +3764,7 @@ export interface InquiryPriceRenewDBInstanceResponse {
  */
 export interface DescribeSlowQueryAnalysisRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -4393,11 +4398,11 @@ export interface DescribeDBVersionsResponse {
  */
 export interface ModifyDBInstanceSSLConfigRequest {
   /**
-   * 实例 ID
+   * 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 开启或关闭SSL
+   * 开启或关闭SSL。true - 开启 ；false - 关闭。
    */
   SSLEnabled: boolean
   /**
@@ -4477,11 +4482,11 @@ export interface ModifyDBInstanceNameResponse {
  */
 export interface UpgradeDBInstanceMajorVersionRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 目标内核版本号，可以通过API DescribeDBVersions获取可以升级的目标内核版本号。
+   * 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。
    */
   TargetDBKernelVersion: string
   /**
@@ -4582,7 +4587,7 @@ export interface CreateReadOnlyDBInstanceRequest {
    */
   Zone: string
   /**
-   * 只读实例的主实例ID。
+   * 只读实例的主实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   MasterDBInstanceId: string
   /**
@@ -4590,7 +4595,7 @@ export interface CreateReadOnlyDBInstanceRequest {
    */
   SpecCode: string
   /**
-   * 实例容量大小，单位：GB。
+   * 实例硬盘容量大小，单位：GB。该参数的设置步长为10。
    */
   Storage: number
   /**
@@ -4637,7 +4642,7 @@ export interface CreateReadOnlyDBInstanceRequest {
    */
   AutoRenewFlag?: number
   /**
-   * 项目ID。
+   * 项目ID。默认值为0，表示归属默认项目。
    */
   ProjectId?: number
   /**
@@ -4665,7 +4670,7 @@ export interface CreateReadOnlyDBInstanceRequest {
    */
   NeedSupportIpv6?: number
   /**
-   * 实例名(后续支持)
+   * 实例名。仅支持长度小于60的中文/英文/数字/"_"/"-"
    */
   Name?: string
   /**
@@ -4804,7 +4809,7 @@ export interface ModifyParameterTemplateResponse {
  */
 export interface DescribeEncryptionKeysRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -4826,15 +4831,15 @@ export interface LogBackup {
    */
   Name?: string
   /**
-   * 备份方式：物理备份、逻辑备份。
+   * 备份方式。枚举值，physical - 物理备份；logical - 逻辑备份。
    */
   BackupMethod?: string
   /**
-   * 备份模式：自动备份、手动备份。
+   * 备份模式。枚举值，manual - 手动备份；automatic - 自动备份 。
    */
   BackupMode?: string
   /**
-   * 备份任务状态。
+   * 备份任务状态。枚举值：init、running、finished、failed、canceled
    */
   State?: string
   /**
@@ -5212,7 +5217,7 @@ export interface CreateParameterTemplateRequest {
  */
 export interface DescribeDBInstanceSSLConfigRequest {
   /**
-   * 实例ID，形如postgres-6bwgamo3
+   * 实例ID，形如postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -5232,7 +5237,7 @@ export interface ModifyDatabaseOwnerResponse {
  */
 export interface ModifySwitchTimePeriodRequest {
   /**
-   * 处于等待切换状态中的实例ID
+   * 处于等待切换状态中的实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5256,7 +5261,7 @@ export interface CreateAccountResponse {
  */
 export interface DescribeSlowQueryListRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5338,15 +5343,15 @@ export interface RegionInfo {
  */
 export interface ModifyDatabaseOwnerRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 数据库名称
+   * 数据库名称。可通过[DescribeDatabases](https://cloud.tencent.com/document/api/409/43353)接口获取
    */
   DatabaseName: string
   /**
-   * 数据库新所有者
+   * 数据库新所有者。可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
   DatabaseOwner: string
 }
@@ -5356,13 +5361,13 @@ export interface ModifyDatabaseOwnerRequest {
  */
 export interface DisIsolateDBInstancesRequest {
   /**
-   * 实例ID列表。注意：当前已不支持同时解隔离多个实例，这里只能传入单个实例ID。
+   * 实例ID列表。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。支持同时解隔离多个实例。
    */
   DBInstanceIdSet: Array<string>
   /**
    * 购买时长，单位：月。
 <li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36</li>
-<li>后付费：只支持1</li>
+<li>后付费：该参数不生效</li>
    */
   Period?: number
   /**
@@ -5429,11 +5434,11 @@ export interface DescribeDBInstancesResponse {
  */
 export interface DescribeDBInstanceSecurityGroupsRequest {
   /**
-   * 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId
+   * 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId。
    */
   DBInstanceId?: string
   /**
-   * 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId
+   * 只读组ID，可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId。
    */
   ReadOnlyGroupId?: string
 }
@@ -5501,15 +5506,23 @@ export interface RebalanceReadOnlyGroupResponse {
  */
 export interface ResetAccountPasswordRequest {
   /**
-   * 实例ID，形如postgres-4wdeb0zv
+   * 实例ID，形如postgres-4wdeb0zv。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 实例账户名
+   * 实例账户名。可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
   UserName: string
   /**
-   * UserName账户对应的新密码
+   * UserName账户对应的新密码。
+密码设置规则如下：
+- 长度8~ 32位，推荐使用12位以上的密码
+- 不能以" / "开头
+- 必须包含以下四项:
+  1.    小写字母a ~ z
+  2.    大写字母 A ～ Z
+  3.    数字 0 ～ 9
+  4.    特殊字符 ()`~!@#$%^&*-+=_|{}[]:<>,.?/
    */
   Password: string
 }
@@ -5537,7 +5550,7 @@ export interface DescribeSlowQueryAnalysisResponse {
  */
 export interface ModifyDBInstanceParametersRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5571,7 +5584,7 @@ export interface DedicatedCluster {
    */
   InstanceCount?: number
   /**
-   * Cpu总量
+   * Cpu总数量
    */
   CpuTotal?: number
   /**
@@ -5579,19 +5592,19 @@ export interface DedicatedCluster {
    */
   CpuAvailable?: number
   /**
-   * 内存总量
+   * 内存总量，单位GB
    */
   MemTotal?: number
   /**
-   * 内存可用量
+   * 内存可用量，单位GB
    */
   MemAvailable?: number
   /**
-   * 磁盘总量
+   * 磁盘总量，单位GB
    */
   DiskTotal?: number
   /**
-   * 磁盘可用量
+   * 磁盘可用量，单位GB
    */
   DiskAvailable?: number
 }
@@ -5633,11 +5646,11 @@ export interface DescribeDBSlowlogsResponse {
  */
 export interface DescribeAccountPrivilegesRequest {
   /**
-   * 实例ID。
+   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 查询此账号对某数据库对象所拥有的权限信息。
+   * 查询此账号对某数据库对象所拥有的权限信息。账号名可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
   UserName: string
   /**
@@ -5705,7 +5718,7 @@ export interface DescribeAccountsResponse {
  */
 export interface ModifyDBInstanceChargeTypeRequest {
   /**
-   * 实例ID，形如postgres-6fego161
+   * 实例ID，形如postgres-6fego161。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5786,11 +5799,11 @@ export type DescribeDBVersionsRequest = null
  */
 export interface ModifyDBInstancesProjectRequest {
   /**
-   * 实例ID集合。注意：当前已不支持同时操作多个实例，这里只能传入单个实例ID。
+   * 实例ID集合。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。支持同时操作多个实例。
    */
   DBInstanceIdSet: Array<string>
   /**
-   * 所属新项目的ID
+   * 所属新项目的ID。可通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725)获取
    */
   ProjectId: string
 }
