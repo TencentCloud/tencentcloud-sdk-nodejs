@@ -208,6 +208,16 @@ it("wedata.v20210820.BatchKillIntegrationTaskInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTaskParamDs", async function () {
+    try {
+       const data = await client.DescribeTaskParamDs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyExecStrategy", async function () {
     try {
        const data = await client.ModifyExecStrategy({})
@@ -1478,6 +1488,16 @@ it("wedata.v20210820.JudgeResourceFile", async function () {
     }
 })
 
+it("wedata.v20210820.RemoveDatabase", async function () {
+    try {
+       const data = await client.RemoveDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CommitIntegrationTask", async function () {
     try {
        const data = await client.CommitIntegrationTask({})
@@ -1521,6 +1541,16 @@ it("wedata.v20210820.DeleteDsFolder", async function () {
 it("wedata.v20210820.DescribeDutyScheduleList", async function () {
     try {
        const data = await client.DescribeDutyScheduleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ReportSchema", async function () {
+    try {
+       const data = await client.ReportSchema({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1631,6 +1661,16 @@ it("wedata.v20210820.CreateBaseProject", async function () {
 it("wedata.v20210820.DescribeTableQualityDetails", async function () {
     try {
        const data = await client.DescribeTableQualityDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.TriggerEvent", async function () {
+    try {
+       const data = await client.TriggerEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1768,6 +1808,16 @@ it("wedata.v20210820.DeleteProjectUsers", async function () {
     }
 })
 
+it("wedata.v20210820.GetJobStatus", async function () {
+    try {
+       const data = await client.GetJobStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DeleteFile", async function () {
     try {
        const data = await client.DeleteFile({})
@@ -1801,6 +1851,16 @@ it("wedata.v20210820.UploadContent", async function () {
 it("wedata.v20210820.DescribeDsTaskVersionList", async function () {
     try {
        const data = await client.DescribeDsTaskVersionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.SubmitCustomFunction", async function () {
+    try {
+       const data = await client.SubmitCustomFunction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1958,9 +2018,9 @@ it("wedata.v20210820.DescribeTaskLockStatus", async function () {
     }
 })
 
-it("wedata.v20210820.TriggerEvent", async function () {
+it("wedata.v20210820.ReportTable", async function () {
     try {
-       const data = await client.TriggerEvent({})
+       const data = await client.ReportTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2298,6 +2358,16 @@ it("wedata.v20210820.SaveCustomFunction", async function () {
     }
 })
 
+it("wedata.v20210820.RemoveTable", async function () {
+    try {
+       const data = await client.RemoveTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyDataSource", async function () {
     try {
        const data = await client.ModifyDataSource({})
@@ -2561,6 +2631,16 @@ it("wedata.v20210820.DescribeWorkflowCanvasInfo", async function () {
 it("wedata.v20210820.DescribeDatabaseMetas", async function () {
     try {
        const data = await client.DescribeDatabaseMetas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RemoveSchema", async function () {
+    try {
+       const data = await client.RemoveSchema({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2838,9 +2918,9 @@ it("wedata.v20210820.DescribeTableLineageInfo", async function () {
     }
 })
 
-it("wedata.v20210820.SubmitCustomFunction", async function () {
+it("wedata.v20210820.ReportDatabase", async function () {
     try {
-       const data = await client.SubmitCustomFunction({})
+       const data = await client.ReportDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

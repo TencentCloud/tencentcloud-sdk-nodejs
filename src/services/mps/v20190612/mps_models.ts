@@ -1082,15 +1082,52 @@ export interface MediaSnapshotByTimeOffsetItem {
   /**
    * 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
    */
-  Definition: number
+  Definition?: number
   /**
    * 同一规格的截图信息集合，每个元素代表一张截图。
    */
-  PicInfoSet: Array<MediaSnapshotByTimePicInfoItem>
+  PicInfoSet?: Array<MediaSnapshotByTimePicInfoItem>
   /**
    * 指定时间点截图文件的存储位置。
    */
-  Storage: TaskOutputStorage
+  Storage?: TaskOutputStorage
+}
+
+/**
+ * 语音全文识别结果。
+ */
+export interface SmartSubtitleTaskAsrFullTextResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 语音全文识别任务输入信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: SmartSubtitleTaskResultInput
+  /**
+   * 语音全文识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: SmartSubtitleTaskAsrFullTextResultOutput
+  /**
+   * 任务进度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
 }
 
 /**
@@ -3157,7 +3194,7 @@ export interface AiRecognitionTaskOcrWordsResultInput {
   /**
    * 文本关键词识别模板 ID。
    */
-  Definition: number
+  Definition?: number
 }
 
 /**
@@ -3197,11 +3234,11 @@ HighVoice：爆音，
 NoVoice：静音，
 LowEvaluation：无参考打分低于阈值。
    */
-  Type: string
+  Type?: string
   /**
    * 质检结果项。
    */
-  QualityControlItems: Array<QualityControlItem>
+  QualityControlItems?: Array<QualityControlItem>
 }
 
 /**
@@ -3245,13 +3282,13 @@ export interface ScheduleTask {
   /**
    * 编排任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。
    */
@@ -3264,17 +3301,17 @@ export interface ScheduleTask {
    * 媒体处理的目标文件信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputInfo: MediaInputInfo
+  InputInfo?: MediaInputInfo
   /**
    * 原始视频的元信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
   /**
    * 编排任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ActivityResultSet: Array<ActivityResult>
+  ActivityResultSet?: Array<ActivityResult>
 }
 
 /**
@@ -4166,6 +4203,33 @@ export interface WatermarkTemplate {
 <li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
    */
   CoordinateOrigin?: string
+}
+
+/**
+ * 媒体质检任务结果类型
+ */
+export interface ScheduleExecRuleTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 条件判断任务的输入。
+   */
+  Input?: ExecRulesTask
+  /**
+   * 条件判断任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: ExecRuleTaskData
 }
 
 /**
@@ -5066,6 +5130,34 @@ export interface AiReviewTaskTerrorismOcrResult {
 }
 
 /**
+ * 任务判断条件
+ */
+export interface Rules {
+  /**
+   * 判断条件id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 判断条件配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Conditions?: Array<RuleConditionItem>
+  /**
+   * 条件列表的链接符号，取值如下：
+
+- &&：逻辑与
+- ||：逻辑或
+   */
+  Linker?: string
+  /**
+   * 满足判断条件执行节点索引；
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RearDriveIndexs?: Array<number | bigint>
+}
+
+/**
  * 文本关键识别结果。
  */
 export interface AiRecognitionTaskOcrWordsResult {
@@ -5498,6 +5590,7 @@ export interface MediaProcessTaskImageSpriteResult {
   Input?: ImageSpriteTaskInput
   /**
    * 对视频截雪碧图任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: MediaImageSpriteItem
   /**
@@ -6618,37 +6711,37 @@ export interface MediaProcessTaskResult {
 <li>CoverBySnapshot：截图做封面</li>
 <li>AdaptiveDynamicStreaming：自适应码流</li>
    */
-  Type: string
+  Type?: string
   /**
    * 视频转码任务的查询结果，当任务类型为 Transcode 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TranscodeTask: MediaProcessTaskTranscodeResult
+  TranscodeTask?: MediaProcessTaskTranscodeResult
   /**
    * 视频转动图任务的查询结果，当任务类型为 AnimatedGraphics 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult
+  AnimatedGraphicTask?: MediaProcessTaskAnimatedGraphicResult
   /**
    * 对视频按时间点截图任务的查询结果，当任务类型为 SnapshotByTimeOffset 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotByTimeOffsetTask: MediaProcessTaskSnapshotByTimeOffsetResult
+  SnapshotByTimeOffsetTask?: MediaProcessTaskSnapshotByTimeOffsetResult
   /**
    * 对视频采样截图任务的查询结果，当任务类型为 SampleSnapshot 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult
+  SampleSnapshotTask?: MediaProcessTaskSampleSnapshotResult
   /**
    * 对视频截雪碧图任务的查询结果，当任务类型为 ImageSprite 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageSpriteTask: MediaProcessTaskImageSpriteResult
+  ImageSpriteTask?: MediaProcessTaskImageSpriteResult
   /**
    * 转自适应码流任务查询结果，当任务类型为 AdaptiveDynamicStreaming 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult
+  AdaptiveDynamicStreamingTask?: MediaProcessTaskAdaptiveDynamicStreamingResult
 }
 
 /**
@@ -6701,6 +6794,16 @@ export interface UserDefineConfigureInfo {
    * 用户自定义文本审核控制参数。
    */
   OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo
+}
+
+/**
+ * 字幕位置信息
+ */
+export interface SubtitlePosition {
+  /**
+   * 居中位置时Y的坐标值
+   */
+  CenterY?: number
 }
 
 /**
@@ -6790,29 +6893,24 @@ export interface AiReviewPornOcrTaskInput {
 export interface LiveScheduleTask {
   /**
    * 直播编排任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
    * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrCode?: number
   /**
    * 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 直播流 URL。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
   /**
@@ -7395,6 +7493,10 @@ export interface ProcessMediaRequest {
    */
   AiQualityControlTask?: AiQualityControlTaskInput
   /**
+   * 智能字幕
+   */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput
+  /**
    * 任务的事件通知信息，不填代表不获取事件通知。
    */
   TaskNotifyConfig?: TaskNotifyConfig
@@ -7420,10 +7522,6 @@ export interface ProcessMediaRequest {
    * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
    */
   ResourceId?: string
-  /**
-   * 智能字幕
-   */
-  SmartSubtitlesTask?: SmartSubtitlesTaskInput
   /**
    * 是否跳过元信息获取，可选值： 
 0：表示不跳过 
@@ -7623,6 +7721,7 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
   Input?: SnapshotByTimeOffsetTaskInput
   /**
    * 对视频按指定时间点截图任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: MediaSnapshotByTimeOffsetItem
   /**
@@ -8979,6 +9078,11 @@ export interface ActivityPara {
    */
   QualityControlTask?: AiQualityControlTaskInput
   /**
+   * 任务条件判断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecRulesTask?: ExecRulesTask
+  /**
    * 智能字幕任务
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -9111,36 +9215,33 @@ export interface ScheduleAnalysisTaskResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 分析任务的输入。
    */
-  Input: AiAnalysisTaskInput
+  Input?: AiAnalysisTaskInput
   /**
    * 分析任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: Array<AiAnalysisResult>
+  Output?: Array<AiAnalysisResult>
   /**
    * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginProcessTime?: string
   /**
    * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
 }
@@ -10776,6 +10877,16 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
 }
 
 /**
+ * 条件判断输出
+ */
+export interface ExecRuleTaskData {
+  /**
+   * 质检条件判断需要执行的节点索引。
+   */
+  RearDriveIndex?: Array<number | bigint>
+}
+
+/**
  * ModifyStreamLinkOutputInfo返回参数结构体
  */
 export interface ModifyStreamLinkOutputInfoResponse {
@@ -11449,6 +11560,10 @@ export interface MediaAiAnalysisTagItem {
    * 标签的可信度，取值范围是 0 到 100。
    */
   Confidence?: number
+  /**
+   * 根据不同类型决定
+   */
+  SpecialInfo?: string
 }
 
 /**
@@ -11979,6 +12094,11 @@ export interface AiAnalysisTaskDelLogoOutput {
    * 基于画面提取的字幕翻译文件路径。
    */
   TranslateSubtitlePath?: string
+  /**
+   * 擦除的字幕位置。**注意**：仅对字幕提取且开启返回字幕位置时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitlePos?: SubtitlePosition
 }
 
 /**
@@ -12856,6 +12976,7 @@ export interface MediaProcessTaskSampleSnapshotResult {
   Input?: SampleSnapshotTaskInput
   /**
    * 对视频做采样截图任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: MediaSampleSnapshotItem
   /**
@@ -13678,6 +13799,7 @@ export interface Activity {
 <li>action-adaptive-substream：自适应码流</li>
 <li>action-AIQualityControl：媒体质检</li>
 <li>action-SmartSubtitles：智能字幕</li>
+<li>action-exec-rules：判断规则</li>
 
 
 
@@ -13897,6 +14019,20 @@ export interface LiveStreamRecordResultInfo {
 }
 
 /**
+ * 规则条件配置。
+ */
+export interface RuleConditionItem {
+  /**
+   * 质检项条件对应的Key。
+   */
+  Key?: string
+  /**
+   * 条件对应的Value。
+   */
+  Value?: string
+}
+
+/**
  * 视频编辑/合成任务 样式信息。
  */
 export interface ComposeStyles {
@@ -14071,6 +14207,10 @@ PureAudio：纯音频类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubtitleTemplate?: SubtitleTemplate
+  /**
+   * 转码参数扩展字段
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -14940,8 +15080,8 @@ export interface AiRecognitionTaskTransTextResultOutput {
  */
 export interface SmartSubtitlesResult {
   /**
-   * 任务的类型，取值范围：
-<li>AsrFullTextRecognition：语音全文识别，</li>
+   * 任务的类型，取值范围： 
+<li>AsrFullTextRecognition：语音全文识别，</li> 
 <li>TransTextRecognition：语音翻译。</li>
    */
   Type?: string
@@ -15334,6 +15474,14 @@ export interface DescribeTasksRequest {
    * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
    */
   ScrollToken?: string
+  /**
+   * 查询任务开始时间
+   */
+  StartTime?: string
+  /**
+   * 查询任务结束时间。
+   */
+  EndTime?: string
 }
 
 /**
@@ -15383,6 +15531,21 @@ export interface CreateTranscodeTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体质检检测策略。
+ */
+export interface QualityControlStrategy {
+  /**
+   * 策略类型。取值：
+- TimeSpotCheck
+   */
+  StrategyType?: string
+  /**
+   * 根据时间的抽检策略。
+   */
+  TimeSpotCheck?: TimeSpotCheck
 }
 
 /**
@@ -15727,6 +15890,32 @@ export interface ModifyImageSpriteTemplateRequest {
 }
 
 /**
+ * 媒体质检的检测策略。
+ */
+export interface TimeSpotCheck {
+  /**
+   * 抽检策略的每次循环检测的时长。取值范围（单位s）：
+
+- 最小值：10
+- 最大值：86400
+
+   */
+  CheckDuration?: number
+  /**
+   * 抽检测略的检测间隔，表示在一次检测结束后，等待多长时间后，再次检测。
+   */
+  CheckInterval?: number
+  /**
+   * 片头跳过时长。
+   */
+  SkipDuration?: number
+  /**
+   * 循环次数，该字段为空或 0 时，默认循环直至视频结束。
+   */
+  CirclesNumber?: number
+}
+
+/**
  * 内容审核 Ocr 文字鉴违禁任务输入参数类型
  */
 export interface AiReviewProhibitedOcrTaskInput {
@@ -16027,32 +16216,26 @@ export interface LiveStreamProcessTask {
 export interface QualityControlData {
   /**
    * 为true时表示视频无音频轨。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoAudio?: boolean
   /**
    * 为true时表示视频无视频轨。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoVideo?: boolean
   /**
    * 视频无参考质量评分，百分制。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEvaluationScore?: number
   /**
    * 视频无参考质量评分，MOS分数。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEvaluationMeanOpinionScore?: number
   /**
    * 内容质检检出异常项。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlResultSet?: Array<QualityControlResult>
   /**
-   * 格式诊断检出异常项
-注意：此字段可能返回 null，表示取不到有效值。
+   * 格式诊断检出异常项。
    */
   ContainerDiagnoseResultSet?: Array<ContainerDiagnoseResultItem>
 }
@@ -16345,7 +16528,6 @@ export interface LiveActivityResult {
    * 原子任务类型。
 <li>LiveRecord：直播录制。</li>
 <li>AiQualityControl：媒体质检。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivityType?: string
   /**
@@ -17530,40 +17712,14 @@ export interface FlowMediaVideo {
 }
 
 /**
- * 语音全文识别结果。
+ * 任务判断条件
  */
-export interface SmartSubtitleTaskAsrFullTextResult {
+export interface ExecRulesTask {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
-   */
-  Status?: string
-  /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 语音全文识别任务输入信息。
+   * 条件判断信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Input?: SmartSubtitleTaskResultInput
-  /**
-   * 语音全文识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: SmartSubtitleTaskAsrFullTextResultOutput
-  /**
-   * 任务进度。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Progress?: number
+  Rules?: Array<Rules>
 }
 
 /**
@@ -18121,6 +18277,11 @@ export interface ActivityResItem {
    */
   QualityControlTask?: ScheduleQualityControlTaskResult
   /**
+   * 条件判断任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecRuleTask?: ScheduleExecRuleTaskResult
+  /**
    * 智能字幕任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -18313,6 +18474,10 @@ export interface QualityControlTemplate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
+  /**
+   * 媒体质检的抽检策略。
+   */
+  Strategy?: QualityControlStrategy
 }
 
 /**
@@ -18366,6 +18531,26 @@ export interface SmartSubtitlesTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RawParameter?: RawSmartSubtitleParameter
+  /**
+   * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。 
+**注意**：当InputInfo.Type为URL时，该参数是必填项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 生成字幕文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+
+相对路径示例:
+- 文件名_{变量名}.{format}
+- 文件名.{format}
+
+绝对路径示例：
+- /自定义路径/文件名_{变量名}.{format}
+
+如果不填，则默认为相对路径: `{inputName}_smartsubtitle_{definition}.{format}`。
+   */
+  OutputObjectPath?: string
 }
 
 /**
@@ -18841,13 +19026,11 @@ export interface HighlightSegmentItem {
    */
   SegmentTags?: Array<string>
   /**
-   * 直播切片对应直播起始时间点，采用 ISO 日期格式。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 直播切片对应直播起始时间点，采用 ISO 日期格式。
    */
   BeginTime?: string
   /**
-   * 直播切片对应直播结束时间点，采用 ISO 日期格式。	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 直播切片对应直播结束时间点，采用 ISO 日期格式。
    */
   EndTime?: string
 }

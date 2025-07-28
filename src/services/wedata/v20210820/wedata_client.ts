@@ -38,7 +38,7 @@ import {
   ColumnBasicInfo,
   DescribeWorkflowInfoByIdRequest,
   CreateDataSourceRequest,
-  UserFileDTONew,
+  ReportSchemaResponse,
   IntegrationNodeSchemaMapping,
   DescribeTrendStatResponse,
   DescribeRealTimeTaskSpeedRequest,
@@ -46,6 +46,7 @@ import {
   BatchTaskOperateNew,
   DescribeRuleDimStatRequest,
   DescribeRuleTemplatesResponse,
+  ReportTableRequest,
   CreateAndDDLSupport,
   CreateIntegrationNodeResponse,
   TaskInnerInfo,
@@ -78,6 +79,7 @@ import {
   AddProjectUserRoleResponse,
   ModifyDimensionWeightResponse,
   BatchResumeIntegrationTasksResponse,
+  ReportColumnInfo,
   DescribeFieldBasicInfoResponse,
   ColumnItem,
   RuleGroupExecResult,
@@ -105,6 +107,7 @@ import {
   DescribeDataCheckStatRequest,
   TablePropertyScore,
   SubscribeWebHook,
+  RemoveSchemaResponse,
   DiagnoseProRequest,
   DescribeQualityScoreTrendResponse,
   TaskTypeMap,
@@ -147,6 +150,7 @@ import {
   UploadContentResponse,
   UploadResourceRequest,
   RuleExecLog,
+  ReportDatabaseResponse,
   AiOpsEventListenerDTO,
   DescribeRuleGroupsByPageRequest,
   DescribeTaskTemplatesResponse,
@@ -180,7 +184,7 @@ import {
   ProdSchedulerTask,
   DeleteCustomFunctionResponse,
   RulePage,
-  UpdateCodeTemplateResponse,
+  ReportSchemaRequest,
   DimensionScoreInfo,
   DescribeTaskScriptResponse,
   InstancePageVO,
@@ -207,8 +211,10 @@ import {
   InstanceLogByLine,
   StartTaskInfo,
   DescribeIntegrationStatisticsInstanceTrendResponse,
+  ReportDatabaseRequest,
   DescribeInstanceLogListRequest,
   WorkflowExtOpsDto,
+  ReportTableResponse,
   IntegrationNodeInfo,
   DescribeRuleGroupResponse,
   DeleteDataSourcesResponse,
@@ -265,6 +271,7 @@ import {
   RegisterDsEventResponse,
   WorkflowExtOpsDtoPage,
   DataSourceInfo,
+  RemoveTableResponse,
   AlarmDsVO,
   DescribeBaseBizCatalogsResponse,
   FindAllFolderResponse,
@@ -300,6 +307,7 @@ import {
   DescribeSuccessorOpsTaskInfosResponse,
   DeleteResourceResponse,
   ManualTriggerRecordOpsDto,
+  RemoveDatabaseResponse,
   ModifyRuleResponse,
   DescribeInstanceLogFileResponse,
   RecordsSpeed,
@@ -325,6 +333,7 @@ import {
   InstanceList,
   ProjectUsersPage,
   SqlExpressionTable,
+  UpdateCodeTemplateResponse,
   OrderFieldOptional,
   DryRunDIOfflineTaskRequest,
   CreateOfflineTaskRequest,
@@ -357,6 +366,7 @@ import {
   CreateTaskFolderRequest,
   EngineTaskInfo,
   TaskSimpleVo,
+  RemoveSchemaRequest,
   IntegrationNodeDetail,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
@@ -365,7 +375,8 @@ import {
   BatchCreateIntegrationTaskAlarmsRequest,
   QualityScore,
   LockIntegrationTaskResponse,
-  KillScheduleInstancesRequest,
+  IntegrationTag,
+  GetJobStatusResponse,
   SearchConditionNew,
   BatchStopOpsTasksRequest,
   DescribeFunctionTypesResponse,
@@ -656,6 +667,7 @@ import {
   RuleExecDateStat,
   DescribeTenantProjectsResponse,
   DescribeTaskAlarmRegulationsRequest,
+  KillScheduleInstancesRequest,
   UnboundProjectExecutorResourceResponse,
   OrderCondition,
   CreateCustomFunctionResponse,
@@ -667,6 +679,7 @@ import {
   DescribeTableMetaResponse,
   TableQualityDetail,
   DescribeOfflineTaskTokenRequest,
+  GetJobStatusRequest,
   DescribeRuleExecDetailRequest,
   DeleteResourceRequest,
   RenewWorkflowOwnerDsResponse,
@@ -793,6 +806,7 @@ import {
   DescribeRulesByPageResponse,
   Partition,
   AttributeItemDsVO,
+  DescribeTaskParamDsResponse,
   RuleDimCnt,
   BatchOperateResult,
   DutySchedule,
@@ -819,6 +833,7 @@ import {
   EventCaseAuditLogVOCollection,
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
+  RemoveDatabaseRequest,
   DatabaseSchemaIInfo,
   TaskOpsDto,
   DeleteLinkResponse,
@@ -898,6 +913,7 @@ import {
   DescribeTaskLockStatusRequest,
   DescribeRuleExecStatRequest,
   GetPaginationTaskScriptResponse,
+  UserFileDTONew,
   GetInstanceLogRequest,
   RuleConfig,
   LogContent,
@@ -911,10 +927,12 @@ import {
   DescribeTrendStatRequest,
   ExecutorUsageTrendInfo,
   DescribeOpsInstanceLogListResponse,
+  DescribeTaskParamDsRequest,
   DescribeApproveTypeListResponse,
   RuleGroupExecResultPage,
   DescribeRuleGroupSubscriptionRequest,
   OrganizationalFunction,
+  RemoveTableRequest,
   OrderField,
   BatchSuspendIntegrationTasksResponse,
   DeleteProjectUsersRequest,
@@ -1138,6 +1156,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: BatchKillIntegrationTaskInstancesResponse) => void
   ): Promise<BatchKillIntegrationTaskInstancesResponse> {
     return this.request("BatchKillIntegrationTaskInstances", req, cb)
+  }
+
+  /**
+   * 查询任务引用参数
+   */
+  async DescribeTaskParamDs(
+    req: DescribeTaskParamDsRequest,
+    cb?: (error: string, rep: DescribeTaskParamDsResponse) => void
+  ): Promise<DescribeTaskParamDsResponse> {
+    return this.request("DescribeTaskParamDs", req, cb)
   }
 
   /**
@@ -2414,6 +2442,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 移除database元数据
+   */
+  async RemoveDatabase(
+    req: RemoveDatabaseRequest,
+    cb?: (error: string, rep: RemoveDatabaseResponse) => void
+  ): Promise<RemoveDatabaseResponse> {
+    return this.request("RemoveDatabase", req, cb)
+  }
+
+  /**
    * 提交集成任务
    */
   async CommitIntegrationTask(
@@ -2461,6 +2499,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeDutyScheduleListResponse) => void
   ): Promise<DescribeDutyScheduleListResponse> {
     return this.request("DescribeDutyScheduleList", req, cb)
+  }
+
+  /**
+   * 上报schema元数据
+   */
+  async ReportSchema(
+    req: ReportSchemaRequest,
+    cb?: (error: string, rep: ReportSchemaResponse) => void
+  ): Promise<ReportSchemaResponse> {
+    return this.request("ReportSchema", req, cb)
   }
 
   /**
@@ -2571,6 +2619,17 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeTableQualityDetailsResponse) => void
   ): Promise<DescribeTableQualityDetailsResponse> {
     return this.request("DescribeTableQualityDetails", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+触发事件。本接口已废弃，请使用接口TriggerDsEvent。
+     */
+  async TriggerEvent(
+    req: TriggerEventRequest,
+    cb?: (error: string, rep: TriggerEventResponse) => void
+  ): Promise<TriggerEventResponse> {
+    return this.request("TriggerEvent", req, cb)
   }
 
   /**
@@ -2708,6 +2767,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 获取异步任务执行结果
+   */
+  async GetJobStatus(
+    req: GetJobStatusRequest,
+    cb?: (error: string, rep: GetJobStatusResponse) => void
+  ): Promise<GetJobStatusResponse> {
+    return this.request("GetJobStatus", req, cb)
+  }
+
+  /**
    * 删除文件
    */
   async DeleteFile(
@@ -2745,6 +2814,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeDsTaskVersionListResponse) => void
   ): Promise<DescribeDsTaskVersionListResponse> {
     return this.request("DescribeDsTaskVersionList", req, cb)
+  }
+
+  /**
+   * 提交自定义函数
+   */
+  async SubmitCustomFunction(
+    req: SubmitCustomFunctionRequest,
+    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
+  ): Promise<SubmitCustomFunctionResponse> {
+    return this.request("SubmitCustomFunction", req, cb)
   }
 
   /**
@@ -2898,14 +2977,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-触发事件。本接口已废弃，请使用接口TriggerDsEvent。
-     */
-  async TriggerEvent(
-    req: TriggerEventRequest,
-    cb?: (error: string, rep: TriggerEventResponse) => void
-  ): Promise<TriggerEventResponse> {
-    return this.request("TriggerEvent", req, cb)
+   * 上报table元数据
+   */
+  async ReportTable(
+    req: ReportTableRequest,
+    cb?: (error: string, rep: ReportTableResponse) => void
+  ): Promise<ReportTableResponse> {
+    return this.request("ReportTable", req, cb)
   }
 
   /**
@@ -3239,6 +3317,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 移除table元数据
+   */
+  async RemoveTable(
+    req: RemoveTableRequest,
+    cb?: (error: string, rep: RemoveTableResponse) => void
+  ): Promise<RemoveTableResponse> {
+    return this.request("RemoveTable", req, cb)
+  }
+
+  /**
    * 修改数据源
    */
   async ModifyDataSource(
@@ -3508,6 +3596,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeDatabaseMetasResponse) => void
   ): Promise<DescribeDatabaseMetasResponse> {
     return this.request("DescribeDatabaseMetas", req, cb)
+  }
+
+  /**
+   * 移除schema元数据
+   */
+  async RemoveSchema(
+    req: RemoveSchemaRequest,
+    cb?: (error: string, rep: RemoveSchemaResponse) => void
+  ): Promise<RemoveSchemaResponse> {
+    return this.request("RemoveSchema", req, cb)
   }
 
   /**
@@ -3783,13 +3881,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 提交自定义函数
+   * 上报database元数据
    */
-  async SubmitCustomFunction(
-    req: SubmitCustomFunctionRequest,
-    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
-  ): Promise<SubmitCustomFunctionResponse> {
-    return this.request("SubmitCustomFunction", req, cb)
+  async ReportDatabase(
+    req: ReportDatabaseRequest,
+    cb?: (error: string, rep: ReportDatabaseResponse) => void
+  ): Promise<ReportDatabaseResponse> {
+    return this.request("ReportDatabase", req, cb)
   }
 
   /**

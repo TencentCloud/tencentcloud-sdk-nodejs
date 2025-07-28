@@ -1078,6 +1078,10 @@ export interface UploadCertificateRequest {
    * 相同的证书是否允许重复上传； true：允许上传相同指纹的证书；  false：不允许上传相同指纹的证书； 默认值：true
    */
   Repeatable?: boolean
+  /**
+   * 私钥密码
+   */
+  KeyPassword?: string
 }
 
 /**

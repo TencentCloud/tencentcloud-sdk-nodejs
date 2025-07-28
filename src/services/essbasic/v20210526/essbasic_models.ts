@@ -3829,11 +3829,6 @@ export interface CreateConsoleLoginUrlRequest {
    */
   AuthorizationTypes?: Array<number | bigint>
   /**
-   * 暂未开放
-   * @deprecated
-   */
-  Operator?: UserInfo
-  /**
    * 子客经办人身份证
 注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型`。
    */
@@ -3883,6 +3878,18 @@ export interface CreateConsoleLoginUrlRequest {
    * 企业认证时个性化能力信息
    */
   OrganizationAuthorizationOptions?: OrganizationAuthorizationOptions
+  /**
+   * 组织机构对公打款 账号，账户名跟企业名称一致。
+
+p.s.
+只有认证方式是授权书+对公打款时才生效。
+   */
+  BankAccountNumber?: string
+  /**
+   * 无
+   * @deprecated
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -5743,7 +5750,7 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
 }
 
 /**
- * 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致等信息。
+ * 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致， 对公打款账号是否一致等信息。
 代表生成链接的时候指定的这些信息不能被用户修改。
 
 p.s. 注意这些选项一旦传递，相关的信息也不会被上传的营业执照里面包含的信息所覆盖。
@@ -5761,6 +5768,10 @@ export interface OrganizationAuthorizationOptions {
    * 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>p.s. 仅在法人姓名不为空时有效
    */
   LegalNameSame?: boolean
+  /**
+   * 对方打开链接认证时，对公打款账号是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>p.s. 仅在对公打款账号不为空时有效
+   */
+  BankAccountNumberSame?: boolean
 }
 
 /**

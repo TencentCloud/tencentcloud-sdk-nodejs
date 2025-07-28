@@ -61,6 +61,7 @@ import {
   UserDefineOcrTextReviewTemplateInfoForUpdate,
   ModifyOutputInfo,
   MediaSnapshotByTimeOffsetItem,
+  SmartSubtitleTaskAsrFullTextResult,
   NumberFormat,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
@@ -176,6 +177,7 @@ import {
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   WatermarkTemplate,
+  ScheduleExecRuleTaskResult,
   TextWatermarkTemplateInput,
   ModifyAIAnalysisTemplateResponse,
   DescribeWordSamplesResponse,
@@ -218,6 +220,7 @@ import {
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
+  Rules,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   ComposeVideoStream,
@@ -278,6 +281,7 @@ import {
   MediaProcessTaskResult,
   ModifyAIAnalysisTemplateRequest,
   UserDefineConfigureInfo,
+  SubtitlePosition,
   DeleteQualityControlTemplateRequest,
   ColorEnhanceConfig,
   DescribeOutputRTPSettings,
@@ -428,6 +432,7 @@ import {
   DeletePersonSampleResponse,
   StartStreamLinkFlowRequest,
   CreateSnapshotByTimeOffsetTemplateResponse,
+  ExecRuleTaskData,
   ModifyStreamLinkOutputInfoResponse,
   ModifyContentReviewTemplateRequest,
   StopStreamLinkFlowResponse,
@@ -556,6 +561,7 @@ import {
   DescribeStreamLinkEventAttachedFlowsResponse,
   ModifyTranscodeTemplateResponse,
   LiveStreamRecordResultInfo,
+  RuleConditionItem,
   ComposeStyles,
   ExpressionConfigInfo,
   CreateLiveRecordTemplateRequest,
@@ -612,6 +618,7 @@ import {
   DescribeTasksRequest,
   FaceConfigureInfoForUpdate,
   CreateTranscodeTemplateResponse,
+  QualityControlStrategy,
   AiRecognitionTaskAsrWordsResultInput,
   CreateAIAnalysisTemplateRequest,
   AiReviewTerrorismTaskInput,
@@ -622,6 +629,7 @@ import {
   ProcessLiveStreamRequest,
   AiAnalysisTaskHorizontalToVerticalOutput,
   ModifyImageSpriteTemplateRequest,
+  TimeSpotCheck,
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
   ComposeSubtitleItem,
@@ -685,7 +693,7 @@ import {
   CreateSampleSnapshotTemplateRequest,
   WorkflowTask,
   FlowMediaVideo,
-  SmartSubtitleTaskAsrFullTextResult,
+  ExecRulesTask,
   AiReviewTaskPornAsrResult,
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
@@ -942,11 +950,11 @@ export class Client extends AbstractClient {
 4. 对视频采样截图；
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
-7. 智能内容审核（鉴黄、敏感信息检测）；
-8. 智能内容分析（标签、分类、封面、按帧标签、拆条、集锦、片头片尾、游戏打点）；
-9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）。
-10. 媒体质检（直播流格式诊断、音画内容检测（抖动、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等）、无参考打分）
-11. 智能字幕（语音全文、语音热词、语音翻译）
+7. 智能内容审核（例如鉴黄、敏感信息检测）；
+8. 智能内容分析（例如标签、分类、封面、按帧标签、拆条、集锦、片头片尾、游戏打点）；
+9. 智能内容识别（例如人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）；
+10. 媒体质检（例如媒体格式诊断、音画内容检测（抖动、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等）、无参考打分）；
+11. 智能字幕（例如语音全文、语音热词、语音翻译）；
      */
   async ProcessMedia(
     req: ProcessMediaRequest,

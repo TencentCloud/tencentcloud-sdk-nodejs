@@ -11033,7 +11033,6 @@ export interface DescribeProvinceIspPlayInfoListRequest {
 “FluxPerSecond”：平均流量
 “Flux”：流量
 “Request”：请求数
-“Online”：并发连接数
    */
   StatType: string
   /**

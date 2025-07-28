@@ -507,7 +507,7 @@ export interface DescribeAvailableRecoveryTimeResponse {
  */
 export interface CreateBaseBackupRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -1018,7 +1018,7 @@ export interface UpgradeDBInstanceMajorVersionResponse {
  */
 export interface ModifyBackupDownloadRestrictionRequest {
   /**
-   * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。
+   * 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。当该参数取值为CUSTOMIZE时，Vpc限制和Ip限制需要至少填写一项。
    */
   RestrictionType: string
   /**
@@ -2175,9 +2175,9 @@ export interface DescribeLogBackupsRequest {
   /**
    * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
 db-instance-id：按照实例ID过滤，类型为string。
-db-instance-name：按照实例名过滤，类型为string。
+db-instance-name：按照实例名过滤，支持模糊匹配，类型为string。
 db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
-db-instance-status：按实例状态过滤，类型为string。取值参考DBInstance结构的DBInstanceStatus字段。
+db-instance-status：按实例状态过滤，类型为string。取值参考[DBInstance](https://cloud.tencent.com/document/api/409/16778#DBInstance)结构的DBInstanceStatus字段。
    */
   Filters?: Array<Filter>
   /**
@@ -2189,11 +2189,11 @@ db-instance-status：按实例状态过滤，类型为string。取值参考DBIns
    */
   Offset?: number
   /**
-   * 排序字段，支持StartTime,FinishTime,Size。
+   * 排序字段，支持StartTime,FinishTime,Size。默认值：StartTime
    */
   OrderBy?: string
   /**
-   * 排序方式，包括升序：asc，降序：desc。
+   * 排序方式，包括升序：asc，降序：desc。默认值：desc。
    */
   OrderByType?: string
 }
@@ -2273,7 +2273,7 @@ export interface NetworkAccess {
  */
 export interface CreateBackupPlanRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -2297,7 +2297,8 @@ export interface CreateBackupPlanRequest {
    */
   MaxBackupStartTime?: string
   /**
-   * 数据备份保留时长，week默认是7,month为30。
+   * 数据备份保留时长，单位：天。取值范围为：[0,30000)
+BackupPeriodType为week时默认是7,为month时默认为31。
    */
   BaseBackupRetentionPeriod?: number
 }
@@ -2743,11 +2744,11 @@ export interface ServerlessDBAccount {
  */
 export interface DeleteBackupPlanRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 备份计划的ID。
+   * 备份计划的ID。可通过[DescribeBackupPlans](https://cloud.tencent.com/document/api/409/68069)接口获取
    */
   PlanId: string
 }
@@ -3888,7 +3889,7 @@ export interface DescribeBackupOverviewResponse {
  */
 export interface DescribeParameterTemplatesRequest {
   /**
-   * 过滤条件，目前支持的过滤条件有：TemplateName, TemplateId，DBMajorVersion，DBEngine
+   * 过滤条件，目前支持的过滤条件有：TemplateName, TemplateId，DBMajorVersion，DBEngine。TemplateName不支持模糊匹配。
    */
   Filters?: Array<Filter>
   /**
@@ -3900,11 +3901,11 @@ export interface DescribeParameterTemplatesRequest {
    */
   Offset?: number
   /**
-   * 排序指标，枚举值，支持：CreateTime，TemplateName，DBMajorVersion
+   * 排序指标，枚举值，支持：CreateTime，TemplateName，DBMajorVersion。如果不指定该参数，默认将按照参数模板的编号倒序排列，也就是说最新添加的参数模板会排在最前面。
    */
   OrderBy?: string
   /**
-   * 排序方式，枚举值，支持：asc（升序） ，desc（降序）
+   * 排序方式，枚举值，支持：asc（升序） ，desc（降序）。默认值为asc。当未指定OrderBy时，该参数失效，此时排序方式为OrderBy参数描述中给出的默认排序方式。
    */
   OrderByType?: string
 }
@@ -4176,11 +4177,11 @@ export interface DeleteParameterTemplateResponse {
  */
 export interface ModifyReadOnlyDBInstanceWeightRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 只读组ID
+   * 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
   ReadOnlyGroupId: string
   /**
@@ -4358,7 +4359,7 @@ export interface DescribeBaseBackupsResponse {
  */
 export interface ModifyParameterTemplateRequest {
   /**
-   * 参数模板ID，用于唯一确认参数模板，不可修改
+   * 参数模板ID，用于唯一确认参数模板，不可修改。可通过[DescribeParameterTemplates](https://cloud.tencent.com/document/api/409/84067)接口获取
    */
   TemplateId: string
   /**
@@ -4865,7 +4866,7 @@ export interface LogBackup {
  */
 export interface RebalanceReadOnlyGroupRequest {
   /**
-   * 只读组ID
+   * 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
   ReadOnlyGroupId: string
 }
@@ -5069,7 +5070,7 @@ export interface ModifyAccountRemarkRequest {
  */
 export interface DescribeParameterTemplateAttributesRequest {
   /**
-   * 参数模板ID
+   * 参数模板ID。可通过[DescribeParameterTemplates](https://tapd.woa.com/tapd_fe/20400322/story/detail/1020400322125673714)接口获取
    */
   TemplateId: string
 }
@@ -5097,7 +5098,7 @@ export interface DescribeDBErrlogsResponse {
  */
 export interface ModifyBackupPlanRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5113,7 +5114,7 @@ export interface ModifyBackupPlanRequest {
    */
   BaseBackupRetentionPeriod?: number
   /**
-   * 实例备份周期，若是星期维度，格式为小写星期英文单词；若是按月维度，格式为数字字符，如["1","2"]。
+   * 实例备份周期，若是星期维度，格式为小写星期英文单词，且至少设置两天备份；若是按月维度，格式为数字字符，如["1","2"]。
    */
   BackupPeriod?: Array<string>
   /**
@@ -5135,11 +5136,11 @@ export interface ModifyBackupPlanRequest {
  */
 export interface DeleteBaseBackupRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 数据备份ID。
+   * 数据备份ID。可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取。7天内自动备份集不允许删除。
    */
   BaseBackupId: string
 }
@@ -5199,7 +5200,7 @@ export interface CreateParameterTemplateRequest {
    */
   TemplateName: string
   /**
-   * 数据库大版本号，例如：11，12，13
+   * 数据库大版本号，例如：11，12，13。可通过[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)接口获取
    */
   DBMajorVersion: string
   /**
@@ -5299,11 +5300,11 @@ export interface DescribeSlowQueryListRequest {
  */
 export interface DescribeCloneDBInstanceSpecRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 基础备份集ID，此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
+   * 基础备份集ID，可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取。此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
    */
   BackupSetId?: string
   /**
@@ -5448,7 +5449,7 @@ export interface DescribeDBInstanceSecurityGroupsRequest {
  */
 export interface DescribeBackupPlansRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -5458,11 +5459,11 @@ export interface DescribeBackupPlansRequest {
  */
 export interface ModifyBaseBackupExpireTimeRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 数据备份ID。
+   * 数据备份ID。可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取
    */
   BaseBackupId: string
   /**
@@ -5678,7 +5679,7 @@ export interface DescribeReadOnlyGroupsResponse {
  */
 export interface RestoreDBInstanceObjectsRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5686,7 +5687,7 @@ export interface RestoreDBInstanceObjectsRequest {
    */
   RestoreObjects: Array<string>
   /**
-   * 恢复所用备份集。BackupSetId与RestoreTargetTime有且只能传一个。
+   * 恢复所用备份集。BackupSetId与RestoreTargetTime有且只能传一个。可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取
    */
   BackupSetId?: string
   /**
@@ -5803,7 +5804,7 @@ export interface ModifyDBInstancesProjectRequest {
    */
   DBInstanceIdSet: Array<string>
   /**
-   * 所属新项目的ID。可通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725)获取
+   * 所属新项目的ID。可通过[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)获取
    */
   ProjectId: string
 }
@@ -5875,11 +5876,11 @@ export interface DescribeDBInstanceAttributeResponse {
  */
 export interface DeleteLogBackupRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 日志备份ID。
+   * 日志备份ID。可通过[DescribeLogBackups](https://cloud.tencent.com/document/api/409/89021)接口获取。注：7天内自动备份集不允许删除。
    */
   LogBackupId: string
 }
@@ -5943,7 +5944,7 @@ export interface ModifyDBInstanceSpecResponse {
  */
 export interface DescribeBackupDownloadURLRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -5955,7 +5956,7 @@ export interface DescribeBackupDownloadURLRequest {
    */
   BackupId: string
   /**
-   * 链接的有效时间，默认为12小时。
+   * 链接的有效时间，取值为[0,36]，默认为12小时。
    */
   URLExpireTime?: number
   /**
@@ -6011,10 +6012,10 @@ export interface DescribeBaseBackupsRequest {
   /**
    * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
 db-instance-id：按照实例ID过滤，类型为string。
-db-instance-name：按照实例名过滤，类型为string。
+db-instance-name：按照实例名过滤，支持模糊匹配，类型为string。
 db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
 base-backup-id：按照备份集ID过滤，类型为string。
-db-instance-status：按实例状态过滤，类型为string。取值参考DBInstance结构的DBInstanceStatus字段。
+db-instance-status：按实例状态过滤，类型为string。取值参考[DBInstance](https://cloud.tencent.com/document/api/409/16778#DBInstance)结构的DBInstanceStatus字段。
    */
   Filters?: Array<Filter>
   /**
@@ -6026,11 +6027,11 @@ db-instance-status：按实例状态过滤，类型为string。取值参考DBIns
    */
   Offset?: number
   /**
-   * 排序字段，支持StartTime,FinishTime,Size。
+   * 排序字段，支持StartTime,FinishTime,Size。默认值：StartTime。
    */
   OrderBy?: string
   /**
-   * 排序方式，包括升序：asc，降序：desc。
+   * 排序方式，包括升序：asc，降序：desc。默认值：desc。
    */
   OrderByType?: string
 }
