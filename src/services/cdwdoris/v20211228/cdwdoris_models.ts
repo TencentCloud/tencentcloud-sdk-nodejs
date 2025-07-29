@@ -3044,6 +3044,10 @@ export interface UserInfo {
    * ranger group id列表
    */
   CamRangerGroupIds?: Array<number | bigint>
+  /**
+   * 0: 灵活场景 1: 固定场景
+   */
+  ComputeGroupType?: number
 }
 
 /**

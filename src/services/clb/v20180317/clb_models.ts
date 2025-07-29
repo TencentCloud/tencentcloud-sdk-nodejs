@@ -384,6 +384,10 @@ OPEN：公网属性， INTERNAL：内网属性。
    * 七层访问日志主题ID
    */
   AccessLogTopicId?: string
+  /**
+   * 是否开启七层高级路由
+   */
+  AdvancedRoute?: boolean
 }
 
 /**
@@ -1366,6 +1370,10 @@ export interface RuleHealth {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
+  /**
+   * 高级路由规则ID
+   */
+  RuleId?: string
   /**
    * 本规则上绑定的后端服务的健康检查状态
    */
@@ -6099,6 +6107,10 @@ export interface AssociationItem {
    * 关联目标组的权重， 该参数只有v2新版目标组生效。
    */
   Weight?: number
+  /**
+   * 高级路由规则ID
+   */
+  RuleId?: string
 }
 
 /**

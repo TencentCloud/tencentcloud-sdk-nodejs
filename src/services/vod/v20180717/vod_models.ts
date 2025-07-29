@@ -12417,6 +12417,29 @@ export interface SegmentConfigureInfo {
 }
 
 /**
+ * ProcessMediaByMPS请求参数结构体
+ */
+export interface ProcessMediaByMPSRequest {
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   */
+  FileId: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。
+视频处理参数详情请参考：[MPS 发起媒体处理](https://cloud.tencent.com/document/api/862/37578)。
+填写说明：
+1. 目前仅需要配置 MPS “发起媒体处理”接口中的 AiAnalysisTask 参数，其他参数无需填写，若包含其它参数，系统将自动忽略；
+2. 当前仅支持通过此方式发起智能擦除任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数。
+
+   */
+  MPSProcessMediaParams: string
+}
+
+/**
  * 去划痕控制信息
  */
 export interface ScratchRepairInfo {
@@ -12508,21 +12531,17 @@ export interface RefererAuthPolicy {
 }
 
 /**
- * 任务统计数据，包括任务数和用量。
+ * ProcessMediaByMPS返回参数结构体
  */
-export interface TaskStatDataItem {
+export interface ProcessMediaByMPSResponse {
   /**
-   * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+   * 任务 ID。
    */
-  Time?: string
+  TaskId?: string
   /**
-   * 任务数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Count?: number
-  /**
-   * 任务用量。
-   */
-  Usage?: number
+  RequestId?: string
 }
 
 /**
@@ -13177,6 +13196,24 @@ export interface JustInTimeTranscodeTemplate {
    * 水印参数配置。
    */
   WatermarkConfigure?: WatermarkConfigureData
+}
+
+/**
+ * 任务统计数据，包括任务数和用量。
+ */
+export interface TaskStatDataItem {
+  /**
+   * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+   */
+  Time?: string
+  /**
+   * 任务数。
+   */
+  Count?: number
+  /**
+   * 任务用量。
+   */
+  Usage?: number
 }
 
 /**

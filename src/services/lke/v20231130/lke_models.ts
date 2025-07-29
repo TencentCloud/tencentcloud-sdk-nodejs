@@ -3658,11 +3658,11 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    */
   ReferUrlType?: number
   /**
-   * 有效开始时间，unix时间戳
+   * 有效开始时间，unix秒级时间戳
    */
   ExpireStart?: string
   /**
-   * 有效结束时间，unix时间戳，0代表永久有效
+   * 有效结束时间，unix秒级时间戳，0代表永久有效
    */
   ExpireEnd?: string
   /**

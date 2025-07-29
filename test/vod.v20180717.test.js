@@ -988,6 +988,16 @@ it("vod.v20180717.DescribeImageReviewUsageData", async function () {
     }
 })
 
+it("vod.v20180717.ProcessMediaByMPS", async function () {
+    try {
+       const data = await client.ProcessMediaByMPS({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyVodDomainConfig", async function () {
     try {
        const data = await client.ModifyVodDomainConfig({})

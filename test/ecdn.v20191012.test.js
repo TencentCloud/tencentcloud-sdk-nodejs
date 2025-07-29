@@ -28,16 +28,6 @@ it("ecdn.v20191012.DescribeIpStatus", async function () {
     }
 })
 
-it("ecdn.v20191012.DescribePurgeTasks", async function () {
-    try {
-       const data = await client.DescribePurgeTasks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ecdn.v20191012.DescribeEcdnDomainLogs", async function () {
     try {
        const data = await client.DescribeEcdnDomainLogs({})
@@ -51,16 +41,6 @@ it("ecdn.v20191012.DescribeEcdnDomainLogs", async function () {
 it("ecdn.v20191012.DescribeDomainsConfig", async function () {
     try {
        const data = await client.DescribeDomainsConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecdn.v20191012.PurgeUrlsCache", async function () {
-    try {
-       const data = await client.PurgeUrlsCache({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -125,16 +125,6 @@ twoWay - 双向校验
 }
 
 /**
- * PurgeUrlsCache请求参数结构体
- */
-export interface PurgeUrlsCacheRequest {
-  /**
-   * 要刷新的Url列表，必须包含协议头部。
-   */
-  Urls: Array<string>
-}
-
-/**
  * 查询对象及其对应的访问明细数据
  */
 export interface ResourceData {
@@ -321,55 +311,32 @@ export interface IpFreqLimit {
 }
 
 /**
- * DescribePurgeTasks请求参数结构体
+ * 域名查询时过滤条件。
  */
-export interface DescribePurgeTasksRequest {
+export interface DomainFilter {
   /**
-   * 查询刷新类型。url：查询 url 刷新记录；path：查询目录刷新记录。
+   * 过滤字段名，支持的列表如下：
+- origin：主源站。
+- domain：域名。
+- resourceId：域名id。
+- status：域名状态，online，offline，processing。
+- disable：域名封禁状态，normal，unlicensed。
+- projectId：项目ID。
+- fullUrlCache：全路径缓存，on或off。
+- https：是否配置https，on，off或processing。
+- originPullProtocol：回源协议类型，支持http，follow或https。
+- area：加速区域，支持mainland，overseas或global。
+- tagKey：标签键。
    */
-  PurgeType?: string
+  Name: string
   /**
-   * 开始时间，如2018-08-08 00:00:00。
+   * 过滤字段值。
    */
-  StartTime?: string
+  Value: Array<string>
   /**
-   * 结束时间，如2018-08-08 23:59:59。
+   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
    */
-  EndTime?: string
-  /**
-   * 提交时返回的任务 Id，查询时 TaskId 和起始时间必须指定一项。
-   */
-  TaskId?: string
-  /**
-   * 分页查询偏移量，默认为0（从第0条开始）。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目，默认为20。
-   */
-  Limit?: number
-  /**
-   * 查询关键字，请输入域名或 http(s):// 开头完整 URL。
-   */
-  Keyword?: string
-  /**
-   * 查询指定任务状态，fail表示失败，done表示成功，process表示刷新中。
-   */
-  Status?: string
-}
-
-/**
- * DescribeEcdnStatistics返回参数结构体
- */
-export interface DescribeEcdnStatisticsResponse {
-  /**
-   * 指定条件查询得到的数据明细
-   */
-  Data: Array<ResourceData>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Fuzzy?: boolean
 }
 
 /**
@@ -630,20 +597,6 @@ export interface WebSocket {
 }
 
 /**
- * PurgeUrlsCache返回参数结构体
- */
-export interface PurgeUrlsCacheResponse {
-  /**
-   * 刷新任务Id。
-   */
-  TaskId: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * IP黑白名单。
  */
 export interface IpFilter {
@@ -697,17 +650,13 @@ export interface DescribeDomainsResponse {
 }
 
 /**
- * DescribePurgeTasks返回参数结构体
+ * DescribeEcdnStatistics返回参数结构体
  */
-export interface DescribePurgeTasksResponse {
+export interface DescribeEcdnStatisticsResponse {
   /**
-   * 刷新历史记录。
+   * 指定条件查询得到的数据明细
    */
-  PurgeLogs: Array<PurgeTask>
-  /**
-   * 任务总数，用于分页。
-   */
-  TotalCount: number
+  Data: Array<ResourceData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -742,36 +691,6 @@ offline：下线状态
   Status: string
   /**
    * 节点 IP 添加时间
-   */
-  CreateTime: string
-}
-
-/**
- * 刷新任务日志详情
- */
-export interface PurgeTask {
-  /**
-   * 刷新任务ID。
-   */
-  TaskId: string
-  /**
-   * 刷新Url。
-   */
-  Url: string
-  /**
-   * 刷新任务状态，fail表示失败，done表示成功，process表示刷新中。
-   */
-  Status: string
-  /**
-   * 刷新类型，url表示url刷新，path表示目录刷新。
-   */
-  PurgeType: string
-  /**
-   * 刷新资源方式，flush代表刷新更新资源，delete代表刷新全部资源。
-   */
-  FlushType: string
-  /**
-   * 刷新任务提交时间
    */
   CreateTime: string
 }
@@ -903,35 +822,6 @@ export interface CacheKey {
    * 是否开启全路径缓存，on或off。
    */
   FullUrlCache?: string
-}
-
-/**
- * 域名查询时过滤条件。
- */
-export interface DomainFilter {
-  /**
-   * 过滤字段名，支持的列表如下：
-- origin：主源站。
-- domain：域名。
-- resourceId：域名id。
-- status：域名状态，online，offline，processing。
-- disable：域名封禁状态，normal，unlicensed。
-- projectId：项目ID。
-- fullUrlCache：全路径缓存，on或off。
-- https：是否配置https，on，off或processing。
-- originPullProtocol：回源协议类型，支持http，follow或https。
-- area：加速区域，支持mainland，overseas或global。
-- tagKey：标签键。
-   */
-  Name: string
-  /**
-   * 过滤字段值。
-   */
-  Value: Array<string>
-  /**
-   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
-   */
-  Fuzzy?: boolean
 }
 
 /**

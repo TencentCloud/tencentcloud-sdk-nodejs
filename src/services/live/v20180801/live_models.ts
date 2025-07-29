@@ -7612,8 +7612,7 @@ export interface CreateLiveTimeShiftTemplateRequest {
    */
   TemplateName: string
   /**
-   * 时移时长。
-单位：s。
+   * 时移时长。单位：s。取值范围：86400 259200 604800 1296000 2592000。
    */
   Duration: number
   /**

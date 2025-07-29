@@ -8945,6 +8945,10 @@ export interface CreateInput {
    * 输入节点的地区
    */
   InputRegion?: string
+  /**
+   * 冷热备相关
+   */
+  FailOverOption?: FailOverOption
 }
 
 /**
@@ -9953,6 +9957,10 @@ export interface CreateQualityControlTemplateRequest {
 <li>PNG: PNG图片</li>
    */
   RecordFormat?: string
+  /**
+   * 媒体质检抽检策略。
+   */
+  Strategy?: QualityControlStrategy
 }
 
 /**
@@ -12294,7 +12302,6 @@ export interface DescribeQualityControlTemplatesResponse {
   TotalCount?: number
   /**
    * 媒体质检模板详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlTemplateSet?: Array<QualityControlTemplate>
   /**
@@ -14238,6 +14245,10 @@ export interface ModifyQualityControlTemplateRequest {
 <li>PNG: PNG图片</li>
    */
   RecordFormat?: string
+  /**
+   * 媒体质检抽检策略。
+   */
+  Strategy?: QualityControlStrategy
 }
 
 /**
@@ -15816,77 +15827,14 @@ export interface AiAnalysisTaskHorizontalToVerticalOutput {
 }
 
 /**
- * ModifyImageSpriteTemplate请求参数结构体
+ * type FailOverOption struct 
+{ FailOverType string json:"FailOverType" // 新增 冷/热备 COLDSTANDBY、HOTSTANDBY }
  */
-export interface ModifyImageSpriteTemplateRequest {
+export interface FailOverOption {
   /**
-   * 雪碧图模板唯一标识。
+   * 热备
    */
-  Definition: number
-  /**
-   * 雪碧图模板名称，长度限制：64 个字符。
-   */
-  Name?: string
-  /**
-   * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Width?: number
-  /**
-   * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Height?: number
-  /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-   */
-  ResolutionAdaptive?: string
-  /**
-   * 采样类型，取值：
-<li>Percent：按百分比。</li>
-<li>Time：按时间间隔。</li>
-   */
-  SampleType?: string
-  /**
-   * 采样间隔。
-<li>当 SampleType 为 Percent 时，指定采样间隔的百分比。</li>
-<li>当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。</li>
-   */
-  SampleInterval?: number
-  /**
-   * 雪碧图中小图的行数。
-   */
-  RowCount?: number
-  /**
-   * 雪碧图中小图的列数。
-   */
-  ColumnCount?: number
-  /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：black 。
-   */
-  FillType?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 图片格式，取值可以为 jpg、png、webp。
-   */
-  Format?: string
+  FailOverType?: string
 }
 
 /**
@@ -17338,6 +17286,10 @@ export interface ModifyInput {
    * 输入节点的地区
    */
   InputRegion?: string
+  /**
+   * 冷热备相关
+   */
+  FailOverOption?: FailOverOption
 }
 
 /**
@@ -19069,6 +19021,80 @@ export interface DescribeOutputRTSPPullServerUrl {
    * RTSP拉流地址的Url。
    */
   Url: string
+}
+
+/**
+ * ModifyImageSpriteTemplate请求参数结构体
+ */
+export interface ModifyImageSpriteTemplateRequest {
+  /**
+   * 雪碧图模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 雪碧图模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Width?: number
+  /**
+   * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Height?: number
+  /**
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+   */
+  ResolutionAdaptive?: string
+  /**
+   * 采样类型，取值：
+<li>Percent：按百分比。</li>
+<li>Time：按时间间隔。</li>
+   */
+  SampleType?: string
+  /**
+   * 采样间隔。
+<li>当 SampleType 为 Percent 时，指定采样间隔的百分比。</li>
+<li>当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。</li>
+   */
+  SampleInterval?: number
+  /**
+   * 雪碧图中小图的行数。
+   */
+  RowCount?: number
+  /**
+   * 雪碧图中小图的列数。
+   */
+  ColumnCount?: number
+  /**
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+   */
+  FillType?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 图片格式，取值可以为 jpg、png、webp。
+   */
+  Format?: string
 }
 
 /**

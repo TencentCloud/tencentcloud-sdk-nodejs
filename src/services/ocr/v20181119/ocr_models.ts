@@ -4135,6 +4135,10 @@ export interface RecognizeThaiIDCardOCRResponse {
    */
   AdvancedInfo?: string
   /**
+   * 卡证正面图片中，证件主体的数量（仅请求曼谷地域[ap-bangkok]返回）
+   */
+  CardCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5637,6 +5641,10 @@ export interface TaxPayment {
 示例值：纳税人识别号
    */
   Content?: Array<OtherInvoiceItem>
+  /**
+   * 表格。
+   */
+  TableItems?: Array<OtherInvoiceList>
 }
 
 /**
@@ -9065,6 +9073,10 @@ export interface MLIDPassportOCRResponse {
 -9109 告警能力未开通
    */
   WarnCardInfos?: Array<number | bigint>
+  /**
+   * 输入图片中的卡证数量（仅请求曼谷地域[ap-bangkok]返回）
+   */
+  CardCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
