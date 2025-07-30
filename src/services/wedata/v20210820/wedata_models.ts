@@ -21716,6 +21716,10 @@ export interface DescribeExecutorGroupMetricRequest {
  */
 export interface DescribeProjectUsersRequest {
   /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
    * 分页号
    */
   PageNumber: number
