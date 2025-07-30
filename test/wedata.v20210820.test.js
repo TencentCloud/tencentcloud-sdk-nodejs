@@ -2038,6 +2038,16 @@ it("wedata.v20210820.DescribeExecStrategy", async function () {
     }
 })
 
+it("wedata.v20210820.FreezeTasksByWorkflowIds", async function () {
+    try {
+       const data = await client.FreezeTasksByWorkflowIds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeTableLineage", async function () {
     try {
        const data = await client.DescribeTableLineage({})
@@ -2308,9 +2318,9 @@ it("wedata.v20210820.DeleteTaskLineage", async function () {
     }
 })
 
-it("wedata.v20210820.FreezeTasksByWorkflowIds", async function () {
+it("wedata.v20210820.DescribeSuccessorTaskInfoList", async function () {
     try {
-       const data = await client.FreezeTasksByWorkflowIds({})
+       const data = await client.DescribeSuccessorTaskInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -39,6 +39,10 @@ export interface DescribeFakeWechatOfficialsResponse {
  */
 export interface DescribeManagesRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否聚合数据
    */
   IsAggregation?: boolean
@@ -96,6 +100,10 @@ export interface DescribeManagesRequest {
  * DescribeFakeApps请求参数结构体
  */
 export interface DescribeFakeAppsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */
@@ -183,6 +191,10 @@ export interface DisplayLeakageCode {
  */
 export interface DescribeAppsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 子公司ID列表
    */
   EnterpriseUidList?: Array<string>
@@ -236,6 +248,10 @@ export interface DescribeAppsRequest {
  * DescribeSensitiveInfos请求参数结构体
  */
 export interface DescribeSensitiveInfosRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否聚合数据
    */
@@ -373,17 +389,21 @@ export interface DescribeCustomersRequest {
  */
 export interface ModifyLabelRequest {
   /**
-   * 资产或风险主键ID
-   */
-  Id: number
-  /**
-   * 企业ID，在企业管理页面查看
-   */
-  CustomerId: number
-  /**
    * 模块，包括：enterprise：企业架构，domain：主域名，sub_domain：子域名，asset：IP资产，port：端口服务，http：HTTP资产，vul：漏洞信息，app：APP，wechat_applet：微信小程序，wechat_official_account：微信公众号，github：Github信息泄露，manage：管理后台暴露，config：目录爆破，dark_web：暗网泄露，net_disk：文库网盘泄露，supply_chain：供应链，weak_password：弱口令，sensitive_info：敏感信息泄露
    */
   Module: string
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 资产或风险主键ID
+   */
+  Id?: number
+  /**
+   * 企业ID，在企业管理页面查看
+   */
+  CustomerId?: number
   /**
    * 是否聚合数据
    */
@@ -392,6 +412,10 @@ export interface ModifyLabelRequest {
    * 标签详情
    */
   Labels?: string
+  /**
+   * 资产或风险主键ID列表
+   */
+  Ids?: Array<number | bigint>
 }
 
 /**
@@ -702,6 +726,10 @@ export interface DisplayLeakageEmail {
  */
 export interface DescribeFakeWebsitesRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否新增数据
    */
   IsNew?: boolean
@@ -845,6 +873,10 @@ export interface DisplayJobRecordDetail {
  */
 export interface DescribeAssetsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否新增数据
    */
   IsNew?: boolean
@@ -916,6 +948,10 @@ export interface DescribeJobRecordDetailsRequest {
  * DescribeSubDomains请求参数结构体
  */
 export interface DescribeSubDomainsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */
@@ -1210,6 +1246,10 @@ export interface ModifyLabelResponse {
  */
 export interface DescribeEnterprisesRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否新增数据
    */
   IsNew?: boolean
@@ -1267,6 +1307,10 @@ export interface DescribeEnterprisesRequest {
  * DescribeLeakageCodes请求参数结构体
  */
 export interface DescribeLeakageCodesRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否聚合数据
    */
@@ -1473,6 +1517,10 @@ export interface DisplayHttp {
  */
 export interface DescribePortsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否聚合数据
    */
   IsAggregation?: boolean
@@ -1637,6 +1685,10 @@ export interface DescribeWechatOfficialAccountsResponse {
  */
 export interface DescribeWechatOfficialAccountsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否新增数据
    */
   IsNew?: boolean
@@ -1729,6 +1781,10 @@ export interface DisplayFakeApp {
  */
 export interface DescribeDarkWebsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否新增数据
    */
   IsNew?: boolean
@@ -1782,6 +1838,10 @@ export interface DescribeDarkWebsRequest {
  * DescribeHttps请求参数结构体
  */
 export interface DescribeHttpsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否聚合数据
    */
@@ -1866,6 +1926,10 @@ export interface DescribeEnterprisesResponse {
  * DescribeNetDisks请求参数结构体
  */
 export interface DescribeNetDisksRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */
@@ -2117,6 +2181,10 @@ export interface DisplaySubDomain {
  */
 export interface DescribeSuspiciousAssetsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否聚合数据
    */
   IsAggregation?: boolean
@@ -2247,6 +2315,10 @@ export interface DisplayVul {
  */
 export interface DescribeWechatAppletsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 企业ID
    */
   CustomerId?: number
@@ -2374,6 +2446,10 @@ export interface DisplayWeakPassword {
  */
 export interface DescribeLeakageEmailsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否聚合数据
    */
   IsAggregation?: boolean
@@ -2460,6 +2536,10 @@ export interface DescribeManagesResponse {
  */
 export interface DescribeConfigsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否聚合数据
    */
   IsAggregation?: boolean
@@ -2517,6 +2597,10 @@ export interface DescribeConfigsRequest {
  * DescribeWeakPasswords请求参数结构体
  */
 export interface DescribeWeakPasswordsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */
@@ -2631,6 +2715,10 @@ export interface StopJobRecordResponse {
  * DescribeFakeMiniPrograms请求参数结构体
  */
 export interface DescribeFakeMiniProgramsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */
@@ -2822,6 +2910,10 @@ export interface CreateCustomerRequest {
  */
 export interface DescribeLeakageDatasRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否聚合数据
    */
   IsAggregation?: boolean
@@ -2897,6 +2989,10 @@ export interface DescribeJobRecordDetailsResponse {
  * DescribeVuls请求参数结构体
  */
 export interface DescribeVulsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */
@@ -3326,6 +3422,10 @@ export interface DescribeWeakPasswordsResponse {
  */
 export interface DescribeFakeWechatOfficialsRequest {
   /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
    * 是否新增数据
    */
   IsNew?: boolean
@@ -3494,6 +3594,10 @@ export interface DescribeLeakageCodesResponse {
  * DescribeDomains请求参数结构体
  */
 export interface DescribeDomainsRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
   /**
    * 是否新增数据
    */

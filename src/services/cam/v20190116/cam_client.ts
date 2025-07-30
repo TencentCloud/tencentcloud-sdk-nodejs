@@ -36,7 +36,7 @@ import {
   LoginActionFlagIntl,
   GetRoleRequest,
   CreateServiceLinkedRoleRequest,
-  ListAttachedGroupPoliciesRequest,
+  CreateSAMLProviderRequest,
   ListGroupsForUserRequest,
   AttachRolePolicyResponse,
   GetUserPermissionBoundaryRequest,
@@ -51,7 +51,7 @@ import {
   GetAccountSummaryRequest,
   DeletePolicyResponse,
   GetUserAppIdResponse,
-  GetUserAppIdRequest,
+  CreateSubAccountLoginIpPolicyResponse,
   DescribeOIDCConfigResponse,
   ListPolicyVersionsRequest,
   GetCustomMFATokenInfoRequest,
@@ -98,6 +98,7 @@ import {
   DeleteGroupRequest,
   GetUserResponse,
   GetUserPermissionBoundaryResponse,
+  ListAttachedGroupPoliciesRequest,
   CreatePolicyResponse,
   ListGroupsResponse,
   DetachRolePolicyRequest,
@@ -132,7 +133,7 @@ import {
   UpdateAccessKeyRequest,
   UpdateUserRequest,
   ListWeChatWorkSubAccountsResponse,
-  CreateSAMLProviderRequest,
+  CreateSubAccountLoginIpPolicyRequest,
   AttachPolicyInfo,
   DisableUserSSOResponse,
   UpdateRoleConsoleLoginResponse,
@@ -179,6 +180,7 @@ import {
   CreateRoleResponse,
   GetSAMLProviderResponse,
   DescribeSafeAuthFlagIntlResponse,
+  IpPolicy,
   ListGroupsRequest,
   ListPolicyVersionsResponse,
   GetPolicyRequest,
@@ -203,6 +205,7 @@ import {
   DeleteServiceLinkedRoleResponse,
   ListUsersForGroupResponse,
   GetPolicyResponse,
+  GetUserAppIdRequest,
   DescribeSafeAuthFlagRequest,
   DeleteServiceLinkedRoleRequest,
   AttachEntityOfPolicy,
@@ -362,6 +365,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 增加子账号登录IP策略
+   */
+  async CreateSubAccountLoginIpPolicy(
+    req: CreateSubAccountLoginIpPolicyRequest,
+    cb?: (error: string, rep: CreateSubAccountLoginIpPolicyResponse) => void
+  ): Promise<CreateSubAccountLoginIpPolicyResponse> {
+    return this.request("CreateSubAccountLoginIpPolicy", req, cb)
+  }
+
+  /**
    * 根据删除TaskId获取服务相关角色删除状态
    */
   async GetServiceLinkedRoleDeletionStatus(
@@ -502,13 +515,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+   * 删除OIDC身份提供商
    */
-  async CreateUserOIDCConfig(
-    req: CreateUserOIDCConfigRequest,
-    cb?: (error: string, rep: CreateUserOIDCConfigResponse) => void
-  ): Promise<CreateUserOIDCConfigResponse> {
-    return this.request("CreateUserOIDCConfig", req, cb)
+  async DeleteOIDCConfig(
+    req: DeleteOIDCConfigRequest,
+    cb?: (error: string, rep: DeleteOIDCConfigResponse) => void
+  ): Promise<DeleteOIDCConfigResponse> {
+    return this.request("DeleteOIDCConfig", req, cb)
   }
 
   /**
@@ -603,13 +616,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除OIDC身份提供商
+   * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
    */
-  async DeleteOIDCConfig(
-    req: DeleteOIDCConfigRequest,
-    cb?: (error: string, rep: DeleteOIDCConfigResponse) => void
-  ): Promise<DeleteOIDCConfigResponse> {
-    return this.request("DeleteOIDCConfig", req, cb)
+  async CreateUserOIDCConfig(
+    req: CreateUserOIDCConfigRequest,
+    cb?: (error: string, rep: CreateUserOIDCConfigResponse) => void
+  ): Promise<CreateUserOIDCConfigResponse> {
+    return this.request("CreateUserOIDCConfig", req, cb)
   }
 
   /**

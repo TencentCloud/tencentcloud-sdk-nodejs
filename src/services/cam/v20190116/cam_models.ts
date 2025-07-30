@@ -357,25 +357,21 @@ https://cloud.tencent.com/document/product/598/85165
 }
 
 /**
- * ListAttachedGroupPolicies请求参数结构体
+ * CreateSAMLProvider请求参数结构体
  */
-export interface ListAttachedGroupPoliciesRequest {
+export interface CreateSAMLProviderRequest {
   /**
-   * 用户组ID
+   * SAML身份提供商名称
    */
-  TargetGroupId: number
+  Name: string
   /**
-   * 页码，默认值是 1，从 1 开始
+   * SAML身份提供商描述
    */
-  Page?: number
+  Description: string
   /**
-   * 每页大小，默认值是 20
+   * SAML身份提供商Base64编码的元数据文档
    */
-  Rp?: number
-  /**
-   * 搜索关键字
-   */
-  Keyword?: string
+  SAMLMetadataDocument: string
 }
 
 /**
@@ -572,9 +568,14 @@ export interface GetUserAppIdResponse {
 }
 
 /**
- * GetUserAppId请求参数结构体
+ * CreateSubAccountLoginIpPolicy返回参数结构体
  */
-export type GetUserAppIdRequest = null
+export interface CreateSubAccountLoginIpPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeOIDCConfig返回参数结构体
@@ -1498,6 +1499,28 @@ export interface GetUserPermissionBoundaryResponse {
 }
 
 /**
+ * ListAttachedGroupPolicies请求参数结构体
+ */
+export interface ListAttachedGroupPoliciesRequest {
+  /**
+   * 用户组ID
+   */
+  TargetGroupId: number
+  /**
+   * 页码，默认值是 1，从 1 开始
+   */
+  Page?: number
+  /**
+   * 每页大小，默认值是 20
+   */
+  Rp?: number
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
+}
+
+/**
  * CreatePolicy返回参数结构体
  */
 export interface CreatePolicyResponse {
@@ -2138,21 +2161,29 @@ export interface ListWeChatWorkSubAccountsResponse {
 }
 
 /**
- * CreateSAMLProvider请求参数结构体
+ * CreateSubAccountLoginIpPolicy请求参数结构体
  */
-export interface CreateSAMLProviderRequest {
+export interface CreateSubAccountLoginIpPolicyRequest {
   /**
-   * SAML身份提供商名称
+   * IP策略集合
    */
-  Name: string
+  IpPolicies?: Array<IpPolicy>
   /**
-   * SAML身份提供商描述
+   * 审批人类型，目前支持的类型有：SubAccountLoginLimitApproval（子账号登录限制审批）
    */
-  Description: string
+  ApproverType?: string
   /**
-   * SAML身份提供商Base64编码的元数据文档
+   * 被添加为协助审批人的账号ID数组
    */
-  SAMLMetadataDocument: string
+  ApproverUin?: Array<number | bigint>
+  /**
+   * 是否禁用策略：0：不禁用，1：禁用
+   */
+  DisablePolicy?: number
+  /**
+   * 策略类型：1：更新IP策略，2：设置异地登录校验校验规则
+   */
+  PolicyType?: number
 }
 
 /**
@@ -3073,6 +3104,20 @@ export interface DescribeSafeAuthFlagIntlResponse {
 }
 
 /**
+ * IP限制策略
+ */
+export interface IpPolicy {
+  /**
+   * IP段
+   */
+  IP: string
+  /**
+   * 策略效力，Allow或Deny
+   */
+  Effect: string
+}
+
+/**
  * ListGroups请求参数结构体
  */
 export interface ListGroupsRequest {
@@ -3511,6 +3556,11 @@ export interface GetPolicyResponse {
    */
   RequestId?: string
 }
+
+/**
+ * GetUserAppId请求参数结构体
+ */
+export type GetUserAppIdRequest = null
 
 /**
  * DescribeSafeAuthFlag请求参数结构体

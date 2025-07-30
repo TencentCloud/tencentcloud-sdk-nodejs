@@ -122,6 +122,32 @@ export interface SnapshotStatistics {
 }
 
 /**
+ * CreateLifecycleDataTask请求参数结构体
+ */
+export interface CreateLifecycleDataTaskRequest {
+  /**
+   * 文件系统唯一 ID
+   */
+  FileSystemId: string
+  /**
+   * 生命周期任务类型；archive：沉降；restore：预热；release：数据释放；metaload：元数据加载
+   */
+  Type: string
+  /**
+   * 需要沉降的路径或文件，仅支持传入1个路径，不允许为空。
+   */
+  TaskPath: string
+  /**
+   * 任务名称
+   */
+  TaskName: string
+  /**
+   * 数据流动 ID ，该接口可以通过 DescribeDataFlow 查询
+   */
+  DataFlowId?: string
+}
+
+/**
  * DescribeCfsPGroups返回参数结构体
  */
 export interface DescribeCfsPGroupsResponse {
@@ -129,6 +155,20 @@ export interface DescribeCfsPGroupsResponse {
    * 权限组信息列表
    */
   PGroupList?: Array<PGroupInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDataFlow返回参数结构体
+ */
+export interface ModifyDataFlowResponse {
+  /**
+   * 数据流动管理 ID
+   */
+  DataFlowId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -169,6 +209,20 @@ export interface DescribeSnapshotOperationLogsRequest {
    * 结束时间，格式“YYYY-MM-DD hh:mm:ss”
    */
   EndTime: string
+}
+
+/**
+ * CreateLifecyclePolicyDownloadTask请求参数结构体
+ */
+export interface CreateLifecyclePolicyDownloadTaskRequest {
+  /**
+   * 任务Id
+   */
+  TaskId?: string
+  /**
+   * 下载文件的类型，包含 FileSuccessList，FileTotalList，FileFailedList
+   */
+  Type?: string
 }
 
 /**
@@ -282,6 +336,16 @@ export interface MigrationTaskInfo {
 }
 
 /**
+ * StopLifecycleDataTask请求参数结构体
+ */
+export interface StopLifecycleDataTaskRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * 文件系统客户端信息
  */
 export interface FileSystemClient {
@@ -330,6 +394,1178 @@ export interface DescribeCfsFileSystemsResponse {
 }
 
 /**
+ * CreateLifecycleDataTask返回参数结构体
+ */
+export interface CreateLifecycleDataTaskResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ApplyPathLifecyclePolicy请求参数结构体
+ */
+export interface ApplyPathLifecyclePolicyRequest {
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID: string
+  /**
+   * 生命周期管理策略关联目录的绝对路径列表
+   */
+  Paths?: Array<PathInfo>
+}
+
+/**
+ * BindAutoSnapshotPolicy请求参数结构体
+ */
+export interface BindAutoSnapshotPolicyRequest {
+  /**
+   * 需要解绑的文件系统ID列表，用"," 分割，文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   */
+  AutoSnapshotPolicyId: string
+  /**
+   * 解绑的快照策略ID，可以通过[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) 查询获取
+   */
+  FileSystemIds: string
+}
+
+/**
+ * ModifyFileSystemAutoScaleUpRule请求参数结构体
+ */
+export interface ModifyFileSystemAutoScaleUpRuleRequest {
+  /**
+   * 文件系统 ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   */
+  FileSystemId: string
+  /**
+   * 扩容阈值，范围[10-90]
+   */
+  ScaleUpThreshold: number
+  /**
+   * 扩容后目标阈值，范围[10-90]，该值要小于 ScaleUpThreshold
+   */
+  TargetThreshold: number
+  /**
+   * 规则状态 0：关闭，1：开启；不传保留原状态
+   */
+  Status?: number
+}
+
+/**
+ * ScaleUpFileSystem请求参数结构体
+ */
+export interface ScaleUpFileSystemRequest {
+  /**
+   * 文件系统Id,该参数通过查询文件系统列表接口获取
+   */
+  FileSystemId: string
+  /**
+   * 扩容的目标容量（单位GiB）
+   */
+  TargetCapacity: number
+}
+
+/**
+ * CreateCfsPGroup请求参数结构体
+ */
+export interface CreateCfsPGroupRequest {
+  /**
+   * 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线
+   */
+  Name: string
+  /**
+   * 权限组描述信息，1-255个字符
+   */
+  DescInfo?: string
+}
+
+/**
+ * DescribeMigrationTasks返回参数结构体
+ */
+export interface DescribeMigrationTasksResponse {
+  /**
+   * 迁移任务的总数量
+   */
+  TotalCount?: number
+  /**
+   * 迁移任务详情
+   */
+  MigrationTasks?: Array<MigrationTaskInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAutoSnapshotPolicies请求参数结构体
+ */
+export interface DescribeAutoSnapshotPoliciesRequest {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 分页码
+   */
+  Offset?: number
+  /**
+   * 页面长
+   */
+  Limit?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 升序，降序
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  OrderField?: string
+}
+
+/**
+ * DescribeAvailableZoneInfo请求参数结构体
+ */
+export type DescribeAvailableZoneInfoRequest = null
+
+/**
+ * DescribeMountTargets请求参数结构体
+ */
+export interface DescribeMountTargetsRequest {
+  /**
+   * 文件系统 ID，[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)可以获得id
+   */
+  FileSystemId: string
+}
+
+/**
+ * CreateDataFlow返回参数结构体
+ */
+export interface CreateDataFlowResponse {
+  /**
+   * 数据流动管理 ID
+   */
+  DataFlowId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SignUpCfsService请求参数结构体
+ */
+export type SignUpCfsServiceRequest = null
+
+/**
+ * SignUpCfsService返回参数结构体
+ */
+export interface SignUpCfsServiceResponse {
+  /**
+   * 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通
+   */
+  CfsServiceStatus: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 快照策略信息
+ */
+export interface AutoSnapshotPolicyInfo {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 快照策略名称
+   */
+  PolicyName?: string
+  /**
+   * 快照策略创建时间
+   */
+  CreationTime?: string
+  /**
+   * 关联的文件系统个数
+   */
+  FileSystemNums?: number
+  /**
+   * 快照定期备份在一星期哪一天，该参数与DayOfMonth,IntervalDays互斥
+   */
+  DayOfWeek?: string
+  /**
+   * 快照定期备份在一天的哪一小时
+   */
+  Hour?: string
+  /**
+   * 是否激活定期快照功能,1代表已激活，0代表未激活
+   */
+  IsActivated?: number
+  /**
+   * 下一次触发快照时间
+   */
+  NextActiveTime?: string
+  /**
+   * 快照策略状态，available代表快照策略状态正常。这里只有一种状态
+   */
+  Status?: string
+  /**
+   * 账号ID
+   */
+  AppId?: number
+  /**
+   * 保留时间
+   */
+  AliveDays?: number
+  /**
+   * 地域
+   */
+  RegionName?: string
+  /**
+   * 文件系统信息
+   */
+  FileSystems?: Array<FileSystemByPolicy>
+  /**
+   * 快照定期备份在一个月的某个时间；该参数与DayOfWeek,IntervalDays互斥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DayOfMonth?: string
+  /**
+   * 快照定期间隔天数，1-365 天；该参数与DayOfMonth,DayOfWeek互斥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntervalDays?: number
+  /**
+   * 跨地域复制的快照保留时间，单位天
+   */
+  CrossRegionsAliveDays?: number
+}
+
+/**
+ * CreateLifecyclePolicyDownloadTask返回参数结构体
+ */
+export interface CreateLifecyclePolicyDownloadTaskResponse {
+  /**
+   * 下载路径
+   */
+  DownloadAddress?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCfsRules请求参数结构体
+ */
+export interface DescribeCfsRulesRequest {
+  /**
+   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
+   */
+  PGroupId: string
+}
+
+/**
+ * UpdateCfsFileSystemName请求参数结构体
+ */
+export interface UpdateCfsFileSystemNameRequest {
+  /**
+   * 文件系统 ID,通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取
+   */
+  FileSystemId: string
+  /**
+   * 用户自定义文件系统名称，64字节内的中文字母数字或者 _,-,与CreationToken 至少填一个
+   */
+  FsName?: string
+}
+
+/**
+ * DeleteCfsPGroup请求参数结构体
+ */
+export interface DeleteCfsPGroupRequest {
+  /**
+   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
+   */
+  PGroupId: string
+}
+
+/**
+ * DescribeLifecycleDataTask返回参数结构体
+ */
+export interface DescribeLifecycleDataTaskResponse {
+  /**
+   * 任务数组
+   */
+  LifecycleDataTask?: Array<LifecycleDataTaskInfo>
+  /**
+   * 查询结果总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCfsPGroup返回参数结构体
+ */
+export interface UpdateCfsPGroupResponse {
+  /**
+   * 权限组ID
+   */
+  PGroupId?: string
+  /**
+   * 权限组名称
+   */
+  Name?: string
+  /**
+   * 描述信息
+   */
+  DescInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateFileSystemBandwidthLimit返回参数结构体
+ */
+export interface UpdateFileSystemBandwidthLimitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 快照操作日志
+ */
+export interface SnapshotOperateLog {
+  /**
+   * 操作类型
+CreateCfsSnapshot：创建快照
+DeleteCfsSnapshot：删除快照
+CreateCfsFileSystem：创建文件系统
+UpdateCfsSnapshotAttribute：更新快照
+   */
+  Action?: string
+  /**
+   * 操作时间
+   */
+  ActionTime?: string
+  /**
+   * 操作名称
+CreateCfsSnapshot
+DeleteCfsSnapshot
+CreateCfsFileSystem
+UpdateCfsSnapshotAttribute
+   */
+  ActionName?: string
+  /**
+   * 操作者uin
+   */
+  Operator?: string
+  /**
+   * 1-任务进行中；2-任务成功；3-任务失败
+   */
+  Result?: number
+}
+
+/**
+ * DescribeLifecyclePolicies请求参数结构体
+ */
+export interface DescribeLifecyclePoliciesRequest {
+  /**
+   * 生命周期管理策略名称
+   */
+  LifecyclePolicyName?: string
+  /**
+   * 每个分页包含的生命周期管理策略个数
+   */
+  PageSize?: number
+  /**
+   * 列表的分页页码
+   */
+  PageNumber?: number
+  /**
+   * 文件系统ID
+   */
+  FileSystemId?: string
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID?: string
+}
+
+/**
+ * DeleteAutoSnapshotPolicy请求参数结构体
+ */
+export interface DeleteAutoSnapshotPolicyRequest {
+  /**
+   * 快照策略ID，查询快照策略接口获取,[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208)
+   */
+  AutoSnapshotPolicyId: string
+}
+
+/**
+ * CreateLifecyclePolicy返回参数结构体
+ */
+export interface CreateLifecyclePolicyResponse {
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCfsRule请求参数结构体
+ */
+export interface UpdateCfsRuleRequest {
+  /**
+   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
+   */
+  PGroupId: string
+  /**
+   * 规则 ID，可通过[DescribeCfsRules](https://cloud.tencent.com/document/api/582/38156)接口获取
+   */
+  RuleId: string
+  /**
+   * 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。
+   */
+  AuthClientIp?: string
+  /**
+   * 读写权限, 值为RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读
+   */
+  RWPermission?: string
+  /**
+   * 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash，默认值为root_squash
+all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
+no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
+root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
+no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
+
+   */
+  UserPermission?: string
+  /**
+   * 规则优先级，参数范围1-100。 其中 1 为最高，100为最低，默认值为100
+   */
+  Priority?: number
+}
+
+/**
+ * StopLifecycleDataTask返回参数结构体
+ */
+export interface StopLifecycleDataTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteUserQuota请求参数结构体
+ */
+export interface DeleteUserQuotaRequest {
+  /**
+   * 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   */
+  FileSystemId: string
+  /**
+   * 指定配额类型，包括Uid（按用户ID限制）、Gid（按用户组ID限制）、Dir（按目录限制）
+   */
+  UserType: string
+  /**
+   * UID/GID信息，和DirectoryPath参数，两者必须填写一个
+   */
+  UserId?: string
+  /**
+   * 设置目录配额的目录的绝对路径，和UserId参数，两者必须填写一个
+   */
+  DirectoryPath?: string
+}
+
+/**
+ * DescribeAvailableZoneInfo返回参数结构体
+ */
+export interface DescribeAvailableZoneInfoResponse {
+  /**
+   * 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息
+   */
+  RegionZones?: Array<AvailableRegion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCfsSnapshot返回参数结构体
+ */
+export interface DeleteCfsSnapshotResponse {
+  /**
+   * 文件系统ID
+   */
+  SnapshotId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCfsFileSystemClients返回参数结构体
+ */
+export interface DescribeCfsFileSystemClientsResponse {
+  /**
+   * 客户端列表
+   */
+  ClientList?: Array<FileSystemClient>
+  /**
+   * 文件系统总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMountTarget返回参数结构体
+ */
+export interface DeleteMountTargetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLifecyclePolicy返回参数结构体
+ */
+export interface ModifyLifecyclePolicyResponse {
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCfsSnapshot请求参数结构体
+ */
+export interface CreateCfsSnapshotRequest {
+  /**
+   * 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
+   */
+  FileSystemId: string
+  /**
+   * 快照名称，支持不超过64字符长度，支持中文、数字、_、-
+   */
+  SnapshotName?: string
+  /**
+   * 快照标签
+   */
+  ResourceTags?: Array<TagInfo>
+}
+
+/**
+ * DescribeBucketList请求参数结构体
+ */
+export interface DescribeBucketListRequest {
+  /**
+   * 数据源服务商。COS: 腾讯云COS，OSS: 阿里云OSS，OBS:华为云OBS
+   */
+  SrcService: string
+  /**
+   * 数据源账号的SecretId
+   */
+  SrcSecretId: string
+  /**
+   * 数据源账号的SecretKey
+   */
+  SrcSecretKey: string
+}
+
+/**
+ * DeleteCfsRule请求参数结构体
+ */
+export interface DeleteCfsRuleRequest {
+  /**
+   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
+   */
+  PGroupId: string
+  /**
+   * 规则 ID，可通过[DescribeCfsRules](https://cloud.tencent.com/document/api/582/38156)接口获取
+   */
+  RuleId: string
+}
+
+/**
+ * ApplyPathLifecyclePolicy返回参数结构体
+ */
+export interface ApplyPathLifecyclePolicyResponse {
+  /**
+   * 有规则冲突时返回的已有冲突规则信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckResults?: Array<CheckResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCfsRule返回参数结构体
+ */
+export interface UpdateCfsRuleResponse {
+  /**
+   * 权限组 ID
+   */
+  PGroupId?: string
+  /**
+   * 规则 ID
+   */
+  RuleId?: string
+  /**
+   * 允许访问的客户端 IP 或者 IP 段
+   */
+  AuthClientIp?: string
+  /**
+   * 读写权限
+   */
+  RWPermission?: string
+  /**
+   * 用户权限
+   */
+  UserPermission?: string
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMigrationTask返回参数结构体
+ */
+export interface DeleteMigrationTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLifecycleDataTask请求参数结构体
+ */
+export interface DescribeLifecycleDataTaskRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 	任务ID
+   */
+  TaskId?: string
+  /**
+   * Offset 分页码
+   */
+  Offset?: number
+  /**
+   * Limit 页面大小
+   */
+  Limit?: number
+  /**
+   * 过滤条件，TaskName，FileSystemId，Type
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeSnapshotOperationLogs返回参数结构体
+ */
+export interface DescribeSnapshotOperationLogsResponse {
+  /**
+   * 快照ID
+   */
+  SnapshotId?: string
+  /**
+   * 操作日志
+   */
+  SnapshotOperates?: Array<SnapshotOperateLog>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCfsFileSystem请求参数结构体
+ */
+export interface DeleteCfsFileSystemRequest {
+  /**
+   * 文件系统 ID，通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
+   */
+  FileSystemId: string
+}
+
+/**
+ * UpdateFileSystemBandwidthLimit请求参数结构体
+ */
+export interface UpdateFileSystemBandwidthLimitRequest {
+  /**
+   * 文件系统 ID,可通过[DescribeCfsFileSystems](https://cloud.tencent.com/document/api/582/38170)接口获取
+   */
+  FileSystemId: string
+  /**
+   * 文件系统带宽，仅吞吐型可填。单位MiB/s，最小为1GiB/s，最大200GiB/s。
+   */
+  BandwidthLimit: number
+}
+
+/**
+ * DeleteLifecyclePolicy返回参数结构体
+ */
+export interface DeleteLifecyclePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCfsPGroup返回参数结构体
+ */
+export interface CreateCfsPGroupResponse {
+  /**
+   * 权限组 ID
+   */
+  PGroupId: string
+  /**
+   * 权限组名字
+   */
+  Name: string
+  /**
+   * 权限组描述信息
+   */
+  DescInfo: string
+  /**
+   * 已经与该权限组绑定的文件系统个数
+   */
+  BindCfsNum: number
+  /**
+   * 权限组创建时间
+   */
+  CDate: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCfsServiceStatus请求参数结构体
+ */
+export type DescribeCfsServiceStatusRequest = null
+
+/**
+ * 有规则冲突时返回的已有冲突规则信息列表
+ */
+export interface CheckResult {
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID: string
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 目录绝对路径
+   */
+  Path: string
+  /**
+   * 生命周期管理策略关联的管理规则列表
+   */
+  LifecycleRules: Array<LifecycleRule>
+  /**
+   * 目标路径
+   */
+  TargetPath: string
+}
+
+/**
+ * DeleteUserQuota返回参数结构体
+ */
+export interface DeleteUserQuotaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMigrationTask请求参数结构体
+ */
+export interface DeleteMigrationTaskRequest {
+  /**
+   * 迁移任务ID
+   */
+  TaskId: string
+}
+
+/**
+ * 文件系统绑定权限组信息
+ */
+export interface PGroup {
+  /**
+   * 权限组ID
+   */
+  PGroupId?: string
+  /**
+   * 权限组名称
+   */
+  Name?: string
+}
+
+/**
+ * SetUserQuota请求参数结构体
+ */
+export interface SetUserQuotaRequest {
+  /**
+   * 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取
+   */
+  FileSystemId: string
+  /**
+   * 指定配额类型，包括Uid、Gid，Dir，分别代表用户配额，用户组配额，目录配额
+   */
+  UserType: string
+  /**
+   * UID/GID信息
+   */
+  UserId?: string
+  /**
+   * 容量硬限制，单位GiB。设置范围10-10000000。
+   */
+  CapacityHardLimit?: number
+  /**
+   * 文件硬限制，单位个。设置范围1000-100000000
+   */
+  FileHardLimit?: number
+  /**
+   * 需设置目录配额的目录绝对路径，不同目录不可存在包含关系
+   */
+  DirectoryPath?: string
+}
+
+/**
+ * CreateAutoSnapshotPolicy返回参数结构体
+ */
+export interface CreateAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyFileSystemAutoScaleUpRule返回参数结构体
+ */
+export interface ModifyFileSystemAutoScaleUpRuleResponse {
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId?: string
+  /**
+   * 规则状态 0：关闭，1：开启
+   */
+  Status?: number
+  /**
+   * 扩容阈值，范围[10-90]
+   */
+  ScaleUpThreshold?: number
+  /**
+   * 扩容后达到阈值，范围[10-90]
+   */
+  TargetThreshold?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据流动信息
+ */
+export interface DataFlowInfo {
+  /**
+   * 数据流动管理 ID
+   */
+  DataFlowId?: string
+  /**
+   * 数据流动名称
+   */
+  DataFlowName?: string
+  /**
+   * 源端数据类型
+   */
+  SourceStorageType?: string
+  /**
+   * 源端存储地址
+   */
+  SourceStorageAddress?: string
+  /**
+   * 源端路径
+   */
+  SourcePath?: string
+  /**
+   * 目录路径
+   */
+  TargetPath?: string
+  /**
+   * available：已生效
+pending：配置中
+unavailable：失效
+deleting：删除中
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreationTime?: string
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId?: string
+}
+
+/**
+ * 版本控制-类型数组
+ */
+export interface AvailableType {
+  /**
+   * 协议与售卖详情
+   */
+  Protocols?: Array<AvailableProtoStatus>
+  /**
+   * 存储类型。返回值中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。
+   */
+  Type?: string
+  /**
+   * 是否支持预付费。返回值中 true 为支持、false 为不支持
+   */
+  Prepayment?: boolean
+}
+
+/**
+ * 生命周期管理策略信息
+ */
+export interface LifecyclePolicy {
+  /**
+   * 生命周期管理策略创建的时间
+   */
+  CreateTime: string
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID: string
+  /**
+   * 生命周期管理策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifecyclePolicyName: string
+  /**
+   * 生命周期管理策略关联的管理规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifecycleRules: Array<LifecycleRule>
+  /**
+   * 生命周期管理策略关联目录的绝对路径列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paths: Array<PathInfo>
+}
+
+/**
+ * CreateCfsSnapshot返回参数结构体
+ */
+export interface CreateCfsSnapshotResponse {
+  /**
+   * 文件系统快照id
+   */
+  SnapshotId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 生命周期管理策略关联的管理规则
+ */
+export interface LifecycleRule {
+  /**
+   * 数据转储后的存储类型
+   */
+  StorageType: string
+  /**
+   * 数据转储文件类型
+   */
+  FileType: string
+  /**
+   * 数据转储行为
+   */
+  Action: string
+  /**
+   * 数据转储触发时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interval?: string
+  /**
+   * 数据转储文件最大规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileMaxSize?: string
+  /**
+   * 数据转储文件最小规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileMinSize?: string
+}
+
+/**
+ * 文件系统配额信息
+ */
+export interface UserQuota {
+  /**
+   * 指定配额类型，包括Uid、Gid、Dir
+   */
+  UserType: string
+  /**
+   * UID/GID信息
+   */
+  UserId: string
+  /**
+   * 容量硬限制，单位GiB
+   */
+  CapacityHardLimit: number
+  /**
+   * 文件硬限制，单位个
+   */
+  FileHardLimit: number
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 容量使用，单位GiB
+   */
+  CapacityUsed?: number
+  /**
+   * 文件使用个数，单位个
+   */
+  FileUsed?: number
+  /**
+   * 目录配额的目录绝对路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectoryPath?: string
+  /**
+   * 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败
+   */
+  Status?: string
+}
+
+/**
+ * DeleteMountTarget请求参数结构体
+ */
+export interface DeleteMountTargetRequest {
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId: string
+  /**
+   * 挂载点 ID
+   */
+  MountTargetId: string
+}
+
+/**
+ * CreateCfsRule请求参数结构体
+ */
+export interface CreateCfsRuleRequest {
+  /**
+   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
+   */
+  PGroupId: string
+  /**
+   * 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。
+   */
+  AuthClientIp: string
+  /**
+   * 规则优先级，参数范围1-100。 其中 1 为最高，100为最低
+   */
+  Priority: number
+  /**
+   * 读写权限, 值为 RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读
+   */
+  RWPermission?: string
+  /**
+   * 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。默认值为root_squash
+all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
+no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
+root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
+no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
+
+   */
+  UserPermission?: string
+}
+
+/**
+ * DeleteCfsFileSystem返回参数结构体
+ */
+export interface DeleteCfsFileSystemResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCfsFileSystem返回参数结构体
  */
 export interface CreateCfsFileSystemResponse {
@@ -369,6 +1605,178 @@ export interface CreateCfsFileSystemResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 对象存储桶
+ */
+export interface BucketInfo {
+  /**
+   * 桶名称
+   */
+  Name?: string
+  /**
+   * 桶所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+}
+
+/**
+ * DeleteDataFlow返回参数结构体
+ */
+export interface DeleteDataFlowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccessCert请求参数结构体
+ */
+export interface CreateAccessCertRequest {
+  /**
+   * 证书描述，不超过64字符
+   */
+  CertDesc: string
+}
+
+/**
+ * 生命周期任务
+ */
+export interface LifecycleDataTaskInfo {
+  /**
+   * 任务id
+   */
+  TaskId?: string
+  /**
+   * 任务状态.
+init：未执行
+running：执行中，finished：已完成
+,failed：失败
+,stopping：停止中,stopped：已停止
+   */
+  TaskStatus?: string
+  /**
+   * 任务创建时间
+   */
+  CreationTime?: string
+  /**
+   * 任务结束时间
+   */
+  FinishTime?: string
+  /**
+   * 文件总数
+   */
+  FileTotalCount?: number
+  /**
+   * 处理成功文件数量
+   */
+  FileSuccessedCount?: number
+  /**
+   * 当前已经失败的文件数
+   */
+  FileFailedCount?: number
+  /**
+   * 文件容量，单位Byte
+
+
+   */
+  FileTotalSize?: number
+  /**
+   * 已处理完成的文件容量，单位Byte
+
+
+   */
+  FileSuccessedSize?: number
+  /**
+   * 已处理失败文件容量，单位Byte
+
+   */
+  FileFailedSize?: number
+  /**
+   * 总文件列表
+   */
+  FileTotalList?: string
+  /**
+   * 成功的文件列表
+   */
+  FileSuccessedList?: string
+  /**
+   * 失败文件的列表
+   */
+  FileFailedList?: string
+  /**
+   * FileSystemId
+   */
+  FileSystemId?: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 任务路径
+   */
+  TaskPath?: string
+  /**
+   * 任务类型,archive:表示沉降任务，restore：表示拉取任务
+   */
+  Type?: string
+  /**
+   * 数据流动Id
+   */
+  DataFlowId?: string
+}
+
+/**
+ * DescribeLifecyclePolicies返回参数结构体
+ */
+export interface DescribeLifecyclePoliciesResponse {
+  /**
+   * 列表的分页页码
+   */
+  PageNumber?: number
+  /**
+   * 每个分页包含的生命周期管理策略个数
+   */
+  PageSize?: number
+  /**
+   * 生命周期管理策略总数
+   */
+  TotalCount?: number
+  /**
+   * 生命周期管理策略列表
+   */
+  LifecyclePolicies?: Array<LifecyclePolicy>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserQuota请求参数结构体
+ */
+export interface DescribeUserQuotaRequest {
+  /**
+   * 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取
+   */
+  FileSystemId: string
+  /**
+   * 过滤条件。
+UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir，分别对应用户，用户组，目录 )
+UserId- Array of String - 是否必填：否 -（过滤条件）按用户id过滤。
+   */
+  Filters?: Array<Filter>
+  /**
+   * Offset 分页码，默认值0
+   */
+  Offset?: number
+  /**
+   * Limit 页面大小，可填范围为大于0的整数，默认值是10
+   */
+  Limit?: number
 }
 
 /**
@@ -501,912 +1909,29 @@ enhanced：增项版元数据类型
 }
 
 /**
- * BindAutoSnapshotPolicy请求参数结构体
+ * DescribeDataFlow请求参数结构体
  */
-export interface BindAutoSnapshotPolicyRequest {
+export interface DescribeDataFlowRequest {
   /**
-   * 需要解绑的文件系统ID列表，用"," 分割，文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
-   */
-  AutoSnapshotPolicyId: string
-  /**
-   * 解绑的快照策略ID，可以通过[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) 查询获取
-   */
-  FileSystemIds: string
-}
-
-/**
- * ModifyFileSystemAutoScaleUpRule请求参数结构体
- */
-export interface ModifyFileSystemAutoScaleUpRuleRequest {
-  /**
-   * 文件系统 ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
-   */
-  FileSystemId: string
-  /**
-   * 扩容阈值，范围[10-90]
-   */
-  ScaleUpThreshold: number
-  /**
-   * 扩容后目标阈值，范围[10-90]，该值要小于 ScaleUpThreshold
-   */
-  TargetThreshold: number
-  /**
-   * 规则状态 0：关闭，1：开启；不传保留原状态
-   */
-  Status?: number
-}
-
-/**
- * ScaleUpFileSystem请求参数结构体
- */
-export interface ScaleUpFileSystemRequest {
-  /**
-   * 文件系统Id,该参数通过查询文件系统列表接口获取
-   */
-  FileSystemId: string
-  /**
-   * 扩容的目标容量（单位GiB）
-   */
-  TargetCapacity: number
-}
-
-/**
- * CreateCfsPGroup请求参数结构体
- */
-export interface CreateCfsPGroupRequest {
-  /**
-   * 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线
-   */
-  Name: string
-  /**
-   * 权限组描述信息，1-255个字符
-   */
-  DescInfo?: string
-}
-
-/**
- * DescribeMigrationTasks返回参数结构体
- */
-export interface DescribeMigrationTasksResponse {
-  /**
-   * 迁移任务的总数量
-   */
-  TotalCount?: number
-  /**
-   * 迁移任务详情
-   */
-  MigrationTasks?: Array<MigrationTaskInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAutoSnapshotPolicies请求参数结构体
- */
-export interface DescribeAutoSnapshotPoliciesRequest {
-  /**
-   * 快照策略ID
-   */
-  AutoSnapshotPolicyId?: string
-  /**
-   * 分页码
-   */
-  Offset?: number
-  /**
-   * 页面长
-   */
-  Limit?: number
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-  /**
-   * 升序，降序
-   */
-  Order?: string
-  /**
-   * 排序字段
-   */
-  OrderField?: string
-}
-
-/**
- * DescribeAvailableZoneInfo请求参数结构体
- */
-export type DescribeAvailableZoneInfoRequest = null
-
-/**
- * DescribeMountTargets请求参数结构体
- */
-export interface DescribeMountTargetsRequest {
-  /**
-   * 文件系统 ID，[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)可以获得id
-   */
-  FileSystemId: string
-}
-
-/**
- * BindAutoSnapshotPolicy返回参数结构体
- */
-export interface BindAutoSnapshotPolicyResponse {
-  /**
-   * 快照策略ID
-   */
-  AutoSnapshotPolicyId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SignUpCfsService请求参数结构体
- */
-export type SignUpCfsServiceRequest = null
-
-/**
- * SignUpCfsService返回参数结构体
- */
-export interface SignUpCfsServiceResponse {
-  /**
-   * 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通
-   */
-  CfsServiceStatus: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 快照策略信息
- */
-export interface AutoSnapshotPolicyInfo {
-  /**
-   * 快照策略ID
-   */
-  AutoSnapshotPolicyId?: string
-  /**
-   * 快照策略名称
-   */
-  PolicyName?: string
-  /**
-   * 快照策略创建时间
-   */
-  CreationTime?: string
-  /**
-   * 关联的文件系统个数
-   */
-  FileSystemNums?: number
-  /**
-   * 快照定期备份在一星期哪一天，该参数与DayOfMonth,IntervalDays互斥
-   */
-  DayOfWeek?: string
-  /**
-   * 快照定期备份在一天的哪一小时
-   */
-  Hour?: string
-  /**
-   * 是否激活定期快照功能,1代表已激活，0代表未激活
-   */
-  IsActivated?: number
-  /**
-   * 下一次触发快照时间
-   */
-  NextActiveTime?: string
-  /**
-   * 快照策略状态，available代表快照策略状态正常。这里只有一种状态
-   */
-  Status?: string
-  /**
-   * 账号ID
-   */
-  AppId?: number
-  /**
-   * 保留时间
-   */
-  AliveDays?: number
-  /**
-   * 地域
-   */
-  RegionName?: string
-  /**
-   * 文件系统信息
-   */
-  FileSystems?: Array<FileSystemByPolicy>
-  /**
-   * 快照定期备份在一个月的某个时间；该参数与DayOfWeek,IntervalDays互斥
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DayOfMonth?: string
-  /**
-   * 快照定期间隔天数，1-365 天；该参数与DayOfMonth,DayOfWeek互斥
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IntervalDays?: number
-  /**
-   * 跨地域复制的快照保留时间，单位天
-   */
-  CrossRegionsAliveDays?: number
-}
-
-/**
- * DescribeCfsRules请求参数结构体
- */
-export interface DescribeCfsRulesRequest {
-  /**
-   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
-   */
-  PGroupId: string
-}
-
-/**
- * UpdateCfsFileSystemName请求参数结构体
- */
-export interface UpdateCfsFileSystemNameRequest {
-  /**
-   * 文件系统 ID,通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取
-   */
-  FileSystemId: string
-  /**
-   * 用户自定义文件系统名称，64字节内的中文字母数字或者 _,-,与CreationToken 至少填一个
-   */
-  FsName?: string
-}
-
-/**
- * DeleteCfsPGroup请求参数结构体
- */
-export interface DeleteCfsPGroupRequest {
-  /**
-   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
-   */
-  PGroupId: string
-}
-
-/**
- * UpdateCfsPGroup返回参数结构体
- */
-export interface UpdateCfsPGroupResponse {
-  /**
-   * 权限组ID
-   */
-  PGroupId?: string
-  /**
-   * 权限组名称
-   */
-  Name?: string
-  /**
-   * 描述信息
-   */
-  DescInfo?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 快照操作日志
- */
-export interface SnapshotOperateLog {
-  /**
-   * 操作类型
-CreateCfsSnapshot：创建快照
-DeleteCfsSnapshot：删除快照
-CreateCfsFileSystem：创建文件系统
-UpdateCfsSnapshotAttribute：更新快照
-   */
-  Action?: string
-  /**
-   * 操作时间
-   */
-  ActionTime?: string
-  /**
-   * 操作名称
-CreateCfsSnapshot
-DeleteCfsSnapshot
-CreateCfsFileSystem
-UpdateCfsSnapshotAttribute
-   */
-  ActionName?: string
-  /**
-   * 操作者uin
-   */
-  Operator?: string
-  /**
-   * 1-任务进行中；2-任务成功；3-任务失败
-   */
-  Result?: number
-}
-
-/**
- * DeleteAutoSnapshotPolicy请求参数结构体
- */
-export interface DeleteAutoSnapshotPolicyRequest {
-  /**
-   * 快照策略ID，查询快照策略接口获取,[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208)
-   */
-  AutoSnapshotPolicyId: string
-}
-
-/**
- * DeleteCfsFileSystem返回参数结构体
- */
-export interface DeleteCfsFileSystemResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateCfsRule请求参数结构体
- */
-export interface UpdateCfsRuleRequest {
-  /**
-   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
-   */
-  PGroupId: string
-  /**
-   * 规则 ID，可通过[DescribeCfsRules](https://cloud.tencent.com/document/api/582/38156)接口获取
-   */
-  RuleId: string
-  /**
-   * 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。
-   */
-  AuthClientIp?: string
-  /**
-   * 读写权限, 值为RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读
-   */
-  RWPermission?: string
-  /**
-   * 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash，默认值为root_squash
-all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
-no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
-root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
-no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
-
-   */
-  UserPermission?: string
-  /**
-   * 规则优先级，参数范围1-100。 其中 1 为最高，100为最低，默认值为100
-   */
-  Priority?: number
-}
-
-/**
- * DeleteUserQuota请求参数结构体
- */
-export interface DeleteUserQuotaRequest {
-  /**
-   * 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
-   */
-  FileSystemId: string
-  /**
-   * 指定配额类型，包括Uid（按用户ID限制）、Gid（按用户组ID限制）、Dir（按目录限制）
-   */
-  UserType: string
-  /**
-   * UID/GID信息，和DirectoryPath参数，两者必须填写一个
-   */
-  UserId?: string
-  /**
-   * 设置目录配额的目录的绝对路径，和UserId参数，两者必须填写一个
-   */
-  DirectoryPath?: string
-}
-
-/**
- * DescribeAvailableZoneInfo返回参数结构体
- */
-export interface DescribeAvailableZoneInfoResponse {
-  /**
-   * 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息
-   */
-  RegionZones?: Array<AvailableRegion>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteCfsSnapshot返回参数结构体
- */
-export interface DeleteCfsSnapshotResponse {
-  /**
-   * 文件系统ID
-   */
-  SnapshotId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCfsFileSystemClients返回参数结构体
- */
-export interface DescribeCfsFileSystemClientsResponse {
-  /**
-   * 客户端列表
-   */
-  ClientList?: Array<FileSystemClient>
-  /**
-   * 文件系统总数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteMountTarget返回参数结构体
- */
-export interface DeleteMountTargetResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateCfsSnapshot请求参数结构体
- */
-export interface CreateCfsSnapshotRequest {
-  /**
-   * 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
-   */
-  FileSystemId: string
-  /**
-   * 快照名称，支持不超过64字符长度，支持中文、数字、_、-
-   */
-  SnapshotName?: string
-  /**
-   * 快照标签
-   */
-  ResourceTags?: Array<TagInfo>
-}
-
-/**
- * DescribeBucketList请求参数结构体
- */
-export interface DescribeBucketListRequest {
-  /**
-   * 数据源服务商。COS: 腾讯云COS，OSS: 阿里云OSS，OBS:华为云OBS
-   */
-  SrcService: string
-  /**
-   * 数据源账号的SecretId
-   */
-  SrcSecretId: string
-  /**
-   * 数据源账号的SecretKey
-   */
-  SrcSecretKey: string
-}
-
-/**
- * DeleteCfsRule请求参数结构体
- */
-export interface DeleteCfsRuleRequest {
-  /**
-   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
-   */
-  PGroupId: string
-  /**
-   * 规则 ID，可通过[DescribeCfsRules](https://cloud.tencent.com/document/api/582/38156)接口获取
-   */
-  RuleId: string
-}
-
-/**
- * UpdateCfsRule返回参数结构体
- */
-export interface UpdateCfsRuleResponse {
-  /**
-   * 权限组 ID
-   */
-  PGroupId?: string
-  /**
-   * 规则 ID
-   */
-  RuleId?: string
-  /**
-   * 允许访问的客户端 IP 或者 IP 段
-   */
-  AuthClientIp?: string
-  /**
-   * 读写权限
-   */
-  RWPermission?: string
-  /**
-   * 用户权限
-   */
-  UserPermission?: string
-  /**
-   * 优先级
-   */
-  Priority?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteMigrationTask返回参数结构体
- */
-export interface DeleteMigrationTaskResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateFileSystemBandwidthLimit返回参数结构体
- */
-export interface UpdateFileSystemBandwidthLimitResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSnapshotOperationLogs返回参数结构体
- */
-export interface DescribeSnapshotOperationLogsResponse {
-  /**
-   * 快照ID
-   */
-  SnapshotId?: string
-  /**
-   * 操作日志
-   */
-  SnapshotOperates?: Array<SnapshotOperateLog>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteCfsFileSystem请求参数结构体
- */
-export interface DeleteCfsFileSystemRequest {
-  /**
-   * 文件系统 ID，通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
-   */
-  FileSystemId: string
-}
-
-/**
- * UpdateFileSystemBandwidthLimit请求参数结构体
- */
-export interface UpdateFileSystemBandwidthLimitRequest {
-  /**
-   * 文件系统 ID,可通过[DescribeCfsFileSystems](https://cloud.tencent.com/document/api/582/38170)接口获取
-   */
-  FileSystemId: string
-  /**
-   * 文件系统带宽，仅吞吐型可填。单位MiB/s，最小为1GiB/s，最大200GiB/s。
-   */
-  BandwidthLimit: number
-}
-
-/**
- * CreateCfsPGroup返回参数结构体
- */
-export interface CreateCfsPGroupResponse {
-  /**
-   * 权限组 ID
-   */
-  PGroupId: string
-  /**
-   * 权限组名字
-   */
-  Name: string
-  /**
-   * 权限组描述信息
-   */
-  DescInfo: string
-  /**
-   * 已经与该权限组绑定的文件系统个数
-   */
-  BindCfsNum: number
-  /**
-   * 权限组创建时间
-   */
-  CDate: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCfsServiceStatus请求参数结构体
- */
-export type DescribeCfsServiceStatusRequest = null
-
-/**
- * DeleteUserQuota返回参数结构体
- */
-export interface DeleteUserQuotaResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteMigrationTask请求参数结构体
- */
-export interface DeleteMigrationTaskRequest {
-  /**
-   * 迁移任务ID
-   */
-  TaskId: string
-}
-
-/**
- * 文件系统绑定权限组信息
- */
-export interface PGroup {
-  /**
-   * 权限组ID
-   */
-  PGroupId?: string
-  /**
-   * 权限组名称
-   */
-  Name?: string
-}
-
-/**
- * SetUserQuota请求参数结构体
- */
-export interface SetUserQuotaRequest {
-  /**
-   * 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取
-   */
-  FileSystemId: string
-  /**
-   * 指定配额类型，包括Uid、Gid，Dir，分别代表用户配额，用户组配额，目录配额
-   */
-  UserType: string
-  /**
-   * UID/GID信息
-   */
-  UserId?: string
-  /**
-   * 容量硬限制，单位GiB。设置范围10-10000000。
-   */
-  CapacityHardLimit?: number
-  /**
-   * 文件硬限制，单位个。设置范围1000-100000000
-   */
-  FileHardLimit?: number
-  /**
-   * 需设置目录配额的目录绝对路径，不同目录不可存在包含关系
-   */
-  DirectoryPath?: string
-}
-
-/**
- * CreateAutoSnapshotPolicy返回参数结构体
- */
-export interface CreateAutoSnapshotPolicyResponse {
-  /**
-   * 快照策略ID
-   */
-  AutoSnapshotPolicyId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyFileSystemAutoScaleUpRule返回参数结构体
- */
-export interface ModifyFileSystemAutoScaleUpRuleResponse {
-  /**
-   * 文件系统 ID
+   * 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取
    */
   FileSystemId?: string
   /**
-   * 规则状态 0：关闭，1：开启
+   * 数据流动 ID ，由创建数据流动返回
    */
-  Status?: number
+  DataFlowId?: string
   /**
-   * 扩容阈值，范围[10-90]
+   * 每次查询返回值个数，默认20；最大100
    */
-  ScaleUpThreshold?: number
+  Limit?: number
   /**
-   * 扩容后达到阈值，范围[10-90]
-   */
-  TargetThreshold?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 版本控制-类型数组
- */
-export interface AvailableType {
-  /**
-   * 协议与售卖详情
-   */
-  Protocols?: Array<AvailableProtoStatus>
-  /**
-   * 存储类型。返回值中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。
-   */
-  Type?: string
-  /**
-   * 是否支持预付费。返回值中 true 为支持、false 为不支持
-   */
-  Prepayment?: boolean
-}
-
-/**
- * CreateCfsSnapshot返回参数结构体
- */
-export interface CreateCfsSnapshotResponse {
-  /**
-   * 文件系统快照id
-   */
-  SnapshotId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 文件系统配额信息
- */
-export interface UserQuota {
-  /**
-   * 指定配额类型，包括Uid、Gid、Dir
-   */
-  UserType: string
-  /**
-   * UID/GID信息
-   */
-  UserId: string
-  /**
-   * 容量硬限制，单位GiB
-   */
-  CapacityHardLimit: number
-  /**
-   * 文件硬限制，单位个
-   */
-  FileHardLimit: number
-  /**
-   * 文件系统ID
-   */
-  FileSystemId: string
-  /**
-   * 容量使用，单位GiB
-   */
-  CapacityUsed?: number
-  /**
-   * 文件使用个数，单位个
-   */
-  FileUsed?: number
-  /**
-   * 目录配额的目录绝对路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DirectoryPath?: string
-  /**
-   * 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败
-   */
-  Status?: string
-}
-
-/**
- * DeleteMountTarget请求参数结构体
- */
-export interface DeleteMountTargetRequest {
-  /**
-   * 文件系统 ID
-   */
-  FileSystemId: string
-  /**
-   * 挂载点 ID
-   */
-  MountTargetId: string
-}
-
-/**
- * CreateCfsRule请求参数结构体
- */
-export interface CreateCfsRuleRequest {
-  /**
-   * 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取
-   */
-  PGroupId: string
-  /**
-   * 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。
-   */
-  AuthClientIp: string
-  /**
-   * 规则优先级，参数范围1-100。 其中 1 为最高，100为最低
-   */
-  Priority: number
-  /**
-   * 读写权限, 值为 RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读
-   */
-  RWPermission?: string
-  /**
-   * 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。默认值为root_squash
-all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
-no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
-root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
-no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
-
-   */
-  UserPermission?: string
-}
-
-/**
- * 对象存储桶
- */
-export interface BucketInfo {
-  /**
-   * 桶名称
-   */
-  Name?: string
-  /**
-   * 桶所在地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-}
-
-/**
- * CreateAccessCert请求参数结构体
- */
-export interface CreateAccessCertRequest {
-  /**
-   * 证书描述，不超过64字符
-   */
-  CertDesc: string
-}
-
-/**
- * DescribeUserQuota请求参数结构体
- */
-export interface DescribeUserQuotaRequest {
-  /**
-   * 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取
-   */
-  FileSystemId: string
-  /**
-   * 过滤条件。
-UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir，分别对应用户，用户组，目录 )
-UserId- Array of String - 是否必填：否 -（过滤条件）按用户id过滤。
-   */
-  Filters?: Array<Filter>
-  /**
-   * Offset 分页码，默认值0
+   * 偏移量，默认为0
    */
   Offset?: number
   /**
-   * Limit 页面大小，可填范围为大于0的整数，默认值是10
+   * 文件系统版本；版本号：v1.5，v3.0，v3.1，v4.0
    */
-  Limit?: number
+  CfsVersion?: string
 }
 
 /**
@@ -1425,6 +1950,62 @@ export interface DescribeBucketListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 挂载点信息
+ */
+export interface MountInfo {
+  /**
+   * 文件系统 ID
+   */
+  FileSystemId?: string
+  /**
+   * 挂载点 ID
+   */
+  MountTargetId?: string
+  /**
+   * 挂载点 IP
+   */
+  IpAddress?: string
+  /**
+   * 挂载根目录
+   */
+  FSID?: string
+  /**
+   * 挂载点状态，包括creating：创建中；available：运行中；
+deleting：删除中；
+create_failed： 创建失败
+   */
+  LifeCycleState?: string
+  /**
+   * 网络类型，包括VPC,CCN
+   */
+  NetworkInterface?: string
+  /**
+   * 私有网络 ID
+   */
+  VpcId?: string
+  /**
+   * 私有网络名称
+   */
+  VpcName?: string
+  /**
+   * 子网 Id
+   */
+  SubnetId?: string
+  /**
+   * 子网名称
+   */
+  SubnetName?: string
+  /**
+   * CFS Turbo使用的云联网ID
+   */
+  CcnID?: string
+  /**
+   * 云联网中CFS Turbo使用的网段
+   */
+  CidrBlock?: string
 }
 
 /**
@@ -1515,17 +2096,25 @@ export interface DescribeCfsFileSystemClientsRequest {
 }
 
 /**
- * 版本控制-协议详情
+ * DescribeCfsSnapshots返回参数结构体
  */
-export interface AvailableProtoStatus {
+export interface DescribeCfsSnapshotsResponse {
   /**
-   * 售卖状态。可选值有 sale_out 售罄、saling可售、no_saling不可销售
+   * 总个数
    */
-  SaleStatus?: string
+  TotalCount?: number
   /**
-   * 协议类型。可选值有 NFS、CIFS、TURBO
+   * 快照信息描述
    */
-  Protocol?: string
+  Snapshots?: Array<SnapshotInfo>
+  /**
+   * 快照列表快照汇总
+   */
+  TotalSize?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1721,6 +2310,36 @@ export interface DescribeMigrationTasksRequest {
 }
 
 /**
+ * 权限组规则列表
+ */
+export interface PGroupRuleInfo {
+  /**
+   * 规则ID
+   */
+  RuleId?: string
+  /**
+   * 允许访问的客户端IP
+   */
+  AuthClientIp?: string
+  /**
+   * 读写权限, ro为只读，rw为读写
+   */
+  RWPermission?: string
+  /**
+   * all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
+no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
+root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
+no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
+
+   */
+  UserPermission?: string
+  /**
+   * 规则优先级，1-100。 其中 1 为最高，100为最低
+   */
+  Priority?: number
+}
+
+/**
  * 条件过滤
  */
 export interface Filter {
@@ -1791,33 +2410,17 @@ export interface ExstraPerformanceInfo {
 }
 
 /**
- * 权限组规则列表
+ * BindAutoSnapshotPolicy返回参数结构体
  */
-export interface PGroupRuleInfo {
+export interface BindAutoSnapshotPolicyResponse {
   /**
-   * 规则ID
+   * 快照策略ID
    */
-  RuleId?: string
+  AutoSnapshotPolicyId?: string
   /**
-   * 允许访问的客户端IP
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AuthClientIp?: string
-  /**
-   * 读写权限, ro为只读，rw为读写
-   */
-  RWPermission?: string
-  /**
-   * all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
-no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
-root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
-no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
-
-   */
-  UserPermission?: string
-  /**
-   * 规则优先级，1-100。 其中 1 为最高，100为最低
-   */
-  Priority?: number
+  RequestId?: string
 }
 
 /**
@@ -2073,59 +2676,17 @@ export interface SnapshotInfo {
 }
 
 /**
- * 挂载点信息
+ * 版本控制-协议详情
  */
-export interface MountInfo {
+export interface AvailableProtoStatus {
   /**
-   * 文件系统 ID
+   * 售卖状态。可选值有 sale_out 售罄、saling可售、no_saling不可销售
    */
-  FileSystemId?: string
+  SaleStatus?: string
   /**
-   * 挂载点 ID
+   * 协议类型。可选值有 NFS、CIFS、TURBO
    */
-  MountTargetId?: string
-  /**
-   * 挂载点 IP
-   */
-  IpAddress?: string
-  /**
-   * 挂载根目录
-   */
-  FSID?: string
-  /**
-   * 挂载点状态，包括creating：创建中；available：运行中；
-deleting：删除中；
-create_failed： 创建失败
-   */
-  LifeCycleState?: string
-  /**
-   * 网络类型，包括VPC,CCN
-   */
-  NetworkInterface?: string
-  /**
-   * 私有网络 ID
-   */
-  VpcId?: string
-  /**
-   * 私有网络名称
-   */
-  VpcName?: string
-  /**
-   * 子网 Id
-   */
-  SubnetId?: string
-  /**
-   * 子网名称
-   */
-  SubnetName?: string
-  /**
-   * CFS Turbo使用的云联网ID
-   */
-  CcnID?: string
-  /**
-   * 云联网中CFS Turbo使用的网段
-   */
-  CidrBlock?: string
+  Protocol?: string
 }
 
 /**
@@ -2221,17 +2782,31 @@ export interface UpdateCfsPGroupRequest {
 }
 
 /**
- * CreateAccessCert返回参数结构体
+ * DeleteDataFlow请求参数结构体
  */
-export interface CreateAccessCertResponse {
+export interface DeleteDataFlowRequest {
   /**
-   * 凭证唯一标识
+   * 数据流动管理 ID
    */
-  CertId?: string
+  DataFlowId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取
    */
-  RequestId?: string
+  FileSystemId?: string
+}
+
+/**
+ * 生命周期管理策略关联目录的绝对路径
+ */
+export interface PathInfo {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 目录绝对路径
+   */
+  Path: string
 }
 
 /**
@@ -2322,6 +2897,34 @@ export interface DescribeUserQuotaResponse {
 }
 
 /**
+ * ModifyLifecyclePolicy请求参数结构体
+ */
+export interface ModifyLifecyclePolicyRequest {
+  /**
+   * 生命周期管理策略名称，中文/英文/数字/下划线/中划线的组合，不超过64个字符
+   */
+  LifecyclePolicyName: string
+  /**
+   * 生命周期管理策略关联的管理规则列表
+   */
+  LifecycleRules: Array<LifecycleRule>
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID: string
+}
+
+/**
+ * DeleteLifecyclePolicy请求参数结构体
+ */
+export interface DeleteLifecyclePolicyRequest {
+  /**
+   * 生命周期管理策略ID
+   */
+  LifecyclePolicyID: string
+}
+
+/**
  * 分层存储详细信息
  */
 export interface TieringDetailInfo {
@@ -2333,6 +2936,20 @@ export interface TieringDetailInfo {
    * 冷存储容量
    */
   SecondaryTieringSizeInBytes?: number
+}
+
+/**
+ * CreateLifecyclePolicy请求参数结构体
+ */
+export interface CreateLifecyclePolicyRequest {
+  /**
+   * 生命周期管理策略名称，中文/英文/数字/下划线/中划线的组合，不超过64个字符
+   */
+  LifecyclePolicyName: string
+  /**
+   * 生命周期管理策略关联的管理规则列表
+   */
+  LifecycleRules: Array<LifecycleRule>
 }
 
 /**
@@ -2414,21 +3031,13 @@ export interface StopMigrationTaskResponse {
 }
 
 /**
- * DescribeCfsSnapshots返回参数结构体
+ * CreateAccessCert返回参数结构体
  */
-export interface DescribeCfsSnapshotsResponse {
+export interface CreateAccessCertResponse {
   /**
-   * 总个数
+   * 凭证唯一标识
    */
-  TotalCount?: number
-  /**
-   * 快照信息描述
-   */
-  Snapshots?: Array<SnapshotInfo>
-  /**
-   * 快照列表快照汇总
-   */
-  TotalSize?: number
+  CertId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2464,6 +3073,32 @@ export interface DescribeAutoSnapshotPoliciesResponse {
 }
 
 /**
+ * ModifyDataFlow请求参数结构体
+ */
+export interface ModifyDataFlowRequest {
+  /**
+   * 数据流动管理 ID ，通过查询数据流动接口获取
+   */
+  DataFlowId: string
+  /**
+   * 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取
+   */
+  FileSystemId: string
+  /**
+   * 数据流动名称；支持不超过64字符长度，支持中文、数字、_、-
+   */
+  DataFlowName?: string
+  /**
+   * 密钥 ID
+   */
+  SecretId?: string
+  /**
+   * 密钥 key
+   */
+  SecretKey?: string
+}
+
+/**
  * DescribeCfsSnapshotOverview请求参数结构体
  */
 export type DescribeCfsSnapshotOverviewRequest = null
@@ -2496,4 +3131,60 @@ export interface CreateAutoSnapshotPolicyRequest {
    * 间隔天数，与DayOfWeek，DayOfMonth 三者选一
    */
   IntervalDays?: number
+}
+
+/**
+ * CreateDataFlow请求参数结构体
+ */
+export interface CreateDataFlowRequest {
+  /**
+   * 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取
+   */
+  FileSystemId: string
+  /**
+   * 源端数据类型；包含S3_COS，S3_L5
+   */
+  SourceStorageType: string
+  /**
+   * 源端存储地址
+   */
+  SourceStorageAddress: string
+  /**
+   * 源端路径
+   */
+  SourcePath: string
+  /**
+   * 文件系统内目标路径
+   */
+  TargetPath: string
+  /**
+   * 密钥 ID
+   */
+  SecretId: string
+  /**
+   * 密钥 key
+   */
+  SecretKey: string
+  /**
+   * 数据流动名称；支持不超过64字符长度，支持中文、数字、_、-
+   */
+  DataFlowName?: string
+}
+
+/**
+ * DescribeDataFlow返回参数结构体
+ */
+export interface DescribeDataFlowResponse {
+  /**
+   * 查询总数量
+   */
+  TotalCount?: number
+  /**
+   * 无
+   */
+  DataFlows?: Array<DataFlowInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

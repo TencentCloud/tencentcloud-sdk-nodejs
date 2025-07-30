@@ -21,14 +21,18 @@ import {
   CreateMigrationTaskRequest,
   ScaleUpFileSystemResponse,
   SnapshotStatistics,
+  CreateLifecycleDataTaskRequest,
   DescribeCfsPGroupsResponse,
+  ModifyDataFlowResponse,
   DescribeMountTargetsResponse,
   DescribeSnapshotOperationLogsRequest,
+  CreateLifecyclePolicyDownloadTaskRequest,
   MigrationTaskInfo,
+  StopLifecycleDataTaskRequest,
   FileSystemClient,
   DescribeCfsFileSystemsResponse,
-  CreateCfsFileSystemResponse,
-  FileSystemInfo,
+  CreateLifecycleDataTaskResponse,
+  ApplyPathLifecyclePolicyRequest,
   BindAutoSnapshotPolicyRequest,
   ModifyFileSystemAutoScaleUpRuleRequest,
   ScaleUpFileSystemRequest,
@@ -37,66 +41,87 @@ import {
   DescribeAutoSnapshotPoliciesRequest,
   DescribeAvailableZoneInfoRequest,
   DescribeMountTargetsRequest,
-  BindAutoSnapshotPolicyResponse,
+  CreateDataFlowResponse,
   SignUpCfsServiceRequest,
   SignUpCfsServiceResponse,
   AutoSnapshotPolicyInfo,
+  CreateLifecyclePolicyDownloadTaskResponse,
   DescribeCfsRulesRequest,
   UpdateCfsFileSystemNameRequest,
   DeleteCfsPGroupRequest,
+  DescribeLifecycleDataTaskResponse,
   UpdateCfsPGroupResponse,
+  UpdateFileSystemBandwidthLimitResponse,
   SnapshotOperateLog,
+  DescribeLifecyclePoliciesRequest,
   DeleteAutoSnapshotPolicyRequest,
-  DeleteCfsFileSystemResponse,
+  CreateLifecyclePolicyResponse,
   UpdateCfsRuleRequest,
+  StopLifecycleDataTaskResponse,
   DeleteUserQuotaRequest,
   DescribeAvailableZoneInfoResponse,
   DeleteCfsSnapshotResponse,
   DescribeCfsFileSystemClientsResponse,
   DeleteMountTargetResponse,
+  ModifyLifecyclePolicyResponse,
   CreateCfsSnapshotRequest,
   DescribeBucketListRequest,
   DeleteCfsRuleRequest,
+  ApplyPathLifecyclePolicyResponse,
   UpdateCfsRuleResponse,
   DeleteMigrationTaskResponse,
-  UpdateFileSystemBandwidthLimitResponse,
+  DescribeLifecycleDataTaskRequest,
   DescribeSnapshotOperationLogsResponse,
   DeleteCfsFileSystemRequest,
   UpdateFileSystemBandwidthLimitRequest,
+  DeleteLifecyclePolicyResponse,
   CreateCfsPGroupResponse,
   DescribeCfsServiceStatusRequest,
+  CheckResult,
   DeleteUserQuotaResponse,
   DeleteMigrationTaskRequest,
   PGroup,
   SetUserQuotaRequest,
   CreateAutoSnapshotPolicyResponse,
   ModifyFileSystemAutoScaleUpRuleResponse,
+  DataFlowInfo,
   AvailableType,
+  LifecyclePolicy,
   CreateCfsSnapshotResponse,
+  LifecycleRule,
   UserQuota,
   DeleteMountTargetRequest,
   CreateCfsRuleRequest,
+  DeleteCfsFileSystemResponse,
+  CreateCfsFileSystemResponse,
   BucketInfo,
+  DeleteDataFlowResponse,
   CreateAccessCertRequest,
+  LifecycleDataTaskInfo,
+  DescribeLifecyclePoliciesResponse,
   DescribeUserQuotaRequest,
+  FileSystemInfo,
+  DescribeDataFlowRequest,
   DescribeBucketListResponse,
+  MountInfo,
   UpdateCfsFileSystemNameResponse,
   DescribeCfsSnapshotOverviewResponse,
   AutoScaleUpRule,
   DeleteCfsSnapshotRequest,
   DescribeCfsFileSystemClientsRequest,
-  AvailableProtoStatus,
+  DescribeCfsSnapshotsResponse,
   DescribeCfsFileSystemsRequest,
   AvailableRegion,
   CreateCfsFileSystemRequest,
   AvailableZone,
   DescribeMigrationTasksRequest,
+  PGroupRuleInfo,
   Filter,
   UnbindAutoSnapshotPolicyRequest,
   UnbindAutoSnapshotPolicyResponse,
   DescribeCfsServiceStatusResponse,
   ExstraPerformanceInfo,
-  PGroupRuleInfo,
+  BindAutoSnapshotPolicyResponse,
   DescribeCfsSnapshotsRequest,
   UpdateCfsFileSystemSizeLimitResponse,
   UpdateAutoSnapshotPolicyRequest,
@@ -106,29 +131,36 @@ import {
   UpdateAutoSnapshotPolicyResponse,
   FileSystemByPolicy,
   SnapshotInfo,
-  MountInfo,
+  AvailableProtoStatus,
   UpdateCfsFileSystemPGroupRequest,
   CreateMigrationTaskResponse,
   DeleteAutoSnapshotPolicyResponse,
   DeleteCfsRuleResponse,
   UpdateCfsSnapshotAttributeResponse,
   UpdateCfsPGroupRequest,
-  CreateAccessCertResponse,
+  DeleteDataFlowRequest,
+  PathInfo,
   SetUserQuotaResponse,
   TagInfo,
   DescribeCfsPGroupsRequest,
   DeleteCfsPGroupResponse,
   UpdateCfsSnapshotAttributeRequest,
   DescribeUserQuotaResponse,
+  ModifyLifecyclePolicyRequest,
+  DeleteLifecyclePolicyRequest,
   TieringDetailInfo,
+  CreateLifecyclePolicyRequest,
   PGroupInfo,
   CreateCfsRuleResponse,
   StopMigrationTaskResponse,
-  DescribeCfsSnapshotsResponse,
+  CreateAccessCertResponse,
   StopMigrationTaskRequest,
   DescribeAutoSnapshotPoliciesResponse,
+  ModifyDataFlowRequest,
   DescribeCfsSnapshotOverviewRequest,
   CreateAutoSnapshotPolicyRequest,
+  CreateDataFlowRequest,
+  DescribeDataFlowResponse,
 } from "./cfs_models"
 
 /**
@@ -161,13 +193,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SignUpCfsService）用于开通CFS服务。
+   * 查询生命周期任务的接口
    */
-  async SignUpCfsService(
-    req?: SignUpCfsServiceRequest,
-    cb?: (error: string, rep: SignUpCfsServiceResponse) => void
-  ): Promise<SignUpCfsServiceResponse> {
-    return this.request("SignUpCfsService", req, cb)
+  async DescribeLifecycleDataTask(
+    req: DescribeLifecycleDataTaskRequest,
+    cb?: (error: string, rep: DescribeLifecycleDataTaskResponse) => void
+  ): Promise<DescribeLifecycleDataTaskResponse> {
+    return this.request("DescribeLifecycleDataTask", req, cb)
   }
 
   /**
@@ -181,13 +213,34 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeCfsPGroups）用于查询权限组列表。
+   * 用于删除文件系统
    */
-  async DescribeCfsPGroups(
-    req?: DescribeCfsPGroupsRequest,
-    cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void
-  ): Promise<DescribeCfsPGroupsResponse> {
-    return this.request("DescribeCfsPGroups", req, cb)
+  async DeleteCfsFileSystem(
+    req: DeleteCfsFileSystemRequest,
+    cb?: (error: string, rep: DeleteCfsFileSystemResponse) => void
+  ): Promise<DeleteCfsFileSystemResponse> {
+    return this.request("DeleteCfsFileSystem", req, cb)
+  }
+
+  /**
+   * 更新文件系统快照名称及保留时长
+   */
+  async UpdateCfsSnapshotAttribute(
+    req: UpdateCfsSnapshotAttributeRequest,
+    cb?: (error: string, rep: UpdateCfsSnapshotAttributeResponse) => void
+  ): Promise<UpdateCfsSnapshotAttributeResponse> {
+    return this.request("UpdateCfsSnapshotAttribute", req, cb)
+  }
+
+  /**
+     * 用于获取迁移任务列表。
+此接口需提交工单，开启白名单之后才能使用。
+     */
+  async DescribeMigrationTasks(
+    req: DescribeMigrationTasksRequest,
+    cb?: (error: string, rep: DescribeMigrationTasksResponse) => void
+  ): Promise<DescribeMigrationTasksResponse> {
+    return this.request("DescribeMigrationTasks", req, cb)
   }
 
   /**
@@ -212,13 +265,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文件系统快照定期策略列表信息
+   * 本接口（CreateCfsPGroup）用于创建权限组
    */
-  async DescribeAutoSnapshotPolicies(
-    req: DescribeAutoSnapshotPoliciesRequest,
-    cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void
-  ): Promise<DescribeAutoSnapshotPoliciesResponse> {
-    return this.request("DescribeAutoSnapshotPolicies", req, cb)
+  async CreateCfsPGroup(
+    req: CreateCfsPGroupRequest,
+    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
+  ): Promise<CreateCfsPGroupResponse> {
+    return this.request("CreateCfsPGroup", req, cb)
   }
 
   /**
@@ -232,6 +285,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建数据流动接口
+   */
+  async CreateDataFlow(
+    req: CreateDataFlowRequest,
+    cb?: (error: string, rep: CreateDataFlowResponse) => void
+  ): Promise<CreateDataFlowResponse> {
+    return this.request("CreateDataFlow", req, cb)
+  }
+
+  /**
    * 本接口（DeleteCfsPGroup）用于删除权限组，只有未绑定文件系统的权限组才能够被此接口删除。
    */
   async DeleteCfsPGroup(
@@ -239,6 +302,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCfsPGroupResponse) => void
   ): Promise<DeleteCfsPGroupResponse> {
     return this.request("DeleteCfsPGroup", req, cb)
+  }
+
+  /**
+   * 删除生命周期管理策略
+   */
+  async DeleteLifecyclePolicy(
+    req: DeleteLifecyclePolicyRequest,
+    cb?: (error: string, rep: DeleteLifecyclePolicyResponse) => void
+  ): Promise<DeleteLifecyclePolicyResponse> {
+    return this.request("DeleteLifecyclePolicy", req, cb)
+  }
+
+  /**
+   * 下载生命周期任务中文件列表
+   */
+  async CreateLifecyclePolicyDownloadTask(
+    req: CreateLifecyclePolicyDownloadTaskRequest,
+    cb?: (error: string, rep: CreateLifecyclePolicyDownloadTaskResponse) => void
+  ): Promise<CreateLifecyclePolicyDownloadTaskResponse> {
+    return this.request("CreateLifecyclePolicyDownloadTask", req, cb)
   }
 
   /**
@@ -272,14 +355,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于获取迁移任务列表。
-此接口需提交工单，开启白名单之后才能使用。
-     */
-  async DescribeMigrationTasks(
-    req: DescribeMigrationTasksRequest,
-    cb?: (error: string, rep: DescribeMigrationTasksResponse) => void
-  ): Promise<DescribeMigrationTasksResponse> {
-    return this.request("DescribeMigrationTasks", req, cb)
+   * 用于获取数据源桶列表。
+   */
+  async DescribeBucketList(
+    req: DescribeBucketListRequest,
+    cb?: (error: string, rep: DescribeBucketListResponse) => void
+  ): Promise<DescribeBucketListResponse> {
+    return this.request("DescribeBucketList", req, cb)
   }
 
   /**
@@ -293,13 +375,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateCfsFileSystemName）用于更新文件系统名
+   * 支持主动沉降/预热接口
    */
-  async UpdateCfsFileSystemName(
-    req: UpdateCfsFileSystemNameRequest,
-    cb?: (error: string, rep: UpdateCfsFileSystemNameResponse) => void
-  ): Promise<UpdateCfsFileSystemNameResponse> {
-    return this.request("UpdateCfsFileSystemName", req, cb)
+  async CreateLifecycleDataTask(
+    req: CreateLifecycleDataTaskRequest,
+    cb?: (error: string, rep: CreateLifecycleDataTaskResponse) => void
+  ): Promise<CreateLifecycleDataTaskResponse> {
+    return this.request("CreateLifecycleDataTask", req, cb)
+  }
+
+  /**
+   * 本接口（SignUpCfsService）用于开通CFS服务。
+   */
+  async SignUpCfsService(
+    req?: SignUpCfsServiceRequest,
+    cb?: (error: string, rep: SignUpCfsServiceResponse) => void
+  ): Promise<SignUpCfsServiceResponse> {
+    return this.request("SignUpCfsService", req, cb)
   }
 
   /**
@@ -333,23 +425,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建定期快照策略
+   * 创建文件存储生命周期策略
    */
-  async CreateAutoSnapshotPolicy(
-    req: CreateAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
-  ): Promise<CreateAutoSnapshotPolicyResponse> {
-    return this.request("CreateAutoSnapshotPolicy", req, cb)
-  }
-
-  /**
-   * 用于删除文件系统
-   */
-  async DeleteCfsFileSystem(
-    req: DeleteCfsFileSystemRequest,
-    cb?: (error: string, rep: DeleteCfsFileSystemResponse) => void
-  ): Promise<DeleteCfsFileSystemResponse> {
-    return this.request("DeleteCfsFileSystem", req, cb)
+  async CreateLifecyclePolicy(
+    req: CreateLifecyclePolicyRequest,
+    cb?: (error: string, rep: CreateLifecyclePolicyResponse) => void
+  ): Promise<CreateLifecyclePolicyResponse> {
+    return this.request("CreateLifecyclePolicy", req, cb)
   }
 
   /**
@@ -363,13 +445,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新文件系统快照名称及保留时长
+   * 本接口（DescribeCfsPGroups）用于查询权限组列表。
    */
-  async UpdateCfsSnapshotAttribute(
-    req: UpdateCfsSnapshotAttributeRequest,
-    cb?: (error: string, rep: UpdateCfsSnapshotAttributeResponse) => void
-  ): Promise<UpdateCfsSnapshotAttributeResponse> {
-    return this.request("UpdateCfsSnapshotAttribute", req, cb)
+  async DescribeCfsPGroups(
+    req?: DescribeCfsPGroupsRequest,
+    cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void
+  ): Promise<DescribeCfsPGroupsResponse> {
+    return this.request("DescribeCfsPGroups", req, cb)
   }
 
   /**
@@ -383,6 +465,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询生命周期管理策略
+   */
+  async DescribeLifecyclePolicies(
+    req: DescribeLifecyclePoliciesRequest,
+    cb?: (error: string, rep: DescribeLifecyclePoliciesResponse) => void
+  ): Promise<DescribeLifecyclePoliciesResponse> {
+    return this.request("DescribeLifecyclePolicies", req, cb)
+  }
+
+  /**
    * 查询文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
    */
   async DescribeUserQuota(
@@ -393,23 +485,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用来设置文件系统扩容策略，该接口只支持turbo文件系统
+   * 配置生命周期策略关联到的目录列表
    */
-  async ModifyFileSystemAutoScaleUpRule(
-    req: ModifyFileSystemAutoScaleUpRuleRequest,
-    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
-  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
-    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
+  async ApplyPathLifecyclePolicy(
+    req: ApplyPathLifecyclePolicyRequest,
+    cb?: (error: string, rep: ApplyPathLifecyclePolicyResponse) => void
+  ): Promise<ApplyPathLifecyclePolicyResponse> {
+    return this.request("ApplyPathLifecyclePolicy", req, cb)
   }
 
   /**
-   * 更新定期自动快照策略
+   * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
    */
-  async UpdateAutoSnapshotPolicy(
-    req: UpdateAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: UpdateAutoSnapshotPolicyResponse) => void
-  ): Promise<UpdateAutoSnapshotPolicyResponse> {
-    return this.request("UpdateAutoSnapshotPolicy", req, cb)
+  async DeleteUserQuota(
+    req: DeleteUserQuotaRequest,
+    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
+  ): Promise<DeleteUserQuotaResponse> {
+    return this.request("DeleteUserQuota", req, cb)
+  }
+
+  /**
+   * 修改数据流动相关参数
+   */
+  async ModifyDataFlow(
+    req: ModifyDataFlowRequest,
+    cb?: (error: string, rep: ModifyDataFlowResponse) => void
+  ): Promise<ModifyDataFlowResponse> {
+    return this.request("ModifyDataFlow", req, cb)
   }
 
   /**
@@ -433,6 +535,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用来设置文件系统扩容策略，该接口只支持turbo文件系统
+   */
+  async ModifyFileSystemAutoScaleUpRule(
+    req: ModifyFileSystemAutoScaleUpRuleRequest,
+    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
+  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
+    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
+  }
+
+  /**
    * 查询文件系统快照列表
    */
   async DescribeCfsSnapshots(
@@ -453,6 +565,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新文件存储生命周期策略
+   */
+  async ModifyLifecyclePolicy(
+    req: ModifyLifecyclePolicyRequest,
+    cb?: (error: string, rep: ModifyLifecyclePolicyResponse) => void
+  ): Promise<ModifyLifecyclePolicyResponse> {
+    return this.request("ModifyLifecyclePolicy", req, cb)
+  }
+
+  /**
    * 本接口（DeleteCfsRule）用于删除权限组规则。
    */
   async DeleteCfsRule(
@@ -463,13 +585,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取数据源桶列表。
+   * 删除数据流动
    */
-  async DescribeBucketList(
-    req: DescribeBucketListRequest,
-    cb?: (error: string, rep: DescribeBucketListResponse) => void
-  ): Promise<DescribeBucketListResponse> {
-    return this.request("DescribeBucketList", req, cb)
+  async DeleteDataFlow(
+    req: DeleteDataFlowRequest,
+    cb?: (error: string, rep: DeleteDataFlowResponse) => void
+  ): Promise<DeleteDataFlowResponse> {
+    return this.request("DeleteDataFlow", req, cb)
   }
 
   /**
@@ -494,23 +616,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
+   * 创建定期快照策略
    */
-  async DeleteUserQuota(
-    req: DeleteUserQuotaRequest,
-    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
-  ): Promise<DeleteUserQuotaResponse> {
-    return this.request("DeleteUserQuota", req, cb)
+  async CreateAutoSnapshotPolicy(
+    req: CreateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
+  ): Promise<CreateAutoSnapshotPolicyResponse> {
+    return this.request("CreateAutoSnapshotPolicy", req, cb)
   }
 
   /**
-   * 本接口（CreateCfsPGroup）用于创建权限组
+   * 查询文件系统快照定期策略列表信息
    */
-  async CreateCfsPGroup(
-    req: CreateCfsPGroupRequest,
-    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
-  ): Promise<CreateCfsPGroupResponse> {
-    return this.request("CreateCfsPGroup", req, cb)
+  async DescribeAutoSnapshotPolicies(
+    req: DescribeAutoSnapshotPoliciesRequest,
+    cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void
+  ): Promise<DescribeAutoSnapshotPoliciesResponse> {
+    return this.request("DescribeAutoSnapshotPolicies", req, cb)
   }
 
   /**
@@ -524,6 +646,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 终止生命周期任务的接口
+   */
+  async StopLifecycleDataTask(
+    req: StopLifecycleDataTaskRequest,
+    cb?: (error: string, rep: StopLifecycleDataTaskResponse) => void
+  ): Promise<StopLifecycleDataTaskResponse> {
+    return this.request("StopLifecycleDataTask", req, cb)
+  }
+
+  /**
    * 创建文件系统快照
    */
   async CreateCfsSnapshot(
@@ -531,6 +663,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCfsSnapshotResponse) => void
   ): Promise<CreateCfsSnapshotResponse> {
     return this.request("CreateCfsSnapshot", req, cb)
+  }
+
+  /**
+   * 更新定期自动快照策略
+   */
+  async UpdateAutoSnapshotPolicy(
+    req: UpdateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: UpdateAutoSnapshotPolicyResponse) => void
+  ): Promise<UpdateAutoSnapshotPolicyResponse> {
+    return this.request("UpdateAutoSnapshotPolicy", req, cb)
   }
 
   /**
@@ -551,6 +693,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSnapshotOperationLogsResponse) => void
   ): Promise<DescribeSnapshotOperationLogsResponse> {
     return this.request("DescribeSnapshotOperationLogs", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateCfsFileSystemName）用于更新文件系统名
+   */
+  async UpdateCfsFileSystemName(
+    req: UpdateCfsFileSystemNameRequest,
+    cb?: (error: string, rep: UpdateCfsFileSystemNameResponse) => void
+  ): Promise<UpdateCfsFileSystemNameResponse> {
+    return this.request("UpdateCfsFileSystemName", req, cb)
+  }
+
+  /**
+   * 查询数据流动信息接口
+   */
+  async DescribeDataFlow(
+    req: DescribeDataFlowRequest,
+    cb?: (error: string, rep: DescribeDataFlowResponse) => void
+  ): Promise<DescribeDataFlowResponse> {
+    return this.request("DescribeDataFlow", req, cb)
   }
 
   /**

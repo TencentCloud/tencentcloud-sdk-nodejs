@@ -138,6 +138,16 @@ it("cam.v20190116.UpdateUserOIDCConfig", async function () {
     }
 })
 
+it("cam.v20190116.CreateSubAccountLoginIpPolicy", async function () {
+    try {
+       const data = await client.CreateSubAccountLoginIpPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.GetServiceLinkedRoleDeletionStatus", async function () {
     try {
        const data = await client.GetServiceLinkedRoleDeletionStatus({})
@@ -278,9 +288,9 @@ it("cam.v20190116.GetGroup", async function () {
     }
 })
 
-it("cam.v20190116.CreateUserOIDCConfig", async function () {
+it("cam.v20190116.DeleteOIDCConfig", async function () {
     try {
-       const data = await client.CreateUserOIDCConfig({})
+       const data = await client.DeleteOIDCConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +388,9 @@ it("cam.v20190116.CreateSAMLProvider", async function () {
     }
 })
 
-it("cam.v20190116.DeleteOIDCConfig", async function () {
+it("cam.v20190116.CreateUserOIDCConfig", async function () {
     try {
-       const data = await client.DeleteOIDCConfig({})
+       const data = await client.CreateUserOIDCConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

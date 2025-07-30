@@ -199,6 +199,30 @@ export interface DescribeKnowledgeDocumentSetListResponse {
 }
 
 /**
+ * DeleteAppBindWxApp返回参数结构体
+ */
+export interface DeleteAppBindWxAppResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据源模糊查询参数
+ */
+export interface DataSourceQueryOption {
+  /**
+   * 数据源标识模糊匹配
+   */
+  LikeName?: string
+  /**
+   * 数据源名称模糊匹配
+   */
+  LikeTitle?: string
+}
+
+/**
  * 上传知识库文档返回结果
  */
 export interface UploadKnowledgeDocumentSetRsp {
@@ -223,20 +247,6 @@ export interface UploadKnowledgeDocumentSetRsp {
    * Cos存储文件ID
    */
   FileId?: string
-}
-
-/**
- * 数据源模糊查询参数
- */
-export interface DataSourceQueryOption {
-  /**
-   * 数据源标识模糊匹配
-   */
-  LikeName?: string
-  /**
-   * 数据源名称模糊匹配
-   */
-  LikeTitle?: string
 }
 
 /**
@@ -274,6 +284,20 @@ export interface PageQuery {
 }
 
 /**
+ * CheckDeployApp返回参数结构体
+ */
+export interface CheckDeployAppResponse {
+  /**
+   * 状态：success、building、reviewFail、releaseSuccess、underReview
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchDocList返回参数结构体
  */
 export interface SearchDocListResponse {
@@ -288,13 +312,53 @@ export interface SearchDocListResponse {
 }
 
 /**
- * DeleteKnowledgeSet返回参数结构体
+ * CheckDeployApp请求参数结构体
  */
-export interface DeleteKnowledgeSetResponse {
+export interface CheckDeployAppRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 环境ID
    */
-  RequestId?: string
+  EnvId: string
+  /**
+   * 应用id
+   */
+  Id: string
+  /**
+   * 构建 Id
+   */
+  BuildId: string
+}
+
+/**
+ * DescribeKnowledgeDocumentSetList请求参数结构体
+ */
+export interface DescribeKnowledgeDocumentSetListRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 知识库标识
+   */
+  CollectionView: string
+  /**
+   * 查询条件
+   */
+  Query?: PageQuery
+}
+
+/**
+ * PutWxAppIdToWeApp请求参数结构体
+ */
+export interface PutWxAppIdToWeAppRequest {
+  /**
+   * 应用ID
+   */
+  WeAppId: string
+  /**
+   * 微信AppId
+   */
+  WxAppId: string
 }
 
 /**
@@ -609,6 +673,32 @@ ENABLED 已启用
 }
 
 /**
+ * DeployApp请求参数结构体
+ */
+export interface DeployAppRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 应用id
+   */
+  Id: string
+  /**
+   * 发布体验preview/正式upload
+   */
+  Mode?: string
+  /**
+   * 构建类型：mp、pc、web、adminPortal
+   */
+  BuildType?: string
+  /**
+   * 子包数组
+   */
+  SubAppIds?: Array<string>
+}
+
+/**
  * 文件拆分信息
  */
 export interface KnowledgeSplitterPreprocess {
@@ -651,9 +741,22 @@ export interface DescribeKnowledgeDocumentSetDetailRequest {
 }
 
 /**
- * CreateKnowledgeSet返回参数结构体
+ * DeployApp返回参数结构体
  */
-export interface CreateKnowledgeSetResponse {
+export interface DeployAppResponse {
+  /**
+   * 构建id
+   */
+  BuildId?: string
+  /**
+   * 发布错误code
+   */
+  DeployErrCode?: number
+  /**
+   * 发布错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeployErrMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -693,21 +796,13 @@ export interface RelationField {
 }
 
 /**
- * DescribeKnowledgeDocumentSetList请求参数结构体
+ * DeleteKnowledgeSet返回参数结构体
  */
-export interface DescribeKnowledgeDocumentSetListRequest {
+export interface DeleteKnowledgeSetResponse {
   /**
-   * 环境ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
-  /**
-   * 知识库标识
-   */
-  CollectionView: string
-  /**
-   * 查询条件
-   */
-  Query?: PageQuery
+  RequestId?: string
 }
 
 /**
@@ -886,6 +981,16 @@ export interface DescribeDataSourceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteAppBindWxApp请求参数结构体
+ */
+export interface DeleteAppBindWxAppRequest {
+  /**
+   * 应用id
+   */
+  WeappId: string
 }
 
 /**
@@ -1165,4 +1270,24 @@ export interface DataSourceDetailItems {
    * 数据源列表总个数
    */
   Count?: number
+}
+
+/**
+ * PutWxAppIdToWeApp返回参数结构体
+ */
+export interface PutWxAppIdToWeAppResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateKnowledgeSet返回参数结构体
+ */
+export interface CreateKnowledgeSetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

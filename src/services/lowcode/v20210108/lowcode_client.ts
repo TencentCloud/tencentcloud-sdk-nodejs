@@ -25,27 +25,33 @@ import {
   UpdateKnowledgeSetResponse,
   SearchDocListRequest,
   DescribeKnowledgeDocumentSetListResponse,
-  UploadKnowledgeDocumentSetRsp,
+  DeleteAppBindWxAppResponse,
   DataSourceQueryOption,
+  UploadKnowledgeDocumentSetRsp,
   PageQuery,
+  CheckDeployAppResponse,
   SearchDocListResponse,
-  DeleteKnowledgeSetResponse,
+  CheckDeployAppRequest,
+  DescribeKnowledgeDocumentSetListRequest,
+  PutWxAppIdToWeAppRequest,
   DocumentQuery,
   UpdateKnowledgeSetRequest,
   SearchDocInfo,
   DataSourceDetail,
   KnowledgeSet,
+  DeployAppRequest,
   KnowledgeSplitterPreprocess,
   DescribeKnowledgeDocumentSetDetailRequest,
-  CreateKnowledgeSetResponse,
+  DeployAppResponse,
   DeleteKnowledgeSetRequest,
   RelationField,
-  DescribeKnowledgeDocumentSetListRequest,
+  DeleteKnowledgeSetResponse,
   DescribeDataSourceListRequest,
   DeleteKnowledgeDocumentSetRequest,
   QureyKnowledgeDocumentSet,
   DescribeKnowledgeSetListResponse,
   DescribeDataSourceListResponse,
+  DeleteAppBindWxAppRequest,
   UploadKnowledgeDocumentSetResponse,
   DeleteKnowledgeDocumentSetResponse,
   TicketAuthInfo,
@@ -59,6 +65,8 @@ import {
   SearchDocRsp,
   KnowledgeSetRsp,
   DataSourceDetailItems,
+  PutWxAppIdToWeAppResponse,
+  CreateKnowledgeSetResponse,
 } from "./lowcode_models"
 
 /**
@@ -78,6 +86,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateKnowledgeSetResponse) => void
   ): Promise<CreateKnowledgeSetResponse> {
     return this.request("CreateKnowledgeSet", req, cb)
+  }
+
+  /**
+   * 检查应用发布状态
+   */
+  async CheckDeployApp(
+    req: CheckDeployAppRequest,
+    cb?: (error: string, rep: CheckDeployAppResponse) => void
+  ): Promise<CheckDeployAppResponse> {
+    return this.request("CheckDeployApp", req, cb)
   }
 
   /**
@@ -151,6 +169,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除应用绑定小程序
+   */
+  async DeleteAppBindWxApp(
+    req: DeleteAppBindWxAppRequest,
+    cb?: (error: string, rep: DeleteAppBindWxAppResponse) => void
+  ): Promise<DeleteAppBindWxAppResponse> {
+    return this.request("DeleteAppBindWxApp", req, cb)
+  }
+
+  /**
    * 查询知识库下文件集合
    */
   async DescribeKnowledgeDocumentSetList(
@@ -158,6 +186,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKnowledgeDocumentSetListResponse) => void
   ): Promise<DescribeKnowledgeDocumentSetListResponse> {
     return this.request("DescribeKnowledgeDocumentSetList", req, cb)
+  }
+
+  /**
+   * 发布应用
+   */
+  async DeployApp(
+    req: DeployAppRequest,
+    cb?: (error: string, rep: DeployAppResponse) => void
+  ): Promise<DeployAppResponse> {
+    return this.request("DeployApp", req, cb)
+  }
+
+  /**
+   * 接口提供应用绑定微信ID功能。
+   */
+  async PutWxAppIdToWeApp(
+    req: PutWxAppIdToWeAppRequest,
+    cb?: (error: string, rep: PutWxAppIdToWeAppResponse) => void
+  ): Promise<PutWxAppIdToWeAppResponse> {
+    return this.request("PutWxAppIdToWeApp", req, cb)
   }
 
   /**

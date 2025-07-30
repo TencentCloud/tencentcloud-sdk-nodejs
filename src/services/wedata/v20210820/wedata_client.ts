@@ -237,6 +237,7 @@ import {
   DescribeTenantProjectsRequest,
   DescribeTaskRunHistoryResponse,
   LockIntegrationTaskRequest,
+  DescribeSuccessorTaskInfoListResponse,
   BatchStopWorkflowsByIdsRequest,
   DescribeDutyScheduleListResponse,
   AsyncResourceVO,
@@ -536,6 +537,7 @@ import {
   DescribeRuleTemplatesByPageResponse,
   DescribeTemplateDimCountResponse,
   DataSourceConnectStatus,
+  SuccessorTaskInfo,
   DescribeFunctionTypesRequest,
   DimensionCount,
   AttributeItemDTO,
@@ -742,6 +744,7 @@ import {
   RuleExecResultPage,
   DescribeTaskByStatusReportRequest,
   ExtParam,
+  DescribeSuccessorTaskInfoListRequest,
   BatchForceSuccessIntegrationTaskInstancesRequest,
   DescribeRealTimeTaskInstanceNodeInfoResponse,
   DescribeTaskByCycleReportRequest,
@@ -2997,6 +3000,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 暂停工作流下的所有任务
+   */
+  async FreezeTasksByWorkflowIds(
+    req: FreezeTasksByWorkflowIdsRequest,
+    cb?: (error: string, rep: FreezeTasksByWorkflowIdsResponse) => void
+  ): Promise<FreezeTasksByWorkflowIdsResponse> {
+    return this.request("FreezeTasksByWorkflowIds", req, cb)
+  }
+
+  /**
    * 列出表血缘信息
    */
   async DescribeTableLineage(
@@ -3267,13 +3280,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 暂停工作流下的所有任务
+   * 获取下游任务信息批量
    */
-  async FreezeTasksByWorkflowIds(
-    req: FreezeTasksByWorkflowIdsRequest,
-    cb?: (error: string, rep: FreezeTasksByWorkflowIdsResponse) => void
-  ): Promise<FreezeTasksByWorkflowIdsResponse> {
-    return this.request("FreezeTasksByWorkflowIds", req, cb)
+  async DescribeSuccessorTaskInfoList(
+    req: DescribeSuccessorTaskInfoListRequest,
+    cb?: (error: string, rep: DescribeSuccessorTaskInfoListResponse) => void
+  ): Promise<DescribeSuccessorTaskInfoListResponse> {
+    return this.request("DescribeSuccessorTaskInfoList", req, cb)
   }
 
   /**

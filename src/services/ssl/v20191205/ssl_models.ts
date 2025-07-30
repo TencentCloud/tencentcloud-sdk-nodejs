@@ -255,7 +255,7 @@ export interface DescribeHostDeployRecordDetailResponse {
    */
   RunningTotalCount?: number
   /**
-   * 带部署总数
+   * 待部署总数
    */
   PendingTotalCount?: number
   /**
@@ -397,6 +397,10 @@ export interface DeployRecordDetail {
    * 原证书加密算法
    */
   OldAlgorithm?: string
+  /**
+   * 实例状态，不同云产品状态不一样
+   */
+  InstanceStatus?: string
 }
 
 /**
@@ -572,11 +576,11 @@ null：用户上传证书（没有套餐类型），
    */
   VerifyType?: string
   /**
-   * 证书生效时间。
+   * 证书生效时间。时区为GMT+8:00
    */
   CertBeginTime?: string
   /**
-   * 证书过期时间。
+   * 证书过期时间。时区为GMT+8:00
    */
   CertEndTime?: string
   /**
@@ -584,7 +588,7 @@ null：用户上传证书（没有套餐类型），
    */
   ValidityPeriod?: string
   /**
-   * 创建时间。
+   * 创建时间。时区为GMT+8:00
    */
   InsertTime?: string
   /**
@@ -696,11 +700,11 @@ null：用户上传证书（没有套餐类型），
    */
   IsExpiring?: boolean
   /**
-   * DV证书添加验证截止时间
+   * DV证书添加验证截止时间，时区为GMT+8:00
    */
   DVAuthDeadline?: string
   /**
-   * 域名验证通过时间
+   * 域名验证通过时间，时区为GMT+8:00
    */
   ValidationPassedTime?: string
   /**
@@ -732,7 +736,7 @@ null：用户上传证书（没有套餐类型），
    */
   SupportDownloadType?: SupportDownloadType
   /**
-   * 证书吊销完成时间
+   * 证书吊销完成时间，时区为GMT+8:00
    */
   CertRevokedTime?: string
   /**
@@ -1037,7 +1041,7 @@ export interface DescribeDeployedResourcesRequest {
    */
   CertificateIds: Array<string>
   /**
-   * 资源类型:clb,cdn,live,waf,antiddos,teo
+   * 资源类型:clb,cdn,live,vod,waf,antiddos,teo
    */
   ResourceType: string
 }
@@ -1976,12 +1980,12 @@ null：用户上传证书（没有套餐类型），
    */
   VulnerabilityStatus?: string
   /**
-   * 证书生效时间。
+   * 证书生效时间。时区为GMT+8:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertBeginTime?: string
   /**
-   * 证书失效时间。
+   * 证书失效时间。时区为GMT+8:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertEndTime?: string
@@ -1991,7 +1995,7 @@ null：用户上传证书（没有套餐类型），
    */
   ValidityPeriod?: string
   /**
-   * 申请时间。
+   * 申请时间。时区为GMT+8:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InsertTime?: string
@@ -2086,7 +2090,7 @@ null：用户上传证书（没有套餐类型），
    */
   CACommonNames?: Array<string>
   /**
-   * CA证书所有的到期时间。仅证书类型CertificateType为CA有效
+   * CA证书所有的到期时间。仅证书类型CertificateType为CA有效，时区为GMT+8:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CAEndTimes?: Array<string>

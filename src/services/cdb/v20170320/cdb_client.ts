@@ -1225,8 +1225,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeSlowLogs)用于获取云数据库实例的慢查询日志。说明：若单次查询数据量过大，则有可能响应超时，建议缩短单次查询时间范围，如一小时，避免导致超时。
-   */
+     * 本接口（DescribeSlowLogs）用于获取云数据库实例的慢查询日志。
+说明：若单次查询数据量过大，则有可能响应超时，建议缩短单次查询时间范围，如一小时，避免导致超时。
+     */
   async DescribeSlowLogs(
     req: DescribeSlowLogsRequest,
     cb?: (error: string, rep: DescribeSlowLogsResponse) => void

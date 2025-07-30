@@ -4311,7 +4311,7 @@ export interface Task {
    * 状态。取值有：
 <li>processing：处理中；</li>
 <li>success：成功；</li>
-<li> failed：失败；</li>
+<li>failed：失败；</li>
 <li>timeout：超时；</li>
 <li>canceled：已取消。</li>
    */
@@ -4324,6 +4324,19 @@ export interface Task {
    * 任务完成时间。
    */
   UpdateTime?: string
+  /**
+   * 刷新、预热失败类型。取值有：
+<li>taskFailed：任务失败；</li>
+<li>quotaExceeded：配额超限；</li>
+<li>downloadManifestFailed：下载描述文件失败；</li>
+<li>accessDenied：访问被拒绝。</li>
+<li>originPullFailed：回源失败。</li>
+   */
+  FailType?: string
+  /**
+   * 刷新、预热失败描述。
+   */
+  FailMessage?: string
 }
 
 /**

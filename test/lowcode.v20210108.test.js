@@ -28,6 +28,16 @@ it("lowcode.v20210108.CreateKnowledgeSet", async function () {
     }
 })
 
+it("lowcode.v20210108.CheckDeployApp", async function () {
+    try {
+       const data = await client.CheckDeployApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lowcode.v20210108.UpdateKnowledgeSet", async function () {
     try {
        const data = await client.UpdateKnowledgeSet({})
@@ -98,9 +108,39 @@ it("lowcode.v20210108.UploadKnowledgeDocumentSet", async function () {
     }
 })
 
+it("lowcode.v20210108.DeleteAppBindWxApp", async function () {
+    try {
+       const data = await client.DeleteAppBindWxApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lowcode.v20210108.DescribeKnowledgeDocumentSetList", async function () {
     try {
        const data = await client.DescribeKnowledgeDocumentSetList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lowcode.v20210108.DeployApp", async function () {
+    try {
+       const data = await client.DeployApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lowcode.v20210108.PutWxAppIdToWeApp", async function () {
+    try {
+       const data = await client.PutWxAppIdToWeApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

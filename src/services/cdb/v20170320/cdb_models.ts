@@ -511,19 +511,19 @@ export interface ParamRecord {
  */
 export interface DescribeParamTemplatesRequest {
   /**
-   * 引擎版本，缺省则查询所有
+   * 引擎版本，缺省则查询所有。可取值为：5.5、5.6、5.7、8.0。
    */
   EngineVersions?: Array<string>
   /**
-   * 引擎类型，缺省则查询所有
+   * 引擎类型，缺省则查询所有。可取值为：InnoDB、RocksDB，不区分大小写。
    */
   EngineTypes?: Array<string>
   /**
-   * 模板名称，缺省则查询所有
+   * 模板名称，缺省则查询所有。支持模糊匹配。
    */
   TemplateNames?: Array<string>
   /**
-   * 模板id，缺省则查询所有
+   * 模板 ID，缺省则查询所有。
    */
   TemplateIds?: Array<number | bigint>
 }
@@ -863,7 +863,7 @@ export interface PeriodStrategy {
  */
 export interface DescribeParamTemplateInfoRequest {
   /**
-   * 参数模板 ID。
+   * 参数模板 ID。可通过 [DescribeParamTemplates](https://cloud.tencent.com/document/api/236/32659) 接口获取。
    */
   TemplateId: number
 }
@@ -2199,7 +2199,7 @@ export interface DescribeParamTemplateInfoResponse {
    */
   Name?: string
   /**
-   * 参数模板对应实例版本
+   * 参数模板对应实例版本，可取值：5.5、5.6、5.7、8.0。
    */
   EngineVersion?: string
   /**
@@ -2561,7 +2561,7 @@ export interface DescribeBinlogsRequest {
    */
   Offset?: number
   /**
-   * 分页大小，默认值为20，最小值为1，最大值为100。
+   * 分页大小，默认值为20，最小值为1，最大值为1000。
    */
   Limit?: number
   /**
@@ -2976,7 +2976,7 @@ export interface SwitchDBInstanceMasterSlaveResponse {
  */
 export interface DescribeBackupsRequest {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
@@ -2984,7 +2984,7 @@ export interface DescribeBackupsRequest {
    */
   Offset?: number
   /**
-   * 分页大小，默认值为20，最小值为1，最大值为100。
+   * 分页大小，默认值为20，最小值为1，最大值为1000。
    */
   Limit?: number
 }
@@ -3157,10 +3157,12 @@ export interface BinlogInfo {
   Date?: string
   /**
    * 下载地址
+说明：此下载地址和参数 InternetUrl 的下载地址一样。
    */
   IntranetUrl?: string
   /**
    * 下载地址
+说明：此下载地址和参数 IntranetUrl 的下载地址一样。
    */
   InternetUrl?: string
   /**
@@ -3193,6 +3195,7 @@ export interface BinlogInfo {
   CosStorageType?: number
   /**
    * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+   * @deprecated
    */
   InstanceId?: string
 }
@@ -3574,7 +3577,7 @@ export interface DeleteAccountsResponse {
  */
 export interface ParamTemplateInfo {
   /**
-   * 参数模板ID
+   * 参数模板 ID
    */
   TemplateId?: number
   /**
@@ -3586,15 +3589,15 @@ export interface ParamTemplateInfo {
    */
   Description?: string
   /**
-   * 实例引擎版本
+   * 实例引擎版本，值为：5.5、5.6、5.7、8.0。
    */
   EngineVersion?: string
   /**
-   * 参数模板类型
+   * 参数模板类型，值为：HIGH_STABILITY、HIGH_PERFORMANCE。
    */
   TemplateType?: string
   /**
-   * 参数模板引擎
+   * 参数模板引擎，值为：InnoDB、RocksDB。
    */
   EngineType?: string
 }
@@ -5446,19 +5449,19 @@ export interface ModifyAuditServiceRequest {
  */
 export interface DescribeErrorLogDataRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
-   * 开始时间戳。例如 1585142640 。
+   * 开始时间戳。例如1585142640，秒级。
    */
   StartTime: number
   /**
-   * 结束时间戳。例如 1585142640 。
+   * 结束时间戳。例如1585142640，秒级。
    */
   EndTime: number
   /**
-   * 要匹配的关键字列表，最多支持15个关键字。
+   * 要匹配的关键字列表，最多支持15个关键字，支持模糊匹配。
    */
   KeyWords?: Array<string>
   /**
@@ -8596,7 +8599,7 @@ export interface DescribeSlowLogsRequest {
    */
   Offset?: number
   /**
-   * 分页大小，默认值为20，最小值为1，最大值为100。
+   * 分页大小，默认值为20，最小值为1，最大值为1000。
    */
   Limit?: number
 }
@@ -10712,7 +10715,7 @@ export interface DescribeSSLStatusRequest {
  */
 export interface DescribeSlowLogDataRequest {
   /**
-   * 实例 ID。
+   * 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
    */
   InstanceId: string
   /**
@@ -10738,11 +10741,16 @@ export interface DescribeSlowLogDataRequest {
    */
   DataBases?: Array<string>
   /**
-   * 排序字段。当前支持：Timestamp,QueryTime,LockTime,RowsExamined,RowsSent 。
+   * 排序字段，当前支持字段及含义如下，默认值为 Timestamp。
+1. Timestamp：SQL 的执行时间
+2. QueryTime：SQL 的执行时长（秒）
+3. LockTime：锁时长（秒）
+4. RowsExamined：扫描行数
+5. RowsSent：结果集行数
    */
   SortBy?: string
   /**
-   * 升序还是降序排列。当前支持：ASC,DESC 。
+   * 升序还是降序排列。当前支持值为 ASC - 升序，DESC - 降序 ，默认值为 ASC。
    */
   OrderBy?: string
   /**
@@ -10750,7 +10758,7 @@ export interface DescribeSlowLogDataRequest {
    */
   Offset?: number
   /**
-   * 一次性返回的记录数量，默认为100，最大为400。
+   * 一次性返回的记录数量，默认为100，最大为800。
    */
   Limit?: number
   /**

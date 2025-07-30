@@ -223,10 +223,6 @@ export interface DescribeReportTaskListRequest {
    */
   PageSize?: number
   /**
-   * 租户id
-   */
-  TenantId?: string
-  /**
    * 项目id
    */
   ProjectId?: string
@@ -8043,6 +8039,20 @@ export interface LockIntegrationTaskRequest {
    * 项目id
    */
   ProjectId: string
+}
+
+/**
+ * DescribeSuccessorTaskInfoList返回参数结构体
+ */
+export interface DescribeSuccessorTaskInfoListResponse {
+  /**
+   * 出参
+   */
+  Data?: Array<SuccessorTaskInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18643,6 +18653,67 @@ export interface DataSourceConnectStatus {
 }
 
 /**
+ * 下游任务列表
+ */
+export interface SuccessorTaskInfo {
+  /**
+   * 任务id
+   */
+  TaskId?: string
+  /**
+   * 所属工作流id
+   */
+  WorkflowId?: string
+  /**
+   * 任务名
+   */
+  TaskName?: string
+  /**
+   * 层级，0表示当前任务
+   */
+  Layer?: number
+  /**
+   * 任务状态
+   */
+  Status?: string
+  /**
+   * 任务类型，-1表示跨流任务
+   */
+  TaskTypeId?: number
+  /**
+   * 责任人
+   */
+  InCharge?: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 项目名称
+   */
+  ProjectName?: string
+  /**
+   * 所属工作流名称
+   */
+  WorkflowName?: string
+  /**
+   * 周期单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleUnit?: string
+  /**
+   * 调度计划
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleDesc?: string
+  /**
+   * 任务类型描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeDesc?: string
+}
+
+/**
  * DescribeFunctionTypes请求参数结构体
  */
 export type DescribeFunctionTypesRequest = null
@@ -25698,6 +25769,20 @@ export interface ExtParam {
    * 具体值
    */
   Value?: string
+}
+
+/**
+ * DescribeSuccessorTaskInfoList请求参数结构体
+ */
+export interface DescribeSuccessorTaskInfoListRequest {
+  /**
+   * 任务id集合
+   */
+  TaskIds?: Array<string>
+  /**
+   * 项目id
+   */
+  ProjectId?: string
 }
 
 /**

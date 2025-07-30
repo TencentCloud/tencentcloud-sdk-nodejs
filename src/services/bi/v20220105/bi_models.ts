@@ -272,6 +272,14 @@ export interface CreateDatasourceRequest {
    * 地域
    */
   RegionId?: string
+  /**
+   * 数据库schema
+   */
+  Schema?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
 }
 
 /**
@@ -1280,7 +1288,7 @@ export interface ModifyDatasourceCloudResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 成功无
+   * 无
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
@@ -1388,6 +1396,14 @@ export interface ModifyDatasourceCloudRequest {
    * 集群id
    */
   ClusterId?: string
+  /**
+   * 数据库schema
+   */
+  Schema?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
 }
 
 /**
@@ -1482,6 +1498,14 @@ export interface ModifyDatasourceRequest {
    * 地域
    */
   RegionId?: string
+  /**
+   * 数据库schema
+   */
+  Schema?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
 }
 
 /**
@@ -2108,6 +2132,16 @@ export interface DatasourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerName?: string
+  /**
+   * 数据库schema
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Schema?: string
+  /**
+   * 数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbVersion?: string
 }
 
 /**
@@ -2656,6 +2690,14 @@ export interface CreateDatasourceCloudRequest {
    * 集群id
    */
   ClusterId?: string
+  /**
+   * 数据库schema
+   */
+  Schema?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
 }
 
 /**
