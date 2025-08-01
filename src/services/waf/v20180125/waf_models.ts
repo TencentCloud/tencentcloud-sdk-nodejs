@@ -16,6 +16,30 @@
  */
 
 /**
+ * DeleteOwaspWhiteRule请求参数结构体
+ */
+export interface DeleteOwaspWhiteRuleRequest {
+  /**
+   * 规则白名单ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 域名
+   */
+  Domain: string
+}
+
+/**
+ * ModifyUserLevel返回参数结构体
+ */
+export interface ModifyUserLevelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyWebshellStatus请求参数结构体
  */
 export interface ModifyWebshellStatusRequest {
@@ -138,55 +162,21 @@ export interface AddAntiFakeUrlRequest {
 }
 
 /**
- * ModifyIpAccessControl请求参数结构体
+ * DescribeOwaspWhiteRules返回参数结构体
  */
-export interface ModifyIpAccessControlRequest {
+export interface DescribeOwaspWhiteRulesResponse {
   /**
-   * 具体域名如：test.qcloudwaf.com
-全局域名为：global
+   * 规则总数
    */
-  Domain: string
+  Total?: number
   /**
-   * ip参数列表
+   * 规则白名单列表
    */
-  IpList: Array<string>
+  List?: Array<OwaspWhiteRule>
   /**
-   * 42为黑名单，40为白名单
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ActionType: number
-  /**
-   * 规则ID
-   */
-  RuleId: number
-  /**
-   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
-   * @deprecated
-   */
-  ValidTS?: number
-  /**
-   * 实例Id
-   */
-  InstanceId?: string
-  /**
-   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
-   */
-  Edition?: string
-  /**
-   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
-   */
-  SourceType?: string
-  /**
-   * 备注
-   */
-  Note?: string
-  /**
-   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
-   */
-  JobType?: string
-  /**
-   * 定时配置详情
-   */
-  JobDateTime?: JobDateTime
+  RequestId?: string
 }
 
 /**
@@ -391,6 +381,36 @@ export interface LoadBalancerPackageNew {
    * 负载均衡器的域名
    */
   LoadBalancerDomain?: string
+}
+
+/**
+ * DescribeOwaspWhiteRules请求参数结构体
+ */
+export interface DescribeOwaspWhiteRulesRequest {
+  /**
+   * 需要查询的域名
+   */
+  Domain: string
+  /**
+   * 分页分页，默认为0
+   */
+  Offset?: number
+  /**
+   * 每页容量，默认为10
+   */
+  Limit?: number
+  /**
+   * 排序的字段，支持CreateTime：新建时间、UpdateTime：修改时间
+   */
+  By?: string
+  /**
+   * 排序方式，支持asc、desc
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持RuleId：加白规则ID、 Name：规则名称、RuleType：加白的规则类型、Status：规则开关状态、ValidStatus：规则生效状态、TimerType：生效方式、ID：具体的加白id，根据RuleType来判断是规则id还是类型id
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -1230,97 +1250,49 @@ export interface SpartaProtectionPort {
 }
 
 /**
- * PeakPoints数组项
+ * ModifyOwaspWhiteRule请求参数结构体
  */
-export interface PeakPointsItem {
+export interface ModifyOwaspWhiteRuleRequest {
   /**
-   * 秒级别时间戳
+   * 规则ID
    */
-  Time?: number
+  RuleId: number
   /**
-   * QPS
+   * 规则名称
    */
-  Access?: number
+  Name: string
   /**
-   * 上行带宽峰值，单位B
+   * 域名
    */
-  Up?: number
+  Domain: string
   /**
-   * 下行带宽峰值，单位B
+   * 规则匹配策略列表
    */
-  Down?: number
+  Strategies: Array<Strategy>
   /**
-   * Web攻击次数
+   * 加白的规则ID列表
    */
-  Attack?: number
+  Ids: Array<number | bigint>
   /**
-   * CC攻击次数
+   * 加白的类型，0:按照特定规则ID加白, 1:按照规则类型加白
    */
-  Cc?: number
+  Type: number
   /**
-   * Bot qps
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
    */
-  BotAccess?: number
+  JobType: string
   /**
-   * WAF返回给客户端状态码5xx次数
+   * 定时任务配置
    */
-  StatusServerError?: number
+  JobDateTime: JobDateTime
   /**
-   * WAF返回给客户端状态码4xx次数
+   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
    */
-  StatusClientError?: number
+  ExpireTime: number
   /**
-   * WAF返回给客户端状态码302次数
+   * 规则状态，0：关闭、1：开启，默认为开启
    */
-  StatusRedirect?: number
-  /**
-   * WAF返回给客户端状态码202次数
-   */
-  StatusOk?: number
-  /**
-   * 源站返回给WAF状态码5xx次数
-   */
-  UpstreamServerError?: number
-  /**
-   * 源站返回给WAF状态码4xx次数
-   */
-  UpstreamClientError?: number
-  /**
-   * 源站返回给WAF状态码302次数
-   */
-  UpstreamRedirect?: number
-  /**
-   * 黑名单次数
-   */
-  BlackIP?: number
-  /**
-   * 防篡改次数
-   */
-  Tamper?: number
-  /**
-   * 信息防泄露次数
-   */
-  Leak?: number
-  /**
-   * 访问控制
-   */
-  ACL?: number
-  /**
-   * 小程序 qps
-   */
-  WxAccess?: number
-  /**
-   * 小程序请求数
-   */
-  WxCount?: number
-  /**
-   * 小程序上行带宽峰值，单位B
-   */
-  WxUp?: number
-  /**
-   * 小程序下行带宽峰值，单位B
-   */
-  WxDown?: number
+  Status?: number
 }
 
 /**
@@ -1349,6 +1321,58 @@ export interface DescribePolicyStatusRequest {
    * clb-waf或者saas-waf
    */
   Edition: string
+}
+
+/**
+ * ModifyIpAccessControl请求参数结构体
+ */
+export interface ModifyIpAccessControlRequest {
+  /**
+   * 具体域名如：test.qcloudwaf.com
+全局域名为：global
+   */
+  Domain: string
+  /**
+   * ip参数列表
+   */
+  IpList: Array<string>
+  /**
+   * 42为黑名单，40为白名单
+   */
+  ActionType: number
+  /**
+   * 规则ID
+   */
+  RuleId: number
+  /**
+   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   * @deprecated
+   */
+  ValidTS?: number
+  /**
+   * 实例Id
+   */
+  InstanceId?: string
+  /**
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   */
+  Edition?: string
+  /**
+   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   */
+  SourceType?: string
+  /**
+   * 备注
+   */
+  Note?: string
+  /**
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   */
+  JobType?: string
+  /**
+   * 定时配置详情
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -3444,6 +3468,16 @@ export interface SearchAttackLogResponse {
    * CLS接口返回内容，标志是否启动新版本索引
    */
   SqlFlag?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySpartaProtectionMode返回参数结构体
+ */
+export interface ModifySpartaProtectionModeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5770,13 +5804,45 @@ export interface BatchIpAccessControlItem {
 }
 
 /**
- * ModifyUserLevel返回参数结构体
+ * CreateOwaspWhiteRule请求参数结构体
  */
-export interface ModifyUserLevelResponse {
+export interface CreateOwaspWhiteRuleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则名称
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则匹配策略列表
+   */
+  Strategies: Array<Strategy>
+  /**
+   * 加白的规则ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 加白的类型，0:按照特定规则ID加白, 1:按照规则类型加白
+   */
+  Type: number
+  /**
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   */
+  JobType: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime: JobDateTime
+  /**
+   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
+   */
+  ExpireTime: number
+  /**
+   * 规则状态，0：关闭、1：开启，默认为开启
+   */
+  Status?: number
 }
 
 /**
@@ -7262,6 +7328,100 @@ export interface DescribeCCRuleListResponse {
 }
 
 /**
+ * PeakPoints数组项
+ */
+export interface PeakPointsItem {
+  /**
+   * 秒级别时间戳
+   */
+  Time?: number
+  /**
+   * QPS
+   */
+  Access?: number
+  /**
+   * 上行带宽峰值，单位B
+   */
+  Up?: number
+  /**
+   * 下行带宽峰值，单位B
+   */
+  Down?: number
+  /**
+   * Web攻击次数
+   */
+  Attack?: number
+  /**
+   * CC攻击次数
+   */
+  Cc?: number
+  /**
+   * Bot qps
+   */
+  BotAccess?: number
+  /**
+   * WAF返回给客户端状态码5xx次数
+   */
+  StatusServerError?: number
+  /**
+   * WAF返回给客户端状态码4xx次数
+   */
+  StatusClientError?: number
+  /**
+   * WAF返回给客户端状态码302次数
+   */
+  StatusRedirect?: number
+  /**
+   * WAF返回给客户端状态码202次数
+   */
+  StatusOk?: number
+  /**
+   * 源站返回给WAF状态码5xx次数
+   */
+  UpstreamServerError?: number
+  /**
+   * 源站返回给WAF状态码4xx次数
+   */
+  UpstreamClientError?: number
+  /**
+   * 源站返回给WAF状态码302次数
+   */
+  UpstreamRedirect?: number
+  /**
+   * 黑名单次数
+   */
+  BlackIP?: number
+  /**
+   * 防篡改次数
+   */
+  Tamper?: number
+  /**
+   * 信息防泄露次数
+   */
+  Leak?: number
+  /**
+   * 访问控制
+   */
+  ACL?: number
+  /**
+   * 小程序 qps
+   */
+  WxAccess?: number
+  /**
+   * 小程序请求数
+   */
+  WxCount?: number
+  /**
+   * 小程序上行带宽峰值，单位B
+   */
+  WxUp?: number
+  /**
+   * 小程序下行带宽峰值，单位B
+   */
+  WxDown?: number
+}
+
+/**
  * DescribeCCAutoStatus请求参数结构体
  */
 export interface DescribeCCAutoStatusRequest {
@@ -7980,6 +8140,60 @@ export interface AccessLogInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogJson?: string
+}
+
+/**
+ * 规则引擎白名单
+ */
+export interface OwaspWhiteRule {
+  /**
+   * 白名单的规则ID
+   */
+  RuleId?: number
+  /**
+   * 规则名
+   */
+  Name?: string
+  /**
+   * 加白的规则ID列表
+   */
+  Ids?: Array<number | bigint>
+  /**
+   * 白名单规则的状态，0：关闭、1：开启
+   */
+  Status?: number
+  /**
+   * 加白的类型，0:按照特定规则ID加白、1:按照规则类型加白
+   */
+  Type?: number
+  /**
+   * 规则匹配策略列表
+   */
+  Strategies?: Array<Strategy>
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  UpdateTime?: string
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 周期任务粒度
+   */
+  CronType?: string
+  /**
+   * 当前是否有效
+   */
+  ValidStatus?: boolean
 }
 
 /**
@@ -9987,6 +10201,16 @@ export interface CronJob {
 }
 
 /**
+ * DeleteOwaspWhiteRule返回参数结构体
+ */
+export interface DeleteOwaspWhiteRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SaaS型WAF域名详情
  */
 export interface DomainsPartInfo {
@@ -10866,9 +11090,9 @@ export interface CreateDealsGoods {
 }
 
 /**
- * ModifySpartaProtectionMode返回参数结构体
+ * ModifyOwaspWhiteRule返回参数结构体
  */
-export interface ModifySpartaProtectionModeResponse {
+export interface ModifyOwaspWhiteRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12002,6 +12226,20 @@ export interface MiniExtendPkg {
    * 计费项
    */
   BillingItem?: string
+}
+
+/**
+ * CreateOwaspWhiteRule返回参数结构体
+ */
+export interface CreateOwaspWhiteRuleResponse {
+  /**
+   * 规则ID
+   */
+  RuleId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

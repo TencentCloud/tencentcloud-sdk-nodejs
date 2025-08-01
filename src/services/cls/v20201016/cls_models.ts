@@ -4584,39 +4584,43 @@ export interface ShipperTaskInfo {
   /**
    * 投递任务ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 投递信息ID
    */
-  ShipperId: string
+  ShipperId?: string
   /**
    * 日志主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 本批投递的日志的开始时间戳，毫秒
    */
-  RangeStart: number
+  RangeStart?: number
   /**
    * 本批投递的日志的结束时间戳， 毫秒
    */
-  RangeEnd: number
+  RangeEnd?: number
   /**
    * 本次投递任务的开始时间戳， 毫秒
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 本次投递任务的结束时间戳， 毫秒
    */
-  EndTime: number
+  EndTime?: number
   /**
-   * 本次投递的结果，"success","running","failed"
+   * 本次投递的结果。"success"，"running"，"failed"
+
+- success：任务成功。
+- running：任务处理中。
+- failed：任务失败。
    */
-  Status: string
+  Status?: string
   /**
    * 结果的详细信息
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -4949,6 +4953,11 @@ export interface JsonInfo {
   EnableTag: boolean
   /**
    * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。
+
+- __SOURCE__：日志采集的源 IP，示例：10.0.1.2
+- __FILENAME__：日志采集的文件名，示例：/data/log/nginx/access.log
+- __TIMESTAMP__：日志时间戳（毫秒级别 Unix 时间戳），按时间范围检索日志时，将自动使用该时间对日志进行检索，在控制台显示为“日志时间”，示例：1640005601188
+- __HOSTNAME__：日志来源机器名称，需使用2.7.4及以上版本的 Loglistener 才会采集该字段，示例：localhost
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaFields: Array<string>
@@ -5583,7 +5592,7 @@ export interface Column {
  */
 export interface ContentInfo {
   /**
-   * 内容格式，支持json、csv
+   * 内容格式，支持json，csv，parquet
    */
   Format: string
   /**

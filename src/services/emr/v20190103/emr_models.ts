@@ -7883,7 +7883,7 @@ export interface DescribeHBaseTableOverviewRequest {
    */
   InstanceId: string
   /**
-   * 分页查询编号偏移量，从0开始
+   * 页码，第一页:0，第二页:1
    */
   Offset: number
   /**

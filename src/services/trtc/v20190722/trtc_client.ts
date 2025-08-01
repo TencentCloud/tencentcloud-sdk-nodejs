@@ -206,6 +206,7 @@ import {
   DescribeTRTCRealTimeScaleDataResponse,
   DescribeTRTCMarketQualityDataRequest,
   UpdatePublishCdnStreamRequest,
+  InvokeLLM,
   SliceStorageParams,
   MaxVideoUser,
   AuditStorageParams,

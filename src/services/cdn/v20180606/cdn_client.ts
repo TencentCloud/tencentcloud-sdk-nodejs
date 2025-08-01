@@ -18,365 +18,281 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeWafDataRequest,
   DescribeCdnDomainLogsResponse,
-  ScdnTopUrlData,
-  Compression,
-  ImageOptimization,
-  DescribeCdnDomainLogsRequest,
-  CcTopData,
-  ListTopBotDataResponse,
-  SpecificConfig,
-  RuleCache,
-  HttpHeaderPathRule,
-  UserAgentFilter,
-  DescribeScdnTopDataResponse,
-  ScdnDomain,
-  CacheConfigNoCache,
-  BotRecord,
-  ListScdnTopBotDataRequest,
-  RedirectConfig,
-  UpdateScdnDomainResponse,
-  Origin,
-  DescribeBillingDataRequest,
-  Tag,
-  DescribeCdnOriginIpRequest,
-  DescribeDiagnoseReportRequest,
-  BriefDomain,
-  RuleCacheConfig,
-  EnableClsLogTopicResponse,
-  ListClsLogTopicsResponse,
-  VerifyDomainRecordResponse,
-  AdvancedAuthenticationTypeE,
-  AdvancedAuthenticationTypeD,
-  AdvancedAuthenticationTypeF,
-  AdvancedAuthenticationTypeA,
-  ListTopCcDataRequest,
-  AdvancedAuthenticationTypeB,
-  CreateScdnLogTaskResponse,
-  AuthenticationTypeC,
-  OriginAuthenticationTypeA,
-  DescribeScdnIpStrategyResponse,
-  DDoSAttackIPTopData,
-  CreateDiagnoseUrlResponse,
-  ListScdnDomainsResponse,
-  CreateScdnLogTaskRequest,
-  DescribeEdgePackTaskStatusResponse,
-  HeuristicCache,
-  SummarizedData,
-  ManageClsTopicDomainsRequest,
-  DomainBotCount,
-  PostSize,
-  ForceRedirect,
-  ListClsTopicDomainsRequest,
-  DescribeReportDataRequest,
-  DownstreamCapping,
-  CacheOptResult,
-  StopCdnDomainRequest,
-  EnableCachesResponse,
-  ScdnTopDomainData,
-  StartScdnDomainResponse,
-  ResponseHeader,
-  DisableCachesResponse,
-  EventLogStatsData,
-  DescribeIpStatusResponse,
-  DescribeDistrictIspDataRequest,
-  DeleteScdnDomainResponse,
-  CreateVerifyRecordRequest,
-  PurgePathCacheRequest,
-  DDoSAttackBandwidthData,
-  OriginPullOptimization,
-  PushTask,
-  SecurityConfig,
-  QueryStringKey,
-  MaxAge,
-  LogSetInfo,
-  AdvanceConfig,
-  AwsPrivateAccess,
-  VideoSeek,
-  Compatibility,
-  ModifyDomainConfigRequest,
-  ClsSearchLogs,
-  OriginIp,
-  DescribeScdnBotDataRequest,
-  ScdnConfig,
-  CdnIp,
-  ExtraLogset,
-  OfflineCache,
-  TopDataMore,
-  DiagnoseList,
-  HTTPHeader,
-  IpFilterPathRule,
-  ReportData,
+  AdvancedAuthentication,
   AdvanceHttps,
+  Revalidate,
+  ResourceData,
+  UrlRecord,
+  OthersPrivateAccess,
+  DescribePushQuotaResponse,
   DescribePurgeQuotaResponse,
+  Authentication,
+  ImageOptimization,
+  Https,
+  RangeOriginPullRule,
+  RuleCache,
+  DescribeCdnDomainLogsRequest,
   AvifAdapter,
-  RemoteAuthenticationRule,
+  CreateClsLogTopicResponse,
+  MaxAgeCodeRule,
+  Compression,
   PurgePathCacheResponse,
+  RangeOriginPull,
+  DomainFilter,
+  DescribeCdnOriginIpResponse,
+  ParamFilter,
+  SpecificConfig,
   DescribeTopDataRequest,
   HttpsPackage,
+  DescribePurgeQuotaRequest,
   ModifyPurgeFetchTaskStatusRequest,
   Referer,
-  AdvanceCacheRule,
-  ListTopDDoSDataRequest,
+  UserAgentFilter,
+  DescribeCdnDataResponse,
+  EnableClsLogTopicRequest,
+  UpdateImageConfigResponse,
+  CacheConfigNoCache,
+  AccessControl,
   DeleteCdnDomainRequest,
-  DescribeEventLogDataRequest,
+  DescribePayTypeResponse,
+  ForceRedirect,
   PathRule,
+  ListTopDataRequest,
+  ListClsTopicDomainsRequest,
   DescribeDomainsResponse,
-  DescribeScdnConfigRequest,
-  DescribeCcDataResponse,
-  UpdatePayTypeResponse,
-  TopicInfo,
-  AdvancedCCRules,
-  CacheConfigCache,
-  ListScdnTopBotDataResponse,
-  DisableClsLogTopicRequest,
-  TrafficPackage,
-  BotCookie,
-  CreateScdnFailedLogTaskResponse,
-  StatusCodeCache,
-  ScdnCCRules,
-  AddCdnDomainRequest,
-  CacheConfigFollowOrigin,
   DescribePayTypeRequest,
-  DeleteScdnDomainRequest,
+  UpdateImageConfigRequest,
+  AdvancedAuthenticationTypeD,
+  CompressionRule,
+  RedirectConfig,
+  GuetzliAdapter,
+  Origin,
+  AdvancedAuthenticationTypeF,
+  TopData,
+  EnableCachesRequest,
+  ClsLogIpData,
+  HeaderKey,
+  DescribeBillingDataRequest,
+  SimpleCache,
+  DeleteClsLogTopicRequest,
+  DescribeDistrictIspDataResponse,
+  DescribeCdnOriginIpRequest,
+  TopDetailDataMore,
+  TopicInfo,
+  DescribeDomainsConfigResponse,
+  DescribeDiagnoseReportRequest,
+  ResourceBillingData,
+  BriefDomain,
+  TimestampData,
+  TpgAdapter,
+  CacheConfigCache,
+  DescribeReportDataResponse,
+  DisableClsLogTopicRequest,
+  RuleCacheConfig,
+  ListClsTopicDomainsResponse,
+  TrafficPackage,
+  HttpsBilling,
+  DescribeCdnIpRequest,
+  Ipv6,
+  DescribeHttpsPackagesRequest,
+  DescribeTrafficPackagesRequest,
+  StatusCodeCache,
+  DescribeIpVisitResponse,
+  EnableClsLogTopicResponse,
+  ListClsLogTopicsResponse,
+  RemoteAuthenticationRule,
+  OverseaConfig,
+  AddCdnDomainRequest,
+  UserAgentFilterRule,
+  UpdateDomainConfigRequest,
+  Tag,
+  CacheConfigFollowOrigin,
+  MaxAgeRule,
+  AdvancedAuthenticationTypeE,
+  DescribeCertDomainsRequest,
+  DescribeDomainsConfigRequest,
+  AdvancedAuthenticationTypeA,
+  AdvancedCache,
+  AdvancedAuthenticationTypeC,
+  AdvancedAuthenticationTypeB,
+  WebpAdapter,
   DescribeHttpsPackagesResponse,
   QnPrivateAccess,
+  WebSocket,
   MapInfo,
   DescribeCertDomainsResponse,
-  ScdnBotConfig,
+  DuplicateDomainConfigRequest,
+  AuthenticationTypeD,
+  AuthenticationTypeC,
+  AuthenticationTypeB,
+  AuthenticationTypeA,
+  ResponseHeader,
+  OriginAuthenticationTypeA,
+  SecurityConfig,
+  DescribePushTasksResponse,
   ResourceOriginData,
-  ListScdnDomainsRequest,
+  IpStatus,
+  AddCdnDomainResponse,
+  DomainAreaConfig,
+  ServerCert,
+  AccessControlRule,
+  HttpHeaderPathRule,
   DisableCachesRequest,
+  DescribeEdgePackTaskStatusResponse,
+  DistrictIspInfo,
   AddCLSTopicDomainsResponse,
+  SimpleCacheRule,
+  ModifyPurgeFetchTaskStatusResponse,
+  DisableClsLogTopicResponse,
+  Hsts,
   DescribeIpStatusRequest,
-  CreateScdnFailedLogTaskRequest,
-  DescribeCdnOriginIpResponse,
-  RangeOriginPull,
+  DetailDomain,
+  RuleEngine,
+  GetDisableRecordsResponse,
+  Ipv6Access,
+  HeuristicCache,
+  DuplicateDomainConfigResponse,
+  CdnIpHistory,
+  SummarizedData,
+  VerifyDomainRecordResponse,
+  ManageClsTopicDomainsRequest,
+  AddCLSTopicDomainsRequest,
+  ListDiagnoseReportRequest,
+  UrlRedirectRule,
+  Quota,
+  PostSize,
+  Cache,
+  DiagnoseData,
+  DescribeOriginDataRequest,
+  FollowRedirect,
   ViolationUrl,
   SearchClsLogResponse,
   PathBasedOriginRule,
   PushUrlsCacheRequest,
+  MainlandConfig,
+  DescribeReportDataRequest,
+  DescribePushTasksRequest,
+  EdgePackTaskFilter,
+  OriginSni,
   DescribeUrlViolationsRequest,
   RefererRule,
-  DescribeScdnIpStrategyRequest,
   IpFreqLimit,
-  OriginSni,
-  EdgePackTaskFilter,
-  TopDetailDataMore,
+  CreateDiagnoseUrlResponse,
+  CreateClsLogTopicRequest,
+  UpdatePayTypeResponse,
+  RequestHeader,
+  CacheOptResult,
+  ListTopClsLogDataRequest,
+  CreateVerifyRecordResponse,
+  StopCdnDomainRequest,
+  DescribeMapInfoResponse,
+  DescribeTrafficPackagesResponse,
+  DescribeMapInfoRequest,
+  EnableCachesResponse,
+  RuleQueryString,
   DescribeIpVisitRequest,
+  HttpHeaderRule,
   StatusCodeCacheRule,
-  DeleteCdnDomainResponse,
-  DeleteClsLogTopicResponse,
-  BotStatisticsCount,
-  RangeOriginPullRule,
-  DescribeCdnIpResponse,
-  ScdnErrorPage,
-  UpdateImageConfigRequest,
-  TopData,
-  ListTopClsLogDataResponse,
   ClientCert,
+  DomainLog,
+  DescribeEdgePackTaskStatusRequest,
+  GetDisableRecordsRequest,
+  CreateDiagnoseUrlRequest,
+  PurgeUrlsCacheResponse,
+  DeleteClsLogTopicResponse,
+  DescribeBillingDataResponse,
+  DisableCachesResponse,
+  SchemeKey,
+  StatisticItem,
+  DescribeImageConfigRequest,
+  DescribeCdnIpResponse,
+  AdvanceCacheRule,
+  DescribeIpStatusResponse,
+  DescribeDistrictIspDataRequest,
+  CacheKey,
+  UrlRedirect,
+  DownstreamCapping,
+  CookieKey,
+  ListTopClsLogDataResponse,
+  RemoteAuthentication,
+  KeyRule,
+  ParamFilterRule,
+  CappingRule,
   ShareCname,
   ListClsLogTopicsRequest,
   Seo,
-  CreateClsLogTopicRequest,
-  PurgeUrlsCacheRequest,
-  DescribeScdnConfigResponse,
-  DescribePushQuotaRequest,
-  DescribePurgeTasksRequest,
-  CreateDiagnoseUrlRequest,
-  CacheConfig,
-  ListTopDataResponse,
-  UpdateDomainConfigResponse,
-  ListDiagnoseReportResponse,
-  HeaderKey,
-  ScdnWafRule,
-  DescribeHttpsPackagesRequest,
-  IpFilter,
-  DiagnoseUnit,
-  DiagnoseInfo,
-  DescribeScdnBotRecordsResponse,
-  DDoSStatsData,
-  DescribeCdnDataRequest,
-  DescribeImageConfigResponse,
-  Cache,
-  StopScdnDomainRequest,
-  AdvancedAuthentication,
-  Revalidate,
-  UrlRecord,
-  OthersPrivateAccess,
-  DescribePushQuotaResponse,
-  Authentication,
-  CreateClsLogTopicResponse,
-  MaxAgeCodeRule,
-  ScdnAclRule,
-  DomainFilter,
-  DescribePurgeQuotaRequest,
-  StopScdnDomainResponse,
-  DescribePayTypeResponse,
-  ListTopDataRequest,
-  CacheKey,
-  DuplicateDomainConfigResponse,
-  CompressionRule,
-  GuetzliAdapter,
-  OriginCombine,
-  EnableCachesRequest,
-  ClsLogIpData,
-  DeleteClsLogTopicRequest,
-  AdvancedAuthenticationTypeC,
-  VerifyDomainRecordRequest,
-  CreateVerifyRecordResponse,
-  DescribeReportDataResponse,
-  ListClsTopicDomainsResponse,
-  Ipv6,
-  DescribeTrafficPackagesRequest,
-  ManageClsTopicDomainsResponse,
-  OverseaConfig,
-  AdvancedCache,
-  StartCdnDomainRequest,
-  DescribePushTasksResponse,
-  AddCdnDomainResponse,
-  HttpHeaderRule,
-  AccessControlRule,
-  DistrictIspInfo,
-  SimpleCacheRule,
-  ModifyPurgeFetchTaskStatusResponse,
-  DisableClsLogTopicResponse,
-  TpgAdapter,
-  DetailDomain,
-  GetDisableRecordsResponse,
-  Ipv6Access,
-  BotSortBy,
-  AddCLSTopicDomainsRequest,
-  EdgePackTaskStatus,
-  MainlandConfig,
-  DescribeDDoSDataRequest,
-  CreateEdgePackTaskRequest,
-  StatisticItem,
-  RequestHeader,
-  Hsts,
-  ListTopClsLogDataRequest,
-  DescribeTrafficPackagesResponse,
-  DescribeMapInfoRequest,
-  RuleQueryString,
-  AdvancedScdnAclRule,
-  DescribeEdgePackTaskStatusRequest,
-  GetDisableRecordsRequest,
-  PurgeUrlsCacheResponse,
-  DescribeImageConfigRequest,
-  ScdnTopData,
-  OssPrivateAccess,
-  ListScdnLogTasksResponse,
-  UrlRedirect,
-  CookieKey,
-  ParamFilterRule,
   BandwidthAlert,
+  CreateVerifyRecordRequest,
   ClsLogObject,
-  DescribeWafDataResponse,
   RegionMapRelation,
+  PurgePathCacheRequest,
   DescribeDiagnoseReportResponse,
-  SimpleCache,
-  BotStatsDetailData,
-  Sort,
-  DescribeEventLogDataResponse,
-  ScdnLogTaskDetail,
-  ResourceBillingData,
-  SearchClsLogRequest,
-  UpdateDomainConfigRequest,
-  AdvancedScdnAclGroup,
-  ScdnAclGroup,
-  WafSubRuleStatus,
-  ScdnAclConfig,
-  OriginAuthentication,
-  PurgeTask,
-  SchemeKey,
-  DescribeCcDataRequest,
-  CacheTagKey,
-  ScdnTypeData,
-  DescribeDomainsRequest,
-  ResourceData,
-  ScdnSevenLayerRules,
-  Https,
-  ScdnEventLogConditions,
-  ParamFilter,
-  FollowRedirect,
-  DescribeScdnBotDataResponse,
-  StartScdnDomainRequest,
-  ListTopWafDataRequest,
-  DescribeCdnDataResponse,
-  UpdateImageConfigResponse,
-  DescribeOriginDataRequest,
-  ScdnIpStrategyFilter,
-  CreateScdnDomainRequest,
-  TopDetailData,
-  DescribeDistrictIspDataResponse,
-  RuleEngine,
-  DescribeDomainsConfigResponse,
-  HttpsBilling,
-  DescribeCdnIpRequest,
-  DescribeIpVisitResponse,
-  UserAgentFilterRule,
-  ErrorPage,
-  MaxAgeRule,
-  DescribeCertDomainsRequest,
-  DescribeDomainsConfigRequest,
-  ListTopDDoSDataResponse,
-  WebpAdapter,
-  WebSocket,
-  AuthenticationTypeD,
-  DuplicateDomainConfigRequest,
-  AuthenticationTypeB,
-  AuthenticationTypeA,
-  IpStatus,
-  ServerCert,
-  CdnIpHistory,
-  UpdateScdnDomainRequest,
-  UpdatePayTypeRequest,
-  ListDiagnoseReportRequest,
-  ScdnWafConfig,
-  DiagnoseData,
-  DescribeScdnBotRecordsRequest,
-  ListScdnLogTasksRequest,
-  ListTopCcDataResponse,
-  DescribePushTasksRequest,
-  DescribeOriginDataResponse,
-  DomainAreaConfig,
-  DescribeMapInfoResponse,
-  CreateScdnDomainResponse,
-  DomainLog,
-  ListTopBotDataRequest,
-  BotJavaScript,
-  DescribeBillingDataResponse,
-  ResponseHeaderCache,
-  EnableClsLogTopicRequest,
-  AccessControl,
-  RemoteAuthentication,
-  KeyRule,
-  CappingRule,
   ModifyDomainConfigResponse,
   Quic,
   CdnData,
+  PurgeUrlsCacheRequest,
+  StartCdnDomainRequest,
+  OriginPullOptimization,
+  ErrorPage,
+  PushTask,
   CreateEdgePackTaskResponse,
-  TimestampData,
+  ReportData,
   StartCdnDomainResponse,
-  ListTopWafDataResponse,
+  DescribePushQuotaRequest,
+  TopDetailData,
+  ResponseHeaderCache,
+  EdgePackTaskStatus,
+  Sort,
   ClientInfo,
-  ErrorPageRule,
+  DescribePurgeTasksRequest,
   HwPrivateAccess,
+  CacheConfig,
   PushUrlsCacheResponse,
-  StopCdnDomainResponse,
-  Quota,
-  BotStats,
+  OriginCombine,
+  QueryStringKey,
+  ListTopDataResponse,
+  MaxAge,
+  UpdateDomainConfigResponse,
+  OssPrivateAccess,
+  LogSetInfo,
+  ListDiagnoseReportResponse,
+  SearchClsLogRequest,
+  AdvanceConfig,
+  AwsPrivateAccess,
+  ManageClsTopicDomainsResponse,
+  VideoSeek,
+  Compatibility,
+  ModifyDomainConfigRequest,
+  ClsSearchLogs,
   DescribeUrlViolationsResponse,
+  IpFilter,
+  UpdatePayTypeRequest,
+  DiagnoseUnit,
+  DiagnoseInfo,
   DescribePurgeTasksResponse,
-  ScdnDdosConfig,
-  DDoSTopData,
+  OriginAuthentication,
+  ErrorPageRule,
+  DescribeOriginDataResponse,
+  PurgeTask,
   OriginPullTimeout,
-  DescribeScdnTopDataRequest,
-  ScdnIpStrategy,
-  DescribeDDoSDataResponse,
+  DeleteCdnDomainResponse,
+  OriginIp,
+  CdnIp,
+  DescribeCdnDataRequest,
+  DescribeImageConfigResponse,
+  ExtraLogset,
+  CacheTagKey,
+  VerifyDomainRecordRequest,
   DescribeTopDataResponse,
-  UrlRedirectRule,
+  DescribeDomainsRequest,
+  OfflineCache,
+  CreateEdgePackTaskRequest,
+  StopCdnDomainResponse,
+  TopDataMore,
+  DiagnoseList,
+  HTTPHeader,
+  IpFilterPathRule,
 } from "./cdn_models"
 
 /**
@@ -396,6 +312,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddCLSTopicDomainsResponse) => void
   ): Promise<AddCLSTopicDomainsResponse> {
     return this.request("AddCLSTopicDomains", req, cb)
+  }
+
+  /**
+   * 动态打包任务提交接口
+   */
+  async CreateEdgePackTask(
+    req: CreateEdgePackTaskRequest,
+    cb?: (error: string, rep: CreateEdgePackTaskResponse) => void
+  ): Promise<CreateEdgePackTaskResponse> {
+    return this.request("CreateEdgePackTask", req, cb)
   }
 
   /**
@@ -457,18 +383,6 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
   }
 
   /**
-     * SCDN平台下线，接口开始预下线处理
-
-获取Waf攻击Top数据
-     */
-  async ListTopWafData(
-    req: ListTopWafDataRequest,
-    cb?: (error: string, rep: ListTopWafDataResponse) => void
-  ): Promise<ListTopWafDataResponse> {
-    return this.request("ListTopWafData", req, cb)
-  }
-
-  /**
    * DescribeEdgePackTaskStatus 用于查询动态打包任务状态列表
    */
   async DescribeEdgePackTaskStatus(
@@ -476,18 +390,6 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
     cb?: (error: string, rep: DescribeEdgePackTaskStatusResponse) => void
   ): Promise<DescribeEdgePackTaskStatusResponse> {
     return this.request("DescribeEdgePackTaskStatus", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-删除SCDN域名
-     */
-  async DeleteScdnDomain(
-    req: DeleteScdnDomainRequest,
-    cb?: (error: string, rep: DeleteScdnDomainResponse) => void
-  ): Promise<DeleteScdnDomainResponse> {
-    return this.request("DeleteScdnDomain", req, cb)
   }
 
   /**
@@ -518,19 +420,6 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
     cb?: (error: string, rep: AddCdnDomainResponse) => void
   ): Promise<AddCdnDomainResponse> {
     return this.request("AddCdnDomain", req, cb)
-  }
-
-  /**
-     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
-
-### <font color=red>**该接口已废弃** </font><br>
-GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
-     */
-  async GetDisableRecords(
-    req: GetDisableRecordsRequest,
-    cb?: (error: string, rep: GetDisableRecordsResponse) => void
-  ): Promise<GetDisableRecordsResponse> {
-    return this.request("GetDisableRecords", req, cb)
   }
 
   /**
@@ -579,13 +468,13 @@ GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
   }
 
   /**
-   * 动态打包任务提交接口
+   * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
    */
-  async CreateEdgePackTask(
-    req: CreateEdgePackTaskRequest,
-    cb?: (error: string, rep: CreateEdgePackTaskResponse) => void
-  ): Promise<CreateEdgePackTaskResponse> {
-    return this.request("CreateEdgePackTask", req, cb)
+  async DescribeDomains(
+    req: DescribeDomainsRequest,
+    cb?: (error: string, rep: DescribeDomainsResponse) => void
+  ): Promise<DescribeDomainsResponse> {
+    return this.request("DescribeDomains", req, cb)
   }
 
   /**
@@ -599,18 +488,6 @@ GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
     cb?: (error: string, rep: CreateVerifyRecordResponse) => void
   ): Promise<CreateVerifyRecordResponse> {
     return this.request("CreateVerifyRecord", req, cb)
-  }
-
-  /**
-     * SCDN平台下线，接口开始预下线处理
-
-CC统计数据查询
-     */
-  async DescribeCcData(
-    req: DescribeCcDataRequest,
-    cb?: (error: string, rep: DescribeCcDataResponse) => void
-  ): Promise<DescribeCcDataResponse> {
-    return this.request("DescribeCcData", req, cb)
   }
 
   /**
@@ -657,40 +534,13 @@ CreateDiagnoseUrl 用于添加域名诊断任务URL。
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-StopScdnDomain 用于关闭域名的安全防护配置
-     */
-  async StopScdnDomain(
-    req: StopScdnDomainRequest,
-    cb?: (error: string, rep: StopScdnDomainResponse) => void
-  ): Promise<StopScdnDomainResponse> {
-    return this.request("StopScdnDomain", req, cb)
-  }
-
-  /**
-     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
-
-### <font color=red>**该接口已废弃** </font><br>
-DescribeDiagnoseReport 用于获取指定报告id的内容。
-     */
-  async DescribeDiagnoseReport(
-    req: DescribeDiagnoseReportRequest,
-    cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
-  ): Promise<DescribeDiagnoseReportResponse> {
-    return this.request("DescribeDiagnoseReport", req, cb)
-  }
-
-  /**
-     * SCDN平台下线，接口开始预下线处理
-
-DDoS统计数据查询
-     */
-  async DescribeDDoSData(
-    req: DescribeDDoSDataRequest,
-    cb?: (error: string, rep: DescribeDDoSDataResponse) => void
-  ): Promise<DescribeDDoSDataResponse> {
-    return this.request("DescribeDDoSData", req, cb)
+   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+   */
+  async DescribeCertDomains(
+    req: DescribeCertDomainsRequest,
+    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
+  ): Promise<DescribeCertDomainsResponse> {
+    return this.request("DescribeCertDomains", req, cb)
   }
 
   /**
@@ -718,30 +568,6 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-     * SCDN平台下线，接口开始预下线处理
-
-获取CC攻击Top数据
-     */
-  async ListTopCcData(
-    req: ListTopCcDataRequest,
-    cb?: (error: string, rep: ListTopCcDataResponse) => void
-  ): Promise<ListTopCcDataResponse> {
-    return this.request("ListTopCcData", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-查询在SCDN IP安全策略
-     */
-  async DescribeScdnIpStrategy(
-    req: DescribeScdnIpStrategyRequest,
-    cb?: (error: string, rep: DescribeScdnIpStrategyResponse) => void
-  ): Promise<DescribeScdnIpStrategyResponse> {
-    return this.request("DescribeScdnIpStrategy", req, cb)
-  }
-
-  /**
    * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
    */
   async DescribePurgeQuota(
@@ -749,54 +575,6 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
     cb?: (error: string, rep: DescribePurgeQuotaResponse) => void
   ): Promise<DescribePurgeQuotaResponse> {
     return this.request("DescribePurgeQuota", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-UpdateScdnDomain 用于修改 SCDN 加速域名安全相关配置
-     */
-  async UpdateScdnDomain(
-    req: UpdateScdnDomainRequest,
-    cb?: (error: string, rep: UpdateScdnDomainResponse) => void
-  ): Promise<UpdateScdnDomainResponse> {
-    return this.request("UpdateScdnDomain", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
-     */
-  async ListScdnLogTasks(
-    req: ListScdnLogTasksRequest,
-    cb?: (error: string, rep: ListScdnLogTasksResponse) => void
-  ): Promise<ListScdnLogTasksResponse> {
-    return this.request("ListScdnLogTasks", req, cb)
-  }
-
-  /**
-     * SCDN平台下线，接口开始预下线处理
-
-获取Bot攻击的Top信息
-     */
-  async ListTopBotData(
-    req: ListTopBotDataRequest,
-    cb?: (error: string, rep: ListTopBotDataResponse) => void
-  ): Promise<ListTopBotDataResponse> {
-    return this.request("ListTopBotData", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-CreateScdnLogTask 用于创建事件日志任务
-     */
-  async CreateScdnLogTask(
-    req: CreateScdnLogTaskRequest,
-    cb?: (error: string, rep: CreateScdnLogTaskResponse) => void
-  ): Promise<CreateScdnLogTaskResponse> {
-    return this.request("CreateScdnLogTask", req, cb)
   }
 
   /**
@@ -810,15 +588,22 @@ CreateScdnLogTask 用于创建事件日志任务
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
+     * DescribeTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
 
-获取SCDN的Top数据
++ 依据总流量、总请求数对访问 IP 排序，从大至小返回 TOP 100 IP
++ 依据总流量、总请求数对访问 Refer 排序，从大至小返回 TOP 100 Refer
++ 依据总流量、总请求数对访问 设备 排序，从大至小返回 设备类型
++ 依据总流量、总请求数对访问 操作系统 排序，从大至小返回 操作系统
++ 依据总流量、总请求数对访问 浏览器 排序，从大至小返回 浏览器
+
+注意：
++ 仅支持 90 天内数据查询，且从2021年09月20日开始有数据
      */
-  async DescribeScdnTopData(
-    req: DescribeScdnTopDataRequest,
-    cb?: (error: string, rep: DescribeScdnTopDataResponse) => void
-  ): Promise<DescribeScdnTopDataResponse> {
-    return this.request("DescribeScdnTopData", req, cb)
+  async DescribeTopData(
+    req: DescribeTopDataRequest,
+    cb?: (error: string, rep: DescribeTopDataResponse) => void
+  ): Promise<DescribeTopDataResponse> {
+    return this.request("DescribeTopData", req, cb)
   }
 
   /**
@@ -892,18 +677,6 @@ CreateScdnLogTask 用于创建事件日志任务
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-StartScdnDomain 用于开启域名的安全防护配置
-     */
-  async StartScdnDomain(
-    req: StartScdnDomainRequest,
-    cb?: (error: string, rep: StartScdnDomainResponse) => void
-  ): Promise<StartScdnDomainResponse> {
-    return this.request("StartScdnDomain", req, cb)
-  }
-
-  /**
      * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
 默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 500 条。
      */
@@ -925,16 +698,6 @@ StartScdnDomain 用于开启域名的安全防护配置
   }
 
   /**
-   * 通过CLS日志计算Top信息。支持近7天的日志数据。
-   */
-  async ListTopClsLogData(
-    req: ListTopClsLogDataRequest,
-    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
-  ): Promise<ListTopClsLogDataResponse> {
-    return this.request("ListTopClsLogData", req, cb)
-  }
-
-  /**
      * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。
 对应内容分发网络控制台【内容合规】页面。
      */
@@ -943,40 +706,6 @@ StartScdnDomain 用于开启域名的安全防护配置
     cb?: (error: string, rep: DescribeUrlViolationsResponse) => void
   ): Promise<DescribeUrlViolationsResponse> {
     return this.request("DescribeUrlViolations", req, cb)
-  }
-
-  /**
-     * SCDN平台下线，接口开始预下线处理
-
-Waf统计数据查询
-     */
-  async DescribeWafData(
-    req: DescribeWafDataRequest,
-    cb?: (error: string, rep: DescribeWafDataResponse) => void
-  ): Promise<DescribeWafDataResponse> {
-    return this.request("DescribeWafData", req, cb)
-  }
-
-  /**
-     * SCDN平台下线，接口开始预下线处理
-
-获取DDoS攻击Top数据
-     */
-  async ListTopDDoSData(
-    req: ListTopDDoSDataRequest,
-    cb?: (error: string, rep: ListTopDDoSDataResponse) => void
-  ): Promise<ListTopDDoSDataResponse> {
-    return this.request("ListTopDDoSData", req, cb)
-  }
-
-  /**
-   * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
-   */
-  async DescribeDomains(
-    req: DescribeDomainsRequest,
-    cb?: (error: string, rep: DescribeDomainsResponse) => void
-  ): Promise<DescribeDomainsResponse> {
-    return this.request("DescribeDomains", req, cb)
   }
 
   /**
@@ -1033,25 +762,16 @@ Waf统计数据查询
   }
 
   /**
-   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
-   */
-  async DescribeCertDomains(
-    req: DescribeCertDomainsRequest,
-    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
-  ): Promise<DescribeCertDomainsResponse> {
-    return this.request("DescribeCertDomains", req, cb)
-  }
+     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
 
-  /**
-     * SCDN平台下线，接口开始预下线处理
-
-DescribeEventLogData 用于查询事件日志统计曲线
+### <font color=red>**该接口已废弃** </font><br>
+DescribeDiagnoseReport 用于获取指定报告id的内容。
      */
-  async DescribeEventLogData(
-    req: DescribeEventLogDataRequest,
-    cb?: (error: string, rep: DescribeEventLogDataResponse) => void
-  ): Promise<DescribeEventLogDataResponse> {
-    return this.request("DescribeEventLogData", req, cb)
+  async DescribeDiagnoseReport(
+    req: DescribeDiagnoseReportRequest,
+    cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
+  ): Promise<DescribeDiagnoseReportResponse> {
+    return this.request("DescribeDiagnoseReport", req, cb)
   }
 
   /**
@@ -1076,18 +796,6 @@ DescribeEventLogData 用于查询事件日志统计曲线
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-CreateScdnDomain 用于创建 SCDN 加速域名
-     */
-  async CreateScdnDomain(
-    req: CreateScdnDomainRequest,
-    cb?: (error: string, rep: CreateScdnDomainResponse) => void
-  ): Promise<CreateScdnDomainResponse> {
-    return this.request("CreateScdnDomain", req, cb)
-  }
-
-  /**
    * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG、 Guetzli 和 Avif。
    */
   async UpdateImageConfig(
@@ -1105,18 +813,6 @@ CreateScdnDomain 用于创建 SCDN 加速域名
     cb?: (error: string, rep: ModifyPurgeFetchTaskStatusResponse) => void
   ): Promise<ModifyPurgeFetchTaskStatusResponse> {
     return this.request("ModifyPurgeFetchTaskStatus", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
-     */
-  async CreateScdnFailedLogTask(
-    req: CreateScdnFailedLogTaskRequest,
-    cb?: (error: string, rep: CreateScdnFailedLogTaskResponse) => void
-  ): Promise<CreateScdnFailedLogTaskResponse> {
-    return this.request("CreateScdnFailedLogTask", req, cb)
   }
 
   /**
@@ -1151,27 +847,16 @@ CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
+     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
 
-查询BOT会话记录列表
+### <font color=red>**该接口已废弃** </font><br>
+GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
      */
-  async DescribeScdnBotRecords(
-    req: DescribeScdnBotRecordsRequest,
-    cb?: (error: string, rep: DescribeScdnBotRecordsResponse) => void
-  ): Promise<DescribeScdnBotRecordsResponse> {
-    return this.request("DescribeScdnBotRecords", req, cb)
-  }
-
-  /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
-     */
-  async DescribeScdnConfig(
-    req: DescribeScdnConfigRequest,
-    cb?: (error: string, rep: DescribeScdnConfigResponse) => void
-  ): Promise<DescribeScdnConfigResponse> {
-    return this.request("DescribeScdnConfig", req, cb)
+  async GetDisableRecords(
+    req: GetDisableRecordsRequest,
+    cb?: (error: string, rep: GetDisableRecordsResponse) => void
+  ): Promise<GetDisableRecordsResponse> {
+    return this.request("GetDisableRecords", req, cb)
   }
 
   /**
@@ -1226,18 +911,6 @@ DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配置信息
-     */
-  async ListScdnDomains(
-    req: ListScdnDomainsRequest,
-    cb?: (error: string, rep: ListScdnDomainsResponse) => void
-  ): Promise<ListScdnDomainsResponse> {
-    return this.request("ListScdnDomains", req, cb)
-  }
-
-  /**
    * DescribeReportData 用于查询域名/项目维度的日/周/月报表数据。
    */
   async DescribeReportData(
@@ -1259,18 +932,6 @@ ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配�
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-获取BOT统计数据列表
-     */
-  async DescribeScdnBotData(
-    req: DescribeScdnBotDataRequest,
-    cb?: (error: string, rep: DescribeScdnBotDataResponse) => void
-  ): Promise<DescribeScdnBotDataResponse> {
-    return this.request("DescribeScdnBotData", req, cb)
-  }
-
-  /**
    * 本接口(UpdatePayType)用于修改账号计费类型，暂不支持月结用户或子账号修改。
    */
   async UpdatePayType(
@@ -1278,25 +939,6 @@ ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配�
     cb?: (error: string, rep: UpdatePayTypeResponse) => void
   ): Promise<UpdatePayTypeResponse> {
     return this.request("UpdatePayType", req, cb)
-  }
-
-  /**
-     * DescribeTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
-
-+ 依据总流量、总请求数对访问 IP 排序，从大至小返回 TOP 100 IP
-+ 依据总流量、总请求数对访问 Refer 排序，从大至小返回 TOP 100 Refer
-+ 依据总流量、总请求数对访问 设备 排序，从大至小返回 设备类型
-+ 依据总流量、总请求数对访问 操作系统 排序，从大至小返回 操作系统
-+ 依据总流量、总请求数对访问 浏览器 排序，从大至小返回 浏览器
-
-注意：
-+ 仅支持 90 天内数据查询，且从2021年09月20日开始有数据
-     */
-  async DescribeTopData(
-    req: DescribeTopDataRequest,
-    cb?: (error: string, rep: DescribeTopDataResponse) => void
-  ): Promise<DescribeTopDataResponse> {
-    return this.request("DescribeTopData", req, cb)
   }
 
   /**
@@ -1311,14 +953,12 @@ EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时
   }
 
   /**
-     * SCDN平台已经正式下线，接口开始预下线处理
-
-获取Bot攻击的Top数据列表
-     */
-  async ListScdnTopBotData(
-    req: ListScdnTopBotDataRequest,
-    cb?: (error: string, rep: ListScdnTopBotDataResponse) => void
-  ): Promise<ListScdnTopBotDataResponse> {
-    return this.request("ListScdnTopBotData", req, cb)
+   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   */
+  async ListTopClsLogData(
+    req: ListTopClsLogDataRequest,
+    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
+  ): Promise<ListTopClsLogDataResponse> {
+    return this.request("ListTopClsLogData", req, cb)
   }
 }

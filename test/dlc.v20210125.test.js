@@ -78,6 +78,16 @@ it("dlc.v20210125.ModifyUserType", async function () {
     }
 })
 
+it("dlc.v20210125.LaunchStandardEngineResourceGroups", async function () {
+    try {
+       const data = await client.LaunchStandardEngineResourceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeWorkGroupInfo", async function () {
     try {
        const data = await client.DescribeWorkGroupInfo({})
@@ -178,9 +188,9 @@ it("dlc.v20210125.SwitchDataEngine", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeDataEngines", async function () {
+it("dlc.v20210125.AlterDMSDatabase", async function () {
     try {
-       const data = await client.DescribeDataEngines({})
+       const data = await client.AlterDMSDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +201,16 @@ it("dlc.v20210125.DescribeDataEngines", async function () {
 it("dlc.v20210125.DescribeUserRegisterTime", async function () {
     try {
        const data = await client.DescribeUserRegisterTime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeNotebookSessions", async function () {
+    try {
+       const data = await client.DescribeNotebookSessions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +258,59 @@ it("dlc.v20210125.DescribeDMSTables", async function () {
     }
 })
 
+it("dlc.v20210125.CreateSparkSubmitTask", async function () {
+    try {
+       const data = await client.CreateSparkSubmitTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeUserType", async function () {
     try {
        const data = await client.DescribeUserType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateStandardEngineResourceGroupResourceInfo", async function () {
+    try {
+       const data = await client.UpdateStandardEngineResourceGroupResourceInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.RenewDataEngine", async function () {
+    try {
+       const data = await client.RenewDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeNetworkConnections", async function () {
+    try {
+       const data = await client.DescribeNetworkConnections({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateStandardEngineResourceGroup", async function () {
+    try {
+       const data = await client.CreateStandardEngineResourceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +338,9 @@ it("dlc.v20210125.DeleteScript", async function () {
     }
 })
 
-it("dlc.v20210125.SwitchDataEngineImage", async function () {
+it("dlc.v20210125.DeleteTable", async function () {
     try {
-       const data = await client.SwitchDataEngineImage({})
+       const data = await client.DeleteTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +368,16 @@ it("dlc.v20210125.DescribeOtherCHDFSBindingList", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateStandardEngineResourceGroupBaseInfo", async function () {
+    try {
+       const data = await client.UpdateStandardEngineResourceGroupBaseInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeLakeFsDirSummary", async function () {
     try {
        const data = await client.DescribeLakeFsDirSummary({})
@@ -318,9 +398,9 @@ it("dlc.v20210125.DescribeDatabases", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeNotebookSessions", async function () {
+it("dlc.v20210125.AlterDMSPartition", async function () {
     try {
-       const data = await client.DescribeNotebookSessions({})
+       const data = await client.AlterDMSPartition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +458,19 @@ it("dlc.v20210125.ListTaskJobLogName", async function () {
     }
 })
 
-it("dlc.v20210125.AlterDMSPartition", async function () {
+it("dlc.v20210125.SwitchDataEngineImage", async function () {
     try {
-       const data = await client.AlterDMSPartition({})
+       const data = await client.SwitchDataEngineImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.AssociateDatasourceHouse", async function () {
+    try {
+       const data = await client.AssociateDatasourceHouse({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,6 +598,16 @@ it("dlc.v20210125.DeleteCHDFSBindingProduct", async function () {
     }
 })
 
+it("dlc.v20210125.PauseStandardEngineResourceGroups", async function () {
+    try {
+       const data = await client.PauseStandardEngineResourceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.ReportHeartbeatMetaData", async function () {
     try {
        const data = await client.ReportHeartbeatMetaData({})
@@ -588,6 +688,16 @@ it("dlc.v20210125.CreateSparkApp", async function () {
     }
 })
 
+it("dlc.v20210125.DeleteStandardEngineResourceGroup", async function () {
+    try {
+       const data = await client.DeleteStandardEngineResourceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateDatabase", async function () {
     try {
        const data = await client.CreateDatabase({})
@@ -608,6 +718,16 @@ it("dlc.v20210125.RollbackDataEngineImage", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeSessionImageVersion", async function () {
+    try {
+       const data = await client.DescribeSessionImageVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeSubUserAccessPolicy", async function () {
     try {
        const data = await client.DescribeSubUserAccessPolicy({})
@@ -621,6 +741,16 @@ it("dlc.v20210125.DescribeSubUserAccessPolicy", async function () {
 it("dlc.v20210125.CreateSparkSessionBatchSQL", async function () {
     try {
        const data = await client.CreateSparkSessionBatchSQL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateUserVpcConnection", async function () {
+    try {
+       const data = await client.CreateUserVpcConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +858,29 @@ it("dlc.v20210125.CreateNotebookSessionStatement", async function () {
     }
 })
 
-it("dlc.v20210125.AlterDMSDatabase", async function () {
+it("dlc.v20210125.UnboundDatasourceHouse", async function () {
     try {
-       const data = await client.AlterDMSDatabase({})
+       const data = await client.UnboundDatasourceHouse({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeStandardEngineResourceGroupConfigInfo", async function () {
+    try {
+       const data = await client.DescribeStandardEngineResourceGroupConfigInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDataEngines", async function () {
+    try {
+       const data = await client.DescribeDataEngines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,9 +1128,9 @@ it("dlc.v20210125.GetOptimizerPolicy", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeUserInfo", async function () {
+it("dlc.v20210125.DeleteUserVpcConnection", async function () {
     try {
-       const data = await client.DescribeUserInfo({})
+       const data = await client.DeleteUserVpcConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +1138,9 @@ it("dlc.v20210125.DescribeUserInfo", async function () {
     }
 })
 
-it("dlc.v20210125.UpdateDataEngine", async function () {
+it("dlc.v20210125.DeleteNativeSparkSession", async function () {
     try {
-       const data = await client.UpdateDataEngine({})
+       const data = await client.DeleteNativeSparkSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1001,6 +1151,16 @@ it("dlc.v20210125.UpdateDataEngine", async function () {
 it("dlc.v20210125.CheckDataEngineConfigPairsValidity", async function () {
     try {
        const data = await client.CheckDataEngineConfigPairsValidity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeUserVpcConnection", async function () {
+    try {
+       const data = await client.DescribeUserVpcConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,9 +1188,9 @@ it("dlc.v20210125.DeleteUser", async function () {
     }
 })
 
-it("dlc.v20210125.DeleteTable", async function () {
+it("dlc.v20210125.DescribeDataEngineSessionParameters", async function () {
     try {
-       const data = await client.DeleteTable({})
+       const data = await client.DescribeDataEngineSessionParameters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1188,6 +1348,16 @@ it("dlc.v20210125.CreateImportTask", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateStandardEngineResourceGroupConfigInfo", async function () {
+    try {
+       const data = await client.UpdateStandardEngineResourceGroupConfigInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CancelTasks", async function () {
     try {
        const data = await client.CancelTasks({})
@@ -1258,9 +1428,19 @@ it("dlc.v20210125.DeleteUsersFromWorkGroup", async function () {
     }
 })
 
-it("dlc.v20210125.CreateDataEngine", async function () {
+it("dlc.v20210125.UpdateNetworkConnection", async function () {
     try {
-       const data = await client.CreateDataEngine({})
+       const data = await client.UpdateNetworkConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeSparkAppTasks", async function () {
+    try {
+       const data = await client.DescribeSparkAppTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1278,9 +1458,9 @@ it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     }
 })
 
-it("dlc.v20210125.CreateSparkSubmitTask", async function () {
+it("dlc.v20210125.DescribeNativeSparkSessions", async function () {
     try {
-       const data = await client.CreateSparkSubmitTask({})
+       const data = await client.DescribeNativeSparkSessions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1338,9 +1518,9 @@ it("dlc.v20210125.DescribeClusterMonitorInfos", async function () {
     }
 })
 
-it("dlc.v20210125.RenewDataEngine", async function () {
+it("dlc.v20210125.DescribeEngineNodeSpec", async function () {
     try {
-       const data = await client.RenewDataEngine({})
+       const data = await client.DescribeEngineNodeSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1371,6 +1551,16 @@ it("dlc.v20210125.DescribeViews", async function () {
 it("dlc.v20210125.DeleteThirdPartyAccessUser", async function () {
     try {
        const data = await client.DeleteThirdPartyAccessUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateEngineResourceGroupNetworkConfigInfo", async function () {
+    try {
+       const data = await client.UpdateEngineResourceGroupNetworkConfigInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1458,6 +1648,16 @@ it("dlc.v20210125.CancelNotebookSessionStatement", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeUserInfo", async function () {
+    try {
+       const data = await client.DescribeUserInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeStoreLocation", async function () {
     try {
        const data = await client.DescribeStoreLocation({})
@@ -1478,9 +1678,9 @@ it("dlc.v20210125.DescribeSparkAppJob", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeSparkAppTasks", async function () {
+it("dlc.v20210125.CreateDataEngine", async function () {
     try {
-       const data = await client.DescribeSparkAppTasks({})
+       const data = await client.CreateDataEngine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1498,6 +1698,16 @@ it("dlc.v20210125.DescribeDataEnginePythonSparkImages", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeStandardEngineResourceGroups", async function () {
+    try {
+       const data = await client.DescribeStandardEngineResourceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.ListTaskJobLogDetail", async function () {
     try {
        const data = await client.ListTaskJobLogDetail({})
@@ -1508,9 +1718,29 @@ it("dlc.v20210125.ListTaskJobLogDetail", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeEngineNetworks", async function () {
+    try {
+       const data = await client.DescribeEngineNetworks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeLakeFsInfo", async function () {
     try {
        const data = await client.DescribeLakeFsInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateDataEngine", async function () {
+    try {
+       const data = await client.UpdateDataEngine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

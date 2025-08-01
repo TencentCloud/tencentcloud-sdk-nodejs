@@ -48,6 +48,10 @@ export interface MQTTClientSubscription {
    * 投递未确认数量
    */
   Inflight?: number
+  /**
+   * 用户属性
+   */
+  UserProperties?: Array<SubscriptionUserProperty>
 }
 
 /**
@@ -685,6 +689,16 @@ API：手动通过API注册
    * 授权策略开关
    */
   AuthorizationPolicy?: boolean
+  /**
+   * 是否使用默认的服务端证书
+   */
+  UseDefaultServerCert?: boolean
+  /**
+   * TLS：单向认证
+mTLS；双向认证
+BYOC：一机一证
+   */
+  X509Mode?: string
 }
 
 /**
@@ -2274,6 +2288,18 @@ API：通过API手动注册
    */
   MaxTopicFilterPerAutoSubscriptionPolicy?: number
   /**
+   * 是否使用默认的服务端证书
+   */
+  UseDefaultServerCert?: boolean
+  /**
+   * 服务端CA最大数量
+   */
+  TrustedCaLimit?: number
+  /**
+   * 服务端证书最大数量
+   */
+  ServerCertLimit?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2743,6 +2769,20 @@ JITP 自动注册
    * 证书生效开始日期，毫秒级时间戳 。
    */
   NotBeforeTime?: number
+}
+
+/**
+ * 订阅的UserProperty结构
+ */
+export interface SubscriptionUserProperty {
+  /**
+   * 订阅的UserProperty键
+   */
+  Key?: string
+  /**
+   * 订阅的UserProperty值
+   */
+  Value?: string
 }
 
 /**

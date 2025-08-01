@@ -28,6 +28,16 @@ it("cdn.v20180606.AddCLSTopicDomains", async function () {
     }
 })
 
+it("cdn.v20180606.CreateEdgePackTask", async function () {
+    try {
+       const data = await client.CreateEdgePackTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.ModifyDomainConfig", async function () {
     try {
        const data = await client.ModifyDomainConfig({})
@@ -78,29 +88,9 @@ it("cdn.v20180606.VerifyDomainRecord", async function () {
     }
 })
 
-it("cdn.v20180606.ListTopWafData", async function () {
-    try {
-       const data = await client.ListTopWafData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.DescribeEdgePackTaskStatus", async function () {
     try {
        const data = await client.DescribeEdgePackTaskStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DeleteScdnDomain", async function () {
-    try {
-       const data = await client.DeleteScdnDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,16 +128,6 @@ it("cdn.v20180606.AddCdnDomain", async function () {
     }
 })
 
-it("cdn.v20180606.GetDisableRecords", async function () {
-    try {
-       const data = await client.GetDisableRecords({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.DescribeIpVisit", async function () {
     try {
        const data = await client.DescribeIpVisit({})
@@ -178,9 +158,9 @@ it("cdn.v20180606.DescribeHttpsPackages", async function () {
     }
 })
 
-it("cdn.v20180606.CreateEdgePackTask", async function () {
+it("cdn.v20180606.DescribeDomains", async function () {
     try {
-       const data = await client.CreateEdgePackTask({})
+       const data = await client.DescribeDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,16 +171,6 @@ it("cdn.v20180606.CreateEdgePackTask", async function () {
 it("cdn.v20180606.CreateVerifyRecord", async function () {
     try {
        const data = await client.CreateVerifyRecord({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeCcData", async function () {
-    try {
-       const data = await client.DescribeCcData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,29 +218,9 @@ it("cdn.v20180606.DuplicateDomainConfig", async function () {
     }
 })
 
-it("cdn.v20180606.StopScdnDomain", async function () {
+it("cdn.v20180606.DescribeCertDomains", async function () {
     try {
-       const data = await client.StopScdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeDiagnoseReport", async function () {
-    try {
-       const data = await client.DescribeDiagnoseReport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeDDoSData", async function () {
-    try {
-       const data = await client.DescribeDDoSData({})
+       const data = await client.DescribeCertDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,69 +248,9 @@ it("cdn.v20180606.ListDiagnoseReport", async function () {
     }
 })
 
-it("cdn.v20180606.ListTopCcData", async function () {
-    try {
-       const data = await client.ListTopCcData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeScdnIpStrategy", async function () {
-    try {
-       const data = await client.DescribeScdnIpStrategy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.DescribePurgeQuota", async function () {
     try {
        const data = await client.DescribePurgeQuota({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.UpdateScdnDomain", async function () {
-    try {
-       const data = await client.UpdateScdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.ListScdnLogTasks", async function () {
-    try {
-       const data = await client.ListScdnLogTasks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.ListTopBotData", async function () {
-    try {
-       const data = await client.ListTopBotData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.CreateScdnLogTask", async function () {
-    try {
-       const data = await client.CreateScdnLogTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +268,9 @@ it("cdn.v20180606.DescribeImageConfig", async function () {
     }
 })
 
-it("cdn.v20180606.DescribeScdnTopData", async function () {
+it("cdn.v20180606.DescribeTopData", async function () {
     try {
-       const data = await client.DescribeScdnTopData({})
+       const data = await client.DescribeTopData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,16 +328,6 @@ it("cdn.v20180606.DescribeCdnIp", async function () {
     }
 })
 
-it("cdn.v20180606.StartScdnDomain", async function () {
-    try {
-       const data = await client.StartScdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.PurgePathCache", async function () {
     try {
        const data = await client.PurgePathCache({})
@@ -468,49 +348,9 @@ it("cdn.v20180606.DescribePurgeTasks", async function () {
     }
 })
 
-it("cdn.v20180606.ListTopClsLogData", async function () {
-    try {
-       const data = await client.ListTopClsLogData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.DescribeUrlViolations", async function () {
     try {
        const data = await client.DescribeUrlViolations({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeWafData", async function () {
-    try {
-       const data = await client.DescribeWafData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.ListTopDDoSData", async function () {
-    try {
-       const data = await client.ListTopDDoSData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeDomains", async function () {
-    try {
-       const data = await client.DescribeDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,19 +408,9 @@ it("cdn.v20180606.DescribePushTasks", async function () {
     }
 })
 
-it("cdn.v20180606.DescribeCertDomains", async function () {
+it("cdn.v20180606.DescribeDiagnoseReport", async function () {
     try {
-       const data = await client.DescribeCertDomains({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeEventLogData", async function () {
-    try {
-       const data = await client.DescribeEventLogData({})
+       const data = await client.DescribeDiagnoseReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,16 +438,6 @@ it("cdn.v20180606.PushUrlsCache", async function () {
     }
 })
 
-it("cdn.v20180606.CreateScdnDomain", async function () {
-    try {
-       const data = await client.CreateScdnDomain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.UpdateImageConfig", async function () {
     try {
        const data = await client.UpdateImageConfig({})
@@ -631,16 +451,6 @@ it("cdn.v20180606.UpdateImageConfig", async function () {
 it("cdn.v20180606.ModifyPurgeFetchTaskStatus", async function () {
     try {
        const data = await client.ModifyPurgeFetchTaskStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.CreateScdnFailedLogTask", async function () {
-    try {
-       const data = await client.CreateScdnFailedLogTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,19 +488,9 @@ it("cdn.v20180606.ListClsLogTopics", async function () {
     }
 })
 
-it("cdn.v20180606.DescribeScdnBotRecords", async function () {
+it("cdn.v20180606.GetDisableRecords", async function () {
     try {
-       const data = await client.DescribeScdnBotRecords({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeScdnConfig", async function () {
-    try {
-       const data = await client.DescribeScdnConfig({})
+       const data = await client.GetDisableRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,16 +548,6 @@ it("cdn.v20180606.EnableClsLogTopic", async function () {
     }
 })
 
-it("cdn.v20180606.ListScdnDomains", async function () {
-    try {
-       const data = await client.ListScdnDomains({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.DescribeReportData", async function () {
     try {
        const data = await client.DescribeReportData({})
@@ -778,29 +568,9 @@ it("cdn.v20180606.DescribeDistrictIspData", async function () {
     }
 })
 
-it("cdn.v20180606.DescribeScdnBotData", async function () {
-    try {
-       const data = await client.DescribeScdnBotData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.UpdatePayType", async function () {
     try {
        const data = await client.UpdatePayType({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.DescribeTopData", async function () {
-    try {
-       const data = await client.DescribeTopData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -818,9 +588,9 @@ it("cdn.v20180606.EnableCaches", async function () {
     }
 })
 
-it("cdn.v20180606.ListScdnTopBotData", async function () {
+it("cdn.v20180606.ListTopClsLogData", async function () {
     try {
-       const data = await client.ListScdnTopBotData({})
+       const data = await client.ListTopClsLogData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

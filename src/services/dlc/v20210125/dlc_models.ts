@@ -84,6 +84,57 @@ export interface AccessInfo {
 }
 
 /**
+ * 引擎网络信息
+ */
+export interface EngineNetworkInfo {
+  /**
+   * 引擎网络名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkName?: string
+  /**
+   * 引擎网络状态，0--初始化，2--可用，-1--已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkState?: number
+  /**
+   * 引擎网络cidr
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkCidr?: string
+  /**
+   * 引擎网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkId?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * 私有连接个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateLinkNumber?: number
+  /**
+   * 计算引擎个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNumber?: number
+  /**
+   * 网关信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GateWayInfo?: Array<GatewayInfo>
+}
+
+/**
  * DescribeDatabases请求参数结构体
  */
 export interface DescribeDatabasesRequest {
@@ -477,6 +528,16 @@ export interface SessionResourceTemplate {
 }
 
 /**
+ * DeleteNativeSparkSession返回参数结构体
+ */
+export interface DeleteNativeSparkSessionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDMSPartitions请求参数结构体
  */
 export interface DescribeDMSPartitionsRequest {
@@ -635,6 +696,87 @@ export interface CreateTasksInOrderRequest {
    * 数据源名称，默认为COSDataCatalog
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * UpdateStandardEngineResourceGroupConfigInfo返回参数结构体
+ */
+export interface UpdateStandardEngineResourceGroupConfigInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 集群Session配置信息.
+ */
+export interface DataEngineImageSessionParameter {
+  /**
+   * 配置id
+   */
+  ParameterId: string
+  /**
+   * 小版本镜像ID
+   */
+  ChildImageVersionId: string
+  /**
+   * 集群类型：SparkSQL/PrestoSQL/SparkBatch
+   */
+  EngineType: string
+  /**
+   * 参数key
+   */
+  KeyName: string
+  /**
+   * Key描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyDescription: string
+  /**
+   * value类型
+   */
+  ValueType: string
+  /**
+   * value长度限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueLengthLimit: string
+  /**
+   * value正则限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueRegexpLimit: string
+  /**
+   * value默认值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueDefault: string
+  /**
+   * 是否为公共版本：1：公共；2：私有
+   */
+  IsPublic: number
+  /**
+   * 配置类型：1：session配置（默认）；2：common配置；3：cluster配置
+   */
+  ParameterType: number
+  /**
+   * 提交方式：User(用户)、BackGround（后台）
+   */
+  SubmitMethod: string
+  /**
+   * 操作者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator: string
+  /**
+   * 插入时间
+   */
+  InsertTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
 }
 
 /**
@@ -881,6 +1023,26 @@ export interface CreateNotebookSessionRequest {
 }
 
 /**
+ * UnboundDatasourceHouse请求参数结构体
+ */
+export interface UnboundDatasourceHouseRequest {
+  /**
+   * 网络配置名称
+   */
+  NetworkConnectionName?: string
+}
+
+/**
+ * DeleteUserVpcConnection返回参数结构体
+ */
+export interface DeleteUserVpcConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateDataEngine请求参数结构体
  */
 export interface UpdateDataEngineRequest {
@@ -1011,6 +1173,34 @@ export interface CreateDMSTableResponse {
 }
 
 /**
+ * 查询视图信息对象
+ */
+export interface ViewResponseInfo {
+  /**
+   * 视图基本信息。
+   */
+  ViewBaseInfo?: ViewBaseInfo
+  /**
+   * 视图列信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<Column>
+  /**
+   * 视图属性信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: Array<Property>
+  /**
+   * 视图创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 视图更新时间。
+   */
+  ModifiedTime?: string
+}
+
+/**
  * DescribeSparkSessionBatchSQL请求参数结构体
  */
 export interface DescribeSparkSessionBatchSQLRequest {
@@ -1025,21 +1215,21 @@ export interface DescribeSparkSessionBatchSQLRequest {
 }
 
 /**
- * DescribeUsers返回参数结构体
+ * UpdateEngineResourceGroupNetworkConfigInfo请求参数结构体
  */
-export interface DescribeUsersResponse {
+export interface UpdateEngineResourceGroupNetworkConfigInfoRequest {
   /**
-   * 查询到的用户总数
+   * 引擎资源组ID
    */
-  TotalCount: number
+  EngineResourceGroupId: string
   /**
-   * 查询到的授权用户信息集合
+   * 是否立即重启资源组生效，0--立即生效，1--只保持不重启生效
    */
-  UserSet: Array<UserInfo>
+  IsEffectiveNow: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 资源组绑定的网络配置名称集合
    */
-  RequestId?: string
+  NetworkConfigNames?: Array<string>
 }
 
 /**
@@ -1075,6 +1265,16 @@ export interface SmartOptimizerPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChangeTable?: SmartOptimizerChangeTablePolicy
+}
+
+/**
+ * UnboundDatasourceHouse返回参数结构体
+ */
+export interface UnboundDatasourceHouseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1425,6 +1625,16 @@ export interface ModifyAdvancedStoreLocationResponse {
 }
 
 /**
+ * UpdateEngineResourceGroupNetworkConfigInfo返回参数结构体
+ */
+export interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUserRegisterTime请求参数结构体
  */
 export type DescribeUserRegisterTimeRequest = null
@@ -1540,6 +1750,137 @@ export interface DescribeDataEnginesScaleDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据优化引擎信息
+ */
+export interface OptimizerEngineInfo {
+  /**
+   * 引擎资源名称
+   */
+  HouseName: string
+  /**
+   * 引擎资源ID
+   */
+  HouseId: string
+  /**
+   * 该参数仅针对spark作业引擎有效，用于执行数据优化任务的资源大小，不填时将采用该引擎所有资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HouseSize?: number
+}
+
+/**
+ * CreateStandardEngineResourceGroup请求参数结构体
+ */
+export interface CreateStandardEngineResourceGroupRequest {
+  /**
+   * 标准引擎资源组名称
+   */
+  EngineResourceGroupName: string
+  /**
+   * 标准引擎名称
+   */
+  DataEngineName: string
+  /**
+   * 自动启动，（任务提交自动拉起资源组）0-自动启动，1-不自动启动
+   */
+  AutoLaunch?: number
+  /**
+   * 自动挂起资源组。0-自动挂起，1-不自动挂起
+   */
+  AutoPause?: number
+  /**
+   * driver的cu规格：
+当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型）
+   */
+  DriverCuSpec?: string
+  /**
+   * executor的cu规格：
+当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型）
+   */
+  ExecutorCuSpec?: string
+  /**
+   * executor最小数量，
+   */
+  MinExecutorNums?: number
+  /**
+   * executor最大数量
+   */
+  MaxExecutorNums?: number
+  /**
+   * 创建资源组后是否直接拉起，0-拉起，1-不拉起
+   */
+  IsLaunchNow?: number
+  /**
+   * 自动挂起时间，单位分钟，取值范围在1-999（在无任务AutoPauseTime后，资源组自动挂起）
+   */
+  AutoPauseTime?: number
+  /**
+   * 资源组静态参数，需要重启资源组生效
+   */
+  StaticConfigPairs?: Array<EngineResourceGroupConfigPair>
+  /**
+   * 资源组动态参数，下一个任务生效。
+   */
+  DynamicConfigPairs?: Array<EngineResourceGroupConfigPair>
+  /**
+   * 任务并发数，默人是5个
+   */
+  MaxConcurrency?: number
+  /**
+   * 网络配置名称
+   */
+  NetworkConfigNames?: Array<string>
+  /**
+   * 自定义镜像域名
+   */
+  PublicDomain?: string
+  /**
+   * 自定义镜像实例id
+   */
+  RegistryId?: string
+  /**
+   * AI类型资源组的框架类型，machine-learning，python，spark-ml，不填默认为machine-learning
+   */
+  FrameType?: string
+  /**
+   * 镜像类型，bulit-in：内置，custom：自定义，不填默认为bulit-in
+   */
+  ImageType?: string
+  /**
+   * 镜像名称
+   */
+  ImageName?: string
+  /**
+   * 镜像id
+   */
+  ImageVersion?: string
+  /**
+   * AI资源组有效，资源组可用资源上限，该值需要小于引擎资源上限
+   */
+  Size?: number
+  /**
+   * 资源组场景
+   */
+  ResourceGroupScene?: string
+  /**
+   * 自定义镜像所在地域
+   */
+  RegionName?: string
+  /**
+   * python类型资源组python单机节点资源上限，该值要小于资源组的资源上限.small:1cu medium:2cu large:4cu xlarge:8cu 4xlarge:16cu 8xlarge:32cu 16xlarge:64cu，如果是高内存型资源，在类型前面加上m.
+   */
+  PythonCuSpec?: string
+  /**
+   * 仅SQL资源组资源配置模式，fast：快速模式，custom：自定义模式
+   */
+  SparkSpecMode?: string
+  /**
+   * 仅SQL资源组资源上限，仅用于快速模块
+   */
+  SparkSize?: number
 }
 
 /**
@@ -1659,6 +2000,16 @@ export interface ListTaskJobLogNameRequest {
 }
 
 /**
+ * DeleteStandardEngineResourceGroup返回参数结构体
+ */
+export interface DeleteStandardEngineResourceGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskResult请求参数结构体
  */
 export interface DescribeTaskResultRequest {
@@ -1721,25 +2072,17 @@ export interface RollbackDataEngineImageRequest {
 }
 
 /**
- * QueryResult返回参数结构体
+ * DescribeUsers返回参数结构体
  */
-export interface QueryResultResponse {
+export interface DescribeUsersResponse {
   /**
-   * 任务Id
+   * 查询到的用户总数
    */
-  TaskId?: string
+  TotalCount: number
   /**
-   * 结果数据
+   * 查询到的授权用户信息集合
    */
-  ResultSet?: string
-  /**
-   * schema
-   */
-  ResultSchema?: Array<Column>
-  /**
-   * 分页信息
-   */
-  NextToken?: string
+  UserSet: Array<UserInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1904,6 +2247,16 @@ export interface DescribeLakeFsInfoResponse {
 }
 
 /**
+ * ModifyWorkGroup返回参数结构体
+ */
+export interface ModifyWorkGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetOptimizerPolicy返回参数结构体
  */
 export interface GetOptimizerPolicyResponse {
@@ -1911,6 +2264,24 @@ export interface GetOptimizerPolicyResponse {
    * 智能优化策略
    */
   SmartOptimizerPolicy?: SmartOptimizerPolicy
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStandardEngineResourceGroupConfigInfo返回参数结构体
+ */
+export interface DescribeStandardEngineResourceGroupConfigInfoResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 标准引擎资源组，配置相关信息
+   */
+  StandardEngineResourceGroupConfigInfos?: Array<StandardEngineResourceGroupConfigInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2083,6 +2454,32 @@ export interface DescribeDataEnginesScaleDetailRequest {
 }
 
 /**
+ * DescribeEngineNetworks请求参数结构体
+ */
+export interface DescribeEngineNetworksRequest {
+  /**
+   * 排序字段
+   */
+  SortBy?: string
+  /**
+   * 升序，降序
+   */
+  Sorting?: string
+  /**
+   * 过滤条件可选，engine-network-id--引擎网络ID，engine-network-state--引擎网络状态
+   */
+  Filters?: Array<Filter>
+  /**
+   * 数据条数
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+}
+
+/**
  * CreateTasks请求参数结构体
  */
 export interface CreateTasksRequest {
@@ -2128,6 +2525,24 @@ export interface SuspendResumeDataEngineRequest {
    * 操作类型 suspend/resume
    */
   Operate: string
+}
+
+/**
+ * DescribeNetworkConnections返回参数结构体
+ */
+export interface DescribeNetworkConnectionsResponse {
+  /**
+   * 总条数
+   */
+  TotalCount: number
+  /**
+   * 网络配置列表
+   */
+  NetworkConnectionSet: Array<NetworkConnection>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2287,6 +2702,22 @@ export interface TasksOverview {
    * 当前时间范围的总任务个数
    */
   TotalTaskCount: number
+}
+
+/**
+ * 引擎资源组参数 配置项
+ */
+export interface EngineResourceGroupConfigPair {
+  /**
+   * 配置项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigItem: string
+  /**
+   * 配置项的值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigValue: string
 }
 
 /**
@@ -2479,6 +2910,34 @@ export interface DescribeNotebookSessionStatementSqlResultResponse {
 }
 
 /**
+ * PauseStandardEngineResourceGroups请求参数结构体
+ */
+export interface PauseStandardEngineResourceGroupsRequest {
+  /**
+   * 标准引擎资源组名称
+   */
+  EngineResourceGroupNames: Array<string>
+}
+
+/**
+ * UpdateStandardEngineResourceGroupConfigInfo请求参数结构体
+ */
+export interface UpdateStandardEngineResourceGroupConfigInfoRequest {
+  /**
+   * 引擎资源组名称
+   */
+  EngineResourceGroupName: string
+  /**
+   * 需要更新的配置
+   */
+  UpdateConfContext: Array<UpdateConfContext>
+  /**
+   * 是否立即重启资源组生效，0--立即生效，1--只保持不重启生效
+   */
+  IsEffectiveNow: number
+}
+
+/**
  * ModifyUser请求参数结构体
  */
 export interface ModifyUserRequest {
@@ -2540,6 +2999,69 @@ export interface CancelNotebookSessionStatementRequest {
    * Session Statement唯一标识
    */
   StatementId: string
+}
+
+/**
+ * 对指定参数的更新、增加、删除
+ */
+export interface Param {
+  /**
+   * 参数key，例如：
+   */
+  ConfigItem?: string
+  /**
+   * 参数值
+   */
+  ConfigValue?: string
+  /**
+   * 下发操作，支持：ADD、DELETE、MODIFY
+   */
+  Operate?: string
+}
+
+/**
+ * UpdateStandardEngineResourceGroupBaseInfo请求参数结构体
+ */
+export interface UpdateStandardEngineResourceGroupBaseInfoRequest {
+  /**
+   * 引擎资源组名称
+   */
+  EngineResourceGroupName: string
+  /**
+   * 自动启动，（任务提交自动拉起资源组）0-自动启动，1-不自动启动
+   */
+  AutoLaunch: number
+  /**
+   * 自动挂起资源组。0-自动挂起，1-不自动挂起
+   */
+  AutoPause: number
+  /**
+   * 自动挂起时间，单位分钟，取值范围在1-999（在无任务AutoPauseTime后，资源组自动挂起）
+   */
+  AutoPauseTime?: number
+  /**
+   * 任务并发数
+   */
+  MaxConcurrency?: number
+}
+
+/**
+ * SparkSQL批任务日志操作信息。
+ */
+export interface SparkSessionBatchLogOperate {
+  /**
+   * 操作提示
+   */
+  Text?: string
+  /**
+   * 操作类型：COPY、LOG、UI、RESULT、List、TAB
+   */
+  Operate?: string
+  /**
+   * 补充信息：如：taskid、sessionid、sparkui等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Supplement?: Array<KVPair>
 }
 
 /**
@@ -3056,6 +3578,67 @@ engine-name：库表的模糊搜索。
 }
 
 /**
+ * PauseStandardEngineResourceGroups返回参数结构体
+ */
+export interface PauseStandardEngineResourceGroupsResponse {
+  /**
+   * 批量操作资源组时，操作失败的资源组相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateEngineResourceGroupFailMessages?: Array<OperateEngineResourceGroupFailMessage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteStandardEngineResourceGroup请求参数结构体
+ */
+export interface DeleteStandardEngineResourceGroupRequest {
+  /**
+   * 标准引擎资源组名称
+   */
+  EngineResourceGroupName: string
+}
+
+/**
+ * 网关基础信息，包括id，名称，规格和状态
+ */
+export interface GatewayInfo {
+  /**
+   * 网关ID，
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 网关名称，全局唯一
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayName?: string
+  /**
+   * 网关的规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中 5挂起中 6启动中 7隔离中 8隔离 9续费中 10变配中 11冲正中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+  /**
+   * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: number
+  /**
+   * 模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: number
+}
+
+/**
  * DescribeUserType返回参数结构体
  */
 export interface DescribeUserTypeResponse {
@@ -3104,6 +3687,16 @@ export interface CreateDataEngineResponse {
 }
 
 /**
+ * AssociateDatasourceHouse返回参数结构体
+ */
+export interface AssociateDatasourceHouseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataEngine请求参数结构体
  */
 export interface DescribeDataEngineRequest {
@@ -3143,6 +3736,36 @@ export interface KerberosInfo {
    * 服务主体
    */
   ServicePrincipal?: string
+}
+
+/**
+ * AssociateDatasourceHouse请求参数结构体
+ */
+export interface AssociateDatasourceHouseRequest {
+  /**
+   * 网络配置名称
+   */
+  DatasourceConnectionName: string
+  /**
+   * 数据源类型
+   */
+  DatasourceConnectionType: string
+  /**
+   * 数据源网络配置
+   */
+  DatasourceConnectionConfig: DatasourceConnectionConfig
+  /**
+   * 引擎名称，只允许绑定一个引擎
+   */
+  DataEngineNames: Array<string>
+  /**
+   * 网络类型，2-跨源型，4-增强型
+   */
+  NetworkConnectionType: number
+  /**
+   * 网络配置描述
+   */
+  NetworkConnectionDesc?: string
 }
 
 /**
@@ -3803,6 +4426,20 @@ export interface CreateScriptRequest {
 }
 
 /**
+ * DescribeUserVpcConnection请求参数结构体
+ */
+export interface DescribeUserVpcConnectionRequest {
+  /**
+   * 引擎网络ID
+   */
+  EngineNetworkId: string
+  /**
+   * 引擎ID集合
+   */
+  DataEngineIds?: Array<string>
+}
+
+/**
  * 数据表数据格式。
  */
 export interface DataFormat {
@@ -4202,6 +4839,16 @@ export interface MountPointAssociates {
  * AlterDMSPartition返回参数结构体
  */
 export interface AlterDMSPartitionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateStandardEngineResourceGroupResourceInfo返回参数结构体
+ */
+export interface UpdateStandardEngineResourceGroupResourceInfoResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4626,6 +5273,21 @@ export interface DataEngineInfo {
 }
 
 /**
+ * DescribeSessionImageVersion返回参数结构体
+ */
+export interface DescribeSessionImageVersionResponse {
+  /**
+   * 扩展镜像列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineSessionImages?: Array<EngineSessionImage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * LockMetaData返回参数结构体
  */
 export interface LockMetaDataResponse {
@@ -4809,6 +5471,36 @@ export interface DescribeDataEnginesResponse {
 }
 
 /**
+ * 标准引擎资源组，配置相关信息
+ */
+export interface StandardEngineResourceGroupConfigInfo {
+  /**
+   * 引擎资源组 ID
+   */
+  ResourceGroupId?: string
+  /**
+   * 引擎ID
+   */
+  DataEngineId?: string
+  /**
+   * 资源组静态参数，需要重启资源组生效
+   */
+  StaticConfigPairs?: Array<EngineResourceGroupConfigPair>
+  /**
+   * 资源组动态参数，下一个任务生效。
+   */
+  DynamicConfigPairs?: Array<EngineResourceGroupConfigPair>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * 数据源属性
  */
 export interface DatasourceConnectionConfig {
@@ -4952,9 +5644,37 @@ export interface LakeFileSystemToken {
 }
 
 /**
+ * DeleteNativeSparkSession请求参数结构体
+ */
+export interface DeleteNativeSparkSessionRequest {
+  /**
+   * 引擎id
+   */
+  DataEngineId?: string
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * spark session名称
+   */
+  EngineSessionName?: string
+}
+
+/**
  * AlterDMSTable返回参数结构体
  */
 export interface AlterDMSTableResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateUserVpcConnection返回参数结构体
+ */
+export interface CreateUserVpcConnectionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5078,6 +5798,20 @@ export interface RestartDataEngineResponse {
 }
 
 /**
+ * DescribeNativeSparkSessions返回参数结构体
+ */
+export interface DescribeNativeSparkSessionsResponse {
+  /**
+   * spark session列表
+   */
+  SparkSessionsList?: Array<SparkSessionInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SwitchDataEngineImage返回参数结构体
  */
 export interface SwitchDataEngineImageResponse {
@@ -5156,119 +5890,13 @@ export interface DescribeUserRegisterTimeResponse {
 }
 
 /**
- * Notebook Session详细信息。
+ * DropDMSTable返回参数结构体
  */
-export interface NotebookSessionInfo {
+export interface DropDMSTableResponse {
   /**
-   * Session名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 类型，当前支持：spark、pyspark、sparkr、sql
-   */
-  Kind?: string
-  /**
-   * DLC Spark作业引擎名称
-   */
-  DataEngineName?: string
-  /**
-   * Session相关配置，当前支持：eni、roleArn以及用户指定的配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Arguments?: Array<KVPair>
-  /**
-   * 运行程序地址，当前支持：cosn://和lakefs://两种路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProgramDependentFiles?: Array<string>
-  /**
-   * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProgramDependentJars?: Array<string>
-  /**
-   * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProgramDependentPython?: Array<string>
-  /**
-   * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProgramArchives?: Array<string>
-  /**
-   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-   */
-  DriverSize?: string
-  /**
-   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-   */
-  ExecutorSize?: string
-  /**
-   * 指定的Executor数量，默认为1
-   */
-  ExecutorNumbers?: number
-  /**
-   * 代理用户，默认为root
-   */
-  ProxyUser?: string
-  /**
-   * 指定的Session超时时间，单位秒，默认3600秒
-   */
-  TimeoutInSecond?: number
-  /**
-   * Spark任务返回的AppId
-   */
-  SparkAppId?: string
-  /**
-   * Session唯一标识
-   */
-  SessionId?: string
-  /**
-   * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
-   */
-  State?: string
-  /**
-   * Session创建时间
-   */
-  CreateTime?: string
-  /**
-   * 其它信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppInfo?: Array<KVPair>
-  /**
-   * Spark ui地址
-   */
-  SparkUiUrl?: string
-  /**
-   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
-   */
-  ExecutorMaxNumbers?: number
-  /**
-   * session类型，group：资源组下session independent：独立资源session， 不依赖资源组
-   */
-  SessionType?: string
-  /**
-   * 引擎id
-   */
-  DataEngineId?: string
-  /**
-   * 资源组id
-   */
-  ResourceGroupId?: string
-  /**
-   * 资源组名称
-   */
-  ResourceGroupName?: string
-  /**
-   * session，pod大小
-   */
-  PodSize?: number
-  /**
-   * pod数量
-   */
-  PodNumbers?: number
+  RequestId?: string
 }
 
 /**
@@ -5441,6 +6069,32 @@ export interface ModifySparkAppRequest {
    * 标准引擎依赖包
    */
   DependencyPackages?: Array<DependencyPackage>
+}
+
+/**
+ * 节点规格信息
+ */
+export interface SpecInfo {
+  /**
+   * 规格名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 当前规格的cu数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cu?: number
+  /**
+   * 当前规格的cpu数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * 当前规格的内存数，单位G
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
 }
 
 /**
@@ -5781,6 +6435,20 @@ export interface TPartition {
 }
 
 /**
+ * DeleteUserVpcConnection请求参数结构体
+ */
+export interface DeleteUserVpcConnectionRequest {
+  /**
+   * 引擎网络ID
+   */
+  EngineNetworkId: string
+  /**
+   * 终端节点ID
+   */
+  UserVpcEndpointId: string
+}
+
+/**
  * DescribeTaskMonitorInfos请求参数结构体
  */
 export interface DescribeTaskMonitorInfosRequest {
@@ -5935,6 +6603,32 @@ export interface CreateTableRequest {
 }
 
 /**
+ * DescribeStandardEngineResourceGroups请求参数结构体
+ */
+export interface DescribeStandardEngineResourceGroupsRequest {
+  /**
+   * 排序字段
+   */
+  SortBy?: string
+  /**
+   * 升序，降序
+   */
+  Sorting?: string
+  /**
+   * 过滤条件可选，app-id--用户appID，engine-resource-group-id--引擎资源组ID，data-engine-name--引擎名称，engine-resource-group-name---引擎资源组名称（模糊查询），engine-resource-group-state---引擎资源组状态engine-resource-group-name-unique --引擎资源组名称（完全匹配）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 数据条数，默认10
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+}
+
+/**
  * 任务监控信息
  */
 export interface TaskMonitorInfo {
@@ -6079,6 +6773,182 @@ view-id - String - （过滤条件）view id形如：12342。
 }
 
 /**
+ * 用户标准引擎资源组信息
+ */
+export interface StandardEngineResourceGroupInfo {
+  /**
+   * 标准引擎资源组ID
+   */
+  EngineResourceGroupId?: string
+  /**
+   * 标准引擎资源组名称，支持1-50个英文、汉字、数字、连接线-或下划线_
+   */
+  EngineResourceGroupName?: string
+  /**
+   * 创建者
+   */
+  Creator?: string
+  /**
+   * 资源组 状态，-1--删除、0--启动中、2--运行、3--暂停、4--暂停中、7--切换引擎中、8--配置修改中。9--资源组重启中，10--因为变配导致资源组启动、11--因为隔离导致资源组挂起、12- 资源配置下发中、 13-接入点隔离导致资源组挂起中
+   */
+  ResourceGroupState?: number
+  /**
+   * 自动启动，（任务提交自动拉起资源组）0-自动启动，1-不自动启动
+   */
+  AutoLaunch?: number
+  /**
+   * 自动挂起资源组。0-自动挂起，1-不自动挂起
+   */
+  AutoPause?: number
+  /**
+   * 自动挂起时间，单位分钟，取值范围在1-999（在无任务AutoPauseTime后，资源组自动挂起）
+   */
+  AutoPauseTime?: number
+  /**
+   * driver的cu规格：
+当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型）
+   */
+  DriverCuSpec?: string
+  /**
+   * executor的cu规格：
+当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型）
+   */
+  ExecutorCuSpec?: string
+  /**
+   * 任务并发数
+   */
+  MaxConcurrency?: number
+  /**
+   * executor最小数量，
+   */
+  MinExecutorNums?: number
+  /**
+   * executor最大数量，
+   */
+  MaxExecutorNums?: number
+  /**
+   * 创建时间戳
+   */
+  CreateTime?: number
+  /**
+   * 更新时间戳
+   */
+  UpdateTime?: number
+  /**
+   * 是否待重启，作为有资源参数，静态参数修改未重启生效的标识；0-- 不需要重启、1--因为资源参数待重启、2--因静态参数重启、3--因资源和静态参数而待重启、4--因网络配置而待重启、5--因网络配置和资源配置而待重启、6--因网络配置和静态参数而待重启、7--因网络配置，资源参数和静态参数而待重启、
+   */
+  NeedRestart?: number
+  /**
+   * 绑定的引擎名称
+   */
+  DataEngineName?: string
+  /**
+   * 绑定的引擎ID
+   */
+  DataEngineId?: string
+  /**
+   * 绑定的引擎状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineState?: number
+  /**
+   * 接入点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessPointId?: string
+  /**
+   * 接入点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessPointName?: string
+  /**
+   * 接入点状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessPointState?: number
+  /**
+   * 资源组类型，console/ default
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupType?: string
+  /**
+   * 引擎网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkId?: string
+  /**
+   * 网络配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkConfigNames?: Array<string>
+  /**
+   * AI类型资源组的框架类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameType?: string
+  /**
+   * AI类型资源组的镜像类型，内置：bulit-in，自定义：custom
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageType?: string
+  /**
+   * 镜像名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageName?: string
+  /**
+   * 镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageVersion?: string
+  /**
+   * AI资源组的可用资源上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * 是否是默认资源组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefault?: boolean
+  /**
+   * 资源组场景
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupScene?: string
+  /**
+   * python类型资源组python单机节点资源上限，该值要小于资源组的资源上限.small:1cu medium:2cu large:4cu xlarge:8cu 4xlarge:16cu 8xlarge:32cu 16xlarge:64cu，如果是高内存型资源，在类型前面加上m.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PythonCuSpec?: string
+  /**
+   * Spark类型资源组资源配置模式，fast：快速模式，custom：自定义模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkSpecMode?: string
+  /**
+   * Spark类型资源组资源上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkSize?: number
+  /**
+   * Spark类型资源组资源最小值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkMinSize?: number
+}
+
+/**
+ * CreateStandardEngineResourceGroup返回参数结构体
+ */
+export interface CreateStandardEngineResourceGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GrantDLCCatalogAccess请求参数结构体
  */
 export interface GrantDLCCatalogAccessRequest {
@@ -6120,6 +6990,54 @@ export interface ReportHeartbeatMetaDataRequest {
    * 事务ID
    */
   TxnId?: number
+}
+
+/**
+ * DescribeEngineNetworks返回参数结构体
+ */
+export interface DescribeEngineNetworksResponse {
+  /**
+   * 引擎网络信息
+   */
+  EngineNetworkInfos?: Array<EngineNetworkInfo>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeNetworkConnections请求参数结构体
+ */
+export interface DescribeNetworkConnectionsRequest {
+  /**
+   * 网络配置类型
+   */
+  NetworkConnectionType?: number
+  /**
+   * 计算引擎名称
+   */
+  DataEngineName?: string
+  /**
+   * 数据源vpcid
+   */
+  DatasourceConnectionVpcId?: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 网络配置名称
+   */
+  NetworkConnectionName?: string
 }
 
 /**
@@ -6192,6 +7110,31 @@ export interface DescribeDMSTablesRequest {
    * 数据源连接名
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * LaunchStandardEngineResourceGroups返回参数结构体
+ */
+export interface LaunchStandardEngineResourceGroupsResponse {
+  /**
+   * 批量操作资源组时，操作失败的资源组相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateEngineResourceGroupFailMessages?: Array<OperateEngineResourceGroupFailMessage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateNetworkConnection返回参数结构体
+ */
+export interface UpdateNetworkConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6315,20 +7258,6 @@ export interface DescribeDataEngineImageVersionsRequest {
  * BindWorkGroupsToUser返回参数结构体
  */
 export interface BindWorkGroupsToUserResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AssignMangedTableProperties返回参数结构体
- */
-export interface AssignMangedTablePropertiesResponse {
-  /**
-   * 分配的原生表表属性
-   */
-  Properties?: Array<Property>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6532,6 +7461,20 @@ export interface DescribeTasksAnalysisRequest {
 }
 
 /**
+ * DescribeDataEngineSessionParameters返回参数结构体
+ */
+export interface DescribeDataEngineSessionParametersResponse {
+  /**
+   * 集群Session配置列表
+   */
+  DataEngineParameters?: Array<DataEngineImageSessionParameter>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeScripts返回参数结构体
  */
 export interface DescribeScriptsResponse {
@@ -6561,31 +7504,79 @@ export interface UnbindWorkGroupsFromUserRequest {
 }
 
 /**
- * 查询视图信息对象
+ * UpdateStandardEngineResourceGroupResourceInfo请求参数结构体
  */
-export interface ViewResponseInfo {
+export interface UpdateStandardEngineResourceGroupResourceInfoRequest {
   /**
-   * 视图基本信息。
+   * 引擎资源组名称
    */
-  ViewBaseInfo?: ViewBaseInfo
+  EngineResourceGroupName: string
   /**
-   * 视图列信息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * driver的cu规格：
+当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型）
    */
-  Columns?: Array<Column>
+  DriverCuSpec?: string
   /**
-   * 视图属性信息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * executor的cu规格：
+当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型）
    */
-  Properties?: Array<Property>
+  ExecutorCuSpec?: string
   /**
-   * 视图创建时间。
+   * executor最小数量，
    */
-  CreateTime?: string
+  MinExecutorNums?: number
   /**
-   * 视图更新时间。
+   * executor最大数量
    */
-  ModifiedTime?: string
+  MaxExecutorNums?: number
+  /**
+   * 是否立即重启资源组生效，0--立即生效，1--只保持不重启生效
+   */
+  IsEffectiveNow?: number
+  /**
+   * AI资源组资源上限
+   */
+  Size?: number
+  /**
+   * 镜像类型，内置镜像：built-in，自定义镜像：custom
+   */
+  ImageType?: string
+  /**
+   * 镜像名称
+   */
+  ImageName?: string
+  /**
+   * 镜像版本，镜像id
+   */
+  ImageVersion?: string
+  /**
+   * 框架类型
+   */
+  FrameType?: string
+  /**
+   * 自定义镜像域名
+   */
+  PublicDomain?: string
+  /**
+   * 自定义镜像实例id
+   */
+  RegistryId?: string
+  /**
+   * 自定义镜像所属地域
+   */
+  RegionName?: string
+  /**
+   * python类型资源组python单机节点资源上限，该值要小于资源组的资源上限.small:1cu medium:2cu large:4cu xlarge:8cu 4xlarge:16cu 8xlarge:32cu 16xlarge:64cu，如果是高内存型资源，在类型前面加上m.
+   */
+  PythonCuSpec?: string
+  /**
+   * 仅SQL资源组资源配置模式，fast：快速模式，custom：自定义模式
+   */
+  SparkSpecMode?: string
+  /**
+   * 仅SQL资源组资源上限，仅用于快速模式
+   */
+  SparkSize?: number
 }
 
 /**
@@ -6734,6 +7725,16 @@ export interface ModifyWorkGroupRequest {
    * 工作组描述，最大字符数限制50
    */
   WorkGroupDescription: string
+}
+
+/**
+ * UpdateStandardEngineResourceGroupBaseInfo返回参数结构体
+ */
+export interface UpdateStandardEngineResourceGroupBaseInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6906,27 +7907,32 @@ export interface WorkGroupDetailInfo {
 }
 
 /**
+ * DescribeEngineNodeSpec请求参数结构体
+ */
+export interface DescribeEngineNodeSpecRequest {
+  /**
+   * 引擎名称
+   */
+  DataEngineName?: string
+}
+
+/**
  * DescribeThirdPartyAccessUser请求参数结构体
  */
 export type DescribeThirdPartyAccessUserRequest = null
 
 /**
- * 数据优化引擎信息
+ * AssignMangedTableProperties返回参数结构体
  */
-export interface OptimizerEngineInfo {
+export interface AssignMangedTablePropertiesResponse {
   /**
-   * 引擎资源名称
+   * 分配的原生表表属性
    */
-  HouseName: string
+  Properties?: Array<Property>
   /**
-   * 引擎资源ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HouseId: string
-  /**
-   * 该参数仅针对spark作业引擎有效，用于执行数据优化任务的资源大小，不填时将采用该引擎所有资源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HouseSize?: number
+  RequestId?: string
 }
 
 /**
@@ -7635,6 +8641,20 @@ export interface DeleteCHDFSBindingProductResponse {
 }
 
 /**
+ * 配置下发参数
+ */
+export interface UpdateConfContext {
+  /**
+   * 参数类型，可选：StaticConfigType，DynamicConfigType
+   */
+  ConfigType: string
+  /**
+   * 参数的配置数组
+   */
+  Params: Array<Param>
+}
+
+/**
  * CancelNotebookSessionStatementBatch请求参数结构体
  */
 export interface CancelNotebookSessionStatementBatchRequest {
@@ -7660,6 +8680,33 @@ export interface DescribeLakeFsTaskResultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TensorFlow、Pytorch、SK-learn镜像信息列表
+ */
+export interface EngineSessionImage {
+  /**
+   * Spark镜像唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkImageId?: string
+  /**
+   * Spark镜像版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkImageVersion?: string
+  /**
+   * 小版本镜像类型.1:TensorFlow、2:Pytorch、3:SK-learn
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkImageType?: number
+  /**
+   * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkImageTag?: string
 }
 
 /**
@@ -7851,13 +8898,17 @@ export interface ModifyDataEngineDescriptionRequest {
 }
 
 /**
- * DropDMSTable返回参数结构体
+ * UpdateNetworkConnection请求参数结构体
  */
-export interface DropDMSTableResponse {
+export interface UpdateNetworkConnectionRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 网络配置描述
    */
-  RequestId?: string
+  NetworkConnectionDesc?: string
+  /**
+   * 网络配置名称
+   */
+  NetworkConnectionName?: string
 }
 
 /**
@@ -8024,9 +9075,17 @@ export interface CreateScriptResponse {
 }
 
 /**
- * ModifyWorkGroup返回参数结构体
+ * CreateSparkSubmitTask返回参数结构体
  */
-export interface ModifyWorkGroupResponse {
+export interface CreateSparkSubmitTaskResponse {
+  /**
+   * 批作业ID
+   */
+  BatchId?: string
+  /**
+   * 批任务ID，用改ID进行任务的查询与删除等
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8066,6 +9125,61 @@ export interface TagInfo {
 }
 
 /**
+ * spark session详细信息
+ */
+export interface SparkSessionInfo {
+  /**
+   * spark session id
+   */
+  SparkSessionId?: string
+  /**
+   * spark session名称
+   */
+  SparkSessionName?: string
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * engine session id
+   */
+  EngineSessionId?: string
+  /**
+   * engine session   
+name
+   */
+  EngineSessionName?: string
+  /**
+   * 自动销毁时间
+   */
+  IdleTimeoutMin?: number
+  /**
+   * driver规格
+   */
+  DriverSpec?: string
+  /**
+   * executor规格
+   */
+  ExecutorSpec?: string
+  /**
+   * executor最小数量
+   */
+  ExecutorNumMin?: number
+  /**
+   * executor最大数量
+   */
+  ExecutorNumMax?: number
+  /**
+   * 总规格最小
+   */
+  TotalSpecMin?: number
+  /**
+   * 总规格最大
+   */
+  TotalSpecMax?: number
+}
+
+/**
  * DeleteSparkApp请求参数结构体
  */
 export interface DeleteSparkAppRequest {
@@ -8094,17 +9208,17 @@ export interface DescribeDLCCatalogAccessRequest {
 }
 
 /**
- * CreateSparkSubmitTask返回参数结构体
+ * DescribeStandardEngineResourceGroups返回参数结构体
  */
-export interface CreateSparkSubmitTaskResponse {
+export interface DescribeStandardEngineResourceGroupsResponse {
   /**
-   * 批作业ID
+   * 标准引擎资源组信息
    */
-  BatchId?: string
+  UserEngineResourceGroupInfos?: Array<StandardEngineResourceGroupInfo>
   /**
-   * 批任务ID，用改ID进行任务的查询与删除等
+   * 资源组总数
    */
-  TaskId?: string
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8740,22 +9854,31 @@ export interface ListTaskJobLogDetailRequest {
 }
 
 /**
- * SparkSQL批任务日志操作信息。
+ * DescribeNativeSparkSessions请求参数结构体
  */
-export interface SparkSessionBatchLogOperate {
+export interface DescribeNativeSparkSessionsRequest {
   /**
-   * 操作提示
+   * 引擎ID
    */
-  Text?: string
+  DataEngineId?: string
   /**
-   * 操作类型：COPY、LOG、UI、RESULT、List、TAB
+   * 资源组ID
    */
-  Operate?: string
+  ResourceGroupId?: string
+}
+
+/**
+ * DescribeSessionImageVersion请求参数结构体
+ */
+export interface DescribeSessionImageVersionRequest {
   /**
-   * 补充信息：如：taskid、sessionid、sparkui等
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎Id
    */
-  Supplement?: Array<KVPair>
+  DataEngineId: string
+  /**
+   * 框架类型：machine-learning、python、spark-ml
+   */
+  FrameworkType: string
 }
 
 /**
@@ -9034,6 +10157,16 @@ export interface ModifySparkAppResponse {
 }
 
 /**
+ * LaunchStandardEngineResourceGroups请求参数结构体
+ */
+export interface LaunchStandardEngineResourceGroupsRequest {
+  /**
+   * 标准引擎资源组名称
+   */
+  EngineResourceGroupNames: Array<string>
+}
+
+/**
  * 数据库和数据表属性信息
  */
 export interface Property {
@@ -9045,6 +10178,37 @@ export interface Property {
    * 属性key对应的value。
    */
   Value: string
+}
+
+/**
+ * 用户vpc网络连接信息
+ */
+export interface UserVpcConnectionInfo {
+  /**
+   * 引擎网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkId?: string
+  /**
+   * 用户vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcId?: string
+  /**
+   * 用户终端节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcEndpointId?: string
+  /**
+   * 用户终端节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcEndpointName?: string
+  /**
+   * 接入点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessConnectionInfos?: Array<string>
 }
 
 /**
@@ -9319,6 +10483,32 @@ export interface DescribeNotebookSessionStatementResponse {
 }
 
 /**
+ * DescribeStandardEngineResourceGroupConfigInfo请求参数结构体
+ */
+export interface DescribeStandardEngineResourceGroupConfigInfoRequest {
+  /**
+   * 排序字段
+   */
+  SortBy?: string
+  /**
+   * 升序，降序
+   */
+  Sorting?: string
+  /**
+   * 过滤条件可选，engine-resource-group-id--引擎资源组ID，engine-id---引擎ID
+   */
+  Filters?: Array<Filter>
+  /**
+   * 数据条数，默认10
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+}
+
+/**
  * UpgradeDataEngineImage返回参数结构体
  */
 export interface UpgradeDataEngineImageResponse {
@@ -9560,6 +10750,20 @@ export interface TaskResponseInfo {
 }
 
 /**
+ * 操作资源组，返回的操作失败信息
+ */
+export interface OperateEngineResourceGroupFailMessage {
+  /**
+   * 引擎资源组名称
+   */
+  EngineResourceGroupName?: string
+  /**
+   * 操作失败的提示信息
+   */
+  FailMessage?: string
+}
+
+/**
  * DescribeStoreLocation返回参数结构体
  */
 export interface DescribeStoreLocationResponse {
@@ -9589,6 +10793,122 @@ export interface QueryTaskCostDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Notebook Session详细信息。
+ */
+export interface NotebookSessionInfo {
+  /**
+   * Session名称
+   */
+  Name?: string
+  /**
+   * 类型，当前支持：spark、pyspark、sparkr、sql
+   */
+  Kind?: string
+  /**
+   * DLC Spark作业引擎名称
+   */
+  DataEngineName?: string
+  /**
+   * Session相关配置，当前支持：eni、roleArn以及用户指定的配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Arguments?: Array<KVPair>
+  /**
+   * 运行程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgramDependentFiles?: Array<string>
+  /**
+   * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgramDependentJars?: Array<string>
+  /**
+   * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgramDependentPython?: Array<string>
+  /**
+   * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgramArchives?: Array<string>
+  /**
+   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+   */
+  DriverSize?: string
+  /**
+   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+   */
+  ExecutorSize?: string
+  /**
+   * 指定的Executor数量，默认为1
+   */
+  ExecutorNumbers?: number
+  /**
+   * 代理用户，默认为root
+   */
+  ProxyUser?: string
+  /**
+   * 指定的Session超时时间，单位秒，默认3600秒
+   */
+  TimeoutInSecond?: number
+  /**
+   * Spark任务返回的AppId
+   */
+  SparkAppId?: string
+  /**
+   * Session唯一标识
+   */
+  SessionId?: string
+  /**
+   * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
+   */
+  State?: string
+  /**
+   * Session创建时间
+   */
+  CreateTime?: string
+  /**
+   * 其它信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppInfo?: Array<KVPair>
+  /**
+   * Spark ui地址
+   */
+  SparkUiUrl?: string
+  /**
+   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+   */
+  ExecutorMaxNumbers?: number
+  /**
+   * session类型，group：资源组下session independent：独立资源session， 不依赖资源组
+   */
+  SessionType?: string
+  /**
+   * 引擎id
+   */
+  DataEngineId?: string
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * 资源组名称
+   */
+  ResourceGroupName?: string
+  /**
+   * session，pod大小
+   */
+  PodSize?: number
+  /**
+   * pod数量
+   */
+  PodNumbers?: number
 }
 
 /**
@@ -9702,6 +11022,21 @@ export interface DescribeLakeFsDirSummaryResponse {
 }
 
 /**
+ * DescribeUserVpcConnection返回参数结构体
+ */
+export interface DescribeUserVpcConnectionResponse {
+  /**
+   * 用户vpc连接信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVpcConnectionInfos?: Array<UserVpcConnectionInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UnlockMetaData返回参数结构体
  */
 export interface UnlockMetaDataResponse {
@@ -9720,6 +11055,11 @@ export interface DeleteWorkGroupResponse {
    */
   RequestId?: string
 }
+
+/**
+ * RegisterThirdPartyAccessUser请求参数结构体
+ */
+export type RegisterThirdPartyAccessUserRequest = null
 
 /**
  * ModifySparkAppBatch返回参数结构体
@@ -10113,6 +11453,20 @@ export interface DataEngineScaleInfo {
 }
 
 /**
+ * DescribeDataEngineSessionParameters请求参数结构体
+ */
+export interface DescribeDataEngineSessionParametersRequest {
+  /**
+   * 引擎id
+   */
+  DataEngineId: string
+  /**
+   * 引擎名称，当指定引擎名称后优先使用名称获取配置
+   */
+  DataEngineName?: string
+}
+
+/**
  * QueryTaskCostDetail请求参数结构体
  */
 export interface QueryTaskCostDetailRequest {
@@ -10253,6 +11607,52 @@ export interface DescribeSparkAppTasksRequest {
 }
 
 /**
+ * DescribeEngineNodeSpec返回参数结构体
+ */
+export interface DescribeEngineNodeSpecResponse {
+  /**
+   * driver可用的规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DriverSpec?: Array<SpecInfo>
+  /**
+   * executor可用的规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorSpec?: Array<SpecInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateUserVpcConnection请求参数结构体
+ */
+export interface CreateUserVpcConnectionRequest {
+  /**
+   * 用户vpcid
+   */
+  UserVpcId: string
+  /**
+   * 用户子网
+   */
+  UserSubnetId: string
+  /**
+   * 用户终端节点名称
+   */
+  UserVpcEndpointName: string
+  /**
+   * 引擎网络ID
+   */
+  EngineNetworkId: string
+  /**
+   * 手动指定vip，不填自动分配子网下的一个ip
+   */
+  UserVpcEndpointVip?: string
+}
+
+/**
  * 用户部分信息
  */
 export interface UserMessage {
@@ -10280,9 +11680,30 @@ export interface UserMessage {
 }
 
 /**
- * RegisterThirdPartyAccessUser请求参数结构体
+ * QueryResult返回参数结构体
  */
-export type RegisterThirdPartyAccessUserRequest = null
+export interface QueryResultResponse {
+  /**
+   * 任务Id
+   */
+  TaskId?: string
+  /**
+   * 结果数据
+   */
+  ResultSet?: string
+  /**
+   * schema
+   */
+  ResultSchema?: Array<Column>
+  /**
+   * 分页信息
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * SwitchDataEngineImage请求参数结构体

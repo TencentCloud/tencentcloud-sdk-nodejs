@@ -26,6 +26,7 @@ import {
   GetDocumentChunkResultRequest,
   RerankResult,
   GetDocumentParseResultRequest,
+  PageUsage,
   Usage,
   DocumentParseConfig,
   ParseDocumentResponse,

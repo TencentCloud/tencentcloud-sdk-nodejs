@@ -211,20 +211,6 @@ export interface QueryHunyuanImageJobRequest {
 }
 
 /**
- * 3D文件
- */
-export interface File3D {
-  /**
-   * 3D文件的格式。取值范围：GIF, OBJ
-   */
-  Type?: string
-  /**
-   * 文件的Url（有效期24小时）
-   */
-  Url?: string
-}
-
-/**
  * QueryHunyuanImageChatJob请求参数结构体
  */
 export interface QueryHunyuanImageChatJobRequest {
@@ -532,16 +518,6 @@ export interface GetThreadMessageListRequest {
    * 排序方式，按创建时间升序（asc）或降序（desc），默认为 desc
    */
   Order?: string
-}
-
-/**
- * QueryHunyuanTo3DJob请求参数结构体
- */
-export interface QueryHunyuanTo3DJobRequest {
-  /**
-   * 任务ID
-   */
-  JobId?: string
 }
 
 /**
@@ -1673,16 +1649,6 @@ export interface Timeline {
 }
 
 /**
- * 3D文件列表
- */
-export interface File3Ds {
-  /**
-   * 3D文件列表
-   */
-  File3D?: Array<File3D>
-}
-
-/**
  * 返回的内容（流式返回）
  */
 export interface Delta {
@@ -1917,32 +1883,6 @@ export interface GroupChatConfig {
 }
 
 /**
- * QueryHunyuanTo3DJob返回参数结构体
- */
-export interface QueryHunyuanTo3DJobResponse {
-  /**
-   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
-   */
-  Status?: string
-  /**
-   * 生成的3D文件数组
-   */
-  ResultFile3Ds?: Array<File3Ds>
-  /**
-   * 错误码
-   */
-  ErrorCode?: string
-  /**
-   * 错误信息
-   */
-  ErrorMessage?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 知识注入相关的参数信息
  */
 export interface WebSearchOptions {
@@ -2052,34 +1992,6 @@ export interface ThreadMessageInCompleteDetailsObject {
 }
 
 /**
- * SubmitHunyuanTo3DJob请求参数结构体
- */
-export interface SubmitHunyuanTo3DJobRequest {
-  /**
-   * 3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
-   */
-  Prompt?: string
-  /**
-   * 输入图 Base64 数据。
-大小：单边分辨率要求不小于50，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）
-格式：jpg，png，jpeg，webp。
-ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
-   */
-  ImageBase64?: string
-  /**
-   * 输入图Url。
-大小：单边分辨率要求不小于50，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）
-格式：jpg，png，jpeg，webp。
-ImageBase64/ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
-   */
-  ImageUrl?: string
-  /**
-   * 生成数量。默认1，当前限制只能为1。
-   */
-  Num?: number
-}
-
-/**
  * ImageQuestion请求参数结构体
  */
 export interface ImageQuestionRequest {
@@ -2105,20 +2017,6 @@ export interface ImageQuestionRequest {
 通过 SDK 调用时，流式和非流式调用需用**不同的方式**获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。
    */
   Stream?: boolean
-}
-
-/**
- * SubmitHunyuanTo3DJob返回参数结构体
- */
-export interface SubmitHunyuanTo3DJobResponse {
-  /**
-   * 任务id（有效期24小时）
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

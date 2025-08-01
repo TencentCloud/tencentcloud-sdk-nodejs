@@ -328,6 +328,16 @@ it("ess.v20201111.DeleteIntegrationEmployees", async function () {
     }
 })
 
+it("ess.v20201111.CreateBatchContractReviewTask", async function () {
+    try {
+       const data = await client.CreateBatchContractReviewTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateUserAutoSignSealUrl", async function () {
     try {
        const data = await client.CreateUserAutoSignSealUrl({})
@@ -341,6 +351,16 @@ it("ess.v20201111.CreateUserAutoSignSealUrl", async function () {
 it("ess.v20201111.DescribeOrganizationAuthStatus", async function () {
     try {
        const data = await client.DescribeOrganizationAuthStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeContractReviewTask", async function () {
+    try {
+       const data = await client.DescribeContractReviewTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

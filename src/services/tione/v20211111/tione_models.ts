@@ -870,6 +870,10 @@ DEFAULT: 其他来源
 枚举值，部分情况下与CreateSource不同，通过该字段兼容
    */
   MonitorSource?: string
+  /**
+   * 服务创建者的子账号名称
+   */
+  SubUinName?: string
 }
 
 /**

@@ -137,6 +137,7 @@ import {
   CreateJWTAuthenticatorRequest,
   DescribeCaCertificatesRequest,
   DeviceCertificateItem,
+  SubscriptionUserProperty,
   MQTTClientInfo,
   MQTTTopicItem,
   PriceTag,

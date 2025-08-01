@@ -38,6 +38,24 @@ export interface DeployConfigGroupVersionRequest {
 }
 
 /**
+ * DescribeSecurityAPIResource返回参数结构体
+ */
+export interface DescribeSecurityAPIResourceResponse {
+  /**
+   * API 资源总数量。
+   */
+  TotalCount?: number
+  /**
+   * API 资源列表。
+   */
+  APIResources?: Array<APIResource>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 预付费套餐自动续费配置项。
  */
 export interface RenewFlag {
@@ -154,6 +172,20 @@ export interface DescribeOriginGroupResponse {
 }
 
 /**
+ * ModifySecurityJSInjectionRule请求参数结构体
+ */
+export interface ModifySecurityJSInjectionRuleRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * JavaScript 注入规则列表。
+   */
+  JSInjectionRules?: Array<JSInjectionRule>
+}
+
+/**
  * DescribeSecurityIPGroupInfo返回参数结构体
  */
 export interface DescribeSecurityIPGroupInfoResponse {
@@ -227,6 +259,20 @@ export interface DescribeWebSecurityTemplatesRequest {
    * 站点 ID 列表。单次查询最多传入 100 个站点。
    */
   ZoneIds: Array<string>
+}
+
+/**
+ * CreateSecurityAPIService请求参数结构体
+ */
+export interface CreateSecurityAPIServiceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   *  API 服务列表。
+   */
+  APIServices?: Array<APIService>
 }
 
 /**
@@ -567,6 +613,20 @@ export interface ModifyAccelerationDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteSecurityAPIResource请求参数结构体
+ */
+export interface DeleteSecurityAPIResourceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 需要删除的 API 资源 ID 列表。
+   */
+  APIResourceIds?: Array<string>
 }
 
 /**
@@ -1162,17 +1222,23 @@ export interface ModifyContentIdentifierResponse {
 }
 
 /**
- * 刷新预热附带的头部信息
+ * DeleteSecurityAPIService返回参数结构体
  */
-export interface Header {
+export interface DeleteSecurityAPIServiceResponse {
   /**
-   * HTTP头部名称。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
+  RequestId?: string
+}
+
+/**
+ * 规则引擎条件且关系条件列表
+ */
+export interface RuleAndConditions {
   /**
-   * HTTP头部值。
+   * 规则引擎条件，该数组内所有项全部满足即判断该条件满足。
    */
-  Value: string
+  Conditions: Array<RuleCondition>
 }
 
 /**
@@ -1392,21 +1458,25 @@ export interface CreateMultiPathGatewaySecretKeyResponse {
 }
 
 /**
- * DescribeAccelerationDomains返回参数结构体
+ * DescribeSecurityIPGroupContent请求参数结构体
  */
-export interface DescribeAccelerationDomainsResponse {
+export interface DescribeSecurityIPGroupContentRequest {
   /**
-   * 符合查询条件的加速域名个数。
+   * 站点 ID。
    */
-  TotalCount?: number
+  ZoneId: string
   /**
-   * 符合查询条件的所有加速域名的信息。
+   * IP 组 ID。
    */
-  AccelerationDomains?: Array<AccelerationDomain>
+  GroupId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页查询限制数目。默认值：2000，最大值：100000。
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
 }
 
 /**
@@ -1461,6 +1531,20 @@ export interface UpstreamRequestQueryString {
    * 指定参数值。仅当查询字符串模式 Action 为 includeCustom 或者 excludeCustom 时该参数生效，用于指定需要保留或者忽略的参数。最大支持 10 个参数。
    */
   Values?: Array<string>
+}
+
+/**
+ * DeleteJustInTimeTranscodeTemplates请求参数结构体
+ */
+export interface DeleteJustInTimeTranscodeTemplatesRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 需删除的即时转码模板唯一标识数组，长度限制：100。
+   */
+  TemplateIds: Array<string>
 }
 
 /**
@@ -1664,6 +1748,21 @@ export interface EnvInfo {
 }
 
 /**
+ * 音频流配置参数。
+ */
+export interface AudioTemplateInfo {
+  /**
+   * 音频流的编码格式。可选值为：
+<li>libfdk_aac。</li>
+   */
+  Codec: string
+  /**
+   * 音频通道数，可选值：<li>2：双通道。</li>默认值：2。
+   */
+  AudioChannel?: number
+}
+
+/**
  * ModifyLoadBalancer请求参数结构体
  */
 export interface ModifyLoadBalancerRequest {
@@ -1809,6 +1908,20 @@ export interface DescribeTimingL7CacheDataRequest {
 <li>global：全球数据。</li>不填默认取值为global。
    */
   Area?: string
+}
+
+/**
+ * ModifySecurityAPIResource请求参数结构体
+ */
+export interface ModifySecurityAPIResourceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * API 资源列表。
+   */
+  APIResources?: Array<APIResource>
 }
 
 /**
@@ -2164,6 +2277,24 @@ export interface RulesProperties {
 }
 
 /**
+ * DescribeSecurityJSInjectionRule返回参数结构体
+ */
+export interface DescribeSecurityJSInjectionRuleResponse {
+  /**
+   * JavaScript 注入规则总数量。
+   */
+  TotalCount?: number
+  /**
+   * JavaScript 注入规则列表。
+   */
+  JSInjectionRules?: Array<JSInjectionRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 规则引擎条件使用StatusCode字段动作参数
  */
 export interface RuleCodeActionParams {
@@ -2328,18 +2459,17 @@ export interface ModifyCustomErrorPageResponse {
 }
 
 /**
- * 嵌套规则信息。
+ * ModifySecurityAPIService请求参数结构体
  */
-export interface SubRule {
+export interface ModifySecurityAPIServiceRequest {
   /**
-   * 执行功能判断条件。
-注意：满足该数组内任意一项条件，功能即可执行。
+   * 站点 ID。
    */
-  Conditions: Array<RuleAndConditions>
+  ZoneId: string
   /**
-   * 执行的功能。
+   * API 服务列表。
    */
-  Actions: Array<Action>
+  APIServices?: Array<APIService>
 }
 
 /**
@@ -2415,6 +2545,24 @@ export interface VerifyOwnershipResponse {
    * 当验证结果为不通过时，该字段会返回原因，协助您排查问题。
    */
   Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityIPGroupContent返回参数结构体
+ */
+export interface DescribeSecurityIPGroupContentResponse {
+  /**
+   * IP 组中正在生效的 IP 或网段个数。
+   */
+  IPTotalCount?: number
+  /**
+   * 满足查询条件的 IP 或网段列表。受 Limit 和 Offset 参数限制。
+   */
+  IPList?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2804,6 +2952,29 @@ export interface DescribeTimingL7CacheDataResponse {
 }
 
 /**
+ * DescribeDefaultCertificates请求参数结构体
+ */
+export interface DescribeDefaultCertificatesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId?: string
+  /**
+   * 过滤条件，Filters.Values的上限为5。详细的过滤条件如下：
+<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：是 </li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值：20，最大值：100。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeZones返回参数结构体
  */
 export interface DescribeZonesResponse {
@@ -2871,6 +3042,24 @@ export interface CustomField {
    * 是否投递该字段，不填表示不投递此字段。
    */
   Enabled?: boolean
+}
+
+/**
+ * DescribeSecurityAPIService请求参数结构体
+ */
+export interface DescribeSecurityAPIServiceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询限制数目。默认值：20，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
 }
 
 /**
@@ -3219,43 +3408,25 @@ export interface PrivateParameter {
 }
 
 /**
- * 离线日志详细信息
+ * 缓存键配置。
  */
-export interface L4OfflineLog {
+export interface CacheKeyConfigParameters {
   /**
-   * 四层代理实例 ID。
+   * 是否开启全路径缓存，取值有：
+<li>on：开启全路径缓存（即关闭参数忽略）；</li>
+<li>off：关闭全路径缓存（即开启参数忽略）。</li>
    */
-  ProxyId?: string
+  FullURLCache?: string
   /**
-   * 日志所属区域，取值有：
-<li>mainland：中国大陆境内;</li>
-<li>overseas：全球（不含中国大陆）。</li>
+   * 是否忽略大小写缓存，取值有：
+<li>on：忽略；</li>
+<li>off：不忽略。</li>
    */
-  Area?: string
+  IgnoreCase?: string
   /**
-   * 离线日志数据包名。
+   * 查询字符串保留配置参数。此字段和 FullURLCache 必须同时设置，但不能同为 on。
    */
-  LogPacketName?: string
-  /**
-   * 离线日志下载地址。
-   */
-  Url?: string
-  /**
-   * 日志打包时间，此参数已经废弃。
-   */
-  LogTime?: number
-  /**
-   * 日志打包开始时间。
-   */
-  LogStartTime?: string
-  /**
-   * 日志打包结束时间。
-   */
-  LogEndTime?: string
-  /**
-   * 日志大小，单位为 Byte。
-   */
-  Size?: number
+  QueryString?: CacheKeyQueryString
 }
 
 /**
@@ -3404,29 +3575,63 @@ export interface ModifyRealtimeLogDeliveryTaskResponse {
 }
 
 /**
- * 客户端设备配置
+ * 加速域名所对应的证书信息。
  */
-export interface DeviceProfile {
+export interface AccelerationDomainCertificate {
   /**
-   * 客户端设备类型。取值有：<li>iOS；</li><li>Android；</li><li>WebView。</li>
+   * 配置证书的模式，取值有： <li>disable：不配置证书；</li> <li>eofreecert：配置 EdgeOne 免费证书；</li> <li>sslcert：配置 SSL 证书。</li>
    */
-  ClientType: string
+  Mode?: string
   /**
-   * 判定请求为高风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 50，对应含义 51～100 为高风险。
+   * 服务端证书列表，相关证书部署在 EO 的入口侧。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HighRiskMinScore?: number
+  List?: Array<CertificateInfo>
   /**
-   * 高风险请求的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
+   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。
    */
-  HighRiskRequestAction?: SecurityAction
+  ClientCertInfo?: MutualTLS
   /**
-   * 判定请求为中风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 15，对应含义 16～50 为中风险。
+   * 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。
    */
-  MediumRiskMinScore?: number
+  UpstreamCertInfo?: UpstreamCertInfo
+}
+
+/**
+ * 源站组记录
+ */
+export interface OriginRecord {
   /**
-   * 中风险请求的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
+   * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
    */
-  MediumRiskRequestAction?: SecurityAction
+  Record: string
+  /**
+   * 源站类型，取值有：
+<li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
+<li>COS：COS源。</li>
+<li>AWS_S3：AWS S3对象存储源站。</li>
+   */
+  Type?: string
+  /**
+   * 源站记录ID。
+   */
+  RecordId?: string
+  /**
+   * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
+<li>true：使用私有鉴权；</li>
+<li>false：不使用私有鉴权。</li>不填写，默认值为：false。
+
+   */
+  Private?: boolean
+  /**
+   * 私有鉴权参数，当源站类型Private=true时有效。
+   */
+  PrivateParameters?: Array<PrivateParameter>
 }
 
 /**
@@ -3578,6 +3783,16 @@ export interface RuleEngineItem {
 }
 
 /**
+ * ModifySecurityAPIService返回参数结构体
+ */
+export interface ModifySecurityAPIServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OCSP 装订配置参数。
  */
 export interface OCSPStaplingParameters {
@@ -3625,6 +3840,21 @@ export interface DescribeDDoSAttackTopDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 嵌套规则信息。
+ */
+export interface SubRule {
+  /**
+   * 执行功能判断条件。
+注意：满足该数组内任意一项条件，功能即可执行。
+   */
+  Conditions: Array<RuleAndConditions>
+  /**
+   * 执行的功能。
+   */
+  Actions: Array<Action>
 }
 
 /**
@@ -3705,6 +3935,20 @@ export interface LoadBalancer {
    * 该负载均衡实例绑定的七层域名列表。
    */
   L7UsedList?: Array<string>
+}
+
+/**
+ * CreateSecurityAPIService返回参数结构体
+ */
+export interface CreateSecurityAPIServiceResponse {
+  /**
+   * API 服务 ID 列表。
+   */
+  APIServiceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3913,6 +4157,24 @@ export interface SecEntryValue {
    * 数据总和。
    */
   Sum: number
+}
+
+/**
+ * DescribeSecurityAPIResource请求参数结构体
+ */
+export interface DescribeSecurityAPIResourceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询限制数目。默认值：20，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
 }
 
 /**
@@ -4808,6 +5070,24 @@ export interface AclCondition {
 }
 
 /**
+ * DescribeJustInTimeTranscodeTemplates返回参数结构体
+ */
+export interface DescribeJustInTimeTranscodeTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 模板详情列表。
+   */
+  TemplateSet?: Array<JustInTimeTranscodeTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 站点验证信息
  */
 export interface Identification {
@@ -5571,6 +5851,44 @@ export interface ModifyRealtimeLogDeliveryTaskRequest {
 }
 
 /**
+ * 视频流配置参数。
+ */
+export interface VideoTemplateInfo {
+  /**
+   * 视频流的编码格式，可选值：<li>H.264: 使用 H.264 编码；</li><li>H.265: 使用 H.265 编码。</li>
+   */
+  Codec: string
+  /**
+   * 视频帧率，取值范围：[0, 30]，单位：Hz。
+取值为 0，表示帧率和原始视频保持一致，但最大不超过 30。
+默认值：0。
+   */
+  Fps?: number
+  /**
+   * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
+取值为 0，表示自动根据视频画面和质量选择视频码率。
+默认值：0。
+   */
+  Bitrate?: number
+  /**
+   * 分辨率自适应，可选值：<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li><li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>默认值：open。
+   */
+  ResolutionAdaptive?: string
+  /**
+   * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
+   */
+  Width?: number
+  /**
+   * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1080]，单位：px。<li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
+   */
+  Height?: number
+  /**
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁”或者“拉长”。</li><li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li><li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li><li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>默认值：black 。
+   */
+  FillType?: string
+}
+
+/**
  * HandleFunctionRuntimeEnvironment返回参数结构体
  */
 export interface HandleFunctionRuntimeEnvironmentResponse {
@@ -5730,26 +6048,17 @@ export interface CreatePrefetchTaskResponse {
 }
 
 /**
- * DescribeDefaultCertificates请求参数结构体
+ * CreateSecurityJSInjectionRule请求参数结构体
  */
-export interface DescribeDefaultCertificatesRequest {
+export interface CreateSecurityJSInjectionRuleRequest {
   /**
    * 站点 ID。
    */
-  ZoneId?: string
+  ZoneId: string
   /**
-   * 过滤条件，Filters.Values的上限为5。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：是 </li>
+   * JavaScript 注入规则列表。
    */
-  Filters?: Array<Filter>
-  /**
-   * 分页查询偏移量。默认值：0。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目。默认值：20，最大值：100。
-   */
-  Limit?: number
+  JSInjectionRules?: Array<JSInjectionRule>
 }
 
 /**
@@ -5819,14 +6128,21 @@ export interface ModifyL7AccRulePriorityResponse {
 }
 
 /**
- * 修改 HTTP 回源请求头配置参数。
+ * API 服务配置。
  */
-export interface ModifyRequestHeaderParameters {
+export interface APIService {
   /**
-   * HTTP 头部设置规则列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * API 服务 ID。
    */
-  HeaderActions?: Array<HeaderAction>
+  Id?: string
+  /**
+   * API 服务名称。
+   */
+  Name?: string
+  /**
+   * 基础路径。
+   */
+  BasePath?: string
 }
 
 /**
@@ -5851,6 +6167,20 @@ export interface ConfirmOriginACLUpdateRequest {
    * 站点 ID。
    */
   ZoneId: string
+}
+
+/**
+ * CreateJustInTimeTranscodeTemplate返回参数结构体
+ */
+export interface CreateJustInTimeTranscodeTemplateResponse {
+  /**
+   * 即时转码模板唯一标识，用于即时转码 URL 拼接。
+   */
+  TemplateId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5879,6 +6209,24 @@ export interface DownloadL7LogsRequest {
   Limit?: number
   /**
    * 分页的偏移量，默认值为 0。
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeSecurityClientAttester请求参数结构体
+ */
+export interface DescribeSecurityClientAttesterRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询限制数目。默认值：20，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
    */
   Offset?: number
 }
@@ -6131,6 +6479,20 @@ export interface DescribeRealtimeLogDeliveryTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TopN的Entry数据
+ */
+export interface TopEntry {
+  /**
+   * top查询维度值。
+   */
+  Key: string
+  /**
+   * 查询具体数据。
+   */
+  Value: Array<TopEntryValue>
 }
 
 /**
@@ -6469,40 +6831,67 @@ export interface CreatePlanForZoneRequest {
 }
 
 /**
- * 加速域名所对应的证书信息。
+ * 客户端设备配置
  */
-export interface AccelerationDomainCertificate {
+export interface DeviceProfile {
   /**
-   * 配置证书的模式，取值有： <li>disable：不配置证书；</li> <li>eofreecert：配置 EdgeOne 免费证书；</li> <li>sslcert：配置 SSL 证书。</li>
+   * 客户端设备类型。取值有：<li>iOS；</li><li>Android；</li><li>WebView。</li>
    */
-  Mode?: string
+  ClientType: string
   /**
-   * 服务端证书列表，相关证书部署在 EO 的入口侧。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 判定请求为高风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 50，对应含义 51～100 为高风险。
    */
-  List?: Array<CertificateInfo>
+  HighRiskMinScore?: number
   /**
-   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。
+   * 高风险请求的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
    */
-  ClientCertInfo?: MutualTLS
+  HighRiskRequestAction?: SecurityAction
   /**
-   * 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。
+   * 判定请求为中风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 15，对应含义 16～50 为中风险。
    */
-  UpstreamCertInfo?: UpstreamCertInfo
+  MediumRiskMinScore?: number
+  /**
+   * 中风险请求的处置方式。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Redirect：重定向；</li><li>Challenge：挑战。</li>默认值为 Monitor。
+   */
+  MediumRiskRequestAction?: SecurityAction
 }
 
 /**
- * CreateL4ProxyRules返回参数结构体
+ * CreateJustInTimeTranscodeTemplate请求参数结构体
  */
-export interface CreateL4ProxyRulesResponse {
+export interface CreateJustInTimeTranscodeTemplateRequest {
   /**
-   * 新增转发规则的 ID，以数组的形式返回。
+   * 站点ID。
    */
-  L4ProxyRuleIds?: Array<string>
+  ZoneId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 即时转码模板名称，长度限制：64 个字符。
    */
-  RequestId?: string
+  TemplateName: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。默认为空。
+   */
+  Comment?: string
+  /**
+   * 启用视频流开关，取值：
+<li>on：开启；</li>
+<li>off：关闭。</li>默认值：on。
+   */
+  VideoStreamSwitch?: string
+  /**
+   * 启用音频流开关，取值：
+<li>on：开启；</li>
+<li>off：关闭。</li>默认值：on。
+   */
+  AudioStreamSwitch?: string
+  /**
+   * 视频流配置参数，当 VideoStreamSwitch 为 on，该字段必填。
+   */
+  VideoTemplate?: VideoTemplateInfo
+  /**
+   * 音频流配置参数，当 AudioStreamSwitch 为 on，该字段必填。
+   */
+  AudioTemplate?: AudioTemplateInfo
 }
 
 /**
@@ -6809,6 +7198,24 @@ export interface ModifyHostsCertificateResponse {
 }
 
 /**
+ * DescribeSecurityAPIService返回参数结构体
+ */
+export interface DescribeSecurityAPIServiceResponse {
+  /**
+   * API 服务总数量。
+   */
+  TotalCount?: number
+  /**
+   * API 服务列表。
+   */
+  APIServices?: Array<APIService>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAccelerationDomain请求参数结构体
  */
 export interface CreateAccelerationDomainRequest {
@@ -6944,6 +7351,16 @@ export interface CreateMultiPathGatewayResponse {
    * 网关 ID。
    */
   GatewayId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteJustInTimeTranscodeTemplates返回参数结构体
+ */
+export interface DeleteJustInTimeTranscodeTemplatesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7500,6 +7917,20 @@ export interface ModifyFunctionResponse {
 }
 
 /**
+ * CreateL4ProxyRules返回参数结构体
+ */
+export interface CreateL4ProxyRulesResponse {
+  /**
+   * 新增转发规则的 ID，以数组的形式返回。
+   */
+  L4ProxyRuleIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOriginGroup请求参数结构体
  */
 export interface DescribeOriginGroupRequest {
@@ -7520,6 +7951,20 @@ export interface DescribeOriginGroupRequest {
 <li>origin-group-id：按照源站组 ID 进行过滤，不支持模糊查询。源站组 ID 形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a；</li><li>origin-group-name： 按照源站组名称进行过滤，使用模糊查询时，仅支持填写一个源站组名称。</li>
    */
   Filters?: Array<AdvancedFilter>
+}
+
+/**
+ * CreateSecurityClientAttester请求参数结构体
+ */
+export interface CreateSecurityClientAttesterRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 认证选项列表。
+   */
+  ClientAttesters?: Array<ClientAttester>
 }
 
 /**
@@ -7596,6 +8041,49 @@ export interface CreatePlanForZoneResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 认证选项配置。
+ */
+export interface ClientAttester {
+  /**
+   * 认证选项 ID。
+   */
+  Id?: string
+  /**
+   * 认证选项名称。
+   */
+  Name?: string
+  /**
+   * 认证规则类型。仅出参返回，取值有：
+<li>PRESET: 系统预置规则，仅允许修改 AttesterDuration；</li>
+<li>CUSTOM: 用户自定义规则。</li>
+   */
+  Type?: string
+  /**
+   * 认证方法。取值有：
+<li>TC-RCE: 使用全栈式风控引擎进行认证；</li>
+<li>TC-CAPTCHA: 使用天御验证码进行认证。</li>
+   */
+  AttesterSource?: string
+  /**
+   * 认证有效时间。默认为 60s，支持的单位有：
+<li>s：秒，取值范围 60～43200；</li>
+<li>m：分，取值范围 1～720；</li>
+<li>h：小时，取值范围 1～12。</li>
+   */
+  AttesterDuration?: string
+  /**
+   * TC-RCE 认证的配置信息。
+<li>当 AttesterSource 参数值为 TC-RCE 时，此字段必填。</li>
+   */
+  TCRCEOption?: TCRCEOption
+  /**
+   * TC-CAPTCHA 认证的配置信息。
+<li>当 AttesterSource 参数值为 TC-CAPTCHA 时，此字段必填。</li>
+   */
+  TCCaptchaOption?: TCCaptchaOption
 }
 
 /**
@@ -8081,6 +8569,20 @@ export interface DescribeDeployHistoryRequest {
 }
 
 /**
+ * 刷新预热附带的头部信息
+ */
+export interface Header {
+  /**
+   * HTTP头部名称。
+   */
+  Name: string
+  /**
+   * HTTP头部值。
+   */
+  Value: string
+}
+
+/**
  * CreateMultiPathGatewayLine返回参数结构体
  */
 export interface CreateMultiPathGatewayLineResponse {
@@ -8154,6 +8656,20 @@ export interface DescribePlansRequest {
    * 分页查询偏移量。默认值：0。
    */
   Offset?: number
+}
+
+/**
+ * CreateSecurityJSInjectionRule返回参数结构体
+ */
+export interface CreateSecurityJSInjectionRuleResponse {
+  /**
+   * JavaScript 注入规则 ID 列表。
+   */
+  JSInjectionRuleIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8237,6 +8753,16 @@ export interface ModifyL7AccSettingResponse {
 }
 
 /**
+ * DeleteSecurityJSInjectionRule返回参数结构体
+ */
+export interface DeleteSecurityJSInjectionRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Web安全自定义页面的附加参数
  */
 export interface ReturnCustomPageActionParameters {
@@ -8248,6 +8774,24 @@ export interface ReturnCustomPageActionParameters {
    * 响应的自定义页面ID。
    */
   ErrorPageId: string
+}
+
+/**
+ * DescribeAccelerationDomains返回参数结构体
+ */
+export interface DescribeAccelerationDomainsResponse {
+  /**
+   * 符合查询条件的加速域名个数。
+   */
+  TotalCount?: number
+  /**
+   * 符合查询条件的所有加速域名的信息。
+   */
+  AccelerationDomains?: Array<AccelerationDomain>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8883,6 +9427,20 @@ export interface ClientIpCountry {
 }
 
 /**
+ * DeleteSecurityClientAttester请求参数结构体
+ */
+export interface DeleteSecurityClientAttesterRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 客户端认证选项 ID。
+   */
+  ClientAttesterIds?: Array<string>
+}
+
+/**
  * DeleteApplicationProxyRule请求参数结构体
  */
 export interface DeleteApplicationProxyRuleRequest {
@@ -9313,21 +9871,13 @@ export interface AscriptionInfo {
 }
 
 /**
- * 源站组健康状态详情。
+ * ModifySecurityClientAttester返回参数结构体
  */
-export interface OriginGroupHealthStatusDetail {
+export interface ModifySecurityClientAttesterResponse {
   /**
-   * 源站组 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OriginGroupId?: string
-  /**
-   * 根据所有探测区域的结果综合决策出来的源站组下各个源站的健康状态。超过一半的地域判定该源站不健康，则对应状态为不健康，否则为健康。
-   */
-  OriginHealthStatus?: Array<OriginHealthStatus>
-  /**
-   * 各个健康检查区域下源站的健康状态。
-   */
-  CheckRegionHealthStatus?: Array<CheckRegionHealthStatus>
+  RequestId?: string
 }
 
 /**
@@ -9442,6 +9992,80 @@ export interface CreateApplicationProxyRuleRequest {
    * 规则标签。默认值为空字符串。
    */
   RuleTag?: string
+}
+
+/**
+ * 即时转码模板详情。
+ */
+export interface JustInTimeTranscodeTemplate {
+  /**
+   * 即时转码模板唯一标识。
+   */
+  TemplateId?: string
+  /**
+   * 转码模板名称。
+   */
+  TemplateName?: string
+  /**
+   * 模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 模板类型，取值：<li>preset：系统预置模板；</li><li>custom：用户自定义模板。</li>
+   */
+  Type?: string
+  /**
+   * 启用视频流开关，取值：<li>on：开启；</li><li>off：关闭。</li>
+   */
+  VideoStreamSwitch?: string
+  /**
+   * 启用音频流开关，取值：<li>on：开启；</li><li>off：关闭。</li>
+   */
+  AudioStreamSwitch?: string
+  /**
+   * 视频流配置参数，仅当 VideoStreamSwitch 为 on，该字段有效。
+   */
+  VideoTemplate?: VideoTemplateInfo
+  /**
+   * 音频流配置参数，仅当 AudioStreamSwitch 为 on，该字段有效。
+   */
+  AudioTemplate?: AudioTemplateInfo
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
+}
+
+/**
+ * DeleteSecurityAPIService请求参数结构体
+ */
+export interface DeleteSecurityAPIServiceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * API 服务 ID 列表。
+   */
+  APIServiceIds?: Array<string>
+}
+
+/**
+ * 验证码认证实例信息。
+ */
+export interface TCCaptchaOption {
+  /**
+   * CaptchaAppId 信息。
+   */
+  CaptchaAppId: string
+  /**
+   * AppSecretKey 信息。
+   */
+  AppSecretKey: string
 }
 
 /**
@@ -10167,40 +10791,32 @@ export interface Action {
 }
 
 /**
- * 源站组记录
+ * JavaScript 注入规则。
  */
-export interface OriginRecord {
+export interface JSInjectionRule {
   /**
-   * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+   * 规则 ID。
    */
-  Record: string
+  RuleId?: string
   /**
-   * 源站类型，取值有：
-<li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
-<li>COS：COS源。</li>
-<li>AWS_S3：AWS S3对象存储源站。</li>
+   * 规则名称。
    */
-  Type?: string
+  Name?: string
   /**
-   * 源站记录ID。
+   * 规则优先级，数值越小越优先执行，范围是 0 ~ 100，默认为 0。
    */
-  RecordId?: string
+  Priority?: number
   /**
-   * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 匹配条件内容。需符合表达式语法，详细规范参见产品文档。
    */
-  Weight?: number
+  Condition?: string
   /**
-   * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
-<li>true：使用私有鉴权；</li>
-<li>false：不使用私有鉴权。</li>不填写，默认值为：false。
+   * JavaScript 注入选项。默认值为 run-attestations，取值有：
+<li> no-injection: 不注入 JavaScript;</li>
+<li> inject-sdk-only: 注入当前支持的所有认证方式的 SDK，当前支持：TC-RCE 和 TC-CAPTCHA。注意：若需执行认证检测，请配置挑战规则。</li>
 
    */
-  Private?: boolean
-  /**
-   * 私有鉴权参数，当源站类型Private=true时有效。
-   */
-  PrivateParameters?: Array<PrivateParameter>
+  InjectJS?: string
 }
 
 /**
@@ -10218,6 +10834,24 @@ export interface UpstreamFollowRedirectParameters {
 注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
    */
   MaxTimes?: number
+}
+
+/**
+ * DescribeSecurityClientAttester返回参数结构体
+ */
+export interface DescribeSecurityClientAttesterResponse {
+  /**
+   * 认证选项总数量。
+   */
+  TotalCount?: number
+  /**
+   * 认证选项列表。
+   */
+  ClientAttesters?: Array<ClientAttester>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10506,13 +11140,21 @@ export interface ModifyL4ProxyRequest {
 }
 
 /**
- * 规则引擎条件且关系条件列表
+ * DescribeSecurityJSInjectionRule请求参数结构体
  */
-export interface RuleAndConditions {
+export interface DescribeSecurityJSInjectionRuleRequest {
   /**
-   * 规则引擎条件，该数组内所有项全部满足即判断该条件满足。
+   * 站点 ID。
    */
-  Conditions: Array<RuleCondition>
+  ZoneId: string
+  /**
+   * 分页查询限制数目。默认值：20，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
 }
 
 /**
@@ -10778,25 +11420,17 @@ export interface DestroyPlanResponse {
 }
 
 /**
- * 缓存键配置。
+ * CreateSecurityAPIResource请求参数结构体
  */
-export interface CacheKeyConfigParameters {
+export interface CreateSecurityAPIResourceRequest {
   /**
-   * 是否开启全路径缓存，取值有：
-<li>on：开启全路径缓存（即关闭参数忽略）；</li>
-<li>off：关闭全路径缓存（即开启参数忽略）。</li>
+   * 站点 ID。
    */
-  FullURLCache?: string
+  ZoneId: string
   /**
-   * 是否忽略大小写缓存，取值有：
-<li>on：忽略；</li>
-<li>off：不忽略。</li>
+   *  API 资源列表。
    */
-  IgnoreCase?: string
-  /**
-   * 查询字符串保留配置参数。此字段和 FullURLCache 必须同时设置，但不能同为 on。
-   */
-  QueryString?: CacheKeyQueryString
+  APIResources?: Array<APIResource>
 }
 
 /**
@@ -10874,6 +11508,46 @@ export interface ClientIPHeaderParameters {
    * 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。
    */
   HeaderName?: string
+}
+
+/**
+ * 离线日志详细信息
+ */
+export interface L4OfflineLog {
+  /**
+   * 四层代理实例 ID。
+   */
+  ProxyId?: string
+  /**
+   * 日志所属区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
+   */
+  Area?: string
+  /**
+   * 离线日志数据包名。
+   */
+  LogPacketName?: string
+  /**
+   * 离线日志下载地址。
+   */
+  Url?: string
+  /**
+   * 日志打包时间，此参数已经废弃。
+   */
+  LogTime?: number
+  /**
+   * 日志打包开始时间。
+   */
+  LogStartTime?: string
+  /**
+   * 日志打包结束时间。
+   */
+  LogEndTime?: string
+  /**
+   * 日志大小，单位为 Byte。
+   */
+  Size?: number
 }
 
 /**
@@ -11405,6 +12079,20 @@ export interface DeleteAliasDomainResponse {
 }
 
 /**
+ * DeleteSecurityJSInjectionRule请求参数结构体
+ */
+export interface DeleteSecurityJSInjectionRuleRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * JavaScript 注入规则 ID 列表。
+   */
+  JSInjectionRuleIds: Array<string>
+}
+
+/**
  * 安全Bot配置
  */
 export interface BotConfig {
@@ -11697,6 +12385,24 @@ export interface ExportZoneConfigRequest {
 需注意：后续支持导出的类型会随着迭代增加，导出所有类型时需要注意导出文件大小，建议使用时指定需要导出的配置类型，以便控制请求响应包负载大小。
    */
   Types?: Array<string>
+}
+
+/**
+ * 源站组健康状态详情。
+ */
+export interface OriginGroupHealthStatusDetail {
+  /**
+   * 源站组 ID。
+   */
+  OriginGroupId?: string
+  /**
+   * 根据所有探测区域的结果综合决策出来的源站组下各个源站的健康状态。超过一半的地域判定该源站不健康，则对应状态为不健康，否则为健康。
+   */
+  OriginHealthStatus?: Array<OriginHealthStatus>
+  /**
+   * 各个健康检查区域下源站的健康状态。
+   */
+  CheckRegionHealthStatus?: Array<CheckRegionHealthStatus>
 }
 
 /**
@@ -12136,6 +12842,16 @@ export interface OriginProtectionInfo {
  * ModifyDnsRecordsStatus返回参数结构体
  */
 export interface ModifyDnsRecordsStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySecurityJSInjectionRule返回参数结构体
+ */
+export interface ModifySecurityJSInjectionRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12583,22 +13299,23 @@ export interface DescribeRulesRequest {
 }
 
 /**
- * 检测长度限制配置条件。
+ * DescribeContentQuota返回参数结构体
  */
-export interface DetectLengthLimitCondition {
+export interface DescribeContentQuotaResponse {
   /**
-   * 匹配条件的参数名称，取值有：
-<li>body_depth：请求正文包部分的检测深度。</li>
+   * 刷新相关配额。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  PurgeQuota?: Array<Quota>
   /**
-   * 匹配条件的参数值，取值与 Name 成对使用。
-当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：
-<li>10KB；</li>
-<li>64KB；</li>
-<li>128KB。</li>
+   * 预热相关配额。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Values: Array<string>
+  PrefetchQuota?: Array<Quota>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13046,6 +13763,36 @@ export interface ErrorPage {
 }
 
 /**
+ * API 资源。
+ */
+export interface APIResource {
+  /**
+   * 资源 ID。
+   */
+  Id?: string
+  /**
+   * 资源名称。
+   */
+  Name?: string
+  /**
+   * API 资源关联的 API 服务 ID 列表。
+   */
+  APIServiceIds?: Array<string>
+  /**
+   * 资源路径。
+   */
+  Path?: string
+  /**
+   * 请求方法列表。支持以下取值：GET, POST, PUT, HEAD, PATCH, OPTIONS, DELETE。
+   */
+  Methods?: Array<string>
+  /**
+   * 请求内容匹配规则的具体内容，需符合表达式语法，详细规范参见产品文档。
+   */
+  RequestConstraint?: string
+}
+
+/**
  * HTTP2 接入配置参数。
  */
 export interface HTTP2Parameters {
@@ -13385,6 +14132,16 @@ export interface HSTSParameters {
 }
 
 /**
+ * DeleteSecurityAPIResource返回参数结构体
+ */
+export interface DeleteSecurityAPIResourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindZoneToPlan请求参数结构体
  */
 export interface BindZoneToPlanRequest {
@@ -13595,17 +14352,23 @@ export interface UpstreamRequestParameters {
 }
 
 /**
- * TopN的Entry数据
+ * DeleteSecurityClientAttester返回参数结构体
  */
-export interface TopEntry {
+export interface DeleteSecurityClientAttesterResponse {
   /**
-   * top查询维度值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Key: string
+  RequestId?: string
+}
+
+/**
+ * RCE 认证选项实例信息。
+ */
+export interface TCRCEOption {
   /**
-   * 查询具体数据。
+   * Channel 信息。
    */
-  Value: Array<TopEntryValue>
+  Channel: string
 }
 
 /**
@@ -14092,6 +14855,20 @@ export interface DescribeMultiPathGatewaySecretKeyResponse {
 }
 
 /**
+ * CreateSecurityAPIResource返回参数结构体
+ */
+export interface CreateSecurityAPIResourceResponse {
+  /**
+   * API 资源 ID 列表。
+   */
+  APIResourceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。
  */
 export interface CacheTag {
@@ -14099,6 +14876,20 @@ export interface CacheTag {
    * 待清除缓存的域名列表。
    */
   Domains: Array<string>
+}
+
+/**
+ * CreateSecurityClientAttester返回参数结构体
+ */
+export interface CreateSecurityClientAttesterResponse {
+  /**
+   * 认证选项 ID 列表。
+   */
+  ClientAttesterIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14352,19 +15143,28 @@ export interface CheckCnameStatusRequest {
 }
 
 /**
- * DescribeContentQuota返回参数结构体
+ * 检测长度限制配置条件。
  */
-export interface DescribeContentQuotaResponse {
+export interface DetectLengthLimitCondition {
   /**
-   * 刷新相关配额。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 匹配条件的参数名称，取值有：
+<li>body_depth：请求正文包部分的检测深度。</li>
    */
-  PurgeQuota?: Array<Quota>
+  Name: string
   /**
-   * 预热相关配额。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 匹配条件的参数值，取值与 Name 成对使用。
+当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：
+<li>10KB；</li>
+<li>64KB；</li>
+<li>128KB。</li>
    */
-  PrefetchQuota?: Array<Quota>
+  Values: Array<string>
+}
+
+/**
+ * ModifySecurityAPIResource返回参数结构体
+ */
+export interface ModifySecurityAPIResourceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14449,6 +15249,17 @@ export interface DeleteDnsRecordsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改 HTTP 回源请求头配置参数。
+ */
+export interface ModifyRequestHeaderParameters {
+  /**
+   * HTTP 头部设置规则列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderActions?: Array<HeaderAction>
 }
 
 /**
@@ -14650,6 +15461,36 @@ export interface DescribeDeployHistoryResponse {
 }
 
 /**
+ * DescribeJustInTimeTranscodeTemplates请求参数结构体
+ */
+export interface DescribeJustInTimeTranscodeTemplatesRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 过滤条件，Filters 的上限为 20，Filters.Values 的上限为 20。该参数不填写时，默认返回当前 ZoneId 下有权限的即时转码模板。详细的过滤条件如下：<li>template-name：按照模版名批量进行过滤。例如：mytemplate；</li><li>template-type：按照模板类型批量进行过滤。例如：preset 或 custom。</li><li>template-id：按照模板 ID 批量进行过滤。例如：C1LZ7982VgTpYhJ7M。</li>默认为空。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段，取值有：<li>createTime：模板创建时间。</li>默认值为：createTime。
+   */
+  SortBy?: string
+  /**
+   * 排序方式，取值有：<li>asc：升序方式；</li><li>desc：降序方式。</li>默认值为：desc。
+   */
+  SortOrder?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：20，最大值：1000。
+   */
+  Limit?: number
+}
+
+/**
  * CacheKey中包含请求参数
  */
 export interface QueryString {
@@ -14669,6 +15510,20 @@ export interface QueryString {
    * 使用/排除的url参数数组。
    */
   Value?: Array<string>
+}
+
+/**
+ * ModifySecurityClientAttester请求参数结构体
+ */
+export interface ModifySecurityClientAttesterRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 认证选项列表。
+   */
+  ClientAttesters?: Array<ClientAttester>
 }
 
 /**

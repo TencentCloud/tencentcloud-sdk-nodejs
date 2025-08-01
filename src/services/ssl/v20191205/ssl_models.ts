@@ -5768,12 +5768,12 @@ null：用户上传证书（没有套餐类型），
    */
   VulnerabilityStatus?: string
   /**
-   * 证书生效时间。
+   * 证书生效时间。时区为GMT+8:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertBeginTime?: string
   /**
-   * 证书失效时间。
+   * 证书失效时间。时区为GMT+8:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertEndTime?: string
@@ -5782,7 +5782,7 @@ null：用户上传证书（没有套餐类型），
    */
   ValidityPeriod?: string
   /**
-   * 证书申请时间。
+   * 证书申请时间。时区为GMT+8:00
    */
   InsertTime?: string
   /**

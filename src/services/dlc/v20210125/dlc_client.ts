@@ -21,6 +21,7 @@ import {
   CheckDataEngineConfigPairsValidityResponse,
   DescribeResultDownloadResponse,
   AccessInfo,
+  EngineNetworkInfo,
   DescribeDatabasesRequest,
   Asset,
   CreateUserRequest,
@@ -35,9 +36,12 @@ import {
   DescribeTablesResponse,
   DescribeDataEngineEventsResponse,
   SessionResourceTemplate,
+  DeleteNativeSparkSessionResponse,
   DescribeDMSPartitionsRequest,
   DescribeDMSTableResponse,
   CreateTasksInOrderRequest,
+  UpdateStandardEngineResourceGroupConfigInfoResponse,
+  DataEngineImageSessionParameter,
   CreateDatabaseRequest,
   DescribeDMSTablesResponse,
   DependencyPackage,
@@ -48,14 +52,18 @@ import {
   SmartOptimizerChangeTablePolicy,
   BatchSqlTask,
   CreateNotebookSessionRequest,
+  UnboundDatasourceHouseRequest,
+  DeleteUserVpcConnectionResponse,
   UpdateDataEngineRequest,
   SmartOptimizerWrittenPolicy,
   DescribeSparkAppJobsRequest,
   DeleteNotebookSessionRequest,
   CreateDMSTableResponse,
+  ViewResponseInfo,
   DescribeSparkSessionBatchSQLRequest,
-  DescribeUsersResponse,
+  UpdateEngineResourceGroupNetworkConfigInfoRequest,
   SmartOptimizerPolicy,
+  UnboundDatasourceHouseResponse,
   DescribeUserInfoResponse,
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
@@ -68,18 +76,22 @@ import {
   CreateDMSTableRequest,
   DMSTable,
   ModifyAdvancedStoreLocationResponse,
+  UpdateEngineResourceGroupNetworkConfigInfoResponse,
   DescribeUserRegisterTimeRequest,
   DMSSds,
   OpendThirdAccessUserInfo,
   DescribeDataEnginesScaleDetailResponse,
+  OptimizerEngineInfo,
+  CreateStandardEngineResourceGroupRequest,
   DescribeNotebookSessionStatementSqlResultRequest,
   CreateSparkSubmitTaskRequest,
   CreateTableResponse,
   ListTaskJobLogNameRequest,
+  DeleteStandardEngineResourceGroupResponse,
   DescribeTaskResultRequest,
   UpdateUserDataEngineConfigRequest,
   RollbackDataEngineImageRequest,
-  QueryResultResponse,
+  DescribeUsersResponse,
   RevokeDLCCatalogAccessRequest,
   DataGovernPolicy,
   CreateWorkGroupResponse,
@@ -88,13 +100,17 @@ import {
   DescribeTablesRequest,
   CreateStoreLocationRequest,
   DescribeLakeFsInfoResponse,
+  ModifyWorkGroupResponse,
   GetOptimizerPolicyResponse,
+  DescribeStandardEngineResourceGroupConfigInfoResponse,
   DescribeTableRequest,
   Policy,
   DescribeTaskLogRequest,
   DescribeDataEnginesScaleDetailRequest,
+  DescribeEngineNetworksRequest,
   CreateTasksRequest,
   SuspendResumeDataEngineRequest,
+  DescribeNetworkConnectionsResponse,
   DescribeSparkAppJobsResponse,
   TableResponseInfo,
   UpdateUserDataEngineConfigResponse,
@@ -103,6 +119,7 @@ import {
   CancelSparkSessionBatchSQLRequest,
   CancelTasksRequest,
   TasksOverview,
+  EngineResourceGroupConfigPair,
   CreateDatabaseResponse,
   DropDMSPartitionsResponse,
   CreateWorkGroupRequest,
@@ -111,10 +128,15 @@ import {
   QueryInternalTableWarehouseRequest,
   CreateResultDownloadRequest,
   DescribeNotebookSessionStatementSqlResultResponse,
+  PauseStandardEngineResourceGroupsRequest,
+  UpdateStandardEngineResourceGroupConfigInfoRequest,
   ModifyUserRequest,
   DescribeTasksCostInfoResponse,
   AddDMSPartitionsResponse,
   CancelNotebookSessionStatementRequest,
+  Param,
+  UpdateStandardEngineResourceGroupBaseInfoRequest,
+  SparkSessionBatchLogOperate,
   DescribeTablePartitionsRequest,
   SparkMonitorMetrics,
   CreateDMSDatabaseResponse,
@@ -139,14 +161,19 @@ import {
   DescribeLakeFsInfoRequest,
   CreateCHDFSBindingProductResponse,
   DescribeUserInfoRequest,
+  PauseStandardEngineResourceGroupsResponse,
+  DeleteStandardEngineResourceGroupRequest,
+  GatewayInfo,
   DescribeUserTypeResponse,
   DeleteThirdPartyAccessUserRequest,
   DeleteUserResponse,
   DescribeForbiddenTableProRequest,
   CreateDataEngineResponse,
+  AssociateDatasourceHouseResponse,
   DescribeDataEngineRequest,
   GroupInfo,
   KerberosInfo,
+  AssociateDatasourceHouseRequest,
   CreateDataEngineRequest,
   DescribeNotebookSessionRequest,
   UpgradeDataEngineImageRequest,
@@ -175,6 +202,7 @@ import {
   AlterDMSTableRequest,
   DescribeDMSPartitionsResponse,
   CreateScriptRequest,
+  DescribeUserVpcConnectionRequest,
   DataFormat,
   DescribeNotebookSessionLogResponse,
   DescribeForbiddenTableProResponse,
@@ -197,6 +225,7 @@ import {
   CreateTaskResponse,
   MountPointAssociates,
   AlterDMSPartitionResponse,
+  UpdateStandardEngineResourceGroupResourceInfoResponse,
   DescribeTableResponse,
   DetachUserPolicyResponse,
   AnalysisTaskResults,
@@ -204,6 +233,7 @@ import {
   AlterDMSDatabaseResponse,
   CancelNotebookSessionStatementResponse,
   DataEngineInfo,
+  DescribeSessionImageVersionResponse,
   LockMetaDataResponse,
   CheckLockMetaDataResponse,
   AlterDMSDatabaseRequest,
@@ -213,11 +243,14 @@ import {
   DescribeDataEnginePythonSparkImagesResponse,
   LockComponentInfo,
   DescribeDataEnginesResponse,
+  StandardEngineResourceGroupConfigInfo,
   DatasourceConnectionConfig,
   UpdateRowFilterRequest,
   TColumn,
   LakeFileSystemToken,
+  DeleteNativeSparkSessionRequest,
   AlterDMSTableResponse,
+  CreateUserVpcConnectionResponse,
   DescribeUpdatableDataEnginesResponse,
   DeleteUserRequest,
   DataEngineScaleInfoDetail,
@@ -226,13 +259,15 @@ import {
   IpPortPair,
   DescribeTasksAnalysisResponse,
   RestartDataEngineResponse,
+  DescribeNativeSparkSessionsResponse,
   SwitchDataEngineImageResponse,
   DescribeSparkAppTasksResponse,
   CreateCHDFSBindingProductRequest,
   DescribeUserRegisterTimeResponse,
-  NotebookSessionInfo,
+  DropDMSTableResponse,
   DataEngineBasicInfo,
   ModifySparkAppRequest,
+  SpecInfo,
   AssignMangedTablePropertiesRequest,
   UserIdSetOfWorkGroupId,
   AlterDMSPartitionRequest,
@@ -249,6 +284,7 @@ import {
   UpdateDataEngineResponse,
   DescribeTasksOverviewRequest,
   TPartition,
+  DeleteUserVpcConnectionRequest,
   DescribeTaskMonitorInfosRequest,
   LakeFsInfo,
   QueryResultRequest,
@@ -256,6 +292,7 @@ import {
   CreateTaskRequest,
   DescribeClusterMonitorInfosRequest,
   CreateTableRequest,
+  DescribeStandardEngineResourceGroupsRequest,
   TaskMonitorInfo,
   DescribeSparkSessionBatchSqlLogRequest,
   WorkGroupIdSetOfUserId,
@@ -263,15 +300,20 @@ import {
   DeleteTableRequest,
   DescribeStoreLocationRequest,
   DescribeViewsRequest,
+  StandardEngineResourceGroupInfo,
+  CreateStandardEngineResourceGroupResponse,
   GrantDLCCatalogAccessRequest,
   ReportHeartbeatMetaDataRequest,
+  DescribeEngineNetworksResponse,
+  DescribeNetworkConnectionsRequest,
   AttachWorkGroupPolicyResponse,
   DescribeDMSTablesRequest,
+  LaunchStandardEngineResourceGroupsResponse,
+  UpdateNetworkConnectionResponse,
   GenerateCreateMangedTableSqlResponse,
   DatasourceConnectionInfo,
   DescribeDataEngineImageVersionsRequest,
   BindWorkGroupsToUserResponse,
-  AssignMangedTablePropertiesResponse,
   SparkSessionBatchLog,
   DeleteScriptRequest,
   AddDMSPartitionsRequest,
@@ -281,19 +323,22 @@ import {
   SmartOptimizerIndexPolicy,
   RenewDataEngineRequest,
   DescribeTasksAnalysisRequest,
+  DescribeDataEngineSessionParametersResponse,
   DescribeScriptsResponse,
   UnbindWorkGroupsFromUserRequest,
-  ViewResponseInfo,
+  UpdateStandardEngineResourceGroupResourceInfoRequest,
   NetworkConnection,
   ElasticsearchInfo,
   ModifyWorkGroupRequest,
+  UpdateStandardEngineResourceGroupBaseInfoResponse,
   SmartPolicyBaseInfo,
   DescribeDatabasesResponse,
   DMSTableInfo,
   DMSPartition,
   WorkGroupDetailInfo,
+  DescribeEngineNodeSpecRequest,
   DescribeThirdPartyAccessUserRequest,
-  OptimizerEngineInfo,
+  AssignMangedTablePropertiesResponse,
   UpdateDataEngineConfigResponse,
   DataEngineImageVersion,
   MysqlInfo,
@@ -320,8 +365,10 @@ import {
   CreateDMSDatabaseRequest,
   DetachWorkGroupPolicyRequest,
   DeleteCHDFSBindingProductResponse,
+  UpdateConfContext,
   CancelNotebookSessionStatementBatchRequest,
   DescribeLakeFsTaskResultResponse,
+  EngineSessionImage,
   DescribeTaskMonitorInfosResponse,
   DescribeTasksCostInfoRequest,
   UserDetailInfo,
@@ -330,7 +377,7 @@ import {
   PrestoMonitorMetrics,
   DescribeNotebookSessionStatementRequest,
   ModifyDataEngineDescriptionRequest,
-  DropDMSTableResponse,
+  UpdateNetworkConnectionRequest,
   WorkGroupMessage,
   DescribeUserDataEngineConfigResponse,
   DescribeSparkAppJobRequest,
@@ -340,12 +387,13 @@ import {
   DescribeNotebookSessionResponse,
   DescribeSubUserAccessPolicyResponse,
   CreateScriptResponse,
-  ModifyWorkGroupResponse,
+  CreateSparkSubmitTaskResponse,
   CreateTasksInOrderResponse,
   TagInfo,
+  SparkSessionInfo,
   DeleteSparkAppRequest,
   DescribeDLCCatalogAccessRequest,
-  CreateSparkSubmitTaskResponse,
+  DescribeStandardEngineResourceGroupsResponse,
   DetachUserPolicyRequest,
   DescribeTaskLogResponse,
   DescribeTasksResponse,
@@ -369,7 +417,8 @@ import {
   UnlockMetaDataRequest,
   CreateSparkAppTaskResponse,
   ListTaskJobLogDetailRequest,
-  SparkSessionBatchLogOperate,
+  DescribeNativeSparkSessionsRequest,
+  DescribeSessionImageVersionRequest,
   RevokeDLCCatalogAccessResponse,
   DeleteCHDFSBindingProductRequest,
   RenewDataEngineResponse,
@@ -383,25 +432,32 @@ import {
   ModifySparkAppBatchRequest,
   RegisterThirdPartyAccessUserResponse,
   ModifySparkAppResponse,
+  LaunchStandardEngineResourceGroupsRequest,
   Property,
+  UserVpcConnectionInfo,
   DescribeWorkGroupsResponse,
   SparkJobInfo,
   DescribeScriptsRequest,
   DescribeSparkAppJobResponse,
   DescribeNotebookSessionStatementResponse,
+  DescribeStandardEngineResourceGroupConfigInfoRequest,
   UpgradeDataEngineImageResponse,
   StreamingStatistics,
   TaskResponseInfo,
+  OperateEngineResourceGroupFailMessage,
   DescribeStoreLocationResponse,
   QueryTaskCostDetailResponse,
+  NotebookSessionInfo,
   Execution,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
   BindWorkGroupsToUserRequest,
   Column,
   Filter,
   DescribeLakeFsDirSummaryResponse,
+  DescribeUserVpcConnectionResponse,
   UnlockMetaDataResponse,
   DeleteWorkGroupResponse,
+  RegisterThirdPartyAccessUserRequest,
   ModifySparkAppBatchResponse,
   CheckDataEngineImageCanBeRollbackResponse,
   DeleteNotebookSessionResponse,
@@ -423,14 +479,17 @@ import {
   CreateNotebookSessionResponse,
   DescribeDataEngineResponse,
   DataEngineScaleInfo,
+  DescribeDataEngineSessionParametersRequest,
   QueryTaskCostDetailRequest,
   ModifyDataEngineDescriptionResponse,
   UpdateDataEngineConfigRequest,
   DropDMSTableRequest,
   CreateInternalTableResponse,
   DescribeSparkAppTasksRequest,
+  DescribeEngineNodeSpecResponse,
+  CreateUserVpcConnectionRequest,
   UserMessage,
-  RegisterThirdPartyAccessUserRequest,
+  QueryResultResponse,
   SwitchDataEngineImageRequest,
   DescribeDMSTableRequest,
   ModifyGovernEventRuleRequest,
@@ -506,6 +565,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserTypeResponse) => void
   ): Promise<ModifyUserTypeResponse> {
     return this.request("ModifyUserType", req, cb)
+  }
+
+  /**
+   * 启动标准引擎资源组
+   */
+  async LaunchStandardEngineResourceGroups(
+    req: LaunchStandardEngineResourceGroupsRequest,
+    cb?: (error: string, rep: LaunchStandardEngineResourceGroupsResponse) => void
+  ): Promise<LaunchStandardEngineResourceGroupsResponse> {
+    return this.request("LaunchStandardEngineResourceGroups", req, cb)
   }
 
   /**
@@ -609,13 +678,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDataEngines）用于查询DataEngines信息列表.
+   * DMS元数据更新库
    */
-  async DescribeDataEngines(
-    req: DescribeDataEnginesRequest,
-    cb?: (error: string, rep: DescribeDataEnginesResponse) => void
-  ): Promise<DescribeDataEnginesResponse> {
-    return this.request("DescribeDataEngines", req, cb)
+  async AlterDMSDatabase(
+    req: AlterDMSDatabaseRequest,
+    cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
+  ): Promise<AlterDMSDatabaseResponse> {
+    return this.request("AlterDMSDatabase", req, cb)
   }
 
   /**
@@ -626,6 +695,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserRegisterTimeResponse) => void
   ): Promise<DescribeUserRegisterTimeResponse> {
     return this.request("DescribeUserRegisterTime", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
+   */
+  async DescribeNotebookSessions(
+    req: DescribeNotebookSessionsRequest,
+    cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void
+  ): Promise<DescribeNotebookSessionsResponse> {
+    return this.request("DescribeNotebookSessions", req, cb)
   }
 
   /**
@@ -669,6 +748,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateSparkSubmitTask）用于提交SparkSbumit批流任务。
+   */
+  async CreateSparkSubmitTask(
+    req: CreateSparkSubmitTaskRequest,
+    cb?: (error: string, rep: CreateSparkSubmitTaskResponse) => void
+  ): Promise<CreateSparkSubmitTaskResponse> {
+    return this.request("CreateSparkSubmitTask", req, cb)
+  }
+
+  /**
    * 获取用户类型
    */
   async DescribeUserType(
@@ -676,6 +765,46 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserTypeResponse) => void
   ): Promise<DescribeUserTypeResponse> {
     return this.request("DescribeUserType", req, cb)
+  }
+
+  /**
+   * 更新标准引擎资源组基础信息
+   */
+  async UpdateStandardEngineResourceGroupResourceInfo(
+    req: UpdateStandardEngineResourceGroupResourceInfoRequest,
+    cb?: (error: string, rep: UpdateStandardEngineResourceGroupResourceInfoResponse) => void
+  ): Promise<UpdateStandardEngineResourceGroupResourceInfoResponse> {
+    return this.request("UpdateStandardEngineResourceGroupResourceInfo", req, cb)
+  }
+
+  /**
+   * 续费数据引擎
+   */
+  async RenewDataEngine(
+    req: RenewDataEngineRequest,
+    cb?: (error: string, rep: RenewDataEngineResponse) => void
+  ): Promise<RenewDataEngineResponse> {
+    return this.request("RenewDataEngine", req, cb)
+  }
+
+  /**
+   * 查询网络配置列表
+   */
+  async DescribeNetworkConnections(
+    req: DescribeNetworkConnectionsRequest,
+    cb?: (error: string, rep: DescribeNetworkConnectionsResponse) => void
+  ): Promise<DescribeNetworkConnectionsResponse> {
+    return this.request("DescribeNetworkConnections", req, cb)
+  }
+
+  /**
+   * 创建标准引擎资源组
+   */
+  async CreateStandardEngineResourceGroup(
+    req: CreateStandardEngineResourceGroupRequest,
+    cb?: (error: string, rep: CreateStandardEngineResourceGroupResponse) => void
+  ): Promise<CreateStandardEngineResourceGroupResponse> {
+    return this.request("CreateStandardEngineResourceGroup", req, cb)
   }
 
   /**
@@ -699,13 +828,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换引擎镜像版本
+   * 删除表
    */
-  async SwitchDataEngineImage(
-    req: SwitchDataEngineImageRequest,
-    cb?: (error: string, rep: SwitchDataEngineImageResponse) => void
-  ): Promise<SwitchDataEngineImageResponse> {
-    return this.request("SwitchDataEngineImage", req, cb)
+  async DeleteTable(
+    req: DeleteTableRequest,
+    cb?: (error: string, rep: DeleteTableResponse) => void
+  ): Promise<DeleteTableResponse> {
+    return this.request("DeleteTable", req, cb)
   }
 
   /**
@@ -729,6 +858,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新标准引擎资源组基础信息
+   */
+  async UpdateStandardEngineResourceGroupBaseInfo(
+    req: UpdateStandardEngineResourceGroupBaseInfoRequest,
+    cb?: (error: string, rep: UpdateStandardEngineResourceGroupBaseInfoResponse) => void
+  ): Promise<UpdateStandardEngineResourceGroupBaseInfoResponse> {
+    return this.request("UpdateStandardEngineResourceGroupBaseInfo", req, cb)
+  }
+
+  /**
    * 查询托管存储指定目录的Summary
    */
   async DescribeLakeFsDirSummary(
@@ -749,13 +888,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
+   * DMS元数据更新分区
    */
-  async DescribeNotebookSessions(
-    req: DescribeNotebookSessionsRequest,
-    cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void
-  ): Promise<DescribeNotebookSessionsResponse> {
-    return this.request("DescribeNotebookSessions", req, cb)
+  async AlterDMSPartition(
+    req: AlterDMSPartitionRequest,
+    cb?: (error: string, rep: AlterDMSPartitionResponse) => void
+  ): Promise<AlterDMSPartitionResponse> {
+    return this.request("AlterDMSPartition", req, cb)
   }
 
   /**
@@ -809,13 +948,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DMS元数据更新分区
+   * 切换引擎镜像版本
    */
-  async AlterDMSPartition(
-    req: AlterDMSPartitionRequest,
-    cb?: (error: string, rep: AlterDMSPartitionResponse) => void
-  ): Promise<AlterDMSPartitionResponse> {
-    return this.request("AlterDMSPartition", req, cb)
+  async SwitchDataEngineImage(
+    req: SwitchDataEngineImageRequest,
+    cb?: (error: string, rep: SwitchDataEngineImageResponse) => void
+  ): Promise<SwitchDataEngineImageResponse> {
+    return this.request("SwitchDataEngineImage", req, cb)
+  }
+
+  /**
+   * 绑定数据源和队列
+   */
+  async AssociateDatasourceHouse(
+    req: AssociateDatasourceHouseRequest,
+    cb?: (error: string, rep: AssociateDatasourceHouseResponse) => void
+  ): Promise<AssociateDatasourceHouseResponse> {
+    return this.request("AssociateDatasourceHouse", req, cb)
   }
 
   /**
@@ -939,6 +1088,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 暂停标准引擎session
+   */
+  async PauseStandardEngineResourceGroups(
+    req: PauseStandardEngineResourceGroupsRequest,
+    cb?: (error: string, rep: PauseStandardEngineResourceGroupsResponse) => void
+  ): Promise<PauseStandardEngineResourceGroupsResponse> {
+    return this.request("PauseStandardEngineResourceGroups", req, cb)
+  }
+
+  /**
    * 上报元数据心跳
    */
   async ReportHeartbeatMetaData(
@@ -1019,6 +1178,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除标准引擎资源组
+   */
+  async DeleteStandardEngineResourceGroup(
+    req: DeleteStandardEngineResourceGroupRequest,
+    cb?: (error: string, rep: DeleteStandardEngineResourceGroupResponse) => void
+  ): Promise<DeleteStandardEngineResourceGroupResponse> {
+    return this.request("DeleteStandardEngineResourceGroup", req, cb)
+  }
+
+  /**
    * 本接口（CreateDatabase）用于生成建库SQL语句。
    */
   async CreateDatabase(
@@ -1039,6 +1208,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指定大版本下所有小版本的所有内置镜像
+   */
+  async DescribeSessionImageVersion(
+    req: DescribeSessionImageVersionRequest,
+    cb?: (error: string, rep: DescribeSessionImageVersionResponse) => void
+  ): Promise<DescribeSessionImageVersionResponse> {
+    return this.request("DescribeSessionImageVersion", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSubUserAccessPolicy）用于开通了第三方平台访问的用户，查询其子用户的访问策略
    */
   async DescribeSubUserAccessPolicy(
@@ -1056,6 +1235,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSparkSessionBatchSQLResponse) => void
   ): Promise<CreateSparkSessionBatchSQLResponse> {
     return this.request("CreateSparkSessionBatchSQL", req, cb)
+  }
+
+  /**
+   * 创建用户vpc连接到指定引擎网络
+   */
+  async CreateUserVpcConnection(
+    req: CreateUserVpcConnectionRequest,
+    cb?: (error: string, rep: CreateUserVpcConnectionResponse) => void
+  ): Promise<CreateUserVpcConnectionResponse> {
+    return this.request("CreateUserVpcConnection", req, cb)
   }
 
   /**
@@ -1159,13 +1348,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DMS元数据更新库
+   * 解绑数据源与队列
    */
-  async AlterDMSDatabase(
-    req: AlterDMSDatabaseRequest,
-    cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
-  ): Promise<AlterDMSDatabaseResponse> {
-    return this.request("AlterDMSDatabase", req, cb)
+  async UnboundDatasourceHouse(
+    req: UnboundDatasourceHouseRequest,
+    cb?: (error: string, rep: UnboundDatasourceHouseResponse) => void
+  ): Promise<UnboundDatasourceHouseResponse> {
+    return this.request("UnboundDatasourceHouse", req, cb)
+  }
+
+  /**
+   * 查询标准引擎资源组信息
+   */
+  async DescribeStandardEngineResourceGroupConfigInfo(
+    req: DescribeStandardEngineResourceGroupConfigInfoRequest,
+    cb?: (error: string, rep: DescribeStandardEngineResourceGroupConfigInfoResponse) => void
+  ): Promise<DescribeStandardEngineResourceGroupConfigInfoResponse> {
+    return this.request("DescribeStandardEngineResourceGroupConfigInfo", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDataEngines）用于查询DataEngines信息列表.
+   */
+  async DescribeDataEngines(
+    req: DescribeDataEnginesRequest,
+    cb?: (error: string, rep: DescribeDataEnginesResponse) => void
+  ): Promise<DescribeDataEnginesResponse> {
+    return this.request("DescribeDataEngines", req, cb)
   }
 
   /**
@@ -1409,23 +1618,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户详细信息
+   * 删除用户vpc到引擎网络的连接
    */
-  async DescribeUserInfo(
-    req: DescribeUserInfoRequest,
-    cb?: (error: string, rep: DescribeUserInfoResponse) => void
-  ): Promise<DescribeUserInfoResponse> {
-    return this.request("DescribeUserInfo", req, cb)
+  async DeleteUserVpcConnection(
+    req: DeleteUserVpcConnectionRequest,
+    cb?: (error: string, rep: DeleteUserVpcConnectionResponse) => void
+  ): Promise<DeleteUserVpcConnectionResponse> {
+    return this.request("DeleteUserVpcConnection", req, cb)
   }
 
   /**
-   * 本接口用于更新数据引擎配置
+   * 根据spark session名称销毁eg spark session
    */
-  async UpdateDataEngine(
-    req: UpdateDataEngineRequest,
-    cb?: (error: string, rep: UpdateDataEngineResponse) => void
-  ): Promise<UpdateDataEngineResponse> {
-    return this.request("UpdateDataEngine", req, cb)
+  async DeleteNativeSparkSession(
+    req: DeleteNativeSparkSessionRequest,
+    cb?: (error: string, rep: DeleteNativeSparkSessionResponse) => void
+  ): Promise<DeleteNativeSparkSessionResponse> {
+    return this.request("DeleteNativeSparkSession", req, cb)
   }
 
   /**
@@ -1436,6 +1645,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckDataEngineConfigPairsValidityResponse) => void
   ): Promise<CheckDataEngineConfigPairsValidityResponse> {
     return this.request("CheckDataEngineConfigPairsValidity", req, cb)
+  }
+
+  /**
+   * 查询用户vpc到引擎网络的连接
+   */
+  async DescribeUserVpcConnection(
+    req: DescribeUserVpcConnectionRequest,
+    cb?: (error: string, rep: DescribeUserVpcConnectionResponse) => void
+  ): Promise<DescribeUserVpcConnectionResponse> {
+    return this.request("DescribeUserVpcConnection", req, cb)
   }
 
   /**
@@ -1459,13 +1678,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除表
+   * 本接口（DescribeDataEngineSessionParameters）用于获取指定小版本下的Session配置。
    */
-  async DeleteTable(
-    req: DeleteTableRequest,
-    cb?: (error: string, rep: DeleteTableResponse) => void
-  ): Promise<DeleteTableResponse> {
-    return this.request("DeleteTable", req, cb)
+  async DescribeDataEngineSessionParameters(
+    req: DescribeDataEngineSessionParametersRequest,
+    cb?: (error: string, rep: DescribeDataEngineSessionParametersResponse) => void
+  ): Promise<DescribeDataEngineSessionParametersResponse> {
+    return this.request("DescribeDataEngineSessionParameters", req, cb)
   }
 
   /**
@@ -1621,6 +1840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新标准引擎资源组基础信息
+   */
+  async UpdateStandardEngineResourceGroupConfigInfo(
+    req: UpdateStandardEngineResourceGroupConfigInfoRequest,
+    cb?: (error: string, rep: UpdateStandardEngineResourceGroupConfigInfoResponse) => void
+  ): Promise<UpdateStandardEngineResourceGroupConfigInfoResponse> {
+    return this.request("UpdateStandardEngineResourceGroupConfigInfo", req, cb)
+  }
+
+  /**
    * 批量取消任务
    */
   async CancelTasks(
@@ -1691,13 +1920,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为用户创建数据引擎
+   * 更新网络配置
    */
-  async CreateDataEngine(
-    req: CreateDataEngineRequest,
-    cb?: (error: string, rep: CreateDataEngineResponse) => void
-  ): Promise<CreateDataEngineResponse> {
-    return this.request("CreateDataEngine", req, cb)
+  async UpdateNetworkConnection(
+    req: UpdateNetworkConnectionRequest,
+    cb?: (error: string, rep: UpdateNetworkConnectionResponse) => void
+  ): Promise<UpdateNetworkConnectionResponse> {
+    return this.request("UpdateNetworkConnection", req, cb)
+  }
+
+  /**
+   * 查询Spark作业的运行任务列表
+   */
+  async DescribeSparkAppTasks(
+    req: DescribeSparkAppTasksRequest,
+    cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void
+  ): Promise<DescribeSparkAppTasksResponse> {
+    return this.request("DescribeSparkAppTasks", req, cb)
   }
 
   /**
@@ -1711,13 +1950,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateSparkSubmitTask）用于提交SparkSbumit批流任务。
+   * 根据资源组获取spark session列表
    */
-  async CreateSparkSubmitTask(
-    req: CreateSparkSubmitTaskRequest,
-    cb?: (error: string, rep: CreateSparkSubmitTaskResponse) => void
-  ): Promise<CreateSparkSubmitTaskResponse> {
-    return this.request("CreateSparkSubmitTask", req, cb)
+  async DescribeNativeSparkSessions(
+    req: DescribeNativeSparkSessionsRequest,
+    cb?: (error: string, rep: DescribeNativeSparkSessionsResponse) => void
+  ): Promise<DescribeNativeSparkSessionsResponse> {
+    return this.request("DescribeNativeSparkSessions", req, cb)
   }
 
   /**
@@ -1771,13 +2010,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续费数据引擎
+   * 查询引擎可用的节点规格
    */
-  async RenewDataEngine(
-    req: RenewDataEngineRequest,
-    cb?: (error: string, rep: RenewDataEngineResponse) => void
-  ): Promise<RenewDataEngineResponse> {
-    return this.request("RenewDataEngine", req, cb)
+  async DescribeEngineNodeSpec(
+    req: DescribeEngineNodeSpecRequest,
+    cb?: (error: string, rep: DescribeEngineNodeSpecResponse) => void
+  ): Promise<DescribeEngineNodeSpecResponse> {
+    return this.request("DescribeEngineNodeSpec", req, cb)
   }
 
   /**
@@ -1808,6 +2047,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteThirdPartyAccessUserResponse) => void
   ): Promise<DeleteThirdPartyAccessUserResponse> {
     return this.request("DeleteThirdPartyAccessUser", req, cb)
+  }
+
+  /**
+   * 更新标准引擎资源组网络配置信息
+   */
+  async UpdateEngineResourceGroupNetworkConfigInfo(
+    req: UpdateEngineResourceGroupNetworkConfigInfoRequest,
+    cb?: (error: string, rep: UpdateEngineResourceGroupNetworkConfigInfoResponse) => void
+  ): Promise<UpdateEngineResourceGroupNetworkConfigInfoResponse> {
+    return this.request("UpdateEngineResourceGroupNetworkConfigInfo", req, cb)
   }
 
   /**
@@ -1891,6 +2140,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户详细信息
+   */
+  async DescribeUserInfo(
+    req: DescribeUserInfoRequest,
+    cb?: (error: string, rep: DescribeUserInfoResponse) => void
+  ): Promise<DescribeUserInfoResponse> {
+    return this.request("DescribeUserInfo", req, cb)
+  }
+
+  /**
    * 查询计算结果存储位置。
    */
   async DescribeStoreLocation(
@@ -1911,13 +2170,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Spark作业的运行任务列表
+   * 为用户创建数据引擎
    */
-  async DescribeSparkAppTasks(
-    req: DescribeSparkAppTasksRequest,
-    cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void
-  ): Promise<DescribeSparkAppTasksResponse> {
-    return this.request("DescribeSparkAppTasks", req, cb)
+  async CreateDataEngine(
+    req: CreateDataEngineRequest,
+    cb?: (error: string, rep: CreateDataEngineResponse) => void
+  ): Promise<CreateDataEngineResponse> {
+    return this.request("CreateDataEngine", req, cb)
   }
 
   /**
@@ -1931,6 +2190,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询标准引擎资源组信息
+   */
+  async DescribeStandardEngineResourceGroups(
+    req: DescribeStandardEngineResourceGroupsRequest,
+    cb?: (error: string, rep: DescribeStandardEngineResourceGroupsResponse) => void
+  ): Promise<DescribeStandardEngineResourceGroupsResponse> {
+    return this.request("DescribeStandardEngineResourceGroups", req, cb)
+  }
+
+  /**
    * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
    */
   async ListTaskJobLogDetail(
@@ -1941,6 +2210,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询引擎网络信息
+   */
+  async DescribeEngineNetworks(
+    req: DescribeEngineNetworksRequest,
+    cb?: (error: string, rep: DescribeEngineNetworksResponse) => void
+  ): Promise<DescribeEngineNetworksResponse> {
+    return this.request("DescribeEngineNetworks", req, cb)
+  }
+
+  /**
    * 查询用户的托管存储信息
    */
   async DescribeLakeFsInfo(
@@ -1948,5 +2227,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLakeFsInfoResponse) => void
   ): Promise<DescribeLakeFsInfoResponse> {
     return this.request("DescribeLakeFsInfo", req, cb)
+  }
+
+  /**
+   * 本接口用于更新数据引擎配置
+   */
+  async UpdateDataEngine(
+    req: UpdateDataEngineRequest,
+    cb?: (error: string, rep: UpdateDataEngineResponse) => void
+  ): Promise<UpdateDataEngineResponse> {
+    return this.request("UpdateDataEngine", req, cb)
   }
 }

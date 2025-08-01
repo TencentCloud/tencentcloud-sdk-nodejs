@@ -19,16 +19,19 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeployConfigGroupVersionRequest,
+  DescribeSecurityAPIResourceResponse,
   RenewFlag,
   Compression,
   DescribeFunctionsResponse,
   RequestFieldsForException,
   DeleteL4ProxyRulesRequest,
   DescribeOriginGroupResponse,
+  ModifySecurityJSInjectionRuleRequest,
   DescribeSecurityIPGroupInfoResponse,
   AdaptiveFrequencyControl,
   SlowPostConfig,
   DescribeWebSecurityTemplatesRequest,
+  CreateSecurityAPIServiceRequest,
   RateLimitingRules,
   DescribeMultiPathGatewayLineRequest,
   OriginACLEntity,
@@ -42,6 +45,7 @@ import {
   AccessURLRedirectQueryString,
   ModifyFunctionRulePriorityRequest,
   ModifyAccelerationDomainResponse,
+  DeleteSecurityAPIResourceRequest,
   UpstreamHTTP2Parameters,
   TopEntryValue,
   DescribeHostsSettingResponse,
@@ -68,7 +72,8 @@ import {
   WebSocket,
   ModifyAccelerationDomainRequest,
   ModifyContentIdentifierResponse,
-  Header,
+  DeleteSecurityAPIServiceResponse,
+  RuleAndConditions,
   CreateAliasDomainRequest,
   CLSTopic,
   CreatePrefetchTaskRequest,
@@ -76,10 +81,11 @@ import {
   VanityNameServers,
   DescribeTopL7AnalysisDataRequest,
   CreateMultiPathGatewaySecretKeyResponse,
-  DescribeAccelerationDomainsResponse,
+  DescribeSecurityIPGroupContentRequest,
   SwitchConfig,
   IdentifyZoneResponse,
   UpstreamRequestQueryString,
+  DeleteJustInTimeTranscodeTemplatesRequest,
   ModifyLoadBalancerResponse,
   ModifyL4ProxyResponse,
   HealthChecker,
@@ -88,9 +94,11 @@ import {
   ConfirmOriginACLUpdateResponse,
   DescribeAliasDomainsResponse,
   EnvInfo,
+  AudioTemplateInfo,
   ModifyLoadBalancerRequest,
   PlanInfo,
   DescribeTimingL7CacheDataRequest,
+  ModifySecurityAPIResourceRequest,
   IPv6Parameters,
   CreateFunctionRequest,
   PostMaxSizeParameters,
@@ -109,6 +117,7 @@ import {
   CreateL7AccRulesRequest,
   BotPortraitRule,
   RulesProperties,
+  DescribeSecurityJSInjectionRuleResponse,
   RuleCodeActionParams,
   OriginGroupReference,
   DeleteLoadBalancerRequest,
@@ -117,10 +126,11 @@ import {
   ExceptUserRule,
   SecEntry,
   ModifyCustomErrorPageResponse,
-  SubRule,
+  ModifySecurityAPIServiceRequest,
   StandardDebugParameters,
   ConfigGroupVersionInfo,
   VerifyOwnershipResponse,
+  DescribeSecurityIPGroupContentResponse,
   Sv,
   Rule,
   DownloadL4LogsRequest,
@@ -134,10 +144,12 @@ import {
   BillingDataFilter,
   DeleteCustomErrorPageResponse,
   DescribeTimingL7CacheDataResponse,
+  DescribeDefaultCertificatesRequest,
   DescribeZonesResponse,
   DeleteMultiPathGatewayRequest,
   DeleteCustomErrorPageRequest,
   CustomField,
+  DescribeSecurityAPIServiceRequest,
   CacheKeyHeader,
   DeleteZoneRequest,
   RangeOriginPullParameters,
@@ -158,7 +170,7 @@ import {
   HTTPUpstreamTimeoutParameters,
   DescribeMultiPathGatewayRequest,
   PrivateParameter,
-  L4OfflineLog,
+  CacheKeyConfigParameters,
   CreateOriginGroupRequest,
   TopDataRecord,
   DescribeDDoSProtectionResponse,
@@ -168,17 +180,21 @@ import {
   DescribeAvailablePlansResponse,
   RateLimitTemplate,
   ModifyRealtimeLogDeliveryTaskResponse,
-  DeviceProfile,
+  AccelerationDomainCertificate,
+  OriginRecord,
   DescribeSecurityTemplateBindingsRequest,
   L4ProxyRemoteAuth,
   AlgDetectResult,
   DefaultServerCertInfo,
   RuleEngineItem,
+  ModifySecurityAPIServiceResponse,
   OCSPStaplingParameters,
   CreateL4ProxyRulesRequest,
   DescribeDDoSAttackTopDataResponse,
+  SubRule,
   ModifyMultiPathGatewayRequest,
   LoadBalancer,
+  CreateSecurityAPIServiceResponse,
   HostName,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
@@ -189,6 +205,7 @@ import {
   DeleteApplicationProxyResponse,
   AlgDetectRule,
   SecEntryValue,
+  DescribeSecurityAPIResourceRequest,
   DiffIPWhitelist,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
@@ -227,6 +244,7 @@ import {
   DeleteOriginGroupRequest,
   DescribeDDoSProtectionRequest,
   AclCondition,
+  DescribeJustInTimeTranscodeTemplatesResponse,
   Identification,
   RequestBodyTransferTimeout,
   L7OfflineLog,
@@ -255,6 +273,7 @@ import {
   DeleteSharedCNAMERequest,
   CustomRules,
   ModifyRealtimeLogDeliveryTaskRequest,
+  VideoTemplateInfo,
   HandleFunctionRuntimeEnvironmentResponse,
   DestroyPlanRequest,
   BlockIPActionParameters,
@@ -264,16 +283,18 @@ import {
   IPGroup,
   DescribeDnsRecordsRequest,
   CreatePrefetchTaskResponse,
-  DescribeDefaultCertificatesRequest,
+  CreateSecurityJSInjectionRuleRequest,
   DescribeMultiPathGatewaysResponse,
   MaxAgeParameters,
   ModifyApplicationProxyRuleResponse,
   DDoS,
   ModifyL7AccRulePriorityResponse,
-  ModifyRequestHeaderParameters,
+  APIService,
   CreateConfigGroupVersionResponse,
   ConfirmOriginACLUpdateRequest,
+  CreateJustInTimeTranscodeTemplateResponse,
   DownloadL7LogsRequest,
+  DescribeSecurityClientAttesterRequest,
   WebSocketParameters,
   RuleItem,
   SlowRateConfig,
@@ -281,6 +302,7 @@ import {
   CustomTime,
   DetailHost,
   DescribeRealtimeLogDeliveryTasksResponse,
+  TopEntry,
   DescribeConfigGroupVersionsResponse,
   FunctionEnvironmentVariable,
   DeleteRealtimeLogDeliveryTaskResponse,
@@ -293,8 +315,8 @@ import {
   RateLimitUserRule,
   DeployRecord,
   CreatePlanForZoneRequest,
-  AccelerationDomainCertificate,
-  CreateL4ProxyRulesResponse,
+  DeviceProfile,
+  CreateJustInTimeTranscodeTemplateRequest,
   ModifyCustomErrorPageRequest,
   ModifyFunctionRuleResponse,
   DescribeL7AccRulesRequest,
@@ -310,12 +332,14 @@ import {
   DescribeL4ProxyRequest,
   DescribeIdentificationsRequest,
   ModifyHostsCertificateResponse,
+  DescribeSecurityAPIServiceResponse,
   CreateAccelerationDomainRequest,
   NormalAction,
   DenyActionParameters,
   TopDetailData,
   DescribeZoneSettingResponse,
   CreateMultiPathGatewayResponse,
+  DeleteJustInTimeTranscodeTemplatesResponse,
   DescribePurgeTasksRequest,
   ModifyDnsRecordsRequest,
   IdentifyZoneRequest,
@@ -338,11 +362,14 @@ import {
   CreateL4ProxyResponse,
   CacheKeyParameters,
   ModifyFunctionResponse,
+  CreateL4ProxyRulesResponse,
   DescribeOriginGroupRequest,
+  CreateSecurityClientAttesterRequest,
   DescribeIPRegionRequest,
   BindDomainInfo,
   TimingTypeValue,
   CreatePlanForZoneResponse,
+  ClientAttester,
   ModifyL4ProxyRulesStatusResponse,
   CheckCnameStatusResponse,
   ImportZoneConfigResponse,
@@ -368,15 +395,19 @@ import {
   RenewPlanResponse,
   CustomErrorPage,
   DescribeDeployHistoryRequest,
+  Header,
   CreateMultiPathGatewayLineResponse,
   BillingData,
   DescribePlansRequest,
+  CreateSecurityJSInjectionRuleResponse,
   ModifyOriginGroupRequest,
   RefreshMultiPathGatewaySecretKeyResponse,
   DeleteZoneResponse,
   CreateRuleResponse,
   ModifyL7AccSettingResponse,
+  DeleteSecurityJSInjectionRuleResponse,
   ReturnCustomPageActionParameters,
+  DescribeAccelerationDomainsResponse,
   BindZoneToPlanResponse,
   DeleteWebSecurityTemplateRequest,
   DescribeL7AccSettingResponse,
@@ -404,6 +435,7 @@ import {
   Grpc,
   CreateAliasDomainResponse,
   ClientIpCountry,
+  DeleteSecurityClientAttesterRequest,
   DeleteApplicationProxyRuleRequest,
   ManagedRuleAction,
   ModifyL7AccRuleResponse,
@@ -423,11 +455,14 @@ import {
   CreateZoneRequest,
   SecurityPolicy,
   AscriptionInfo,
-  OriginGroupHealthStatusDetail,
+  ModifySecurityClientAttesterResponse,
   ModifyOriginACLRequest,
   FirstPartConfig,
   Waf,
   CreateApplicationProxyRuleRequest,
+  JustInTimeTranscodeTemplate,
+  DeleteSecurityAPIServiceRequest,
+  TCCaptchaOption,
   DescribeDnsRecordsResponse,
   CreateWebSecurityTemplateRequest,
   CreateL4ProxyRequest,
@@ -452,15 +487,16 @@ import {
   GatewayRegion,
   CachePrefreshParameters,
   Action,
-  OriginRecord,
+  JSInjectionRule,
   UpstreamFollowRedirectParameters,
+  DescribeSecurityClientAttesterResponse,
   ApplicationProxy,
   ModifyApplicationProxyResponse,
   ModifySecurityIPGroupResponse,
   SecurityType,
   ZoneSetting,
   ModifyL4ProxyRequest,
-  RuleAndConditions,
+  DescribeSecurityJSInjectionRuleRequest,
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
   ExceptUserRuleScope,
@@ -474,11 +510,12 @@ import {
   DescribeMultiPathGatewayResponse,
   IPRegionInfo,
   DestroyPlanResponse,
-  CacheKeyConfigParameters,
+  CreateSecurityAPIResourceRequest,
   TLSConfigParameters,
   QueryCondition,
   RuleRewriteActionParams,
   ClientIPHeaderParameters,
+  L4OfflineLog,
   ModifyAliasDomainResponse,
   DeleteDnsRecordsRequest,
   OfflineCacheParameters,
@@ -503,6 +540,7 @@ import {
   UpstreamHttp2,
   EnableOriginACLResponse,
   DeleteAliasDomainResponse,
+  DeleteSecurityJSInjectionRuleRequest,
   BotConfig,
   EnableOriginACLRequest,
   ModifyZoneResponse,
@@ -514,6 +552,7 @@ import {
   DescribeOriginGroupHealthStatusRequest,
   DescribeContentIdentifiersRequest,
   ExportZoneConfigRequest,
+  OriginGroupHealthStatusDetail,
   L4ProxyRule,
   CacheKeyQueryString,
   AdvancedFilter,
@@ -536,6 +575,7 @@ import {
   CreateContentIdentifierRequest,
   OriginProtectionInfo,
   ModifyDnsRecordsStatusResponse,
+  ModifySecurityJSInjectionRuleResponse,
   AliasDomain,
   ImportZoneConfigRequest,
   IpTableRule,
@@ -551,7 +591,7 @@ import {
   SlowAttackDefense,
   CreateCLSIndexRequest,
   DescribeRulesRequest,
-  DetectLengthLimitCondition,
+  DescribeContentQuotaResponse,
   ModifyZoneSettingResponse,
   DownloadL7LogsResponse,
   AccelerationDomain,
@@ -562,6 +602,7 @@ import {
   RewriteAction,
   TemplateScope,
   ErrorPage,
+  APIResource,
   HTTP2Parameters,
   DescribeOverviewL7DataRequest,
   CreateMultiPathGatewayRequest,
@@ -575,6 +616,7 @@ import {
   DnsRecord,
   OriginPrivateParameters,
   HSTSParameters,
+  DeleteSecurityAPIResourceResponse,
   BindZoneToPlanRequest,
   DeleteFunctionResponse,
   IPWhitelist,
@@ -589,7 +631,8 @@ import {
   OriginGroupInLoadBalancer,
   HTTPResponseParameters,
   UpstreamRequestParameters,
-  TopEntry,
+  DeleteSecurityClientAttesterResponse,
+  TCRCEOption,
   NsVerification,
   AccelerateMainland,
   ChallengeActionParameters,
@@ -616,7 +659,9 @@ import {
   ManagedRules,
   SecurityTemplateBinding,
   DescribeMultiPathGatewaySecretKeyResponse,
+  CreateSecurityAPIResourceResponse,
   CacheTag,
+  CreateSecurityClientAttesterResponse,
   ModifyMultiPathGatewayLineResponse,
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
@@ -630,11 +675,13 @@ import {
   DescribeWebSecurityTemplatesResponse,
   Quota,
   CheckCnameStatusRequest,
-  DescribeContentQuotaResponse,
+  DetectLengthLimitCondition,
+  ModifySecurityAPIResourceResponse,
   DescribeSecurityIPGroupResponse,
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DeleteDnsRecordsResponse,
+  ModifyRequestHeaderParameters,
   CreateWebSecurityTemplateResponse,
   DescribePurgeTasksResponse,
   HttpDDoSProtection,
@@ -645,7 +692,9 @@ import {
   Addresses,
   RateLimitIntelligence,
   DescribeDeployHistoryResponse,
+  DescribeJustInTimeTranscodeTemplatesRequest,
   QueryString,
+  ModifySecurityClientAttesterRequest,
   DescribeAccelerationDomainsRequest,
   CreateDnsRecordResponse,
   DescribeTimingL4DataRequest,
@@ -872,13 +921,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 您可以通过本接口查看站点下的域名信息，包括加速域名、源站以及域名状态等信息。您可以查看站点下全部域名的信息，也可以指定过滤条件查询对应的域名信息。
+   * 创建 JavaScript 注入规则。
    */
-  async DescribeAccelerationDomains(
-    req: DescribeAccelerationDomainsRequest,
-    cb?: (error: string, rep: DescribeAccelerationDomainsResponse) => void
-  ): Promise<DescribeAccelerationDomainsResponse> {
-    return this.request("DescribeAccelerationDomains", req, cb)
+  async CreateSecurityJSInjectionRule(
+    req: CreateSecurityJSInjectionRuleRequest,
+    cb?: (error: string, rep: CreateSecurityJSInjectionRuleResponse) => void
+  ): Promise<CreateSecurityJSInjectionRuleResponse> {
+    return this.request("CreateSecurityJSInjectionRule", req, cb)
   }
 
   /**
@@ -902,6 +951,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于删除 API 资源。
+   */
+  async DeleteSecurityAPIResource(
+    req: DeleteSecurityAPIResourceRequest,
+    cb?: (error: string, rep: DeleteSecurityAPIResourceResponse) => void
+  ): Promise<DeleteSecurityAPIResourceResponse> {
+    return this.request("DeleteSecurityAPIResource", req, cb)
+  }
+
+  /**
      * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [删除四层代理实例
 ](https://cloud.tencent.com/document/product/1552/103415) 。
      */
@@ -920,6 +979,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyL7AccSettingResponse) => void
   ): Promise<ModifyL7AccSettingResponse> {
     return this.request("ModifyL7AccSetting", req, cb)
+  }
+
+  /**
+   * 用于创建 API 资源。
+   */
+  async CreateSecurityAPIResource(
+    req: CreateSecurityAPIResourceRequest,
+    cb?: (error: string, rep: CreateSecurityAPIResourceResponse) => void
+  ): Promise<CreateSecurityAPIResourceResponse> {
+    return this.request("CreateSecurityAPIResource", req, cb)
   }
 
   /**
@@ -1056,6 +1125,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+     * 修改别称域名。
+该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
+     */
+  async ModifyAliasDomain(
+    req: ModifyAliasDomainRequest,
+    cb?: (error: string, rep: ModifyAliasDomainResponse) => void
+  ): Promise<ModifyAliasDomainResponse> {
+    return this.request("ModifyAliasDomain", req, cb)
+  }
+
+  /**
    * 该接口用于查询您有权限的站点信息。可根据不同查询条件筛选站点。
    */
   async DescribeZones(
@@ -1177,6 +1257,19 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+     * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
+> 不同类型 Edgeone 计费套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165)
+计费套餐升级规则以及资费详情参考 [Edgeone计费套餐升配说明](https://cloud.tencent.com/document/product/1552/95291)
+如果需要将套餐升级至企业版，请 [联系我们](https://cloud.tencent.com/online-service)
+     */
+  async UpgradePlan(
+    req: UpgradePlanRequest,
+    cb?: (error: string, rep: UpgradePlanResponse) => void
+  ): Promise<UpgradePlanResponse> {
+    return this.request("UpgradePlan", req, cb)
+  }
+
+  /**
    * 批量删除加速域名
    */
   async DeleteAccelerationDomains(
@@ -1184,6 +1277,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DeleteAccelerationDomainsResponse) => void
   ): Promise<DeleteAccelerationDomainsResponse> {
     return this.request("DeleteAccelerationDomains", req, cb)
+  }
+
+  /**
+   * 删除 JavaScript 注入规则。
+   */
+  async DeleteSecurityJSInjectionRule(
+    req: DeleteSecurityJSInjectionRuleRequest,
+    cb?: (error: string, rep: DeleteSecurityJSInjectionRuleResponse) => void
+  ): Promise<DeleteSecurityJSInjectionRuleResponse> {
+    return this.request("DeleteSecurityJSInjectionRule", req, cb)
   }
 
   /**
@@ -1297,6 +1400,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyWebSecurityTemplateResponse) => void
   ): Promise<ModifyWebSecurityTemplateResponse> {
     return this.request("ModifyWebSecurityTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用于分页查询指定 IP 组中的 IP 地址列表。当 IP 组中的 IP 地址数量超过 2000 个时，可以使用此接口进行分页查询，以获取完整的 IP 地址列表。
+   */
+  async DescribeSecurityIPGroupContent(
+    req: DescribeSecurityIPGroupContentRequest,
+    cb?: (error: string, rep: DescribeSecurityIPGroupContentResponse) => void
+  ): Promise<DescribeSecurityIPGroupContentResponse> {
+    return this.request("DescribeSecurityIPGroupContent", req, cb)
   }
 
   /**
@@ -1423,6 +1536,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询客户端认证选项配置。
+   */
+  async DescribeSecurityClientAttester(
+    req: DescribeSecurityClientAttesterRequest,
+    cb?: (error: string, rep: DescribeSecurityClientAttesterResponse) => void
+  ): Promise<DescribeSecurityClientAttesterResponse> {
+    return this.request("DescribeSecurityClientAttester", req, cb)
+  }
+
+  /**
    * 修改Web&Bot安全配置。
    */
   async ModifySecurityPolicy(
@@ -1524,6 +1647,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 该接口用于修改 API 资源。
+   */
+  async ModifySecurityAPIResource(
+    req: ModifySecurityAPIResourceRequest,
+    cb?: (error: string, rep: ModifySecurityAPIResourceResponse) => void
+  ): Promise<ModifySecurityAPIResourceResponse> {
+    return this.request("ModifySecurityAPIResource", req, cb)
+  }
+
+  /**
    * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理实例状态](https://cloud.tencent.com/document/product/1552/103408) 。
    */
   async ModifyApplicationProxyStatus(
@@ -1534,14 +1667,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 若您需要使用 Edgeone 产品，您需要通过此接口创建计费套餐。
-> 创建套餐后，您需要通过 [CreateZone](https://cloud.tencent.com/document/product/1552/80719) 完成创建站点，绑定套餐的流程，Edgeone 才能正常提供服务。
-     */
-  async CreatePlan(
-    req: CreatePlanRequest,
-    cb?: (error: string, rep: CreatePlanResponse) => void
-  ): Promise<CreatePlanResponse> {
-    return this.request("CreatePlan", req, cb)
+   * 删除负载均衡实例，若负载均衡示例被其他服务（例如：四层代理等）引用的时候，示例无法被删除，需要先解除引用关系。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async DeleteLoadBalancer(
+    req: DeleteLoadBalancerRequest,
+    cb?: (error: string, rep: DeleteLoadBalancerResponse) => void
+  ): Promise<DeleteLoadBalancerResponse> {
+    return this.request("DeleteLoadBalancer", req, cb)
   }
 
   /**
@@ -1592,6 +1724,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateSharedCNAMEResponse) => void
   ): Promise<CreateSharedCNAMEResponse> {
     return this.request("CreateSharedCNAME", req, cb)
+  }
+
+  /**
+   * 查询 JavaScript 注入规则。
+   */
+  async DescribeSecurityJSInjectionRule(
+    req: DescribeSecurityJSInjectionRuleRequest,
+    cb?: (error: string, rep: DescribeSecurityJSInjectionRuleResponse) => void
+  ): Promise<DescribeSecurityJSInjectionRuleResponse> {
+    return this.request("DescribeSecurityJSInjectionRule", req, cb)
   }
 
   /**
@@ -1699,13 +1841,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 删除负载均衡实例，若负载均衡示例被其他服务（例如：四层代理等）引用的时候，示例无法被删除，需要先解除引用关系。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   * 创建客户端认证选项。
    */
-  async DeleteLoadBalancer(
-    req: DeleteLoadBalancerRequest,
-    cb?: (error: string, rep: DeleteLoadBalancerResponse) => void
-  ): Promise<DeleteLoadBalancerResponse> {
-    return this.request("DeleteLoadBalancer", req, cb)
+  async CreateSecurityClientAttester(
+    req: CreateSecurityClientAttesterRequest,
+    cb?: (error: string, rep: CreateSecurityClientAttesterResponse) => void
+  ): Promise<CreateSecurityClientAttesterResponse> {
+    return this.request("CreateSecurityClientAttester", req, cb)
   }
 
   /**
@@ -1759,6 +1901,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 该接口用于修改 API 服务。
+   */
+  async ModifySecurityAPIService(
+    req: ModifySecurityAPIServiceRequest,
+    cb?: (error: string, rep: ModifySecurityAPIServiceResponse) => void
+  ): Promise<ModifySecurityAPIServiceResponse> {
+    return this.request("ModifySecurityAPIService", req, cb)
+  }
+
+  /**
    * 查询边缘函数触发规则列表，支持按照规则 ID、函数 ID、规则描述等条件进行过滤。
    */
   async DescribeFunctionRules(
@@ -1779,13 +1931,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口（DescribeDDoSAttackTopData）用于查询DDoS攻击Top数据。
+   * 您可以通过本接口查看站点下的域名信息，包括加速域名、源站以及域名状态等信息。您可以查看站点下全部域名的信息，也可以指定过滤条件查询对应的域名信息。
    */
-  async DescribeDDoSAttackTopData(
-    req: DescribeDDoSAttackTopDataRequest,
-    cb?: (error: string, rep: DescribeDDoSAttackTopDataResponse) => void
-  ): Promise<DescribeDDoSAttackTopDataResponse> {
-    return this.request("DescribeDDoSAttackTopData", req, cb)
+  async DescribeAccelerationDomains(
+    req: DescribeAccelerationDomainsRequest,
+    cb?: (error: string, rep: DescribeAccelerationDomainsResponse) => void
+  ): Promise<DescribeAccelerationDomainsResponse> {
+    return this.request("DescribeAccelerationDomains", req, cb)
   }
 
   /**
@@ -1840,13 +1992,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询四层代理实例下的转发规则列表。
+   * 用于删除 API 服务。
    */
-  async DescribeL4ProxyRules(
-    req: DescribeL4ProxyRulesRequest,
-    cb?: (error: string, rep: DescribeL4ProxyRulesResponse) => void
-  ): Promise<DescribeL4ProxyRulesResponse> {
-    return this.request("DescribeL4ProxyRules", req, cb)
+  async DeleteSecurityAPIService(
+    req: DeleteSecurityAPIServiceRequest,
+    cb?: (error: string, rep: DeleteSecurityAPIServiceResponse) => void
+  ): Promise<DeleteSecurityAPIServiceResponse> {
+    return this.request("DeleteSecurityAPIService", req, cb)
   }
 
   /**
@@ -1860,13 +2012,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于查询四层代理实例列表。
+   * 删除自定义错误页面。
    */
-  async DescribeL4Proxy(
-    req: DescribeL4ProxyRequest,
-    cb?: (error: string, rep: DescribeL4ProxyResponse) => void
-  ): Promise<DescribeL4ProxyResponse> {
-    return this.request("DescribeL4Proxy", req, cb)
+  async DeleteCustomErrorPage(
+    req: DeleteCustomErrorPageRequest,
+    cb?: (error: string, rep: DeleteCustomErrorPageResponse) => void
+  ): Promise<DeleteCustomErrorPageResponse> {
+    return this.request("DeleteCustomErrorPage", req, cb)
   }
 
   /**
@@ -1901,16 +2053,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
-> 不同类型 Edgeone 计费套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165)
-计费套餐升级规则以及资费详情参考 [Edgeone计费套餐升配说明](https://cloud.tencent.com/document/product/1552/95291)
-如果需要将套餐升级至企业版，请 [联系我们](https://cloud.tencent.com/online-service)
-     */
-  async UpgradePlan(
-    req: UpgradePlanRequest,
-    cb?: (error: string, rep: UpgradePlanResponse) => void
-  ): Promise<UpgradePlanResponse> {
-    return this.request("UpgradePlan", req, cb)
+   * 修改客户端认证选项。
+   */
+  async ModifySecurityClientAttester(
+    req: ModifySecurityClientAttesterRequest,
+    cb?: (error: string, rep: ModifySecurityClientAttesterResponse) => void
+  ): Promise<ModifySecurityClientAttesterResponse> {
+    return this.request("ModifySecurityClientAttester", req, cb)
   }
 
   /**
@@ -1921,6 +2070,28 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeSecurityPolicyResponse) => void
   ): Promise<DescribeSecurityPolicyResponse> {
     return this.request("DescribeSecurityPolicy", req, cb)
+  }
+
+  /**
+   * 删除客户端认证选项。
+   */
+  async DeleteSecurityClientAttester(
+    req: DeleteSecurityClientAttesterRequest,
+    cb?: (error: string, rep: DeleteSecurityClientAttesterResponse) => void
+  ): Promise<DeleteSecurityClientAttesterResponse> {
+    return this.request("DeleteSecurityClientAttester", req, cb)
+  }
+
+  /**
+     * 完成域名创建之后，您可以为域名配置自有证书，也可以使用 EdgeOne 为您提供的 [免费证书](https://cloud.tencent.com/document/product/1552/90437)。
+如果您需要配置自有证书，请先将证书上传至 [SSL证书控制台](https://console.cloud.tencent.com/certoverview)，然后在本接口中传入对应的证书 ID。详情参考 [部署自有证书至 EdgeOne 域名
+](https://cloud.tencent.com/document/product/1552/88874)。
+     */
+  async ModifyHostsCertificate(
+    req: ModifyHostsCertificateRequest,
+    cb?: (error: string, rep: ModifyHostsCertificateResponse) => void
+  ): Promise<ModifyHostsCertificateResponse> {
+    return this.request("ModifyHostsCertificate", req, cb)
   }
 
   /**
@@ -2019,14 +2190,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 修改别称域名。
-该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
-     */
-  async ModifyAliasDomain(
-    req: ModifyAliasDomainRequest,
-    cb?: (error: string, rep: ModifyAliasDomainResponse) => void
-  ): Promise<ModifyAliasDomainResponse> {
-    return this.request("ModifyAliasDomain", req, cb)
+   * 本接口（DescribeDDoSAttackTopData）用于查询DDoS攻击Top数据。
+   */
+  async DescribeDDoSAttackTopData(
+    req: DescribeDDoSAttackTopDataRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackTopDataResponse) => void
+  ): Promise<DescribeDDoSAttackTopDataResponse> {
+    return this.request("DescribeDDoSAttackTopData", req, cb)
   }
 
   /**
@@ -2037,6 +2207,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateLoadBalancerResponse) => void
   ): Promise<CreateLoadBalancerResponse> {
     return this.request("CreateLoadBalancer", req, cb)
+  }
+
+  /**
+   * 根据即时转码模板名字、模板类型或唯一标识，获取即时转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及预置模板。
+   */
+  async DescribeJustInTimeTranscodeTemplates(
+    req: DescribeJustInTimeTranscodeTemplatesRequest,
+    cb?: (error: string, rep: DescribeJustInTimeTranscodeTemplatesResponse) => void
+  ): Promise<DescribeJustInTimeTranscodeTemplatesResponse> {
+    return this.request("DescribeJustInTimeTranscodeTemplates", req, cb)
   }
 
   /**
@@ -2071,15 +2251,15 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-     * 完成域名创建之后，您可以为域名配置自有证书，也可以使用 EdgeOne 为您提供的 [免费证书](https://cloud.tencent.com/document/product/1552/90437)。
-如果您需要配置自有证书，请先将证书上传至 [SSL证书控制台](https://console.cloud.tencent.com/certoverview)，然后在本接口中传入对应的证书 ID。详情参考 [部署自有证书至 EdgeOne 域名
-](https://cloud.tencent.com/document/product/1552/88874)。
+     * 即时转码已经提供了预置转码模板，满足大部分的需求。如果有个性化的转码需求，可以通过本接口创建自定义的转码模板，最多可创建100个自定义转码模板。
+为了确保即时转码效果的一致性，避免因 EO 缓存或 M3U8 分片处理过程中的模板变更导致视频输出异常，模板在创建后不可进行修改。
+即时转码详细能力了解：[EdgeOne视频即时处理功能介绍](https://cloud.tencent.com/document/product/1552/111927)。
      */
-  async ModifyHostsCertificate(
-    req: ModifyHostsCertificateRequest,
-    cb?: (error: string, rep: ModifyHostsCertificateResponse) => void
-  ): Promise<ModifyHostsCertificateResponse> {
-    return this.request("ModifyHostsCertificate", req, cb)
+  async CreateJustInTimeTranscodeTemplate(
+    req: CreateJustInTimeTranscodeTemplateRequest,
+    cb?: (error: string, rep: CreateJustInTimeTranscodeTemplateResponse) => void
+  ): Promise<CreateJustInTimeTranscodeTemplateResponse> {
+    return this.request("CreateJustInTimeTranscodeTemplate", req, cb)
   }
 
   /**
@@ -2100,6 +2280,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DeployConfigGroupVersionResponse) => void
   ): Promise<DeployConfigGroupVersionResponse> {
     return this.request("DeployConfigGroupVersion", req, cb)
+  }
+
+  /**
+   * 创建内容标识符，可以设置描述、标签等信息，同时需要绑定企业版套餐用于统计计费数据；一个内容标识符只能绑定一个计费套餐，一个计费套餐可以绑定多个内容标识符。该功能仅限白名单开放。
+   */
+  async CreateContentIdentifier(
+    req: CreateContentIdentifierRequest,
+    cb?: (error: string, rep: CreateContentIdentifierResponse) => void
+  ): Promise<CreateContentIdentifierResponse> {
+    return this.request("CreateContentIdentifier", req, cb)
   }
 
   /**
@@ -2196,6 +2386,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询站点下的 API 资源。
+   */
+  async DescribeSecurityAPIResource(
+    req: DescribeSecurityAPIResourceRequest,
+    cb?: (error: string, rep: DescribeSecurityAPIResourceResponse) => void
+  ): Promise<DescribeSecurityAPIResourceResponse> {
+    return this.request("DescribeSecurityAPIResource", req, cb)
+  }
+
+  /**
    * 查询站点配置项导入结果接口，本接口用于站点配置导入接口（ImportZoneConfig）的结果查询。该功能仅支持标准版或企业版套餐的站点使用。
    */
   async DescribeZoneConfigImportResult(
@@ -2206,13 +2406,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 创建内容标识符，可以设置描述、标签等信息，同时需要绑定企业版套餐用于统计计费数据；一个内容标识符只能绑定一个计费套餐，一个计费套餐可以绑定多个内容标识符。该功能仅限白名单开放。
+   * 用于创建 API 服务。
    */
-  async CreateContentIdentifier(
-    req: CreateContentIdentifierRequest,
-    cb?: (error: string, rep: CreateContentIdentifierResponse) => void
-  ): Promise<CreateContentIdentifierResponse> {
-    return this.request("CreateContentIdentifier", req, cb)
+  async CreateSecurityAPIService(
+    req: CreateSecurityAPIServiceRequest,
+    cb?: (error: string, rep: CreateSecurityAPIServiceResponse) => void
+  ): Promise<CreateSecurityAPIServiceResponse> {
+    return this.request("CreateSecurityAPIService", req, cb)
   }
 
   /**
@@ -2234,6 +2434,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateApplicationProxyRuleResponse) => void
   ): Promise<CreateApplicationProxyRuleResponse> {
     return this.request("CreateApplicationProxyRule", req, cb)
+  }
+
+  /**
+   * 修改 JavaScript 注入规则。
+   */
+  async ModifySecurityJSInjectionRule(
+    req: ModifySecurityJSInjectionRuleRequest,
+    cb?: (error: string, rep: ModifySecurityJSInjectionRuleResponse) => void
+  ): Promise<ModifySecurityJSInjectionRuleResponse> {
+    return this.request("ModifySecurityJSInjectionRule", req, cb)
   }
 
   /**
@@ -2280,6 +2490,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+     * 若您需要使用 Edgeone 产品，您需要通过此接口创建计费套餐。
+> 创建套餐后，您需要通过 [CreateZone](https://cloud.tencent.com/document/product/1552/80719) 完成创建站点，绑定套餐的流程，Edgeone 才能正常提供服务。
+     */
+  async CreatePlan(
+    req: CreatePlanRequest,
+    cb?: (error: string, rep: CreatePlanResponse) => void
+  ): Promise<CreatePlanResponse> {
+    return this.request("CreatePlan", req, cb)
+  }
+
+  /**
    * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
    */
   async DescribeDnsRecords(
@@ -2297,6 +2518,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyDDoSProtectionResponse) => void
   ): Promise<ModifyDDoSProtectionResponse> {
     return this.request("ModifyDDoSProtection", req, cb)
+  }
+
+  /**
+   * 查询站点下的 API 服务。
+   */
+  async DescribeSecurityAPIService(
+    req: DescribeSecurityAPIServiceRequest,
+    cb?: (error: string, rep: DescribeSecurityAPIServiceResponse) => void
+  ): Promise<DescribeSecurityAPIServiceResponse> {
+    return this.request("DescribeSecurityAPIService", req, cb)
   }
 
   /**
@@ -2327,6 +2558,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyCustomErrorPageResponse) => void
   ): Promise<ModifyCustomErrorPageResponse> {
     return this.request("ModifyCustomErrorPage", req, cb)
+  }
+
+  /**
+   * 查询四层代理实例下的转发规则列表。
+   */
+  async DescribeL4ProxyRules(
+    req: DescribeL4ProxyRulesRequest,
+    cb?: (error: string, rep: DescribeL4ProxyRulesResponse) => void
+  ): Promise<DescribeL4ProxyRulesResponse> {
+    return this.request("DescribeL4ProxyRules", req, cb)
   }
 
   /**
@@ -2361,13 +2602,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 删除自定义错误页面。
+   * 用于查询四层代理实例列表。
    */
-  async DeleteCustomErrorPage(
-    req: DeleteCustomErrorPageRequest,
-    cb?: (error: string, rep: DeleteCustomErrorPageResponse) => void
-  ): Promise<DeleteCustomErrorPageResponse> {
-    return this.request("DeleteCustomErrorPage", req, cb)
+  async DescribeL4Proxy(
+    req: DescribeL4ProxyRequest,
+    cb?: (error: string, rep: DescribeL4ProxyResponse) => void
+  ): Promise<DescribeL4ProxyResponse> {
+    return this.request("DescribeL4Proxy", req, cb)
   }
 
   /**
@@ -2388,6 +2629,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeBillingDataResponse) => void
   ): Promise<DescribeBillingDataResponse> {
     return this.request("DescribeBillingData", req, cb)
+  }
+
+  /**
+   * 根据站点 id 下唯一的模板标识，删除相应的即时转码模板。
+   */
+  async DeleteJustInTimeTranscodeTemplates(
+    req: DeleteJustInTimeTranscodeTemplatesRequest,
+    cb?: (error: string, rep: DeleteJustInTimeTranscodeTemplatesResponse) => void
+  ): Promise<DeleteJustInTimeTranscodeTemplatesResponse> {
+    return this.request("DeleteJustInTimeTranscodeTemplates", req, cb)
   }
 
   /**

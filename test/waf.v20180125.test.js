@@ -98,6 +98,16 @@ it("waf.v20180125.DeleteIpAccessControl", async function () {
     }
 })
 
+it("waf.v20180125.DeleteOwaspWhiteRule", async function () {
+    try {
+       const data = await client.DeleteOwaspWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyUserSignatureRule", async function () {
     try {
        const data = await client.ModifyUserSignatureRule({})
@@ -398,9 +408,9 @@ it("waf.v20180125.DeleteAntiInfoLeakRule", async function () {
     }
 })
 
-it("waf.v20180125.CreateAreaBanRule", async function () {
+it("waf.v20180125.CreateOwaspWhiteRule", async function () {
     try {
-       const data = await client.CreateAreaBanRule({})
+       const data = await client.CreateOwaspWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +471,16 @@ it("waf.v20180125.DescribeRuleLimit", async function () {
 it("waf.v20180125.AddAntiInfoLeakRules", async function () {
     try {
        const data = await client.AddAntiInfoLeakRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateAreaBanRule", async function () {
+    try {
+       const data = await client.CreateAreaBanRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,6 +748,16 @@ it("waf.v20180125.DescribeAttackOverview", async function () {
     }
 })
 
+it("waf.v20180125.ModifyOwaspWhiteRule", async function () {
+    try {
+       const data = await client.ModifyOwaspWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAttackWhiteRule", async function () {
     try {
        const data = await client.DescribeAttackWhiteRule({})
@@ -768,9 +798,9 @@ it("waf.v20180125.DescribePolicyStatus", async function () {
     }
 })
 
-it("waf.v20180125.DescribeSession", async function () {
+it("waf.v20180125.DescribeBotSceneList", async function () {
     try {
-       const data = await client.DescribeSession({})
+       const data = await client.DescribeBotSceneList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,6 +871,16 @@ it("waf.v20180125.ModifyProtectionStatus", async function () {
 it("waf.v20180125.DescribeCiphersDetail", async function () {
     try {
        const data = await client.DescribeCiphersDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeOwaspWhiteRules", async function () {
+    try {
+       const data = await client.DescribeOwaspWhiteRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1398,9 +1438,9 @@ it("waf.v20180125.DescribeWafAutoDenyStatus", async function () {
     }
 })
 
-it("waf.v20180125.DescribeBotSceneList", async function () {
+it("waf.v20180125.DescribeSession", async function () {
     try {
-       const data = await client.DescribeBotSceneList({})
+       const data = await client.DescribeSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

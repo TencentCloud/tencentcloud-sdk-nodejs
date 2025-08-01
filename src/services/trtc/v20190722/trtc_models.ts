@@ -4212,15 +4212,17 @@ export interface ControlAIConversationRequest {
    */
   TaskId: string
   /**
-   * 控制命令，目前支持命令如下：
-
-- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本
+   * 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话
    */
   Command: string
   /**
    * 服务端发送播报文本命令，当Command为ServerPushText时必填
    */
   ServerPushText?: ServerPushText
+  /**
+   * 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1"
+   */
+  InvokeLLM?: InvokeLLM
 }
 
 /**
@@ -4530,6 +4532,20 @@ export interface UpdatePublishCdnStreamRequest {
    * 回推房间信息
    */
   FeedBackRoomParams?: Array<McuFeedBackRoomParams>
+}
+
+/**
+ * 调用服务端主动发起请求到LLM
+ */
+export interface InvokeLLM {
+  /**
+   * 请求LLM的内容
+   */
+  Content?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
 }
 
 /**

@@ -4314,7 +4314,7 @@ export interface InternetAccessible {
    */
   BandwidthPackageId?: string
   /**
-   * 线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
+   * 线路类型。各种线路类型及支持地区详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
 
 <li>BGP：常规 BGP 线路</li>
 已开通静态单线IP白名单的用户，可选值：

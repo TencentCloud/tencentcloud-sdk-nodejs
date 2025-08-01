@@ -18,18 +18,21 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DeleteOwaspWhiteRuleRequest,
+  ModifyUserLevelResponse,
   ModifyWebshellStatusRequest,
   WafRuleLimit,
   DescribeUserClbWafRegionsResponse,
   TLSCiphers,
   AddAntiFakeUrlRequest,
-  ModifyIpAccessControlRequest,
+  DescribeOwaspWhiteRulesResponse,
   DescribeApiListVersionTwoResponse,
   GlobalSceneInfo,
   DescribePeakValueResponse,
   ProductInfo,
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
+  DescribeOwaspWhiteRulesRequest,
   ModifyUserSignatureClassResponse,
   UpdateProtectionModesResponse,
   CCRuleItem,
@@ -66,9 +69,10 @@ import {
   FreshAntiFakeUrlRequest,
   ModifyAreaBanStatusRequest,
   SpartaProtectionPort,
-  PeakPointsItem,
+  ModifyOwaspWhiteRuleRequest,
   DescribeSessionRequest,
   DescribePolicyStatusRequest,
+  ModifyIpAccessControlRequest,
   DescribeAccessFastAnalysisRequest,
   UCBActionProportion,
   DeleteIpAccessControlRequest,
@@ -148,6 +152,7 @@ import {
   BotActionScopeRuleEntry,
   AddAntiFakeUrlResponse,
   SearchAttackLogResponse,
+  ModifySpartaProtectionModeResponse,
   ModifySpartaProtectionResponse,
   DescribeUserCdcClbWafRegionsResponse,
   SwitchElasticModeResponse,
@@ -234,7 +239,7 @@ import {
   DestroyPostCKafkaFlowRequest,
   DescribeHistogramResponse,
   BatchIpAccessControlItem,
-  ModifyUserLevelResponse,
+  CreateOwaspWhiteRuleRequest,
   CreateAccessExportRequest,
   ModifyBotSceneUCBRuleResponse,
   DescribeIpHitItemsResponse,
@@ -297,6 +302,7 @@ import {
   DescribeAttackOverviewResponse,
   AddAreaBanAreasRequest,
   DescribeCCRuleListResponse,
+  PeakPointsItem,
   DescribeCCAutoStatusRequest,
   DescribeDomainDetailsClbRequest,
   TimedJob,
@@ -324,6 +330,7 @@ import {
   ModifyAntiInfoLeakRulesRequest,
   DescribeUserSignatureClassRequest,
   AccessLogInfo,
+  OwaspWhiteRule,
   CommonRspData,
   DescribeBatchIpAccessControlResponse,
   DescribeDomainDetailsSaasResponse,
@@ -403,6 +410,7 @@ import {
   ImportIpAccessControlResponse,
   AddCustomWhiteRuleRequest,
   CronJob,
+  DeleteOwaspWhiteRuleResponse,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   AddSpartaProtectionRequest,
@@ -417,7 +425,7 @@ import {
   DeleteDomainWhiteRulesRequest,
   DescribeDomainVerifyResultRequest,
   CreateDealsGoods,
-  ModifySpartaProtectionModeResponse,
+  ModifyOwaspWhiteRuleResponse,
   ModifyApiSecEventChangeResponse,
   ModifyCustomWhiteRuleStatusResponse,
   AccessFieldValueRatioInfo,
@@ -468,6 +476,7 @@ import {
   DescribeObjectsResponse,
   SearchAccessLogRequest,
   MiniExtendPkg,
+  CreateOwaspWhiteRuleResponse,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
   AccessRuleKeyValueInfo,
@@ -563,6 +572,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteIpAccessControlResponse) => void
   ): Promise<DeleteIpAccessControlResponse> {
     return this.request("DeleteIpAccessControl", req, cb)
+  }
+
+  /**
+   * 删除用户规则引擎白名单
+   */
+  async DeleteOwaspWhiteRule(
+    req: DeleteOwaspWhiteRuleRequest,
+    cb?: (error: string, rep: DeleteOwaspWhiteRuleResponse) => void
+  ): Promise<DeleteOwaspWhiteRuleResponse> {
+    return this.request("DeleteOwaspWhiteRule", req, cb)
   }
 
   /**
@@ -866,13 +885,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加（编辑）地域封禁中的地域信息
+   * 添加规则引擎白名单
    */
-  async CreateAreaBanRule(
-    req: CreateAreaBanRuleRequest,
-    cb?: (error: string, rep: CreateAreaBanRuleResponse) => void
-  ): Promise<CreateAreaBanRuleResponse> {
-    return this.request("CreateAreaBanRule", req, cb)
+  async CreateOwaspWhiteRule(
+    req: CreateOwaspWhiteRuleRequest,
+    cb?: (error: string, rep: CreateOwaspWhiteRuleResponse) => void
+  ): Promise<CreateOwaspWhiteRuleResponse> {
+    return this.request("CreateOwaspWhiteRule", req, cb)
   }
 
   /**
@@ -933,6 +952,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddAntiInfoLeakRulesResponse) => void
   ): Promise<AddAntiInfoLeakRulesResponse> {
     return this.request("AddAntiInfoLeakRules", req, cb)
+  }
+
+  /**
+   * 添加（编辑）地域封禁中的地域信息
+   */
+  async CreateAreaBanRule(
+    req: CreateAreaBanRuleRequest,
+    cb?: (error: string, rep: CreateAreaBanRuleResponse) => void
+  ): Promise<CreateAreaBanRuleResponse> {
+    return this.request("CreateAreaBanRule", req, cb)
   }
 
   /**
@@ -1197,6 +1226,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 编辑规则引擎白名单
+   */
+  async ModifyOwaspWhiteRule(
+    req: ModifyOwaspWhiteRuleRequest,
+    cb?: (error: string, rep: ModifyOwaspWhiteRuleResponse) => void
+  ): Promise<ModifyOwaspWhiteRuleResponse> {
+    return this.request("ModifyOwaspWhiteRule", req, cb)
+  }
+
+  /**
    * 获取用户规则白名单列表
    */
   async DescribeAttackWhiteRule(
@@ -1237,13 +1276,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf 会话定义查询接口
+   * 获取BOT场景列表与概览
    */
-  async DescribeSession(
-    req: DescribeSessionRequest,
-    cb?: (error: string, rep: DescribeSessionResponse) => void
-  ): Promise<DescribeSessionResponse> {
-    return this.request("DescribeSession", req, cb)
+  async DescribeBotSceneList(
+    req: DescribeBotSceneListRequest,
+    cb?: (error: string, rep: DescribeBotSceneListResponse) => void
+  ): Promise<DescribeBotSceneListResponse> {
+    return this.request("DescribeBotSceneList", req, cb)
   }
 
   /**
@@ -1314,6 +1353,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCiphersDetailResponse) => void
   ): Promise<DescribeCiphersDetailResponse> {
     return this.request("DescribeCiphersDetail", req, cb)
+  }
+
+  /**
+   * 获取规则引擎白名单列表
+   */
+  async DescribeOwaspWhiteRules(
+    req: DescribeOwaspWhiteRulesRequest,
+    cb?: (error: string, rep: DescribeOwaspWhiteRulesResponse) => void
+  ): Promise<DescribeOwaspWhiteRulesResponse> {
+    return this.request("DescribeOwaspWhiteRules", req, cb)
   }
 
   /**
@@ -1869,13 +1918,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取BOT场景列表与概览
+   * Waf 会话定义查询接口
    */
-  async DescribeBotSceneList(
-    req: DescribeBotSceneListRequest,
-    cb?: (error: string, rep: DescribeBotSceneListResponse) => void
-  ): Promise<DescribeBotSceneListResponse> {
-    return this.request("DescribeBotSceneList", req, cb)
+  async DescribeSession(
+    req: DescribeSessionRequest,
+    cb?: (error: string, rep: DescribeSessionResponse) => void
+  ): Promise<DescribeSessionResponse> {
+    return this.request("DescribeSession", req, cb)
   }
 
   /**
