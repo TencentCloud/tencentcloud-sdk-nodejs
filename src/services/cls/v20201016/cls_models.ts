@@ -2243,15 +2243,15 @@ export interface ModifyDashboardSubscribeResponse {
  */
 export interface ModifyDashboardSubscribeRequest {
   /**
-   * 仪表盘订阅id。
+   * 仪表盘订阅id。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Id。
    */
   Id: number
   /**
-   * 仪表盘id。
+   * 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。
    */
   DashboardId?: string
   /**
-   * 仪表盘订阅名称。
+   * 仪表盘订阅名称。最大支持128个字符，且不支持'|'字符。
    */
   Name?: string
   /**
@@ -2497,7 +2497,7 @@ export interface ModifyNoticeContentResponse {
  */
 export interface SearchDashboardSubscribeRequest {
   /**
-   * 仪表盘id。
+   * 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。
    */
   DashboardId: string
   /**
@@ -2505,11 +2505,11 @@ export interface SearchDashboardSubscribeRequest {
    */
   SubscribeData: DashboardSubscribeData
   /**
-   * 仪表盘订阅Id。
+   * 仪表盘订阅Id。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Id。
    */
   Id?: number
   /**
-   * 仪表盘订阅名称。
+   * 仪表盘订阅名称。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Name。
    */
   Name?: string
 }
@@ -2910,7 +2910,11 @@ export interface DeleteExportResponse {
  */
 export interface DescribeDashboardSubscribesRequest {
   /**
-   * <br><li/> dashboardId：按照【仪表盘id】进行过滤。类型：String必选：否<br><br><li/> 每次请求的Filters的上限为10，Filter.Values的上限为100。
+   * dashboardId：按照【仪表盘id】进行过滤。类型：String必选：否
+
+- 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。
+
+每次请求的Filters的上限为10，Filter.Values的上限为100。
    */
   Filters?: Array<Filter>
   /**
@@ -7305,7 +7309,7 @@ export interface MergePartitionRequest {
  */
 export interface DeleteDashboardSubscribeRequest {
   /**
-   * 仪表盘订阅记录id。
+   * 仪表盘订阅记录id。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Id。
    */
   Id: number
 }

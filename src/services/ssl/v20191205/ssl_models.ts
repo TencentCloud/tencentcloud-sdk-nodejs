@@ -6018,7 +6018,7 @@ export interface DescribeHostTeoInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
+  CertificateId?: string
   /**
    * 部署资源类型
    * @deprecated

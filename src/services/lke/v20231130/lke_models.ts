@@ -3681,6 +3681,10 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    * 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义
    */
   IsDownload?: boolean
+  /**
+   * 重复文档处理方式，按顺序匹配第一个满足条件的方式处理
+   */
+  DuplicateFileHandles?: Array<DuplicateFileHandle>
 }
 
 /**
@@ -7566,6 +7570,20 @@ export interface CreateAttributeLabelResponse {
 }
 
 /**
+ * 重复文档处理方式
+ */
+export interface DuplicateFileHandle {
+  /**
+   * 重复文档判断方式，1：按文档内容，即cos_hash字段判断是否重复
+   */
+  CheckType?: number
+  /**
+   * 重复文档处理方式，1：返回报错，2：跳过，返回重复的文档业务ID
+   */
+  HandleType?: number
+}
+
+/**
  * DescribeAppAgentList请求参数结构体
  */
 export interface DescribeAppAgentListRequest {
@@ -8091,6 +8109,10 @@ export interface SaveDocResponse {
    * 错误链接文本
    */
   ErrorLinkText?: string
+  /**
+   * 重复类型，0：未重复，其他取值请参考入参DuplicateFileHandle结构体的CheckType字段
+   */
+  DuplicateFileCheckType?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

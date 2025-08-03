@@ -530,7 +530,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可对RO组进行网络的删除操作。
+   * 可对RO组进行网络的删除操作（网络数量至少保留1个）。
    */
   async DeleteReadOnlyGroupNetworkAccess(
     req: DeleteReadOnlyGroupNetworkAccessRequest,
@@ -894,7 +894,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可对实例进行网络的删除操作。
+   * 可对实例进行网络的删除操作（实例内至少保留一个网络）。
    */
   async DeleteDBInstanceNetworkAccess(
     req: DeleteDBInstanceNetworkAccessRequest,

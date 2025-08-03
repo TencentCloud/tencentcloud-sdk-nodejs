@@ -668,7 +668,7 @@ export interface DescribeDBInstancesRequest {
    */
   VersionSet?: Array<string>
   /**
-   * 实例可用区，格式如：ap-guangzhou-2
+   * 实例可用区
    */
   Zone?: string
   /**

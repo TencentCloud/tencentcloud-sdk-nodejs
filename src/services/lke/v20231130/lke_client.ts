@@ -280,6 +280,7 @@ import {
   GetAppKnowledgeCountResponse,
   AgentKnowledgeFilterDocAndAnswer,
   CreateAttributeLabelResponse,
+  DuplicateFileHandle,
   DescribeAppAgentListRequest,
   ListAppKnowledgeDetailRequest,
   CreateQAResponse,

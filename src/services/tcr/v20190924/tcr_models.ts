@@ -2619,7 +2619,7 @@ export interface NamespaceInfoResp {
  */
 export interface CreateRepositoryPersonalRequest {
   /**
-   * 仓库名称
+   * 仓库名称，格式为 {Namespace}/{lmageName}。
    */
   RepoName: string
   /**

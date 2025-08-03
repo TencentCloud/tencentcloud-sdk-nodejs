@@ -1034,19 +1034,21 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
    * 实时日志投递任务类型，取值有：
 <li>cls: 推送到腾讯云 CLS；</li>
 <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li>
-<li>s3：推送到 AWS S3 兼容存储桶地址。</li>
+<li>s3：推送到 AWS S3 兼容存储桶地址；</li>
    */
   TaskType: string
   /**
-   * 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下：
-<li>七层域名：domain.example.com；</li>
-<li>四层代理实例：sid-2s69eb5wcms7。</li>
+   * 实时日志投递任务对应的实体列表。取值示例如下：
+<li>七层域名：domain.example.com</li>
+<li>四层代理实例：sid-2s69eb5wcms7</li>
+<li>边缘函数实例：test-zone-2mxigizoh9l9-1257626257</li>
    */
   EntityList: Array<string>
   /**
    * 数据投递类型，取值有：
 <li>domain：站点加速日志；</li>
 <li>application：四层代理日志；</li>
+<li>function：边缘函数运行日志；</li>
 <li>web-rateLiming：速率限制和 CC 攻击防护日志；</li>
 <li>web-attack：托管规则日志；</li>
 <li>web-rule：自定义规则日志；</li>
@@ -1060,7 +1062,10 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
    */
   Area: string
   /**
-   * 投递的预设字段列表。
+   * 投递的预设字段列表。取值参考：
+<li>[站点加速日志（七层访问日志）](https://cloud.tencent.com/document/product/1552/105791)</li>
+<li>[四层代理日志](https://cloud.tencent.com/document/product/1552/105792)</li>
+<li>[边缘函数运行日志](https://cloud.tencent.com/document/product/1552/115585)</li>
    */
   Fields: Array<string>
   /**

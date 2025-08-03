@@ -96,7 +96,7 @@ export interface DescribeAccountPrivilegesResponse {
  */
 export interface DescribeDatabasesRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/product/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -108,7 +108,8 @@ export interface DescribeDatabasesRequest {
    */
   Offset?: number
   /**
-   * 单次显示数量
+   * 单次显示数量。建议最大取值100。
+默认值：20
    */
   Limit?: number
 }
@@ -1141,7 +1142,7 @@ export interface ModifyDBInstanceDeploymentRequest {
  */
 export interface DeleteReadOnlyGroupNetworkAccessRequest {
   /**
-   * RO组ID，形如：pgro-4t9c6g7k。
+   * RO组ID，形如：pgrogrp-4t9c6g7k。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取
    */
   ReadOnlyGroupId: string
   /**
@@ -3292,11 +3293,11 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    */
   SecurityGroupIdSet: Array<string>
   /**
-   * 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId
+   * 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId。
    */
   DBInstanceId?: string
   /**
-   * 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId
+   * 只读组ID，可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId
    */
   ReadOnlyGroupId?: string
 }
@@ -3745,15 +3746,15 @@ export interface InquiryPriceRenewDBInstanceResponse {
   /**
    * 刊例价，单位为分。如24650表示246.5元
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 折后实际付款金额，单位为分。如24650表示246.5元
    */
-  Price: number
+  Price?: number
   /**
    * 币种。例如，CNY：人民币。
    */
-  Currency: string
+  Currency?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3929,7 +3930,7 @@ export interface DescribeClassesResponse {
  */
 export interface DeleteDBInstanceNetworkAccessRequest {
   /**
-   * 实例ID，形如：postgres-6bwgamo3。
+   * 实例ID，形如：postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
@@ -4786,11 +4787,11 @@ export interface DescribeOrdersRequest {
  */
 export interface CloseDBExtranetAccessRequest {
   /**
-   * 实例ID，形如postgres-6r233v55
+   * 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。形如postgres-6r233v55
    */
   DBInstanceId: string
   /**
-   * 是否关闭Ipv6外网，1：是，0：否
+   * 是否关闭Ipv6外网，1：是，0：否。默认值：0。
    */
   IsIpv6?: number
 }
@@ -4934,11 +4935,12 @@ export interface CreateServerlessDBInstanceRequest {
  */
 export interface InquiryPriceRenewDBInstanceRequest {
   /**
-   * 实例ID
+   * 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)获取。
+（此接口仅支持预付费实例的查询）
    */
   DBInstanceId: string
   /**
-   * 续费周期，按月计算，最大不超过48
+   * 续费周期，按月计算
    */
   Period: number
 }
@@ -4980,11 +4982,11 @@ export interface DeleteDBInstanceNetworkAccessResponse {
  */
 export interface ModifyAccountPrivilegesRequest {
   /**
-   * 实例ID。
+   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 修改此账号对某数据库对象的权限。
+   * 修改此账号对某数据库对象的权限。可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
   UserName: string
   /**

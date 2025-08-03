@@ -143,9 +143,13 @@ export interface CreateCloudRunServerRequest {
    */
   DeployInfo: DeployParam
   /**
+   * 服务配置信息(已废弃)
+   */
+  ServerConfig?: ServerBaseConfig
+  /**
    * 服务配置信息
    */
-  ServerConfig: ServerBaseConfig
+  Items?: Array<DiffConfigItem>
 }
 
 /**
@@ -296,6 +300,75 @@ export interface DeployParam {
 }
 
 /**
+ * 服务配置入参
+ */
+export interface DiffConfigItem {
+  /**
+   * 配置项 Key
+MinNum 最小副本数
+MaxNum 最大副本数
+PolicyDetails 扩缩容策略
+AccessTypes 访问类型
+TimerScale 定时扩缩容
+InternalAccess 内网访问
+OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScale
+SessionAffinity 会话亲和性 open | close
+CpuSpecs cpu 规格
+MemSpecs mem规格
+EnvParam 环境变量
+LogPath 日志采集路径
+Port 端口
+Dockerfile dockerfile 文件名
+BuildDir 目标目录
+Tag 服务标签
+LogType 日志类型 none | default | custom 
+LogSetId 日志集Id
+LogTopicId 日志主题ID
+LogParseType 日志解析类型 json ｜ line
+EntryPoint entrypoint 命令
+Cmd cmd命令
+VpcConf 网络信息
+   */
+  Key: string
+  /**
+   * 字符串类型配置项值
+InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType
+   */
+  Value?: string
+  /**
+   * int 类型配置项值
+MinNum、MaxNum、Port
+   */
+  IntValue?: number
+  /**
+   * bool 类型配置项值
+   */
+  BoolValue?: boolean
+  /**
+   * 浮点型配置项值
+CpuSpecs、MemSpecs
+   */
+  FloatValue?: number
+  /**
+   * 字符串数组配置项值
+AccessTypes，EntryPoint，Cmd
+   */
+  ArrayValue?: Array<string>
+  /**
+   * 扩缩容策略配置项值
+   */
+  PolicyDetails?: Array<HpaPolicy>
+  /**
+   * 定时扩缩容配置项值
+   */
+  TimerScale?: Array<TimerScale>
+  /**
+   * 配置内网访问时网络信息
+   */
+  VpcConf?: VpcConf
+}
+
+/**
  * OperateServerManage请求参数结构体
  */
 export interface OperateServerManageRequest {
@@ -364,13 +437,17 @@ export interface UpdateCloudRunServerRequest {
    */
   DeployInfo: DeployParam
   /**
-   * 服务配置信息
+   * 服务配置信息(已废弃)
    */
-  ServerConfig: ServerBaseConfig
+  ServerConfig?: ServerBaseConfig
   /**
    * 业务类型，默认tcr
    */
   Business?: string
+  /**
+   * 服务配置信息
+   */
+  Items?: Array<DiffConfigItem>
 }
 
 /**

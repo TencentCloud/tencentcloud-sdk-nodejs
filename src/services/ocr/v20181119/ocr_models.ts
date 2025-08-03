@@ -303,6 +303,20 @@ export interface QuotaInvoiceOCRRequest {
 }
 
 /**
+ * VinOCR返回参数结构体
+ */
+export interface VinOCRResponse {
+  /**
+   * 检测到的车辆 VIN 码。
+   */
+  Vin?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 港澳台居住证信息返回
  */
 export interface ResidencePermitInfo {
@@ -7910,17 +7924,21 @@ export interface TableInfo {
 }
 
 /**
- * VinOCR返回参数结构体
+ * 请求 id 信息
  */
-export interface VinOCRResponse {
+export interface RequestIdInfo {
   /**
-   * 检测到的车辆 VIN 码。
+   * 请求 api 的 requestid
    */
-  Vin?: string
+  ApiRequestId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 请求 api 的错误码
    */
-  RequestId?: string
+  ApiErrorCode?: string
+  /**
+   * 告警码
+   */
+  WarnCodes?: Array<number | bigint>
 }
 
 /**
@@ -9570,6 +9588,10 @@ export interface GetOCRResultResponse {
    * ocr结果
    */
   OCRResult?: OCRResult
+  /**
+   * requestid 信息
+   */
+  RequestIdInfos?: Array<RequestIdInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

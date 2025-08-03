@@ -538,6 +538,32 @@ export interface DeleteNativeSparkSessionResponse {
 }
 
 /**
+ * 引擎资源弹性伸缩计划
+ */
+export interface ElasticPlan {
+  /**
+   * 最小集群数
+   */
+  MinElasticClusters?: number
+  /**
+   * 最大集群数
+   */
+  MaxElasticClusters?: number
+  /**
+   * 最大排队时间
+   */
+  TolerableQueueTime?: number
+  /**
+   * 开始时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
+   */
+  StartTime?: string
+  /**
+   * 结束时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
+   */
+  EndTime?: string
+}
+
+/**
  * DescribeDMSPartitions请求参数结构体
  */
 export interface DescribeDMSPartitionsRequest {
@@ -950,6 +976,32 @@ export interface BatchSqlTask {
 }
 
 /**
+ * 引擎资源弹性伸缩策略
+ */
+export interface ScheduleElasticityConf {
+  /**
+   * 是否开启弹性伸缩：true/false
+   */
+  ScheduledElasticityEnabled?: boolean
+  /**
+   * 调度类型：ONCE（一次性调度），DAILY（每日调度），WEEKLY（每周调度），MONTHLY（每月调度）
+   */
+  ScheduleType?: string
+  /**
+   * 调度日期：WEEKLY传：1~7； MONTHLY传:1~31；其它类型不传
+   */
+  ScheduleDays?: Array<number | bigint>
+  /**
+   * 调度时区
+   */
+  TimeZone?: string
+  /**
+   * 弹性伸缩计划
+   */
+  ElasticPlans?: Array<ElasticPlan>
+}
+
+/**
  * CreateNotebookSession请求参数结构体
  */
 export interface CreateNotebookSessionRequest {
@@ -1106,6 +1158,10 @@ export interface UpdateDataEngineRequest {
    * Spark批作业集群Session资源配置模板
    */
   SessionResourceTemplate?: SessionResourceTemplate
+  /**
+   * 引擎资源弹性伸缩策略
+   */
+  ScheduleElasticityConf?: ScheduleElasticityConf
 }
 
 /**
@@ -5270,6 +5326,10 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAIEngine?: number
+  /**
+   * 引擎资源弹性伸缩策略
+   */
+  ScheduleElasticityConf?: ScheduleElasticityConf
 }
 
 /**
@@ -11231,6 +11291,10 @@ export interface DescribeDataEnginesRequest {
    * 引擎类型，支持：SparkSQL、SparkBatch、PrestoSQL、Kyuubi
    */
   EngineTypeDetail?: string
+  /**
+   * 默认 false, 为 true 时仅列出具有洞察 listener 的引擎
+   */
+  ListHasListener?: boolean
 }
 
 /**

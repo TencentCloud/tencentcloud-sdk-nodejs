@@ -1266,7 +1266,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBInstances)用于查询实例列表。
+   * 本接口（DescribeDBInstances）用于查询实例列表。
    */
   async DescribeDBInstances(
     req: DescribeDBInstancesRequest,

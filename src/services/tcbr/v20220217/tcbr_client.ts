@@ -31,6 +31,7 @@ import {
   DescribeCloudRunEnvsRequest,
   ReleaseGrayResponse,
   DeployParam,
+  DiffConfigItem,
   OperateServerManageRequest,
   StaticStorageInfo,
   UpdateCloudRunServerRequest,

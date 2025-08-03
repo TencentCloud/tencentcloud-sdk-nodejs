@@ -173,7 +173,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（TerminateDBInstances）可将包年包月实例退还隔离。
+   * 本接口（TerminateDBInstances）用于退还包年包月计费实例。
    */
   async TerminateDBInstances(
     req: TerminateDBInstancesRequest,
