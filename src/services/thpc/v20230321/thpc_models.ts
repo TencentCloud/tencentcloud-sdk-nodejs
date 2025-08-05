@@ -158,9 +158,9 @@ export interface DescribeInitNodeScriptsRequest {
 }
 
 /**
- * DeleteCluster返回参数结构体
+ * AddNodes返回参数结构体
  */
-export interface DeleteClusterResponse {
+export interface AddNodesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -302,6 +302,28 @@ CLOUD_PREMIUM：高性能云硬盘
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize?: number
+}
+
+/**
+ * 作业任务配置信息。
+ */
+export interface Task {
+  /**
+   * 作业任务的应用环境配置信息。
+   */
+  Application: Application
+  /**
+   * 作业任务名称。
+   */
+  TaskName?: string
+  /**
+   * 作业任务所需的节点数/副本数。
+   */
+  TaskInstanceNum?: number
+  /**
+   * 任务超时时间(单位：秒)。
+   */
+  Timeout?: number
 }
 
 /**
@@ -450,23 +472,14 @@ export interface StorageOptionOverview {
 }
 
 /**
- * ModifyWorkspacesRenewFlag请求参数结构体
+ * DescribeJobsOverview请求参数结构体
  */
-export interface ModifyWorkspacesRenewFlagRequest {
-  /**
-   * 工作空间列表
-   */
-  SpaceIds: Array<string>
-  /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-   */
-  RenewFlag: string
-}
+export type DescribeJobsOverviewRequest = null
 
 /**
- * AddNodes返回参数结构体
+ * DeleteCluster返回参数结构体
  */
-export interface AddNodesResponse {
+export interface DeleteClusterResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -526,6 +539,16 @@ export interface DescribeClustersRequest {
 <p style="padding-left: 30px;">每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。</p>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * TerminateJob请求参数结构体
+ */
+export interface TerminateJobRequest {
+  /**
+   * 作业任务ID
+   */
+  JobId: string
 }
 
 /**
@@ -660,6 +683,55 @@ export interface QueueConfigOverview {
 }
 
 /**
+ * DescribeQueues返回参数结构体
+ */
+export interface DescribeQueuesResponse {
+  /**
+   * 队列概览信息列表。
+   */
+  QueueSet?: Array<QueueOverview>
+  /**
+   * 符合条件的队列数量。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitJob请求参数结构体
+ */
+export type SubmitJobRequest = null
+
+/**
+ * 提交Job作业信息
+ */
+export interface Job {
+  /**
+   * 任务配置信息。
+   */
+  Tasks: Array<Task>
+  /**
+   * 作业名称。
+   */
+  JobName?: string
+  /**
+   * 作业描述。
+   */
+  JobDescription?: string
+  /**
+   * 作业优先级，数值越大，优先级越高，数值范围1～100。
+   */
+  Priority?: number
+  /**
+   * 描述任务的依赖关系，DAG有向无环图。
+   */
+  TaskDependencies?: Array<TaskDependence>
+}
+
+/**
  * ModifyWorkspacesRenewFlag返回参数结构体
  */
 export interface ModifyWorkspacesRenewFlagResponse {
@@ -714,6 +786,39 @@ export interface GooseFSOptionOverview {
    * 文件系统master的ip和端口。
    */
   Masters?: Array<string>
+}
+
+/**
+ * 描述CFS文件系统版本和挂载信息
+ */
+export interface CFSOption {
+  /**
+   * 文件系统本地挂载路径。
+   */
+  LocalPath: string
+  /**
+   * 文件系统远程挂载ip及路径。
+   */
+  RemotePath: string
+  /**
+   * 文件系统协议类型，默认值NFS 3.0。
+<li>NFS 3.0。
+<li>NFS 4.0。
+<li>TURBO。
+   */
+  Protocol?: string
+  /**
+   * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
+   */
+  StorageType?: string
+  /**
+   * 文件系统挂载挂载命令参数选项。
+
+- NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
+- NFS 4.0默认值：vers=4.0,noresvport
+- TURBO默认值：user_xattr
+   */
+  MountOption?: string
 }
 
 /**
@@ -792,17 +897,108 @@ export interface ExpansionNodeConfigOverview {
 }
 
 /**
- * GooseFSx存储选项概览信息。
+ * DeleteJob请求参数结构体
  */
-export interface GooseFSxOptionOverview {
+export interface DeleteJobRequest {
   /**
-   * 文件系统master的ip和端口列表。
+   * 作业任务ID
    */
-  Masters?: Array<string>
+  JobId: string
+}
+
+/**
+ * 工作空间数据盘配置
+ */
+export interface SpaceDataDisk {
   /**
-   * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
+   * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br />
+<li>
+  LOCAL_BASIC：本地硬盘<br />
+  <li>
+    LOCAL_SSD：本地SSD硬盘<br />
+    <li>
+      LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br />
+      <li>
+        LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br />
+        <li>
+          CLOUD_BASIC：普通云硬盘<br />
+          <li>
+            CLOUD_PREMIUM：高性能云硬盘<br />
+            <li>
+              CLOUD_SSD：SSD云硬盘<br />
+              <li>
+                CLOUD_HSSD：增强型SSD云硬盘<br />
+                <li>
+                  CLOUD_TSSD：极速型SSD云硬盘<br />
+                  <li>
+                    CLOUD_BSSD：通用型SSD云硬盘<br /><br />默认取值：LOCAL_BASIC。<br /><br />该参数对`ResizeInstanceDisk`接口无效。
+                  </li>
+                </li>
+              </li>
+            </li>
+          </li>
+        </li>
+      </li>
+    </li>
+  </li>
+</li>
    */
-  LocalPath?: string
+  DiskType?: string
+  /**
+   * 数据盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskId?: string
+  /**
+   * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+   */
+  DiskSize?: number
+  /**
+   * 数据盘是否随子机销毁。取值范围：
+<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li>
+<li>
+  FALSE：子机销毁时，保留数据盘<br />
+  默认取值：TRUE<br />
+  该参数目前仅用于 `RunInstances` 接口。
+</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteWithInstance?: boolean
+  /**
+   * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SnapshotId?: string
+  /**
+   * 数据盘是加密。取值范围：
+<li>true：加密</li>
+<li>
+  false：不加密<br />
+  默认取值：false<br />
+  该参数目前仅用于 `RunInstances` 接口。
+</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Encrypt?: boolean
+  /**
+   * 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。
+
+该参数目前仅用于 `CreateWorkspaces` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyId?: string
+  /**
+   * 云硬盘性能，单位：MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThroughputPerformance?: number
+  /**
+   * 突发性能
+
+注：内测中。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BurstPerformance?: boolean
 }
 
 /**
@@ -950,6 +1146,16 @@ export interface QueueOverview {
 }
 
 /**
+ * DeleteJob返回参数结构体
+ */
+export interface DeleteJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了实例登录相关配置与信息。
  */
 export interface LoginSettings {
@@ -961,6 +1167,20 @@ export interface LoginSettings {
    * 实例登录密钥
    */
   KeyIds?: Array<string>
+}
+
+/**
+ * 任务的依赖关系。
+ */
+export interface TaskDependence {
+  /**
+   * 依赖关系的起点任务名称。
+   */
+  StartTask: string
+  /**
+   * 依赖关系的终点任务名称。
+   */
+  EndTask: string
 }
 
 /**
@@ -1043,17 +1263,21 @@ export interface ClusterActivity {
 }
 
 /**
- * DescribeQueues返回参数结构体
+ * DescribeJobSubmitInfo返回参数结构体
  */
-export interface DescribeQueuesResponse {
+export interface DescribeJobSubmitInfoResponse {
   /**
-   * 队列概览信息列表。
+   * 集群ID
    */
-  QueueSet?: Array<QueueOverview>
+  ClusterId?: string
   /**
-   * 符合条件的队列数量。
+   * 队列名称
    */
-  TotalCount?: number
+  QueueName?: string
+  /**
+   * 作业信息
+   */
+  Job?: Job
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1263,6 +1487,16 @@ export interface ModifyInitNodeScriptsResponse {
 }
 
 /**
+ * 任务执行命令脚本。
+ */
+export interface CommandItem {
+  /**
+   * 脚本命令
+   */
+  Command: string
+}
+
+/**
  * 管控节点信息
  */
 export interface ManagerNode {
@@ -1305,6 +1539,30 @@ export interface ManagerNode {
 }
 
 /**
+ * DescribeJobSubmitInfo请求参数结构体
+ */
+export interface DescribeJobSubmitInfoRequest {
+  /**
+   * 作业ID
+   */
+  JobId: string
+}
+
+/**
+ * 输出重定向配置
+ */
+export interface OutputRedirect {
+  /**
+   * 输出driver类型
+   */
+  Driver?: string
+  /**
+   * 重定向配置参数
+   */
+  Options?: Array<string>
+}
+
+/**
  * ModifyWorkspacesAttribute请求参数结构体
  */
 export interface ModifyWorkspacesAttributeRequest {
@@ -1332,6 +1590,55 @@ export interface Filter {
    * 字段的过滤值。
    */
   Values: Array<string>
+}
+
+/**
+ * 容器配置信息。
+ */
+export interface Docker {
+  /**
+   * 容器镜像地址
+   */
+  Image: string
+  /**
+   * 容器运行参数
+   */
+  RunArgs?: Array<string>
+}
+
+/**
+ * 任务的应用环境配置信息。
+ */
+export interface Application {
+  /**
+   * 待执行脚本命令。
+   */
+  Commands: Array<CommandItem>
+  /**
+   * 存储目录挂载配置。
+   */
+  StorageMounts?: Array<StorageMount>
+  /**
+   * 用户自定义环境变量。
+   */
+  EnvVars?: Array<EnvVar>
+  /**
+   * 容器配置信息。
+   */
+  Docker?: Docker
+  /**
+   * 无
+   */
+  OutputRedirect?: OutputRedirect
+  /**
+   * 表示所选训练框架，支持可选参数
+ 
+- PyTorch：表示提交PyTorch训练作业
+- Custom：表示用户自定义作业
+
+默认参数为：Custom
+   */
+  JobType?: string
 }
 
 /**
@@ -1480,6 +1787,16 @@ export interface DeleteClusterStorageOptionResponse {
 }
 
 /**
+ * TerminateJob返回参数结构体
+ */
+export interface TerminateJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了工作空间的公网可访问性，声明了工作空间的公网使用计费模式，最大带宽等
  */
 export interface SpaceInternetAccessible {
@@ -1506,98 +1823,39 @@ export interface SpaceInternetAccessible {
 }
 
 /**
- * 工作空间数据盘配置
+ * DescribeJobs请求参数结构体
  */
-export interface SpaceDataDisk {
+export interface DescribeJobsRequest {
   /**
-   * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br />
-<li>
-  LOCAL_BASIC：本地硬盘<br />
-  <li>
-    LOCAL_SSD：本地SSD硬盘<br />
-    <li>
-      LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br />
-      <li>
-        LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br />
-        <li>
-          CLOUD_BASIC：普通云硬盘<br />
-          <li>
-            CLOUD_PREMIUM：高性能云硬盘<br />
-            <li>
-              CLOUD_SSD：SSD云硬盘<br />
-              <li>
-                CLOUD_HSSD：增强型SSD云硬盘<br />
-                <li>
-                  CLOUD_TSSD：极速型SSD云硬盘<br />
-                  <li>
-                    CLOUD_BSSD：通用型SSD云硬盘<br /><br />默认取值：LOCAL_BASIC。<br /><br />该参数对`ResizeInstanceDisk`接口无效。
-                  </li>
-                </li>
-              </li>
-            </li>
-          </li>
-        </li>
-      </li>
-    </li>
-  </li>
-</li>
+   * 作业任务ID列表
    */
-  DiskType?: string
+  JobIds?: Array<string>
   /**
-   * 数据盘
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤列表
    */
-  DiskId?: string
+  Filters?: Array<Filter>
   /**
-   * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+   * 偏移量，默认为0。 关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
-  DiskSize?: number
+  Offset?: number
   /**
-   * 数据盘是否随子机销毁。取值范围：
-<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li>
-<li>
-  FALSE：子机销毁时，保留数据盘<br />
-  默认取值：TRUE<br />
-  该参数目前仅用于 `RunInstances` 接口。
-</li>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
-  DeleteWithInstance?: boolean
-  /**
-   * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SnapshotId?: string
-  /**
-   * 数据盘是加密。取值范围：
-<li>true：加密</li>
-<li>
-  false：不加密<br />
-  默认取值：false<br />
-  该参数目前仅用于 `RunInstances` 接口。
-</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Encrypt?: boolean
-  /**
-   * 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。
+  Limit?: number
+}
 
-该参数目前仅用于 `CreateWorkspaces` 接口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KmsKeyId?: string
+/**
+ * GooseFSx存储选项概览信息。
+ */
+export interface GooseFSxOptionOverview {
   /**
-   * 云硬盘性能，单位：MB/s
-注意：此字段可能返回 null，表示取不到有效值。
+   * 文件系统master的ip和端口列表。
    */
-  ThroughputPerformance?: number
+  Masters?: Array<string>
   /**
-   * 突发性能
-
-注：内测中。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
    */
-  BurstPerformance?: boolean
+  LocalPath?: string
 }
 
 /**
@@ -1628,6 +1886,16 @@ true：发送检查请求，不会绑定弹性伸缩组。检查项包括是否�
 false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩组。
    */
   DryRun?: boolean
+}
+
+/**
+ * SubmitJob返回参数结构体
+ */
+export interface SubmitJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1735,36 +2003,27 @@ export interface LoginNode {
 }
 
 /**
- * 描述CFS文件系统版本和挂载信息
+ * DescribeJobsOverview返回参数结构体
  */
-export interface CFSOption {
+export interface DescribeJobsOverviewResponse {
   /**
-   * 文件系统本地挂载路径。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LocalPath: string
-  /**
-   * 文件系统远程挂载ip及路径。
-   */
-  RemotePath: string
-  /**
-   * 文件系统协议类型，默认值NFS 3.0。
-<li>NFS 3.0。
-<li>NFS 4.0。
-<li>TURBO。
-   */
-  Protocol?: string
-  /**
-   * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
-   */
-  StorageType?: string
-  /**
-   * 文件系统挂载挂载命令参数选项。
+  RequestId?: string
+}
 
-- NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
-- NFS 4.0默认值：vers=4.0,noresvport
-- TURBO默认值：user_xattr
+/**
+ * ModifyWorkspacesRenewFlag请求参数结构体
+ */
+export interface ModifyWorkspacesRenewFlagRequest {
+  /**
+   * 工作空间列表
    */
-  MountOption?: string
+  SpaceIds: Array<string>
+  /**
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   */
+  RenewFlag: string
 }
 
 /**
@@ -1987,6 +2246,24 @@ export interface DescribeClusterActivitiesRequest {
 }
 
 /**
+ * DescribeJobs返回参数结构体
+ */
+export interface DescribeJobsResponse {
+  /**
+   * 作业任务概览列表
+   */
+  JobSet?: Array<JobView>
+  /**
+   * 符合条件的作业任务数量。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddNodes请求参数结构体
  */
 export interface AddNodesRequest {
@@ -2195,6 +2472,24 @@ export interface DescribeAutoScalingConfigurationRequest {
 }
 
 /**
+ * 存储目录挂载配置。
+ */
+export interface StorageMount {
+  /**
+   * 挂载源
+   */
+  Source: string
+  /**
+   * 目标挂载位置
+   */
+  Target: string
+  /**
+   * 挂载的存储类型，目前仅支持：local
+   */
+  StorageType?: string
+}
+
+/**
  * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
  */
 export interface InternetAccessible {
@@ -2213,6 +2508,68 @@ BANDWIDTH_PACKAGE：带宽包用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetMaxBandwidthOut?: number
+}
+
+/**
+ * 作业概览信息
+ */
+export interface JobView {
+  /**
+   * 作业ID
+   */
+  JobId?: string
+  /**
+   * 作业名称
+   */
+  JobName?: string
+  /**
+   * 作业描述
+   */
+  JobDescription?: string
+  /**
+   * 作业优先级
+   */
+  Priority?: number
+  /**
+   * 作业状态，包括CREATED, QUEING, STARTNG, RUNING, TERMINATING, TERMINATED, SUCCESS, 
+FAILED
+
+   */
+  JobState?: string
+  /**
+   * 作业所属集群ID
+   */
+  ClusterId?: string
+  /**
+   * 作业所属队列名称
+   */
+  QueueName?: string
+  /**
+   * 完成作业任务所需资源
+   */
+  OccupyResources?: string
+  /**
+   * 作业任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 作业任务结束时间
+   */
+  EndTime?: string
+}
+
+/**
+ * 用户自定义环境变量。
+ */
+export interface EnvVar {
+  /**
+   * ENV
+   */
+  Name: string
+  /**
+   * test
+   */
+  Value: string
 }
 
 /**

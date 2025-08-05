@@ -679,7 +679,9 @@ export interface DescribeWebCallbacksResponse {
  */
 export interface CreateLogsetRequest {
   /**
-   * 日志集名字，不能重名
+   * 日志集名字。
+
+- 最大支持255个字符。不支持`|`字符。
    */
   LogsetName: string
   /**
@@ -1589,7 +1591,8 @@ export interface FilePathInfo {
  */
 export interface DescribeIndexRequest {
   /**
-   * 日志主题ID
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
 }
@@ -2421,11 +2424,11 @@ export interface DescribeAlarmShieldsRequest {
  */
 export interface ModifyLogsetRequest {
   /**
-   * 日志集ID
+   * 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
    */
   LogsetId: string
   /**
-   * 日志集名称
+   * 日志集名字。- 最大支持255个字符。不支持`|`字符。
    */
   LogsetName?: string
   /**
@@ -3489,7 +3492,8 @@ export interface DescribeConsumerRequest {
  */
 export interface CreateIndexRequest {
   /**
-   * 日志主题ID
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
   /**
@@ -4077,7 +4081,8 @@ tag:tagKey
  */
 export interface DeleteIndexRequest {
   /**
-   * 日志主题ID
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
 }
@@ -4360,7 +4365,7 @@ export interface LogsetInfo {
    */
   LogsetName?: string
   /**
-   * 创建时间
+   * 创建时间。格式 `YYYY-MM-DD HH:MM:SS`
    */
   CreateTime?: string
   /**
@@ -7523,7 +7528,7 @@ export interface DescribeScheduledSqlInfoRequest {
  */
 export interface DeleteLogsetRequest {
   /**
-   * 日志集ID
+   * 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
    */
   LogsetId: string
 }
@@ -7973,11 +7978,12 @@ export interface DeleteCosRechargeResponse {
  */
 export interface DescribeIndexResponse {
   /**
-   * 日志主题ID
+   * 日志主题Id
    */
   TopicId?: string
   /**
-   * 是否生效
+   * 索引状态。true：开启状态，false：关闭状态
+开启后可对日志进行检索分析，将产生索引流量、索引存储及相应费用。[费用详情](https://cloud.tencent.com/document/product/614/45802#.E8.AE.A1.E8.B4.B9.E9.A1.B9)
    */
   Status?: boolean
   /**
@@ -7986,7 +7992,7 @@ export interface DescribeIndexResponse {
    */
   Rule?: RuleInfo
   /**
-   * 索引修改时间，初始值为索引创建时间。
+   * 索引修改时间，初始值为索引创建时间。格式 `YYYY-MM-DD HH:MM:SS`
    */
   ModifyTime?: string
   /**
@@ -8323,11 +8329,12 @@ export interface DescribeLogsetsRequest {
 - 按照【日志集名称】进行过滤。
 - 类型：String
 - 必选：否
-
+- 通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集名称。
 logsetId
 - 按照【日志集ID】进行过滤。
 - 类型：String
 - 必选：否
+- 通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
 
 tagKey
 - 按照【标签键】进行过滤。

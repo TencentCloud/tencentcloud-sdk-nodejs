@@ -474,10 +474,12 @@ export interface RocketMQGroup {
   ConsumerNum?: number
   /**
    * 消费TPS
+   * @deprecated
    */
   TPS?: number
   /**
    * 总堆积数量
+   * @deprecated
    */
   TotalAccumulative?: number
   /**
@@ -539,6 +541,10 @@ export interface RocketMQGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
+  /**
+   * 订阅的主题个数
+   */
+  SubscribeTopicNum?: number
 }
 
 /**
@@ -7375,6 +7381,28 @@ export interface RocketMQClusterInfo {
    * 是否已冻结
    */
   IsFrozen?: boolean
+  /**
+   * 是否开启自动创建主题
+   */
+  AutoCreateTopicEnabled?: boolean
+  /**
+   * 是否开启集群Admin能力
+   */
+  AdminFeatureEnabled?: boolean
+  /**
+   * Admin AK
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminAccessKey?: string
+  /**
+   * Admin SK
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminSecretKey?: string
+  /**
+   * 是否开启删除保护
+   */
+  EnableDeletionProtection?: boolean
 }
 
 /**

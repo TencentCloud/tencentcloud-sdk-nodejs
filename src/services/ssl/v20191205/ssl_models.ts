@@ -3634,6 +3634,22 @@ export interface DescribeManagerDetailResponse {
    */
   StatusInfo?: Array<ManagerStatusInfo>
   /**
+   * 管理员证件类型，SFZ代表身份证，HZ代表护照
+   */
+  ManagerIdType?: string
+  /**
+   * 管理员证件号码
+   */
+  ManagerIdNumber?: string
+  /**
+   * 联系人证件类型，SFZ代表身份证，HZ代表护照
+   */
+  ContactIdType?: string
+  /**
+   * 联系人证件号码
+   */
+  ContactIdNumber?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

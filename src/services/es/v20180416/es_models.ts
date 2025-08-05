@@ -817,52 +817,44 @@ export interface DescribeInstanceOperationsResponse {
 }
 
 /**
- * Logstash管道信息
+ * 索引自治字段
  */
-export interface LogstashPipeline {
+export interface IndexOptionsField {
   /**
-   * 管道ID
-   */
-  PipelineId?: string
-  /**
-   * 管道描述信息
+   * 过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PipelineDesc?: string
+  ExpireMaxAge?: string
   /**
-   * 管道配置内容
-   */
-  Config?: string
-  /**
-   * 管道的Worker数量
+   * 过期大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Workers?: number
+  ExpireMaxSize?: string
   /**
-   * 管道批处理大小
+   * 滚动周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchSize?: number
+  RolloverMaxAge?: string
   /**
-   * 管道批处理延迟
+   * 是否开启动态滚动
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchDelay?: number
+  RolloverDynamic?: string
   /**
-   * 管道缓冲队列类型
+   * 是否开启动态分片
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueType?: string
+  ShardNumDynamic?: string
   /**
-   * 管道缓冲队列大小
+   * 时间分区字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueMaxBytes?: string
+  TimestampField?: string
   /**
-   * 管道缓冲队列检查点写入数
+   * 写入模式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueCheckPointWrites?: number
+  WriteMode?: string
 }
 
 /**
@@ -973,44 +965,44 @@ export interface DescribeLogstashInstancesRequest {
 }
 
 /**
- * 索引自治字段
+ * cvm 自动扩盘参数
  */
-export interface IndexOptionsField {
+export interface AutoScaleDiskInfo {
   /**
-   * 过期时间
+   * 节点类型 hotData,warmData
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireMaxAge?: string
+  NodeType?: string
   /**
-   * 过期大小
+   * 0:百分比扩容;1:绝对值扩容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireMaxSize?: string
+  ScaleType?: number
   /**
-   * 滚动周期
+   * 触发阈值,单位%,例如80%
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RolloverMaxAge?: string
+  Threshold?: number
   /**
-   * 是否开启动态滚动
+   * 触发持续时间,单位分钟,例如60
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RolloverDynamic?: string
+  Duration?: number
   /**
-   * 是否开启动态分片
+   * 每次扩容比例,单位%,例如20%
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShardNumDynamic?: string
+  PercentSize?: number
   /**
-   * 时间分区字段
+   * 绝对值扩容,单位GB,例如100GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimestampField?: string
+  FixSize?: number
   /**
-   * 写入模式
+   * 扩容上限,单位GB,例如500GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WriteMode?: string
+  MaxSize?: number
 }
 
 /**
@@ -1315,6 +1307,10 @@ export interface Operation {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubAccountUin?: string
+  /**
+   * 自动扩容标识：0-非自动，1-自动
+   */
+  AutoScaleTag?: number
 }
 
 /**
@@ -1367,6 +1363,55 @@ export interface InstanceLog {
    * 集群节点ID
    */
   NodeID?: string
+}
+
+/**
+ * Logstash管道信息
+ */
+export interface LogstashPipeline {
+  /**
+   * 管道ID
+   */
+  PipelineId?: string
+  /**
+   * 管道描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PipelineDesc?: string
+  /**
+   * 管道配置内容
+   */
+  Config?: string
+  /**
+   * 管道的Worker数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Workers?: number
+  /**
+   * 管道批处理大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BatchSize?: number
+  /**
+   * 管道批处理延迟
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BatchDelay?: number
+  /**
+   * 管道缓冲队列类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueType?: string
+  /**
+   * 管道缓冲队列大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueMaxBytes?: string
+  /**
+   * 管道缓冲队列检查点写入数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueCheckPointWrites?: number
 }
 
 /**
@@ -3149,6 +3194,14 @@ export interface CreateInstanceRequest {
    * 置放群组开启异步任务的可维护时间段
    */
   EnableScheduleOperationDuration?: EnableScheduleOperationDuration
+  /**
+   * 自动扩盘参数列表
+   */
+  AutoScaleDiskInfoList?: Array<AutoScaleDiskInfo>
+  /**
+   * 是否开启kibana公网访问，不传默认开启
+   */
+  EnableKibanaPublicAccess?: string
 }
 
 /**
@@ -5137,6 +5190,14 @@ CLOSE 关闭
    * 开启集群保护：OPEN-开启，CLOSE-关闭
    */
   EnableDestroyProtection?: string
+  /**
+   * 自动扩盘参数
+   */
+  AutoScaleDiskInfoList?: Array<AutoScaleDiskInfo>
+  /**
+   * 自动扩盘删除参数
+   */
+  AutoScaleDiskDeleteNodeTypeList?: Array<string>
 }
 
 /**

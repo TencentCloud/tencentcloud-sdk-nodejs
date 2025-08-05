@@ -3138,6 +3138,8 @@ export interface DescribeMediaProcessUsageDataRequest {
 <li>VoiceTranslation: 语音翻译</li>
 <li>JITTranscoding: 即时转码</li>
 <li>VideoSnapshot: 视频截图</li>
+<li>JITEncryption: 即时加密</li>
+
    */
   Type?: string
 }
@@ -4926,6 +4928,7 @@ export interface TaskStatData {
 <li>VoiceTranslation: 语音翻译</li>
 <li>JITTranscoding: 即时转码</li>
 <li>VideoSnapshot: 视频截图</li>
+<li>JITEncryption: 即时加密</li>
    */
   TaskType?: string
   /**
@@ -19118,8 +19121,9 @@ export interface DescribeLicenseUsageDataRequest {
    */
   EndTime: string
   /**
-   * License 类型，默认为 DRM 。目前支持的 License 类型包括：
-<li> DRM: DRM 加密播放 License</li>
+   * License 类型，默认为 CommercialDRMLicense 。目前支持的 License 类型包括：
+<li> CommercialDRMLicense: 商业级 DRM License</li>
+<li> JITEncryptionDRMLicense: 即时加密 DRM License</li>
    */
   LicenseType?: string
   /**

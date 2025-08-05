@@ -356,6 +356,15 @@ export interface ConsumeGroupItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FullNamespaceV4?: string
+  /**
+   * 订阅的主题个数
+   */
+  SubscribeTopicNum?: number
+  /**
+   * 1753153590
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
 }
 
 /**
@@ -2860,6 +2869,18 @@ export interface DescribeConsumerGroupListRequest {
    * 查询指定主题下的消费组
    */
   FromTopic?: string
+  /**
+   * 按照指定字段排序，枚举值如下：
+- subscribeNum：订阅 Topic 个数
+   */
+  SortedBy?: string
+  /**
+   * 按升序或降序排列，枚举值如下：
+
+- asc：升序
+- desc：降序
+   */
+  SortOrder?: string
 }
 
 /**

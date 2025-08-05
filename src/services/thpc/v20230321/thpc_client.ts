@@ -21,7 +21,7 @@ import {
   ClusterOverview,
   NodeOverview,
   DescribeInitNodeScriptsRequest,
-  DeleteClusterResponse,
+  AddNodesResponse,
   ExpansionNodeConfig,
   NodeActivity,
   CreateWorkspacesResponse,
@@ -29,6 +29,7 @@ import {
   ManagerNodeOverview,
   DeleteClusterRequest,
   SystemDisk,
+  Task,
   TerminateWorkspacesResponse,
   ModifyInitNodeScriptsRequest,
   AttachNodesRequest,
@@ -37,24 +38,30 @@ import {
   Tag,
   GooseFSOption,
   StorageOptionOverview,
-  ModifyWorkspacesRenewFlagRequest,
-  AddNodesResponse,
+  DescribeJobsOverviewRequest,
+  DeleteClusterResponse,
   DescribeAutoScalingConfigurationResponse,
   DescribeClustersRequest,
+  TerminateJobRequest,
   TagSpecification,
   DeleteNodesResponse,
   AddClusterStorageOptionResponse,
   DescribeWorkspacesRequest,
   AddQueueRequest,
   QueueConfigOverview,
+  DescribeQueuesResponse,
+  SubmitJobRequest,
+  Job,
   ModifyWorkspacesRenewFlagResponse,
   Placement,
   DescribeNodesResponse,
   GooseFSOptionOverview,
+  CFSOption,
   DeleteClusterStorageOptionRequest,
   RunMonitorServiceEnabled,
   ExpansionNodeConfigOverview,
-  GooseFSxOptionOverview,
+  DeleteJobRequest,
+  SpaceDataDisk,
   DetachNodesResponse,
   DescribeClusterStorageOptionRequest,
   StorageOption,
@@ -66,11 +73,13 @@ import {
   DeleteQueueResponse,
   DataDisk,
   QueueOverview,
+  DeleteJobResponse,
   LoginSettings,
+  TaskDependence,
   EnhancedService,
   RunAutomationServiceEnabled,
   ClusterActivity,
-  DescribeQueuesResponse,
+  DescribeJobSubmitInfoResponse,
   CreateClusterResponse,
   RunSecurityServiceEnabled,
   DescribeQueuesRequest,
@@ -80,27 +89,37 @@ import {
   DescribeClusterStorageOptionResponse,
   NodeScript,
   ModifyInitNodeScriptsResponse,
+  CommandItem,
   ManagerNode,
+  DescribeJobSubmitInfoRequest,
+  OutputRedirect,
   ModifyWorkspacesAttributeRequest,
   Filter,
+  Docker,
+  Application,
   SpaceInfo,
   TerminateWorkspacesRequest,
   ComputeNode,
   DeleteNodesRequest,
   DeleteClusterStorageOptionResponse,
+  TerminateJobResponse,
   SpaceInternetAccessible,
-  SpaceDataDisk,
+  DescribeJobsRequest,
+  GooseFSxOptionOverview,
   SetAutoScalingConfigurationRequest,
+  SubmitJobResponse,
   DescribeNodesRequest,
   DetachNodesRequest,
   AttachNodesResponse,
   LoginNode,
-  CFSOption,
+  DescribeJobsOverviewResponse,
+  ModifyWorkspacesRenewFlagRequest,
   CreateWorkspacesRequest,
   SpaceSystemDisk,
   ComputeNodeOverview,
   QueueConfig,
   DescribeClusterActivitiesRequest,
+  DescribeJobsResponse,
   AddNodesRequest,
   CFSOptionOverview,
   DeleteQueueRequest,
@@ -109,7 +128,10 @@ import {
   SpacePlacement,
   VirtualPrivateCloud,
   DescribeAutoScalingConfigurationRequest,
+  StorageMount,
   InternetAccessible,
+  JobView,
+  EnvVar,
   InstanceChargePrepaid,
 } from "./thpc_models"
 
@@ -120,6 +142,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("thpc.tencentcloudapi.com", "2023-03-21", clientConfig)
+  }
+
+  /**
+   * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
+   */
+  async DescribeAutoScalingConfiguration(
+    req: DescribeAutoScalingConfigurationRequest,
+    cb?: (error: string, rep: DescribeAutoScalingConfigurationResponse) => void
+  ): Promise<DescribeAutoScalingConfigurationResponse> {
+    return this.request("DescribeAutoScalingConfiguration", req, cb)
   }
 
   /**
@@ -195,13 +227,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
+   * 本接口 (DescribeJobs) 用于查询作业任务列表信息。
    */
-  async DetachNodes(
-    req: DetachNodesRequest,
-    cb?: (error: string, rep: DetachNodesResponse) => void
-  ): Promise<DetachNodesResponse> {
-    return this.request("DetachNodes", req, cb)
+  async DescribeJobs(
+    req: DescribeJobsRequest,
+    cb?: (error: string, rep: DescribeJobsResponse) => void
+  ): Promise<DescribeJobsResponse> {
+    return this.request("DescribeJobs", req, cb)
   }
 
   /**
@@ -212,6 +244,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterResponse) => void
   ): Promise<DeleteClusterResponse> {
     return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
+   * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
+   */
+  async DetachNodes(
+    req: DetachNodesRequest,
+    cb?: (error: string, rep: DetachNodesResponse) => void
+  ): Promise<DetachNodesResponse> {
+    return this.request("DetachNodes", req, cb)
   }
 
   /**
@@ -232,6 +274,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWorkspacesResponse) => void
   ): Promise<DescribeWorkspacesResponse> {
     return this.request("DescribeWorkspaces", req, cb)
+  }
+
+  /**
+   * 本接口 (TerminateJob) 用于终止一个作业任务。
+   */
+  async TerminateJob(
+    req: TerminateJobRequest,
+    cb?: (error: string, rep: TerminateJobResponse) => void
+  ): Promise<TerminateJobResponse> {
+    return this.request("TerminateJob", req, cb)
   }
 
   /**
@@ -297,13 +349,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
+   * 本接口用于查询作业的提交信息。
    */
-  async DescribeAutoScalingConfiguration(
-    req: DescribeAutoScalingConfigurationRequest,
-    cb?: (error: string, rep: DescribeAutoScalingConfigurationResponse) => void
-  ): Promise<DescribeAutoScalingConfigurationResponse> {
-    return this.request("DescribeAutoScalingConfiguration", req, cb)
+  async DescribeJobSubmitInfo(
+    req: DescribeJobSubmitInfoRequest,
+    cb?: (error: string, rep: DescribeJobSubmitInfoResponse) => void
+  ): Promise<DescribeJobSubmitInfoResponse> {
+    return this.request("DescribeJobSubmitInfo", req, cb)
   }
 
   /**
@@ -314,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterActivitiesResponse) => void
   ): Promise<DescribeClusterActivitiesResponse> {
     return this.request("DescribeClusterActivities", req, cb)
+  }
+
+  /**
+   * 本接口 (SubmitJob) 用于提交一个作业任务。
+   */
+  async SubmitJob(
+    req?: SubmitJobRequest,
+    cb?: (error: string, rep: SubmitJobResponse) => void
+  ): Promise<SubmitJobResponse> {
+    return this.request("SubmitJob", req, cb)
   }
 
   /**
@@ -344,6 +406,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddClusterStorageOptionResponse) => void
   ): Promise<AddClusterStorageOptionResponse> {
     return this.request("AddClusterStorageOption", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeJobs) 用于查询作业任务列表信息。
+   */
+  async DescribeJobsOverview(
+    req?: DescribeJobsOverviewRequest,
+    cb?: (error: string, rep: DescribeJobsOverviewResponse) => void
+  ): Promise<DescribeJobsOverviewResponse> {
+    return this.request("DescribeJobsOverview", req, cb)
+  }
+
+  /**
+   * 本接口 (DeleteJob) 用于删除一个作业任务。
+   */
+  async DeleteJob(
+    req: DeleteJobRequest,
+    cb?: (error: string, rep: DeleteJobResponse) => void
+  ): Promise<DeleteJobResponse> {
+    return this.request("DeleteJob", req, cb)
   }
 
   /**

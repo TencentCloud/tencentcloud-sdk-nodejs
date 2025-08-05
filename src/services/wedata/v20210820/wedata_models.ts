@@ -16374,6 +16374,10 @@ export interface CreateTaskNewRequest {
    */
   TaskType: number
   /**
+   * （必填参数）指定脚本内容，base64编码
+   */
+  Content: string
+  /**
    * 扩展属性
    */
   TaskExt?: Array<TaskExtInfo>
@@ -16397,10 +16401,6 @@ export interface CreateTaskNewRequest {
    * 工作流目录ID
    */
   TaskFolderId?: string
-  /**
-   * （必填参数）指定脚本内容，base64编码
-   */
-  Content?: string
   /**
    * 代码模板ID
    */

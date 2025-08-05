@@ -18,6 +18,16 @@ const client = new tencentcloud.thpc.v20230321.Client({
 })
 describe("thpc.v20230321.test.js", function () {
 
+it("thpc.v20230321.DescribeAutoScalingConfiguration", async function () {
+    try {
+       const data = await client.DescribeAutoScalingConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.DeleteNodes", async function () {
     try {
        const data = await client.DeleteNodes({})
@@ -88,9 +98,9 @@ it("thpc.v20230321.AddNodes", async function () {
     }
 })
 
-it("thpc.v20230321.DetachNodes", async function () {
+it("thpc.v20230321.DescribeJobs", async function () {
     try {
-       const data = await client.DetachNodes({})
+       const data = await client.DescribeJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +111,16 @@ it("thpc.v20230321.DetachNodes", async function () {
 it("thpc.v20230321.DeleteCluster", async function () {
     try {
        const data = await client.DeleteCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.DetachNodes", async function () {
+    try {
+       const data = await client.DetachNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +141,16 @@ it("thpc.v20230321.DeleteClusterStorageOption", async function () {
 it("thpc.v20230321.DescribeWorkspaces", async function () {
     try {
        const data = await client.DescribeWorkspaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.TerminateJob", async function () {
+    try {
+       const data = await client.TerminateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +218,9 @@ it("thpc.v20230321.AttachNodes", async function () {
     }
 })
 
-it("thpc.v20230321.DescribeAutoScalingConfiguration", async function () {
+it("thpc.v20230321.DescribeJobSubmitInfo", async function () {
     try {
-       const data = await client.DescribeAutoScalingConfiguration({})
+       const data = await client.DescribeJobSubmitInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +231,16 @@ it("thpc.v20230321.DescribeAutoScalingConfiguration", async function () {
 it("thpc.v20230321.DescribeClusterActivities", async function () {
     try {
        const data = await client.DescribeClusterActivities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.SubmitJob", async function () {
+    try {
+       const data = await client.SubmitJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +271,26 @@ it("thpc.v20230321.ModifyInitNodeScripts", async function () {
 it("thpc.v20230321.AddClusterStorageOption", async function () {
     try {
        const data = await client.AddClusterStorageOption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.DescribeJobsOverview", async function () {
+    try {
+       const data = await client.DescribeJobsOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.DeleteJob", async function () {
+    try {
+       const data = await client.DeleteJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
