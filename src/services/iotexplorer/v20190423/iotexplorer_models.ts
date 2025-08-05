@@ -1184,6 +1184,10 @@ export interface ModifyTWeSeeConfigRequest {
    * 配置参数，不传则不修改
    */
   Config?: string
+  /**
+   * 视频摘要配置参数，不传则不修改
+   */
+  SummaryConfig?: VisionSummaryConfig
 }
 
 /**
@@ -2806,7 +2810,7 @@ export interface DescribeStudioProductResponse {
  */
 export interface VisionRecognitionResult {
   /**
-   * 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功）
+   * 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功；4：执行中）
    */
   Status?: number
   /**
@@ -2820,7 +2824,6 @@ export interface VisionRecognitionResult {
 - `smoke`：烟雾
 - `package`：快递包裹
 - `license_plate`：车牌
-
    */
   DetectedClassifications?: Array<string>
   /**
@@ -2831,6 +2834,13 @@ export interface VisionRecognitionResult {
    * 摘要文本（次选语言）
    */
   AlternativeSummary?: string
+  /**
+   * 错误码，可能取值：
+
+- `DownloadFailed`：下载视频/图片文件失败
+- `ReadFailed`：读取视频/图片文件失败
+   */
+  ErrorCode?: string
 }
 
 /**
@@ -4264,6 +4274,10 @@ export interface CreateTWeSeeRecognitionTaskRequest {
 - `immediate`：立即
    */
   SummaryQOS?: string
+  /**
+   * 摘要输出配置
+   */
+  SummaryConfig?: VisionSummaryConfig
 }
 
 /**
@@ -4560,6 +4574,10 @@ export interface InvokeTWeSeeRecognitionTaskRequest {
 - `immediate`：立即
    */
   SummaryQOS?: string
+  /**
+   * 摘要输出配置
+   */
+  SummaryConfig?: VisionSummaryConfig
 }
 
 /**
@@ -6430,6 +6448,56 @@ export interface DescribeTWeSeeConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频摘要配置
+ */
+export interface VisionSummaryConfig {
+  /**
+   * 主输出语言
+
+支持列表如下：
+zh 中文
+en 英语
+ja 日语
+ko 韩文
+pt-BR 葡萄牙语（巴西）
+th 泰语
+
+   */
+  OutputLang?: string
+  /**
+   * 可选输出语言
+
+支持列表如下：
+zh 中文
+en 英语
+ja 日语
+ko 韩文
+pt-BR 葡萄牙语（巴西）
+th 泰语
+
+   */
+  AlternativeOutputLang?: string
+  /**
+   * 多摄像头布局定义。可能取值：
+
+- 单摄（默认值）：`Single`
+
+- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`
+- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`
+- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`
+
+- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`
+- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`
+- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`
+- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`
+- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`
+- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`
+- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2`
+   */
+  MultiCameraLayout?: string
 }
 
 /**

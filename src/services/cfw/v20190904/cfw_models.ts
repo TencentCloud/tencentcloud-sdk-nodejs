@@ -200,8 +200,7 @@ Type为5，域名模板eg：www.qq.com,www.tencent.com
    */
   IpString: string
   /**
-   * 1 ip模板
-5 域名模板
+   * 1 ip模板  5 域名模板
    */
   Type: number
   /**
@@ -400,20 +399,6 @@ export interface DescribeNatAcRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyBlockTop请求参数结构体
- */
-export interface ModifyBlockTopRequest {
-  /**
-   * 操作类型 1 置顶 0取消
-   */
-  OpeType: string
-  /**
-   * 记录id
-   */
-  UniqueId: string
 }
 
 /**
@@ -1713,14 +1698,21 @@ drop：拒绝
 }
 
 /**
- * DeleteIdsWhiteRule请求参数结构体
+ * DeleteSecurityGroupRule返回参数结构体
  */
-export interface DeleteIdsWhiteRuleRequest {
+export interface DeleteSecurityGroupRuleResponse {
   /**
-   * 入侵防御白名单id
-参考DescribeIdsWhiteRule接口返回的Id字段
+   * 状态值，0：成功，非0：失败
    */
-  Id: number
+  Status?: number
+  /**
+   * 返回多余的信息
+   */
+  Info?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2505,110 +2497,6 @@ export interface DescribeLogStorageStatisticResponse {
 }
 
 /**
- * DeleteSecurityGroupRule返回参数结构体
- */
-export interface DeleteSecurityGroupRuleResponse {
-  /**
-   * 状态值，0：成功，非0：失败
-   */
-  Status?: number
-  /**
-   * 返回多余的信息
-   */
-  Info?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * LogItem的数组
- */
-export interface LogItems {
-  /**
-   * 分析结果返回的KV数据对
-   */
-  Data?: Array<LogItem>
-}
-
-/**
- * 创建NAT ACL规则参数结构
- */
-export interface CreateNatRuleItem {
-  /**
-   * 访问源示例： net：IP/CIDR(192.168.0.2)
-   */
-  SourceContent: string
-  /**
-   * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
-   */
-  SourceType: string
-  /**
-   * 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com
-   */
-  TargetContent: string
-  /**
-   * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location
-   */
-  TargetType: string
-  /**
-   * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
-   */
-  Protocol: string
-  /**
-   * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
-   */
-  RuleAction: string
-  /**
-   * 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口
-   */
-  Port: string
-  /**
-   * 规则方向：1，入站；0，出站
-   */
-  Direction: number
-  /**
-   * 规则序号
-   */
-  OrderIndex: number
-  /**
-   * 规则状态，true表示启用，false表示禁用
-   */
-  Enable?: string
-  /**
-   * 规则对应的唯一id，创建规则时无需填写
-   */
-  Uuid?: number
-  /**
-   * 描述
-   */
-  Description?: string
-  /**
-   * 端口协议组ID
-   */
-  ParamTemplateId?: string
-  /**
-   * 内部id
-   */
-  InternalUuid?: number
-  /**
-   * 规则生效的范围：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
-   */
-  Scope?: string
-}
-
-/**
- * ModifyStorageSetting返回参数结构体
- */
-export interface ModifyStorageSettingResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 访问控制列表对象
  */
 export interface AcListsData {
@@ -2710,6 +2598,92 @@ export interface AcListsData {
    * 城市名称
    */
   RegName2?: string
+}
+
+/**
+ * LogItem的数组
+ */
+export interface LogItems {
+  /**
+   * 分析结果返回的KV数据对
+   */
+  Data?: Array<LogItem>
+}
+
+/**
+ * 创建NAT ACL规则参数结构
+ */
+export interface CreateNatRuleItem {
+  /**
+   * 访问源示例： net：IP/CIDR(192.168.0.2)
+   */
+  SourceContent: string
+  /**
+   * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+   */
+  SourceType: string
+  /**
+   * 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com
+   */
+  TargetContent: string
+  /**
+   * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location
+   */
+  TargetType: string
+  /**
+   * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
+   */
+  Protocol: string
+  /**
+   * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+   */
+  RuleAction: string
+  /**
+   * 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口
+   */
+  Port: string
+  /**
+   * 规则方向：1，入站；0，出站
+   */
+  Direction: number
+  /**
+   * 规则序号
+   */
+  OrderIndex: number
+  /**
+   * 规则状态，true表示启用，false表示禁用
+   */
+  Enable?: string
+  /**
+   * 规则对应的唯一id，创建规则时无需填写
+   */
+  Uuid?: number
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 端口协议组ID
+   */
+  ParamTemplateId?: string
+  /**
+   * 内部id
+   */
+  InternalUuid?: number
+  /**
+   * 规则生效的范围：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
+   */
+  Scope?: string
+}
+
+/**
+ * ModifyStorageSetting返回参数结构体
+ */
+export interface ModifyStorageSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3297,6 +3271,10 @@ export interface ModifyAddressTemplateResponse {
    */
   Uuid?: string
   /**
+   * 规则数上限配置
+   */
+  RuleLimitNum?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3429,34 +3407,6 @@ export interface ModifyVpcFwGroupRequest {
 export interface ModifyEnterpriseSecurityDispatchStatusResponse {
   /**
    * 0: 修改成功, 其他: 修改失败
-   */
-  Status?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateIdsWhiteRule返回参数结构体
- */
-export interface CreateIdsWhiteRuleResponse {
-  /**
-   * 返回状态码：
-0 成功
-非0 失败
-   */
-  ReturnCode?: number
-  /**
-   * 返回信息：
-success 成功
-其他
-   */
-  ReturnMsg?: string
-  /**
-   * 返回状态码：
-0  处置成功
--1 通用错误，不用处理
    */
   Status?: number
   /**
@@ -4426,29 +4376,17 @@ log：观察
 }
 
 /**
- * DescribeIdsWhiteRule返回参数结构体
+ * ModifyBlockTop请求参数结构体
  */
-export interface DescribeIdsWhiteRuleResponse {
+export interface ModifyBlockTopRequest {
   /**
-   * 总条数
+   * 操作类型 1 置顶 0取消
    */
-  Total?: number
+  OpeType: string
   /**
-   * 规则详情
+   * 记录id
    */
-  Data?: Array<IdsWhiteInfo>
-  /**
-   * 返回状态码 0 成功 非0不成功
-   */
-  ReturnCode?: number
-  /**
-   * 返回信息  success 成功 其他 不成功
-   */
-  ReturnMsg?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  UniqueId: string
 }
 
 /**
@@ -4618,31 +4556,21 @@ export interface ModifySequenceRulesResponse {
 }
 
 /**
- * DeleteIdsWhiteRule返回参数结构体
+ * 新增模式传递参数
  */
-export interface DeleteIdsWhiteRuleResponse {
+export interface NewModeItems {
   /**
-   * 返回状态码：
-0 成功
-非0 失败
+   * 新增模式下接入的vpc列表
    */
-  ReturnCode?: number
+  VpcList: Array<string>
   /**
-   * 返回信息：
-success 成功
-其他
+   * 新增模式下绑定的出口弹性公网ip列表，其中Eips和AddCount至少传递一个。
    */
-  ReturnMsg?: string
+  Eips?: Array<string>
   /**
-   * 返回状态码：
-0  处置成功
--1 通用错误，不用处理
+   * 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。
    */
-  Status?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AddCount?: number
 }
 
 /**
@@ -5114,13 +5042,17 @@ export interface DescribeFwSyncStatusResponse {
 }
 
 /**
- * DeleteNatFwInstance请求参数结构体
+ * DescribeBlockByIpTimesList返回参数结构体
  */
-export interface DeleteNatFwInstanceRequest {
+export interface DescribeBlockByIpTimesListResponse {
   /**
-   * 防火墙实例id
+   * 返回数据
    */
-  CfwInstance: string
+  Data?: Array<IpStatic>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5272,36 +5204,6 @@ export interface DescribeAcListsRequest {
 }
 
 /**
- * 入侵防御规则白名单详情
- */
-export interface IdsWhiteInfo {
-  /**
-   * 白名单唯一ID
-   */
-  Id?: number
-  /**
-   * 源IP
-   */
-  SrcIp?: string
-  /**
-   * 目的IP
-   */
-  DstIp?: string
-  /**
-   * 规则类型
-   */
-  WhiteRuleType?: string
-  /**
-   * 白名单生效防火墙范围： 1 边界防火墙 2 nat防火墙 4 vpc防火墙 7 = 1+2+4 所有防火墙
-   */
-  FwType?: number
-  /**
-   * 入侵防御规则ID
-   */
-  RuleId?: string
-}
-
-/**
  * DescribeGuideScanInfo请求参数结构体
  */
 export type DescribeGuideScanInfoRequest = null
@@ -5333,41 +5235,37 @@ export interface UnHandleEvent {
 }
 
 /**
- * DescribeAssociatedInstanceList请求参数结构体
+ * DescribeBlockIgnoreList返回参数结构体
  */
-export interface DescribeAssociatedInstanceListRequest {
+export interface DescribeBlockIgnoreListResponse {
   /**
-   * 列表偏移量
+   * 列表数据
    */
-  Offset: number
+  Data?: Array<BlockIgnoreRule>
   /**
-   * 每页记录条数
+   * 查询结果总数，用于分页
    */
-  Limit: number
+  Total?: number
   /**
-   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
+   * 状态值，0：查询成功，非0：查询失败
    */
-  Area: string
+  ReturnCode?: number
   /**
-   * 额外检索条件（JSON字符串）
+   * 状态信息，success：查询成功，fail：查询失败
    */
-  SearchValue?: string
+  ReturnMsg?: string
   /**
-   * 排序字段
+   * 安全事件来源下拉框
    */
-  By?: string
+  SourceList?: Array<string>
   /**
-   * 排序方式（asc:升序,desc:降序）
+   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
    */
-  Order?: string
+  RuleTypeDataList?: Array<number | bigint>
   /**
-   * 安全组ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SecurityGroupId?: string
-  /**
-   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -5813,24 +5711,6 @@ export interface MultiTopicSearchInformation {
 export type DescribeNatFwInfoCountRequest = null
 
 /**
- * 新增模式传递参数
- */
-export interface NewModeItems {
-  /**
-   * 新增模式下接入的vpc列表
-   */
-  VpcList: Array<string>
-  /**
-   * 新增模式下绑定的出口弹性公网ip列表，其中Eips和AddCount至少传递一个。
-   */
-  Eips?: Array<string>
-  /**
-   * 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。
-   */
-  AddCount?: number
-}
-
-/**
  * 封禁列表和放通列表结构体
  */
 export interface BanAndAllowRule {
@@ -6123,6 +6003,10 @@ export interface ModifyAllRuleStatusResponse {
    */
   Status?: number
   /**
+   * 规则限制数量
+   */
+  RuleLimitNum?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6280,17 +6164,13 @@ export interface RemoveAclRuleResponse {
 }
 
 /**
- * DescribeBlockByIpTimesList返回参数结构体
+ * DeleteNatFwInstance请求参数结构体
  */
-export interface DescribeBlockByIpTimesListResponse {
+export interface DeleteNatFwInstanceRequest {
   /**
-   * 返回数据
+   * 防火墙实例id
    */
-  Data?: Array<IpStatic>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CfwInstance: string
 }
 
 /**
@@ -6325,32 +6205,6 @@ export interface ModifySecurityGroupItemRuleStatusRequest {
  * ModifyStorageSetting请求参数结构体
  */
 export type ModifyStorageSettingRequest = null
-
-/**
- * DescribeIdsWhiteRule请求参数结构体
- */
-export interface DescribeIdsWhiteRuleRequest {
-  /**
-   * 每页条数
-   */
-  Limit: number
-  /**
-   * 偏移值
-   */
-  Offset: number
-  /**
-   * 过滤条件组合
-   */
-  Filters?: Array<CommonFilter>
-  /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
-   */
-  Order?: string
-  /**
-   * 排序所用到的字段
-   */
-  By?: string
-}
 
 /**
  * ModifyAssetSync请求参数结构体
@@ -7620,37 +7474,41 @@ export interface DescNatDnatRule {
 }
 
 /**
- * DescribeBlockIgnoreList返回参数结构体
+ * DescribeAssociatedInstanceList请求参数结构体
  */
-export interface DescribeBlockIgnoreListResponse {
+export interface DescribeAssociatedInstanceListRequest {
   /**
-   * 列表数据
+   * 列表偏移量
    */
-  Data?: Array<BlockIgnoreRule>
+  Offset: number
   /**
-   * 查询结果总数，用于分页
+   * 每页记录条数
    */
-  Total?: number
+  Limit: number
   /**
-   * 状态值，0：查询成功，非0：查询失败
+   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
    */
-  ReturnCode?: number
+  Area: string
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * 额外检索条件（JSON字符串）
    */
-  ReturnMsg?: string
+  SearchValue?: string
   /**
-   * 安全事件来源下拉框
+   * 排序字段
    */
-  SourceList?: Array<string>
+  By?: string
   /**
-   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
+   * 排序方式（asc:升序,desc:降序）
    */
-  RuleTypeDataList?: Array<number | bigint>
+  Order?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 安全组ID
    */
-  RequestId?: string
+  SecurityGroupId?: string
+  /**
+   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
+   */
+  Type?: string
 }
 
 /**
@@ -7863,37 +7721,4 @@ export interface DescribeAddressTemplateListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateIdsWhiteRule请求参数结构体
- */
-export interface CreateIdsWhiteRuleRequest {
-  /**
-   * 入侵防御规则ID
-   */
-  IdsRuleId: string
-  /**
-   * 白名单类型：
-src 针对源放通
-dst 针对目的放通
-srcdst 针对源和目的放通
-   */
-  WhiteRuleType: string
-  /**
-   * 白名单生效防火墙范围：
-1 边界防火墙
-2 nat防火墙
-4 vpc防火墙
-7 = 1+2+4  所有防火墙
-   */
-  FwType: number
-  /**
-   * 源IP
-   */
-  SrcIp?: string
-  /**
-   * 目的IP
-   */
-  DstIp?: string
 }

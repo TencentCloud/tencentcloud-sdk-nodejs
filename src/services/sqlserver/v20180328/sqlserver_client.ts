@@ -684,7 +684,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeZones) 用于查询当前可售卖的可用区信息。
+   * 本接口（DescribeZones）用于查询当前可售卖的可用区信息。
    */
   async DescribeZones(
     req?: DescribeZonesRequest,
@@ -704,7 +704,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeProductConfig) 用于查询售卖规格配置。
+   * 本接口（DescribeProductConfig）用于查询售卖规格配置。
    */
   async DescribeProductConfig(
     req: DescribeProductConfigRequest,

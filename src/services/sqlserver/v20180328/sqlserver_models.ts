@@ -1375,11 +1375,11 @@ export interface DescribeZonesResponse {
   /**
    * 返回多少个可用区信息
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 可用区数组
    */
-  ZoneSet: Array<ZoneInfo>
+  ZoneSet?: Array<ZoneInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4783,7 +4783,7 @@ export interface RunMigrationResponse {
  */
 export interface DescribeProductConfigRequest {
   /**
-   * 可用区英文ID，形如ap-guangzhou-1
+   * 可用区英文 ID
    */
   Zone: string
   /**
@@ -7107,17 +7107,17 @@ export interface BusinessIntelligenceFile {
  */
 export interface ZoneStatus {
   /**
-   * 规格地域
-   */
-  Zone: string
-  /**
    * 规格可用区
    */
-  Region: string
+  Zone?: string
+  /**
+   * 规格地域
+   */
+  Region?: string
   /**
    * 规格在该可用区的售卖状态 1-正常 2-关闭售卖但是可以升级 3-完全关闭售卖
    */
-  Status: number
+  Status?: number
 }
 
 /**

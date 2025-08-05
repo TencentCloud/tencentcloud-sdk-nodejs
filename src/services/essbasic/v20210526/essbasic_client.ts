@@ -885,7 +885,6 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
      * 接口（ChannelCreateDynamicFlowApprover）用来补充<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>发起的动态合同的签署人信息
 **注**: 
 <ul>
-<li>此接口需要保证：渠道企业已开启：模块化计费能力，</li>
 <li>此接口需要保证：渠道应用已开启：动态签署人2.0能力</li>
 <li>此接口需要保证：合同发起时指定开启了动态合同</li>
 <li>此接口补充的动态签署人传参规则，请参考接口：<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>的签署人传参规则</li>

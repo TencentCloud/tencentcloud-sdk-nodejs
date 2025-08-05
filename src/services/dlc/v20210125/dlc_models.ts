@@ -2200,6 +2200,10 @@ export interface DescribeEngineUsageInfoResponse {
    */
   Available?: number
   /**
+   * 剩余集群规格百分比
+   */
+  AvailPercent?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6996,6 +7000,22 @@ export interface StandardEngineResourceGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkMinSize?: number
+  /**
+   * 自定义镜像容器镜像服务domain 名称
+   */
+  PublicDomain?: string
+  /**
+   * 自定义镜像容器镜像服务tcr实例id
+   */
+  RegistryId?: string
+  /**
+   * 容器镜像服务tcr所在地域
+   */
+  RegionName?: string
+  /**
+   * 资源组启动耗时
+   */
+  LaunchTime?: string
 }
 
 /**
@@ -9880,10 +9900,6 @@ export interface CreateSparkAppTaskResponse {
  */
 export interface ListTaskJobLogDetailRequest {
   /**
-   * 列表返回的Id
-   */
-  TaskId: string
-  /**
    * 开始运行时间，unix时间戳（毫秒）
    */
   StartTime: number
@@ -9900,6 +9916,10 @@ export interface ListTaskJobLogDetailRequest {
    */
   Context: string
   /**
+   * 列表返回的Id
+   */
+  TaskId?: string
+  /**
    * 最近1000条日志是否升序排列，true:升序排序，false:倒序，默认false，倒序排列
    */
   Asc?: boolean
@@ -9911,6 +9931,14 @@ export interface ListTaskJobLogDetailRequest {
    * SparkSQL任务唯一ID
    */
   BatchId?: string
+  /**
+   * 引擎id
+   */
+  DataEngineId?: string
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
 }
 
 /**

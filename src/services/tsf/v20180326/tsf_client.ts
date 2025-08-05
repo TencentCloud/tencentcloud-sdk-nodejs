@@ -31,6 +31,7 @@ import {
   DescribeUnitApiUseDetailRequest,
   ClusterV2,
   ModifyApplicationResponse,
+  TsfPageLicenseTag,
   DescribeApiVersionsResponse,
   ReassociateBusinessLogConfigRequest,
   StopContainerGroupResponse,
@@ -40,11 +41,12 @@ import {
   DescribeGroupReleaseRequest,
   DescribeConfigTemplateResponse,
   TsfPageContainerEvent,
+  DescribeLicensesRequest,
   DescribeDeliveryConfigResponse,
   ForceSchedule,
   SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
-  DescribeSimpleClustersResponse,
+  DescribeSimpleApplicationsResponse,
   DeleteRepositoryResponse,
   DeleteApplicationResponse,
   QuantileEntity,
@@ -109,6 +111,7 @@ import {
   ModifyNamespaceResponse,
   ModifyLaneRuleRequest,
   AddInstancesResponse,
+  DescribeResourceConfigResponse,
   StartContainerGroupRequest,
   DescribeRepositoryResponse,
   ReleaseConfigWithDetailRespResponse,
@@ -117,12 +120,13 @@ import {
   ScalableRule,
   EnableUnitRuleRequest,
   CreateClusterResponse,
+  DescribeResourceConfigRequest,
   CreateMicroserviceResponse,
   CreateFileConfigWithDetailRespRequest,
   AgentProfile,
   ModifyContainerReplicasResponse,
   StopGroupRequest,
-  ShrinkGroupResponse,
+  DescribeLicensesResponse,
   CosUploadInfo,
   DescribeLanesResponse,
   StartGroupRequest,
@@ -181,7 +185,6 @@ import {
   TsfPageInstance,
   ModifyLaneResponse,
   DeleteGroupResponse,
-  DescribeSimpleApplicationsResponse,
   DeployContainerGroupRequest,
   CreateApiRateLimitRuleWithDetailRespRequest,
   CreateUnitRuleWithDetailRespRequest,
@@ -189,7 +192,7 @@ import {
   DescribeSimpleApplicationsRequest,
   DescribeDeliveryConfigByGroupIdResponse,
   ModifyContainerGroupRequest,
-  OperateApplicationTcrBindingRequest,
+  DescribeResourceConfigCluster,
   ContainGroup,
   CreateConfigWithDetailRespResponse,
   DescribeGroupBusinessLogConfigsResponse,
@@ -201,6 +204,7 @@ import {
   UpdateApiRateLimitRulesRequest,
   DescribeGroupInstancesRequest,
   DescribeMsApiListRequest,
+  LicenseTag,
   DescribeUploadInfoResponse,
   LifeCycleHook,
   DescribeMsApiListResponse,
@@ -210,12 +214,14 @@ import {
   DescribeMicroserviceRequest,
   TsfPageCluster,
   InstanceEnrichedInfoPage,
+  DescribeSimpleClustersResponse,
   DescribePodInstancesResponse,
   FileConfigRelease,
   DescribeInvocationMetricDataPointRequest,
   DescribeRepositoriesResponse,
   MonitorOverview,
   CreateGroupRequest,
+  ContainerAdditionalResourceRequirement,
   DeleteClusterRequest,
   StopTaskBatchResponse,
   ServiceStatisticsResult,
@@ -264,6 +270,7 @@ import {
   ValueFrom,
   ShrinkInstancesResponse,
   DeleteLaneRuleResponse,
+  DescribeResourceConfigLicenseResource,
   DescribeApiRateLimitRulesResponse,
   ContainerGroupOther,
   AddClusterInstancesRequest,
@@ -291,6 +298,7 @@ import {
   DescribeImageRepositoryRequest,
   IndicatorCoord,
   TsfPageUnitRule,
+  OperateApplicationTcrBindingRequest,
   DescribeApiGroupRequest,
   AssociateBusinessLogConfigResponse,
   DescribeGatewayApisRequest,
@@ -323,7 +331,7 @@ import {
   UpdateUnitRuleResponse,
   CreateUnitRuleRequest,
   StartGroupResponse,
-  GroupRelease,
+  DescribeResourceConfigClusterContainer,
   DescribePathRewritesRequest,
   ShrinkGroupRequest,
   TsfPageStdoutLogV2,
@@ -341,6 +349,7 @@ import {
   ServiceStatisticsResults,
   DeployGroupRequest,
   LaneInfos,
+  ContainerAdditionalResourceRequirementMap,
   CreateTaskFlowRequest,
   CreateFileConfigWithDetailRespResponse,
   CreateConfigTemplateWithDetailRespRequest,
@@ -354,7 +363,7 @@ import {
   DescribeInvocationMetricDataDimensionRequest,
   DeployGroupResponse,
   ModifyGroupResponse,
-  DescribeUnitRulesV2Request,
+  DescribeResourceConfigLicenseFunction,
   BindApiGroupResponse,
   MetricDataPointMap,
   DescribeGroupAttributeResponse,
@@ -410,6 +419,7 @@ import {
   DisableTaskFlowResponse,
   DescribeGatewayMonitorOverviewRequest,
   DescribeImageTagsResponse,
+  VmInstanceResourceConfig,
   BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
@@ -420,10 +430,11 @@ import {
   DeleteApiRateLimitRuleRequest,
   DescribePkgsRequest,
   SchedulingStrategy,
-  GatewayVo,
+  DescribeResourceConfigSts,
   DescribeApplicationAttributeRequest,
   ReleaseConfigWithDetailRespRequest,
   CreateTaskRequest,
+  GatewayVo,
   OperationInfo,
   DescribePublicConfigResponse,
   DescribeUsableUnitNamespacesResponse,
@@ -434,6 +445,7 @@ import {
   CreateApiRateLimitRuleWithDetailRespResponse,
   DescribeTaskRecordsRequest,
   CustomTolerateSchedule,
+  GroupResourceConfig,
   ModifyContainerGroupResponse,
   ExclusiveInstance,
   DeleteApplicationRequest,
@@ -459,8 +471,10 @@ import {
   DescribeUnitRulesResponse,
   UpdateGatewayApiRequest,
   DescribeInstancesRequest,
+  GroupRelease,
   ReassociateBusinessLogConfigResponse,
   PathRewriteCreateObject,
+  PackageConfig,
   DescribeApiGroupsRequest,
   DeleteUnitRuleRequest,
   ApplicationAttribute,
@@ -468,6 +482,7 @@ import {
   DeletePkgsResponse,
   DescribeGroupsResponse,
   DescribeBusinessLogConfigsResponse,
+  ContainerInstanceResourceConfig,
   ApplicationForPage,
   DescribeInvocationMetricScatterPlotRequest,
   CreateTaskFlowResponse,
@@ -520,8 +535,10 @@ import {
   DescribeGroupAttributeRequest,
   ModifyClusterResponse,
   PkgInfo,
+  ContainerGroupResourceConfig,
   GroupPod,
   EnableTaskFlowRequest,
+  InstanceResourceConfig,
   DescribeReleasedConfigRequest,
   ApiInfo,
   StopGroupResponse,
@@ -537,10 +554,12 @@ import {
   RedoTaskExecuteResponse,
   CreateLaneRequest,
   CreateApiGroupResponse,
+  DescribeResourceConfigLicense,
   ServiceConfig,
   RedoTaskExecuteRequest,
   DescribeApplicationsResponse,
   InvocationIndicator,
+  DescribeStatisticsRequest,
   DescribeConfigRequest,
   OperateApplicationTcrBindingResponse,
   DisableUnitRouteRequest,
@@ -562,6 +581,7 @@ import {
   DescribeProgramsResponse,
   ProgramItem,
   DisableTaskFlowRequest,
+  DescribeLogCapacityResponse,
   DescribePodInstancesRequest,
   RedoTaskResponse,
   DeliveryConfigBindGroup,
@@ -578,6 +598,7 @@ import {
   DescribeFileConfigsRequest,
   CreateConfigTemplateResponse,
   ExecuteTaskResponse,
+  ShrinkGroupResponse,
   CreateApiRateLimitRuleResponse,
   Config,
   ProtocolPort,
@@ -608,6 +629,7 @@ import {
   DescribePathRewritesResponse,
   DeleteGatewayApiRequest,
   ModifyProgramResponse,
+  DescribeLogCapacityRequest,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   StopTaskExecuteResponse,
@@ -633,6 +655,7 @@ import {
   HealthCheckConfig,
   TsfPageSimpleApplication,
   Affinity,
+  DescribeUnitRulesV2Request,
   PropertyField,
   DescribeApiDetailResponse,
   DescribeGroupsRequest,
@@ -644,7 +667,7 @@ import {
   ContainerInfo,
   SearchStdoutLogRequest,
   RedoTaskBatchResponse,
-  DescribeStatisticsRequest,
+  DescribeResourceConfigResultV2,
   ModifyGroupRequest,
   DescribeMicroserviceResponse,
   DescribeImageRepositoryResponse,
@@ -1538,6 +1561,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: CreatePublicConfigWithDetailRespResponse) => void
   ): Promise<CreatePublicConfigWithDetailRespResponse> {
     return this.request("CreatePublicConfigWithDetailResp", req, cb)
+  }
+
+  /**
+   * 查询许可列表
+   */
+  async DescribeLicenses(
+    req: DescribeLicensesRequest,
+    cb?: (error: string, rep: DescribeLicensesResponse) => void
+  ): Promise<DescribeLicensesResponse> {
+    return this.request("DescribeLicenses", req, cb)
   }
 
   /**
@@ -2600,6 +2633,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 获取用户日志使用量
+   */
+  async DescribeLogCapacity(
+    req?: DescribeLogCapacityRequest,
+    cb?: (error: string, rep: DescribeLogCapacityResponse) => void
+  ): Promise<DescribeLogCapacityResponse> {
+    return this.request("DescribeLogCapacity", req, cb)
+  }
+
+  /**
    * 发布公共配置
    */
   async ReleasePublicConfig(
@@ -2928,5 +2971,15 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeUnitRulesResponse) => void
   ): Promise<DescribeUnitRulesResponse> {
     return this.request("DescribeUnitRules", req, cb)
+  }
+
+  /**
+   * 无
+   */
+  async DescribeResourceConfig(
+    req?: DescribeResourceConfigRequest,
+    cb?: (error: string, rep: DescribeResourceConfigResponse) => void
+  ): Promise<DescribeResourceConfigResponse> {
+    return this.request("DescribeResourceConfig", req, cb)
   }
 }

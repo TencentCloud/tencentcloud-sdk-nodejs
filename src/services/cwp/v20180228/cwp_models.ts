@@ -8876,11 +8876,11 @@ export interface DescribeExpertServiceListResponse {
  */
 export interface DescribeAccountStatisticsResponse {
   /**
-   * 帐号统计列表记录总数。
+   * 账号统计列表记录总数。
    */
   TotalCount?: number
   /**
-   * 帐号统计列表。
+   * 账号统计列表。
    */
   AccountStatistics?: Array<AccountStatistics>
   /**
@@ -24227,11 +24227,11 @@ export interface ModifyLogStorageConfigResponse {
  */
 export interface DescribeHistoryAccountsResponse {
   /**
-   * 帐号变更历史列表记录总数。
+   * 账号变更历史列表记录总数。
    */
   TotalCount?: number
   /**
-   * 帐号变更历史数据数组。
+   * 账号变更历史数据数组。
    */
   HistoryAccounts?: Array<HistoryAccount>
   /**

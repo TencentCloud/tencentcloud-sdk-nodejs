@@ -6050,6 +6050,8 @@ off：关闭全路径缓存（即开启参数忽略）
   FullUrlCache?: string
   /**
    * 是否忽略大小写缓存
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IgnoreCase?: string
@@ -6215,6 +6217,8 @@ off：关闭全路径缓存（即开启参数忽略）
   FullUrlCache: string
   /**
    * 是否忽略大小写缓存
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IgnoreCase: string

@@ -4900,7 +4900,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeHistoryAccounts) 用于获取帐号变更历史列表数据。
+   * 本接口 (DescribeHistoryAccounts) 用于获取账号变更历史列表数据。
    */
   async DescribeHistoryAccounts(
     req: DescribeHistoryAccountsRequest,
@@ -5713,7 +5713,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeAccountStatistics) 用于获取帐号统计列表数据。
+   * 本接口 (DescribeAccountStatistics) 用于获取账号统计列表数据。
    */
   async DescribeAccountStatistics(
     req: DescribeAccountStatisticsRequest,

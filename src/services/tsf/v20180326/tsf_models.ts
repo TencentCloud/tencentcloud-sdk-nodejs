@@ -489,6 +489,22 @@ false：操作失败
 }
 
 /**
+ * LicenseTag 翻页对象
+ */
+export interface TsfPageLicenseTag {
+  /**
+   * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 记录实体列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content: Array<LicenseTag>
+}
+
+/**
  * DescribeApiVersions返回参数结构体
  */
 export interface DescribeApiVersionsResponse {
@@ -617,6 +633,20 @@ export interface TsfPageContainerEvent {
 }
 
 /**
+ * DescribeLicenses请求参数结构体
+ */
+export interface DescribeLicensesRequest {
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 每页条数
+   */
+  Limit?: number
+}
+
+/**
  * DescribeDeliveryConfig返回参数结构体
  */
 export interface DescribeDeliveryConfigResponse {
@@ -713,13 +743,13 @@ export interface ContinueRunFailedTaskBatchRequest {
 }
 
 /**
- * DescribeSimpleClusters返回参数结构体
+ * DescribeSimpleApplications返回参数结构体
  */
-export interface DescribeSimpleClustersResponse {
+export interface DescribeSimpleApplicationsResponse {
   /**
-   * TSF集群分页对象
+   * 简单应用分页对象
    */
-  Result?: TsfPageCluster
+  Result?: TsfPageSimpleApplication
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1995,6 +2025,20 @@ export interface AddInstancesResponse {
 }
 
 /**
+ * DescribeResourceConfig返回参数结构体
+ */
+export interface DescribeResourceConfigResponse {
+  /**
+   * 配置详情
+   */
+  Result?: DescribeResourceConfigResultV2
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartContainerGroup请求参数结构体
  */
 export interface StartContainerGroupRequest {
@@ -2318,6 +2362,11 @@ export interface CreateClusterResponse {
 }
 
 /**
+ * DescribeResourceConfig请求参数结构体
+ */
+export type DescribeResourceConfigRequest = null
+
+/**
  * CreateMicroservice返回参数结构体
  */
 export interface CreateMicroserviceResponse {
@@ -2422,13 +2471,14 @@ export interface StopGroupRequest {
 }
 
 /**
- * ShrinkGroup返回参数结构体
+ * DescribeLicenses返回参数结构体
  */
-export interface ShrinkGroupResponse {
+export interface DescribeLicensesResponse {
   /**
-   * 任务ID
+   * 许可标签列表分页信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result?: TaskId
+  Result?: TsfPageLicenseTag
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3637,20 +3687,6 @@ false：操作失败。
 }
 
 /**
- * DescribeSimpleApplications返回参数结构体
- */
-export interface DescribeSimpleApplicationsResponse {
-  /**
-   * 简单应用分页对象
-   */
-  Result?: TsfPageSimpleApplication
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeployContainerGroup请求参数结构体
  */
 export interface DeployContainerGroupRequest {
@@ -3952,21 +3988,14 @@ export interface ModifyContainerGroupRequest {
 }
 
 /**
- * OperateApplicationTcrBinding请求参数结构体
+ * 返回给前端的控制信息
  */
-export interface OperateApplicationTcrBindingRequest {
+export interface DescribeResourceConfigCluster {
   /**
-   * bind 或 unbind
+   * 返回给前端的控制信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Command?: string
-  /**
-   * 应用id
-   */
-  ApplicationId?: string
-  /**
-   * TcrRepoInfo值
-   */
-  TcrRepoInfo?: TcrRepoInfo
+  Container: DescribeResourceConfigClusterContainer
 }
 
 /**
@@ -4223,6 +4252,22 @@ export interface DescribeMsApiListRequest {
 }
 
 /**
+ * 许可标签
+ */
+export interface LicenseTag {
+  /**
+   * 许可ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LicenseId: string
+  /**
+   * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags: Array<Tag>
+}
+
+/**
  * DescribeUploadInfo返回参数结构体
  */
 export interface DescribeUploadInfoResponse {
@@ -4382,6 +4427,20 @@ export interface InstanceEnrichedInfoPage {
    * 列表
    */
   Content?: Array<InstanceEnrichedInfo>
+}
+
+/**
+ * DescribeSimpleClusters返回参数结构体
+ */
+export interface DescribeSimpleClustersResponse {
+  /**
+   * TSF集群分页对象
+   */
+  Result?: TsfPageCluster
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4581,6 +4640,22 @@ export interface CreateGroupRequest {
    * 标签列表
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * 应用使用容器部署时需要的额外资源
+ */
+export interface ContainerAdditionalResourceRequirement {
+  /**
+   * CPU 核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: string
+  /**
+   * 内存 MiB 数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mem: string
 }
 
 /**
@@ -5634,6 +5709,22 @@ export interface DeleteLaneRuleResponse {
 }
 
 /**
+ * DescribeResourceConfig
+ */
+export interface DescribeResourceConfigLicenseResource {
+  /**
+   * Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * Quota
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Quota: number
+}
+
+/**
  * DescribeApiRateLimitRules返回参数结构体
  */
 export interface DescribeApiRateLimitRulesResponse {
@@ -6495,6 +6586,24 @@ export interface TsfPageUnitRule {
    * 记录实体列表
    */
   Content?: Array<UnitRule>
+}
+
+/**
+ * OperateApplicationTcrBinding请求参数结构体
+ */
+export interface OperateApplicationTcrBindingRequest {
+  /**
+   * bind 或 unbind
+   */
+  Command?: string
+  /**
+   * 应用id
+   */
+  ApplicationId?: string
+  /**
+   * TcrRepoInfo值
+   */
+  TcrRepoInfo?: TcrRepoInfo
 }
 
 /**
@@ -7376,49 +7485,14 @@ export interface StartGroupResponse {
 }
 
 /**
- * 部署组配置发布相关信息
+ * 返回给前端的控制信息
  */
-export interface GroupRelease {
+export interface DescribeResourceConfigClusterContainer {
   /**
-   * 程序包ID
+   * 是否需要子网
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageId?: string
-  /**
-   * 程序包名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageName?: string
-  /**
-   * 程序包版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageVersion?: string
-  /**
-   * 镜像名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RepoName?: string
-  /**
-   * 镜像版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagName?: string
-  /**
-   * 已发布的全局配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicConfigReleaseList?: Array<ConfigRelease>
-  /**
-   * 已发布的应用配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigReleaseList?: Array<ConfigRelease>
-  /**
-   * 已发布的文件配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileConfigReleaseList?: Array<FileConfigRelease>
+  NeedSubnetWhenCreatingCluster: boolean
 }
 
 /**
@@ -7880,6 +7954,22 @@ export interface LaneInfos {
 }
 
 /**
+ * 不同类型的应用的容器部署组，部署时的额外资源要求
+ */
+export interface ContainerAdditionalResourceRequirementMap {
+  /**
+   * Mesh 应用部署时需要的额外资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  M: ContainerAdditionalResourceRequirement
+  /**
+   * 普通应用部署时需要的额外资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  N: ContainerAdditionalResourceRequirement
+}
+
+/**
  * CreateTaskFlow请求参数结构体
  */
 export interface CreateTaskFlowRequest {
@@ -8108,29 +8198,19 @@ false：操作失败。
 }
 
 /**
- * DescribeUnitRulesV2请求参数结构体
+ * DescribeResourceConfig
  */
-export interface DescribeUnitRulesV2Request {
+export interface DescribeResourceConfigLicenseFunction {
   /**
-   * 网关实体ID
+   * name
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayInstanceId: string
+  Name: string
   /**
-   * 根据规则名或备注内容模糊查询
+   * enable
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SearchWord?: string
-  /**
-   * 启用状态, disabled: 未发布， enabled: 发布
-   */
-  Status?: string
-  /**
-   * 翻页查询偏移量
-   */
-  Offset?: number
-  /**
-   * 翻页查询每页记录数
-   */
-  Limit?: number
+  Enable: boolean
 }
 
 /**
@@ -9514,6 +9594,17 @@ export interface DescribeImageTagsResponse {
 }
 
 /**
+ * 虚拟机实例相关的参数配置
+ */
+export interface VmInstanceResourceConfig {
+  /**
+   * 实例导入方式，可多个，公有云为 ["R", "M"]，独立版的取值仅有 "M" 脚本模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportMode: Array<string>
+}
+
+/**
  * BindPlugin返回参数结构体
  */
 export interface BindPluginResponse {
@@ -9750,25 +9841,14 @@ export interface SchedulingStrategy {
 }
 
 /**
- * 网关部署组、分组、API列表数据
+ * DescribeResourceConfig
  */
-export interface GatewayVo {
+export interface DescribeResourceConfigSts {
   /**
-   * 网关部署组ID
+   * uin
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayDeployGroupId?: string
-  /**
-   * 网关部署组名称
-   */
-  GatewayDeployGroupName?: string
-  /**
-   * API 分组个数
-   */
-  GroupNum?: number
-  /**
-   * API 分组列表
-   */
-  Groups?: Array<GatewayApiGroupVo>
+  Uin: string
 }
 
 /**
@@ -9867,6 +9947,28 @@ export interface CreateTaskRequest {
    * 无
    */
   ProgramIdList?: Array<string>
+}
+
+/**
+ * 网关部署组、分组、API列表数据
+ */
+export interface GatewayVo {
+  /**
+   * 网关部署组ID
+   */
+  GatewayDeployGroupId?: string
+  /**
+   * 网关部署组名称
+   */
+  GatewayDeployGroupName?: string
+  /**
+   * API 分组个数
+   */
+  GroupNum?: number
+  /**
+   * API 分组列表
+   */
+  Groups?: Array<GatewayApiGroupVo>
 }
 
 /**
@@ -10102,6 +10204,17 @@ export interface CustomTolerateSchedule {
    * -
    */
   TolerationSeconds?: number
+}
+
+/**
+ * 部署组相关的参数配置
+ */
+export interface GroupResourceConfig {
+  /**
+   * 容器部署组相关的参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Container: ContainerGroupResourceConfig
 }
 
 /**
@@ -10737,6 +10850,52 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * 部署组配置发布相关信息
+ */
+export interface GroupRelease {
+  /**
+   * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageId?: string
+  /**
+   * 程序包名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageName?: string
+  /**
+   * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageVersion?: string
+  /**
+   * 镜像名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoName?: string
+  /**
+   * 镜像版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagName?: string
+  /**
+   * 已发布的全局配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicConfigReleaseList?: Array<ConfigRelease>
+  /**
+   * 已发布的应用配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigReleaseList?: Array<ConfigRelease>
+  /**
+   * 已发布的文件配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileConfigReleaseList?: Array<FileConfigRelease>
+}
+
+/**
  * ReassociateBusinessLogConfig返回参数结构体
  */
 export interface ReassociateBusinessLogConfigResponse {
@@ -10770,6 +10929,17 @@ export interface PathRewriteCreateObject {
    * 规则顺序，越小优先级越高
    */
   Order: number
+}
+
+/**
+ * 程序包相关配置信息
+ */
+export interface PackageConfig {
+  /**
+   * 程序包存储空间大小，单位字节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpaceSize: number
 }
 
 /**
@@ -10904,6 +11074,27 @@ export interface DescribeBusinessLogConfigsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 容器实例相关的参数配置
+ */
+export interface ContainerInstanceResourceConfig {
+  /**
+   * 实例导入方式，可多个，公有云为 ["R"]，独立版的取值有 "M" 脚本模式、"S" SSH 模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportMode: Array<string>
+  /**
+   * SSH 模式时，前端应该限制用户填这个数量的 master 主机信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterNumLimit: number
+  /**
+   * SSH 模式时，前端应该限制用户填的最高数量的 node 主机信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeNumLimitPerSetup: number
 }
 
 /**
@@ -12105,6 +12296,17 @@ export interface PkgInfo {
 }
 
 /**
+ * 容器部署组相关的参数配置
+ */
+export interface ContainerGroupResourceConfig {
+  /**
+   * 不同类型的应用的容器部署组，部署时的额外资源要求
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdditionalResourceRequirement: ContainerAdditionalResourceRequirementMap
+}
+
+/**
  * 部署组实例列表
  */
 export interface GroupPod {
@@ -12178,6 +12380,22 @@ export interface EnableTaskFlowRequest {
    * 工作流 ID
    */
   FlowId: string
+}
+
+/**
+ * 实例相关的参数配置
+ */
+export interface InstanceResourceConfig {
+  /**
+   * 容器实例相关的参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Container: ContainerInstanceResourceConfig
+  /**
+   * 虚拟机实例相关的参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vm: VmInstanceResourceConfig
 }
 
 /**
@@ -12455,6 +12673,37 @@ export interface CreateApiGroupResponse {
 }
 
 /**
+ * DescribeResourceConfig
+ */
+export interface DescribeResourceConfigLicense {
+  /**
+   * 功能
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Function: Array<DescribeResourceConfigLicenseFunction>
+  /**
+   * 资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource: Array<DescribeResourceConfigLicenseResource>
+  /**
+   * utc时间 单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime: number
+  /**
+   * utc时间 单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Countdown: number
+  /**
+   * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec: string
+}
+
+/**
  * 服务配置
  */
 export interface ServiceConfig {
@@ -12543,6 +12792,76 @@ export interface InvocationIndicator {
    * 并发请求次数时间分布
    */
   InvocationQuantityDistribution?: Array<IndicatorCoord>
+}
+
+/**
+ * DescribeStatistics请求参数结构体
+ */
+export interface DescribeStatisticsRequest {
+  /**
+   * 类型：Interface、Service、Group、Instance、SQL、NoSQL
+   */
+  Type: string
+  /**
+   * 步长，单位s：60、3600、86400
+   */
+  TimeStep: number
+  /**
+   * 偏移量，取值范围大于等于0，默认值为0
+   */
+  Offset: number
+  /**
+   * 单页请求配置数量，取值范围[1, 50]，默认值为10
+   */
+  Limit: number
+  /**
+   * 命名空间Id,此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一。
+   */
+  NamespaceId?: string
+  /**
+   * 排序字段:AvgTimeConsuming[默认]、RequestCount、ErrorRate。实例监控还支持 CpuPercent
+   */
+  OrderBy?: string
+  /**
+   * 排序方式：ASC:0、DESC:1
+   */
+  OrderType?: number
+  /**
+   * 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空
+   */
+  EndTime?: string
+  /**
+   * 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空
+   */
+  StartTime?: string
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+  /**
+   * 搜索关键词
+   */
+  SearchWord?: string
+  /**
+   * 维度
+   */
+  MetricDimensionValues?: Array<MetricDimensionValue>
+  /**
+   * 聚合关键词
+   */
+  BucketKey?: string
+  /**
+   * 数据库
+   */
+  DbName?: string
+  /**
+   * 命名空间id数组
+   */
+  NamespaceIdList?: Array<string>
+  /**
+   * 独占配置中心的ID
+   */
+  ConfigCenterInstanceId?: string
 }
 
 /**
@@ -13123,6 +13442,24 @@ export interface DisableTaskFlowRequest {
 }
 
 /**
+ * DescribeLogCapacity返回参数结构体
+ */
+export interface DescribeLogCapacityResponse {
+  /**
+   * 使用日志容量大小
+   */
+  UsedSpace?: number
+  /**
+   * 日志总容量大小
+   */
+  Capacity?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePodInstances请求参数结构体
  */
 export interface DescribePodInstancesRequest {
@@ -13517,6 +13854,20 @@ export interface ExecuteTaskResponse {
    * 成功/失败
    */
   Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ShrinkGroup返回参数结构体
+ */
+export interface ShrinkGroupResponse {
+  /**
+   * 任务ID
+   */
+  Result?: TaskId
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14525,6 +14876,11 @@ export interface ModifyProgramResponse {
 }
 
 /**
+ * DescribeLogCapacity请求参数结构体
+ */
+export type DescribeLogCapacityRequest = null
+
+/**
  * 添加实例到集群的结果
  */
 export interface AddInstanceResult {
@@ -15109,6 +15465,32 @@ export interface Affinity {
 }
 
 /**
+ * DescribeUnitRulesV2请求参数结构体
+ */
+export interface DescribeUnitRulesV2Request {
+  /**
+   * 网关实体ID
+   */
+  GatewayInstanceId: string
+  /**
+   * 根据规则名或备注内容模糊查询
+   */
+  SearchWord?: string
+  /**
+   * 启用状态, disabled: 未发布， enabled: 发布
+   */
+  Status?: string
+  /**
+   * 翻页查询偏移量
+   */
+  Offset?: number
+  /**
+   * 翻页查询每页记录数
+   */
+  Limit?: number
+}
+
+/**
  * 属性字段
  */
 export interface PropertyField {
@@ -15534,73 +15916,39 @@ export interface RedoTaskBatchResponse {
 }
 
 /**
- * DescribeStatistics请求参数结构体
+ * DescribeResourceConfig
  */
-export interface DescribeStatisticsRequest {
+export interface DescribeResourceConfigResultV2 {
   /**
-   * 类型：Interface、Service、Group、Instance、SQL、NoSQL
+   * STS参数配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Sts: DescribeResourceConfigSts
   /**
-   * 步长，单位s：60、3600、86400
+   * 许可信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeStep: number
+  License: DescribeResourceConfigLicense
   /**
-   * 偏移量，取值范围大于等于0，默认值为0
+   * 部署组相关的参数配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  Group: GroupResourceConfig
   /**
-   * 单页请求配置数量，取值范围[1, 50]，默认值为10
+   * 实例相关的参数配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
+  Instance: InstanceResourceConfig
   /**
-   * 命名空间Id,此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一。
+   * Cluster相关配置信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceId?: string
+  Cluster: DescribeResourceConfigCluster
   /**
-   * 排序字段:AvgTimeConsuming[默认]、RequestCount、ErrorRate。实例监控还支持 CpuPercent
+   * 程序包相关配置信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrderBy?: string
-  /**
-   * 排序方式：ASC:0、DESC:1
-   */
-  OrderType?: number
-  /**
-   * 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空
-   */
-  EndTime?: string
-  /**
-   * 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空
-   */
-  StartTime?: string
-  /**
-   * 服务名称
-   */
-  ServiceName?: string
-  /**
-   * 搜索关键词
-   */
-  SearchWord?: string
-  /**
-   * 维度
-   */
-  MetricDimensionValues?: Array<MetricDimensionValue>
-  /**
-   * 聚合关键词
-   */
-  BucketKey?: string
-  /**
-   * 数据库
-   */
-  DbName?: string
-  /**
-   * 命名空间id数组
-   */
-  NamespaceIdList?: Array<string>
-  /**
-   * 独占配置中心的ID
-   */
-  ConfigCenterInstanceId?: string
+  Package: PackageConfig
 }
 
 /**

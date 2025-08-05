@@ -327,6 +327,7 @@ import {
   DevicesItem,
   CloudStorageAIServiceTaskFileInfo,
   DescribeTWeSeeConfigResponse,
+  VisionSummaryConfig,
   ModifyPositionFenceRequest,
   PositionFenceItem,
   DeleteTopicRuleResponse,

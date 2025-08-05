@@ -9737,6 +9737,10 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSourceEnvInfos?: Array<DataSourceEnvInfo>
+  /**
+   * 禁止数据探查
+   */
+  ForbidProbe?: boolean
 }
 
 /**
@@ -11484,6 +11488,14 @@ export interface ModifyProjectRequest {
    */
   ProjectId: string
   /**
+   * 项目显示名称，可以为中文名,需要租户范围内唯一
+   */
+  DisplayName?: string
+  /**
+   * 备注
+   */
+  Description?: string
+  /**
    * true/false则修改，不带该参数不修改。
    */
   TaskSubmitApproval?: boolean
@@ -11511,6 +11523,10 @@ export interface ModifyProjectRequest {
    * 项目负责人
    */
   ProjectOwner?: Array<string>
+  /**
+   * 更新类型
+   */
+  ModifyType?: string
 }
 
 /**
@@ -15553,7 +15569,7 @@ export interface DescribeDataSourceInfoListRequest {
    */
   OrderFields?: OrderField
   /**
-   * 数据源类型，必选（如MYSQL、DLC等）
+   * 数据源类型，MYSQL,TENCENT_MYSQL,TDSQL_MYSQL,HIVE,KAFKA,POSTGRE,CDW,ORACLE,SQLSERVER,FTP,HDFS,ICEBERG,HBASE,TDSQL,TDSQLC,SPARK,VIRTUAL,TBASE,DB2,DM,TDENGINE,GAUSSDB,GBASE,IMPALA,ES,TENCENT_ES,S3_DATAINSIGHT,GREENPLUM,PHOENIX,SAP_HANA,SFTP,OCEANBASE,CLICKHOUSE,TCHOUSE_C,KUDU,VERTICA,REDIS,COS,S3,DLC,DORIS,CKAFKA,TDMQ_PULSAR,MONGODB,TENCENT_MONGODB,FTP_FILE,HDFS_FILE,DTS_KAFKA,REST_API,FILE,TIDB,SYBASE,TCHOUSE_X,TDSQL_POSTGRE,TCHOUSE_P,TCHOUSE_D,STARROCKS,EMR_STARROCKS,TBDS_STARROCKS,TRINO,KYUUBI,GDB,INFLUXDB,BIG_QUERY,BLOB,FILESYSTEM,SHAREPOINT,KINGBASEES,HUDI等
    */
   Type?: string
   /**
@@ -19888,25 +19904,54 @@ export interface DescribeDependTaskListsResponse {
 }
 
 /**
- * ModifyTaskScript请求参数结构体
+ * 项目信息
  */
-export interface ModifyTaskScriptRequest {
+export interface BaseProject {
   /**
-   * 项目Id
+   * 项目标识，英文名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  ProjectName: string
   /**
-   * 任务ID
+   * 项目显示名称，可以为中文名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  DisplayName: string
   /**
-   * 必填，脚本内容 base64编码
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScriptContent?: string
+  Region: string
   /**
-   * 集成任务脚本配置
+   * 项目的所在租户ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntegrationNodeDetails?: Array<IntegrationNodeDetail>
+  TenantId?: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 项目类型，SIMPLE：简单模式 STANDARD：标准模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model?: string
 }
 
 /**
@@ -22794,19 +22839,25 @@ export interface UnboundProjectExecutorResourceResponse {
 }
 
 /**
- * 通用排序字段名和排序方向
+ * ModifyTaskScript请求参数结构体
  */
-export interface OrderCondition {
+export interface ModifyTaskScriptRequest {
   /**
-   * name
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目Id
    */
-  Name: string
+  ProjectId: string
   /**
-   * 降序DESC; 升序ASC
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务ID
    */
-  Direction: string
+  TaskId: string
+  /**
+   * 存在脚本的任务必填（shell任务、Hive任务、python任务等），脚本内容 base64编码
+   */
+  ScriptContent?: string
+  /**
+   * 集成任务脚本配置
+   */
+  IntegrationNodeDetails?: Array<IntegrationNodeDetail>
 }
 
 /**
@@ -29796,6 +29847,22 @@ export interface ModifyTaskLinksDsRequest {
 }
 
 /**
+ * 通用排序字段名和排序方向
+ */
+export interface OrderCondition {
+  /**
+   * name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 降序DESC; 升序ASC
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Direction: string
+}
+
+/**
  * ds参数map结构体
  */
 export interface ParamMapDsDto {
@@ -29843,7 +29910,12 @@ export interface DescribeDatabaseInfoListRequest {
 /**
  * CreateBaseProject请求参数结构体
  */
-export type CreateBaseProjectRequest = null
+export interface CreateBaseProjectRequest {
+  /**
+   * 项目信息
+   */
+  Project: BaseProject
+}
 
 /**
  * DescribeRuleExecLog请求参数结构体

@@ -582,7 +582,7 @@ import {
   BizCatalogsInfo,
   TaskCollectionParamDTO,
   DescribeDependTaskListsResponse,
-  ModifyTaskScriptRequest,
+  BaseProject,
   ModifyDataSourceRequest,
   CreateHiveTableResponse,
   RuleTemplatePage,
@@ -671,7 +671,7 @@ import {
   DescribeTaskAlarmRegulationsRequest,
   KillScheduleInstancesRequest,
   UnboundProjectExecutorResourceResponse,
-  OrderCondition,
+  ModifyTaskScriptRequest,
   CreateCustomFunctionResponse,
   UpdateCodeTemplateRequest,
   ScreenInstanceInfo,
@@ -884,6 +884,7 @@ import {
   JudgeResourceFileRequest,
   UploadResourceResponse,
   ModifyTaskLinksDsRequest,
+  OrderCondition,
   ParamMapDsDto,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
@@ -2608,7 +2609,7 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
    * 创建项目 仅项目本身，不包含集群等信息
    */
   async CreateBaseProject(
-    req?: CreateBaseProjectRequest,
+    req: CreateBaseProjectRequest,
     cb?: (error: string, rep: CreateBaseProjectResponse) => void
   ): Promise<CreateBaseProjectResponse> {
     return this.request("CreateBaseProject", req, cb)

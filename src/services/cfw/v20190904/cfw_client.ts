@@ -36,7 +36,6 @@ import {
   StaticInfo,
   ModifySequenceRulesRequest,
   DescribeNatAcRuleResponse,
-  ModifyBlockTopRequest,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
   FwDeploy,
@@ -84,7 +83,7 @@ import {
   FwGateway,
   ModifySecurityGroupSequenceRulesResponse,
   SecurityGroupRule,
-  DeleteIdsWhiteRuleRequest,
+  DeleteSecurityGroupRuleResponse,
   ModifyNatFwSwitchResponse,
   ModifyAclRuleResponse,
   SequenceData,
@@ -111,11 +110,10 @@ import {
   DeleteRemoteAccessDomainRequest,
   SetNatFwEipResponse,
   DescribeLogStorageStatisticResponse,
-  DeleteSecurityGroupRuleResponse,
+  AcListsData,
   LogItems,
   CreateNatRuleItem,
   ModifyStorageSettingResponse,
-  AcListsData,
   DescribeNatFwInstancesInfoRequest,
   ModifyBlockIgnoreRuleNewResponse,
   DescribeSourceAssetRequest,
@@ -148,7 +146,6 @@ import {
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
-  CreateIdsWhiteRuleResponse,
   ModifyResourceGroupRequest,
   SecurityGroupListData,
   EdgeIpSwitch,
@@ -190,7 +187,7 @@ import {
   DescribeFwGroupInstanceInfoResponse,
   DescribeBlockByIpTimesListRequest,
   VpcRuleItem,
-  DescribeIdsWhiteRuleResponse,
+  ModifyBlockTopRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
   NetInstancesInfo,
   DescribeEnterpriseSecurityGroupRuleListRequest,
@@ -198,7 +195,7 @@ import {
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
   ModifySequenceRulesResponse,
-  DeleteIdsWhiteRuleResponse,
+  NewModeItems,
   CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
   ModifyEdgeIpSwitchResponse,
@@ -213,17 +210,16 @@ import {
   DescribeNatFwDnatRuleResponse,
   ModifyNatFwVpcDnsSwitchRequest,
   DescribeFwSyncStatusResponse,
-  DeleteNatFwInstanceRequest,
+  DescribeBlockByIpTimesListResponse,
   ModifyAllRuleStatusRequest,
   SetNatFwDnatRuleResponse,
   VpcFwInstanceShow,
   Column,
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
-  IdsWhiteInfo,
   DescribeGuideScanInfoRequest,
   UnHandleEvent,
-  DescribeAssociatedInstanceListRequest,
+  DescribeBlockIgnoreListResponse,
   ModifyVpcAcRuleResponse,
   ModifyBlockIgnoreRuleNewRequest,
   ModifyEWRuleStatusRequest,
@@ -246,7 +242,6 @@ import {
   DescribeTLogIpListResponse,
   MultiTopicSearchInformation,
   DescribeNatFwInfoCountRequest,
-  NewModeItems,
   BanAndAllowRule,
   RemoveAcRuleRequest,
   FwGroupSwitchShow,
@@ -262,11 +257,10 @@ import {
   SecurityGroupSimplifyRule,
   ModifyBlockTopResponse,
   RemoveAclRuleResponse,
-  DescribeBlockByIpTimesListResponse,
+  DeleteNatFwInstanceRequest,
   ModifyVpcFwSequenceRulesRequest,
   ModifySecurityGroupItemRuleStatusRequest,
   ModifyStorageSettingRequest,
-  DescribeIdsWhiteRuleRequest,
   ModifyAssetSyncRequest,
   DescribeNatFwVpcDnsLstResponse,
   DescAcItem,
@@ -314,7 +308,7 @@ import {
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   DescNatDnatRule,
-  DescribeBlockIgnoreListResponse,
+  DescribeAssociatedInstanceListRequest,
   ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
@@ -324,7 +318,6 @@ import {
   VpcFwInstance,
   CreateAlertCenterRuleResponse,
   DescribeAddressTemplateListResponse,
-  CreateIdsWhiteRuleRequest,
 } from "./cfw_models"
 
 /**
@@ -768,18 +761,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * 历史方案，业务已迁移，接口不再适用
-
-删除入侵防御规则白名单接口
-     */
-  async DeleteIdsWhiteRule(
-    req: DeleteIdsWhiteRuleRequest,
-    cb?: (error: string, rep: DeleteIdsWhiteRuleResponse) => void
-  ): Promise<DeleteIdsWhiteRuleResponse> {
-    return this.request("DeleteIdsWhiteRule", req, cb)
-  }
-
-  /**
    * 批量添加入侵防御封禁列表、放通列表规则
    */
   async CreateBlockIgnoreRuleNew(
@@ -837,18 +818,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateAlertCenterOmitResponse) => void
   ): Promise<CreateAlertCenterOmitResponse> {
     return this.request("CreateAlertCenterOmit", req, cb)
-  }
-
-  /**
-     * CreateIdsWhiteRule
-
-创建入侵防御规则白名单接口
-     */
-  async CreateIdsWhiteRule(
-    req: CreateIdsWhiteRuleRequest,
-    cb?: (error: string, rep: CreateIdsWhiteRuleResponse) => void
-  ): Promise<CreateIdsWhiteRuleResponse> {
-    return this.request("CreateIdsWhiteRule", req, cb)
   }
 
   /**
@@ -1428,16 +1397,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 串行防火墙IP开关列表
-   */
-  async DescribeFwEdgeIps(
-    req: DescribeFwEdgeIpsRequest,
-    cb?: (error: string, rep: DescribeFwEdgeIpsResponse) => void
-  ): Promise<DescribeFwEdgeIpsResponse> {
-    return this.request("DescribeFwEdgeIps", req, cb)
-  }
-
-  /**
    * 修改NAT防火墙开关
    */
   async ModifyNatFwSwitch(
@@ -1488,14 +1447,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * 历史方案，业务已迁移，接口不再适用
-
-查询入侵防御规则白名单接口
-     */
-  async DescribeIdsWhiteRule(
-    req: DescribeIdsWhiteRuleRequest,
-    cb?: (error: string, rep: DescribeIdsWhiteRuleResponse) => void
-  ): Promise<DescribeIdsWhiteRuleResponse> {
-    return this.request("DescribeIdsWhiteRule", req, cb)
+   * 串行防火墙IP开关列表
+   */
+  async DescribeFwEdgeIps(
+    req: DescribeFwEdgeIpsRequest,
+    cb?: (error: string, rep: DescribeFwEdgeIpsResponse) => void
+  ): Promise<DescribeFwEdgeIpsResponse> {
+    return this.request("DescribeFwEdgeIps", req, cb)
   }
 }
