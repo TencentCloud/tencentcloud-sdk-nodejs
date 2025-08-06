@@ -53,6 +53,7 @@ import {
   OrganizationUserInfo,
   AssetTag,
   DescribeCheckViewRisksResponse,
+  DescribeConfigCheckRulesRequest,
   DescribeRiskCallRecordResponse,
   DescribeScanReportListRequest,
   NewAlertKey,
@@ -102,6 +103,7 @@ import {
   CheckViewRiskItem,
   AssetViewVULRiskData,
   DescribeOrganizationUserInfoResponse,
+  RiskRuleInfo,
   DescribeVULRiskDetailRequest,
   NICAsset,
   AccessKeyRisk,
@@ -149,6 +151,7 @@ import {
   UpdateAlertStatusListResponse,
   DescribeAssetRiskListResponse,
   DescribeRiskCenterVULViewVULRiskListResponse,
+  DescribeConfigCheckRulesResponse,
   DescribeAccessKeyAssetRequest,
   DescribeRiskCenterVULViewVULRiskListRequest,
   VULRiskAdvanceCFGList,
@@ -255,6 +258,7 @@ import {
   DescribeOtherCloudAssetsRequest,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
+  SourceIPVpcInfo,
   AccessKeyUser,
   DescribeRiskCenterServerRiskListResponse,
   DescribeListenerListRequest,
@@ -496,6 +500,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRiskScanTaskResponse) => void
   ): Promise<DeleteRiskScanTaskResponse> {
     return this.request("DeleteRiskScanTask", req, cb)
+  }
+
+  /**
+   * 云资源配置风险规则列表示例
+   */
+  async DescribeConfigCheckRules(
+    req: DescribeConfigCheckRulesRequest,
+    cb?: (error: string, rep: DescribeConfigCheckRulesResponse) => void
+  ): Promise<DescribeConfigCheckRulesResponse> {
+    return this.request("DescribeConfigCheckRules", req, cb)
   }
 
   /**

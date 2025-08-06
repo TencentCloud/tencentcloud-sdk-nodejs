@@ -383,6 +383,10 @@ export interface CreateInstanceRequest {
    */
   Project?: string
   /**
+   * 产品版本，0-标准版，1-容量增强版
+   */
+  ProductType?: number
+  /**
    * 实例类型。
 - base：免费测试版。
 - single：单机版。
@@ -846,21 +850,21 @@ export interface ScaleUpInstanceRequest {
 - 节点规格可选项（CPU & 内存）必须 >= 当前配置。
 - 可选择的规格信息，请参见[选择节点规格与数量](https://cloud.tencent.com/document/product/1709/113399)。
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 指定升级配置后的内存大小，单位为：GB。
 - 节点规格可选项（CPU & 内存）必须 >= 当前配置。
 - 不同实例类型对 CPU 与内存资源的配置比例有不同的要求。例如，计算型实例，CPU 与内存的分配比例要求为 1:2。CPU 被指定为 4 核，那么内存则应被指定为 8GB。节点规格的详细信息，请参见[选择节点规格与数量](https://cloud.tencent.com/document/product/1709/113399)。
 
    */
-  Memory: number
+  Memory?: number
   /**
    * 指定升级配置后的磁盘容量。
 - 单位：GB。
 - 取值范围为：[10,1000]。
 - 取值必须为10的倍数。
    */
-  StorageSize: number
+  StorageSize?: number
   /**
    * 指定垂直扩容升级节点配置的时间。
 - false：默认值，指在下一个维护时间段内执行升配节点规格的任务。实例列表中“状态”列将显示“待执行配置变更”，等到维护时间窗内启动任务。维护时间的更多信息，请参见维护时间窗。

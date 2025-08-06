@@ -550,6 +550,14 @@ export interface CreateVolumeRequest {
    * 缓存卷大小（GB），Turbo系列需要指定。
    */
   Capacity?: number
+  /**
+   * 是否开启默认扩容，仅turbo类型文件存储支持
+   */
+  EnableAutoScaleUp?: boolean
+  /**
+   * turbo文件系统元数据属性，basic：标准型元数据；enhanced：增强型元数据
+   */
+  MetaType?: string
 }
 
 /**
@@ -1208,6 +1216,25 @@ export interface DescribeRunGroupsResponse {
 }
 
 /**
+ * 缓存卷自动扩容策略
+ */
+export interface VolumeAutoScaleUpRule {
+  /**
+   * 自动扩容策略开启，关闭
+示例值：open,close
+   */
+  Status?: string
+  /**
+   * 集群用量占比，到达这个值后开始扩容,范围[10-90]
+   */
+  ScaleThreshold?: number
+  /**
+   * 扩容后使用量跟集群总量比例,范围[10-90]
+   */
+  TargetThreshold?: number
+}
+
+/**
  * 缓存卷。
  */
 export interface Volume {
@@ -1265,6 +1292,18 @@ export interface Volume {
    * 状态。
    */
   Status?: string
+  /**
+   * turbo自动扩容策略
+   */
+  AutoScaleUpRule?: VolumeAutoScaleUpRule
+  /**
+   * turbo元数据属性
+   */
+  MetaType?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
 }
 
 /**
@@ -1503,6 +1542,14 @@ export interface StorageOption {
 - turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。
    */
   Capacity?: number
+  /**
+   * 是否开启默认扩容，仅turbo类型文件存储支持
+   */
+  EnableAutoScaleUp?: boolean
+  /**
+   * turbo文件系统元数据属性，basic：标准型元数据；enhanced：增强型元数据
+   */
+  MetaType?: string
 }
 
 /**

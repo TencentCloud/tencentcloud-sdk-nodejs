@@ -1613,6 +1613,8 @@ export interface DescribeJobMonitorDataRequest {
 - MemUsage：内存利用率，单位：%
 - LanOuttraffic：内网出带宽，单位：Bytes/s
 - LanIntraffic：内网入带宽，单位：Bytes/s
+- MaxDiskUsage：所有磁盘中的使用率最高的磁盘使用率，单位：%
+- TargetDiskUsage：指定磁盘的使用率，单位：%；配合Dimensions参数使用
    */
   MetricName: string
   /**
@@ -1623,6 +1625,14 @@ export interface DescribeJobMonitorDataRequest {
    * 查询任务实例的终止时间；如果未传入查询终止时间或传入的时间大于任务实例的终止时间（任务实例终止时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），并且任务实例已经结束，会自动将查询终止时间调整到任务实例的终止时间；如果任务实例未结束，会自动将查询终止时间调整到当前时间。传入时间格式只支持零时区格式。
    */
   EndTime?: string
+  /**
+   * 查询指标的扩展参数；当前只支持TargetDiskUsage;
+
+- TargetDiskUsage
+    -支持的查询维度diskname, 维度值为磁盘挂载名，例如vdb；如果不传此参数，默认查询vdb磁盘的使用率。
+    样例：[{"Name":"diskname", "Value":"vdb"}]
+   */
+  Dimensions?: Array<Dimension>
 }
 
 /**
@@ -1710,6 +1720,20 @@ export interface DescribeJobRequest {
    * 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909)
    */
   JobId: string
+}
+
+/**
+ * Job资源监控查询维度
+ */
+export interface Dimension {
+  /**
+   * 查询指标的维度名称
+   */
+  Name: string
+  /**
+   * 查询指标的维度值
+   */
+  Value: string
 }
 
 /**

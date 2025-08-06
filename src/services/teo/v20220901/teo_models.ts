@@ -56,6 +56,20 @@ export interface DescribeSecurityAPIResourceResponse {
 }
 
 /**
+ * TopN数据Entry
+ */
+export interface TopEntryValue {
+  /**
+   * 排序实体名。
+   */
+  Name: string
+  /**
+   * 排序实体数量。
+   */
+  Count: number
+}
+
+/**
  * 预付费套餐自动续费配置项。
  */
 export interface RenewFlag {
@@ -642,17 +656,41 @@ export interface UpstreamHTTP2Parameters {
 }
 
 /**
- * TopN数据Entry
+ * ModifyMultiPathGatewayLine请求参数结构体
  */
-export interface TopEntryValue {
+export interface ModifyMultiPathGatewayLineRequest {
   /**
-   * 排序实体名。
+   * 站点 ID。
    */
-  Name: string
+  ZoneId: string
   /**
-   * 排序实体数量。
+   * 多通道安全加速网关 ID 。
    */
-  Count: number
+  GatewayId: string
+  /**
+   * 线路 ID ， 取值有:
+<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
+<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   */
+  LineId: string
+  /**
+   * 线路类型，取值有： 
+<li>proxy ：EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li> 
+<li>custom ：自定义线路，支持编辑、删除实例和规则。</li>
+   */
+  LineType?: string
+  /**
+   * 线路地址，格式为 host:port，直连线路（ LineType 取值为 direct ）不允许修改，其余类型支持修改。
+   */
+  LineAddress?: string
+  /**
+   * 四层代理实例 ID  ，当线路类型 LineType  取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   */
+  RuleId?: string
 }
 
 /**
@@ -14789,6 +14827,10 @@ export interface ManagedRules {
    * 托管规则组的配置。如果此结构传空数组或 GroupId 未包含在列表内将按照默认方式处理。
    */
   ManagedRuleGroups?: Array<ManagedRuleGroup>
+  /**
+   * 高频扫描防护配置选项，当某一访客的请求频繁命中「配置为拦截」的托管规则时，在一段时间内封禁该访客所有请求。
+   */
+  FrequentScanningProtection?: FrequentScanningProtection
 }
 
 /**
@@ -15303,41 +15345,33 @@ export interface CheckRegionHealthStatus {
 }
 
 /**
- * ModifyMultiPathGatewayLine请求参数结构体
+ * 高频扫描防护配置选项，当某一访客的请求频繁命中「配置为拦截」的托管规则时，在一段时间内封禁该访客所有请求。
  */
-export interface ModifyMultiPathGatewayLineRequest {
+export interface FrequentScanningProtection {
   /**
-   * 站点 ID。
+   * 高频扫描防护规则是否开启。取值有：<li>on：开启，高频扫描防护规则生效；</li><li>off：关闭，高频扫描防护规则不生效。</li>
    */
-  ZoneId: string
+  Enabled?: string
   /**
-   * 多通道安全加速网关 ID 。
+   * 高频扫描防护的处置动作。 当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：<li>Deny：拦截，响应拦截页面；</li><li>Monitor：观察，不处理请求记录安全事件到日志中；</li><li>JSChallenge：JavaScript 挑战，响应 JavaScript 挑战页面。</li>
    */
-  GatewayId: string
+  Action?: SecurityAction
   /**
-   * 线路 ID ， 取值有:
-<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
-<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   * 请求统计的匹配方式，当 Enabled 为 on 时，此字段必填。取值有：<li>http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；</li><li>http.request.ip：客户端 IP。</li>
    */
-  LineId: string
+  CountBy?: string
   /**
-   * 线路类型，取值有： 
-<li>proxy ：EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li> 
-<li>custom ：自定义线路，支持编辑、删除实例和规则。</li>
+   * 此参数指定高频扫描防护的阈值，即在 CountingPeriod 所设置时间范围内命中「配置为拦截」的托管规则时的累计拦截次数，取值范围 1 ~ 4294967294，例如 100，当超过此统计值时，后续请求将触发 Action 所设置的处置动作。当 Enabled 为 on 时，此字段必填。
    */
-  LineType?: string
+  BlockThreshold?: number
   /**
-   * 线路地址，格式为 host:port，直连线路（ LineType 取值为 direct ）不允许修改，其余类型支持修改。
+   * 此参数指定高频扫描防护所统计的时间窗口，即命中「配置为拦截」的托管规则的请求的统计时间窗口，取值 5 ~ 1800，单位仅支持秒（s），例如 5s。 当 Enabled 为 on 时，此字段必填。
    */
-  LineAddress?: string
+  CountingPeriod?: string
   /**
-   * 四层代理实例 ID  ，当线路类型 LineType  取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   * 此参数指定高频扫描防护 Action 参数所设置处置动作的持续时长，取值范围 60 ~ 86400，单位仅支持秒（s），例如 60s。当 Enabled 为 on 时，此字段必填。
    */
-  ProxyId?: string
-  /**
-   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
-   */
-  RuleId?: string
+  ActionDuration?: string
 }
 
 /**

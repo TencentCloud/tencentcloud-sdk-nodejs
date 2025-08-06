@@ -3057,6 +3057,10 @@ export interface CreateInstanceRequest {
    */
   SkuCode: string
   /**
+   * 集群绑定的VPC信息
+   */
+  VpcList: Array<VpcInfo>
+  /**
    * 备注信息
    */
   Remark?: string
@@ -3064,10 +3068,6 @@ export interface CreateInstanceRequest {
    * 标签列表
    */
   TagList?: Array<Tag>
-  /**
-   * 集群绑定的VPC信息，必填
-   */
-  VpcList?: Array<VpcInfo>
   /**
    * 是否开启公网，默认值为false表示不开启
    */

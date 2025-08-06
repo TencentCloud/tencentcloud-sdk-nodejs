@@ -1466,6 +1466,36 @@ export interface DescribeCheckViewRisksResponse {
 }
 
 /**
+ * DescribeConfigCheckRules请求参数结构体
+ */
+export interface DescribeConfigCheckRulesRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filters?: Array<Filters>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序类型
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+}
+
+/**
  * DescribeRiskCallRecord返回参数结构体
  */
 export interface DescribeRiskCallRecordResponse {
@@ -3262,6 +3292,48 @@ export interface DescribeOrganizationUserInfoResponse {
 }
 
 /**
+ * 风险规则
+ */
+export interface RiskRuleInfo {
+  /**
+   * 风险检查项ID
+   */
+  RuleID?: string
+  /**
+   * 云厂商名称
+   */
+  Provider?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 风险名称
+   */
+  RiskTitle?: string
+  /**
+   * 检查类型
+   */
+  CheckType?: string
+  /**
+   * 风险等级
+   */
+  RiskLevel?: string
+  /**
+   * 风险危害
+   */
+  RiskInfluence?: string
+  /**
+   * 风险修复指引报告链接
+   */
+  RiskFixAdvance?: string
+  /**
+   * 边界管控
+   */
+  DispositionType?: string
+}
+
+/**
  * DescribeVULRiskDetail请求参数结构体
  */
 export interface DescribeVULRiskDetailRequest {
@@ -4272,6 +4344,18 @@ export interface ExposesItem {
    * 租户ID字符串
    */
   AppIdStr?: string
+  /**
+   * 记录ID
+   */
+  ExposureID?: number
+  /**
+   * 端口开放数量
+   */
+  PortDetectCount?: number
+  /**
+   * 端口开放结果
+   */
+  PortDetectResult?: string
 }
 
 /**
@@ -5370,6 +5454,40 @@ export interface DescribeRiskCenterVULViewVULRiskListResponse {
    * 漏洞类型列表
    */
   VULTypeLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConfigCheckRules返回参数结构体
+ */
+export interface DescribeConfigCheckRulesResponse {
+  /**
+   * 风险规则数量
+   */
+  TotalCount?: number
+  /**
+   * 风险规则列表
+   */
+  RuleList?: Array<RiskRuleInfo>
+  /**
+   * 云厂商类型选项
+   */
+  ProviderList?: Array<AttributeOptionSet>
+  /**
+   * 风险等级类型选项
+   */
+  RiskLevelList?: Array<AttributeOptionSet>
+  /**
+   * 处置分类选项
+   */
+  DispositionTypeList?: Array<AttributeOptionSet>
+  /**
+   * 检查类型选项
+   */
+  CheckTypeList?: Array<AttributeOptionSet>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6848,6 +6966,10 @@ export interface DescribeCallRecordRequest {
    */
   SourceIPID?: number
   /**
+   * 访问账号uin
+   */
+  AccUin?: string
+  /**
    * 过滤器
    */
   Filter?: Filter
@@ -7579,8 +7701,7 @@ export interface CallRecord {
    */
   EventType?: number
   /**
-   * 用户类型
-CAMUser/root/AssumedRole
+   * 用户类型CAMUser/root/AssumedRole
 
    */
   UserType?: string
@@ -7633,6 +7754,10 @@ CAMUser/root/AssumedRole
    * 运营商
    */
   ISP?: string
+  /**
+   * 账号外vpc信息列表
+   */
+  VpcInfo?: Array<SourceIPVpcInfo>
 }
 
 /**
@@ -9433,6 +9558,28 @@ export interface ClbListenerListInfo {
    * 负载均衡域名
    */
   LoadBalancerDomain?: string
+}
+
+/**
+ * 调用源IP 外部账号信息
+ */
+export interface SourceIPVpcInfo {
+  /**
+   * 账号名称
+   */
+  Name?: string
+  /**
+   * vpc所属appid
+   */
+  AppID?: number
+  /**
+   * vpc id
+   */
+  VpcID?: string
+  /**
+   * vpc 名称
+   */
+  VpcName?: string
 }
 
 /**

@@ -228,6 +228,16 @@ it("csip.v20221121.DeleteRiskScanTask", async function () {
     }
 })
 
+it("csip.v20221121.DescribeConfigCheckRules", async function () {
+    try {
+       const data = await client.DescribeConfigCheckRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterAssetViewWeakPasswordRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterAssetViewWeakPasswordRiskList({})

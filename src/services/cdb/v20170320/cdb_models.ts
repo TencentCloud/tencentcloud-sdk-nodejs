@@ -752,7 +752,7 @@ export interface ModifyInstanceParamRequest {
    */
   ParamList?: Array<Parameter>
   /**
-   * 模板 ID，ParamList 和 TemplateId 必须至少传其中之一。可通过 [DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/236/32660) 接口获取。
+   * 模板 ID，ParamList 和 TemplateId 必须至少传其中之一。可通过 [DescribeParamTemplates](https://cloud.tencent.com/document/api/236/32659) 接口获取。
    */
   TemplateId?: number
   /**
@@ -1936,7 +1936,7 @@ export interface UpgradeDBInstanceRequest {
  */
 export interface ModifyParamTemplateRequest {
   /**
-   * 模板 ID。可通过 [DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/236/32660) 接口获取。
+   * 模板 ID。可通过 [DescribeParamTemplates](https://cloud.tencent.com/document/api/236/32659) 接口获取。
    */
   TemplateId: number
   /**

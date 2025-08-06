@@ -646,8 +646,7 @@ SpecName从DescribeSpec接口中返回的DataSpec.Name获取
    */
   HAZk?: boolean
   /**
-   * ZK节点
-SpecName从DescribeSpec接口中返回的CommonSpec.Name（ZK节点）获取
+   * ZK节点SpecName从DescribeSpec接口中返回的CommonSpec结构体的Name（ZK节点）获取
    */
   CommonSpec?: NodeSpec
   /**
@@ -655,9 +654,13 @@ SpecName从DescribeSpec接口中返回的CommonSpec.Name（ZK节点）获取
    */
   TagItems?: Array<Tag>
   /**
-   * 副可用去信息
+   * 副可用区信息
    */
   SecondaryZoneInfo?: Array<SecondaryZoneInfo>
+  /**
+   * default账号登陆实例的密码。8-16个字符，至少包含大写字母、小写字母、数字和特殊字符!@#%^*中的三种，第一个字符不能为特殊字符
+   */
+  CkDefaultUserPwd?: string
 }
 
 /**

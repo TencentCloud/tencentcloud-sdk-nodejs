@@ -63,6 +63,7 @@ import {
   Filter,
   ResourceIds,
   DescribeRunGroupsResponse,
+  VolumeAutoScaleUpRule,
   Volume,
   VolumeInfo,
   TerminateRunGroupRequest,

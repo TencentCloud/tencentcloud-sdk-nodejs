@@ -89,6 +89,7 @@ import {
   DescribeComputeEnvCreateInfosResponse,
   RunSecurityServiceEnabled,
   DescribeJobRequest,
+  Dimension,
   RedirectInfo,
   DescribeInstanceCategoriesResponse,
   ModifyTaskTemplateResponse,

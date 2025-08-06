@@ -10547,7 +10547,7 @@ export interface DescribeRocketMQGroupsRequest {
    */
   FilterGroup?: string
   /**
-   * 按照指定字段排序，可选值为tps，accumulative
+   * 按照指定字段排序，可选值为 subscribeNum: 订阅 Topic 个数
    */
   SortedBy?: string
   /**
@@ -10778,11 +10778,15 @@ export interface ResetRocketMQConsumerOffSetRequest {
   /**
    * 主题名称
    */
-  Topic: string
+  Topic?: string
   /**
    * 重置指定的时间戳，仅在 Type 为1是生效，以毫秒为单位
    */
   ResetTimestamp?: number
+  /**
+   * 重置的是否是retry topic
+   */
+  RetryFlag?: boolean
 }
 
 /**

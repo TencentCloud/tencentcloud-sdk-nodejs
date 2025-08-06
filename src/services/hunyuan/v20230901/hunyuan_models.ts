@@ -1573,7 +1573,7 @@ export interface SubmitHunyuanImageJobRequest {
   Clarity?: string
   /**
    * 用于引导内容的参考图。
-图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png。
    */
   ContentImage?: Image
   /**
