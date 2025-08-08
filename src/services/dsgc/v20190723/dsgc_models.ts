@@ -761,7 +761,7 @@ export interface ReportInfo {
    */
   ProgressPercent?: number
   /**
-   * 报告模版名称
+   * 报告模板名称
    */
   ReportTemplateName?: string
 }
@@ -7316,7 +7316,7 @@ export interface CreateDSPAComplianceGroupRequest {
    */
   LevelGroupId?: number
   /**
-   * 1代表模版开启，0代表模版关闭
+   * 1代表模板开启，0代表模板关闭
    */
   Status?: number
   /**
@@ -8165,7 +8165,7 @@ export interface DescribeDSPAComplianceGroupsRequest {
    */
   ComplianceGroupTypeList?: Array<number | bigint>
   /**
-   * 是否仅显示已开启模版
+   * 是否仅显示已开启模板
    */
   IsFilterCloseComplianceGroup?: boolean
 }
@@ -8941,11 +8941,11 @@ export interface DspaDiscoveryComplianceGroupInfo {
    */
   IsAlias?: boolean
   /**
-   * 1代表模版开启，0代表模版关闭
+   * 1代表模板开启，0代表模板关闭
    */
   Status?: number
   /**
-   * 模版最后修改时间
+   * 模板最后修改时间
    */
   ModifyTime?: string
 }

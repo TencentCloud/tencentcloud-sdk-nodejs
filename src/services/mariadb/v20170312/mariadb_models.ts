@@ -1868,6 +1868,10 @@ export interface DescribeDBInstanceDetailResponse {
    */
   CpuType?: string
   /**
+   * 删除保护标记，1: 已开启删除保护，0: 未开启删除保护
+   */
+  ProtectedProperty?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2466,7 +2470,7 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    */
   InstanceId: string
   /**
-   * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组
+   * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。<br>注意：改入参会全量替换存量已有安全组集合，并非增量更新。修改需传入全量的预期集合。
    */
   SecurityGroupIds: Array<string>
 }
@@ -2645,6 +2649,10 @@ export interface KillSessionRequest {
    * 会话ID列表
    */
   SessionId: Array<number | bigint>
+  /**
+   * 节点ID，可指定主节点或者备节点进行kill。可选参数，不传默认为主节点。
+   */
+  NodeId?: string
 }
 
 /**
@@ -3191,6 +3199,10 @@ export interface DBInstance {
    * 数据库版本
    */
   DbVersionId?: string
+  /**
+   * 实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护
+   */
+  ProtectedProperty?: number
 }
 
 /**

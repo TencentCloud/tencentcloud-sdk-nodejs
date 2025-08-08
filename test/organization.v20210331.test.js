@@ -708,6 +708,16 @@ it("organization.v20210331.DeleteOrganizationMembers", async function () {
     }
 })
 
+it("organization.v20210331.DescribeResourceToShareMember", async function () {
+    try {
+       const data = await client.DescribeResourceToShareMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.ListOrgServiceAssignMember", async function () {
     try {
        const data = await client.ListOrgServiceAssignMember({})

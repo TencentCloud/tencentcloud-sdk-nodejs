@@ -42,6 +42,7 @@ import {
   RejectJoinShareUnitInvitationRequest,
   DescribeIdentityCenterResponse,
   DescribePolicyConfigResponse,
+  GetZoneStatisticsResponse,
   GetExternalSAMLIdentityProviderResponse,
   ListOrganizationIdentityRequest,
   DeleteOrganizationMembersRequest,
@@ -191,6 +192,7 @@ import {
   DescribeEffectivePolicyResponse,
   CreateOrgServiceAssignResponse,
   AddOrganizationMemberEmailResponse,
+  DescribeResourceToShareMemberRequest,
   AddShareUnitMembersResponse,
   ListGroupsResponse,
   CreateOrganizationMemberPolicyRequest,
@@ -233,7 +235,7 @@ import {
   OrgMemberPolicy,
   CreateUserRequest,
   QuitOrganizationResponse,
-  GetZoneStatisticsResponse,
+  DescribeResourceToShareMemberResponse,
   UpdatePolicyResponse,
   DeleteShareUnitMembersResponse,
   UpdateGroupResponse,
@@ -282,6 +284,7 @@ import {
   ListSCIMCredentialsResponse,
   DescribeOrganizationNodesRequest,
   UpdateCustomPolicyForRoleConfigurationRequest,
+  ShareResourceToMember,
   InviteOrganizationMemberResponse,
   BindOrganizationMemberAuthAccountResponse,
   ListOrgServiceAssignMemberRequest,
@@ -1026,6 +1029,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteOrganizationMembersResponse) => void
   ): Promise<DeleteOrganizationMembersResponse> {
     return this.request("DeleteOrganizationMembers", req, cb)
+  }
+
+  /**
+   * 获取与我共享的资源列表。
+   */
+  async DescribeResourceToShareMember(
+    req: DescribeResourceToShareMemberRequest,
+    cb?: (error: string, rep: DescribeResourceToShareMemberResponse) => void
+  ): Promise<DescribeResourceToShareMemberResponse> {
+    return this.request("DescribeResourceToShareMember", req, cb)
   }
 
   /**

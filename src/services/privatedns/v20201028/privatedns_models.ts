@@ -84,7 +84,7 @@ export interface DescribePrivateDNSAccountListResponse {
  */
 export interface DescribePrivateZoneRecordListRequest {
   /**
-   * 私有域ID: zone-xxxxxx
+   * 私有域ID: zone-12c5a6e8
    */
   ZoneId: string
   /**
@@ -733,7 +733,7 @@ export interface DescribePrivateZoneResponse {
  */
 export interface CreatePrivateZoneResponse {
   /**
-   * 私有域ID, zone-12345678
+   * 私有域ID, zone-12sa5ce78
    */
   ZoneId?: string
   /**
@@ -1305,7 +1305,7 @@ export interface DeletePrivateZoneRecordResponse {
  */
 export interface ModifyPrivateZoneVpcResponse {
   /**
-   * 私有域ID, zone-12345ds6
+   * 私有域ID, zone-12e45ds6
    */
   ZoneId?: string
   /**

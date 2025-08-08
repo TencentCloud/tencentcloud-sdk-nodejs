@@ -158,6 +158,16 @@ it("cfs.v20190719.DeleteLifecyclePolicy", async function () {
     }
 })
 
+it("cfs.v20190719.UnbindAutoSnapshotPolicy", async function () {
+    try {
+       const data = await client.UnbindAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.CreateLifecyclePolicyDownloadTask", async function () {
     try {
        const data = await client.CreateLifecyclePolicyDownloadTask({})
@@ -518,9 +528,9 @@ it("cfs.v20190719.UpdateAutoSnapshotPolicy", async function () {
     }
 })
 
-it("cfs.v20190719.UnbindAutoSnapshotPolicy", async function () {
+it("cfs.v20190719.DoDirectoryOperation", async function () {
     try {
-       const data = await client.UnbindAutoSnapshotPolicy({})
+       const data = await client.DoDirectoryOperation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -10835,6 +10835,10 @@ export interface TaskResponseInfo {
    * spark引擎资源组名称
    */
   ResourceGroupName?: string
+  /**
+   * 任务执行耗时
+   */
+  JobTimeSum?: number
 }
 
 /**

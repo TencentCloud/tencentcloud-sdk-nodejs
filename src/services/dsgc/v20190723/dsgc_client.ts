@@ -1624,7 +1624,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DSPA评估模版关联的评估控制项列表
+   * 获取DSPA评估模板关联的评估控制项列表
    */
   async DescribeDSPAAssessmentTemplateControlItems(
     req: DescribeDSPAAssessmentTemplateControlItemsRequest,

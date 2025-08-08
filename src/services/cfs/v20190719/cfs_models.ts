@@ -949,6 +949,20 @@ export interface DescribeCfsFileSystemClientsResponse {
 }
 
 /**
+ * DoDirectoryOperation返回参数结构体
+ */
+export interface DoDirectoryOperationResponse {
+  /**
+   * 1:成功  0:失败  创建目录的操作，1表示创建成功，0表示创建失败。  确认目录是否存在的操作，1表示目录存在，0表示目录不存在。  说明：创建目录操作若目录已存在，也会返回创建成功。
+   */
+  Result?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteMountTarget返回参数结构体
  */
 export interface DeleteMountTargetResponse {
@@ -3186,4 +3200,26 @@ export interface DescribeDataFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DoDirectoryOperation请求参数结构体
+ */
+export interface DoDirectoryOperationRequest {
+  /**
+   * 文件系统Id
+   */
+  FileSystemId: string
+  /**
+   * create：创建目录  check：确认目录是否存在
+   */
+  OpetationType: string
+  /**
+   * 目录的绝对路径  默认递归创建（即如果目录中有子目录不存在，则先创建出对应子目录）
+   */
+  DirectoryPath: string
+  /**
+   * 创建目录的权限，若不传，默认为0755  若Operation Type为check，此值无实际意义
+   */
+  Mode?: string
 }

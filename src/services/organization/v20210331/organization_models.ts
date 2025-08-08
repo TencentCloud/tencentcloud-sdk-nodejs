@@ -580,6 +580,20 @@ export interface DescribePolicyConfigResponse {
 }
 
 /**
+ * GetZoneStatistics返回参数结构体
+ */
+export interface GetZoneStatisticsResponse {
+  /**
+   * 空间的统计信息。
+   */
+  ZoneStatistics?: ZoneStatistics
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetExternalSAMLIdentityProvider返回参数结构体
  */
 export interface GetExternalSAMLIdentityProviderResponse {
@@ -3580,6 +3594,36 @@ export interface AddOrganizationMemberEmailResponse {
 }
 
 /**
+ * DescribeResourceToShareMember请求参数结构体
+ */
+export interface DescribeResourceToShareMemberRequest {
+  /**
+   * 地域
+   */
+  Area: string
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 每页条数
+   */
+  Limit: number
+  /**
+   * 搜索关键字，支持业务资源ID搜索
+   */
+  SearchKey?: string
+  /**
+   * 资源类型
+   */
+  Type?: string
+  /**
+   * 业务资源ID。最大50个
+   */
+  ProductResourceIds?: Array<string>
+}
+
+/**
  * AddShareUnitMembers返回参数结构体
  */
 export interface AddShareUnitMembersResponse {
@@ -4416,13 +4460,19 @@ export interface QuitOrganizationResponse {
 }
 
 /**
- * GetZoneStatistics返回参数结构体
+ * DescribeResourceToShareMember返回参数结构体
  */
-export interface GetZoneStatisticsResponse {
+export interface DescribeResourceToShareMemberResponse {
   /**
-   * 空间的统计信息。
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneStatistics?: ZoneStatistics
+  Total?: number
+  /**
+   * 详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ShareResourceToMember>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5405,6 +5455,41 @@ export interface UpdateCustomPolicyForRoleConfigurationRequest {
    * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
    */
   NewCustomPolicyDocument?: string
+}
+
+/**
+ * 与我共享的资源
+ */
+export interface ShareResourceToMember {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+  /**
+   * 资源类型
+   */
+  Type: string
+  /**
+   * 共享单元ID
+   */
+  UnitId: string
+  /**
+   * 共享单元名
+   */
+  UnitName: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 业务资源ID
+   */
+  ProductResourceId: string
+  /**
+   * 共享管理员uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShareManagerUin: number
 }
 
 /**

@@ -62,6 +62,7 @@ import {
   DescribeAvailableZoneInfoResponse,
   DeleteCfsSnapshotResponse,
   DescribeCfsFileSystemClientsResponse,
+  DoDirectoryOperationResponse,
   DeleteMountTargetResponse,
   ModifyLifecyclePolicyResponse,
   CreateCfsSnapshotRequest,
@@ -161,6 +162,7 @@ import {
   CreateAutoSnapshotPolicyRequest,
   CreateDataFlowRequest,
   DescribeDataFlowResponse,
+  DoDirectoryOperationRequest,
 } from "./cfs_models"
 
 /**
@@ -312,6 +314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLifecyclePolicyResponse) => void
   ): Promise<DeleteLifecyclePolicyResponse> {
     return this.request("DeleteLifecyclePolicy", req, cb)
+  }
+
+  /**
+   * 解除文件系统绑定的快照策略
+   */
+  async UnbindAutoSnapshotPolicy(
+    req: UnbindAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: UnbindAutoSnapshotPolicyResponse) => void
+  ): Promise<UnbindAutoSnapshotPolicyResponse> {
+    return this.request("UnbindAutoSnapshotPolicy", req, cb)
   }
 
   /**
@@ -676,13 +688,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解除文件系统绑定的快照策略
+   * 文件系统目录操作接口
    */
-  async UnbindAutoSnapshotPolicy(
-    req: UnbindAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: UnbindAutoSnapshotPolicyResponse) => void
-  ): Promise<UnbindAutoSnapshotPolicyResponse> {
-    return this.request("UnbindAutoSnapshotPolicy", req, cb)
+  async DoDirectoryOperation(
+    req: DoDirectoryOperationRequest,
+    cb?: (error: string, rep: DoDirectoryOperationResponse) => void
+  ): Promise<DoDirectoryOperationResponse> {
+    return this.request("DoDirectoryOperation", req, cb)
   }
 
   /**
