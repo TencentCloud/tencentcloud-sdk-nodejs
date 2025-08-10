@@ -232,6 +232,7 @@ import {
   ModifyIntegrationRoleResponse,
   ApproverComponentLimitType,
   CreateFlowEvidenceReportResponse,
+  RuleIdConfig,
   OperateTemplateResponse,
   CreateOrganizationGroupInvitationLinkResponse,
   DeleteIntegrationRoleUsersResponse,

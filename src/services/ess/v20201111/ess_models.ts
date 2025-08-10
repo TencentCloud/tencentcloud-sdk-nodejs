@@ -7192,7 +7192,7 @@ export interface FlowGroupInfo {
   Approvers: Array<ApproverInfo>
   /**
    * 文件资源ID，通过多文件上传[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获得，为32位字符串。
-建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。
+注：此字段定义为数组，但仅支持单个文件
    */
   FileIds?: Array<string>
   /**
@@ -7370,6 +7370,20 @@ export interface CreateFlowEvidenceReportResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频核身相关配置
+ */
+export interface RuleIdConfig {
+  /**
+   * 意愿核身语音播报速度，配置后问答模式和点头模式的语音播报环节都会生效，默认值为0：
+0-智能语速（根据播报文案的长度自动调整语音播报速度）
+1-固定1倍速
+2-固定1.2倍速
+3-固定1.5倍速
+   */
+  Speed?: number
 }
 
 /**
@@ -10583,6 +10597,10 @@ export interface Intention {
 注：`选择点头模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可点头同意。`
    */
   IntentionActions?: Array<IntentionAction>
+  /**
+   * 视频核身相关配置
+   */
+  RuleIdConfig?: RuleIdConfig
 }
 
 /**

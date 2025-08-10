@@ -3882,11 +3882,11 @@ export interface CreateDataEngineRequest {
    */
   PayMode?: number
   /**
-   * 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认1
+   * 资源使用时长，后付费：固定填1，预付费：最少填1，代表购买资源一个月，最长不超过120。默认1
    */
   TimeSpan?: number
   /**
-   * 资源使用时长的单位，后付费：s，预付费：m。默认为s
+   * 资源使用时长的单位，后付费：h，预付费：m。默认为h
    */
   TimeUnit?: string
   /**
@@ -3910,7 +3910,7 @@ export interface CreateDataEngineRequest {
    */
   CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy
   /**
-   * 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL
+   * 引擎执行任务类型，有效值：SQL/BATCH，标准引擎默认为BATCH
    */
   EngineExecType?: string
   /**

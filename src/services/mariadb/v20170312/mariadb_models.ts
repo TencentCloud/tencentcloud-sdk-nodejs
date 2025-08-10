@@ -2470,7 +2470,7 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    */
   InstanceId: string
   /**
-   * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。<br>注意：改入参会全量替换存量已有安全组集合，并非增量更新。修改需传入全量的预期集合。
+   * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。<br>注意：该入参会全量替换存量已有安全组集合，并非增量更新。修改需传入全量的预期集合。
    */
   SecurityGroupIds: Array<string>
 }

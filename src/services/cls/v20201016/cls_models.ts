@@ -642,7 +642,8 @@ export interface DeleteConsoleSharingRequest {
  */
 export interface UploadLogRequest {
   /**
-   * 主题id
+   * 日志主题id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
   /**
@@ -651,7 +652,9 @@ export interface UploadLogRequest {
    */
   HashKey?: string
   /**
-   * 压缩方法
+   * 压缩方法，目前支持
+- lz4
+- zstd
    */
   CompressType?: string
 }
@@ -1279,11 +1282,11 @@ export interface KafkaRechargeInfo {
    */
   Offset?: number
   /**
-   * 创建时间
+   * 创建时间。格式`YYYY-MM-DD HH:MM:SS`
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * 更新时间。格式`YYYY-MM-DD HH:MM:SS`
    */
   UpdateTime?: string
   /**
@@ -1307,7 +1310,12 @@ export interface DeleteKafkaRechargeResponse {
  */
 export interface ContainerWorkLoadInfo {
   /**
-   * 工作负载的类型
+   * 工作负载的类型，支持
+- deployment
+- statefulset
+- daemonset
+- job
+- cronjob
    */
   Kind: string
   /**
@@ -2761,7 +2769,12 @@ export interface TopicExtendInfo {
  */
 export interface EventLog {
   /**
-   * 事件通道，支持Application，Security，Setup，System，ALL
+   * 事件通道，支持
+- Application 应用日志
+- Security 安全日志
+- Setup 启动日志
+- System 系统日志
+- ALL 所有日志
 
    */
   EventChannel: string
@@ -2770,7 +2783,7 @@ export interface EventLog {
    */
   TimeType: number
   /**
-   * 时间，用户选择自定义时间类型时，需要指定时间
+   * 时间，用户选择自定义时间类型时，需要指定时间，单位秒
    */
   Timestamp?: number
   /**
@@ -3378,6 +3391,8 @@ export interface CheckRechargeKafkaServerRequest {
   /**
    * 腾讯云CKafka实例ID。
 KafkaType为0时，KafkaInstance必填
+
+- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。
    */
   KafkaInstance?: string
   /**
@@ -6106,6 +6121,7 @@ export interface PreviewKafkaRechargeRequest {
   Offset: number
   /**
    * 腾讯云CKafka实例ID，当KafkaType为0时参数KafkaInstance有效且必填。
+- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。
    */
   KafkaInstance?: string
   /**
@@ -6124,7 +6140,9 @@ KafkaType为1并且IsEncryptionAddr为true时Protocol必填。
    */
   Protocol?: KafkaProtocolInfo
   /**
-   * 用户Kafka消费组
+   * 用户Kafka消费组。
+
+- 消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。
    */
   ConsumerGroupName?: string
   /**
@@ -6383,11 +6401,15 @@ KafkaType为1并且IsEncryptionAddr为true时Protocol必填。
  */
 export interface DeleteKafkaRechargeRequest {
   /**
-   * Kafka导入配置ID
+   * Kafka导入配置Id。
+
+- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
+- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
    */
   Id: string
   /**
-   * 导入CLS目标topic ID
+   * 导入CLS目标日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
 }
@@ -8044,6 +8066,7 @@ export interface DescribeMachineGroupConfigsRequest {
 export interface ModifyConfigExtraRequest {
   /**
    * 采集配置扩展信息id
+- 通过[获取特殊采集配置](https://cloud.tencent.com/document/api/614/71164)获取采集配置扩展信息id。
    */
   ConfigExtraId: string
   /**
@@ -8052,10 +8075,11 @@ export interface ModifyConfigExtraRequest {
   Name?: string
   /**
    * 日志主题id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId?: string
   /**
-   * 节点文件配置信息
+   * 自建k8s-节点文件配置信息,包括文件路径、名称及元数据相关信息，详细参考https://cloud.tencent.com/document/api/614/56471#HostFileInfo
    */
   HostFile?: HostFileInfo
   /**
@@ -8064,7 +8088,7 @@ export interface ModifyConfigExtraRequest {
    */
   ContainerFile?: ContainerFileInfo
   /**
-   * 容器标准输出信息
+   * 自建k8s-容器标准输出信息，包括容器、命名空间等，详细参考https://cloud.tencent.com/document/api/614/56471#ContainerStdoutInfo
    */
   ContainerStdout?: ContainerStdoutInfo
   /**
@@ -8100,11 +8124,15 @@ export interface ModifyConfigExtraRequest {
    */
   UserDefineRule?: string
   /**
-   * 类型：container_stdout、container_file、host_file
+   * 容器场景，日志采集输入类型，支持以下三种类型
+- container_stdout 标准输出
+- container_file 容器文件
+- host_file 主机节点文件
    */
   Type?: string
   /**
    * 机器组ID
+- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。
    */
   GroupId?: string
   /**
@@ -8113,14 +8141,17 @@ export interface ModifyConfigExtraRequest {
   ConfigFlag?: string
   /**
    * 日志集ID
+- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集Id。
    */
   LogsetId?: string
   /**
-   * 日志集name
+   * 日志集名称
+- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集名称。
    */
   LogsetName?: string
   /**
-   * 日志主题name
+   * 日志主题名称
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题名称。
    */
   TopicName?: string
   /**
@@ -8251,7 +8282,20 @@ export interface DeleteMachineGroupInfoResponse {
  */
 export interface CheckRechargeKafkaServerResponse {
   /**
-   * Kafka集群可访问状态，0：可正常访问 ...
+   * Kafka集群可访问状态。
+
+- 0：可正常访问 
+- -1：broker 连接失败
+- -2：sasl 鉴权失败
+- -3：ckafka 角色未授权
+- -4：topic 列表不存在
+- -5：topic 内暂无数据
+- -6：用户没有 ckafka 权限
+- -7：消费组已经存在
+- -8：kafka 实例不存在或已销毁
+- -9：Broker 列表为空
+- -10：Broker 地址格式不正确
+- -11：Broker 端口非整型
    */
   Status?: number
   /**

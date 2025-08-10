@@ -262,6 +262,7 @@ import {
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
   UserInfo,
+  RuleIdConfig,
   CreateBatchInitOrganizationUrlRequest,
   CreateFlowGroupSignReviewRequest,
   ChannelBillUsageDetail,
