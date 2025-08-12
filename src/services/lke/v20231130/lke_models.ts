@@ -2122,21 +2122,6 @@ export interface ListRejectedQuestionPreviewResponse {
 }
 
 /**
- * ListAppCategory返回参数结构体
- */
-export interface ListAppCategoryResponse {
-  /**
-   * 应用类型列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  List?: Array<ListAppCategoryRspOption>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateApp返回参数结构体
  */
 export interface CreateAppResponse {
@@ -4053,11 +4038,6 @@ export interface KnowledgeBaseInfo {
 }
 
 /**
- * ListAppCategory请求参数结构体
- */
-export type ListAppCategoryRequest = null
-
-/**
  * ListReleaseConfigPreview请求参数结构体
  */
 export interface ListReleaseConfigPreviewRequest {
@@ -5480,6 +5460,10 @@ export interface ModifyAttributeLabelResponse {
    * 任务ID
    */
   TaskId?: string
+  /**
+   * 标签ID与名称
+   */
+  Labels?: Array<AttributeLabel>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7564,6 +7548,10 @@ export interface CreateAttributeLabelResponse {
    */
   AttrBizId?: string
   /**
+   * 标签值ID与名称
+   */
+  Labels?: Array<AttributeLabel>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7917,27 +7905,6 @@ export interface ListRejectedQuestionRequest {
 
    */
   Query?: string
-}
-
-/**
- * 应用类型详情
- */
-export interface ListAppCategoryRspOption {
-  /**
-   * 类型名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Text?: string
-  /**
-   * 类型值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-  /**
-   * 类型log
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Logo?: string
 }
 
 /**

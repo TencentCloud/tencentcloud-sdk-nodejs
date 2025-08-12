@@ -1523,7 +1523,7 @@ export interface ModifyDomainOwnerRequest {
    */
   Domain: string
   /**
-   * 域名需要转入的账号，支持Uin或者邮箱格式
+   * 域名需要转入的账号Uin
    */
   Account: string
   /**
@@ -5258,6 +5258,10 @@ export interface WhoisInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Dnssec?: string
+  /**
+   * 腾讯注册商资质
+   */
+  RegistrarType?: string
 }
 
 /**

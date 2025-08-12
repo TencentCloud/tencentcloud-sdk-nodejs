@@ -498,16 +498,6 @@ it("lke.v20231130.ListQACate", async function () {
     }
 })
 
-it("lke.v20231130.ListAppCategory", async function () {
-    try {
-       const data = await client.ListAppCategory({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.DescribeQA", async function () {
     try {
        const data = await client.DescribeQA({})

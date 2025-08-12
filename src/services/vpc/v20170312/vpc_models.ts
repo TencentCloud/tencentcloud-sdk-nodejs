@@ -16597,7 +16597,12 @@ export interface DeleteRouteTableRequest {
 /**
  * AssociateHaVipInstance请求参数结构体
  */
-export type AssociateHaVipInstanceRequest = null
+export interface AssociateHaVipInstanceRequest {
+  /**
+   * HaVip绑定的子机或网卡。最多支持10个实例。
+   */
+  HaVipAssociationSet: Array<HaVipAssociation>
+}
 
 /**
  * DescribeCdcLDCXList返回参数结构体

@@ -88,7 +88,6 @@ import {
   GetDocPreviewRequest,
   ListDocCateResponse,
   ListRejectedQuestionPreviewResponse,
-  ListAppCategoryResponse,
   CreateAppResponse,
   Agent,
   DescribeAttributeLabelRequest,
@@ -163,7 +162,6 @@ import {
   DescribeReleaseRequest,
   DescribeDocRequest,
   KnowledgeBaseInfo,
-  ListAppCategoryRequest,
   ListReleaseConfigPreviewRequest,
   CallDetail,
   AgentToolReqParam,
@@ -298,7 +296,6 @@ import {
   GetVarListResponse,
   WorkFlowSummary,
   ListRejectedQuestionRequest,
-  ListAppCategoryRspOption,
   AgentPluginHeader,
   UpdateSharedKnowledgeResponse,
   DescribeSearchStatsGraphResponse,
@@ -839,16 +836,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListQACateResponse) => void
   ): Promise<ListQACateResponse> {
     return this.request("ListQACate", req, cb)
-  }
-
-  /**
-   * 应用类型列表
-   */
-  async ListAppCategory(
-    req?: ListAppCategoryRequest,
-    cb?: (error: string, rep: ListAppCategoryResponse) => void
-  ): Promise<ListAppCategoryResponse> {
-    return this.request("ListAppCategory", req, cb)
   }
 
   /**

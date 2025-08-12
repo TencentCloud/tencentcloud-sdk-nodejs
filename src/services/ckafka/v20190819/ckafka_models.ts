@@ -112,9 +112,9 @@ export interface FetchMessageByOffsetRequest {
    */
   Partition: number
   /**
-   * 位点信息，必填
+   * 位点信息
    */
-  Offset?: number
+  Offset: number
 }
 
 /**
@@ -904,13 +904,13 @@ export interface DeleteRouteTriggerTimeRequest {
  */
 export interface CreatePostPaidInstanceRequest {
   /**
+   * 私有网络Id  创建的实例默认接入点所在的 vpc 对应 vpcId
+   */
+  VpcId: string
+  /**
    * ckafka集群实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
   InstanceName?: string
-  /**
-   * 私有网络Id  创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
-   */
-  VpcId?: string
   /**
    * 子网id。创建实例默认接入点所在的子网对应的子网 id
    */
@@ -4112,9 +4112,9 @@ export interface FetchDatahubMessageByOffsetRequest {
    */
   Partition: number
   /**
-   * 位点信息，必填
+   * 位点信息
    */
-  Offset?: number
+  Offset: number
 }
 
 /**
@@ -6698,13 +6698,13 @@ export interface CreateInstancePreRequest {
    */
   InstanceType: number
   /**
-   * 私有网络Id，必填
+   * 私有网络Id
    */
-  VpcId?: string
+  VpcId: string
   /**
-   * 子网id，必填
+   * 子网id
    */
-  SubnetId?: string
+  SubnetId: string
   /**
    * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
    */

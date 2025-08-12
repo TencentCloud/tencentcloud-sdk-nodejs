@@ -20,35 +20,39 @@
  */
 export interface DescribePublicConfigSummaryRequest {
   /**
-   * 查询关键字，模糊查询：配置项名称，不传入时查询全量
+   * 查询关键字，模糊查询：配置项名称，不传入时查询全量。
    */
   SearchWord?: string
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数，默认为20
+   * 返回数量，默认为20，最大值为50。
    */
   Limit?: number
   /**
-   * 按时间排序：creation_time；按名称排序：config_name
+   * 排序字段。
+- creation_time：按时间排序
+- config_name：按名称排序
    */
   OrderBy?: string
   /**
-   * 升序传 0，降序传 1
+   * 排序顺序。
+- 0：升序
+- 1：降序
    */
   OrderType?: number
   /**
-   * 无
+   * TAG标签资源值。
    */
   ConfigTagList?: Array<string>
   /**
-   * 无
+   * 忽略传参，业务预留字段。
    */
   DisableProgramAuthCheck?: boolean
   /**
-   * 无
+   * 配置ID。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigIdList?: Array<string>
 }
@@ -509,7 +513,7 @@ export interface TsfPageLicenseTag {
  */
 export interface DescribeApiVersionsResponse {
   /**
-   * API版本列表
+   * API版本列表。
    */
   Result?: Array<ApiVersionArray>
   /**
@@ -561,7 +565,7 @@ false：停止失败
  */
 export interface CreateConfigTemplateWithDetailRespResponse {
   /**
-   * 创建成功，返回 ID
+   * 创建成功，返回配置模板ID。
    */
   Result?: ConfigTemplate
   /**
@@ -585,7 +589,9 @@ export interface DeletePathRewritesRequest {
  */
 export interface DeleteLaneResponse {
   /**
-   * 删除成功: true / 删除失败: false
+   * 删除结果。
+- true：删除成功
+- false：删除失败
    */
   Result?: boolean
   /**
@@ -599,7 +605,7 @@ export interface DeleteLaneResponse {
  */
 export interface DescribeGroupReleaseRequest {
   /**
-   * 部署组ID
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
 }
@@ -609,7 +615,7 @@ export interface DescribeGroupReleaseRequest {
  */
 export interface DescribeConfigTemplateResponse {
   /**
-   * 导入结果
+   * 导入结果。
    */
   Result?: ConfigTemplate
   /**
@@ -737,7 +743,7 @@ export interface SimpleApplication {
  */
 export interface ContinueRunFailedTaskBatchRequest {
   /**
-   * 批次ID。
+   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入执行记录页，第一列即为任务批次ID，在[任务执行记录](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=task)页能查看所有任务批次ID。
    */
   BatchId: string
 }
@@ -857,7 +863,7 @@ export interface DescribeSimpleGroupsResponse {
  */
 export interface DescribeConfigsResponse {
   /**
-   * 分页后的配置项列表
+   * 分页后的配置项列表。
    */
   Result?: TsfPageConfig
   /**
@@ -885,15 +891,15 @@ export interface ModifyContainerReplicasRequest {
  */
 export interface ReleaseFileConfigRequest {
   /**
-   * 配置ID
+   * 配置ID。该参数可以通过调用 [DescribeFileConfigs](https://cloud.tencent.com/document/product/649/58593) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?rid=1&subTab=file)配置详情-配置版本页查看；也可以调用[CreateFileConfig](https://cloud.tencent.com/document/product/649/58594)创建新的配置。
    */
   ConfigId: string
   /**
-   * 部署组ID
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
   /**
-   * 发布描述
+   * 发布描述，最多支持200个字符。
    */
   ReleaseDesc?: string
 }
@@ -959,7 +965,7 @@ export interface CreateGatewayApiResponse {
  */
 export interface DescribeFileConfigsResponse {
   /**
-   * 文件配置项列表
+   * 文件配置项列表。
    */
   Result?: TsfPageFileConfig
   /**
@@ -1007,15 +1013,22 @@ export interface DescribeClustersRequest {
  */
 export interface DescribeApiVersionsRequest {
   /**
-   * 微服务ID
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId: string
   /**
-   * API 请求路径
+   * API请求路径。
    */
   Path?: string
   /**
-   * 请求方法
+   * API请求方法。
+- GET
+- POST
+- PUT
+- DELETE
+- HEAD
+- PATCH
+- OPTIONS
    */
   Method?: string
 }
@@ -1087,7 +1100,7 @@ export interface DescribeJvmMonitorRequest {
  */
 export interface EnableLaneRuleRequest {
   /**
-   * 泳道规则ID
+   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。
    */
   RuleId: string
 }
@@ -1097,7 +1110,7 @@ export interface EnableLaneRuleRequest {
  */
 export interface TaskRule {
   /**
-   * 触发规则类型, Cron/Repeat
+   * 触发规则类型，枚举值。一共3个值，Cron：定时触发，Repeat：周期触发，WorkFlow：工作流触发
    */
   RuleType: string
   /**
@@ -1134,7 +1147,7 @@ export interface TaskRecord {
    */
   TaskType?: string
   /**
-   * 执行类型
+   * 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
    */
   ExecuteType?: string
   /**
@@ -1146,7 +1159,7 @@ export interface TaskRecord {
    */
   GroupId?: string
   /**
-   * 超时时间
+   * 超时时间，单位：毫秒。
    */
   TimeOut?: number
   /**
@@ -1154,7 +1167,7 @@ export interface TaskRecord {
    */
   RetryCount?: number
   /**
-   * 重试间隔
+   * 重试间隔，单位：毫秒。
    */
   RetryInterval?: number
   /**
@@ -1162,7 +1175,7 @@ export interface TaskRecord {
    */
   TaskRule?: TaskRule
   /**
-   * 是否启用任务,ENABLED/DISABLED
+   * 任务启用状态。一共2种状态可选，ENABLED：启用，DISABLED：停用
    */
   TaskState?: string
   /**
@@ -1198,7 +1211,7 @@ export interface TaskRecord {
    */
   TaskLogId?: string
   /**
-   * 触发类型
+   * 触发类型，一共3种类型，WorkFlow：工作流触发，Cron：定时触发，FixRate：周期触发
    */
   TriggerType?: string
   /**
@@ -1226,11 +1239,11 @@ export interface CreateNamespaceResponse {
  */
 export interface RedoTaskBatchRequest {
   /**
-   * 任务ID
+   * 任务ID。在任务管理列表页面可以查看任务ID。
    */
   TaskId: string
   /**
-   * 批次ID
+   * 任务批次ID。在任务管理页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
    */
   BatchId: string
 }
@@ -1240,7 +1253,7 @@ export interface RedoTaskBatchRequest {
  */
 export interface DescribeTaskLastStatusRequest {
   /**
-   * 任务ID
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。
    */
   TaskId: string
 }
@@ -1260,7 +1273,9 @@ export interface ModifyUploadInfoResponse {
  */
 export interface EnableLaneRuleResponse {
   /**
-   * 操作状态。成功：true，失败：false
+   * 操作状态。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -1324,7 +1339,9 @@ export interface CreateApiRateLimitRuleRequest {
  */
 export interface DisableLaneRuleResponse {
   /**
-   * 操作状态。成功：true，失败：false
+   * 操作状态。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -1414,7 +1431,7 @@ export interface ChangeApiUsableStatusRequest {
  */
 export interface DescribeMicroservicesResponse {
   /**
-   * 微服务分页列表信息
+   * 微服务分页列表信息。
    */
   Result?: TsfPageMicroservice
   /**
@@ -1452,7 +1469,7 @@ export interface DescribeApiGroupsResponse {
  */
 export interface DeletePublicConfigRequest {
   /**
-   * 配置项ID
+   * 配置ID。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigId: string
 }
@@ -1478,15 +1495,15 @@ false：删除失败。
  */
 export interface CreateMicroserviceRequest {
   /**
-   * 命名空间ID
+   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId: string
   /**
-   * 微服务名称
+   * 微服务名称。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceName 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceName: string
   /**
-   * 微服务描述信息
+   * 微服务备注信息，最多支持200个字符。
    */
   MicroserviceDesc?: string
 }
@@ -1496,7 +1513,9 @@ export interface CreateMicroserviceRequest {
  */
 export interface ReleaseConfigResponse {
   /**
-   * true：发布成功；false：发布失败
+   * 发布结果。
+- true：发布成功
+- false：发布失败
    */
   Result?: boolean
   /**
@@ -1542,15 +1561,15 @@ export interface DescribeRepositoriesRequest {
    */
   SearchWord?: string
   /**
-   * 查询起始偏移
+   * 查询起始偏移，大于等于0，默认值为0
    */
   Offset?: number
   /**
-   * 返回数量限制
+   * 返回数量限制，大于0，默认为不分页
    */
   Limit?: number
   /**
-   * 仓库类型（默认仓库：default，私有仓库：private）
+   * 仓库类型（默认仓库：default，私有仓库：private，公共仓库：public-demo）
    */
   RepositoryType?: string
 }
@@ -1582,11 +1601,11 @@ export interface InvocationMetricScatterPlot {
  */
 export interface RollbackConfigRequest {
   /**
-   * 配置项发布历史ID
+   * 配置项发布历史ID。该参数可以通过调用 [DescribeConfigReleaseLogs](https://cloud.tencent.com/document/product/649/38343) 的返回值中的 ConfigReleaseLogId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-发布情况页查看。
    */
   ConfigReleaseLogId: string
   /**
-   * 回滚描述
+   * 回滚描述，最多支持200个字符。
    */
   ReleaseDesc?: string
 }
@@ -1628,7 +1647,9 @@ export interface CreateGatewayApiRequest {
  */
 export interface DescribeCreateGatewayApiStatusResponse {
   /**
-   * 是否已完成导入任务
+   * 导入任务状态执行结果。
+- true：已完成
+- false：未完成
    */
   Result?: boolean
   /**
@@ -1642,7 +1663,9 @@ export interface DescribeCreateGatewayApiStatusResponse {
  */
 export interface DeleteConfigResponse {
   /**
-   * true：删除成功；false：删除失败
+   * 删除结果。
+- true：删除成功
+- false：删除失败
    */
   Result?: boolean
   /**
@@ -1981,31 +2004,33 @@ export interface ModifyNamespaceResponse {
  */
 export interface ModifyLaneRuleRequest {
   /**
-   * 泳道规则ID
+   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。
    */
   RuleId: string
   /**
-   * 泳道规则名称
+   * 灰度发布规则名称，最多支持60个字符，支持中英文字符。
    */
   RuleName: string
   /**
-   * 泳道规则备注
+   * 灰度发布规则备注，最多支持200个字符。
    */
   Remark: string
   /**
-   * 泳道规则标签列表
+   * 灰度发布规则标签列表。
    */
   RuleTagList: Array<LaneRuleTag>
   /**
-   * 泳道规则标签关系
+   * 灰度发布规则标签关系。- RELEATION_AND：与- RELEATION_OR：或
    */
   RuleTagRelationship: string
   /**
-   * 泳道ID
+   * 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。
    */
   LaneId: string
   /**
-   * 开启状态
+   * 开启状态。
+- true：开启
+- false：关闭
    */
   Enable: boolean
 }
@@ -2067,7 +2092,7 @@ export interface DescribeRepositoryResponse {
  */
 export interface ReleaseConfigWithDetailRespResponse {
   /**
-   * 配置项发布 ID
+   * 配置项发布ID。
    */
   Result?: ConfigRelease
   /**
@@ -2371,7 +2396,7 @@ export type DescribeResourceConfigRequest = null
  */
 export interface CreateMicroserviceResponse {
   /**
-   * 新增微服务是否成功。
+   * 新增结果。
 true：操作成功。
 false：操作失败。
    */
@@ -2387,39 +2412,39 @@ false：操作失败。
  */
 export interface CreateFileConfigWithDetailRespRequest {
   /**
-   * 配置项名称
+   * 配置名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”、“_”），且不能以分隔符开头或结尾。
    */
   ConfigName: string
   /**
-   * 配置项版本
+   * 配置项版本，只能包含小写字母、数字及分隔符("-"，".")，且必须以小写字母或数字开头、以小写字母或数字结尾，中间不能有连续的"-"或"."。
    */
   ConfigVersion: string
   /**
-   * 配置项文件名
+   * 配置项文件名，不超过60个字符，只能包含英文、数字、"-"（英文）、"_"（英文）、"."（英文）。
    */
   ConfigFileName: string
   /**
-   * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）
+   * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）。
    */
   ConfigFileValue: string
   /**
-   * 配置项关联应用ID
+   * 配置项关联应用ID。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
-   * 发布路径
+   * 发布路径。
    */
   ConfigFilePath: string
   /**
-   * 配置项版本描述
+   * 配置项版本描述，最多支持200个字符。
    */
   ConfigVersionDesc?: string
   /**
-   * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
+   * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持。
    */
   ConfigFileCode?: string
   /**
-   * 后置命令
+   * 后置命令。
    */
   ConfigPostCmd?: string
   /**
@@ -2427,7 +2452,7 @@ export interface CreateFileConfigWithDetailRespRequest {
    */
   EncodeWithBase64?: boolean
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -2516,7 +2541,7 @@ export interface CosUploadInfo {
  */
 export interface DescribeLanesResponse {
   /**
-   * 泳道列表
+   * 泳道配置列表。
    */
   Result?: LaneInfos
   /**
@@ -2582,19 +2607,19 @@ export interface CreateNamespaceRequest {
  */
 export interface DescribeDownloadInfoRequest {
   /**
-   * 应用ID
+   * 应用ID，通过调用DescribeApplications接口[获取应用列表](https://cloud.tencent.com/document/api/649/36090)从而获取应用ID，或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看，调用CreateApplication接口[创建应用](https://cloud.tencent.com/document/product/649/36094)时的返回值
    */
   ApplicationId: string
   /**
-   * 程序包ID
+   * 软件包ID可通过调用DescribeUploadInfo接口时[获取上传程序包信息](https://cloud.tencent.com/document/api/649/36078)返回的COS上传信息获取，登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   PkgId: string
   /**
-   * 程序包仓库ID
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId?: string
   /**
-   * 程序包仓库类型
+   * 程序包仓库类型（允许值："public-demo"TSF公共demo仓库, "private"自定义仓库, "default"TSF公共仓库）
    */
   RepositoryType?: string
 }
@@ -2672,7 +2697,7 @@ export interface DescribeGroupBindedGatewaysRequest {
  */
 export interface DescribeRepositoryRequest {
   /**
-   * 仓库ID
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId: string
 }
@@ -2682,31 +2707,33 @@ export interface DescribeRepositoryRequest {
  */
 export interface CreatePublicConfigWithDetailRespRequest {
   /**
-   * 配置项名称
+   * 配置项名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”、“_”），且不能以分隔符开头或结尾。
    */
   ConfigName: string
   /**
-   * 配置项版本
+   * 配置项版本，最多支持60个字符，只能包含小写字母、数字及分隔符("-",".")，且必须以小写字母或数字开头、以小写字母或数字结尾，中间不能有连续的"-"或"."。
    */
   ConfigVersion: string
   /**
-   * 配置项值，总是接收yaml格式的内容
+   * 配置项值，总是接收yaml格式的内容。
    */
   ConfigValue: string
   /**
-   * 配置项版本描述
+   * 配置项版本描述，最多支持200个字符。
    */
   ConfigVersionDesc?: string
   /**
-   * 配置项类型
+   * 配置项类型，固定值。
    */
   ConfigType?: string
   /**
-   * Base64编码的配置项
+   * Base64编码的配置项。
+- true：开启
+- false：关闭
    */
   EncodeWithBase64?: boolean
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -2730,7 +2757,7 @@ export interface DescribeResourceTaskStatusResponse {
  */
 export interface RedoTaskRequest {
   /**
-   * 任务ID
+   * 任务ID。在任务管理列表页面第一列查看任务ID。
    */
   TaskId: string
 }
@@ -2828,7 +2855,7 @@ export interface DraftApiGroupRequest {
  */
 export interface CreateLaneResponse {
   /**
-   * 泳道ID
+   * 泳道配置ID。
    */
   Result?: string
   /**
@@ -3077,7 +3104,7 @@ export interface DescribeProgramsRequest {
  */
 export interface DescribePublicConfigRequest {
   /**
-   * 需要查询的配置项ID
+   * 需要查询的配置ID。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigId: string
 }
@@ -3246,7 +3273,9 @@ export interface CommonOption {
  */
 export interface CreatePublicConfigResponse {
   /**
-   * true：创建成功；false：创建失败
+   * 创建结果。
+- true：创建成功
+- false：创建失败
    */
   Result?: boolean
   /**
@@ -3288,7 +3317,9 @@ export interface TsfPageVmGroup {
  */
 export interface CreateConfigResponse {
   /**
-   * true：创建成功；false：创建失败
+   * 创建结果。
+- true：创建成功
+- false：创建失败
    */
   Result?: boolean
   /**
@@ -3302,7 +3333,7 @@ export interface CreateConfigResponse {
  */
 export interface RevokeFileConfigRequest {
   /**
-   * 配置项发布ID
+   * 按照【配置项发布ID】进行撤回。可通过调用[DescribeFileConfigReleases](https://cloud.tencent.com/document/product/649/85855)查询已发布的文件配置列表或登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=file)-查看发布信息-发布情况进行查看；也可以调用[ReleaseFileConfig](https://cloud.tencent.com/document/product/649/58592)发布文件配置。
    */
   ConfigReleaseId: string
 }
@@ -3312,11 +3343,11 @@ export interface RevokeFileConfigRequest {
  */
 export interface DescribeCreateGatewayApiStatusRequest {
   /**
-   * 所属分组ID
+   * 网关分组ID。该参数可以通过调用 [DescribeApiGroups](https://cloud.tencent.com/document/product/649/50636) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app?tab=middleware&subTab=app)-网关应用详情-Java网关实例-实例详情-分组管理页查看；也可以调用[CreateApiGroup](https://cloud.tencent.com/document/product/649/50641)创建新的网关分组。
    */
   GroupId?: string
   /**
-   * 微服务ID
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId?: string
 }
@@ -3340,27 +3371,27 @@ export interface RevocationPublicConfigResponse {
  */
 export interface DescribeConfigReleaseLogsRequest {
   /**
-   * 部署组ID，不传入时查询全量
+   * 部署组ID，不传入时查询全量。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId?: string
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数，默认为20
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 命名空间ID，不传入时查询全量
+   * 命名空间ID，不传入时查询全量。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
   /**
-   * 集群ID，不传入时查询全量
+   * 集群ID，不传入时查询全量。该参数可以通过调用 [DescribeClusters](https://cloud.tencent.com/document/product/649/85857) 的返回值中的 ClusterId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
    */
   ClusterId?: string
   /**
-   * 应用ID，不传入时查询全量
+   * 应用ID，不传入时查询全量。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
 }
@@ -3412,7 +3443,9 @@ export interface DisassociateKafkaConfigRequest {
  */
 export interface TsfConfigCenter {
   /**
-   * 配置中心类型
+   * 配置中心类型。
+- SHARE：共享型
+- EXCLUSIVE：独占型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigType?: string
@@ -3453,7 +3486,9 @@ export interface TsfConfigCenter {
  */
 export interface RollbackConfigResponse {
   /**
-   * true：回滚成功；false：回滚失败
+   * 回滚结果。
+- true：回滚成功
+- false：回滚失败
    */
   Result?: boolean
   /**
@@ -3467,7 +3502,7 @@ export interface RollbackConfigResponse {
  */
 export interface RevocationConfigRequest {
   /**
-   * 配置项发布ID
+   * 配置项发布ID。该参数可以通过调用 [DescribeConfigReleases](https://cloud.tencent.com/document/product/649/38342) 的返回值中的 ConfigReleaseId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-发布情况页查看。
    */
   ConfigReleaseId: string
 }
@@ -3493,23 +3528,23 @@ false：启动失败
  */
 export interface ModifyTaskRequest {
   /**
-   * 任务ID
+   * 任务ID。在任务管理列表页面第一列查看任务ID。
    */
   TaskId: string
   /**
-   * 任务名称
+   * 任务名称，长度限制为64字符。在任务管理列表页面第一列或是任务基本信息页查看任务名称。
    */
   TaskName?: string
   /**
-   * 任务类型
+   * 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务
    */
   TaskType?: string
   /**
-   * 任务内容
+   * 任务内容，长度限制为 65536 字节
    */
   TaskContent?: string
   /**
-   * 任务执行类型
+   * 任务执行方式，枚举值。unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
    */
   ExecuteType?: string
   /**
@@ -3517,15 +3552,15 @@ export interface ModifyTaskRequest {
    */
   TaskRule?: TaskRule
   /**
-   * 超时时间，单位 ms
+   * 超时时间，取值大于0，单位：毫秒（ms）
    */
   TimeOut?: number
   /**
-   * 分组ID
+   * 部署组ID。在[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)，点击应用ID进入应用部署页查看部署组ID。
    */
   GroupId?: string
   /**
-   * 分片数量
+   * 分片数量，取值范围2~1000
    */
   ShardCount?: number
   /**
@@ -3541,15 +3576,15 @@ export interface ModifyTaskRequest {
    */
   SuccessOperator?: string
   /**
-   * 判断任务成功率的阈值
+   * 判断任务成功率的阈值，取值范围：1-100，单位：百分比（%）
    */
   SuccessRatio?: number
   /**
-   * 重试次数
+   * 重试次数，取值范围 0 - 10，单位：次
    */
   RetryCount?: number
   /**
-   * 重试间隔
+   * 重试间隔，取值范围 0-600，单位：秒（s）
    */
   RetryInterval?: number
   /**
@@ -3557,7 +3592,7 @@ export interface ModifyTaskRequest {
    */
   TaskArgument?: string
   /**
-   * 无
+   * 数据集列表。
    */
   ProgramIdList?: Array<string>
 }
@@ -3581,7 +3616,7 @@ export interface DeleteUnitNamespacesResponse {
  */
 export interface DescribeMicroservicesByGroupIdsRequest {
   /**
-   * 部署组ID列表
+   * 部署组ID列表。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupIds: Array<string>
 }
@@ -3661,7 +3696,9 @@ export interface TsfPageInstance {
  */
 export interface ModifyLaneResponse {
   /**
-   * 更新成功: true / 更新失败: false
+   * 更新结果。
+- true：更新成功
+- false：更新失败
    */
   Result?: boolean
   /**
@@ -4077,7 +4114,7 @@ export interface ContainGroup {
  */
 export interface CreateConfigWithDetailRespResponse {
   /**
-   * 配置项
+   * 配置项。
    */
   Result?: Config
   /**
@@ -4141,7 +4178,9 @@ export interface UpdateUnitRuleRequest {
  */
 export interface ReleasePublicConfigResponse {
   /**
-   * true：发布成功；false：发布失败
+   * 发布结果。
+- true：发布成功
+- false：发布失败
    */
   Result?: boolean
   /**
@@ -4234,19 +4273,19 @@ export interface DescribeGroupInstancesRequest {
  */
 export interface DescribeMsApiListRequest {
   /**
-   * 微服务ID
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId: string
   /**
-   * 搜索关键字
+   * 搜索关键字。
    */
   SearchWord?: string
   /**
-   * 每页的数量
+   * 返回数量，默认为20，最大值为50。
    */
   Limit?: number
   /**
-   * 翻页偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
 }
@@ -4312,7 +4351,7 @@ export interface LifeCycleHook {
  */
 export interface DescribeMsApiListResponse {
   /**
-   * 相应结果
+   * 微服务API列表。
    */
   Result?: TsfApiListResponse
   /**
@@ -4326,7 +4365,7 @@ export interface DescribeMsApiListResponse {
  */
 export interface EnableTaskRequest {
   /**
-   * 启用任务
+   * 任务ID。在任务管理列表页面和任务基本信息页可以查看任务ID。
    */
   TaskId: string
 }
@@ -4366,7 +4405,7 @@ export interface BusinessLogV2 {
  */
 export interface DisableTaskResponse {
   /**
-   * 操作成功 or 失败
+   * true：操作成功，false：操作失败
    */
   Result?: boolean
   /**
@@ -4380,23 +4419,29 @@ export interface DisableTaskResponse {
  */
 export interface DescribeMicroserviceRequest {
   /**
-   * 微服务ID
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId: string
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 分页个数
+   * 返回数量，默认为20，最大值为50。
    */
   Limit?: number
   /**
-   * 可选，根据部署组ID进行过滤
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupIds?: Array<string>
   /**
-   * 过滤条件。多个 filter 之间是与关系，单个 filter 多个 value 之间是或关系。filter name 取值有：id（实例id）、name（实例名）、lan-ip（内网ip）、node-ip（所在节点ip）
+   * 过滤条件。多个 filter 之间是与关系，单个 filter 多个 value 之间是或关系。
+参考：[{"Name":"LanIp","Values":["172.16.16.139"]}]
+filter name 取值范围：
+- id：实例ID
+- name：实例名
+- lan-ip：内网IP
+- node-ip：所在节点IP
    */
   Filters?: Array<Filter>
 }
@@ -4487,7 +4532,7 @@ export interface FileConfigRelease {
    */
   ReleaseDesc?: string
   /**
-   * 发布时间
+   * 发布时间。格式为 YYYY-MM-DD hh:mm:ss。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseTime?: string
@@ -4845,7 +4890,7 @@ export interface DescribeContainerGroupDetailResponse {
  */
 export interface DisableTaskRequest {
   /**
-   * 任务ID
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列或是任务基本信息页查看任务ID。
    */
   TaskId: string
 }
@@ -4883,7 +4928,7 @@ export interface Ports {
  */
 export interface UpdateRepositoryRequest {
   /**
-   * 仓库ID
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId: string
   /**
@@ -4927,7 +4972,9 @@ export interface SimpleKafkaDeliveryConfig {
  */
 export interface RevocationConfigResponse {
   /**
-   * true：回滚成功；false：回滚失败
+   * 撤回结果。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -4955,7 +5002,7 @@ export interface PkgBind {
  */
 export interface DeleteTaskResponse {
   /**
-   * 删除成功or失败
+   * true：删除成功，false：删除失败
    */
   Result?: boolean
   /**
@@ -4985,7 +5032,7 @@ export interface TsfPageMsInstance {
  */
 export interface DeleteMicroserviceRequest {
   /**
-   * 微服务ID
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId: string
 }
@@ -4995,7 +5042,7 @@ export interface DeleteMicroserviceRequest {
  */
 export interface CreatePublicConfigWithDetailRespResponse {
   /**
-   * 公共配置项 ID
+   * 公共配置项ID。
    */
   Result?: Config
   /**
@@ -5009,35 +5056,37 @@ export interface CreatePublicConfigWithDetailRespResponse {
  */
 export interface CreateConfigWithDetailRespRequest {
   /**
-   * 配置项名称
+   * 配置项名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”、“_”），且不能以分隔符开头或结尾。
    */
   ConfigName: string
   /**
-   * 配置项版本
+   * 配置项版本，只能包含小写字母、数字及分隔符("-"，".")，且必须以小写字母或数字开头、以小写字母或数字结尾，中间不能有连续的"-"或"."。
    */
   ConfigVersion: string
   /**
-   * 配置项值
+   * 配置项值。
    */
   ConfigValue: string
   /**
-   * 应用ID
+   * 应用ID。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
-   * 配置项版本描述
+   * 配置项版本描述，最多支持200个字符。
    */
   ConfigVersionDesc?: string
   /**
-   * 配置项值类型
+   * 配置项值类型，固定值。
    */
   ConfigType?: string
   /**
-   * Base64编码的配置项
+   * Base64编码的配置项。
+- true：开启
+- false：关闭
    */
   EncodeWithBase64?: boolean
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -5420,7 +5469,7 @@ export interface GroupUnitApiDailyUseStatistics {
  */
 export interface DescribeFileConfigReleasesResponse {
   /**
-   * 配置项发布信息列表
+   * 配置项发布信息列表。
    */
   Result?: TsfPageFileConfigRelease
   /**
@@ -5448,7 +5497,7 @@ export interface DisableUnitRouteResponse {
  */
 export interface ExecuteTaskRequest {
   /**
-   * 任务 ID
+   * 任务ID。在任务管理列表页面第一列或是任务基本信息页查看任务ID。
    */
   TaskId: string
 }
@@ -5534,7 +5583,7 @@ export interface LaneInfo {
  */
 export interface DescribeConfigReleaseLogsResponse {
   /**
-   * 分页的配置项发布历史列表
+   * 分页的配置项发布历史列表。
    */
   Result?: TsfPageConfigReleaseLog
   /**
@@ -5548,7 +5597,9 @@ export interface DescribeConfigReleaseLogsResponse {
  */
 export interface DeletePublicConfigResponse {
   /**
-   * true：删除成功；false：删除失败
+   * 删除结果。
+- true：删除成功
+- false：删除失败
    */
   Result?: boolean
   /**
@@ -5576,7 +5627,7 @@ export interface DescribePathRewriteResponse {
  */
 export interface DescribeFlowLastBatchStateRequest {
   /**
-   * 工作流 ID
+   * 工作流 ID。前往[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)，在工作流列表第一列和工作流详情页查看工作流ID。
    */
   FlowId: string
 }
@@ -5634,7 +5685,7 @@ export interface GroupInfo {
  */
 export interface TerminateTaskFlowBatchResponse {
   /**
-   * 是否停止成功
+   * 是否停止成功，true：停止成功，false：停止失败
    */
   Result?: boolean
   /**
@@ -5699,7 +5750,9 @@ export interface ShrinkInstancesResponse {
  */
 export interface DeleteLaneRuleResponse {
   /**
-   * 操作状态
+   * 删除结果。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -6156,11 +6209,11 @@ export interface DescribeOverviewInvocationResponse {
  */
 export interface ShrinkInstancesRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[获取虚拟机部署组列表](https://cloud.tencent.com/document/api/649/36065)接口时出参中的Result.Content.GroupId，或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-aaaaaaaa&tab=publish&subTab=group)选择对应应用进入应用部署页面查看，同时也是调用[创建部署组](https://cloud.tencent.com/document/api/649/36074)接口返回的Result值
    */
   GroupId: string
   /**
-   * 下线机器实例ID列表
+   * 实例ID列表，实例ID可通过调用[查询虚拟机部署组云主机列表](https://cloud.tencent.com/document/product/649/36066)接口时出参中的Result.Content.InstanceId，或登录[控制台](https://console.cloud.tencent.com/tsf/resource-detail?rid=1&id=cluster-aaaaaaaa)选择对应的虚拟机集群查看云主机信息，同时也是[集群添加云主机](https://cloud.tencent.com/document/product/649/41225?ls=doc-search!current)接口的的返回值Result中的节点列表
    */
   InstanceIdList: Array<string>
 }
@@ -6220,7 +6273,7 @@ export interface DescribeSimpleNamespacesRequest {
  */
 export interface ExecuteTaskFlowResponse {
   /**
-   * 工作流批次ID
+   * 操作成功返回工作流批次ID，操作失败返回空字符串。
    */
   Result?: string
   /**
@@ -6324,7 +6377,7 @@ export interface ExpandGroupResponse {
  */
 export interface DescribePublicConfigsResponse {
   /**
-   * 分页后的全局配置项列表
+   * 分页后的全局配置项列表。
    */
   Result?: TsfPageConfig
   /**
@@ -6513,7 +6566,7 @@ export interface ApiDefinitionDescr {
  */
 export interface DescribeLaneRulesResponse {
   /**
-   * 泳道规则列表
+   * 灰度发布规则列表。
    */
   Result?: LaneRules
   /**
@@ -6831,7 +6884,7 @@ export interface ImageRepositoryResult {
  */
 export interface ModifyTaskResponse {
   /**
-   * 更新是否成功
+   * 更新是否成功。true：操作成功、false：操作失败
    */
   Result?: boolean
   /**
@@ -6959,7 +7012,9 @@ export interface UnitRuleItem {
  */
 export interface UpdateConfigTemplateResponse {
   /**
-   * 更新成功: true / 更新失败: false
+   * 更新结果。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -7058,7 +7113,7 @@ export interface HealthCheckSetting {
  */
 export interface DeleteLaneRuleRequest {
   /**
-   * 泳道规则Id
+   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的泳道规则。
    */
   RuleId: string
 }
@@ -7574,7 +7629,7 @@ export interface RepositoryList {
  */
 export interface CreateLaneRuleResponse {
   /**
-   * 泳道规则Id
+   * 灰度发布规则ID。
    */
   Result?: string
   /**
@@ -8000,7 +8055,7 @@ export interface CreateTaskFlowRequest {
  */
 export interface CreateFileConfigWithDetailRespResponse {
   /**
-   * 文件配置项
+   * 文件配置项。
    */
   Result?: FileConfig
   /**
@@ -8014,23 +8069,23 @@ export interface CreateFileConfigWithDetailRespResponse {
  */
 export interface CreateConfigTemplateWithDetailRespRequest {
   /**
-   * 配置模板名称
+   * 配置模板名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”），且不能以分隔符开头或结尾。
    */
   ConfigTemplateName: string
   /**
-   * 配置模板对应的微服务框架
+   * 配置模板对应的微服务框架。- Ribbon：Ribbon类型配置模板- Hystrix：Hystrix类型配置模板- Zuul：Zuul类型配置模板- customize：自定义类型配置模板。
    */
   ConfigTemplateType: string
   /**
-   * 配置模板数据
+   * 配置模板数据。
    */
   ConfigTemplateValue: string
   /**
-   * 配置模板描述
+   * 配置模板描述，最多支持200个字符。
    */
   ConfigTemplateDesc?: string
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -8086,7 +8141,7 @@ export interface UnbindApiGroupResponse {
  */
 export interface DescribeGroupReleaseResponse {
   /**
-   * 部署组发布的相关信息
+   * 部署组发布的相关信息。
    */
   Result?: GroupRelease
   /**
@@ -8486,7 +8541,7 @@ export interface ImageTag {
  */
 export interface ExecuteTaskFlowRequest {
   /**
-   * 工作流 ID
+   * 工作流 ID。前往工作流管理，在工作流列表第一列和工作流详情页查看工作流ID。
    */
   FlowId?: string
 }
@@ -8510,7 +8565,7 @@ export interface DescribeBusinessLogConfigResponse {
  */
 export interface TerminateTaskFlowBatchRequest {
   /**
-   * 工作流批次 ID
+   * 工作流批次 ID，在[工作流执行记录](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=taskflow)列表页第一列获取。
    */
   FlowBatchId: string
 }
@@ -8868,11 +8923,11 @@ export interface ServiceSetting {
  */
 export interface ModifyUploadInfoRequest {
   /**
-   * 应用ID
+   * 应用ID，通过调用DescribeApplications接口[获取应用列表](https://cloud.tencent.com/document/api/649/36090)从而获取应用ID，或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看，调用CreateApplication接口[创建应用](https://cloud.tencent.com/document/product/649/36094)时的返回值
    */
   ApplicationId: string
   /**
-   * 调用DescribeUploadInfo接口时返回的软件包ID
+   * 软件包ID可通过调用DescribeUploadInfo接口时[获取上传程序包信息](https://cloud.tencent.com/document/api/649/36078)返回的COS上传信息获取，登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   PkgId: string
   /**
@@ -8892,7 +8947,7 @@ export interface ModifyUploadInfoRequest {
    */
   RepositoryType?: string
   /**
-   * 程序包仓库id
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId?: string
 }
@@ -8986,7 +9041,9 @@ export interface CreatePathRewritesWithDetailRespRequest {
  */
 export interface DeleteFileConfigResponse {
   /**
-   * 删除结果
+   * 删除结果。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -9062,7 +9119,7 @@ export interface DeleteApiRateLimitRuleResponse {
  */
 export interface DeleteFileConfigRequest {
   /**
-   * 文件配置项ID
+   * 文件配置项ID。该参数可以通过调用 [DescribeFileConfigs](https://cloud.tencent.com/document/product/649/58593) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=file)-详情页查看；也可以调用[CreateFileConfig](https://cloud.tencent.com/document/product/649/58594)创建新的文件配置。
    */
   ConfigId: string
 }
@@ -9072,7 +9129,7 @@ export interface DeleteFileConfigRequest {
  */
 export interface DescribePublicConfigSummaryResponse {
   /**
-   * 分页的全局配置统计信息列表
+   * 分页的全局配置统计信息列表。
    */
   Result?: TsfPageConfig
   /**
@@ -9086,15 +9143,15 @@ export interface DescribePublicConfigSummaryResponse {
  */
 export interface DescribePublicConfigReleaseLogsRequest {
   /**
-   * 命名空间ID，不传入时查询全量
+   * 命名空间ID，不传入时查询全量。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数，默认为20
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 }
@@ -9165,15 +9222,15 @@ export interface DescribeApplicationAttributeResponse {
  */
 export interface ModifyLaneRequest {
   /**
-   * 泳道ID
+   * 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。
    */
   LaneId: string
   /**
-   * 泳道名称
+   * 泳道配置名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”），且不能以分隔符开头或结尾。
    */
   LaneName: string
   /**
-   * 备注
+   * 备注，最多支持200个字符。
    */
   Remark: string
 }
@@ -9183,23 +9240,23 @@ export interface ModifyLaneRequest {
  */
 export interface DescribeLanesRequest {
   /**
-   * 每页展示的条数
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 翻页偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 搜索关键字
+   * 搜索关键字。
    */
   SearchWord?: string
   /**
-   * 无
+   * 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。
    */
   LaneIdList?: Array<string>
   /**
-   * 无
+   * 忽略传参，业务预留字段。
    */
   DisableProgramAuthCheck?: boolean
 }
@@ -9284,31 +9341,33 @@ export interface BusinesLogConfigAssociatedGroup {
  */
 export interface CreatePublicConfigRequest {
   /**
-   * 配置项名称
+   * 配置名称，最长60个字符，只能包含字母、数字及分隔符（“-”、“_”），且不能以分隔符开头或结尾。
    */
   ConfigName: string
   /**
-   * 配置项版本
+   * 配置版本，只能包含小写字母、数字及分隔符("-"，".")，且必须以小写字母或数字开头、以小写字母或数字结尾，中间不能有连续的"-"或"."。
    */
   ConfigVersion: string
   /**
-   * 配置项值，总是接收yaml格式的内容
+   * 配置项值，总是接收yaml格式的内容。
    */
   ConfigValue: string
   /**
-   * 配置项版本描述
+   * 配置项版本描述，最多支持200个字符。
    */
   ConfigVersionDesc?: string
   /**
-   * 配置项类型
+   * 配置项类型，固定值。
    */
   ConfigType?: string
   /**
-   * Base64编码的配置项
+   * Base64编码的配置项。
+- true：开启
+- false：关闭
    */
   EncodeWithBase64?: boolean
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -9623,7 +9682,7 @@ export interface BindPluginResponse {
  */
 export interface RedoTaskFlowBatchRequest {
   /**
-   * 工作流批次 ID
+   * 工作流批次 ID。在工作流管理页面，点击第一列的工作流ID进入工作流执行记录列表页面，第一列的内容即为工作流批次ID。
    */
   FlowBatchId: string
 }
@@ -9647,15 +9706,15 @@ export interface TsfPageUnitNamespace {
  */
 export interface CreateMicroserviceWithDetailRespRequest {
   /**
-   * 命名空间ID
+   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId: string
   /**
-   * 微服务名称
+   * 微服务名称，最多支持128个字符。
    */
   MicroserviceName: string
   /**
-   * 微服务描述信息
+   * 微服务描述信息，最多支持200个字符。
    */
   MicroserviceDesc?: string
 }
@@ -9749,7 +9808,7 @@ export interface DeleteApiRateLimitRuleRequest {
  */
 export interface DescribePkgsRequest {
   /**
-   * 应用ID（只传入应用ID，返回该应用下所有软件包信息）
+   * 应用ID，通过调用DescribeApplications接口[获取应用列表](https://cloud.tencent.com/document/api/649/36090)从而获取应用ID，或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看，调用CreateApplication接口[创建应用](https://cloud.tencent.com/document/product/649/36094)时的返回值
    */
   ApplicationId: string
   /**
@@ -9757,7 +9816,7 @@ export interface DescribePkgsRequest {
    */
   SearchWord?: string
   /**
-   * 排序关键字（默认为"UploadTime"：上传时间）
+   * 排序关键字（默认值"UploadTime"），允许值："UploadTime"上传时间, "name"程序包名, "size"应用大小, "id"程序包ID
    */
   OrderBy?: string
   /**
@@ -9765,7 +9824,7 @@ export interface DescribePkgsRequest {
    */
   OrderType?: number
   /**
-   * 查询起始偏移
+   * 查询起始偏移，大于等于0，默认值为0
    */
   Offset?: number
   /**
@@ -9773,11 +9832,11 @@ export interface DescribePkgsRequest {
    */
   Limit?: number
   /**
-   * 程序包仓库类型
+   * 程序包仓库类型，允许值："public-demo"TSF公共demo仓库, "private"自定义仓库, "default"TSF公共仓库
    */
   RepositoryType?: string
   /**
-   * 程序包仓库id
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId?: string
   /**
@@ -9866,15 +9925,15 @@ export interface DescribeApplicationAttributeRequest {
  */
 export interface ReleaseConfigWithDetailRespRequest {
   /**
-   * 配置ID
+   * 配置ID。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigId: string
   /**
-   * 部署组ID
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
   /**
-   * 发布描述
+   * 发布描述，最多支持200个字符。
    */
   ReleaseDesc?: string
 }
@@ -9892,19 +9951,19 @@ export interface CreateTaskRequest {
    */
   TaskContent: string
   /**
-   * 执行类型，unicast/broadcast
+   * 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
    */
   ExecuteType: string
   /**
-   * 任务类型,java
+   * 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务
    */
   TaskType: string
   /**
-   * 任务超时时间， 时间单位 ms
+   * 任务超时时间，取值大于0，单位：毫秒（ms）
    */
   TimeOut: number
   /**
-   * 部署组ID
+   * 部署组ID。在[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)，点击应用ID进入应用部署页查看部署组ID。
    */
   GroupId: string
   /**
@@ -9920,7 +9979,7 @@ export interface CreateTaskRequest {
    */
   RetryInterval?: number
   /**
-   * 分片数量
+   * 分片数量，仅当任务执行方式为分片执行时需要设置该值，取值范围2~1000
    */
   ShardCount?: number
   /**
@@ -9944,7 +10003,7 @@ export interface CreateTaskRequest {
    */
   TaskArgument?: string
   /**
-   * 无
+   * 数据集列表
    */
   ProgramIdList?: Array<string>
 }
@@ -9994,7 +10053,7 @@ export interface OperationInfo {
  */
 export interface DescribePublicConfigResponse {
   /**
-   * 全局配置
+   * 全局配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Config
@@ -10023,7 +10082,9 @@ export interface DescribeUsableUnitNamespacesResponse {
  */
 export interface ReleaseFileConfigResponse {
   /**
-   * 发布结果，成功：true，失败：false。
+   * 发布结果。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -10060,7 +10121,7 @@ export interface ThreadPicture {
  */
 export interface DescribeConfigResponse {
   /**
-   * 配置项
+   * 配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Config
@@ -10147,11 +10208,11 @@ export interface CreateApiRateLimitRuleWithDetailRespResponse {
  */
 export interface DescribeTaskRecordsRequest {
   /**
-   * 翻页偏移量。
+   * 翻页偏移量。默认值为0
    */
   Offset?: number
   /**
-   * 翻页查询单页数量。
+   * 翻页查询单页数量。默认值为 20，最大值为 1000
    */
   Limit?: number
   /**
@@ -10159,23 +10220,23 @@ export interface DescribeTaskRecordsRequest {
    */
   SearchWord?: string
   /**
-   * 任务启用状态。enabled/disabled
+   * 任务启用状态。一共2种状态可选，ENABLED：启用，DISABLED：停用
    */
   TaskState?: string
   /**
-   * 分组ID。
+   * 部署组ID。前往应用管理 - 应用部署，部署组列表页面获取部署组ID。
    */
   GroupId?: string
   /**
-   * 任务类型。
+   * 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务
    */
   TaskType?: string
   /**
-   * 任务触发类型，UNICAST、BROADCAST。
+   * 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
    */
   ExecuteType?: string
   /**
-   * 无
+   * 任务ID列表。
    */
   Ids?: Array<string>
 }
@@ -10304,7 +10365,7 @@ export interface DescribeUnitNamespacesRequest {
  */
 export interface DeleteTaskRequest {
   /**
-   * 任务ID
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。
    */
   TaskId: string
 }
@@ -10452,7 +10513,7 @@ export interface DescribeBusinessLogConfigsRequest {
  */
 export interface DeleteConfigTemplateRequest {
   /**
-   * 无
+   * 配置模板ID。该参数可以通过调用 [DescribeConfigTemplate](https://cloud.tencent.com/document/product/649/85856) 的返回值中的 ConfigTemplateId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=template)查看；也可以调用[CreateConfigTemplate](https://cloud.tencent.com/document/product/649/85861)创建新的配置模板。
    */
   ConfigTemplateId: string
 }
@@ -10700,35 +10761,37 @@ export interface ConfigReleaseLog {
  */
 export interface CreateConfigRequest {
   /**
-   * 配置项名称
+   * 配置项名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”、“_”），且不能以分隔符开头或结尾。
    */
   ConfigName: string
   /**
-   * 配置项版本
+   * 配置项版本，只能包含小写字母、数字及分隔符("-"，".")，且必须以小写字母或数字开头、以小写字母或数字结尾，中间不能有连续的"-"或"."。
    */
   ConfigVersion: string
   /**
-   * 配置项值
+   * 配置项值。
    */
   ConfigValue: string
   /**
-   * 应用ID
+   * 应用ID。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
-   * 配置项版本描述
+   * 配置项版本描述，最多支持200个字符。
    */
   ConfigVersionDesc?: string
   /**
-   * 配置项值类型
+   * 配置项值类型，固定值。
    */
   ConfigType?: string
   /**
-   * Base64编码的配置项
+   * Base64编码的配置项。
+- true：开启
+- false：关闭
    */
   EncodeWithBase64?: boolean
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -11252,43 +11315,50 @@ export interface CreateTaskFlowResponse {
  */
 export interface DescribeMicroservicesRequest {
   /**
-   * 命名空间ID
+   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId: string
   /**
-   * 搜索字段
+   * 搜索字段。
    */
   SearchWord?: string
   /**
-   * 排序字段
+   * 排序字段。
+- create_time：创建时间
+默认为创建时间，暂不支持其他值。
    */
   OrderBy?: string
   /**
-   * 排序类型
+   * 排序类型。
+- 1：倒序
+默认为倒序，暂不支持其他值。
    */
   OrderType?: number
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 分页个数
+   * 返回数量，默认为20，最大值为50。
    */
   Limit?: number
   /**
-   * 状态过滤，online、offline、single_online
+   * 状态。
+- online：在线
+- offline：离线
+- single_online：单点在线
    */
   Status?: Array<string>
   /**
-   * IdList
+   * 微服务ID列表。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceIdList?: Array<string>
   /**
-   * 搜索的服务名列表
+   * 微服务名称列表。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceName 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceNameList?: Array<string>
   /**
-   * 注册中心实例id
+   * 注册中心实例ID。业务预留参数，忽略传参。
    */
   ConfigCenterInstanceId?: string
 }
@@ -11410,27 +11480,27 @@ export interface DescribeTaskLastStatusResponse {
  */
 export interface DescribePublicConfigsRequest {
   /**
-   * 配置项ID，不传入时查询全量，高优先级
+   * 配置ID。不传入时查询全量，高优先级。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigId?: string
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数，默认为20
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 配置项ID列表，不传入时查询全量，低优先级
+   * 配置ID列表，不传入时查询全量，低优先级。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigIdList?: Array<string>
   /**
-   * 配置项名称，精确查询，不传入时查询全量
+   * 配置项名称，精确查询，不传入时查询全量。
    */
   ConfigName?: string
   /**
-   * 配置项版本，精确查询，不传入时查询全量
+   * 配置项版本，精确查询，不传入时查询全量。
    */
   ConfigVersion?: string
 }
@@ -11564,11 +11634,11 @@ export interface DescribeApplicationsRequest {
  */
 export interface DescribeTaskDetailRequest {
   /**
-   * 任务ID
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。
    */
   TaskId: string
   /**
-   * 任务历史ID
+   * 任务历史ID。查询任务列表 [DescribeTaskRecords](https://cloud.tencent.com/document/api/649/56136) 返回值字段 TaskLogId
    */
   TaskLogId?: string
 }
@@ -11588,23 +11658,23 @@ export interface MultiValue {
  */
 export interface DescribePublicConfigReleasesRequest {
   /**
-   * 配置项名称，不传入时查询全量
+   * 配置名称，不传入时查询全量。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigName 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigName?: string
   /**
-   * 命名空间ID，不传入时查询全量
+   * 命名空间ID，不传入时查询全量。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
   /**
-   * 每页条数
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 配置项ID，不传入时查询全量
+   * 配置项ID，不传入时查询全量。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigId?: string
 }
@@ -11628,23 +11698,23 @@ export interface TsfPageFileConfigRelease {
  */
 export interface DescribeLaneRulesRequest {
   /**
-   * 每页展示的条数
+   * 返回数量，默认为20，最大值为500。
    */
   Limit?: number
   /**
-   * 翻页偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 搜索关键词
+   * 搜索关键词。
    */
   SearchWord?: string
   /**
-   * 泳道规则ID（用于精确搜索）
+   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。
    */
   RuleId?: string
   /**
-   * 无
+   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。
    */
   RuleIdList?: Array<string>
 }
@@ -11728,27 +11798,29 @@ export interface CreateRepositoryResponse {
  */
 export interface CreateLaneRuleRequest {
   /**
-   * 泳道规则名称
+   * 灰度发布规则名称，最多支持60个字符，支持中英文字符。
    */
   RuleName: string
   /**
-   * 泳道规则备注
+   * 灰度发布规则备注，最多支持200个字符。
    */
   Remark: string
   /**
-   * 泳道规则标签列表
+   * 灰度发布规则标签列表。
    */
   RuleTagList: Array<LaneRuleTag>
   /**
-   * 泳道规则标签关系
+   * 灰度发布规则标签关系。
+- RELEATION_AND：与
+- RELEATION_OR：或
    */
   RuleTagRelationship: string
   /**
-   * 泳道Id
+   * 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。
    */
   LaneId: string
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -11798,19 +11870,19 @@ export interface CosDownloadInfo {
  */
 export interface DeletePkgsRequest {
   /**
-   * 应用ID
+   * 应用ID，通过调用DescribeApplications接口[获取应用列表](https://cloud.tencent.com/document/api/649/36090)从而获取应用ID，或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看，调用CreateApplication接口[创建应用](https://cloud.tencent.com/document/product/649/36094)时的返回值
    */
   ApplicationId: string
   /**
-   * 需要删除的程序包ID列表
+   * 软件包ID所形成的列表，软件包ID可通过调用DescribeUploadInfo接口时[获取上传程序包信息](https://cloud.tencent.com/document/api/649/36078)返回的COS上传信息获取，登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   PkgIds: Array<string>
   /**
-   * 程序包仓库类型
+   * 程序包仓库类型（允许值："public-demo"TSF公共demo仓库, "private"自定义仓库, "default"TSF公共仓库）
    */
   RepositoryType?: string
   /**
-   * 程序包仓库id
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId?: string
 }
@@ -11820,15 +11892,15 @@ export interface DeletePkgsRequest {
  */
 export interface CreateFileConfigRequest {
   /**
-   * 配置项名称
+   * 配置项名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”、“_”），且不能以分隔符开头或结尾。
    */
   ConfigName: string
   /**
-   * 配置项版本
+   * 配置项版本，只能包含小写字母、数字及分隔符("-"，".")，且必须以小写字母或数字开头、以小写字母或数字结尾，中间不能有连续的"-"或"."。
    */
   ConfigVersion: string
   /**
-   * 配置项文件名
+   * 配置项文件名，最多支持60个字符，只能包含英文、数字、"-"（英文）、"_"（英文）、"."（英文）。
    */
   ConfigFileName: string
   /**
@@ -11836,31 +11908,33 @@ export interface CreateFileConfigRequest {
    */
   ConfigFileValue: string
   /**
-   * 配置项关联应用ID
+   * 配置项关联应用ID，该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
-   * 发布路径
+   * 发布路径。
    */
   ConfigFilePath: string
   /**
-   * 配置项版本描述
+   * 配置项版本描述，最多支持200个字符。
    */
   ConfigVersionDesc?: string
   /**
-   * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
+   * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持。
    */
   ConfigFileCode?: string
   /**
-   * 后置命令
+   * 后置命令。
    */
   ConfigPostCmd?: string
   /**
-   * Base64编码的配置项
+   * Base64编码的配置项。
+- true：开启
+- false：关闭
    */
   EncodeWithBase64?: boolean
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -11916,7 +11990,9 @@ export interface DescribeContainerGroupAttributeResponse {
  */
 export interface CreateFileConfigResponse {
   /**
-   * true：创建成功；false：创建失败
+   * 创建结果。
+- true：创建成功
+- false：创建失败
    */
   Result?: boolean
   /**
@@ -12044,7 +12120,7 @@ export interface DisassociateBusinessLogConfigRequest {
  */
 export interface DescribePublicConfigReleaseLogsResponse {
   /**
-   * 分页后的公共配置项发布历史列表
+   * 分页后的公共配置项发布历史列表。
    */
   Result?: TsfPageConfigReleaseLog
   /**
@@ -12078,35 +12154,35 @@ export interface ReleaseApiGroupRequest {
  */
 export interface DescribeFileConfigReleasesRequest {
   /**
-   * 配置项ID
+   * 配置ID。该参数可以通过调用 [DescribeFileConfigs](https://cloud.tencent.com/document/product/649/58593) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?rid=1&subTab=file)配置详情-配置版本页查看；也可以调用[CreateFileConfig](https://cloud.tencent.com/document/product/649/58594)创建新的配置。
    */
   ConfigId?: string
   /**
-   * 配置项名称
+   * 配置项名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”,“_”），且不能以分隔符开头或结尾。
    */
   ConfigName?: string
   /**
-   * 部署组ID
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId?: string
   /**
-   * 命名空间ID
+   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
   /**
-   * 集群ID
+   * 集群ID。该参数可以通过调用 [DescribeClusters](https://cloud.tencent.com/document/product/649/85857) 的返回值中的 ClusterId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
    */
   ClusterId?: string
   /**
-   * 应用ID
+   * 应用ID。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 }
@@ -12190,7 +12266,9 @@ export interface RevocationPublicConfigRequest {
  */
 export interface ModifyLaneRuleResponse {
   /**
-   * 操作状态。成功：true，失败：false
+   * 修改结果。
+- true：成功
+- false：失败
    */
   Result?: boolean
   /**
@@ -12218,7 +12296,7 @@ export interface TsfPageSimpleGroup {
  */
 export interface DescribeMicroservicesByGroupIdsResponse {
   /**
-   * 微服务信息分页列表
+   * 微服务信息分页列表。
    */
   Result?: TsfPageMicroservice
   /**
@@ -12377,7 +12455,7 @@ export interface GroupPod {
  */
 export interface EnableTaskFlowRequest {
   /**
-   * 工作流 ID
+   * 工作流 ID。前往工作流管理，在工作流列表第一列和工作流详情页查看工作流ID。
    */
   FlowId: string
 }
@@ -12403,7 +12481,7 @@ export interface InstanceResourceConfig {
  */
 export interface DescribeReleasedConfigRequest {
   /**
-   * 部署组ID
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
 }
@@ -12471,11 +12549,11 @@ export interface CreatePathRewritesRequest {
  */
 export interface ModifyMicroserviceRequest {
   /**
-   * 微服务 ID
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId: string
   /**
-   * 微服务备注信息
+   * 微服务备注信息，最多支持200个字符。
    */
   MicroserviceDesc: string
 }
@@ -12485,35 +12563,35 @@ export interface ModifyMicroserviceRequest {
  */
 export interface DescribeConfigReleasesRequest {
   /**
-   * 配置项名称，不传入时查询全量
+   * 配置项名称，不传入时查询全量。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigName 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigName?: string
   /**
-   * 部署组ID，不传入时查询全量
+   * 部署组ID，不传入时查询全量。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId?: string
   /**
-   * 命名空间ID，不传入时查询全量
+   * 命名空间ID，不传入时查询全量。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
   /**
-   * 集群ID，不传入时查询全量
+   * 集群ID，不传入时查询全量。该参数可以通过调用 [DescribeClusters](https://cloud.tencent.com/document/product/649/85857) 的返回值中的 ClusterId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
    */
   ClusterId?: string
   /**
-   * 每页条数
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 配置ID，不传入时查询全量
+   * 配置ID，不传入时查询全量。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigId?: string
   /**
-   * 应用ID，不传入时查询全量
+   * 应用ID，不传入时查询全量。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
 }
@@ -12587,23 +12665,27 @@ export interface DescribeEnabledUnitRuleRequest {
  */
 export interface CreateConfigTemplateRequest {
   /**
-   * 配置模板名称
+   * 配置模板名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”），且不能以分隔符开头或结尾。
    */
   ConfigTemplateName: string
   /**
-   * 配置模板对应的微服务框架
+   * 配置模板对应的微服务框架。
+- Ribbon：Ribbon类型配置模板
+- Hystrix：Hystrix类型配置模板
+- Zuul：Zuul类型配置模板
+- customize：自定义类型配置模板
    */
   ConfigTemplateType: string
   /**
-   * 配置模板数据
+   * 配置模板数据。
    */
   ConfigTemplateValue: string
   /**
-   * 配置模板描述
+   * 配置模板描述，最多支持200个字符。
    */
   ConfigTemplateDesc?: string
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -12627,7 +12709,7 @@ export interface DescribeApiGroupResponse {
  */
 export interface RedoTaskExecuteResponse {
   /**
-   * 成功失败
+   * 成功返回执行批次流水ID。失败返回空字符串。
    */
   Result?: string
   /**
@@ -12641,19 +12723,19 @@ export interface RedoTaskExecuteResponse {
  */
 export interface CreateLaneRequest {
   /**
-   * 泳道名称
+   * 泳道配置名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”），且不能以分隔符开头或结尾。
    */
   LaneName: string
   /**
-   * 泳道备注
+   * 泳道配置备注，最多支持200个字符。
    */
   Remark: string
   /**
-   * 泳道部署组信息
+   * 泳道部署组信息。
    */
   LaneGroupList: Array<LaneGroup>
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
 }
@@ -12726,15 +12808,15 @@ export interface ServiceConfig {
  */
 export interface RedoTaskExecuteRequest {
   /**
-   * 任务批次ID
+   * 任务批次ID。在任务管理页面第一列点击任务ID进入任务详情，进入执行记录列表页，第一列内容即为任务批次ID。
    */
   BatchId: string
   /**
-   * 任务执行ID
+   * 任务执行ID。在任务管理页面第一列点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。
    */
   ExecuteId: string
   /**
-   * 任务ID
+   * 任务ID。在任务管理列表页面可以查看任务ID。
    */
   TaskId: string
 }
@@ -12869,7 +12951,7 @@ export interface DescribeStatisticsRequest {
  */
 export interface DescribeConfigRequest {
   /**
-   * 配置项ID
+   * 配置ID。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigId: string
 }
@@ -12947,23 +13029,27 @@ export interface MetricDataCurve {
  */
 export interface UpdateConfigTemplateRequest {
   /**
-   * 配置模板id
+   * 配置模板ID。该参数可以通过调用 [DescribeConfigTemplate](https://cloud.tencent.com/document/product/649/85856) 的返回值中的 ConfigTemplateId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=template)查看；也可以调用[CreateConfigTemplate](https://cloud.tencent.com/document/product/649/85861)创建新的配置模板。
    */
   ConfigTemplateId: string
   /**
-   * 配置模板名称
+   * 配置模板名称，最多支持60个字符，只能包含字母、数字及分隔符（“-”），且不能以分隔符开头或结尾。
    */
   ConfigTemplateName: string
   /**
-   * 配置模板对应的微服务框架
+   * 配置模板对应的微服务框架。
+- Ribbon：Ribbon类型配置模板
+- Hystrix：Hystrix类型配置模板
+- Zuul：Zuul类型配置模板
+- customize：自定义类型配置模板
    */
   ConfigTemplateType: string
   /**
-   * 配置模板数据
+   * 配置模板数据。
    */
   ConfigTemplateValue: string
   /**
-   * 配置模板描述
+   * 配置模板描述，最多支持200个字符。
    */
   ConfigTemplateDesc?: string
 }
@@ -13210,7 +13296,7 @@ export interface StopTaskBatchRequest {
  */
 export interface DescribeUploadInfoRequest {
   /**
-   * 应用ID
+   * 应用ID，通过调用DescribeApplications接口[获取应用列表](https://cloud.tencent.com/document/api/649/36090)从而获取应用ID，或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看，调用CreateApplication接口[创建应用](https://cloud.tencent.com/document/product/649/36094)时的返回值
    */
   ApplicationId: string
   /**
@@ -13230,11 +13316,11 @@ export interface DescribeUploadInfoRequest {
    */
   PkgDesc?: string
   /**
-   * 程序包仓库类型
+   * 仓库类型（默认仓库：default，私有仓库：private，公共仓库：public-demo）
    */
   RepositoryType?: string
   /**
-   * 程序包仓库id
+   * 仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId?: string
 }
@@ -13436,7 +13522,7 @@ export interface ProgramItem {
  */
 export interface DisableTaskFlowRequest {
   /**
-   * 工作流 ID
+   * 工作流 ID。前往工作流管理，在工作流列表第一列和工作流详情页查看工作流ID。
    */
   FlowId: string
 }
@@ -13494,7 +13580,7 @@ export interface DescribePodInstancesRequest {
  */
 export interface RedoTaskResponse {
   /**
-   * 操作成功or失败
+   * 操作成功任务批次ID。操作失败返回空字符串。
    */
   Result?: string
   /**
@@ -13601,31 +13687,31 @@ export interface CustomPodSchedule {
  */
 export interface DescribeConfigsRequest {
   /**
-   * 应用ID，不传入时查询全量
+   * 应用ID，不传入时查询全量。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
-   * 配置项ID，不传入时查询全量，高优先级
+   * 配置ID，不传入时查询全量，高优先级。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigId?: string
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 配置项ID列表，不传入时查询全量，低优先级
+   * 配置ID列表，不传入时查询全量，低优先级。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigIdList?: Array<string>
   /**
-   * 配置项名称，精确查询，不传入时查询全量
+   * 配置项名称，精确查询，不传入时查询全量。
    */
   ConfigName?: string
   /**
-   * 配置项版本，精确查询，不传入时查询全量
+   * 配置项版本，精确查询，不传入时查询全量。
    */
   ConfigVersion?: string
 }
@@ -13685,7 +13771,7 @@ export interface TsfPageApplication {
  */
 export interface DisableLaneRuleRequest {
   /**
-   * 泳道规则ID
+   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。
    */
   RuleId: string
 }
@@ -13793,7 +13879,7 @@ export interface DescribeInvocationMetricDataCurveResponse {
  */
 export interface DeleteConfigRequest {
   /**
-   * 配置项ID
+   * 配置ID。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigId: string
 }
@@ -13803,31 +13889,31 @@ export interface DeleteConfigRequest {
  */
 export interface DescribeFileConfigsRequest {
   /**
-   * 配置项ID
+   * 配置ID。该参数可以通过调用 [DescribeFileConfigs](https://cloud.tencent.com/document/product/649/58593) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?rid=1&subTab=file)配置详情-配置版本页查看；也可以调用[CreateFileConfig](https://cloud.tencent.com/document/product/649/58594)创建新的配置。
    */
   ConfigId?: string
   /**
-   * 配置项ID列表
+   * 配置项ID列表。该参数可以通过调用 [DescribeFileConfigs](https://cloud.tencent.com/document/product/649/58593) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?rid=1&subTab=file)配置详情-配置版本页查看；也可以调用[CreateFileConfig](https://cloud.tencent.com/document/product/649/58594)创建新的配置。
    */
   ConfigIdList?: Array<string>
   /**
-   * 配置项名称
+   * 配置项名称。
    */
   ConfigName?: string
   /**
-   * 应用ID
+   * 应用ID。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
-   * 偏移量
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
-   * 配置项版本
+   * 配置项版本。
    */
   ConfigVersion?: string
 }
@@ -13837,7 +13923,9 @@ export interface DescribeFileConfigsRequest {
  */
 export interface CreateConfigTemplateResponse {
   /**
-   * true：创建成功；false：创建失败
+   * 创建结果。
+- true：创建成功
+- false：创建失败
    */
   Result?: boolean
   /**
@@ -13851,7 +13939,7 @@ export interface CreateConfigTemplateResponse {
  */
 export interface ExecuteTaskResponse {
   /**
-   * 成功/失败
+   * 操作成功返回任务批次ID，操作失败返回空字符串。
    */
   Result?: string
   /**
@@ -14007,7 +14095,7 @@ export interface DescribeApiUseDetailRequest {
  */
 export interface CreateMicroserviceWithDetailRespResponse {
   /**
-   * 微服务ID
+   * 微服务ID。
    */
   Result?: string
   /**
@@ -14262,7 +14350,7 @@ export interface AdvanceSettings {
  */
 export interface EnableTaskResponse {
   /**
-   * 操作成功or失败
+   * true：操作成功，false：操作失败
    */
   Result?: boolean
   /**
@@ -14276,15 +14364,15 @@ export interface EnableTaskResponse {
  */
 export interface ReleaseConfigRequest {
   /**
-   * 配置ID
+   * 配置ID。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigId: string
   /**
-   * 部署组ID
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
   /**
-   * 发布描述
+   * 发布描述，最多支持200个字符。
    */
   ReleaseDesc?: string
 }
@@ -14382,23 +14470,30 @@ export interface BusinessLogConfig {
  */
 export interface DescribeApiDetailRequest {
   /**
-   * 微服务id
+   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
    */
   MicroserviceId: string
   /**
-   * 请求路径
+   * 请求路径。
    */
   Path: string
   /**
-   * 请求方法
+   * 请求方法。
+- GET
+- POST
+- PUT
+- DELETE
+- HEAD
+- PATCH
+- OPTIONS
    */
   Method: string
   /**
-   * 包版本
+   * 应用包版本号。
    */
   PkgVersion: string
   /**
-   * 应用ID
+   * 应用ID。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
 }
@@ -14964,7 +15059,7 @@ export interface UpdateApiRateLimitRulesResponse {
  */
 export interface DeleteRepositoryRequest {
   /**
-   * 仓库ID
+   * 删除对应仓库ID，可通过调用[仓库信息查询类](https://cloud.tencent.com/document/api/649/45925)接口时出参中的RepositoryId，或登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   RepositoryId: string
 }
@@ -15016,7 +15111,7 @@ export interface DescribeSimpleGroupsRequest {
  */
 export interface DescribeConfigReleasesResponse {
   /**
-   * 分页的配置发布信息
+   * 分页的配置发布信息。
    */
   Result?: TsfPageConfigRelease
   /**
@@ -15161,9 +15256,9 @@ export interface UnitNamespace {
  */
 export interface ModifyMicroserviceResponse {
   /**
-   * 修改微服务详情是否成功。
-true：操作成功。
-false：操作失败。
+   * 修改结果。
+- true：修改成功
+- false：修改失败
    */
   Result?: boolean
   /**
@@ -15387,9 +15482,9 @@ export interface DescribeBasicResourceUsageRequest {
  */
 export interface DeleteMicroserviceResponse {
   /**
-   * 删除微服务是否成功。
-true：操作成功。
-false：操作失败。
+   * 删除结果。
+- true：操作成功
+- false：操作失败
    */
   Result?: boolean
   /**
@@ -15413,7 +15508,7 @@ export interface ResourceFieldRef {
  */
 export interface DescribeReleasedConfigResponse {
   /**
-   * 已发布的配置内容
+   * 已发布的配置内容。
    */
   Result?: string
   /**
@@ -15514,7 +15609,7 @@ export interface PropertyField {
  */
 export interface DescribeApiDetailResponse {
   /**
-   * API 详情
+   * API详情。
    */
   Result?: ApiDetailResponse
   /**
@@ -15667,11 +15762,11 @@ export interface CreateRepositoryRequest {
    */
   RepositoryType: string
   /**
-   * 仓库所在桶名称
+   * 仓库所在桶名称，[存储桶概述和创建](https://cloud.tencent.com/document/product/436/13312)
    */
   BucketName: string
   /**
-   * 仓库所在桶地域
+   * 仓库所在桶地域，[存储桶概述和创建](https://cloud.tencent.com/document/product/436/13312)
    */
   BucketRegion: string
   /**
@@ -15906,7 +16001,7 @@ export interface SearchStdoutLogRequest {
  */
 export interface RedoTaskBatchResponse {
   /**
-   * 批次ID
+   * 批次流水ID
    */
   Result?: string
   /**
@@ -15978,7 +16073,7 @@ export interface ModifyGroupRequest {
  */
 export interface DescribeMicroserviceResponse {
   /**
-   * 微服务详情实例列表
+   * 微服务详情实例列表。
    */
   Result?: TsfPageMsInstance
   /**
@@ -16072,7 +16167,7 @@ export interface MemoryPicture {
  */
 export interface DescribeConfigSummaryResponse {
   /**
-   * 配置项分页对象
+   * 配置项分页对象。
    */
   Result?: TsfPageConfig
   /**
@@ -16190,7 +16285,7 @@ GW — 网关资源类型；
  */
 export interface DescribePublicConfigReleasesResponse {
   /**
-   * 公共配置发布信息
+   * 公共配置发布信息。
    */
   Result?: TsfPageConfigRelease
   /**
@@ -16218,7 +16313,7 @@ export interface CreatePathRewritesResponse {
  */
 export interface DescribeConfigTemplateRequest {
   /**
-   * 配置模板Id
+   * 配置模板ID。该参数可以通过调用 [DescribeConfigTemplate](https://cloud.tencent.com/document/product/649/85856) 的返回值中的 ConfigTemplateId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=template)查看；也可以调用[CreateConfigTemplate](https://cloud.tencent.com/document/product/649/85861)创建新的配置模板。
    */
   ConfigTemplateId: string
 }
@@ -16242,39 +16337,43 @@ export interface DraftApiGroupResponse {
  */
 export interface DescribeConfigSummaryRequest {
   /**
-   * 应用ID，不传入时查询全量
+   * 应用ID，不传入时查询全量。该参数可以通过调用 [DescribeApplications](https://cloud.tencent.com/document/product/649/36090) 的返回值中的 ApplicationId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/app)查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
-   * 查询关键字，模糊查询：应用名称，配置项名称，不传入时查询全量
+   * 查询关键字，模糊查询：应用名称，配置项名称，不传入时查询全量。
    */
   SearchWord?: string
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 每页条数，默认为20
+   * 返回数量，默认为20，最大值为50。
    */
   Limit?: number
   /**
-   * 按时间排序：creation_time；按名称排序：config_name
+   * 排序字段。
+- creation_time：按时间排序
+- config_name：按名称排序
    */
   OrderBy?: string
   /**
-   * 升序传 0，降序传 1
+   * 排序顺序。
+- 0：升序
+- 1：降序
    */
   OrderType?: number
   /**
-   * 无
+   * TAG标签资源值。
    */
   ConfigTagList?: Array<string>
   /**
-   * 无
+   * 忽略传参，业务预留字段。
    */
   DisableProgramAuthCheck?: boolean
   /**
-   * 无
+   * 配置ID列表。该参数可以通过调用 [DescribeConfigs](https://cloud.tencent.com/document/product/649/38340) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=app)配置详情-配置版本页查看；也可以调用[CreateConfig](https://cloud.tencent.com/document/product/649/38348)创建新的配置。
    */
   ConfigIdList?: Array<string>
 }
@@ -16284,7 +16383,7 @@ export interface DescribeConfigSummaryRequest {
  */
 export interface DeleteLaneRequest {
   /**
-   * 泳道Idl
+   * 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。
    */
   LaneId: string
 }
@@ -16334,15 +16433,15 @@ export interface TsfPageApiGroupInfo {
  */
 export interface ReleasePublicConfigRequest {
   /**
-   * 配置ID
+   * 配置ID。该参数可以通过调用 [DescribePublicConfigs](https://cloud.tencent.com/document/product/649/38335) 的返回值中的 ConfigId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?subTab=public)配置详情-配置版本页查看；也可以调用[CreatePublicConfig](https://cloud.tencent.com/document/product/649/38347)创建新的配置。
    */
   ConfigId: string
   /**
-   * 命名空间ID
+   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId: string
   /**
-   * 发布描述
+   * 发布描述，最多支持200个字符。
    */
   ReleaseDesc?: string
 }
@@ -16352,11 +16451,11 @@ export interface ReleasePublicConfigRequest {
  */
 export interface TaskFlowEdge {
   /**
-   * 节点 ID
+   * 节点 ID，节点类型为任务时为任务ID，节点类型为逻辑节点"且"时为 AND，为逻辑节点"或"时为 OR，节点类型为头节点时为字符串"head"
    */
   NodeId?: string
   /**
-   * 子节点 ID
+   * 子节点 ID，节点类型为任务时为任务ID，节点类型为逻辑节点"且"时为 AND，为逻辑节点"或"时为 OR
    */
   ChildNodeId?: string
   /**
@@ -16364,11 +16463,11 @@ export interface TaskFlowEdge {
    */
   CoreNode?: string
   /**
-   * 边类型
+   * 边类型，上下游任务依赖触发关系。一共2个值，Y：成功触发，N：失败触发
    */
   EdgeType?: string
   /**
-   * 任务节点类型
+   * 任务节点类型，一共有4种类型，AND：逻辑节点且，OR：逻辑节点或，TASK：任务节点，START：头节点
    */
   NodeType?: string
   /**
@@ -16380,11 +16479,11 @@ export interface TaskFlowEdge {
    */
   PositionY?: string
   /**
-   * 图 ID
+   * 图 ID，新建工作流时自动生成，不需要填写，查看工作流图时后端返回
    */
   GraphId?: string
   /**
-   * 工作流 ID
+   * 工作流 ID，新建工作流时自动生成，不需要填写，查看工作流图时后端返回
    */
   FlowId?: string
   /**
@@ -16392,11 +16491,11 @@ export interface TaskFlowEdge {
    */
   NodeName?: string
   /**
-   * 任务ID
+   * 任务ID，新建工作流时不需要填写，查看工作流图时后端返回
    */
   TaskId?: string
   /**
-   * 任务历史ID
+   * 任务历史ID，新建工作流时不需要填写，查看工作流图时后端返回
    */
   TaskLogId?: string
 }
@@ -16406,7 +16505,7 @@ export interface TaskFlowEdge {
  */
 export interface RedoTaskFlowBatchResponse {
   /**
-   * 工作流批次历史 ID
+   * 工作流批次历史 ID。操作失败时不返回该字段，返回错误码。
    */
   Result?: string
   /**

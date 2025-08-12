@@ -3753,6 +3753,10 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableDestroyProtection?: string
+  /**
+   * kibana内网访问地址
+   */
+  ShowKibanaIpPort?: string
 }
 
 /**
@@ -5694,6 +5698,10 @@ export interface RestartNodesRequest {
    * 置放群组异步任务时间段
    */
   EnableScheduleOperationDuration?: EnableScheduleOperationDuration
+  /**
+   * 事件id列表
+   */
+  EventTypeIds?: Array<string>
 }
 
 /**

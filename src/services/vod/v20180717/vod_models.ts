@@ -8723,6 +8723,10 @@ export interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
 
    */
   Default?: string
+  /**
+   * 音轨序号，表示选择音频源中的第几个音轨，从0开始计数。默认值为0，表示选择最靠前的音轨。
+   */
+  AudioTrackIdx?: number
 }
 
 /**

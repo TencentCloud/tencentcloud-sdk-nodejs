@@ -34,6 +34,7 @@ import {
   STTConfig,
   DescribeTRTCMarketScaleDataRequest,
   McuLayoutVolume,
+  VoiceCloneRequest,
   SliceParams,
   DescribeUserEventRequest,
   DeleteCloudModerationRequest,
@@ -112,6 +113,7 @@ import {
   CreateBasicModerationResponse,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   DescribeAIConversationResponse,
+  AudioFormat,
   McuLayout,
   DescribeUserInfoResponse,
   RemoveUserByStrRoomIdResponse,
@@ -129,6 +131,7 @@ import {
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
   UpdateVoicePrintResponse,
+  TextToSpeechSSEResponse,
   DescribeRecordingUsageResponse,
   McuPassThrough,
   ModerationSupplierParam,
@@ -181,12 +184,14 @@ import {
   DescribeTrtcMcuTranscodeTimeResponse,
   DeleteCloudRecordingRequest,
   DescribePictureRequest,
+  Voice,
   ModifyCloudModerationResponse,
   TRTCDataResp,
   VideoParams,
   RegisterVoicePrintRequest,
   DescribePictureResponse,
   DescribeTrtcRoomUsageRequest,
+  TextToSpeechResponse,
   CreateCloudModerationRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
   StopStreamIngestResponse,
@@ -211,8 +216,10 @@ import {
   MaxVideoUser,
   AuditStorageParams,
   AgentParams,
+  VoiceCloneResponse,
   TurnDetection,
   UpdateStreamIngestRequest,
+  TextToSpeechSSERequest,
   StopWebRecordResponse,
   DeletePictureRequest,
   StopWebRecordRequest,
@@ -227,6 +234,7 @@ import {
   SeriesInfos,
   RemoveUserByStrRoomIdRequest,
   DeleteBasicModerationResponse,
+  TextToSpeechRequest,
   DescribeStreamIngestRequest,
   OneSdkAppIdTranscodeTimeUsagesInfo,
   EncodeParams,
@@ -503,6 +511,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: StartMCUMixTranscodeByStrRoomIdResponse) => void
   ): Promise<StartMCUMixTranscodeByStrRoomIdResponse> {
     return this.request("StartMCUMixTranscodeByStrRoomId", req, cb)
+  }
+
+  /**
+   * 语音合成接口
+   */
+  async TextToSpeech(
+    req: TextToSpeechRequest,
+    cb?: (error: string, rep: TextToSpeechResponse) => void
+  ): Promise<TextToSpeechResponse> {
+    return this.request("TextToSpeech", req, cb)
   }
 
   /**
@@ -866,6 +884,16 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+   * 声音克隆
+   */
+  async VoiceClone(
+    req: VoiceCloneRequest,
+    cb?: (error: string, rep: VoiceCloneResponse) => void
+  ): Promise<VoiceCloneResponse> {
+    return this.request("VoiceClone", req, cb)
+  }
+
+  /**
      * 获取TRTC录制的用量明细。
 - 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
 - 单次查询统计区间最多不能超过31天。
@@ -1125,6 +1153,16 @@ xa0
     cb?: (error: string, rep: DescribeTRTCRealTimeScaleMetricDataResponse) => void
   ): Promise<DescribeTRTCRealTimeScaleMetricDataResponse> {
     return this.request("DescribeTRTCRealTimeScaleMetricData", req, cb)
+  }
+
+  /**
+   * SSE流式文本转语音
+   */
+  async TextToSpeechSSE(
+    req: TextToSpeechSSERequest,
+    cb?: (error: string, rep: TextToSpeechSSEResponse) => void
+  ): Promise<TextToSpeechSSEResponse> {
+    return this.request("TextToSpeechSSE", req, cb)
   }
 
   /**

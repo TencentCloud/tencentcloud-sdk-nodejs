@@ -188,6 +188,16 @@ it("trtc.v20190722.StartMCUMixTranscodeByStrRoomId", async function () {
     }
 })
 
+it("trtc.v20190722.TextToSpeech", async function () {
+    try {
+       const data = await client.TextToSpeech({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StartStreamIngest", async function () {
     try {
        const data = await client.StartStreamIngest({})
@@ -478,6 +488,16 @@ it("trtc.v20190722.StopStreamIngest", async function () {
     }
 })
 
+it("trtc.v20190722.VoiceClone", async function () {
+    try {
+       const data = await client.VoiceClone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeRecordingUsage", async function () {
     try {
        const data = await client.DescribeRecordingUsage({})
@@ -691,6 +711,16 @@ it("trtc.v20190722.DescribeUnusualEvent", async function () {
 it("trtc.v20190722.DescribeTRTCRealTimeScaleMetricData", async function () {
     try {
        const data = await client.DescribeTRTCRealTimeScaleMetricData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.TextToSpeechSSE", async function () {
+    try {
+       const data = await client.TextToSpeechSSE({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

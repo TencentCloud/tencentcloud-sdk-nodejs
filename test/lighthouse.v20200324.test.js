@@ -118,6 +118,16 @@ it("lighthouse.v20200324.ImportKeyPair", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeImagesToShare", async function () {
+    try {
+       const data = await client.DescribeImagesToShare({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.InquirePriceCreateDisks", async function () {
     try {
        const data = await client.InquirePriceCreateDisks({})
@@ -541,6 +551,16 @@ it("lighthouse.v20200324.DescribeDockerActivities", async function () {
 it("lighthouse.v20200324.DetachDisks", async function () {
     try {
        const data = await client.DetachDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ModifyImageSharePermission", async function () {
+    try {
+       const data = await client.ModifyImageSharePermission({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

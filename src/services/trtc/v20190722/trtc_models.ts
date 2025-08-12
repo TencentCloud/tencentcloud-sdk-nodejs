@@ -537,6 +537,32 @@ export interface McuLayoutVolume {
 }
 
 /**
+ * VoiceClone请求参数结构体
+ */
+export interface VoiceCloneRequest {
+  /**
+   * TRTC的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * TTS的API密钥
+   */
+  APIKey: string
+  /**
+   * 声音克隆的名字
+   */
+  VoiceName: string
+  /**
+   * 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在5秒～12秒之间
+   */
+  PromptAudio: string
+  /**
+   * 声音克隆的参考文本，为参考音频对应的文字。
+   */
+  PromptText?: string
+}
+
+/**
  * 云端切片的控制参数。
  */
 export interface SliceParams {
@@ -2273,6 +2299,16 @@ export interface DescribeAIConversationResponse {
 }
 
 /**
+ * TTS音频输出的格式
+ */
+export interface AudioFormat {
+  /**
+   * 生成的音频格式，默认pcm，目前支持的格式列表：[pcm]。
+   */
+  Format?: string
+}
+
+/**
  * 混流布局参数。
  */
 export interface McuLayout {
@@ -2716,6 +2752,16 @@ export interface StartStreamIngestRequest {
 export interface UpdateVoicePrintResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TextToSpeechSSE返回参数结构体
+ */
+export interface TextToSpeechSSEResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
    */
   RequestId?: string
 }
@@ -3956,6 +4002,16 @@ export interface DescribePictureRequest {
 }
 
 /**
+ * TTS的声音参数
+ */
+export interface Voice {
+  /**
+   * TTS的声音的ID
+   */
+  VoiceId: string
+}
+
+/**
  * ModifyCloudModeration返回参数结构体
  */
 export interface ModifyCloudModerationResponse {
@@ -4076,6 +4132,20 @@ export interface DescribeTrtcRoomUsageRequest {
    * 查询结束时间，格式为YYYY-MM-DD HH:MM，单次查询不超过24h。
    */
   EndTime: string
+}
+
+/**
+ * TextToSpeech返回参数结构体
+ */
+export interface TextToSpeechResponse {
+  /**
+   * Base64编码的音频数据
+   */
+  Audio?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4597,6 +4667,20 @@ export interface AgentParams {
 }
 
 /**
+ * VoiceClone返回参数结构体
+ */
+export interface VoiceCloneResponse {
+  /**
+   * 克隆出的音色ID，可以用此id进行语音合成
+   */
+  VoiceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 断句配置
  */
 export interface TurnDetection {
@@ -4647,6 +4731,32 @@ export interface UpdateStreamIngestRequest {
    * 是否暂停，默认false表示不暂停。暂停期间任务仍在进行中仍会计费，如果要销毁任务请调用停止接口。
    */
   IsPause?: boolean
+}
+
+/**
+ * TextToSpeechSSE请求参数结构体
+ */
+export interface TextToSpeechSSERequest {
+  /**
+   * 需要转语音的文字内容，长度范围：[1, 255]
+   */
+  Text: string
+  /**
+   * 文本转语音的声音配置
+   */
+  Voice: Voice
+  /**
+   * TRTC的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * 文本转语音的输出音频的格式
+   */
+  AudioFormat?: AudioFormat
+  /**
+   * TTS的API密钥
+   */
+  APIKey?: string
 }
 
 /**
@@ -4949,6 +5059,32 @@ export interface DeleteBasicModerationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TextToSpeech请求参数结构体
+ */
+export interface TextToSpeechRequest {
+  /**
+   * 需要转语音的文字内容，长度范围：[1, 255]
+   */
+  Text: string
+  /**
+   * 文本转语音的声音配置
+   */
+  Voice: Voice
+  /**
+   * TRTC的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * 文本转语音的输出音频的格式
+   */
+  AudioFormat?: AudioFormat
+  /**
+   * TTS的API密钥
+   */
+  APIKey?: string
 }
 
 /**

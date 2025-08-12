@@ -53,6 +53,7 @@ import {
   RerunDockerContainerResponse,
   ResetInstanceBlueprint,
   DescribeBundlesResponse,
+  ModifyImageSharePermissionResponse,
   DeleteFirewallTemplateRulesResponse,
   DescribeFirewallTemplatesRequest,
   ModifyInstancesBundleRequest,
@@ -98,7 +99,7 @@ import {
   DescribeInstanceVncUrlRequest,
   ModifyFirewallRuleDescriptionRequest,
   InstanceTrafficPackage,
-  SnapshotDeniedActions,
+  ModifyImageSharePermissionRequest,
   TerminateInstancesResponse,
   FirewallTemplateApplyRecordDetail,
   DescribeInstancesDiskNumRequest,
@@ -144,7 +145,7 @@ import {
   DeleteFirewallTemplateResponse,
   CreateInstancesResponse,
   ModifyBlueprintAttributeResponse,
-  ModifyFirewallTemplateRequest,
+  Image,
   StopDockerContainersRequest,
   DescribeModifyInstanceBundlesRequest,
   DescribeRegionsRequest,
@@ -200,7 +201,7 @@ import {
   DescribeInstancesRequest,
   DescribeFirewallTemplateRuleQuotaResponse,
   DetachCcnRequest,
-  RenameDockerContainerResponse,
+  DescribeImagesToShareResponse,
   DockerActivity,
   DescribeFirewallTemplateApplyRecordsResponse,
   Filter,
@@ -218,8 +219,9 @@ import {
   DescribeFirewallRulesResponse,
   DescribeInstancesReturnableResponse,
   ContainerEnv,
-  FirewallRule,
+  DescribeImagesToShareRequest,
   DeleteBlueprintsRequest,
+  RenameDockerContainerResponse,
   FirewallRuleInfo,
   CreateFirewallRulesResponse,
   DescribeDisksRequest,
@@ -238,6 +240,7 @@ import {
   ApplyInstanceSnapshotRequest,
   DisassociateInstancesKeyPairsResponse,
   TerminateInstancesRequest,
+  ModifyFirewallTemplateRequest,
   RenewDiskChargePrepaid,
   SystemDisk,
   ApplyFirewallTemplateResponse,
@@ -285,6 +288,7 @@ import {
   IsolateDisksResponse,
   DescribeFirewallRulesRequest,
   FirewallTemplateRule,
+  SnapshotDeniedActions,
   DiskDeniedActions,
   InquirePriceCreateInstancesRequest,
   Scene,
@@ -299,6 +303,7 @@ import {
   InstanceChargePrepaid,
   ModifyInstancesAttributeResponse,
   Price,
+  FirewallRule,
   DeleteFirewallTemplateRulesRequest,
 } from "./lighthouse_models"
 
@@ -430,6 +435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportKeyPairResponse) => void
   ): Promise<ImportKeyPairResponse> {
     return this.request("ImportKeyPair", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeImagesToShare) 用于查询CVM的自定义镜像列表共享到轻量应用服务器。
+   */
+  async DescribeImagesToShare(
+    req: DescribeImagesToShareRequest,
+    cb?: (error: string, rep: DescribeImagesToShareResponse) => void
+  ): Promise<DescribeImagesToShareResponse> {
+    return this.request("DescribeImagesToShare", req, cb)
   }
 
   /**
@@ -909,6 +924,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachDisksResponse) => void
   ): Promise<DetachDisksResponse> {
     return this.request("DetachDisks", req, cb)
+  }
+
+  /**
+     * 本接口 (ModifyImageSharePermission) 用于共享和取消共享CVM自定义镜像到轻量应用服务器服务。
+CVM镜像共享到轻量应用服务器镜像需要满足如下条件：
+1.已共享过的镜像不支持再次共享。
+2.外部导入的镜像不支持共享。
+3.整机镜像不支持共享。
+4.镜像要支持Cloudinit才支持共享。
+5.镜像的Platform和OsName要满足。
+6.NORMAL状态的镜像才支持共享。
+     */
+  async ModifyImageSharePermission(
+    req: ModifyImageSharePermissionRequest,
+    cb?: (error: string, rep: ModifyImageSharePermissionResponse) => void
+  ): Promise<ModifyImageSharePermissionResponse> {
+    return this.request("ModifyImageSharePermission", req, cb)
   }
 
   /**

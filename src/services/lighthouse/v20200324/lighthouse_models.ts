@@ -685,6 +685,21 @@ export interface DescribeBundlesResponse {
 }
 
 /**
+ * ModifyImageSharePermission返回参数结构体
+ */
+export interface ModifyImageSharePermissionResponse {
+  /**
+   * CVM自定义镜像共享到轻量应用服务器后的镜像ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlueprintId: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteFirewallTemplateRules返回参数结构体
  */
 export interface DeleteFirewallTemplateRulesResponse {
@@ -1607,17 +1622,17 @@ export interface InstanceTrafficPackage {
 }
 
 /**
- * 快照操作限制列表。
+ * ModifyImageSharePermission请求参数结构体
  */
-export interface SnapshotDeniedActions {
+export interface ModifyImageSharePermissionRequest {
   /**
-   * 快照 ID。
+   * 镜像 ID。可通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回值中的ImageId获取。
    */
-  SnapshotId?: string
+  ImageId: string
   /**
-   * 操作限制列表。
+   * 共享属性，包括 SHARE，CANCEL。其中SHARE代表共享，CANCEL代表取消共享。
    */
-  DeniedActions?: Array<DeniedAction>
+  Permission: string
 }
 
 /**
@@ -2364,17 +2379,76 @@ export interface ModifyBlueprintAttributeResponse {
 }
 
 /**
- * ModifyFirewallTemplate请求参数结构体
+ * CVM镜像信息。
  */
-export interface ModifyFirewallTemplateRequest {
+export interface Image {
   /**
-   * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
+   * CVM镜像 ID ，是Image的唯一标识。
    */
-  TemplateId: string
+  ImageId: string
   /**
-   * 防火墙模板名称。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
+   * 镜像名称。
    */
-  TemplateName?: string
+  ImageName: string
+  /**
+   * 镜像描述。
+   */
+  ImageDescription: string
+  /**
+   * 镜像大小。单位GB。
+   */
+  ImageSize: number
+  /**
+   * 镜像来源。
+<li>CREATE_IMAGE：自定义镜像</li>
+<li>EXTERNAL_IMPORT：外部导入镜像</li>
+   */
+  ImageSource: string
+  /**
+   * 镜像分类
+<li>SystemImage：系统盘镜像</li>
+<li>InstanceImage：整机镜像</li>
+   */
+  ImageClass: string
+  /**
+   * 镜像状态
+CREATING:创建中
+NORMAL:正常
+CREATEFAILED:创建失败
+USING:使用中
+SYNCING:同步中
+IMPORTING:导入中
+IMPORTFAILED:导入失败
+   */
+  ImageState: string
+  /**
+   * 镜像是否支持Cloudinit。
+   */
+  IsSupportCloudinit: boolean
+  /**
+   * 镜像架构。
+   */
+  Architecture: string
+  /**
+   * 镜像操作系统。
+   */
+  OsName: string
+  /**
+   * 镜像来源平台。
+   */
+  Platform: string
+  /**
+   * 镜像创建时间。
+   */
+  CreatedTime: string
+  /**
+   * 镜像是否可共享到轻量应用服务器。
+   */
+  IsShareable: boolean
+  /**
+   * 不可共享的原因。
+   */
+  UnshareableReason: string
 }
 
 /**
@@ -3634,13 +3708,17 @@ export interface DetachCcnRequest {
 }
 
 /**
- * RenameDockerContainer返回参数结构体
+ * DescribeImagesToShare返回参数结构体
  */
-export interface RenameDockerContainerResponse {
+export interface DescribeImagesToShareResponse {
   /**
-   * Docker活动ID。
+   * 符合条件的镜像数量。
    */
-  DockerActivityId?: string
+  TotalCount: number
+  /**
+   * CVM镜像详细信息列表。
+   */
+  ImageSet: Array<Image>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3996,42 +4074,43 @@ export interface ContainerEnv {
 }
 
 /**
- * 描述防火墙规则信息。
+ * DescribeImagesToShare请求参数结构体
  */
-export interface FirewallRule {
+export interface DescribeImagesToShareRequest {
   /**
-   * 协议，取值：TCP，UDP，ICMP，ALL，ICMPv6。
+   * CVM镜像 ID 列表。可通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回值中的ImageId获取。
+   */
+  ImageIds?: Array<string>
+  /**
+   * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+   */
+  Limit?: number
+  /**
+   * 过滤器列表。
+<li>image-id</li>按照【CVM镜像ID】进行过滤。
+类型：String
+必选：否
 
-- 使用ICMP协议时，只支持CidrBlock，不支持使用Port、Ipv6CidrBlock参数；
-- 使用ICMPv6协议时，只支持Ipv6CidrBlock，不支持使用Port、Ipv6CidrBlock参数；
-   */
-  Protocol: string
-  /**
-   * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。注意：单独的端口与离散端口不能同时存在。
-   */
-  Port?: string
-  /**
-   * IPv4网段或 IPv4地址(互斥)。
-示例值：0.0.0.0/0。
+<li>image-name</li>按照【CVM镜像名称】进行过滤。
+类型：String
+必选：否
 
-和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。
-   */
-  CidrBlock?: string
-  /**
-   * IPv6网段或IPv6地址(互斥)。
-示例值：::/0。
+<li>image-type</li>按照【CVM镜像类型】进行过滤。
+类型：String
+必选：否
+取值范围：
+PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像)
+PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
+SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像) 。
 
-和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
+参数不可以同时指定ImageIds和Filters。
    */
-  Ipv6CidrBlock?: string
-  /**
-   * 取值：ACCEPT（允许），DROP（拒绝）。默认为 ACCEPT。
-   */
-  Action?: string
-  /**
-   * 防火墙规则描述。
-   */
-  FirewallRuleDescription?: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -4042,6 +4121,20 @@ export interface DeleteBlueprintsRequest {
    * 镜像ID列表。镜像ID，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
    */
   BlueprintIds: Array<string>
+}
+
+/**
+ * RenameDockerContainer返回参数结构体
+ */
+export interface RenameDockerContainerResponse {
+  /**
+   * Docker活动ID。
+   */
+  DockerActivityId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4437,6 +4530,20 @@ export interface TerminateInstancesRequest {
    * 实例ID列表。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * ModifyFirewallTemplate请求参数结构体
+ */
+export interface ModifyFirewallTemplateRequest {
+  /**
+   * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
+   */
+  TemplateId: string
+  /**
+   * 防火墙模板名称。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
+   */
+  TemplateName?: string
 }
 
 /**
@@ -5227,6 +5334,20 @@ export interface FirewallTemplateRule {
 }
 
 /**
+ * 快照操作限制列表。
+ */
+export interface SnapshotDeniedActions {
+  /**
+   * 快照 ID。
+   */
+  SnapshotId?: string
+  /**
+   * 操作限制列表。
+   */
+  DeniedActions?: Array<DeniedAction>
+}
+
+/**
  * 磁盘操作限制列表详细信息
  */
 export interface DiskDeniedActions {
@@ -5457,6 +5578,45 @@ export interface Price {
    * 实例价格。
    */
   InstancePrice?: InstancePrice
+}
+
+/**
+ * 描述防火墙规则信息。
+ */
+export interface FirewallRule {
+  /**
+   * 协议，取值：TCP，UDP，ICMP，ALL，ICMPv6。
+
+- 使用ICMP协议时，只支持CidrBlock，不支持使用Port、Ipv6CidrBlock参数；
+- 使用ICMPv6协议时，只支持Ipv6CidrBlock，不支持使用Port、Ipv6CidrBlock参数；
+   */
+  Protocol: string
+  /**
+   * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。注意：单独的端口与离散端口不能同时存在。
+   */
+  Port?: string
+  /**
+   * IPv4网段或 IPv4地址(互斥)。
+示例值：0.0.0.0/0。
+
+和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。
+   */
+  CidrBlock?: string
+  /**
+   * IPv6网段或IPv6地址(互斥)。
+示例值：::/0。
+
+和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。
+   */
+  Ipv6CidrBlock?: string
+  /**
+   * 取值：ACCEPT（允许），DROP（拒绝）。默认为 ACCEPT。
+   */
+  Action?: string
+  /**
+   * 防火墙规则描述。
+   */
+  FirewallRuleDescription?: string
 }
 
 /**

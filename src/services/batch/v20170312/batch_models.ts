@@ -250,7 +250,7 @@ export interface EnvData {
  */
 export interface DescribeTaskTemplatesRequest {
   /**
-   * 任务模板ID列表，与Filters参数不能同时指定。
+   * 任务模板ID列表，与Filters参数不能同时指定。模版ID最大限制100.
    */
   TaskTemplateIds?: Array<string>
   /**
@@ -267,7 +267,7 @@ export interface DescribeTaskTemplatesRequest {
    */
   Offset?: number
   /**
-   * 返回数量
+   * 返回数量; 可选范围[1-100]；默认值为20。
    */
   Limit?: number
 }
@@ -1210,11 +1210,11 @@ export interface DescribeTaskTemplatesResponse {
   /**
    * 任务模板列表
    */
-  TaskTemplateSet: Array<TaskTemplateView>
+  TaskTemplateSet?: Array<TaskTemplateView>
   /**
    * 任务模板数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1652,32 +1652,32 @@ export interface DescribeJobSubmitInfoResponse {
   /**
    * 作业ID
    */
-  JobId: string
+  JobId?: string
   /**
    * 作业名称
    */
-  JobName: string
+  JobName?: string
   /**
    * 作业描述
    */
-  JobDescription: string
+  JobDescription?: string
   /**
    * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
    */
-  Priority: number
+  Priority?: number
   /**
    * 任务信息
    */
-  Tasks: Array<Task>
+  Tasks?: Array<Task>
   /**
    * 依赖信息
    */
-  Dependences: Array<Dependence>
+  Dependences?: Array<Dependence>
   /**
    * 作业绑定的标签列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1841,7 +1841,7 @@ export interface RedirectLocalInfo {
  */
 export interface DescribeJobSubmitInfoRequest {
   /**
-   * 作业ID
+   * 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909)
    */
   JobId: string
 }
@@ -2861,48 +2861,38 @@ export interface InternetAccessible {
    */
   BandwidthPackageId?: string
   /**
-   * 线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
-
-- BGP：常规 BGP 线路
-
+   * 线路类型。各种线路类型及支持地区详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
+<li>BGP：常规 BGP 线路</li>
 已开通静态单线IP白名单的用户，可选值：
-
- - CMCC：中国移动
- - CTCC：中国电信
- - CUCC：中国联通
-
+<li>CMCC：中国移动</li>
+<li>CTCC：中国电信</li>
+<li>CUCC：中国联通</li>
 注意：仅部分地域支持静态单线IP。
-示例值：BGP
+
    */
   InternetServiceProvider?: string
   /**
    * 公网 IP 类型。
 
-- WanIP：普通公网IP。
-- HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。
-- AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。
-
+<li> WanIP：普通公网IP。</li>
+<li> HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。</li>
+<li> AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。</li>
 如需为资源分配公网IPv4地址，请指定公网IPv4地址类型。
-
-示例值：WanIP
 
 此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category)
    */
   IPv4AddressType?: string
   /**
    * 弹性公网 IPv6 类型。
-- EIPv6：弹性公网 IPv6。
-- HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。
-
+<li> EIPv6：弹性公网 IPv6。</li>
+<li> HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。</li>
 如需为资源分配IPv6地址，请指定弹性公网IPv6类型。
-示例值：EIPv6
 
 此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category)
    */
   IPv6AddressType?: string
   /**
    * 高防包唯一ID，申请高防IP时，该字段必传。
-示例值：bgp-12345678
 
    */
   AntiDDoSPackageId?: string

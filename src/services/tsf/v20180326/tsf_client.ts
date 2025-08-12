@@ -811,7 +811,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除泳道规则
+   * 删除灰度发布规则
    */
   async DeleteLaneRule(
     req: DeleteLaneRuleRequest,
@@ -871,7 +871,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建文件配置项，返回详细信息
+   * 创建文件配置项，返回详细信息。
    */
   async CreateFileConfigWithDetailResp(
     req: CreateFileConfigWithDetailRespRequest,
@@ -1071,7 +1071,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用泳道规则
+   * 启用灰度发布规则
    */
   async EnableLaneRule(
     req: EnableLaneRuleRequest,
@@ -1132,7 +1132,7 @@ export class Client extends AbstractClient {
 
   /**
      * TSF上传的程序包存放在腾讯云对象存储（COS）中，通过该API可以获取从COS下载程序包需要的信息，包括包所在的桶、存储路径、鉴权信息等，之后使用COS API（或SDK）进行下载。
-COS相关文档请查阅：https://cloud.tencent.com/document/product/436
+请查阅[COS相关文档](https://cloud.tencent.com/document/product/436)
      */
   async DescribeDownloadInfo(
     req: DescribeDownloadInfoRequest,
@@ -1494,7 +1494,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 创建泳道规则
+   * 创建灰度发布规则
    */
   async CreateLaneRule(
     req: CreateLaneRuleRequest,
@@ -1554,7 +1554,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 创建公共配置项，并返回配置项详细信息
+   * 创建公共配置项，并返回配置项详细信息。
    */
   async CreatePublicConfigWithDetailResp(
     req: CreatePublicConfigWithDetailRespRequest,
@@ -2128,7 +2128,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 删除泳道
+   * 删除泳道配置
    */
   async DeleteLane(
     req: DeleteLaneRequest,
@@ -2158,7 +2158,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 创建泳道
+   * 创建泳道配置
    */
   async CreateLane(
     req: CreateLaneRequest,
@@ -2231,7 +2231,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 更新泳道信息
+   * 更新泳道配置信息
    */
   async ModifyLane(
     req: ModifyLaneRequest,
@@ -2261,7 +2261,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 新增微服务返回id
+   * 新增微服务返回ID
    */
   async CreateMicroserviceWithDetailResp(
     req: CreateMicroserviceWithDetailRespRequest,
@@ -2473,7 +2473,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 发布配置,并且返回配置 ID
+   * 发布配置，并且返回配置ID。
    */
   async ReleaseConfigWithDetailResp(
     req: ReleaseConfigWithDetailRespRequest,
@@ -2683,7 +2683,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 禁用泳道规则
+   * 禁用灰度发布规则
    */
   async DisableLaneRule(
     req: DisableLaneRuleRequest,
@@ -2713,7 +2713,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询API 版本
+   * 查询API版本
    */
   async DescribeApiVersions(
     req: DescribeApiVersionsRequest,
@@ -2813,7 +2813,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询泳道规则列表
+   * 查询灰度发布规则列表
    */
   async DescribeLaneRules(
     req: DescribeLaneRulesRequest,
@@ -2823,7 +2823,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 更新泳道规则
+   * 更新灰度发布规则
    */
   async ModifyLaneRule(
     req: ModifyLaneRuleRequest,
@@ -2833,7 +2833,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询group发布的配置
+   * 查询部署组发布的配置
    */
   async DescribeReleasedConfig(
     req: DescribeReleasedConfigRequest,
@@ -2863,7 +2863,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询泳道列表
+   * 查询泳道配置列表
    */
   async DescribeLanes(
     req: DescribeLanesRequest,
@@ -2884,7 +2884,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
 
   /**
      * TSF会将软件包上传到腾讯云对象存储（COS）。调用此接口获取上传信息，如目标地域，桶，包Id，存储路径，鉴权信息等，之后请使用COS API（或SDK）进行上传。
-COS相关文档请查阅：https://cloud.tencent.com/document/product/436
+请查阅[COS相关文档](https://cloud.tencent.com/document/product/436)
      */
   async DescribeUploadInfo(
     req: DescribeUploadInfoRequest,

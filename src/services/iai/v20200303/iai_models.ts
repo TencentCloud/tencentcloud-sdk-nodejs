@@ -2671,6 +2671,12 @@ export interface CompareFaceRequest {
 - 若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
    */
   NeedRotateDetection?: number
+  /**
+   * 若图片中包含多张人脸，指定选取策略，默认为0。
+- 0：选取其中置信度最高的人脸
+- 1：选取其中面积最大的人脸。
+   */
+  FaceMatchingStrategy?: number
 }
 
 /**
