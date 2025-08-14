@@ -103,6 +103,7 @@ import {
   DescribeTopicListByGroupResponse,
   DescribeMessageTraceResponse,
   DoHealthCheckOnMigratingTopicRequest,
+  DescribeProducerListRequest,
   DescribeMigratingTopicListResponse,
   ModifyMQTTInsPublicEndpointRequest,
   ModifyMQTTInstanceCertBindingResponse,
@@ -153,6 +154,7 @@ import {
   DescribeConsumerClientResponse,
   DescribeMQTTInstanceCertRequest,
   MessageTrackItem,
+  DescribeProducerListResponse,
   ModifyMQTTInsPublicEndpointResponse,
   ResendDeadLetterMessageRequest,
   CreateMQTTUserRequest,
@@ -185,6 +187,7 @@ import {
   DescribeConsumerGroupListResponse,
   ModifyMQTTUserRequest,
   CreateMQTTInsPublicEndpointRequest,
+  ProducerInfo,
   CreateMQTTTopicRequest,
   DeleteTopicResponse,
   DescribeMQTTInstanceCertResponse,
@@ -496,13 +499,15 @@ Filters示例：
   }
 
   /**
-   * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
-   */
-  async DescribeProductSKUs(
-    req?: DescribeProductSKUsRequest,
-    cb?: (error: string, rep: DescribeProductSKUsResponse) => void
-  ): Promise<DescribeProductSKUsResponse> {
-    return this.request("DescribeProductSKUs", req, cb)
+     * 查询主题关联的生产者列表信息，Filters支持以下筛选条件：
+- ClientIP，客户端IP
+- ClientID，客户端ID
+     */
+  async DescribeProducerList(
+    req: DescribeProducerListRequest,
+    cb?: (error: string, rep: DescribeProducerListResponse) => void
+  ): Promise<DescribeProducerListResponse> {
+    return this.request("DescribeProducerList", req, cb)
   }
 
   /**
@@ -576,6 +581,16 @@ Filters示例：
   }
 
   /**
+   * 更新MQTT实例公网接入点
+   */
+  async ModifyMQTTInsPublicEndpoint(
+    req: ModifyMQTTInsPublicEndpointRequest,
+    cb?: (error: string, rep: ModifyMQTTInsPublicEndpointResponse) => void
+  ): Promise<ModifyMQTTInsPublicEndpointResponse> {
+    return this.request("ModifyMQTTInsPublicEndpoint", req, cb)
+  }
+
+  /**
    * 修改迁移中的Topic状态进入下一步
    */
   async ChangeMigratingTopicToNextStage(
@@ -606,13 +621,13 @@ Filters示例：
   }
 
   /**
-   * 更新MQTT实例公网接入点
+   * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
    */
-  async ModifyMQTTInsPublicEndpoint(
-    req: ModifyMQTTInsPublicEndpointRequest,
-    cb?: (error: string, rep: ModifyMQTTInsPublicEndpointResponse) => void
-  ): Promise<ModifyMQTTInsPublicEndpointResponse> {
-    return this.request("ModifyMQTTInsPublicEndpoint", req, cb)
+  async DescribeProductSKUs(
+    req?: DescribeProductSKUsRequest,
+    cb?: (error: string, rep: DescribeProductSKUsResponse) => void
+  ): Promise<DescribeProductSKUsResponse> {
+    return this.request("DescribeProductSKUs", req, cb)
   }
 
   /**

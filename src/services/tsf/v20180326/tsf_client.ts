@@ -313,6 +313,7 @@ import {
   SearchBusinessLogResponse,
   DeleteUnitNamespacesRequest,
   DescribeGroupRequest,
+  VolumeClaimTemplatesOption,
   UnitRuleItem,
   UpdateConfigTemplateResponse,
   TrySchedule,

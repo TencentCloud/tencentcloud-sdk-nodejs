@@ -222,6 +222,7 @@ import {
   ModifyLoadBalancerMixIpTargetResponse,
   InquiryPriceCreateLoadBalancerResponse,
   CreateLoadBalancerSnatIpsRequest,
+  TargetGroupHealthCheck,
   DescribeTargetGroupInstancesResponse,
   DescribeQuotaResponse,
   DeleteTargetGroupsResponse,

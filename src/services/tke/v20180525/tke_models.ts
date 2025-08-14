@@ -6975,6 +6975,10 @@ export interface ClusterAdvancedSettings {
    */
   ContainerRuntime?: string
   /**
+   * 是否启用 DataPlaneV2（cilium替代kube-proxy）
+   */
+  DataPlaneV2?: boolean
+  /**
    * 是否启用集群删除保护
    */
   DeletionProtection?: boolean
@@ -7013,7 +7017,7 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
    */
   KubeProxyMode?: string
   /**
-   * 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。
+   * 集群网络类型。包括GR（全局路由）和VPC-CNI两种模式，默认为GR。
    */
   NetworkType?: string
   /**

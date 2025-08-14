@@ -40,7 +40,6 @@ import {
   DescribeDBInstanceSecurityGroupsResponse,
   BackupPlan,
   RestoreDBInstanceObjectsResponse,
-  SlowlogDetail,
   SwitchDBInstancePrimaryRequest,
   RenewInstanceResponse,
   DeleteLogBackupResponse,
@@ -58,7 +57,6 @@ import {
   DescribeBackupOverviewRequest,
   DescribeRegionsResponse,
   ModifyBaseBackupExpireTimeResponse,
-  UpgradeDBInstanceMajorVersionResponse,
   ModifyBackupDownloadRestrictionRequest,
   DBInstanceNetInfo,
   BackupDownloadRestriction,
@@ -67,7 +65,6 @@ import {
   DescribeBackupDownloadRestrictionRequest,
   ZoneInfo,
   CreateDatabaseRequest,
-  NormalQueryItem,
   Tag,
   DescribeBackupSummariesRequest,
   DescribeDBInstanceAttributeRequest,
@@ -93,7 +90,6 @@ import {
   TaskSet,
   InquiryPriceCreateDBInstancesRequest,
   DescribeDefaultParametersResponse,
-  ServerlessDBInstanceNetInfo,
   DescribeBackupPlansResponse,
   DescribeDBInstancesRequest,
   ReadOnlyGroup,
@@ -125,7 +121,6 @@ import {
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
   DBBackup,
-  ServerlessDBAccount,
   DeleteBackupPlanRequest,
   CloneDBInstanceRequest,
   DeleteParameterTemplateRequest,
@@ -135,11 +130,9 @@ import {
   CreateInstancesResponse,
   AnalysisItems,
   Xlog,
-  DescribeServerlessDBInstancesRequest,
   DescribeDBBackupsResponse,
   DescribeRegionsRequest,
   DescribeSlowQueryListResponse,
-  ServerlessDBInstance,
   CreateReadOnlyGroupRequest,
   ModifyDBInstanceSSLConfigResponse,
   DescribeParamsEventResponse,
@@ -162,12 +155,11 @@ import {
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   DescribeDBInstanceSSLConfigResponse,
-  DeleteAccountRequest,
   UpgradeDBInstanceKernelVersionResponse,
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
-  DescribeServerlessDBInstancesResponse,
+  DestroyDBInstanceRequest,
   DescribeBackupOverviewResponse,
   DescribeParameterTemplatesRequest,
   DescribeClassesResponse,
@@ -183,7 +175,7 @@ import {
   DescribeDBBackupsRequest,
   RestartDBInstanceResponse,
   Filter,
-  DescribeReadOnlyGroupsRequest,
+  UpgradeDBInstanceMajorVersionResponse,
   DescribeBaseBackupsResponse,
   ModifyParameterTemplateRequest,
   DescribeDBVersionsResponse,
@@ -193,13 +185,11 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   DBNode,
   ModifyDBInstanceNameResponse,
-  UpgradeDBInstanceMajorVersionRequest,
   CloseDBExtranetAccessResponse,
   DescribeBackupDownloadRestrictionResponse,
   CreateReadOnlyDBInstanceRequest,
   DescribeCloneDBInstanceSpecResponse,
   DescribeZonesResponse,
-  CreateServerlessDBInstanceResponse,
   DescribeDatabasesResponse,
   DescribeProductConfigResponse,
   DescribeOrdersRequest,
@@ -209,8 +199,7 @@ import {
   LogBackup,
   RebalanceReadOnlyGroupRequest,
   ModifyBackupPlanResponse,
-  DestroyDBInstanceRequest,
-  CreateServerlessDBInstanceRequest,
+  DeleteAccountRequest,
   InquiryPriceRenewDBInstanceRequest,
   CreateReadOnlyGroupResponse,
   DeleteDBInstanceNetworkAccessResponse,
@@ -250,7 +239,7 @@ import {
   ModifyDBInstanceParametersRequest,
   DedicatedCluster,
   DurationAnalysis,
-  DescribeDBSlowlogsResponse,
+  DescribeReadOnlyGroupsRequest,
   DescribeAccountPrivilegesRequest,
   DescribeReadOnlyGroupsResponse,
   RestoreDBInstanceObjectsRequest,
@@ -259,7 +248,7 @@ import {
   DescribeParameterTemplateAttributesResponse,
   DescribeDBVersionsRequest,
   ModifyDBInstancesProjectRequest,
-  DescribeDBSlowlogsRequest,
+  UpgradeDBInstanceMajorVersionRequest,
   DestroyDBInstanceResponse,
   DescribeDBInstanceAttributeResponse,
   DeleteLogBackupRequest,
@@ -285,13 +274,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
-   */
-  async ModifyMaintainTimeWindow(
-    req: ModifyMaintainTimeWindowRequest,
-    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
-  ): Promise<ModifyMaintainTimeWindowResponse> {
-    return this.request("ModifyMaintainTimeWindow", req, cb)
+     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
+注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
+     */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
   }
 
   /**
@@ -457,24 +447,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
-注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
-     */
-  async DescribeTasks(
-    req: DescribeTasksRequest,
-    cb?: (error: string, rep: DescribeTasksResponse) => void
-  ): Promise<DescribeTasksResponse> {
-    return this.request("DescribeTasks", req, cb)
-  }
-
-  /**
-   * 本接口（RenewInstance）用于续费实例。
+   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
    */
-  async RenewInstance(
-    req: RenewInstanceRequest,
-    cb?: (error: string, rep: RenewInstanceResponse) => void
-  ): Promise<RenewInstanceResponse> {
-    return this.request("RenewInstance", req, cb)
+  async ModifyMaintainTimeWindow(
+    req: ModifyMaintainTimeWindowRequest,
+    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
+  ): Promise<ModifyMaintainTimeWindowResponse> {
+    return this.request("ModifyMaintainTimeWindow", req, cb)
   }
 
   /**
@@ -505,18 +484,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductConfigResponse) => void
   ): Promise<DescribeProductConfigResponse> {
     return this.request("DescribeProductConfig", req, cb)
-  }
-
-  /**
-     * 早期接口不规范，已提供新接口 DescribeSlowQueryList 替换
-
-本接口（DescribeDBSlowlogs）用于获取慢查询日志。本接口已于2021.09.01日废弃，后续此接口将不再返回任何数据，推荐使用接口[DescribeSlowQueryList](https://cloud.tencent.com/document/api/409/60540)替代。
-     */
-  async DescribeDBSlowlogs(
-    req: DescribeDBSlowlogsRequest,
-    cb?: (error: string, rep: DescribeDBSlowlogsResponse) => void
-  ): Promise<DescribeDBSlowlogsResponse> {
-    return this.request("DescribeDBSlowlogs", req, cb)
   }
 
   /**
@@ -650,15 +617,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
-
-【接口下线中，请勿使用】本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
-     */
-  async CreateServerlessDBInstance(
-    req: CreateServerlessDBInstanceRequest,
-    cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void
-  ): Promise<CreateServerlessDBInstanceResponse> {
-    return this.request("CreateServerlessDBInstance", req, cb)
+   * 本接口（RenewInstance）用于续费实例。
+   */
+  async RenewInstance(
+    req: RenewInstanceRequest,
+    cb?: (error: string, rep: RenewInstanceResponse) => void
+  ): Promise<RenewInstanceResponse> {
+    return this.request("RenewInstance", req, cb)
   }
 
   /**
@@ -749,18 +714,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisIsolateDBInstancesResponse) => void
   ): Promise<DisIsolateDBInstancesResponse> {
     return this.request("DisIsolateDBInstances", req, cb)
-  }
-
-  /**
-     * 该产品形态需要下线，已完成客户实例全部下线、后端服务下线等
-
-【接口下线中，请勿使用】用于查询一个或多个serverlessDB实例的详细信息
-     */
-  async DescribeServerlessDBInstances(
-    req: DescribeServerlessDBInstancesRequest,
-    cb?: (error: string, rep: DescribeServerlessDBInstancesResponse) => void
-  ): Promise<DescribeServerlessDBInstancesResponse> {
-    return this.request("DescribeServerlessDBInstances", req, cb)
   }
 
   /**

@@ -22485,6 +22485,11 @@ export interface CompareResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerRows: number
+  /**
+   * 比较关系
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComputeExpression?: string
 }
 
 /**
@@ -24394,6 +24399,61 @@ export interface RuleExecResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerCondition?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupName?: string
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceName?: string
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 模式名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 判断是否屏蔽监控 0.屏蔽 1.不屏蔽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupExist?: number
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceType?: number
+  /**
+   * 数据表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupTableId?: number
+  /**
+   * 监控方式 1.未配置, 2.关联生产调度, 3.离线周期检测
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorType?: number
+  /**
+   * 执行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishTime?: string
 }
 
 /**

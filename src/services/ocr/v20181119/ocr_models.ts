@@ -486,7 +486,7 @@ flase：输出默认字段+自定义字段
   /**
    * 配置id支持：
 General -- 通用场景 
-InvoiceEng -- 国际invoice模版 
+InvoiceEng -- 国际invoice模板 
 WayBillEng --海运订单模板
 CustomsDeclaration -- 进出口报关单
 WeightNote -- 磅单
@@ -496,12 +496,12 @@ EntrustmentBook -- 海运托书
 Statement -- 对账单识别模板
 BookingConfirmation -- 配舱通知书识别模板
 AirWayBill -- 航空运单识别模板
-Table -- 表格模版
+Table -- 表格模板
 SteelLabel -- 实物标签识别模板
 CarInsurance -- 车辆保险单识别模板
 MultiRealEstateCertificate -- 房产材料识别模板
 MultiRealEstateMaterial -- 房产证明识别模板
-HongKongUtilityBill -- 香港水电煤单识别模板
+HongKongUtilityBill -- 中国香港水电煤单识别模板
    */
   ConfigId?: string
   /**
@@ -513,7 +513,7 @@ HongKongUtilityBill -- 香港水电煤单识别模板
    */
   OutputParentKey?: boolean
   /**
-   * 模版的单个属性配置
+   * 模板的单个属性配置
    */
   ConfigAdvanced?: ConfigAdvanced
   /**
@@ -663,7 +663,7 @@ ReceiptWeightNote -- 磅单收货单识别模板
    */
   OutputParentKey?: boolean
   /**
-   * 模版的单个属性配置
+   * 模板的单个属性配置
    */
   ConfigAdvanced?: ConfigAdvanced
 }
@@ -3996,7 +3996,7 @@ RideHailingDriverLicense -- 网约车驾驶证
 RideHailingTransportLicense -- 网约车运输证
 WayBill -- 快递运单
 AccountOpeningPermit -- 银行开户许可证
-InvoiceEng -- 海外发票模版
+InvoiceEng -- 国际发票模板
 Coin --钱币识别模板
 OnboardingDocuments -- 入职材料识别
 PropertyOwnershipCertificate -- 房产证识别
@@ -6718,6 +6718,10 @@ export interface GeneralAccurateOCRRequest {
    * 文本检测开关，默认为true。设置为false可直接进行单行识别，适用于仅包含正向单行文本的图片场景。
    */
   EnableDetectText?: boolean
+  /**
+   * 配置ID支持：  OCR -- 通用场景  MulOCR--多语种场景
+   */
+  ConfigID?: string
 }
 
 /**
@@ -7785,12 +7789,12 @@ export interface HandwritingEssayOCRRequest {
   PdfPageNumber?: number
   /**
    * 配置id支持：
-ArticleRecognize -- 手写作文模版
+ArticleRecognize -- 手写作文模板
 默认：ArticleRecognize
    */
   ConfigId?: string
   /**
-   * 模版的单个属性配置
+   * 模板的单个属性配置
    */
   Scene?: string
 }

@@ -366,6 +366,40 @@ AccessTypes，EntryPoint，Cmd
    * 配置内网访问时网络信息
    */
   VpcConf?: VpcConf
+  /**
+   * 存储配置信息
+   */
+  VolumesConf?: Array<VolumeConf>
+}
+
+/**
+ * 存储配置
+ */
+export interface VolumeConf {
+  /**
+   * 存储类型
+   */
+  Type?: string
+  /**
+   * 对象存储桶名称
+   */
+  BucketName?: string
+  /**
+   * 存储连接地址
+   */
+  Endpoint?: string
+  /**
+   * 存储连接用户密码
+   */
+  KeyID?: string
+  /**
+   * 存储挂载目的目录
+   */
+  DstPath?: string
+  /**
+   * 存储挂载源目录
+   */
+  SrcPath?: string
 }
 
 /**
@@ -748,6 +782,10 @@ export interface ServerBaseConfig {
    * Vpc 配置参数
    */
   VpcConf?: VpcConf
+  /**
+   * 存储配置信息
+   */
+  VolumesConf?: Array<VolumeConf>
 }
 
 /**

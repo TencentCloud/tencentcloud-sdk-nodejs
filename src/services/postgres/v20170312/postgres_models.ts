@@ -650,24 +650,6 @@ export interface RestoreDBInstanceObjectsResponse {
 }
 
 /**
- * 慢查询详情
- */
-export interface SlowlogDetail {
-  /**
-   * 花费总时间
-   */
-  TotalTime?: number
-  /**
-   * 调用总次数
-   */
-  TotalCalls?: number
-  /**
-   * 脱敏后的慢SQL列表
-   */
-  NormalQueries?: Array<NormalQueryItem>
-}
-
-/**
  * SwitchDBInstancePrimary请求参数结构体
  */
 export interface SwitchDBInstancePrimaryRequest {
@@ -1005,16 +987,6 @@ export interface ModifyBaseBackupExpireTimeResponse {
 }
 
 /**
- * UpgradeDBInstanceMajorVersion返回参数结构体
- */
-export interface UpgradeDBInstanceMajorVersionResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyBackupDownloadRestriction请求参数结构体
  */
 export interface ModifyBackupDownloadRestrictionRequest {
@@ -1171,15 +1143,15 @@ export interface ZoneInfo {
   /**
    * 该可用区的英文名称
    */
-  Zone: string
+  Zone?: string
   /**
    * 该可用区的中文名称
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 该可用区对应的数字编号
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 可用状态包含，
 UNAVAILABLE：不可用。
@@ -1187,16 +1159,16 @@ AVAILABLE：可用。
 SELLOUT：售罄。
 SUPPORTMODIFYONLY：支持变配。
    */
-  ZoneState: string
+  ZoneState?: string
   /**
    * 该可用区是否支持Ipv6
    */
-  ZoneSupportIpv6: number
+  ZoneSupportIpv6?: number
   /**
    * 该可用区对应的备可用区集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StandbyZoneSet: Array<string>
+  StandbyZoneSet?: Array<string>
 }
 
 /**
@@ -1233,72 +1205,6 @@ export interface CreateDatabaseRequest {
 }
 
 /**
- * 单条SlowQuery信息
- */
-export interface NormalQueryItem {
-  /**
-   * 用户名
-   */
-  UserName?: string
-  /**
-   * 调用次数
-   */
-  Calls?: number
-  /**
-   * 粒度点
-   */
-  CallsGrids?: Array<number | bigint>
-  /**
-   * 花费总时间
-   */
-  CostTime?: number
-  /**
-   * 影响的行数
-   */
-  Rows?: number
-  /**
-   * 花费最小时间
-   */
-  MinCostTime?: number
-  /**
-   * 花费最大时间
-   */
-  MaxCostTime?: number
-  /**
-   * 最早一条慢SQL时间
-   */
-  FirstTime?: string
-  /**
-   * 最晚一条慢SQL时间
-   */
-  LastTime?: string
-  /**
-   * 读共享内存块数
-   */
-  SharedReadBlks?: number
-  /**
-   * 写共享内存块数
-   */
-  SharedWriteBlks?: number
-  /**
-   * 读io总耗时
-   */
-  ReadCostTime?: number
-  /**
-   * 写io总耗时
-   */
-  WriteCostTime?: number
-  /**
-   * 数据库名字
-   */
-  DatabaseName?: string
-  /**
-   * 脱敏后的慢SQL
-   */
-  NormalQuery?: string
-}
-
-/**
  * 实例绑定的标签信息，包含标签键TagKey和标签值TagValue
  */
 export interface Tag {
@@ -1327,16 +1233,16 @@ export interface DescribeBackupSummariesRequest {
   /**
    * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
 db-instance-id：按照实例ID过滤，类型为string。
-db-instance-name：按照实例名过滤，类型为string。
+db-instance-name：按照实例名过滤，支持模糊匹配，类型为string。
 db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
    */
   Filters?: Array<Filter>
   /**
-   * 排序字段，支持TotalBackupSize,LogBackupSize,ManualBaseBackupSize,AutoBaseBackupSize。
+   * 排序字段，支持TotalBackupSize - 备份总大小、LogBackupSize - 备份日志的大小、ManualBaseBackupSize - 手动备份数据大小、AutoBaseBackupSize - 自动备份数据大小。当不传入该参数时，默认不进行排序。
    */
   OrderBy?: string
   /**
-   * 排序方式，包括升序：asc，降序：desc。
+   * 排序方式，包括升序：asc，降序：desc。默认值：asc。
    */
   OrderByType?: string
 }
@@ -1849,32 +1755,6 @@ export interface DescribeDefaultParametersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * serverless实例网络信息描述
- */
-export interface ServerlessDBInstanceNetInfo {
-  /**
-   * 地址
-   */
-  Address?: string
-  /**
-   * ip地址
-   */
-  Ip?: string
-  /**
-   * 端口号
-   */
-  Port?: number
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 网络类型
-   */
-  NetType?: string
 }
 
 /**
@@ -2723,24 +2603,6 @@ export interface DBBackup {
 }
 
 /**
- * serverless账号描述
- */
-export interface ServerlessDBAccount {
-  /**
-   * 用户名
-   */
-  DBUser?: string
-  /**
-   * 密码
-   */
-  DBPassword?: string
-  /**
-   * 连接数限制
-   */
-  DBConnLimit?: number
-}
-
-/**
  * DeleteBackupPlan请求参数结构体
  */
 export interface DeleteBackupPlanRequest {
@@ -3050,38 +2912,6 @@ export interface Xlog {
 }
 
 /**
- * DescribeServerlessDBInstances请求参数结构体
- */
-export interface DescribeServerlessDBInstancesRequest {
-  /**
-   * 查询条件。按照一个或者多个过滤条件进行查询，目前支持的过滤条件类型（name字段指定）有： 
-
-- db-instance-id：按照实例ID过滤，类型为string
-- db-instance-name：按照实例名过滤，类型为string
-- db-tag-key：按照实例的tag过滤，类型为string
-
-value字段指定该类型过滤条件下具体要过滤的实例ID/实例名/实例tag-key。
-   */
-  Filter?: Array<Filter>
-  /**
-   * 查询个数
-   */
-  Limit?: number
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 排序指标，目前支持实例创建时间CreateTime
-   */
-  OrderBy?: string
-  /**
-   * 排序方式，包括升序、降序
-   */
-  OrderByType?: string
-}
-
-/**
  * DescribeDBBackups返回参数结构体
  */
 export interface DescribeDBBackupsResponse {
@@ -3124,80 +2954,6 @@ export interface DescribeSlowQueryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * serverless实例描述
- */
-export interface ServerlessDBInstance {
-  /**
-   * 实例id，唯一标识符
-   */
-  DBInstanceId?: string
-  /**
-   * 实例名称
-   */
-  DBInstanceName?: string
-  /**
-   * 实例状态
-   */
-  DBInstanceStatus?: string
-  /**
-   * 地域
-   */
-  Region?: string
-  /**
-   * 可用区
-   */
-  Zone?: string
-  /**
-   * 项目id
-   */
-  ProjectId?: number
-  /**
-   * 私有网络Id
-   */
-  VpcId?: string
-  /**
-   * 子网id
-   */
-  SubnetId?: string
-  /**
-   * 字符集
-   */
-  DBCharset?: string
-  /**
-   * 数据库版本
-   */
-  DBVersion?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 实例网络信息
-   */
-  DBInstanceNetInfo?: Array<ServerlessDBInstanceNetInfo>
-  /**
-   * 实例账户信息
-   */
-  DBAccountSet?: Array<ServerlessDBAccount>
-  /**
-   * 实例下的db信息
-   */
-  DBDatabaseList?: Array<string>
-  /**
-   * 实例绑定的标签数组
-   */
-  TagList?: Array<Tag>
-  /**
-   * 数据库内核版本
-   */
-  DBKernelVersion?: string
-  /**
-   * 数据库主要版本
-   */
-  DBMajorVersion?: string
 }
 
 /**
@@ -3716,20 +3472,6 @@ export interface DescribeDBInstanceSSLConfigResponse {
 }
 
 /**
- * DeleteAccount请求参数结构体
- */
-export interface DeleteAccountRequest {
-  /**
-   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
-   */
-  DBInstanceId: string
-  /**
-   * 删除的账号名称。	可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
-   */
-  UserName: string
-}
-
-/**
  * UpgradeDBInstanceKernelVersion返回参数结构体
  */
 export interface UpgradeDBInstanceKernelVersionResponse {
@@ -3822,21 +3564,13 @@ export interface ErrLogDetail {
 }
 
 /**
- * DescribeServerlessDBInstances返回参数结构体
+ * DestroyDBInstance请求参数结构体
  */
-export interface DescribeServerlessDBInstancesResponse {
+export interface DestroyDBInstanceRequest {
   /**
-   * 查询结果数
+   * 待下线实例ID
    */
-  TotalCount?: number
-  /**
-   * 查询结果
-   */
-  DBInstanceSet?: Array<ServerlessDBInstance>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DBInstanceId: string
 }
 
 /**
@@ -4310,31 +4044,13 @@ export interface Filter {
 }
 
 /**
- * DescribeReadOnlyGroups请求参数结构体
+ * UpgradeDBInstanceMajorVersion返回参数结构体
  */
-export interface DescribeReadOnlyGroupsRequest {
+export interface UpgradeDBInstanceMajorVersionResponse {
   /**
-   * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
-db-master-instance-id：按照主实例过滤，类型为string。
-read-only-group-id：按照只读组ID过滤，类型为string。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
-  /**
-   * 查询每一页的条数，默认为10
-   */
-  PageSize?: number
-  /**
-   * 查询的页码，默认为1
-   */
-  PageNumber?: number
-  /**
-   * 查询排序依据，目前支持:ROGroupId,CreateTime,Name
-   */
-  OrderBy?: string
-  /**
-   * 查询排序依据类型，目前支持:desc,asc
-   */
-  OrderByType?: string
+  RequestId?: string
 }
 
 /**
@@ -4477,62 +4193,6 @@ export interface ModifyDBInstanceNameResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * UpgradeDBInstanceMajorVersion请求参数结构体
- */
-export interface UpgradeDBInstanceMajorVersionRequest {
-  /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
-   */
-  DBInstanceId: string
-  /**
-   * 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。
-   */
-  TargetDBKernelVersion: string
-  /**
-   * 是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。
-   */
-  UpgradeCheck?: boolean
-  /**
-   * 升级前备份选项。True，表示升级前需要创建全量备份，False，表示升级前不需要创建全量备份。当实例已有备份集可以恢复到升级前的状态时，可选择False，否则需要指定为True。UpgradeCheck为True时，此参数无效。
-   */
-  BackupBeforeUpgrade?: boolean
-  /**
-   * 统计信息收集选项，对主例运行 ANALYZE 以在升级后更新系统统计信息。可选值包括，
-0：不需要收集统计信息；
-1：实例恢复写之前收集统计信息；
-3：实例恢复写之后收集统计信息。
-UpgradeCheck为True时，此参数无效。
-   */
-  StatisticsRefreshOption?: number
-  /**
-   * 插件升级选项，pg_upgrade不会升级任何插件，需要在升级完成后在创建过插件的库上执行"ALTER EXTENSION UPDATE"。发起升级实例大版本时可以指定在实例恢复写前/后是否需要升级任务自动升级插件版本。可选值包括：
-0：不需要自动升级插件；
-1：恢复写之前升级插件；
-2：恢复写之后升级插件。
-UpgradeCheck为True时，此参数无效。
-   */
-  ExtensionUpgradeOption?: number
-  /**
-   * 升级时间选项，升级过程中会有一段时间实例只读，并会有一次秒级闪断，发起升级时需要选择这段影响的时间窗。可选值包括：
-0：自动执行，不需要指定时间窗；
-1：指定本次升级任务的时间窗，通过参数UpgradeTimeBegin和UpgradeTimeEnd设置；
-2：在实例运维时间窗内执行。
-UpgradeCheck为True时，此参数无效。
-   */
-  UpgradeTimeOption?: number
-  /**
-   * 升级时间窗开始时间，时间格式：HH:MM:SS，例如：01:00:00。当UpgradeTimeOption为1时，该参数有效。
-UpgradeCheck为True时，此参数无效。
-   */
-  UpgradeTimeBegin?: string
-  /**
-   * 升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。
-UpgradeCheck为True时，此参数无效。
-   */
-  UpgradeTimeEnd?: string
 }
 
 /**
@@ -4723,20 +4383,6 @@ export interface DescribeZonesResponse {
 }
 
 /**
- * CreateServerlessDBInstance返回参数结构体
- */
-export interface CreateServerlessDBInstanceResponse {
-  /**
-   * 实例ID，该ID全局唯一，如：postgres-xxxxx
-   */
-  DBInstanceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeDatabases返回参数结构体
  */
 export interface DescribeDatabasesResponse {
@@ -4883,51 +4529,17 @@ export interface ModifyBackupPlanResponse {
 }
 
 /**
- * DestroyDBInstance请求参数结构体
+ * DeleteAccount请求参数结构体
  */
-export interface DestroyDBInstanceRequest {
+export interface DeleteAccountRequest {
   /**
-   * 待下线实例ID
+   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
-}
-
-/**
- * CreateServerlessDBInstance请求参数结构体
- */
-export interface CreateServerlessDBInstanceRequest {
   /**
-   * 可用区ID。公测阶段仅支持ap-shanghai-2、ap-beijing-1,ap-guangzhou-2.
+   * 删除的账号名称。	可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取
    */
-  Zone: string
-  /**
-   * DB实例名称，同一个账号下该值必须唯一。
-   */
-  DBInstanceName: string
-  /**
-   * PostgreSQL内核版本，目前只支持：10.4。
-   */
-  DBVersion: string
-  /**
-   * PostgreSQL数据库字符集，目前支持UTF8。
-   */
-  DBCharset: string
-  /**
-   * 项目ID。
-   */
-  ProjectId?: number
-  /**
-   * 私有网络ID。
-   */
-  VpcId?: string
-  /**
-   * 私有网络子网ID。
-   */
-  SubnetId?: string
-  /**
-   * 实例需要绑定的标签数组信息
-   */
-  TagList?: Array<Tag>
+  UserName: string
 }
 
 /**
@@ -5627,21 +5239,31 @@ export interface DurationAnalysis {
 }
 
 /**
- * DescribeDBSlowlogs返回参数结构体
+ * DescribeReadOnlyGroups请求参数结构体
  */
-export interface DescribeDBSlowlogsResponse {
+export interface DescribeReadOnlyGroupsRequest {
   /**
-   * 本次返回多少条数据
+   * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+db-master-instance-id：按照主实例过滤，类型为string。
+read-only-group-id：按照只读组ID过滤，类型为string。
    */
-  TotalCount?: number
+  Filters?: Array<Filter>
   /**
-   * 慢查询日志详情
+   * 查询每一页的条数，默认为10
    */
-  Detail?: SlowlogDetail
+  PageSize?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 查询的页码，默认为1
    */
-  RequestId?: string
+  PageNumber?: number
+  /**
+   * 查询排序依据，目前支持:ROGroupId,CreateTime,Name
+   */
+  OrderBy?: string
+  /**
+   * 查询排序依据类型，目前支持:desc,asc
+   */
+  OrderByType?: string
 }
 
 /**
@@ -5812,41 +5434,59 @@ export interface ModifyDBInstancesProjectRequest {
 }
 
 /**
- * DescribeDBSlowlogs请求参数结构体
+ * UpgradeDBInstanceMajorVersion请求参数结构体
  */
-export interface DescribeDBSlowlogsRequest {
+export interface UpgradeDBInstanceMajorVersionRequest {
   /**
-   * 实例ID，形如postgres-lnp6j617
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 查询起始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
+   * 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。
    */
-  StartTime: string
+  TargetDBKernelVersion: string
   /**
-   * 查询结束时间，形如2018-06-10 17:06:38
+   * 是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。
    */
-  EndTime: string
+  UpgradeCheck?: boolean
   /**
-   * 数据库名字
+   * 升级前备份选项。True，表示升级前需要创建全量备份，False，表示升级前不需要创建全量备份。当实例已有备份集可以恢复到升级前的状态时，可选择False，否则需要指定为True。UpgradeCheck为True时，此参数无效。
    */
-  DatabaseName?: string
+  BackupBeforeUpgrade?: boolean
   /**
-   * 按照何种指标排序，取值为sum_calls或者sum_cost_time。sum_calls-总调用次数；sum_cost_time-总的花费时间
+   * 统计信息收集选项，对主例运行 ANALYZE 以在升级后更新系统统计信息。可选值包括，
+0：不需要收集统计信息；
+1：实例恢复写之前收集统计信息；
+3：实例恢复写之后收集统计信息。
+UpgradeCheck为True时，此参数无效。
    */
-  OrderBy?: string
+  StatisticsRefreshOption?: number
   /**
-   * 排序规则。desc-降序；asc-升序
+   * 插件升级选项，pg_upgrade不会升级任何插件，需要在升级完成后在创建过插件的库上执行"ALTER EXTENSION UPDATE"。发起升级实例大版本时可以指定在实例恢复写前/后是否需要升级任务自动升级插件版本。可选值包括：
+0：不需要自动升级插件；
+1：恢复写之前升级插件；
+2：恢复写之后升级插件。
+UpgradeCheck为True时，此参数无效。
    */
-  OrderByType?: string
+  ExtensionUpgradeOption?: number
   /**
-   * 分页返回结果，每页最大返回数量，取值为1-100，默认20
+   * 升级时间选项，升级过程中会有一段时间实例只读，并会有一次秒级闪断，发起升级时需要选择这段影响的时间窗。可选值包括：
+0：自动执行，不需要指定时间窗；
+1：指定本次升级任务的时间窗，通过参数UpgradeTimeBegin和UpgradeTimeEnd设置；
+2：在实例运维时间窗内执行。
+UpgradeCheck为True时，此参数无效。
    */
-  Limit?: number
+  UpgradeTimeOption?: number
   /**
-   * 分页返回结果，返回结果的第几页，从0开始计数
+   * 升级时间窗开始时间，时间格式：HH:MM:SS，例如：01:00:00。当UpgradeTimeOption为1时，该参数有效。
+UpgradeCheck为True时，此参数无效。
    */
-  Offset?: number
+  UpgradeTimeBegin?: string
+  /**
+   * 升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。
+UpgradeCheck为True时，此参数无效。
+   */
+  UpgradeTimeEnd?: string
 }
 
 /**

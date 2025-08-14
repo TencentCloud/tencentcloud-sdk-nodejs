@@ -2168,23 +2168,23 @@ export interface AvailableRegion {
   /**
    * 区域名称，如“ap-beijing”
    */
-  Region: string
+  Region?: string
   /**
    * 区域名称，如“bj”
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 区域可用情况，当区域内至少有一个可用区处于可售状态时，取值为AVAILABLE，否则为UNAVAILABLE
    */
-  RegionStatus: string
+  RegionStatus?: string
   /**
    * 可用区数组
    */
-  Zones: Array<AvailableZone>
+  Zones?: Array<AvailableZone>
   /**
    * 区域中文名称，如“广州”
    */
-  RegionCnName: string
+  RegionCnName?: string
 }
 
 /**

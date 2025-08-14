@@ -258,9 +258,9 @@ it("trocket.v20230308.DeleteConsumerGroup", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeProductSKUs", async function () {
+it("trocket.v20230308.DescribeProducerList", async function () {
     try {
-       const data = await client.DescribeProductSKUs({})
+       const data = await client.DescribeProducerList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +338,16 @@ it("trocket.v20230308.DescribeMQTTMessage", async function () {
     }
 })
 
+it("trocket.v20230308.ModifyMQTTInsPublicEndpoint", async function () {
+    try {
+       const data = await client.ModifyMQTTInsPublicEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.ChangeMigratingTopicToNextStage", async function () {
     try {
        const data = await client.ChangeMigratingTopicToNextStage({})
@@ -368,9 +378,9 @@ it("trocket.v20230308.DescribeMQTTTopic", async function () {
     }
 })
 
-it("trocket.v20230308.ModifyMQTTInsPublicEndpoint", async function () {
+it("trocket.v20230308.DescribeProductSKUs", async function () {
     try {
-       const data = await client.ModifyMQTTInsPublicEndpoint({})
+       const data = await client.DescribeProductSKUs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -549,7 +549,7 @@ export interface VoiceCloneRequest {
    */
   APIKey: string
   /**
-   * 声音克隆的名字
+   * 声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位
    */
   VoiceName: string
   /**
@@ -1035,6 +1035,7 @@ bigvHeight：上/下行分辨率高；
 aCapEnergy：音频采集能量；
 aPlayEnergy：音频播放能量；
 rtt：SDK到云端的往返延时；单位: ms
+bigvRecFps: 云端送达帧率；
    */
   DataType?: Array<string>
   /**
@@ -3711,7 +3712,7 @@ export interface StartAIConversationRequest {
   STTConfig?: STTConfig
   /**
    * LLM配置。需符合openai规范，为JSON字符串，示例如下：
-<pre> { <br> &emsp;  "LLMType": "大模型类型",  // String 必填，如："openai" <br> &emsp;  "Model": "您的模型名称", // String 必填，指定使用的模型<br>    "APIKey": "您的LLM API密钥", // String 必填 <br> &emsp;  "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL<br> &emsp;  "Streaming": true // Boolean 非必填，指定是否使用流式传输<br> &emsp;} </pre>
+<pre> { <br> &emsp;  "LLMType": "大模型类型",  // String 必填，如："openai" <br> &emsp;  "Model": "您的模型名称", // String 必填，指定使用的模型<br>    "APIKey": "您的LLM API密钥", // String 必填 <br> &emsp;  "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL<br> &emsp;  "History": 10, // Integer 选填，设置 LLM 的上下文轮次，默认值为0，最大值50<br> &emsp;  "HistoryMode": 1, // Integer 选填，1表示LLM上下文中的内容会和播放音频做同步，没有播放的音频对应的文本不会出现在上下文中。0表示不会做同步，默认值为0<br> &emsp;  "Streaming": true // Boolean 非必填，指定是否使用流式传输<br> &emsp;} </pre>
 
    */
   LLMConfig?: string

@@ -1641,6 +1641,24 @@ export interface DescribeAttackWhiteRuleRequest {
 }
 
 /**
+ * DescribeOwaspRules返回参数结构体
+ */
+export interface DescribeOwaspRulesResponse {
+  /**
+   * 规则总数
+   */
+  Total?: number
+  /**
+   * 规则列表
+   */
+  List?: Array<OwaspRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 防信息泄露的匹配条件结构体
  */
 export interface StrategyForAntiInfoLeak {
@@ -2771,6 +2789,16 @@ export interface TLSVersion {
 }
 
 /**
+ * ModifyOwaspRuleTypeAction返回参数结构体
+ */
+export interface ModifyOwaspRuleTypeActionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 负载均衡的监听器
  */
 export interface LoadBalancer {
@@ -3677,6 +3705,36 @@ export interface ApiAsset {
    * 对象接入和泛域名接入时，展示host列表
    */
   HostList?: Array<string>
+}
+
+/**
+ * DescribeOwaspRules请求参数结构体
+ */
+export interface DescribeOwaspRulesRequest {
+  /**
+   * 需要查询的域名
+   */
+  Domain: string
+  /**
+   * 分页页数，默认为0
+   */
+  Offset?: number
+  /**
+   * 每页容量，默认为10
+   */
+  Limit?: number
+  /**
+   * 排序字段，支持 RuleId, UpdateTime
+   */
+  By?: string
+  /**
+   * 排序方式，支持asc、desc
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持 RuleId：规则ID、TypeId：规则类型、Desc：规则描述 、CveID：CVE编号、Status：规则状态、VulLevel：威胁等级
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -5090,6 +5148,24 @@ export interface DescribeIpAccessControlRequest {
 }
 
 /**
+ * ModifyOwaspRuleTypeAction请求参数结构体
+ */
+export interface ModifyOwaspRuleTypeActionRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则类型ID列表
+   */
+  TypeIDs: Array<string>
+  /**
+   * 规则类型的防护模式，0：观察、1：拦截
+   */
+  RuleTypeAction: number
+}
+
+/**
  * ModifyWafThreatenIntelligence请求参数结构体
  */
 export interface ModifyWafThreatenIntelligenceRequest {
@@ -5358,6 +5434,16 @@ export interface DescribeUserSignatureRuleRequest {
 }
 
 /**
+ * DeleteOwaspRuleStatus返回参数结构体
+ */
+export interface DeleteOwaspRuleStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyProtectionStatus返回参数结构体
  */
 export interface ModifyProtectionStatusResponse {
@@ -5365,6 +5451,36 @@ export interface ModifyProtectionStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyOwaspRuleStatus请求参数结构体
+ */
+export interface ModifyOwaspRuleStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则开关，0：关闭、1：开启、2：只观察
+   */
+  RuleStatus: number
+  /**
+   * 是否全选
+   */
+  SelectAll: boolean
+  /**
+   * 规则ID列表
+   */
+  RuleIDs?: Array<string>
+  /**
+   * 如果反转需要传入类型
+   */
+  TypeId?: number
+  /**
+   * 修改原因 0：无(兼容记录为空) 1：业务自身特性误报避免 2：规则误报上报 3：核心业务规则灰度 4：其它
+   */
+  Reason?: number
 }
 
 /**
@@ -5687,6 +5803,24 @@ export interface CreateAccessExportResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyOwaspRuleTypeLevel请求参数结构体
+ */
+export interface ModifyOwaspRuleTypeLevelRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则类型ID列表
+   */
+  TypeIDs: Array<string>
+  /**
+   * 规则的防护等级，100：宽松、200：正常、300：严格、400：超严格
+   */
+  RuleTypeLevel: number
 }
 
 /**
@@ -6323,6 +6457,16 @@ export interface UpsertCCAutoStatusResponse {
    * 正常情况为null
    */
   Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyOwaspRuleStatus返回参数结构体
+ */
+export interface ModifyOwaspRuleStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7432,6 +7576,28 @@ export interface DescribeCCAutoStatusRequest {
 }
 
 /**
+ * ModifyAntiFakeUrl请求参数结构体
+ */
+export interface ModifyAntiFakeUrlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 名称
+   */
+  Name: string
+  /**
+   * uri
+   */
+  Uri: string
+  /**
+   * ID
+   */
+  Id: number
+}
+
+/**
  * DescribeDomainDetailsClb请求参数结构体
  */
 export interface DescribeDomainDetailsClbRequest {
@@ -7612,34 +7778,25 @@ export interface PortItem {
 }
 
 /**
- * Tiga规则
+ * DescribeOwaspRuleTypes请求参数结构体
  */
-export interface RuleType {
+export interface DescribeOwaspRuleTypesRequest {
   /**
-   * 规则ID
+   * 查询域名
    */
-  TypeID?: string
+  Domain: string
   /**
-   * 规则名称
+   * 分页页数，默认为0
    */
-  Name?: string
+  Offset?: number
   /**
-   * 规则类型描述
-
+   * 每页容量，默认为10
    */
-  Desc?: string
+  Limit?: number
   /**
-   * 规则类型状态，即类型生效开关，0：关闭，1：开启
+   * 筛选条件，支持 RuleId：规则ID、CveID：CVE编号、Desc：描述
    */
-  RuleTypeStatus?: number
-  /**
-   * 类型下生效的规则数量
-   */
-  ActiveRuleCount?: number
-  /**
-   * 类型下的规则总数量
-   */
-  TotalRuleCount?: number
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -7680,6 +7837,49 @@ export interface ModifyCustomRuleStatusRequest {
    * 规则id
    */
   DomainRuleIdList?: Array<DomainRuleId>
+}
+
+/**
+ * Owasp规则类型
+ */
+export interface OwaspRuleType {
+  /**
+   * 类型ID
+   */
+  TypeId: number
+  /**
+   * 类型名称
+   */
+  TypeName: string
+  /**
+   * 类型描述
+
+   */
+  Description?: string
+  /**
+   * 类型分类
+   */
+  Classification?: string
+  /**
+   * 规则类型的防护模式，0：观察、1：拦截
+   */
+  Action?: number
+  /**
+   * 规则类型的防护等级，100：宽松、200：正常、300：严格、400：超严格
+   */
+  Level?: number
+  /**
+   * 规则类型的开关状态，0：关闭、1：开启
+   */
+  Status?: number
+  /**
+   * 规则类型下的所有规则总是
+   */
+  TotalRule?: number
+  /**
+   * 规则类型下的启用的规则总数
+   */
+  ActiveRule?: number
 }
 
 /**
@@ -8659,6 +8859,20 @@ export interface DescribeAccessHistogramResponse {
 }
 
 /**
+ * DeleteOwaspRuleStatus请求参数结构体
+ */
+export interface DeleteOwaspRuleStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则ID列表
+   */
+  RuleIDs: Array<string>
+}
+
+/**
  * ModifyHostFlowMode返回参数结构体
  */
 export interface ModifyHostFlowModeResponse {
@@ -9577,6 +9791,16 @@ export interface ModifyCustomRuleRequest {
 }
 
 /**
+ * ModifyOwaspRuleTypeLevel返回参数结构体
+ */
+export interface ModifyOwaspRuleTypeLevelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDomainWhiteRule请求参数结构体
  */
 export interface ModifyDomainWhiteRuleRequest {
@@ -9957,6 +10181,61 @@ export interface DescribeScanIpResponse {
 }
 
 /**
+ * Owasp规则
+ */
+export interface OwaspRule {
+  /**
+   * 规则ID
+   */
+  RuleId?: number
+  /**
+   * 规则描述
+   */
+  Description?: string
+  /**
+   * 规则开关，0：关闭、1：开启、2：只观察
+   */
+  Status?: number
+  /**
+   * 规则的防护等级，100：宽松、200：正常、300：严格、400：超严格
+   */
+  Level?: number
+  /**
+   * 威胁等级，0：未知，100：低危，200：中危，300：高危，400：危急
+   */
+  VulLevel?: number
+  /**
+   * CVE ID
+   */
+  CveID?: string
+  /**
+   * 规则所属的类型ID
+   */
+  TypeId?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  ModifyTime?: string
+  /**
+   * 是否被锁定
+   */
+  Locked?: number
+  /**
+   * 修改原因
+0：无(兼容记录为空)
+1：业务自身特性误报避免
+2：规则误报上报
+3：核心业务规则灰度
+4：其它
+   */
+  Reason?: number
+}
+
+/**
  * GetAttackHistogram请求参数结构体
  */
 export interface GetAttackHistogramRequest {
@@ -10106,6 +10385,16 @@ export interface DeleteCustomWhiteRuleRequest {
  * ModifyInstanceRenewFlag返回参数结构体
  */
 export interface ModifyInstanceRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyOwaspRuleTypeStatus返回参数结构体
+ */
+export interface ModifyOwaspRuleTypeStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10532,6 +10821,37 @@ export interface DescribeAutoDenyIPRequest {
    * 排序参数
    */
   Sort?: string
+}
+
+/**
+ * Tiga规则
+ */
+export interface RuleType {
+  /**
+   * 规则ID
+   */
+  TypeID?: string
+  /**
+   * 规则名称
+   */
+  Name?: string
+  /**
+   * 规则类型描述
+
+   */
+  Desc?: string
+  /**
+   * 规则类型状态，即类型生效开关，0：关闭，1：开启
+   */
+  RuleTypeStatus?: number
+  /**
+   * 类型下生效的规则数量
+   */
+  ActiveRuleCount?: number
+  /**
+   * 类型下的规则总数量
+   */
+  TotalRuleCount?: number
 }
 
 /**
@@ -10979,6 +11299,24 @@ export interface ModifyHostStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyOwaspRuleTypeStatus请求参数结构体
+ */
+export interface ModifyOwaspRuleTypeStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则类型ID列表
+   */
+  TypeIDs: Array<string>
+  /**
+   * 规则类型的开关状态，0：关闭、1：开启
+   */
+  RuleTypeStatus: number
 }
 
 /**
@@ -11541,25 +11879,21 @@ export interface ModifyAntiFakeUrlStatusResponse {
 }
 
 /**
- * ModifyAntiFakeUrl请求参数结构体
+ * DescribeOwaspRuleTypes返回参数结构体
  */
-export interface ModifyAntiFakeUrlRequest {
+export interface DescribeOwaspRuleTypesResponse {
   /**
-   * 域名
+   * 规则类型数量
    */
-  Domain: string
+  Total?: number
   /**
-   * 名称
+   * 规则类型列表及信息
    */
-  Name: string
+  List?: Array<OwaspRuleType>
   /**
-   * uri
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Uri: string
-  /**
-   * ID
-   */
-  Id: number
+  RequestId?: string
 }
 
 /**

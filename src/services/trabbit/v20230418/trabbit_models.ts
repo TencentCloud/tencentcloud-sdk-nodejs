@@ -710,6 +710,10 @@ export interface RabbitMQServerlessAccessInfo {
    * 公网状态
    */
   PublicDataStreamStatus?: string
+  /**
+   * 公网CLB实例ID
+   */
+  PublicClbId?: string
 }
 
 /**
@@ -864,6 +868,10 @@ export interface CreateRabbitMQServerlessExchangeRequest {
    * 替代 exchange, 如果消息无法发送到当前 exchange, 就会发送到该替代 exchange
    */
   AlternateExchange?: string
+  /**
+   * 延迟类型的exchange背后对应的exchange类型, 支持 "fanout","direct","topic","headers"
+   */
+  DelayedExchangeType?: string
 }
 
 /**
@@ -1024,6 +1032,14 @@ export interface RabbitMQClusterInfo {
    * 消息保留时间，单位小时
    */
   MessageRetainTime?: number
+  /**
+   * 发送消息流量比例
+   */
+  SendReceiveRatio?: number
+  /**
+   * 消息轨迹保留时间，单位小时
+   */
+  TraceTime?: number
 }
 
 /**

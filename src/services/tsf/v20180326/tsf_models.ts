@@ -303,7 +303,7 @@ export interface ClusterV2 {
    */
   ClusterDesc?: string
   /**
-   * 集群类型
+   * 集群类型，C表示容器集群，V表示虚拟机集群
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: string
@@ -363,12 +363,12 @@ export interface ClusterV2 {
    */
   DeleteFlag?: boolean
   /**
-   * 创建时间
+   * 创建时间，格式为​​YYYY-MM-DD HH:MM:SS
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * 更新时间，格式为​​YYYY-MM-DD HH:MM:SS
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
@@ -458,7 +458,7 @@ export interface ClusterV2 {
    */
   KuberneteApiServer?: string
   /**
-   * K : kubeconfig, S : service account
+   * K 表示通过kubeconfig 导入, S 表示通过service account导入
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KuberneteNativeType?: string
@@ -482,8 +482,7 @@ export interface ClusterV2 {
  */
 export interface ModifyApplicationResponse {
   /**
-   * true：操作成功
-false：操作失败
+   * true表示修改成功，false表示修改失败
    */
   Result?: boolean
   /**
@@ -877,7 +876,7 @@ export interface DescribeConfigsResponse {
  */
 export interface ModifyContainerReplicasRequest {
   /**
-   * 部署组ID，部署组唯一标识
+   * 部署组ID，部署组唯一标识，调用[DescribeClusters](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)接口，选定一个容器集群，选择部署组，查看DescribeSingleContainerGroups接口返回的GroupId
    */
   GroupId: string
   /**
@@ -979,27 +978,27 @@ export interface DescribeFileConfigsResponse {
  */
 export interface DescribeClustersRequest {
   /**
-   * 搜索词
+   * 搜索词，可以搜索ID/名称/备注/标签
    */
   SearchWord?: string
   /**
-   * 排序字段
+   * 排序字段，例如创建时间
    */
   OrderBy?: string
   /**
-   * 排序方式
+   * 排序方式，0表示升序，1表示倒序
    */
   OrderType?: number
   /**
-   * 偏移量
+   * 偏移量，默认0
    */
   Offset?: number
   /**
-   * 分页个数
+   * 分页个数，0-50 之间，默认20
    */
   Limit?: number
   /**
-   * 集群类型
+   * 集群类型，C表示容器集群，V表示虚拟机集群
    */
   ClusterType?: string
   /**
@@ -1066,11 +1065,13 @@ export interface DescribeGroupBindedGatewaysResponse {
  */
 export interface DescribeJvmMonitorRequest {
   /**
-   * 查询的实例Id
+   * 查询的实例ID
+可通过调用[DescribeClusterInstances](https://cloud.tencent.com/document/product/649/36048)查询已导入的实例列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=instance)进行查询。实例ID例如：ins-6decplwk
    */
   InstanceId: string
   /**
-   * 实例所属应用Id
+   * 实例所属应用ID
+可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已经存在的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)查看。应用ID例如：application-v378ewna
    */
   ApplicationId: string
   /**
@@ -1086,7 +1087,8 @@ export interface DescribeJvmMonitorRequest {
    */
   To: string
   /**
-   * 查询的监控图列表,以返回值属性名作为入参
+   * 查询的监控图列表，以返回值属性名作为入参，可选值：
+heapMemory：堆内存监控图；nonHeapMemory：非堆内存监控图；edenSpace：伊甸区监控图；survivorSpace：幸存者区监控图；oldSpace：老年代监控图；metaSpace：元空间监控图；youngGC：youngGC增量监控图；fullGC：fullGC增量监控图；cpuUsage：cpu使用率监控图；classCount：加载类数监控图；threadPicture：线程图
    */
   RequiredPictures: Array<string>
   /**
@@ -1239,11 +1241,11 @@ export interface CreateNamespaceResponse {
  */
 export interface RedoTaskBatchRequest {
   /**
-   * 任务ID。在任务管理列表页面可以查看任务ID。
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
   /**
-   * 任务批次ID。在任务管理页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
+   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
    */
   BatchId: string
 }
@@ -1369,11 +1371,13 @@ export interface TaskRecordPage {
  */
 export interface AssociateBusinessLogConfigRequest {
   /**
-   * TSF分组ID
+   * 部署组ID
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupId: string
   /**
    * 日志配置项ID列表
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigIdList?: Array<string>
 }
@@ -1397,7 +1401,8 @@ export interface DescribeJvmMonitorResponse {
  */
 export interface DescribeDeliveryConfigRequest {
   /**
-   * 投递配置id
+   * 日志配置项ID
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigId: string
 }
@@ -1543,7 +1548,7 @@ export interface DescribeUnitRuleResponse {
  */
 export interface DeleteImageTagsRequest {
   /**
-   * 镜像版本数组
+   * 需要删除的镜像版本列表，可通过调用[DescribeImageTags](https://cloud.tencent.com/document/api/649/36052)查询已创建的镜像版本列表或登录控制台进行查看。
    */
   ImageTags: Array<DeleteImageTag>
   /**
@@ -1615,7 +1620,7 @@ export interface RollbackConfigRequest {
  */
 export interface DisassociateBusinessLogConfigResponse {
   /**
-   * 操作结果
+   * 操作结果，true：成功，false：失败。
    */
   Result?: boolean
   /**
@@ -2068,7 +2073,7 @@ export interface DescribeResourceConfigResponse {
  */
 export interface StartContainerGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
 }
@@ -2307,7 +2312,7 @@ export interface Instance {
  */
 export interface UpdateHealthCheckSettingsRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
   /**
@@ -2569,7 +2574,7 @@ export interface CreateNamespaceRequest {
    */
   NamespaceName: string
   /**
-   * 集群ID
+   * 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。
    */
   ClusterId?: string
   /**
@@ -2577,7 +2582,7 @@ export interface CreateNamespaceRequest {
    */
   NamespaceDesc?: string
   /**
-   * 命名空间资源类型(默认值为DEF)
+   * 命名空间资源类型(默认值为DEF)。DEF：默认普通命名空间。GLOBAL：全局命名空间
    */
   NamespaceResourceType?: string
   /**
@@ -2585,7 +2590,7 @@ export interface CreateNamespaceRequest {
    */
   NamespaceType?: string
   /**
-   * 命名空间ID
+   * 命名空间ID，按照【命名空间ID】进行过滤，可通过调用[DescribeNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录控制台进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新命名空间。
    */
   NamespaceId?: string
   /**
@@ -2593,13 +2598,17 @@ export interface CreateNamespaceRequest {
    */
   IsHaEnable?: string
   /**
-   * 需要绑定的数据集ID
+   * 需要绑定的数据集ID，可通过调用[DescribePrograms](https://cloud.tencent.com/document/api/649/73477)查询已创建的数据集列表或登录控制台进行查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/api/649/108544)创建新的数据集。
    */
   ProgramId?: string
   /**
-   * 需要绑定的数据集ID
+   * 需要绑定的数据集ID列表，可通过调用[DescribePrograms](https://cloud.tencent.com/document/api/649/73477)查询已创建的数据集列表或登录控制台进行查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/api/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
+  /**
+   * 是否创建k8s命名空间标识
+   */
+  CreateK8sNamespaceFlag?: boolean
 }
 
 /**
@@ -2645,7 +2654,7 @@ export interface ContainerGroupObservabilityConfig {
  */
 export interface DescribeClusterInstancesRequest {
   /**
-   * 集群ID
+   * 集群 ID。调用[DescribeSimpleClusters](https://cloud.tencent.com/document/api/649/36047)查询已创建的集群或通过[CreateCluster](https://cloud.tencent.com/document/api/649/36049)接口创建新的集群。
    */
   ClusterId: string
   /**
@@ -2657,15 +2666,15 @@ export interface DescribeClusterInstancesRequest {
    */
   OrderBy?: string
   /**
-   * 排序类型
+   * 排序类型；0：升序，1：降序。
    */
   OrderType?: number
   /**
-   * 偏移量
+   * 偏移量，默认值：0。
    */
   Offset?: number
   /**
-   * 分页个数
+   * 分页个数，默认值：20。
    */
   Limit?: number
 }
@@ -2757,7 +2766,7 @@ export interface DescribeResourceTaskStatusResponse {
  */
 export interface RedoTaskRequest {
   /**
-   * 任务ID。在任务管理列表页面第一列查看任务ID。
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
 }
@@ -3043,10 +3052,11 @@ export interface DescribeContainerGroupDeployInfoResponse {
 export interface DescribeOverviewInvocationRequest {
   /**
    * 命名空间ID， 此参数必填
+可通过[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已经创建的命名空间，也可以通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)查看
    */
   NamespaceId?: string
   /**
-   * 监控统计类型，必填，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时
+   * 监控统计类型，必填，取值范围 SumReqAmount：请求量，AvgFailureRate：请求错误率，AvgTimeCost：平均响应耗时
    */
   Type?: string
   /**
@@ -3054,11 +3064,11 @@ export interface DescribeOverviewInvocationRequest {
    */
   Period?: number
   /**
-   * 查询开始时间，默认为当天的 00:00:00
+   * 查询开始时间，格式为yyyy-MM-dd HH:mm:ss，默认为当天的 00:00:00
    */
   StartTime?: string
   /**
-   * 查询结束时间，默认为当前时间
+   * 查询结束时间，格式为yyyy-MM-dd HH:mm:ss，默认为当前时间
    */
   EndTime?: string
 }
@@ -3429,11 +3439,13 @@ export interface UpdateRepositoryResponse {
  */
 export interface DisassociateKafkaConfigRequest {
   /**
-   * 配置项id
+   * 日志配置项ID
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigId: string
   /**
-   * 部署组id
+   * 部署组ID列表
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupIds?: Array<string>
 }
@@ -3528,7 +3540,7 @@ false：启动失败
  */
 export interface ModifyTaskRequest {
   /**
-   * 任务ID。在任务管理列表页面第一列查看任务ID。
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
   /**
@@ -3668,7 +3680,7 @@ export interface CreateAllGatewayApiAsyncResponse {
  */
 export interface RemoveInstancesRequest {
   /**
-   * 集群 ID
+   * 集群 ID。调用[DescribeSimpleClusters](https://cloud.tencent.com/document/api/649/36047)查询已创建的集群或通过[CreateCluster](https://cloud.tencent.com/document/api/649/36049)接口创建新的集群。
    */
   ClusterId: string
   /**
@@ -3728,7 +3740,7 @@ false：操作失败。
  */
 export interface DeployContainerGroupRequest {
   /**
-   * 部署组ID，分组唯一标识
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
   /**
@@ -3939,19 +3951,22 @@ export interface DescribeContainerGroupAttributeRequest {
  */
 export interface DescribeSimpleApplicationsRequest {
   /**
-   * 应用ID列表
+   * 应用ID列表，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。
    */
   ApplicationIdList?: Array<string>
   /**
-   * 应用类型
+   * 指定应用类型，目前支持：
+- `V`：普通应用/CVM应用
+- `C`：容器应用
+- `S`：serverless 应用
    */
   ApplicationType?: string
   /**
-   * 每页条数
+   * 数量限制，默认为20，最大值为100。关于Limit详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Limit?: number
   /**
-   * 起始偏移量
+   * 偏移量，默认为0。关于Offset详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Offset?: number
   /**
@@ -3967,7 +3982,7 @@ export interface DescribeSimpleApplicationsRequest {
    */
   SearchWord?: string
   /**
-   * 无
+   * 是否关闭鉴权查询
    */
   DisableProgramAuthCheck?: boolean
   /**
@@ -3995,7 +4010,7 @@ export interface DescribeDeliveryConfigByGroupIdResponse {
  */
 export interface ModifyContainerGroupRequest {
   /**
-   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的项目列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的项目。
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
   /**
@@ -4015,7 +4030,7 @@ export interface ModifyContainerGroupRequest {
    */
   UpdateIvl?: number
   /**
-   * 子网ID，可通过调用[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)查询已创建的项目列表或登录控制台进行查看；也可以调用[CreateSubnet](https://cloud.tencent.com/document/product/1108/43594)创建新的项目。
+   * 子网ID，可通过调用[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)查询已创建的子网列表或登录控制台进行查看；也可以调用[CreateSubnet](https://cloud.tencent.com/document/product/1108/43594)创建新的子网。
    */
   SubnetId?: string
   /**
@@ -4243,7 +4258,7 @@ export interface UpdateApiRateLimitRulesRequest {
  */
 export interface DescribeGroupInstancesRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeGroups](https://cloud.tencent.com/document/api/649/36065)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/api/649/36074)创建新的部署组。
    */
   GroupId: string
   /**
@@ -4255,15 +4270,15 @@ export interface DescribeGroupInstancesRequest {
    */
   OrderBy?: string
   /**
-   * 排序类型
+   * 排序类型；0：升序，1：降序
    */
   OrderType?: number
   /**
-   * 偏移量
+   * 偏移量，默认值：0
    */
   Offset?: number
   /**
-   * 分页个数
+   * 分页个数；默认值：20
    */
   Limit?: number
 }
@@ -4365,7 +4380,7 @@ export interface DescribeMsApiListResponse {
  */
 export interface EnableTaskRequest {
   /**
-   * 任务ID。在任务管理列表页面和任务基本信息页可以查看任务ID。
+   * 任务ID。[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
 }
@@ -4383,7 +4398,7 @@ export interface BusinessLogV2 {
    */
   Content?: string
   /**
-   * 日志时间戳
+   * 日志时间戳，单位毫秒
    */
   Timestamp?: number
   /**
@@ -4578,23 +4593,23 @@ export interface FileConfigRelease {
  */
 export interface DescribeInvocationMetricDataPointRequest {
   /**
-   * 开始时间
+   * 开始时间，格式yyyy-MM-dd HH:mm:ss
    */
   StartTime: string
   /**
-   * 结束时间
+   * 结束时间，格式yyyy-MM-dd HH:mm:ss
    */
   EndTime: string
   /**
-   * 维度，并且 维度 key value 不能为空
+   * 查询指标维度, 不能为空
    */
   MetricDimensionValues: Array<MetricDimensionValue>
   /**
-   * 指标，并且 key, value 不能为空
+   * 指标，不能为空
    */
   Metrics: Array<Metric>
   /**
-   * 调用视角。可选值：SERVER, CLIENT。默认为SERVER
+   * 视图视角。可选值：SERVER：服务端, CLIENT：客户端。默认为SERVER
    */
   Kind?: string
 }
@@ -4708,7 +4723,7 @@ export interface ContainerAdditionalResourceRequirement {
  */
 export interface DeleteClusterRequest {
   /**
-   * 集群ID
+   * 集群ID，按照【集群ID】进行过滤，可通过调用DescribeClusters查询已创建的项目列表或登录控制台进行查看；也可以调用CreateCluster创建新的项目。集群ID例如：cls-6a79x94v。仅在集群下无部署组、命名空间、云主机时可以删除。
    */
   ClusterId: string
   /**
@@ -4722,7 +4737,7 @@ export interface DeleteClusterRequest {
  */
 export interface StopTaskBatchResponse {
   /**
-   * 操作成功 or 失败
+   * 返回 true 或 false。true：操作成功，false：操作失败
    */
   Result?: boolean
   /**
@@ -4744,7 +4759,7 @@ export interface ServiceStatisticsResult {
    */
   Method?: string
   /**
-   * 微服务Id
+   * 微服务ID
    */
   MicroserviceId?: string
   /**
@@ -4776,7 +4791,7 @@ export interface ServiceStatisticsResult {
    */
   InstanceName?: string
   /**
-   * 部署组id
+   * 部署组ID
    */
   GroupId?: string
   /**
@@ -4784,7 +4799,7 @@ export interface ServiceStatisticsResult {
    */
   GroupName?: string
   /**
-   * 部署组类型
+   * 集群类型，C：容器集群，V：虚拟机集群
    */
   ClusterType?: string
   /**
@@ -4796,11 +4811,11 @@ export interface ServiceStatisticsResult {
    */
   InstanceExist?: number
   /**
-   * 应用id
+   * 应用ID
    */
   ApplicationId?: string
   /**
-   * 微服务类型
+   * 微服务类型。RAW：裸应用，M：mesh应用，N：普通应用，G：网关应用
    */
   MicroserviceType?: string
   /**
@@ -4840,19 +4855,19 @@ export interface ServiceStatisticsResult {
    */
   InstanceTotalCount?: number
   /**
-   * normal/error
+   * 状态。normal：正常，warn：警告，error：错误
    */
   Status?: string
   /**
-   * normal/warn/error
+   * 请求错误率等级。normal：正常，warn：警告，error：错误
    */
   ErrorRateLevel?: string
   /**
-   * normal/warn/error
+   * 请求平均耗时等级。normal：正常，warn：警告，error：错误
    */
   AvgTimeConsumingLevel?: string
   /**
-   * normal/warn/error
+   * 应用程序性能指数等级。normal：正常，warn：警告，error：错误
    */
   ApdexLevel?: string
 }
@@ -4890,7 +4905,7 @@ export interface DescribeContainerGroupDetailResponse {
  */
 export interface DisableTaskRequest {
   /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列或是任务基本信息页查看任务ID。
+   * 任务ID。[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
 }
@@ -4918,7 +4933,7 @@ export interface Ports {
    */
   TargetPort: number
   /**
-   * 端口协议
+   * 端口协议，TCP或者UDP
    */
   Protocol: string
 }
@@ -5110,11 +5125,11 @@ export interface RemoveInstancesResponse {
  */
 export interface DescribeContainerEventsRequest {
   /**
-   * event 的资源类型, group 或者 instance
+   * event 的资源类型, 仅支持 group
    */
   ResourceType: string
   /**
-   * event 的资源 id
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd
    */
   ResourceId: string
   /**
@@ -5126,15 +5141,15 @@ export interface DescribeContainerEventsRequest {
    */
   Limit?: number
   /**
-   * 当类型是 instance 时需要
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd。
    */
   GroupId?: string
   /**
-   * event的资源kind
+   * event的资源种类
    */
   Kind?: string
   /**
-   * event 的type
+   * event 的事件级别
    */
   Type?: string
   /**
@@ -5261,7 +5276,7 @@ export interface Env {
  */
 export interface ModifyClusterRequest {
   /**
-   * 集群ID
+   * 集群ID，按照【集群ID】进行过滤，可通过调用DescribeClusters查询已创建的项目列表或登录控制台进行查看；也可以调用CreateCluster创建新的项目。集群ID例如：cls-6a79x94v。
    */
   ClusterId: string
   /**
@@ -5277,11 +5292,11 @@ export interface ModifyClusterRequest {
    */
   ClusterRemarkName?: string
   /**
-   * 是否开启cls日志功能
+   * 是否开启cls日志功能，true表示开启，false表示关闭
    */
   EnableLogCollection?: boolean
   /**
-   * 是否修复cls日志功能
+   * 是否修复cls日志功能，true表示修复，false表示不修复
    */
   RepairLog?: boolean
 }
@@ -5291,11 +5306,11 @@ export interface ModifyClusterRequest {
  */
 export interface Resource {
   /**
-   * 资源ID
+   * 资源ID，调用[DescribeResource](https://console.cloud.tencent.com/tsf/privilege-program-create?rid=1)查询接口获取
    */
   ResourceId?: string
   /**
-   * 资源编码
+   * 资源编码，枚举值描述【cluster、namespace、config】
    */
   ResourceCode?: string
   /**
@@ -5303,15 +5318,15 @@ export interface Resource {
    */
   ResourceName?: string
   /**
-   * 资源所属产品编码
+   * 资源所属产品编码，枚举值描述【tsf】
    */
   ServiceCode?: string
   /**
-   * 选取资源使用的Action
+   * 选取资源使用的Action，枚举值描述【DescribeSimpleCluster、DescribeLanes、DescribeTaskRecords】
    */
   ResourceAction?: string
   /**
-   * 资源数据查询的ID字段名
+   * 资源数据查询的ID字段名，调用[DescribeResource](https://console.cloud.tencent.com/tsf/privilege-program-create?rid=1)查询接口获取
    */
   IdField?: string
   /**
@@ -5323,11 +5338,11 @@ export interface Resource {
    */
   SelectIdsField?: string
   /**
-   * 创建时间
+   * 创建时间，时间戳格式【Long】
    */
   CreationTime?: number
   /**
-   * 最后更新时间
+   * 最后更新时间，时间戳格式【Long】
    */
   LastUpdateTime?: number
   /**
@@ -5347,7 +5362,7 @@ export interface Resource {
    */
   SearchWordField?: string
   /**
-   * 排序
+   * 排序，枚举值描述【10、20、77】
    */
   Index?: number
 }
@@ -5497,7 +5512,7 @@ export interface DisableUnitRouteResponse {
  */
 export interface ExecuteTaskRequest {
   /**
-   * 任务ID。在任务管理列表页面第一列或是任务基本信息页查看任务ID。
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
 }
@@ -5507,7 +5522,8 @@ export interface ExecuteTaskRequest {
  */
 export interface DescribeGroupBusinessLogConfigsRequest {
   /**
-   * 分组ID
+   * 部署组ID
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupId: string
 }
@@ -5651,7 +5667,8 @@ export interface DescribeSimpleNamespacesResponse {
  */
 export interface GroupInfo {
   /**
-   * 部署组id
+   * 部署组ID
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看。
    */
   GroupId: string
   /**
@@ -5659,11 +5676,12 @@ export interface GroupInfo {
    */
   GroupName: string
   /**
-   * 集群类型
+   * 集群类型，C：容器集群，V：虚拟机集群
    */
   ClusterType: string
   /**
-   * 集群id
+   * 集群ID
+可通过[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已经创建的集群列表，也可以通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1)查看。
    */
   ClusterId?: string
   /**
@@ -5675,7 +5693,7 @@ export interface GroupInfo {
    */
   NamespaceName?: string
   /**
-   * 绑定时间
+   * 绑定时间，格式yyyy-MM-dd HH:mm:ss
    */
   AssociateTime?: string
 }
@@ -5699,7 +5717,7 @@ export interface TerminateTaskFlowBatchResponse {
  */
 export interface DisassociateKafkaConfigResponse {
   /**
-   * 解除绑定是否成功
+   * 解除绑定是否成功，true：成功，false：失败。
    */
   Result?: boolean
   /**
@@ -5853,11 +5871,11 @@ export interface ContainerGroupOther {
  */
 export interface AddClusterInstancesRequest {
   /**
-   * 集群ID
+   * 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。
    */
   ClusterId: string
   /**
-   * 云主机ID列表
+   * 云主机ID列表，可通过调用[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)查询已创建的云主机列表或登录控制台进行查看；也可以调用[RunInstances](https://cloud.tencent.com/document/api/213/15730)创建新的云主机。
    */
   InstanceIdList: Array<string>
   /**
@@ -6073,7 +6091,7 @@ export interface ContainerGroupDeploy {
    */
   TcrRepoInfo?: TcrRepoInfo
   /**
-   * 数据卷信息，list
+   * 数据卷信息，数组结构
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeInfos?: Array<VolumeInfo>
@@ -6156,6 +6174,10 @@ export interface VolumeInfo {
    * -
    */
   EmptyDirOption?: EmptyDirOption
+  /**
+   * 数据卷PVC声明模板
+   */
+  VolumeClaimTemplateOption?: VolumeClaimTemplatesOption
 }
 
 /**
@@ -6185,7 +6207,7 @@ export interface Metric {
    */
   Name?: string
   /**
-   * 指标计算方式
+   * 指标计算方式，可选值： none：无，sum：求和，exclusive：独占值，avg：平均值，max：最大值，min：最小值，percentage_50：50分位数，percentage_75：75分位数，percentage_95：95分位数，percentage_99：99分位数，bucket_5：分桶统计。
    */
   Function?: string
 }
@@ -6223,23 +6245,23 @@ export interface ShrinkInstancesRequest {
  */
 export interface DescribeSimpleNamespacesRequest {
   /**
-   * 命名空间ID列表，不传入时查询全量
+   * 命名空间ID列表，按照【命名空间ID列表】进行过滤，可通过调用[DescribeNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录控制台进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceIdList?: Array<string>
   /**
-   * 集群ID，不传入时查询全量
+   * 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。
    */
   ClusterId?: string
   /**
-   * 每页条数
+   * 数量限制，默认为20，最大值为100。关于Limit详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Limit?: number
   /**
-   * 起始偏移量
+   * 偏移量，默认为0。关于Offset详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Offset?: number
   /**
-   * 命名空间ID，不传入时查询全量
+   * 命名空间ID，按照【命名空间ID】进行过滤，可通过调用[DescribeNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录控制台进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新命名空间。
    */
   NamespaceId?: string
   /**
@@ -6251,7 +6273,7 @@ export interface DescribeSimpleNamespacesRequest {
    */
   SearchWord?: string
   /**
-   * 查询的命名空间类型列表
+   * 查询的命名空间类型列表。DEF：默认普通命名空间。GLOBAL：全局命名空间。
    */
   NamespaceTypeList?: Array<string>
   /**
@@ -6259,7 +6281,7 @@ export interface DescribeSimpleNamespacesRequest {
    */
   NamespaceName?: string
   /**
-   * 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认命名空间。1：非默认命名空间
+   * 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认命名空间。1：非默认命名空间。
    */
   IsDefault?: string
   /**
@@ -6302,6 +6324,7 @@ export interface DescribeClustersResponse {
 export interface SearchBusinessLogRequest {
   /**
    * 日志配置项ID
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigId: string
   /**
@@ -6309,11 +6332,11 @@ export interface SearchBusinessLogRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 开始时间
+   * 开始时间，格式yyyy-MM-dd HH:mm:ss
    */
   StartTime?: string
   /**
-   * 结束时间
+   * 结束时间，格式yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
   /**
@@ -6338,14 +6361,15 @@ export interface SearchBusinessLogRequest {
   SearchWords?: Array<string>
   /**
    * 部署组ID列表，不传表示全部部署组
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupIds?: Array<string>
   /**
-   * 检索类型，取值"LUCENE", "REGEXP", "NORMAL"
+   * 检索类型，取值 LUCENE：Lucene检索，REGEXP：正则检索，NORMAL：普通检索
    */
   SearchWordType?: string
   /**
-   * 批量请求类型，取值"page"或"scroll"
+   * 批量请求类型，取值 PAGE：分页查询，SCROLL：滚动查询，SEARCHAFTER：游标查询，默认值PAGE
    */
   BatchType?: string
   /**
@@ -6584,11 +6608,11 @@ export interface DescribeImageRepositoryRequest {
    */
   SearchWord?: string
   /**
-   * 偏移量，取值从0开始
+   * 偏移量，默认为0。关于Offset详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Offset?: number
   /**
-   * 分页个数，默认为20， 取值应为1~100
+   * 数量限制，默认为20，最大值为100。关于Limit详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Limit?: number
   /**
@@ -6596,7 +6620,7 @@ export interface DescribeImageRepositoryRequest {
    */
   RepoType?: string
   /**
-   * 应用id
+   * 应用ID，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
@@ -6646,11 +6670,13 @@ export interface TsfPageUnitRule {
  */
 export interface OperateApplicationTcrBindingRequest {
   /**
-   * bind 或 unbind
+   * 指定操作类型，目前支持：
+- `bind`：绑定（默认）
+- `unbind`：解除绑定
    */
   Command?: string
   /**
-   * 应用id
+   * 应用ID，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
@@ -6674,7 +6700,7 @@ export interface DescribeApiGroupRequest {
  */
 export interface AssociateBusinessLogConfigResponse {
   /**
-   * 操作结果
+   * 操作结果，true：成功，false：失败
    */
   Result?: boolean
   /**
@@ -6718,7 +6744,8 @@ export interface DescribeGatewayApisRequest {
  */
 export interface AssociateConfigWithGroupRequest {
   /**
-   * 配置项id
+   * 配置项ID
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigId: string
   /**
@@ -6730,11 +6757,13 @@ export interface AssociateConfigWithGroupRequest {
    */
   SelectAll?: number
   /**
-   * 命名空间id
+   * 命名空间ID
+可通过[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已经创建的命名空间，也可以通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)查看
    */
   NamespaceId?: string
   /**
-   * 集群id
+   * 集群ID
+可通过[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已经创建的集群列表，也可以通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1)查看
    */
   ClusterId?: string
   /**
@@ -6940,9 +6969,27 @@ export interface DeleteUnitNamespacesRequest {
  */
 export interface DescribeGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeGroups](https://cloud.tencent.com/document/api/649/36065)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/api/649/36074)创建新的部署组。
    */
   GroupId: string
+}
+
+/**
+ * VolumeClaim模板项
+ */
+export interface VolumeClaimTemplatesOption {
+  /**
+   * StorageClass名称
+   */
+  StorageClass?: string
+  /**
+   * 访问模式
+   */
+  AccessModes?: Array<string>
+  /**
+   * 卷空间的预占声明
+   */
+  StorageRequest?: number
 }
 
 /**
@@ -7057,17 +7104,17 @@ export interface HealthCheckSetting {
    */
   ActionType: string
   /**
-   * 容器延时启动健康检查的时间。
+   * 容器延时启动健康检查的时间，单位秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialDelaySeconds?: number
   /**
-   * 每次健康检查响应的最大超时时间。
+   * 每次健康检查响应的最大超时时间，单位秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeoutSeconds?: number
   /**
-   * 进行健康检查的时间间隔。
+   * 进行健康检查的时间间隔，单位秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodSeconds?: number
@@ -7577,7 +7624,7 @@ export interface DescribePathRewritesRequest {
  */
 export interface ShrinkGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeGroups](https://cloud.tencent.com/document/api/649/36065)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/api/649/36074)创建新的部署组。
    */
   GroupId: string
 }
@@ -7600,12 +7647,12 @@ export interface TsfPageStdoutLogV2 {
    */
   ScrollId?: string
   /**
-   * 查询状态
+   * 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 游标ID
+   * 查询es使用searchAfter时，游标
    */
   SearchAfter?: Array<string>
 }
@@ -7713,11 +7760,11 @@ export interface DescribeGroupsWithPluginResponse {
  */
 export interface AddInstancesRequest {
   /**
-   * 集群ID
+   * 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。
    */
   ClusterId: string
   /**
-   * 云主机ID列表
+   * 云主机ID列表，可通过调用[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)查询已创建的云主机列表或登录控制台进行查看；也可以调用[RunInstances](https://cloud.tencent.com/document/api/213/15730)创建新的云主机。
    */
   InstanceIdList: Array<string>
   /**
@@ -8193,11 +8240,11 @@ export interface GatewayGroupIds {
  */
 export interface DescribeInvocationMetricDataDimensionRequest {
   /**
-   * 开始时间
+   * 开始时间，格式yyyy-MM-dd HH:mm:ss
    */
   StartTime: string
   /**
-   * 结束时间
+   * 结束时间，格式yyyy-MM-dd HH:mm:ss
    */
   EndTime: string
   /**
@@ -8209,7 +8256,7 @@ export interface DescribeInvocationMetricDataDimensionRequest {
    */
   Limit: number
   /**
-   * 聚合维度
+   * 聚合维度。可选值 NamespaceId：命名空间ID，GroupId：部署组ID，InstanceId：实例ID，ApplicationId：应用ID，OperationMethod：执行方法，OperationName：执行名称，ServiceName：服务名，UpstreamNamespaceId：上游命名空间ID
    */
   DimensionName: string
   /**
@@ -8217,7 +8264,7 @@ export interface DescribeInvocationMetricDataDimensionRequest {
    */
   SearchWord?: string
   /**
-   * 维度
+   * 构建维度
    */
   MetricDimensionValues?: Array<MetricDimensionValue>
 }
@@ -8455,7 +8502,8 @@ export interface GroupUseStatisticsEntity {
  */
 export interface DescribeBusinessLogConfigRequest {
   /**
-   * 配置项ID
+   * 日志配置项ID
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigId: string
 }
@@ -8541,7 +8589,7 @@ export interface ImageTag {
  */
 export interface ExecuteTaskFlowRequest {
   /**
-   * 工作流 ID。前往工作流管理，在工作流列表第一列和工作流详情页查看工作流ID。
+   * 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。
    */
   FlowId?: string
 }
@@ -8877,7 +8925,7 @@ export interface ServiceSetting {
    */
   LoadBalancerProvisioner?: string
   /**
-   * 负载均衡类型
+   * 负载均衡类型，Intranet表示内网，Internet表示外网
    */
   LoadBalancingType?: string
   /**
@@ -9057,7 +9105,10 @@ export interface DeleteFileConfigResponse {
  */
 export interface ResourceTaskStatusResult {
   /**
-   * 任务的执行状态
+   * 变更状态：
+- `0`：成功
+- `1`：失败
+- `2`：执行中
    */
   TaskStatus?: number
 }
@@ -9172,7 +9223,7 @@ export interface ShardArgument {
 }
 
 /**
- * 指标维度多值匹配
+ * 指标维度多值匹配。可选值 NamespaceId：命名空间ID，GroupId：部署组ID，InstanceId：实例ID，ApplicationId：应用ID，OperationMethod：执行方法，OperationName：执行名称，ServiceName：服务名，UpstreamNamespaceId：上游命名空间ID
  */
 export interface MetricDimensionValue {
   /**
@@ -9682,7 +9733,7 @@ export interface BindPluginResponse {
  */
 export interface RedoTaskFlowBatchRequest {
   /**
-   * 工作流批次 ID。在工作流管理页面，点击第一列的工作流ID进入工作流执行记录列表页面，第一列的内容即为工作流批次ID。
+   * 工作流批次 ID。在[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)页面，点击第一列的工作流ID进入工作流执行记录列表页面，第一列的内容即为工作流批次ID。
    */
   FlowBatchId: string
 }
@@ -9724,7 +9775,7 @@ export interface CreateMicroserviceWithDetailRespRequest {
  */
 export interface BusinessLogConfigSchema {
   /**
-   * 解析规则类型
+   * 解析规则类型。可选值 0（SPRING_BOOT：默认Spring Boot格式），1（NONE：无解析规则），4（NGINX_ACCESS：nginx access日志），5（CUSTOM_LOGBACK：自定义Logback），6（CUSTOM_LOG4J：自定义Log4J），7（CUSTOM_LOG4J2：自定义Log4J2），8（TEXT：单行/多行文本），9（ENVOY_MSGW_ACCESS：envoy access日志）。
    */
   SchemaType: number
   /**
@@ -9743,7 +9794,7 @@ export interface BusinessLogConfigSchema {
    */
   SchemaMultilinePattern?: string
   /**
-   * 解析规则创建时间
+   * 解析规则创建时间，格式为yyyy-MM-dd HH:mm:ss
    */
   SchemaCreateTime?: string
   /**
@@ -9780,15 +9831,15 @@ export interface MetricDataSingleValue {
  */
 export interface StopTaskExecuteRequest {
   /**
-   * 任务执行ID
+   * 任务执行ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。
    */
   ExecuteId: string
   /**
-   * 任务批次ID
+   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
    */
   BatchId?: string
   /**
-   * 任务ID
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页面可以查看任务ID。
    */
   TaskId?: string
 }
@@ -10224,7 +10275,7 @@ export interface DescribeTaskRecordsRequest {
    */
   TaskState?: string
   /**
-   * 部署组ID。前往应用管理 - 应用部署，部署组列表页面获取部署组ID。
+   * 部署组ID。前往[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)点击应用ID进入应用部署列表页面获取部署组ID。
    */
   GroupId?: string
   /**
@@ -10236,7 +10287,7 @@ export interface DescribeTaskRecordsRequest {
    */
   ExecuteType?: string
   /**
-   * 任务ID列表。
+   * 任务ID列表。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列查看任务ID。
    */
   Ids?: Array<string>
 }
@@ -10299,15 +10350,15 @@ false：失败。
  */
 export interface ExclusiveInstance {
   /**
-   * 配置中心类型[Registration、Configuration]
+   * 配置中心类型[注册中心Registration、配置中心Configuration]
    */
   CenterType?: string
   /**
-   * 实例id
+   * 实例id，通过北极星控制台获取
    */
   InstanceId?: string
   /**
-   * 实例类型[Polaris]
+   * 实例类型，例如北极星Polaris
    */
   InstanceType?: string
   /**
@@ -10315,11 +10366,11 @@ export interface ExclusiveInstance {
    */
   InstanceName?: string
   /**
-   * 实例地域id
+   * 实例地域id，通过北极星控制台获取
    */
   RegionId?: string
   /**
-   * 实例命名空间ID
+   * 实例命名空间ID，通过北极星控制台获取
    */
   InstanceNamespaceId?: string
 }
@@ -10329,7 +10380,7 @@ export interface ExclusiveInstance {
  */
 export interface DeleteApplicationRequest {
   /**
-   * 应用ID
+   * 应用ID，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
@@ -10499,11 +10550,12 @@ export interface DescribeBusinessLogConfigsRequest {
    */
   SearchWord?: string
   /**
-   * 无
+   * 是否禁用数据集鉴权
    */
   DisableProgramAuthCheck?: boolean
   /**
-   * 无
+   * 日志配置项ID
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigIdList?: Array<string>
 }
@@ -10899,7 +10951,7 @@ export interface UpdateGatewayApiRequest {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 过滤条件
+   * 过滤条件，name表示过滤字段，value表示过滤字段值。
    */
   Filters?: Array<Filter>
   /**
@@ -11271,27 +11323,27 @@ export interface ApplicationForPage {
  */
 export interface DescribeInvocationMetricScatterPlotRequest {
   /**
-   * 查询开始时间
+   * 查询开始时间，格式yyyy-MM-dd HH:mm:ss
    */
   StartTime?: string
   /**
-   * 查询结束时间
+   * 查询结束时间，格式yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
   /**
-   * 查询时间粒度，单位秒。可选值：60、3600、86400。
+   * 查询时间粒度，单位秒。可选值：60、3600、86400
    */
   Period?: number
   /**
-   * 查询指标维度, 不能为空。可选 NamespaceId, GroupId, InstanceId, OperationName, ServiceName, PeerServiceName, PeerOperationName
+   * 查询指标维度, 不能为空。Name, Valeu键值对形式。Name可选值 NamespaceId：命名空间ID，GroupId：部署组ID，InstanceId：实例ID，ApplicationId：应用ID，OperationMethod：执行方法，OperationName：执行名称，ServiceName：服务名，UpstreamNamespaceId：上游命名空间ID
    */
   MetricDimensions?: Array<MetricDimension>
   /**
-   * 查询指标名， 不能为空。仅支持 range_count_duratioin 为 key 下的 sum 方法
+   * 查询指标名， 不能为空。仅支持 range_count_duration（响应耗时分布） 为 key 下的 sum（求和） 方法
    */
   Metrics?: Array<Metric>
   /**
-   * 视图视角。可选值：SERVER, CLIENT。默认为SERVER
+   * 视图视角。可选值：SERVER：服务端, CLIENT：客户端。默认为SERVER
    */
   Kind?: string
 }
@@ -11382,27 +11434,27 @@ export interface AddClusterInstancesResponse {
  */
 export interface DescribeInvocationMetricDataCurveRequest {
   /**
-   * 查询开始时间
+   * 开始时间，格式yyyy-MM-dd HH:mm:ss
    */
   StartTime?: string
   /**
-   * 查询结束时间
+   * 结束时间，格式yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
   /**
-   * 查询时间粒度，单位秒可选值：60、3600、86400
+   * 查询时间粒度，单位秒。可选值：60、3600、86400
    */
   Period?: number
   /**
-   * 查询指标维度，不能为空，支持 ServiceName, OperationName, PeerServiceName, PeerOperationName
+   * 查询指标维度，不能为空
    */
   MetricDimensions?: Array<MetricDimension>
   /**
-   * 查询指标名，不能为空.
+   * 查询指标名，不能为空
    */
   Metrics?: Array<Metric>
   /**
-   * 视图视角。可选值：SERVER, CLIENT。默认为SERVER
+   * 视图视角。可选值：SERVER：服务端，CLIENT：客户端。默认为SERVER
    */
   Kind?: string
   /**
@@ -11447,7 +11499,7 @@ export interface VmGroupOther {
    */
   OffInstanceCount?: number
   /**
-   * 部署组状态
+   * 部署组状态，Running运行中，Waiting等待中，Paused暂停中，Updating更新中，RollingBack回滚中，Abnormal异常，Unknown未知
    */
   GroupStatus?: string
   /**
@@ -11554,7 +11606,7 @@ export interface BusinessLogConfigAssociatedGroup {
    */
   ApplicationName: string
   /**
-   * 部署组所属应用类型
+   * 部署组所属应用类型，C：容器应用，V：虚拟机应用
    */
   ApplicationType: string
   /**
@@ -11574,11 +11626,11 @@ export interface BusinessLogConfigAssociatedGroup {
    */
   ClusterName: string
   /**
-   * 部署组所属集群类型
+   * 部署组所属集群类型，C：容器集群，V：虚拟机集群
    */
   ClusterType: string
   /**
-   * 部署组关联日志配置时间
+   * 部署组关联日志配置时间，格式yyyy-MM-dd HH:mm:ss
    */
   AssociatedTime: string
 }
@@ -11596,15 +11648,17 @@ export interface DescribeApplicationsRequest {
    */
   OrderBy?: string
   /**
-   * 排序类型
+   * 指定排序类型，目前支持：
+`0`：降序
+`1`：升序
    */
   OrderType?: number
   /**
-   * 偏移量
+   * 偏移量，默认为0。关于Offset详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Offset?: number
   /**
-   * 分页个数
+   * 数量限制，默认为20，最大值为100。关于Limit详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Limit?: number
   /**
@@ -11838,7 +11892,7 @@ export interface CurvePoint {
    */
   Value?: string
   /**
-   * 该坐标点时间戳
+   * 该坐标点时间戳，单位毫秒
    */
   Timestamp?: string
 }
@@ -12070,7 +12124,7 @@ export interface DescribeGroupInstancesResponse {
  */
 export interface DescribeContainerGroupDeployInfoRequest {
   /**
-   * 实例所属 groupId
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-ab958z6y
    */
   GroupId: string
 }
@@ -12092,11 +12146,13 @@ export interface DescribeDeliveryConfigsRequest {
    */
   Limit?: number
   /**
-   * 数据集idList
+   * 数据集ID列表
+可通过调用[DescribePrograms](https://cloud.tencent.com/document/product/649/73477)查询已创建的数据集列表或登录[控制台](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program&roleId=role-a22gwdwa)进行查看
    */
   ProgramIdList?: Array<string>
   /**
-   * ConfigIdList
+   * 日志配置项ID列表
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigIdList?: Array<string>
 }
@@ -12107,10 +12163,12 @@ export interface DescribeDeliveryConfigsRequest {
 export interface DisassociateBusinessLogConfigRequest {
   /**
    * 业务日志配置项ID列表
+可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigIdList: Array<string>
   /**
-   * TSF分组ID
+   * 部署组ID
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupId: string
 }
@@ -12242,11 +12300,11 @@ export interface EmptyDirOption {
  */
 export interface ExpandGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeGroups](https://cloud.tencent.com/document/api/649/36065)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/api/649/36074)创建新的部署组。
    */
   GroupId: string
   /**
-   * 扩容的机器实例ID列表
+   * 扩容的机器实例ID列表，调用[DescribeClusters](https://console.cloud.tencent.com/tsf/resource?rid=1)接口，选定一个虚拟机集群，选择部署组，选择应用扩容可获取实例列表
    */
   InstanceIdList: Array<string>
 }
@@ -12310,7 +12368,7 @@ export interface DescribeMicroservicesByGroupIdsResponse {
  */
 export interface DescribeGroupAttributeRequest {
   /**
-   * 部署组ID字段
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-ab958z6y
    */
   GroupId: string
 }
@@ -12421,19 +12479,19 @@ export interface GroupPod {
    */
   ReadyCount?: number
   /**
-   * 运行时长
+   * 运行时长，单位秒
    */
   Runtime?: string
   /**
-   * 实例启动时间
+   * 实例启动时的时间戳
    */
   CreatedAt?: string
   /**
-   * 服务实例状态
+   * 服务实例状态，枚举值为Starting/Running/Stopping/Stopped/StopFailed/Abnormal/Unknown
    */
   ServiceInstanceStatus?: string
   /**
-   * 机器实例可使用状态
+   * 机器实例可使用状态，枚举值为Starting/Running/Stopping/Stopped/StopFailed/Abnormal/Unknown
    */
   InstanceAvailableStatus?: string
   /**
@@ -12455,7 +12513,7 @@ export interface GroupPod {
  */
 export interface EnableTaskFlowRequest {
   /**
-   * 工作流 ID。前往工作流管理，在工作流列表第一列和工作流详情页查看工作流ID。
+   * 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。
    */
   FlowId: string
 }
@@ -12623,7 +12681,7 @@ export interface StdoutLogV2 {
    */
   Content?: string
   /**
-   * 日志时间戳
+   * 日志时间戳，单位毫秒
    */
   Timestamp?: number
   /**
@@ -12808,15 +12866,15 @@ export interface ServiceConfig {
  */
 export interface RedoTaskExecuteRequest {
   /**
-   * 任务批次ID。在任务管理页面第一列点击任务ID进入任务详情，进入执行记录列表页，第一列内容即为任务批次ID。
+   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面第一列点击任务ID进入任务详情，进入执行记录列表页，第一列内容即为任务批次ID。
    */
   BatchId: string
   /**
-   * 任务执行ID。在任务管理页面第一列点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。
+   * 任务执行ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面第一列点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。
    */
   ExecuteId: string
   /**
-   * 任务ID。在任务管理列表页面可以查看任务ID。
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
    */
   TaskId: string
 }
@@ -12881,11 +12939,11 @@ export interface InvocationIndicator {
  */
 export interface DescribeStatisticsRequest {
   /**
-   * 类型：Interface、Service、Group、Instance、SQL、NoSQL
+   * 统计类型。可选值 Interface：接口类型、Service：服务类型、Group：部署组类型、Instance：实例类型、SQL：SQL类型、NoSQL：NoSQL类型
    */
   Type: string
   /**
-   * 步长，单位s：60、3600、86400
+   * 步长，单位秒。可选值 60、3600、86400
    */
   TimeStep: number
   /**
@@ -12897,7 +12955,9 @@ export interface DescribeStatisticsRequest {
    */
   Limit: number
   /**
-   * 命名空间Id,此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一。
+   * 命名空间ID。此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一。
+可通过[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已经创建的命名空间，也可以通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)查看
+
    */
   NamespaceId?: string
   /**
@@ -12925,7 +12985,7 @@ export interface DescribeStatisticsRequest {
    */
   SearchWord?: string
   /**
-   * 维度
+   * 维度。此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一
    */
   MetricDimensionValues?: Array<MetricDimensionValue>
   /**
@@ -12933,15 +12993,16 @@ export interface DescribeStatisticsRequest {
    */
   BucketKey?: string
   /**
-   * 数据库
+   * 数据库名称
    */
   DbName?: string
   /**
-   * 命名空间id数组
+   * 命名空间ID数组。此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一
    */
   NamespaceIdList?: Array<string>
   /**
-   * 独占配置中心的ID
+   * 独占配置中心的ID。
+可通过调用[DescribeClusterInstances](https://cloud.tencent.com/document/product/649/36048)查询已导入的实例列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=instance)进行查询。实例ID例如：ins-6decplwk。
    */
   ConfigCenterInstanceId?: string
 }
@@ -13073,7 +13134,7 @@ export interface DescribeGatewayAllGroupApisRequest {
  */
 export interface DeleteGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeGroups](https://cloud.tencent.com/document/api/649/36065)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/api/649/36074)创建新的部署组。
    */
   GroupId: string
 }
@@ -13282,11 +13343,11 @@ export interface BindApiGroupRequest {
  */
 export interface StopTaskBatchRequest {
   /**
-   * 批次ID
+   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
    */
   BatchId: string
   /**
-   * 参数ID
+   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页面可以查看任务ID。
    */
   TaskId?: string
 }
@@ -13484,7 +13545,8 @@ export interface DescribeProgramsResponse {
  */
 export interface ProgramItem {
   /**
-   * 数据项ID
+   * 数据项ID，调用[DescribePrograms](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program)接口查询已创建的数据集或登陆控制台进行查看；也可以通过调用[CreateProgram](https://cloud.tencent.com/document/api/649/108544)创建新的数据集。
+
    */
   ProgramItemId?: string
   /**
@@ -13500,11 +13562,11 @@ export interface ProgramItem {
    */
   IsAll?: boolean
   /**
-   * 创建时间
+   * 创建时间，时间戳格式【Long】
    */
   CreationTime?: number
   /**
-   * 最后更新时间
+   * 最后更新时间，时间戳格式【Long】，单位毫秒
    */
   LastUpdateTime?: number
   /**
@@ -13512,7 +13574,7 @@ export interface ProgramItem {
    */
   DeleteFlag?: boolean
   /**
-   * 数据集ID
+   * 数据集ID，调用[DescribePrograms](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program)查询接口获取
    */
   ProgramId?: string
 }
@@ -13522,7 +13584,7 @@ export interface ProgramItem {
  */
 export interface DisableTaskFlowRequest {
   /**
-   * 工作流 ID。前往工作流管理，在工作流列表第一列和工作流详情页查看工作流ID。
+   * 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。
    */
   FlowId: string
 }
@@ -13550,7 +13612,7 @@ export interface DescribeLogCapacityResponse {
  */
 export interface DescribePodInstancesRequest {
   /**
-   * 实例所属groupId
+   * 实例所属部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd。部署组所在集群必须是活跃状态的。
    */
   GroupId: string
   /**
@@ -13562,15 +13624,15 @@ export interface DescribePodInstancesRequest {
    */
   Limit?: number
   /**
-   * 过滤字段
+   * 用于通过PodName字段过滤返回结果。
    */
   PodNameList?: Array<string>
   /**
-   * 新老版本pod批次标识
+   * 新老版本pod批次标识，old表示老版本，new表示新版本。
    */
   DeployVersion?: string
   /**
-   * 任务ID
+   * 实例所属任务ID，登录控制台进行查看。
    */
   TaskId?: string
 }
@@ -13610,21 +13672,21 @@ export interface DeliveryConfigBindGroup {
    */
   Groups: Array<GroupInfo>
   /**
-   * 创建时间
+   * 创建时间，格式yyyy-MM-dd HH:mm:ss
    */
   CreateTime: string
   /**
-   * KafkaVIp
+   * Kafka的vip
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaVIp?: string
   /**
-   * KafkaAddress
+   * Kafka地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaAddress?: string
   /**
-   * KafkaVPort
+   * Kafka端口
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaVPort?: string
@@ -13638,7 +13700,7 @@ export interface DeliveryConfigBindGroup {
    */
   LineRule?: string
   /**
-   * CustomRule
+   * 自定义规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomRule?: string
@@ -13648,16 +13710,16 @@ export interface DeliveryConfigBindGroup {
    */
   EnableGlobalLineRule?: boolean
   /**
-   * EnableAuth
+   * 是否开启认证
    */
   EnableAuth?: boolean
   /**
-   * Username
+   * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Username?: string
   /**
-   * Password
+   * 密码
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
@@ -13725,7 +13787,7 @@ export interface WarmupSetting {
    */
   Enabled?: boolean
   /**
-   * 预热时间
+   * 预热时间，单位秒
    */
   WarmupTime?: number
   /**
@@ -13817,7 +13879,7 @@ export interface InstanceEnrichedInfo {
    */
   ApplicationName?: string
   /**
-   * 应用类型
+   * 应用类型，C表示容器应用，V表示虚拟机应用
    */
   ApplicationType?: string
   /**
@@ -13829,7 +13891,7 @@ export interface InstanceEnrichedInfo {
    */
   ClusterName?: string
   /**
-   * 集群类型
+   * 集群类型，C表示容器集群，V表示虚拟机集群
    */
   ClusterType?: string
   /**
@@ -13855,7 +13917,7 @@ export interface InstanceEnrichedInfo {
  */
 export interface DescribeResourceTaskStatusRequest {
   /**
-   * 任务ID
+   * 容器实例任务ID，可通过调用 ListContainerTask 查询已创建的变更记录总数或登录控制台进行查看。
    */
   TaskId: string
 }
@@ -14122,7 +14184,7 @@ export interface TsfPageBusinessLogV2 {
    */
   ScrollId?: string
   /**
-   * 查询状态
+   * 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
@@ -14151,11 +14213,14 @@ export interface CreateClusterRequest {
    */
   ClusterName: string
   /**
-   * 集群类型
+   * 指定集群类型，目前支持：
+- `V`：虚拟机集群
+- `C`：容器集群
+- `S`：Serverless 集群
    */
   ClusterType: string
   /**
-   * 私有网络ID
+   * 私有网络ID，可通过调用[DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372)查询已创建的私有网络列表或登录控制台进行查看；也可以调用[CreateVpc](https://cloud.tencent.com/document/api/215/1309)创建新的私有网络。
    */
   VpcId: string
   /**
@@ -14221,7 +14286,8 @@ export interface CreateClusterRequest {
  */
 export interface DescribeDeliveryConfigByGroupIdRequest {
   /**
-   * 部署组id
+   * 部署组ID
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupId: string
 }
@@ -14330,7 +14396,7 @@ DUAL_STATUS_WRITE_REGISTRATION_OFF 双写&&双注册关闭
  */
 export interface DeleteContainerGroupRequest {
   /**
-   * 部署组ID，分组唯一标识
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
 }
@@ -14432,12 +14498,12 @@ export interface BusinessLogConfig {
    */
   ConfigPipeline?: string
   /**
-   * 配置项创建时间
+   * 配置项创建时间，格式为yyyy-MM-dd HH:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigCreateTime?: string
   /**
-   * 配置项更新时间
+   * 配置项更新时间，格式为yyyy-MM-dd HH:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigUpdateTime?: string
@@ -14463,6 +14529,22 @@ export interface BusinessLogConfig {
    * close_timeout参数
    */
   FilebeatCloseTimeout?: number
+  /**
+   * filebeat ignore_older参数
+   */
+  FilebeatIgnoreOlder?: number
+  /**
+   * filebeat harvester_limit参数
+   */
+  FilebeatHarvesterLimit?: number
+  /**
+   * filebeat close_inactive参数
+   */
+  FilebeatCloseInactive?: number
+  /**
+   * filebeat clean_inactive参数
+   */
+  FilebeatCleanInactive?: number
 }
 
 /**
@@ -14503,7 +14585,7 @@ export interface DescribeApiDetailRequest {
  */
 export interface StopContainerGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
 }
@@ -14866,7 +14948,7 @@ export interface ServiceGovernanceConfig {
    */
   EnableGovernance?: boolean
   /**
-   * 服务治理类型（枚举：SHARE、EXCLUSIVE）
+   * 服务治理类型（枚举：SHARE表示共享型、EXCLUSIVE表示独占型）
    */
   GovernanceType?: string
   /**
@@ -14915,7 +14997,7 @@ export interface ModifyApplicationRequest {
    */
   ServiceConfigList?: Array<ServiceConfig>
   /**
-   * 应用的微服务类型
+   * 应用的微服务类型，N表示普通应用，M表示Mesh应用，G表示网关应用，NATIVE表示原生应用，RAW表示裸应用
    */
   MicroserviceType?: string
   /**
@@ -14923,7 +15005,7 @@ export interface ModifyApplicationRequest {
    */
   ServiceGovernanceConfig?: ServiceGovernanceConfig
   /**
-   * 应用开发框架
+   * 应用开发框架，SpringCloud表示SpringCloud应用，Dubbo表示Dubbo应用，Go-GRPC表示Go-GRPC应用，Other表示其他应用
    */
   FrameworkType?: string
 }
@@ -15017,7 +15099,7 @@ export interface DescribeFlowLastBatchStateResponse {
  */
 export interface StopTaskExecuteResponse {
   /**
-   * 操作成功 or 失败
+   * 返回 true 或 false。true：操作成功，false：操作失败
    */
   Result?: boolean
   /**
@@ -15346,7 +15428,7 @@ export interface GroupPodResult {
  */
 export interface DescribeApplicationRequest {
   /**
-   * 应用ID
+   * 应用ID，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。
    */
   ApplicationId: string
 }
@@ -15627,7 +15709,7 @@ export interface DescribeGroupsRequest {
    */
   SearchWord?: string
   /**
-   * 应用ID
+   * 应用ID。调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用或通过[CreateApplication](https://cloud.tencent.com/document/api/649/36094)接口创建新的应用。
    */
   ApplicationId?: string
   /**
@@ -15635,23 +15717,23 @@ export interface DescribeGroupsRequest {
    */
   OrderBy?: string
   /**
-   * 排序方式
+   * 排序方式，0：升序，1：降序
    */
   OrderType?: number
   /**
-   * 偏移量
+   * 偏移量，默认值：0
    */
   Offset?: number
   /**
-   * 分页个数
+   * 分页个数，默认值：20
    */
   Limit?: number
   /**
-   * 命名空间ID
+   * 命名空间ID。调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096)查询已创建的命名空间或通过[CreateNamespace](https://cloud.tencent.com/document/api/649/36098)接口创建新的集群。
    */
   NamespaceId?: string
   /**
-   * 集群ID
+   * 集群 ID。调用[DescribeSimpleClusters](https://cloud.tencent.com/document/api/649/36047)查询已创建的集群或通过[CreateCluster](https://cloud.tencent.com/document/api/649/36049)接口创建新的集群。
    */
   ClusterId?: string
   /**
@@ -15714,7 +15796,7 @@ export interface LaneRuleTag {
  */
 export interface ModifyNamespaceRequest {
   /**
-   * 命名空间ID
+   * 命名空间ID，按照【命名空间ID】进行过滤，可通过调用DescribeNamespaces查询已创建的项目列表或登录控制台进行查看；也可以调用CreateNamespace创建新的项目。命名空间ID例如：namespace-6a79x94v。
    */
   NamespaceId: string
   /**
@@ -15726,7 +15808,7 @@ export interface ModifyNamespaceRequest {
    */
   NamespaceDesc?: string
   /**
-   * 是否开启高可用
+   * 是否开启高可用，0表示不开启，1表示开启
    */
   IsHaEnable?: string
 }
@@ -15784,11 +15866,11 @@ export interface CreateRepositoryRequest {
  */
 export interface DeleteNamespaceRequest {
   /**
-   * 命名空间ID
+   * 命名空间ID，按照【命名空间ID】进行过滤，可通过调用[DescribeNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录控制台进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新命名空间。
    */
   NamespaceId: string
   /**
-   * 集群ID
+   * 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。
    */
   ClusterId?: string
 }
@@ -15939,7 +16021,11 @@ export interface ContainerInfo {
  */
 export interface SearchStdoutLogRequest {
   /**
-   * 机器实例ID， 和  实例 ID 二者必选其一，不能同时为空
+   * 机器实例ID， 和 部署组 ID 二者必选其一，不能同时为空
+可通过调用[DescribeClusterInstances](https://cloud.tencent.com/document/product/649/36048)查询已导入的实例列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=instance)进行查询。实例ID例如：ins-6decplwk
+
+
+
    */
   InstanceId?: string
   /**
@@ -15951,15 +16037,16 @@ export interface SearchStdoutLogRequest {
    */
   SearchWords?: Array<string>
   /**
-   * 查询起始时间
+   * 查询起始时间，格式yyyy-MM-dd HH:mm:ss
    */
   StartTime?: string
   /**
    * 部署组ID，和 InstanceId 二者必选其一，不能同时为空
+可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)或[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-yo7kp9dv&tab=publish&subTab=group)进行查看
    */
   GroupId?: string
   /**
-   * 查询结束时间
+   * 查询结束时间，格式yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
   /**
@@ -15968,22 +16055,20 @@ export interface SearchStdoutLogRequest {
    */
   Offset?: number
   /**
-   * 排序规则，默认值"time"
+   * 排序规则，time：按时间排序，score：按检索值排序，默认值"time"
    */
   OrderBy?: string
   /**
-   * 排序方式，取值"asc"或"desc"，默认
-值"desc"
+   * 排序方式，取值 asc：升序 或 desc：降序，默认值desc
    */
   OrderType?: string
   /**
-   * 检索类型，取值"LUCENE", "REGEXP",
-"NORMAL"
+   * 检索类型，取值 LUCENE：Lucene检索，REGEXP：正则检索，NORMAL：普通检索
    */
   SearchWordType?: string
   /**
-   * 批量请求类型，取值"page"或"scroll"，默认
-值"page"
+   * 批量请求类型，取值 PAGE：分页查询，SCROLL：滚动查询，SEARCHAFTER：游标查询，默认值PAGE
+
    */
   BatchType?: string
   /**
@@ -16051,7 +16136,7 @@ export interface DescribeResourceConfigResultV2 {
  */
 export interface ModifyGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd。
    */
   GroupId: string
   /**
@@ -16111,15 +16196,15 @@ export interface TaskId {
  */
 export interface DescribeImageTagsRequest {
   /**
-   * 应用Id
+   * 应用ID，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
-   * 偏移量，取值从0开始
+   * 偏移量，默认为0。关于Offset详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Offset?: number
   /**
-   * 分页个数，默认为20， 取值应为1~100
+   * 数量限制，默认为20，最大值为100。关于Limit详见[API简介](https://cloud.tencent.com/document/api/213/568#.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0.E4.B8.8E.E8.BF.94.E5.9B.9E.E5.8F.82.E6.95.B0.E9.87.8A.E4.B9.89)
    */
   Limit?: number
   /**

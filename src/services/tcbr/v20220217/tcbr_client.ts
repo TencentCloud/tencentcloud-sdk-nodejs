@@ -32,6 +32,7 @@ import {
   ReleaseGrayResponse,
   DeployParam,
   DiffConfigItem,
+  VolumeConf,
   OperateServerManageRequest,
   StaticStorageInfo,
   UpdateCloudRunServerRequest,

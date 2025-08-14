@@ -2220,6 +2220,32 @@ export interface DoHealthCheckOnMigratingTopicRequest {
 }
 
 /**
+ * DescribeProducerList请求参数结构体
+ */
+export interface DescribeProducerListRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
+   */
+  Topic: string
+  /**
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询结果限制数量，默认20。
+   */
+  Limit?: number
+  /**
+   * 查询起始位置，默认为0。
+   */
+  Offset?: number
+}
+
+/**
  * DescribeMigratingTopicList返回参数结构体
  */
 export interface DescribeMigratingTopicListResponse {
@@ -3689,6 +3715,24 @@ export interface MessageTrackItem {
 }
 
 /**
+ * DescribeProducerList返回参数结构体
+ */
+export interface DescribeProducerListResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * 生产者信息列表
+   */
+  ProducerList?: Array<ProducerInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMQTTInsPublicEndpoint返回参数结构体
  */
 export interface ModifyMQTTInsPublicEndpointResponse {
@@ -4448,6 +4492,58 @@ export interface CreateMQTTInsPublicEndpointRequest {
    * 公网访问规则
    */
   Rules?: Array<PublicAccessRule>
+}
+
+/**
+ * 生产者信息
+ */
+export interface ProducerInfo {
+  /**
+   * 客户端ID	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * 客户端IP	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIp?: string
+  /**
+   * 客户端语言 
+- JAVA((byte) 0)
+- CPP((byte) 1) 
+- DOTNET((byte) 2) 
+- PYTHON((byte) 3)
+- DELPHI((byte) 4)
+- ERLANG((byte) 5)
+- RUBY((byte) 6)
+- OTHER((byte) 7)
+- HTTP((byte) 8)
+- GO((byte) 9)
+- PHP((byte) 10)
+- OMS((byte) 11)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Language?: string
+  /**
+   * 客户端版本	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 最后生产时间，**Unix时间戳（秒）**
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTimestamp?: number
+  /**
+   * 生产者客户端协议类型，枚举如下：
+
+- grpc：GRpc协议
+- remoting：Remoting协议
+- http：HTTP协议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelProtocol?: string
 }
 
 /**

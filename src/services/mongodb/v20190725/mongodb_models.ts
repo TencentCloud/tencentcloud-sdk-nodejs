@@ -500,7 +500,7 @@ export interface SlowLogPattern {
  */
 export interface AssignProjectResponse {
   /**
-   * 返回的异步任务ID列表
+   * 返回的异步任务ID列表。
    */
   FlowIds?: Array<number | bigint>
   /**
@@ -2802,7 +2802,7 @@ export interface AssignProjectRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 项目ID，用户已创建项目的唯一ID,非自定义
+   * 项目ID，用户已创建项目的唯一ID。请在控制台账号中心的项目管理中复制项目 ID。
    */
   ProjectId: number
 }

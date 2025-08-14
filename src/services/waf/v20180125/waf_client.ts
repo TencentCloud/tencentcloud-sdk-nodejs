@@ -84,6 +84,7 @@ import {
   DeleteIpAccessControlV2Response,
   PostAttackDownloadTaskResponse,
   DescribeAttackWhiteRuleRequest,
+  DescribeOwaspRulesResponse,
   StrategyForAntiInfoLeak,
   AddSpartaProtectionResponse,
   DescribeUserDomainInfoRequest,
@@ -130,6 +131,7 @@ import {
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
   TLSVersion,
+  ModifyOwaspRuleTypeActionResponse,
   LoadBalancer,
   PostCLSFlowInfo,
   CdcCluster,
@@ -163,6 +165,7 @@ import {
   ModifyAreaBanAreasResponse,
   ModifyAntiFakeUrlStatusRequest,
   ApiAsset,
+  DescribeOwaspRulesRequest,
   DescribeCCRuleListRequest,
   ResponseCode,
   ModifyAttackWhiteRuleResponse,
@@ -212,6 +215,7 @@ import {
   DescribeDomainDetailsClbResponse,
   ExportAccessInfo,
   DescribeIpAccessControlRequest,
+  ModifyOwaspRuleTypeActionRequest,
   ModifyWafThreatenIntelligenceRequest,
   DescribeApiListVersionTwoRequest,
   ModifyInstanceQpsLimitResponse,
@@ -221,7 +225,9 @@ import {
   ModifyBotSceneUCBRuleRequest,
   ScanIpInfo,
   DescribeUserSignatureRuleRequest,
+  DeleteOwaspRuleStatusResponse,
   ModifyProtectionStatusResponse,
+  ModifyOwaspRuleStatusRequest,
   DescribeUserClbWafRegionsRequest,
   DescribePostCKafkaFlowsRequest,
   CreatePostCKafkaFlowRequest,
@@ -235,6 +241,7 @@ import {
   DownloadAttackRecordInfo,
   DescribeRuleLimitResponse,
   CreateAccessExportResponse,
+  ModifyOwaspRuleTypeLevelRequest,
   ModifyHostRequest,
   DestroyPostCKafkaFlowRequest,
   DescribeHistogramResponse,
@@ -264,6 +271,7 @@ import {
   InOutputUCBRuleEntry,
   DestroyPostCLSFlowResponse,
   UpsertCCAutoStatusResponse,
+  ModifyOwaspRuleStatusResponse,
   ModifyGenerateDealsResponse,
   UpsertSessionResponse,
   AccessLogItem,
@@ -304,6 +312,7 @@ import {
   DescribeCCRuleListResponse,
   PeakPointsItem,
   DescribeCCAutoStatusRequest,
+  ModifyAntiFakeUrlRequest,
   DescribeDomainDetailsClbRequest,
   TimedJob,
   SwitchElasticModeRequest,
@@ -314,9 +323,10 @@ import {
   DomainRuleId,
   DescribeProtectionModesRequest,
   PortItem,
-  RuleType,
+  DescribeOwaspRuleTypesRequest,
   DescribeCCAutoStatusResponse,
   ModifyCustomRuleStatusRequest,
+  OwaspRuleType,
   AccessHistogramItem,
   ModifySpartaProtectionModeRequest,
   DescribeAttackOverviewRequest,
@@ -356,6 +366,7 @@ import {
   ModifyIpAccessControlResponse,
   VipInfo,
   DescribeAccessHistogramResponse,
+  DeleteOwaspRuleStatusRequest,
   ModifyHostFlowModeResponse,
   DescribeBotSceneListRequest,
   Goods,
@@ -388,6 +399,7 @@ import {
   ModifyInstanceNameRequest,
   DescribePortsResponse,
   ModifyCustomRuleRequest,
+  ModifyOwaspRuleTypeLevelResponse,
   ModifyDomainWhiteRuleRequest,
   DescribePeakPointsRequest,
   DescribeTopAttackDomainResponse,
@@ -400,12 +412,14 @@ import {
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
+  OwaspRule,
   GetAttackHistogramRequest,
   RuleList,
   DescribeAttackTypeRequest,
   ModifyCustomWhiteRuleRequest,
   DeleteCustomWhiteRuleRequest,
   ModifyInstanceRenewFlagResponse,
+  ModifyOwaspRuleTypeStatusResponse,
   AddAttackWhiteRuleResponse,
   ImportIpAccessControlResponse,
   AddCustomWhiteRuleRequest,
@@ -413,6 +427,7 @@ import {
   DeleteOwaspWhiteRuleResponse,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
+  RuleType,
   AddSpartaProtectionRequest,
   PostAttackDownloadTaskRequest,
   ModifyAreaBanAreasRequest,
@@ -420,6 +435,7 @@ import {
   InOutputBotUCBRule,
   AttackLogInfo,
   ModifyHostStatusResponse,
+  ModifyOwaspRuleTypeStatusRequest,
   QPSPackageNew,
   LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
@@ -450,7 +466,7 @@ import {
   ModifyDomainWhiteRuleResponse,
   ModifyObjectResponse,
   ModifyAntiFakeUrlStatusResponse,
-  ModifyAntiFakeUrlRequest,
+  DescribeOwaspRuleTypesResponse,
   ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
   DescribeWebshellStatusResponse,
@@ -705,6 +721,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解除门神规则的状态锁
+   */
+  async DeleteOwaspRuleStatus(
+    req: DeleteOwaspRuleStatusRequest,
+    cb?: (error: string, rep: DeleteOwaspRuleStatusResponse) => void
+  ): Promise<DeleteOwaspRuleStatusResponse> {
+    return this.request("DeleteOwaspRuleStatus", req, cb)
+  }
+
+  /**
    * 创建CKafka投递流任务
    */
   async CreatePostCKafkaFlow(
@@ -785,13 +811,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Tiga引擎大类规则及其防护模式
+   * Waf  CC V2 Delete接口
    */
-  async DescribeProtectionModes(
-    req: DescribeProtectionModesRequest,
-    cb?: (error: string, rep: DescribeProtectionModesResponse) => void
-  ): Promise<DescribeProtectionModesResponse> {
-    return this.request("DescribeProtectionModes", req, cb)
+  async DeleteCCRule(
+    req: DeleteCCRuleRequest,
+    cb?: (error: string, rep: DeleteCCRuleResponse) => void
+  ): Promise<DeleteCCRuleResponse> {
+    return this.request("DeleteCCRule", req, cb)
   }
 
   /**
@@ -842,6 +868,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpHitItemsResponse) => void
   ): Promise<DescribeIpHitItemsResponse> {
     return this.request("DescribeIpHitItems", req, cb)
+  }
+
+  /**
+   * 查询规则引擎的规则类型列表
+   */
+  async DescribeOwaspRuleTypes(
+    req: DescribeOwaspRuleTypesRequest,
+    cb?: (error: string, rep: DescribeOwaspRuleTypesResponse) => void
+  ): Promise<DescribeOwaspRuleTypesResponse> {
+    return this.request("DescribeOwaspRuleTypes", req, cb)
   }
 
   /**
@@ -902,6 +938,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAreaBanAreasResponse) => void
   ): Promise<ModifyAreaBanAreasResponse> {
     return this.request("ModifyAreaBanAreas", req, cb)
+  }
+
+  /**
+   * 更新规则的开关
+   */
+  async ModifyOwaspRuleStatus(
+    req: ModifyOwaspRuleStatusRequest,
+    cb?: (error: string, rep: ModifyOwaspRuleStatusResponse) => void
+  ): Promise<ModifyOwaspRuleStatusResponse> {
+    return this.request("ModifyOwaspRuleStatus", req, cb)
   }
 
   /**
@@ -973,6 +1019,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyHostStatusResponse) => void
   ): Promise<ModifyHostStatusResponse> {
     return this.request("ModifyHostStatus", req, cb)
+  }
+
+  /**
+   * 设置waf防护状态
+   */
+  async ModifySpartaProtectionMode(
+    req: ModifySpartaProtectionModeRequest,
+    cb?: (error: string, rep: ModifySpartaProtectionModeResponse) => void
+  ): Promise<ModifySpartaProtectionModeResponse> {
+    return this.request("ModifySpartaProtectionMode", req, cb)
   }
 
   /**
@@ -1166,6 +1222,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新规则类型的防护模式
+   */
+  async ModifyOwaspRuleTypeAction(
+    req: ModifyOwaspRuleTypeActionRequest,
+    cb?: (error: string, rep: ModifyOwaspRuleTypeActionResponse) => void
+  ): Promise<ModifyOwaspRuleTypeActionResponse> {
+    return this.request("ModifyOwaspRuleTypeAction", req, cb)
+  }
+
+  /**
    * 获取业务和攻击概览峰值
    */
   async DescribePeakValue(
@@ -1186,13 +1252,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置waf防护状态
+   * 更新规则类型的防护等级
    */
-  async ModifySpartaProtectionMode(
-    req: ModifySpartaProtectionModeRequest,
-    cb?: (error: string, rep: ModifySpartaProtectionModeResponse) => void
-  ): Promise<ModifySpartaProtectionModeResponse> {
-    return this.request("ModifySpartaProtectionMode", req, cb)
+  async ModifyOwaspRuleTypeLevel(
+    req: ModifyOwaspRuleTypeLevelRequest,
+    cb?: (error: string, rep: ModifyOwaspRuleTypeLevelResponse) => void
+  ): Promise<ModifyOwaspRuleTypeLevelResponse> {
+    return this.request("ModifyOwaspRuleTypeLevel", req, cb)
   }
 
   /**
@@ -1486,6 +1552,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Tiga引擎大类规则及其防护模式
+   */
+  async DescribeProtectionModes(
+    req: DescribeProtectionModesRequest,
+    cb?: (error: string, rep: DescribeProtectionModesResponse) => void
+  ): Promise<DescribeProtectionModesResponse> {
+    return this.request("DescribeProtectionModes", req, cb)
+  }
+
+  /**
    * 查看防护对象列表
    */
   async DescribeObjects(
@@ -1606,6 +1682,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新规则类型的开关
+   */
+  async ModifyOwaspRuleTypeStatus(
+    req: ModifyOwaspRuleTypeStatusRequest,
+    cb?: (error: string, rep: ModifyOwaspRuleTypeStatusResponse) => void
+  ): Promise<ModifyOwaspRuleTypeStatusResponse> {
+    return this.request("ModifyOwaspRuleTypeStatus", req, cb)
+  }
+
+  /**
    * 销毁CLS投递流任务
    */
   async DestroyPostCLSFlow(
@@ -1633,6 +1719,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWafAutoDenyRulesResponse) => void
   ): Promise<DescribeWafAutoDenyRulesResponse> {
     return this.request("DescribeWafAutoDenyRules", req, cb)
+  }
+
+  /**
+   * 查询规则引擎的规则列表
+   */
+  async DescribeOwaspRules(
+    req: DescribeOwaspRulesRequest,
+    cb?: (error: string, rep: DescribeOwaspRulesResponse) => void
+  ): Promise<DescribeOwaspRulesResponse> {
+    return this.request("DescribeOwaspRules", req, cb)
   }
 
   /**
@@ -2015,16 +2111,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCCRuleListResponse) => void
   ): Promise<DescribeCCRuleListResponse> {
     return this.request("DescribeCCRuleList", req, cb)
-  }
-
-  /**
-   * Waf  CC V2 Delete接口
-   */
-  async DeleteCCRule(
-    req: DeleteCCRuleRequest,
-    cb?: (error: string, rep: DeleteCCRuleResponse) => void
-  ): Promise<DeleteCCRuleResponse> {
-    return this.request("DeleteCCRule", req, cb)
   }
 
   /**

@@ -509,6 +509,16 @@ export interface MediaAiAnalysisHighlightItem {
    * 智能精彩集锦子片段列表。
    */
   SegmentSet?: Array<HighlightSegmentItem>
+  /**
+   * 智能精彩集锦地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighlightUrl?: string
+  /**
+   * 智能精彩集锦封面地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CovImgUrl?: string
 }
 
 /**
@@ -18999,6 +19009,14 @@ export interface HighlightSegmentItem {
    * 直播切片对应直播结束时间点，采用 ISO 日期格式。
    */
   EndTime?: string
+  /**
+   * 集锦标题。
+   */
+  Title?: string
+  /**
+   * 集锦概要。
+   */
+  Summary?: string
 }
 
 /**

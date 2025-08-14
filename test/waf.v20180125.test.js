@@ -228,6 +228,16 @@ it("waf.v20180125.DescribeScanIp", async function () {
     }
 })
 
+it("waf.v20180125.DeleteOwaspRuleStatus", async function () {
+    try {
+       const data = await client.DeleteOwaspRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.CreatePostCKafkaFlow", async function () {
     try {
        const data = await client.CreatePostCKafkaFlow({})
@@ -308,9 +318,9 @@ it("waf.v20180125.DescribeUserDomainInfo", async function () {
     }
 })
 
-it("waf.v20180125.DescribeProtectionModes", async function () {
+it("waf.v20180125.DeleteCCRule", async function () {
     try {
-       const data = await client.DescribeProtectionModes({})
+       const data = await client.DeleteCCRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +371,16 @@ it("waf.v20180125.DescribeBotSceneUCBRule", async function () {
 it("waf.v20180125.DescribeIpHitItems", async function () {
     try {
        const data = await client.DescribeIpHitItems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeOwaspRuleTypes", async function () {
+    try {
+       const data = await client.DescribeOwaspRuleTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +441,16 @@ it("waf.v20180125.CreateOwaspWhiteRule", async function () {
 it("waf.v20180125.ModifyAreaBanAreas", async function () {
     try {
        const data = await client.ModifyAreaBanAreas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyOwaspRuleStatus", async function () {
+    try {
+       const data = await client.ModifyOwaspRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +521,16 @@ it("waf.v20180125.CreateAreaBanRule", async function () {
 it("waf.v20180125.ModifyHostStatus", async function () {
     try {
        const data = await client.ModifyHostStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+    try {
+       const data = await client.ModifySpartaProtectionMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +728,16 @@ it("waf.v20180125.DescribeCCRule", async function () {
     }
 })
 
+it("waf.v20180125.ModifyOwaspRuleTypeAction", async function () {
+    try {
+       const data = await client.ModifyOwaspRuleTypeAction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribePeakValue", async function () {
     try {
        const data = await client.DescribePeakValue({})
@@ -708,9 +758,9 @@ it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     }
 })
 
-it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+it("waf.v20180125.ModifyOwaspRuleTypeLevel", async function () {
     try {
-       const data = await client.ModifySpartaProtectionMode({})
+       const data = await client.ModifyOwaspRuleTypeLevel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1008,6 +1058,16 @@ it("waf.v20180125.DescribeFlowTrend", async function () {
     }
 })
 
+it("waf.v20180125.DescribeProtectionModes", async function () {
+    try {
+       const data = await client.DescribeProtectionModes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeObjects", async function () {
     try {
        const data = await client.DescribeObjects({})
@@ -1128,6 +1188,16 @@ it("waf.v20180125.UpsertCCAutoStatus", async function () {
     }
 })
 
+it("waf.v20180125.ModifyOwaspRuleTypeStatus", async function () {
+    try {
+       const data = await client.ModifyOwaspRuleTypeStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DestroyPostCLSFlow", async function () {
     try {
        const data = await client.DestroyPostCLSFlow({})
@@ -1151,6 +1221,16 @@ it("waf.v20180125.DescribeBatchIpAccessControl", async function () {
 it("waf.v20180125.DescribeWafAutoDenyRules", async function () {
     try {
        const data = await client.DescribeWafAutoDenyRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeOwaspRules", async function () {
+    try {
+       const data = await client.DescribeOwaspRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1531,16 +1611,6 @@ it("waf.v20180125.DeleteAntiFakeUrl", async function () {
 it("waf.v20180125.DescribeCCRuleList", async function () {
     try {
        const data = await client.DescribeCCRuleList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.DeleteCCRule", async function () {
-    try {
-       const data = await client.DeleteCCRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

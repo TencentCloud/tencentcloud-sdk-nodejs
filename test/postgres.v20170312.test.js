@@ -18,9 +18,9 @@ const client = new tencentcloud.postgres.v20170312.Client({
 })
 describe("postgres.v20170312.test.js", function () {
 
-it("postgres.v20170312.ModifyMaintainTimeWindow", async function () {
+it("postgres.v20170312.DescribeTasks", async function () {
     try {
-       const data = await client.ModifyMaintainTimeWindow({})
+       const data = await client.DescribeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,19 +188,9 @@ it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeTasks", async function () {
+it("postgres.v20170312.ModifyMaintainTimeWindow", async function () {
     try {
-       const data = await client.DescribeTasks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("postgres.v20170312.RenewInstance", async function () {
-    try {
-       const data = await client.RenewInstance({})
+       const data = await client.ModifyMaintainTimeWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,16 +221,6 @@ it("postgres.v20170312.DescribeSlowQueryAnalysis", async function () {
 it("postgres.v20170312.DescribeProductConfig", async function () {
     try {
        const data = await client.DescribeProductConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("postgres.v20170312.DescribeDBSlowlogs", async function () {
-    try {
-       const data = await client.DescribeDBSlowlogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +358,9 @@ it("postgres.v20170312.ModifyDBInstanceDeployment", async function () {
     }
 })
 
-it("postgres.v20170312.CreateServerlessDBInstance", async function () {
+it("postgres.v20170312.RenewInstance", async function () {
     try {
-       const data = await client.CreateServerlessDBInstance({})
+       const data = await client.RenewInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,16 +451,6 @@ it("postgres.v20170312.CloneDBInstance", async function () {
 it("postgres.v20170312.DisIsolateDBInstances", async function () {
     try {
        const data = await client.DisIsolateDBInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("postgres.v20170312.DescribeServerlessDBInstances", async function () {
-    try {
-       const data = await client.DescribeServerlessDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

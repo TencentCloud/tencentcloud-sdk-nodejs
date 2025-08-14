@@ -40,19 +40,19 @@ export interface ModifyAutoBackupConfigResponse {
   /**
    * 增量备份文件保存天数。
    */
-  BackupStorageDays: number
+  BackupStorageDays?: number
   /**
    * 全量备份文件保存天数。
    */
-  BinlogStorageDays: number
+  BinlogStorageDays?: number
   /**
    * 备份时间段。
    */
-  TimePeriod: string
+  TimePeriod?: string
   /**
    * 备份周期。Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
    */
-  WeekDays: Array<string>
+  WeekDays?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -362,7 +362,7 @@ export interface ModifyInstanceRequest {
    */
   ProjectId?: number
   /**
-   * 包年包月计费的续费模式。<b>InstanceIds</b>数组和<b>AutoRenews</b>数组中的修改值对应。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
+   * 包年包月计费的续费模式。<b>InstanceIds</b>数组和<b>AutoRenews</b>数组中的修改值对应。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</li></ul>
    */
   AutoRenews?: Array<number | bigint>
 }
@@ -512,7 +512,7 @@ export interface ResetPasswordResponse {
    * 任务 ID。
 <b>说明：</b>修改密码时的任务ID，如果切换免密访问或者非免密码实例，则无需关注此返回值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -599,11 +599,11 @@ export interface DescribeInstanceParamRecordsResponse {
   /**
    * 修改历史记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 修改历史记录信息。
    */
-  InstanceParamHistory: Array<InstanceParamHistory>
+  InstanceParamHistory?: Array<InstanceParamHistory>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -791,11 +791,11 @@ export interface DescribeTendisSlowLogResponse {
   /**
    * 慢查询详情。
    */
-  TendisSlowLogDetail: Array<TendisSlowLogDetail>
+  TendisSlowLogDetail?: Array<TendisSlowLogDetail>
   /**
    * 慢查询总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -922,11 +922,11 @@ export interface DescribeInstanceReplicasResponse {
   /**
    * 实例所有节点数量，包括主节点、副本节点。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例节点信息。
    */
-  ReplicaGroups: Array<ReplicaGroup>
+  ReplicaGroups?: Array<ReplicaGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1314,19 +1314,19 @@ export interface DescribeAutoBackupConfigResponse {
   /**
    * 自动备份的周期。包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
    */
-  WeekDays: Array<string>
+  WeekDays?: Array<string>
   /**
    * 自动备份时间段。
    */
-  TimePeriod: string
+  TimePeriod?: string
   /**
    * 全量备份文件保存天数。
    */
-  BackupStorageDays: number
+  BackupStorageDays?: number
   /**
    * 增量备份文件保存天数。
    */
-  BinlogStorageDays: number
+  BinlogStorageDays?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2069,7 +2069,7 @@ export interface ModifyConnectionConfigResponse {
   /**
    * 任务 ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2083,7 +2083,7 @@ export interface ModifyMaintenanceWindowResponse {
   /**
    * 执行结果。<ul><li>success：修改成功。 </li> <li>failed：修改失败。</li></ul>
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2273,11 +2273,11 @@ export interface DescribeProxySlowLogResponse {
   /**
    * 慢查询总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 慢查询详情。
    */
-  InstanceProxySlowLogDetail: Array<InstanceProxySlowlogDetail>
+  InstanceProxySlowLogDetail?: Array<InstanceProxySlowlogDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2407,7 +2407,7 @@ export interface ChangeInstanceMasterResponse {
   /**
    * 异步任务 ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2521,11 +2521,11 @@ export interface DescribeInstanceBinlogsResponse {
   /**
    * 备份总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例的备份信息数组
    */
-  BackupSet: Array<BinlogInfo>
+  BackupSet?: Array<BinlogInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

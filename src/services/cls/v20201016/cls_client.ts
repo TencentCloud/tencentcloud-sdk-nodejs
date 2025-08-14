@@ -880,7 +880,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于修改告警屏蔽规则。
+   * 该接口用于修改告警屏蔽规则。当告警屏蔽规则为失效中时，无法对其进行修改
    */
   async ModifyAlarmShield(
     req: ModifyAlarmShieldRequest,

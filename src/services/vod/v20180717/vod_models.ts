@@ -3150,7 +3150,7 @@ export interface DescribeMediaProcessUsageDataRequest {
 export interface MPSOutputFile {
   /**
    * 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。
-取值：<li>AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件；</li><li>AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；</li><li>AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。</li>
+取值：<li>AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件，默认以原文件类型存储；</li><li>AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；</li><li>AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。</li><li>MediaProcess.Transcode.Video: 音视频增强任务中增强后的音视频文件，默认以转码文件类型存储。</li>
    */
   FileType?: string
   /**
@@ -3165,6 +3165,10 @@ export interface MPSOutputFile {
    * 结果文件的可下载 Url。
    */
   Url?: string
+  /**
+   * 转码规格 ID。当 FileType 等于 MediaProcess.Transcode.Video时有效，取值为0表示原始文件。
+   */
+  Definition?: string
   /**
    * 过期时间。当 StorageMode 为 Temporary 时有效，表示 Url 的过期时间，单位为秒。
    */
@@ -8531,7 +8535,7 @@ export interface DescribeCLSTopicsResponse {
  */
 export interface MPSSubTaskResult {
   /**
-   * 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：<li>AiAnalysis.DeLogo：智能擦除任务。</li>
+   * 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：<li>AiAnalysis.DeLogo：智能擦除任务。</li><li>MediaProcess.Transcode：音视频增强任务。</li>
    */
   TaskType?: string
   /**
@@ -8548,6 +8552,7 @@ export interface MPSSubTaskResult {
   Message?: string
   /**
    * MPS 视频处理任务输入。该字段对应 MPS 任务返回中的 Input 结果，以 JSON 格式返回。
+示例：{"Definition": 24}
    */
   Input?: string
   /**
@@ -12439,11 +12444,16 @@ export interface ProcessMediaByMPSRequest {
    * 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。
 视频处理参数详情请参考：[MPS 发起媒体处理](https://cloud.tencent.com/document/api/862/37578)。
 填写说明：
-1. 目前仅需要配置 MPS “发起媒体处理”接口中的 AiAnalysisTask 参数，其他参数无需填写，若包含其它参数，系统将自动忽略；
-2. 当前仅支持通过此方式发起智能擦除任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数。
-
+1. 目前仅需要配置 MPS “发起媒体处理”接口中任务配置相关的参数，如 AiAnalysisTask 与 MediaProcessTask，其他参数无需填写。若包含其它参数，系统将自动忽略；
+2. 当前仅支持通过此方式发起智能擦除及音视频增强任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数；
+3. 音视频增强任务目前不支持使用预置模板发起，可通过 [CreateMPSTemplate](document/product/266/57382) 接口创建自定义模板。
+示例：{"AiAnalysisTask":{"Definition":25}}
    */
   MPSProcessMediaParams: string
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -14338,6 +14348,7 @@ export interface EventContent {
 <li>QualityEnhanceComplete：音画质重生任务完成；</li>
 <li>PersistenceComplete：剪辑固化完成；</li>
 <li>ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。</li>
+<li>ProcessMediaByMPSComplete：MPS视频处理完成。</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -14481,6 +14492,10 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComplexAdaptiveDynamicStreamingCompleteEvent?: ComplexAdaptiveDynamicStreamingTask
+  /**
+   * MPS 视频处理任务信息，仅当 EventType 为 ProcessMediaByMPSComplete 时有效。
+   */
+  ProcessMediaByMPSCompleteEvent?: ProcessMediaByMPS
 }
 
 /**

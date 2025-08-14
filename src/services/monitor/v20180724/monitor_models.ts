@@ -5546,11 +5546,11 @@ export interface MetricData {
   /**
    * 指标名
    */
-  MetricName: string
+  MetricName?: string
   /**
    * 监控数据点
    */
-  Points: Array<MetricDataPoint>
+  Points?: Array<MetricDataPoint>
 }
 
 /**
