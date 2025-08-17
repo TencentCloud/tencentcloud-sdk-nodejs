@@ -1161,31 +1161,17 @@ export interface CreateImageSpriteTask2017 {
 }
 
 /**
- * 视频裁剪结果文件信息（2017 版）
+ * DescribeImageReviewUsageData返回参数结构体
  */
-export interface ClipFileInfo2017 {
+export interface DescribeImageReviewUsageDataResponse {
   /**
-   * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+   * 图片审核次数统计数据，展示查询时间范围内的图片审核次数的概览数据。
    */
-  ErrCode?: number
+  ImageReviewUsageDataSet?: Array<ImageReviewUsageDataItem>
   /**
-   * 错误描述。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Message?: string
-  /**
-   * 输出目标文件的文件 ID。
-   */
-  FileId?: string
-  /**
-   * 输出目标文件的文件地址。
-   */
-  FileUrl?: string
-  /**
-   * 输出目标文件的文件类型。
-   */
-  FileType?: string
+  RequestId?: string
 }
 
 /**
@@ -1899,6 +1885,25 @@ export interface DescribeLicenseUsageDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteMPSTemplate请求参数结构体
+ */
+export interface DeleteMPSTemplateRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 需要删除的 MPS 模板的类型。取值：
+<li>Transcode: 删除转码模板。</li>
+   */
+  TemplateType: string
+  /**
+   * MPS 任务模板唯一标识。
+   */
+  Definition: number
 }
 
 /**
@@ -2764,6 +2769,28 @@ export interface ModifyTranscodeTemplateRequest {
 }
 
 /**
+ * ModifyMPSTemplate请求参数结构体
+ */
+export interface ModifyMPSTemplateRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 需要修改的 MPS 模板的类型。取值：
+<li>Transcode: 创建转码模板，目前仅支持修改增强参数。</li>
+   */
+  TemplateType: string
+  /**
+   * MPS 修改模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧修改用户自定义的 MPS 任务模板。
+ 目前仅支持通过此方式修改以下任务类型的模板：
+1. 音视频增强：仅支持填写“[修改转码模板](https://cloud.tencent.com/document/api/862/37578)”接口中的 Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
+示例：{"Definition":24214,"Container":"mp4","Name":"test","RemoveAudio":1,"VideoTemplate":{"Codec":"h264","Fps":0,"Bitrate":0},"EnhanceConfig":{"VideoEnhance":{"FrameRate":{"Switch":"ON","Fps":50}}}}
+   */
+  MPSModifyTemplateParams: string
+}
+
+/**
  * MPS 媒体处理任务信息。
  */
 export interface ProcessMediaByMPS {
@@ -2847,6 +2874,22 @@ export interface DeleteImageProcessingTemplateRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * MPS 任务模板详情。
+ */
+export interface MPSTemplate {
+  /**
+   * MPS 模板的类型。取值：
+<li>Transcode: 转码模板。</li>
+   */
+  TaskType?: string
+  /**
+   * MPS 任务模板详情内容。
+示例：{"Definition":24214,"Name":"test","Comment":"","Type":"Preset","EnhanceConfig":{"VideoEnhance":{"FrameRate":{"Switch":"ON","Fps":50},"SuperResolution":{"Switch":"ON","Type":"lq"}}}}
+   */
+  MPSTemplateInfo?: string
 }
 
 /**
@@ -10001,6 +10044,26 @@ export interface SortBy {
 }
 
 /**
+ * DescribeMPSTemplates请求参数结构体
+ */
+export interface DescribeMPSTemplatesRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * MPS 模板类型。根据需要查询的 MPS 模板的类型对结果进行过滤。取值：
+<li>Transcode: 查询转码模板列表。</li>
+   */
+  TemplateType: string
+  /**
+   * MPS 查询模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧查询 MPS 任务模板列表。目前仅支持通过此方式查询以下任务类型的模板：
+1. 音视频增强：仅支持填写“[获取转码模板列表](https://cloud.tencent.com/document/product/862/37593)”接口中的 Definitions、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
+   */
+  MPSDescribeTemplateParams?: string
+}
+
+/**
  * 鉴别涉及令人不安全的信息的任务控制参数。
  */
 export interface TerrorismConfigureInfoForUpdate {
@@ -13928,6 +13991,16 @@ export interface ModifyAIRecognitionTemplateRequest {
 }
 
 /**
+ * DeleteMPSTemplate返回参数结构体
+ */
+export interface DeleteMPSTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 视频画面二维码检测的控制参数。
  */
 export interface QRCodeConfigureInfo {
@@ -13947,6 +14020,20 @@ export interface DescribeStorageRegionsRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * CreateMPSTemplate返回参数结构体
+ */
+export interface CreateMPSTemplateResponse {
+  /**
+   * MPS 任务模板唯一标识。该模板独立于直接在 MPS 服务中创建的模板。
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14117,17 +14204,31 @@ export interface HeadTailTaskInput {
 }
 
 /**
- * DescribeImageReviewUsageData返回参数结构体
+ * 视频裁剪结果文件信息（2017 版）
  */
-export interface DescribeImageReviewUsageDataResponse {
+export interface ClipFileInfo2017 {
   /**
-   * 图片审核次数统计数据，展示查询时间范围内的图片审核次数的概览数据。
+   * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
    */
-  ImageReviewUsageDataSet?: Array<ImageReviewUsageDataItem>
+  ErrCode?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 错误描述。
    */
-  RequestId?: string
+  Message?: string
+  /**
+   * 输出目标文件的文件 ID。
+   */
+  FileId?: string
+  /**
+   * 输出目标文件的文件地址。
+   */
+  FileUrl?: string
+  /**
+   * 输出目标文件的文件类型。
+   */
+  FileType?: string
 }
 
 /**
@@ -15548,6 +15649,30 @@ export interface AdaptiveDynamicStreamingInfoItem {
 }
 
 /**
+ * CreateMPSTemplate请求参数结构体
+ */
+export interface CreateMPSTemplateRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 需要创建的 MPS 模板的类型。取值：
+<li>Transcode: 创建转码模板，目前仅支持创建增强模板。</li>
+   */
+  TemplateType: string
+  /**
+   * MPS 创建模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧创建用户自定义的 MPS 任务模板。
+目前仅支持通过此方式创建以下任务类型的模板：
+1. 音视频增强：仅支持填写“[创建转码模板](https://cloud.tencent.com/document/product/862/37605)”接口中的 Container 、Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数。其中 EnhanceConfig 此处必填。
+
+目前模板中仅支持配置以上参数，其他参数无需填写。若包含其它参数，系统将自动忽略。以上透传参数以JSON形式表示。
+
+   */
+  MPSCreateTemplateParams: string
+}
+
+/**
  * 直播即时剪辑流信息
  */
 export interface LiveRealTimeClipStreamInfo {
@@ -16601,59 +16726,21 @@ export interface DescribeCLSLogsetsResponse {
 }
 
 /**
- * ModifyEnhanceMediaTemplate请求参数结构体
+ * DescribeMPSTemplates返回参数结构体
  */
-export interface ModifyEnhanceMediaTemplateRequest {
+export interface DescribeMPSTemplatesResponse {
   /**
-   * 音画质重生模板号。
+   * 符合过滤条件的记录总数。
    */
-  Definition: number
+  TotalCount?: number
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * MPS 任务模板详情列表。
    */
-  SubAppId?: number
+  MPSTemplateSet?: Array<MPSTemplate>
   /**
-   * 音画质重生模板名称，长度限制：64 个字符。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 音画质重生视频控制控制信息。
-   */
-  RebuildVideoInfo?: RebuildVideoInfo
-  /**
-   * 音画质重生音频控制控制信息。
-   */
-  RebuildAudioInfo?: RebuildAudioInfo
-  /**
-   * 输出目标视频控制信息。
-   */
-  TargetVideoInfo?: RebuildMediaTargetVideoStream
-  /**
-   * 输出目标音频控制信息。
-   */
-  TargetAudioInfo?: RebuildMediaTargetAudioStream
-  /**
-   * 输出文件封装格式，可选值：mp4、flv、hls。
-   */
-  Container?: string
-  /**
-   * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值 0。
-   */
-  RemoveVideo?: number
-  /**
-   * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值 0。
-   */
-  RemoveAudio?: number
+  RequestId?: string
 }
 
 /**
@@ -16887,6 +16974,16 @@ export interface DescribeSubAppIdsRequest {
    * 分页拉取的最大返回结果数。默认值：200；最大值：200。
    */
   Limit?: number
+}
+
+/**
+ * ModifyMPSTemplate返回参数结构体
+ */
+export interface ModifyMPSTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -19918,6 +20015,62 @@ export interface DescribeRebuildMediaTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyEnhanceMediaTemplate请求参数结构体
+ */
+export interface ModifyEnhanceMediaTemplateRequest {
+  /**
+   * 音画质重生模板号。
+   */
+  Definition: number
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 音画质重生模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 音画质重生视频控制控制信息。
+   */
+  RebuildVideoInfo?: RebuildVideoInfo
+  /**
+   * 音画质重生音频控制控制信息。
+   */
+  RebuildAudioInfo?: RebuildAudioInfo
+  /**
+   * 输出目标视频控制信息。
+   */
+  TargetVideoInfo?: RebuildMediaTargetVideoStream
+  /**
+   * 输出目标音频控制信息。
+   */
+  TargetAudioInfo?: RebuildMediaTargetAudioStream
+  /**
+   * 输出文件封装格式，可选值：mp4、flv、hls。
+   */
+  Container?: string
+  /**
+   * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值 0。
+   */
+  RemoveVideo?: number
+  /**
+   * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值 0。
+   */
+  RemoveAudio?: number
 }
 
 /**

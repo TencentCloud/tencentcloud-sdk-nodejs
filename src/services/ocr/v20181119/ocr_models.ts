@@ -6464,6 +6464,10 @@ export interface VatElectronicInfo {
    * 是否有公司印章（0：没有，1：有）
    */
   CompanySealMark?: number
+  /**
+   * 全电类型的多页pdf票据中，支持输出票面页码：当前第几页，一共第几页。
+   */
+  InvoicePageIndex?: string
 }
 
 /**

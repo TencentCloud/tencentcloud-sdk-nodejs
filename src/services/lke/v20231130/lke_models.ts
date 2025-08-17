@@ -118,6 +118,10 @@ export interface ListUsageCallDetailRequest {
    * 账单明细对应的自定义tag
    */
   BillingTag?: string
+  /**
+   * 空间id
+   */
+  SpaceId?: string
 }
 
 /**
@@ -1013,8 +1017,13 @@ export interface CreateSharedKnowledgeRequest {
   KnowledgeDescription?: string
   /**
    * Embedding模型，字符数量上限128
+   * @deprecated
    */
   EmbeddingModel?: string
+  /**
+   * 共享知识库类型，0普通，1公众号
+   */
+  KnowledgeType?: number
 }
 
 /**
@@ -1097,68 +1106,19 @@ export interface DescribeUnsatisfiedReplyContextRequest {
 }
 
 /**
- * 节点运行的基本信息
+ * 应用配置关联的agent信息
  */
-export interface NodeRunBase {
+export interface KnowledgeQaAgent {
   /**
-   * 节点运行的ID
+   * 协同方式，1：自由转交，2：工作流编排，3：Plan-and-Execute
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeRunId?: string
+  AgentCollaboration?: number
   /**
-   * 节点ID
+   * 应用配置agent关联的工作流
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId?: string
-  /**
-   * 工作流运行实例的ID
-   */
-  WorkflowRunId?: string
-  /**
-   * 节点名称
-   */
-  NodeName?: string
-  /**
-   * 节点类型。
-1： 开始节点
-2：参数提取节点
-3：大模型节点
-4：知识问答节点
-5：知识检索节点
-6：标签提取节点
-7：代码执行节点
-8：工具节点
-9：逻辑判断节点
-10：回复节点
-11：选项卡节点
-12：循环节点
-13：意图识别节点
-14：工作流节点
-15：插件节点
-16：结束节点
-17: 变量聚合节点数据
-18: 批处理节点
-19: 消息队列节点
-   */
-  NodeType?: number
-  /**
-   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
-   */
-  State?: number
-  /**
-   * 错误码
-   */
-  FailCode?: string
-  /**
-   * 错误信息
-   */
-  FailMessage?: string
-  /**
-   * 消耗时间（毫秒）
-   */
-  CostMilliseconds?: number
-  /**
-   * 消耗的token总数
-   */
-  TotalTokens?: number
+  Workflow?: KnowledgeQaWorkflowInfo
 }
 
 /**
@@ -1227,6 +1187,20 @@ export interface QAQuery {
 }
 
 /**
+ * 选项卡索引
+ */
+export interface OptionCardIndex {
+  /**
+   * 唯一标识
+   */
+  RecordId?: string
+  /**
+   * 选项卡索引
+   */
+  Index?: number
+}
+
+/**
  * Agent 配置里面的模型定义
  */
 export interface AgentModelInfo {
@@ -1266,6 +1240,10 @@ export interface AgentModelInfo {
    * 单次会话最大推理轮数
    */
   MaxReasoningRound?: number
+  /**
+   * 模型参数
+   */
+  ModelParams?: ModelParams
 }
 
 /**
@@ -1292,6 +1270,14 @@ export interface ListAppRequest {
    * 登录用户子账号(集成商模式必填)
    */
   LoginSubAccountUin?: string
+  /**
+   * 智能体类型 dialogue：对话智能体，wechat：公众号智能体
+   */
+  AgentType?: string
+  /**
+   * 应用状态 1:未上线 2：运行中
+   */
+  AppStatus?: string
 }
 
 /**
@@ -1537,69 +1523,14 @@ export interface KnowledgeQaSearch {
 }
 
 /**
- * 工作流运行实例详情
+ * 更新时间策略
  */
-export interface WorkflowRunDetail {
+export interface UpdatePeriodInfo {
   /**
-   * 运行环境。0: 测试环境； 1: 正式环境
+   * 文档更新频率类型：0不更新 -H 小时粒度,当前仅支持24(1天)，72(3天)，168(7天) 仅source=2 腾讯文档类型有效
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunEnv?: number
-  /**
-   * 应用ID
-   */
-  AppBizId?: string
-  /**
-   * 工作流运行实例的ID
-   */
-  WorkflowRunId?: string
-  /**
-   * 所属工作流ID
-   */
-  WorkflowId?: string
-  /**
-   * 名称
-   */
-  Name?: string
-  /**
-   * 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消
-   */
-  State?: number
-  /**
-   * 错误信息
-   */
-  FailMessage?: string
-  /**
-   * 消耗的token总数
-   */
-  TotalTokens?: number
-  /**
-   * 创建时间（毫秒时间戳）
-   */
-  CreateTime?: string
-  /**
-   * 开始时间（毫秒时间戳）
-   */
-  StartTime?: string
-  /**
-   * 结束时间（毫秒时间戳）
-   */
-  EndTime?: string
-  /**
-   * 工作流画布Json
-   */
-  DialogJson?: string
-  /**
-   * 用户的输入
-   */
-  Query?: string
-  /**
-   * 主模型名称
-   */
-  MainModelName?: string
-  /**
-   * API参数配置
-   */
-  CustomVariables?: Array<CustomVariable>
+  UpdatePeriodH?: number
 }
 
 /**
@@ -1800,13 +1731,19 @@ export interface KnowledgeUpdateInfo {
   /**
    * Embedding模型
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   EmbeddingModel?: string
   /**
    * 问答提取模型
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   QaExtractModel?: string
+  /**
+   * 拥有者id
+   */
+  OwnerStaffId?: string
 }
 
 /**
@@ -1908,6 +1845,10 @@ export interface AgentMCPServerInfo {
    * sse服务超时时间，单位秒
    */
   SseReadTimeout?: number
+  /**
+   * mcp server query信息
+   */
+  Query?: Array<AgentPluginQuery>
 }
 
 /**
@@ -2193,6 +2134,10 @@ export interface Agent {
    * Agent类型; 0: 未指定类型; 1: 知识库检索Agent
    */
   AgentType?: number
+  /**
+   * 0 自由转交，1 计划与执行
+   */
+  AgentMode?: number
 }
 
 /**
@@ -2319,6 +2264,10 @@ export interface ListSharedKnowledgeRequest {
    * 搜索关键字
    */
   Keyword?: string
+  /**
+   * 共享知识库类型，0普通，1公众号
+   */
+  KnowledgeTypes?: Array<number | bigint>
 }
 
 /**
@@ -2572,6 +2521,16 @@ export interface DescribeDocResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDownload?: boolean
+  /**
+   * 自定义切分规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SplitRule?: string
+  /**
+   * 文档更新频率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatePeriodInfo?: UpdatePeriodInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2938,6 +2897,71 @@ export interface CreateAgentRequest {
 }
 
 /**
+ * 节点运行的基本信息
+ */
+export interface NodeRunBase {
+  /**
+   * 节点运行的ID
+   */
+  NodeRunId?: string
+  /**
+   * 节点ID
+   */
+  NodeId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 节点类型。
+1： 开始节点
+2：参数提取节点
+3：大模型节点
+4：知识问答节点
+5：知识检索节点
+6：标签提取节点
+7：代码执行节点
+8：工具节点
+9：逻辑判断节点
+10：回复节点
+11：选项卡节点
+12：循环节点
+13：意图识别节点
+14：工作流节点
+15：插件节点
+16：结束节点
+17: 变量聚合节点数据
+18: 批处理节点
+19: 消息队列节点
+   */
+  NodeType?: number
+  /**
+   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
+   */
+  State?: number
+  /**
+   * 错误码
+   */
+  FailCode?: string
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗时间（毫秒）
+   */
+  CostMilliseconds?: number
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+}
+
+/**
  * UpdateVar返回参数结构体
  */
 export interface UpdateVarResponse {
@@ -2961,10 +2985,25 @@ export interface SearchStrategy {
    */
   StrategyType?: number
   /**
-   * Excel检索增强开关
+   * Excel检索增强开关, false关闭，true打开
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableEnhancement?: boolean
+  /**
+   * 向量模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmbeddingModel?: string
+  /**
+   * 结果重排序开关， on打开，off关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerankModelSwitch?: string
+  /**
+   * 结果重排序模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerankModel?: string
 }
 
 /**
@@ -3046,6 +3085,7 @@ export interface ProcedureDebugging {
   Agent?: AgentDebugInfo
   /**
    * 自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomVariables?: Array<string>
 }
@@ -3121,6 +3161,56 @@ export interface ListUnsatisfiedReplyResponse {
 }
 
 /**
+ * 工作流运行实例的基本信息
+ */
+export interface WorkflowRunBase {
+  /**
+   * 运行环境。0: 测试环境； 1: 正式环境
+   */
+  RunEnv?: number
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 所属工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消
+   */
+  State?: number
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+  /**
+   * 创建时间（毫秒时间戳）
+   */
+  CreateTime?: string
+  /**
+   * 开始时间（毫秒时间戳）
+   */
+  StartTime?: string
+  /**
+   * 结束时间（毫秒时间戳）
+   */
+  EndTime?: string
+}
+
+/**
  * GetAppSecret请求参数结构体
  */
 export interface GetAppSecretRequest {
@@ -3149,6 +3239,11 @@ export interface ModelParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Max?: number
+  /**
+   * 超参名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
 }
 
 /**
@@ -3228,6 +3323,14 @@ export interface AgentToolInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallingMethod?: string
+  /**
+   * query信息
+   */
+  Query?: Array<AgentPluginQuery>
+  /**
+   * 工具计费状态 0-不计费 1-可用 2-不可用（欠费、无资源等）
+   */
+  FinanceStatus?: number
 }
 
 /**
@@ -3420,6 +3523,10 @@ export interface DescribeConcurrencyUsageGraphRequest {
    * 应用id列表
    */
   AppBizIds?: Array<string>
+  /**
+   * 空间id
+   */
+  SpaceId?: string
 }
 
 /**
@@ -3437,7 +3544,7 @@ export interface AgentProcedureDebugging {
    */
   DisplayContent?: string
   /**
-   * 展示类型
+   * 1：搜索引擎参考来源；2：知识库参考来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DisplayType?: number
@@ -3500,6 +3607,10 @@ export interface DescribeTokenUsageGraphRequest {
    * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
    */
   AppType?: string
+  /**
+   * 筛选子场景
+   */
+  SubScenes?: Array<string>
 }
 
 /**
@@ -3548,6 +3659,32 @@ export interface VoiceConfig {
 }
 
 /**
+ * 应用配置关联的工作流信息
+ */
+export interface KnowledgeQaWorkflowInfo {
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+   */
+  WorkflowName?: string
+  /**
+   * 工作流描述
+   */
+  WorkflowDesc?: string
+  /**
+   * 工作流状态，发布状态(UNPUBLISHED: 待发布 PUBLISHING: 发布中 PUBLISHED: 已发布 FAIL:发布失败)
+   */
+  Status?: string
+  /**
+   * 工作流是否启用
+   */
+  IsEnable?: boolean
+}
+
+/**
  * 变量详情
  */
 export interface TaskFLowVar {
@@ -3578,6 +3715,10 @@ export interface TaskFLowVar {
    * 自定义变量文件默认名称
    */
   VarDefaultFileName?: string
+  /**
+   * 变量类型
+   */
+  VarModuleType?: number
 }
 
 /**
@@ -3670,6 +3811,98 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    * 重复文档处理方式，按顺序匹配第一个满足条件的方式处理
    */
   DuplicateFileHandles?: Array<DuplicateFileHandle>
+  /**
+   * 自定义切分规则
+
+请求参数为一个 **JSON Object**，具体格式可参见接口示例值。包含以下主要字段：
+
+| 字段名             | 类型      | 说明                                   |
+|--------------------|--------|----------------------------------------|
+| `xlsx_splitter`    | Object   | **Excel（xlsx）文件切分策略配置**，仅当处理 Excel 文件时有效 |
+| `common_splitter`  | Object  | **通用文件（如 txt、pdf 等）切分策略配置**，按页或按标签切分 |
+| `table_style`      | String | 表格内容的输出格式，如 HTML 或 Markdown |
+
+---
+
+## `xlsx_splitter`（Excel 切分策略）
+
+用于配置 **表格文件的切分方式**。
+**类型：Object**
+
+```json
+"xlsx_splitter": {
+  "header_interval": [1, 2],
+  "content_start": 10,
+  "split_row": 2
+}
+```
+
+### 字段说明：
+
+| 字段名            | 类型   | 说明                                                                 |
+|-------------------|--------|----------------------------------------------------------------------|
+| `header_interval` | Array\<Number\>  | 表头所在的行区间，格式为 `[起始行, 结束行]`，**行号从 1 开始计数**。例如 `[1, 2]` 表示第 1~2 行为表头。 |
+| `content_start`   | Number  | **表格内容的起始行号（从 1 开始）**。 |
+| `split_row`       | Number   | **切分行数**。                   |
+
+---
+## `common_splitter`（通用文件切分策略）
+
+用于配置 **非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式**，支持两种策略：**按页切分（page）** 或 **按标识符切分（tag）**。
+
+**类型：Object**
+
+```json
+"common_splitter": {
+  "splitter": "page",
+  "page_splitter": {
+    "chunk_length": 1000,
+    "chunk_overlap_length": 100
+  }
+}
+```
+
+### 字段说明：
+
+| 字段名            | 类型     | 说明                                                                 |
+|-------------------|--------|---------------------------------------------------|
+| `splitter`        | String  | 切分策略类型，可选值为：`"page"`（按页切分） 或 `"tag"`（按标识符切分）。 |
+| `page_splitter`   | Object   | **按页切分的配置**。                                         |
+| `page_splitter.chunk_length`   | 1000    | **切片最大长度**。              |
+| `page_splitter.chunk_overlap_length`  | 100    | **切片重叠长度**。  |
+| `tag_splitter`             | Object          | **自定义切分配置**。             |
+| `tag_splitter.tag`         | Array\<String\>    | **切分标识符**。                             |
+| `tag_splitter.chunk_length`| Number       | **切片最大长度**。                                                               |
+| `tag_splitter.chunk_overlap_length` | Number    | **切块重叠长度**。                                                  |
+
+🔹 **补充说明：**
+
+- `splitter` 字段的值可以是：
+  - `"page"`：只使用按页切分逻辑，此时只需要关心 `page_splitter` 相关字段。
+  - `"tag"`：只使用按标识符（如分号、换行等）切分逻辑，此时关注 `tag_splitter`。
+---
+
+##  `table_style`（表格输出样式）
+
+用于指定 **表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回**，方便前端展示或后续处理。
+
+**类型：String**
+
+```json
+"table_style": "md"
+```
+
+### 字段说明：
+
+| 字段名       | 类型   | 说明                                                                 |
+|--------------|--------|----------------------------------------------------------------------|
+| `table_style` | String | 指定表格内容的输出格式。可用值：<br>• `"html"`：以 HTML 表格形式返回，适合网页展示。<br>• `"md"`：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。|
+   */
+  SplitRule?: string
+  /**
+   * 文档更新频率
+   */
+  UpdatePeriodInfo?: UpdatePeriodInfo
 }
 
 /**
@@ -3830,6 +4063,10 @@ export interface GetVarListRequest {
    * 是否需要内部变量(默认false)
    */
   NeedInternalVar?: boolean
+  /**
+   * 变量类型
+   */
+  VarModuleType?: number
 }
 
 /**
@@ -3952,6 +4189,10 @@ export interface CreateAppRequest {
    * 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式
    */
   Pattern?: string
+  /**
+   * 智能体类型 dialogue 对话式智能体，wechat 公众号智能体
+   */
+  AgentType?: string
 }
 
 /**
@@ -4035,6 +4276,24 @@ export interface KnowledgeBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
+  /**
+   * 共享知识库类型，0普通，1公众号
+   */
+  KnowledgeType?: number
+  /**
+   * 拥有者id
+   */
+  OwnerStaffId?: string
+  /**
+   * 知识库文档数量,当前仅支持公众号知识库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocTotal?: number
+  /**
+   * 知识库处理中状态标记，1：向量embedding变更中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessingFlags?: Array<number | bigint>
 }
 
 /**
@@ -4077,6 +4336,76 @@ export interface ListReleaseConfigPreviewRequest {
    * 发布状态
    */
   ReleaseStatus?: Array<number | bigint>
+}
+
+/**
+ * 工作流运行实例详情
+ */
+export interface WorkflowRunDetail {
+  /**
+   * 运行环境。0: 测试环境； 1: 正式环境
+   */
+  RunEnv?: number
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
+   * 工作流运行实例的ID
+   */
+  WorkflowRunId?: string
+  /**
+   * 所属工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 工作流输出
+   */
+  Output?: string
+  /**
+   * 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消
+   */
+  State?: number
+  /**
+   * 错误信息
+   */
+  FailMessage?: string
+  /**
+   * 消耗的token总数
+   */
+  TotalTokens?: number
+  /**
+   * 创建时间（毫秒时间戳）
+   */
+  CreateTime?: string
+  /**
+   * 开始时间（毫秒时间戳）
+   */
+  StartTime?: string
+  /**
+   * 结束时间（毫秒时间戳）
+   */
+  EndTime?: string
+  /**
+   * 工作流画布Json
+   */
+  DialogJson?: string
+  /**
+   * 用户的输入
+   */
+  Query?: string
+  /**
+   * 主模型名称
+   */
+  MainModelName?: string
+  /**
+   * API参数配置
+   */
+  CustomVariables?: Array<CustomVariable>
 }
 
 /**
@@ -4466,6 +4795,10 @@ export interface DescribeKnowledgeUsagePieGraphRequest {
    * 应用ID数组
    */
   AppBizIds?: Array<string>
+  /**
+   * 空间列表
+   */
+  SpaceId?: string
 }
 
 /**
@@ -4764,6 +5097,10 @@ export interface DescribeCallStatsGraphRequest {
    * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
    */
   AppType?: string
+  /**
+   * 空间id
+   */
+  SpaceId?: string
 }
 
 /**
@@ -4871,53 +5208,47 @@ export interface DescribeReleaseResponse {
 }
 
 /**
- * 工作流运行实例的基本信息
+ * 执行过程信息记录
  */
-export interface WorkflowRunBase {
+export interface Procedure {
   /**
-   * 运行环境。0: 测试环境； 1: 正式环境
-   */
-  RunEnv?: number
-  /**
-   * 应用ID
-   */
-  AppBizId?: string
-  /**
-   * 工作流运行实例的ID
-   */
-  WorkflowRunId?: string
-  /**
-   * 所属工作流ID
-   */
-  WorkflowId?: string
-  /**
-   * 名称
+   * 执行过程英语名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消
+   * 中文名, 用于展示
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  State?: number
+  Title?: string
   /**
-   * 错误信息
+   * 状态常量: 使用中: processing, 成功: success, 失败: failed
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailMessage?: string
+  Status?: string
   /**
-   * 消耗的token总数
+   * 消耗 token 数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalTokens?: number
+  Count?: number
   /**
-   * 创建时间（毫秒时间戳）
+   * 调试信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: string
+  Debugging?: ProcedureDebugging
   /**
-   * 开始时间（毫秒时间戳）
+   * 计费资源状态，1：可用，2：不可用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
+  ResourceStatus?: number
   /**
-   * 结束时间（毫秒时间戳）
+   * 输入消耗 token 数
    */
-  EndTime?: string
+  InputCount?: number
+  /**
+   * 输出消耗 token 数
+   */
+  OutputCount?: number
 }
 
 /**
@@ -5147,6 +5478,18 @@ export interface AgentPluginInfo {
    * 知识库问答插件配置
    */
   KnowledgeQa?: AgentKnowledgeQAPlugin
+  /**
+   * 是否使用一键授权
+   */
+  EnableRoleAuth?: boolean
+  /**
+   * 应用配置的插件query信息
+   */
+  Query?: Array<AgentPluginQuery>
+  /**
+   * MCP类型
+   */
+  McpType?: number
 }
 
 /**
@@ -5245,6 +5588,11 @@ export interface AppModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceStatus?: number
+  /**
+   * 模型参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelParams?: ModelParams
 }
 
 /**
@@ -5500,6 +5848,48 @@ export interface ModifyDocCateRequest {
 }
 
 /**
+ * 模型参数
+ */
+export interface ModelParams {
+  /**
+   * 温度
+   */
+  Temperature?: number
+  /**
+   * Top_P
+   */
+  TopP?: number
+  /**
+   * 随机种子
+   */
+  Seed?: number
+  /**
+   * 存在惩罚
+   */
+  PresencePenalty?: number
+  /**
+   * 频率惩罚
+   */
+  FrequencyPenalty?: number
+  /**
+   * 重复惩罚
+   */
+  RepetitionPenalty?: number
+  /**
+   * 最大输出长度
+   */
+  MaxTokens?: number
+  /**
+   * 停止序列
+   */
+  StopSequences?: Array<string>
+  /**
+   * 输出格式
+   */
+  ReplyFormat?: string
+}
+
+/**
  * ReferShareKnowledge返回参数结构体
  */
 export interface ReferShareKnowledgeResponse {
@@ -5576,6 +5966,18 @@ export interface ModifyDocRequest {
    * 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义
    */
   IsDownload?: boolean
+  /**
+   * 需要修改的内容类型  0  无效 1 更新文档cos信息 2 更新文档引用信息 3 更新文档刷新频率 4 腾讯文档刷新
+   */
+  ModifyTypes?: Array<number | bigint>
+  /**
+   * 文档更新频率
+   */
+  UpdatePeriodInfo?: UpdatePeriodInfo
+  /**
+   * 自定义切分规则
+   */
+  SplitRule?: string
 }
 
 /**
@@ -5732,7 +6134,7 @@ export interface ListAppResponse {
    */
   Total?: string
   /**
-   * 标签列表
+   * 应用列表
    */
   List?: Array<AppInfo>
   /**
@@ -5815,6 +6217,10 @@ export interface AppInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThoughtModelAliasName?: string
+  /**
+   * 权限位信息
+   */
+  PermissionIds?: Array<string>
 }
 
 /**
@@ -5867,7 +6273,7 @@ export interface CateInfo {
  */
 export interface DescribeSharedKnowledgeResponse {
   /**
-   * 知识库列表
+   * 知识库详情列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Info?: KnowledgeDetailInfo
@@ -5935,6 +6341,10 @@ export interface DeleteVarRequest {
    * 变量ID
    */
   VarId: string
+  /**
+   * 参数类型
+   */
+  VarModuleType?: number
 }
 
 /**
@@ -6030,6 +6440,7 @@ export interface KnowledgeQaConfig {
   AiCall?: AICallConfig
   /**
    * 共享知识库关联配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareKnowledgeBases?: Array<ShareKnowledgeBase>
   /**
@@ -6042,6 +6453,29 @@ export interface KnowledgeQaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OpeningQuestions?: Array<string>
+  /**
+   * 长期记忆开关
+   */
+  LongMemoryOpen?: boolean
+  /**
+   * 长期记忆时效
+   */
+  LongMemoryDay?: number
+  /**
+   * agent配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Agent?: KnowledgeQaAgent
+  /**
+   * 知识库模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeModelConfig?: KnowledgeModelConfig
+  /**
+   * 知识库高级设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeAdvancedConfig?: KnowledgeAdvancedConfig
 }
 
 /**
@@ -6131,6 +6565,10 @@ export interface MsgRecordReference {
    * 问答业务id
    */
   QaBizId?: string
+  /**
+   * 文档索引id
+   */
+  Index?: number
 }
 
 /**
@@ -6310,6 +6748,28 @@ export interface ModelInfo {
    * 专属并发数
    */
   Concurrency?: number
+  /**
+   * 模型标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelTags?: Array<string>
+  /**
+   * 模型超参定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelParams?: Array<ModelParameter>
+  /**
+   * 提供商名称
+   */
+  ProviderName?: string
+  /**
+   * 提供商别名
+   */
+  ProviderAliasName?: string
+  /**
+   * 提供商类型 Self:提供商，Custom：自定义模型提供商，Third：第三方模型提供商
+   */
+  ProviderType?: string
 }
 
 /**
@@ -6854,6 +7314,10 @@ export interface UpdateVarRequest {
    * 自定义变量文件默认名称
    */
   VarDefaultFileName?: string
+  /**
+   * 变量类型
+   */
+  VarModuleType?: number
 }
 
 /**
@@ -7092,39 +7556,19 @@ export interface DeleteAppResponse {
 }
 
 /**
- * 执行过程信息记录
+ * 知识库高级设置
  */
-export interface Procedure {
+export interface KnowledgeAdvancedConfig {
   /**
-   * 执行过程英语名
+   * 重排序模型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  RerankModel?: string
   /**
-   * 中文名, 用于展示
+   * 召回数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Title?: string
-  /**
-   * 状态常量: 使用中: processing, 成功: success, 失败: failed
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 消耗 token 数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Count?: number
-  /**
-   * 调试信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Debugging?: ProcedureDebugging
-  /**
-   * 计费资源状态，1：可用，2：不可用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceStatus?: number
+  RerankRecallNum?: number
 }
 
 /**
@@ -7247,6 +7691,16 @@ export interface AgentReference {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
+  /**
+   * 知识库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeName?: string
+  /**
+   * 知识库标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeBizId?: string
 }
 
 /**
@@ -7370,6 +7824,10 @@ export interface DescribeConcurrencyUsageRequest {
    * 应用id列表
    */
   AppBizIds?: Array<string>
+  /**
+   * 空间id
+   */
+  SpaceId?: string
 }
 
 /**
@@ -7508,6 +7966,10 @@ export interface DescribeTokenUsageRequest {
    * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
    */
   AppType?: string
+  /**
+   * 空间id
+   */
+  SpaceId?: string
 }
 
 /**
@@ -7597,6 +8059,10 @@ export interface ListAppKnowledgeDetailRequest {
    * 应用ID列表
    */
   AppBizIds?: Array<string>
+  /**
+   * 空间列表
+   */
+  SpaceId?: string
 }
 
 /**
@@ -7779,6 +8245,10 @@ export interface AgentDebugInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: string
+  /**
+   * 模型名
+   */
+  ModelName?: string
 }
 
 /**
@@ -7880,6 +8350,35 @@ export interface WorkFlowSummary {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowReleaseTime?: string
+  /**
+   * 中间消息
+   */
+  PendingMessages?: Array<string>
+  /**
+   * 选项卡索引
+   */
+  OptionCardIndex?: OptionCardIndex
+}
+
+/**
+ * 知识库模型设置
+ */
+export interface KnowledgeModelConfig {
+  /**
+   * 向量模型，该字段只有共享知识库有，应用知识库没有
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmbeddingModel?: string
+  /**
+   * 问答对生成模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QaExtractModel?: string
+  /**
+   * schema生成模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaModel?: string
 }
 
 /**
@@ -8017,12 +8516,39 @@ export interface QAList {
 export interface ShareKnowledgeBase {
   /**
    * 共享知识库ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeBizId?: string
   /**
    * 检索范围
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchRange?: SearchRange
+  /**
+   * 知识库模型设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeModelConfig?: KnowledgeModelConfig
+  /**
+   * 检索策略配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchStrategy?: SearchStrategy
+  /**
+   * 检索配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Search?: Array<KnowledgeQaSearch>
+  /**
+   * // 问答-回复灵活度 1：已采纳答案直接回复 2：已采纳润色后回复
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplyFlexibility?: number
+  /**
+   * 共享知识库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeName?: string
 }
 
 /**
@@ -8044,6 +8570,10 @@ export interface KnowledgeDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: UserBaseInfo
+  /**
+   * 权限位信息
+   */
+  PermissionIds?: Array<string>
 }
 
 /**
@@ -8084,6 +8614,37 @@ export interface SaveDocResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 发布拒答
+ */
+export interface ReleaseRejectedQuestion {
+  /**
+   * 问题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Question?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Action?: number
+  /**
+   * 状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionDesc?: string
+  /**
+   * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
 }
 
 /**
@@ -8561,34 +9122,29 @@ export interface ModifyDocAttrRangeRequest {
 }
 
 /**
- * 发布拒答
+ * 应用配置MCP插件query信息
  */
-export interface ReleaseRejectedQuestion {
+export interface AgentPluginQuery {
   /**
-   * 问题
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数名称
    */
-  Question?: string
+  ParamName?: string
   /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数值
    */
-  UpdateTime?: string
+  ParamValue?: string
   /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
+   * query参数配置是否隐藏不可见，true-隐藏不可见，false-可见
    */
-  Action?: number
+  GlobalHidden?: boolean
   /**
-   * 状态描述
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数是否可以为空
    */
-  ActionDesc?: string
+  IsRequired?: boolean
   /**
-   * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
+   * 输入的值
    */
-  Message?: string
+  Input?: AgentInput
 }
 
 /**
@@ -8690,6 +9246,10 @@ export interface CreateVarRequest {
    * 自定义变量文件默认名称
    */
   VarDefaultFileName?: string
+  /**
+   * 参数类型
+   */
+  VarModuleType?: number
 }
 
 /**
@@ -8833,6 +9393,10 @@ export interface DescribeSearchStatsGraphRequest {
    * 应用id列表
    */
   AppBizIds?: Array<string>
+  /**
+   * 空间id
+   */
+  SpaceId?: string
 }
 
 /**
@@ -8957,7 +9521,7 @@ export interface ListModelRequest {
    */
   Pattern?: string
   /**
-   * 模型类别 generate：生成模型，thought：思考模型
+   * 模型类别 generate：生成模型，thought：思考模型,embedding模型，rerank：rerank模型
    */
   ModelCategory?: string
   /**
@@ -9001,12 +9565,11 @@ export interface ListSelectDocRequest {
    */
   BotBizId: string
   /**
-   * 文档名称
-
+   * 文档名称。可通过文档名称检索支持生成问答的文档，不支持xlsx、xls、csv格式
    */
   FileName?: string
   /**
-   * 文档状态： 7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期
+   * 文档状态筛选。文档状态对应码为7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期。其中仅状态为10 待发布、12 已发布的文档支持生成问答
    */
   Status?: Array<number | bigint>
 }

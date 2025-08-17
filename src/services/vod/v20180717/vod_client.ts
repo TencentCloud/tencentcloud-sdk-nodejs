@@ -61,7 +61,7 @@ import {
   DescribePrepaidProductsRequest,
   MediaInputInfo,
   CreateImageSpriteTask2017,
-  ClipFileInfo2017,
+  DescribeImageReviewUsageDataResponse,
   TempCertificate,
   DescribeDefaultDistributionConfigRequest,
   AiReviewTaskPoliticalOcrResult,
@@ -87,6 +87,7 @@ import {
   ComposeMediaResponse,
   RoundPlayInfo,
   DescribeLicenseUsageDataResponse,
+  DeleteMPSTemplateRequest,
   DrmStreamingsInfoForUpdate,
   ClassificationConfigureInfo,
   AbnormalLightingConfigureInfoForUpdate,
@@ -119,10 +120,12 @@ import {
   TerrorismImgReviewTemplateInfoForUpdate,
   FaceConfigureInfoForUpdate,
   ModifyTranscodeTemplateRequest,
+  ModifyMPSTemplateRequest,
   ProcessMediaByMPS,
   EditMediaTaskInput,
   DescribeImageSpriteTemplatesRequest,
   DeleteImageProcessingTemplateRequest,
+  MPSTemplate,
   DescribeDailyPlayStatFileListResponse,
   CLSTopicInfo,
   AbnormalLightingConfigureInfo,
@@ -411,6 +414,7 @@ import {
   CreateWatermarkTemplateRequest,
   ComplexAdaptiveDynamicStreamingTaskInput,
   SortBy,
+  DescribeMPSTemplatesRequest,
   TerrorismConfigureInfoForUpdate,
   DescribeEventsStateRequest,
   WechatMiniProgramPublishTask,
@@ -558,12 +562,14 @@ import {
   TranscodeTaskInput,
   DescribeClientUploadAccelerationUsageDataRequest,
   ModifyAIRecognitionTemplateRequest,
+  DeleteMPSTemplateResponse,
   QRCodeConfigureInfo,
   DescribeStorageRegionsRequest,
+  CreateMPSTemplateResponse,
   WechatPublishTask,
   DescribeCDNStatDetailsRequest,
   HeadTailTaskInput,
-  DescribeImageReviewUsageDataResponse,
+  ClipFileInfo2017,
   DeleteRoundPlayResponse,
   StatDataItem,
   CreateStorageRegionResponse,
@@ -619,6 +625,7 @@ import {
   WatermarkInput,
   AiSampleWordInfo,
   AdaptiveDynamicStreamingInfoItem,
+  CreateMPSTemplateRequest,
   LiveRealTimeClipStreamInfo,
   ProhibitedOcrReviewTemplateInfo,
   DeleteClassResponse,
@@ -656,7 +663,7 @@ import {
   ModifyRoundPlayResponse,
   CreateProcedureTemplateResponse,
   DescribeCLSLogsetsResponse,
-  ModifyEnhanceMediaTemplateRequest,
+  DescribeMPSTemplatesResponse,
   RebuildMediaResponse,
   DomainHTTPSConfig,
   DescribeMediaProcessUsageDataResponse,
@@ -670,6 +677,7 @@ import {
   ModifyHeadTailTemplateRequest,
   DescribeTasksResponse,
   DescribeSubAppIdsRequest,
+  ModifyMPSTemplateResponse,
   AiRecognitionTaskFaceResultInput,
   RebuildMediaOutputConfig,
   AiReviewPoliticalTaskOutput,
@@ -770,6 +778,7 @@ import {
   DynamicRangeInfo,
   CreateSampleSnapshotTemplateRequest,
   DescribeRebuildMediaTemplatesResponse,
+  ModifyEnhanceMediaTemplateRequest,
   AudioVolumeParam,
   AiReviewTaskPornAsrResult,
   ProductInstanceResource,
@@ -1493,6 +1502,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 获取用户自定义媒体处理服务（MPS）任务模板。
+查询模板列表时，需要将 MPS 相关参数以 JSON 格式填入 MPSDescribeTemplateParams 参数中。关于具体的任务参数配置方法，请参考 MPS 任务模板相关文档说明。
+     */
+  async DescribeMPSTemplates(
+    req: DescribeMPSTemplatesRequest,
+    cb?: (error: string, rep: DescribeMPSTemplatesResponse) => void
+  ): Promise<DescribeMPSTemplatesResponse> {
+    return this.request("DescribeMPSTemplates", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
 发起音画质重生
      */
@@ -2187,6 +2207,23 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 该接口用于创建自定义模板，模板用于 ProcessMediaByMPS 接口的部分功能。
+创建模板时，需要将 MPS 相关参数以 JSON 格式填入 MPSCreateTemplateParams 参数中。关于具体的任务参数配置方法，请参考 MPS 任务模板相关文档说明。
+当前支持创建自定义模板的 MPS 功能：
+1. [音视频增强](https://cloud.tencent.com/document/product/862/118703)。
+
+> 以该种方式创建的任务模板：
+> 1. 模板的管理仍在点播平台中完成。
+> 2. 该功能目前仍在内测中，如需测试体验，您可以联系我们获得支持。
+     */
+  async CreateMPSTemplate(
+    req: CreateMPSTemplateRequest,
+    cb?: (error: string, rep: CreateMPSTemplateResponse) => void
+  ): Promise<CreateMPSTemplateResponse> {
+    return this.request("CreateMPSTemplate", req, cb)
+  }
+
+  /**
      * 对云点播的 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
 
 快速拼接或剪辑生成的视频，将产生新的 FileId 并进行固化，固化成功后新视频的文件独立于原始输入视频存在，不受原始视频删除等影响。
@@ -2570,6 +2607,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户自定义 MPS 任务模板。
+   */
+  async DeleteMPSTemplate(
+    req: DeleteMPSTemplateRequest,
+    cb?: (error: string, rep: DeleteMPSTemplateResponse) => void
+  ): Promise<DeleteMPSTemplateResponse> {
+    return this.request("DeleteMPSTemplate", req, cb)
+  }
+
+  /**
      * 获取审核模板列表。
 >模板仅适用于 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 和 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 接口。
      */
@@ -2720,6 +2767,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
   ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
     return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+     * 修改用户自定义 MPS 任务模板。
+修改模板时，需要将 MPS 相关参数以 JSON 格式填入 MPSModifyTemplateParams 参数中。关于具体的任务参数配置方法，请参考 MPS 任务模板相关文档说明。
+     */
+  async ModifyMPSTemplate(
+    req: ModifyMPSTemplateRequest,
+    cb?: (error: string, rep: ModifyMPSTemplateResponse) => void
+  ): Promise<ModifyMPSTemplateResponse> {
+    return this.request("ModifyMPSTemplate", req, cb)
   }
 
   /**

@@ -531,6 +531,10 @@ export interface ModifyRabbitMQServerlessInstanceRequest {
    * 是否开启trace
    */
   TraceFlag?: boolean
+  /**
+   * 限流生产消费比例
+   */
+  SendReceiveRatio?: number
 }
 
 /**

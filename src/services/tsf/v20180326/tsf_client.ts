@@ -962,7 +962,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
+   * 容器部署组详情（已废弃，请使用  [DescribeContainerGroupDeployInfo](https://cloud.tencent.com/document/product/649/67221)）
    */
   async DescribeContainerGroupDetail(
     req: DescribeContainerGroupDetailRequest,

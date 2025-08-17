@@ -22,11 +22,11 @@ export interface DescribeCrossBackupStatisticalResponse {
   /**
    * 跨地域备份概览实时统计总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 跨地域备份概览实时统计列表
    */
-  Items: Array<CrossSummaryDetailRes>
+  Items?: Array<CrossSummaryDetailRes>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -146,11 +146,11 @@ export interface DescribeBackupStatisticalResponse {
   /**
    * 符合条件的实例总数。分页返回的话，这个值指的是所有符合条件的实例的个数，而非当前根据Limit和Offset值返回的实例个数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例列表。
    */
-  Items: Array<SummaryDetailRes>
+  Items?: Array<SummaryDetailRes>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1656,11 +1656,11 @@ export interface DescribeRegularBackupPlanResponse {
   /**
    * 常规备份计划
    */
-  SaveModePeriod: Array<string>
+  SaveModePeriod?: Array<string>
   /**
    * 定期备份计划
    */
-  SaveModeRegular: Array<string>
+  SaveModeRegular?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5992,7 +5992,7 @@ export interface CreateBackupRequest {
    */
   DBNames?: Array<string>
   /**
-   * 实例ID（必填），形如mssql-i1z41iwd
+   * 实例ID，形如mssql-i1z41iwd
    */
   InstanceId?: string
   /**
@@ -6441,7 +6441,7 @@ export interface ModifyBackupStrategyRequest {
    */
   BackupDay?: number
   /**
-   * 备份模式（必填），master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
+   * 备份模式，master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
    */
   BackupModel?: string
   /**
@@ -7674,7 +7674,7 @@ export interface DescribeCrossBackupStatisticalRequest {
    */
   CrossRegion?: string
   /**
-   * 排序字段，默认default-按照备份空间降序排序，data-按照数据备份排序，log-按照日志备份培训
+   * 排序字段，默认default-按照备份空间降序排序，data-按照数据备份排序，log-按照日志备份
    */
   OrderBy?: string
   /**

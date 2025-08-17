@@ -822,7 +822,7 @@ export interface QuantileEntity {
  */
 export interface ModifyProgramRequest {
   /**
-   * 数据集ID
+   * 数据集ID，调用[DescribePrograms](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program)查询接口会返回数据集信息，包括programId
    */
   ProgramId: string
   /**
@@ -2495,7 +2495,7 @@ export interface ModifyContainerReplicasResponse {
  */
 export interface StopGroupRequest {
   /**
-   * 部署组ID
+   * 按照【部署组ID】进行部署组删除，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-zvw6zp9a&tab=publish&subTab=group)进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
 }
@@ -2560,7 +2560,7 @@ export interface DescribeLanesResponse {
  */
 export interface StartGroupRequest {
   /**
-   * 部署组ID
+   * 按照【部署组ID】进行部署组启动，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-zvw6zp9a&tab=publish&subTab=group)进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupId: string
 }
@@ -2582,11 +2582,11 @@ export interface CreateNamespaceRequest {
    */
   NamespaceDesc?: string
   /**
-   * 命名空间资源类型(默认值为DEF)。DEF：默认普通命名空间。GLOBAL：全局命名空间
+   * 命名空间资源类型；DEF：表示默认资源类型；GW：表示网关资源类型
    */
   NamespaceResourceType?: string
   /**
-   * 是否是全局命名空间(默认是DEF，表示普通命名空间；GLOBAL表示全局命名空间)
+   * 命名空间类型；DEF 表示默认普通命名空间；GLOBAL 表示全局命名空间
    */
   NamespaceType?: string
   /**
@@ -3100,11 +3100,11 @@ export interface DescribeProgramsRequest {
    */
   SearchWord?: string
   /**
-   * 每页数量
+   * 每页数量，默认值20
    */
   Limit?: number
   /**
-   * 起始偏移量
+   * 起始偏移量，默认值0
    */
   Offset?: number
 }
@@ -3941,7 +3941,7 @@ export interface CreateUnitRuleWithDetailRespRequest {
  */
 export interface DescribeContainerGroupAttributeRequest {
   /**
-   * 部署组ID
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-ab958z6y
    */
   GroupId: string
 }
@@ -3974,7 +3974,7 @@ export interface DescribeSimpleApplicationsRequest {
    */
   MicroserviceType?: string
   /**
-   * 资源类型数组
+   * 应用资源类型列表；DEF 表示默认资源类型；GW 表示网关资源类型
    */
   ApplicationResourceTypeList?: Array<string>
   /**
@@ -4669,11 +4669,11 @@ export interface MonitorOverview {
  */
 export interface CreateGroupRequest {
   /**
-   * 部署组所属的应用ID
+   * 部署组所属的【应用ID】，可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
-   * 部署组所属命名空间ID
+   * 部署组所属【命名空间ID】，可通过调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId: string
   /**
@@ -4681,7 +4681,7 @@ export interface CreateGroupRequest {
    */
   GroupName: string
   /**
-   * 集群ID
+   * 部署组所属的【集群ID】，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
    */
   ClusterId: string
   /**
@@ -4689,7 +4689,7 @@ export interface CreateGroupRequest {
    */
   GroupDesc?: string
   /**
-   * 部署组资源类型；DEF 表示默认资源类型；GW 表示网关资源类型
+   * 部署组资源类型；DEF 表示默认资源类型
    */
   GroupResourceType?: string
   /**
@@ -4700,6 +4700,10 @@ export interface CreateGroupRequest {
    * 标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * k8s命名空间名称
+   */
+  K8sNamespaceName?: string
 }
 
 /**
@@ -5592,6 +5596,16 @@ export interface LaneInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LaneGroupId?: string
+  /**
+   * 是否禁用删除。
+true：禁用
+false：取消禁用
+   */
+  DeleteDisabled?: boolean
+  /**
+   * 禁用原因
+   */
+  DeleteDisabledReason?: string
 }
 
 /**
@@ -6265,7 +6279,7 @@ export interface DescribeSimpleNamespacesRequest {
    */
   NamespaceId?: string
   /**
-   * 查询资源类型列表
+   * 查询资源类型列表；DEF 表示默认资源类型；GW 表示网关资源类型
    */
   NamespaceResourceTypeList?: Array<string>
   /**
@@ -7836,6 +7850,14 @@ export interface GatewayPlugin {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
+  /**
+   * 是否禁用删除
+   */
+  DeleteDisabled?: boolean
+  /**
+   * 禁用原因
+   */
+  DeleteDisabledReason?: string
 }
 
 /**
@@ -7873,7 +7895,7 @@ export interface GatewayApiGroupVo {
  */
 export interface CreateApplicationRequest {
   /**
-   * 应用名称
+   * 应用名称，最长60字符
    */
   ApplicationName: string
   /**
@@ -7903,7 +7925,7 @@ export interface CreateApplicationRequest {
    */
   ApplicationRuntimeType?: string
   /**
-   * 需要绑定的数据集ID
+   * 【数据集ID】。可通过调用[DescribePrograms](https://cloud.tencent.com/document/product/649/73477)查询已创建的数据集列表或登录[控制台](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program&roleId=role-a26486wy)进行查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramId?: string
   /**
@@ -7959,11 +7981,11 @@ export interface ServiceStatisticsResults {
  */
 export interface DeployGroupRequest {
   /**
-   * 部署组ID
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
   /**
-   * 程序包ID
+   * 软件包ID，可通过调用DescribeUploadInfo接口时[获取上传程序包信息](https://cloud.tencent.com/document/api/649/36078)返回的COS上传信息获取，登录[控制台](https://console.cloud.tencent.com/tsf/product?rid=1)进行查看
    */
   PkgId: string
   /**
@@ -8003,7 +8025,7 @@ export interface DeployGroupRequest {
    */
   DeployExeMode?: string
   /**
-   * 滚动发布每个批次的时间间隔
+   * 滚动发布每个批次的时间间隔，单位min。默认值是0，不等待。
    */
   DeployWaitTime?: number
   /**
@@ -9966,7 +9988,7 @@ export interface DescribeResourceConfigSts {
  */
 export interface DescribeApplicationAttributeRequest {
   /**
-   * 应用ID
+   * 【应用ID】，可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
 }
@@ -10238,6 +10260,10 @@ export interface SimpleGroup {
    * 应用微服务类型
    */
   AppMicroServiceType?: string
+  /**
+   * k8s 命名空间名称
+   */
+  K8sNamespaceName?: string
 }
 
 /**
@@ -11662,7 +11688,10 @@ export interface DescribeApplicationsRequest {
    */
   Limit?: number
   /**
-   * 应用类型
+   * 指定应用类型，目前支持：
+- `V`：普通应用/CVM应用
+- `C`：容器应用
+- `S`：serverless 应用
    */
   ApplicationType?: string
   /**
@@ -11670,7 +11699,7 @@ export interface DescribeApplicationsRequest {
    */
   MicroserviceType?: string
   /**
-   * 应用资源类型数组
+   * 应用资源类型列表；DEF 表示默认资源类型；GW 表示网关资源类型
    */
   ApplicationResourceTypeList?: Array<string>
   /**
@@ -13479,7 +13508,7 @@ export interface DescribeUsableUnitNamespacesRequest {
  */
 export interface DescribeContainerGroupsRequest {
   /**
-   * 分组所属应用ID。
+   * 分组所属【应用ID】，可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
@@ -13503,11 +13532,11 @@ export interface DescribeContainerGroupsRequest {
    */
   Limit?: number
   /**
-   * 集群ID
+   * 分组所属【集群ID】，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
    */
   ClusterId?: string
   /**
-   * 命名空间 ID
+   * 分组所属【命名空间 ID】，可通过调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
 }
@@ -14909,6 +14938,22 @@ export interface DeployContainerApplicationRequest {
    * 本次部署的描述信息
    */
   DeployDesc?: string
+  /**
+   * k8s命名空间名称
+   */
+  K8sNamespaceName?: string
+  /**
+   * 是否启用静态IP
+   */
+  StaticIpEnabled?: boolean
+  /**
+   * 启动策略[OrderedReady/Parallel]
+   */
+  PodManagementPolicyType?: string
+  /**
+   * 滚动更新分区序号
+   */
+  Partition?: number
 }
 
 /**
@@ -15151,27 +15196,27 @@ export interface DeleteRepositoryRequest {
  */
 export interface DescribeSimpleGroupsRequest {
   /**
-   * 部署组ID列表，不填写时查询全量
+   * 按照【部署组ID】进行过滤，不填写时查询全量。可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-zvw6zp9a&tab=publish&subTab=group)进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
    */
   GroupIdList?: Array<string>
   /**
-   * 应用ID，不填写时查询全量
+   * 按照【应用ID】进行过滤，不填写时查询全量。可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId?: string
   /**
-   * 集群ID，不填写时查询全量
+   * 按照【集群ID】进行过滤，不填写时查询全量。可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
    */
   ClusterId?: string
   /**
-   * 命名空间ID，不填写时查询全量
+   * 按照【命名空间ID】进行过滤，不填写时查询全量。可通过调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId?: string
   /**
-   * 每页条数
+   * 每页条数，默认值20，无上限
    */
   Limit?: number
   /**
-   * 起始偏移量
+   * 起始偏移量，默认值0
    */
   Offset?: number
   /**
@@ -16266,11 +16311,11 @@ export interface DescribeConfigSummaryResponse {
  */
 export interface CreateContainGroupRequest {
   /**
-   * 分组所属应用ID
+   * 分组所属【应用ID】，可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
    */
   ApplicationId: string
   /**
-   * 分组所属命名空间ID
+   * 分组所属【命名空间ID】，可通过调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
    */
   NamespaceId: string
   /**
@@ -16322,13 +16367,11 @@ export interface CreateContainGroupRequest {
    */
   MemRequest?: string
   /**
-   * 部署组资源类型；
-DEF — 默认资源类型；
-GW — 网关资源类型；
+   * 部署组资源类型；DEF 表示默认资源类型
    */
   GroupResourceType?: string
   /**
-   * 子网ID
+   * 分组所属【子网ID】，可前往TKE侧集群[控制台](https://console.cloud.tencent.com/tke2/cluster/sub/list/basic/info/base?rid=1&clusterId=cls-2nhp3g1i)进行获取
    */
   SubnetId?: string
   /**

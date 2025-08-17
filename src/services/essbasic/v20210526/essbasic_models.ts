@@ -9243,6 +9243,18 @@ export interface OccupiedSeal {
    * 授权人列表
    */
   AuthorizedUsers?: Array<AuthorizedUser>
+  /**
+   * 印章的真实宽度，单位毫米
+   */
+  RealWidth?: number
+  /**
+   * 印章的真实高度，单位毫米
+   */
+  RealHeight?: number
+  /**
+   * 印章描述
+   */
+  SealDescription?: string
 }
 
 /**
@@ -9414,6 +9426,10 @@ export interface CreateSealByImageRequest {
 </ul>
    */
   TaxIdentifyCode?: string
+  /**
+   * 印章描述内容
+   */
+  SealDescription?: string
 }
 
 /**

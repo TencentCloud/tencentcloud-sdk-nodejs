@@ -568,6 +568,16 @@ it("vod.v20180717.CreateContentReviewTemplate", async function () {
     }
 })
 
+it("vod.v20180717.DescribeMPSTemplates", async function () {
+    try {
+       const data = await client.DescribeMPSTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.RebuildMedia", async function () {
     try {
        const data = await client.RebuildMedia({})
@@ -1138,6 +1148,16 @@ it("vod.v20180717.DeleteWordSamples", async function () {
     }
 })
 
+it("vod.v20180717.CreateMPSTemplate", async function () {
+    try {
+       const data = await client.CreateMPSTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.FastEditMedia", async function () {
     try {
        const data = await client.FastEditMedia({})
@@ -1498,6 +1518,16 @@ it("vod.v20180717.DescribeDefaultDistributionConfig", async function () {
     }
 })
 
+it("vod.v20180717.DeleteMPSTemplate", async function () {
+    try {
+       const data = await client.DeleteMPSTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeReviewTemplates", async function () {
     try {
        const data = await client.DescribeReviewTemplates({})
@@ -1601,6 +1631,16 @@ it("vod.v20180717.CreateAnimatedGraphicsTemplate", async function () {
 it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
     try {
        const data = await client.ModifyAnimatedGraphicsTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyMPSTemplate", async function () {
+    try {
+       const data = await client.ModifyMPSTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -157,6 +157,10 @@ export interface CreateSealRequest {
 </ul>
    */
   TaxIdentifyCode?: string
+  /**
+   * 印章描述内容
+   */
+  SealDescription?: string
 }
 
 /**
@@ -869,6 +873,10 @@ export interface OrganizationAuthUrl {
    * 企业批量注册的唯一 Id， 此 Id 可以用在[创建企业批量认证链接-单链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationAuthorizationUrl)。
    */
   SubTaskId?: string
+  /**
+   * 企业批量注册 传递过来的企业名称，方便客户定位企业
+   */
+  OrganizationName?: string
 }
 
 /**
@@ -5346,6 +5354,26 @@ export interface OccupiedSeal {
    * 印章扩展数据信息
    */
   ExtendScene?: ExtendScene
+  /**
+   * 印章的真实宽度，单位毫米
+   */
+  RealWidth?: number
+  /**
+   * 印章的真实高度，单位毫米
+   */
+  RealHeight?: number
+  /**
+   * 自定义子类型印章
+   */
+  SubSealType?: string
+  /**
+   * 自定义子类型印章名称
+   */
+  SubSealName?: string
+  /**
+   * 印章描述
+   */
+  SealDescription?: string
 }
 
 /**
