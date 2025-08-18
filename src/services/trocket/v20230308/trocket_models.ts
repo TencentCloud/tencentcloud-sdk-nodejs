@@ -2210,7 +2210,7 @@ export interface DoHealthCheckOnMigratingTopicRequest {
    */
   TopicName: string
   /**
-   * 必填，是否忽略当前检查
+   * 是否忽略当前检查
    */
   IgnoreCheck?: boolean
   /**

@@ -5409,6 +5409,15 @@ export interface EmbedUrlOption {
 
    */
   ForbidEditWatermark?: boolean
+  /**
+   * 印章描述
+   */
+  SealDescription?: string
+  /**
+   * 是否禁止编辑印章描述内容
+<ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
+   */
+  ForbidEditSealDescription?: string
 }
 
 /**

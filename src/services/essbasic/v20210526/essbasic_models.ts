@@ -497,6 +497,14 @@ export interface OrganizationAuthUrl {
    * 企业批量注册的错误信息，例如：企业三要素不通过
    */
   ErrorMessage?: string
+  /**
+   * 企业批量注册 传递过来的企业名称，方便客户定位企业
+   */
+  OrganizationName?: string
+  /**
+   * 企业批量注册的唯一 Id， 此 Id 可以用在[创建企业批量认证链接-单链接](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks)。
+   */
+  SubTaskId?: string
 }
 
 /**
@@ -9508,6 +9516,15 @@ export interface EmbedUrlOption {
 <ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
    */
   ForbidEditWatermark?: boolean
+  /**
+   * 印章描述
+   */
+  SealDescription?: string
+  /**
+   * 是否禁止编辑印章描述内容
+<ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
+   */
+  ForbidEditSealDescription?: string
 }
 
 /**

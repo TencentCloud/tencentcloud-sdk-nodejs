@@ -338,6 +338,16 @@ it("tdmq.v20200217.ModifyRocketMQTopic", async function () {
     }
 })
 
+it("tdmq.v20200217.ExecuteDisasterRecovery", async function () {
+    try {
+       const data = await client.ExecuteDisasterRecovery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRocketMQTopicMsgs", async function () {
     try {
        const data = await client.DescribeRocketMQTopicMsgs({})

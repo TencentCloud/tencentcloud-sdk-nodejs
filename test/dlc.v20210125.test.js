@@ -58,9 +58,9 @@ it("dlc.v20210125.DescribeForbiddenTablePro", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeUserRoles", async function () {
+it("dlc.v20210125.DescribeUserInfo", async function () {
     try {
-       const data = await client.DescribeUserRoles({})
+       const data = await client.DescribeUserInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("dlc.v20210125.DescribeNotebookSession", async function () {
 it("dlc.v20210125.CreateNotebookSession", async function () {
     try {
        const data = await client.CreateNotebookSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDataMaskStrategies", async function () {
+    try {
+       const data = await client.DescribeDataMaskStrategies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +248,16 @@ it("dlc.v20210125.CancelTask", async function () {
     }
 })
 
+it("dlc.v20210125.DeleteDataMaskStrategy", async function () {
+    try {
+       const data = await client.DeleteDataMaskStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeDLCCatalogAccess", async function () {
     try {
        const data = await client.DescribeDLCCatalogAccess({})
@@ -258,9 +278,9 @@ it("dlc.v20210125.DescribeDMSTables", async function () {
     }
 })
 
-it("dlc.v20210125.CreateSparkSubmitTask", async function () {
+it("dlc.v20210125.DescribeNativeSparkSessions", async function () {
     try {
-       const data = await client.CreateSparkSubmitTask({})
+       const data = await client.DescribeNativeSparkSessions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +311,16 @@ it("dlc.v20210125.UpdateStandardEngineResourceGroupResourceInfo", async function
 it("dlc.v20210125.RenewDataEngine", async function () {
     try {
        const data = await client.RenewDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeUserRoles", async function () {
+    try {
+       const data = await client.DescribeUserRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,6 +598,16 @@ it("dlc.v20210125.DescribeScripts", async function () {
     }
 })
 
+it("dlc.v20210125.AttachDataMaskPolicy", async function () {
+    try {
+       const data = await client.AttachDataMaskPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.ModifyWorkGroup", async function () {
     try {
        const data = await client.ModifyWorkGroup({})
@@ -751,6 +791,16 @@ it("dlc.v20210125.CreateSparkSessionBatchSQL", async function () {
 it("dlc.v20210125.CreateUserVpcConnection", async function () {
     try {
        const data = await client.CreateUserVpcConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeUDFPolicy", async function () {
+    try {
+       const data = await client.DescribeUDFPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,6 +1268,16 @@ it("dlc.v20210125.DescribeTasksOverview", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateDataMaskStrategy", async function () {
+    try {
+       const data = await client.UpdateDataMaskStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.UpdateDataEngineConfig", async function () {
     try {
        const data = await client.UpdateDataEngineConfig({})
@@ -1281,6 +1341,16 @@ it("dlc.v20210125.UpgradeDataEngineImage", async function () {
 it("dlc.v20210125.DetachUserPolicy", async function () {
     try {
        const data = await client.DetachUserPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateUDFPolicy", async function () {
+    try {
+       const data = await client.UpdateUDFPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1458,9 +1528,9 @@ it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeNativeSparkSessions", async function () {
+it("dlc.v20210125.CreateSparkSubmitTask", async function () {
     try {
-       const data = await client.DescribeNativeSparkSessions({})
+       const data = await client.CreateSparkSubmitTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1648,9 +1718,9 @@ it("dlc.v20210125.CancelNotebookSessionStatement", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeUserInfo", async function () {
+it("dlc.v20210125.CreateDataMaskStrategy", async function () {
     try {
-       const data = await client.DescribeUserInfo({})
+       const data = await client.CreateDataMaskStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

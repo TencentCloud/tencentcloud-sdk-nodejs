@@ -24,7 +24,7 @@ import {
   EngineNetworkInfo,
   DescribeDatabasesRequest,
   Asset,
-  CreateUserRequest,
+  DescribeDataMaskStrategiesResponse,
   PythonSparkImage,
   ModifyGovernEventRuleResponse,
   DescribeNotebookSessionsRequest,
@@ -46,6 +46,7 @@ import {
   CreateDatabaseRequest,
   DescribeDMSTablesResponse,
   DependencyPackage,
+  DataMaskStrategy,
   DescribeAdvancedStoreLocationResponse,
   DescribeTablesNameResponse,
   DescribeAdvancedStoreLocationRequest,
@@ -70,6 +71,8 @@ import {
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
   CreateImportTaskRequest,
+  DescribeDataMaskStrategiesRequest,
+  UpdateDataMaskStrategyResponse,
   DeleteUsersFromWorkGroupResponse,
   DescribeDLCCatalogAccessResponse,
   DeleteTableResponse,
@@ -77,12 +80,14 @@ import {
   CreateExportTaskRequest,
   CreateDMSTableRequest,
   DMSTable,
-  ModifyAdvancedStoreLocationResponse,
+  CreateSparkSubmitTaskResponse,
   UpdateEngineResourceGroupNetworkConfigInfoResponse,
   DescribeUserRegisterTimeRequest,
+  AttachDataMaskPolicyRequest,
   DMSSds,
   OpendThirdAccessUserInfo,
   DescribeDataEnginesScaleDetailResponse,
+  CreateDataMaskStrategyResponse,
   OptimizerEngineInfo,
   CreateStandardEngineResourceGroupRequest,
   DescribeNotebookSessionStatementSqlResultRequest,
@@ -125,6 +130,7 @@ import {
   CreateDatabaseResponse,
   DropDMSPartitionsResponse,
   CreateWorkGroupRequest,
+  UpdateDataMaskStrategyRequest,
   DescribeDatasourceConnectionRequest,
   CheckDataEngineImageCanBeUpgradeRequest,
   QueryInternalTableWarehouseRequest,
@@ -180,10 +186,12 @@ import {
   DescribeNotebookSessionRequest,
   UpgradeDataEngineImageRequest,
   CSV,
+  DeleteDataMaskStrategyRequest,
   CreateNotebookSessionStatementRequest,
   DescribeUsersRequest,
   CreateExportTaskResponse,
   AddUsersToWorkGroupRequest,
+  CreateDataMaskStrategyRequest,
   ModifyAdvancedStoreLocationRequest,
   DescribeNotebookSessionLogRequest,
   UserInfo,
@@ -237,13 +245,13 @@ import {
   DataEngineInfo,
   DescribeSessionImageVersionResponse,
   LockMetaDataResponse,
-  CheckLockMetaDataResponse,
+  CreateUserRequest,
   AlterDMSDatabaseRequest,
   DescribeOtherCHDFSBindingListResponse,
   UpdateRowFilterResponse,
   DescribeDataEngineEventsRequest,
   DescribeDataEnginePythonSparkImagesResponse,
-  LockComponentInfo,
+  DescribeViewsResponse,
   DescribeDataEnginesResponse,
   StandardEngineResourceGroupConfigInfo,
   DatasourceConnectionConfig,
@@ -276,6 +284,7 @@ import {
   ReportHeartbeatMetaDataResponse,
   QueryInternalTableWarehouseResponse,
   Script,
+  DescribeUDFPolicyResponse,
   CheckDataEngineImageCanBeUpgradeResponse,
   CreateInternalTableRequest,
   TasksInfo,
@@ -316,12 +325,14 @@ import {
   DatasourceConnectionInfo,
   DescribeDataEngineImageVersionsRequest,
   BindWorkGroupsToUserResponse,
+  UpdateUDFPolicyResponse,
   SparkSessionBatchLog,
   DeleteScriptRequest,
   AddDMSPartitionsRequest,
   DescribeUserRolesRequest,
   ResourceInfo,
   CreateImportTaskResponse,
+  DescribeUDFPolicyRequest,
   SmartOptimizerIndexPolicy,
   RenewDataEngineRequest,
   DescribeTasksAnalysisRequest,
@@ -389,7 +400,7 @@ import {
   DescribeNotebookSessionResponse,
   DescribeSubUserAccessPolicyResponse,
   CreateScriptResponse,
-  CreateSparkSubmitTaskResponse,
+  ModifyAdvancedStoreLocationResponse,
   CreateTasksInOrderResponse,
   TagInfo,
   SparkSessionInfo,
@@ -410,6 +421,7 @@ import {
   CHDFSProductVpcInfo,
   ViewBaseInfo,
   CheckLockMetaDataRequest,
+  DeleteDataMaskStrategyResponse,
   AddOptimizerEnginesResponse,
   DescribeTasksRequest,
   CreateSparkAppTaskRequest,
@@ -441,7 +453,9 @@ import {
   SparkJobInfo,
   DescribeScriptsRequest,
   DescribeSparkAppJobResponse,
+  UDFPolicyInfo,
   DescribeNotebookSessionStatementResponse,
+  UpdateUDFPolicyRequest,
   DescribeStandardEngineResourceGroupConfigInfoRequest,
   UpgradeDataEngineImageResponse,
   StreamingStatistics,
@@ -449,6 +463,7 @@ import {
   OperateEngineResourceGroupFailMessage,
   DescribeStoreLocationResponse,
   QueryTaskCostDetailResponse,
+  CheckLockMetaDataResponse,
   NotebookSessionInfo,
   Execution,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
@@ -474,11 +489,12 @@ import {
   VpcCidrBlock,
   DeleteUsersFromWorkGroupRequest,
   DMSColumnOrder,
-  DescribeViewsResponse,
+  LockComponentInfo,
   DescribeWorkGroupsRequest,
   LockMetaDataRequest,
   DescribeSparkSessionBatchSQLCostRequest,
   CreateNotebookSessionResponse,
+  DataMaskStrategyPolicy,
   DescribeDataEngineResponse,
   DataEngineScaleInfo,
   DescribeDataEngineSessionParametersRequest,
@@ -489,6 +505,7 @@ import {
   CreateInternalTableResponse,
   DescribeSparkAppTasksRequest,
   DescribeEngineNodeSpecResponse,
+  AttachDataMaskPolicyResponse,
   CreateUserVpcConnectionRequest,
   UserMessage,
   QueryResultResponse,
@@ -550,13 +567,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列举用户角色信息
+   * 获取用户详细信息
    */
-  async DescribeUserRoles(
-    req: DescribeUserRolesRequest,
-    cb?: (error: string, rep: DescribeUserRolesResponse) => void
-  ): Promise<DescribeUserRolesResponse> {
-    return this.request("DescribeUserRoles", req, cb)
+  async DescribeUserInfo(
+    req: DescribeUserInfoRequest,
+    cb?: (error: string, rep: DescribeUserInfoResponse) => void
+  ): Promise<DescribeUserInfoResponse> {
+    return this.request("DescribeUserInfo", req, cb)
   }
 
   /**
@@ -617,6 +634,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateNotebookSessionResponse) => void
   ): Promise<CreateNotebookSessionResponse> {
     return this.request("CreateNotebookSession", req, cb)
+  }
+
+  /**
+   * 查询数据脱敏列表接口
+   */
+  async DescribeDataMaskStrategies(
+    req: DescribeDataMaskStrategiesRequest,
+    cb?: (error: string, rep: DescribeDataMaskStrategiesResponse) => void
+  ): Promise<DescribeDataMaskStrategiesResponse> {
+    return this.request("DescribeDataMaskStrategies", req, cb)
   }
 
   /**
@@ -730,6 +757,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除数据脱敏策略
+   */
+  async DeleteDataMaskStrategy(
+    req: DeleteDataMaskStrategyRequest,
+    cb?: (error: string, rep: DeleteDataMaskStrategyResponse) => void
+  ): Promise<DeleteDataMaskStrategyResponse> {
+    return this.request("DeleteDataMaskStrategy", req, cb)
+  }
+
+  /**
    * 查询DLC Catalog授权列表
    */
   async DescribeDLCCatalogAccess(
@@ -750,13 +787,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateSparkSubmitTask）用于提交SparkSbumit批流任务。
+   * 根据资源组获取spark session列表
    */
-  async CreateSparkSubmitTask(
-    req: CreateSparkSubmitTaskRequest,
-    cb?: (error: string, rep: CreateSparkSubmitTaskResponse) => void
-  ): Promise<CreateSparkSubmitTaskResponse> {
-    return this.request("CreateSparkSubmitTask", req, cb)
+  async DescribeNativeSparkSessions(
+    req: DescribeNativeSparkSessionsRequest,
+    cb?: (error: string, rep: DescribeNativeSparkSessionsResponse) => void
+  ): Promise<DescribeNativeSparkSessionsResponse> {
+    return this.request("DescribeNativeSparkSessions", req, cb)
   }
 
   /**
@@ -787,6 +824,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewDataEngineResponse) => void
   ): Promise<RenewDataEngineResponse> {
     return this.request("RenewDataEngine", req, cb)
+  }
+
+  /**
+   * 列举用户角色信息
+   */
+  async DescribeUserRoles(
+    req: DescribeUserRolesRequest,
+    cb?: (error: string, rep: DescribeUserRolesResponse) => void
+  ): Promise<DescribeUserRolesResponse> {
+    return this.request("DescribeUserRoles", req, cb)
   }
 
   /**
@@ -1060,6 +1107,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 绑定数据脱敏策略
+   */
+  async AttachDataMaskPolicy(
+    req: AttachDataMaskPolicyRequest,
+    cb?: (error: string, rep: AttachDataMaskPolicyResponse) => void
+  ): Promise<AttachDataMaskPolicyResponse> {
+    return this.request("AttachDataMaskPolicy", req, cb)
+  }
+
+  /**
    * 修改工作组信息
    */
   async ModifyWorkGroup(
@@ -1247,6 +1304,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserVpcConnectionResponse) => void
   ): Promise<CreateUserVpcConnectionResponse> {
     return this.request("CreateUserVpcConnection", req, cb)
+  }
+
+  /**
+   * 获取UDF权限信息
+   */
+  async DescribeUDFPolicy(
+    req: DescribeUDFPolicyRequest,
+    cb?: (error: string, rep: DescribeUDFPolicyResponse) => void
+  ): Promise<DescribeUDFPolicyResponse> {
+    return this.request("DescribeUDFPolicy", req, cb)
   }
 
   /**
@@ -1710,6 +1777,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新数据脱敏策略
+   */
+  async UpdateDataMaskStrategy(
+    req: UpdateDataMaskStrategyRequest,
+    cb?: (error: string, rep: UpdateDataMaskStrategyResponse) => void
+  ): Promise<UpdateDataMaskStrategyResponse> {
+    return this.request("UpdateDataMaskStrategy", req, cb)
+  }
+
+  /**
    * 用户某种操作，触发引擎配置修改
    */
   async UpdateDataEngineConfig(
@@ -1779,6 +1856,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachUserPolicyResponse) => void
   ): Promise<DetachUserPolicyResponse> {
     return this.request("DetachUserPolicy", req, cb)
+  }
+
+  /**
+   * UDP权限修改
+   */
+  async UpdateUDFPolicy(
+    req: UpdateUDFPolicyRequest,
+    cb?: (error: string, rep: UpdateUDFPolicyResponse) => void
+  ): Promise<UpdateUDFPolicyResponse> {
+    return this.request("UpdateUDFPolicy", req, cb)
   }
 
   /**
@@ -1952,13 +2039,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据资源组获取spark session列表
+   * 本接口（CreateSparkSubmitTask）用于提交SparkSbumit批流任务。
    */
-  async DescribeNativeSparkSessions(
-    req: DescribeNativeSparkSessionsRequest,
-    cb?: (error: string, rep: DescribeNativeSparkSessionsResponse) => void
-  ): Promise<DescribeNativeSparkSessionsResponse> {
-    return this.request("DescribeNativeSparkSessions", req, cb)
+  async CreateSparkSubmitTask(
+    req: CreateSparkSubmitTaskRequest,
+    cb?: (error: string, rep: CreateSparkSubmitTaskResponse) => void
+  ): Promise<CreateSparkSubmitTaskResponse> {
+    return this.request("CreateSparkSubmitTask", req, cb)
   }
 
   /**
@@ -2142,13 +2229,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户详细信息
+   * 创建数据脱敏策略
    */
-  async DescribeUserInfo(
-    req: DescribeUserInfoRequest,
-    cb?: (error: string, rep: DescribeUserInfoResponse) => void
-  ): Promise<DescribeUserInfoResponse> {
-    return this.request("DescribeUserInfo", req, cb)
+  async CreateDataMaskStrategy(
+    req: CreateDataMaskStrategyRequest,
+    cb?: (error: string, rep: CreateDataMaskStrategyResponse) => void
+  ): Promise<CreateDataMaskStrategyResponse> {
+    return this.request("CreateDataMaskStrategy", req, cb)
   }
 
   /**

@@ -5141,6 +5141,11 @@ export interface CreateRocketMQClusterResponse {
 }
 
 /**
+ * ExecuteDisasterRecovery请求参数结构体
+ */
+export type ExecuteDisasterRecoveryRequest = null
+
+/**
  * DeleteRocketMQNamespace返回参数结构体
  */
 export interface DeleteRocketMQNamespaceResponse {
@@ -7974,6 +7979,16 @@ export interface TraceResult {
 }
 
 /**
+ * ExecuteDisasterRecovery返回参数结构体
+ */
+export interface ExecuteDisasterRecoveryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRabbitMQQueues请求参数结构体
  */
 export interface DescribeRabbitMQQueuesRequest {
@@ -9746,7 +9761,11 @@ export interface TopicRecord {
  */
 export interface DescribeEnvironmentRolesRequest {
   /**
-   * 必填字段，环境（命名空间）名称。
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
+   * 环境（命名空间）名称。
    */
   EnvironmentId?: string
   /**
@@ -9757,10 +9776,6 @@ export interface DescribeEnvironmentRolesRequest {
    * 返回数量，不填则默认为10，最大值为20。
    */
   Limit?: number
-  /**
-   * 必填字段，Pulsar 集群的ID
-   */
-  ClusterId?: string
   /**
    * 角色名称
    */

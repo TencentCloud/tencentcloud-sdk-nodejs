@@ -7307,6 +7307,10 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
    * 服务名字，服务ID
    */
   Name: string
+  /**
+   * 是否同步删除服务上绑定的路由
+   */
+  DeleteRoutes?: boolean
 }
 
 /**

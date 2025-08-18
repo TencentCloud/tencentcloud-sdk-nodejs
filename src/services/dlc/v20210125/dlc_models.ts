@@ -236,33 +236,21 @@ export interface Asset {
 }
 
 /**
- * CreateUser请求参数结构体
+ * DescribeDataMaskStrategies返回参数结构体
  */
-export interface CreateUserRequest {
+export interface DescribeDataMaskStrategiesResponse {
   /**
-   * 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。
+   * 总数据脱敏策略数
    */
-  UserId: string
+  TotalCount?: number
   /**
-   * 用户描述信息，方便区分不同用户
+   * 数据脱敏策略列表
    */
-  UserDescription?: string
+  Strategies?: Array<DataMaskStrategy>
   /**
-   * 绑定到用户的权限集合
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PolicySet?: Array<Policy>
-  /**
-   * 用户类型。ADMIN：管理员 COMMON：一般用户。当用户类型为管理员的时候，不能设置权限集合和绑定的工作组集合，管理员默认拥有所有权限。该参数不填默认为COMMON
-   */
-  UserType?: string
-  /**
-   * 绑定到用户的工作组ID集合。
-   */
-  WorkGroupIds?: Array<number | bigint>
-  /**
-   * 用户别名，字符长度小50
-   */
-  UserAlias?: string
+  RequestId?: string
 }
 
 /**
@@ -885,6 +873,72 @@ export interface DependencyPackage {
 }
 
 /**
+ * 数据脱敏策略信息
+ */
+export interface DataMaskStrategy {
+  /**
+   * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyId?: string
+  /**
+   * 用户AppId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAppId?: string
+  /**
+   * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 操作用户子账号uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubAccountUin?: string
+  /**
+   * 策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName?: string
+  /**
+   * MASK_SHOW_FIRST_4; MASK_SHOW_LAST_4;MASK_HASH; MASK_DATE_SHOW_YEAR; MASK_NULL; MASK_DEFAULT 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyType?: string
+  /**
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyDesc?: string
+  /**
+   * 用户组策略列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Groups?: Array<GroupInfo>
+  /**
+   * 用户子账号uin列表，按;拼接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Users?: string
+  /**
+   * 1: 生效中； 0：已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+  /**
+   * 策略创建时间，毫秒时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 策略更新时间，毫秒时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeAdvancedStoreLocation返回参数结构体
  */
 export interface DescribeAdvancedStoreLocationResponse {
@@ -1428,6 +1482,34 @@ export interface CreateImportTaskRequest {
 }
 
 /**
+ * DescribeDataMaskStrategies请求参数结构体
+ */
+export interface DescribeDataMaskStrategiesRequest {
+  /**
+   * 分页参数，单页返回数据量，默认10
+   */
+  Limit?: number
+  /**
+   * 分页参数，数据便偏移量，默认0
+   */
+  Offset?: number
+  /**
+   * 过滤字段，strategy-name: 按策略名称搜索
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * UpdateDataMaskStrategy返回参数结构体
+ */
+export interface UpdateDataMaskStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUsersFromWorkGroup返回参数结构体
  */
 export interface DeleteUsersFromWorkGroupResponse {
@@ -1671,9 +1753,17 @@ export interface DMSTable {
 }
 
 /**
- * ModifyAdvancedStoreLocation返回参数结构体
+ * CreateSparkSubmitTask返回参数结构体
  */
-export interface ModifyAdvancedStoreLocationResponse {
+export interface CreateSparkSubmitTaskResponse {
+  /**
+   * 批作业ID
+   */
+  BatchId?: string
+  /**
+   * 批任务ID，用改ID进行任务的查询与删除等
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1694,6 +1784,16 @@ export interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
  * DescribeUserRegisterTime请求参数结构体
  */
 export type DescribeUserRegisterTimeRequest = null
+
+/**
+ * AttachDataMaskPolicy请求参数结构体
+ */
+export interface AttachDataMaskPolicyRequest {
+  /**
+   * 要绑定的数据脱敏策略权限对象集合
+   */
+  DataMaskStrategyPolicySet?: Array<DataMaskStrategyPolicy>
+}
 
 /**
  * 元数据存储描述属性
@@ -1802,6 +1902,16 @@ export interface DescribeDataEnginesScaleDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Scales?: Array<DataEngineScaleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDataMaskStrategy返回参数结构体
+ */
+export interface CreateDataMaskStrategyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2828,6 +2938,16 @@ export interface CreateWorkGroupRequest {
    * 需要绑定到工作组的用户Id集合
    */
   UserIds?: Array<string>
+}
+
+/**
+ * UpdateDataMaskStrategy请求参数结构体
+ */
+export interface UpdateDataMaskStrategyRequest {
+  /**
+   * 数据脱敏策略详情
+   */
+  Strategy?: DataMaskStrategyInfo
 }
 
 /**
@@ -4010,6 +4130,16 @@ export interface CSV {
 }
 
 /**
+ * DeleteDataMaskStrategy请求参数结构体
+ */
+export interface DeleteDataMaskStrategyRequest {
+  /**
+   * 数据脱敏策略Id
+   */
+  StrategyId?: string
+}
+
+/**
  * CreateNotebookSessionStatement请求参数结构体
  */
 export interface CreateNotebookSessionStatementRequest {
@@ -4079,6 +4209,16 @@ export interface AddUsersToWorkGroupRequest {
    * 要操作的工作组和用户信息
    */
   AddInfo: UserIdSetOfWorkGroupId
+}
+
+/**
+ * CreateDataMaskStrategy请求参数结构体
+ */
+export interface CreateDataMaskStrategyRequest {
+  /**
+   * 数据脱敏策略详情
+   */
+  Strategy?: DataMaskStrategyInfo
 }
 
 /**
@@ -5370,21 +5510,33 @@ export interface LockMetaDataResponse {
 }
 
 /**
- * CheckLockMetaData返回参数结构体
+ * CreateUser请求参数结构体
  */
-export interface CheckLockMetaDataResponse {
+export interface CreateUserRequest {
   /**
-   * 锁ID
+   * 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。
    */
-  LockId?: number
+  UserId: string
   /**
-   * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
+   * 用户描述信息，方便区分不同用户
    */
-  LockState?: string
+  UserDescription?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 绑定到用户的权限集合
    */
-  RequestId?: string
+  PolicySet?: Array<Policy>
+  /**
+   * 用户类型。ADMIN：管理员 COMMON：一般用户。当用户类型为管理员的时候，不能设置权限集合和绑定的工作组集合，管理员默认拥有所有权限。该参数不填默认为COMMON
+   */
+  UserType?: string
+  /**
+   * 绑定到用户的工作组ID集合。
+   */
+  WorkGroupIds?: Array<number | bigint>
+  /**
+   * 用户别名，字符长度小50
+   */
+  UserAlias?: string
 }
 
 /**
@@ -5478,41 +5630,21 @@ export interface DescribeDataEnginePythonSparkImagesResponse {
 }
 
 /**
- * 元数据加锁内容
+ * DescribeViews返回参数结构体
  */
-export interface LockComponentInfo {
+export interface DescribeViewsResponse {
   /**
-   * 数据库名称
+   * 视图对象列表。
    */
-  DbName: string
+  ViewList?: Array<ViewResponseInfo>
   /**
-   * 表名称
+   * 实例总数。
    */
-  TableName?: string
+  TotalCount?: number
   /**
-   * 分区
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Partition?: string
-  /**
-   * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
-   */
-  LockType?: string
-  /**
-   * 锁级别：DB、TABLE、PARTITION
-   */
-  LockLevel?: string
-  /**
-   * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
-   */
-  DataOperationType?: string
-  /**
-   * 是否保持Acid
-   */
-  IsAcid?: boolean
-  /**
-   * 是否动态分区写
-   */
-  IsDynamicPartitionWrite?: boolean
+  RequestId?: string
 }
 
 /**
@@ -6281,6 +6413,20 @@ export interface Script {
    * 更新时间戳， 单位：ms。
    */
   UpdateTime?: number
+}
+
+/**
+ * DescribeUDFPolicy返回参数结构体
+ */
+export interface DescribeUDFPolicyResponse {
+  /**
+   * UDF权限信息
+   */
+  UDFPolicyInfos?: Array<UDFPolicyInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7345,6 +7491,20 @@ export interface BindWorkGroupsToUserResponse {
 }
 
 /**
+ * UpdateUDFPolicy返回参数结构体
+ */
+export interface UpdateUDFPolicyResponse {
+  /**
+   * UDF权限信息
+   */
+  UDFPolicyInfos?: Array<UDFPolicyInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SparkSQL批任务运行日志
  */
 export interface SparkSessionBatchLog {
@@ -7464,6 +7624,24 @@ export interface CreateImportTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUDFPolicy请求参数结构体
+ */
+export interface DescribeUDFPolicyRequest {
+  /**
+   * udf名称
+   */
+  Name: string
+  /**
+   * 数据库名(全局UDF：global-function)
+   */
+  DatabaseName: string
+  /**
+   * 数据目录名
+   */
+  CatalogName: string
 }
 
 /**
@@ -9155,17 +9333,9 @@ export interface CreateScriptResponse {
 }
 
 /**
- * CreateSparkSubmitTask返回参数结构体
+ * ModifyAdvancedStoreLocation返回参数结构体
  */
-export interface CreateSparkSubmitTaskResponse {
-  /**
-   * 批作业ID
-   */
-  BatchId?: string
-  /**
-   * 批任务ID，用改ID进行任务的查询与删除等
-   */
-  TaskId?: string
+export interface ModifyAdvancedStoreLocationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9701,6 +9871,16 @@ export interface CheckLockMetaDataRequest {
    * 过期时间ms
    */
   ElapsedMs?: number
+}
+
+/**
+ * DeleteDataMaskStrategy返回参数结构体
+ */
+export interface DeleteDataMaskStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10557,6 +10737,25 @@ export interface DescribeSparkAppJobResponse {
 }
 
 /**
+ * UDF权限信息
+ */
+export interface UDFPolicyInfo {
+  /**
+   * 权限类型
+示例：select，alter，drop
+   */
+  Accesses?: Array<string>
+  /**
+   * 拥有权限的用户信息
+   */
+  Users?: Array<string>
+  /**
+   * 拥有权限的工作组的信息
+   */
+  Groups?: Array<string>
+}
+
+/**
  * DescribeNotebookSessionStatement返回参数结构体
  */
 export interface DescribeNotebookSessionStatementResponse {
@@ -10568,6 +10767,28 @@ export interface DescribeNotebookSessionStatementResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateUDFPolicy请求参数结构体
+ */
+export interface UpdateUDFPolicyRequest {
+  /**
+   * UDF名称
+   */
+  Name: string
+  /**
+   * 数据库名
+   */
+  DatabaseName: string
+  /**
+   * 数据目录名
+   */
+  CatalogName: string
+  /**
+   * UDF权限信息
+   */
+  UDFPolicyInfos: Array<UDFPolicyInfo>
 }
 
 /**
@@ -10881,6 +11102,24 @@ export interface QueryTaskCostDetailResponse {
    * 返回的数据
    */
   Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckLockMetaData返回参数结构体
+ */
+export interface CheckLockMetaDataResponse {
+  /**
+   * 锁ID
+   */
+  LockId?: number
+  /**
+   * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
+   */
+  LockState?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11411,21 +11650,41 @@ export interface DMSColumnOrder {
 }
 
 /**
- * DescribeViews返回参数结构体
+ * 元数据加锁内容
  */
-export interface DescribeViewsResponse {
+export interface LockComponentInfo {
   /**
-   * 视图对象列表。
+   * 数据库名称
    */
-  ViewList?: Array<ViewResponseInfo>
+  DbName: string
   /**
-   * 实例总数。
+   * 表名称
    */
-  TotalCount?: number
+  TableName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分区
    */
-  RequestId?: string
+  Partition?: string
+  /**
+   * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
+   */
+  LockType?: string
+  /**
+   * 锁级别：DB、TABLE、PARTITION
+   */
+  LockLevel?: string
+  /**
+   * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
+   */
+  DataOperationType?: string
+  /**
+   * 是否保持Acid
+   */
+  IsAcid?: boolean
+  /**
+   * 是否动态分区写
+   */
+  IsDynamicPartitionWrite?: boolean
 }
 
 /**
@@ -11514,6 +11773,27 @@ export interface CreateNotebookSessionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据脱敏策略权限对象
+ */
+export interface DataMaskStrategyPolicy {
+  /**
+   * 数据脱敏权限对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyInfo?: Policy
+  /**
+   * 数据脱敏策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataMaskStrategyId?: string
+  /**
+   * 绑定字段类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnType?: string
 }
 
 /**
@@ -11716,6 +11996,16 @@ export interface DescribeEngineNodeSpecResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorSpec?: Array<SpecInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AttachDataMaskPolicy返回参数结构体
+ */
+export interface AttachDataMaskPolicyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

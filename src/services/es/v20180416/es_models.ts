@@ -2946,6 +2946,11 @@ export interface NodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskEnhance?: number
+  /**
+   * 节点Gpu信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuInfo?: GpuInfo
 }
 
 /**
@@ -3757,6 +3762,10 @@ RENEW_FLAG_DEFAULT：不自动续费
    * kibana内网访问地址
    */
   ShowKibanaIpPort?: string
+  /**
+   * 是否为CDZLite可用区
+   */
+  IsCdzLite?: boolean
 }
 
 /**
@@ -5259,6 +5268,20 @@ export interface DescribeDiagnoseRequest {
    * 报告返回份数
    */
   Limit?: number
+}
+
+/**
+ * 节点Gpu信息
+ */
+export interface GpuInfo {
+  /**
+   * Gpu块数
+   */
+  GpuCount?: number
+  /**
+   * Gpu类型
+   */
+  GpuType?: string
 }
 
 /**

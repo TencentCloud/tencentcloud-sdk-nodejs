@@ -20,13 +20,17 @@
  */
 export interface CreatePrivilegeCodeRequest {
   /**
+   * 必填；设备唯一标识符;
+   */
+  Mid: string
+  /**
    * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
   DomainInstanceId?: string
   /**
-   * 必填；设备唯一标识符;
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios ）；默认值0
    */
-  Mid?: string
+  OsType?: number
 }
 
 /**
@@ -360,6 +364,10 @@ export interface DescribeDeviceHardwareInfoItem {
    * 显示器品牌型号
    */
   Monitor?: string
+  /**
+   * 终端备注名
+   */
+  RemarkName?: string
 }
 
 /**
@@ -904,23 +912,23 @@ export interface DescribeSoftwareInformationRequest {
  */
 export interface CreateDeviceVirtualGroupRequest {
   /**
+   * 必填，终端自定义分组名
+   */
+  DeviceVirtualGroupName: string
+  /**
    * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
   DomainInstanceId?: string
-  /**
-   * 必填，终端自定义分组名
-   */
-  DeviceVirtualGroupName?: string
   /**
    * 详情
    */
   Description?: string
   /**
-   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios ）(只支持32位)
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios ； 默认值0）(只支持32位)
    */
   OsType?: number
   /**
-   * 必填，分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组）(只支持32位)
+   * 分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组； 默认值0）(只支持32位)
    */
   TimeType?: number
   /**
@@ -1515,6 +1523,10 @@ export interface RuleExpression {
  */
 export interface ModifyVirtualDeviceGroupsRequest {
   /**
+   * 必填，操作的设备列表数据
+   */
+  DeviceList: Array<ModifyVirtualDeviceGroupsReqItem>
+  /**
    * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
   DomainInstanceId?: string
@@ -1523,15 +1535,11 @@ export interface ModifyVirtualDeviceGroupsRequest {
    */
   DeviceVirtualGroupId?: number
   /**
-   * 必填，操作的设备列表数据
-   */
-  DeviceList?: Array<ModifyVirtualDeviceGroupsReqItem>
-  /**
    * 要添加的终端自定义分组id列表
    */
   DeviceVirtualGroupIds?: Array<number | bigint>
   /**
-   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
    */
   OsType?: number
 }
@@ -1737,7 +1745,6 @@ export interface CreateDLPFileDetectionTaskRequest {
 export interface CreatePrivilegeCodeResponse {
   /**
    * 业务响应数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CreatePrivilegeCodeRspData
   /**

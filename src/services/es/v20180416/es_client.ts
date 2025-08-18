@@ -190,6 +190,7 @@ import {
   CreateServerlessInstanceResponse,
   ServerlessIndexSettingsField,
   DescribeDiagnoseRequest,
+  GpuInfo,
   DescribeInstancePluginListResponse,
   DiSourceCvm,
   CosSnapShotInfo,

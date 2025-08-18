@@ -194,6 +194,7 @@ import {
   Cluster,
   RocketMQMsgLog,
   CreateRocketMQClusterResponse,
+  ExecuteDisasterRecoveryRequest,
   DeleteRocketMQNamespaceResponse,
   CreateRocketMQTopicRequest,
   DescribeRocketMQVipInstancesResponse,
@@ -298,6 +299,7 @@ import {
   ConsumersSchedule,
   DescribeRocketMQClustersResponse,
   TraceResult,
+  ExecuteDisasterRecoveryResponse,
   DescribeRabbitMQQueuesRequest,
   SendMsgRequest,
   DescribeRocketMQEnvironmentRolesResponse,
@@ -739,6 +741,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRocketMQTopicResponse) => void
   ): Promise<ModifyRocketMQTopicResponse> {
     return this.request("ModifyRocketMQTopic", req, cb)
+  }
+
+  /**
+   * 执行域名异地访问切换，域名的访问指向将切换至备份集群。
+   */
+  async ExecuteDisasterRecovery(
+    req?: ExecuteDisasterRecoveryRequest,
+    cb?: (error: string, rep: ExecuteDisasterRecoveryResponse) => void
+  ): Promise<ExecuteDisasterRecoveryResponse> {
+    return this.request("ExecuteDisasterRecovery", req, cb)
   }
 
   /**

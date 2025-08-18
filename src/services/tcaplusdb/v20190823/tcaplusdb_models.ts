@@ -21,12 +21,10 @@
 export interface ImportSnapshotsResponse {
   /**
    * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
    * ApplicationId由 AppInstanceId-applicationId 组成，以区分不同集群的申请
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
   /**
@@ -41,44 +39,36 @@ export interface ImportSnapshotsResponse {
 export interface CompareTablesInfo {
   /**
    * 源表格的集群id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SrcTableClusterId: string
+  SrcTableClusterId?: string
   /**
    * 源表格的表格组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SrcTableGroupId: string
+  SrcTableGroupId?: string
   /**
    * 源表格的表名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SrcTableName: string
+  SrcTableName?: string
   /**
    * 目标表格的集群id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DstTableClusterId: string
+  DstTableClusterId?: string
   /**
    * 目标表格的表格组id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DstTableGroupId: string
+  DstTableGroupId?: string
   /**
    * 目标表格的表名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DstTableName: string
+  DstTableName?: string
   /**
    * 源表格的实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SrcTableInstanceId: string
+  SrcTableInstanceId?: string
   /**
    * 目标表格的实例id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DstTableInstanceId: string
+  DstTableInstanceId?: string
 }
 
 /**
@@ -167,59 +157,48 @@ export interface DeleteTableIndexResponse {
 export interface TableRollbackResultNew {
   /**
    * 表格实例ID，形如：tcaplus-3be64cbb
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInstanceId: string
+  TableInstanceId?: string
   /**
    * 任务ID，对于创建单任务的接口有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 表格数据结构类型，如：`GENERIC`或`LIST`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableType: string
+  TableType?: string
   /**
    * 表格数据描述语言（IDL）类型，如：`PROTO`或`TDR`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableIdlType: string
+  TableIdlType?: string
   /**
    * 表格所属表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
   /**
    * 任务ID列表，对于创建多任务的接口有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskIds: Array<string>
+  TaskIds?: Array<string>
   /**
    * 上传的key文件ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileId: string
+  FileId?: string
   /**
    * 校验成功Key数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccKeyNum: number
+  SuccKeyNum?: number
   /**
    * Key文件中包含总的Key数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalKeyNum: number
+  TotalKeyNum?: number
 }
 
 /**
@@ -229,11 +208,11 @@ export interface DescribeBackupRecordsResponse {
   /**
    * 备份记录详情
    */
-  BackupRecords: Array<BackupRecords>
+  BackupRecords?: Array<BackupRecords>
   /**
    * 返回记录条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -269,19 +248,19 @@ export interface RegionInfo {
   /**
    * 地域Ap-Code
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 地域缩写
    */
-  RegionAbbr: string
+  RegionAbbr?: string
   /**
    * 地域ID
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 是否支持ipv6，0:不支持，1:支持
    */
-  Ipv6Enable: number
+  Ipv6Enable?: number
 }
 
 /**
@@ -309,11 +288,11 @@ export interface ModifySnapshotsResponse {
   /**
    * 批量修改的快照数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 批量修改的快照结果列表
    */
-  TableResults: Array<SnapshotResult>
+  TableResults?: Array<SnapshotResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -326,7 +305,6 @@ export interface ModifySnapshotsResponse {
 export interface UpdateApplyResponse {
   /**
    * 已更新的申请单列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplyResults?: Array<ApplyResult>
   /**
@@ -649,24 +627,20 @@ export interface DescribeSnapshotsRequest {
 export interface TagsInfoOfTableGroup {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<TagInfoUnit>
+  Tags?: Array<TagInfoUnit>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
 }
 
 /**
@@ -676,11 +650,11 @@ export interface DescribeApplicationsResponse {
   /**
    * 申请单列表
    */
-  Applications: Array<Application>
+  Applications?: Array<Application>
   /**
    * 申请单个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -729,29 +703,24 @@ export interface ModifyClusterMachineResponse {
 export interface TagsInfoOfTable {
   /**
    * 表格实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInstanceId: string
+  TableInstanceId?: string
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<TagInfoUnit>
+  Tags?: Array<TagInfoUnit>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
 }
 
 /**
@@ -822,23 +791,20 @@ export interface ModifyTableTagsRequest {
 export interface MergeTableResult {
   /**
    * 任务Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 成功时此字段返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
   /**
    * 对比的表格信息
    */
-  Table: CompareTablesInfo
+  Table?: CompareTablesInfo
   /**
    * 申请单Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationId: string
+  ApplicationId?: string
 }
 
 /**
@@ -848,26 +814,23 @@ export interface ApplyResult {
   /**
    * 申请单id
    */
-  ApplicationId: string
+  ApplicationId?: string
   /**
    * 申请类型
    */
-  ApplicationType: number
+  ApplicationType?: number
   /**
    * 处理状态 0-待审核 1-已经审核并提交任务 2-已驳回
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationStatus: number
+  ApplicationStatus?: number
   /**
    * 已提交的任务Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
 }
 
 /**
@@ -925,78 +888,71 @@ export interface Application {
   /**
    * 审批单号
    */
-  ApplicationId: string
+  ApplicationId?: string
   /**
    * 申请类型
    */
-  ApplicationType: number
+  ApplicationType?: number
   /**
    * 集群Id
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 表格组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupName: string
+  TableGroupName?: string
   /**
    * 表格名称
    */
-  TableName: string
+  TableName?: string
   /**
    * 申请人
    */
-  Applicant: string
+  Applicant?: string
   /**
    * 建单时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 处理状态 -1 撤回 0-待审核 1-已经审核并提交任务 2-已驳回
    */
-  ApplicationStatus: number
+  ApplicationStatus?: number
   /**
    * 表格组Id
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 已提交的任务Id，未提交申请为0
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 腾讯云上table的唯一键
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInstanceId: string
+  TableInstanceId?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 审批人
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecuteUser: string
+  ExecuteUser?: string
   /**
    * 执行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecuteStatus: string
+  ExecuteStatus?: string
   /**
    * 该申请单是否可以被当前用户审批
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CanCensor: boolean
+  CanCensor?: boolean
   /**
    * 该申请单是否可以被当前用户撤回
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CanWithdrawal: boolean
+  CanWithdrawal?: boolean
 }
 
 /**
@@ -1067,57 +1023,46 @@ export interface ModifyTableTagsResponse {
 export interface SnapshotResult {
   /**
    * 表格所属表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 任务ID，对于创建单任务的接口有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
   /**
    * 快照名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotName: string
+  SnapshotName?: string
   /**
    * 快照的时间点
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotTime: string
+  SnapshotTime?: string
   /**
    * 快照的过期时间点
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotDeadTime: string
+  SnapshotDeadTime?: string
   /**
    * 快照创建时间点
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotCreateTime: string
+  SnapshotCreateTime?: string
   /**
    * 快照大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotSize: number
+  SnapshotSize?: number
   /**
    * 快照状态，0 生成中 1 正常 2 删除中 3 已失效 4 回档使用中
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotStatus: number
+  SnapshotStatus?: number
   /**
    * 申请单ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
 }
@@ -1147,139 +1092,123 @@ export interface ClusterInfo {
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群所在地域
    */
-  Region: string
+  Region?: string
   /**
    * 集群数据描述语言类型，如：`PROTO`,`TDR`
    */
-  IdlType: string
+  IdlType?: string
   /**
    * 网络类型
    */
-  NetworkType: string
+  NetworkType?: string
   /**
    * 集群关联的用户私有网络实例ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 集群关联的用户子网实例ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 集群密码
    */
-  Password: string
+  Password?: string
   /**
    * 密码状态
    */
-  PasswordStatus: string
+  PasswordStatus?: string
   /**
    * TcaplusDB SDK连接参数，接入ID
    */
-  ApiAccessId: string
+  ApiAccessId?: string
   /**
    * TcaplusDB SDK连接参数，接入地址
    */
-  ApiAccessIp: string
+  ApiAccessIp?: string
   /**
    * TcaplusDB SDK连接参数，接入端口
    */
-  ApiAccessPort: number
+  ApiAccessPort?: number
   /**
    * 如果PasswordStatus是unmodifiable说明有旧密码还未过期，此字段将显示旧密码过期的时间，否则为空
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldPasswordExpireTime: string
+  OldPasswordExpireTime?: string
   /**
    * TcaplusDB SDK连接参数，接入ipv6地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApiAccessIpv6: string
+  ApiAccessIpv6?: string
   /**
    * 集群类型，0,1:共享集群; 2:独立集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterType: number
+  ClusterType?: number
   /**
    * 集群状态, 0：表示正常运行中，1：表示冻结隔离一般欠费进入此状态，2：表示待回收，一般用户主动触发删除进入这个状态，3：待释放，进入这个状态，表示可以释放此表占用的资源了，4：变更中
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterStatus: number
+  ClusterStatus?: number
   /**
    * 读CU
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadCapacityUnit: number
+  ReadCapacityUnit?: number
   /**
    * 写CU
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  WriteCapacityUnit: number
+  WriteCapacityUnit?: number
   /**
    * 磁盘容量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskVolume: number
+  DiskVolume?: number
   /**
    * 独占server机器信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerList: Array<ServerDetailInfo>
+  ServerList?: Array<ServerDetailInfo>
   /**
    * 独占proxy机器信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyList: Array<ProxyDetailInfo>
+  ProxyList?: Array<ProxyDetailInfo>
   /**
    * 是否开启审核 0-不开启 1-开启
    */
-  Censorship: number
+  Censorship?: number
   /**
    * 审批人uin列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DbaUins: Array<string>
+  DbaUins?: Array<string>
   /**
    * 是否开启了数据订阅
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataFlowStatus: number
+  DataFlowStatus?: number
   /**
    * 数据订阅的kafka信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  KafkaInfo: KafkaInfo
+  KafkaInfo?: KafkaInfo
   /**
    * 集群Txh备份文件多少天后过期删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TxhBackupExpireDay: number
+  TxhBackupExpireDay?: number
   /**
    * 集群Ulog备份文件多少天后过期删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UlogBackupExpireDay: number
+  UlogBackupExpireDay?: number
   /**
    * 集群Ulog备份文件过期策略是否为只读， 0： UlogBackupExpire是只读，不可修改， 1： UlogBackupExpire可以修改（当前业务存在Svrid第二段等于clusterid的机器）
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsReadOnlyUlogBackupExpireDay: number
+  IsReadOnlyUlogBackupExpireDay?: number
   /**
    * restproxy状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RestProxyStatus: number
+  RestProxyStatus?: number
 }
 
 /**
@@ -1348,7 +1277,6 @@ export interface DeleteSnapshotsRequest {
 export interface ModifyTableGroupTagsResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
@@ -1395,12 +1323,10 @@ export interface CreateSnapshotsRequest {
 export interface DescribeTableGroupTagsResponse {
   /**
    * 表格组标签信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rows?: Array<TagsInfoOfTableGroup>
   /**
    * 返回结果个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1484,11 +1410,11 @@ export interface DeleteSnapshotsResponse {
   /**
    * 批量删除的快照数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 批量删除的快照结果
    */
-  TableResults: Array<SnapshotResult>
+  TableResults?: Array<SnapshotResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1597,16 +1523,15 @@ export interface ModifyCensorshipResponse {
   /**
    * 集群id
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 已加入审批人的uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uins: Array<string>
+  Uins?: Array<string>
   /**
    * 集群是否开启审核 0-关闭 1-开启
    */
-  Censorship: number
+  Censorship?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1806,7 +1731,6 @@ export interface MergeTablesInfo {
 export interface ModifyClusterTagsResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
@@ -1821,12 +1745,10 @@ export interface ModifyClusterTagsResponse {
 export interface DescribeClusterTagsResponse {
   /**
    * 集群标签信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rows?: Array<TagsInfoOfCluster>
   /**
    * 返回结果个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1841,19 +1763,16 @@ export interface DescribeClusterTagsResponse {
 export interface TagsInfoOfCluster {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<TagInfoUnit>
+  Tags?: Array<TagInfoUnit>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
 }
 
 /**
@@ -1913,11 +1832,11 @@ export interface ServerMachineInfo {
   /**
    * 机器唯一id
    */
-  ServerUid: string
+  ServerUid?: string
   /**
    * 机器类型
    */
-  MachineType: string
+  MachineType?: string
 }
 
 /**
@@ -1927,11 +1846,11 @@ export interface CreateSnapshotsResponse {
   /**
    * 批量创建的快照数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 批量创建的快照结果列表
    */
-  TableResults: Array<SnapshotResult>
+  TableResults?: Array<SnapshotResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1958,9 +1877,8 @@ export interface SetBackupExpireRuleRequest {
 export interface DeleteBackupRecordsResponse {
   /**
    * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1989,12 +1907,10 @@ export interface IdlFileInfo {
   FileSize: number
   /**
    * 文件ID，对于已上传的文件有意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileId?: number
   /**
    * 文件内容，对于本次新上传的文件有意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileContent?: string
 }
@@ -2027,7 +1943,6 @@ export interface TagInfoUnit {
   TagKey: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
 }
@@ -2079,32 +1994,31 @@ export interface ServerDetailInfo {
   /**
    * svr唯一id
    */
-  ServerUid: string
+  ServerUid?: string
   /**
    * 机器类型
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 内存占用量
    */
-  MemoryRate: number
+  MemoryRate?: number
   /**
    * 磁盘占用量
    */
-  DiskRate: number
+  DiskRate?: number
   /**
    * 读次数
    */
-  ReadNum: number
+  ReadNum?: number
   /**
    * 写次数
    */
-  WriteNum: number
+  WriteNum?: number
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
 }
 
 /**
@@ -2113,149 +2027,120 @@ export interface ServerDetailInfo {
 export interface TableInfoNew {
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 表格实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInstanceId: string
+  TableInstanceId?: string
   /**
    * 表格数据结构类型，如：`GENERIC`或`LIST`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableType: string
+  TableType?: string
   /**
    * 表格数据描述语言（IDL）类型，如：`PROTO`或`TDR`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableIdlType: string
+  TableIdlType?: string
   /**
    * 表格所属集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 表格所属集群名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 表格所属表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 表格所属表格组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupName: string
+  TableGroupName?: string
   /**
    * 表格主键字段结构json字符串
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyStruct: string
+  KeyStruct?: string
   /**
    * 表格非主键字段结构json字符串
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValueStruct: string
+  ValueStruct?: string
   /**
    * 表格分表因子集合，对PROTO类型表格有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShardingKeySet: string
+  ShardingKeySet?: string
   /**
    * 表格索引键字段集合，对PROTO类型表格有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexStruct: string
+  IndexStruct?: string
   /**
    * LIST类型表格元素个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListElementNum: number
+  ListElementNum?: number
   /**
    * 表格所关联IDL文件信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdlFiles: Array<IdlFileInfo>
+  IdlFiles?: Array<IdlFileInfo>
   /**
    * 表格预留容量（GB）
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReservedVolume: number
+  ReservedVolume?: number
   /**
    * 表格预留读CU
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReservedReadQps: number
+  ReservedReadQps?: number
   /**
    * 表格预留写CU
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReservedWriteQps: number
+  ReservedWriteQps?: number
   /**
    * 表格实际数据量大小（MB）
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableSize: number
+  TableSize?: number
   /**
    * 表格状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 表格创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 表格最后一次修改时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 表格备注信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Memo: string
+  Memo?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
   /**
    * TcaplusDB SDK数据访问接入ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApiAccessId: string
+  ApiAccessId?: string
   /**
    * SORTLIST类型表格排序字段个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SortFieldNum: number
+  SortFieldNum?: number
   /**
    * SORTLIST类型表格排序顺序
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SortRule: number
+  SortRule?: number
   /**
    * 表格分布式索引/缓写、kafka数据订阅信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DbClusterInfoStruct: string
+  DbClusterInfoStruct?: string
   /**
    * 表格Txh备份文件多少天后过期删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TxhBackupExpireDay: number
+  TxhBackupExpireDay?: number
   /**
    * 表格的缓写信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SyncTableInfo: SyncTableInfo
+  SyncTableInfo?: SyncTableInfo
 }
 
 /**
@@ -2265,56 +2150,53 @@ export interface TaskInfoNew {
   /**
    * 任务ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务类型
    */
-  TaskType: string
+  TaskType?: string
   /**
    * 任务所关联的TcaplusDB内部事务ID
    */
-  TransId: string
+  TransId?: string
   /**
    * 任务所属集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 任务所属集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 任务进度
    */
-  Progress: number
+  Progress?: number
   /**
    * 任务创建时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 任务最后更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 操作者
    */
-  Operator: string
+  Operator?: string
   /**
    * 任务详情
    */
-  Content: string
+  Content?: string
   /**
    * 表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableGroupId?: string
   /**
    * 表格组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableGroupName?: string
   /**
    * 表名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
 }
@@ -2326,47 +2208,47 @@ export interface SyncTableInfo {
   /**
    * 目标缓写表的分表数目
    */
-  TargetTableSplitNum: number
+  TargetTableSplitNum?: number
   /**
    * 目标缓写表名前缀
    */
-  TargetTableNamePrefix: Array<string>
+  TargetTableNamePrefix?: Array<string>
   /**
    * 缓写数据库实例ID
    */
-  TargetSyncDBInstanceId: string
+  TargetSyncDBInstanceId?: string
   /**
    * 缓写表所在数据库名称
    */
-  TargetDatabaseName: string
+  TargetDatabaseName?: string
   /**
    * 缓写状态，0：创建中，1：进行中，2：关闭，-1：被删除
    */
-  Status: number
+  Status?: number
   /**
    * 表格所在集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 表格所在表格组ID
    */
-  TableGroupId: number
+  TableGroupId?: number
   /**
    * 表格名称
    */
-  TableName: string
+  TableName?: string
   /**
    * 表格ID
    */
-  TableId: string
+  TableId?: string
   /**
    * TcaplusDB表主键字段到目标缓写表字段的映射
    */
-  KeyFieldMapping: Array<SyncTableField>
+  KeyFieldMapping?: Array<SyncTableField>
   /**
    * TcaplusDB表字段到目标缓写表字段的映射
    */
-  ValueFieldMapping: Array<SyncTableField>
+  ValueFieldMapping?: Array<SyncTableField>
 }
 
 /**
@@ -2389,14 +2271,12 @@ export interface DeleteIdlFilesRequest {
 export interface CreateBackupResponse {
   /**
    * 创建的备份任务ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskIds: Array<string>
+  TaskIds?: Array<string>
   /**
    * 创建的备份申请ID列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationIds: Array<string>
+  ApplicationIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2486,11 +2366,11 @@ export interface DescribeSnapshotsResponse {
   /**
    * 快照数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 快照结果列表
    */
-  TableResults: Array<SnapshotResult>
+  TableResults?: Array<SnapshotResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2503,9 +2383,8 @@ export interface DescribeSnapshotsResponse {
 export interface SetBackupExpireRuleResponse {
   /**
    * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2684,34 +2563,28 @@ export interface DescribeTablesRequest {
 export interface KafkaInfo {
   /**
    * Kafka address
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address: string
+  Address?: string
   /**
    * Kafka topic
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Topic: string
+  Topic?: string
   /**
    * kafka username
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  User: string
+  User?: string
   /**
    * kafka password
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Password: string
+  Password?: string
   /**
    * ckafka实例
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Instance: string
+  Instance?: string
   /**
    * 是否走VPC
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsVpc: number
+  IsVpc?: number
 }
 
 /**
@@ -2802,94 +2675,76 @@ export interface SnapshotInfo {
 export interface ParsedTableInfoNew {
   /**
    * 表格描述语言类型：`PROTO`或`TDR`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableIdlType: string
+  TableIdlType?: string
   /**
    * 表格实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInstanceId: string
+  TableInstanceId?: string
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 表格数据结构类型：`GENERIC`或`LIST`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableType: string
+  TableType?: string
   /**
    * 主键字段信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyFields: string
+  KeyFields?: string
   /**
    * 原主键字段信息，改表校验时有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldKeyFields: string
+  OldKeyFields?: string
   /**
    * 非主键字段信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValueFields: string
+  ValueFields?: string
   /**
    * 原非主键字段信息，改表校验时有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldValueFields: string
+  OldValueFields?: string
   /**
    * 所属表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 主键字段总大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SumKeyFieldSize: number
+  SumKeyFieldSize?: number
   /**
    * 非主键字段总大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SumValueFieldSize: number
+  SumValueFieldSize?: number
   /**
    * 索引键集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexKeySet: string
+  IndexKeySet?: string
   /**
    * 分表因子集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShardingKeySet: string
+  ShardingKeySet?: string
   /**
    * TDR版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TdrVersion: number
+  TdrVersion?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
   /**
    * LIST类型表格元素个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListElementNum: number
+  ListElementNum?: number
   /**
    * SORTLIST类型表格排序字段个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SortFieldNum: number
+  SortFieldNum?: number
   /**
    * SORTLIST类型表格排序顺序
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SortRule: number
+  SortRule?: number
 }
 
 /**
@@ -2948,49 +2803,40 @@ export interface CreateBackupRequest {
 export interface TableResultNew {
   /**
    * 表格实例ID，形如：tcaplus-3be64cbb
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInstanceId: string
+  TableInstanceId?: string
   /**
    * 任务ID，对于创建单任务的接口有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 表格数据结构类型，如：`GENERIC`或`LIST`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableType: string
+  TableType?: string
   /**
    * 表数据描述语言（IDL）类型，如：`PROTO`或`TDR`
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableIdlType: string
+  TableIdlType?: string
   /**
    * 表格所属表格组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
   /**
    * 任务ID列表，对于创建多任务的接口有效
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskIds: Array<string>
+  TaskIds?: Array<string>
   /**
    * 腾讯云申请审核单Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationId: string
+  ApplicationId?: string
 }
 
 /**
@@ -3160,23 +3006,23 @@ export interface PoolInfo {
   /**
    * 唯一id
    */
-  PoolUid: number
+  PoolUid?: number
   /**
    * 是否支持ipv6
    */
-  Ipv6Enable: number
+  Ipv6Enable?: number
   /**
    * 剩余可用app
    */
-  AvailableAppCount: number
+  AvailableAppCount?: number
   /**
    * svr机器列表
    */
-  ServerList: Array<ServerMachineInfo>
+  ServerList?: Array<ServerMachineInfo>
   /**
    * proxy机器列表
    */
-  ProxyList: Array<ProxyMachineInfo>
+  ProxyList?: Array<ProxyMachineInfo>
 }
 
 /**
@@ -3245,28 +3091,27 @@ export interface ProxyDetailInfo {
   /**
    * proxy的唯一id
    */
-  ProxyUid: string
+  ProxyUid?: string
   /**
    * 机器类型
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 请求包速度
    */
-  ProcessSpeed: number
+  ProcessSpeed?: number
   /**
    * 请求包时延
    */
-  AverageProcessDelay: number
+  AverageProcessDelay?: number
   /**
    * 慢处理包速度
    */
-  SlowProcessSpeed: number
+  SlowProcessSpeed?: number
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
 }
 
 /**
@@ -3275,34 +3120,28 @@ export interface ProxyDetailInfo {
 export interface IdlFileInfoWithoutContent {
   /**
    * 文件名称，不包含扩展名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileName: string
+  FileName?: string
   /**
    * 数据描述语言（IDL）类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileType: string
+  FileType?: string
   /**
    * 文件扩展名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileExtType: string
+  FileExtType?: string
   /**
    * 文件大小（Bytes）
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileSize: number
+  FileSize?: number
   /**
    * 文件ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileId: number
+  FileId?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Error: ErrorInfo
+  Error?: ErrorInfo
 }
 
 /**
@@ -3458,11 +3297,11 @@ export interface ErrorInfo {
   /**
    * 错误码
    */
-  Code: string
+  Code?: string
   /**
    * 错误信息
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -3472,40 +3311,37 @@ export interface TableGroupInfo {
   /**
    * 表格组ID
    */
-  TableGroupId: string
+  TableGroupId?: string
   /**
    * 表格组名称
    */
-  TableGroupName: string
+  TableGroupName?: string
   /**
    * 表格组创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 表格组包含的表格数量
    */
-  TableCount: number
+  TableCount?: number
   /**
    * 表格组包含的表格存储总量（MB）
    */
-  TotalSize: number
+  TotalSize?: number
   /**
    * 表格Txh备份文件多少天后过期删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  TxhBackupExpireDay: number
+  TxhBackupExpireDay?: number
   /**
    * 是否开启mysql负载均衡,0未开启 1开启中 2已开启
    */
-  EnableMysql: number
+  EnableMysql?: number
   /**
    * mysql负载均衡vip
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MysqlConnIp: string
+  MysqlConnIp?: string
   /**
    * mysql负载均衡vport
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MysqlConnPort: number
+  MysqlConnPort?: number
 }

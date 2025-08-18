@@ -564,11 +564,11 @@ export interface InvokeChainMakerDemoContractRequest {
    */
   ContractName: string
   /**
-   * 合约方法名
+   * 合约方法名，由合约代码定义，可以参考合约详情中的合约调用定义
    */
   FuncName: string
   /**
-   * 合约方法入参，json格式字符串，key/value都是string类型的map
+   * 合约方法入参，json格式字符串，key/value都是string类型的map，由合约代码定义，可以参考合约详情中的合约调用定义
    */
   FuncParam?: string
   /**
@@ -912,11 +912,11 @@ export interface QueryChainMakerDemoContractRequest {
    */
   ContractName: string
   /**
-   * 合约方法名
+   * 合约方法名，由合约代码定义，可以参考合约详情中的合约调用定义
    */
   FuncName: string
   /**
-   * 合约方法入参，json格式字符串，key/value都是string类型的map
+   * 合约方法入参，json格式字符串，key/value都是string类型的map，由合约代码定义，可以参考合约详情中的合约调用定义
    */
   FuncParam?: string
 }
@@ -1312,11 +1312,11 @@ export interface QueryChainMakerContractRequest {
    */
   ContractName: string
   /**
-   * 合约方法名
+   * 合约方法名，由合约代码定义
    */
   FuncName: string
   /**
-   * 合约方法入参，json格式字符串，key/value都是string类型的map
+   * 合约方法入参，json格式字符串，key/value都是string类型的map，由合约代码定义
    */
   FuncParam?: string
 }

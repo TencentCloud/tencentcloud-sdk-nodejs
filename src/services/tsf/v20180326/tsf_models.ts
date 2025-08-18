@@ -499,12 +499,12 @@ export interface TsfPageLicenseTag {
    * 记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 记录实体列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<LicenseTag>
+  Content?: Array<LicenseTag>
 }
 
 /**
@@ -4313,12 +4313,12 @@ export interface LicenseTag {
    * 许可ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LicenseId: string
+  LicenseId?: string
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4714,12 +4714,12 @@ export interface ContainerAdditionalResourceRequirement {
    * CPU 核数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cpu: string
+  Cpu?: string
   /**
    * 内存 MiB 数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Mem: string
+  Mem?: string
 }
 
 /**
@@ -5801,12 +5801,12 @@ export interface DescribeResourceConfigLicenseResource {
    * Name
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * Quota
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Quota: number
+  Quota?: number
 }
 
 /**
@@ -7608,7 +7608,7 @@ export interface DescribeResourceConfigClusterContainer {
    * 是否需要子网
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NeedSubnetWhenCreatingCluster: boolean
+  NeedSubnetWhenCreatingCluster?: boolean
 }
 
 /**
@@ -8326,15 +8326,15 @@ false：操作失败。
  */
 export interface DescribeResourceConfigLicenseFunction {
   /**
-   * name
+   * 功能名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
-   * enable
+   * 是否启用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enable: boolean
+  Enable?: boolean
 }
 
 /**
@@ -9733,7 +9733,7 @@ export interface VmInstanceResourceConfig {
    * 实例导入方式，可多个，公有云为 ["R", "M"]，独立版的取值仅有 "M" 脚本模式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImportMode: Array<string>
+  ImportMode?: Array<string>
 }
 
 /**
@@ -9980,7 +9980,7 @@ export interface DescribeResourceConfigSts {
    * uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
 }
 
 /**
@@ -11080,7 +11080,7 @@ export interface PackageConfig {
    * 程序包存储空间大小，单位字节
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpaceSize: number
+  SpaceSize?: number
 }
 
 /**
@@ -11225,17 +11225,17 @@ export interface ContainerInstanceResourceConfig {
    * 实例导入方式，可多个，公有云为 ["R"]，独立版的取值有 "M" 脚本模式、"S" SSH 模式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImportMode: Array<string>
+  ImportMode?: Array<string>
   /**
    * SSH 模式时，前端应该限制用户填这个数量的 master 主机信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterNumLimit: number
+  MasterNumLimit?: number
   /**
    * SSH 模式时，前端应该限制用户填的最高数量的 node 主机信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeNumLimitPerSetup: number
+  NodeNumLimitPerSetup?: number
 }
 
 /**
@@ -12849,27 +12849,27 @@ export interface DescribeResourceConfigLicense {
    * 功能
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Function: Array<DescribeResourceConfigLicenseFunction>
+  Function?: Array<DescribeResourceConfigLicenseFunction>
   /**
    * 资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Resource: Array<DescribeResourceConfigLicenseResource>
+  Resource?: Array<DescribeResourceConfigLicenseResource>
   /**
    * utc时间 单位秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: number
+  ExpireTime?: number
   /**
    * utc时间 单位秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Countdown: number
+  Countdown?: number
   /**
    * 规格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Spec: string
+  Spec?: string
 }
 
 /**
@@ -13946,7 +13946,7 @@ export interface InstanceEnrichedInfo {
  */
 export interface DescribeResourceTaskStatusRequest {
   /**
-   * 容器实例任务ID，可通过调用 ListContainerTask 查询已创建的变更记录总数或登录控制台进行查看。
+   * 容器实例任务ID，可通过调用 [DeployContainerGroup](https://cloud.tencent.com/document/product/649/120669) 部署容器应用，查询其返回内容中的任务ID。
    */
   TaskId: string
 }
@@ -14425,7 +14425,8 @@ DUAL_STATUS_WRITE_REGISTRATION_OFF 双写&&双注册关闭
  */
 export interface DeleteContainerGroupRequest {
   /**
-   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或[登录控制台](https://console.cloud.tencent.com/tsf/app-group-docker-detail?rid=1&id=group-aedpen6v)
+进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
 }
