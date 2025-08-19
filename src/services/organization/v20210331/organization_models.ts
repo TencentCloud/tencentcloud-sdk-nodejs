@@ -2166,42 +2166,49 @@ export interface GetTaskStatusResponse {
 }
 
 /**
- * CAM用户同步信息
+ * SAML 签名证书信息
  */
-export interface UserSyncProvisioning {
+export interface SAMLIdPCertificate {
   /**
-   * 描述。
+   * 证书序列号。
    */
-  Description?: string
+  SerialNumber?: string
   /**
-   * CAM 用户同步的身份 ID。取值：
-当PrincipalType取值为Group时，该值为CIC用户组 ID（g-********）。
-当PrincipalType取值为User时，该值为CIC用户 ID（u-********）。
+   * 证书颁发者。
    */
-  PrincipalId?: string
+  Issuer?: string
   /**
-   * CAM 用户同步的身份类型。取值：
-
-User：表示该 CAM 用户同步的身份是CIC用户。
-Group：表示该 CAM 用户同步的身份是CIC用户组。
+   * 证书版本。
    */
-  PrincipalType?: string
+  Version?: number
   /**
-   * 同步的集团账号目标账号的UIN。
+   * 证书ID。
    */
-  TargetUin?: number
+  CertificateId?: string
   /**
-   * 冲突策略。当CIC 用户同步到 CAM 时，如果 CAM 中存在同名用户时的处理策略。取值： KeepBoth：两者都保留。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则对CIC 用户的用户名添加后缀_cic后尝试创建该用户名的 CAM 用户。 TakeOver：替换。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则直接将已经存在的 CAM 用户替换为CIC 同步用户。
+   * PEM 格式的公钥证书（Base64 编码）。
    */
-  DuplicationStrategy?: string
+  PublicKey?: string
   /**
-   * 删除策略。删除 CAM 用户同步时，对已同步的 CAM 用户的处理策略。取值： Delete：删除。删除 CAM 用户同步时，会删除从CIC 已经同步到 CAM 中的 CAM 用户。 Keep：保留。删除 RAM 用户同步时，会保留从CIC 已经同步到 CAM 中的 CAM 用户。
+   * 证书的签名算法。
    */
-  DeletionStrategy?: string
+  SignatureAlgorithm?: string
   /**
-   * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号
+   * 证书的过期时间。
    */
-  TargetType?: string
+  NotAfter?: string
+  /**
+   * 证书的创建时间。
+   */
+  NotBefore?: string
+  /**
+   * 证书的主体。
+   */
+  Subject?: string
+  /**
+   * PEM 格式的 X509 证书。
+   */
+  X509Certificate?: string
 }
 
 /**
@@ -2428,17 +2435,29 @@ export interface CancelOrganizationPolicySubAccountResponse {
 }
 
 /**
- * GetUserSyncProvisioning返回参数结构体
+ * DescribeOrganizationMembersAuthPolicy请求参数结构体
  */
-export interface GetUserSyncProvisioningResponse {
+export interface DescribeOrganizationMembersAuthPolicyRequest {
   /**
-   * CAM 用户同步信息。
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
-  UserProvisioning?: UserProvisioning
+  Offset: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 限制数目。取值范围：1~50。默认值：10。
    */
-  RequestId?: string
+  Limit: number
+  /**
+   * 成员uin。
+   */
+  MemberUin?: number
+  /**
+   * 集团管理员子账号uin。
+   */
+  OrgSubAccountUin?: number
+  /**
+   * 成员访问策略Id。
+   */
+  PolicyId?: number
 }
 
 /**
@@ -3686,49 +3705,56 @@ export interface CreateOrganizationMemberPolicyRequest {
 }
 
 /**
- * SAML 签名证书信息
+ * CAM用户同步信息
  */
-export interface SAMLIdPCertificate {
+export interface UserSyncProvisioning {
   /**
-   * 证书序列号。
+   * 描述。
    */
-  SerialNumber?: string
+  Description?: string
   /**
-   * 证书颁发者。
+   * CAM 用户同步的身份 ID。取值：
+当PrincipalType取值为Group时，该值为CIC用户组 ID（g-********）。
+当PrincipalType取值为User时，该值为CIC用户 ID（u-********）。
    */
-  Issuer?: string
+  PrincipalId?: string
   /**
-   * 证书版本。
+   * CAM 用户同步的身份类型。取值：
+
+User：表示该 CAM 用户同步的身份是CIC用户。
+Group：表示该 CAM 用户同步的身份是CIC用户组。
    */
-  Version?: number
+  PrincipalType?: string
   /**
-   * 证书ID。
+   * 同步的集团账号目标账号的UIN。
    */
-  CertificateId?: string
+  TargetUin?: number
   /**
-   * PEM 格式的公钥证书（Base64 编码）。
+   * 冲突策略。当CIC 用户同步到 CAM 时，如果 CAM 中存在同名用户时的处理策略。取值： KeepBoth：两者都保留。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则对CIC 用户的用户名添加后缀_cic后尝试创建该用户名的 CAM 用户。 TakeOver：替换。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则直接将已经存在的 CAM 用户替换为CIC 同步用户。
    */
-  PublicKey?: string
+  DuplicationStrategy?: string
   /**
-   * 证书的签名算法。
+   * 删除策略。删除 CAM 用户同步时，对已同步的 CAM 用户的处理策略。取值： Delete：删除。删除 CAM 用户同步时，会删除从CIC 已经同步到 CAM 中的 CAM 用户。 Keep：保留。删除 RAM 用户同步时，会保留从CIC 已经同步到 CAM 中的 CAM 用户。
    */
-  SignatureAlgorithm?: string
+  DeletionStrategy?: string
   /**
-   * 证书的过期时间。
+   * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号
    */
-  NotAfter?: string
+  TargetType?: string
+}
+
+/**
+ * GetUserSyncProvisioning返回参数结构体
+ */
+export interface GetUserSyncProvisioningResponse {
   /**
-   * 证书的创建时间。
+   * CAM 用户同步信息。
    */
-  NotBefore?: string
+  UserProvisioning?: UserProvisioning
   /**
-   * 证书的主体。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Subject?: string
-  /**
-   * PEM 格式的 X509 证书。
-   */
-  X509Certificate?: string
+  RequestId?: string
 }
 
 /**
@@ -4913,6 +4939,72 @@ export interface SAMLServiceProvider {
 }
 
 /**
+ * 组织成员访问授权策略
+ */
+export interface OrgMembersAuthPolicy {
+  /**
+   * 身份Id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityId?: number
+  /**
+   * 身份的角色名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityRoleName?: string
+  /**
+   * 身份的角色别名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityRoleAliasName?: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 成员访问策略Id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyId?: number
+  /**
+   * 成员访问策略名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyName?: string
+  /**
+   * 成员uin。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberUin?: number
+  /**
+   * 成员名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberName?: string
+  /**
+   * 子账号uin或者用户组Id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgSubAccountUin?: number
+  /**
+   * 子账号名称或者用户组名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgSubAccountName?: string
+  /**
+   * 绑定类型。1-子账号、2-用户组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindType?: number
+  /**
+   * 成员信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Members?: Array<MemberMainInfo>
+}
+
+/**
  * UpdateUserStatus返回参数结构体
  */
 export interface UpdateUserStatusResponse {
@@ -5649,6 +5741,26 @@ export interface CreateSCIMCredentialRequest {
    * 过期时间（秒），最小1小时，最大99年。如果不传则默认一年过期
    */
   ExpireDuration?: number
+}
+
+/**
+ * DescribeOrganizationMembersAuthPolicy返回参数结构体
+ */
+export interface DescribeOrganizationMembersAuthPolicyResponse {
+  /**
+   * 访问授权策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<OrgMembersAuthPolicy>
+  /**
+   * 总数目。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

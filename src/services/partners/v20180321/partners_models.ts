@@ -128,11 +128,11 @@ export interface DescribeAgentAuditedClientsRequest {
    */
   ClientRemark?: string
   /**
-   * 偏移量 请保持必传
+   * *偏移量 【请保持必传】
    */
   Offset?: number
   /**
-   * 限制数目 请保持必传，最大2000
+   * *限制数目 【请保持必传】最大2000
    */
   Limit?: number
   /**

@@ -1061,6 +1061,16 @@ export interface ChefHatAIResultInfo {
 }
 
 /**
+ * DescribeUserDeviceList请求参数结构体
+ */
+export interface DescribeUserDeviceListRequest {
+  /**
+   * 设备Id列表
+   */
+  DeviceIds: Array<string>
+}
+
+/**
  * UpdateGateway返回参数结构体
  */
 export interface UpdateGatewayResponse {
@@ -2064,17 +2074,17 @@ export interface RecordPlanOptData {
 }
 
 /**
- * 列举子任务列表
+ * DescribeUserDeviceList返回参数结构体
  */
-export interface ListSubTasksData {
+export interface DescribeUserDeviceListResponse {
   /**
-   * 子任务列表
+   * 返回结果
    */
-  List?: Array<SubTaskData>
+  Data?: DescribeDeviceListData
   /**
-   * 子任务数量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount?: number
+  RequestId?: string
 }
 
 /**
@@ -3482,6 +3492,16 @@ export interface ListAITaskData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<AITaskInfo>
+}
+
+/**
+ * 批量查询设备接口返回数据
+ */
+export interface DescribeDeviceListData {
+  /**
+   * 设备详情列表
+   */
+  List?: Array<DescribeDeviceData>
 }
 
 /**
@@ -5245,6 +5265,20 @@ export interface ListTasksData {
   List?: Array<TaskData>
   /**
    * 任务数量
+   */
+  TotalCount?: number
+}
+
+/**
+ * 列举子任务列表
+ */
+export interface ListSubTasksData {
+  /**
+   * 子任务列表
+   */
+  List?: Array<SubTaskData>
+  /**
+   * 子任务数量
    */
   TotalCount?: number
 }

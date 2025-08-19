@@ -284,19 +284,21 @@ export interface DeleteAlarmShieldRequest {
  */
 export interface DescribeLogContextRequest {
   /**
-   * 要查询的日志主题ID
+   * 要查询的日志主题Id。
+- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
    */
   TopicId: string
   /**
-   * 日志时间,  即SearchLog接口返回信息中Results结构体中的Time，需按照 UTC+8 时区将该毫秒级Unix时间戳转换为 YYYY-mm-dd HH:MM:SS.FFF 格式的字符串。
+   * 日志时间,  即 [检索分析日志](https://cloud.tencent.com/document/product/614/56447) 接口返回信息中Results结构体中的Time，需按照 UTC+8 时区将该毫秒级Unix时间戳转换为 YYYY-mm-dd HH:MM:SS.FFF 格式的字符串。
    */
   BTime: string
   /**
-   * 日志包序号，即SearchLog接口返回信息中Results结构体中的PkgId。
+   * 日志包序号，即 [检索分析日志](https://cloud.tencent.com/document/product/614/56447) 接口返回信息中Results结构体中的PkgId。
    */
   PkgId: string
   /**
-   * 日志包内一条日志的序号，即SearchLog接口返回信息中Results结构中的PkgLogId。
+   * 日志包内一条日志的序号，即 [检索分析日志](https://cloud.tencent.com/document/product/614/56447) 接口返回信息中Results结构中的PkgLogId。
    */
   PkgLogId: number
   /**
@@ -3507,11 +3509,13 @@ export interface AdvanceFilterRuleInfo {
  */
 export interface SplitPartitionRequest {
   /**
-   * 日志主题ID
+   * 日志主题Id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
   /**
-   * 待分裂分区ID
+   * 待分裂分区Id
+- 通过[获取分区列表](https://cloud.tencent.com/document/product/614/56470)获取待分裂分区Id。
    */
   PartitionId: number
   /**
@@ -5859,11 +5863,13 @@ export interface SearchLogErrors {
  */
 export interface ModifyIndexRequest {
   /**
-   * 日志主题ID
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   TopicId: string
   /**
-   * 默认不生效
+   * 索引状态。false：关闭索引， true：开启索引
+开启后可对日志进行检索分析，将产生索引流量、索引存储及相应费用。[费用详情](https://cloud.tencent.com/document/product/614/45802#.E8.AE.A1.E8.B4.B9.E9.A1.B9)
    */
   Status?: boolean
   /**

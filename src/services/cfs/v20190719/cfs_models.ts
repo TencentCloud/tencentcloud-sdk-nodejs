@@ -3211,7 +3211,7 @@ export interface DoDirectoryOperationRequest {
    */
   FileSystemId: string
   /**
-   * create：创建目录  check：确认目录是否存在
+   * create：创建目录  check：确认目录是否存在  move: 对目录做mv 操作
    */
   OpetationType: string
   /**
@@ -3222,4 +3222,8 @@ export interface DoDirectoryOperationRequest {
    * 创建目录的权限，若不传，默认为0755  若Operation Type为check，此值无实际意义
    */
   Mode?: string
+  /**
+   * mv操作的目标目录名称；如果是turbo文件系统必须以/cfs/开头
+   */
+  DestPath?: string
 }

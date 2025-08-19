@@ -147,6 +147,10 @@ export interface DescribeSoftCensusListByDeviceData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PiracyRisk?: number
+  /**
+   * 终端备注名
+   */
+  RemarkName?: string
 }
 
 /**
@@ -217,7 +221,6 @@ export interface ModifyVirtualDeviceGroupsReqItem {
 export interface DescribeSoftCensusListByDeviceResponse {
   /**
    * 业务响应数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DescribeSoftCensusListByDevicePageData
   /**
@@ -484,6 +487,10 @@ export interface CreatePrivilegeCodeRspData {
  * DescribeDeviceInfo请求参数结构体
  */
 export interface DescribeDeviceInfoRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
   /**
    * 终端id
    */
@@ -1078,6 +1085,10 @@ export interface Paging {
  */
 export interface CreateDeviceTaskRequest {
   /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
    * 终端id
    */
   Mid?: string
@@ -1491,13 +1502,17 @@ export interface GetAccountGroupData {
  */
 export interface DescribeSoftCensusListByDeviceRequest {
   /**
-   * 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios  ）
-   */
-  OsType?: number
-  /**
    * 必填，终端分组ID
    */
-  GroupId?: number
+  GroupId: number
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios  ）；默认值0
+   */
+  OsType?: number
   /**
    * 过滤条件、分页参数   <li>Name - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，终端名。</li> 	<li>UserName - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，终端用户名。</li> 	<li>IoaUserName - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，最近登录账号。</li> 	<li>Ip - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，IP地址。</li> 	<li>MacAddr - String - 是否必填：否 - 操作符: eq,like,ilike  - 排序支持：否 - 备注：字段含义，MAC地址。</li>
    */

@@ -2092,6 +2092,10 @@ export interface ModifyLoadBalancerAttributesRequest {
    * 将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。
    */
   ModifyClassicDomain?: boolean
+  /**
+   * 关联的终端节点Id，可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679)接口查询。传空字符串代表解除关联。
+   */
+  AssociateEndpoint?: string
 }
 
 /**
@@ -6553,4 +6557,8 @@ ToaClean: TOA（TCP Option Address）清理，清除TCP选项中的地址信息�
    * 已绑定的后端服务数量。
    */
   TargetCount?: number
+  /**
+   * 负载均衡实例关联的Endpoint id。
+   */
+  AssociateEndpoint?: string
 }

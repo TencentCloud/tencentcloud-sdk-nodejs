@@ -123,7 +123,7 @@ import {
   RoleAssignments,
   MoveOrganizationNodeMembersRequest,
   GetTaskStatusResponse,
-  UserSyncProvisioning,
+  SAMLIdPCertificate,
   UpdateOrganizationMemberResponse,
   AuthNode,
   DeleteGroupRequest,
@@ -139,7 +139,7 @@ import {
   ShareArea,
   DeletePolicyRequest,
   CancelOrganizationPolicySubAccountResponse,
-  GetUserSyncProvisioningResponse,
+  DescribeOrganizationMembersAuthPolicyRequest,
   GroupInfo,
   GetSCIMSynchronizationStatusResponse,
   GetZoneStatisticsRequest,
@@ -196,7 +196,8 @@ import {
   AddShareUnitMembersResponse,
   ListGroupsResponse,
   CreateOrganizationMemberPolicyRequest,
-  SAMLIdPCertificate,
+  UserSyncProvisioning,
+  GetUserSyncProvisioningResponse,
   CreateOrganizationRequest,
   ListJoinedGroupsForUserRequest,
   UpdateRoleConfigurationResponse,
@@ -258,6 +259,7 @@ import {
   CheckAccountDeleteResponse,
   DescribePolicyResponse,
   SAMLServiceProvider,
+  OrgMembersAuthPolicy,
   UpdateUserStatusResponse,
   UpdateGroupRequest,
   ListExternalSAMLIdPCertificatesResponse,
@@ -297,6 +299,7 @@ import {
   CreateUserSyncProvisioningRequest,
   DeleteOrganizationMembersPolicyRequest,
   CreateSCIMCredentialRequest,
+  DescribeOrganizationMembersAuthPolicyResponse,
   DescribePolicyRequest,
   DeleteGroupResponse,
   UpdateOrganizationMembersPolicyResponse,
@@ -472,13 +475,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户
+   * 查询用户组列表
    */
-  async DeleteUser(
-    req: DeleteUserRequest,
-    cb?: (error: string, rep: DeleteUserResponse) => void
-  ): Promise<DeleteUserResponse> {
-    return this.request("DeleteUser", req, cb)
+  async ListGroups(
+    req: ListGroupsRequest,
+    cb?: (error: string, rep: ListGroupsResponse) => void
+  ): Promise<ListGroupsResponse> {
+    return this.request("ListGroups", req, cb)
   }
 
   /**
@@ -1172,13 +1175,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户组列表
+   * 删除用户
    */
-  async ListGroups(
-    req: ListGroupsRequest,
-    cb?: (error: string, rep: ListGroupsResponse) => void
-  ): Promise<ListGroupsResponse> {
-    return this.request("ListGroups", req, cb)
+  async DeleteUser(
+    req: DeleteUserRequest,
+    cb?: (error: string, rep: DeleteUserResponse) => void
+  ): Promise<DeleteUserResponse> {
+    return this.request("DeleteUser", req, cb)
   }
 
   /**
@@ -1219,6 +1222,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePolicyResponse) => void
   ): Promise<CreatePolicyResponse> {
     return this.request("CreatePolicy", req, cb)
+  }
+
+  /**
+   * 查询组织成员访问策略列表
+   */
+  async DescribeOrganizationMembersAuthPolicy(
+    req: DescribeOrganizationMembersAuthPolicyRequest,
+    cb?: (error: string, rep: DescribeOrganizationMembersAuthPolicyResponse) => void
+  ): Promise<DescribeOrganizationMembersAuthPolicyResponse> {
+    return this.request("DescribeOrganizationMembersAuthPolicy", req, cb)
   }
 
   /**

@@ -148,9 +148,9 @@ it("organization.v20210331.OpenIdentityCenter", async function () {
     }
 })
 
-it("organization.v20210331.DeleteUser", async function () {
+it("organization.v20210331.ListGroups", async function () {
     try {
-       const data = await client.DeleteUser({})
+       const data = await client.ListGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,9 +848,9 @@ it("organization.v20210331.UpdateSCIMSynchronizationStatus", async function () {
     }
 })
 
-it("organization.v20210331.ListGroups", async function () {
+it("organization.v20210331.DeleteUser", async function () {
     try {
-       const data = await client.ListGroups({})
+       const data = await client.DeleteUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -891,6 +891,16 @@ it("organization.v20210331.UpdateGroup", async function () {
 it("organization.v20210331.CreatePolicy", async function () {
     try {
        const data = await client.CreatePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganizationMembersAuthPolicy", async function () {
+    try {
+       const data = await client.DescribeOrganizationMembersAuthPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -278,6 +278,16 @@ it("iss.v20230517.DescribeRecordBackupTemplate", async function () {
     }
 })
 
+it("iss.v20230517.DescribeUserDeviceList", async function () {
+    try {
+       const data = await client.DescribeUserDeviceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.DescribeVideoBitRate", async function () {
     try {
        const data = await client.DescribeVideoBitRate({})

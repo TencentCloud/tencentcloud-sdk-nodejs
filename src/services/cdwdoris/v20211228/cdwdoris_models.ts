@@ -740,6 +740,10 @@ export interface DeleteBackUpDataRequest {
    * 是否删除所有实例
    */
   IsDeleteAll?: boolean
+  /**
+   * true代表恢复删除隔离中的job 默认false就是删除
+   */
+  IsRecover?: boolean
 }
 
 /**
@@ -3789,6 +3793,10 @@ export interface RestoreStatus {
  */
 export interface DeleteBackUpDataResponse {
   /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3900,6 +3908,10 @@ export interface BackUpJobDisplay {
    * 快照保留策略
    */
   SnapshotRemainPolicy?: SnapshotRemainPolicy
+  /**
+   * 隔离次数
+   */
+  IsolationCount?: number
 }
 
 /**

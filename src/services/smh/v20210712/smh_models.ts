@@ -445,12 +445,12 @@ export interface LibraryExtension {
    */
   EnableFileHistory?: boolean
   /**
-   * 当开启历史版本时，指定单个文件保留的历史版本的数量上限，不能超过 999，指定为 0 则不限制，默认为 0。当未开启历史版本时，该属性为 null。
+   * 当开启历史版本时，指定单个文件保留的历史版本的数量上限，取值范围为 1 到 999。当未开启历史版本时，该属性可能为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileHistoryCount?: number
   /**
-   * 当开启历史版本时，指定历史版本保留的最长天数，不能超过 999，指定为 0 则不限制，默认为 0。当未开启历史版本时，该属性为 null。
+   * 当开启历史版本时，指定历史版本保留的最长天数，取值范围为 0 到 999，当指定为 0 时代表永久保留。当未开启历史版本时，该属性可能为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileHistoryExpireDay?: number
@@ -836,43 +836,47 @@ export interface Library {
   /**
    * 媒体库 ID
    */
-  LibraryId: string
+  LibraryId?: string
   /**
    * 媒体库友好名称
    */
-  Name: string
+  Name?: string
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 媒体库绑定的 COS 存储桶
    */
-  BucketName: string
+  BucketName?: string
   /**
    * 媒体库绑定的 COS 存储桶所在的地域
    */
-  BucketRegion: string
+  BucketRegion?: string
+  /**
+   * 该媒体库的业务 API 访问域名
+   */
+  AccessDomain?: string
   /**
    * 媒体库创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 媒体库配置项
    */
-  LibraryExtension: LibraryExtension
+  LibraryExtension?: LibraryExtension
   /**
    * 媒体库用量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。
    */
-  Size: string
+  Size?: string
   /**
    * 媒体库目录数，由于数字类型精度限制，该字段为 String 类型。
    */
-  DirNum: string
+  DirNum?: string
   /**
    * 媒体库文件数，由于数字类型精度限制，该字段为 String 类型。
    */
-  FileNum: string
+  FileNum?: string
 }
 
 /**

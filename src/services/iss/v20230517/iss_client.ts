@@ -65,6 +65,7 @@ import {
   DescribeVideoBitRateRequest,
   DeleteAITaskRequest,
   ChefHatAIResultInfo,
+  DescribeUserDeviceListRequest,
   UpdateGatewayResponse,
   DescribeRecordRetrieveTaskRequest,
   ControlDeviceSnapshotResponse,
@@ -113,7 +114,7 @@ import {
   DescribeOrganizationData,
   DescribeVideoDownloadUrlResponse,
   RecordPlanOptData,
-  ListSubTasksData,
+  DescribeUserDeviceListResponse,
   DescribeRecordPlanResponse,
   Timeline,
   ListGatewaysData,
@@ -184,6 +185,7 @@ import {
   DescribeGatewayProtocolResponse,
   DescribeGBDeviceAddrRequest,
   ListAITaskData,
+  DescribeDeviceListData,
   ControlDeviceSnapshotRequest,
   UpdateRecordTemplateData,
   DescribeDomainRegionRequest,
@@ -277,6 +279,7 @@ import {
   ListOrganizationChannelsData,
   AddRecordBackupPlanRequest,
   ListTasksData,
+  ListSubTasksData,
   ControlDeviceStreamData,
   ListDeviceSnapshotsResponse,
   RecordTemplateInfo,
@@ -567,6 +570,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordBackupTemplateResponse) => void
   ): Promise<DescribeRecordBackupTemplateResponse> {
     return this.request("DescribeRecordBackupTemplate", req, cb)
+  }
+
+  /**
+   * 用于批量查询设备详细信息。
+   */
+  async DescribeUserDeviceList(
+    req: DescribeUserDeviceListRequest,
+    cb?: (error: string, rep: DescribeUserDeviceListResponse) => void
+  ): Promise<DescribeUserDeviceListResponse> {
+    return this.request("DescribeUserDeviceList", req, cb)
   }
 
   /**
