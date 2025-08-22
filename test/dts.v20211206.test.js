@@ -408,6 +408,16 @@ it("dts.v20211206.DescribeSubscribeCheckJob", async function () {
     }
 })
 
+it("dts.v20211206.SkipCheckItem", async function () {
+    try {
+       const data = await client.SkipCheckItem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ContinueSyncJob", async function () {
     try {
        const data = await client.ContinueSyncJob({})
@@ -448,9 +458,9 @@ it("dts.v20211206.DescribeMigrateDBInstances", async function () {
     }
 })
 
-it("dts.v20211206.SkipCheckItem", async function () {
+it("dts.v20211206.ResetSyncJob", async function () {
     try {
-       const data = await client.SkipCheckItem({})
+       const data = await client.ResetSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,6 +18,16 @@ const client = new tencentcloud.mqtt.v20240516.Client({
 })
 describe("mqtt.v20240516.test.js", function () {
 
+it("mqtt.v20240516.CreateDeviceIdentity", async function () {
+    try {
+       const data = await client.CreateDeviceIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.PublishMessage", async function () {
     try {
        const data = await client.PublishMessage({})
@@ -268,6 +278,16 @@ it("mqtt.v20240516.UpdateAuthorizationPolicyPriority", async function () {
     }
 })
 
+it("mqtt.v20240516.DeleteDeviceIdentity", async function () {
+    try {
+       const data = await client.DeleteDeviceIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
@@ -361,6 +381,16 @@ it("mqtt.v20240516.DescribeInstance", async function () {
 it("mqtt.v20240516.DescribeMessageDetails", async function () {
     try {
        const data = await client.DescribeMessageDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeDeviceIdentity", async function () {
+    try {
+       const data = await client.DescribeDeviceIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +508,16 @@ it("mqtt.v20240516.DescribeAuthenticator", async function () {
     }
 })
 
+it("mqtt.v20240516.ModifyDeviceIdentity", async function () {
+    try {
+       const data = await client.ModifyDeviceIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.ActivateCaCertificate", async function () {
     try {
        const data = await client.ActivateCaCertificate({})
@@ -551,6 +591,16 @@ it("mqtt.v20240516.ModifyInstance", async function () {
 it("mqtt.v20240516.CreateHttpAuthenticator", async function () {
     try {
        const data = await client.CreateHttpAuthenticator({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeDeviceIdentities", async function () {
+    try {
+       const data = await client.DescribeDeviceIdentities({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2610,7 +2610,7 @@ export interface ApproverItem {
 }
 
 /**
- * 批量认证企业任务详情信息，其中包括 TaskId，状态信息等等
+ * 批量认证企业任务详情信息，其中包括 TaskId，状态信息等
  */
 export interface BatchOrganizationRegistrationTasksDetails {
   /**
@@ -2898,7 +2898,7 @@ export interface TemplateInfo {
    */
   Available?: number
   /**
-   * 模版的用户合同类型
+   * 模板的用户合同类型
    */
   UserFlowType?: UserFlowType
 }
@@ -4491,7 +4491,7 @@ export interface UserThreeFactor {
 }
 
 /**
- * 模版对应的合同类型
+ * 模板对应的合同类型
  */
 export interface TemplateUserFlowType {
   /**
@@ -4503,7 +4503,7 @@ export interface TemplateUserFlowType {
    */
   Name?: string
   /**
-   * 每个合同类型绑定的模版数量
+   * 每个合同类型绑定的模板数量
    */
   TemplateNum?: number
   /**
@@ -9521,7 +9521,7 @@ export interface EmbedUrlOption {
    * 是否禁止编辑印章描述内容
 <ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
    */
-  ForbidEditSealDescription?: string
+  ForbidEditSealDescription?: boolean
 }
 
 /**

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   PageScreenVO,
   DataId,
+  ClearEmbedTokenRequest,
   DescribeUserRoleListResponse,
   ExportScreenPageResponse,
   ModifyProjectResponse,
@@ -73,6 +74,7 @@ import {
   DescribeProjectInfoResponse,
   ExportScreenPageRequest,
   DescribeUserRoleListRequest,
+  ClearEmbedTokenResponse,
   DeleteProjectResponse,
   ProjectListData,
   DescribeUserRoleProjectListRequest,
@@ -271,6 +273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void
   ): Promise<ModifyDatasourceCloudResponse> {
     return this.request("ModifyDatasourceCloud", req, cb)
+  }
+
+  /**
+   * 强鉴权token 清理，只有企业管理员才能调用该接口
+   */
+  async ClearEmbedToken(
+    req: ClearEmbedTokenRequest,
+    cb?: (error: string, rep: ClearEmbedTokenResponse) => void
+  ): Promise<ClearEmbedTokenResponse> {
+    return this.request("ClearEmbedToken", req, cb)
   }
 
   /**

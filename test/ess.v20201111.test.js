@@ -278,6 +278,16 @@ it("ess.v20201111.CreateFlowReminds", async function () {
     }
 })
 
+it("ess.v20201111.DescribeContractReviewWebUrl", async function () {
+    try {
+       const data = await client.DescribeContractReviewWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateUserNameChangeUrl", async function () {
     try {
        const data = await client.CreateUserNameChangeUrl({})
@@ -888,6 +898,16 @@ it("ess.v20201111.DescribeUserFlowType", async function () {
     }
 })
 
+it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
+    try {
+       const data = await client.DescribeThirdPartyAuthCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateModifyAdminAuthorizationUrl", async function () {
     try {
        const data = await client.CreateModifyAdminAuthorizationUrl({})
@@ -1128,9 +1148,9 @@ it("ess.v20201111.CreateOrganizationBatchSignUrl", async function () {
     }
 })
 
-it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
+it("ess.v20201111.CreateContractReviewWebUrl", async function () {
     try {
-       const data = await client.DescribeThirdPartyAuthCode({})
+       const data = await client.CreateContractReviewWebUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

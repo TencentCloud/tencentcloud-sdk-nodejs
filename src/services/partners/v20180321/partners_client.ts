@@ -213,7 +213,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可以查询代理商代付的预付费订单
+   * 查询最近15天内的代理商代付订单
    */
   async DescribeAgentPayDealsV2(
     req: DescribeAgentPayDealsV2Request,
@@ -253,7 +253,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询代理商名下指定代客的自付订单（预付费）
+   * 查询代理商名下指定代客最近15天内的自付订单（预付费）
    */
   async DescribeAgentSelfPayDealsV2(
     req: DescribeAgentSelfPayDealsV2Request,

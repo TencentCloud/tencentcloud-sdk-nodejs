@@ -198,6 +198,22 @@ export interface Department {
 }
 
 /**
+ * DescribeContractReviewWebUrl请求参数结构体
+ */
+export interface DescribeContractReviewWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 合同审查任务ID，该参数通过调用接口<a href="https://qian.tencent.com/developers/companyApis/embedPages/CreateContractReviewWebUrl" target="_blank">创建合同审查web页面</a>获取。
+   */
+  TaskId: string
+}
+
+/**
  * DescribeInformationExtractionTask请求参数结构体
  */
 export interface DescribeInformationExtractionTaskRequest {
@@ -3147,6 +3163,28 @@ export interface ReviewerInfo {
 }
 
 /**
+ * CreateContractReviewWebUrl返回参数结构体
+ */
+export interface CreateContractReviewWebUrlResponse {
+  /**
+   * 接口返回的合同审查任务ID，可以调用接口<a href="https://qian.tencent.com/developers/companyApis/embedPages/DescribeContractReviewWebUrl" target="_blank">获取合同审查结果web页面</a>查看审查任务的结果。
+
+注意： `当ResourceId参数不为空时才会返回此值。`
+   */
+  TaskId?: string
+  /**
+   * 合同审查嵌入式web页面链接。
+
+注意：`链接有效期为5分钟，且链接仅能使用一次。如果上传的合同文件为word时不能进行iframe方式嵌入到贵方系统的网页中，需要单独页面打开此链接显示`
+   */
+  WebUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DisableUserAutoSign返回参数结构体
  */
 export interface DisableUserAutoSignResponse {
@@ -5414,7 +5452,7 @@ export interface EmbedUrlOption {
    * 是否禁止编辑印章描述内容
 <ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
    */
-  ForbidEditSealDescription?: string
+  ForbidEditSealDescription?: boolean
 }
 
 /**
@@ -9547,6 +9585,33 @@ export interface StartFlowResponse {
 }
 
 /**
+ * DescribeContractReviewWebUrl返回参数结构体
+ */
+export interface DescribeContractReviewWebUrlResponse {
+  /**
+   * 合同审查嵌入式web页面链接。
+注意：`链接有效期为5分钟，且链接仅能使用一次。如果上传的合同文件为word时不能进行iframe方式嵌入到贵方系统的网页中，需要单独页面打开此链接显示`
+   */
+  WebUrl?: string
+  /**
+   * 合同审查任务状态。任务状态为`5`时没有WebUrl链接。
+状态如下：
+<ul>
+    <li>**1** - 合同审查任务创建成功</li>   
+    <li>**2** - 合同审查任务排队中</li>  
+    <li>**3** - 合同审查任务执行中</li>   
+    <li>**4** - 合同审查任务执行成功</li>
+    <li>**5** - 合同审查任务执行失败</li>
+</ul>
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 签署控件的配置信息，用在嵌入式发起的页面配置，包括
 
 - 签署控件是否默认展示日期.
@@ -9771,6 +9836,30 @@ export interface FileUrl {
    * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
    */
   Option: string
+}
+
+/**
+ * CreateContractReviewWebUrl请求参数结构体
+ */
+export interface CreateContractReviewWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 需要审查的合同文件资源ID,可通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
+
+注:  `目前，每个文件限制在10M以下，文件仅支持pdf、doc、docx格式`
+   */
+  ResourceId?: string
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
+   */
+  UserData?: string
 }
 
 /**

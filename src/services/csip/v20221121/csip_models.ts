@@ -7545,7 +7545,7 @@ export interface SubUserInfo {
    */
   ActionRiskCount?: number
   /**
-   * 是否接入云审计日志
+   * 是否接入操作审计日志
    */
   IsAccessCloudAudit?: boolean
   /**
@@ -8119,7 +8119,7 @@ export interface AKInfo {
    */
   ID?: number
   /**
-   * ak具体值
+   * ak具体值\n
 临时密钥时返回临时密钥
    */
   Name?: string

@@ -1591,7 +1591,7 @@ export interface OrderPerLicenseRequest {
    */
   Type: number
   /**
-   * 购买失败后是否回滚（删除）设备，默认true，如果设备绑定了生效中的流量包则不能回滚。
+   * 购买失败后是否回滚（删除）设备，默认false，如果设备绑定了生效中的流量包则不能回滚。
    */
   RollBack?: boolean
   /**

@@ -188,6 +188,16 @@ it("bi.v20220105.ModifyDatasourceCloud", async function () {
     }
 })
 
+it("bi.v20220105.ClearEmbedToken", async function () {
+    try {
+       const data = await client.ClearEmbedToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.CreateUserRoleProject", async function () {
     try {
        const data = await client.CreateUserRoleProject({})

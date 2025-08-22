@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UpdateAuthorizationPolicyPriorityResponse,
   MQTTClientSubscription,
+  ModifyDeviceIdentityResponse,
   DeleteUserRequest,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
@@ -28,6 +29,7 @@ import {
   CreateInstanceResponse,
   ApplyRegistrationCodeRequest,
   DescribeMessageListRequest,
+  DeleteDeviceIdentityRequest,
   ModifyJWTAuthenticatorRequest,
   AuthorizationPolicyPriority,
   DescribeInsPublicEndpointsResponse,
@@ -42,11 +44,13 @@ import {
   DeleteAuthorizationPolicyResponse,
   ProductSkuItem,
   ModifyJWKSAuthenticatorRequest,
+  DescribeDeviceIdentitiesRequest,
   RegisterCaCertificateResponse,
   UserProperty,
   DescribeMessageDetailsRequest,
   DeleteInstanceRequest,
   ModifyInstanceRequest,
+  CreateDeviceIdentityRequest,
   RegisterDeviceCertificateResponse,
   MQTTAuthenticatorItem,
   DescribeClientListResponse,
@@ -61,6 +65,7 @@ import {
   MQTTMessage,
   MQTTMessageItem,
   ModifyJWKSAuthenticatorResponse,
+  DeleteDeviceIdentityResponse,
   CreateInsPublicEndpointResponse,
   CreateUserResponse,
   CreateAuthorizationPolicyRequest,
@@ -70,7 +75,7 @@ import {
   DeleteCaCertificateRequest,
   DeleteDeviceCertificateRequest,
   DescribeMessageByTopicRequest,
-  DescribeInsPublicEndpointsRequest,
+  DescribeUserListRequest,
   DeleteUserResponse,
   ActivateCaCertificateResponse,
   DeleteDeviceCertificateResponse,
@@ -99,15 +104,16 @@ import {
   DescribeClientListRequest,
   DeleteInsPublicEndpointResponse,
   MQTTEndpointItem,
+  DeviceIdentityItem,
   DescribeInsVPCEndpointsRequest,
   DescribeTopicListRequest,
   CreateTopicResponse,
   RevokedDeviceCertificateRequest,
   ModifyInsPublicEndpointResponse,
-  CreateAuthorizationPolicyResponse,
+  CreateInstanceRequest,
   DescribeAuthenticatorRequest,
   RegisterCaCertificateRequest,
-  CreateInstanceRequest,
+  CreateAuthorizationPolicyResponse,
   CreateInsPublicEndpointRequest,
   RegisterDeviceCertificateRequest,
   Filter,
@@ -121,16 +127,21 @@ import {
   DescribeDeviceCertificateRequest,
   ModifyInsPublicEndpointRequest,
   DeleteInsPublicEndpointRequest,
-  DescribeUserListRequest,
+  DescribeInsPublicEndpointsRequest,
+  CreateDeviceIdentityResponse,
+  DescribeDeviceIdentityResponse,
   DescribeCaCertificateRequest,
   UpdateAuthorizationPolicyPriorityRequest,
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
+  DescribeDeviceIdentityRequest,
+  ModifyDeviceIdentityRequest,
   DescribeAuthorizationPoliciesRequest,
   RevokedDeviceCertificateResponse,
+  PropagatingProperty,
   CreateHttpAuthenticatorRequest,
   DescribeProductSKUListRequest,
-  DescribeTopicListResponse,
+  DescribeSharedSubscriptionLagRequest,
   DescribeDeviceCertificateResponse,
   DescribeInstanceListRequest,
   DeactivateCaCertificateRequest,
@@ -142,7 +153,7 @@ import {
   MQTTTopicItem,
   PriceTag,
   ModifyAuthorizationPolicyRequest,
-  DescribeSharedSubscriptionLagRequest,
+  DescribeTopicListResponse,
   DeleteTopicResponse,
   ModifyInstanceCertBindingRequest,
   ModifyHttpAuthenticatorRequest,
@@ -150,6 +161,7 @@ import {
   DescribeCaCertificatesResponse,
   ModifyUserRequest,
   DeleteAuthenticatorResponse,
+  DescribeDeviceIdentitiesResponse,
   IpRule,
 } from "./mqtt_models"
 
@@ -160,6 +172,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mqtt.tencentcloudapi.com", "2024-05-16", clientConfig)
+  }
+
+  /**
+   * 创建一机一密设备签名
+   */
+  async CreateDeviceIdentity(
+    req: CreateDeviceIdentityRequest,
+    cb?: (error: string, rep: CreateDeviceIdentityResponse) => void
+  ): Promise<CreateDeviceIdentityResponse> {
+    return this.request("CreateDeviceIdentity", req, cb)
   }
 
   /**
@@ -416,6 +438,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除一机一密设备签名
+   */
+  async DeleteDeviceIdentity(
+    req: DeleteDeviceIdentityRequest,
+    cb?: (error: string, rep: DeleteDeviceIdentityResponse) => void
+  ): Promise<DeleteDeviceIdentityResponse> {
+    return this.request("DeleteDeviceIdentity", req, cb)
+  }
+
+  /**
    * 创建主题
    */
   async CreateTopic(
@@ -521,6 +553,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMessageDetailsResponse) => void
   ): Promise<DescribeMessageDetailsResponse> {
     return this.request("DescribeMessageDetails", req, cb)
+  }
+
+  /**
+   * 查询设备一机一密标识
+   */
+  async DescribeDeviceIdentity(
+    req: DescribeDeviceIdentityRequest,
+    cb?: (error: string, rep: DescribeDeviceIdentityResponse) => void
+  ): Promise<DescribeDeviceIdentityResponse> {
+    return this.request("DescribeDeviceIdentity", req, cb)
   }
 
   /**
@@ -634,6 +676,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改一机一密设备签名
+   */
+  async ModifyDeviceIdentity(
+    req: ModifyDeviceIdentityRequest,
+    cb?: (error: string, rep: ModifyDeviceIdentityResponse) => void
+  ): Promise<ModifyDeviceIdentityResponse> {
+    return this.request("ModifyDeviceIdentity", req, cb)
+  }
+
+  /**
    * 激活Ca证书
    */
   async ActivateCaCertificate(
@@ -711,5 +763,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateHttpAuthenticatorResponse) => void
   ): Promise<CreateHttpAuthenticatorResponse> {
     return this.request("CreateHttpAuthenticator", req, cb)
+  }
+
+  /**
+   * 查询集群下设备标识列表
+   */
+  async DescribeDeviceIdentities(
+    req: DescribeDeviceIdentitiesRequest,
+    cb?: (error: string, rep: DescribeDeviceIdentitiesResponse) => void
+  ): Promise<DescribeDeviceIdentitiesResponse> {
+    return this.request("DescribeDeviceIdentities", req, cb)
   }
 }

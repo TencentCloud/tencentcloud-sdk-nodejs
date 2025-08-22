@@ -2877,7 +2877,7 @@ export interface WeChatBillDetail {
    */
   BizToken?: string
   /**
-   * 本token收费次数
+   * 本token收费次数。（说明：一次核身过程用户可能会重试多次，因此一个biztoken可能会对应多次计费，如需配置重试上限，请[联系我们](https://cloud.tencent.com/document/product/1007/56130)配置。）
    */
   ChargeCount?: number
   /**

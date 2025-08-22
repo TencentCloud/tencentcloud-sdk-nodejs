@@ -55,6 +55,16 @@ export interface MQTTClientSubscription {
 }
 
 /**
+ * ModifyDeviceIdentity返回参数结构体
+ */
+export interface ModifyDeviceIdentityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUser请求参数结构体
  */
 export interface DeleteUserRequest {
@@ -220,6 +230,20 @@ export interface DescribeMessageListRequest {
    * 查询结果限制数量，默认20，最大50
    */
   Limit?: number
+}
+
+/**
+ * DeleteDeviceIdentity请求参数结构体
+ */
+export interface DeleteDeviceIdentityRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 设备id
+   */
+  DeviceId: string
 }
 
 /**
@@ -593,6 +617,24 @@ password-对应 MQTT CONNECT Packet 中 password 字段。默认username
 }
 
 /**
+ * DescribeDeviceIdentities请求参数结构体
+ */
+export interface DescribeDeviceIdentitiesRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
+}
+
+/**
  * RegisterCaCertificate返回参数结构体
  */
 export interface RegisterCaCertificateResponse {
@@ -699,6 +741,37 @@ mTLS；双向认证
 BYOC：一机一证
    */
   X509Mode?: string
+}
+
+/**
+ * CreateDeviceIdentity请求参数结构体
+ */
+export interface CreateDeviceIdentityRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 设备id
+   */
+  DeviceId: string
+  /**
+   * 1:ENABLED-可用（默认）
+2:DISABLE-不可用
+   */
+  Status?: string
+  /**
+   * 主要签名key，不传则由系统自动生成，需要base64编码。
+   */
+  PrimaryKey?: string
+  /**
+   * 次要签名key，不传则油系统自动生成，需要base64编码。
+   */
+  SecondaryKey?: string
+  /**
+   * 该设备id的传播属性设置
+   */
+  PropagatingProperties?: Array<PropagatingProperty>
 }
 
 /**
@@ -1104,6 +1177,16 @@ export interface ModifyJWKSAuthenticatorResponse {
 }
 
 /**
+ * DeleteDeviceIdentity返回参数结构体
+ */
+export interface DeleteDeviceIdentityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateInsPublicEndpoint返回参数结构体
  */
 export interface CreateInsPublicEndpointResponse {
@@ -1280,13 +1363,26 @@ export interface DescribeMessageByTopicRequest {
 }
 
 /**
- * DescribeInsPublicEndpoints请求参数结构体
+ * DescribeUserList请求参数结构体
  */
-export interface DescribeInsPublicEndpointsRequest {
+export interface DescribeUserListRequest {
   /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
+  /**
+   * 查询条件列表支持字段
+Username：按照【用户名】进行过滤，支持模糊过滤，类型：String
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询起始位置，默认值0
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量，默认值20，最大值100
+   */
+  Limit?: number
 }
 
 /**
@@ -1835,6 +1931,40 @@ export interface MQTTEndpointItem {
 }
 
 /**
+ * 设备标识列表
+ */
+export interface DeviceIdentityItem {
+  /**
+   * 集群id
+   */
+  InstanceId?: string
+  /**
+   * 设备id
+   */
+  DeviceId?: string
+  /**
+   * 1:ENABLED-可用2:DISABLE-不可用
+   */
+  Status?: number
+  /**
+   * 主要签名key，不传则由系统自动生成
+   */
+  PrimaryKey?: string
+  /**
+   * 次要签名key，不传则由系统自动生成
+   */
+  SecondaryKey?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: number
+  /**
+   * 传播属性列表
+   */
+  PropagatingProperties?: Array<PropagatingProperty>
+}
+
+/**
  * DescribeInsVPCEndpoints请求参数结构体
  */
 export interface DescribeInsVPCEndpointsRequest {
@@ -1910,69 +2040,6 @@ export interface ModifyInsPublicEndpointResponse {
 }
 
 /**
- * CreateAuthorizationPolicy返回参数结构体
- */
-export interface CreateAuthorizationPolicyResponse {
-  /**
-   * 集群Id
-   */
-  InstanceId?: string
-  /**
-   * 策略id
-   */
-  Id?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAuthenticator请求参数结构体
- */
-export interface DescribeAuthenticatorRequest {
-  /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
-   */
-  InstanceId: string
-  /**
-   * 认证器类型:
-JWT：JWT认证器
-JWKS：JWKS认证器
-HTTP：HTTP认证器
-   */
-  Type?: string
-}
-
-/**
- * RegisterCaCertificate请求参数结构体
- */
-export interface RegisterCaCertificateRequest {
-  /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
-   */
-  InstanceId: string
-  /**
-   * CA证书内容，自签CA可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 签发自签CA
-   */
-  CaCertificate: string
-  /**
-   * 验证证书内容，可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 手动注册CA证书章节
-   */
-  VerificationCertificate: string
-  /**
-   * 证书格式，不传默认PEM格式，当前仅支持PEM格式
-   */
-  Format?: string
-  /**
-   * 证书状态，不传默认ACTIVE状态
-    ACTIVE：激活
-    INACTIVE：未激活
-   */
-  Status?: string
-}
-
-/**
  * CreateInstance请求参数结构体
  */
 export interface CreateInstanceRequest {
@@ -2028,6 +2095,69 @@ PLATINUM 铂金版
    * 付费模式（0: 后付费；1: 预付费），默认0（后付费）。
    */
   PayMode?: number
+}
+
+/**
+ * DescribeAuthenticator请求参数结构体
+ */
+export interface DescribeAuthenticatorRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 认证器类型:
+JWT：JWT认证器
+JWKS：JWKS认证器
+HTTP：HTTP认证器
+   */
+  Type?: string
+}
+
+/**
+ * RegisterCaCertificate请求参数结构体
+ */
+export interface RegisterCaCertificateRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * CA证书内容，自签CA可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 签发自签CA
+   */
+  CaCertificate: string
+  /**
+   * 验证证书内容，可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 手动注册CA证书章节
+   */
+  VerificationCertificate: string
+  /**
+   * 证书格式，不传默认PEM格式，当前仅支持PEM格式
+   */
+  Format?: string
+  /**
+   * 证书状态，不传默认ACTIVE状态
+    ACTIVE：激活
+    INACTIVE：未激活
+   */
+  Status?: string
+}
+
+/**
+ * CreateAuthorizationPolicy返回参数结构体
+ */
+export interface CreateAuthorizationPolicyResponse {
+  /**
+   * 集群Id
+   */
+  InstanceId?: string
+  /**
+   * 策略id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2372,26 +2502,62 @@ export interface DeleteInsPublicEndpointRequest {
 }
 
 /**
- * DescribeUserList请求参数结构体
+ * DescribeInsPublicEndpoints请求参数结构体
  */
-export interface DescribeUserListRequest {
+export interface DescribeInsPublicEndpointsRequest {
   /**
-   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
+}
+
+/**
+ * CreateDeviceIdentity返回参数结构体
+ */
+export interface CreateDeviceIdentityResponse {
   /**
-   * 查询条件列表支持字段
-Username：按照【用户名】进行过滤，支持模糊过滤，类型：String
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
+  RequestId?: string
+}
+
+/**
+ * DescribeDeviceIdentity返回参数结构体
+ */
+export interface DescribeDeviceIdentityResponse {
   /**
-   * 查询起始位置，默认值0
+   * 集群id
    */
-  Offset?: number
+  InstanceId?: string
   /**
-   * 查询结果限制数量，默认值20，最大值100
+   * 设备id
    */
-  Limit?: number
+  DeviceId?: string
+  /**
+   * 1:ENABLED-可用
+ 2:DISABLE-不可用
+   */
+  Status?: number
+  /**
+   * 主要签名key
+   */
+  PrimaryKey?: string
+  /**
+   * 次要签名key
+   */
+  SecondaryKey?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: number
+  /**
+   * 该设备id的传播属性
+   */
+  PropagatingProperties?: Array<PropagatingProperty>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2447,6 +2613,51 @@ export interface DeleteAuthorizationPolicyRequest {
 }
 
 /**
+ * DescribeDeviceIdentity请求参数结构体
+ */
+export interface DescribeDeviceIdentityRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 设备id
+   */
+  DeviceId: string
+}
+
+/**
+ * ModifyDeviceIdentity请求参数结构体
+ */
+export interface ModifyDeviceIdentityRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 设备id
+   */
+  DeviceId: string
+  /**
+   * 1:ENABLED-可用
+2:DISABLE-不可用
+   */
+  Status?: string
+  /**
+   * 主要签名key，需要Base64编码。
+   */
+  PrimaryKey?: string
+  /**
+   * 次要签名key，需要Base64编码。
+   */
+  SecondaryKey?: string
+  /**
+   * 该设备id的传播属性设置
+   */
+  PropagatingProperties?: Array<PropagatingProperty>
+}
+
+/**
  * DescribeAuthorizationPolicies请求参数结构体
  */
 export interface DescribeAuthorizationPoliciesRequest {
@@ -2464,6 +2675,20 @@ export interface RevokedDeviceCertificateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 传播属性结构
+ */
+export interface PropagatingProperty {
+  /**
+   * 传播属性key
+   */
+  Key: string
+  /**
+   * 传播属性value
+   */
+  Value: string
 }
 
 /**
@@ -2518,21 +2743,17 @@ export interface CreateHttpAuthenticatorRequest {
 export type DescribeProductSKUListRequest = null
 
 /**
- * DescribeTopicList返回参数结构体
+ * DescribeSharedSubscriptionLag请求参数结构体
  */
-export interface DescribeTopicListResponse {
+export interface DescribeSharedSubscriptionLagRequest {
   /**
-   * 查询总数
+   * 集群id
    */
-  TotalCount?: number
+  InstanceId: string
   /**
-   * 主题列表
+   * 共享订阅表达式
    */
-  Data?: Array<MQTTTopicItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SharedSubscription: string
 }
 
 /**
@@ -2947,17 +3168,21 @@ sub：订阅
 }
 
 /**
- * DescribeSharedSubscriptionLag请求参数结构体
+ * DescribeTopicList返回参数结构体
  */
-export interface DescribeSharedSubscriptionLagRequest {
+export interface DescribeTopicListResponse {
   /**
-   * 集群id
+   * 查询总数
    */
-  InstanceId: string
+  TotalCount?: number
   /**
-   * 共享订阅表达式
+   * 主题列表
    */
-  SharedSubscription: string
+  Data?: Array<MQTTTopicItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3098,6 +3323,20 @@ export interface ModifyUserRequest {
  * DeleteAuthenticator返回参数结构体
  */
 export interface DeleteAuthenticatorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDeviceIdentities返回参数结构体
+ */
+export interface DescribeDeviceIdentitiesResponse {
+  /**
+   * 返回的设备标识列表
+   */
+  Data?: Array<DeviceIdentityItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

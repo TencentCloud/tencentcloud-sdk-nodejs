@@ -230,6 +230,20 @@ export interface DescribeSoftCensusListByDeviceResponse {
 }
 
 /**
+ * 简单规则表达式
+ */
+export interface SimpleRule {
+  /**
+   * 规则表达式
+   */
+  Expressions?: Array<RuleExpression>
+  /**
+   * 表达式间逻辑关系
+   */
+  Relation?: string
+}
+
+/**
  * DescribeSoftwareInformation返回参数结构体
  */
 export interface DescribeSoftwareInformationResponse {
@@ -272,17 +286,21 @@ export interface DescribeDeviceHardwareInfoListResponse {
 }
 
 /**
- * Sort 排序字段
+ * Filters 条件过滤
  */
-export interface Sort {
+export interface Filter {
   /**
-   * 排序字段
+   * 过滤字段
    */
   Field?: string
   /**
-   * 排序方式
+   * 过滤方式： eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于。具体支持哪些过滤方式，结合具体接口字段描述来定
    */
-  Order?: string
+  Operator?: string
+  /**
+   * 过滤条件
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -418,29 +436,98 @@ export interface DescribeDeviceVirtualGroupsRequest {
 }
 
 /**
- * DescribeVirtualDevices请求参数结构体
+ * DescribeDeviceChildGroups请求参数结构体
  */
-export interface DescribeVirtualDevicesRequest {
+export interface DescribeDeviceChildGroupsRequest {
   /**
    * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
   DomainInstanceId?: string
   /**
-   * 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100
+   * 过滤条件参数（字段含义请参考接口返回值）
+- Name, 类型String，支持操作：【like，ilike】，支持排序
+
+
+
+
+分页参数
+- PageNum 从1开始，小于等于0时使用默认参数
+- PageSize 最大值5000，最好不超过100
    */
   Condition?: Condition
   /**
-   * 必填，终端自定义分组id
+   * 父分组id，默认0：表示获取全网终端分组
    */
-  DeviceVirtualGroupId?: number
+  ParentId?: number
   /**
-   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
+   * 操作系统类型（0：win，1：linux，2：mac，4：android，5：ios；默认0：系统win）
+   */
+  OsType?: number
+}
+
+/**
+ * 按版本聚合后的软件列表
+ */
+export interface AggrCategorySoftDetailRow {
+  /**
+   * ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: number
+  /**
+   * 软件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 盗版风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PiracyRisk?: number
+  /**
+   * 系统平台
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OsType?: number
   /**
-   * 选填，在线状态 （2表示在线，0或者1表示离线）
+   * 企业名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OnlineStatus?: number
+  CorpName?: string
+  /**
+   * 安装设备数量(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstalledDeviceNum?: number
+  /**
+   * 盗版安装设备数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PiracyInstalledDeviceNum?: number
+  /**
+   * 已安装用户数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstalledUserNum?: number
+  /**
+   * 盗版软件用户数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PiracyInstalledUserNum?: number
+  /**
+   * 授权总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthNum?: number
+  /**
+   * 正版率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GenuineRate?: number
+  /**
+   * 有新版本可升级的设备数量
+   */
+  UpgradableDeviceNum?: number
 }
 
 /**
@@ -661,6 +748,16 @@ export interface DescribeVirtualDevicesPageRsp {
 export type DescribeRootAccountGroupRequest = null
 
 /**
+ * 查询设备组子分组详情响应结构
+ */
+export interface DescribeDeviceChildGroupsRspData {
+  /**
+   * 返回的数组列表
+   */
+  Items?: Array<DeviceGroupDetail>
+}
+
+/**
  * 软件详情响应对象集合
  */
 export interface SoftwareInformationData {
@@ -756,6 +853,20 @@ export interface DescribeAccountGroupsResponse {
 }
 
 /**
+ * Sort 排序字段
+ */
+export interface Sort {
+  /**
+   * 排序字段
+   */
+  Field?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+}
+
+/**
  * 分页的data数据
  */
 export interface DescribeDevicesPageRsp {
@@ -784,17 +895,91 @@ export interface DescribeDeviceVirtualGroupsResponse {
 }
 
 /**
- * 简单规则表达式
+ * 返回的数组列表
  */
-export interface SimpleRule {
+export interface DeviceGroupDetail {
   /**
-   * 规则表达式
+   * 设备组id
    */
-  Expressions?: Array<RuleExpression>
+  Id?: number
   /**
-   * 表达式间逻辑关系
+   * 设备组名称
    */
-  Relation?: string
+  Name?: string
+  /**
+   * 设备组描述
+   */
+  Description?: string
+  /**
+   * 父节点id
+   */
+  ParentId?: number
+  /**
+   * 基于id的节点路径
+   */
+  IdPath?: string
+  /**
+   * 基于名称的节点路径
+   */
+  NamePath?: string
+  /**
+   * 分组锁定状态
+   */
+  Locked?: number
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   ）
+   */
+  OsType?: number
+  /**
+   * 排序
+   */
+  Sort?: number
+  /**
+   * 是否自动调整
+   */
+  FromAuto?: number
+  /**
+   * 子节点数量
+   */
+  Count?: number
+  /**
+   * 图标
+   */
+  Icon?: string
+  /**
+   * 是否有ip
+   */
+  WithIp?: number
+  /**
+   * 是否有组ip
+   */
+  HasIp?: boolean
+  /**
+   * 是否是叶子节点
+   */
+  IsLeaf?: boolean
+  /**
+   * 是否只读
+   */
+  ReadOnly?: boolean
+  /**
+   * 对应绑定的账号id
+   */
+  BindAccount?: number
+  /**
+   * 绑定账号的用户名
+   */
+  BindAccountName?: string
+}
+
+/**
+ * DescribeAggrSoftCategorySoftList请求参数结构体
+ */
+export interface DescribeAggrSoftCategorySoftListRequest {
+  /**
+   * os类别(只支持32位)
+   */
+  OsType?: number
 }
 
 /**
@@ -915,37 +1100,24 @@ export interface DescribeSoftwareInformationRequest {
 }
 
 /**
- * CreateDeviceVirtualGroup请求参数结构体
+ * 业务响应数据
  */
-export interface CreateDeviceVirtualGroupRequest {
+export interface DescribeAggrSoftCategorySoftListData {
   /**
-   * 必填，终端自定义分组名
+   * 分页公共对象
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceVirtualGroupName: string
+  Page?: Paging
   /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   * 总数(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainInstanceId?: string
+  Total?: number
   /**
-   * 详情
+   * 行数据
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description?: string
-  /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios ； 默认值0）(只支持32位)
-   */
-  OsType?: number
-  /**
-   * 分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组； 默认值0）(只支持32位)
-   */
-  TimeType?: number
-  /**
-   * 选填，TimeType=3时的自动划分时间，其他情况为0（单位min）(只支持32位)
-   */
-  AutoMinute?: number
-  /**
-   * 选填，手动分组不填，自动划分分组的划分规则数据
-   */
-  AutoRules?: ComplexRule
+  AggrSoftCategorySoftList?: Array<AggrCategorySoftDetailRow>
 }
 
 /**
@@ -1383,44 +1555,25 @@ export interface DescribeLocalAccountsData {
 }
 
 /**
- * 分页的具体数据对象
+ * DescribeDeviceHardwareInfoList请求参数结构体
  */
-export interface DeviceServiceInfo {
+export interface DescribeDeviceHardwareInfoListRequest {
   /**
-   * 命令行
-注意：此字段可能返回 null，表示取不到有效值。
+   * 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
    */
-  CmdLine?: string
+  GroupId: number
   /**
-   * 内存
-注意：此字段可能返回 null，表示取不到有效值。
+   * 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
    */
-  Description?: string
+  OsType: number
   /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
-  Name?: string
+  DomainInstanceId?: string
   /**
-   * 进程id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100
    */
-  ProcessId?: number
-  /**
-   * 启动类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartType?: number
-  /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  State?: number
-  /**
-   * 启动用户
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  User?: string
+  Condition?: Condition
 }
 
 /**
@@ -1560,21 +1713,37 @@ export interface ModifyVirtualDeviceGroupsRequest {
 }
 
 /**
- * Filters 条件过滤
+ * CreateDeviceVirtualGroup请求参数结构体
  */
-export interface Filter {
+export interface CreateDeviceVirtualGroupRequest {
   /**
-   * 过滤字段
+   * 必填，终端自定义分组名
    */
-  Field?: string
+  DeviceVirtualGroupName: string
   /**
-   * 过滤方式： eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于。具体支持哪些过滤方式，结合具体接口字段描述来定
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
-  Operator?: string
+  DomainInstanceId?: string
   /**
-   * 过滤条件
+   * 详情
    */
-  Values?: Array<string>
+  Description?: string
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios ； 默认值0）(只支持32位)
+   */
+  OsType?: number
+  /**
+   * 分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组； 默认值0）(只支持32位)
+   */
+  TimeType?: number
+  /**
+   * 选填，TimeType=3时的自动划分时间，其他情况为0（单位min）(只支持32位)
+   */
+  AutoMinute?: number
+  /**
+   * 选填，手动分组不填，自动划分分组的划分规则数据
+   */
+  AutoRules?: ComplexRule
 }
 
 /**
@@ -1606,6 +1775,47 @@ export interface DeviceProcessInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessId?: number
+  /**
+   * 启动用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+}
+
+/**
+ * 分页的具体数据对象
+ */
+export interface DeviceServiceInfo {
+  /**
+   * 命令行
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CmdLine?: string
+  /**
+   * 内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 进程id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessId?: number
+  /**
+   * 启动类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartType?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
   /**
    * 启动用户
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1652,6 +1862,20 @@ export interface CreateDLPFileDetectionTaskResponse {
    * 创建送检任务响应数据
    */
   Data?: CreateDLPFileDetectionTaskData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDeviceChildGroups返回参数结构体
+ */
+export interface DescribeDeviceChildGroupsResponse {
+  /**
+   * 查询设备组子分组详情响应结构
+   */
+  Data?: DescribeDeviceChildGroupsRspData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1755,6 +1979,32 @@ export interface CreateDLPFileDetectionTaskRequest {
 }
 
 /**
+ * DescribeVirtualDevices请求参数结构体
+ */
+export interface DescribeVirtualDevicesRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100
+   */
+  Condition?: Condition
+  /**
+   * 必填，终端自定义分组id
+   */
+  DeviceVirtualGroupId?: number
+  /**
+   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
+   */
+  OsType?: number
+  /**
+   * 选填，在线状态 （2表示在线，0或者1表示离线）
+   */
+  OnlineStatus?: number
+}
+
+/**
  * CreatePrivilegeCode返回参数结构体
  */
 export interface CreatePrivilegeCodeResponse {
@@ -1769,25 +2019,17 @@ export interface CreatePrivilegeCodeResponse {
 }
 
 /**
- * DescribeDeviceHardwareInfoList请求参数结构体
+ * DescribeAggrSoftCategorySoftList返回参数结构体
  */
-export interface DescribeDeviceHardwareInfoListRequest {
+export interface DescribeAggrSoftCategorySoftListResponse {
   /**
-   * 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
+   * 数据
    */
-  GroupId: number
+  Data?: DescribeAggrSoftCategorySoftListData
   /**
-   * 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OsType: number
-  /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
-   */
-  DomainInstanceId?: string
-  /**
-   * 过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100
-   */
-  Condition?: Condition
+  RequestId?: string
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   ModifyIntegrationDepartmentResponse,
   CancelFlowResponse,
   Department,
+  DescribeContractReviewWebUrlRequest,
   DescribeInformationExtractionTaskRequest,
   CreateDynamicFlowApproverRequest,
   DisableUserAutoSignRequest,
@@ -105,6 +106,7 @@ import {
   ModifyExtendedServiceRequest,
   DeleteOrganizationAuthorizationInfo,
   ReviewerInfo,
+  CreateContractReviewWebUrlResponse,
   DisableUserAutoSignResponse,
   DescribeFileUrlsRequest,
   CreateMiniAppPrepareFlowResponse,
@@ -293,12 +295,14 @@ import {
   CreateOrganizationAuthFileResponse,
   FlowBatchApproverInfo,
   StartFlowResponse,
+  DescribeContractReviewWebUrlResponse,
   SignComponentConfig,
   DescribeFlowComponentsResponse,
   CancelFailureFlow,
   DescribeIntegrationEmployeesRequest,
   CreateFlowRequest,
   FileUrl,
+  CreateContractReviewWebUrlRequest,
   CreateDynamicFlowApproverResponse,
   CreateBatchOrganizationRegistrationTasksResponse,
   DescribeBillUsageDetailRequest,
@@ -873,6 +877,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowRemindsResponse) => void
   ): Promise<CreateFlowRemindsResponse> {
     return this.request("CreateFlowReminds", req, cb)
+  }
+
+  /**
+     * 此接口（DescribeContractReviewWebUrl）用来创建合同审查web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+
+适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
+
+注意:  `如果文件资源为word类型生成的链接不能进行iframe嵌入，需要在单独窗口打开`
+     */
+  async DescribeContractReviewWebUrl(
+    req: DescribeContractReviewWebUrlRequest,
+    cb?: (error: string, rep: DescribeContractReviewWebUrlResponse) => void
+  ): Promise<DescribeContractReviewWebUrlResponse> {
+    return this.request("DescribeContractReviewWebUrl", req, cb)
   }
 
   /**
@@ -2007,6 +2025,23 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+     * 通过AuthCode查询个人用户是否实名
+
+
+注意: 
+<ul>
+<li>此接口为合作引流场景使用，使用<b>有白名单限制</b>，使用前请联系对接的客户经理沟通。</li>
+<li><b>AuthCode 只能使用一次</b>，查询一次再次查询会返回错误</li>
+</ul>
+     */
+  async DescribeThirdPartyAuthCode(
+    req: DescribeThirdPartyAuthCodeRequest,
+    cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
+  ): Promise<DescribeThirdPartyAuthCodeResponse> {
+    return this.request("DescribeThirdPartyAuthCode", req, cb)
+  }
+
+  /**
      * 本接口（CreateModifyAdminAuthorizationUrl）用于重新上传超管授权书。
 
 注意:
@@ -2462,20 +2497,19 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 通过AuthCode查询个人用户是否实名
+     * 此接口（CreateContractReviewWebUrl）用来创建合同审查web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
 
+适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
 
-注意: 
-<ul>
-<li>此接口为合作引流场景使用，使用<b>有白名单限制</b>，使用前请联系对接的客户经理沟通。</li>
-<li><b>AuthCode 只能使用一次</b>，查询一次再次查询会返回错误</li>
-</ul>
+注: 
+1. pdf、word格式限制大小为10M以下
+2. 如果文件资源为word类型生成的链接不能进行iframe嵌入，需要在单独窗口打开
      */
-  async DescribeThirdPartyAuthCode(
-    req: DescribeThirdPartyAuthCodeRequest,
-    cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
-  ): Promise<DescribeThirdPartyAuthCodeResponse> {
-    return this.request("DescribeThirdPartyAuthCode", req, cb)
+  async CreateContractReviewWebUrl(
+    req: CreateContractReviewWebUrlRequest,
+    cb?: (error: string, rep: CreateContractReviewWebUrlResponse) => void
+  ): Promise<CreateContractReviewWebUrlResponse> {
+    return this.request("CreateContractReviewWebUrl", req, cb)
   }
 
   /**

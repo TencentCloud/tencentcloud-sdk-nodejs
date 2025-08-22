@@ -29,15 +29,17 @@ import {
   DescribeDeviceVirtualGroupsPageRsp,
   ModifyVirtualDeviceGroupsReqItem,
   DescribeSoftCensusListByDeviceResponse,
+  SimpleRule,
   DescribeSoftwareInformationResponse,
   ComplexRule,
   DescribeDeviceHardwareInfoListResponse,
-  Sort,
+  Filter,
   DescribeRootAccountGroupResponse,
   DescribeDeviceHardwareInfoItem,
   DescribeDLPFileDetectResultData,
   DescribeDeviceVirtualGroupsRequest,
-  DescribeVirtualDevicesRequest,
+  DescribeDeviceChildGroupsRequest,
+  AggrCategorySoftDetailRow,
   DescribeDeviceInfoResponse,
   DescribeDevicesResponse,
   CreatePrivilegeCodeRspData,
@@ -48,41 +50,47 @@ import {
   DescribeAccountGroupsData,
   DescribeVirtualDevicesPageRsp,
   DescribeRootAccountGroupRequest,
+  DescribeDeviceChildGroupsRspData,
   SoftwareInformationData,
   DescribeAccountGroupsPageResp,
   DescribeAccountGroupsRequest,
   DescribeAccountGroupsResponse,
+  Sort,
   DescribeDevicesPageRsp,
   DescribeDeviceVirtualGroupsResponse,
-  SimpleRule,
+  DeviceGroupDetail,
+  DescribeAggrSoftCategorySoftListRequest,
   FilterGroup,
   DescribeSoftCensusListByDevicePageData,
   DeviceNetworkInfo,
   DescribeLocalAccountsRequest,
   DescribeSoftwareInformationRequest,
-  CreateDeviceVirtualGroupRequest,
+  DescribeAggrSoftCategorySoftListData,
   DescribeDevicesRequest,
   Paging,
   CreateDeviceTaskRequest,
   DeviceDetail,
   DescribeLocalAccountsData,
-  DeviceServiceInfo,
+  DescribeDeviceHardwareInfoListRequest,
   GetAccountGroupData,
   DescribeSoftCensusListByDeviceRequest,
   RuleExpression,
   ModifyVirtualDeviceGroupsRequest,
-  Filter,
+  CreateDeviceVirtualGroupRequest,
   DeviceProcessInfo,
+  DeviceServiceInfo,
   DescribeDeviceInfoRspData,
   CreateDeviceTaskResponse,
   CreateDLPFileDetectionTaskResponse,
+  DescribeDeviceChildGroupsResponse,
   DescribeLocalAccountsPage,
   DescribeSoftwareInformationPageData,
   DescribeDLPFileDetectResultResponse,
   Condition,
   CreateDLPFileDetectionTaskRequest,
+  DescribeVirtualDevicesRequest,
   CreatePrivilegeCodeResponse,
-  DescribeDeviceHardwareInfoListRequest,
+  DescribeAggrSoftCategorySoftListResponse,
   CreateDeviceVirtualGroupRspData,
   DescribeVirtualDevicesResponse,
 } from "./ioa_models"
@@ -94,6 +102,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ioa.tencentcloudapi.com", "2022-06-01", clientConfig)
+  }
+
+  /**
+   * 终端自定义分组增减终端，私有化调用path为：/capi/Assets/Device/ModifyVirtualDeviceGroups
+   */
+  async ModifyVirtualDeviceGroups(
+    req: ModifyVirtualDeviceGroupsRequest,
+    cb?: (error: string, rep: ModifyVirtualDeviceGroupsResponse) => void
+  ): Promise<ModifyVirtualDeviceGroupsResponse> {
+    return this.request("ModifyVirtualDeviceGroups", req, cb)
+  }
+
+  /**
+   * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
+   */
+  async DescribeRootAccountGroup(
+    req?: DescribeRootAccountGroupRequest,
+    cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void
+  ): Promise<DescribeRootAccountGroupResponse> {
+    return this.request("DescribeRootAccountGroup", req, cb)
   }
 
   /**
@@ -207,23 +235,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 终端自定义分组增减终端，私有化调用path为：/capi/Assets/Device/ModifyVirtualDeviceGroups
+   * 查看终端树下的软件列表,私有化调用path为：capi/Software/DescribeSoftCensusListByDevice
    */
-  async ModifyVirtualDeviceGroups(
-    req: ModifyVirtualDeviceGroupsRequest,
-    cb?: (error: string, rep: ModifyVirtualDeviceGroupsResponse) => void
-  ): Promise<ModifyVirtualDeviceGroupsResponse> {
-    return this.request("ModifyVirtualDeviceGroups", req, cb)
+  async DescribeSoftCensusListByDevice(
+    req: DescribeSoftCensusListByDeviceRequest,
+    cb?: (error: string, rep: DescribeSoftCensusListByDeviceResponse) => void
+  ): Promise<DescribeSoftCensusListByDeviceResponse> {
+    return this.request("DescribeSoftCensusListByDevice", req, cb)
   }
 
   /**
-   * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
+   * 查询设备组子分组详情，私有化调用path为：capi/Assets/Device/DescribeDeviceChildGroups
    */
-  async DescribeRootAccountGroup(
-    req?: DescribeRootAccountGroupRequest,
-    cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void
-  ): Promise<DescribeRootAccountGroupResponse> {
-    return this.request("DescribeRootAccountGroup", req, cb)
+  async DescribeDeviceChildGroups(
+    req: DescribeDeviceChildGroupsRequest,
+    cb?: (error: string, rep: DescribeDeviceChildGroupsResponse) => void
+  ): Promise<DescribeDeviceChildGroupsResponse> {
+    return this.request("DescribeDeviceChildGroups", req, cb)
   }
 
   /**
@@ -237,13 +265,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看终端树下的软件列表,私有化调用path为：capi/Software/DescribeSoftCensusListByDevice
+   * 聚合的分类软件列表
    */
-  async DescribeSoftCensusListByDevice(
-    req: DescribeSoftCensusListByDeviceRequest,
-    cb?: (error: string, rep: DescribeSoftCensusListByDeviceResponse) => void
-  ): Promise<DescribeSoftCensusListByDeviceResponse> {
-    return this.request("DescribeSoftCensusListByDevice", req, cb)
+  async DescribeAggrSoftCategorySoftList(
+    req: DescribeAggrSoftCategorySoftListRequest,
+    cb?: (error: string, rep: DescribeAggrSoftCategorySoftListResponse) => void
+  ): Promise<DescribeAggrSoftCategorySoftListResponse> {
+    return this.request("DescribeAggrSoftCategorySoftList", req, cb)
   }
 
   /**

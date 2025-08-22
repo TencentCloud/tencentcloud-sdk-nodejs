@@ -1445,11 +1445,18 @@ export interface CloudProductLogTaskInfo {
  */
 export interface ModifyDataTransformRequest {
   /**
-   * 加工任务id
+   * 数据加工任务ID
+- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。
    */
   TaskId: string
   /**
    * 加工任务名称
+- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务名称。
+
+名称限制
+- 不能为空字符串
+- 不能包含字符'|'
+- 最长 255 个字符
    */
   Name?: string
   /**
@@ -6016,28 +6023,40 @@ export interface DescribeDataTransformInfoRequest {
 按照【加工任务名称】进行过滤。
 类型：String
 必选：否
+示例：test-task
 
 - taskId
 按照【加工任务id】进行过滤。
 类型：String
 必选：否
+示例：a3622556-6402-4942-b4ff-5ae32ec29810
+数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。
 
 - topicId
 按照【源topicId】进行过滤。
 类型：String
 必选：否
+示例：756cec3e-a0a5-44c3-85a8-090870582000
+日志主题ID
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+
 - status
 按照【 任务运行状态】进行过滤。 1：准备中，2：运行中，3：停止中，4：已停止
 类型：String
 必选：否
+示例：1
+
 - hasServiceLog
 按照【是否开启服务日志】进行过滤。 1：未开启，2：已开启
 类型：String
 必选：否
+示例：1
+
 - dstTopicType
 按照【目标topic类型】进行过滤。  1：固定，2：动态
 类型：String
 必选：否
+示例：1
 
 每次请求的Filters的上限为10，Filter.Values的上限为100。
    */
@@ -6056,6 +6075,7 @@ export interface DescribeDataTransformInfoRequest {
   Type?: number
   /**
    * Type为1， 此参数必填
+数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。
    */
   TaskId?: string
 }
@@ -7064,7 +7084,7 @@ export interface DataTransformTaskInfo {
    */
   EnableFlag?: number
   /**
-   * 加工任务类型，1： DSL， 2：SQL
+   * 加工任务类型，1： DSL(使用自定义加工语言的加工任务)， 2：SQL(使用sql的加工任务)
    */
   Type?: number
   /**
@@ -7081,10 +7101,12 @@ export interface DataTransformTaskInfo {
   CreateTime?: string
   /**
    * 最近修改时间
+示例值：2025-06-18 16:55:54
    */
   UpdateTime?: string
   /**
    * 最后启用时间，如果需要重建集群，修改该时间
+示例值：2025-06-18 19:55:54
    */
   LastEnableTime?: string
   /**
@@ -8685,11 +8707,16 @@ export interface CreateDataTransformRequest {
    */
   FuncType: number
   /**
-   * 源日志主题
+   * 日志主题ID
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   SrcTopicId: string
   /**
    * 加工任务名称
+名称限制
+- 不能为空字符串
+- 不能包含字符'|'
+- 最长 255 个字符
    */
   Name: string
   /**
@@ -8707,7 +8734,10 @@ export interface CreateDataTransformRequest {
    */
   TaskType: number
   /**
-   * 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写。
+   * 加工任务目标topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写。
+目标topic_id，通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+别名限制 1.不能为空字符串，2. 不能包含字符'|'。
+
    */
   DstResources?: Array<DataTransformResouceInfo>
   /**
@@ -8716,6 +8746,7 @@ export interface CreateDataTransformRequest {
   EnableFlag?: number
   /**
    * 用于预览加工结果的测试数据
+目标日志主题ID通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   PreviewLogStatistics?: Array<PreviewLogStatistic>
   /**

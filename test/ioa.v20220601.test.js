@@ -18,6 +18,26 @@ const client = new tencentcloud.ioa.v20220601.Client({
 })
 describe("ioa.v20220601.test.js", function () {
 
+it("ioa.v20220601.ModifyVirtualDeviceGroups", async function () {
+    try {
+       const data = await client.ModifyVirtualDeviceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeRootAccountGroup", async function () {
+    try {
+       const data = await client.DescribeRootAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.CreateDeviceVirtualGroup", async function () {
     try {
        const data = await client.CreateDeviceVirtualGroup({})
@@ -128,9 +148,9 @@ it("ioa.v20220601.DescribeDeviceHardwareInfoList", async function () {
     }
 })
 
-it("ioa.v20220601.ModifyVirtualDeviceGroups", async function () {
+it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
     try {
-       const data = await client.ModifyVirtualDeviceGroups({})
+       const data = await client.DescribeSoftCensusListByDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +158,9 @@ it("ioa.v20220601.ModifyVirtualDeviceGroups", async function () {
     }
 })
 
-it("ioa.v20220601.DescribeRootAccountGroup", async function () {
+it("ioa.v20220601.DescribeDeviceChildGroups", async function () {
     try {
-       const data = await client.DescribeRootAccountGroup({})
+       const data = await client.DescribeDeviceChildGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +178,9 @@ it("ioa.v20220601.DescribeDLPFileDetectResult", async function () {
     }
 })
 
-it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
+it("ioa.v20220601.DescribeAggrSoftCategorySoftList", async function () {
     try {
-       const data = await client.DescribeSoftCensusListByDevice({})
+       const data = await client.DescribeAggrSoftCategorySoftList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

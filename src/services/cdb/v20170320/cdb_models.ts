@@ -1291,9 +1291,9 @@ export interface DescribeInstanceParamRecordsRequest {
  */
 export interface StopRollbackResponse {
   /**
-   * 执行请求的异步任务ID
+   * 执行请求的异步任务 ID。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4245,7 +4245,7 @@ export interface ModifyAccountPrivilegesResponse {
  */
 export interface StopRollbackRequest {
   /**
-   * 撤销回档任务对应的实例Id。
+   * 撤销回档任务对应的实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) 接口获取。
    */
   InstanceId: string
 }
@@ -4346,12 +4346,17 @@ export interface DescribeProxyCustomConfResponse {
   Count?: number
   /**
    * 代理配置
+   * @deprecated
    */
   CustomConf?: CustomConfig
   /**
    * 权重限制
    */
   WeightRule?: Rule
+  /**
+   * 代理配置
+   */
+  CustomConfInfo?: Array<CustomConfig>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

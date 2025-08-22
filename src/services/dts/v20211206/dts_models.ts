@@ -2804,6 +2804,16 @@ export interface ModifyCompareTaskRequest {
 }
 
 /**
+ * StopMigrateJob请求参数结构体
+ */
+export interface StopMigrateJobRequest {
+  /**
+   * 数据迁移任务ID
+   */
+  JobId: string
+}
+
+/**
  * RecoverSyncJob请求参数结构体
  */
 export interface RecoverSyncJobRequest {
@@ -3435,6 +3445,16 @@ export interface DescribeOffsetByTimeRequest {
    * 时间点，格式为：Y-m-d h:m:s。如果输入时间比当前时间晚的多，相当于查询最新offset；如果输入时间比当前时间早的多，相当于查询最老offset；如果输入空，默认0时间，等价于查询最老offset。
    */
   Time: string
+}
+
+/**
+ * ResetSyncJob请求参数结构体
+ */
+export interface ResetSyncJobRequest {
+  /**
+   * 需要重置的同步任务ID。
+   */
+  JobId: string
 }
 
 /**
@@ -4262,13 +4282,13 @@ export interface MigrateDetailInfo {
 }
 
 /**
- * StopMigrateJob请求参数结构体
+ * ResetSyncJob返回参数结构体
  */
-export interface StopMigrateJobRequest {
+export interface ResetSyncJobResponse {
   /**
-   * 数据迁移任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  JobId: string
+  RequestId?: string
 }
 
 /**

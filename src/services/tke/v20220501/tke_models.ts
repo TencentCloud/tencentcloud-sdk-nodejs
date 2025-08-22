@@ -360,6 +360,10 @@ export interface CreateNativeNodePoolParam {
    */
   DataDisks?: Array<DataDisk>
   /**
+   * qgpu开关
+   */
+  QGPUEnable?: boolean
+  /**
    * 节点池ssh公钥id数组
    */
   KeyIds?: Array<string>
@@ -367,6 +371,10 @@ export interface CreateNativeNodePoolParam {
    * 节点池类型
    */
   MachineType?: string
+  /**
+   * 原生节点池安装节点自动化助手开关
+   */
+  AutomationService?: boolean
 }
 
 /**
@@ -1363,7 +1371,7 @@ export interface CreateNodePoolRequest {
    */
   Unschedulable?: boolean
   /**
-   * 原生节点池创建参数
+   * 原生节点池创建参数（Type字段设置为Native时需填写）
    */
   Native?: CreateNativeNodePoolParam
   /**

@@ -4366,7 +4366,7 @@ export interface HostLoginList {
   Quuid?: string
   /**
    * 高危信息说明：
-ABROAD - 海外IP；
+ABROAD - 境外IP；
 XTI - 威胁情报
    */
   Desc?: string
@@ -7971,10 +7971,7 @@ export interface ExportFileTamperEventsResponse {
  */
 export interface DescribeBanStatusResponse {
   /**
-   * 阻断开关状态:
- 0 -- 关闭 
- 1 -- 高级阻断
- 2 -- 基础阻断(只阻断情报库黑ip)
+   * (已废弃) 阻断开关状态: 0 -- 关闭  1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip)
    */
   Status?: number
   /**
@@ -7985,6 +7982,18 @@ export interface DescribeBanStatusResponse {
    * 是否开启智能过白模式
    */
   OpenSmartMode?: boolean
+  /**
+   * 是否开启情报IP阻断
+   */
+  BanBlackIp?: boolean
+  /**
+   * 是否开启漏洞IP阻断
+   */
+  BanVulIp?: boolean
+  /**
+   * 是否开启规则阻断
+   */
+  BanByRule?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9352,7 +9361,7 @@ export interface LoginWhiteCombinedInfo {
    */
   Uuid?: string
   /**
-   * 登陆地
+   * 登录地
    */
   Locations?: string
 }
@@ -25556,7 +25565,7 @@ export interface Place {
    */
   ProvinceId: number
   /**
-   * 国家ID，暂只支持国内：1。
+   * 国家ID，暂只支持境内：1。
    */
   CountryId: number
   /**

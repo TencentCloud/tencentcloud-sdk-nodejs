@@ -157,6 +157,7 @@ import {
   CheckStepInfo,
   ProcessStepTip,
   ModifyCompareTaskRequest,
+  StopMigrateJobRequest,
   RecoverSyncJobRequest,
   Database,
   Column,
@@ -183,6 +184,7 @@ import {
   View,
   MonitorInfo,
   DescribeOffsetByTimeRequest,
+  ResetSyncJobRequest,
   StartCompareResponse,
   DynamicOptions,
   CreateCompareTaskResponse,
@@ -210,7 +212,7 @@ import {
   DBItem,
   DeleteCompareTaskRequest,
   MigrateDetailInfo,
-  StopMigrateJobRequest,
+  ResetSyncJobResponse,
   Endpoint,
   ConfigureSubscribeJobRequest,
   SyncJobInfo,
@@ -642,6 +644,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   */
+  async SkipCheckItem(
+    req: SkipCheckItemRequest,
+    cb?: (error: string, rep: SkipCheckItemResponse) => void
+  ): Promise<SkipCheckItemResponse> {
+    return this.request("SkipCheckItem", req, cb)
+  }
+
+  /**
    * 恢复处于已暂停状态的数据同步任务。
    */
   async ContinueSyncJob(
@@ -682,13 +694,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   * 重置已经结束的同步任务，重置后可以重新配置启动任务。
    */
-  async SkipCheckItem(
-    req: SkipCheckItemRequest,
-    cb?: (error: string, rep: SkipCheckItemResponse) => void
-  ): Promise<SkipCheckItemResponse> {
-    return this.request("SkipCheckItem", req, cb)
+  async ResetSyncJob(
+    req: ResetSyncJobRequest,
+    cb?: (error: string, rep: ResetSyncJobResponse) => void
+  ): Promise<ResetSyncJobResponse> {
+    return this.request("ResetSyncJob", req, cb)
   }
 
   /**

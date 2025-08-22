@@ -1028,6 +1028,10 @@ export interface ModifyDirectConnectAttributeRequest {
    */
   FaultReportContactNumber?: string
   /**
+   * 报障联系邮箱。
+   */
+  FaultReportContactEmail?: string
+  /**
    * 物理专线申请者补签用户使用协议。
    */
   SignLaw?: boolean
@@ -1216,6 +1220,10 @@ ChinaOther：中国其他；
    * 报障联系电话。
    */
   FaultReportContactNumber?: string
+  /**
+   * 报障联系邮箱。
+   */
+  FaultReportContactEmail?: string
   /**
    * 物理专线申请者是否签署了用户使用协议。默认已签署。
    */

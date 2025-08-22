@@ -183,11 +183,11 @@ HYBRID_PAID:
    */
   InstancePerReplicas?: number
   /**
-   * 30
+   * 服务的优雅退出时限。单位为秒，默认值为30，最小为1
    */
   TerminationGracePeriodSeconds?: number
   /**
-   * ["sleep","60"]
+   * 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束
    */
   PreStopCommand?: Array<string>
   /**
@@ -206,6 +206,10 @@ HYBRID_PAID:
    * sidecar配置
    */
   Sidecar?: SidecarSpec
+  /**
+   * 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-资源组缓存”。
+   */
+  VolumeMounts?: Array<VolumeMount>
 }
 
 /**
@@ -874,6 +878,14 @@ DEFAULT: 其他来源
    * 服务创建者的子账号名称
    */
   SubUinName?: string
+  /**
+   * 服务的调度策略
+   */
+  SchedulingPolicy?: SchedulingPolicy
+  /**
+   * 外部的资源组信息，表示借调了哪些资源组的资源
+   */
+  ExternalResourceGroups?: Array<ResourceGroupInfo>
 }
 
 /**
@@ -1008,6 +1020,11 @@ export interface VolumeMount {
    * 挂载源类型，CFS、COS，默认为CFS
    */
   VolumeSourceType?: string
+  /**
+   * 自定义容器内挂载路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MountPath?: string
 }
 
 /**
@@ -1523,11 +1540,11 @@ HYBRID_PAID:
    */
   InstancePerReplicas?: number
   /**
-   * 30
+   * 服务的优雅退出时限。单位为秒，默认值为30，最小为1
    */
   TerminationGracePeriodSeconds?: number
   /**
-   * ["sleep","60"]
+   * 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束
    */
   PreStopCommand?: Array<string>
   /**
@@ -1550,6 +1567,10 @@ HYBRID_PAID:
    * 资源组 id
    */
   ResourceGroupId?: string
+  /**
+   * 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-资源组缓存”。
+   */
+  VolumeMounts?: Array<VolumeMount>
 }
 
 /**
@@ -2057,6 +2078,20 @@ export interface InferGatewayCallInfo {
 }
 
 /**
+ * 在线服务中服务的资源组简略信息结构
+ */
+export interface ResourceGroupInfo {
+  /**
+   * 资源组 id
+   */
+  ResourceGroupId?: string
+  /**
+   * 资源组名称
+   */
+  ResourceGroupName?: string
+}
+
+/**
  * CreateNotebook请求参数结构体
  */
 export interface CreateNotebookRequest {
@@ -2291,7 +2326,16 @@ TI.GN7.20XLARGE320.POST: 80C32
 /**
  * 公有云数据源结构
  */
-export type PublicDataSourceFS = null
+export interface PublicDataSourceFS {
+  /**
+   * 数据源id
+   */
+  DataSourceId?: string
+  /**
+   * 相对数据源子路径
+   */
+  SubPath?: string
+}
 
 /**
  * 配置GooseFS参数
@@ -2421,6 +2465,16 @@ export interface ModifyModelServiceAuthTokenRequest {
    * AuthToken 数据
    */
   AuthToken?: AuthToken
+}
+
+/**
+ * 服务的调度策略配置
+ */
+export interface SchedulingPolicy {
+  /**
+   * 是否启用了跨资源组调度开关
+   */
+  CrossResourceGroupScheduling?: boolean
 }
 
 /**
@@ -3310,6 +3364,14 @@ HYBRID_PAID:
    * 滚动更新配置
    */
   RollingUpdate?: RollingUpdate
+  /**
+   * 单副本下的实例数，仅在部署类型为DIST、ROLE时生效，默认1
+   */
+  InstancePerReplicas?: number
+  /**
+   * 批量数据盘挂载配置
+   */
+  VolumeMounts?: Array<VolumeMount>
 }
 
 /**
@@ -4979,7 +5041,7 @@ export interface ResourceGroup {
    */
   TotalInstance?: number
   /**
-   * 资资源组已用的资源
+   * 资源组已用的资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedResource?: GroupResource
@@ -6303,6 +6365,22 @@ export interface Pod {
    * 当前实例所在的节点 IP
    */
   NodeIP?: string
+  /**
+   * 当前实例所在节点id
+   */
+  NodeId?: string
+  /**
+   * 当时实例所属资源组 id
+   */
+  ResourceGroupId?: string
+  /**
+   * 资源组名称
+   */
+  ResourceGroupName?: string
+  /**
+   * 实例的资源占用信息
+   */
+  ResourceInfo?: ResourceInfo
 }
 
 /**

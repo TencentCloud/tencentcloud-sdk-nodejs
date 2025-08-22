@@ -659,6 +659,10 @@ export interface DocumentUsage {
    * 解析失败页数
    */
   FailPageNum?: number
+  /**
+   * 文件大小，单位KB
+   */
+  FileSize?: number
 }
 
 /**

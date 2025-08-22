@@ -433,7 +433,7 @@ export interface DescribeAgentPayDealsV2Request {
    */
   Limit: number
   /**
-   * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
+   * 下单时间范围起始点(不传时会默认查最近15天内订单，传值时需要传最近15天内的起始时间)
    */
   CreatTimeRangeStart?: string
   /**
@@ -841,7 +841,7 @@ export interface DescribeAgentSelfPayDealsV2Request {
    */
   Limit: number
   /**
-   * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
+   * 下单时间范围起始点(不传时会默认查最近15天内订单，传值时需要传最近15天内的起始时间)
    */
   CreatTimeRangeStart?: string
   /**

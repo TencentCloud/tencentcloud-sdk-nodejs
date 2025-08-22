@@ -1362,11 +1362,13 @@ export interface ModifyDBInstanceSpecRequest {
 export interface Auth {
   /**
    * 当前账号具有的权限信息。<ul><li>0：无权限。</li><li>1：只读。</li><li>2：只写。</li><li>3：读写。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Mask: number
   /**
    * 指具有当前账号权限的数据库名。
 <ul><li>* ：表示所有数据库。</li><li>db.name：表示特定name的数据库。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NameSpace: string
 }
@@ -1763,23 +1765,27 @@ export interface UserInfo {
   /**
    * 账号名。
    */
-  UserName: string
+  UserName?: string
   /**
    * 账号权限详情。
    */
-  AuthRole: Array<Auth>
+  AuthRole?: Array<Auth>
   /**
    * 账号创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 账号更新时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 备注信息。
    */
-  UserDesc: string
+  UserDesc?: string
+  /**
+   * 控制台密码更新时间
+   */
+  ConsolePassUpdateTime?: string
 }
 
 /**

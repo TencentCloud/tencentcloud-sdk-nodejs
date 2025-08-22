@@ -4278,6 +4278,16 @@ export interface CreateTWeSeeRecognitionTaskRequest {
    * 摘要输出配置
    */
   SummaryConfig?: VisionSummaryConfig
+  /**
+   * 算法类型，可能取值：
+- `Summary`：视频/图片摘要
+- `ObjectDetect`：目标检测
+   */
+  ServiceType?: string
+  /**
+   * 目标检测配置
+   */
+  ObjectDetectConfig?: VisionObjectDetectConfig
 }
 
 /**
@@ -4578,6 +4588,16 @@ export interface InvokeTWeSeeRecognitionTaskRequest {
    * 摘要输出配置
    */
   SummaryConfig?: VisionSummaryConfig
+  /**
+   * 算法类型，可能取值：
+- `Summary`：视频/图片摘要
+- `ObjectDetect`：目标检测
+   */
+  ServiceType?: string
+  /**
+   * 目标检测配置
+   */
+  ObjectDetectConfig?: VisionObjectDetectConfig
 }
 
 /**
@@ -8414,6 +8434,18 @@ export interface CreateBatchProductionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 目标检测配置
+ */
+export interface VisionObjectDetectConfig {
+  /**
+   * 检测类别，可选值：
+- `adult`：成年人
+- `child`：儿童
+   */
+  DetectTypes?: Array<string>
 }
 
 /**

@@ -412,6 +412,7 @@ import {
   DiarySHLConfig,
   UnbindDevicesResponse,
   CreateBatchProductionResponse,
+  VisionObjectDetectConfig,
   TargetInfo,
   GetTopicRuleListRequest,
   DeleteStudioProductRequest,
