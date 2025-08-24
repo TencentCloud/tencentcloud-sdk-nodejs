@@ -101,7 +101,7 @@ import {
   DescribeDeviceDataHistoryResponse,
   DeviceUser,
   ProductModelDefinition,
-  PositionFenceInfo,
+  GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   ModifyLoRaFrequencyResponse,
   InstanceDetail,
@@ -178,7 +178,7 @@ import {
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
-  GetBatchProductionsListRequest,
+  PositionFenceInfo,
   DescribeDeviceBindGatewayResponse,
   ControlDeviceDataResponse,
   EventHistoryItem,
@@ -303,6 +303,7 @@ import {
   CreateLoRaFrequencyRequest,
   LoRaGatewayItem,
   ModifyLoRaFrequencyRequest,
+  VisionRecognitionTask,
   CreateLoRaFrequencyResponse,
   EnableTopicRuleResponse,
   GetGatewaySubDeviceListRequest,
@@ -361,6 +362,7 @@ import {
   InvokeExternalSourceAIServiceTaskRequest,
   DescribeProductCloudStorageAIServiceRequest,
   DeleteLoRaGatewayRequest,
+  DescribeTWeSeeRecognitionTaskResponse,
   ModifyTopicPolicyResponse,
   DescribeCloudStorageStreamDataResponse,
   TransferTWeCallDeviceResponse,
@@ -393,6 +395,7 @@ import {
   CreateDeviceChannelResponse,
   CreateTopicRuleRequest,
   CreateTopicPolicyRequest,
+  DescribeTWeSeeRecognitionTaskRequest,
   CancelAssignTWeCallLicenseResponse,
   DescribeCloudStorageEventsResponse,
   Filter,
@@ -733,6 +736,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStoragePackageConsumeStatsResponse) => void
   ): Promise<DescribeCloudStoragePackageConsumeStatsResponse> {
     return this.request("DescribeCloudStoragePackageConsumeStats", req, cb)
+  }
+
+  /**
+   * 获取指定网关设备的子设备列表
+   */
+  async GetGatewaySubDeviceList(
+    req: GetGatewaySubDeviceListRequest,
+    cb?: (error: string, rep: GetGatewaySubDeviceListResponse) => void
+  ): Promise<GetGatewaySubDeviceListResponse> {
+    return this.request("GetGatewaySubDeviceList", req, cb)
   }
 
   /**
@@ -1662,13 +1675,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定网关设备的子设备列表
+   * 查询 TWeSee 语义理解任务
    */
-  async GetGatewaySubDeviceList(
-    req: GetGatewaySubDeviceListRequest,
-    cb?: (error: string, rep: GetGatewaySubDeviceListResponse) => void
-  ): Promise<GetGatewaySubDeviceListResponse> {
-    return this.request("GetGatewaySubDeviceList", req, cb)
+  async DescribeTWeSeeRecognitionTask(
+    req: DescribeTWeSeeRecognitionTaskRequest,
+    cb?: (error: string, rep: DescribeTWeSeeRecognitionTaskResponse) => void
+  ): Promise<DescribeTWeSeeRecognitionTaskResponse> {
+    return this.request("DescribeTWeSeeRecognitionTask", req, cb)
   }
 
   /**

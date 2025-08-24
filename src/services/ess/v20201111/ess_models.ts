@@ -2395,6 +2395,36 @@ export interface CreateEmployeeChangeUrlRequest {
 }
 
 /**
+ * 坐标详情
+ */
+export interface PositionInfo {
+  /**
+   * PDF文件页X坐标位置,以PDF单页左上角为坐标原点
+   */
+  X?: number
+  /**
+   * PDF文件页Y坐标位置,以PDF单页左上角为坐标原点
+   */
+  Y?: number
+  /**
+   * 距离X坐标的宽度，用于在PDF文件进行画框。
+   */
+  Width?: number
+  /**
+   * 距离Y坐标的高度，用于在PDF文件进行画框。
+   */
+  Height?: number
+  /**
+   * PDF文件页码索引，此值加1就是对应PDF文件的页码。
+   */
+  PageIndex?: number
+  /**
+   * 系统生成的唯一ID值
+   */
+  Id?: string
+}
+
+/**
  * CreateUserAutoSignEnableUrl请求参数结构体
  */
 export interface CreateUserAutoSignEnableUrlRequest {
@@ -3872,30 +3902,40 @@ export interface CreateBatchContractReviewTaskRequest {
    */
   ResourceIds: Array<string>
   /**
-   * 合同审查的审查立场方。
+   * 合同审查的审查尺度。默认为`0`严格尺度
 
-审查立场方如下：
+审查尺度如下：
 <ul>
     <li>**0** - 【严格】以保护己方利益为核心，对合同条款进行严格把控，尽可能争取对己方有利的条款，同时对对方提出的不合理条款可进行坚决修改或删除。</li> 
     <li>**1** - 【中立】以公平合理为原则，平衡双方的权利义务，既不过分强调己方利益，也不过度让步，力求达成双方均可接受的条款。</li>   
     <li>**2** - 【宽松】以促成交易为核心，对合同条款的修改要求较为宽松，倾向于接受对方提出的条款，以尽快达成合作。</li>  
 </ul>
    */
-  PolicyType: number
+  PolicyType?: number
   /**
-   * 合同审查中的角色信息，通过明确入参角色的名称和描述，可以提高合同审查的效率和准确性。
+   * 合同审查中的角色信息，通过明确入参角色的名称和描述，可以提高合同审查的效率和准确性。用户不做配置时大模型会根据合同内容推荐出风险识别角色的名称和描述信息。
    */
-  Role: RiskIdentificationRoleInfo
+  Role?: RiskIdentificationRoleInfo
   /**
    * 用户配置的审查清单ID，基于此清单ID批量创建合同审查任务，为32位字符串。
-[点击查看审查清单ID在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/2c6588549e28ca49bd8bb7f4a072b19e.png)
+[点击查看审查清单ID在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/2c6588549e28ca49bd8bb7f4a072b19e.png)。如果用户不做此配置大模型会根据合同内容在当前企业下的审查清单和系统默认的清单中选择一个清单进行审查。
    */
-  ChecklistId: string
+  ChecklistId?: string
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+  /**
+   * 备注信息，长度不能超过100个字符
+   */
+  Comment?: string
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
+   */
+  UserData?: string
 }
 
 /**
@@ -8319,7 +8359,7 @@ export interface CreateSealPolicyRequest {
  */
 export interface DescribeContractReviewTaskResponse {
   /**
-   * 用于审查任务的审查清单ID。
+   * 用于审查任务的审查清单ID。注意：如果用户没有配置清单时此值可能为空，需要等大模型根据合同内容推荐出可以使用的审查清单。
    */
   ChecklistId?: string
   /**
@@ -8352,7 +8392,8 @@ export interface DescribeContractReviewTaskResponse {
    */
   Risks?: Array<OutputRisk>
   /**
-   * 合同审查中的角色信息。
+   * 合同审查中的角色信息。注意：注意：如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Role?: RiskIdentificationRoleInfo
   /**
@@ -8371,6 +8412,16 @@ export interface DescribeContractReviewTaskResponse {
    * 合同审查任务ID
    */
   TaskId?: string
+  /**
+   * 审查任务备注信息，长度不能超过100个字符
+   */
+  Comment?: string
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
+   */
+  UserData?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10172,6 +10223,10 @@ export interface OutputRisk {
    * PDF风险原文内容
    */
   Content?: string
+  /**
+   * 审查出的PDF段落位置信息
+   */
+  Positions?: Array<PositionInfo>
   /**
    * 审查依据
    */

@@ -358,6 +358,16 @@ it("tdmq.v20200217.DescribeRocketMQTopicMsgs", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQProducers", async function () {
+    try {
+       const data = await client.DescribeRocketMQProducers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeEnvironmentAttributes", async function () {
     try {
        const data = await client.DescribeEnvironmentAttributes({})

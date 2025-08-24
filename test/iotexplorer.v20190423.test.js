@@ -308,6 +308,16 @@ it("iotexplorer.v20190423.DescribeCloudStoragePackageConsumeStats", async functi
     }
 })
 
+it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
+    try {
+       const data = await client.GetGatewaySubDeviceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeletePositionSpace", async function () {
     try {
        const data = await client.DeletePositionSpace({})
@@ -1228,9 +1238,9 @@ it("iotexplorer.v20190423.BindCloudStorageUser", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
+it("iotexplorer.v20190423.DescribeTWeSeeRecognitionTask", async function () {
     try {
-       const data = await client.GetGatewaySubDeviceList({})
+       const data = await client.DescribeTWeSeeRecognitionTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

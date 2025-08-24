@@ -9659,10 +9659,12 @@ export interface LogicBackupConfigInfo {
   LogicBackupTimeEnd?: number
   /**
    * 自动逻辑备份保留时间
+单位：秒
    */
   LogicReserveDuration?: number
   /**
    * 是否开启跨地域逻辑备份
+可选值：ON/OFF
    */
   LogicCrossRegionsEnable?: string
   /**

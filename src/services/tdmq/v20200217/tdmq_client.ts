@@ -56,7 +56,7 @@ import {
   DescribeRabbitMQVirtualHostResponse,
   RabbitMQPermission,
   CreateRocketMQClusterRequest,
-  ModifyCmqSubscriptionAttributeResponse,
+  DescribeClusterDetailRequest,
   DeleteRocketMQRolesResponse,
   DeleteRocketMQTopicResponse,
   Publisher,
@@ -115,6 +115,7 @@ import {
   SendBatchMessagesRequest,
   DescribeRabbitMQNodeListResponse,
   RocketMQTopicConfig,
+  ProducerInfo,
   ProducerLog,
   DescribePublisherSummaryRequest,
   PulsarProClusterInfo,
@@ -125,6 +126,7 @@ import {
   DetailedRolePerm,
   RabbitMQClusterAccessInfo,
   DescribeBindClustersResponse,
+  ExportRocketMQMessageDetailResponse,
   ModifyRabbitMQVirtualHostRequest,
   ReceiveMessageRequest,
   RocketMQConsumerConnection,
@@ -142,7 +144,7 @@ import {
   ExchangeQuota,
   ModifyRabbitMQVirtualHostResponse,
   RabbitMQQueueListConsumerDetailInfo,
-  ExportRocketMQMessageDetailResponse,
+  CreateRocketMQRoleResponse,
   CreateSubscriptionResponse,
   ImportRocketMQConsumerGroupsResponse,
   DescribeRocketMQConsumerConnectionsResponse,
@@ -174,7 +176,7 @@ import {
   CreateRocketMQGroupResponse,
   ModifyRocketMQNamespaceRequest,
   ModifyRocketMQTopicResponse,
-  CreateRocketMQRoleResponse,
+  DescribeRocketMQProducersRequest,
   DeleteRocketMQGroupResponse,
   PulsarProInstance,
   RocketMQMigrationTopicDistribution,
@@ -228,7 +230,7 @@ import {
   CreateRocketMQGroupRequest,
   Role,
   DescribeTopicMsgsResponse,
-  DescribeClusterDetailRequest,
+  ModifyCmqSubscriptionAttributeResponse,
   SendCmqMsgRequest,
   RabbitMQUserQuota,
   CreateRabbitMQVirtualHostResponse,
@@ -280,6 +282,7 @@ import {
   ResetMsgSubOffsetByTimestampResponse,
   SendMessagesRequest,
   CreateRocketMQRoleRequest,
+  DescribeRocketMQProducersResponse,
   DescribeNodeHealthOptResponse,
   DescribeRabbitMQVipInstanceResponse,
   ModifyCmqSubscriptionAttributeRequest,
@@ -761,6 +764,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQTopicMsgsResponse) => void
   ): Promise<DescribeRocketMQTopicMsgsResponse> {
     return this.request("DescribeRocketMQTopicMsgs", req, cb)
+  }
+
+  /**
+   * 查询 RocketMQ 指定主题下的生产者客户端列表。
+   */
+  async DescribeRocketMQProducers(
+    req: DescribeRocketMQProducersRequest,
+    cb?: (error: string, rep: DescribeRocketMQProducersResponse) => void
+  ): Promise<DescribeRocketMQProducersResponse> {
+    return this.request("DescribeRocketMQProducers", req, cb)
   }
 
   /**

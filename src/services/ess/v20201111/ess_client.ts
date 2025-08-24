@@ -76,6 +76,7 @@ import {
   VerifyPdfRequest,
   FailedCreateRoleData,
   CreateEmployeeChangeUrlRequest,
+  PositionInfo,
   CreateUserAutoSignEnableUrlRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
   DescribeBatchOrganizationRegistrationTasksResponse,

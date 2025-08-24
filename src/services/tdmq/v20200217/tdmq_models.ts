@@ -1245,13 +1245,13 @@ export interface CreateRocketMQClusterRequest {
 }
 
 /**
- * ModifyCmqSubscriptionAttribute返回参数结构体
+ * DescribeClusterDetail请求参数结构体
  */
-export interface ModifyCmqSubscriptionAttributeResponse {
+export interface DescribeClusterDetailRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群的ID
    */
-  RequestId?: string
+  ClusterId: string
 }
 
 /**
@@ -2859,6 +2859,49 @@ DelayScheduled，延迟/定时消息
 }
 
 /**
+ * 生产者客户端详情
+ */
+export interface ProducerInfo {
+  /**
+   * 客户端ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * 客户端IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIp?: string
+  /**
+   * 客户端语言
+JAVA((byte) 0),
+    CPP((byte) 1),
+    DOTNET((byte) 2),
+    PYTHON((byte) 3),
+    DELPHI((byte) 4),
+    ERLANG((byte) 5),
+    RUBY((byte) 6),
+    OTHER((byte) 7),
+    HTTP((byte) 8),
+    GO((byte) 9),
+    PHP((byte) 10),
+    OMS((byte) 11);
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Language?: string
+  /**
+   * 客户端版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 最后生产时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTimestamp?: number
+}
+
+/**
  * 消息生产信息
  */
 export interface ProducerLog {
@@ -3158,6 +3201,70 @@ export interface DescribeBindClustersResponse {
    * 专享集群的列表
    */
   ClusterSet?: Array<BindCluster>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ExportRocketMQMessageDetail返回参数结构体
+ */
+export interface ExportRocketMQMessageDetailResponse {
+  /**
+   * 消息id
+   */
+  MsgId?: string
+  /**
+   * 消息生成时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BornTimestamp?: number
+  /**
+   * 消息存储时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StoreTimestamp?: number
+  /**
+   * 消息生产客户端地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BornHost?: string
+  /**
+   * 消息Tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgTag?: string
+  /**
+   * 消息Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgKey?: string
+  /**
+   * 消息属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: string
+  /**
+   * 消息重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReConsumeTimes?: number
+  /**
+   * Base64编码格式字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgBody?: string
+  /**
+   * 消息内容的CRC32 Code
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgBodyCRC?: number
+  /**
+   * 消息体大小（单位K）
+当大于2048时不返回消息
+   */
+  MsgBodySize?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3706,63 +3813,22 @@ export interface RabbitMQQueueListConsumerDetailInfo {
 }
 
 /**
- * ExportRocketMQMessageDetail返回参数结构体
+ * CreateRocketMQRole返回参数结构体
  */
-export interface ExportRocketMQMessageDetailResponse {
+export interface CreateRocketMQRoleResponse {
   /**
-   * 消息id
+   * 角色名称
    */
-  MsgId?: string
+  RoleName?: string
   /**
-   * 消息生成时间戳
+   * 角色token
+   */
+  Token?: string
+  /**
+   * 备注说明
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BornTimestamp?: number
-  /**
-   * 消息存储时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StoreTimestamp?: number
-  /**
-   * 消息生产客户端地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BornHost?: string
-  /**
-   * 消息Tag
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgTag?: string
-  /**
-   * 消息Key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgKey?: string
-  /**
-   * 消息属性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Properties?: string
-  /**
-   * 消息重试次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReConsumeTimes?: number
-  /**
-   * Base64编码格式字符串
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgBody?: string
-  /**
-   * 消息内容的CRC32 Code
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgBodyCRC?: number
-  /**
-   * 消息体大小（单位K）
-当大于2048时不返回消息
-   */
-  MsgBodySize?: number
+  Remark?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4493,26 +4559,36 @@ export interface ModifyRocketMQTopicResponse {
 }
 
 /**
- * CreateRocketMQRole返回参数结构体
+ * DescribeRocketMQProducers请求参数结构体
  */
-export interface CreateRocketMQRoleResponse {
+export interface DescribeRocketMQProducersRequest {
   /**
-   * 角色名称
+   * 集群ID
    */
-  RoleName?: string
+  ClusterId: string
   /**
-   * 角色token
+   * 命名空间
    */
-  Token?: string
+  NamespaceId: string
   /**
-   * 备注说明
-注意：此字段可能返回 null，表示取不到有效值。
+   * 主题名
    */
-  Remark?: string
+  Topic: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页offset
    */
-  RequestId?: string
+  Offset: number
+  /**
+   * 分页limit
+   */
+  Limit: number
+  /**
+   * 过滤查询条件列表，支持以下过滤参数：
+
+- ClientId：生产者客户端ID
+- ClientIp：生产者客户端IP
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5995,13 +6071,13 @@ export interface DescribeTopicMsgsResponse {
 }
 
 /**
- * DescribeClusterDetail请求参数结构体
+ * ModifyCmqSubscriptionAttribute返回参数结构体
  */
-export interface DescribeClusterDetailRequest {
+export interface ModifyCmqSubscriptionAttributeResponse {
   /**
-   * 集群的ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId: string
+  RequestId?: string
 }
 
 /**
@@ -7557,6 +7633,24 @@ export interface CreateRocketMQRoleRequest {
    * 角色授权类型（集群：Cluster; 主题或消费组：TopicAndGroup）
    */
   PermType?: string
+}
+
+/**
+ * DescribeRocketMQProducers返回参数结构体
+ */
+export interface DescribeRocketMQProducersResponse {
+  /**
+   * 生产者客户端列表
+   */
+  Producers?: Array<ProducerInfo>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

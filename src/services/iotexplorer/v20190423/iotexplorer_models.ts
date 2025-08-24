@@ -1666,21 +1666,21 @@ export interface ProductModelDefinition {
 }
 
 /**
- * 围栏详细信息(包含创建时间及更新时间)
+ * GetBatchProductionsList请求参数结构体
  */
-export interface PositionFenceInfo {
+export interface GetBatchProductionsListRequest {
   /**
-   * 围栏信息
+   * 项目ID
    */
-  GeoFence?: PositionFenceItem
+  ProjectId: string
   /**
-   * 围栏创建时间
+   * 偏移量
    */
-  CreateTime?: number
+  Offset?: number
   /**
-   * 围栏更新时间
+   * 返回数量限制
    */
-  UpdateTime?: number
+  Limit?: number
 }
 
 /**
@@ -3196,21 +3196,21 @@ export interface CreateLoRaGatewayResponse {
 }
 
 /**
- * GetBatchProductionsList请求参数结构体
+ * 围栏详细信息(包含创建时间及更新时间)
  */
-export interface GetBatchProductionsListRequest {
+export interface PositionFenceInfo {
   /**
-   * 项目ID
+   * 围栏信息
    */
-  ProjectId: string
+  GeoFence?: PositionFenceItem
   /**
-   * 偏移量
+   * 围栏创建时间
    */
-  Offset?: number
+  CreateTime?: number
   /**
-   * 返回数量限制
+   * 围栏更新时间
    */
-  Limit?: number
+  UpdateTime?: number
 }
 
 /**
@@ -5917,6 +5917,72 @@ export interface ModifyLoRaFrequencyRequest {
 }
 
 /**
+ * TWeSee 语义理解任务信息
+ */
+export interface VisionRecognitionTask {
+  /**
+   * 云存 AI 服务任务 ID
+   */
+  TaskId?: string
+  /**
+   * 产品 ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
+   * 对应云存视频的起始时间（秒级 UNIX 时间戳）
+   */
+  StartTime?: number
+  /**
+   * 对应云存视频的起始时间（毫秒级 UNIX 时间戳）
+   */
+  StartTimeMs?: number
+  /**
+   * 对应云存视频的结束时间（秒级 UNIX 时间戳）
+   */
+  EndTime?: number
+  /**
+   * 对应云存视频的结束时间（毫秒级 UNIX 时间戳）
+   */
+  EndTimeMs?: number
+  /**
+   * 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功；4：执行中）
+   */
+  Status?: number
+  /**
+   * 任务结果
+   */
+  Result?: VisionRecognitionResult
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 最后更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 自定义任务 ID
+   */
+  CustomId?: string
+  /**
+   * 任务输出文件列表
+   */
+  Files?: Array<string>
+  /**
+   * 任务输出文件信息列表
+   */
+  FilesInfo?: Array<CloudStorageAIServiceTaskFileInfo>
+}
+
+/**
  * CreateLoRaFrequency返回参数结构体
  */
 export interface CreateLoRaFrequencyResponse {
@@ -7222,6 +7288,20 @@ export interface DeleteLoRaGatewayRequest {
 }
 
 /**
+ * DescribeTWeSeeRecognitionTask返回参数结构体
+ */
+export interface DescribeTWeSeeRecognitionTaskResponse {
+  /**
+   * 任务信息
+   */
+  TaskInfo?: VisionRecognitionTask
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyTopicPolicy返回参数结构体
  */
 export interface ModifyTopicPolicyResponse {
@@ -7989,6 +8069,22 @@ export interface CreateTopicPolicyRequest {
    * Topic权限，1发布，2订阅，3订阅和发布
    */
   Privilege: number
+}
+
+/**
+ * DescribeTWeSeeRecognitionTask请求参数结构体
+ */
+export interface DescribeTWeSeeRecognitionTaskRequest {
+  /**
+   * 任务 ID
+   */
+  TaskId: string
+  /**
+   * 下载 URL 的过期时间。
+
+若传入该参数，则响应中将包含所有文件的下载 URL
+   */
+  FileURLExpireTime?: number
 }
 
 /**
