@@ -158,16 +158,6 @@ it("wedata.v20210820.BatchStopOpsTasks", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTaskByCycleReport", async function () {
-    try {
-       const data = await client.DescribeTaskByCycleReport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("wedata.v20210820.DownloadLogByLine", async function () {
     try {
        const data = await client.DownloadLogByLine({})
@@ -2218,16 +2208,6 @@ it("wedata.v20210820.DescribeColumnLineage", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTrendStat", async function () {
-    try {
-       const data = await client.DescribeTrendStat({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("wedata.v20210820.DescribeTableInfoList", async function () {
     try {
        const data = await client.DescribeTableInfoList({})
@@ -2268,9 +2248,9 @@ it("wedata.v20210820.DeleteTaskDs", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyRuleGroupSubscription", async function () {
+it("wedata.v20210820.DescribeTestRunningRecord", async function () {
     try {
-       const data = await client.ModifyRuleGroupSubscription({})
+       const data = await client.DescribeTestRunningRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2628,6 +2608,16 @@ it("wedata.v20210820.DescribeTenantProjects", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyRuleGroupSubscription", async function () {
+    try {
+       const data = await client.ModifyRuleGroupSubscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeWorkflowCanvasInfo", async function () {
     try {
        const data = await client.DescribeWorkflowCanvasInfo({})
@@ -2788,9 +2778,9 @@ it("wedata.v20210820.TaskLog", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeRuleTemplates", async function () {
+it("wedata.v20210820.DescribeTrendStat", async function () {
     try {
-       const data = await client.DescribeRuleTemplates({})
+       const data = await client.DescribeTrendStat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2978,9 +2968,9 @@ it("wedata.v20210820.BatchStopWorkflowsByIds", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeDrInstancePage", async function () {
+it("wedata.v20210820.DescribeRuleTemplates", async function () {
     try {
-       const data = await client.DescribeDrInstancePage({})
+       const data = await client.DescribeRuleTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

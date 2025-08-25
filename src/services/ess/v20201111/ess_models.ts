@@ -8392,7 +8392,7 @@ export interface DescribeContractReviewTaskResponse {
    */
   Risks?: Array<OutputRisk>
   /**
-   * 合同审查中的角色信息。注意：注意：如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。
+   * 合同审查中的角色信息。注意： `如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。`
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Role?: RiskIdentificationRoleInfo
@@ -8422,6 +8422,14 @@ export interface DescribeContractReviewTaskResponse {
 在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
    */
   UserData?: string
+  /**
+   * 合同审查出的高风险项数量
+   */
+  HighRiskCount?: number
+  /**
+   * 合同审查出的风险总数
+   */
+  TotalRiskCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

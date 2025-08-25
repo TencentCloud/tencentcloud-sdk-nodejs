@@ -92,7 +92,8 @@ import {
   BytesSpeed,
   RegisterDsEventRequest,
   CheckTaskNameExistRequest,
-  ThresholdValue,
+  WorkspaceExt,
+  TestRunningSubRecord,
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
   DescribeInstanceDetailInfoResponse,
@@ -118,7 +119,7 @@ import {
   InstanceDownloadLogInfo,
   EventCaseDTO,
   DescribeOpsWorkflowsResponse,
-  TableScoreStatisticsInfo,
+  DescribeTestRunningRecordResponse,
   InstanceOpsDto,
   DescribeDutyScheduleDetailsRequest,
   DescribeTasksForCodeTemplateResponse,
@@ -155,7 +156,6 @@ import {
   DescribeRuleGroupsByPageRequest,
   DescribeTaskTemplatesResponse,
   BatchDeleteIntegrationTasksResponse,
-  ListBatchDetailResponse,
   DescribeTaskTableMetricOverviewResponse,
   BaseRole,
   BatchRerunIntegrationTaskInstancesRequest,
@@ -174,7 +174,7 @@ import {
   DescribeInstanceLogDetailRequest,
   BatchSuspendIntegrationTasksRequest,
   DeleteDsFolderResponse,
-  DescribeDrInstancePageResponse,
+  GetCosTokenResponse,
   MoveTasksToFolderRequest,
   OrderFields,
   MoveTasksToFolderResponse,
@@ -189,9 +189,8 @@ import {
   DescribeTaskScriptResponse,
   InstancePageVO,
   CollectionInstanceOpsDto,
-  DrInstanceOpsDtoPage,
+  ListBatchDetailResponse,
   TableLineageInfo,
-  GetCosTokenResponse,
   DescribeSchedulerInstanceStatusResponse,
   CountOpsInstanceStateRequest,
   DescribeThirdTaskRunLogResponse,
@@ -327,7 +326,6 @@ import {
   DescribeInstanceListRequest,
   GetOfflineInstanceListResponse,
   DeleteCustomFunctionRequest,
-  DrInstanceOpsDto,
   InstanceLogInfo,
   GetFileInfoRequest,
   TableLineageBaseInfo,
@@ -342,6 +340,7 @@ import {
   JobLogErrorTip,
   EventOpsDto,
   DescribeFolderWorkflowListData,
+  AlarmReceiverGroup,
   ScreenTaskInfo,
   TableConfig,
   FilterOptional,
@@ -371,7 +370,6 @@ import {
   IntegrationNodeDetail,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
-  ResourcePoolInfo,
   GenHiveTableDDLSqlRequest,
   BatchCreateIntegrationTaskAlarmsRequest,
   QualityScore,
@@ -379,10 +377,11 @@ import {
   IntegrationTag,
   GetJobStatusResponse,
   SearchConditionNew,
+  RenewWorkflowSchedulerInfoDsResponse,
   BatchStopOpsTasksRequest,
   DescribeFunctionTypesResponse,
   ModifyRuleTemplateResponse,
-  RenewWorkflowSchedulerInfoDsResponse,
+  BatchRerunIntegrationTaskInstancesResponse,
   DescribePendingSubmitTaskInfo,
   BatchUpdateIntegrationTasksResponse,
   TaskLogResponse,
@@ -480,11 +479,13 @@ import {
   DescribeOrganizationalFunctionsResponse,
   CollectionFolderOpsDto,
   FreezeTasksByWorkflowIdsRequest,
-  DescribeTaskByCycleReportResponse,
+  SubmitCustomFunctionRequest,
   BatchDeleteOpsTasksResponse,
   ModifyProjectResponse,
   CheckIntegrationTaskNameExistsResponse,
   BatchOperateResultOpsDto,
+  DescribeTestRunningRecordRequest,
+  ThresholdValue,
   RegisterDsEventListenerRequest,
   DeleteRuleRequest,
   ApproveType,
@@ -602,6 +603,7 @@ import {
   BatchStopOpsTasksResponse,
   InstanceLogInfoOpsDto,
   DeleteFilePathResponse,
+  TableScoreStatisticsInfo,
   FailMessage,
   RunRerunScheduleInstancesResponse,
   DependencyConfig,
@@ -645,6 +647,7 @@ import {
   DatasourceBaseInfo,
   LinkOpsDto,
   DlcMergeManifestsInfo,
+  TestRunningRecord,
   DescribeWorkflowListByProjectIdRequest,
   AlarmIndicatorInfo,
   DescribeDataServicePublishedApiDetailResponse,
@@ -702,7 +705,7 @@ import {
   IntegrationInstanceLog,
   EventDsDto,
   IntegrationStatisticsTrendResult,
-  DescribeDrInstancePageRequest,
+  ResourcePoolInfo,
   RuntimeInstanceCntTop,
   ColumnMeta,
   ModifyWorkflowScheduleResponse,
@@ -747,7 +750,6 @@ import {
   DescribeSuccessorTaskInfoListRequest,
   BatchForceSuccessIntegrationTaskInstancesRequest,
   DescribeRealTimeTaskInstanceNodeInfoResponse,
-  DescribeTaskByCycleReportRequest,
   DescribeInstanceLogDetailResponse,
   DescribeApproveListRequest,
   DescribeDutyScheduleListRequest,
@@ -947,14 +949,13 @@ import {
   ModifyTaskInfoDsResponse,
   DescribeTableLineageResponse,
   DescribeDsTaskVersionListResponse,
-  BatchRerunIntegrationTaskInstancesResponse,
+  CommitTaskDataDto,
   RuleGroupPage,
   DeleteDataModelRequest,
   DescribeApproveListResponse,
   DescribeIntegrationTasksRequest,
   BatchMakeUpIntegrationTasksResponse,
   FunctionResource,
-  SubmitCustomFunctionRequest,
   TaskLockStatus,
   EventCaseConsumeLogOptDto,
 } from "./wedata_models"
@@ -1106,20 +1107,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchStopOpsTasksResponse) => void
   ): Promise<BatchStopOpsTasksResponse> {
     return this.request("BatchStopOpsTasks", req, cb)
-  }
-
-  /**
-     * 能够调通但该API已经没有使用了，看北京数据最后一次上报是23年10月，有接近一千万条数据历史无效数据。当前策略，云API示例修订然后已经分析出来的无效API走预下线流程。
-https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20&action=DescribeTaskByCycleReport
-这两天在分析API的时候 有较多运维大屏的原始API当前已经没有使用了，但API没有下线。预计需要专项去梳理这一系列待下线API。
-
-任务状态周期增长趋势
-     */
-  async DescribeTaskByCycleReport(
-    req: DescribeTaskByCycleReportRequest,
-    cb?: (error: string, rep: DescribeTaskByCycleReportResponse) => void
-  ): Promise<DescribeTaskByCycleReportResponse> {
-    return this.request("DescribeTaskByCycleReport", req, cb)
   }
 
   /**
@@ -3181,16 +3168,6 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 数据质量概览页面趋势变化接口
-   */
-  async DescribeTrendStat(
-    req: DescribeTrendStatRequest,
-    cb?: (error: string, rep: DescribeTrendStatResponse) => void
-  ): Promise<DescribeTrendStatResponse> {
-    return this.request("DescribeTrendStat", req, cb)
-  }
-
-  /**
    * 获取数据表信息
    */
   async DescribeTableInfoList(
@@ -3231,13 +3208,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 更新规则组订阅信息
+   * 获取编排空间试运行历史
    */
-  async ModifyRuleGroupSubscription(
-    req: ModifyRuleGroupSubscriptionRequest,
-    cb?: (error: string, rep: ModifyRuleGroupSubscriptionResponse) => void
-  ): Promise<ModifyRuleGroupSubscriptionResponse> {
-    return this.request("ModifyRuleGroupSubscription", req, cb)
+  async DescribeTestRunningRecord(
+    req: DescribeTestRunningRecordRequest,
+    cb?: (error: string, rep: DescribeTestRunningRecordResponse) => void
+  ): Promise<DescribeTestRunningRecordResponse> {
+    return this.request("DescribeTestRunningRecord", req, cb)
   }
 
   /**
@@ -3593,6 +3570,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
+   * 更新规则组订阅信息
+   */
+  async ModifyRuleGroupSubscription(
+    req: ModifyRuleGroupSubscriptionRequest,
+    cb?: (error: string, rep: ModifyRuleGroupSubscriptionResponse) => void
+  ): Promise<ModifyRuleGroupSubscriptionResponse> {
+    return this.request("ModifyRuleGroupSubscription", req, cb)
+  }
+
+  /**
    * 查询工作流画布
    */
   async DescribeWorkflowCanvasInfo(
@@ -3755,13 +3742,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 查询规则模板列表
+   * 数据质量概览页面趋势变化接口
    */
-  async DescribeRuleTemplates(
-    req: DescribeRuleTemplatesRequest,
-    cb?: (error: string, rep: DescribeRuleTemplatesResponse) => void
-  ): Promise<DescribeRuleTemplatesResponse> {
-    return this.request("DescribeRuleTemplates", req, cb)
+  async DescribeTrendStat(
+    req: DescribeTrendStatRequest,
+    cb?: (error: string, rep: DescribeTrendStatResponse) => void
+  ): Promise<DescribeTrendStatResponse> {
+    return this.request("DescribeTrendStat", req, cb)
   }
 
   /**
@@ -3945,15 +3932,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-     * 无效API，没有上线过的业务功能
-
-分页查询试运行实例列表
-     */
-  async DescribeDrInstancePage(
-    req: DescribeDrInstancePageRequest,
-    cb?: (error: string, rep: DescribeDrInstancePageResponse) => void
-  ): Promise<DescribeDrInstancePageResponse> {
-    return this.request("DescribeDrInstancePage", req, cb)
+   * 查询规则模板列表
+   */
+  async DescribeRuleTemplates(
+    req: DescribeRuleTemplatesRequest,
+    cb?: (error: string, rep: DescribeRuleTemplatesResponse) => void
+  ): Promise<DescribeRuleTemplatesResponse> {
+    return this.request("DescribeRuleTemplates", req, cb)
   }
 
   /**

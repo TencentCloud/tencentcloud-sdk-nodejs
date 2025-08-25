@@ -742,6 +742,14 @@ export interface ApmApplicationConfigView {
    * 链路压缩开关（已废弃）
    */
   TraceSquash?: boolean
+  /**
+   * 探针熔断内存阈值
+   */
+  DisableMemoryUsed?: number
+  /**
+   * 探针熔断CPU阈值
+   */
+  DisableCpuUsed?: number
 }
 
 /**

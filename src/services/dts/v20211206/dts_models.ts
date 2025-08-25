@@ -615,7 +615,7 @@ export interface SubscribeInfo {
    */
   Endpoints?: Array<EndpointItem>
   /**
-   * 数据订阅版本, 当前只支持 kafka 版本。
+   * 数据订阅版本, 当前支持kafka和kafkaPro（专业版）
    */
   SubscribeVersion?: string
   /**
@@ -628,6 +628,10 @@ export interface SubscribeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Errors?: Array<SubsErr>
+  /**
+   * 订阅实例规格
+   */
+  InstanceClass?: string
 }
 
 /**
@@ -1505,6 +1509,22 @@ mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不�
 mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。
    */
   ExtraAttr?: Array<KeyValuePairOption>
+  /**
+   * 数据订阅版本, 当前支持kafka和kafkaPro（专业版）
+   */
+  SubscribeVersion?: string
+  /**
+   * 消费端地址所在vpc
+   */
+  ConsumerVpcId?: string
+  /**
+   * 消费端地址所在子网
+   */
+  ConsumerSubnetId?: string
+  /**
+   * 订阅实例规格
+   */
+  InstanceClass?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4078,6 +4098,10 @@ export interface CreateSubscribeRequest {
    * 任务名，自定义
    */
   Name?: string
+  /**
+   * 订阅实例规格，当前仅支持small、medium、large
+   */
+  InstanceClass?: string
 }
 
 /**
@@ -4460,6 +4484,14 @@ mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream，�
 其他业务暂没有可选参数。
    */
   ExtraAttr?: Array<KeyValuePairOption>
+  /**
+   * vpc id
+   */
+  ConsumerVpcId?: string
+  /**
+   * subnet id
+   */
+  ConsumerSubnetId?: string
 }
 
 /**
