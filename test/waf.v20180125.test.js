@@ -1158,6 +1158,16 @@ it("waf.v20180125.DescribeDomainCountInfo", async function () {
     }
 })
 
+it("waf.v20180125.ModifyProtectionLevel", async function () {
+    try {
+       const data = await client.ModifyProtectionLevel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteSpartaProtection", async function () {
     try {
        const data = await client.DeleteSpartaProtection({})

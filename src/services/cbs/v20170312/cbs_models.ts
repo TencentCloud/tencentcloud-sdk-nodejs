@@ -1219,7 +1219,7 @@ export interface Placement {
    */
   CageId?: string
   /**
-   * 实例所属项目ID，可通过[DescribeProject](/document/api/651/78725)获取。不填默认为0，表示默认项目。
+   * 实例所属项目ID，可通过DescribeProject获取。不填默认为0，表示默认项目。
    */
   ProjectId?: number
   /**

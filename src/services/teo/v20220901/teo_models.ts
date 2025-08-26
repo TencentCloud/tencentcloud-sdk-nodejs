@@ -4616,7 +4616,7 @@ export interface Task {
    */
   FailType?: string
   /**
-   * 刷新、预热失败描述。
+   * 清除缓存、预热缓存的失败原因描述。
    */
   FailMessage?: string
 }

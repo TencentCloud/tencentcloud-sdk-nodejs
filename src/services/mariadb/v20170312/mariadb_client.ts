@@ -32,6 +32,8 @@ import {
   CreateDedicatedClusterDBInstanceResponse,
   ModifyInstanceVportResponse,
   DestroyHourDBInstanceRequest,
+  ModifyInstanceProtectedPropertyResponse,
+  ModifyInstanceSSLAttributesRequest,
   ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   DescribeUpgradePriceRequest,
@@ -43,6 +45,7 @@ import {
   DescribeFileDownloadUrlRequest,
   DescribeDBInstanceSpecsResponse,
   DestroyHourDBInstanceResponse,
+  DescribeInstanceSSLAttributesRequest,
   DescribeDBSyncModeResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeDBSlowLogsRequest,
@@ -60,6 +63,8 @@ import {
   ZoneChooseInfo,
   IsolateDedicatedDBInstanceRequest,
   ModifyAccountDescriptionResponse,
+  DescribeProcessListRequest,
+  Process,
   Tag,
   ParamConstraint,
   ModifyDBInstancesProjectResponse,
@@ -101,6 +106,7 @@ import {
   TerminateDedicatedDBInstanceResponse,
   ModifyDBEncryptAttributesResponse,
   DescribeDBEncryptAttributesResponse,
+  ModifyInstanceProtectedPropertyRequest,
   UpgradeDedicatedDBInstanceRequest,
   DestroyDBInstanceRequest,
   DatabaseTable,
@@ -148,7 +154,9 @@ import {
   ModifyBackupTimeResponse,
   Database,
   GrantAccountPrivilegesResponse,
+  ModifyAccountPrivilegesRequest,
   CancelDcnJobRequest,
+  Filter,
   ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
   ReservedNetResource,
@@ -160,6 +168,7 @@ import {
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
   DescribeBackupTimeResponse,
+  ModifyInstanceSSLAttributesResponse,
   ActivateHourDBInstanceRequest,
   RenewDBInstanceResponse,
   DescribeDatabasesResponse,
@@ -173,16 +182,17 @@ import {
   InstanceSpec,
   DescribeFlowRequest,
   DCNReplicaConfig,
-  ModifyAccountPrivilegesRequest,
+  DescribeProcessListResponse,
   Account,
   ModifyBackupConfigsResponse,
   DatabaseProcedure,
   DescribeDBTmpInstancesResponse,
+  ModifyDBEncryptAttributesRequest,
   ModifyDBSyncModeRequest,
   ActivateHourDBInstanceResponse,
   DescribeInstanceNodeInfoRequest,
   CreateHourDBInstanceResponse,
-  ModifyDBEncryptAttributesRequest,
+  DescribeInstanceSSLAttributesResponse,
   CreateAccountResponse,
   IsolateDedicatedDBInstanceResponse,
   DescribeLogFileRetentionPeriodResponse,
@@ -358,6 +368,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeInstanceSSLAttributes）用于拉取实例SSL认证属性
+   */
+  async DescribeInstanceSSLAttributes(
+    req: DescribeInstanceSSLAttributesRequest,
+    cb?: (error: string, rep: DescribeInstanceSSLAttributesResponse) => void
+  ): Promise<DescribeInstanceSSLAttributesResponse> {
+    return this.request("DescribeInstanceSSLAttributes", req, cb)
+  }
+
+  /**
    * 解隔离MariaDB按量计费实例
    */
   async ActivateHourDBInstance(
@@ -396,6 +416,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: KillSessionResponse) => void
   ): Promise<KillSessionResponse> {
     return this.request("KillSession", req, cb)
+  }
+
+  /**
+   * 本接口  （ModifyInstanceSSLAttributes）用于修改实例SSL认证功能属性
+   */
+  async ModifyInstanceSSLAttributes(
+    req: ModifyInstanceSSLAttributesRequest,
+    cb?: (error: string, rep: ModifyInstanceSSLAttributesResponse) => void
+  ): Promise<ModifyInstanceSSLAttributesResponse> {
+    return this.request("ModifyInstanceSSLAttributes", req, cb)
   }
 
   /**
@@ -551,6 +581,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRealServerAccessStrategyResponse) => void
   ): Promise<ModifyRealServerAccessStrategyResponse> {
     return this.request("ModifyRealServerAccessStrategy", req, cb)
+  }
+
+  /**
+   * 该接口用于对实例修改删除保护属性
+   */
+  async ModifyInstanceProtectedProperty(
+    req: ModifyInstanceProtectedPropertyRequest,
+    cb?: (error: string, rep: ModifyInstanceProtectedPropertyResponse) => void
+  ): Promise<ModifyInstanceProtectedPropertyResponse> {
+    return this.request("ModifyInstanceProtectedProperty", req, cb)
   }
 
   /**
@@ -949,6 +989,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
   ): Promise<UpgradeDBInstanceResponse> {
     return this.request("UpgradeDBInstance", req, cb)
+  }
+
+  /**
+     * 本接口 (DescribeProcessList) 用于查询当前正在运行的线程（连接/查询）信息。
+
+- 可以根据客户端IP，DB，执行时间等信息来查询实例正在运行的线程信息。过滤信息详细请见过滤器Filter。
+- 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的线程信息。
+     */
+  async DescribeProcessList(
+    req: DescribeProcessListRequest,
+    cb?: (error: string, rep: DescribeProcessListResponse) => void
+  ): Promise<DescribeProcessListResponse> {
+    return this.request("DescribeProcessList", req, cb)
   }
 
   /**

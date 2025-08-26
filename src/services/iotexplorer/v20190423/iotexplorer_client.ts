@@ -34,6 +34,7 @@ import {
   ModifyApplicationResponse,
   DescribeCsReportCountDataInfoRequest,
   CreateFreeCloudStorageResponse,
+  DescribeTWeTalkProductConfigResponse,
   ModifyPositionFenceResponse,
   DescribeCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageThumbnailListRequest,
@@ -45,6 +46,7 @@ import {
   WifiInfo,
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
+  GetTWeTalkProductConfigListRequest,
   DescribeSpaceFenceEventListResponse,
   DescribeCloudStorageEventsWithAITasksResponse,
   SearchTopicRuleResponse,
@@ -129,6 +131,7 @@ import {
   CreateStudioProductRequest,
   TransferCloudStorageRequest,
   FenceAlarmPoint,
+  UploadFirmwareRequest,
   DescribeFirmwareRequest,
   DescribeP2PRouteResponse,
   ListTopicPolicyResponse,
@@ -138,6 +141,7 @@ import {
   DescribeBatchProductionResponse,
   DescribeProductCloudStorageAIServiceResponse,
   DescribeLoRaFrequencyRequest,
+  ModifyTWeTalkProductConfigResponse,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
   DescribeCloudStorageAIServiceCallbackResponse,
@@ -183,6 +187,7 @@ import {
   ControlDeviceDataResponse,
   EventHistoryItem,
   CreatePositionSpaceResponse,
+  CreateTWeTalkProductConfigResponse,
   AISearchInfo,
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
@@ -196,7 +201,7 @@ import {
   ProjectEntryEx,
   PublishMessageResponse,
   SearchKeyword,
-  DescribeModelDefinitionRequest,
+  DescribeTWeTalkProductConfigRequest,
   DisableTopicRuleRequest,
   DescribeTWeSeeConfigRequest,
   CreateTopicRuleResponse,
@@ -204,6 +209,7 @@ import {
   DescribePositionFenceListRequest,
   DescribeUnbindedDevicesResponse,
   InvokeCloudStorageAIServiceTaskRequest,
+  GetTWeTalkProductConfigListResponse,
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
@@ -314,6 +320,7 @@ import {
   DescribeGatewaySubProductsRequest,
   CreateExternalSourceAIServiceTaskResponse,
   BindProductsRequest,
+  CreateTWeTalkProductConfigRequest,
   ModifyLoRaGatewayResponse,
   DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageOrderResponse,
@@ -378,10 +385,12 @@ import {
   CreateFenceBindRequest,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
-  UploadFirmwareRequest,
+  DescribeModelDefinitionRequest,
+  ModifyTWeTalkProductConfigRequest,
   GetDeviceLocationHistoryResponse,
   ModifyFenceBindRequest,
   GetLoRaGatewayListResponse,
+  TalkProductConfigInfo,
   DirectBindDeviceInFamilyResponse,
   TopicRule,
   DescribeCloudStoragePackageConsumeStatsRequest,
@@ -971,6 +980,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于获取TWeTalk服务连接产品配置信息列表。
+   */
+  async GetTWeTalkProductConfigList(
+    req: GetTWeTalkProductConfigListRequest,
+    cb?: (error: string, rep: GetTWeTalkProductConfigListResponse) => void
+  ): Promise<GetTWeTalkProductConfigListResponse> {
+    return this.request("GetTWeTalkProductConfigList", req, cb)
+  }
+
+  /**
    * p2p路线切换（此接口目前处于内测接口，可以联系申请加白 ）
    */
   async ChangeP2PRoute(
@@ -1011,6 +1030,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于修改TWeTalk服务连接产品配置信息。
+   */
+  async ModifyTWeTalkProductConfig(
+    req: ModifyTWeTalkProductConfigRequest,
+    cb?: (error: string, rep: ModifyTWeTalkProductConfigResponse) => void
+  ): Promise<ModifyTWeTalkProductConfigResponse> {
+    return this.request("ModifyTWeTalkProductConfig", req, cb)
+  }
+
+  /**
    * 转移设备
    */
   async TransferTWeCallDevice(
@@ -1048,6 +1077,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeviceResponse) => void
   ): Promise<CreateDeviceResponse> {
     return this.request("CreateDevice", req, cb)
+  }
+
+  /**
+   * 用于配置TWeTalk服务连接产品配置信息。
+   */
+  async CreateTWeTalkProductConfig(
+    req: CreateTWeTalkProductConfigRequest,
+    cb?: (error: string, rep: CreateTWeTalkProductConfigResponse) => void
+  ): Promise<CreateTWeTalkProductConfigResponse> {
+    return this.request("CreateTWeTalkProductConfig", req, cb)
   }
 
   /**
@@ -1655,6 +1694,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于获取TWeTalk服务连接产品配置信息。
+   */
+  async DescribeTWeTalkProductConfig(
+    req: DescribeTWeTalkProductConfigRequest,
+    cb?: (error: string, rep: DescribeTWeTalkProductConfigResponse) => void
+  ): Promise<DescribeTWeTalkProductConfigResponse> {
+    return this.request("DescribeTWeTalkProductConfig", req, cb)
+  }
+
+  /**
    * 提供查询某个项目下所有产品信息的能力。
    */
   async GetStudioProductList(
@@ -1665,13 +1714,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 绑定云存用户
+   * 查询产品配置的数据模板信息
    */
-  async BindCloudStorageUser(
-    req: BindCloudStorageUserRequest,
-    cb?: (error: string, rep: BindCloudStorageUserResponse) => void
-  ): Promise<BindCloudStorageUserResponse> {
-    return this.request("BindCloudStorageUser", req, cb)
+  async DescribeModelDefinition(
+    req: DescribeModelDefinitionRequest,
+    cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
+  ): Promise<DescribeModelDefinitionResponse> {
+    return this.request("DescribeModelDefinition", req, cb)
   }
 
   /**
@@ -2095,13 +2144,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询产品配置的数据模板信息
+   * 绑定云存用户
    */
-  async DescribeModelDefinition(
-    req: DescribeModelDefinitionRequest,
-    cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
-  ): Promise<DescribeModelDefinitionResponse> {
-    return this.request("DescribeModelDefinition", req, cb)
+  async BindCloudStorageUser(
+    req: BindCloudStorageUserRequest,
+    cb?: (error: string, rep: BindCloudStorageUserResponse) => void
+  ): Promise<BindCloudStorageUserResponse> {
+    return this.request("BindCloudStorageUser", req, cb)
   }
 
   /**

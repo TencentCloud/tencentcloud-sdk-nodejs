@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeInstanceSSLAttributesResponse,
   DescribeUserTasksResponse,
   InitDCDBInstancesResponse,
   DescribeDBTmpInstancesRequest,
@@ -36,6 +37,7 @@ import {
   ModifyInstanceVportResponse,
   DescribeDCDBInstanceDetailRequest,
   DescribeFileDownloadUrlResponse,
+  ModifyInstanceSSLAttributesRequest,
   ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   ShardBriefInfo,
@@ -46,6 +48,7 @@ import {
   CancelDcnJobResponse,
   DescribeFileDownloadUrlRequest,
   UpgradeDCDBInstanceResponse,
+  DescribeInstanceSSLAttributesRequest,
   DescribeDBSyncModeResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeDCDBUpgradePriceResponse,
@@ -66,6 +69,7 @@ import {
   ModifyAccountDescriptionResponse,
   DestroyDCDBInstanceRequest,
   OpenDBExtranetAccessResponse,
+  DescribeProcessListRequest,
   CreateDCDBInstanceResponse,
   BriefNodeInfo,
   ModifyDBInstancesProjectResponse,
@@ -103,6 +107,7 @@ import {
   RenewDCDBInstanceRequest,
   DescribeDBEncryptAttributesResponse,
   Project,
+  ModifyInstanceProtectedPropertyRequest,
   CreateTmpDCDBInstanceRequest,
   DatabaseTable,
   DescribeDBEncryptAttributesRequest,
@@ -150,8 +155,10 @@ import {
   BackupConfig,
   Database,
   GrantAccountPrivilegesResponse,
+  ModifyAccountPrivilegesRequest,
   CancelDcnJobRequest,
   IsolateHourDCDBInstanceResponse,
+  Filter,
   ShardInfo,
   ModifyInstanceVipRequest,
   OpenDBExtranetAccessRequest,
@@ -161,11 +168,14 @@ import {
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
   CreateHourDCDBInstanceRequest,
+  ModifyInstanceProtectedPropertyResponse,
   DescribeDBSyncModeRequest,
   CloseDBExtranetAccessResponse,
+  Process,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
   DescribeProjectsRequest,
+  ModifyInstanceSSLAttributesResponse,
   SlowLogData,
   CreateOnlineDDLJobRequest,
   DescribeDatabasesResponse,
@@ -179,7 +189,7 @@ import {
   DescribeDCDBInstancesResponse,
   ModifyAccountPrivilegesResponse,
   DescribeFlowRequest,
-  ModifyAccountPrivilegesRequest,
+  DescribeProcessListResponse,
   Account,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
@@ -375,13 +385,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+   * 本接口（DescribeInstanceSSLAttributes）用于拉取实例SSL认证属性
    */
-  async DescribeOrders(
-    req: DescribeOrdersRequest,
-    cb?: (error: string, rep: DescribeOrdersResponse) => void
-  ): Promise<DescribeOrdersResponse> {
-    return this.request("DescribeOrders", req, cb)
+  async DescribeInstanceSSLAttributes(
+    req: DescribeInstanceSSLAttributesRequest,
+    cb?: (error: string, rep: DescribeInstanceSSLAttributesResponse) => void
+  ): Promise<DescribeInstanceSSLAttributesResponse> {
+    return this.request("DescribeInstanceSSLAttributes", req, cb)
   }
 
   /**
@@ -552,6 +562,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBLogFilesResponse) => void
   ): Promise<DescribeDBLogFilesResponse> {
     return this.request("DescribeDBLogFiles", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  }
+
+  /**
+   * 该接口用于修改实例的保护属性
+   */
+  async ModifyInstanceProtectedProperty(
+    req: ModifyInstanceProtectedPropertyRequest,
+    cb?: (error: string, rep: ModifyInstanceProtectedPropertyResponse) => void
+  ): Promise<ModifyInstanceProtectedPropertyResponse> {
+    return this.request("ModifyInstanceProtectedProperty", req, cb)
   }
 
   /**
@@ -727,6 +757,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void
   ): Promise<CloseDBExtranetAccessResponse> {
     return this.request("CloseDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 本接口  （ModifyInstanceSSLAttributes）用于修改实例SSL认证功能属性
+   */
+  async ModifyInstanceSSLAttributes(
+    req: ModifyInstanceSSLAttributesRequest,
+    cb?: (error: string, rep: ModifyInstanceSSLAttributesResponse) => void
+  ): Promise<ModifyInstanceSSLAttributesResponse> {
+    return this.request("ModifyInstanceSSLAttributes", req, cb)
   }
 
   /**
@@ -972,6 +1012,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (DescribeProcessList) 用于查询当前正在运行的线程（连接/查询）信息。
+
+- 可以根据客户端IP，DB，执行时间等信息来查询实例正在运行的线程信息。过滤信息详细请见过滤器Filter。
+- 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的线程信息。
+     */
+  async DescribeProcessList(
+    req: DescribeProcessListRequest,
+    cb?: (error: string, rep: DescribeProcessListResponse) => void
+  ): Promise<DescribeProcessListResponse> {
+    return this.request("DescribeProcessList", req, cb)
+  }
+
+  /**
      * 本接口(ModifyBackupConfigs)用于修改数据库备份配置信息。
 
 1. 修改数据库超期备份配置，目前按年、按月、按日只支持一种，存在互斥关系，如当前策略按年备份，如果传入按月备份策略将会覆盖当前的按年备份策略，务必注意。
@@ -1034,12 +1087,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async DescribeOrders(
+    req: DescribeOrdersRequest,
+    cb?: (error: string, rep: DescribeOrdersResponse) => void
+  ): Promise<DescribeOrdersResponse> {
+    return this.request("DescribeOrders", req, cb)
   }
 }

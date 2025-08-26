@@ -328,6 +328,20 @@ export interface CreateFreeCloudStorageResponse {
 }
 
 /**
+ * DescribeTWeTalkProductConfig返回参数结构体
+ */
+export interface DescribeTWeTalkProductConfigResponse {
+  /**
+   * 配置信息
+   */
+  Data?: TalkProductConfigInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPositionFence返回参数结构体
  */
 export interface ModifyPositionFenceResponse {
@@ -537,6 +551,28 @@ export interface DescribeCloudStorageOrderRequest {
    * 订单id
    */
   OrderId: string
+}
+
+/**
+ * GetTWeTalkProductConfigList请求参数结构体
+ */
+export interface GetTWeTalkProductConfigListRequest {
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 	支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
+  /**
+   * 页码
+   */
+  Offset?: number
+  /**
+   * 偏移量，10-100
+   */
+  Limit?: number
 }
 
 /**
@@ -2295,6 +2331,44 @@ export interface FenceAlarmPoint {
 }
 
 /**
+ * UploadFirmware请求参数结构体
+ */
+export interface UploadFirmwareRequest {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+  /**
+   * 固件版本号
+   */
+  FirmwareVersion: string
+  /**
+   * 固件的MD5值
+   */
+  Md5sum: string
+  /**
+   * 固件的大小
+   */
+  FileSize: number
+  /**
+   * 固件名称
+   */
+  FirmwareName?: string
+  /**
+   * 固件描述
+   */
+  FirmwareDescription?: string
+  /**
+   * 固件升级模块；可选值 mcu|moudule
+   */
+  FwType?: string
+  /**
+   * 固件用户自定义配置信息
+   */
+  FirmwareUserDefined?: string
+}
+
+/**
  * DescribeFirmware请求参数结构体
  */
 export interface DescribeFirmwareRequest {
@@ -2470,6 +2544,16 @@ export interface DescribeLoRaFrequencyRequest {
    * 频点唯一ID
    */
   FreqId?: string
+}
+
+/**
+ * ModifyTWeTalkProductConfig返回参数结构体
+ */
+export interface ModifyTWeTalkProductConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3308,6 +3392,16 @@ export interface CreatePositionSpaceResponse {
 }
 
 /**
+ * CreateTWeTalkProductConfig返回参数结构体
+ */
+export interface CreateTWeTalkProductConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI视频搜索结果结构体。
  */
 export interface AISearchInfo {
@@ -3590,13 +3684,17 @@ export interface SearchKeyword {
 }
 
 /**
- * DescribeModelDefinition请求参数结构体
+ * DescribeTWeTalkProductConfig请求参数结构体
  */
-export interface DescribeModelDefinitionRequest {
+export interface DescribeTWeTalkProductConfigRequest {
   /**
    * 产品ID
    */
   ProductId: string
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
 }
 
 /**
@@ -3738,6 +3836,24 @@ export interface InvokeCloudStorageAIServiceTaskRequest {
    * 自定义任务 ID
    */
   CustomId?: string
+}
+
+/**
+ * GetTWeTalkProductConfigList返回参数结构体
+ */
+export interface GetTWeTalkProductConfigListResponse {
+  /**
+   * 配置信息列表
+   */
+  Data?: Array<TalkProductConfigInfo>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6171,6 +6287,32 @@ export interface BindProductsRequest {
 }
 
 /**
+ * CreateTWeTalkProductConfig请求参数结构体
+ */
+export interface CreateTWeTalkProductConfigRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 系统提示词
+   */
+  SystemPrompt: string
+  /**
+   * 欢迎语
+   */
+  GreetingMessage: string
+  /**
+   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
+   */
+  VoiceType?: number
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
+}
+
+/**
  * ModifyLoRaGateway返回参数结构体
  */
 export interface ModifyLoRaGatewayResponse {
@@ -7645,41 +7787,39 @@ export interface FamilySubDevice {
 }
 
 /**
- * UploadFirmware请求参数结构体
+ * DescribeModelDefinition请求参数结构体
  */
-export interface UploadFirmwareRequest {
+export interface DescribeModelDefinitionRequest {
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductId: string
+}
+
+/**
+ * ModifyTWeTalkProductConfig请求参数结构体
+ */
+export interface ModifyTWeTalkProductConfigRequest {
   /**
-   * 固件版本号
+   * 产品ID
    */
-  FirmwareVersion: string
+  ProductId: string
   /**
-   * 固件的MD5值
+   * 系统提示词
    */
-  Md5sum: string
+  SystemPrompt?: string
   /**
-   * 固件的大小
+   * 欢迎语
    */
-  FileSize: number
+  GreetingMessage?: string
   /**
-   * 固件名称
+   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
    */
-  FirmwareName?: string
+  VoiceType?: number
   /**
-   * 固件描述
+   * 支持的语言，zh-中文；en-英文；默认zh
    */
-  FirmwareDescription?: string
-  /**
-   * 固件升级模块；可选值 mcu|moudule
-   */
-  FwType?: string
-  /**
-   * 固件用户自定义配置信息
-   */
-  FirmwareUserDefined?: string
+  TargetLanguage?: string
 }
 
 /**
@@ -7726,6 +7866,40 @@ export interface GetLoRaGatewayListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Talk配置信息描述。
+ */
+export interface TalkProductConfigInfo {
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
+  /**
+   *  系统提示词
+   */
+  SystemPrompt?: string
+  /**
+   * 欢迎语
+   */
+  GreetingMessage?: string
+  /**
+   * 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。
+   */
+  VoiceType?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
 }
 
 /**

@@ -340,6 +340,30 @@ export interface DestroyHourDBInstanceRequest {
 }
 
 /**
+ * ModifyInstanceProtectedProperty返回参数结构体
+ */
+export interface ModifyInstanceProtectedPropertyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceSSLAttributes请求参数结构体
+ */
+export interface ModifyInstanceSSLAttributesRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 是否开启实例的SSL认证。0-关闭；1-开启
+   */
+  SSLEnabled: number
+}
+
+/**
  * ModifyInstanceVip返回参数结构体
  */
 export interface ModifyInstanceVipResponse {
@@ -544,6 +568,16 @@ export interface DestroyHourDBInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInstanceSSLAttributes请求参数结构体
+ */
+export interface DescribeInstanceSSLAttributesRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -850,6 +884,127 @@ export interface ModifyAccountDescriptionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeProcessList请求参数结构体
+ */
+export interface DescribeProcessListRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 节点ID。
+   */
+  NodeId: string
+  /**
+   * <li><strong>id</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>会话ID</strong>】进行过滤。会话ID例如：125700。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：精确匹配</p>
+
+<li><strong>user</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>用户名</strong>】进行过滤。用户名例如：root。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：精确匹配</p>
+<li><strong>host</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>客户端Host</strong>】进行过滤。客户端Host例如：127.0.0.1:46295。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：前缀匹配，例如可以查询客户端IP不加端口：127.0.0.1。</p>
+<li><strong>state</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>线程状态</strong>】进行过滤。线程状态例如：Updating。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：精确匹配</p>
+<li><strong>db</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>数据库名称</strong>】进行过滤。数据库名称例如：mysql。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：精确匹配</p>
+<li><strong>command</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>命令类型</strong>】进行过滤。命令类型例如：Query。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：精确匹配</p>
+<li><strong>info</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>执行语句</strong>】进行过滤。执行语句例如：select id, name from demo.table1 where id > 10。</p>
+    <p style="padding-left: 30px;">类型：String</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：前缀匹配，例如SQL较长，可以输入SQL前缀：select  id, name from demo.table1。</p>
+<li><strong>time</strong></li>
+    <p style="padding-left: 30px;">按照【<strong>执行时间大于多少（秒）</strong>】进行过滤。例如：10，表示查询执行时间超过10秒的会话。</p>
+    <p style="padding-left: 30px;">类型：Integer</p>
+    <p style="padding-left: 30px;">必选：否</p>
+    <p style="padding-left: 30px;">匹配类型：范围匹配，Values值只支持输入1个。</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为50。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
+ * 用于显示当前正在运行的线程（连接/查询）信息，数据源来自系统表：information_schema.processlist。
+ */
+export interface Process {
+  /**
+   * 线程ID​​：唯一标识当前连接/线程的整数。
+   */
+  Id?: number
+  /**
+   * 用户名​​：发起连接的 MySQL 用户。
+   */
+  User?: string
+  /**
+   * 客户端地址​​：发起连接的客户端主机名及端口（格式：host:port）。
+   */
+  Host?: string
+  /**
+   * 当前数据库​​：线程正在使用的数据库名（未选择数据库时为 空串）。
+   */
+  Db?: string
+  /**
+   * 命令类型​​：线程正在执行的命令类型。常见值：
+
+- Sleep：空闲等待状态（等待新查询）。
+- Query：正在执行查询或 SQL 语句。
+- Binlog Dump：主服务器线程向从服务器发送二进制日志。
+- Connect：客户端正在连接。
+- Killed：线程被终止但未完全退出。
+   */
+  Command?: string
+  /**
+   * 执行时间（秒）​​：线程在当前状态持续的秒数。
+   */
+  Time?: number
+  /**
+   * 执行开始时间（秒）​​：线程在当前状态开始执行的时间。
+   */
+  ProcessStartTime?: string
+  /**
+   * ​​状态描述​​：线程当前的详细操作状态。常见值：
+
+- Sending data：正在处理/发送数据。
+- Locked：等待表锁释放（例如 MyISAM 表级锁）。
+- Sorting result：排序查询结果。
+- Updating：更新表中数据。
+- 当为NULL返回空串：无明确状态（如 Sleep 时）。
+   */
+  State?: string
+  /**
+   * 执行语句​​：正在执行的 SQL 语句（前 1024 字符）。
+   */
+  Info?: string
 }
 
 /**
@@ -2014,6 +2169,20 @@ export interface DescribeDBEncryptAttributesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstanceProtectedProperty请求参数结构体
+ */
+export interface ModifyInstanceProtectedPropertyRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 0-允许删除，无销毁保护，1-禁止删除，有销毁保护
+   */
+  ProtectedProperty: number
 }
 
 /**
@@ -3333,6 +3502,55 @@ export interface GrantAccountPrivilegesResponse {
 }
 
 /**
+ * ModifyAccountPrivileges请求参数结构体
+ */
+export interface ModifyAccountPrivilegesRequest {
+  /**
+   * 实例 ID，格式如：tdsql-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 数据库的账号，包括用户名和域名。
+   */
+  Accounts: Array<Account>
+  /**
+   * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，该字段传空数组。
+   */
+  GlobalPrivileges?: Array<string>
+  /**
+   * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+   */
+  DatabasePrivileges?: Array<DatabasePrivilege>
+  /**
+   * 数据库中表的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+   */
+  TablePrivileges?: Array<TablePrivilege>
+  /**
+   * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+   */
+  ColumnPrivileges?: Array<ColumnPrivilege>
+  /**
+   * 数据库视图的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+   */
+  ViewPrivileges?: Array<ViewPrivileges>
+  /**
+   * 数据库函数的权限。Privileges 权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+   */
+  FunctionPrivileges?: Array<FunctionPrivilege>
+  /**
+   * 数据库存储过程的权限。Privileges 权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+   */
+  ProcedurePrivileges?: Array<ProcedurePrivilege>
+}
+
+/**
  * CancelDcnJob请求参数结构体
  */
 export interface CancelDcnJobRequest {
@@ -3340,6 +3558,23 @@ export interface CancelDcnJobRequest {
    * 灾备实例ID
    */
   InstanceId: string
+}
+
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段。
+   */
+  Name: string
+  /**
+   * 字段的过滤值。
+   */
+  Values: Array<string>
 }
 
 /**
@@ -3518,6 +3753,16 @@ export interface DescribeBackupTimeResponse {
    * 实例备份时间配置信息
    */
   Items?: Array<DBBackupTimeConfig>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceSSLAttributes返回参数结构体
+ */
+export interface ModifyInstanceSSLAttributesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3764,52 +4009,17 @@ export interface DCNReplicaConfig {
 }
 
 /**
- * ModifyAccountPrivileges请求参数结构体
+ * DescribeProcessList返回参数结构体
  */
-export interface ModifyAccountPrivilegesRequest {
+export interface DescribeProcessListResponse {
   /**
-   * 实例 ID，格式如：tdsql-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 当前正在运行的线程（连接/查询）信息列表。
    */
-  InstanceId: string
+  ProcessList?: Array<Process>
   /**
-   * 数据库的账号，包括用户名和域名。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Accounts: Array<Account>
-  /**
-   * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
-注意，不传该参数表示保留现有权限，如需清除，该字段传空数组。
-   */
-  GlobalPrivileges?: Array<string>
-  /**
-   * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
-注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
-   */
-  DatabasePrivileges?: Array<DatabasePrivilege>
-  /**
-   * 数据库中表的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
-注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
-   */
-  TablePrivileges?: Array<TablePrivilege>
-  /**
-   * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
-注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
-   */
-  ColumnPrivileges?: Array<ColumnPrivilege>
-  /**
-   * 数据库视图的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
-注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
-   */
-  ViewPrivileges?: Array<ViewPrivileges>
-  /**
-   * 数据库函数的权限。Privileges 权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
-注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
-   */
-  FunctionPrivileges?: Array<FunctionPrivilege>
-  /**
-   * 数据库存储过程的权限。Privileges 权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
-注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
-   */
-  ProcedurePrivileges?: Array<ProcedurePrivilege>
+  RequestId?: string
 }
 
 /**
@@ -3858,6 +4068,20 @@ export interface DescribeDBTmpInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDBEncryptAttributes请求参数结构体
+ */
+export interface ModifyDBEncryptAttributesRequest {
+  /**
+   * 实例Id，形如：tdsql-ow728lmc。
+   */
+  InstanceId: string
+  /**
+   * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+   */
+  EncryptEnabled: number
 }
 
 /**
@@ -3934,17 +4158,17 @@ export interface CreateHourDBInstanceResponse {
 }
 
 /**
- * ModifyDBEncryptAttributes请求参数结构体
+ * DescribeInstanceSSLAttributes返回参数结构体
  */
-export interface ModifyDBEncryptAttributesRequest {
+export interface DescribeInstanceSSLAttributesResponse {
   /**
-   * 实例Id，形如：tdsql-ow728lmc。
+   * 实例SSL认证功能当前状态。1-开启中；2-已开启；3-已关闭；4-关闭中
    */
-  InstanceId: string
+  Status?: number
   /**
-   * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EncryptEnabled: number
+  RequestId?: string
 }
 
 /**

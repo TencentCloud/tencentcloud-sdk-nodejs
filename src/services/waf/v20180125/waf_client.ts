@@ -210,6 +210,7 @@ import {
   UserWhiteRule,
   PortInfo,
   AddAttackWhiteRuleRequest,
+  ModifyProtectionLevelResponse,
   FraudPkg,
   UCBEntryValue,
   DescribeDomainDetailsClbResponse,
@@ -465,6 +466,7 @@ import {
   ModifyGenerateDealsRequest,
   ModifyDomainWhiteRuleResponse,
   ModifyObjectResponse,
+  ModifyProtectionLevelRequest,
   ModifyAntiFakeUrlStatusResponse,
   DescribeOwaspRuleTypesResponse,
   ModifyInstanceElasticModeRequest,
@@ -1649,6 +1651,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainCountInfoResponse) => void
   ): Promise<DescribeDomainCountInfoResponse> {
     return this.request("DescribeDomainCountInfo", req, cb)
+  }
+
+  /**
+   * 更改防护等级
+   */
+  async ModifyProtectionLevel(
+    req: ModifyProtectionLevelRequest,
+    cb?: (error: string, rep: ModifyProtectionLevelResponse) => void
+  ): Promise<ModifyProtectionLevelResponse> {
+    return this.request("ModifyProtectionLevel", req, cb)
   }
 
   /**

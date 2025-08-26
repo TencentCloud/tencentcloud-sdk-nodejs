@@ -148,6 +148,16 @@ it("mariadb.v20170312.DescribeBackupTime", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeInstanceSSLAttributes", async function () {
+    try {
+       const data = await client.DescribeInstanceSSLAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.ActivateHourDBInstance", async function () {
     try {
        const data = await client.ActivateHourDBInstance({})
@@ -181,6 +191,16 @@ it("mariadb.v20170312.ModifyDBParameters", async function () {
 it("mariadb.v20170312.KillSession", async function () {
     try {
        const data = await client.KillSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyInstanceSSLAttributes", async function () {
+    try {
+       const data = await client.ModifyInstanceSSLAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +351,16 @@ it("mariadb.v20170312.DescribeDBLogFiles", async function () {
 it("mariadb.v20170312.ModifyRealServerAccessStrategy", async function () {
     try {
        const data = await client.ModifyRealServerAccessStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyInstanceProtectedProperty", async function () {
+    try {
+       const data = await client.ModifyInstanceProtectedProperty({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -721,6 +751,16 @@ it("mariadb.v20170312.IsolateHourDBInstance", async function () {
 it("mariadb.v20170312.UpgradeDBInstance", async function () {
     try {
        const data = await client.UpgradeDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.DescribeProcessList", async function () {
+    try {
+       const data = await client.DescribeProcessList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -4459,7 +4459,7 @@ yidun : 网易易盾审核 （支持 1:音频切片审核，2:视频截帧审核
    */
   ModerationSupplierParam?: ModerationSupplierParam
   /**
-   * 是否保存命中文件 0 默认不保存  1 保存命中文件
+   * 是否保存文件  0不保存文件 1保存所有文件 2仅保存命中文件
    */
   SaveModerationFile?: number
   /**

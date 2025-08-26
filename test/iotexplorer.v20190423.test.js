@@ -538,6 +538,16 @@ it("iotexplorer.v20190423.DescribeVideoLicense", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetTWeTalkProductConfigList", async function () {
+    try {
+       const data = await client.GetTWeTalkProductConfigList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ChangeP2PRoute", async function () {
     try {
        const data = await client.ChangeP2PRoute({})
@@ -578,6 +588,16 @@ it("iotexplorer.v20190423.InheritCloudStorageUser", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ModifyTWeTalkProductConfig", async function () {
+    try {
+       const data = await client.ModifyTWeTalkProductConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.TransferTWeCallDevice", async function () {
     try {
        const data = await client.TransferTWeCallDevice({})
@@ -611,6 +631,16 @@ it("iotexplorer.v20190423.PublishFirmwareUpdateMessage", async function () {
 it("iotexplorer.v20190423.CreateDevice", async function () {
     try {
        const data = await client.CreateDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateTWeTalkProductConfig", async function () {
+    try {
+       const data = await client.CreateTWeTalkProductConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,6 +1248,16 @@ it("iotexplorer.v20190423.ResumeWeCallDevice", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeTWeTalkProductConfig", async function () {
+    try {
+       const data = await client.DescribeTWeTalkProductConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetStudioProductList", async function () {
     try {
        const data = await client.GetStudioProductList({})
@@ -1228,9 +1268,9 @@ it("iotexplorer.v20190423.GetStudioProductList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.BindCloudStorageUser", async function () {
+it("iotexplorer.v20190423.DescribeModelDefinition", async function () {
     try {
-       const data = await client.BindCloudStorageUser({})
+       const data = await client.DescribeModelDefinition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1658,9 +1698,9 @@ it("iotexplorer.v20190423.DescribeProject", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeModelDefinition", async function () {
+it("iotexplorer.v20190423.BindCloudStorageUser", async function () {
     try {
-       const data = await client.DescribeModelDefinition({})
+       const data = await client.BindCloudStorageUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -148,9 +148,9 @@ it("dcdb.v20180411.ModifyAccountDescription", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeOrders", async function () {
+it("dcdb.v20180411.DescribeInstanceSSLAttributes", async function () {
     try {
-       const data = await client.DescribeOrders({})
+       const data = await client.DescribeInstanceSSLAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +328,26 @@ it("dcdb.v20180411.DescribeDBLogFiles", async function () {
     }
 })
 
+it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyInstanceProtectedProperty", async function () {
+    try {
+       const data = await client.ModifyInstanceProtectedProperty({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.IsolateHourDCDBInstance", async function () {
     try {
        const data = await client.IsolateHourDCDBInstance({})
@@ -491,6 +511,16 @@ it("dcdb.v20180411.DescribeLogFileRetentionPeriod", async function () {
 it("dcdb.v20180411.CloseDBExtranetAccess", async function () {
     try {
        const data = await client.CloseDBExtranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyInstanceSSLAttributes", async function () {
+    try {
+       const data = await client.ModifyInstanceSSLAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +768,16 @@ it("dcdb.v20180411.CreateOnlineDDLJob", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeProcessList", async function () {
+    try {
+       const data = await client.DescribeProcessList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.ModifyBackupConfigs", async function () {
     try {
        const data = await client.ModifyBackupConfigs({})
@@ -798,9 +838,9 @@ it("dcdb.v20180411.DescribeDCDBRenewalPrice", async function () {
     }
 })
 
-it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
+it("dcdb.v20180411.DescribeOrders", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

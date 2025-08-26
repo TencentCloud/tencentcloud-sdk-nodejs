@@ -4940,6 +4940,16 @@ export interface AddAttackWhiteRuleRequest {
 }
 
 /**
+ * ModifyProtectionLevel返回参数结构体
+ */
+export interface ModifyProtectionLevelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 业务安全资源信息
  */
 export interface FraudPkg {
@@ -11866,6 +11876,20 @@ export interface ModifyObjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyProtectionLevel请求参数结构体
+ */
+export interface ModifyProtectionLevelRequest {
+  /**
+   * 客户域名
+   */
+  Domain?: string
+  /**
+   * 防护等级,100,200,300
+   */
+  Level?: number
 }
 
 /**
