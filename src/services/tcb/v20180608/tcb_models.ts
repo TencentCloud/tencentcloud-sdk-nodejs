@@ -673,6 +673,10 @@ export interface LogResObject {
    * 日志内容信息
    */
   Results?: Array<LogObject>
+  /**
+   * 日志聚合结果
+   */
+  AnalysisRecords?: Array<string>
 }
 
 /**

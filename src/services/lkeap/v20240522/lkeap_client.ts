@@ -90,6 +90,7 @@ import {
   AttributeItem,
   EmbeddingObject,
   Message,
+  ErrorInfo,
   CreateKnowledgeBaseRequest,
   ChatCompletionsResponse,
   DeleteDocsRequest,

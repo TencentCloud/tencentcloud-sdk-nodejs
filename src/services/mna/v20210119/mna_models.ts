@@ -54,6 +54,36 @@ export interface GetMultiFlowStatisticResponse {
 }
 
 /**
+ * 返回上报的订单信息
+ */
+export interface OrderInfo {
+  /**
+   * 父帐号uin
+   */
+  Uin?: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 用量类型
+   */
+  PackageType?: string
+  /**
+   * 订单编号唯一标识符
+   */
+  OrderId?: string
+  /**
+   * 上报月份，默认当前月
+   */
+  ReportMonth?: string
+  /**
+   * 数据更新时间
+   */
+  Updated?: string
+}
+
+/**
  * 设备流量信息
  */
 export interface FlowDetails {
@@ -258,6 +288,28 @@ export interface GetFlowPackagesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReportOrder请求参数结构体
+ */
+export interface ReportOrderRequest {
+  /**
+   * 订单编号唯一标识符
+   */
+  OrderId: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 用量类型
+   */
+  PackageType?: string
+  /**
+   * 上报月份，默认当前月
+   */
+  ReportMonth?: string
 }
 
 /**
@@ -632,6 +684,20 @@ export interface GetFlowStatisticByRegionRequest {
    * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
    */
   AccessRegion?: string
+}
+
+/**
+ * ReportOrder返回参数结构体
+ */
+export interface ReportOrderResponse {
+  /**
+   * 订单信息
+   */
+  OrderInfo?: OrderInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -6017,23 +6017,23 @@ export interface ModifyClusterVirtualNodePoolResponse {
  */
 export interface SuperNodeResource {
   /**
-   * 节点名称
+   * 节点名称，此字段在出参中有效。
    */
   NodeName?: string
   /**
-   * 节点上的资源总数
+   * 节点上的资源总数，QuotaType为 exact 时，表示创建指定规格的精确配额数量。
    */
   Num?: number
   /**
-   * 节点上的总核数
+   * 节点上的总核数，QuotaType为 exact 时表示指定规格的核数。
    */
   Cpu?: number
   /**
-   * 节点上的总内存数
+   * 节点上的总内存数，QuotaType为 exact 时表示指定规格的内存，单位：Gi
    */
   Memory?: number
   /**
-   * 节点上的总 GPU 卡数
+   * 节点上的总 GPU 卡数，QuotaType为 exact 时表示指定规格的GPU卡数。
    */
   Gpu?: number
   /**
@@ -6049,7 +6049,7 @@ export interface SuperNodeResource {
    */
   ResourceType?: string
   /**
-   * 置放群组 ID
+   * 置放群组 ID，QuotaType为 exact 时有效，表示购买的精确配额需满足置放群组。可通过 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810) 接口返回值中的DisasterRecoverGroupId获取。
    */
   DisasterRecoverGroupId?: string
 }

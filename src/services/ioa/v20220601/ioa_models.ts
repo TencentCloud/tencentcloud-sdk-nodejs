@@ -426,7 +426,7 @@ export interface DescribeDeviceVirtualGroupsRequest {
    */
   Condition?: Condition
   /**
-   * 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
    */
   OsType?: number
   /**
@@ -1125,6 +1125,10 @@ export interface DescribeAggrSoftCategorySoftListData {
  */
 export interface DescribeDevicesRequest {
   /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
    * 过滤条件参数（字段含义请参考接口返回值）
 
 - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序
@@ -1196,7 +1200,7 @@ SaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
    */
   GroupId?: number
   /**
-   * 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
+   * 操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
    */
   OsType?: number
   /**
@@ -1991,11 +1995,11 @@ export interface DescribeVirtualDevicesRequest {
    */
   Condition?: Condition
   /**
-   * 必填，终端自定义分组id
+   * 终端自定义分组ID（0：获取租户全部自定义分组下的终端数据；其他值：获取具体ID分组下的终端数据）
    */
   DeviceVirtualGroupId?: number
   /**
-   * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
    */
   OsType?: number
   /**

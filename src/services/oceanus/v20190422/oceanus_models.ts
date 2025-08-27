@@ -390,6 +390,10 @@ export interface CreateJobConfigRequest {
    * checkpoint 超时时间
    */
   CheckpointTimeoutSecond?: number
+  /**
+   * checkpoint 间隔时间
+   */
+  CheckpointIntervalSecond?: number
 }
 
 /**
@@ -1236,6 +1240,27 @@ export interface CreateWorkSpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 多可用区支持备区域
+ */
+export interface SlaveZone {
+  /**
+   * vpc
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
 }
 
 /**
@@ -3242,6 +3267,20 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Yarns?: Array<HadoopYarnItem>
+  /**
+   * 0 单可用区 1多可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeploymentMode?: number
+  /**
+   * 备可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaveZones?: Array<SlaveZone>
+  /**
+   * 集群的日志cos存储
+   */
+  LogCOSBucket?: string
 }
 
 /**
@@ -3733,6 +3772,10 @@ export interface JobConfig {
    * checkpoint 超时时间
    */
   CheckpointTimeoutSecond?: number
+  /**
+   * checkpoint 间隔时间
+   */
+  CheckpointIntervalSecond?: number
 }
 
 /**

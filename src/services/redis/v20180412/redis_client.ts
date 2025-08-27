@@ -1247,7 +1247,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除复制组
+   * 本接口（RemoveReplicationGroup）用于删除复制组。
    */
   async RemoveReplicationGroup(
     req: RemoveReplicationGroupRequest,

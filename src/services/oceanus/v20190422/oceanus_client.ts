@@ -57,6 +57,7 @@ import {
   DescribeResourceConfigsResponse,
   DescribeClustersRequest,
   CreateWorkSpaceResponse,
+  SlaveZone,
   CreateJobResponse,
   SqlGatewayItem,
   DescribeJobRuntimeInfoResponse,

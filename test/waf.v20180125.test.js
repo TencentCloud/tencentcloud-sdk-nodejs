@@ -38,6 +38,16 @@ it("waf.v20180125.DescribeDomainDetailsClb", async function () {
     }
 })
 
+it("waf.v20180125.DescribeExports", async function () {
+    try {
+       const data = await client.DescribeExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeDomains", async function () {
     try {
        const data = await client.DescribeDomains({})
@@ -288,9 +298,9 @@ it("waf.v20180125.ModifyInstanceElasticMode", async function () {
     }
 })
 
-it("waf.v20180125.ModifyApiAnalyzeStatus", async function () {
+it("waf.v20180125.DescribeTopics", async function () {
     try {
-       const data = await client.ModifyApiAnalyzeStatus({})
+       const data = await client.DescribeTopics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,6 +768,26 @@ it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     }
 })
 
+it("waf.v20180125.DescribeLogHistogram", async function () {
+    try {
+       const data = await client.DescribeLogHistogram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateExport", async function () {
+    try {
+       const data = await client.CreateExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyOwaspRuleTypeLevel", async function () {
     try {
        const data = await client.ModifyOwaspRuleTypeLevel({})
@@ -1158,6 +1188,16 @@ it("waf.v20180125.DescribeDomainCountInfo", async function () {
     }
 })
 
+it("waf.v20180125.SearchLog", async function () {
+    try {
+       const data = await client.SearchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyProtectionLevel", async function () {
     try {
        const data = await client.ModifyProtectionLevel({})
@@ -1298,9 +1338,9 @@ it("waf.v20180125.DestroyPostCKafkaFlow", async function () {
     }
 })
 
-it("waf.v20180125.PostAttackDownloadTask", async function () {
+it("waf.v20180125.DeleteExport", async function () {
     try {
-       const data = await client.PostAttackDownloadTask({})
+       const data = await client.DeleteExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1321,6 +1361,16 @@ it("waf.v20180125.DescribeCustomWhiteRule", async function () {
 it("waf.v20180125.DescribeHost", async function () {
     try {
        const data = await client.DescribeHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyApiAnalyzeStatus", async function () {
+    try {
+       const data = await client.ModifyApiAnalyzeStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1541,6 +1591,16 @@ it("waf.v20180125.DescribeSession", async function () {
 it("waf.v20180125.ModifyCustomWhiteRuleStatus", async function () {
     try {
        const data = await client.ModifyCustomWhiteRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.PostAttackDownloadTask", async function () {
+    try {
+       const data = await client.PostAttackDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

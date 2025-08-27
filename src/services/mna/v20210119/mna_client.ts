@@ -21,6 +21,7 @@ import {
   DeleteL3ConnResponse,
   GetDeviceResponse,
   GetMultiFlowStatisticResponse,
+  OrderInfo,
   FlowDetails,
   UpdateL3ConnResponse,
   UpdateHardwareResponse,
@@ -33,6 +34,7 @@ import {
   UpdateL3CidrResponse,
   ModifyPackageRenewFlagRequest,
   GetFlowPackagesResponse,
+  ReportOrderRequest,
   DeleteL3ConnRequest,
   GetVendorHardwareResponse,
   GetActiveDeviceCountResponse,
@@ -48,6 +50,7 @@ import {
   GetFlowStatisticByGroupResponse,
   GetNetMonitorResponse,
   GetFlowStatisticByRegionRequest,
+  ReportOrderResponse,
   GetFlowAlarmInfoRequest,
   GetVendorHardwareRequest,
   CreateEncryptedKeyRequest,
@@ -404,6 +407,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFlowAlarmInfoResponse) => void
   ): Promise<GetFlowAlarmInfoResponse> {
     return this.request("GetFlowAlarmInfo", req, cb)
+  }
+
+  /**
+   * 用户上报自定义的订单信息，多网聚合加速服务将相关信息进行保存
+   */
+  async ReportOrder(
+    req: ReportOrderRequest,
+    cb?: (error: string, rep: ReportOrderResponse) => void
+  ): Promise<ReportOrderResponse> {
+    return this.request("ReportOrder", req, cb)
   }
 
   /**

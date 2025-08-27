@@ -571,6 +571,10 @@ export interface GetReconstructDocumentResultResponse {
    */
   Usage?: DocumentUsage
   /**
+   * 文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息
+   */
+  Error?: ErrorInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -660,7 +664,7 @@ export interface DocumentUsage {
    */
   FailPageNum?: number
   /**
-   * 文件大小，单位KB
+   * 文件大小，单位：字节
    */
   FileSize?: number
 }
@@ -1148,6 +1152,10 @@ export interface GetSplitDocumentResultResponse {
    */
   Usage?: DocumentUsage
   /**
+   * 文档拆分失败的错误信息，当拆分任务失败时返回该错误信息
+   */
+  Error?: ErrorInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1538,6 +1546,20 @@ ReasoningConent参数仅支持出参，且只有deepseek-r1模型会返回。
    * 搜索结果
    */
   SearchResults?: Array<SearchResult>
+}
+
+/**
+ * 错误信息
+ */
+export interface ErrorInfo {
+  /**
+   * 错误码
+   */
+  Code?: string
+  /**
+   * 错误信息
+   */
+  Message?: string
 }
 
 /**

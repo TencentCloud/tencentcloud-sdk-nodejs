@@ -2249,6 +2249,32 @@ export interface KnowledgeSummary {
 }
 
 /**
+ * 任务流程调试信息
+ */
+export interface TaskFlowSummary {
+  /**
+   * 任务流程名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntentName?: string
+  /**
+   * 实体列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedSlotValues?: Array<ValueInfo>
+  /**
+   * 节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunNodes?: Array<RunNodeInfo>
+  /**
+   * 意图判断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Purposes?: Array<string>
+}
+
+/**
  * ListSharedKnowledge请求参数结构体
  */
 export interface ListSharedKnowledgeRequest {
@@ -2686,6 +2712,11 @@ export interface KnowledgeQaOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseRecommended?: boolean
+  /**
+   * 推荐问模式，0.结合知识库&对话历史推荐问题Prompt(默认) 1.仅结合知识库输出推荐问的prompt
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecommendedPromptMode?: number
 }
 
 /**
@@ -3462,29 +3493,17 @@ export interface GetTaskStatusResponse {
 }
 
 /**
- * 任务流程调试信息
+ * 系统参数
  */
-export interface TaskFlowSummary {
+export interface AgentInputSystemVariable {
   /**
-   * 任务流程名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 系统参数名
    */
-  IntentName?: string
+  Name?: string
   /**
-   * 实体列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 对话历史轮数的配置；如果Input是系统变量中的“对话历史”时才使用；
    */
-  UpdatedSlotValues?: Array<ValueInfo>
-  /**
-   * 节点列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunNodes?: Array<RunNodeInfo>
-  /**
-   * 意图判断
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Purposes?: Array<string>
+  DialogHistoryLimit?: number
 }
 
 /**
@@ -6026,6 +6045,18 @@ export interface AgentInput {
    * 自定义变量（API参数）
    */
   CustomVarId?: string
+  /**
+   * 环境变量参数
+   */
+  EnvVarId?: string
+  /**
+   * 应用变量参数
+   */
+  AppVarId?: string
+  /**
+   * 系统参数
+   */
+  SystemVariable?: AgentInputSystemVariable
 }
 
 /**
@@ -6221,6 +6252,11 @@ export interface AppInfo {
    * 权限位信息
    */
   PermissionIds?: Array<string>
+  /**
+   * 创建人昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
 }
 
 /**

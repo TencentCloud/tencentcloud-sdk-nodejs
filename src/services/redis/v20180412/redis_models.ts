@@ -44,7 +44,7 @@ export interface UpgradeProxyVersionRequest {
  */
 export interface RemoveReplicationGroupRequest {
   /**
-   * 复制组ID
+   * 复制组ID。请登录 [Redis控制台的全球复制](https://console.cloud.tencent.com/redis/replication) 页面获取复制组 ID。
    */
   GroupId: string
 }

@@ -298,6 +298,16 @@ it("mna.v20210119.GetFlowAlarmInfo", async function () {
     }
 })
 
+it("mna.v20210119.ReportOrder", async function () {
+    try {
+       const data = await client.ReportOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GroupDeleteDevice", async function () {
     try {
        const data = await client.GroupDeleteDevice({})
