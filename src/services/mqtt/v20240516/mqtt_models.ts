@@ -765,7 +765,7 @@ export interface CreateDeviceIdentityRequest {
    */
   PrimaryKey?: string
   /**
-   * 次要签名key，不传则油系统自动生成，需要base64编码。
+   * 次要签名key，不传则由系统自动生成，需要base64编码。
    */
   SecondaryKey?: string
   /**

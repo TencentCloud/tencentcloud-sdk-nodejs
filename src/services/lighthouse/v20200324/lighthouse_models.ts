@@ -101,6 +101,16 @@ export interface DescribeDisksDeniedActionsRequest {
 }
 
 /**
+ * StopMcpServers返回参数结构体
+ */
+export interface StopMcpServersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Docker容器映射的端口
  */
 export interface DockerContainerPublishPort {
@@ -123,13 +133,29 @@ export interface DockerContainerPublishPort {
 }
 
 /**
- * InquirePriceCreateBlueprint请求参数结构体
+ * DescribeMcpServers返回参数结构体
  */
-export interface InquirePriceCreateBlueprintRequest {
+export interface DescribeMcpServersResponse {
   /**
-   * 自定义镜像的个数。默认值为1。
+   * MCP Server列表。
    */
-  BlueprintCount?: number
+  McpServerSet?: Array<McpServer>
+  /**
+   * 符合条件的MCP Server数量。
+   */
+  TotalCount?: number
+  /**
+   * 实例 ID。
+   */
+  InstanceId?: string
+  /**
+   * 实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -359,6 +385,20 @@ export interface RegionInfo {
 }
 
 /**
+ * StopMcpServers请求参数结构体
+ */
+export interface StopMcpServersRequest {
+  /**
+   * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceId: string
+  /**
+   * MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10
+   */
+  McpServerIds: Array<string>
+}
+
+/**
  * DescribeBlueprintInstances返回参数结构体
  */
 export interface DescribeBlueprintInstancesResponse {
@@ -547,6 +587,16 @@ export interface InquirePriceRenewInstancesResponse {
 }
 
 /**
+ * RenewDisks返回参数结构体
+ */
+export interface RenewDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteFirewallRules返回参数结构体
  */
 export interface DeleteFirewallRulesResponse {
@@ -685,6 +735,20 @@ export interface DescribeBundlesResponse {
 }
 
 /**
+ * ResetFirewallTemplateRules请求参数结构体
+ */
+export interface ResetFirewallTemplateRulesRequest {
+  /**
+   * 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 接口返回值中的 TemplateId	获取。
+   */
+  TemplateId: string
+  /**
+   * 重置后的防火墙模板规则列表。每次请求批量防火墙规则的上限为 100。
+   */
+  TemplateRules: Array<FirewallRule>
+}
+
+/**
  * ModifyImageSharePermission返回参数结构体
  */
 export interface ModifyImageSharePermissionResponse {
@@ -740,6 +804,16 @@ export interface DescribeFirewallTemplatesRequest {
    * 返回数量，默认为 20，最大值为 100。
    */
   Limit?: number
+}
+
+/**
+ * ModifyDiskBackupsAttribute返回参数结构体
+ */
+export interface ModifyDiskBackupsAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1029,6 +1103,16 @@ export interface AssociateInstancesKeyPairsRequest {
    * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * RestartMcpServers返回参数结构体
+ */
+export interface RestartMcpServersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1544,21 +1628,17 @@ False：表示开机状态制作镜像
 }
 
 /**
- * DeleteFirewallRules请求参数结构体
+ * CreateMcpServer返回参数结构体
  */
-export interface DeleteFirewallRulesRequest {
+export interface CreateMcpServerResponse {
   /**
-   * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
+   * MCP Server ID。
    */
-  InstanceId: string
+  McpServerId?: string
   /**
-   * 防火墙规则列表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FirewallRules: Array<FirewallRule>
-  /**
-   * 防火墙当前版本。用户每次更新防火墙规则时版本会自动加1，防止规则已过期，不填不考虑冲突。
-   */
-  FirewallVersion?: number
+  RequestId?: string
 }
 
 /**
@@ -1731,6 +1811,24 @@ export interface ApplyDiskBackupResponse {
 }
 
 /**
+ * DeleteFirewallRules请求参数结构体
+ */
+export interface DeleteFirewallRulesRequest {
+  /**
+   * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
+   */
+  InstanceId: string
+  /**
+   * 防火墙规则列表。
+   */
+  FirewallRules: Array<FirewallRule>
+  /**
+   * 防火墙当前版本。用户每次更新防火墙规则时版本会自动加1，防止规则已过期，不填不考虑冲突。
+   */
+  FirewallVersion?: number
+}
+
+/**
  * DescribeBlueprints请求参数结构体
  */
 export interface DescribeBlueprintsRequest {
@@ -1775,6 +1873,24 @@ export interface DescribeBlueprintsRequest {
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * ResetInstancesPassword请求参数结构体
+ */
+export interface ResetInstancesPasswordRequest {
+  /**
+   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
+   */
+  InstanceIds: Array<string>
+  /**
+   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：</br> `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：</br> <li>小写字母：[a-z]</br></li> <li>大写字母：[A-Z]</br></li> <li>数字：0-9</br></li> <li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li></br> `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符</br> <li>小写字母：[a-z]</br></li> <li>大写字母：[A-Z]</br></li> <li>数字： 0-9</br></li> <li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</br></li> <li>如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。</li>
+   */
+  Password: string
+  /**
+   * 待重置密码的实例操作系统用户名。不得超过 64 个字符。
+   */
+  UserName?: string
 }
 
 /**
@@ -1849,6 +1965,16 @@ export interface CreateFirewallTemplateRequest {
    * 防火墙规则列表。
    */
   TemplateRules?: Array<FirewallRule>
+}
+
+/**
+ * ModifyMcpServer返回参数结构体
+ */
+export interface ModifyMcpServerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2088,13 +2214,25 @@ export interface DescribeDisksResponse {
 }
 
 /**
- * StartInstances请求参数结构体
+ * DescribeMcpServers请求参数结构体
  */
-export interface StartInstancesRequest {
+export interface DescribeMcpServersRequest {
   /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
-  InstanceIds: Array<string>
+  InstanceId: string
+  /**
+   * MCP Server ID列表。列表为空时此条件不生效。最大长度：10
+   */
+  McpServerIds?: Array<string>
+  /**
+   * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+   */
+  Offset?: number
 }
 
 /**
@@ -2185,6 +2323,16 @@ export interface DisassociateInstancesKeyPairsRequest {
  * DescribeFirewallTemplateQuota请求参数结构体
  */
 export type DescribeFirewallTemplateQuotaRequest = null
+
+/**
+ * RemoveMcpServers返回参数结构体
+ */
+export interface RemoveMcpServersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 数据盘价格
@@ -2510,17 +2658,29 @@ export interface DescribeModifyInstanceBundlesRequest {
 export type DescribeRegionsRequest = null
 
 /**
- * 实例标识信息。
+ * CreateMcpServer请求参数结构体
  */
-export interface InstanceIdentifier {
+export interface CreateMcpServerRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceId: string
   /**
-   * 实例地域。
+   * MCP Server名称。最大长度：64
    */
-  Region: string
+  Name: string
+  /**
+   * Base64编码后的MCP Server启动命令。最大长度：2048
+   */
+  Command: string
+  /**
+   * MCP Server备注。最大长度：2048
+   */
+  Description?: string
+  /**
+   * MCP Server环境变量。最大长度：10
+   */
+  Envs?: Array<McpServerEnv>
 }
 
 /**
@@ -2556,17 +2716,13 @@ export interface InquirePriceCreateBlueprintResponse {
 }
 
 /**
- * ResetFirewallTemplateRules请求参数结构体
+ * InquirePriceCreateBlueprint请求参数结构体
  */
-export interface ResetFirewallTemplateRulesRequest {
+export interface InquirePriceCreateBlueprintRequest {
   /**
-   * 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 接口返回值中的 TemplateId	获取。
+   * 自定义镜像的个数。默认值为1。
    */
-  TemplateId: string
-  /**
-   * 重置后的防火墙模板规则列表。每次请求批量防火墙规则的上限为 100。
-   */
-  TemplateRules: Array<FirewallRule>
+  BlueprintCount?: number
 }
 
 /**
@@ -2945,9 +3101,9 @@ export interface DockerContainerVolume {
 }
 
 /**
- * StopInstances请求参数结构体
+ * StartInstances请求参数结构体
  */
-export interface StopInstancesRequest {
+export interface StartInstancesRequest {
   /**
    * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
@@ -3256,6 +3412,20 @@ export interface DeniedAction {
 }
 
 /**
+ * RemoveMcpServers请求参数结构体
+ */
+export interface RemoveMcpServersRequest {
+  /**
+   * 实例ID。可以通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceId: string
+  /**
+   * MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10
+   */
+  McpServerIds: Array<string>
+}
+
+/**
  * DescribeAllScenes返回参数结构体
  */
 export interface DescribeAllScenesResponse {
@@ -3463,43 +3633,17 @@ export interface CreateFirewallTemplateRulesResponse {
 }
 
 /**
- * ModifyDockerContainer请求参数结构体
+ * MCP Server环境变量
  */
-export interface ModifyDockerContainerRequest {
+export interface McpServerEnv {
   /**
-   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
+   * MCP Server的环境变量键。最大长度：128
    */
-  InstanceId: string
+  Key: string
   /**
-   * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
+   * MCP Server的环境变量值。最大长度：1024。该字段可能存储密钥，出参时将固定返回“**********”，避免明文泄露。
    */
-  ContainerId: string
-  /**
-   * 环境变量列表
-   */
-  Envs?: Array<ContainerEnv>
-  /**
-   * 容器端口主机端口映射列表
-   */
-  PublishPorts?: Array<DockerContainerPublishPort>
-  /**
-   * 容器加载本地卷列表
-   */
-  Volumes?: Array<DockerContainerVolume>
-  /**
-   * 运行的命令
-   */
-  Command?: string
-  /**
-   * 容器重启策略，对应docker "--restart"参数。
-
-枚举值:
-no: 不自动重启。默认策略。
-on-failure[:max-retries]: 当容器退出码非0时重启容器。使用max-retries限制重启次数，比如on-failure:10，限制最多重启10次。
-always: 只要容器退出就重启。
-unless-stopped: 始终重新启动容器，包括在守护进程启动时，除非容器在 Docker 守护进程停止之前进入停止状态。
-   */
-  RestartPolicy?: string
+  Value?: string
 }
 
 /**
@@ -3567,31 +3711,57 @@ export interface CreateKeyPairRequest {
 }
 
 /**
- * StopInstances返回参数结构体
+ * RestartMcpServers请求参数结构体
  */
-export interface StopInstancesResponse {
+export interface RestartMcpServersRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10
+   */
+  McpServerIds: Array<string>
 }
 
 /**
- * ResetInstancesPassword请求参数结构体
+ * ModifyDockerContainer请求参数结构体
  */
-export interface ResetInstancesPasswordRequest {
+export interface ModifyDockerContainerRequest {
   /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
    */
-  InstanceIds: Array<string>
+  InstanceId: string
   /**
-   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：</br> `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：</br> <li>小写字母：[a-z]</br></li> <li>大写字母：[A-Z]</br></li> <li>数字：0-9</br></li> <li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li></br> `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符</br> <li>小写字母：[a-z]</br></li> <li>大写字母：[A-Z]</br></li> <li>数字： 0-9</br></li> <li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</br></li> <li>如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。</li>
+   * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
    */
-  Password: string
+  ContainerId: string
   /**
-   * 待重置密码的实例操作系统用户名。不得超过 64 个字符。
+   * 环境变量列表
    */
-  UserName?: string
+  Envs?: Array<ContainerEnv>
+  /**
+   * 容器端口主机端口映射列表
+   */
+  PublishPorts?: Array<DockerContainerPublishPort>
+  /**
+   * 容器加载本地卷列表
+   */
+  Volumes?: Array<DockerContainerVolume>
+  /**
+   * 运行的命令
+   */
+  Command?: string
+  /**
+   * 容器重启策略，对应docker "--restart"参数。
+
+枚举值:
+no: 不自动重启。默认策略。
+on-failure[:max-retries]: 当容器退出码非0时重启容器。使用max-retries限制重启次数，比如on-failure:10，限制最多重启10次。
+always: 只要容器退出就重启。
+unless-stopped: 始终重新启动容器，包括在守护进程启动时，除非容器在 Docker 守护进程停止之前进入停止状态。
+   */
+  RestartPolicy?: string
 }
 
 /**
@@ -4071,6 +4241,73 @@ export interface ContainerEnv {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
+}
+
+/**
+ * MCP Server信息
+ */
+export interface McpServer {
+  /**
+   * MCP Server ID。
+   */
+  McpServerId?: string
+  /**
+   * MCP Server名称。最大长度：64
+   */
+  Name?: string
+  /**
+   * MCP Server类型。枚举值：PUBLIC_PACKAGE，公共包安装；AGENT_GENERATED，AI生成。
+   */
+  McpServerType?: string
+  /**
+   * MCP Server图标地址
+   */
+  IconUrl?: string
+  /**
+   * Base64编码后的MCP Server启动命令。最大长度：2048
+   */
+  Command?: string
+  /**
+   * MCP Server状态。枚举值如下：
+
+PENDING：表示创建中
+LAUNCH_FAILED：表示创建失败
+RUNNING：表示运行中
+STOPPED：表示关闭
+STARTING：表示开启中
+STOPPING：表示关闭中
+RESTARTING：表示重启中
+REMOVING：表示删除中
+UNKNOWN：表示未知
+ENV_ERROR：表示环境错误
+   */
+  State?: string
+  /**
+   * MCP Server访问地址。
+   */
+  ServerUrl?: string
+  /**
+   * MCP Server配置
+   */
+  Config?: string
+  /**
+   * MCP Server备注
+   */
+  Description?: string
+  /**
+   * MCP Server创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+   */
+  CreatedTime?: string
+  /**
+   * MCP Server修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+   */
+  UpdatedTime?: string
+  /**
+   * MCP Server环境变量
+   */
+  EnvSet?: Array<McpServerEnv>
 }
 
 /**
@@ -4624,13 +4861,33 @@ export interface TerminateDisksRequest {
 }
 
 /**
- * RenewDisks返回参数结构体
+ * ModifyMcpServer请求参数结构体
  */
-export interface RenewDisksResponse {
+export interface ModifyMcpServerRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID。可以通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * MCP Server ID。可以通过DescribeMcpServers接口返回值中的McpServerId获取。
+   */
+  McpServerId: string
+  /**
+   * MCP Server名称。最大长度：64
+   */
+  Name?: string
+  /**
+   * Base64编码后的MCP Server启动命令。最大长度：2048
+   */
+  Command?: string
+  /**
+   * MCP Server备注。最大长度：2048
+   */
+  Description?: string
+  /**
+   * MCP Server环境变量。最大长度：10。用于完整替换MCP Server的环境变量。当该字段为空时，系统将清除当前所有环境变量。若无需修改环境变量，请勿传递该字段。
+   */
+  Envs?: Array<McpServerEnv>
 }
 
 /**
@@ -4946,13 +5203,17 @@ export interface DescribeDisksReturnableResponse {
 }
 
 /**
- * ModifyDiskBackupsAttribute返回参数结构体
+ * 实例标识信息。
  */
-export interface ModifyDiskBackupsAttributeResponse {
+export interface InstanceIdentifier {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID。
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 实例地域。
+   */
+  Region: string
 }
 
 /**
@@ -4963,6 +5224,16 @@ export interface DeleteFirewallTemplateRequest {
    * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
    */
   TemplateId: string
+}
+
+/**
+ * StopInstances返回参数结构体
+ */
+export interface StopInstancesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4987,6 +5258,30 @@ export interface CreateInstanceSnapshotResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopInstances请求参数结构体
+ */
+export interface StopInstancesRequest {
+  /**
+   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * StartMcpServers请求参数结构体
+ */
+export interface StartMcpServersRequest {
+  /**
+   * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceId: string
+  /**
+   * MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10
+   */
+  McpServerIds: Array<string>
 }
 
 /**
@@ -5191,6 +5486,16 @@ export interface StartDockerContainersRequest {
    * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
    */
   ContainerIds: Array<string>
+}
+
+/**
+ * StartMcpServers返回参数结构体
+ */
+export interface StartMcpServersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

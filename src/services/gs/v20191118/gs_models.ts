@@ -773,6 +773,10 @@ export interface UploadFileToAndroidInstancesRequest {
    * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
    */
   DestinationDirectory?: string
+  /**
+   * 目标文件名
+   */
+  DestinationFileName?: string
 }
 
 /**
@@ -1916,6 +1920,10 @@ export interface DistributeFileToAndroidInstancesRequest {
    * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
    */
   DestinationDirectory: string
+  /**
+   * 目标文件名
+   */
+  DestinationFileName?: string
 }
 
 /**
@@ -2807,6 +2815,10 @@ export interface AndroidInstanceUploadFile {
    * 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下
    */
   DestinationDirectory?: string
+  /**
+   * 目标文件名
+   */
+  DestinationFileName?: string
 }
 
 /**

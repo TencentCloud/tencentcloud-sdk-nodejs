@@ -402,7 +402,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 预付费实例变配接口，调整磁盘，带宽
+   * 预付费实例变配接口，调整磁盘，带宽,  分区
    */
   async ModifyInstancePre(
     req: ModifyInstancePreRequest,
@@ -532,7 +532,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除预付费实例，该接口会对实例执行隔离并删除的动作，执行成功后实例会被直接删除销毁
+   * 删除预付费实例，该接口会对实例执行隔离并删除的动作，执行成功后实例会被直接删除销毁。通过调用API删除不会对连接器和任务进行关联预检查，直接进行实例销毁。
    */
   async DeleteInstancePre(
     req: DeleteInstancePreRequest,
@@ -882,7 +882,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除后付费实例
+   * 删除后付费实例，通过调用API删除不会对连接器和任务进行关联预检查，直接进行实例销毁。
    */
   async DeleteInstancePost(
     req: DeleteInstancePostRequest,
@@ -1173,7 +1173,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加普罗米修斯监控1
+   * 添加普罗米修斯监控
    */
   async CreatePrometheus(
     req: CreatePrometheusRequest,

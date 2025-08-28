@@ -799,12 +799,12 @@ export interface CFSOption {
   /**
    * 文件系统远程挂载ip及路径。
    */
-  RemotePath: string
+  RemotePath?: string
   /**
-   * 文件系统协议类型，默认值NFS 3.0。
-<li>NFS 3.0。
-<li>NFS 4.0。
-<li>TURBO。
+   * 文件系统协议类型。
+<li>NFS 3.0</li>
+<li>NFS 4.0</li>
+<li>TURBO</li>
    */
   Protocol?: string
   /**
@@ -813,12 +813,15 @@ export interface CFSOption {
   StorageType?: string
   /**
    * 文件系统挂载挂载命令参数选项。
-
 - NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
 - NFS 4.0默认值：vers=4.0,noresvport
 - TURBO默认值：user_xattr
    */
   MountOption?: string
+  /**
+   * 文件系统ID    文件系统ID通过调用接口[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)获取。
+   */
+  FileSystemId?: string
 }
 
 /**

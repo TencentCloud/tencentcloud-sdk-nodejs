@@ -23,8 +23,9 @@ import {
   AssociateInstancesKeyPairsResponse,
   DescribeInstancesTrafficPackagesRequest,
   DescribeDisksDeniedActionsRequest,
+  StopMcpServersResponse,
   DockerContainerPublishPort,
-  InquirePriceCreateBlueprintRequest,
+  DescribeMcpServersResponse,
   DescribeDiskBackupsRequest,
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
@@ -34,6 +35,7 @@ import {
   DescribeZonesRequest,
   RebootInstancesResponse,
   RegionInfo,
+  StopMcpServersRequest,
   DescribeBlueprintInstancesResponse,
   InstanceDeniedActions,
   InquirePriceCreateDisksRequest,
@@ -44,6 +46,7 @@ import {
   SyncBlueprintRequest,
   DescribeScenesResponse,
   InquirePriceRenewInstancesResponse,
+  RenewDisksResponse,
   DeleteFirewallRulesResponse,
   ModifyInstancesAttributeRequest,
   DescribeDockerContainerDetailRequest,
@@ -53,9 +56,11 @@ import {
   RerunDockerContainerResponse,
   ResetInstanceBlueprint,
   DescribeBundlesResponse,
+  ResetFirewallTemplateRulesRequest,
   ModifyImageSharePermissionResponse,
   DeleteFirewallTemplateRulesResponse,
   DescribeFirewallTemplatesRequest,
+  ModifyDiskBackupsAttributeResponse,
   ModifyInstancesBundleRequest,
   DeleteDiskBackupsRequest,
   InquirePriceRenewInstancesRequest,
@@ -72,6 +77,7 @@ import {
   ResetAttachCcnRequest,
   CreateDisksRequest,
   AssociateInstancesKeyPairsRequest,
+  RestartMcpServersResponse,
   DockerContainer,
   CancelShareBlueprintAcrossAccountsResponse,
   DescribeSnapshotsRequest,
@@ -94,7 +100,7 @@ import {
   DetachDisksRequest,
   ModifyFirewallRulesRequest,
   CreateBlueprintRequest,
-  DeleteFirewallRulesRequest,
+  CreateMcpServerResponse,
   RerunDockerContainerRequest,
   DescribeInstanceVncUrlRequest,
   ModifyFirewallRuleDescriptionRequest,
@@ -106,11 +112,14 @@ import {
   DetailPrice,
   StopDockerContainersResponse,
   ApplyDiskBackupResponse,
+  DeleteFirewallRulesRequest,
   DescribeBlueprintsRequest,
+  ResetInstancesPasswordRequest,
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
   RestartDockerContainersResponse,
   CreateFirewallTemplateRequest,
+  ModifyMcpServerResponse,
   RemoveDockerContainersRequest,
   RenewDisksRequest,
   ModifyDisksAttributeRequest,
@@ -127,13 +136,14 @@ import {
   DeleteSnapshotsResponse,
   ReplaceFirewallTemplateRuleResponse,
   DescribeDisksResponse,
-  StartInstancesRequest,
+  DescribeMcpServersRequest,
   DescribeBundleDiscountResponse,
   DescribeAllScenesRequest,
   ModifyDisksRenewFlagRequest,
   StartDockerContainersResponse,
   DisassociateInstancesKeyPairsRequest,
   DescribeFirewallTemplateQuotaRequest,
+  RemoveMcpServersResponse,
   DataDiskPrice,
   Command,
   SceneInfo,
@@ -149,10 +159,10 @@ import {
   StopDockerContainersRequest,
   DescribeModifyInstanceBundlesRequest,
   DescribeRegionsRequest,
-  InstanceIdentifier,
+  CreateMcpServerRequest,
   DescribeInstancesDiskNumResponse,
   InquirePriceCreateBlueprintResponse,
-  ResetFirewallTemplateRulesRequest,
+  InquirePriceCreateBlueprintRequest,
   ModifyFirewallTemplateResponse,
   DescribeInstancesReturnableRequest,
   DiskReturnable,
@@ -168,7 +178,7 @@ import {
   DescribeDockerContainerConfigurationResponse,
   Instance,
   DockerContainerVolume,
-  StopInstancesRequest,
+  StartInstancesRequest,
   IsolateInstancesResponse,
   CreateKeyPairResponse,
   InstanceViolationDetail,
@@ -182,6 +192,7 @@ import {
   InquirePriceCreateInstancesResponse,
   TotalPrice,
   DeniedAction,
+  RemoveMcpServersRequest,
   DescribeAllScenesResponse,
   InquirePriceRenewDisksResponse,
   Bundle,
@@ -190,13 +201,13 @@ import {
   DescribeSnapshotsDeniedActionsRequest,
   DescribeDiskDiscountResponse,
   CreateFirewallTemplateRulesResponse,
-  ModifyDockerContainerRequest,
+  McpServerEnv,
   ResizeDisksRequest,
   DiskChargePrepaid,
   RunDockerContainersResponse,
   CreateKeyPairRequest,
-  StopInstancesResponse,
-  ResetInstancesPasswordRequest,
+  RestartMcpServersRequest,
+  ModifyDockerContainerRequest,
   DiskPrice,
   DescribeInstancesRequest,
   DescribeFirewallTemplateRuleQuotaResponse,
@@ -219,6 +230,7 @@ import {
   DescribeFirewallRulesResponse,
   DescribeInstancesReturnableResponse,
   ContainerEnv,
+  McpServer,
   DescribeImagesToShareRequest,
   DeleteBlueprintsRequest,
   RenameDockerContainerResponse,
@@ -245,7 +257,7 @@ import {
   SystemDisk,
   ApplyFirewallTemplateResponse,
   TerminateDisksRequest,
-  RenewDisksResponse,
+  ModifyMcpServerRequest,
   ResetInstanceRequest,
   ResizeDisksResponse,
   DescribeDiskConfigsResponse,
@@ -262,10 +274,13 @@ import {
   DescribeBundleDiscountRequest,
   DescribeFirewallTemplateRulesResponse,
   DescribeDisksReturnableResponse,
-  ModifyDiskBackupsAttributeResponse,
+  InstanceIdentifier,
   DeleteFirewallTemplateRequest,
+  StopInstancesResponse,
   IsolateDisksRequest,
   CreateInstanceSnapshotResponse,
+  StopInstancesRequest,
+  StartMcpServersRequest,
   ModifyInstancesBundleResponse,
   GeneralResourceQuota,
   DescribeResetInstanceBlueprintsResponse,
@@ -279,6 +294,7 @@ import {
   DescribeGeneralResourceQuotasResponse,
   ModifyInstancesRenewFlagRequest,
   StartDockerContainersRequest,
+  StartMcpServersResponse,
   RenewInstancesRequest,
   DescribeFirewallRulesTemplateResponse,
   RenewInstancesResponse,
@@ -626,6 +642,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（RemoveMcpServers）用于删除MCP Server。
+- 本接口为异步接口，API返回时操作并未立即完成。MCP Server的操作结果可以通过调用 DescribeMcpServers 接口查询。
+- 本接口在操作多个MCP Server时，不会因为某一个失败而停止。您需要通过调用 DescribeMcpServers 接口查询最终操作结果，如无法查询到，代表删除成功。
+     */
+  async RemoveMcpServers(
+    req: RemoveMcpServersRequest,
+    cb?: (error: string, rep: RemoveMcpServersResponse) => void
+  ): Promise<RemoveMcpServersResponse> {
+    return this.request("RemoveMcpServers", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeFirewallTemplateQuota) 用于查询防火墙模板配额。
    */
   async DescribeFirewallTemplateQuota(
@@ -675,6 +703,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDiskBackupsResponse) => void
   ): Promise<DeleteDiskBackupsResponse> {
     return this.request("DeleteDiskBackups", req, cb)
+  }
+
+  /**
+     * 本接口（StartMcpServers）用于开启实例中的MCP Server。
+- 本接口为异步接口，API返回时操作并未立即完成。MCP Server的操作结果可以通过调用 DescribeMcpServers 接口查询。
+- 本接口在操作多个MCP Server时，不会因为某一个失败而停止。您需要通过调用 DescribeMcpServers 接口查询最终操作结果。
+     */
+  async StartMcpServers(
+    req: StartMcpServersRequest,
+    cb?: (error: string, rep: StartMcpServersResponse) => void
+  ): Promise<StartMcpServersResponse> {
+    return this.request("StartMcpServers", req, cb)
   }
 
   /**
@@ -748,6 +788,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void
   ): Promise<DescribeInstancesDeniedActionsResponse> {
     return this.request("DescribeInstancesDeniedActions", req, cb)
+  }
+
+  /**
+     * 本接口（ShareBlueprintAcrossAccounts）用于跨账号共享镜像。
+仅支持共享自定义镜像， 且用于共享的镜像状态必须为NORMAL。
+共享的账号必须为主账号。
+     */
+  async ShareBlueprintAcrossAccounts(
+    req: ShareBlueprintAcrossAccountsRequest,
+    cb?: (error: string, rep: ShareBlueprintAcrossAccountsResponse) => void
+  ): Promise<ShareBlueprintAcrossAccountsResponse> {
+    return this.request("ShareBlueprintAcrossAccounts", req, cb)
   }
 
   /**
@@ -895,6 +947,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（CreateMcpServer）用于创建MCP Server。
+- 本接口为异步接口，请求发送成功后会返回一个 McpServerId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeMcpServers 接口查询。
+     */
+  async CreateMcpServer(
+    req: CreateMcpServerRequest,
+    cb?: (error: string, rep: CreateMcpServerResponse) => void
+  ): Promise<CreateMcpServerResponse> {
+    return this.request("CreateMcpServer", req, cb)
+  }
+
+  /**
    * 本接口 (CreateBlueprint) 用于创建镜像。
    */
   async CreateBlueprint(
@@ -984,15 +1047,14 @@ CVM镜像共享到轻量应用服务器镜像需要满足如下条件：
   }
 
   /**
-     * 本接口（ShareBlueprintAcrossAccounts）用于跨账号共享镜像。
-仅支持共享自定义镜像， 且用于共享的镜像状态必须为NORMAL。
-共享的账号必须为主账号。
+     * 本接口（ModifyMcpServer）用于修改实例的MCP Server信息。
+- 本接口为异步接口，API返回时修改操作并未立即完成。MCP Server的修改结果可以通过调用 DescribeMcpServers 接口查询。
      */
-  async ShareBlueprintAcrossAccounts(
-    req: ShareBlueprintAcrossAccountsRequest,
-    cb?: (error: string, rep: ShareBlueprintAcrossAccountsResponse) => void
-  ): Promise<ShareBlueprintAcrossAccountsResponse> {
-    return this.request("ShareBlueprintAcrossAccounts", req, cb)
+  async ModifyMcpServer(
+    req: ModifyMcpServerRequest,
+    cb?: (error: string, rep: ModifyMcpServerResponse) => void
+  ): Promise<ModifyMcpServerResponse> {
+    return this.request("ModifyMcpServer", req, cb)
   }
 
   /**
@@ -1292,6 +1354,18 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
+     * 本接口（StopMcpServers）用于关闭实例中的MCP Server。
+- 本接口为异步接口，API返回时操作并未立即完成。MCP Server的操作结果可以通过调用 DescribeMcpServers 接口查询。
+- 本接口在操作多个MCP Server时，不会因为某一个失败而停止。您需要通过调用 DescribeMcpServers 接口查询最终操作结果。
+     */
+  async StopMcpServers(
+    req: StopMcpServersRequest,
+    cb?: (error: string, rep: StopMcpServersResponse) => void
+  ): Promise<StopMcpServersResponse> {
+    return this.request("StopMcpServers", req, cb)
+  }
+
+  /**
    * 本接口 (DeleteFirewallTemplateRules) 用于删除防火墙模板规则。
    */
   async DeleteFirewallTemplateRules(
@@ -1329,6 +1403,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DescribeFirewallRulesTemplateResponse) => void
   ): Promise<DescribeFirewallRulesTemplateResponse> {
     return this.request("DescribeFirewallRulesTemplate", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeMcpServers）用于查询MCP Server列表。
+   */
+  async DescribeMcpServers(
+    req: DescribeMcpServersRequest,
+    cb?: (error: string, rep: DescribeMcpServersResponse) => void
+  ): Promise<DescribeMcpServersResponse> {
+    return this.request("DescribeMcpServers", req, cb)
   }
 
   /**
@@ -1544,6 +1628,18 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: RenewInstancesResponse) => void
   ): Promise<RenewInstancesResponse> {
     return this.request("RenewInstances", req, cb)
+  }
+
+  /**
+     * 本接口（RestartMcpServers）用于重启实例中的MCP Server。
+- 本接口为异步接口，API返回时操作并未立即完成。MCP Server的操作结果可以通过调用 DescribeMcpServers 接口查询。
+- 本接口在操作多个MCP Server时，不会因为某一个失败而停止。您需要通过调用 DescribeMcpServers 接口查询最终操作结果。
+     */
+  async RestartMcpServers(
+    req: RestartMcpServersRequest,
+    cb?: (error: string, rep: RestartMcpServersResponse) => void
+  ): Promise<RestartMcpServersResponse> {
+    return this.request("RestartMcpServers", req, cb)
   }
 
   /**

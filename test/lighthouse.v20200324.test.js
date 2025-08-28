@@ -288,6 +288,16 @@ it("lighthouse.v20200324.DescribeDiskDiscount", async function () {
     }
 })
 
+it("lighthouse.v20200324.RemoveMcpServers", async function () {
+    try {
+       const data = await client.RemoveMcpServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeFirewallTemplateQuota", async function () {
     try {
        const data = await client.DescribeFirewallTemplateQuota({})
@@ -331,6 +341,16 @@ it("lighthouse.v20200324.AttachDisks", async function () {
 it("lighthouse.v20200324.DeleteDiskBackups", async function () {
     try {
        const data = await client.DeleteDiskBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.StartMcpServers", async function () {
+    try {
+       const data = await client.StartMcpServers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +411,16 @@ it("lighthouse.v20200324.ModifyDockerContainer", async function () {
 it("lighthouse.v20200324.DescribeInstancesDeniedActions", async function () {
     try {
        const data = await client.DescribeInstancesDeniedActions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ShareBlueprintAcrossAccounts", async function () {
+    try {
+       const data = await client.ShareBlueprintAcrossAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +558,16 @@ it("lighthouse.v20200324.IsolateInstances", async function () {
     }
 })
 
+it("lighthouse.v20200324.CreateMcpServer", async function () {
+    try {
+       const data = await client.CreateMcpServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.CreateBlueprint", async function () {
     try {
        const data = await client.CreateBlueprint({})
@@ -608,9 +648,9 @@ it("lighthouse.v20200324.DescribeBundles", async function () {
     }
 })
 
-it("lighthouse.v20200324.ShareBlueprintAcrossAccounts", async function () {
+it("lighthouse.v20200324.ModifyMcpServer", async function () {
     try {
-       const data = await client.ShareBlueprintAcrossAccounts({})
+       const data = await client.ModifyMcpServer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,6 +898,16 @@ it("lighthouse.v20200324.DescribeInstancesDiskNum", async function () {
     }
 })
 
+it("lighthouse.v20200324.StopMcpServers", async function () {
+    try {
+       const data = await client.StopMcpServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DeleteFirewallTemplateRules", async function () {
     try {
        const data = await client.DeleteFirewallTemplateRules({})
@@ -891,6 +941,16 @@ it("lighthouse.v20200324.DescribeInstancesReturnable", async function () {
 it("lighthouse.v20200324.DescribeFirewallRulesTemplate", async function () {
     try {
        const data = await client.DescribeFirewallRulesTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeMcpServers", async function () {
+    try {
+       const data = await client.DescribeMcpServers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1071,6 +1131,16 @@ it("lighthouse.v20200324.RenewDisks", async function () {
 it("lighthouse.v20200324.RenewInstances", async function () {
     try {
        const data = await client.RenewInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.RestartMcpServers", async function () {
+    try {
+       const data = await client.RestartMcpServers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
