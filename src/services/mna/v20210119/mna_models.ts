@@ -58,7 +58,7 @@ export interface GetMultiFlowStatisticResponse {
  */
 export interface OrderInfo {
   /**
-   * 父帐号uin
+   * 父账号uin
    */
   Uin?: string
   /**

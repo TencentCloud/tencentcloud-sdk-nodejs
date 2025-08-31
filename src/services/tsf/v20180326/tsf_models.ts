@@ -5133,7 +5133,7 @@ export interface DescribeContainerEventsRequest {
    */
   ResourceType: string
   /**
-   * 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd
+   * 部署组ID，按照【部署组ID】进行过滤，可通过调用[DescribeGroups](https://cloud.tencent.com/document/product/649/36065)查询已创建的项目列表或登录控制台进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的项目。
    */
   ResourceId: string
   /**
@@ -8270,11 +8270,11 @@ export interface DescribeInvocationMetricDataDimensionRequest {
    */
   EndTime: string
   /**
-   * 开始index
+   * 开始index，取值范围大于等于0，默认值为0
    */
   Offset: number
   /**
-   * 分页大小
+   * 单页请求配置数量，取值范围[1, 50]，默认值为10
    */
   Limit: number
   /**
@@ -9152,7 +9152,7 @@ export interface ContainerEvent {
    */
   Type?: string
   /**
-   * Kubernetes 资源类型，典型取值有 Deployment、Pod、Service 等
+   * Kubernetes 资源类型，典型取值有 Deployment(部署资源)、Pod(容器组)、Service(服务资源) 等
    */
   Kind?: string
   /**
@@ -10572,7 +10572,7 @@ export interface DescribeBusinessLogConfigsRequest {
    */
   Limit?: number
   /**
-   * 模糊匹配关键词
+   * 模糊匹配关键词，可搜索配置项ID或配置项名称
    */
   SearchWord?: string
   /**
@@ -10977,7 +10977,12 @@ export interface UpdateGatewayApiRequest {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 过滤条件，name表示过滤字段，value表示过滤字段值。
+   * 过滤条件。多个 filter 之间是与关系，单个 filter 多个 value 之间是或关系。
+参考：[{"Name":"ip","Values":["172.16.16.139"]}]
+filter name 取值范围：
+- `id`：实例ID
+- ` name `：实例名
+- ` ip `：内网IP（可填wan_ip或lan_ip）
    */
   Filters?: Array<Filter>
   /**
@@ -12163,15 +12168,15 @@ export interface DescribeContainerGroupDeployInfoRequest {
  */
 export interface DescribeDeliveryConfigsRequest {
   /**
-   * 关键字
+   * 搜索关键字，可搜索日志投递配置项ID或日志投递配置项名称
    */
   SearchWord?: string
   /**
-   * 偏移
+   * 偏移量，取值范围大于等于0，默认值为0
    */
   Offset?: number
   /**
-   * 搜索条数
+   * 单页请求配置数量，取值范围[1, 50]，默认值为10
    */
   Limit?: number
   /**
@@ -16394,7 +16399,7 @@ export interface CreateContainGroupRequest {
    */
   GroupResourceType?: string
   /**
-   * 分组所属【子网ID】，可前往TKE侧集群[控制台](https://console.cloud.tencent.com/tke2/cluster/sub/list/basic/info/base?rid=1&clusterId=cls-2nhp3g1i)进行获取
+   * 分组所属【子网ID】，可前往私有网络[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1&unVpcId=vpc-6bs8ytjd)进行获取
    */
   SubnetId?: string
   /**
