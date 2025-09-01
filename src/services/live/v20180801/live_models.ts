@@ -5296,11 +5296,11 @@ export interface TranscodeTotalInfo {
 例如：2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  Time: string
+  Time?: string
   /**
    * 转码时长，单位：分钟。
    */
-  Duration: number
+  Duration?: number
   /**
    * 编码方式，带模块，
 示例：
@@ -5309,12 +5309,12 @@ liveprocessor_H265 =》 直播转码-H265，
 topspeed_H264 =》极速高清-H264，
 topspeed_H265 =》极速高清-H265。
    */
-  ModuleCodec: string
+  ModuleCodec?: string
   /**
    * 分辨率，
 示例：540*480。
    */
-  Resolution: string
+  Resolution?: string
 }
 
 /**

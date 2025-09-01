@@ -10862,6 +10862,14 @@ export interface InstanceSpec {
    * 库存数量
    */
   StockCount?: number
+  /**
+   * 最大cpu
+   */
+  MaxCpu?: number
+  /**
+   * 最小cpu
+   */
+  MinCpu?: number
 }
 
 /**

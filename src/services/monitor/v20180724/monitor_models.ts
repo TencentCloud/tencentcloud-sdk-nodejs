@@ -5458,7 +5458,7 @@ export interface ModifyAlarmPolicyTasksRequest {
    */
   PolicyId: string
   /**
-   * 告警策略触发任务列表，空数据代表解绑
+   * 告警策略触发任务列表，空数据代表解绑示例值： { "Type": "AS", "TaskConfig": "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0zhspjx\",\"Policy\":\"asp-ganig28\"}" }
    */
   TriggerTasks?: Array<AlarmPolicyTriggerTask>
 }

@@ -19,81 +19,94 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   PageScreenVO,
+  DeleteProjectRequest,
+  Role,
+  ExportScreenPageResponse,
+  ProjectConfigResult,
+  DeleteUserRoleResponse,
+  DescribeUserProjectListRequest,
+  CorpUserListData,
+  RowColumnConfig,
+  DescribeProjectListResponse,
+  PageScreenListVO,
+  ModifyDatasourceCloudResponse,
+  CreateUserRoleResponse,
+  ApplyEmbedTokenInfo,
+  Project,
+  PermissionComponent,
+  RowColumnStatus,
+  WidgetVO,
+  CreateUserRoleProjectRequest,
+  DescribePermissionStatusInfoRequest,
+  CreateDatasourceResponse,
+  DeleteDatasourceResponse,
+  CreateProjectRequest,
+  DescribePermissionStatusInfoResponse,
+  ApplyEmbedIntervalRequest,
+  DescribePermissionRoleInfoResponse,
+  CreatePermissionRanksRequest,
+  DescribeProjectInfoRequest,
+  ModifyUserRoleRequest,
+  CreateUserRoleRequest,
+  CreateEmbedTokenRequest,
+  ModifyDatasourceRequest,
+  CreatePermissionRanksResponse,
+  CreateProjectResponse,
+  DescribeProjectInfoResponse,
+  DeleteProjectResponse,
+  ApplyEmbedIntervalResponse,
+  RankInfo,
+  UserInfo,
+  UserIdAndUserName,
+  DescribeUserRoleListResponse,
+  RowColumnTagValue,
+  UserRoleListDataRoleInfo,
+  EmbedTokenInfo,
+  DatasourceInfoData,
+  DescribePageWidgetListRequest,
+  DescribeUserRoleProjectListRequest,
+  BaseStateAction,
+  Data,
+  DescribeUserRoleProjectListResponse,
+  DeleteUserRoleRequest,
+  UserRoleListData,
+  CreateUserRoleProjectResponse,
+  DeleteUserRoleProjectRequest,
+  DescribeUserRoleListRequest,
+  ClearEmbedTokenResponse,
+  DeleteUserRoleProjectResponse,
+  DescribePermissionRoleInfoRequest,
+  CreateDatasourceCloudRequest,
+  IdDTO,
+  ModifyDatasourceCloudRequest,
   DataId,
   ClearEmbedTokenRequest,
-  DescribeUserRoleListResponse,
-  ExportScreenPageResponse,
-  ModifyProjectResponse,
-  DeleteProjectRequest,
   DescribeUserProjectListResponse,
   CreateDatasourceRequest,
   DeleteDatasourceRequest,
+  WidgetListVO,
   ModifyDatasourceResponse,
-  UserRoleListDataRoleInfo,
-  ApplyEmbedIntervalRequest,
-  ProjectConfigResult,
-  EmbedTokenInfo,
   DescribePageWidgetListResponse,
-  DeleteUserRoleResponse,
-  ErrorInfo,
-  DescribeUserProjectListRequest,
-  DescribePageWidgetListRequest,
   CreateDatasourceCloudResponse,
   ProjectConfigList,
-  DeleteUserRoleRequest,
-  CreateUserRoleRequest,
+  PermissionGroup,
   UserGroupDTO,
-  ModifyUserRoleRequest,
-  DatasourceInfoData,
-  DescribeProjectListResponse,
-  CorpUserListData,
-  IdDTO,
+  ModifyProjectResponse,
   ModifyUserRoleResponse,
-  CreateEmbedTokenRequest,
-  CreateUserRoleProjectResponse,
-  PageScreenListVO,
-  DescribeProjectInfoRequest,
-  BaseStateAction,
-  Data,
+  DescribePermissionRanksInfoResponse,
   ModifyUserRoleProjectResponse,
-  DescribeUserRoleProjectListResponse,
-  ModifyDatasourceCloudResponse,
-  ModifyDatasourceCloudRequest,
-  ModifyDatasourceRequest,
   ModifyProjectRequest,
   ModifyUserRoleProjectRequest,
-  CreateUserRoleResponse,
-  ApplyEmbedTokenInfo,
   DescribeProjectListRequest,
   UserRoleListDataUserRoleInfo,
-  UserRoleListData,
-  Project,
   DatasourceInfo,
-  DeleteUserRoleProjectRequest,
-  CreateProjectResponse,
-  DescribeProjectInfoResponse,
-  ExportScreenPageRequest,
-  DescribeUserRoleListRequest,
-  ClearEmbedTokenResponse,
-  DeleteProjectResponse,
   ProjectListData,
-  DescribeUserRoleProjectListRequest,
-  PermissionGroup,
   CreateEmbedTokenResponse,
-  CreateUserRoleProjectRequest,
-  WidgetListVO,
-  WidgetVO,
   DescribeDatasourceListRequest,
-  ApplyEmbedIntervalResponse,
-  CreateDatasourceResponse,
-  DeleteUserRoleProjectResponse,
-  CreateDatasourceCloudRequest,
-  UserInfo,
+  DescribePermissionRanksInfoRequest,
   DescribeDatasourceListResponse,
-  UserIdAndUserName,
-  DeleteDatasourceResponse,
-  CreateProjectRequest,
-  PermissionComponent,
+  ErrorInfo,
+  ExportScreenPageRequest,
 } from "./bi_models"
 
 /**
@@ -103,6 +116,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("bi.tencentcloudapi.com", "2022-01-05", clientConfig)
+  }
+
+  /**
+   * 根据角色或标签查询行列权限配置
+   */
+  async DescribePermissionRanksInfo(
+    req: DescribePermissionRanksInfoRequest,
+    cb?: (error: string, rep: DescribePermissionRanksInfoResponse) => void
+  ): Promise<DescribePermissionRanksInfoResponse> {
+    return this.request("DescribePermissionRanksInfo", req, cb)
   }
 
   /**
@@ -136,6 +159,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建行列权限
+   */
+  async CreatePermissionRanks(
+    req: CreatePermissionRanksRequest,
+    cb?: (error: string, rep: CreatePermissionRanksResponse) => void
+  ): Promise<CreatePermissionRanksResponse> {
+    return this.request("CreatePermissionRanks", req, cb)
+  }
+
+  /**
    * 项目详情接口
    */
   async DescribeProjectInfo(
@@ -146,23 +179,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 申请延长Token可用时间接口-强鉴权
+   * 创建项目
    */
-  async ApplyEmbedInterval(
-    req: ApplyEmbedIntervalRequest,
-    cb?: (error: string, rep: ApplyEmbedIntervalResponse) => void
-  ): Promise<ApplyEmbedIntervalResponse> {
-    return this.request("ApplyEmbedInterval", req, cb)
+  async CreateProject(
+    req: CreateProjectRequest,
+    cb?: (error: string, rep: CreateProjectResponse) => void
+  ): Promise<CreateProjectResponse> {
+    return this.request("CreateProject", req, cb)
   }
 
   /**
-   * 页面截图导出
+   * 创建云数据库
    */
-  async ExportScreenPage(
-    req: ExportScreenPageRequest,
-    cb?: (error: string, rep: ExportScreenPageResponse) => void
-  ): Promise<ExportScreenPageResponse> {
-    return this.request("ExportScreenPage", req, cb)
+  async CreateDatasourceCloud(
+    req: CreateDatasourceCloudRequest,
+    cb?: (error: string, rep: CreateDatasourceCloudResponse) => void
+  ): Promise<CreateDatasourceCloudResponse> {
+    return this.request("CreateDatasourceCloud", req, cb)
+  }
+
+  /**
+   * 查询行列权限初始状态1
+   */
+  async DescribePermissionStatusInfo(
+    req: DescribePermissionStatusInfoRequest,
+    cb?: (error: string, rep: DescribePermissionStatusInfoResponse) => void
+  ): Promise<DescribePermissionStatusInfoResponse> {
+    return this.request("DescribePermissionStatusInfo", req, cb)
   }
 
   /**
@@ -176,13 +219,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云数据库
+   * 页面截图导出
    */
-  async CreateDatasourceCloud(
-    req: CreateDatasourceCloudRequest,
-    cb?: (error: string, rep: CreateDatasourceCloudResponse) => void
-  ): Promise<CreateDatasourceCloudResponse> {
-    return this.request("CreateDatasourceCloud", req, cb)
+  async ExportScreenPage(
+    req: ExportScreenPageRequest,
+    cb?: (error: string, rep: ExportScreenPageResponse) => void
+  ): Promise<ExportScreenPageResponse> {
+    return this.request("ExportScreenPage", req, cb)
   }
 
   /**
@@ -306,13 +349,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建项目
+   * 申请延长Token可用时间接口-强鉴权
    */
-  async CreateProject(
-    req: CreateProjectRequest,
-    cb?: (error: string, rep: CreateProjectResponse) => void
-  ): Promise<CreateProjectResponse> {
-    return this.request("CreateProject", req, cb)
+  async ApplyEmbedInterval(
+    req: ApplyEmbedIntervalRequest,
+    cb?: (error: string, rep: ApplyEmbedIntervalResponse) => void
+  ): Promise<ApplyEmbedIntervalResponse> {
+    return this.request("ApplyEmbedInterval", req, cb)
+  }
+
+  /**
+   * 行列权限项目内角色列表接口1
+   */
+  async DescribePermissionRoleInfo(
+    req: DescribePermissionRoleInfoRequest,
+    cb?: (error: string, rep: DescribePermissionRoleInfoResponse) => void
+  ): Promise<DescribePermissionRoleInfoResponse> {
+    return this.request("DescribePermissionRoleInfo", req, cb)
   }
 
   /**

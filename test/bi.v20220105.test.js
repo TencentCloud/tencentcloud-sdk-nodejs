@@ -18,6 +18,16 @@ const client = new tencentcloud.bi.v20220105.Client({
 })
 describe("bi.v20220105.test.js", function () {
 
+it("bi.v20220105.DescribePermissionRanksInfo", async function () {
+    try {
+       const data = await client.DescribePermissionRanksInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.ModifyDatasource", async function () {
     try {
        const data = await client.ModifyDatasource({})
@@ -48,6 +58,16 @@ it("bi.v20220105.CreateDatasource", async function () {
     }
 })
 
+it("bi.v20220105.CreatePermissionRanks", async function () {
+    try {
+       const data = await client.CreatePermissionRanks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribeProjectInfo", async function () {
     try {
        const data = await client.DescribeProjectInfo({})
@@ -58,9 +78,9 @@ it("bi.v20220105.DescribeProjectInfo", async function () {
     }
 })
 
-it("bi.v20220105.ApplyEmbedInterval", async function () {
+it("bi.v20220105.CreateProject", async function () {
     try {
-       const data = await client.ApplyEmbedInterval({})
+       const data = await client.CreateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +88,19 @@ it("bi.v20220105.ApplyEmbedInterval", async function () {
     }
 })
 
-it("bi.v20220105.ExportScreenPage", async function () {
+it("bi.v20220105.CreateDatasourceCloud", async function () {
     try {
-       const data = await client.ExportScreenPage({})
+       const data = await client.CreateDatasourceCloud({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DescribePermissionStatusInfo", async function () {
+    try {
+       const data = await client.DescribePermissionStatusInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +118,9 @@ it("bi.v20220105.ModifyUserRole", async function () {
     }
 })
 
-it("bi.v20220105.CreateDatasourceCloud", async function () {
+it("bi.v20220105.ExportScreenPage", async function () {
     try {
-       const data = await client.CreateDatasourceCloud({})
+       const data = await client.ExportScreenPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +248,19 @@ it("bi.v20220105.DeleteUserRoleProject", async function () {
     }
 })
 
-it("bi.v20220105.CreateProject", async function () {
+it("bi.v20220105.ApplyEmbedInterval", async function () {
     try {
-       const data = await client.CreateProject({})
+       const data = await client.ApplyEmbedInterval({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DescribePermissionRoleInfo", async function () {
+    try {
+       const data = await client.DescribePermissionRoleInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

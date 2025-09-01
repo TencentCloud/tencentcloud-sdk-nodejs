@@ -5826,7 +5826,8 @@ export interface PreviewLogStatistic {
    */
   LineNum: number
   /**
-   * 目标日志主题
+   * 目标日志主题ID
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
   DstTopicId?: string
   /**
@@ -7098,19 +7099,16 @@ export interface DataTransformTaskInfo {
   Status?: number
   /**
    * 加工任务创建时间
-示例值：2025-03-18 19:55:54
 时间格式：yyyy-MM-dd HH:mm:ss
    */
   CreateTime?: string
   /**
    * 最近修改时间
-示例值：2025-04-18 16:55:54
 时间格式：yyyy-MM-dd HH:mm:ss
    */
   UpdateTime?: string
   /**
    * 最后启用时间，如果需要重建集群，修改该时间
-示例值：2025-05-18 19:55:54
 时间格式：yyyy-MM-dd HH:mm:ss
    */
   LastEnableTime?: string
