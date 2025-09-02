@@ -502,6 +502,12 @@ CarInsurance -- 车辆保险单识别模板
 MultiRealEstateCertificate -- 房产材料识别模板
 MultiRealEstateMaterial -- 房产证明识别模板
 HongKongUtilityBill -- 中国香港水电煤单识别模板
+OverseasCheques -- 海外支票
+RegistrationCertificate -- 备案证
+​GridPhoto -- 电网系统照片
+​SignaturePage -- 签署页
+
+
    */
   ConfigId?: string
   /**
@@ -1575,6 +1581,11 @@ export interface Value {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Coord?: Polygon
+  /**
+   * 页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageIndex?: string
 }
 
 /**
