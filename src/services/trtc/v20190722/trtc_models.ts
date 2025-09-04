@@ -586,10 +586,11 @@ export interface SliceParams {
   MaxIdleTime?: number
   /**
    * 音频切片时长，默认15s 示例值：15
+取值范围15-60s
    */
   SliceAudio?: number
   /**
-   * 视频截帧间隔时长，默认5s， 示例值：5
+   * 视频截帧间隔时长，默认5s， 示例值：5 取值范围5-60s
    */
   SliceVideo?: number
   /**

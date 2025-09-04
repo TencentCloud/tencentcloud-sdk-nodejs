@@ -2457,8 +2457,9 @@ export interface DataTransformResouceInfo {
   TopicId: string
   /**
    * 别名
+限制：不能包含字符 |。
    */
-  Alias: string
+  Alias?: string
 }
 
 /**

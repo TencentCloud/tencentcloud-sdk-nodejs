@@ -7275,6 +7275,32 @@ export interface DescribeNetworkConnectionsRequest {
 }
 
 /**
+ * CreateTcIcebergTable请求参数结构体
+ */
+export interface CreateTcIcebergTableRequest {
+  /**
+   * 表基本信息
+   */
+  TableBaseInfo: TableBaseInfo
+  /**
+   * 表字段信息
+   */
+  Columns: Array<TColumn>
+  /**
+   * 为true时只获取sql而不执行
+   */
+  DryRun: boolean
+  /**
+   * 表分区信息
+   */
+  Partitions?: Array<TPartition>
+  /**
+   * 表属性信息
+   */
+  Properties?: Array<Property>
+}
+
+/**
  * AttachWorkGroupPolicy返回参数结构体
  */
 export interface AttachWorkGroupPolicyResponse {
@@ -8458,6 +8484,28 @@ export interface DescribeDataEngineImageVersionsResponse {
    * 总数
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTcIcebergTable返回参数结构体
+ */
+export interface CreateTcIcebergTableResponse {
+  /**
+   * amoro的SessionId
+   */
+  SessionId?: string
+  /**
+   * 执行的sql
+   */
+  SQL?: string
+  /**
+   * 为true时只返回sql而不实际执行
+   */
+  DryRun?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

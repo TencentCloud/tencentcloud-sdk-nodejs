@@ -317,6 +317,7 @@ import {
   ReportHeartbeatMetaDataRequest,
   DescribeEngineNetworksResponse,
   DescribeNetworkConnectionsRequest,
+  CreateTcIcebergTableRequest,
   AttachWorkGroupPolicyResponse,
   DescribeDMSTablesRequest,
   LaunchStandardEngineResourceGroupsResponse,
@@ -362,6 +363,7 @@ import {
   DeleteThirdPartyAccessUserResponse,
   AddUsersToWorkGroupResponse,
   DescribeDataEngineImageVersionsResponse,
+  CreateTcIcebergTableResponse,
   DeleteSparkAppResponse,
   DescribeUserDataEngineConfigRequest,
   CreateTasksResponse,
@@ -1584,6 +1586,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkGroupResponse) => void
   ): Promise<CreateWorkGroupResponse> {
     return this.request("CreateWorkGroup", req, cb)
+  }
+
+  /**
+   * 创建TIceberg表
+   */
+  async CreateTcIcebergTable(
+    req: CreateTcIcebergTableRequest,
+    cb?: (error: string, rep: CreateTcIcebergTableResponse) => void
+  ): Promise<CreateTcIcebergTableResponse> {
+    return this.request("CreateTcIcebergTable", req, cb)
   }
 
   /**
