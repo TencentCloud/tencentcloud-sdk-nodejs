@@ -1352,6 +1352,12 @@ export interface IntentionVerifyData {
    * @deprecated
    */
   AsrResultSimilarity?: string
+  /**
+   * 意愿确认环节中录制的音频（base64）。
+- 若不存在则为空字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntentionVerifyAudio?: string
 }
 
 /**
