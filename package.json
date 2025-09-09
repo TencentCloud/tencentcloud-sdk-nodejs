@@ -12,7 +12,8 @@
     "build:es": "tsc -p tsconfig.es.json",
     "build:slim": "node ./scripts/build_slim.js",
     "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}'",
-    "clean": "rimraf tencentcloud es"
+    "clean": "rimraf tencentcloud es",
+    "test:common": "vitest run"
   },
   "engines": {
     "node": ">=10"
@@ -32,7 +33,7 @@
   "author": "tencentcloudapi",
   "license": "Apache-2.0",
   "dependencies": {
-    "form-data": "^3.0.0",
+    "form-data": "^3.0.4",
     "get-stream": "^6.0.0",
     "https-proxy-agent": "^5.0.0",
     "is-stream": "^2.0.0",
@@ -50,9 +51,8 @@
     "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs"
   },
   "devDependencies": {
-    "@types/form-data": "^2.5.0",
     "@types/json-bigint": "^1.0.1",
-    "@types/node": "^14.0.26",
+    "@types/node": "^18.0.0",
     "@types/node-fetch": "^2.5.7",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
@@ -67,6 +67,7 @@
     "prettier": "^2.3.0",
     "rimraf": "^5.0.10",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "typescript": "^5.9.2",
+    "vitest": "2.1.9"
   }
 }
