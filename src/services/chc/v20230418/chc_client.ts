@@ -103,6 +103,7 @@ import {
   DescribeCommonServiceWorkOrderDetailResponse,
   ModifyWorkOrderTypeCollectFlagRequest,
   CreateNetDeviceModelResponse,
+  PersonnelVisitCar,
   DescribeCommonServiceWorkOrderDetailRequest,
   ServerReceivingInfo,
   CustomerInfo,

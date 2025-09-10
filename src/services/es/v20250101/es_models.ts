@@ -237,12 +237,20 @@ export interface ParseDocumentResponse {
  */
 export interface Document {
   /**
-   * 文件类型。
-支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2
-支持的文件大小：
-- PDF、DOC、DOCX、PPT、PPTX 支持100M
-- MD、TXT、XLS、XLSX、CSV 支持10M
-- 其他支持20M
+   * 支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、
+XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、
+IM、PCX、PPM、TIFF、XBM、HEIF、JP2
+
+文档解析支持的文件大小：
+-PDF、DOC、DOCX、PPT、PPTX支持100M
+-MD、TXT、XLS、XLSX、CSV支特10M
+-其他支持20M
+
+文本切片支持的文件大小：
+-PDF最大300M
+-D0CX、D0C、PPT、PPTX最大200M
+-TXT、MD最大10M
+-其他最大20M
    */
   FileType: string
   /**
@@ -431,6 +439,20 @@ export interface ChunkConfig {
 }
 
 /**
+ * 具体的function调用
+ */
+export interface ToolCallFunction {
+  /**
+   * function名称
+   */
+  Name?: string
+  /**
+   * function参数，一般为json字符串
+   */
+  Arguments?: string
+}
+
+/**
  * 会话内容，按对话时间从旧到新在数组中排列，长度受模型窗口大小限制。
  */
 export interface OutputMessage {
@@ -446,6 +468,10 @@ export interface OutputMessage {
    * 推理内容
    */
   ReasoningContent?: string
+  /**
+   * 模型生成的工具调用
+   */
+  ToolCalls?: Array<ToolCall>
 }
 
 /**
@@ -453,12 +479,20 @@ export interface OutputMessage {
  */
 export interface ParseDocument {
   /**
-   * 文件类型。
-支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2
-支持的文件大小：
-- PDF、DOC、DOCX、PPT、PPTX 支持100M
-- MD、TXT、XLS、XLSX、CSV 支持10M
-- 其他支持20M
+   * 支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、
+XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、
+IM、PCX、PPM、TIFF、XBM、HEIF、JP2
+
+文档解析支持的文件大小：
+-PDF、DOC、DOCX、PPT、PPTX支持100M
+-MD、TXT、XLS、XLSX、CSV支特10M
+-其他支持20M
+
+文本切片支持的文件大小：
+-PDF最大300M
+-D0CX、D0C、PPT、PPTX最大200M
+-TXT、MD最大10M
+-其他最大20M
    */
   FileType: string
   /**
@@ -469,6 +503,7 @@ export interface ParseDocument {
    * 文件的 base64 值，携带 MineType前缀信息。编码后的后的文件不超过 10M。
 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过3秒。
 支持的图片像素：单边介于20-10000px之间。
+文件的 FileUrl、FileContent必须提供一个，如果都提供只使用 FileUrl。
    */
   FileContent?: string
   /**
@@ -519,6 +554,28 @@ export interface ChunkDocumentAsyncResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模型生成的工具调用
+ */
+export interface ToolCall {
+  /**
+   * 工具调用id
+   */
+  Id?: string
+  /**
+   * 工具调用类型，当前只支持function
+   */
+  Type?: string
+  /**
+   * 具体的function调用
+   */
+  Function?: ToolCallFunction
+  /**
+   * 索引值
+   */
+  Index?: number
 }
 
 /**
@@ -638,13 +695,21 @@ export interface ChunkDocument {
  */
 export interface Message {
   /**
-   * 角色, ‘system', ‘user'，'assistant'或者'tool', 在message中, 除了system，其他必须是user与assistant交替(一问一答)
+   * 角色，可选值包括 system、user、assistant、 tool。
    */
   Role?: string
   /**
    * 具体文本内容
    */
   Content?: string
+  /**
+   * 当role为tool时传入，标识具体的函数调用
+   */
+  ToolCallId?: string
+  /**
+   * 模型生成的工具调用
+   */
+  ToolCalls?: Array<ToolCall>
 }
 
 /**

@@ -4214,28 +4214,23 @@ export interface OrgCodeCertOCRResponse {
 }
 
 /**
- * PermitOCR请求参数结构体
+ * 自定义抽取需要的字段名称、字段类型、字段提示词。
  */
-export interface PermitOCRRequest {
+export interface ItemNames {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 自定义抽取功能需返回的字段名称。
    */
-  ImageBase64?: string
+  KeyName?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 默认 0；0表示kv对  1表示 表格字段。
+
    */
-  ImageUrl?: string
+  KeyType?: number
   /**
-   * 是否返回头像照片，默认为 false
+   * 抽取字段的描述内容。
+
    */
-  CropPortrait?: boolean
+  KeyPrompt?: string
 }
 
 /**
@@ -4743,6 +4738,20 @@ export interface RecognizeContainerOCRRequest {
 }
 
 /**
+ * SubmitExtractDocAgentJob返回参数结构体
+ */
+export interface SubmitExtractDocAgentJobResponse {
+  /**
+   * 任务唯一ID。由服务端生成。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 火车票
  */
 export interface TrainTicket {
@@ -4929,6 +4938,44 @@ export interface RecognizeThaiIDCardOCRRequest {
   /**
    * 图片开关。默认为false，不返回泰国身份证头像照片的base64编码。
 设置为true时，返回旋转矫正后的泰国身份证头像照片的base64编码
+   */
+  CropPortrait?: boolean
+}
+
+/**
+ * 身份证配置信息
+ */
+export interface IDCardConfig {
+  /**
+   * 复印件告警，默认为false
+   */
+  CopyWarn?: boolean
+  /**
+   * 边框和框内遮挡告警，默认为false
+   */
+  BorderCheckWarn?: boolean
+  /**
+   * 翻拍告警，默认为false
+   */
+  ReshootWarn?: boolean
+  /**
+   * 疑似存在PS痕迹告警，默认为false
+   */
+  DetectPsWarn?: boolean
+  /**
+   * 临时身份证告警，默认为false
+   */
+  TempIdWarn?: boolean
+  /**
+   * 身份证有效日期不合法告警，默认为false
+   */
+  InvalidDateWarn?: boolean
+  /**
+   * 是否开启反光检测，默认为false
+   */
+  ReflectWarn?: boolean
+  /**
+   * 是否开启头像剪切
    */
   CropPortrait?: boolean
 }
@@ -7528,25 +7575,13 @@ export interface ClassifyStoreNameResponse {
 }
 
 /**
- * VatRollInvoiceOCR请求参数结构体
+ * DescribeExtractDocAgentJob请求参数结构体
  */
-export interface VatRollInvoiceOCRRequest {
+export interface DescribeExtractDocAgentJobRequest {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 任务唯一ID。由服务端生成。
    */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
-   */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
+  JobId?: string
 }
 
 /**
@@ -8414,41 +8449,37 @@ export interface TableDetectInfo {
 }
 
 /**
- * 身份证配置信息
+ * DescribeExtractDocAgentJob返回参数结构体
  */
-export interface IDCardConfig {
+export interface DescribeExtractDocAgentJobResponse {
   /**
-   * 复印件告警，默认为false
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。
    */
-  CopyWarn?: boolean
+  Angle?: number
   /**
-   * 边框和框内遮挡告警，默认为false
+   * 配置结构化文本信息。
    */
-  BorderCheckWarn?: boolean
+  StructuralList?: Array<GroupInfo>
   /**
-   * 翻拍告警，默认为false
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
    */
-  ReshootWarn?: boolean
+  ErrorCode?: string
   /**
-   * 疑似存在PS痕迹告警，默认为false
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
    */
-  DetectPsWarn?: boolean
+  ErrorMessage?: string
   /**
-   * 临时身份证告警，默认为false
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
    */
-  TempIdWarn?: boolean
+  JobStatus?: string
   /**
-   * 身份证有效日期不合法告警，默认为false
+   * 思考过程
    */
-  InvalidDateWarn?: boolean
+  ThoughtContent?: string
   /**
-   * 是否开启反光检测，默认为false
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ReflectWarn?: boolean
-  /**
-   * 是否开启头像剪切
-   */
-  CropPortrait?: boolean
+  RequestId?: string
 }
 
 /**
@@ -9844,25 +9875,28 @@ Y: 有清单 N：无清单
 }
 
 /**
- * 增值税普通发票（卷票）条目
+ * PermitOCR请求参数结构体
  */
-export interface VatRollItem {
+export interface PermitOCRRequest {
   /**
-   * 项目名称
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Name?: string
+  ImageBase64?: string
   /**
-   * 数量
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Quantity?: string
+  ImageUrl?: string
   /**
-   * 单价
+   * 是否返回头像照片，默认为 false
    */
-  Price?: string
-  /**
-   * 金额
-   */
-  Total?: string
+  CropPortrait?: boolean
 }
 
 /**
@@ -10700,6 +10734,40 @@ export interface Element {
 }
 
 /**
+ * SubmitExtractDocAgentJob请求参数结构体
+ */
+export interface SubmitExtractDocAgentJobRequest {
+  /**
+   * 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF、WORD、EXCEL格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF、WORD、EXCEL格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前5页。
+   */
+  PdfPageNumber?: number
+  /**
+   * 自定义抽取需要的字段名称、字段类型、字段提示词。
+   */
+  ItemNames?: Array<ItemNames>
+  /**
+   * 是否需要返回坐标，默认false。
+   */
+  EnableCoord?: boolean
+  /**
+   * 起始页
+   */
+  FileStartPageNumber?: number
+  /**
+   * 结束页
+   */
+  FileEndPageNumber?: number
+}
+
+/**
  * AdvertiseOCR返回参数结构体
  */
 export interface AdvertiseOCRResponse {
@@ -10756,6 +10824,28 @@ export interface ShoppingReceipt {
    * 识别出的字段名称(关键字)
    */
   Content?: Array<OtherInvoiceItem>
+}
+
+/**
+ * VatRollInvoiceOCR请求参数结构体
+ */
+export interface VatRollInvoiceOCRRequest {
+  /**
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**
@@ -10866,29 +10956,25 @@ export interface MixedInvoiceDetectRequest {
 }
 
 /**
- * WaybillOCR请求参数结构体
+ * 增值税普通发票（卷票）条目
  */
-export interface WaybillOCRRequest {
+export interface VatRollItem {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 项目名称
    */
-  ImageBase64?: string
+  Name?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 数量
    */
-  ImageUrl?: string
+  Quantity?: string
   /**
-   * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
+   * 单价
    */
-  EnablePreDetect?: boolean
+  Price?: string
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   * 金额
    */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
+  Total?: string
 }
 
 /**
@@ -10929,6 +11015,32 @@ export interface BusinessCertificateInfo {
    * 坐标
    */
   Rect?: Rect
+}
+
+/**
+ * WaybillOCR请求参数结构体
+ */
+export interface WaybillOCRRequest {
+  /**
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
+   */
+  EnablePreDetect?: boolean
+  /**
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**

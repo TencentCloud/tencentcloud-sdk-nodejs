@@ -767,6 +767,10 @@ export interface LoadAutoScaleStrategy {
    */
   GraceDownTime?: number
   /**
+   * 是否开启任务保护
+   */
+  GraceDownProtectFlag?: boolean
+  /**
    * 绑定标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3447,6 +3451,10 @@ export interface TimeAutoScaleStrategy {
    */
   GraceDownTime?: number
   /**
+   * 是否开启任务保护
+   */
+  GraceDownProtectFlag?: boolean
+  /**
    * 绑定标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4434,6 +4442,14 @@ Hadoop-Hbase
    * CLB id
    */
   LoadBalancerId?: string
+  /**
+   * 数据库类型：mysql8/tdsql8
+   */
+  DefaultMetaVersion?: string
+  /**
+   * 是否开通审计：0:不开通,1:开通
+   */
+  NeedCdbAudit?: number
 }
 
 /**
@@ -5083,6 +5099,14 @@ export interface InquiryPriceCreateInstanceRequest {
    * 可用区的规格信息
    */
   MultiZoneSettings?: Array<MultiZoneSetting>
+  /**
+   * 数据库版本
+   */
+  DefaultMetaVersion?: string
+  /**
+   * 0:不开通审计；1:开通审计
+   */
+  NeedCdbAudit?: number
 }
 
 /**
@@ -5166,6 +5190,20 @@ export interface DescribeSLInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签信息
+ */
+export interface TagInfo {
+  /**
+   * 标签键
+   */
+  Key?: string
+  /**
+   * 标签值
+   */
+  Value?: string
 }
 
 /**
@@ -6023,6 +6061,11 @@ export interface DescribeNodeDataDisksRequest {
    * 数据偏移值
    */
   Offset?: number
+  /**
+   * 场景值：
+ModifyDiskExtraPerformance ：调整数据盘额外性能
+   */
+  Scene?: string
 }
 
 /**
@@ -6985,6 +7028,10 @@ export interface DescribeNodeDataDisksResponse {
    * 云盘最大容量
    */
   MaxSize?: number
+  /**
+   * 云硬盘最大额外性能值
+   */
+  MaxThroughputPerformance?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9703,6 +9750,14 @@ export interface CreateClusterRequest {
    * clb id
    */
   LoadBalancerId?: string
+  /**
+   * 数据库版本：mysql8/tdsql8/mysql5
+   */
+  DefaultMetaVersion?: string
+  /**
+   * 是否开通数据库审计
+   */
+  NeedCdbAudit?: number
 }
 
 /**
@@ -9746,8 +9801,8 @@ export interface CreateCloudInstanceRequest {
    */
   ProductId?: number
   /**
-   * 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6----fae36063280
-示例值：a9a90aa6----fae36063280
+   * 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6fae36063280
+示例值：a9a90aa6fae36063280
    */
   ClientToken?: string
   /**
@@ -9774,7 +9829,7 @@ MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser M
    */
   Tags?: Array<Tag>
   /**
-   * 登陆密码，LoginSettings中的Password字段
+   * 登录密码，LoginSettings中的Password字段
    */
   LoginSettings?: LoginSettings
   /**
@@ -9785,6 +9840,14 @@ MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser M
    * 可用区id
    */
   ZoneId?: number
+  /**
+   * 数据库版本
+   */
+  DefaultMetaVersion?: string
+  /**
+   * 是否开通审计
+   */
+  NeedCdbAudit?: number
 }
 
 /**
@@ -10296,6 +10359,14 @@ export interface CBSInstance {
    * 包销到期时间
    */
   UnderwriteExpiredTime?: string
+  /**
+   * 标签
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * 云硬盘额外性能值，单位：MB/s
+   */
+  ThroughputPerformance?: number
 }
 
 /**

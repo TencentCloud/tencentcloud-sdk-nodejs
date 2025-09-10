@@ -5726,6 +5726,7 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
   FlowEffectiveDay?: number
   /**
    * 二维码的有效期限，默认为7天，最高设定不得超过90天。 一旦超过二维码的有效期限，该二维码将自动失效。
+   * @deprecated
    */
   QrEffectiveDay?: number
   /**
@@ -5761,6 +5762,14 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    * 合同流程名称是否应包含扫码签署人的信息，且遵循特定格式（flowname-姓名-手机号后四位）。 例如，通过参数FlowName设定的扫码发起合同名称为“员工入职合同”，当扫码人张三（手机号18800009527）扫码签署时，合同名称将自动生成为“员工入职合同-张三-9527”。
    */
   FlowNameAppendScannerInfo?: boolean
+  /**
+   * 签署二维码的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成,会在生成的二维码图片上展示，若为空，则使用FlowName
+   */
+  QrCodeName?: string
+  /**
+   * 签署二维码截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为签署二维码创建后的7天时截止，最长可设置为签署二维码创建后的365天时截止。
+   */
+  QrCodeExpiredOn?: number
 }
 
 /**

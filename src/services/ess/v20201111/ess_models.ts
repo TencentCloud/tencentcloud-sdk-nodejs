@@ -2614,6 +2614,14 @@ export interface MiniAppCreateFlowOption {
    * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
    */
   FlowDisplayType?: number
+  /**
+   * 小程序集成发起，是否禁止发起时修改合同内容
+<ul>
+<li>false：默认值，不禁止发起时修改合同内容</li>
+<li>true：禁止发起时修改合同内容</li>
+</ul>
+   */
+  ForbidEditFlow?: boolean
 }
 
 /**
@@ -8777,6 +8785,7 @@ export interface CreateMultiFlowSignQRCodeRequest {
   /**
    * 二维码的有效期限，默认为7天，最高设定不得超过90天。
 一旦超过二维码的有效期限，该二维码将自动失效。
+   * @deprecated
    */
   QrEffectiveDay?: number
   /**
@@ -8827,6 +8836,14 @@ export interface CreateMultiFlowSignQRCodeRequest {
 例如，通过参数FlowName设定的扫码发起合同名称为“员工入职合同”，当扫码人张三（手机号18800009527）扫码签署时，合同名称将自动生成为“员工入职合同-张三-9527”。
    */
   FlowNameAppendScannerInfo?: boolean
+  /**
+   * 签署二维码的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成,会在生成的二维码图片上展示，若为空，则使用FlowName
+   */
+  QrCodeName?: string
+  /**
+   * 签署二维码截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为签署二维码创建后的7天时截止，最长可设置为签署二维码创建后的365天时截止。
+   */
+  QrCodeExpiredOn?: number
 }
 
 /**

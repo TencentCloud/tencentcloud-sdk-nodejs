@@ -342,6 +342,22 @@ export interface DisplayAsset {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+  /**
+   * 端口数据
+   */
+  Ports?: string
+  /**
+   * 服务数据
+   */
+  Services?: string
+  /**
+   * 域名数据
+   */
+  Domains?: string
+  /**
+   * 端口和服务最近更新时间
+   */
+  LastModify?: string
 }
 
 /**

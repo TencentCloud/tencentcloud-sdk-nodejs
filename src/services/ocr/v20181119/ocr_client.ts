@@ -148,7 +148,7 @@ import {
   RecognizeThaiIDCardOCRResponse,
   GroupInfo,
   OrgCodeCertOCRResponse,
-  PermitOCRRequest,
+  ItemNames,
   SingleInvoiceItem,
   InvoiceGeneralOCRResponse,
   OnlineTaxiItineraryInfo,
@@ -158,11 +158,13 @@ import {
   FinancialBillItem,
   SingleInvoiceInfo,
   RecognizeContainerOCRRequest,
+  SubmitExtractDocAgentJobResponse,
   TrainTicket,
   TextDetectRequest,
   VatRollInvoiceOCRResponse,
   EduPaperOCRResponse,
   RecognizeThaiIDCardOCRRequest,
+  IDCardConfig,
   BusinessCardInfo,
   MotorVehicleSaleInvoice,
   ElectronicTrainTicket,
@@ -224,7 +226,7 @@ import {
   FinanBillSliceOCRRequest,
   RecognizeGeneralCardWarnResponse,
   ClassifyStoreNameResponse,
-  VatRollInvoiceOCRRequest,
+  DescribeExtractDocAgentJobRequest,
   AirTransport,
   TableTitle,
   RecognizeTableAccurateOCRRequest,
@@ -255,7 +257,7 @@ import {
   MixedInvoiceOCRRequest,
   ShippingInvoice,
   TableDetectInfo,
-  IDCardConfig,
+  DescribeExtractDocAgentJobResponse,
   ResidenceBookletOCRResponse,
   VatInvoiceRoll,
   CarInvoiceOCRResponse,
@@ -288,7 +290,7 @@ import {
   GetOCRResultResponse,
   MainlandPermitOCRResponse,
   VatInvoice,
-  VatRollItem,
+  PermitOCRRequest,
   MLIDCardOCRRequest,
   QuestionInfo,
   TaxiTicket,
@@ -313,15 +315,18 @@ import {
   DetectedWordCoordPoint,
   QuestionBlockObj,
   Element,
+  SubmitExtractDocAgentJobRequest,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
   ShoppingReceipt,
+  VatRollInvoiceOCRRequest,
   RecognizeOnlineTaxiItineraryOCRRequest,
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
-  WaybillOCRRequest,
+  VatRollItem,
   RecognizeStoreNameResponse,
   BusinessCertificateInfo,
+  WaybillOCRRequest,
   RideHailingTransportLicenseOCRRequest,
   VatInvoiceVerifyNewResponse,
   MLIDCardOCRResponse,
@@ -670,6 +675,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TaxiInvoiceOCRResponse) => void
   ): Promise<TaxiInvoiceOCRResponse> {
     return this.request("TaxiInvoiceOCR", req, cb)
+  }
+
+  /**
+   * 用于查询文档处理任务。文档处理领域里常见的通用Agent 如抽取、比对之类的，目前我们提供的抽取，但未来可以根据实际情况和客户需求扩展。
+   */
+  async DescribeExtractDocAgentJob(
+    req: DescribeExtractDocAgentJobRequest,
+    cb?: (error: string, rep: DescribeExtractDocAgentJobResponse) => void
+  ): Promise<DescribeExtractDocAgentJobResponse> {
+    return this.request("DescribeExtractDocAgentJob", req, cb)
   }
 
   /**
@@ -1484,15 +1499,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async ResidenceBookletOCR(
-    req: ResidenceBookletOCRRequest,
-    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
-  ): Promise<ResidenceBookletOCRResponse> {
-    return this.request("ResidenceBookletOCR", req, cb)
+  async VehicleRegCertOCR(
+    req: VehicleRegCertOCRRequest,
+    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
+  ): Promise<VehicleRegCertOCRResponse> {
+    return this.request("VehicleRegCertOCR", req, cb)
   }
 
   /**
@@ -1505,6 +1520,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeTravelCardOCRResponse) => void
   ): Promise<RecognizeTravelCardOCRResponse> {
     return this.request("RecognizeTravelCardOCR", req, cb)
+  }
+
+  /**
+   * 文档处理领域里常见的通用Agent 如抽取、比对之类的，目前我们提供的抽取，但未来可以根据实际情况和客户需求扩展。
+   */
+  async SubmitExtractDocAgentJob(
+    req: SubmitExtractDocAgentJobRequest,
+    cb?: (error: string, rep: SubmitExtractDocAgentJobResponse) => void
+  ): Promise<SubmitExtractDocAgentJobResponse> {
+    return this.request("SubmitExtractDocAgentJob", req, cb)
   }
 
   /**
@@ -1809,15 +1834,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async VehicleRegCertOCR(
-    req: VehicleRegCertOCRRequest,
-    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
-  ): Promise<VehicleRegCertOCRResponse> {
-    return this.request("VehicleRegCertOCR", req, cb)
+  async ResidenceBookletOCR(
+    req: ResidenceBookletOCRRequest,
+    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
+  ): Promise<ResidenceBookletOCRResponse> {
+    return this.request("ResidenceBookletOCR", req, cb)
   }
 
   /**

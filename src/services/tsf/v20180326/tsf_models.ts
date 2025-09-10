@@ -14325,11 +14325,11 @@ export interface CreateClusterRequest {
    */
   KuberneteNativeType?: string
   /**
-   * native secret
+   * Kubernetes 原生 Secret 资源对象
    */
   KuberneteNativeSecret?: string
   /**
-   * 无
+   * 需要绑定的数据集ID。该参数可以通过调用 [DescribePrograms](https://cloud.tencent.com/document/product/649/73477) 的返回值中的 ProgramId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/privilege?tab=program&roleId=role-yrle4doy)查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。
    */
   ProgramIdList?: Array<string>
   /**

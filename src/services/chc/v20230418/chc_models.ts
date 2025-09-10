@@ -47,6 +47,10 @@ export interface CreatePersonnelVisitWorkOrderRequest {
    * 到访说明
    */
   VisitRemark: string
+  /**
+   * 到访人员车辆信息
+   */
+  CarSet?: Array<PersonnelVisitCar>
 }
 
 /**
@@ -1468,6 +1472,10 @@ export interface WorkOrderData {
    * 工单完成时间
    */
   FinishTime?: string
+  /**
+   * 工单关联的dcops单号
+   */
+  TicketId?: string
 }
 
 /**
@@ -2005,6 +2013,24 @@ export interface CreateNetDeviceModelResponse {
 }
 
 /**
+ * 人员到访时的车辆信息
+ */
+export interface PersonnelVisitCar {
+  /**
+   * 车牌号
+   */
+  CarNumber: string
+  /**
+   * 驾驶人姓名
+   */
+  DriverName: string
+  /**
+   * 驾驶人身份证号
+   */
+  DriverNumber: string
+}
+
+/**
  * DescribeCommonServiceWorkOrderDetail请求参数结构体
  */
 export interface DescribeCommonServiceWorkOrderDetailRequest {
@@ -2252,6 +2278,10 @@ export interface DescribePersonnelVisitWorkOrderDetailResponse {
    * 拒绝原因
    */
   RejectReason?: string
+  /**
+   * 到访人员车辆信息
+   */
+  CarSet?: Array<PersonnelVisitCar>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

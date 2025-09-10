@@ -38,6 +38,26 @@ it("gme.v20180711.StopRecord", async function () {
     }
 })
 
+it("gme.v20180711.UpdateAIConversation", async function () {
+    try {
+       const data = await client.UpdateAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.StopAIConversation", async function () {
+    try {
+       const data = await client.StopAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.DeleteScanUser", async function () {
     try {
        const data = await client.DeleteScanUser({})
@@ -78,9 +98,29 @@ it("gme.v20180711.DescribeUserInAndOutTime", async function () {
     }
 })
 
+it("gme.v20180711.DeleteVoicePrint", async function () {
+    try {
+       const data = await client.DeleteVoicePrint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.UpdateScanRooms", async function () {
     try {
        const data = await client.UpdateScanRooms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.StartAIConversation", async function () {
+    try {
+       const data = await client.StartAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +148,29 @@ it("gme.v20180711.DescribeTaskInfo", async function () {
     }
 })
 
+it("gme.v20180711.RegisterVoicePrint", async function () {
+    try {
+       const data = await client.RegisterVoicePrint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.CreateAgeDetectTask", async function () {
     try {
        const data = await client.CreateAgeDetectTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.UpdateVoicePrint", async function () {
+    try {
+       const data = await client.UpdateVoicePrint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +191,16 @@ it("gme.v20180711.DeleteRoomMember", async function () {
 it("gme.v20180711.DescribeApplicationData", async function () {
     try {
        const data = await client.DescribeApplicationData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeAIConversation", async function () {
+    try {
+       const data = await client.DescribeAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +261,16 @@ it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
 it("gme.v20180711.ModifyRecordInfo", async function () {
     try {
        const data = await client.ModifyRecordInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeVoicePrint", async function () {
+    try {
+       const data = await client.DescribeVoicePrint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +341,16 @@ it("gme.v20180711.ModifyUserMicStatus", async function () {
 it("gme.v20180711.DeleteCustomization", async function () {
     try {
        const data = await client.DeleteCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.ControlAIConversation", async function () {
+    try {
+       const data = await client.ControlAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1835,6 +1835,14 @@ REJECTED:拒绝
    * 是否共享通道
    */
   ShareOrNot?: number
+  /**
+   * 接入点名称
+   */
+  AccessPointName?: string
+  /**
+   * 接入点ID
+   */
+  AccessPointId?: string
 }
 
 /**

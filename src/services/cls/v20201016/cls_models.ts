@@ -103,7 +103,7 @@ export interface AlarmInfo {
    */
   AlarmPeriod?: number
   /**
-   * 关联的告警通知模板列表。
+   * 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥
    */
   AlarmNoticeIds?: Array<string>
   /**
@@ -164,6 +164,10 @@ export interface AlarmInfo {
 Condition互斥。
    */
   MultiConditions?: Array<MultiCondition>
+  /**
+   * 云监控通知渠道相关信息，和AlarmNoticeIds互斥
+   */
+  MonitorNotice?: MonitorNotice
 }
 
 /**
@@ -2751,7 +2755,7 @@ export interface ModifyAlarmRequest {
    */
   AlarmPeriod?: number
   /**
-   * 关联的告警通知渠道列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取告警通知渠道列表
+   * 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥
    */
   AlarmNoticeIds?: Array<string>
   /**
@@ -2973,9 +2977,9 @@ export interface CreateAlarmRequest {
    */
   AlarmPeriod: number
   /**
-   * 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表
+   * 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥
    */
-  AlarmNoticeIds: Array<string>
+  AlarmNoticeIds?: Array<string>
   /**
    * 告警发送通知的触发条件
  注意:  
@@ -5465,6 +5469,16 @@ export interface DeleteAlarmResponse {
 }
 
 /**
+ * 提供多个Notice信息
+ */
+export interface MonitorNotice {
+  /**
+   * 以数组的形式提供MonitorNoticeRule
+   */
+  Notices?: Array<MonitorNoticeRule>
+}
+
+/**
  * 回调地址
  */
 export interface WebCallback {
@@ -5751,6 +5765,10 @@ export interface AlertHistoryRecord {
 0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 
    */
   MonitorObjectType?: number
+  /**
+   * 通知渠道类型，0默认代表cls内部通知渠道，1代表云监控通知渠道
+   */
+  SendType?: number
 }
 
 /**
@@ -6853,6 +6871,25 @@ export interface RuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DynamicIndex?: DynamicIndex
+}
+
+/**
+ * 云监控通知渠道组信息
+ */
+export interface MonitorNoticeRule {
+  /**
+   * 云监控通知模版ID
+   */
+  NoticeId?: string
+  /**
+   * 云监控内容模版ID，不传默认内容模版
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentTmplId?: string
+  /**
+   * 告警级别,0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)
+   */
+  AlarmLevels?: Array<number | bigint>
 }
 
 /**

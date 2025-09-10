@@ -788,7 +788,7 @@ export interface DescribePermissionStatusInfoResponse {
  */
 export interface ApplyEmbedIntervalRequest {
   /**
-   * 分享项目id，必选
+   * 分享项目id
    */
   ProjectId?: number
   /**
@@ -836,7 +836,7 @@ export interface DescribePermissionRoleInfoResponse {
    */
   Msg?: string
   /**
-   * 112
+   * 112 
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
@@ -2757,7 +2757,7 @@ export interface DescribePermissionRanksInfoResponse {
    */
   Extra?: string
   /**
-   * 1
+   * 无
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: RankInfo

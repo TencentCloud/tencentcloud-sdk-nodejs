@@ -64,17 +64,25 @@ export interface ModifyAppStatusRequest {
 }
 
 /**
- * CreateCustomization返回参数结构体
+ * ModifyRecordInfo请求参数结构体
  */
-export interface CreateCustomizationResponse {
+export interface ModifyRecordInfoRequest {
   /**
-   * 模型ID
+   * 进行中的任务taskid（StartRecord接口返回）。
    */
-  ModelId?: string
+  TaskId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 录制类型：1代表单流 2代表混流 3代表单流和混流。
    */
-  RequestId?: string
+  RecordMode: number
+  /**
+   * 应用ID。
+   */
+  BizId: number
+  /**
+   * 指定订阅流白名单或者黑名单。
+   */
+  SubscribeRecordUserIds?: SubscribeRecordUserIds
 }
 
 /**
@@ -93,6 +101,84 @@ export interface ModifyCustomizationStateRequest {
    * 应用 ID，登录控制台创建应用得到的AppID
    */
   BizId: number
+}
+
+/**
+ * 机器人参数
+ */
+export interface AgentConfig {
+  /**
+   * 机器人的UserId，用于进房发起任务。【注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个任务时，机器人的UserId也不能相互重复，否则会中断前一个任务。需要保证机器人UserId在房间内唯一。
+   */
+  UserId: string
+  /**
+   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码。
+   */
+  UserSig: string
+  /**
+   * 机器人拉流的UserId, 填写后，机器人会拉取该UserId的流进行实时处理
+   */
+  TargetUserId: string
+  /**
+   * 房间内超过MaxIdleTime 没有推流，后台自动关闭任务，默认值是60s。
+   */
+  MaxIdleTime?: number
+  /**
+   * 机器人的欢迎语
+   */
+  WelcomeMessage?: string
+  /**
+   * 智能打断模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
+   */
+  InterruptMode?: number
+  /**
+   * InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。
+   */
+  InterruptSpeechDuration?: number
+  /**
+   * 控制新一轮对话的触发方式，默认为0。
+- 0表示当服务端语音识别检测出的完整一句话后，自动触发一轮新的对话。
+- 1表示客户端在收到字幕消息后，自行决定是否手动发送聊天信令触发一轮新的对话。
+   */
+  TurnDetectionMode?: number
+  /**
+   * 是否过滤掉用户只说了一个字的句子，true表示过滤，false表示不过滤，默认值为true
+   */
+  FilterOneWord?: boolean
+  /**
+   * 欢迎消息优先级，0默认，1高优，高优不能被打断。
+   */
+  WelcomeMessagePriority?: number
+  /**
+   * 用于过滤LLM返回内容，不播放括号中的内容。
+1：中文括号（）
+2：英文括号()
+3：中文方括号【】
+4：英文方括号[]
+5：英文花括号{}
+默认值为空，表示不进行过滤。
+   */
+  FilterBracketsContent?: number
+  /**
+   * 环境音设置
+   */
+  AmbientSound?: AmbientSound
+  /**
+   * 声纹配置
+   */
+  VoicePrint?: VoicePrint
+  /**
+   * 与WelcomeMessage参数互斥，当该参数有值时，WelcomeMessage将失效。\n在对话开始后把该消息送到大模型来获取欢迎语。
+   */
+  InitLLMMessage?: string
+  /**
+   * 语义断句检测
+   */
+  TurnDetection?: TurnDetection
+  /**
+   * 机器人字幕显示模式。 - 0表示尽快显示，不会和音频播放进行同步。此时字幕全量下发，后面的字幕会包含前面的字幕。 - 1表示句子级别的实时显示，会和音频播放进行同步，只有当前句子对应的音频播放完后，下一条字幕才会下发。此时字幕增量下发，端上需要把前后的字幕进行拼接才是完整字幕。
+   */
+  SubtitleMode?: number
 }
 
 /**
@@ -136,6 +222,47 @@ export interface VoiceMessageStatisticsItem {
 }
 
 /**
+ * 服务端控制AI对话机器人播报指定文本
+ */
+export interface ServerPushText {
+  /**
+   * 服务端推送播报文本
+   */
+  Text?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
+  /**
+   * 播报完文本后，是否自动关闭对话任务
+   */
+  StopAfterPlay?: boolean
+  /**
+   * 服务端推送播报音频
+    格式说明：音频必须为单声道，采样率必须跟对应TTS的采样率保持一致，编码为Base64字符串。
+    输入规则：当提供Audio字段时，将不接受Text字段的输入。系统将直接播放Audio字段中的音频内容。
+   */
+  Audio?: string
+  /**
+   * 默认为0，仅在Interrupt为false时有效
+- 0表示当前有交互发生时，会丢弃Interrupt为false的消息
+- 1表示当前有交互发生时，不会丢弃Interrupt为false的消息，而是缓存下来，等待当前交互结束后，再去处理
+
+注意：DropMode为1时，允许缓存多个消息，如果后续出现了打断，缓存的消息会被清空
+   */
+  DropMode?: number
+  /**
+   * ServerPushText消息的优先级，0表示可被打断，1表示不会被打断。**目前仅支持传入0，如果需要传入1，请提工单联系我们添加权限。**
+注意：在接收到Priority=1的消息后，后续其他任何消息都会被忽略（包括Priority=1的消息），直到Priority=1的消息处理结束。该字段可与Interrupt、DropMode字段配合使用。
+例子：
+- Priority=1、Interrupt=true，会打断现有交互，立刻播报，播报过程中不会被打断
+- Priority=1、Interrupt=false、DropMode=1，会等待当前交互结束，再进行播报，播报过程中不会被打断
+
+   */
+  Priority?: number
+}
+
+/**
  * 房间内用户信息
  */
 export interface RoomUser {
@@ -155,6 +282,86 @@ export interface RoomUser {
    * 房间里用户字符串uin列表
    */
   StrUins?: Array<string>
+}
+
+/**
+ * StartAIConversation返回参数结构体
+ */
+export interface StartAIConversationResponse {
+  /**
+   * 用于唯一标识对话任务。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateScanUser请求参数结构体
+ */
+export interface CreateScanUserRequest {
+  /**
+   * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
+   */
+  BizId: number
+  /**
+   * 需要新增送检的用户号。示例：1234
+(若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准)
+   */
+  UserId?: number
+  /**
+   * 需要新增送检的用户号。示例："1234"
+(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+   */
+  UserIdString?: string
+  /**
+   * 当前用户送检过期时间，单位：秒。
+若参数不为0，则在过期时间之后，用户不会被送检。
+若参数为0，则送检配置不会自动失效。 
+   */
+  ExpirationTime?: number
+}
+
+/**
+ * StartAIConversation请求参数结构体
+ */
+export interface StartAIConversationRequest {
+  /**
+   * GME的SdkAppId和开启转录任务的房间使用的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * GME的RoomId表示开启对话任务的房间号。
+   */
+  RoomId: string
+  /**
+   * 机器人参数
+   */
+  AgentConfig: AgentConfig
+  /**
+   * 语音识别配置。
+   */
+  STTConfig?: STTConfig
+  /**
+   * LLM配置。需符合openai规范，为JSON字符串，示例如下：
+<pre> { <br> &emsp;  "LLMType": "大模型类型",  // String 必填，如："openai" <br> &emsp;  "Model": "您的模型名称", // String 必填，指定使用的模型<br>    "APIKey": "您的LLM API密钥", // String 必填 <br> &emsp;  "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL<br> &emsp;  "Streaming": true // Boolean 非必填，指定是否使用流式传输<br> &emsp;} </pre>
+
+   */
+  LLMConfig?: string
+  /**
+   *                                         "description": "TTS配置，为JSON字符串，腾讯云TTS示例如下： <pre>{ <br> &emsp; \"AppId\": 您的应用ID, // Integer 必填<br> &emsp; \"TTSType\": \"TTS类型\", // String TTS类型, 固定为\"tencent\"<br> &emsp; \"SecretId\": \"您的密钥ID\", // String 必填<br> &emsp; \"SecretKey\":  \"您的密钥Key\", // String 必填<br> &emsp; \"VoiceType\": 101001, // Integer  必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色。<br> &emsp; \"Speed\": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍  6: 代表2.5倍  如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换\"Volume\": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。<br> &emsp; \"EmotionCategory\":  \"angry\", // String 非必填 控制合成音频的情感，仅支持多情感音色使用。取值: neutral(中性)、sad(悲伤)、happy(高兴)、angry(生气)、fear(恐惧)、news(新闻)、story(故事)、radio(广播)、poetry(诗歌)、call(客服)、sajiao(撒娇)、disgusted(厌恶)、amaze(震惊)、peaceful(平静)、exciting(兴奋)、aojiao(傲娇)、jieshuo(解说)。<br> &emsp; \"EmotionIntensity\":  150 // Integer 非必填 控制合成音频情感程度，取值范围为 [50,200]，默认为 100；只有 EmotionCategory 不为空时生效。<br> &emsp; }</pre>",
+   */
+  TTSConfig?: string
+  /**
+   * 数字人配置，为JSON字符串。**数字人配置需要提工单加白后才能使用**
+   */
+  AvatarConfig?: string
+  /**
+   * 实验性参数,联系后台使用
+   */
+  ExperimentalParams?: string
 }
 
 /**
@@ -193,28 +400,6 @@ export interface StartRecordRequest {
   RecordMode: number
   /**
    * 指定订阅流白名单或者黑名单（不传默认订阅房间内所有音频流）。
-   */
-  SubscribeRecordUserIds?: SubscribeRecordUserIds
-}
-
-/**
- * ModifyRecordInfo请求参数结构体
- */
-export interface ModifyRecordInfoRequest {
-  /**
-   * 进行中的任务taskid（StartRecord接口返回）。
-   */
-  TaskId: number
-  /**
-   * 录制类型：1代表单流 2代表混流 3代表单流和混流。
-   */
-  RecordMode: number
-  /**
-   * 应用ID。
-   */
-  BizId: number
-  /**
-   * 指定订阅流白名单或者黑名单。
    */
   SubscribeRecordUserIds?: SubscribeRecordUserIds
 }
@@ -326,6 +511,16 @@ export interface UpdateScanUsersResponse {
 }
 
 /**
+ * ControlAIConversation返回参数结构体
+ */
+export interface ControlAIConversationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 语音过滤用量统计数据
  */
 export interface VoiceFilterStatisticsItem {
@@ -401,6 +596,20 @@ export interface GetCustomizationListRequest {
    * 应用 ID，登录控制台创建应用得到的AppID
    */
   BizId: number
+}
+
+/**
+ * RegisterVoicePrint返回参数结构体
+ */
+export interface RegisterVoicePrintResponse {
+  /**
+   * 声纹信息ID
+   */
+  VoicePrintId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -514,6 +723,16 @@ export interface Tag {
 }
 
 /**
+ * DeleteVoicePrint请求参数结构体
+ */
+export interface DeleteVoicePrintRequest {
+  /**
+   * 声纹信息ID
+   */
+  VoicePrintId: string
+}
+
+/**
  * DescribeUserInAndOutTime请求参数结构体
  */
 export interface DescribeUserInAndOutTimeRequest {
@@ -624,6 +843,24 @@ export interface DescribeRecordInfoRequest {
 }
 
 /**
+ * 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：
+coffee_shops: 咖啡店氛围，背景中有人聊天。
+busy_office: 客服中心
+street_traffic: 户外街道
+evening_mountain: 户外山林
+ */
+export interface AmbientSound {
+  /**
+   * 环境场景选择
+   */
+  Scene: string
+  /**
+   * 控制环境音的音量。取值的范围是 [0,2]。值越低，环境音越小；值越高，环境音越响亮。如果未设置，则使用默认值 1。
+   */
+  Volume?: number
+}
+
+/**
  * DescribeRoomInfo请求参数结构体
  */
 export interface DescribeRoomInfoRequest {
@@ -694,6 +931,20 @@ export interface CreateAgeDetectTaskRequest {
 }
 
 /**
+ * 离线语音服务配置数据
+ */
+export interface VoiceMessageConf {
+  /**
+   * 离线语音服务开关，取值：open/close
+   */
+  Status?: string
+  /**
+   * 离线语音支持语种，取值： all-全部，cnen-中英文。默认为中英文
+   */
+  Language?: string
+}
+
+/**
  * DescribeAppStatistics返回参数结构体
  */
 export interface DescribeAppStatisticsResponse {
@@ -705,6 +956,62 @@ export interface DescribeAppStatisticsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeVoicePrint返回参数结构体
+ */
+export interface DescribeVoicePrintResponse {
+  /**
+   * 总的条数
+   */
+  TotalCount?: number
+  /**
+   * 声纹信息
+   */
+  Data?: Array<VoicePrintInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 声纹查询数据
+ */
+export interface VoicePrintInfo {
+  /**
+   * 声纹ID
+   */
+  VoicePrintId?: string
+  /**
+   * 应用id
+   */
+  AppId?: number
+  /**
+   * 和声纹绑定的MetaInfo
+   */
+  VoicePrintMetaInfo?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 音频格式,当前只有0(代表wav)
+   */
+  AudioFormat?: number
+  /**
+   * 音频名称
+   */
+  AudioName?: string
+  /**
+   * 请求毫秒时间戳
+   */
+  ReqTimestamp?: number
 }
 
 /**
@@ -796,6 +1103,32 @@ export interface SceneInfo {
 }
 
 /**
+ * DescribeAIConversation返回参数结构体
+ */
+export interface DescribeAIConversationResponse {
+  /**
+   * 任务开始时间。
+   */
+  StartTime?: string
+  /**
+   * 任务状态。有4个值：1、Idle表示任务未开始2、Preparing表示任务准备中3、InProgress表示任务正在运行4、Stopped表示任务已停止，正在清理资源中
+   */
+  Status?: string
+  /**
+   * 唯一标识一次任务。
+   */
+  TaskId?: string
+  /**
+   * 开启对话任务时填写的SessionId，如果没写则不返回。
+   */
+  SessionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 剔除房间操作结果
  */
 export interface DeleteResult {
@@ -843,6 +1176,28 @@ export interface AgeDetectTask {
    * 数据文件的url，为 urlencode 编码,音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg
    */
   Url: string
+}
+
+/**
+ * DescribeVoicePrint请求参数结构体
+ */
+export interface DescribeVoicePrintRequest {
+  /**
+   * 查询方式，0表示查询特定VoicePrintId，1表示分页查询
+   */
+  DescribeMode: number
+  /**
+   * 声纹ID
+   */
+  VoicePrintIdList?: Array<string>
+  /**
+   * 当前页码,从1开始,DescribeMode为1时填写
+   */
+  PageIndex?: number
+  /**
+   * 每页条数 最少20,DescribeMode为1时填写
+   */
+  PageSize?: number
 }
 
 /**
@@ -960,6 +1315,72 @@ export interface ScanVoiceRequest {
 }
 
 /**
+ * RegisterVoicePrint请求参数结构体
+ */
+export interface RegisterVoicePrintRequest {
+  /**
+   * 整个wav音频文件的base64字符串,其中wav文件限定为16k采样率, 16bit位深, 单声道, 4到18秒音频时长,有效音频不小于3秒(不能有太多静音段), 编码数据大小不超过2M, 为了识别准确率，建议音频长度为8秒
+   */
+  Audio: string
+  /**
+   * 毫秒时间戳
+   */
+  ReqTimestamp: number
+  /**
+   * 音频格式,目前只支持0,代表wav
+   */
+  AudioFormat: number
+  /**
+   * 音频名称,长度不要超过32
+   */
+  AudioName: string
+  /**
+   * 和声纹绑定的MetaInfo，长度最大不超过512
+   */
+  AudioMetaInfo?: string
+}
+
+/**
+ * UpdateVoicePrint请求参数结构体
+ */
+export interface UpdateVoicePrintRequest {
+  /**
+   * 声纹信息ID
+   */
+  VoicePrintId: string
+  /**
+   * 毫秒时间戳
+   */
+  ReqTimestamp: number
+  /**
+   * 音频格式,目前只支持0,代表wav
+   */
+  AudioFormat?: number
+  /**
+   * 整个wav音频文件的base64字符串,其中wav文件限定为16k采样率, 16bit位深, 单声道, 8到18秒音频时长,有效音频不小于6秒(不能有太多静音段),编码数据大小不超过2M
+   */
+  Audio?: string
+  /**
+   * 和声纹绑定的MetaInfo，长度最大不超过512
+   */
+  AudioMetaInfo?: string
+}
+
+/**
+ * 语音过滤服务配置数据
+ */
+export interface VoiceFilterConf {
+  /**
+   * 语音过滤服务开关，取值：open/close
+   */
+  Status?: string
+  /**
+   * 场景配置信息，如开关状态，回调地址。
+   */
+  SceneInfos?: Array<SceneInfo>
+}
+
+/**
  * DescribeApplicationData请求参数结构体
  */
 export interface DescribeApplicationDataRequest {
@@ -985,6 +1406,57 @@ export interface CreateScanUserResponse {
    * 返回结果码
    */
   ErrorCode?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 断句配置
+ */
+export interface TurnDetection {
+  /**
+   * TurnDetectionMode为3时生效，语义断句的灵敏程度
+
+
+功能简介：根据用户所说的话来判断其已完成发言来分割音频
+
+
+可选: "low" | "medium" | "high" | "auto"
+
+
+auto 是默认值，与 medium 相同。
+low 将让用户有足够的时间说话。
+high 将尽快对音频进行分块。
+
+
+如果您希望模型在对话模式下更频繁地响应，可以将 SemanticEagerness 设置为 high
+如果您希望在用户停顿时，AI能够等待片刻，可以将 SemanticEagerness 设置为 low
+无论什么模式，最终都会分割送个大模型进行回复
+
+   */
+  SemanticEagerness?: string
+}
+
+/**
+ * 声纹配置参数
+ */
+export interface VoicePrint {
+  /**
+   * 默认为0，表示不启用声纹。1表示启用声纹，此时需要填写voiceprint id。
+   */
+  Mode?: number
+  /**
+   * VoicePrint Mode为1时需要填写，目前仅支持填写一个声纹id
+   */
+  IdList?: Array<string>
+}
+
+/**
+ * DeleteVoicePrint返回参数结构体
+ */
+export interface DeleteVoicePrintResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1166,17 +1638,27 @@ export interface ModifyCustomizationRequest {
 }
 
 /**
- * 用量数据单元
+ * StopAIConversation返回参数结构体
  */
-export interface StatisticsItem {
+export interface StopAIConversationResponse {
   /**
-   * 日期，格式为年-月-日，如2018-07-13
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StatDate?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeAIConversation请求参数结构体
+ */
+export interface DescribeAIConversationRequest {
   /**
-   * 统计值
+   * GME的SdkAppId，和开启转录任务的房间使用的SdkAppId相同。
    */
-  Data?: number
+  SdkAppId?: number
+  /**
+   * 唯一标识一次任务。
+   */
+  TaskId?: string
 }
 
 /**
@@ -1308,17 +1790,39 @@ export interface CreateAppRequest {
 }
 
 /**
- * 语音过滤服务配置数据
+ * ControlAIConversation请求参数结构体
  */
-export interface VoiceFilterConf {
+export interface ControlAIConversationRequest {
   /**
-   * 语音过滤服务开关，取值：open/close
+   * 任务唯一标识
    */
-  Status?: string
+  TaskId: string
   /**
-   * 场景配置信息，如开关状态，回调地址。
+   * 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话
    */
-  SceneInfos?: Array<SceneInfo>
+  Command: string
+  /**
+   * 服务端发送播报文本命令，当Command为ServerPushText时必填
+   */
+  ServerPushText?: ServerPushText
+  /**
+   * 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1"
+   */
+  InvokeLLM?: InvokeLLM
+}
+
+/**
+ * 用量数据单元
+ */
+export interface StatisticsItem {
+  /**
+   * 日期，格式为年-月-日，如2018-07-13
+   */
+  StatDate?: string
+  /**
+   * 统计值
+   */
+  Data?: number
 }
 
 /**
@@ -1523,47 +2027,91 @@ export interface DescribeRealtimeScanConfigRequest {
 }
 
 /**
- * ModifyCustomizationState返回参数结构体
+ * 调用服务端主动发起请求到LLM
  */
-export interface ModifyCustomizationStateResponse {
+export interface InvokeLLM {
   /**
-   * 模型ID
+   * 请求LLM的内容
    */
-  ModelId?: string
+  Content?: string
   /**
-   * 返回值。0为成功，非0为失败。
+   * 是否允许该文本打断机器人说话
    */
-  ErrorCode?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Interrupt?: boolean
 }
 
 /**
- * CreateScanUser请求参数结构体
+ * 语音转文字参数
  */
-export interface CreateScanUserRequest {
+export interface STTConfig {
   /**
-   * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
+   * 
+语音转文字支持识别的语言，默认是"zh" 中文
+
+可通过购买「AI智能识别时长包」解锁或领取包月套餐体验版解锁不同语言. 
+
+语音转文本不同套餐版本支持的语言如下：
+
+**基础版**：
+- "zh": 中文（简体）
+- "zh-TW": 中文（繁体）
+- "en": 英语
+
+**标准版：**
+- "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.
+- "16k_zh_large": 普方英大模型引擎. 当前模型同时支持中文、英文、多种中文方言等语言的识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.
+- "16k_multi_lang": 多语种大模型引擎. 当前模型同时支持英语、日语、韩语、阿拉伯语、菲律宾语、法语、印地语、印尼语、马来语、葡萄牙语、西班牙语、泰语、土耳其语、越南语、德语的识别，可实现15个语种的自动识别(句子/段落级别).
+- "16k_zh_en": 中英大模型引擎. 当前模型同时支持中文、英语识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.
+
+**高级版：**
+- "zh-dialect": 中国方言
+- "zh-yue": 中国粤语
+- "vi": 越南语
+- "ja": 日语
+- "ko": 韩语
+- "id": 印度尼西亚语
+- "th": 泰语
+- "pt": 葡萄牙语
+- "tr": 土耳其语
+- "ar": 阿拉伯语
+- "es": 西班牙语
+- "hi": 印地语
+- "fr": 法语
+- "ms": 马来语
+- "fil": 菲律宾语
+- "de": 德语
+- "it": 意大利语
+- "ru": 俄语
+- "sv": 瑞典语
+- "da": 丹麦语
+- "no": 挪威语
+
+**注意：**
+如果缺少满足您需求的语言，请联系我们技术人员。
    */
-  BizId: number
+  Language?: string
   /**
-   * 需要新增送检的用户号。示例：1234
-(若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准)
+   * **发起模糊识别为高级版能力,默认按照高级版收费,仅支持填写基础版和高级版语言.**
+注意：不支持填写"zh-dialect"
    */
-  UserId?: number
+  AlternativeLanguage?: Array<string>
   /**
-   * 需要新增送检的用户号。示例："1234"
-(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+   * 自定义参数，联系后台使用
+
    */
-  UserIdString?: string
+  CustomParam?: string
   /**
-   * 当前用户送检过期时间，单位：秒。
-若参数不为0，则在过期时间之后，用户不会被送检。
-若参数为0，则送检配置不会自动失效。 
+   * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
    */
-  ExpirationTime?: number
+  VadSilenceTime?: number
+  /**
+   * 热词表：该参数用于提升识别准确率。 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：“腾讯云|5” 或 “ASR|11”； 热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：“腾讯云|10,语音识别|5,ASR|11”；
+   */
+  HotWordList?: string
+  /**
+   * vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。
+   */
+  VadLevel?: number
 }
 
 /**
@@ -1599,17 +2147,43 @@ Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知�
 }
 
 /**
- * 离线语音服务配置数据
+ * StopAIConversation请求参数结构体
  */
-export interface VoiceMessageConf {
+export interface StopAIConversationRequest {
   /**
-   * 离线语音服务开关，取值：open/close
+   * 唯一标识任务。
    */
-  Status?: string
+  TaskId: string
+}
+
+/**
+ * UpdateAIConversation请求参数结构体
+ */
+export interface UpdateAIConversationRequest {
   /**
-   * 离线语音支持语种，取值： all-全部，cnen-中英文。默认为中英文
+   * 唯一标识一个任务
    */
-  Language?: string
+  TaskId: string
+  /**
+   * 不填写则不进行更新，机器人的欢迎语
+   */
+  WelcomeMessage?: string
+  /**
+   * 不填写则不进行更新。智能打断模式，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
+   */
+  InterruptMode?: number
+  /**
+   * 不填写则不进行更新。InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断
+   */
+  InterruptSpeechDuration?: number
+  /**
+   * 不填写则不进行更新，LLM配置，详情见StartAIConversation接口
+   */
+  LLMConfig?: string
+  /**
+   * 不填写则不进行更新，TTS配置，详情见StartAIConversation接口
+   */
+  TTSConfig?: string
 }
 
 /**
@@ -1676,6 +2250,26 @@ export interface DescribeApplicationDataResponse {
    * 应用统计数据
    */
   Data: ApplicationDataStatistics
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateAIConversation返回参数结构体
+ */
+export interface UpdateAIConversationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateVoicePrint返回参数结构体
+ */
+export interface UpdateVoicePrintResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1805,6 +2399,38 @@ export interface ModifyAppStatusResponse {
    * 修改应用开关状态返回数据
    */
   Data: ModifyAppStatusResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCustomization返回参数结构体
+ */
+export interface CreateCustomizationResponse {
+  /**
+   * 模型ID
+   */
+  ModelId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCustomizationState返回参数结构体
+ */
+export interface ModifyCustomizationStateResponse {
+  /**
+   * 模型ID
+   */
+  ModelId?: string
+  /**
+   * 返回值。0为成功，非0为失败。
+   */
+  ErrorCode?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

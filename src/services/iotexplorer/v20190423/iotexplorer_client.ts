@@ -42,6 +42,7 @@ import {
   DescribeCloudStorageUsersResponse,
   CountDataInfo,
   DescribeCloudStoragePackageConsumeDetailsRequest,
+  BatchUpdateFirmwareResponse,
   DescribeActivateLicenseServiceResponse,
   WifiInfo,
   CreateCloudStorageAIServiceTaskRequest,
@@ -53,6 +54,7 @@ import {
   ModifyCloudStorageAIServiceResponse,
   DescribeDeviceFirmWareRequest,
   BindCloudStorageUserRequest,
+  CreateLoRaFrequencyRequest,
   ChangeP2PRouteResponse,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
   CreateProjectResponse,
@@ -61,7 +63,7 @@ import {
   CreateDeviceResponse,
   CreateDeviceRequest,
   InheritCloudStorageUserResponse,
-  ChangeP2PRouteRequest,
+  DescribeFirmwareTasksRequest,
   DescribeDeviceResponse,
   DescribeCloudStorageEventsRequest,
   GetStudioProductListResponse,
@@ -112,6 +114,7 @@ import {
   DescribeDeviceFirmwaresResponse,
   DescribeCloudStorageUsersRequest,
   TWeCallLicenseInfo,
+  UpdateFirmwareResponse,
   DescribeCloudStorageDateRequest,
   DescribeTopicPolicyRequest,
   DescribeDeviceFirmwaresRequest,
@@ -121,6 +124,7 @@ import {
   DescribeCloudStorageTimeResponse,
   GetPositionSpaceListRequest,
   DescribeGatewaySubProductsResponse,
+  BindProductsResponse,
   GetDeviceListResponse,
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
@@ -137,6 +141,7 @@ import {
   ListTopicPolicyResponse,
   CreateAISearchTaskAsyncRequest,
   GenSingleDeviceSignatureOfPublicResponse,
+  SearchStudioProductResponse,
   FenceBindDeviceItem,
   DescribeBatchProductionResponse,
   DescribeProductCloudStorageAIServiceResponse,
@@ -232,11 +237,12 @@ import {
   ProductDevicesPositionItem,
   ResetCloudStorageAIServiceResponse,
   CreateTWeSeeRecognitionTaskRequest,
-  InvokeCloudStorageAIServiceTaskResponse,
+  LoRaFrequencyEntry,
   ModifyFenceBindResponse,
   DescribeGatewayBindDevicesResponse,
   DeletePositionFenceResponse,
   GetAuthMiniProgramAppListResponse,
+  UpdateOtaModuleResponse,
   UpdateDeviceTWeCallAuthorizeStatusResponse,
   ModifyProductCloudStorageAIServiceResponse,
   ModifyTWeSeeConfigResponse,
@@ -259,7 +265,7 @@ import {
   DescribePackageConsumeTasksResponse,
   UnbindProductsResponse,
   DescribeTopicPolicyResponse,
-  LoRaFrequencyEntry,
+  InvokeCloudStorageAIServiceTaskResponse,
   InvokeTWeSeeRecognitionTaskResponse,
   DescribeDeviceFirmWareResponse,
   RegisteredDeviceTypeInfo,
@@ -268,6 +274,7 @@ import {
   LicenseServiceNumInfo,
   TRTCParams,
   DescribeCsReportCountDataInfoResponse,
+  DescribeFirmwareTaskDevicesResponse,
   ModifyCloudStorageAIServiceRequest,
   GenerateSignedVideoURLRequest,
   GetStudioProductListRequest,
@@ -296,18 +303,20 @@ import {
   DescribeDeviceRequest,
   CamTag,
   WXDeviceInfo,
+  ListOtaModulesResponse,
   CloudStorageEventWithAITasks,
   CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
   CloudStorageAIServiceTaskVideoMetaInfo,
   DescribeGatewaySubDeviceListResponse,
-  SearchStudioProductResponse,
+  CreateOtaModuleRequest,
   DescribeVideoLicenseResponse,
   DescribePackageConsumeTasksRequest,
   GetFamilyDeviceUserListResponse,
   DeleteLoRaGatewayResponse,
-  CreateLoRaFrequencyRequest,
+  ChangeP2PRouteRequest,
   LoRaGatewayItem,
+  UpdateOtaModuleRequest,
   ModifyLoRaFrequencyRequest,
   VisionRecognitionTask,
   CreateLoRaFrequencyResponse,
@@ -315,13 +324,15 @@ import {
   GetGatewaySubDeviceListRequest,
   SearchStudioProductRequest,
   GenSingleDeviceSignatureOfPublicRequest,
-  BindProductsResponse,
+  ListProductOtaModulesResponse,
   DescribeGatewayBindDevicesRequest,
   DescribeGatewaySubProductsRequest,
   CreateExternalSourceAIServiceTaskResponse,
   BindProductsRequest,
+  TargetInfo,
   CreateTWeTalkProductConfigRequest,
   ModifyLoRaGatewayResponse,
+  DeleteOtaModuleRequest,
   DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageOrderResponse,
   DescribeActivateLicenseServiceRequest,
@@ -333,16 +344,18 @@ import {
   DeleteProjectRequest,
   CloudStoragePackageInfo,
   DevicesItem,
+  OtaModuleInfo,
   CloudStorageAIServiceTaskFileInfo,
   DescribeTWeSeeConfigResponse,
   VisionSummaryConfig,
+  ActivateTWeCallLicenseRequest,
   ModifyPositionFenceRequest,
   PositionFenceItem,
   DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
   TransferCloudStorageResponse,
   CreateStudioProductResponse,
-  UpdateFirmwareResponse,
+  DeleteOtaModuleResponse,
   ModifyStudioProductRequest,
   CreateBatchProductionRequest,
   ReleaseStudioProductRequest,
@@ -353,7 +366,7 @@ import {
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   FenceBindProductItem,
-  PublishRRPCMessageRequest,
+  ListProductOtaModulesRequest,
   DescribePositionFenceListResponse,
   DescribeCloudStorageMultiThumbnailRequest,
   DescribeFirmwareUpdateStatusRequest,
@@ -363,15 +376,18 @@ import {
   ProductEntry,
   BindDeviceInfo,
   CloudStorageAIServiceTask,
+  PublishRRPCMessageRequest,
   ListTopicPolicyRequest,
   DeleteLoRaFrequencyRequest,
   InvokeVideosKeywordsAnalyzerRequest,
+  DescribeFirmwareTaskDevicesRequest,
   InvokeExternalSourceAIServiceTaskRequest,
   DescribeProductCloudStorageAIServiceRequest,
   DeleteLoRaGatewayRequest,
   DescribeTWeSeeRecognitionTaskResponse,
   ModifyTopicPolicyResponse,
   DescribeCloudStorageStreamDataResponse,
+  DeviceUpdateStatus,
   TransferTWeCallDeviceResponse,
   DescribeTopicRuleRequest,
   ModifyCloudStorageAIServiceCallbackRequest,
@@ -386,6 +402,7 @@ import {
   AuthMiniProgramAppInfo,
   FamilySubDevice,
   DescribeModelDefinitionRequest,
+  DescribeFirmwareTasksResponse,
   ModifyTWeTalkProductConfigRequest,
   GetDeviceLocationHistoryResponse,
   ModifyFenceBindRequest,
@@ -395,7 +412,7 @@ import {
   TopicRule,
   DescribeCloudStoragePackageConsumeStatsRequest,
   DeleteFenceBindResponse,
-  ActivateTWeCallLicenseRequest,
+  FirmwareTaskInfo,
   DescribeAISearchTaskAsyncResponse,
   IotApplication,
   PublishBroadcastMessageResponse,
@@ -423,10 +440,12 @@ import {
   DeviceActivationDetail,
   DiarySHLConfig,
   UnbindDevicesResponse,
+  CreateOtaModuleResponse,
   CreateBatchProductionResponse,
   VisionObjectDetectConfig,
-  TargetInfo,
+  BatchUpdateFirmwareRequest,
   GetTopicRuleListRequest,
+  ListOtaModulesRequest,
   DeleteStudioProductRequest,
   DescribeP2PRouteRequest,
   GetDeviceSumStatisticsRequest,
@@ -648,6 +667,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ListProductOtaModules）用于获取产品OTA模块列表
+   */
+  async ListProductOtaModules(
+    req: ListProductOtaModulesRequest,
+    cb?: (error: string, rep: ListProductOtaModulesResponse) => void
+  ): Promise<ListProductOtaModulesResponse> {
+    return this.request("ListProductOtaModules", req, cb)
+  }
+
+  /**
    * 获取 LoRa 网关列表接口
    */
   async GetLoRaGatewayList(
@@ -798,13 +827,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查看某个设备的详细信息
+   * 搜索固件升级任务列表
    */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
+  async DescribeFirmwareTasks(
+    req: DescribeFirmwareTasksRequest,
+    cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
+  ): Promise<DescribeFirmwareTasksResponse> {
+    return this.request("DescribeFirmwareTasks", req, cb)
   }
 
   /**
@@ -845,6 +874,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTopicRuleResponse) => void
   ): Promise<DeleteTopicRuleResponse> {
     return this.request("DeleteTopicRule", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteOtaModule）用于删除OTA模块
+   */
+  async DeleteOtaModule(
+    req: DeleteOtaModuleRequest,
+    cb?: (error: string, rep: DeleteOtaModuleResponse) => void
+  ): Promise<DeleteOtaModuleResponse> {
+    return this.request("DeleteOtaModule", req, cb)
   }
 
   /**
@@ -980,6 +1019,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（BatchUpdateFirmware）用于批量更新设备固件
+   */
+  async BatchUpdateFirmware(
+    req: BatchUpdateFirmwareRequest,
+    cb?: (error: string, rep: BatchUpdateFirmwareResponse) => void
+  ): Promise<BatchUpdateFirmwareResponse> {
+    return this.request("BatchUpdateFirmware", req, cb)
+  }
+
+  /**
    * 用于获取TWeTalk服务连接产品配置信息列表。
    */
   async GetTWeTalkProductConfigList(
@@ -1027,6 +1076,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InheritCloudStorageUserResponse) => void
   ): Promise<InheritCloudStorageUserResponse> {
     return this.request("InheritCloudStorageUser", req, cb)
+  }
+
+  /**
+   * 本接口（ListOtaModules）用于获取OTA模块列表
+   */
+  async ListOtaModules(
+    req: ListOtaModulesRequest,
+    cb?: (error: string, rep: ListOtaModulesResponse) => void
+  ): Promise<ListOtaModulesResponse> {
+    return this.request("ListOtaModules", req, cb)
   }
 
   /**
@@ -1147,6 +1206,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InvokeExternalSourceAIServiceTaskResponse) => void
   ): Promise<InvokeExternalSourceAIServiceTaskResponse> {
     return this.request("InvokeExternalSourceAIServiceTask", req, cb)
+  }
+
+  /**
+   * 查询固件升级任务的设备列表
+   */
+  async DescribeFirmwareTaskDevices(
+    req: DescribeFirmwareTaskDevicesRequest,
+    cb?: (error: string, rep: DescribeFirmwareTaskDevicesResponse) => void
+  ): Promise<DescribeFirmwareTaskDevicesResponse> {
+    return this.request("DescribeFirmwareTaskDevices", req, cb)
   }
 
   /**
@@ -1392,6 +1461,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpdateOtaModule）用于修改OTA模块
+   */
+  async UpdateOtaModule(
+    req: UpdateOtaModuleRequest,
+    cb?: (error: string, rep: UpdateOtaModuleResponse) => void
+  ): Promise<UpdateOtaModuleResponse> {
+    return this.request("UpdateOtaModule", req, cb)
+  }
+
+  /**
    * 创建 LoRa 自定义频点
    */
   async CreateLoRaFrequency(
@@ -1594,6 +1673,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateOtaModule）用于新建OTA模块
+   */
+  async CreateOtaModule(
+    req: CreateOtaModuleRequest,
+    cb?: (error: string, rep: CreateOtaModuleResponse) => void
+  ): Promise<CreateOtaModuleResponse> {
+    return this.request("CreateOtaModule", req, cb)
+  }
+
+  /**
    * 获取设备位置列表
    */
   async DescribeDevicePositionList(
@@ -1731,6 +1820,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTWeSeeRecognitionTaskResponse) => void
   ): Promise<DescribeTWeSeeRecognitionTaskResponse> {
     return this.request("DescribeTWeSeeRecognitionTask", req, cb)
+  }
+
+  /**
+   * 用于查看某个设备的详细信息
+   */
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
   }
 
   /**

@@ -47,7 +47,7 @@ export interface SearchProRequest {
    */
   Cnt?: number
   /**
-   * Industry=gov/news/acad，对应党政机关、新闻、学术，**仅限尊享版使用**
+   * Industry=gov/news/acad，对应党政机关、权威媒体、学术（英文），**仅限尊享版使用**
    */
   Industry?: string
 }

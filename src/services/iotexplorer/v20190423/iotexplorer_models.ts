@@ -467,6 +467,20 @@ export interface DescribeCloudStoragePackageConsumeDetailsRequest {
 }
 
 /**
+ * BatchUpdateFirmware返回参数结构体
+ */
+export interface BatchUpdateFirmwareResponse {
+  /**
+   * 任务Id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeActivateLicenseService返回参数结构体
  */
 export interface DescribeActivateLicenseServiceResponse {
@@ -685,6 +699,44 @@ export interface BindCloudStorageUserRequest {
 }
 
 /**
+ * CreateLoRaFrequency请求参数结构体
+ */
+export interface CreateLoRaFrequencyRequest {
+  /**
+   * 频点配置名称
+   */
+  FreqName?: string
+  /**
+   * 数据上行信道
+   */
+  ChannelsDataUp?: Array<number | bigint>
+  /**
+   * 数据下行RX1信道
+   */
+  ChannelsDataRX1?: Array<number | bigint>
+  /**
+   * 数据下行RX2信道
+   */
+  ChannelsDataRX2?: Array<number | bigint>
+  /**
+   * 入网上行信道
+   */
+  ChannelsJoinUp?: Array<number | bigint>
+  /**
+   * 入网下行RX1信道
+   */
+  ChannelsJoinRX1?: Array<number | bigint>
+  /**
+   * 入网下行RX2信道
+   */
+  ChannelsJoinRX2?: Array<number | bigint>
+  /**
+   * 频点配置描述
+   */
+  Description?: string
+}
+
+/**
  * ChangeP2PRoute返回参数结构体
  */
 export interface ChangeP2PRouteResponse {
@@ -813,21 +865,33 @@ export interface InheritCloudStorageUserResponse {
 }
 
 /**
- * ChangeP2PRoute请求参数结构体
+ * DescribeFirmwareTasks请求参数结构体
  */
-export interface ChangeP2PRouteRequest {
+export interface DescribeFirmwareTasksRequest {
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductID: string
   /**
-   * 设备名称
+   * 固件版本号
    */
-  DeviceName: string
+  FirmwareVersion: string
   /**
-   * P2P线路
+   * 查询偏移量
    */
-  RouteId: number
+  Offset: number
+  /**
+   * 返回查询结果条数
+   */
+  Limit: number
+  /**
+   * 搜索过滤条件
+   */
+  Filters?: Array<SearchKeyword>
+  /**
+   * 固件类型
+   */
+  FwType?: string
 }
 
 /**
@@ -1954,6 +2018,16 @@ export interface TWeCallLicenseInfo {
 }
 
 /**
+ * UpdateFirmware返回参数结构体
+ */
+export interface UpdateFirmwareResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudStorageDate请求参数结构体
  */
 export interface DescribeCloudStorageDateRequest {
@@ -2105,6 +2179,16 @@ export interface DescribeGatewaySubProductsResponse {
    * 可绑定或解绑的产品总数
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BindProducts返回参数结构体
+ */
+export interface BindProductsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2452,6 +2536,24 @@ export interface GenSingleDeviceSignatureOfPublicResponse {
    * 设备签名
    */
   DeviceSignature?: DeviceSignatureInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchStudioProduct返回参数结构体
+ */
+export interface SearchStudioProductResponse {
+  /**
+   * 产品列表
+   */
+  Products?: Array<ProductEntry>
+  /**
+   * 产品数量
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4431,25 +4533,49 @@ export interface CreateTWeSeeRecognitionTaskRequest {
 }
 
 /**
- * InvokeCloudStorageAIServiceTask返回参数结构体
+ * LoRa自定义频点信息
  */
-export interface InvokeCloudStorageAIServiceTaskResponse {
+export interface LoRaFrequencyEntry {
   /**
-   * 任务是否执行完成
+   * 频点唯一ID
    */
-  Completed?: boolean
+  FreqId?: string
   /**
-   * 任务 ID
+   * 频点名称
    */
-  TaskId?: string
+  FreqName?: string
   /**
-   * 任务信息
+   * 频点描述
    */
-  TaskInfo?: CloudStorageAIServiceTask
+  Description?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数据上行信道
    */
-  RequestId?: string
+  ChannelsDataUp?: Array<number | bigint>
+  /**
+   * 数据下行信道RX1
+   */
+  ChannelsDataRX1?: Array<number | bigint>
+  /**
+   * 数据下行信道RX2
+   */
+  ChannelsDataRX2?: Array<number | bigint>
+  /**
+   * 入网上行信道
+   */
+  ChannelsJoinUp?: Array<number | bigint>
+  /**
+   * 入网下行RX1信道
+   */
+  ChannelsJoinRX1?: Array<number | bigint>
+  /**
+   * 入网下行RX2信道
+   */
+  ChannelsJoinRX2?: Array<number | bigint>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
 }
 
 /**
@@ -4506,6 +4632,16 @@ export interface GetAuthMiniProgramAppListResponse {
    * 总数
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateOtaModule返回参数结构体
+ */
+export interface UpdateOtaModuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4941,49 +5077,25 @@ export interface DescribeTopicPolicyResponse {
 }
 
 /**
- * LoRa自定义频点信息
+ * InvokeCloudStorageAIServiceTask返回参数结构体
  */
-export interface LoRaFrequencyEntry {
+export interface InvokeCloudStorageAIServiceTaskResponse {
   /**
-   * 频点唯一ID
+   * 任务是否执行完成
    */
-  FreqId?: string
+  Completed?: boolean
   /**
-   * 频点名称
+   * 任务 ID
    */
-  FreqName?: string
+  TaskId?: string
   /**
-   * 频点描述
+   * 任务信息
    */
-  Description?: string
+  TaskInfo?: CloudStorageAIServiceTask
   /**
-   * 数据上行信道
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ChannelsDataUp?: Array<number | bigint>
-  /**
-   * 数据下行信道RX1
-   */
-  ChannelsDataRX1?: Array<number | bigint>
-  /**
-   * 数据下行信道RX2
-   */
-  ChannelsDataRX2?: Array<number | bigint>
-  /**
-   * 入网上行信道
-   */
-  ChannelsJoinUp?: Array<number | bigint>
-  /**
-   * 入网下行RX1信道
-   */
-  ChannelsJoinRX1?: Array<number | bigint>
-  /**
-   * 入网下行RX2信道
-   */
-  ChannelsJoinRX2?: Array<number | bigint>
-  /**
-   * 创建时间
-   */
-  CreateTime?: number
+  RequestId?: string
 }
 
 /**
@@ -5132,6 +5244,26 @@ export interface DescribeCsReportCountDataInfoResponse {
    * 云存上报统计信息
    */
   Data?: CountDataInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFirmwareTaskDevices返回参数结构体
+ */
+export interface DescribeFirmwareTaskDevicesResponse {
+  /**
+   * 固件升级任务的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 固件升级任务的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Devices?: Array<DeviceUpdateStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5786,6 +5918,24 @@ export interface WXDeviceInfo {
 }
 
 /**
+ * ListOtaModules返回参数结构体
+ */
+export interface ListOtaModulesResponse {
+  /**
+   * 固件总数
+   */
+  TotalCount?: number
+  /**
+   * 固件列表
+   */
+  Modules?: Array<OtaModuleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云存事件及其关联的云存 AI 任务
  */
 export interface CloudStorageEventWithAITasks {
@@ -5889,21 +6039,25 @@ export interface DescribeGatewaySubDeviceListResponse {
 }
 
 /**
- * SearchStudioProduct返回参数结构体
+ * CreateOtaModule请求参数结构体
  */
-export interface SearchStudioProductResponse {
+export interface CreateOtaModuleRequest {
   /**
-   * 产品列表
+   * 产品ID
    */
-  Products?: Array<ProductEntry>
+  ProductID: string
   /**
-   * 产品数量
+   * 模块类型
    */
-  Total?: number
+  FwType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 模块类型名称
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 类型描述
+   */
+  Remark?: string
 }
 
 /**
@@ -5959,41 +6113,21 @@ export interface DeleteLoRaGatewayResponse {
 }
 
 /**
- * CreateLoRaFrequency请求参数结构体
+ * ChangeP2PRoute请求参数结构体
  */
-export interface CreateLoRaFrequencyRequest {
+export interface ChangeP2PRouteRequest {
   /**
-   * 频点配置名称
+   * 产品ID
    */
-  FreqName?: string
+  ProductId: string
   /**
-   * 数据上行信道
+   * 设备名称
    */
-  ChannelsDataUp?: Array<number | bigint>
+  DeviceName: string
   /**
-   * 数据下行RX1信道
+   * P2P线路
    */
-  ChannelsDataRX1?: Array<number | bigint>
-  /**
-   * 数据下行RX2信道
-   */
-  ChannelsDataRX2?: Array<number | bigint>
-  /**
-   * 入网上行信道
-   */
-  ChannelsJoinUp?: Array<number | bigint>
-  /**
-   * 入网下行RX1信道
-   */
-  ChannelsJoinRX1?: Array<number | bigint>
-  /**
-   * 入网下行RX2信道
-   */
-  ChannelsJoinRX2?: Array<number | bigint>
-  /**
-   * 频点配置描述
-   */
-  Description?: string
+  RouteId: number
 }
 
 /**
@@ -6044,6 +6178,28 @@ export interface LoRaGatewayItem {
    * 频点ID
    */
   FrequencyId?: string
+}
+
+/**
+ * UpdateOtaModule请求参数结构体
+ */
+export interface UpdateOtaModuleRequest {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+  /**
+   * 模块类型
+   */
+  FwType: string
+  /**
+   * 模块类型名称
+   */
+  Name?: string
+  /**
+   * 模块类型描述
+   */
+  Remark?: string
 }
 
 /**
@@ -6253,9 +6409,13 @@ export interface GenSingleDeviceSignatureOfPublicRequest {
 }
 
 /**
- * BindProducts返回参数结构体
+ * ListProductOtaModules返回参数结构体
  */
-export interface BindProductsResponse {
+export interface ListProductOtaModulesResponse {
+  /**
+   * 固件列表
+   */
+  Modules?: Array<OtaModuleInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6343,6 +6503,48 @@ export interface BindProductsRequest {
 }
 
 /**
+ * 视频语义搜索结果
+ */
+export interface TargetInfo {
+  /**
+   * 视频唯一ID
+   */
+  Id?: string
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 视频起始时间（毫秒级Unix时间戳）
+   */
+  StartTimeMs?: number
+  /**
+   * 视频结束时间（毫秒级Unix时间戳）
+   */
+  EndTimeMs?: number
+  /**
+   * 用户自定义事件ID，后续扩展使用
+   */
+  EventId?: string
+  /**
+   * 视频内容摘要
+   */
+  Summary?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
+  /**
+   * 缩略图路径
+   */
+  Thumbnail?: string
+}
+
+/**
  * CreateTWeTalkProductConfig请求参数结构体
  */
 export interface CreateTWeTalkProductConfigRequest {
@@ -6380,6 +6582,20 @@ export interface ModifyLoRaGatewayResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteOtaModule请求参数结构体
+ */
+export interface DeleteOtaModuleRequest {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+  /**
+   * 模块类型
+   */
+  FwType: string
 }
 
 /**
@@ -6683,6 +6899,40 @@ export interface DevicesItem {
 }
 
 /**
+ * 升级包类型详细信息
+ */
+export interface OtaModuleInfo {
+  /**
+   * 模块创建时间
+   */
+  CreateTime?: number
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 模块名称
+   */
+  Name?: string
+  /**
+   * 产品ID
+   */
+  ProductID?: string
+  /**
+   * 模块类型
+   */
+  FwType?: string
+  /**
+   * 是否系统内置升级包类型
+   */
+  IsBuildIn?: boolean
+  /**
+   * 模块描述
+   */
+  Remark?: string
+}
+
+/**
  * 云存 AI 任务输出文件信息
  */
 export interface CloudStorageAIServiceTaskFileInfo {
@@ -6785,6 +7035,25 @@ th 泰语
 }
 
 /**
+ * ActivateTWeCallLicense请求参数结构体
+ */
+export interface ActivateTWeCallLicenseRequest {
+  /**
+   * TWecall类型：0-体验套餐；1-基础版；3-高级版；
+   */
+  PkgType: number
+  /**
+   * 参数已弃用，不用传参
+   * @deprecated
+   */
+  MiniProgramAppId?: string
+  /**
+   * 设备列表
+   */
+  DeviceList?: Array<TWeCallInfo>
+}
+
+/**
  * ModifyPositionFence请求参数结构体
  */
 export type ModifyPositionFenceRequest = null
@@ -6864,9 +7133,9 @@ export interface CreateStudioProductResponse {
 }
 
 /**
- * UpdateFirmware返回参数结构体
+ * DeleteOtaModule返回参数结构体
  */
-export interface UpdateFirmwareResponse {
+export interface DeleteOtaModuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7074,21 +7343,13 @@ export interface FenceBindProductItem {
 }
 
 /**
- * PublishRRPCMessage请求参数结构体
+ * ListProductOtaModules请求参数结构体
  */
-export interface PublishRRPCMessageRequest {
+export interface ListProductOtaModulesRequest {
   /**
    * 产品ID
    */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
-   * 消息内容，utf8编码
-   */
-  Payload: string
+  ProductID: string
 }
 
 /**
@@ -7379,6 +7640,24 @@ export interface CloudStorageAIServiceTask {
 }
 
 /**
+ * PublishRRPCMessage请求参数结构体
+ */
+export interface PublishRRPCMessageRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 消息内容，utf8编码
+   */
+  Payload: string
+}
+
+/**
  * ListTopicPolicy请求参数结构体
  */
 export interface ListTopicPolicyRequest {
@@ -7430,6 +7709,36 @@ export interface InvokeVideosKeywordsAnalyzerRequest {
    * 返回的关键字最大数量，默认为5；最大不能超过10
    */
   KeywordsMaxNum?: number
+}
+
+/**
+ * DescribeFirmwareTaskDevices请求参数结构体
+ */
+export interface DescribeFirmwareTaskDevicesRequest {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+  /**
+   * 固件版本
+   */
+  FirmwareVersion: string
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<SearchKeyword>
+  /**
+   * 查询偏移量
+   */
+  Offset?: number
+  /**
+   * 查询的数量
+   */
+  Limit?: number
+  /**
+   * 固件类型
+   */
+  FwType?: string
 }
 
 /**
@@ -7525,6 +7834,59 @@ export interface DescribeCloudStorageStreamDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 设备固件更新状态
+ */
+export interface DeviceUpdateStatus {
+  /**
+   * 设备名
+   */
+  DeviceName?: string
+  /**
+   * 最后处理时间
+   */
+  LastProcessTime?: number
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 错误消息
+   */
+  ErrMsg?: string
+  /**
+   * 返回码
+   */
+  Retcode?: number
+  /**
+   * 目标更新版本
+   */
+  DstVersion?: string
+  /**
+   * 下载中状态时的下载进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
+  /**
+   * 原版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriVersion?: string
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 固件类型
+   */
+  FwType?: string
+  /**
+   * 重试次数
+   */
+  RetryNum?: number
 }
 
 /**
@@ -7857,6 +8219,26 @@ export interface DescribeModelDefinitionRequest {
 }
 
 /**
+ * DescribeFirmwareTasks返回参数结构体
+ */
+export interface DescribeFirmwareTasksResponse {
+  /**
+   * 固件升级任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskInfos?: Array<FirmwareTaskInfo>
+  /**
+   * 固件升级任务总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyTWeTalkProductConfig请求参数结构体
  */
 export interface ModifyTWeTalkProductConfigRequest {
@@ -8027,22 +8409,48 @@ export interface DeleteFenceBindResponse {
 }
 
 /**
- * ActivateTWeCallLicense请求参数结构体
+ * 固件升级任务信息
  */
-export interface ActivateTWeCallLicenseRequest {
+export interface FirmwareTaskInfo {
   /**
-   * TWecall类型：0-体验套餐；1-基础版；3-高级版；
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PkgType: number
+  TaskId?: number
   /**
-   * 参数已弃用，不用传参
-   * @deprecated
+   * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniProgramAppId?: string
+  Status?: number
   /**
-   * 设备列表
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceList?: Array<TWeCallInfo>
+  Type?: number
+  /**
+   * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorNickName?: string
+  /**
+   * 创建者ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserId?: number
+  /**
+   * 任务启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronTime?: number
+  /**
+   * 固件类型
+   */
+  FwType?: string
 }
 
 /**
@@ -8745,6 +9153,16 @@ export interface UnbindDevicesResponse {
 }
 
 /**
+ * CreateOtaModule返回参数结构体
+ */
+export interface CreateOtaModuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBatchProduction返回参数结构体
  */
 export interface CreateBatchProductionResponse {
@@ -8779,45 +9197,73 @@ export interface VisionObjectDetectConfig {
 }
 
 /**
- * 视频语义搜索结果
+ * BatchUpdateFirmware请求参数结构体
  */
-export interface TargetInfo {
-  /**
-   * 视频唯一ID
-   */
-  Id?: string
+export interface BatchUpdateFirmwareRequest {
   /**
    * 产品ID
    */
-  ProductId?: string
+  ProductID: string
   /**
-   * 设备名称
+   * 固件新版本号
    */
-  DeviceName?: string
+  FirmwareVersion: string
   /**
-   * 视频起始时间（毫秒级Unix时间戳）
+   * 固件原版本号
    */
-  StartTimeMs?: number
+  FirmwareOriVersion?: string
   /**
-   * 视频结束时间（毫秒级Unix时间戳）
+   * 升级方式，0 静默升级  1 用户确认升级。 不填默认为静默升级方式
    */
-  EndTimeMs?: number
+  UpgradeMethod?: number
   /**
-   * 用户自定义事件ID，后续扩展使用
+   * 设备列表文件名称，根据文件列表升级固件需要填写此参数
    */
-  EventId?: string
+  FileName?: string
   /**
-   * 视频内容摘要
+   * 设备列表的文件md5值
    */
-  Summary?: string
+  FileMd5?: string
   /**
-   * 通道ID
+   * 设备列表的文件大小值
    */
-  ChannelId?: number
+  FileSize?: number
   /**
-   * 缩略图路径
+   * 需要升级的设备名称列表
    */
-  Thumbnail?: string
+  DeviceNames?: Array<string>
+  /**
+   * 固件升级任务，默认超时时间。 最小取值120秒，最大为900秒
+   */
+  TimeoutInterval?: number
+  /**
+   * 固件升级任务类型，默认静态升级值为空或1，动态升级值为7
+   */
+  Type?: number
+  /**
+   * 任务延迟时间
+   */
+  DelayTime?: number
+  /**
+   * 是否覆盖，0不覆盖，1覆盖
+   */
+  OverrideMode?: number
+  /**
+   * 失败重试次数
+   */
+  MaxRetryNum?: number
+  /**
+   * 重试间隔min
+   */
+  RetryInterval?: number
+  /**
+   * 固件模块
+   */
+  FwType?: string
+  /**
+   * 用户自定义信息
+   */
+  TaskUserDefine?: string
 }
 
 /**
@@ -8832,6 +9278,24 @@ export interface GetTopicRuleListRequest {
    * 分页的大小
    */
   PageSize: number
+}
+
+/**
+ * ListOtaModules请求参数结构体
+ */
+export interface ListOtaModulesRequest {
+  /**
+   * 获取的页数
+   */
+  PageNum: number
+  /**
+   * 分页的大小
+   */
+  PageSize: number
+  /**
+   * 搜索过滤条件
+   */
+  Filters?: Array<SearchKeyword>
 }
 
 /**

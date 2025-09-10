@@ -20,30 +20,37 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ApplicationList,
   ModifyAppStatusRequest,
-  CreateCustomizationResponse,
+  ModifyRecordInfoRequest,
   ModifyCustomizationStateRequest,
+  AgentConfig,
   CustomizationConfigs,
   VoiceMessageStatisticsItem,
+  ServerPushText,
   RoomUser,
+  StartAIConversationResponse,
+  CreateScanUserRequest,
+  StartAIConversationRequest,
   DescribeScanResultListRequest,
   StartRecordRequest,
-  ModifyRecordInfoRequest,
   RealTimeSpeechStatisticsItem,
   AudioTextStatisticsItem,
   GetCustomizationListResponse,
   DeleteScanUserRequest,
   ModifyUserMicStatusRequest,
   UpdateScanUsersResponse,
+  ControlAIConversationResponse,
   VoiceFilterStatisticsItem,
   DescribeAgeDetectTaskRequest,
   DeleteCustomizationResponse,
   DescribeApplicationListRequest,
   GetCustomizationListRequest,
+  RegisterVoicePrintResponse,
   DescribeRecordInfoResponse,
   DescribeApplicationListResponse,
   StopRecordResponse,
   ScanPiece,
   Tag,
+  DeleteVoicePrintRequest,
   DescribeUserInAndOutTimeRequest,
   AsrConf,
   StartRecordResponse,
@@ -51,27 +58,39 @@ import {
   UserMicStatus,
   CreateAppResponse,
   DescribeRecordInfoRequest,
+  AmbientSound,
   DescribeRoomInfoRequest,
   ModifyCustomizationResponse,
   DeleteCustomizationRequest,
   CreateAgeDetectTaskRequest,
+  VoiceMessageConf,
   DescribeAppStatisticsResponse,
+  DescribeVoicePrintResponse,
+  VoicePrintInfo,
   DeleteScanUserResponse,
   DescribeRoomInfoResponse,
   RecordInfo,
   StatusInfo,
   SceneInfo,
+  DescribeAIConversationResponse,
   DeleteResult,
   AgeDetectTaskResult,
   AgeDetectTask,
+  DescribeVoicePrintRequest,
   DescribeTaskInfoRequest,
   RealtimeSpeechConf,
   DescribeAppStatisticsResp,
   ScanVoiceResult,
   ServiceStatus,
   ScanVoiceRequest,
+  RegisterVoicePrintRequest,
+  UpdateVoicePrintRequest,
+  VoiceFilterConf,
   DescribeApplicationDataRequest,
   CreateScanUserResponse,
+  TurnDetection,
+  VoicePrint,
+  DeleteVoicePrintResponse,
   ModifyUserMicStatusResponse,
   DescribeTaskInfoResponse,
   ApplicationDataStatistics,
@@ -79,14 +98,16 @@ import {
   InOutTimeInfo,
   DeleteRoomMemberResponse,
   ModifyCustomizationRequest,
-  StatisticsItem,
+  StopAIConversationResponse,
+  DescribeAIConversationRequest,
   Filter,
   SubscribeRecordUserIds,
   DescribeUserInAndOutTimeResponse,
   DescribeAppStatisticsRequest,
   StopRecordRequest,
   CreateAppRequest,
-  VoiceFilterConf,
+  ControlAIConversationRequest,
+  StatisticsItem,
   ScanVoiceResponse,
   AppStatisticsItem,
   CreateAgeDetectTaskResponse,
@@ -96,19 +117,24 @@ import {
   CreateCustomizationRequest,
   UpdateScanRoomsRequest,
   DescribeRealtimeScanConfigRequest,
-  ModifyCustomizationStateResponse,
-  CreateScanUserRequest,
+  InvokeLLM,
+  STTConfig,
   StreamTextStatisticsItem,
   DescribeAgeDetectTaskResponse,
-  VoiceMessageConf,
+  StopAIConversationRequest,
+  UpdateAIConversationRequest,
   CreateAppResp,
   UpdateScanRoomsResponse,
   DescribeApplicationDataResponse,
+  UpdateAIConversationResponse,
+  UpdateVoicePrintResponse,
   UpdateScanUsersRequest,
   OverseaTextStatisticsItem,
   DescribeScanResult,
   ScanDetail,
   ModifyAppStatusResponse,
+  CreateCustomizationResponse,
+  ModifyCustomizationStateResponse,
   RealtimeTextStatisticsItem,
   ModifyRecordInfoResponse,
 } from "./gme_models"
@@ -141,6 +167,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopRecordResponse) => void
   ): Promise<StopRecordResponse> {
     return this.request("StopRecord", req, cb)
+  }
+
+  /**
+   * 更新AIConversation参数
+   */
+  async UpdateAIConversation(
+    req: UpdateAIConversationRequest,
+    cb?: (error: string, rep: UpdateAIConversationResponse) => void
+  ): Promise<UpdateAIConversationResponse> {
+    return this.request("UpdateAIConversation", req, cb)
+  }
+
+  /**
+   * 停止AI对话任务
+   */
+  async StopAIConversation(
+    req: StopAIConversationRequest,
+    cb?: (error: string, rep: StopAIConversationResponse) => void
+  ): Promise<StopAIConversationResponse> {
+    return this.request("StopAIConversation", req, cb)
   }
 
   /**
@@ -185,6 +231,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 传入声纹ID，删除之前注册的声纹信息
+   */
+  async DeleteVoicePrint(
+    req: DeleteVoicePrintRequest,
+    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
+  ): Promise<DeleteVoicePrintResponse> {
+    return this.request("DeleteVoicePrint", req, cb)
+  }
+
+  /**
    * 更新自定义送检房间号。**接口使用前提**：目前 UpdateScanRooms 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
    */
   async UpdateScanRooms(
@@ -192,6 +248,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateScanRoomsResponse) => void
   ): Promise<UpdateScanRoomsResponse> {
     return this.request("UpdateScanRooms", req, cb)
+  }
+
+  /**
+     * 启动AI对话任务，AI通道机器人进入GME房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
+
+GME AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
+     */
+  async StartAIConversation(
+    req: StartAIConversationRequest,
+    cb?: (error: string, rep: StartAIConversationResponse) => void
+  ): Promise<StartAIConversationResponse> {
+    return this.request("StartAIConversation", req, cb)
   }
 
   /**
@@ -212,6 +280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskInfoResponse) => void
   ): Promise<DescribeTaskInfoResponse> {
     return this.request("DescribeTaskInfo", req, cb)
+  }
+
+  /**
+   * 传入音频base64串，注册声纹信息，返回声纹ID
+   */
+  async RegisterVoicePrint(
+    req: RegisterVoicePrintRequest,
+    cb?: (error: string, rep: RegisterVoicePrintResponse) => void
+  ): Promise<RegisterVoicePrintResponse> {
+    return this.request("RegisterVoicePrint", req, cb)
   }
 
   /**
@@ -237,6 +315,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 传入声纹ID以及对应音频信息，更新对应声纹信息
+   */
+  async UpdateVoicePrint(
+    req: UpdateVoicePrintRequest,
+    cb?: (error: string, rep: UpdateVoicePrintResponse) => void
+  ): Promise<UpdateVoicePrintResponse> {
+    return this.request("UpdateVoicePrint", req, cb)
+  }
+
+  /**
    * 本接口(DeleteRoomMember)用户删除房间或者剔除房间内用户
    */
   async DeleteRoomMember(
@@ -254,6 +342,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationDataResponse) => void
   ): Promise<DescribeApplicationDataResponse> {
     return this.request("DescribeApplicationData", req, cb)
+  }
+
+  /**
+   * 查询AI对话任务状态。
+   */
+  async DescribeAIConversation(
+    req: DescribeAIConversationRequest,
+    cb?: (error: string, rep: DescribeAIConversationResponse) => void
+  ): Promise<DescribeAIConversationResponse> {
+    return this.request("DescribeAIConversation", req, cb)
   }
 
   /**
@@ -452,6 +550,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询先前注册的声纹信息
+   */
+  async DescribeVoicePrint(
+    req: DescribeVoicePrintRequest,
+    cb?: (error: string, rep: DescribeVoicePrintResponse) => void
+  ): Promise<DescribeVoicePrintResponse> {
+    return this.request("DescribeVoicePrint", req, cb)
+  }
+
+  /**
    * 本接口(CreateApp)用于创建一个GME应用。
    */
   async CreateApp(
@@ -522,6 +630,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCustomizationResponse) => void
   ): Promise<DeleteCustomizationResponse> {
     return this.request("DeleteCustomization", req, cb)
+  }
+
+  /**
+   * 提供服务端控制机器人的功能
+   */
+  async ControlAIConversation(
+    req: ControlAIConversationRequest,
+    cb?: (error: string, rep: ControlAIConversationResponse) => void
+  ): Promise<ControlAIConversationResponse> {
+    return this.request("ControlAIConversation", req, cb)
   }
 
   /**

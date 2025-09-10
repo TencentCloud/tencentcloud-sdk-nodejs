@@ -181,6 +181,7 @@ import {
   ConfigurationItem,
   InquiryPriceCreateInstanceRequest,
   DescribeSLInstanceResponse,
+  TagInfo,
   ModifySLInstanceResponse,
   ModifyGlobalConfigRequest,
   LoadMetricsCondition,

@@ -10381,8 +10381,7 @@ export interface ModifyCasterRequest {
    */
   CasterName?: string
   /**
-   * 导播台的描述
-最大允许长度256
+   * 导播台的描述，最大允许长度256
    */
   Description?: string
   /**

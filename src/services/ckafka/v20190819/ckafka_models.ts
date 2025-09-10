@@ -56,7 +56,7 @@ export interface PartitionOffset {
  */
 export interface DescribeACLRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -100,11 +100,11 @@ export interface DescribeTopicSyncReplicaResponse {
  */
 export interface FetchMessageByOffsetRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题名，可通过DescribeTopic接口获取。
+   * 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取
    */
   Topic: string
   /**
@@ -377,7 +377,7 @@ export interface DtsParam {
  */
 export interface CancelAuthorizationTokenRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -527,7 +527,7 @@ export interface Region {
  */
 export interface CreateAclRuleRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -621,7 +621,7 @@ export interface DescribeTaskStatusRequest {
  */
 export interface DescribeAclRuleRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -890,7 +890,7 @@ export interface FetchMessageListByOffsetResponse {
  */
 export interface DeleteRouteTriggerTimeRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -904,17 +904,17 @@ export interface DeleteRouteTriggerTimeRequest {
  */
 export interface CreatePostPaidInstanceRequest {
   /**
-   * 私有网络Id  创建的实例默认接入点所在的 vpc 对应 vpcId
+   * 私有网络Id,可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取
    */
   VpcId: string
   /**
-   * ckafka集群实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * 子网Id,可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取
+   */
+  SubnetId: string
+  /**
+   * ckafka集群实例名称，是一个长度不超过128的任意字符。
    */
   InstanceName?: string
-  /**
-   * 子网id。创建实例默认接入点所在的子网对应的子网 id
-   */
-  SubnetId?: string
   /**
    * 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。
    */
@@ -928,7 +928,7 @@ export interface CreatePostPaidInstanceRequest {
    */
   ClusterId?: number
   /**
-   * 实例版本。目前支持 "0.10.2","1.1.1","2.4.1","2.4.2","2.8.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。
+   * 实例版本。目前支持当前支持"2.4.1", "2.4.2","2.8.1", "3.2.3"，默认取值"2.4.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。
    */
   KafkaVersion?: string
   /**
@@ -940,23 +940,23 @@ export interface CreatePostPaidInstanceRequest {
    */
   DiskType?: string
   /**
-   * 实例内网峰值带宽。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格。
+   * 实例内网峰值带宽，默认值为40。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格，可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/11745
    */
   BandWidth?: number
   /**
-   * 实例硬盘大小，需要满足当前实例的计费规格
+   * 实例硬盘大小，默认取值为500，步长设置为100。需要满足当前实例的计费规格，可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/122562
    */
   DiskSize?: number
   /**
-   * 实例最大分区数量，需要满足当前实例的计费规格
+   * 实例最大分区数量，需要满足当前实例的计费规格。默认值为800，步长为100。可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/122563
    */
   Partition?: number
   /**
-   * 实例最大 topic 数量，需要满足当前实例的计费规格
+   * 实例最大 topic 数量，需要满足当前实例的计费规格。默认值为800，步长设置为100。
    */
   TopicNum?: number
   /**
-   * 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在子网的可用区 id
+   * 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在子网的可用区 id。ZoneId、ZoneIds不能同时为空，可通过[DescribeCkafkaZone](https://cloud.tencent.com/document/product/597/55246)接口获取。
    */
   ZoneId?: number
   /**
@@ -964,7 +964,7 @@ export interface CreatePostPaidInstanceRequest {
    */
   MultiZoneFlag?: boolean
   /**
-   * 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中
+   * 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中。ZoneId、ZoneIds不能同时为空，可通过[DescribeCkafkaZone](https://cloud.tencent.com/document/product/597/55246)接口获取。
    */
   ZoneIds?: Array<number | bigint>
   /**
@@ -1008,7 +1008,7 @@ export interface ModifyInstanceAttributesConfig {
  */
 export interface AuthorizeTokenRequest {
   /**
-   * ckafka集群实例Id, 可通过DescribeInstances接口获取
+   * ckafka集群实例Id, 可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -1607,7 +1607,7 @@ export interface PrometheusResult {
  */
 export interface ModifyRoutineMaintenanceTaskRequest {
   /**
-   * ckafka集群实例id,可通过DescribeInstances接口获取
+   * ckafka集群实例id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -2250,7 +2250,7 @@ export interface BatchCreateAclResponse {
  */
 export interface DeleteRouteRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -2403,7 +2403,7 @@ export interface SplitParam {
  */
 export interface DescribeTopicDetailRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -2566,7 +2566,7 @@ export interface DescribeDatahubTopicResp {
    */
   PartitionNum?: number
   /**
-   * 过期时间
+   * 过期时间，单位ms
    */
   RetentionMs?: number
   /**
@@ -2774,7 +2774,7 @@ export interface SecurityGroupRouteResp {
  */
 export interface DeleteAclRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -3355,7 +3355,7 @@ export interface DeleteUserResponse {
  */
 export interface CreateAclRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -3687,7 +3687,7 @@ export interface CtsdbConnectParam {
  */
 export interface ModifyInstanceAttributesRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -3868,7 +3868,7 @@ export interface DescribeGroupRequest {
  */
 export interface InstanceScalingDownRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -4014,7 +4014,7 @@ export interface JsonPathReplaceParam {
  */
 export interface PrometheusDTO {
   /**
-   * export类型（jmx_export\node_export）
+   * export类型（JmxExport\NodeExport）
    */
   Type?: string
   /**
@@ -4044,7 +4044,7 @@ export interface PrometheusDTO {
  */
 export interface CreateConsumerRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -4114,7 +4114,7 @@ export interface MqttConnectParam {
  */
 export interface FetchDatahubMessageByOffsetRequest {
   /**
-   * 弹性topic名称，可通过DescribeDatahubTopics接口获取。
+   * 弹性topic名称，可通过[DescribeDatahubTopics](https://cloud.tencent.com/document/product/597/86863)接口获取
    */
   Name: string
   /**
@@ -4314,7 +4314,7 @@ export interface DatahubTopicDTO {
    */
   PartitionNum?: number
   /**
-   * 过期时间
+   * 过期时间，单位ms
    */
   RetentionMs?: number
   /**
@@ -4332,7 +4332,7 @@ export interface DatahubTopicDTO {
  */
 export interface ModifyInstancePreRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -4462,11 +4462,11 @@ export interface BatchModifyTopicInfo {
    */
   RetentionMs?: number
   /**
-   * topic维度的消息保留大小，范围1 MB到1024 GB
+   * topic维度的消息保留大小，单位为Byte，范围1 GB到1024 GB。
    */
   RetentionBytes?: number
   /**
-   * Segment分片滚动的时长（毫秒），范围1 到90 天
+   * Segment分片滚动的时长（毫秒），范围1 天到90 天
    */
   SegmentMs?: number
   /**
@@ -4598,11 +4598,11 @@ export interface KVParam {
  */
 export interface BatchModifyTopicAttributesRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题属性列表 (同一个批次最多支持10个)
+   * 主题属性列表 (同一个批次最多支持10个)，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取
    */
   Topic: Array<BatchModifyTopicInfo>
 }
@@ -4702,7 +4702,7 @@ export interface DescribeDatahubTaskRes {
  */
 export interface DescribePrometheusRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
 }
@@ -4897,11 +4897,11 @@ export interface DropCls {
  */
 export interface DeleteUserRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取。
    */
   InstanceId: string
   /**
-   * 用户名称，可通过DescribeUser接口获取。
+   * 用户名称，可通过[DescribeUser](https://cloud.tencent.com/document/product/597/40855)接口获取。
    */
   Name: string
 }
@@ -4933,11 +4933,11 @@ export interface BatchModifyTopicResultDTO {
  */
 export interface DescribeTopicAttributesRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题名称，可通过DescribeTopic接口获取。
+   * 主题名称，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取
    */
   TopicName: string
 }
@@ -5375,7 +5375,7 @@ export interface DescribeTopicSubscribeGroupResponse {
  */
 export interface DeleteAclRuleRequest {
   /**
-   * 实例id信息，可通过DescribeInstances接口获取。
+   * 实例id信息，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -5473,7 +5473,7 @@ export interface ModifyConnectResourceRequest {
  */
 export interface CreateTokenRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -5513,7 +5513,7 @@ export interface TdwParam {
  */
 export interface DescribeCvmInfoRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
 }
@@ -5589,7 +5589,7 @@ export interface BatchAnalyseParam {
  */
 export interface DeleteInstancePostRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
 }
@@ -5599,11 +5599,11 @@ export interface DeleteInstancePostRequest {
  */
 export interface DescribeTopicProduceConnectionRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题名，可通过DescribeTopic接口获取。
+   * 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取。
    */
   TopicName: string
 }
@@ -5811,11 +5811,11 @@ export interface UserResponse {
  */
 export interface DescribeGroupInfoRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * Kafka 消费分组列表,可通过DescribeConsumerGroup接口获取
+   * Kafka 消费分组列表,可通过[DescribeConsumerGroup](https://cloud.tencent.com/document/product/597/40841)接口获取
    */
   GroupList: Array<string>
 }
@@ -5961,7 +5961,7 @@ export interface ZoneResponse {
    */
   Physical?: string
   /**
-   * 公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写
+   * 公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写   已废弃,无实际意义
    */
   PublicNetwork?: string
   /**
@@ -5972,10 +5972,6 @@ export interface ZoneResponse {
    * 请求Id
    */
   RequestId?: string
-  /**
-   * 版本
-   */
-  Version?: string
   /**
    * 分页offset
    */
@@ -5995,7 +5991,7 @@ export interface ZoneResponse {
  */
 export interface DeleteInstancePreRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
 }
@@ -6150,7 +6146,7 @@ export interface ModifyInstancePreResponse {
  */
 export interface CreateUserRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -6567,11 +6563,11 @@ export interface PostgreSQLParam {
  */
 export interface CreateTopicIpWhiteListRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题名称，可通过DescribeTopic接口获取
+   * 主题名称，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取
    */
   TopicName: string
   /**
@@ -6929,7 +6925,7 @@ export interface ReplaceParam {
  */
 export interface BatchCreateAclRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -6937,11 +6933,11 @@ export interface BatchCreateAclRequest {
    */
   ResourceType: number
   /**
-   * 资源列表数组，可通过DescribeTopic接口获取。
+   * 资源列表数组，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取。
    */
   ResourceNames: Array<string>
   /**
-   * 设置的ACL规则列表，可通过DescribeAclRule接口获取。
+   * 设置的ACL规则列表，可通过[DescribeAclRule](https://cloud.tencent.com/document/product/597/89217)接口获取。
    */
   RuleList: Array<AclRuleInfo>
 }
@@ -6977,11 +6973,11 @@ export interface DescribeConnectResourcesRequest {
  */
 export interface CreatePartitionRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题名称，可通过DescribeTopic接口获取。
+   * 主题名称，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取
    */
   TopicName: string
   /**
@@ -7005,7 +7001,7 @@ export interface InstanceDeleteResponse {
  */
 export interface DescribeInstanceAttributesRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
 }
@@ -7096,7 +7092,7 @@ export interface MySQLConnectParam {
  */
 export interface CreateRouteRequest {
   /**
-   * ckafka集群实例id,可通过DescribeInstances接口获取
+   * ckafka集群实例id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -7128,13 +7124,17 @@ vipType=1,支持1,3
    */
   CallerAppid?: number
   /**
-   * 公网带宽,公网路由必传,且必选时3的倍数,无默认值
+   * 公网带宽,公网路由必传,且是3的倍数,无默认值
    */
   PublicNetwork?: number
   /**
    * vip地址
    */
   Ip?: string
+  /**
+   * 备注信息
+   */
+  Note?: string
 }
 
 /**
@@ -7539,7 +7539,7 @@ export interface DescribeDatahubTasksRequest {
  */
 export interface DescribeTopicFlowRankingRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -7764,7 +7764,7 @@ export interface ClusterInfo {
  */
 export interface DeleteGroupRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取。
    */
   InstanceId: string
   /**
@@ -8191,11 +8191,11 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
  */
 export interface ModifyPasswordRequest {
   /**
-   * 实例Id，可通过DescribeInstances接口获取。
+   * 实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 用户名称，可通过DescribeUser接口获取。
+   * 用户名称，可通过[DescribeUser](https://cloud.tencent.com/document/product/597/40855)接口获取。
    */
   Name: string
   /**
@@ -8237,7 +8237,7 @@ export interface ModifyTopicAttributesResponse {
  */
 export interface DescribeConsumerGroupRequest {
   /**
-   * ckafka集群实例Id,通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -8635,11 +8635,11 @@ export interface InquiryPrice {
  */
 export interface ModifyGroupOffsetsRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 消费分组名称,可通过DescribeConsumerGroup接口获取
+   * 消费分组名称,可通过[DescribeConsumerGroup](https://cloud.tencent.com/document/product/597/40841)接口获取
    */
   Group: string
   /**
@@ -8720,6 +8720,11 @@ export interface Route {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Note?: string
 }
 
 /**
@@ -8749,7 +8754,7 @@ export interface AclRuleInfo {
  */
 export interface RenewCkafkaInstanceRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
@@ -8821,11 +8826,11 @@ export interface SecondaryAnalyseParam {
  */
 export interface DeleteTopicIpWhiteListRequest {
   /**
-   * ckafka集群实例Id，可通过DescribeInstances接口获取。
+   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 主题名，可通过DescribeTopic接口获取。
+   * 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取。
    */
   TopicName: string
   /**
@@ -8936,15 +8941,16 @@ export interface ModifyDatahubTaskRequest {
  */
 export interface CreatePrometheusRequest {
   /**
-   * ckafka集群实例Id,可通过DescribeInstances接口获取
+   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
    */
   InstanceId: string
   /**
-   * 私有网络Id
+   * 私有网络Id,可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取
+
    */
   VpcId: string
   /**
-   * 子网Id
+   * 子网Id,可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取
    */
   SubnetId: string
 }
