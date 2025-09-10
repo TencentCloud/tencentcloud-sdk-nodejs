@@ -1088,6 +1088,26 @@ export interface DescribeTRTCMarketScaleDataResponse {
 }
 
 /**
+ * 翻译相关配置
+ */
+export interface TranslationConfig {
+  /**
+   * 翻译的目标语言，目标语种列表（ISO 639-1）
+
+   */
+  TargetLanguages: Array<string>
+  /**
+   *  1： 仅文字翻译，  2： 语音同传
+
+   */
+  Mode?: number
+  /**
+   * 语音同传配置，开启同传时，需要传递
+   */
+  TTSConfig?: TTSConfig
+}
+
+/**
  * Mcu转推录制，腾讯云点播相关参数。
  */
 export interface McuTencentVod {
@@ -3541,6 +3561,10 @@ TranscriptionMode为0时，需要保证一个房间内只发起一个任务，�
    * 语音识别配置。
    */
   RecognizeConfig?: RecognizeConfig
+  /**
+   * 翻译相关配置
+   */
+  TranslationConfig?: TranslationConfig
 }
 
 /**
@@ -3654,6 +3678,10 @@ export interface RecognizeConfig {
    * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
    */
   VadSilenceTime?: number
+  /**
+   * vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。
+   */
+  VadLevel?: number
 }
 
 /**
@@ -5018,6 +5046,10 @@ https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.9
    * 声纹配置
    */
   VoicePrint?: VoicePrint
+  /**
+   * 语义断句检测
+   */
+  TurnDetection?: TurnDetection
 }
 
 /**
@@ -5124,6 +5156,16 @@ export interface OneSdkAppIdTranscodeTimeUsagesInfo {
    * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
    */
   SdkAppId?: string
+}
+
+/**
+ * TTS相关配置
+ */
+export interface TTSConfig {
+  /**
+   * 音色ID
+   */
+  VoiceId: string
 }
 
 /**

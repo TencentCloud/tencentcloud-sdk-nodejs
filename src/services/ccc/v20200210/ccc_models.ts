@@ -401,6 +401,20 @@ export interface DisableCCCPhoneNumberResponse {
 }
 
 /**
+ * 筛选条件
+ */
+export interface Filter {
+  /**
+   * 筛选字段名
+   */
+  Name: string
+  /**
+   * 筛选条件值
+   */
+  Values: Array<string>
+}
+
+/**
  * DescribeProtectedTelCdr返回参数结构体
  */
 export interface DescribeProtectedTelCdrResponse {
@@ -849,6 +863,24 @@ export interface PausePredictiveDialingCampaignRequest {
 }
 
 /**
+ * 呼转配置
+ */
+export interface ForwardingConfig {
+  /**
+   * 是否启用
+   */
+  Enabled?: boolean
+  /**
+   * 1 无条件呼转 2 有条件呼转
+   */
+  Condition?: number
+  /**
+   * 呼转目标
+   */
+  Target?: ForwardingTarget
+}
+
+/**
  * DescribeAILatency请求参数结构体
  */
 export interface DescribeAILatencyRequest {
@@ -1072,6 +1104,108 @@ export interface DescribeChatMessagesResponse {
    * 消息列表
    */
   Messages?: Array<MessageBody>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSessionDetail返回参数结构体
+ */
+export interface DescribeSessionDetailResponse {
+  /**
+   * 主叫号码
+   */
+  Caller?: string
+  /**
+   * 被叫号码
+   */
+  Callee?: string
+  /**
+   * 通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫
+   */
+  CallType?: number
+  /**
+   * 开始时间戳，Unix 秒级时间戳
+   */
+  StartTimeStamp?: number
+  /**
+   * 振铃时间戳，UNIX 秒级时间戳
+   */
+  RingTimestamp?: number
+  /**
+   * 接听时间戳，UNIX 秒级时间戳
+   */
+  AcceptTimestamp?: number
+  /**
+   * 结束时间戳，UNIX 秒级时间戳
+   */
+  EndedTimestamp?: number
+  /**
+   * 进入排队时间，Unix 秒级时间戳
+   */
+  QueuedTimestamp?: number
+  /**
+   * 座席账号
+   */
+  StaffUserId?: string
+  /**
+   * 参考 DescribeTelCdr 接口 EndStatus 字段
+   */
+  EndStatus?: number
+  /**
+   * 排队技能组 ID
+   */
+  QueuedSkillGroupId?: number
+  /**
+   * 排队技能组名称
+   */
+  QueuedSkillGroupName?: string
+  /**
+   * 录音链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接
+   */
+  RecordURL?: string
+  /**
+   * 录音转存第三方 COS 链接
+   */
+  CustomRecordURL?: string
+  /**
+   * 录音文本信息链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接
+   */
+  AsrURL?: string
+  /**
+   * 语音留言录音链接
+   */
+  VoicemailRecordURL?: Array<string>
+  /**
+   * 语音留言录音文本信息链接，需在控制台购买离线语音识别套餐包并开启离线语音识别开关
+   */
+  VoicemailAsrURL?: Array<string>
+  /**
+   * IVR 按键信息
+   */
+  IVRKeyPressed?: Array<IVRKeyPressedElement>
+  /**
+   * 满意度按键信息
+   */
+  PostIVRKeyPressed?: Array<IVRKeyPressedElement>
+  /**
+   * 挂机方 seat 座席 user 用户 system 系统
+   */
+  HungUpSide?: string
+  /**
+   * 客户自定义数据（User-to-User Interface）
+   */
+  UUI?: string
+  /**
+   * 通话中的事件列表
+   */
+  Events?: Array<SessionEvent>
+  /**
+   * 服务参与者列表
+   */
+  ServeParticipants?: Array<ServeParticipant>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2054,6 +2188,24 @@ export interface DescribeIMCdrsRequest {
 }
 
 /**
+ * 通话事件
+ */
+export interface SessionEvent {
+  /**
+   * 事件时间戳，Unix 秒级时间戳
+   */
+  Timestamp?: number
+  /**
+   * 事件类型，目前支持 StaffHold StaffUnhold StaffMute StaffUnmute
+   */
+  EventType?: string
+  /**
+   * 座席相关事件详情
+   */
+  StaffEventDetail?: EventStaffDetail
+}
+
+/**
  * DescribeSkillGroupInfoList请求参数结构体
  */
 export interface DescribeSkillGroupInfoListRequest {
@@ -2606,6 +2758,24 @@ export interface SkillGroupInfoItem {
 }
 
 /**
+ * UploadIvrAudio返回参数结构体
+ */
+export interface UploadIvrAudioResponse {
+  /**
+   * 上传失败的文件列表
+   */
+  FailedFileList?: Array<UploadIvrAudioFailedInfo>
+  /**
+   * 上传成功文件列表
+   */
+  SuccessFileList?: Array<AudioFileInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAIAgentCall请求参数结构体
  */
 export interface CreateAIAgentCallRequest {
@@ -2695,21 +2865,17 @@ export interface TimeRange {
 }
 
 /**
- * 呼转配置
+ * DescribeStaffStatusHistory返回参数结构体
  */
-export interface ForwardingConfig {
+export interface DescribeStaffStatusHistoryResponse {
   /**
-   * 是否启用
+   * 座席状态数据
    */
-  Enabled?: boolean
+  Data?: Array<StaffStatus>
   /**
-   * 1 无条件呼转 2 有条件呼转
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Condition?: number
-  /**
-   * 呼转目标
-   */
-  Target?: ForwardingTarget
+  RequestId?: string
 }
 
 /**
@@ -3168,21 +3334,25 @@ export interface UploadIvrAudioFailedInfo {
 }
 
 /**
- * UploadIvrAudio返回参数结构体
+ * DescribeSessionDetail请求参数结构体
  */
-export interface UploadIvrAudioResponse {
+export interface DescribeSessionDetailRequest {
   /**
-   * 上传失败的文件列表
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  FailedFileList?: Array<UploadIvrAudioFailedInfo>
+  SdkAppId: number
   /**
-   * 上传成功文件列表
+   * 通话的 session id
    */
-  SuccessFileList?: Array<AudioFileInfo>
+  SessionId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
    */
-  RequestId?: string
+  StartTimestamp: number
+  /**
+   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   */
+  EndTimestamp: number
 }
 
 /**
@@ -3608,17 +3778,17 @@ export interface AITransferItem {
 }
 
 /**
- * 筛选条件
+ * 座席信息
  */
-export interface Filter {
+export interface EventStaffElement {
   /**
-   * 筛选字段名
+   * 座席邮箱账号
    */
-  Name: string
+  Mail?: string
   /**
-   * 筛选条件值
+   * 座席工号
    */
-  Values: Array<string>
+  StaffNumber?: string
 }
 
 /**
@@ -4587,6 +4757,36 @@ export interface StaffStatusExtra {
 }
 
 /**
+ * DescribeStaffStatusHistory请求参数结构体
+ */
+export interface DescribeStaffStatusHistoryRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 座席账号
+   */
+  StaffUserId: string
+  /**
+   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   */
+  StartTimestamp: number
+  /**
+   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于 7 天。
+   */
+  EndTimestamp: number
+  /**
+   * 分页检索时使用的游标
+   */
+  Cursor?: string
+  /**
+   * 分页尺寸
+   */
+  PageSize?: number
+}
+
+/**
  * CreateStaff请求参数结构体
  */
 export interface CreateStaffRequest {
@@ -4667,6 +4867,16 @@ export interface DescribePSTNActiveSessionListResponse {
 }
 
 /**
+ * 座席事件相关详情
+ */
+export interface EventStaffDetail {
+  /**
+   * 座席数据
+   */
+  Staffs?: Array<EventStaffElement>
+}
+
+/**
  * AI时延统计
  */
 export interface AILatencyStatistics {
@@ -4686,6 +4896,28 @@ export interface AILatencyStatistics {
    * 端到端时延统计
    */
   ETELatency?: AILatencyStatisticsInfo
+}
+
+/**
+ * 座席状态
+ */
+export interface StaffStatus {
+  /**
+   * 查询使用的游标，分页场景使用
+   */
+  Cursor?: string
+  /**
+   * 状态时间戳，Unix 秒级时间戳
+   */
+  Timestamp?: number
+  /**
+   * 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
+   */
+  Status?: string
+  /**
+   * 状态关联的会话 Id
+   */
+  SessionId?: string
 }
 
 /**

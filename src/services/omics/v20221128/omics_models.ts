@@ -30,6 +30,20 @@ export interface DeleteVolumeDataRequest {
 }
 
 /**
+ * 任务批次超时通知。
+ */
+export interface RunGroupTimeoutNotification {
+  /**
+   * 任务批次超时时间，单位分钟。
+   */
+  TimeoutMinutes?: number
+  /**
+   * 通知类型。
+   */
+  NotificationType?: NotificationType
+}
+
+/**
  * RetryRuns返回参数结构体
  */
 export interface RetryRunsResponse {
@@ -206,6 +220,22 @@ export interface RunApplicationRequest {
    * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
    */
   VolumeIds?: Array<string>
+  /**
+   * 是否开启结果通知。
+   */
+  ResultNotification?: boolean
+  /**
+   * 是否开启超时通知。
+   */
+  TimeoutNotification?: boolean
+  /**
+   * 任务超时通知时间（单位：分钟），支持5到2880分钟。
+   */
+  TimeoutNotificationMinutes?: number
+  /**
+   * 接受通知邮件地址列表。
+   */
+  EmailForNotification?: Array<string>
 }
 
 /**
@@ -252,6 +282,38 @@ export interface DeleteEnvironmentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 运行应用选项。
+ */
+export interface RunOption {
+  /**
+   * 运行失败模式，取值范围：
+- ContinueWhilePossible
+- NoNewCalls
+   */
+  FailureMode: string
+  /**
+   * 是否使用Call-Caching功能。
+   */
+  UseCallCache: boolean
+  /**
+   * 是否使用错误挂起功能。
+   */
+  UseErrorOnHold: boolean
+  /**
+   * 输出归档COS路径。
+   */
+  FinalWorkflowOutputsDir?: string
+  /**
+   * 是否使用相对目录归档输出。
+   */
+  UseRelativeOutputPaths?: boolean
+  /**
+   * 是否添加运行信息到输出目录中
+   */
+  AddRunInfoToOutputDir?: boolean
 }
 
 /**
@@ -568,6 +630,24 @@ export interface SecurityGroupOption {
    * 安全组ID。
    */
   SecurityGroupId: string
+}
+
+/**
+ * 通知类型
+ */
+export interface NotificationType {
+  /**
+   * 腾讯健康组学平台站点信息。
+   */
+  StationMessage?: boolean
+  /**
+   * 邮箱列表。
+   */
+  Email?: Array<string>
+  /**
+   * 当前用户邮箱。
+   */
+  CurrentUserEmail?: boolean
 }
 
 /**
@@ -1084,9 +1164,9 @@ export interface RunGroup {
    */
   ErrorMessage?: string
   /**
-   * 运行结果通知方式。
+   * 任务批次通知。
    */
-  ResultNotify?: string
+  Notification?: RunGroupNotification
   /**
    * 创建时间。
    */
@@ -1103,6 +1183,10 @@ export interface RunGroup {
    * 创建者ID。
    */
   CreatorId?: string
+  /**
+   * 运行结果通知方式。
+   */
+  ResultNotify?: string
 }
 
 /**
@@ -1622,35 +1706,17 @@ export interface DescribeEnvironmentsRequest {
 }
 
 /**
- * 运行应用选项。
+ * 任务批次通知。
  */
-export interface RunOption {
+export interface RunGroupNotification {
   /**
-   * 运行失败模式，取值范围：
-- ContinueWhilePossible
-- NoNewCalls
+   * 结果通知。
    */
-  FailureMode: string
+  ResultNotification?: RunGroupResultNotification
   /**
-   * 是否使用Call-Caching功能。
+   * 超时通知。
    */
-  UseCallCache: boolean
-  /**
-   * 是否使用错误挂起功能。
-   */
-  UseErrorOnHold: boolean
-  /**
-   * 输出归档COS路径。
-   */
-  FinalWorkflowOutputsDir?: string
-  /**
-   * 是否使用相对目录归档输出。
-   */
-  UseRelativeOutputPaths?: boolean
-  /**
-   * 是否添加运行信息到输出目录中
-   */
-  AddRunInfoToOutputDir?: boolean
+  TimeoutNotification?: RunGroupTimeoutNotification
 }
 
 /**
@@ -1683,6 +1749,16 @@ export interface NFOption {
    * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
    */
   LaunchDir?: string
+}
+
+/**
+ * 任务批次结果通知
+ */
+export interface RunGroupResultNotification {
+  /**
+   * 通知类型。
+   */
+  NotificationType?: NotificationType
 }
 
 /**

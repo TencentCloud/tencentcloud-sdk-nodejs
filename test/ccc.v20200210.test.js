@@ -28,6 +28,16 @@ it("ccc.v20200210.TransferToManual", async function () {
     }
 })
 
+it("ccc.v20200210.ModifyCompanyApply", async function () {
+    try {
+       const data = await client.ModifyCompanyApply({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.ModifyStaff", async function () {
     try {
        const data = await client.ModifyStaff({})
@@ -108,9 +118,9 @@ it("ccc.v20200210.DeleteCCCSkillGroup", async function () {
     }
 })
 
-it("ccc.v20200210.StopAutoCalloutTask", async function () {
+it("ccc.v20200210.ModifyOwnNumberApply", async function () {
     try {
-       const data = await client.StopAutoCalloutTask({})
+       const data = await client.ModifyOwnNumberApply({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +141,16 @@ it("ccc.v20200210.DescribePredictiveDialingCampaign", async function () {
 it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     try {
        const data = await client.DescribePSTNActiveSessionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.StopAutoCalloutTask", async function () {
+    try {
+       const data = await client.StopAutoCalloutTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,9 @@ it("ccc.v20200210.BindNumberCallOutSkillGroup", async function () {
     }
 })
 
-it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
+it("ccc.v20200210.DescribeStaffStatusHistory", async function () {
     try {
-       const data = await client.DisableCCCPhoneNumber({})
+       const data = await client.DescribeStaffStatusHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +238,9 @@ it("ccc.v20200210.DeleteStaff", async function () {
     }
 })
 
-it("ccc.v20200210.ModifyCompanyApply", async function () {
+it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
     try {
-       const data = await client.ModifyCompanyApply({})
+       const data = await client.DisableCCCPhoneNumber({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +408,9 @@ it("ccc.v20200210.UnbindNumberCallOutSkillGroup", async function () {
     }
 })
 
-it("ccc.v20200210.ModifyOwnNumberApply", async function () {
+it("ccc.v20200210.DescribeSessionDetail", async function () {
     try {
-       const data = await client.ModifyOwnNumberApply({})
+       const data = await client.DescribeSessionDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

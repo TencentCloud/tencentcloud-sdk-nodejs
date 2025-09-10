@@ -508,6 +508,16 @@ it("gs.v20191118.StopPublishStream", async function () {
     }
 })
 
+it("gs.v20191118.DisconnectAndroidInstance", async function () {
+    try {
+       const data = await client.DisconnectAndroidInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.DescribeAndroidInstanceApps", async function () {
     try {
        const data = await client.DescribeAndroidInstanceApps({})

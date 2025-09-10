@@ -26,6 +26,7 @@ import {
   Asset,
   DescribeDataMaskStrategiesResponse,
   PythonSparkImage,
+  MixedTablePartitions,
   ModifyGovernEventRuleResponse,
   DescribeNotebookSessionsRequest,
   SmartOptimizerLifecyclePolicy,
@@ -64,6 +65,7 @@ import {
   CreateDMSTableResponse,
   ViewResponseInfo,
   DescribeSparkSessionBatchSQLRequest,
+  LocationInfo,
   UpdateEngineResourceGroupNetworkConfigInfoRequest,
   SmartOptimizerPolicy,
   UnboundDatasourceHouseResponse,
@@ -357,6 +359,7 @@ import {
   DataEngineImageVersion,
   MysqlInfo,
   GenerateCreateMangedTableSqlRequest,
+  Sort,
   StatementInformation,
   OtherDatasourceConnection,
   TaskResultInfo,
@@ -455,6 +458,7 @@ import {
   SparkJobInfo,
   DescribeScriptsRequest,
   DescribeSparkAppJobResponse,
+  HiveTablePartition,
   UDFPolicyInfo,
   DescribeNotebookSessionStatementResponse,
   UpdateUDFPolicyRequest,
@@ -514,6 +518,7 @@ import {
   SwitchDataEngineImageRequest,
   DescribeDMSTableRequest,
   ModifyGovernEventRuleRequest,
+  IcebergTablePartition,
   DatabaseResponseInfo,
   DMSColumn,
   DescribeResultDownloadRequest,
@@ -1632,7 +1637,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeTablePartitions）用于查询数据表分区信息
    */
   async DescribeTablePartitions(
-    req?: DescribeTablePartitionsRequest,
+    req: DescribeTablePartitionsRequest,
     cb?: (error: string, rep: DescribeTablePartitionsResponse) => void
   ): Promise<DescribeTablePartitionsResponse> {
     return this.request("DescribeTablePartitions", req, cb)

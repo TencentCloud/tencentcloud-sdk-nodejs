@@ -6722,7 +6722,7 @@ export interface GeneralAccurateOCRRequest {
    */
   IsWords?: boolean
   /**
-   * 是否开启原图切图检测功能，开启后可提升“整图面积大，但单字符占比面积小”（例如：试卷）场景下的识别效果，默认关
+   * 是否开启原图切图检测功能，开启后可提升“整图面积大，但单字符占比面积小”（例如：试卷）场景下的识别效果，默认关，注：仅ConfigID配置为OCR时支持。
    */
   EnableDetectSplit?: boolean
   /**
@@ -6738,7 +6738,7 @@ export interface GeneralAccurateOCRRequest {
    */
   EnableDetectText?: boolean
   /**
-   * 配置ID支持：  OCR -- 通用场景  MulOCR--多语种场景
+   * 配置ID支持：  OCR -- 通用场景  MulOCR--多语种场景，注：仅ConfigID配置为OCR时支持
    */
   ConfigID?: string
 }

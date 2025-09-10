@@ -604,7 +604,7 @@ export interface CynosdbInstanceGrp {
   /**
    * biz_net_service表id
    */
-  NetServiceId: number
+  NetServiceId?: number
 }
 
 /**

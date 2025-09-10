@@ -1064,6 +1064,10 @@ export interface AttrLabelRefer {
  */
 export interface DescribeWorkflowRunRequest {
   /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
    * 工作流运行实例ID
    */
   WorkflowRunId?: string
@@ -2423,6 +2427,10 @@ export interface RenameDocResponse {
  */
 export interface DescribeNodeRunRequest {
   /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
    * 节点运行实例ID
    */
   NodeRunId?: string
@@ -3387,6 +3395,10 @@ export interface ListReleaseDocPreviewResponse {
  */
 export interface StopWorkflowRunRequest {
   /**
+   * 应用ID
+   */
+  AppBizId?: string
+  /**
    * 工作流运行实例ID
    */
   WorkflowRunId?: string
@@ -4313,6 +4325,10 @@ export interface KnowledgeBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessingFlags?: Array<number | bigint>
+  /**
+   * 知识库拥有者的名字
+   */
+  OwnerStaffName?: string
 }
 
 /**
@@ -5499,6 +5515,7 @@ export interface AgentPluginInfo {
   KnowledgeQa?: AgentKnowledgeQAPlugin
   /**
    * 是否使用一键授权
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableRoleAuth?: boolean
   /**
@@ -8789,7 +8806,7 @@ export interface ListReleaseItem {
    */
   UpdateTime?: string
   /**
-   * 发布状态
+   * 发布状态，1：待发布，2：发布中，3：发布成功，5：发布失败
    */
   Status?: number
   /**
@@ -9501,7 +9518,7 @@ export interface IgnoreUnsatisfiedReplyResponse {
  */
 export interface ListReleaseRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**

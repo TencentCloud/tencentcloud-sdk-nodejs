@@ -111,6 +111,7 @@ import {
   DatasetInfo,
   DescribeModelAccelerateTaskResponse,
   TagFilter,
+  PodSSHInfo,
   DescribeModelServiceGroupsRequest,
   ImageInfo,
   Tag,

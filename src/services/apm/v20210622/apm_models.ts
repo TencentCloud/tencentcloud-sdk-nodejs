@@ -893,6 +893,10 @@ export interface ApmField {
    * 指标中文名
    */
   NameCN?: string
+  /**
+   * 指标英文名
+   */
+  NameEN?: string
 }
 
 /**

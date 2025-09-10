@@ -447,7 +447,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyInstanceAccount）用于修改实例子账号。
+   * 本接口（ModifyInstanceAccount）用于修改实例账号。
    */
   async ModifyInstanceAccount(
     req: ModifyInstanceAccountRequest,

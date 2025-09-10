@@ -967,6 +967,7 @@ export interface ScaleUpInstanceResponse {
 export interface ModifyDBInstanceSecurityGroupsRequest {
   /**
    * 要修改的安全组ID列表，一个或者多个安全组 ID 组成的数组。
+注意：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。
    */
   SecurityGroupIds: Array<string>
   /**

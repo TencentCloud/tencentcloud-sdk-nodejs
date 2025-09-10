@@ -49,6 +49,7 @@ import {
   BackUpAndroidInstanceToStorageRequest,
   ModifyAndroidInstancesPropertiesRequest,
   SyncAndroidInstanceImage,
+  DisconnectAndroidInstanceRequest,
   AndroidInstanceLabel,
   DeleteAndroidInstanceImagesResponse,
   StartAndroidInstancesRequest,
@@ -63,6 +64,7 @@ import {
   UploadFileToAndroidInstancesRequest,
   CleanAndroidInstancesAppDataRequest,
   DisableAndroidInstancesAppRequest,
+  DescribeAndroidInstancesAppBlacklistRequest,
   EnableAndroidInstancesAppResponse,
   ConnectAndroidInstanceRequest,
   CopyAndroidInstanceRequest,
@@ -78,7 +80,7 @@ import {
   StartAndroidInstancesAppRequest,
   ModifyAndroidInstancesResolutionResponse,
   DeleteAndroidAppVersionResponse,
-  CreateAndroidInstancesRequest,
+  DistributePhotoToAndroidInstancesResponse,
   AndroidInstanceError,
   ModifyAndroidInstancesUserIdRequest,
   InstallAndroidInstancesAppWithURLRequest,
@@ -138,7 +140,7 @@ import {
   DescribeAndroidInstancesByAppsRequest,
   TrylockWorkerResponse,
   S3Options,
-  DescribeAndroidInstancesAppBlacklistRequest,
+  DisconnectAndroidInstanceResponse,
   CreateAndroidInstanceWebShellRequest,
   CreateAndroidInstancesAccessTokenResponse,
   ModifyAndroidInstancesLabelsResponse,
@@ -169,7 +171,7 @@ import {
   CreateCosCredentialResponse,
   UploadFileToAndroidInstancesResponse,
   AndroidInstanceAppBlacklist,
-  DistributePhotoToAndroidInstancesResponse,
+  CreateAndroidInstancesRequest,
   CreateAndroidInstanceLabelResponse,
   StartPublishStreamResponse,
   AndroidInstanceImage,
@@ -691,6 +693,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopPublishStreamResponse) => void
   ): Promise<StopPublishStreamResponse> {
     return this.request("StopPublishStream", req, cb)
+  }
+
+  /**
+   * 断开安卓实例
+   */
+  async DisconnectAndroidInstance(
+    req: DisconnectAndroidInstanceRequest,
+    cb?: (error: string, rep: DisconnectAndroidInstanceResponse) => void
+  ): Promise<DisconnectAndroidInstanceResponse> {
+    return this.request("DisconnectAndroidInstance", req, cb)
   }
 
   /**

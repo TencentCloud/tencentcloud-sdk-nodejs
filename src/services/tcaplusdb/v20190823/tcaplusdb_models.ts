@@ -1209,6 +1209,14 @@ export interface ClusterInfo {
    * restproxy状态
    */
   RestProxyStatus?: number
+  /**
+   * 该集群shard总数
+   */
+  ShardTotalNum?: number
+  /**
+   * 已使用的shard总数
+   */
+  ShardUsedNum?: number
 }
 
 /**

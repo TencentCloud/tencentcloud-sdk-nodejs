@@ -529,6 +529,16 @@ export interface SyncAndroidInstanceImage {
 }
 
 /**
+ * DisconnectAndroidInstance请求参数结构体
+ */
+export interface DisconnectAndroidInstanceRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceId: string
+}
+
+/**
  * 安卓实例标签
  */
 export interface AndroidInstanceLabel {
@@ -808,6 +818,16 @@ export interface DisableAndroidInstancesAppRequest {
 }
 
 /**
+ * DescribeAndroidInstancesAppBlacklist请求参数结构体
+ */
+export interface DescribeAndroidInstancesAppBlacklistRequest {
+  /**
+   * 实例 ID 列表，数量上限 100
+   */
+  AndroidInstanceIds: Array<string>
+}
+
+/**
  * EnableAndroidInstancesApp返回参数结构体
  */
 export interface EnableAndroidInstancesAppResponse {
@@ -1034,44 +1054,17 @@ export interface DeleteAndroidAppVersionResponse {
 }
 
 /**
- * CreateAndroidInstances请求参数结构体
+ * DistributePhotoToAndroidInstances返回参数结构体
  */
-export interface CreateAndroidInstancesRequest {
+export interface DistributePhotoToAndroidInstancesResponse {
   /**
-   * 安卓实例可用区。
-ap-guangzhou-3：广州三区
-ap-shenzhen-1：深圳一区
-ap-xian-ec-1：西安一区
-ap-hangzhou-ec-1：杭州一区
+   * 实例任务集合
    */
-  Zone: string
+  TaskSet?: Array<AndroidInstanceTask>
   /**
-   * 安卓实例类型。
-A1：单开
-A2：双开
-A3：三开
-A4：四开
-A5：五开
-A6：六开
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
-  /**
-   * 当 HostSerialNumbers 不为空时，该参数表示每个宿主机要创建的安卓实例数量；
-当 HostSerialNumbers 为空时，该参数表示要创建安卓实例的总数量，最大值为 100。
-   */
-  Number: number
-  /**
-   * 宿主机 ID 列表。可以指定宿主机 ID 进行创建；也可以不指定由系统自动分配宿主机。
-   */
-  HostSerialNumbers?: Array<string>
-  /**
-   * 镜像 ID。如果不填，将使用默认的系统镜像
-   */
-  ImageId?: string
-  /**
-   * 安卓实例标签列表
-   */
-  Labels?: Array<AndroidInstanceLabel>
+  RequestId?: string
 }
 
 /**
@@ -2103,13 +2096,13 @@ export interface S3Options {
 }
 
 /**
- * DescribeAndroidInstancesAppBlacklist请求参数结构体
+ * DisconnectAndroidInstance返回参数结构体
  */
-export interface DescribeAndroidInstancesAppBlacklistRequest {
+export interface DisconnectAndroidInstanceResponse {
   /**
-   * 实例 ID 列表，数量上限 100
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AndroidInstanceIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -2668,17 +2661,44 @@ export interface AndroidInstanceAppBlacklist {
 }
 
 /**
- * DistributePhotoToAndroidInstances返回参数结构体
+ * CreateAndroidInstances请求参数结构体
  */
-export interface DistributePhotoToAndroidInstancesResponse {
+export interface CreateAndroidInstancesRequest {
   /**
-   * 实例任务集合
+   * 安卓实例可用区。
+ap-guangzhou-3：广州三区
+ap-shenzhen-1：深圳一区
+ap-xian-ec-1：西安一区
+ap-hangzhou-ec-1：杭州一区
    */
-  TaskSet?: Array<AndroidInstanceTask>
+  Zone: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 安卓实例类型。
+A1：单开
+A2：双开
+A3：三开
+A4：四开
+A5：五开
+A6：六开
    */
-  RequestId?: string
+  Type: string
+  /**
+   * 当 HostSerialNumbers 不为空时，该参数表示每个宿主机要创建的安卓实例数量；
+当 HostSerialNumbers 为空时，该参数表示要创建安卓实例的总数量，最大值为 100。
+   */
+  Number: number
+  /**
+   * 宿主机 ID 列表。可以指定宿主机 ID 进行创建；也可以不指定由系统自动分配宿主机。
+   */
+  HostSerialNumbers?: Array<string>
+  /**
+   * 镜像 ID。如果不填，将使用默认的系统镜像
+   */
+  ImageId?: string
+  /**
+   * 安卓实例标签列表
+   */
+  Labels?: Array<AndroidInstanceLabel>
 }
 
 /**

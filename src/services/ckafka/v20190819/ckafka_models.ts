@@ -1283,7 +1283,7 @@ export interface FailureParam {
  */
 export interface CreateTopicRequest {
   /**
-   * 实例Id
+   * 实例Id，可通过DescribeInstances接口获取。
    */
   InstanceId: string
   /**
@@ -1311,27 +1311,27 @@ export interface CreateTopicRequest {
    */
   CleanUpPolicy?: string
   /**
-   * 主题备注，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * 主题备注，是一个不超过 64 个字符的字符串，可以用字母和数字为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
   Note?: string
   /**
-   * 默认为1
+   * 最小同步副本数，默认为1
    */
   MinInsyncReplicas?: number
   /**
-   * 是否允许未同步的副本选为leader，false:不允许，true:允许，默认不允许
+   * 是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许
    */
   UncleanLeaderElectionEnable?: number
   /**
-   * 可选参数。消息保留时间，单位ms，当前最小值为60000ms
+   * 可选参数。消息保留时间，单位ms，当前最小值为60000。默认值为7200000ms（2小时），最大值为7776000000 ms（90天）。
    */
   RetentionMs?: number
   /**
-   * Segment分片滚动的时长，单位ms，当前最小为3600000ms
+   * Segment分片滚动的时长，单位ms，最小值为86400000ms（1天）。
    */
   SegmentMs?: number
   /**
-   * 主题消息最大值，单位为 Byte，最小值1024Byte(即1KB)，最大值为12582912Byte（即12MB）
+   * 主题消息最大值，单位为 Byte，最小值1024Bytes(即1KB)，最大值为12582912Bytes（即12MB）
    */
   MaxMessageBytes?: number
   /**
@@ -1343,7 +1343,7 @@ export interface CreateTopicRequest {
    */
   AclRuleName?: string
   /**
-   * 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B
+   * 可选, 保留文件大小. 默认为-1,单位Byte, 当前最小值为1073741824。
    */
   RetentionBytes?: number
   /**
@@ -2403,7 +2403,7 @@ export interface SplitParam {
  */
 export interface DescribeTopicDetailRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id，可通过DescribeInstances接口获取。
    */
   InstanceId: string
   /**
@@ -2415,7 +2415,7 @@ export interface DescribeTopicDetailRequest {
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认 10，最大值20，取值要大于0
+   * 返回数量，不填则默认 20，取值要大于0
    */
   Limit?: number
   /**
@@ -2423,11 +2423,11 @@ export interface DescribeTopicDetailRequest {
    */
   AclRuleName?: string
   /**
-   * 根据特定的属性排序(目前支持PartitionNum/CreateTime)
+   * 根据特定的属性排序(目前支持PartitionNum/CreateTime)，默认值为CreateTime。
    */
   OrderBy?: string
   /**
-   * 0-顺序、1-倒序
+   * 0-顺序、1-倒序，默认值为0。
    */
   OrderType?: number
   /**
@@ -4933,11 +4933,11 @@ export interface BatchModifyTopicResultDTO {
  */
 export interface DescribeTopicAttributesRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id，可通过DescribeInstances接口获取。
    */
   InstanceId: string
   /**
-   * 主题名称
+   * 主题名称，可通过DescribeTopic接口获取。
    */
   TopicName: string
 }
@@ -5599,11 +5599,11 @@ export interface DeleteInstancePostRequest {
  */
 export interface DescribeTopicProduceConnectionRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id，可通过DescribeInstances接口获取。
    */
   InstanceId: string
   /**
-   * 主题名
+   * 主题名，可通过DescribeTopic接口获取。
    */
   TopicName: string
 }
@@ -5811,11 +5811,11 @@ export interface UserResponse {
  */
 export interface DescribeGroupInfoRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id,可通过DescribeInstances接口获取
    */
   InstanceId: string
   /**
-   * Kafka 消费分组列表
+   * Kafka 消费分组列表,可通过DescribeConsumerGroup接口获取
    */
   GroupList: Array<string>
 }
@@ -6172,7 +6172,7 @@ export interface TopicAttributesResponse {
    */
   TopicId?: string
   /**
-   * 创建时间
+   * 创建时间的秒级时间戳
    */
   CreateTime?: number
   /**
@@ -6651,7 +6651,7 @@ export interface ModifyTopicAttributesRequest {
    */
   MaxMessageBytes?: number
   /**
-   * Segment 分片滚动的时长，单位：ms，当前最小为300000ms。
+   * Segment 分片滚动的时长，单位：ms，当前最小值86400000ms。
    */
   SegmentMs?: number
   /**
@@ -6705,7 +6705,7 @@ export interface CreateInstancePreRequest {
    */
   ZoneId: number
   /**
-   * 预付费购买时长，例如 "1m",就是一个月
+   * 预付费购买时长，例如 "1m",就是一个月,取值范围 1m~36m
    */
   Period: string
   /**
@@ -6955,7 +6955,7 @@ export interface DescribeConnectResourcesRequest {
    */
   Type?: string
   /**
-   * 连接源名称的关键字查询
+   * 连接源名称的关键字查询,支持模糊匹配
    */
   SearchWord?: string
   /**
@@ -6963,7 +6963,7 @@ export interface DescribeConnectResourcesRequest {
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * 返回数量，默认为20，最大值为1000 (超过1000,则限制为1000)
    */
   Limit?: number
   /**
@@ -7005,7 +7005,7 @@ export interface InstanceDeleteResponse {
  */
 export interface DescribeInstanceAttributesRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id,可通过DescribeInstances接口获取
    */
   InstanceId: string
 }
@@ -7112,7 +7112,11 @@ export interface CreateRouteRequest {
    */
   SubnetId?: string
   /**
-   * 访问类型：0-plaintext；1-sasl_plaintext；2-ssl；3-sasl_ssl,默认为0
+   * 访问类型：0-plaintext；1-sasl_plaintext；3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512  默认为0
+vipType=3,支持 0,1,3,4,5
+vipType=7,支持0,1,3
+vipType=1,支持1,3
+
    */
   AccessType?: number
   /**
@@ -7501,7 +7505,7 @@ export interface CheckCdcClusterResponse {
  */
 export interface DescribeDatahubTasksRequest {
   /**
-   * 返回数量，默认为20，最大值为100
+   * 返回数量，默认为20，最大值为100 (超过100限制为100)
    */
   Limit?: number
   /**
@@ -7535,7 +7539,7 @@ export interface DescribeDatahubTasksRequest {
  */
 export interface DescribeTopicFlowRankingRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id，可通过DescribeInstances接口获取。
    */
   InstanceId: string
   /**
@@ -8136,7 +8140,7 @@ export interface DescribeDatahubTopicRequest {
  */
 export interface Config {
   /**
-   * 消息保留时间
+   * 消息保留时间，单位ms。
    */
   Retention?: number
   /**
@@ -8151,7 +8155,7 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
    */
   CleanUpPolicy?: string
   /**
-   * Segment 分片滚动的时长
+   * Segment 分片滚动的时长，单位ms。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentMs?: number
@@ -8161,22 +8165,22 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
    */
   UncleanLeaderElectionEnable?: number
   /**
-   * Segment 分片滚动的字节数
+   * Segment 分片滚动的字节数，单位bytes
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentBytes?: number
   /**
-   * 最大消息字节数
+   * 最大消息字节数，单位bytes
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxMessageBytes?: number
   /**
-   * 消息保留文件大小
+   * 消息保留文件大小，单位Bytes
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetentionBytes?: number
   /**
-   * 消息保存的时间类型
+   * 消息保存的时间类型，CreateTime表示生产者创建这条消息的时间;LogAppendTime表示broker接收到消息的时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogMsgTimestampType?: string
@@ -8233,23 +8237,23 @@ export interface ModifyTopicAttributesResponse {
  */
 export interface DescribeConsumerGroupRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id,通过DescribeInstances接口获取
    */
   InstanceId: string
   /**
-   * 可选，用户需要查询的group名称。
+   * 用户需要查询的group名称。
    */
   GroupName?: string
   /**
-   * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
+   * 用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
    */
   TopicName?: string
   /**
-   * 本次返回个数限制，最大支持50
+   * 返回消费组的限制数量，最大支持50
    */
   Limit?: number
   /**
-   * 偏移位置
+   * 消费组列表的起始偏移量
    */
   Offset?: number
 }
@@ -8351,7 +8355,7 @@ export interface ModifyRoutineMaintenanceTaskResponse {
  */
 export interface DescribeConnectResourceResponse {
   /**
-   * 连接源的Id
+   * 连接源数据信息
    */
   Result?: DescribeConnectResourceResp
   /**
@@ -8631,19 +8635,19 @@ export interface InquiryPrice {
  */
 export interface ModifyGroupOffsetsRequest {
   /**
-   * ckafka集群实例Id
+   * ckafka集群实例Id,可通过DescribeInstances接口获取
    */
   InstanceId: string
   /**
-   * 消费分组名称
+   * 消费分组名称,可通过DescribeConsumerGroup接口获取
    */
   Group: string
   /**
-   * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
+   * 重置offset的策略,入参含义 0. 对齐shift-by参数,代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset),代表把offset移动到指定的offset位置
    */
   Strategy: number
   /**
-   * 需要重置的主题名列表， 不填表示全部
+   * 需要重置的主题名列表
    */
   Topics?: Array<string>
   /**
@@ -8651,7 +8655,7 @@ export interface ModifyGroupOffsetsRequest {
    */
   Shift?: number
   /**
-   * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
+   * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的是，如果指定的时间不存在消息，则获取最末尾的offset。
    */
   ShiftTimestamp?: number
   /**
@@ -8900,7 +8904,7 @@ export interface DescribeTopicSyncReplicaRequest {
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认10，最大值20。
+   * 返回数量，默认值为20，必须大于0。
    */
   Limit?: number
   /**

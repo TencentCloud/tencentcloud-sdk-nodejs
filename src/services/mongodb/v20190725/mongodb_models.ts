@@ -359,6 +359,20 @@ export interface DescribeCurrentOpResponse {
 }
 
 /**
+ * SetDBInstanceDeletionProtection请求参数结构体
+ */
+export interface SetDBInstanceDeletionProtectionRequest {
+  /**
+   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceIds: Array<string>
+  /**
+   * 实例销毁保护选项，取值范围：0-关闭销毁保护，1-开启销毁保护
+   */
+  EnableDeletionProtection: number
+}
+
+/**
  * 实例可修改参数Multi类型集合。
  */
 export interface InstanceMultiParam {
@@ -574,7 +588,7 @@ export interface IsolateDBInstanceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2300,6 +2314,16 @@ export interface DescribeClientConnectionsRequest {
 }
 
 /**
+ * SetDBInstanceDeletionProtection返回参数结构体
+ */
+export interface SetDBInstanceDeletionProtectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDetailedSlowLogs返回参数结构体
  */
 export interface DescribeDetailedSlowLogsResponse {
@@ -2841,7 +2865,7 @@ export interface CreateBackupDownloadTaskResponse {
   /**
    * 下载任务状态
    */
-  Tasks: Array<BackupDownloadTaskStatus>
+  Tasks?: Array<BackupDownloadTaskStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

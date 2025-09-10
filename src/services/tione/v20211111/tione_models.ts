@@ -552,6 +552,11 @@ export interface SSHConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAddressChanged?: boolean
+  /**
+   * POD访问信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodSSHInfo?: PodSSHInfo
 }
 
 /**
@@ -3079,6 +3084,24 @@ export interface TagFilter {
    * 多个标签值
    */
   TagValues?: Array<string>
+}
+
+/**
+ * SSH pod访问信息
+ */
+export interface PodSSHInfo {
+  /**
+   * pod访问ip
+   */
+  Host?: string
+  /**
+   * pod ssh访问端口
+   */
+  Port?: number
+  /**
+   * ssh访问命令
+   */
+  LoginCommand?: string
 }
 
 /**

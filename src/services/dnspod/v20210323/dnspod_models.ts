@@ -2289,51 +2289,55 @@ export interface UserInfo {
   /**
    * 用户昵称
    */
-  Nick: string
+  Nick?: string
   /**
    * 用户ID
    */
-  Id: number
+  Id?: number
   /**
    * 用户账号, 邮箱格式
    */
-  Email: string
+  Email?: string
   /**
    * 账号状态：”enabled”: 正常；”disabled”: 被封禁
    */
-  Status: string
+  Status?: string
   /**
    * 电话号码
    */
-  Telephone: string
+  Telephone?: string
   /**
    * 邮箱是否通过验证：”yes”: 通过；”no”: 未通过
    */
-  EmailVerified: string
+  EmailVerified?: string
   /**
    * 手机是否通过验证：”yes”: 通过；”no”: 未通过
    */
-  TelephoneVerified: string
+  TelephoneVerified?: string
   /**
    * 账号等级, 按照用户账号下域名等级排序, 选取一个最高等级为账号等级, 具体对应情况参见域名等级。
    */
-  UserGrade: string
+  UserGrade?: string
   /**
    * 用户名称, 企业用户对应为公司名称
    */
-  RealName: string
+  RealName?: string
   /**
    * 是否绑定微信：”yes”: 通过；”no”: 未通过
    */
-  WechatBinded: string
+  WechatBinded?: string
   /**
    * 用户UIN
    */
-  Uin: number
+  Uin?: number
   /**
    * 所属 DNS 服务器
    */
-  FreeNs: Array<string>
+  FreeNs?: Array<string>
+  /**
+   * 用户是否允许任何人转移域名到本账号
+   */
+  AllowTransferIn?: boolean
 }
 
 /**

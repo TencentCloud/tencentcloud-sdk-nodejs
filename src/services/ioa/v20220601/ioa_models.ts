@@ -1062,7 +1062,7 @@ export interface DescribeDLPFileDetectResultData {
    */
   Status?: string
   /**
-   * 文件检测结果，json字符串。
+   * 文件检测结果，json字符串。包含文件基本信息如type，path，md5以及命中的信息。其中State为检测状态，0为待解析文件，1为检测中，2为检测完成；FileAbstract为命中的上下文摘要信息，HitRuleid是命中的规则唯一ID，HitRuleCategoryId是规则分类唯一id，HitLevel是文件的等级，HitRuleDesc是规则的名称，HitContent是具体命中的规则以及词库信息，以及命中的内容。EngineConfigVersion是当前词库版本号
    */
   DetectResult?: string
 }
@@ -1423,7 +1423,7 @@ export interface DescribeVirtualDevicesResponse {
  */
 export interface DescribeDLPFileDetectResultRequest {
   /**
-   * 管理域实例ID，用于CAM管理域权限分配
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
   DomainInstanceId?: string
   /**
@@ -2386,7 +2386,7 @@ export interface DescribeDeviceChildGroupsResponse {
  */
 export interface DescribeDLPFileDetectResultResponse {
   /**
-   * 查询任务结果
+   * 文件鉴定任务结果数据。详情查看具体数据结构
    */
   Data?: DescribeDLPFileDetectResultData
   /**

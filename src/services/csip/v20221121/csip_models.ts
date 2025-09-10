@@ -3548,6 +3548,10 @@ export interface AccessKeyRisk {
    * 所属appid
    */
   AppID?: number
+  /**
+   * 对应风险的查询参数
+   */
+  QueryParam?: string
 }
 
 /**
@@ -4984,6 +4988,18 @@ export interface AccessKeyAlarm {
    * 泄漏证据
    */
   LeakEvidence?: Array<string>
+  /**
+   * 是否支持编辑信任账号
+   */
+  IsSupportEditWhiteAccount?: boolean
+  /**
+   * 告警证据
+   */
+  Evidence?: string
+  /**
+   * 告警规则标识
+   */
+  RuleKey?: string
 }
 
 /**
@@ -6922,6 +6938,7 @@ export interface AccessKeyAsset {
    * AK状态 
 0:禁用
 1:已启用
+2:已删除(已在cam侧删除，安全中心仍然存留之前的记录)
    */
   Status?: number
   /**
@@ -7758,6 +7775,10 @@ export interface CallRecord {
    * 账号外vpc信息列表
    */
   VpcInfo?: Array<SourceIPVpcInfo>
+  /**
+   * 调用请求客户端列表
+   */
+  ReqClient?: Array<string>
 }
 
 /**
@@ -8119,8 +8140,7 @@ export interface AKInfo {
    */
   ID?: number
   /**
-   * ak具体值\n
-临时密钥时返回临时密钥
+   * ak具体值 临时密钥时返回临时密钥
    */
   Name?: string
   /**

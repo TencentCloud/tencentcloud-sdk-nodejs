@@ -1269,6 +1269,10 @@ export interface GetDeviceListRequest {
    */
   FirmwareVersion?: string
   /**
+   * 固件类型
+   */
+  FwType?: string
+  /**
    * 需要过滤的设备名称
    */
   DeviceName?: string
@@ -2380,6 +2384,10 @@ export interface DescribeFirmwareRequest {
    * 固件版本号
    */
   FirmwareVersion: string
+  /**
+   * 固件模块
+   */
+  FwType?: string
 }
 
 /**
@@ -4091,6 +4099,22 @@ export interface InvokeAISearchServiceRequest {
 
    */
   TimeZone?: string
+  /**
+   * 取值为1表示高级搜索，取值为2表示简单搜索，默认为1
+   */
+  SearchMode?: number
+  /**
+   * 最终输出的条数；仅当SearchMode为2时支持自定义设置，默认为50
+   */
+  Limit?: number
+  /**
+   * 向量搜索的相似度搜索半径，取值范围[-1, 1]；仅当SearchMode为2时支持自定义设置，默认为0.5
+   */
+  VectorSearchRadius?: number
+  /**
+   * 指定向量搜索最相似的 Top K；仅当SearchMode为2时支持自定义设置，默认为100
+   */
+  VectorSearchTopK?: number
 }
 
 /**
@@ -5235,6 +5259,38 @@ export interface DescribeFirmwareTaskResponse {
    * 创建账号ID昵称
    */
   CreatorNickName?: string
+  /**
+   * 延迟时间
+   */
+  DelayTime?: number
+  /**
+   * 超时时间
+   */
+  TimeoutInterval?: number
+  /**
+   * 静默升级or用户确认升级
+   */
+  UpgradeMethod?: number
+  /**
+   * 最大重试次数
+   */
+  MaxRetryNum?: number
+  /**
+   * 固件类型
+   */
+  FwType?: string
+  /**
+   * 重试间隔时间单位min
+   */
+  RetryInterval?: number
+  /**
+   * 是否覆盖任务
+   */
+  OverrideMode?: number
+  /**
+   * 用户自定义消息
+   */
+  TaskUserDefine?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7694,6 +7750,10 @@ export interface GetCOSURLRequest {
    * 文件大小
    */
   FileSize?: number
+  /**
+   * 模块类型or固件类型
+   */
+  FwType?: string
 }
 
 /**
@@ -8910,6 +8970,10 @@ export interface PublishFirmwareUpdateMessageRequest {
    * 设备名称。
    */
   DeviceName?: string
+  /**
+   * 固件类型
+   */
+  FwType?: string
 }
 
 /**

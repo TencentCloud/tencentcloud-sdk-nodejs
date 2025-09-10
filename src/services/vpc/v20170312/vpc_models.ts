@@ -1039,6 +1039,10 @@ export interface ModifyNatGatewayAttributeRequest {
    * NAT网关绑定的安全组列表，最终状态，空列表表示删除所有安全组，形如: `['sg-1n232323', 'sg-o4242424']`
    */
   SecurityGroupIds?: Array<string>
+  /**
+   * NAT实例是否开启删除保护
+   */
+  DeletionProtectionEnabled?: boolean
 }
 
 /**
@@ -6406,6 +6410,10 @@ export interface NatGateway {
    * NAT实例归属的专属集群id
    */
   DedicatedClusterId?: string
+  /**
+   * NAT实例是否开启删除保护
+   */
+  DeletionProtectionEnabled?: boolean
 }
 
 /**
@@ -12385,6 +12393,10 @@ export interface PrivateNatGateway {
    * 跨域私网NAT关联的云联网ID
    */
   CcnId?: string
+  /**
+   * 私网NAT是否开启删除保护
+   */
+  DeletionProtectionEnabled?: boolean
 }
 
 /**

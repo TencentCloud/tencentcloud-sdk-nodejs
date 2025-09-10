@@ -31,6 +31,7 @@ import {
   ServerPushText,
   ResetExtensionPasswordRequest,
   DisableCCCPhoneNumberResponse,
+  Filter,
   DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTaskRequest,
   CreateUserSigResponse,
@@ -38,6 +39,7 @@ import {
   StaffInfo,
   CreateAdminURLResponse,
   PausePredictiveDialingCampaignRequest,
+  ForwardingConfig,
   DescribeAILatencyRequest,
   CreateCallOutSessionResponse,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
@@ -49,6 +51,7 @@ import {
   RestoreMemberOnlineResponse,
   AbortAgentCruiseDialingCampaignResponse,
   DescribeChatMessagesResponse,
+  DescribeSessionDetailResponse,
   ServeParticipant,
   AICallExtractResultElement,
   DescribeTelCallInfoResponse,
@@ -88,6 +91,7 @@ import {
   BindNumberCallInInterfaceRequest,
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
+  SessionEvent,
   DescribeSkillGroupInfoListRequest,
   CreateCarrierPrivilegeNumberApplicantResponse,
   Interface,
@@ -107,11 +111,12 @@ import {
   BindNumberCallInInterfaceResponse,
   ForceMemberOfflineRequest,
   SkillGroupInfoItem,
+  UploadIvrAudioResponse,
   CreateAIAgentCallRequest,
   UpdateCCCSkillGroupRequest,
   RestoreMemberOnlineRequest,
   TimeRange,
-  ForwardingConfig,
+  DescribeStaffStatusHistoryResponse,
   DescribeTelCdrRequest,
   ModifyStaffResponse,
   ModifyExtensionRequest,
@@ -134,7 +139,7 @@ import {
   DescribeAICallExtractResultResponse,
   DeleteCCCSkillGroupResponse,
   UploadIvrAudioFailedInfo,
-  UploadIvrAudioResponse,
+  DescribeSessionDetailRequest,
   ModifyExtensionResponse,
   DescribeCompanyListResponse,
   NumberInfo,
@@ -154,7 +159,7 @@ import {
   CreateAutoCalloutTaskRequest,
   AILatencyDetail,
   AITransferItem,
-  Filter,
+  EventStaffElement,
   AbortAgentCruiseDialingCampaignRequest,
   ForceMemberOfflineResponse,
   CreateOwnNumberApplyResponse,
@@ -195,11 +200,14 @@ import {
   DeleteStaffResponse,
   CalleeAttribute,
   StaffStatusExtra,
+  DescribeStaffStatusHistoryRequest,
   CreateStaffRequest,
   CreateCompanyApplyResponse,
   SdkAppIdBuyInfo,
   DescribePSTNActiveSessionListResponse,
+  EventStaffDetail,
   AILatencyStatistics,
+  StaffStatus,
   DescribeIMCdrListRequest,
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
@@ -241,6 +249,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TransferToManualResponse) => void
   ): Promise<TransferToManualResponse> {
     return this.request("TransferToManual", req, cb)
+  }
+
+  /**
+   * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模板:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+   */
+  async ModifyCompanyApply(
+    req: ModifyCompanyApplyRequest,
+    cb?: (error: string, rep: ModifyCompanyApplyResponse) => void
+  ): Promise<ModifyCompanyApplyResponse> {
+    return this.request("ModifyCompanyApply", req, cb)
   }
 
   /**
@@ -326,13 +344,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止自动外呼任务
+   * 修改客户自携号码审批单
    */
-  async StopAutoCalloutTask(
-    req: StopAutoCalloutTaskRequest,
-    cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
-  ): Promise<StopAutoCalloutTaskResponse> {
-    return this.request("StopAutoCalloutTask", req, cb)
+  async ModifyOwnNumberApply(
+    req: ModifyOwnNumberApplyRequest,
+    cb?: (error: string, rep: ModifyOwnNumberApplyResponse) => void
+  ): Promise<ModifyOwnNumberApplyResponse> {
+    return this.request("ModifyOwnNumberApply", req, cb)
   }
 
   /**
@@ -353,6 +371,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void
   ): Promise<DescribePSTNActiveSessionListResponse> {
     return this.request("DescribePSTNActiveSessionList", req, cb)
+  }
+
+  /**
+   * 停止自动外呼任务
+   */
+  async StopAutoCalloutTask(
+    req: StopAutoCalloutTaskRequest,
+    cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
+  ): Promise<StopAutoCalloutTaskResponse> {
+    return this.request("StopAutoCalloutTask", req, cb)
   }
 
   /**
@@ -398,13 +426,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用号码
+   * 查询座席状态历史
    */
-  async DisableCCCPhoneNumber(
-    req: DisableCCCPhoneNumberRequest,
-    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
-  ): Promise<DisableCCCPhoneNumberResponse> {
-    return this.request("DisableCCCPhoneNumber", req, cb)
+  async DescribeStaffStatusHistory(
+    req: DescribeStaffStatusHistoryRequest,
+    cb?: (error: string, rep: DescribeStaffStatusHistoryResponse) => void
+  ): Promise<DescribeStaffStatusHistoryResponse> {
+    return this.request("DescribeStaffStatusHistory", req, cb)
   }
 
   /**
@@ -438,13 +466,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模板:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+   * 停用号码
    */
-  async ModifyCompanyApply(
-    req: ModifyCompanyApplyRequest,
-    cb?: (error: string, rep: ModifyCompanyApplyResponse) => void
-  ): Promise<ModifyCompanyApplyResponse> {
-    return this.request("ModifyCompanyApply", req, cb)
+  async DisableCCCPhoneNumber(
+    req: DisableCCCPhoneNumberRequest,
+    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
+  ): Promise<DisableCCCPhoneNumberResponse> {
+    return this.request("DisableCCCPhoneNumber", req, cb)
   }
 
   /**
@@ -612,13 +640,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改客户自携号码审批单
+   * 获取通话详情
    */
-  async ModifyOwnNumberApply(
-    req: ModifyOwnNumberApplyRequest,
-    cb?: (error: string, rep: ModifyOwnNumberApplyResponse) => void
-  ): Promise<ModifyOwnNumberApplyResponse> {
-    return this.request("ModifyOwnNumberApply", req, cb)
+  async DescribeSessionDetail(
+    req: DescribeSessionDetailRequest,
+    cb?: (error: string, rep: DescribeSessionDetailResponse) => void
+  ): Promise<DescribeSessionDetailResponse> {
+    return this.request("DescribeSessionDetail", req, cb)
   }
 
   /**

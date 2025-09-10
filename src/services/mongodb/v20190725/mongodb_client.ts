@@ -30,6 +30,7 @@ import {
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   DescribeCurrentOpResponse,
+  SetDBInstanceDeletionProtectionRequest,
   InstanceMultiParam,
   ModifyInstanceParamsResponse,
   SetInstanceMaintenanceResponse,
@@ -115,6 +116,7 @@ import {
   BackupDownloadTask,
   DescribeDBBackupsRequest,
   DescribeClientConnectionsRequest,
+  SetDBInstanceDeletionProtectionResponse,
   DescribeDetailedSlowLogsResponse,
   ShardInfo,
   SetBackupRulesResponse,
@@ -575,6 +577,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceCreateDBInstancesResponse) => void
   ): Promise<InquirePriceCreateDBInstancesResponse> {
     return this.request("InquirePriceCreateDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（SetDBInstanceDeletionProtection）用于设置实例销毁保护
+   */
+  async SetDBInstanceDeletionProtection(
+    req: SetDBInstanceDeletionProtectionRequest,
+    cb?: (error: string, rep: SetDBInstanceDeletionProtectionResponse) => void
+  ): Promise<SetDBInstanceDeletionProtectionResponse> {
+    return this.request("SetDBInstanceDeletionProtection", req, cb)
   }
 
   /**

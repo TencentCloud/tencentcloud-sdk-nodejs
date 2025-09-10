@@ -3243,6 +3243,10 @@ export interface CheckLDAPConnectionRequest {
    * 网络域id
    */
   DomainId?: string
+  /**
+   * 用户名称映射属性
+   */
+  AttributeUserName?: string
 }
 
 /**

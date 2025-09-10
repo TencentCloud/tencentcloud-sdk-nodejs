@@ -418,6 +418,16 @@ it("mongodb.v20190725.InquirePriceCreateDBInstances", async function () {
     }
 })
 
+it("mongodb.v20190725.SetDBInstanceDeletionProtection", async function () {
+    try {
+       const data = await client.SetDBInstanceDeletionProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.AssignProject", async function () {
     try {
        const data = await client.AssignProject({})
