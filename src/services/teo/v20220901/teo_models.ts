@@ -2042,13 +2042,21 @@ export interface DescribeDDoSAttackEventResponse {
 }
 
 /**
- * DisableOriginACL请求参数结构体
+ * DescribeTimingL7OriginPullData返回参数结构体
  */
-export interface DisableOriginACLRequest {
+export interface DescribeTimingL7OriginPullDataResponse {
   /**
-   * 站点 ID。
+   * 查询结果的总条数。
    */
-  ZoneId: string
+  TotalCount?: number
+  /**
+   * 回源时序数据列表。
+   */
+  TimingDataRecords?: Array<TimingDataRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4774,6 +4782,47 @@ export interface ZoneConfig {
 }
 
 /**
+ * DescribeTimingL7OriginPullData请求参数结构体
+ */
+export interface DescribeTimingL7OriginPullDataRequest {
+  /**
+   * 开始时间。
+   */
+  StartTime: string
+  /**
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
+   */
+  EndTime: string
+  /**
+   * 指标列表，取值有:
+<li>l7Flow_outFlux_hy: EdgeOne 节点至源站方向的请求流量，单位：Byte；</li>
+<li>l7Flow_outBandwidth_hy: EdgeOne 节点至源站方向的请求带宽，单位：bps；</li>
+<li>l7Flow_request_hy: EdgeOne 节点至源站方向的请求数，单位：次。</li>
+<li>l7Flow_inFlux_hy: 源站至 EdgeOne 节点方向的响应流量，单位：Byte；</li>
+<li>l7Flow_inBandwidth_hy: 源站至 EdgeOne 节点方向的响应带宽，单位：bps；</li>
+
+   */
+  MetricNames: Array<string>
+  /**
+   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   */
+  ZoneIds: Array<string>
+  /**
+   * 查询时间粒度，取值有：
+<li>min: 1分钟；</li>
+<li>5min: 5分钟；</li>
+<li>hour: 1小时；</li>
+<li>day: 1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。
+   */
+  Interval?: string
+  /**
+   * 过滤条件，详细的过滤条件如下：
+<li>domain：客户端请求的域名。若按泛域名接入 EdgeOne，则数据中记录为泛域名，而不是具体域名。</li>
+   */
+  Filters?: Array<QueryCondition>
+}
+
+/**
  * 负载均衡实例 HTTP/HTTPS 健康检查策略下可配置的自定义头部。
  */
 export interface CustomizedHeader {
@@ -4844,39 +4893,17 @@ export interface ModifyDnsRecordsStatusRequest {
 }
 
 /**
- * ModifyZone请求参数结构体
+ * 托管规则自动更新选项
  */
-export interface ModifyZoneRequest {
+export interface ManagedRuleAutoUpdate {
   /**
-   * 站点 ID。
+   * 是否开启自动更新至最新版本。取值有：<li>on：开启</li><li>off：关闭</li>
    */
-  ZoneId: string
+  AutoUpdateToLatestVersion: string
   /**
-   * 站点接入方式，取值有：
-<li>full：NS 接入；</li>
-<li>partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；</li>
-<li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>不填写保持原有配置。
+   * 当前使用的版本，格式符合ISO 8601标准，如2023-12-21T12:00:32Z，默认为空，仅出参。
    */
-  Type?: string
-  /**
-   * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
-   */
-  VanityNameServers?: VanityNameServers
-  /**
-   * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
-   */
-  AliasZoneName?: string
-  /**
-   * 站点接入地域，取值有：
-<li> global：全球；</li>
-<li> mainland：中国大陆；</li>
-<li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
-   */
-  Area?: string
-  /**
-   * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
-   */
-  ZoneName?: string
+  RulesetVersion?: string
 }
 
 /**
@@ -8489,6 +8516,10 @@ export interface ModifyHostsCertificateRequest {
    * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。
    */
   ClientCertInfo?: MutualTLS
+  /**
+   * 用于配置 EO 节点回源时携带的证书，用于回源双向认证握手，默认关闭，不填写表示保持原有配置。该配置当前为白名单内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service)。
+   */
+  UpstreamCertInfo?: UpstreamCertInfo
 }
 
 /**
@@ -10153,6 +10184,42 @@ export interface CreateL4ProxyRequest {
    * L3/L4 DDoS 防护配置，不填写时默认使用平台默认防护选项。详情参考 [独立 DDoS 防护](https://cloud.tencent.com/document/product/1552/95994)。
    */
   DDosProtectionConfig?: DDosProtectionConfig
+}
+
+/**
+ * ModifyZone请求参数结构体
+ */
+export interface ModifyZoneRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 站点接入方式，取值有：
+<li>full：NS 接入；</li>
+<li>partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；</li>
+<li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>不填写保持原有配置。
+   */
+  Type?: string
+  /**
+   * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
+   */
+  VanityNameServers?: VanityNameServers
+  /**
+   * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
+   */
+  AliasZoneName?: string
+  /**
+   * 站点接入地域，取值有：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
+   */
+  Area?: string
+  /**
+   * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
+   */
+  ZoneName?: string
 }
 
 /**
@@ -12628,17 +12695,13 @@ export interface ModifyApplicationProxyRuleStatusResponse {
 }
 
 /**
- * 托管规则自动更新选项
+ * DisableOriginACL请求参数结构体
  */
-export interface ManagedRuleAutoUpdate {
+export interface DisableOriginACLRequest {
   /**
-   * 是否开启自动更新至最新版本。取值有：<li>on：开启</li><li>off：关闭</li>
+   * 站点 ID。
    */
-  AutoUpdateToLatestVersion: string
-  /**
-   * 当前使用的版本，格式符合ISO 8601标准，如2023-12-21T12:00:32Z，默认为空，仅出参。
-   */
-  RulesetVersion?: string
+  ZoneId: string
 }
 
 /**

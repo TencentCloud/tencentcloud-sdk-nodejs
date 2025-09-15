@@ -1,7 +1,7 @@
 
 const expect = require("chai").expect
 const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-const client = new tencentcloud.lowcode.v20210108.Client({
+const client = new tencentcloud.tdai.v20250717.Client({
   credential: {
     secretId: process.env.secretId,
     secretKey: process.env.secretKey,
@@ -16,11 +16,11 @@ const client = new tencentcloud.lowcode.v20210108.Client({
     },
   },
 })
-describe("lowcode.v20210108.test.js", function () {
+describe("tdai.v20250717.test.js", function () {
 
-it("lowcode.v20210108.CreateKnowledgeSet", async function () {
+it("tdai.v20250717.DescribeChatDetail", async function () {
     try {
-       const data = await client.CreateKnowledgeSet({})
+       const data = await client.DescribeChatDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("lowcode.v20210108.CreateKnowledgeSet", async function () {
     }
 })
 
-it("lowcode.v20210108.CheckDeployApp", async function () {
+it("tdai.v20250717.RemoveChat", async function () {
     try {
-       const data = await client.CheckDeployApp({})
+       const data = await client.RemoveChat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("lowcode.v20210108.CheckDeployApp", async function () {
     }
 })
 
-it("lowcode.v20210108.UpdateKnowledgeSet", async function () {
+it("tdai.v20250717.IsolateAgentInstance", async function () {
     try {
-       const data = await client.UpdateKnowledgeSet({})
+       const data = await client.IsolateAgentInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("lowcode.v20210108.UpdateKnowledgeSet", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeApps", async function () {
+it("tdai.v20250717.ContinueAgentWork", async function () {
     try {
-       const data = await client.DescribeApps({})
+       const data = await client.ContinueAgentWork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("lowcode.v20210108.DescribeApps", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeRelatedUsers", async function () {
+it("tdai.v20250717.DescribeAgentDutyTasks", async function () {
     try {
-       const data = await client.DescribeRelatedUsers({})
+       const data = await client.DescribeAgentDutyTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("lowcode.v20210108.DescribeRelatedUsers", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeKnowledgeSetList", async function () {
+it("tdai.v20250717.PauseAgentWork", async function () {
     try {
-       const data = await client.DescribeKnowledgeSetList({})
+       const data = await client.PauseAgentWork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("lowcode.v20210108.DescribeKnowledgeSetList", async function () {
     }
 })
 
-it("lowcode.v20210108.SearchDocList", async function () {
+it("tdai.v20250717.DescribeChats", async function () {
     try {
-       const data = await client.SearchDocList({})
+       const data = await client.DescribeChats({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("lowcode.v20210108.SearchDocList", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeDataSourceList", async function () {
+it("tdai.v20250717.DescribeAgentInstance", async function () {
     try {
-       const data = await client.DescribeDataSourceList({})
+       const data = await client.DescribeAgentInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("lowcode.v20210108.DescribeDataSourceList", async function () {
     }
 })
 
-it("lowcode.v20210108.PutWxAppIdToWeApp", async function () {
+it("tdai.v20250717.CreateChatCompletion", async function () {
     try {
-       const data = await client.PutWxAppIdToWeApp({})
+       const data = await client.CreateChatCompletion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("lowcode.v20210108.PutWxAppIdToWeApp", async function () {
     }
 })
 
-it("lowcode.v20210108.DeleteKnowledgeDocumentSet", async function () {
+it("tdai.v20250717.ModifyChatTitle", async function () {
     try {
-       const data = await client.DeleteKnowledgeDocumentSet({})
+       const data = await client.ModifyChatTitle({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,9 @@ it("lowcode.v20210108.DeleteKnowledgeDocumentSet", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeKnowledgeDocumentSetDetail", async function () {
+it("tdai.v20250717.DescribeAgentDutyTaskDetail", async function () {
     try {
-       const data = await client.DescribeKnowledgeDocumentSetDetail({})
+       const data = await client.DescribeAgentDutyTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("lowcode.v20210108.DescribeKnowledgeDocumentSetDetail", async function () {
     }
 })
 
-it("lowcode.v20210108.UploadKnowledgeDocumentSet", async function () {
+it("tdai.v20250717.DescribeReportUrl", async function () {
     try {
-       const data = await client.UploadKnowledgeDocumentSet({})
+       const data = await client.DescribeReportUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("lowcode.v20210108.UploadKnowledgeDocumentSet", async function () {
     }
 })
 
-it("lowcode.v20210108.DeleteAppBindWxApp", async function () {
+it("tdai.v20250717.TerminateAgentInstance", async function () {
     try {
-       const data = await client.DeleteAppBindWxApp({})
+       const data = await client.TerminateAgentInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("lowcode.v20210108.DeleteAppBindWxApp", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeKnowledgeDocumentSetList", async function () {
+it("tdai.v20250717.RecoverAgentInstance", async function () {
     try {
-       const data = await client.DescribeKnowledgeDocumentSetList({})
+       const data = await client.RecoverAgentInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("lowcode.v20210108.DescribeKnowledgeDocumentSetList", async function () {
     }
 })
 
-it("lowcode.v20210108.DeployApp", async function () {
+it("tdai.v20250717.ModifyAgentInstanceParameters", async function () {
     try {
-       const data = await client.DeployApp({})
+       const data = await client.ModifyAgentInstanceParameters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("lowcode.v20210108.DeployApp", async function () {
     }
 })
 
-it("lowcode.v20210108.DescribeResourceRoleList", async function () {
+it("tdai.v20250717.DescribeAgentInstances", async function () {
     try {
-       const data = await client.DescribeResourceRoleList({})
+       const data = await client.DescribeAgentInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,19 @@ it("lowcode.v20210108.DescribeResourceRoleList", async function () {
     }
 })
 
-it("lowcode.v20210108.DeleteKnowledgeSet", async function () {
+it("tdai.v20250717.DescribeAgents", async function () {
     try {
-       const data = await client.DeleteKnowledgeSet({})
+       const data = await client.DescribeAgents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.CreateAgentInstance", async function () {
+    try {
+       const data = await client.CreateAgentInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

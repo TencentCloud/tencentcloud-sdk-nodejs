@@ -903,6 +903,20 @@ export interface DiscountDetail {
 }
 
 /**
+ * MCP Server模板环境变量
+ */
+export interface McpServerTemplateEnv {
+  /**
+   * MCP Server模板的环境变量键
+   */
+  Key?: string
+  /**
+   * MCP Server模板的环境变量值
+   */
+  Value?: string
+}
+
+/**
  * DescribeDiskConfigs请求参数结构体
  */
 export interface DescribeDiskConfigsRequest {
@@ -963,6 +977,24 @@ export interface DescribeFirewallTemplateApplyRecordsRequest {
    * 应用防火墙模板任务ID列表。可通过[ApplyFirewallTemplate](https://cloud.tencent.com/document/product/1207/96883)接口返回值TaskId字段获取。
    */
   TaskIds?: Array<string>
+}
+
+/**
+ * DescribeMcpServerTemplates返回参数结构体
+ */
+export interface DescribeMcpServerTemplatesResponse {
+  /**
+   * MCP Server模板列表。
+   */
+  McpServerTemplateSet?: Array<McpServerTemplate>
+  /**
+   * 符合条件的MCP Server模板数量。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1423,27 +1455,27 @@ export interface FirewallTemplateRuleInfo {
 }
 
 /**
- * 磁盘信息
+ * 云硬盘信息。
  */
 export interface Disk {
   /**
-   * 磁盘ID
+   * 云硬盘ID。
    */
   DiskId?: string
   /**
-   * 实例ID
+   * 实例ID。
    */
   InstanceId?: string
   /**
-   * 可用区
+   * 可用区。
    */
   Zone?: string
   /**
-   * 磁盘名称
+   * 云硬盘名称。
    */
   DiskName?: string
   /**
-   * 磁盘类型
+   * 云硬盘类型。
 枚举值：
 <li> SYSTEM_DISK: 系统盘 </li>
 <li> DATA_DISK: 数据盘 </li>
@@ -1451,7 +1483,7 @@ export interface Disk {
    */
   DiskUsage?: string
   /**
-   * 磁盘介质类型
+   * 云硬盘介质类型。
 枚举值:
 <li> CLOUD_BASIC: 普通云硬盘 </li>
 <li> CLOUD_PREMIUM: 高性能云硬盘 </li>
@@ -1459,21 +1491,21 @@ export interface Disk {
    */
   DiskType?: string
   /**
-   * 磁盘付费类型
+   * 云硬盘付费类型。
 <li> PREPAID: 预付费 </li>
 <li> POSTPAID_BY_HOUR: 按小时后付费 </li>
    */
   DiskChargeType?: string
   /**
-   * 磁盘大小, 单位GB
+   * 云硬盘大小, 单位GB。
    */
   DiskSize?: number
   /**
-   * 续费标识
+   * 续费标识。
    */
   RenewFlag?: string
   /**
-   * 磁盘状态，取值范围：
+   * 云硬盘状态，取值范围：
 <li>PENDING：创建中。 </li>
 <li>UNATTACHED：待挂载。</li>
 <li>ATTACHING：挂载中。</li>
@@ -1487,23 +1519,23 @@ export interface Disk {
    */
   DiskState?: string
   /**
-   * 磁盘挂载状态
+   * 云硬盘挂载状态。
    */
   Attached?: boolean
   /**
-   * 是否随实例释放
+   * 是否随实例释放。
    */
   DeleteWithInstance?: boolean
   /**
-   * 上一次操作
+   * 上一次操作。
    */
   LatestOperation?: string
   /**
-   * 上一次操作状态
+   * 上一次操作状态。
    */
   LatestOperationState?: string
   /**
-   * 上一次请求ID
+   * 上一次请求ID。
    */
   LatestOperationRequestId?: string
   /**
@@ -1775,25 +1807,27 @@ export interface DetailPrice {
   /**
    * 描述计费项目名称，目前取值
 <li>"DiskSpace"代表云硬盘空间收费项。</li>
-<li>"DiskBackupQuota"代表云硬盘备份点配额收费项。</li>
+<li>"DiskBackupQuota"代表数据盘备份点配额收费项。</li>
+<li>"Instance"代表实例收费项。</li>
+<li>"SystemDiskBackupQuota"代表系统盘备份点配额收费项。</li>
    */
-  PriceName: string
+  PriceName?: string
   /**
-   * 云硬盘计费项维度单价。
+   * 计费项维度单价。
    */
-  OriginUnitPrice: number
+  OriginUnitPrice?: number
   /**
-   * 云硬盘计费项维度总价。
+   * 计费项维度总价。
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
-   * 云硬盘在计费项维度折扣。
+   * 计费项维度折扣。
    */
-  Discount: number
+  Discount?: number
   /**
-   * 云硬盘在计费项维度折后总价。
+   * 计费项维度折后总价。
    */
-  DiscountPrice: number
+  DiscountPrice?: number
 }
 
 /**
@@ -2042,7 +2076,7 @@ export interface ModifyDisksBackupQuotaRequest {
    */
   DiskIds: Array<string>
   /**
-   * 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须不小于已存在的备份点数量。
+   * 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须大于等于已存在的备份点数量。
    */
   DiskBackupQuota: number
 }
@@ -3721,17 +3755,25 @@ export interface CreateKeyPairRequest {
 }
 
 /**
- * RestartMcpServers请求参数结构体
+ * DescribeMcpServerTemplates请求参数结构体
  */
-export interface RestartMcpServersRequest {
+export interface DescribeMcpServerTemplatesRequest {
   /**
-   * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   * 过滤器列表。
+<li>name-description</li>按照MCP Server模板名称或描述进行过滤（支持模糊匹配）。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
    */
-  InstanceId: string
+  Filters?: Array<Filter>
   /**
-   * MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10
+   * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
    */
-  McpServerIds: Array<string>
+  Limit?: number
+  /**
+   * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+   */
+  Offset?: number
 }
 
 /**
@@ -4825,24 +4867,17 @@ export interface RenewDiskChargePrepaid {
 }
 
 /**
- * 描述了操作系统所在块设备即系统盘的信息。
+ * RestartMcpServers请求参数结构体
  */
-export interface SystemDisk {
+export interface RestartMcpServersRequest {
   /**
-   * 系统盘类型。
-取值范围： 
-<li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+   * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
-  DiskType?: string
+  InstanceId: string
   /**
-   * 系统盘大小，单位：GB。
+   * MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10
    */
-  DiskSize?: number
-  /**
-   * 系统盘ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskId?: string
+  McpServerIds: Array<string>
 }
 
 /**
@@ -5213,6 +5248,40 @@ export interface DescribeDisksReturnableResponse {
 }
 
 /**
+ * MCP Server模板
+ */
+export interface McpServerTemplate {
+  /**
+   * MCP Server名称
+   */
+  Name?: string
+  /**
+   * Base64编码之后的MCP Server启动命令。
+   */
+  Command?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * MCP Server图标地址
+   */
+  IconUrl?: string
+  /**
+   * MCP Server社区地址
+   */
+  CommunityUrl?: string
+  /**
+   * MCP Server关联的开发平台地址或开放平台地址
+   */
+  PlatformUrl?: string
+  /**
+   * MCP Server环境变量
+   */
+  EnvSet?: Array<McpServerTemplateEnv>
+}
+
+/**
  * 实例标识信息。
  */
 export interface InstanceIdentifier {
@@ -5402,7 +5471,7 @@ export interface AutoMountConfiguration {
 }
 
 /**
- * 关于Lighthouse Instance实例的价格信息
+ * 关于Lighthouse Instance实例的价格信息。
  */
 export interface InstancePrice {
   /**
@@ -5425,6 +5494,10 @@ export interface InstancePrice {
    * 价格货币单位。取值范围CNY:人民币。USD:美元。
    */
   Currency?: string
+  /**
+   * 计费项目明细。
+   */
+  DetailPrices?: Array<DetailPrice>
 }
 
 /**
@@ -5605,6 +5678,27 @@ export interface DescribeDisksDeniedActionsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了操作系统所在块设备即系统盘的信息。
+ */
+export interface SystemDisk {
+  /**
+   * 系统盘类型。
+取值范围： 
+<li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+   */
+  DiskType?: string
+  /**
+   * 系统盘大小，单位：GB。
+   */
+  DiskSize?: number
+  /**
+   * 系统盘ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskId?: string
 }
 
 /**

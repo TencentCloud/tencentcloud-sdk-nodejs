@@ -52,7 +52,7 @@ export interface DescribeLogHistogramRequest {
    */
   To: number
   /**
-   * 查询语句
+   * 查询语句，进行base64编码
    */
   Query: string
   /**
@@ -8199,7 +8199,7 @@ export interface CreateExportRequest {
    */
   Count: number
   /**
-   * 日志导出检索语句，不支持<a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>
+   * 日志导出检索语句，需要进行base64编码,不支持<a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>
    */
   Query: string
   /**
@@ -12915,9 +12915,7 @@ export interface SearchLogRequest {
    */
   To: number
   /**
-   * 检索分析语句，最大长度为12KB
-语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
-使用*或空字符串可查询所有日志
+   * 检索分析语句，需要进行base64编码，最大长度为12KB语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句使用*或空字符串可查询所有日志
    */
   Query: string
   /**

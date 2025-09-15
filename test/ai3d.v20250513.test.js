@@ -18,6 +18,26 @@ const client = new tencentcloud.ai3d.v20250513.Client({
 })
 describe("ai3d.v20250513.test.js", function () {
 
+it("ai3d.v20250513.SubmitHunyuanTo3DProJob", async function () {
+    try {
+       const data = await client.SubmitHunyuanTo3DProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ai3d.v20250513.QueryHunyuanTo3DProJob", async function () {
+    try {
+       const data = await client.QueryHunyuanTo3DProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ai3d.v20250513.SubmitHunyuanTo3DJob", async function () {
     try {
        const data = await client.SubmitHunyuanTo3DJob({})

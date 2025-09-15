@@ -16,6 +16,129 @@
  */
 
 /**
+ * weda用户
+ */
+export interface WedaUser {
+  /**
+   * 腾讯云主账号uin
+   */
+  Uin?: number
+  /**
+   * 名字
+   */
+  Name?: string
+  /**
+   * 环境
+   */
+  Env?: number
+  /**
+   * 类型
+   */
+  Type?: number
+  /**
+   * 昵称
+   */
+  NickName?: string
+  /**
+   * 邮箱
+   */
+  Email?: string
+  /**
+   * 手机号
+   */
+  Phone?: string
+  /**
+   * 项目id
+   */
+  ProjectId?: number
+  /**
+   * 用户uuid
+   */
+  Uuid?: string
+  /**
+   * 渠道，1:自建；2:企业微信导入
+   */
+  Source?: number
+  /**
+   * 微信openid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpenId?: string
+  /**
+   * 关联角色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelatedRoles?: Array<WedaRole>
+  /**
+   * 企业微信userid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WechatUserId?: string
+  /**
+   * 内部用户类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternalUserType?: number
+  /**
+   * 微搭用户id
+   */
+  UserId?: number
+  /**
+   * 所属部门名称
+   */
+  OrgName?: string
+  /**
+   * 用户schema
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserSchema?: string
+  /**
+   * 用户扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserExtend?: string
+  /**
+   * 用户是否授权License
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLicensed?: boolean
+  /**
+   * 权限组数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelatedRoleGroups?: Array<RoleGroup>
+  /**
+   * 兼岗部门
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Orgs?: Array<OrgResp>
+  /**
+   * 主岗部门
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MainOrg?: Array<OrgResp>
+  /**
+   * 直属上级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentUserId?: number
+  /**
+   * 主列字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrimaryColumn?: string
+  /**
+   * 用户头像
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvatarUrl?: string
+  /**
+   * 最后登录时间
+   */
+  LastLoginTime?: string
+}
+
+/**
  * DescribeKnowledgeSetList请求参数结构体
  */
 export interface DescribeKnowledgeSetListRequest {
@@ -155,33 +278,41 @@ export interface UpdateKnowledgeSetResponse {
 }
 
 /**
- * SearchDocList请求参数结构体
+ * DescribeApps请求参数结构体
  */
-export interface SearchDocListRequest {
+export interface DescribeAppsRequest {
   /**
-   * 环境ID
+   * 分页每页个数
    */
-  EnvId: string
+  Limit: number
   /**
-   * 知识库名称
+   * 分页Offset
    */
-  CollectionView?: string
+  Offset: number
   /**
-   * 搜索模式
+   * 环境id
    */
-  SearchKey?: string
+  EnvId?: string
   /**
-   * 搜索值
+   * 搜索关键词
    */
-  SearchValue?: string
+  Keyword?: string
   /**
-   * 页码
+   * 应用id
    */
-  PageNo?: number
+  AppIds?: Array<string>
   /**
-   * 页大小
+   * 来源类型
    */
-  PageSize?: number
+  Channel?: string
+  /**
+   * 1-自定义应用；2-模型应用
+   */
+  Type?: number
+  /**
+   * 应用是否收藏
+   */
+  Favorite?: boolean
 }
 
 /**
@@ -223,30 +354,42 @@ export interface DataSourceQueryOption {
 }
 
 /**
- * 上传知识库文档返回结果
+ * 权限组
  */
-export interface UploadKnowledgeDocumentSetRsp {
+export interface RoleGroup {
   /**
-   * 给文件分配的 ID 信息。
-   * @deprecated
+   * 权限组id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DocumentSetId?: string
+  Id: number
   /**
-   * 文件名
+   * 权限组名称
    */
-  DocumentSetName?: string
+  Name: string
   /**
-   * 文件标题
+   * 权限组标识
    */
-  FileTitle?: string
+  GroupIdentity: string
   /**
-   * 文件元信息，为jsonstring
+   * 权限组描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileMetaData?: string
+  GroupDesc: string
   /**
-   * Cos存储文件ID
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileId?: string
+  CreateTime: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 角色数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleList: Array<WedaRole>
 }
 
 /**
@@ -312,6 +455,24 @@ export interface SearchDocListResponse {
 }
 
 /**
+ * 数据源关联的的信息
+ */
+export interface RelationField {
+  /**
+   * 关联关系字段
+   */
+  Field?: string
+  /**
+   * 关联关系格式
+   */
+  Format?: string
+  /**
+   * 关联数据源名称
+   */
+  RelateDataSourceName?: string
+}
+
+/**
  * CheckDeployApp请求参数结构体
  */
 export interface CheckDeployAppRequest {
@@ -348,6 +509,33 @@ export interface DescribeKnowledgeDocumentSetListRequest {
 }
 
 /**
+ * 上传知识库文档返回结果
+ */
+export interface UploadKnowledgeDocumentSetRsp {
+  /**
+   * 给文件分配的 ID 信息。
+   * @deprecated
+   */
+  DocumentSetId?: string
+  /**
+   * 文件名
+   */
+  DocumentSetName?: string
+  /**
+   * 文件标题
+   */
+  FileTitle?: string
+  /**
+   * 文件元信息，为jsonstring
+   */
+  FileMetaData?: string
+  /**
+   * Cos存储文件ID
+   */
+  FileId?: string
+}
+
+/**
  * PutWxAppIdToWeApp请求参数结构体
  */
 export interface PutWxAppIdToWeAppRequest {
@@ -380,6 +568,203 @@ export interface DocumentQuery {
 }
 
 /**
+ * 低码应用详情
+ */
+export interface Weapp {
+  /**
+   * 应用id
+   */
+  Id?: string
+  /**
+   * 应用所属者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 标识
+   */
+  Name?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 应用名称
+   */
+  Title?: string
+  /**
+   * 环境信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Env?: string
+  /**
+   * 状态.
+0:已经安装
+3:安装中
+4:安装失败
+   */
+  Status?: number
+  /**
+   * 环境信息
+   */
+  EnvId?: string
+  /**
+   * 环境地域
+   */
+  EnvRegion?: string
+  /**
+   * 资源包
+   */
+  PkgId?: string
+  /**
+   * 应用信息是否安装到cms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CmsProject?: number
+  /**
+   * 渠道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Channel?: string
+  /**
+   * 模板id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateId?: string
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
+   * 是否计费应用
+   */
+  IsFree?: boolean
+  /**
+   * 应用内容类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContentType?: string
+  /**
+   * 应用类型，是否为B端应用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppType?: number
+  /**
+   * 关联B端一样id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttachAppId?: string
+  /**
+   * 应用类型，是否为企业应用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EType?: number
+  /**
+   * 企业应用数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EData?: string
+  /**
+   * 最新一次小程序构建id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastMpCiId?: string
+  /**
+   * 最新一次小程序状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastMpCiStatus?: string
+  /**
+   * 最新一次web构建id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastWebCiId?: string
+  /**
+   * 最新一次web状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastWebCiStatus?: string
+  /**
+   * 最新部署时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastDeployTime?: string
+  /**
+   * 安装任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobInfo?: AppJobInfo
+  /**
+   * 应用端
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Platform?: string
+  /**
+   * 最新一次web构建模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastWebCiMode?: number
+  /**
+   * 最新一次小程序构建模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastMpCiMode?: number
+  /**
+   * 应用场景化入口类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SceneType?: string
+  /**
+   * client_Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * 图标地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IconUrl?: string
+  /**
+   * 页面图标地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FaviconUrl?: string
+  /**
+   * 图标背景色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackgroundColor?: string
+  /**
+   * 应用是否收藏
+   */
+  Favorite?: boolean
+  /**
+   * 发布平台：web、mp、pc、adminPortal、xPagePC、cloudAdmin
+   */
+  PublishPlatform?: string
+}
+
+/**
  * UpdateKnowledgeSet请求参数结构体
  */
 export interface UpdateKnowledgeSetRequest {
@@ -407,6 +792,20 @@ export interface UpdateKnowledgeSetRequest {
    * 知识库的meta信息
    */
   Meta?: string
+}
+
+/**
+ * 角色分页
+ */
+export interface RoleListPage {
+  /**
+   * 角色列表
+   */
+  RoleList: Array<WedaRole>
+  /**
+   * 总数
+   */
+  Total: number
 }
 
 /**
@@ -778,21 +1177,51 @@ export interface DeleteKnowledgeSetRequest {
 }
 
 /**
- * 数据源关联的的信息
+ * 安装应用，任务详情
  */
-export interface RelationField {
+export interface AppJobInfo {
   /**
-   * 关联关系字段
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Field?: string
+  Status: number
   /**
-   * 关联关系格式
+   * 当前步骤
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Format?: string
+  Step: number
   /**
-   * 关联数据源名称
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RelateDataSourceName?: string
+  Id: number
+  /**
+   * 任务总共步骤数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalStep: number
+  /**
+   * 当前步骤详情
+   */
+  StepDesc: string
+  /**
+   * 错误信息
+   */
+  ErrMsg: string
+}
+
+/**
+ * 查询知识库列表返回
+ */
+export interface KnowledgeSetRsp {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 知识库列表
+   */
+  KnowledgeSets?: Array<KnowledgeSet>
 }
 
 /**
@@ -902,6 +1331,38 @@ export interface DeleteKnowledgeDocumentSetRequest {
 }
 
 /**
+ * DescribeResourceRoleList返回参数结构体
+ */
+export interface DescribeResourceRoleListResponse {
+  /**
+   * 角色列表
+   */
+  Data?: RoleListPage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRelatedUsers返回参数结构体
+ */
+export interface DescribeRelatedUsersResponse {
+  /**
+   * 关联的用户列表
+   */
+  Data?: Array<WedaUser>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 搜索数据的集合
  */
 export interface QureyKnowledgeDocumentSet {
@@ -977,6 +1438,26 @@ export interface DescribeDataSourceListResponse {
    * data 数据
    */
   Data?: DataSourceDetailItems
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApps返回参数结构体
+ */
+export interface DescribeAppsResponse {
+  /**
+   * 应用列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weapps?: Array<Weapp>
+  /**
+   * 应用个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1201,6 +1682,70 @@ export interface DescribeKnowledgeDocumentSetDetailResponse {
 }
 
 /**
+ * SearchDocList请求参数结构体
+ */
+export interface SearchDocListRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 知识库名称
+   */
+  CollectionView?: string
+  /**
+   * 搜索模式
+   */
+  SearchKey?: string
+  /**
+   * 搜索值
+   */
+  SearchValue?: string
+  /**
+   * 页码
+   */
+  PageNo?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+}
+
+/**
+ * DescribeResourceRoleList请求参数结构体
+ */
+export interface DescribeResourceRoleListRequest {
+  /**
+   * 资源id
+   */
+  ResourceId: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 预览：pre；非预览：prod
+   */
+  EnvType: string
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 子资源类型
+   */
+  SubType?: string
+  /**
+   * 页码
+   */
+  PageNo?: number
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+}
+
+/**
  * 数据源关联App信息
  */
 export interface DataSourceLinkApp {
@@ -1245,17 +1790,29 @@ export interface SearchDocRsp {
 }
 
 /**
- * 查询知识库列表返回
+ * DescribeRelatedUsers请求参数结构体
  */
-export interface KnowledgeSetRsp {
+export interface DescribeRelatedUsersRequest {
   /**
-   * 总数
+   * 角色id
    */
-  Total?: number
+  RoleId: number
   /**
-   * 知识库列表
+   * 环境id
    */
-  KnowledgeSets?: Array<KnowledgeSet>
+  EnvId: string
+  /**
+   * 页码
+   */
+  PageNo: number
+  /**
+   * 页面含量
+   */
+  PageSize: number
+  /**
+   * 环境类型
+   */
+  EnvType?: string
 }
 
 /**
@@ -1270,6 +1827,32 @@ export interface DataSourceDetailItems {
    * 数据源列表总个数
    */
   Count?: number
+}
+
+/**
+ * 组织架构返回参数
+ */
+export interface OrgResp {
+  /**
+   * 部门id
+   */
+  OrgId: string
+  /**
+   * 部门名称
+   */
+  OrgName: string
+  /**
+   * 部门标识
+   */
+  OrgIdentity: string
+  /**
+   * 部门层级
+   */
+  Level: string
+  /**
+   * 主键字段
+   */
+  PrimaryColumn: string
 }
 
 /**
@@ -1290,4 +1873,39 @@ export interface CreateKnowledgeSetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * weda角色
+ */
+export interface WedaRole {
+  /**
+   * 角色名称
+   */
+  Name: string
+  /**
+   * 角色标识
+   */
+  RoleIdentity: string
+  /**
+   * 角色id
+   */
+  Id: number
+  /**
+   * 父角色id
+   */
+  ParentRoleId: number
+  /**
+   * 子角色id
+   */
+  ChildRoleId: number
+  /**
+   * 环境标识
+   */
+  EnvIdentity: string
+  /**
+   * 是否已发布
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsReleased: boolean
 }

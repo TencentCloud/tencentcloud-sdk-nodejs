@@ -28,4 +28,14 @@ it("cloudapp.v20220530.VerifyLicense", async function () {
     }
 })
 
+it("cloudapp.v20220530.DescribeLicense", async function () {
+    try {
+       const data = await client.DescribeLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

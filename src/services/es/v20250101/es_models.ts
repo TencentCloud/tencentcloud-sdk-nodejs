@@ -47,6 +47,18 @@ export interface ChatCompletionsRequest {
    * 当 OnlineSearch 为 true 时，指定的搜索引擎，默认为 bing。
    */
   OnlineSearchOptions?: OnlineSearchOptions
+  /**
+   * 可调用的工具列表，当前支持模型：hunyuan-turbo, deepseek-v3。
+   */
+  Tools?: Array<Tool>
+  /**
+   * 工具使用选项，可选值包括 none、auto、custom。说明：1. 仅对 hunyuan-turbo、deepseek-v3 模型生效。2. none：不调用工具；auto：模型自行选择生成回复或调用工具；custom：强制模型调用指定的工具。3. 未设置时，默认值为auto
+   */
+  ToolChoice?: string
+  /**
+   * 强制模型调用指定的工具，当参数ToolChoice为custom时，此参数为必填
+   */
+  CustomTool?: Tool
 }
 
 /**
@@ -324,6 +336,20 @@ export interface ChunkDocumentResponse {
 }
 
 /**
+ * 用户指定模型使用的工具
+ */
+export interface Tool {
+  /**
+   * 工具类型，当前只支持function
+   */
+  Type: string
+  /**
+   * 具体要调用的function
+   */
+  Function: ToolFunction
+}
+
+/**
  * GetDocumentParseResult返回参数结构体
  */
 export interface GetDocumentParseResultResponse {
@@ -436,6 +462,24 @@ export interface ChunkConfig {
    * 相邻切片重合字符数，需要小于分片长度
    */
   ChunkOverlap?: number
+}
+
+/**
+ * function定义
+ */
+export interface ToolFunction {
+  /**
+   * function名称，只能包含a-z，A-Z，0-9，_或-
+   */
+  Name: string
+  /**
+   * function参数，一般为json字符串
+   */
+  Parameters: string
+  /**
+   * function的简单描述
+   */
+  Description?: string
 }
 
 /**

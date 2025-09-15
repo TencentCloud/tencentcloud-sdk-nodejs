@@ -34,6 +34,133 @@ export interface DescribeCloudRunServersResponse {
 }
 
 /**
+ * 服务基础配置信息
+ */
+export interface ServerBaseConfig {
+  /**
+   * 环境 Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 是否开启公网访问
+   */
+  OpenAccessTypes: Array<string>
+  /**
+   * Cpu 规格
+   */
+  Cpu: number
+  /**
+   * Mem 规格
+   */
+  Mem: number
+  /**
+   * 最小副本数
+   */
+  MinNum: number
+  /**
+   * 最大副本数
+   */
+  MaxNum: number
+  /**
+   * 扩缩容配置
+   */
+  PolicyDetails: Array<HpaPolicy>
+  /**
+   * 日志采集路径
+   */
+  CustomLogs: string
+  /**
+   * 环境变量
+   */
+  EnvParams: string
+  /**
+   * 延迟检测时间
+   */
+  InitialDelaySeconds: number
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 服务端口
+   */
+  Port: number
+  /**
+   * 是否有Dockerfile
+   */
+  HasDockerfile: boolean
+  /**
+   * Dockerfile 文件名
+   */
+  Dockerfile: string
+  /**
+   * 构建目录
+   */
+  BuildDir: string
+  /**
+   * 日志类型: none | default | custom
+   */
+  LogType?: string
+  /**
+   * cls setId
+   */
+  LogSetId?: string
+  /**
+   * cls 主题id
+   */
+  LogTopicId?: string
+  /**
+   * 解析类型：json ｜ line
+   */
+  LogParseType?: string
+  /**
+   * 服务标签, function: 函数托管
+   */
+  Tag?: string
+  /**
+   * 内网访问开关 close | open
+   */
+  InternalAccess?: string
+  /**
+   * 内网域名
+   */
+  InternalDomain?: string
+  /**
+   * 运行模式
+   */
+  OperationMode?: string
+  /**
+   * 定时扩缩容配置
+   */
+  TimerScale?: Array<TimerScale>
+  /**
+   * Dockerfile EntryPoint 参数
+   */
+  EntryPoint?: Array<string>
+  /**
+   * Dockerfile Cmd 参数
+   */
+  Cmd?: Array<string>
+  /**
+   * 会话亲和性开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionAffinity?: string
+  /**
+   * Vpc 配置参数
+   */
+  VpcConf?: VpcConf
+  /**
+   * 存储配置信息
+   */
+  VolumesConf?: Array<VolumeConf>
+}
+
+/**
  * 代码仓库信息
  */
 export interface RepositoryInfo {
@@ -150,21 +277,28 @@ export interface CreateCloudRunServerRequest {
    * 服务配置信息
    */
   Items?: Array<DiffConfigItem>
+  /**
+   * vpc 信息
+   */
+  VpcInfo?: CreateVpcInfo
 }
 
 /**
- * 函数的信息
+ * 创建 vpc 信息
  */
-export interface FunctionInfo {
+export interface CreateVpcInfo {
   /**
-   * 命名空间
+   * vpc id
    */
-  Namespace: string
+  VpcId: string
   /**
-   * 所属地域。
-当前支持ap-shanghai
+   * 1 新建 2 指定
    */
-  Region: string
+  CreateType: number
+  /**
+   * 子网ID列表
+   */
+  SubnetIds?: Array<string>
 }
 
 /**
@@ -583,6 +717,10 @@ export interface DescribeCloudRunServersRequest {
    * 服务类型：function | container
    */
   ServerType?: string
+  /**
+   * vpcId
+   */
+  VpcId?: string
 }
 
 /**
@@ -662,130 +800,18 @@ export interface OnlineVersionInfo {
 }
 
 /**
- * 服务基础配置信息
+ * 函数的信息
  */
-export interface ServerBaseConfig {
+export interface FunctionInfo {
   /**
-   * 环境 Id
+   * 命名空间
    */
-  EnvId: string
+  Namespace: string
   /**
-   * 服务名
+   * 所属地域。
+当前支持ap-shanghai
    */
-  ServerName: string
-  /**
-   * 是否开启公网访问
-   */
-  OpenAccessTypes: Array<string>
-  /**
-   * Cpu 规格
-   */
-  Cpu: number
-  /**
-   * Mem 规格
-   */
-  Mem: number
-  /**
-   * 最小副本数
-   */
-  MinNum: number
-  /**
-   * 最大副本数
-   */
-  MaxNum: number
-  /**
-   * 扩缩容配置
-   */
-  PolicyDetails: Array<HpaPolicy>
-  /**
-   * 日志采集路径
-   */
-  CustomLogs: string
-  /**
-   * 环境变量
-   */
-  EnvParams: string
-  /**
-   * 延迟检测时间
-   */
-  InitialDelaySeconds: number
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-  /**
-   * 服务端口
-   */
-  Port: number
-  /**
-   * 是否有Dockerfile
-   */
-  HasDockerfile: boolean
-  /**
-   * Dockerfile 文件名
-   */
-  Dockerfile: string
-  /**
-   * 构建目录
-   */
-  BuildDir: string
-  /**
-   * 日志类型: none | default | custom
-   */
-  LogType?: string
-  /**
-   * cls setId
-   */
-  LogSetId?: string
-  /**
-   * cls 主题id
-   */
-  LogTopicId?: string
-  /**
-   * 解析类型：json ｜ line
-   */
-  LogParseType?: string
-  /**
-   * 服务标签, function: 函数托管
-   */
-  Tag?: string
-  /**
-   * 内网访问开关 close | open
-   */
-  InternalAccess?: string
-  /**
-   * 内网域名
-   */
-  InternalDomain?: string
-  /**
-   * 运行模式
-   */
-  OperationMode?: string
-  /**
-   * 定时扩缩容配置
-   */
-  TimerScale?: Array<TimerScale>
-  /**
-   * Dockerfile EntryPoint 参数
-   */
-  EntryPoint?: Array<string>
-  /**
-   * Dockerfile Cmd 参数
-   */
-  Cmd?: Array<string>
-  /**
-   * 会话亲和性开关
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SessionAffinity?: string
-  /**
-   * Vpc 配置参数
-   */
-  VpcConf?: VpcConf
-  /**
-   * 存储配置信息
-   */
-  VolumesConf?: Array<VolumeConf>
+  Region: string
 }
 
 /**

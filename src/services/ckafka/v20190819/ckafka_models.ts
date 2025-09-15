@@ -666,7 +666,7 @@ export interface MqttParam {
    */
   Topics: string
   /**
-   * MQTT clean-session
+   * 用于控制会话的持久性。cleanSession 为true时，连接时会创建一个全新的会话。 cleanSession = false时，连接时会恢复之前的会话。
    */
   CleanSession: boolean
   /**
@@ -1163,7 +1163,7 @@ export interface MySQLParam {
    */
   DateTimeZone?: string
   /**
-   * 自建
+   * 是否为自建集群
    */
   SelfBuilt?: boolean
 }
@@ -1429,7 +1429,7 @@ export interface InquiryPublicNetworkParam {
    */
   PublicNetworkChargeType?: string
   /**
-   * 公网带宽, 单位MB
+   * 公网带宽, 单位MB 取值需是0，或是3的倍数
    */
   PublicNetworkMonthly?: number
 }
@@ -2008,7 +2008,11 @@ export interface InstanceAttributesResponse {
    */
   Cvm?: number
   /**
-   * 类型
+   * 实例类型  枚举列表: 
+profession  :专业版    
+standards2  :标准版
+premium   :高级版
+serverless  :serverless版
    */
   InstanceType?: string
   /**
@@ -2028,7 +2032,7 @@ export interface InstanceAttributesResponse {
    */
   PublicNetwork?: number
   /**
-   * 时间
+   * 该字段已废弃,无实际含义
    */
   DeleteRouteTimestamp?: string
   /**
@@ -2044,11 +2048,17 @@ export interface InstanceAttributesResponse {
    */
   DynamicDiskConfig?: DynamicDiskConfig
   /**
-   * 实例计费类型
+   * 实例计费类型  POSTPAID_BY_HOUR 按小时付费; PREPAID 包年包月
    */
   InstanceChargeType?: string
   /**
-   * 集群类型
+   * 集群类型  
+CLOUD_IDC IDC集群
+CLOUD_CVM_SHARE CVM共享集群
+CLOUD_CVM_YUNTI 云梯CVM集群
+CLOUD_CVM    CVM集群
+CLOUD_CDC CDC集群
+CLOUD_EKS_TSE EKS集群
    */
   ClusterType?: string
   /**
@@ -2060,7 +2070,7 @@ export interface InstanceAttributesResponse {
    */
   ElasticFloatBandwidth?: number
   /**
-   * ssl自定义证书id
+   * ssl自定义证书id  仅自定义证书实例集群返回
    */
   CustomCertId?: string
   /**
@@ -2254,7 +2264,7 @@ export interface DeleteRouteRequest {
    */
   InstanceId: string
   /**
-   * 路由id,可通过DescribeRoute接口获取
+   * 路由id,可通过[DescribeRoute](https://cloud.tencent.com/document/product/597/45484)接口获取
    */
   RouteId: number
   /**
@@ -3187,11 +3197,11 @@ export interface DescribeCkafkaZoneRequest {
 }
 
 /**
- * 标准版销售信息
+ * 各版本销售信息
  */
 export interface SaleInfo {
   /**
-   * 手动设置的flag标志
+   * 手动设置的flag标志，true表示售罄，false表示可售。
    */
   Flag?: boolean
   /**
@@ -5326,7 +5336,7 @@ export interface ZoneInfo {
    */
   AppId?: number
   /**
-   * 标识
+   * 可用区是否售罄标识，true表示已售罄，false表示未售罄。
    */
   Flag?: boolean
   /**
@@ -7768,7 +7778,7 @@ export interface DeleteGroupRequest {
    */
   InstanceId: string
   /**
-   * 消费组名称，可通过DescribeConsumerGroup接口获取。
+   * 消费组名称，可通过[DescribeConsumerGroup](https://cloud.tencent.com/document/product/597/40841)接口获取。
    */
   Group: string
 }
@@ -8649,7 +8659,7 @@ export interface ModifyGroupOffsetsRequest {
   /**
    * 需要重置的主题名列表
    */
-  Topics?: Array<string>
+  Topics: Array<string>
   /**
    * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
    */
@@ -8725,6 +8735,11 @@ export interface Route {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Note?: string
+  /**
+   * 路由的状态。1: 创建中，2: 创建成功，3: 创建失败，4: 删除中，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
 }
 
 /**

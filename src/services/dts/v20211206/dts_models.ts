@@ -1770,6 +1770,7 @@ export interface MigrateOption {
   MigrateType?: string
   /**
    * 数据一致性校验选项， 默认为不开启一致性校验
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Consistency?: ConsistencyOption
   /**
@@ -1786,7 +1787,7 @@ export interface MigrateOption {
   IsDstReadOnly?: boolean
   /**
    * 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数: 
-["DstWriteMode":normal, 	目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(跟正常流程一样，不做额外动作) 	"IsDstReadOnly":true, 	是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) 	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 	"ReplTimeout":120，		复制超时时间(秒) 	"IsExpireKey":"true",过期key自动淘汰]
+["DstWriteMode":normal, 	目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务	"IsDstReadOnly":true, 	是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) 	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 	"ReplTimeout":120，		复制超时时间(秒) 	"IsExpireKey":"true",过期key自动淘汰]
    */
   ExtraAttr?: Array<KeyValuePairOption>
   /**
@@ -2201,7 +2202,7 @@ export interface CreateMigrationServiceResponse {
  */
 export interface KafkaOption {
   /**
-   * 投递到kafka的数据类型，如Avro,Json,canal-pb,canal-json
+   * 投递到kafka的数据类型，如Avro,Json,canal-pb,canal-json,debezium
    */
   DataType?: string
   /**
@@ -2473,7 +2474,7 @@ export interface AdvancedObjectsItem {
  */
 export interface Options {
   /**
-   * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)
+   * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)；mongodb链路只支持全量数据初始化或仅增量。
    */
   InitType?: string
   /**
@@ -2608,7 +2609,7 @@ export interface ConfigureSyncJobRequest {
    */
   SrcInfo?: Endpoint
   /**
-   * 源端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等。
+   * 源端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等，mongodb使用此参数透传。
    */
   SrcInfos?: SyncDBEndpointInfos
   /**
@@ -2620,7 +2621,7 @@ export interface ConfigureSyncJobRequest {
    */
   DstInfo?: Endpoint
   /**
-   * 目标端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等。
+   * 目标端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等，mongodb使用此参数透传。
    */
   DstInfos?: SyncDBEndpointInfos
   /**
@@ -4564,7 +4565,7 @@ export interface SyncJobInfo {
    */
   SrcNodeType?: string
   /**
-   * 源端信息，多节点数据库使用
+   * 源端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。
    */
   SrcInfos?: SyncDBEndpointInfos
   /**
@@ -4588,7 +4589,7 @@ export interface SyncJobInfo {
    */
   DstNodeType?: string
   /**
-   * 目标端信息，多节点数据库使用
+   * 目标端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。
    */
   DstInfos?: SyncDBEndpointInfos
   /**

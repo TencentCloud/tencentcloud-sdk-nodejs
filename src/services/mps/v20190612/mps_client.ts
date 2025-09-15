@@ -78,6 +78,7 @@ import {
   AudioTrackChannelInfo,
   MediaTranscodeItem,
   DiagnoseResult,
+  SmartEraseTaskInput,
   RawWatermarkParameter,
   AiReviewTaskPoliticalOcrResult,
   AiSampleWord,
@@ -214,6 +215,7 @@ import {
   ParseNotificationRequest,
   ImageEraseConfig,
   CreateWordSamplesRequest,
+  SmartEraseWatermarkConfig,
   DescribeStreamLinkEventsResponse,
   PoliticalAsrReviewTemplateInfoForUpdate,
   DescribeStreamLinkFlowStatisticsRequest,
@@ -272,6 +274,7 @@ import {
   LiveStreamTaskNotifyConfig,
   VideoTemplateInfo,
   ComposeSubtitleStyle,
+  SmartErasePrivacyConfig,
   PornOcrReviewTemplateInfoForUpdate,
   AiReviewTaskPornOcrResult,
   BatchProcessMediaRequest,
@@ -291,6 +294,7 @@ import {
   AiAnalysisTaskFrameTagOutput,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   MediaAnimatedGraphicsItem,
+  BeautyConfig,
   DescribeQualityControlTemplatesRequest,
   ModifyWordSampleRequest,
   EditMediaTask,
@@ -315,6 +319,7 @@ import {
   AiAnalysisTaskSegmentOutput,
   ComposeVideoItem,
   LiveStreamOcrFullTextRecognitionResult,
+  VODOutputStorage,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   DescribeOutputHLSPullSettings,
   AddBlindWatermarkConfig,
@@ -335,6 +340,7 @@ import {
   SnapshotByTimeOffsetTaskInput,
   ImageSpriteTaskInput,
   DeleteContentReviewTemplateResponse,
+  VODInputInfo,
   ImageWatermarkTemplate,
   ModifyQualityControlTemplateResponse,
   AsrWordsConfigureInfo,
@@ -352,6 +358,7 @@ import {
   ScheduleSmartSubtitleTaskResult,
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
+  EraseArea,
   BlindWatermarkEmbedInfo,
   DescribeStreamLinkActivateStateResponse,
   VideoTemplateInfoForUpdate,
@@ -399,6 +406,7 @@ import {
   DescribeImageSpriteTemplatesRequest,
   CreateQualityControlTemplateRequest,
   AiSampleTagOperation,
+  RawSmartEraseParameter,
   SRTSourceAddressResp,
   CreateAIRecognitionTemplateResponse,
   DescribeInput,
@@ -486,6 +494,7 @@ import {
   DescribeBatchTaskDetailRequest,
   AiReviewProhibitedAsrTaskOutput,
   LiveStreamFaceRecognitionResult,
+  SmartEraseTaskResult,
   LiveStreamAiReviewResultInfo,
   DescribeSampleSnapshotTemplatesRequest,
   CoverConfigureInfoForUpdate,
@@ -600,6 +609,7 @@ import {
   VolumeBalanceConfig,
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
+  BeautyEffectItemConfig,
   AiRecognitionTaskTransTextResultOutput,
   SmartSubtitlesResult,
   ModifySnapshotByTimeOffsetTemplateRequest,
@@ -608,6 +618,7 @@ import {
   LiveStreamAiReviewResultItem,
   DescribeVideoSearchTaskDetailRequest,
   CreateInputRTPSettings,
+  SmartEraseSubtitleConfig,
   DeleteLiveRecordTemplateResponse,
   SearchTaskResult,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
@@ -716,8 +727,10 @@ import {
   DeleteSnapshotByTimeOffsetTemplateRequest,
   DescribeAnimatedGraphicsTemplatesResponse,
   FlowAudio,
+  BeautyFilterItemConfig,
   ActivityResItem,
   LiveActivityResItem,
+  EraseTimeArea,
   SearchValueInput,
   EditMediaFileInfo,
   AiAnalysisTaskDelLogoResult,
@@ -954,8 +967,9 @@ export class Client extends AbstractClient {
 7. 智能内容审核（例如鉴黄、敏感信息检测）；
 8. 智能内容分析（例如标签、分类、封面、按帧标签、拆条、集锦、片头片尾、游戏打点）；
 9. 智能内容识别（例如人脸、文本全文、文本关键词、语音全文、语音关键词、语音翻译、物体识别）；
-10. 媒体质检（例如媒体格式诊断、音画内容检测（抖动、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等）、无参考打分）；
+10. 媒体质检（例如媒体格式诊断、音画内容检测、无参考打分，其中音画内容检测主要针对抖动、模糊、低光照、过曝光、花屏、噪点、马赛克、二维码等问题）;
 11. 智能字幕（例如语音全文、语音热词、语音翻译）；
+12.  智能擦除（去水印、去字幕、隐私保护）；
      */
   async ProcessMedia(
     req: ProcessMediaRequest,
@@ -1790,6 +1804,9 @@ export class Client extends AbstractClient {
 7. 智能内容审核（鉴黄、敏感信息检测）；
 8. 智能内容分析（标签、分类、封面、按帧标签）；
 9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
+10. 媒体质检（直播流格式诊断、音画内容检测（抖动、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等）、无参考打分）
+11. 智能字幕（语音全文、语音热词、语音翻译）
+12. 智能擦除（去水印、去字幕、隐私保护）；
 
 注意：创建编排成功后是禁用状态，需要手动启用。
      */

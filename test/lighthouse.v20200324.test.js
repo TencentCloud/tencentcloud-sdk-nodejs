@@ -648,6 +648,16 @@ it("lighthouse.v20200324.DescribeBundles", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeMcpServerTemplates", async function () {
+    try {
+       const data = await client.DescribeMcpServerTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.ModifyMcpServer", async function () {
     try {
        const data = await client.ModifyMcpServer({})

@@ -65,10 +65,12 @@ import {
   DeleteDiskBackupsRequest,
   InquirePriceRenewInstancesRequest,
   DiscountDetail,
+  McpServerTemplateEnv,
   DescribeDiskConfigsRequest,
   DescribeFirewallTemplateQuotaResponse,
   DescribeRegionsResponse,
   DescribeFirewallTemplateApplyRecordsRequest,
+  DescribeMcpServerTemplatesResponse,
   DescribeDiskBackupsResponse,
   AttachDisksRequest,
   ModifyDiskBackupsAttributeRequest,
@@ -206,7 +208,7 @@ import {
   DiskChargePrepaid,
   RunDockerContainersResponse,
   CreateKeyPairRequest,
-  RestartMcpServersRequest,
+  DescribeMcpServerTemplatesRequest,
   ModifyDockerContainerRequest,
   DiskPrice,
   DescribeInstancesRequest,
@@ -254,7 +256,7 @@ import {
   TerminateInstancesRequest,
   ModifyFirewallTemplateRequest,
   RenewDiskChargePrepaid,
-  SystemDisk,
+  RestartMcpServersRequest,
   ApplyFirewallTemplateResponse,
   TerminateDisksRequest,
   ModifyMcpServerRequest,
@@ -274,6 +276,7 @@ import {
   DescribeBundleDiscountRequest,
   DescribeFirewallTemplateRulesResponse,
   DescribeDisksReturnableResponse,
+  McpServerTemplate,
   InstanceIdentifier,
   DeleteFirewallTemplateRequest,
   StopInstancesResponse,
@@ -300,6 +303,7 @@ import {
   RenewInstancesResponse,
   RenameDockerContainerRequest,
   DescribeDisksDeniedActionsResponse,
+  SystemDisk,
   ResetInstanceResponse,
   IsolateDisksResponse,
   DescribeFirewallRulesRequest,
@@ -824,7 +828,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口(ModifyDisksBackupQuota)用于调整云硬盘备份点配额。
-该操作目前仅支持云硬盘类型为数据盘且状态是ATTACHED（已挂载）或 UNATTACHED（待挂载）的云硬盘。
+该操作目前仅支持状态是ATTACHED（已挂载）或 UNATTACHED（待挂载）的云硬盘。
 支持批量操作。每次批量请求云硬盘数量上限为15个。
      */
   async ModifyDisksBackupQuota(
@@ -1044,6 +1048,16 @@ CVM镜像共享到轻量应用服务器镜像需要满足如下条件：
     cb?: (error: string, rep: DescribeBundlesResponse) => void
   ): Promise<DescribeBundlesResponse> {
     return this.request("DescribeBundles", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeMcpServerTemplates）用于查询MCP Server模板列表。
+   */
+  async DescribeMcpServerTemplates(
+    req: DescribeMcpServerTemplatesRequest,
+    cb?: (error: string, rep: DescribeMcpServerTemplatesResponse) => void
+  ): Promise<DescribeMcpServerTemplatesResponse> {
+    return this.request("DescribeMcpServerTemplates", req, cb)
   }
 
   /**

@@ -398,6 +398,16 @@ it("cls.v20201016.DeleteCosRecharge", async function () {
     }
 })
 
+it("cls.v20201016.DescribeKafkaConsumerGroupList", async function () {
+    try {
+       const data = await client.DescribeKafkaConsumerGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeKafkaRecharges", async function () {
     try {
        const data = await client.DescribeKafkaRecharges({})
@@ -988,9 +998,29 @@ it("cls.v20201016.DescribeShippers", async function () {
     }
 })
 
+it("cls.v20201016.ModifyKafkaConsumerGroupOffset", async function () {
+    try {
+       const data = await client.ModifyKafkaConsumerGroupOffset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyConsoleSharing", async function () {
     try {
        const data = await client.ModifyConsoleSharing({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeKafkaConsumerGroupDetail", async function () {
+    try {
+       const data = await client.DescribeKafkaConsumerGroupDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

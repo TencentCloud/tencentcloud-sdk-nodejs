@@ -505,42 +505,33 @@ export interface ModifyConfigExtraResponse {
 }
 
 /**
- * SearchCosRechargeInfo请求参数结构体
+ * DescribeKafkaConsumerGroupDetail返回参数结构体
  */
-export interface SearchCosRechargeInfoRequest {
+export interface DescribeKafkaConsumerGroupDetailResponse {
   /**
-   * 日志主题Id。
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * 日志集id
    */
-  TopicId: string
+  LogsetId?: string
   /**
-   * 日志集Id。
-
-- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
+   * 消费组名称
    */
-  LogsetId: string
+  Group?: string
   /**
-   * COS导入任务名称,最大支持128个字节。
+   * 消费组信息列表
    */
-  Name: string
+  PartitionInfos?: Array<GroupPartitionInfo>
   /**
-   * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	
-
-- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。
+   * Empty：组内没有成员，但存在已提交的偏移量。所有消费者都离开但保留了偏移量
+Dead：组内没有成员，且没有已提交的偏移量。组被删除或长时间无活动
+Stable：组内成员正常消费，分区分配平衡。正常运行状态
+PreparingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开
+CompletingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开
    */
-  Bucket: string
+  State?: string
   /**
-   * COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BucketRegion: string
-  /**
-   * COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。
-   */
-  Prefix?: string
-  /**
-   * 压缩模式:   "", "gzip", "lzop", "snappy"。  默认："" 不压缩
-   */
-  Compress?: string
+  RequestId?: string
 }
 
 /**
@@ -551,6 +542,36 @@ export interface DeleteScheduledSqlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * kafka协议消费组信息
+ */
+export interface ConsumerGroup {
+  /**
+   * 消费组名称
+   */
+  Group?: string
+  /**
+   * 状态。
+
+- Empty：组内没有成员，但存在已提交的偏移量。所有消费者都离开但保留了偏移量
+- Dead：组内没有成员，且没有已提交的偏移量。组被删除或长时间无活动
+- Stable：组内成员正常消费，分区分配平衡。正常运行状态
+- PreparingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开
+- CompletingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开
+
+   */
+  State?: string
+  /**
+   * 分区分配策略均衡算法名称。
+
+- 常见均衡算法如下：
+    - range:按分区范围分配
+    - roundrobin:轮询式分配
+    - sticky:粘性分配（避免不必要的重平衡）
+   */
+  ProtocolName?: string
 }
 
 /**
@@ -713,7 +734,11 @@ export interface CreateLogsetRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 日志集ID，格式为：用户自定义部分-用户appid，用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符，尾部需要使用-拼接用户appid
+   * 日志集ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。
+
+- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符。
+- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。
+- 如果指定该字段，需保证全地域唯一
    */
   LogsetId?: string
 }
@@ -1695,13 +1720,37 @@ export interface DescribeIndexRequest {
 }
 
 /**
- * ModifyScheduledSql返回参数结构体
+ * ModifyKafkaConsumerGroupOffset请求参数结构体
  */
-export interface ModifyScheduledSqlResponse {
+export type ModifyKafkaConsumerGroupOffsetRequest = null
+
+/**
+ * DescribeKafkaConsumerGroupList请求参数结构体
+ */
+export interface DescribeKafkaConsumerGroupListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 日志主题id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  RequestId?: string
+  TopicId: string
+  /**
+   * - group
+按照【消费组名称】进行过滤。
+类型：String
+必选：否
+示例：消费组1
+
+每次请求的Filters的上限为10，Filter.Values的上限为10。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为20，最大值100。
+   */
+  Limit?: number
 }
 
 /**
@@ -2243,6 +2292,42 @@ export interface CreateCosRechargeRequest {
    * 元数据。
    */
   Metadata?: Array<string>
+}
+
+/**
+ * ModifyWebCallback请求参数结构体
+ */
+export interface ModifyWebCallbackRequest {
+  /**
+   * 告警渠道回调配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/api/614/115229)获取告警渠道回调配置ID
+   */
+  WebCallbackId: string
+  /**
+   * 告警渠道回调配置名称。最大支持255个字节
+   */
+  Name?: string
+  /**
+   * 渠道类型
+
+WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调;
+   */
+  Type?: string
+  /**
+   * 回调地址。
+   */
+  Webhook?: string
+  /**
+   * 请求方式。
+
+支持POST、PUT。
+
+注意：当Type为Http时，必填。
+   */
+  Method?: string
+  /**
+   * 秘钥信息。最大支持1024个字节
+   */
+  Key?: string
 }
 
 /**
@@ -3789,9 +3874,10 @@ export interface CreateTopicRequest {
    */
   HotPeriod?: number
   /**
-   * 主题自定义ID，格式为：用户自定义部分-APPID。未填写该参数时将自动生成ID。
+   * 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。
 - 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符
-- APPID可在https://console.cloud.tencent.com/developer页面查询
+- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。
+- 如果指定该字段，需保证全地域唯一
    */
   TopicId?: string
   /**
@@ -4212,6 +4298,20 @@ export interface NoticeContentInfo {
 仅“自定义回调”支持该配置。
    */
   Headers?: Array<string>
+}
+
+/**
+ * 多主题检索返回信息
+ */
+export interface SearchLogTopics {
+  /**
+   * 多日志主题检索对应的错误信息
+   */
+  Errors?: Array<SearchLogErrors>
+  /**
+   * 多日志主题检索各日志主题信息
+   */
+  Infos?: Array<SearchLogInfos>
 }
 
 /**
@@ -4651,6 +4751,45 @@ export interface DeleteConfigRequest {
 }
 
 /**
+ * SearchCosRechargeInfo请求参数结构体
+ */
+export interface SearchCosRechargeInfoRequest {
+  /**
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 日志集Id。
+
+- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
+   */
+  LogsetId: string
+  /**
+   * COS导入任务名称,最大支持128个字节。
+   */
+  Name: string
+  /**
+   * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	
+
+- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。
+   */
+  Bucket: string
+  /**
+   * COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。
+   */
+  BucketRegion: string
+  /**
+   * COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。
+   */
+  Prefix?: string
+  /**
+   * 压缩模式:   "", "gzip", "lzop", "snappy"。  默认："" 不压缩
+   */
+  Compress?: string
+}
+
+/**
  * 多维分析的分析维度
  */
 export interface AnalysisDimensional {
@@ -4891,6 +5030,24 @@ export interface DeleteCosRechargeRequest {
 -  通过[获取日志主题列表](https://cloud.tencent.com/document/api/614/56454)获取日志主题Id。
    */
   TopicId: string
+}
+
+/**
+ * kafka协议消费组区分信息
+ */
+export interface GroupPartitionInfo {
+  /**
+   * 分区id
+   */
+  PartitionId?: number
+  /**
+   * 分区最新数据时间戳，单位：s
+   */
+  CommitTimestamp?: number
+  /**
+   * 消费者
+   */
+  Consumer?: string
 }
 
 /**
@@ -5251,24 +5408,29 @@ export interface AddMachineGroupInfoRequest {
 }
 
 /**
- * DescribeKafkaRecharges请求参数结构体
+ * DescribeKafkaConsumerGroupList返回参数结构体
  */
-export interface DescribeKafkaRechargesRequest {
+export interface DescribeKafkaConsumerGroupListResponse {
   /**
-   * 日志主题Id。
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * 日志主题名称
    */
-  TopicId: string
+  TopicName?: string
   /**
-   * 导入配置Id。
-- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
-- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
+   * 日志集id
    */
-  Id?: string
+  LogsetId?: string
   /**
-   * 状态。1: 运行中，2: 暂停，3：错误
+   * 总个数
    */
-  Status?: number
+  Total?: number
+  /**
+   * 消费组信息列表
+   */
+  Groups?: Array<ConsumerGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5330,39 +5492,24 @@ export interface PreviewKafkaRechargeResponse {
 }
 
 /**
- * ModifyWebCallback请求参数结构体
+ * DescribeKafkaRecharges请求参数结构体
  */
-export interface ModifyWebCallbackRequest {
+export interface DescribeKafkaRechargesRequest {
   /**
-   * 告警渠道回调配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/api/614/115229)获取告警渠道回调配置ID
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  WebCallbackId: string
+  TopicId: string
   /**
-   * 告警渠道回调配置名称。最大支持255个字节
+   * 导入配置Id。
+- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
+- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
    */
-  Name?: string
+  Id?: string
   /**
-   * 渠道类型
-
-WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调;
+   * 状态。1: 运行中，2: 暂停，3：错误
    */
-  Type?: string
-  /**
-   * 回调地址。
-   */
-  Webhook?: string
-  /**
-   * 请求方式。
-
-支持POST、PUT。
-
-注意：当Type为Http时，必填。
-   */
-  Method?: string
-  /**
-   * 秘钥信息。最大支持1024个字节
-   */
-  Key?: string
+  Status?: number
 }
 
 /**
@@ -7379,6 +7526,16 @@ export interface ModifyKafkaConsumerResponse {
 }
 
 /**
+ * ModifyScheduledSql返回参数结构体
+ */
+export interface ModifyScheduledSqlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyConsoleSharing返回参数结构体
  */
 export interface ModifyConsoleSharingResponse {
@@ -8132,17 +8289,17 @@ export interface MonitorTime {
 }
 
 /**
- * 多主题检索返回信息
+ * ModifyKafkaConsumerGroupOffset返回参数结构体
  */
-export interface SearchLogTopics {
+export interface ModifyKafkaConsumerGroupOffsetResponse {
   /**
-   * 多日志主题检索对应的错误信息
+   * 状态码。0：成功，-1：失败
    */
-  Errors?: Array<SearchLogErrors>
+  Code?: number
   /**
-   * 多日志主题检索各日志主题信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Infos?: Array<SearchLogInfos>
+  RequestId?: string
 }
 
 /**
@@ -8231,17 +8388,18 @@ export interface Tag {
 }
 
 /**
- * 需要过滤日志的key，及其对应的regex
+ * DescribeKafkaConsumerGroupDetail请求参数结构体
  */
-export interface KeyRegexInfo {
+export interface DescribeKafkaConsumerGroupDetailRequest {
   /**
-   * 需要过滤日志的key
+   * 日志主题id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  Key: string
+  TopicId: string
   /**
-   * key对应的过滤规则regex
+   * 消费组名称
    */
-  Regex: string
+  Group: string
 }
 
 /**
@@ -8570,6 +8728,20 @@ export interface DescribeMachineGroupConfigsRequest {
 - 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。
    */
   GroupId: string
+}
+
+/**
+ * 需要过滤日志的key，及其对应的regex
+ */
+export interface KeyRegexInfo {
+  /**
+   * 需要过滤日志的key
+   */
+  Key: string
+  /**
+   * key对应的过滤规则regex
+   */
+  Regex: string
 }
 
 /**

@@ -1124,7 +1124,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDatabaseShrinkDMF)用于收缩数据库mdf(Shrink mdf)。
+   * 本接口（ModifyDatabaseShrinkMDF）用于收缩数据库 mdf（Shrink mdf）。
    */
   async ModifyDatabaseShrinkMDF(
     req: ModifyDatabaseShrinkMDFRequest,

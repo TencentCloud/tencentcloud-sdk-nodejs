@@ -105,7 +105,7 @@ import {
   PostMaxSizeParameters,
   S3,
   DescribeDDoSAttackEventResponse,
-  DisableOriginACLRequest,
+  DescribeTimingL7OriginPullDataResponse,
   DeleteL4ProxyRulesResponse,
   ForceRedirect,
   CodeAction,
@@ -229,11 +229,12 @@ import {
   DescribeL4ProxyRulesResponse,
   OriginHealthStatus,
   ZoneConfig,
+  DescribeTimingL7OriginPullDataRequest,
   CustomizedHeader,
   ModifyDDoSProtectionResponse,
   DescribeFunctionsRequest,
   ModifyDnsRecordsStatusRequest,
-  ModifyZoneRequest,
+  ManagedRuleAutoUpdate,
   CustomRule,
   BotExtendAction,
   CreatePurgeTaskResponse,
@@ -467,6 +468,7 @@ import {
   DescribeDnsRecordsResponse,
   CreateWebSecurityTemplateRequest,
   CreateL4ProxyRequest,
+  ModifyZoneRequest,
   CreatePlanResponse,
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
@@ -563,7 +565,7 @@ import {
   DescribeIdentificationsResponse,
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
-  ManagedRuleAutoUpdate,
+  DisableOriginACLRequest,
   ClientIPCountryParameters,
   IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
@@ -2486,6 +2488,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DeleteZoneResponse) => void
   ): Promise<DeleteZoneResponse> {
     return this.request("DeleteZone", req, cb)
+  }
+
+  /**
+   * 本接口用以查询七层域名业务的回源时序数据。
+   */
+  async DescribeTimingL7OriginPullData(
+    req: DescribeTimingL7OriginPullDataRequest,
+    cb?: (error: string, rep: DescribeTimingL7OriginPullDataResponse) => void
+  ): Promise<DescribeTimingL7OriginPullDataResponse> {
+    return this.request("DescribeTimingL7OriginPullData", req, cb)
   }
 
   /**

@@ -164,6 +164,10 @@ export interface Receiver {
    * 账号uin
    */
   Uin?: number
+  /**
+   * 国家代码
+   */
+  CountryCode?: string
 }
 
 /**

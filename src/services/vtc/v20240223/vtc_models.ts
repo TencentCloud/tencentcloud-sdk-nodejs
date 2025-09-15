@@ -164,12 +164,12 @@ export interface TranslateResult {
    * 翻译源文字。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceText?: string
+  SourceText: string
   /**
    * 翻译后文字。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetText?: string
+  TargetText: string
 }
 
 /**

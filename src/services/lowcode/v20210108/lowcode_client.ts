@@ -18,24 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  WedaUser,
   DescribeKnowledgeSetListRequest,
   KnowledgeDocumentSetInfo,
   DeleteKnowledgeDocumentSetRsp,
   UploadKnowledgeDocumentSetRequest,
   UpdateKnowledgeSetResponse,
-  SearchDocListRequest,
+  DescribeAppsRequest,
   DescribeKnowledgeDocumentSetListResponse,
   DeleteAppBindWxAppResponse,
   DataSourceQueryOption,
-  UploadKnowledgeDocumentSetRsp,
+  RoleGroup,
   PageQuery,
   CheckDeployAppResponse,
   SearchDocListResponse,
+  RelationField,
   CheckDeployAppRequest,
   DescribeKnowledgeDocumentSetListRequest,
+  UploadKnowledgeDocumentSetRsp,
   PutWxAppIdToWeAppRequest,
   DocumentQuery,
+  Weapp,
   UpdateKnowledgeSetRequest,
+  RoleListPage,
   SearchDocInfo,
   DataSourceDetail,
   KnowledgeSet,
@@ -44,13 +49,17 @@ import {
   DescribeKnowledgeDocumentSetDetailRequest,
   DeployAppResponse,
   DeleteKnowledgeSetRequest,
-  RelationField,
+  AppJobInfo,
+  KnowledgeSetRsp,
   DeleteKnowledgeSetResponse,
   DescribeDataSourceListRequest,
   DeleteKnowledgeDocumentSetRequest,
+  DescribeResourceRoleListResponse,
+  DescribeRelatedUsersResponse,
   QureyKnowledgeDocumentSet,
   DescribeKnowledgeSetListResponse,
   DescribeDataSourceListResponse,
+  DescribeAppsResponse,
   DeleteAppBindWxAppRequest,
   UploadKnowledgeDocumentSetResponse,
   DeleteKnowledgeDocumentSetResponse,
@@ -61,12 +70,16 @@ import {
   DescribeKnowledgeDocumentSetListRsp,
   KnowledgeDocumentSet,
   DescribeKnowledgeDocumentSetDetailResponse,
+  SearchDocListRequest,
+  DescribeResourceRoleListRequest,
   DataSourceLinkApp,
   SearchDocRsp,
-  KnowledgeSetRsp,
+  DescribeRelatedUsersRequest,
   DataSourceDetailItems,
+  OrgResp,
   PutWxAppIdToWeAppResponse,
   CreateKnowledgeSetResponse,
+  WedaRole,
 } from "./lowcode_models"
 
 /**
@@ -109,13 +122,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 知识库文档搜索接口
+   * 分页获取当前用户的应用列表
    */
-  async SearchDocList(
-    req: SearchDocListRequest,
-    cb?: (error: string, rep: SearchDocListResponse) => void
-  ): Promise<SearchDocListResponse> {
-    return this.request("SearchDocList", req, cb)
+  async DescribeApps(
+    req: DescribeAppsRequest,
+    cb?: (error: string, rep: DescribeAppsResponse) => void
+  ): Promise<DescribeAppsResponse> {
+    return this.request("DescribeApps", req, cb)
+  }
+
+  /**
+   * 获取角色关联的用户列表
+   */
+  async DescribeRelatedUsers(
+    req: DescribeRelatedUsersRequest,
+    cb?: (error: string, rep: DescribeRelatedUsersResponse) => void
+  ): Promise<DescribeRelatedUsersResponse> {
+    return this.request("DescribeRelatedUsers", req, cb)
   }
 
   /**
@@ -129,6 +152,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 知识库文档搜索接口
+   */
+  async SearchDocList(
+    req: SearchDocListRequest,
+    cb?: (error: string, rep: SearchDocListResponse) => void
+  ): Promise<SearchDocListResponse> {
+    return this.request("SearchDocList", req, cb)
+  }
+
+  /**
    * 获取数据源详情列表
    */
   async DescribeDataSourceList(
@@ -136,6 +169,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataSourceListResponse) => void
   ): Promise<DescribeDataSourceListResponse> {
     return this.request("DescribeDataSourceList", req, cb)
+  }
+
+  /**
+   * 接口提供应用绑定微信ID功能。
+   */
+  async PutWxAppIdToWeApp(
+    req: PutWxAppIdToWeAppRequest,
+    cb?: (error: string, rep: PutWxAppIdToWeAppResponse) => void
+  ): Promise<PutWxAppIdToWeAppResponse> {
+    return this.request("PutWxAppIdToWeApp", req, cb)
   }
 
   /**
@@ -199,13 +242,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 接口提供应用绑定微信ID功能。
+   * 查询资源关联的角色列表
    */
-  async PutWxAppIdToWeApp(
-    req: PutWxAppIdToWeAppRequest,
-    cb?: (error: string, rep: PutWxAppIdToWeAppResponse) => void
-  ): Promise<PutWxAppIdToWeAppResponse> {
-    return this.request("PutWxAppIdToWeApp", req, cb)
+  async DescribeResourceRoleList(
+    req: DescribeResourceRoleListRequest,
+    cb?: (error: string, rep: DescribeResourceRoleListResponse) => void
+  ): Promise<DescribeResourceRoleListResponse> {
+    return this.request("DescribeResourceRoleList", req, cb)
   }
 
   /**

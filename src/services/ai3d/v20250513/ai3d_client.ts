@@ -18,10 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  QueryHunyuanTo3DJobRequest,
   ViewImage,
+  SubmitHunyuanTo3DProJobResponse,
   SubmitHunyuanTo3DJobResponse,
+  QueryHunyuanTo3DJobRequest,
+  SubmitHunyuanTo3DProJobRequest,
+  QueryHunyuanTo3DProJobRequest,
   File3D,
+  QueryHunyuanTo3DProJobResponse,
   QueryHunyuanTo3DJobResponse,
   SubmitHunyuanTo3DJobRequest,
 } from "./ai3d_models"
@@ -33,6 +37,28 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ai3d.tencentcloudapi.com", "2025-05-13", clientConfig)
+  }
+
+  /**
+     * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async SubmitHunyuanTo3DProJob(
+    req: SubmitHunyuanTo3DProJobRequest,
+    cb?: (error: string, rep: SubmitHunyuanTo3DProJobResponse) => void
+  ): Promise<SubmitHunyuanTo3DProJobResponse> {
+    return this.request("SubmitHunyuanTo3DProJob", req, cb)
+  }
+
+  /**
+     * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async QueryHunyuanTo3DProJob(
+    req: QueryHunyuanTo3DProJobRequest,
+    cb?: (error: string, rep: QueryHunyuanTo3DProJobResponse) => void
+  ): Promise<QueryHunyuanTo3DProJobResponse> {
+    return this.request("QueryHunyuanTo3DProJob", req, cb)
   }
 
   /**

@@ -46,31 +46,23 @@ export interface SaleParam {
 }
 
 /**
- * VerifyLicense请求参数结构体
+ * DescribeLicense返回参数结构体
  */
-export type VerifyLicenseRequest = null
-
-/**
- * VerifyLicense返回参数结构体
- */
-export interface VerifyLicenseResponse {
+export interface DescribeLicenseResponse {
   /**
-   * 软件的详细授权信息。
+   * 针对上面raw的签名
    */
-  License?: License
-  /**
-   * 当前请求服务端的时间戳，格式为RFC3339
-   */
-  Timestamp?: string
-  /**
-   * 对License字段对应的json数据的签名
-   */
-  Signature?: string
+  Token?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
+
+/**
+ * VerifyLicense请求参数结构体
+ */
+export type VerifyLicenseRequest = null
 
 /**
  * 表示应用实例的软件授权，包含颁发信息、激活信息等内容。
@@ -150,4 +142,53 @@ export interface License {
    * 授权的层级：Master 主授权；Child 子授权/增强型授权
    */
   LicenseLevel?: string
+}
+
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤 ID、名称、状态等
+
+- 若存在多个 Filter 时，Filter间的关系为逻辑与（AND）关系。
+- 若同一个 Filter 存在多个 Values，同一 Filter 下 Values 间的关系为逻辑或（OR）关系。
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段
+   */
+  Name: string
+  /**
+   * 字段的过滤值
+   */
+  Values: Array<string>
+}
+
+/**
+ * VerifyLicense返回参数结构体
+ */
+export interface VerifyLicenseResponse {
+  /**
+   * 软件的详细授权信息。
+   */
+  License?: License
+  /**
+   * 当前请求服务端的时间戳，格式为RFC3339
+   */
+  Timestamp?: string
+  /**
+   * 对License字段对应的json数据的签名
+   */
+  Signature?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLicense请求参数结构体
+ */
+export interface DescribeLicenseRequest {
+  /**
+   * 可选过滤器
+   */
+  Filters?: Array<Filter>
 }

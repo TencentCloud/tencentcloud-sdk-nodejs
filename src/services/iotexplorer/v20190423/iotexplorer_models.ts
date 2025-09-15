@@ -6612,10 +6612,17 @@ export interface DescribeCloudStorageAIServiceRequest {
   DeviceName: string
   /**
    * 云存 AI 服务类型。可选值：
-- `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
    */
   ServiceType: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
+   * 用户 ID
+   */
+  UserId?: string
 }
 
 /**

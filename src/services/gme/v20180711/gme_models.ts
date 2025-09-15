@@ -312,8 +312,7 @@ export interface CreateScanUserRequest {
    */
   UserId?: number
   /**
-   * 需要新增送检的用户号。示例："1234"
-(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+   * 需要新增送检的用户号，长度不超过1024字符。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
    */
   UserIdString?: string
   /**
@@ -472,8 +471,7 @@ export interface DeleteScanUserRequest {
    */
   UserId?: number
   /**
-   * 需要删除送检的用户号。示例："1234"
-(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+   * 需要删除送检的用户号，长度不超过1024字符。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
    */
   UserIdString?: string
 }
@@ -2007,11 +2005,11 @@ export interface UpdateScanRoomsRequest {
    */
   BizId: number
   /**
-   * 需要送检的所有房间号。多个房间号之间用","分隔。示例："0001,0002,0003"
+   * 需要送检的所有房间号。多个房间号之间用","分隔，长度不超过1024字符。示例："0001,0002,0003"
    */
   RoomIdString?: string
   /**
-   * 符合此正则表达式规则的房间号将被送检。示例：^6.*（表示所有以6开头的房间号将被送检）
+   * 符合此正则表达式规则的房间号将被送检，最大不能超过10个。示例：^6.*（表示所有以6开头的房间号将被送检）
    */
   RoomIdRegex?: Array<string>
 }
@@ -2285,11 +2283,11 @@ export interface UpdateScanUsersRequest {
    */
   BizId: number
   /**
-   * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
+   * 需要送检的所有用户号。多个用户号之间用","分隔，长度不超过1024字符。示例："0001,0002,0003"
    */
   UserIdString?: string
   /**
-   * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
+   * 符合此正则表达式规则的用户号将被送检，最大不能超过10个。示例：["^6.*"] 表示所有以6开头的用户号将被送检
    */
   UserIdRegex?: Array<string>
 }

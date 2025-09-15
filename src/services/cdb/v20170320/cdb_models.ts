@@ -7444,6 +7444,14 @@ export interface AdjustCdbProxyAddressRequest {
    * 访问模式：nearby - 就近访问，balance - 均衡分配，默认就近访问。
    */
   AccessMode?: string
+  /**
+   * 是否将libra节点当作普通RO节点
+   */
+  ApNodeAsRoNode?: string
+  /**
+   * libra节点故障，是否转发给其他节点
+   */
+  ApQueryToOtherNode?: string
 }
 
 /**
@@ -8991,6 +8999,14 @@ export interface ProxyAddress {
    * 是否开启自动负载均衡
    */
   AutoLoadBalance?: boolean
+  /**
+   * 是否把libra当作ro节点
+   */
+  ApNodeAsRoNode?: boolean
+  /**
+   * libra节点故障，是否转发给其他节点
+   */
+  ApQueryToOtherNode?: boolean
 }
 
 /**

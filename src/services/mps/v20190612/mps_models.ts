@@ -838,6 +838,10 @@ export interface SmartSubtitleTaskTransTextResultOutput {
    * 字幕文件地址。
    */
   SubtitlePath?: string
+  /**
+   * 字幕文件存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -1369,6 +1373,7 @@ export interface MediaInputInfo {
 <li> COS：COS源</li>
 <li> URL：URL源</li>
 <li> AWS-S3：AWS 源，目前只支持转码任务 </li>
+<li> VOD：点播专业版 </li>
    */
   Type: string
   /**
@@ -1385,6 +1390,11 @@ export interface MediaInputInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   S3InputInfo?: S3InputInfo
+  /**
+   * 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VODInputInfo?: VODInputInfo
 }
 
 /**
@@ -1708,6 +1718,38 @@ Info：一般性的流信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SeverityLevel?: string
+}
+
+/**
+ * 智能擦除任务
+ */
+export interface SmartEraseTaskInput {
+  /**
+   * 智能擦除模板id。
+   */
+  Definition?: number
+  /**
+   * 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawParameter?: RawSmartEraseParameter
+  /**
+   * 文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+
+**注意**：目前不支持`BatchProcessMedia`接口。
+   */
+  OutputObjectPath?: string
 }
 
 /**
@@ -3394,6 +3436,10 @@ export interface ImageTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BlindWatermarkConfig?: BlindWatermarkConfig
+  /**
+   * 美颜配置。
+   */
+  BeautyConfig?: BeautyConfig
 }
 
 /**
@@ -4972,6 +5018,42 @@ export interface CreateWordSamplesRequest {
 }
 
 /**
+ * 智能擦除模板去水印配置
+ */
+export interface SmartEraseWatermarkConfig {
+  /**
+   * 水印擦除方式。
+**自动擦除：**通过A模型自动识别视频中的水印，擦除后生成新的视频。适用于动态水印。
+当使用自动擦除时，若您不指定AutoAreas，将对视频全屏进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。
+**指定区域擦除：**针对位置较固定的静态水印，建议您直接指定擦除区域。
+当您选择指定区域擦除时，请至少传入一个指定区域。
+
+- auto 自动擦除
+- custom 指定区域擦除
+   */
+  WatermarkEraseMethod: string
+  /**
+   * 水印擦除模型。
+基础版：效果一般，性价比高，适合动画或背景较干净的视频。
+高级版：效果更好，适合短剧等现实风格视频。
+- basic 基础版
+- advanced 高级版
+   */
+  WatermarkModel: string
+  /**
+   * 自动擦除自定义区域。
+对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。
+注意，当擦除方式为custom时，此参数将不会生效。
+   */
+  AutoAreas?: Array<EraseArea>
+  /**
+   * 指定擦除自定义区域。
+对选定区域，在选定时间段内不进行检测识别直接进行擦除。
+   */
+  CustomAreas?: Array<EraseTimeArea>
+}
+
+/**
  * DescribeStreamLinkEvents返回参数结构体
  */
 export interface DescribeStreamLinkEventsResponse {
@@ -6500,6 +6582,24 @@ export interface ComposeSubtitleStyle {
 }
 
 /**
+ * 智能擦除模板隐私保护配置
+ */
+export interface SmartErasePrivacyConfig {
+  /**
+   * 隐私保护擦除方式。
+- blur 模糊
+- mosaic 马赛克
+   */
+  PrivacyModel: string
+  /**
+   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
+- face 人脸
+- plate 车牌
+   */
+  PrivacyTargets: Array<string>
+}
+
+/**
  * 文本鉴黄任务控制参数。
  */
 export interface PornOcrReviewTemplateInfoForUpdate {
@@ -6702,6 +6802,7 @@ export interface TaskOutputStorage {
    * 媒体处理输出对象存储位置的类型，支持：
 <li>COS：COS存储</li>
 <li>AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域</li>
+<li> VOD：点播专业版 </li>
    */
   Type: string
   /**
@@ -6714,6 +6815,11 @@ export interface TaskOutputStorage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   S3OutputStorage?: S3OutputStorage
+  /**
+   * 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 输出位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VODOutputStorage?: VODOutputStorage
 }
 
 /**
@@ -7061,6 +7167,20 @@ export interface MediaAnimatedGraphicsItem {
 }
 
 /**
+ * 美颜配置
+ */
+export interface BeautyConfig {
+  /**
+   * 美颜效果
+   */
+  BeautyEffectItems?: Array<BeautyEffectItemConfig>
+  /**
+   * 美颜滤镜
+   */
+  BeautyFilterItems?: Array<BeautyFilterItemConfig>
+}
+
+/**
  * DescribeQualityControlTemplates请求参数结构体
  */
 export interface DescribeQualityControlTemplatesRequest {
@@ -7331,10 +7451,16 @@ export interface AiAnalysisTaskHighlightOutput {
 export interface QualityControlItemConfig {
   /**
    * 质检项名称。质检项取值如下：
-<li>LowEvaluation：无参考打分</li>
+<li>LowEvaluation：视频无参考评分（MOS）</li>
+<li>AudioEvaluation：音频无参考评分（MOS）</li>
 <li>Mosaic：马赛克检测</li>
 <li>CrashScreen：花屏检测</li>
 <li>Blur：模糊检测</li>
+<li>Jitter：抖动检测</li>
+<li>Noise：噪点检测</li>
+<li>QRCode：二维码检测</li>
+<li>BarCode：条形码检测</li>
+<li>AppletCode：小程序码检测</li>
 <li>BlackWhiteEdge：黑白边检测</li>
 <li>SolidColorScreen：纯色屏检测</li>
 <li>LowLighting：低光照</li>
@@ -7342,11 +7468,7 @@ export interface QualityControlItemConfig {
 <li>NoVoice：静音检测</li>
 <li>LowVoice：低音检测</li>
 <li>HighVoice：爆音检测</li>
-<li>Jitter：抖动检测</li>
-<li>Noise：噪点检测</li>
-<li>QRCode：二维码检测</li>
-<li>BarCode：条形码检测</li>
-<li>AppletCode：小程序码检测</li>
+<li>AudioNoise：音频噪声检测</li>
 <li>VideoResolutionChanged：视频分辨率变化</li>
 <li>AudioSampleRateChanged：音频采样率变化</li>
 <li>AudioChannelsChanged：音频通道数变化</li>
@@ -7515,6 +7637,10 @@ export interface ProcessMediaRequest {
    * 智能字幕
    */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput
+  /**
+   * 智能擦除类型任务参数
+   */
+  SmartEraseTask?: SmartEraseTaskInput
   /**
    * 任务的事件通知信息，不填代表不获取事件通知。
    */
@@ -7712,6 +7838,24 @@ export interface LiveStreamOcrFullTextRecognitionResult {
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
   AreaCoordSet?: Array<number | bigint>
+}
+
+/**
+ * 媒体处理 VOD（点播专业版） 输出对象信息。
+ */
+export interface VODOutputStorage {
+  /**
+   * 媒体处理生成的文件输出的目标 *Bucket ID*
+   */
+  Bucket?: string
+  /**
+   * 媒体处理生成的文件输出的目标 Bucket 的园区
+   */
+  Region?: string
+  /**
+   * 点播专业版应用Id
+   */
+  SubAppId?: number
 }
 
 /**
@@ -7935,11 +8079,14 @@ hi：印地语
 fr：法语
 de：德语
 zh_dialect：中文方言
+zh_en: 中英
+prime_zh: 中英方言
    */
   VideoSrcLanguage: string
   /**
    * 智能字幕文件格式
  vtt: WebVTT 格式
+srt: SRT格式
 不填或填空：不生成字幕文件
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -8195,6 +8342,28 @@ export interface DeleteContentReviewTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体处理 VOD （点播专业版）对象信息。
+ */
+export interface VODInputInfo {
+  /**
+   * 媒体处理对象文件所在的 *Bucket ID*
+   */
+  Bucket?: string
+  /**
+   * 媒体处理对象文件所在的 Bucket 所属园区
+   */
+  Region?: string
+  /**
+   * 媒体处理对象文件的输入路径
+   */
+  Object?: string
+  /**
+   * 点播专业版应用Id
+   */
+  SubAppId?: number
 }
 
 /**
@@ -8558,6 +8727,46 @@ export interface DescribeContentReviewTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 智能擦除，擦除区域坐标配置。
+区域由左上角与右下角点的坐标确定。
+坐标原点为画面左上角，坐标点可使用像素值或百分比单位指定。
+对自动擦除区域：
+当单位为%时，坐标范围为[0,1]；
+当单位为px时，X值范围为 [0，视频画面宽度]，Y值范围为 [0，视频画面高度]
+对指定擦除区域：
+当单位为%时，坐标范围为[0,1)；
+当单位为px时，X值范围为 [0，视频画面宽度]，Y值范围为 [0，视频画面高度]
+ */
+export interface EraseArea {
+  /**
+   * 区域左上角X坐标。
+如当Unit取1即使用百分比单位时，0.05表示区域左上角离整个画面左上角的横向距离为画面宽度的5%。
+   */
+  LeftTopX: number
+  /**
+   * 区域左上角Y坐标。
+如当Unit取1即使用百分比单位时，0.1表示区域左上角离整个画面左上角的纵向距离为画面高度的10%。
+   */
+  LeftTopY: number
+  /**
+   * 区域右下角X坐标。
+如当Unit取1即使用百分比单位时，0.75表示区域右下角离整个画面左上角的横向距离为画面宽度的75%。
+   */
+  RightBottomX: number
+  /**
+   * 区域右下角Y坐标。
+如当Unit取1即使用百分比单位时，0.9表示区域右下角离整个画面左上角的纵向距离为画面高度的90%。
+   */
+  RightBottomY: number
+  /**
+   * 坐标单位
+- 1 百分比
+- 2 像素值
+   */
+  Unit: number
 }
 
 /**
@@ -9025,7 +9234,7 @@ export interface HLSPullSourceAddress {
  */
 export interface EvaluationMediaInputInfo {
   /**
-   * 对比视频的来源 ID，当评测任务的类型为 BD_RATE 且对比视频来自用户输入时有效；当对比视频来自转码模版时为空
+   * 对比视频的来源 ID，当评测任务的类型为 BD_RATE 且对比视频来自用户输入时有效；当对比视频来自转码模板时为空
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceId?: string
@@ -9110,6 +9319,11 @@ export interface ActivityPara {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput
+  /**
+   * 智能擦除任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartEraseTask?: SmartEraseTaskInput
 }
 
 /**
@@ -9994,6 +10208,37 @@ export interface AiSampleTagOperation {
    * 标签，长度限制：128 个字符。
    */
   Tags: Array<string>
+}
+
+/**
+ * 智能擦除自定义参数
+ */
+export interface RawSmartEraseParameter {
+  /**
+   * 擦除类型
+- subtitle 去字幕
+- watermark 去水印
+- privacy 隐私保护
+   */
+  EraseType: string
+  /**
+   * 字幕擦除配置；
+当EraseType值为：subtitle，此字段为必填参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig
+  /**
+   * 水印擦除配置；
+当EraseType值为：watermark，此字段为必填参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig
+  /**
+   * 隐私保护配置；
+当EraseType值为：privacy，此字段为必填参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig
 }
 
 /**
@@ -12048,6 +12293,10 @@ export interface SmartSubtitleTaskAsrFullTextResultOutput {
    * 字幕文件地址。
    */
   SubtitlePath?: string
+  /**
+   * 字幕文件存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -12237,6 +12486,46 @@ export interface LiveStreamFaceRecognitionResult {
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
   AreaCoordSet?: Array<number | bigint>
+}
+
+/**
+ * 智能擦除任务结果
+ */
+export interface SmartEraseTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 智能擦除输入。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: SmartEraseTaskInput
+  /**
+   * 智能擦除任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskDelLogoOutput
+  /**
+   * 任务进度。
+   */
+  Progress?: number
+  /**
+   * 任务开始执行的时间，采用 ISO 日期格式。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 ISO 日期格式。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -12876,6 +13165,7 @@ export interface ActivityResult {
 <li>AIAnalysis：智能分析。</li>
 <li>AiQualityControl：媒体质检。</li>
 <li>SmartSubtitles：智能字幕。</li>
+<li>SmartErase：智能擦除。</li>
    */
   ActivityType?: string
   /**
@@ -13871,6 +14161,7 @@ export interface Activity {
 <li>action-AIQualityControl：媒体质检</li>
 <li>action-SmartSubtitles：智能字幕</li>
 <li>action-exec-rules：判断规则</li>
+<li>action-SmartErase：智能擦除</li>
 
 
 
@@ -14263,12 +14554,13 @@ export interface AdaptiveDynamicStreamingTaskInput {
    */
   SegmentObjectName?: string
   /**
-   * 要插入的字幕文件。
+   * 外挂字幕功能，指定要插入的字幕文件。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AddOnSubtitles?: Array<AddOnSubtitle>
   /**
    * Drm信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DrmInfo?: DrmInfo
   /**
@@ -14278,7 +14570,7 @@ PureAudio：纯音频类型
    */
   DefinitionType?: string
   /**
-   * 字幕参数
+   * 硬字幕（压制字幕）功能，指定字幕来源、字体大小、位置等字幕参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubtitleTemplate?: SubtitleTemplate
@@ -15141,6 +15433,41 @@ export interface AiReviewTaskPoliticalResult {
 }
 
 /**
+ * 美颜效果配置项
+ */
+export interface BeautyEffectItemConfig {
+  /**
+   * 类型名称。取值如下：
+
+<li>Whiten：美白</li>
+<li>Smooth：磨皮</li>
+<li>BeautyThinFace：瘦脸</li>
+<li>NatureFace：自然脸型</li>
+<li>VFace：V脸</li>
+<li>EnlargeEye：大眼</li>
+<li>EyeLighten：亮眼</li>
+<li>RemoveEyeBags：祛眼袋</li>
+<li>ThinNose：瘦鼻</li>
+<li>RemoveLawLine：祛法令纹</li>
+<li>ToothWhiten：牙齿美白</li>
+
+
+   */
+  Type: string
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 效果强度，值范围：[0, 100]。
+   */
+  Value?: number
+}
+
+/**
  * 翻译结果。
  */
 export interface AiRecognitionTaskTransTextResultOutput {
@@ -15330,6 +15657,94 @@ export interface CreateInputRTPSettings {
    * 空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。
    */
   IdleTimeout?: number
+}
+
+/**
+ * 智能擦除模板去字幕配置
+ */
+export interface SmartEraseSubtitleConfig {
+  /**
+   * 字幕擦除方式。
+**自动擦除：**通过AI模型自动识别视频中的字幕文本内容，进行无痕化擦除，生成新的视频。但画面干扰、特殊字幕样式可能会带来一定漏擦误擦问题，可以通过指定区域擦除处理。
+当使用自动擦除时，若您不指定AutoAreas，将对默认区域（画面中下部）进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。
+**指定区域擦除：**若您的字幕位置较固定，建议您直接指定擦除区域，最大程度减少漏擦的情况。
+当您选择指定区域擦除时，请在CustomAreas中至少传入一个指定区域。
+- auto 自动擦除
+- custom 指定区域擦除
+
+   */
+  SubtitleEraseMethod: string
+  /**
+   * 字幕擦除模型。
+**标准版（推荐）：**若您的字幕样式标准，通常建议选择该版本，细节无痕化效果更好。
+**区域版：**若您的字幕存在花体、阴影、动效等特殊样式，建议选择区域版，擦除面积更大，但细节效果不如标准版。
+- standard 标准模型
+- area 区域模型
+   */
+  SubtitleModel: string
+  /**
+   * 是否开启OCR字幕提取，默认取OFF。
+当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。
+- ON 开启
+- OFF 关闭
+   */
+  OcrSwitch?: string
+  /**
+   * 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取"ON"时生效。
+- zh_en 中英文
+- multi 其他
+其他具体支持识别如下语言：
+中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语
+
+
+   */
+  SubtitleLang?: string
+  /**
+   * 字幕文件格式，默认取vtt；仅当OcrSwitch取"ON"时生效。
+- srt srt格式
+- vtt WebVTT格式
+   */
+  SubtitleFormat?: string
+  /**
+   * 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取"ON"时生效。
+- ON 开启
+- OFF 关闭
+   */
+  TransSwitch?: string
+  /**
+   * 字幕翻译目标语言，默认取en；仅当TransSwitch取"ON"时生效。
+当前支持以下语言：
+zh：简体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印度尼西亚语
+ms：马来语
+th：泰语
+ar：阿拉伯语
+hi：印地语
+   */
+  TransDstLang?: string
+  /**
+   * 自动擦除自定义区域。
+对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。
+注意：当擦除方式选择custom时，此参数将不会生效；修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。
+   */
+  AutoAreas?: Array<EraseArea>
+  /**
+   * 指定擦除自定义区域。
+对选定区域，在选定时间段内不进行检测识别直接进行擦除。
+注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。
+   */
+  CustomAreas?: Array<EraseTimeArea>
 }
 
 /**
@@ -16097,11 +16512,11 @@ export interface MediaSampleSnapshotItem {
 }
 
 /**
- * 在评测中使用的转码模版的信息
+ * 在评测中使用的转码模板的信息
  */
 export interface EvaluationTemplateInputInfo {
   /**
-   * 转码模版的 ID。
+   * 转码模板的 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Definition: number
@@ -16149,6 +16564,8 @@ hi：印地语
 fr：法语
 de：德语
 zh_dialect：中文方言
+zh_en: 中英
+prime_zh: 中英方言
    */
   VideoSrcLanguage: string
   /**
@@ -16168,6 +16585,7 @@ zh_dialect：中文方言
   /**
    * 智能字幕文件格式
  vtt: WebVTT 格式
+ srt: SRT 格式
 不填或填空：不生成字幕文件
    */
   SubtitleFormat?: string
@@ -17715,6 +18133,11 @@ export interface WorkflowTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTaskResult?: Array<SmartSubtitlesResult>
+  /**
+   * 智能擦除任务的执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartEraseTaskResult?: SmartEraseTaskResult
 }
 
 /**
@@ -18132,11 +18555,14 @@ hi：印地语
 fr：法语
 de：德语
 zh_dialect：中文方言
+zh_en: 中英
+prime_zh: 中英方言
    */
   VideoSrcLanguage?: string
   /**
    * 智能字幕文件格式
  vtt: WebVTT 格式
+srt: SRT格式
 不填或填空：不生成字幕文件
    */
   SubtitleFormat?: string
@@ -18255,6 +18681,33 @@ export interface FlowAudio {
 }
 
 /**
+ * 美颜滤镜配置项
+ */
+export interface BeautyFilterItemConfig {
+  /**
+   * 类型名称。取值如下：
+
+<li>Dongjing：东京</li>
+<li>QingJiaopian：轻胶片</li>
+<li>Meiwei：美味</li>
+
+
+   */
+  Type: string
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 效果强度，值范围：[0, 100]。
+   */
+  Value?: number
+}
+
+/**
  * 编排子任务输出
  */
 export interface ActivityResItem {
@@ -18318,6 +18771,11 @@ export interface ActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult
+  /**
+   * 智能擦除任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartEraseTask?: SmartEraseTaskResult
 }
 
 /**
@@ -18334,6 +18792,26 @@ export interface LiveActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveQualityControlTask?: ScheduleQualityControlTaskResult
+}
+
+/**
+ * 智能擦除，指定擦除区域配置。
+对指定时间段内的指定区域直接进行擦除。
+当BeginMs和EndMs均取0时对整个视频内的指定区域直接进行擦除。
+ */
+export interface EraseTimeArea {
+  /**
+   * 开始时间，单位:毫秒
+   */
+  BeginMs: number
+  /**
+   * 结束时间，单位:毫秒
+   */
+  EndMs: number
+  /**
+   * 时间段内擦除区域列表
+   */
+  Areas: Array<EraseArea>
 }
 
 /**

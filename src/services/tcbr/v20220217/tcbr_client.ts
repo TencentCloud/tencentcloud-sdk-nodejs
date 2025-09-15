@@ -19,12 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCloudRunServersResponse,
+  ServerBaseConfig,
   RepositoryInfo,
   ReleaseGrayRequest,
   StorageInfo,
   DescribeEnvBaseInfoResponse,
   CreateCloudRunServerRequest,
-  FunctionInfo,
+  CreateVpcInfo,
   DescribeServerManageTaskResponse,
   TaskStepInfo,
   DescribeCloudRunEnvsResponse,
@@ -45,7 +46,7 @@ import {
   DescribeServerManageTaskRequest,
   HpaPolicy,
   OnlineVersionInfo,
-  ServerBaseConfig,
+  FunctionInfo,
   DescribeCloudRunServerDetailResponse,
   CreateCloudRunEnvResponse,
   EnvBaseInfo,

@@ -38,8 +38,9 @@ import {
   Filter,
   DescribeAlarmShieldsResponse,
   ModifyConfigExtraResponse,
-  SearchCosRechargeInfoRequest,
+  DescribeKafkaConsumerGroupDetailResponse,
   DeleteScheduledSqlResponse,
+  ConsumerGroup,
   DescribeNoticeContentsRequest,
   ConsoleSharingConfig,
   DeleteConsoleSharingRequest,
@@ -81,7 +82,8 @@ import {
   ScheduledSqlResouceInfo,
   FilePathInfo,
   DescribeIndexRequest,
-  ModifyScheduledSqlResponse,
+  ModifyKafkaConsumerGroupOffsetRequest,
+  DescribeKafkaConsumerGroupListRequest,
   FilterRuleInfo,
   ConditionInfo,
   MachineGroupInfo,
@@ -95,6 +97,7 @@ import {
   MetaTagInfo,
   ModifyTopicRequest,
   CreateCosRechargeRequest,
+  ModifyWebCallbackRequest,
   DescribeConfigsResponse,
   DescribeNoticeContentsResponse,
   CreateAlarmShieldResponse,
@@ -172,6 +175,7 @@ import {
   ModifyCloudProductLogCollectionResponse,
   DeleteConsumerRequest,
   NoticeContentInfo,
+  SearchLogTopics,
   CreateWebCallbackRequest,
   DescribeMachineGroupsRequest,
   DeleteIndexRequest,
@@ -184,10 +188,12 @@ import {
   LogsetInfo,
   DashboardTopicInfo,
   DeleteConfigRequest,
+  SearchCosRechargeInfoRequest,
   AnalysisDimensional,
   DeleteWebCallbackRequest,
   LogRechargeRuleInfo,
   DeleteCosRechargeRequest,
+  GroupPartitionInfo,
   ShipperTaskInfo,
   CloseKafkaConsumerRequest,
   RuleTagInfo,
@@ -201,11 +207,11 @@ import {
   DashboardInfo,
   ModifyConfigRequest,
   AddMachineGroupInfoRequest,
-  DescribeKafkaRechargesRequest,
+  DescribeKafkaConsumerGroupListResponse,
   JsonInfo,
   ModifyConsoleSharingRequest,
   PreviewKafkaRechargeResponse,
-  ModifyWebCallbackRequest,
+  DescribeKafkaRechargesRequest,
   CreateShipperRequest,
   CreateTopicResponse,
   DeleteAlarmResponse,
@@ -275,6 +281,7 @@ import {
   AlarmShieldInfo,
   CreateConsoleSharingResponse,
   ModifyKafkaConsumerResponse,
+  ModifyScheduledSqlResponse,
   ModifyConsoleSharingResponse,
   CreateCloudProductLogCollectionResponse,
   DeleteConfigFromMachineGroupRequest,
@@ -304,11 +311,11 @@ import {
   MachineInfo,
   ModifyLogsetResponse,
   MonitorTime,
-  SearchLogTopics,
+  ModifyKafkaConsumerGroupOffsetResponse,
   MultiTopicSearchInformation,
   CreateMachineGroupRequest,
   Tag,
-  KeyRegexInfo,
+  DescribeKafkaConsumerGroupDetailRequest,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
   CollectConfig,
@@ -321,6 +328,7 @@ import {
   DescribeIndexResponse,
   HistogramInfo,
   DescribeMachineGroupConfigsRequest,
+  KeyRegexInfo,
   ModifyConfigExtraRequest,
   ModifyKafkaRechargeRequest,
   CreateDataTransformRequest,
@@ -740,6 +748,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCosRechargeResponse) => void
   ): Promise<DeleteCosRechargeResponse> {
     return this.request("DeleteCosRecharge", req, cb)
+  }
+
+  /**
+   * 获取Kafka协议消费组信息列表
+   */
+  async DescribeKafkaConsumerGroupList(
+    req: DescribeKafkaConsumerGroupListRequest,
+    cb?: (error: string, rep: DescribeKafkaConsumerGroupListResponse) => void
+  ): Promise<DescribeKafkaConsumerGroupListResponse> {
+    return this.request("DescribeKafkaConsumerGroupList", req, cb)
   }
 
   /**
@@ -1344,6 +1362,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Kafka协议消费组点位
+   */
+  async ModifyKafkaConsumerGroupOffset(
+    req?: ModifyKafkaConsumerGroupOffsetRequest,
+    cb?: (error: string, rep: ModifyKafkaConsumerGroupOffsetResponse) => void
+  ): Promise<ModifyKafkaConsumerGroupOffsetResponse> {
+    return this.request("ModifyKafkaConsumerGroupOffset", req, cb)
+  }
+
+  /**
    * 修改控制台分享，目前仅允许修改有效期
    */
   async ModifyConsoleSharing(
@@ -1351,6 +1379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyConsoleSharingResponse) => void
   ): Promise<ModifyConsoleSharingResponse> {
     return this.request("ModifyConsoleSharing", req, cb)
+  }
+
+  /**
+   * 获取Kafka协议消费组详情
+   */
+  async DescribeKafkaConsumerGroupDetail(
+    req: DescribeKafkaConsumerGroupDetailRequest,
+    cb?: (error: string, rep: DescribeKafkaConsumerGroupDetailResponse) => void
+  ): Promise<DescribeKafkaConsumerGroupDetailResponse> {
+    return this.request("DescribeKafkaConsumerGroupDetail", req, cb)
   }
 
   /**
