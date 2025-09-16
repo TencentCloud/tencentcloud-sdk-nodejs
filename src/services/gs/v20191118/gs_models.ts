@@ -92,21 +92,17 @@ export interface FetchAndroidInstancesLogsResponse {
 }
 
 /**
- * CreateAndroidApp请求参数结构体
+ * 安卓实例宿主机任务信息
  */
-export interface CreateAndroidAppRequest {
+export interface AndroidInstanceHostTask {
   /**
-   * 安卓应用名字
+   * 任务 ID
    */
-  Name: string
+  TaskId?: string
   /**
-   * 用户 Id
+   * 宿主机序列号
    */
-  UserId?: string
-  /**
-   * 应用模式（NORMAL : 普通模式、只支持 apk 文件上传，为默认值；ADVANCED : 高级模式、只支持上传 tgz 文件 和 自定义 shell 命令执行）
-   */
-  AppMode?: string
+  HostSerialNumber?: string
 }
 
 /**
@@ -563,13 +559,21 @@ export interface DeleteAndroidInstanceImagesResponse {
 }
 
 /**
- * StartAndroidInstances请求参数结构体
+ * CreateAndroidApp请求参数结构体
  */
-export interface StartAndroidInstancesRequest {
+export interface CreateAndroidAppRequest {
   /**
-   * 实例ID
+   * 安卓应用名字
    */
-  AndroidInstanceIds: Array<string>
+  Name: string
+  /**
+   * 用户 Id
+   */
+  UserId?: string
+  /**
+   * 应用模式（NORMAL : 普通模式、只支持 apk 文件上传，为默认值；ADVANCED : 高级模式、只支持上传 tgz 文件 和 自定义 shell 命令执行）
+   */
+  AppMode?: string
 }
 
 /**
@@ -1110,6 +1114,16 @@ export interface InstallAndroidInstancesAppWithURLRequest {
 }
 
 /**
+ * StartAndroidInstances请求参数结构体
+ */
+export interface StartAndroidInstancesRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceIds: Array<string>
+}
+
+/**
  * RebootAndroidInstances返回参数结构体
  */
 export interface RebootAndroidInstancesResponse {
@@ -1279,6 +1293,32 @@ export interface StopPublishStreamRequest {
    * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
   UserId: string
+}
+
+/**
+ * DeleteAndroidInstanceBackupFiles请求参数结构体
+ */
+export interface DeleteAndroidInstanceBackupFilesRequest {
+  /**
+   * 文件对象键列表
+   */
+  ObjectKeys: Array<string>
+  /**
+   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
+   */
+  StorageType: string
+  /**
+   * COS协议选项
+   */
+  COSOptions?: COSOptions
+  /**
+   * S3存储协议选项
+   */
+  S3Options?: S3Options
+  /**
+   * 安卓实例可用区。StorageType 为 S3 时，需要填写该字段；StorageType 为 COS 时，不需要填写该字段
+   */
+  AndroidInstanceZone?: string
 }
 
 /**
@@ -1528,29 +1568,31 @@ export interface InstallAndroidInstancesAppResponse {
 }
 
 /**
- * DeleteAndroidInstanceBackupFiles请求参数结构体
+ * DistributeAndroidInstanceImageToHosts请求参数结构体
  */
-export interface DeleteAndroidInstanceBackupFilesRequest {
+export interface DistributeAndroidInstanceImageToHostsRequest {
   /**
-   * 文件对象键列表
+   * 宿主机序列号数组
    */
-  ObjectKeys: Array<string>
+  HostSerialNumbers: Array<string>
   /**
-   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
+   * 实例镜像 ID
    */
-  StorageType: string
+  ImageId: string
+}
+
+/**
+ * DistributeAndroidInstanceImageToHosts返回参数结构体
+ */
+export interface DistributeAndroidInstanceImageToHostsResponse {
   /**
-   * COS协议选项
+   * 任务集合
    */
-  COSOptions?: COSOptions
+  TaskSet?: Array<AndroidInstanceHostTask>
   /**
-   * S3存储协议选项
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  S3Options?: S3Options
-  /**
-   * 安卓实例可用区。StorageType 为 S3 时，需要填写该字段；StorageType 为 COS 时，不需要填写该字段
-   */
-  AndroidInstanceZone?: string
+  RequestId?: string
 }
 
 /**

@@ -539,6 +539,37 @@ export interface CreateTargetGroupRequest {
    * 标签。
    */
   Tags?: Array<TagInfo>
+  /**
+   * 流量分发方式
+
+- STATELESS：无状态
+- STATEFUL： 有状态
+   */
+  ForwardingMode?: string
+  /**
+   * TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。
+   */
+  TcpIdleConnectTimeout?: number
+  /**
+   * 其他协议连接空闲超时时间，可配置5s-180s，默认120s
+   */
+  OthersIdleConnectTimeout?: number
+  /**
+   * 重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。
+   */
+  RescheduleUnbindRs?: boolean
+  /**
+   * 解绑RS后开启重调度的时间，可配置0s-3600s，默认0s
+   */
+  RescheduleUnbindRsStartTime?: number
+  /**
+   * 重新调度功能内的后端服务健康探测异常开关，开关打开后后端服务健康检查异常会触发重新调度。
+   */
+  RescheduleUnhealthy?: boolean
+  /**
+   * 后端服务健康探测异常后开启重调度的时间，可配置0s-3600s，默认0s
+   */
+  RescheduleUnhealthyStartTime?: number
 }
 
 /**
@@ -858,6 +889,30 @@ export interface ModifyTargetGroupAttributeRequest {
    * 是否支持全死全活。
    */
   AllDeadToAlive?: boolean
+  /**
+   * TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。
+   */
+  TcpIdleConnectTimeout?: number
+  /**
+   * 其他协议连接空闲超时时间，可配置5s-180s，默认120s
+   */
+  OthersIdleConnectTimeout?: number
+  /**
+   * 重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。
+   */
+  RescheduleUnbindRs?: boolean
+  /**
+   * 解绑RS后开启重调度的时间，可配置0s-3600s，默认0s
+   */
+  RescheduleUnbindRsStartTime?: number
+  /**
+   * 重新调度功能内的后端服务健康探测异常开关，开关打开后后端服务健康检查异常会触发重新调度。
+   */
+  RescheduleUnhealthy?: boolean
+  /**
+   * 后端服务健康探测异常后开启重调度的时间，可配置0s-3600s，默认0s
+   */
+  RescheduleUnhealthyStartTime?: number
 }
 
 /**

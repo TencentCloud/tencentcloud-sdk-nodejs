@@ -24,7 +24,7 @@ import {
   StartPublishStreamToCSSResponse,
   CreateAndroidInstanceADBRequest,
   FetchAndroidInstancesLogsResponse,
-  CreateAndroidAppRequest,
+  AndroidInstanceHostTask,
   AndroidInstanceDevice,
   RestoreAndroidInstanceFromStorageRequest,
   InstallAndroidInstancesAppWithURLResponse,
@@ -52,7 +52,7 @@ import {
   DisconnectAndroidInstanceRequest,
   AndroidInstanceLabel,
   DeleteAndroidInstanceImagesResponse,
-  StartAndroidInstancesRequest,
+  CreateAndroidAppRequest,
   StartPublishStreamRequest,
   CreateSessionRequest,
   CreateAndroidInstanceImageResponse,
@@ -84,6 +84,7 @@ import {
   AndroidInstanceError,
   ModifyAndroidInstancesUserIdRequest,
   InstallAndroidInstancesAppWithURLRequest,
+  StartAndroidInstancesRequest,
   RebootAndroidInstancesResponse,
   StopPublishStreamResponse,
   ImportAndroidInstanceImageResponse,
@@ -96,6 +97,7 @@ import {
   DescribeAndroidInstanceImagesResponse,
   ModifyAndroidInstanceInformationRequest,
   StopPublishStreamRequest,
+  DeleteAndroidInstanceBackupFilesRequest,
   AndroidAppCosInfo,
   SyncExecuteCommandResult,
   ModifyAndroidInstancesAppBlacklistRequest,
@@ -113,7 +115,8 @@ import {
   CreateAndroidInstancesScreenshotRequest,
   CreateCosCredentialRequest,
   InstallAndroidInstancesAppResponse,
-  DeleteAndroidInstanceBackupFilesRequest,
+  DistributeAndroidInstanceImageToHostsRequest,
+  DistributeAndroidInstanceImageToHostsResponse,
   AndroidInstanceTask,
   ConnectAndroidInstanceResponse,
   DescribeAndroidInstancesRequest,
@@ -476,13 +479,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换游戏存档
+   * 分发安卓实例镜像至宿主机
    */
-  async SwitchGameArchive(
-    req: SwitchGameArchiveRequest,
-    cb?: (error: string, rep: SwitchGameArchiveResponse) => void
-  ): Promise<SwitchGameArchiveResponse> {
-    return this.request("SwitchGameArchive", req, cb)
+  async DistributeAndroidInstanceImageToHosts(
+    req: DistributeAndroidInstanceImageToHostsRequest,
+    cb?: (error: string, rep: DistributeAndroidInstanceImageToHostsResponse) => void
+  ): Promise<DistributeAndroidInstanceImageToHostsResponse> {
+    return this.request("DistributeAndroidInstanceImageToHosts", req, cb)
   }
 
   /**
@@ -713,6 +716,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAndroidInstanceAppsResponse) => void
   ): Promise<DescribeAndroidInstanceAppsResponse> {
     return this.request("DescribeAndroidInstanceApps", req, cb)
+  }
+
+  /**
+   * 切换游戏存档
+   */
+  async SwitchGameArchive(
+    req: SwitchGameArchiveRequest,
+    cb?: (error: string, rep: SwitchGameArchiveResponse) => void
+  ): Promise<SwitchGameArchiveResponse> {
+    return this.request("SwitchGameArchive", req, cb)
   }
 
   /**

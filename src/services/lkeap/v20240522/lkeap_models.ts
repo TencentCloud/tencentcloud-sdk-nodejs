@@ -48,6 +48,10 @@ export interface ChatCompletionsRequest {
    * 是否启用联网搜索
    */
   EnableSearch?: boolean
+  /**
+   * 思维链开关，本参数仅在deepseek v3.1时生效
+   */
+  Thinking?: Thinking
 }
 
 /**
@@ -1209,6 +1213,19 @@ export interface ModifyAttributeLabelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 思维链开关类型
+ */
+export interface Thinking {
+  /**
+   * 控制开启思维链，默认disabled
+
+enabled：开启思维链
+disabled：关闭思维链
+   */
+  Type?: string
 }
 
 /**

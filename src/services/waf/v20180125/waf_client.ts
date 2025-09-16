@@ -21,6 +21,7 @@ import {
   DeleteOwaspWhiteRuleRequest,
   ModifyUserLevelResponse,
   DescribeLogHistogramRequest,
+  CreateBatchIpAccessControlResponse,
   ModifyWebshellStatusRequest,
   WafRuleLimit,
   DescribeUserClbWafRegionsResponse,
@@ -71,7 +72,7 @@ import {
   ModifyAttackWhiteRuleRequest,
   HostRecord,
   DescribeBotUCBRuleRsp,
-  FreshAntiFakeUrlRequest,
+  BatchDomainResult,
   ModifyAreaBanStatusRequest,
   SpartaProtectionPort,
   ModifyOwaspWhiteRuleRequest,
@@ -206,6 +207,7 @@ import {
   DealData,
   DescribeDomainDetailsSaasRequest,
   ApiDataFilter,
+  ModifyObjectRequest,
   CreateDealsGoodsDetail,
   ApiDetailSampleHistory,
   WafThreatenIntelligenceDetails,
@@ -299,7 +301,7 @@ import {
   UpsertIpAccessControlRequest,
   BotSceneActionRule,
   SessionItem,
-  ModifyObjectRequest,
+  ModifyBatchIpAccessControlResponse,
   DescribeAccessExportsRequest,
   DescribeCustomWhiteRuleRequest,
   DeleteAntiFakeUrlResponse,
@@ -321,6 +323,7 @@ import {
   UserDomainInfo,
   DescribeAntiFakeRulesResponse,
   DescribeTopicsRequest,
+  FreshAntiFakeUrlRequest,
   CreateAreaBanRuleResponse,
   GetAttackTotalCountRequest,
   DeleteDomainWhiteRulesResponse,
@@ -340,7 +343,7 @@ import {
   CreateExportRequest,
   DomainRuleId,
   DescribeProtectionModesRequest,
-  PortItem,
+  ModifyBatchIpAccessControlRequest,
   DescribeOwaspRuleTypesRequest,
   DescribeCCAutoStatusResponse,
   ModifyCustomRuleStatusRequest,
@@ -369,6 +372,7 @@ import {
   ModifyAreaBanStatusResponse,
   ModifyOwaspRuleStatusRequest,
   DeleteIpAccessControlV2Request,
+  DeleteBatchIpAccessControlResponse,
   DescribeTopAttackDomainRequest,
   DescribeAccessFastAnalysisResponse,
   ModifyDomainIpv6StatusResponse,
@@ -446,6 +450,7 @@ import {
   AddCustomWhiteRuleRequest,
   DescribeTopicsResponse,
   CronJob,
+  PortItem,
   DeleteOwaspWhiteRuleResponse,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
@@ -484,6 +489,7 @@ import {
   AddCustomRuleRequest,
   DeleteCCRuleRequest,
   DescribeAttackTypeResponse,
+  CreateBatchIpAccessControlRequest,
   DescribeCCRuleResponse,
   ModifyGenerateDealsRequest,
   ModifyDomainWhiteRuleResponse,
@@ -493,6 +499,7 @@ import {
   DescribeOwaspRuleTypesResponse,
   ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
+  DeleteBatchIpAccessControlRequest,
   DescribeWebshellStatusResponse,
   UpdateProtectionModesRequest,
   FindAllDomainDetail,
@@ -544,6 +551,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAttackTypeResponse) => void
   ): Promise<DescribeAttackTypeResponse> {
     return this.request("DescribeAttackType", req, cb)
+  }
+
+  /**
+   * 查询业务和攻击概要趋势
+   */
+  async DescribePeakPoints(
+    req: DescribePeakPointsRequest,
+    cb?: (error: string, rep: DescribePeakPointsResponse) => void
+  ): Promise<DescribePeakPointsResponse> {
+    return this.request("DescribePeakPoints", req, cb)
   }
 
   /**
@@ -1037,16 +1054,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加（编辑）地域封禁中的地域信息
-   */
-  async CreateAreaBanRule(
-    req: CreateAreaBanRuleRequest,
-    cb?: (error: string, rep: CreateAreaBanRuleResponse) => void
-  ): Promise<CreateAreaBanRuleResponse> {
-    return this.request("CreateAreaBanRule", req, cb)
-  }
-
-  /**
      * clb-waf 设置防护域名WAF开关
 支持批量操作。
      */
@@ -1158,6 +1165,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量黑白名单删除接口
+   */
+  async DeleteBatchIpAccessControl(
+    req: DeleteBatchIpAccessControlRequest,
+    cb?: (error: string, rep: DeleteBatchIpAccessControlResponse) => void
+  ): Promise<DeleteBatchIpAccessControlResponse> {
+    return this.request("DeleteBatchIpAccessControl", req, cb)
+  }
+
+  /**
    * 删除负载均衡型域名，支持批量操作。
    */
   async DeleteHost(
@@ -1178,13 +1195,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询业务和攻击概要趋势
+   * 添加（编辑）地域封禁中的地域信息
    */
-  async DescribePeakPoints(
-    req: DescribePeakPointsRequest,
-    cb?: (error: string, rep: DescribePeakPointsResponse) => void
-  ): Promise<DescribePeakPointsResponse> {
-    return this.request("DescribePeakPoints", req, cb)
+  async CreateAreaBanRule(
+    req: CreateAreaBanRuleRequest,
+    cb?: (error: string, rep: CreateAreaBanRuleResponse) => void
+  ): Promise<CreateAreaBanRuleResponse> {
+    return this.request("CreateAreaBanRule", req, cb)
   }
 
   /**
@@ -1438,6 +1455,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量IP黑白名单新增接口
+   */
+  async ModifyBatchIpAccessControl(
+    req: ModifyBatchIpAccessControlRequest,
+    cb?: (error: string, rep: ModifyBatchIpAccessControlResponse) => void
+  ): Promise<ModifyBatchIpAccessControlResponse> {
+    return this.request("ModifyBatchIpAccessControl", req, cb)
+  }
+
+  /**
    * 查询Tiga引擎规则类型及状态
    */
   async DescribeUserSignatureClass(
@@ -1555,6 +1582,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessHistogramResponse) => void
   ): Promise<DescribeAccessHistogramResponse> {
     return this.request("DescribeAccessHistogram", req, cb)
+  }
+
+  /**
+   * 批量IP黑白名单新增接口
+   */
+  async CreateBatchIpAccessControl(
+    req: CreateBatchIpAccessControlRequest,
+    cb?: (error: string, rep: CreateBatchIpAccessControlResponse) => void
+  ): Promise<CreateBatchIpAccessControlResponse> {
+    return this.request("CreateBatchIpAccessControl", req, cb)
   }
 
   /**

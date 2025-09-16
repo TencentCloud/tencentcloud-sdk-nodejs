@@ -28,6 +28,16 @@ it("waf.v20180125.DescribeAttackType", async function () {
     }
 })
 
+it("waf.v20180125.DescribePeakPoints", async function () {
+    try {
+       const data = await client.DescribePeakPoints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeDomainDetailsClb", async function () {
     try {
        const data = await client.DescribeDomainDetailsClb({})
@@ -518,16 +528,6 @@ it("waf.v20180125.AddAntiInfoLeakRules", async function () {
     }
 })
 
-it("waf.v20180125.CreateAreaBanRule", async function () {
-    try {
-       const data = await client.CreateAreaBanRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.ModifyHostStatus", async function () {
     try {
        const data = await client.ModifyHostStatus({})
@@ -638,6 +638,16 @@ it("waf.v20180125.DescribeVipInfo", async function () {
     }
 })
 
+it("waf.v20180125.DeleteBatchIpAccessControl", async function () {
+    try {
+       const data = await client.DeleteBatchIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteHost", async function () {
     try {
        const data = await client.DeleteHost({})
@@ -658,9 +668,9 @@ it("waf.v20180125.DescribeAccessFastAnalysis", async function () {
     }
 })
 
-it("waf.v20180125.DescribePeakPoints", async function () {
+it("waf.v20180125.CreateAreaBanRule", async function () {
     try {
-       const data = await client.DescribePeakPoints({})
+       const data = await client.CreateAreaBanRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -918,6 +928,16 @@ it("waf.v20180125.ModifyHost", async function () {
     }
 })
 
+it("waf.v20180125.ModifyBatchIpAccessControl", async function () {
+    try {
+       const data = await client.ModifyBatchIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeUserSignatureClass", async function () {
     try {
        const data = await client.DescribeUserSignatureClass({})
@@ -1031,6 +1051,16 @@ it("waf.v20180125.ModifyAntiFakeUrlStatus", async function () {
 it("waf.v20180125.DescribeAccessHistogram", async function () {
     try {
        const data = await client.DescribeAccessHistogram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateBatchIpAccessControl", async function () {
+    try {
+       const data = await client.CreateBatchIpAccessControl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

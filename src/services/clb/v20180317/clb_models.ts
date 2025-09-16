@@ -630,7 +630,7 @@ export interface RsTagRule {
    */
   LocationId?: string
   /**
-   * 后端服务修改后的标签。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694#Target)中的Tag参数，即最终的标签以Target中的Tag参数值为准，仅当Target中的Weight参数为空时，才以RsTagRule中的Tag参数为准。
+   * 后端服务修改后的标签。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694#Target)中的Tag参数，即最终的标签以Target中的Tag参数值为准，仅当Target中的Tag参数为空时，才以RsTagRule中的Tag参数为准。
    */
   Tag?: string
 }
@@ -3952,6 +3952,10 @@ export interface CreateTargetGroupRequest {
    * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。仅V2新版且后端转发协议为HTTP/HTTPS/GRPC目标组支持该参数。
    */
   SessionExpireTime?: number
+  /**
+   * IP版本类型。
+   */
+  IpVersion?: string
 }
 
 /**
@@ -6014,6 +6018,10 @@ export interface TargetGroupInfo {
    * 会话保持时间，仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。
    */
   SessionExpireTime?: number
+  /**
+   * IP版本。
+   */
+  IpVersion?: string
 }
 
 /**

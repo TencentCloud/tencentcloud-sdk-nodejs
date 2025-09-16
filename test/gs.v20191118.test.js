@@ -288,9 +288,9 @@ it("gs.v20191118.DeleteAndroidInstanceLabel", async function () {
     }
 })
 
-it("gs.v20191118.SwitchGameArchive", async function () {
+it("gs.v20191118.DistributeAndroidInstanceImageToHosts", async function () {
     try {
-       const data = await client.SwitchGameArchive({})
+       const data = await client.DistributeAndroidInstanceImageToHosts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,6 +521,16 @@ it("gs.v20191118.DisconnectAndroidInstance", async function () {
 it("gs.v20191118.DescribeAndroidInstanceApps", async function () {
     try {
        const data = await client.DescribeAndroidInstanceApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.SwitchGameArchive", async function () {
+    try {
+       const data = await client.SwitchGameArchive({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

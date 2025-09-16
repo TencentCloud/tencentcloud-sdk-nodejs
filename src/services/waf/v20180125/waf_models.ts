@@ -72,6 +72,24 @@ export interface DescribeLogHistogramRequest {
 }
 
 /**
+ * CreateBatchIpAccessControl返回参数结构体
+ */
+export interface CreateBatchIpAccessControlResponse {
+  /**
+   * 添加失败的域名列表，如果非空则表示有域名添加失败，整个批量规则添加失败，否则则表示批量规则添加成功。
+   */
+  Failed?: Array<BatchDomainResult>
+  /**
+   * 添加成功的批量规则ID
+   */
+  RuleId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyWebshellStatus请求参数结构体
  */
 export interface ModifyWebshellStatusRequest {
@@ -1333,17 +1351,17 @@ export interface DescribeBotUCBRuleRsp {
 }
 
 /**
- * FreshAntiFakeUrl请求参数结构体
+ * 批量防护失败的域名以及对应的原因。
  */
-export interface FreshAntiFakeUrlRequest {
+export interface BatchDomainResult {
   /**
-   * 域名
+   * 批量操作中失败的域名
    */
-  Domain: string
+  Domain?: string
   /**
-   * Id
+   * 操作失败的原因
    */
-  Id: number
+  Message?: string
 }
 
 /**
@@ -4672,6 +4690,36 @@ export interface ApiDataFilter {
 }
 
 /**
+ * ModifyObject请求参数结构体
+ */
+export interface ModifyObjectRequest {
+  /**
+   * 修改对象标识
+   */
+  ObjectId: string
+  /**
+   * 改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态
+   */
+  OpType: string
+  /**
+   * 新的Waf开关状态，如果和已有状态相同认为修改成功
+   */
+  Status?: number
+  /**
+   * 新的实例ID，如果和已绑定的实例相同认为修改成功
+   */
+  InstanceId?: string
+  /**
+   * 是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)
+   */
+  Proxy?: number
+  /**
+   * IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)
+   */
+  IpHeaders?: Array<string>
+}
+
+/**
  * 产品明细
  */
 export interface CreateDealsGoodsDetail {
@@ -7193,33 +7241,17 @@ export interface SessionItem {
 }
 
 /**
- * ModifyObject请求参数结构体
+ * ModifyBatchIpAccessControl返回参数结构体
  */
-export interface ModifyObjectRequest {
+export interface ModifyBatchIpAccessControlResponse {
   /**
-   * 修改对象标识
+   * 编辑失败的域名列表，如果非空则表示有域名编辑失败，整个批量规则编辑失败，否则则表示批量规则编辑成功。
    */
-  ObjectId: string
+  Failed?: Array<BatchDomainResult>
   /**
-   * 改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OpType: string
-  /**
-   * 新的Waf开关状态，如果和已有状态相同认为修改成功
-   */
-  Status?: number
-  /**
-   * 新的实例ID，如果和已绑定的实例相同认为修改成功
-   */
-  InstanceId?: string
-  /**
-   * 是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)
-   */
-  Proxy?: number
-  /**
-   * IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)
-   */
-  IpHeaders?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -7795,6 +7827,20 @@ export interface DescribeTopicsRequest {
 }
 
 /**
+ * FreshAntiFakeUrl请求参数结构体
+ */
+export interface FreshAntiFakeUrlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * Id
+   */
+  Id: number
+}
+
+/**
  * CreateAreaBanRule返回参数结构体
  */
 export interface CreateAreaBanRuleResponse {
@@ -8258,29 +8304,41 @@ export interface DescribeProtectionModesRequest {
 }
 
 /**
- * 防护域名端口配置信息
+ * ModifyBatchIpAccessControl请求参数结构体
  */
-export interface PortItem {
+export interface ModifyBatchIpAccessControlRequest {
   /**
-   * 监听端口配置
+   * 编辑的批量规则ID
    */
-  Port: string
+  RuleId: number
   /**
-   * 与Port一一对应，表示端口对应的协议
+   * IP参数列表
    */
-  Protocol: string
+  IpList: Array<string>
   /**
-   * 与Port一一对应,  表示回源端口
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
    */
-  UpstreamPort: string
+  JobType: string
   /**
-   * 与Port一一对应,  表示回源协议
+   * 定时任务配置
    */
-  UpstreamProtocol: string
+  JobDateTime: JobDateTime
   /**
-   * Nginx的服务器ID,新增域名时填"0"
+   * 42为黑名单，40为白名单
    */
-  NginxServerId: string
+  ActionType: number
+  /**
+   * 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一
+   */
+  GroupIds?: Array<number | bigint>
+  /**
+   * 域名列表，如果绑定的是批量域名，和GroupIds参数二选一
+   */
+  Domains?: Array<string>
+  /**
+   * 备注
+   */
+  Note?: string
 }
 
 /**
@@ -9118,6 +9176,16 @@ export interface DeleteIpAccessControlV2Request {
    * IP黑白名单类型，40为IP白名单，42为IP黑名单，在DeleteAll为true的时候必传此参数
    */
   ActionType?: number
+}
+
+/**
+ * DeleteBatchIpAccessControl返回参数结构体
+ */
+export interface DeleteBatchIpAccessControlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11122,6 +11190,32 @@ export interface CronJob {
 }
 
 /**
+ * 防护域名端口配置信息
+ */
+export interface PortItem {
+  /**
+   * 监听端口配置
+   */
+  Port: string
+  /**
+   * 与Port一一对应，表示端口对应的协议
+   */
+  Protocol: string
+  /**
+   * 与Port一一对应,  表示回源端口
+   */
+  UpstreamPort: string
+  /**
+   * 与Port一一对应,  表示回源协议
+   */
+  UpstreamProtocol: string
+  /**
+   * Nginx的服务器ID,新增域名时填"0"
+   */
+  NginxServerId: string
+}
+
+/**
  * DeleteOwaspWhiteRule返回参数结构体
  */
 export interface DeleteOwaspWhiteRuleResponse {
@@ -12451,6 +12545,40 @@ export interface DescribeAttackTypeResponse {
 }
 
 /**
+ * CreateBatchIpAccessControl请求参数结构体
+ */
+export interface CreateBatchIpAccessControlRequest {
+  /**
+   * IP参数列表
+   */
+  IpList: Array<string>
+  /**
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   */
+  JobType: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime: JobDateTime
+  /**
+   * 42为黑名单，40为白名单
+   */
+  ActionType: number
+  /**
+   * 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一
+   */
+  GroupIds?: Array<number | bigint>
+  /**
+   * 域名列表，如果绑定的是批量域名，和GroupIds参数二选一
+   */
+  Domains?: Array<string>
+  /**
+   * 备注
+   */
+  Note?: string
+}
+
+/**
  * DescribeCCRule返回参数结构体
  */
 export interface DescribeCCRuleResponse {
@@ -12578,6 +12706,16 @@ export interface AutoDenyDetail {
    * 最后更新时间
    */
   LastUpdateTime?: string
+}
+
+/**
+ * DeleteBatchIpAccessControl请求参数结构体
+ */
+export interface DeleteBatchIpAccessControlRequest {
+  /**
+   * 规则ID列表，支持批量删除
+   */
+  Ids?: Array<number | bigint>
 }
 
 /**
