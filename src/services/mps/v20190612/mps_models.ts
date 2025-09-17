@@ -560,6 +560,51 @@ export interface DescribeAnimatedGraphicsTemplatesRequest {
 }
 
 /**
+ * 提取视频数字水印任务信息
+ */
+export interface ExtractBlindWatermarkTask {
+  /**
+   * 媒体处理任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 媒体处理的目标文件信息。
+   */
+  InputInfo?: MediaInputInfo
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li> <li>blind-ab：ab版权数字水印；</li>
+   */
+  Type?: string
+  /**
+   * 标记是否检测到水印，如果该参数为true， Result字段将返回水印提取结果，如果该参数为false，Result字段不会返回。
+   */
+  IsDetected?: boolean
+  /**
+   * 提取出的数字水印内容，当没有检测到水印时该字段不会返回。
+   */
+  Result?: string
+  /**
+   * 提取数字水印配置。
+   */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
+}
+
+/**
  * 内容审核 Asr 文字鉴任违禁务结果类型
  */
 export interface AiReviewTaskProhibitedAsrResult {
@@ -826,22 +871,13 @@ export interface DeleteScheduleResponse {
 }
 
 /**
- * 翻译结果。
+ * DisableSchedule返回参数结构体
  */
-export interface SmartSubtitleTaskTransTextResultOutput {
+export interface DisableScheduleResponse {
   /**
-   * 翻译片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SegmentSet?: Array<SmartSubtitleTaskTransTextSegmentItem>
-  /**
-   * 字幕文件地址。
-   */
-  SubtitlePath?: string
-  /**
-   * 字幕文件存储位置。
-   */
-  OutputStorage?: TaskOutputStorage
+  RequestId?: string
 }
 
 /**
@@ -4644,6 +4680,25 @@ export interface WithdrawsWatermarkRequest {
 }
 
 /**
+ * 翻译结果。
+ */
+export interface SmartSubtitleTaskTransTextResultOutput {
+  /**
+   * 翻译片段列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSet?: Array<SmartSubtitleTaskTransTextSegmentItem>
+  /**
+   * 字幕文件地址。
+   */
+  SubtitlePath?: string
+  /**
+   * 字幕文件存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
+}
+
+/**
  * 图片处理结果信息
  */
 export interface ImageProcessTaskOutput {
@@ -5347,9 +5402,13 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
 }
 
 /**
- * DisableSchedule返回参数结构体
+ * DescribeStreamLinkFlow返回参数结构体
  */
-export interface DisableScheduleResponse {
+export interface DescribeStreamLinkFlowResponse {
+  /**
+   * 流的配置信息。
+   */
+  Info?: DescribeFlow
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7053,6 +7112,25 @@ export interface AiAnalysisTaskFrameTagOutput {
    * 视频按帧标签列表。
    */
   SegmentSet: Array<MediaAiAnalysisFrameTagSegmentItem>
+}
+
+/**
+ * 智能译制结果信息
+ */
+export interface AiAnalysisTaskDubbingOutput {
+  /**
+   * 译制视频路径。
+   */
+  VideoPath?: string
+  /**
+   * 标记文件路径
+
+   */
+  SpeakerPath?: string
+  /**
+   * 译制视频存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -10553,6 +10631,7 @@ export interface AiAnalysisResult {
 <li>Highlight：智能精彩集锦</li>
 <li>DeLogo：智能擦除</li>
 <li>Description：大模型摘要</li>
+<li>Dubbing：智能译制</li>
    */
   Type?: string
   /**
@@ -10605,6 +10684,11 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HorizontalToVerticalTask?: AiAnalysisTaskHorizontalToVerticalResult
+  /**
+   * 视频内容分析译制任务的查询结果，当任务类型为 Dubbing 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DubbingTask?: AiAnalysisTaskDubbingResult
 }
 
 /**
@@ -11211,6 +11295,62 @@ export interface ModifyContentReviewTemplateRequest {
    * 用户自定义内容审核控制参数。
    */
   UserDefineConfigure?: UserDefineConfigureInfoForUpdate
+}
+
+/**
+ * 直播流 AI 识别结果
+ */
+export interface LiveStreamAiRecognitionResultItem {
+  /**
+   * 结果的类型，取值范围：
+<li>FaceRecognition：人脸识别，</li>
+<li>AsrWordsRecognition：语音关键词识别，</li>
+<li>OcrWordsRecognition：文本关键词识别，</li>
+<li>AsrFullTextRecognition：语音全文识别，</li>
+<li>OcrFullTextRecognition：文本全文识别。</li>
+<li>TransTextRecognition：语音翻译。</li>
+<li>ObjectRecognition：目标检测。</li>
+<li>TagRecognition：精彩打点。</li>
+   */
+  Type?: string
+  /**
+   * 人脸识别结果，当 Type 为
+FaceRecognition 时有效。
+   */
+  FaceRecognitionResultSet?: Array<LiveStreamFaceRecognitionResult>
+  /**
+   * 语音关键词识别结果，当 Type 为
+AsrWordsRecognition 时有效。
+   */
+  AsrWordsRecognitionResultSet?: Array<LiveStreamAsrWordsRecognitionResult>
+  /**
+   * 文本关键词识别结果，当 Type 为
+OcrWordsRecognition 时有效。
+   */
+  OcrWordsRecognitionResultSet?: Array<LiveStreamOcrWordsRecognitionResult>
+  /**
+   * 语音全文识别结果，当 Type 为
+AsrFullTextRecognition 时有效。
+   */
+  AsrFullTextRecognitionResultSet?: Array<LiveStreamAsrFullTextRecognitionResult>
+  /**
+   * 文本全文识别结果，当 Type 为
+OcrFullTextRecognition 时有效。
+   */
+  OcrFullTextRecognitionResultSet?: Array<LiveStreamOcrFullTextRecognitionResult>
+  /**
+   * 翻译结果，当Type 为 TransTextRecognition 时有效。
+   */
+  TransTextRecognitionResultSet?: Array<LiveStreamTransTextRecognitionResult>
+  /**
+   * 目标检测结果，当Type为 ObjectRecognition 时有效。
+   */
+  ObjectRecognitionResultSet?: Array<LiveStreamObjectRecognitionResult>
+  /**
+   * 打点结果，当Type 为 TagRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagRecognitionResultSet?: Array<LiveStreamTagRecognitionResult>
 }
 
 /**
@@ -12320,6 +12460,18 @@ export interface TerrorismOcrReviewTemplateInfo {
 }
 
 /**
+ * 提取视频转码数字水印任务配置
+ */
+export interface ExtractBlindWatermarkTaskConfig {
+  /**
+   * 当提取数字水印类型为blind-abseq时有效，用于指定输入视频的切片时长，单位：毫秒。
+如果不填默认切片时长为5秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentDuration: number
+}
+
+/**
  * 细节增强配置
  */
 export interface SharpEnhanceConfig {
@@ -12420,6 +12572,16 @@ export interface AiAnalysisTaskDelLogoOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubtitlePos?: SubtitlePosition
+  /**
+   * 音色克隆后的视频文件地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoiceClonedVideo?: string
+  /**
+   * 音色克隆的标注文件地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoiceClonedMarkFile?: string
 }
 
 /**
@@ -13672,17 +13834,13 @@ export interface DescribeTaskDetailRequest {
 }
 
 /**
- * DescribeStreamLinkFlow返回参数结构体
+ * 智能译制任务输入类型
  */
-export interface DescribeStreamLinkFlowResponse {
+export interface AiAnalysisTaskDubbingInput {
   /**
-   * 流的配置信息。
+   * 视频译制模板 ID。
    */
-  Info?: DescribeFlow
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Definition?: number
 }
 
 /**
@@ -14926,6 +15084,10 @@ export interface DescribeTaskDetailResponse {
    */
   LiveStreamProcessTask?: LiveStreamProcessTask
   /**
+   * 提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。
+   */
+  ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask
+  /**
    * 任务的事件通知信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -14963,59 +15125,30 @@ export interface DescribeTaskDetailResponse {
 }
 
 /**
- * 直播流 AI 识别结果
+ * 智能译制结果类型
  */
-export interface LiveStreamAiRecognitionResultItem {
+export interface AiAnalysisTaskDubbingResult {
   /**
-   * 结果的类型，取值范围：
-<li>FaceRecognition：人脸识别，</li>
-<li>AsrWordsRecognition：语音关键词识别，</li>
-<li>OcrWordsRecognition：文本关键词识别，</li>
-<li>AsrFullTextRecognition：语音全文识别，</li>
-<li>OcrFullTextRecognition：文本全文识别。</li>
-<li>TransTextRecognition：语音翻译。</li>
-<li>ObjectRecognition：目标检测。</li>
-<li>TagRecognition：精彩打点。</li>
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Type?: string
+  Status?: string
   /**
-   * 人脸识别结果，当 Type 为
-FaceRecognition 时有效。
+   * 错误码，0：成功，其他值：失败。
    */
-  FaceRecognitionResultSet?: Array<LiveStreamFaceRecognitionResult>
+  ErrCode?: number
   /**
-   * 语音关键词识别结果，当 Type 为
-AsrWordsRecognition 时有效。
+   * 错误信息。
    */
-  AsrWordsRecognitionResultSet?: Array<LiveStreamAsrWordsRecognitionResult>
+  Message?: string
   /**
-   * 文本关键词识别结果，当 Type 为
-OcrWordsRecognition 时有效。
+   * 智能译制任务输入。
    */
-  OcrWordsRecognitionResultSet?: Array<LiveStreamOcrWordsRecognitionResult>
+  Input?: AiAnalysisTaskDubbingInput
   /**
-   * 语音全文识别结果，当 Type 为
-AsrFullTextRecognition 时有效。
-   */
-  AsrFullTextRecognitionResultSet?: Array<LiveStreamAsrFullTextRecognitionResult>
-  /**
-   * 文本全文识别结果，当 Type 为
-OcrFullTextRecognition 时有效。
-   */
-  OcrFullTextRecognitionResultSet?: Array<LiveStreamOcrFullTextRecognitionResult>
-  /**
-   * 翻译结果，当Type 为 TransTextRecognition 时有效。
-   */
-  TransTextRecognitionResultSet?: Array<LiveStreamTransTextRecognitionResult>
-  /**
-   * 目标检测结果，当Type为 ObjectRecognition 时有效。
-   */
-  ObjectRecognitionResultSet?: Array<LiveStreamObjectRecognitionResult>
-  /**
-   * 打点结果，当Type 为 TagRecognition 时有效。
+   * 智能译制任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagRecognitionResultSet?: Array<LiveStreamTagRecognitionResult>
+  Output?: AiAnalysisTaskDubbingOutput
 }
 
 /**
@@ -18688,10 +18821,8 @@ export interface BeautyFilterItemConfig {
    * 类型名称。取值如下：
 
 <li>Dongjing：东京</li>
-<li>QingJiaopian：轻胶片</li>
+<li>Qingjiaopian：轻胶片</li>
 <li>Meiwei：美味</li>
-
-
    */
   Type: string
   /**
@@ -18702,7 +18833,7 @@ export interface BeautyFilterItemConfig {
    */
   Switch?: string
   /**
-   * 效果强度，值范围：[0, 100]。
+   * 效果强度，值范围：[-100, 100]。
    */
   Value?: number
 }

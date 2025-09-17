@@ -7723,7 +7723,7 @@ export interface FlowGroupOptions {
  */
 export interface RegisterInfo {
   /**
-   * <font color="red">字段不再使用</font>，法人姓名
+   * 法人姓名
    */
   LegalName: string
   /**
@@ -7733,7 +7733,7 @@ export interface RegisterInfo {
    */
   Uscc?: string
   /**
-   * <font color="red">字段不再使用</font>，社会统一信用代码
+   * 社会统一信用代码
    */
   UnifiedSocialCreditCode?: string
   /**

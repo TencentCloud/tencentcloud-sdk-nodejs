@@ -295,7 +295,9 @@ export interface ApplyParamsTemplateRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 应用的参数模板ID，请通过接口[DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/239/58748)的返回参数 **TemplateId** 获取参数模板 ID。
+   * 应用的参数模板ID。
+- 请通过接口 [DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/239/58748) 的返回参数 **TemplateId** 获取参数模板 ID。
+- 仅当参数模板版本与目标实例的架构版本一致时，操作才能成功执行。版本不匹配将触发执行错误。
    */
   TemplateId: string
 }
@@ -676,20 +678,20 @@ export interface ModifyInstancePasswordResponse {
  */
 export interface DescribeSecondLevelBackupInfoResponse {
   /**
-   * 备份记录ID
+   * 备份记录ID。
    */
   BackupId?: string
   /**
-   * 备份时间戳
+   * 备份时间戳。
    */
   BackupTimestamp?: number
   /**
-   * 备份不存在的时间戳范围
+   * 备份不存在的时间戳范围。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MissingTimestamps?: Array<SecondLevelBackupMissingTimestamps>
   /**
-   * 实例开启秒级备份的时间戳
+   * 实例开启秒级备份的时间戳。
    */
   StartTimestamp?: number
   /**
@@ -1909,11 +1911,15 @@ export interface DescribeInstanceEventsRequest {
    */
   InstanceId?: string
   /**
-   * 输出每页显示事件的数量，默认：10，最大100。
+   * 输出每页显示事件的数量。
+- 默认值：10。
+- 取值范围：[1,100]。
    */
   PageSize?: number
   /**
-   * 配置查询事件的输出页码，即支持根据PageNo（页码）与 PageSize （每页输出数量）查询某一页的事件。默认：1。
+   * 配置查询事件的输出页码，即支持根据PageNo（页码）与 PageSize （每页输出数量）查询某一页的事件。
+- 默认值：1。
+- 取值范围：大于0 的正整数。
    */
   PageNo?: number
   /**
@@ -5616,7 +5622,7 @@ export interface ModifyInstanceParamsRequest {
  */
 export interface DescribeSSLStatusRequest {
   /**
-   * 实例 ID。
+   * 实例 ID。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
   InstanceId: string
 }
@@ -6292,11 +6298,13 @@ export interface RemoveReplicationInstanceResponse {
  */
 export interface DescribeSecondLevelBackupInfoRequest {
   /**
-   * 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。
+   * 指定实例 ID。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
   InstanceId?: string
   /**
-   * 秒级备份时间戳，7天内
+   * 秒级备份时间戳。
+- 设置范围：支持7天内任意秒级时间点。
+-  时间戳格式：Unix 时间戳。
    */
   BackupTimestamp?: number
 }

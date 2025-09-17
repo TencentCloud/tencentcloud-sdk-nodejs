@@ -101,7 +101,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询视频翻译任务
+   * 查询视频转译任务
    */
   async DescribeVideoTranslateJob(
     req: DescribeVideoTranslateJobRequest,
