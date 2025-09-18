@@ -68,6 +68,6 @@
     "rimraf": "^5.0.10",
     "ts-node": "^8.10.2",
     "typescript": "^5.9.2",
-    "vitest": "2.1.9"
+    "vitest": "3.2.4"
   }
 }
