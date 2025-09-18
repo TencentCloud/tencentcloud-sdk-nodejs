@@ -16,6 +16,24 @@
  */
 
 /**
+ * ParseConnector请求参数结构体
+ */
+export interface ParseConnectorRequest {
+  /**
+   * 资源id
+   */
+  ResourceId: string
+  /**
+   * 资源版本
+   */
+  VersionId: number
+  /**
+   * 空间
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * 复制作业单条明细结果
  */
 export interface CopyJobResult {
@@ -491,6 +509,16 @@ export interface CopyJobsResponse {
 }
 
 /**
+ * CreateConnector返回参数结构体
+ */
+export interface CreateConnectorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TriggerJobSavepoint请求参数结构体
  */
 export interface TriggerJobSavepointRequest {
@@ -539,21 +567,19 @@ export interface LogContent {
 }
 
 /**
- * DeleteJobConfigs请求参数结构体
+ * 作业运行时信息
  */
-export interface DeleteJobConfigsRequest {
+export interface JobRuntimeInfo {
   /**
-   * 作业ID
+   * 运行信息的key，目前支持：TaskManagers：taskmanager pod 列表； StreamGraph：作业对应的 StreamGraph；SubTasks：作业的 subtask 列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobId: string
+  Key?: string
   /**
-   * 作业配置版本数组
+   * 运行信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobConfigVersions: Array<number | bigint>
-  /**
-   * 工作空间 SerialId
-   */
-  WorkSpaceId?: string
+  Value?: string
 }
 
 /**
@@ -1037,6 +1063,36 @@ export interface DescribeFolderResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyConnector请求参数结构体
+ */
+export interface ModifyConnectorRequest {
+  /**
+   * 空间
+   */
+  WorkSpaceId: string
+  /**
+   * connector ID
+   */
+  ConnectorResourceId: string
+  /**
+   * 资源id
+   */
+  ResourceId?: string
+  /**
+   * 资源版本
+   */
+  VersionId?: number
+  /**
+   * 连接器名称
+   */
+  Connector?: string
+  /**
+   * 连接方式
+   */
+  ConnectionMethod?: string
 }
 
 /**
@@ -1985,6 +2041,24 @@ export interface DescribeResourceRelatedJobsResponse {
 }
 
 /**
+ * 解析Connector
+ */
+export interface Connectors {
+  /**
+   * 连接方式
+   */
+  ConnectionMethod?: string
+  /**
+   * 连接器名称
+   */
+  Connector?: string
+  /**
+   * 是否已经被使用
+   */
+  Existed?: boolean
+}
+
+/**
  * 描述作业发生的一个事件
  */
 export interface JobEvent {
@@ -2015,6 +2089,20 @@ export interface JobEvent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SolutionLink: string
+}
+
+/**
+ * CheckConnectorName返回参数结构体
+ */
+export interface CheckConnectorNameResponse {
+  /**
+   * 是否存在
+   */
+  Exists?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2185,19 +2273,21 @@ export interface CheckSavepointRequest {
 }
 
 /**
- * 作业运行时信息
+ * DeleteJobConfigs请求参数结构体
  */
-export interface JobRuntimeInfo {
+export interface DeleteJobConfigsRequest {
   /**
-   * 运行信息的key，目前支持：TaskManagers：taskmanager pod 列表； StreamGraph：作业对应的 StreamGraph；SubTasks：作业的 subtask 列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 作业ID
    */
-  Key?: string
+  JobId: string
   /**
-   * 运行信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 作业配置版本数组
    */
-  Value?: string
+  JobConfigVersions: Array<number | bigint>
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
 }
 
 /**
@@ -2691,6 +2781,32 @@ export interface ResourceRefDetail {
    * Connector
    */
   Connector?: string
+}
+
+/**
+ * setats 机器规格
+ */
+export interface SetatsCvmInfo {
+  /**
+   * setats机器cpu
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * setats机器内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mem?: number
+  /**
+   * setats worker 并行度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultParallelism?: number
+  /**
+   * setats 机器磁盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Disk?: SetatsDisk
 }
 
 /**
@@ -4140,6 +4256,20 @@ export interface ClusterSession {
 }
 
 /**
+ * ParseConnector返回参数结构体
+ */
+export interface ParseConnectorResponse {
+  /**
+   * 连接器
+   */
+  Connectors?: Array<Connectors>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateResourceConfig请求参数结构体
  */
 export interface CreateResourceConfigRequest {
@@ -4163,6 +4293,26 @@ export interface CreateResourceConfigRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * ModifyConnector返回参数结构体
+ */
+export interface ModifyConnectorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckConnectorName请求参数结构体
+ */
+export interface CheckConnectorNameRequest {
+  /**
+   * 资源名
+   */
+  Name: string
 }
 
 /**
@@ -4362,29 +4512,29 @@ export interface Order {
 }
 
 /**
- * setats 机器规格
+ * CreateConnector请求参数结构体
  */
-export interface SetatsCvmInfo {
+export interface CreateConnectorRequest {
   /**
-   * setats机器cpu
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源id
    */
-  Cpu?: number
+  ResourceId: string
   /**
-   * setats机器内存
-注意：此字段可能返回 null，表示取不到有效值。
+   * 空间
    */
-  Mem?: number
+  WorkSpaceId: string
   /**
-   * setats worker 并行度
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源版本
    */
-  DefaultParallelism?: number
+  VersionId: number
   /**
-   * setats 机器磁盘
-注意：此字段可能返回 null，表示取不到有效值。
+   * 连接器名称
    */
-  Disk?: SetatsDisk
+  Connector: string
+  /**
+   * 连接方式
+   */
+  ConnectionMethod: string
 }
 
 /**

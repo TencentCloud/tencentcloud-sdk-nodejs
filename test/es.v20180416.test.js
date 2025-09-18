@@ -578,6 +578,16 @@ it("es.v20180416.UpdateDictionaries", async function () {
     }
 })
 
+it("es.v20180416.ExportIpTraceLog", async function () {
+    try {
+       const data = await client.ExportIpTraceLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.UpgradeLicense", async function () {
     try {
        const data = await client.UpgradeLicense({})

@@ -84,6 +84,26 @@ export interface ServerlessSpaceUser {
 }
 
 /**
+ * 索引配置字段
+ */
+export interface ServerlessIndexSettingsField {
+  /**
+   * 索引主分片数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberOfShards?: string
+  /**
+   * 索引刷新频率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefreshInterval?: string
+  /**
+   * 自定义参数
+   */
+  CustomSetting?: string
+}
+
+/**
  * RestartLogstashInstance请求参数结构体
  */
 export interface RestartLogstashInstanceRequest {
@@ -2055,6 +2075,16 @@ export interface UpdatePluginsRequest {
    * 0：系统插件
    */
   PluginType?: number
+}
+
+/**
+ * StopLogstashPipelines返回参数结构体
+ */
+export interface StopLogstashPipelinesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4804,6 +4834,24 @@ export interface BackingIndexMetaField {
 }
 
 /**
+ * 节点IP、访问IP、访问时间
+ */
+export interface IpTimePair {
+  /**
+   * IP地址
+   */
+  Ip?: string
+  /**
+   * 时间戳，毫秒
+   */
+  Timestamp?: number
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: string
+}
+
+/**
  * 索引配置字段
  */
 export interface IndexSettingsField {
@@ -5233,23 +5281,17 @@ export interface CreateServerlessInstanceResponse {
 }
 
 /**
- * 索引配置字段
+ * ExportIpTraceLog返回参数结构体
  */
-export interface ServerlessIndexSettingsField {
+export interface ExportIpTraceLogResponse {
   /**
-   * 索引主分片数
-注意：此字段可能返回 null，表示取不到有效值。
+   * IP时间列表
    */
-  NumberOfShards?: string
+  IpTraceList?: Array<IpTimePair>
   /**
-   * 索引刷新频率
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RefreshInterval?: string
-  /**
-   * 自定义参数
-   */
-  CustomSetting?: string
+  RequestId?: string
 }
 
 /**
@@ -5497,13 +5539,57 @@ export interface DescribeServerlessMetricsResponse {
 }
 
 /**
- * StopLogstashPipelines返回参数结构体
+ * ExportIpTraceLog请求参数结构体
  */
-export interface StopLogstashPipelinesResponse {
+export interface ExportIpTraceLogRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * ES集群ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 起始偏移量
+   */
+  Offset?: number
+  /**
+   * 数据条数
+   */
+  Limit?: number
+  /**
+   * 访问IP
+   */
+  RemoteIp?: Array<string>
+  /**
+   * Request/Response 请求/返回, 非必填
+   */
+  TraceType?: Array<string>
+  /**
+   * Public/Private 公网访问/内网访问, 非必填
+   */
+  NetType?: Array<string>
+  /**
+   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
+   */
+  ReqTypeOrRspStatus?: Array<string>
+  /**
+   * 关键字模糊查询，支持Lucene Query String
+   */
+  SearchKey?: string
+  /**
+   * uri搜索
+   */
+  Uri?: string
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: Array<string>
 }
 
 /**

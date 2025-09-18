@@ -118,6 +118,16 @@ it("oceanus.v20190422.DeleteWorkSpace", async function () {
     }
 })
 
+it("oceanus.v20190422.CreateConnector", async function () {
+    try {
+       const data = await client.CreateConnector({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.ModifyFolder", async function () {
     try {
        const data = await client.ModifyFolder({})
@@ -171,6 +181,16 @@ it("oceanus.v20190422.DescribeJobRuntimeInfo", async function () {
 it("oceanus.v20190422.FetchSqlGatewayStatementResult", async function () {
     try {
        const data = await client.FetchSqlGatewayStatementResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.RunJobs", async function () {
+    try {
+       const data = await client.RunJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +258,19 @@ it("oceanus.v20190422.TriggerJobSavepoint", async function () {
     }
 })
 
-it("oceanus.v20190422.RunJobs", async function () {
+it("oceanus.v20190422.ParseConnector", async function () {
     try {
-       const data = await client.RunJobs({})
+       const data = await client.ParseConnector({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.CheckConnectorName", async function () {
+    try {
+       const data = await client.CheckConnectorName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +391,16 @@ it("oceanus.v20190422.DescribeJobs", async function () {
 it("oceanus.v20190422.ModifyJob", async function () {
     try {
        const data = await client.ModifyJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.ModifyConnector", async function () {
+    try {
+       const data = await client.ModifyConnector({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

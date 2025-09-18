@@ -1487,7 +1487,6 @@ ip：IP 列表作为源站
 以下备源源站类型尚未全量支持，需要申请试用：
 ipv6_domain: 源站列表为多个 IPv6 地址以及域名
 ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址
-ipv6_domain: 源站列表为多个 IPv6 地址以及域名
 ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2149,6 +2148,10 @@ export interface ListClsTopicDomainsResponse {
    * 日志主题最近更新时间
    */
   UpdateTime?: string
+  /**
+   * 是否继承域名标签
+   */
+  InheritDomainTags?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4051,10 +4054,7 @@ last：表示回源层节点
    */
   Layer?: string
   /**
-   * 查询区域：
-mainland: 国内节点
-overseas: 海外节点
-global: 全球节点
+   * 查询区域：mainland: 中国境内节点overseas: 海外节点global: 全球节点
    */
   Area?: string
   /**
@@ -4575,6 +4575,10 @@ export interface ManageClsTopicDomainsRequest {
    * 域名区域配置，注意：如果此字段为空，则表示解绑对应主题下的所有域名
    */
   DomainAreaConfigs?: Array<DomainAreaConfig>
+  /**
+   * 是否继承域名标签
+   */
+  InheritDomainTags?: boolean
 }
 
 /**
@@ -4597,6 +4601,10 @@ export interface AddCLSTopicDomainsRequest {
    * 接入渠道，cdn或者ecdn，默认值为cdn
    */
   Channel?: string
+  /**
+   * 是否继承域名标签, 默认保留上一次更改的值
+   */
+  InheritDomainTags?: boolean
 }
 
 /**
@@ -5323,6 +5331,10 @@ export interface CreateClsLogTopicRequest {
    * 域名区域信息
    */
   DomainAreaConfigs?: Array<DomainAreaConfig>
+  /**
+   * 是否继承域名标签，默认为false
+   */
+  InheritDomainTags?: boolean
 }
 
 /**
@@ -7329,7 +7341,7 @@ blacklist：黑名单
    */
   Filters?: Array<string>
   /**
-   * IP 黑白名单分路径配置，白名单功能。黑白名单 IP 总数不能超过 1000 个。
+   * IP 黑白名单分路径配置。黑白名单 IP 总数不能超过 1000 个。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterRules?: Array<IpFilterPathRule>

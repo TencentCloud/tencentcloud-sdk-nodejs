@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   TaskDetail,
   ServerlessSpaceUser,
+  ServerlessIndexSettingsField,
   RestartLogstashInstanceRequest,
   DescribeInstanceOperationsRequest,
   LogstashInstanceInfo,
@@ -98,6 +99,7 @@ import {
   CreateIndexRequest,
   LogstashPipelineInfo,
   UpdatePluginsRequest,
+  StopLogstashPipelinesResponse,
   RestoreClusterSnapshotRequest,
   DescribeServerlessSpaceUserRequest,
   Dimension,
@@ -179,6 +181,7 @@ import {
   CreateCosMigrateToServerlessInstanceResponse,
   RestartInstanceResponse,
   BackingIndexMetaField,
+  IpTimePair,
   IndexSettingsField,
   UpdateServerlessSpaceResponse,
   UpdateLogstashPipelineDescRequest,
@@ -188,7 +191,7 @@ import {
   ModifyEsVipSecurityGroupResponse,
   UpdateInstanceRequest,
   CreateServerlessInstanceResponse,
-  ServerlessIndexSettingsField,
+  ExportIpTraceLogResponse,
   DescribeDiagnoseRequest,
   GpuInfo,
   DescribeInstancePluginListResponse,
@@ -199,7 +202,7 @@ import {
   UpdateJdkRequest,
   ServerlessDi,
   DescribeServerlessMetricsResponse,
-  StopLogstashPipelinesResponse,
+  ExportIpTraceLogRequest,
   DescribeServerlessInstancesRequest,
   VpcInfo,
   KibanaNodeInfo,
@@ -798,6 +801,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDictionariesResponse) => void
   ): Promise<UpdateDictionariesResponse> {
     return this.request("UpdateDictionaries", req, cb)
+  }
+
+  /**
+   * 查询IP溯源日志原始数据
+   */
+  async ExportIpTraceLog(
+    req: ExportIpTraceLogRequest,
+    cb?: (error: string, rep: ExportIpTraceLogResponse) => void
+  ): Promise<ExportIpTraceLogResponse> {
+    return this.request("ExportIpTraceLog", req, cb)
   }
 
   /**

@@ -987,6 +987,10 @@ export interface AddCustomizedConfigRequest {
    * 配置内容
    */
   ConfigContent: string
+  /**
+   * 标签
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**

@@ -408,6 +408,16 @@ it("dbbrain.v20210527.DescribeRedisCommandCostStatistics", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeRedisTopCostCommands", async function () {
+    try {
+       const data = await client.DescribeRedisTopCostCommands({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateAuditLogFile", async function () {
     try {
        const data = await client.CreateAuditLogFile({})
@@ -541,6 +551,16 @@ it("dbbrain.v20210527.CreateDBDiagReportTask", async function () {
 it("dbbrain.v20210527.DescribeDiagDBInstances", async function () {
     try {
        const data = await client.DescribeDiagDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeHealthScoreTimeSeries", async function () {
+    try {
+       const data = await client.DescribeHealthScoreTimeSeries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

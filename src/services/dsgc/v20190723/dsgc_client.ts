@@ -44,6 +44,7 @@ import {
   DSPACosMetaDataInfo,
   AssessmentTemplate,
   ModifyDSPATaskResultRequest,
+  Tag,
   RDBAsset,
   DescribeAssetOverviewResponse,
   ReportInfo,

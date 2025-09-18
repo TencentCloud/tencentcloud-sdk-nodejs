@@ -233,6 +233,18 @@ es类型示例:
    * 事件规则ID
    */
   RuleId: string
+  /**
+   * 批量投递最长等待时间
+   */
+  BatchTimeout?: number
+  /**
+   * 批量投递最大事件条数
+   */
+  BatchEventCount?: number
+  /**
+   * 开启批量投递使能
+   */
+  EnableBatchDelivery?: boolean
 }
 
 /**

@@ -1551,6 +1551,10 @@ export interface InvocationTask {
 - INVOKER：来源于定时执行。
    */
   InvocationSource?: string
+  /**
+   * 执行的命令的名称。
+   */
+  CommandName?: string
 }
 
 /**

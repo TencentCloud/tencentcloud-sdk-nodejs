@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ParseConnectorRequest,
   CopyJobResult,
   CreateResourceRequest,
   ModifyFolderRequest,
@@ -32,9 +33,10 @@ import {
   DescribeTreeJobsResponse,
   CopyJobsRequest,
   CopyJobsResponse,
+  CreateConnectorResponse,
   TriggerJobSavepointRequest,
   LogContent,
-  DeleteJobConfigsRequest,
+  JobRuntimeInfo,
   JobEventInfo,
   ResourceLocParam,
   NodeConfig,
@@ -47,6 +49,7 @@ import {
   RefJobStatusCountItem,
   RunSqlGatewayStatementRequest,
   DescribeFolderResponse,
+  ModifyConnectorRequest,
   SetatsDisk,
   ResourceLoc,
   CCN,
@@ -89,14 +92,16 @@ import {
   DescribeResourcesResponse,
   RunJobDescription,
   DescribeResourceRelatedJobsResponse,
+  Connectors,
   JobEvent,
+  CheckConnectorNameResponse,
   ResourceRef,
   DescribeSystemResourcesResponse,
   ClazzLevel,
   SubEks,
   WorkSpaceClusterItem,
   CheckSavepointRequest,
-  JobRuntimeInfo,
+  DeleteJobConfigsRequest,
   StopJobsRequest,
   TraceModeConfiguration,
   RunJobsRequest,
@@ -113,6 +118,7 @@ import {
   RoleAuth,
   DescribeTreeResourcesRsp,
   ResourceRefDetail,
+  SetatsCvmInfo,
   TreeResourceItem,
   ExpertModeConfiguration,
   RunJobsResponse,
@@ -142,7 +148,10 @@ import {
   DeleteFoldersResponse,
   SubFolderInfo,
   ClusterSession,
+  ParseConnectorResponse,
   CreateResourceConfigRequest,
+  ModifyConnectorResponse,
+  CheckConnectorNameRequest,
   StopJobsResponse,
   DescribeClustersResponse,
   DescribeResourcesRequest,
@@ -151,7 +160,7 @@ import {
   DescribeJobsResponse,
   DescribeTreeResourcesResponse,
   Order,
-  SetatsCvmInfo,
+  CreateConnectorRequest,
   CopyJobItem,
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
@@ -270,6 +279,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建Connector
+   */
+  async CreateConnector(
+    req: CreateConnectorRequest,
+    cb?: (error: string, rep: CreateConnectorResponse) => void
+  ): Promise<CreateConnectorResponse> {
+    return this.request("CreateConnector", req, cb)
+  }
+
+  /**
    * 自定义树状结构页面拖拽文件夹
    */
   async ModifyFolder(
@@ -327,6 +346,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FetchSqlGatewayStatementResultResponse) => void
   ): Promise<FetchSqlGatewayStatementResultResponse> {
     return this.request("FetchSqlGatewayStatementResult", req, cb)
+  }
+
+  /**
+   * 批量启动或者恢复作业，批量操作数量上限20
+   */
+  async RunJobs(
+    req: RunJobsRequest,
+    cb?: (error: string, rep: RunJobsResponse) => void
+  ): Promise<RunJobsResponse> {
+    return this.request("RunJobs", req, cb)
   }
 
   /**
@@ -390,13 +419,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量启动或者恢复作业，批量操作数量上限20
+   * 解析用户上传connector
    */
-  async RunJobs(
-    req: RunJobsRequest,
-    cb?: (error: string, rep: RunJobsResponse) => void
-  ): Promise<RunJobsResponse> {
-    return this.request("RunJobs", req, cb)
+  async ParseConnector(
+    req: ParseConnectorRequest,
+    cb?: (error: string, rep: ParseConnectorResponse) => void
+  ): Promise<ParseConnectorResponse> {
+    return this.request("ParseConnector", req, cb)
+  }
+
+  /**
+   * 查询资源名是否重复
+   */
+  async CheckConnectorName(
+    req: CheckConnectorNameRequest,
+    cb?: (error: string, rep: CheckConnectorNameResponse) => void
+  ): Promise<CheckConnectorNameResponse> {
+    return this.request("CheckConnectorName", req, cb)
   }
 
   /**
@@ -525,6 +564,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyJobResponse) => void
   ): Promise<ModifyJobResponse> {
     return this.request("ModifyJob", req, cb)
+  }
+
+  /**
+   * 修改Connector
+   */
+  async ModifyConnector(
+    req: ModifyConnectorRequest,
+    cb?: (error: string, rep: ModifyConnectorResponse) => void
+  ): Promise<ModifyConnectorResponse> {
+    return this.request("ModifyConnector", req, cb)
   }
 
   /**

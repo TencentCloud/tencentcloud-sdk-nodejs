@@ -592,6 +592,20 @@ export interface CreateSecurityAuditLogExportTaskRequest {
 }
 
 /**
+ * DescribeTopSpaceTableTimeSeries返回参数结构体
+ */
+export interface DescribeTopSpaceTableTimeSeriesResponse {
+  /**
+   * 返回的Top表空间统计信息的时序数据列表。
+   */
+  TopSpaceTableTimeSeries?: Array<TableSpaceTimeSeries>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBDiagEvent返回参数结构体
  */
 export interface DescribeDBDiagEventResponse {
@@ -2209,6 +2223,28 @@ export interface DeleteSqlFiltersResponse {
 }
 
 /**
+ * DescribeHealthScoreTimeSeries请求参数结构体
+ */
+export interface DescribeHealthScoreTimeSeriesRequest {
+  /**
+   * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
+   */
+  StartTime: string
+  /**
+   * 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。
+   */
+  EndTime: string
+  /**
+   * 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb    默认为"mysql"。
+   */
+  Product: string
+}
+
+/**
  * DescribeDBDiagEvents请求参数结构体
  */
 export interface DescribeDBDiagEventsRequest {
@@ -2395,17 +2431,17 @@ export interface TopHotKeys {
 }
 
 /**
- * DescribeIndexRecommendInfo请求参数结构体
+ * DescribeHealthScoreTimeSeries返回参数结构体
  */
-export interface DescribeIndexRecommendInfoRequest {
+export interface DescribeHealthScoreTimeSeriesResponse {
   /**
-   * 服务产品类型，支持值包括："mongodb" - 云数据库 。
+   * 健康得分趋势数据
    */
-  Product: string
+  Data?: HealthScoreTimeSeriesData
   /**
-   * 实例ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -2657,6 +2693,20 @@ export interface EventInfo {
 }
 
 /**
+ * DescribeIndexRecommendInfo请求参数结构体
+ */
+export interface DescribeIndexRecommendInfoRequest {
+  /**
+   * 服务产品类型，支持值包括："mongodb" - 云数据库 。
+   */
+  Product: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+}
+
+/**
  * 实例列表查询条件
  */
 export interface AuditInstanceFilter {
@@ -2694,6 +2744,20 @@ export interface DescribeMailProfileRequest {
    * 根据邮件配置名称查询，定期发送的邮件配置名称遵循："scheduler_"+{instanceId}的规则。
    */
   ProfileName?: string
+}
+
+/**
+ * 接收用户
+ */
+export interface ReceiveUin {
+  /**
+   * 用户名
+   */
+  UinName?: string
+  /**
+   * 用户id
+   */
+  Uin?: string
 }
 
 /**
@@ -3007,17 +3071,29 @@ export interface HealthScoreInfo {
 }
 
 /**
- * DescribeTopSpaceTableTimeSeries返回参数结构体
+ * DescribeRedisTopCostCommands请求参数结构体
  */
-export interface DescribeTopSpaceTableTimeSeriesResponse {
+export interface DescribeRedisTopCostCommandsRequest {
   /**
-   * 返回的Top表空间统计信息的时序数据列表。
+   * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
    */
-  TopSpaceTableTimeSeries?: Array<TableSpaceTimeSeries>
+  StartTime: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。
    */
-  RequestId?: string
+  EndTime: string
+  /**
+   * 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb    默认为"mysql"。
+   */
+  Product: string
+  /**
+   * 默认前20条
+   */
+  Limit?: number
 }
 
 /**
@@ -3389,17 +3465,17 @@ export interface DescribeTopSpaceTablesRequest {
 }
 
 /**
- * 接收用户
+ * DescribeRedisTopCostCommands返回参数结构体
  */
-export interface ReceiveUin {
+export interface DescribeRedisTopCostCommandsResponse {
   /**
-   * 用户名
+   * 命令列表
    */
-  UinName?: string
+  TopCostCmdList?: Array<RedisCostCmd>
   /**
-   * 用户id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Uin?: string
+  RequestId?: string
 }
 
 /**
@@ -4163,6 +4239,39 @@ export interface CancelRedisBigKeyAnalysisTasksRequest {
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
   Product: string
+}
+
+/**
+ * 健康得分趋势
+ */
+export interface HealthScoreTimeSeriesData {
+  /**
+   * 平均得分
+   */
+  Avg?: number
+  /**
+   * 健康状态
+1-health
+2-warning
+3-critical
+   */
+  HealthStatus?: number
+  /**
+   * 指标名称
+   */
+  Metric?: string
+  /**
+   * 得分序列
+   */
+  Series?: Array<number | bigint>
+  /**
+   * 时间序列，单位：毫秒数
+   */
+  Timestamp?: Array<number | bigint>
+  /**
+   * 单位
+   */
+  Unit?: string
 }
 
 /**
@@ -5209,6 +5318,20 @@ export interface DescribeRedisTopKeyPrefixListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * redis命令cost详情
+ */
+export interface RedisCostCmd {
+  /**
+   * 命令
+   */
+  Cmd?: string
+  /**
+   * 最大cost
+   */
+  MaxCost?: number
 }
 
 /**

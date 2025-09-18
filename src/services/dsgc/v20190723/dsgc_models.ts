@@ -597,6 +597,24 @@ export interface ModifyDSPATaskResultRequest {
 }
 
 /**
+ * 标签键/值和所属类别
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue: string
+  /**
+   * 标签所属类别
+   */
+  Category?: string
+}
+
+/**
  * rdb的资产统计结果
  */
 export interface RDBAsset {
@@ -6566,6 +6584,10 @@ export interface DspaInstance {
    * 已购买的实例数量
    */
   InsTotalQuota?: number
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -7138,6 +7160,10 @@ Version支持的可选值：trial、official。
 Channel支持的可选值：sp_cds_dsgc_pre（代表dsgc实例）、sp_cds_dsgc_wedata_dc（代表wedata实例）
    */
   Filters?: Array<DspaDataSourceMngFilter>
+  /**
+   * Tag键值过滤
+   */
+  TagFilter?: Array<Tag>
   /**
    * 展示模式。
 

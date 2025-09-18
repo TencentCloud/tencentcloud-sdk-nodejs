@@ -2185,7 +2185,7 @@ GooseFSx：GooseFSx存储
    */
   Tags?: Array<Tag>
   /**
-   * 数据配置，只支持WEDATA_HDFS存储类型
+   * 数据存储挂载配置
    */
   DataConfigs?: Array<DataConfig>
   /**

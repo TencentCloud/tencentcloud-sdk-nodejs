@@ -40,6 +40,7 @@ import {
   ScoreItem,
   CreateRedisBigKeyAnalysisTaskResponse,
   CreateSecurityAuditLogExportTaskRequest,
+  DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagEventResponse,
   DescribeDBAutonomyActionsResponse,
   DescribeSlowLogTopSqlsRequest,
@@ -106,6 +107,7 @@ import {
   AuditInstance,
   IndexesToBuild,
   DeleteSqlFiltersResponse,
+  DescribeHealthScoreTimeSeriesRequest,
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
   ScoreDetail,
@@ -115,7 +117,7 @@ import {
   DescribeProxyProcessStatisticsResponse,
   CmdPerfInfo,
   TopHotKeys,
-  DescribeIndexRecommendInfoRequest,
+  DescribeHealthScoreTimeSeriesResponse,
   SlowLogHost,
   DescribeRedisCmdPerfTimeSeriesResponse,
   CreateMailProfileRequest,
@@ -126,8 +128,10 @@ import {
   DescribeSlowLogUserHostStatsResponse,
   TableSpaceData,
   EventInfo,
+  DescribeIndexRecommendInfoRequest,
   AuditInstanceFilter,
   DescribeMailProfileRequest,
+  ReceiveUin,
   DeleteSecurityAuditLogExportTasksResponse,
   KillMySqlThreadsRequest,
   DescribeSqlFiltersResponse,
@@ -141,7 +145,7 @@ import {
   ReceiveInfo,
   DescribeSqlTemplateResponse,
   HealthScoreInfo,
-  DescribeTopSpaceTableTimeSeriesResponse,
+  DescribeRedisTopCostCommandsRequest,
   RedisInstanceConf,
   DescribeDBDiagHistoryResponse,
   CreateUserAutonomyProfileRequest,
@@ -158,7 +162,7 @@ import {
   CreateSqlFilterRequest,
   InstanceBasicInfo,
   DescribeTopSpaceTablesRequest,
-  ReceiveUin,
+  DescribeRedisTopCostCommandsResponse,
   SchemaSpaceData,
   DescribeAllUserContactRequest,
   MySqlProcess,
@@ -186,6 +190,7 @@ import {
   DescribeRedisTopBigKeysRequest,
   ModifyUserAutonomyProfileRequest,
   CancelRedisBigKeyAnalysisTasksRequest,
+  HealthScoreTimeSeriesData,
   Process,
   ModifyAuditServiceResponse,
   DescribeDBAutonomyEventsRequest,
@@ -231,6 +236,7 @@ import {
   MonitorMetricSeriesData,
   DescribeDBPerfTimeSeriesResponse,
   DescribeRedisTopKeyPrefixListResponse,
+  RedisCostCmd,
   IndexesToDrop,
   DescribeHealthScoreResponse,
   CancelRedisBigKeyAnalysisTasksResponse,
@@ -650,6 +656,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指定时间段内Redis 访问命令 cost top N
+   */
+  async DescribeRedisTopCostCommands(
+    req: DescribeRedisTopCostCommandsRequest,
+    cb?: (error: string, rep: DescribeRedisTopCostCommandsResponse) => void
+  ): Promise<DescribeRedisTopCostCommandsResponse> {
+    return this.request("DescribeRedisTopCostCommands", req, cb)
+  }
+
+  /**
    * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
    */
   async CreateAuditLogFile(
@@ -787,6 +803,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiagDBInstancesResponse) => void
   ): Promise<DescribeDiagDBInstancesResponse> {
     return this.request("DescribeDiagDBInstances", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内的健康得分趋势
+   */
+  async DescribeHealthScoreTimeSeries(
+    req: DescribeHealthScoreTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeHealthScoreTimeSeriesResponse) => void
+  ): Promise<DescribeHealthScoreTimeSeriesResponse> {
+    return this.request("DescribeHealthScoreTimeSeries", req, cb)
   }
 
   /**
