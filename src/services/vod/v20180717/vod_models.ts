@@ -19235,7 +19235,6 @@ export interface DescribeLicenseUsageDataRequest {
   /**
    * License 类型，默认为 CommercialDRMLicense 。目前支持的 License 类型包括：
 <li> CommercialDRMLicense: 商业级 DRM License</li>
-<li> JITEncryptionDRMLicense: 即时加密 DRM License</li>
    */
   LicenseType?: string
   /**

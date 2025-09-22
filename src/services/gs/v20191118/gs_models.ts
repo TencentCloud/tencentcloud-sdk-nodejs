@@ -369,6 +369,16 @@ export interface ModifyAndroidAppRequest {
 }
 
 /**
+ * DeleteAndroidInstanceBackups返回参数结构体
+ */
+export interface DeleteAndroidInstanceBackupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAndroidApps返回参数结构体
  */
 export interface DescribeAndroidAppsResponse {
@@ -522,6 +532,20 @@ export interface SyncAndroidInstanceImage {
    * 镜像可用区
    */
   AndroidInstanceImageZone?: string
+}
+
+/**
+ * RestoreAndroidInstance返回参数结构体
+ */
+export interface RestoreAndroidInstanceResponse {
+  /**
+   * 实例任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -719,33 +743,13 @@ export interface DescribeAndroidInstanceAppsResponse {
 }
 
 /**
- * CreateAndroidInstanceSSH返回参数结构体
+ * CreateAndroidInstanceWebShell请求参数结构体
  */
-export interface CreateAndroidInstanceSSHResponse {
+export interface CreateAndroidInstanceWebShellRequest {
   /**
-   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   * 实例 ID
    */
-  PrivateKey?: string
-  /**
-   * 用户名称
-   */
-  UserName?: string
-  /**
-   * 连接地址
-   */
-  HostName?: string
-  /**
-   * 连接端口
-   */
-  Port?: number
-  /**
-   * 连接参考命令
-   */
-  ConnectCommand?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AndroidInstanceId: string
 }
 
 /**
@@ -822,13 +826,13 @@ export interface DisableAndroidInstancesAppRequest {
 }
 
 /**
- * DescribeAndroidInstancesAppBlacklist请求参数结构体
+ * DisconnectAndroidInstance返回参数结构体
  */
-export interface DescribeAndroidInstancesAppBlacklistRequest {
+export interface DisconnectAndroidInstanceResponse {
   /**
-   * 实例 ID 列表，数量上限 100
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AndroidInstanceIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -914,13 +918,9 @@ export interface StartAndroidInstancesResponse {
 }
 
 /**
- * RestoreAndroidInstanceFromStorage返回参数结构体
+ * DescribeAndroidInstanceBackups返回参数结构体
  */
-export interface RestoreAndroidInstanceFromStorageResponse {
-  /**
-   * 实例任务 ID
-   */
-  TaskId?: string
+export interface DescribeAndroidInstanceBackupsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1176,6 +1176,24 @@ export interface DeleteAndroidInstanceLabelRequest {
 }
 
 /**
+ * DescribeAndroidInstanceBackups请求参数结构体
+ */
+export interface DescribeAndroidInstanceBackupsRequest {
+  /**
+   * 备份ID列表
+   */
+  BackupIds?: Array<string>
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 每页数量
+   */
+  Limit?: number
+}
+
+/**
  * ModifyAndroidInstancesUserId返回参数结构体
  */
 export interface ModifyAndroidInstancesUserIdResponse {
@@ -1286,6 +1304,24 @@ export interface ModifyAndroidInstanceInformationRequest {
 }
 
 /**
+ * BackUpAndroidInstance请求参数结构体
+ */
+export interface BackUpAndroidInstanceRequest {
+  /**
+   * 安卓实例ID
+   */
+  AndroidInstanceId: string
+  /**
+   * 包含的路径，支持仅含一个通配符*，通配符不能出现在路径开始
+   */
+  Includes?: Array<string>
+  /**
+   * 需要排除路径，支持仅含一个通配符*，通配符不能出现在路径开始
+   */
+  Excludes?: Array<string>
+}
+
+/**
  * StopPublishStream请求参数结构体
  */
 export interface StopPublishStreamRequest {
@@ -1296,29 +1332,17 @@ export interface StopPublishStreamRequest {
 }
 
 /**
- * DeleteAndroidInstanceBackupFiles请求参数结构体
+ * DistributeAndroidInstanceImageToHosts返回参数结构体
  */
-export interface DeleteAndroidInstanceBackupFilesRequest {
+export interface DistributeAndroidInstanceImageToHostsResponse {
   /**
-   * 文件对象键列表
+   * 任务集合
    */
-  ObjectKeys: Array<string>
+  TaskSet?: Array<AndroidInstanceHostTask>
   /**
-   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StorageType: string
-  /**
-   * COS协议选项
-   */
-  COSOptions?: COSOptions
-  /**
-   * S3存储协议选项
-   */
-  S3Options?: S3Options
-  /**
-   * 安卓实例可用区。StorageType 为 S3 时，需要填写该字段；StorageType 为 COS 时，不需要填写该字段
-   */
-  AndroidInstanceZone?: string
+  RequestId?: string
 }
 
 /**
@@ -1392,6 +1416,20 @@ export interface RestartAndroidInstancesAppResponse {
 }
 
 /**
+ * RestoreAndroidInstance请求参数结构体
+ */
+export interface RestoreAndroidInstanceRequest {
+  /**
+   * 安卓实例 ID
+   */
+  AndroidInstanceId: string
+  /**
+   * 备份 ID
+   */
+  BackupId: string
+}
+
+/**
  * DescribeAndroidInstancesByApps返回参数结构体
  */
 export interface DescribeAndroidInstancesByAppsResponse {
@@ -1433,6 +1471,16 @@ export interface DescribeAndroidInstanceTasksStatusRequest {
    * 时间范围限制，以天数为单位
    */
   RecentDays?: number
+}
+
+/**
+ * DeleteAndroidInstanceBackups请求参数结构体
+ */
+export interface DeleteAndroidInstanceBackupsRequest {
+  /**
+   * 备份ID列表
+   */
+  BackupIds: Array<string>
 }
 
 /**
@@ -1485,6 +1533,20 @@ export interface ExecuteCommandOnAndroidInstancesRequest {
  * ModifyAndroidInstanceInformation返回参数结构体
  */
 export interface ModifyAndroidInstanceInformationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BackUpAndroidInstance返回参数结构体
+ */
+export interface BackUpAndroidInstanceResponse {
+  /**
+   * 备份 ID
+   */
+  BackupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1582,17 +1644,29 @@ export interface DistributeAndroidInstanceImageToHostsRequest {
 }
 
 /**
- * DistributeAndroidInstanceImageToHosts返回参数结构体
+ * DeleteAndroidInstanceBackupFiles请求参数结构体
  */
-export interface DistributeAndroidInstanceImageToHostsResponse {
+export interface DeleteAndroidInstanceBackupFilesRequest {
   /**
-   * 任务集合
+   * 文件对象键列表
    */
-  TaskSet?: Array<AndroidInstanceHostTask>
+  ObjectKeys: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。
    */
-  RequestId?: string
+  StorageType: string
+  /**
+   * COS协议选项
+   */
+  COSOptions?: COSOptions
+  /**
+   * S3存储协议选项
+   */
+  S3Options?: S3Options
+  /**
+   * 安卓实例可用区。StorageType 为 S3 时，需要填写该字段；StorageType 为 COS 时，不需要填写该字段
+   */
+  AndroidInstanceZone?: string
 }
 
 /**
@@ -1617,6 +1691,20 @@ export interface ConnectAndroidInstanceResponse {
    * 服务端session信息
    */
   ServerSession?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestoreAndroidInstanceFromStorage返回参数结构体
+ */
+export interface RestoreAndroidInstanceFromStorageResponse {
+  /**
+   * 实例任务 ID
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2138,23 +2226,13 @@ export interface S3Options {
 }
 
 /**
- * DisconnectAndroidInstance返回参数结构体
+ * DescribeAndroidInstancesAppBlacklist请求参数结构体
  */
-export interface DisconnectAndroidInstanceResponse {
+export interface DescribeAndroidInstancesAppBlacklistRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例 ID 列表，数量上限 100
    */
-  RequestId?: string
-}
-
-/**
- * CreateAndroidInstanceWebShell请求参数结构体
- */
-export interface CreateAndroidInstanceWebShellRequest {
-  /**
-   * 实例 ID
-   */
-  AndroidInstanceId: string
+  AndroidInstanceIds: Array<string>
 }
 
 /**
@@ -2605,6 +2683,36 @@ export interface ModifyAndroidInstancesPropertiesResponse {
    * 安卓实例错误列表
    */
   AndroidInstanceErrors?: Array<AndroidInstanceError>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAndroidInstanceSSH返回参数结构体
+ */
+export interface CreateAndroidInstanceSSHResponse {
+  /**
+   * 连接私钥，需要保存为文件形式，例如 private_key.pem
+   */
+  PrivateKey?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 连接地址
+   */
+  HostName?: string
+  /**
+   * 连接端口
+   */
+  Port?: number
+  /**
+   * 连接参考命令
+   */
+  ConnectCommand?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -953,6 +953,10 @@ export interface GetFlowStatisticByGroupRequest {
    * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
    */
   GatewayType?: number
+  /**
+   * 应用ID, 查询分组流量时无需使用。 查询应用流量时该字段为应用ID，GroupId 填写 "-1"
+   */
+  MpApplicationId?: string
 }
 
 /**

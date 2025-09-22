@@ -23,8 +23,10 @@ import {
   ApmInstanceDetail,
   CreateApmInstanceRequest,
   ModifyGeneralApmApplicationConfigRequest,
+  DescribeApmServiceMetricRequest,
   DescribeServiceOverviewResponse,
   QueryMetricItem,
+  ServiceDetail,
   TerminateApmInstanceRequest,
   DescribeApmInstancesResponse,
   Instrument,
@@ -36,6 +38,7 @@ import {
   DescribeServiceOverviewRequest,
   DescribeApmAgentResponse,
   DescribeTagValuesRequest,
+  ApmServiceMetric,
   ApmField,
   Line,
   DescribeGeneralSpanListResponse,
@@ -43,6 +46,7 @@ import {
   DescribeGeneralSpanListRequest,
   APMKVItem,
   OrderBy,
+  DescribeApmServiceMetricResponse,
   DescribeMetricRecordsResponse,
   DescribeGeneralOTSpanListResponse,
   ApmTag,
@@ -205,6 +209,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateApmInstanceResponse) => void
   ): Promise<CreateApmInstanceResponse> {
     return this.request("CreateApmInstance", req, cb)
+  }
+
+  /**
+   * 获取 APM 应用指标列表
+   */
+  async DescribeApmServiceMetric(
+    req: DescribeApmServiceMetricRequest,
+    cb?: (error: string, rep: DescribeApmServiceMetricResponse) => void
+  ): Promise<DescribeApmServiceMetricResponse> {
+    return this.request("DescribeApmServiceMetric", req, cb)
   }
 
   /**

@@ -6913,7 +6913,6 @@ export interface ImageRepositoryResult {
   TotalCount?: number
   /**
    * 镜像服务器地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Server?: string
   /**

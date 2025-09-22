@@ -196,6 +196,7 @@ import {
   HangUpCallRequest,
   ClientInfo,
   DescribeTelCdrResponse,
+  InvokeLLM,
   DescribeStaffStatusMetricsRequest,
   DeleteStaffResponse,
   CalleeAttribute,

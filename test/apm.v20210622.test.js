@@ -148,6 +148,16 @@ it("apm.v20210622.CreateApmInstance", async function () {
     }
 })
 
+it("apm.v20210622.DescribeApmServiceMetric", async function () {
+    try {
+       const data = await client.DescribeApmServiceMetric({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeServiceOverview", async function () {
     try {
        const data = await client.DescribeServiceOverview({})

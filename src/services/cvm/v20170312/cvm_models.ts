@@ -849,7 +849,7 @@ export interface SystemDisk {
   DiskType?: string
   /**
    * 系统盘ID。
-该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。
+该参数目前仅用于 [DescribeInstances](https://cloud.tencent.com/document/product/213/15728) 等查询类接口的返回参数，不可用于 [RunInstances](https://cloud.tencent.com/document/product/213/15730) 等写接口的入参。
    */
   DiskId?: string
   /**
@@ -1078,32 +1078,6 @@ export interface ImportImageDataDisk {
    * 数据盘镜像 COS 链接
    */
   ImageUrl: string
-}
-
-/**
- * PurchaseReservedInstancesOffering请求参数结构体
- */
-export interface PurchaseReservedInstancesOfferingRequest {
-  /**
-   * 购买预留实例计费数量
-   */
-  InstanceCount: number
-  /**
-   * 预留实例计费配置ID
-   */
-  ReservedInstancesOfferingId: string
-  /**
-   * 试运行
-   */
-  DryRun?: boolean
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性
-   */
-  ClientToken?: string
-  /**
-   * 预留实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>最多支持60个字符（包含模式串）。</li>
-   */
-  ReservedInstanceName?: string
 }
 
 /**
@@ -1760,36 +1734,6 @@ export interface InstanceAttribute {
 }
 
 /**
- * 预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstancePrice {
-  /**
-   * 预支合计费用的原价，单位：元。
-   */
-  OriginalFixedPrice?: number
-  /**
-   * 预支合计费用的折扣价，单位：元。
-   */
-  DiscountFixedPrice?: number
-  /**
-   * 后续合计费用的原价，单位：元/小时
-   */
-  OriginalUsagePrice?: number
-  /**
-   * 后续合计费用的折扣价，单位：元/小时
-   */
-  DiscountUsagePrice?: number
-  /**
-   * 预支费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FixedPriceDiscount?: number
-  /**
-   * 后续费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsagePriceDiscount?: number
-}
-
-/**
  * 置放群组配置数据
  */
 export interface DisasterRecoverGroupQuota {
@@ -2139,30 +2083,6 @@ export interface DescribeDisasterRecoverGroupsRequest {
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
    */
   Filters?: Array<Filter>
-}
-
-/**
- * ModifyKeyPairAttribute返回参数结构体
- */
-export interface ModifyKeyPairAttributeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyInstancesRenewFlag请求参数结构体
- */
-export interface ModifyInstancesRenewFlagRequest {
-  /**
-   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
-   */
-  InstanceIds: Array<string>
-  /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-   */
-  RenewFlag: string
 }
 
 /**
@@ -2830,29 +2750,13 @@ export interface DescribeImportImageOsResponse {
 }
 
 /**
- * InquirePricePurchaseReservedInstancesOffering请求参数结构体
+ * ModifyKeyPairAttribute返回参数结构体
  */
-export interface InquirePricePurchaseReservedInstancesOfferingRequest {
+export interface ModifyKeyPairAttributeResponse {
   /**
-   * 购买预留实例计费数量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceCount: number
-  /**
-   * 预留实例计费配置ID
-   */
-  ReservedInstancesOfferingId: string
-  /**
-   * 试运行
-   */
-  DryRun?: boolean
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性
-   */
-  ClientToken?: string
-  /**
-   * 预留实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>最多支持60个字符（包含模式串）。</li>
-   */
-  ReservedInstanceName?: string
+  RequestId?: string
 }
 
 /**
@@ -3015,25 +2919,13 @@ export interface OperationCountLimit {
 }
 
 /**
- * 预留实例静态配置信息。预留实例当前只针对国际站白名单用户开放。
+ * 描述了 “云自动化助手” 服务相关的信息
  */
-export interface ReservedInstanceConfigInfoItem {
+export interface RunAutomationServiceEnabled {
   /**
-   * 实例规格。
+   * 是否开启云自动化助手。取值范围：<br><li>true：表示开启云自动化助手服务<br><li>false：表示不开启云自动化助手服务<br><br>默认取值：false。
    */
-  Type?: string
-  /**
-   * 实例规格名称。
-   */
-  TypeName?: string
-  /**
-   * 优先级。
-   */
-  Order?: number
-  /**
-   * 实例族信息列表。
-   */
-  InstanceFamilies?: Array<ReservedInstanceFamilyItem>
+  Enabled?: boolean
 }
 
 /**
@@ -3674,6 +3566,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例。
    */
   DisableApiTermination?: boolean
   /**
+   * 实例是否开启巨型帧，取值范围：<br><li/> true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。<br><li/>false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。<br> 支持巨型帧的实例规格： [实例规格](https://cloud.tencent.com/document/product/213/11518)
+   */
+  EnableJumboFrame?: boolean
+  /**
    * 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。
    **注：内测中**。
    */
@@ -3732,70 +3628,6 @@ export interface DescribeInstanceVncUrlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeReservedInstancesOfferings请求参数结构体
- */
-export interface DescribeReservedInstancesOfferingsRequest {
-  /**
-   * 试运行, 默认为 false。
-   */
-  DryRun?: boolean
-  /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Limit?: number
-  /**
-   * 以最大有效期作为过滤参数。
-计量单位: 秒
-默认为 94608000。
-   */
-  MaxDuration?: number
-  /**
-   * 以最小有效期作为过滤参数。
-计量单位: 秒
-默认为 2592000。
-   */
-  MinDuration?: number
-  /**
-   * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>duration</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
-<li><strong>instance-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>预留实例计费类型</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a></p>
-<li><strong>offering-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (预付全部费用)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (预付全部费用)</p>
-<li><strong>product-description</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
-<li><strong>reserved-instances-offering-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>预留实例计费配置ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 预留实例相关实例族信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstanceFamilyItem {
-  /**
-   * 实例族。
-   */
-  InstanceFamily?: string
-  /**
-   * 优先级。
-   */
-  Order?: number
-  /**
-   * 实例类型信息列表。
-   */
-  InstanceTypes?: Array<ReservedInstanceTypeItem>
 }
 
 /**
@@ -4029,6 +3861,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例。
    */
   DisableApiTermination?: boolean
   /**
+   * 实例是否开启巨型帧，取值范围：<br><li/> true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。<br><li/>false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。<br> 支持巨型帧的实例规格： [实例规格](https://cloud.tencent.com/document/product/213/11518)
+   */
+  EnableJumboFrame?: boolean
+  /**
    * 标签描述列表。通过指定该参数可以绑定标签到实例启动模板。
    */
   LaunchTemplateTagSpecification?: Array<TagSpecification>
@@ -4045,33 +3881,6 @@ false（默认）：发送正常请求，通过检查后直接创建实例。
 **注：内测中**。
    */
   TemplateDataModifyAction?: string
-}
-
-/**
- * DescribeReservedInstancesConfigInfos请求参数结构体
- */
-export interface DescribeReservedInstancesConfigInfosRequest {
-  /**
-   * zone
-按照预留实例计费可购买的可用区进行过滤。形如：ap-guangzhou-1。
-类型：String
-必选：否
-可选项：各地域可用区列表
-
-product-description
-按照预留实例计费的平台描述（即操作系统）进行过滤。形如：linux。
-类型：String
-必选：否
-可选项：linux
-
-duration
-按照预留实例计费有效期，即预留实例计费购买时长进行过滤。形如：31536000。
-类型：Integer
-计量单位：秒
-必选：否
-可选项：31536000 (1年)
-   */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -4417,7 +4226,7 @@ UserData: 实例自定义数据
 export interface DescribeInstanceTypeConfigsRequest {
   /**
    * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
 <li><strong>instance-family</strong></li>
 <p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。具体取值参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>instance-type</strong></li>
@@ -4488,6 +4297,13 @@ export interface RunInstancesRequest {
    * 购买实例数量。包年包月实例取值范围：[1，500]，按量计费实例取值范围：[1，500]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
    */
   InstanceCount?: number
+  /**
+   * 指定创建实例的最小数量，取值范围为不大于InstanceCount的正整数。
+指定最小数量时，承诺最少创建MinCount台实例，并尽量创建InstanceCount台实例。
+库存不足以满足最小数量时，API 会返回库存不足最小数量的错误信息。
+仅对支持部分发货的账号、区域和计费模式（包年包月、按量计费、竞价实例、按量包销）生效。
+   */
+  MinCount?: number
   /**
    * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持128个字符（包含模式串）。</li>
    */
@@ -4585,10 +4401,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
 >
-> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
+> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州六区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
 ```
 Filters.0.Name=zone
-&Filters.0.Values.0=ap-guangzhou-1
+&Filters.0.Values.0=ap-guangzhou-6
 &Filters.1.Name=instance-charge-type
 &Filters.1.Values.0=PREPAID
 &Filters.1.Values.1=POSTPAID_BY_HOUR
@@ -4831,22 +4647,12 @@ export interface AccountQuotaOverview {
 }
 
 /**
- * 描述了 “云自动化助手” 服务相关的信息
- */
-export interface RunAutomationServiceEnabled {
-  /**
-   * 是否开启云自动化助手。取值范围：<br><li>true：表示开启云自动化助手服务<br><li>false：表示不开启云自动化助手服务<br><br>默认取值：false。
-   */
-  Enabled?: boolean
-}
-
-/**
  * DescribeZoneInstanceConfigInfos请求参数结构体
  */
 export interface DescribeZoneInstanceConfigInfosRequest {
   /**
    * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
 <li><strong>instance-family</strong></li>
 <p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。具体取值参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>instance-type</strong></li>
@@ -5093,68 +4899,6 @@ export interface ImageOsList {
 }
 
 /**
- * 预留实例类型信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstanceTypeItem {
-  /**
-   * 实例类型。
-   */
-  InstanceType?: string
-  /**
-   * CPU核数。
-   */
-  Cpu?: number
-  /**
-   * 内存大小。
-   */
-  Memory?: number
-  /**
-   * GPU数量。
-   */
-  Gpu?: number
-  /**
-   * FPGA数量。
-   */
-  Fpga?: number
-  /**
-   * 本地存储块数量。
-   */
-  StorageBlock?: number
-  /**
-   * 网卡数。
-   */
-  NetworkCard?: number
-  /**
-   * 最大带宽。
-   */
-  MaxBandwidth?: number
-  /**
-   * 主频。
-   */
-  Frequency?: string
-  /**
-   * CPU型号名称。
-   */
-  CpuModelName?: string
-  /**
-   * 包转发率。
-   */
-  Pps?: number
-  /**
-   * 外部信息。
-   */
-  Externals?: Externals
-  /**
-   * 备注信息。
-   */
-  Remark?: string
-  /**
-   * 预留实例配置价格信息。
-   */
-  Prices?: Array<ReservedInstancePriceItem>
-}
-
-/**
  * ExportImages返回参数结构体
  */
 export interface ExportImagesResponse {
@@ -5249,7 +4993,7 @@ export interface DescribeHostsRequest {
 export interface DescribeAccountQuotaRequest {
   /**
    * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
 <li><strong>quota-type</strong></li>
 <p style="padding-left: 30px;">按照【<strong>配额类型</strong>】进行过滤。配额类型形如：PostPaidQuotaSet。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：</p><p style="padding-left: 30px;">PostPaidQuotaSet: 后付费配额</p><p style="padding-left: 30px;">PrePaidQuotaSet: 预付费配额</p><p style="padding-left: 30px;">SpotPaidQuotaSet: 竞价配额</p><p style="padding-left: 30px;">ImageQuotaSet: 镜像配额</p><p style="padding-left: 30px;">DisasterRecoverGroupQuotaSet: 置放群组配额</p>
    */
@@ -5376,20 +5120,6 @@ export interface SharePermission {
 }
 
 /**
- * PurchaseReservedInstancesOffering返回参数结构体
- */
-export interface PurchaseReservedInstancesOfferingResponse {
-  /**
-   * 已购买预留实例计费ID
-   */
-  ReservedInstanceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteImages返回参数结构体
  */
 export interface DeleteImagesResponse {
@@ -5463,50 +5193,6 @@ export interface ModifyDisasterRecoverGroupAttributeRequest {
 }
 
 /**
- * 基于付费类型的预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstancePriceItem {
-  /**
-   * 付费类型，如："All Upfront","Partial Upfront","No Upfront"
-   */
-  OfferingType?: string
-  /**
-   * 预支合计费用，单位：元。
-   */
-  FixedPrice?: number
-  /**
-   * 后续合计费用，单位：元/小时
-   */
-  UsagePrice?: number
-  /**
-   * 预留实例配置ID
-   */
-  ReservedInstancesOfferingId?: string
-  /**
-   * 预留实例计费可购买的可用区。
-   */
-  Zone?: string
-  /**
-   * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
-计量单位：秒
-   */
-  Duration?: number
-  /**
-   * 预留实例计费的平台描述（即操作系统）。形如：Linux。
-返回项： Linux 。
-   */
-  ProductDescription?: string
-  /**
-   * 预支合计费用，单位：元。
-   */
-  DiscountUsagePrice?: number
-  /**
-   * 后续合计费用的折扣价，单位：元/小时
-   */
-  DiscountFixedPrice?: number
-}
-
-/**
  * ConfigureChcAssistVpc返回参数结构体
  */
 export interface ConfigureChcAssistVpcResponse {
@@ -5535,20 +5221,7 @@ export interface DescribeChcHostsRequest {
    */
   ChcIds?: Array<string>
   /**
-   * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>instance-name</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>instance-state</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>device-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>设备类型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>vpc-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>私有网络唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>subnet-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>私有子网唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>sn</strong></li>
-<p style="padding-left: 30px;">按照【<strong>设备SN</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+   * <li><strong>zone</strong></li><p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p><li><strong>instance-name</strong></li><p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>instance-state</strong></li><p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>device-type</strong></li><p style="padding-left: 30px;">按照【<strong>设备类型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>vpc-id</strong></li><p style="padding-left: 30px;">按照【<strong>私有网络唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>subnet-id</strong></li><p style="padding-left: 30px;">按照【<strong>私有子网唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>sn</strong></li><p style="padding-left: 30px;">按照【<strong>设备SN</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
    */
   Filters?: Array<Filter>
   /**
@@ -5615,57 +5288,6 @@ export interface DeleteHpcClustersRequest {
    * 高性能计算集群ID列表。
    */
   HpcClusterIds: Array<string>
-}
-
-/**
- * 描述可购买预留实例计费信息
- */
-export interface ReservedInstancesOffering {
-  /**
-   * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
-返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
-   */
-  Zone?: string
-  /**
-   * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。
-返回项：USD（美元）。
-   */
-  CurrencyCode?: string
-  /**
-   * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
-计量单位：秒
-   */
-  Duration?: number
-  /**
-   * 预留实例计费的购买价格。形如：4000.0。
-计量单位：与 currencyCode 一致，目前支持 USD（美元）
-   */
-  FixedPrice?: number
-  /**
-   * 预留实例计费的实例类型。形如：S3.MEDIUM4。
-返回项：<a href="https://cloud.tencent.com/product/cvm/instances">预留实例计费类型列表</a>
-   */
-  InstanceType?: string
-  /**
-   * 预留实例计费的付款类型。形如：All Upfront。
-返回项： All Upfront (预付全部费用)。
-   */
-  OfferingType?: string
-  /**
-   * 可购买的预留实例计费配置ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
-   */
-  ReservedInstancesOfferingId?: string
-  /**
-   * 预留实例计费的平台描述（即操作系统）。形如：linux。
-返回项： linux 。
-   */
-  ProductDescription?: string
-  /**
-   * 扣除预付费之后的使用价格 (按小时计费)。形如：0.0。
-目前，因为只支持 All Upfront 付款类型，所以默认为 0元/小时。
-计量单位：元/小时，货币单位与 currencyCode 一致，目前支持 USD（美元）
-   */
-  UsagePrice?: number
 }
 
 /**
@@ -5747,24 +5369,6 @@ export interface GPUInfo {
 }
 
 /**
- * DescribeReservedInstancesOfferings返回参数结构体
- */
-export interface DescribeReservedInstancesOfferingsResponse {
-  /**
-   * 符合条件的预留实例计费数量。
-   */
-  TotalCount?: number
-  /**
-   * 符合条件的预留实例计费列表。
-   */
-  ReservedInstancesOfferingsSet?: Array<ReservedInstancesOffering>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 描述退款详情。
  */
 export interface InstanceRefund {
@@ -5791,7 +5395,7 @@ export interface DescribeInstancesRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * <li><strong>zone</strong></li> <p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区例如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p> <li><strong>project-id</strong></li> <p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID例如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p> <li><strong>host-id</strong></li> <p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID例如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>dedicated-cluster-id</strong></li> <p style="padding-left: 30px;">按照【<strong>[CDC](https://cloud.tencent.com/document/product/1346) ID</strong>】进行过滤。[CDC](https://cloud.tencent.com/document/product/1346) ID例如：cluster-xxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>vpc-id</strong></li> <p style="padding-left: 30px;">按照【<strong>VPC ID</strong>】进行过滤。VPC ID例如：vpc-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>subnet-id</strong></li> <p style="padding-left: 30px;">按照【<strong>子网ID</strong>】进行过滤。子网ID例如：subnet-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-id</strong></li> <p style="padding-left: 30px;">按照【<strong>实例ID</strong>】进行过滤。实例ID例如：ins-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>uuid</strong></li> <p style="padding-left: 30px;">按照【<strong>实例UUID</strong>】进行过滤。实例UUID例如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>security-group-id</strong></li> <p style="padding-left: 30px;">按照【<strong>安全组ID</strong>】进行过滤。安全组ID例如: sg-8jlk3f3r。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-name</strong></li> <p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-charge-type</strong></li> <p style="padding-left: 30px;">按照【<strong>实例计费模式</strong>】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-state</strong></li> <p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>private-ip-address</strong></li> <p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>public-ip-address</strong></li> <p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>ipv6-address</strong></li> <p style="padding-left: 30px;">按照【<strong>实例的IPv6地址</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag-value</strong></li> <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag:tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>creation-start-time</strong></li> <p style="padding-left: 30px;">按照【<strong>创建实例请求的起始时间</strong>】进行过滤。例如：2023-06-01 00:00:00。
+   * <li><strong>zone</strong></li> <p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区例如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p> <li><strong>project-id</strong></li> <p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID例如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p> <li><strong>host-id</strong></li> <p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID例如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>dedicated-cluster-id</strong></li> <p style="padding-left: 30px;">按照【<strong>[CDC](https://cloud.tencent.com/document/product/1346) ID</strong>】进行过滤。[CDC](https://cloud.tencent.com/document/product/1346) ID例如：cluster-xxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>vpc-id</strong></li> <p style="padding-left: 30px;">按照【<strong>VPC ID</strong>】进行过滤。VPC ID例如：vpc-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>subnet-id</strong></li> <p style="padding-left: 30px;">按照【<strong>子网ID</strong>】进行过滤。子网ID例如：subnet-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-id</strong></li> <p style="padding-left: 30px;">按照【<strong>实例ID</strong>】进行过滤。实例ID例如：ins-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>uuid</strong></li> <p style="padding-left: 30px;">按照【<strong>实例UUID</strong>】进行过滤。实例UUID例如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>security-group-id</strong></li> <p style="padding-left: 30px;">按照【<strong>安全组ID</strong>】进行过滤。安全组ID例如: sg-8jlk3f3r。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-name</strong></li> <p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-charge-type</strong></li> <p style="padding-left: 30px;">按照【<strong>实例计费模式</strong>】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>instance-state</strong></li> <p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>private-ip-address</strong></li> <p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>public-ip-address</strong></li> <p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>ipv6-address</strong></li> <p style="padding-left: 30px;">按照【<strong>实例的IPv6地址</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag-value</strong></li> <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag:tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><li><strong>creation-start-time</strong></li> <p style="padding-left: 30px;">按照【<strong>创建实例请求的起始时间</strong>】进行过滤。例如：2023-06-01 00:00:00。
 </p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>creation-end-time</strong></li> <p style="padding-left: 30px;">按照【<strong>创建实例请求的截止时间</strong>】进行过滤。例如：2023-06-01 00:00:00。
 </p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。
@@ -5823,20 +5427,6 @@ export interface RegionInfo {
    * 地域是否可用状态
    */
   RegionState?: string
-}
-
-/**
- * DescribeReservedInstancesConfigInfos返回参数结构体
- */
-export interface DescribeReservedInstancesConfigInfosResponse {
-  /**
-   * 预留实例静态配置信息列表。
-   */
-  ReservedInstanceConfigInfos?: Array<ReservedInstanceConfigInfoItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5981,17 +5571,17 @@ export interface LoginSettings {
 }
 
 /**
- * InquirePricePurchaseReservedInstancesOffering返回参数结构体
+ * ModifyInstancesRenewFlag请求参数结构体
  */
-export interface InquirePricePurchaseReservedInstancesOfferingResponse {
+export interface ModifyInstancesRenewFlagRequest {
   /**
-   * 该参数表示对应配置预留实例的价格。
+   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
    */
-  Price?: ReservedInstancePrice
+  InstanceIds: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
-  RequestId?: string
+  RenewFlag: string
 }
 
 /**
@@ -6025,7 +5615,7 @@ export interface ModifyHostsAttributeRequest {
    */
   RenewFlag?: string
   /**
-   * 项目ID。项目可以使用[AddProject](https://cloud.tencent.com/document/api/651/81952)接口创建。可通过[DescribeProject](https://cloud.tencent.com/document/product/378/4400) API返回值中的`projectId`获取。后续使用[DescribeHosts](https://cloud.tencent.com/document/api/213/16474)接口查询实例时，项目ID可用于过滤结果。
+   * 项目ID。项目可以使用 [AddProject](https://cloud.tencent.com/document/api/651/81952) 接口创建。可通过 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725) 接口返回值中的`projectId`获取。后续使用 [DescribeHosts](https://cloud.tencent.com/document/api/213/16474) 接口查询实例时，项目ID可用于过滤结果。
    */
   ProjectId?: number
 }
@@ -6543,48 +6133,38 @@ export interface InternetAccessible {
    */
   BandwidthPackageId?: string
   /**
-   * 线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
-
-- BGP：常规 BGP 线路
-
+   * 线路类型。各种线路类型及支持地区详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。
+<li>BGP：常规 BGP 线路</li>
 已开通静态单线IP白名单的用户，可选值：
-
- - CMCC：中国移动
- - CTCC：中国电信
- - CUCC：中国联通
-
+<li>CMCC：中国移动</li>
+<li>CTCC：中国电信</li>
+<li>CUCC：中国联通</li>
 注意：仅部分地域支持静态单线IP。
-示例值：BGP
+
    */
   InternetServiceProvider?: string
   /**
    * 公网 IP 类型。
 
-- WanIP：普通公网IP。
-- HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。
-- AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。
-
+<li> WanIP：普通公网IP。</li>
+<li> HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。</li>
+<li> AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。</li>
 如需为资源分配公网IPv4地址，请指定公网IPv4地址类型。
-
-示例值：WanIP
 
 此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category)
    */
   IPv4AddressType?: string
   /**
    * 弹性公网 IPv6 类型。
-- EIPv6：弹性公网 IPv6。
-- HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。
-
+<li> EIPv6：弹性公网 IPv6。</li>
+<li> HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。</li>
 如需为资源分配IPv6地址，请指定弹性公网IPv6类型。
-示例值：EIPv6
 
 此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category)
    */
   IPv6AddressType?: string
   /**
    * 高防包唯一ID，申请高防IP时，该字段必传。
-示例值：bgp-12345678
 
    */
   AntiDDoSPackageId?: string

@@ -1,7 +1,7 @@
 
 const expect = require("chai").expect
 const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-const client = new tencentcloud.gs.v20191118.Client({
+const client = new tencentcloud.wedata.v20250806.Client({
   credential: {
     secretId: process.env.secretId,
     secretKey: process.env.secretKey,
@@ -16,11 +16,11 @@ const client = new tencentcloud.gs.v20191118.Client({
     },
   },
 })
-describe("gs.v20191118.test.js", function () {
+describe("wedata.v20250806.test.js", function () {
 
-it("gs.v20191118.BackUpAndroidInstanceToStorage", async function () {
+it("wedata.v20250806.CreateResourceFolder", async function () {
     try {
-       const data = await client.BackUpAndroidInstanceToStorage({})
+       const data = await client.CreateResourceFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("gs.v20191118.BackUpAndroidInstanceToStorage", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
+it("wedata.v20250806.CreateTask", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesUserId({})
+       const data = await client.CreateTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("gs.v20191118.ModifyAndroidInstancesUserId", async function () {
     }
 })
 
-it("gs.v20191118.TrylockWorker", async function () {
+it("wedata.v20250806.ListOpsWorkflows", async function () {
     try {
-       const data = await client.TrylockWorker({})
+       const data = await client.ListOpsWorkflows({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("gs.v20191118.TrylockWorker", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesProperties", async function () {
+it("wedata.v20250806.CreateSQLFolder", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesProperties({})
+       const data = await client.CreateSQLFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("gs.v20191118.ModifyAndroidInstancesProperties", async function () {
     }
 })
 
-it("gs.v20191118.StopGame", async function () {
+it("wedata.v20250806.UpdateCodeFolder", async function () {
     try {
-       const data = await client.StopGame({})
+       const data = await client.UpdateCodeFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("gs.v20191118.StopGame", async function () {
     }
 })
 
-it("gs.v20191118.SyncExecuteCommandOnAndroidInstances", async function () {
+it("wedata.v20250806.ListAlarmMessages", async function () {
     try {
-       const data = await client.SyncExecuteCommandOnAndroidInstances({})
+       const data = await client.ListAlarmMessages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("gs.v20191118.SyncExecuteCommandOnAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.DisableAndroidInstancesApp", async function () {
+it("wedata.v20250806.GetWorkflow", async function () {
     try {
-       const data = await client.DisableAndroidInstancesApp({})
+       const data = await client.GetWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("gs.v20191118.DisableAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.UploadFileToAndroidInstances", async function () {
+it("wedata.v20250806.ListDownstreamTaskInstances", async function () {
     try {
-       const data = await client.UploadFileToAndroidInstances({})
+       const data = await client.ListDownstreamTaskInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("gs.v20191118.UploadFileToAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.RestoreAndroidInstanceFromStorage", async function () {
+it("wedata.v20250806.UpdateWorkflow", async function () {
     try {
-       const data = await client.RestoreAndroidInstanceFromStorage({})
+       const data = await client.UpdateWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("gs.v20191118.RestoreAndroidInstanceFromStorage", async function () {
     }
 })
 
-it("gs.v20191118.CleanAndroidInstancesAppData", async function () {
+it("wedata.v20250806.ListUpstreamTasks", async function () {
     try {
-       const data = await client.CleanAndroidInstancesAppData({})
+       const data = await client.ListUpstreamTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,9 @@ it("gs.v20191118.CleanAndroidInstancesAppData", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstanceSSH", async function () {
+it("wedata.v20250806.GetTaskVersion", async function () {
     try {
-       const data = await client.CreateAndroidInstanceSSH({})
+       const data = await client.GetTaskVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("gs.v20191118.CreateAndroidInstanceSSH", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstancesScreenshot", async function () {
+it("wedata.v20250806.CreateDataBackfillPlan", async function () {
     try {
-       const data = await client.CreateAndroidInstancesScreenshot({})
+       const data = await client.CreateDataBackfillPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("gs.v20191118.CreateAndroidInstancesScreenshot", async function () {
     }
 })
 
-it("gs.v20191118.UninstallAndroidInstancesApp", async function () {
+it("wedata.v20250806.ListSQLFolderContents", async function () {
     try {
-       const data = await client.UninstallAndroidInstancesApp({})
+       const data = await client.ListSQLFolderContents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("gs.v20191118.UninstallAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstanceImage", async function () {
+it("wedata.v20250806.RunSQLScript", async function () {
     try {
-       const data = await client.CreateAndroidInstanceImage({})
+       const data = await client.RunSQLScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("gs.v20191118.CreateAndroidInstanceImage", async function () {
     }
 })
 
-it("gs.v20191118.EnableAndroidInstancesApp", async function () {
+it("wedata.v20250806.CreateCodeFolder", async function () {
     try {
-       const data = await client.EnableAndroidInstancesApp({})
+       const data = await client.CreateCodeFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("gs.v20191118.EnableAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.StartPublishStreamToCSS", async function () {
+it("wedata.v20250806.ListUpstreamOpsTasks", async function () {
     try {
-       const data = await client.StartPublishStreamToCSS({})
+       const data = await client.ListUpstreamOpsTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("gs.v20191118.StartPublishStreamToCSS", async function () {
     }
 })
 
-it("gs.v20191118.DeleteAndroidInstanceBackups", async function () {
+it("wedata.v20250806.CreateSQLScript", async function () {
     try {
-       const data = await client.DeleteAndroidInstanceBackups({})
+       const data = await client.CreateSQLScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,9 @@ it("gs.v20191118.DeleteAndroidInstanceBackups", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstanceInformation", async function () {
+it("wedata.v20250806.PauseOpsTasksAsync", async function () {
     try {
-       const data = await client.ModifyAndroidInstanceInformation({})
+       const data = await client.PauseOpsTasksAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("gs.v20191118.ModifyAndroidInstanceInformation", async function () {
     }
 })
 
-it("gs.v20191118.DeleteAndroidInstanceImages", async function () {
+it("wedata.v20250806.GetOpsAsyncJob", async function () {
     try {
-       const data = await client.DeleteAndroidInstanceImages({})
+       const data = await client.GetOpsAsyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("gs.v20191118.DeleteAndroidInstanceImages", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesInformation", async function () {
+it("wedata.v20250806.UpdateCodeFile", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesInformation({})
+       const data = await client.UpdateCodeFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +218,9 @@ it("gs.v20191118.ModifyAndroidInstancesInformation", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesAppBlacklist", async function () {
+it("wedata.v20250806.UpdateOpsTasksOwner", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesAppBlacklist({})
+       const data = await client.UpdateOpsTasksOwner({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +228,9 @@ it("gs.v20191118.ModifyAndroidInstancesAppBlacklist", async function () {
     }
 })
 
-it("gs.v20191118.InstallAndroidInstancesAppWithURL", async function () {
+it("wedata.v20250806.DeleteOpsAlarmRule", async function () {
     try {
-       const data = await client.InstallAndroidInstancesAppWithURL({})
+       const data = await client.DeleteOpsAlarmRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,9 @@ it("gs.v20191118.InstallAndroidInstancesAppWithURL", async function () {
     }
 })
 
-it("gs.v20191118.RestoreAndroidInstance", async function () {
+it("wedata.v20250806.GetAlarmMessage", async function () {
     try {
-       const data = await client.RestoreAndroidInstance({})
+       const data = await client.GetAlarmMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +248,9 @@ it("gs.v20191118.RestoreAndroidInstance", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstanceLabels", async function () {
+it("wedata.v20250806.ListDownstreamOpsTasks", async function () {
     try {
-       const data = await client.DescribeAndroidInstanceLabels({})
+       const data = await client.ListDownstreamOpsTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +258,9 @@ it("gs.v20191118.DescribeAndroidInstanceLabels", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstanceImages", async function () {
+it("wedata.v20250806.ListTaskVersions", async function () {
     try {
-       const data = await client.DescribeAndroidInstanceImages({})
+       const data = await client.ListTaskVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +268,9 @@ it("gs.v20191118.DescribeAndroidInstanceImages", async function () {
     }
 })
 
-it("gs.v20191118.StartAndroidInstancesApp", async function () {
+it("wedata.v20250806.RerunTaskInstancesAsync", async function () {
     try {
-       const data = await client.StartAndroidInstancesApp({})
+       const data = await client.RerunTaskInstancesAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +278,9 @@ it("gs.v20191118.StartAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.RestartAndroidInstancesApp", async function () {
+it("wedata.v20250806.StopOpsTasksAsync", async function () {
     try {
-       const data = await client.RestartAndroidInstancesApp({})
+       const data = await client.StopOpsTasksAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +288,9 @@ it("gs.v20191118.RestartAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesResolution", async function () {
+it("wedata.v20250806.DeleteCodeFile", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesResolution({})
+       const data = await client.DeleteCodeFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("gs.v20191118.ModifyAndroidInstancesResolution", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstanceBackups", async function () {
+it("wedata.v20250806.DeleteTask", async function () {
     try {
-       const data = await client.DescribeAndroidInstanceBackups({})
+       const data = await client.DeleteTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,9 @@ it("gs.v20191118.DescribeAndroidInstanceBackups", async function () {
     }
 })
 
-it("gs.v20191118.DeleteAndroidInstanceLabel", async function () {
+it("wedata.v20250806.GetSQLScript", async function () {
     try {
-       const data = await client.DeleteAndroidInstanceLabel({})
+       const data = await client.GetSQLScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +318,9 @@ it("gs.v20191118.DeleteAndroidInstanceLabel", async function () {
     }
 })
 
-it("gs.v20191118.DistributeAndroidInstanceImageToHosts", async function () {
+it("wedata.v20250806.GetTaskCode", async function () {
     try {
-       const data = await client.DistributeAndroidInstanceImageToHosts({})
+       const data = await client.GetTaskCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +328,9 @@ it("gs.v20191118.DistributeAndroidInstanceImageToHosts", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstanceLabel", async function () {
+it("wedata.v20250806.ListCodeFolderContents", async function () {
     try {
-       const data = await client.CreateAndroidInstanceLabel({})
+       const data = await client.ListCodeFolderContents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +338,9 @@ it("gs.v20191118.CreateAndroidInstanceLabel", async function () {
     }
 })
 
-it("gs.v20191118.RenewAndroidInstancesAccessToken", async function () {
+it("wedata.v20250806.CreateResourceFile", async function () {
     try {
-       const data = await client.RenewAndroidInstancesAccessToken({})
+       const data = await client.CreateResourceFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +348,9 @@ it("gs.v20191118.RenewAndroidInstancesAccessToken", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidApp", async function () {
+it("wedata.v20250806.UpdateSQLFolder", async function () {
     try {
-       const data = await client.CreateAndroidApp({})
+       const data = await client.UpdateSQLFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +358,9 @@ it("gs.v20191118.CreateAndroidApp", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstancesResources", async function () {
+it("wedata.v20250806.ListSQLScriptRuns", async function () {
     try {
-       const data = await client.ModifyAndroidInstancesResources({})
+       const data = await client.ListSQLScriptRuns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +368,9 @@ it("gs.v20191118.ModifyAndroidInstancesResources", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstanceWebShell", async function () {
+it("wedata.v20250806.UpdateOpsAlarmRule", async function () {
     try {
-       const data = await client.CreateAndroidInstanceWebShell({})
+       const data = await client.UpdateOpsAlarmRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +378,9 @@ it("gs.v20191118.CreateAndroidInstanceWebShell", async function () {
     }
 })
 
-it("gs.v20191118.StopAndroidInstancesApp", async function () {
+it("wedata.v20250806.ListOpsAlarmRules", async function () {
     try {
-       const data = await client.StopAndroidInstancesApp({})
+       const data = await client.ListOpsAlarmRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +388,9 @@ it("gs.v20191118.StopAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.StartPublishStream", async function () {
+it("wedata.v20250806.GetOpsAlarmRule", async function () {
     try {
-       const data = await client.StartPublishStream({})
+       const data = await client.GetOpsAlarmRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +398,9 @@ it("gs.v20191118.StartPublishStream", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstances", async function () {
+it("wedata.v20250806.ListResourceFolders", async function () {
     try {
-       const data = await client.DescribeAndroidInstances({})
+       const data = await client.ListResourceFolders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +408,9 @@ it("gs.v20191118.DescribeAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.UploadFilesToAndroidInstances", async function () {
+it("wedata.v20250806.ListWorkflows", async function () {
     try {
-       const data = await client.UploadFilesToAndroidInstances({})
+       const data = await client.ListWorkflows({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +418,9 @@ it("gs.v20191118.UploadFilesToAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.SyncAndroidInstanceImage", async function () {
+it("wedata.v20250806.GetOpsTask", async function () {
     try {
-       const data = await client.SyncAndroidInstanceImage({})
+       const data = await client.GetOpsTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +428,9 @@ it("gs.v20191118.SyncAndroidInstanceImage", async function () {
     }
 })
 
-it("gs.v20191118.DistributePhotoToAndroidInstances", async function () {
+it("wedata.v20250806.SetSuccessTaskInstancesAsync", async function () {
     try {
-       const data = await client.DistributePhotoToAndroidInstances({})
+       const data = await client.SetSuccessTaskInstancesAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +438,9 @@ it("gs.v20191118.DistributePhotoToAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstancesAppBlacklist", async function () {
+it("wedata.v20250806.UpdateResourceFile", async function () {
     try {
-       const data = await client.DescribeAndroidInstancesAppBlacklist({})
+       const data = await client.UpdateResourceFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +448,9 @@ it("gs.v20191118.DescribeAndroidInstancesAppBlacklist", async function () {
     }
 })
 
-it("gs.v20191118.StopAndroidInstances", async function () {
+it("wedata.v20250806.ListTaskInstances", async function () {
     try {
-       const data = await client.StopAndroidInstances({})
+       const data = await client.ListTaskInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +458,9 @@ it("gs.v20191118.StopAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.DescribeInstancesCount", async function () {
+it("wedata.v20250806.GetOpsWorkflow", async function () {
     try {
-       const data = await client.DescribeInstancesCount({})
+       const data = await client.GetOpsWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +468,9 @@ it("gs.v20191118.DescribeInstancesCount", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstances", async function () {
+it("wedata.v20250806.GetOpsTaskCode", async function () {
     try {
-       const data = await client.CreateAndroidInstances({})
+       const data = await client.GetOpsTaskCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +478,9 @@ it("gs.v20191118.CreateAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.CreateCosCredential", async function () {
+it("wedata.v20250806.CreateOpsAlarmRule", async function () {
     try {
-       const data = await client.CreateCosCredential({})
+       const data = await client.CreateOpsAlarmRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +488,9 @@ it("gs.v20191118.CreateCosCredential", async function () {
     }
 })
 
-it("gs.v20191118.BackUpAndroidInstance", async function () {
+it("wedata.v20250806.ListDataBackfillInstances", async function () {
     try {
-       const data = await client.BackUpAndroidInstance({})
+       const data = await client.ListDataBackfillInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +498,9 @@ it("gs.v20191118.BackUpAndroidInstance", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidApp", async function () {
+it("wedata.v20250806.ListUpstreamTaskInstances", async function () {
     try {
-       const data = await client.ModifyAndroidApp({})
+       const data = await client.ListUpstreamTaskInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +508,9 @@ it("gs.v20191118.ModifyAndroidApp", async function () {
     }
 })
 
-it("gs.v20191118.StartAndroidInstances", async function () {
+it("wedata.v20250806.ListWorkflowFolders", async function () {
     try {
-       const data = await client.StartAndroidInstances({})
+       const data = await client.ListWorkflowFolders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +518,9 @@ it("gs.v20191118.StartAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.ModifyAndroidInstanceResolution", async function () {
+it("wedata.v20250806.DeleteResourceFile", async function () {
     try {
-       const data = await client.ModifyAndroidInstanceResolution({})
+       const data = await client.DeleteResourceFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +528,9 @@ it("gs.v20191118.ModifyAndroidInstanceResolution", async function () {
     }
 })
 
-it("gs.v20191118.ConnectAndroidInstance", async function () {
+it("wedata.v20250806.CreateCodeFile", async function () {
     try {
-       const data = await client.ConnectAndroidInstance({})
+       const data = await client.CreateCodeFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +538,9 @@ it("gs.v20191118.ConnectAndroidInstance", async function () {
     }
 })
 
-it("gs.v20191118.StopPublishStream", async function () {
+it("wedata.v20250806.GetTask", async function () {
     try {
-       const data = await client.StopPublishStream({})
+       const data = await client.GetTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +548,9 @@ it("gs.v20191118.StopPublishStream", async function () {
     }
 })
 
-it("gs.v20191118.DisconnectAndroidInstance", async function () {
+it("wedata.v20250806.SubmitTask", async function () {
     try {
-       const data = await client.DisconnectAndroidInstance({})
+       const data = await client.SubmitTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +558,9 @@ it("gs.v20191118.DisconnectAndroidInstance", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstanceApps", async function () {
+it("wedata.v20250806.GetTaskInstanceLog", async function () {
     try {
-       const data = await client.DescribeAndroidInstanceApps({})
+       const data = await client.GetTaskInstanceLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +568,9 @@ it("gs.v20191118.DescribeAndroidInstanceApps", async function () {
     }
 })
 
-it("gs.v20191118.SwitchGameArchive", async function () {
+it("wedata.v20250806.ListResourceFiles", async function () {
     try {
-       const data = await client.SwitchGameArchive({})
+       const data = await client.ListResourceFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +578,9 @@ it("gs.v20191118.SwitchGameArchive", async function () {
     }
 })
 
-it("gs.v20191118.DistributeFileToAndroidInstances", async function () {
+it("wedata.v20250806.UpdateTask", async function () {
     try {
-       const data = await client.DistributeFileToAndroidInstances({})
+       const data = await client.UpdateTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +588,9 @@ it("gs.v20191118.DistributeFileToAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.RebootAndroidInstanceHosts", async function () {
+it("wedata.v20250806.DeleteWorkflow", async function () {
     try {
-       const data = await client.RebootAndroidInstanceHosts({})
+       const data = await client.DeleteWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +598,9 @@ it("gs.v20191118.RebootAndroidInstanceHosts", async function () {
     }
 })
 
-it("gs.v20191118.CreateSession", async function () {
+it("wedata.v20250806.GetResourceFile", async function () {
     try {
-       const data = await client.CreateSession({})
+       const data = await client.GetResourceFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,9 +608,9 @@ it("gs.v20191118.CreateSession", async function () {
     }
 })
 
-it("gs.v20191118.DeleteAndroidAppVersion", async function () {
+it("wedata.v20250806.DeleteCodeFolder", async function () {
     try {
-       const data = await client.DeleteAndroidAppVersion({})
+       const data = await client.DeleteCodeFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +618,9 @@ it("gs.v20191118.DeleteAndroidAppVersion", async function () {
     }
 })
 
-it("gs.v20191118.ResetAndroidInstances", async function () {
+it("wedata.v20250806.DeleteResourceFolder", async function () {
     try {
-       const data = await client.ResetAndroidInstances({})
+       const data = await client.DeleteResourceFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +628,9 @@ it("gs.v20191118.ResetAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.InstallAndroidInstancesApp", async function () {
+it("wedata.v20250806.CreateWorkflow", async function () {
     try {
-       const data = await client.InstallAndroidInstancesApp({})
+       const data = await client.CreateWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +638,9 @@ it("gs.v20191118.InstallAndroidInstancesApp", async function () {
     }
 })
 
-it("gs.v20191118.SetAndroidInstancesFGAppKeepAlive", async function () {
+it("wedata.v20250806.KillTaskInstancesAsync", async function () {
     try {
-       const data = await client.SetAndroidInstancesFGAppKeepAlive({})
+       const data = await client.KillTaskInstancesAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +648,9 @@ it("gs.v20191118.SetAndroidInstancesFGAppKeepAlive", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidApps", async function () {
+it("wedata.v20250806.DeleteWorkflowFolder", async function () {
     try {
-       const data = await client.DescribeAndroidApps({})
+       const data = await client.DeleteWorkflowFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +658,9 @@ it("gs.v20191118.DescribeAndroidApps", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstancesAccessToken", async function () {
+it("wedata.v20250806.ListTasks", async function () {
     try {
-       const data = await client.CreateAndroidInstancesAccessToken({})
+       const data = await client.ListTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,9 +668,9 @@ it("gs.v20191118.CreateAndroidInstancesAccessToken", async function () {
     }
 })
 
-it("gs.v20191118.CopyAndroidInstance", async function () {
+it("wedata.v20250806.ListTaskInstanceExecutions", async function () {
     try {
-       const data = await client.CopyAndroidInstance({})
+       const data = await client.ListTaskInstanceExecutions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +678,9 @@ it("gs.v20191118.CopyAndroidInstance", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidAppVersion", async function () {
+it("wedata.v20250806.GetCodeFile", async function () {
     try {
-       const data = await client.CreateAndroidAppVersion({})
+       const data = await client.GetCodeFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +688,9 @@ it("gs.v20191118.CreateAndroidAppVersion", async function () {
     }
 })
 
-it("gs.v20191118.DestroyAndroidInstances", async function () {
+it("wedata.v20250806.CreateWorkflowFolder", async function () {
     try {
-       const data = await client.DestroyAndroidInstances({})
+       const data = await client.CreateWorkflowFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,9 +698,9 @@ it("gs.v20191118.DestroyAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.DeleteAndroidApp", async function () {
+it("wedata.v20250806.DeleteSQLFolder", async function () {
     try {
-       const data = await client.DeleteAndroidApp({})
+       const data = await client.DeleteSQLFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,9 +708,9 @@ it("gs.v20191118.DeleteAndroidApp", async function () {
     }
 })
 
-it("gs.v20191118.CreateAndroidInstanceADB", async function () {
+it("wedata.v20250806.DeleteSQLScript", async function () {
     try {
-       const data = await client.CreateAndroidInstanceADB({})
+       const data = await client.DeleteSQLScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +718,9 @@ it("gs.v20191118.CreateAndroidInstanceADB", async function () {
     }
 })
 
-it("gs.v20191118.SetAndroidInstancesBGAppKeepAlive", async function () {
+it("wedata.v20250806.UpdateWorkflowFolder", async function () {
     try {
-       const data = await client.SetAndroidInstancesBGAppKeepAlive({})
+       const data = await client.UpdateWorkflowFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +728,9 @@ it("gs.v20191118.SetAndroidInstancesBGAppKeepAlive", async function () {
     }
 })
 
-it("gs.v20191118.FetchAndroidInstancesLogs", async function () {
+it("wedata.v20250806.ListOpsTasks", async function () {
     try {
-       const data = await client.FetchAndroidInstancesLogs({})
+       const data = await client.ListOpsTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,9 +738,9 @@ it("gs.v20191118.FetchAndroidInstancesLogs", async function () {
     }
 })
 
-it("gs.v20191118.ExecuteCommandOnAndroidInstances", async function () {
+it("wedata.v20250806.StopSQLScriptRun", async function () {
     try {
-       const data = await client.ExecuteCommandOnAndroidInstances({})
+       const data = await client.StopSQLScriptRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +748,9 @@ it("gs.v20191118.ExecuteCommandOnAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.RebootAndroidInstances", async function () {
+it("wedata.v20250806.ListDownstreamTasks", async function () {
     try {
-       const data = await client.RebootAndroidInstances({})
+       const data = await client.ListDownstreamTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +758,9 @@ it("gs.v20191118.RebootAndroidInstances", async function () {
     }
 })
 
-it("gs.v20191118.ImportAndroidInstanceImage", async function () {
+it("wedata.v20250806.UpdateResourceFolder", async function () {
     try {
-       const data = await client.ImportAndroidInstanceImage({})
+       const data = await client.UpdateResourceFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +768,9 @@ it("gs.v20191118.ImportAndroidInstanceImage", async function () {
     }
 })
 
-it("gs.v20191118.DescribeAndroidInstancesByApps", async function () {
+it("wedata.v20250806.UpdateSQLScript", async function () {
     try {
-       const data = await client.DescribeAndroidInstancesByApps({})
+       const data = await client.UpdateSQLScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -778,49 +778,9 @@ it("gs.v20191118.DescribeAndroidInstancesByApps", async function () {
     }
 })
 
-it("gs.v20191118.DeleteAndroidInstanceBackupFiles", async function () {
+it("wedata.v20250806.GetTaskInstance", async function () {
     try {
-       const data = await client.DeleteAndroidInstanceBackupFiles({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gs.v20191118.ModifyAndroidAppVersion", async function () {
-    try {
-       const data = await client.ModifyAndroidAppVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gs.v20191118.ModifyAndroidInstancesLabels", async function () {
-    try {
-       const data = await client.ModifyAndroidInstancesLabels({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gs.v20191118.SaveGameArchive", async function () {
-    try {
-       const data = await client.SaveGameArchive({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("gs.v20191118.DescribeAndroidInstanceTasksStatus", async function () {
-    try {
-       const data = await client.DescribeAndroidInstanceTasksStatus({})
+       const data = await client.GetTaskInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

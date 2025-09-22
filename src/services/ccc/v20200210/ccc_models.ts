@@ -3005,6 +3005,14 @@ export interface ModifyOwnNumberApplyRequest {
    * 送号前缀
    */
   Prefix?: string
+  /**
+   * 国内长途手机前缀码
+   */
+  MobileNddPrefix?: string
+  /**
+   * 同市固话去掉区号
+   */
+  LocalNumberTrimAC?: boolean
 }
 
 /**
@@ -3499,6 +3507,10 @@ export interface OwnNumberApplyDetailItem {
    * 呼出被叫格式，使用 {+E.164} 或 {E.164},
    */
   OutboundCalleeFormat?: string
+  /**
+   * 运营商号码
+   */
+  CarrierPhoneNumber?: string
 }
 
 /**
@@ -3704,11 +3716,11 @@ export interface CreateAutoCalloutTaskRequest {
    */
   Tries?: number
   /**
-   * 自定义变量（仅高级版支持）
+   * 自定义变量（仅高级版支持），CalleeAttributes 字段中使用相同变量会覆盖此处
    */
   Variables?: Array<Variable>
   /**
-   * UUI
+   * 用户自定义数据，CalleeAttributes 字段中使用 UUI 会覆盖此处
    */
   UUI?: string
   /**
@@ -4286,12 +4298,17 @@ export interface ControlAIConversationRequest {
    * 控制命令，目前支持命令如下：
 
 - ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本
+- InvokeLLM，服务端发送文本给大模型，触发对话
    */
   Command?: string
   /**
    * 服务端发送播报文本命令，当Command为ServerPushText时必填
    */
   ServerPushText?: ServerPushText
+  /**
+   * 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1"
+   */
+  InvokeLLM?: InvokeLLM
 }
 
 /**
@@ -4654,6 +4671,20 @@ export interface DescribeTelCdrResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 调用服务端主动发起请求到LLM
+ */
+export interface InvokeLLM {
+  /**
+   * 请求LLM的内容
+   */
+  Content?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
 }
 
 /**
@@ -5320,6 +5351,14 @@ export interface CreateOwnNumberApplyRequest {
    * 送号前缀
    */
   Prefix?: string
+  /**
+   * 国内长途手机前缀码
+   */
+  MobileNddPrefix?: string
+  /**
+   * 同市固话去掉区号
+   */
+  LocalNumberTrimAC?: boolean
 }
 
 /**

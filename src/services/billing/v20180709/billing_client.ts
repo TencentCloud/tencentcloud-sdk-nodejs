@@ -21,16 +21,21 @@ import {
   CreateAllocationUnitRequest,
   DescribeBillAdjustInfoResponse,
   DescribeCostSummaryByProductRequest,
+  DescribeBudgetResponse,
   DescribeCostExplorerSummaryResponse,
   ConsumptionBusinessSummaryDataItem,
+  ModifyGatherRuleRequest,
+  BudgetWarn,
   ModifyAllocationRuleRequest,
   DeleteAllocationRuleRequest,
   CreateAllocationRuleResponse,
   BillTagInfo,
   AllocationOverviewTotal,
+  BudgetExtend,
   BillTransactionInfo,
   ConditionBusiness,
   AnalyseActionTypeDetail,
+  DescribeBudgetRequest,
   DescribeCostExplorerSummaryRequest,
   BillBusinessLink,
   DescribeCostSummaryByProductResponse,
@@ -41,12 +46,13 @@ import {
   BillDetailComponentConfig,
   DescribeCostSummaryByResourceResponse,
   DescribeBillSummaryByRegionRequest,
+  CreateBudgetRequest,
   AdjustInfoDetail,
   DescribeBillListResponse,
   DescribeAllocateConditionsRequest,
   CreateAllocationRuleRequest,
   ConsumptionRegionSummaryDataItem,
-  DescribeAllocationUnitDetailResponse,
+  DeleteBudgetResponse,
   DescribeBillSummaryRequest,
   DescribeBillResourceSummaryResponse,
   AllocationSummaryByItem,
@@ -56,8 +62,10 @@ import {
   DescribeAllocationOverviewResponse,
   DescribeDosageCosDetailByDateRequest,
   DeleteAllocationTagRequest,
+  OrderDto,
   DescribeBillSummaryByProductRequest,
   BillDistributionResourceSummary,
+  WaveThresholdForm,
   BusinessSummaryInfo,
   DescribeDosageDetailListResponse,
   DescribeAllocationBillDetailRequest,
@@ -67,23 +75,26 @@ import {
   AllocationRationExpression,
   DescribeVoucherUsageDetailsResponse,
   ConsumptionSummaryTotal,
-  DescribeAllocationOverviewRequest,
+  BudgetConditionsForm,
+  DescribeAccountBalanceResponse,
   DescribeGatherResourceResponse,
+  DescribeAllocationSummaryByResourceRequest,
   DescribeCostDetailResponse,
   DetailPoint,
   DescribeAllocationMonthOverviewResponse,
   DescribeAllocationSummaryByItemResponse,
-  DescribeDosageDetailByDateResponse,
+  DataForBudgetOperationLogPage,
   DescribeDosageDetailByDateRequest,
   UsageRecords,
+  ModifyBudgetResponse,
   DescribeGatherResourceRequest,
   DescribeCostSummaryByProjectResponse,
   AnalyseProjectDetail,
   ProjectSummaryOverviewItem,
   DescribeBillSummaryByTagResponse,
-  ModifyGatherRuleRequest,
+  ModifyAllocationRuleResponse,
   SummaryDetail,
-  DescribeBillSummaryByPayModeResponse,
+  DescribeAllocationUnitDetailResponse,
   DescribeAllocationSummaryByBusinessResponse,
   DescribeAllocationSummaryByItemRequest,
   DescribeBillSummaryByTagRequest,
@@ -94,10 +105,13 @@ import {
   DescribeBillSummaryByProjectRequest,
   CreateGatherRuleRequest,
   DescribeBillResourceSummaryForOrganizationRequest,
+  DescribeBudgetRemindRecordListRequest,
   DescribeCostSummaryByRegionRequest,
   ConsumptionSummaryTrend,
   DescribeBillDownloadUrlRequest,
+  DescribeAllocationOverviewRequest,
   DescribeAllocationSummaryByBusinessRequest,
+  CreateBudgetResponse,
   DescribeBillSummaryByPayModeRequest,
   DeleteGatherRuleResponse,
   DescribeAllocationBillConditionsRequest,
@@ -134,6 +148,7 @@ import {
   AnalysePayModeDetail,
   AllocationBillTrendDetail,
   DescribeBillSummaryResponse,
+  TagsForm,
   AnalyseOwnerUinDetail,
   Conditions,
   AnalyseTimeDetail,
@@ -143,14 +158,15 @@ import {
   ConsumptionProjectSummaryDataItem,
   AnalyseRegionDetail,
   ProductInfo,
-  DeleteAllocationTagResponse,
+  BudgetInfoDiffEntity,
+  DescribeBudgetOperationLogResponse,
   AllocationDetail,
   VoucherInfos,
   DescribeAllocationUnitDetailRequest,
   DescribeBillSummaryForOrganizationRequest,
   AllocationSummaryByBusiness,
   AllocationStat,
-  ModifyGatherRuleResponse,
+  ModifyBudgetRequest,
   BillProject,
   ActionSummaryOverviewItem,
   DescribeBillDetailForOrganizationRequest,
@@ -163,7 +179,7 @@ import {
   ConsumptionResourceSummaryConditionValue,
   DescribeCostSummaryByRegionResponse,
   DescribeCostDetailRequest,
-  DescribeAllocationSummaryByResourceRequest,
+  BudgetSendInfoDto,
   DescribeBillSummaryForOrganizationResponse,
   BillOperateUin,
   DescribeTagListRequest,
@@ -174,35 +190,46 @@ import {
   ExcludedProducts,
   PayModeSummaryOverviewItem,
   BillBusiness,
+  BudgetRemindRecords,
   DescribeAllocationRuleDetailResponse,
   UsageDetails,
+  DescribeBillSummaryByPayModeResponse,
   BillInstanceType,
   AnalyseBusinessDetail,
   AnalyseConditions,
+  DeleteAllocationTagResponse,
+  BudgetInfoApiResponse,
   CostDetail,
+  DescribeBudgetOperationLogRequest,
   DescribeBillSummaryByProductResponse,
-  DescribeBillSummaryByRegionResponse,
+  DescribeAllocationRuleSummaryRequest,
   CreateAllocationTagResponse,
   ModifyAllocationUnitRequest,
   DescribeBillDownloadUrlResponse,
   ConsumptionResourceSummaryDataItem,
+  ModifyGatherRuleResponse,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
+  DescribeDosageDetailByDateResponse,
   DescribeSavingPlanResourceInfoRequest,
   AnalyseZoneDetail,
   DescribeVoucherInfoResponse,
   AllocationRulesSummary,
   DeleteGatherRuleRequest,
-  DescribeAccountBalanceResponse,
+  DataForBudgetInfoPage,
+  BudgetOperationLogEntity,
   DescribeAllocationBillDetailResponse,
   BusinessSummaryOverviewItem,
   CreateGatherRuleResponse,
   BillTag,
   DescribeAllocateConditionsResponse,
-  DescribeDosageDetailListRequest,
-  ModifyAllocationRuleResponse,
-  BillComponent,
   DescribeVoucherInfoRequest,
+  DescribeDosageDetailListRequest,
+  DescribeBudgetRemindRecordListResponse,
+  BillComponent,
+  DescribeBillSummaryByRegionResponse,
+  BudgetRemindRecordList,
+  DeleteBudgetRequest,
   BillActionType,
   GatherResourceSummary,
   DescribeSavingPlanResourceInfoResponse,
@@ -219,7 +246,7 @@ import {
   DescribeTagListResponse,
   CosDetailSets,
   DescribeDosageDetail,
-  DescribeAllocationRuleSummaryRequest,
+  BudgetPlan,
   BillPayMode,
   DescribeAllocationTrendByMonthResponse,
   ModifyAllocationUnitResponse,
@@ -331,6 +358,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建预算信息
+   */
+  async CreateBudget(
+    req: CreateBudgetRequest,
+    cb?: (error: string, rep: CreateBudgetResponse) => void
+  ): Promise<CreateBudgetResponse> {
+    return this.request("CreateBudget", req, cb)
+  }
+
+  /**
+   * 返回预算提醒记录，包括预算周期、检测时间、提醒时间、提醒类型、提醒内容
+   */
+  async DescribeBudgetRemindRecordList(
+    req: DescribeBudgetRemindRecordListRequest,
+    cb?: (error: string, rep: DescribeBudgetRemindRecordListResponse) => void
+  ): Promise<DescribeBudgetRemindRecordListResponse> {
+    return this.request("DescribeBudgetRemindRecordList", req, cb)
+  }
+
+  /**
    * 查询分账账单日概览
    */
   async DescribeAllocationOverview(
@@ -368,6 +415,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAllocationTagResponse) => void
   ): Promise<CreateAllocationTagResponse> {
     return this.request("CreateAllocationTag", req, cb)
+  }
+
+  /**
+   * 依据预算ID删除对应预算项目
+   */
+  async DeleteBudget(
+    req: DeleteBudgetRequest,
+    cb?: (error: string, rep: DeleteBudgetResponse) => void
+  ): Promise<DeleteBudgetResponse> {
+    return this.request("DeleteBudget", req, cb)
   }
 
   /**
@@ -544,6 +601,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新预算信息
+   */
+  async ModifyBudget(
+    req: ModifyBudgetRequest,
+    cb?: (error: string, rep: ModifyBudgetResponse) => void
+  ): Promise<ModifyBudgetResponse> {
+    return this.request("ModifyBudget", req, cb)
+  }
+
+  /**
    * 获取云账户余额信息。
    */
   async DescribeAccountBalance(
@@ -591,6 +658,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAllocationUnitDetailResponse) => void
   ): Promise<DescribeAllocationUnitDetailResponse> {
     return this.request("DescribeAllocationUnitDetail", req, cb)
+  }
+
+  /**
+   * 获取分账标签
+   */
+  async DescribeTagList(
+    req: DescribeTagListRequest,
+    cb?: (error: string, rep: DescribeTagListResponse) => void
+  ): Promise<DescribeTagListResponse> {
+    return this.request("DescribeTagList", req, cb)
   }
 
   /**
@@ -694,13 +771,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取分账标签
+   * 获取预算详细信息
    */
-  async DescribeTagList(
-    req: DescribeTagListRequest,
-    cb?: (error: string, rep: DescribeTagListResponse) => void
-  ): Promise<DescribeTagListResponse> {
-    return this.request("DescribeTagList", req, cb)
+  async DescribeBudget(
+    req: DescribeBudgetRequest,
+    cb?: (error: string, rep: DescribeBudgetResponse) => void
+  ): Promise<DescribeBudgetResponse> {
+    return this.request("DescribeBudget", req, cb)
   }
 
   /**
@@ -734,13 +811,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取按产品汇总消耗详情
+   * 查询预算修改记录
    */
-  async DescribeCostSummaryByProduct(
-    req: DescribeCostSummaryByProductRequest,
-    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
-  ): Promise<DescribeCostSummaryByProductResponse> {
-    return this.request("DescribeCostSummaryByProduct", req, cb)
+  async DescribeBudgetOperationLog(
+    req: DescribeBudgetOperationLogRequest,
+    cb?: (error: string, rep: DescribeBudgetOperationLogResponse) => void
+  ): Promise<DescribeBudgetOperationLogResponse> {
+    return this.request("DescribeBudgetOperationLog", req, cb)
   }
 
   /**
@@ -761,6 +838,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDealsByCondResponse) => void
   ): Promise<DescribeDealsByCondResponse> {
     return this.request("DescribeDealsByCond", req, cb)
+  }
+
+  /**
+   * 获取按产品汇总消耗详情
+   */
+  async DescribeCostSummaryByProduct(
+    req: DescribeCostSummaryByProductRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
+  ): Promise<DescribeCostSummaryByProductResponse> {
+    return this.request("DescribeCostSummaryByProduct", req, cb)
   }
 
   /**

@@ -495,6 +495,60 @@ export interface ModifyGeneralApmApplicationConfigRequest {
 }
 
 /**
+ * DescribeApmServiceMetric请求参数结构体
+ */
+export interface DescribeApmServiceMetricRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 应用名
+   */
+  ServiceName?: string
+  /**
+   * 应用ID
+   */
+  ServiceID?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+  /**
+   * 排序
+   */
+  OrderBy?: OrderBy
+  /**
+   * 是否demo模式
+   */
+  Demo?: boolean
+  /**
+   * 应用状态筛选，可枚举的值为：health、warning、error。如果选中多个状态用逗号隔开，比如："warning,error"
+   */
+  ServiceStatus?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 页码
+   */
+  Page?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeServiceOverview返回参数结构体
  */
 export interface DescribeServiceOverviewResponse {
@@ -524,6 +578,56 @@ export interface QueryMetricItem {
    * 同比，已弃用，不建议使用
    */
   Compare?: string
+}
+
+/**
+ * 应用详细信息
+ */
+export interface ServiceDetail {
+  /**
+   * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceID?: string
+  /**
+   * 业务系统ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceKey?: string
+  /**
+   * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppID?: number
+  /**
+   * 主账号uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUIN?: string
+  /**
+   * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceDescription?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 业务系统名称
+   */
+  InstanceName?: string
 }
 
 /**
@@ -860,6 +964,27 @@ export interface DescribeTagValuesRequest {
 }
 
 /**
+ * apm应用指标信息
+ */
+export interface ApmServiceMetric {
+  /**
+   * filed数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fields?: Array<ApmField>
+  /**
+   * tag数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 应用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceDetail?: ServiceDetail
+}
+
+/**
  * 指标维度信息
  */
 export interface ApmField {
@@ -1035,6 +1160,48 @@ export interface OrderBy {
    * asc 顺序排序 / desc 倒序排序
    */
   Value: string
+}
+
+/**
+ * DescribeApmServiceMetric返回参数结构体
+ */
+export interface DescribeApmServiceMetricResponse {
+  /**
+   * 应用指标列表
+   */
+  ServiceMetricList?: Array<ApmServiceMetric>
+  /**
+   * 符合筛选条件的应用数
+   */
+  TotalCount?: number
+  /**
+   * 警示异常应用数
+   */
+  WarningErrorCount?: number
+  /**
+   * 应用总数
+   */
+  ApplicationCount?: number
+  /**
+   * 页码
+   */
+  Page?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 异常应用数
+   */
+  ErrorCount?: number
+  /**
+   * 警示应用数
+   */
+  WarningCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

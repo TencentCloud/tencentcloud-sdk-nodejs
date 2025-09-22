@@ -3818,6 +3818,11 @@ export interface WorkflowRunNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatisticInfos?: Array<StatisticInfo>
+  /**
+   * 错误代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailCode?: string
 }
 
 /**
@@ -6590,6 +6595,14 @@ export interface ModelInfo {
    * 提供商类型 Self:提供商，Custom：自定义模型提供商，Third：第三方模型提供商
    */
   ProviderType?: string
+  /**
+   * 是否关闭模型超参
+   */
+  IsCloseModelParams?: boolean
+  /**
+   * 是否支持深度思考
+   */
+  IsDeepThinking?: boolean
 }
 
 /**
@@ -7668,7 +7681,7 @@ export interface ListAppRequest {
    */
   AgentType?: string
   /**
-   * 应用状态 1:未上线 2：运行中
+   * 应用状态 1:未上线   2：运行中
    */
   AppStatus?: string
 }

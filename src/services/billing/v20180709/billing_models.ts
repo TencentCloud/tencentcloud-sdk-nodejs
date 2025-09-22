@@ -82,6 +82,29 @@ export interface DescribeCostSummaryByProductRequest {
 }
 
 /**
+ * DescribeBudget返回参数结构体
+ */
+export interface DescribeBudgetResponse {
+  /**
+   * 预算项目详情
+   */
+  Data?: DataForBudgetInfoPage
+  /**
+   * 信息提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 返回码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCostExplorerSummary返回参数结构体
  */
 export interface DescribeCostExplorerSummaryResponse {
@@ -151,6 +174,43 @@ export interface ConsumptionBusinessSummaryDataItem {
    * 地域名称（仅在地域汇总总展示）
    */
   RegionName?: string
+}
+
+/**
+ * ModifyGatherRule请求参数结构体
+ */
+export interface ModifyGatherRuleRequest {
+  /**
+   * 所编辑归集规则ID
+   */
+  Id: number
+  /**
+   * 所编辑分账规则详情
+   */
+  RuleDetail: AllocationRuleExpression
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
+ * 预算阈值提醒信息
+ */
+export interface BudgetWarn {
+  /**
+   * ACTUAL 实际金额，
+FORECAST 预测金额
+   */
+  WarnType: string
+  /**
+   * PERCENTAGE 预算金额的百分比，ABS 固定值
+   */
+  CalType: string
+  /**
+   * 阈值（大于等于0）
+   */
+  ThresholdValue: string
 }
 
 /**
@@ -257,6 +317,149 @@ export interface AllocationOverviewTotal {
 }
 
 /**
+ * 查询返回预算完整信息
+ */
+export interface BudgetExtend {
+  /**
+   * 预算名称
+   */
+  BudgetName: string
+  /**
+   * 预算额度
+   */
+  BudgetQuota: string
+  /**
+   * DAY 天，MONTH 月度，QUARTER 季度 ，YEAR 年度
+   */
+  CycleType: string
+  /**
+   * BILL  系统账单，CONSUMPTION  消耗账单
+   */
+  BillType: string
+  /**
+   * COST 原价，REAL_COST 实际费用，CASH 现金，INCENTIVE 赠送金，VOUCHER 代金券，TRANSFER 分成金，TAX 税，AMOUNT_BEFORE_TAX 现金支付(税前)
+   */
+  FeeType: string
+  /**
+   * 有效期起始时间 2025-01-01
+   */
+  PeriodBegin: string
+  /**
+   * 有效期结束时间  2025-12-01
+   */
+  PeriodEnd: string
+  /**
+   * COST，USAGE，RI，SP
+   */
+  Dimensions: string
+  /**
+   * FIX 固定值，CYCLE 不同值
+   */
+  PlanType: string
+  /**
+   * 阈值提醒
+   */
+  WarnJson: Array<BudgetWarn>
+  /**
+   * 用户Uin
+   */
+  PayerUin?: number
+  /**
+   * 波动提醒
+   */
+  WaveThresholdJson?: Array<WaveThresholdForm>
+  /**
+   * 预算备注
+   */
+  BudgetNote?: string
+  /**
+   * 自定义发送对象信息
+   */
+  SendDetail?: string
+  /**
+   * 0:默认uin发送
+   */
+  DefaultMode?: number
+  /**
+   * CUS 自定义预算，ZERO_COST 零支出预算模板，BY_MONTH 按月费用预算模板
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateType?: string
+  /**
+   * (1, "未超支"),
+(2, "超支")
+   */
+  MoneyStatus?: number
+  /**
+   * 提醒次数
+   */
+  RemindTimes?: number
+  /**
+   * 创建预算时间
+   */
+  CreateTime?: string
+  /**
+   * 更新预算时间
+   */
+  UpdateTime?: string
+  /**
+   * 预算关联Id
+   */
+  BudgetId?: string
+  /**
+   * NO_FORECAST(没有设置预测),
+ FORECAST_NO_DATA(设置了预测,但是没有数据),
+FORECAST_HAS_DATA(设置了预测,且有预测数据)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasForecast?: string
+  /**
+   * 预测费用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForecastCost?: string
+  /**
+   * 预测进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForecastProgress?: string
+  /**
+   * 实际费用
+   */
+  RealCost?: string
+  /**
+   * 自定义发送
+   */
+  BudgetSendInfoForm?: Array<BudgetSendInfoDto>
+  /**
+   * 当前周期
+   */
+  CurDateDesc?: string
+  /**
+   *  EXPIRED  已过期
+ACTIVE 生效中
+UNACTIVATED 已失效
+ACTIVATED 待生效
+   */
+  BudgetStatus?: string
+  /**
+   * 预算维度范围条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimensionsRange?: BudgetConditionsForm
+  /**
+   * 预算进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetProgress?: string
+  /**
+   * 预算类型设置为计划预算时返回预算额度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetQuotaJson?: Array<BudgetPlan>
+}
+
+/**
  * 收支明细的流水信息
  */
 export interface BillTransactionInfo {
@@ -332,6 +535,36 @@ export interface AnalyseActionTypeDetail {
    * 交易类型Name
    */
   ActionTypeName?: string
+}
+
+/**
+ * DescribeBudget请求参数结构体
+ */
+export interface DescribeBudgetRequest {
+  /**
+   * 页码，整型
+   */
+  PageNo: number
+  /**
+   * 每页数目，整型
+   */
+  PageSize: number
+  /**
+   * 预算项目id
+   */
+  BudgetId?: string
+  /**
+   * 预算名称
+   */
+  BudgetName?: string
+  /**
+   * EXPIRED失效，ACTIVE生效中， ACTIVATED待生效
+   */
+  BudgetStatus?: string
+  /**
+   * DAY天 MONTH月度 QUARTER季度 YEAR年度
+   */
+  CycleTypes?: Array<string>
 }
 
 /**
@@ -658,6 +891,62 @@ export interface DescribeBillSummaryByRegionRequest {
 }
 
 /**
+ * CreateBudget请求参数结构体
+ */
+export interface CreateBudgetRequest {
+  /**
+   * 预算名称
+   */
+  BudgetName: string
+  /**
+   * DAY 天，MONTH 月度，QUARTER 季度 ，YEAR 年度
+   */
+  CycleType: string
+  /**
+   * 有效期起始时间 2025-01-01(周期: 天) / 2025-01（周期: 月）
+   */
+  PeriodBegin: string
+  /**
+   * 有效期结束时间  2025-12-01(周期：天)  / 2025-12（周期：月）
+   */
+  PeriodEnd: string
+  /**
+   * FIX 固定预算，CYCLE 计划预算
+   */
+  PlanType: string
+  /**
+   * 预算值额度
+预算计划类型为FIX(固定预算)时传定值；
+预算计划类型为CYCLE(计划预算)时传[{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}]；
+   */
+  BudgetQuota: string
+  /**
+   * BILL  系统账单，CONSUMPTION  消耗账单
+   */
+  BillType: string
+  /**
+   * COST 原价，REAL_COST 实际费用，CASH 现金，INCENTIVE 赠送金，VOUCHER 代金券，TRANSFER 分成金，TAX 税，AMOUNT_BEFORE_TAX 现金支付(税前)
+   */
+  FeeType: string
+  /**
+   * 阈值提醒
+   */
+  WarnJson: Array<BudgetWarn>
+  /**
+   * 预算备注
+   */
+  BudgetNote?: string
+  /**
+   * 预算维度范围条件
+   */
+  DimensionsRange?: BudgetConditionsForm
+  /**
+   * 波动提醒
+   */
+  WaveThresholdJson?: Array<WaveThresholdForm>
+}
+
+/**
  * UIN异常调整明细
  */
 export interface AdjustInfoDetail {
@@ -815,45 +1104,21 @@ export interface ConsumptionRegionSummaryDataItem {
 }
 
 /**
- * DescribeAllocationUnitDetail返回参数结构体
+ * DeleteBudget返回参数结构体
  */
-export interface DescribeAllocationUnitDetailResponse {
+export interface DeleteBudgetResponse {
   /**
-   * 分账单元ID
+   * 返回删除预算项目id
    */
-  Id?: number
+  Data?: Array<string>
   /**
-   * 分账单元所属UIN
+   * 信息提示
    */
-  Uin?: string
+  Message?: string
   /**
-   * 分账单元名称
+   * 返回码
    */
-  Name?: string
-  /**
-   * 分账单元父节点ID
-   */
-  ParentId?: number
-  /**
-   * 源组织名称
-   */
-  SourceName?: string
-  /**
-   * 源组织ID
-   */
-  SourceId?: string
-  /**
-   * 备注说明
-   */
-  Remark?: string
-  /**
-   * 分账单元标识
-   */
-  TreeNodeUniqKey?: string
-  /**
-   * 若分账单元设置归集规则，返回归集规则ID，若无分账规则，则不返回
-   */
-  RuleId?: number
+  Code?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1409,6 +1674,22 @@ export interface DeleteAllocationTagRequest {
 }
 
 /**
+ * 字段排序
+ */
+export interface OrderDto {
+  /**
+   * 字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Column: string
+  /**
+   * 是否升序
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Asc: boolean
+}
+
+/**
  * DescribeBillSummaryByProduct请求参数结构体
  */
 export interface DescribeBillSummaryByProductRequest {
@@ -1592,6 +1873,34 @@ export interface BillDistributionResourceSummary {
    * 账单归属月
    */
   BillMonth?: string
+}
+
+/**
+ * 阈值波动预警信息
+ */
+export interface WaveThresholdForm {
+  /**
+   * ACTUAL 实际金额，FORECAST 预测金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WarnType?: string
+  /**
+   * 波动阈值（大于等于0）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Threshold?: string
+  /**
+   * 告警类型：chain 环比，yoy 同比，fix 固定值
+（支持类型：日环比 chain day，日同比周维度 chain weekday，日同比月维度 yoy  day，日固定值 fix day，月环比 chain month，月固定值 fix month）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaType?: string
+  /**
+   * 告警维度：day 日，month 月，weekday 周
+（支持类型：日环比 chain day，日同比周维度 chain weekday，日同比月维度 yoy  day，日固定值 fix day，月环比 chain month，月固定值 fix month）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodType?: string
 }
 
 /**
@@ -1878,61 +2187,138 @@ export interface ConsumptionSummaryTotal {
 }
 
 /**
- * DescribeAllocationOverview请求参数结构体
+ * 预算管理自定义费用范围参数
  */
-export interface DescribeAllocationOverviewRequest {
+export interface BudgetConditionsForm {
   /**
-   * 数量，最大值为1000
+   * 产品
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
+  Business?: Array<string>
   /**
-   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
+   * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  PayMode?: Array<string>
   /**
-   * 账单月份，格式为2024-02，不传默认当前月
+   * 子产品
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Month?: string
+  ProductCodes?: Array<string>
   /**
-   * 统计周期，枚举值如下
-month - 月
-day - 日
+   * 组件编码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PeriodType?: string
+  ComponentCodes?: Array<string>
   /**
-   * 分账单元唯一标识，用作筛选
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneIds?: Array<string>
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionIds?: Array<string>
+  /**
+   * 项目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectIds?: Array<string>
+  /**
+   * 交易类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionTypes?: Array<string>
+  /**
+   * 消耗类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumptionTypes?: Array<string>
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagsForm>
+  /**
+   *  末级分账单元
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayerUins?: Array<string>
+  /**
+   * 主用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUins?: Array<string>
+  /**
+   *  末级分账单元唯一键
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TreeNodeUniqKeys?: Array<string>
+}
+
+/**
+ * DescribeAccountBalance返回参数结构体
+ */
+export interface DescribeAccountBalanceResponse {
   /**
-   * 排序字段，枚举值如下： 
-GatherCashPayAmount - 归集费用(现金)
-GatherVoucherPayAmount- 归集费用(优惠券)
-GatherIncentivePayAmount -  归集费用(赠送金)
-GatherTransferPayAmount - 归集费用(分成金)
-AllocateCashPayAmount - 分摊费用(现金)
-AllocateVoucherPayAmount - 分摊费用(优惠券)
-AllocateIncentivePayAmount - 分摊费用(赠送金)
-AllocateTransferPayAmount - 分摊费用(分成金)
-TotalCashPayAmount - 合计费用(现金)
-TotalVoucherPayAmount - 合计费用(优惠券)
-TotalIncentivePayAmount - 合计费用(赠送金)
-TotalTransferPayAmount - 合计费用(分成金)
-GatherRealCost - 归集费用(折后总额)
-AllocateRealCost - 分摊费用(折后总额)
-RealTotalCost - 合计费用(折后总额)
-Ratio  - 占比(折后总额)
+   * 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分
    */
-  Sort?: string
+  Balance?: number
   /**
-   * 排序类型，枚举值如下：
-asc - 升序
-desc - 降序
+   * 查询的用户Uin
    */
-  SortType?: string
+  Uin?: number
   /**
-   * 日期，用作筛选
+   * 当前真实可用余额,单位 分
    */
-  BillDates?: Array<string>
+  RealBalance?: number
+  /**
+   * 现金账户余额,单位 分
+   */
+  CashAccountBalance?: number
+  /**
+   * 收益转入账户余额,单位 分
+   */
+  IncomeIntoAccountBalance?: number
+  /**
+   * 赠送账户余额,单位 分
+   */
+  PresentAccountBalance?: number
+  /**
+   * 冻结金额,单位 分
+   */
+  FreezeAmount?: number
+  /**
+   * 欠费金额,单位 分
+   */
+  OweAmount?: number
+  /**
+   * 是否允许欠费消费
+   * @deprecated
+   */
+  IsAllowArrears?: boolean
+  /**
+   * 是否限制信用额度
+   * @deprecated
+   */
+  IsCreditLimited?: boolean
+  /**
+   * 信用额度,单位 分
+   */
+  CreditAmount?: number
+  /**
+   * 可用信用额度,单位 分
+   */
+  CreditBalance?: number
+  /**
+   * 真实可用信用额度,单位 分
+   */
+  RealCreditBalance?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1957,6 +2343,113 @@ export interface DescribeGatherResourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAllocationSummaryByResource请求参数结构体
+ */
+export interface DescribeAllocationSummaryByResourceRequest {
+  /**
+   * 数量，最大值为1000
+
+   */
+  Limit: number
+  /**
+   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
+   */
+  Offset: number
+  /**
+   * 账单月份，格式为2024-02，不传默认当前月
+
+   */
+  Month?: string
+  /**
+   * 统计周期，枚举值如下
+month - 月
+day - 日
+   */
+  PeriodType?: string
+  /**
+   * 分账单元唯一标识，用作筛选
+   */
+  TreeNodeUniqKeys?: Array<string>
+  /**
+   * 排序字段，枚举值如下：
+RiTimeSpan - 预留实例抵扣时长
+ExtendPayAmount1 - 预留实例抵扣组件原价
+RealCost - 折后总价
+CashPayAmount - 现金金额
+VoucherPayAmount - 代金券金额
+IncentivePayAmount - 赠送金金额
+TransferPayAmount -分成金金额
+Cost - 组件原价
+   */
+  Sort?: string
+  /**
+   * 排序类型，枚举值如下：
+asc - 升序
+desc - 降序
+   */
+  SortType?: string
+  /**
+   * 日期，用作筛选
+   */
+  BillDates?: Array<string>
+  /**
+   * 产品编码，用作筛选
+   */
+  BusinessCodes?: Array<string>
+  /**
+   * 使用者UIN，用作筛选
+   */
+  OwnerUins?: Array<string>
+  /**
+   * 操作者UIN，用作筛选
+   */
+  OperateUins?: Array<string>
+  /**
+   * 计费模式编码，用作筛选
+   */
+  PayModes?: Array<string>
+  /**
+   * 交易类型编码，用作筛选
+   */
+  ActionTypes?: Array<string>
+  /**
+   * 子产品编码，用作筛选
+   */
+  ProductCodes?: Array<string>
+  /**
+   * 地域ID，用作筛选
+   */
+  RegionIds?: Array<string>
+  /**
+   * 可用区ID，用作筛选
+   */
+  ZoneIds?: Array<string>
+  /**
+   * 实例类型编码，用作筛选
+   */
+  InstanceTypes?: Array<string>
+  /**
+   * 标签，用作筛选
+   */
+  Tag?: Array<string>
+  /**
+   * 模糊搜索：支持标签、资源id、资源别名
+   */
+  SearchKey?: string
+  /**
+   * 项目ID，用作筛选
+   */
+  ProjectIds?: Array<number | bigint>
+  /**
+   * 费用归集类型，枚举值如下：
+0 - 分摊 
+1 - 归集 
+-1 -  未分配
+   */
+  AllocationType?: Array<number | bigint>
 }
 
 /**
@@ -2035,29 +2528,30 @@ export interface DescribeAllocationSummaryByItemResponse {
 }
 
 /**
- * DescribeDosageDetailByDate返回参数结构体
+ * 预算修改记录信息分页数据
  */
-export interface DescribeDosageDetailByDateResponse {
+export interface DataForBudgetOperationLogPage {
   /**
-   * 计量单位
+   * 分页
    */
-  Unit?: string
+  Pages?: number
   /**
-   * 用量数组
+   * 分页大小
    */
-  DetailSets?: Array<DetailSet>
+  Size?: number
   /**
-   * 错误码
+   * 总量
    */
-  RetCode?: number
+  Total?: number
   /**
-   * 错误信息
+   * 查询数据列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RetMsg?: string
+  Records?: Array<BudgetOperationLogEntity>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 当前页
    */
-  RequestId?: string
+  Current?: number
 }
 
 /**
@@ -2143,6 +2637,29 @@ export interface UsageRecords {
    * 唯一id,对应交易:预付费的dealName,调账/后付费的outTradeNo
    */
   SeqId?: string
+}
+
+/**
+ * ModifyBudget返回参数结构体
+ */
+export interface ModifyBudgetResponse {
+  /**
+   * 更新预算返回信息
+   */
+  Data?: BudgetInfoApiResponse
+  /**
+   * update success
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 返回码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2347,21 +2864,13 @@ export interface DescribeBillSummaryByTagResponse {
 }
 
 /**
- * ModifyGatherRule请求参数结构体
+ * ModifyAllocationRule返回参数结构体
  */
-export interface ModifyGatherRuleRequest {
+export interface ModifyAllocationRuleResponse {
   /**
-   * 所编辑归集规则ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: number
-  /**
-   * 所编辑分账规则详情
-   */
-  RuleDetail: AllocationRuleExpression
-  /**
-   * 月份，不传默认当前月
-   */
-  Month?: string
+  RequestId?: string
 }
 
 /**
@@ -2407,18 +2916,45 @@ export interface SummaryDetail {
 }
 
 /**
- * DescribeBillSummaryByPayMode返回参数结构体
+ * DescribeAllocationUnitDetail返回参数结构体
  */
-export interface DescribeBillSummaryByPayModeResponse {
+export interface DescribeAllocationUnitDetailResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * 分账单元ID
    */
-  Ready?: number
+  Id?: number
   /**
-   * 各付费模式花费分布详情
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分账单元所属UIN
    */
-  SummaryOverview?: Array<PayModeSummaryOverviewItem>
+  Uin?: string
+  /**
+   * 分账单元名称
+   */
+  Name?: string
+  /**
+   * 分账单元父节点ID
+   */
+  ParentId?: number
+  /**
+   * 源组织名称
+   */
+  SourceName?: string
+  /**
+   * 源组织ID
+   */
+  SourceId?: string
+  /**
+   * 备注说明
+   */
+  Remark?: string
+  /**
+   * 分账单元标识
+   */
+  TreeNodeUniqKey?: string
+  /**
+   * 若分账单元设置归集规则，返回归集规则ID，若无分账规则，则不返回
+   */
+  RuleId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2781,6 +3317,24 @@ export interface DescribeBillResourceSummaryForOrganizationRequest {
 }
 
 /**
+ * DescribeBudgetRemindRecordList请求参数结构体
+ */
+export interface DescribeBudgetRemindRecordListRequest {
+  /**
+   * 页码，整型
+   */
+  PageNo: number
+  /**
+   * 每页数目，整型
+   */
+  PageSize: number
+  /**
+   * 预算基础信息关联id
+   */
+  BudgetId: string
+}
+
+/**
  * DescribeCostSummaryByRegion请求参数结构体
  */
 export interface DescribeCostSummaryByRegionRequest {
@@ -2847,6 +3401,64 @@ L0-PDF&账单包不支持当月下载，当月账单请在次月1号19:00出账�
    * 下载的账号 ID列表，默认查询本账号账单，如集团管理账号需下载成员账号自付的账单，该字段需入参成员账号UIN
    */
   ChildUin?: Array<string>
+}
+
+/**
+ * DescribeAllocationOverview请求参数结构体
+ */
+export interface DescribeAllocationOverviewRequest {
+  /**
+   * 数量，最大值为1000
+   */
+  Limit: number
+  /**
+   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
+   */
+  Offset: number
+  /**
+   * 账单月份，格式为2024-02，不传默认当前月
+   */
+  Month?: string
+  /**
+   * 统计周期，枚举值如下
+month - 月
+day - 日
+   */
+  PeriodType?: string
+  /**
+   * 分账单元唯一标识，用作筛选
+   */
+  TreeNodeUniqKeys?: Array<string>
+  /**
+   * 排序字段，枚举值如下： 
+GatherCashPayAmount - 归集费用(现金)
+GatherVoucherPayAmount- 归集费用(优惠券)
+GatherIncentivePayAmount -  归集费用(赠送金)
+GatherTransferPayAmount - 归集费用(分成金)
+AllocateCashPayAmount - 分摊费用(现金)
+AllocateVoucherPayAmount - 分摊费用(优惠券)
+AllocateIncentivePayAmount - 分摊费用(赠送金)
+AllocateTransferPayAmount - 分摊费用(分成金)
+TotalCashPayAmount - 合计费用(现金)
+TotalVoucherPayAmount - 合计费用(优惠券)
+TotalIncentivePayAmount - 合计费用(赠送金)
+TotalTransferPayAmount - 合计费用(分成金)
+GatherRealCost - 归集费用(折后总额)
+AllocateRealCost - 分摊费用(折后总额)
+RealTotalCost - 合计费用(折后总额)
+Ratio  - 占比(折后总额)
+   */
+  Sort?: string
+  /**
+   * 排序类型，枚举值如下：
+asc - 升序
+desc - 降序
+   */
+  SortType?: string
+  /**
+   * 日期，用作筛选
+   */
+  BillDates?: Array<string>
 }
 
 /**
@@ -2919,6 +3531,28 @@ Trend - 环比(折后总额)
    * @deprecated
    */
   SearchKey?: string
+}
+
+/**
+ * CreateBudget返回参数结构体
+ */
+export interface CreateBudgetResponse {
+  /**
+   * 创建预算返回信息
+   */
+  Data?: BudgetInfoApiResponse
+  /**
+   * create success
+   */
+  Message?: string
+  /**
+   * 返回码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4219,6 +4853,22 @@ export interface DescribeBillSummaryResponse {
 }
 
 /**
+ * 预算管理自定义费用范围，tag 参数
+ */
+export interface TagsForm {
+  /**
+   * key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey?: string
+  /**
+   * value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue?: Array<string>
+}
+
+/**
  * 成本分析使用者uin复杂类型
  */
 export interface AnalyseOwnerUinDetail {
@@ -4465,9 +5115,41 @@ export interface ProductInfo {
 }
 
 /**
- * DeleteAllocationTag返回参数结构体
+ * 记录预算项目相关字段的变更信息
  */
-export interface DeleteAllocationTagResponse {
+export interface BudgetInfoDiffEntity {
+  /**
+   * 变更属性
+   */
+  Property?: string
+  /**
+   * 变更前内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Before?: string
+  /**
+   * 变更后内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  After?: string
+}
+
+/**
+ * DescribeBudgetOperationLog返回参数结构体
+ */
+export interface DescribeBudgetOperationLogResponse {
+  /**
+   * 预算修改记录详情
+   */
+  Data?: DataForBudgetOperationLogPage
+  /**
+   * 信息提示
+   */
+  Message?: string
+  /**
+   * 返回码
+   */
+  Code?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5013,13 +5695,63 @@ export interface AllocationStat {
 }
 
 /**
- * ModifyGatherRule返回参数结构体
+ * ModifyBudget请求参数结构体
  */
-export interface ModifyGatherRuleResponse {
+export interface ModifyBudgetRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 预算项目id
    */
-  RequestId?: string
+  BudgetId: string
+  /**
+   * 预算名称
+   */
+  BudgetName: string
+  /**
+   * DAY 天，MONTH 月度，QUARTER 季度 ，YEAR 年度
+   */
+  CycleType: string
+  /**
+   * 有效期起始时间 2025-01-01
+   */
+  PeriodBegin: string
+  /**
+   * 有效期结束时间  2025-12-01
+   */
+  PeriodEnd: string
+  /**
+   * FIX 固定值，CYCLE 不同值
+   */
+  PlanType: string
+  /**
+   * 预算值额度 
+预算计划类型固定预算时设为定值；
+预算计划类型为CYCLE(计划预算)时传[{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}]；
+   */
+  BudgetQuota: string
+  /**
+   * BILL  系统账单，CONSUMPTION  消耗账单
+   */
+  BillType: string
+  /**
+   * COST 原价，REAL_COST 实际费用，CASH 现金，INCENTIVE 赠送金，VOUCHER 代金券，TRANSFER 分成金，TAX 税，AMOUNT_BEFORE_TAX 现金支付(税前)
+   */
+  FeeType: string
+  /**
+   * 阈值提醒
+   */
+  WarnJson: Array<BudgetWarn>
+  /**
+   * 预算备注
+   */
+  BudgetNote?: string
+  /**
+   * 预算维度范围条件
+   */
+  DimensionsRange?: BudgetConditionsForm
+  /**
+   * 波动提醒
+   */
+  WaveThresholdJson?: Array<WaveThresholdForm>
 }
 
 /**
@@ -5550,110 +6282,65 @@ export interface DescribeCostDetailRequest {
 }
 
 /**
- * DescribeAllocationSummaryByResource请求参数结构体
+ * 预算提醒
  */
-export interface DescribeAllocationSummaryByResourceRequest {
+export interface BudgetSendInfoDto {
   /**
-   * 数量，最大值为1000
-
+   * 通知周期,逗号隔开。
+枚举值:
+周一:1,
+周二:2,
+周天:7
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
+  WeekDays?: Array<number | bigint>
   /**
-   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
+   * 接收类型。
+枚举值:
+UIN 默认模式,
+USER 用户,
+GROUP 用户组。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  ReceiverType?: string
   /**
-   * 账单月份，格式为2024-02，不传默认当前月
-
+   * 发送接收窗口HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Month?: string
+  EndTime?: string
   /**
-   * 统计周期，枚举值如下
-month - 月
-day - 日
+   * 预算配置id（预算名称）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PeriodType?: string
+  BudgetId?: number
   /**
-   * 分账单元唯一标识，用作筛选
+   * 接收渠道,逗号隔开;
+枚举值:
+TITLE 标题，
+SITE 站内信,
+EMAIL 邮件,
+SMS 短信,
+WECHAT 微信,
+VOICE 语音,
+QYWX 企业微信;
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TreeNodeUniqKeys?: Array<string>
+  NoticeWays?: Array<string>
   /**
-   * 排序字段，枚举值如下：
-RiTimeSpan - 预留实例抵扣时长
-ExtendPayAmount1 - 预留实例抵扣组件原价
-RealCost - 折后总价
-CashPayAmount - 现金金额
-VoucherPayAmount - 代金券金额
-IncentivePayAmount - 赠送金金额
-TransferPayAmount -分成金金额
-Cost - 组件原价
+   * 发送开始窗口HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sort?: string
+  StartTime?: string
   /**
-   * 排序类型，枚举值如下：
-asc - 升序
-desc - 降序
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SortType?: string
+  Id?: string
   /**
-   * 日期，用作筛选
+   * 用户id,用户组id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillDates?: Array<string>
-  /**
-   * 产品编码，用作筛选
-   */
-  BusinessCodes?: Array<string>
-  /**
-   * 使用者UIN，用作筛选
-   */
-  OwnerUins?: Array<string>
-  /**
-   * 操作者UIN，用作筛选
-   */
-  OperateUins?: Array<string>
-  /**
-   * 计费模式编码，用作筛选
-   */
-  PayModes?: Array<string>
-  /**
-   * 交易类型编码，用作筛选
-   */
-  ActionTypes?: Array<string>
-  /**
-   * 子产品编码，用作筛选
-   */
-  ProductCodes?: Array<string>
-  /**
-   * 地域ID，用作筛选
-   */
-  RegionIds?: Array<string>
-  /**
-   * 可用区ID，用作筛选
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 实例类型编码，用作筛选
-   */
-  InstanceTypes?: Array<string>
-  /**
-   * 标签，用作筛选
-   */
-  Tag?: Array<string>
-  /**
-   * 模糊搜索：支持标签、资源id、资源别名
-   */
-  SearchKey?: string
-  /**
-   * 项目ID，用作筛选
-   */
-  ProjectIds?: Array<number | bigint>
-  /**
-   * 费用归集类型，枚举值如下：
-0 - 分摊 
-1 - 归集 
--1 -  未分配
-   */
-  AllocationType?: Array<number | bigint>
+  ReceiverIds?: Array<number | bigint>
 }
 
 /**
@@ -5863,6 +6550,47 @@ export interface BillBusiness {
 }
 
 /**
+ * 预算历史详情
+ */
+export interface BudgetRemindRecords {
+  /**
+   * 预算周期
+   */
+  DateDesc?: string
+  /**
+   * 实际费用
+   */
+  RealCost?: string
+  /**
+   * 预算值额度
+   */
+  BudgetQuota?: string
+  /**
+   * 提醒类型。
+枚举值:
+BUDGET 预算提醒,
+WAVE 波动提醒.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmType?: string
+  /**
+   * 消息内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageContent?: string
+  /**
+   * 发送时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendTime?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+}
+
+/**
  * DescribeAllocationRuleDetail返回参数结构体
  */
 export interface DescribeAllocationRuleDetailResponse {
@@ -5943,6 +6671,25 @@ export interface UsageDetails {
    * payMode为prepay 且 payScene为common的情况下存在
    */
   Action?: string
+}
+
+/**
+ * DescribeBillSummaryByPayMode返回参数结构体
+ */
+export interface DescribeBillSummaryByPayModeResponse {
+  /**
+   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   */
+  Ready?: number
+  /**
+   * 各付费模式花费分布详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SummaryOverview?: Array<PayModeSummaryOverviewItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6037,6 +6784,30 @@ costBeforeTax:税前价
 }
 
 /**
+ * DeleteAllocationTag返回参数结构体
+ */
+export interface DeleteAllocationTagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 预算操作后返回信息
+ */
+export interface BudgetInfoApiResponse {
+  /**
+   * 预算项目id
+   */
+  BudgetId?: string
+  /**
+   * 更新预算时间
+   */
+  UpdateTime?: string
+}
+
+/**
  * 消耗明细数据类型
  */
 export interface CostDetail {
@@ -6107,6 +6878,24 @@ export interface CostDetail {
 }
 
 /**
+ * DescribeBudgetOperationLog请求参数结构体
+ */
+export interface DescribeBudgetOperationLogRequest {
+  /**
+   * 页码
+   */
+  PageNo: number
+  /**
+   * 每页数目
+   */
+  PageSize: number
+  /**
+   * 预算项目id
+   */
+  BudgetId: string
+}
+
+/**
  * DescribeBillSummaryByProduct返回参数结构体
  */
 export interface DescribeBillSummaryByProductResponse {
@@ -6131,22 +6920,33 @@ export interface DescribeBillSummaryByProductResponse {
 }
 
 /**
- * DescribeBillSummaryByRegion返回参数结构体
+ * DescribeAllocationRuleSummary请求参数结构体
  */
-export interface DescribeBillSummaryByRegionResponse {
+export interface DescribeAllocationRuleSummaryRequest {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * 每次获取数据量，最大值1000
    */
-  Ready?: number
+  Limit: number
   /**
-   * 各地域花费分布详情
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页偏移量
    */
-  SummaryOverview?: Array<RegionSummaryOverviewItem>
+  Offset: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 月份，不传默认当前月
    */
-  RequestId?: string
+  Month?: string
+  /**
+   * 公摊策略类型，用于筛选。
+枚举值如下： 
+1 - 自定义分摊占比 
+2 - 等比分摊 
+3 - 按占比分摊
+   */
+  Type?: number
+  /**
+   * 公摊规则名称或分账单元名称，用于模糊筛选。
+   */
+  Name?: string
 }
 
 /**
@@ -6375,6 +7175,16 @@ export interface ConsumptionResourceSummaryDataItem {
 }
 
 /**
+ * ModifyGatherRule返回参数结构体
+ */
+export interface ModifyGatherRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAccountBalance请求参数结构体
  */
 export type DescribeAccountBalanceRequest = null
@@ -6478,6 +7288,32 @@ export interface DescribeBillDetailRequest {
 }
 
 /**
+ * DescribeDosageDetailByDate返回参数结构体
+ */
+export interface DescribeDosageDetailByDateResponse {
+  /**
+   * 计量单位
+   */
+  Unit?: string
+  /**
+   * 用量数组
+   */
+  DetailSets?: Array<DetailSet>
+  /**
+   * 错误码
+   */
+  RetCode?: number
+  /**
+   * 错误信息
+   */
+  RetMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSavingPlanResourceInfo请求参数结构体
  */
 export interface DescribeSavingPlanResourceInfoRequest {
@@ -6575,67 +7411,81 @@ export interface DeleteGatherRuleRequest {
 }
 
 /**
- * DescribeAccountBalance返回参数结构体
+ * 获取预算管理的基础信息分页数据
  */
-export interface DescribeAccountBalanceResponse {
+export interface DataForBudgetInfoPage {
   /**
-   * 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分
+   * 分页
    */
-  Balance?: number
+  Pages?: number
   /**
-   * 查询的用户Uin
+   * 分页大小
    */
-  Uin?: number
+  Size?: number
   /**
-   * 当前真实可用余额,单位 分
+   * 总量
    */
-  RealBalance?: number
+  Total?: number
   /**
-   * 现金账户余额,单位 分
+   * 查询数据列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CashAccountBalance?: number
+  Records?: Array<BudgetExtend>
   /**
-   * 收益转入账户余额,单位 分
+   * 当前页
    */
-  IncomeIntoAccountBalance?: number
+  Current?: number
+}
+
+/**
+ * 预算修改记录信息
+ */
+export interface BudgetOperationLogEntity {
   /**
-   * 赠送账户余额,单位 分
+   * Uin
    */
-  PresentAccountBalance?: number
+  PayerUin?: number
   /**
-   * 冻结金额,单位 分
+   * 主用户Uin
+
    */
-  FreezeAmount?: number
+  OwnerUin?: number
   /**
-   * 欠费金额,单位 分
+   * 操作用户Uin
    */
-  OweAmount?: number
+  OperateUin?: number
   /**
-   * 是否允许欠费消费
-   * @deprecated
+   * 日期
    */
-  IsAllowArrears?: boolean
+  BillDay?: number
   /**
-   * 是否限制信用额度
-   * @deprecated
+   * 月份
    */
-  IsCreditLimited?: boolean
+  BillMonth?: string
   /**
-   * 信用额度,单位 分
+   * 修改类型：ADD(新增)、UPDATE(更新)
    */
-  CreditAmount?: number
+  Action?: string
   /**
-   * 可用信用额度,单位 分
+   * 变更信息
    */
-  CreditBalance?: number
+  DiffValue?: Array<BudgetInfoDiffEntity>
   /**
-   * 真实可用信用额度,单位 分
+   * 创建时间
    */
-  RealCreditBalance?: number
+  CreateTime?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 修改时间
    */
-  RequestId?: string
+  UpdateTime?: string
+  /**
+   * 修改渠道：官网修改/API修改
+   */
+  OperationChannel?: string
+  /**
+   * 预算项目id
+   */
+  BudgetId?: string
 }
 
 /**
@@ -6789,72 +7639,6 @@ export interface DescribeAllocateConditionsResponse {
 }
 
 /**
- * DescribeDosageDetailList请求参数结构体
- */
-export interface DescribeDosageDetailListRequest {
-  /**
-   * 用量起始时间，如：2023-02-01
-   */
-  StartTime: string
-  /**
-   * 用量截止时间，如：2023-02-28
-   */
-  EndTime: string
-  /**
-   * 产品编码，已支持查询的产品如下：
-p_ccc（云联络中心）
-p_rav（实时音视频）
-p_pstn（号码保护）
-p_smh（智能媒资托管）
-p_coding_devops（CODING DevOps）
-p_dsa（全球IP应用加速）
-   */
-  ProductCode: string
-  /**
-   * 数据偏移量（从0开始）
-   */
-  Offset: number
-  /**
-   * 单次数据量（最大3000）
-   */
-  Limit: number
-  /**
-   * 用量统计类型：用量明细的数据统计汇总周期类型，包括minute-按5分钟汇总、hour-按小时汇总、day-按天汇总、month-按月汇总、comm-其他，默认查询所有类型明细，目前各产品已支持的统计类型如下：
-p_ccc（云联络中心）：comm、day
-p_rav（实时音视频）：minute、day
-p_pstn（号码保护）：comm
-p_smh（智能媒资托管）：day
-p_coding_devops（CODING DevOps）：comm、day
-p_dsa（全球IP应用加速）：minute
-   */
-  DosageType?: string
-}
-
-/**
- * ModifyAllocationRule返回参数结构体
- */
-export interface ModifyAllocationRuleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 组件类型筛选列表
- */
-export interface BillComponent {
-  /**
-   * 组件类型编码
-   */
-  ComponentCode: string
-  /**
-   * 组件类型：用户购买的产品或服务对应的组件大类
-   */
-  ComponentCodeName: string
-}
-
-/**
  * DescribeVoucherInfo请求参数结构体
  */
 export interface DescribeVoucherInfoRequest {
@@ -6950,6 +7734,170 @@ export interface DescribeVoucherInfoRequest {
    * 发券时间结束时间
    */
   CreateTimeTo?: string
+}
+
+/**
+ * DescribeDosageDetailList请求参数结构体
+ */
+export interface DescribeDosageDetailListRequest {
+  /**
+   * 用量起始时间，如：2023-02-01
+   */
+  StartTime: string
+  /**
+   * 用量截止时间，如：2023-02-28
+   */
+  EndTime: string
+  /**
+   * 产品编码，已支持查询的产品如下：
+p_ccc（云联络中心）
+p_rav（实时音视频）
+p_pstn（号码保护）
+p_smh（智能媒资托管）
+p_coding_devops（CODING DevOps）
+p_dsa（全球IP应用加速）
+   */
+  ProductCode: string
+  /**
+   * 数据偏移量（从0开始）
+   */
+  Offset: number
+  /**
+   * 单次数据量（最大3000）
+   */
+  Limit: number
+  /**
+   * 用量统计类型：用量明细的数据统计汇总周期类型，包括minute-按5分钟汇总、hour-按小时汇总、day-按天汇总、month-按月汇总、comm-其他，默认查询所有类型明细，目前各产品已支持的统计类型如下：
+p_ccc（云联络中心）：comm、day
+p_rav（实时音视频）：minute、day
+p_pstn（号码保护）：comm
+p_smh（智能媒资托管）：day
+p_coding_devops（CODING DevOps）：comm、day
+p_dsa（全球IP应用加速）：minute
+   */
+  DosageType?: string
+}
+
+/**
+ * DescribeBudgetRemindRecordList返回参数结构体
+ */
+export interface DescribeBudgetRemindRecordListResponse {
+  /**
+   * 预算配置属性
+   */
+  Data?: BudgetRemindRecordList
+  /**
+   * 错误信息提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 错误响应码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 组件类型筛选列表
+ */
+export interface BillComponent {
+  /**
+   * 组件类型编码
+   */
+  ComponentCode: string
+  /**
+   * 组件类型：用户购买的产品或服务对应的组件大类
+   */
+  ComponentCodeName: string
+}
+
+/**
+ * DescribeBillSummaryByRegion返回参数结构体
+ */
+export interface DescribeBillSummaryByRegionResponse {
+  /**
+   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   */
+  Ready?: number
+  /**
+   * 各地域花费分布详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SummaryOverview?: Array<RegionSummaryOverviewItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 预算管理的分页数据
+ */
+export interface BudgetRemindRecordList {
+  /**
+   * 自动优化 COUNT SQL 如果遇到 jSqlParser 无法解析情况，设置该参数为 false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptimizeCountSql?: boolean
+  /**
+   * 分页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pages?: number
+  /**
+   * 排序字段信息，允许前端传入的时候，注意 SQL 注入问题，可以使用 SqlInjectionUtils.check(...) 检查文本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Orders?: Array<OrderDto>
+  /**
+   * xml 自定义 count 查询的 statementId 也可以不用指定在分页 statementId 后面加上 _mpCount 例如分页 selectPageById 指定 count 的查询 statementId 设置为 selectPageById_mpCount 即可默认找到该 SQL 执行
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CountId?: string
+  /**
+   * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * 总量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 单页分页条数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxLimit?: string
+  /**
+   * 查询数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Records?: Array<BudgetRemindRecords>
+  /**
+   * 当前页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Current?: number
+  /**
+   * 是否进行 count 查询，如果只想查询到列表不要查询总记录数，设置该参数为 false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchCount?: boolean
+}
+
+/**
+ * DeleteBudget请求参数结构体
+ */
+export interface DeleteBudgetRequest {
+  /**
+   * 预算项目id
+   */
+  BudgetIds: Array<string>
 }
 
 /**
@@ -7502,33 +8450,19 @@ export interface DescribeDosageDetail {
 }
 
 /**
- * DescribeAllocationRuleSummary请求参数结构体
+ * 预算计算复杂数据类型
  */
-export interface DescribeAllocationRuleSummaryRequest {
+export interface BudgetPlan {
   /**
-   * 每次获取数据量，最大值1000
+   * 前端页面日期显示
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
+  DateDesc?: string
   /**
-   * 分页偏移量
+   * 预算额度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
-  /**
-   * 月份，不传默认当前月
-   */
-  Month?: string
-  /**
-   * 公摊策略类型，用于筛选。
-枚举值如下： 
-1 - 自定义分摊占比 
-2 - 等比分摊 
-3 - 按占比分摊
-   */
-  Type?: number
-  /**
-   * 公摊规则名称或分账单元名称，用于模糊筛选。
-   */
-  Name?: string
+  Quota?: string
 }
 
 /**

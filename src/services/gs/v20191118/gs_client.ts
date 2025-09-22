@@ -41,6 +41,7 @@ import {
   AndroidApp,
   DescribeAndroidInstancesAppBlacklistResponse,
   ModifyAndroidAppRequest,
+  DeleteAndroidInstanceBackupsResponse,
   DescribeAndroidAppsResponse,
   StopAndroidInstancesAppRequest,
   CreateAndroidAppVersionRequest,
@@ -49,6 +50,7 @@ import {
   BackUpAndroidInstanceToStorageRequest,
   ModifyAndroidInstancesPropertiesRequest,
   SyncAndroidInstanceImage,
+  RestoreAndroidInstanceResponse,
   DisconnectAndroidInstanceRequest,
   AndroidInstanceLabel,
   DeleteAndroidInstanceImagesResponse,
@@ -59,18 +61,18 @@ import {
   ModifyAndroidInstanceResolutionResponse,
   DeleteAndroidInstanceImagesRequest,
   DescribeAndroidInstanceAppsResponse,
-  CreateAndroidInstanceSSHResponse,
+  CreateAndroidInstanceWebShellRequest,
   ResetAndroidInstancesRequest,
   UploadFileToAndroidInstancesRequest,
   CleanAndroidInstancesAppDataRequest,
   DisableAndroidInstancesAppRequest,
-  DescribeAndroidInstancesAppBlacklistRequest,
+  DisconnectAndroidInstanceResponse,
   EnableAndroidInstancesAppResponse,
   ConnectAndroidInstanceRequest,
   CopyAndroidInstanceRequest,
   SyncExecuteCommandOnAndroidInstancesResponse,
   StartAndroidInstancesResponse,
-  RestoreAndroidInstanceFromStorageResponse,
+  DescribeAndroidInstanceBackupsResponse,
   DistributeFileToAndroidInstancesResponse,
   SaveGameArchiveResponse,
   ModifyAndroidAppVersionRequest,
@@ -89,6 +91,7 @@ import {
   StopPublishStreamResponse,
   ImportAndroidInstanceImageResponse,
   DeleteAndroidInstanceLabelRequest,
+  DescribeAndroidInstanceBackupsRequest,
   ModifyAndroidInstancesUserIdResponse,
   InstallAndroidInstancesAppRequest,
   SyncAndroidInstanceImageResponse,
@@ -96,19 +99,23 @@ import {
   CreateAndroidInstanceWebShellResponse,
   DescribeAndroidInstanceImagesResponse,
   ModifyAndroidInstanceInformationRequest,
+  BackUpAndroidInstanceRequest,
   StopPublishStreamRequest,
-  DeleteAndroidInstanceBackupFilesRequest,
+  DistributeAndroidInstanceImageToHostsResponse,
   AndroidAppCosInfo,
   SyncExecuteCommandResult,
   ModifyAndroidInstancesAppBlacklistRequest,
   ModifyAndroidInstancesInformationRequest,
   RestartAndroidInstancesAppResponse,
+  RestoreAndroidInstanceRequest,
   DescribeAndroidInstancesByAppsResponse,
   DescribeAndroidInstanceTasksStatusRequest,
+  DeleteAndroidInstanceBackupsRequest,
   CreateAndroidInstancesScreenshotResponse,
   DescribeInstancesCountResponse,
   ExecuteCommandOnAndroidInstancesRequest,
   ModifyAndroidInstanceInformationResponse,
+  BackUpAndroidInstanceResponse,
   DestroyAndroidInstancesResponse,
   SaveGameArchiveRequest,
   SwitchGameArchiveResponse,
@@ -116,9 +123,10 @@ import {
   CreateCosCredentialRequest,
   InstallAndroidInstancesAppResponse,
   DistributeAndroidInstanceImageToHostsRequest,
-  DistributeAndroidInstanceImageToHostsResponse,
+  DeleteAndroidInstanceBackupFilesRequest,
   AndroidInstanceTask,
   ConnectAndroidInstanceResponse,
+  RestoreAndroidInstanceFromStorageResponse,
   DescribeAndroidInstancesRequest,
   DescribeAndroidInstancesResponse,
   SyncAndroidInstanceImageRequest,
@@ -143,8 +151,7 @@ import {
   DescribeAndroidInstancesByAppsRequest,
   TrylockWorkerResponse,
   S3Options,
-  DisconnectAndroidInstanceResponse,
-  CreateAndroidInstanceWebShellRequest,
+  DescribeAndroidInstancesAppBlacklistRequest,
   CreateAndroidInstancesAccessTokenResponse,
   ModifyAndroidInstancesLabelsResponse,
   RenewAndroidInstancesAccessTokenRequest,
@@ -169,6 +176,7 @@ import {
   RebootAndroidInstanceHostsRequest,
   COSOptions,
   ModifyAndroidInstancesPropertiesResponse,
+  CreateAndroidInstanceSSHResponse,
   ModifyAndroidInstancesInformationResponse,
   RenewAndroidInstancesAccessTokenResponse,
   CreateCosCredentialResponse,
@@ -369,6 +377,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除安卓实例备份
+   */
+  async DeleteAndroidInstanceBackups(
+    req: DeleteAndroidInstanceBackupsRequest,
+    cb?: (error: string, rep: DeleteAndroidInstanceBackupsResponse) => void
+  ): Promise<DeleteAndroidInstanceBackupsResponse> {
+    return this.request("DeleteAndroidInstanceBackups", req, cb)
+  }
+
+  /**
    * 修改安卓实例的信息
    */
   async ModifyAndroidInstanceInformation(
@@ -419,6 +437,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 还原安卓实例。该接口需要联系我们开通内网存储才能使用。
+   */
+  async RestoreAndroidInstance(
+    req: RestoreAndroidInstanceRequest,
+    cb?: (error: string, rep: RestoreAndroidInstanceResponse) => void
+  ): Promise<RestoreAndroidInstanceResponse> {
+    return this.request("RestoreAndroidInstance", req, cb)
+  }
+
+  /**
    * 查询安卓实例标签
    */
   async DescribeAndroidInstanceLabels(
@@ -466,6 +494,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAndroidInstancesResolutionResponse) => void
   ): Promise<ModifyAndroidInstancesResolutionResponse> {
     return this.request("ModifyAndroidInstancesResolution", req, cb)
+  }
+
+  /**
+   * 查询安卓实例备份列表
+   */
+  async DescribeAndroidInstanceBackups(
+    req: DescribeAndroidInstanceBackupsRequest,
+    cb?: (error: string, rep: DescribeAndroidInstanceBackupsResponse) => void
+  ): Promise<DescribeAndroidInstanceBackupsResponse> {
+    return this.request("DescribeAndroidInstanceBackups", req, cb)
   }
 
   /**
@@ -646,6 +684,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCosCredentialResponse) => void
   ): Promise<CreateCosCredentialResponse> {
     return this.request("CreateCosCredential", req, cb)
+  }
+
+  /**
+   * 备份安卓实例。该接口需要联系我们开通内网存储才能使用。
+   */
+  async BackUpAndroidInstance(
+    req: BackUpAndroidInstanceRequest,
+    cb?: (error: string, rep: BackUpAndroidInstanceResponse) => void
+  ): Promise<BackUpAndroidInstanceResponse> {
+    return this.request("BackUpAndroidInstance", req, cb)
   }
 
   /**
