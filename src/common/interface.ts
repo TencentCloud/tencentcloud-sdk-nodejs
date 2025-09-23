@@ -118,3 +118,11 @@ export interface Credential {
 export interface DynamicCredential {
   getCredential(): Promise<Credential>
 }
+
+export interface CredentialResult {
+  TmpSecretId: string
+  TmpSecretKey: string
+  ExpiredTime: number
+  Expiration: string
+  Token: string
+}

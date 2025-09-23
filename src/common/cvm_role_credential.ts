@@ -1,16 +1,11 @@
-import { Credential, DynamicCredential } from "./interface"
+import { Credential, DynamicCredential, CredentialResult } from "./interface"
 import fetch from "./http/fetch"
 
 const META_URL = "http://metadata.tencentyun.com/latest/meta-data/"
 const ROLE_URL = META_URL + "cam/security-credentials/"
 const EXPIRE_BUFFER = 30 * 1000
 
-interface CvmRoleCredentialResult {
-  TmpSecretId: string
-  TmpSecretKey: string
-  ExpiredTime: 1671330188
-  Expiration: string
-  Token: string
+interface CvmRoleCredentialResult extends CredentialResult {
   Code: string
 }
 

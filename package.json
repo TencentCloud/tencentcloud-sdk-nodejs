@@ -36,6 +36,7 @@
     "form-data": "^3.0.4",
     "get-stream": "^6.0.0",
     "https-proxy-agent": "^5.0.0",
+    "ini": "^5.0.0",
     "is-stream": "^2.0.0",
     "json-bigint": "^1.0.0",
     "node-fetch": "^2.2.0",
@@ -51,6 +52,7 @@
     "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs"
   },
   "devDependencies": {
+    "@types/ini": "^4.1.1",
     "@types/json-bigint": "^1.0.1",
     "@types/node": "^18.0.0",
     "@types/node-fetch": "^2.5.7",
