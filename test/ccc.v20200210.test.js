@@ -38,9 +38,9 @@ it("ccc.v20200210.ModifyCompanyApply", async function () {
     }
 })
 
-it("ccc.v20200210.ModifyStaff", async function () {
+it("ccc.v20200210.DescribeAIAnalysisResult", async function () {
     try {
-       const data = await client.ModifyStaff({})
+       const data = await client.DescribeAIAnalysisResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +281,16 @@ it("ccc.v20200210.DescribeTelCallInfo", async function () {
 it("ccc.v20200210.UploadIvrAudio", async function () {
     try {
        const data = await client.UploadIvrAudio({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.ModifyStaff", async function () {
+    try {
+       const data = await client.ModifyStaff({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

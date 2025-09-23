@@ -184,7 +184,12 @@ export interface DescribeDiskBackupsRequest {
 取值：
 - SYSTEM_DISK - 系统盘
 - DATA_DISK - 数据盘
-
+<li>tag-key</li>
+按照【标签键】进行过滤。 类型：String 必选：否
+<li>tag-value</li>
+按照【标签值】进行过滤。 类型：String 必选：否
+<li>tag:tag-key</li>
+按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。
    */
   Filters?: Array<Filter>
@@ -1131,6 +1136,10 @@ export interface CreateDisksRequest {
    * 自动挂载并初始化数据盘。
    */
   AutoMountConfiguration?: AutoMountConfiguration
+  /**
+   * 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1226,12 +1235,10 @@ export interface DescribeSnapshotsRequest {
 类型：String
 必选：否
 可通过 <a href="https://cloud.tencent.com/document/product/1207/54388">DescribeSnapshots</a> 接口返回值中的 SnapshotId 获取。
-
 <li>disk-id</li>按照【磁盘 ID】进行过滤。
 类型：String
 必选：否
 可通过 <a href="https://cloud.tencent.com/document/product/1207/66093">DescribeDisks</a> 接口返回值中的 DiskId 获取。
-
 <li>snapshot-name</li>按照【快照名称】进行过滤。
 类型：String
 必选：否
@@ -1240,7 +1247,12 @@ export interface DescribeSnapshotsRequest {
 类型：String
 必选：否
 可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
-
+<li>tag-key</li>
+按照【标签键】进行过滤。 类型：String 必选：否
+<li>tag-value</li>
+按照【标签值】进行过滤。 类型：String 必选：否
+<li>tag:tag-key</li>
+按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。
    */
   Filters?: Array<Filter>
@@ -1317,6 +1329,10 @@ export interface DiskBackup {
 格式为： YYYY-MM-DDThh:mm:ssZ。
    */
   CreatedTime?: string
+  /**
+   * 云硬盘备份点绑定的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1377,6 +1393,10 @@ export interface KeyPair {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivateKey?: string
+  /**
+   * 密钥对绑定的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1564,6 +1584,10 @@ export interface Disk {
    * 云硬盘的备份点配额数量。
    */
   DiskBackupQuota?: number
+  /**
+   * 云硬盘绑定的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1667,6 +1691,10 @@ False：表示开机状态制作镜像
 开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
    */
   ForcePowerOff?: boolean
+  /**
+   * 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1913,7 +1941,12 @@ export interface DescribeBlueprintsRequest {
 类型：String
 必选：否
 场景Id，可通过[查看使用场景列表](https://cloud.tencent.com/document/product/1207/83512)接口获取。
-
+<li>tag-key</li>
+按照【标签键】进行过滤。 类型：String 必选：否
+<li>tag-value</li>
+按照【标签值】进行过滤。 类型：String 必选：否
+<li>tag:tag-key</li>
+按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。
    */
   Filters?: Array<Filter>
@@ -2461,6 +2494,10 @@ export interface ImportKeyPairRequest {
    * 密钥对的公钥内容， OpenSSH RSA 格式。
    */
   PublicKey: string
+  /**
+   * 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2500,7 +2537,7 @@ export interface ImportKeyPairResponse {
   /**
    * 密钥对 ID。
    */
-  KeyId: string
+  KeyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2861,6 +2898,12 @@ export interface DescribeKeyPairsRequest {
 <li>key-name</li>按照【密钥对名称】进行过滤（支持模糊匹配）。
 类型：String
 必选：否
+<li>tag-key</li>
+按照【标签键】进行过滤。 类型：String 必选：否
+<li>tag-value</li>
+按照【标签值】进行过滤。 类型：String 必选：否
+<li>tag:tag-key</li>
+按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 KeyIds 和 Filters。
    */
   Filters?: Array<Filter>
@@ -3407,6 +3450,10 @@ NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（�
    * 镜像是否已共享。
    */
   BlueprintShared?: boolean
+  /**
+   * 镜像绑定的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3752,6 +3799,10 @@ export interface CreateKeyPairRequest {
    * 密钥对名称，可由数字，字母和下划线组成，长度不超过 25 个字符。
    */
   KeyName: string
+  /**
+   * 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4097,6 +4148,10 @@ export interface Snapshot {
    * 快照的创建时间。
    */
   CreatedTime?: string
+  /**
+   * 快照绑定的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4193,6 +4248,10 @@ export interface CreateDiskBackupRequest {
    * 云硬盘备份点名称，最大长度为 90 。
    */
   DiskBackupName?: string
+  /**
+   * 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4512,6 +4571,12 @@ disk-state
 类型：String
 必选：否
 取值：参考数据结构[Disk](https://cloud.tencent.com/document/api/1207/47576#Disk)中DiskState取值。
+tag-key
+按照【标签键】进行过滤。 类型：String 必选：否
+tag-value
+按照【标签值】进行过滤。 类型：String 必选：否
+tag:tag-key
+按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 DiskIds 和 Filters。
    */
   Filters?: Array<Filter>
@@ -5916,6 +5981,10 @@ export interface CreateInstanceSnapshotRequest {
    * 快照名称，最长为 60 个字符。
    */
   SnapshotName?: string
+  /**
+   * 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。
+   */
+  Tags?: Array<Tag>
 }
 
 /**

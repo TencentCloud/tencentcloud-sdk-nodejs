@@ -2052,6 +2052,23 @@ serverless  :serverless版
    */
   InstanceChargeType?: string
   /**
+   * 是否开启弹性带宽白名单   
+1:已开启弹性带宽白名单;
+0:未开启弹性带宽白名单;
+   */
+  ElasticBandwidthSwitch?: number
+  /**
+   * 弹性带宽开通状态
+1:未开启弹性带宽;
+16: 开启弹性带宽中;
+32:开启弹性带宽成功;
+33:关闭弹性带宽中;
+34:关闭弹性带宽成功;
+64:开启弹性带宽失败;
+65:关闭弹性带宽失败;
+   */
+  ElasticBandwidthOpenStatus?: number
+  /**
    * 集群类型  
 CLOUD_IDC IDC集群
 CLOUD_CVM_SHARE CVM共享集群

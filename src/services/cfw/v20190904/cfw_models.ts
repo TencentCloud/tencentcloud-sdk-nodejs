@@ -173,7 +173,7 @@ export interface CreateBlockIgnoreRuleNewRequest {
    */
   RuleType: number
   /**
-   * 是否覆盖重复数据，1覆盖，非1不覆盖，跳过重复数据
+   * 删除白名单冲突地址并继续添加/删除封禁列表冲突地址并继续添加；表示是否覆盖重复数据，1为覆盖，非1不覆盖，跳过重复数据
    */
   CoverDuplicate?: number
 }
@@ -2491,6 +2491,18 @@ export interface DescribeLogStorageStatisticResponse {
    */
   ArrearsStopWriting?: number
   /**
+   * NDR流量日志存储量，单位B
+   */
+  NDRNetFlowSize?: number
+  /**
+   * NDR风险日志存储量，单位B
+   */
+  NDRRiskSize?: number
+  /**
+   * NDR日志存储天数
+   */
+  NDRStorageDay?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4373,6 +4385,14 @@ log：观察
    * 是否是无效规则，0 表示有效规则，1 表示无效规则，出参场景返回使用
    */
   Invalid?: number
+  /**
+   * 规则创建时间
+   */
+  CreateTime?: string
+  /**
+   * 规则最近更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -4893,6 +4913,14 @@ ANY:表示所有
    * 域名解析的IP统计
    */
   DnsParseCount?: SgDnsParseCount
+  /**
+   * 规则创建时间
+   */
+  CreateTime?: string
+  /**
+   * 规则最近更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -6378,6 +6406,14 @@ export interface DescAcItem {
    * 省份、城市简称
    */
   CityKey?: string
+  /**
+   * 规则创建时间
+   */
+  CreateTime?: string
+  /**
+   * 规则最近更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -7627,6 +7663,14 @@ export interface StorageHistogram {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Time?: string
+  /**
+   * NDR流量日志存储量，单位B
+   */
+  NDRNetflowSize?: number
+  /**
+   * NDR风险日志存储量，单位B
+   */
+  NDRRiskSize?: number
 }
 
 /**

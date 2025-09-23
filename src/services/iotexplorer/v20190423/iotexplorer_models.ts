@@ -148,6 +148,16 @@ export interface DescribeModelDefinitionResponse {
 }
 
 /**
+ * 已订阅Topic信息
+ */
+export interface SubscribedTopicItem {
+  /**
+   * Topic名称
+   */
+  TopicName?: string
+}
+
+/**
  * GetGatewaySubDeviceList返回参数结构体
  */
 export interface GetGatewaySubDeviceListResponse {
@@ -3967,6 +3977,20 @@ export interface GetTWeTalkProductConfigListResponse {
 }
 
 /**
+ * DescribeSubscribedTopicPolicy返回参数结构体
+ */
+export interface DescribeSubscribedTopicPolicyResponse {
+  /**
+   * 已订阅Topic信息
+   */
+  Topics?: Array<SubscribedTopicItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetCloudStorage请求参数结构体
  */
 export interface ResetCloudStorageRequest {
@@ -4790,6 +4814,20 @@ export interface DeviceDataHistoryItem {
    * 字段取值
    */
   Value?: string
+}
+
+/**
+ * DescribeSubscribedTopicPolicy请求参数结构体
+ */
+export interface DescribeSubscribedTopicPolicyRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
 }
 
 /**

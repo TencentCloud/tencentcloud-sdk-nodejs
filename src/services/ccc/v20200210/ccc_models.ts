@@ -2976,6 +2976,20 @@ export interface CreatePredictiveDialingCampaignResponse {
 }
 
 /**
+ * DescribeAIAnalysisResult返回参数结构体
+ */
+export interface DescribeAIAnalysisResultResponse {
+  /**
+   * AI会话分析结果
+   */
+  ResultList?: Array<AIAnalysisResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdatePredictiveDialingCampaign返回参数结构体
  */
 export interface UpdatePredictiveDialingCampaignResponse {
@@ -4219,6 +4233,28 @@ export interface PhoneNumBuyInfo {
 }
 
 /**
+ * DescribeAIAnalysisResult请求参数结构体
+ */
+export interface DescribeAIAnalysisResultRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 会话 ID
+   */
+  SessionId: string
+  /**
+   * 查找起始时间
+   */
+  StartTime: number
+  /**
+   * 1737350008
+   */
+  EndTime: number
+}
+
+/**
  * ModifyCompanyApply返回参数结构体
  */
 export interface ModifyCompanyApplyResponse {
@@ -4947,6 +4983,22 @@ export interface DescribeIMCdrListRequest {
    * 1为全媒体，2为文本客服，不填则查询全部
    */
   Type?: number
+}
+
+/**
+ * AI会话分析结果
+ */
+export interface AIAnalysisResult {
+  /**
+   * summary: 会话小结
+mood: 情绪分析
+intention: 意向提取
+   */
+  Type?: string
+  /**
+   * AI会话分析结果
+   */
+  Result?: string
 }
 
 /**

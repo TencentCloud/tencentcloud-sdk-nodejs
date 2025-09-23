@@ -1377,6 +1377,10 @@ export interface ScaleOutClusterRequest {
    * 节点标记信息，当前只提供给tf平台使用
    */
   NodeMarks?: NodeMark
+  /**
+   * 扩容指定计算组名称
+   */
+  WarehouseName?: string
 }
 
 /**
@@ -3208,6 +3212,10 @@ export interface ScaleOutInstanceRequest {
    * 节点标记信息，目前只提供tf平台使用
    */
   NodeMarks?: NodeMark
+  /**
+   * 扩容指定计算组
+   */
+  WarehouseName?: string
 }
 
 /**
@@ -4516,6 +4524,7 @@ export interface DiffDetailItem {
 export interface AutoScaleGroupAdvanceAttrs {
   /**
    * 计算资源高级设置
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams
 }
@@ -7861,6 +7870,10 @@ export interface AutoScaleResourceConf {
    */
   YarnNodeLabel?: string
   /**
+   * 对应的计算组
+   */
+  WarehouseName?: string
+  /**
    * 伸缩组状态
    */
   GroupStatus?: number
@@ -7874,6 +7887,7 @@ export interface AutoScaleResourceConf {
   EnableMNode?: number
   /**
    * 伸缩组更多设置
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraAdvanceAttrs?: AutoScaleGroupAdvanceAttrs
 }

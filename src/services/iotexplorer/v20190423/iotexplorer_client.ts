@@ -25,6 +25,7 @@ import {
   GetWechatDeviceTicketRequest,
   DeleteFenceBindRequest,
   DescribeModelDefinitionResponse,
+  SubscribedTopicItem,
   GetGatewaySubDeviceListResponse,
   DeleteStudioProductResponse,
   DescribeDevicePackagesRequest,
@@ -215,6 +216,7 @@ import {
   DescribeUnbindedDevicesResponse,
   InvokeCloudStorageAIServiceTaskRequest,
   GetTWeTalkProductConfigListResponse,
+  DescribeSubscribedTopicPolicyResponse,
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
@@ -253,6 +255,7 @@ import {
   CreateProjectRequest,
   CreateCloudStorageAIServiceResponse,
   DeviceDataHistoryItem,
+  DescribeSubscribedTopicPolicyRequest,
   GetTWeCallActiveStatusResponse,
   InvokeTWeSeeRecognitionTaskRequest,
   PauseTWeCallDeviceResponse,
@@ -1593,13 +1596,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * TRTC操作，将用户从房间移出
+   * 本接口（DescribeSubscribedTopicPolicy）用于获取设备已订阅Topic列表
    */
-  async RemoveUserByRoomIdFromTRTC(
-    req: RemoveUserByRoomIdFromTRTCRequest,
-    cb?: (error: string, rep: RemoveUserByRoomIdFromTRTCResponse) => void
-  ): Promise<RemoveUserByRoomIdFromTRTCResponse> {
-    return this.request("RemoveUserByRoomIdFromTRTC", req, cb)
+  async DescribeSubscribedTopicPolicy(
+    req: DescribeSubscribedTopicPolicyRequest,
+    cb?: (error: string, rep: DescribeSubscribedTopicPolicyResponse) => void
+  ): Promise<DescribeSubscribedTopicPolicyResponse> {
+    return this.request("DescribeSubscribedTopicPolicy", req, cb)
   }
 
   /**
@@ -1710,6 +1713,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceFirmwaresResponse) => void
   ): Promise<DescribeDeviceFirmwaresResponse> {
     return this.request("DescribeDeviceFirmwares", req, cb)
+  }
+
+  /**
+   * TRTC操作，将用户从房间移出
+   */
+  async RemoveUserByRoomIdFromTRTC(
+    req: RemoveUserByRoomIdFromTRTCRequest,
+    cb?: (error: string, rep: RemoveUserByRoomIdFromTRTCResponse) => void
+  ): Promise<RemoveUserByRoomIdFromTRTCResponse> {
+    return this.request("RemoveUserByRoomIdFromTRTC", req, cb)
   }
 
   /**

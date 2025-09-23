@@ -1,3 +1,8 @@
+## [4.1.121](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/compare/4.1.120...4.1.121) (2025-09-23)
+
+### Features
+
+* add credential chain ([#286](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/issues/286)) ([dab5f4b](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/commit/dab5f4bcd8571798581bdbe5f980df53f484f032))
 ## [4.1.65](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/compare/4.1.64...4.1.65) (2025-06-25)
 
 ### Features

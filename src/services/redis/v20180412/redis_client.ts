@@ -357,7 +357,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceAccount）用于查看实例子账号信息。
+   * 本接口（DescribeInstanceAccount）用于查看实例账号信息。
    */
   async DescribeInstanceAccount(
     req: DescribeInstanceAccountRequest,
@@ -427,7 +427,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例的备份模式
+   * 本接口（ModifyInstanceBackupMode）用于修改实例的备份模式。
    */
   async ModifyInstanceBackupMode(
     req: ModifyInstanceBackupModeRequest,

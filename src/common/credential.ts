@@ -2,7 +2,7 @@ import { ClientConfig, Credential, CredentialResult, DynamicCredential } from ".
 import fs from "fs"
 import path from "path"
 import { homedir } from "os"
-import { parse }  from 'ini'
+import { parse } from "ini"
 import { CommonClient } from "./common_client"
 import CvmRoleCredential from "./cvm_role_credential"
 
@@ -46,22 +46,24 @@ export class EnvironmentVariableCredential implements DynamicCredential {
  */
 export class ProfileCredential implements DynamicCredential {
   async getCredential(): Promise<Credential> {
-    let filePath = ''
+    let filePath = ""
     // Try user home directory first
-    const userHome = homedir();
+    const userHome = homedir()
     const userCredentialsPath = path.join(userHome, ".tencentcloud", "credentials")
     if (fs.existsSync(userCredentialsPath)) {
-        filePath = userCredentialsPath
+      filePath = userCredentialsPath
     } else {
-        // Try system directory as fallback
-        filePath = '/etc/tencentcloud/credentials'
+      // Try system directory as fallback
+      filePath = "/etc/tencentcloud/credentials"
     }
 
     if (filePath) {
       try {
         const content = fs.readFileSync(filePath, "utf8")
-        const { default: { secret_id, secret_key, token } } = parse(content)
-        
+        const {
+          default: { secret_id, secret_key, token },
+        } = parse(content)
+
         if (secret_id && secret_key) {
           return new BasicCredential(secret_id, secret_key, token)
         }
@@ -70,7 +72,7 @@ export class ProfileCredential implements DynamicCredential {
       }
     }
 
-    return new BasicCredential('', '')
+    return new BasicCredential("", "")
   }
 }
 
@@ -84,15 +86,15 @@ interface AssumeRoleParams {
  * @see {@link https://cloud.tencent.com/document/api/1312/48197} for more information.
  */
 export class STSCredential implements DynamicCredential {
-  private endpoint = 'sts.tencentcloudapi.com';
-  private version = '2018-08-13';
-  private action = 'AssumeRole';
-  private region = 'ap-guangzhou'
+  private endpoint = "sts.tencentcloudapi.com"
+  private version = "2018-08-13"
+  private action = "AssumeRole"
+  private region = "ap-guangzhou"
   credentialTask: Promise<CredentialResult> | null
 
   /**
    * Constructs a new STSCredential instance
-   * 
+   *
    * @param {ClientConfig} clientConfig Request client Configuration object
    * @param {AssumeRoleParams} assumeRoleParams Request parameters of the AssumeRole interface
    * @see {@link https://cloud.tencent.com/document/api/1312/48197} for more AssumeRoleParams information.
@@ -100,18 +102,14 @@ export class STSCredential implements DynamicCredential {
   constructor(private clientConfig: ClientConfig, private assumeRoleParams: AssumeRoleParams) {}
 
   protected async getCredentialWithStsAssumeRole(): Promise<CredentialResult> {
-    const { endpoint, version, action, region, clientConfig, assumeRoleParams} = this
+    const { endpoint, version, action, region, clientConfig, assumeRoleParams } = this
     try {
-      const client = new CommonClient(
-        endpoint,
-        version,
-        {
-          region,
-          ...clientConfig
-        }
-      );
+      const client = new CommonClient(endpoint, version, {
+        region,
+        ...clientConfig,
+      })
       const result = await client.request(action, assumeRoleParams)
-  
+
       return {
         TmpSecretId: result.Credentials.TmpSecretId,
         TmpSecretKey: result.Credentials.TmpSecretKey,
@@ -119,7 +117,7 @@ export class STSCredential implements DynamicCredential {
         ExpiredTime: result.ExpiredTime,
         Expiration: result.Expiration,
       }
-    } catch(error) {
+    } catch (error) {
       throw new Error(`Get STS AssumeRole failed: ${(error as any).message}`)
     }
   }
@@ -156,34 +154,34 @@ export { default as CvmRoleCredential } from "./cvm_role_credential"
  * @see {@link https://cloud.tencent.com/document/product/598/96013} for more information.
  */
 export class OIDCRoleArnCredential implements DynamicCredential {
-  private endpoint = 'sts.tencentcloudapi.com';
-  private version = '2018-08-13';
-  private action = 'AssumeRoleWithWebIdentity';
-  private clientConfig: ClientConfig;
-  private assumeRoleWithWebIdentityParams: AssumeRoleParams;
-  private defaultSessionName = 'tencentcloud-node-sdk-'
-  private isTke = false;
-  protected region: string;
+  private endpoint = "sts.tencentcloudapi.com"
+  private version = "2018-08-13"
+  private action = "AssumeRoleWithWebIdentity"
+  private clientConfig: ClientConfig
+  private assumeRoleWithWebIdentityParams: AssumeRoleParams
+  private defaultSessionName = "tencentcloud-node-sdk-"
+  private isTke = false
+  protected region: string
   protected expirationReservationTime = 600
   protected credentialTask: Promise<CredentialResult> | null
 
   /**
    * Constructs a new OIDCRoleArnCredential instance
-   * 
+   *
    * @param {ClientConfig} [clientConfig] Optional request client Configuration object
    * @param {AssumeRoleParams} [assumeRoleParams] Optional request parameters of the AssumeRole interface
    * @see {@link https://cloud.tencent.com/document/api/1312/48197} for more AssumeRoleWithWebIdentity information.
    */
-  constructor();
-  constructor(clientConfig: ClientConfig, assumeRoleWithWebIdentityParams: AssumeRoleParams);
+  constructor()
+  constructor(clientConfig: ClientConfig, assumeRoleWithWebIdentityParams: AssumeRoleParams)
   constructor(clientConfig?: ClientConfig, assumeRoleWithWebIdentityParams?: AssumeRoleParams) {
     if (clientConfig && assumeRoleWithWebIdentityParams) {
-      this.clientConfig = clientConfig;
-      this.assumeRoleWithWebIdentityParams = assumeRoleWithWebIdentityParams;
+      this.clientConfig = clientConfig
+      this.assumeRoleWithWebIdentityParams = assumeRoleWithWebIdentityParams
     } else {
-      this.isTke = true;
+      this.isTke = true
       this.clientConfig = {
-        credential: new BasicCredential('', ''),
+        credential: new BasicCredential("", ""),
         ...clientConfig,
       }
     }
@@ -192,17 +190,17 @@ export class OIDCRoleArnCredential implements DynamicCredential {
   private initFromTke() {
     const region = process.env.TKE_REGION
     if (!region) {
-      throw new Error('env TKE_REGION not exist')
+      throw new Error("env TKE_REGION not exist")
     }
 
     const providerId = process.env.TKE_PROVIDER_ID
     if (!providerId) {
-      throw new Error('env TKE_PROVIDER_ID not exist')
+      throw new Error("env TKE_PROVIDER_ID not exist")
     }
 
     const tokenFile = process.env.TKE_WEB_IDENTITY_TOKEN_FILE
     if (!tokenFile) {
-      throw new Error('env TKE_WEB_IDENTITY_TOKEN_FILE not exist')
+      throw new Error("env TKE_WEB_IDENTITY_TOKEN_FILE not exist")
     }
     let wbIdentityToken: string
     try {
@@ -213,10 +211,10 @@ export class OIDCRoleArnCredential implements DynamicCredential {
 
     const roleArn = process.env.TKE_ROLE_ARN
     if (!roleArn) {
-      throw new Error('env TKE_ROLE_ARN not exist')
+      throw new Error("env TKE_ROLE_ARN not exist")
     }
 
-    this.clientConfig.region = region;
+    this.clientConfig.region = region
     this.assumeRoleWithWebIdentityParams = {
       RoleArn: roleArn,
       RoleSessionName: `${this.defaultSessionName}${Date.now() * 1000}`,
@@ -224,24 +222,21 @@ export class OIDCRoleArnCredential implements DynamicCredential {
       ProviderId: providerId,
     }
   }
-  
+
   protected async getCredentialWithStsAssumeRoleWithWebIdentity(): Promise<CredentialResult> {
     try {
       if (this.isTke) {
         this.initFromTke()
       }
 
-      const {endpoint, version, action, region, clientConfig, assumeRoleWithWebIdentityParams} = this
-      const client = new CommonClient(
-        endpoint,
-        version,
-        {
-          region: region,
-          ...clientConfig,
-        }
-      );
+      const { endpoint, version, action, region, clientConfig, assumeRoleWithWebIdentityParams } =
+        this
+      const client = new CommonClient(endpoint, version, {
+        region: region,
+        ...clientConfig,
+      })
       const result = await client.request(action, assumeRoleWithWebIdentityParams)
-  
+
       return {
         TmpSecretId: result.Credentials.TmpSecretId,
         TmpSecretKey: result.Credentials.TmpSecretKey,
@@ -249,7 +244,7 @@ export class OIDCRoleArnCredential implements DynamicCredential {
         ExpiredTime: result.ExpiredTime,
         Expiration: result.Expiration,
       }
-    } catch(error) {
+    } catch (error) {
       throw new Error(`Get STS AssumeRoleWithWebIdentity failed: ${(error as any).message}`)
     }
   }
@@ -285,7 +280,7 @@ export class DefaultCredentialProvider implements DynamicCredential {
       new EnvironmentVariableCredential(),
       new ProfileCredential(),
       new CvmRoleCredential(),
-      new OIDCRoleArnCredential()
+      new OIDCRoleArnCredential(),
     ]
   }
 
@@ -302,7 +297,7 @@ export class DefaultCredentialProvider implements DynamicCredential {
         continue
       }
     }
-    
-    return new BasicCredential('', '')
+
+    return new BasicCredential("", "")
   }
 }

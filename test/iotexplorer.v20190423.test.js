@@ -1128,9 +1128,9 @@ it("iotexplorer.v20190423.BindProducts", async function () {
     }
 })
 
-it("iotexplorer.v20190423.RemoveUserByRoomIdFromTRTC", async function () {
+it("iotexplorer.v20190423.DescribeSubscribedTopicPolicy", async function () {
     try {
-       const data = await client.RemoveUserByRoomIdFromTRTC({})
+       const data = await client.DescribeSubscribedTopicPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1241,6 +1241,16 @@ it("iotexplorer.v20190423.DescribeFirmware", async function () {
 it("iotexplorer.v20190423.DescribeDeviceFirmwares", async function () {
     try {
        const data = await client.DescribeDeviceFirmwares({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.RemoveUserByRoomIdFromTRTC", async function () {
+    try {
+       const data = await client.RemoveUserByRoomIdFromTRTC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

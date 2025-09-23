@@ -121,6 +121,7 @@ import {
   ModifyStaffResponse,
   ModifyExtensionRequest,
   CreatePredictiveDialingCampaignResponse,
+  DescribeAIAnalysisResultResponse,
   UpdatePredictiveDialingCampaignResponse,
   ModifyOwnNumberApplyRequest,
   PSTNSessionInfo,
@@ -173,6 +174,7 @@ import {
   SkillGroupItem,
   MessageBody,
   PhoneNumBuyInfo,
+  DescribeAIAnalysisResultRequest,
   ModifyCompanyApplyResponse,
   DescribeCCCBuyInfoListResponse,
   ActiveCarrierPrivilegeNumber,
@@ -210,6 +212,7 @@ import {
   AILatencyStatistics,
   StaffStatus,
   DescribeIMCdrListRequest,
+  AIAnalysisResult,
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
   DescribeTelSessionResponse,
@@ -263,13 +266,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改客服账号
+   * 获取 AI 会话分析结果
    */
-  async ModifyStaff(
-    req: ModifyStaffRequest,
-    cb?: (error: string, rep: ModifyStaffResponse) => void
-  ): Promise<ModifyStaffResponse> {
-    return this.request("ModifyStaff", req, cb)
+  async DescribeAIAnalysisResult(
+    req: DescribeAIAnalysisResultRequest,
+    cb?: (error: string, rep: DescribeAIAnalysisResultResponse) => void
+  ): Promise<DescribeAIAnalysisResultResponse> {
+    return this.request("DescribeAIAnalysisResult", req, cb)
   }
 
   /**
@@ -514,6 +517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadIvrAudioResponse) => void
   ): Promise<UploadIvrAudioResponse> {
     return this.request("UploadIvrAudio", req, cb)
+  }
+
+  /**
+   * 修改客服账号
+   */
+  async ModifyStaff(
+    req: ModifyStaffRequest,
+    cb?: (error: string, rep: ModifyStaffResponse) => void
+  ): Promise<ModifyStaffResponse> {
+    return this.request("ModifyStaff", req, cb)
   }
 
   /**

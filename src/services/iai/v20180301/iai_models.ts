@@ -1139,22 +1139,21 @@ export interface DenseFaceShape {
 
 /**
  * 识别结果。
-
  */
 export interface ResultsReturnsByGroup {
   /**
    * 检测出的人脸框位置。
    */
-  FaceRect: FaceRect
+  FaceRect?: FaceRect
   /**
    * 识别结果。
    */
-  GroupCandidates: Array<GroupCandidate>
+  GroupCandidates?: Array<GroupCandidate>
   /**
    * 检测出的人脸图片状态返回码。0 表示正常。 
 -1601代表不符合图片质量控制要求，此时Candidate内容为空。
    */
-  RetCode: number
+  RetCode?: number
 }
 
 /**
@@ -1814,28 +1813,28 @@ export interface PersonInfo {
   /**
    * 人员名称
    */
-  PersonName: string
+  PersonName?: string
   /**
    * 人员Id
    */
-  PersonId: string
+  PersonId?: string
   /**
    * 人员性别
    */
-  Gender: number
+  Gender?: number
   /**
    * 人员描述字段内容
    */
-  PersonExDescriptions: Array<string>
+  PersonExDescriptions?: Array<string>
   /**
    * 包含的人脸照片列表
    */
-  FaceIds: Array<string>
+  FaceIds?: Array<string>
   /**
    * 人员的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。
    */
-  CreationTimestamp: number
+  CreationTimestamp?: number
 }
 
 /**

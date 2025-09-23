@@ -3001,7 +3001,7 @@ export interface DescribeInstanceAccountRequest {
    */
   InstanceId: string
   /**
-   * 分页大小。
+   * 分页大小。默认值为20，最小值为1，最大值为100。
    */
   Limit: number
   /**
@@ -3223,7 +3223,7 @@ export interface ModifyInstanceEventRequest {
    */
   InstanceId: string
   /**
-   * 事件 ID。请通过 DescribeInstanceEvents 获取需修改的事件 ID。
+   * 事件 ID。请通过 [DescribeInstanceEvents](https://cloud.tencent.com/document/product/239/104779) 获取需修改的事件 ID。
    */
   EventId: number
   /**
@@ -4193,7 +4193,7 @@ export interface InstanceNode {
  */
 export interface ModifyInstanceBackupModeResponse {
   /**
-   * 任务ID
+   * 任务 ID。
    */
   TaskId?: number
   /**
@@ -5961,13 +5961,13 @@ export interface DescribeRedisClustersResponse {
  */
 export interface ModifyInstanceBackupModeRequest {
   /**
-   * 实例的ID，长度在12-36之间。
+   * 实例的ID。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
   InstanceId: string
   /**
    * 备份模式：
-- SecondLevelBackup   秒级备份
-- NormalLevelBackup    普通备份
+- SecondLevelBackup   秒级备份。
+- NormalLevelBackup    普通备份。
    */
   BackupMode?: string
 }
