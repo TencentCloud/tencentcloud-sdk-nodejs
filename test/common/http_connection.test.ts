@@ -103,5 +103,19 @@ describe("HttpConnection", () => {
       expect(mockCalls.body).toBe('{"Number":123456789012345678901234567890}')
       expect(result).toBe(mockResolvedValue)
     })
+
+    it("should be no token header when the token does not exist", async() => {
+       mockFetch.mockResolvedValue(mockResolvedValue)
+
+      const params = {
+        ...defaultArgs
+      }
+      delete params.token
+      const result = await HttpConnection.doRequestWithSign3(params)
+
+      const mockCalls = mockFetch.mock.calls[0][1]
+      expect(mockCalls.headers["X-TC-Token"]).toBeUndefined()
+      expect(result).toBe(mockResolvedValue)
+    })
   })
 })
