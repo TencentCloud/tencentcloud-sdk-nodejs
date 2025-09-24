@@ -23,7 +23,7 @@ import {
   AdvanceHttps,
   Revalidate,
   ResourceData,
-  UrlRecord,
+  UserAgentFilter,
   OthersPrivateAccess,
   DescribePushQuotaResponse,
   DescribePurgeQuotaResponse,
@@ -40,7 +40,6 @@ import {
   PurgePathCacheResponse,
   RangeOriginPull,
   DomainFilter,
-  DescribeCdnOriginIpResponse,
   ParamFilter,
   SpecificConfig,
   DescribeTopDataRequest,
@@ -48,13 +47,12 @@ import {
   DescribePurgeQuotaRequest,
   ModifyPurgeFetchTaskStatusRequest,
   Referer,
-  UserAgentFilter,
   DescribeCdnDataResponse,
   EnableClsLogTopicRequest,
   UpdateImageConfigResponse,
   CacheConfigNoCache,
   AccessControl,
-  DeleteCdnDomainRequest,
+  DescribeCdnOriginIpResponse,
   DescribePayTypeResponse,
   ForceRedirect,
   PathRule,
@@ -70,7 +68,6 @@ import {
   Origin,
   AdvancedAuthenticationTypeF,
   TopData,
-  EnableCachesRequest,
   ClsLogIpData,
   HeaderKey,
   DescribeBillingDataRequest,
@@ -106,7 +103,7 @@ import {
   AddCdnDomainRequest,
   UserAgentFilterRule,
   UpdateDomainConfigRequest,
-  Tag,
+  ShareCname,
   CacheConfigFollowOrigin,
   MaxAgeRule,
   AdvancedAuthenticationTypeE,
@@ -138,18 +135,15 @@ import {
   ServerCert,
   AccessControlRule,
   HttpHeaderPathRule,
-  DisableCachesRequest,
   DescribeEdgePackTaskStatusResponse,
   DistrictIspInfo,
   AddCLSTopicDomainsResponse,
   SimpleCacheRule,
   ModifyPurgeFetchTaskStatusResponse,
   DisableClsLogTopicResponse,
-  Hsts,
   DescribeIpStatusRequest,
   DetailDomain,
   RuleEngine,
-  GetDisableRecordsResponse,
   Ipv6Access,
   HeuristicCache,
   DuplicateDomainConfigResponse,
@@ -182,14 +176,13 @@ import {
   CreateClsLogTopicRequest,
   UpdatePayTypeResponse,
   RequestHeader,
-  CacheOptResult,
+  Hsts,
   ListTopClsLogDataRequest,
   CreateVerifyRecordResponse,
   StopCdnDomainRequest,
   DescribeMapInfoResponse,
   DescribeTrafficPackagesResponse,
   DescribeMapInfoRequest,
-  EnableCachesResponse,
   RuleQueryString,
   DescribeIpVisitRequest,
   HttpHeaderRule,
@@ -197,12 +190,10 @@ import {
   ClientCert,
   DomainLog,
   DescribeEdgePackTaskStatusRequest,
-  GetDisableRecordsRequest,
   CreateDiagnoseUrlRequest,
   PurgeUrlsCacheResponse,
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
-  DisableCachesResponse,
   SchemeKey,
   StatisticItem,
   DescribeImageConfigRequest,
@@ -219,7 +210,7 @@ import {
   KeyRule,
   ParamFilterRule,
   CappingRule,
-  ShareCname,
+  PushTask,
   ListClsLogTopicsRequest,
   Seo,
   BandwidthAlert,
@@ -235,7 +226,7 @@ import {
   StartCdnDomainRequest,
   OriginPullOptimization,
   ErrorPage,
-  PushTask,
+  DeleteCdnDomainRequest,
   CreateEdgePackTaskResponse,
   ReportData,
   StartCdnDomainResponse,
@@ -264,6 +255,7 @@ import {
   VideoSeek,
   Compatibility,
   ModifyDomainConfigRequest,
+  Tag,
   ClsSearchLogs,
   DescribeUrlViolationsResponse,
   IpFilter,
@@ -544,14 +536,13 @@ CreateDiagnoseUrl 用于添加域名诊断任务URL。
   }
 
   /**
-     * ### <font color=red>**该接口已废弃** </font><br>
-DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。
-     */
-  async DisableCaches(
-    req: DisableCachesRequest,
-    cb?: (error: string, rep: DisableCachesResponse) => void
-  ): Promise<DisableCachesResponse> {
-    return this.request("DisableCaches", req, cb)
+   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   */
+  async ListTopClsLogData(
+    req: ListTopClsLogDataRequest,
+    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
+  ): Promise<ListTopClsLogDataResponse> {
+    return this.request("ListTopClsLogData", req, cb)
   }
 
   /**
@@ -847,19 +838,6 @@ DescribeDiagnoseReport 用于获取指定报告id的内容。
   }
 
   /**
-     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
-
-### <font color=red>**该接口已废弃** </font><br>
-GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
-     */
-  async GetDisableRecords(
-    req: GetDisableRecordsRequest,
-    cb?: (error: string, rep: GetDisableRecordsResponse) => void
-  ): Promise<GetDisableRecordsResponse> {
-    return this.request("GetDisableRecords", req, cb)
-  }
-
-  /**
    * DeleteClsLogTopic 用于删除日志主题。注意：删除后，所有该日志主题下绑定域名的日志将不再继续投递至该主题，已经投递的日志将会被全部清空。生效时间约为 5~15 分钟。
    */
   async DeleteClsLogTopic(
@@ -939,26 +917,5 @@ GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
     cb?: (error: string, rep: UpdatePayTypeResponse) => void
   ): Promise<UpdatePayTypeResponse> {
     return this.request("UpdatePayType", req, cb)
-  }
-
-  /**
-     * ### <font color=red>**该接口已废弃** </font><br>
-EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时间约 5~10 分钟。
-     */
-  async EnableCaches(
-    req: EnableCachesRequest,
-    cb?: (error: string, rep: EnableCachesResponse) => void
-  ): Promise<EnableCachesResponse> {
-    return this.request("EnableCaches", req, cb)
-  }
-
-  /**
-   * 通过CLS日志计算Top信息。支持近7天的日志数据。
-   */
-  async ListTopClsLogData(
-    req: ListTopClsLogDataRequest,
-    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
-  ): Promise<ListTopClsLogDataResponse> {
-    return this.request("ListTopClsLogData", req, cb)
   }
 }

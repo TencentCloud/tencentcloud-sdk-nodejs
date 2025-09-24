@@ -56,7 +56,7 @@ export class Client extends AbstractClient {
 
   /**
      * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
-默认提供3个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+默认提供3个并发，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
      */
   async SubmitHunyuanTo3DProJob(
     req: SubmitHunyuanTo3DProJobRequest,
@@ -89,7 +89,7 @@ export class Client extends AbstractClient {
 
   /**
      * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
-默认提供3个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+默认提供3个并发，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
      */
   async QueryHunyuanTo3DProJob(
     req: QueryHunyuanTo3DProJobRequest,

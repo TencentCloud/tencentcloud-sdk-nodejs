@@ -271,17 +271,17 @@ export interface FaceHairAttributesInfo {
    * 0：光头，1：短发，2：中发，3：长发，4：绑发
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Length: number
+  Length?: number
   /**
    * 0：有刘海，1：无刘海
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bang: number
+  Bang?: number
   /**
    * 0：黑色，1：金色，2：棕色，3：灰白色
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Color: number
+  Color?: number
 }
 
 /**
@@ -1066,75 +1066,75 @@ export interface DenseFaceShape {
   /**
    * 人脸框左上角横坐标。
    */
-  X: number
+  X?: number
   /**
    * 人脸框左上角纵坐标。
    */
-  Y: number
+  Y?: number
   /**
    * 人脸框宽度。
    */
-  Width: number
+  Width?: number
   /**
    * 人脸框高度。
    */
-  Height: number
+  Height?: number
   /**
    * 描述左侧眼睛轮廓的 XX 点。
    */
-  LeftEye: Array<Point>
+  LeftEye?: Array<Point>
   /**
    * 描述右侧眼睛轮廓的 XX 点。
    */
-  RightEye: Array<Point>
+  RightEye?: Array<Point>
   /**
    * 描述左侧眉毛轮廓的 XX 点。
    */
-  LeftEyeBrow: Array<Point>
+  LeftEyeBrow?: Array<Point>
   /**
    * 描述右侧眉毛轮廓的 XX 点。
    */
-  RightEyeBrow: Array<Point>
+  RightEyeBrow?: Array<Point>
   /**
    * 描述外嘴巴轮廓的 XX 点， 从左侧开始逆时针返回。
    */
-  MouthOutside: Array<Point>
+  MouthOutside?: Array<Point>
   /**
    * 描述内嘴巴轮廓的 XX 点，从左侧开始逆时针返回。
    */
-  MouthInside: Array<Point>
+  MouthInside?: Array<Point>
   /**
    * 描述鼻子轮廓的 XX 点。
    */
-  Nose: Array<Point>
+  Nose?: Array<Point>
   /**
    * 左瞳孔轮廓的 XX 个点。
    */
-  LeftPupil: Array<Point>
+  LeftPupil?: Array<Point>
   /**
    * 右瞳孔轮廓的 XX 个点。
    */
-  RightPupil: Array<Point>
+  RightPupil?: Array<Point>
   /**
    * 中轴线轮廓的 XX 个点。
    */
-  CentralAxis: Array<Point>
+  CentralAxis?: Array<Point>
   /**
    * 下巴轮廓的 XX 个点。
    */
-  Chin: Array<Point>
+  Chin?: Array<Point>
   /**
    * 左眼袋的 XX 个点。
    */
-  LeftEyeBags: Array<Point>
+  LeftEyeBags?: Array<Point>
   /**
    * 右眼袋的 XX 个点。
    */
-  RightEyeBags: Array<Point>
+  RightEyeBags?: Array<Point>
   /**
    * 额头的 XX 个点。
    */
-  Forehead: Array<Point>
+  Forehead?: Array<Point>
 }
 
 /**

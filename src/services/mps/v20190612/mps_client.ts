@@ -68,6 +68,7 @@ import {
   AiReviewPoliticalOcrTaskInput,
   SmartSubtitleTaskTransTextResult,
   ManageTaskRequest,
+  CreateSmartEraseTemplateRequest,
   FlowInOutResp,
   EnhanceConfig,
   MediaInputInfo,
@@ -91,6 +92,7 @@ import {
   CreateInputHLSPullSettings,
   DeleteStreamLinkSecurityGroupRequest,
   ContentReviewTemplateItem,
+  ModifySmartEraseTemplateResponse,
   ModifyStreamLinkFlowResponse,
   DeleteAIRecognitionTemplateResponse,
   VideoEnhanceConfig,
@@ -219,6 +221,7 @@ import {
   CreateWordSamplesRequest,
   SmartEraseWatermarkConfig,
   DescribeStreamLinkEventsResponse,
+  DescribeSmartEraseTemplatesRequest,
   PoliticalAsrReviewTemplateInfoForUpdate,
   DescribeStreamLinkFlowStatisticsRequest,
   AiSampleFaceOperation,
@@ -355,6 +358,7 @@ import {
   FlowStatistics,
   BatchSmartSubtitlesResult,
   CreateInputSRTSettings,
+  ModifySmartEraseTemplateRequest,
   DescribeGroupAttachFlowsByIdRequest,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
@@ -376,6 +380,7 @@ import {
   ModifyAsrHotwordsResponse,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   ModifyImageSpriteTemplateResponse,
+  MediaContentReviewAsrTextSegmentItem,
   CreateInputRISTSettings,
   CreateWatermarkTemplateRequest,
   ScheduleAnalysisTaskResult,
@@ -438,7 +443,7 @@ import {
   AiReviewTaskTerrorismResult,
   DescribeOutput,
   LiveStreamAiReviewVoicePornResult,
-  MediaContentReviewAsrTextSegmentItem,
+  DeleteSmartEraseTemplateRequest,
   MediaContentReviewPoliticalSegmentItem,
   DeletePersonSampleResponse,
   StartStreamLinkFlowRequest,
@@ -528,6 +533,7 @@ import {
   DescribeStreamLinkFlowsRequest,
   HLSConfigureInfo,
   CreateAIAnalysisTemplateResponse,
+  CreateSmartEraseTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   OutputRISTSourceAddressResp,
   ModifySmartSubtitleTemplateResponse,
@@ -551,6 +557,7 @@ import {
   AiRecognitionTaskAsrFullTextResult,
   ModifyAIRecognitionTemplateResponse,
   PoliticalImgReviewTemplateInfo,
+  ExecRulesTask,
   PoliticalConfigureInfo,
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeOutputRTMPPullServerUrl,
@@ -609,6 +616,7 @@ import {
   AiRecognitionTaskOcrFullTextResultInput,
   DeleteStreamLinkEventResponse,
   DescribeTasksResponse,
+  ModifyImageSpriteTemplateRequest,
   DescribeOutputSRTSettings,
   AiRecognitionTaskFaceResultInput,
   VolumeBalanceConfig,
@@ -644,7 +652,7 @@ import {
   LiveStreamAiReviewImageTerrorismResult,
   ProcessLiveStreamRequest,
   AiAnalysisTaskHorizontalToVerticalOutput,
-  FailOverOption,
+  DescribeSmartEraseTemplatesResponse,
   TimeSpotCheck,
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
@@ -709,7 +717,7 @@ import {
   CreateSampleSnapshotTemplateRequest,
   WorkflowTask,
   FlowMediaVideo,
-  ExecRulesTask,
+  DeleteSmartEraseTemplateResponse,
   AiReviewTaskPornAsrResult,
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
@@ -761,19 +769,20 @@ import {
   CreateSmartSubtitleTemplateResponse,
   LiveStreamAiAnalysisResultItem,
   AiRecognitionTaskTransTextResult,
-  DescribeAIRecognitionTemplatesRequest,
+  DescribeGroupAttachFlowsByIdResponse,
   BatchStopStreamLinkFlowResponse,
   EditMediaTaskOutput,
   HighlightSegmentItem,
+  SmartEraseTemplateItem,
   DeleteWatermarkTemplateResponse,
   ResilientStreamConf,
   DescribeOutputRTSPPullServerUrl,
-  ModifyImageSpriteTemplateRequest,
+  FailOverOption,
   LowLightEnhanceConfig,
   DescribeMediaMetaDataRequest,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
-  DescribeGroupAttachFlowsByIdResponse,
+  DescribeAIRecognitionTemplatesRequest,
   AiRecognitionTaskTransTextSegmentItem,
   ModifyWatermarkTemplateResponse,
   AiRecognitionResult,
@@ -1229,6 +1238,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体传输流的输出配置。
+   */
+  async ModifyStreamLinkOutputInfo(
+    req: ModifyStreamLinkOutputInfoRequest,
+    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
+  ): Promise<ModifyStreamLinkOutputInfoResponse> {
+    return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  }
+
+  /**
    * 根据安全组反差关联的Flow信息。
    */
   async DescribeGroupAttachFlowsById(
@@ -1427,6 +1446,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据智能擦除模板唯一标识，获取智能擦除模板详情列表。返回结果包含符合条件的所有用户自定义智能擦除模板及系统预置智能擦除模板
+   */
+  async DescribeSmartEraseTemplates(
+    req: DescribeSmartEraseTemplatesRequest,
+    cb?: (error: string, rep: DescribeSmartEraseTemplatesResponse) => void
+  ): Promise<DescribeSmartEraseTemplatesResponse> {
+    return this.request("DescribeSmartEraseTemplates", req, cb)
+  }
+
+  /**
+   * 修改用户自定义智能擦除模板。
+   */
+  async ModifySmartEraseTemplate(
+    req: ModifySmartEraseTemplateRequest,
+    cb?: (error: string, rep: ModifySmartEraseTemplateResponse) => void
+  ): Promise<ModifySmartEraseTemplateResponse> {
+    return this.request("ModifySmartEraseTemplate", req, cb)
+  }
+
+  /**
    * 创建自定义智能字幕模板
    */
   async CreateSmartSubtitleTemplate(
@@ -1547,13 +1586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改媒体传输流的输出配置。
+   * 修改用户自定义内容识别模板。
    */
-  async ModifyStreamLinkOutputInfo(
-    req: ModifyStreamLinkOutputInfoRequest,
-    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
-  ): Promise<ModifyStreamLinkOutputInfoResponse> {
-    return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  async ModifyAIRecognitionTemplate(
+    req: ModifyAIRecognitionTemplateRequest,
+    cb?: (error: string, rep: ModifyAIRecognitionTemplateResponse) => void
+  ): Promise<ModifyAIRecognitionTemplateResponse> {
+    return this.request("ModifyAIRecognitionTemplate", req, cb)
   }
 
   /**
@@ -2112,6 +2151,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建自定义智能擦除模板
+   */
+  async CreateSmartEraseTemplate(
+    req: CreateSmartEraseTemplateRequest,
+    cb?: (error: string, rep: CreateSmartEraseTemplateResponse) => void
+  ): Promise<CreateSmartEraseTemplateResponse> {
+    return this.request("CreateSmartEraseTemplate", req, cb)
+  }
+
+  /**
    * 修改用户自定义内容审核模板。
    */
   async ModifyContentReviewTemplate(
@@ -2142,13 +2191,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义内容识别模板。
+   * 删除用户自定义智能擦除模板。
    */
-  async ModifyAIRecognitionTemplate(
-    req: ModifyAIRecognitionTemplateRequest,
-    cb?: (error: string, rep: ModifyAIRecognitionTemplateResponse) => void
-  ): Promise<ModifyAIRecognitionTemplateResponse> {
-    return this.request("ModifyAIRecognitionTemplate", req, cb)
+  async DeleteSmartEraseTemplate(
+    req: DeleteSmartEraseTemplateRequest,
+    cb?: (error: string, rep: DeleteSmartEraseTemplateResponse) => void
+  ): Promise<DeleteSmartEraseTemplateResponse> {
+    return this.request("DeleteSmartEraseTemplate", req, cb)
   }
 
   /**

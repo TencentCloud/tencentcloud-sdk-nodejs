@@ -428,6 +428,16 @@ it("mps.v20190612.CreateContentReviewTemplate", async function () {
     }
 })
 
+it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
+    try {
+       const data = await client.ModifyStreamLinkOutputInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeGroupAttachFlowsById", async function () {
     try {
        const data = await client.DescribeGroupAttachFlowsById({})
@@ -618,6 +628,26 @@ it("mps.v20190612.ModifyStreamLinkInput", async function () {
     }
 })
 
+it("mps.v20190612.DescribeSmartEraseTemplates", async function () {
+    try {
+       const data = await client.DescribeSmartEraseTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifySmartEraseTemplate", async function () {
+    try {
+       const data = await client.ModifySmartEraseTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateSmartSubtitleTemplate", async function () {
     try {
        const data = await client.CreateSmartSubtitleTemplate({})
@@ -738,9 +768,9 @@ it("mps.v20190612.DescribeSmartSubtitleTemplates", async function () {
     }
 })
 
-it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
+it("mps.v20190612.ModifyAIRecognitionTemplate", async function () {
     try {
-       const data = await client.ModifyStreamLinkOutputInfo({})
+       const data = await client.ModifyAIRecognitionTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,6 +1298,16 @@ it("mps.v20190612.DisassociateSecurityGroup", async function () {
     }
 })
 
+it("mps.v20190612.CreateSmartEraseTemplate", async function () {
+    try {
+       const data = await client.CreateSmartEraseTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyContentReviewTemplate", async function () {
     try {
        const data = await client.ModifyContentReviewTemplate({})
@@ -1298,9 +1338,9 @@ it("mps.v20190612.BatchStopStreamLinkFlow", async function () {
     }
 })
 
-it("mps.v20190612.ModifyAIRecognitionTemplate", async function () {
+it("mps.v20190612.DeleteSmartEraseTemplate", async function () {
     try {
-       const data = await client.ModifyAIRecognitionTemplate({})
+       const data = await client.DeleteSmartEraseTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

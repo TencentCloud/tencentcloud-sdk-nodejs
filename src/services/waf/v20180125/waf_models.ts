@@ -377,7 +377,7 @@ export interface LoadBalancerPackageNew {
   Protocol: string
   /**
    * 地区
-"多伦多": "ca",
+    "多伦多": "ca",
     "广州": "gz",
     "成都": "cd",
     "福州": "fzec",
@@ -404,7 +404,8 @@ export interface LoadBalancerPackageNew {
     "首尔": "kr",
     "上海": "sh",
     "新加坡": "sg",
-    "清远": "qy"
+    "清远": "qy",
+    "雅加达": "jkt"
    */
   Region: string
   /**
@@ -958,6 +959,20 @@ export interface DescribeExportsRequest {
 }
 
 /**
+ * JWT显示设置（只有当校验方式为JWS/JWE的时候才会有该配置信息）
+ */
+export interface TokenDisplaySetting {
+  /**
+   * 是否使用payload字段作为显示token
+   */
+  DisplayWithPayloadEnable?: boolean
+  /**
+   * 用于显示的payload字段名
+   */
+  FieldName?: string
+}
+
+/**
  * Key-Value的形式，Value为Int
  */
 export interface KVInt {
@@ -1041,6 +1056,10 @@ export interface BotToken {
    * 优先级
    */
   Priority?: number
+  /**
+   * token有效性配置信息
+   */
+  TokenValidation?: TokenValidation
 }
 
 /**
@@ -2654,6 +2673,10 @@ https：使用https协议回源
    */
   CipherTemplate?: number
   /**
+   * WAF与源站的连接超时时间，默认10s。
+   */
+  ProxyConnectTimeout?: number
+  /**
    * WAF与源站的读超时时间，默认300s。
    */
   ProxyReadTimeout?: number
@@ -2737,6 +2760,10 @@ https：使用https协议回源
    * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
    */
   UseCase?: number
+  /**
+   * gzip开关。0：关闭 1：默认值，打开
+   */
+  Gzip?: number
 }
 
 /**
@@ -3215,6 +3242,10 @@ export interface DescribeCustomRulesRspRuleListItem {
    * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
    */
   LogicalOp?: string
+  /**
+   * 规则灰度的比例，默认是100，不灰度
+   */
+  ActionRatio?: number
 }
 
 /**
@@ -4687,6 +4718,10 @@ export interface ApiDataFilter {
    * 日期，手机号，邮箱等
    */
   Value: string
+  /**
+   * 风险等级
+   */
+  ValueList?: Array<string>
 }
 
 /**
@@ -5446,6 +5481,20 @@ export interface FraudPkg {
    * 续费标志
    */
   RenewFlag?: number
+}
+
+/**
+ * 当用户选择JWS/JWE会话管理方式的时候，上传的配置信息以及校验规则
+ */
+export interface JWTConfig {
+  /**
+   * 密钥信息
+   */
+  SecretInfo?: SecretInfo
+  /**
+   * Payload校验规则集合
+   */
+  PayloadRule?: Array<TokenRuleEntry>
 }
 
 /**
@@ -6763,6 +6812,48 @@ export interface AddDomainWhiteRuleResponse {
 }
 
 /**
+ * 有效REC设备安全包信息
+ */
+export interface RCEPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 申请数量
+   */
+  InquireNum?: number
+  /**
+   * 使用数量
+   */
+  UsedNum?: number
+  /**
+   * 续费标志
+   */
+  RenewFlag?: number
+  /**
+   * 计费项
+   */
+  BillingItem?: string
+}
+
+/**
  * DescribeIpAccessControl返回参数结构体
  */
 export interface DescribeIpAccessControlResponse {
@@ -7238,6 +7329,10 @@ export interface SessionItem {
    * Session关联的CC规则ID
    */
   RelatedRuleID?: Array<number | bigint>
+  /**
+   * 精准匹配时，配置的key
+   */
+  Key?: string
 }
 
 /**
@@ -7390,6 +7485,28 @@ export interface IpAccessControlParam {
    * 备注
    */
   Note?: string
+}
+
+/**
+ * token有效性配置信息
+ */
+export interface TokenValidation {
+  /**
+   * 是否开启token有效性校验
+   */
+  Enable?: boolean
+  /**
+   * token有效性的校验方式，可选值为：jws、jwe、contains、len、regex
+   */
+  VerifyType?: string
+  /**
+   * 有效性校验配置和规则
+   */
+  VerifyRule?: TokenVerifyRule
+  /**
+   * Token显示设置（只有当校验方式为jws/jwe的时候才会有该配置信息）
+   */
+  DisplaySetting?: TokenDisplaySetting
 }
 
 /**
@@ -7709,13 +7826,13 @@ export interface DeleteSpartaProtectionRequest {
    */
   Domains: Array<string>
   /**
+   * 必填项。域名所属实例ID
+   */
+  InstanceID: string
+  /**
    * 实例类型
    */
   Edition?: string
-  /**
-   * 必填项。域名所属实例ID
-   */
-  InstanceID?: string
 }
 
 /**
@@ -8731,6 +8848,23 @@ export interface InstanceInfo {
    * 实例的网络配置
    */
   NetworkConfig?: NetworkConfig
+  /**
+   * RCE设备安全信息包
+   */
+  RCEPkg?: RCEPkg
+  /**
+   * 超量策略。0：超量沙箱
+1：超量限流
+   */
+  ExceedPolicy?: number
+  /**
+   * 大模型安全信息包
+   */
+  LLMPkg?: LLMPkg
+  /**
+   * 弹性资源Id
+   */
+  ElasticResourceId?: string
 }
 
 /**
@@ -9186,6 +9320,36 @@ export interface DeleteBatchIpAccessControlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 有效大模型安全包信息
+ */
+export interface LLMPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 计费项
+   */
+  InquireKey?: string
 }
 
 /**
@@ -9983,6 +10147,36 @@ export interface UpsertCCRuleRequest {
    * 配置方式的逻辑操作符，and或者or
    */
   LogicalOp?: string
+  /**
+   * 页面ID
+   */
+  PageId?: string
+  /**
+   * 动作灰度比例，默认值100
+   */
+  ActionRatio?: number
+}
+
+/**
+ * Token有效性校验规则
+ */
+export interface TokenRuleEntry {
+  /**
+   * 校验方式，可选值：验签校验、字段校验
+   */
+  Type?: string
+  /**
+   * 键
+   */
+  Key?: string
+  /**
+   * 操作符
+   */
+  Op?: string
+  /**
+   * 值
+   */
+  Value?: TokenRuleEntryValue
 }
 
 /**
@@ -10470,6 +10664,10 @@ export interface ModifyCustomRuleRequest {
    * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
    */
   LogicalOp?: string
+  /**
+   * 规则生效比例
+   */
+  ActionRatio?: number
 }
 
 /**
@@ -10725,7 +10923,7 @@ export interface CCRuleItems {
    */
   TsVersion?: number
   /**
-   * 规则详情
+   * key为匹配字段；args为base64编码后的参数，等于号前为匹配参数，等于号后为匹配内容；match为逻辑符号；encodeflag为参数内容是否编码
    */
   Options?: string
   /**
@@ -10756,6 +10954,14 @@ export interface CCRuleItems {
    * 逻辑操作符
    */
   LogicalOp?: string
+  /**
+   * 页面ID
+   */
+  PageId?: string
+  /**
+   * 动作灰度比例，默认值100
+   */
+  ActionRatio?: number
 }
 
 /**
@@ -10971,6 +11177,24 @@ export interface RuleList {
    * 创建时间
    */
   CreateTime?: string
+}
+
+/**
+ * 用于JWT验签的密钥信息
+ */
+export interface SecretInfo {
+  /**
+   * 密钥上传方式，可选值：manual、upload
+   */
+  SecretSource?: string
+  /**
+   * 密钥内容（用户手动输入/前端从密钥文件提取出的密钥内容）
+   */
+  SecretKey?: string
+  /**
+   * 上传的密钥文件文件名
+   */
+  FileName?: string
 }
 
 /**
@@ -11394,6 +11618,10 @@ https：使用https协议回源
    */
   CipherTemplate?: number
   /**
+   * WAF与源站的连接超时，默认10s。
+   */
+  ProxyConnectTimeout?: number
+  /**
    * WAF与源站的读超时时间，默认300s。
    */
   ProxyReadTimeout?: number
@@ -11493,6 +11721,10 @@ https：使用https协议回源
    * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
    */
   UseCase?: number
+  /**
+   * gzip开关。0：关闭 1：默认值，打开。
+   */
+  Gzip?: number
 }
 
 /**
@@ -11642,6 +11874,32 @@ UpstreamProtocol：与Protocol相同
    */
   InstanceID: string
   /**
+   * 必填项，是否开启HTTP强制跳转到HTTPS。
+0：不强制跳转
+1：开启强制跳转
+   */
+  HttpsRewrite: number
+  /**
+   * 必填项，是否开启HTTP2，需要开启HTTPS协议支持。
+0：关闭
+1：开启
+   */
+  IsHttp2: number
+  /**
+   * 必填项，是否开启主动健康检测。
+0：不开启
+1：开启
+   */
+  ActiveCheck: number
+  /**
+   * 必填项，加密套件模板。
+0：不支持选择，使用默认模板  
+1：通用型模板 
+2：安全型模板
+3：自定义模板
+   */
+  CipherTemplate: number
+  /**
    * CertType为1时，需要填充此参数，表示自有证书的证书链
    */
   Cert?: string
@@ -11683,12 +11941,6 @@ https：使用https协议回源
    */
   GrayAreas?: Array<string>
   /**
-   * 必填项，是否开启HTTP强制跳转到HTTPS。
-0：不强制跳转
-1：开启强制跳转
-   */
-  HttpsRewrite?: number
-  /**
    * 域名回源时的回源域名。UpstreamType为1时，需要填充此字段
    */
   UpstreamDomain?: string
@@ -11696,12 +11948,6 @@ https：使用https协议回源
    * IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段
    */
   SrcList?: Array<string>
-  /**
-   * 必填项，是否开启HTTP2，需要开启HTTPS协议支持。
-0：关闭
-1：开启
-   */
-  IsHttp2?: number
   /**
    * WAF实例类型。
 sparta-waf：SAAS型WAF
@@ -11720,27 +11966,17 @@ cdn-waf：CDN上的Web防护能力
    */
   Weights?: Array<number | bigint>
   /**
-   * 必填项，是否开启主动健康检测。
-0：不开启
-1：开启
-   */
-  ActiveCheck?: number
-  /**
    * TLS版本信息
    */
   TLSVersion?: number
   /**
-   * 必填项，加密套件模板。
-0：不支持选择，使用默认模板  
-1：通用型模板 
-2：安全型模板
-3：自定义模板
-   */
-  CipherTemplate?: number
-  /**
    * 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。
    */
   Ciphers?: Array<number | bigint>
+  /**
+   * WAF与源站的连接超时，默认10s。
+   */
+  ProxyConnectTimeout?: number
   /**
    * WAF与源站的读超时时间，默认300s。
    */
@@ -11821,6 +12057,10 @@ cdn-waf：CDN上的Web防护能力
    * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
    */
   UseCase?: number
+  /**
+   * gzip开关。0：关闭 1：默认值，打开。
+   */
+  Gzip?: number
 }
 
 /**
@@ -12131,6 +12371,26 @@ export interface CreateDealsGoods {
 9表示购买非中国大陆资源
    */
   RegionId?: number
+}
+
+/**
+ * 通过复杂类型识别传入的不同类型参数值
+ */
+export interface TokenRuleEntryValue {
+  /**
+   * 布尔类型值
+   */
+  LogicValue?: boolean
+  /**
+   * 数组类型值
+可以存储字符串/数值
+如果只有一个元素，则为长度为1的数组
+   */
+  MultiValue?: Array<string>
+  /**
+   * 指示有效的字段
+   */
+  ValidKey?: string
 }
 
 /**
@@ -12506,6 +12766,10 @@ export interface AddCustomRuleRequest {
    * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
    */
   LogicalOp?: string
+  /**
+   * 按照动作灰度的比例，默认是100
+   */
+  ActionRatio?: number
 }
 
 /**
@@ -12835,6 +13099,10 @@ export interface DescribeBotSceneOverviewResponse {
    */
   CustomRuleNums?: number
   /**
+   * 图灵盾开关状态
+   */
+  TldStatus?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12914,6 +13182,20 @@ export interface DescribeApiDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Token有效性校验规则
+ */
+export interface TokenVerifyRule {
+  /**
+   * JWS、JWE专用校验规则
+   */
+  JWTRule?: JWTConfig
+  /**
+   * 其他会话有效性校验方式(contains、length、regex)的校验规则
+   */
+  GeneralRule?: TokenRuleEntry
 }
 
 /**
@@ -13236,6 +13518,10 @@ export interface UpsertSessionRequest {
    * Session对应ID
    */
   SessionID?: number
+  /**
+   * 精准匹配时配置的key
+   */
+  Key?: string
 }
 
 /**

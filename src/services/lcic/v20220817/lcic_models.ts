@@ -21,6 +21,7 @@
 export interface CreateRoomRequest {
   /**
    * 课堂名称。
+字符数不超过256
    */
   Name: string
   /**
@@ -169,7 +170,9 @@ export interface CreateRoomRequest {
    */
   WhiteBoardSnapshotMode?: number
   /**
-   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   * 字幕转写功能开关。可以有以下取值：
+0 不开启字幕转写功能（默认值）
+1 自动转写模式：上课自动开启，下课自动停止
    */
   SubtitlesTranscription?: number
   /**
@@ -3020,6 +3023,7 @@ export interface SetWatermarkResponse {
 export interface RoomInfo {
   /**
    * 房间名称。
+字符数不超过256
    */
   Name: string
   /**
@@ -3144,7 +3148,9 @@ export interface RoomInfo {
    */
   WhiteBoardSnapshotMode?: number
   /**
-   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   * 字幕转写功能开关。可以有以下取值：
+0 不开启字幕转写功能（默认值）
+1 自动转写模式：上课自动开启，下课自动停止
    */
   SubtitlesTranscription?: number
   /**
@@ -3905,6 +3911,7 @@ export interface DescribeGroupListResponse {
 export interface ModifyRoomRequest {
   /**
    * 房间ID。
+字符数不超过256
    */
   RoomId: number
   /**
@@ -4032,7 +4039,9 @@ video 纯视频
    */
   WhiteBoardSnapshotMode?: number
   /**
-   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   * 字幕转写功能开关。可以有以下取值：
+0 不开启字幕转写功能（默认值）
+1 自动转写模式：上课自动开启，下课自动停止
    */
   SubtitlesTranscription?: number
   /**

@@ -118,16 +118,6 @@ it("lke.v20231130.StopWorkflowRun", async function () {
     }
 })
 
-it("lke.v20231130.ModifyAgent", async function () {
-    try {
-       const data = await client.ModifyAgent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("lke.v20231130.CreateAttributeLabel", async function () {
     try {
        const data = await client.CreateAttributeLabel({})
@@ -681,16 +671,6 @@ it("lke.v20231130.DescribeRobotBizIDByAppKey", async function () {
 it("lke.v20231130.ExportQAList", async function () {
     try {
        const data = await client.ExportQAList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("lke.v20231130.CreateAgent", async function () {
-    try {
-       const data = await client.CreateAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

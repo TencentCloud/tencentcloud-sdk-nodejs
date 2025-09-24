@@ -57,6 +57,7 @@ import {
   DescribeModuleStatusResponse,
   AccessKeyValueInfo,
   DescribeExportsRequest,
+  TokenDisplaySetting,
   KVInt,
   AddAntiInfoLeakRulesRequest,
   BotToken,
@@ -227,6 +228,7 @@ import {
   AddAttackWhiteRuleRequest,
   ModifyProtectionLevelResponse,
   FraudPkg,
+  JWTConfig,
   UCBEntryValue,
   DescribeDomainDetailsClbResponse,
   ExportAccessInfo,
@@ -279,6 +281,7 @@ import {
   BotSceneMatchCondition,
   DescribeAreaBanAreasRequest,
   AddDomainWhiteRuleResponse,
+  RCEPkg,
   DescribeIpAccessControlResponse,
   ModifyProtectionStatusRequest,
   CCRuleData,
@@ -309,6 +312,7 @@ import {
   Area,
   DescribeUserLevelResponse,
   IpAccessControlParam,
+  TokenValidation,
   DescribeCustomRuleListResponse,
   GetInstanceQpsLimitRequest,
   BotSceneInfo,
@@ -373,6 +377,7 @@ import {
   ModifyOwaspRuleStatusRequest,
   DeleteIpAccessControlV2Request,
   DeleteBatchIpAccessControlResponse,
+  LLMPkg,
   DescribeTopAttackDomainRequest,
   DescribeAccessFastAnalysisResponse,
   ModifyDomainIpv6StatusResponse,
@@ -407,6 +412,7 @@ import {
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
+  TokenRuleEntry,
   ModifyAreaBanRuleResponse,
   DescribeDomainsRequest,
   ModifyDomainPostActionRequest,
@@ -440,6 +446,7 @@ import {
   OwaspRule,
   GetAttackHistogramRequest,
   RuleList,
+  SecretInfo,
   DescribeAttackTypeRequest,
   ModifyCustomWhiteRuleRequest,
   DeleteCustomWhiteRuleRequest,
@@ -468,6 +475,7 @@ import {
   DeleteDomainWhiteRulesRequest,
   DescribeDomainVerifyResultRequest,
   CreateDealsGoods,
+  TokenRuleEntryValue,
   ModifyOwaspWhiteRuleResponse,
   ModifyApiSecEventChangeResponse,
   ModifyCustomWhiteRuleStatusResponse,
@@ -507,6 +515,7 @@ import {
   DescribeBotSceneOverviewResponse,
   DescribeVipInfoResponse,
   DescribeApiDetailResponse,
+  TokenVerifyRule,
   DescribeRuleLimitRequest,
   ModifyDomainPostActionResponse,
   ModifyDomainsCLSStatusRequest,
@@ -1665,7 +1674,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更改某一条规则
+   * 修改域名规则白名单
    */
   async ModifyDomainWhiteRule(
     req: ModifyDomainWhiteRuleRequest,

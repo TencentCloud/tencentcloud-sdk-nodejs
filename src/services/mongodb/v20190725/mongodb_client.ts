@@ -246,7 +246,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例用户的密码
+   * 本接口（ResetDBInstancePassword）用于重置实例访问密码。
    */
   async ResetDBInstancePassword(
     req: ResetDBInstancePasswordRequest,

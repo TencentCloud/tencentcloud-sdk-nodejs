@@ -1337,6 +1337,39 @@ export interface ManageTaskRequest {
 }
 
 /**
+ * CreateSmartEraseTemplate请求参数结构体
+ */
+export interface CreateSmartEraseTemplateRequest {
+  /**
+   * 智能擦除模板名称长度限制：64 个字符。
+   */
+  Name: string
+  /**
+   * 擦除类型
+- subtitle 去字幕
+- watermark 去水印
+- privacy 隐私保护
+   */
+  EraseType: string
+  /**
+   * 智能擦除模板描述信息长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 字幕擦除配置，EraseType取subtitle时必填且仅此时生效。
+   */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig
+  /**
+   * 水印擦除配置，EraseType取watermark时必填且仅此时生效。
+   */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig
+  /**
+   * 隐私保护配置，EraseType取privacy时必填且仅此时生效。
+   */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig
+}
+
+/**
  * 查询Flow的配置信息。
  */
 export interface FlowInOutResp {
@@ -2145,6 +2178,16 @@ export interface ContentReviewTemplateItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
+}
+
+/**
+ * ModifySmartEraseTemplate返回参数结构体
+ */
+export interface ModifySmartEraseTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5140,6 +5183,34 @@ export interface DescribeStreamLinkEventsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSmartEraseTemplates请求参数结构体
+ */
+export interface DescribeSmartEraseTemplatesRequest {
+  /**
+   * 智能擦除模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
+  /**
+   * 智能擦除模板名过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -8701,6 +8772,43 @@ export interface CreateInputSRTSettings {
 }
 
 /**
+ * ModifySmartEraseTemplate请求参数结构体
+ */
+export interface ModifySmartEraseTemplateRequest {
+  /**
+   * 智能擦除模板唯一标识
+   */
+  Definition: number
+  /**
+   * 智能擦除模板名称长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 智能擦除模板描述信息长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 擦除类型
+- subtitle 去字幕
+- watermark 去水印
+- privacy 隐私保护
+   */
+  EraseType?: string
+  /**
+   * 字幕擦除配置，EraseType取subtitle或者EraseType不填，对应模板原EraseType为subtitle时生效。
+   */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig
+  /**
+   * 水印擦除配置，EraseType取watermark或者EraseType不填，对应模板原EraseType为watermark时生效。
+   */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig
+  /**
+   * 隐私保护配置，EraseType取privacy或者EraseType不填，对应模板原EraseType为privacy时生效。
+   */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig
+}
+
+/**
  * DescribeGroupAttachFlowsById请求参数结构体
  */
 export interface DescribeGroupAttachFlowsByIdRequest {
@@ -9451,6 +9559,35 @@ export interface ModifyImageSpriteTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 内容审核 Asr 文字审核嫌疑片段
+ */
+export interface MediaContentReviewAsrTextSegmentItem {
+  /**
+   * 嫌疑片段起始的偏移时间，单位：秒。
+   */
+  StartTimeOffset?: number
+  /**
+   * 嫌疑片段结束的偏移时间，单位：秒。
+   */
+  EndTimeOffset?: number
+  /**
+   * 嫌疑片段置信度。
+   */
+  Confidence?: number
+  /**
+   * 嫌疑片段审核结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+   */
+  Suggestion?: string
+  /**
+   * 嫌疑关键词列表。
+   */
+  KeywordSet?: Array<string>
 }
 
 /**
@@ -11116,32 +11253,13 @@ export interface LiveStreamAiReviewVoicePornResult {
 }
 
 /**
- * 内容审核 Asr 文字审核嫌疑片段
+ * DeleteSmartEraseTemplate请求参数结构体
  */
-export interface MediaContentReviewAsrTextSegmentItem {
+export interface DeleteSmartEraseTemplateRequest {
   /**
-   * 嫌疑片段起始的偏移时间，单位：秒。
+   * 智能擦除模板唯一标识。
    */
-  StartTimeOffset?: number
-  /**
-   * 嫌疑片段结束的偏移时间，单位：秒。
-   */
-  EndTimeOffset?: number
-  /**
-   * 嫌疑片段置信度。
-   */
-  Confidence?: number
-  /**
-   * 嫌疑片段审核结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
-   */
-  Suggestion?: string
-  /**
-   * 嫌疑关键词列表。
-   */
-  KeywordSet?: Array<string>
+  Definition: number
 }
 
 /**
@@ -11688,7 +11806,7 @@ export interface SpekeDrm {
    */
   KeyServerUrl: string
   /**
-   * 加密初始化向量(32字节字符串)，该字段内容为用户自定义。
+   * 加密初始化向量(十六进制32字节字符串)，该字段内容为用户自定义。
    */
   Vector: string
   /**
@@ -13489,6 +13607,20 @@ export interface CreateAIAnalysisTemplateResponse {
 }
 
 /**
+ * CreateSmartEraseTemplate返回参数结构体
+ */
+export interface CreateSmartEraseTemplateResponse {
+  /**
+   * 智能擦除模板唯一标识
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对视频做采样截图任务结果类型
  */
 export interface MediaProcessTaskSampleSnapshotResult {
@@ -13998,6 +14130,17 @@ export interface PoliticalImgReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 95 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 任务判断条件
+ */
+export interface ExecRulesTask {
+  /**
+   * 条件判断信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<Rules>
 }
 
 /**
@@ -15430,6 +15573,80 @@ export interface DescribeTasksResponse {
 }
 
 /**
+ * ModifyImageSpriteTemplate请求参数结构体
+ */
+export interface ModifyImageSpriteTemplateRequest {
+  /**
+   * 雪碧图模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 雪碧图模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Width?: number
+  /**
+   * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Height?: number
+  /**
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+   */
+  ResolutionAdaptive?: string
+  /**
+   * 采样类型，取值：
+<li>Percent：按百分比。</li>
+<li>Time：按时间间隔。</li>
+   */
+  SampleType?: string
+  /**
+   * 采样间隔。
+<li>当 SampleType 为 Percent 时，指定采样间隔的百分比。</li>
+<li>当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。</li>
+   */
+  SampleInterval?: number
+  /**
+   * 雪碧图中小图的行数。
+   */
+  RowCount?: number
+  /**
+   * 雪碧图中小图的列数。
+   */
+  ColumnCount?: number
+  /**
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+   */
+  FillType?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 图片格式，取值可以为 jpg、png、webp。
+   */
+  Format?: string
+}
+
+/**
  * 查询输出的SRT配置信息。
  */
 export interface DescribeOutputSRTSettings {
@@ -16458,14 +16675,21 @@ export interface AiAnalysisTaskHorizontalToVerticalOutput {
 }
 
 /**
- * type FailOverOption struct 
-{ FailOverType string json:"FailOverType" // 新增 冷/热备 COLDSTANDBY、HOTSTANDBY }
+ * DescribeSmartEraseTemplates返回参数结构体
  */
-export interface FailOverOption {
+export interface DescribeSmartEraseTemplatesResponse {
   /**
-   * 热备
+   * 符合过滤条件的记录总数。
    */
-  FailOverType?: string
+  TotalCount?: number
+  /**
+   * 智能擦除模板详情列表。
+   */
+  SmartEraseTemplateSet?: Array<SmartEraseTemplateItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17700,12 +17924,12 @@ export interface SimpleAesDrm {
    */
   Uri: string
   /**
-   * 加密key(32字节字符串)。
+   * 加密key(十六进制32字节字符串)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
-   * 加密初始化向量(32字节字符串)。
+   * 加密初始化向量(十六进制32字节字符串)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vector?: string
@@ -18311,14 +18535,13 @@ export interface FlowMediaVideo {
 }
 
 /**
- * 任务判断条件
+ * DeleteSmartEraseTemplate返回参数结构体
  */
-export interface ExecRulesTask {
+export interface DeleteSmartEraseTemplateResponse {
   /**
-   * 条件判断信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Rules?: Array<Rules>
+  RequestId?: string
 }
 
 /**
@@ -19610,31 +19833,17 @@ export interface AiRecognitionTaskTransTextResult {
 }
 
 /**
- * DescribeAIRecognitionTemplates请求参数结构体
+ * DescribeGroupAttachFlowsById返回参数结构体
  */
-export interface DescribeAIRecognitionTemplatesRequest {
+export interface DescribeGroupAttachFlowsByIdResponse {
   /**
-   * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
+   * 安全组反查的Flow信息列表。
    */
-  Definitions?: Array<number | bigint>
+  Infos?: Array<FlowInOutResp>
   /**
-   * 分页偏移量，默认值：0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：10，最大值：50。
-   */
-  Limit?: number
-  /**
-   * 模板类型过滤条件，不填则返回所有，可选值：
-   * Preset：系统预置模板；
-   * Custom：用户自定义模板。
-   */
-  Type?: string
-  /**
-   * 视频内容识别模板标识过滤条件，长度限制：64 个字符。
-   */
-  Name?: string
+  RequestId?: string
 }
 
 /**
@@ -19706,6 +19915,64 @@ export interface HighlightSegmentItem {
 }
 
 /**
+ * 智能擦除模板详情
+ */
+export interface SmartEraseTemplateItem {
+  /**
+   * 智能擦除模板唯一标识
+   */
+  Definition?: number
+  /**
+   * 智能擦除模板名称
+   */
+  Name?: string
+  /**
+   * 智能擦除模板描述信息
+   */
+  Comment?: string
+  /**
+   * 模板类型，取值范围：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
+  /**
+   * 擦除类型
+- subtitle 去字幕
+- watermark 去水印
+- privacy 隐私保护
+   */
+  EraseType?: string
+  /**
+   * 字幕擦除配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig
+  /**
+   * 水印擦除配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig
+  /**
+   * 隐私保护配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime?: string
+  /**
+   * 智能擦除预设模板别名
+   */
+  AliasName?: string
+}
+
+/**
  * DeleteWatermarkTemplate返回参数结构体
  */
 export interface DeleteWatermarkTemplateResponse {
@@ -19742,77 +20009,14 @@ export interface DescribeOutputRTSPPullServerUrl {
 }
 
 /**
- * ModifyImageSpriteTemplate请求参数结构体
+ * type FailOverOption struct 
+{ FailOverType string json:"FailOverType" // 新增 冷/热备 COLDSTANDBY、HOTSTANDBY }
  */
-export interface ModifyImageSpriteTemplateRequest {
+export interface FailOverOption {
   /**
-   * 雪碧图模板唯一标识。
+   * 热备
    */
-  Definition: number
-  /**
-   * 雪碧图模板名称，长度限制：64 个字符。
-   */
-  Name?: string
-  /**
-   * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Width?: number
-  /**
-   * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Height?: number
-  /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-   */
-  ResolutionAdaptive?: string
-  /**
-   * 采样类型，取值：
-<li>Percent：按百分比。</li>
-<li>Time：按时间间隔。</li>
-   */
-  SampleType?: string
-  /**
-   * 采样间隔。
-<li>当 SampleType 为 Percent 时，指定采样间隔的百分比。</li>
-<li>当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。</li>
-   */
-  SampleInterval?: number
-  /**
-   * 雪碧图中小图的行数。
-   */
-  RowCount?: number
-  /**
-   * 雪碧图中小图的列数。
-   */
-  ColumnCount?: number
-  /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：black 。
-   */
-  FillType?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 图片格式，取值可以为 jpg、png、webp。
-   */
-  Format?: string
+  FailOverType?: string
 }
 
 /**
@@ -19872,17 +20076,31 @@ export interface CreateImageSpriteTemplateResponse {
 }
 
 /**
- * DescribeGroupAttachFlowsById返回参数结构体
+ * DescribeAIRecognitionTemplates请求参数结构体
  */
-export interface DescribeGroupAttachFlowsByIdResponse {
+export interface DescribeAIRecognitionTemplatesRequest {
   /**
-   * 安全组反查的Flow信息列表。
+   * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
    */
-  Infos?: Array<FlowInOutResp>
+  Definitions?: Array<number | bigint>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页偏移量，默认值：0。
    */
-  RequestId?: string
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：50。
+   */
+  Limit?: number
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
+  /**
+   * 视频内容识别模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**

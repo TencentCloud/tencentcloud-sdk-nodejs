@@ -154,29 +154,21 @@ all：账号维度明细数据，即账号下所有域名的汇总明细数据
 }
 
 /**
- * 封禁url的详细信息
+ * UserAgent黑白名单配置
  */
-export interface UrlRecord {
+export interface UserAgentFilter {
   /**
-   * 状态(disable表示封禁，enable表示解封)
+   * UserAgent黑白名单配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  Switch: string
   /**
-   * 对应的url
+   * UA黑白名单生效规则列表，不能超过10条规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealUrl?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
+  FilterRules?: Array<UserAgentFilterRule>
 }
 
 /**
@@ -617,24 +609,6 @@ export interface DomainFilter {
 }
 
 /**
- * DescribeCdnOriginIp返回参数结构体
- */
-export interface DescribeCdnOriginIpResponse {
-  /**
-   * 回源节点IP详情。
-   */
-  Ips?: Array<OriginIp>
-  /**
-   * 回源节点IP总个数。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 参数黑名单
  */
 export interface ParamFilter {
@@ -857,24 +831,6 @@ off：关闭
 }
 
 /**
- * UserAgent黑白名单配置
- */
-export interface UserAgentFilter {
-  /**
-   * UserAgent黑白名单配置开关，取值有：
-on：开启
-off：关闭
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Switch: string
-  /**
-   * UA黑白名单生效规则列表，不能超过10条规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FilterRules?: Array<UserAgentFilterRule>
-}
-
-/**
  * DescribeCdnData返回参数结构体
  */
 export interface DescribeCdnDataResponse {
@@ -968,14 +924,21 @@ off：关闭
 }
 
 /**
- * DeleteCdnDomain请求参数结构体
+ * DescribeCdnOriginIp返回参数结构体
  */
-export interface DeleteCdnDomainRequest {
+export interface DescribeCdnOriginIpResponse {
   /**
-   * 域名
-域名状态需要为【已停用】
+   * 回源节点IP详情。
    */
-  Domain: string
+  Ips?: Array<OriginIp>
+  /**
+   * 回源节点IP总个数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1582,20 +1545,6 @@ all：账号维度明细数据
    * 排序结果详情
    */
   DetailData?: Array<TopDetailData>
-}
-
-/**
- * EnableCaches请求参数结构体
- */
-export interface EnableCachesRequest {
-  /**
-   * 解封 URL 列表
-   */
-  Urls: Array<string>
-  /**
-   * URL封禁日期
-   */
-  Date?: string
 }
 
 /**
@@ -3027,19 +2976,22 @@ global：全球加速
 }
 
 /**
- * 域名标签配置
+ * ShareCname配置
+ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白.
  */
-export interface Tag {
+export interface ShareCname {
   /**
-   * 标签键
+   * ShareCname 配置开关, 取值有：
+on：开启，使用共享CNAME
+off：关闭，使用默认CNAME
+
+   */
+  Switch: string
+  /**
+   * 设置共享CNAME.
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKey: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
+  Cname?: string
 }
 
 /**
@@ -3875,17 +3827,6 @@ path 时填充绝对路径，如 /xxx/test.html
 }
 
 /**
- * DisableCaches请求参数结构体
- */
-export interface DisableCachesRequest {
-  /**
-   * 禁用的 URL 列表（分协议生效，必须包含http://或https://）
-每次最多可提交 100 条，每日最多可提交 3000 条
-   */
-  Urls: Array<string>
-}
-
-/**
  * DescribeEdgePackTaskStatus返回参数结构体
  */
 export interface DescribeEdgePackTaskStatusResponse {
@@ -4014,28 +3955,6 @@ export interface DisableClsLogTopicResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * HSTS 配置。
- */
-export interface Hsts {
-  /**
-   * HSTS 配置开关，取值有：
-on：开启
-off：关闭
-   */
-  Switch: string
-  /**
-   * MaxAge数值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxAge?: number
-  /**
-   * 是否包含子域名，on或off。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IncludeSubDomains?: string
 }
 
 /**
@@ -4445,24 +4364,6 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
-}
-
-/**
- * GetDisableRecords返回参数结构体
- */
-export interface GetDisableRecordsResponse {
-  /**
-   * 封禁历史记录
-   */
-  UrlRecordList?: Array<UrlRecord>
-  /**
-   * 任务总数，用于分页
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5365,19 +5266,25 @@ off：关闭
 }
 
 /**
- * 违规资源封禁/解封返回类型
+ * HSTS 配置。
  */
-export interface CacheOptResult {
+export interface Hsts {
   /**
-   * 成功的url列表
+   * HSTS 配置开关，取值有：
+on：开启
+off：关闭
+   */
+  Switch: string
+  /**
+   * MaxAge数值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessUrls?: Array<string>
+  MaxAge?: number
   /**
-   * 失败的url列表
+   * 是否包含子域名，on或off。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailUrls?: Array<string>
+  IncludeSubDomains?: string
 }
 
 /**
@@ -5534,24 +5441,6 @@ isp：运营商映射查询
 district：省份（中国境内）、国家/地区（中国境外）映射查询
    */
   Name: string
-}
-
-/**
- * EnableCaches返回参数结构体
- */
-export interface EnableCachesResponse {
-  /**
-   * 结果列表
-   */
-  CacheOptResult?: CacheOptResult
-  /**
-   * 任务ID
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5731,42 +5620,6 @@ export interface DescribeEdgePackTaskStatusRequest {
 }
 
 /**
- * GetDisableRecords请求参数结构体
- */
-export interface GetDisableRecordsRequest {
-  /**
-   * 指定 URL 查询
-   */
-  Url?: string
-  /**
-   * 开始时间，如：2018-12-12 10:24:00。
-   */
-  StartTime?: string
-  /**
-   * 结束时间，如：2018-12-14 10:24:00。
-   */
-  EndTime?: string
-  /**
-   * URL 当前状态
-disable：当前仍为禁用状态，访问返回 403
-enable：当前为可用状态，已解禁，可正常访问
-   */
-  Status?: string
-  /**
-   * 分页查询偏移量，默认为 0
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目，默认为20。
-   */
-  Limit?: number
-  /**
-   * 任务ID，任务ID和起始时间需要至少填写一项。
-   */
-  TaskId?: string
-}
-
-/**
  * CreateDiagnoseUrl请求参数结构体
  */
 export interface CreateDiagnoseUrlRequest {
@@ -5820,24 +5673,6 @@ day：天粒度
    * 数据明细
    */
   Data: Array<ResourceBillingData>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DisableCaches返回参数结构体
- */
-export interface DisableCachesResponse {
-  /**
-   * 提交结果
-   */
-  CacheOptResult?: CacheOptResult
-  /**
-   * 任务ID
-   */
-  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6294,22 +6129,45 @@ path 时填充绝对路径，如 /xxx/test.html
 }
 
 /**
- * ShareCname配置
-ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白.
+ * 预热任务详情
  */
-export interface ShareCname {
+export interface PushTask {
   /**
-   * ShareCname 配置开关, 取值有：
-on：开启，使用共享CNAME
-off：关闭，使用默认CNAME
-
+   * 预热任务 ID
    */
-  Switch: string
+  TaskId?: string
   /**
-   * 设置共享CNAME.
+   * 预热 URL
+   */
+  Url?: string
+  /**
+   * 预热任务状态
+fail：预热失败
+done：预热成功
+process：预热中
+invalid：预热无效(源站返回4xx或5xx状态码)
+   */
+  Status?: string
+  /**
+   * 预热进度百分比
+   */
+  Percent?: number
+  /**
+   * 预热任务提交时间
+   */
+  CreateTime?: string
+  /**
+   * 预热区域
+mainland：境内
+overseas：境外
+global：全球
+   */
+  Area?: string
+  /**
+   * 预热任务更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cname?: string
+  UpdateTime?: string
 }
 
 /**
@@ -6641,45 +6499,14 @@ off：关闭
 }
 
 /**
- * 预热任务详情
+ * DeleteCdnDomain请求参数结构体
  */
-export interface PushTask {
+export interface DeleteCdnDomainRequest {
   /**
-   * 预热任务 ID
+   * 域名
+域名状态需要为【已停用】
    */
-  TaskId?: string
-  /**
-   * 预热 URL
-   */
-  Url?: string
-  /**
-   * 预热任务状态
-fail：预热失败
-done：预热成功
-process：预热中
-invalid：预热无效(源站返回4xx或5xx状态码)
-   */
-  Status?: string
-  /**
-   * 预热进度百分比
-   */
-  Percent?: number
-  /**
-   * 预热任务提交时间
-   */
-  CreateTime?: string
-  /**
-   * 预热区域
-mainland：境内
-overseas：境外
-global：全球
-   */
-  Area?: string
-  /**
-   * 预热任务更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
+  Domain: string
 }
 
 /**
@@ -7277,6 +7104,22 @@ export interface ModifyDomainConfigRequest {
    * 配置路径值，使用 json 进行序列化，其中固定 update 作为 key
    */
   Value: string
+}
+
+/**
+ * 域名标签配置
+ */
+export interface Tag {
+  /**
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue: string
 }
 
 /**

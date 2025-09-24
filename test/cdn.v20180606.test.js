@@ -228,9 +228,9 @@ it("cdn.v20180606.DescribeCertDomains", async function () {
     }
 })
 
-it("cdn.v20180606.DisableCaches", async function () {
+it("cdn.v20180606.ListTopClsLogData", async function () {
     try {
-       const data = await client.DisableCaches({})
+       const data = await client.ListTopClsLogData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,16 +488,6 @@ it("cdn.v20180606.ListClsLogTopics", async function () {
     }
 })
 
-it("cdn.v20180606.GetDisableRecords", async function () {
-    try {
-       const data = await client.GetDisableRecords({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdn.v20180606.DeleteClsLogTopic", async function () {
     try {
        const data = await client.DeleteClsLogTopic({})
@@ -571,26 +561,6 @@ it("cdn.v20180606.DescribeDistrictIspData", async function () {
 it("cdn.v20180606.UpdatePayType", async function () {
     try {
        const data = await client.UpdatePayType({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.EnableCaches", async function () {
-    try {
-       const data = await client.EnableCaches({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdn.v20180606.ListTopClsLogData", async function () {
-    try {
-       const data = await client.ListTopClsLogData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

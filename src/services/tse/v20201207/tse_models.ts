@@ -386,6 +386,10 @@ export interface CreateNativeGatewayServiceSourceResponse {
    */
   Result?: boolean
   /**
+   * 服务来源ID
+   */
+  SourceID?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3912,6 +3916,10 @@ export interface CloudNativeAPIGatewayConfig {
    * 是否为新 ipv6 CLB
    */
   IPV6FullChain?: boolean
+  /**
+   * 负载均衡个性化配置内容
+   */
+  CustomizedConfigContent?: string
 }
 
 /**
@@ -6794,6 +6802,10 @@ export interface DescribeNativeGatewayServiceSourcesRequest {
    */
   Offset: number
   /**
+   * 服务来源ID
+   */
+  SourceID?: string
+  /**
    * 服务来源实例名称，模糊搜索
    */
   SourceName?: string
@@ -7500,6 +7512,18 @@ export interface ModifyNetworkBasicInfoRequest {
    * 负载均衡描述
    */
   Description?: string
+  /**
+   * 负载均衡的规格类型，支持：
+- 不传为共享型。
+- clb.c2.medium：标准型规格
+- clb.c3.small：高阶型1规格
+- clb.c3.medium：高阶型2规格
+- clb.c4.small：超强型1规格
+- clb.c4.medium：超强型2规格
+- clb.c4.large：超强型3规格
+- clb.c4.xlarge：超强型4规格
+   */
+  SlaType?: string
 }
 
 /**
