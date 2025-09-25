@@ -137,7 +137,7 @@ const CvmClient = tencentcloud.cvm.v20170312.Client
 // ...
 ```
 
-实例化 `Client` 的入参支持 `clientConfig`，数据结构和说明详见 [ClientConfig](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts)。
+实例化 `Client` 的入参支持 `clientConfig`，数据结构和说明详见 [ClientConfig](src/common/interface.ts)。
 
 ## Common Client
 
@@ -145,17 +145,17 @@ const CvmClient = tencentcloud.cvm.v20170312.Client
 
 **注意，您必须明确知道您调用的接口所需参数，否则可能会调用失败。**
 
-详细使用请参阅示例：[使用 Common Client 进行调用](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/tree/master/examples/common)
+详细使用请参阅示例：[使用 Common Client 进行调用](examples/common)
 
 ## 更多示例
 
-请参考 [examples](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/tree/master/examples) 目录。
+请参考 [examples](examples) 目录。
 
 # 相关配置
 
 ## 代理
 
-如果是有代理的环境下，需要配置代理，请在创建 Client 时传入 [profile.httpProfile.proxy](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts#L78) 参数，或设置系统环境变量 `http_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
+如果是有代理的环境下，需要配置代理，请在创建 Client 时传入 [profile.httpProfile.proxy](src/common/interface.ts#L78) 参数，或设置系统环境变量 `http_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
 
 # 凭证管理
 
