@@ -187,6 +187,7 @@ import {
   DescribePictureRequest,
   Voice,
   ModifyCloudModerationResponse,
+  Terminology,
   TRTCDataResp,
   VideoParams,
   RegisterVoicePrintRequest,

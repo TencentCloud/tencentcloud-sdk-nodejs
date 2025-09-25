@@ -15817,7 +15817,7 @@ export interface DescribeGroupsRequest {
    */
   Status?: string
   /**
-   * 无
+   * 部署组ID列表
    */
   GroupIdList?: Array<string>
 }

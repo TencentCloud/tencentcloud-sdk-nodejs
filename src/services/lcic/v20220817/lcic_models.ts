@@ -3911,7 +3911,6 @@ export interface DescribeGroupListResponse {
 export interface ModifyRoomRequest {
   /**
    * 房间ID。
-字符数不超过256
    */
   RoomId: number
   /**
@@ -3932,6 +3931,7 @@ export interface ModifyRoomRequest {
   TeacherId?: string
   /**
    * 房间名称。
+字符数不超过256
    */
   Name?: string
   /**
