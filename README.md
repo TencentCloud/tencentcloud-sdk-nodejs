@@ -62,6 +62,8 @@ npm install tencentcloud-sdk-slim-nodejs --save
 
 1. clone 代码到本地：
 ```
+git clone https://cnb.cool/tencent/cloud/api/sdk/tencentcloud-sdk-nodejs
+# 或者
 git clone https://github.com/tencentcloud/tencentcloud-sdk-nodejs
 # 或者
 git clone https://gitee.com/tencentcloud/tencentcloud-sdk-nodejs
