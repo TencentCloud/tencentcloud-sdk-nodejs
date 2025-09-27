@@ -1008,6 +1008,16 @@ it("dlc.v20210125.DeleteSparkApp", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeTaskResourceUsage", async function () {
+    try {
+       const data = await client.DescribeTaskResourceUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSessionLog", async function () {
     try {
        const data = await client.DescribeNotebookSessionLog({})

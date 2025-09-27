@@ -168,6 +168,7 @@ import {
   DetachWorkGroupPolicyResponse,
   DescribeSparkSessionBatchSqlLogResponse,
   SwitchDataEngineResponse,
+  DescribeTaskResourceUsageRequest,
   DescribeLakeFsInfoRequest,
   CreateCHDFSBindingProductResponse,
   DescribeUserInfoRequest,
@@ -239,6 +240,7 @@ import {
   AlterDMSPartitionResponse,
   UpdateStandardEngineResourceGroupResourceInfoResponse,
   DescribeTableResponse,
+  CoreInfo,
   DetachUserPolicyResponse,
   AnalysisTaskResults,
   UnbindWorkGroupsFromUserResponse,
@@ -365,7 +367,7 @@ import {
   TaskResultInfo,
   DeleteThirdPartyAccessUserResponse,
   AddUsersToWorkGroupResponse,
-  DescribeDataEngineImageVersionsResponse,
+  DataSourceInfo,
   CreateTcIcebergTableResponse,
   DeleteSparkAppResponse,
   DescribeUserDataEngineConfigRequest,
@@ -416,6 +418,7 @@ import {
   DescribeTaskLogResponse,
   DescribeTasksResponse,
   DropDMSPartitionsRequest,
+  DescribeTaskResourceUsageResponse,
   CommonMetrics,
   UserRole,
   DescribeUserTypeRequest,
@@ -441,7 +444,6 @@ import {
   RevokeDLCCatalogAccessResponse,
   DeleteCHDFSBindingProductRequest,
   RenewDataEngineResponse,
-  DataSourceInfo,
   DescribeNotebookSessionsResponse,
   DescribeEngineUsageInfoRequest,
   DataMaskStrategyInfo,
@@ -471,6 +473,7 @@ import {
   QueryTaskCostDetailResponse,
   CheckLockMetaDataResponse,
   NotebookSessionInfo,
+  DescribeDataEngineImageVersionsResponse,
   Execution,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
   BindWorkGroupsToUserRequest,
@@ -1521,6 +1524,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSparkAppResponse) => void
   ): Promise<DeleteSparkAppResponse> {
     return this.request("DeleteSparkApp", req, cb)
+  }
+
+  /**
+   * 返回任务洞察资源用量
+   */
+  async DescribeTaskResourceUsage(
+    req: DescribeTaskResourceUsageRequest,
+    cb?: (error: string, rep: DescribeTaskResourceUsageResponse) => void
+  ): Promise<DescribeTaskResourceUsageResponse> {
+    return this.request("DescribeTaskResourceUsage", req, cb)
   }
 
   /**

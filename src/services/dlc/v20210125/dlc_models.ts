@@ -1953,6 +1953,10 @@ export interface DescribeDataEnginesScaleDetailResponse {
  */
 export interface CreateDataMaskStrategyResponse {
   /**
+   * 策略id
+   */
+  StrategyId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2087,6 +2091,26 @@ export interface CreateStandardEngineResourceGroupRequest {
    * 仅SQL资源组资源上限，仅用于快速模块
    */
   SparkSize?: number
+  /**
+   * GPUDriver规格
+   */
+  DriverGPUSpec?: number
+  /**
+   * GPUExecutor规格
+   */
+  ExecutorGPUSpec?: number
+  /**
+   * GPU上限
+   */
+  GPULimitSize?: number
+  /**
+   * GPU规格
+   */
+  GPUSize?: number
+  /**
+   * Pod GPU规格上限
+   */
+  PythonGPUSpec?: number
 }
 
 /**
@@ -3754,6 +3778,16 @@ export interface SwitchDataEngineResponse {
 }
 
 /**
+ * DescribeTaskResourceUsage请求参数结构体
+ */
+export interface DescribeTaskResourceUsageRequest {
+  /**
+   * 任务 id
+   */
+  TaskInstanceId: string
+}
+
+/**
  * DescribeLakeFsInfo请求参数结构体
  */
 export type DescribeLakeFsInfoRequest = null
@@ -5144,6 +5178,20 @@ export interface DescribeTableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务 core 用量信息
+ */
+export interface CoreInfo {
+  /**
+   * 时间戳(毫秒)数组
+   */
+  Timestamp?: Array<number | bigint>
+  /**
+   * core 用量
+   */
+  CoreUsage?: Array<number | bigint>
 }
 
 /**
@@ -7942,6 +7990,26 @@ export interface UpdateStandardEngineResourceGroupResourceInfoRequest {
    * 仅SQL资源组资源上限，仅用于快速模式
    */
   SparkSize?: number
+  /**
+   * gpuDriver规格
+   */
+  DriverGPUSpec?: number
+  /**
+   * gpuExcutor 规格
+   */
+  ExecutorGPUSpec?: number
+  /**
+   * gpu 上限
+   */
+  GPULimitSize?: number
+  /**
+   * gpu 规格
+   */
+  GPUSize?: number
+  /**
+   * gpupod 规格
+   */
+  PythonGPUSpec?: number
 }
 
 /**
@@ -8537,6 +8605,10 @@ export interface TaskResultInfo {
    * 获取结果消耗的时间
    */
   QueryResultTime?: number
+  /**
+   * base64 编码结果集
+   */
+  ResultSetEncode?: string
 }
 
 /**
@@ -8560,21 +8632,44 @@ export interface AddUsersToWorkGroupResponse {
 }
 
 /**
- * DescribeDataEngineImageVersions返回参数结构体
+ * 数据源详细信息
  */
-export interface DescribeDataEngineImageVersionsResponse {
+export interface DataSourceInfo {
   /**
-   * 集群大版本镜像信息列表
+   * 数据源实例的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageParentVersions?: Array<DataEngineImageVersion>
+  InstanceId?: string
   /**
-   * 总数
+   * 数据源的名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
+  InstanceName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数据源的JDBC访问链接
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  JdbcUrl?: string
+  /**
+   * 用于访问数据源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 数据源访问密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
 }
 
 /**
@@ -9716,6 +9811,20 @@ export interface DropDMSPartitionsRequest {
 }
 
 /**
+ * DescribeTaskResourceUsage返回参数结构体
+ */
+export interface DescribeTaskResourceUsageResponse {
+  /**
+   * core 用量信息
+   */
+  CoreInfo?: CoreInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 任务公共指标
  */
 export interface CommonMetrics {
@@ -10340,47 +10449,6 @@ export interface RenewDataEngineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 数据源详细信息
- */
-export interface DataSourceInfo {
-  /**
-   * 数据源实例的唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 数据源的名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceName?: string
-  /**
-   * 数据源的JDBC访问链接
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JdbcUrl?: string
-  /**
-   * 用于访问数据源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  User?: string
-  /**
-   * 数据源访问密码，需要base64编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Password?: string
-  /**
-   * 数据源的VPC和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Location?: DatasourceConnectionLocation
-  /**
-   * 默认数据库名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DbName?: string
 }
 
 /**
@@ -11417,6 +11485,24 @@ export interface NotebookSessionInfo {
    * pod数量
    */
   PodNumbers?: number
+}
+
+/**
+ * DescribeDataEngineImageVersions返回参数结构体
+ */
+export interface DescribeDataEngineImageVersionsResponse {
+  /**
+   * 集群大版本镜像信息列表
+   */
+  ImageParentVersions?: Array<DataEngineImageVersion>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
