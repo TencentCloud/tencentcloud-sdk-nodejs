@@ -3093,7 +3093,7 @@ export interface DescribeTaskListRequest {
    */
   InstanceId?: string
   /**
-   * 实例名称。
+   * 实例名称。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例名称。
    */
   InstanceName?: string
   /**
@@ -3101,7 +3101,7 @@ export interface DescribeTaskListRequest {
    */
   Limit?: number
   /**
-   * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
+   * 分页偏移量。取值需为 Limit 的整数倍：offset=limit*(页码-1)，默认值为0。
    */
   Offset?: number
   /**
@@ -3701,9 +3701,9 @@ export interface DescribeInstanceShardsRequest {
    */
   InstanceId: string
   /**
-   * 是否过滤掉从节信息。
+   * 指定是否过滤掉从节信息。
 - true；过滤从节点。
-- false：不过滤。
+- false：不过滤。默认为 false。
    */
   FilterSlave?: boolean
 }
@@ -4800,7 +4800,7 @@ export interface ModifyReplicationGroupResponse {
  */
 export interface DeleteParamTemplateRequest {
   /**
-   * 参数模板 ID。
+   * 参数模板 ID。请登录 [Redis 控制台的参数模版](https://console.cloud.tencent.com/redis/templates)页面获取模版 ID。
    */
   TemplateId: string
 }
@@ -5533,15 +5533,18 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    */
   BillingMode: number
   /**
-   * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   * 实例所属的可用区 ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   **说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。
    */
   ZoneId?: number
   /**
-   * 实例分片数量。2.8 标准架构无需配置分片，其余版本标准架构需要配置分片数量为1。集群架构需指定需购买的分片数量。
+   * 实例分片数量。
+- 标准架构需要配置分片数量为1。
+- 集群架构分片数量支持设置为1、3、5、8、12、16、24、32、40、48、64、80、96、128。
    */
   RedisShardNum?: number
   /**
-   * 实例副本数量。2.8 标准架构无需配置副本数量。
+   * 实例副本数量。取值范围为：1、2、3、4、5。
    */
   RedisReplicasNum?: number
   /**
@@ -5552,6 +5555,7 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
   ReplicasReadonly?: boolean
   /**
    * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   **说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。
    */
   ZoneName?: string
   /**

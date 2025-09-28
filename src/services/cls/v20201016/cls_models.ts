@@ -1171,7 +1171,7 @@ export interface DeleteCloudProductLogCollectionRequest {
 - DCDB所有日志类型：gz
 - MariaDB所有日志类型：gz
 - PostgreSQL所有日志类型：gz
-- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)
 - APIS所有日志类型：gz
    */
   CloudProductRegion: string
@@ -1206,7 +1206,7 @@ export interface CreateCloudProductLogCollectionRequest {
 - DCDB所有日志类型：gz
 - MariaDB所有日志类型：gz
 - PostgreSQL所有日志类型：gz
-- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)
 - APIS所有日志类型：gz
    */
   CloudProductRegion: string
@@ -5833,7 +5833,7 @@ export interface ModifyCloudProductLogCollectionRequest {
 - DCDB所有日志类型：gz
 - MariaDB所有日志类型：gz
 - PostgreSQL所有日志类型：gz
-- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)
 - APIS所有日志类型：gz
    */
   CloudProductRegion: string

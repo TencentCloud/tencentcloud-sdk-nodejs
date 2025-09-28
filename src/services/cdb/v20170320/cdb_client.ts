@@ -38,7 +38,7 @@ import {
   DescribeAuditInstanceListResponse,
   ModifyDBInstanceProjectResponse,
   DescribeCpuExpandHistoryResponse,
-  DescribeDataBackupOverviewResponse,
+  ModifyDBInstanceModesResponse,
   DeleteAuditPolicyRequest,
   BackupSummaryItem,
   CreateDatabaseRequest,
@@ -142,6 +142,7 @@ import {
   AuditInstanceInfo,
   CustomConfig,
   SwitchDBInstanceMasterSlaveResponse,
+  DescribeDataBackupOverviewResponse,
   DescribeBackupsRequest,
   DescribeInstanceParamRecordsResponse,
   DescribeDBInstanceGTIDResponse,
@@ -255,6 +256,7 @@ import {
   DescribeDBInstanceRebootTimeRequest,
   Inbound,
   CreateAccountsResponse,
+  ModifyDBInstanceModesRequest,
   CdbSellType,
   MasterInfo,
   ResetRootAccountResponse,
@@ -1515,6 +1517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBackupResponse) => void
   ): Promise<DeleteBackupResponse> {
     return this.request("DeleteBackup", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBInstanceModes）用于更改云数据库的模式。
+   */
+  async ModifyDBInstanceModes(
+    req: ModifyDBInstanceModesRequest,
+    cb?: (error: string, rep: ModifyDBInstanceModesResponse) => void
+  ): Promise<ModifyDBInstanceModesResponse> {
+    return this.request("ModifyDBInstanceModes", req, cb)
   }
 
   /**

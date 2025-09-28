@@ -298,6 +298,16 @@ it("dbbrain.v20210527.DescribeDBSpaceStatus", async function () {
     }
 })
 
+it("dbbrain.v20210527.KillMySqlThreads", async function () {
+    try {
+       const data = await client.KillMySqlThreads({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateProxySessionKillTask", async function () {
     try {
        const data = await client.CreateProxySessionKillTask({})
@@ -708,9 +718,9 @@ it("dbbrain.v20210527.UpdateAgentSwitch", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeNoPrimaryKeyTables", async function () {
+it("dbbrain.v20210527.DescribeMetricTopProxies", async function () {
     try {
-       const data = await client.DescribeNoPrimaryKeyTables({})
+       const data = await client.DescribeMetricTopProxies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +768,9 @@ it("dbbrain.v20210527.DescribeAuditLogFiles", async function () {
     }
 })
 
-it("dbbrain.v20210527.KillMySqlThreads", async function () {
+it("dbbrain.v20210527.DescribeNoPrimaryKeyTables", async function () {
     try {
-       const data = await client.KillMySqlThreads({})
+       const data = await client.DescribeNoPrimaryKeyTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

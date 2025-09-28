@@ -551,7 +551,7 @@ export interface DescribeRollbackRangeTimeRequest {
  */
 export interface DescribeBackupOverviewRequest {
   /**
-   * 需要查询备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
+   * 需要查询备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。
    */
   Product: string
 }
@@ -604,57 +604,13 @@ export interface DescribeCpuExpandHistoryResponse {
 }
 
 /**
- * DescribeDataBackupOverview返回参数结构体
+ * ModifyDBInstanceModes返回参数结构体
  */
-export interface DescribeDataBackupOverviewResponse {
+export interface ModifyDBInstanceModesResponse {
   /**
-   * 当前地域的数据备份总容量（包含自动备份和手动备份，单位为字节）。
+   * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
    */
-  DataBackupVolume?: number
-  /**
-   * 当前地域的数据备份总个数。
-   */
-  DataBackupCount?: number
-  /**
-   * 当前地域的自动备份总容量。
-   */
-  AutoBackupVolume?: number
-  /**
-   * 当前地域的自动备份总个数。
-   */
-  AutoBackupCount?: number
-  /**
-   * 当前地域的手动备份总容量。
-   */
-  ManualBackupVolume?: number
-  /**
-   * 当前地域的手动备份总个数。
-   */
-  ManualBackupCount?: number
-  /**
-   * 异地备份总容量。
-   */
-  RemoteBackupVolume?: number
-  /**
-   * 异地备份总个数。
-   */
-  RemoteBackupCount?: number
-  /**
-   * 当前地域归档备份总容量。
-   */
-  DataBackupArchiveVolume?: number
-  /**
-   * 当前地域归档备份总个数。
-   */
-  DataBackupArchiveCount?: number
-  /**
-   * 当前地域标准存储备份总容量。
-   */
-  DataBackupStandbyVolume?: number
-  /**
-   * 当前地域标准存储备份总个数。
-   */
-  DataBackupStandbyCount?: number
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1099,7 +1055,7 @@ export interface CdbRegionSellConf {
 }
 
 /**
- * 集群版 RW 节点的配置。
+ * 云盘版 RW 节点的配置。
  */
 export interface ReadWriteNode {
   /**
@@ -1107,7 +1063,7 @@ export interface ReadWriteNode {
    */
   Zone: string
   /**
-   * 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。
+   * 升级云盘版实例时，如果要调整只读节点可用区，需要指定节点 ID。
    */
   NodeId?: string
 }
@@ -1792,7 +1748,7 @@ export interface DescribeCdbZoneConfigResponse {
 }
 
 /**
- * 集群版的 RO 节点配置。
+ * 云盘版的 RO 节点配置。
  */
 export interface ReadonlyNode {
   /**
@@ -1804,7 +1760,7 @@ export interface ReadonlyNode {
    */
   Zone?: string
   /**
-   * 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。
+   * 升级云盘版实例时，如果要调整只读节点可用区，需要指定节点 ID。
    */
   NodeId?: string
 }
@@ -1912,7 +1868,7 @@ export interface UpgradeDBInstanceRequest {
    */
   RoTransType?: string
   /**
-   * 集群版节点拓扑配置。
+   * 云盘版节点拓扑配置。
    */
   ClusterTopology?: ClusterTopology
   /**
@@ -2965,6 +2921,64 @@ export interface SwitchDBInstanceMasterSlaveResponse {
    * 异步任务 ID。
    */
   AsyncRequestId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataBackupOverview返回参数结构体
+ */
+export interface DescribeDataBackupOverviewResponse {
+  /**
+   * 当前地域的数据备份总容量（包含自动备份和手动备份，单位为字节）。
+   */
+  DataBackupVolume?: number
+  /**
+   * 当前地域的数据备份总个数。
+   */
+  DataBackupCount?: number
+  /**
+   * 当前地域的自动备份总容量。
+   */
+  AutoBackupVolume?: number
+  /**
+   * 当前地域的自动备份总个数。
+   */
+  AutoBackupCount?: number
+  /**
+   * 当前地域的手动备份总容量。
+   */
+  ManualBackupVolume?: number
+  /**
+   * 当前地域的手动备份总个数。
+   */
+  ManualBackupCount?: number
+  /**
+   * 异地备份总容量。
+   */
+  RemoteBackupVolume?: number
+  /**
+   * 异地备份总个数。
+   */
+  RemoteBackupCount?: number
+  /**
+   * 当前地域归档备份总容量。
+   */
+  DataBackupArchiveVolume?: number
+  /**
+   * 当前地域归档备份总个数。
+   */
+  DataBackupArchiveCount?: number
+  /**
+   * 当前地域标准存储备份总容量。
+   */
+  DataBackupStandbyVolume?: number
+  /**
+   * 当前地域标准存储备份总个数。
+   */
+  DataBackupStandbyCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4616,7 +4630,7 @@ export interface DescribeRemoteBackupConfigRequest {
 }
 
 /**
- * 集群版的节点拓扑配置。
+ * 云盘版的节点拓扑配置。
  */
 export interface ClusterTopology {
   /**
@@ -5566,6 +5580,24 @@ export interface CreateAccountsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDBInstanceModes请求参数结构体
+ */
+export interface ModifyDBInstanceModesRequest {
+  /**
+   * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   */
+  InstanceId: string
+  /**
+   * 云数据库的模式，目前仅支持传入 "protectMode" 表示修改主从同步方式。
+   */
+  Mode: string
+  /**
+   * 数据同步方式，可选值：0-异步复制，1-半同步复制，2-强同步复制。
+   */
+  ProtectMode?: number
 }
 
 /**
@@ -8031,7 +8063,7 @@ export interface UpgradeDBInstanceEngineVersionRequest {
  */
 export interface DescribeDataBackupOverviewRequest {
   /**
-   * 需要查询数据备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
+   * 需要查询数据备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。
    */
   Product: string
 }
@@ -9587,7 +9619,7 @@ export interface DescribeProjectSecurityGroupsResponse {
  */
 export interface DescribeBackupSummariesRequest {
   /**
-   * 需要查询备份实时统计的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
+   * 需要查询备份实时统计的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。
    */
   Product: string
   /**
@@ -9796,7 +9828,7 @@ export interface DescribeBackupSummariesResponse {
  */
 export interface DescribeBinlogBackupOverviewRequest {
   /**
-   * 需要查询日志备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。
+   * 需要查询日志备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。
    */
   Product: string
 }
@@ -9859,7 +9891,7 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    */
   ForReadonlyInstance?: boolean
   /**
-   * 变更集群版实例只读组时，InstanceId 传实例 ID，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   * 变更云盘版实例只读组时，InstanceId 传实例 ID，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
    */
   OpResourceId?: string
 }

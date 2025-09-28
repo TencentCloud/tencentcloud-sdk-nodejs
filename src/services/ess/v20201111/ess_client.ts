@@ -308,6 +308,7 @@ import {
   CreateContractReviewWebUrlRequest,
   CreateDynamicFlowApproverResponse,
   CreateBatchOrganizationRegistrationTasksResponse,
+  Option,
   DescribeBillUsageDetailRequest,
   CreateUserAutoSignSealUrlResponse,
   Caller,

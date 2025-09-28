@@ -100,45 +100,17 @@ export interface DescribeUserAutonomyProfileRequest {
 }
 
 /**
- * redis key空间信息。
+ * DescribeMetricTopProxies返回参数结构体
  */
-export interface RedisKeySpaceData {
+export interface DescribeMetricTopProxiesResponse {
   /**
-   * key名。
+   * 命令列表
    */
-  Key?: string
+  Data?: Array<RedisMetricTopProxiesData>
   /**
-   * key类型。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: string
-  /**
-   * key编码方式。
-   */
-  Encoding?: string
-  /**
-   * key过期时间戳（毫秒），0代表未设置过期时间。
-   */
-  ExpireTime?: number
-  /**
-   * key内存大小，单位Byte。
-   */
-  Length?: number
-  /**
-   * 元素个数。
-   */
-  ItemCount?: number
-  /**
-   * 最大元素长度。
-   */
-  MaxElementSize?: number
-  /**
-   * 平均元素长度。
-   */
-  AveElementSize?: number
-  /**
-   * 所属分片序号。
-   */
-  ShardId?: string
+  RequestId?: string
 }
 
 /**
@@ -172,11 +144,11 @@ export interface DescribeRedisTopKeyPrefixListRequest {
  */
 export interface DescribeDBAutonomyActionsRequest {
   /**
-   * 事件ID。
+   * 事件ID。可通过 [DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) 接口获取。
    */
   EventId: number
   /**
-   * 实列ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -282,7 +254,7 @@ export interface DescribeUserAutonomyProfileResponse {
  */
 export interface DescribeRedisTopHotKeysRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -316,7 +288,7 @@ export interface DescribeRedisTopHotKeysRequest {
  */
 export interface CreateDBDiagReportTaskRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -340,7 +312,7 @@ export interface CreateDBDiagReportTaskRequest {
    */
   ContactGroup?: Array<number | bigint>
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认值为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product?: string
 }
@@ -420,7 +392,7 @@ export interface DescribeIndexRecommendAggregationSlowLogsRequest {
    */
   Product: string
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -432,7 +404,7 @@ export interface DescribeIndexRecommendAggregationSlowLogsRequest {
    */
   Collection: string
   /**
-   * 签名。这个值是DescribelndexRecommendInfo接口返回
+   * 签名。这个值是 [DescribeIndexRecommendInfo](https://cloud.tencent.com/document/product/1130/98911) 接口返回
    */
   Signs: Array<string>
 }
@@ -496,7 +468,7 @@ export interface DescribeSlowLogsRequest {
  */
 export interface DescribeRedisCmdPerfTimeSeriesRequest {
   /**
-   * 实例 ID
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -516,11 +488,17 @@ export interface DescribeRedisCmdPerfTimeSeriesRequest {
    */
   CommandList: Array<string>
   /**
-   * 监控指标，以逗号分隔
+   * 监控指标，包括：qps,latency_p99,latency_avg,latency_max，以逗号分隔
+其中：
+qps          - 每秒查询率  
+latency_p99  - 99分位延迟  
+latency_avg  - 平均延迟  
+latency_max  - 最大延迟  
+
    */
   Metric: string
   /**
-   * 监控指标时间粒度，单位秒，若不提供则根据开始时间和结束时间取默认值
+   * Period，监控指标时间粒度，单位秒，若不提供则根据开始时间和结束时间取默认值
    */
   Period?: number
 }
@@ -614,7 +592,7 @@ export interface DescribeDBDiagEventResponse {
    */
   DiagItem?: string
   /**
-   * 诊断类型。
+   * 诊断类型。支持值包括"高危账号","自增键耗尽","连接性检查","CPU利用率","死锁","全表扫描","高并发/压力请求","预编译语句过多","内存利用率","Metadata lock","磁盘超限","内存超限","只读锁","只读实例剔除","行锁","活跃会话","慢SQL","数据库快照","磁盘空间利用率","执行计划变化","主从切换","Table open cache命中率低","大表","事务未提交","事务导致复制延迟"等。
    */
   DiagType?: string
   /**
@@ -638,7 +616,7 @@ export interface DescribeDBDiagEventResponse {
    */
   Severity?: number
   /**
-   * 开始时间
+   * 开始时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   StartTime?: string
   /**
@@ -650,7 +628,7 @@ export interface DescribeDBDiagEventResponse {
    */
   Metric?: string
   /**
-   * 结束时间。
+   * 结束时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   EndTime?: string
   /**
@@ -912,7 +890,7 @@ export interface DescribeRedisTopBigKeysResponse {
  */
 export interface DescribeSqlTemplateRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -948,19 +926,20 @@ export interface DescribeTopSpaceSchemaTimeSeriesResponse {
  */
 export interface ModifySqlFiltersRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * SQL限流任务ID列表。
+   * SQL限流任务ID列表。可通过接口[查询实例SQL限流任务列表
+](https://cloud.tencent.com/document/product/1130/72831)获得。
    */
   FilterIds: Array<number | bigint>
   /**
-   * 限流任务状态，取值支持TERMINATED - 终止。
+   * 限流任务状态，仅支持传参TERMINATED - 终止。
    */
   Status: string
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   * 通过 [VerifyUserAccount](https://cloud.tencent.com/document/product/1130/72828) 获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
    */
   SessionToken?: string
   /**
@@ -1334,7 +1313,7 @@ export interface DescribeIndexRecommendInfoResponse {
  */
 export interface CreateRedisBigKeyAnalysisTaskRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -1379,7 +1358,7 @@ export interface UpdateMonitorSwitchRequest {
    */
   Switch: string
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -1393,7 +1372,10 @@ export interface UpdateMonitorSwitchRequest {
  */
 export interface AutonomyUserProfileInfo {
   /**
-   * 是否开启自治。
+   * 是否开启自治。枚举值：true，false。
+其中：
+true - 开启
+false - 关闭
    */
   Enabled?: boolean
   /**
@@ -1647,15 +1629,15 @@ export interface CreateSchedulerMailProfileRequest {
    */
   ProfileInfo: ProfileInfo
   /**
-   * 配置名称，需要保持唯一性，定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
+   * 配置名称，需要保持唯一性，定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"scheduler_cdb-test"。
    */
   ProfileName: string
   /**
-   * 配置订阅的实例ID。
+   * 配置订阅的实例ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   BindInstanceId: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product: string
 }
@@ -1764,7 +1746,7 @@ information-通知
  */
 export interface DescribeRedisProcessListRequest {
   /**
-   * Redis 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -1831,11 +1813,11 @@ export interface AuditLogFile {
    */
   ErrMsg?: string
   /**
-   * 文件生成进度。
+   * 文件生成进度。（单位：%）
    */
   Progress?: number
   /**
-   * 文件生成成功时间。
+   * 文件生成成功时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   FinishTime?: string
 }
@@ -1845,7 +1827,7 @@ export interface AuditLogFile {
  */
 export interface DescribeRedisCommandCostStatisticsRequest {
   /**
-   * 实例 ID
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -1871,7 +1853,7 @@ export interface ModifyDiagDBInstanceConfRequest {
    */
   InstanceConfs: InstanceConfs
   /**
-   * 生效实例地域，取值为"All"，代表全地域。
+   * 生效实例地域，固定为"All"，代表全地域。
    */
   Regions: string
   /**
@@ -1880,6 +1862,8 @@ export interface ModifyDiagDBInstanceConfRequest {
   Product: string
   /**
    * 指定更改巡检状态的实例ID。
+可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+
    */
   InstanceIds?: Array<string>
 }
@@ -1907,7 +1891,7 @@ export interface DescribeSlowLogsResponse {
  */
 export interface UpdateAgentSwitchRequest {
   /**
-   * Agent标识。
+   * Agent标识。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   AgentId: string
   /**
@@ -1995,11 +1979,11 @@ export interface UpdateMonitorSwitchResponse {
  */
 export interface DescribeDBAutonomyActionRequest {
   /**
-   * 自治任务ID。
+   * 自治任务ID。可通过 [DescribeDBAutonomyActions](https://cloud.tencent.com/document/product/1130/116974) 接口获取。
    */
   ActionId: number
   /**
-   * 实列ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -2055,11 +2039,11 @@ export interface InstanceID {
  */
 export interface DescribeDBDiagHistoryRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * 开始时间，如“2019-09-10 12:13:14”。结束时间与开始时间的间隔最大可为2天。
    */
   StartTime: string
   /**
@@ -2489,7 +2473,7 @@ export interface CreateMailProfileRequest {
    */
   ProfileLevel: string
   /**
-   * 配置名称，需要保持唯一性，数据库巡检邮件配置名称自拟；定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
+   * 配置名称，需要保持唯一性，数据库巡检邮件配置名称自拟；定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"scheduler_cdb-test"。
    */
   ProfileName: string
   /**
@@ -2497,11 +2481,11 @@ export interface CreateMailProfileRequest {
    */
   ProfileType: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product: string
   /**
-   * 配置绑定的实例ID，当配置级别为"Instance"时需要传入且只能为一个实例；当配置级别为“User”时，此参数不填。
+   * 配置绑定的实例ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。当配置级别为"Instance"时需要传入且只能为一个实例；当配置级别为“User”时，此参数不填。
    */
   BindInstanceIds?: Array<string>
 }
@@ -2533,7 +2517,7 @@ export interface MailConfiguration {
    */
   Region: Array<string>
   /**
-   * 发送指定的健康等级的报告, 如["HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"]。
+   * 包含的健康等级，包括值：HEALTH-健康，SUB_HEALTH-亚健康，RISK-风险，HIGH_RISK-高危。
    */
   HealthStatus: Array<string>
   /**
@@ -2561,7 +2545,7 @@ export interface UpdateAgentSwitchResponse {
  */
 export interface VerifyUserAccountRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -2701,7 +2685,7 @@ export interface DescribeIndexRecommendInfoRequest {
    */
   Product: string
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
 }
@@ -2775,7 +2759,7 @@ export interface DeleteSecurityAuditLogExportTasksResponse {
  */
 export interface KillMySqlThreadsRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -2783,7 +2767,8 @@ export interface KillMySqlThreadsRequest {
    */
   Stage: string
   /**
-   * 需要kill的sql会话ID列表，此参数用于Prepare阶段。
+   * 需要kill的sql会话ID列表，通过接口[查询实时线程列表](https://cloud.tencent.com/document/product/1130/57824)
+此参数用于Prepare阶段。
    */
   Threads?: Array<number | bigint>
   /**
@@ -2857,15 +2842,16 @@ export interface MongoDBIndex {
  */
 export interface CreateDBDiagReportUrlRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+示例值：cdb-dctw4edd
    */
   InstanceId: string
   /**
-   * 健康报告相应的任务ID，可通过DescribeDBDiagReportTasks查询。
+   * 健康报告相应的任务ID，可通过[DescribeDBDiagReportTasks](https://cloud.tencent.com/document/product/1130/54873)查询。
    */
   AsyncRequestId: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product?: string
 }
@@ -2887,19 +2873,19 @@ export interface AutonomyActionVo {
    */
   Type?: string
   /**
-   * 自治任务触发时间。
+   * 自治任务触发时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   TriggerTime?: string
   /**
-   * 自治任务创建时间。
+   * 自治任务创建时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   CreateTime?: string
   /**
-   * 自治任务更新时间
+   * 自治任务更新时间，格式: "yyyy-MM-dd HH:mm:ss"
    */
   UpdateTime?: string
   /**
-   * 自治任务完成时间。
+   * 自治任务完成时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   FinishTime?: string
   /**
@@ -2911,7 +2897,13 @@ export interface AutonomyActionVo {
    */
   Reason?: string
   /**
-   * 自治任务状态：支持 RUNNING，FINISHED，TERMINATED，CANCELLED
+   * 自治任务状态：RUNNING，FINISHED，TERMINATED，CANCELLED
+其中：
+RUNNING    - 运行中  
+FINISHED   - 已完成  
+TERMINATED - 已终止  
+CANCELLED  - 已取消  
+
    */
   Status?: string
 }
@@ -2953,11 +2945,11 @@ export interface CloseAuditServiceRequest {
    */
   Product: string
   /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   * NodeRequestType主要标识数据库产品类型，与Product保持一致。如："dcdb" ,"mariadb"。
    */
   NodeRequestType: string
   /**
-   * 实例Id。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
 }
@@ -2997,7 +2989,7 @@ export interface ReceiveInfo {
    */
   ReceiveGroup?: Array<number | bigint>
   /**
-   * 最后接收时间
+   * 最后接收时间，格式: "HH:mm:ss"
    */
   EndReceiveTime?: string
   /**
@@ -3009,7 +3001,7 @@ export interface ReceiveInfo {
    */
   SendChannel?: Array<number | bigint>
   /**
-   * 开始时间
+   * 开始时间，格式: "HH:mm:ss"
    */
   StartReceiveTime?: string
   /**
@@ -3035,11 +3027,11 @@ export interface DescribeSqlTemplateResponse {
    */
   SqlType?: string
   /**
-   * SQL模版内容。
+   * SQL模板内容。
    */
   SqlTemplate?: string
   /**
-   * SQL模版ID。
+   * SQL模板ID。
    */
   SqlId?: number
   /**
@@ -3121,7 +3113,7 @@ export interface DescribeDBDiagHistoryResponse {
   /**
    * 事件描述。
    */
-  Events: Array<DiagHistoryEventItem>
+  Events?: Array<DiagHistoryEventItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3133,11 +3125,11 @@ export interface DescribeDBDiagHistoryResponse {
  */
 export interface CreateUserAutonomyProfileRequest {
   /**
-   * 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）
+   * 配置类型，为需要配置的功能枚举值，目前包含以下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）
    */
   ProfileType: string
   /**
-   * 实列ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -3235,6 +3227,48 @@ export interface DescribeRedisCommandCostStatisticsResponse {
 }
 
 /**
+ * redis key空间信息。
+ */
+export interface RedisKeySpaceData {
+  /**
+   * key名。
+   */
+  Key?: string
+  /**
+   * key类型。
+   */
+  Type?: string
+  /**
+   * key编码方式。
+   */
+  Encoding?: string
+  /**
+   * key过期时间戳（毫秒），0代表未设置过期时间。
+   */
+  ExpireTime?: number
+  /**
+   * key内存大小，单位Byte。
+   */
+  Length?: number
+  /**
+   * 元素个数。
+   */
+  ItemCount?: number
+  /**
+   * 最大元素长度。
+   */
+  MaxElementSize?: number
+  /**
+   * 平均元素长度。
+   */
+  AveElementSize?: number
+  /**
+   * 所属分片序号。
+   */
+  ShardId?: string
+}
+
+/**
  * CancelDBAutonomyEvent返回参数结构体
  */
 export interface CancelDBAutonomyEventResponse {
@@ -3267,7 +3301,7 @@ export interface MonitorMetric {
  */
 export interface ProfileInfo {
   /**
-   * 语言, 如"zh"。
+   * 语言类型, 包含“zh”-中文，“en”-英文。
    */
   Language: string
   /**
@@ -3293,7 +3327,7 @@ export interface SqlCostDistribution {
    */
   To?: number
   /**
-   * 耗时占比。
+   * 耗时占比。单位（%）
    */
   Ratio?: number
 }
@@ -3347,11 +3381,17 @@ export interface AddUserContactRequest {
  */
 export interface CreateSqlFilterRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。
+   * SQL语句的类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。
+其中：
+SELECT   - 查询  
+UPDATE   - 更新  
+DELETE   - 删除  
+INSERT   - 插入  
+REPLACE  - 替换
    */
   SqlType: string
   /**
@@ -3367,7 +3407,7 @@ export interface CreateSqlFilterRequest {
    */
   Duration: number
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   * 通过 [VerifyUserAccount](https://cloud.tencent.com/document/product/1130/72828) 获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
    */
   SessionToken?: string
   /**
@@ -3447,7 +3487,7 @@ export interface InstanceBasicInfo {
  */
 export interface DescribeTopSpaceTablesRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -3456,6 +3496,14 @@ export interface DescribeTopSpaceTablesRequest {
   Limit?: number
   /**
    * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
+其中：
+DataLength       - 数据长度  
+IndexLength      - 索引长度  
+TotalLength      - 总长度  
+DataFree         - 空闲空间  
+FragRatio        - 碎片率  
+TableRows        - 表行数  
+PhysicalFileSize - 物理文件大小
    */
   SortBy?: string
   /**
@@ -3573,11 +3621,11 @@ export interface MySqlProcess {
  */
 export interface DescribeDBDiagEventRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
+   * 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。
    */
   EventId?: number
   /**
@@ -3591,7 +3639,7 @@ export interface DescribeDBDiagEventRequest {
  */
 export interface DescribeNoPrimaryKeyTablesRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -3672,7 +3720,7 @@ export interface AlarmProfileList {
    */
   ReceiveInfo?: Array<ReceiveInfo>
   /**
-   * 更新时间
+   * 更新时间，格式: "yyyy-MM-dd HH:mm:ss"
    */
   UpdateTime?: string
   /**
@@ -3844,7 +3892,7 @@ export interface InstanceInfo {
  */
 export interface DescribeTopSpaceSchemasRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -3853,6 +3901,14 @@ export interface DescribeTopSpaceSchemasRequest {
   Limit?: number
   /**
    * 筛选Top库所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
+其中：
+DataLength       - 数据长度  
+IndexLength      - 索引长度  
+TotalLength      - 总长度  
+DataFree         - 空闲空间  
+FragRatio        - 碎片率  
+TableRows        - 表行数  
+PhysicalFileSize - 物理文件大小
    */
   SortBy?: string
   /**
@@ -3866,11 +3922,11 @@ export interface DescribeTopSpaceSchemasRequest {
  */
 export interface TemplateInfo {
   /**
-   * 模板id
+   * 模板id,通过接口[通知模板查询](https://cloud.tencent.com/document/product/1130/97726)获得。
    */
   TemplateId: string
   /**
-   * 模板名
+   * 模板名,通过接口[通知模板查询](https://cloud.tencent.com/document/product/1130/97726)获得。
    */
   TemplateName: string
 }
@@ -3884,7 +3940,7 @@ export interface DescribeAuditInstanceListRequest {
    */
   Product: string
   /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   * NodeRequestType主要标识数据库产品类型，与Product保持一致。如："dcdb" ,"mariadb"。
    */
   NodeRequestType: string
   /**
@@ -3900,7 +3956,7 @@ export interface DescribeAuditInstanceListRequest {
    */
   Limit?: number
   /**
-   * 查询实例的搜索条件。
+   * 查询实例的搜索条件。Name包括：InstanceId， InstanceName。
    */
   Filters?: Array<AuditInstanceFilter>
 }
@@ -3932,7 +3988,7 @@ export interface DescribeRedisBigKeyAnalysisTasksRequest {
  */
 export interface DescribeSqlFiltersRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -4168,7 +4224,7 @@ export interface CmdCostGroup {
  */
 export interface DescribeRedisTopBigKeysRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -4210,7 +4266,7 @@ export interface ModifyUserAutonomyProfileRequest {
    */
   ProfileType: string
   /**
-   * 实列ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -4221,6 +4277,36 @@ export interface ModifyUserAutonomyProfileRequest {
    * 自治功能相关配置，标准JSON字符串格式。
    */
   NewProfileInfo?: string
+}
+
+/**
+ * DescribeMetricTopProxies请求参数结构体
+ */
+export interface DescribeMetricTopProxiesRequest {
+  /**
+   * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
+   */
+  StartTime: string
+  /**
+   * 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。
+   */
+  EndTime: string
+  /**
+   * 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb    默认为"mysql"。
+   */
+  Product: string
+  /**
+   * 指标 eg: cpu_util, connections
+   */
+  Metric: string
+  /**
+   * 默认前20条
+   */
+  Limit?: number
 }
 
 /**
@@ -4284,6 +4370,7 @@ export interface Process {
   Id?: number
   /**
    * 访问来源，IP 地址和端口号。
+格式：IP:Port
    */
   Address?: string
   /**
@@ -4591,11 +4678,11 @@ export interface DescribeTopSpaceSchemasResponse {
   /**
    * 返回的Top库空间统计信息列表。
    */
-  TopSpaceSchemas: Array<SchemaSpaceData>
+  TopSpaceSchemas?: Array<SchemaSpaceData>
   /**
    * 采集库空间数据的时间戳（秒）。
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4657,15 +4744,15 @@ export interface CancelDBAutonomyActionRequest {
  */
 export interface DeleteDBDiagReportTasksRequest {
   /**
-   * 需要删除的任务id列表
+   * 需要删除的任务id列表。可通过[查询健康报告生成任务列表](https://cloud.tencent.com/document/product/1130/57805)获取
    */
   AsyncRequestIds: Array<number | bigint>
   /**
-   * 实例ID
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -4679,16 +4766,15 @@ export interface DescribeAlarmTemplateRequest {
    */
   TemplateNameRegexp: string
   /**
-   * 返回限制长度
+   * 返回限制长度，最大值: 50，默认值: 50
    */
   Limit: number
   /**
-   * 偏置
+   * 偏置，最大值: 无限制，默认值: 0
    */
   Offset: number
   /**
-   * mysql -  mysql
-cynosdb -  tdsql-c
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL
    */
   Product?: string
 }
@@ -4700,7 +4786,7 @@ export interface VerifyUserAccountResponse {
   /**
    * 会话token，有效期为5分钟。
    */
-  SessionToken: string
+  SessionToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4800,15 +4886,15 @@ export interface MonitorFloatMetric {
  */
 export interface ModifyAlarmPolicyRequest {
   /**
-   * 类型
+   * 策略类型，固定值：instance， instance-代表实例类型策略
    */
   ApplyType: string
   /**
-   * 开启策略
+   * 策略是否开启，0-代表开启，1-代表关闭
    */
   Enable: number
   /**
-   * 列表
+   * 实例id列表，可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceIds: Array<InstanceID>
   /**
@@ -4817,15 +4903,15 @@ Instance-关联实例列表的实例
    */
   NewProfileLevel: string
   /**
-   * 新策略名
+   * 新策略名，包含中文英文数字，长度在60个字符以内，不能以“_”开头。
    */
   NewProfileName: string
   /**
-   * 旧策略名
+   * 旧策略名，包含中文英文数字，长度在60个字符以内，不能以“_”开头。
    */
   ProfileName: string
   /**
-   * 策略类型
+   * 策略类型，固定值：alarm_policy
    */
   ProfileType: string
   /**
@@ -4843,11 +4929,11 @@ Instance-关联实例列表的实例
   /**
    * 快速规则  支持包括fatal-致命, critical-严重,
 warning-告警,
-information-通知
+information-通知，与Rules互斥
    */
   QuickRule?: string
   /**
-   * 自定义规则
+   * 自定义规则，与QuickRule互斥。
    */
   Rules?: Array<AlarmsRules>
 }
@@ -4857,7 +4943,7 @@ information-通知
  */
 export interface DescribeRedisCommandOverviewRequest {
   /**
-   * 实例 ID
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -4923,15 +5009,15 @@ export interface CreateAuditLogFileRequest {
    */
   NodeRequestType: string
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * 开始时间，如“2025-03-17T00:00:00+00:00”。
    */
   StartTime: string
   /**
-   * 截止时间，如“2019-09-11 10:13:14”。
+   * 结束时间，如“2025-03-17T01:00:00+00:00”。
    */
   EndTime: string
   /**
@@ -4945,19 +5031,19 @@ export interface CreateAuditLogFileRequest {
  */
 export interface DeleteAuditLogFileRequest {
   /**
-   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
+   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB， "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "postgres" - 云数据库 PostgreSQL。
    */
   Product: string
   /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"
+   * NodeRequestType主要标识数据库产品类型，与Product保持一致。该字段规则如下： 当product为"dcdb"则输入"dcdb"， 当product为"mariadb"则输入"mariadb"， 当product为"mysql"则输入"mysql"， 当product为"cynosdb"则输入"mysql"， 当product为"postgres"则输入"postgres"。
    */
   NodeRequestType: string
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 审计日志文件生成异步任务ID。
+   * 审计日志文件生成异步任务ID。可通过[查询审计日志文件](https://cloud.tencent.com/document/product/1130/90371)获得。
    */
   AsyncRequestId: number
 }
@@ -5157,7 +5243,7 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
  */
 export interface DescribeUserSqlAdviceRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -5195,19 +5281,19 @@ export interface DescribeDBAutonomyActionResponse {
    */
   Type?: string
   /**
-   * 自治任务触发时间。
+   * 自治任务触发时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   TriggerTime?: string
   /**
-   * 自治任务创建时间。
+   * 自治任务创建时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   CreateTime?: string
   /**
-   * 自治任务更新时间。
+   * 自治任务更新时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   UpdateTime?: string
   /**
-   * 自治任务完成时间。
+   * 自治任务完成时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   FinishTime?: string
   /**
@@ -5220,6 +5306,12 @@ export interface DescribeDBAutonomyActionResponse {
   Reason?: string
   /**
    * 自治任务状态：支持 RUNNING，FINISHED，TERMINATED，CANCELLED
+其中：
+RUNNING    - 运行中  
+FINISHED   - 已完成  
+TERMINATED - 已终止  
+CANCELLED  - 已取消  
+
    */
   Status?: string
   /**
@@ -5283,7 +5375,7 @@ export interface MonitorMetricSeriesData {
    */
   Series?: Array<MonitorMetric>
   /**
-   * 监控指标对应的时间戳。
+   * 监控指标对应的时间戳。（精度：秒）
    */
   Timestamp?: Array<number | bigint>
 }
@@ -5318,6 +5410,42 @@ export interface DescribeRedisTopKeyPrefixListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Redis  DescribeMetricTopProxies 接口返回数据
+ */
+export interface RedisMetricTopProxiesData {
+  /**
+   * host
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * Proxy Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceProxyId?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 最新的值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: number
+  /**
+   * 时间（秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: Array<number | bigint>
+  /**
+   * 序列数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Series?: Array<MonitorFloatMetric>
 }
 
 /**
@@ -5527,7 +5655,7 @@ export interface DescribeAuditLogFilesRequest {
    */
   NodeRequestType: string
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -5545,15 +5673,15 @@ export interface DescribeAuditLogFilesRequest {
  */
 export interface DeleteSqlFiltersRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 限流任务ID列表。
+   * 限流任务ID列表。通过接口[创建实例SQL限流任务](https://cloud.tencent.com/document/product/1130/72835)获得。
    */
   FilterIds: Array<number | bigint>
   /**
-   * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
+   * 通过 [VerifyUserAccount](https://cloud.tencent.com/document/product/1130/72828) 获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
    */
   SessionToken?: string
   /**
@@ -5665,7 +5793,7 @@ export interface Table {
  */
 export interface DescribeMySqlProcessListRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -5685,11 +5813,11 @@ export interface DescribeMySqlProcessListRequest {
    */
   DB?: string
   /**
-   * 线程的操作状态，用于筛选线程列表。
+   * 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等
    */
   State?: string
   /**
-   * 线程的执行类型，用于筛选线程列表。
+   * 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等
    */
   Command?: string
   /**
@@ -5733,11 +5861,11 @@ export interface DescribeSecurityAuditLogDownloadUrlsResponse {
  */
 export interface DescribeSlowLogQueryTimeStatsRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * 开始时间，如“2019-09-10 12:13:14”，截止时间与开始时间的间隔小于7天。
    */
   StartTime: string
   /**
@@ -5753,11 +5881,14 @@ export interface DescribeSlowLogQueryTimeStatsRequest {
    */
   InstanceProxyId?: string
   /**
-   * 实列节点ID。
+   * 实例节点ID。
    */
   InstanceNodeId?: string
   /**
    * 查询类型，目前支持值：mongod，mongos。
+其中：
+mongod - MongoDB的数据存储节点
+mongos - MongoDB的路由节点
    */
   Type?: string
 }

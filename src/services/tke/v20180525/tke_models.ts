@@ -3948,6 +3948,8 @@ export interface BackupStorageLocation {
   Path?: string
   /**
    * 存储仓库状态
+- Available: 可用
+- Unavailable: 不可用
    */
   State?: string
   /**
@@ -5412,7 +5414,7 @@ export interface RegionInstance {
    */
   RegionId?: number
   /**
-   * 地域状态
+   * 地域状态\n- alluser: 所有用户可见
    */
   Status?: string
   /**
@@ -6342,6 +6344,10 @@ export interface RemoveNodeFromNodePoolRequest {
 export interface DescribeEncryptionStatusResponse {
   /**
    * 加密状态
+- Opening: 开启中
+- Opened: 已开启
+- Closing: 关闭中
+- Closed: 已关闭
    */
   Status?: string
   /**
@@ -6487,7 +6493,7 @@ export interface Filter {
  */
 export interface KMSConfiguration {
   /**
-   * kms id
+   * kms id，可以在密钥管理控制台获取
    */
   KeyId?: string
   /**
@@ -7017,7 +7023,10 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
    */
   KubeProxyMode?: string
   /**
-   * 集群网络类型。包括GR（全局路由）和VPC-CNI两种模式，默认为GR。
+   * 集群网络类型，默认为GR。
+- GR: 全局路由
+- VPC-CNI: VPC-CNI模式
+- CiliumOverlay: CiliumOverlay模式
    */
   NetworkType?: string
   /**
@@ -7824,7 +7833,7 @@ export interface VersionInstance {
    */
   Version?: string
   /**
-   * Remark
+   * 备注
    */
   Remark?: string
 }

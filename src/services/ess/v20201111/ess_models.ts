@@ -161,6 +161,10 @@ export interface CreateSealRequest {
    * 印章描述内容
    */
   SealDescription?: string
+  /**
+   * 个性化配置字段，默认不传。
+   */
+  Options?: Array<Option>
 }
 
 /**
@@ -366,6 +370,14 @@ export interface IntentionQuestionResult {
  * OperateSeals返回参数结构体
  */
 export interface OperateSealsResponse {
+  /**
+   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   */
+  SealOperatorVerifyPath?: string
+  /**
+   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   */
+  SealOperatorVerifyQrcodeUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1887,6 +1899,10 @@ export interface OperateSealsRequest {
    * 需要操作的印章ID，数组形式，印章ID可从【web控制台->印章 】获取。
    */
   SealIds?: Array<string>
+  /**
+   * 个性化配置字段，默认不传。
+   */
+  Options?: Array<Option>
 }
 
 /**
@@ -2593,6 +2609,14 @@ export interface CreateSealResponse {
    */
   SealId?: string
   /**
+   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   */
+  SealOperatorVerifyPath?: string
+  /**
+   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   */
+  SealOperatorVerifyQrcodeUrl?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2618,8 +2642,12 @@ export interface MiniAppCreateFlowOption {
    * 小程序集成发起，是否禁止发起时修改合同内容
 <ul>
 <li>false：默认值，不禁止发起时修改合同内容</li>
-<li>true：禁止发起时修改合同内容</li>
+<li>true：禁止发起时修改合同内容（将直接跳过添加/编辑签署人步骤，直接到核对合同信息页面</li>
 </ul>
+指定为true，效果如下：
+
+效果如下:![ForbidEditFlow](https://qcloudimg.tencent-cloud.cn/raw/2440eca624f2f6730fecbf69daad0533.jpg)
+
    */
   ForbidEditFlow?: boolean
 }
@@ -4273,6 +4301,14 @@ export interface CreateSealPolicyResponse {
 可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
    */
   UserIds?: Array<string>
+  /**
+   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   */
+  SealOperatorVerifyPath?: string
+  /**
+   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   */
+  SealOperatorVerifyQrcodeUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8405,6 +8441,10 @@ export interface CreateSealPolicyRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+  /**
+   * 个性化配置字段，默认不传。
+   */
+  Options?: Array<Option>
 }
 
 /**
@@ -10021,6 +10061,22 @@ export interface CreateBatchOrganizationRegistrationTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 业务逻辑个性化配置字段，默认不传
+
+注: `配置前请联系对接的客户经理沟通确认。`
+ */
+export interface Option {
+  /**
+   * 个性化配置参数Key字段，对应传入字段的字段名
+   */
+  Key: string
+  /**
+   * 个性化配置参数Value字段，对应传入字段的字段值
+   */
+  Value: string
 }
 
 /**

@@ -998,6 +998,16 @@ it("cdb.v20170320.DeleteBackup", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyDBInstanceModes", async function () {
+    try {
+       const data = await client.ModifyDBInstanceModes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeRoMinScale", async function () {
     try {
        const data = await client.DescribeRoMinScale({})

@@ -362,7 +362,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
+   * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线(DestroySyncJob)操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
    */
   async IsolateSyncJob(
     req: IsolateSyncJobRequest,
@@ -412,8 +412,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为订阅实例创建消费者组
-   */
+     * 为订阅实例创建消费者组。
+只有状态为运行中的实例支持创建消费组。
+     */
   async CreateConsumerGroup(
     req: CreateConsumerGroupRequest,
     cb?: (error: string, rep: CreateConsumerGroupResponse) => void
@@ -724,10 +725,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 校验迁移任务，
+     * 创建校验迁移任务，
 在开始迁移前, 必须调用本接口创建校验迁移任务, 且校验成功后才能开始迁移. 校验的结果可以通过DescribeMigrationCheckJob查看，
 校验成功后,迁移任务若有修改, 则必须重新校验并通过后, 才能开始迁移
-
      */
   async CreateMigrateCheckJob(
     req: CreateMigrateCheckJobRequest,
@@ -817,7 +817,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解除隔离同步任务，任务在已隔离状态下可调用该接口解除隔离状态任务，同时可通过查询同步任务信息接口DescribeSyncJobs，获取操作后状态。
+   * 解除隔离同步任务，任务在已隔离状态下可调用该接口解除隔离状态任务，同时可通过查询同步任务信息接口DescribeSyncJobs，获取操作后状态。注意，此接口只支持按量计费实例。
    */
   async RecoverSyncJob(
     req: RecoverSyncJobRequest,
@@ -828,7 +828,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口(ResetSubscribe)用于重置订阅实例，重置后，可以重新配置订阅任务。
-可以调用 DescribeSubscribeDetail 查询订阅信息判断是否置成功。当SubsStatus变为notStarted时，表示重置成功。
+可以调用 [DescribeSubscribeDetail](https://cloud.tencent.com/document/product/571/102944) 查询订阅信息判断是否置成功。当SubsStatus变为notStarted时，表示重置成功。
      */
   async ResetSubscribe(
     req: ResetSubscribeRequest,

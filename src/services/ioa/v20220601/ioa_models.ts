@@ -406,6 +406,10 @@ export interface DescribeAccountGroupsData {
    * 最新一次同步任务的结束时间
    */
   LatestSyncTime?: string
+  /**
+   * 分组名称数组
+   */
+  NamePathArr?: Array<string>
 }
 
 /**

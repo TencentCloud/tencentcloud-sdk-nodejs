@@ -1017,7 +1017,8 @@ export interface ModifySubscribeAutoRenewFlagRequest {
  */
 export interface CompleteMigrateJobRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -1355,7 +1356,8 @@ export interface StartMigrateJobResponse {
  */
 export interface StartMigrateJobRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
 }

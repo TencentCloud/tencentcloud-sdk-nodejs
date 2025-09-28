@@ -456,6 +456,20 @@ export interface OriginDetail {
 }
 
 /**
+ * 多通道网关示例实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。
+ */
+export interface MultiPathGatewayOriginACLInfo {
+  /**
+   * 当前生效的回源 IP 网段。
+   */
+  MultiPathGatewayCurrentOriginACL?: MultiPathGatewayCurrentOriginACL
+  /**
+   * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前回源 IP 网段的对比。无更新时该字段为空。
+   */
+  MultiPathGatewayNextOriginACL?: MultiPathGatewayNextOriginACL
+}
+
+/**
  * HTTP 头部设置规则。
  */
 export interface HeaderAction {
@@ -3604,6 +3618,19 @@ export interface ModifyRealtimeLogDeliveryTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 内容压缩配置。
+ */
+export interface ContentCompressionParameters {
+  /**
+   * 内容压缩配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+当 Switch 为 on 时，将同时支持 brotli 和 gzip 压缩算法。
+   */
+  Switch: string
 }
 
 /**
@@ -6908,6 +6935,16 @@ export interface DeviceProfile {
 }
 
 /**
+ * ConfirmMultiPathGatewayOriginACL返回参数结构体
+ */
+export interface ConfirmMultiPathGatewayOriginACLResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateJustInTimeTranscodeTemplate请求参数结构体
  */
 export interface CreateJustInTimeTranscodeTemplateRequest {
@@ -7057,6 +7094,20 @@ export interface DownloadL4LogsResponse {
    * 四层离线日志数据列表。
    */
   Data?: Array<L4OfflineLog>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMultiPathGatewayOriginACL返回参数结构体
+ */
+export interface DescribeMultiPathGatewayOriginACLResponse {
+  /**
+   * 多通道网关实例与回源 IP 网段的绑定关系详情。
+   */
+  MultiPathGatewayOriginACLInfo?: MultiPathGatewayOriginACLInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10686,6 +10737,32 @@ export interface CreateApplicationProxyRequest {
 }
 
 /**
+ * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。
+ */
+export interface MultiPathGatewayNextOriginACL {
+  /**
+   * 版本号。
+   */
+  Version?: number
+  /**
+   * 回源 IP 网段详情。
+   */
+  EntireAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段新增的部分。
+   */
+  AddedAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段删减的部分。
+   */
+  RemovedAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段无变化的部分。
+   */
+  NoChangeAddresses?: Addresses
+}
+
+/**
  * cc配置项。
  */
 export interface CC {
@@ -12679,6 +12756,24 @@ export interface DescribeIdentificationsResponse {
 }
 
 /**
+ * ConfirmMultiPathGatewayOriginACL请求参数结构体
+ */
+export interface ConfirmMultiPathGatewayOriginACLRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 网关 ID。
+   */
+  GatewayId: string
+  /**
+   * 回源 IP 版本号。
+   */
+  OriginACLVersion: number
+}
+
+/**
  * DeleteL4Proxy返回参数结构体
  */
 export interface DeleteL4ProxyResponse {
@@ -12756,6 +12851,16 @@ export interface DescribeIPRegionResponse {
  * DescribeAvailablePlans请求参数结构体
  */
 export type DescribeAvailablePlansRequest = null
+
+/**
+ * ModifyMultiPathGatewayStatus返回参数结构体
+ */
+export interface ModifyMultiPathGatewayStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * CNAME 接入，使用 DNS 解析验证时所需的信息。
@@ -13557,224 +13662,17 @@ export interface CreateCustomizeErrorPageResponse {
 }
 
 /**
- * 规则引擎操作。
+ * DescribeMultiPathGatewayOriginACL请求参数结构体
  */
-export interface RuleEngineAction {
+export interface DescribeMultiPathGatewayOriginACLRequest {
   /**
-   * 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。
-<li>Cache：节点缓存 TTL；</li>
-<li>CacheKey：自定义 Cache Key；</li>
-<li>CachePrefresh：缓存预刷新；</li>
-<li>AccessURLRedirect：访问 URL 重定向；</li>
-<li>UpstreamURLRewrite：回源 URL 重写；</li>
-<li>QUIC：QUIC；</li>
-<li>WebSocket：WebSocket；</li>
-<li>Authentication：Token 鉴权；</li>
-<li>MaxAge：浏览器缓存 TTL；</li>
-<li>StatusCodeCache：状态码缓存 TTL；</li>
-<li>OfflineCache：离线缓存；</li>
-<li>SmartRouting：智能加速；</li>
-<li>RangeOriginPull：分片回源 ；</li>
-<li>UpstreamHTTP2：HTTP2 回源；</li>
-<li>HostHeader：Host Header 重写；</li>
-<li>ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；</li>
-<li>OriginPullProtocol：回源 HTTPS；</li>
-<li>Compression：智能压缩配置；</li>
-<li>HSTS：HSTS；</li>
-<li>ClientIPHeader：存储客户端请求 IP 的头部信息配置；</li>
-<li>OCSPStapling：OCSP 装订；</li>
-<li>HTTP2：HTTP2 接入；</li>
-<li>PostMaxSize：POST 请求上传文件流式传输最大限制配置；</li>
-<li>ClientIPCountry：回源时携带客户端 IP 所属地域信息；</li>
-<li>UpstreamFollowRedirect：回源跟随重定向参数配置；</li>
-<li>UpstreamRequest：回源请求参数；</li>
-<li>TLSConfig：SSL/TLS 安全；</li>
-<li>ModifyOrigin：修改源站；</li>
-<li>HTTPUpstreamTimeout：七层回源超时配置；</li>
-<li>HttpResponse：HTTP 应答；</li>
-<li>ErrorPage：自定义错误页面；</li>
-<li>ModifyResponseHeader：修改 HTTP 节点响应头；</li>
-<li>ModifyRequestHeader：修改 HTTP 节点请求头；</li>
-<li>ResponseSpeedLimit：单连接下载限速；</li>
-<li>SetContentIdentifier：设置内容标识符；</li>
-<li>Vary：Vary 特性配置。</li>
+   * 站点 ID。
    */
-  Name: string
+  ZoneId: string
   /**
-   * 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 网关 ID。
    */
-  CacheParameters?: CacheParameters
-  /**
-   * 自定义 Cache Key 配置参数，当 Name 取值为 CacheKey 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CacheKeyParameters?: CacheKeyParameters
-  /**
-   * 缓存预刷新配置参数，当 Name 取值为 CachePrefresh 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CachePrefreshParameters?: CachePrefreshParameters
-  /**
-   * 访问 URL 重定向配置参数，当 Name 取值为 AccessURLRedirect 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccessURLRedirectParameters?: AccessURLRedirectParameters
-  /**
-   * 回源 URL 重写配置参数，当 Name 取值为 UpstreamURLRewrite 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpstreamURLRewriteParameters?: UpstreamURLRewriteParameters
-  /**
-   * QUIC 配置参数，当 Name 取值为 QUIC 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QUICParameters?: QUICParameters
-  /**
-   * WebSocket 配置参数，当 Name 取值为 WebSocket 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebSocketParameters?: WebSocketParameters
-  /**
-   * Token 鉴权配置参数，当 Name 取值为 Authentication 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuthenticationParameters?: AuthenticationParameters
-  /**
-   * 浏览器缓存 TTL 配置参数，当 Name 取值为 MaxAge 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxAgeParameters?: MaxAgeParameters
-  /**
-   * 状态码缓存 TTL 配置参数，当 Name 取值为 StatusCodeCache 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusCodeCacheParameters?: StatusCodeCacheParameters
-  /**
-   * 离线缓存配置参数，当 Name 取值为 OfflineCache 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OfflineCacheParameters?: OfflineCacheParameters
-  /**
-   * 智能加速配置参数，当 Name 取值为 SmartRouting 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SmartRoutingParameters?: SmartRoutingParameters
-  /**
-   * 分片回源配置参数，当 Name 取值为 RangeOriginPull 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RangeOriginPullParameters?: RangeOriginPullParameters
-  /**
-   * HTTP2 回源配置参数，当 Name 取值为 UpstreamHTTP2 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpstreamHTTP2Parameters?: UpstreamHTTP2Parameters
-  /**
-   * Host Header 重写配置参数，当 Name 取值为 HostHeader 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HostHeaderParameters?: HostHeaderParameters
-  /**
-   * 访问协议强制 HTTPS 跳转配置，当 Name 取值为 ForceRedirectHTTPS 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ForceRedirectHTTPSParameters?: ForceRedirectHTTPSParameters
-  /**
-   * 智能压缩配置，当 Name 取值为 Compression 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CompressionParameters?: CompressionParameters
-  /**
-   * HSTS 配置参数，当 Name 取值为 HSTS 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HSTSParameters?: HSTSParameters
-  /**
-   * 存储客户端请求 IP 的头部信息配置，当 Name 取值为 ClientIPHeader 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientIPHeaderParameters?: ClientIPHeaderParameters
-  /**
-   * OCSP 装订配置参数，当 Name 取值为 OCSPStapling 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OCSPStaplingParameters?: OCSPStaplingParameters
-  /**
-   * HTTP2 接入配置参数，当 Name 取值为 HTTP2 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTP2Parameters?: HTTP2Parameters
-  /**
-   * POST 请求上传文件流式传输最大限制配置，当 Name 取值为 PostMaxSize 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PostMaxSizeParameters?: PostMaxSizeParameters
-  /**
-   * 回源时携带客户端 IP 所属地域信息配置参数，当 Name 取值为 ClientIPCountry 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientIPCountryParameters?: ClientIPCountryParameters
-  /**
-   * 回源跟随重定向参数配置，当 Name 取值为 UpstreamFollowRedirect 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpstreamFollowRedirectParameters?: UpstreamFollowRedirectParameters
-  /**
-   * 回源请求参数配置参数，当 Name 取值为 UpstreamRequest 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpstreamRequestParameters?: UpstreamRequestParameters
-  /**
-   * SSL/TLS 安全配置参数，当 Name 取值为 TLSConfig 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TLSConfigParameters?: TLSConfigParameters
-  /**
-   * 修改源站配置参数，当 Name 取值为 ModifyOrigin 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyOriginParameters?: ModifyOriginParameters
-  /**
-   * 七层回源超时配置，当 Name 取值为 HTTPUpstreamTimeout 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTPUpstreamTimeoutParameters?: HTTPUpstreamTimeoutParameters
-  /**
-   * HTTP 应答配置参数，当 Name 取值为 HttpResponse 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpResponseParameters?: HTTPResponseParameters
-  /**
-   * 自定义错误页面配置参数，当 Name 取值为 ErrorPage 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorPageParameters?: ErrorPageParameters
-  /**
-   * 修改 HTTP 节点响应头配置参数，当 Name 取值为 ModifyResponseHeader 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyResponseHeaderParameters?: ModifyResponseHeaderParameters
-  /**
-   * 修改 HTTP 节点请求头配置参数，当 Name 取值为 ModifyRequestHeader 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyRequestHeaderParameters?: ModifyRequestHeaderParameters
-  /**
-   * 单连接下载限速配置参数，当 Name 取值为 ResponseSpeedLimit 时，该参数必填。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResponseSpeedLimitParameters?: ResponseSpeedLimitParameters
-  /**
-   * 内容标识配置参数，当 Name 取值为 SetContentIdentifier 时，该参数必填。
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SetContentIdentifierParameters?: SetContentIdentifierParameters
-  /**
-   * Vary 特性配置参数，当 Name 取值为 Vary 时，该参数必填。
-   */
-  VaryParameters?: VaryParameters
+  GatewayId: string
 }
 
 /**
@@ -14422,6 +14320,24 @@ export interface UpstreamRequestParameters {
 }
 
 /**
+ * ModifyMultiPathGatewayStatus请求参数结构体
+ */
+export interface ModifyMultiPathGatewayStatusRequest {
+  /**
+   * 网关 ID。
+   */
+  GatewayId: string
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 修改网关的启用停用状态，取值有：<li> offline：停用；</li><li> online：启用。</li>
+   */
+  GatewayStatus?: string
+}
+
+/**
  * DeleteSecurityClientAttester返回参数结构体
  */
 export interface DeleteSecurityClientAttesterResponse {
@@ -14943,6 +14859,19 @@ export interface CreateSecurityAPIResourceResponse {
 }
 
 /**
+ * 回源 HTTPS 配置参数。
+ */
+export interface OriginPullProtocolParameters {
+  /**
+   * 回源协议配置，取值有：
+<li>http：使用 HTTP 协议回源；</li>
+<li>https：使用 HTTPS 协议回源；</li>
+<li>follow：协议跟随。</li>
+   */
+  Protocol?: string
+}
+
+/**
  * 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。
  */
 export interface CacheTag {
@@ -15078,6 +15007,27 @@ export interface DescribeConfigGroupVersionsRequest {
    * 分页查询限制数目。默认值为 20，最大值为 100。
    */
   Limit?: number
+}
+
+/**
+ * 当前生效的回源 IP 网段。
+ */
+export interface MultiPathGatewayCurrentOriginACL {
+  /**
+   * 回源 IP 网段详情。
+   */
+  EntireAddresses?: Addresses
+  /**
+   * 版本号。
+   */
+  Version?: number
+  /**
+   * 本参数用于记录当前版本生效前是否完成「我已更新至最新回源 IP 网段」的确认。取值有：
+<li>true：已完成更新至最新回源 IP 的确认；</li>
+<li>false：未完成更新至最新回源 IP 的确认；</li>
+注意：本参数返回 false 时，请及时确认您的源站防火墙配置是否已更新至最新的回源 IP 网段，以避免出现回源失败。
+   */
+  IsPlaned?: string
 }
 
 /**
@@ -15719,6 +15669,236 @@ export interface DescribeTimingL4DataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则引擎操作。
+ */
+export interface RuleEngineAction {
+  /**
+   * 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。
+<li>Cache：节点缓存 TTL；</li>
+<li>CacheKey：自定义 Cache Key；</li>
+<li>CachePrefresh：缓存预刷新；</li>
+<li>AccessURLRedirect：访问 URL 重定向；</li>
+<li>UpstreamURLRewrite：回源 URL 重写；</li>
+<li>QUIC：QUIC；</li>
+<li>WebSocket：WebSocket；</li>
+<li>Authentication：Token 鉴权；</li>
+<li>MaxAge：浏览器缓存 TTL；</li>
+<li>StatusCodeCache：状态码缓存 TTL；</li>
+<li>OfflineCache：离线缓存；</li>
+<li>SmartRouting：智能加速；</li>
+<li>RangeOriginPull：分片回源 ；</li>
+<li>UpstreamHTTP2：HTTP2 回源；</li>
+<li>HostHeader：Host Header 重写；</li>
+<li>ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；</li>
+<li>OriginPullProtocol：回源 HTTPS；</li>
+<li>Compression：智能压缩配置；</li>
+<li>HSTS：HSTS；</li>
+<li>ClientIPHeader：存储客户端请求 IP 的头部信息配置；</li>
+<li>OCSPStapling：OCSP 装订；</li>
+<li>HTTP2：HTTP2 接入；</li>
+<li>PostMaxSize：POST 请求上传文件流式传输最大限制配置；</li>
+<li>ClientIPCountry：回源时携带客户端 IP 所属地域信息；</li>
+<li>UpstreamFollowRedirect：回源跟随重定向参数配置；</li>
+<li>UpstreamRequest：回源请求参数；</li>
+<li>TLSConfig：SSL/TLS 安全；</li>
+<li>ModifyOrigin：修改源站；</li>
+<li>HTTPUpstreamTimeout：七层回源超时配置；</li>
+<li>HttpResponse：HTTP 应答；</li>
+<li>ErrorPage：自定义错误页面；</li>
+<li>ModifyResponseHeader：修改 HTTP 节点响应头；</li>
+<li>ModifyRequestHeader：修改 HTTP 节点请求头；</li>
+<li>ResponseSpeedLimit：单连接下载限速；</li>
+<li>SetContentIdentifier：设置内容标识符；</li>
+<li>Vary：Vary 特性配置。</li>
+   */
+  Name: string
+  /**
+   * 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheParameters?: CacheParameters
+  /**
+   * 自定义 Cache Key 配置参数，当 Name 取值为 CacheKey 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheKeyParameters?: CacheKeyParameters
+  /**
+   * 缓存预刷新配置参数，当 Name 取值为 CachePrefresh 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CachePrefreshParameters?: CachePrefreshParameters
+  /**
+   * 访问 URL 重定向配置参数，当 Name 取值为 AccessURLRedirect 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessURLRedirectParameters?: AccessURLRedirectParameters
+  /**
+   * 回源 URL 重写配置参数，当 Name 取值为 UpstreamURLRewrite 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamURLRewriteParameters?: UpstreamURLRewriteParameters
+  /**
+   * QUIC 配置参数，当 Name 取值为 QUIC 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QUICParameters?: QUICParameters
+  /**
+   * WebSocket 配置参数，当 Name 取值为 WebSocket 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebSocketParameters?: WebSocketParameters
+  /**
+   * Token 鉴权配置参数，当 Name 取值为 Authentication 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthenticationParameters?: AuthenticationParameters
+  /**
+   * 浏览器缓存 TTL 配置参数，当 Name 取值为 MaxAge 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxAgeParameters?: MaxAgeParameters
+  /**
+   * 状态码缓存 TTL 配置参数，当 Name 取值为 StatusCodeCache 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusCodeCacheParameters?: StatusCodeCacheParameters
+  /**
+   * 离线缓存配置参数，当 Name 取值为 OfflineCache 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OfflineCacheParameters?: OfflineCacheParameters
+  /**
+   * 智能加速配置参数，当 Name 取值为 SmartRouting 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartRoutingParameters?: SmartRoutingParameters
+  /**
+   * 分片回源配置参数，当 Name 取值为 RangeOriginPull 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RangeOriginPullParameters?: RangeOriginPullParameters
+  /**
+   * HTTP2 回源配置参数，当 Name 取值为 UpstreamHTTP2 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamHTTP2Parameters?: UpstreamHTTP2Parameters
+  /**
+   * Host Header 重写配置参数，当 Name 取值为 HostHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostHeaderParameters?: HostHeaderParameters
+  /**
+   * 访问协议强制 HTTPS 跳转配置，当 Name 取值为 ForceRedirectHTTPS 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForceRedirectHTTPSParameters?: ForceRedirectHTTPSParameters
+  /**
+   * 回源 HTTPS 配置参数，当 Name 取值为 OriginPullProtocol 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginPullProtocolParameters?: OriginPullProtocolParameters
+  /**
+   * 智能压缩配置，当 Name 取值为 Compression 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompressionParameters?: CompressionParameters
+  /**
+   * HSTS 配置参数，当 Name 取值为 HSTS 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSTSParameters?: HSTSParameters
+  /**
+   * 存储客户端请求 IP 的头部信息配置，当 Name 取值为 ClientIPHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIPHeaderParameters?: ClientIPHeaderParameters
+  /**
+   * OCSP 装订配置参数，当 Name 取值为 OCSPStapling 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OCSPStaplingParameters?: OCSPStaplingParameters
+  /**
+   * HTTP2 接入配置参数，当 Name 取值为 HTTP2 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTP2Parameters?: HTTP2Parameters
+  /**
+   * POST 请求上传文件流式传输最大限制配置，当 Name 取值为 PostMaxSize 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostMaxSizeParameters?: PostMaxSizeParameters
+  /**
+   * 回源时携带客户端 IP 所属地域信息配置参数，当 Name 取值为 ClientIPCountry 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIPCountryParameters?: ClientIPCountryParameters
+  /**
+   * 回源跟随重定向参数配置，当 Name 取值为 UpstreamFollowRedirect 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamFollowRedirectParameters?: UpstreamFollowRedirectParameters
+  /**
+   * 回源请求参数配置参数，当 Name 取值为 UpstreamRequest 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamRequestParameters?: UpstreamRequestParameters
+  /**
+   * SSL/TLS 安全配置参数，当 Name 取值为 TLSConfig 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TLSConfigParameters?: TLSConfigParameters
+  /**
+   * 修改源站配置参数，当 Name 取值为 ModifyOrigin 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyOriginParameters?: ModifyOriginParameters
+  /**
+   * 七层回源超时配置，当 Name 取值为 HTTPUpstreamTimeout 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPUpstreamTimeoutParameters?: HTTPUpstreamTimeoutParameters
+  /**
+   * HTTP 应答配置参数，当 Name 取值为 HttpResponse 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpResponseParameters?: HTTPResponseParameters
+  /**
+   * 自定义错误页面配置参数，当 Name 取值为 ErrorPage 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorPageParameters?: ErrorPageParameters
+  /**
+   * 修改 HTTP 节点响应头配置参数，当 Name 取值为 ModifyResponseHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyResponseHeaderParameters?: ModifyResponseHeaderParameters
+  /**
+   * 修改 HTTP 节点请求头配置参数，当 Name 取值为 ModifyRequestHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyRequestHeaderParameters?: ModifyRequestHeaderParameters
+  /**
+   * 单连接下载限速配置参数，当 Name 取值为 ResponseSpeedLimit 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseSpeedLimitParameters?: ResponseSpeedLimitParameters
+  /**
+   * 内容标识配置参数，当 Name 取值为 SetContentIdentifier 时，该参数必填。
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetContentIdentifierParameters?: SetContentIdentifierParameters
+  /**
+   * Vary 特性配置参数，当 Name 取值为 Vary 时，该参数必填。
+   */
+  VaryParameters?: VaryParameters
+  /**
+   * 内容压缩配置参数，当 Name 取值为 ContentCompression 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。
+   */
+  ContentCompressionParameters?: ContentCompressionParameters
 }
 
 /**

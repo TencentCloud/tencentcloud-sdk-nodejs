@@ -54,35 +54,35 @@ export interface HealthReportTask {
   /**
    * 异步任务请求 ID。
    */
-  AsyncRequestId: number
+  AsyncRequestId?: number
   /**
    * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
    */
-  Source: string
+  Source?: string
   /**
    * 任务完成进度，单位%。
    */
-  Progress: number
+  Progress?: number
   /**
-   * 任务创建时间。
+   * 任务创建时间，格式: "yyyy-MM-dd HH:mm:ss"。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
-   * 任务开始执行时间。
+   * 任务开始执行时间，格式: "yyyy-MM-dd HH:mm:ss"。
    */
-  StartTime: string
+  StartTime?: string
   /**
-   * 任务完成执行时间。
+   * 任务完成执行时间，格式: "yyyy-MM-dd HH:mm:ss"。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 任务所属实例的基础信息。
    */
-  InstanceInfo: InstanceBasicInfo
+  InstanceInfo?: InstanceBasicInfo
   /**
    * 健康报告中的健康信息。
    */
-  HealthStatus: HealthStatus
+  HealthStatus?: HealthStatus
 }
 
 /**
@@ -114,7 +114,7 @@ export interface CreateDBDiagReportTaskRequest {
    */
   ContactGroup?: Array<number | bigint>
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认值为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product?: string
 }
@@ -146,7 +146,7 @@ export interface TableSpaceTimeSeries {
  */
 export interface DescribeTopSpaceTablesRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -155,6 +155,13 @@ export interface DescribeTopSpaceTablesRequest {
   Limit?: number
   /**
    * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
+DataLength       - 数据长度  
+IndexLength      - 索引长度  
+TotalLength      - 总长度  
+DataFree         - 空闲空间  
+FragRatio        - 碎片率  
+TableRows        - 表行数  
+PhysicalFileSize - 物理文件大小
    */
   SortBy?: string
   /**
@@ -242,7 +249,7 @@ export interface DescribeDBDiagEventResponse {
    */
   DiagItem?: string
   /**
-   * 诊断类型。
+   * 诊断类型。支持值包括"高危账号","自增键耗尽","连接性检查","CPU利用率","死锁","全表扫描","高并发/压力请求","预编译语句过多","内存利用率","Metadata lock","磁盘超限","内存超限","只读锁","只读实例剔除","行锁","活跃会话","慢SQL","数据库快照","磁盘空间利用率","执行计划变化","主从切换","Table open cache命中率低","大表","事务未提交","事务导致复制延迟"等。
    */
   DiagType?: string
   /**
@@ -266,7 +273,7 @@ export interface DescribeDBDiagEventResponse {
    */
   Severity?: number
   /**
-   * 开始时间
+   * 开始时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   StartTime?: string
   /**
@@ -278,7 +285,7 @@ export interface DescribeDBDiagEventResponse {
    */
   Metric?: string
   /**
-   * 结束时间。
+   * 结束时间。格式: "yyyy-MM-dd HH:mm:ss"
    */
   EndTime?: string
   /**
@@ -520,15 +527,15 @@ export interface CreateSchedulerMailProfileRequest {
    */
   ProfileInfo: ProfileInfo
   /**
-   * 配置名称，需要保持唯一性，定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
+   * 配置名称，需要保持唯一性，定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"scheduler_cdb-test"。
    */
   ProfileName: string
   /**
-   * 配置订阅的实例ID。
+   * 配置订阅的实例ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   BindInstanceId: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product: string
 }
@@ -592,7 +599,7 @@ export interface ModifyDiagDBInstanceConfRequest {
    */
   InstanceConfs: InstanceConfs
   /**
-   * 生效实例地域，取值为"All"，代表全地域。
+   * 生效实例地域，固定为"All"，代表全地域。
    */
   Regions: string
   /**
@@ -601,6 +608,7 @@ export interface ModifyDiagDBInstanceConfRequest {
   Product: string
   /**
    * 指定更改巡检状态的实例ID。
+可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceIds?: Array<string>
 }
@@ -824,7 +832,7 @@ export interface CreateMailProfileRequest {
    */
   ProfileLevel: string
   /**
-   * 配置名称，需要保持唯一性，数据库巡检邮件配置名称自拟；定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
+   * 配置名称，需要保持唯一性，数据库巡检邮件配置名称自拟；定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"scheduler_cdb-test"。
    */
   ProfileName: string
   /**
@@ -832,11 +840,11 @@ export interface CreateMailProfileRequest {
    */
   ProfileType: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product: string
   /**
-   * 配置绑定的实例ID，当配置级别为"Instance"时需要传入且只能为一个实例；当配置级别为“User”时，此参数不填。
+   * 配置绑定的实例ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。当配置级别为"Instance"时需要传入且只能为一个实例；当配置级别为“User”时，此参数不填。
    */
   BindInstanceIds?: Array<string>
 }
@@ -868,7 +876,7 @@ export interface MailConfiguration {
    */
   Region: Array<string>
   /**
-   * 发送指定的健康等级的报告, 如["HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"]。
+   * 包含的健康等级，包括值：HEALTH-健康，SUB_HEALTH-亚健康，RISK-风险，HIGH_RISK-高危。
    */
   HealthStatus: Array<string>
   /**
@@ -1036,15 +1044,16 @@ export interface DeleteSecurityAuditLogExportTasksResponse {
  */
 export interface CreateDBDiagReportUrlRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+示例值：cdb-dctw4edd
    */
   InstanceId: string
   /**
-   * 健康报告相应的任务ID，可通过DescribeDBDiagReportTasks查询。
+   * 健康报告相应的任务ID，可通过[DescribeDBDiagReportTasks](https://cloud.tencent.com/document/product/1130/54873)查询。
    */
   AsyncRequestId: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product?: string
 }
@@ -1144,11 +1153,11 @@ export interface DescribeDBDiagHistoryResponse {
  */
 export interface DescribeDBDiagEventRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
+   * 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。
    */
   EventId?: number
   /**
@@ -1198,7 +1207,7 @@ export interface MonitorMetric {
  */
 export interface ProfileInfo {
   /**
-   * 语言, 如"zh"。
+   * 语言类型, 包含“zh”-中文，“en”-英文。
    */
   Language: string
   /**
@@ -1284,7 +1293,8 @@ export interface InstanceBasicInfo {
    */
   Cpu?: number
   /**
-   * 实例部署模式。
+   * 实例部署模式，取值包括"CUSTOM", "EXCLUSIVE", "CUSTOMER_AGENT", "CUSTOMER_DIRECT",
+"CLOUD_NATIVE_CLUSTER_EXCLUSIVE", "CLOUD_NATIVE_CLUSTER"。
    */
   DeployMode?: string
   /**
@@ -1630,7 +1640,7 @@ export interface DescribeTopSpaceSchemaTimeSeriesRequest {
  */
 export interface DescribeSlowLogTopSqlsRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -1643,6 +1653,13 @@ export interface DescribeSlowLogTopSqlsRequest {
   EndTime: string
   /**
    * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键。
+其中：
+QueryTime    - 查询耗时  
+ExecTimes    - 执行次数  
+RowsSent     - 返回行数  
+LockTime     - 锁等待时间  
+RowsExamined - 扫描行数  
+
    */
   SortBy?: string
   /**
@@ -1996,15 +2013,15 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
  */
 export interface DescribeDBDiagReportTasksRequest {
   /**
-   * 第一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。
+   * 第一个任务的开始时间，用于范围查询，时间格式如：2019-09-10T12:13:14+08:00。
    */
   StartTime?: string
   /**
-   * 最后一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。
+   * 最后一个任务的开始时间，用于范围查询，时间格式如：2019-09-10T12:13:14+08:00。
    */
   EndTime?: string
   /**
-   * 实例ID数组，用于筛选指定实例的任务列表。
+   * 实例ID数组，用于筛选指定实例的任务列表，可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceIds?: Array<string>
   /**
@@ -2042,7 +2059,7 @@ export interface MonitorMetricSeriesData {
    */
   Series?: Array<MonitorMetric>
   /**
-   * 监控指标对应的时间戳。
+   * 监控指标对应的时间戳。（精度：秒）
    */
   Timestamp?: Array<number | bigint>
 }
@@ -2130,7 +2147,7 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
  */
 export interface DescribeTopSpaceSchemasRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -2139,6 +2156,14 @@ export interface DescribeTopSpaceSchemasRequest {
   Limit?: number
   /**
    * 筛选Top库所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize（仅云数据库 MySQL实例支持），云数据库 MySQL实例默认为 PhysicalFileSize，其他产品实例默认为TotalLength。
+其中：
+DataLength       - 数据长度  
+IndexLength      - 索引长度  
+TotalLength      - 总长度  
+DataFree         - 空闲空间  
+FragRatio        - 碎片率  
+TableRows        - 表行数  
+PhysicalFileSize - 物理文件大小
    */
   SortBy?: string
   /**
@@ -2170,7 +2195,7 @@ export interface DescribeSlowLogTopSqlsResponse {
  */
 export interface DescribeUserSqlAdviceRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -2188,7 +2213,7 @@ export interface DescribeUserSqlAdviceRequest {
  */
 export interface DescribeMySqlProcessListRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
@@ -2208,11 +2233,11 @@ export interface DescribeMySqlProcessListRequest {
    */
   DB?: string
   /**
-   * 线程的操作状态，用于筛选线程列表。
+   * 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等
    */
   State?: string
   /**
-   * 线程的执行类型，用于筛选线程列表。
+   * 线程的执行类型，用于筛选线程列表。包含以下值：Sleep，Query ，Connect ，Binlog Dump等
    */
   Command?: string
   /**

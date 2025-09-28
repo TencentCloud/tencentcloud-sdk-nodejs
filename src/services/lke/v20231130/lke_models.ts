@@ -79,14 +79,6 @@ export interface ListUsageCallDetailRequest {
    */
   ModelName: string
   /**
-   * 开始时间
-   */
-  StartTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
-  /**
    * 页码（从1开始）
    */
   PageNumber: number
@@ -94,6 +86,14 @@ export interface ListUsageCallDetailRequest {
    * 分页数量(最大值1000)
    */
   PageSize: number
+  /**
+   * 开始时间(废弃)
+   */
+  StartTime?: string
+  /**
+   * 结束时间(废弃)
+   */
+  EndTime?: string
   /**
    * uin列表
    */
@@ -122,6 +122,14 @@ export interface ListUsageCallDetailRequest {
    * 空间id
    */
   SpaceId?: string
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**
@@ -3580,13 +3588,13 @@ export interface DescribeConcurrencyUsageGraphRequest {
    */
   ModelName: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间戳, 单位为秒(废弃)
    */
-  StartTime: string
+  StartTime?: string
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间戳, 单位为秒(废弃)
    */
-  EndTime: string
+  EndTime?: string
   /**
    * uin
    */
@@ -3611,6 +3619,14 @@ export interface DescribeConcurrencyUsageGraphRequest {
    * 空间id
    */
   SpaceId?: string
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 结束时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**
@@ -3676,11 +3692,11 @@ export interface DescribeTokenUsageGraphRequest {
    */
   ModelName?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间戳, 单位为秒(废弃)
    */
   StartTime?: string
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间戳, 单位为秒(废弃)
    */
   EndTime?: string
   /**
@@ -3695,6 +3711,14 @@ export interface DescribeTokenUsageGraphRequest {
    * 筛选子场景
    */
   SubScenes?: Array<string>
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 结束时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**
@@ -5223,11 +5247,11 @@ export interface DescribeCallStatsGraphRequest {
    */
   ModelName?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间戳, 单位为秒(废弃)
    */
   StartTime?: string
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间戳, 单位为秒(废弃)
    */
   EndTime?: string
   /**
@@ -5246,6 +5270,14 @@ export interface DescribeCallStatsGraphRequest {
    * 空间id
    */
   SpaceId?: string
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 结束时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**
@@ -7995,13 +8027,13 @@ export interface DescribeConcurrencyUsageRequest {
    */
   ModelName: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间戳, 单位为秒(废弃)
    */
-  StartTime: string
+  StartTime?: string
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间戳, 单位为秒(废弃)
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 应用id列表
    */
@@ -8010,6 +8042,14 @@ export interface DescribeConcurrencyUsageRequest {
    * 空间id
    */
   SpaceId?: string
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 结束时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**
@@ -8129,11 +8169,11 @@ export interface DescribeTokenUsageRequest {
    */
   ModelName?: string
   /**
-   * 开始时间戳, 单位为秒(默认值0)
+   * 开始时间戳, 单位为秒(默认值0)(废弃)
    */
   StartTime?: string
   /**
-   * 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳)
+   * 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳)(废弃)
    */
   EndTime?: string
   /**
@@ -8152,6 +8192,14 @@ export interface DescribeTokenUsageRequest {
    * 空间id
    */
   SpaceId?: string
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 结束时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**
@@ -9612,11 +9660,11 @@ export interface DescribeSearchStatsGraphRequest {
    */
   ModelName?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间戳, 单位为秒(废弃)
    */
   StartTime?: string
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间戳, 单位为秒(废弃)
    */
   EndTime?: string
   /**
@@ -9627,6 +9675,14 @@ export interface DescribeSearchStatsGraphRequest {
    * 空间id
    */
   SpaceId?: string
+  /**
+   * 开始时间戳, 单位为秒
+   */
+  StatStartTime?: number
+  /**
+   * 结束时间戳, 单位为秒
+   */
+  StatEndTime?: number
 }
 
 /**

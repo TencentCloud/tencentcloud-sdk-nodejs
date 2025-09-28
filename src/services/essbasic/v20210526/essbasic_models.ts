@@ -1610,59 +1610,19 @@ export interface ChannelCreateUserRolesResponse {
 }
 
 /**
- * SyncProxyOrganization请求参数结构体
+ * 业务逻辑个性化配置字段，默认不传
+
+注: `配置前请联系对接的客户经理沟通确认。`
  */
-export interface SyncProxyOrganizationRequest {
+export interface Option {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-</ul>
-
+   * 个性化配置参数Key字段，对应传入字段的字段名
    */
-  Agent: Agent
+  Key: string
   /**
-   * 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。
-注: `如果名称中包含英文括号()，请使用中文括号（）代替。`
+   * 个性化配置参数Value字段，对应传入字段的字段值
    */
-  ProxyOrganizationName: string
-  /**
-   * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
-   */
-  BusinessLicense?: string
-  /**
-   * 第三方平台子客企业统一社会信用代码，最大长度200个字符
-   */
-  UniformSocialCreditCode?: string
-  /**
-   * 第三方平台子客企业法定代表人的名字
-   */
-  ProxyLegalName?: string
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  Operator?: UserInfo
-  /**
-   * 第三方平台子客企业法定代表人的证件类型，支持以下类型
-<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li></ul>
-注: `现在仅支持ID_CARD中国大陆居民身份证类型`
-   */
-  ProxyLegalIdCardType?: string
-  /**
-   * 第三方平台子客企业法定代表人的证件号码, 应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li></ul>
-   */
-  ProxyLegalIdCardNumber?: string
-  /**
-   * 第三方平台子客企业详细住所，最大长度500个字符
-
-注：`需要符合省市区详情的格式例如： XX省XX市XX区街道具体地址`
-   */
-  ProxyAddress?: string
+  Value: string
 }
 
 /**
@@ -1812,6 +1772,14 @@ export interface ChannelCreateSealPolicyResponse {
 请求参数填写OpenId时，返回授权成功的 Openid。
    */
   UserIds?: Array<string>
+  /**
+   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   */
+  SealOperatorVerifyPath?: string
+  /**
+   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   */
+  SealOperatorVerifyQrcodeUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7832,6 +7800,14 @@ export interface CreateSealByImageResponse {
    */
   ImageUrl?: string
   /**
+   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   */
+  SealOperatorVerifyPath?: string
+  /**
+   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   */
+  SealOperatorVerifyQrcodeUrl?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8525,6 +8501,14 @@ export interface ChannelCreateBatchSignUrlRequest {
  */
 export interface ChannelUpdateSealStatusResponse {
   /**
+   * 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。
+   */
+  SealOperatorVerifyPath?: string
+  /**
+   * 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。
+   */
+  SealOperatorVerifyQrcodeUrl?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8789,6 +8773,10 @@ export interface ChannelUpdateSealStatusRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 个性化配置字段，默认不传。
+   */
+  Options?: Array<Option>
 }
 
 /**
@@ -9208,6 +9196,10 @@ export interface ChannelCreateSealPolicyRequest {
    * @deprecated
    */
   Organization?: OrganizationInfo
+  /**
+   * 个性化配置字段，默认不传。
+   */
+  Options?: Array<Option>
 }
 
 /**
@@ -9448,6 +9440,10 @@ export interface CreateSealByImageRequest {
    * 印章描述内容
    */
   SealDescription?: string
+  /**
+   * 个性化配置字段，默认不传。
+   */
+  Options?: Array<Option>
 }
 
 /**
@@ -9815,6 +9811,62 @@ export interface ChannelCreateReleaseFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SyncProxyOrganization请求参数结构体
+ */
+export interface SyncProxyOrganizationRequest {
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+</ul>
+
+   */
+  Agent: Agent
+  /**
+   * 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。
+注: `如果名称中包含英文括号()，请使用中文括号（）代替。`
+   */
+  ProxyOrganizationName: string
+  /**
+   * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
+   */
+  BusinessLicense?: string
+  /**
+   * 第三方平台子客企业统一社会信用代码，最大长度200个字符
+   */
+  UniformSocialCreditCode?: string
+  /**
+   * 第三方平台子客企业法定代表人的名字
+   */
+  ProxyLegalName?: string
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  Operator?: UserInfo
+  /**
+   * 第三方平台子客企业法定代表人的证件类型，支持以下类型
+<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li></ul>
+注: `现在仅支持ID_CARD中国大陆居民身份证类型`
+   */
+  ProxyLegalIdCardType?: string
+  /**
+   * 第三方平台子客企业法定代表人的证件号码, 应符合以下规则
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li></ul>
+   */
+  ProxyLegalIdCardNumber?: string
+  /**
+   * 第三方平台子客企业详细住所，最大长度500个字符
+
+注：`需要符合省市区详情的格式例如： XX省XX市XX区街道具体地址`
+   */
+  ProxyAddress?: string
 }
 
 /**

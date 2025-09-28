@@ -39,6 +39,7 @@ import {
   CompressionParameters,
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
+  MultiPathGatewayOriginACLInfo,
   HeaderAction,
   RealtimeLogDeliveryTask,
   PrepaidPlanParam,
@@ -181,6 +182,7 @@ import {
   DescribeAvailablePlansResponse,
   RateLimitTemplate,
   ModifyRealtimeLogDeliveryTaskResponse,
+  ContentCompressionParameters,
   AccelerationDomainCertificate,
   OriginRecord,
   DescribeSecurityTemplateBindingsRequest,
@@ -318,6 +320,7 @@ import {
   DeployRecord,
   CreatePlanForZoneRequest,
   DeviceProfile,
+  ConfirmMultiPathGatewayOriginACLResponse,
   CreateJustInTimeTranscodeTemplateRequest,
   ModifyCustomErrorPageRequest,
   ModifyFunctionRuleResponse,
@@ -325,6 +328,7 @@ import {
   DescribeFunctionRulesResponse,
   CacheKey,
   DownloadL4LogsResponse,
+  DescribeMultiPathGatewayOriginACLResponse,
   BindSharedCNAMERequest,
   IpTableConfig,
   ModifyApplicationProxyStatusRequest,
@@ -483,6 +487,7 @@ import {
   RateLimitingRule,
   CertificateInfo,
   CreateApplicationProxyRequest,
+  MultiPathGatewayNextOriginACL,
   CC,
   HandleFunctionRuntimeEnvironmentRequest,
   ModifyL4ProxyRulesStatusRequest,
@@ -563,6 +568,7 @@ import {
   TemplateConfig,
   ErrorPageReference,
   DescribeIdentificationsResponse,
+  ConfirmMultiPathGatewayOriginACLRequest,
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
   DisableOriginACLRequest,
@@ -570,6 +576,7 @@ import {
   IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
   DescribeAvailablePlansRequest,
+  ModifyMultiPathGatewayStatusResponse,
   DnsVerification,
   AlgDetectSession,
   ModifyZoneStatusResponse,
@@ -600,7 +607,7 @@ import {
   AccelerationDomain,
   ContentIdentifier,
   CreateCustomizeErrorPageResponse,
-  RuleEngineAction,
+  DescribeMultiPathGatewayOriginACLRequest,
   StatusCodeCacheParameters,
   RewriteAction,
   TemplateScope,
@@ -634,6 +641,7 @@ import {
   OriginGroupInLoadBalancer,
   HTTPResponseParameters,
   UpstreamRequestParameters,
+  ModifyMultiPathGatewayStatusRequest,
   DeleteSecurityClientAttesterResponse,
   TCRCEOption,
   NsVerification,
@@ -663,6 +671,7 @@ import {
   SecurityTemplateBinding,
   DescribeMultiPathGatewaySecretKeyResponse,
   CreateSecurityAPIResourceResponse,
+  OriginPullProtocolParameters,
   CacheTag,
   CreateSecurityClientAttesterResponse,
   ModifyMultiPathGatewayLineResponse,
@@ -672,6 +681,7 @@ import {
   CreateContentIdentifierResponse,
   HostHeaderParameters,
   DescribeConfigGroupVersionsRequest,
+  MultiPathGatewayCurrentOriginACL,
   DescribeL4ProxyRulesRequest,
   AiRule,
   Function,
@@ -702,6 +712,7 @@ import {
   CreateDnsRecordResponse,
   DescribeTimingL4DataRequest,
   DescribeTimingL4DataResponse,
+  RuleEngineAction,
   VanityNameServersIps,
 } from "./teo_models"
 
@@ -891,6 +902,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFunctionRulesResponse) => void
   ): Promise<DeleteFunctionRulesResponse> {
     return this.request("DeleteFunctionRules", req, cb)
+  }
+
+  /**
+   * 更新多通道安全网关状态。
+   */
+  async ModifyMultiPathGatewayStatus(
+    req: ModifyMultiPathGatewayStatusRequest,
+    cb?: (error: string, rep: ModifyMultiPathGatewayStatusResponse) => void
+  ): Promise<ModifyMultiPathGatewayStatusResponse> {
+    return this.request("ModifyMultiPathGatewayStatus", req, cb)
   }
 
   /**
@@ -1741,6 +1762,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 本接口用于多通道安全加速网关回源 IP 网段发生变更时，确认已将最新回源 IP 网段更新至源站防火墙。
+   */
+  async ConfirmMultiPathGatewayOriginACL(
+    req: ConfirmMultiPathGatewayOriginACLRequest,
+    cb?: (error: string, rep: ConfirmMultiPathGatewayOriginACLResponse) => void
+  ): Promise<ConfirmMultiPathGatewayOriginACLResponse> {
+    return this.request("ConfirmMultiPathGatewayOriginACL", req, cb)
+  }
+
+  /**
    * 查询 JavaScript 注入规则。
    */
   async DescribeSecurityJSInjectionRule(
@@ -2221,6 +2252,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateLoadBalancerResponse) => void
   ): Promise<CreateLoadBalancerResponse> {
     return this.request("CreateLoadBalancer", req, cb)
+  }
+
+  /**
+   * 本接口用于查询多通道安全加速网关实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。若 MultiPathGatewayNextOriginACL 字段有返回值，则需要将最新的回源 IP 网段同步到源站防火墙配置中。
+   */
+  async DescribeMultiPathGatewayOriginACL(
+    req: DescribeMultiPathGatewayOriginACLRequest,
+    cb?: (error: string, rep: DescribeMultiPathGatewayOriginACLResponse) => void
+  ): Promise<DescribeMultiPathGatewayOriginACLResponse> {
+    return this.request("DescribeMultiPathGatewayOriginACL", req, cb)
   }
 
   /**

@@ -22,7 +22,7 @@ import {
   SlowLogUser,
   DescribeSlowLogTimeSeriesStatsRequest,
   DescribeUserAutonomyProfileRequest,
-  RedisKeySpaceData,
+  DescribeMetricTopProxiesResponse,
   DescribeRedisTopKeyPrefixListRequest,
   DescribeDBAutonomyActionsRequest,
   SecLogExportTaskInfo,
@@ -153,6 +153,7 @@ import {
   HealthStatus,
   DescribeAllUserContactResponse,
   DescribeRedisCommandCostStatisticsResponse,
+  RedisKeySpaceData,
   CancelDBAutonomyEventResponse,
   MonitorMetric,
   ProfileInfo,
@@ -189,6 +190,7 @@ import {
   CmdCostGroup,
   DescribeRedisTopBigKeysRequest,
   ModifyUserAutonomyProfileRequest,
+  DescribeMetricTopProxiesRequest,
   CancelRedisBigKeyAnalysisTasksRequest,
   HealthScoreTimeSeriesData,
   Process,
@@ -236,6 +238,7 @@ import {
   MonitorMetricSeriesData,
   DescribeDBPerfTimeSeriesResponse,
   DescribeRedisTopKeyPrefixListResponse,
+  RedisMetricTopProxiesData,
   RedisCostCmd,
   IndexesToDrop,
   DescribeHealthScoreResponse,
@@ -543,6 +546,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSpaceStatusResponse) => void
   ): Promise<DescribeDBSpaceStatusResponse> {
     return this.request("DescribeDBSpaceStatus", req, cb)
+  }
+
+  /**
+   * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
+   */
+  async KillMySqlThreads(
+    req: KillMySqlThreadsRequest,
+    cb?: (error: string, rep: KillMySqlThreadsResponse) => void
+  ): Promise<KillMySqlThreadsResponse> {
+    return this.request("KillMySqlThreads", req, cb)
   }
 
   /**
@@ -956,13 +969,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例无主键表。
+   * 获取指定时间段内Redis 访问命令 cost top N
    */
-  async DescribeNoPrimaryKeyTables(
-    req: DescribeNoPrimaryKeyTablesRequest,
-    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
-  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
-    return this.request("DescribeNoPrimaryKeyTables", req, cb)
+  async DescribeMetricTopProxies(
+    req: DescribeMetricTopProxiesRequest,
+    cb?: (error: string, rep: DescribeMetricTopProxiesResponse) => void
+  ): Promise<DescribeMetricTopProxiesResponse> {
+    return this.request("DescribeMetricTopProxies", req, cb)
   }
 
   /**
@@ -1006,13 +1019,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
+   * 查询实例无主键表。
    */
-  async KillMySqlThreads(
-    req: KillMySqlThreadsRequest,
-    cb?: (error: string, rep: KillMySqlThreadsResponse) => void
-  ): Promise<KillMySqlThreadsResponse> {
-    return this.request("KillMySqlThreads", req, cb)
+  async DescribeNoPrimaryKeyTables(
+    req: DescribeNoPrimaryKeyTablesRequest,
+    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
+  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
+    return this.request("DescribeNoPrimaryKeyTables", req, cb)
   }
 
   /**
