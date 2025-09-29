@@ -1830,19 +1830,19 @@ export interface ReadOnlyGroup {
    */
   MinDelayEliminateReserve?: number
   /**
-   * 延迟空间大小阈值
+   * 延迟空间大小阈值。单位MB。
    */
   MaxReplayLatency?: number
   /**
-   * 延迟大小开关
+   * 延迟大小开关。0 - 关闭； 1 - 开启。
    */
   ReplayLatencyEliminate?: number
   /**
-   * 延迟时间大小阈值
+   * 延迟时间大小阈值，单位：秒。
    */
   MaxReplayLag?: number
   /**
-   * 延迟时间开关
+   * 延迟时间开关。0 - 关闭； 1 - 开启。
    */
   ReplayLagEliminate?: number
   /**
@@ -1862,7 +1862,7 @@ export interface ReadOnlyGroup {
    */
   Zone?: string
   /**
-   * 状态
+   * 状态。枚举值：creating、ok、modifying、deleting、deleted
    */
   Status?: string
   /**
@@ -3895,6 +3895,10 @@ mssql_compatible引擎：
 默认值：0
    */
   SupportIpv6?: number
+  /**
+   * 实例已经弹性扩容的cpu核数
+   */
+  ExpandedCpu?: number
 }
 
 /**
@@ -5246,10 +5250,11 @@ export interface DescribeReadOnlyGroupsRequest {
    * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
 db-master-instance-id：按照主实例过滤，类型为string。
 read-only-group-id：按照只读组ID过滤，类型为string。
+注：该参数的过滤条件中，db-master-instance-id为必须指定项。
    */
   Filters?: Array<Filter>
   /**
-   * 查询每一页的条数，默认为10
+   * 查询每一页的条数，默认为10，最大值99。
    */
   PageSize?: number
   /**
@@ -5257,11 +5262,11 @@ read-only-group-id：按照只读组ID过滤，类型为string。
    */
   PageNumber?: number
   /**
-   * 查询排序依据，目前支持:ROGroupId,CreateTime,Name
+   * 查询排序依据，目前支持:ROGroupId,CreateTime,Name。默认值CreateTime
    */
   OrderBy?: string
   /**
-   * 查询排序依据类型，目前支持:desc,asc
+   * 查询排序依据类型，目前支持:desc,asc。默认值asc。
    */
   OrderByType?: string
 }

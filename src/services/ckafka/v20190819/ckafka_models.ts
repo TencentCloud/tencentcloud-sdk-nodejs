@@ -1789,6 +1789,30 @@ export interface KafkaConnectParam {
    * CKafka连接源的实例资源地域, 跨地域时必填
    */
   Region?: string
+  /**
+   * 网络类型：PUBLIC公网；VPC
+   */
+  NetworkType?: string
+  /**
+   * vpcId，NetworkType=VPC时必传
+   */
+  UniqVpcId?: string
+  /**
+   * vip，NetworkType=VPC时必传
+   */
+  ServiceVip?: string
+  /**
+   * 端口，NetworkType=VPC时必传
+   */
+  Port?: number
+  /**
+   * 跨云同步下需要客户传递唯一Id标志一组资源
+   */
+  CrossNetResourceUniqueId?: string
+  /**
+   * 跨云子网ID
+   */
+  CrossNetVpcSubNetId?: string
 }
 
 /**

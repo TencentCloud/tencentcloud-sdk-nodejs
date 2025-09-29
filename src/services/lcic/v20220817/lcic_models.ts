@@ -1934,7 +1934,7 @@ export interface BatchCreateRoomRequest {
    */
   SdkAppId: number
   /**
-   * 创建课堂ID列表
+   * 批量创建课堂的配置信息
    */
   RoomInfos: Array<RoomInfo>
 }

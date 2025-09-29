@@ -2427,7 +2427,7 @@ export interface RestartClusterForConfigsResponse {
  */
 export interface InstanceInfo {
   /**
-   * 集群实例ID, "cdw-xxxx" 字符串类型
+   * 集群实例ID, "cdwdoris-xxxx" 字符串类型
    */
   InstanceId?: string
   /**
@@ -2436,9 +2436,10 @@ export interface InstanceInfo {
   InstanceName?: string
   /**
    * 状态,
-Init 创建中; Serving 运行中； 
-Deleted已销毁；Deleting 销毁中；
-Modify 集群变更中；
+Init  创建中
+Serving   运行中
+Isolated   已隔离
+Changing  变更中
    */
   Status?: string
   /**
@@ -2505,7 +2506,7 @@ Modify 集群变更中；
    */
   RegionId?: number
   /**
-   * 可用区说明，例如 "广州二区"
+   * 可用区说明，例如 "广州三区"
    */
   ZoneDesc?: string
   /**
@@ -2655,6 +2656,14 @@ Modify 集群变更中；
    * 存算分离的指标 当是true 不支持新建计算组
    */
   IsMasterNonVM?: boolean
+  /**
+   * Cos容量包大小
+   */
+  CosPkgCapacity?: number
+  /**
+   * 集群是否使用托管桶
+   */
+  UseManagedBucket?: boolean
 }
 
 /**
@@ -3575,7 +3584,11 @@ export interface CreateWorkloadGroupResponse {
  */
 export interface DescribeInstanceStateResponse {
   /**
-   * 集群状态，例如：Serving
+   * 集群状态 
+ Init  创建中 
+Serving   运行中 
+Isolated   已隔离 
+Changing  变更中
    */
   InstanceState?: string
   /**

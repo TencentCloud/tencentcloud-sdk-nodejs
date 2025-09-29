@@ -145,7 +145,7 @@ back：后视图；
   EnablePBR?: boolean
   /**
    * 生成3D模型的面数，默认值为500000。
-可支持生成面数范围，参考值：40000-500000。
+可支持生成面数范围，参考值：40000-1500000。
    */
   FaceCount?: number
   /**
@@ -156,6 +156,14 @@ Geometry：可生成不带纹理的几何模型（白模），选择此任务时
 Sketch：可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。
    */
   GenerateType?: string
+  /**
+   * 该参数仅在GenerateType中选择LowPoly模式可生效。
+
+多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:
+triangle: 三角形面。
+quadrilateral: 四边形面与三角形面混合生成。
+   */
+  PolygonType?: string
 }
 
 /**
@@ -225,6 +233,10 @@ export interface ViewImage {
    * 图片Url地址
    */
   ViewImageUrl?: string
+  /**
+   * 图片base64地址
+   */
+  ViewImageBase64?: string
 }
 
 /**

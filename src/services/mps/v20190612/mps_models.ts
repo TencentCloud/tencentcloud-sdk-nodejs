@@ -3363,7 +3363,9 @@ BarCode：条形码，
 LowVoice：低音，
 HighVoice：爆音，
 NoVoice：静音，
-LowEvaluation：无参考打分低于阈值。
+LowEvaluation：视频无参考评分（MOS）低于阈值，
+AudioEvaluation：音频无参考评分（MOS）低于阈值，
+AudioNoise：音频噪声。
    */
   Type?: string
   /**
@@ -16322,9 +16324,16 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
  */
 export interface DescribeTasksRequest {
   /**
-   * 过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。
+   * 任务状态过滤条件，可选值：
+- WAITING（等待中）
+- PROCESSING（处理中）
+- FINISH（已完成）。
    */
   Status: string
+  /**
+   * 任务结束时子任务是否有失败。
+   */
+  SubTaskHasFailed?: boolean
   /**
    * 返回记录条数，默认值：10，最大值：100。
    */
@@ -16821,6 +16830,16 @@ export interface AddOnSubtitle {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubtitleName?: string
+  /**
+   * 字幕输出格式。取值{"WebVTT","TTML"}。
+默认值："WebVTT"
+   */
+  OutputFormat?: string
+  /**
+   * 默认字幕轨道。为true时指定当前字幕为默认字幕轨道，最多可指定1条默认字幕轨道。
+默认值：false
+   */
+  DefaultTrack?: boolean
 }
 
 /**
