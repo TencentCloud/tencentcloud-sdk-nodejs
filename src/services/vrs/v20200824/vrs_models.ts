@@ -45,7 +45,6 @@ export interface DescribeVRSTaskStatusResponse {
 export interface GetTrainingTextRequest {
   /**
    * 复刻类型。
-0 - 轻量版声音复刻（默认）;
 5 - 一句话声音复刻。
    */
   TaskType?: number
@@ -369,7 +368,7 @@ export interface CreateVRSTaskRequest {
    */
   Codec?: string
   /**
-   * 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。（注意：回调方式目前仅支持轻量版声音复刻）
+   * 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。（注意：回调方式暂不支持一句话版声音复刻）
 回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""}
    */
   CallbackUrl?: string
@@ -379,7 +378,6 @@ export interface CreateVRSTaskRequest {
   ModelType?: number
   /**
    * 复刻类型。
-0 - 轻量版声音复刻（默认）；
 5 - 一句话声音复刻。
    */
   TaskType?: number
@@ -473,7 +471,7 @@ export interface VoiceTypeInfo {
    */
   VoiceGender?: number
   /**
-   * 复刻类型: 0-轻量版复刻 1-基础版复刻
+   * 复刻类型: 1-基础版复刻
    */
   TaskType?: number
   /**
@@ -529,9 +527,7 @@ export interface DetectEnvAndSoundQualityRequest {
    */
   SampleRate?: number
   /**
-   * 复刻类型。
-0 - 轻量版声音复刻（默认）;
-5 - 一句话声音复刻。
+   * 复刻类型。5 - 一句话声音复刻。
    */
   TaskType?: number
 }

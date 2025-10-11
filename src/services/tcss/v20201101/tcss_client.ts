@@ -111,6 +111,7 @@ import {
   CreateNetworkFirewallPolicyDiscoverResponse,
   ComplianceAssetDetailInfo,
   UnauthorizedCoresTendency,
+  ModifyDefendStatusRequest,
   DescribeRiskSyscallEventsResponse,
   AssetClusterListItem,
   NetworkPolicyInfoItem,
@@ -198,7 +199,6 @@ import {
   ClsLogsetInfo,
   ModifyEscapeEventStatusResponse,
   CheckRepeatAssetImageRegistryResponse,
-  RiskSyscallWhiteListInfo,
   VulDefenceEvent,
   DescribeAccessControlEventsExportRequest,
   ExportVirusListResponse,
@@ -348,7 +348,7 @@ import {
   AddNetworkFirewallPolicyYamlDetailRequest,
   DescribeVulLevelImageSummaryResponse,
   ScanComplianceAssetsResponse,
-  DescribeCompliancePeriodTaskListRequest,
+  DescribeClusterNodesRequest,
   CreateAssetImageVirusExportJobResponse,
   RaspRuleVul,
   DescribeIndexListRequest,
@@ -396,6 +396,7 @@ import {
   DescribeAssetImageRiskListExportResponse,
   ModifySecLogCleanSettingInfoRequest,
   DescribeAccessControlEventsRequest,
+  DescribeCompliancePeriodTaskListRequest,
   DescribeAccessControlRuleDetailRequest,
   ModifyVirusScanTimeoutSettingRequest,
   CreateProcessEventsExportJobResponse,
@@ -587,6 +588,7 @@ import {
   DescribeSystemVulListResponse,
   ModifyIgnoreVul,
   DescribeAssetImageRegistryVirusListResponse,
+  ModifyDefendStatusResponse,
   DescribeAssetImageSimpleListRequest,
   DescribeAssetDBServiceListResponse,
   DescribeSecLogJoinTypeListRequest,
@@ -680,6 +682,7 @@ import {
   DescribeRiskSyscallEventsRequest,
   DescribeRiskListResponse,
   ModifyAssetRequest,
+  CreateClusterAccessRequest,
   RegionInfo,
   DescribeEscapeWhiteListRequest,
   DescribeNetworkFirewallPolicyListRequest,
@@ -707,6 +710,7 @@ import {
   DescribeUnfinishRefreshTaskRequest,
   DescribeAssetImageRegistryRiskInfoListRequest,
   DescribeImageRegistryNamespaceListRequest,
+  CreateClusterAccessResponse,
   DescribeAssetImageRegistryScanStatusOneKeyRequest,
   ModifyAccessControlRuleStatusRequest,
   DescribeVulScanAuthorizedImageSummaryRequest,
@@ -721,7 +725,7 @@ import {
   DeleteRiskSyscallWhiteListsResponse,
   DescribeAssetImageVirusListRequest,
   DescribeAssetImageScanSettingResponse,
-  DescribeClusterNodesRequest,
+  DescribeReverseShellDetailResponse,
   DescribeClusterSummaryRequest,
   AddIgnoreVulRequest,
   CreateEscapeWhiteListExportJobResponse,
@@ -819,7 +823,7 @@ import {
   ModifyAssetImageRegistryScanStopRequest,
   DeleteNetworkFirewallPolicyDetailResponse,
   DescribeK8sApiAbnormalTendencyRequest,
-  DescribeReverseShellDetailResponse,
+  RiskSyscallWhiteListInfo,
   DescribeNewestVulResponse,
   DescribeCompliancePolicyItemAffectedAssetListResponse,
   DescribeComplianceAssetPolicyItemListRequest,
@@ -1516,13 +1520,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询运行时高危系统调用系统名称列表
+   * 查询上次任务的资产通过率汇总信息
    */
-  async DescribeRiskSyscallNames(
-    req?: DescribeRiskSyscallNamesRequest,
-    cb?: (error: string, rep: DescribeRiskSyscallNamesResponse) => void
-  ): Promise<DescribeRiskSyscallNamesResponse> {
-    return this.request("DescribeRiskSyscallNames", req, cb)
+  async DescribeComplianceTaskAssetSummary(
+    req: DescribeComplianceTaskAssetSummaryRequest,
+    cb?: (error: string, rep: DescribeComplianceTaskAssetSummaryResponse) => void
+  ): Promise<DescribeComplianceTaskAssetSummaryResponse> {
+    return this.request("DescribeComplianceTaskAssetSummary", req, cb)
   }
 
   /**
@@ -2127,13 +2131,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询上次任务的资产通过率汇总信息
+   * 查看单个镜像仓库详细信息
    */
-  async DescribeComplianceTaskAssetSummary(
-    req: DescribeComplianceTaskAssetSummaryRequest,
-    cb?: (error: string, rep: DescribeComplianceTaskAssetSummaryResponse) => void
-  ): Promise<DescribeComplianceTaskAssetSummaryResponse> {
-    return this.request("DescribeComplianceTaskAssetSummary", req, cb)
+  async DescribeAssetImageRegistryRegistryDetail(
+    req: DescribeAssetImageRegistryRegistryDetailRequest,
+    cb?: (error: string, rep: DescribeAssetImageRegistryRegistryDetailResponse) => void
+  ): Promise<DescribeAssetImageRegistryRegistryDetailResponse> {
+    return this.request("DescribeAssetImageRegistryRegistryDetail", req, cb)
   }
 
   /**
@@ -2227,13 +2231,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看单个镜像仓库详细信息
+   * 创建集群接入
    */
-  async DescribeAssetImageRegistryRegistryDetail(
-    req: DescribeAssetImageRegistryRegistryDetailRequest,
-    cb?: (error: string, rep: DescribeAssetImageRegistryRegistryDetailResponse) => void
-  ): Promise<DescribeAssetImageRegistryRegistryDetailResponse> {
-    return this.request("DescribeAssetImageRegistryRegistryDetail", req, cb)
+  async CreateClusterAccess(
+    req: CreateClusterAccessRequest,
+    cb?: (error: string, rep: CreateClusterAccessResponse) => void
+  ): Promise<CreateClusterAccessResponse> {
+    return this.request("CreateClusterAccess", req, cb)
   }
 
   /**
@@ -3148,6 +3152,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改防护状态
+   */
+  async ModifyDefendStatus(
+    req: ModifyDefendStatusRequest,
+    cb?: (error: string, rep: ModifyDefendStatusResponse) => void
+  ): Promise<ModifyDefendStatusResponse> {
+    return this.request("ModifyDefendStatus", req, cb)
+  }
+
+  /**
    * 容器网络集群查看策略详情
    */
   async DescribeNetworkFirewallPolicyDetail(
@@ -3947,6 +3961,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetImageVirusListResponse) => void
   ): Promise<DescribeAssetImageVirusListResponse> {
     return this.request("DescribeAssetImageVirusList", req, cb)
+  }
+
+  /**
+   * 查询运行时高危系统调用系统名称列表
+   */
+  async DescribeRiskSyscallNames(
+    req?: DescribeRiskSyscallNamesRequest,
+    cb?: (error: string, rep: DescribeRiskSyscallNamesResponse) => void
+  ): Promise<DescribeRiskSyscallNamesResponse> {
+    return this.request("DescribeRiskSyscallNames", req, cb)
   }
 
   /**

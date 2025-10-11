@@ -40,19 +40,21 @@ import {
   FlowApproverUrlInfo,
   NeedReviewApproverInfo,
   CreateBatchSignUrlResponse,
-  DescribeOrganizationAuthStatusResponse,
+  DescribeUserAutoSignStatusResponse,
   FlowApproverDetail,
   CreateFlowForwardsResponse,
   DescribeFlowEvidenceReportRequest,
   DeleteSealPoliciesRequest,
   CreateFlowGroupByTemplatesResponse,
   DetectInfoVideoData,
+  ModifySingleSignOnEmployeesResponse,
   CreateWebThemeConfigResponse,
   DescribeFlowInfoRequest,
   OrganizationAuthUrl,
   OrganizationCommonInfo,
   ArchiveDynamicFlowResponse,
   OrganizationInfo,
+  DescribeSingleSignOnEmployeesRequest,
   FailedDeleteStaffData,
   CreateUserNameChangeUrlRequest,
   AuthRecord,
@@ -76,6 +78,7 @@ import {
   VerifyPdfRequest,
   FailedCreateRoleData,
   CreateEmployeeChangeUrlRequest,
+  DescribeSingleSignOnEmployeesResponse,
   PositionInfo,
   CreateUserAutoSignEnableUrlRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
@@ -115,11 +118,13 @@ import {
   OperateTemplateRequest,
   CreateBatchQuickSignUrlResponse,
   FlowCreateApprover,
+  DeleteSingleSignOnEmployeesResponse,
   CreateUserMobileChangeUrlResponse,
   DescribeFlowTemplatesRequest,
   DescribeFlowEvidenceReportResponse,
   BatchOrganizationRegistrationTasksDetails,
   RecipientComponentInfo,
+  SingleSignOnEmployees,
   WebThemeConfig,
   CreateBatchContractReviewTaskRequest,
   DeleteIntegrationDepartmentResponse,
@@ -131,7 +136,7 @@ import {
   CreateFlowForwardsRequest,
   CreateIntegrationDepartmentResponse,
   DeleteSealPoliciesResponse,
-  DescribeUserAutoSignStatusResponse,
+  DescribeOrganizationAuthStatusResponse,
   DescribeBatchOrganizationRegistrationTasksRequest,
   UserThreeFactor,
   FailedUpdateStaffData,
@@ -180,6 +185,8 @@ import {
   CreateOrganizationInfoChangeUrlResponse,
   CreateFlowResponse,
   CreateUserNameChangeUrlResponse,
+  ModifySingleSignOnEmployeesRequest,
+  DeleteSingleSignOnEmployeesRequest,
   CancelMultiFlowSignQRCodeResponse,
   BillUsageDetail,
   ExtractionField,
@@ -236,6 +243,7 @@ import {
   ArchiveDynamicFlowRequest,
   ModifyIntegrationRoleResponse,
   ApproverComponentLimitType,
+  CreateSingleSignOnEmployeesResponse,
   CreateFlowEvidenceReportResponse,
   RuleIdConfig,
   OperateTemplateResponse,
@@ -309,6 +317,7 @@ import {
   CreateDynamicFlowApproverResponse,
   CreateBatchOrganizationRegistrationTasksResponse,
   Option,
+  CreateSingleSignOnEmployeesRequest,
   DescribeBillUsageDetailRequest,
   CreateUserAutoSignSealUrlResponse,
   Caller,
@@ -1222,6 +1231,33 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReleaseFlowResponse) => void
   ): Promise<CreateReleaseFlowResponse> {
     return this.request("CreateReleaseFlow", req, cb)
+  }
+
+  /**
+     * 此接口（CreateSingleSignOnEmployees）用于创建单点登录企业员工。
+创建好的员工，可以通过腾讯电子签提供的链接， 如下图位置，进行登录。
+此操作的功能：
+1. 可以绑定已经实名的员工，然后 sso 登录实名绑定。
+2. 可以提前导入员工，在 sso 登录的时候进行实名。
+3. 如果已经绑定过，可以直接通过 sso 链接登录腾讯电子签。
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/0cd98ca2cc49ea1472a2397cea9a3ef6.png)
+     */
+  async CreateSingleSignOnEmployees(
+    req: CreateSingleSignOnEmployeesRequest,
+    cb?: (error: string, rep: CreateSingleSignOnEmployeesResponse) => void
+  ): Promise<CreateSingleSignOnEmployeesResponse> {
+    return this.request("CreateSingleSignOnEmployees", req, cb)
+  }
+
+  /**
+   * 此接口（DescribeSingleSignOnEmployees）用于查询单点登录企业员工。
+   */
+  async DescribeSingleSignOnEmployees(
+    req: DescribeSingleSignOnEmployeesRequest,
+    cb?: (error: string, rep: DescribeSingleSignOnEmployeesResponse) => void
+  ): Promise<DescribeSingleSignOnEmployeesResponse> {
+    return this.request("DescribeSingleSignOnEmployees", req, cb)
   }
 
   /**
@@ -2328,6 +2364,20 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+     * 此接口（DeleteSingleSignOnEmployees）用于删除单点登录企业员工。
+注意：
+此接口只能删除未跟腾讯电子签绑定的单点登录企业员工，
+如果企业员工的单点登录信息已经和腾讯电子签里面的企业员工绑定，需要企业的超级管理员或者组织管理员在腾讯电子签控制台对当前企业员工进行离职操作，如下图操作。
+![image](https://qcloudimg.tencent-cloud.cn/raw/5e69f6e11859972d466900040f68c105.png)
+     */
+  async DeleteSingleSignOnEmployees(
+    req: DeleteSingleSignOnEmployeesRequest,
+    cb?: (error: string, rep: DeleteSingleSignOnEmployeesResponse) => void
+  ): Promise<DeleteSingleSignOnEmployeesResponse> {
+    return this.request("DeleteSingleSignOnEmployees", req, cb)
+  }
+
+  /**
    * 通过[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
    */
   async DescribeCancelFlowsTask(
@@ -2498,6 +2548,17 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: CreateOrganizationBatchSignUrlResponse) => void
   ): Promise<CreateOrganizationBatchSignUrlResponse> {
     return this.request("CreateOrganizationBatchSignUrl", req, cb)
+  }
+
+  /**
+     * 此接口（ModifySingleSignOnEmployees）用于修改单点登录企业员工。
+ 注意： 此接口只能修改未跟腾讯电子签绑定的单点登录企业员工， 如果企业员工的单点登录信息已经和腾讯电子签里面的企业员工绑定，需要在腾讯电子签小程序进行个人信息变更操作。
+     */
+  async ModifySingleSignOnEmployees(
+    req: ModifySingleSignOnEmployeesRequest,
+    cb?: (error: string, rep: ModifySingleSignOnEmployeesResponse) => void
+  ): Promise<ModifySingleSignOnEmployeesResponse> {
+    return this.request("ModifySingleSignOnEmployees", req, cb)
   }
 
   /**

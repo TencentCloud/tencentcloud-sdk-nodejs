@@ -3439,6 +3439,10 @@ export interface Instance {
    */
   LatestOperationErrorMsg?: string
   /**
+   * 自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。**注：内测中**。
+   */
+  Metadata?: Metadata
+  /**
    * 实例绑定的公网IPv6地址。
    */
   PublicIPv6Addresses?: Array<string>
@@ -5806,12 +5810,11 @@ export interface ResetInstanceResponse {
  */
 export interface MetadataItem {
   /**
-   * 自定义metadata键，需符合正则 ^[a-zA-Z0-9_-]+$，长度 ≤128 字节（大小写敏感）；
-
+   * 自定义metadata键，由大写字母（A-Z）、小写字母（a-z）、数字（0-9）、下划线（_）或连字符（-）组成，大小上限为128 字节。
    */
   Key: string
   /**
-   * 自定义metadata值，支持任意数据（含二进制），大小 ≤256 KB（大小写敏感）；
+   * 自定义metadata值，大小上限为256 KB。
    */
   Value: string
 }

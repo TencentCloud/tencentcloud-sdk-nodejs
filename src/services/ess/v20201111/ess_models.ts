@@ -615,27 +615,33 @@ export interface CreateBatchSignUrlResponse {
 }
 
 /**
- * DescribeOrganizationAuthStatus返回参数结构体
+ * DescribeUserAutoSignStatus返回参数结构体
  */
-export interface DescribeOrganizationAuthStatusResponse {
+export interface DescribeUserAutoSignStatusResponse {
   /**
-   * 企业是否已认证
+   * 查询用户是否已开通自动签
    */
-  IsVerified?: boolean
+  IsOpen?: boolean
   /**
-   * 企业认证状态 0-未认证 1-认证中 2-已认证
+   * 自动签许可生效时间。当且仅当已通过许可开通自动签时有值。
+
+值为unix时间戳,单位为秒。
    */
-  AuthStatus?: number
+  LicenseFrom?: number
   /**
-   * 企业认证信息
+   * 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。
+
+值为unix时间戳,单位为秒。
    */
-  AuthRecords?: Array<AuthRecord>
+  LicenseTo?: number
   /**
-   * 企业在腾讯电子签平台的唯一身份标识，为32位字符串。
-可登录腾讯电子签控制台，在 "更多"->"企业设置"->"企业中心"- 中查看企业电子签账号。
-p.s. 只有当前企业认证成功的时候返回
+   * 设置用户开通自动签时是否绑定个人自动签账号许可。<ul><li>**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li><li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
    */
-  OrganizationId?: string
+  LicenseType?: number
+  /**
+   * 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。
+   */
+  SealId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -837,6 +843,16 @@ export interface DetectInfoVideoData {
 }
 
 /**
+ * ModifySingleSignOnEmployees返回参数结构体
+ */
+export interface ModifySingleSignOnEmployeesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateWebThemeConfig返回参数结构体
  */
 export interface CreateWebThemeConfigResponse {
@@ -1017,6 +1033,39 @@ export interface OrganizationInfo {
    * @deprecated
    */
   ProxyIp?: string
+}
+
+/**
+ * DescribeSingleSignOnEmployees请求参数结构体
+ */
+export interface DescribeSingleSignOnEmployeesRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png)
+   */
+  SsoApplicationId: string
+  /**
+   * 需要删除的单点登录员工的唯一Id 值.不能超过 200 个。
+如果传递了 openIds，limit 和 offset 参数无效，
+   */
+  OpenIds?: Array<string>
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 指定分页每页返回的数据条数，单页最大支持 200。如果不传， 则默认是 20.
+   */
+  Limit?: number
+  /**
+   * OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0,最大20000。 分页参数, 需要limit, offset 配合使用 例如: 您希望得到第三页的数据, 且每页限制最多10条 您可以使用 LIMIT 10 OFFSET 20
+   */
+  Offset?: number
 }
 
 /**
@@ -2411,6 +2460,20 @@ export interface CreateEmployeeChangeUrlRequest {
 }
 
 /**
+ * DescribeSingleSignOnEmployees返回参数结构体
+ */
+export interface DescribeSingleSignOnEmployeesResponse {
+  /**
+   * 单点登录企业员工信息
+   */
+  Employees?: Array<SingleSignOnEmployees>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 坐标详情
  */
 export interface PositionInfo {
@@ -3703,6 +3766,16 @@ export interface FlowCreateApprover {
 }
 
 /**
+ * DeleteSingleSignOnEmployees返回参数结构体
+ */
+export interface DeleteSingleSignOnEmployeesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateUserMobileChangeUrl返回参数结构体
  */
 export interface CreateUserMobileChangeUrlResponse {
@@ -3899,6 +3972,47 @@ export interface RecipientComponentInfo {
    * 改参与方填写控件信息列表
    */
   Components?: Array<FilledComponent>
+}
+
+/**
+ * 单点登录企业员工信息。
+ */
+export interface SingleSignOnEmployees {
+  /**
+   * 用户在idp分配的唯一值，需要保持跟在电子签应用集成->单点登录配置->端点配置中配置的。
+如下图配置![image](https://qcloudimg.tencent-cloud.cn/raw/6ff22248c930b2a7684322cac9401a9c.png)。
+   */
+  OpenId: string
+  /**
+   * 企业员工姓名。 员工的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
+   */
+  Name: string
+  /**
+   * 用户手机号码， 支持中国大陆手机号11位数字(无需加+86前缀或其他字符)。
+   */
+  Mobile: string
+  /**
+   * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+注：`创建和更新场景无需填写。`
+   */
+  UserId?: string
+  /**
+   * 用户邮箱。
+   */
+  Email?: string
+  /**
+   * 员工角色信息。
+此处roleId为电子签配置的 RoleId，可通过接口[查询企业角色列表](https://qian.tencent.com/developers/companyApis/roles/DescribeIntegrationRoles) 获取
+   */
+  RoleIds?: Array<string>
+  /**
+   * 员工是否实名。
+   */
+  IsVerified?: boolean
+  /**
+   * 员工创建时间戳，单位秒。
+   */
+  CreatedOn?: number
 }
 
 /**
@@ -4187,33 +4301,27 @@ export interface DeleteSealPoliciesResponse {
 }
 
 /**
- * DescribeUserAutoSignStatus返回参数结构体
+ * DescribeOrganizationAuthStatus返回参数结构体
  */
-export interface DescribeUserAutoSignStatusResponse {
+export interface DescribeOrganizationAuthStatusResponse {
   /**
-   * 查询用户是否已开通自动签
+   * 企业是否已认证
    */
-  IsOpen?: boolean
+  IsVerified?: boolean
   /**
-   * 自动签许可生效时间。当且仅当已通过许可开通自动签时有值。
-
-值为unix时间戳,单位为秒。
+   * 企业认证状态 0-未认证 1-认证中 2-已认证
    */
-  LicenseFrom?: number
+  AuthStatus?: number
   /**
-   * 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。
-
-值为unix时间戳,单位为秒。
+   * 企业认证信息
    */
-  LicenseTo?: number
+  AuthRecords?: Array<AuthRecord>
   /**
-   * 设置用户开通自动签时是否绑定个人自动签账号许可。<ul><li>**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li><li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
+   * 企业在腾讯电子签平台的唯一身份标识，为32位字符串。
+可登录腾讯电子签控制台，在 "更多"->"企业设置"->"企业中心"- 中查看企业电子签账号。
+p.s. 只有当前企业认证成功的时候返回
    */
-  LicenseType?: number
-  /**
-   * 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。
-   */
-  SealId?: string
+  OrganizationId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5619,6 +5727,54 @@ export interface CreateUserNameChangeUrlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifySingleSignOnEmployees请求参数结构体
+ */
+export interface ModifySingleSignOnEmployeesRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png)
+   */
+  SsoApplicationId: string
+  /**
+   * 待修改员工的信息。
+   */
+  Employee: SingleSignOnEmployees
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+}
+
+/**
+ * DeleteSingleSignOnEmployees请求参数结构体
+ */
+export interface DeleteSingleSignOnEmployeesRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png)
+   */
+  SsoApplicationId: string
+  /**
+   * 需要删除的单点登录员工的唯一Id 值
+   */
+  OpenId: string
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -7539,6 +7695,27 @@ export interface ApproverComponentLimitType {
 </ul>
    */
   Values: Array<string>
+}
+
+/**
+ * CreateSingleSignOnEmployees返回参数结构体
+ */
+export interface CreateSingleSignOnEmployeesResponse {
+  /**
+   * 导入员工返回的错误信息，信息数组的顺序跟导入的保持一致
+   */
+  ErrorMessages?: Array<string>
+  /**
+   * 导入员工返回的状态码
+0-全部成功
+1-部分成功
+2-全部失败
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10077,6 +10254,35 @@ export interface Option {
    * 个性化配置参数Value字段，对应传入字段的字段值
    */
   Value: string
+}
+
+/**
+ * CreateSingleSignOnEmployees请求参数结构体
+ */
+export interface CreateSingleSignOnEmployeesRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 待创建员工的信息最多不超过200个。
+
+注意：
+1. 传递的 openId 不能重复， 且字符不能超过64位。
+2. 传递的手机号不能重复。
+3. 绑定的角色必须存在且不能超过 10 个。
+   */
+  Employees: Array<SingleSignOnEmployees>
+  /**
+   * 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png)
+   */
+  SsoApplicationId: string
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**

@@ -478,6 +478,26 @@ it("ess.v20201111.CreateReleaseFlow", async function () {
     }
 })
 
+it("ess.v20201111.CreateSingleSignOnEmployees", async function () {
+    try {
+       const data = await client.CreateSingleSignOnEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeSingleSignOnEmployees", async function () {
+    try {
+       const data = await client.DescribeSingleSignOnEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateLegalSealQrCode", async function () {
     try {
        const data = await client.CreateLegalSealQrCode({})
@@ -1048,6 +1068,16 @@ it("ess.v20201111.CreateSealPolicy", async function () {
     }
 })
 
+it("ess.v20201111.DeleteSingleSignOnEmployees", async function () {
+    try {
+       const data = await client.DeleteSingleSignOnEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeCancelFlowsTask", async function () {
     try {
        const data = await client.DescribeCancelFlowsTask({})
@@ -1141,6 +1171,16 @@ it("ess.v20201111.UpdateIntegrationEmployees", async function () {
 it("ess.v20201111.CreateOrganizationBatchSignUrl", async function () {
     try {
        const data = await client.CreateOrganizationBatchSignUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ModifySingleSignOnEmployees", async function () {
+    try {
+       const data = await client.ModifySingleSignOnEmployees({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

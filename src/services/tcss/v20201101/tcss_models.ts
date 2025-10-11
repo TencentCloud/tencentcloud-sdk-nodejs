@@ -2232,6 +2232,28 @@ export interface UnauthorizedCoresTendency {
 }
 
 /**
+ * ModifyDefendStatus请求参数结构体
+ */
+export interface ModifyDefendStatusRequest {
+  /**
+   * 开关是否开启
+   */
+  SwitchOn: boolean
+  /**
+   * 实例类型 <li> Cluster: 集群</li> <li> Node: 节点</li>
+   */
+  InstanceType: string
+  /**
+   * 是否是全部实例
+   */
+  IsAll: boolean
+  /**
+   * 实例id列表
+   */
+  InstanceIDs?: Array<string>
+}
+
+/**
  * DescribeRiskSyscallEvents返回参数结构体
  */
 export interface DescribeRiskSyscallEventsResponse {
@@ -4736,28 +4758,6 @@ export interface CheckRepeatAssetImageRegistryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 高危系统调用白名单信息
- */
-export interface RiskSyscallWhiteListInfo {
-  /**
-   * 镜像id数组，为空代表全部
-   */
-  ImageIds: Array<string>
-  /**
-   * 系统调用名称，通过DescribeRiskSyscallNames接口获取枚举列表
-   */
-  SyscallNames?: Array<string>
-  /**
-   * 目标进程
-   */
-  ProcessPath?: string
-  /**
-   * 白名单id，如果新建则id为空
-   */
-  Id?: string
 }
 
 /**
@@ -8742,25 +8742,51 @@ export interface ScanComplianceAssetsResponse {
 }
 
 /**
- * DescribeCompliancePeriodTaskList请求参数结构体
+ * DescribeClusterNodes请求参数结构体
  */
-export interface DescribeCompliancePeriodTaskListRequest {
+export interface DescribeClusterNodesRequest {
   /**
-   * 资产的类型，取值为：
-ASSET_CONTAINER, 容器
-ASSET_IMAGE, 镜像
-ASSET_HOST, 主机
-ASSET_K8S, K8S资产
+   * 集群Id,不输入表示查询所有
    */
-  AssetType?: string
+  ClusterId?: string
   /**
-   * 偏移量，默认为0。
+   * 偏移量
    */
   Offset?: number
   /**
-   * 需要返回的数量，默认为10，最大值为100。
+   * 每次查询的最大记录数量
    */
   Limit?: number
+  /**
+   * Name 可取值：
+DefendStatus（防护状态）:
+	Defended 已防护
+	UnDefended 未防护
+AgentStatus (容器agent状态):
+ 	OFFLINE 离线
+ 	ONLINE 在线
+ 	UNINSTALL 未安装
+InstanceState (节点状态):
+  	Running 运行中
+  	Ready 准备
+  	Notready 未准备好
+  	Initializing 初始化
+  	Failed 失败
+  	Error 错误
+InstanceRole (节点角色)
+    WORKER 工作节点
+    MASTER_ETCD 主节点
+    SUPER 超级节点
+   */
+  Filters?: Array<ComplianceFilters>
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 排序方式 asc,desc
+   */
+  Order?: string
 }
 
 /**
@@ -10104,6 +10130,28 @@ export interface DescribeAccessControlEventsRequest {
    * 排序字段
    */
   By?: string
+}
+
+/**
+ * DescribeCompliancePeriodTaskList请求参数结构体
+ */
+export interface DescribeCompliancePeriodTaskListRequest {
+  /**
+   * 资产的类型，取值为：
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
+   */
+  AssetType?: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 需要返回的数量，默认为10，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -15208,6 +15256,16 @@ export interface DescribeAssetImageRegistryVirusListResponse {
 }
 
 /**
+ * ModifyDefendStatus返回参数结构体
+ */
+export interface ModifyDefendStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetImageSimpleList请求参数结构体
  */
 export interface DescribeAssetImageSimpleListRequest {
@@ -17674,6 +17732,16 @@ export interface ModifyAssetRequest {
 }
 
 /**
+ * CreateClusterAccess请求参数结构体
+ */
+export interface CreateClusterAccessRequest {
+  /**
+   * 集群ID
+   */
+  ClusterIDs: Array<string>
+}
+
+/**
  * 地域信息
  */
 export interface RegionInfo {
@@ -18527,6 +18595,16 @@ export interface DescribeImageRegistryNamespaceListRequest {
 }
 
 /**
+ * CreateClusterAccess返回参数结构体
+ */
+export interface CreateClusterAccessResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetImageRegistryScanStatusOneKey请求参数结构体
  */
 export interface DescribeAssetImageRegistryScanStatusOneKeyRequest {
@@ -18840,51 +18918,33 @@ export interface DescribeAssetImageScanSettingResponse {
 }
 
 /**
- * DescribeClusterNodes请求参数结构体
+ * DescribeReverseShellDetail返回参数结构体
  */
-export interface DescribeClusterNodesRequest {
+export interface DescribeReverseShellDetailResponse {
   /**
-   * 集群Id,不输入表示查询所有
+   * 事件基本信息
    */
-  ClusterId?: string
+  EventBaseInfo?: RunTimeEventBaseInfo
   /**
-   * 偏移量
+   * 进程信息
    */
-  Offset?: number
+  ProcessInfo?: ProcessDetailInfo
   /**
-   * 每次查询的最大记录数量
+   * 父进程信息
    */
-  Limit?: number
+  ParentProcessInfo?: ProcessDetailBaseInfo
   /**
-   * Name 可取值：
-DefendStatus（防护状态）:
-	Defended 已防护
-	UnDefended 未防护
-AgentStatus (容器agent状态):
- 	OFFLINE 离线
- 	ONLINE 在线
- 	UNINSTALL 未安装
-InstanceState (节点状态):
-  	Running 运行中
-  	Ready 准备
-  	Notready 未准备好
-  	Initializing 初始化
-  	Failed 失败
-  	Error 错误
-InstanceRole (节点角色)
-    WORKER 工作节点
-    MASTER_ETCD 主节点
-    SUPER 超级节点
+   * 事件描述
    */
-  Filters?: Array<ComplianceFilters>
+  EventDetail?: ReverseShellEventDescription
   /**
-   * 排序字段
+   * 祖先进程信息
    */
-  By?: string
+  AncestorProcessInfo?: ProcessBaseInfo
   /**
-   * 排序方式 asc,desc
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Order?: string
+  RequestId?: string
 }
 
 /**
@@ -21368,33 +21428,25 @@ export interface DescribeK8sApiAbnormalTendencyRequest {
 }
 
 /**
- * DescribeReverseShellDetail返回参数结构体
+ * 高危系统调用白名单信息
  */
-export interface DescribeReverseShellDetailResponse {
+export interface RiskSyscallWhiteListInfo {
   /**
-   * 事件基本信息
+   * 镜像id数组，为空代表全部
    */
-  EventBaseInfo?: RunTimeEventBaseInfo
+  ImageIds: Array<string>
   /**
-   * 进程信息
+   * 系统调用名称，通过DescribeRiskSyscallNames接口获取枚举列表
    */
-  ProcessInfo?: ProcessDetailInfo
+  SyscallNames?: Array<string>
   /**
-   * 父进程信息
+   * 目标进程
    */
-  ParentProcessInfo?: ProcessDetailBaseInfo
+  ProcessPath?: string
   /**
-   * 事件描述
+   * 白名单id，如果新建则id为空
    */
-  EventDetail?: ReverseShellEventDescription
-  /**
-   * 祖先进程信息
-   */
-  AncestorProcessInfo?: ProcessBaseInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Id?: string
 }
 
 /**

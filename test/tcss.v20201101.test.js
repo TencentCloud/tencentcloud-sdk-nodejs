@@ -658,9 +658,9 @@ it("tcss.v20201101.DescribeNewestVul", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeRiskSyscallNames", async function () {
+it("tcss.v20201101.DescribeComplianceTaskAssetSummary", async function () {
     try {
-       const data = await client.DescribeRiskSyscallNames({})
+       const data = await client.DescribeComplianceTaskAssetSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,9 +1268,9 @@ it("tcss.v20201101.DescribeK8sApiAbnormalEventList", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeComplianceTaskAssetSummary", async function () {
+it("tcss.v20201101.DescribeAssetImageRegistryRegistryDetail", async function () {
     try {
-       const data = await client.DescribeComplianceTaskAssetSummary({})
+       const data = await client.DescribeAssetImageRegistryRegistryDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1368,9 +1368,9 @@ it("tcss.v20201101.DeleteReverseShellEvents", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeAssetImageRegistryRegistryDetail", async function () {
+it("tcss.v20201101.CreateClusterAccess", async function () {
     try {
-       const data = await client.DescribeAssetImageRegistryRegistryDetail({})
+       const data = await client.CreateClusterAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2288,6 +2288,16 @@ it("tcss.v20201101.CreateProcessEventsExportJob", async function () {
     }
 })
 
+it("tcss.v20201101.ModifyDefendStatus", async function () {
+    try {
+       const data = await client.ModifyDefendStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeNetworkFirewallPolicyDetail", async function () {
     try {
        const data = await client.DescribeNetworkFirewallPolicyDetail({})
@@ -3081,6 +3091,16 @@ it("tcss.v20201101.CreateAssetImageScanSetting", async function () {
 it("tcss.v20201101.DescribeAssetImageVirusList", async function () {
     try {
        const data = await client.DescribeAssetImageVirusList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeRiskSyscallNames", async function () {
+    try {
+       const data = await client.DescribeRiskSyscallNames({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
