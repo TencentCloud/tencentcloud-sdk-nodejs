@@ -29,6 +29,14 @@ export interface SaleParam {
    */
   ParamKeyName: string
   /**
+   * 参数 Id
+   */
+  ParamId?: string
+  /**
+   * 参数值 Id
+   */
+  ParamValueId?: string
+  /**
    * 售卖参数值，当ParamType=Quant时，该值有可能为Null
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -43,6 +51,18 @@ export interface SaleParam {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamType?: string
+  /**
+   * 模块ID
+   */
+  ModuleId?: string
+  /**
+   * 模块key
+   */
+  ModuleKey?: string
+  /**
+   * 模块名称
+   */
+  ModuleName?: string
 }
 
 /**

@@ -4131,6 +4131,10 @@ export interface CreateDatahubTopicResponse {
  */
 export interface MqttConnectParam {
   /**
+   * MQTT的连接port
+   */
+  Port: number
+  /**
    * MQTT连接源的用户名
    */
   UserName: string
@@ -4142,6 +4146,10 @@ export interface MqttConnectParam {
    * MQTT连接源的实例资源
    */
   Resource: string
+  /**
+   * MQTT的连接ip
+   */
+  ServiceVip: string
   /**
    * MQTT Instance vpc-id
    */
@@ -4158,6 +4166,10 @@ export interface MqttConnectParam {
    * MQTT连接源的实例资源地域, 跨地域时必填
    */
   Region?: string
+  /**
+   * IP
+   */
+  Ip?: string
 }
 
 /**

@@ -5436,6 +5436,21 @@ export interface FlowGroupApprovers {
 }
 
 /**
+ * DescribeContractComparisonTask请求参数结构体
+ */
+export interface DescribeContractComparisonTaskRequest {
+  /**
+   * 执行合同审查任务的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。
+   */
+  TaskId: string
+}
+
+/**
  * DescribeFlowBriefs请求参数结构体
  */
 export interface DescribeFlowBriefsRequest {
@@ -5636,6 +5651,70 @@ export interface EmbedUrlOption {
 <ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
    */
   ForbidEditSealDescription?: boolean
+}
+
+/**
+ * DescribeContractComparisonTask返回参数结构体
+ */
+export interface DescribeContractComparisonTaskResponse {
+  /**
+   * 合同对比任务ID。
+   */
+  TaskId?: string
+  /**
+   * 合同对比任务状态。
+状态如下：
+<ul><li> **0**：待创建（未执行）</li>
+<li> **1**：对比中</li>
+<li> **2**：对比成功</li>
+<li> **3**：对比失败</li>
+</ul>
+   */
+  Status?: number
+  /**
+   * 对比失败的具体原因描述，仅当状态为失败时返回此字段。
+   */
+  Message?: string
+  /**
+   * 原版文件ID，对比基准的旧版本文件唯一标识。
+   */
+  OriginalFileResourceId?: string
+  /**
+   * 新版文件ID，与旧版进行对比的新版本文件唯一标识。
+   */
+  DiffFileResourceId?: string
+  /**
+   * 对比任务备注，长度不能超过50个字符。
+   */
+  Comment?: string
+  /**
+   * 合同对比差异点总数。
+   */
+  TotalDiffCount?: number
+  /**
+   * 合同对比新增点数量。
+   */
+  AddDiffCount?: number
+  /**
+   * 合同对比修改点数量。
+   */
+  ChangeDiffCount?: number
+  /**
+   * 合同对比删除点数量。
+   */
+  DeleteDiffCount?: number
+  /**
+   * 提交人，提交此任务或请求的用户唯一标识。
+   */
+  Operator?: string
+  /**
+   * 合同对比任务创建时间，时间戳。
+   */
+  CreateTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

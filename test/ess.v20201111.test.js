@@ -368,6 +368,16 @@ it("ess.v20201111.DescribeOrganizationAuthStatus", async function () {
     }
 })
 
+it("ess.v20201111.ModifyExtendedService", async function () {
+    try {
+       const data = await client.ModifyExtendedService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeContractReviewTask", async function () {
     try {
        const data = await client.DescribeContractReviewTask({})
@@ -718,9 +728,9 @@ it("ess.v20201111.OperateTemplate", async function () {
     }
 })
 
-it("ess.v20201111.ModifyExtendedService", async function () {
+it("ess.v20201111.DescribeContractComparisonTask", async function () {
     try {
-       const data = await client.ModifyExtendedService({})
+       const data = await client.DescribeContractComparisonTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

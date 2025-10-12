@@ -956,6 +956,24 @@ export interface ResourceStatisticsItem {
 }
 
 /**
+ * DescribeServiceTemplateInstances请求参数结构体
+ */
+export interface DescribeServiceTemplateInstancesRequest {
+  /**
+   * 协议端口实例ID。例如：ppm-12345678。
+   */
+  ServiceTemplateId: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
  * ModifyVpcPeeringConnection请求参数结构体
  */
 export interface ModifyVpcPeeringConnectionRequest {
@@ -1485,7 +1503,7 @@ export interface DescribeVpcPrivateIpAddressesRequest {
    */
   VpcId: string
   /**
-   * 内网`IP`地址列表，批量查询单次请求最多支持`10`个。
+   * 内网`IP`地址列表，批量查询单次请求最多支持`100`个。
    */
   PrivateIpAddresses: Array<string>
 }
@@ -2493,17 +2511,21 @@ NONEXTHOP：无下一跳；
 }
 
 /**
- * 路由表关联关系
+ * DescribeAddressTemplateInstances请求参数结构体
  */
-export interface RouteTableAssociation {
+export interface DescribeAddressTemplateInstancesRequest {
   /**
-   * 子网实例ID。
+   * IP地址实例ID。例如：ipm-12345678。
    */
-  SubnetId?: string
+  AddressTemplateId: string
   /**
-   * 路由表实例ID。
+   * 偏移量，默认为0。
    */
-  RouteTableId?: string
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -4856,17 +4878,16 @@ export interface DescribeFlowLogResponse {
 }
 
 /**
- * DownloadCustomerGatewayConfiguration返回参数结构体
+ * DisableGatewayFlowMonitor请求参数结构体
  */
-export interface DownloadCustomerGatewayConfigurationResponse {
+export interface DisableGatewayFlowMonitorRequest {
   /**
-   * XML格式配置信息。
+   * 网关实例ID，目前我们支持的网关实例类型有，
+专线网关实例ID，形如，`dcg-ltjahce6`；
+Nat网关实例ID，形如，`nat-ltjahce6`；
+VPN网关实例ID，形如，`vpn-ltjahce6`。
    */
-  CustomerGatewayConfiguration?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  GatewayId: string
 }
 
 /**
@@ -7475,6 +7496,48 @@ export interface AssignIpv6AddressesRequest {
 }
 
 /**
+ * 路由表选择策略信息
+ */
+export interface RouteSelectionPolicy {
+  /**
+   * 云联网ID。
+   */
+  CcnId?: string
+  /**
+   * 路由表ID。
+   */
+  RouteTableId?: string
+  /**
+   * 路由表名称。
+   */
+  RouteTableName?: string
+  /**
+   * 实例类型。如VPC
+   */
+  InstanceType?: string
+  /**
+   * 实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 源端cidr。
+   */
+  SourceCidrBlock?: string
+  /**
+   * 路由表描述。
+   */
+  Description?: string
+  /**
+   * 实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 关联实例所属UIN（根账号）。
+   */
+  InstanceUin?: string
+}
+
+/**
  * CreateServiceTemplateGroup返回参数结构体
  */
 export interface CreateServiceTemplateGroupResponse {
@@ -8279,7 +8342,11 @@ export interface ModifyPrivateNatGatewayAttributeRequest {
   /**
    * 私网网关名称，可任意命名，但不得超过60个字符。
    */
-  NatGatewayName: string
+  NatGatewayName?: string
+  /**
+   * 私网NAT实例是否开启删除保护
+   */
+  DeletionProtectionEnabled?: boolean
 }
 
 /**
@@ -8772,16 +8839,21 @@ export interface DescribeSnapshotPoliciesResponse {
 }
 
 /**
- * DisableGatewayFlowMonitor请求参数结构体
+ * DescribeAddressTemplateGroupInstances请求参数结构体
  */
-export interface DisableGatewayFlowMonitorRequest {
+export interface DescribeAddressTemplateGroupInstancesRequest {
   /**
-   * 网关实例ID，目前我们支持的网关实例类型有，
-专线网关实例ID，形如，`dcg-ltjahce6`；
-Nat网关实例ID，形如，`nat-ltjahce6`；
-VPN网关实例ID，形如，`vpn-ltjahce6`。
+   * IP地址组实例ID。例如：ipmg-12345678。
    */
-  GatewayId: string
+  AddressTemplateGroupId: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -9252,6 +9324,16 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
    * 专线网关自定义ASN
    */
   GatewayAsn?: number
+}
+
+/**
+ * DescribeAddressTemplateInstances返回参数结构体
+ */
+export interface DescribeAddressTemplateInstancesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11511,9 +11593,9 @@ export interface CreateVpnGatewaySslClientRequest {
 }
 
 /**
- * ResetVpnConnection返回参数结构体
+ * DescribeServiceTemplateGroupInstances返回参数结构体
  */
-export interface ResetVpnConnectionResponse {
+export interface DescribeServiceTemplateGroupInstancesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13241,21 +13323,13 @@ export interface DisableRoutesRequest {
 }
 
 /**
- * DisassociateDirectConnectGatewayNatGateway请求参数结构体
+ * DescribeAddressTemplateGroupInstances返回参数结构体
  */
-export interface DisassociateDirectConnectGatewayNatGatewayRequest {
+export interface DescribeAddressTemplateGroupInstancesResponse {
   /**
-   * VPC实例ID。形如：vpc-xxx。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  VpcId: string
-  /**
-   * NAT网关ID。形如：nat-xxx
-   */
-  NatGatewayId: string
-  /**
-   * 专线网关ID。形如：dcg-xxx
-   */
-  DirectConnectGatewayId: string
+  RequestId?: string
 }
 
 /**
@@ -13339,9 +13413,9 @@ export interface SetCcnRegionBandwidthLimitsRequest {
 }
 
 /**
- * ModifyPrivateNatGatewayTranslationAclRule返回参数结构体
+ * DescribeServiceTemplateInstances返回参数结构体
  */
-export interface ModifyPrivateNatGatewayTranslationAclRuleResponse {
+export interface DescribeServiceTemplateInstancesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13429,6 +13503,24 @@ export interface CreateRouteTableRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * DescribeServiceTemplateGroupInstances请求参数结构体
+ */
+export interface DescribeServiceTemplateGroupInstancesRequest {
+  /**
+   * 协议端口实例ID。例如：ppmg-12345678。
+   */
+  ServiceTemplateGroupId: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -15945,6 +16037,16 @@ export interface EnableCcnRoutesResponse {
 }
 
 /**
+ * ResetVpnConnection返回参数结构体
+ */
+export interface ResetVpnConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePrivateNatGateways返回参数结构体
  */
 export interface DescribePrivateNatGatewaysResponse {
@@ -17304,6 +17406,20 @@ export interface ReplaceDirectConnectGatewayCcnRoutesResponse {
 }
 
 /**
+ * DownloadCustomerGatewayConfiguration返回参数结构体
+ */
+export interface DownloadCustomerGatewayConfigurationResponse {
+  /**
+   * XML格式配置信息。
+   */
+  CustomerGatewayConfiguration?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySecurityGroupPolicies返回参数结构体
  */
 export interface ModifySecurityGroupPoliciesResponse {
@@ -17500,6 +17616,20 @@ export interface ReserveIpAddressInfo {
    * 标签键值对。
    */
   TagSet?: Array<Tag>
+}
+
+/**
+ * 路由表关联关系
+ */
+export interface RouteTableAssociation {
+  /**
+   * 子网实例ID。
+   */
+  SubnetId?: string
+  /**
+   * 路由表实例ID。
+   */
+  RouteTableId?: string
 }
 
 /**
@@ -17961,45 +18091,13 @@ export interface AssociateAddressRequest {
 }
 
 /**
- * 路由表选择策略信息
+ * ModifyPrivateNatGatewayTranslationAclRule返回参数结构体
  */
-export interface RouteSelectionPolicy {
+export interface ModifyPrivateNatGatewayTranslationAclRuleResponse {
   /**
-   * 云联网ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CcnId?: string
-  /**
-   * 路由表ID。
-   */
-  RouteTableId?: string
-  /**
-   * 路由表名称。
-   */
-  RouteTableName?: string
-  /**
-   * 实例类型。如VPC
-   */
-  InstanceType?: string
-  /**
-   * 实例名称。
-   */
-  InstanceName?: string
-  /**
-   * 源端cidr。
-   */
-  SourceCidrBlock?: string
-  /**
-   * 路由表描述。
-   */
-  Description?: string
-  /**
-   * 实例ID。
-   */
-  InstanceId?: string
-  /**
-   * 关联实例所属UIN（根账号）。
-   */
-  InstanceUin?: string
+  RequestId?: string
 }
 
 /**
@@ -18821,6 +18919,24 @@ export interface ResetNatGatewayConnectionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisassociateDirectConnectGatewayNatGateway请求参数结构体
+ */
+export interface DisassociateDirectConnectGatewayNatGatewayRequest {
+  /**
+   * VPC实例ID。形如：vpc-xxx。
+   */
+  VpcId: string
+  /**
+   * NAT网关ID。形如：nat-xxx
+   */
+  NatGatewayId: string
+  /**
+   * 专线网关ID。形如：dcg-xxx
+   */
+  DirectConnectGatewayId: string
 }
 
 /**

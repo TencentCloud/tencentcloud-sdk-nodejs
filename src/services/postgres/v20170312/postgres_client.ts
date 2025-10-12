@@ -316,8 +316,8 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口（DescribeDBInstanceHAConfig）用于查询实例HA配置信息。其中HA配置信息包括：
-<li>允许备节点切换为主节点的条件配置
-<li>半同步实例使用同步复制或异步复制的条件配置
+<li>允许备节点切换为主节点的条件配置</li>
+<li>半同步实例使用同步复制或异步复制的条件配置</li>
      */
   async DescribeDBInstanceHAConfig(
     req: DescribeDBInstanceHAConfigRequest,

@@ -176,11 +176,13 @@ import {
   CreateBatchSignUrlRequest,
   CreateBatchInformationExtractionTaskResponse,
   FlowGroupApprovers,
+  DescribeContractComparisonTaskRequest,
   DescribeFlowBriefsRequest,
   CreateFlowGroupSignReviewRequest,
   Admin,
   OccupiedSeal,
   EmbedUrlOption,
+  DescribeContractComparisonTaskResponse,
   CreateModifyAdminAuthorizationUrlResponse,
   CreateOrganizationInfoChangeUrlResponse,
   CreateFlowResponse,
@@ -1027,6 +1029,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 管理企业扩展服务
+
+- **直接开通的情形：** 若在操作过程中接口没有返回跳转链接，这表明无需进行任何跳转操作。此时，相应的企业拓展服务将会直接被开通或关闭。
+
+- **需要法人或者超管签署开通协议的情形：** 当需要开通以下企业拓展服务时， 系统将返回一个操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成服务的开通操作。
+  - **OPEN_SERVER_SIGN（企业自动签）**
+
+注意： `在调用此接口以管理企业扩展服务时，操作者（入参中的Operator）必须是企业的超级管理员（超管）或法人`
+
+
+对应的扩展服务能力可以在控制台的【扩展服务】中找到
+![image](https://qcloudimg.tencent-cloud.cn/raw/7eb35d2473d6c29784f3b35617bca9a9.png)
+     */
+  async ModifyExtendedService(
+    req: ModifyExtendedServiceRequest,
+    cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
+  ): Promise<ModifyExtendedServiceResponse> {
+    return this.request("ModifyExtendedService", req, cb)
+  }
+
+  /**
    * 本接口（DescribeContractReviewTask）用于获取合同审查任务详情，包括任务的状态和识别出的风险信息。
    */
   async DescribeContractReviewTask(
@@ -1654,24 +1677,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 管理企业扩展服务
-
-- **直接开通的情形：** 若在操作过程中接口没有返回跳转链接，这表明无需进行任何跳转操作。此时，相应的企业拓展服务将会直接被开通或关闭。
-
-- **需要法人或者超管签署开通协议的情形：** 当需要开通以下企业拓展服务时， 系统将返回一个操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成服务的开通操作。
-  - **OPEN_SERVER_SIGN（企业自动签）**
-
-注意： `在调用此接口以管理企业扩展服务时，操作者（入参中的Operator）必须是企业的超级管理员（超管）或法人`
-
-
-对应的扩展服务能力可以在控制台的【扩展服务】中找到
-![image](https://qcloudimg.tencent-cloud.cn/raw/7eb35d2473d6c29784f3b35617bca9a9.png)
-     */
-  async ModifyExtendedService(
-    req: ModifyExtendedServiceRequest,
-    cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
-  ): Promise<ModifyExtendedServiceResponse> {
-    return this.request("ModifyExtendedService", req, cb)
+   * 本接口（DescribeContractComparisonTask）用于查询合同对比任务结果详情。
+   */
+  async DescribeContractComparisonTask(
+    req: DescribeContractComparisonTaskRequest,
+    cb?: (error: string, rep: DescribeContractComparisonTaskResponse) => void
+  ): Promise<DescribeContractComparisonTaskResponse> {
+    return this.request("DescribeContractComparisonTask", req, cb)
   }
 
   /**

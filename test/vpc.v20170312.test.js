@@ -878,9 +878,9 @@ it("vpc.v20170312.ModifyPrivateNatGatewayTranslationAclRule", async function () 
     }
 })
 
-it("vpc.v20170312.ModifyPrivateIpAddressesAttribute", async function () {
+it("vpc.v20170312.DescribeAddressTemplateInstances", async function () {
     try {
-       const data = await client.ModifyPrivateIpAddressesAttribute({})
+       const data = await client.DescribeAddressTemplateInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,9 +898,9 @@ it("vpc.v20170312.ReplaceCcnRouteTableInputPolicys", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyNetworkInterfaceQos", async function () {
+it("vpc.v20170312.CreateDirectConnectGateway", async function () {
     try {
-       const data = await client.ModifyNetworkInterfaceQos({})
+       const data = await client.CreateDirectConnectGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1188,6 +1188,16 @@ it("vpc.v20170312.DisassociateNatGatewayAddress", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyPrivateIpAddressesAttribute", async function () {
+    try {
+       const data = await client.ModifyPrivateIpAddressesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeGatewayFlowMonitorDetail", async function () {
     try {
        const data = await client.DescribeGatewayFlowMonitorDetail({})
@@ -1238,9 +1248,9 @@ it("vpc.v20170312.DescribeVpcTaskResult", async function () {
     }
 })
 
-it("vpc.v20170312.CreateDirectConnectGateway", async function () {
+it("vpc.v20170312.ModifyNetworkInterfaceQos", async function () {
     try {
-       const data = await client.CreateDirectConnectGateway({})
+       const data = await client.ModifyNetworkInterfaceQos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1858,9 +1868,9 @@ it("vpc.v20170312.RejectVpcPeeringConnection", async function () {
     }
 })
 
-it("vpc.v20170312.DescribePrivateNatGateways", async function () {
+it("vpc.v20170312.DescribeServiceTemplateInstances", async function () {
     try {
-       const data = await client.DescribePrivateNatGateways({})
+       const data = await client.DescribeServiceTemplateInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2558,6 +2568,16 @@ it("vpc.v20170312.ModifyNatGatewaySourceIpTranslationNatRule", async function ()
     }
 })
 
+it("vpc.v20170312.DescribeServiceTemplateGroupInstances", async function () {
+    try {
+       const data = await client.DescribeServiceTemplateGroupInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.UnassignIpv6SubnetCidrBlock", async function () {
     try {
        const data = await client.UnassignIpv6SubnetCidrBlock({})
@@ -2748,6 +2768,16 @@ it("vpc.v20170312.CreateAddressTemplateGroup", async function () {
     }
 })
 
+it("vpc.v20170312.DescribePrivateNatGateways", async function () {
+    try {
+       const data = await client.DescribePrivateNatGateways({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.AssociateNetworkAclSubnets", async function () {
     try {
        const data = await client.AssociateNetworkAclSubnets({})
@@ -2901,6 +2931,16 @@ it("vpc.v20170312.DisassociateDhcpIpWithAddressIp", async function () {
 it("vpc.v20170312.CreateHaVip", async function () {
     try {
        const data = await client.CreateHaVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeAddressTemplateGroupInstances", async function () {
+    try {
+       const data = await client.DescribeAddressTemplateGroupInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

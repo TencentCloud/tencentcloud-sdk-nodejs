@@ -3128,7 +3128,7 @@ export interface RestartDBInstanceRequest {
  */
 export interface DescribeDBInstanceHAConfigRequest {
   /**
-   * 实例ID
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
 }
@@ -3367,20 +3367,20 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
 export interface DescribeDBInstanceHAConfigResponse {
   /**
    * 主从同步方式：
-<li>Semi-sync：半同步
-<li>Async：异步
+<li>Semi-sync：半同步</li>
+<li>Async：异步</li>
    */
   SyncMode?: string
   /**
    * 高可用备机最大延迟数据量。备节点延迟数据量小于等于该值，且备节点延迟时间小于等于MaxStandbyLag时，可以切换为主节点。
-<li>单位：byte
-<li>参数范围：[1073741824, 322122547200]
+<li>单位：byte</li>
+<li>参数范围：[1073741824, 322122547200]</li>
    */
   MaxStandbyLatency?: number
   /**
    * 高可用备机最大延迟时间。备节点延迟时间小于等于该值，且备节点延迟数据量小于等于MaxStandbyLatency时，可以切换为主节点。
-<li>单位：s
-<li>参数范围：[5, 10]
+<li>单位：s</li>
+<li>参数范围：[5, 10]</li>
    */
   MaxStandbyLag?: number
   /**

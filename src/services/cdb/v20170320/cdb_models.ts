@@ -459,6 +459,26 @@ export interface InstanceDbAuditStatus {
    * 实例所应用的规则模板。
    */
   RuleTemplateIds?: Array<string>
+  /**
+   * 限免状态
+   */
+  TrialStatus?: string
+  /**
+   * 限免开启时间
+   */
+  TrialStartTime?: number
+  /**
+   * 限免持续时间
+   */
+  TrialDuration?: number
+  /**
+   * 限免关闭时间
+   */
+  TrialCloseTime?: number
+  /**
+   * 限免期查询日志时长
+   */
+  TrialDescribeLogHours?: number
 }
 
 /**
@@ -2098,6 +2118,10 @@ export interface DescribeAuditConfigResponse {
    * 是否正在关闭审计。目前支持的值包括："false"-否，"true"-是
    */
   IsClosing?: string
+  /**
+   * 是否正在开启审计。目前支持的值包括："false"-否，"true"-是
+   */
+  IsOpening?: string
   /**
    * 审计服务开通时间。
    */

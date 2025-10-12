@@ -201,6 +201,10 @@ export interface ModifyUserPrivilegesV3Request {
    * 默认计算组
    */
   DefaultComputeGroup?: string
+  /**
+   * 0: 灵活场景 1: 固定场景
+   */
+  ComputeGroupType?: number
 }
 
 /**

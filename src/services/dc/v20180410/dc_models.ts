@@ -263,6 +263,10 @@ export interface DirectConnect {
    */
   FaultReportContactNumber?: string
   /**
+   * 报障联系邮箱。
+   */
+  FaultReportContactEmail?: string
+  /**
    * 标签键值对
    */
   TagSet?: Array<Tag>
@@ -525,6 +529,14 @@ export interface AccessPoint {
    * 是否MACsec
    */
   IsMacSec?: boolean
+  /**
+   * 版本号
+   */
+  Version?: string
+  /**
+   * 接入点业务类型，枚举值：NORMAL-标准接入点，CDZ：EZ/CDZ接入点，COOPERATIVE-合作POP
+   */
+  AccessPointServiceType?: string
 }
 
 /**
@@ -1338,6 +1350,10 @@ export interface ModifyDirectConnectTunnelExtraRequest {
    * 用户侧互联IPv6。
    */
   CustomerIPv6Address?: string
+  /**
+   * 互联IP重分布状态
+   */
+  ImportDirectRoute?: boolean
 }
 
 /**
@@ -1400,6 +1416,10 @@ export interface DeleteDirectConnectTunnelResponse {
  * BFD配置信息
  */
 export interface BFDInfo {
+  /**
+   * 使能BFD多跳，0:未开启，2-255:BFD跳数
+   */
+  EnableBfdMultiHop?: number
   /**
    * 健康检查次数
    */
@@ -1531,6 +1551,18 @@ cross-region：跨地域
    * 接入地域
    */
   ArRegion?: string
+  /**
+   * 运营商代码
+   */
+  IapCode?: string
+  /**
+   * IDC侧类型。枚举值：CLOUD-云，ISP-运营商，OTHER-第三方
+   */
+  IdcPointType?: string
+  /**
+   * 运营商链路是否有保护
+   */
+  BIapLinkProtected?: boolean
 }
 
 /**
@@ -1695,6 +1727,14 @@ export interface CreateCasInput {
    * 接入地域
    */
   ArRegion?: string
+  /**
+   * IDC侧类型，默认为OTHER。枚举值：CLOUD-云，ISP-运营商，OTHER-第三方
+   */
+  IdcPointType?: string
+  /**
+   * 运营商链路是否有保护
+   */
+  BIapLinkProtected?: boolean
 }
 
 /**

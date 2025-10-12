@@ -64,6 +64,7 @@ import {
   DescribeServiceTemplateGroupsResponse,
   DescribeVpcEndPointRequest,
   ResourceStatisticsItem,
+  DescribeServiceTemplateInstancesRequest,
   ModifyVpcPeeringConnectionRequest,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
@@ -126,7 +127,7 @@ import {
   CheckDefaultSubnetRequest,
   PeerConnection,
   CheckNetDetectStateRequest,
-  RouteTableAssociation,
+  DescribeAddressTemplateInstancesRequest,
   ModifyCustomerGatewayAttributeRequest,
   DescribeBandwidthPackageBandwidthRangeResponse,
   DeleteVpcEndPointServiceWhiteListRequest,
@@ -262,7 +263,7 @@ import {
   DescribeNetDetectStatesRequest,
   DescribeRouteConflictsRequest,
   DescribeFlowLogResponse,
-  DownloadCustomerGatewayConfigurationResponse,
+  DisableGatewayFlowMonitorRequest,
   DescribeBandwidthPackagesRequest,
   DeleteDirectConnectGatewayCcnRoutesResponse,
   HaVipAssociation,
@@ -385,6 +386,7 @@ import {
   AddressTemplateSpecification,
   VpcIpv6Address,
   AssignIpv6AddressesRequest,
+  RouteSelectionPolicy,
   CreateServiceTemplateGroupResponse,
   NetDetect,
   VpnGatewayRouteModify,
@@ -453,7 +455,7 @@ import {
   DescribeNetworkAclQuintupleEntriesRequest,
   NetDetectState,
   DescribeSnapshotPoliciesResponse,
-  DisableGatewayFlowMonitorRequest,
+  DescribeAddressTemplateGroupInstancesRequest,
   DescribeCcnRouteTableBroadcastPolicysResponse,
   EnableRoutesResponse,
   HaVipAssociateAddressIpResponse,
@@ -471,6 +473,7 @@ import {
   EndPoint,
   RemoveIp6RulesResponse,
   DirectConnectGateway,
+  DescribeAddressTemplateInstancesResponse,
   DescribeProductQuotaResponse,
   Price,
   HaVipDisassociateAddressIpRequest,
@@ -573,7 +576,7 @@ import {
   AttachClassicLinkVpcRequest,
   GatewayFlowMonitorDetail,
   CreateVpnGatewaySslClientRequest,
-  ResetVpnConnectionResponse,
+  DescribeServiceTemplateGroupInstancesResponse,
   CreateCdcNetPlanesResponse,
   DescribeVpnGatewaySslServersResponse,
   ModifyAddressesRenewFlagResponse,
@@ -665,19 +668,20 @@ import {
   ModifyReserveIpAddressRequest,
   ISPIPv6CidrBlock,
   DisableRoutesRequest,
-  DisassociateDirectConnectGatewayNatGatewayRequest,
+  DescribeAddressTemplateGroupInstancesResponse,
   DescribeRouteTableAssociatedInstancesRequest,
   ReleaseIPv6AddressesRequest,
   DisassociateIPv6AddressResponse,
   CheckGatewayFlowMonitorRequest,
   SetCcnRegionBandwidthLimitsRequest,
-  ModifyPrivateNatGatewayTranslationAclRuleResponse,
+  DescribeServiceTemplateInstancesResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
   ModifyGatewayFlowQosRequest,
   StopTrafficMirrorRequest,
   ModifyHighPriorityRouteTableAttributeResponse,
   CreateDirectConnectGatewayCcnRoutesResponse,
   CreateRouteTableRequest,
+  DescribeServiceTemplateGroupInstancesRequest,
   StartTrafficMirrorRequest,
   MigrateNetworkInterfaceRequest,
   DescribeCustomerGatewaysRequest,
@@ -796,6 +800,7 @@ import {
   InquiryPriceRenewVpnGatewayRequest,
   HighPriorityModifyItem,
   EnableCcnRoutesResponse,
+  ResetVpnConnectionResponse,
   DescribePrivateNatGatewaysResponse,
   ModifyVpnGatewayCcnRoutesResponse,
   DetachCcnInstancesResponse,
@@ -876,6 +881,7 @@ import {
   ModifyVpnGatewayCcnRoutesRequest,
   DescribeGatewayFlowQosRequest,
   ReplaceDirectConnectGatewayCcnRoutesResponse,
+  DownloadCustomerGatewayConfigurationResponse,
   ModifySecurityGroupPoliciesResponse,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest,
   DescribeServiceTemplatesRequest,
@@ -885,6 +891,7 @@ import {
   DetachNetworkInterfaceRequest,
   DescribeSnapshotAttachedInstancesResponse,
   ReserveIpAddressInfo,
+  RouteTableAssociation,
   Ip6Rule,
   AttachClassicLinkVpcResponse,
   DownloadVpnGatewaySslClientCertRequest,
@@ -909,7 +916,7 @@ import {
   GetCcnRegionBandwidthLimitsResponse,
   DeleteRoutesRequest,
   AssociateAddressRequest,
-  RouteSelectionPolicy,
+  ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CcnRegionBandwidthLimit,
   ModifyCcnRouteTablesRequest,
   ResetAttachCcnInstancesRequest,
@@ -952,6 +959,7 @@ import {
   DescribeDirectConnectGatewayCcnRoutesResponse,
   ModifyPrivateIpAddressesAttributeRequest,
   ResetNatGatewayConnectionResponse,
+  DisassociateDirectConnectGatewayNatGatewayRequest,
   UpdateTrafficMirrorAllFilterResponse,
   AssociateNetworkInterfaceSecurityGroupsRequest,
   DeleteVpnGatewayRoutesResponse,
@@ -2010,13 +2018,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（ModifyPrivateIpAddressesAttribute）用于修改弹性网卡内网IP属性。
+   * 本接口（DescribeAddressTemplateInstances）用于查询参数模板IP地址关联的实例列表。本接口不会返回查询的结果，需要根据返回的RequestId调用DescribeVpcTaskResult接口获取结果。
    */
-  async ModifyPrivateIpAddressesAttribute(
-    req: ModifyPrivateIpAddressesAttributeRequest,
-    cb?: (error: string, rep: ModifyPrivateIpAddressesAttributeResponse) => void
-  ): Promise<ModifyPrivateIpAddressesAttributeResponse> {
-    return this.request("ModifyPrivateIpAddressesAttribute", req, cb)
+  async DescribeAddressTemplateInstances(
+    req: DescribeAddressTemplateInstancesRequest,
+    cb?: (error: string, rep: DescribeAddressTemplateInstancesResponse) => void
+  ): Promise<DescribeAddressTemplateInstancesResponse> {
+    return this.request("DescribeAddressTemplateInstances", req, cb)
   }
 
   /**
@@ -2044,13 +2052,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（ModifyNetworkInterfaceQos）用于修改弹性网卡服务质量。
+   * 本接口（CreateDirectConnectGateway）用于创建专线网关。
    */
-  async ModifyNetworkInterfaceQos(
-    req: ModifyNetworkInterfaceQosRequest,
-    cb?: (error: string, rep: ModifyNetworkInterfaceQosResponse) => void
-  ): Promise<ModifyNetworkInterfaceQosResponse> {
-    return this.request("ModifyNetworkInterfaceQos", req, cb)
+  async CreateDirectConnectGateway(
+    req: CreateDirectConnectGatewayRequest,
+    cb?: (error: string, rep: CreateDirectConnectGatewayResponse) => void
+  ): Promise<CreateDirectConnectGatewayResponse> {
+    return this.request("CreateDirectConnectGateway", req, cb)
   }
 
   /**
@@ -2347,6 +2355,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（ModifyPrivateIpAddressesAttribute）用于修改弹性网卡内网IP属性。
+   */
+  async ModifyPrivateIpAddressesAttribute(
+    req: ModifyPrivateIpAddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyPrivateIpAddressesAttributeResponse) => void
+  ): Promise<ModifyPrivateIpAddressesAttributeResponse> {
+    return this.request("ModifyPrivateIpAddressesAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DescribeGatewayFlowMonitorDetail）用于查询网关流量监控明细。
    * 只支持单个网关实例查询。即入参 `VpnId`、 `DirectConnectGatewayId`、 `PeeringConnectionId`、 `NatId` 最多只支持传一个，且必须传一个。
    * 如果网关有流量，但调用本接口没有返回数据，请在控制台对应网关详情页确认是否开启网关流量监控。
@@ -2405,13 +2423,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（CreateDirectConnectGateway）用于创建专线网关。
+   * 本接口（ModifyNetworkInterfaceQos）用于修改弹性网卡服务质量。
    */
-  async CreateDirectConnectGateway(
-    req: CreateDirectConnectGatewayRequest,
-    cb?: (error: string, rep: CreateDirectConnectGatewayResponse) => void
-  ): Promise<CreateDirectConnectGatewayResponse> {
-    return this.request("CreateDirectConnectGateway", req, cb)
+  async ModifyNetworkInterfaceQos(
+    req: ModifyNetworkInterfaceQosRequest,
+    cb?: (error: string, rep: ModifyNetworkInterfaceQosResponse) => void
+  ): Promise<ModifyNetworkInterfaceQosResponse> {
+    return this.request("ModifyNetworkInterfaceQos", req, cb)
   }
 
   /**
@@ -3082,13 +3100,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（DescribePrivateNatGateways）用于查询私网NAT网关
+   * 本接口（DescribeServiceTemplateInstances）用于查询参数模板协议端口关联的实例列表。本接口不会返回查询的结果，需要根据返回的RequestId调用DescribeVpcTaskResult接口获取结果。
    */
-  async DescribePrivateNatGateways(
-    req: DescribePrivateNatGatewaysRequest,
-    cb?: (error: string, rep: DescribePrivateNatGatewaysResponse) => void
-  ): Promise<DescribePrivateNatGatewaysResponse> {
-    return this.request("DescribePrivateNatGateways", req, cb)
+  async DescribeServiceTemplateInstances(
+    req: DescribeServiceTemplateInstancesRequest,
+    cb?: (error: string, rep: DescribeServiceTemplateInstancesResponse) => void
+  ): Promise<DescribeServiceTemplateInstancesResponse> {
+    return this.request("DescribeServiceTemplateInstances", req, cb)
   }
 
   /**
@@ -3844,6 +3862,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（DescribeServiceTemplateGroupInstances）用于查询参数模板协议端口组关联的实例列表。本接口不会返回查询的结果，需要根据返回的RequestId调用DescribeVpcTaskResult接口获取结果。
+   */
+  async DescribeServiceTemplateGroupInstances(
+    req: DescribeServiceTemplateGroupInstancesRequest,
+    cb?: (error: string, rep: DescribeServiceTemplateGroupInstancesResponse) => void
+  ): Promise<DescribeServiceTemplateGroupInstancesResponse> {
+    return this.request("DescribeServiceTemplateGroupInstances", req, cb)
+  }
+
+  /**
      * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
 子网段如果还有IP占用且未回收，则子网段无法释放。
      */
@@ -4036,6 +4064,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（DescribePrivateNatGateways）用于查询私网NAT网关
+   */
+  async DescribePrivateNatGateways(
+    req: DescribePrivateNatGatewaysRequest,
+    cb?: (error: string, rep: DescribePrivateNatGatewaysResponse) => void
+  ): Promise<DescribePrivateNatGatewaysResponse> {
+    return this.request("DescribePrivateNatGateways", req, cb)
+  }
+
+  /**
    * 本接口（AssociateNetworkAclSubnets）用于网络ACL关联VPC下的子网。
    */
   async AssociateNetworkAclSubnets(
@@ -4196,6 +4234,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: CreateHaVipResponse) => void
   ): Promise<CreateHaVipResponse> {
     return this.request("CreateHaVip", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeAddressTemplateGroupInstances）用于查询参数模板IP地址组口关联的实例列表。本接口不会返回查询的结果，需要根据返回的RequestId调用DescribeVpcTaskResult接口获取结果。
+   */
+  async DescribeAddressTemplateGroupInstances(
+    req: DescribeAddressTemplateGroupInstancesRequest,
+    cb?: (error: string, rep: DescribeAddressTemplateGroupInstancesResponse) => void
+  ): Promise<DescribeAddressTemplateGroupInstancesResponse> {
+    return this.request("DescribeAddressTemplateGroupInstances", req, cb)
   }
 
   /**

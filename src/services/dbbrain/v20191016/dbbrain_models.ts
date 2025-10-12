@@ -753,6 +753,11 @@ export interface MySqlProcess {
    * 线程的操作语句。
    */
   Info?: string
+  /**
+   * sql类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlType?: string
 }
 
 /**
@@ -2253,7 +2258,7 @@ export interface DescribeMySqlProcessListRequest {
    */
   Limit?: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。
    */
   Product?: string
 }
