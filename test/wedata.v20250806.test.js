@@ -148,6 +148,16 @@ it("wedata.v20250806.ListCatalog", async function () {
     }
 })
 
+it("wedata.v20250806.GetDataBackfillPlan", async function () {
+    try {
+       const data = await client.GetDataBackfillPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.DeleteWorkflow", async function () {
     try {
        const data = await client.DeleteWorkflow({})
@@ -778,9 +788,9 @@ it("wedata.v20250806.GrantMemberProjectRole", async function () {
     }
 })
 
-it("wedata.v20250806.ListTaskInstances", async function () {
+it("wedata.v20250806.GetSQLFolder", async function () {
     try {
-       const data = await client.ListTaskInstances({})
+       const data = await client.GetSQLFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,6 +968,26 @@ it("wedata.v20250806.GetTaskVersion", async function () {
     }
 })
 
+it("wedata.v20250806.GetCodeFolder", async function () {
+    try {
+       const data = await client.GetCodeFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20250806.StartOpsTasks", async function () {
+    try {
+       const data = await client.StartOpsTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.DeleteOpsAlarmRule", async function () {
     try {
        const data = await client.DeleteOpsAlarmRule({})
@@ -981,6 +1011,16 @@ it("wedata.v20250806.GetAlarmMessage", async function () {
 it("wedata.v20250806.RerunTaskInstancesAsync", async function () {
     try {
        const data = await client.RerunTaskInstancesAsync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20250806.ListTaskInstances", async function () {
+    try {
+       const data = await client.ListTaskInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

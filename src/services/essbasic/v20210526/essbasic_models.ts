@@ -2917,6 +2917,10 @@ export interface ChannelCreateOrganizationBatchSignUrlRequest {
    * 合同组Id，传入此参数则可以不传FlowIds
    */
   FlowGroupId?: string
+  /**
+   * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。`
+   */
+  CanBatchReject?: boolean
 }
 
 /**
@@ -5159,7 +5163,7 @@ export interface ChannelCreateBatchQuickSignUrlRequest {
    */
   CacheApproverInfo?: boolean
   /**
-   * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`合同组暂不支持批量拒签功能。`
+   * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。`
    */
   CanBatchReject?: boolean
   /**
@@ -8486,7 +8490,7 @@ export interface ChannelCreateBatchSignUrlRequest {
   UrlUseEnv?: string
   /**
    * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>
-注：`1. 合同组暂不支持批量拒签功能。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能`
+注：`1. 当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能`
    */
   CanBatchReject?: boolean
   /**

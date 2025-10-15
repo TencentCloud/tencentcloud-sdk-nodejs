@@ -468,6 +468,16 @@ it("monitor.v20180724.BindingPolicyTag", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusScrapeStatistics", async function () {
+    try {
+       const data = await client.DescribePrometheusScrapeStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreateAlarmShield", async function () {
     try {
        const data = await client.CreateAlarmShield({})

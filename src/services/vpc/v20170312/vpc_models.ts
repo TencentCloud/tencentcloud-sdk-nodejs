@@ -2181,6 +2181,10 @@ export interface ModifyFlowLogAttributeRequest {
    * 流日志实例描述。长度为不超过512个字符。
    */
   FlowLogDescription?: string
+  /**
+   * 流日志采集周期，只支持CCN类型流日志。 取值范围（单位s）：60， 300， 600。
+   */
+  Period?: number
 }
 
 /**

@@ -5099,6 +5099,14 @@ export interface GovernanceService {
    * 是否开启同步到全局注册中心
    */
   SyncToGlobalRegistry?: boolean
+  /**
+   * 隔离实例数
+   */
+  IsolateInstanceCount?: number
+  /**
+   * 服务健康状态
+   */
+  ServiceStatus?: number
 }
 
 /**
@@ -8666,6 +8674,10 @@ export interface DescribeGovernanceServicesRequest {
    * 是否开启同步到全局注册中心
    */
   SyncToGlobalRegistry?: string
+  /**
+   * 过滤筛选条件
+   */
+  StatusFilter?: Array<Filter>
 }
 
 /**

@@ -552,10 +552,6 @@ export interface VoiceCloneRequest {
    */
   SdkAppId: number
   /**
-   * TTS的API密钥
-   */
-  APIKey: string
-  /**
    * 声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位
    */
   VoiceName: string
@@ -563,6 +559,10 @@ export interface VoiceCloneRequest {
    * 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在5秒～12秒之间
    */
   PromptAudio: string
+  /**
+   * TTS的API密钥
+   */
+  APIKey?: string
   /**
    * 声音克隆的参考文本，为参考音频对应的文字。
    */

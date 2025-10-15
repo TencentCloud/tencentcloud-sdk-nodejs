@@ -41,7 +41,7 @@ import {
   ResourceLocParam,
   NodeConfig,
   WorkSpaceSetItem,
-  DescribeJobSavepointRequest,
+  DescribeJobConfigsRequest,
   ResultColumn,
   Setats,
   TreeJobSets,
@@ -63,6 +63,7 @@ import {
   SlaveZone,
   CreateJobResponse,
   SqlGatewayItem,
+  DescribeVariablesRequest,
   DescribeJobRuntimeInfoResponse,
   StopJobDescription,
   CreateFolderRequest,
@@ -76,10 +77,11 @@ import {
   Tag,
   GetMetaTableResponse,
   FetchSqlGatewayStatementResultResponse,
+  DescribeJobSavepointResponse,
   JobGraphNode,
   CreateWorkSpaceRequest,
   DeleteResourceConfigsRequest,
-  DescribeJobSavepointResponse,
+  DescribeVariablesResponse,
   DeleteFoldersRequest,
   DeleteWorkSpaceRequest,
   DescribeJobRuntimeInfoRequest,
@@ -93,7 +95,7 @@ import {
   RunJobDescription,
   DescribeResourceRelatedJobsResponse,
   Connectors,
-  JobEvent,
+  DescribeClustersResponse,
   CheckConnectorNameResponse,
   ResourceRef,
   DescribeSystemResourcesResponse,
@@ -121,16 +123,18 @@ import {
   SetatsCvmInfo,
   TreeResourceItem,
   ExpertModeConfiguration,
-  RunJobsResponse,
+  CreateVariableResponse,
   Filter,
   DeleteResourcesRequest,
+  RunJobsResponse,
   ClusterGroupSetItem,
-  DescribeJobConfigsRequest,
+  DescribeJobSavepointRequest,
   ModifyJobRequest,
   GetMetaTableRequest,
   ResultData,
   DeleteResourceConfigsResponse,
   Cluster,
+  CreateVariableRequest,
   JobGraph,
   DescribeJobSubmissionLogRequest,
   DescribeJobsRequest,
@@ -153,7 +157,7 @@ import {
   ModifyConnectorResponse,
   CheckConnectorNameRequest,
   StopJobsResponse,
-  DescribeClustersResponse,
+  JobEvent,
   DescribeResourcesRequest,
   DescribeJobEventsRequest,
   CheckSavepointResponse,
@@ -379,6 +383,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建变量
+   */
+  async CreateVariable(
+    req: CreateVariableRequest,
+    cb?: (error: string, rep: CreateVariableResponse) => void
+  ): Promise<CreateVariableResponse> {
+    return this.request("CreateVariable", req, cb)
+  }
+
+  /**
    * 作业列表删除文件夹
    */
   async DeleteFolders(
@@ -536,6 +550,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteResourcesResponse) => void
   ): Promise<DeleteResourcesResponse> {
     return this.request("DeleteResources", req, cb)
+  }
+
+  /**
+   * 变量列表展示
+   */
+  async DescribeVariables(
+    req: DescribeVariablesRequest,
+    cb?: (error: string, rep: DescribeVariablesResponse) => void
+  ): Promise<DescribeVariablesResponse> {
+    return this.request("DescribeVariables", req, cb)
   }
 
   /**

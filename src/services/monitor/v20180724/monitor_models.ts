@@ -3295,6 +3295,26 @@ export interface DescribeAlarmEventsResponse {
 }
 
 /**
+ * DescribePrometheusScrapeStatistics返回参数结构体
+ */
+export interface DescribePrometheusScrapeStatisticsResponse {
+  /**
+   * 总个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 实例指标抓取速率详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceResults?: Array<PrometheusInstanceScrapeStatistics>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeServiceDiscovery返回参数结构体
  */
 export interface DescribeServiceDiscoveryResponse {
@@ -8214,6 +8234,31 @@ export interface PrometheusJobTargets {
 }
 
 /**
+ * 集群指标抓取统计
+ */
+export interface PrometheusClusterScrapeStatistics {
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * 被采集的点数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScrapedRate?: number
+  /**
+   * Job列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Jobs?: Array<PrometheusJobScrapeStatistics>
+  /**
+   * 过滤前的指标采集速率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SamplesRate?: number
+}
+
+/**
  * UpdateGrafanaConfig请求参数结构体
  */
 export interface UpdateGrafanaConfigRequest {
@@ -9400,6 +9445,33 @@ export interface DescribeProductEventListDimensions {
 }
 
 /**
+ * 实例抓取指标统计
+ */
+export interface PrometheusInstanceScrapeStatistics {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 被采集的点数
+   */
+  ScrapedRate?: number
+  /**
+   * 集群指标列表
+   */
+  Clusters?: Array<PrometheusClusterScrapeStatistics>
+  /**
+   * 非容器指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Global?: Array<PrometheusClusterScrapeStatistics>
+  /**
+   * 过滤前的指标采集速率
+   */
+  SamplesRate?: number
+}
+
+/**
  * ModifyAlarmPolicyNotice请求参数结构体
  */
 export interface ModifyAlarmPolicyNoticeRequest {
@@ -9630,6 +9702,16 @@ export interface DeleteAlertRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePrometheusScrapeStatistics请求参数结构体
+ */
+export interface DescribePrometheusScrapeStatisticsRequest {
+  /**
+   * job 类型
+   */
+  JobType?: string
 }
 
 /**
@@ -10871,6 +10953,29 @@ export interface CreateSSOAccountResponse {
 }
 
 /**
+ * Job抓取统计
+ */
+export interface PrometheusJobScrapeStatistics {
+  /**
+   * Job 名
+   */
+  JobName?: string
+  /**
+   * 被采集的点数
+   */
+  ScrapedRate?: number
+  /**
+   * 指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metrics?: Array<PrometheusMetricScrapeStatistics>
+  /**
+   * Job 类型
+   */
+  JobType?: string
+}
+
+/**
  * UpdatePrometheusScrapeJob返回参数结构体
  */
 export interface UpdatePrometheusScrapeJobResponse {
@@ -11206,6 +11311,32 @@ export interface ModifyPrometheusRecordRuleYamlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 指标抓取统计
+ */
+export interface PrometheusMetricScrapeStatistics {
+  /**
+   * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricName?: string
+  /**
+   * 原始数据中的点数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SamplesRate?: number
+  /**
+   * 被采集的点数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScrapedRate?: number
+  /**
+   * 是否推荐采集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsRecommended?: boolean
 }
 
 /**

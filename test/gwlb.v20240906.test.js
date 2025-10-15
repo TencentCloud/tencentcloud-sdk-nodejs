@@ -128,6 +128,16 @@ it("gwlb.v20240906.AssociateTargetGroups", async function () {
     }
 })
 
+it("gwlb.v20240906.DescribeGatewayLoadBalancersResources", async function () {
+    try {
+       const data = await client.DescribeGatewayLoadBalancersResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gwlb.v20240906.DescribeGatewayLoadBalancers", async function () {
     try {
        const data = await client.DescribeGatewayLoadBalancers({})

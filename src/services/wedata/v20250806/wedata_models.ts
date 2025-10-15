@@ -515,6 +515,24 @@ export interface DeleteResourceFolderResponse {
 }
 
 /**
+ * UpdateTask请求参数结构体
+ */
+export interface UpdateTaskRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 任务基本属性
+   */
+  Task: UpdateTaskBrief
+}
+
+/**
  * map
  */
 export interface KVMap {
@@ -1049,17 +1067,159 @@ export interface DeleteLineageResponse {
 }
 
 /**
- * DeleteWorkflowFolder返回参数结构体
+ * 调度任务实例详情
  */
-export interface DeleteWorkflowFolderResponse {
+export interface TaskInstanceDetail {
   /**
-   * 删除结果
+   * 所属项目id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: DeleteFolderResult
+  ProjectId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * **实例唯一标识**
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  InstanceKey?: string
+  /**
+   * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: string
+  /**
+   * 文件夹名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderName?: string
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * taskType对应的id
+   */
+  TaskTypeId?: number
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: string
+  /**
+   * **任务周期类型**
+* ONEOFF_CYCLE: 一次性
+* YEAR_CYCLE: 年
+* MONTH_CYCLE: 月
+* WEEK_CYCLE: 周
+* DAY_CYCLE: 天
+* HOUR_CYCLE: 小时
+* MINUTE_CYCLE: 分钟
+* CRONTAB_CYCLE: crontab表达式类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleType?: string
+  /**
+   * 实例数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurRunDate?: string
+  /**
+   * **实例状态**
+- WAIT_EVENT: 等待事件
+- WAIT_UPSTREAM: 等待上游
+- WAIT_RUN: 等待运行
+- RUNNING: 运行中
+- SKIP_RUNNING: 跳过运行
+- FAILED_RETRY: 失败重试
+- EXPIRED: 失败
+- COMPLETED: 成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceState?: string
+  /**
+   * **实例类型**
+
+- 0 表示补录类型
+- 1 表示周期实例
+- 2 表示非周期实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: number
+  /**
+   * 负责人列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUinList?: Array<string>
+  /**
+   * 累计运行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRunNum?: number
+  /**
+   * 每次运行失败，下发重试次数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TryLimit?: number
+  /**
+   * **失败重试次数**
+再次使用 手动重跑 或 补录实例等方式触发运行时，会被重置为 0 后重新计数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tries?: number
+  /**
+   * 耗费时间, 单位ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: number
+  /**
+   * 运行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 运行完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 计划调度时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerTime?: string
+  /**
+   * 实例最近更新时间, 时间格式为 yyyy-MM-dd HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: string
+  /**
+   * 执行资源组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupId?: string
+  /**
+   * 资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorGroupName?: string
+  /**
+   * 简要的任务失败信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobErrorMsg?: string
 }
 
 /**
@@ -1563,20 +1723,6 @@ export interface GetTaskCodeResponse {
 }
 
 /**
- * ListAlarmMessages返回参数结构体
- */
-export interface ListAlarmMessagesResponse {
-  /**
-   * 告警信息列表
-   */
-  Data?: ListAlarmMessages
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteResourceFile请求参数结构体
  */
 export interface DeleteResourceFileRequest {
@@ -1957,159 +2103,17 @@ export interface TaskConfiguration {
 }
 
 /**
- * 调度任务实例详情
+ * DeleteWorkflowFolder返回参数结构体
  */
-export interface TaskInstanceDetail {
+export interface DeleteWorkflowFolderResponse {
   /**
-   * 所属项目id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 删除结果
    */
-  ProjectId?: string
+  Data?: DeleteFolderResult
   /**
-   * **实例唯一标识**
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceKey?: string
-  /**
-   * 文件夹ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FolderId?: string
-  /**
-   * 文件夹名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FolderName?: string
-  /**
-   * 工作流ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowId?: string
-  /**
-   * 工作流名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkflowName?: string
-  /**
-   * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId?: string
-  /**
-   * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * taskType对应的id
-   */
-  TaskTypeId?: number
-  /**
-   * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskType?: string
-  /**
-   * **任务周期类型**
-* ONEOFF_CYCLE: 一次性
-* YEAR_CYCLE: 年
-* MONTH_CYCLE: 月
-* WEEK_CYCLE: 周
-* DAY_CYCLE: 天
-* HOUR_CYCLE: 小时
-* MINUTE_CYCLE: 分钟
-* CRONTAB_CYCLE: crontab表达式类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleType?: string
-  /**
-   * 实例数据时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CurRunDate?: string
-  /**
-   * **实例状态**
-- WAIT_EVENT: 等待事件
-- WAIT_UPSTREAM: 等待上游
-- WAIT_RUN: 等待运行
-- RUNNING: 运行中
-- SKIP_RUNNING: 跳过运行
-- FAILED_RETRY: 失败重试
-- EXPIRED: 失败
-- COMPLETED: 成功
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceState?: string
-  /**
-   * **实例类型**
-
-- 0 表示补录类型
-- 1 表示周期实例
-- 2 表示非周期实例
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: number
-  /**
-   * 负责人列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnerUinList?: Array<string>
-  /**
-   * 累计运行次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalRunNum?: number
-  /**
-   * 每次运行失败，下发重试次数限制
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TryLimit?: number
-  /**
-   * **失败重试次数**
-再次使用 手动重跑 或 补录实例等方式触发运行时，会被重置为 0 后重新计数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tries?: number
-  /**
-   * 耗费时间, 单位ms
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CostTime?: number
-  /**
-   * 运行开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * 运行完成时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * 计划调度时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SchedulerTime?: string
-  /**
-   * 实例最近更新时间, 时间格式为 yyyy-MM-dd HH:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastUpdateTime?: string
-  /**
-   * 执行资源组ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExecutorGroupId?: string
-  /**
-   * 资源组名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExecutorGroupName?: string
-  /**
-   * 简要的任务失败信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JobErrorMsg?: string
+  RequestId?: string
 }
 
 /**
@@ -3637,6 +3641,20 @@ export interface CreateOpsAlarmRuleResponse {
 }
 
 /**
+ * GetSQLFolder请求参数结构体
+ */
+export interface GetSQLFolderRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 文件夹id
+   */
+  FolderId: string
+}
+
+/**
  * 告警渠道 企业微信群/钉钉群/飞书群 等webhook地址配置
  */
 export interface AlarmWayWebHook {
@@ -3866,6 +3884,99 @@ export interface SQLContentActionResult {
 }
 
 /**
+ * 补录计划详情
+ */
+export interface DataBackfill {
+  /**
+   * 项目Id
+   */
+  ProjectId?: string
+  /**
+   * 数据补录计划id
+   */
+  DataBackfillPlanId?: string
+  /**
+   * 数据补录计划名称
+   */
+  DataBackfillPlanName?: string
+  /**
+   * 补录任务集合
+   */
+  TaskIds?: Array<string>
+  /**
+   * 补录任务的数据配置列表
+   */
+  DataBackfillRangeList?: Array<DataBackfillRange>
+  /**
+   * 检查父任务类型，取值范围：- NONE-全部不检查- ALL-检查全部上游父任务- MAKE_SCOPE-只在（当前补录计划）选中任务中检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckParentType?: string
+  /**
+   * 补录是否忽略事件依赖	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipEventListening?: boolean
+  /**
+   * 自定义实例运行并发度, 返回为null或者不返回，则表示任务原有自依赖
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedefineParallelNum?: number
+  /**
+   * 自定义的工作流自依赖，yes或者no；如果不配置，则使用工作流原有自依赖
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedefineSelfWorkflowDependency?: string
+  /**
+   * 调度资源组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerResourceGroupId?: string
+  /**
+   * 集成资源组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntegrationResourceGroupId?: string
+  /**
+   * 补录自定义的生成周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedefineCycleType?: string
+  /**
+   * 自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedefineParamList?: Array<KVPair>
+  /**
+   * 补录任务的执行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 补录任务的执行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 创建用户id
+   */
+  CreateUserUin?: string
+  /**
+   * 补录计划实例完成百分数
+   */
+  CompletePercent?: number
+  /**
+   * 补录计划实例成功百分数
+   */
+  SuccessPercent?: number
+  /**
+   * 补录是实例数据时间顺序，生效必须满足2个条件:1. 必须同周期任务2. 优先按依赖关系执行，无依赖关系影响的情况下按配置执行顺序执行 可选值- NORMAL: 不设置- ORDER: 顺序- REVERSE: 逆序不设置默认为NORMAL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataTimeOrder?: string
+}
+
+/**
  * RemoveMemberProjectRole请求参数结构体
  */
 export interface RemoveMemberProjectRoleRequest {
@@ -3878,9 +3989,13 @@ export interface RemoveMemberProjectRoleRequest {
    */
   UserUin: string
   /**
-   * 角色id
+   * 角色id列表，目前支持的项目角色有
+- 308335260274237440 (项目管理员)
+- 308335260676890624 (数据工程师)
+- 308335260844662784 (运维工程师)
+- 308335260945326080 (普通成员)
    */
-  RoleId: string
+  RoleIds: Array<string>
 }
 
 /**
@@ -4040,6 +4155,20 @@ export interface ListSchemaResponse {
    * 分页数据
    */
   Data?: ListSchemaPage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetCodeFolder返回参数结构体
+ */
+export interface GetCodeFolderResponse {
+  /**
+   * codestudio文件夹
+   */
+  Data?: CodeFolderNode
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5151,19 +5280,13 @@ export interface DependencyConfigPage {
 }
 
 /**
- * CodeStudio文件对象操作结果
+ * 批量启动任务返回参数
  */
-export interface CodeStudioFileActionResult {
+export interface StartTasks {
   /**
-   * 成功true，失败false
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务启动是否成功
    */
   Status?: boolean
-  /**
-   * 文件夹ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CodeFileId?: string
 }
 
 /**
@@ -5895,6 +6018,11 @@ export interface CodeFile {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
+  /**
+   * 父文件夹路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentFolderPath?: string
 }
 
 /**
@@ -6020,21 +6148,17 @@ export interface ResourceType {
 }
 
 /**
- * UpdateTask请求参数结构体
+ * StartOpsTasks返回参数结构体
  */
-export interface UpdateTaskRequest {
+export interface StartOpsTasksResponse {
   /**
-   * 项目ID
+   * 异步操作结果
    */
-  ProjectId: string
+  Data?: StartTasks
   /**
-   * 任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: string
-  /**
-   * 任务基本属性
-   */
-  Task: UpdateTaskBrief
+  RequestId?: string
 }
 
 /**
@@ -6768,6 +6892,22 @@ true: 更新成功 false：更新失败/未更新
 }
 
 /**
+ * CodeStudio文件对象操作结果
+ */
+export interface CodeStudioFileActionResult {
+  /**
+   * 成功true，失败false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
+  /**
+   * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeFileId?: string
+}
+
+/**
  * 异步操作详情
  */
 export interface OpsAsyncJobDetail {
@@ -7150,54 +7290,17 @@ TABLE|METRIC|MODEL|SERVICE|COLUMN
 }
 
 /**
- * 任务版本列表信息
+ * ListAlarmMessages返回参数结构体
  */
-export interface TaskVersionDetail {
+export interface ListAlarmMessagesResponse {
   /**
-   * 保存时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 告警信息列表
    */
-  CreateTime?: string
+  Data?: ListAlarmMessages
   /**
-   * 版本号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  VersionNum?: string
-  /**
-   * 版本创建人
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateUserUin?: string
-  /**
-   * 保存版本Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionId?: string
-  /**
-   * 版本描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionRemark?: string
-  /**
-   * 审批状态（只有提交版本有）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ApproveStatus?: string
-  /**
-   * 生产状态（只有提交版本有）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ApproveTime?: string
-  /**
-   * 版本的任务详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Task?: Task
-  /**
-   * 审批人Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ApproveUserUin?: string
+  RequestId?: string
 }
 
 /**
@@ -7252,6 +7355,20 @@ false：针对下游任务实例进行强制失败
 
    */
   DeleteMode?: boolean
+}
+
+/**
+ * GetCodeFolder请求参数结构体
+ */
+export interface GetCodeFolderRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 文件夹id
+   */
+  FolderId: string
 }
 
 /**
@@ -8084,6 +8201,57 @@ export interface DataSourceInfo {
 }
 
 /**
+ * 任务版本列表信息
+ */
+export interface TaskVersionDetail {
+  /**
+   * 保存时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionNum?: string
+  /**
+   * 版本创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserUin?: string
+  /**
+   * 保存版本Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * 版本描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionRemark?: string
+  /**
+   * 审批状态（只有提交版本有）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveStatus?: string
+  /**
+   * 生产状态（只有提交版本有）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveTime?: string
+  /**
+   * 版本的任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Task?: Task
+  /**
+   * 审批人Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveUserUin?: string
+}
+
+/**
  * StopOpsTasksAsync返回参数结构体
  */
 export interface StopOpsTasksAsyncResponse {
@@ -8209,9 +8377,13 @@ export interface GrantMemberProjectRoleRequest {
    */
   UserUin: string
   /**
-   * 角色id
+   * 角色id列表，目前支持的项目角色有
+- 308335260274237440 (项目管理员)
+- 308335260676890624 (数据工程师)
+- 308335260844662784 (运维工程师)
+- 308335260945326080 (普通成员)
    */
-  RoleId: string
+  RoleIds: Array<string>
 }
 
 /**
@@ -8416,6 +8588,24 @@ export interface RegisterLineageRequest {
    * 需要注册的血缘关系列表
    */
   Relations: Array<LineagePair>
+}
+
+/**
+ * GetDataBackfillPlan请求参数结构体
+ */
+export interface GetDataBackfillPlanRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 补录计划id
+   */
+  DataBackfillPlanId: string
+  /**
+   * 展示时区，默认UTC+8
+   */
+  TimeZone?: string
 }
 
 /**
@@ -8732,6 +8922,20 @@ export interface DeleteProjectMemberRequest {
 }
 
 /**
+ * GetSQLFolder返回参数结构体
+ */
+export interface GetSQLFolderResponse {
+  /**
+   * sql文件夹
+   */
+  Data?: SQLFolderNode
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 项目信息
  */
 export interface Project {
@@ -8853,6 +9057,24 @@ export interface AlarmMessage {
    * 告警接收人
    */
   AlarmRecipients?: Array<string>
+}
+
+/**
+ * StartOpsTasks请求参数结构体
+ */
+export interface StartOpsTasksRequest {
+  /**
+   * 所属项目Id
+   */
+  ProjectId: string
+  /**
+   * 任务Id列表
+   */
+  TaskIds: Array<string>
+  /**
+   * 启动时是否补录上次暂停到当前的中间实例，默认false即不补录
+   */
+  EnableDataBackfill?: boolean
 }
 
 /**
@@ -9158,6 +9380,11 @@ export interface CodeFolderNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Children?: Array<CodeFolderNode>
+  /**
+   * 父文件夹路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentFolderPath?: string
 }
 
 /**
@@ -9625,6 +9852,20 @@ export interface GetDataSourceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DataSource
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetDataBackfillPlan返回参数结构体
+ */
+export interface GetDataBackfillPlanResponse {
+  /**
+   * 补录详情
+   */
+  Data?: DataBackfill
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

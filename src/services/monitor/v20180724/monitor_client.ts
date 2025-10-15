@@ -150,6 +150,7 @@ import {
   DescribePolicyConditionListConfigManual,
   InstallPluginsRequest,
   DescribeAlarmEventsResponse,
+  DescribePrometheusScrapeStatisticsResponse,
   DescribeServiceDiscoveryResponse,
   ExportPrometheusReadOnlyDynamicAPIRequest,
   PrometheusTag,
@@ -355,6 +356,7 @@ import {
   ModifyAlarmPolicyConditionRequest,
   ModifyAlarmNoticeResponse,
   PrometheusJobTargets,
+  PrometheusClusterScrapeStatistics,
   UpdateGrafanaConfigRequest,
   DescribeGrafanaIntegrationsRequest,
   AlarmHistory,
@@ -399,6 +401,7 @@ import {
   DeletePrometheusAlertPolicyResponse,
   DescribePrometheusRegionsRequest,
   DescribeProductEventListDimensions,
+  PrometheusInstanceScrapeStatistics,
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
   EventCondition,
@@ -410,6 +413,7 @@ import {
   DimensionNew,
   CreateExternalClusterResponse,
   DeleteAlertRulesResponse,
+  DescribePrometheusScrapeStatisticsRequest,
   DeletePrometheusScrapeJobsRequest,
   ModifyAlarmPolicyStatusRequest,
   ConditionsTemp,
@@ -460,6 +464,7 @@ import {
   DescribeProductEventListEventsGroupInfo,
   UpdatePrometheusAlertGroupResponse,
   CreateSSOAccountResponse,
+  PrometheusJobScrapeStatistics,
   UpdatePrometheusScrapeJobResponse,
   DescribeAlarmPoliciesRequest,
   EnableGrafanaSSOResponse,
@@ -471,6 +476,7 @@ import {
   DimensionsDesc,
   CreateAlertRuleRequest,
   ModifyPrometheusRecordRuleYamlResponse,
+  PrometheusMetricScrapeStatistics,
   DeletePrometheusScrapeJobsResponse,
   DescribeAlarmPolicyRequest,
   UninstallGrafanaDashboardRequest,
@@ -959,6 +965,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindingPolicyTagResponse) => void
   ): Promise<BindingPolicyTagResponse> {
     return this.request("BindingPolicyTag", req, cb)
+  }
+
+  /**
+   * 获取实例采集速率信息
+   */
+  async DescribePrometheusScrapeStatistics(
+    req: DescribePrometheusScrapeStatisticsRequest,
+    cb?: (error: string, rep: DescribePrometheusScrapeStatisticsResponse) => void
+  ): Promise<DescribePrometheusScrapeStatisticsResponse> {
+    return this.request("DescribePrometheusScrapeStatistics", req, cb)
   }
 
   /**

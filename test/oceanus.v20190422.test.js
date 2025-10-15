@@ -218,6 +218,16 @@ it("oceanus.v20190422.DescribeResourceConfigs", async function () {
     }
 })
 
+it("oceanus.v20190422.CreateVariable", async function () {
+    try {
+       const data = await client.CreateVariable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DeleteFolders", async function () {
     try {
        const data = await client.DeleteFolders({})
@@ -371,6 +381,16 @@ it("oceanus.v20190422.ModifyWorkSpace", async function () {
 it("oceanus.v20190422.DeleteResources", async function () {
     try {
        const data = await client.DeleteResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.DescribeVariables", async function () {
+    try {
+       const data = await client.DescribeVariables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

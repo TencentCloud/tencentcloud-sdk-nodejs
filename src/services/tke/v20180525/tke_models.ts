@@ -524,7 +524,13 @@ export interface Addon {
    */
   RawValues?: string
   /**
-   * addon的状态
+   * addon的状态：
+- Installing：安装中
+- Upgrading：升级中
+- Terminating：删除中
+- Succeeded：安装/升级成功
+- InstallFailed：安装失败
+- UpgradFailed：升级失败
    */
   Phase?: string
   /**
@@ -1263,11 +1269,11 @@ export interface ExtensionAddon {
  */
 export interface DescribeAddonValuesRequest {
   /**
-   * 集群ID
+   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterId: string
   /**
-   * addon名称
+   * addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。
    */
   AddonName: string
 }
@@ -1707,11 +1713,11 @@ KeyName: image-cache-name
  */
 export interface DeleteAddonRequest {
   /**
-   * 集群ID
+   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterId: string
   /**
-   * addon名称
+   * addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。
    */
   AddonName: string
 }
@@ -8982,7 +8988,7 @@ export interface ReleaseDetails {
  */
 export interface DescribeAddonRequest {
   /**
-   * 集群ID
+   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterId: string
   /**
@@ -10619,11 +10625,11 @@ export interface ModifyClusterAuthenticationOptionsResponse {
  */
 export interface UpdateAddonRequest {
   /**
-   * 集群ID
+   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterId: string
   /**
-   * addon名称
+   * addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。
    */
   AddonName: string
   /**
@@ -10631,7 +10637,7 @@ export interface UpdateAddonRequest {
    */
   AddonVersion?: string
   /**
-   * addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取，不传RawValues时AddonVersion必传））
+   * addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取，不传RawValues时AddonVersion必传）。
    */
   RawValues?: string
   /**
@@ -10639,7 +10645,7 @@ export interface UpdateAddonRequest {
    */
   UpdateStrategy?: string
   /**
-   * 是否仅做更新检查，设置为true时仅做检查，不会更新组件
+   * 是否仅做更新检查，设置为true时仅做检查，不会更新组件。默认值为 false。
    */
   DryRun?: boolean
 }
@@ -13192,11 +13198,11 @@ export interface DeletePrometheusRecordRuleYamlRequest {
  */
 export interface InstallAddonRequest {
   /**
-   * 集群ID（仅支持标准tke集群）
+   * 集群ID（仅支持标准tke集群），请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterId: string
   /**
-   * addon名称
+   * addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。
    */
   AddonName: string
   /**
@@ -13208,7 +13214,7 @@ export interface InstallAddonRequest {
    */
   RawValues?: string
   /**
-   * 是否仅做安装检查，设置为true时仅做检查，不会安装组件
+   * 是否仅做安装检查，设置为true时仅做检查，不会安装组件。默认值为 false。
    */
   DryRun?: boolean
 }

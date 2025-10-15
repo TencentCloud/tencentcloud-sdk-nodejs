@@ -21,12 +21,13 @@ import {
   DescribeTargetGroupInstanceStatusRequest,
   DescribeTargetGroupListResponse,
   DisassociateTargetGroupsResponse,
+  InquirePriceCreateGatewayLoadBalancerResponse,
   DescribeTargetGroupListRequest,
   ModifyGatewayLoadBalancerAttributeRequest,
   ModifyTargetGroupInstancesWeightResponse,
   DescribeTargetGroupsRequest,
   DescribeTaskStatusResponse,
-  InquirePriceCreateGatewayLoadBalancerResponse,
+  DescribeGatewayLoadBalancersResourcesRequest,
   CreateTargetGroupResponse,
   TargetGroupBackend,
   TargetGroupHealthCheck,
@@ -37,6 +38,7 @@ import {
   DeleteGatewayLoadBalancerRequest,
   TagInfo,
   AssociateTargetGroupsRequest,
+  DescribeGatewayLoadBalancersResourcesResponse,
   DeregisterTargetGroupInstancesRequest,
   GatewayLoadBalancer,
   DescribeGatewayLoadBalancersRequest,
@@ -49,6 +51,7 @@ import {
   DisassociateTargetGroupsRequest,
   Filter,
   TargetGroupInstanceStatus,
+  ZoneResource,
   DescribeTargetGroupInstanceStatusResponse,
   DescribeTargetGroupInstancesRequest,
   DescribeTaskStatusRequest,
@@ -190,6 +193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateTargetGroupsResponse) => void
   ): Promise<AssociateTargetGroupsResponse> {
     return this.request("AssociateTargetGroups", req, cb)
+  }
+
+  /**
+   * 查询用户在当前地域支持可用区列表
+   */
+  async DescribeGatewayLoadBalancersResources(
+    req: DescribeGatewayLoadBalancersResourcesRequest,
+    cb?: (error: string, rep: DescribeGatewayLoadBalancersResourcesResponse) => void
+  ): Promise<DescribeGatewayLoadBalancersResourcesResponse> {
+    return this.request("DescribeGatewayLoadBalancersResources", req, cb)
   }
 
   /**

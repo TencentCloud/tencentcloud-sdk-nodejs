@@ -1340,7 +1340,7 @@ export interface DescribeMySqlProcessListResponse {
    */
   ProcessList?: Array<MySqlProcess>
   /**
-   * sql会话统计信息。
+   * sql会话统计信息。如果请求参数中包含StatDimensions，该参数则可能返回，否则不返回。
    */
   Statistics?: Array<StatisticInfo>
   /**
@@ -3599,11 +3599,11 @@ export interface MySqlProcess {
    */
   DB?: string
   /**
-   * 线程的操作状态。
+   * 线程的操作状态。包含以下枚举值：Sending data​-线程正在处理查询结果， ​Sorting result​-线程正在对查询结果进行排序​，Creating tmp table​-线程正在创建临时表，Altering table​-线程正在执行表结构变更，Updating-线程执行更新中。
    */
   State?: string
   /**
-   * 线程的执行类型。
+   * 线程的执行类型。包含以下枚举值：Sleep-线程处于空闲状态，Query-线程正在执行一个查询，Connect-从服务器连接到主服务器，Execute-线程正在执行预处理语句。
    */
   Command?: string
   /**
@@ -3614,6 +3614,11 @@ export interface MySqlProcess {
    * 线程的操作语句。
    */
   Info?: string
+  /**
+   * sql类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlType?: string
 }
 
 /**
@@ -5813,11 +5818,11 @@ export interface DescribeMySqlProcessListRequest {
    */
   DB?: string
   /**
-   * 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等
+   * 线程的操作状态。包含以下枚举值：Sending data​-线程正在处理查询结果， ​Sorting result​-线程正在对查询结果进行排序​，Creating tmp table​-线程正在创建临时表，Altering table​-线程正在执行表结构变更，Updating-线程执行更新中。
    */
   State?: string
   /**
-   * 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等
+   * 线程的执行类型。包含以下枚举值：Sleep-线程处于空闲状态，Query-线程正在执行一个查询，Connect-从服务器连接到主服务器，Execute-线程正在执行预处理语句。
    */
   Command?: string
   /**
@@ -5833,7 +5838,9 @@ export interface DescribeMySqlProcessListRequest {
    */
   Limit?: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。
+
+
    */
   Product?: string
   /**

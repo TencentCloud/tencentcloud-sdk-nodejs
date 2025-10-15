@@ -41,13 +41,16 @@ import {
   RunRerankRequest,
   EmbeddingData,
   ChunkConfig,
+  MultiModalEmbeddingData,
   ToolFunction,
   ToolCallFunction,
   OutputMessage,
+  ToolCall,
   ParseDocument,
   GetDocumentChunkResultResponse,
   ChunkDocumentAsyncResponse,
-  ToolCall,
+  GetMultiModalEmbeddingResponse,
+  GetMultiModalEmbeddingRequest,
   OnlineSearchOptions,
   ParseDocumentRequest,
   Chunk,
@@ -57,6 +60,7 @@ import {
   ParseDocumentAsyncRequest,
   ChunkDocument,
   Message,
+  MultiModalUsage,
   ChatCompletionsResponse,
 } from "./es_models"
 
@@ -153,6 +157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChunkDocumentResponse) => void
   ): Promise<ChunkDocumentResponse> {
     return this.request("ChunkDocument", req, cb)
+  }
+
+  /**
+   * Embedding是一种将高维数据映射到低维空间的技术，通常用于将非结构化数据，如文本、图像或音频转化为向量表示，使其更容易输入机器模型进行处理，并且向量之间的距离可以反映对象之间的相似性。 本接口有模型维度调用上限控制，单个模型qps限制10，如您有提高并发限制的需求请[联系我们](https://cloud.tencent.com/act/event/Online_service)  。
+   */
+  async GetMultiModalEmbedding(
+    req: GetMultiModalEmbeddingRequest,
+    cb?: (error: string, rep: GetMultiModalEmbeddingResponse) => void
+  ): Promise<GetMultiModalEmbeddingResponse> {
+    return this.request("GetMultiModalEmbedding", req, cb)
   }
 
   /**

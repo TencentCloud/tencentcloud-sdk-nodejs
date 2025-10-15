@@ -2236,7 +2236,7 @@ export interface ModifyRejectedQuestionRequest {
  */
 export interface DescribeWorkflowRunResponse {
   /**
-   * 总数
+   * 工作流的详情
    */
   WorkflowRun?: WorkflowRunDetail
   /**

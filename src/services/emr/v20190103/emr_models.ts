@@ -7076,6 +7076,10 @@ export interface DescribeInstancesListRequest {
    * 自定义查询过滤器。示例：<li>根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]</li><li>根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]</li><li>根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}]</li>
    */
   Filters?: Array<Filters>
+  /**
+   * 默认0为普通集群，2为tke集群
+   */
+  ClusterType?: number
 }
 
 /**

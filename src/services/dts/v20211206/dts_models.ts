@@ -729,6 +729,10 @@ export interface DifferenceData {
    */
   DstItem?: string
   /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
    * 更新时间
    */
   UpdatedAt?: string

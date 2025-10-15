@@ -465,6 +465,22 @@ export interface ChunkConfig {
 }
 
 /**
+ * 多模态特征向量
+ */
+export interface MultiModalEmbeddingData {
+  /**
+   * 文本特征向量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextEmbeddings?: Array<EmbeddingData>
+  /**
+   * 图片特征向量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageEmbeddings?: Array<EmbeddingData>
+}
+
+/**
  * function定义
  */
 export interface ToolFunction {
@@ -516,6 +532,28 @@ export interface OutputMessage {
    * 模型生成的工具调用
    */
   ToolCalls?: Array<ToolCall>
+}
+
+/**
+ * 模型生成的工具调用
+ */
+export interface ToolCall {
+  /**
+   * 工具调用id
+   */
+  Id?: string
+  /**
+   * 工具调用类型，当前只支持function
+   */
+  Type?: string
+  /**
+   * 具体的function调用
+   */
+  Function?: ToolCallFunction
+  /**
+   * 索引值
+   */
+  Index?: number
 }
 
 /**
@@ -601,25 +639,43 @@ export interface ChunkDocumentAsyncResponse {
 }
 
 /**
- * 模型生成的工具调用
+ * GetMultiModalEmbedding返回参数结构体
  */
-export interface ToolCall {
+export interface GetMultiModalEmbeddingResponse {
   /**
-   * 工具调用id
+   * 多模态特征向量输出
    */
-  Id?: string
+  Data?: MultiModalEmbeddingData
   /**
-   * 工具调用类型，当前只支持function
+   * 消耗的tokens和输入图片数量
    */
-  Type?: string
+  Usage?: MultiModalUsage
   /**
-   * 具体的function调用
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Function?: ToolCallFunction
+  RequestId?: string
+}
+
+/**
+ * GetMultiModalEmbedding请求参数结构体
+ */
+export interface GetMultiModalEmbeddingRequest {
   /**
-   * 索引值
+   * 模型名称，支持WeCLIPv2-Base和WeCLIPv2-Large
    */
-  Index?: number
+  ModelName?: string
+  /**
+   * 需进行向量化的文本集，一次输入限10条，单条文本长度限72
+   */
+  Texts?: Array<string>
+  /**
+   * 输入图片，base64编码格式，一次输入限制8个，单张图片限制1M
+   */
+  ImageData?: Array<string>
+  /**
+   * 输入图片url，一次输入限8个，推荐cos地址，速度更快
+   */
+  ImageUrl?: Array<string>
 }
 
 /**
@@ -754,6 +810,20 @@ export interface Message {
    * 模型生成的工具调用
    */
   ToolCalls?: Array<ToolCall>
+}
+
+/**
+ * 多模态向量化消耗tokens和images数量
+ */
+export interface MultiModalUsage {
+  /**
+   * 消耗tokens
+   */
+  TotalTokens?: number
+  /**
+   * 输入图片数量
+   */
+  TotalImages?: number
 }
 
 /**

@@ -418,6 +418,16 @@ it("iotexplorer.v20190423.DeleteTopicRule", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeTWeTalkProductConfigV2", async function () {
+    try {
+       const data = await client.DescribeTWeTalkProductConfigV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeleteOtaModule", async function () {
     try {
        const data = await client.DeleteOtaModule({})
@@ -628,6 +638,16 @@ it("iotexplorer.v20190423.ListOtaModules", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetWechatDeviceTicket", async function () {
+    try {
+       const data = await client.GetWechatDeviceTicket({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyTWeTalkProductConfig", async function () {
     try {
        const data = await client.ModifyTWeTalkProductConfig({})
@@ -818,9 +838,9 @@ it("iotexplorer.v20190423.ResetCloudStorageAIService", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetWechatDeviceTicket", async function () {
+it("iotexplorer.v20190423.CreateTWeTalkProductConfigV2", async function () {
     try {
-       const data = await client.GetWechatDeviceTicket({})
+       const data = await client.CreateTWeTalkProductConfigV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1188,6 +1208,16 @@ it("iotexplorer.v20190423.UpdateFirmware", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetTWeTalkProductConfigListV2", async function () {
+    try {
+       const data = await client.GetTWeTalkProductConfigListV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetTWeCallActiveStatus", async function () {
     try {
        const data = await client.GetTWeCallActiveStatus({})
@@ -1301,6 +1331,16 @@ it("iotexplorer.v20190423.DisableTopicRule", async function () {
 it("iotexplorer.v20190423.UnbindDevices", async function () {
     try {
        const data = await client.UnbindDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyTWeTalkProductConfigV2", async function () {
+    try {
+       const data = await client.ModifyTWeTalkProductConfigV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

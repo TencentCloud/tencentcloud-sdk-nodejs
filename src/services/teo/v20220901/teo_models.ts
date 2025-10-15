@@ -13539,39 +13539,15 @@ export interface AccelerationDomain {
 <li>process：部署中；</li>
 <li>offline：已停用；</li>
 <li>forbidden：已封禁；</li>
-<li>init：未生效，待激活站点；</li>
+<li>init：未生效，待激活站点。</li>
    */
   DomainStatus?: string
   /**
-   * 源站信息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * CNAME 地址。
    */
-  OriginDetail?: OriginDetail
+  Cname?: string
   /**
-   * 回源协议，取值有：
-<li>FOLLOW: 协议跟随；</li>
-<li>HTTP: HTTP协议回源；</li>
-<li>HTTPS: HTTPS协议回源。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginProtocol?: string
-  /**
-   * 域名证书信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Certificate?: AccelerationDomainCertificate
-  /**
-   * HTTP回源端口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpOriginPort?: number
-  /**
-   * HTTPS回源端口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpsOriginPort?: number
-  /**
-   * IPv6状态，取值有：
+   * IPv6 状态，取值有：
 <li>follow：遵循站点IPv6配置；</li>
 <li>on：开启状态；</li>
 <li>off：关闭状态。</li>
@@ -13579,14 +13555,45 @@ export interface AccelerationDomain {
    */
   IPv6Status?: string
   /**
-   * CNAME 地址。
-   */
-  Cname?: string
-  /**
-   * 加速域名归属权验证状态，取值有： <li>pending：待验证；</li> <li>finished：已完成验证。</li>	
+   * 加速域名归属权验证状态，取值有： 
+<li>pending：待验证；</li>
+<li>finished：已完成验证。</li>	
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdentificationStatus?: string
+  /**
+   * 加速域名需进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnershipVerification?: OwnershipVerification
+  /**
+   * 源站信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginDetail?: OriginDetail
+  /**
+   * 回源协议，取值有：
+<li>FOLLOW：协议跟随；</li>
+<li>HTTP：HTTP协议回源；</li>
+<li>HTTPS：HTTPS协议回源。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginProtocol?: string
+  /**
+   * HTTP 回源端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpOriginPort?: number
+  /**
+   * HTTPS 回源端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpsOriginPort?: number
+  /**
+   * 加速域名证书信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Certificate?: AccelerationDomainCertificate
   /**
    * 创建时间。
    */
@@ -13595,11 +13602,6 @@ export interface AccelerationDomain {
    * 修改时间。
    */
   ModifiedOn?: string
-  /**
-   * 当域名需要进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OwnershipVerification?: OwnershipVerification
 }
 
 /**

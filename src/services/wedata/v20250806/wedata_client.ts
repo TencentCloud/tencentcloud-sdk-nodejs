@@ -30,6 +30,7 @@ import {
   OpsWorkflows,
   ProjectRequest,
   DeleteResourceFolderResponse,
+  UpdateTaskRequest,
   KVMap,
   ListResourceFilesResponse,
   ListDownstreamTaskInstancesRequest,
@@ -53,7 +54,7 @@ import {
   ListCatalogPage,
   GetDataSourceRelatedTasksResponse,
   DeleteLineageResponse,
-  DeleteWorkflowFolderResponse,
+  TaskInstanceDetail,
   ListTaskInstancesRequest,
   ProjectUserRole,
   TaskDependDto,
@@ -67,7 +68,6 @@ import {
   ProjectBrief,
   TaskCode,
   GetTaskCodeResponse,
-  ListAlarmMessagesResponse,
   DeleteResourceFileRequest,
   SQLScriptConfig,
   ResourceNumber,
@@ -85,7 +85,7 @@ import {
   UpdateResourceGroupResponse,
   ListSQLFolderContentsResponse,
   TaskConfiguration,
-  TaskInstanceDetail,
+  DeleteWorkflowFolderResponse,
   SubmitTaskResult,
   RerunTaskInstancesAsyncResponse,
   ListLineagePage,
@@ -130,6 +130,7 @@ import {
   CodeStudioFolderResult,
   ListOpsTasksPage,
   CreateOpsAlarmRuleResponse,
+  GetSQLFolderRequest,
   AlarmWayWebHook,
   GetResourceFileResponse,
   GetTaskCodeRequest,
@@ -138,6 +139,7 @@ import {
   CreateCodeFolderResponse,
   ExecutorResourceGroupData,
   SQLContentActionResult,
+  DataBackfill,
   RemoveMemberProjectRoleRequest,
   RunSQLScriptRequest,
   AssociateResourceGroupToProjectResponse,
@@ -148,6 +150,7 @@ import {
   DataSourceFileUpload,
   DeleteResourceFileResult,
   ListSchemaResponse,
+  GetCodeFolderResponse,
   DeleteSQLFolderResponse,
   ListWorkflowFoldersRequest,
   GetTableColumnsRequest,
@@ -177,7 +180,7 @@ import {
   WorkflowSchedulerConfigurationInfo,
   ListProjectRolesResponse,
   DependencyConfigPage,
-  CodeStudioFileActionResult,
+  StartTasks,
   CreateResourceFileResponse,
   TaskInstanceExecutions,
   ListAlarmRulesResult,
@@ -214,7 +217,7 @@ import {
   ListAlarmMessages,
   BindProject,
   ResourceType,
-  UpdateTaskRequest,
+  StartOpsTasksResponse,
   UpdateTaskResponse,
   ResourceFolder,
   UpdateDataSourceRequest,
@@ -245,6 +248,7 @@ import {
   TrendData,
   ListColumnLineageRequest,
   UpdateOpsAlarmRuleResponse,
+  CodeStudioFileActionResult,
   OpsAsyncJobDetail,
   ListDownstreamOpsTasksResponse,
   GetProjectRequest,
@@ -259,9 +263,10 @@ import {
   GetDataSourceRequest,
   ListProjectMembersResponse,
   LineageResouce,
-  TaskVersionDetail,
+  ListAlarmMessagesResponse,
   SystemRole,
   DeleteTaskRequest,
+  GetCodeFolderRequest,
   GetOpsTaskRequest,
   DeleteAlarmRuleResult,
   ListWorkflowFoldersResponse,
@@ -293,6 +298,7 @@ import {
   WorkflowSchedulerConfiguration,
   CreateDataBackfillPlanResponse,
   DataSourceInfo,
+  TaskVersionDetail,
   StopOpsTasksAsyncResponse,
   CreateWorkflowResponse,
   DeleteTaskResponse,
@@ -311,6 +317,7 @@ import {
   UpdateTaskBaseAttribute,
   GetOpsTaskCodeRequest,
   RegisterLineageRequest,
+  GetDataBackfillPlanRequest,
   ListProcessLineageRequest,
   UpdateProjectResponse,
   CreateResourceFileRequest,
@@ -325,10 +332,12 @@ import {
   ParentDependencyConfigPage,
   ListUpstreamOpsTasksResponse,
   DeleteProjectMemberRequest,
+  GetSQLFolderResponse,
   Project,
   DeleteOpsAlarmRuleResponse,
   GetTaskRequest,
   AlarmMessage,
+  StartOpsTasksRequest,
   ListCatalogResponse,
   GetResourceFileRequest,
   UpdateTasksOwner,
@@ -368,6 +377,7 @@ import {
   InTaskParameter,
   ListResourceFoldersRequest,
   GetDataSourceResponse,
+  GetDataBackfillPlanResponse,
   KillTaskInstancesAsyncRequest,
   ListDataBackfillInstancesRequest,
   CodeStudioFolderActionResult,
@@ -543,6 +553,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListCatalogResponse) => void
   ): Promise<ListCatalogResponse> {
     return this.request("ListCatalog", req, cb)
+  }
+
+  /**
+   * 获取补录计划详情
+   */
+  async GetDataBackfillPlan(
+    req: GetDataBackfillPlanRequest,
+    cb?: (error: string, rep: GetDataBackfillPlanResponse) => void
+  ): Promise<GetDataBackfillPlanResponse> {
+    return this.request("GetDataBackfillPlan", req, cb)
   }
 
   /**
@@ -1176,13 +1196,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例列表
+   * 获取sql文件夹详情
    */
-  async ListTaskInstances(
-    req: ListTaskInstancesRequest,
-    cb?: (error: string, rep: ListTaskInstancesResponse) => void
-  ): Promise<ListTaskInstancesResponse> {
-    return this.request("ListTaskInstances", req, cb)
+  async GetSQLFolder(
+    req: GetSQLFolderRequest,
+    cb?: (error: string, rep: GetSQLFolderResponse) => void
+  ): Promise<GetSQLFolderResponse> {
+    return this.request("GetSQLFolder", req, cb)
   }
 
   /**
@@ -1356,6 +1376,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取sql文件夹详情
+   */
+  async GetCodeFolder(
+    req: GetCodeFolderRequest,
+    cb?: (error: string, rep: GetCodeFolderResponse) => void
+  ): Promise<GetCodeFolderResponse> {
+    return this.request("GetCodeFolder", req, cb)
+  }
+
+  /**
+   * 异步批量启动任务
+   */
+  async StartOpsTasks(
+    req: StartOpsTasksRequest,
+    cb?: (error: string, rep: StartOpsTasksResponse) => void
+  ): Promise<StartOpsTasksResponse> {
+    return this.request("StartOpsTasks", req, cb)
+  }
+
+  /**
    * 删除告警规则
    */
   async DeleteOpsAlarmRule(
@@ -1383,6 +1423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RerunTaskInstancesAsyncResponse) => void
   ): Promise<RerunTaskInstancesAsyncResponse> {
     return this.request("RerunTaskInstancesAsync", req, cb)
+  }
+
+  /**
+   * 获取实例列表
+   */
+  async ListTaskInstances(
+    req: ListTaskInstancesRequest,
+    cb?: (error: string, rep: ListTaskInstancesResponse) => void
+  ): Promise<ListTaskInstancesResponse> {
+    return this.request("ListTaskInstances", req, cb)
   }
 
   /**

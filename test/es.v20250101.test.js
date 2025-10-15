@@ -98,6 +98,16 @@ it("es.v20250101.ChunkDocument", async function () {
     }
 })
 
+it("es.v20250101.GetMultiModalEmbedding", async function () {
+    try {
+       const data = await client.GetMultiModalEmbedding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20250101.RunRerank", async function () {
     try {
        const data = await client.RunRerank({})

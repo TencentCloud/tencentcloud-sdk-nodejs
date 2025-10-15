@@ -521,7 +521,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于创建日志主题。
+   * 本接口用于创建日志或指标主题。
    */
   async CreateTopic(
     req: CreateTopicRequest,
@@ -591,7 +591,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取日志主题列表，支持分页
+   * 本接口用于获取日志或指标主题列表，支持分页
    */
   async DescribeTopics(
     req: DescribeTopicsRequest,
@@ -1261,7 +1261,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改日志主题。
+   * 本接口用于修改日志或指标主题。
    */
   async ModifyTopic(
     req: ModifyTopicRequest,
@@ -1574,7 +1574,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于删除日志主题。
+   * 本接口用于删除日志或指标主题。
    */
   async DeleteTopic(
     req: DeleteTopicRequest,

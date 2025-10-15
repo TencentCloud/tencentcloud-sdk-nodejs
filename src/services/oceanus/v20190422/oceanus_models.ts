@@ -711,31 +711,37 @@ export interface WorkSpaceSetItem {
 }
 
 /**
- * DescribeJobSavepoint请求参数结构体
+ * DescribeJobConfigs请求参数结构体
  */
-export interface DescribeJobSavepointRequest {
+export interface DescribeJobConfigsRequest {
   /**
-   * 作业 SerialId
+   * 作业Id
    */
   JobId: string
   /**
-   * 分页参数，单页总数
+   * 作业配置版本
    */
-  Limit: number
+  JobConfigVersions?: Array<number | bigint>
   /**
-   * 分页参数，偏移量
+   * 偏移量，默认0
    */
-  Offset: number
+  Offset?: number
+  /**
+   * 分页大小，默认20，最大100
+   */
+  Limit?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * true 表示只展示草稿
+   */
+  OnlyDraft?: boolean
   /**
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
-  /**
-   * 2 是checkpoint
-1 是触发savepoint
-3 停止触发的savepoint
-   */
-  RecordTypes?: Array<number | bigint>
 }
 
 /**
@@ -1393,6 +1399,16 @@ export interface SqlGatewayItem {
 }
 
 /**
+ * DescribeVariables请求参数结构体
+ */
+export interface DescribeVariablesRequest {
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * DescribeJobRuntimeInfo返回参数结构体
  */
 export interface DescribeJobRuntimeInfoResponse {
@@ -1680,6 +1696,36 @@ export interface FetchSqlGatewayStatementResultResponse {
 }
 
 /**
+ * DescribeJobSavepoint返回参数结构体
+ */
+export interface DescribeJobSavepointResponse {
+  /**
+   * 快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalNumber?: number
+  /**
+   * 快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Savepoint?: Array<Savepoint>
+  /**
+   * 进行中的快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningSavepoint?: Array<Savepoint>
+  /**
+   * 进行中的快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningTotalNumber?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Flink Job 运行图的点信息
  */
 export interface JobGraphNode {
@@ -1738,29 +1784,9 @@ export interface DeleteResourceConfigsRequest {
 }
 
 /**
- * DescribeJobSavepoint返回参数结构体
+ * DescribeVariables返回参数结构体
  */
-export interface DescribeJobSavepointResponse {
-  /**
-   * 快照列表总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalNumber?: number
-  /**
-   * 快照列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Savepoint?: Array<Savepoint>
-  /**
-   * 进行中的快照列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunningSavepoint?: Array<Savepoint>
-  /**
-   * 进行中的快照列表总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunningTotalNumber?: number
+export interface DescribeVariablesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2059,36 +2085,21 @@ export interface Connectors {
 }
 
 /**
- * 描述作业发生的一个事件
+ * DescribeClusters返回参数结构体
  */
-export interface JobEvent {
+export interface DescribeClustersResponse {
   /**
-   * 内部定义的事件类型
+   * 集群总数
    */
-  Type: string
+  TotalCount?: number
   /**
-   * 事件类型的说明文字
+   * 集群列表
    */
-  Description: string
+  ClusterSet?: Array<Cluster>
   /**
-   * 事件发生的 Unix 时间戳（秒）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Timestamp: number
-  /**
-   * 事件发生时的运行 ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunningOrderId: number
-  /**
-   * 事件的一些可选说明
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message: string
-  /**
-   * 异常事件的排查手册链接
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SolutionLink: string
+  RequestId?: string
 }
 
 /**
@@ -2870,9 +2881,13 @@ export interface ExpertModeConfiguration {
 }
 
 /**
- * RunJobs返回参数结构体
+ * CreateVariable返回参数结构体
  */
-export interface RunJobsResponse {
+export interface CreateVariableResponse {
+  /**
+   * 变量Id
+   */
+  VariableId: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2905,6 +2920,16 @@ export interface DeleteResourcesRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * RunJobs返回参数结构体
+ */
+export interface RunJobsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3016,37 +3041,31 @@ export interface ClusterGroupSetItem {
 }
 
 /**
- * DescribeJobConfigs请求参数结构体
+ * DescribeJobSavepoint请求参数结构体
  */
-export interface DescribeJobConfigsRequest {
+export interface DescribeJobSavepointRequest {
   /**
-   * 作业Id
+   * 作业 SerialId
    */
   JobId: string
   /**
-   * 作业配置版本
+   * 分页参数，单页总数
    */
-  JobConfigVersions?: Array<number | bigint>
+  Limit: number
   /**
-   * 偏移量，默认0
+   * 分页参数，偏移量
    */
-  Offset?: number
-  /**
-   * 分页大小，默认20，最大100
-   */
-  Limit?: number
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-  /**
-   * true 表示只展示草稿
-   */
-  OnlyDraft?: boolean
+  Offset: number
   /**
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+  /**
+   * 2 是checkpoint
+1 是触发savepoint
+3 停止触发的savepoint
+   */
+  RecordTypes?: Array<number | bigint>
 }
 
 /**
@@ -3397,6 +3416,32 @@ export interface Cluster {
    * 集群的日志cos存储
    */
   LogCOSBucket?: string
+}
+
+/**
+ * CreateVariable请求参数结构体
+ */
+export interface CreateVariableRequest {
+  /**
+   * 变量名
+   */
+  Name: string
+  /**
+   * 变量值
+   */
+  Value: string
+  /**
+   * 变量类型  1：显式   2：隐藏
+   */
+  Type: number
+  /**
+   * 描述信息
+   */
+  Remark?: string
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
 }
 
 /**
@@ -4326,21 +4371,36 @@ export interface StopJobsResponse {
 }
 
 /**
- * DescribeClusters返回参数结构体
+ * 描述作业发生的一个事件
  */
-export interface DescribeClustersResponse {
+export interface JobEvent {
   /**
-   * 集群总数
+   * 内部定义的事件类型
    */
-  TotalCount?: number
+  Type: string
   /**
-   * 集群列表
+   * 事件类型的说明文字
    */
-  ClusterSet?: Array<Cluster>
+  Description: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 事件发生的 Unix 时间戳（秒）
    */
-  RequestId?: string
+  Timestamp: number
+  /**
+   * 事件发生时的运行 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningOrderId: number
+  /**
+   * 事件的一些可选说明
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message: string
+  /**
+   * 异常事件的排查手册链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SolutionLink: string
 }
 
 /**

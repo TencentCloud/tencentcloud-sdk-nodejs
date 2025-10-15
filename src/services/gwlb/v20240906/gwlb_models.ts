@@ -58,6 +58,20 @@ export interface DisassociateTargetGroupsResponse {
 }
 
 /**
+ * InquirePriceCreateGatewayLoadBalancer返回参数结构体
+ */
+export interface InquirePriceCreateGatewayLoadBalancerResponse {
+  /**
+   * 该参数表示对应的价格。
+   */
+  Price?: Price
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTargetGroupList请求参数结构体
  */
 export interface DescribeTargetGroupListRequest {
@@ -159,17 +173,17 @@ export interface DescribeTaskStatusResponse {
 }
 
 /**
- * InquirePriceCreateGatewayLoadBalancer返回参数结构体
+ * DescribeGatewayLoadBalancersResources请求参数结构体
  */
-export interface InquirePriceCreateGatewayLoadBalancerResponse {
+export interface DescribeGatewayLoadBalancersResourcesRequest {
   /**
-   * 该参数表示对应的价格。
+   * 返回可用区资源列表数目，默认20，最大值100。
    */
-  Price?: Price
+  Limit?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 返回可用区资源列表起始偏移量，默认0。
    */
-  RequestId?: string
+  Offset?: number
 }
 
 /**
@@ -354,6 +368,24 @@ export interface AssociateTargetGroupsRequest {
    * 绑定的关系数组。一次请求最多支持20个。
    */
   Associations: Array<TargetGroupAssociation>
+}
+
+/**
+ * DescribeGatewayLoadBalancersResources返回参数结构体
+ */
+export interface DescribeGatewayLoadBalancersResourcesResponse {
+  /**
+   * 可用区支持的资源列表。
+   */
+  ZoneResourceSet?: Array<ZoneResource>
+  /**
+   * 可用区资源列表数目。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -662,6 +694,16 @@ export interface TargetGroupInstanceStatus {
 ● unhealth：表示异常。
    */
   Status?: string
+}
+
+/**
+ * 可用区资源列表
+ */
+export interface ZoneResource {
+  /**
+   * 主可用区
+   */
+  MasterZone?: string
 }
 
 /**

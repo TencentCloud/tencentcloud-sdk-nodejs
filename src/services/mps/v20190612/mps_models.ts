@@ -16394,7 +16394,9 @@ export interface DescribeTasksRequest {
    */
   Status: string
   /**
-   * 任务结束时子任务是否有失败。
+   * 任务结束时子任务是否有失败。如果不传则忽略。
+<li>false: 过滤子任务没有失败的任务；</li>
+<li>true: 过滤子任务有失败的任务。</li>
    */
   SubTaskHasFailed?: boolean
   /**
