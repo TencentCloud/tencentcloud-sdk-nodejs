@@ -28,6 +28,16 @@ it("ess.v20201111.StartFlow", async function () {
     }
 })
 
+it("ess.v20201111.CreateContractComparisonTask", async function () {
+    try {
+       const data = await client.CreateContractComparisonTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeFlowTemplates", async function () {
     try {
        const data = await client.DescribeFlowTemplates({})
@@ -671,6 +681,16 @@ it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
 it("ess.v20201111.CreateUserMobileChangeUrl", async function () {
     try {
        const data = await client.CreateUserMobileChangeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ExportContractComparisonTask", async function () {
+    try {
+       const data = await client.ExportContractComparisonTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

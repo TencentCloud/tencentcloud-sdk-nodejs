@@ -429,6 +429,10 @@ export interface CreateContractDiffTaskWebUrlResponse {
    */
   WebUrl?: string
   /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+   */
+  UserData?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -730,6 +734,20 @@ export interface FlowApproverDetail {
    * 模板配置中的参与方ID,与控件绑定
    */
   RecipientId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键，最大长度不超过50字符。
+   */
+  TagKey?: string
+  /**
+   * 标签值，最大长度不超过50字符。
+   */
+  TagValue?: string
 }
 
 /**
@@ -2596,6 +2614,39 @@ p.s.
 }
 
 /**
+ * CreateContractComparisonTask请求参数结构体
+ */
+export interface CreateContractComparisonTaskRequest {
+  /**
+   * 执行合同审查任务的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 原版文件ID，对比基准的旧版本文件唯一标识，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
+   */
+  OriginFileResourceId: string
+  /**
+   * 新版文件ID，与旧版进行对比的新版本文件唯一标识，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
+   */
+  DiffFileResourceId: string
+  /**
+   * 对比任务备注，长度不能超过50个字符。
+   */
+  Comment?: string
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
+   */
+  UserData?: string
+  /**
+   * 标签列表，用户自定义的键值对（Key-Value），可绑定到资源上，用于资源的分类、管理和访问控制。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * DescribeBatchOrganizationRegistrationTasks返回参数结构体
  */
 export interface DescribeBatchOrganizationRegistrationTasksResponse {
@@ -2851,6 +2902,36 @@ export interface DescribePersonCertificateRequest {
 }
 
 /**
+ * 合同对比差异结果详情。
+ */
+export interface ComparisonDetail {
+  /**
+   * 对比前后差异类型，具体如下：
+<ul><li> **add**：新增</li>
+<li> **change**：变更</li>
+<li> **delete**：删除</li>
+</ul>
+   */
+  ComparisonType?: string
+  /**
+   * 对比内容类型，具体如下：
+<ul><li> **text**：文本</li>
+<li> **table**：表格</li>
+<li> **picture**：图片</li>
+</ul>
+   */
+  ContentType?: string
+  /**
+   * 原文文本。
+   */
+  OriginText?: string
+  /**
+   * 对比文本。
+   */
+  DiffText?: string
+}
+
+/**
  * CreateBatchOrganizationAuthorizationUrl返回参数结构体
  */
 export interface CreateBatchOrganizationAuthorizationUrlResponse {
@@ -3037,6 +3118,16 @@ export interface CreateContractDiffTaskWebUrlRequest {
    * 需要对比的新合同文件资源ID，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
    */
   DiffFileResourceId?: string
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
+   */
+  UserData?: string
+  /**
+   * 标签列表，用户自定义的键值对（Key-Value），可绑定到资源上，用于资源的分类、管理和访问控制。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3315,6 +3406,24 @@ export interface CreateContractReviewWebUrlResponse {
  * DisableUserAutoSign返回参数结构体
  */
 export interface DisableUserAutoSignResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateContractComparisonTask返回参数结构体
+ */
+export interface CreateContractComparisonTaskResponse {
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+   */
+  UserData?: string
+  /**
+   * 合同对比任务ID，可以调用接口<a href="https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeContractComparisonTask" target="_blank">查询合同对比任务结果</a>查看对比任务的结果。
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5013,34 +5122,21 @@ export interface CreateExtendedServiceAuthInfosResponse {
 }
 
 /**
- * 集团子企业使用集团主企业的套餐使用情况
+ * 合同信息提取结果
  */
-export interface SubOrgBillUsage {
+export interface ExtractionTaskResult {
   /**
-   * 套餐使用数
+   * 用于合同信息提取的资源ID。
    */
-  Used?: number
+  ResourceId?: string
   /**
-   * 套餐类型
-对应关系如下:
-<ul>
-<li>**CloudEnterprise**: 企业版合同</li>
-<li>**SingleSignature**: 单方签章</li>
-<li>**CloudProve**: 签署报告</li>
-<li>**CloudOnlineSign**: 腾讯会议在线签约</li>
-<li>**ChannelWeCard**: 微工卡</li>
-<li>**SignFlow**: 合同套餐</li>
-<li>**SignFace**: 签署意愿（人脸识别）</li>
-<li>**SignPassword**: 签署意愿（密码）</li>
-<li>**SignSMS**: 签署意愿（短信）</li>
-<li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li>
-<li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li>
-<li>**OrgEssAuth**: 签署企业实名</li>
-<li>**FlowNotify**: 短信通知</li>
-<li>**AuthService**: 企业工商信息查询</li>
-</ul>
+   * 用于合同信息提取的资源名称。
    */
-  QuotaType?: string
+  ResourceName?: string
+  /**
+   * 根据当前合同提取出的字段信息
+   */
+  ExtractionFieldResults?: Array<ExtractionFieldResult>
 }
 
 /**
@@ -5452,6 +5548,11 @@ export interface DescribeContractComparisonTaskRequest {
    * 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。
    */
   TaskId: string
+  /**
+   * 是否返回详细的对比结果。为 true时，响应中将包含详细的对比信息，如相似度、文本差异具体内容等；为 false时，仅返回任务基本状态信息。
+注：`详细结果数据量可能较大，请按需开启。`
+   */
+  ShowDetail?: boolean
 }
 
 /**
@@ -5614,6 +5715,24 @@ export interface OccupiedSeal {
 }
 
 /**
+ * ExportContractComparisonTask返回参数结构体
+ */
+export interface ExportContractComparisonTaskResponse {
+  /**
+   * 对比任务详情下载链接。
+   */
+  ResourceUrl?: string
+  /**
+   * 下载链接有效截止时间。
+   */
+  ExpireTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 个性化参数
  */
 export interface EmbedUrlOption {
@@ -5715,6 +5834,10 @@ export interface DescribeContractComparisonTaskResponse {
    * 合同对比任务创建时间，时间戳。
    */
   CreateTime?: number
+  /**
+   * 对比差异详情，请求参数ShowDetail为true时返回。
+   */
+  ComparisonDetail?: Array<ComparisonDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5980,14 +6103,17 @@ export interface ExtractionField {
    * 用于描述字段信息。
 
 注意：
-1、`如果Type值为OPTION时，需要在字段描述中填写选项值，用,分隔`
-2、描述字段不能超过100个字符
+1、描述字段不能超过100个字符
    */
   Description?: string
   /**
    * 提取出合同中的字段信息。
    */
   Values?: Array<string>
+  /**
+   * 当字段类型`Type`为OPTION时为必输项，输入选项值
+   */
+  ChoiceList?: Array<string>
 }
 
 /**
@@ -6788,21 +6914,34 @@ export interface CreateFlowRemindsResponse {
 }
 
 /**
- * 合同信息提取结果
+ * 集团子企业使用集团主企业的套餐使用情况
  */
-export interface ExtractionTaskResult {
+export interface SubOrgBillUsage {
   /**
-   * 用于合同信息提取的资源ID。
+   * 套餐使用数
    */
-  ResourceId?: string
+  Used?: number
   /**
-   * 用于合同信息提取的资源名称。
+   * 套餐类型
+对应关系如下:
+<ul>
+<li>**CloudEnterprise**: 企业版合同</li>
+<li>**SingleSignature**: 单方签章</li>
+<li>**CloudProve**: 签署报告</li>
+<li>**CloudOnlineSign**: 腾讯会议在线签约</li>
+<li>**ChannelWeCard**: 微工卡</li>
+<li>**SignFlow**: 合同套餐</li>
+<li>**SignFace**: 签署意愿（人脸识别）</li>
+<li>**SignPassword**: 签署意愿（密码）</li>
+<li>**SignSMS**: 签署意愿（短信）</li>
+<li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li>
+<li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li>
+<li>**OrgEssAuth**: 签署企业实名</li>
+<li>**FlowNotify**: 短信通知</li>
+<li>**AuthService**: 企业工商信息查询</li>
+</ul>
    */
-  ResourceName?: string
-  /**
-   * 根据当前合同提取出的字段信息
-   */
-  ExtractionFieldResults?: Array<ExtractionFieldResult>
+  QuotaType?: string
 }
 
 /**
@@ -9013,7 +9152,7 @@ export interface DescribeOrganizationSealsRequest {
    */
   SealId?: string
   /**
-   * 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种：<ul> <li><strong>OFFICIAL</strong>：企业公章；</li> <li><strong>CONTRACT</strong>：合同专用章；</li> <li><strong>ORGANIZATION_SEAL</strong>：企业印章（通过图片上传创建）；</li> <li><strong>LEGAL_PERSON_SEAL</strong>：法定代表人章。</li> <li><strong>EMPLOYEE_QUALIFICATION_SEAL</strong>：员工执业章。</li> </ul>
+   * 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种：<ul> <li><strong>OFFICIAL</strong>：企业公章；</li> <li><strong>CONTRACT</strong>：合同专用章；</li> <li><strong>FINANCE</strong>：财务专用章；</li> <li><strong>PERSONNEL</strong>：人事专用章；</li><li><strong>INVOICE</strong>：发票专用章；</li><li><strong>LEGAL_PERSON_SEAL</strong>：法定代表人章。</li> <li><strong>EMPLOYEE_QUALIFICATION_SEAL</strong>：员工执业章。</li> </ul>
    */
   SealTypes?: Array<string>
   /**
@@ -10887,6 +11026,51 @@ export interface CreateFlowApproversRequest {
 }
 
 /**
+ * 扩展服务开通和授权的详细信息
+ */
+export interface ExtendAuthInfo {
+  /**
+   * 扩展服务的类型，可能是以下值：
+<ul><li>OPEN_SERVER_SIGN：企业自动签署</li>
+<li>BATCH_SIGN：批量签署</li>
+<li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
+<li>AGE_LIMIT_EXPANSION：拓宽签署方年龄限制</li>
+<li>MOBILE_CHECK_APPROVER：个人签署方仅校验手机号</li>
+<li>HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名</li>
+<li>ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型</li>
+<li>ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方</li>
+<li>HIDE_ONE_KEY_SIGN：个人签署方手动签字</li>
+<li>PAGING_SEAL：骑缝章</li>
+<li>ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导</li></ul>
+   */
+  Type?: string
+  /**
+   * 扩展服务的名称
+   */
+  Name?: string
+  /**
+   * 扩展服务的开通状态：
+<ul>
+<li>ENABLE : 已开通</li>
+<li>DISABLE : 未开通</li>
+</ul>
+   */
+  Status?: string
+  /**
+   * 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+   */
+  OperatorUserId?: string
+  /**
+   * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
+   */
+  OperateOn?: number
+  /**
+   * 该扩展服务若可以授权，此参数对应授权人员的列表
+   */
+  HasAuthUserList?: Array<HasAuthUser>
+}
+
+/**
  * CreatePreparedPersonalEsign请求参数结构体
  */
 export interface CreatePreparedPersonalEsignRequest {
@@ -12298,48 +12482,35 @@ export interface DescribeBatchOrganizationRegistrationUrlsResponse {
 }
 
 /**
- * 扩展服务开通和授权的详细信息
+ * ExportContractComparisonTask请求参数结构体
  */
-export interface ExtendAuthInfo {
+export interface ExportContractComparisonTaskRequest {
   /**
-   * 扩展服务的类型，可能是以下值：
-<ul><li>OPEN_SERVER_SIGN：企业自动签署</li>
-<li>BATCH_SIGN：批量签署</li>
-<li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
-<li>AGE_LIMIT_EXPANSION：拓宽签署方年龄限制</li>
-<li>MOBILE_CHECK_APPROVER：个人签署方仅校验手机号</li>
-<li>HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名</li>
-<li>ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型</li>
-<li>ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方</li>
-<li>HIDE_ONE_KEY_SIGN：个人签署方手动签字</li>
-<li>PAGING_SEAL：骑缝章</li>
-<li>ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导</li></ul>
+   * 执行合同审查任务的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  Type?: string
+  Operator: UserInfo
   /**
-   * 扩展服务的名称
+   * 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。
    */
-  Name?: string
+  TaskId: string
   /**
-   * 扩展服务的开通状态：
+   * 导出对比结果文件类型。
+类型如下：
 <ul>
-<li>ENABLE : 已开通</li>
-<li>DISABLE : 未开通</li>
+<li> **0**：【PDF】以新合同文件为基础，导出带有可视化对比点标注的PDF文件。</li>
+<li> **1**：【EXCEL】导出结构化的对比点明细表格，以列表形式罗列每一个差异点，包含改动位置、类型、标签及修改前后的完整内容。</li>
 </ul>
    */
-  Status?: string
+  ExportType?: number
   /**
-   * 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+   * 是否忽略，适用于PDF。
+<ul>
+<li> **true**：导出文件标注去掉忽略项。</li>
+<li> **false**：导出文件包含所有对比点。</li>
+</ul>
    */
-  OperatorUserId?: string
-  /**
-   * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
-   */
-  OperateOn?: number
-  /**
-   * 该扩展服务若可以授权，此参数对应授权人员的列表
-   */
-  HasAuthUserList?: Array<HasAuthUser>
+  Ignore?: boolean
 }
 
 /**

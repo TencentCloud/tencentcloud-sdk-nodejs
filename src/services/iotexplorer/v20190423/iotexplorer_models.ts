@@ -578,7 +578,7 @@ export interface DescribeCloudStorageOrderRequest {
 }
 
 /**
- * TTS配置信息。
+ * 会话配置信息。
  */
 export interface TalkConversationConfigInfo {
   /**
@@ -601,6 +601,14 @@ export interface TalkConversationConfigInfo {
    * 是否启用情绪识别
    */
   EmotionEnabled?: boolean
+  /**
+   * 是否启用语义vad
+   */
+  SemanticVADEnabled?: boolean
+  /**
+   * 是否启用噪声过滤
+   */
+  NoiseFilterEnabled?: boolean
 }
 
 /**

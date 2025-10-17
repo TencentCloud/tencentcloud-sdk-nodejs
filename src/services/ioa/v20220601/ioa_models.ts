@@ -1060,6 +1060,57 @@ export interface DescribeDeviceInfoRequest {
 /**
  * 查询文件检测结果响应数据
  */
+export interface DescribeDLPFileDetectTaskResult {
+  /**
+   * 提交任务时的文件md5
+   */
+  FileMd5?: string
+  /**
+   * 提交任务时的文件名
+   */
+  FileName?: string
+  /**
+   * 检测执行状态：0未执行 1等待执行 2执行中 3执行失败 4执行完成
+   */
+  Status?: number
+  /**
+   *     FileAbstract:文件摘要
+    FileAttr:文件属性
+    FileCategory:命中分级分类 array
+    FileContent:命中信息json(array)
+	            RuleId:规则Id
+				RuleName:规则名称
+				RuleLevel:规则等级
+				Hits：命中词库内容
+				    LibraryId：词库Id
+					LibraryType:词库类型
+					LibraryName:词库名称
+					Attribute: 命中属性 doc.Content文件内容|doc.FileSize文件大小|doc.Name文件名|doc.Type文件类型
+					String  待匹配内容
+					Content 命中内容
+                HitsTotal 规则命中次数
+    FileMd5 文件ND5
+    FileName 文件名
+    FileSize 文件大小
+    FileType 文件后缀
+    FileTypeName 文件类型名称
+    FinalDataLevel 命中最高等级
+    NodeId 节点唯一Id
+    NodeIp 节点IP
+    NodeName 节点名称
+    OperateTime 文件操作时间
+    Url 文件下载Url
+   */
+  DetectResult?: string
+  /**
+   * 检测执行状态描述
+   */
+  Message?: string
+}
+
+/**
+ * 查询文件检测结果响应数据
+ */
 export interface DescribeDLPFileDetectResultData {
   /**
    * 提交任务时的文件md5
@@ -1267,6 +1318,20 @@ export interface DescribeAccountGroupsPageResp {
 }
 
 /**
+ * DescribeDLPEdgeNodes返回参数结构体
+ */
+export interface DescribeDLPEdgeNodesResponse {
+  /**
+   * 业务响应数据
+   */
+  Data?: DescribeDLPEdgeNodesPageData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExportSoftwareInformationList返回参数结构体
  */
 export interface ExportSoftwareInformationListResponse {
@@ -1281,19 +1346,13 @@ export interface ExportSoftwareInformationListResponse {
 }
 
 /**
- * 业务响应数据
+ * FilterGroups 条件过滤组
  */
-export interface DescribeSoftCensusListByDevicePageData {
+export interface FilterGroup {
   /**
-   * 软件统计响应对象集合
-注意：此字段可能返回 null，表示取不到有效值。
+   * Filters 条件过滤
    */
-  Items?: Array<DescribeSoftCensusListByDeviceData>
-  /**
-   * 分页公共对象
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Page?: Paging
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1359,6 +1418,72 @@ export interface Paging {
 }
 
 /**
+ * 业务响应数据
+ */
+export interface DescribeDLPEdgeNodesPageData {
+  /**
+   * 分页信息
+   */
+  Page?: Paging
+  /**
+   * 节点列表
+   */
+  Items?: Array<DescribeDLPEdgeNodesRspItem>
+}
+
+/**
+ * DescribeDLPFileDetectTaskResult返回参数结构体
+ */
+export interface DescribeDLPFileDetectTaskResultResponse {
+  /**
+   * 文件鉴定任务结果数据。详情查看具体数据结构
+   */
+  Data?: DescribeDLPFileDetectTaskResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDLPFileDetectTask返回参数结构体
+ */
+export interface CreateDLPFileDetectTaskResponse {
+  /**
+   * 创建文件鉴定任务数据
+   */
+  Data?: CreateDLPFileDetectTaskData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 文件鉴定任务分页数据
+ */
+export interface CreateDLPFileDetectTaskData {
+  /**
+   * 任务请求唯一Id
+   */
+  TaskRequestId?: Array<string>
+}
+
+/**
+ * DescribeDLPEdgeNodes请求参数结构体
+ */
+export interface DescribeDLPEdgeNodesRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 过滤条件、分页参数<li>EdgeNodeName - string - 是否必填：否 - 操作符: ilike  - 排序支持：否- 按节点名称过滤。</li>
+   */
+  Condition?: Condition
+}
+
+/**
  * 软件详情响应对象集合
  */
 export interface SoftwareInformationData {
@@ -1421,6 +1546,20 @@ export interface CreateDeviceVirtualGroupRspData {
 }
 
 /**
+ * DescribeDLPEdgeNodeGroups请求参数结构体
+ */
+export interface DescribeDLPEdgeNodeGroupsRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 过滤条件
+   */
+  Condition?: Condition
+}
+
+/**
  * DescribeVirtualDevices返回参数结构体
  */
 export interface DescribeVirtualDevicesResponse {
@@ -1432,6 +1571,40 @@ export interface DescribeVirtualDevicesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateDLPFileDetectTask请求参数结构体
+ */
+export interface CreateDLPFileDetectTaskRequest {
+  /**
+   * 文件下载Url
+   */
+  DownloadUrl: string
+  /**
+   * 文件名
+   */
+  FileName: string
+  /**
+   * 文件Md5
+   */
+  FileMd5: string
+  /**
+   * 负载类型  1 从GroupId中选一节点 鉴定  2使用所有SelectNodeIds节点鉴定
+   */
+  BalanceType: number
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 选中节点唯一Id列表,BalanceType=2时必填
+   */
+  SelectNodeIds?: Array<string>
+  /**
+   * 节点组唯一Id,BalanceType=1时必填
+   */
+  GroupId?: string
 }
 
 /**
@@ -1754,6 +1927,96 @@ export interface DescribeSoftCensusListByDeviceResponse {
 }
 
 /**
+ * 边缘节点信息
+ */
+export interface DescribeDLPEdgeNodesRspItem {
+  /**
+   * 自增id，数据库中唯一
+   */
+  Id?: number
+  /**
+   * 节点分组唯一id
+   */
+  GroupId?: string
+  /**
+   * 节点id
+   */
+  EdgeNodeId?: string
+  /**
+   * 节点名称
+   */
+  EdgeNodeName?: string
+  /**
+   * 是否活跃/连通
+   */
+  IsActive?: boolean
+  /**
+   * 节点分组名称
+   */
+  GroupName?: string
+  /**
+   * 节点IP
+   */
+  Ip?: string
+  /**
+   * 节点版本
+   */
+  Version?: string
+  /**
+   * 是否支持升级连接器
+   */
+  IsUpgradeEnable?: boolean
+  /**
+   * 升级状态: 0(升级中) , 1(升级失败) 或 2(升级成功)
+   */
+  UpgradeStatus?: number
+  /**
+   * 升级状态描述
+   */
+  UpgradeDescription?: string
+  /**
+   * 规则版本
+   */
+  RuleVersion?: string
+}
+
+/**
+ * 节点分组信息
+ */
+export interface DescribeDLPEdgeNodeGroupsRspItem {
+  /**
+   * 自增id，数据库中唯一
+   */
+  Id?: number
+  /**
+   * 节点分组名称
+   */
+  GroupName?: string
+  /**
+   * 节点分组id
+   */
+  GroupId?: string
+  /**
+   * 包含边缘节点数量
+   */
+  EdgeCount?: number
+}
+
+/**
+ * DescribeDLPEdgeNodeGroups返回参数结构体
+ */
+export interface DescribeDLPEdgeNodeGroupsResponse {
+  /**
+   * 业务响应数据
+   */
+  Data?: DescribeDLPEdgeNodeGroupsRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Filters 条件过滤
  */
 export interface Filter {
@@ -1811,6 +2074,20 @@ export interface SimpleRule {
    * 表达式间逻辑关系
    */
   Relation?: string
+}
+
+/**
+ * DescribeDLPFileDetectTaskResult请求参数结构体
+ */
+export interface DescribeDLPFileDetectTaskResultRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 任务请求Id
+   */
+  TaskRequestId?: string
 }
 
 /**
@@ -2222,13 +2499,19 @@ export interface DeviceGroupDetail {
 }
 
 /**
- * FilterGroups 条件过滤组
+ * 业务响应数据
  */
-export interface FilterGroup {
+export interface DescribeSoftCensusListByDevicePageData {
   /**
-   * Filters 条件过滤
+   * 软件统计响应对象集合
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Filters?: Array<Filter>
+  Items?: Array<DescribeSoftCensusListByDeviceData>
+  /**
+   * 分页公共对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: Paging
 }
 
 /**
@@ -2413,6 +2696,20 @@ export interface DescribeDLPFileDetectResultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 业务响应数据
+ */
+export interface DescribeDLPEdgeNodeGroupsRspData {
+  /**
+   * 分组信息
+   */
+  Items?: Array<DescribeDLPEdgeNodeGroupsRspItem>
+  /**
+   * 分页信息
+   */
+  Page?: Paging
 }
 
 /**

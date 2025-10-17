@@ -42,6 +42,7 @@ import {
   CreateBatchSignUrlResponse,
   DescribeUserAutoSignStatusResponse,
   FlowApproverDetail,
+  Tag,
   CreateFlowForwardsResponse,
   DescribeFlowEvidenceReportRequest,
   DeleteSealPoliciesRequest,
@@ -82,6 +83,7 @@ import {
   PositionInfo,
   CreateUserAutoSignEnableUrlRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
+  CreateContractComparisonTaskRequest,
   DescribeBatchOrganizationRegistrationTasksResponse,
   CreatePrepareFlowResponse,
   DescribeOrganizationVerifyStatusRequest,
@@ -94,6 +96,7 @@ import {
   DescribeFlowBriefsResponse,
   DescribeFlowTemplatesResponse,
   DescribePersonCertificateRequest,
+  ComparisonDetail,
   CreateBatchOrganizationAuthorizationUrlResponse,
   ModifyPartnerAutoSignAuthUrlResponse,
   CreateIntegrationSubOrganizationActiveRecordRequest,
@@ -112,6 +115,7 @@ import {
   ReviewerInfo,
   CreateContractReviewWebUrlResponse,
   DisableUserAutoSignResponse,
+  CreateContractComparisonTaskResponse,
   DescribeFileUrlsRequest,
   CreateMiniAppPrepareFlowResponse,
   CreateConvertTaskApiRequest,
@@ -164,7 +168,7 @@ import {
   FileInfo,
   CreatePartnerAutoSignAuthUrlRequest,
   CreateExtendedServiceAuthInfosResponse,
-  SubOrgBillUsage,
+  ExtractionTaskResult,
   ApproverRestriction,
   IntentionAction,
   CreateOrganizationBatchSignUrlRequest,
@@ -181,6 +185,7 @@ import {
   CreateFlowGroupSignReviewRequest,
   Admin,
   OccupiedSeal,
+  ExportContractComparisonTaskResponse,
   EmbedUrlOption,
   DescribeContractComparisonTaskResponse,
   CreateModifyAdminAuthorizationUrlResponse,
@@ -214,7 +219,7 @@ import {
   DescribeIntegrationRolesRequest,
   CreateFlowGroupSignReviewResponse,
   CreateFlowRemindsResponse,
-  ExtractionTaskResult,
+  SubOrgBillUsage,
   DescribeOrganizationGroupOrganizationsRequest,
   Agent,
   CallbackInfo,
@@ -336,6 +341,7 @@ import {
   CreateUserAutoSignSealUrlRequest,
   ModifyFlowDeadlineRequest,
   CreateFlowApproversRequest,
+  ExtendAuthInfo,
   CreatePreparedPersonalEsignRequest,
   CreateMiniAppPrepareFlowRequest,
   CreateIntegrationDepartmentRequest,
@@ -373,7 +379,7 @@ import {
   DeleteStaffsResult,
   FlowGroupApproverInfo,
   DescribeBatchOrganizationRegistrationUrlsResponse,
-  ExtendAuthInfo,
+  ExportContractComparisonTaskRequest,
   Permission,
   ReleasedApprover,
   DescribeUserFlowTypeRequest,
@@ -409,6 +415,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartFlowResponse) => void
   ): Promise<StartFlowResponse> {
     return this.request("StartFlow", req, cb)
+  }
+
+  /**
+     * 此接口（CreateContractComparisonTask）用于创建合同对比任务。
+适用场景：对比两份合同中字段（如：金额、日期、甲方名称等）的内容差异。
+     */
+  async CreateContractComparisonTask(
+    req: CreateContractComparisonTaskRequest,
+    cb?: (error: string, rep: CreateContractComparisonTaskResponse) => void
+  ): Promise<CreateContractComparisonTaskResponse> {
+    return this.request("CreateContractComparisonTask", req, cb)
   }
 
   /**
@@ -1581,6 +1598,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserMobileChangeUrlResponse) => void
   ): Promise<CreateUserMobileChangeUrlResponse> {
     return this.request("CreateUserMobileChangeUrl", req, cb)
+  }
+
+  /**
+   * 本接口（ExportContractComparisonTask）用于导出指定的合同对比任务的结果文件。任务完成后，用户可根据不同的使用场景，选择导出可视化对比报告（PDF）或结构化差异明细（EXCEL）。
+   */
+  async ExportContractComparisonTask(
+    req: ExportContractComparisonTaskRequest,
+    cb?: (error: string, rep: ExportContractComparisonTaskResponse) => void
+  ): Promise<ExportContractComparisonTaskResponse> {
+    return this.request("ExportContractComparisonTask", req, cb)
   }
 
   /**

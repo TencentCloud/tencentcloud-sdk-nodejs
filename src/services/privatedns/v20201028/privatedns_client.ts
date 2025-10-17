@@ -18,72 +18,98 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeQuotaUsageResponse,
-  ModifyPrivateZoneVpcRequest,
-  DescribeAuditLogResponse,
-  DescribePrivateDNSAccountListResponse,
-  DescribePrivateZoneRecordListRequest,
-  PrivateDNSAccount,
   QueryAsyncBindVpcStatusResponse,
-  DescribePrivateZoneRecordListResponse,
-  DescribePrivateZoneListResponse,
+  SubnetIpInfo,
+  DescribeAccountVpcListRequest,
   AccountVpcInfoOutput,
   DescribePrivateZoneRequest,
+  DescribeAccountVpcListResponse,
+  DeletePrivateDNSAccountRequest,
+  AddSpecifyPrivateZoneVpcRequest,
+  ModifyInboundEndpointRequest,
+  VpcInfo,
+  CreatePrivateDNSAccountResponse,
+  SubscribePrivateZoneServiceRequest,
+  PrivateZone,
+  CreatePrivateDNSAccountRequest,
+  FlowUsage,
+  CreateForwardRuleResponse,
+  ModifyPrivateZoneVpcRequest,
+  DescribePrivateDNSAccountListResponse,
+  CreateExtendEndpointRequest,
+  PrivateZoneRecord,
+  CreatePrivateZoneRecordRequest,
+  ModifyPrivateZoneRecordResponse,
+  DescribePrivateZoneRecordListResponse,
+  DescribeRequestDataResponse,
+  DeleteInboundEndpointResponse,
+  DescribeRecordRequest,
+  DeleteForwardRuleRequest,
+  ModifyPrivateZoneResponse,
+  DeleteSpecifyPrivateZoneVpcRequest,
+  ModifyPrivateZoneRequest,
+  DescribeRecordResponse,
+  RecordInfo,
+  DescribeDashboardResponse,
+  ModifyForwardRuleResponse,
+  SubscribePrivateZoneServiceResponse,
+  AuditLogInfo,
+  ModifyRecordsStatusRequest,
+  CreateInboundEndpointResponse,
+  ModifyPrivateZoneRecordRequest,
+  DescribePrivateDNSAccountListRequest,
+  EndPointServiceInfo,
+  DescribePrivateZoneRecordListRequest,
+  PrivateDNSAccount,
+  DescribeForwardRuleListRequest,
   ModifyRecordsStatusResponse,
   DatePoint,
   DeleteSpecifyPrivateZoneVpcResponse,
-  DescribeAccountVpcListResponse,
-  DescribePrivateZoneServiceRequest,
-  PrivateZoneRecord,
-  AddSpecifyPrivateZoneVpcResponse,
-  AuditLogInfo,
-  AddSpecifyPrivateZoneVpcRequest,
+  DeleteEndPointResponse,
+  DeleteEndPointRequest,
+  DescribePrivateZoneListRequest,
+  DescribeExtendEndpointListRequest,
+  InboundEndpointSet,
+  AccountVpcInfoOut,
+  CreatePrivateZoneRequest,
+  ModifyForwardRuleRequest,
+  DescribePrivateZoneResponse,
   DescribeRequestDataRequest,
-  ModifyPrivateZoneRecordResponse,
-  DescribeAccountVpcListRequest,
-  DescribeRequestDataResponse,
-  ModifyPrivateZoneRequest,
+  DescribePrivateZoneServiceResponse,
+  DescribeDashboardRequest,
+  DescribeInboundEndpointListResponse,
+  DeletePrivateZoneResponse,
+  DescribePrivateZoneListResponse,
+  DescribePrivateZoneServiceRequest,
+  DeleteInboundEndpointRequest,
+  ModifyPrivateZoneVpcResponse,
+  DescribeQuotaUsageResponse,
+  DescribeAuditLogResponse,
+  CreateForwardRuleRequest,
+  AddSpecifyPrivateZoneVpcResponse,
+  CreateExtendEndpointResponse,
+  CreateInboundEndpointRequest,
   TagInfo,
   TldQuota,
-  CreatePrivateZoneRequest,
-  VpcInfo,
-  AccountVpcInfoOut,
   AccountVpcInfo,
-  ModifyPrivateZoneResponse,
-  DeleteSpecifyPrivateZoneVpcRequest,
-  DescribeRecordRequest,
-  DescribeRecordResponse,
-  SubscribePrivateZoneServiceRequest,
-  DescribePrivateZoneResponse,
+  ForwardRule,
   CreatePrivateZoneResponse,
-  DescribeDashboardResponse,
   CreatePrivateZoneRecordResponse,
-  RecordInfo,
-  DescribePrivateZoneServiceResponse,
-  CreatePrivateDNSAccountResponse,
+  DescribeForwardRuleListResponse,
+  DescribeExtendEndpointListResponse,
   DescribeAuditLogRequest,
-  DescribeDashboardRequest,
+  DescribeQuotaUsageRequest,
+  DescribeInboundEndpointListRequest,
   DeletePrivateZoneRequest,
   AuditLog,
-  SubscribePrivateZoneServiceResponse,
-  DeletePrivateDNSAccountRequest,
   DeletePrivateZoneRecordRequest,
   Filter,
-  DeletePrivateZoneResponse,
-  ModifyRecordsStatusRequest,
-  CreatePrivateDNSAccountRequest,
-  QueryAsyncBindVpcStatusRequest,
+  DeleteForwardRuleResponse,
+  ModifyInboundEndpointResponse,
   MetricData,
-  DescribePrivateDNSAccountListRequest,
-  PrivateZone,
-  CreatePrivateZoneRecordRequest,
-  DescribeQuotaUsageRequest,
-  ModifyPrivateZoneRecordRequest,
-  DescribePrivateZoneListRequest,
-  DeletePrivateDNSAccountResponse,
-  FlowUsage,
   DeletePrivateZoneRecordResponse,
-  ModifyPrivateZoneVpcResponse,
+  DeletePrivateDNSAccountResponse,
+  QueryAsyncBindVpcStatusRequest,
 } from "./privatedns_models"
 
 /**
@@ -116,13 +142,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取私有域记录列表
+   * 删除转发规则并停止转发
    */
-  async DescribePrivateZoneRecordList(
-    req: DescribePrivateZoneRecordListRequest,
-    cb?: (error: string, rep: DescribePrivateZoneRecordListResponse) => void
-  ): Promise<DescribePrivateZoneRecordListResponse> {
-    return this.request("DescribePrivateZoneRecordList", req, cb)
+  async DeleteForwardRule(
+    req: DeleteForwardRuleRequest,
+    cb?: (error: string, rep: DeleteForwardRuleResponse) => void
+  ): Promise<DeleteForwardRuleResponse> {
+    return this.request("DeleteForwardRule", req, cb)
+  }
+
+  /**
+   * 删除终端节点
+   */
+  async DeleteEndPoint(
+    req: DeleteEndPointRequest,
+    cb?: (error: string, rep: DeleteEndPointResponse) => void
+  ): Promise<DeleteEndPointResponse> {
+    return this.request("DeleteEndPoint", req, cb)
   }
 
   /**
@@ -176,6 +212,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除入站终端节点
+   */
+  async ModifyInboundEndpoint(
+    req: ModifyInboundEndpointRequest,
+    cb?: (error: string, rep: ModifyInboundEndpointResponse) => void
+  ): Promise<ModifyInboundEndpointResponse> {
+    return this.request("ModifyInboundEndpoint", req, cb)
+  }
+
+  /**
+   * 获取私有域记录列表
+   */
+  async DescribePrivateZoneRecordList(
+    req: DescribePrivateZoneRecordListRequest,
+    cb?: (error: string, rep: DescribePrivateZoneRecordListResponse) => void
+  ): Promise<DescribePrivateZoneRecordListResponse> {
+    return this.request("DescribePrivateZoneRecordList", req, cb)
+  }
+
+  /**
    * 追加与私有域关联的VPC
    */
   async AddSpecifyPrivateZoneVpc(
@@ -183,6 +239,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddSpecifyPrivateZoneVpcResponse) => void
   ): Promise<AddSpecifyPrivateZoneVpcResponse> {
     return this.request("AddSpecifyPrivateZoneVpc", req, cb)
+  }
+
+  /**
+   * 修改转发规则
+   */
+  async ModifyForwardRule(
+    req: ModifyForwardRuleRequest,
+    cb?: (error: string, rep: ModifyForwardRuleResponse) => void
+  ): Promise<ModifyForwardRuleResponse> {
+    return this.request("ModifyForwardRule", req, cb)
   }
 
   /**
@@ -223,6 +289,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivateDNSAccountResponse) => void
   ): Promise<DeletePrivateDNSAccountResponse> {
     return this.request("DeletePrivateDNSAccount", req, cb)
+  }
+
+  /**
+   * 创建终端节点
+   */
+  async CreateExtendEndpoint(
+    req?: CreateExtendEndpointRequest,
+    cb?: (error: string, rep: CreateExtendEndpointResponse) => void
+  ): Promise<CreateExtendEndpointResponse> {
+    return this.request("CreateExtendEndpoint", req, cb)
   }
 
   /**
@@ -286,6 +362,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除入站终端节点
+   */
+  async CreateInboundEndpoint(
+    req: CreateInboundEndpointRequest,
+    cb?: (error: string, rep: CreateInboundEndpointResponse) => void
+  ): Promise<CreateInboundEndpointResponse> {
+    return this.request("CreateInboundEndpoint", req, cb)
+  }
+
+  /**
    * 修改解析记录状态
    */
   async ModifyRecordsStatus(
@@ -306,6 +392,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建自定义转发规则
+   */
+  async CreateForwardRule(
+    req: CreateForwardRuleRequest,
+    cb?: (error: string, rep: CreateForwardRuleResponse) => void
+  ): Promise<CreateForwardRuleResponse> {
+    return this.request("CreateForwardRule", req, cb)
+  }
+
+  /**
    * 查询私有域解析开通状态
    */
   async DescribePrivateZoneService(
@@ -313,6 +409,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrivateZoneServiceResponse) => void
   ): Promise<DescribePrivateZoneServiceResponse> {
     return this.request("DescribePrivateZoneService", req, cb)
+  }
+
+  /**
+   * 获取终端节点列表
+   */
+  async DescribeExtendEndpointList(
+    req: DescribeExtendEndpointListRequest,
+    cb?: (error: string, rep: DescribeExtendEndpointListResponse) => void
+  ): Promise<DescribeExtendEndpointListResponse> {
+    return this.request("DescribeExtendEndpointList", req, cb)
+  }
+
+  /**
+   * 查询转发规则列表
+   */
+  async DescribeForwardRuleList(
+    req: DescribeForwardRuleListRequest,
+    cb?: (error: string, rep: DescribeForwardRuleListResponse) => void
+  ): Promise<DescribeForwardRuleListResponse> {
+    return this.request("DescribeForwardRuleList", req, cb)
+  }
+
+  /**
+   * 获取入站终端节点列表
+   */
+  async DescribeInboundEndpointList(
+    req: DescribeInboundEndpointListRequest,
+    cb?: (error: string, rep: DescribeInboundEndpointListResponse) => void
+  ): Promise<DescribeInboundEndpointListResponse> {
+    return this.request("DescribeInboundEndpointList", req, cb)
   }
 
   /**
@@ -333,6 +459,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRequestDataResponse) => void
   ): Promise<DescribeRequestDataResponse> {
     return this.request("DescribeRequestData", req, cb)
+  }
+
+  /**
+   * 删除入站终端节点
+   */
+  async DeleteInboundEndpoint(
+    req: DeleteInboundEndpointRequest,
+    cb?: (error: string, rep: DeleteInboundEndpointResponse) => void
+  ): Promise<DeleteInboundEndpointResponse> {
+    return this.request("DeleteInboundEndpoint", req, cb)
   }
 
   /**

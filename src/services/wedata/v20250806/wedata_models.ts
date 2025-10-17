@@ -190,6 +190,7 @@ export interface CreateDataSourceRequest {
 - GDB
 - TDENGINE
 - TDSQLC
+- FileSystem
 
    */
   Type: string
@@ -6693,7 +6694,7 @@ export interface CreateProjectMemberRequest {
   /**
    * 用户id
    */
-  UseUins: Array<string>
+  UserUins: Array<string>
   /**
    * 角色id
    */
@@ -8482,13 +8483,13 @@ export interface ListDatabasePage {
  */
 export interface ListResourceGroupsRequest {
   /**
-   * 执行资源组类型，不能为空
+   * 执行资源组类型
 
 - Schedule --- 调度资源组
 - Integration --- 集成资源组
 - DataService -- 数据服务资源组
    */
-  Type: string
+  Type?: string
   /**
    * 资源组id
    */

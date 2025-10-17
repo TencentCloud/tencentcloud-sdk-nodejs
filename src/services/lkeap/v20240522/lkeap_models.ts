@@ -240,7 +240,7 @@ export interface GetEmbeddingRequest {
    */
   TextType?: string
   /**
-   * 说明：自定义任务指令词，当且仅当TextType=query时，生效
+   * 说明：自定义任务指令词，当且仅当TextType=query且Model为youtu-embedding-llm-v1时，生效
    */
   Instruction?: string
 }

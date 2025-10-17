@@ -197,11 +197,11 @@ export interface CdbZoneSellConf {
    */
   EngineType?: Array<string>
   /**
-   * 集群版实例在当前可用区的售卖状态。可能的返回值为：1-上线；3-停售；4-不展示
+   * 云盘版实例在当前可用区的售卖状态。可能的返回值为：1-上线；3-停售；4-不展示
    */
   CloudNativeClusterStatus?: number
   /**
-   * 集群版或者单节点基础型支持的磁盘类型。
+   * 云盘版或者单节点基础型支持的磁盘类型。
    */
   DiskTypeConf?: Array<DiskTypeConfigItem>
 }
@@ -4331,7 +4331,7 @@ export interface DescribeDBInstanceConfigRequest {
 }
 
 /**
- * 集群版实例节点信息
+ * 云盘版实例节点信息
  */
 export interface ClusterNodeInfo {
   /**
@@ -5043,7 +5043,7 @@ export interface ModifyBackupConfigRequest {
  */
 export interface DiskTypeConfigItem {
   /**
-   * 磁盘对应的实例类型。仅支持单节点基础型和集群版。
+   * 磁盘对应的实例类型。仅支持单节点（云盘）和云盘版。
    */
   DeviceType?: string
   /**
@@ -5629,17 +5629,23 @@ export interface ModifyDBInstanceModesRequest {
  */
 export interface CdbSellType {
   /**
-   * 售卖实例名称。Z3是高可用类型对应规格中的DeviceType包含UNIVERSAL,EXCLUSIVE；CVM是基础版类型对应规格中的DeviceType是BASIC；TKE是基础型v2类型对应规格中的DeviceType是BASIC_V2。
+   * 售卖实例名称。
+Z3：是高可用类型，对应规格中的 DeviceType，包含 UNIVERSAL，EXCLUSIVE。
+CVM：是基础版类型，对应规格中的 DeviceType 是 BASIC（已下线）。
+TKE：是基础版v2类型，对应规格中的 DeviceType 是 BASIC_V2。
+CLOUD_NATIVE_CLUSTER：表示云盘版标准型。
+CLOUD_NATIVE_CLUSTER_EXCLUSIVE：表示云盘版加强型。
+ECONOMICAL：表示经济型。
    */
-  TypeName: string
+  TypeName?: string
   /**
    * 引擎版本号
    */
-  EngineVersion: Array<string>
+  EngineVersion?: Array<string>
   /**
    * 售卖规格Id
    */
-  ConfigIds: Array<number | bigint>
+  ConfigIds?: Array<number | bigint>
 }
 
 /**
@@ -6533,7 +6539,7 @@ export interface ModifyInstanceTagRequest {
 }
 
 /**
- * 一键迁移集群版只读实例信息
+ * 一键迁移云盘版只读实例信息
  */
 export interface MigrateClusterRoInfo {
   /**
@@ -6561,7 +6567,7 @@ export interface MigrateClusterRoInfo {
    */
   Zone?: string
   /**
-   * 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型集群版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型集群版实例。
+   * 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 云盘版标准型实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 云盘版加强型实例。
    */
   DeviceType?: string
   /**
@@ -7245,7 +7251,11 @@ export interface InstanceInfo {
    */
   MaxDelayTime?: number
   /**
-   * 实例磁盘类型，仅云盘版实例才返回该值。可能的值为 CLOUD_SSD：SSD云硬盘， CLOUD_HSSD：增强型SSD云硬盘
+   * 实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。
+说明：
+1. 若返回："DiskType": "CLOUD_HSSD"，则表示该实例磁盘类型为增强型 SSD 云硬盘。
+2. 若返回："DiskType": "CLOUD_SSD"，则表示该实例磁盘类型为 SSD 云硬盘。
+3. 若返回："DiskType": ""，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。
    */
   DiskType?: string
   /**
@@ -7253,7 +7263,7 @@ export interface InstanceInfo {
    */
   ExpandCpu?: number
   /**
-   * 实例集群版节点信息
+   * 云盘版实例节点信息
    */
   ClusterInfo?: Array<ClusterInfo>
   /**
@@ -7264,6 +7274,10 @@ export interface InstanceInfo {
    * 设备带宽，单位G。当DeviceClass不为空时此参数才有效。例：25-表示当前设备带宽为25G；10-表示当前设备带宽为10G。
    */
   DeviceBandwidth?: number
+  /**
+   * 实例销毁保护状态，on表示开启保护，否则为关闭保护
+   */
+  DestroyProtect?: string
 }
 
 /**
@@ -8270,7 +8284,7 @@ export interface DescribeSupportedPrivilegesResponse {
 }
 
 /**
- * 迁移集群版校验结果
+ * 迁移云盘版校验结果
  */
 export interface CheckMigrateResult {
   /**
@@ -9575,7 +9589,7 @@ export interface CreateCloneInstanceRequest {
 }
 
 /**
- * 集群版节点信息
+ * 云盘版节点信息
  */
 export interface ClusterInfo {
   /**

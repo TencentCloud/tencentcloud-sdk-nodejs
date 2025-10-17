@@ -583,6 +583,10 @@ export interface DisplayWechatOfficialAccount {
    * 描述
    */
   Description?: string
+  /**
+   * 认证主体
+   */
+  RecordSubject?: string
 }
 
 /**
@@ -1742,6 +1746,14 @@ export interface DisplayWechatApplet {
    * 描述
    */
   Description?: string
+  /**
+   * 认证主体
+   */
+  RecordSubject?: string
+  /**
+   * 账号Appid
+   */
+  AccountAppid?: string
 }
 
 /**

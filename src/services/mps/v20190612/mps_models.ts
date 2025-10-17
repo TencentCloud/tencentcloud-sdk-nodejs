@@ -282,6 +282,49 @@ export interface FrameRateConfig {
 }
 
 /**
+ * 视频（音频）理解结果
+ */
+export interface AiAnalysisTaskVideoComprehensionResult {
+  /**
+   * 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，0：成功，其他值：失败
+   */
+  ErrCode?: number
+  /**
+   * 错误信息
+   */
+  Message?: string
+  /**
+   * 视频（音频）理解输入
+   */
+  Input?: AiAnalysisTaskVideoComprehensionInput
+  /**
+   * 视频（音频）理解输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskVideoComprehensionOutput
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表
+   */
+  ErrCodeExt?: string
+  /**
+   * 任务进度
+   */
+  Progress?: number
+  /**
+   * 任务开始执行的时间，采用 ISO 日期格式。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕时间，采用 ISO 日期格式。
+   */
+  FinishTime?: string
+}
+
+/**
  * DeleteStreamLinkSecurityGroup返回参数结构体
  */
 export interface DeleteStreamLinkSecurityGroupResponse {
@@ -6815,50 +6858,31 @@ export interface AiReviewTaskPornOcrResult {
 }
 
 /**
- * BatchProcessMedia请求参数结构体
+ * DescribeLiveRecordTemplates请求参数结构体
  */
-export interface BatchProcessMediaRequest {
+export interface DescribeLiveRecordTemplatesRequest {
   /**
-   * 媒体处理的文件输入信息。
+   * 录制模板唯一标识过滤条件，数组长度限制：100。
    */
-  InputInfo: Array<MediaInputInfo>
+  Definitions?: Array<number | bigint>
   /**
-   * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
-注意：当InputInfo.Type为URL时，该参数是必填项
+   * 分页偏移量，默认值：0。
    */
-  OutputStorage?: TaskOutputStorage
+  Offset?: number
   /**
-   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
-如果不填，表示与 InputInfo 中文件所在的目录一致。
+   * 返回记录条数，默认值：10，最大值：100。
    */
-  OutputDir?: string
+  Limit?: number
   /**
-   * 智能字幕
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
    */
-  SmartSubtitlesTask?: SmartSubtitlesTaskInput
+  Type?: string
   /**
-   * 任务的事件通知信息，不填代表不获取事件通知。
+   * 录制模板标识过滤条件，长度限制：64 个字符。
    */
-  TaskNotifyConfig?: TaskNotifyConfig
-  /**
-   * 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
-   */
-  TasksPriority?: number
-  /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
-   */
-  ResourceId?: string
-  /**
-   * 是否跳过元信息获取，可选值： 
-0：表示不跳过 
-1：表示跳过 
-默认值：0	
-   */
-  SkipMateData?: number
+  Name?: string
 }
 
 /**
@@ -10814,6 +10838,7 @@ export interface AiAnalysisResult {
 <li>Description：大模型摘要</li>
 <li>Dubbing：智能译制</li>
 <li>VideoRemake: 视频去重</li>
+<li>VideoComprehension: 视频（音频）理解</li>
    */
   Type?: string
   /**
@@ -10876,6 +10901,11 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoRemakeTask?: AiAnalysisTaskVideoRemakeResult
+  /**
+   * 视频（音频）理解任务的查询结果，当任务类型为 VideoComprehension 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoComprehensionTask?: AiAnalysisTaskVideoComprehensionResult
 }
 
 /**
@@ -12137,6 +12167,16 @@ export interface ActionConfigInfo {
 <li>OFF：关闭。</li>
    */
   Switch: string
+}
+
+/**
+ * 视频（音频）理解任务输入
+ */
+export interface AiAnalysisTaskVideoComprehensionInput {
+  /**
+   * 视频（音频）理解模板ID
+   */
+  Definition?: number
 }
 
 /**
@@ -14120,6 +14160,16 @@ export interface CreateWorkflowResponse {
 }
 
 /**
+ * 视频（音频）理解输出内容结果信息
+ */
+export interface AiAnalysisTaskVideoComprehensionOutput {
+  /**
+   * 视频（音频）理解内容详情
+   */
+  VideoComprehensionAnalysisResult?: string
+}
+
+/**
  * 语音全文识别结果。
  */
 export interface AiRecognitionTaskAsrFullTextResult {
@@ -14336,31 +14386,50 @@ export interface AiRecognitionTaskOcrWordsSegmentItem {
 }
 
 /**
- * DescribeLiveRecordTemplates请求参数结构体
+ * BatchProcessMedia请求参数结构体
  */
-export interface DescribeLiveRecordTemplatesRequest {
+export interface BatchProcessMediaRequest {
   /**
-   * 录制模板唯一标识过滤条件，数组长度限制：100。
+   * 媒体处理的文件输入信息。
    */
-  Definitions?: Array<number | bigint>
+  InputInfo: Array<MediaInputInfo>
   /**
-   * 分页偏移量，默认值：0。
+   * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
    */
-  Offset?: number
+  OutputStorage?: TaskOutputStorage
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与 InputInfo 中文件所在的目录一致。
    */
-  Limit?: number
+  OutputDir?: string
   /**
-   * 模板类型过滤条件，不填则返回所有，可选值：
-   * Preset：系统预置模板；
-   * Custom：用户自定义模板。
+   * 智能字幕
    */
-  Type?: string
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput
   /**
-   * 录制模板标识过滤条件，长度限制：64 个字符。
+   * 任务的事件通知信息，不填代表不获取事件通知。
    */
-  Name?: string
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
+   */
+  TasksPriority?: number
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+   */
+  ResourceId?: string
+  /**
+   * 是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
+   */
+  SkipMateData?: number
 }
 
 /**

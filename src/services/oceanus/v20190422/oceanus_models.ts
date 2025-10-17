@@ -888,6 +888,10 @@ export interface TreeJobSets {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DecodeSqlCode?: string
+  /**
+   * 发布版本配置id
+   */
+  PublishedJobConfigId?: number
 }
 
 /**
@@ -3622,10 +3626,14 @@ export interface JobV1 {
    */
   ClusterName?: string
   /**
-   * 最新配置版本号
+   * 最新配置版本号，包括已经删除的版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestJobConfigVersion?: number
+  /**
+   * 最新的版本号，不包括已经删除的版本号
+   */
+  LatestValidJobConfigVersion?: number
   /**
    * 已发布的配置版本
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3736,6 +3744,10 @@ export interface JobV1 {
    * 停止持续告警
    */
   ContinueAlarm?: number
+  /**
+   * 作业重启次数
+   */
+  RestartCount?: number
 }
 
 /**

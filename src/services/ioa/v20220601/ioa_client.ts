@@ -46,6 +46,7 @@ import {
   CreateDLPFileDetectionTaskRequest,
   DescribeSoftCensusListByDeviceData,
   DescribeDeviceInfoRequest,
+  DescribeDLPFileDetectTaskResult,
   DescribeDLPFileDetectResultData,
   DescribeDeviceVirtualGroupsRequest,
   DescribeDeviceChildGroupsRequest,
@@ -54,15 +55,23 @@ import {
   CreatePrivilegeCodeRspData,
   DeviceVirtualDeviceGroupsDetail,
   DescribeAccountGroupsPageResp,
+  DescribeDLPEdgeNodesResponse,
   ExportSoftwareInformationListResponse,
-  DescribeSoftCensusListByDevicePageData,
+  FilterGroup,
   DescribeSoftwareInformationRequest,
   DescribeAggrSoftCategorySoftListData,
   Paging,
+  DescribeDLPEdgeNodesPageData,
+  DescribeDLPFileDetectTaskResultResponse,
+  CreateDLPFileDetectTaskResponse,
+  CreateDLPFileDetectTaskData,
+  DescribeDLPEdgeNodesRequest,
   SoftwareInformationData,
   DescribeAggrSoftDetailRequest,
   CreateDeviceVirtualGroupRspData,
+  DescribeDLPEdgeNodeGroupsRequest,
   DescribeVirtualDevicesResponse,
+  CreateDLPFileDetectTaskRequest,
   DescribeDLPFileDetectResultRequest,
   RuleItem,
   CreateDeviceVirtualGroupResponse,
@@ -79,10 +88,14 @@ import {
   DescribeAccountGroupsResponse,
   DescribeDevicesPageRsp,
   DescribeSoftCensusListByDeviceResponse,
+  DescribeDLPEdgeNodesRspItem,
+  DescribeDLPEdgeNodeGroupsRspItem,
+  DescribeDLPEdgeNodeGroupsResponse,
   Filter,
   DescribeAggrSoftDeviceListResponse,
   DescribeRootAccountGroupResponse,
   SimpleRule,
+  DescribeDLPFileDetectTaskResultRequest,
   DescribeDeviceDetailListRequest,
   DeviceServiceInfo,
   DescribeLocalAccountAccountGroupsData,
@@ -98,13 +111,14 @@ import {
   DescribeRootAccountGroupRequest,
   DescribeDeviceChildGroupsRspData,
   DeviceGroupDetail,
-  FilterGroup,
+  DescribeSoftCensusListByDevicePageData,
   DescribeDevicesRequest,
   DescribeAggrSoftCategorySoftListResponse,
   DescribeAggrSoftDetailResponse,
   CreateDLPFileDetectionTaskResponse,
   DescribeDeviceChildGroupsResponse,
   DescribeDLPFileDetectResultResponse,
+  DescribeDLPEdgeNodeGroupsRspData,
   CreatePrivilegeCodeResponse,
   DescribeDeviceHardwareInfoListRequest,
   DescribeAggrSoftDetailData,
@@ -150,6 +164,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建文件鉴定任务，私有化调用path为：capi/DlpOpenApi/CreateDLPFileDetectTask
+   */
+  async CreateDLPFileDetectTask(
+    req: CreateDLPFileDetectTaskRequest,
+    cb?: (error: string, rep: CreateDLPFileDetectTaskResponse) => void
+  ): Promise<CreateDLPFileDetectTaskResponse> {
+    return this.request("CreateDLPFileDetectTask", req, cb)
+  }
+
+  /**
    * 创建终端自定义分组，私有化调用path为：/capi/Assets/Device/CreateDeviceVirtualGroup
    */
   async CreateDeviceVirtualGroup(
@@ -157,6 +181,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeviceVirtualGroupResponse) => void
   ): Promise<CreateDeviceVirtualGroupResponse> {
     return this.request("CreateDeviceVirtualGroup", req, cb)
+  }
+
+  /**
+   * 查询文件鉴定任务结果
+   */
+  async DescribeDLPFileDetectTaskResult(
+    req: DescribeDLPFileDetectTaskResultRequest,
+    cb?: (error: string, rep: DescribeDLPFileDetectTaskResultResponse) => void
+  ): Promise<DescribeDLPFileDetectTaskResultResponse> {
+    return this.request("DescribeDLPFileDetectTaskResult", req, cb)
   }
 
   /**
@@ -230,6 +264,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询边缘节点列表，私有化调用path为：capi/DlpOpenApi/DescribeDLPEdgeNodes
+   */
+  async DescribeDLPEdgeNodes(
+    req: DescribeDLPEdgeNodesRequest,
+    cb?: (error: string, rep: DescribeDLPEdgeNodesResponse) => void
+  ): Promise<DescribeDLPEdgeNodesResponse> {
+    return this.request("DescribeDLPEdgeNodes", req, cb)
+  }
+
+  /**
    * 聚合的软件详情
    */
   async DescribeAggrSoftDetail(
@@ -297,6 +341,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLocalAccountsResponse) => void
   ): Promise<DescribeLocalAccountsResponse> {
     return this.request("DescribeLocalAccounts", req, cb)
+  }
+
+  /**
+   * 查询边缘节点分组，私有化调用path为：capi/Connectors/DescribeDLPEdgeNodeGroups
+   */
+  async DescribeDLPEdgeNodeGroups(
+    req: DescribeDLPEdgeNodeGroupsRequest,
+    cb?: (error: string, rep: DescribeDLPEdgeNodeGroupsResponse) => void
+  ): Promise<DescribeDLPEdgeNodeGroupsResponse> {
+    return this.request("DescribeDLPEdgeNodeGroups", req, cb)
   }
 
   /**

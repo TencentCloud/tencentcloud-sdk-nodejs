@@ -48,9 +48,29 @@ it("ioa.v20220601.DescribeSoftwareInformation", async function () {
     }
 })
 
+it("ioa.v20220601.CreateDLPFileDetectTask", async function () {
+    try {
+       const data = await client.CreateDLPFileDetectTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.CreateDeviceVirtualGroup", async function () {
     try {
        const data = await client.CreateDeviceVirtualGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDLPFileDetectTaskResult", async function () {
+    try {
+       const data = await client.DescribeDLPFileDetectTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +148,16 @@ it("ioa.v20220601.DescribeAggrSoftCategorySoftList", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeDLPEdgeNodes", async function () {
+    try {
+       const data = await client.DescribeDLPEdgeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeAggrSoftDetail", async function () {
     try {
        const data = await client.DescribeAggrSoftDetail({})
@@ -191,6 +221,16 @@ it("ioa.v20220601.DescribeDeviceDetailList", async function () {
 it("ioa.v20220601.DescribeLocalAccounts", async function () {
     try {
        const data = await client.DescribeLocalAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDLPEdgeNodeGroups", async function () {
+    try {
+       const data = await client.DescribeDLPEdgeNodeGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

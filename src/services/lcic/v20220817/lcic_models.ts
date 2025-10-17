@@ -599,7 +599,7 @@ export interface MemberRecord {
    */
   SubGroupId?: Array<string>
   /**
-   * 用户的上台状态
+   * 本堂课用户是否上过台。0 否；1 是
    */
   Stage?: number
   /**

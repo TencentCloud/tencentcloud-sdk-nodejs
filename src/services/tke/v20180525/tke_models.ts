@@ -7236,6 +7236,11 @@ export interface CreateReservedInstancesRequest {
    * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
    */
   ClientToken?: string
+  /**
+   * 是否只预检此次请求。
+true：只预检，不会创建实例。默认值为：false。
+   */
+  DryRun?: boolean
 }
 
 /**

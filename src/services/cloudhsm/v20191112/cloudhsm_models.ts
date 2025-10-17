@@ -132,17 +132,17 @@ export interface InquiryPriceBuyVsmRequest {
    */
   TimeUnit: string
   /**
-   * 货币类型，默认为CNY
-   */
-  Currency?: string
-  /**
    * 默认为CREATE，可选RENEW
    */
-  Type?: string
+  Type: string
   /**
    * Hsm服务类型，可选值virtualization、physical、GHSM、EHSM、SHSM
    */
-  HsmType?: string
+  HsmType: string
+  /**
+   * 货币类型，默认为CNY
+   */
+  Currency?: string
 }
 
 /**

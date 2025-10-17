@@ -3865,11 +3865,13 @@ export interface ErrInfo {
  */
 export interface StartCompareRequest {
   /**
-   * 迁移任务 Id
+   * 迁移任务 ID，可通过 [DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084) 接口获取。
+
    */
   JobId: string
   /**
-   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
+   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9，可通过 [DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084) 接口获取。
+
    */
   CompareTaskId: string
 }
