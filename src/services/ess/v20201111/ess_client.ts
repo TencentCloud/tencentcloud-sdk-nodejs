@@ -182,6 +182,7 @@ import {
   FlowGroupApprovers,
   DescribeContractComparisonTaskRequest,
   DescribeFlowBriefsRequest,
+  CreateInformationExtractionWebUrlResponse,
   CreateFlowGroupSignReviewRequest,
   Admin,
   OccupiedSeal,
@@ -203,6 +204,7 @@ import {
   CreateLegalSealQrCodeResponse,
   DescribeIntegrationDepartmentsResponse,
   CreateFileCounterSignRequest,
+  WebUrlOption,
   DescribeOrganizationVerifyStatusResponse,
   DeleteExtendedServiceAuthInfosResponse,
   AuthInfoDetail,
@@ -304,6 +306,7 @@ import {
   FlowGroupUrlInfo,
   UpdateIntegrationEmployeesResponse,
   ModifyPartnerAutoSignAuthUrlRequest,
+  DescribeInformationExtractionWebUrlResponse,
   CreateExtendedServiceAuthInfosRequest,
   CreatePrepareFlowGroupResponse,
   CreateMultiFlowSignQRCodeResponse,
@@ -315,6 +318,7 @@ import {
   StartFlowResponse,
   DescribeContractReviewWebUrlResponse,
   SignComponentConfig,
+  DescribeInformationExtractionWebUrlRequest,
   DescribeFlowComponentsResponse,
   CancelFailureFlow,
   DescribeIntegrationEmployeesRequest,
@@ -380,6 +384,7 @@ import {
   FlowGroupApproverInfo,
   DescribeBatchOrganizationRegistrationUrlsResponse,
   ExportContractComparisonTaskRequest,
+  CreateInformationExtractionWebUrlRequest,
   Permission,
   ReleasedApprover,
   DescribeUserFlowTypeRequest,
@@ -1803,6 +1808,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（DescribeInformationExtractionWebUrl）用来获取合同信息提取web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+   */
+  async DescribeInformationExtractionWebUrl(
+    req: DescribeInformationExtractionWebUrlRequest,
+    cb?: (error: string, rep: DescribeInformationExtractionWebUrlResponse) => void
+  ): Promise<DescribeInformationExtractionWebUrlResponse> {
+    return this.request("DescribeInformationExtractionWebUrl", req, cb)
+  }
+
+  /**
      * 检测个人用户是否已经实名。
 
 在调用生成C端用户实名链接（[CreateUserVerifyUrl](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)）接口之前，客户企业应首先调用本接口判断C端用户是否已经完成实名认证。如果用户已经实名，那么无需再次调用（[CreateUserVerifyUrl](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)）生成链接并走实名认证流程。
@@ -1875,6 +1890,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEmployeeQualificationSealQrCodeResponse) => void
   ): Promise<CreateEmployeeQualificationSealQrCodeResponse> {
     return this.request("CreateEmployeeQualificationSealQrCode", req, cb)
+  }
+
+  /**
+     * 此接口（CreateInformationExtractionWebUrl）用来创建合同信息提取web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+
+注: 
+1. pdf、word格式限制大小为10M以下
+2. pdg、jpeg、jpg格式限制大小为5M以下
+     */
+  async CreateInformationExtractionWebUrl(
+    req: CreateInformationExtractionWebUrlRequest,
+    cb?: (error: string, rep: CreateInformationExtractionWebUrlResponse) => void
+  ): Promise<CreateInformationExtractionWebUrlResponse> {
+    return this.request("CreateInformationExtractionWebUrl", req, cb)
   }
 
   /**

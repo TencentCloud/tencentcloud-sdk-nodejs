@@ -658,15 +658,17 @@ export interface DeleteSecurityAPIResourceRequest {
 }
 
 /**
- * HTTP2 回源配置。
+ * 地区策略配置。
  */
-export interface UpstreamHTTP2Parameters {
+export interface FunctionRegionSelection {
   /**
-   * HTTP2 回源配置开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 函数 ID 。
    */
-  Switch?: string
+  FunctionId: string
+  /**
+   * 国家/地区列表。示例值：CN：中国，CN.GD：中国广东。取值请参考：[国家/地区及对应代码枚举](https://cloud.tencent.com/document/product/1552/112542)。
+   */
+  Regions: Array<string>
 }
 
 /**
@@ -1686,9 +1688,25 @@ export interface CreateFunctionRuleRequest {
    */
   FunctionRuleConditions: Array<FunctionRuleCondition>
   /**
-   * 函数 ID，命中触发规则条件后执行的函数。
+   * 函数选择配置类型：
+<li> direct：直接指定执行函数；</li>
+<li> weight：基于权重比选择函数；</li>
+<li> region：基于客户端 IP 的国家/地区选择函数。</li>
+不填时默认为 direct 。
    */
-  FunctionId: string
+  TriggerType?: string
+  /**
+   * 指定执行的函数 ID。当 TriggerType 为 direct 或 TriggerType 不填时生效。
+   */
+  FunctionId?: string
+  /**
+   * 基于客户端 IP 国家/地区的函数选择配置，当 TriggerType 为 region 时生效且 RegionMappingSelections 必填。RegionMappingSelections 中至少包含一项 Regions 为 Default 的配置。
+   */
+  RegionMappingSelections?: Array<FunctionRegionSelection>
+  /**
+   * 基于权重的函数选择配置，当 TriggerType 为 weight 时生效且 WeightedSelections 必填。WeightedSelections 中的所有权重之和需要为100。
+   */
+  WeightedSelections?: Array<FunctionWeightedSelection>
   /**
    * 规则描述，最大支持 60 个字符。
    */
@@ -6425,6 +6443,22 @@ export interface CustomTime {
 }
 
 /**
+ * 权重策略配置。
+ */
+export interface FunctionWeightedSelection {
+  /**
+   * 函数 ID 。
+   */
+  FunctionId: string
+  /**
+   * 选中权重。取值范围0-100，所有的权重之和需要为100。
+选中概率计算方式为：
+weight/100。例如设置了两个函数 A 和 B ，其中 A 的权重为30，那么 B 的权重必须为70，最终选中 A 的概率为30%，选中 B 的概率为70%。
+   */
+  Weight: number
+}
+
+/**
  * 域名配置信息
  */
 export interface DetailHost {
@@ -8937,6 +8971,18 @@ export interface DescribeL7AccSettingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * HTTP2 回源配置。
+ */
+export interface UpstreamHTTP2Parameters {
+  /**
+   * HTTP2 回源配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -13190,7 +13236,7 @@ export interface ModifyFunctionRuleRequest {
    */
   ZoneId: string
   /**
-   * 规则 ID。
+   * 规则 ID。您可以先通过 DescribeFunctionRules 接口来获取需要修改的规则的 RuleId，然后传入修改后的规则内容，原规则内容会被覆盖式更新。
    */
   RuleId: string
   /**
@@ -13198,9 +13244,25 @@ export interface ModifyFunctionRuleRequest {
    */
   FunctionRuleConditions?: Array<FunctionRuleCondition>
   /**
-   * 函数 ID，命中触发规则条件后执行的函数，不填写保持原有配置。
+   * 函数选择配置类型：
+<li> direct：直接指定执行函数；</li>
+<li> weight：基于权重比选择函数；</li>
+<li> region：基于客户端 IP 的国家/地区选择函数。</li>
+不填时默认为 direct 。
+   */
+  TriggerType?: string
+  /**
+   * 指定执行的函数 ID。当 TriggerType 为 direct 或 TriggerType 不填时生效。
    */
   FunctionId?: string
+  /**
+   * 基于客户端 IP 国家/地区的函数选择配置，当 TriggerType 为 region 时生效且 RegionMappingSelections 必填。RegionMappingSelections 中至少包含一项 Regions 为 Default 的配置。
+   */
+  RegionMappingSelections?: Array<FunctionRegionSelection>
+  /**
+   * 基于权重的函数选择配置，当 TriggerType 为 weight 时生效且 WeightedSelections 必填。WeightedSelections 中的所有权重之和需要为100。
+   */
+  WeightedSelections?: Array<FunctionWeightedSelection>
   /**
    * 规则描述，最大支持 60 个字符，不填写保持原有配置。
    */
@@ -13256,21 +13318,37 @@ export interface FunctionRule {
    */
   FunctionRuleConditions?: Array<FunctionRuleCondition>
   /**
-   * 函数 ID，命中触发规则条件后执行的函数。
+   * 函数选择配置类型：
+<li> direct：直接指定执行函数；</li>
+<li> weight：基于权重比选择函数；</li>
+<li> region：基于客户端 IP 的国家/地区选择函数。</li>
+
+   */
+  TriggerType?: string
+  /**
+   * 指定执行的函数 ID。当 TriggerType 为 direct 时有效。
    */
   FunctionId?: string
   /**
-   * 规则描述。
-   */
-  Remark?: string
-  /**
-   * 函数名称。
+   * 指定执行的函数名称。
    */
   FunctionName?: string
+  /**
+   * 基于客户端 IP 国家/地区的函数选择配置。
+   */
+  RegionMappingSelections?: Array<FunctionRegionSelection>
+  /**
+   * 基于权重的函数选择配置。
+   */
+  WeightedSelections?: Array<FunctionWeightedSelection>
   /**
    * 函数触发规则优先级，数值越大，优先级越高。
    */
   Priority?: number
+  /**
+   * 规则描述。
+   */
+  Remark?: string
   /**
    * 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
    */

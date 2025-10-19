@@ -5580,6 +5580,22 @@ export interface DescribeFlowBriefsRequest {
 }
 
 /**
+ * CreateInformationExtractionWebUrl返回参数结构体
+ */
+export interface CreateInformationExtractionWebUrlResponse {
+  /**
+   * 合同信息提取嵌入式web页面链接。
+
+注意：`链接有效期为5分钟，且链接仅能使用一次。`
+   */
+  Url?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateFlowGroupSignReview请求参数结构体
  */
 export interface CreateFlowGroupSignReviewRequest {
@@ -6233,6 +6249,24 @@ export interface CreateFileCounterSignRequest {
 1. 当加签文件较大的时候，建议使用异步接口进行操作。否则文件加签时间过长会导致接口超时。
    */
   SyncMode?: boolean
+}
+
+/**
+ * 提取web嵌入页面个性化设置
+ */
+export interface WebUrlOption {
+  /**
+   * 禁用链接预览
+   */
+  DisableLinkPreview?: boolean
+  /**
+   * 禁用任务编辑
+   */
+  DisableTaskEditing?: boolean
+  /**
+   * 禁用任务结果编辑
+   */
+  DisableTaskResultEditing?: boolean
 }
 
 /**
@@ -9979,6 +10013,21 @@ export interface ModifyPartnerAutoSignAuthUrlRequest {
 }
 
 /**
+ * DescribeInformationExtractionWebUrl返回参数结构体
+ */
+export interface DescribeInformationExtractionWebUrlResponse {
+  /**
+   * 合同信息提取嵌入式web页面链接。
+注意：`链接有效期为5分钟，且链接仅能使用一次。`
+   */
+  Url?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateExtendedServiceAuthInfos请求参数结构体
  */
 export interface CreateExtendedServiceAuthInfosRequest {
@@ -10185,6 +10234,24 @@ export interface SignComponentConfig {
 ![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。
    */
   HideDate?: boolean
+}
+
+/**
+ * DescribeInformationExtractionWebUrl请求参数结构体
+ */
+export interface DescribeInformationExtractionWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 合同信息提取任务ID，该参数可通过回调事件[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)获取或者从控制台信息提取任务列表获取。
+
+注意：`不填写任务ID时返回信息提取任务列表URL，填写任务ID时返回信息提取任务详情URL`
+   */
+  TaskId?: string
 }
 
 /**
@@ -12511,6 +12578,36 @@ export interface ExportContractComparisonTaskRequest {
 </ul>
    */
   Ignore?: boolean
+}
+
+/**
+ * CreateInformationExtractionWebUrl请求参数结构体
+ */
+export interface CreateInformationExtractionWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 需要提取的合同文件资源ID,可通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源ID。
+
+注: 
+-  `word、pdf文件每个文件限制在10M以下`
+-  `png、jpg、jpeg文件每个限制在5M以下`
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
+   */
+  UserData?: string
+  /**
+   * 个性化参数，用于控制页面展示内容
+   */
+  Option?: WebUrlOption
 }
 
 /**

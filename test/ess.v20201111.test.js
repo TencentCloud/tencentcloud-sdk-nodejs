@@ -798,6 +798,16 @@ it("ess.v20201111.CreateBatchOrganizationRegistrationTasks", async function () {
     }
 })
 
+it("ess.v20201111.DescribeInformationExtractionWebUrl", async function () {
+    try {
+       const data = await client.DescribeInformationExtractionWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeUserVerifyStatus", async function () {
     try {
        const data = await client.DescribeUserVerifyStatus({})
@@ -831,6 +841,16 @@ it("ess.v20201111.CreateBatchOrganizationAuthorizationUrl", async function () {
 it("ess.v20201111.CreateEmployeeQualificationSealQrCode", async function () {
     try {
        const data = await client.CreateEmployeeQualificationSealQrCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateInformationExtractionWebUrl", async function () {
+    try {
+       const data = await client.CreateInformationExtractionWebUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

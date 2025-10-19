@@ -876,7 +876,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建任务接口
+   * 获取任务详情接口
    */
   async GetTask(
     req: GetTaskRequest,
@@ -1236,7 +1236,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建文件夹
+   * 更新工作流文件夹
    */
   async UpdateWorkflowFolder(
     req: UpdateWorkflowFolderRequest,
@@ -1246,7 +1246,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建任务接口
+   * 更新任务接口
    */
   async UpdateTask(
     req: UpdateTaskRequest,
