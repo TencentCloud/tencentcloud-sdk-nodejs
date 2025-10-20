@@ -76,6 +76,7 @@ import {
   StopDBImportJobResponse,
   ProxyAllocation,
   StopCpuExpandRequest,
+  DescribeInstancePasswordComplexityRequest,
   ModifyDBInstanceNameRequest,
   TagInfoUnit,
   ModifyAuditRuleResponse,
@@ -327,6 +328,7 @@ import {
   CreateAuditRuleTemplateRequest,
   DatabasePrivilege,
   DescribeAuditPoliciesRequest,
+  DescribeInstancePasswordComplexityResponse,
   AdjustCdbProxyAddressRequest,
   DescribeDatabasesResponse,
   TaskAttachInfo,
@@ -1194,6 +1196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceConfigResponse) => void
   ): Promise<DescribeDBInstanceConfigResponse> {
     return this.request("DescribeDBInstanceConfig", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeInstancePasswordComplexity）用于查询实例的密码复杂度参数列表。
+   */
+  async DescribeInstancePasswordComplexity(
+    req: DescribeInstancePasswordComplexityRequest,
+    cb?: (error: string, rep: DescribeInstancePasswordComplexityResponse) => void
+  ): Promise<DescribeInstancePasswordComplexityResponse> {
+    return this.request("DescribeInstancePasswordComplexity", req, cb)
   }
 
   /**

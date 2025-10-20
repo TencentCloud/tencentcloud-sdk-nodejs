@@ -970,6 +970,40 @@ export interface CreateDLPFileDetectionTaskRequest {
 }
 
 /**
+ * ExportDeviceDownloadTask请求参数结构体
+ */
+export interface ExportDeviceDownloadTaskRequest {
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios；默认值0）
+   */
+  OsType?: number
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 分组id
+   */
+  GroupId?: number
+  /**
+   *  在线状态 2 在线 0，1 离线
+   */
+  OnlineStatus?: number
+  /**
+   * 导出顺序，接口返回的数据字段
+   */
+  ExportOrder?: string
+  /**
+   *  导出类型， 0：终端树；7:硬件信息列表导出；
+   */
+  ExportType?: number
+  /**
+   * 过滤条件。同DescribeDevices接口
+   */
+  Condition?: Condition
+}
+
+/**
  * 软件统计响应对象集合
  */
 export interface DescribeSoftCensusListByDeviceData {
@@ -1791,6 +1825,20 @@ export interface SoftVersionAndNum {
 }
 
 /**
+ * ExportDeviceDownloadTask返回参数结构体
+ */
+export interface ExportDeviceDownloadTaskResponse {
+  /**
+   * 业务响应数据
+   */
+  Data?: DeviceDownloadTask
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 业务响应数据
  */
 export interface DescribeDeviceDetailListPageData {
@@ -2418,6 +2466,20 @@ export interface DescribeDeviceChildGroupsRspData {
    * 返回的数组列表
    */
   Items?: Array<DeviceGroupDetail>
+}
+
+/**
+ * 业务响应数据
+ */
+export interface DeviceDownloadTask {
+  /**
+   * 同步数据下载的url
+   */
+  DownloadURL?: string
+  /**
+   * 异步任务id，需要根据id去任务中心下载
+   */
+  TaskId?: number
 }
 
 /**

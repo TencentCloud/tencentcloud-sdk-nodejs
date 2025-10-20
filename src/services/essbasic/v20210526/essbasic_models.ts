@@ -9960,15 +9960,11 @@ export interface DescribeUserFlowTypeRequest {
    */
   Agent: Agent
   /**
-   * 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。 <ul><li><strong>模板的用户合同类型</strong>：<strong>Key</strong>设置为 <code>user-flow-type-id</code> ，<strong>Values</strong>为您想要查询的用户模版类型id列表。</li></ul>
+   * 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。 <ul><li><strong>模板的用户合同类型</strong>：<strong>Key</strong>设置为 <code>user-flow-type-id</code> ，<strong>Values</strong>为您想要查询的用户模板类型id列表。</li></ul>
    */
   Filters?: Array<Filter>
   /**
-   * 查询绑定了模版的用户合同类型
-<ul>
-<li>false（默认值），查询用户合同类型</li>
-<li>true，查询绑定了模版的用户合同类型</li>
-</ul>
+   * 查询绑定了模板的用户合同类型<ul><li>false（默认值），查询用户合同类型</li><li>true，查询绑定了模板的用户合同类型</li></ul>
    */
   QueryBindTemplate?: boolean
 }

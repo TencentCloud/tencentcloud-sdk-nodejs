@@ -126,6 +126,7 @@ import {
   ListResourceGroupsResponse,
   UpdateResourceFolderRequest,
   ListTaskInstanceExecutionsRequest,
+  MonitorWhiteTask,
   ProjectUsersBrief,
   CodeStudioFolderResult,
   ListOpsTasksPage,

@@ -1608,21 +1608,17 @@ export interface ModifyFirewallRulesResponse {
 }
 
 /**
- * 可用区详细信息
+ * 目标地域镜像信息。
  */
-export interface ZoneInfo {
+export interface DestinationRegionBlueprint {
   /**
-   * 可用区
+   * 目标地域。
    */
-  Zone: string
+  Region?: string
   /**
-   * 可用区中文名称
+   * 目标地域镜像ID。
    */
-  ZoneName: string
-  /**
-   * 实例购买页可用区展示标签
-   */
-  InstanceDisplayLabel: string
+  BlueprintId?: string
 }
 
 /**
@@ -2926,6 +2922,10 @@ export type DescribeCcnAttachedInstancesRequest = null
  */
 export interface SyncBlueprintResponse {
   /**
+   * 目标地域镜像信息。
+   */
+  DestinationRegionBlueprintSet?: Array<DestinationRegionBlueprint>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4079,6 +4079,24 @@ export interface Filter {
    * 字段的过滤值。
    */
   Values: Array<string>
+}
+
+/**
+ * 可用区详细信息
+ */
+export interface ZoneInfo {
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 可用区中文名称
+   */
+  ZoneName: string
+  /**
+   * 实例购买页可用区展示标签
+   */
+  InstanceDisplayLabel: string
 }
 
 /**

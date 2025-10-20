@@ -28,6 +28,16 @@ it("ioa.v20220601.DescribeAggrSoftDeviceList", async function () {
     }
 })
 
+it("ioa.v20220601.ExportDeviceDownloadTask", async function () {
+    try {
+       const data = await client.ExportDeviceDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.CreateDeviceTask", async function () {
     try {
        const data = await client.CreateDeviceTask({})

@@ -44,6 +44,7 @@ import {
   DescribeLocalAccountsPage,
   DescribeSoftwareInformationPageData,
   CreateDLPFileDetectionTaskRequest,
+  ExportDeviceDownloadTaskRequest,
   DescribeSoftCensusListByDeviceData,
   DescribeDeviceInfoRequest,
   DescribeDLPFileDetectTaskResult,
@@ -79,6 +80,7 @@ import {
   DescribeDeviceVirtualGroupsPageRsp,
   AggrSoftDeviceRow,
   SoftVersionAndNum,
+  ExportDeviceDownloadTaskResponse,
   DescribeDeviceDetailListPageData,
   DescribeSoftwareInformationResponse,
   ModifyVirtualDeviceGroupsResponse,
@@ -110,6 +112,7 @@ import {
   RuleExpression,
   DescribeRootAccountGroupRequest,
   DescribeDeviceChildGroupsRspData,
+  DeviceDownloadTask,
   DeviceGroupDetail,
   DescribeSoftCensusListByDevicePageData,
   DescribeDevicesRequest,
@@ -141,6 +144,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAggrSoftDeviceListResponse) => void
   ): Promise<DescribeAggrSoftDeviceListResponse> {
     return this.request("DescribeAggrSoftDeviceList", req, cb)
+  }
+
+  /**
+   * 创建终端导出任务，私有化调用path为：capi/Assets/Device/ExportDeviceDownloadTask
+   */
+  async ExportDeviceDownloadTask(
+    req: ExportDeviceDownloadTaskRequest,
+    cb?: (error: string, rep: ExportDeviceDownloadTaskResponse) => void
+  ): Promise<ExportDeviceDownloadTaskResponse> {
+    return this.request("ExportDeviceDownloadTask", req, cb)
   }
 
   /**

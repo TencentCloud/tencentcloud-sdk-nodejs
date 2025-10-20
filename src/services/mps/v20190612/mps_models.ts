@@ -2555,7 +2555,8 @@ export interface AudioTemplateInfoForUpdate {
    */
   Bitrate?: number
   /**
-   * 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53)
+   * 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。
+详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53)
 单位：Hz
 注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2950,7 +2951,8 @@ export interface AudioTemplateInfo {
    */
   Bitrate: number
   /**
-   * 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53)
+   * 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。
+详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166#f3b039f1-d817-4a96-b4e4-90132d31cd53)
 单位：Hz
 注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！
    */
@@ -16024,8 +16026,12 @@ export interface AiReviewTaskPoliticalResult {
 export interface BeautyEffectItemConfig {
   /**
    * 类型名称。取值如下：
-
 <li>Whiten：美白</li>
+<li>BlackAlpha1：美黑</li>
+<li>BlackAlpha2：较强美黑</li>
+<li>FoundationAlpha2：美白-粉白</li>
+<li>Clear：清晰度</li>
+<li>Sharpen：锐化</li>
 <li>Smooth：磨皮</li>
 <li>BeautyThinFace：瘦脸</li>
 <li>NatureFace：自然脸型</li>
@@ -16035,9 +16041,11 @@ export interface BeautyEffectItemConfig {
 <li>RemoveEyeBags：祛眼袋</li>
 <li>ThinNose：瘦鼻</li>
 <li>RemoveLawLine：祛法令纹</li>
+<li>CheekboneThin：瘦颧骨</li>
+<li>FaceFeatureLipsLut：口红</li>
 <li>ToothWhiten：牙齿美白</li>
-
-
+<li>FaceFeatureSoftlight：柔光</li>
+<li>Makeup：美妆</li>
    */
   Type: string
   /**
@@ -16051,6 +16059,14 @@ export interface BeautyEffectItemConfig {
    * 效果强度，值范围：[0, 100]。
    */
   Value?: number
+  /**
+   * 附加资源路径。
+   */
+  ResourcePath?: string
+  /**
+   * 自定义参数。
+   */
+  ExtInfo?: string
 }
 
 /**

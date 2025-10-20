@@ -688,6 +688,16 @@ it("cdb.v20170320.DescribeDBInstanceConfig", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeInstancePasswordComplexity", async function () {
+    try {
+       const data = await client.DescribeInstancePasswordComplexity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.CreateCdbProxyAddress", async function () {
     try {
        const data = await client.CreateCdbProxyAddress({})

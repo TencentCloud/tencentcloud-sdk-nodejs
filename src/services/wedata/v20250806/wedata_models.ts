@@ -2249,6 +2249,10 @@ export interface AlarmRuleDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReconciliationExtInfo?: Array<ReconciliationStrategyInfo>
+  /**
+   * 监控对象的白名单配置
+   */
+  MonitorWhiteTasks?: Array<MonitorWhiteTask>
 }
 
 /**
@@ -3552,6 +3556,20 @@ export interface ListTaskInstanceExecutionsRequest {
    * 分页页码，默认1
    */
   PageNumber?: number
+}
+
+/**
+ * 告警规则监控白名单配置
+ */
+export interface MonitorWhiteTask {
+  /**
+   * 配置白名单的对应的工作流/项目的id
+   */
+  MonitorObjectId?: string
+  /**
+   * 白名单任务列表
+   */
+  TaskIds?: Array<string>
 }
 
 /**

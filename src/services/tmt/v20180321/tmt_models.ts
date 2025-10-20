@@ -322,6 +322,10 @@ export interface TransDetail {
    * 正常段落spam_code字段为0；如果存在spam_code字段且值大于0（1: 命中垃圾检查；2: 命中安全策略；3: 其他。），则命中安全检查被过滤。
    */
   SpamCode?: number
+  /**
+   * 段落文本旋转信息，只在valid为true时表示坐标有效
+   */
+  RotateParagraphRect?: RotateParagraphRect
 }
 
 /**
@@ -385,6 +389,171 @@ export interface SpeechTranslateRequest {
    * @deprecated
    */
   TransType?: number
+}
+
+/**
+ * 段落文本旋转信息
+ */
+export interface RotateParagraphRect {
+  /**
+   * 段落文本坐标
+   */
+  Coord?: Array<Coord>
+  /**
+   * 旋转角度
+   */
+  TiltAngle?: number
+  /**
+   * 段落文本信息是否有效
+   */
+  Valid?: boolean
+}
+
+/**
+ * TextTranslateBatch请求参数结构体
+ */
+export interface TextTranslateBatchRequest {
+  /**
+   * 源语言，支持： 
+auto：自动识别（识别为一种语言）
+zh：简体中文
+zh-TW：繁体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印尼语
+th：泰语
+ms：马来西亚语
+ar：阿拉伯语
+hi：印地语
+   */
+  Source: string
+  /**
+   * 目标语言，各源语言的目标语言支持列表如下
+
+<li> zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）</li>
+<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）</li>
+<li>en（英语）：zh（中文）、zh-TW（繁体中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）</li>
+<li>ja（日语）：zh（中文）、zh-TW（繁体中文）、en（英语）、ko（韩语）</li>
+<li>ko（韩语）：zh（中文）、zh-TW（繁体中文）、en（英语）、ja（日语）</li>
+<li>fr（法语）：zh（中文）、zh-TW（繁体中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>es（西班牙语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>it（意大利语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>de（德语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>tr（土耳其语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>ru（俄语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）</li>
+<li>pt（葡萄牙语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）</li>
+<li>vi（越南语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
+<li>id（印尼语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
+<li>th（泰语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
+<li>ms（马来语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
+<li>ar（阿拉伯语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
+<li>hi（印地语）：en（英语）</li>
+   */
+  Target: string
+  /**
+   * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+   */
+  ProjectId: number
+  /**
+   * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于6000字符。
+   */
+  SourceTextList: Array<string>
+  /**
+   * 需要使用的术语库列表，通过 [术语库操作指南](https://cloud.tencent.com/document/product/551/107926) 自行创建术语库获取。
+   */
+  TermRepoIDList?: Array<string>
+  /**
+   * 需要使用的例句库列表，通过 [例句库操作指南](https://cloud.tencent.com/document/product/551/107927) 自行创建例句库获取。
+   */
+  SentRepoIDList?: Array<string>
+}
+
+/**
+ * 坐标详细信息
+ */
+export interface Coord {
+  /**
+   * X坐标
+   */
+  X?: number
+  /**
+   * Y坐标
+   */
+  Y?: number
+}
+
+/**
+ * GetFileTranslate返回参数结构体
+ */
+export interface GetFileTranslateResponse {
+  /**
+   * 任务id
+   */
+  Data?: GetFileTranslateData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * FileTranslate返回参数结构体
+ */
+export interface FileTranslateResponse {
+  /**
+   * 文件翻译的请求返回结果，包含结果查询需要的TaskId
+   */
+  Data?: Task
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 文件翻译任务结果
+ */
+export interface GetFileTranslateData {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 任务状态
+
+- init：任务已初始化
+- wait：任务等待执行
+- success：任务执行成功
+- fail：任务执行失败
+   */
+  Status?: string
+  /**
+   * 文件数据，目标文件必须小于50M，否则请通过回调方式请求文件翻译接口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileData?: string
+  /**
+   * 错误提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 任务进度
+   */
+  Progress?: number
+  /**
+   * 本次翻译消耗的字符数
+   */
+  UsedAmount?: number
 }
 
 /**
@@ -457,139 +626,6 @@ hi：印地语
    * 需要使用的例句库列表，通过 [例句库操作指南](https://cloud.tencent.com/document/product/551/107927) 自行创建例句库获取。
    */
   SentRepoIDList?: Array<string>
-}
-
-/**
- * TextTranslateBatch请求参数结构体
- */
-export interface TextTranslateBatchRequest {
-  /**
-   * 源语言，支持： 
-auto：自动识别（识别为一种语言）
-zh：简体中文
-zh-TW：繁体中文
-en：英语
-ja：日语
-ko：韩语
-fr：法语
-es：西班牙语
-it：意大利语
-de：德语
-tr：土耳其语
-ru：俄语
-pt：葡萄牙语
-vi：越南语
-id：印尼语
-th：泰语
-ms：马来西亚语
-ar：阿拉伯语
-hi：印地语
-   */
-  Source: string
-  /**
-   * 目标语言，各源语言的目标语言支持列表如下
-
-<li> zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）</li>
-<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）</li>
-<li>en（英语）：zh（中文）、zh-TW（繁体中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）</li>
-<li>ja（日语）：zh（中文）、zh-TW（繁体中文）、en（英语）、ko（韩语）</li>
-<li>ko（韩语）：zh（中文）、zh-TW（繁体中文）、en（英语）、ja（日语）</li>
-<li>fr（法语）：zh（中文）、zh-TW（繁体中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>es（西班牙语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>it（意大利语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>de（德语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>tr（土耳其语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）</li>
-<li>ru（俄语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）</li>
-<li>pt（葡萄牙语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）</li>
-<li>vi（越南语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
-<li>id（印尼语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
-<li>th（泰语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
-<li>ms（马来语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
-<li>ar（阿拉伯语）：zh（中文）、zh-TW（繁体中文）、en（英语）</li>
-<li>hi（印地语）：en（英语）</li>
-   */
-  Target: string
-  /**
-   * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
-   */
-  ProjectId: number
-  /**
-   * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于6000字符。
-   */
-  SourceTextList: Array<string>
-  /**
-   * 需要使用的术语库列表，通过 [术语库操作指南](https://cloud.tencent.com/document/product/551/107926) 自行创建术语库获取。
-   */
-  TermRepoIDList?: Array<string>
-  /**
-   * 需要使用的例句库列表，通过 [例句库操作指南](https://cloud.tencent.com/document/product/551/107927) 自行创建例句库获取。
-   */
-  SentRepoIDList?: Array<string>
-}
-
-/**
- * GetFileTranslate返回参数结构体
- */
-export interface GetFileTranslateResponse {
-  /**
-   * 任务id
-   */
-  Data?: GetFileTranslateData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * FileTranslate返回参数结构体
- */
-export interface FileTranslateResponse {
-  /**
-   * 文件翻译的请求返回结果，包含结果查询需要的TaskId
-   */
-  Data?: Task
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 文件翻译任务结果
- */
-export interface GetFileTranslateData {
-  /**
-   * 任务ID
-   */
-  TaskId?: string
-  /**
-   * 任务状态
-
-- init：任务已初始化
-- wait：任务等待执行
-- success：任务执行成功
-- fail：任务执行失败
-   */
-  Status?: string
-  /**
-   * 文件数据，目标文件必须小于50M，否则请通过回调方式请求文件翻译接口
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileData?: string
-  /**
-   * 错误提示
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
-  /**
-   * 任务进度
-   */
-  Progress?: number
-  /**
-   * 本次翻译消耗的字符数
-   */
-  UsedAmount?: number
 }
 
 /**
