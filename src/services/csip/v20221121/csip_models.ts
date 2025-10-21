@@ -5000,6 +5000,10 @@ export interface AccessKeyAlarm {
    * 告警规则标识
    */
   RuleKey?: string
+  /**
+   * 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云
+   */
+  CloudType?: number
 }
 
 /**
@@ -6946,6 +6950,10 @@ export interface AccessKeyAsset {
 1 表示检测中
    */
   CheckStatus?: number
+  /**
+   * 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云
+   */
+  CloudType?: number
 }
 
 /**
@@ -8771,6 +8779,7 @@ export interface SourceIPAsset {
   Region?: string
   /**
    * 调用方式
+-1:未统计
 0:控制台调用
 1:API
    */
@@ -8823,6 +8832,15 @@ export interface SourceIPAsset {
    * 运营商字段
    */
   ISP?: string
+  /**
+   * 账号外vpc信息
+   */
+  VpcInfo?: Array<SourceIPVpcInfo>
+  /**
+   * 云类型
+0为腾讯云
+   */
+  CloudType?: number
 }
 
 /**
@@ -9688,6 +9706,10 @@ export interface AccessKeyUser {
    * 0 表示已检测 1 表示检测中
    */
   CheckStatus?: number
+  /**
+   * 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云
+   */
+  CloudType?: number
 }
 
 /**

@@ -2004,6 +2004,24 @@ export interface UpgradeGrafanaInstanceResponse {
 }
 
 /**
+ * DescribeRemoteWrites返回参数结构体
+ */
+export interface DescribeRemoteWritesResponse {
+  /**
+   * 存储数据
+   */
+  Count?: number
+  /**
+   * 多写信息
+   */
+  RemoteWrites?: Array<WriteDestination>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindingPolicyTag请求参数结构体
  */
 export interface BindingPolicyTagRequest {
@@ -5077,6 +5095,16 @@ export interface DescribeGrafanaNotificationChannelsResponse {
 }
 
 /**
+ * 数据写向目标
+ */
+export interface WriteDestination {
+  /**
+   * 存储标识
+   */
+  Destination?: string
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual.CalcType
  */
 export interface DescribePolicyConditionListConfigManualCalcType {
@@ -5463,6 +5491,24 @@ export interface DescribeBindingPolicyObjectListInstanceGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Regions: Array<string>
+}
+
+/**
+ * DescribeRemoteWrites请求参数结构体
+ */
+export interface DescribeRemoteWritesRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 列表 offset
+   */
+  Offset?: number
+  /**
+   * 返回 limit
+   */
+  Limit?: number
 }
 
 /**
@@ -6302,7 +6348,7 @@ export interface GetMonitorDataRequest {
    */
   EndTime?: string
   /**
-   * 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合。注意: 仅支持对API配置文档中展示的统计方式返回对应的统计数据。如所需的统计方式不满足您的查询需求，请提工单反馈。
+   * 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合。特别说明：建议查询时严格参考API配置文档中提供的统计方式。如选择其他未提供的统计方式，可能有数据统计误差。
    */
   SpecifyStatistics?: number
 }
@@ -9708,6 +9754,10 @@ export interface DeleteAlertRulesResponse {
  * DescribePrometheusScrapeStatistics请求参数结构体
  */
 export interface DescribePrometheusScrapeStatisticsRequest {
+  /**
+   * 实例ID列表
+   */
+  InstanceIds: Array<string>
   /**
    * job 类型
    */

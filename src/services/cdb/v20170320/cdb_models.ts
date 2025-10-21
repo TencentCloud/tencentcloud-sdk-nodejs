@@ -5449,6 +5449,14 @@ export interface DescribeAccountsRequest {
    * 匹配账号名的正则表达式，规则同 MySQL 官网。
    */
   AccountRegexp?: string
+  /**
+   * 默认无排序，支持：ASC、DESC、asc、desc
+   */
+  SortBy?: string
+  /**
+   * 待排序的时间字段，可选：CreateTime(账号创建时间)、ModifyTime(账号更新时间)、ModifyPasswordTime(密码修改时间)
+   */
+  OrderBy?: string
 }
 
 /**

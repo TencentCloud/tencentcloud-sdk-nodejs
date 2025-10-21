@@ -88,7 +88,8 @@ export interface IsolateMigrateJobResponse {
  */
 export interface ModifyMigrateJobSpecRequest {
   /**
-   * 任务id
+   * 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -394,19 +395,19 @@ export interface ContinueMigrateJobRequest {
  */
 export interface ResetConsumerGroupOffsetRequest {
   /**
-   * 订阅实例id
+   * 订阅实例id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   SubscribeId: string
   /**
-   * 订阅的kafka topic
+   * 订阅的kafka topic，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   TopicName: string
   /**
-   * 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}
+   * 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/api/571/102947)接口获取。
    */
   ConsumerGroupName: string
   /**
-   * 需要修改offset的分区编号
+   * 需要修改offset的分区编号，可通过[DescribeOffsetByTime](https://cloud.tencent.com/document/api/571/102946)接口获取。
    */
   PartitionNos: Array<number | bigint>
   /**
@@ -424,7 +425,7 @@ export interface ResetConsumerGroupOffsetRequest {
  */
 export interface ModifySyncRateLimitRequest {
   /**
-   * 迁移任务ID
+   * 同步任务ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   JobId: string
   /**
@@ -432,7 +433,7 @@ export interface ModifySyncRateLimitRequest {
    */
   DumpThread?: number
   /**
-   * 同步任务全量导出的 Rps 限制、需要大于 0
+   * 同步任务全量导出的 Rps 限制、需要大于 0;对于mongodb最大值为20000，其他数据库最大值为50000000
    */
   DumpRps?: number
   /**
@@ -507,7 +508,8 @@ export interface ErrorInfoItem {
  */
 export interface IsolateMigrateJobRequest {
   /**
-   * 任务id
+   * 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
 }
@@ -645,11 +647,13 @@ export interface SubscribeInfo {
  */
 export interface ModifyCompareTaskNameRequest {
   /**
-   * 迁移任务 Id
+   * 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
-   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
+   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   CompareTaskId: string
   /**
@@ -805,7 +809,8 @@ export interface DescribeSubscribeReturnableRequest {
  */
 export interface DescribeMigrationDetailRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
 }
@@ -842,11 +847,12 @@ export interface CreateConsumerGroupRequest {
  */
 export interface ResizeSyncJobRequest {
   /**
-   * 同步任务id
+   * 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
+
    */
   JobId: string
   /**
-   * 任务规格
+   * 任务规格，可选值包括micro,small,medium,large
    */
   NewInstanceClass: string
 }
@@ -900,11 +906,11 @@ export interface ConflictHandleOption {
    */
   ConditionColumn?: string
   /**
-   * 条件覆盖操作
+   * 条件覆盖操作，目前仅支持>
    */
   ConditionOperator?: string
   /**
-   * 条件覆盖优先级处理
+   * 条件覆盖优先级处理，支持类型有>,<,=
    */
   ConditionOrderInSrcAndDst?: string
 }
@@ -958,7 +964,7 @@ export interface ModifyCompareTaskNameResponse {
  */
 export interface StartSyncJobRequest {
   /**
-   * 同步任务id
+   * 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   JobId?: string
 }
@@ -1023,7 +1029,7 @@ export interface CreateMigrateCheckJobResponse {
  */
 export interface ModifySyncJobConfigRequest {
   /**
-   * 同步任务id
+   * 同步任务ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   JobId: string
   /**
@@ -1127,7 +1133,8 @@ export interface DetailCheckItem {
  */
 export interface DescribeCompareTasksRequest {
   /**
-   * 迁移任务 Id
+   * 迁移任务 Id，可通过 [DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084) 接口获取。
+
    */
   JobId: string
   /**
@@ -1659,7 +1666,8 @@ export interface ModifySubscribeAutoRenewFlagRequest {
  */
 export interface CompleteMigrateJobRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -1885,6 +1893,22 @@ export interface CompareOptions {
    * 线程数，取值1-8，默认为1
    */
   ThreadCount?: number
+  /**
+   * 对比类型：builtin（内置校验）、independent（独立校验）。默认为builtin，mongodb及redis链路不支持独立校验。
+   */
+  Type?: string
+  /**
+   * 校验类型，枚举值：structureCheck-结构校验(目前仅postgresql支持)、full-全量校验、increment-增量校验(如果勾选了增量校验，Method只能选dataCheck)、advanceObject-数据库信息校验(目前仅mongodb支持)
+   */
+  CompareMode?: Array<string>
+  /**
+   * 复检次数
+   */
+  ReCheckTime?: number
+  /**
+   * 复检时间间隔，单位为分钟，取值 1-60
+   */
+  ReCheckInterval?: number
 }
 
 /**
@@ -1920,7 +1944,8 @@ export interface DescribeMigrationJobsResponse {
  */
 export interface ModifyMigrationJobRequest {
   /**
-   * 任务id
+   * 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -2012,7 +2037,8 @@ export interface ProcessProgress {
  */
 export interface SkipSyncCheckItemRequest {
   /**
-   * 任务id，如：sync-4ddgid2
+   * 任务id，如：sync-4ddgid2，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
+
    */
   JobId: string
   /**
@@ -2688,7 +2714,7 @@ export interface SubscribeCheckStepInfo {
    */
   StepNo?: number
   /**
-   * 当前步骤状态，可能值为 notStarted,running,finished,failed
+   * 当前步骤状态，可能值为 notStarted-未开始，running-运行中，finished-已完成，failed-失败，unknown-未知
    */
   Status?: string
   /**
@@ -2740,7 +2766,7 @@ export interface MigrateDBItem {
  */
 export interface DescribeMigrateDBInstancesRequest {
   /**
-   * 数据库类型，如mysql,redis等
+   * 数据库类型，如mysql,percona,mariadb,tdsqlmysql,mariadb,postgresql,cynosdbmysql,redis,tendis,keewidb,tdstore,mongodb,clickhouse,sqlserver等。
    */
   DatabaseType: string
   /**
@@ -2748,11 +2774,11 @@ export interface DescribeMigrateDBInstancesRequest {
    */
   MigrateRole?: string
   /**
-   * 云数据库实例ID
+   * 云数据库实例ID，可通过对应业务实例列表获取实例信息。
    */
   InstanceId?: string
   /**
-   * 云数据库名称
+   * 云数据库名称，可通过对应业务实例列表获取实例信息。
    */
   InstanceName?: string
   /**
@@ -2822,11 +2848,13 @@ export interface ProcessStepTip {
  */
 export interface ModifyCompareTaskRequest {
   /**
-   * 任务 Id
+   * 任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
-   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
+   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   CompareTaskId: string
   /**
@@ -2852,7 +2880,8 @@ export interface ModifyCompareTaskRequest {
  */
 export interface StopMigrateJobRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
 }
@@ -3102,11 +3131,12 @@ export interface ResumeSubscribeResponse {
  */
 export interface DescribeSyncJobsRequest {
   /**
-   * 同步任务id，如sync-werwfs23
+   * 同步任务id，如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
+
    */
   JobId?: string
   /**
-   * 同步任务id列表，如sync-werwfs23
+   * 同步任务id列表，如["sync-n3gh7md9"]
    */
   JobIds?: Array<string>
   /**
@@ -3114,7 +3144,7 @@ export interface DescribeSyncJobsRequest {
    */
   JobName?: string
   /**
-   * 排序字段，可以取值为CreateTime
+   * 排序字段，目前仅支持CreateTime字段排序
    */
   Order?: string
   /**
@@ -3130,7 +3160,7 @@ export interface DescribeSyncJobsRequest {
    */
   Limit?: number
   /**
-   * 状态集合，如Initialized,CheckPass,Running,ResumableErr,Stopped
+   * 状态集合，如Initialized(初始化),CheckPass(校验通过),Running(运行中),ResumableErr(恢复中),Stopped(已结束)
    */
   Status?: Array<string>
   /**
@@ -3138,7 +3168,7 @@ export interface DescribeSyncJobsRequest {
    */
   RunMode?: string
   /**
-   * 任务类型，如mysql2mysql：msyql同步到mysql
+   * 任务类型，如mysql2mysql：msyql同步到mysql;可取值有mysql2mysql、mysql2kafka、tdsqlmysql2kafka、tdsqlmysql2tdsqlmysql、tdsqlmysql2mysql、mysql2tdsqlmysql、mysql2mariadb、mariadb2mariadb、mariadb2kafka、cynosdbmysql2kafka、cynosdbmysql2cynosdbmysql、cynosdbmysql2mysql、mysql2cynosdbmysql、mariadb2tdsqlmysql、tdsqlmysql2cynosdbmysql、cynosdbmysql2tdsqlmysql、tdstore2mysql、tdstore2percona、tdstore2mariadb、tdstore2cynosdbmysql、cynosdbmysql2mariadb、mariadb2cynosdbmysql、tdsqlmysql2mariadb、mariadb2mysql、percona2mariadb、postgresql2postgresql、tdstore2tdsqlmysql、mongodb2mongodb
    */
   JobType?: string
   /**
@@ -3229,7 +3259,7 @@ export interface DescribeConsumerGroupsResponse {
  */
 export interface ModifyMigrateRateLimitRequest {
   /**
-   * 迁移任务ID
+   * 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
    */
   JobId: string
   /**
@@ -3381,7 +3411,8 @@ export interface SubscribeObject {
  */
 export interface ResumeMigrateJobRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -3405,7 +3436,7 @@ export interface PauseSyncJobResponse {
  */
 export interface DescribeSubscribeCheckJobRequest {
   /**
-   * 数据订阅实例的 ID
+   * 数据订阅实例的 ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   SubscribeId: string
 }
@@ -3623,11 +3654,12 @@ export interface RateLimitOption {
  */
 export interface SkipCheckItemRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
-   * 需要跳过校验项的步骤id，需要通过DescribeMigrationCheckJob接口返回StepInfo[i].StepId字段获取，例如：["OptimizeCheck"]
+   * 需要跳过校验项的步骤id，需要通过[DescribeMigrationCheckJob](https://cloud.tencent.com/document/product/571/82086)接口返回StepInfo[i].StepId字段获取，例如：["OptimizeCheck"]
    */
   StepIds: Array<string>
   /**
@@ -3823,7 +3855,8 @@ export interface CreateSyncJobResponse {
  */
 export interface CreateCompareTaskRequest {
   /**
-   * 任务 Id
+   * 任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -4085,7 +4118,8 @@ export interface CreateModifyCheckSyncJobResponse {
  */
 export interface ModifyMigrateNameRequest {
   /**
-   * 迁移任务id
+   * 迁移任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -4147,7 +4181,8 @@ export interface StartSyncJobResponse {
  */
 export interface StartMigrateJobRequest {
   /**
-   * 数据迁移任务ID
+   * 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
 }
@@ -4298,11 +4333,11 @@ export interface DBItem {
  */
 export interface DeleteCompareTaskRequest {
   /**
-   * 迁移任务 Id
+   * 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
    */
   JobId: string
   /**
-   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
+   * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9。可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
    */
   CompareTaskId: string
 }
@@ -4474,7 +4509,7 @@ export interface Endpoint {
  */
 export interface ConfigureSubscribeJobRequest {
   /**
-   * 数据订阅实例的 ID
+   * 数据订阅实例的 ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   SubscribeId: string
   /**
@@ -4576,11 +4611,11 @@ export interface SyncJobInfo {
    */
   SrcRegion?: string
   /**
-   * 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
+   * 源端数据库类型，mysql,tdsqlmysql,mariadb,cynosdbmysql(表示tdsql-c实例),tdstore,percona,postgresql,mongodb等。
    */
   SrcDatabaseType?: string
   /**
-   * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
+   * 源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
    */
   SrcAccessType?: string
   /**
@@ -4600,7 +4635,7 @@ export interface SyncJobInfo {
    */
   DstRegion?: string
   /**
-   * 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
+   * 目标端数据库类型，mysql,tdsqlmysql,mariadb,cynosdbmysql(表示tdsql-c实例),tdstore,percona,postgresql,mongodb等。
    */
   DstDatabaseType?: string
   /**
@@ -4686,7 +4721,7 @@ export interface DescribeSubscribeCheckJobResponse {
    */
   Message?: string
   /**
-   * 任务运行状态，可能值为 running,failed,success
+   * 任务运行状态，可能值为 running(运行中),failed(失败),success(成功),unknown(未知状态)。
    */
   Status?: string
   /**
@@ -4806,7 +4841,7 @@ export interface CreateSyncJobRequest {
    */
   DstRegion: string
   /**
-   * 同步任务规格，Standard:标准版
+   * 同步任务规格，Standard:标准版，目前仅支持Standard规格。
    */
   Specification?: string
   /**
@@ -4985,7 +5020,7 @@ export interface RecoverMigrateJobRequest {
  */
 export interface OnlineDDL {
   /**
-   * 状态
+   * 状态，ON-启用，OFF-不启用。
    */
   Status: string
 }
@@ -5032,7 +5067,9 @@ export interface DatabaseTableObject {
    */
   Databases?: Array<DBItem>
   /**
-   * 高级对象类型，如trigger、function、procedure、event。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型
+   * 高级对象类型，如trigger(触发器)、function(函数)、procedure(存储过程)、event(事件)。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型。
+
+> 当前支持高级对象迁移的场景为MySQL、TDSQL-CMySQL、MariaDB、Percona之间的数据迁移。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedObjects?: Array<string>
@@ -5043,7 +5080,8 @@ export interface DatabaseTableObject {
  */
 export interface ModifyMigrateRuntimeAttributeRequest {
   /**
-   * 迁移任务id，如：dts-2rgv0f09
+   * 迁移任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+
    */
   JobId: string
   /**
@@ -5212,4 +5250,17 @@ export interface ConsistencyOption {
    * 一致性检测类型: full(全量检测迁移对象)、noCheck(不检测)、notConfigured(未配置)
    */
   Mode?: string
+  /**
+   * 校验对象选择。枚举值：sameAsMigrate-与迁移同步任务相同、custom-用户自定义，搭配Objects操作
+   */
+  ObjectMode?: string
+  /**
+   * 校验对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Objects?: DatabaseTableObject
+  /**
+   * 校验配置
+   */
+  Options?: CompareOptions
 }

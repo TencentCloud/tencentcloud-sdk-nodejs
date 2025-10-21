@@ -462,6 +462,26 @@ export interface DescribeInstanceLogsRequest {
 <li>1, 升序</li>
    */
   OrderByType?: number
+  /**
+   * 日志级别
+   */
+  LogLevels?: Array<string>
+  /**
+   * 节点ID
+   */
+  NodeIds?: Array<string>
+  /**
+   * 慢日志索引名
+   */
+  IndexName?: string
+  /**
+   * 慢日志索引分片
+   */
+  ShardId?: string
+  /**
+   * 慢日志查询耗时
+   */
+  QueryCost?: number
 }
 
 /**
@@ -1138,6 +1158,14 @@ export interface ServerlessSpace {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<TagInfo>
+  /**
+   * 是否开启mcp服务
+   */
+  EnableMcpAccess?: number
+  /**
+   * mcp的访问地址
+   */
+  McpAccess?: string
 }
 
 /**
@@ -1383,6 +1411,18 @@ export interface InstanceLog {
    * 集群节点ID
    */
   NodeID?: string
+  /**
+   * 慢日志索引名
+   */
+  IndexName?: string
+  /**
+   * 慢日志索引分片
+   */
+  Shard?: string
+  /**
+   * 慢日志索引查询耗时
+   */
+  QueryCost?: string
 }
 
 /**

@@ -292,7 +292,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 配置迁移服务，配置成功后可通过`CreateMigrationCheckJob` 创建迁移校验任务接口发起校验任务，只有校验通过才能启动迁移任务。
+   * 配置迁移服务，配置成功后可通过`CreateMigrateCheckJob` 创建迁移校验任务接口发起校验任务，只有校验通过才能启动迁移任务。
    */
   async ModifyMigrationJob(
     req: ModifyMigrationJobRequest,
@@ -342,7 +342,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用户在发现迁移任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
+   * 用户在发现迁移任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率；此操作仅在任务运行中可执行。
    */
   async ModifyMigrateRateLimit(
     req: ModifyMigrateRateLimitRequest,
@@ -584,7 +584,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重试数据迁移任务，针对异常情况可进行重试，对于redis在失败时也可重试。注意：此操作跳过校验阶段，直接重新发起任务，相当于从StartMigrationJob开始执行。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
+   * 重试数据迁移任务，针对异常情况可进行重试，对于redis在失败时也可重试。
    */
   async ResumeMigrateJob(
     req: ResumeMigrateJobRequest,
@@ -594,7 +594,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（StopMigrateJob）用于终止数据迁移任务。
+     * 本接口（StopMigrateJob）用于终止数据迁移任务。当任务状态为运行中、准备运行、准备完成、错误、暂停、未知等状态时可调用此接口终止任务。
 调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
      */
   async StopMigrateJob(
@@ -665,7 +665,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  隔离退还数据迁移服务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。对于计费任务，在任务隔离后可进行解除隔离(RecoverMigrationJob)操作或直接进行下线销毁(DestroyMigrateJob)操作。对于不计费任务，调用此接口会直接销毁任务，无法进行恢复操作。
+   * 隔离退还数据迁移服务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。对于计费任务，在任务隔离后可进行解除隔离(RecoverMigrateJob)操作或直接进行下线销毁(DestroyMigrateJob)操作。对于不计费任务，调用此接口会直接销毁任务，无法进行恢复操作。
    */
   async IsolateMigrateJob(
     req: IsolateMigrateJobRequest,
@@ -747,7 +747,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询一致性校验任务列表，调用该接口后可通过接口`DescribeCompareTasks` 查询一致性校验任务列表来获得启动后的状态。
+   * 查询一致性校验任务列表。
    */
   async DescribeCompareTasks(
     req: DescribeCompareTasksRequest,
@@ -924,7 +924,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（StartMigrationJob）用于启动迁移任务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
+   * 本接口（StartMigrateJob）用于启动迁移任务。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
    */
   async StartMigrateJob(
     req: StartMigrateJobRequest,
@@ -934,7 +934,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调整实例规格，此接口只支持按量计费任务的调整。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
+   * 调整实例规格，此接口只支持按量计费任务的调整，且仅在计费或者待计费状态下支持修改。调用此接口后可通过查询迁移服务列表接口`DescribeMigrationJobs`来查询当前任务状态。
    */
   async ModifyMigrateJobSpec(
     req: ModifyMigrateJobSpecRequest,
@@ -977,7 +977,6 @@ export class Client extends AbstractClient {
      * 本接口（CompleteMigrateJob）用于完成数据迁移任务。
 选择采用增量迁移方式的任务, 需要在迁移进度进入准备完成阶段后, 调用本接口, 停止迁移增量数据。
 通过DescribeMigrationJobs接口查询到任务的状态为准备完成（Status="readyComplete"）时，此时可以调用本接口完成迁移任务。
-
      */
   async CompleteMigrateJob(
     req: CompleteMigrateJobRequest,

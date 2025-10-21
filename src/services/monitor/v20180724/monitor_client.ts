@@ -95,6 +95,7 @@ import {
   UninstallGrafanaPluginsResponse,
   ModifyPrometheusTempRequest,
   UpgradeGrafanaInstanceResponse,
+  DescribeRemoteWritesResponse,
   BindingPolicyTagRequest,
   DeletePrometheusTempSyncResponse,
   DescribeDNSConfigRequest,
@@ -229,6 +230,7 @@ import {
   AlarmPolicyEventCondition,
   DeleteAlarmNoticesRequest,
   DescribeGrafanaNotificationChannelsResponse,
+  WriteDestination,
   DescribePolicyConditionListConfigManualCalcType,
   ResumeGrafanaInstanceResponse,
   DescribeAccidentEventListResponse,
@@ -248,6 +250,7 @@ import {
   GrafanaAccountInfo,
   DescribePrometheusTargetsTMPRequest,
   DescribeBindingPolicyObjectListInstanceGroup,
+  DescribeRemoteWritesRequest,
   ModifyAlarmPolicyTasksRequest,
   GetPrometheusAgentManagementCommandRequest,
   DescribeBindingPolicyObjectListDimension,
@@ -1075,6 +1078,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeGrafanaInstanceResponse) => void
   ): Promise<UpgradeGrafanaInstanceResponse> {
     return this.request("UpgradeGrafanaInstance", req, cb)
+  }
+
+  /**
+   * 查询安装的 Agent 列表
+   */
+  async DescribeRemoteWrites(
+    req: DescribeRemoteWritesRequest,
+    cb?: (error: string, rep: DescribeRemoteWritesResponse) => void
+  ): Promise<DescribeRemoteWritesResponse> {
+    return this.request("DescribeRemoteWrites", req, cb)
   }
 
   /**
