@@ -530,17 +530,33 @@ en时，添加的key为英语
 }
 
 /**
- * RecognizeTravelCardOCR请求参数结构体
+ * QuestionSplitLayoutOCR请求参数结构体
  */
-export interface RecognizeTravelCardOCRRequest {
+export interface QuestionSplitLayoutOCRRequest {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
    */
-  ImageUrl?: string
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
+  /**
+   * 是否开启切边增强和弯曲矫正,默认为false不开启
+   */
+  EnableImageCrop?: boolean
+  /**
+   * false: 使用当前默认模型  true: 使用新的多模态推理模型，速度更快推理效果更强，仅 `EnableOnlyDetectBorder` 为 `true` 时生效，公测中
+   */
+  UseNewModel?: boolean
 }
 
 /**
@@ -742,6 +758,25 @@ export interface ItemInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: Value
+}
+
+/**
+ * 增值税发票卷票信息
+ */
+export interface VatRollInvoiceInfo {
+  /**
+   * 识别出的字段名称(关键字)，支持以下字段：
+发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。
+   */
+  Name?: string
+  /**
+   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+   */
+  Value?: string
+  /**
+   * 文本行在旋转纠正之后的图像中的像素坐标。
+   */
+  Rect?: Rect
 }
 
 /**
@@ -2885,41 +2920,17 @@ export interface ExtractDocMultiProResponse {
 }
 
 /**
- * 单元格数据
+ * RecognizeTravelCardOCR请求参数结构体
  */
-export interface TableCellInfo {
+export interface RecognizeTravelCardOCRRequest {
   /**
-   * 单元格左上角的列索引
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  ColTl: number
+  ImageBase64?: string
   /**
-   * 单元格左上角的行索引
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  RowTl: number
-  /**
-   * 单元格右下角的列索引
-   */
-  ColBr: number
-  /**
-   * 单元格右下角的行索引
-   */
-  RowBr: number
-  /**
-   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
-   */
-  Text: string
-  /**
-   * 单元格类型
-   */
-  Type: string
-  /**
-   * 单元格置信度
-   */
-  Confidence: number
-  /**
-   * 单元格在图像中的四点坐标
-   */
-  Polygon: Array<Coord>
+  ImageUrl?: string
 }
 
 /**
@@ -5755,29 +5766,13 @@ export interface VehicleRegCertOCRRequest {
 }
 
 /**
- * RecognizeTravelCardOCR返回参数结构体
+ * QuestionSplitLayoutOCR返回参数结构体
  */
-export interface RecognizeTravelCardOCRResponse {
+export interface QuestionSplitLayoutOCRResponse {
   /**
-   * 行程卡更新时间，格式为：XXXX.XX.XX XX:XX:XX
+   * 检测到的文本信息
    */
-  Time?: string
-  /**
-   * 行程卡颜色：绿色、黄色、红色
-   */
-  Color?: string
-  /**
-   * 7天内到达或途经的城市（自2022年7月8日起，通信行程卡查询结果的覆盖时间范围由“14天”调整为“7天”）
-   */
-  ReachedCity?: Array<string>
-  /**
-   * 7天内到达或途径存在中高风险地区的城市（自2022年6月29日起，通信行程卡取消“星号”标记，改字段将返回空值）
-   */
-  RiskArea?: Array<string>
-  /**
-   * 电话号码
-   */
-  Telephone?: string
+  QuestionInfo?: Array<QuestionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7223,22 +7218,17 @@ export interface FinanBillSliceInfo {
 }
 
 /**
- * 增值税发票卷票信息
+ * 购物小票
  */
-export interface VatRollInvoiceInfo {
+export interface ShoppingReceipt {
   /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。
+   * 发票名称
    */
-  Name?: string
+  Title?: string
   /**
-   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+   * 识别出的字段名称(关键字)
    */
-  Value?: string
-  /**
-   * 文本行在旋转纠正之后的图像中的像素坐标。
-   */
-  Rect?: Rect
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -10043,6 +10033,184 @@ export interface TaxiTicket {
 }
 
 /**
+ * 二手车销售统一发票
+ */
+export interface UsedCarPurchaseInvoice {
+  /**
+   * 发票名称
+   */
+  Title?: string
+  /**
+   * 是否存在二维码（0：没有，1：有）
+   */
+  QRCodeMark?: number
+  /**
+   * 发票代码
+   */
+  Code?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 开票日期
+   */
+  Date?: string
+  /**
+   * 价税合计（小写）
+   */
+  Total?: string
+  /**
+   * 价税合计（大写）
+   */
+  TotalCn?: string
+  /**
+   * 销货单位名称
+   */
+  Seller?: string
+  /**
+   * 销售方电话
+   */
+  SellerTel?: string
+  /**
+   * 销售方单位代码/个人身份证号
+   */
+  SellerTaxID?: string
+  /**
+   * 销售方地址
+   */
+  SellerAddress?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 购买方单位代码/个人身份证号
+   */
+  BuyerID?: string
+  /**
+   * 购买方地址
+   */
+  BuyerAddress?: string
+  /**
+   * 购买方电话
+   */
+  BuyerTel?: string
+  /**
+   * 二手车市场
+   */
+  CompanyName?: string
+  /**
+   * 二手车市场纳税人识别号
+   */
+  CompanyTaxID?: string
+  /**
+   * 二手车市场开户银行和账号
+   */
+  CompanyBankAccount?: string
+  /**
+   * 二手车市场电话
+   */
+  CompanyTel?: string
+  /**
+   * 二手车市场地址
+   */
+  CompanyAddress?: string
+  /**
+   * 转入地车辆管理所名称
+   */
+  TransferAdministrationName?: string
+  /**
+   * 车牌号
+   */
+  LicensePlate?: string
+  /**
+   * 登记证号
+   */
+  RegistrationNumber?: string
+  /**
+   * 车辆识别代码
+   */
+  VIN?: string
+  /**
+   * 厂牌型号
+   */
+  VehicleModel?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 市
+   */
+  City?: string
+  /**
+   * 车辆类型
+   */
+  VehicleType?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 发票联次
+   */
+  FormType?: string
+  /**
+   * 发票联名
+   */
+  FormName?: string
+  /**
+   * 是否有公司印章（0：没有，1：有）
+   */
+  CompanySealMark?: number
+  /**
+   * 经营拍卖单位
+   */
+  AuctionOrgName?: string
+  /**
+   * 经营拍卖单位地址
+   */
+  AuctionOrgAddress?: string
+  /**
+   * 经营拍卖单位纳税人识别号
+   */
+  AuctionOrgTaxID?: string
+  /**
+   * 经营拍卖单位开户银行账号
+   */
+  AuctionOrgBankAccount?: string
+  /**
+   * 经营拍卖单位电话
+   */
+  AuctionOrgPhone?: string
+  /**
+   * 开票人
+   */
+  Issuer?: string
+  /**
+   * 税控码
+   */
+  TaxCode?: string
+  /**
+   * 机器编号
+   */
+  MachineSerialNumber?: string
+  /**
+   * 机打发票代码
+   */
+  MachineCode?: string
+  /**
+   * 机打发票号码
+   */
+  MachineNumber?: string
+}
+
+/**
  * EnglishOCR返回参数结构体
  */
 export interface EnglishOCRResponse {
@@ -10818,17 +10986,33 @@ DOUBLE 为行驶证主页正面和副页正面。
 }
 
 /**
- * 购物小票
+ * RecognizeTravelCardOCR返回参数结构体
  */
-export interface ShoppingReceipt {
+export interface RecognizeTravelCardOCRResponse {
   /**
-   * 发票名称
+   * 行程卡更新时间，格式为：XXXX.XX.XX XX:XX:XX
    */
-  Title?: string
+  Time?: string
   /**
-   * 识别出的字段名称(关键字)
+   * 行程卡颜色：绿色、黄色、红色
    */
-  Content?: Array<OtherInvoiceItem>
+  Color?: string
+  /**
+   * 7天内到达或途经的城市（自2022年7月8日起，通信行程卡查询结果的覆盖时间范围由“14天”调整为“7天”）
+   */
+  ReachedCity?: Array<string>
+  /**
+   * 7天内到达或途径存在中高风险地区的城市（自2022年6月29日起，通信行程卡取消“星号”标记，改字段将返回空值）
+   */
+  RiskArea?: Array<string>
+  /**
+   * 电话号码
+   */
+  Telephone?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11696,181 +11880,41 @@ export interface GeneralFastOCRResponse {
 }
 
 /**
- * 二手车销售统一发票
+ * 单元格数据
  */
-export interface UsedCarPurchaseInvoice {
+export interface TableCellInfo {
   /**
-   * 发票名称
+   * 单元格左上角的列索引
    */
-  Title?: string
+  ColTl: number
   /**
-   * 是否存在二维码（0：没有，1：有）
+   * 单元格左上角的行索引
    */
-  QRCodeMark?: number
+  RowTl: number
   /**
-   * 发票代码
+   * 单元格右下角的列索引
    */
-  Code?: string
+  ColBr: number
   /**
-   * 发票号码
+   * 单元格右下角的行索引
    */
-  Number?: string
+  RowBr: number
   /**
-   * 开票日期
+   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
    */
-  Date?: string
+  Text: string
   /**
-   * 价税合计（小写）
+   * 单元格类型
    */
-  Total?: string
+  Type: string
   /**
-   * 价税合计（大写）
+   * 单元格置信度
    */
-  TotalCn?: string
+  Confidence: number
   /**
-   * 销货单位名称
+   * 单元格在图像中的四点坐标
    */
-  Seller?: string
-  /**
-   * 销售方电话
-   */
-  SellerTel?: string
-  /**
-   * 销售方单位代码/个人身份证号
-   */
-  SellerTaxID?: string
-  /**
-   * 销售方地址
-   */
-  SellerAddress?: string
-  /**
-   * 购买方名称
-   */
-  Buyer?: string
-  /**
-   * 购买方单位代码/个人身份证号
-   */
-  BuyerID?: string
-  /**
-   * 购买方地址
-   */
-  BuyerAddress?: string
-  /**
-   * 购买方电话
-   */
-  BuyerTel?: string
-  /**
-   * 二手车市场
-   */
-  CompanyName?: string
-  /**
-   * 二手车市场纳税人识别号
-   */
-  CompanyTaxID?: string
-  /**
-   * 二手车市场开户银行和账号
-   */
-  CompanyBankAccount?: string
-  /**
-   * 二手车市场电话
-   */
-  CompanyTel?: string
-  /**
-   * 二手车市场地址
-   */
-  CompanyAddress?: string
-  /**
-   * 转入地车辆管理所名称
-   */
-  TransferAdministrationName?: string
-  /**
-   * 车牌号
-   */
-  LicensePlate?: string
-  /**
-   * 登记证号
-   */
-  RegistrationNumber?: string
-  /**
-   * 车辆识别代码
-   */
-  VIN?: string
-  /**
-   * 厂牌型号
-   */
-  VehicleModel?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 省
-   */
-  Province?: string
-  /**
-   * 市
-   */
-  City?: string
-  /**
-   * 车辆类型
-   */
-  VehicleType?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 发票联次
-   */
-  FormType?: string
-  /**
-   * 发票联名
-   */
-  FormName?: string
-  /**
-   * 是否有公司印章（0：没有，1：有）
-   */
-  CompanySealMark?: number
-  /**
-   * 经营拍卖单位
-   */
-  AuctionOrgName?: string
-  /**
-   * 经营拍卖单位地址
-   */
-  AuctionOrgAddress?: string
-  /**
-   * 经营拍卖单位纳税人识别号
-   */
-  AuctionOrgTaxID?: string
-  /**
-   * 经营拍卖单位开户银行账号
-   */
-  AuctionOrgBankAccount?: string
-  /**
-   * 经营拍卖单位电话
-   */
-  AuctionOrgPhone?: string
-  /**
-   * 开票人
-   */
-  Issuer?: string
-  /**
-   * 税控码
-   */
-  TaxCode?: string
-  /**
-   * 机器编号
-   */
-  MachineSerialNumber?: string
-  /**
-   * 机打发票代码
-   */
-  MachineCode?: string
-  /**
-   * 机打发票号码
-   */
-  MachineNumber?: string
+  Polygon: Array<Coord>
 }
 
 /**

@@ -18,27 +18,31 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeImageToVideoGeneralJobResponse,
+  SubmitVideoStylizationJobRequest,
+  LogoParam,
+  SubmitImageAnimateJobRequest,
+  SubmitPortraitSingJobResponse,
+  DescribePortraitSingJobRequest,
+  SubmitImageToVideoGeneralJobResponse,
+  SubmitImageAnimateJobResponse,
+  DescribeTemplateToVideoJobResponse,
   CheckAnimateImageJobResponse,
-  SubmitTemplateToVideoJobRequest,
   SubmitTemplateToVideoJobResponse,
   CheckAnimateImageJobRequest,
   DescribeVideoStylizationJobRequest,
-  DescribePortraitSingJobRequest,
   DescribeImageAnimateJobResponse,
-  SubmitVideoStylizationJobRequest,
   SubmitPortraitSingJobRequest,
-  Image,
   LogoRect,
-  SubmitImageAnimateJobResponse,
-  DescribeTemplateToVideoJobResponse,
-  DescribeTemplateToVideoJobRequest,
-  SubmitVideoStylizationJobResponse,
   DescribeVideoStylizationJobResponse,
-  SubmitImageAnimateJobRequest,
+  SubmitVideoStylizationJobResponse,
+  SubmitTemplateToVideoJobRequest,
+  SubmitImageToVideoGeneralJobRequest,
+  Image,
+  DescribeImageToVideoGeneralJobRequest,
+  DescribeTemplateToVideoJobRequest,
   DescribeImageAnimateJobRequest,
   DescribePortraitSingJobResponse,
-  SubmitPortraitSingJobResponse,
-  LogoParam,
 } from "./vclm_models"
 
 /**
@@ -123,6 +127,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 图生视频通用能力接口
+   */
+  async SubmitImageToVideoGeneralJob(
+    req: SubmitImageToVideoGeneralJobRequest,
+    cb?: (error: string, rep: SubmitImageToVideoGeneralJobResponse) => void
+  ): Promise<SubmitImageToVideoGeneralJobResponse> {
+    return this.request("SubmitImageToVideoGeneralJob", req, cb)
+  }
+
+  /**
    * 检查图片跳舞输入图
    */
   async CheckAnimateImageJob(
@@ -140,5 +154,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoStylizationJobResponse) => void
   ): Promise<DescribeVideoStylizationJobResponse> {
     return this.request("DescribeVideoStylizationJob", req, cb)
+  }
+
+  /**
+   * 查询图生视频通用能力任务接口
+   */
+  async DescribeImageToVideoGeneralJob(
+    req: DescribeImageToVideoGeneralJobRequest,
+    cb?: (error: string, rep: DescribeImageToVideoGeneralJobResponse) => void
+  ): Promise<DescribeImageToVideoGeneralJobResponse> {
+    return this.request("DescribeImageToVideoGeneralJob", req, cb)
   }
 }

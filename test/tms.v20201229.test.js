@@ -18,9 +18,29 @@ const client = new tencentcloud.tms.v20201229.Client({
 })
 describe("tms.v20201229.test.js", function () {
 
+it("tms.v20201229.CreateFinancialLLMTask", async function () {
+    try {
+       const data = await client.CreateFinancialLLMTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tms.v20201229.TextModeration", async function () {
     try {
        const data = await client.TextModeration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tms.v20201229.GetFinancialLLMTaskResult", async function () {
+    try {
+       const data = await client.GetFinancialLLMTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

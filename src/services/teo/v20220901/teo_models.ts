@@ -276,6 +276,20 @@ export interface DescribeWebSecurityTemplatesRequest {
 }
 
 /**
+ * IP 情报库（原客户端画像分析）配置。
+ */
+export interface IPReputation {
+  /**
+   * IP 情报库（原客户端画像分析）。取值有：<li>on：开启；</li><li>off：关闭。</li>
+   */
+  Enabled?: string
+  /**
+   * IP 情报库（原客户端画像分析）的具体配置内容。
+   */
+  IPReputationGroup?: IPReputationGroup
+}
+
+/**
  * CreateSecurityAPIService请求参数结构体
  */
 export interface CreateSecurityAPIServiceRequest {
@@ -339,6 +353,20 @@ export interface OriginACLEntity {
 <li>disable：停用。</li>
    */
   OperationMode: string
+}
+
+/**
+ * IDC 规则配置的具体内容。
+ */
+export interface SourceIDC {
+  /**
+   * 来自指定 IDC 请求的处置方式。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Disabled：未启用，不启用指定规则；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；</li><li>Allow：放行（待废弃）。</li>
+   */
+  BaseAction?: SecurityAction
+  /**
+   * 指定 IDC 请求的处置方式。
+   */
+  BotManagementActionOverrides?: Array<BotManagementActionOverrides>
 }
 
 /**
@@ -617,6 +645,32 @@ export interface AccessURLRedirectQueryString {
 <li>ignore：全部忽略。</li>
    */
   Action?: string
+}
+
+/**
+ * 浏览器伪造识别规则（原主动特征识别规则）。
+ */
+export interface BrowserImpersonationDetectionRule {
+  /**
+   * 浏览器伪造识别规则的 ID。<br>通过规则 ID 可支持不同的规则配置操作：<br> <li> <b>增加</b>新规则：ID 为空或不指定 ID 参数；</li><li><b>修改</b>已有规则：指定需要更新/修改的规则 ID；</li><li><b>删除</b>已有规则：BrowserImpersonationDetection 参数中，Rules 列表中未包含的已有规则将被删除。</li>
+   */
+  Id?: string
+  /**
+   * 浏览器伪造识别规则的名称。
+   */
+  Name?: string
+  /**
+   * 浏览器伪造识别规则是否开启。取值有：<li>on：开启；</li><li>off：关闭。</li>
+   */
+  Enabled?: string
+  /**
+   * 浏览器伪造识别规则的具体内容，其中仅支持请求方式（Method）、请求路径（Path）和请求 URL 的配置，需符合表达式语法，详细规范参见产品文档。
+   */
+  Condition?: string
+  /**
+   * 浏览器伪造识别规则的处置方式，包括 Cookie 校验和会话跟踪配置以及客户端行为校验配置。
+   */
+  Action?: BrowserImpersonationDetectionAction
 }
 
 /**
@@ -2015,6 +2069,28 @@ export interface CreateFunctionRequest {
 }
 
 /**
+ * 会话速率和周期特征校验配置。
+ */
+export interface SessionRateControl {
+  /**
+   * 会话速率和周期特征校验配置是否开启。取值有：<li>on：启用</li><li>off：关闭</li>
+   */
+  Enabled?: string
+  /**
+   * 会话速率和周期特征校验高风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  HighRateSessionAction?: SecurityAction
+  /**
+   * 会话速率和周期特征校验中风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  MidRateSessionAction?: SecurityAction
+  /**
+   * 会话速率和周期特征校验低风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  LowRateSessionAction?: SecurityAction
+}
+
+/**
  * POST 请求上传文件流式传输最大限制。
  */
 export interface PostMaxSizeParameters {
@@ -2761,6 +2837,7 @@ export interface SecurityAction {
 <li>Disabled：未启用，不启用指定规则；</li>
 <li>Allow：允许访问，但延迟处理请求；</li>
 <li>Challenge：挑战，响应挑战内容；</li>
+<li>Trans：放行，允许请求直接访问站点资源；</li>
 <li>BlockIP：待废弃，IP 封禁；</li>
 <li>ReturnCustomPage：待废弃，使用指定页面拦截；</li>
 <li>JSChallenge：待废弃，JavaScript 挑战；</li>
@@ -3047,7 +3124,7 @@ export interface DescribeZonesResponse {
    */
   TotalCount?: number
   /**
-   * 站点详细信息。
+   * 站点列表详情。
    */
   Zones?: Array<Zone>
   /**
@@ -3124,6 +3201,20 @@ export interface DescribeSecurityAPIServiceRequest {
    * 分页查询偏移量。默认值：0。
    */
   Offset?: number
+}
+
+/**
+ * Bot 浏览器校验规则（原主动特征识别规则）的 Action。
+ */
+export interface BrowserImpersonationDetectionAction {
+  /**
+   * Cookie 校验和会话跟踪配置。
+   */
+  BotSessionValidation?: BotSessionValidation
+  /**
+   * 客户端行为校验配置。
+   */
+  ClientBehaviorDetection?: ClientBehaviorDetection
 }
 
 /**
@@ -3228,6 +3319,18 @@ export interface CurrentOriginACL {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPlaned?: string
+}
+
+/**
+ * Ipv6访问配置
+ */
+export interface Ipv6 {
+  /**
+   * Ipv6 访问功能配置，取值有：
+<li>on：开启Ipv6访问功能；</li>
+<li>off：关闭Ipv6访问功能。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -3491,6 +3594,20 @@ export interface CacheKeyConfigParameters {
    * 查询字符串保留配置参数。此字段和 FullURLCache 必须同时设置，但不能同为 on。
    */
   QueryString?: CacheKeyQueryString
+}
+
+/**
+ * Bot 管理中校验的触发阈值。
+ */
+export interface MaxNewSessionTriggerConfig {
+  /**
+   * 触发阈值统计的时间窗口，取值有：<li>5s：5 秒内；</li><li>10s：10 秒内；</li><li>15s：15 秒内；</li><li>30s：30 秒内；</li><li>60s：60 秒内；</li><li>5m：5 分钟内；</li><li>10m：10 分钟内；</li><li>30m：30 分钟内；</li><li>60m：60 分钟内。</li>
+   */
+  MaxNewSessionCountInterval?: string
+  /**
+   * 触发阈值统计的累计次数，取值范围 1 ~ 100000000。
+   */
+  MaxNewSessionCountThreshold?: number
 }
 
 /**
@@ -4483,11 +4600,11 @@ export interface ModifySecurityPolicyRequest {
    */
   ZoneId: string
   /**
-   * 安全策略配置。<li>当 SecurityPolicy 参数中的 ExceptionRules 被设置时，SecurityConfig 参数中的 ExceptConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 CustomRules 被设置时，SecurityConfig 参数中的 AclConfig、 IpTableConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 HttpDDoSProtection 和 RateLimitingRules 被设置时，SecurityConfig 参数中的 RateLimitConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略；</li><li>对于例外规则、自定义规则、速率限制以及托管规则策略配置建议使用 SecurityPolicy 参数进行设置。</li>
+   * 安全策略配置。<li>当 SecurityPolicy 参数中的 ExceptionRules 被设置时，SecurityConfig 参数中的 ExceptConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 CustomRules 被设置时，SecurityConfig 参数中的 AclConfig、 IpTableConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 HttpDDoSProtection 和 RateLimitingRules 被设置时，SecurityConfig 参数中的 RateLimitConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略；</li><li>当 SecurityPolicy 参数中的 BotManagement 被设置时，SecurityConfig 参数中的 BotConfig 将被忽略；</li><li>对于例外规则、自定义规则、速率限制、托管规则以及 Bot 管理策略配置建议使用 SecurityPolicy 参数进行设置。</li>
    */
   SecurityConfig: SecurityConfig
   /**
-   * 安全策略配置。对 Web 例外规则、防护自定义策略、速率规则和托管规则配置建议使用，支持表达式语法对安全策略进行配置。
+   * 安全策略配置。对 Web 例外规则、防护自定义策略、速率规则、托管规则和 Bot 管理配置建议使用，支持表达式语法对安全策略进行配置。
    */
   SecurityPolicy?: SecurityPolicy
   /**
@@ -5368,7 +5485,7 @@ export interface UpstreamCertInfo {
 }
 
 /**
- * 站点信息
+ * 站点详情。
  */
 export interface Zone {
   /**
@@ -5380,13 +5497,53 @@ export interface Zone {
    */
   ZoneName?: string
   /**
-   * 站点当前使用的 NS 列表。
+   * 同名站点标识。允许输入数字、英文、"." 、"-" 和 "_" 组合，长度 200 个字符以内。
    */
-  OriginalNameServers?: Array<string>
+  AliasZoneName?: string
   /**
-   * 腾讯云分配的 NS 列表。
+   * 站点加速区域，取值有：
+<li> global：全球可用区；</li>
+<li> mainland：中国大陆可用区；</li>
+<li> overseas：全球可用区（不含中国大陆）。</li>
    */
-  NameServers?: Array<string>
+  Area?: string
+  /**
+   * 站点接入类型，取值有：
+<li> full：NS 接入类型；</li>
+<li> partial：CNAME 接入类型；</li>
+<li> noDomainAccess：无域名接入类型；</li>
+<li>dnsPodAccess：DNSPod 托管类型，该类型要求您的域名已托管在腾讯云 DNSPod；</li>
+<li> pages：Pages 类型。</li>
+   */
+  Type?: string
+  /**
+   * 站点关联的标签。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 计费资源列表。
+   */
+  Resources?: Array<Resource>
+  /**
+   * NS 类型站点详情。仅当 Type = full 时返回值。
+   */
+  NSDetail?: NSDetail
+  /**
+   * CNAME 类型站点详情。仅当 Type = partial 时返回值。
+   */
+  CNAMEDetail?: CNAMEDetail
+  /**
+   * DNSPod 托管类型站点详情。仅当 Type = dnsPodAccess 时返回值。
+   */
+  DNSPodDetail?: DNSPodDetail
+  /**
+   * 站点创建时间。
+   */
+  CreatedOn?: string
+  /**
+   * 站点修改时间。
+   */
+  ModifiedOn?: string
   /**
    * 站点状态，取值有：
 <li> active：NS 已切换； </li>
@@ -5397,61 +5554,11 @@ export interface Zone {
    */
   Status?: string
   /**
-   * 站点接入方式，取值有：
-<li> full：NS 接入；</li>
-<li> partial：CNAME 接入；</li>
-<li> noDomainAccess：无域名接入；</li>
-   */
-  Type?: string
-  /**
-   * 站点是否关闭。
-   */
-  Paused?: boolean
-  /**
-   * 是否开启 CNAME 加速，取值有：
-<li> enabled：开启；</li>
-<li> disabled：关闭。</li>
-   */
-  CnameSpeedUp?: string
-  /**
    * CNAME 接入状态，取值有：
 <li> finished：站点已验证；</li>
 <li> pending：站点验证中。</li>
    */
   CnameStatus?: string
-  /**
-   * 资源标签列表。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 计费资源列表。
-   */
-  Resources?: Array<Resource>
-  /**
-   * 站点创建时间。
-   */
-  CreatedOn?: string
-  /**
-   * 站点修改时间。
-   */
-  ModifiedOn?: string
-  /**
-   * 站点接入地域，取值有：
-<li> global：全球；</li>
-<li> mainland：中国大陆；</li>
-<li> overseas：境外区域。</li>
-   */
-  Area?: string
-  /**
-   * 用户自定义 NS 信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VanityNameServers?: VanityNameServers
-  /**
-   * 用户自定义 NS IP 信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VanityNameServersIps?: Array<VanityNameServersIps>
   /**
    * 展示状态，取值有：
 <li> active：已启用；</li>
@@ -5460,24 +5567,49 @@ export interface Zone {
    */
   ActiveStatus?: string
   /**
-   * 站点别名。数字、英文、-和_组合，限制20个字符。
-   */
-  AliasZoneName?: string
-  /**
-   * 是否伪站点，取值有：
-<li> 0：非伪站点；</li>
-<li> 1：伪站点。</li>
-   */
-  IsFake?: number
-  /**
    * 锁定状态，取值有：<li> enable：正常，允许进行修改操作；</li><li> disable：锁定中，不允许进行修改操作；</li><li> plan_migrate：套餐迁移中，不允许进行修改操作。</li>
    */
   LockStatus?: string
   /**
-   * 归属权验证信息。
+   * 站点是否关闭。
+   */
+  Paused?: boolean
+  /**
+   * 是否伪站点（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段），取值有：
+<li> 0：非伪站点；</li>
+<li> 1：伪站点。</li>
+
+   */
+  IsFake?: number
+  /**
+   * 是否开启 CNAME 加速（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段），取值有：
+<li> enabled：开启；</li>
+<li> disabled：关闭。</li>
+   */
+  CnameSpeedUp?: string
+  /**
+   * 归属权验证信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnershipVerification?: OwnershipVerification
+  /**
+   * 站点当前使用的 NS 列表。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段）
+   */
+  OriginalNameServers?: Array<string>
+  /**
+   * 腾讯云分配的 NS 列表。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段）
+   */
+  NameServers?: Array<string>
+  /**
+   * 用户自定义 NS 信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VanityNameServers?: VanityNameServers
+  /**
+   * 用户自定义 NS IP 信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VanityNameServersIps?: Array<VanityNameServersIps>
 }
 
 /**
@@ -5527,6 +5659,32 @@ export interface BindSecurityTemplateToEntityResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Bot 管理的基础配置，对策略关联的所有域名生效。可以通过 CustomRules 进行精细化定制。
+ */
+export interface BasicBotSettings {
+  /**
+   * 客户端 IP 的来源 IDC 配置，用于处置来自 IDC（数据中心） 的客户端 IP 的访问请求。此类来源请求不是由移动端或浏览器端直接访问。
+   */
+  SourceIDC?: SourceIDC
+  /**
+   * 搜索引擎爬虫配置，用于处置来自搜索引擎爬虫的请求。此类请求的 IP、User-Agent 或 rDNS 结果匹配已知搜索引擎爬虫。
+   */
+  SearchEngineBots?: SearchEngineBots
+  /**
+   * 商业或开源工具 UA 特征配置（原 UA 特征规则），用于处置来自已知商业工具或开源工具的访问请求。此类请求的 User-Agent 头部符合已知商业或开源工具特征。
+   */
+  KnownBotCategories?: KnownBotCategories
+  /**
+   * IP 威胁情报库（原客户端画像分析）配置，用于处置近期访问行为具有特定风险特征的客户端 IP。
+   */
+  IPReputation?: IPReputation
+  /**
+   * Bot 智能分析的具体配置。
+   */
+  BotIntelligence?: BotIntelligence
 }
 
 /**
@@ -5786,7 +5944,7 @@ export interface DescribeZonesRequest {
   Limit?: number
   /**
    * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：
-<li>zone-name：按照站点名称进行过滤；</li><li>zone-id：按照站点 ID进行过滤。站点 ID 形如：zone-2noz78a8ev6k；</li><li>status：按照站点状态进行过滤；</li><li>tag-key：按照标签键进行过滤；</li><li>tag-value： 按照标签值进行过滤。</li><li>alias-zone-name： 按照同名站点标识进行过滤。</li>模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。
+<li>zone-name：按照站点名称进行过滤；</li><li>zone-type：按照站点类型进行过滤。可选项：<br>   full：NS 接入类型；<br>   partial：CNAME 接入类型；<br>   partialComposite：无域名接入类型；<br>   dnsPodAccess：DNSPod 托管接入类型；<br>   pages：Pages 类型。</li><li>zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；</li><li>status：按照站点状态进行过滤。可选项：<br>   active：NS 已切换；<br>   pending：NS 待切换；<br>   deleted：已删除。</li><li>tag-key：按照标签键进行过滤；</li><li>tag-value： 按照标签值进行过滤；</li><li>alias-zone-name： 按照同名站点标识进行过滤。</li>模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。
    */
   Filters?: Array<AdvancedFilter>
   /**
@@ -6307,6 +6465,19 @@ export interface DownloadL7LogsRequest {
    * 分页的偏移量，默认值为 0。
    */
   Offset?: number
+}
+
+/**
+ * DNSPod 托管类型站点参数详情。
+ */
+export interface DNSPodDetail {
+  /**
+   * 是否伪站点，取值有：
+<li> 0：非伪站点；</li>
+<li> 1：伪站点。</li>
+
+   */
+  IsFake?: number
 }
 
 /**
@@ -7394,6 +7565,28 @@ export interface CreateAccelerationDomainRequest {
 }
 
 /**
+ * 基于客户端和请求特征，将请求来源分为人类来源请求、合法 Bot 请求、疑似 Bot 请求和高风险 Bot 请求，并提供请求处置选项。
+ */
+export interface BotRatings {
+  /**
+   * 恶意 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Allow：放行；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。</li>
+   */
+  HighRiskBotRequestsAction?: SecurityAction
+  /**
+   * 疑似 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Allow：放行；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。</li>
+   */
+  LikelyBotRequestsAction?: SecurityAction
+  /**
+   * 友好 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Allow：放行；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。</li>
+   */
+  VerifiedBotRequestsAction?: SecurityAction
+  /**
+   * 正常 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：<li>Allow：放行。</li>
+   */
+  HumanRequestsAction?: SecurityAction
+}
+
+/**
  * 规则引擎常规类型的动作
  */
 export interface NormalAction {
@@ -8090,6 +8283,20 @@ export interface DescribeOriginGroupRequest {
 }
 
 /**
+ * 商业或开源工具 UA 特征配置（原 UA 特征规则）。
+ */
+export interface KnownBotCategories {
+  /**
+   * 来自已知商业工具或开源工具的访问请求的处置方式。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Disabled：未启用，不启用指定规则；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；</li><li>Allow：放行（待废弃）。</li>
+   */
+  BaseAction?: SecurityAction
+  /**
+   * 指定已知商业工具或开源工具的访问请求的处置方式。
+   */
+  BotManagementActionOverrides?: Array<BotManagementActionOverrides>
+}
+
+/**
  * CreateSecurityClientAttester请求参数结构体
  */
 export interface CreateSecurityClientAttesterRequest {
@@ -8460,9 +8667,25 @@ export interface ModifyMultiPathGatewayResponse {
  */
 export interface BotManagement {
   /**
-   * 客户端认证规则的定义列表。该功能内测中，如需使用，请提工单或联系智能客服。
+   * Bot 管理是否开启。取值有：<li>on：开启；</li><li>off：关闭。</li>
+   */
+  Enabled?: string
+  /**
+   * Bot 管理的自定义规则，组合各类爬虫和请求行为特征，精准定义 Bot 并配置定制化处置方式。
+   */
+  CustomRules?: BotManagementCustomRules
+  /**
+   * Bot 管理的基础配置，对策略关联的所有域名生效。可以通过 CustomRules 进行精细化定制。
+   */
+  BasicBotSettings?: BasicBotSettings
+  /**
+   * 客户端认证规则的定义列表。该功能内测中，如需使用，请提工单。
    */
   ClientAttestationRules?: ClientAttestationRules
+  /**
+   * 配置浏览器伪造识别规则（原主动特征识别规则）。设置注入 JavaScript 的响应页面范围，浏览器校验选项，以及对非浏览器客户端的处置方式。
+   */
+  BrowserImpersonationDetection?: BrowserImpersonationDetection
 }
 
 /**
@@ -9157,6 +9380,16 @@ export interface WafRule {
 }
 
 /**
+ * 浏览器伪造识别规则（原主动特征识别规则）的配置。
+ */
+export interface BrowserImpersonationDetection {
+  /**
+   * 浏览器伪造识别规则的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时： <br> <li>  若未指定 SecurityPolicy.BotManagement.BrowserImpersonationDetection 中的 Rules 参数，或 Rules 参数长度为零： 清空所有浏览器伪造识别规则配置。</li> <li> 若 SecurityPolicy.BotManagement 参数中，未指定 BrowserImpersonationDetection 参数值： 保持已有浏览器伪造识别规则配置，不做修改。</li>
+   */
+  Rules?: Array<BrowserImpersonationDetectionRule>
+}
+
+/**
  * ModifyApplicationProxy请求参数结构体
  */
 export interface ModifyApplicationProxyRequest {
@@ -9348,15 +9581,37 @@ export interface MutualTLS {
 }
 
 /**
- * Ipv6访问配置
+ * 客户端行为校验
  */
-export interface Ipv6 {
+export interface ClientBehaviorDetection {
   /**
-   * Ipv6 访问功能配置，取值有：
-<li>on：开启Ipv6访问功能；</li>
-<li>off：关闭Ipv6访问功能。</li>
+   * 工作量证明校验强度。取值有：<li>low：低；</li><li>medium：中；</li><li>high：高。</li>
    */
-  Switch: string
+  CryptoChallengeIntensity?: string
+  /**
+   * 客户端行为校验的执行方式。取值有：<li>0ms：立即执行；</li><li>100ms：延迟 100ms 执行；</li><li>200ms：延迟 200ms 执行；</li><li>300ms：延迟 300ms 执行；</li><li>400ms：延迟 400ms 执行；</li><li>500ms：延迟 500ms 执行；</li><li>600ms：延迟 600ms 执行；</li><li>700ms：延迟 700ms 执行；</li><li>800ms：延迟 800ms 执行；</li><li>900ms：延迟 900ms 执行；</li><li>1000ms：延迟 1000ms 执行。</li>
+   */
+  CryptoChallengeDelayBefore?: string
+  /**
+   * 触发阈值统计的时间窗口，取值有：<li>5s：5 秒内；</li><li>10s：10 秒内；</li><li>15s：15 秒内；</li><li>30s：30 秒内；</li><li>60s：60 秒内；</li><li>5m：5 分钟内；</li><li>10m：10 分钟内；</li><li>30m：30 分钟内；</li><li>60m：60 分钟内。</li>
+   */
+  MaxChallengeCountInterval?: string
+  /**
+   * 触发阈值统计的累计次数，取值范围 1 ~ 100000000。
+   */
+  MaxChallengeCountThreshold?: number
+  /**
+   * 客户端未启用 JS（未完成检测）时的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  ChallengeNotFinishedAction?: SecurityAction
+  /**
+   * 客户端检测超时的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  ChallengeTimeoutAction?: SecurityAction
+  /**
+   * Bot 客户端的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  BotClientAction?: SecurityAction
 }
 
 /**
@@ -9712,6 +9967,42 @@ export interface GrpcParameters {
 }
 
 /**
+ * Bot 自定义规则的配置。
+ */
+export interface BotManagementCustomRules {
+  /**
+   * Bot 自定义规则的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时： <br> <li>  若未指定 SecurityPolicy.BotManagement.CustomRules 中的 Rules 参数，或 Rules 参数长度为零：清空所有 Bot 自定义规则配置。</li> <li> 若 SecurityPolicy.BotManagement 参数中，未指定 CustomRules 参数值：保持已有 Bot 自定义规则配置，不做修改。</li>
+   */
+  Rules?: Array<BotManagementCustomRule>
+}
+
+/**
+ * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。
+ */
+export interface MultiPathGatewayNextOriginACL {
+  /**
+   * 版本号。
+   */
+  Version?: number
+  /**
+   * 回源 IP 网段详情。
+   */
+  EntireAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段新增的部分。
+   */
+  AddedAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段删减的部分。
+   */
+  RemovedAddresses?: Addresses
+  /**
+   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段无变化的部分。
+   */
+  NoChangeAddresses?: Addresses
+}
+
+/**
  * 规则引擎可应用于匹配请求的设置详细信息，可选参数配置项
  */
 export interface RuleChoicePropertiesItem {
@@ -9910,55 +10201,29 @@ export interface ManagedRuleGroup {
 }
 
 /**
- * CreateZone请求参数结构体
+ * Cookie 校验和会话跟踪行为具体配置。
  */
-export interface CreateZoneRequest {
+export interface BotSessionValidation {
   /**
-   * 站点接入类型。该参数取值如下，不填写时默认为 partial：
-<li>partial：CNAME 接入；</li>
-<li>full：NS 接入；</li>
-<li>noDomainAccess：无域名接入；</li>
-<li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>
+   * 是否更新 Cookie 并校验。取值有：<li>on：更新 Cookie 并校验；</li><li>off：仅校验。</li>
    */
-  Type?: string
+  IssueNewBotSessionCookie?: string
   /**
-   * 站点名称。CNAME/NS 接入的时，请传入二级域名（example.com）作为站点名称；无域名接入时，该值请保留为空。
+   * 更新 Cookie 并校验时的触发阈值，仅当 IssueNewBotSessionCookie 为 on 时有效。
    */
-  ZoneName?: string
+  MaxNewSessionTriggerConfig?: MaxNewSessionTriggerConfig
   /**
-   * Type 取值为 partial/full 时，七层域名的加速区域。以下为该参数取值，不填写时该值默认为 overseas。Type 取值为 noDomainAccess 时该值请保留为空：
-<li> global: 全球可用区；</li>
-<li> mainland: 中国大陆可用区；</li>
-<li> overseas: 全球可用区（不含中国大陆）。</li>
+   * 未携带 Cookie 或 Cookie 已过期的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
    */
-  Area?: string
+  SessionExpiredAction?: SecurityAction
   /**
-   * 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，可通过 [CreatePlan](https://cloud.tencent.com/document/product/1552/105771) 购买套餐。
-注意：如果不填写此参数，将创建一个处于“init”状态的站点，该站点为未激活状态，并不会显示在控制台上。您可以通过访问 [BindZoneToPlan](https://cloud.tencent.com/document/product/1552/83042) 来绑定套餐并激活站点，激活后站点可以正常提供服务。
-
-
+   * 不合法 Cookie 的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
    */
-  PlanId?: string
+  SessionInvalidAction?: SecurityAction
   /**
-   * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。
+   * 会话速率和周期特征校验的具体配置。
    */
-  AliasZoneName?: string
-  /**
-   * 标签。该参数用于对站点进行分权限管控、分账。需要先前往 [标签控制台](https://console.cloud.tencent.com/tag/taglist) 创建对应的标签才可以在此处传入对应的标签键和标签值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 是否允许重复接入。
-<li> true：允许重复接入；</li>
-<li> false：不允许重复接入。</li>不填写使用默认值false。
-   * @deprecated
-   */
-  AllowDuplicates?: boolean
-  /**
-   * 是否跳过站点现有的DNS记录扫描。默认值：false。
-   * @deprecated
-   */
-  JumpStart?: boolean
+  SessionRateControl?: SessionRateControl
 }
 
 /**
@@ -10491,34 +10756,18 @@ export interface ModifyL4ProxyStatusRequest {
 }
 
 /**
- * CreateMultiPathGatewayLine请求参数结构体
+ * DescribeSecurityPolicy返回参数结构体
  */
-export interface CreateMultiPathGatewayLineRequest {
+export interface DescribeSecurityPolicyResponse {
   /**
-   * 站点 ID 。
+   * 安全策略配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: string
+  SecurityPolicy?: SecurityPolicy
   /**
-   * 多通道安全网关 ID 。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GatewayId: string
-  /**
-   * 线路类型，取值有：
- <li>direct ：直连线路，不支持修改和删除。</li> <li>proxy ：EdgeOne 四层代理线路，支持修改实例 ID 和规则 ID，不支持删除。</li> <li>custom ：自定义线路，支持修改、删除实例 ID 和规则 ID。</li>
-   */
-  LineType: string
-  /**
-   * 线路地址，格式为 ip:port。
-   */
-  LineAddress: string
-  /**
-   * 四层代理实例 ID，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可由接口 [DescribeL4Proxy](https://cloud.tencent.com/document/api/1552/103413) 获取。
-   */
-  ProxyId?: string
-  /**
-   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可以从接口 [DescribeL4ProxyRules](https://cloud.tencent.com/document/api/1552/103412) 获取。
-   */
-  RuleId?: string
+  RequestId?: string
 }
 
 /**
@@ -10787,29 +11036,21 @@ export interface CreateApplicationProxyRequest {
 }
 
 /**
- * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。
+ * ConfirmMultiPathGatewayOriginACL请求参数结构体
  */
-export interface MultiPathGatewayNextOriginACL {
+export interface ConfirmMultiPathGatewayOriginACLRequest {
   /**
-   * 版本号。
+   * 站点 ID。
    */
-  Version?: number
+  ZoneId: string
   /**
-   * 回源 IP 网段详情。
+   * 网关 ID。
    */
-  EntireAddresses?: Addresses
+  GatewayId: string
   /**
-   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段新增的部分。
+   * 回源 IP 版本号。
    */
-  AddedAddresses?: Addresses
-  /**
-   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段删减的部分。
-   */
-  RemovedAddresses?: Addresses
-  /**
-   * 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段无变化的部分。
-   */
-  NoChangeAddresses?: Addresses
+  OriginACLVersion: number
 }
 
 /**
@@ -11785,6 +12026,58 @@ export interface OfflineCacheParameters {
 <li>off：关闭。</li>
    */
   Switch?: string
+}
+
+/**
+ * CreateZone请求参数结构体
+ */
+export interface CreateZoneRequest {
+  /**
+   * 站点接入类型。该参数取值如下，不填写时默认为 partial：
+<li>partial：CNAME 接入；</li>
+<li>full：NS 接入；</li>
+<li>noDomainAccess：无域名接入；</li>
+<li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>
+   */
+  Type?: string
+  /**
+   * 站点名称。CNAME/NS 接入的时，请传入二级域名（example.com）作为站点名称；无域名接入时，该值请保留为空。
+   */
+  ZoneName?: string
+  /**
+   * Type 取值为 partial/full 时，七层域名的加速区域。以下为该参数取值，不填写时该值默认为 overseas。Type 取值为 noDomainAccess 时该值请保留为空：
+<li> global: 全球可用区；</li>
+<li> mainland: 中国大陆可用区；</li>
+<li> overseas: 全球可用区（不含中国大陆）。</li>
+   */
+  Area?: string
+  /**
+   * 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，可通过 [CreatePlan](https://cloud.tencent.com/document/product/1552/105771) 购买套餐。
+注意：如果不填写此参数，将创建一个处于“init”状态的站点，该站点为未激活状态，并不会显示在控制台上。您可以通过访问 [BindZoneToPlan](https://cloud.tencent.com/document/product/1552/83042) 来绑定套餐并激活站点，激活后站点可以正常提供服务。
+
+
+   */
+  PlanId?: string
+  /**
+   * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。
+   */
+  AliasZoneName?: string
+  /**
+   * 标签。该参数用于对站点进行分权限管控、分账。需要先前往 [标签控制台](https://console.cloud.tencent.com/tag/taglist) 创建对应的标签才可以在此处传入对应的标签键和标签值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 是否允许重复接入。
+<li> true：允许重复接入；</li>
+<li> false：不允许重复接入。</li>不填写使用默认值false。
+   * @deprecated
+   */
+  AllowDuplicates?: boolean
+  /**
+   * 是否跳过站点现有的DNS记录扫描。默认值：false。
+   * @deprecated
+   */
+  JumpStart?: boolean
 }
 
 /**
@@ -12778,6 +13071,21 @@ export interface TemplateConfig {
 }
 
 /**
+ * Bot 规则项的具体配置，用于覆盖上层的默认配置。
+ */
+export interface BotManagementActionOverrides {
+  /**
+   * Bot 规则组下的具体项，用于改写此单条规则项配置的内容，Ids 所对应的具体信息请参考 DescribeBotManagedRules 接口返回的信息。
+   */
+  Ids?: Array<string>
+  /**
+   * Ids 中指定 Bot 规则项的处置动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Disabled：未启用，不启用指定规则；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；</li><li>Allow：放行（仅限Bot基础特征管理）。</li>
+
+   */
+  Action?: SecurityAction
+}
+
+/**
  * 自定义错误页面被引用的来源
  */
 export interface ErrorPageReference {
@@ -12806,21 +13114,33 @@ export interface DescribeIdentificationsResponse {
 }
 
 /**
- * ConfirmMultiPathGatewayOriginACL请求参数结构体
+ * Web 安全的 Bot 自定义规则。
  */
-export interface ConfirmMultiPathGatewayOriginACLRequest {
+export interface BotManagementCustomRule {
   /**
-   * 站点 ID。
+   * Bot 自定义规则的 ID。<br>通过规则 ID 可支持不同的规则配置操作：<br> <li> <b>增加</b>新规则：ID 为空或不指定 ID 参数；</li><li><b>修改</b>已有规则：指定需要更新/修改的规则 ID；</li><li><b>删除</b>已有规则：BotManagementCustomRules 参数中，Rules 列表中未包含的已有规则将被删除。</li>
    */
-  ZoneId: string
+  Id?: string
   /**
-   * 网关 ID。
+   * Bot 自定义规则的名称。
    */
-  GatewayId: string
+  Name?: string
   /**
-   * 回源 IP 版本号。
+   * Bot 自定义规则是否开启。取值有：<li>on：开启；</li><li>off：关闭。</li>
    */
-  OriginACLVersion: number
+  Enabled?: string
+  /**
+   * Bot 自定义规则的优先级，范围是 1 ~ 100，默认为 50。
+   */
+  Priority?: number
+  /**
+   * Bot 自定义规则的具体内容，需符合表达式语法，详细规范参见产品文档。
+   */
+  Condition?: string
+  /**
+   * Bot 自定义规则的处置方式。取值有：<li>Monitor：观察；</li><li>Deny：拦截，其中 DenyActionParameters.Name 支持 Deny 和 ReturnCustomPage；</li><li>Challenge：挑战，其中 ChallengeActionParameters.Name 支持 JSChallenge 和 ManagedChallenge；</li><li>Redirect：重定向至 URL。</li>
+   */
+  Action?: Array<SecurityWeightedAction>
 }
 
 /**
@@ -12910,6 +13230,58 @@ export interface ModifyMultiPathGatewayStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IP 情报库（原客户端画像分析）的具体配置。
+ */
+export interface IPReputationGroup {
+  /**
+   * IP 情报库（原客户端画像分析）的执行动作。SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Disabled：未启用，不启用指定规则；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。</li>
+   */
+  BaseAction?: SecurityAction
+  /**
+   * IP 情报库（原客户端画像分析）的具体配置，用于覆盖 BaseAction 中的默认配置。其中 BotManagementActionOverrides 的 Ids 中可以填写：<li>IPREP_WEB_AND_DDOS_ATTACKERS_LOW：网络攻击 - 一般置信度；</li><li>IPREP_WEB_AND_DDOS_ATTACKERS_MID：网络攻击 - 中等置信度；</li><li>IPREP_WEB_AND_DDOS_ATTACKERS_HIGH：网络攻击 - 高置信度；</li><li>IPREP_PROXIES_AND_ANONYMIZERS_LOW：网络代理 - 一般置信度；</li><li>IPREP_PROXIES_AND_ANONYMIZERS_MID：网络代理 - 中等置信度；</li><li>IPREP_PROXIES_AND_ANONYMIZERS_HIGH：网络代理 - 高置信度；</li><li>IPREP_SCANNING_TOOLS_LOW：扫描器 - 一般置信度；</li><li>IPREP_SCANNING_TOOLS_MID：扫描器 - 中等置信度；</li><li>IPREP_SCANNING_TOOLS_HIGH：扫描器 - 高置信度；</li><li>IPREP_ATO_ATTACKERS_LOW：账号接管攻击 - 一般置信度；</li><li>IPREP_ATO_ATTACKERS_MID：账号接管攻击 - 中等置信度；</li><li>IPREP_ATO_ATTACKERS_HIGH：账号接管攻击 - 高置信度；</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW：恶意 BOT - 一般置信度；</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID：恶意 BOT - 中等置信度；</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH：恶意 BOT - 高置信度。</li>
+   */
+  BotManagementActionOverrides?: Array<BotManagementActionOverrides>
+}
+
+/**
+ * NS 接入类型站点参数详情。
+ */
+export interface NSDetail {
+  /**
+   * 是否开启 CNAME 加速，取值有：
+<li> enabled：开启；</li>
+<li> disabled：关闭。</li>
+   */
+  CnameSpeedUp?: string
+  /**
+   * 是否存在同名站点，取值有：
+<li> 0：不存在同名站点；</li>
+<li> 1：已存在同名站点。</li>
+   */
+  IsFake?: number
+  /**
+   * 归属权验证信息。针对 NS 接入类型的站点，将当前的 NS 服务器切换至腾讯云 EdgeOne 指定的 NS 服务器，即视为通过归属权验证。详情请参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789) 。
+   */
+  OwnershipVerification?: OwnershipVerification
+  /**
+   * 由 EdgeOne 检测到的站点当前正在使用的 NS 服务器列表。
+   */
+  OriginalNameServers?: Array<string>
+  /**
+   * 腾讯云 EdgeOne 分配的 NS 服务器列表。需要将当前站点 NS 服务器指向该地址，站点才能生效。
+   */
+  NameServers?: Array<string>
+  /**
+   * 用户自定义 NS 服务器域名信息。如果启用了自定义 NS 服务，需要在域名注册厂商内将 NS 指向该地址。
+   */
+  VanityNameServers?: VanityNameServers
+  /**
+   * 用户自定义 NS 服务器对应的 IP 地址信息。
+   */
+  VanityNameServersIps?: Array<VanityNameServersIps>
 }
 
 /**
@@ -13274,17 +13646,13 @@ export interface ModifyFunctionRuleRequest {
 }
 
 /**
- * DescribePlans返回参数结构体
+ * DescribeSecurityIPGroup返回参数结构体
  */
-export interface DescribePlansResponse {
+export interface DescribeSecurityIPGroupResponse {
   /**
-   * 符合条件的套餐个数。
+   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、IP / 网段总数量、 IP / 网段列表信息和过期时间信息。
    */
-  TotalCount?: number
-  /**
-   * 套餐信息列表。
-   */
-  Plans?: Array<Plan>
+  IPGroups?: Array<IPGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14980,6 +15348,20 @@ export interface CreateSecurityClientAttesterResponse {
 }
 
 /**
+ * 按权重分配的 SecurityAction。
+ */
+export interface SecurityWeightedAction {
+  /**
+   * Bot 自定义规则的处置方式。取值有：<li>Allow：放行，其中 AllowActionParameters 支持 MinDelayTime 和 MaxDelayTime 配置；</li><li>Deny：拦截，其中 DenyActionParameters 中支持 BlockIp、ReturnCustomPage 和 Stall 配置；</li><li>Monitor：观察；</li><li>Challenge：挑战，其中 ChallengeActionParameters.ChallengeOption 支持 JSChallenge 和 ManagedChallenge；</li><li>Redirect：重定向至URL。</li>
+   */
+  SecurityAction?: SecurityAction
+  /**
+   * 当前 SecurityAction 的权重，仅支持 10 ~ 100 且必须为 10 的倍数，其中 Weight 参数全部相加须等于 100。
+   */
+  Weight?: number
+}
+
+/**
  * ModifyMultiPathGatewayLine返回参数结构体
  */
 export interface ModifyMultiPathGatewayLineResponse {
@@ -15022,18 +15404,34 @@ export interface CreateOriginGroupResponse {
 }
 
 /**
- * DescribeSecurityPolicy返回参数结构体
+ * CreateMultiPathGatewayLine请求参数结构体
  */
-export interface DescribeSecurityPolicyResponse {
+export interface CreateMultiPathGatewayLineRequest {
   /**
-   * 安全策略配置。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 站点 ID 。
    */
-  SecurityPolicy?: SecurityPolicy
+  ZoneId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 多通道安全网关 ID 。
    */
-  RequestId?: string
+  GatewayId: string
+  /**
+   * 线路类型，取值有：
+ <li>direct ：直连线路，不支持修改和删除。</li> <li>proxy ：EdgeOne 四层代理线路，支持修改实例 ID 和规则 ID，不支持删除。</li> <li>custom ：自定义线路，支持修改、删除实例 ID 和规则 ID。</li>
+   */
+  LineType: string
+  /**
+   * 线路地址，格式为 ip:port。
+   */
+  LineAddress: string
+  /**
+   * 四层代理实例 ID，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可由接口 [DescribeL4Proxy](https://cloud.tencent.com/document/api/1552/103413) 获取。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可以从接口 [DescribeL4ProxyRules](https://cloud.tencent.com/document/api/1552/103412) 获取。
+   */
+  RuleId?: string
 }
 
 /**
@@ -15280,13 +15678,17 @@ export interface ModifySecurityAPIResourceResponse {
 }
 
 /**
- * DescribeSecurityIPGroup返回参数结构体
+ * DescribePlans返回参数结构体
  */
-export interface DescribeSecurityIPGroupResponse {
+export interface DescribePlansResponse {
   /**
-   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、IP / 网段总数量、 IP / 网段列表信息和过期时间信息。
+   * 符合条件的套餐个数。
    */
-  IPGroups?: Array<IPGroup>
+  TotalCount?: number
+  /**
+   * 套餐信息列表。
+   */
+  Plans?: Array<Plan>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15382,6 +15784,37 @@ export interface CreateWebSecurityTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Bot 智能分析的具体配置。
+ */
+export interface BotIntelligence {
+  /**
+   * 基于客户端和请求特征，将请求来源分为人类来源请求、合法 Bot 请求、疑似 Bot 请求和高风险 Bot 请求，并提供请求处置选项。
+   */
+  BotRatings?: BotRatings
+  /**
+   * Bot 智能分析的具体配置开关。取值有：
+
+on：开启；
+off：关闭。
+   */
+  Enabled?: string
+}
+
+/**
+ * 搜索引擎规则配置。
+ */
+export interface SearchEngineBots {
+  /**
+   * 来自搜索引擎爬虫的请求的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>Disabled：未启用，不启用指定规则；</li><li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；</li><li>Allow：放行（待废弃）。</li>
+   */
+  BaseAction?: SecurityAction
+  /**
+   * 指定搜索引擎爬虫请求的处置方式。
+   */
+  BotManagementActionOverrides?: Array<BotManagementActionOverrides>
 }
 
 /**
@@ -15753,6 +16186,23 @@ export interface DescribeTimingL4DataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CNAME 接入类型站点参数详情。
+ */
+export interface CNAMEDetail {
+  /**
+   * 是否伪站点，取值有：
+<li> 0：非伪站点；</li>
+<li> 1：伪站点。</li>
+
+   */
+  IsFake?: number
+  /**
+   * 归属权验证信息。详情请参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789) 。
+   */
+  OwnershipVerification?: OwnershipVerification
 }
 
 /**

@@ -42,17 +42,13 @@ export interface SentimentAnalysis {
 }
 
 /**
- * 标识命中的违规关键词位置信息
+ * GetFinancialLLMTaskResult请求参数结构体
  */
-export interface Positions {
+export interface GetFinancialLLMTaskResultRequest {
   /**
-   * 关键词起始位置
+   * 金融大模型审校任务ID
    */
-  Start?: number
-  /**
-   * 关键词结束位置
-   */
-  End?: number
+  TaskId: string
 }
 
 /**
@@ -70,38 +66,41 @@ export interface RiskDetails {
 }
 
 /**
- * TextModeration请求参数结构体
+ * GetFinancialLLMTaskResult返回参数结构体
  */
-export interface TextModerationRequest {
+export interface GetFinancialLLMTaskResultResponse {
   /**
-   * 该字段表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密
+   * 审校任务状态：
+
+- Success: 成功
+- Processing: 处理中，请等待
+- Failed: 失败
    */
-  Content: string
+  Status?: string
   /**
-   * 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中配置。
-备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
+   * 大模型审校结果
    */
-  BizType?: string
+  ModerationResult?: string
   /**
-   * 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。<br>取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符**
+   * 审校任务失败原因，仅当任务失败时有值
    */
-  DataId?: string
+  FailureReason?: string
   /**
-   * 该字段表示待检测对象对应的用户相关信息，传入后可便于甄别相应违规风险用户
+   * 审校任务开始时间
    */
-  User?: User
+  StartTime?: string
   /**
-   * 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备
+   * 本次检测的违规点列表
    */
-  Device?: Device
+  ReviewedLabels?: Array<string>
   /**
-   * 表示Content的原始语种，枚举值包括 "en" 和 "zh"。其中，"en" 表示英文，"zh" 表示中文。非中文场景的处理耗时较高，具体情况取决于送审文本长度，非中文场景需[反馈工单](https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认。
+   * 违规明细
    */
-  SourceLanguage?: string
+  Details?: Array<FinancialLLMViolationDetail>
   /**
-   * 审核的业务类型，枚举值包括"TEXT"和"TEXT_AIGC"。其中"TEXT"表示传统文本审核，"TEXT_AIGC"表示AI生成检测（生成检测能力具体能力了解可[参见文档](https://cloud.tencent.com/document/product/1124/118694)）。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -152,6 +151,41 @@ export interface DetailResults {
 }
 
 /**
+ * TextModeration请求参数结构体
+ */
+export interface TextModerationRequest {
+  /**
+   * 该字段表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密
+   */
+  Content: string
+  /**
+   * 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中配置。
+备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
+   */
+  BizType?: string
+  /**
+   * 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。<br>取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符**
+   */
+  DataId?: string
+  /**
+   * 该字段表示待检测对象对应的用户相关信息，传入后可便于甄别相应违规风险用户
+   */
+  User?: User
+  /**
+   * 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备
+   */
+  Device?: Device
+  /**
+   * 表示Content的原始语种，枚举值包括 "en" 和 "zh"。其中，"en" 表示英文，"zh" 表示中文。非中文场景的处理耗时较高，具体情况取决于送审文本长度，非中文场景需[反馈工单](https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认。
+   */
+  SourceLanguage?: string
+  /**
+   * 审核的业务类型，枚举值包括"TEXT"和"TEXT_AIGC"。其中"TEXT"表示传统文本审核，"TEXT_AIGC"表示AI生成检测（生成检测能力具体能力了解可[参见文档](https://cloud.tencent.com/document/product/1124/118694)）。
+   */
+  Type?: string
+}
+
+/**
  * 关键词命中位置信息
  */
 export interface HitInfo {
@@ -174,6 +208,34 @@ export interface HitInfo {
 }
 
 /**
+ * 金融大模型审校-违规原因
+ */
+export interface FinancialLLMViolationReason {
+  /**
+   * 违规原文片段
+   */
+  TargetText?: string
+  /**
+   * 违规原因
+   */
+  Reason?: string
+}
+
+/**
+ * CreateFinancialLLMTask返回参数结构体
+ */
+export interface CreateFinancialLLMTaskResponse {
+  /**
+   * 金融大模型审校任务ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 该字段用于返回审核结果明细字段的标签及分数
  */
 export interface Tag {
@@ -192,64 +254,52 @@ export interface Tag {
 }
 
 /**
- * 用于表示业务用户的账号相关信息
+ * CreateFinancialLLMTask请求参数结构体
  */
-export interface User {
+export interface CreateFinancialLLMTaskRequest {
   /**
-   * 该字段表示业务用户ID,填写后，系统可根据账号过往违规历史优化审核结果判定，有利于存在可疑违规风险时的辅助判断。<br>
-备注：该字段可传入微信openid、QQopenid、字符串等账号信息，与账号类别参数（AccountType）配合使用可确定唯一账号。
+   * 审核策略BizType
    */
-  UserId?: string
+  BizType: string
   /**
-   * 该字段表示业务用户对应的账号昵称信息。
+   * 待审文件类型，目前支持：PDF, DOC, DOCX
    */
-  Nickname?: string
+  FileType?: string
   /**
-   * 该字段表示业务用户ID对应的账号类型，取值：**1**-微信uin，**2**-QQ号，**3**-微信群uin，**4**-qq群号，**5**-微信openid，**6**-QQopenid，**7**-其它string。<br>
-该字段与账号ID参数（UserId）配合使用可确定唯一账号。
+   * 送审内容类型：1-文档，2-文本
    */
-  AccountType?: number
+  ContentType?: number
   /**
-   * 该字段表示业务用户对应账号的性别信息。<br>
-取值：**0**（默认值，代表性别未知）、**1**（男性）、**2**（女性）。
+   * 送审内容，根据ContentType字段的取值，传入送审文档的Url链接，或送审文本的Base64编码
+
+文档限制：
+
+- 文件下载时间不超过15秒（文件存储于腾讯云的Url可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。）
+- 所下载文件经 Base64 编码后不超过支持的文件大小：PDF/DOC/DOCX - 200M
+- 文档解析后的纯文本长度不超过 10000字
+
+文本限制：Base64解码后的文本长度不超过10000字
+
    */
-  Gender?: number
+  Content?: string
+}
+
+/**
+ * 金融大模型审校 违规明细
+ */
+export interface FinancialLLMViolationDetail {
   /**
-   * 该字段表示业务用户对应账号的年龄信息。<br>
-取值：**0**（默认值，代表年龄未知）-（**自定义年龄上限**）之间的整数。
+   * 违规点
    */
-  Age?: number
+  Label?: string
   /**
-   * 该字段表示业务用户对应账号的等级信息。<br>
-取值：**0**（默认值，代表等级未知）、**1**（等级较低）、**2**（等级中等）、**3**（等级较高），目前**暂不支持自定义等级**。
+   * 处置建议
    */
-  Level?: number
+  Suggestion?: string
   /**
-   * 该字段表示业务用户对应账号的手机号信息，支持全球各地区手机号的记录。<br>
-备注：请保持手机号格式的统一，如区号格式（086/+86）等。
+   * 违规原因列表
    */
-  Phone?: string
-  /**
-   * 该字段表示业务用户头像图片的访问链接(URL)，支持PNG、JPG、JPEG、BMP、GIF、WEBP格式。
-备注：头像图片大小不超过5MB，建议分辨率不低于256x256；图片下载时间限制为3秒，超过则会返回下载超时。
-   */
-  HeadUrl?: string
-  /**
-   * 该字段表示业务用户的简介信息，支持汉字、英文及特殊符号，长度不超过5000个汉字字符。
-   */
-  Desc?: string
-  /**
-   * 该字段表示业务群聊场景时的房间ID。
-   */
-  RoomId?: string
-  /**
-   * 该字段表示消息接受者ID
-   */
-  ReceiverId?: string
-  /**
-   * 消息生成时间，精确到毫秒
-   */
-  SendTime?: number
+  Reasons?: Array<FinancialLLMViolationReason>
 }
 
 /**
@@ -366,4 +416,79 @@ export interface TextModerationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标识命中的违规关键词位置信息
+ */
+export interface Positions {
+  /**
+   * 关键词起始位置
+   */
+  Start?: number
+  /**
+   * 关键词结束位置
+   */
+  End?: number
+}
+
+/**
+ * 用于表示业务用户的账号相关信息
+ */
+export interface User {
+  /**
+   * 该字段表示业务用户ID,填写后，系统可根据账号过往违规历史优化审核结果判定，有利于存在可疑违规风险时的辅助判断。<br>
+备注：该字段可传入微信openid、QQopenid、字符串等账号信息，与账号类别参数（AccountType）配合使用可确定唯一账号。
+   */
+  UserId?: string
+  /**
+   * 该字段表示业务用户对应的账号昵称信息。
+   */
+  Nickname?: string
+  /**
+   * 该字段表示业务用户ID对应的账号类型，取值：**1**-微信uin，**2**-QQ号，**3**-微信群uin，**4**-qq群号，**5**-微信openid，**6**-QQopenid，**7**-其它string。<br>
+该字段与账号ID参数（UserId）配合使用可确定唯一账号。
+   */
+  AccountType?: number
+  /**
+   * 该字段表示业务用户对应账号的性别信息。<br>
+取值：**0**（默认值，代表性别未知）、**1**（男性）、**2**（女性）。
+   */
+  Gender?: number
+  /**
+   * 该字段表示业务用户对应账号的年龄信息。<br>
+取值：**0**（默认值，代表年龄未知）-（**自定义年龄上限**）之间的整数。
+   */
+  Age?: number
+  /**
+   * 该字段表示业务用户对应账号的等级信息。<br>
+取值：**0**（默认值，代表等级未知）、**1**（等级较低）、**2**（等级中等）、**3**（等级较高），目前**暂不支持自定义等级**。
+   */
+  Level?: number
+  /**
+   * 该字段表示业务用户对应账号的手机号信息，支持全球各地区手机号的记录。<br>
+备注：请保持手机号格式的统一，如区号格式（086/+86）等。
+   */
+  Phone?: string
+  /**
+   * 该字段表示业务用户头像图片的访问链接(URL)，支持PNG、JPG、JPEG、BMP、GIF、WEBP格式。
+备注：头像图片大小不超过5MB，建议分辨率不低于256x256；图片下载时间限制为3秒，超过则会返回下载超时。
+   */
+  HeadUrl?: string
+  /**
+   * 该字段表示业务用户的简介信息，支持汉字、英文及特殊符号，长度不超过5000个汉字字符。
+   */
+  Desc?: string
+  /**
+   * 该字段表示业务群聊场景时的房间ID。
+   */
+  RoomId?: string
+  /**
+   * 该字段表示消息接受者ID
+   */
+  ReceiverId?: string
+  /**
+   * 消息生成时间，精确到毫秒
+   */
+  SendTime?: number
 }

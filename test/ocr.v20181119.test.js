@@ -148,6 +148,16 @@ it("ocr.v20181119.PermitOCR", async function () {
     }
 })
 
+it("ocr.v20181119.QuestionSplitLayoutOCR", async function () {
+    try {
+       const data = await client.QuestionSplitLayoutOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.BusInvoiceOCR", async function () {
     try {
        const data = await client.BusInvoiceOCR({})

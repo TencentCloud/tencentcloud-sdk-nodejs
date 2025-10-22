@@ -19,16 +19,22 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SentimentAnalysis,
-  Positions,
+  GetFinancialLLMTaskResultRequest,
   RiskDetails,
-  TextModerationRequest,
+  GetFinancialLLMTaskResultResponse,
   DetailResults,
+  TextModerationRequest,
   HitInfo,
+  FinancialLLMViolationReason,
+  CreateFinancialLLMTaskResponse,
   Tag,
-  User,
+  CreateFinancialLLMTaskRequest,
+  FinancialLLMViolationDetail,
   Device,
   SentimentDetail,
   TextModerationResponse,
+  Positions,
+  User,
 } from "./tms_models"
 
 /**
@@ -38,6 +44,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tms.tencentcloudapi.com", "2020-12-29", clientConfig)
+  }
+
+  /**
+   * 创建金融大模型审校任务
+   */
+  async CreateFinancialLLMTask(
+    req: CreateFinancialLLMTaskRequest,
+    cb?: (error: string, rep: CreateFinancialLLMTaskResponse) => void
+  ): Promise<CreateFinancialLLMTaskResponse> {
+    return this.request("CreateFinancialLLMTask", req, cb)
   }
 
   /**
@@ -64,5 +80,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextModerationResponse) => void
   ): Promise<TextModerationResponse> {
     return this.request("TextModeration", req, cb)
+  }
+
+  /**
+   * 获取金融大模型审校任务结果
+   */
+  async GetFinancialLLMTaskResult(
+    req: GetFinancialLLMTaskResultRequest,
+    cb?: (error: string, rep: GetFinancialLLMTaskResultResponse) => void
+  ): Promise<GetFinancialLLMTaskResultResponse> {
+    return this.request("GetFinancialLLMTaskResult", req, cb)
   }
 }

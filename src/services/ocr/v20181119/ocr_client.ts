@@ -34,7 +34,7 @@ import {
   SmartStructuralOCRResponse,
   CarInvoiceOCRRequest,
   ExtractDocMultiRequest,
-  RecognizeTravelCardOCRRequest,
+  QuestionSplitLayoutOCRRequest,
   TrainTicketOCRRequest,
   EstateCertOCRResponse,
   ExtractDocMultiProRequest,
@@ -42,6 +42,7 @@ import {
   MLIDPassportOCRRequest,
   OverseasInvoice,
   ItemInfo,
+  VatRollInvoiceInfo,
   TextDetectResponse,
   RailwayTicketInfo,
   TollInvoiceOCRResponse,
@@ -110,7 +111,7 @@ import {
   RecognizeEncryptedIDCardOCRRequest,
   SmartStructuralOCRRequest,
   ExtractDocMultiProResponse,
-  TableCellInfo,
+  RecognizeTravelCardOCRRequest,
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
@@ -179,7 +180,7 @@ import {
   CardWarnInfo,
   TaxPayment,
   VehicleRegCertOCRRequest,
-  RecognizeTravelCardOCRResponse,
+  QuestionSplitLayoutOCRResponse,
   ElectronicAirTransportDetail,
   FinancialBill,
   LicensePlateOCRRequest,
@@ -216,7 +217,7 @@ import {
   AdvertiseTextDetection,
   TextTable,
   FinanBillSliceInfo,
-  VatRollInvoiceInfo,
+  ShoppingReceipt,
   Encryption,
   RecognizeGeneralTextImageWarnResponse,
   ArithmeticOCRRequest,
@@ -294,6 +295,7 @@ import {
   MLIDCardOCRRequest,
   QuestionInfo,
   TaxiTicket,
+  UsedCarPurchaseInvoice,
   EnglishOCRResponse,
   ImageCoordinates,
   RecognizeForeignPermanentResidentIdCardResponse,
@@ -318,7 +320,7 @@ import {
   SubmitExtractDocAgentJobRequest,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
-  ShoppingReceipt,
+  RecognizeTravelCardOCRResponse,
   VatRollInvoiceOCRRequest,
   RecognizeOnlineTaxiItineraryOCRRequest,
   IDCardOCRRequest,
@@ -345,7 +347,7 @@ import {
   RecognizeGeneralTextImageWarnRequest,
   RecognizeForeignPermanentResidentIdCardRequest,
   GeneralFastOCRResponse,
-  UsedCarPurchaseInvoice,
+  TableCellInfo,
   QrcodePositionObj,
 } from "./ocr_models"
 
@@ -617,6 +619,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PermitOCRResponse) => void
   ): Promise<PermitOCRResponse> {
     return this.request("PermitOCR", req, cb)
+  }
+
+  /**
+     * 试卷切题（仅检测）可将整页练习册、试卷或教辅中的题目进行自动切题，返回试题边框和题目元素的坐标位置。
+
+默认接口请求频率限制：2次/秒。
+     */
+  async QuestionSplitLayoutOCR(
+    req: QuestionSplitLayoutOCRRequest,
+    cb?: (error: string, rep: QuestionSplitLayoutOCRResponse) => void
+  ): Promise<QuestionSplitLayoutOCRResponse> {
+    return this.request("QuestionSplitLayoutOCR", req, cb)
   }
 
   /**
