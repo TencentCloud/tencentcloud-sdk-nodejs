@@ -1148,7 +1148,7 @@ export interface DescribeAssetImageRegistryRiskListExportRequest {
   /**
    * 导出字段
    */
-  ExportField: Array<string>
+  ExportField?: Array<string>
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -2981,6 +2981,10 @@ export interface DescribeAssetImageRegistryRiskListExportResponse {
    * excel文件下载地址
    */
   DownloadUrl?: string
+  /**
+   * 导出任务id
+   */
+  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9069,6 +9073,14 @@ export interface DescribeAssetImageDetailResponse {
    */
   IsAuthorized?: number
   /**
+   * 解决方案
+   */
+  Solution?: string
+  /**
+   * 原因
+   */
+  Reason?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9649,6 +9661,14 @@ export interface ImageRepoInfo {
    * 是否推荐处置
    */
   RecommendedFix?: boolean
+  /**
+   * 解决方案
+   */
+  Solution?: string
+  /**
+   * 原因
+   */
+  Reason?: string
 }
 
 /**
@@ -16514,6 +16534,15 @@ export interface ImagesInfo {
    * 是否推荐处置
    */
   RecommendedFix?: boolean
+  /**
+   * 解决方案
+   */
+  Solution?: string
+  /**
+   * 原因
+
+   */
+  Reason?: string
 }
 
 /**
@@ -18019,6 +18048,10 @@ export interface CreateExportComplianceStatusListJobRequest {
    * 要导出的资产ID列表或检测项ID列表，由ExportByAsset的取值决定。
    */
   IdList?: Array<number | bigint>
+  /**
+   * 筛选
+   */
+  Filters?: Array<RunTimeFilters>
 }
 
 /**
@@ -19501,6 +19534,14 @@ export interface DescribeAssetImageRegistryDetailResponse {
    * Id
    */
   Id?: number
+  /**
+   * 解决方案
+   */
+  Solution?: string
+  /**
+   * 原因
+   */
+  Reason?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

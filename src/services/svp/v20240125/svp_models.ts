@@ -168,7 +168,7 @@ export interface SavingPlanOverviewDetail {
    */
   EndTime?: string
   /**
-   * 状态
+   * 1 生效 2 失效 3 作废
    */
   Status?: number
   /**
@@ -180,13 +180,18 @@ export interface SavingPlanOverviewDetail {
    */
   Region?: Array<string>
   /**
-   * 支付类型
+   * 1 全预付 2 部分预付 3 全不预付
    */
   PayType?: number
   /**
    * 购买时间 yyyy-mm-dd HH:mm:ss格式
    */
   BuyTime?: string
+  /**
+   * 承诺金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PromiseAmount?: string
 }
 
 /**

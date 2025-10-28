@@ -1519,7 +1519,7 @@ export interface DescribeTopL7AnalysisDataRequest {
    */
   MetricName: string
   /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -2775,7 +2775,7 @@ export interface DownloadL4LogsRequest {
    */
   EndTime: string
   /**
-   * 站点 ID 集合，此参数必填。
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
   ZoneIds?: Array<string>
   /**
@@ -4259,7 +4259,7 @@ export interface MaxAge {
    */
   FollowOrigin?: string
   /**
-   * MaxAge 时间设置，单位秒，最大365天。
+   * MaxAge 时间设置，单位为秒，取值：0～315360000。
 注意：时间为0，即不缓存。
    */
   MaxAgeTime?: number
@@ -6450,7 +6450,7 @@ export interface DownloadL7LogsRequest {
    */
   EndTime: string
   /**
-   * 站点ID集合，此参数必填。
+   * 站点ID集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
   ZoneIds?: Array<string>
   /**
@@ -7701,7 +7701,7 @@ export interface DeleteJustInTimeTranscodeTemplatesResponse {
  */
 export interface DescribePurgeTasksRequest {
   /**
-   * 站点 ID。该参数必填。
+   * 站点 ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
   ZoneId?: string
   /**
@@ -7725,7 +7725,7 @@ export interface DescribePurgeTasksRequest {
 <li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li>
 <li>target：按照目标资源信息进行过滤，target 形如：http://www.qq.com/1.txt 或者 tag1，暂不支持多值，支持模糊查询；</li>
 <li>domains：按照域名进行过滤，形如：www.qq.com，不支持模糊查询；</li>
-<li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
+<li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消</li>
 <li>type：按照清除缓存类型进行过滤，暂不支持多值，不支持模糊查询。可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
    */
   Filters?: Array<AdvancedFilter>
@@ -8073,7 +8073,7 @@ export interface DescribeDDoSAttackEventRequest {
    */
   PolicyIds?: Array<number | bigint>
   /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -10118,7 +10118,7 @@ export interface DescribeTimingL7AnalysisDataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -12800,8 +12800,8 @@ export interface Https {
   /**
    * Tls 版本设置，取值有：
 <li>TLSv1：TLSv1版本；</li>
-<li>TLSV1.1：TLSv1.1版本；</li>
-<li>TLSV1.2：TLSv1.2版本；</li>
+<li>TLSv1.1：TLSv1.1版本；</li>
+<li>TLSv1.2：TLSv1.2版本；</li>
 <li>TLSv1.3：TLSv1.3版本。</li>修改时必须开启连续的版本。
    */
   TlsVersion?: Array<string>
@@ -13778,7 +13778,7 @@ export interface DescribeDDoSAttackTopDataRequest {
    */
   MetricName: string
   /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -13848,7 +13848,7 @@ export interface DescribeDDoSAttackDataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**
@@ -14398,7 +14398,7 @@ export interface DescribeMultiPathGatewaysRequest {
  */
 export interface DescribePrefetchTasksRequest {
   /**
-   * 站点ID。该参数必填。
+   * 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
   ZoneId?: string
   /**
@@ -14418,7 +14418,7 @@ export interface DescribePrefetchTasksRequest {
    */
   Limit?: number
   /**
-   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
+   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
    */
   Filters?: Array<AdvancedFilter>
 }
@@ -16142,7 +16142,8 @@ export interface DescribeTimingL4DataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   * 站点ID，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
+最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
   ZoneIds?: Array<string>
   /**

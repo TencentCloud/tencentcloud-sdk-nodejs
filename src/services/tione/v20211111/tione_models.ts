@@ -359,6 +359,24 @@ export interface ServiceEIP {
 }
 
 /**
+ * DescribeExport返回参数结构体
+ */
+export interface DescribeExportResponse {
+  /**
+   * 日志文件大小
+   */
+  FileSize?: string
+  /**
+   * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Notebook列表元素
  */
 export interface NotebookSetItem {
@@ -2421,6 +2439,16 @@ export interface Option {
 }
 
 /**
+ * DeleteExport返回参数结构体
+ */
+export interface DeleteExportResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 默认内网调用信息
  */
 export interface DefaultInnerCallInfo {
@@ -2741,6 +2769,16 @@ export interface GpuDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: number
+}
+
+/**
+ * CreateExport返回参数结构体
+ */
+export interface CreateExportResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3885,6 +3923,11 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
 }
 
 /**
+ * CreateExport请求参数结构体
+ */
+export type CreateExportRequest = null
+
+/**
  * DescribeBillingSpecs返回参数结构体
  */
 export interface DescribeBillingSpecsResponse {
@@ -4850,6 +4893,16 @@ export interface CreateModelServiceResponse {
 }
 
 /**
+ * DeleteExport请求参数结构体
+ */
+export interface DeleteExportRequest {
+  /**
+   * 日志下载任务的ID
+   */
+  ExportId: string
+}
+
+/**
  * 在线服务一个服务组的信息
  */
 export interface ServiceGroup {
@@ -5200,6 +5253,24 @@ export interface ServiceEIPInfo {
 }
 
 /**
+ * DescribeTrainingTasks返回参数结构体
+ */
+export interface DescribeTrainingTasksResponse {
+  /**
+   * 训练任务集
+   */
+  TrainingTaskSet?: Array<TrainingTaskSetItem>
+  /**
+   * 数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeModelAccelerateTask请求参数结构体
  */
 export interface DescribeModelAccelerateTaskRequest {
@@ -5455,22 +5526,9 @@ export interface TrainingTaskDetail {
 }
 
 /**
- * DescribeTrainingTasks返回参数结构体
+ * DescribeExport请求参数结构体
  */
-export interface DescribeTrainingTasksResponse {
-  /**
-   * 训练任务集
-   */
-  TrainingTaskSet?: Array<TrainingTaskSetItem>
-  /**
-   * 数量
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeExportRequest = null
 
 /**
  * DescribeNotebook请求参数结构体

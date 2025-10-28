@@ -336,7 +336,7 @@ export interface UpdateProjectRequest {
  */
 export interface DescribeResourcesByTagsUnionRequest {
   /**
-   * 标签过滤数组
+   * 标签过滤数组，数量最多六个
    */
   TagFilters: Array<TagFilter>
   /**
@@ -934,7 +934,7 @@ export interface ResourceIdTag {
 }
 
 /**
- * tag过滤数组多个是与的关系
+ * 标签键值过滤条件
  */
 export interface TagFilter {
   /**
@@ -1301,7 +1301,7 @@ export interface GetTagsRequest {
  */
 export interface DescribeResourcesByTagsRequest {
   /**
-   * 标签过滤数组
+   * 标签过滤数组，数量最多6个
    */
   TagFilters: Array<TagFilter>
   /**

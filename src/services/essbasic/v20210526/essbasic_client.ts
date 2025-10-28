@@ -124,6 +124,7 @@ import {
   ComponentLimit,
   ChannelVerifyPdfResponse,
   OrganizationCommonInfo,
+  JumpEvent,
   ArchiveDynamicFlowResponse,
   WebThemeConfig,
   CreateConsoleLoginUrlRequest,

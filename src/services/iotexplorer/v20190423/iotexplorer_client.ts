@@ -61,7 +61,7 @@ import {
   UpdateDeviceTWeCallAuthorizeStatusRequest,
   CreateProjectResponse,
   DeleteProjectResponse,
-  CreateTopicPolicyResponse,
+  CallDeviceActionAsyncRequest,
   CreateDeviceResponse,
   CreateDeviceRequest,
   InheritCloudStorageUserResponse,
@@ -139,6 +139,7 @@ import {
   InvokeExternalSourceAIServiceTaskResponse,
   CreateStudioProductRequest,
   TransferCloudStorageRequest,
+  CreateTWeSeeServiceRequest,
   FenceAlarmPoint,
   UploadFirmwareRequest,
   DescribeFirmwareRequest,
@@ -160,6 +161,7 @@ import {
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
   ModifyTopicRuleRequest,
+  CreateTWeSeeServiceResponse,
   CreateAISearchTaskAsyncResponse,
   DescribeFenceBindListResponse,
   TransferTWeCallDeviceRequest,
@@ -248,6 +250,7 @@ import {
   ProductDevicesPositionItem,
   ResetCloudStorageAIServiceResponse,
   CreateTWeSeeRecognitionTaskRequest,
+  UpdateOtaTaskStatusRequest,
   LoRaFrequencyEntry,
   ModifyFenceBindResponse,
   DescribeGatewayBindDevicesResponse,
@@ -307,7 +310,7 @@ import {
   GenerateCloudStorageAIServiceTaskFileURLResponse,
   ActivateDeviceInfo,
   ResetTWeCallDeviceRequest,
-  CallDeviceActionAsyncRequest,
+  CreateTopicPolicyResponse,
   CallDeviceActionAsyncResponse,
   GetPositionSpaceListResponse,
   CreatePositionFenceResponse,
@@ -475,6 +478,7 @@ import {
   PublishFirmwareUpdateMessageRequest,
   UpdateDevicesEnableStateRequest,
   ResetCloudStorageAIServiceRequest,
+  UpdateOtaTaskStatusResponse,
   ModifyModelDefinitionResponse,
   ModifyTWeTalkProductConfigV2Request,
   RemoveUserByRoomIdFromTRTCResponse,
@@ -1552,6 +1556,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpdateOtaTask）当固件升级大任务处于没有在全部成功的状态时，可修改为取消状态，取消部分或全部设备的升级;或其它允许的可修改的状态。
+   */
+  async UpdateOtaTaskStatus(
+    req: UpdateOtaTaskStatusRequest,
+    cb?: (error: string, rep: UpdateOtaTaskStatusResponse) => void
+  ): Promise<UpdateOtaTaskStatusResponse> {
+    return this.request("UpdateOtaTaskStatus", req, cb)
+  }
+
+  /**
    * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
    */
   async UploadFirmware(
@@ -1709,6 +1723,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTWeCallActiveStatusResponse) => void
   ): Promise<GetTWeCallActiveStatusResponse> {
     return this.request("GetTWeCallActiveStatus", req, cb)
+  }
+
+  /**
+   * 开通 TWeSee 后付费服务
+   */
+  async CreateTWeSeeService(
+    req: CreateTWeSeeServiceRequest,
+    cb?: (error: string, rep: CreateTWeSeeServiceResponse) => void
+  ): Promise<CreateTWeSeeServiceResponse> {
+    return this.request("CreateTWeSeeService", req, cb)
   }
 
   /**

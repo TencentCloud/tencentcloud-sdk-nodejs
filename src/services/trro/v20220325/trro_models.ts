@@ -160,6 +160,16 @@ export interface CreateCloudRecordingResponse {
 }
 
 /**
+ * ModifyProjectSecMode返回参数结构体
+ */
+export interface ModifyProjectSecModeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartPublishLiveStream请求参数结构体
  */
 export interface StartPublishLiveStreamRequest {
@@ -503,6 +513,24 @@ export interface DescribeDeviceInfoResponse {
 export type GetLicenseStatRequest = null
 
 /**
+ * GetDurationDetails返回参数结构体
+ */
+export interface GetDurationDetailsResponse {
+  /**
+   * 列表总数
+   */
+  TotalCount?: number
+  /**
+   * 时长明细列表
+   */
+  DurationDetails?: Array<DurationDetails>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProjectList返回参数结构体
  */
 export interface DescribeProjectListResponse {
@@ -705,13 +733,33 @@ export interface DescribeSessionStatisticsRequest {
 }
 
 /**
- * ModifyProjectSecMode返回参数结构体
+ * GetDurationDetails请求参数结构体
  */
-export interface ModifyProjectSecModeResponse {
+export interface GetDurationDetailsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开始时间
    */
-  RequestId?: string
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 页码
+   */
+  PageNum: number
+  /**
+   * 页面数量
+   */
+  PageSize: number
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 设备ID，不传查全部设备
+   */
+  DeviceId?: string
 }
 
 /**
@@ -1157,6 +1205,72 @@ export interface SessionDeviceDetail {
 }
 
 /**
+ * GetTotalDuration返回参数结构体
+ */
+export interface GetTotalDurationResponse {
+  /**
+   * 语音:min
+   */
+  Voice?: number
+  /**
+   * 标清:min
+   */
+  SD?: number
+  /**
+   * 高清:min
+   */
+  HD?: number
+  /**
+   * 超高清:min
+   */
+  FHD?: number
+  /**
+   * 2k:min
+   */
+  TwoK?: number
+  /**
+   * 4k:min
+   */
+  FourK?: number
+  /**
+   * 在线时长:min
+   */
+  Online?: number
+  /**
+   * 多网标清:min
+   */
+  MultiSD?: number
+  /**
+   * 多网高清:min
+   */
+  MultiHD?: number
+  /**
+   * 多网超高清:min
+   */
+  MultiFHD?: number
+  /**
+   * 多网2k:min
+   */
+  MultiTwoK?: number
+  /**
+   * 多网4k:min
+   */
+  MultiFourK?: number
+  /**
+   * 多网在线时长:min
+   */
+  MultiOnline?: number
+  /**
+   * 总抵扣时长:min
+   */
+  DeductDuration?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetDeviceLicense返回参数结构体
  */
 export interface GetDeviceLicenseResponse {
@@ -1407,6 +1521,72 @@ export interface DeviceInfo {
 }
 
 /**
+ * 会话时长明细
+ */
+export interface DurationDetails {
+  /**
+   * 会话时间
+   */
+  SessionTime?: string
+  /**
+   * 语音:min
+   */
+  Voice?: number
+  /**
+   * 标清:min
+   */
+  SD?: number
+  /**
+   * 高清:min
+   */
+  HD?: number
+  /**
+   * 超高清:min
+   */
+  FHD?: number
+  /**
+   * 2k:min
+   */
+  TwoK?: number
+  /**
+   * 4k:min
+   */
+  FourK?: number
+  /**
+   * 在线时长:min
+   */
+  Online?: number
+  /**
+   * 多网标清:min
+   */
+  MultiSD?: number
+  /**
+   * 多网高清:min
+   */
+  MultiHD?: number
+  /**
+   * 多网超高清:min
+   */
+  MultiFHD?: number
+  /**
+   * 多网2k:min
+   */
+  MultiTwoK?: number
+  /**
+   * 多网4k:min
+   */
+  MultiFourK?: number
+  /**
+   * 多网在线时长:min
+   */
+  MultiOnline?: number
+  /**
+   * 抵扣时长:min
+   */
+  DeductDuration?: number
+}
+
+/**
  * DescribeDeviceSessionList请求参数结构体
  */
 export interface DescribeDeviceSessionListRequest {
@@ -1498,6 +1678,28 @@ export interface GetDevicesRequest {
   ProjectId?: string
   /**
    * 设备ID
+   */
+  DeviceId?: string
+}
+
+/**
+ * GetTotalDuration请求参数结构体
+ */
+export interface GetTotalDurationRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 设备id，不传查全部
    */
   DeviceId?: string
 }

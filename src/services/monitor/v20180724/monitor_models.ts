@@ -9759,9 +9759,17 @@ export interface DescribePrometheusScrapeStatisticsRequest {
    */
   InstanceIds: Array<string>
   /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
    * job 类型
    */
   JobType?: string
+  /**
+   * job 过滤，不写就是全部 job
+   */
+  Job?: string
 }
 
 /**

@@ -3659,6 +3659,26 @@ export interface OrganizationCommonInfo {
 }
 
 /**
+ * 跳转事件的结构体，其中包括认证期间收录，授权书审核，企业认证的回跳事件。
+ */
+export interface JumpEvent {
+  /**
+   * 跳转事件枚举，
+   * 1 - 企业收录。
+   * 2 - 超管授权书审核。
+   * 3 - 认证完成。
+   */
+  JumpEventType?: number
+  /**
+   * 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。
+Endpoint如果是APP 类型，请传递<font color="red">"true"</font>
+如果 Endpoint 是 H5 类型，请参考文档[跳转电子签H5](https://qian.tencent.com/developers/partner/openqianh5)
+p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。
+   */
+  JumpUrl?: string
+}
+
+/**
  * ArchiveDynamicFlow返回参数结构体
  */
 export interface ArchiveDynamicFlowResponse {
@@ -3796,7 +3816,8 @@ export interface CreateConsoleLoginUrlRequest {
    */
   Endpoint?: string
   /**
-   * 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括：
+   * <font color="red">已废弃</font> 请使用 JumpEvents 参数，进行替换。
+触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括：
 <ul><li> **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序</li></ul>
    */
   AutoJumpBackEvent?: string
@@ -3814,7 +3835,8 @@ export interface CreateConsoleLoginUrlRequest {
    */
   ProxyOperatorIdCardNumber?: string
   /**
-   * 认证完成跳转链接。
+   * <font color="red">已废弃</font> 请使用 JumpEvents 参数，进行替换。
+认证完成跳转链接。
 注意：`此功能仅在Endpoint参数设置成 H5 或 PC时才有效`。
    */
   AutoJumpUrl?: string
@@ -3870,6 +3892,12 @@ p.s.
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。
+p.s.Endpoint如果是APP 类型，请传递JumpUrl为<font color="red">"true" </font>
+如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。
+   */
+  JumpEvents?: Array<JumpEvent>
 }
 
 /**
@@ -7508,6 +7536,7 @@ export interface CreatePartnerAutoSignAuthUrlRequest {
    * 被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationName二选一传入。
 
 注：`被授权企业必须和当前企业在同一应用号下`
+   * @deprecated
    */
   AuthorizedOrganizationId?: string
   /**
@@ -7516,13 +7545,14 @@ export interface CreatePartnerAutoSignAuthUrlRequest {
 注: 
 1. 如果名称中包含英文括号()，请使用中文括号（）代替。
 2. 被授权企业必须和当前企业在同一应用号下
+   * @deprecated
    */
   AuthorizedOrganizationName?: string
   /**
    * 是否给平台应用授权
 
 <ul>
-<li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationId</code>和<code>AuthorizedOrganizationName</code>。</li>
+<li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationIds</code>和<code>AuthorizedOrganizationNames</code>。</li>
 <li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li>
 </ul>
 
@@ -7543,11 +7573,19 @@ export interface CreatePartnerAutoSignAuthUrlRequest {
   /**
    * 在处理授权关系时，授权的方向
 <ul>
-<li><strong>false</strong>（默认值）：表示我方授权他方。在这种情况下，<code>AuthorizedOrganizationName</code> 代表的是【被授权方】的企业名称，即接收授权的企业。</li>
-<li><strong>true</strong>：表示他方授权我方。在这种情况下，<code>AuthorizedOrganizationName</code> 代表的是【授权方】的企业名称，即提供授权的企业。</li>
+<li><strong>false</strong>（默认值）：表示我方授权他方。在这种情况下，<code>AuthorizedOrganizationNames</code> 代表的是【被授权方】的企业名称，即接收授权的企业。</li>
+<li><strong>true</strong>：表示他方授权我方。在这种情况下，<code>AuthorizedOrganizationNames</code> 代表的是【授权方】的企业名称，即提供授权的企业。此场景下不支持批量</li>
 </ul>
    */
   AuthToMe?: boolean
+  /**
+   * 被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationNames二选一传入，最大支持50个，注：`被授权企业必须和当前企业在同一应用号下`
+   */
+  AuthorizedOrganizationIds?: Array<string>
+  /**
+   * 被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationIds二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。2. 被授权企业必须和当前企业在同一应用号下 3. 数组最大长度50
+   */
+  AuthorizedOrganizationNames?: Array<string>
 }
 
 /**

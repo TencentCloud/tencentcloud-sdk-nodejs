@@ -1068,6 +1068,16 @@ it("iotexplorer.v20190423.DescribeCloudStorage", async function () {
     }
 })
 
+it("iotexplorer.v20190423.UpdateOtaTaskStatus", async function () {
+    try {
+       const data = await client.UpdateOtaTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UploadFirmware", async function () {
     try {
        const data = await client.UploadFirmware({})
@@ -1221,6 +1231,16 @@ it("iotexplorer.v20190423.GetTWeTalkProductConfigListV2", async function () {
 it("iotexplorer.v20190423.GetTWeCallActiveStatus", async function () {
     try {
        const data = await client.GetTWeCallActiveStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateTWeSeeService", async function () {
+    try {
+       const data = await client.CreateTWeSeeService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -837,13 +837,25 @@ export interface DeleteProjectResponse {
 }
 
 /**
- * CreateTopicPolicy返回参数结构体
+ * CallDeviceActionAsync请求参数结构体
  */
-export interface CreateTopicPolicyResponse {
+export interface CallDeviceActionAsyncRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 产品Id
    */
-  RequestId?: string
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
+   */
+  ActionId: string
+  /**
+   * 输入参数
+   */
+  InputParams?: string
 }
 
 /**
@@ -2499,6 +2511,18 @@ export interface TransferCloudStorageRequest {
 }
 
 /**
+ * CreateTWeSeeService请求参数结构体
+ */
+export interface CreateTWeSeeServiceRequest {
+  /**
+   * 服务类型
+1.VideoSummary
+2.ImageSummary
+   */
+  Service: string
+}
+
+/**
  * 围栏告警位置点
  */
 export interface FenceAlarmPoint {
@@ -2938,6 +2962,16 @@ export interface ModifyTopicRuleRequest {
    * 替换的规则包体
    */
   TopicRulePayload: TopicRulePayload
+}
+
+/**
+ * CreateTWeSeeService返回参数结构体
+ */
+export interface CreateTWeSeeServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4851,6 +4885,24 @@ export interface CreateTWeSeeRecognitionTaskRequest {
 }
 
 /**
+ * UpdateOtaTaskStatus请求参数结构体
+ */
+export interface UpdateOtaTaskStatusRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 固件升级任务ID
+   */
+  TaskId: number
+  /**
+   * 固件任务取消状态
+   */
+  Status: number
+}
+
+/**
  * LoRa自定义频点信息
  */
 export interface LoRaFrequencyEntry {
@@ -6242,25 +6294,13 @@ export interface ResetTWeCallDeviceRequest {
 }
 
 /**
- * CallDeviceActionAsync请求参数结构体
+ * CreateTopicPolicy返回参数结构体
  */
-export interface CallDeviceActionAsyncRequest {
+export interface CreateTopicPolicyResponse {
   /**
-   * 产品Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
-   * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
-   */
-  ActionId: string
-  /**
-   * 输入参数
-   */
-  InputParams?: string
+  RequestId?: string
 }
 
 /**
@@ -10079,6 +10119,16 @@ export interface ResetCloudStorageAIServiceRequest {
    * 用户 ID
    */
   UserId?: string
+}
+
+/**
+ * UpdateOtaTaskStatus返回参数结构体
+ */
+export interface UpdateOtaTaskStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

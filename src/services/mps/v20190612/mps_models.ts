@@ -1164,8 +1164,13 @@ export interface ModifyOutputInfo {
   OutputType?: string
   /**
    * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+   * @deprecated
    */
   PidSelector?: PidSelector
+  /**
+   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+   */
+  StreamSelector?: StreamSelector
 }
 
 /**
@@ -7048,9 +7053,14 @@ export interface CreateOutputInfo {
    */
   RISTSettings?: CreateOutputRistSettings
   /**
-   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
+   * @deprecated
    */
   PidSelector?: PidSelector
+  /**
+   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
+   */
+  StreamSelector?: StreamSelector
 }
 
 /**
@@ -11379,12 +11389,17 @@ export interface DescribeOutput {
   RISTSettings?: DescribeOutputRISTSettings
   /**
    * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+   * @deprecated
    */
   PidSelector?: PidSelector
   /**
    * 输出模块配置，相关的URL，包括提供的拉流地址，或者配置的输出到第三方的转推地址
    */
   StreamUrls?: Array<StreamUrlDetail>
+  /**
+   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+   */
+  StreamSelector?: StreamSelector
 }
 
 /**
@@ -13635,6 +13650,20 @@ export interface CreateLiveRecordTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 音视频轨道选择
+ */
+export interface TrackSelector {
+  /**
+   * 视频轨道序号，从1开始.
+   */
+  VideoIndex?: Array<number | bigint>
+  /**
+   * 音频轨道序号，从1开始.
+   */
+  AudioIndex?: Array<number | bigint>
 }
 
 /**
@@ -18239,7 +18268,6 @@ export interface DescribeImageTaskDetailResponse {
   /**
    * 任务类型，目前取值有：
 <li>WorkflowTask：工作流处理任务。</li>
-
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
@@ -18251,6 +18279,18 @@ export interface DescribeImageTaskDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
+  /**
+   * 任务失败时的错误码。
+   */
+  ErrCode?: number
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrMsg?: string
+  /**
+   * 任务异常Message。
+   */
+  Message?: string
   /**
    * 图片处理任务的执行状态与结果。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -20068,6 +20108,24 @@ export interface RegionInfo {
    * 地区名称。
    */
   Name?: string
+}
+
+/**
+ * 选择指定的音轨或者视频输出
+ */
+export interface StreamSelector {
+  /**
+   * 选择类型: PID | TRACK
+   */
+  SelectorType?: string
+  /**
+   * 根据 PID 配置选择器
+   */
+  PidSelector?: PidSelector
+  /**
+   * 根据 Track 配置选择器
+   */
+  TrackSelector?: TrackSelector
 }
 
 /**

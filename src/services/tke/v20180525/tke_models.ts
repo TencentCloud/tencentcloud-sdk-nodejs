@@ -3172,7 +3172,7 @@ export interface DescribeSupportedRuntimeRequest {
  */
 export interface AddVpcCniSubnetsRequest {
   /**
-   * 集群ID
+   * 集群 ID，请[登录控制台](https://console.cloud.tencent.com/tke2/cluster)在集群列表复制ID
    */
   ClusterId: string
   /**
@@ -3710,7 +3710,7 @@ export interface DeleteEdgeCVMInstancesResponse {
  */
 export interface DescribeIPAMDRequest {
   /**
-   * 集群ID
+   * 集群 ID，请[登录控制台](https://console.cloud.tencent.com/tke2/cluster)在集群列表复制ID
    */
   ClusterId: string
 }
@@ -6137,7 +6137,7 @@ export interface InstanceUpgradeClusterStatus {
  */
 export interface DescribeClusterRoutesRequest {
   /**
-   * 路由表名称。
+   * 路由表名称。与集群 ID 一致，可以到[集群控制台](https://console.cloud.tencent.com/tke2)进行复制。
    */
   RouteTableName: string
   /**
@@ -6290,11 +6290,11 @@ export interface EnableClusterAuditRequest {
    */
   ClusterId: string
   /**
-   * CLS日志集ID
+   * CLS日志集ID，可以通过cls接口或者控制台获取
    */
   LogsetId?: string
   /**
-   * CLS日志主题ID
+   * CLS日志主题ID，可以通过cls接口或者控制台获取
    */
   TopicId?: string
   /**
@@ -8115,7 +8115,7 @@ export interface CreateCLSLogConfigRequest {
    */
   LogsetId?: string
   /**
-   * 当前集群类型支持tke、eks
+   * 当前集群类型支持tke（标准集群）、eks（serverless集群）
    */
   ClusterType?: string
 }
@@ -10658,11 +10658,11 @@ export interface EnableEventPersistenceRequest {
    */
   ClusterId: string
   /**
-   * cls服务的logsetID
+   * cls服务的logsetID，通过cls接口或者控制台获取
    */
   LogsetId?: string
   /**
-   * cls服务的topicID
+   * cls服务的topicID，通过cls接口或者控制台获取
    */
   TopicId?: string
   /**
@@ -11288,7 +11288,7 @@ export interface DescribeRouteTableConflictsRequest {
    */
   RouteTableCidrBlock: string
   /**
-   * 路由表绑定的VPC
+   * 路由表绑定的VPC，请到 [VPC 控制台](https://console.cloud.tencent.com/vpc/vpc)复制 VPC ID
    */
   VpcId: string
 }
@@ -13540,6 +13540,7 @@ export interface GPUArgs {
 export interface RouteTableConflict {
   /**
    * 路由表类型。
+枚举值：CcsCluster、Vpc、VpcRouteTable、CcsClusterRouteTable
    */
   RouteTableType?: string
   /**

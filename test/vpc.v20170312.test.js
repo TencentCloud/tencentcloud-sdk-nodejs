@@ -2958,16 +2958,6 @@ it("vpc.v20170312.ModifyNatGatewayDestinationIpPortTranslationNatRule", async fu
     }
 })
 
-it("vpc.v20170312.DisableVpnGatewaySslClientCert", async function () {
-    try {
-       const data = await client.DisableVpnGatewaySslClientCert({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("vpc.v20170312.DescribeHaVips", async function () {
     try {
        const data = await client.DescribeHaVips({})
@@ -3528,6 +3518,16 @@ it("vpc.v20170312.ModifyNetworkAclAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeSecurityGroupExpandedPolicies", async function () {
+    try {
+       const data = await client.DescribeSecurityGroupExpandedPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DisableSnapshotPolicies", async function () {
     try {
        const data = await client.DisableSnapshotPolicies({})
@@ -3718,6 +3718,16 @@ it("vpc.v20170312.DescribeRouteList", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyIpv6AddressesAttribute", async function () {
+    try {
+       const data = await client.ModifyIpv6AddressesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyGlobalRoutes", async function () {
     try {
        const data = await client.ModifyGlobalRoutes({})
@@ -3878,9 +3888,9 @@ it("vpc.v20170312.DescribeSecurityGroupReferences", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyIpv6AddressesAttribute", async function () {
+it("vpc.v20170312.DisableVpnGatewaySslClientCert", async function () {
     try {
-       const data = await client.ModifyIpv6AddressesAttribute({})
+       const data = await client.DisableVpnGatewaySslClientCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -91,6 +91,11 @@ export interface Storage {
    * 被指定存储用户appid
    */
   StorageAppId?: string
+  /**
+   * 是否压缩。
+1:压缩  2:不压缩
+   */
+  Compress?: number
 }
 
 /**

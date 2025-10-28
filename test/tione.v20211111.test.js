@@ -468,6 +468,16 @@ it("tione.v20211111.DescribeBillingResourceGroup", async function () {
     }
 })
 
+it("tione.v20211111.DescribeExport", async function () {
+    try {
+       const data = await client.DescribeExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeNotebook", async function () {
     try {
        const data = await client.DescribeNotebook({})
@@ -511,6 +521,26 @@ it("tione.v20211111.DescribeInferTemplates", async function () {
 it("tione.v20211111.DescribeModelServiceGroups", async function () {
     try {
        const data = await client.DescribeModelServiceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DeleteExport", async function () {
+    try {
+       const data = await client.DeleteExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.CreateExport", async function () {
+    try {
+       const data = await client.CreateExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

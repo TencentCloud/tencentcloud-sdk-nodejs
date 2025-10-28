@@ -904,6 +904,12 @@ UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceNameSuffix?: string
+  /**
+   * 云服务器实例名分隔符。 默认的分隔符是点号（.），可选短横线（-）。仅有点号（.）和短横线（-）能作为实例名的分隔符。如果不设置，则默认采用点号（.）分隔符。 通过分割符连接多段。
+
+假设原实例名为“product-as-instance”，分隔符InstanceNameDelimiter为“-”，设置实例名后缀"suffix"，那么最终实例名为“product-as-instance-suffix”。
+   */
+  InstanceNameDelimiter?: string
 }
 
 /**
@@ -1841,6 +1847,14 @@ HostNameSettings的该入参非必选，未选时不设置主机名后缀。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostNameSuffix?: string
+  /**
+   * 云服务器的主机名分隔符。
+默认的分隔符是点号（.），可选短横线（-）。仅有点号（.）和短横线（-）能作为主机名的分隔符。如果不设置，则默认采用点号（.）分隔符。
+通过分割符连接多段。
+
+假设原主机名为“product-as-host”，分隔符HostNameDelimiter为“-”，设置主机名后缀"suffix"，那么最终主机名为“product-as-host-suffix”。
+   */
+  HostNameDelimiter?: string
 }
 
 /**

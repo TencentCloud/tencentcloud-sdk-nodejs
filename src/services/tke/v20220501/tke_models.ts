@@ -753,13 +753,13 @@ export interface RebootMachinesResponse {
 export interface InstanceChargePrepaid {
   /**
    * 后付费计费周期，单位（月）：
-1，2，3，4，5，，6，7， 8，9，10，11，12，24，36，48，60
+1，2，3，4，5，6，7， 8，9，10，11，12，24，36，48，60
    */
-  Period: number
+  Period?: number
   /**
    * 预付费续费方式：
-- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 (默认）
-- NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不自动续费
+- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 
+- NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不自动续费(默认)
 - DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知用户过期，也不自动续费
 
    */
@@ -1006,6 +1006,10 @@ export interface UpdateNativeNodePoolParam {
    * 期望节点数
    */
   Replicas?: number
+  /**
+   * 是否更新存量节点
+   */
+  UpdateExistedNode?: boolean
   /**
    * 数据盘列表
    */

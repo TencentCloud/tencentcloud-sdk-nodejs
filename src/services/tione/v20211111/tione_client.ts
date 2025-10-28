@@ -24,6 +24,7 @@ import {
   StopModelAccelerateTaskRequest,
   DeleteTrainingModelVersionResponse,
   ServiceEIP,
+  DescribeExportResponse,
   NotebookSetItem,
   ModifyNotebookTagsRequest,
   SSHConfig,
@@ -87,6 +88,7 @@ import {
   GooseFS,
   DescribeBillingResourceGroupsRequest,
   Option,
+  DeleteExportResponse,
   DefaultInnerCallInfo,
   Choice,
   ModifyModelServiceAuthTokenRequest,
@@ -103,6 +105,7 @@ import {
   ModifyModelServiceAuthorizationRequest,
   DeleteModelServiceGroupResponse,
   GpuDetail,
+  CreateExportResponse,
   CronScaleJob,
   PrivateLinkInfo,
   DescribeNotebooksResponse,
@@ -135,6 +138,7 @@ import {
   IntranetCallInfo,
   DescribeBillingSpecsPriceRequest,
   Instance,
+  CreateExportRequest,
   DescribeBillingSpecsResponse,
   DeleteTrainingTaskResponse,
   AuthToken,
@@ -161,6 +165,7 @@ import {
   ModelInfo,
   CreateDatasetRequest,
   CreateModelServiceResponse,
+  DeleteExportRequest,
   ServiceGroup,
   ServiceLimit,
   DescribeModelServiceGroupResponse,
@@ -172,12 +177,13 @@ import {
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
   ServiceEIPInfo,
+  DescribeTrainingTasksResponse,
   DescribeModelAccelerateTaskRequest,
   Container,
   DeleteDatasetResponse,
   ExecAction,
   TrainingTaskDetail,
-  DescribeTrainingTasksResponse,
+  DescribeExportRequest,
   DescribeNotebookRequest,
   LocalDisk,
   DescribeLogsResponse,
@@ -690,6 +696,16 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
+   * 查看任务式建模训练任务，Notebook，在线服务和批量预测任务日志下载任务状态API
+   */
+  async DescribeExport(
+    req?: DescribeExportRequest,
+    cb?: (error: string, rep: DescribeExportResponse) => void
+  ): Promise<DescribeExportResponse> {
+    return this.request("DescribeExport", req, cb)
+  }
+
+  /**
    * Notebook详情
    */
   async DescribeNotebook(
@@ -739,6 +755,26 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DescribeModelServiceGroupsResponse) => void
   ): Promise<DescribeModelServiceGroupsResponse> {
     return this.request("DescribeModelServiceGroups", req, cb)
+  }
+
+  /**
+   * 删除任务式建模训练任务，Notebook，在线服务和批量预测任务日志导出任务API
+   */
+  async DeleteExport(
+    req: DeleteExportRequest,
+    cb?: (error: string, rep: DeleteExportResponse) => void
+  ): Promise<DeleteExportResponse> {
+    return this.request("DeleteExport", req, cb)
+  }
+
+  /**
+   * 创建任务式建模训练任务，Notebook，在线服务和批量预测任务日志下载任务API
+   */
+  async CreateExport(
+    req?: CreateExportRequest,
+    cb?: (error: string, rep: CreateExportResponse) => void
+  ): Promise<CreateExportResponse> {
+    return this.request("CreateExport", req, cb)
   }
 
   /**

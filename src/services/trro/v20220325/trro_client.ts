@@ -25,6 +25,7 @@ import {
   BoundLicensesRequest,
   PolicyInfo,
   CreateCloudRecordingResponse,
+  ModifyProjectSecModeResponse,
   StartPublishLiveStreamRequest,
   ModifyDeviceResponse,
   GetLicensesRequest,
@@ -41,6 +42,7 @@ import {
   ModifyPolicyRequest,
   DescribeDeviceInfoResponse,
   GetLicenseStatRequest,
+  GetDurationDetailsResponse,
   DescribeProjectListResponse,
   ModifyProjectResponse,
   BatchDeletePolicyResponse,
@@ -50,7 +52,7 @@ import {
   Device,
   DeleteCloudRecordingResponse,
   DescribeSessionStatisticsRequest,
-  ModifyProjectSecModeResponse,
+  GetDurationDetailsRequest,
   BatchDeleteDevicesResponse,
   ModifyProjectRequest,
   DescribeRecentSessionListResponse,
@@ -67,6 +69,7 @@ import {
   DeleteProjectResponse,
   DescribeDeviceListRequest,
   SessionDeviceDetail,
+  GetTotalDurationResponse,
   GetDeviceLicenseResponse,
   CreateDeviceResponse,
   MultiNet,
@@ -80,10 +83,12 @@ import {
   DescribeDeviceSessionDetailsRequest,
   GetLicensesResponse,
   DeviceInfo,
+  DurationDetails,
   DescribeDeviceSessionListRequest,
   ModifyCallbackUrlRequest,
   VideoList,
   GetDevicesRequest,
+  GetTotalDurationRequest,
   DescribeDeviceSessionListResponse,
   VideoParams,
   SessionIntervalStatistic,
@@ -99,6 +104,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trro.tencentcloudapi.com", "2022-03-25", clientConfig)
+  }
+
+  /**
+   * 查询该时间段、对应项目、设备的不同分辨率的通话时长汇总
+   */
+  async GetTotalDuration(
+    req: GetTotalDurationRequest,
+    cb?: (error: string, rep: GetTotalDurationResponse) => void
+  ): Promise<GetTotalDurationResponse> {
+    return this.request("GetTotalDuration", req, cb)
   }
 
   /**
@@ -271,6 +286,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPolicyResponse) => void
   ): Promise<ModifyPolicyResponse> {
     return this.request("ModifyPolicy", req, cb)
+  }
+
+  /**
+   * 查询该时间段、对应项目、设备的不同分辨率的通话时长流水，流水以日期（天）为单位
+   */
+  async GetDurationDetails(
+    req: GetDurationDetailsRequest,
+    cb?: (error: string, rep: GetDurationDetailsResponse) => void
+  ): Promise<GetDurationDetailsResponse> {
+    return this.request("GetDurationDetails", req, cb)
   }
 
   /**

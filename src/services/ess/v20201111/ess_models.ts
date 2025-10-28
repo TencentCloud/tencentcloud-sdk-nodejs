@@ -4400,6 +4400,27 @@ export interface CreateIntegrationDepartmentResponse {
 }
 
 /**
+ * 跳转事件的结构体，其中包括认证期间收录，授权书审核，企业认证的回跳事件。
+ */
+export interface JumpEvent {
+  /**
+   * 跳转事件枚举，
+   * 1 - 企业收录。
+   * 2 - 超管授权书审核。
+   * 3 - 认证完成。
+   */
+  JumpEventType?: number
+  /**
+   * 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。
+Endpoint如果是APP 类型，请传递<font color="red">"true"</font>
+如果 Endpoint 是 H5 类型，请参考文档[跳转电子签H5](https://qian.tencent.com/developers/company/openqianh5/)
+
+p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。
+   */
+  JumpUrl?: string
+}
+
+/**
  * DeleteSealPolicies返回参数结构体
  */
 export interface DeleteSealPoliciesResponse {
@@ -4483,30 +4504,26 @@ export interface UserThreeFactor {
 }
 
 /**
- * 更新员工信息失败返回的数据信息
+ * 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。
  */
-export interface FailedUpdateStaffData {
+export interface SignQrCode {
   /**
-   * 用户传入的名称
+   * 二维码ID，为32位字符串。
    */
-  DisplayName?: string
+  QrCodeId?: string
   /**
-   * 用户传入的手机号，明文展示
+   * 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。
    */
-  Mobile?: string
+  QrCodeUrl?: string
   /**
-   * 失败原因
+   * 二维码的有截止时间，格式为Unix标准时间戳（秒）。
+一旦超过二维码的有效期限，该二维码将自动失效。
    */
-  Reason?: string
+  ExpiredTime?: number
   /**
-   * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
-可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
+   * 微信小程序二维码
    */
-  UserId?: string
-  /**
-   * 员工在第三方平台的openId
-   */
-  OpenId?: string
+  WeixinQrCodeUrl?: string
 }
 
 /**
@@ -4738,26 +4755,30 @@ export interface DeleteIntegrationEmployeesRequest {
 }
 
 /**
- * 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。
+ * 更新员工信息失败返回的数据信息
  */
-export interface SignQrCode {
+export interface FailedUpdateStaffData {
   /**
-   * 二维码ID，为32位字符串。
+   * 用户传入的名称
    */
-  QrCodeId?: string
+  DisplayName?: string
   /**
-   * 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。
+   * 用户传入的手机号，明文展示
    */
-  QrCodeUrl?: string
+  Mobile?: string
   /**
-   * 二维码的有截止时间，格式为Unix标准时间戳（秒）。
-一旦超过二维码的有效期限，该二维码将自动失效。
+   * 失败原因
    */
-  ExpiredTime?: number
+  Reason?: string
   /**
-   * 微信小程序二维码
+   * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
    */
-  WeixinQrCodeUrl?: string
+  UserId?: string
+  /**
+   * 员工在第三方平台的openId
+   */
+  OpenId?: string
 }
 
 /**
@@ -6720,7 +6741,9 @@ export interface CreateOrganizationAuthUrlRequest {
    */
   LegalName?: string
   /**
-   * 认证完成跳回的链接，最长500个字符
+   * <font color="red">即将废弃</font>，入参请使用JumpEvents。
+认证完成跳回的链接，最长500个字符。
+
    */
   AutoJumpUrl?: string
   /**
@@ -6838,6 +6861,15 @@ p.s.
 p.s. 仅在对公打款不为空时有效
    */
   BankAccountNumberSame?: boolean
+  /**
+   * 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。
+p.s.
+Endpoint如果是APP 类型，请传递JumpUrl为<font color="red">"true" </font>
+如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 
+
+p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。
+   */
+  JumpEvents?: Array<JumpEvent>
 }
 
 /**

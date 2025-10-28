@@ -1118,7 +1118,7 @@ export interface DescribeLocalGatewayRequest {
  */
 export interface FlowLog {
   /**
-   * 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
+   * 私有网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。
    */
   VpcId?: string
   /**
@@ -1130,7 +1130,7 @@ export interface FlowLog {
    */
   FlowLogName?: string
   /**
-   * 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。
+   * 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转换），DCG（专线网关）。
    */
   ResourceType?: string
   /**
@@ -1177,6 +1177,10 @@ export interface FlowLog {
    * 流日志存储ID对应的地域信息。
    */
   CloudLogRegion?: string
+  /**
+   * 流日志采集周期，只支持CCN类型流日志。取值范围（单位s）：60， 300， 600。
+   */
+  Period?: number
 }
 
 /**
@@ -2282,6 +2286,20 @@ export interface DescribeHighPriorityRoutesRequest {
    * 请求对象个数。
    */
   Limit?: number
+}
+
+/**
+ * DescribeSecurityGroupExpandedPolicies返回参数结构体
+ */
+export interface DescribeSecurityGroupExpandedPoliciesResponse {
+  /**
+   * 安全组规则集合。
+   */
+  SecurityGroupPolicySet?: SecurityGroupPolicySet
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8296,14 +8314,17 @@ export interface AddressTemplateItem {
   AddressTemplateId?: string
   /**
    * IP模板名称，废弃字段。
+   * @deprecated
    */
   AddressTemplateName?: string
   /**
    * 废弃字段。
+   * @deprecated
    */
   From?: string
   /**
    * 废弃字段
+   * @deprecated
    */
   To?: string
   /**
@@ -8713,11 +8734,11 @@ export interface DescribeAddressesRequest {
   /**
    * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。详细的过滤条件如下：
 <li> address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的唯一 ID 过滤。EIP 唯一 ID 形如：eip-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-id。</li>
-<li> address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-name。</li>
+<li> address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-name。注意：当指定 address-name 参数时，仅支持按第一个传入的 address-name 参数执行查询操作。</li>
 <li> address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-ip。</li>
 <li> address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'：创建中，'BINDING'：绑定中，'BIND'：已绑，'UNBINDING'：解绑中，'UNBIND'：未绑定，'OFFLINING'：下线中，'BIND_ENI'：绑定了ENI。</li>
 <li> instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的实例 ID 过滤。实例 ID 形如：ins-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取instance-id。</li>
-<li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取private-ip-address。</li>
+<li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取private-ip-address。注意：当指定 private-ip-address 参数时，仅支持按第一个传入的 private-ip-address 参数执行查询操作。</li>
 <li> network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取network-interface-id。</li>
 <li> is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常）</li>
 <li> address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'WanIP'：普通公网 IP, 'EIP'：弹性公网 IP，'AnycastEIP'：加速 IP，'HighQualityEIP'：精品弹性公网 IP， 'AntiDDoSEIP'：高防 IP。默认值是'EIP'。</li>
@@ -10621,6 +10642,7 @@ export interface DescribePrivateNatGatewayTranslationAclRulesRequest {
 export interface ConflictItem {
   /**
    * 冲突资源的ID。已废弃
+   * @deprecated
    */
   ConfilctId?: string
   /**
@@ -13413,7 +13435,7 @@ export interface CreateFlowLogRequest {
    */
   FlowLogName: string
   /**
-   * 流日志所属资源类型，VPC（私有网络），SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。当选择VPC，SUBNET，CCN，DCG时，请通过工单加入白名单。
+   * 流日志所属资源类型，NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。当选择CCN，DCG时，请通过工单加入白名单。
    */
   ResourceType: string
   /**
@@ -13453,6 +13475,10 @@ export interface CreateFlowLogRequest {
    * 流日志存储ID对应的地域，不传递默认为本地域。
    */
   CloudLogRegion?: string
+  /**
+   * 流日志采集周期，只支持CCN类型流日志。取值范围（单位s）：60， 300， 600。
+   */
+  Period?: number
 }
 
 /**
@@ -17332,6 +17358,29 @@ export interface DescribeSgSnapshotFileContentRequest {
    * 安全组Id。
    */
   SecurityGroupId: string
+}
+
+/**
+ * DescribeSecurityGroupExpandedPolicies请求参数结构体
+ */
+export interface DescribeSecurityGroupExpandedPoliciesRequest {
+  /**
+   * 安全组实例ID，例如：sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
+   */
+  SecurityGroupId: string
+  /**
+   * 过滤条件。
+<li>security-group-id - String - 规则中的安全组ID。</li>
+<li>ip - String - IP，支持IPV4和IPV6模糊匹配。</li>
+<li>address-module - String - IP地址模板或IP地址组模板ID。</li>
+<li>service-module - String - 协议端口模板或协议端口组模板ID。</li>
+<li>protocol-type - String - 安全组策略支持的协议，可选值：`TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`。</li>
+<li>port - String - 是否必填：否 -协议端口，支持模糊匹配，值为`ALL`时，查询所有的端口。</li>
+<li>poly - String - 协议策略，可选值：`ALL`，所有策略；`ACCEPT`，允许；`DROP`，拒绝。</li>
+<li>direction - String - 协议规则，可选值：`ALL`，所有策略；`INBOUND`，入站规则；`OUTBOUND`，出站规则。</li>
+<li>description - String - 协议描述，该过滤条件支持模糊匹配。</li>
+   */
+  Filters?: Array<Filter>
 }
 
 /**

@@ -1435,6 +1435,10 @@ export interface UpgradeDBInstanceRequest {
 
    */
   DrZones?: Array<DrZoneInfo>
+  /**
+   * 是否自动升级数据库的兼容性级别，默认0。0-否，1-是
+   */
+  UpgradeCompatLevel?: number
 }
 
 /**
@@ -5639,7 +5643,7 @@ export interface Events {
    */
   EventType?: string
   /**
-   * 事件记录状态，1-成功，2-失败
+   * 事件记录状态，1-成功，2-失败，3-文件待删除，4-写入中
    */
   Status?: number
   /**
@@ -5647,7 +5651,7 @@ export interface Events {
    */
   StartTime?: string
   /**
-   * 扩展文件生成开始时间
+   * 扩展文件最后更新时间
    */
   EndTime?: string
   /**
@@ -8174,6 +8178,14 @@ export interface DbNormalDetail {
    * 是否全文启用 0：否 1：是
    */
   IsFullTextEnabled?: string
+  /**
+   * 是否是可用性组 0：否 1：是
+   */
+  IsAvailabilityGroups?: string
+  /**
+   * AG组数据库同步状态
+   */
+  AGSyncState?: string
 }
 
 /**

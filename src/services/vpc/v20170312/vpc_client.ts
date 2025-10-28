@@ -117,6 +117,7 @@ import {
   DeleteNetworkAclEntriesRequest,
   SecurityGroupPolicySet,
   DescribeHighPriorityRoutesRequest,
+  DescribeSecurityGroupExpandedPoliciesResponse,
   ModifyFlowLogAttributeRequest,
   UnassignIpv6SubnetCidrBlockResponse,
   ReplaceHighPriorityRoutesResponse,
@@ -869,6 +870,7 @@ import {
   DescribeServiceTemplatesResponse,
   AcceptVpcPeeringConnectionResponse,
   DescribeSgSnapshotFileContentRequest,
+  DescribeSecurityGroupExpandedPoliciesRequest,
   CreateBandwidthPackageResponse,
   CreateNetworkAclEntriesResponse,
   ResetVpnConnectionRequest,
@@ -4282,16 +4284,6 @@ LimitTypes取值范围：
   }
 
   /**
-   * 禁用SSL-VPN-CLIENT 证书
-   */
-  async DisableVpnGatewaySslClientCert(
-    req: DisableVpnGatewaySslClientCertRequest,
-    cb?: (error: string, rep: DisableVpnGatewaySslClientCertResponse) => void
-  ): Promise<DisableVpnGatewaySslClientCertResponse> {
-    return this.request("DisableVpnGatewaySslClientCert", req, cb)
-  }
-
-  /**
    * 本接口（DescribeHaVips）用于查询高可用虚拟IP（HAVIP）列表。
    */
   async DescribeHaVips(
@@ -4887,6 +4879,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（DescribeSecurityGroupExpandedPolicies）用于查看参数模板展开后的安全组规则。本接口会通过缓存降低请求后端服务的调用次数，因此拉取结果会存在延迟（缓存超时时间为1分钟）。
+   */
+  async DescribeSecurityGroupExpandedPolicies(
+    req: DescribeSecurityGroupExpandedPoliciesRequest,
+    cb?: (error: string, rep: DescribeSecurityGroupExpandedPoliciesResponse) => void
+  ): Promise<DescribeSecurityGroupExpandedPoliciesResponse> {
+    return this.request("DescribeSecurityGroupExpandedPolicies", req, cb)
+  }
+
+  /**
    * 本接口（DisableSnapshotPolicies）用于停用快照策略。
    */
   async DisableSnapshotPolicies(
@@ -5085,6 +5087,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+   */
+  async ModifyIpv6AddressesAttribute(
+    req: ModifyIpv6AddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
+  ): Promise<ModifyIpv6AddressesAttributeResponse> {
+    return this.request("ModifyIpv6AddressesAttribute", req, cb)
+  }
+
+  /**
    * 修改全局路由。
    */
   async ModifyGlobalRoutes(
@@ -5263,13 +5275,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+   * 禁用SSL-VPN-CLIENT 证书
    */
-  async ModifyIpv6AddressesAttribute(
-    req: ModifyIpv6AddressesAttributeRequest,
-    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
-  ): Promise<ModifyIpv6AddressesAttributeResponse> {
-    return this.request("ModifyIpv6AddressesAttribute", req, cb)
+  async DisableVpnGatewaySslClientCert(
+    req: DisableVpnGatewaySslClientCertRequest,
+    cb?: (error: string, rep: DisableVpnGatewaySslClientCertResponse) => void
+  ): Promise<DisableVpnGatewaySslClientCertResponse> {
+    return this.request("DisableVpnGatewaySslClientCert", req, cb)
   }
 
   /**

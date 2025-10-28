@@ -7442,11 +7442,11 @@ export interface DataForBudgetInfoPage {
  */
 export interface BudgetOperationLogEntity {
   /**
-   * Uin
+   * 支付者Uin
    */
   PayerUin?: number
   /**
-   * 主用户Uin
+   * 使用者Uin
 
    */
   OwnerUin?: number
@@ -7463,7 +7463,7 @@ export interface BudgetOperationLogEntity {
    */
   BillMonth?: string
   /**
-   * 修改类型：ADD(新增)、UPDATE(更新)
+   * 修改类型：ADD(新增)、UPDATE(更新)、DELETE(删除)
    */
   Action?: string
   /**
@@ -7479,7 +7479,7 @@ export interface BudgetOperationLogEntity {
    */
   UpdateTime?: string
   /**
-   * 修改渠道：官网修改/API修改
+   * 修改渠道：CONSOLE/API
    */
   OperationChannel?: string
   /**

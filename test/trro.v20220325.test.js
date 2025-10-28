@@ -18,6 +18,16 @@ const client = new tencentcloud.trro.v20220325.Client({
 })
 describe("trro.v20220325.test.js", function () {
 
+it("trro.v20220325.GetTotalDuration", async function () {
+    try {
+       const data = await client.GetTotalDuration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trro.v20220325.ModifyCallbackUrl", async function () {
     try {
        const data = await client.ModifyCallbackUrl({})
@@ -181,6 +191,16 @@ it("trro.v20220325.DescribeDeviceSessionDetails", async function () {
 it("trro.v20220325.ModifyPolicy", async function () {
     try {
        const data = await client.ModifyPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trro.v20220325.GetDurationDetails", async function () {
+    try {
+       const data = await client.GetDurationDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
