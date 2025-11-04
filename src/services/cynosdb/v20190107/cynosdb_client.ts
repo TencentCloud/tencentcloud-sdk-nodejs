@@ -39,6 +39,7 @@ import {
   DescribeSlaveZonesResponse,
   DescribeProxiesResponse,
   DescribeClusterDetailDatabasesRequest,
+  InquirePriceMultiSpecRequest,
   RollbackRoGroupInfo,
   CreateClustersResponse,
   CynosdbInstanceGrp,
@@ -73,6 +74,7 @@ import {
   AddInstancesResponse,
   BackupLimitClusterRestriction,
   SlowQueriesItem,
+  DescribeIntegrateTaskRequest,
   PolicyRule,
   ProxyGroupInfo,
   AssociateSecurityGroupsResponse,
@@ -88,6 +90,7 @@ import {
   DescribeClusterReadOnlyResponse,
   DescribeInstanceSpecsRequest,
   DescribeProxyNodesResponse,
+  CreateIntegrateClusterRequest,
   ProxyNodeInfo,
   DescribeZonesResponse,
   SearchClusterTablesResponse,
@@ -100,6 +103,7 @@ import {
   DescribeAuditLogsRequest,
   InquirePriceCreateResponse,
   DescribeClusterReadOnlyRequest,
+  DescribeIntegrateTaskResponse,
   CreateClustersRequest,
   DescribeClusterParamLogsRequest,
   CloseProxyResponse,
@@ -112,6 +116,7 @@ import {
   ModifyClusterDatabaseRequest,
   DescribeResourcePackageDetailRequest,
   InstanceCLSDeliveryInfo,
+  InquirePriceMultiSpecResponse,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
@@ -120,6 +125,7 @@ import {
   ModifyAccountHostResponse,
   DescribeAccountAllGrantPrivilegesRequest,
   DeleteCLSDeliveryRequest,
+  ProxyEndPointConfigInfo,
   CreateCLSDeliveryResponse,
   DescribeServerlessInstanceSpecsResponse,
   ManualBackupData,
@@ -145,6 +151,7 @@ import {
   IsolateInstanceResponse,
   CopyClusterPasswordComplexityResponse,
   DescribeClusterTransparentEncryptInfoRequest,
+  GoodsSpec,
   DeleteParamTemplateRequest,
   RevokeAccountPrivilegesResponse,
   ServerlessSpec,
@@ -268,6 +275,7 @@ import {
   CloseWanRequest,
   AuditLogFilter,
   UpgradeProxyVersionRequest,
+  GoodsPrice,
   ModifyResourcePackageClustersRequest,
   RuleFilters,
   DescribeFlowResponse,
@@ -300,6 +308,7 @@ import {
   DescribeAuditRuleWithInstanceIdsResponse,
   SearchClusterDatabasesRequest,
   ModifyProxyDescResponse,
+  CreateIntegrateClusterResponse,
   DbTable,
   ModifyClusterSlaveZoneResponse,
   RollbackToNewClusterRequest,
@@ -359,6 +368,7 @@ import {
   DescribeInstanceSlowQueriesRequest,
   ModifyResourcePackageClustersResponse,
   InputAccount,
+  ProxyConfigInfo,
   ModifyClusterNameRequest,
   InstanceAuditRule,
   ExchangeRoGroupInfo,
@@ -394,6 +404,7 @@ import {
   AuditLogFile,
   DescribeAuditRuleTemplatesResponse,
   LogicBackupConfigInfo,
+  IntegrateCreateClusterConfig,
   DeleteBackupResponse,
   ModifyBackupDownloadRestrictionResponse,
   ParamDetail,
@@ -403,6 +414,7 @@ import {
   OpenAuditServiceRequest,
   ModifyResourcePackageNameResponse,
   DescribeBackupListRequest,
+  IntegrateInstanceInfo,
   SwitchClusterLogBin,
   ExportInstanceErrorLogsResponse,
   ParamItemDetail,
@@ -455,6 +467,7 @@ import {
   GrantAccountPrivilegesResponse,
   ClusterParamModifyLog,
   ModifyBinlogConfigResponse,
+  InstanceNameWeight,
   ResetAccountPasswordRequest,
   ModifiableInfo,
   TaskMaintainInfo,
@@ -483,13 +496,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ResumeServerless）用于恢复 serverless 集群（启动暂停的集群）。
+   * 本接口（CreateClusters）用于新购集群。
    */
-  async ResumeServerless(
-    req: ResumeServerlessRequest,
-    cb?: (error: string, rep: ResumeServerlessResponse) => void
-  ): Promise<ResumeServerlessResponse> {
-    return this.request("ResumeServerless", req, cb)
+  async CreateIntegrateCluster(
+    req: CreateIntegrateClusterRequest,
+    cb?: (error: string, rep: CreateIntegrateClusterResponse) => void
+  ): Promise<CreateIntegrateClusterResponse> {
+    return this.request("CreateIntegrateCluster", req, cb)
   }
 
   /**
@@ -530,6 +543,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBinlogConfigResponse) => void
   ): Promise<ModifyBinlogConfigResponse> {
     return this.request("ModifyBinlogConfig", req, cb)
+  }
+
+  /**
+   * 本接口（ResumeServerless）用于恢复 serverless 集群（启动暂停的集群）。
+   */
+  async ResumeServerless(
+    req: ResumeServerlessRequest,
+    cb?: (error: string, rep: ResumeServerlessResponse) => void
+  ): Promise<ResumeServerlessResponse> {
+    return this.request("ResumeServerless", req, cb)
   }
 
   /**
@@ -1070,6 +1093,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeProxyResponse) => void
   ): Promise<UpgradeProxyResponse> {
     return this.request("UpgradeProxy", req, cb)
+  }
+
+  /**
+   * 此接口（InquirePriceMultiSpec）用于批量询价
+   */
+  async InquirePriceMultiSpec(
+    req: InquirePriceMultiSpecRequest,
+    cb?: (error: string, rep: InquirePriceMultiSpecResponse) => void
+  ): Promise<InquirePriceMultiSpecResponse> {
+    return this.request("InquirePriceMultiSpec", req, cb)
   }
 
   /**
@@ -1650,6 +1683,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceRenewResponse) => void
   ): Promise<InquirePriceRenewResponse> {
     return this.request("InquirePriceRenew", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeIntegrateTask）用于查询集群任务。
+   */
+  async DescribeIntegrateTask(
+    req: DescribeIntegrateTaskRequest,
+    cb?: (error: string, rep: DescribeIntegrateTaskResponse) => void
+  ): Promise<DescribeIntegrateTaskResponse> {
+    return this.request("DescribeIntegrateTask", req, cb)
   }
 
   /**

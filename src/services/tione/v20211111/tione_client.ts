@@ -699,7 +699,7 @@ https://cloud.tencent.com/document/product/1278/85305
    * 查看任务式建模训练任务，Notebook，在线服务和批量预测任务日志下载任务状态API
    */
   async DescribeExport(
-    req?: DescribeExportRequest,
+    req: DescribeExportRequest,
     cb?: (error: string, rep: DescribeExportResponse) => void
   ): Promise<DescribeExportResponse> {
     return this.request("DescribeExport", req, cb)
@@ -771,7 +771,7 @@ https://cloud.tencent.com/document/product/1278/85305
    * 创建任务式建模训练任务，Notebook，在线服务和批量预测任务日志下载任务API
    */
   async CreateExport(
-    req?: CreateExportRequest,
+    req: CreateExportRequest,
     cb?: (error: string, rep: CreateExportResponse) => void
   ): Promise<CreateExportResponse> {
     return this.request("CreateExport", req, cb)

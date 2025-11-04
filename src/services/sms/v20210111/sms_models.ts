@@ -505,7 +505,9 @@ export interface DescribeSignListStatus {
    */
   International?: number
   /**
-   * 申请签名状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。
+   * 签名状态，其中：
+国内短信0表示签名可用，1表示审核中，2表示审核通过待生效，-1表示审核未通过、审核失败或未完成首次报备等原因导致签名不可用。具体可参考 [国内短信签名状态值说明](https://cloud.tencent.com/document/product/382/39022#ea7b2b63-ee71-404f-a525-c5a572d12ccd)。
+国际短信0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。
    */
   StatusCode?: number
   /**
@@ -543,6 +545,7 @@ export interface DescribeSignListStatus {
 export interface SendSmsResponse {
   /**
    * 短信发送状态。
+注：可参考 <a href="#4.-.E7.A4.BA.E4.BE.8B">示例</a> ，包含短信发送成功和发送失败的输出示例。
    */
   SendStatusSet?: Array<SendStatus>
   /**
@@ -603,8 +606,8 @@ export interface SendSmsRequest {
    */
   SessionContext?: string
   /**
-   * 国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。
-注：月度使用量达到指定量级可申请独立 SenderId 使用，详情请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
+   * 国际/港澳台短信 Sender ID。可参考 [Sender ID 说明](https://cloud.tencent.com/document/product/382/102831)。
+注：国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。
    */
   SenderId?: string
 }
@@ -774,7 +777,8 @@ export interface PullSmsSendStatus {
    */
   SerialNo?: string
   /**
-   * 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）。
+   * 实际是否收到的短信接收状态，SUCCESS（下发成功）、FAIL（下发失败）。
+注：仅当运营商有返回短信接收状态时回包中才会有状态数据。
    */
   ReportStatus?: string
   /**
@@ -978,7 +982,7 @@ export interface SendStatus {
    */
   SessionContext?: string
   /**
-   * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/api/382/55981#6.-.E9.94.99.E8.AF.AF.E7.A0.81)，发送成功返回 "Ok"。
+   * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/product/382/59177#.E7.9F.AD.E4.BF.A1-API-3.0-.E5.8F.91.E9.80.81.E9.94.99.E8.AF.AF.E7.A0.81)，发送成功返回 "Ok"。
    */
   Code?: string
   /**

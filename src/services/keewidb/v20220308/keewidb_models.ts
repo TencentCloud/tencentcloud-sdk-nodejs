@@ -22,11 +22,11 @@ export interface ModifyInstanceParamsResponse {
   /**
    * 修改是否成功。<ul><li>true：修改成功。</li><li>false：修改失败。</li></ul>
    */
-  Changed: boolean
+  Changed?: boolean
   /**
    * 任务 ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -373,8 +373,13 @@ export interface ModifyInstanceRequest {
 export interface RenewInstanceResponse {
   /**
    * 交易 ID。
+   * @deprecated
    */
   DealId?: string
+  /**
+   * 订单号。
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -654,8 +659,13 @@ export interface InstanceMultiParam {
 export interface DescribeInstanceDealDetailRequest {
   /**
    * 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/1520/86207) 的输出参数DealId。
+   * @deprecated
    */
-  DealIds: Array<string>
+  DealIds?: Array<string>
+  /**
+   * 订单号，订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/1520/86207) 的输出参数DealName。
+   */
+  DealName?: string
 }
 
 /**
@@ -735,7 +745,7 @@ export interface DestroyPostpaidInstanceResponse {
   /**
    * 任务 ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1073,12 +1083,17 @@ export interface DescribeTaskListRequest {
 export interface CreateInstancesResponse {
   /**
    * 交易 ID。
+   * @deprecated
    */
   DealId?: string
   /**
    * 实例 ID 。
    */
   InstanceIds?: Array<string>
+  /**
+   * 订单号。
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1210,7 +1225,7 @@ export interface CleanUpInstanceResponse {
   /**
    * 任务 ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2026,8 +2041,13 @@ export interface InstanceEnumParam {
 export interface UpgradeInstanceResponse {
   /**
    * 交易ID。
+   * @deprecated
    */
   DealId?: string
+  /**
+   * 订单号。
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2106,8 +2126,13 @@ export interface DescribeInstanceReplicasRequest {
 export interface DestroyPrepaidInstanceResponse {
   /**
    * 交易ID。
+   * @deprecated
    */
-  DealId: string
+  DealId?: string
+  /**
+   * 订单号。
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

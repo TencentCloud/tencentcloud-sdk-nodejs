@@ -1870,6 +1870,10 @@ export interface UpdateLogstashInstanceRequest {
    * 可维护时间段
    */
   OperationDuration?: OperationDurationUpdated
+  /**
+   * 多可用区部署
+   */
+  MultiZoneInfo?: Array<ZoneDetail>
 }
 
 /**
@@ -3836,6 +3840,10 @@ RENEW_FLAG_DEFAULT：不自动续费
    * 是否为CDZLite可用区
    */
   IsCdzLite?: boolean
+  /**
+   * 集群内网tcp地址
+   */
+  EsPrivateTcpUrl?: string
 }
 
 /**

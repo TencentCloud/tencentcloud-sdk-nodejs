@@ -24,6 +24,7 @@ import {
   ModifyRabbitMQServerlessUserResponse,
   CreateRabbitMQServerlessVirtualHostRequest,
   DescribeRabbitMQServerlessUserResponse,
+  RabbitMQServerlessTag,
   ModifyRabbitMQServerlessExchangeResponse,
   DescribeRabbitMQServerlessConsumersResponse,
   DescribeRabbitMQServerlessQueueDetailResponse,

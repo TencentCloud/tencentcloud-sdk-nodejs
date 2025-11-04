@@ -27,6 +27,10 @@ export interface CkafkaTargetParams {
    * 重试策略
    */
   RetryPolicy: RetryPolicy
+  /**
+   * 事件投递kafka时的协议格式；目前只支持两种格式：1.CloudEvent(完整的cloudevent消息协议)2.CloudEventDataKey(cloudevent协议中的data字段内容)
+   */
+  EventDeliveryFormat?: string
 }
 
 /**

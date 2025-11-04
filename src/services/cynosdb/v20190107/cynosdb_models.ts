@@ -458,6 +458,28 @@ export interface DescribeClusterDetailDatabasesRequest {
 }
 
 /**
+ * InquirePriceMultiSpec请求参数结构体
+ */
+export interface InquirePriceMultiSpecRequest {
+  /**
+   * 可用区,每个地域提供最佳实践
+   */
+  Zone: string
+  /**
+   * 实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS
+   */
+  InstancePayMode: string
+  /**
+   * 存储购买类型，可选值为：PREPAID, POSTPAID
+   */
+  StoragePayMode: string
+  /**
+   * 商品规格
+   */
+  GoodsSpecs: Array<GoodsSpec>
+}
+
+/**
  * 回档RO组信息
  */
 export interface RollbackRoGroupInfo {
@@ -1571,6 +1593,20 @@ export interface SlowQueriesItem {
 }
 
 /**
+ * DescribeIntegrateTask请求参数结构体
+ */
+export interface DescribeIntegrateTaskRequest {
+  /**
+   * 大订单id，大订单id和子订单id必须二选一
+   */
+  BigDealId?: string
+  /**
+   * 订单列表
+   */
+  DealNames?: Array<string>
+}
+
+/**
  * 安全组规则
  */
 export interface PolicyRule {
@@ -1982,6 +2018,141 @@ export interface DescribeProxyNodesResponse {
 }
 
 /**
+ * CreateIntegrateCluster请求参数结构体
+ */
+export interface CreateIntegrateClusterRequest {
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 所属VPC网络ID
+   */
+  VpcId: string
+  /**
+   * 所属子网ID
+   */
+  SubnetId: string
+  /**
+   * 数据库版本，取值范围: 
+<li> MYSQL可选值：5.7，8.0 </li>
+   */
+  DbVersion: string
+  /**
+   * 所属项目ID
+   */
+  ProjectId?: number
+  /**
+   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
+   */
+  ClusterName?: string
+  /**
+   * 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种)
+   */
+  AdminPassword?: string
+  /**
+   * 端口，默认3306，取值范围[0, 65535)
+   */
+  Port?: number
+  /**
+   * 计费模式，按量计费：0，包年包月：1。默认按量计费。
+   */
+  PayMode?: number
+  /**
+   * 购买集群数，可选值范围[1,3]，默认为1
+   */
+  Count?: number
+  /**
+   * 普通实例存储上限，单位GB
+当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
+   */
+  StorageLimit?: number
+  /**
+   * 包年包月购买时长
+   */
+  TimeSpan?: number
+  /**
+   * 包年包月购买时长单位，['s','d','m','y']
+   */
+  TimeUnit?: string
+  /**
+   * 包年包月购买是否自动续费，默认为0。
+0标识默认续费方式，1表示自动续费，2表示不自动续费。
+   */
+  AutoRenewFlag?: number
+  /**
+   * 是否自动选择代金券 1是 0否 默认为0
+   */
+  AutoVoucher?: number
+  /**
+   * 集群创建需要绑定的tag数组信息
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费
+当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费
+回档与克隆均不支持包年包月存储
+   */
+  StoragePayMode?: number
+  /**
+   * 安全组id数组
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 告警策略Id数组
+   */
+  AlarmPolicyIds?: Array<string>
+  /**
+   * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
+   */
+  ClusterParams?: Array<ParamItem>
+  /**
+   * 交易模式，0-下单且支付，1-下单
+   */
+  DealMode?: number
+  /**
+   * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
+   */
+  ParamTemplateId?: number
+  /**
+   * 多可用区地址
+   */
+  SlaveZone?: string
+  /**
+   * 实例初始化配置信息，主要用于购买集群时选不同规格实例
+   */
+  InstanceInitInfos?: Array<IntegrateInstanceInfo>
+  /**
+   * 全球数据库唯一标识
+   */
+  GdnId?: string
+  /**
+   * 数据库代理配置
+   */
+  ProxyConfig?: ProxyConfigInfo
+  /**
+   * 是否自动归档
+   */
+  AutoArchive?: string
+  /**
+   * 暂停后的归档处理时间
+   */
+  AutoArchiveDelayHours?: number
+  /**
+   * 加密方法（由加密算法和密钥对版本组成）
+   */
+  EncryptMethod?: string
+  /**
+   * 集成集群配置信息
+   */
+  IntegrateCreateClusterConfig?: IntegrateCreateClusterConfig
+  /**
+   * 存储架构类型。 枚举值：1.0/2.0 默认值：1.0
+   */
+  StorageVersion?: string
+}
+
+/**
  * 数据库代理组节点
  */
 export interface ProxyNodeInfo {
@@ -2167,6 +2338,14 @@ export interface ProxyGroupRwInfo {
    * 连接模式，可选值：balance，nearby
    */
   AccessMode?: string
+  /**
+   * 是否将libra节点当作普通RO节点
+   */
+  ApNodeAsRoNode?: boolean
+  /**
+   * libra节点故障，是否转发给其他节点
+   */
+  ApQueryToOtherNode?: boolean
 }
 
 /**
@@ -2272,6 +2451,28 @@ export interface DescribeClusterReadOnlyRequest {
    * 集群ID列表
    */
   ClusterIds: Array<string>
+}
+
+/**
+ * DescribeIntegrateTask返回参数结构体
+ */
+export interface DescribeIntegrateTaskResponse {
+  /**
+   * 当前步骤
+   */
+  CurrentStep?: string
+  /**
+   * 当前进度
+   */
+  CurrentProgress?: string
+  /**
+   * 任务状态
+   */
+  TaskStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2739,6 +2940,20 @@ export interface InstanceCLSDeliveryInfo {
 }
 
 /**
+ * InquirePriceMultiSpec返回参数结构体
+ */
+export interface InquirePriceMultiSpecResponse {
+  /**
+   * 商品价格
+   */
+  GoodsPrice?: Array<GoodsPrice>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMaintainPeriodConfig返回参数结构体
  */
 export interface ModifyMaintainPeriodConfigResponse {
@@ -2858,6 +3073,40 @@ export interface DeleteCLSDeliveryRequest {
    * 是否维护时间运行
    */
   IsInMaintainPeriod?: string
+}
+
+/**
+ * 集成集群proxy地址配置
+ */
+export interface ProxyEndPointConfigInfo {
+  /**
+   * 所属VPC网络ID
+   */
+  UniqueVpcId?: string
+  /**
+   * 所属子网ID
+   */
+  UniqueSubnetId?: string
+  /**
+   * 安全组id数组
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 权重模式： system-系统分配，custom-自定义
+   */
+  WeightMode?: string
+  /**
+   * 是否自动添加只读实例，yes-是，no-不自动添加
+   */
+  AutoAddRo?: string
+  /**
+   * 读写属性： READWRITE,READONLY
+   */
+  RwType?: string
+  /**
+   * 权重信息
+   */
+  InstanceNameWeights?: Array<InstanceNameWeight>
 }
 
 /**
@@ -3079,6 +3328,14 @@ SessionConnectionPool
 可选范围:0~300（秒）
    */
   ConnectionPoolTimeOut?: number
+  /**
+   * 是否将libra节点当作普通RO节点
+   */
+  ApNodeAsRoNode?: boolean
+  /**
+   * libra节点故障，是否转发给其他节点
+   */
+  ApQueryToOtherNode?: boolean
 }
 
 /**
@@ -3408,6 +3665,51 @@ export interface DescribeClusterTransparentEncryptInfoRequest {
    * 集群id
    */
   ClusterId: string
+}
+
+/**
+ * 商品规格
+ */
+export interface GoodsSpec {
+  /**
+   * 商品数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GoodsNum?: number
+  /**
+   * CPU核数，PREPAID与POSTPAID实例类型必传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * 内存大小，单位G，PREPAID与POSTPAID实例类型必传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
+  /**
+   * Ccu大小，serverless类型必传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ccu?: number
+  /**
+   * 存储大小，PREPAID存储类型必传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageLimit?: number
+  /**
+   * 购买时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeSpan?: number
+  /**
+   * 时长单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeUnit?: string
+  /**
+   * 机器类型
+   */
+  DeviceType?: string
 }
 
 /**
@@ -6061,7 +6363,7 @@ base-基础版本，common-通用版本，enterprise-企业版本
    */
   PackageVersion: string
   /**
-   * 资源包大小，计算资源单位：万个；存储资源：GB
+   * 资源包大小，计算资源单位：个；存储资源：GB
    */
   PackageSpec: number
   /**
@@ -6490,6 +6792,27 @@ export interface UpgradeProxyVersionRequest {
    * 升级时间 ：no（升级完成时）yes（实例维护时间）
    */
   IsInMaintainPeriod?: string
+}
+
+/**
+ * 商品价格
+ */
+export interface GoodsPrice {
+  /**
+   * 实例价格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstancePrice: TradePrice
+  /**
+   * 存储价格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StoragePrice: TradePrice
+  /**
+   * 商品规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GoodsSpec: GoodsSpec
 }
 
 /**
@@ -7120,6 +7443,37 @@ export interface SearchClusterDatabasesRequest {
  * ModifyProxyDesc返回参数结构体
  */
 export interface ModifyProxyDescResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateIntegrateCluster返回参数结构体
+ */
+export interface CreateIntegrateClusterResponse {
+  /**
+   * 冻结流水ID
+   */
+  TranId?: string
+  /**
+   * 订单号
+   */
+  DealNames?: Array<string>
+  /**
+   * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
+   */
+  ClusterIds?: Array<string>
+  /**
+   * 大订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDealIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8828,6 +9182,32 @@ export interface InputAccount {
 }
 
 /**
+ * 访问代理配置
+ */
+export interface ProxyConfigInfo {
+  /**
+   * 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones
+   */
+  ProxyCount?: number
+  /**
+   * cpu核数
+   */
+  Cpu?: number
+  /**
+   * 内存
+   */
+  Mem?: number
+  /**
+   * 描述说明
+   */
+  Description?: string
+  /**
+   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
+   */
+  ProxyZones?: Array<ProxyZone>
+}
+
+/**
  * ModifyClusterName请求参数结构体
  */
 export interface ModifyClusterNameRequest {
@@ -9675,6 +10055,28 @@ export interface LogicBackupConfigInfo {
 }
 
 /**
+ * 集成集群配置
+ */
+export interface IntegrateCreateClusterConfig {
+  /**
+   * binlog保留天数[7,1830]
+   */
+  BinlogSaveDays?: number
+  /**
+   * 备份保留天数[7,1830]
+   */
+  BackupSaveDays?: number
+  /**
+   * 半同步超时时间[1000,4294967295]
+   */
+  SemiSyncTimeout?: number
+  /**
+   * proxy连接地址配置信息
+   */
+  ProxyEndPointConfigs?: Array<ProxyEndPointConfigInfo>
+}
+
+/**
  * DeleteBackup返回参数结构体
  */
 export interface DeleteBackupResponse {
@@ -9904,6 +10306,32 @@ export interface DescribeBackupListRequest {
    * 是否跨地域备份
    */
   IsCrossRegionsBackup?: string
+}
+
+/**
+ * 实例初始化配置信息
+ */
+export interface IntegrateInstanceInfo {
+  /**
+   * 实例cpu
+   */
+  Cpu: number
+  /**
+   * 实例内存
+   */
+  Memory: number
+  /**
+   * 实例类型 rw/ro
+   */
+  InstanceType: string
+  /**
+   * 实例个数,范围[1,15]
+   */
+  InstanceCount: number
+  /**
+   * 实例机器类型 common-公通用型,exclusive-独享型
+   */
+  DeviceType?: string
 }
 
 /**
@@ -11140,6 +11568,20 @@ export interface ModifyBinlogConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例权重
+ */
+export interface InstanceNameWeight {
+  /**
+   * 实例名称，创建集群中InstanceInitInfo.InstanceName所指定名称
+   */
+  InstanceName?: string
+  /**
+   * 权重
+   */
+  Weight?: number
 }
 
 /**

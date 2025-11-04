@@ -1329,7 +1329,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群属性
+   * 修改集群属性，至少选择一个参数更新
    */
   async ModifyClusterAttribute(
     req: ModifyClusterAttributeRequest,
@@ -2949,7 +2949,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群及节点池纬度运行时配置
+   * 修改集群及节点池维度运行时配置
    */
   async ModifyClusterRuntimeConfig(
     req: ModifyClusterRuntimeConfigRequest,

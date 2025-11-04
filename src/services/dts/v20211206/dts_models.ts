@@ -84,6 +84,102 @@ export interface IsolateMigrateJobResponse {
 }
 
 /**
+ * 订阅实例信息
+ */
+export interface SubscribeInfo {
+  /**
+   * 数据订阅的实例ID
+   */
+  SubscribeId?: string
+  /**
+   * 数据订阅实例的名称
+   */
+  SubscribeName?: string
+  /**
+   * 订阅实例发送数据的kafka topic
+   */
+  Topic?: string
+  /**
+   * 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)
+   */
+  Product?: string
+  /**
+   * 订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。
+   */
+  InstanceId?: string
+  /**
+   * 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空
+   */
+  InstanceStatus?: string
+  /**
+   * 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng
+   */
+  Status?: string
+  /**
+   * 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error
+   */
+  SubsStatus?: string
+  /**
+   * 上次修改时间，时间格式如：Y-m-d h:m:s
+   */
+  ModifyTime?: string
+  /**
+   * 创建时间，时间格式如：Y-m-d h:m:s
+   */
+  CreateTime?: string
+  /**
+   * 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   */
+  IsolateTime?: string
+  /**
+   * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   */
+  ExpireTime?: string
+  /**
+   * 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   */
+  OfflineTime?: string
+  /**
+   * 计费方式，0 - 包年包月，1 - 按量计费
+   */
+  PayType?: number
+  /**
+   * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
+   */
+  AutoRenewFlag?: number
+  /**
+   * 数据订阅实例所属地域
+   */
+  Region?: string
+  /**
+   * 接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc)
+   */
+  AccessType?: string
+  /**
+   * 数据库节点信息
+   */
+  Endpoints?: Array<EndpointItem>
+  /**
+   * 数据订阅版本, 当前支持kafka和kafkaPro（专业版）
+   */
+  SubscribeVersion?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagItem>
+  /**
+   * 任务报错信息，如果有的话。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Errors?: Array<SubsErr>
+  /**
+   * 订阅实例规格
+   */
+  InstanceClass?: string
+}
+
+/**
  * ModifyMigrateJobSpec请求参数结构体
  */
 export interface ModifyMigrateJobSpecRequest {
@@ -266,6 +362,21 @@ export interface RowsCountDifference {
    * 目标端行数
    */
   DstCount?: number
+}
+
+/**
+ * pg owner不一致性详情
+ */
+export interface DifferenceOwnerDetail {
+  /**
+   * owner不一致总数
+   */
+  TotalCount?: number
+  /**
+   * owner不一致详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<OwnerDifference>
 }
 
 /**
@@ -482,6 +593,32 @@ export interface DestroySyncJobResponse {
 }
 
 /**
+ * 结构不一致详情
+ */
+export interface SchemaDifference {
+  /**
+   * 结构不一致的表所在库
+   */
+  Db?: string
+  /**
+   * 结构不一致的表所在schema
+   */
+  Schema?: string
+  /**
+   * 结构不一致的表
+   */
+  Table?: string
+  /**
+   * 源库表结构
+   */
+  SrcSchema?: string
+  /**
+   * 目标库表结构
+   */
+  DstSchema?: string
+}
+
+/**
  * 任务错误信息
  */
 export interface ErrorInfoItem {
@@ -547,99 +684,18 @@ export interface TableItem {
 }
 
 /**
- * 订阅实例信息
+ * 表结构不一致信息
  */
-export interface SubscribeInfo {
+export interface DifferenceSchemaDetail {
   /**
-   * 数据订阅的实例ID
+   * 表结构不一致的数量
    */
-  SubscribeId?: string
+  TotalCount?: number
   /**
-   * 数据订阅实例的名称
-   */
-  SubscribeName?: string
-  /**
-   * 订阅实例发送数据的kafka topic
-   */
-  Topic?: string
-  /**
-   * 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)
-   */
-  Product?: string
-  /**
-   * 订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。
-   */
-  InstanceId?: string
-  /**
-   * 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空
-   */
-  InstanceStatus?: string
-  /**
-   * 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng
-   */
-  Status?: string
-  /**
-   * 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error
-   */
-  SubsStatus?: string
-  /**
-   * 上次修改时间，时间格式如：Y-m-d h:m:s
-   */
-  ModifyTime?: string
-  /**
-   * 创建时间，时间格式如：Y-m-d h:m:s
-   */
-  CreateTime?: string
-  /**
-   * 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
-   */
-  IsolateTime?: string
-  /**
-   * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
-   */
-  ExpireTime?: string
-  /**
-   * 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
-   */
-  OfflineTime?: string
-  /**
-   * 计费方式，0 - 包年包月，1 - 按量计费
-   */
-  PayType?: number
-  /**
-   * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
-   */
-  AutoRenewFlag?: number
-  /**
-   * 数据订阅实例所属地域
-   */
-  Region?: string
-  /**
-   * 接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc)
-   */
-  AccessType?: string
-  /**
-   * 数据库节点信息
-   */
-  Endpoints?: Array<EndpointItem>
-  /**
-   * 数据订阅版本, 当前支持kafka和kafkaPro（专业版）
-   */
-  SubscribeVersion?: string
-  /**
-   * 标签
+   * 表结构不一致信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags?: Array<TagItem>
-  /**
-   * 任务报错信息，如果有的话。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Errors?: Array<SubsErr>
-  /**
-   * 订阅实例规格
-   */
-  InstanceClass?: string
+  Items?: Array<SchemaDifference>
 }
 
 /**
@@ -785,9 +841,9 @@ export interface DescribeModifyCheckSyncJobResultResponse {
 }
 
 /**
- * StartSubscribe返回参数结构体
+ * StartModifySyncJob返回参数结构体
  */
-export interface StartSubscribeResponse {
+export interface StartModifySyncJobResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2688,13 +2744,33 @@ export interface ConfigureSyncJobRequest {
 }
 
 /**
- * StartModifySyncJob返回参数结构体
+ * pg对象owner不一致信息
  */
-export interface StartModifySyncJobResponse {
+export interface OwnerDifference {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * owner不一致的pg对象所在库
    */
-  RequestId?: string
+  Db?: string
+  /**
+   * owner不一致的pg对象所在schema
+   */
+  Schema?: string
+  /**
+   * owner不一致的pg对象名
+   */
+  ObjectName?: string
+  /**
+   * owner不一致的pg对象类型
+   */
+  ObjectType?: string
+  /**
+   * 源库对象owner
+   */
+  SrcOwner?: string
+  /**
+   * 目标库对象owner
+   */
+  DstOwner?: string
 }
 
 /**
@@ -4188,6 +4264,16 @@ export interface StartMigrateJobRequest {
 }
 
 /**
+ * StartSubscribe返回参数结构体
+ */
+export interface StartSubscribeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 订阅任务的kafka分区规则。符合库名和表名正则表达式的数据将按照RuleType计算该条数据将被投递的kafka分区。如果配置了多个规则，将按照配置的顺序，第一条命中的规则生效。
  */
 export interface DistributeRule {
@@ -5172,6 +5258,14 @@ export interface CompareDetailInfo {
    * 数据行不一致的详情，mongodb业务用到
    */
   DifferenceRow?: DifferenceRowDetail
+  /**
+   * 表结构不一致详情，pg用
+   */
+  DifferenceSchema?: DifferenceSchemaDetail
+  /**
+   * 对象owner不一致详情，pg用
+   */
+  DifferenceOwner?: DifferenceOwnerDetail
 }
 
 /**

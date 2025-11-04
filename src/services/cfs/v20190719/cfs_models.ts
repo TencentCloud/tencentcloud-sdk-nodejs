@@ -963,16 +963,6 @@ export interface DoDirectoryOperationResponse {
 }
 
 /**
- * DeleteMountTarget返回参数结构体
- */
-export interface DeleteMountTargetResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyLifecyclePolicy返回参数结构体
  */
 export interface ModifyLifecyclePolicyResponse {
@@ -1522,20 +1512,6 @@ export interface UserQuota {
    * 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败
    */
   Status?: string
-}
-
-/**
- * DeleteMountTarget请求参数结构体
- */
-export interface DeleteMountTargetRequest {
-  /**
-   * 文件系统 ID
-   */
-  FileSystemId: string
-  /**
-   * 挂载点 ID
-   */
-  MountTargetId: string
 }
 
 /**

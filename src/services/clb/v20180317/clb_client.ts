@@ -26,7 +26,6 @@ import {
   SetLoadBalancerSecurityGroupsResponse,
   RulesItems,
   ExtraInfo,
-  ClassicalListener,
   BatchModifyTargetWeightResponse,
   SetSecurityGroupForLoadbalancersRequest,
   CreateLoadBalancerRequest,
@@ -34,7 +33,7 @@ import {
   DeleteRuleRequest,
   CloneLoadBalancerRequest,
   DisassociateTargetGroupsResponse,
-  ListenerBackend,
+  SetLoadBalancerStartStatusResponse,
   SetLoadBalancerClsLogResponse,
   DescribeLoadBalancerTrafficResponse,
   MultiCertInfo,
@@ -47,20 +46,17 @@ import {
   DescribeTargetGroupInstancesRequest,
   DescribeLBOperateProtectRequest,
   DescribeIdleLoadBalancersResponse,
-  BindItem,
+  AssociateTargetGroupsRequest,
   DescribeLoadBalancersRequest,
-  AddCustomizedConfigRequest,
   ClassicalTarget,
   ListenerItem,
   RsWeightRule,
   RegisterFunctionTargetsRequest,
   DeregisterTargetsFromClassicalLBRequest,
   InquiryPriceModifyLoadBalancerRequest,
-  ModifyCustomizedConfigRequest,
   BasicTargetGroupInfo,
   ModifyTargetWeightResponse,
   ZoneResource,
-  AssociateTargetGroupsRequest,
   DescribeTaskStatusRequest,
   TargetGroupInstance,
   DescribeClassicalLBByInstanceIdResponse,
@@ -69,7 +65,7 @@ import {
   RuleHealth,
   DescribeExclusiveClustersResponse,
   ModifyDomainRequest,
-  DisassociateCustomizedConfigResponse,
+  IdleLoadBalancer,
   BatchModifyTargetTagRequest,
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
@@ -79,7 +75,6 @@ import {
   DescribeTargetGroupsResponse,
   LoadBalancerHealth,
   InquiryPriceCreateLoadBalancerRequest,
-  ModifyFunctionTargetsResponse,
   DeleteLoadBalancerListenersRequest,
   BlockedIP,
   ModifyRuleResponse,
@@ -89,10 +84,9 @@ import {
   DeregisterFunctionTargetsResponse,
   DescribeCustomizedConfigListRequest,
   AutoRewriteRequest,
-  IdleLoadBalancer,
   DescribeCrossTargetsResponse,
   FunctionInfo,
-  ModifyCustomizedConfigResponse,
+  ModifyFunctionTargetsResponse,
   DescribeLoadBalancerListByCertIdResponse,
   ModifyTargetGroupInstancesWeightResponse,
   DescribeTargetGroupsRequest,
@@ -105,7 +99,6 @@ import {
   Target,
   DescribeLoadBalancerTrafficRequest,
   DescribeBlockIPListRequest,
-  MigrateClassicalLoadBalancersResponse,
   CertIdRelatedWithLoadBalancers,
   ItemPrice,
   DescribeClassicalLBHealthStatusResponse,
@@ -116,7 +109,6 @@ import {
   SpecAvailability,
   ConfigListItem,
   RegisterTargetsWithClassicalLBRequest,
-  HealthCheck,
   ModifyDomainAttributesResponse,
   ReplaceCertForLoadBalancersResponse,
   DescribeTargetsResponse,
@@ -124,7 +116,7 @@ import {
   SetSecurityGroupForLoadbalancersResponse,
   DeregisterTargetGroupInstancesResponse,
   RegisterTargetsRequest,
-  DisassociateCustomizedConfigRequest,
+  HealthCheck,
   AssociateTargetGroupsResponse,
   CreateTopicRequest,
   DeleteListenerRequest,
@@ -151,10 +143,9 @@ import {
   CreateClsLogSetResponse,
   Backend,
   LBChargePrepaid,
-  AddCustomizedConfigResponse,
+  ClassicalListener,
   DeleteLoadBalancerRequest,
   ModifyLoadBalancersProjectRequest,
-  AssociateCustomizedConfigRequest,
   CertificateInput,
   ResourceAvailability,
   SetLoadBalancerSecurityGroupsRequest,
@@ -162,7 +153,7 @@ import {
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
   CreateTargetGroupResponse,
-  AssociateCustomizedConfigResponse,
+  MigrateClassicalLoadBalancersResponse,
   CreateLoadBalancerSnatIpsResponse,
   ClassicalLoadBalancerInfo,
   DescribeListenersResponse,
@@ -229,7 +220,7 @@ import {
   Price,
   ModifyTargetGroupInstancesPortRequest,
   BatchRegisterTargetsRequest,
-  DeleteCustomizedConfigResponse,
+  ListenerBackend,
   DescribeLBOperateProtectResponse,
   RuleInput,
   TagInfo,
@@ -240,7 +231,6 @@ import {
   DescribeClassicalLBListenersResponse,
   DescribeExclusiveClustersRequest,
   ModifyLoadBalancerSlaRequest,
-  SetLoadBalancerStartStatusResponse,
   DescribeBlockIPTaskRequest,
   Resource,
   CreateLoadBalancerResponse,
@@ -249,7 +239,6 @@ import {
   Quota,
   SetLoadBalancerClsLogRequest,
   LBItem,
-  DeleteCustomizedConfigRequest,
   ModifyTargetGroupAttributeResponse,
   DeleteLoadBalancerListenersResponse,
   DescribeIdleLoadBalancersRequest,
@@ -347,16 +336,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTargetGroupInstancesWeightResponse) => void
   ): Promise<ModifyTargetGroupInstancesWeightResponse> {
     return this.request("ModifyTargetGroupInstancesWeight", req, cb)
-  }
-
-  /**
-   * 关联配置到server或location，根据配置类型关联到server或location。准备下线，请使用SetCustomizedConfigForLoadBalancer。
-   */
-  async AssociateCustomizedConfig(
-    req: AssociateCustomizedConfigRequest,
-    cb?: (error: string, rep: AssociateCustomizedConfigResponse) => void
-  ): Promise<AssociateCustomizedConfigResponse> {
-    return this.request("AssociateCustomizedConfig", req, cb)
   }
 
   /**
@@ -511,16 +490,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 去关联个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
-   */
-  async DisassociateCustomizedConfig(
-    req: DisassociateCustomizedConfigRequest,
-    cb?: (error: string, rep: DisassociateCustomizedConfigResponse) => void
-  ): Promise<DisassociateCustomizedConfigResponse> {
-    return this.request("DisassociateCustomizedConfig", req, cb)
-  }
-
-  /**
      * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口。本接口是set语义，
 绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
 解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网 CLB 绑定 EIP 后，CLB 上的安全组对来自 EIP 的流量不生效，对来自内网 CLB 的流量生效。
@@ -595,16 +564,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyListenerResponse) => void
   ): Promise<ModifyListenerResponse> {
     return this.request("ModifyListener", req, cb)
-  }
-
-  /**
-   * 删除个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
-   */
-  async DeleteCustomizedConfig(
-    req: DeleteCustomizedConfigRequest,
-    cb?: (error: string, rep: DeleteCustomizedConfigResponse) => void
-  ): Promise<DeleteCustomizedConfigResponse> {
-    return this.request("DeleteCustomizedConfig", req, cb)
   }
 
   /**
@@ -872,16 +831,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
-   */
-  async AddCustomizedConfig(
-    req: AddCustomizedConfigRequest,
-    cb?: (error: string, rep: AddCustomizedConfigResponse) => void
-  ): Promise<AddCustomizedConfigResponse> {
-    return this.request("AddCustomizedConfig", req, cb)
-  }
-
-  /**
      * ModifyDomain接口用来修改负载均衡七层监听器下的域名。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
      */
@@ -942,16 +891,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRuleResponse) => void
   ): Promise<DeleteRuleResponse> {
     return this.request("DeleteRule", req, cb)
-  }
-
-  /**
-   * 修改个性化配置。如果配置已经绑定clb、server或location，同时更新。准备下线，请使用SetCustomizedConfigForLoadBalancer。
-   */
-  async ModifyCustomizedConfig(
-    req: ModifyCustomizedConfigRequest,
-    cb?: (error: string, rep: ModifyCustomizedConfigResponse) => void
-  ): Promise<ModifyCustomizedConfigResponse> {
-    return this.request("ModifyCustomizedConfig", req, cb)
   }
 
   /**

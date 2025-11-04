@@ -122,7 +122,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 跨账号关联VPC时绑定其他账号
+   * 跨账号关联VPC时，可通过该API接口添加关联账号
    */
   async CreatePrivateDNSAccount(
     req: CreatePrivateDNSAccountRequest,
@@ -282,7 +282,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除私有域解析账号
+   * 适用于跨账号绑定VPC时需要移除关联账号的场景，解除账号关联后，将无法获取对应账号下的 VPC资源。
    */
   async DeletePrivateDNSAccount(
     req: DeletePrivateDNSAccountRequest,
@@ -472,7 +472,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取私有域解析账号列表
+   * 在跨账号绑定VPC的场景下，可通过该API接口获取所有已关联账号的列表
    */
   async DescribePrivateDNSAccountList(
     req: DescribePrivateDNSAccountListRequest,

@@ -38,6 +38,16 @@ it("gme.v20180711.StopRecord", async function () {
     }
 })
 
+it("gme.v20180711.DescribeAuditResultExternal", async function () {
+    try {
+       const data = await client.DescribeAuditResultExternal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.UpdateAIConversation", async function () {
     try {
        const data = await client.UpdateAIConversation({})

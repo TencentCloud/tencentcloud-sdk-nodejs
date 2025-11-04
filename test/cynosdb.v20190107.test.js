@@ -18,9 +18,9 @@ const client = new tencentcloud.cynosdb.v20190107.Client({
 })
 describe("cynosdb.v20190107.test.js", function () {
 
-it("cynosdb.v20190107.ResumeServerless", async function () {
+it("cynosdb.v20190107.CreateIntegrateCluster", async function () {
     try {
-       const data = await client.ResumeServerless({})
+       const data = await client.CreateIntegrateCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("cynosdb.v20190107.ReplayInstanceAuditLog", async function () {
 it("cynosdb.v20190107.ModifyBinlogConfig", async function () {
     try {
        const data = await client.ModifyBinlogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ResumeServerless", async function () {
+    try {
+       const data = await client.ResumeServerless({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +611,16 @@ it("cynosdb.v20190107.RestartInstance", async function () {
 it("cynosdb.v20190107.UpgradeProxy", async function () {
     try {
        const data = await client.UpgradeProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.InquirePriceMultiSpec", async function () {
+    try {
+       const data = await client.InquirePriceMultiSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1181,6 +1201,16 @@ it("cynosdb.v20190107.SetRenewFlag", async function () {
 it("cynosdb.v20190107.InquirePriceRenew", async function () {
     try {
        const data = await client.InquirePriceRenew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeIntegrateTask", async function () {
+    try {
+       const data = await client.DescribeIntegrateTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

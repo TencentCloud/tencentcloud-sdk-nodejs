@@ -108,9 +108,9 @@ it("ocr.v20181119.TrainTicketOCR", async function () {
     }
 })
 
-it("ocr.v20181119.PropOwnerCertOCR", async function () {
+it("ocr.v20181119.RecognizeValidIDCardOCR", async function () {
     try {
-       const data = await client.PropOwnerCertOCR({})
+       const data = await client.RecognizeValidIDCardOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,16 +221,6 @@ it("ocr.v20181119.DescribeExtractDocAgentJob", async function () {
 it("ocr.v20181119.RideHailingDriverLicenseOCR", async function () {
     try {
        const data = await client.RideHailingDriverLicenseOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.RecognizeForeignPermanentResidentIdCard", async function () {
-    try {
-       const data = await client.RecognizeForeignPermanentResidentIdCard({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,16 +378,6 @@ it("ocr.v20181119.EstateCertOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeValidIDCardOCR", async function () {
-    try {
-       const data = await client.RecognizeValidIDCardOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.BankCardOCR", async function () {
     try {
        const data = await client.BankCardOCR({})
@@ -451,26 +431,6 @@ it("ocr.v20181119.BusinessCardOCR", async function () {
 it("ocr.v20181119.IDCardOCR", async function () {
     try {
        const data = await client.IDCardOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.RecognizeGeneralTextImageWarn", async function () {
-    try {
-       const data = await client.RecognizeGeneralTextImageWarn({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.InstitutionOCR", async function () {
-    try {
-       const data = await client.InstitutionOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +598,9 @@ it("ocr.v20181119.BankSlipOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VehicleRegCertOCR", async function () {
+it("ocr.v20181119.ResidenceBookletOCR", async function () {
     try {
-       const data = await client.VehicleRegCertOCR({})
+       const data = await client.ResidenceBookletOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,16 +758,6 @@ it("ocr.v20181119.DutyPaidProofOCR", async function () {
     }
 })
 
-it("ocr.v20181119.OrgCodeCertOCR", async function () {
-    try {
-       const data = await client.OrgCodeCertOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.FinanBillSliceOCR", async function () {
     try {
        const data = await client.FinanBillSliceOCR({})
@@ -858,9 +808,9 @@ it("ocr.v20181119.AdvertiseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.ResidenceBookletOCR", async function () {
+it("ocr.v20181119.VehicleRegCertOCR", async function () {
     try {
-       const data = await client.ResidenceBookletOCR({})
+       const data = await client.VehicleRegCertOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

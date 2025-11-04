@@ -200,6 +200,71 @@ export interface HealthCheckTemplateRule {
 }
 
 /**
+ * DescribeClusters请求参数结构体
+ */
+export interface DescribeClustersRequest {
+  /**
+   * 集群ID列表(为空时，
+表示获取账号下所有集群)
+   */
+  ClusterIds?: Array<string>
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+  /**
+   * 最大输出条数，默认20，最大为100
+   */
+  Limit?: number
+  /**
+   * ·  ClusterName
+    按照【集群名】进行过滤。
+    类型：String
+    必选：否
+
+·  ClusterType
+    按照【集群类型】进行过滤。
+    类型：String
+    必选：否
+
+·  ClusterStatus
+    按照【集群状态】进行过滤。
+    类型：String
+    必选：否
+
+·  Tags
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+
+·  vpc-id
+    按照【VPC】进行过滤。
+    类型：String
+    必选：否
+
+·  tag-key
+    按照【标签键】进行过滤。
+    类型：String
+    必选：否
+
+·  tag-value
+    按照【标签值】进行过滤。
+    类型：String
+    必选：否
+
+·  tag:tag-key
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+   */
+  Filters?: Array<Filter>
+  /**
+   * 集群类型，例如：MANAGED_CLUSTER
+   */
+  ClusterType?: string
+}
+
+/**
  * 机型名称与GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric等相关配置信息
  */
 export interface GPUConfig {
@@ -677,6 +742,16 @@ export interface CreateHealthCheckPolicyRequest {
    * 健康检测策略
    */
   HealthCheckPolicy: HealthCheckPolicy
+}
+
+/**
+ * SetMachineLogin返回参数结构体
+ */
+export interface SetMachineLoginResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1756,6 +1831,27 @@ export interface DescribeHealthCheckPoliciesResponse {
 }
 
 /**
+ * 托管节点池Management配置
+ */
+export interface ManagementConfig {
+  /**
+   * dns 配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nameservers?: Array<string>
+  /**
+   * hosts 配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hosts?: Array<string>
+  /**
+   * 内核参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KernelArgs?: Array<string>
+}
+
+/**
  * 健康检测模板
  */
 export interface HealthCheckTemplate {
@@ -1798,13 +1894,54 @@ export interface ModifyHealthCheckPolicyRequest {
 }
 
 /**
- * SetMachineLogin返回参数结构体
+ * 集群信息结构体
  */
-export interface SetMachineLoginResponse {
+export interface Cluster {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群描述
+   */
+  ClusterDescription?: string
+  /**
+   * 集群版本（默认值为1.10.5）
+   */
+  ClusterVersion?: string
+  /**
+   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
+   */
+  ClusterType?: string
+  /**
+   * 标签描述列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSpecification?: Array<TagSpecification>
+  /**
+   * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Upgrading 升级中,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 欠费隔离中,ResourceIsolated 欠费已隔离,ResourceReverse 冲正恢复中,Abnormal 异常)
+   */
+  ClusterStatus?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+  /**
+   * 集群等级，针对托管集群生效
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterLevel?: string
+  /**
+   * 集群所在vpc的id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
 }
 
 /**
@@ -1830,24 +1967,25 @@ export interface ManuallyAdded {
 }
 
 /**
- * 托管节点池Management配置
+ * DescribeClusters返回参数结构体
  */
-export interface ManagementConfig {
+export interface DescribeClustersResponse {
   /**
-   * dns 配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群总个数
    */
-  Nameservers?: Array<string>
+  TotalCount?: number
   /**
-   * hosts 配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群信息列表
    */
-  Hosts?: Array<string>
+  Clusters?: Array<Cluster>
   /**
-   * 内核参数配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * 错误信息集合
    */
-  KernelArgs?: Array<string>
+  Errors?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

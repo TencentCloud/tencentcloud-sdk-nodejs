@@ -104,18 +104,17 @@ export interface RunStatusCount {
 }
 
 /**
- * GetRunStatus请求参数结构体
+ * 环境运行时配置
  */
-export interface GetRunStatusRequest {
+export interface EnvironmentRuntimeConfig {
   /**
-   * 任务Uuid。
+   * Cromwell工作流引擎设置
    */
-  RunUuid: string
+  CromwellConfig: CromwellConfig
   /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
+   * Nextflow工作流引擎设置
    */
-  ProjectId?: string
+  NextflowConfig: NextflowConfig
 }
 
 /**
@@ -380,6 +379,10 @@ export interface Environment {
    * 创建时间。
    */
   CreationTime?: string
+  /**
+   * 运行时配置。
+   */
+  RuntimeConfig?: EnvironmentRuntimeConfig
 }
 
 /**
@@ -801,29 +804,13 @@ export interface ResourceQuota {
 }
 
 /**
- * RetryRuns请求参数结构体
+ * Nextflow工作流引擎设置
  */
-export interface RetryRunsRequest {
+export interface NextflowConfig {
   /**
-   * 项目ID。（不填使用指定地域下的默认项目）
+   * 工作流任务并发数
    */
-  ProjectId?: string
-  /**
-   * 需要重试的任务批次ID。
-   */
-  RunGroupId?: string
-  /**
-   * 需要重试的任务UUID。
-   */
-  RunUuids?: Array<string>
-  /**
-   * WDL运行选项，不填使用被重试的任务批次运行选项。
-   */
-  WDLOption?: RunOption
-  /**
-   * Nextflow运行选项，不填使用被重试的任务批次运行选项。
-   */
-  NFOption?: NFOption
+  ExecutorQueueSize: number
 }
 
 /**
@@ -1035,6 +1022,32 @@ export interface DeleteVolumeRequest {
 }
 
 /**
+ * RetryRuns请求参数结构体
+ */
+export interface RetryRunsRequest {
+  /**
+   * 项目ID。（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+  /**
+   * 需要重试的任务批次ID。
+   */
+  RunGroupId?: string
+  /**
+   * 需要重试的任务UUID。
+   */
+  RunUuids?: Array<string>
+  /**
+   * WDL运行选项，不填使用被重试的任务批次运行选项。
+   */
+  WDLOption?: RunOption
+  /**
+   * Nextflow运行选项，不填使用被重试的任务批次运行选项。
+   */
+  NFOption?: NFOption
+}
+
+/**
  * DeleteEnvironment请求参数结构体
  */
 export interface DeleteEnvironmentRequest {
@@ -1197,6 +1210,38 @@ export interface DatabaseOption {
    * 数据库可用区。
    */
   Zone: string
+}
+
+/**
+ * Nextflow选项。
+ */
+export interface NFOption {
+  /**
+   * Config。
+   */
+  Config?: string
+  /**
+   * Profile。
+   */
+  Profile?: string
+  /**
+   * Report。
+   */
+  Report?: boolean
+  /**
+   * Resume。
+   */
+  Resume?: boolean
+  /**
+   * Nextflow引擎版本，取值范围：
+- 22.10.7
+- 23.10.1
+   */
+  NFVersion?: string
+  /**
+   * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
+   */
+  LaunchDir?: string
 }
 
 /**
@@ -1416,6 +1461,21 @@ export interface TerminateRunGroupRequest {
    * 任务批次ID。
    */
   RunGroupId: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+}
+
+/**
+ * GetRunStatus请求参数结构体
+ */
+export interface GetRunStatusRequest {
+  /**
+   * 任务Uuid。
+   */
+  RunUuid: string
   /**
    * 项目ID。
 （不填使用指定地域下的默认项目）
@@ -1720,35 +1780,17 @@ export interface RunGroupNotification {
 }
 
 /**
- * Nextflow选项。
+ * Cromwell工作流引擎设置
  */
-export interface NFOption {
+export interface CromwellConfig {
   /**
-   * Config。
+   * 工作流并发数
    */
-  Config?: string
+  MaxConcurrentWorkflows: number
   /**
-   * Profile。
+   * 作业并发数
    */
-  Profile?: string
-  /**
-   * Report。
-   */
-  Report?: boolean
-  /**
-   * Resume。
-   */
-  Resume?: boolean
-  /**
-   * Nextflow引擎版本，取值范围：
-- 22.10.7
-- 23.10.1
-   */
-  NFVersion?: string
-  /**
-   * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
-   */
-  LaunchDir?: string
+  ConcurrentJobLimit: number
 }
 
 /**

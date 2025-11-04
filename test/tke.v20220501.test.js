@@ -68,6 +68,16 @@ it("tke.v20220501.SetMachineLogin", async function () {
     }
 })
 
+it("tke.v20220501.StopMachines", async function () {
+    try {
+       const data = await client.StopMachines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.DeleteHealthCheckPolicy", async function () {
     try {
        const data = await client.DeleteHealthCheckPolicy({})
@@ -108,9 +118,9 @@ it("tke.v20220501.ModifyHealthCheckPolicy", async function () {
     }
 })
 
-it("tke.v20220501.StopMachines", async function () {
+it("tke.v20220501.DescribeHealthCheckPolicyBindings", async function () {
     try {
-       const data = await client.StopMachines({})
+       const data = await client.DescribeHealthCheckPolicyBindings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +148,9 @@ it("tke.v20220501.DescribeHealthCheckTemplate", async function () {
     }
 })
 
-it("tke.v20220501.DescribeHealthCheckPolicyBindings", async function () {
+it("tke.v20220501.DescribeClusters", async function () {
     try {
-       const data = await client.DescribeHealthCheckPolicyBindings({})
+       const data = await client.DescribeClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

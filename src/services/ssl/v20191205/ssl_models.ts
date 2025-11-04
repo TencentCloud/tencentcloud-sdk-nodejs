@@ -4052,6 +4052,10 @@ export interface ReplaceCertificateRequest {
    * 签名算法
    */
   SignAlgo?: string
+  /**
+   * 是否使用交叉根证书，默认为true
+   */
+  UseCrossSignRoot?: boolean
 }
 
 /**
@@ -5927,6 +5931,10 @@ null：用户上传证书（没有套餐类型），
    */
   CertType?: string
   /**
+   * 是否使用交叉根
+   */
+  UseCrossSignRoot?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6352,6 +6360,10 @@ FILE：手动添加域名文件验证。 需要用户手动在域名站点根目
    * 签名算法
    */
   SignAlgo?: string
+  /**
+   * 是否使用交叉根证书
+   */
+  UseCrossSignRoot?: boolean
 }
 
 /**

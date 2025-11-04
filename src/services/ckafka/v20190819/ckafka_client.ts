@@ -39,6 +39,7 @@ import {
   InstanceRoute,
   DescribeTaskStatusRequest,
   DescribeAclRuleRequest,
+  RestartDatahubTaskRequest,
   JgwOperateResponse,
   MqttParam,
   BrokerTopicFlowData,
@@ -67,6 +68,7 @@ import {
   DescribeDatahubGroupOffsetsResponse,
   InquiryPublicNetworkParam,
   DeleteConnectResourceResponse,
+  RestartDatahubTaskResponse,
   BatchContent,
   ScfParam,
   DescribeTopicRequest,
@@ -116,7 +118,7 @@ import {
   RouteDTO,
   DescribeDatahubTaskResponse,
   FetchLatestDatahubMessageListRequest,
-  SQLServerConnectParam,
+  PauseDatahubTaskResponse,
   CreateConnectResourceResponse,
   GroupOffsetResponse,
   InquiryDetailPrice,
@@ -225,6 +227,7 @@ import {
   DeleteAclRuleRequest,
   DescribeTypeInstancesResponse,
   ModifyConnectResourceRequest,
+  SQLServerConnectParam,
   CreateTokenRequest,
   TdwParam,
   DescribeCvmInfoRequest,
@@ -254,6 +257,7 @@ import {
   ClickHouseSchema,
   ConsumerGroupTopic,
   TransformsParam,
+  PauseDatahubTaskRequest,
   DescribeInstancesRequest,
   DescribeCkafkaZoneResponse,
   ModifyInstancePreResponse,
@@ -277,6 +281,7 @@ import {
   PostgreSQLParam,
   CreateTopicIpWhiteListRequest,
   MariaDBConnectParam,
+  ResumeDatahubTaskResponse,
   ModifyTopicAttributesRequest,
   CreateInstancePreRequest,
   DeleteTopicResponse,
@@ -287,6 +292,7 @@ import {
   SQLServerParam,
   ReplaceParam,
   BatchCreateAclRequest,
+  ResumeDatahubTaskRequest,
   DescribeConnectResourcesRequest,
   CreatePartitionRequest,
   InstanceDeleteResponse,
@@ -582,6 +588,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复Dip任务
+   */
+  async ResumeDatahubTask(
+    req: ResumeDatahubTaskRequest,
+    cb?: (error: string, rep: ResumeDatahubTaskResponse) => void
+  ): Promise<ResumeDatahubTaskResponse> {
+    return this.request("ResumeDatahubTask", req, cb)
+  }
+
+  /**
    * 添加 ACL 规则
    */
   async CreateAclRule(
@@ -762,13 +778,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DIP主题属性
+   * 暂停Dip任务
    */
-  async DescribeDatahubTopic(
-    req: DescribeDatahubTopicRequest,
-    cb?: (error: string, rep: DescribeDatahubTopicResponse) => void
-  ): Promise<DescribeDatahubTopicResponse> {
-    return this.request("DescribeDatahubTopic", req, cb)
+  async PauseDatahubTask(
+    req: PauseDatahubTaskRequest,
+    cb?: (error: string, rep: PauseDatahubTaskResponse) => void
+  ): Promise<PauseDatahubTaskResponse> {
+    return this.request("PauseDatahubTask", req, cb)
   }
 
   /**
@@ -1023,6 +1039,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Datahub任务异常时，重启Datahub任务
+   */
+  async RestartDatahubTask(
+    req: RestartDatahubTaskRequest,
+    cb?: (error: string, rep: RestartDatahubTaskResponse) => void
+  ): Promise<RestartDatahubTaskResponse> {
+    return this.request("RestartDatahubTask", req, cb)
+  }
+
+  /**
    * 创建消费者组
    */
   async CreateConsumer(
@@ -1090,6 +1116,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 获取DIP主题属性
+   */
+  async DescribeDatahubTopic(
+    req: DescribeDatahubTopicRequest,
+    cb?: (error: string, rep: DescribeDatahubTopicResponse) => void
+  ): Promise<DescribeDatahubTopicResponse> {
+    return this.request("DescribeDatahubTopic", req, cb)
   }
 
   /**

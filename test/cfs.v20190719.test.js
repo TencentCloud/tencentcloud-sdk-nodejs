@@ -248,6 +248,16 @@ it("cfs.v20190719.SignUpCfsService", async function () {
     }
 })
 
+it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
+    try {
+       const data = await client.CreateAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DeleteMigrationTask", async function () {
     try {
        const data = await client.DeleteMigrationTask({})
@@ -348,9 +358,9 @@ it("cfs.v20190719.ApplyPathLifecyclePolicy", async function () {
     }
 })
 
-it("cfs.v20190719.DeleteUserQuota", async function () {
+it("cfs.v20190719.ModifyFileSystemAutoScaleUpRule", async function () {
     try {
-       const data = await client.DeleteUserQuota({})
+       const data = await client.ModifyFileSystemAutoScaleUpRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,16 +391,6 @@ it("cfs.v20190719.UpdateCfsRule", async function () {
 it("cfs.v20190719.DescribeCfsFileSystems", async function () {
     try {
        const data = await client.DescribeCfsFileSystems({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfs.v20190719.ModifyFileSystemAutoScaleUpRule", async function () {
-    try {
-       const data = await client.ModifyFileSystemAutoScaleUpRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,19 +458,9 @@ it("cfs.v20190719.CreateMigrationTask", async function () {
     }
 })
 
-it("cfs.v20190719.DeleteMountTarget", async function () {
+it("cfs.v20190719.DeleteUserQuota", async function () {
     try {
-       const data = await client.DeleteMountTarget({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
-    try {
-       const data = await client.CreateAutoSnapshotPolicy({})
+       const data = await client.DeleteUserQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

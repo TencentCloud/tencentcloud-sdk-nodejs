@@ -258,6 +258,16 @@ it("thpc.v20230321.DescribeClusterStorageOption", async function () {
     }
 })
 
+it("thpc.v20230321.ModifyClusterDeletionProtection", async function () {
+    try {
+       const data = await client.ModifyClusterDeletionProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20230321.ModifyInitNodeScripts", async function () {
     try {
        const data = await client.ModifyInitNodeScripts({})

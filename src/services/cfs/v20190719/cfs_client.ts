@@ -63,7 +63,6 @@ import {
   DeleteCfsSnapshotResponse,
   DescribeCfsFileSystemClientsResponse,
   DoDirectoryOperationResponse,
-  DeleteMountTargetResponse,
   ModifyLifecyclePolicyResponse,
   CreateCfsSnapshotRequest,
   DescribeBucketListRequest,
@@ -91,7 +90,6 @@ import {
   CreateCfsSnapshotResponse,
   LifecycleRule,
   UserQuota,
-  DeleteMountTargetRequest,
   CreateCfsRuleRequest,
   DeleteCfsFileSystemResponse,
   CreateCfsFileSystemResponse,
@@ -407,6 +405,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建定期快照策略
+   */
+  async CreateAutoSnapshotPolicy(
+    req: CreateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
+  ): Promise<CreateAutoSnapshotPolicyResponse> {
+    return this.request("CreateAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
    * 用于删除迁移任务。不支持删除等待中、创建中、运行中、取消中、终止中状态的任务。
    */
   async DeleteMigrationTask(
@@ -507,13 +515,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
+   * 用来设置文件系统扩容策略，该接口只支持turbo文件系统
    */
-  async DeleteUserQuota(
-    req: DeleteUserQuotaRequest,
-    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
-  ): Promise<DeleteUserQuotaResponse> {
-    return this.request("DeleteUserQuota", req, cb)
+  async ModifyFileSystemAutoScaleUpRule(
+    req: ModifyFileSystemAutoScaleUpRuleRequest,
+    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
+  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
+    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
   }
 
   /**
@@ -544,16 +552,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCfsFileSystemsResponse) => void
   ): Promise<DescribeCfsFileSystemsResponse> {
     return this.request("DescribeCfsFileSystems", req, cb)
-  }
-
-  /**
-   * 用来设置文件系统扩容策略，该接口只支持turbo文件系统
-   */
-  async ModifyFileSystemAutoScaleUpRule(
-    req: ModifyFileSystemAutoScaleUpRuleRequest,
-    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
-  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
-    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
   }
 
   /**
@@ -617,24 +615,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DeleteMountTarget）用于删除挂载点
-说明：2022年6月1日之后创建的CFS文件系统删除时无需单独调用删除挂载点操作，此API仅适用老版本的CFS实例。
-     */
-  async DeleteMountTarget(
-    req: DeleteMountTargetRequest,
-    cb?: (error: string, rep: DeleteMountTargetResponse) => void
-  ): Promise<DeleteMountTargetResponse> {
-    return this.request("DeleteMountTarget", req, cb)
-  }
-
-  /**
-   * 创建定期快照策略
+   * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
    */
-  async CreateAutoSnapshotPolicy(
-    req: CreateAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
-  ): Promise<CreateAutoSnapshotPolicyResponse> {
-    return this.request("CreateAutoSnapshotPolicy", req, cb)
+  async DeleteUserQuota(
+    req: DeleteUserQuotaRequest,
+    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
+  ): Promise<DeleteUserQuotaResponse> {
+    return this.request("DeleteUserQuota", req, cb)
   }
 
   /**

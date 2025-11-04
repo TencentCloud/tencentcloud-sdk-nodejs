@@ -850,7 +850,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeInstanceSpecBandwidth）用于查询或计算带宽规格。
    */
   async DescribeInstanceSpecBandwidth(
-    req?: DescribeInstanceSpecBandwidthRequest,
+    req: DescribeInstanceSpecBandwidthRequest,
     cb?: (error: string, rep: DescribeInstanceSpecBandwidthResponse) => void
   ): Promise<DescribeInstanceSpecBandwidthResponse> {
     return this.request("DescribeInstanceSpecBandwidth", req, cb)

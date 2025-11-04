@@ -60,6 +60,7 @@ import {
   DescribeRecordInfoRequest,
   AmbientSound,
   DescribeRoomInfoRequest,
+  DescribeAuditResultExternalRequest,
   ModifyCustomizationResponse,
   DeleteCustomizationRequest,
   CreateAgeDetectTaskRequest,
@@ -81,6 +82,7 @@ import {
   RealtimeSpeechConf,
   DescribeAppStatisticsResp,
   ScanVoiceResult,
+  DescribeAuditResultExternalResponse,
   ServiceStatus,
   ScanVoiceRequest,
   RegisterVoicePrintRequest,
@@ -170,6 +172,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获审核结果明细（外部API）
+   */
+  async DescribeAuditResultExternal(
+    req?: DescribeAuditResultExternalRequest,
+    cb?: (error: string, rep: DescribeAuditResultExternalResponse) => void
+  ): Promise<DescribeAuditResultExternalResponse> {
+    return this.request("DescribeAuditResultExternal", req, cb)
+  }
+
+  /**
    * 更新AIConversation参数
    */
   async UpdateAIConversation(
@@ -253,7 +265,7 @@ export class Client extends AbstractClient {
   /**
      * 启动AI对话任务，AI通道机器人进入GME房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
 
-GME AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
+GME AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS）服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
      */
   async StartAIConversation(
     req: StartAIConversationRequest,

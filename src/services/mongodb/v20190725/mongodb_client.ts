@@ -26,6 +26,7 @@ import {
   CreateBackupDBInstanceResponse,
   DBInstancePrice,
   KillOpsRequest,
+  DeleteLogDownloadTaskResponse,
   DescribeDBInstanceNamespaceResponse,
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
@@ -37,6 +38,7 @@ import {
   DescribeBackupRulesResponse,
   DescribeDBInstanceNamespaceRequest,
   SlowLogPattern,
+  Task,
   AssignProjectResponse,
   DescribeDBInstanceDealResponse,
   ModifyMongoDBParamType,
@@ -57,9 +59,11 @@ import {
   CreateDBInstanceHourResponse,
   DropDBInstanceParamTplResponse,
   EnableTransparentDataEncryptionRequest,
+  LogInfo,
   DeleteAccountUserRequest,
   SpecItem,
   DescribeDetailedSlowLogsRequest,
+  UpgradeDbInstanceVersionRequest,
   ModifyDBInstanceNetworkAddressResponse,
   DropDBInstanceParamTplRequest,
   CreateAccountUserResponse,
@@ -71,6 +75,7 @@ import {
   DescribeDBInstancesRequest,
   CurrentOp,
   ModifyDBInstanceSpecRequest,
+  DescribeLogDownloadTasksRequest,
   Auth,
   FlashBackDBInstanceRequest,
   TerminateDBInstancesResponse,
@@ -79,6 +84,7 @@ import {
   ModifyNetworkAddress,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
+  CreateLogDownloadTaskRequest,
   CreateAccountUserRequest,
   InstanceTextParam,
   ModifyDBInstanceSecurityGroupRequest,
@@ -103,6 +109,7 @@ import {
   ClientConnection,
   ReplicateSetInfo,
   DescribeDBInstanceDealRequest,
+  UpgradeDBInstanceKernelVersionResponse,
   DescribeAsyncRequestInfoRequest,
   FBKeyValue,
   CreateBackupDownloadTaskRequest,
@@ -111,6 +118,7 @@ import {
   SecurityGroupBound,
   DescribeDBInstanceNodePropertyResponse,
   DescribeDBInstanceParamTplDetailResponse,
+  DescribeMongodbLogsResponse,
   ModifyDBInstanceParamTplRequest,
   DescribeCurrentOpRequest,
   BackupDownloadTask,
@@ -128,6 +136,7 @@ import {
   DescribeTransparentDataEncryptionStatusResponse,
   CreateBackupDBInstanceRequest,
   SetAccountUserPrivilegeRequest,
+  UpgradeDbInstanceVersionResponse,
   NodeProperty,
   KillOpsResponse,
   IsolateDBInstanceRequest,
@@ -135,10 +144,12 @@ import {
   EnableTransparentDataEncryptionResponse,
   SetBackupRulesRequest,
   AssignProjectRequest,
-  ModifyInstanceParamsRequest,
+  DescribeMongodbLogsRequest,
   CreateBackupDownloadTaskResponse,
+  CreateLogDownloadTaskResponse,
+  ModifyInstanceParamsRequest,
   DbURL,
-  SlowLogItem,
+  DeleteLogDownloadTaskRequest,
   SpecificationInfo,
   DescribeSlowLogPatternsRequest,
   FlashbackCollection,
@@ -154,6 +165,8 @@ import {
   DescribeDBInstanceParamTplResponse,
   DescribeDBInstanceURLResponse,
   RemoveNodeList,
+  DescribeLogDownloadTasksResponse,
+  SlowLogItem,
   RestartNodesRequest,
   SetInstanceMaintenanceRequest,
   RestartNodesResponse,
@@ -163,6 +176,7 @@ import {
   ModifyDBInstanceSpecResponse,
   InstanceChargePrepaid,
   RenewDBInstancesRequest,
+  UpgradeDBInstanceKernelVersionRequest,
 } from "./mongodb_models"
 
 /**
@@ -192,6 +206,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceURLResponse) => void
   ): Promise<DescribeDBInstanceURLResponse> {
     return this.request("DescribeDBInstanceURL", req, cb)
+  }
+
+  /**
+   * 创建日志下载任务
+   */
+  async CreateLogDownloadTask(
+    req: CreateLogDownloadTaskRequest,
+    cb?: (error: string, rep: CreateLogDownloadTaskResponse) => void
+  ): Promise<CreateLogDownloadTaskResponse> {
+    return this.request("CreateLogDownloadTask", req, cb)
   }
 
   /**
@@ -233,6 +257,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCurrentOpResponse) => void
   ): Promise<DescribeCurrentOpResponse> {
     return this.request("DescribeCurrentOp", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBBackups）用于查询实例备份列表，目前只支持查询7天内的备份记录。
+   */
+  async DescribeDBBackups(
+    req: DescribeDBBackupsRequest,
+    cb?: (error: string, rep: DescribeDBBackupsResponse) => void
+  ): Promise<DescribeDBBackupsResponse> {
+    return this.request("DescribeDBBackups", req, cb)
   }
 
   /**
@@ -286,13 +320,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDBBackups）用于查询实例备份列表，目前只支持查询7天内的备份记录。
+   * 删除日志下载任务
    */
-  async DescribeDBBackups(
-    req: DescribeDBBackupsRequest,
-    cb?: (error: string, rep: DescribeDBBackupsResponse) => void
-  ): Promise<DescribeDBBackupsResponse> {
-    return this.request("DescribeDBBackups", req, cb)
+  async DeleteLogDownloadTask(
+    req: DeleteLogDownloadTaskRequest,
+    cb?: (error: string, rep: DeleteLogDownloadTaskResponse) => void
+  ): Promise<DeleteLogDownloadTaskResponse> {
+    return this.request("DeleteLogDownloadTask", req, cb)
   }
 
   /**
@@ -326,6 +360,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 日志下载任务查询
+   */
+  async DescribeLogDownloadTasks(
+    req: DescribeLogDownloadTasksRequest,
+    cb?: (error: string, rep: DescribeLogDownloadTasksResponse) => void
+  ): Promise<DescribeLogDownloadTasksResponse> {
+    return this.request("DescribeLogDownloadTasks", req, cb)
+  }
+
+  /**
    * 本接口（RestartNodes）用于批量重启数据库节点。
    */
   async RestartNodes(
@@ -346,13 +390,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(RenameInstance)用于修改云数据库实例的名称。
+   * 本接口（ModifyInstanceParams）用于修改mongoDB实例的参数配置。
    */
-  async RenameInstance(
-    req: RenameInstanceRequest,
-    cb?: (error: string, rep: RenameInstanceResponse) => void
-  ): Promise<RenameInstanceResponse> {
-    return this.request("RenameInstance", req, cb)
+  async ModifyInstanceParams(
+    req: ModifyInstanceParamsRequest,
+    cb?: (error: string, rep: ModifyInstanceParamsResponse) => void
+  ): Promise<ModifyInstanceParamsResponse> {
+    return this.request("ModifyInstanceParams", req, cb)
   }
 
   /**
@@ -500,6 +544,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(RenameInstance)用于修改云数据库实例的名称。
+   */
+  async RenameInstance(
+    req: RenameInstanceRequest,
+    cb?: (error: string, rep: RenameInstanceResponse) => void
+  ): Promise<RenameInstanceResponse> {
+    return this.request("RenameInstance", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSlowLogs）用于获取云数据库慢日志信息。接口只支持查询最近7天内慢日志。
    */
   async DescribeSlowLogs(
@@ -510,13 +564,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceNetworkAddress）用于修改云数据库实例的网络信息，支持基础网络切换为私有网络、私有网络切换私有网络。
+   * 该接口（DescribeMongodbLogs）用于查询运行日志。
    */
-  async ModifyDBInstanceNetworkAddress(
-    req: ModifyDBInstanceNetworkAddressRequest,
-    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
-  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
-    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
+  async DescribeMongodbLogs(
+    req: DescribeMongodbLogsRequest,
+    cb?: (error: string, rep: DescribeMongodbLogsResponse) => void
+  ): Promise<DescribeMongodbLogsResponse> {
+    return this.request("DescribeMongodbLogs", req, cb)
   }
 
   /**
@@ -547,6 +601,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
   ): Promise<DescribeInstanceParamsResponse> {
     return this.request("DescribeInstanceParams", req, cb)
+  }
+
+  /**
+   * 本接口(UpgradeDBInstanceKernelVersion)用于升级数据库实例内核版本。
+   */
+  async UpgradeDBInstanceKernelVersion(
+    req: UpgradeDBInstanceKernelVersionRequest,
+    cb?: (error: string, rep: UpgradeDBInstanceKernelVersionResponse) => void
+  ): Promise<UpgradeDBInstanceKernelVersionResponse> {
+    return this.request("UpgradeDBInstanceKernelVersion", req, cb)
   }
 
   /**
@@ -610,6 +674,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于跨版本升级数据库内核。当前仅支持3.6版本升级为4.0版本、4.0版本升级为4.2版本、4.2版本升级为4.4版本及4.4版本升级为5.0版本。
+   */
+  async UpgradeDbInstanceVersion(
+    req: UpgradeDbInstanceVersionRequest,
+    cb?: (error: string, rep: UpgradeDbInstanceVersionResponse) => void
+  ): Promise<UpgradeDbInstanceVersionResponse> {
+    return this.request("UpgradeDbInstanceVersion", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAccountUsers）用于获取当前实例的全部账号。
    */
   async DescribeAccountUsers(
@@ -630,13 +704,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyInstanceParams）用于修改mongoDB实例的参数配置。
+   * 本接口（ModifyDBInstanceNetworkAddress）用于修改云数据库实例的网络信息，支持基础网络切换为私有网络、私有网络切换私有网络。
    */
-  async ModifyInstanceParams(
-    req: ModifyInstanceParamsRequest,
-    cb?: (error: string, rep: ModifyInstanceParamsResponse) => void
-  ): Promise<ModifyInstanceParamsResponse> {
-    return this.request("ModifyInstanceParams", req, cb)
+  async ModifyDBInstanceNetworkAddress(
+    req: ModifyDBInstanceNetworkAddressRequest,
+    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
+  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
+    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
   }
 
   /**

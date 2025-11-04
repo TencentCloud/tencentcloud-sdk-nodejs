@@ -535,7 +535,7 @@ export interface RealtimeLogDeliveryTask {
    */
   DeliveryStatus?: string
   /**
-   * 实时日志投递任务类型，取值有： <li>cls: 推送到腾讯云 CLS；</li> <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li> <li>s3：推送到 AWS S3 兼容存储桶地址。</li>
+   * 实时日志投递任务类型，取值有： <li>cls: 推送到腾讯云 CLS；</li> <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li> <li>s3：推送到 AWS S3 兼容存储桶地址；</li><li>log_analysis：推送到 EdgeOne 日志分析。</li>
    */
   TaskType?: string
   /**
@@ -885,7 +885,7 @@ export interface DescribeRealtimeLogDeliveryTasksRequest {
 <li>task-id：按照实时日志投递任务 ID进行过滤。不支持模糊查询。</li>
 <li>task-name：按照实时日志投递任务名称进行过滤。支持模糊查询，使用模糊查询时，仅支持填写一个实时日志投递任务名称。</li>
 <li>entity-list：按照实时日志投递任务对应的实体进行过滤。不支持模糊查询。示例值：domain.example.com 或者 sid-2s69eb5wcms7。</li>
-<li>task-type：按照实时日志投递任务类型进行过滤。不支持模糊查询。可选项如下：<br>   cls: 推送到腾讯云 CLS；<br>   custom_endpoint：推送到自定义 HTTP(S) 地址；<br>   s3：推送到 AWS S3 兼容存储桶地址。</li>
+<li>task-type：按照实时日志投递任务类型进行过滤。不支持模糊查询。可选项如下：<br>   cls: 推送到腾讯云 CLS；<br>   custom_endpoint：推送到自定义 HTTP(S) 地址；<br>   s3：推送到 AWS S3 兼容存储桶地址；<br>   log_analysis：推送到 EdgeOne 日志分析。</li>
    */
   Filters?: Array<AdvancedFilter>
 }
@@ -1147,6 +1147,7 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
 <li>cls: 推送到腾讯云 CLS；</li>
 <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li>
 <li>s3：推送到 AWS S3 兼容存储桶地址；</li>
+<li>log_analysis：推送到 EdgeOne 日志分析，该任务类型仅支持“站点加速日志”这一数据投递类型。</li>
    */
   TaskType: string
   /**
@@ -1195,7 +1196,7 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
   /**
    * 日志投递的输出格式。不填表示为默认格式，默认格式逻辑如下：
 <li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
-<li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines；</li>特别地，当 TaskType 取值为 cls 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。
+<li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines；</li>特别地，当 TaskType 取值为 cls 或 log_analysis 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。
    */
   LogFormat?: LogFormat
   /**
@@ -2099,7 +2100,7 @@ export interface PostMaxSizeParameters {
    */
   Switch?: string
   /**
-   * POST 请求上传文件流式传输最大限制，单位为 Byte，取值：1 * 2<sup>20</sup> Byte～500 * 2<sup>20</sup> Byte。
+   * POST 请求上传文件流式传输最大限制，该字段仅在 Switch 为 on 时生效，取值在 1MB 和 800MB 之间，单位字节。
    */
   MaxSize?: number
 }
@@ -15048,7 +15049,7 @@ export interface PostMaxSize {
    */
   Switch: string
   /**
-   * 最大限制，取值在1MB和500MB之间。单位字节。
+   * 最大限制，该字段仅在 Switch 为 on 时生效，取值在 1MB 和 800MB 之间，单位字节。
    */
   MaxSize?: number
 }

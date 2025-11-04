@@ -6564,7 +6564,7 @@ export interface CreateFlowOption {
    */
   ForbidEditApprover?: boolean
   /**
-   *   禁止设置设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板
+   *   禁止设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板
 
    */
   ForbidEditFlowProperties?: boolean
@@ -6647,6 +6647,43 @@ export interface CreateFlowOption {
 <ul><li>（默认） false -否</li> <li> true - 禁止编辑</li></ul>
    */
   ForbidEditWatermark?: boolean
+  /**
+   * 隐藏操作指引: 具体的控件类型如下
+
+<ul><li>1 : 操作指引入口</li>
+<li>2 : 操作文档</li>
+<li>3 : 操作视频</li>
+</ul>
+注：仅对新版页面生效
+   * @deprecated
+   */
+  HideOperationInstructions?: Array<number | bigint>
+  /**
+   * 隐藏操作步骤: 具体的控件类型如下
+
+<ul><li>1 : 选择文件及签署方</li>
+<li>2 : 补充文件内容</li>
+<li>4 : 发起前合同信息与设置确认</li>
+</ul>
+注：仅对新版页面生效
+   */
+  HideOperationSteps?: Array<number | bigint>
+  /**
+   * 本企业简称，注：仅对新版页面生效
+   */
+  SelfName?: string
+  /**
+   * 发起后签署码隐藏，默认false，注：仅对新版页面生效
+   */
+  HideSignCodeAfterStart?: boolean
+  /**
+   * 发起成功后是否预览合同 <ul><li>（默认） false -否</li> <li> true - 展示预览按钮</li></ul>
+   */
+  PreviewAfterStart?: boolean
+  /**
+   * 发起成功之后是否签署合同，仅当前经办人作为签署人时生效 <ul><li>（默认） false -否</li> <li> true - 展示签署按钮</li></ul>
+   */
+  SignAfterStart?: boolean
 }
 
 /**
@@ -9586,6 +9623,10 @@ export interface CreateBatchQuickSignUrlRequest {
    */
   Intention?: Intention
   /**
+   * 用于指定进入视频签署的限制次数，次数取值范围：1 - 10，不设置则默认为5次，仅视频签署时生效。
+   */
+  VideoVerifyTimesLimit?: number
+  /**
    * 缓存签署人信息。在H5签署链接动态领取场景，首次填写后，选择缓存签署人信息，在下次签署人点击领取链接时，会自动将个人信息（姓名、身份证号、手机号）填入，否则需要每次手动填写。
 
 注: `若参与方为企业员工时，暂不支持对参与方信息进行缓存`
@@ -9841,6 +9882,11 @@ export interface Component {
 <font color="red">签署印章大小功能设置，</font>当ComponentType为SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署时按照实际印章的大小进行签署，如果印章没有设置大小，那么默认会是4.2cm的印章大小：
 <ul><li> <b>UseSealSize</b>：使用印章设置的大小盖章，true表示使用印章设置的大小盖章，false表示使用签署控件的大小进行盖章；不传则为false</li></ul>
 <b>参数样例</b>：`{"UseSealSize":true}`
+
+<font color="red">签署意见功能设置，</font>当ComponentType为SIGN_OPINION时，可以通过以下参数设置签署意见的相关内容：
+<ul><li> <b>Values</b>：签署意见预设的需要用户填写的的文本</li>
+<li> <b>ValuesArray</b>：签署意见需要用户按顺序点击的分词（组合后应和Values内容一致）</li></ul>
+<b>参数样例</b>：`{"Values":"我已知晓内容并同意签署","ValuesArray":["我","已知晓","内容","并","同意","签署"]}`
 
 <font color="red">关键字模式下支持关键字找不到的情况下不进行报错的设置</font>
 <ul><li> <b>IgnoreKeywordError</b> :1-关键字查找不到时不进行报错</li></ul>
@@ -11800,6 +11846,10 @@ export interface CreateFlowSignUrlRequest {
    */
   FlowApproverInfos?: Array<FlowCreateApprover>
   /**
+   * 用于指定进入视频签署的限制次数，次数取值范围：1 - 10，不设置则默认为5次，仅视频签署时生效。
+   */
+  VideoVerifyTimesLimit?: number
+  /**
    * 机构信息，暂未开放
    * @deprecated
    */
@@ -12394,7 +12444,7 @@ export interface ApproverOption {
 
 
 注：
-1. `使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关`
+1. `使用动态签署人能力前，需登录腾讯电子签控制台打开服务开关`
 2. 此参数在嵌入式场景下无效。
    */
   FillType?: number

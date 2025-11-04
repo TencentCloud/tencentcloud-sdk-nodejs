@@ -1162,7 +1162,7 @@ export interface ModifyClusterAttributeRequest {
    */
   ProjectId?: number
   /**
-   * 集群名称
+   * 集群名称,字符长度50
    */
   ClusterName?: string
   /**
@@ -1170,7 +1170,7 @@ export interface ModifyClusterAttributeRequest {
    */
   ClusterDesc?: string
   /**
-   * 集群等级
+   * 集群等级，等级类型：L20、L50、L100、L200、L500、L1000、L3000、L5000
    */
   ClusterLevel?: string
   /**
@@ -1257,7 +1257,7 @@ export interface DescribeClustersRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 集群类型，例如：MANAGED_CLUSTER
+   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
    */
   ClusterType?: string
 }
@@ -1575,11 +1575,11 @@ export interface CreateBackupStorageLocationRequest {
    */
   StorageRegion: string
   /**
-   * 对象存储桶名称，如果是COS必须是tke-backup前缀开头
+   * 对象存储桶名称，如果是COS必须是tke-backup前缀开头，字符长度是19
    */
   Bucket: string
   /**
-   * 备份仓库名称
+   * 备份仓库名称，字符长度为63
    */
   Name: string
   /**
@@ -2840,11 +2840,11 @@ export interface DescribePrometheusAgentInstancesResponse {
  */
 export interface AddExistedInstancesRequest {
   /**
-   * 集群ID
+   * 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ）
    */
   ClusterId: string
   /**
-   * 实例列表，不支持竞价实例
+   * 实例列表，不支持竞价实例（请登录 [CVM控制台](https://console.cloud.tencent.com/cvm) 获取待添加节点ID ）
    */
   InstanceIds: Array<string>
   /**
@@ -2944,12 +2944,12 @@ export interface ClusterAsGroupOption {
    */
   MaxTotalUnreadyPercentage?: number
   /**
-   * 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间
+   * 表示未准备就绪的节点在有资格进行缩减之前应该停留多少分钟
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleDownUnreadyTime?: number
   /**
-   * CA删除未在Kubernetes中注册的节点之前等待的时间
+   * CA删除未在Kubernetes中注册的节点之前等待的分钟数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnregisteredNodeRemovalTime?: number
@@ -3122,6 +3122,14 @@ export interface KubeJarvisStateInspectionResultsItem {
    * 诊断结果统计
    */
   Statistics?: Array<KubeJarvisStateStatistic>
+  /**
+   * 诊断数据开始时间
+   */
+  StartTime?: string
+  /**
+   * 诊断数据结束时间
+   */
+  EndTime?: string
 }
 
 /**
@@ -3425,11 +3433,11 @@ export interface UpdateClusterVersionRequest {
    */
   ExtraArgs?: ClusterExtraArgs
   /**
-   * 可容忍的最大不可用pod数目
+   * 可容忍的最大不可用pod数目。默认0
    */
   MaxNotReadyPercent?: number
   /**
-   * 是否跳过预检查阶段
+   * 是否跳过预检查阶段，默认false
    */
   SkipPreCheck?: boolean
 }
@@ -4443,11 +4451,11 @@ export interface HttpGet {
  */
 export interface ResourceUsage {
   /**
-   * 资源类型
+   * 资源类型，参考k8s 官方资源
    */
   Name?: string
   /**
-   * 资源使用量
+   * 资源使用量，单位：个数
    */
   Usage?: number
   /**
@@ -4845,7 +4853,7 @@ export interface ModifyNodePoolInstanceTypesRequest {
    */
   NodePoolId: string
   /**
-   * 机型列表，主实例机型不支持修改
+   * 机型列表，参考 https://cloud.tencent.com/document/product/213/11518，主实例机型不支持修改
    */
   InstanceTypes: Array<string>
 }
@@ -5313,15 +5321,15 @@ export interface DescribeResourceUsageResponse {
    */
   CRDUsage?: ResourceUsage
   /**
-   * Pod使用量
+   * Pod使用量，单位：个数
    */
   PodUsage?: number
   /**
-   * ReplicaSet使用量
+   * ReplicaSet使用量，单位：个数
    */
   RSUsage?: number
   /**
-   * ConfigMap使用量
+   * ConfigMap使用量，单位：个数
    */
   ConfigMapUsage?: number
   /**
@@ -5385,11 +5393,11 @@ export interface ReservedInstanceScope {
  */
 export interface DescribeAvailableClusterVersionRequest {
   /**
-   * 集群 Id。若只查询某个集群可升级的版本，需填写此项。
+   * 集群 Id。若只查询某个集群可升级的版本，需填写此项，与ClusterIds 参数二选一。
    */
   ClusterId?: string
   /**
-   * 集群 Id 列表。若查询多个集群可升级的版本，需填写此项。
+   * 集群 Id 列表。若查询多个集群可升级的版本，需填写此项，与ClusterId 参数二选一。
    */
   ClusterIds?: Array<string>
 }
@@ -5450,15 +5458,15 @@ export interface ModifyClusterRuntimeConfigRequest {
    */
   ClusterId: string
   /**
-   * 当需要修改运行时版本是根据另外的K8S版本获取时，需填写。例如升级校验有冲突后修改场景
+   * 运行时版本需依据指定的Kubernetes版本进行设置。典型情况为，在升级过程中因版本冲突而需要调整运行时版本时。
    */
   DstK8SVersion?: string
   /**
-   * 需要修改集群运行时时填写
+   * 需要修改集群运行时填写
    */
   ClusterRuntimeConfig?: RuntimeConfig
   /**
-   * 需要修改节点池运行时时，填需要修改的部分
+   * 需要修改节点池运行时，填需要修改的部分
    */
   NodePoolRuntimeConfig?: Array<NodePoolRuntime>
 }
@@ -5667,7 +5675,7 @@ export interface CreatePrometheusConfigResponse {
  */
 export interface DescribeClusterEndpointStatusResponse {
   /**
-   * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启）
+   * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启，CreateFailed 开启失败）
    */
   Status?: string
   /**
@@ -5851,7 +5859,8 @@ export interface CreateClusterEndpointRequest {
    */
   ClusterId: string
   /**
-   * 集群端口所在的子网ID  (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网)
+   * 集群端口所在的子网ID  (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网)。获取方式：https://cloud.tencent.com/document/product/215/15784
+
    */
   SubnetId?: string
   /**
@@ -5863,7 +5872,7 @@ export interface CreateClusterEndpointRequest {
    */
   Domain?: string
   /**
-   * 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传）
+   * 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传）。获取方式：https://cloud.tencent.com/document/api/215/15808
    */
   SecurityGroup?: string
   /**
@@ -7263,7 +7272,7 @@ export interface AddNodeToNodePoolRequest {
    */
   NodePoolId: string
   /**
-   * 节点id
+   * 节点id，获取参考 https://cloud.tencent.com/document/product/213/15728
    */
   InstanceIds: Array<string>
 }
@@ -7798,11 +7807,11 @@ export interface Cluster {
    */
   CreatedTime?: string
   /**
-   * 删除保护开关
+   * 集群删除保护开关，打开：true，关闭：false
    */
   DeletionProtection?: boolean
   /**
-   * 集群是否开启第三方节点支持
+   * 集群是否开启第三方节点支持，开启：true，关闭：false
    */
   EnableExternalNode?: boolean
   /**
@@ -7810,11 +7819,11 @@ export interface Cluster {
    */
   ClusterLevel?: string
   /**
-   * 自动变配集群等级，针对托管集群生效
+   * 自动变配集群等级，针对托管集群生效。开启：true，关闭：false
    */
   AutoUpgradeClusterLevel?: boolean
   /**
-   * 是否开启QGPU共享
+   * 是否开启QGPU共享，开启：true，关闭：false
    */
   QGPUShareEnable?: boolean
   /**
@@ -8850,6 +8859,9 @@ export interface CreatePrometheusGlobalNotificationResponse {
 export interface ListClusterInspectionResultsItemsRequest {
   /**
    * 目标集群ID
+
+取值可参考：
+[查询TKE集群列表](https://cloud.tencent.com/document/api/457/31862)
    */
   ClusterId: string
   /**
@@ -11256,15 +11268,15 @@ export interface NodePoolRuntime {
    */
   NodePoolId?: string
   /**
-   * 运行时类型
+   * 运行时类型，参考：https://cloud.tencent.com/document/api/457/105241
    */
   RuntimeType?: string
   /**
-   * 运行时版本
+   * 运行时版本，参考：https://cloud.tencent.com/document/api/457/105241
    */
   RuntimeVersion?: string
   /**
-   * 节点池名称
+   * 节点池名称，限制 255 字符
    */
   NodePoolName?: string
 }
@@ -11560,7 +11572,8 @@ export interface ModifyClusterTagsRequest {
    */
   ClusterId: string
   /**
-   * 集群标签
+   * 集群标签:
+[{"TagKey":"env","TagValue":"dev"}]}]
    */
   Tags?: Array<Tag>
   /**
@@ -12668,7 +12681,7 @@ export interface ModifyClusterNodePoolRequest {
    */
   NodePoolId: string
   /**
-   * 名称
+   * 名称，最长63个字符，只能包含小写字母、数字及分隔符“_”，且必须以小写字母开头，数字或小写字母结尾
    */
   Name?: string
   /**
@@ -12756,7 +12769,7 @@ export interface InstallLogAgentResponse {
  */
 export interface GetClusterLevelPriceRequest {
   /**
-   * 集群规格，托管集群询价
+   * 集群规格，托管集群询价，集群等级：L20、L50、L100、L200、L500、L1000、L3000、L5000
    */
   ClusterLevel: string
 }
@@ -12925,11 +12938,11 @@ export interface UpdateClusterKubeconfigResponse {
  */
 export interface RuntimeConfig {
   /**
-   * 运行时类型
+   * 运行时类型，支持的类型有 docker、containerd
    */
   RuntimeType?: string
   /**
-   * 运行时版本
+   * 运行时版本，参考：https://cloud.tencent.com/document/api/457/105241
    */
   RuntimeVersion?: string
 }
@@ -13189,7 +13202,12 @@ export interface AddVpcCniSubnetsResponse {
  */
 export interface KubeJarvisStateStatistic {
   /**
-   * 诊断结果的健康水平
+   * 诊断结果的健康水平，健康水平取值：
+serious：高风险
+risk：中风险
+warn：低风险
+good：健康
+failed：诊断流程异常
    */
   HealthyLevel?: string
   /**

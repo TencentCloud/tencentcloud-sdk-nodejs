@@ -83,6 +83,13 @@ export interface ClusterOverview {
    * 集群类型
    */
   ClusterType?: string
+  /**
+   * 集群销毁保护开关状态，当前支持参数：
+
+- ON: 集群销毁保护打开
+- OFF: 集群销毁保护关闭
+   */
+  DeletionProtection?: string
 }
 
 /**
@@ -221,6 +228,16 @@ export interface NodeActivity {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeActivityStatusReason?: string
+}
+
+/**
+ * ModifyClusterDeletionProtection返回参数结构体
+ */
+export interface ModifyClusterDeletionProtectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -474,7 +491,12 @@ export interface StorageOptionOverview {
 /**
  * DescribeJobsOverview请求参数结构体
  */
-export type DescribeJobsOverviewRequest = null
+export interface DescribeJobsOverviewRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
 
 /**
  * DeleteCluster返回参数结构体
@@ -703,7 +725,22 @@ export interface DescribeQueuesResponse {
 /**
  * SubmitJob请求参数结构体
  */
-export type SubmitJobRequest = null
+export interface SubmitJobRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 作业任务参数配置
+   */
+  Job: Job
+  /**
+   * 队列名称。不指定则为默认队列：
+SLURM默认队列为：compute。 
+SGE默认队列为：all.q。
+   */
+  QueueName?: string
+}
 
 /**
  * 提交Job作业信息
@@ -1099,17 +1136,100 @@ export interface DescribeClusterActivitiesResponse {
 }
 
 /**
- * DescribeInitNodeScripts返回参数结构体
+ * AddNodes请求参数结构体
  */
-export interface DescribeInitNodeScriptsResponse {
+export interface AddNodesRequest {
   /**
-   * 节点初始化脚本列表。
+   * 集群中实例所在的位置。
    */
-  InitNodeScriptSet?: Array<NodeScript>
+  Placement: Placement
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID。
    */
-  RequestId?: string
+  ClusterId: string
+  /**
+   * 私有网络相关信息配置。
+   */
+  VirtualPrivateCloud: VirtualPrivateCloud
+  /**
+   * 添加节点数量。
+   */
+  Count: number
+  /**
+   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818#.E9.95.9C.E5.83.8F)
+   */
+  ImageId?: string
+  /**
+   * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li><li>SPOTPAID：竞价付费</li>默认值：POSTPAID_BY_HOUR。
+   */
+  InstanceChargeType?: string
+  /**
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
+   */
+  InstanceType?: string
+  /**
+   * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+   */
+  SystemDisk?: SystemDisk
+  /**
+   * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+   */
+  DataDisks?: Array<DataDisk>
+  /**
+   * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+   */
+  InternetAccessible?: InternetAccessible
+  /**
+   * 节点显示名称。
+不指定节点显示名称则默认显示‘未命名’。
+最多支持60个字符。
+   */
+  InstanceName?: string
+  /**
+   * 集群登录设置。
+   */
+  LoginSettings?: LoginSettings
+  /**
+   * 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
+  /**
+   * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li>
+
+   */
+  QueueName?: string
+  /**
+   * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。</li><li>Login：登录节点。</li>
+   */
+  NodeRole?: string
+  /**
+   * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例
+   */
+  DryRun?: boolean
+  /**
+   * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。</li><li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。</li>
+   */
+  NodeType?: string
+  /**
+   * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
+   */
+  ProjectId?: number
+  /**
+   * 要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
+   */
+  ResourceType?: string
 }
 
 /**
@@ -1346,7 +1466,7 @@ export interface CreateClusterRequest {
   /**
    * 集群中实例所在的位置。
    */
-  Placement: Placement
+  Placement?: Placement
   /**
    * 指定管理节点。
    */
@@ -1640,8 +1760,18 @@ export interface Application {
 - Custom：表示用户自定义作业
 
 默认参数为：Custom
+   * @deprecated
    */
   JobType?: string
+  /**
+   * 表示所选训练框架，支持可选参数
+ 
+- PyTorch：表示提交PyTorch训练作业
+- Custom：表示用户自定义作业
+
+默认参数为：Custom
+   */
+  TaskType?: string
 }
 
 /**
@@ -1896,6 +2026,10 @@ false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩
  */
 export interface SubmitJobResponse {
   /**
+   * 作业任务ID
+   */
+  JobId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2009,6 +2143,18 @@ export interface LoginNode {
  * DescribeJobsOverview返回参数结构体
  */
 export interface DescribeJobsOverviewResponse {
+  /**
+   * 作业任务数量
+   */
+  JobTotal?: number
+  /**
+   * 排队中的作业任务数量
+   */
+  QueuingJobTotal?: number
+  /**
+   * 运行中的作业数量
+   */
+  RunningJobTotal?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2267,100 +2413,32 @@ export interface DescribeJobsResponse {
 }
 
 /**
- * AddNodes请求参数结构体
+ * ModifyClusterDeletionProtection请求参数结构体
  */
-export interface AddNodesRequest {
-  /**
-   * 集群中实例所在的位置。
-   */
-  Placement: Placement
+export interface ModifyClusterDeletionProtectionRequest {
   /**
    * 集群ID。
    */
   ClusterId: string
   /**
-   * 私有网络相关信息配置。
+   * 集群删除保护开关。 
+可选值：<li>OFF：关闭集群删除保护。</li><li>ON：打开集群删除保护。</li>
    */
-  VirtualPrivateCloud: VirtualPrivateCloud
-  /**
-   * 添加节点数量。
-   */
-  Count: number
-  /**
-   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818#.E9.95.9C.E5.83.8F)
-   */
-  ImageId?: string
-  /**
-   * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li><li>SPOTPAID：竞价付费</li>默认值：POSTPAID_BY_HOUR。
-   */
-  InstanceChargeType?: string
-  /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
-   */
-  InstanceChargePrepaid?: InstanceChargePrepaid
-  /**
-   * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
-   */
-  InstanceType?: string
-  /**
-   * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-   */
-  SystemDisk?: SystemDisk
-  /**
-   * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-   */
-  DataDisks?: Array<DataDisk>
-  /**
-   * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-   */
-  InternetAccessible?: InternetAccessible
-  /**
-   * 节点显示名称。
-不指定节点显示名称则默认显示‘未命名’。
-最多支持60个字符。
-   */
-  InstanceName?: string
-  /**
-   * 集群登录设置。
-   */
-  LoginSettings?: LoginSettings
-  /**
-   * 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-   */
-  ClientToken?: string
-  /**
-   * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li>
+  DeletionProtection: string
+}
 
-   */
-  QueueName?: string
+/**
+ * DescribeInitNodeScripts返回参数结构体
+ */
+export interface DescribeInitNodeScriptsResponse {
   /**
-   * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。</li><li>Login：登录节点。</li>
+   * 节点初始化脚本列表。
    */
-  NodeRole?: string
+  InitNodeScriptSet?: Array<NodeScript>
   /**
-   * 是否只预检此次请求。
-true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
-如果检查不通过，则返回对应错误码；
-如果检查通过，则返回RequestId.
-false（默认）：发送正常请求，通过检查后直接创建实例
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DryRun?: boolean
-  /**
-   * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。</li><li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。</li>
-   */
-  NodeType?: string
-  /**
-   * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
-   */
-  ProjectId?: number
-  /**
-   * 要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
-   */
-  ResourceType?: string
+  RequestId?: string
 }
 
 /**

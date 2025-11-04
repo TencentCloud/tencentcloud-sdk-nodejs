@@ -1408,7 +1408,7 @@ DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
    */
   AutoRenewFlag: boolean
   /**
-   * 区域标识，0：国内，1：国外
+   * 区域标识，0：中国境内，1：中国境外
    */
   PackageRegion: number
   /**

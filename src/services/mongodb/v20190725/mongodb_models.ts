@@ -299,6 +299,20 @@ export interface KillOpsRequest {
 }
 
 /**
+ * DeleteLogDownloadTask返回参数结构体
+ */
+export interface DeleteLogDownloadTaskResponse {
+  /**
+   * 任务状态，0:成功
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBInstanceNamespace返回参数结构体
  */
 export interface DescribeDBInstanceNamespaceResponse {
@@ -531,6 +545,50 @@ export interface SlowLogPattern {
    * 慢日志条数。
    */
   Total?: number
+}
+
+/**
+ * 日志下载任务描述
+ */
+export interface Task {
+  /**
+   * 下载任务类型，0:慢日志，1:错误日志
+   */
+  TaskType?: number
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: number
+  /**
+   * 任务状态，0:初始化，1:运行中，2:成功，3:失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
+  /**
+   * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
 }
 
 /**
@@ -887,6 +945,42 @@ export interface EnableTransparentDataEncryptionRequest {
 }
 
 /**
+ * 日志详情
+ */
+export interface LogInfo {
+  /**
+   * 日志类别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogComponent?: string
+  /**
+   * 日志级别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogLevel?: string
+  /**
+   * 日志产生时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogTime?: string
+  /**
+   * 日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogDetail?: string
+  /**
+   * 日志连接信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogConnection?: string
+  /**
+   * 日志id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogId?: string
+}
+
+/**
  * DeleteAccountUser请求参数结构体
  */
 export interface DeleteAccountUserRequest {
@@ -1069,6 +1163,24 @@ export interface DescribeDetailedSlowLogsRequest {
 - asc：顺序。
    */
   OrderByType?: string
+}
+
+/**
+ * UpgradeDbInstanceVersion请求参数结构体
+ */
+export interface UpgradeDbInstanceVersionRequest {
+  /**
+   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+   */
+  InstanceId: string
+  /**
+   * 新升级的数据库版本，当前仅支持MONGO_40_WT（MongoDB 4.0 WiredTiger存储引擎版本）及MONGO_42_WT（MongoDB 4.0 WiredTiger存储引擎版本）。
+   */
+  MongoVersion: string
+  /**
+   * 是否在维护时间内升级。0-立即升级 1-维护时间内升级
+   */
+  InMaintenance?: number
 }
 
 /**
@@ -1466,6 +1578,32 @@ export interface ModifyDBInstanceSpecRequest {
 }
 
 /**
+ * DescribeLogDownloadTasks请求参数结构体
+ */
+export interface DescribeLogDownloadTasksRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: string
+  /**
+   * 查询条数
+   */
+  Limit?: number
+  /**
+   * 页码
+   */
+  Offset?: number
+  /**
+   * 下载任务的开始时间
+   */
+  StartTime?: string
+  /**
+   * 下载任务的结束时间
+   */
+  EndTime?: string
+}
+
+/**
  * 用户权限
  */
 export interface Auth {
@@ -1640,6 +1778,48 @@ export interface CreateDBInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateLogDownloadTask请求参数结构体
+ */
+export interface CreateLogDownloadTaskRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 节点名称
+   */
+  NodeNames?: Array<string>
+  /**
+   * 日志类别
+   */
+  LogComponents?: Array<string>
+  /**
+   * 日志等级
+   */
+  LogLevels?: Array<string>
+  /**
+   * 日志ID
+   */
+  LogIds?: Array<string>
+  /**
+   * 日志连接信息
+   */
+  LogConnections?: Array<string>
+  /**
+   * 日志详情过滤字段
+   */
+  LogDetailParams?: Array<string>
 }
 
 /**
@@ -2085,6 +2265,20 @@ export interface DescribeDBInstanceDealRequest {
 }
 
 /**
+ * UpgradeDBInstanceKernelVersion返回参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionResponse {
+  /**
+   * 异步流程任务ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAsyncRequestInfo请求参数结构体
  */
 export interface DescribeAsyncRequestInfoRequest {
@@ -2288,6 +2482,25 @@ export interface DescribeDBInstanceParamTplDetailResponse {
    * 参数模板名称。
    */
   TplName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMongodbLogs返回参数结构体
+ */
+export interface DescribeMongodbLogsResponse {
+  /**
+   * 日志总数。
+   */
+  TotalCount?: number
+  /**
+   * 日志详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogList?: Array<LogInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2744,6 +2957,20 @@ export interface SetAccountUserPrivilegeRequest {
 }
 
 /**
+ * UpgradeDbInstanceVersion返回参数结构体
+ */
+export interface UpgradeDbInstanceVersionResponse {
+  /**
+   * 异步流程任务ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 节点属性
  */
 export interface NodeProperty {
@@ -3055,6 +3282,92 @@ export interface AssignProjectRequest {
 }
 
 /**
+ * DescribeMongodbLogs请求参数结构体
+ */
+export interface DescribeMongodbLogsRequest {
+  /**
+   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 查询日志的开启时间。
+- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。
+- 查询时间范围：仅支持查询最近 7 天内的日志数据。
+   */
+  StartTime: string
+  /**
+   * 查询日志的结束时间。
+- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。
+- 查询时间范围：仅支持查询最近 7 天内的日志数据。
+   */
+  EndTime: string
+  /**
+   * 节点 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)的**节点管理**页面获取查询的节点 ID。
+   */
+  NodeNames?: Array<string>
+  /**
+   * 日志类别。
+- 日志类别包括但不限于 COMMAND、ACCESS、CONTROL、FTDC、INDEX、NETWORK、QUERY、REPL、SHARDING、STORAGE、RECOVERY、JOURNAL 和 WRITE 等。具体支持的类别可能会因 MongoDB 的版本而存在差异。具体信息，请参见[日志消息](https://www.mongodb.com/zh-cn/docs/v5.0/reference/log-messages/#log-message-examples)。
+- 登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，也可查看**日志类别**。
+   */
+  LogComponents?: Array<string>
+  /**
+   * 日志级别。
+- 日志级别按严重性从高到低依次为：FATAL、ERROR、WARNING。
+- 登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，可查看**日志级别**。
+   */
+  LogLevels?: Array<string>
+  /**
+   * 日志 ID。登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，可查看**日志 ID**。
+   */
+  LogIds?: Array<string>
+  /**
+   * 日志连接信息。登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，可查看**日志连接信息**。
+   */
+  LogConnections?: Array<string>
+  /**
+   * 指定日志筛选的字段。
+   */
+  LogDetailParams?: Array<string>
+  /**
+   * 偏移量，最小值为0，最大值为10000，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页大小，最小值为1，最大值为100，默认值为20。
+   */
+  Limit?: number
+}
+
+/**
+ * CreateBackupDownloadTask返回参数结构体
+ */
+export interface CreateBackupDownloadTaskResponse {
+  /**
+   * 下载任务状态。
+   */
+  Tasks?: Array<BackupDownloadTaskStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateLogDownloadTask返回参数结构体
+ */
+export interface CreateLogDownloadTaskResponse {
+  /**
+   * 任务状态
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstanceParams请求参数结构体
  */
 export interface ModifyInstanceParamsRequest {
@@ -3073,20 +3386,6 @@ export interface ModifyInstanceParamsRequest {
 - DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。
    */
   ModifyType?: string
-}
-
-/**
- * CreateBackupDownloadTask返回参数结构体
- */
-export interface CreateBackupDownloadTaskResponse {
-  /**
-   * 下载任务状态。
-   */
-  Tasks?: Array<BackupDownloadTaskStatus>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -3114,21 +3413,17 @@ export interface DbURL {
 }
 
 /**
- * 慢日志详情
+ * DeleteLogDownloadTask请求参数结构体
  */
-export interface SlowLogItem {
+export interface DeleteLogDownloadTaskRequest {
   /**
-   * 慢日志详情。
+   * 实例 ID
    */
-  Log?: string
+  InstanceId: string
   /**
-   * 节点名称。
+   * 任务ID
    */
-  NodeName?: string
-  /**
-   * 查询哈希值。
-   */
-  QueryHash?: string
+  TaskId: string
 }
 
 /**
@@ -3516,6 +3811,43 @@ export interface RemoveNodeList {
 }
 
 /**
+ * DescribeLogDownloadTasks返回参数结构体
+ */
+export interface DescribeLogDownloadTasksResponse {
+  /**
+   * 数量
+   */
+  TotalCount?: number
+  /**
+   * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tasks?: Array<Task>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 慢日志详情
+ */
+export interface SlowLogItem {
+  /**
+   * 慢日志详情。
+   */
+  Log?: string
+  /**
+   * 节点名称。
+   */
+  NodeName?: string
+  /**
+   * 查询哈希值。
+   */
+  QueryHash?: string
+}
+
+/**
  * RestartNodes请求参数结构体
  */
 export interface RestartNodesRequest {
@@ -3857,4 +4189,18 @@ export interface RenewDBInstancesRequest {
    * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
    */
   InstanceChargePrepaid: InstanceChargePrepaid
+}
+
+/**
+ * UpgradeDBInstanceKernelVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionRequest {
+  /**
+   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+  /**
+   * 是否维护时间内升级。0-否，1-是
+   */
+  InMaintenance?: number
 }

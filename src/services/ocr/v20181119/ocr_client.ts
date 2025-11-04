@@ -31,7 +31,7 @@ import {
   VinOCRResponse,
   ResidencePermitInfo,
   BankCardOCRRequest,
-  SmartStructuralOCRResponse,
+  VatInvoiceVerifyNewResponse,
   CarInvoiceOCRRequest,
   ExtractDocMultiRequest,
   QuestionSplitLayoutOCRRequest,
@@ -44,7 +44,7 @@ import {
   ItemInfo,
   VatRollInvoiceInfo,
   TextDetectResponse,
-  RailwayTicketInfo,
+  TaxPayment,
   TollInvoiceOCRResponse,
   GetOCRTokenResponse,
   IDCardInfoResult,
@@ -64,7 +64,7 @@ import {
   HmtResidentPermitOCRResponse,
   OtherInvoiceList,
   VehicleRegCertInfo,
-  GeneralWarnInfo,
+  IDCardOCRResponse,
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
@@ -73,7 +73,7 @@ import {
   SealInfo,
   InvoiceGeneralInfo,
   TextVatInvoice,
-  InstitutionOCRResponse,
+  ShipInvoiceInfo,
   VehicleInvoiceInfo,
   DriverLicenseOCRRequest,
   TollInvoiceOCRRequest,
@@ -96,7 +96,6 @@ import {
   StructuralItem,
   InvoiceDetectInfo,
   FlightItemInfo,
-  PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
   TextFormulaInfo,
@@ -148,7 +147,7 @@ import {
   VatInvoiceGoodsInfo,
   RecognizeThaiIDCardOCRResponse,
   GroupInfo,
-  OrgCodeCertOCRResponse,
+  QuotaInvoice,
   ItemNames,
   SingleInvoiceItem,
   InvoiceGeneralOCRResponse,
@@ -159,7 +158,6 @@ import {
   FinancialBillItem,
   SingleInvoiceInfo,
   RecognizeContainerOCRRequest,
-  SubmitExtractDocAgentJobResponse,
   TrainTicket,
   TextDetectRequest,
   VatRollInvoiceOCRResponse,
@@ -171,14 +169,13 @@ import {
   ElectronicTrainTicket,
   UsedVehicleInvoiceInfo,
   PassportRecognizeInfos,
-  PropOwnerCertOCRRequest,
+  SubmitExtractDocAgentJobResponse,
   ImageEnhancementResponse,
   PortraitImageInfo,
   QrcodeImgSize,
   PassportOCRResponse,
   FinancialBillItemDetails,
   CardWarnInfo,
-  TaxPayment,
   VehicleRegCertOCRRequest,
   QuestionSplitLayoutOCRResponse,
   ElectronicAirTransportDetail,
@@ -196,19 +193,16 @@ import {
   EnglishOCRRequest,
   VatInvoiceItemInfo,
   VatElectronicInfo,
-  RecognizeValidIDCardOCRResponse,
+  SmartStructuralOCRResponse,
   DetectedWords,
   IDCardInfo,
-  IDCardOCRResponse,
-  ShipInvoiceInfo,
   MedicalInvoiceItem,
   GeneralAccurateOCRRequest,
-  OrgCodeCertOCRRequest,
+  RailwayTicketInfo,
   RecognizeFormulaOCRRequest,
   FlightInvoiceOCRResponse,
   TemporaryIDCardInfo,
   VatInvoiceVerifyNewRequest,
-  InstitutionOCRRequest,
   CarInvoiceInfo,
   RecognizeTableMultiOCRResponse,
   FlightInvoiceInfo,
@@ -219,7 +213,6 @@ import {
   FinanBillSliceInfo,
   ShoppingReceipt,
   Encryption,
-  RecognizeGeneralTextImageWarnResponse,
   ArithmeticOCRRequest,
   NonTaxIncomeBill,
   VerifyOfdVatInvoiceOCRRequest,
@@ -298,7 +291,6 @@ import {
   UsedCarPurchaseInvoice,
   EnglishOCRResponse,
   ImageCoordinates,
-  RecognizeForeignPermanentResidentIdCardResponse,
   BusInvoiceOCRRequest,
   QuotaInvoiceOCRResponse,
   RecognizeEncryptedIDCardOCRResponse,
@@ -308,7 +300,6 @@ import {
   RecognizeContainerOCRResponse,
   EnterpriseLicenseInfo,
   PermitOCRResponse,
-  QuotaInvoice,
   InsuranceBillOCRRequest,
   GeneralHandwritingOCRResponse,
   IDCardResult,
@@ -330,7 +321,6 @@ import {
   BusinessCertificateInfo,
   WaybillOCRRequest,
   RideHailingTransportLicenseOCRRequest,
-  VatInvoiceVerifyNewResponse,
   MLIDCardOCRResponse,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
@@ -344,8 +334,7 @@ import {
   RecognizeHealthCodeOCRRequest,
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
-  RecognizeGeneralTextImageWarnRequest,
-  RecognizeForeignPermanentResidentIdCardRequest,
+  RecognizeValidIDCardOCRResponse,
   GeneralFastOCRResponse,
   TableCellInfo,
   QrcodePositionObj,
@@ -569,19 +558,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 不再维护，功能已切到其它接口
-
-<b>因技术原因，本接口将不再迭代升级。文档抽取(基础版)可支持此类证书的识别抽取，效果、功能更强并将持续迭代优化，建议使用<a href="https://cloud.tencent.com/document/product/866/119452">文档抽取（基础版）</a>。</b>
-本接口支持房产证关键字段的识别，包括房地产权利人、共有情况、登记时间、规划用途、房屋性质、房屋坐落等。
-目前接口对合肥、成都、佛山三个城市的房产证版式识别较好。
+     * 本接口支持二代身份证、临时身份证、港澳台居住证、外国人永久居留证，字段内容识别功能，包括姓名、性别、民族、出生、出生日期、住址、公民身份号码、签发机关、有效期限、国籍、通行证号码、持证人持有号码；支持返回证件类型；支持翻拍、复印、边框不完整、遮挡、字段级反光和字段级完整性告警；支持卡片主体框裁剪和头像裁剪。
 
 默认接口请求频率限制：5次/秒。
      */
-  async PropOwnerCertOCR(
-    req: PropOwnerCertOCRRequest,
-    cb?: (error: string, rep: PropOwnerCertOCRResponse) => void
-  ): Promise<PropOwnerCertOCRResponse> {
-    return this.request("PropOwnerCertOCR", req, cb)
+  async RecognizeValidIDCardOCR(
+    req: RecognizeValidIDCardOCRRequest,
+    cb?: (error: string, rep: RecognizeValidIDCardOCRResponse) => void
+  ): Promise<RecognizeValidIDCardOCRResponse> {
+    return this.request("RecognizeValidIDCardOCR", req, cb)
   }
 
   /**
@@ -713,19 +698,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RideHailingDriverLicenseOCRResponse) => void
   ): Promise<RideHailingDriverLicenseOCRResponse> {
     return this.request("RideHailingDriverLicenseOCR", req, cb)
-  }
-
-  /**
-     * 不再维护，功能已切到其它接口
-
-<b>因技术原因，本接口将不再迭代升级。有效身份证件识别（鉴伪版）可支持此类证件的识别，并包含质量和PS告警，效果、功能更强并将持续迭代优化，建议使用<a href="https://cloud.tencent.com/document/product/866/112345">有效身份证件识别（鉴伪版）</a>。</b>
-外国人永久居留身份证识别
-     */
-  async RecognizeForeignPermanentResidentIdCard(
-    req: RecognizeForeignPermanentResidentIdCardRequest,
-    cb?: (error: string, rep: RecognizeForeignPermanentResidentIdCardResponse) => void
-  ): Promise<RecognizeForeignPermanentResidentIdCardResponse> {
-    return this.request("RecognizeForeignPermanentResidentIdCard", req, cb)
   }
 
   /**
@@ -1169,18 +1141,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持二代身份证、临时身份证、港澳台居住证、外国人永久居留证，字段内容识别功能，包括姓名、性别、民族、出生、出生日期、住址、公民身份号码、签发机关、有效期限、国籍、通行证号码、持证人持有号码；支持返回证件类型；支持翻拍、复印、边框不完整、遮挡、字段级反光和字段级完整性告警；支持卡片主体框裁剪和头像裁剪。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async RecognizeValidIDCardOCR(
-    req: RecognizeValidIDCardOCRRequest,
-    cb?: (error: string, rep: RecognizeValidIDCardOCRResponse) => void
-  ): Promise<RecognizeValidIDCardOCRResponse> {
-    return this.request("RecognizeValidIDCardOCR", req, cb)
-  }
-
-  /**
      * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
 
 默认接口请求频率限制：10次/秒。
@@ -1292,34 +1252,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IDCardOCRResponse) => void
   ): Promise<IDCardOCRResponse> {
     return this.request("IDCardOCR", req, cb)
-  }
-
-  /**
-     * 不再维护，功能已切到其它接口
-
-<b>因技术原因，本接口将不再迭代升级。通用卡证鉴伪可支持更多告警类型，效果、功能更强并将持续迭代优化，建议使用<a href="https://cloud.tencent.com/document/product/866/115916">通用卡证鉴伪</a>。</b>
-本接口支持多种类型证件有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能。可以应用于各种证件信息有效性校验场景，例如银行开户、用户注册等场景。
-     */
-  async RecognizeGeneralTextImageWarn(
-    req: RecognizeGeneralTextImageWarnRequest,
-    cb?: (error: string, rep: RecognizeGeneralTextImageWarnResponse) => void
-  ): Promise<RecognizeGeneralTextImageWarnResponse> {
-    return this.request("RecognizeGeneralTextImageWarn", req, cb)
-  }
-
-  /**
-     * 不再维护，功能已切到其它接口
-
-<b>因技术原因，本接口将不再迭代升级。文档抽取(基础版)可支持此类证书的识别抽取，效果、功能更强并将持续迭代优化，建议使用<a href="https://cloud.tencent.com/document/product/866/119452">文档抽取（基础版）</a>。</b>
-本接口支持事业单位法人证书关键字段识别，包括注册号、有效期、住所、名称、法定代表人等。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async InstitutionOCR(
-    req: InstitutionOCRRequest,
-    cb?: (error: string, rep: InstitutionOCRResponse) => void
-  ): Promise<InstitutionOCRResponse> {
-    return this.request("InstitutionOCR", req, cb)
   }
 
   /**
@@ -1521,15 +1453,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async VehicleRegCertOCR(
-    req: VehicleRegCertOCRRequest,
-    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
-  ): Promise<VehicleRegCertOCRResponse> {
-    return this.request("VehicleRegCertOCR", req, cb)
+  async ResidenceBookletOCR(
+    req: ResidenceBookletOCRRequest,
+    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
+  ): Promise<ResidenceBookletOCRResponse> {
+    return this.request("ResidenceBookletOCR", req, cb)
   }
 
   /**
@@ -1718,21 +1650,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 不再维护，功能已切到其它接口
-
-<b>因技术原因，本接口将不再迭代升级。文档抽取(基础版)可支持此类证书的识别抽取，效果、功能更强并将持续迭代优化，建议使用<a href="https://cloud.tencent.com/document/product/866/119452">文档抽取（基础版）</a>。</b>
-本接口支持组织机构代码证关键字段的识别，包括代码、有效期、地址、机构名称等。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async OrgCodeCertOCR(
-    req: OrgCodeCertOCRRequest,
-    cb?: (error: string, rep: OrgCodeCertOCRResponse) => void
-  ): Promise<OrgCodeCertOCRResponse> {
-    return this.request("OrgCodeCertOCR", req, cb)
-  }
-
-  /**
      * <b>此接口不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/90802">通用票据识别（高级版）</a>。</b>
 本接口支持常见银行票据的自动分类和识别。切片识别包括金融行业常见票据的重要切片字段识别，包括金额、账号、日期、凭证号码等。（金融票据切片：金融票据中待识别字段及其周围局部区域的裁剪图像。）
 
@@ -1858,15 +1775,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async ResidenceBookletOCR(
-    req: ResidenceBookletOCRRequest,
-    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
-  ): Promise<ResidenceBookletOCRResponse> {
-    return this.request("ResidenceBookletOCR", req, cb)
+  async VehicleRegCertOCR(
+    req: VehicleRegCertOCRRequest,
+    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
+  ): Promise<VehicleRegCertOCRResponse> {
+    return this.request("VehicleRegCertOCR", req, cb)
   }
 
   /**

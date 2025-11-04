@@ -8206,6 +8206,10 @@ export interface ModifyUserManagerPwdRequest {
    * 密码
    */
   PassWord: string
+  /**
+   * 是否同步密码
+   */
+  SyncPwd?: boolean
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   AddNodesResponse,
   ExpansionNodeConfig,
   NodeActivity,
+  ModifyClusterDeletionProtectionResponse,
   CreateWorkspacesResponse,
   SpaceVirtualPrivateCloud,
   ManagerNodeOverview,
@@ -69,7 +70,7 @@ import {
   ModifyWorkspacesAttributeResponse,
   DescribeClustersResponse,
   DescribeClusterActivitiesResponse,
-  DescribeInitNodeScriptsResponse,
+  AddNodesRequest,
   DeleteQueueResponse,
   DataDisk,
   QueueOverview,
@@ -120,7 +121,8 @@ import {
   QueueConfig,
   DescribeClusterActivitiesRequest,
   DescribeJobsResponse,
-  AddNodesRequest,
+  ModifyClusterDeletionProtectionRequest,
+  DescribeInitNodeScriptsResponse,
   CFSOptionOverview,
   DeleteQueueRequest,
   AddClusterStorageOptionRequest,
@@ -372,7 +374,7 @@ export class Client extends AbstractClient {
    * 本接口 (SubmitJob) 用于提交一个作业任务。
    */
   async SubmitJob(
-    req?: SubmitJobRequest,
+    req: SubmitJobRequest,
     cb?: (error: string, rep: SubmitJobResponse) => void
   ): Promise<SubmitJobResponse> {
     return this.request("SubmitJob", req, cb)
@@ -386,6 +388,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterStorageOptionResponse) => void
   ): Promise<DescribeClusterStorageOptionResponse> {
     return this.request("DescribeClusterStorageOption", req, cb)
+  }
+
+  /**
+   * 修改集群删除保护状态
+   */
+  async ModifyClusterDeletionProtection(
+    req: ModifyClusterDeletionProtectionRequest,
+    cb?: (error: string, rep: ModifyClusterDeletionProtectionResponse) => void
+  ): Promise<ModifyClusterDeletionProtectionResponse> {
+    return this.request("ModifyClusterDeletionProtection", req, cb)
   }
 
   /**
@@ -412,7 +424,7 @@ export class Client extends AbstractClient {
    * 本接口 (DescribeJobs) 用于查询作业任务列表信息。
    */
   async DescribeJobsOverview(
-    req?: DescribeJobsOverviewRequest,
+    req: DescribeJobsOverviewRequest,
     cb?: (error: string, rep: DescribeJobsOverviewResponse) => void
   ): Promise<DescribeJobsOverviewResponse> {
     return this.request("DescribeJobsOverview", req, cb)

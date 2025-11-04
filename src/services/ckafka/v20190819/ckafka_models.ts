@@ -639,6 +639,16 @@ export interface DescribeAclRuleRequest {
 }
 
 /**
+ * RestartDatahubTask请求参数结构体
+ */
+export interface RestartDatahubTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+}
+
+/**
  * 操作型结果返回值
  */
 export interface JgwOperateResponse {
@@ -1442,6 +1452,21 @@ export interface DeleteConnectResourceResponse {
    * 连接源的Id
    */
   Result?: ConnectResourceResourceIdResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartDatahubTask返回参数结构体
+ */
+export interface RestartDatahubTaskResponse {
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DatahubTaskIdRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2262,6 +2287,14 @@ export interface KafkaParam {
    * 正则匹配Topic列表
    */
   TopicRegularExpression?: string
+  /**
+   * Topic 前缀
+   */
+  Prefix?: string
+  /**
+   * Topic前缀分隔符
+   */
+  Separator?: string
 }
 
 /**
@@ -2901,37 +2934,18 @@ export interface FetchLatestDatahubMessageListRequest {
 }
 
 /**
- * SQLServer连接源参数
+ * PauseDatahubTask返回参数结构体
  */
-export interface SQLServerConnectParam {
+export interface PauseDatahubTaskResponse {
   /**
-   * SQLServer的连接port
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port: number
+  Result?: DatahubTaskIdRes
   /**
-   * SQLServer连接源的用户名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName: string
-  /**
-   * SQLServer连接源的密码
-   */
-  Password: string
-  /**
-   * SQLServer连接源的实例资源
-   */
-  Resource: string
-  /**
-   * SQLServer连接源的实例vip，当为腾讯云实例时，必填
-   */
-  ServiceVip?: string
-  /**
-   * SQLServer连接源的vpcId，当为腾讯云实例时，必填
-   */
-  UniqVpcId?: string
-  /**
-   * 是否更新到关联的Dip任务
-   */
-  IsUpdate?: boolean
+  RequestId?: string
 }
 
 /**
@@ -5533,6 +5547,40 @@ export interface ModifyConnectResourceRequest {
 }
 
 /**
+ * SQLServer连接源参数
+ */
+export interface SQLServerConnectParam {
+  /**
+   * SQLServer的连接port
+   */
+  Port: number
+  /**
+   * SQLServer连接源的用户名
+   */
+  UserName: string
+  /**
+   * SQLServer连接源的密码
+   */
+  Password: string
+  /**
+   * SQLServer连接源的实例资源
+   */
+  Resource: string
+  /**
+   * SQLServer连接源的实例vip，当为腾讯云实例时，必填
+   */
+  ServiceVip?: string
+  /**
+   * SQLServer连接源的vpcId，当为腾讯云实例时，必填
+   */
+  UniqVpcId?: string
+  /**
+   * 是否更新到关联的Dip任务
+   */
+  IsUpdate?: boolean
+}
+
+/**
  * CreateToken请求参数结构体
  */
 export interface CreateTokenRequest {
@@ -6143,6 +6191,16 @@ export interface TransformsParam {
 }
 
 /**
+ * PauseDatahubTask请求参数结构体
+ */
+export interface PauseDatahubTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+}
+
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -6675,6 +6733,21 @@ export interface MariaDBConnectParam {
 }
 
 /**
+ * ResumeDatahubTask返回参数结构体
+ */
+export interface ResumeDatahubTaskResponse {
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DatahubTaskIdRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyTopicAttributes请求参数结构体
  */
 export interface ModifyTopicAttributesRequest {
@@ -7004,6 +7077,16 @@ export interface BatchCreateAclRequest {
    * 设置的ACL规则列表，可通过[DescribeAclRule](https://cloud.tencent.com/document/product/597/89217)接口获取。
    */
   RuleList: Array<AclRuleInfo>
+}
+
+/**
+ * ResumeDatahubTask请求参数结构体
+ */
+export interface ResumeDatahubTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
 }
 
 /**

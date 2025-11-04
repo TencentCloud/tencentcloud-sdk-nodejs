@@ -21,6 +21,7 @@ import {
   StartMachinesResponse,
   NativeNodeInfo,
   HealthCheckTemplateRule,
+  DescribeClustersRequest,
   GPUConfig,
   HealthCheckPolicyRule,
   DeleteHealthCheckPolicyRequest,
@@ -40,6 +41,7 @@ import {
   Label,
   HealthCheckPolicyBinding,
   CreateHealthCheckPolicyRequest,
+  SetMachineLoginResponse,
   InstanceExtraArgs,
   MachineUpgradeSettings,
   DeleteClusterMachinesResponse,
@@ -80,12 +82,13 @@ import {
   StopMachinesResponse,
   DescribeHealthCheckTemplateRequest,
   DescribeHealthCheckPoliciesResponse,
+  ManagementConfig,
   HealthCheckTemplate,
   InternetAccessible,
   ModifyHealthCheckPolicyRequest,
-  SetMachineLoginResponse,
+  Cluster,
   ManuallyAdded,
-  ManagementConfig,
+  DescribeClustersResponse,
   ModifyHealthCheckPolicyResponse,
   SortBy,
   HealthCheckPolicy,
@@ -154,6 +157,22 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (StopMachines) 用于关闭一个或多个原生节点实例。
+
+只有状态为 Running 的实例才可以进行此操作。
+接口调用成功时，实例会进入 Stopping 状态；关闭实例成功时，实例会进入 Stopped 状态。
+支持强制关闭。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+支持批量操作。每次请求批量实例的上限为 100。
+本接口为同步接口，关闭实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeClusterInstances 接口查询，如果实例的状态为stopped_with_charging，则代表关闭实例操作成功。
+     */
+  async StopMachines(
+    req: StopMachinesRequest,
+    cb?: (error: string, rep: StopMachinesResponse) => void
+  ): Promise<StopMachinesResponse> {
+    return this.request("StopMachines", req, cb)
+  }
+
+  /**
    * 删除健康检测策略
    */
   async DeleteHealthCheckPolicy(
@@ -194,19 +213,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (StopMachines) 用于关闭一个或多个原生节点实例。
-
-只有状态为 Running 的实例才可以进行此操作。
-接口调用成功时，实例会进入 Stopping 状态；关闭实例成功时，实例会进入 Stopped 状态。
-支持强制关闭。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
-支持批量操作。每次请求批量实例的上限为 100。
-本接口为同步接口，关闭实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeClusterInstances 接口查询，如果实例的状态为stopped_with_charging，则代表关闭实例操作成功。
-     */
-  async StopMachines(
-    req: StopMachinesRequest,
-    cb?: (error: string, rep: StopMachinesResponse) => void
-  ): Promise<StopMachinesResponse> {
-    return this.request("StopMachines", req, cb)
+   * 查询健康检测策略绑定关系
+   */
+  async DescribeHealthCheckPolicyBindings(
+    req: DescribeHealthCheckPolicyBindingsRequest,
+    cb?: (error: string, rep: DescribeHealthCheckPolicyBindingsResponse) => void
+  ): Promise<DescribeHealthCheckPolicyBindingsResponse> {
+    return this.request("DescribeHealthCheckPolicyBindings", req, cb)
   }
 
   /**
@@ -230,13 +243,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询健康检测策略绑定关系
+   * 查询集群列表
    */
-  async DescribeHealthCheckPolicyBindings(
-    req: DescribeHealthCheckPolicyBindingsRequest,
-    cb?: (error: string, rep: DescribeHealthCheckPolicyBindingsResponse) => void
-  ): Promise<DescribeHealthCheckPolicyBindingsResponse> {
-    return this.request("DescribeHealthCheckPolicyBindings", req, cb)
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
   }
 
   /**

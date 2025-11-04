@@ -281,7 +281,7 @@ export interface PrivateZone {
  */
 export interface CreatePrivateDNSAccountRequest {
   /**
-   * 私有域解析账号
+   * 私有域解析账号，该账号不能与主账号一致且需要子账号授权
    */
   Account: PrivateDNSAccount
 }

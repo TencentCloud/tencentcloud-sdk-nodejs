@@ -9277,6 +9277,10 @@ export interface ModifyBackupEncryptionStatusRequest {
    * 设置实例新增的自动物理备份文件默认加密状态。可选值为 on或者off。
    */
   EncryptionStatus: string
+  /**
+   * 设置实例新增的自动日志备份文件默认加密状态。可选值为 on或者off。
+   */
+  BinlogEncryptionStatus?: string
 }
 
 /**

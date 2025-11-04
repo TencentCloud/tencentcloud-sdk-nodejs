@@ -413,18 +413,38 @@ export interface BankCardOCRRequest {
 }
 
 /**
- * SmartStructuralOCR返回参数结构体
+ * VatInvoiceVerifyNew返回参数结构体
  */
-export interface SmartStructuralOCRResponse {
+export interface VatInvoiceVerifyNewResponse {
   /**
-   * 图片旋转角度(角度制)，文本的水平方向
-为 0；顺时针为正，逆时针为负
+   * 增值税发票、购车发票、全电发票的基础要素字段信息。
    */
-  Angle?: number
+  Invoice?: VatInvoice
   /**
-   * 识别信息
+   * 机动车销售统一发票详细字段信息。
    */
-  StructuralItems?: Array<StructuralItem>
+  VehicleInvoiceInfo?: VehicleInvoiceInfo
+  /**
+   * 二手车销售统一发票详细字段信息。
+   */
+  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
+  /**
+   * 通行费发票详细字段信息。
+   */
+  PassInvoiceInfoList?: Array<PassInvoiceInfo>
+  /**
+   * 全电发票（铁路电子客票）详细字段信息。
+
+   */
+  ElectronicTrainTicket?: ElectronicTrainTicket
+  /**
+   * 全电发票（航空运输电子客票行程单）详细字段信息。
+   */
+  ElectronicAirTransport?: ElectronicAirTransport
+  /**
+   * 财政发票详细字段信息
+   */
+  FinancialBill?: FinancialBill
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -794,109 +814,23 @@ export interface TextDetectResponse {
 }
 
 /**
- * 铁路电子客票信息
+ * 完税凭证
  */
-export interface RailwayTicketInfo {
+export interface TaxPayment {
   /**
-   * 电子发票类型
+   * 发票名称
    */
-  TypeOfVoucher?: string
+  Title?: string
   /**
-   * 电子客票号
+   * 识别出的字段名称(关键字)，支持以下字段：
+税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。
+示例值：纳税人识别号
    */
-  ElectronicTicketNum?: string
+  Content?: Array<OtherInvoiceItem>
   /**
-   * 开票日期
+   * 表格。
    */
-  DateOfIssue?: string
-  /**
-   * 售票或退票类型
-   */
-  TypeOfBusiness?: string
-  /**
-   * 始发站
-   */
-  DepartureStation?: string
-  /**
-   * 始发站英文
-   */
-  PhonicsOfDepartureStation?: string
-  /**
-   * 到达站
-   */
-  DestinationStation?: string
-  /**
-   * 到达站英文
-   */
-  PhonicsOfDestinationStation?: string
-  /**
-   * 火车号
-   */
-  TrainNumber?: string
-  /**
-   * 火车出发日期
-   */
-  TravelDate?: string
-  /**
-   * 始发时间
-   */
-  DepartureTime?: string
-  /**
-   * 空调特点
-   */
-  AirConditioningCharacteristics?: string
-  /**
-   * 座位类型
-   */
-  SeatLevel?: string
-  /**
-   * 火车第几车
-   */
-  Carriage?: string
-  /**
-   * 座位号
-   */
-  Seat?: string
-  /**
-   * 票价
-   */
-  Fare?: string
-  /**
-   * 发票号码
-   */
-  ElectronicInvoiceRailwayETicketNumber?: string
-  /**
-   * 身份证号
-   */
-  IdNumber?: string
-  /**
-   * 姓名
-   */
-  Name?: string
-  /**
-   * 金额
-   */
-  TotalAmountExcludingTax?: string
-  /**
-   * 税率
-   */
-  TaxRate?: string
-  /**
-   * 税额
-   */
-  TaxAmount?: string
-  /**
-   * 购买方名称
-   */
-  NameOfPurchaser?: string
-  /**
-   * 统一社会信用代码
-   */
-  UnifiedSocialCreditCodeOfPurchaser?: string
-  /**
-   * 原发票号码
-   */
-  NumberOfOriginalInvoice?: string
+  TableItems?: Array<OtherInvoiceList>
 }
 
 /**
@@ -1534,23 +1468,70 @@ export interface VehicleRegCertInfo {
 }
 
 /**
- * 通用告警详情
+ * IDCardOCR返回参数结构体
  */
-export interface GeneralWarnInfo {
+export interface IDCardOCRResponse {
   /**
-   * 是否存在该告警
+   * 姓名（人像面）
    */
-  IsWarn?: boolean
+  Name?: string
   /**
-   * 告警位置四点坐标
+   * 性别（人像面）
    */
-  Polygon?: Array<Polygon>
+  Sex?: string
   /**
-   * 特殊判定，支持包括
+   * 民族（人像面）
+   */
+  Nation?: string
+  /**
+   * 出生日期（人像面）
+   */
+  Birth?: string
+  /**
+   * 地址（人像面）
+   */
+  Address?: string
+  /**
+   * 身份证号（人像面）
+   */
+  IdNum?: string
+  /**
+   * 发证机关（国徽面）
+   */
+  Authority?: string
+  /**
+   * 证件有效期（国徽面）
+   */
+  ValidDate?: string
+  /**
+   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
+IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
+Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
 
-Finger：由手指导致的不完整，仅在不完整告警中返回
+Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
+BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
+
+WarnInfos，告警信息，Code 告警码列表和释义：
+-9101 身份证边框不完整告警，
+
+-9102 身份证复印件告警（黑白及彩色复印件）,
+-9108 身份证复印件告警（仅黑白复印件），
+
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证疑似存在PS痕迹告警，
+-9107 身份证反光告警。
    */
-  SpecificMatter?: string
+  AdvancedInfo?: string
+  /**
+   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   */
+  ReflectDetailInfos?: Array<ReflectDetailInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1738,33 +1719,22 @@ export interface TextVatInvoice {
 }
 
 /**
- * InstitutionOCR返回参数结构体
+ * 轮船票字段信息
  */
-export interface InstitutionOCRResponse {
+export interface ShipInvoiceInfo {
   /**
-   * 注册号
-   */
-  RegId?: string
-  /**
-   * 有效期
-   */
-  ValidDate?: string
-  /**
-   * 住所
-   */
-  Location?: string
-  /**
-   * 名称
+   * 识别出的字段名称(关键字)，支持以下字段：
+发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。
    */
   Name?: string
   /**
-   * 法定代表人
+   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  LegalPerson?: string
+  Value?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  RequestId?: string
+  Rect?: Rect
 }
 
 /**
@@ -2441,40 +2411,6 @@ export interface FlightItemInfo {
    * 有效截止日期
    */
   DateEnd?: string
-}
-
-/**
- * PropOwnerCertOCR返回参数结构体
- */
-export interface PropOwnerCertOCRResponse {
-  /**
-   * 房地产权利人
-   */
-  Owner?: string
-  /**
-   * 共有情况
-   */
-  Possession?: string
-  /**
-   * 登记时间
-   */
-  RegisterTime?: string
-  /**
-   * 规划用途
-   */
-  Purpose?: string
-  /**
-   * 房屋性质
-   */
-  Nature?: string
-  /**
-   * 房地坐落
-   */
-  Location?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4199,29 +4135,49 @@ export interface GroupInfo {
 }
 
 /**
- * OrgCodeCertOCR返回参数结构体
+ * 定额发票
  */
-export interface OrgCodeCertOCRResponse {
+export interface QuotaInvoice {
   /**
-   * 代码
+   * 发票名称
    */
-  OrgCode?: string
+  Title?: string
   /**
-   * 机构名称
+   * 发票代码
    */
-  Name?: string
+  Code?: string
   /**
-   * 地址
+   * 发票号码
    */
-  Address?: string
+  Number?: string
   /**
-   * 有效期
+   * 价税合计（小写）
    */
-  ValidDate?: string
+  Total?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 价税合计（大写）
    */
-  RequestId?: string
+  TotalCn?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 市
+   */
+  City?: string
+  /**
+   * 是否存在二维码（1：有，0：无）
+   */
+  QRCodeMark?: number
+  /**
+   * 是否有公司印章（0：没有，1：有）
+   */
+  CompanySealMark?: number
 }
 
 /**
@@ -4746,20 +4702,6 @@ export interface RecognizeContainerOCRRequest {
    * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
-}
-
-/**
- * SubmitExtractDocAgentJob返回参数结构体
- */
-export interface SubmitExtractDocAgentJobResponse {
-  /**
-   * 任务唯一ID。由服务端生成。
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5489,17 +5431,17 @@ export interface PassportRecognizeInfos {
 }
 
 /**
- * PropOwnerCertOCR请求参数结构体
+ * SubmitExtractDocAgentJob返回参数结构体
  */
-export interface PropOwnerCertOCRRequest {
+export interface SubmitExtractDocAgentJobResponse {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 任务唯一ID。由服务端生成。
    */
-  ImageBase64?: string
+  JobId?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageUrl?: string
+  RequestId?: string
 }
 
 /**
@@ -5722,26 +5664,6 @@ export interface CardWarnInfo {
 1：是电子身份证
    */
   ElectronCheck?: number
-}
-
-/**
- * 完税凭证
- */
-export interface TaxPayment {
-  /**
-   * 发票名称
-   */
-  Title?: string
-  /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。
-示例值：纳税人识别号
-   */
-  Content?: Array<OtherInvoiceItem>
-  /**
-   * 表格。
-   */
-  TableItems?: Array<OtherInvoiceList>
 }
 
 /**
@@ -6532,44 +6454,18 @@ export interface VatElectronicInfo {
 }
 
 /**
- * RecognizeValidIDCardOCR返回参数结构体
+ * SmartStructuralOCR返回参数结构体
  */
-export interface RecognizeValidIDCardOCRResponse {
+export interface SmartStructuralOCRResponse {
   /**
-   * 卡证类型
-身份证人像面
-身份证国徽面
-
-临时身份证人像面
-临时身份证人像面
-
-港澳台居住证人像面
-港澳台居住证国徽面
-
-外国人永久居留证人像面
-外国人永久居留证国徽面
+   * 图片旋转角度(角度制)，文本的水平方向
+为 0；顺时针为正，逆时针为负
    */
-  Type?: string
+  Angle?: number
   /**
-   * 身份证信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 识别信息
    */
-  IDCardInfo?: IDCardInfo
-  /**
-   * 临时身份证信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TemporaryIDCardInfo?: TemporaryIDCardInfo
-  /**
-   * 港澳台居住证信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResidencePermitInfo?: ResidencePermitInfo
-  /**
-   * 外国人永久居留证信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PermanentResidencePermitInfo?: PermanentResidencePermitInfo
+  StructuralItems?: Array<StructuralItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6641,92 +6537,6 @@ export interface IDCardInfo {
 }
 
 /**
- * IDCardOCR返回参数结构体
- */
-export interface IDCardOCRResponse {
-  /**
-   * 姓名（人像面）
-   */
-  Name?: string
-  /**
-   * 性别（人像面）
-   */
-  Sex?: string
-  /**
-   * 民族（人像面）
-   */
-  Nation?: string
-  /**
-   * 出生日期（人像面）
-   */
-  Birth?: string
-  /**
-   * 地址（人像面）
-   */
-  Address?: string
-  /**
-   * 身份证号（人像面）
-   */
-  IdNum?: string
-  /**
-   * 发证机关（国徽面）
-   */
-  Authority?: string
-  /**
-   * 证件有效期（国徽面）
-   */
-  ValidDate?: string
-  /**
-   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
-IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
-Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
-
-Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
-
-WarnInfos，告警信息，Code 告警码列表和释义：
--9101 身份证边框不完整告警，
-
--9102 身份证复印件告警（黑白及彩色复印件）,
--9108 身份证复印件告警（仅黑白复印件），
-
--9103 身份证翻拍告警，
--9105 身份证框内遮挡告警，
--9104 临时身份证告警，
--9106 身份证疑似存在PS痕迹告警，
--9107 身份证反光告警。
-   */
-  AdvancedInfo?: string
-  /**
-   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
-   */
-  ReflectDetailInfos?: Array<ReflectDetailInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 轮船票字段信息
- */
-export interface ShipInvoiceInfo {
-  /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。
-   */
-  Name?: string
-  /**
-   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
-   */
-  Value?: string
-  /**
-   * 文本行在旋转纠正之后的图像中的像素坐标。
-   */
-  Rect?: Rect
-}
-
-/**
  * 医疗发票识别结果
  */
 export interface MedicalInvoiceItem {
@@ -6790,17 +6600,109 @@ export interface GeneralAccurateOCRRequest {
 }
 
 /**
- * OrgCodeCertOCR请求参数结构体
+ * 铁路电子客票信息
  */
-export interface OrgCodeCertOCRRequest {
+export interface RailwayTicketInfo {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 电子发票类型
    */
-  ImageBase64?: string
+  TypeOfVoucher?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 电子客票号
    */
-  ImageUrl?: string
+  ElectronicTicketNum?: string
+  /**
+   * 开票日期
+   */
+  DateOfIssue?: string
+  /**
+   * 售票或退票类型
+   */
+  TypeOfBusiness?: string
+  /**
+   * 始发站
+   */
+  DepartureStation?: string
+  /**
+   * 始发站英文
+   */
+  PhonicsOfDepartureStation?: string
+  /**
+   * 到达站
+   */
+  DestinationStation?: string
+  /**
+   * 到达站英文
+   */
+  PhonicsOfDestinationStation?: string
+  /**
+   * 火车号
+   */
+  TrainNumber?: string
+  /**
+   * 火车出发日期
+   */
+  TravelDate?: string
+  /**
+   * 始发时间
+   */
+  DepartureTime?: string
+  /**
+   * 空调特点
+   */
+  AirConditioningCharacteristics?: string
+  /**
+   * 座位类型
+   */
+  SeatLevel?: string
+  /**
+   * 火车第几车
+   */
+  Carriage?: string
+  /**
+   * 座位号
+   */
+  Seat?: string
+  /**
+   * 票价
+   */
+  Fare?: string
+  /**
+   * 发票号码
+   */
+  ElectronicInvoiceRailwayETicketNumber?: string
+  /**
+   * 身份证号
+   */
+  IdNumber?: string
+  /**
+   * 姓名
+   */
+  Name?: string
+  /**
+   * 金额
+   */
+  TotalAmountExcludingTax?: string
+  /**
+   * 税率
+   */
+  TaxRate?: string
+  /**
+   * 税额
+   */
+  TaxAmount?: string
+  /**
+   * 购买方名称
+   */
+  NameOfPurchaser?: string
+  /**
+   * 统一社会信用代码
+   */
+  UnifiedSocialCreditCodeOfPurchaser?: string
+  /**
+   * 原发票号码
+   */
+  NumberOfOriginalInvoice?: string
 }
 
 /**
@@ -6935,20 +6837,6 @@ export interface VatInvoiceVerifyNewRequest {
    * 是否允许查验当日发票，默认值为false。请注意，发票从开具到录入税局需要一定的时间来更新和验证发票信息，打开后仅支持查验已成功录入到税局中的当日发票。
    */
   EnableTodayInvoice?: boolean
-}
-
-/**
- * InstitutionOCR请求参数结构体
- */
-export interface InstitutionOCRRequest {
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
 }
 
 /**
@@ -7260,36 +7148,6 @@ export interface Encryption {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptList?: Array<string>
-}
-
-/**
- * RecognizeGeneralTextImageWarn返回参数结构体
- */
-export interface RecognizeGeneralTextImageWarnResponse {
-  /**
-   * 复印告警信息
-   */
-  Copy?: GeneralWarnInfo
-  /**
-   * 翻拍告警信息
-   */
-  Reprint?: GeneralWarnInfo
-  /**
-   * 模糊告警信息
-   */
-  Blur?: GeneralWarnInfo
-  /**
-   * 反光告警信息
-   */
-  Reflection?: GeneralWarnInfo
-  /**
-   * 边框不完整告警信息
-   */
-  BorderIncomplete?: GeneralWarnInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7874,9 +7732,9 @@ export interface OnlineTaxiItinerary {
    */
   Title?: string
   /**
-   * 识别出的字段名称(关键字)
+   * 识别出的字段名称
    */
-  Content?: Array<OtherInvoiceItem>
+  Content?: Array<OnlineTaxiItineraryInfo>
 }
 
 /**
@@ -9324,18 +9182,11 @@ export interface MedicalInvoice {
  */
 export interface HmtResidentPermitOCRRequest {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
   /**
@@ -10255,56 +10106,6 @@ export interface ImageCoordinates {
 }
 
 /**
- * RecognizeForeignPermanentResidentIdCard返回参数结构体
- */
-export interface RecognizeForeignPermanentResidentIdCardResponse {
-  /**
-   * 中文姓名。
-   */
-  CnName?: string
-  /**
-   * 英文名。
-   */
-  EnName?: string
-  /**
-   * 性别。
-   */
-  Sex?: string
-  /**
-   * 出生日期。规范格式为 XXXX年XX月XX日。
-   */
-  DateOfBirth?: string
-  /**
-   * 国籍。
-   */
-  Nationality?: string
-  /**
-   * 有效期限。
-   */
-  PeriodOfValidity?: string
-  /**
-   * 证件号码。
-   */
-  No?: string
-  /**
-   * 曾持证件号码。
-   */
-  PreviousNumber?: string
-  /**
-   * 签发机关。
-   */
-  IssuedAuthority?: string
-  /**
-   * 头像和坐标信息。
-   */
-  PortraitImageInfo?: PortraitImageInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * BusInvoiceOCR请求参数结构体
  */
 export interface BusInvoiceOCRRequest {
@@ -10684,52 +10485,6 @@ export interface PermitOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 定额发票
- */
-export interface QuotaInvoice {
-  /**
-   * 发票名称
-   */
-  Title?: string
-  /**
-   * 发票代码
-   */
-  Code?: string
-  /**
-   * 发票号码
-   */
-  Number?: string
-  /**
-   * 价税合计（小写）
-   */
-  Total?: string
-  /**
-   * 价税合计（大写）
-   */
-  TotalCn?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 省
-   */
-  Province?: string
-  /**
-   * 市
-   */
-  City?: string
-  /**
-   * 是否存在二维码（1：有，0：无）
-   */
-  QRCodeMark?: number
-  /**
-   * 是否有公司印章（0：没有，1：有）
-   */
-  CompanySealMark?: number
 }
 
 /**
@@ -11247,45 +11002,6 @@ export interface RideHailingTransportLicenseOCRRequest {
 }
 
 /**
- * VatInvoiceVerifyNew返回参数结构体
- */
-export interface VatInvoiceVerifyNewResponse {
-  /**
-   * 增值税发票、购车发票、全电发票的基础要素字段信息。
-   */
-  Invoice?: VatInvoice
-  /**
-   * 机动车销售统一发票详细字段信息。
-   */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo
-  /**
-   * 二手车销售统一发票详细字段信息。
-   */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
-  /**
-   * 通行费发票详细字段信息。
-   */
-  PassInvoiceInfoList?: Array<PassInvoiceInfo>
-  /**
-   * 全电发票（铁路电子客票）详细字段信息。
-
-   */
-  ElectronicTrainTicket?: ElectronicTrainTicket
-  /**
-   * 全电发票（航空运输电子客票行程单）详细字段信息。
-   */
-  ElectronicAirTransport?: ElectronicAirTransport
-  /**
-   * 财政发票详细字段信息
-   */
-  FinancialBill?: FinancialBill
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * MLIDCardOCR返回参数结构体
  */
 export interface MLIDCardOCRResponse {
@@ -11798,58 +11514,48 @@ export interface FinanBillOCRRequest {
 }
 
 /**
- * RecognizeGeneralTextImageWarn请求参数结构体
+ * RecognizeValidIDCardOCR返回参数结构体
  */
-export interface RecognizeGeneralTextImageWarnRequest {
+export interface RecognizeValidIDCardOCRResponse {
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 示例值：false
-   */
-  EnablePdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。 示例值：1
-   */
-  PdfPageNumber?: number
-  /**
-   * 支持的模板类型
-- General 通用告警（支持所有类型告警）
-- LicensePlate 车牌告警（支持翻拍告警）
+   * 卡证类型
+身份证人像面
+身份证国徽面
+
+临时身份证人像面
+临时身份证人像面
+
+港澳台居住证人像面
+港澳台居住证国徽面
+
+外国人永久居留证人像面
+外国人永久居留证国徽面
    */
   Type?: string
-}
-
-/**
- * RecognizeForeignPermanentResidentIdCard请求参数结构体
- */
-export interface RecognizeForeignPermanentResidentIdCardRequest {
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/docume
+   * 身份证信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageUrl?: string
+  IDCardInfo?: IDCardInfo
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 临时身份证信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageBase64?: string
+  TemporaryIDCardInfo?: TemporaryIDCardInfo
   /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   * 港澳台居住证信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnablePdf?: boolean
+  ResidencePermitInfo?: ResidencePermitInfo
   /**
-   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
-示例值：1
+   * 外国人永久居留证信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PdfPageNumber?: number
+  PermanentResidencePermitInfo?: PermanentResidencePermitInfo
   /**
-   * 是否返回头像和位置坐标
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CropPortrait?: boolean
+  RequestId?: string
 }
 
 /**

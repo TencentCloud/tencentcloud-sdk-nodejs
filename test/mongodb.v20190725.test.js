@@ -38,6 +38,16 @@ it("mongodb.v20190725.DescribeDBInstanceURL", async function () {
     }
 })
 
+it("mongodb.v20190725.CreateLogDownloadTask", async function () {
+    try {
+       const data = await client.CreateLogDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstanceNodeProperty", async function () {
     try {
        const data = await client.DescribeDBInstanceNodeProperty({})
@@ -71,6 +81,16 @@ it("mongodb.v20190725.DescribeDBInstanceDeal", async function () {
 it("mongodb.v20190725.DescribeCurrentOp", async function () {
     try {
        const data = await client.DescribeCurrentOp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeDBBackups", async function () {
+    try {
+       const data = await client.DescribeDBBackups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +148,9 @@ it("mongodb.v20190725.FlushInstanceRouterConfig", async function () {
     }
 })
 
-it("mongodb.v20190725.DescribeDBBackups", async function () {
+it("mongodb.v20190725.DeleteLogDownloadTask", async function () {
     try {
-       const data = await client.DescribeDBBackups({})
+       const data = await client.DeleteLogDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +188,16 @@ it("mongodb.v20190725.InquirePriceModifyDBInstanceSpec", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribeLogDownloadTasks", async function () {
+    try {
+       const data = await client.DescribeLogDownloadTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.RestartNodes", async function () {
     try {
        const data = await client.RestartNodes({})
@@ -188,9 +218,9 @@ it("mongodb.v20190725.DescribeBackupRules", async function () {
     }
 })
 
-it("mongodb.v20190725.RenameInstance", async function () {
+it("mongodb.v20190725.ModifyInstanceParams", async function () {
     try {
-       const data = await client.RenameInstance({})
+       const data = await client.ModifyInstanceParams({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +368,16 @@ it("mongodb.v20190725.DescribeSlowLogPatterns", async function () {
     }
 })
 
+it("mongodb.v20190725.RenameInstance", async function () {
+    try {
+       const data = await client.RenameInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeSlowLogs", async function () {
     try {
        const data = await client.DescribeSlowLogs({})
@@ -348,9 +388,9 @@ it("mongodb.v20190725.DescribeSlowLogs", async function () {
     }
 })
 
-it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
+it("mongodb.v20190725.DescribeMongodbLogs", async function () {
     try {
-       const data = await client.ModifyDBInstanceNetworkAddress({})
+       const data = await client.DescribeMongodbLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +421,16 @@ it("mongodb.v20190725.IsolateDBInstance", async function () {
 it("mongodb.v20190725.DescribeInstanceParams", async function () {
     try {
        const data = await client.DescribeInstanceParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.UpgradeDBInstanceKernelVersion", async function () {
+    try {
+       const data = await client.UpgradeDBInstanceKernelVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +498,16 @@ it("mongodb.v20190725.DescribeTransparentDataEncryptionStatus", async function (
     }
 })
 
+it("mongodb.v20190725.UpgradeDbInstanceVersion", async function () {
+    try {
+       const data = await client.UpgradeDbInstanceVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeAccountUsers", async function () {
     try {
        const data = await client.DescribeAccountUsers({})
@@ -468,9 +528,9 @@ it("mongodb.v20190725.SetInstanceMaintenance", async function () {
     }
 })
 
-it("mongodb.v20190725.ModifyInstanceParams", async function () {
+it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
     try {
-       const data = await client.ModifyInstanceParams({})
+       const data = await client.ModifyDBInstanceNetworkAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
