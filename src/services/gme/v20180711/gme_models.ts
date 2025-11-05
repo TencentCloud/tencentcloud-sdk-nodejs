@@ -633,17 +633,13 @@ export interface DescribeRecordInfoResponse {
 }
 
 /**
- * DescribeApplicationList返回参数结构体
+ * CreateApp返回参数结构体
  */
-export interface DescribeApplicationListResponse {
+export interface CreateAppResponse {
   /**
-   * 获取应用列表返回
+   * 创建应用返回数据
    */
-  ApplicationList?: Array<ApplicationList>
-  /**
-   * 应用总数
-   */
-  Total?: number
+  Data?: CreateAppResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -813,13 +809,17 @@ export interface UserMicStatus {
 }
 
 /**
- * CreateApp返回参数结构体
+ * DescribeApplicationList返回参数结构体
  */
-export interface CreateAppResponse {
+export interface DescribeApplicationListResponse {
   /**
-   * 创建应用返回数据
+   * 获取应用列表返回
    */
-  Data?: CreateAppResp
+  ApplicationList?: Array<ApplicationList>
+  /**
+   * 应用总数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -879,7 +879,48 @@ export interface DescribeRoomInfoRequest {
 /**
  * DescribeAuditResultExternal请求参数结构体
  */
-export type DescribeAuditResultExternalRequest = null
+export interface DescribeAuditResultExternalRequest {
+  /**
+   * 应用 ID
+   */
+  BizId: number
+  /**
+   * 页数  取值范围：>=1
+   */
+  PageNo: number
+  /**
+   * 每页大小
+   */
+  PageSize: number
+  /**
+   * 起始时间戳（秒）
+   */
+  BeginTime: number
+  /**
+   * 截止时间戳（秒）
+   */
+  EndTime: number
+  /**
+   * 最小恶意分数
+   */
+  MinRate: number
+  /**
+   * 最大恶意分数
+   */
+  MaxRate: number
+  /**
+   * UserID
+   */
+  OpenId: string
+  /**
+   * 恶意分类
+   */
+  Label?: string
+  /**
+   * 房间 ID
+   */
+  RoomId?: string
+}
 
 /**
  * ModifyCustomization返回参数结构体
@@ -1260,9 +1301,59 @@ export interface ScanVoiceResult {
  */
 export interface DescribeAuditResultExternalResponse {
   /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 明细列表
+   */
+  Data?: Array<AuditResultDetailExternal>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 审核结果明细（对外）
+ */
+export interface AuditResultDetailExternal {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 房间 ID
+   */
+  RoomId?: string
+  /**
+   * UserID
+   */
+  OpenId?: string
+  /**
+   * 标签
+   */
+  Label?: string
+  /**
+   * 恶意分数
+   */
+  Rate?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 音频 Url
+   */
+  Url?: string
+  /**
+   * 文件Id
+   */
+  FileId?: string
+  /**
+   * ASR结果
+   */
+  Info?: string
 }
 
 /**

@@ -438,6 +438,16 @@ it("dnspod.v20210323.DeleteDomainCustomLine", async function () {
     }
 })
 
+it("dnspod.v20210323.ModifyDomainRecursiveStatusBatch", async function () {
+    try {
+       const data = await client.ModifyDomainRecursiveStatusBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeDomainAliasList", async function () {
     try {
        const data = await client.DescribeDomainAliasList({})
@@ -731,6 +741,16 @@ it("dnspod.v20210323.DownloadSnapshot", async function () {
 it("dnspod.v20210323.ModifyRecordStatus", async function () {
     try {
        const data = await client.ModifyRecordStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.ModifyDomainCNAMESpeedupStatusBatch", async function () {
+    try {
+       const data = await client.ModifyDomainCNAMESpeedupStatusBatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

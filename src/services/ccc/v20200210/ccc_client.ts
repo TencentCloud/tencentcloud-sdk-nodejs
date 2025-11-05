@@ -26,6 +26,7 @@ import {
   CompanyApplyInfo,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
+  DescribeAIAgentInfoListResponse,
   DescribeIvrAudioListResponse,
   DescribePredictiveDialingCampaignsElement,
   ServerPushText,
@@ -34,6 +35,7 @@ import {
   Filter,
   DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTaskRequest,
+  CalleeAttribute,
   CreateUserSigResponse,
   CreateAICallRequest,
   StaffInfo,
@@ -42,6 +44,7 @@ import {
   ForwardingConfig,
   DescribeAILatencyRequest,
   CreateCallOutSessionResponse,
+  AIAgentInfo,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
   ModifyStaffPasswordResponse,
@@ -201,7 +204,7 @@ import {
   InvokeLLM,
   DescribeStaffStatusMetricsRequest,
   DeleteStaffResponse,
-  CalleeAttribute,
+  DescribeAIAgentInfoListRequest,
   StaffStatusExtra,
   DescribeStaffStatusHistoryRequest,
   CreateStaffRequest,
@@ -701,6 +704,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAgentCruiseDialingCampaignResponse) => void
   ): Promise<CreateAgentCruiseDialingCampaignResponse> {
     return this.request("CreateAgentCruiseDialingCampaign", req, cb)
+  }
+
+  /**
+   * 获取智能体列表
+   */
+  async DescribeAIAgentInfoList(
+    req: DescribeAIAgentInfoListRequest,
+    cb?: (error: string, rep: DescribeAIAgentInfoListResponse) => void
+  ): Promise<DescribeAIAgentInfoListResponse> {
+    return this.request("DescribeAIAgentInfoList", req, cb)
   }
 
   /**

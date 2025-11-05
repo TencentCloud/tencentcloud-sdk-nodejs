@@ -276,6 +276,24 @@ export interface ModifyStaffRequest {
 }
 
 /**
+ * DescribeAIAgentInfoList返回参数结构体
+ */
+export interface DescribeAIAgentInfoListResponse {
+  /**
+   * 智能体信息列表
+   */
+  AIAgentInfoList?: Array<AIAgentInfo>
+  /**
+   * 智能体总数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIvrAudioList返回参数结构体
  */
 export interface DescribeIvrAudioListResponse {
@@ -449,6 +467,24 @@ export interface DescribeAutoCalloutTaskRequest {
    * 任务Id
    */
   TaskId: number
+}
+
+/**
+ * 被叫属性
+ */
+export interface CalleeAttribute {
+  /**
+   * 被叫号码
+   */
+  Callee: string
+  /**
+   * 随路数据
+   */
+  UUI?: string
+  /**
+   * 参数
+   */
+  Variables?: Array<Variable>
 }
 
 /**
@@ -909,6 +945,20 @@ export interface CreateCallOutSessionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 智能体信息
+ */
+export interface AIAgentInfo {
+  /**
+   * 智能体ID
+   */
+  AIAgentId?: number
+  /**
+   * 智能体名称
+   */
+  AIAgentName?: string
 }
 
 /**
@@ -4759,21 +4809,21 @@ export interface DeleteStaffResponse {
 }
 
 /**
- * 被叫属性
+ * DescribeAIAgentInfoList请求参数结构体
  */
-export interface CalleeAttribute {
+export interface DescribeAIAgentInfoListRequest {
   /**
-   * 被叫号码
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Callee: string
+  SdkAppId: number
   /**
-   * 随路数据
+   * 分页尺寸，上限 100
    */
-  UUI?: string
+  PageSize: number
   /**
-   * 参数
+   * 分页页码，从 0 开始
    */
-  Variables?: Array<Variable>
+  PageNumber: number
 }
 
 /**

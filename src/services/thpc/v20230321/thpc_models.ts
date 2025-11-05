@@ -2228,7 +2228,7 @@ export interface CreateWorkspacesRequest {
    */
   SpaceName?: string
   /**
-   * 工作空间登陆设置
+   * 工作空间登录设置
    */
   LoginSettings?: LoginSettings
   /**

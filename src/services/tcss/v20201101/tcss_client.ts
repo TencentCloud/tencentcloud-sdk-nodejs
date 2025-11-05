@@ -617,6 +617,7 @@ import {
   DescribeAssetImageScanTaskResponse,
   AddEditAccessControlRuleRequest,
   DescribeVulTopRankingRequest,
+  UninstallClusterContainerSecurityResponse,
   ConfirmNetworkFirewallPolicyRequest,
   ContainerMount,
   DeleteSearchTemplateResponse,
@@ -725,6 +726,7 @@ import {
   DeleteRiskSyscallWhiteListsResponse,
   DescribeAssetImageVirusListRequest,
   DescribeAssetImageScanSettingResponse,
+  UninstallClusterContainerSecurityRequest,
   DescribeReverseShellDetailResponse,
   DescribeClusterSummaryRequest,
   AddIgnoreVulRequest,
@@ -2679,6 +2681,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessControlRuleDetailResponse) => void
   ): Promise<DescribeAccessControlRuleDetailResponse> {
     return this.request("DescribeAccessControlRuleDetail", req, cb)
+  }
+
+  /**
+   * 卸载集群容器安全
+   */
+  async UninstallClusterContainerSecurity(
+    req: UninstallClusterContainerSecurityRequest,
+    cb?: (error: string, rep: UninstallClusterContainerSecurityResponse) => void
+  ): Promise<UninstallClusterContainerSecurityResponse> {
+    return this.request("UninstallClusterContainerSecurity", req, cb)
   }
 
   /**

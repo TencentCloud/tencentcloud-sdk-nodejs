@@ -710,7 +710,7 @@ export interface DomainInfo {
    */
   DomainId?: number
   /**
-   * 域名状态
+   * 域名状态，正常：ENABLE，暂停：PAUSE，封禁：SPAM
    */
   Status?: string
   /**
@@ -726,7 +726,7 @@ export interface DomainInfo {
    */
   IsMark?: string
   /**
-   * TTL(DNS记录缓存时间)
+   * TTL(DNS记录缓存时间)，单位：秒
    */
   TTL?: number
   /**
@@ -742,7 +742,7 @@ export interface DomainInfo {
    */
   Punycode?: string
   /**
-   * 域名DNS状态
+   * 域名DNS状态，错误：dnserror，正常：空字符串
    */
   DnsStatus?: string
   /**
@@ -1860,6 +1860,36 @@ CUSTOMLINE：自定义线路数
 }
 
 /**
+ * 子域名解析量统计查询信息
+ */
+export interface SubdomainAnalyticsInfo {
+  /**
+   * DATE:按天维度统计 HOUR:按小时维度统计
+   */
+  DnsFormat: string
+  /**
+   * 当前统计周期解析量总计
+   */
+  DnsTotal: number
+  /**
+   * 当前查询的域名
+   */
+  Domain: string
+  /**
+   * 当前统计周期开始时间
+   */
+  StartDate: string
+  /**
+   * 当前统计周期结束时间
+   */
+  EndDate: string
+  /**
+   * 当前统计的子域名
+   */
+  Subdomain: string
+}
+
+/**
  * ModifyDomainLock请求参数结构体
  */
 export interface ModifyDomainLockRequest {
@@ -1916,11 +1946,11 @@ export interface ModifyTXTRecordRequest {
    */
   SubDomain?: string
   /**
-   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   * 线路的 ID，通过 API 记录线路获得，字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
    */
   RecordLineId?: string
   /**
-   * TTL，范围1-604800，不同等级域名最小值不同。
+   * TTL，范围1-604800，不同等级域名最小值不同。单位：秒
    */
   TTL?: number
   /**
@@ -2158,6 +2188,20 @@ export interface DeleteRecordGroupResponse {
 }
 
 /**
+ * ModifyDomainRecursiveStatusBatch返回参数结构体
+ */
+export interface ModifyDomainRecursiveStatusBatchResponse {
+  /**
+   * 任务 ID
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 记录信息
  */
 export interface RecordInfo {
@@ -2225,36 +2269,6 @@ export interface RecordInfo {
 }
 
 /**
- * 域名解析量统计信息
- */
-export interface ResolveCountInfo {
-  /**
-   * 当前统计周期解析量总计
-   */
-  DnsTotal?: number
-  /**
-   * 当前查询的域名
-   */
-  Domain?: string
-  /**
-   * 当前统计周期开始时间
-   */
-  StartDate?: string
-  /**
-   * 当前统计周期结束时间
-   */
-  EndDate?: string
-  /**
-   * 当前统计的子域名
-   */
-  SubDomain?: string
-  /**
-   * 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据
-   */
-  DnsFormat?: string
-}
-
-/**
  * DescribeSnapshotRollbackTask请求参数结构体
  */
 export interface DescribeSnapshotRollbackTaskRequest {
@@ -2299,7 +2313,7 @@ export interface UserInfo {
    */
   Email?: string
   /**
-   * 账号状态：”enabled”: 正常；”disabled”: 被封禁
+   * 账号状态: "enabled": 正常; "disabled": 被封禁
    */
   Status?: string
   /**
@@ -2307,11 +2321,11 @@ export interface UserInfo {
    */
   Telephone?: string
   /**
-   * 邮箱是否通过验证：”yes”: 通过；”no”: 未通过
+   * 邮箱是否通过验证："yes": 通过; "no": 未通过
    */
   EmailVerified?: string
   /**
-   * 手机是否通过验证：”yes”: 通过；”no”: 未通过
+   * 手机是否通过验证："yes": 通过； "no": 未通过
    */
   TelephoneVerified?: string
   /**
@@ -2323,7 +2337,7 @@ export interface UserInfo {
    */
   RealName?: string
   /**
-   * 是否绑定微信：”yes”: 通过；”no”: 未通过
+   * 是否绑定微信： "yes": 通过； "no": 未通过
    */
   WechatBinded?: string
   /**
@@ -3090,7 +3104,7 @@ export interface RecordListItem {
    */
   TTL?: number
   /**
-   * MX值，只有MX记录有
+   * MX值
    */
   MX?: number
   /**
@@ -3200,33 +3214,17 @@ export interface ModifyDomainOwnerResponse {
 }
 
 /**
- * 子域名解析量统计查询信息
+ * ModifyDomainRecursiveStatusBatch请求参数结构体
  */
-export interface SubdomainAnalyticsInfo {
+export interface ModifyDomainRecursiveStatusBatchRequest {
   /**
-   * DATE:按天维度统计 HOUR:按小时维度统计
+   * 域名列表
    */
-  DnsFormat: string
+  DomainList: Array<string>
   /**
-   * 当前统计周期解析量总计
+   * ENABLE-开启；DISABLE-关闭。
    */
-  DnsTotal: number
-  /**
-   * 当前查询的域名
-   */
-  Domain: string
-  /**
-   * 当前统计周期开始时间
-   */
-  StartDate: string
-  /**
-   * 当前统计周期结束时间
-   */
-  EndDate: string
-  /**
-   * 当前统计的子域名
-   */
-  Subdomain: string
+  Status: string
 }
 
 /**
@@ -3367,7 +3365,7 @@ export interface CreateDomainRequest {
    */
   GroupId?: number
   /**
-   * 是否星标域名，”yes”、”no” 分别代表是和否。
+   * 是否星标域名，"yes"、"no" 分别代表是和否。
    */
   IsMark?: string
   /**
@@ -4192,6 +4190,20 @@ export interface DescribeRecordGroupListResponse {
 }
 
 /**
+ * ModifyDomainCNAMESpeedupStatusBatch请求参数结构体
+ */
+export interface ModifyDomainCNAMESpeedupStatusBatchRequest {
+  /**
+   * 域名列表
+   */
+  DomainList: Array<string>
+  /**
+   * 状态。ENABLE-开启；DISABLE-关闭。
+   */
+  Status: string
+}
+
+/**
  * 自定义线路分组元素
  */
 export interface LineGroupItem {
@@ -4744,6 +4756,20 @@ export interface DescribeRecordExistExceptDefaultNSRequest {
 }
 
 /**
+ * ModifyDomainCNAMESpeedupStatusBatch返回参数结构体
+ */
+export interface ModifyDomainCNAMESpeedupStatusBatchResponse {
+  /**
+   * 任务 ID
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySnapshotConfig返回参数结构体
  */
 export interface ModifySnapshotConfigResponse {
@@ -5159,6 +5185,36 @@ export interface CreateDealResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 域名解析量统计信息
+ */
+export interface ResolveCountInfo {
+  /**
+   * 当前统计周期解析量总计
+   */
+  DnsTotal?: number
+  /**
+   * 当前查询的域名
+   */
+  Domain?: string
+  /**
+   * 当前统计周期开始时间
+   */
+  StartDate?: string
+  /**
+   * 当前统计周期结束时间
+   */
+  EndDate?: string
+  /**
+   * 当前统计的子域名
+   */
+  SubDomain?: string
+  /**
+   * 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据
+   */
+  DnsFormat?: string
 }
 
 /**

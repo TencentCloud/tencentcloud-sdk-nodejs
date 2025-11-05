@@ -876,7 +876,7 @@ export interface DescribeConfigsResponse {
  */
 export interface ModifyContainerReplicasRequest {
   /**
-   * 部署组ID，部署组唯一标识，调用[DescribeClusters](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)接口，选定一个容器集群，选择部署组，查看DescribeSingleContainerGroups接口返回的GroupId
+   * 部署组ID，部署组唯一标识，可以通过[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的容器部署组列表；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的容器部署组
    */
   GroupId: string
   /**
@@ -3684,7 +3684,7 @@ export interface RemoveInstancesRequest {
    */
   ClusterId: string
   /**
-   * 云主机 ID 列表
+   * 云主机 ID 列表，调用[DescribeInstances](https://cloud.tencent.com/document/api/649/72342)查询已有的云主机列表
    */
   InstanceIdList: Array<string>
 }
@@ -12352,7 +12352,7 @@ export interface ExpandGroupRequest {
    */
   GroupId: string
   /**
-   * 扩容的机器实例ID列表，调用[DescribeClusters](https://console.cloud.tencent.com/tsf/resource?rid=1)接口，选定一个虚拟机集群，选择部署组，选择应用扩容可获取实例列表
+   * 扩容的机器实例ID列表，调用[DescribeGroupInstances](https://cloud.tencent.com/document/api/649/36066)查询虚拟机部署组云主机列表
    */
   InstanceIdList: Array<string>
 }

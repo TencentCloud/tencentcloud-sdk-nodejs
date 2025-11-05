@@ -1090,15 +1090,15 @@ export interface DeleteMigrationTaskResponse {
  */
 export interface DescribeLifecycleDataTaskRequest {
   /**
-   * 开始时间
+   * 开始时间。须早于 EndTime ，仅支持查询最近3个月内的任务数据。
    */
   StartTime: string
   /**
-   * 结束时间
+   * 结束时间。须晚于 StartTime ，仅支持查询最近3个月内的任务数据。
    */
   EndTime: string
   /**
-   * 	任务ID
+   * 任务ID
    */
   TaskId?: string
   /**
@@ -1113,6 +1113,10 @@ export interface DescribeLifecycleDataTaskRequest {
    * 过滤条件，TaskName，FileSystemId，Type
    */
   Filters?: Array<Filter>
+  /**
+   * 文件系统版本；v3.1: pcfs/hifs v4.0:Turbo
+   */
+  CfsVersion?: string
 }
 
 /**
@@ -3085,6 +3089,26 @@ export interface ModifyDataFlowRequest {
    * 密钥 key
    */
   SecretKey?: string
+  /**
+   * KafkaConsumer 消费时使用的Topic参数
+   */
+  UserKafkaTopic?: string
+  /**
+   * 服务地址
+   */
+  ServerAddr?: string
+  /**
+   * name
+   */
+  UserName?: string
+  /**
+   * Kafka消费用户密码
+   */
+  Password?: string
+  /**
+   * 元数据增量更新开关；1开启，0关闭
+   */
+  AutoRefresh?: number
 }
 
 /**
@@ -3158,6 +3182,26 @@ export interface CreateDataFlowRequest {
    * 数据流动名称；支持不超过64字符长度，支持中文、数字、_、-
    */
   DataFlowName?: string
+  /**
+   *  0：不开启自动更新  1：开启自动更新
+   */
+  AutoRefresh?: number
+  /**
+   * KafkaConsumer 消费时使用的Topic参数
+   */
+  UserKafkaTopic?: string
+  /**
+   * 	服务地址 示例值：kafkaconsumer-ap-beijing.cls.tencentyun.com:9095
+   */
+  ServerAddr?: string
+  /**
+   * Kafka消费用户名.示例值：name
+   */
+  UserName?: string
+  /**
+   * Kafka消费用户密码。默认${SecretId}#${SecretKey}。
+   */
+  Password?: string
 }
 
 /**

@@ -46,7 +46,7 @@ import {
   GetCustomizationListRequest,
   RegisterVoicePrintResponse,
   DescribeRecordInfoResponse,
-  DescribeApplicationListResponse,
+  CreateAppResponse,
   StopRecordResponse,
   ScanPiece,
   Tag,
@@ -56,7 +56,7 @@ import {
   StartRecordResponse,
   DescribeScanResultListResponse,
   UserMicStatus,
-  CreateAppResponse,
+  DescribeApplicationListResponse,
   DescribeRecordInfoRequest,
   AmbientSound,
   DescribeRoomInfoRequest,
@@ -83,6 +83,7 @@ import {
   DescribeAppStatisticsResp,
   ScanVoiceResult,
   DescribeAuditResultExternalResponse,
+  AuditResultDetailExternal,
   ServiceStatus,
   ScanVoiceRequest,
   RegisterVoicePrintRequest,
@@ -175,7 +176,7 @@ export class Client extends AbstractClient {
    * 获审核结果明细（外部API）
    */
   async DescribeAuditResultExternal(
-    req?: DescribeAuditResultExternalRequest,
+    req: DescribeAuditResultExternalRequest,
     cb?: (error: string, rep: DescribeAuditResultExternalResponse) => void
   ): Promise<DescribeAuditResultExternalResponse> {
     return this.request("DescribeAuditResultExternal", req, cb)

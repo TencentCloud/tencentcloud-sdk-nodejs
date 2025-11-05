@@ -165,7 +165,7 @@ Condition互斥。
    */
   MultiConditions?: Array<MultiCondition>
   /**
-   * 云监控通知渠道相关信息，和AlarmNoticeIds互斥
+   * 腾讯云可观测平台通知渠道相关信息，和AlarmNoticeIds互斥
    */
   MonitorNotice?: MonitorNotice
 }
@@ -5920,7 +5920,7 @@ export interface AlertHistoryRecord {
    */
   MonitorObjectType?: number
   /**
-   * 通知渠道类型，0默认代表cls内部通知渠道，1代表云监控通知渠道
+   * 通知渠道类型，0默认代表cls内部通知渠道，1代表腾讯云可观测平台通知渠道
    */
   SendType?: number
 }
@@ -7028,7 +7028,7 @@ export interface RuleInfo {
 }
 
 /**
- * 云监控通知渠道组信息
+ * 腾讯云可观测平台通知渠道组信息
  */
 export interface MonitorNoticeRule {
   /**

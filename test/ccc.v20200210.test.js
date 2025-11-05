@@ -468,6 +468,16 @@ it("ccc.v20200210.CreateAgentCruiseDialingCampaign", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeAIAgentInfoList", async function () {
+    try {
+       const data = await client.DescribeAIAgentInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateOwnNumberApply", async function () {
     try {
        const data = await client.CreateOwnNumberApply({})

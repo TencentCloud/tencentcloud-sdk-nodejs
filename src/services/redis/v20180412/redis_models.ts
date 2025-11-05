@@ -6565,6 +6565,14 @@ export interface InstanceClusterShard {
 - 1：on。
    */
   Connected?: number
+  /**
+   * 可用区信息。
+   */
+  ZoneId?: string
+  /**
+   * 节点组 ID。
+   */
+  ReplicasNodeId?: number
 }
 
 /**

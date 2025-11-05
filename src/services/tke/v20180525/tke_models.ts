@@ -1267,7 +1267,7 @@ export interface DescribeClustersRequest {
  */
 export interface UpgradeClusterInstancesRequest {
   /**
-   * 集群ID
+   * 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ）
    */
   ClusterId: string
   /**
@@ -1285,7 +1285,8 @@ major 大版本原地升级
    */
   UpgradeType?: string
   /**
-   * 需要升级的节点列表
+   * 需要升级的节点列表，可以通过控制台或 [查询待升级节点接口
+](https://cloud.tencent.com/document/api/457/50366) 获取
    */
   InstanceIds?: Array<string>
   /**
@@ -1293,7 +1294,7 @@ major 大版本原地升级
    */
   ResetParam?: UpgradeNodeResetParam
   /**
-   * 是否忽略节点升级前检查
+   * 是否忽略节点升级前检查，默认值 false
    */
   SkipPreCheck?: boolean
   /**
@@ -1668,7 +1669,7 @@ export interface DescribeEKSClusterCredentialResponse {
  */
 export interface CheckInstancesUpgradeAbleRequest {
   /**
-   * 集群ID
+   * 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ）
    */
   ClusterId: string
   /**
@@ -1680,15 +1681,20 @@ export interface CheckInstancesUpgradeAbleRequest {
    */
   UpgradeType?: string
   /**
-   * 分页Offset
+   * 偏移量，默认为0。关于 Offset 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Offset?: number
   /**
-   * 分页Limit
+   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Limit?: number
   /**
-   * 过滤
+   * 过滤条件列表，Name 可选值为ip、instanceId、hostname、label
+
+- Name 为 ip 时，Value 为待查询节点 ip
+- Name 为 hostname 时，Value 为待查询节点名称
+- Name 为 label 时，Value 为待查询 K8S 节点 label
+- Name 为 instanceId 时，Value 为 待查询节点 id
    */
   Filter?: Array<Filter>
 }
@@ -2513,7 +2519,7 @@ export interface CreatePrometheusRecordRuleYamlResponse {
  */
 export interface DescribeClusterInstancesRequest {
   /**
-   * 集群ID
+   * 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ）
    */
   ClusterId: string
   /**
@@ -2525,11 +2531,17 @@ export interface DescribeClusterInstancesRequest {
    */
   Limit?: number
   /**
-   * 需要获取的节点实例Id列表。如果为空，表示拉取集群下所有节点实例。
+   * 需要获取的节点实例 ID 列表。如果为空，表示拉取集群下所有节点实例。普通节点用 CVM ID（如 ins-1cghhuuu ），原生节点用节点池内机器 ID （如 np-1ade4uid-0a2dc ）。
    */
   InstanceIds?: Array<string>
   /**
-   * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER。默认为WORKER类型。
+   * 节点角色，默认为WORKER类型
+
+- WOKRER 集群内常规计算节点
+- MASTER 独立集群控制面组件节点
+- ETCD 独立集群 etcd 存储节点
+- MASTER_ETCD 独立集群控制面、etcd 共同部署的 master 节点
+
    */
   InstanceRole?: string
   /**
@@ -4639,11 +4651,11 @@ export interface DescribePodDeductionRateResponse {
  */
 export interface DeleteClusterInstancesRequest {
   /**
-   * 集群ID
+   * 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ）
    */
   ClusterId: string
   /**
-   * 主机InstanceId列表
+   * 主机 InstanceId 列表
    */
   InstanceIds: Array<string>
   /**
@@ -4654,6 +4666,10 @@ export interface DeleteClusterInstancesRequest {
    * 是否强制删除(当节点在初始化时，可以指定参数为TRUE)
    */
   ForceDelete?: boolean
+  /**
+   * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
+   */
+  ResourceDeleteOptions?: Array<ResourceDeleteOption>
 }
 
 /**

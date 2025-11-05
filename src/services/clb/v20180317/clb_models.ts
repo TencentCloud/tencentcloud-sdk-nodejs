@@ -587,6 +587,10 @@ export interface ModifyRuleRequest {
    * OAuth配置信息。
    */
   OAuth?: OAuth
+  /**
+   * 自定义cookie名
+   */
+  CookieName?: string
 }
 
 /**
@@ -1646,6 +1650,10 @@ WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Has
    * OAuth配置状态信息。
    */
   OAuth?: OAuth
+  /**
+   * 自定义cookie名。
+   */
+  CookieName?: string
 }
 
 /**
@@ -5282,6 +5290,10 @@ export interface RuleInput {
    * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数和Certificate不能同时传入。
    */
   MultiCertInfo?: MultiCertInfo
+  /**
+   * 自定义cookie名
+   */
+  CookieName?: string
 }
 
 /**

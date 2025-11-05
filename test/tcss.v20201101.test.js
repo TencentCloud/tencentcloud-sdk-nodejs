@@ -1818,6 +1818,16 @@ it("tcss.v20201101.DescribeAccessControlRuleDetail", async function () {
     }
 })
 
+it("tcss.v20201101.UninstallClusterContainerSecurity", async function () {
+    try {
+       const data = await client.UninstallClusterContainerSecurity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.ModifyImageAuthorized", async function () {
     try {
        const data = await client.ModifyImageAuthorized({})

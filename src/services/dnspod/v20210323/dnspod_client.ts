@@ -100,6 +100,7 @@ import {
   DeleteDomainAliasRequest,
   DomainAliasInfo,
   CreateDealRequest,
+  SubdomainAnalyticsInfo,
   ModifyDomainLockRequest,
   DescribeDomainWhoisRequest,
   ModifyTXTRecordRequest,
@@ -115,8 +116,8 @@ import {
   ModifyRecordStatusRequest,
   CreateRecordResponse,
   DeleteRecordGroupResponse,
+  ModifyDomainRecursiveStatusBatchResponse,
   RecordInfo,
-  ResolveCountInfo,
   DescribeSnapshotRollbackTaskRequest,
   CheckRecordSnapshotRollbackResponse,
   UserInfo,
@@ -156,7 +157,7 @@ import {
   LockInfo,
   SubDomainsAnalyticsParamsItem,
   ModifyDomainOwnerResponse,
-  SubdomainAnalyticsInfo,
+  ModifyDomainRecursiveStatusBatchRequest,
   CustomLineInfo,
   ModifyRecordBatchDetail,
   DescribeSnapshotRollbackResultRequest,
@@ -194,6 +195,7 @@ import {
   PackageDetailItem,
   DescribeDomainAndRecordListRequest,
   DescribeRecordGroupListResponse,
+  ModifyDomainCNAMESpeedupStatusBatchRequest,
   LineGroupItem,
   DescribeSubdomainValidateStatusRequest,
   CreateDomainGroupRequest,
@@ -218,6 +220,7 @@ import {
   PurviewInfo,
   CreateSubDomainsAnalyticsFileRequest,
   DescribeRecordExistExceptDefaultNSRequest,
+  ModifyDomainCNAMESpeedupStatusBatchResponse,
   ModifySnapshotConfigResponse,
   RollbackRecordSnapshotResponse,
   DescribeUserDetailRequest,
@@ -241,6 +244,7 @@ import {
   CreateDomainCustomLineRequest,
   LineItem,
   CreateDealResponse,
+  ResolveCountInfo,
   DescribeRecordExistExceptDefaultNSResponse,
   ModifyTXTRecordResponse,
   ModifyVasAutoRenewStatusRequest,
@@ -697,6 +701,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量修改域名递归解析加速状态
+   */
+  async ModifyDomainRecursiveStatusBatch(
+    req: ModifyDomainRecursiveStatusBatchRequest,
+    cb?: (error: string, rep: ModifyDomainRecursiveStatusBatchResponse) => void
+  ): Promise<ModifyDomainRecursiveStatusBatchResponse> {
+    return this.request("ModifyDomainRecursiveStatusBatch", req, cb)
+  }
+
+  /**
    * 获取域名别名列表
    */
   async DescribeDomainAliasList(
@@ -767,10 +781,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 添加域名
-
-备注：该接口不支持添加子域名。
-     */
+   * 添加域名
+   */
   async CreateDomain(
     req: CreateDomainRequest,
     cb?: (error: string, rep: CreateDomainResponse) => void
@@ -1002,6 +1014,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRecordStatusResponse) => void
   ): Promise<ModifyRecordStatusResponse> {
     return this.request("ModifyRecordStatus", req, cb)
+  }
+
+  /**
+   * 批量修改域名CNAME加速状态
+   */
+  async ModifyDomainCNAMESpeedupStatusBatch(
+    req: ModifyDomainCNAMESpeedupStatusBatchRequest,
+    cb?: (error: string, rep: ModifyDomainCNAMESpeedupStatusBatchResponse) => void
+  ): Promise<ModifyDomainCNAMESpeedupStatusBatchResponse> {
+    return this.request("ModifyDomainCNAMESpeedupStatusBatch", req, cb)
   }
 
   /**

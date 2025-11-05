@@ -2765,6 +2765,13 @@ export interface CreateMcpServerRequest {
    * MCP Server环境变量。最大长度：10
    */
   Envs?: Array<McpServerEnv>
+  /**
+   * 传输类型。枚举值如下：
+
+<li>STREAMABLE_HTTP：HTTP协议的流式传输方式。未传传输类型字段时，默认创建此类型的MCP Server</li>
+<li>SSE：Server-Sent Events，服务器发送事件</li>
+   */
+  TransportType?: string
 }
 
 /**
@@ -4384,7 +4391,7 @@ export interface ContainerEnv {
  */
 export interface McpServer {
   /**
-   * MCP Server ID。
+   * MCP Server ID
    */
   McpServerId?: string
   /**
@@ -4392,7 +4399,10 @@ export interface McpServer {
    */
   Name?: string
   /**
-   * MCP Server类型。枚举值：PUBLIC_PACKAGE，公共包安装；AGENT_GENERATED，AI生成。
+   * MCP Server类型。枚举值如下：
+
+<li>PUBLIC_PACKAGE：公共包安装</li>
+<li>AGENT_GENERATED：AI生成</li>
    */
   McpServerType?: string
   /**
@@ -4406,20 +4416,20 @@ export interface McpServer {
   /**
    * MCP Server状态。枚举值如下：
 
-PENDING：表示创建中
-LAUNCH_FAILED：表示创建失败
-RUNNING：表示运行中
-STOPPED：表示关闭
-STARTING：表示开启中
-STOPPING：表示关闭中
-RESTARTING：表示重启中
-REMOVING：表示删除中
-UNKNOWN：表示未知
-ENV_ERROR：表示环境错误
+<li>PENDING：表示创建中</li>
+<li>LAUNCH_FAILED：表示创建失败</li>
+<li>RUNNING：表示运行中</li>
+<li>STOPPED：表示关闭</li>
+<li>STARTING：表示开启中</li>
+<li>STOPPING：表示关闭中</li>
+<li>RESTARTING：表示重启中</li>
+<li>REMOVING：表示删除中</li>
+<li>UNKNOWN：表示未知</li>
+<li>ENV_ERROR：表示环境错误</li>
    */
   State?: string
   /**
-   * MCP Server访问地址。
+   * MCP Server访问地址。传输类型 TransportType 为 STREAMABLE_HTTP 时以 /mcp结尾，为 SSE 时以 /sse结尾。
    */
   ServerUrl?: string
   /**
@@ -4444,6 +4454,13 @@ ENV_ERROR：表示环境错误
    * MCP Server环境变量
    */
   EnvSet?: Array<McpServerEnv>
+  /**
+   * 传输类型。枚举值如下：
+
+<li>STREAMABLE_HTTP：HTTP协议的流式传输方式</li>
+<li>SSE：Server-Sent Events，服务器发送事件</li>
+   */
+  TransportType?: string
 }
 
 /**
@@ -5004,7 +5021,7 @@ export interface ModifyMcpServerRequest {
    */
   InstanceId: string
   /**
-   * MCP Server ID。可以通过DescribeMcpServers接口返回值中的McpServerId获取。
+   * MCP Server ID。可以通[DescribeMcpServers](https://cloud.tencent.com/document/product/1207/122837)接口返回值中的McpServerId获取。
    */
   McpServerId: string
   /**
@@ -5023,6 +5040,13 @@ export interface ModifyMcpServerRequest {
    * MCP Server环境变量。最大长度：10。用于完整替换MCP Server的环境变量。当该字段为空时，系统将清除当前所有环境变量。若无需修改环境变量，请勿传递该字段。
    */
   Envs?: Array<McpServerEnv>
+  /**
+   * 传输类型。枚举值如下：
+
+<li>STREAMABLE_HTTP：HTTP协议的流式传输方式</li>
+<li>SSE：Server-Sent Events，服务器发送事件</li>
+   */
+  TransportType?: string
 }
 
 /**
