@@ -328,9 +328,9 @@ it("teo.v20220901.DownloadL7Logs", async function () {
     }
 })
 
-it("teo.v20220901.DescribeEnvironments", async function () {
+it("teo.v20220901.CreateContentIdentifier", async function () {
     try {
-       const data = await client.DescribeEnvironments({})
+       const data = await client.CreateContentIdentifier({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +611,16 @@ it("teo.v20220901.CreateRealtimeLogDeliveryTask", async function () {
 it("teo.v20220901.ModifyL4Proxy", async function () {
     try {
        const data = await client.ModifyL4Proxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CheckFreeCertificateVerification", async function () {
+    try {
+       const data = await client.CheckFreeCertificateVerification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1578,16 +1588,6 @@ it("teo.v20220901.DeployConfigGroupVersion", async function () {
     }
 })
 
-it("teo.v20220901.CreateContentIdentifier", async function () {
-    try {
-       const data = await client.CreateContentIdentifier({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("teo.v20220901.DescribeHostsSetting", async function () {
     try {
        const data = await client.DescribeHostsSetting({})
@@ -1771,6 +1771,26 @@ it("teo.v20220901.DeleteZone", async function () {
 it("teo.v20220901.DescribeTimingL7OriginPullData", async function () {
     try {
        const data = await client.DescribeTimingL7OriginPullData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ApplyFreeCertificate", async function () {
+    try {
+       const data = await client.ApplyFreeCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeEnvironments", async function () {
+    try {
+       const data = await client.DescribeEnvironments({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

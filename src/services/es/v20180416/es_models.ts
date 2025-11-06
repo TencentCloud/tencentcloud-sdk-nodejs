@@ -575,6 +575,48 @@ export interface UpdateLogstashPipelineDescResponse {
 }
 
 /**
+ * IP溯源日志
+ */
+export interface IpTraceLogEntry {
+  /**
+   * 时间
+   */
+  Timestamp?: string
+  /**
+   * 访问IP
+   */
+  RemoteIp?: string
+  /**
+   * 溯源类型rsp/req
+   */
+  TraceType?: string
+  /**
+   * 访问网络类型，公网/私网
+   */
+  NetType?: string
+  /**
+   * 原始消息
+   */
+  Message?: string
+  /**
+   * 访问uri
+   */
+  Uri?: string
+  /**
+   * 公网IP
+   */
+  PublicIp?: string
+  /**
+   * 请求类型或返回状态
+   */
+  ReqTypeOrRspStatus?: string
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: string
+}
+
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -1388,6 +1430,32 @@ export interface DiDataSourceCvm {
 }
 
 /**
+ * UpdateIpTraceStatus请求参数结构体
+ */
+export interface UpdateIpTraceStatusRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId?: string
+  /**
+   * IP溯源配置开关
+   */
+  OpenIpTrace?: boolean
+  /**
+   * IP溯源开启持续时间，单位：秒
+   */
+  DurationTime?: number
+  /**
+   * IP溯源配置
+   */
+  IpTraceConfig?: IpTraceConfig
+  /**
+   * 是否过滤kibana节点IP
+   */
+  FilterKibanaIp?: boolean
+}
+
+/**
  * ES集群日志详细信息
  */
 export interface InstanceLog {
@@ -1817,6 +1885,24 @@ export interface KeyValue {
 }
 
 /**
+ * QueryIpTraceLog返回参数结构体
+ */
+export interface QueryIpTraceLogResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * IP溯源日志列表
+   */
+  IpTraceLogList?: Array<IpTraceLogEntry>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Logstash扩展文件信息
  */
 export interface LogstashExtendedFile {
@@ -2092,6 +2178,16 @@ export interface LogstashPipelineInfo {
 }
 
 /**
+ * UpdateIpTraceStatus返回参数结构体
+ */
+export interface UpdateIpTraceStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdatePlugins请求参数结构体
  */
 export interface UpdatePluginsRequest {
@@ -2208,6 +2304,16 @@ export interface DescribeServerlessSpaceUserRequest {
 }
 
 /**
+ * GetIpTraceStatus请求参数结构体
+ */
+export interface GetIpTraceStatusRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId?: string
+}
+
+/**
  * 智能运维指标维度
  */
 export interface Dimension {
@@ -2291,6 +2397,44 @@ export interface KibanaView {
    * ts-0noqayxu-az6-hot-03222010-0
    */
   NodeId?: string
+}
+
+/**
+ * IP溯源配置
+ */
+export interface IpTraceConfig {
+  /**
+   * 请求溯源开关
+   */
+  EnableRequest?: boolean
+  /**
+   * 返回溯源开关
+   */
+  EnableResponse?: boolean
+  /**
+   * 请求消息体溯源开关
+   */
+  EnableRequestBody?: boolean
+  /**
+   * 返回消息体溯源开关
+   */
+  EnableResponseBody?: boolean
+  /**
+   * 排除IP
+   */
+  RemoteIpInclude?: Array<string>
+  /**
+   * 包含IP
+   */
+  RemoteIpExclude?: Array<string>
+  /**
+   * 排除uri
+   */
+  UriInclude?: Array<string>
+  /**
+   * 包含uri
+   */
+  UriExclude?: Array<string>
 }
 
 /**
@@ -2688,6 +2832,60 @@ export interface CommonIndexInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsShardComplete?: number
+}
+
+/**
+ * QueryIpTraceLog请求参数结构体
+ */
+export interface QueryIpTraceLogRequest {
+  /**
+   * ES集群ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 起始偏移量
+   */
+  Offset?: number
+  /**
+   * 数据条数
+   */
+  Limit?: number
+  /**
+   * 访问IP
+   */
+  RemoteIp?: Array<string>
+  /**
+   * Request/Response 请求/返回, 非必填
+   */
+  TraceType?: Array<string>
+  /**
+   * Public/Private 公网访问/内网访问, 非必填
+   */
+  NetType?: Array<string>
+  /**
+   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
+   */
+  ReqTypeOrRspStatus?: Array<string>
+  /**
+   * 关键字模糊查询，支持Lucene Query String
+   */
+  SearchKey?: string
+  /**
+   * Uri搜索
+   */
+  Uri?: string
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: Array<string>
 }
 
 /**
@@ -4317,6 +4515,40 @@ export interface CreateCosMigrateToServerlessInstanceRequest {
    * 待迁移自治索引名列表
    */
   DataStreamArr?: Array<string>
+}
+
+/**
+ * GetIpTraceStatus返回参数结构体
+ */
+export interface GetIpTraceStatusResponse {
+  /**
+   * 是否开启IP溯源
+   */
+  OpenIpTrace?: boolean
+  /**
+   * IP溯源开启持续时间，单位：秒
+   */
+  DurationTime?: number
+  /**
+   * IP溯源配置
+   */
+  IpTraceConfig?: IpTraceConfig
+  /**
+   * 上次执行时间
+   */
+  LastStartTime?: string
+  /**
+   * 上次关闭时间
+   */
+  LastEndTime?: string
+  /**
+   * 是否过滤Kibana节点IP
+   */
+  FilterKibanaIp?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

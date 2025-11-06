@@ -29,6 +29,7 @@ import {
   DescribeAIAgentInfoListResponse,
   DescribeIvrAudioListResponse,
   DescribePredictiveDialingCampaignsElement,
+  SetStaffStatusResponse,
   ServerPushText,
   ResetExtensionPasswordRequest,
   DisableCCCPhoneNumberResponse,
@@ -158,6 +159,7 @@ import {
   CallInNumberMetrics,
   CreateExtensionRequest,
   StaffSkillGroupList,
+  SetStaffStatusRequest,
   ResetExtensionPasswordResponse,
   ForwardingTarget,
   CreateAutoCalloutTaskRequest,
@@ -190,6 +192,7 @@ import {
   CreateAgentCruiseDialingCampaignResponse,
   ModifyOwnNumberApplyResponse,
   UnbindStaffSkillGroupListRequest,
+  SetStaffStatusItem,
   DescribeCallInMetricsResponse,
   ModifyCompanyApplyRequest,
   DescribeAgentCruiseDialingCampaignResponse,
@@ -219,6 +222,7 @@ import {
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
   DescribeTelSessionResponse,
+  SetStaffStatusRspItem,
   CreateAdminURLRequest,
   DescribeAutoCalloutTaskResponse,
   DescribeStaffStatusMetricsResponse,
@@ -500,6 +504,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetExtensionPasswordResponse) => void
   ): Promise<ResetExtensionPasswordResponse> {
     return this.request("ResetExtensionPassword", req, cb)
+  }
+
+  /**
+   * 设置 staff 状态
+   */
+  async SetStaffStatus(
+    req: SetStaffStatusRequest,
+    cb?: (error: string, rep: SetStaffStatusResponse) => void
+  ): Promise<SetStaffStatusResponse> {
+    return this.request("SetStaffStatus", req, cb)
   }
 
   /**

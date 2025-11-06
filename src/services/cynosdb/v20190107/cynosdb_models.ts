@@ -4015,7 +4015,7 @@ export interface DescribeDBSecurityGroupsRequest {
    */
   InstanceId?: string
   /**
-   * 实例组ID（InstanceId与InstanceGroupId必须任选一个传入）
+   * 实例组 ID，可通过 [DescribeClusterInstanceGroups](https://cloud.tencent.com/document/product/1003/103934) 接口查询。
    */
   InstanceGroupId?: string
 }
@@ -5300,6 +5300,14 @@ export interface DescribeClusterTransparentEncryptInfoResponse {
    */
   KeyRegion?: string
   /**
+   * 秘钥类型
+   */
+  KeyType?: string
+  /**
+   * 是否已经开启全局加密
+   */
+  IsOpenGlobalEncryption?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5745,6 +5753,10 @@ export interface OpenClusterTransparentEncryptRequest {
    * 秘钥地域
    */
   KeyRegion?: string
+  /**
+   * 是否开启全局加密
+   */
+  IsOpenGlobalEncryption?: boolean
 }
 
 /**
@@ -7170,6 +7182,22 @@ export interface Ability {
    * 是否支持手动发起逻辑备份
    */
   IsSupportManualLogic?: string
+  /**
+   * 是否支持开启全局加密
+   */
+  IsSupportGlobalEncryption?: string
+  /**
+   * 不支持全局加密的原因
+   */
+  NoSupportGlobalEncryptionReason?: string
+  /**
+   * 不支持透明加密原因状态码
+   */
+  NoSupportTransparentDataEncryptionReasonCode?: string
+  /**
+   * 不支持全局加密原因状态码
+   */
+  NoSupportGlobalEncryptionReasonCode?: string
 }
 
 /**

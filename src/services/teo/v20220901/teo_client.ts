@@ -41,6 +41,7 @@ import {
   CompressionParameters,
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
+  DescribeSecurityClientAttesterResponse,
   MultiPathGatewayOriginACLInfo,
   HeaderAction,
   RealtimeLogDeliveryTask,
@@ -86,9 +87,10 @@ import {
   VanityNameServers,
   DescribeTopL7AnalysisDataRequest,
   CreateMultiPathGatewaySecretKeyResponse,
-  DescribeSecurityIPGroupContentRequest,
+  DescribeAccelerationDomainsResponse,
   SwitchConfig,
   IdentifyZoneResponse,
+  DescribeSecurityAPIServiceRequest,
   UpstreamRequestQueryString,
   DeleteJustInTimeTranscodeTemplatesRequest,
   ModifyLoadBalancerResponse,
@@ -155,12 +157,12 @@ import {
   DeleteMultiPathGatewayRequest,
   DeleteCustomErrorPageRequest,
   CustomField,
-  DescribeSecurityAPIServiceRequest,
+  BotManagedRule,
   BrowserImpersonationDetectionAction,
   CacheKeyHeader,
   DeleteZoneRequest,
   RangeOriginPullParameters,
-  BotManagedRule,
+  ApplyFreeCertificateResponse,
   CurrentOriginACL,
   Ipv6,
   SecurityConfig,
@@ -408,6 +410,7 @@ import {
   UpstreamURLRewriteParameters,
   DescribeL4ProxyResponse,
   ModifyHostsCertificateRequest,
+  ModifyOriginACLRequest,
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
   RenewPlanResponse,
@@ -425,7 +428,7 @@ import {
   ModifyL7AccSettingResponse,
   DeleteSecurityJSInjectionRuleResponse,
   ReturnCustomPageActionParameters,
-  DescribeAccelerationDomainsResponse,
+  DescribeSecurityIPGroupContentRequest,
   BindZoneToPlanResponse,
   DeleteWebSecurityTemplateRequest,
   DescribeL7AccSettingResponse,
@@ -478,12 +481,11 @@ import {
   SecurityPolicy,
   AscriptionInfo,
   ModifySecurityClientAttesterResponse,
-  ModifyOriginACLRequest,
+  CheckFreeCertificateVerificationResponse,
   FirstPartConfig,
   Waf,
   CreateApplicationProxyRuleRequest,
   JustInTimeTranscodeTemplate,
-  DeleteSecurityAPIServiceRequest,
   TCCaptchaOption,
   DescribeDnsRecordsResponse,
   CreateWebSecurityTemplateRequest,
@@ -513,7 +515,7 @@ import {
   Action,
   JSInjectionRule,
   UpstreamFollowRedirectParameters,
-  DescribeSecurityClientAttesterResponse,
+  DeleteSecurityAPIServiceRequest,
   ApplicationProxy,
   ModifyApplicationProxyResponse,
   ModifySecurityIPGroupResponse,
@@ -628,6 +630,7 @@ import {
   ContentIdentifier,
   CreateCustomizeErrorPageResponse,
   DescribeMultiPathGatewayOriginACLRequest,
+  ApplyFreeCertificateRequest,
   StatusCodeCacheParameters,
   RewriteAction,
   TemplateScope,
@@ -709,6 +712,7 @@ import {
   DescribeWebSecurityTemplatesResponse,
   Quota,
   CheckCnameStatusRequest,
+  CheckFreeCertificateVerificationRequest,
   DetectLengthLimitCondition,
   ModifySecurityAPIResourceResponse,
   DescribePlansResponse,
@@ -1070,13 +1074,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在版本管理模式下，用于查询环境信息，可获取环境 ID、类型、当前生效版本等。版本管理功能内测中，当前仅白名单开放。
+   * 创建内容标识符，可以设置描述、标签等信息，同时需要绑定企业版套餐用于统计计费数据；一个内容标识符只能绑定一个计费套餐，一个计费套餐可以绑定多个内容标识符。该功能仅限白名单开放。
    */
-  async DescribeEnvironments(
-    req: DescribeEnvironmentsRequest,
-    cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
-  ): Promise<DescribeEnvironmentsResponse> {
-    return this.request("DescribeEnvironments", req, cb)
+  async CreateContentIdentifier(
+    req: CreateContentIdentifierRequest,
+    cb?: (error: string, rep: CreateContentIdentifierResponse) => void
+  ): Promise<CreateContentIdentifierResponse> {
+    return this.request("CreateContentIdentifier", req, cb)
   }
 
   /**
@@ -1372,6 +1376,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyL4ProxyResponse) => void
   ): Promise<ModifyL4ProxyResponse> {
     return this.request("ModifyL4Proxy", req, cb)
+  }
+
+  /**
+     * 该接口用于验证免费证书并获取免费证书申请结果。如果验证通过，可通过该接口查询到对应域名申请的免费证书信息，如果申请失败，该接口将返回对应的验证失败信息。
+在触发[申请免费证书接口](https://cloud.tencent.com/document/product/1552/90437)后，您可以通过本接口检查免费证书申请结果。在免费证书申请成功后， 还需要通过[配置域名证书](https://tcloud4api.woa.com/document/product/1657/80723?!preview)接口配置，才能将免费证书部署至加速域上。
+     */
+  async CheckFreeCertificateVerification(
+    req: CheckFreeCertificateVerificationRequest,
+    cb?: (error: string, rep: CheckFreeCertificateVerificationResponse) => void
+  ): Promise<CheckFreeCertificateVerificationResponse> {
+    return this.request("CheckFreeCertificateVerification", req, cb)
   }
 
   /**
@@ -2363,16 +2378,6 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 创建内容标识符，可以设置描述、标签等信息，同时需要绑定企业版套餐用于统计计费数据；一个内容标识符只能绑定一个计费套餐，一个计费套餐可以绑定多个内容标识符。该功能仅限白名单开放。
-   */
-  async CreateContentIdentifier(
-    req: CreateContentIdentifierRequest,
-    cb?: (error: string, rep: CreateContentIdentifierResponse) => void
-  ): Promise<CreateContentIdentifierResponse> {
-    return this.request("CreateContentIdentifier", req, cb)
-  }
-
-  /**
    * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，可通过 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819) 和 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820) 来获取域名的详细配置。
    */
   async DescribeHostsSetting(
@@ -2564,6 +2569,36 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeTimingL7OriginPullDataResponse) => void
   ): Promise<DescribeTimingL7OriginPullDataResponse> {
     return this.request("DescribeTimingL7OriginPullData", req, cb)
+  }
+
+  /**
+     * 申请免费证书时，如果您需要通过使用 DNS 委派验证或者文件验证进行申请，您可以调用该接口来进行发起证书申请并根据申请方式来获取对应的验证内容。调用接口的顺序如下：
+第一步：调用 ApplyFreeCertificate，指定申请免费证书的校验方式，获取验证内容；
+第二步：为相应域名按照验证内容配置；
+第三步：调用CheckFreeCertificateVerification 验证，验证通过后即完成免费证书申请；
+第四步：调用ModifyHostsCertificate，下发域名证书为使用 EdgeOne 免费证书配置。
+
+申请方式的介绍可参考文档：[免费证书申请说明](https://cloud.tencent.com/document/product/1552/90437) 
+说明：
+- 仅 CNAME 接入模式可调用该接口来指定免费证书申请方式。NS/DNSPod 托管接入模式都是使用自动验证来申请免费证书，无需调用该接口。
+- 如果您需要切换免费证书验证方式，您可以重新调用本接口通过修改 VerificationMethod 字段来进行变更。
+- 同个域名只能申请一本免费证书，在调用本接口后，后台会触发申请免费证书相关任务，您需要在2 天内，完成域名验证信息的相关配置，然后完成证书验证。
+     */
+  async ApplyFreeCertificate(
+    req: ApplyFreeCertificateRequest,
+    cb?: (error: string, rep: ApplyFreeCertificateResponse) => void
+  ): Promise<ApplyFreeCertificateResponse> {
+    return this.request("ApplyFreeCertificate", req, cb)
+  }
+
+  /**
+   * 在版本管理模式下，用于查询环境信息，可获取环境 ID、类型、当前生效版本等。版本管理功能内测中，当前仅白名单开放。
+   */
+  async DescribeEnvironments(
+    req: DescribeEnvironmentsRequest,
+    cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
+  ): Promise<DescribeEnvironmentsResponse> {
+    return this.request("DescribeEnvironments", req, cb)
   }
 
   /**

@@ -350,6 +350,20 @@ export interface DescribePredictiveDialingCampaignsElement {
 }
 
 /**
+ * SetStaffStatus返回参数结构体
+ */
+export interface SetStaffStatusResponse {
+  /**
+   * 设置座席状态应答列表
+   */
+  StaffStatusList?: Array<SetStaffStatusRspItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 服务端控制AI对话机器人播报指定文本
  */
 export interface ServerPushText {
@@ -3703,6 +3717,20 @@ export interface StaffSkillGroupList {
 }
 
 /**
+ * SetStaffStatus请求参数结构体
+ */
+export interface SetStaffStatusRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 设置座席状态列表，最大个数 10
+   */
+  StaffStatusList: Array<SetStaffStatusItem>
+}
+
+/**
  * ResetExtensionPassword返回参数结构体
  */
 export interface ResetExtensionPasswordResponse {
@@ -4528,6 +4556,24 @@ export interface UnbindStaffSkillGroupListRequest {
 }
 
 /**
+ * 创建 staff 的信息 item
+ */
+export interface SetStaffStatusItem {
+  /**
+   * 座席账号
+   */
+  StaffUserId: string
+  /**
+   * 状态，free 示闲 notReady 示忙 rest 小休
+   */
+  Status: string
+  /**
+   * 如果设置小休状态，这里是原因
+   */
+  Reason?: string
+}
+
+/**
  * DescribeCallInMetrics返回参数结构体
  */
 export interface DescribeCallInMetricsResponse {
@@ -5128,6 +5174,40 @@ export interface DescribeTelSessionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 设置 staff 状态应答 item
+ */
+export interface SetStaffStatusRspItem {
+  /**
+   * 座席账号
+   */
+  StaffUserId?: string
+  /**
+   * 错误码，参考协议整体错误码
+   */
+  ErrorCode?: string
+  /**
+   * 错误信息
+   */
+  ErrorMessage?: string
+  /**
+   * 当前状态
+   */
+  Status?: string
+  /**
+   * 当前状态如果是小休，这里是原因
+   */
+  Reason?: string
+  /**
+   * 之前状态
+   */
+  PreviousStatus?: string
+  /**
+   * 之前状态如果是小休，这里是原因
+   */
+  PreviousReason?: string
 }
 
 /**

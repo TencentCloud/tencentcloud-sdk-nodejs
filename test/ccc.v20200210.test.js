@@ -268,6 +268,16 @@ it("ccc.v20200210.ResetExtensionPassword", async function () {
     }
 })
 
+it("ccc.v20200210.SetStaffStatus", async function () {
+    try {
+       const data = await client.SetStaffStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeTelCallInfo", async function () {
     try {
        const data = await client.DescribeTelCallInfo({})

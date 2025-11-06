@@ -108,9 +108,29 @@ it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
     }
 })
 
+it("es.v20180416.UpdateJdk", async function () {
+    try {
+       const data = await client.UpdateJdk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeUserCosSnapshotList", async function () {
     try {
        const data = await client.DescribeUserCosSnapshotList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpgradeInstance", async function () {
+    try {
+       const data = await client.UpgradeInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +248,9 @@ it("es.v20180416.CheckMigrateIndexMetaData", async function () {
     }
 })
 
-it("es.v20180416.UpdateJdk", async function () {
+it("es.v20180416.UpdateIpTraceStatus", async function () {
     try {
-       const data = await client.UpdateJdk({})
+       const data = await client.UpdateIpTraceStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +301,16 @@ it("es.v20180416.CreateLogstashInstance", async function () {
 it("es.v20180416.RestartInstance", async function () {
     try {
        const data = await client.RestartInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.GetIpTraceStatus", async function () {
+    try {
+       const data = await client.GetIpTraceStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +458,9 @@ it("es.v20180416.UpdateServerlessInstance", async function () {
     }
 })
 
-it("es.v20180416.UpgradeInstance", async function () {
+it("es.v20180416.QueryIpTraceLog", async function () {
     try {
-       const data = await client.UpgradeInstance({})
+       const data = await client.QueryIpTraceLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

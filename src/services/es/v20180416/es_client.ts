@@ -40,6 +40,7 @@ import {
   DescribeClusterSnapshotRequest,
   MetricMapByIndexId,
   UpdateLogstashPipelineDescResponse,
+  IpTraceLogEntry,
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
   IndexMetaField,
@@ -69,6 +70,7 @@ import {
   GetRequestTargetNodeTypesResponse,
   Operation,
   DiDataSourceCvm,
+  UpdateIpTraceStatusRequest,
   InstanceLog,
   LogstashPipeline,
   CreateIndexResponse,
@@ -86,6 +88,7 @@ import {
   DiData,
   UpgradeLicenseResponse,
   KeyValue,
+  QueryIpTraceLogResponse,
   LogstashExtendedFile,
   UpdateLogstashInstanceRequest,
   UpdateRequestTargetNodeTypesRequest,
@@ -98,14 +101,17 @@ import {
   DescribeLogstashInstanceOperationsResponse,
   CreateIndexRequest,
   LogstashPipelineInfo,
+  UpdateIpTraceStatusResponse,
   UpdatePluginsRequest,
   StopLogstashPipelinesResponse,
   RestoreClusterSnapshotRequest,
   DescribeServerlessSpaceUserRequest,
+  GetIpTraceStatusRequest,
   Dimension,
   DescribeServerlessSpacesResponse,
   InquirePriceRenewInstanceRequest,
   KibanaView,
+  IpTraceConfig,
   Metric,
   UpdateInstanceResponse,
   DeleteIndexRequest,
@@ -120,6 +126,7 @@ import {
   DiDataSourceTke,
   ClusterView,
   CommonIndexInfo,
+  QueryIpTraceLogRequest,
   InquirePriceRenewInstanceResponse,
   CreateClusterSnapshotRequest,
   DeleteLogstashPipelinesRequest,
@@ -156,6 +163,7 @@ import {
   ProcessDetail,
   DiSourceTke,
   CreateCosMigrateToServerlessInstanceRequest,
+  GetIpTraceStatusResponse,
   DeleteInstanceRequest,
   MetricDetail,
   UpgradeInstanceResponse,
@@ -321,6 +329,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新实例Jdk配置
+   */
+  async UpdateJdk(
+    req: UpdateJdkRequest,
+    cb?: (error: string, rep: UpdateJdkResponse) => void
+  ): Promise<UpdateJdkResponse> {
+    return this.request("UpdateJdk", req, cb)
+  }
+
+  /**
    * 查询快照信息接口
    */
   async DescribeUserCosSnapshotList(
@@ -328,6 +346,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserCosSnapshotListResponse) => void
   ): Promise<DescribeUserCosSnapshotListResponse> {
     return this.request("DescribeUserCosSnapshotList", req, cb)
+  }
+
+  /**
+   * 升级ES集群版本
+   */
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
   }
 
   /**
@@ -446,13 +474,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新实例Jdk配置
+   * 更新ES集群IP溯源状态
    */
-  async UpdateJdk(
-    req: UpdateJdkRequest,
-    cb?: (error: string, rep: UpdateJdkResponse) => void
-  ): Promise<UpdateJdkResponse> {
-    return this.request("UpdateJdk", req, cb)
+  async UpdateIpTraceStatus(
+    req: UpdateIpTraceStatusRequest,
+    cb?: (error: string, rep: UpdateIpTraceStatusResponse) => void
+  ): Promise<UpdateIpTraceStatusResponse> {
+    return this.request("UpdateIpTraceStatus", req, cb)
   }
 
   /**
@@ -503,6 +531,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartInstanceResponse) => void
   ): Promise<RestartInstanceResponse> {
     return this.request("RestartInstance", req, cb)
+  }
+
+  /**
+   * 查询IP溯源状态
+   */
+  async GetIpTraceStatus(
+    req: GetIpTraceStatusRequest,
+    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
+  ): Promise<GetIpTraceStatusResponse> {
+    return this.request("GetIpTraceStatus", req, cb)
   }
 
   /**
@@ -654,13 +692,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级ES集群版本
+   * 查询IP溯源日志
    */
-  async UpgradeInstance(
-    req: UpgradeInstanceRequest,
-    cb?: (error: string, rep: UpgradeInstanceResponse) => void
-  ): Promise<UpgradeInstanceResponse> {
-    return this.request("UpgradeInstance", req, cb)
+  async QueryIpTraceLog(
+    req: QueryIpTraceLogRequest,
+    cb?: (error: string, rep: QueryIpTraceLogResponse) => void
+  ): Promise<QueryIpTraceLogResponse> {
+    return this.request("QueryIpTraceLog", req, cb)
   }
 
   /**

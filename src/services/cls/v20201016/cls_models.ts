@@ -3896,6 +3896,10 @@ export interface CreateTopicRequest {
    * 主题扩展信息
    */
   Extends?: TopicExtendInfo
+  /**
+   * 开启记录公网来源ip和服务端接收时间
+   */
+  IsSourceFrom?: boolean
 }
 
 /**

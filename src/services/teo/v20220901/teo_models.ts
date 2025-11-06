@@ -484,6 +484,24 @@ export interface OriginDetail {
 }
 
 /**
+ * DescribeSecurityClientAttester返回参数结构体
+ */
+export interface DescribeSecurityClientAttesterResponse {
+  /**
+   * 认证选项总数量。
+   */
+  TotalCount?: number
+  /**
+   * 认证选项列表。
+   */
+  ClientAttesters?: Array<ClientAttester>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 多通道网关示例实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。
  */
 export interface MultiPathGatewayOriginACLInfo {
@@ -1553,25 +1571,21 @@ export interface CreateMultiPathGatewaySecretKeyResponse {
 }
 
 /**
- * DescribeSecurityIPGroupContent请求参数结构体
+ * DescribeAccelerationDomains返回参数结构体
  */
-export interface DescribeSecurityIPGroupContentRequest {
+export interface DescribeAccelerationDomainsResponse {
   /**
-   * 站点 ID。
+   * 符合查询条件的加速域名个数。
    */
-  ZoneId: string
+  TotalCount?: number
   /**
-   * IP 组 ID。
+   * 符合查询条件的所有加速域名的信息。
    */
-  GroupId: number
+  AccelerationDomains?: Array<AccelerationDomain>
   /**
-   * 分页查询限制数目。默认值：2000，最大值：100000。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 分页查询偏移量。默认值：0。
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -1602,6 +1616,24 @@ export interface IdentifyZoneResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSecurityAPIService请求参数结构体
+ */
+export interface DescribeSecurityAPIServiceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询限制数目。默认值：20，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
 }
 
 /**
@@ -3187,21 +3219,41 @@ export interface CustomField {
 }
 
 /**
- * DescribeSecurityAPIService请求参数结构体
+ * Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息
  */
-export interface DescribeSecurityAPIServiceRequest {
+export interface BotManagedRule {
   /**
-   * 站点 ID。
+   * 触发规则后的处置方式，取值有：
+<li>drop：拦截；</li>
+<li>trans：放行；</li>
+<li>alg：Javascript挑战；</li>
+<li>monitor：观察。</li>
    */
-  ZoneId: string
+  Action: string
   /**
-   * 分页查询限制数目。默认值：20，最大值：100。
+   * 本规则的ID。仅出参使用。
    */
-  Limit?: number
+  RuleID?: number
   /**
-   * 分页查询偏移量。默认值：0。
+   * 放行的规则ID。默认所有规则不配置放行。
    */
-  Offset?: number
+  TransManagedIds?: Array<number | bigint>
+  /**
+   * JS挑战的规则ID。默认所有规则不配置JS挑战。
+   */
+  AlgManagedIds?: Array<number | bigint>
+  /**
+   * 数字验证码的规则ID。默认所有规则不配置数字验证码。
+   */
+  CapManagedIds?: Array<number | bigint>
+  /**
+   * 观察的规则ID。默认所有规则不配置观察。
+   */
+  MonManagedIds?: Array<number | bigint>
+  /**
+   * 拦截的规则ID。默认所有规则不配置拦截。
+   */
+  DropManagedIds?: Array<number | bigint>
 }
 
 /**
@@ -3257,41 +3309,21 @@ export interface RangeOriginPullParameters {
 }
 
 /**
- * Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息
+ * ApplyFreeCertificate返回参数结构体
  */
-export interface BotManagedRule {
+export interface ApplyFreeCertificateResponse {
   /**
-   * 触发规则后的处置方式，取值有：
-<li>drop：拦截；</li>
-<li>trans：放行；</li>
-<li>alg：Javascript挑战；</li>
-<li>monitor：观察。</li>
+   * 当 VerificationMethod 为 dns_challenge 时，域名申请免费证书的相关验证信息。
    */
-  Action: string
+  DnsVerification?: DnsVerification
   /**
-   * 本规则的ID。仅出参使用。
+   * 当 VerificationMethod 为 http_challenge 时，域名申请免费证书的相关验证信息。
    */
-  RuleID?: number
+  FileVerification?: FileVerification
   /**
-   * 放行的规则ID。默认所有规则不配置放行。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TransManagedIds?: Array<number | bigint>
-  /**
-   * JS挑战的规则ID。默认所有规则不配置JS挑战。
-   */
-  AlgManagedIds?: Array<number | bigint>
-  /**
-   * 数字验证码的规则ID。默认所有规则不配置数字验证码。
-   */
-  CapManagedIds?: Array<number | bigint>
-  /**
-   * 观察的规则ID。默认所有规则不配置观察。
-   */
-  MonManagedIds?: Array<number | bigint>
-  /**
-   * 拦截的规则ID。默认所有规则不配置拦截。
-   */
-  DropManagedIds?: Array<number | bigint>
+  RequestId?: string
 }
 
 /**
@@ -8840,6 +8872,20 @@ export interface ModifyHostsCertificateRequest {
 }
 
 /**
+ * ModifyOriginACL请求参数结构体
+ */
+export interface ModifyOriginACLRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 需要启用/关闭特定回源 IP 网段回源的实例。
+   */
+  OriginACLEntities?: Array<OriginACLEntity>
+}
+
+/**
  * ModifyOriginGroup返回参数结构体
  */
 export interface ModifyOriginGroupResponse {
@@ -9145,21 +9191,25 @@ export interface ReturnCustomPageActionParameters {
 }
 
 /**
- * DescribeAccelerationDomains返回参数结构体
+ * DescribeSecurityIPGroupContent请求参数结构体
  */
-export interface DescribeAccelerationDomainsResponse {
+export interface DescribeSecurityIPGroupContentRequest {
   /**
-   * 符合查询条件的加速域名个数。
+   * 站点 ID。
    */
-  TotalCount?: number
+  ZoneId: string
   /**
-   * 符合查询条件的所有加速域名的信息。
+   * IP 组 ID。
    */
-  AccelerationDomains?: Array<AccelerationDomain>
+  GroupId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页查询限制数目。默认值：2000，最大值：100000。
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
 }
 
 /**
@@ -10286,17 +10336,26 @@ export interface ModifySecurityClientAttesterResponse {
 }
 
 /**
- * ModifyOriginACL请求参数结构体
+ * CheckFreeCertificateVerification返回参数结构体
  */
-export interface ModifyOriginACLRequest {
+export interface CheckFreeCertificateVerificationResponse {
   /**
-   * 站点 ID。
+   * 免费证书申请成功时，该证书颁发给的域名。
+注意：一个域名只允许申请一本免费证书， 如果已经有泛域名申请了免费证书的情况下，其子域名会匹配使用该泛域名证书。
    */
-  ZoneId: string
+  CommonName?: string
   /**
-   * 需要启用/关闭特定回源 IP 网段回源的实例。
+   * 免费证书申请成功时，该证书使用的签名算法，当前仅支持 RSA 2048。
    */
-  OriginACLEntities?: Array<OriginACLEntity>
+  SignatureAlgorithm?: string
+  /**
+   * 免费证书申请成功时，该证书的过期时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  ExpireTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10443,20 +10502,6 @@ export interface JustInTimeTranscodeTemplate {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   UpdateTime?: string
-}
-
-/**
- * DeleteSecurityAPIService请求参数结构体
- */
-export interface DeleteSecurityAPIServiceRequest {
-  /**
-   * 站点 ID。
-   */
-  ZoneId: string
-  /**
-   * API 服务 ID 列表。
-   */
-  APIServiceIds?: Array<string>
 }
 
 /**
@@ -11280,21 +11325,17 @@ export interface UpstreamFollowRedirectParameters {
 }
 
 /**
- * DescribeSecurityClientAttester返回参数结构体
+ * DeleteSecurityAPIService请求参数结构体
  */
-export interface DescribeSecurityClientAttesterResponse {
+export interface DeleteSecurityAPIServiceRequest {
   /**
-   * 认证选项总数量。
+   * 站点 ID。
    */
-  TotalCount?: number
+  ZoneId: string
   /**
-   * 认证选项列表。
+   * API 服务 ID 列表。
    */
-  ClientAttesters?: Array<ClientAttester>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  APIServiceIds?: Array<string>
 }
 
 /**
@@ -14129,6 +14170,27 @@ export interface DescribeMultiPathGatewayOriginACLRequest {
 }
 
 /**
+ * ApplyFreeCertificate请求参数结构体
+ */
+export interface ApplyFreeCertificateRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 申请免费证书的目标域名。
+   */
+  Domain: string
+  /**
+   * 申请免费证书时验证方式，详细验证方式说明参考[免费证书申请方式说明文档](https://cloud.tencent.com/document/product/1552/90437) ，相关取值有：
+<li>http_challenge：HTTP 访问文件验证方式，通过 HTTP 访问域名指定 URL 获取文件信息以完成免费证书申请验证；</li>
+<li>dns_challenge：DNS 委派验证方式，通过添加指定的主机记录解析指向 EdgeOne 以完成免费证书申请验证。</li>
+注意：在触发本接口后，你需要根据返回的验证信息，完成验证内容配置。配置完成后，还需要通过<a href = 'https://tcloud4api.woa.com/document/product/1657/927938?!preview&!document=1'>检查免费证书申请结果</a>接口进行验证，验证通过后，即可申请成功。在免费证书申请成功后，你可以调用<a href = 'https://cloud.tencent.com/document/product/1552/80764'>配置域名证书</a>接口为当前域名部署免费证书。
+   */
+  VerificationMethod: string
+}
+
+/**
  * 状态码缓存 TTL 配置参数。
  */
 export interface StatusCodeCacheParameters {
@@ -15647,6 +15709,20 @@ export interface CheckCnameStatusRequest {
    * 加速域名列表。
    */
   RecordNames: Array<string>
+}
+
+/**
+ * CheckFreeCertificateVerification请求参数结构体
+ */
+export interface CheckFreeCertificateVerificationRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 加速域名，该域名为[申请免费证书](https://tcloud4api.woa.com/document/product/1657/927654?!preview&!document=1)时使用的域名。
+   */
+  Domain: string
 }
 
 /**
