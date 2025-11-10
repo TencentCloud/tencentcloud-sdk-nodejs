@@ -402,6 +402,14 @@ export interface DisplayAsset {
    * 端口和服务最近更新时间
    */
   LastModify?: string
+  /**
+   * 是否为云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产状态，-1为下线
+   */
+  CloudAssetStatus?: number
 }
 
 /**
@@ -637,6 +645,14 @@ export interface DisplayConfig {
    * 建议
    */
   Suggestion?: string
+  /**
+   * 是否为云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产状态，-1为下线
+   */
+  CloudAssetStatus?: number
 }
 
 /**
@@ -1144,6 +1160,10 @@ export interface DescribeSubDomainsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+  /**
+   * 是否只查询离线子域名
+   */
+  OnlyOffline?: boolean
 }
 
 /**
@@ -1369,6 +1389,14 @@ export interface DisplaySensitiveInfo {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
 }
 
 /**
@@ -1650,6 +1678,30 @@ export interface DisplayHttp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsChange?: boolean
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
+  /**
+   * 可用率（百分比）
+   */
+  AvailabilityRate?: number
+  /**
+   * 可用状态 1:异常 0:正常
+   */
+  AvailabilityState?: number
+  /**
+   * 平均响应时间：单位ms
+   */
+  ResponseTime?: number
+  /**
+   * 域名解析状态 1:异常 0:正常
+   */
+  AnalysisState?: number
 }
 
 /**
@@ -2050,6 +2102,10 @@ export interface DescribeHttpsRequest {
    * 是否仅显示过期风险资产
    */
   HasExpirationRisk?: boolean
+  /**
+   * 是否只查询离线网站
+   */
+  OnlyOffline?: boolean
 }
 
 /**
@@ -2322,6 +2378,34 @@ export interface DisplaySubDomain {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
+  /**
+   * 可用率（百分比）
+   */
+  AvailabilityRate?: number
+  /**
+   * 可用状态 1:异常 0:正常
+   */
+  AvailabilityState?: number
+  /**
+   * 域名解析状态 1:异常 0:正常
+   */
+  AnalysisState?: number
+  /**
+   * 平均时延：单位ms
+   */
+  AverageDelay?: number
+  /**
+   * 丢包率（百分比）
+   */
+  LossRate?: number
 }
 
 /**
@@ -2456,6 +2540,18 @@ export interface DisplayVul {
    * 上次复测时间
    */
   LastCheckTime?: string
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
+  /**
+   * 域名解析状态 1:异常 0:正常
+   */
+  AnalysisState?: number
 }
 
 /**
@@ -2572,7 +2668,7 @@ export interface DisplayWeakPassword {
    */
   Password?: string
   /**
-   * 是否蜜罐
+   * 是否为蜜罐
    */
   IsHoneypot?: boolean
   /**
@@ -2587,6 +2683,14 @@ export interface DisplayWeakPassword {
    * 上次复测时间
    */
   LastCheckTime?: string
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
 }
 
 /**
@@ -2851,6 +2955,18 @@ export interface DisplayPort {
    * 状态，close:连接超时，端口可能已关闭，open:端口开放, checking:复测中, ignore:已忽略
    */
   Status?: string
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
+  /**
+   * 域名解析状态 1:异常 0:正常
+   */
+  AnalysisState?: number
 }
 
 /**
@@ -3423,6 +3539,14 @@ export interface DisplayManage {
 
    */
   Status?: string
+  /**
+   * 是否为云资产：0-非云资产 1-是云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产是否下线：-1-已下线 0-正常
+   */
+  CloudAssetStatus?: number
 }
 
 /**
@@ -3457,6 +3581,14 @@ export interface DisplayDomain {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+  /**
+   * 是否为云资产
+   */
+  IsCloudAsset?: number
+  /**
+   * 云资产状态，-1为下线
+   */
+  CloudAssetStatus?: number
 }
 
 /**

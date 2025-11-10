@@ -3223,8 +3223,8 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
    */
   PureAudio?: number
   /**
-   * hls 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS+MP4 byte range</li> <li>ts-packed-audio：TS+Packed Audio</li> <li>mp4-packed-audio：MP4+Packed Audio</li> 默认值：ts-segment 
-注：自适应码流的hls分片格式已此字段为准
+   * 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS+MP4 byte range</li> <li>ts-packed-audio：TS+Packed Audio</li> <li>mp4-packed-audio：MP4+Packed Audio</li> 默认值：ts-segment 
+注：自适应码流的分片格式以此字段为准
    */
   SegmentType?: string
 }
@@ -4323,6 +4323,10 @@ export interface CreateStreamLinkFlowRequest {
    * 该Flow关联的媒体传输事件ID，每个flow只能关联一个Event。
    */
   EventId?: string
+  /**
+   * 流的输出组。
+   */
+  OutputGroup?: CreateOutputInfo
 }
 
 /**
@@ -6714,7 +6718,6 @@ second：表示秒
   /**
    * 分片平均时长，范围：（0-10]，单位：秒
 不填表示自动，将根据视频的GOP等特征自动选择合适的分片时长。
-注意：只能在封装格式hls的情况下使用
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HlsTime?: number

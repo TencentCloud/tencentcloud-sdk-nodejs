@@ -8981,6 +8981,14 @@ export interface CreateDataTransformRequest {
    * 数据加工类型。0：标准加工任务； 1：前置加工任务。前置加工任务将采集的日志处理完成后，再写入日志主题。
    */
   DataTransformType?: number
+  /**
+   * 保留失败日志状态，1:不保留(默认)，2:保留。
+   */
+  KeepFailureLog?: number
+  /**
+   * 失败日志的字段名称
+   */
+  FailureLogKey?: string
 }
 
 /**

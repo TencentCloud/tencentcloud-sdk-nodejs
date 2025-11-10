@@ -7239,49 +7239,49 @@ export interface MySQLConnectParam {
  */
 export interface CreateRouteRequest {
   /**
-   * ckafka集群实例id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例id,可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * 路由网络类型(3:vpc路由;7:内部支撑路由;1:公网路由)
+   * <p>路由网络类型(3:vpc路由;7:内部支撑路由;1:公网路由)</p>
    */
   VipType: number
   /**
-   * vpc网络Id,当vipType为3时必填
+   * <p>vpc网络Id,当vipType为3时必填</p>
    */
   VpcId?: string
   /**
-   * vpc子网id,当vipType为3时必填
+   * <p>vpc子网id,当vipType为3时必填</p>
    */
   SubnetId?: string
   /**
-   * 访问类型：0-plaintext；1-sasl_plaintext；3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512  默认为0
-vipType=3,支持 0,1,3,4,5
-vipType=7,支持0,1,3
-vipType=1,支持1,3
-
+   * <p>访问类型：0-plaintext；1-sasl_plaintext；3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512  默认为0vipType=3,支持 0,1,3,4,5vipType=7,支持0,1,3vipType=1,支持1,3</p>
    */
   AccessType?: number
   /**
-   * 是否需要权限管理,该字段已废弃
+   * <p>是否需要权限管理,该字段已废弃</p>
    */
   AuthFlag?: number
   /**
-   * 调用方appId
+   * <p>调用方appId</p>
    */
   CallerAppid?: number
   /**
-   * 公网带宽,公网路由必传,且是3的倍数,无默认值
+   * <p>公网带宽,公网路由必传,且是3的倍数,无默认值</p>
    */
   PublicNetwork?: number
   /**
-   * vip地址
+   * <p>vip地址</p>
    */
   Ip?: string
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Note?: string
+  /**
+   * <p>关联安全组有序列表</p>
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -8602,7 +8602,7 @@ export interface ListCvmAndIpInfoRsp {
  */
 export interface CreateRouteResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: JgwOperateResponse
   /**
