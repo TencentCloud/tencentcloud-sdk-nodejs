@@ -4326,7 +4326,7 @@ export interface CreateStreamLinkFlowRequest {
   /**
    * 流的输出组。
    */
-  OutputGroup?: CreateOutputInfo
+  OutputGroup?: Array<CreateOutputInfo>
 }
 
 /**
@@ -9289,7 +9289,7 @@ export interface VideoTemplateInfoForUpdate {
 注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
 注意：VP8、VP9编码容器目前只支持webm，mkv。
 注意：MPEG2、dnxhd 编码容器目前只支持mxf。
-注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。
+注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。且要求输入源为全景视频（带多视角）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Codec?: string
@@ -12176,11 +12176,13 @@ export interface SpekeDrm {
    */
   Vector: string
   /**
-   * 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenc
-加密方式选择WideVine+FairPlay时，仅支持cbcs
+   * 加密方式，FairPlay 默认cbcs
+加密方式，PlayReady，Widevine 默认cenc
+加密方式，WideVine+FairPlay，Playready+Fairplay，Widevine+Playready+Fairplay默认cbcs
+加密方式，Widevine+Playready默认cenc
 
-cbcs：PlayReady，Widevine，FairPlay，WideVine+FairPlay 支持；
-cenc：PlayReady，Widevine支持；
+cbcs：PlayReady，Widevine，FairPlay，WideVine+FairPlay，Widevine+Playready，Playready+Fairplay，Widevine+Playready+Fairplay支持；
+cenc：PlayReady，Widevine，Widevine+Playready支持；
    */
   EncryptionMethod?: string
   /**
@@ -15383,6 +15385,11 @@ PureAudio：纯音频类型
    * 转码参数扩展字段
    */
   StdExtInfo?: string
+  /**
+   * 指定pts时间的帧设为关键帧，并切片。单位毫秒（允许相对偏差<=1ms）。当同时指定gop和切片时长时，会共同作用。注意需开启RawPts，保持帧率随源，并确保传入的pts时间在源中是有对应帧的。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyPTSList?: Array<number | bigint>
 }
 
 /**
@@ -17658,10 +17665,14 @@ export interface DrmInfo {
 输出HLS：可以使用切片模式或singlefile模式
 输出DASH：只能singlefile模式
 
-- widevine+fairplay:
+- widevine+fairplay，playready+fairplay，widevine+playready+fairplay:
  只能用于HLS，切片格式只能是mp4
  可以使用切片模式或singfile模式
 
+- widevine+playready:
+ 可用于HLS、MPEG-DASH，切片格式只能是mp4
+ HLS格式时，可以使用切片模式或singfile模式
+ MPEG-DASH时，只能使用singlefile模式
    */
   Type: string
   /**

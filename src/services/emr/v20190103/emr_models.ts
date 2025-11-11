@@ -1213,6 +1213,10 @@ export interface NodeSpecDisk {
    * 指定磁盘大小
    */
   DefaultDiskSize?: number
+  /**
+   * 是否为特殊的数据盘，如：单副本盘
+   */
+  IsSpecialDisk?: boolean
 }
 
 /**

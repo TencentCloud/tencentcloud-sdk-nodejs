@@ -846,6 +846,14 @@ export interface DeviceDetail {
    */
   AccountGroupId?: number
   /**
+   * 是否开启录屏权限，仅macOS， 0： 未开启 、1： 开启
+   */
+  ScreenRecordingPermission?: number
+  /**
+   * 是否开启磁盘访问权限，仅macOS， 0： 未开启、 1： 开启
+   */
+  DiskAccessPermission?: number
+  /**
    * 终端备注名
    */
   RemarkName?: string

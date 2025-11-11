@@ -8497,9 +8497,21 @@ export interface DescribeAddressTemplatesResponse {
  */
 export interface InternetPrice {
   /**
-   * 公网IP询价详细参数。
+   * 公网IP网络费询价详细参数。
    */
   AddressPrice?: InternetPriceDetail
+  /**
+   * 公网IP资源费询价详细参数。仅原生IP价格查询返回。
+   */
+  IPPrice?: InternetPriceDetail
+  /**
+   * 总原价，单位：元，仅预付费价格查询返回。
+   */
+  OriginalPrice?: number
+  /**
+   * 折扣后的总价格，单位：元。仅预付费价格查询返回。
+   */
+  DiscountPrice?: number
 }
 
 /**
@@ -11660,6 +11672,15 @@ AnycastEIP是否用于绑定负载均衡。
    * 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。
    */
   ClientToken?: string
+  /**
+   * 原生EIP IP资源的计费方式。
+<ul style="margin:0"><li>账号为标准账户类型的用户，可选值：<ul>
+<li>IP_POSTPAID_BY_HOUR：IP资源按小时后付费</li>
+<li>IP_PREPAID_BY_MONTH：IP资源包月预付费</li>
+</ul></li>
+</ul>
+   */
+  IPChargeType?: string
 }
 
 /**
@@ -16025,6 +16046,15 @@ export interface InquiryPriceAllocateAddressesRequest {
 <ul style="margin:0"><li>高防IP，可选值：<ul><li>AntiDDoSEIP：高防IP</li></ul>注意：仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。</li></ul>
    */
   AddressType?: string
+  /**
+   * 原生EIP IP资源的计费方式。
+<ul style="margin:0"><li>账号为标准账户类型的用户，可选值：<ul>
+<li>IP_POSTPAID_BY_HOUR：IP资源按小时后付费</li>
+<li>IP_PREPAID_BY_MONTH：IP资源包月预付费</li>
+</ul></li>
+</ul>
+   */
+  IPChargeType?: string
 }
 
 /**
