@@ -6910,6 +6910,10 @@ export interface ModifyPodNumRequest {
  */
 export interface ModifyUserGroupRequest {
   /**
+   * 集群字符串ID
+   */
+  InstanceId: string
+  /**
    * 用户信息列表
    */
   Users: Array<string>

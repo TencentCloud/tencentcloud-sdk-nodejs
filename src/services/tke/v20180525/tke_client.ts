@@ -132,6 +132,7 @@ import {
   DescribeClusterInstancesRequest,
   PodLimitsInstance,
   ModifyPrometheusTempRequest,
+  DescribeClusterAvailableExtraArgsResponse,
   ControllerStatus,
   DeletePrometheusTempSyncResponse,
   DescribePrometheusRecordRulesRequest,
@@ -191,6 +192,7 @@ import {
   CreateEKSContainerInstancesResponse,
   DeleteEdgeCVMInstancesResponse,
   DescribeIPAMDRequest,
+  ModifyClusterExtraArgsTaskStateResponse,
   DescribeClusterKubeconfigResponse,
   DescribeClusterCommonNamesRequest,
   NfsVolume,
@@ -204,6 +206,7 @@ import {
   VolumeMount,
   DeleteClusterRequest,
   DescribeTKEEdgeClustersResponse,
+  ModifyClusterExtraArgsResponse,
   KubeJarvisStateResultObjInfo,
   DescribeAvailableTKEEdgeVersionRequest,
   OpenConstraintInfo,
@@ -237,6 +240,7 @@ import {
   DriverVersion,
   CreateClusterInstancesRequest,
   DeleteBackupStorageLocationRequest,
+  Flag,
   UninstallClusterReleaseResponse,
   ClusterCIDRSettings,
   Taint,
@@ -344,7 +348,7 @@ import {
   InstanceUpgradeProgressItem,
   DescribeClusterVirtualNodePoolsRequest,
   DescribePrometheusRecordRulesResponse,
-  ClusterAdvancedSettings,
+  DescribeReservedInstancesRequest,
   DescribePodsBySpecResponse,
   SecurityContext,
   DNSConfig,
@@ -358,6 +362,7 @@ import {
   CreateReservedInstancesRequest,
   NodePool,
   ModifyPrometheusGlobalNotificationResponse,
+  ModifyClusterExtraArgsTaskStateRequest,
   UninstallClusterReleaseRequest,
   ModifyPrometheusTempResponse,
   VirtualNode,
@@ -416,6 +421,7 @@ import {
   EnhancedService,
   DescribeClusterNodePoolsResponse,
   DescribePostNodeResourcesResponse,
+  DescribeClusterAvailableExtraArgsRequest,
   DescribePrometheusAlertRuleRequest,
   UninstallLogAgentRequest,
   TcpSocket,
@@ -430,7 +436,7 @@ import {
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
   ReleaseDetails,
-  DescribeAddonRequest,
+  DescribePrometheusInstanceInitStatusRequest,
   DescribeClusterLevelAttributeResponse,
   PrometheusGrafanaInfo,
   Switch,
@@ -453,8 +459,10 @@ import {
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
   UninstallLogAgentResponse,
+  Task,
   PrometheusClusterAgentBasic,
   DeleteTKEEdgeClusterResponse,
+  ModifyClusterExtraArgsRequest,
   CreatePrometheusTempResponse,
   DescribePrometheusTargetsRequest,
   RunPrometheusInstanceResponse,
@@ -506,6 +514,7 @@ import {
   AutoUpgradeClusterLevel,
   DisableEncryptionProtectionResponse,
   CreateEKSClusterRequest,
+  DescribeTasksResponse,
   CommonName,
   EnableEventPersistenceRequest,
   ModifyClusterAuthenticationOptionsResponse,
@@ -533,9 +542,11 @@ import {
   AnnotationValue,
   CreateClusterEndpointVipResponse,
   TaskStepInfo,
+  DescribeTasksRequest,
   DeletePrometheusAlertRuleRequest,
   NodePoolRuntime,
   ModifyReservedInstanceScopeResponse,
+  AvailableExtraArgs,
   DescribeRouteTableConflictsRequest,
   DeleteClusterEndpointVipResponse,
   ClusterBasicSettings,
@@ -610,7 +621,7 @@ import {
   InstallLogAgentResponse,
   GetClusterLevelPriceRequest,
   CreateClusterEndpointResponse,
-  DescribeReservedInstancesRequest,
+  ClusterAdvancedSettings,
   DescribePodsBySpecRequest,
   UpdateClusterKubeconfigResponse,
   RuntimeConfig,
@@ -642,7 +653,7 @@ import {
   GetMostSuitableImageCacheRequest,
   DeleteEKSContainerInstancesRequest,
   DescribeClusterCommonNamesResponse,
-  DescribePrometheusInstanceInitStatusRequest,
+  DescribeAddonRequest,
   PrometheusTemplate,
   GPUArgs,
   RouteTableConflict,
@@ -1319,6 +1330,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新集群自定义参数，只支持托管集群
+   */
+  async ModifyClusterExtraArgs(
+    req: ModifyClusterExtraArgsRequest,
+    cb?: (error: string, rep: ModifyClusterExtraArgsResponse) => void
+  ): Promise<ModifyClusterExtraArgsResponse> {
+    return this.request("ModifyClusterExtraArgs", req, cb)
+  }
+
+  /**
    * 扩展(新建)集群节点
    */
   async CreateClusterInstances(
@@ -1859,6 +1880,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 暂停或者取消集群更新参数任务
+   */
+  async ModifyClusterExtraArgsTaskState(
+    req: ModifyClusterExtraArgsTaskStateRequest,
+    cb?: (error: string, rep: ModifyClusterExtraArgsTaskStateResponse) => void
+  ): Promise<ModifyClusterExtraArgsTaskStateResponse> {
+    return this.request("ModifyClusterExtraArgsTaskState", req, cb)
+  }
+
+  /**
    * 查询集群巡检结果历史列表
    */
   async ListClusterInspectionResultsItems(
@@ -2209,6 +2240,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询任务相关信息，只会查询对应任务类型的最新的一条任务状态
+   */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
+  }
+
+  /**
    * 获取TMP实例关联集群列表
    */
   async DescribePrometheusClusterAgents(
@@ -2476,6 +2517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrometheusAlertPolicyResponse) => void
   ): Promise<CreatePrometheusAlertPolicyResponse> {
     return this.request("CreatePrometheusAlertPolicy", req, cb)
+  }
+
+  /**
+   * 查询集群可用的自定义参数
+   */
+  async DescribeClusterAvailableExtraArgs(
+    req: DescribeClusterAvailableExtraArgsRequest,
+    cb?: (error: string, rep: DescribeClusterAvailableExtraArgsResponse) => void
+  ): Promise<DescribeClusterAvailableExtraArgsResponse> {
+    return this.request("DescribeClusterAvailableExtraArgs", req, cb)
   }
 
   /**

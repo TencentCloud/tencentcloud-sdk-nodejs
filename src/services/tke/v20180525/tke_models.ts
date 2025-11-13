@@ -2587,6 +2587,28 @@ export interface ModifyPrometheusTempRequest {
 }
 
 /**
+ * DescribeClusterAvailableExtraArgs返回参数结构体
+ */
+export interface DescribeClusterAvailableExtraArgsResponse {
+  /**
+   * 集群版本
+   */
+  ClusterVersion?: string
+  /**
+   * 可用的自定义参数
+   */
+  AvailableExtraArgs?: AvailableExtraArgs
+  /**
+   * 集群类型
+   */
+  ClusterType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群中控制器的状态描述
  */
 export interface ControllerStatus {
@@ -3736,6 +3758,16 @@ export interface DescribeIPAMDRequest {
 }
 
 /**
+ * ModifyClusterExtraArgsTaskState返回参数结构体
+ */
+export interface ModifyClusterExtraArgsTaskStateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterKubeconfig返回参数结构体
  */
 export interface DescribeClusterKubeconfigResponse {
@@ -4128,6 +4160,16 @@ export interface DescribeTKEEdgeClustersResponse {
    * 集群信息列表
    */
   Clusters?: Array<EdgeCluster>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyClusterExtraArgs返回参数结构体
+ */
+export interface ModifyClusterExtraArgsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4738,6 +4780,32 @@ export interface DeleteBackupStorageLocationRequest {
    * 备份仓库名称
    */
   Name: string
+}
+
+/**
+ * 参数描述
+ */
+export interface Flag {
+  /**
+   * 参数名
+   */
+  Name: string
+  /**
+   * 参数类型
+   */
+  Type: string
+  /**
+   * 参数描述
+   */
+  Usage: string
+  /**
+   * 参数默认值
+   */
+  Default: string
+  /**
+   * 参数可选范围（目前包含range和in两种，"[]"代表range，如"[1, 5]"表示参数必须>=1且 <=5, "()"代表in， 如"('aa', 'bb')"表示参数只能为字符串'aa'或者'bb'，该参数为空表示不校验）
+   */
+  Constraint: string
 }
 
 /**
@@ -7036,102 +7104,85 @@ export interface DescribePrometheusRecordRulesResponse {
 }
 
 /**
- * 集群高级配置
+ * DescribeReservedInstances请求参数结构体
  */
-export interface ClusterAdvancedSettings {
+export interface DescribeReservedInstancesRequest {
   /**
-   * 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)
+   * 偏移量，默认0。
    */
-  AsEnabled?: boolean
+  Offset?: number
   /**
-   * 是否开启审计开关
+   * 返回数量，默认为20，最大值为100。
    */
-  AuditEnabled?: boolean
+  Limit?: number
   /**
-   * 审计日志上传到的topic
+   * status
+按照**【状态**】进行过滤。状态：Creating：创建中、Active：生效中、Expired：已过期、Refunded：已退还。
+类型：String
+必选：否
+
+resource-type
+按照**【资源类型**】进行过滤。资源类型：common、amd、v100、t4、a10\*gnv4、a10\*gnv4v等，common表示通用类型。
+类型：String
+必选：否
+
+cpu
+按照**【核数**】进行过滤。
+类型：String
+必选：否
+
+memory
+按照**【内存**】进行过滤。
+类型：String
+必选：否
+
+gpu
+按照**【GPU卡数**】进行过滤，取值有0.25、0.5、1、2、4等。
+类型：String
+必选：否
+
+cluster-id
+按照**【集群ID**】进行过滤。
+类型：String
+必选：否
+
+node-name
+按照**【节点名称**】进行过滤。
+类型：String
+必选：否
+
+scope
+按照**【可用区**】进行过滤。比如：ap-guangzhou-2，为空字符串表示地域抵扣范围。如果只过滤可用区抵扣范围，需要同时将cluster-id、node-name设置为空字符串。
+类型：String
+必选：否
+
+reserved-instance-id
+按照**【预留实例ID**】进行过滤。预留实例ID形如：eksri-xxxxxxxx。
+类型：String
+必选：否
+
+reserved-instance-name
+按照**【预留实例名称**】进行过滤。
+类型：String
+必选：否
+
+reserved-instance-deduct
+按照**【上个周期抵扣的预留券**】进行过滤。Values可不设置。
+必选：否
+
+reserved-instance-not-deduct
+按照**【上个周期未抵扣的预留券**】进行过滤。Values可不设置。
+必选：否
    */
-  AuditLogTopicId?: string
+  Filters?: Array<Filter>
   /**
-   * 审计日志上传到的logset日志集
+   * 排序字段。支持CreatedAt、ActiveAt、ExpireAt。默认值CreatedAt。
    */
-  AuditLogsetId?: string
+  OrderField?: string
   /**
-   * 自定义模式下的基础pod数量
+   * 排序方法。顺序：ASC，倒序：DESC。默认值DESC。
    */
-  BasePodNumber?: number
-  /**
-   * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
-   */
-  CiliumMode?: string
-  /**
-   * 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker"
-   */
-  ContainerRuntime?: string
-  /**
-   * 是否启用 DataPlaneV2（cilium替代kube-proxy）
-   */
-  DataPlaneV2?: boolean
-  /**
-   * 是否启用集群删除保护
-   */
-  DeletionProtection?: boolean
-  /**
-   * 是否开节点podCIDR大小的自定义模式
-   */
-  EnableCustomizedPodCIDR?: boolean
-  /**
-   * 元数据拆分存储Etcd配置
-   */
-  EtcdOverrideConfigs?: Array<EtcdOverrideConfig>
-  /**
-   * 集群自定义参数
-   */
-  ExtraArgs?: ClusterExtraArgs
-  /**
-   * 是否启用IPVS
-   */
-  IPVS?: boolean
-  /**
-   * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
-   */
-  IsDualStack?: boolean
-  /**
-   * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
-   */
-  IsNonStaticIpMode?: boolean
-  /**
-   * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
-iptables模式：IPVS和KubeProxyMode都不设置
-ipvs模式: 设置IPVS为true, KubeProxyMode不设置
-ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
-使用ipvs-bpf的网络模式需要满足以下条件：
-1. 集群版本必须为1.14及以上；
-2. 系统镜像必须是: Tencent Linux 2.4；
-   */
-  KubeProxyMode?: string
-  /**
-   * 集群网络类型，默认为GR。
-- GR: 全局路由
-- VPC-CNI: VPC-CNI模式
-- CiliumOverlay: CiliumOverlay模式
-   */
-  NetworkType?: string
-  /**
-   * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
-   */
-  NodeNameType?: string
-  /**
-   * 是否开启QGPU共享
-   */
-  QGPUShareEnable?: boolean
-  /**
-   * 运行时版本
-   */
-  RuntimeVersion?: string
-  /**
-   * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
-   */
-  VpcCniType?: string
+  OrderDirection?: string
 }
 
 /**
@@ -7455,6 +7506,21 @@ export interface ModifyPrometheusGlobalNotificationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyClusterExtraArgsTaskState请求参数结构体
+ */
+export interface ModifyClusterExtraArgsTaskStateRequest {
+  /**
+   * 集群实例ID
+   */
+  ClusterId: string
+  /**
+   * 操作类型：
+abort 取消并回退任务
+   */
+  Operation?: string
 }
 
 /**
@@ -8763,6 +8829,20 @@ export interface DescribePostNodeResourcesResponse {
 }
 
 /**
+ * DescribeClusterAvailableExtraArgs请求参数结构体
+ */
+export interface DescribeClusterAvailableExtraArgsRequest {
+  /**
+   * 集群版本
+   */
+  ClusterVersion: string
+  /**
+   * 集群类型(MANAGED_CLUSTER或INDEPENDENT_CLUSTER)
+   */
+  ClusterType: string
+}
+
+/**
  * DescribePrometheusAlertRule请求参数结构体
  */
 export interface DescribePrometheusAlertRuleRequest {
@@ -9083,17 +9163,13 @@ export interface ReleaseDetails {
 }
 
 /**
- * DescribeAddon请求参数结构体
+ * DescribePrometheusInstanceInitStatus请求参数结构体
  */
-export interface DescribeAddonRequest {
+export interface DescribePrometheusInstanceInitStatusRequest {
   /**
-   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
+   * 实例ID
    */
-  ClusterId: string
-  /**
-   * addon名称（不传时会返回集群下全部的addon）
-   */
-  AddonName?: string
+  InstanceId: string
 }
 
 /**
@@ -9492,6 +9568,57 @@ export interface UninstallLogAgentResponse {
 }
 
 /**
+ * 任务信息
+ */
+export interface Task {
+  /**
+   * 任务状态（process(运行中)、pause(暂停)、pausing(暂停中)、paused(已暂停)、done(已完成)、abort(中止)、aborted(已中止)、resume(重新执行)）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeState?: string
+  /**
+   * 任务目标ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetObj?: string
+  /**
+   * 任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Param?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: string
+  /**
+   * 任务失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastError?: string
+  /**
+   * 任务所属集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterID?: string
+  /**
+   * 任务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
+  /**
+   * 任务更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedAt?: string
+  /**
+   * 创建任务唯一请求ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskID?: string
+}
+
+/**
  * 与云监控融合托管prometheus实例，关联集群基础信息
  */
 export interface PrometheusClusterAgentBasic {
@@ -9537,6 +9664,20 @@ export interface DeleteTKEEdgeClusterResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyClusterExtraArgs请求参数结构体
+ */
+export interface ModifyClusterExtraArgsRequest {
+  /**
+   * 目标集群ID
+   */
+  ClusterId: string
+  /**
+   * 集群自定义参数
+   */
+  ClusterExtraArgs?: ClusterExtraArgs
 }
 
 /**
@@ -10677,6 +10818,20 @@ export interface CreateEKSClusterRequest {
 }
 
 /**
+ * DescribeTasks返回参数结构体
+ */
+export interface DescribeTasksResponse {
+  /**
+   * 任务步骤信息
+   */
+  Tasks?: Array<Task>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 账户UIN与客户端证书CommonName的映射
  */
 export interface CommonName {
@@ -11285,6 +11440,20 @@ failed: 步骤失败
 }
 
 /**
+ * DescribeTasks请求参数结构体
+ */
+export interface DescribeTasksRequest {
+  /**
+   * 根据filter做过滤，支持ClusterId（取值示例：cls-xxxx）、TaskType（任务类型，取值示例：add_cluster_cidr、node_upgrade、node_upgrade_ctl等）其中任务类型必传
+   */
+  Filter?: Array<Filter>
+  /**
+   * 表示最新的任务条目，此值为true的话，输出任务列表中只会有最新的一条
+   */
+  Latest?: boolean
+}
+
+/**
  * DeletePrometheusAlertRule请求参数结构体
  */
 export interface DeletePrometheusAlertRuleRequest {
@@ -11328,6 +11497,32 @@ export interface ModifyReservedInstanceScopeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群可用的自定义参数
+ */
+export interface AvailableExtraArgs {
+  /**
+   * kube-apiserver可用的自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KubeAPIServer?: Array<Flag>
+  /**
+   * kube-controller-manager可用的自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KubeControllerManager?: Array<Flag>
+  /**
+   * kube-scheduler可用的自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KubeScheduler?: Array<Flag>
+  /**
+   * kubelet可用的自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Kubelet?: Array<Flag>
 }
 
 /**
@@ -12834,85 +13029,102 @@ export interface CreateClusterEndpointResponse {
 }
 
 /**
- * DescribeReservedInstances请求参数结构体
+ * 集群高级配置
  */
-export interface DescribeReservedInstancesRequest {
+export interface ClusterAdvancedSettings {
   /**
-   * 偏移量，默认0。
+   * 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)
    */
-  Offset?: number
+  AsEnabled?: boolean
   /**
-   * 返回数量，默认为20，最大值为100。
+   * 是否开启审计开关
    */
-  Limit?: number
+  AuditEnabled?: boolean
   /**
-   * status
-按照**【状态**】进行过滤。状态：Creating：创建中、Active：生效中、Expired：已过期、Refunded：已退还。
-类型：String
-必选：否
-
-resource-type
-按照**【资源类型**】进行过滤。资源类型：common、amd、v100、t4、a10\*gnv4、a10\*gnv4v等，common表示通用类型。
-类型：String
-必选：否
-
-cpu
-按照**【核数**】进行过滤。
-类型：String
-必选：否
-
-memory
-按照**【内存**】进行过滤。
-类型：String
-必选：否
-
-gpu
-按照**【GPU卡数**】进行过滤，取值有0.25、0.5、1、2、4等。
-类型：String
-必选：否
-
-cluster-id
-按照**【集群ID**】进行过滤。
-类型：String
-必选：否
-
-node-name
-按照**【节点名称**】进行过滤。
-类型：String
-必选：否
-
-scope
-按照**【可用区**】进行过滤。比如：ap-guangzhou-2，为空字符串表示地域抵扣范围。如果只过滤可用区抵扣范围，需要同时将cluster-id、node-name设置为空字符串。
-类型：String
-必选：否
-
-reserved-instance-id
-按照**【预留实例ID**】进行过滤。预留实例ID形如：eksri-xxxxxxxx。
-类型：String
-必选：否
-
-reserved-instance-name
-按照**【预留实例名称**】进行过滤。
-类型：String
-必选：否
-
-reserved-instance-deduct
-按照**【上个周期抵扣的预留券**】进行过滤。Values可不设置。
-必选：否
-
-reserved-instance-not-deduct
-按照**【上个周期未抵扣的预留券**】进行过滤。Values可不设置。
-必选：否
+   * 审计日志上传到的topic
    */
-  Filters?: Array<Filter>
+  AuditLogTopicId?: string
   /**
-   * 排序字段。支持CreatedAt、ActiveAt、ExpireAt。默认值CreatedAt。
+   * 审计日志上传到的logset日志集
    */
-  OrderField?: string
+  AuditLogsetId?: string
   /**
-   * 排序方法。顺序：ASC，倒序：DESC。默认值DESC。
+   * 自定义模式下的基础pod数量
    */
-  OrderDirection?: string
+  BasePodNumber?: number
+  /**
+   * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
+   */
+  CiliumMode?: string
+  /**
+   * 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker"
+   */
+  ContainerRuntime?: string
+  /**
+   * 是否启用 DataPlaneV2（cilium替代kube-proxy）
+   */
+  DataPlaneV2?: boolean
+  /**
+   * 是否启用集群删除保护
+   */
+  DeletionProtection?: boolean
+  /**
+   * 是否开节点podCIDR大小的自定义模式
+   */
+  EnableCustomizedPodCIDR?: boolean
+  /**
+   * 元数据拆分存储Etcd配置
+   */
+  EtcdOverrideConfigs?: Array<EtcdOverrideConfig>
+  /**
+   * 集群自定义参数
+   */
+  ExtraArgs?: ClusterExtraArgs
+  /**
+   * 是否启用IPVS
+   */
+  IPVS?: boolean
+  /**
+   * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
+   */
+  IsDualStack?: boolean
+  /**
+   * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
+   */
+  IsNonStaticIpMode?: boolean
+  /**
+   * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
+iptables模式：IPVS和KubeProxyMode都不设置
+ipvs模式: 设置IPVS为true, KubeProxyMode不设置
+ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
+使用ipvs-bpf的网络模式需要满足以下条件：
+1. 集群版本必须为1.14及以上；
+2. 系统镜像必须是: Tencent Linux 2.4；
+   */
+  KubeProxyMode?: string
+  /**
+   * 集群网络类型，默认为GR。
+- GR: 全局路由
+- VPC-CNI: VPC-CNI模式
+- CiliumOverlay: CiliumOverlay模式
+   */
+  NetworkType?: string
+  /**
+   * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
+   */
+  NodeNameType?: string
+  /**
+   * 是否开启QGPU共享
+   */
+  QGPUShareEnable?: boolean
+  /**
+   * 运行时版本
+   */
+  RuntimeVersion?: string
+  /**
+   * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
+   */
+  VpcCniType?: string
 }
 
 /**
@@ -13489,13 +13701,17 @@ export interface DescribeClusterCommonNamesResponse {
 }
 
 /**
- * DescribePrometheusInstanceInitStatus请求参数结构体
+ * DescribeAddon请求参数结构体
  */
-export interface DescribePrometheusInstanceInitStatusRequest {
+export interface DescribeAddonRequest {
   /**
-   * 实例ID
+   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
-  InstanceId: string
+  ClusterId: string
+  /**
+   * addon名称（不传时会返回集群下全部的addon）
+   */
+  AddonName?: string
 }
 
 /**

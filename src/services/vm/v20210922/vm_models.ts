@@ -639,7 +639,7 @@ export interface CreateVideoModerationTaskRequest {
    */
   BizType: string
   /**
-   * 任务类型：可选VIDEO（点播视频），LIVE_VIDEO（直播视频）
+   * 任务类型：可选VIDEO（点播视频），LIVE_VIDEO（直播视频），VIDEO_AIGC（AI生成检测）
    */
   Type: string
   /**

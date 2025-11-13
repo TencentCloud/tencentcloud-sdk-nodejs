@@ -47,6 +47,7 @@ import {
   DescribeDeviceIdentitiesRequest,
   RegisterCaCertificateResponse,
   UserProperty,
+  KickOutClientResponse,
   DescribeMessageDetailsRequest,
   DeleteInstanceRequest,
   ModifyInstanceRequest,
@@ -129,6 +130,7 @@ import {
   DeleteInsPublicEndpointRequest,
   DescribeInsPublicEndpointsRequest,
   CreateDeviceIdentityResponse,
+  KickOutClientRequest,
   DescribeDeviceIdentityResponse,
   DescribeCaCertificateRequest,
   UpdateAuthorizationPolicyPriorityRequest,
@@ -613,6 +615,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 踢出客户端
+   */
+  async KickOutClient(
+    req: KickOutClientRequest,
+    cb?: (error: string, rep: KickOutClientResponse) => void
+  ): Promise<KickOutClientResponse> {
+    return this.request("KickOutClient", req, cb)
   }
 
   /**

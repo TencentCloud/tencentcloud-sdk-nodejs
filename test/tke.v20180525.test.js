@@ -668,6 +668,16 @@ it("tke.v20180525.DeletePrometheusTemplateSync", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterExtraArgs", async function () {
+    try {
+       const data = await client.ModifyClusterExtraArgs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterInstances", async function () {
     try {
        const data = await client.CreateClusterInstances({})
@@ -1208,6 +1218,16 @@ it("tke.v20180525.CreatePrometheusTemp", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterExtraArgsTaskState", async function () {
+    try {
+       const data = await client.ModifyClusterExtraArgsTaskState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.ListClusterInspectionResultsItems", async function () {
     try {
        const data = await client.ListClusterInspectionResultsItems({})
@@ -1558,6 +1578,16 @@ it("tke.v20180525.RenewReservedInstances", async function () {
     }
 })
 
+it("tke.v20180525.DescribeTasks", async function () {
+    try {
+       const data = await client.DescribeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribePrometheusClusterAgents", async function () {
     try {
        const data = await client.DescribePrometheusClusterAgents({})
@@ -1821,6 +1851,16 @@ it("tke.v20180525.DescribeTKEEdgeClusterStatus", async function () {
 it("tke.v20180525.CreatePrometheusAlertPolicy", async function () {
     try {
        const data = await client.CreatePrometheusAlertPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterAvailableExtraArgs", async function () {
+    try {
+       const data = await client.DescribeClusterAvailableExtraArgs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
