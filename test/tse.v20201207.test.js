@@ -448,6 +448,16 @@ it("tse.v20201207.DescribeAutoScalerResourceStrategyBindingGroups", async functi
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewayIPRestriction", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayIPRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeConfigFileRelease", async function () {
     try {
        const data = await client.DescribeConfigFileRelease({})
@@ -758,6 +768,16 @@ it("tse.v20201207.DescribeConfigFileReleaseVersions", async function () {
     }
 })
 
+it("tse.v20201207.DeleteCloudNativeAPIGatewayIPRestriction", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayIPRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeSREInstances", async function () {
     try {
        const data = await client.DescribeSREInstances({})
@@ -771,6 +791,16 @@ it("tse.v20201207.DescribeSREInstances", async function () {
 it("tse.v20201207.DescribeConfigFilesByGroup", async function () {
     try {
        const data = await client.DescribeConfigFilesByGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateOrModifyCloudNativeAPIGatewayIPRestriction", async function () {
+    try {
+       const data = await client.CreateOrModifyCloudNativeAPIGatewayIPRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

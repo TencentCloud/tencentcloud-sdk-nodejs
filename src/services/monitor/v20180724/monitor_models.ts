@@ -7490,6 +7490,10 @@ export interface DescribeAlarmHistoriesRequest {
    * 告警类型
    */
   AlarmTypes?: Array<string>
+  /**
+   * 是否已屏蔽
+   */
+  ShieldStatus?: Array<string>
 }
 
 /**

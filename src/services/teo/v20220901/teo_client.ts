@@ -722,6 +722,7 @@ import {
   ModifyRequestHeaderParameters,
   CreateWebSecurityTemplateResponse,
   BotIntelligence,
+  OriginCertificateVerify,
   SearchEngineBots,
   DescribePurgeTasksResponse,
   HttpDDoSProtection,

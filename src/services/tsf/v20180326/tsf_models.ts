@@ -2055,6 +2055,204 @@ export interface AddInstancesResponse {
 }
 
 /**
+ * 虚拟机部署组信息
+ */
+export interface VmGroup {
+  /**
+   * 部署组ID
+   */
+  GroupId?: string
+  /**
+   * 部署组名称
+   */
+  GroupName?: string
+  /**
+   * 部署组状态
+   */
+  GroupStatus?: string
+  /**
+   * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageId?: string
+  /**
+   * 程序包名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageName?: string
+  /**
+   * 程序包版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageVersion?: string
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 命名空间ID
+   */
+  NamespaceId?: string
+  /**
+   * 命名空间名称
+   */
+  NamespaceName?: string
+  /**
+   * 应用ID
+   */
+  ApplicationId?: string
+  /**
+   * 应用名称
+   */
+  ApplicationName?: string
+  /**
+   * 部署组机器数目
+   */
+  InstanceCount?: number
+  /**
+   * 部署组运行中机器数目
+   */
+  RunInstanceCount?: number
+  /**
+   * 部署组启动参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartupParameters?: string
+  /**
+   * 部署组创建时间
+   */
+  CreateTime?: string
+  /**
+   * 部署组更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 部署组停止机器数目
+   */
+  OffInstanceCount?: number
+  /**
+   * 部署组描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupDesc?: string
+  /**
+   * 微服务类型
+   */
+  MicroserviceType?: string
+  /**
+   * 应用类型
+   */
+  ApplicationType?: string
+  /**
+   * 部署组资源类型
+   */
+  GroupResourceType?: string
+  /**
+   * 部署组更新时间戳
+   */
+  UpdatedTime?: number
+  /**
+   * 部署应用描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeployDesc?: string
+  /**
+   * 滚动发布的更新方式
+   */
+  UpdateType?: number
+  /**
+   * 发布是否启用beta批次
+   */
+  DeployBetaEnable?: boolean
+  /**
+   * 滚动发布的批次比例列表
+   */
+  DeployBatch?: Array<number>
+  /**
+   * 滚动发布的批次执行方式
+   */
+  DeployExeMode?: string
+  /**
+   * 滚动发布的每个批次的等待时间
+   */
+  DeployWaitTime?: number
+  /**
+   * 是否开启了健康检查
+   */
+  EnableHealthCheck?: boolean
+  /**
+   * 健康检查配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckSettings?: HealthCheckSettings
+  /**
+   * 程序包类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 启动脚本 base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartScript?: string
+  /**
+   * 停止脚本 base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StopScript?: string
+  /**
+   * 部署组备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Alias?: string
+  /**
+   * javaagent信息
+   */
+  AgentProfileList?: Array<AgentProfile>
+  /**
+   * 预热属性配置
+   */
+  WarmupSetting?: WarmupSetting
+  /**
+   * Envoy网关配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayConfig?: GatewayConfig
+  /**
+   * 批次是否开启健康检查
+   */
+  EnableBatchHealthCheck?: boolean
+  /**
+   * 是否开启cgroup控制内存cpu
+   */
+  FilebeatCgroupEnable?: boolean
+  /**
+   * filebeat使用cpu上限
+   */
+  FilebeatMaxCpu?: number
+  /**
+   * filebeat使用内存上限
+   */
+  FilebeatMaxMem?: number
+  /**
+   * 仓库ID
+   */
+  RepositoryId?: string
+  /**
+   * 仓库名称
+   */
+  RepositoryName?: string
+  /**
+   * 仓库类型
+   */
+  RepositoryType?: string
+}
+
+/**
  * DescribeResourceConfig返回参数结构体
  */
 export interface DescribeResourceConfigResponse {
@@ -3030,6 +3228,20 @@ export interface DeleteImageTag {
    * 版本号:如V1
    */
   TagName: string
+}
+
+/**
+ * ModifyGroupLane请求参数结构体
+ */
+export interface ModifyGroupLaneRequest {
+  /**
+   * 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。
+   */
+  GroupId: string
+  /**
+   * 泳道部署组列表。
+   */
+  LaneList: Array<LaneGroup>
 }
 
 /**
@@ -8682,201 +8894,17 @@ export interface DescribeTaskRecordsResponse {
 }
 
 /**
- * 虚拟机部署组信息
+ * ModifyGroupLane返回参数结构体
  */
-export interface VmGroup {
+export interface ModifyGroupLaneResponse {
   /**
-   * 部署组ID
+   * 操作结果。- true：成功- false：失败
    */
-  GroupId?: string
+  Result?: boolean
   /**
-   * 部署组名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupName?: string
-  /**
-   * 部署组状态
-   */
-  GroupStatus?: string
-  /**
-   * 程序包ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageId?: string
-  /**
-   * 程序包名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageName?: string
-  /**
-   * 程序包版本号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageVersion?: string
-  /**
-   * 集群ID
-   */
-  ClusterId?: string
-  /**
-   * 集群名称
-   */
-  ClusterName?: string
-  /**
-   * 命名空间ID
-   */
-  NamespaceId?: string
-  /**
-   * 命名空间名称
-   */
-  NamespaceName?: string
-  /**
-   * 应用ID
-   */
-  ApplicationId?: string
-  /**
-   * 应用名称
-   */
-  ApplicationName?: string
-  /**
-   * 部署组机器数目
-   */
-  InstanceCount?: number
-  /**
-   * 部署组运行中机器数目
-   */
-  RunInstanceCount?: number
-  /**
-   * 部署组启动参数信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartupParameters?: string
-  /**
-   * 部署组创建时间
-   */
-  CreateTime?: string
-  /**
-   * 部署组更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 部署组停止机器数目
-   */
-  OffInstanceCount?: number
-  /**
-   * 部署组描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupDesc?: string
-  /**
-   * 微服务类型
-   */
-  MicroserviceType?: string
-  /**
-   * 应用类型
-   */
-  ApplicationType?: string
-  /**
-   * 部署组资源类型
-   */
-  GroupResourceType?: string
-  /**
-   * 部署组更新时间戳
-   */
-  UpdatedTime?: number
-  /**
-   * 部署应用描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeployDesc?: string
-  /**
-   * 滚动发布的更新方式
-   */
-  UpdateType?: number
-  /**
-   * 发布是否启用beta批次
-   */
-  DeployBetaEnable?: boolean
-  /**
-   * 滚动发布的批次比例列表
-   */
-  DeployBatch?: Array<number>
-  /**
-   * 滚动发布的批次执行方式
-   */
-  DeployExeMode?: string
-  /**
-   * 滚动发布的每个批次的等待时间
-   */
-  DeployWaitTime?: number
-  /**
-   * 是否开启了健康检查
-   */
-  EnableHealthCheck?: boolean
-  /**
-   * 健康检查配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HealthCheckSettings?: HealthCheckSettings
-  /**
-   * 程序包类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageType?: string
-  /**
-   * 启动脚本 base64编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartScript?: string
-  /**
-   * 停止脚本 base64编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StopScript?: string
-  /**
-   * 部署组备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Alias?: string
-  /**
-   * javaagent信息
-   */
-  AgentProfileList?: Array<AgentProfile>
-  /**
-   * 预热属性配置
-   */
-  WarmupSetting?: WarmupSetting
-  /**
-   * Envoy网关配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GatewayConfig?: GatewayConfig
-  /**
-   * 批次是否开启健康检查
-   */
-  EnableBatchHealthCheck?: boolean
-  /**
-   * 是否开启cgroup控制内存cpu
-   */
-  FilebeatCgroupEnable?: boolean
-  /**
-   * filebeat使用cpu上限
-   */
-  FilebeatMaxCpu?: number
-  /**
-   * filebeat使用内存上限
-   */
-  FilebeatMaxMem?: number
-  /**
-   * 仓库ID
-   */
-  RepositoryId?: string
-  /**
-   * 仓库名称
-   */
-  RepositoryName?: string
-  /**
-   * 仓库类型
-   */
-  RepositoryType?: string
+  RequestId?: string
 }
 
 /**

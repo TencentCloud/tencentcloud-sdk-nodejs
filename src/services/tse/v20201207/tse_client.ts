@@ -40,6 +40,7 @@ import {
   CreateCloudNativeAPIGatewayServiceRequest,
   ModifyConsoleNetworkRequest,
   PublicAddressConfig,
+  SREInstance,
   DescribeCloudNativeAPIGatewayServicesRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   DeleteGovernanceNamespacesResponse,
@@ -87,7 +88,6 @@ import {
   CreateGovernanceAliasRequest,
   ModifyCloudNativeAPIGatewayServiceRequest,
   DescribeAutoScalerResourceStrategyBindingGroupsRequest,
-  DescribeConfigFilesByGroupResponse,
   DescribeWafProtectionRequest,
   DescribeAutoScalerResourceStrategiesRequest,
   RuleFilter,
@@ -108,7 +108,6 @@ import {
   GovernanceInterfaceDescription,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   ModifyNativeGatewayServerGroupRequest,
-  DescribeGatewayInstancePortResult,
   ModifyConsoleNetworkResponse,
   DescribeWafDomainsResponse,
   DescribeSREInstanceAccessAddressRequest,
@@ -124,6 +123,7 @@ import {
   UpdateEngineInternetAccessRequest,
   DeleteNativeGatewayServerGroupResponse,
   ModifyCloudNativeAPIGatewayCertificateResponse,
+  DescribeCloudNativeAPIGatewayIPRestrictionRequest,
   DescribeSREInstanceAccessAddressResponse,
   CreateConfigFileRequest,
   DescribeConfigFilesResponse,
@@ -163,7 +163,7 @@ import {
   GovernanceServiceContract,
   CreateGovernanceInstancesRequest,
   BindAutoScalerResourceStrategyToGroupsRequest,
-  DeleteCloudNativeAPIGatewayCertificateRequest,
+  DescribeConfigFilesByGroupResponse,
   LimitRule,
   ModifyAutoScalerResourceStrategyResponse,
   CreateCloudNativeAPIGatewayCertificateResponse,
@@ -178,7 +178,7 @@ import {
   CloudNativeAPIGatewayConfig,
   KongServiceLightPreview,
   DescribeNativeGatewayServerGroupsRequest,
-  RouteWafStatus,
+  DescribeGatewayInstancePortResult,
   DescribePublicNetworkRequest,
   DescribeGovernanceNamespacesResponse,
   DescribeConfigFilesByGroupRequest,
@@ -191,6 +191,7 @@ import {
   ModifyCloudNativeAPIGatewayResponse,
   CreateCloudNativeAPIGatewayPublicNetworkRequest,
   UpdateCloudNativeAPIGatewayResult,
+  RouteWafStatus,
   ModifyGovernanceNamespacesRequest,
   SourceInstanceVpcInfo,
   ModifyConfigFileGroupResponse,
@@ -210,6 +211,7 @@ import {
   ModifyGovernanceInstancesRequest,
   GovernanceNamespace,
   DeleteCloudNativeAPIGatewayCanaryRuleResponse,
+  DeleteCloudNativeAPIGatewayIPRestrictionResponse,
   UpdateCloudNativeAPIGatewayCertificateInfoResponse,
   ModifyNetworkBasicInfoResponse,
   DescribeCloudNativeAPIGatewayResponse,
@@ -246,6 +248,7 @@ import {
   ModifyGovernanceAliasResponse,
   ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult,
   DeleteGovernanceInstancesByHostRequest,
+  DescribeCloudNativeAPIGatewayIPRestrictionResponse,
   CreateCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeCloudNativeAPIGatewaysResponse,
   CreateGovernanceNamespacesResponse,
@@ -256,6 +259,7 @@ import {
   DescribeOneCloudNativeAPIGatewayServiceRequest,
   DeleteGovernanceAliasesRequest,
   CertificateInfo,
+  CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
   DescribeWafDomainsRequest,
   ModifyUpstreamNodeStatusResponse,
   OpenWafProtectionResponse,
@@ -291,6 +295,7 @@ import {
   DescribeConfigFileGroupsRequest,
   CreateGovernanceNamespacesRequest,
   ModifyCloudNativeAPIGatewayRouteRequest,
+  DeleteCloudNativeAPIGatewayIPRestrictionRequest,
   CreateGovernanceAliasResponse,
   CloudNativeAPIGatewayNodeConfig,
   DeleteConfigFileGroupResponse,
@@ -311,6 +316,7 @@ import {
   DescribePublicAddressConfigRequest,
   CreateConfigFileResponse,
   DescribeCloudNativeAPIGatewayUpstreamResponse,
+  CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse,
   KVPair,
   UpdateUpstreamTargetsRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
@@ -330,6 +336,7 @@ import {
   DescribeCloudNativeAPIGatewaysRequest,
   DescribeCloudNativeAPIGatewayConfigResult,
   DeleteCloudNativeAPIGatewayServiceRequest,
+  DescribeKongIpRestrictionResult,
   DescribePublicNetworkResponse,
   ZookeeperRegionInfo,
   DescribeInstanceTagInfosResponse,
@@ -342,7 +349,7 @@ import {
   ModifyNetworkBasicInfoRequest,
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
-  SREInstance,
+  DeleteCloudNativeAPIGatewayCertificateRequest,
   CloudNativeAPIGatewayNode,
   DescribeZookeeperServerInterfacesResponse,
   DescribeConfigFileReleaseVersionsResponse,
@@ -825,6 +832,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云原生网关访问控制
+   */
+  async DescribeCloudNativeAPIGatewayIPRestriction(
+    req: DescribeCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayIPRestriction", req, cb)
+  }
+
+  /**
    * 获取配置文件发布
    */
   async DescribeConfigFileRelease(
@@ -1135,6 +1152,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除云原生网关访问控制
+   */
+  async DeleteCloudNativeAPIGatewayIPRestriction(
+    req: DeleteCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayIPRestriction", req, cb)
+  }
+
+  /**
    * 用于查询引擎实例列表
    */
   async DescribeSREInstances(
@@ -1152,6 +1179,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConfigFilesByGroupResponse) => void
   ): Promise<DescribeConfigFilesByGroupResponse> {
     return this.request("DescribeConfigFilesByGroup", req, cb)
+  }
+
+  /**
+   * 创建或编辑云原生网关访问控制
+   */
+  async CreateOrModifyCloudNativeAPIGatewayIPRestriction(
+    req: CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
+    cb?: (error: string, rep: CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse) => void
+  ): Promise<CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse> {
+    return this.request("CreateOrModifyCloudNativeAPIGatewayIPRestriction", req, cb)
   }
 
   /**

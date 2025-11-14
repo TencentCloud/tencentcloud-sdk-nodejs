@@ -361,10 +361,14 @@ export interface ConsumeGroupItem {
    */
   SubscribeTopicNum?: number
   /**
-   * 1753153590
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
+  /**
+   * 绑定的标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**
@@ -661,6 +665,16 @@ DELETING，删除中
    * 是否开启删除保护
    */
   EnableDeletionProtection?: boolean
+  /**
+   * 实例创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 弹性TPS开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaledTpsEnabled?: boolean
 }
 
 /**
@@ -2813,6 +2827,10 @@ export interface DescribeTopicListRequest {
    */
   InstanceId: string
   /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
+  /**
    * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
   Filters?: Array<Filter>
@@ -2883,6 +2901,10 @@ export interface DescribeConsumerGroupListRequest {
    * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
+  /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
   /**
    * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
@@ -2965,6 +2987,10 @@ TRANSACTION:事务消息
    * 消息保留时长
    */
   MsgTTL?: number
+  /**
+   * 绑定的标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**
@@ -3625,6 +3651,16 @@ PLATINUM 铂金版
    */
   ZoneIds?: Array<number | bigint>
   /**
+   * proxy节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeCount?: number
+  /**
+   * proxy调度详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneScheduledList?: Array<ZoneScheduledItem>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3948,6 +3984,20 @@ PUBLIC 公网
    * 公网是否按流量计费
    */
   BillingFlow?: boolean
+}
+
+/**
+ * proxy调度时各个可用区有无调度任务
+ */
+export interface ZoneScheduledItem {
+  /**
+   * 可用区ID
+   */
+  ZoneId?: string
+  /**
+   * 有剔除的调度任务且没有切回的可用区时，该值为true，反之为false
+   */
+  NodePermWipeFlag?: boolean
 }
 
 /**

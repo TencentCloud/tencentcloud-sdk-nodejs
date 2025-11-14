@@ -348,6 +348,7 @@ import {
   LogContextInfo,
   DeleteConfigFromMachineGroupRequest,
   AddMachineGroupInfoResponse,
+  UserKafkaMeta,
   MetricLabel,
   DescribeScheduledSqlInfoRequest,
   SearchLogRequest,

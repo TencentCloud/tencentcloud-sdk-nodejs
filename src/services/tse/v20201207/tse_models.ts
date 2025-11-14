@@ -499,6 +499,172 @@ export interface PublicAddressConfig {
 }
 
 /**
+ * 微服务注册引擎实例
+ */
+export interface SREInstance {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 版本号
+   */
+  Edition?: string
+  /**
+   * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
+   */
+  Status?: string
+  /**
+   * 规格ID
+   */
+  SpecId?: string
+  /**
+   * 副本数
+   */
+  Replica?: number
+  /**
+   * 类型
+   */
+  Type?: string
+  /**
+   * Vpc iD
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+   */
+  SubnetIds?: Array<string>
+  /**
+   * 是否开启持久化存储
+   */
+  EnableStorage?: boolean
+  /**
+   * 数据存储方式
+   */
+  StorageType?: string
+  /**
+   * 云硬盘容量
+   */
+  StorageCapacity?: number
+  /**
+   * 计费方式
+   */
+  Paymode?: string
+  /**
+   * EKS集群的ID
+   */
+  EKSClusterID?: string
+  /**
+   * 集群创建时间
+   */
+  CreateTime?: string
+  /**
+   * 环境配置信息列表
+   */
+  EnvInfos?: Array<EnvInfo>
+  /**
+   * 引擎所在的区域
+   */
+  EngineRegion?: string
+  /**
+   * 注册引擎是否开启公网
+   */
+  EnableInternet?: boolean
+  /**
+   * 私有网络列表信息
+   */
+  VpcInfos?: Array<VpcInfo>
+  /**
+   * 服务治理相关信息列表
+   */
+  ServiceGovernanceInfos?: Array<ServiceGovernanceInfo>
+  /**
+   * 实例的标签信息
+   */
+  Tags?: Array<KVPair>
+  /**
+   * 引擎实例是否开启控制台公网访问地址
+   */
+  EnableConsoleInternet?: boolean
+  /**
+   * 引擎实例是否开启控制台内网访问地址
+   */
+  EnableConsoleIntranet?: boolean
+  /**
+   * 引擎实例是否展示参数配置页面
+   */
+  ConfigInfoVisible?: boolean
+  /**
+   * 引擎实例控制台默认密码
+   */
+  ConsoleDefaultPwd?: string
+  /**
+   * 交易付费类型，0后付费/1预付费
+   */
+  TradeType?: number
+  /**
+   * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
+   */
+  AutoRenewFlag?: number
+  /**
+   * 预付费到期时间
+   */
+  CurDeadline?: string
+  /**
+   * 隔离开始时间
+   */
+  IsolateTime?: string
+  /**
+   * 实例地域相关的描述信息
+   */
+  RegionInfos?: Array<DescribeInstanceRegionInfo>
+  /**
+   * 所在EKS环境，分为common和yunti
+   */
+  EKSType?: string
+  /**
+   * 引擎的产品版本
+   */
+  FeatureVersion?: string
+  /**
+   * 引擎实例是否开启客户端内网访问地址
+   */
+  EnableClientIntranet?: boolean
+  /**
+   * 存储额外配置选项
+   */
+  StorageOption?: Array<StorageOption>
+  /**
+   * Zookeeper的额外环境数据信息
+   */
+  ZookeeperRegionInfo?: ZookeeperRegionInfo
+  /**
+   * 部署架构
+   */
+  DeployMode?: string
+  /**
+   * 全局属性
+   */
+  GlobalType?: string
+  /**
+   * 所属组类型
+   */
+  GroupType?: string
+  /**
+   * 组id
+   */
+  GroupId?: Array<string>
+  /**
+   * 是否为主地域
+   */
+  IsMainRegion?: boolean
+}
+
+/**
  * DescribeCloudNativeAPIGatewayServices请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayServicesRequest {
@@ -715,6 +881,11 @@ export interface DescribeCloudNativeAPIGatewayResult {
    * 是否开启删除保护
    */
   DeleteProtect?: boolean
+  /**
+   * 表示可以升级的版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableVersions?: Array<string>
 }
 
 /**
@@ -1668,24 +1839,6 @@ export interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
 }
 
 /**
- * DescribeConfigFilesByGroup返回参数结构体
- */
-export interface DescribeConfigFilesByGroupResponse {
-  /**
-   * 记录总数量
-   */
-  TotalCount?: number
-  /**
-   * 配置文件列表
-   */
-  ConfigFiles?: Array<ConfigFile>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeWafProtection请求参数结构体
  */
 export interface DescribeWafProtectionRequest {
@@ -2288,20 +2441,6 @@ export interface ModifyNativeGatewayServerGroupRequest {
 }
 
 /**
- * 获取云原生API网关实例协议端口列表响应结果
- */
-export interface DescribeGatewayInstancePortResult {
-  /**
-   * 云原生API网关ID
-   */
-  GatewayId?: string
-  /**
-   * 网关实例协议端口列表
-   */
-  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
-}
-
-/**
  * ModifyConsoleNetwork返回参数结构体
  */
 export interface ModifyConsoleNetworkResponse {
@@ -2573,6 +2712,24 @@ export interface ModifyCloudNativeAPIGatewayCertificateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayIPRestriction请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayIPRestrictionRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 访问控制插件绑定的资源类型：route|service
+   */
+  SourceType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
 }
 
 /**
@@ -3635,17 +3792,21 @@ export interface BindAutoScalerResourceStrategyToGroupsRequest {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayCertificate请求参数结构体
+ * DescribeConfigFilesByGroup返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayCertificateRequest {
+export interface DescribeConfigFilesByGroupResponse {
   /**
-   * 网关ID
+   * 记录总数量
    */
-  GatewayId: string
+  TotalCount?: number
   /**
-   * 证书Id
+   * 配置文件列表
    */
-  Id: string
+  ConfigFiles?: Array<ConfigFile>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3988,41 +4149,17 @@ export interface DescribeNativeGatewayServerGroupsRequest {
 }
 
 /**
- * 路由 WAF 状态
+ * 获取云原生API网关实例协议端口列表响应结果
  */
-export interface RouteWafStatus {
+export interface DescribeGatewayInstancePortResult {
   /**
-   * 路由的名字
+   * 云原生API网关ID
    */
-  Name?: string
+  GatewayId?: string
   /**
-   * 路由的 ID
+   * 网关实例协议端口列表
    */
-  Id?: string
-  /**
-   *  路由是否开启 WAF 防护
-   */
-  Status?: string
-  /**
-   * 方法
-   */
-  Methods?: Array<string>
-  /**
-   * 路径
-   */
-  Paths?: Array<string>
-  /**
-   * 域名
-   */
-  Hosts?: Array<string>
-  /**
-   * 路由对应服务的名字
-   */
-  ServiceName?: string
-  /**
-   * 路由对应服务的ID
-   */
-  ServiceId?: string
+  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
 }
 
 /**
@@ -4249,6 +4386,44 @@ export interface UpdateCloudNativeAPIGatewayResult {
    * 任务ID
    */
   TaskId?: string
+}
+
+/**
+ * 路由 WAF 状态
+ */
+export interface RouteWafStatus {
+  /**
+   * 路由的名字
+   */
+  Name?: string
+  /**
+   * 路由的 ID
+   */
+  Id?: string
+  /**
+   *  路由是否开启 WAF 防护
+   */
+  Status?: string
+  /**
+   * 方法
+   */
+  Methods?: Array<string>
+  /**
+   * 路径
+   */
+  Paths?: Array<string>
+  /**
+   * 域名
+   */
+  Hosts?: Array<string>
+  /**
+   * 路由对应服务的名字
+   */
+  ServiceName?: string
+  /**
+   * 路由对应服务的ID
+   */
+  ServiceId?: string
 }
 
 /**
@@ -4678,6 +4853,16 @@ export interface GovernanceNamespace {
  * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayIPRestriction返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayIPRestrictionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5435,6 +5620,21 @@ export interface DeleteGovernanceInstancesByHostRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayIPRestriction返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayIPRestrictionResponse {
+  /**
+   * 出参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribeKongIpRestrictionResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
@@ -5626,6 +5826,36 @@ export interface CertificateInfo {
    * 唯一id
    */
   Id?: string
+}
+
+/**
+ * CreateOrModifyCloudNativeAPIGatewayIPRestriction请求参数结构体
+ */
+export interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 访问控制插件绑定的资源类型：route|service
+   */
+  SourceType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
+  /**
+   * 是否启用插件
+   */
+  Enabled: boolean
+  /**
+   * 访问控制类型：whiteList｜blackList
+   */
+  RestrictionType: string
+  /**
+   * cidr｜ip
+   */
+  AddressList: Array<string>
 }
 
 /**
@@ -6515,6 +6745,24 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayIPRestriction请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 访问控制插件绑定的资源类型：route|service
+   */
+  SourceType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
+}
+
+/**
  * CreateGovernanceAlias返回参数结构体
  */
 export interface CreateGovernanceAliasResponse {
@@ -6899,6 +7147,16 @@ export interface DescribeCloudNativeAPIGatewayUpstreamResponse {
    * 无
    */
   Result?: KongUpstreamList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateOrModifyCloudNativeAPIGatewayIPRestriction返回参数结构体
+ */
+export interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7334,6 +7592,37 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
+ * 查询云原生网关访问控制配置出参
+ */
+export interface DescribeKongIpRestrictionResult {
+  /**
+   * 访问控制插件绑定的资源类型：route | service
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: string
+  /**
+   * 路由或服务的id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceId?: string
+  /**
+   * 是否启用插件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * 访问控制类型：whiteList｜blackList
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestrictionType?: string
+  /**
+   * cidr｜ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressList?: Array<string>
+}
+
+/**
  * DescribePublicNetwork返回参数结构体
  */
 export interface DescribePublicNetworkResponse {
@@ -7574,169 +7863,17 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
 }
 
 /**
- * 微服务注册引擎实例
+ * DeleteCloudNativeAPIGatewayCertificate请求参数结构体
  */
-export interface SREInstance {
+export interface DeleteCloudNativeAPIGatewayCertificateRequest {
   /**
-   * 实例ID
+   * 网关ID
    */
-  InstanceId?: string
+  GatewayId: string
   /**
-   * 名称
+   * 证书Id
    */
-  Name?: string
-  /**
-   * 版本号
-   */
-  Edition?: string
-  /**
-   * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
-   */
-  Status?: string
-  /**
-   * 规格ID
-   */
-  SpecId?: string
-  /**
-   * 副本数
-   */
-  Replica?: number
-  /**
-   * 类型
-   */
-  Type?: string
-  /**
-   * Vpc iD
-   */
-  VpcId?: string
-  /**
-   * 子网ID
-   */
-  SubnetIds?: Array<string>
-  /**
-   * 是否开启持久化存储
-   */
-  EnableStorage?: boolean
-  /**
-   * 数据存储方式
-   */
-  StorageType?: string
-  /**
-   * 云硬盘容量
-   */
-  StorageCapacity?: number
-  /**
-   * 计费方式
-   */
-  Paymode?: string
-  /**
-   * EKS集群的ID
-   */
-  EKSClusterID?: string
-  /**
-   * 集群创建时间
-   */
-  CreateTime?: string
-  /**
-   * 环境配置信息列表
-   */
-  EnvInfos?: Array<EnvInfo>
-  /**
-   * 引擎所在的区域
-   */
-  EngineRegion?: string
-  /**
-   * 注册引擎是否开启公网
-   */
-  EnableInternet?: boolean
-  /**
-   * 私有网络列表信息
-   */
-  VpcInfos?: Array<VpcInfo>
-  /**
-   * 服务治理相关信息列表
-   */
-  ServiceGovernanceInfos?: Array<ServiceGovernanceInfo>
-  /**
-   * 实例的标签信息
-   */
-  Tags?: Array<KVPair>
-  /**
-   * 引擎实例是否开启控制台公网访问地址
-   */
-  EnableConsoleInternet?: boolean
-  /**
-   * 引擎实例是否开启控制台内网访问地址
-   */
-  EnableConsoleIntranet?: boolean
-  /**
-   * 引擎实例是否展示参数配置页面
-   */
-  ConfigInfoVisible?: boolean
-  /**
-   * 引擎实例控制台默认密码
-   */
-  ConsoleDefaultPwd?: string
-  /**
-   * 交易付费类型，0后付费/1预付费
-   */
-  TradeType?: number
-  /**
-   * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
-   */
-  AutoRenewFlag?: number
-  /**
-   * 预付费到期时间
-   */
-  CurDeadline?: string
-  /**
-   * 隔离开始时间
-   */
-  IsolateTime?: string
-  /**
-   * 实例地域相关的描述信息
-   */
-  RegionInfos?: Array<DescribeInstanceRegionInfo>
-  /**
-   * 所在EKS环境，分为common和yunti
-   */
-  EKSType?: string
-  /**
-   * 引擎的产品版本
-   */
-  FeatureVersion?: string
-  /**
-   * 引擎实例是否开启客户端内网访问地址
-   */
-  EnableClientIntranet?: boolean
-  /**
-   * 存储额外配置选项
-   */
-  StorageOption?: Array<StorageOption>
-  /**
-   * Zookeeper的额外环境数据信息
-   */
-  ZookeeperRegionInfo?: ZookeeperRegionInfo
-  /**
-   * 部署架构
-   */
-  DeployMode?: string
-  /**
-   * 全局属性
-   */
-  GlobalType?: string
-  /**
-   * 所属组类型
-   */
-  GroupType?: string
-  /**
-   * 组id
-   */
-  GroupId?: Array<string>
-  /**
-   * 是否为主地域
-   */
-  IsMainRegion?: boolean
+  Id: string
 }
 
 /**

@@ -111,6 +111,7 @@ import {
   ModifyNamespaceResponse,
   ModifyLaneRuleRequest,
   AddInstancesResponse,
+  VmGroup,
   DescribeResourceConfigResponse,
   StartContainerGroupRequest,
   DescribeRepositoryResponse,
@@ -152,6 +153,7 @@ import {
   DescribePkgsResponse,
   ConfigMapOption,
   DeleteImageTag,
+  ModifyGroupLaneRequest,
   DescribeContainerGroupDeployInfoResponse,
   DescribeOverviewInvocationRequest,
   TaskLastExecuteStatus,
@@ -384,7 +386,7 @@ import {
   CreateUnitRuleResponse,
   CreateUnitNamespacesRequest,
   DescribeTaskRecordsResponse,
-  VmGroup,
+  ModifyGroupLaneResponse,
   DescribeApiUseDetailResponse,
   ServiceSetting,
   ModifyUploadInfoRequest,
@@ -1372,6 +1374,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateApiRateLimitRuleResponse) => void
   ): Promise<CreateApiRateLimitRuleResponse> {
     return this.request("CreateApiRateLimitRule", req, cb)
+  }
+
+  /**
+   * 更新部署组泳道信息
+   */
+  async ModifyGroupLane(
+    req: ModifyGroupLaneRequest,
+    cb?: (error: string, rep: ModifyGroupLaneResponse) => void
+  ): Promise<ModifyGroupLaneResponse> {
+    return this.request("ModifyGroupLane", req, cb)
   }
 
   /**

@@ -16,17 +16,22 @@
  */
 
 /**
- * SubmitHunyuanTo3DRapidJob返回参数结构体
+ * 多视角图片
  */
-export interface SubmitHunyuanTo3DRapidJobResponse {
+export interface ViewImage {
   /**
-   * 任务ID（有效期24小时）
+   * 视角类型。
+取值：back、left、right
    */
-  JobId?: string
+  ViewType?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 图片Url地址
    */
-  RequestId?: string
+  ViewImageUrl?: string
+  /**
+   * 图片base64地址
+   */
+  ViewImageBase64?: string
 }
 
 /**
@@ -77,30 +82,6 @@ export interface SubmitHunyuanTo3DProJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * SubmitHunyuanTo3DJob返回参数结构体
- */
-export interface SubmitHunyuanTo3DJobResponse {
-  /**
-   * 任务ID（有效期24小时）
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * QueryHunyuanTo3DJob请求参数结构体
- */
-export interface QueryHunyuanTo3DJobRequest {
-  /**
-   * 任务ID。
-   */
-  JobId?: string
 }
 
 /**
@@ -221,25 +202,6 @@ export interface QueryHunyuanTo3DRapidJobResponse {
 }
 
 /**
- * 多视角图片
- */
-export interface ViewImage {
-  /**
-   * 视角类型。
-取值：back、left、right
-   */
-  ViewType?: string
-  /**
-   * 图片Url地址
-   */
-  ViewImageUrl?: string
-  /**
-   * 图片base64地址
-   */
-  ViewImageBase64?: string
-}
-
-/**
  * QueryHunyuanTo3DProJob返回参数结构体
  */
 export interface QueryHunyuanTo3DProJobResponse {
@@ -266,51 +228,17 @@ export interface QueryHunyuanTo3DProJobResponse {
 }
 
 /**
- * SubmitHunyuanTo3DJob请求参数结构体
+ * SubmitHunyuanTo3DRapidJob返回参数结构体
  */
-export interface SubmitHunyuanTo3DJobRequest {
+export interface SubmitHunyuanTo3DRapidJobResponse {
   /**
-   * 文生3D，3D内容的描述，中文正向提示词。
-最多支持1024个 utf-8 字符。
-文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。
+   * 任务ID（有效期24小时）
    */
-  Prompt?: string
+  JobId?: string
   /**
-   * 输入图 Base64 数据。
-大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）
-格式：jpg，png，jpeg，webp。
-ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageBase64?: string
-  /**
-   * 输入图Url。
-大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）
-格式：jpg，png，jpeg，webp。
-ImageBase64/ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。
-   */
-  ImageUrl?: string
-  /**
-   * 多视角的模型图片，视角参考值：
-left：左视图；
-right：右视图；
-back：后视图；
-
-每个视角仅限制一张图片。
-●图片大小限制：编码后大小不可超过8M。
-●图片分辨率限制：单边分辨率小于5000且大于128。
-●支持图片格式：支持jpg或png
-   */
-  MultiViewImages?: Array<ViewImage>
-  /**
-   * 生成模型的格式，仅限制生成一种格式。
-生成模型文件组默认返回obj格式。
-可选值：OBJ，GLB，STL，USDZ，FBX，MP4。
-   */
-  ResultFormat?: string
-  /**
-   * 是否开启 PBR材质生成，默认 false。
-   */
-  EnablePBR?: boolean
+  RequestId?: string
 }
 
 /**
@@ -321,30 +249,4 @@ export interface QueryHunyuanTo3DRapidJobRequest {
    * 任务ID。
    */
   JobId?: string
-}
-
-/**
- * QueryHunyuanTo3DJob返回参数结构体
- */
-export interface QueryHunyuanTo3DJobResponse {
-  /**
-   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
-   */
-  Status?: string
-  /**
-   * 错误码
-   */
-  ErrorCode?: string
-  /**
-   * 错误信息
-   */
-  ErrorMessage?: string
-  /**
-   * 生成的3D文件数组。
-   */
-  ResultFile3Ds?: Array<File3D>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }

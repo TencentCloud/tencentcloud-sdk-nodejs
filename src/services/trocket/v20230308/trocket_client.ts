@@ -166,6 +166,7 @@ import {
   DescribeMQTTTopicListResponse,
   MQTTUserItem,
   ModifyInstanceEndpointRequest,
+  ZoneScheduledItem,
   ChangeMigratingTopicToNextStageRequest,
   DescribeMQTTUserListRequest,
   ModifyMQTTInstanceRequest,

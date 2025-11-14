@@ -503,6 +503,20 @@ export interface ChatCompletionsResponse {
 }
 
 /**
+ * 当type为video_url时使用，标识具体的视频链接内容
+ */
+export interface VideoUrl {
+  /**
+   * 视频的url，如"https://your-video-path.mp/4"
+   */
+  Url?: string
+  /**
+   * 控制视频抽帧频率，取值范围为 0.1 ~5，表示每隔 1/fps 秒抽取一帧，默认为 1s抽取一帧
+   */
+  Fps?: number
+}
+
+/**
  * GetThreadMessageList请求参数结构体
  */
 export interface GetThreadMessageListRequest {
@@ -1942,7 +1956,7 @@ export interface Content {
    * 内容类型
 注意：
 需包含至少一个 Type 为"text"的参数。
-参数值可选范围：[text", "image_url"]
+参数值可选范围：[text", "image_url","video_url"]
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
@@ -1957,6 +1971,16 @@ export interface Content {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageUrl?: ImageUrl
+  /**
+   * 当type为video_url时使用，标识具体的视频链接内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoUrl?: VideoUrl
+  /**
+   * 当type为video_frames时使用，标识具体的视频内图像帧内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoFrames?: VideoFrames
 }
 
 /**
@@ -2031,6 +2055,16 @@ export interface ImageQuestionRequest {
 通过 SDK 调用时，流式和非流式调用需用**不同的方式**获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。
    */
   Stream?: boolean
+}
+
+/**
+ * 当type为video_frames时使用，标识具体的视频内图像帧内容
+ */
+export interface VideoFrames {
+  /**
+   * 视频图像帧列表，图像帧传url
+   */
+  Frames?: Array<string>
 }
 
 /**

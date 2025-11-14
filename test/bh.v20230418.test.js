@@ -18,79 +18,9 @@ const client = new tencentcloud.bh.v20230418.Client({
 })
 describe("bh.v20230418.test.js", function () {
 
-it("bh.v20230418.DescribeOperationEvent", async function () {
+it("bh.v20230418.DeleteDeviceAccounts", async function () {
     try {
-       const data = await client.DescribeOperationEvent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeAssetSyncStatus", async function () {
-    try {
-       const data = await client.DescribeAssetSyncStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ModifyOAuthSetting", async function () {
-    try {
-       const data = await client.ModifyOAuthSetting({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteAccessWhiteListRules", async function () {
-    try {
-       const data = await client.DeleteAccessWhiteListRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeLoginEvent", async function () {
-    try {
-       const data = await client.DescribeLoginEvent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CreateDeviceGroup", async function () {
-    try {
-       const data = await client.CreateDeviceGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeDeviceAccounts", async function () {
-    try {
-       const data = await client.DescribeDeviceAccounts({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CheckLDAPConnection", async function () {
-    try {
-       const data = await client.CheckLDAPConnection({})
+       const data = await client.DeleteDeviceAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,39 +38,9 @@ it("bh.v20230418.ResetUser", async function () {
     }
 })
 
-it("bh.v20230418.CreateOperationTask", async function () {
+it("bh.v20230418.DescribeOperationTask", async function () {
     try {
-       const data = await client.CreateOperationTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CreateChangePwdTask", async function () {
-    try {
-       const data = await client.CreateChangePwdTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.SetLDAPSyncFlag", async function () {
-    try {
-       const data = await client.SetLDAPSyncFlag({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeUserGroups", async function () {
-    try {
-       const data = await client.DescribeUserGroups({})
+       const data = await client.DescribeOperationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +51,226 @@ it("bh.v20230418.DescribeUserGroups", async function () {
 it("bh.v20230418.DescribeDomains", async function () {
     try {
        const data = await client.DescribeDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ImportExternalDevice", async function () {
+    try {
+       const data = await client.ImportExternalDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeLoginEvent", async function () {
+    try {
+       const data = await client.DescribeLoginEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateAssetSyncJob", async function () {
+    try {
+       const data = await client.CreateAssetSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchSubtaskResultById", async function () {
+    try {
+       const data = await client.SearchSubtaskResultById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyAcl", async function () {
+    try {
+       const data = await client.ModifyAcl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteUsers", async function () {
+    try {
+       const data = await client.DeleteUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeAssetSyncFlag", async function () {
+    try {
+       const data = await client.DescribeAssetSyncFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeAccessWhiteListRules", async function () {
+    try {
+       const data = await client.DescribeAccessWhiteListRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeAssetSyncStatus", async function () {
+    try {
+       const data = await client.DescribeAssetSyncStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeOperationEvent", async function () {
+    try {
+       const data = await client.DescribeOperationEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteCmdTemplates", async function () {
+    try {
+       const data = await client.DeleteCmdTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyAccessWhiteListStatus", async function () {
+    try {
+       const data = await client.ModifyAccessWhiteListStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeChangePwdTask", async function () {
+    try {
+       const data = await client.DescribeChangePwdTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchFile", async function () {
+    try {
+       const data = await client.SearchFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateUserGroup", async function () {
+    try {
+       const data = await client.CreateUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateUser", async function () {
+    try {
+       const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchTaskResult", async function () {
+    try {
+       const data = await client.SearchTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchCommand", async function () {
+    try {
+       const data = await client.SearchCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateAcl", async function () {
+    try {
+       const data = await client.CreateAcl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateDeviceGroup", async function () {
+    try {
+       const data = await client.CreateDeviceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CheckLDAPConnection", async function () {
+    try {
+       const data = await client.CheckLDAPConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeUserGroups", async function () {
+    try {
+       const data = await client.DescribeUserGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,46 +308,6 @@ it("bh.v20230418.BindDeviceResource", async function () {
     }
 })
 
-it("bh.v20230418.BindDeviceAccountPassword", async function () {
-    try {
-       const data = await client.BindDeviceAccountPassword({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeLDAPUnitSet", async function () {
-    try {
-       const data = await client.DescribeLDAPUnitSet({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ModifyCmdTemplate", async function () {
-    try {
-       const data = await client.ModifyCmdTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.SearchFile", async function () {
-    try {
-       const data = await client.SearchFile({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("bh.v20230418.SearchSession", async function () {
     try {
        const data = await client.SearchSession({})
@@ -238,9 +318,9 @@ it("bh.v20230418.SearchSession", async function () {
     }
 })
 
-it("bh.v20230418.DeleteAcls", async function () {
+it("bh.v20230418.DescribeSecuritySetting", async function () {
     try {
-       const data = await client.DeleteAcls({})
+       const data = await client.DescribeSecuritySetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +348,9 @@ it("bh.v20230418.DescribeResources", async function () {
     }
 })
 
-it("bh.v20230418.DeleteUserGroupMembers", async function () {
+it("bh.v20230418.EnableExternalAccess", async function () {
     try {
-       const data = await client.DeleteUserGroupMembers({})
+       const data = await client.EnableExternalAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,109 +358,9 @@ it("bh.v20230418.DeleteUserGroupMembers", async function () {
     }
 })
 
-it("bh.v20230418.ModifyChangePwdTask", async function () {
+it("bh.v20230418.DisableExternalAccess", async function () {
     try {
-       const data = await client.ModifyChangePwdTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CreateAssetSyncJob", async function () {
-    try {
-       const data = await client.CreateAssetSyncJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeAcls", async function () {
-    try {
-       const data = await client.DescribeAcls({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.RunChangePwdTask", async function () {
-    try {
-       const data = await client.RunChangePwdTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ResetDeviceAccountPassword", async function () {
-    try {
-       const data = await client.ResetDeviceAccountPassword({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ModifyUserGroup", async function () {
-    try {
-       const data = await client.ModifyUserGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteDeviceGroups", async function () {
-    try {
-       const data = await client.DeleteDeviceGroups({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteOperationTasks", async function () {
-    try {
-       const data = await client.DeleteOperationTasks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ModifyAcl", async function () {
-    try {
-       const data = await client.ModifyAcl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteUsers", async function () {
-    try {
-       const data = await client.DeleteUsers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CreateAcl", async function () {
-    try {
-       const data = await client.CreateAcl({})
+       const data = await client.DisableExternalAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +378,9 @@ it("bh.v20230418.SearchCommandBySid", async function () {
     }
 })
 
-it("bh.v20230418.UnlockUser", async function () {
+it("bh.v20230418.ModifyCmdTemplate", async function () {
     try {
-       const data = await client.UnlockUser({})
+       const data = await client.ModifyCmdTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +388,19 @@ it("bh.v20230418.UnlockUser", async function () {
     }
 })
 
-it("bh.v20230418.SearchFileBySid", async function () {
+it("bh.v20230418.CreateCmdTemplate", async function () {
     try {
-       const data = await client.SearchFileBySid({})
+       const data = await client.CreateCmdTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ReplaySession", async function () {
+    try {
+       const data = await client.ReplaySession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +418,129 @@ it("bh.v20230418.ResetDeviceAccountPrivateKey", async function () {
     }
 })
 
-it("bh.v20230418.CreateAccessWhiteListRule", async function () {
+it("bh.v20230418.SearchAuditLog", async function () {
     try {
-       const data = await client.CreateAccessWhiteListRule({})
+       const data = await client.SearchAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyAuthModeSetting", async function () {
+    try {
+       const data = await client.ModifyAuthModeSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchSessionCommand", async function () {
+    try {
+       const data = await client.SearchSessionCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyDeviceGroup", async function () {
+    try {
+       const data = await client.ModifyDeviceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyOAuthSetting", async function () {
+    try {
+       const data = await client.ModifyOAuthSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteUserGroupMembers", async function () {
+    try {
+       const data = await client.DeleteUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateOperationTask", async function () {
+    try {
+       const data = await client.CreateOperationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.AddUserGroupMembers", async function () {
+    try {
+       const data = await client.AddUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SetLDAPSyncFlag", async function () {
+    try {
+       const data = await client.SetLDAPSyncFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.BindDeviceAccountPassword", async function () {
+    try {
+       const data = await client.BindDeviceAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeLDAPUnitSet", async function () {
+    try {
+       const data = await client.DescribeLDAPUnitSet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteAcls", async function () {
+    try {
+       const data = await client.DeleteAcls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyUserGroup", async function () {
+    try {
+       const data = await client.ModifyUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,49 +558,9 @@ it("bh.v20230418.CreateDeviceAccount", async function () {
     }
 })
 
-it("bh.v20230418.DescribeAccessWhiteListRules", async function () {
-    try {
-       const data = await client.DescribeAccessWhiteListRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeChangePwdTaskDetail", async function () {
-    try {
-       const data = await client.DescribeChangePwdTaskDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteDeviceGroupMembers", async function () {
-    try {
-       const data = await client.DeleteDeviceGroupMembers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("bh.v20230418.DeleteChangePwdTask", async function () {
     try {
        const data = await client.DeleteChangePwdTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteDevices", async function () {
-    try {
-       const data = await client.DeleteDevices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,19 +578,9 @@ it("bh.v20230418.ModifyOperationTask", async function () {
     }
 })
 
-it("bh.v20230418.ModifyLDAPSetting", async function () {
+it("bh.v20230418.DescribeDeviceAccounts", async function () {
     try {
-       const data = await client.ModifyLDAPSetting({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DeleteDeviceAccounts", async function () {
-    try {
-       const data = await client.DeleteDeviceAccounts({})
+       const data = await client.DescribeDeviceAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +608,229 @@ it("bh.v20230418.RunOperationTask", async function () {
     }
 })
 
-it("bh.v20230418.CreateCmdTemplate", async function () {
+it("bh.v20230418.EnableIntranetAccess", async function () {
     try {
-       const data = await client.CreateCmdTemplate({})
+       const data = await client.EnableIntranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeUsers", async function () {
+    try {
+       const data = await client.DescribeUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeUserGroupMembers", async function () {
+    try {
+       const data = await client.DescribeUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.UnlockUser", async function () {
+    try {
+       const data = await client.UnlockUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SearchFileBySid", async function () {
+    try {
+       const data = await client.SearchFileBySid({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyAccessWhiteListAutoStatus", async function () {
+    try {
+       const data = await client.ModifyAccessWhiteListAutoStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeChangePwdTaskDetail", async function () {
+    try {
+       const data = await client.DescribeChangePwdTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyReconnectionSetting", async function () {
+    try {
+       const data = await client.ModifyReconnectionSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeDeviceGroupMembers", async function () {
+    try {
+       const data = await client.DescribeDeviceGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DisableIntranetAccess", async function () {
+    try {
+       const data = await client.DisableIntranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyAccessWhiteListRule", async function () {
+    try {
+       const data = await client.ModifyAccessWhiteListRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteOperationTasks", async function () {
+    try {
+       const data = await client.DeleteOperationTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteDevices", async function () {
+    try {
+       const data = await client.DeleteDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateChangePwdTask", async function () {
+    try {
+       const data = await client.CreateChangePwdTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyChangePwdTask", async function () {
+    try {
+       const data = await client.ModifyChangePwdTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.RunChangePwdTask", async function () {
+    try {
+       const data = await client.RunChangePwdTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ResetDeviceAccountPassword", async function () {
+    try {
+       const data = await client.ResetDeviceAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteDeviceGroups", async function () {
+    try {
+       const data = await client.DeleteDeviceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteAccessWhiteListRules", async function () {
+    try {
+       const data = await client.DeleteAccessWhiteListRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateResource", async function () {
+    try {
+       const data = await client.CreateResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateAccessWhiteListRule", async function () {
+    try {
+       const data = await client.CreateAccessWhiteListRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeAcls", async function () {
+    try {
+       const data = await client.DescribeAcls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.ModifyLDAPSetting", async function () {
+    try {
+       const data = await client.ModifyLDAPSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,19 +848,9 @@ it("bh.v20230418.ModifyResource", async function () {
     }
 })
 
-it("bh.v20230418.SearchAuditLog", async function () {
+it("bh.v20230418.ModifyAssetSyncFlag", async function () {
     try {
-       const data = await client.SearchAuditLog({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeOperationTask", async function () {
-    try {
-       const data = await client.DescribeOperationTask({})
+       const data = await client.ModifyAssetSyncFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,19 +878,9 @@ it("bh.v20230418.DescribeCmdTemplates", async function () {
     }
 })
 
-it("bh.v20230418.DeleteCmdTemplates", async function () {
+it("bh.v20230418.DeleteDeviceGroupMembers", async function () {
     try {
-       const data = await client.DeleteCmdTemplates({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.AddUserGroupMembers", async function () {
-    try {
-       const data = await client.AddUserGroupMembers({})
+       const data = await client.DeleteDeviceGroupMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,79 +898,9 @@ it("bh.v20230418.DescribeDeviceGroups", async function () {
     }
 })
 
-it("bh.v20230418.DescribeUsers", async function () {
-    try {
-       const data = await client.DescribeUsers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("bh.v20230418.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeUserGroupMembers", async function () {
-    try {
-       const data = await client.DescribeUserGroupMembers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ReplaySession", async function () {
-    try {
-       const data = await client.ReplaySession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.SearchSubtaskResultById", async function () {
-    try {
-       const data = await client.SearchSubtaskResultById({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeDeviceGroupMembers", async function () {
-    try {
-       const data = await client.DescribeDeviceGroupMembers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ImportExternalDevice", async function () {
-    try {
-       const data = await client.ImportExternalDevice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.DescribeChangePwdTask", async function () {
-    try {
-       const data = await client.DescribeChangePwdTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,79 +918,9 @@ it("bh.v20230418.AddDeviceGroupMembers", async function () {
     }
 })
 
-it("bh.v20230418.CreateUserGroup", async function () {
-    try {
-       const data = await client.CreateUserGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CreateResource", async function () {
-    try {
-       const data = await client.CreateResource({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.CreateUser", async function () {
-    try {
-       const data = await client.CreateUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.SearchTaskResult", async function () {
-    try {
-       const data = await client.SearchTaskResult({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("bh.v20230418.BindDeviceAccountPrivateKey", async function () {
     try {
        const data = await client.BindDeviceAccountPrivateKey({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.ModifyDeviceGroup", async function () {
-    try {
-       const data = await client.ModifyDeviceGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.SearchCommand", async function () {
-    try {
-       const data = await client.SearchCommand({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("bh.v20230418.SearchSessionCommand", async function () {
-    try {
-       const data = await client.SearchSessionCommand({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -44,6 +44,16 @@ export interface DescribeOperationTaskResponse {
 }
 
 /**
+ * ModifyAccessWhiteListStatus返回参数结构体
+ */
+export interface ModifyAccessWhiteListStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 认证信息
  */
 export interface AccessInfo {
@@ -114,77 +124,13 @@ export interface ModifyOperationTaskResponse {
 }
 
 /**
- * SearchSession请求参数结构体
+ * DisableIntranetAccess返回参数结构体
  */
-export interface SearchSessionRequest {
+export interface DisableIntranetAccessResponse {
   /**
-   * 内部Ip
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PrivateIp?: string
-  /**
-   * 外部Ip
-   */
-  PublicIp?: string
-  /**
-   * 用户名，长度不超过20
-   */
-  UserName?: string
-  /**
-   * 账号，长度不超过64
-   */
-  Account?: string
-  /**
-   * 来源Ip
-   */
-  FromIp?: string
-  /**
-   * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
-   */
-  StartTime?: string
-  /**
-   * 搜索区间的结束时间
-   */
-  EndTime?: string
-  /**
-   * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
-   */
-  Kind?: number
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 分页的页内记录数，默认为20，最大200
-   */
-  Limit?: number
-  /**
-   * 姓名，长度不超过20
-   */
-  RealName?: string
-  /**
-   * 主机名，长度不超过64
-   */
-  DeviceName?: string
-  /**
-   * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
-   */
-  Status?: number
-  /**
-   * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
-   */
-  Id?: string
-  /**
-   * 应用资产类型, 1-web
-   */
-  AppAssetKindSet?: Array<number | bigint>
-  /**
-   * 应用资产Url
-   */
-  AppAssetUrl?: string
-  /**
-   * 资产类型
-   */
-  DeviceKind?: string
+  RequestId?: string
 }
 
 /**
@@ -408,9 +354,17 @@ export interface DescribeLoginEventRequest {
    */
   Entry?: number
   /**
+   * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
+   */
+  EntrySet?: Array<number | bigint>
+  /**
    * 操作结果，1-成功，2-失败
    */
   Result?: number
+  /**
+   * 操作结果，1-成功，2-失败
+   */
+  ResultSet?: Array<number | bigint>
   /**
    * 分页偏移位置，默认值为0
    */
@@ -596,6 +550,16 @@ export interface CreateResourceRequest {
 }
 
 /**
+ * ModifyAssetSyncFlag请求参数结构体
+ */
+export interface ModifyAssetSyncFlagRequest {
+  /**
+   * 是否开启资产自动同步，false-不开启，true-开启
+   */
+  AutoSync: boolean
+}
+
+/**
  * DescribeDevices返回参数结构体
  */
 export interface DescribeDevicesResponse {
@@ -638,6 +602,16 @@ export interface CreateAccessWhiteListRuleResponse {
 }
 
 /**
+ * DisableExternalAccess返回参数结构体
+ */
+export interface DisableExternalAccessResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUserGroupMembers请求参数结构体
  */
 export interface DeleteUserGroupMembersRequest {
@@ -670,6 +644,16 @@ export interface RunChangePwdTaskRequest {
 }
 
 /**
+ * ModifyAssetSyncFlag返回参数结构体
+ */
+export interface ModifyAssetSyncFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeChangePwdTaskDetail返回参数结构体
  */
 export interface DescribeChangePwdTaskDetailResponse {
@@ -691,6 +675,16 @@ export interface DescribeChangePwdTaskDetailResponse {
  * DeleteUserGroups返回参数结构体
  */
 export interface DeleteUserGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccessWhiteListAutoStatus返回参数结构体
+ */
+export interface ModifyAccessWhiteListAutoStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -779,6 +773,16 @@ export interface SearchFileRequest {
    * 分页偏移位置，默认值为0
    */
   Offset?: number
+}
+
+/**
+ * ModifyAccessWhiteListRule返回参数结构体
+ */
+export interface ModifyAccessWhiteListRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -962,6 +966,10 @@ export interface ImportExternalDeviceRequest {
    * 资产参数列表
    */
   DeviceSet: Array<ExternalDevice>
+  /**
+   *  资产所属云账号id
+   */
+  AccountId?: number
 }
 
 /**
@@ -1021,9 +1029,24 @@ export interface SetLDAPSyncFlagResponse {
 }
 
 /**
+ * DescribeSecuritySetting请求参数结构体
+ */
+export type DescribeSecuritySettingRequest = null
+
+/**
  * DeleteUserGroupMembers返回参数结构体
  */
 export interface DeleteUserGroupMembersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyReconnectionSetting返回参数结构体
+ */
+export interface ModifyReconnectionSettingResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1215,6 +1238,20 @@ export interface SearchSubtaskResultByIdResponse {
 }
 
 /**
+ * 立即执行改密任务的入参
+ */
+export interface RunChangePwdTaskDetail {
+  /**
+   * 资产id
+   */
+  DeviceId: number
+  /**
+   * 资产账号
+   */
+  Account: string
+}
+
+/**
  * ModifyOAuthSetting请求参数结构体
  */
 export interface ModifyOAuthSettingRequest {
@@ -1281,6 +1318,16 @@ export interface SearchFileTypeFilter {
 }
 
 /**
+ * DisableIntranetAccess请求参数结构体
+ */
+export interface DisableIntranetAccessRequest {
+  /**
+   * 堡垒机id
+   */
+  ResourceId?: string
+}
+
+/**
  * ReplaySession请求参数结构体
  */
 export interface ReplaySessionRequest {
@@ -1288,6 +1335,16 @@ export interface ReplaySessionRequest {
    * 会话Sid
    */
   Sid: string
+}
+
+/**
+ * ModifyAuthModeSetting返回参数结构体
+ */
+export interface ModifyAuthModeSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1545,6 +1602,30 @@ export interface DescribeAccessWhiteListRulesRequest {
    * 每页条目数量，默认20
    */
   Limit?: number
+}
+
+/**
+ * ImportExternalDevice返回参数结构体
+ */
+export interface ImportExternalDeviceResponse {
+  /**
+   * 资产ID列表
+   */
+  DeviceIdSet?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccessWhiteListAutoStatus请求参数结构体
+ */
+export interface ModifyAccessWhiteListAutoStatusRequest {
+  /**
+   * true：放开自动添加IP；false：不放开自动添加IP
+   */
+  AllowAuto: boolean
 }
 
 /**
@@ -1896,17 +1977,13 @@ export interface CreateDeviceGroupRequest {
 }
 
 /**
- * 立即执行改密任务的入参
+ * DisableExternalAccess请求参数结构体
  */
-export interface RunChangePwdTaskDetail {
+export interface DisableExternalAccessRequest {
   /**
-   * 资产id
+   * 堡垒机id
    */
-  DeviceId: number
-  /**
-   * 资产账号
-   */
-  Account: string
+  ResourceId: string
 }
 
 /**
@@ -2613,21 +2690,27 @@ export interface DeployResourceRequest {
 }
 
 /**
- * SearchSession返回参数结构体
+ * EnableExternalAccess返回参数结构体
  */
-export interface SearchSessionResponse {
-  /**
-   * 记录数
-   */
-  TotalCount?: number
-  /**
-   * 会话信息列表
-   */
-  SessionSet?: Array<SessionResult>
+export interface EnableExternalAccessResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资产同步标志
+ */
+export interface AssetSyncFlags {
+  /**
+   * 是否已完成角色授权
+   */
+  RoleGranted?: boolean
+  /**
+   * 是否已开启自动资产同步
+   */
+  AutoSync?: boolean
 }
 
 /**
@@ -3166,17 +3249,31 @@ export interface DescribeUserGroupMembersResponse {
 }
 
 /**
- * ImportExternalDevice返回参数结构体
+ * DescribeSecuritySetting返回参数结构体
  */
-export interface ImportExternalDeviceResponse {
-  /**
-   * 资产ID列表
-   */
-  DeviceIdSet?: Array<number | bigint>
+export interface DescribeSecuritySettingResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyAccessWhiteListRule请求参数结构体
+ */
+export interface ModifyAccessWhiteListRuleRequest {
+  /**
+   * 白名单规则ID
+   */
+  Id: number
+  /**
+   * ip或网段信息，如10.10.10.1或10.10.10.0/24，最大长度40字节
+   */
+  Source: string
+  /**
+   * 备注信息，最大长度64字符。
+   */
+  Remark?: string
 }
 
 /**
@@ -3372,6 +3469,10 @@ export interface Device {
    */
   ApCode?: string
   /**
+   * 地域名称
+   */
+  ApName?: string
+  /**
    * 操作系统名称
    */
   OsName?: string
@@ -3455,6 +3556,26 @@ export interface Device {
    * K8S集群pod总数量
    */
   TotalPodCount?: number
+  /**
+   * 云账号id
+   */
+  CloudAccountId?: number
+  /**
+   * 云账号名称
+   */
+  CloudAccountName?: string
+  /**
+   * 云厂商类型1-腾讯云，2-阿里云
+   */
+  ProviderType?: number
+  /**
+   * 云厂商名称
+   */
+  ProviderName?: string
+  /**
+   * 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期
+   */
+  SyncCloudDeviceStatus?: number
 }
 
 /**
@@ -3521,6 +3642,112 @@ export interface ExternalDevice {
    * SSL证书名称，EnableSSL时必填
    */
   SSLCertName?: string
+  /**
+   * 资产实例id
+   */
+  InstanceId?: string
+  /**
+   * 资产所属地域
+   */
+  ApCode?: string
+  /**
+   * 地域名称
+   */
+  ApName?: string
+  /**
+   * 资产所属VPC
+   */
+  VpcId?: string
+  /**
+   * 资产所属子网
+   */
+  SubnetId?: string
+  /**
+   * 公网IP
+   */
+  PublicIp?: string
+}
+
+/**
+ * SearchSession请求参数结构体
+ */
+export interface SearchSessionRequest {
+  /**
+   * 内部Ip
+   */
+  PrivateIp?: string
+  /**
+   * 外部Ip
+   */
+  PublicIp?: string
+  /**
+   * 用户名，长度不超过20
+   */
+  UserName?: string
+  /**
+   * 账号，长度不超过64
+   */
+  Account?: string
+  /**
+   * 来源Ip
+   */
+  FromIp?: string
+  /**
+   * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
+   */
+  StartTime?: string
+  /**
+   * 搜索区间的结束时间
+   */
+  EndTime?: string
+  /**
+   * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
+   */
+  Kind?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 分页的页内记录数，默认为20，最大200
+   */
+  Limit?: number
+  /**
+   * 姓名，长度不超过20
+   */
+  RealName?: string
+  /**
+   * 主机名，长度不超过64
+   */
+  DeviceName?: string
+  /**
+   * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
+   */
+  Status?: number
+  /**
+   * 状态，1为活跃，2为结束，3为强制离线
+   */
+  StatusSet?: Array<number | bigint>
+  /**
+   * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
+   */
+  Id?: string
+  /**
+   * 应用资产类型, 1-web
+   */
+  AppAssetKindSet?: Array<number | bigint>
+  /**
+   * 应用资产Url
+   */
+  AppAssetUrl?: string
+  /**
+   * 资产类型
+   */
+  DeviceKind?: string
+  /**
+   * 资产类型 Linux, EKS,TKE
+   */
+  DeviceKindSet?: Array<string>
 }
 
 /**
@@ -3628,6 +3855,21 @@ export interface DeployResourceResponse {
 }
 
 /**
+ * ModifyLDAPSetting返回参数结构体
+ */
+export interface ModifyLDAPSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAssetSyncFlag请求参数结构体
+ */
+export type DescribeAssetSyncFlagRequest = null
+
+/**
  * CreateUser请求参数结构体
  */
 export interface CreateUserRequest {
@@ -3716,6 +3958,20 @@ export interface SearchFileBySidResponse {
 }
 
 /**
+ * ModifyAuthModeSetting请求参数结构体
+ */
+export interface ModifyAuthModeSettingRequest {
+  /**
+   * 双因子认证，0-不开启，1-OTP，2-短信，3-USB Key
+   */
+  AuthMode: number
+  /**
+   * 资源类型，0：普通 1：国密
+   */
+  ResourceType?: number
+}
+
+/**
  * DescribeOperationEvent请求参数结构体
  */
 export interface DescribeOperationEventRequest {
@@ -3744,9 +4000,17 @@ export interface DescribeOperationEventRequest {
    */
   Kind?: number
   /**
+   * 操作类型，参考DescribeOperationType返回结果
+   */
+  KindSet?: Array<number | bigint>
+  /**
    * 操作结果，1-成功，2-失败
    */
   Result?: number
+  /**
+   * 操作结果，1-成功，2-失败
+   */
+  ResultSet?: Array<number | bigint>
   /**
    * 分页偏移位置，默认值为0
    */
@@ -3798,6 +4062,24 @@ export interface ChangePwdTaskDetail {
    * 上次改密结果。0-未改密  1-改密成功 2-改密失败
    */
   LastChangeStatus?: number
+}
+
+/**
+ * SearchSession返回参数结构体
+ */
+export interface SearchSessionResponse {
+  /**
+   * 记录数
+   */
+  TotalCount?: number
+  /**
+   * 会话信息列表
+   */
+  SessionSet?: Array<SessionResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3867,6 +4149,16 @@ export interface CreateOperationTaskRequest {
    * Script参数是否需要进行base64编码后传递，1-需要进行base64编码后传递，非1值-不需要进行base64编码后传递
    */
   Encoding?: number
+}
+
+/**
+ * ModifyAcl返回参数结构体
+ */
+export interface ModifyAclResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4005,6 +4297,20 @@ export interface DescribeDeviceAccountsRequest {
    * 每页条目数量，默认20
    */
   Limit?: number
+}
+
+/**
+ * DescribeAssetSyncFlag返回参数结构体
+ */
+export interface DescribeAssetSyncFlagResponse {
+  /**
+   * 资产同步标志
+   */
+  AssetSyncFlags?: AssetSyncFlags
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4253,6 +4559,10 @@ export interface DescribeCmdTemplatesRequest {
    */
   Type?: number
   /**
+   * 命令模板类型 1-内置模板 2-自定义模板
+   */
+  TypeSet?: Array<number | bigint>
+  /**
    * 分页偏移位置，默认值为0
    */
   Offset?: number
@@ -4263,13 +4573,29 @@ export interface DescribeCmdTemplatesRequest {
 }
 
 /**
- * ModifyAcl返回参数结构体
+ * EnableIntranetAccess请求参数结构体
  */
-export interface ModifyAclResponse {
+export interface EnableIntranetAccessRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 堡垒机实例id
    */
-  RequestId?: string
+  ResourceId?: string
+  /**
+   * 开通内网访问的vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc的网段
+   */
+  VpcCidrBlock?: string
+  /**
+   * 开通内网访问的subnet id
+   */
+  SubnetId?: string
+  /**
+   * 内网ip的自定义域名，可为空
+   */
+  DomainName?: string
 }
 
 /**
@@ -4313,6 +4639,10 @@ export interface DescribeAclsRequest {
    */
   Status?: number
   /**
+   * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
+   */
+  StatusSet?: Array<number | bigint>
+  /**
    * 部门ID，用于过滤属于某个部门的访问权限
    */
   DepartmentId?: string
@@ -4324,6 +4654,16 @@ export interface DescribeAclsRequest {
    * 过滤数组
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * EnableExternalAccess请求参数结构体
+ */
+export interface EnableExternalAccessRequest {
+  /**
+   * 堡垒机id
+   */
+  ResourceId: string
 }
 
 /**
@@ -4639,6 +4979,10 @@ export interface Resource {
    */
   IntranetVpcCidr?: string
   /**
+   * 堡垒机内网ip自定义域名
+   */
+  DomainName?: string
+  /**
    * 是否共享clb，true-共享clb，false-独享clb
    */
   ShareClb?: boolean
@@ -4748,6 +5092,20 @@ export interface CheckLDAPConnectionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyReconnectionSetting请求参数结构体
+ */
+export interface ModifyReconnectionSettingRequest {
+  /**
+   * 重试次数,取值范围：0-20
+   */
+  ReconnectionMaxCount: number
+  /**
+   * true：限制重连次数，false：不限制重连次数
+   */
+  Enable: boolean
 }
 
 /**
@@ -4894,6 +5252,18 @@ export interface Acl {
    * 关联的应用资产列表
    */
   AppAssetSet?: Array<AppAsset>
+  /**
+   * 权限类型 0-默认普通权限 1-工单权限,2-权限工单权限
+   */
+  AclType?: number
+  /**
+   * 权限所属工单id
+   */
+  TicketId?: string
+  /**
+   * 权限所属工单名称
+   */
+  TicketName?: string
 }
 
 /**
@@ -4963,6 +5333,18 @@ export interface DescribeDevicesRequest {
    */
   DepartmentId?: string
   /**
+   * 资产所属云账号id
+   */
+  AccountIdSet?: Array<number | bigint>
+  /**
+   * 云厂商类型，1-腾讯云，2-阿里云
+   */
+  ProviderTypeSet?: Array<number | bigint>
+  /**
+   * 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期
+   */
+  CloudDeviceStatusSet?: Array<number | bigint>
+  /**
    * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
    */
   TagFilters?: Array<TagFilter>
@@ -5003,6 +5385,16 @@ export interface ACTemplate {
    * 模板描述
    */
   Description?: string
+}
+
+/**
+ * ModifyAccessWhiteListStatus请求参数结构体
+ */
+export interface ModifyAccessWhiteListStatusRequest {
+  /**
+   * true：放开全部来源IP；false：不放开全部来源IP
+   */
+  AllowAny: boolean
 }
 
 /**
@@ -5065,6 +5457,10 @@ export interface SearchFileBySidRequest {
    */
   AuditAction?: number
   /**
+   * 1-已执行，  2-被阻断
+   */
+  AuditActionSet?: Array<number | bigint>
+  /**
    * 以Protocol和Method为条件查询
    */
   TypeFilters?: Array<SearchFileTypeFilter>
@@ -5107,9 +5503,9 @@ export interface DescribeDomainsResponse {
 }
 
 /**
- * ModifyLDAPSetting返回参数结构体
+ * EnableIntranetAccess返回参数结构体
  */
-export interface ModifyLDAPSettingResponse {
+export interface EnableIntranetAccessResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

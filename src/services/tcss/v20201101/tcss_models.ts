@@ -3851,7 +3851,7 @@ export interface DescribeAssetImageRegistryVulListExportRequest {
    */
   ImageInfo?: ImageInfo
   /**
-   * 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
+   * 镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
    */
   Id?: number
 }
@@ -14151,7 +14151,7 @@ export interface DescribeAssetImageRegistryVulListRequest {
    */
   ImageInfo?: ImageInfo
   /**
-   * 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
+   * 镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
    */
   Id?: number
 }
