@@ -821,6 +821,19 @@ HoaiMy
 我方充分知悉和理解，根据[《网络安全法》](https://www.cac.gov.cn/2016-11/07/c_1119867116.htm)[《互联网信息服务深度合成管理规定》](https://www.gov.cn/zhengce/zhengceku/2022-12/12/content_5731431.htm)[《生成式人工智能服务管理暂行办法》](https://www.gov.cn/zhengce/zhengceku/202307/content_6891752.htm)[《人工智能生成合成内容标识办法》](https://www.gov.cn/zhengce/zhengceku/202503/content_7014286.htm)的法律法规的规定，对人工智能生成合成内容应当添加显式标识和隐式标识。我方基于业务需求，请腾讯云对生成合成内容不添加显式标识，我方承诺合法合规使用生成合成内容，避免造成混淆、误认；如果使用生成合成内容对公众提供服务的，或通过网络传播的，我方将自觉主动添加符合法律规定和国家标准要求的显式标识，承担人工智能生成合成内容标识的法律义务。我方未能恰当、合理地履行人工智能内容标识义务造成不良后果的，或遭受主管部门责罚的，相关责任由我方完全承担。
    */
   EnableComplianceAudio?: boolean
+  /**
+   * 是否开启语音信箱识别
+   */
+  EnableVoicemailDetection?: boolean
+  /**
+   * 识别到对端为语音信箱时的行为，当EnableVoicemailDetection为True时生效
+0: 挂断电话（默认）
+   */
+  VoicemailAction?: number
+  /**
+   * 大模型拓展参数， 格式为json字符串
+   */
+  LLMExtraBody?: string
 }
 
 /**
@@ -2170,6 +2183,21 @@ export interface DeleteCCCSkillGroupRequest {
 }
 
 /**
+ * PauseAutoCalloutTask请求参数结构体
+ */
+export interface PauseAutoCalloutTaskRequest {
+  /**
+   * 任务Id
+   */
+  TaskId: number
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+
+   */
+  SdkAppId: number
+}
+
+/**
  * CreateCompanyApply请求参数结构体
  */
 export interface CreateCompanyApplyRequest {
@@ -2748,6 +2776,16 @@ export interface DescribeIvrAudioListRequest {
    * 文件ID
    */
   FileId?: Array<number | bigint>
+}
+
+/**
+ * PauseAutoCalloutTask返回参数结构体
+ */
+export interface PauseAutoCalloutTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4396,6 +4434,20 @@ export interface UnbindStaffSkillGroupListResponse {
 }
 
 /**
+ * ResumeAutoCalloutTask请求参数结构体
+ */
+export interface ResumeAutoCalloutTaskRequest {
+  /**
+   * 任务Id
+   */
+  TaskId: number
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+}
+
+/**
  * ControlAIConversation请求参数结构体
  */
 export interface ControlAIConversationRequest {
@@ -5275,6 +5327,16 @@ export interface DescribeStaffStatusMetricsResponse {
    * 坐席状态实时信息
    */
   Metrics?: Array<StaffStatusMetrics>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResumeAutoCalloutTask返回参数结构体
+ */
+export interface ResumeAutoCalloutTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

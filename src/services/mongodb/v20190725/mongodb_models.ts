@@ -299,6 +299,16 @@ export interface KillOpsRequest {
 }
 
 /**
+ * DropDBInstanceParamTpl返回参数结构体
+ */
+export interface DropDBInstanceParamTplResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteLogDownloadTask返回参数结构体
  */
 export interface DeleteLogDownloadTaskResponse {
@@ -484,6 +494,24 @@ export interface SetInstanceMaintenanceResponse {
 }
 
 /**
+ * EnableTransparentDataEncryption请求参数结构体
+ */
+export interface EnableTransparentDataEncryptionRequest {
+  /**
+   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。目前支持通用版本包含：4.4、5.0，云盘版暂不支持。
+   */
+  InstanceId: string
+  /**
+   *  [密钥管理系统（Key Management Service，KMS）](https://cloud.tencent.com/document/product/573/18809)服务所在地域，例如 ap-shanghai。
+   */
+  KmsRegion: string
+  /**
+   * 密钥 ID。若不设置该参数，不指定具体的密钥 ID，由腾讯云自动生成密钥。
+   */
+  KeyId?: string
+}
+
+/**
  * DescribeBackupRules返回参数结构体
  */
 export interface DescribeBackupRulesResponse {
@@ -505,20 +533,6 @@ export interface DescribeBackupRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeDBInstanceNamespace请求参数结构体
- */
-export interface DescribeDBInstanceNamespaceRequest {
-  /**
-   * 指定查询数据库所属的实例 ID，支持批量查询。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
-   */
-  InstanceId: string
-  /**
-   * 指定查询的数据库名。为空时，返回当前实例的全部数据库列表。
-   */
-  DbName?: string
 }
 
 /**
@@ -606,6 +620,40 @@ export interface AssignProjectResponse {
 }
 
 /**
+ * 审计日志过滤条件
+ */
+export interface AuditLogFilter {
+  /**
+   * 客户端地址。
+   */
+  Host?: Array<string>
+  /**
+   * 用户名。
+   */
+  User?: Array<string>
+  /**
+   * 执行时间。单位为：ms。表示筛选执行时间大于该值的审计日志。
+   */
+  ExecTime?: number
+  /**
+   * 影响行数。表示筛选影响行数大于该值的审计日志。
+   */
+  AffectRows?: number
+  /**
+   * 操作类型。
+   */
+  Atype?: Array<string>
+  /**
+   * 执行结果。
+   */
+  Result?: Array<string>
+  /**
+   * 根据此关键字过滤日志
+   */
+  Param?: Array<string>
+}
+
+/**
  * DescribeDBInstanceDeal返回参数结构体
  */
 export interface DescribeDBInstanceDealResponse {
@@ -649,17 +697,22 @@ export interface DescribeDBInstanceDealResponse {
 }
 
 /**
- * 修改mongoDB实例，请求参数
+ * DescribeAuditInstanceList返回参数结构体
  */
-export interface ModifyMongoDBParamType {
+export interface DescribeAuditInstanceListResponse {
   /**
-   * 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。
+   * 实例总数。
    */
-  Key: string
+  TotalCount?: number
   /**
-   * 需要修改的参数名称对应的值，请严格参考通过 DescribeInstanceParams 获取的参数对应的值的范围。
+   * 审计实例详情。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Items?: Array<AuditInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -739,20 +792,6 @@ export interface DescribeSecurityGroupRequest {
    * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
-}
-
-/**
- * RenameInstance请求参数结构体
- */
-export interface RenameInstanceRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
-   */
-  InstanceId: string
-  /**
-   * 自定义实例名称，要求为1～128 长度的任意字符。
-   */
-  NewName: string
 }
 
 /**
@@ -917,31 +956,57 @@ export interface CreateDBInstanceHourResponse {
 }
 
 /**
- * DropDBInstanceParamTpl返回参数结构体
+ * DescribeDBInstanceNamespace请求参数结构体
  */
-export interface DropDBInstanceParamTplResponse {
+export interface DescribeDBInstanceNamespaceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * EnableTransparentDataEncryption请求参数结构体
- */
-export interface EnableTransparentDataEncryptionRequest {
-  /**
-   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。目前支持通用版本包含：4.4、5.0，云盘版暂不支持。
+   * 指定查询数据库所属的实例 ID，支持批量查询。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
   /**
-   *  [密钥管理系统（Key Management Service，KMS）](https://cloud.tencent.com/document/product/573/18809)服务所在地域，例如 ap-shanghai。
+   * 指定查询的数据库名。为空时，返回当前实例的全部数据库列表。
    */
-  KmsRegion: string
+  DbName?: string
+}
+
+/**
+ * DescribeDBInstanceNodeProperty请求参数结构体
+ */
+export interface DescribeDBInstanceNodePropertyRequest {
   /**
-   * 密钥 ID。若不设置该参数，不指定具体的密钥 ID，由腾讯云自动生成密钥。
+   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
-  KeyId?: string
+  InstanceId: string
+  /**
+   * 节点 ID。请登录 [MongoDB 控制台的节点管理](https://console.cloud.tencent.com/mongodb)复制节点 ID。
+   */
+  NodeIds?: Array<string>
+  /**
+   * 节点角色。可选值包括：
+- PRIMARY：主节点。
+- SECONDARY：从节点。
+- READONLY：只读节点。
+- ARBITER：仲裁节点。
+   */
+  Roles?: Array<string>
+  /**
+   * 该参数指定节点是否为 Hidden 节点，默认为 false。
+   */
+  OnlyHidden?: boolean
+  /**
+   * 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。
+   */
+  Priority?: number
+  /**
+   * 该参数指定节点投票权。
+- 1：具有投票权。
+- 0：无投票权。
+   */
+  Votes?: number
+  /**
+   * 节点标签。
+   */
+  Tags?: Array<NodeTag>
 }
 
 /**
@@ -1105,6 +1170,24 @@ export interface SpecItem {
 }
 
 /**
+ * 过滤条件
+ */
+export interface LogFilter {
+  /**
+   * 过滤条件名称
+   */
+  Type: string
+  /**
+   * 过滤条件匹配类型，注意：此参数取值只能等于EQ
+   */
+  Compare: string
+  /**
+   * 过滤条件匹配值
+   */
+  Value: Array<string>
+}
+
+/**
  * DescribeDetailedSlowLogs请求参数结构体
  */
 export interface DescribeDetailedSlowLogsRequest {
@@ -1198,13 +1281,13 @@ export interface ModifyDBInstanceNetworkAddressResponse {
 }
 
 /**
- * DropDBInstanceParamTpl请求参数结构体
+ * DeleteAuditLogFile返回参数结构体
  */
-export interface DropDBInstanceParamTplRequest {
+export interface DeleteAuditLogFileResponse {
   /**
-   * 参数模板 ID。请通过接口 [DescribeDBInstanceParamTpl](https://cloud.tencent.com/document/product/240/109155) 获取模板 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TplId: string
+  RequestId?: string
 }
 
 /**
@@ -1677,6 +1760,110 @@ export interface ResetDBInstancePasswordRequest {
 }
 
 /**
+ * CreateAuditLogFile返回参数结构体
+ */
+export interface CreateAuditLogFileResponse {
+  /**
+   * 审计日志文件名称。
+   */
+  FileName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 审计实例信息
+ */
+export interface AuditInstance {
+  /**
+   * 实例 ID。
+   */
+  InstanceId?: string
+  /**
+   * 审计状态。
+   */
+  AuditStatus?: string
+  /**
+   * 是否存在审计任务，0：无任务，1：创建中，2：关闭中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditTask?: number
+  /**
+   * 审计日志过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogExpireDay?: number
+  /**
+   * 高频日志过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighLogExpireDay?: number
+  /**
+   * 低频日志过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowLogExpireDay?: number
+  /**
+   * 费用信息。
+   */
+  BillingAmount?: number
+  /**
+   * 高频存储容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighRealStorage?: number
+  /**
+   * 低频存储容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowRealStorage?: number
+  /**
+   * 实例详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceInfo?: InstanceInfo
+  /**
+   * 性能分析
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PerformancesAnalyse?: number
+  /**
+   * true表示全审计，false表示规则审计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditAll?: boolean
+  /**
+   * 实例审计最近一次的开通时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateAt?: string
+  /**
+   * 实例绑定的规则模版ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateIds?: Array<string>
+  /**
+   * 是否开启投递：ON，OFF
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deliver?: string
+  /**
+   * 日志投递信息
+   */
+  DeliverSummary?: Array<DeliverSummary>
+  /**
+   * 旧规则
+   */
+  OldRule?: boolean
+  /**
+   * 实际存储容量
+   */
+  RealStorage?: number
+}
+
+/**
  * 实例可修改参数 Integer 类型集合。
  */
 export interface InstanceIntegerParam {
@@ -1820,6 +2007,28 @@ export interface CreateLogDownloadTaskRequest {
    * 日志详情过滤字段
    */
   LogDetailParams?: Array<string>
+}
+
+/**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+  /**
+   * 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 审计日志保存时长。单位为：天。当前支持的取值包括： 7： 一周。 30： 一个月。 90： 三个月。 180 ： 六个月。 365 ： 一年。 1095 ： 三年。 1825 ： 五年。
+   */
+  LogExpireDay: number
+  /**
+   * true-全审计，false-规则审计，注意：AuditAll=true 时，RuleFilters 无需填参
+   */
+  AuditAll?: boolean
+  /**
+   * 审计过滤规则，Type的范围【SrcIp、DB、Collection、User、SqlType】，注意：Type=SqlType时，Value必须在这个范围 ["query", "insert", "update", "delete", "command"]
+   */
+  RuleFilters?: Array<LogFilter>
 }
 
 /**
@@ -2437,6 +2646,77 @@ export interface DescribeDBInstanceNodePropertyResponse {
 }
 
 /**
+ * 实例信息详情
+ */
+export interface InstanceInfo {
+  /**
+   * 审计日志保存时长。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditLogExpireDay?: number
+  /**
+   * 审计状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditStatus?: string
+  /**
+   * 实例 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 实例角色。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceRole?: string
+  /**
+   * 实例类型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 数据库版本。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MongodbVersion?: string
+  /**
+   * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * 地域。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 实例状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 是否支持审计。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportAudit?: boolean
+  /**
+   * 可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<TagInfo>
+}
+
+/**
  * DescribeDBInstanceParamTplDetail返回参数结构体
  */
 export interface DescribeDBInstanceParamTplDetailResponse {
@@ -2505,6 +2785,20 @@ export interface DescribeMongodbLogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志投递信息
+ */
+export interface DeliverSummary {
+  /**
+   * 投递类型，store（存储类），mq（消息通道）
+   */
+  DeliverType?: string
+  /**
+   * 投递子类型：cls，ckafka。
+   */
+  DeliverSubType?: string
 }
 
 /**
@@ -2778,43 +3072,39 @@ export interface SetBackupRulesResponse {
 }
 
 /**
- * DescribeDBInstanceNodeProperty请求参数结构体
+ * ModifyAuditService请求参数结构体
  */
-export interface DescribeDBInstanceNodePropertyRequest {
+export interface ModifyAuditServiceRequest {
   /**
-   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 实例ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
-   * 节点 ID。请登录 [MongoDB 控制台的节点管理](https://console.cloud.tencent.com/mongodb)复制节点 ID。
+   * 审计日志保存时长。单位为：天。当前支持的取值包括： 7： 一周。 30： 一个月。 90： 三个月。 180 ： 六个月。 365 ： 一年。 1095 ： 三年。 1825 ： 五年。
    */
-  NodeIds?: Array<string>
+  LogExpireDay?: number
   /**
-   * 节点角色。可选值包括：
-- PRIMARY：主节点。
-- SECONDARY：从节点。
-- READONLY：只读节点。
-- ARBITER：仲裁节点。
+   * true-全审计，false-规则审计，注意：AuditAll=true 时，RuleFilters 无需填参
    */
-  Roles?: Array<string>
+  AuditAll?: boolean
   /**
-   * 该参数指定节点是否为 Hidden 节点，默认为 false。
+   * 审计过滤规则，Type的范围【SrcIp、DB、Collection、User、SqlType】，注意：Type=SqlType时，Value必须在这个范围 ["query", "insert", "update", "delete", "command"]
    */
-  OnlyHidden?: boolean
+  RuleFilters?: Array<LogFilter>
+}
+
+/**
+ * RenameInstance请求参数结构体
+ */
+export interface RenameInstanceRequest {
   /**
-   * 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。
+   * 实例ID，格式如：cmgo-p8vnipr5。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
    */
-  Priority?: number
+  InstanceId: string
   /**
-   * 该参数指定节点投票权。
-- 1：具有投票权。
-- 0：无投票权。
+   * 自定义实例名称，要求为1～128 长度的任意字符。
    */
-  Votes?: number
-  /**
-   * 节点标签。
-   */
-  Tags?: Array<NodeTag>
+  NewName: string
 }
 
 /**
@@ -2894,6 +3184,16 @@ export interface RenameInstanceResponse {
 }
 
 /**
+ * DropDBInstanceParamTpl请求参数结构体
+ */
+export interface DropDBInstanceParamTplRequest {
+  /**
+   * 参数模板 ID。请通过接口 [DescribeDBInstanceParamTpl](https://cloud.tencent.com/document/product/240/109155) 获取模板 ID。
+   */
+  TplId: string
+}
+
+/**
  * DescribeTransparentDataEncryptionStatus返回参数结构体
  */
 export interface DescribeTransparentDataEncryptionStatusResponse {
@@ -2908,6 +3208,16 @@ export interface DescribeTransparentDataEncryptionStatusResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyInfoList?: Array<KMSInfoDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenAuditService返回参数结构体
+ */
+export interface OpenAuditServiceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2968,6 +3278,32 @@ export interface UpgradeDbInstanceVersionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuditInstanceList请求参数结构体
+ */
+export interface DescribeAuditInstanceListRequest {
+  /**
+   * 指明待查询的实例为已开通审计或未开通审计。<ul><li>1：已开通审计功能。</li><li>0：未开通审计功能。</li></ul>
+   */
+  AuditSwitch?: number
+  /**
+   * 筛选条件。
+   */
+  Filters?: Array<Filters>
+  /**
+   * 审计类型，不传 默认全部，0 全审计，1 规则审计
+   */
+  AuditMode?: number
+  /**
+   * 每页显示数量。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
 }
 
 /**
@@ -3451,41 +3787,49 @@ export interface SpecificationInfo {
 }
 
 /**
- * DescribeSlowLogPatterns请求参数结构体
+ * CreateAuditLogFile请求参数结构体
  */
-export interface DescribeSlowLogPatternsRequest {
+export interface CreateAuditLogFileRequest {
   /**
-   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
-   * 慢日志起始时间。
-- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。
-- 查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+   * 开始时间，格式为："2021-07-12 10:29:20"。
    */
   StartTime: string
   /**
-   * 慢日志终止时间。
-- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。
-- 查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+   * 结束时间，格式为："2021-07-12 10:39:20"。
    */
   EndTime: string
   /**
-   * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+   * 审计日志文件的排序方式。
+<ul><li>ASC：升序。</li><li>DESC：降序。</li></ul>
    */
-  SlowMS: number
+  Order?: string
   /**
-   * 偏移量，最小值为0，最大值为10000，默认值为0。
+   * 审计日志文件的排序字段。当前支持的取值包括：
+<ul><li>timestamp：时间戳。</li><li>affectRows：影响行数。</li><li>execTime：执行时间。</li></ul>
    */
-  Offset?: number
+  OrderBy?: string
   /**
-   * 分页大小，最小值为1，最大值为100，默认值为20。
+   * 过滤条件。可按设置的过滤条件过滤审计日志。
    */
-  Limit?: number
+  Filter?: AuditLogFilter
+}
+
+/**
+ * DeleteAuditLogFile请求参数结构体
+ */
+export interface DeleteAuditLogFileRequest {
   /**
-   * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+   * 实例ID，格式如：cmgo-test1234，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  Format?: string
+  InstanceId: string
+  /**
+   * 审计日志文件名称，须保证文件名的准确性。
+   */
+  FileName: string
 }
 
 /**
@@ -3772,6 +4116,20 @@ export interface DescribeDBInstanceParamTplResponse {
 }
 
 /**
+ * ModifyDBInstanceSpec返回参数结构体
+ */
+export interface ModifyDBInstanceSpecResponse {
+  /**
+   * 订单 ID。
+   */
+  DealId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBInstanceURL返回参数结构体
  */
 export interface DescribeDBInstanceURLResponse {
@@ -3861,6 +4219,16 @@ export interface RestartNodesRequest {
 - 节点 ID，请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在**节点管理**页面复制，或者通过 [DescribeDBInstanceNodeProperty ](https://cloud.tencent.com/document/product/240/82022)接口获取。
    */
   NodeIds: Array<string>
+}
+
+/**
+ * ModifyAuditService返回参数结构体
+ */
+export interface ModifyAuditServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4145,17 +4513,58 @@ export interface InstanceDetail {
 }
 
 /**
- * ModifyDBInstanceSpec返回参数结构体
+ * DescribeSlowLogPatterns请求参数结构体
  */
-export interface ModifyDBInstanceSpecResponse {
+export interface DescribeSlowLogPatternsRequest {
   /**
-   * 订单 ID。
+   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
-  DealId?: string
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 慢日志起始时间。
+- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。
+- 查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
    */
-  RequestId?: string
+  StartTime: string
+  /**
+   * 慢日志终止时间。
+- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。
+- 查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+   */
+  EndTime: string
+  /**
+   * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+   */
+  SlowMS: number
+  /**
+   * 偏移量，最小值为0，最大值为10000，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页大小，最小值为1，最大值为100，默认值为20。
+   */
+  Limit?: number
+  /**
+   * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+   */
+  Format?: string
+}
+
+/**
+ * 过滤条件
+ */
+export interface Filters {
+  /**
+   * 搜索字段，目前支持：
+"InstanceId"：实例Id，例如：cmgo-****）
+"InstanceName"：实例名称
+"ClusterId"：实例组Id，例如：cmgo-****
+   */
+  Name: string
+  /**
+   * 筛选值
+   */
+  Values: Array<string>
 }
 
 /**
@@ -4203,4 +4612,18 @@ export interface UpgradeDBInstanceKernelVersionRequest {
    * 是否维护时间内升级。0-否，1-是
    */
   InMaintenance?: number
+}
+
+/**
+ * 修改mongoDB实例，请求参数
+ */
+export interface ModifyMongoDBParamType {
+  /**
+   * 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。
+   */
+  Key: string
+  /**
+   * 需要修改的参数名称对应的值，请严格参考通过 DescribeInstanceParams 获取的参数对应的值的范围。
+   */
+  Value: string
 }

@@ -40,7 +40,7 @@ import {
   DescribeDBInstanceSecurityGroupsResponse,
   BackupPlan,
   RestoreDBInstanceObjectsResponse,
-  SwitchDBInstancePrimaryRequest,
+  ModifyDBInstanceDeletionProtectionRequest,
   RenewInstanceResponse,
   DeleteLogBackupResponse,
   ModifyReadOnlyGroupConfigRequest,
@@ -67,7 +67,7 @@ import {
   CreateDatabaseRequest,
   Tag,
   DescribeBackupSummariesRequest,
-  DescribeDBInstanceAttributeRequest,
+  CreateBackupPlanRequest,
   ModifyDBInstancesProjectResponse,
   CreateBaseBackupResponse,
   LockAccountResponse,
@@ -78,6 +78,7 @@ import {
   BaseBackup,
   CreateReadOnlyDBInstanceResponse,
   DescribeAvailableRecoveryTimeRequest,
+  CloseAccountCAMRequest,
   DescribeTasksRequest,
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
@@ -95,16 +96,18 @@ import {
   ReadOnlyGroup,
   ModifyDBInstanceSpecRequest,
   ModifyAccountRemarkResponse,
+  RefreshAccountPasswordRequest,
+  OpenAccountCAMResponse,
   DescribeZonesRequest,
   SpecInfo,
   ModifyMaintainTimeWindowRequest,
   ModifyBackupDownloadRestrictionResponse,
   ParamVersionRelation,
   DescribeLogBackupsRequest,
-  SetAutoRenewFlagResponse,
+  ModifyDBInstanceParametersRequest,
   ModifyPrivilege,
   NetworkAccess,
-  CreateBackupPlanRequest,
+  DescribeDBInstanceAttributeRequest,
   ResetAccountPasswordResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
   RawSlowQuery,
@@ -155,13 +158,15 @@ import {
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   DescribeDBInstanceSSLConfigResponse,
-  UpgradeDBInstanceKernelVersionResponse,
+  CloseAccountCAMResponse,
+  SwitchDBInstancePrimaryRequest,
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
   DestroyDBInstanceRequest,
   DescribeBackupOverviewResponse,
   DescribeParameterTemplatesRequest,
+  OpenAccountCAMRequest,
   DescribeClassesResponse,
   DeleteDBInstanceNetworkAccessRequest,
   ModifyDBInstanceDeploymentResponse,
@@ -173,6 +178,7 @@ import {
   Database,
   DeleteReadOnlyGroupRequest,
   DescribeDBBackupsRequest,
+  SetAutoRenewFlagResponse,
   RestartDBInstanceResponse,
   Filter,
   UpgradeDBInstanceMajorVersionResponse,
@@ -236,7 +242,7 @@ import {
   RebalanceReadOnlyGroupResponse,
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
-  ModifyDBInstanceParametersRequest,
+  ModifyDBInstanceDeletionProtectionResponse,
   DedicatedCluster,
   DurationAnalysis,
   DescribeReadOnlyGroupsRequest,
@@ -246,6 +252,7 @@ import {
   DescribeAccountsResponse,
   ModifyDBInstanceChargeTypeRequest,
   DescribeParameterTemplateAttributesResponse,
+  UpgradeDBInstanceKernelVersionResponse,
   DescribeDBVersionsRequest,
   ModifyDBInstancesProjectRequest,
   UpgradeDBInstanceMajorVersionRequest,
@@ -255,6 +262,7 @@ import {
   DeleteBaseBackupResponse,
   PolicyRule,
   ModifyDBInstanceSpecResponse,
+  RefreshAccountPasswordResponse,
   DescribeBackupDownloadURLRequest,
   DescribeDBXlogsResponse,
   ModifyDBInstanceChargeTypeResponse,
@@ -271,6 +279,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig)
+  }
+
+  /**
+   * 本接口用于开启数据库账户的CAM验证服务。
+   */
+  async OpenAccountCAM(
+    req: OpenAccountCAMRequest,
+    cb?: (error: string, rep: OpenAccountCAMResponse) => void
+  ): Promise<OpenAccountCAMResponse> {
+    return this.request("OpenAccountCAM", req, cb)
   }
 
   /**
@@ -657,6 +675,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于关闭数据库账户的CAM验证服务。
+   */
+  async CloseAccountCAM(
+    req: CloseAccountCAMRequest,
+    cb?: (error: string, rep: CloseAccountCAMResponse) => void
+  ): Promise<CloseAccountCAMResponse> {
+    return this.request("CloseAccountCAM", req, cb)
+  }
+
+  /**
    * 本接口（DescribeBaseBackups）用于查询数据备份列表。
    */
   async DescribeBaseBackups(
@@ -767,6 +795,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于对开启CAM验证的账户执行手动刷新密码。
+   */
+  async RefreshAccountPassword(
+    req: RefreshAccountPasswordRequest,
+    cb?: (error: string, rep: RefreshAccountPasswordResponse) => void
+  ): Promise<RefreshAccountPasswordResponse> {
+    return this.request("RefreshAccountPassword", req, cb)
+  }
+
+  /**
    * 本接口（UpgradeDBInstanceMajorVersion）用于升级实例内核大版本，例如从PostgreSQL 12升级到PostgreSQL 15。
    */
   async UpgradeDBInstanceMajorVersion(
@@ -784,6 +822,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void
   ): Promise<RebalanceReadOnlyGroupResponse> {
     return this.request("RebalanceReadOnlyGroup", req, cb)
+  }
+
+  /**
+   * 本接口（DeletionProtection）用于开启或关闭实例销毁保护
+   */
+  async ModifyDBInstanceDeletionProtection(
+    req: ModifyDBInstanceDeletionProtectionRequest,
+    cb?: (error: string, rep: ModifyDBInstanceDeletionProtectionResponse) => void
+  ): Promise<ModifyDBInstanceDeletionProtectionResponse> {
+    return this.request("ModifyDBInstanceDeletionProtection", req, cb)
   }
 
   /**

@@ -28,19 +28,24 @@ import {
   QueryChunkListResponse,
   QueryChunkListRequest,
   StopChatAIRequest,
+  StepExpand,
   GetSessionDetailsRequest,
   ModifyKnowledgeBaseRequest,
   ModifyChunkRequest,
   CreateDataAgentSessionResponse,
   KnowledgeBase,
   StopChatAIResponse,
+  Task,
   DeleteDataAgentSessionResponse,
+  Record,
   ChatAIRequest,
   AddChunkResponse,
-  GetKnowledgeBaseListResponse,
+  StepInfo,
+  Chunk,
   CreateDataAgentSessionRequest,
   ModifyKnowledgeBaseResponse,
   DeleteDataAgentSessionRequest,
+  GetKnowledgeBaseListResponse,
 } from "./dataagent_models"
 
 /**
@@ -106,7 +111,7 @@ export class Client extends AbstractClient {
    * 生成DataAgent 会话ID
    */
   async CreateDataAgentSession(
-    req?: CreateDataAgentSessionRequest,
+    req: CreateDataAgentSessionRequest,
     cb?: (error: string, rep: CreateDataAgentSessionResponse) => void
   ): Promise<CreateDataAgentSessionResponse> {
     return this.request("CreateDataAgentSession", req, cb)
@@ -126,14 +131,14 @@ export class Client extends AbstractClient {
    * 删除会话
    */
   async DeleteDataAgentSession(
-    req?: DeleteDataAgentSessionRequest,
+    req: DeleteDataAgentSessionRequest,
     cb?: (error: string, rep: DeleteDataAgentSessionResponse) => void
   ): Promise<DeleteDataAgentSessionResponse> {
     return this.request("DeleteDataAgentSession", req, cb)
   }
 
   /**
-   * 分配查询
+   * 文档切片查询
    */
   async QueryChunkList(
     req: QueryChunkListRequest,
@@ -146,7 +151,7 @@ export class Client extends AbstractClient {
    * 获取用户会话记录详情列表
    */
   async GetSessionDetails(
-    req?: GetSessionDetailsRequest,
+    req: GetSessionDetailsRequest,
     cb?: (error: string, rep: GetSessionDetailsResponse) => void
   ): Promise<GetSessionDetailsResponse> {
     return this.request("GetSessionDetails", req, cb)
@@ -156,7 +161,7 @@ export class Client extends AbstractClient {
    * 中断DataAgent的回答输出
    */
   async StopChatAI(
-    req?: StopChatAIRequest,
+    req: StopChatAIRequest,
     cb?: (error: string, rep: StopChatAIResponse) => void
   ): Promise<StopChatAIResponse> {
     return this.request("StopChatAI", req, cb)

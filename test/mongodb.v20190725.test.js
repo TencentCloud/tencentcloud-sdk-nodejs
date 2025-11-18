@@ -158,6 +158,26 @@ it("mongodb.v20190725.DeleteLogDownloadTask", async function () {
     }
 })
 
+it("mongodb.v20190725.DeleteAuditLogFile", async function () {
+    try {
+       const data = await client.DeleteAuditLogFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeAuditInstanceList", async function () {
+    try {
+       const data = await client.DescribeAuditInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDetailedSlowLogs", async function () {
     try {
        const data = await client.DescribeDetailedSlowLogs({})
@@ -338,6 +358,16 @@ it("mongodb.v20190725.FlashBackDBInstance", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyAuditService", async function () {
+    try {
+       const data = await client.ModifyAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstances", async function () {
     try {
        const data = await client.DescribeDBInstances({})
@@ -511,6 +541,26 @@ it("mongodb.v20190725.UpgradeDbInstanceVersion", async function () {
 it("mongodb.v20190725.DescribeAccountUsers", async function () {
     try {
        const data = await client.DescribeAccountUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.OpenAuditService", async function () {
+    try {
+       const data = await client.OpenAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.CreateAuditLogFile", async function () {
+    try {
+       const data = await client.CreateAuditLogFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

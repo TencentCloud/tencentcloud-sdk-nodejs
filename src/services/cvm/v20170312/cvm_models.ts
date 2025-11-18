@@ -214,7 +214,8 @@ export interface HostResource {
    */
   GpuAvailable?: number
   /**
-   * CDH owner
+   * CDH 拥有者
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ExclusiveOwner?: string
 }
@@ -1660,7 +1661,7 @@ export interface DescribeLaunchTemplateVersionsRequest {
    */
   MinVersion?: number
   /**
-   * 过范围指定版本时的最大版本号，默认为30。
+   * 通过范围指定版本时的最大版本号，默认为30。
    */
   MaxVersion?: number
   /**
@@ -1672,7 +1673,7 @@ export interface DescribeLaunchTemplateVersionsRequest {
    */
   Limit?: number
   /**
-   * 是否查询默认版本。该参数不可与LaunchTemplateVersions同时指定。
+   * 是否查询默认版本。默认值：false
    */
   DefaultVersion?: boolean
 }
@@ -1915,7 +1916,7 @@ export interface CreateDisasterRecoverGroupResponse {
    */
   CurrentNum?: number
   /**
-   * 置放群组创建时间。
+   * 分散置放群组创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
    */
   CreateTime?: string
   /**
@@ -2878,7 +2879,7 @@ export interface DescribeKeyPairsRequest {
   KeyIds?: Array<string>
   /**
    * 过滤条件。
-<li> project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可以通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID，或者调用接口 [DescribeProject](https://cloud.tencent.com/document/api/378/4400)，取返回信息中的projectId获取项目ID。</li>
+<li> project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可以通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID，或者调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的projectId获取项目ID。</li>
 <li> key-name - String - 是否必填：否 -（过滤条件）按照密钥对名称过滤。</li>
 <li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键过滤。</li>
 <li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值过滤。</li>
@@ -3950,7 +3951,7 @@ export interface DescribeLaunchTemplatesRequest {
  */
 export interface ResetInstancesInternetMaxBandwidthRequest {
   /**
-   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的 `InstanceId` 获取。 每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。
+   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口返回值中的 `InstanceId` 获取。 每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。
    */
   InstanceIds: Array<string>
   /**
@@ -4966,7 +4967,7 @@ export interface TagSpecification {
 export interface DescribeHostsRequest {
   /**
    * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
 <li><strong>project-id</strong></li>
 <p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>host-id</strong></li>
@@ -5511,7 +5512,7 @@ export interface DescribeImagesRequest {
    */
   Limit?: number
   /**
-   * 实例类型，如 `S1.SMALL1`。可通过 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 接口返回的 `InstanceType` 获取。
+   * 实例类型，如 `SA5.MEDIUM2`。可通过 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 接口返回的 `InstanceType` 获取。
    */
   InstanceType?: string
 }

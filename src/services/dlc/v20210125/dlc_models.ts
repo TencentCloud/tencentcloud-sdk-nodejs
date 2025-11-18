@@ -5879,6 +5879,10 @@ export interface DatasourceConnectionConfig {
    * TccHive数据目录连接信息
    */
   TccHive?: TccHive
+  /**
+   * MongoDB 数据源
+   */
+  MongoDB?: DataSourceInfo
 }
 
 /**

@@ -2047,32 +2047,32 @@ export interface TaskConfiguration {
    */
   YarnQueue?: string
   /**
-   * 来源数据源ID, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取
+   * 来源数据源ID,  需要通过 DescribeDataSourceWithoutInfo 获取
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceId?: string
   /**
-   * 来源数据源类型, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取
+   * 来源数据源类型,  需要通过 DescribeDataSourceWithoutInfo 获取
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceType?: string
   /**
-   * 来源数据源名称, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取
+   * 来源数据源名称, 需要通过 DescribeDataSourceWithoutInfo 获取
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceName?: string
   /**
-   * 目标数据源ID, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取
+   * 目标数据源ID, 需要通过 DescribeDataSourceWithoutInfo 获取
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceId?: string
   /**
-   * 目标数据源类型, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取
+   * 目标数据源类型,  需要通过 DescribeDataSourceWithoutInfo 获取
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceType?: string
   /**
-   * 目标数据源名称, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取
+   * 目标数据源名称, 需要通过 DescribeDataSourceWithoutInfo 获取
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceName?: string

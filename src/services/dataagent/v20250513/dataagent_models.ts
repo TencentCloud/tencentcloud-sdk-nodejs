@@ -50,7 +50,7 @@ export interface AddChunkRequest {
    */
   Content?: string
   /**
-   * 	 新 Chunk 插入到目标 Chunk ​之后的位置。插入位置的上一个 chunkId
+   * 新 Chunk 插入到目标 Chunk ​之后的位置。插入位置的上一个 chunkId
    */
   AfterChunkId?: string
 }
@@ -98,6 +98,10 @@ export interface DeleteChunkRequest {
  */
 export interface GetSessionDetailsResponse {
   /**
+   * 会话记录详情
+   */
+  RecordList?: Array<Record>
+  /**
    * 记录总数
    */
   RecordCount?: number
@@ -126,6 +130,14 @@ export interface DeleteChunkResponse {
  */
 export interface QueryChunkListResponse {
   /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 分片信息
+   */
+  Chunks?: Array<Chunk>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -136,11 +148,11 @@ export interface QueryChunkListResponse {
  */
 export interface QueryChunkListRequest {
   /**
-   * 默认 1 表示第一页
+   * 表示第一页
    */
   Page?: number
   /**
-   * 	 默认 10 一页展示 10 条
+   * 默认一页展示 10 条
    */
   PageSize?: number
 }
@@ -148,12 +160,48 @@ export interface QueryChunkListRequest {
 /**
  * StopChatAI请求参数结构体
  */
-export type StopChatAIRequest = null
+export interface StopChatAIRequest {
+  /**
+   * 会话ID
+   */
+  SessionId?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+}
+
+/**
+ * 步骤扩展结构
+ */
+export interface StepExpand {
+  /**
+   * 标题
+   */
+  Title?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * cellid数组
+   */
+  CellIds?: Array<string>
+}
 
 /**
  * GetSessionDetails请求参数结构体
  */
-export type GetSessionDetailsRequest = null
+export interface GetSessionDetailsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 会话ID
+   */
+  SessionId?: string
+}
 
 /**
  * ModifyKnowledgeBase请求参数结构体
@@ -208,6 +256,10 @@ export interface ModifyChunkRequest {
  */
 export interface CreateDataAgentSessionResponse {
   /**
+   * 会话
+   */
+  SessionId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -253,9 +305,35 @@ export interface KnowledgeBase {
  */
 export interface StopChatAIResponse {
   /**
+   * 会话
+   */
+  SessionId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务信息
+ */
+export interface Task {
+  /**
+   * 任务ID
+   */
+  Id?: number
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 任务状态
+   */
+  Status?: string
+  /**
+   * 任务步骤列表
+   */
+  StepInfoList?: Array<StepInfo>
 }
 
 /**
@@ -263,9 +341,79 @@ export interface StopChatAIResponse {
  */
 export interface DeleteDataAgentSessionResponse {
   /**
+   * 删除的会话ID
+   */
+  SessionId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 问答结构
+ */
+export interface Record {
+  /**
+   * 问题内容
+   */
+  Question: string
+  /**
+   * 回答内容
+   */
+  Answer?: string
+  /**
+   * 思考内容
+   */
+  Think?: string
+  /**
+   * 任务列表
+   */
+  TaskList?: Array<Task>
+  /**
+   * 记录创建时间
+   */
+  CreateTime?: string
+  /**
+   * 记录更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 记录id
+   */
+  RecordId?: string
+  /**
+   * 总结内容
+   */
+  FinalSummary?: string
+  /**
+   * 会话ID
+   */
+  SessionId?: string
+  /**
+   * 1=赞，2=踩，0=无反馈
+   */
+  Feedback?: number
+  /**
+   * 数据库信息
+   */
+  DbInfo?: string
+  /**
+   * 错误信息
+   */
+  ErrorContext?: string
+  /**
+   * TaskList的string字符串
+   */
+  TaskListStr?: string
+  /**
+   * 知识库id列表
+   */
+  KnowledgeBaseIds?: Array<string>
+  /**
+   * 上下文
+   */
+  Context?: string
 }
 
 /**
@@ -319,7 +467,7 @@ export interface ChatAIRequest {
  */
 export interface AddChunkResponse {
   /**
-   * 新增的chunkid
+   * 新增的ChunkId
    */
   ChunkId?: string
   /**
@@ -329,23 +477,66 @@ export interface AddChunkResponse {
 }
 
 /**
- * GetKnowledgeBaseList返回参数结构体
+ * 任务步骤
  */
-export interface GetKnowledgeBaseListResponse {
+export interface StepInfo {
   /**
-   * 用户实例所有知识库列表
+   * 步骤id
    */
-  KnowledgeBaseList?: Array<KnowledgeBase>
+  Id: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 步骤名称
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 步骤状态
+   */
+  Status: string
+  /**
+   * 类型(text/expand)
+   */
+  Type: string
+  /**
+   * 总结
+   */
+  Summary?: string
+  /**
+   * 步骤扩展结构
+   */
+  Expand?: StepExpand
+  /**
+   * 描述
+   */
+  Desc?: string
+}
+
+/**
+ * 文件分片
+ */
+export interface Chunk {
+  /**
+   * 切片ID
+   */
+  Id?: string
+  /**
+   * 切片内容
+   */
+  Content?: string
+  /**
+   * 切片的字数
+   */
+  Size?: number
 }
 
 /**
  * CreateDataAgentSession请求参数结构体
  */
-export type CreateDataAgentSessionRequest = null
+export interface CreateDataAgentSessionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+}
 
 /**
  * ModifyKnowledgeBase返回参数结构体
@@ -364,4 +555,27 @@ export interface ModifyKnowledgeBaseResponse {
 /**
  * DeleteDataAgentSession请求参数结构体
  */
-export type DeleteDataAgentSessionRequest = null
+export interface DeleteDataAgentSessionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 会话ID
+   */
+  SessionId?: string
+}
+
+/**
+ * GetKnowledgeBaseList返回参数结构体
+ */
+export interface GetKnowledgeBaseListResponse {
+  /**
+   * 用户实例所有知识库列表
+   */
+  KnowledgeBaseList?: Array<KnowledgeBase>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}

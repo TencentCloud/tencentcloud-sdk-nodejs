@@ -91,6 +91,7 @@ import {
   CreateCCCSkillGroupRequest,
   DescribePredictiveDialingSessionsResponse,
   DeleteCCCSkillGroupRequest,
+  PauseAutoCalloutTaskRequest,
   CreateCompanyApplyRequest,
   BindNumberCallInInterfaceRequest,
   DescribeTelSessionRequest,
@@ -112,6 +113,7 @@ import {
   DescribeStaffInfoListRequest,
   AutoCalloutTaskInfo,
   DescribeIvrAudioListRequest,
+  PauseAutoCalloutTaskResponse,
   BindNumberCallInInterfaceResponse,
   ForceMemberOfflineRequest,
   SkillGroupInfoItem,
@@ -184,6 +186,7 @@ import {
   DescribeCCCBuyInfoListResponse,
   ActiveCarrierPrivilegeNumber,
   UnbindStaffSkillGroupListResponse,
+  ResumeAutoCalloutTaskRequest,
   ControlAIConversationRequest,
   UploadAudioInfo,
   CompanyStateInfo,
@@ -226,6 +229,7 @@ import {
   CreateAdminURLRequest,
   DescribeAutoCalloutTaskResponse,
   DescribeStaffStatusMetricsResponse,
+  ResumeAutoCalloutTaskResponse,
   AudioFileInfo,
   DescribeCarrierPrivilegeNumberApplicantsResponse,
   CreateCallOutSessionRequest,
@@ -310,6 +314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAutoCalloutTasksResponse) => void
   ): Promise<DescribeAutoCalloutTasksResponse> {
     return this.request("DescribeAutoCalloutTasks", req, cb)
+  }
+
+  /**
+   * 暂停未完成的自动外呼任务
+   */
+  async PauseAutoCalloutTask(
+    req: PauseAutoCalloutTaskRequest,
+    cb?: (error: string, rep: PauseAutoCalloutTaskResponse) => void
+  ): Promise<PauseAutoCalloutTaskResponse> {
+    return this.request("PauseAutoCalloutTask", req, cb)
   }
 
   /**
@@ -968,6 +982,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
   ): Promise<CreateSDKLoginTokenResponse> {
     return this.request("CreateSDKLoginToken", req, cb)
+  }
+
+  /**
+   * 暂停未完成的自动外呼任务
+   */
+  async ResumeAutoCalloutTask(
+    req: ResumeAutoCalloutTaskRequest,
+    cb?: (error: string, rep: ResumeAutoCalloutTaskResponse) => void
+  ): Promise<ResumeAutoCalloutTaskResponse> {
+    return this.request("ResumeAutoCalloutTask", req, cb)
   }
 
   /**

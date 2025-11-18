@@ -260,6 +260,7 @@ import {
   DescribeRuleLimitResponse,
   CreateAccessExportResponse,
   ModifyOwaspRuleTypeLevelRequest,
+  LLMMonPkg,
   ModifyHostRequest,
   DestroyPostCKafkaFlowRequest,
   DescribeHistogramResponse,

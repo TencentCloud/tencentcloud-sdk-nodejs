@@ -3418,7 +3418,7 @@ export interface Blueprint {
   /**
    * 镜像状态。
 可选值：
-NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（已隔离）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。
+NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。
    */
   BlueprintState?: string
   /**
@@ -5462,12 +5462,10 @@ export interface StopInstancesRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 关机类型。
-取值范围： 
-
-- SOFT：表示软关机
-- HARD：表示硬关机 
-- SOFT_FIRST：表示优先软关机，失败再执行硬关机  
+   * 关机类型。取值范围： 
+<li>SOFT：表示软关机</li>
+<li>HARD：表示硬关机 </li>
+<li>SOFT_FIRST：表示优先软关机，失败再执行硬关机 </li>
 
 默认取值：SOFT_FIRST
    */

@@ -1234,8 +1234,10 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 本接口（DescribeLaunchTemplateVersions）用于查询实例模板版本信息。
-   */
+     * 本接口（DescribeLaunchTemplateVersions）用于查询实例模板版本信息。
+
+- 不支持参数`LaunchTemplateVersions`与以下参数同时指定，包括 `MaxVersion`、`MinVersion`、`Limit`、`Offset`和`DefaultVersion`。
+     */
   async DescribeLaunchTemplateVersions(
     req: DescribeLaunchTemplateVersionsRequest,
     cb?: (error: string, rep: DescribeLaunchTemplateVersionsResponse) => void
@@ -1273,7 +1275,8 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   /**
      * 本接口（DeleteImages）用于删除一个或多个镜像。
 
-* 当[镜像状态](https://cloud.tencent.com/document/product/213/15753#Image)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
+* 当[镜像状态](https://cloud.tencent.com/document/product/213/15753#Image) 为`创建中`、`复制中`、`导入中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
+* 被共享的镜像，需要先取消共享关系，才能删除。
 * 每个地域最多只支持创建500个自定义镜像，删除镜像可以释放账户的配额。
 * 当镜像正在被其它账户分享时，不允许删除。
      */

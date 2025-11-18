@@ -152,6 +152,10 @@ export interface DescribeSavingPlanDeductRequest {
  */
 export interface SavingPlanOverviewDetail {
   /**
+   * 节省计划资源id
+   */
+  SpId?: string
+  /**
    * 节省计划类型
    */
   SpType?: string

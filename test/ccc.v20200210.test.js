@@ -78,6 +78,16 @@ it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     }
 })
 
+it("ccc.v20200210.PauseAutoCalloutTask", async function () {
+    try {
+       const data = await client.PauseAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.AbortAgentCruiseDialingCampaign", async function () {
     try {
        const data = await client.AbortAgentCruiseDialingCampaign({})
@@ -721,6 +731,16 @@ it("ccc.v20200210.DescribeCallInMetrics", async function () {
 it("ccc.v20200210.CreateSDKLoginToken", async function () {
     try {
        const data = await client.CreateSDKLoginToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.ResumeAutoCalloutTask", async function () {
+    try {
+       const data = await client.ResumeAutoCalloutTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

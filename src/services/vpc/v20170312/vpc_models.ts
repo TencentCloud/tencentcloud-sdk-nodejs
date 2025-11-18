@@ -968,9 +968,17 @@ export interface DescribeVpcEndPointRequest {
    */
   EndPointId?: Array<string>
   /**
-   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   * 协议类型，支持 Ipv4，Ipv6， DualStack，默认 Ipv4。使用DualStack查询双栈的时候，必须要使用MaxResult配合NextToken查询。第1次查询的时候只需要携带MaxResult，如果返回NextToken非空，表示有更多可用数据。第2次查询的时候就需要携带NextToken进行分页查询。
    */
   IpAddressType?: string
+  /**
+   * 每次调用返回的最大结果数。如果查询返回的时候有NextToken返回，您可以使用NextToken值获取更多页结果， 当NextToke返回空或者返回的结果数量小于MaxResults时，表示没有更多数据了。允许的最大页面大小为 100。
+   */
+  MaxResults?: number
+  /**
+   * 如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。
+   */
+  NextToken?: string
 }
 
 /**
@@ -1389,6 +1397,11 @@ export interface DeleteVpnGatewaySslClientResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeNatGatewayZones请求参数结构体
+ */
+export type DescribeNatGatewayZonesRequest = null
 
 /**
  * DescribeCrossBorderCompliance请求参数结构体
@@ -1905,6 +1918,7 @@ export interface AssociateNatGatewayAddressRequest {
   PublicIpAddresses?: Array<string>
   /**
    * 弹性IP可用区，自动分配弹性IP时传递。
+其中产品可用区查询接口为[查询产品可用区列表](https://cloud.tencent.com/document/product/1596/77929)
    */
   Zone?: string
   /**
@@ -1919,6 +1933,10 @@ export interface AssociateNatGatewayAddressRequest {
    * 公网IP是否强制与NAT网关来自同可用区，true表示需要与NAT网关同可用区；false表示可与NAT网关不是同一个可用区。此参数只有当参数Zone存在时才能生效。
    */
   PublicIpFromSameZone?: boolean
+  /**
+   * 启用或者禁用NAT网关绑定的EIP
+   */
+  IpAddressEnableMode?: boolean
 }
 
 /**
@@ -2901,7 +2919,7 @@ export interface DescribeNatGatewaysRequest {
    */
   NatGatewayIds?: Array<string>
   /**
-   * 过滤条件，参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5。<li>nat-gateway-id - String - （过滤条件）NAT实例ID，形如：`nat-123xx454`。</li><li>vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。</li><li>nat-gateway-name - String - （过滤条件）协议端口模板实例名称，形如：`test_nat`。</li><li>tag-key - String - （过滤条件）标签键，形如：`test-key`。</li><li>nat-status - String - （过滤条件）NAT实例当前状态，形如：`AVAILABLE`。</li>
+   * 过滤条件，参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5。<li>nat-gateway-id - String - （过滤条件）NAT实例ID，形如：`nat-123xx454`。</li><li>vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。</li><li>nat-gateway-name - String - （过滤条件）协议端口模板实例名称，形如：`test_nat`。</li><li>tag-key - String - （过滤条件）标签键，形如：`test-key`。</li><li>nat-state - String - （过滤条件）NAT实例当前状态，形如：`AVAILABLE`。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -3860,6 +3878,10 @@ export interface DescribeVpcEndPointServiceResponse {
    */
   TotalCount?: number
   /**
+   * 如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。
+   */
+  NextToken?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3951,6 +3973,16 @@ export interface DescribeIp6AddressesRequest {
    * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
    */
   Limit?: number
+}
+
+/**
+ * ReplaceCcnRouteTableInputPolicys返回参数结构体
+ */
+export interface ReplaceCcnRouteTableInputPolicysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4113,7 +4145,7 @@ export interface RefreshDirectConnectGatewayRouteToNatGatewayRequest {
    */
   NatGatewayId: string
   /**
-   * 是否是预刷新；True:是， False:否
+   * 是否是预刷新；true:是， false:否
    */
   DryRun: boolean
 }
@@ -8584,9 +8616,17 @@ GWLB可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/p
    */
   IsListAuthorizedEndPointService?: boolean
   /**
-   * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
+   * 协议类型，支持 Ipv4，Ipv6， DualStack，默认 Ipv4。使用DualStack查询双栈的时候，必须要使用MaxResult配合NextToken查询。第1次查询的时候只需要携带MaxResult，如果返回NextToken非空，表示有更多可用数据。第2次查询的时候就需要携带NextToken进行分页查询。
    */
   IpAddressType?: string
+  /**
+   * 每次调用返回的最大结果数。如果查询返回的时候有NextToken返回，您可以使用NextToken值获取更多页结果， 当NextToke返回空或者返回的结果数量小于MaxResults时，表示没有更多数据了。允许的最大页面大小为 100。
+   */
+  MaxResults?: number
+  /**
+   * 如果NextToken返回 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。
+   */
+  NextToken?: string
 }
 
 /**
@@ -9026,7 +9066,7 @@ export interface ModifyNatGatewaySourceIpTranslationNatRuleRequest {
    */
   NatGatewayId: string
   /**
-   * NAT网关的SNAT转换规则。
+   * NAT网关的SNAT转换规则。仅支持根据指定的NatGatewaySnatId修改PublicIpAddresses或Description。
    */
   SourceIpTranslationNatRule: SourceIpTranslationNatRule
 }
@@ -9312,7 +9352,7 @@ export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRe
    */
   NatGatewayId: string
   /**
-   * 过滤条件，Name可选值"OriginalIp",  "TranslationIp", "OriginalPort","TranslationPort",  "Protocol", "Description"
+   * 过滤条件，Name可选值：OriginalIp、TranslationIp、OriginalPort、TranslationPort、Protocol、Description，分别表示映射前IP、映射后IP、映射前端口、映射后端口、协议类型、描述
    */
   Filters?: Array<Filter>
   /**
@@ -10454,6 +10494,7 @@ export interface CreateVpcEndPointServiceRequest {
 export interface DescribePrivateNatGatewaysRequest {
   /**
    * 私网网关唯一`ID`，形如：`intranat-0g3blj80`。
+注意：NatGatewayIds和Filters参数互斥，不能同时传入。
    */
   NatGatewayIds?: Array<string>
   /**
@@ -10469,11 +10510,11 @@ export interface DescribePrivateNatGatewaysRequest {
    */
   Limit?: number
   /**
-   * 排序字段。可选值："NatGatewayId"、"NatGatewayName"、"CreatedTime"
+   * 排序字段。可选值：NatGatewayId、NatGatewayName、CreatedTime。
    */
   OrderField?: string
   /**
-   * 排序方式。可选值："ASC"、"DESC"。
+   * 排序方式。可选值：ASC、DESC。分别表示升序、降序。
    */
   OrderDirection?: string
 }
@@ -10623,19 +10664,19 @@ export interface DescribePrivateNatGatewayTranslationAclRulesRequest {
    */
   NatGatewayId: string
   /**
-   * 转换规则目标，可选值"LOCAL"。
+   * 转换规则目标，可选值LOCAL。
    */
   TranslationDirection: string
   /**
-   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   * 转换规则类型，可选值NETWORK_LAYER、TRANSPORT_LAYER。分别对应三层、四层。
    */
   TranslationType: string
   /**
-   * 转换`IP`,当转换规则类型为四层时为`IP`池。
+   * 映射后`IP`,当转换规则类型为四层时为`IP`池。
    */
   TranslationIp: string
   /**
-   * 源`IP`,当转换规则类型为三层时有效。
+   * 映射前`IP`,当转换规则类型为三层时有效。
    */
   OriginalIp?: string
   /**
@@ -11190,9 +11231,13 @@ export interface InquiryPriceRenewAddressesResponse {
 }
 
 /**
- * ReplaceCcnRouteTableInputPolicys返回参数结构体
+ * DescribeNatGatewayZones返回参数结构体
  */
-export interface ReplaceCcnRouteTableInputPolicysResponse {
+export interface DescribeNatGatewayZonesResponse {
+  /**
+   * 可售卖可用区信息列表
+   */
+  ZoneSet: Array<NatZoneInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12322,6 +12367,10 @@ export interface DeleteNatGatewayRequest {
    * NAT网关的ID，形如：`nat-df45454`。
    */
   NatGatewayId: string
+  /**
+   * 忽略操作风险
+   */
+  IgnoreOperationRisk?: boolean
 }
 
 /**
@@ -12365,7 +12414,7 @@ export interface DeletePrivateNatGatewayTranslationNatRuleResponse {
   /**
    * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
    */
-  NatGatewayId: string
+  NatGatewayId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12615,7 +12664,7 @@ export interface DescribePrivateNatGatewayTranslationNatRulesRequest {
   /**
    * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
    */
-  NatGatewayId?: string
+  NatGatewayId: string
   /**
    * 过滤条件。
 <li>OriginalIp - String - 转换规则源`IP`。</li>
@@ -12688,6 +12737,10 @@ export interface DescribeVpcEndPointResponse {
    * 符合查询条件的终端节点个数。
    */
   TotalCount?: number
+  /**
+   * 如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。
+   */
+  NextToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13052,7 +13105,7 @@ export interface CreateVpnConnRoute {
  */
 export interface CreatePrivateNatGatewayRequest {
   /**
-   * 私网网关名称
+   * 私网网关名称，限制60个字符
    */
   NatGatewayName: string
   /**
@@ -13132,11 +13185,11 @@ export interface DescribePrivateNatGatewayTranslationNatRulesResponse {
   /**
    * 对象数目。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 转换规则详情数组。
    */
-  TranslationNatRuleSet: Array<TranslationNatRule>
+  TranslationNatRuleSet?: Array<TranslationNatRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14423,7 +14476,7 @@ export interface ModifyVpnGatewayAttributeRequest {
  */
 export interface CreateNatGatewayRequest {
   /**
-   * NAT网关名称
+   * NAT网关名称，限制60字符
    */
   NatGatewayName: string
   /**
@@ -14782,15 +14835,15 @@ export interface CreatePrivateNatGatewayTranslationAclRuleRequest {
    */
   NatGatewayId: string
   /**
-   * 转换规则目标，可选值"LOCAL"。
+   * 转换规则目标，可选值LOCAL。
    */
   TranslationDirection: string
   /**
-   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   * 转换规则类型，可选值NETWORK_LAYER、TRANSPORT_LAYER。分别对应三层、四层。
    */
   TranslationType: string
   /**
-   * 转换`IP`,当转换规则类型为四层时为`IP`池。
+   * 映射后`IP`,当转换规则类型为四层时为`IP`池。
    */
   TranslationIp: string
   /**
@@ -14798,7 +14851,7 @@ export interface CreatePrivateNatGatewayTranslationAclRuleRequest {
    */
   TranslationAclRules: Array<TranslationAclRule>
   /**
-   * 源`IP`,当转换规则类型为三层时有效。
+   * 映射前`IP`,当转换规则类型为三层时有效。
    */
   OriginalIp?: string
 }
@@ -15332,11 +15385,11 @@ export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRe
   /**
    * 总规则数目。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 目的端口转换规则数组。
    */
-  LocalDestinationIpPortTranslationNatRuleSet: Array<PrivateNatDestinationIpPortTranslationNatRule>
+  LocalDestinationIpPortTranslationNatRuleSet?: Array<PrivateNatDestinationIpPortTranslationNatRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19129,15 +19182,15 @@ export interface DeletePrivateNatGatewayTranslationAclRuleRequest {
    */
   NatGatewayId: string
   /**
-   * 转换规则目标，可选值"LOCAL"。
+   * 转换规则目标，可选值LOCAL。
    */
   TranslationDirection: string
   /**
-   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   * 转换规则类型，可选值NETWORK_LAYER、TRANSPORT_LAYER。分别对应三层、四层。
    */
   TranslationType: string
   /**
-   * 转换`IP`,当转换规则类型为四层时为`IP`池
+   * 映射后`IP`,当转换规则类型为四层时为`IP`池
    */
   TranslationIp: string
   /**
@@ -19145,7 +19198,7 @@ export interface DeletePrivateNatGatewayTranslationAclRuleRequest {
    */
   AclRuleIds: Array<number | bigint>
   /**
-   * 源`IP`,当转换规则类型为三层时有效
+   * 映射前`IP`,当转换规则类型为三层时有效
    */
   OriginalIp?: string
 }
@@ -20476,6 +20529,20 @@ export interface InstanceChargePrepaid {
    * 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费， NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认：NOTIFY_AND_AUTO_RENEW
    */
   RenewFlag?: string
+}
+
+/**
+ * NAT网关可用区集合
+ */
+export interface NatZoneInfo {
+  /**
+   * 可用区名称
+   */
+  Zone: string
+  /**
+   * 可用区id
+   */
+  ZoneId: number
 }
 
 /**

@@ -408,6 +408,16 @@ it("mqtt.v20240516.DeleteTopic", async function () {
     }
 })
 
+it("mqtt.v20240516.AddClientSubscription", async function () {
+    try {
+       const data = await client.AddClientSubscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeCaCertificate", async function () {
     try {
        const data = await client.DescribeCaCertificate({})
@@ -578,6 +588,16 @@ it("mqtt.v20240516.ApplyRegistrationCode", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeDeviceIdentities", async function () {
+    try {
+       const data = await client.DescribeDeviceIdentities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.CreateAuthorizationPolicy", async function () {
     try {
        const data = await client.CreateAuthorizationPolicy({})
@@ -608,9 +628,9 @@ it("mqtt.v20240516.CreateHttpAuthenticator", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeDeviceIdentities", async function () {
+it("mqtt.v20240516.DeleteClientSubscription", async function () {
     try {
-       const data = await client.DescribeDeviceIdentities({})
+       const data = await client.DeleteClientSubscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

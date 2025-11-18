@@ -62,6 +62,7 @@ import {
   DescribeInstanceListResponse,
   ApplyRegistrationCodeResponse,
   ModifyInstanceResponse,
+  AddClientSubscriptionRequest,
   CreateHttpAuthenticatorResponse,
   MQTTMessage,
   MQTTMessageItem,
@@ -90,6 +91,7 @@ import {
   DescribeAuthorizationPoliciesResponse,
   CreateTopicRequest,
   DeleteCaCertificateResponse,
+  DeleteClientSubscriptionRequest,
   TagFilter,
   DescribeMessageDetailsResponse,
   DescribeUserListResponse,
@@ -108,6 +110,7 @@ import {
   DeviceIdentityItem,
   DescribeInsVPCEndpointsRequest,
   DescribeTopicListRequest,
+  AddClientSubscriptionResponse,
   CreateTopicResponse,
   RevokedDeviceCertificateRequest,
   ModifyInsPublicEndpointResponse,
@@ -132,6 +135,7 @@ import {
   CreateDeviceIdentityResponse,
   KickOutClientRequest,
   DescribeDeviceIdentityResponse,
+  DeleteClientSubscriptionResponse,
   DescribeCaCertificateRequest,
   UpdateAuthorizationPolicyPriorityRequest,
   CreateJWTAuthenticatorResponse,
@@ -578,6 +582,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 为MQTT客户端增加一条订阅
+   */
+  async AddClientSubscription(
+    req: AddClientSubscriptionRequest,
+    cb?: (error: string, rep: AddClientSubscriptionResponse) => void
+  ): Promise<AddClientSubscriptionResponse> {
+    return this.request("AddClientSubscription", req, cb)
+  }
+
+  /**
    * 查询Ca证书详情接口
    */
   async DescribeCaCertificate(
@@ -748,6 +762,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询集群下设备标识列表
+   */
+  async DescribeDeviceIdentities(
+    req: DescribeDeviceIdentitiesRequest,
+    cb?: (error: string, rep: DescribeDeviceIdentitiesResponse) => void
+  ): Promise<DescribeDeviceIdentitiesResponse> {
+    return this.request("DescribeDeviceIdentities", req, cb)
+  }
+
+  /**
    * 创建MQTT实例的性能测试任务
    */
   async CreateAuthorizationPolicy(
@@ -778,12 +802,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群下设备标识列表
+   * 删除MQTT客户端下的一条订阅
    */
-  async DescribeDeviceIdentities(
-    req: DescribeDeviceIdentitiesRequest,
-    cb?: (error: string, rep: DescribeDeviceIdentitiesResponse) => void
-  ): Promise<DescribeDeviceIdentitiesResponse> {
-    return this.request("DescribeDeviceIdentities", req, cb)
+  async DeleteClientSubscription(
+    req: DeleteClientSubscriptionRequest,
+    cb?: (error: string, rep: DeleteClientSubscriptionResponse) => void
+  ): Promise<DeleteClientSubscriptionResponse> {
+    return this.request("DeleteClientSubscription", req, cb)
   }
 }

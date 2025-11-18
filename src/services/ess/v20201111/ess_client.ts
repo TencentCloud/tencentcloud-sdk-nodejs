@@ -67,12 +67,13 @@ import {
   Staff,
   DescribeFileUrlsResponse,
   RelieveInfo,
+  CreateBatchAdminChangeInvitationsUrlResponse,
   DescribeOrganizationSealsResponse,
   RegistrationOrganizationInfo,
   TemplateUserFlowType,
   ModifyIntegrationRoleRequest,
   SuccessDeleteStaffData,
-  DescribeUserVerifyStatusRequest,
+  GroupOrganization,
   FillError,
   CreateStaffResult,
   Recipient,
@@ -88,13 +89,16 @@ import {
   CreatePrepareFlowResponse,
   DescribeOrganizationVerifyStatusRequest,
   CancelMultiFlowSignQRCodeRequest,
+  OutputReference,
   CreateSealResponse,
   MiniAppCreateFlowOption,
   IntegrationDepartment,
   DescribeIntegrationRolesResponse,
   DescribeBillUsageDetailResponse,
   DescribeFlowBriefsResponse,
+  CreateBatchAdminChangeInvitationsRequest,
   DescribeFlowTemplatesResponse,
+  ReferenceExcerpt,
   DescribePersonCertificateRequest,
   ComparisonDetail,
   CreateBatchOrganizationAuthorizationUrlResponse,
@@ -104,6 +108,7 @@ import {
   CcInfo,
   DescribePersonCertificateResponse,
   FlowBatchUrlInfo,
+  CreateBatchAdminChangeInvitationsResponse,
   DescribeFileCounterSignResultRequest,
   CreateContractDiffTaskWebUrlRequest,
   DescribeContractReviewTaskRequest,
@@ -331,6 +336,7 @@ import {
   Option,
   CreateSingleSignOnEmployeesRequest,
   DescribeBillUsageDetailRequest,
+  CreateBatchAdminChangeInvitationsUrlRequest,
   CreateUserAutoSignSealUrlResponse,
   Caller,
   IntentionActionResultDetail,
@@ -350,7 +356,7 @@ import {
   CreatePreparedPersonalEsignRequest,
   CreateMiniAppPrepareFlowRequest,
   CreateIntegrationDepartmentRequest,
-  GroupOrganization,
+  DescribeUserVerifyStatusRequest,
   AuthorizedUser,
   Intention,
   CreateFlowBlockchainEvidenceUrlResponse,
@@ -375,6 +381,7 @@ import {
   ModifyApplicationCallbackInfoRequest,
   DescribeContractDiffTaskWebUrlRequest,
   StartFlowRequest,
+  AdminChangeInvitationInfo,
   ApproverOption,
   DeleteIntegrationEmployeesResponse,
   PermissionGroup,
@@ -1509,6 +1516,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 此接口用于获取企业批量变更超管链接，包含多条超管变更任务。
+
+前提条件：已调用 [CreateBatchAdminChangeInvitations生成批量变更超管任务接口](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchAdminChangeInvitations) 确保任务提交。
+此链接包含多条超管变更流程，使用该链接可以批量的对企业进行超管变更。
+     */
+  async CreateBatchAdminChangeInvitationsUrl(
+    req: CreateBatchAdminChangeInvitationsUrlRequest,
+    cb?: (error: string, rep: CreateBatchAdminChangeInvitationsUrlResponse) => void
+  ): Promise<CreateBatchAdminChangeInvitationsUrlResponse> {
+    return this.request("CreateBatchAdminChangeInvitationsUrl", req, cb)
+  }
+
+  /**
      * 该接口用于发起合同后，生成用户的签署链接 <br/>
 
 **注意**
@@ -2523,6 +2543,27 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: GetTaskResultApiResponse) => void
   ): Promise<GetTaskResultApiResponse> {
     return this.request("GetTaskResultApi", req, cb)
+  }
+
+  /**
+     * 本接口（CreateBatchAdminChangeInvitations）用于批量创建企业超管信息变更。
+该接口为提交任务接口,如果需要获得链接， 需要使用接口创建超管变更链接(CreateBatchAdminChangeInvitationsUrl)。
+
+批量创建链接有以下限制：
+
+1. 单次最多创建10个企业的超管变更。
+2. 同一批创建的企业不能重复,唯一值为企业 Id。
+
+注意：
+此接口创建的超管变更企业，必须是以下两种企业。
+1. 集团子企业，调用方必须是主企业。
+2. 代认证企业，此企业是由[创建企业认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl)创建的
+     */
+  async CreateBatchAdminChangeInvitations(
+    req: CreateBatchAdminChangeInvitationsRequest,
+    cb?: (error: string, rep: CreateBatchAdminChangeInvitationsResponse) => void
+  ): Promise<CreateBatchAdminChangeInvitationsResponse> {
+    return this.request("CreateBatchAdminChangeInvitations", req, cb)
   }
 
   /**

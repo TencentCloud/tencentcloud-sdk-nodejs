@@ -26,6 +26,7 @@ import {
   CreateBackupDBInstanceResponse,
   DBInstancePrice,
   KillOpsRequest,
+  DropDBInstanceParamTplResponse,
   DeleteLogDownloadTaskResponse,
   DescribeDBInstanceNamespaceResponse,
   DescribeSlowLogsRequest,
@@ -35,18 +36,18 @@ import {
   InstanceMultiParam,
   ModifyInstanceParamsResponse,
   SetInstanceMaintenanceResponse,
+  EnableTransparentDataEncryptionRequest,
   DescribeBackupRulesResponse,
-  DescribeDBInstanceNamespaceRequest,
   SlowLogPattern,
   Task,
   AssignProjectResponse,
+  AuditLogFilter,
   DescribeDBInstanceDealResponse,
-  ModifyMongoDBParamType,
+  DescribeAuditInstanceListResponse,
   OfflineIsolatedDBInstanceResponse,
   IsolateDBInstanceResponse,
   CreateDBInstanceParamTplRequest,
   DescribeSecurityGroupRequest,
-  RenameInstanceRequest,
   DescribeBackupRulesRequest,
   DescribeBackupDownloadTaskResponse,
   AddNodeList,
@@ -57,15 +58,16 @@ import {
   FlashbackDatabase,
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
-  DropDBInstanceParamTplResponse,
-  EnableTransparentDataEncryptionRequest,
+  DescribeDBInstanceNamespaceRequest,
+  DescribeDBInstanceNodePropertyRequest,
   LogInfo,
   DeleteAccountUserRequest,
   SpecItem,
+  LogFilter,
   DescribeDetailedSlowLogsRequest,
   UpgradeDbInstanceVersionRequest,
   ModifyDBInstanceNetworkAddressResponse,
-  DropDBInstanceParamTplRequest,
+  DeleteAuditLogFileResponse,
   CreateAccountUserResponse,
   DescribeSlowLogPatternsResponse,
   BackupDownloadTaskStatus,
@@ -80,11 +82,14 @@ import {
   FlashBackDBInstanceRequest,
   TerminateDBInstancesResponse,
   ResetDBInstancePasswordRequest,
+  CreateAuditLogFileResponse,
+  AuditInstance,
   InstanceIntegerParam,
   ModifyNetworkAddress,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
   CreateLogDownloadTaskRequest,
+  OpenAuditServiceRequest,
   CreateAccountUserRequest,
   InstanceTextParam,
   ModifyDBInstanceSecurityGroupRequest,
@@ -117,8 +122,10 @@ import {
   InquirePriceModifyDBInstanceSpecResponse,
   SecurityGroupBound,
   DescribeDBInstanceNodePropertyResponse,
+  InstanceInfo,
   DescribeDBInstanceParamTplDetailResponse,
   DescribeMongodbLogsResponse,
+  DeliverSummary,
   ModifyDBInstanceParamTplRequest,
   DescribeCurrentOpRequest,
   BackupDownloadTask,
@@ -128,15 +135,19 @@ import {
   DescribeDetailedSlowLogsResponse,
   ShardInfo,
   SetBackupRulesResponse,
-  DescribeDBInstanceNodePropertyRequest,
+  ModifyAuditServiceRequest,
+  RenameInstanceRequest,
   RenewDBInstancesResponse,
   InstanceEnumParam,
   FlashBackDBInstanceResponse,
   RenameInstanceResponse,
+  DropDBInstanceParamTplRequest,
   DescribeTransparentDataEncryptionStatusResponse,
+  OpenAuditServiceResponse,
   CreateBackupDBInstanceRequest,
   SetAccountUserPrivilegeRequest,
   UpgradeDbInstanceVersionResponse,
+  DescribeAuditInstanceListRequest,
   NodeProperty,
   KillOpsResponse,
   IsolateDBInstanceRequest,
@@ -151,7 +162,8 @@ import {
   DbURL,
   DeleteLogDownloadTaskRequest,
   SpecificationInfo,
-  DescribeSlowLogPatternsRequest,
+  CreateAuditLogFileRequest,
+  DeleteAuditLogFileRequest,
   FlashbackCollection,
   DescribeSpecInfoResponse,
   InquirePriceRenewDBInstancesResponse,
@@ -163,20 +175,24 @@ import {
   InquirePriceCreateDBInstancesRequest,
   DescribeInstanceParamsResponse,
   DescribeDBInstanceParamTplResponse,
+  ModifyDBInstanceSpecResponse,
   DescribeDBInstanceURLResponse,
   RemoveNodeList,
   DescribeLogDownloadTasksResponse,
   SlowLogItem,
   RestartNodesRequest,
+  ModifyAuditServiceResponse,
   SetInstanceMaintenanceRequest,
   RestartNodesResponse,
   DescribeDBInstanceURLRequest,
   DescribeDBInstanceParamTplDetailRequest,
   InstanceDetail,
-  ModifyDBInstanceSpecResponse,
+  DescribeSlowLogPatternsRequest,
+  Filters,
   InstanceChargePrepaid,
   RenewDBInstancesRequest,
   UpgradeDBInstanceKernelVersionRequest,
+  ModifyMongoDBParamType,
 } from "./mongodb_models"
 
 /**
@@ -327,6 +343,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLogDownloadTaskResponse) => void
   ): Promise<DeleteLogDownloadTaskResponse> {
     return this.request("DeleteLogDownloadTask", req, cb)
+  }
+
+  /**
+   * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
+   */
+  async DeleteAuditLogFile(
+    req: DeleteAuditLogFileRequest,
+    cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
+  ): Promise<DeleteAuditLogFileResponse> {
+    return this.request("DeleteAuditLogFile", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeAuditInstanceList）用于查询开通或未开通数据库审计的实例列表。
+   */
+  async DescribeAuditInstanceList(
+    req: DescribeAuditInstanceListRequest,
+    cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
+  ): Promise<DescribeAuditInstanceListResponse> {
+    return this.request("DescribeAuditInstanceList", req, cb)
   }
 
   /**
@@ -514,6 +550,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyAuditService)用于修改云数据库审计策略的服务配置，包括审计日志保存时长等。
+   */
+  async ModifyAuditService(
+    req: ModifyAuditServiceRequest,
+    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
+  ): Promise<ModifyAuditServiceResponse> {
+    return this.request("ModifyAuditService", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选主实例、灾备实例和只读实例信息列表。
    */
   async DescribeDBInstances(
@@ -691,6 +737,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountUsersResponse) => void
   ): Promise<DescribeAccountUsersResponse> {
     return this.request("DescribeAccountUsers", req, cb)
+  }
+
+  /**
+   * 本接口(OpenAuditService)用于开通云数据库实例的审计。
+   */
+  async OpenAuditService(
+    req: OpenAuditServiceRequest,
+    cb?: (error: string, rep: OpenAuditServiceResponse) => void
+  ): Promise<OpenAuditServiceResponse> {
+    return this.request("OpenAuditService", req, cb)
+  }
+
+  /**
+   * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
+   */
+  async CreateAuditLogFile(
+    req: CreateAuditLogFileRequest,
+    cb?: (error: string, rep: CreateAuditLogFileResponse) => void
+  ): Promise<CreateAuditLogFileResponse> {
+    return this.request("CreateAuditLogFile", req, cb)
   }
 
   /**

@@ -18,56 +18,83 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SpanLog,
+  DescribeApmAssociationResponse,
   ModifyApmInstanceRequest,
   ApmInstanceDetail,
   CreateApmInstanceRequest,
   ModifyGeneralApmApplicationConfigRequest,
   DescribeApmServiceMetricRequest,
-  DescribeServiceOverviewResponse,
+  CreateApmPrometheusRuleRequest,
   QueryMetricItem,
-  ServiceDetail,
-  TerminateApmInstanceRequest,
+  ModifyApmPrometheusRuleRequest,
+  ModifyGeneralApmApplicationConfigResponse,
   DescribeApmInstancesResponse,
+  AgentOperationConfigView,
   Instrument,
   DescribeTagValuesResponse,
+  DescribeTagValuesRequest,
+  DescribeApmPrometheusRuleResponse,
+  ServiceDetail,
   Span,
   ApmAgentInfo,
+  TerminateApmInstanceRequest,
   ApmApplicationConfigView,
   ApmMetricRecord,
   DescribeServiceOverviewRequest,
+  DescribeApmSampleConfigResponse,
   DescribeApmAgentResponse,
-  DescribeTagValuesRequest,
+  CreateApmSampleConfigRequest,
+  DescribeApmSampleConfigRequest,
+  ModifyApmInstanceResponse,
+  SpanLog,
   ApmServiceMetric,
+  ModifyApmSampleConfigResponse,
+  ApmAppConfig,
+  CreateApmSampleConfigResponse,
+  DescribeApmApplicationConfigRequest,
+  Filter,
   ApmField,
   Line,
   DescribeGeneralSpanListResponse,
   CreateProfileTaskResponse,
   DescribeGeneralSpanListRequest,
-  APMKVItem,
+  ModifyApmPrometheusRuleResponse,
+  ApmAssociation,
   OrderBy,
+  DescribeServiceOverviewResponse,
   DescribeApmServiceMetricResponse,
+  ModifyApmAssociationResponse,
   DescribeMetricRecordsResponse,
   DescribeGeneralOTSpanListResponse,
   ApmTag,
-  Filter,
+  ModifyApmApplicationConfigResponse,
+  DescribeApmApplicationConfigResponse,
+  DescribeApmAssociationRequest,
+  ModifyApmApplicationConfigRequest,
   APMKV,
   DescribeGeneralOTSpanListRequest,
   DescribeApmAgentRequest,
   DescribeMetricRecordsRequest,
   DescribeGeneralApmApplicationConfigResponse,
   DescribeGeneralMetricDataRequest,
+  DescribeApmPrometheusRuleRequest,
   CreateApmInstanceResponse,
   SpanReference,
   CreateProfileTaskRequest,
   SpanProcess,
+  DeleteApmSampleConfigResponse,
+  ModifyApmAssociationRequest,
+  ApmPrometheusRules,
+  ModifyApmSampleConfigRequest,
   DescribeGeneralApmApplicationConfigRequest,
-  ModifyApmInstanceResponse,
+  ApmSampleConfig,
   GeneralFilter,
   DescribeApmInstancesRequest,
   SpanTag,
   DescribeGeneralMetricDataResponse,
-  ModifyGeneralApmApplicationConfigResponse,
+  DeleteApmSampleConfigRequest,
+  APMKVItem,
+  CreateApmPrometheusRuleResponse,
   TerminateApmInstanceResponse,
 } from "./apm_models"
 
@@ -81,33 +108,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建事件任务
+   * 修改APM业务系统接口
    */
-  async CreateProfileTask(
-    req: CreateProfileTaskRequest,
-    cb?: (error: string, rep: CreateProfileTaskResponse) => void
-  ): Promise<CreateProfileTaskResponse> {
-    return this.request("CreateProfileTask", req, cb)
-  }
-
-  /**
-   * 查询应用配置信息
-   */
-  async DescribeGeneralApmApplicationConfig(
-    req: DescribeGeneralApmApplicationConfigRequest,
-    cb?: (error: string, rep: DescribeGeneralApmApplicationConfigResponse) => void
-  ): Promise<DescribeGeneralApmApplicationConfigResponse> {
-    return this.request("DescribeGeneralApmApplicationConfig", req, cb)
-  }
-
-  /**
-   * 根据维度名和过滤条件，查询维度数据.
-   */
-  async DescribeTagValues(
-    req: DescribeTagValuesRequest,
-    cb?: (error: string, rep: DescribeTagValuesResponse) => void
-  ): Promise<DescribeTagValuesResponse> {
-    return this.request("DescribeTagValues", req, cb)
+  async ModifyApmInstance(
+    req: ModifyApmInstanceRequest,
+    cb?: (error: string, rep: ModifyApmInstanceResponse) => void
+  ): Promise<ModifyApmInstanceResponse> {
+    return this.request("ModifyApmInstance", req, cb)
   }
 
   /**
@@ -121,26 +128,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取 APM 业务系统列表
-   */
-  async DescribeApmInstances(
-    req: DescribeApmInstancesRequest,
-    cb?: (error: string, rep: DescribeApmInstancesResponse) => void
-  ): Promise<DescribeApmInstancesResponse> {
-    return this.request("DescribeApmInstances", req, cb)
-  }
-
-  /**
-   * 获取 APM 接入点
-   */
-  async DescribeApmAgent(
-    req: DescribeApmAgentRequest,
-    cb?: (error: string, rep: DescribeApmAgentResponse) => void
-  ): Promise<DescribeApmAgentResponse> {
-    return this.request("DescribeApmAgent", req, cb)
-  }
-
-  /**
    * 通用查询 OpenTelemetry 调用链列表
    */
   async DescribeGeneralOTSpanList(
@@ -151,23 +138,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改APM业务系统接口
+   * 业务购买 APM 业务系统，调用该接口创建
    */
-  async ModifyApmInstance(
-    req: ModifyApmInstanceRequest,
-    cb?: (error: string, rep: ModifyApmInstanceResponse) => void
-  ): Promise<ModifyApmInstanceResponse> {
-    return this.request("ModifyApmInstance", req, cb)
+  async CreateApmInstance(
+    req: CreateApmInstanceRequest,
+    cb?: (error: string, rep: CreateApmInstanceResponse) => void
+  ): Promise<CreateApmInstanceResponse> {
+    return this.request("CreateApmInstance", req, cb)
   }
 
   /**
-   * 对外开放的openApi，客户可以灵活的指定需要修改的字段，再加入需要修改的服务列表.
+   * 查询应用配置信息
    */
-  async ModifyGeneralApmApplicationConfig(
-    req: ModifyGeneralApmApplicationConfigRequest,
-    cb?: (error: string, rep: ModifyGeneralApmApplicationConfigResponse) => void
-  ): Promise<ModifyGeneralApmApplicationConfigResponse> {
-    return this.request("ModifyGeneralApmApplicationConfig", req, cb)
+  async DescribeGeneralApmApplicationConfig(
+    req: DescribeGeneralApmApplicationConfigRequest,
+    cb?: (error: string, rep: DescribeGeneralApmApplicationConfigResponse) => void
+  ): Promise<DescribeGeneralApmApplicationConfigResponse> {
+    return this.request("DescribeGeneralApmApplicationConfig", req, cb)
+  }
+
+  /**
+   * 用于修改apm业务系统与其他产品的关联关系（包括创建和删除）
+   */
+  async ModifyApmAssociation(
+    req: ModifyApmAssociationRequest,
+    cb?: (error: string, rep: ModifyApmAssociationResponse) => void
+  ): Promise<ModifyApmAssociationResponse> {
+    return this.request("ModifyApmAssociation", req, cb)
+  }
+
+  /**
+   * 修改采样配置接口
+   */
+  async ModifyApmSampleConfig(
+    req: ModifyApmSampleConfigRequest,
+    cb?: (error: string, rep: ModifyApmSampleConfigResponse) => void
+  ): Promise<ModifyApmSampleConfigResponse> {
+    return this.request("ModifyApmSampleConfig", req, cb)
+  }
+
+  /**
+   * 获取 APM 接入点
+   */
+  async DescribeApmAgent(
+    req: DescribeApmAgentRequest,
+    cb?: (error: string, rep: DescribeApmAgentResponse) => void
+  ): Promise<DescribeApmAgentResponse> {
+    return this.request("DescribeApmAgent", req, cb)
   }
 
   /**
@@ -182,13 +199,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指标列表接口，查询指标更推荐使用DescribeGeneralMetricData接口
+   * 用于创建apm业务系统与Prometheus实例的指标匹配规则
    */
-  async DescribeMetricRecords(
-    req: DescribeMetricRecordsRequest,
-    cb?: (error: string, rep: DescribeMetricRecordsResponse) => void
-  ): Promise<DescribeMetricRecordsResponse> {
-    return this.request("DescribeMetricRecords", req, cb)
+  async CreateApmPrometheusRule(
+    req: CreateApmPrometheusRuleRequest,
+    cb?: (error: string, rep: CreateApmPrometheusRuleResponse) => void
+  ): Promise<CreateApmPrometheusRuleResponse> {
+    return this.request("CreateApmPrometheusRule", req, cb)
   }
 
   /**
@@ -202,13 +219,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 业务购买 APM 业务系统，调用该接口创建
+   * 用于查询apm业务系统与其他产品的关联关系
    */
-  async CreateApmInstance(
-    req: CreateApmInstanceRequest,
-    cb?: (error: string, rep: CreateApmInstanceResponse) => void
-  ): Promise<CreateApmInstanceResponse> {
-    return this.request("CreateApmInstance", req, cb)
+  async DescribeApmAssociation(
+    req: DescribeApmAssociationRequest,
+    cb?: (error: string, rep: DescribeApmAssociationResponse) => void
+  ): Promise<DescribeApmAssociationResponse> {
+    return this.request("DescribeApmAssociation", req, cb)
   }
 
   /**
@@ -219,6 +236,126 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApmServiceMetricResponse) => void
   ): Promise<DescribeApmServiceMetricResponse> {
     return this.request("DescribeApmServiceMetric", req, cb)
+  }
+
+  /**
+   * 用于修改apm业务系统与Prometheus实例的指标匹配规则
+   */
+  async ModifyApmPrometheusRule(
+    req: ModifyApmPrometheusRuleRequest,
+    cb?: (error: string, rep: ModifyApmPrometheusRuleResponse) => void
+  ): Promise<ModifyApmPrometheusRuleResponse> {
+    return this.request("ModifyApmPrometheusRule", req, cb)
+  }
+
+  /**
+   * 创建采样配置接口
+   */
+  async CreateApmSampleConfig(
+    req: CreateApmSampleConfigRequest,
+    cb?: (error: string, rep: CreateApmSampleConfigResponse) => void
+  ): Promise<CreateApmSampleConfigResponse> {
+    return this.request("CreateApmSampleConfig", req, cb)
+  }
+
+  /**
+   * 查询采样配置接口
+   */
+  async DescribeApmSampleConfig(
+    req: DescribeApmSampleConfigRequest,
+    cb?: (error: string, rep: DescribeApmSampleConfigResponse) => void
+  ): Promise<DescribeApmSampleConfigResponse> {
+    return this.request("DescribeApmSampleConfig", req, cb)
+  }
+
+  /**
+   * 根据维度名和过滤条件，查询维度数据.
+   */
+  async DescribeTagValues(
+    req: DescribeTagValuesRequest,
+    cb?: (error: string, rep: DescribeTagValuesResponse) => void
+  ): Promise<DescribeTagValuesResponse> {
+    return this.request("DescribeTagValues", req, cb)
+  }
+
+  /**
+   * 用于查询apm业务系统与Prometheus实例的指标匹配规则
+   */
+  async DescribeApmPrometheusRule(
+    req: DescribeApmPrometheusRuleRequest,
+    cb?: (error: string, rep: DescribeApmPrometheusRuleResponse) => void
+  ): Promise<DescribeApmPrometheusRuleResponse> {
+    return this.request("DescribeApmPrometheusRule", req, cb)
+  }
+
+  /**
+   * 获取 APM 业务系统列表
+   */
+  async DescribeApmInstances(
+    req: DescribeApmInstancesRequest,
+    cb?: (error: string, rep: DescribeApmInstancesResponse) => void
+  ): Promise<DescribeApmInstancesResponse> {
+    return this.request("DescribeApmInstances", req, cb)
+  }
+
+  /**
+   * 删除采样配置接口
+   */
+  async DeleteApmSampleConfig(
+    req: DeleteApmSampleConfigRequest,
+    cb?: (error: string, rep: DeleteApmSampleConfigResponse) => void
+  ): Promise<DeleteApmSampleConfigResponse> {
+    return this.request("DeleteApmSampleConfig", req, cb)
+  }
+
+  /**
+   * 创建事件任务
+   */
+  async CreateProfileTask(
+    req: CreateProfileTaskRequest,
+    cb?: (error: string, rep: CreateProfileTaskResponse) => void
+  ): Promise<CreateProfileTaskResponse> {
+    return this.request("CreateProfileTask", req, cb)
+  }
+
+  /**
+   * 查询应用配置接口
+   */
+  async DescribeApmApplicationConfig(
+    req: DescribeApmApplicationConfigRequest,
+    cb?: (error: string, rep: DescribeApmApplicationConfigResponse) => void
+  ): Promise<DescribeApmApplicationConfigResponse> {
+    return this.request("DescribeApmApplicationConfig", req, cb)
+  }
+
+  /**
+   * 对外开放的openApi，客户可以灵活的指定需要修改的字段，再加入需要修改的服务列表.
+   */
+  async ModifyGeneralApmApplicationConfig(
+    req: ModifyGeneralApmApplicationConfigRequest,
+    cb?: (error: string, rep: ModifyGeneralApmApplicationConfigResponse) => void
+  ): Promise<ModifyGeneralApmApplicationConfigResponse> {
+    return this.request("ModifyGeneralApmApplicationConfig", req, cb)
+  }
+
+  /**
+   * 查询指标列表接口，查询指标更推荐使用DescribeGeneralMetricData接口
+   */
+  async DescribeMetricRecords(
+    req: DescribeMetricRecordsRequest,
+    cb?: (error: string, rep: DescribeMetricRecordsResponse) => void
+  ): Promise<DescribeMetricRecordsResponse> {
+    return this.request("DescribeMetricRecords", req, cb)
+  }
+
+  /**
+   * 修改应用配置接口
+   */
+  async ModifyApmApplicationConfig(
+    req: ModifyApmApplicationConfigRequest,
+    cb?: (error: string, rep: ModifyApmApplicationConfigResponse) => void
+  ): Promise<ModifyApmApplicationConfigResponse> {
+    return this.request("ModifyApmApplicationConfig", req, cb)
   }
 
   /**

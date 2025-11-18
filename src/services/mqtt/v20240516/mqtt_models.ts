@@ -1097,6 +1097,28 @@ export interface ModifyInstanceResponse {
 }
 
 /**
+ * AddClientSubscription请求参数结构体
+ */
+export interface AddClientSubscriptionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 客户端id
+   */
+  ClientId: string
+  /**
+   * 订阅
+   */
+  TopicFilter: string
+  /**
+   * 服务质量:0,1,2
+   */
+  Qos?: string
+}
+
+/**
  * CreateHttpAuthenticator返回参数结构体
  */
 export interface CreateHttpAuthenticatorResponse {
@@ -1598,6 +1620,24 @@ export interface DeleteCaCertificateResponse {
 }
 
 /**
+ * DeleteClientSubscription请求参数结构体
+ */
+export interface DeleteClientSubscriptionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 客户端id
+   */
+  ClientId?: string
+  /**
+   * 订阅
+   */
+  TopicFilter?: string
+}
+
+/**
  * 标签过滤器
  */
 export interface TagFilter {
@@ -2061,6 +2101,16 @@ export interface DescribeTopicListRequest {
 }
 
 /**
+ * AddClientSubscription返回参数结构体
+ */
+export interface AddClientSubscriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTopic返回参数结构体
  */
 export interface CreateTopicResponse {
@@ -2505,6 +2555,10 @@ API：通过API手动注册
    */
   TransportLayerSecurity?: string
   /**
+   * 消息属性增强规则配额
+   */
+  MessageEnrichmentRuleLimit?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2643,6 +2697,16 @@ export interface DescribeDeviceIdentityResponse {
    * 该设备id的传播属性
    */
   PropagatingProperties?: Array<PropagatingProperty>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteClientSubscription返回参数结构体
+ */
+export interface DeleteClientSubscriptionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

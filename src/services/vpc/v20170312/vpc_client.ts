@@ -83,6 +83,7 @@ import {
   ReplaceRoutePolicyEntriesRequest,
   AssignIpv6SubnetCidrBlockRequest,
   DeleteVpnGatewaySslClientResponse,
+  DescribeNatGatewayZonesRequest,
   DescribeCrossBorderComplianceRequest,
   CreateVpcResponse,
   AssistantCidr,
@@ -212,6 +213,7 @@ import {
   DescribeFlowLogRequest,
   DescribeTenantCcnsRequest,
   DescribeIp6AddressesRequest,
+  ReplaceCcnRouteTableInputPolicysResponse,
   TrafficFlow,
   CreateRoutePolicyRequest,
   DeleteRoutePolicyAssociationsResponse,
@@ -556,7 +558,7 @@ import {
   ModifySnapshotPoliciesResponse,
   ResetRoutePolicyEntriesRequest,
   InquiryPriceRenewAddressesResponse,
-  ReplaceCcnRouteTableInputPolicysResponse,
+  DescribeNatGatewayZonesResponse,
   DeleteCdcNetPlanesResponse,
   CreateRoutePolicyAssociationsRequest,
   RenewAddressesResponse,
@@ -1047,6 +1049,7 @@ import {
   DisassociateHaVipInstanceRequest,
   ReplaceCcnRouteTableInputPolicysRequest,
   InstanceChargePrepaid,
+  NatZoneInfo,
   CreateRoutePolicyAssociationsResponse,
   AddTemplateMemberRequest,
   ModifyNetworkInterfaceAttributeResponse,
@@ -4638,6 +4641,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
   ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
     return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeNatGatewayZones)用于查询NAT网关可售卖的可用区信息
+   */
+  async DescribeNatGatewayZones(
+    req?: DescribeNatGatewayZonesRequest,
+    cb?: (error: string, rep: DescribeNatGatewayZonesResponse) => void
+  ): Promise<DescribeNatGatewayZonesResponse> {
+    return this.request("DescribeNatGatewayZones", req, cb)
   }
 
   /**

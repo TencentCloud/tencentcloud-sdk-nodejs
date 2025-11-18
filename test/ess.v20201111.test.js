@@ -608,6 +608,16 @@ it("ess.v20201111.CreateFlowByFiles", async function () {
     }
 })
 
+it("ess.v20201111.CreateBatchAdminChangeInvitationsUrl", async function () {
+    try {
+       const data = await client.CreateBatchAdminChangeInvitationsUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowSignUrl", async function () {
     try {
        const data = await client.CreateFlowSignUrl({})
@@ -1181,6 +1191,16 @@ it("ess.v20201111.DescribeFileCounterSignResult", async function () {
 it("ess.v20201111.GetTaskResultApi", async function () {
     try {
        const data = await client.GetTaskResultApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateBatchAdminChangeInvitations", async function () {
+    try {
+       const data = await client.CreateBatchAdminChangeInvitations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

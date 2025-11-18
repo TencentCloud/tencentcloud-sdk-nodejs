@@ -2934,6 +2934,10 @@ export interface CreateAlarmNoticeRequest {
    * 模板绑定的标签
    */
   Tags?: Array<Tag>
+  /**
+   * 是否免登录，0-否，1-是
+   */
+  IsLoginFree?: number
 }
 
 /**
@@ -4200,6 +4204,10 @@ export interface ModifyAlarmNoticeRequest {
    * 告警通知模板绑定的告警策略ID列表
    */
   PolicyIds?: Array<string>
+  /**
+   * 是否免登录，0-否，1-是
+   */
+  IsLoginFree?: number
 }
 
 /**
@@ -4832,7 +4840,8 @@ export interface CreateGrafanaInstanceRequest {
    */
   VpcId: string
   /**
-   * 子网 ID 数组(VPC ID下的子网 ID，只取第一个)
+   * 子网 ID 数组(VPC ID下的子网 ID，只取第一个)。
+注意：并不是所有可用区都可用（可通过 monitor:DescribePrometheusZones 接口获取可用区状态，选择 ZoneState 和ZoneResourceState 都为1的可用区）
    */
   SubnetIds: Array<string>
   /**
@@ -6811,6 +6820,10 @@ export interface AlarmNotice {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * 是否免登录，0-否，1-是
+   */
+  IsLoginFree?: number
 }
 
 /**

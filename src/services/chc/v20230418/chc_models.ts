@@ -1047,7 +1047,7 @@ export interface CustomerReceipt {
    */
   PickUpStuffContact: string
   /**
-   * 自提人证件号码
+   * 到访人证件号码
    */
   PickUpStuffIDCard: string
   /**
@@ -1410,6 +1410,18 @@ export interface DeviceOrderBaseInfo {
    * 物流上门收货信息
    */
   LogisticsReceipt?: LogisticsReceipt
+  /**
+   * 涉及物资放行时的楼宇
+   */
+  Building?: string
+  /**
+   * 物资放行抄送邮箱
+   */
+  EmailSet?: Array<string>
+  /**
+   * 物资放行到访原因
+   */
+  FactorSet?: Array<string>
 }
 
 /**
@@ -2336,6 +2348,26 @@ export interface CreateQuitWorkOrderRequest {
    * 客户上门自提必传
    */
   CustomerReceipt?: CustomerReceipt
+  /**
+   * 楼宇名
+   */
+  Building?: string
+  /**
+   * 机房管理单元id
+   */
+  IdcUnitId?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 放行邮件目的邮箱
+   */
+  EmailSet?: Array<string>
+  /**
+   * 到访原因
+   */
+  FactorSet?: Array<string>
 }
 
 /**

@@ -669,7 +669,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateGrafanaInstance）用于创建 Grafana 包年包月实例，默认基础版、到期自动续费、不可使用代金券。
+   * 本接口（CreateGrafanaInstance）用于创建 Grafana 包年包月实例，默认基础版、到期自动续费。
    */
   async CreateGrafanaInstance(
     req: CreateGrafanaInstanceRequest,

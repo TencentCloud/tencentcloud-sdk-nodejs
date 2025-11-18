@@ -106,55 +106,63 @@ export interface WafRuleLimit {
   /**
    * 自定义CC的规格
    */
-  CC: number
+  CC?: number
   /**
    * 自定义策略的规格
    */
-  CustomRule: number
+  CustomRule?: number
   /**
    * 黑白名单的规格
    */
-  IPControl: number
+  IPControl?: number
   /**
    * 信息防泄漏的规格
    */
-  AntiLeak: number
+  AntiLeak?: number
   /**
    * 防篡改的规格
    */
-  AntiTamper: number
+  AntiTamper?: number
   /**
    * 紧急CC的规格
    */
-  AutoCC: number
+  AutoCC?: number
   /**
    * 地域封禁的规格
    */
-  AreaBan: number
+  AreaBan?: number
   /**
    * 自定义CC中配置session
    */
-  CCSession: number
+  CCSession?: number
   /**
    * AI的规格
    */
-  AI: number
+  AI?: number
   /**
    * 精准白名单的规格
    */
-  CustomWhite: number
+  CustomWhite?: number
   /**
    * api安全的规格
    */
-  ApiSecurity: number
+  ApiSecurity?: number
   /**
    * 客户端流量标记的规格
    */
-  ClientMsg: number
+  ClientMsg?: number
   /**
    * 流量标记的规格
    */
-  TrafficMarking: number
+  TrafficMarking?: number
+  /**
+   * 批量cc
+   */
+  BatchCC?: number
+  /**
+   * 批量session
+   */
+  BatchSession?: number
 }
 
 /**
@@ -1471,6 +1479,10 @@ export interface ModifyOwaspWhiteRuleRequest {
    * 规则状态，0：关闭、1：开启，默认为开启
    */
   Status?: number
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -3546,7 +3558,21 @@ cdc-clb-waf：CDC环境下负载均衡型WAF实例
    */
   AppId: number
   /**
-   * 负载均衡型WAF域名LB监听器状态。
+   * SAAS型WAF域名状态：
+-2：配置下发失败
+-1：配置下发中
+0：DNS解析中
+1：无DNS解析记录，请接入WAF
+10：DNS解析未知，域名启用了代理
+11：DNS解析异常，使用A记录接入WAF IP
+200：检测源站不可达
+220：源站不支持长连接
+311：证书过期
+312：证书即将过期
+310：证书异常
+316：备案异常
+5：WAF回源已变更
+负载均衡型WAF域名LB监听器状态：
 0：操作成功 
 4：正在绑定LB 
 6：正在解绑LB 
@@ -3851,6 +3877,14 @@ export interface CCRuleLists {
    * 规则
    */
   Res?: Array<CCRuleItems>
+  /**
+   * 规则限制总数
+   */
+  Limit?: number
+  /**
+   * 规则剩余多少可用
+   */
+  Available?: number
 }
 
 /**
@@ -6332,6 +6366,49 @@ export interface ModifyOwaspRuleTypeLevelRequest {
 }
 
 /**
+ * 有效预付费大模型安全包信息
+ */
+export interface LLMMonPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 计费项
+   */
+  InquireKey?: string
+  /**
+   * 预付费大模型安全续费标识
+0 手动续费；1自动续费；2 到期不续
+   */
+  RenewFlag?: number
+  /**
+   * 大模型安全Token使用量
+   */
+  UseToken?: number
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+}
+
+/**
  * ModifyHost请求参数结构体
  */
 export interface ModifyHostRequest {
@@ -6495,6 +6572,10 @@ export interface CreateOwaspWhiteRuleRequest {
    * 规则状态，0：关闭、1：开启，默认为开启
    */
   Status?: number
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -8869,6 +8950,14 @@ export interface InstanceInfo {
    * 弹性资源Id
    */
   ElasticResourceId?: string
+  /**
+   * 预付费大模型安全信息包
+   */
+  LLMMonPkg?: LLMMonPkg
+  /**
+   * 地域id
+   */
+  RegionId?: number
 }
 
 /**
@@ -9164,6 +9253,10 @@ export interface OwaspWhiteRule {
    * 当前是否有效
    */
   ValidStatus?: boolean
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -10159,6 +10252,10 @@ export interface UpsertCCRuleRequest {
    * 动作灰度比例，默认值100
    */
   ActionRatio?: number
+  /**
+   * 规则来源
+   */
+  Source?: string
 }
 
 /**
@@ -10970,6 +11067,38 @@ export interface CCRuleItems {
    * 动作灰度比例，默认值100
    */
   ActionRatio?: number
+  /**
+   * 批量cc规则配置的批量域名
+   */
+  Domains?: Array<string>
+  /**
+   * 批量cc规则使用的批量防护组
+   */
+  GroupIds?: Array<number | bigint>
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 定时任务类型：month or week
+   */
+  CronType?: string
+  /**
+   * 过期时间
+   */
+  ExpireTime?: number
+  /**
+   * 是否生效
+   */
+  ValidStatus?: number
+  /**
+   * 来源：批量还是单个规则
+   */
+  Source?: string
 }
 
 /**
@@ -11733,6 +11862,30 @@ https：使用https协议回源
    * gzip开关。0：关闭 1：默认值，打开。
    */
   Gzip?: number
+  /**
+   * SAAS型WAF域名状态：
+-2：配置下发失败
+-1：配置下发中
+0：DNS解析中
+1：无DNS解析记录，请接入WAF
+10：DNS解析未知，域名启用了代理
+11：DNS解析异常，使用A记录接入WAF IP
+200：检测源站不可达
+220：源站不支持长连接
+311：证书过期
+312：证书即将过期
+310：证书异常
+316：备案异常
+5：WAF回源已变更
+负载均衡型WAF域名LB监听器状态：
+0：操作成功 
+4：正在绑定LB 
+6：正在解绑LB 
+7：解绑LB失败 
+8：绑定LB失败 
+10：内部错误
+   */
+  State?: number
 }
 
 /**

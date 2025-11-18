@@ -5235,6 +5235,14 @@ export interface TTSConfig {
    * TTS 的模型，默认是：flow_01_turbo, 可选: [ flow_01_turbo, flow_01_ex]
    */
   Model?: string
+  /**
+   * 语速，范围 0.5-2.0，默认 1.0
+   */
+  Speed?: number
+  /**
+   * (0, 10] 默认值1.0
+   */
+  Volume?: number
 }
 
 /**

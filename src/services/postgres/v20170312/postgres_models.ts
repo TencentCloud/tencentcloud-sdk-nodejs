@@ -668,34 +668,17 @@ export interface RestoreDBInstanceObjectsResponse {
 }
 
 /**
- * SwitchDBInstancePrimary请求参数结构体
+ * ModifyDBInstanceDeletionProtection请求参数结构体
  */
-export interface SwitchDBInstancePrimaryRequest {
+export interface ModifyDBInstanceDeletionProtectionRequest {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
   /**
-   * 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。
-<li>默认：false</li>
+   * 开启或关闭实例删除保护。true - 开启 ；false - 关闭。
    */
-  Force?: boolean
-  /**
-   * 指定实例配置完成变更后的切换时间。
-<li>0：立即切换 </li>
-<li>1：指定时间切换</li>
-<li>2：维护时间窗口内切换</li>
-默认值：0 
-   */
-  SwitchTag?: number
-  /**
-   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
-   */
-  SwitchStartTime?: string
-  /**
-   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
-   */
-  SwitchEndTime?: string
+  DeletionProtection: boolean
 }
 
 /**
@@ -1279,13 +1262,38 @@ db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
 }
 
 /**
- * DescribeDBInstanceAttribute请求参数结构体
+ * CreateBackupPlan请求参数结构体
  */
-export interface DescribeDBInstanceAttributeRequest {
+export interface CreateBackupPlanRequest {
   /**
    * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
+  /**
+   * 备份计划名称。
+   */
+  PlanName: string
+  /**
+   * 创建的备份计划类型，当前仅支持month创建。
+   */
+  BackupPeriodType: string
+  /**
+   * 备份的日期，示例是每个月的2号开启备份。
+   */
+  BackupPeriod: Array<string>
+  /**
+   * 备份开始时间，不传跟随默认备份计划。
+   */
+  MinBackupStartTime?: string
+  /**
+   * 备份结束时间，不传跟随默认计划。
+   */
+  MaxBackupStartTime?: string
+  /**
+   * 数据备份保留时长，单位：天。取值范围为：[0,30000)
+BackupPeriodType为week时默认是7,为month时默认为31。
+   */
+  BaseBackupRetentionPeriod?: number
 }
 
 /**
@@ -1498,6 +1506,28 @@ export interface DescribeAvailableRecoveryTimeRequest {
    * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
+}
+
+/**
+ * CloseAccountCAM请求参数结构体
+ */
+export interface CloseAccountCAMRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+  /**
+   * 需要关闭CAM服务的账号名称
+   */
+  UserName: string
+  /**
+   * 关闭CAM后，登录该账号所需要的新密码
+   */
+  Password: string
+  /**
+   * 密码是否加密
+   */
+  PasswordEncrypt?: boolean
 }
 
 /**
@@ -1987,6 +2017,30 @@ export interface ModifyAccountRemarkResponse {
 }
 
 /**
+ * RefreshAccountPassword请求参数结构体
+ */
+export interface RefreshAccountPasswordRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+  /**
+   * 账号名称
+   */
+  UserName: string
+}
+
+/**
+ * OpenAccountCAM返回参数结构体
+ */
+export interface OpenAccountCAMResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeZones请求参数结构体
  */
 export type DescribeZonesRequest = null
@@ -2119,17 +2173,17 @@ db-instance-status：按实例状态过滤，类型为string。取值参考[DBIn
 }
 
 /**
- * SetAutoRenewFlag返回参数结构体
+ * ModifyDBInstanceParameters请求参数结构体
  */
-export interface SetAutoRenewFlagResponse {
+export interface ModifyDBInstanceParametersRequest {
   /**
-   * 设置成功的实例个数
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
-  Count?: number
+  DBInstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 待修改参数及期望值。
    */
-  RequestId?: string
+  ParamList: Array<ParamEntry>
 }
 
 /**
@@ -2189,38 +2243,13 @@ export interface NetworkAccess {
 }
 
 /**
- * CreateBackupPlan请求参数结构体
+ * DescribeDBInstanceAttribute请求参数结构体
  */
-export interface CreateBackupPlanRequest {
+export interface DescribeDBInstanceAttributeRequest {
   /**
    * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
   DBInstanceId: string
-  /**
-   * 备份计划名称。
-   */
-  PlanName: string
-  /**
-   * 创建的备份计划类型，当前仅支持month创建。
-   */
-  BackupPeriodType: string
-  /**
-   * 备份的日期，示例是每个月的2号开启备份。
-   */
-  BackupPeriod: Array<string>
-  /**
-   * 备份开始时间，不传跟随默认备份计划。
-   */
-  MinBackupStartTime?: string
-  /**
-   * 备份结束时间，不传跟随默认计划。
-   */
-  MaxBackupStartTime?: string
-  /**
-   * 数据备份保留时长，单位：天。取值范围为：[0,30000)
-BackupPeriodType为week时默认是7,为month时默认为31。
-   */
-  BaseBackupRetentionPeriod?: number
 }
 
 /**
@@ -3532,17 +3561,44 @@ export interface DescribeDBInstanceSSLConfigResponse {
 }
 
 /**
- * UpgradeDBInstanceKernelVersion返回参数结构体
+ * CloseAccountCAM返回参数结构体
  */
-export interface UpgradeDBInstanceKernelVersionResponse {
-  /**
-   * 任务ID
-   */
-  TaskId?: number
+export interface CloseAccountCAMResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SwitchDBInstancePrimary请求参数结构体
+ */
+export interface SwitchDBInstancePrimaryRequest {
+  /**
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   */
+  DBInstanceId: string
+  /**
+   * 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。
+<li>默认：false</li>
+   */
+  Force?: boolean
+  /**
+   * 指定实例配置完成变更后的切换时间。
+<li>0：立即切换 </li>
+<li>1：指定时间切换</li>
+<li>2：维护时间窗口内切换</li>
+默认值：0 
+   */
+  SwitchTag?: number
+  /**
+   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+   */
+  SwitchStartTime?: string
+  /**
+   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
+   */
+  SwitchEndTime?: string
 }
 
 /**
@@ -3707,6 +3763,20 @@ export interface DescribeParameterTemplatesRequest {
    * 排序方式，枚举值，支持：asc（升序） ，desc（降序）。默认值为asc。当未指定OrderBy时，该参数失效，此时排序方式为OrderBy参数描述中给出的默认排序方式。
    */
   OrderByType?: string
+}
+
+/**
+ * OpenAccountCAM请求参数结构体
+ */
+export interface OpenAccountCAMRequest {
+  /**
+   * 数据库实例ID
+   */
+  DBInstanceId: string
+  /**
+   * 需要开启CAM服务的账号名称
+   */
+  UserName: string
 }
 
 /**
@@ -4089,6 +4159,20 @@ export interface DescribeDBBackupsRequest {
    * 返回结果中的第几页，从第0页开始。默认为0。
    */
   Offset?: number
+}
+
+/**
+ * SetAutoRenewFlag返回参数结构体
+ */
+export interface SetAutoRenewFlagResponse {
+  /**
+   * 设置成功的实例个数
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5278,17 +5362,13 @@ export interface DescribeSlowQueryAnalysisResponse {
 }
 
 /**
- * ModifyDBInstanceParameters请求参数结构体
+ * ModifyDBInstanceDeletionProtection返回参数结构体
  */
-export interface ModifyDBInstanceParametersRequest {
+export interface ModifyDBInstanceDeletionProtectionResponse {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceId: string
-  /**
-   * 待修改参数及期望值。
-   */
-  ParamList: Array<ParamEntry>
+  RequestId?: string
 }
 
 /**
@@ -5533,6 +5613,20 @@ export interface DescribeParameterTemplateAttributesResponse {
 }
 
 /**
+ * UpgradeDBInstanceKernelVersion返回参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBVersions请求参数结构体
  */
 export type DescribeDBVersionsRequest = null
@@ -5693,6 +5787,16 @@ export interface ModifyDBInstanceSpecResponse {
    * 冻结流水号。
    */
   BillId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RefreshAccountPassword返回参数结构体
+ */
+export interface RefreshAccountPasswordResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -18,6 +18,16 @@ const client = new tencentcloud.postgres.v20170312.Client({
 })
 describe("postgres.v20170312.test.js", function () {
 
+it("postgres.v20170312.OpenAccountCAM", async function () {
+    try {
+       const data = await client.OpenAccountCAM({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -398,6 +408,16 @@ it("postgres.v20170312.ModifyDBInstanceParameters", async function () {
     }
 })
 
+it("postgres.v20170312.CloseAccountCAM", async function () {
+    try {
+       const data = await client.CloseAccountCAM({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeBaseBackups", async function () {
     try {
        const data = await client.DescribeBaseBackups({})
@@ -508,6 +528,16 @@ it("postgres.v20170312.DescribeBackupSummaries", async function () {
     }
 })
 
+it("postgres.v20170312.RefreshAccountPassword", async function () {
+    try {
+       const data = await client.RefreshAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.UpgradeDBInstanceMajorVersion", async function () {
     try {
        const data = await client.UpgradeDBInstanceMajorVersion({})
@@ -521,6 +551,16 @@ it("postgres.v20170312.UpgradeDBInstanceMajorVersion", async function () {
 it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
     try {
        const data = await client.RebalanceReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyDBInstanceDeletionProtection", async function () {
+    try {
+       const data = await client.ModifyDBInstanceDeletionProtection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

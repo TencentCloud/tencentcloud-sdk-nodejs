@@ -2094,6 +2094,32 @@ export interface RelieveInfo {
 }
 
 /**
+ * CreateBatchAdminChangeInvitationsUrl返回参数结构体
+ */
+export interface CreateBatchAdminChangeInvitationsUrlResponse {
+  /**
+   * 批量企业注册链接-单链接包含多条认证流，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天
+跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
+<table> <thead> <tr> <th>Endpoint</th> <th>示例</th> <th>链接有效期限</th> </tr> </thead>  <tbody>
+ <tr> <td>HTTP</td> <td>https://res.ess.tencent.cn/cdn/h5-activity-dev/jump-mp.html?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&shortKey=yDCHHURDfBxSB2rj2Bfa</td> <td>7天</td> </tr> 
+<tr> <td>HTTP_SHORT_URL</td> <td>https://test.essurl.cn/8gDKUBAWK8</td> <td>7天</td> </tr> 
+<tr> <td>APP</td> <td>pages/guide/index?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&shortKey=yDCHpURDfR6iEkdpsDde</td> <td>7天</td> </tr><tr> <td>QR_CODE</td> <td>https://dyn.test.ess.tencent.cn/imgs/qrcode_urls/authorization_enterprise_for_batch_submit/yDCHHUUckpbdauq9UEjnoFDCCumAMmv1.png</td> <td>7天</td> </tr> </tbody> </table>
+注： 
+`1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
+
+   */
+  Url?: string
+  /**
+   * 链接过期时间，为 7 天后，创建时间，格式为Unix标准时间戳（秒）。
+   */
+  ExpireTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrganizationSeals返回参数结构体
  */
 export interface DescribeOrganizationSealsResponse {
@@ -2270,31 +2296,66 @@ export interface SuccessDeleteStaffData {
 }
 
 /**
- * DescribeUserVerifyStatus请求参数结构体
+ * 成员企业信息
  */
-export interface DescribeUserVerifyStatusRequest {
+export interface GroupOrganization {
   /**
-   * 用户信息
+   * 成员企业名
    */
-  Operator: UserInfo
+  Name?: string
   /**
-   * 姓名
+   * 成员企业别名
    */
-  Name: string
+  Alias?: string
   /**
-   * 证件号码，应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取
    */
-  IdCardNumber: string
+  OrganizationId?: string
   /**
-   * 证件类型，支持以下类型
-<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
-<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
+   * 记录更新时间， unix时间戳，单位秒
    */
-  IdCardType: string
+  UpdateTime?: number
+  /**
+   * 成员企业加入集团的当前状态
+<ul><li> **1**：待授权</li>
+<li> **2**：已授权待激活</li>
+<li> **3**：拒绝授权</li>
+<li> **4**：已解除</li>
+<li> **5**：已加入</li>
+</ul>
+
+   */
+  Status?: number
+  /**
+   * 是否为集团主企业
+   */
+  IsMainOrganization?: boolean
+  /**
+   * 企业社会信用代码
+   */
+  IdCardNumber?: string
+  /**
+   * 企业超管信息
+   */
+  AdminInfo?: Admin
+  /**
+   * 企业许可证Id，此字段暂时不需要关注
+   */
+  License?: string
+  /**
+   * 企业许可证过期时间，unix时间戳，单位秒
+   */
+  LicenseExpireTime?: number
+  /**
+   * 成员企业加入集团时间，unix时间戳，单位秒
+   */
+  JoinTime?: number
+  /**
+   * 是否使用自建审批流引擎（即不是企微审批流引擎）
+<ul><li> **true**：是</li>
+<li> **false**：否</li></ul>
+   */
+  FlowEngineEnable?: boolean
 }
 
 /**
@@ -2673,6 +2734,10 @@ export interface CreatePrepareFlowResponse {
    */
   FlowId?: string
   /**
+   * 临时的草稿id（还未实际保存草稿），用户可以记录此字段对应后续页面保存的草稿，若在页面上未保存草稿，则此字段无效。
+   */
+  DraftId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2710,6 +2775,37 @@ export interface CancelMultiFlowSignQRCodeRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * 审查通过项对应的引文信息
+ */
+export interface OutputReference {
+  /**
+   * 合同审查风险结果ID
+   */
+  RiskId?: string
+  /**
+   * 风险名称
+   */
+  RiskName?: string
+  /**
+   * 风险描述
+   */
+  RiskDescription?: string
+  /**
+   * 风险要点分类名称
+   */
+  CategoryName?: string
+  /**
+   * 审查依据
+   */
+  RiskBasis?: string
+  /**
+   * 引文内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Excerpts?: Array<ReferenceExcerpt>
 }
 
 /**
@@ -2856,6 +2952,27 @@ export interface DescribeFlowBriefsResponse {
 }
 
 /**
+ * CreateBatchAdminChangeInvitations请求参数结构体
+ */
+export interface CreateBatchAdminChangeInvitationsRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 组织机构超管变更信息。
+一次最多支持10条超管变更信息。
+   */
+  AdminChangeInvitationInfos: Array<AdminChangeInvitationInfo>
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+}
+
+/**
  * DescribeFlowTemplates返回参数结构体
  */
 export interface DescribeFlowTemplatesResponse {
@@ -2871,6 +2988,21 @@ export interface DescribeFlowTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 引用的资料
+ */
+export interface ReferenceExcerpt {
+  /**
+   * 原文内容
+   */
+  Content?: string
+  /**
+   * 坐标信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Position?: PositionInfo
 }
 
 /**
@@ -3074,6 +3206,23 @@ export interface FlowBatchUrlInfo {
    * 批量签署合同和签署方的信息，用于补充动态签署人。
    */
   FlowBatchApproverInfos?: Array<FlowBatchApproverInfo>
+}
+
+/**
+ * CreateBatchAdminChangeInvitations返回参数结构体
+ */
+export interface CreateBatchAdminChangeInvitationsResponse {
+  /**
+   * 批量生成企业认证链接的详细错误信息，
+顺序与输入参数保持一致。
+若企业认证均成功生成，则不返回错误信息；
+若存在任何错误，则返回具体的错误描述。
+   */
+  ErrorMessages?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6698,6 +6847,10 @@ export interface CreateFlowOption {
    * 发起成功之后是否签署合同，仅当前经办人作为签署人时生效 <ul><li>（默认） false -否</li> <li> true - 展示签署按钮</li></ul>
    */
   SignAfterStart?: boolean
+  /**
+   * 发起过程中是否保存草稿
+   */
+  NeedFlowDraft?: boolean
 }
 
 /**
@@ -6921,6 +7074,10 @@ Endpoint如果是APP 类型，请传递JumpUrl为<font color="red">"true" </font
 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。
    */
   JumpEvents?: Array<JumpEvent>
+  /**
+   * 企业证照类型：<ul><li> **USCC** :(默认)工商组织营业执照</li><li> **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证</li></ul>
+   */
+  OrganizationIdCardType?: string
 }
 
 /**
@@ -8759,6 +8916,7 @@ export interface CreatePrepareFlowRequest {
 <ul>
 <li>文件Id（通过UploadFiles获取文件资源Id）</li>
 <li>模板Id（通过控制台创建模板后获取模板Id）</li>
+<li>草稿Id（通过嵌入页面保存草稿后获取草稿Id）</li>
 </ul>
 注意：需要同时设置 ResourceType 参数指定资源类型
    */
@@ -8772,7 +8930,9 @@ export interface CreatePrepareFlowRequest {
   /**
    * 资源类型，取值有：
 <ul><li> **1**：模板</li>
-<li> **2**：文件（默认值）</li></ul>
+<li> **2**：文件（默认值）</li>
+<li> **3**：草稿</li>
+</ul>
    */
   ResourceType?: number
   /**
@@ -9039,6 +9199,11 @@ export interface DescribeContractReviewTaskResponse {
    * 合同审查出的风险总数
    */
   TotalRiskCount?: number
+  /**
+   * 通过项信息(详细引文信息)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApprovedLists?: Array<OutputReference>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10716,6 +10881,61 @@ export interface DescribeBillUsageDetailRequest {
 }
 
 /**
+ * CreateBatchAdminChangeInvitationsUrl请求参数结构体
+ */
+export interface CreateBatchAdminChangeInvitationsUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 组织机构要变更的超管姓名。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的姓名保持一致。
+
+   */
+  NewAdminName: string
+  /**
+   * 组织机构要变更的超管手机号。 
+在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的手机号保持一致。
+
+超管手机号 和超管证件号 二选一 必填。
+
+注意：
+1. 如果新超管的个人身份在电子签进行了手机号的变更，之前提交的超管变更任务将无法获取。
+   */
+  NewAdminMobile?: string
+  /**
+   * 组织机构要变更的超管证件类型支持以下类型
+- ID_CARD : 中国大陆居民身份证 (默认值)
+-  HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证
+- HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)
+需要更当前操作人的证件类型保持一致。
+
+   */
+  NewAdminIdCardType?: string
+  /**
+   * 组织机构要变更的超管证件号。 
+在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的证件号保持一致。
+
+超管手机号和超管证件号 二选一必填。
+   */
+  NewAdminIdCardNumber?: string
+  /**
+   * 通知方式。
+ NONE（默认）
+ SMS  - 如果使用这个方式，则会给即将变更的超管发信息。
+注意：
+发送信息的手机号，是用户传递的手机号。
+如果用户同时传递了证件号，手机号会用用户在电子签注册的手机号进行覆盖。
+   */
+  NotifyType?: string
+  /**
+   * 要跳转的链接类型<ul><li> **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型  ，此时返回长链 (默认类型)</li><li>**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链</li><li>**APP**： 第三方APP或小程序跳转电子签小程序的path,  APP或者小程序跳转适合此类型</li><li>**QR_CODE**： 跳转电子签小程序的http_url的二维码形式,  可以在页面展示适合此类型</li></ul>
+   */
+  Endpoint?: string
+}
+
+/**
  * CreateUserAutoSignSealUrl返回参数结构体
  */
 export interface CreateUserAutoSignSealUrlResponse {
@@ -10948,6 +11168,10 @@ export interface OutputRisk {
    * 审查依据
    */
   RiskBasis?: string
+  /**
+   * 风险等级id
+   */
+  RiskLevelId?: number
 }
 
 /**
@@ -11452,66 +11676,31 @@ export interface CreateIntegrationDepartmentRequest {
 }
 
 /**
- * 成员企业信息
+ * DescribeUserVerifyStatus请求参数结构体
  */
-export interface GroupOrganization {
+export interface DescribeUserVerifyStatusRequest {
   /**
-   * 成员企业名
+   * 用户信息
    */
-  Name?: string
+  Operator: UserInfo
   /**
-   * 成员企业别名
+   * 姓名
    */
-  Alias?: string
+  Name: string
   /**
-   * 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取
+   * 证件号码，应符合以下规则
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
-  OrganizationId?: string
+  IdCardNumber: string
   /**
-   * 记录更新时间， unix时间戳，单位秒
+   * 证件类型，支持以下类型
+<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
-  UpdateTime?: number
-  /**
-   * 成员企业加入集团的当前状态
-<ul><li> **1**：待授权</li>
-<li> **2**：已授权待激活</li>
-<li> **3**：拒绝授权</li>
-<li> **4**：已解除</li>
-<li> **5**：已加入</li>
-</ul>
-
-   */
-  Status?: number
-  /**
-   * 是否为集团主企业
-   */
-  IsMainOrganization?: boolean
-  /**
-   * 企业社会信用代码
-   */
-  IdCardNumber?: string
-  /**
-   * 企业超管信息
-   */
-  AdminInfo?: Admin
-  /**
-   * 企业许可证Id，此字段暂时不需要关注
-   */
-  License?: string
-  /**
-   * 企业许可证过期时间，unix时间戳，单位秒
-   */
-  LicenseExpireTime?: number
-  /**
-   * 成员企业加入集团时间，unix时间戳，单位秒
-   */
-  JoinTime?: number
-  /**
-   * 是否使用自建审批流引擎（即不是企微审批流引擎）
-<ul><li> **true**：是</li>
-<li> **false**：否</li></ul>
-   */
-  FlowEngineEnable?: boolean
+  IdCardType: string
 }
 
 /**
@@ -12439,6 +12628,56 @@ export interface StartFlowRequest {
 <li> **1** : 签署完成后通知对方来查看合同</li></ul>
    */
   CcNotifyType?: number
+}
+
+/**
+ * 企业变更超管信息。
+ */
+export interface AdminChangeInvitationInfo {
+  /**
+   * 要变更的企业Id。
+使用接口进行变更，所支持的企业有两种。
+1. 集团主企业替子企业进行超管变更。
+    子企业的企业 Id 可在更多-组织管理-集团组织管理处获取。如图位置![image](https://qcloudimg.tencent-cloud.cn/raw/3d4469c13ca9e66a847560fc4309c58b.png)
+2. 使用接口[创建企业认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl) 创建的企业，企业 Id 可以从回调[企业引导企业实名认证后回调](https://qian.tencent.com/developers/company/callback_types_staffs#%E5%8D%81%E4%B8%80-%E4%BC%81%E4%B8%9A%E5%BC%95%E5%AF%BC%E4%BC%81%E4%B8%9A%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E5%9B%9E%E8%B0%83)得到。
+   */
+  ChangeAdminOrganizationId: string
+  /**
+   * 组织机构要变更的超管姓名。 
+跟超管变更的操作人保持一致。
+
+   */
+  NewAdminName: string
+  /**
+   * 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。
+p.s. 如果上传授权书 ，需遵循以下条件
+1. 超管的信息（超管姓名，超管手机号）必须为必填参数。
+   */
+  AuthFiles: Array<string>
+  /**
+   * 组织机构要变更的超管手机号。
+跟超管变更的操作人保持一致。
+超管变更的手机号和超管变更的证件号，必须要传递一个。
+   */
+  NewAdminMobile?: string
+  /**
+   * 组织机构要变更的超管证件类型支持以下类型
+- ID_CARD : 中国大陆居民身份证 (默认值)
+- HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证
+- HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)
+
+跟超管变更的操作人保持一致。
+
+   */
+  NewAdminIdCardType?: string
+  /**
+   * 组织机构新超管证件号。
+
+跟超管变更的操作人保持一致。
+
+超管变更的手机号和超管变更的证件号，必须要传递一个。
+   */
+  NewAdminIdCardNumber?: string
 }
 
 /**
