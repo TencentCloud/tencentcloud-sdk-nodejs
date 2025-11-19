@@ -2110,6 +2110,24 @@ export interface CreateImageSpriteTemplateRequest {
 }
 
 /**
+ * 智能擦除模板隐私保护配置
+ */
+export interface SmartErasePrivacyConfig {
+  /**
+   * 隐私保护擦除方式。
+- blur 模糊
+- mosaic 马赛克
+   */
+  PrivacyModel: string
+  /**
+   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
+- face 人脸
+- plate 车牌
+   */
+  PrivacyTargets: Array<string>
+}
+
+/**
  * 指定时间点截图信息
  */
 export interface MediaSnapshotByTimePicInfoItem {
@@ -2823,6 +2841,7 @@ export interface ParseLiveStreamProcessNotificationResponse {
 <li>AiRecognitionResult：内容识别结果；</li>
 <li>LiveRecordResult：直播录制结果；</li>
 <li>AiQualityControlResult：媒体质检结果；</li>
+<li>AiAnalysisResult：内容分析结果；</li>
 <li>ProcessEof：直播流处理结束。</li>
    */
   NotificationType?: string
@@ -5418,6 +5437,13 @@ export interface DescribeSmartEraseTemplatesRequest {
    */
   Type?: string
   /**
+   * 智能擦除模板擦除类型过滤条件。
+- subtitle 去字幕
+- watermark 去水印
+- privacy 隐私保护
+   */
+  EraseType?: string
+  /**
    * 智能擦除模板名过滤条件，长度限制：64 个字符。
    */
   Name?: string
@@ -6940,21 +6966,14 @@ export interface ComposeSubtitleStyle {
 }
 
 /**
- * 智能擦除模板隐私保护配置
+ * 直播摘要结果信息。
  */
-export interface SmartErasePrivacyConfig {
+export interface LiveAiAnalysisDescriptionItem {
   /**
-   * 隐私保护擦除方式。
-- blur 模糊
-- mosaic 马赛克
+   * 分段结果。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivacyModel: string
-  /**
-   * 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。
-- face 人脸
-- plate 车牌
-   */
-  PrivacyTargets: Array<string>
+  Paragraphs?: Array<LiveAiParagraphInfo>
 }
 
 /**
@@ -12422,7 +12441,10 @@ export interface AiReviewPoliticalAsrTaskInput {
  */
 export interface LiveStreamAiAnalysisResultInfo {
   /**
-   * 直播分析子任务结果，暂时只支持直播拆条。
+   * 直播分析子任务结果，支持：
+<li>直播拆条</li>
+<li>直播高光集锦</li>
+<li>直播摘要</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultSet?: Array<LiveStreamAiAnalysisResultItem>
@@ -19352,6 +19374,40 @@ export interface FaceConfigureInfo {
 }
 
 /**
+ * 分段信息。
+ */
+export interface LiveAiParagraphInfo {
+  /**
+   * 分段摘要
+   */
+  Summary?: string
+  /**
+   * 分段标题
+   */
+  Title?: string
+  /**
+   * 分段关键词
+   */
+  Keywords?: Array<string>
+  /**
+   * 分段起始时间点，秒
+   */
+  StartTimeOffset?: number
+  /**
+   * 分段结束时间点，秒
+   */
+  EndTimeOffset?: number
+  /**
+   * 直播切片对应直播起始时间点，采用 ISO 日期格式。
+   */
+  BeginTime?: string
+  /**
+   * 直播切片对应直播结束时间点，采用 ISO 日期格式。
+   */
+  EndTime?: string
+}
+
+/**
  * 智能人脸识别输出。
  */
 export interface AiRecognitionTaskFaceResultOutput {
@@ -20574,6 +20630,7 @@ export interface LiveStreamAiAnalysisResultItem {
    * 结果的类型，取值范围：
 <li>SegmentRecognition：拆条。</li>
 <li>Highlight ：集锦。</li>
+<li> Description：摘要。</li>
    */
   Type?: string
   /**
@@ -20587,6 +20644,10 @@ SegmentRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HighlightResultSet?: Array<MediaAiAnalysisHighlightItem>
+  /**
+   * 摘要结果，当Type 为 Description 时有效。
+   */
+  DescriptionResult?: LiveAiAnalysisDescriptionItem
 }
 
 /**

@@ -120,7 +120,6 @@ import {
   FetchLatestDatahubMessageListRequest,
   PauseDatahubTaskResponse,
   CreateConnectResourceResponse,
-  GroupOffsetResponse,
   InquiryDetailPrice,
   InquireCkafkaPriceResp,
   DescribeDatahubTasksResponse,
@@ -151,7 +150,7 @@ import {
   DescribeRegionRequest,
   DescribeGroupInfoResponse,
   DtsConnectParam,
-  DescribeAppInfoResponse,
+  GroupOffsetResponse,
   AclResponse,
   MapParam,
   CtsdbConnectParam,
@@ -238,7 +237,6 @@ import {
   BatchAnalyseParam,
   DeleteInstancePostRequest,
   DescribeTopicProduceConnectionRequest,
-  DescribeAppInfoRequest,
   MariaDBParam,
   SubstrParam,
   DescribeTopicSubscribeGroupRequest,
@@ -334,7 +332,6 @@ import {
   DatahubTopicResp,
   DescribeCvmInfoResponse,
   DeleteRouteTriggerTimeResponse,
-  AppIdResponse,
   DealInstanceDTO,
   DescribeConnectResource,
   DescribeUserRequest,
@@ -948,13 +945,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户列表
+   * 当前接口用来替代 CreateInstancePost 接口。创建按量计费实例。通常用于 SDK 或云 API 控制台调用接口，创建后付费 CKafka 实例。调用接口与在 CKafka 控制台购买按量付费实例效果相同。
    */
-  async DescribeAppInfo(
-    req: DescribeAppInfoRequest,
-    cb?: (error: string, rep: DescribeAppInfoResponse) => void
-  ): Promise<DescribeAppInfoResponse> {
-    return this.request("DescribeAppInfo", req, cb)
+  async CreatePostPaidInstance(
+    req: CreatePostPaidInstanceRequest,
+    cb?: (error: string, rep: CreatePostPaidInstanceResponse) => void
+  ): Promise<CreatePostPaidInstanceResponse> {
+    return this.request("CreatePostPaidInstance", req, cb)
   }
 
   /**
@@ -1196,16 +1193,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRoutineMaintenanceTaskResponse) => void
   ): Promise<ModifyRoutineMaintenanceTaskResponse> {
     return this.request("ModifyRoutineMaintenanceTask", req, cb)
-  }
-
-  /**
-   * 当前接口用来替代 CreateInstancePost 接口。创建按量计费实例。通常用于 SDK 或云 API 控制台调用接口，创建后付费 CKafka 实例。调用接口与在 CKafka 控制台购买按量付费实例效果相同。
-   */
-  async CreatePostPaidInstance(
-    req: CreatePostPaidInstanceRequest,
-    cb?: (error: string, rep: CreatePostPaidInstanceResponse) => void
-  ): Promise<CreatePostPaidInstanceResponse> {
-    return this.request("CreatePostPaidInstance", req, cb)
   }
 
   /**

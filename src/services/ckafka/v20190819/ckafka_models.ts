@@ -2963,20 +2963,6 @@ export interface CreateConnectResourceResponse {
 }
 
 /**
- * 消费组偏移量返回结果
- */
-export interface GroupOffsetResponse {
-  /**
-   * 符合调节的总结果数
-   */
-  TotalCount?: number
-  /**
-   * 该主题分区数组，其中每个元素为一个 json object
-   */
-  TopicList?: Array<GroupOffsetTopic>
-}
-
-/**
  * 详细类别的价格
  */
 export interface InquiryDetailPrice {
@@ -3672,17 +3658,17 @@ export interface DtsConnectParam {
 }
 
 /**
- * DescribeAppInfo返回参数结构体
+ * 消费组偏移量返回结果
  */
-export interface DescribeAppInfoResponse {
+export interface GroupOffsetResponse {
   /**
-   * 返回的符合要求的App Id列表
+   * 符合调节的总结果数
    */
-  Result?: AppIdResponse
+  TotalCount?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 该主题分区数组，其中每个元素为一个 json object
    */
-  RequestId?: string
+  TopicList?: Array<GroupOffsetTopic>
 }
 
 /**
@@ -5718,20 +5704,6 @@ export interface DescribeTopicProduceConnectionRequest {
    * 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取。
    */
   TopicName: string
-}
-
-/**
- * DescribeAppInfo请求参数结构体
- */
-export interface DescribeAppInfoRequest {
-  /**
-   * 偏移位置
-   */
-  Offset?: number
-  /**
-   * 本次查询用户数目最大数量限制，最大值为50，默认50
-   */
-  Limit?: number
 }
 
 /**
@@ -8110,20 +8082,6 @@ export interface DeleteRouteTriggerTimeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * AppId的查询结果
- */
-export interface AppIdResponse {
-  /**
-   * 符合要求的所有AppId数量
-   */
-  TotalCount?: number
-  /**
-   * 符合要求的App Id列表
-   */
-  AppIdList?: Array<number | bigint>
 }
 
 /**

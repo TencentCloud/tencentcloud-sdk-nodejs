@@ -45,7 +45,6 @@ import {
   DescribeCloudStoragePackageConsumeDetailsRequest,
   BatchUpdateFirmwareResponse,
   DescribeActivateLicenseServiceResponse,
-  WifiInfo,
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   TalkConversationConfigInfo,
@@ -96,6 +95,7 @@ import {
   ModifyPositionSpaceRequest,
   DescribeDeviceBindGatewayRequest,
   GetTWeTalkProductConfigListV2Response,
+  InvokeVisionRecognitionTaskOutput,
   DeleteDevicesRequest,
   ModifyProjectResponse,
   DescribeCloudStorageThumbnailRequest,
@@ -106,12 +106,15 @@ import {
   ModifyProjectRequest,
   ModifySpacePropertyResponse,
   PauseTWeCallDeviceRequest,
+  DescribeTWeSeeConfigResponse,
   DescribeDeviceDataHistoryResponse,
+  CreateTWeSeeRecognitionTaskWithFileResponse,
   DeviceUser,
   ProductModelDefinition,
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   ModifyLoRaFrequencyResponse,
+  ActivateTWeCallLicenseRequest,
   InstanceDetail,
   ListEventHistoryResponse,
   GetBatchProductionsListResponse,
@@ -120,9 +123,11 @@ import {
   TWeCallLicenseInfo,
   UpdateFirmwareResponse,
   DescribeCloudStorageDateRequest,
+  CreateTWeSeeRecognitionTaskWithFileRequest,
   DescribeTopicPolicyRequest,
   DescribeDeviceFirmwaresRequest,
   ProjectEntry,
+  CreateVisionRecognitionTaskInput,
   UnbindDevicesRequest,
   PublishBroadcastMessageRequest,
   DeleteCloudStorageEventResponse,
@@ -148,6 +153,7 @@ import {
   ListTopicPolicyResponse,
   CreateAISearchTaskAsyncRequest,
   GenSingleDeviceSignatureOfPublicResponse,
+  DeleteTWeTalkProductConfigV2Request,
   SearchStudioProductResponse,
   FenceBindDeviceItem,
   DescribeBatchProductionResponse,
@@ -170,7 +176,6 @@ import {
   UnbindProductsRequest,
   GetTWeTalkProductConfigListV2Request,
   CreateCloudStorageAIServiceRequest,
-  DescribeDeviceLocationSolveResponse,
   DescribeStudioProductResponse,
   VisionRecognitionResult,
   CreateIotVideoCloudStorageResponse,
@@ -187,6 +192,7 @@ import {
   LoRaGatewayLocation,
   ModifyTopicRuleResponse,
   DescribeBatchProductionRequest,
+  DirectBindDeviceInFamilyRequest,
   DescribeCloudStorageAIServiceTaskResponse,
   PublishRRPCMessageResponse,
   CloudStorageEvent,
@@ -205,6 +211,7 @@ import {
   EventHistoryItem,
   CreatePositionSpaceResponse,
   CreateTWeTalkProductConfigResponse,
+  ListProductOtaModulesResponse,
   AISearchInfo,
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
@@ -214,7 +221,8 @@ import {
   AppDeviceInfo,
   DescribeCloudStorageResponse,
   DescribeCloudStorageStreamDataRequest,
-  DirectBindDeviceInFamilyRequest,
+  InvokeTWeSeeRecognitionTaskWithFileResponse,
+  BatchCreateTWeSeeRecognitionTaskRequest,
   ProjectEntryEx,
   PublishMessageResponse,
   SearchKeyword,
@@ -232,7 +240,6 @@ import {
   DescribeCloudStorageEventsWithAITasksRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
-  DescribeDeviceLocationSolveRequest,
   DescribeVideoLicenseRequest,
   DescribeCloudStorageAIServiceResponse,
   InvokeAISearchServiceRequest,
@@ -268,6 +275,7 @@ import {
   CreateProjectRequest,
   TalkTTSConfigInfo,
   CreateCloudStorageAIServiceResponse,
+  VisionCustomDetectQuery,
   DeviceDataHistoryItem,
   DescribeSubscribedTopicPolicyRequest,
   GetTWeCallActiveStatusResponse,
@@ -317,6 +325,7 @@ import {
   DescribeTopicRuleResponse,
   UpdateFirmwareRequest,
   DeviceSignatureInfo,
+  InvokeTWeSeeRecognitionTaskWithFileRequest,
   TWeCallInfo,
   DescribeDeviceRequest,
   CamTag,
@@ -337,13 +346,15 @@ import {
   UpdateOtaModuleRequest,
   ModifyLoRaFrequencyRequest,
   DescribeTWeTalkProductConfigV2Request,
+  BatchInvokeTWeSeeRecognitionTaskRequest,
   VisionRecognitionTask,
   CreateLoRaFrequencyResponse,
   EnableTopicRuleResponse,
   GetGatewaySubDeviceListRequest,
   SearchStudioProductRequest,
   GenSingleDeviceSignatureOfPublicRequest,
-  ListProductOtaModulesResponse,
+  CreateVisionRecognitionTaskOutput,
+  BatchCreateTWeSeeRecognitionTaskResponse,
   DescribeGatewayBindDevicesRequest,
   DescribeGatewaySubProductsRequest,
   CreateExternalSourceAIServiceTaskResponse,
@@ -366,9 +377,9 @@ import {
   TalkProductConfigV2Info,
   OtaModuleInfo,
   CloudStorageAIServiceTaskFileInfo,
-  DescribeTWeSeeConfigResponse,
+  DeleteTWeTalkProductConfigV2Response,
   VisionSummaryConfig,
-  ActivateTWeCallLicenseRequest,
+  BatchInvokeTWeSeeRecognitionTaskResponse,
   ModifyPositionFenceRequest,
   PositionFenceItem,
   DeleteTopicRuleResponse,
@@ -393,13 +404,14 @@ import {
   DescribeFirmwareUpdateStatusRequest,
   DescribeDevicePositionListResponse,
   DescribeProjectResponse,
+  VisionDetectedObject,
   CreateTWeTalkProductConfigV2Response,
   ProductEntry,
   BindDeviceInfo,
   CloudStorageAIServiceTask,
   PublishRRPCMessageRequest,
   ListTopicPolicyRequest,
-  DeleteLoRaFrequencyRequest,
+  GenerateSignedVideoURLResponse,
   InvokeVideosKeywordsAnalyzerRequest,
   DescribeFirmwareTaskDevicesRequest,
   InvokeExternalSourceAIServiceTaskRequest,
@@ -472,7 +484,7 @@ import {
   GetDeviceSumStatisticsRequest,
   DescribeCloudStorageAIServiceCallbackRequest,
   DescribeCloudStorageRequest,
-  GenerateSignedVideoURLResponse,
+  DeleteLoRaFrequencyRequest,
   CreatePositionFenceRequest,
   DescribeCloudStorageThumbnailResponse,
   PublishFirmwareUpdateMessageRequest,
@@ -615,18 +627,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DirectBindDeviceInFamilyResponse) => void
   ): Promise<DirectBindDeviceInFamilyResponse> {
     return this.request("DirectBindDeviceInFamily", req, cb)
-  }
-
-  /**
-     * 获取实时位置解析依赖于teg位置服务，近30天调用只有2个个人账号调用，产品推下线
-
-获取实时位置解析
-     */
-  async DescribeDeviceLocationSolve(
-    req: DescribeDeviceLocationSolveRequest,
-    cb?: (error: string, rep: DescribeDeviceLocationSolveResponse) => void
-  ): Promise<DescribeDeviceLocationSolveResponse> {
-    return this.request("DescribeDeviceLocationSolve", req, cb)
   }
 
   /**
@@ -850,13 +850,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 搜索固件升级任务列表
+   * 用于查看某个设备的详细信息
    */
-  async DescribeFirmwareTasks(
-    req: DescribeFirmwareTasksRequest,
-    cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
-  ): Promise<DescribeFirmwareTasksResponse> {
-    return this.request("DescribeFirmwareTasks", req, cb)
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
+  }
+
+  /**
+   * 批量同步执行 TWeSee 语义理解任务
+   */
+  async BatchInvokeTWeSeeRecognitionTask(
+    req: BatchInvokeTWeSeeRecognitionTaskRequest,
+    cb?: (error: string, rep: BatchInvokeTWeSeeRecognitionTaskResponse) => void
+  ): Promise<BatchInvokeTWeSeeRecognitionTaskResponse> {
+    return this.request("BatchInvokeTWeSeeRecognitionTask", req, cb)
   }
 
   /**
@@ -1122,13 +1132,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询微信设备授权票据
+   * 搜索固件升级任务列表
    */
-  async GetWechatDeviceTicket(
-    req: GetWechatDeviceTicketRequest,
-    cb?: (error: string, rep: GetWechatDeviceTicketResponse) => void
-  ): Promise<GetWechatDeviceTicketResponse> {
-    return this.request("GetWechatDeviceTicket", req, cb)
+  async DescribeFirmwareTasks(
+    req: DescribeFirmwareTasksRequest,
+    cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
+  ): Promise<DescribeFirmwareTasksResponse> {
+    return this.request("DescribeFirmwareTasks", req, cb)
   }
 
   /**
@@ -1199,6 +1209,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFenceBindResponse) => void
   ): Promise<DeleteFenceBindResponse> {
     return this.request("DeleteFenceBind", req, cb)
+  }
+
+  /**
+   * 用于删除配置TWeTalk服务连接产品配置信息。
+   */
+  async DeleteTWeTalkProductConfigV2(
+    req: DeleteTWeTalkProductConfigV2Request,
+    cb?: (error: string, rep: DeleteTWeTalkProductConfigV2Response) => void
+  ): Promise<DeleteTWeTalkProductConfigV2Response> {
+    return this.request("DeleteTWeTalkProductConfigV2", req, cb)
   }
 
   /**
@@ -1576,13 +1596,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步执行设备云存 AI 分析任务
+   * 查询微信设备授权票据
    */
-  async InvokeCloudStorageAIServiceTask(
-    req: InvokeCloudStorageAIServiceTaskRequest,
-    cb?: (error: string, rep: InvokeCloudStorageAIServiceTaskResponse) => void
-  ): Promise<InvokeCloudStorageAIServiceTaskResponse> {
-    return this.request("InvokeCloudStorageAIServiceTask", req, cb)
+  async GetWechatDeviceTicket(
+    req: GetWechatDeviceTicketRequest,
+    cb?: (error: string, rep: GetWechatDeviceTicketResponse) => void
+  ): Promise<GetWechatDeviceTicketResponse> {
+    return this.request("GetWechatDeviceTicket", req, cb)
   }
 
   /**
@@ -1623,6 +1643,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDevicesEnableStateResponse) => void
   ): Promise<UpdateDevicesEnableStateResponse> {
     return this.request("UpdateDevicesEnableState", req, cb)
+  }
+
+  /**
+   * 同步执行设备云存 AI 分析任务
+   */
+  async InvokeCloudStorageAIServiceTask(
+    req: InvokeCloudStorageAIServiceTaskRequest,
+    cb?: (error: string, rep: InvokeCloudStorageAIServiceTaskResponse) => void
+  ): Promise<InvokeCloudStorageAIServiceTaskResponse> {
+    return this.request("InvokeCloudStorageAIServiceTask", req, cb)
   }
 
   /**
@@ -1916,16 +1946,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查看某个设备的详细信息
-   */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
-  }
-
-  /**
    * 获取量产详情信息。
    */
   async DescribeBatchProduction(
@@ -2096,13 +2116,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取围栏列表
+   * 同步执行 TWeSee 语义理解任务
    */
-  async DescribePositionFenceList(
-    req: DescribePositionFenceListRequest,
-    cb?: (error: string, rep: DescribePositionFenceListResponse) => void
-  ): Promise<DescribePositionFenceListResponse> {
-    return this.request("DescribePositionFenceList", req, cb)
+  async CreateTWeSeeRecognitionTaskWithFile(
+    req: CreateTWeSeeRecognitionTaskWithFileRequest,
+    cb?: (error: string, rep: CreateTWeSeeRecognitionTaskWithFileResponse) => void
+  ): Promise<CreateTWeSeeRecognitionTaskWithFileResponse> {
+    return this.request("CreateTWeSeeRecognitionTaskWithFile", req, cb)
   }
 
   /**
@@ -2123,6 +2143,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePackageConsumeTaskResponse) => void
   ): Promise<DescribePackageConsumeTaskResponse> {
     return this.request("DescribePackageConsumeTask", req, cb)
+  }
+
+  /**
+   * 批量同步执行 TWeSee 语义理解任务
+   */
+  async BatchCreateTWeSeeRecognitionTask(
+    req: BatchCreateTWeSeeRecognitionTaskRequest,
+    cb?: (error: string, rep: BatchCreateTWeSeeRecognitionTaskResponse) => void
+  ): Promise<BatchCreateTWeSeeRecognitionTaskResponse> {
+    return this.request("BatchCreateTWeSeeRecognitionTask", req, cb)
   }
 
   /**
@@ -2266,6 +2296,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取围栏列表
+   */
+  async DescribePositionFenceList(
+    req: DescribePositionFenceListRequest,
+    cb?: (error: string, rep: DescribePositionFenceListResponse) => void
+  ): Promise<DescribePositionFenceListResponse> {
+    return this.request("DescribePositionFenceList", req, cb)
+  }
+
+  /**
    * 查询指定设备的云存 AI 分析任务列表
    */
   async DescribeCloudStorageAIServiceTasks(
@@ -2383,6 +2423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFenceBindResponse) => void
   ): Promise<CreateFenceBindResponse> {
     return this.request("CreateFenceBind", req, cb)
+  }
+
+  /**
+   * 同步执行 TWeSee 语义理解任务
+   */
+  async InvokeTWeSeeRecognitionTaskWithFile(
+    req: InvokeTWeSeeRecognitionTaskWithFileRequest,
+    cb?: (error: string, rep: InvokeTWeSeeRecognitionTaskWithFileResponse) => void
+  ): Promise<InvokeTWeSeeRecognitionTaskWithFileResponse> {
+    return this.request("InvokeTWeSeeRecognitionTaskWithFile", req, cb)
   }
 
   /**

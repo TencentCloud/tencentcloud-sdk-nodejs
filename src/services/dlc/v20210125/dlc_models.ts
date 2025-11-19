@@ -1454,6 +1454,10 @@ export interface ModifyUserTypeRequest {
    * 用户要修改到的类型，ADMIN：管理员，COMMON：一般用户。
    */
   UserType: string
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -2308,11 +2312,11 @@ export interface DescribeUsersResponse {
   /**
    * 查询到的用户总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 查询到的授权用户信息集合
    */
-  UserSet: Array<UserInfo>
+  UserSet?: Array<UserInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2629,6 +2633,10 @@ export interface Policy {
 
    */
   EngineGeneration?: string
+  /**
+   * 需要授权的Model名，填 * 代表当前Database下所有表。当授权类型为管理员级别时，只允许填“*”，当授权类型为数据连接级别、数据库级别时只允许填空，其他类型下可以任意指定数据表。
+   */
+  Model?: string
 }
 
 /**
@@ -3193,6 +3201,10 @@ export interface ModifyUserRequest {
    * 用户描述
    */
   UserDescription: string
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -3862,6 +3874,10 @@ engine-name：库表的模糊搜索。
    * 偏移量，默认为0
    */
   Offset?: number
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -4292,6 +4308,10 @@ export interface DescribeUsersRequest {
    * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤
    */
   Filters?: Array<Filter>
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -4495,6 +4515,10 @@ export interface AttachUserPolicyRequest {
    * 鉴权策略集合
    */
   PolicySet?: Array<Policy>
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -5662,6 +5686,10 @@ export interface CreateUserRequest {
    * 用户别名，字符长度小50
    */
   UserAlias?: string
+  /**
+   * 账号类型，UserAccount：用户账号 RoleAccount：角色账号，默认为用户账号
+   */
+  AccountType?: string
 }
 
 /**
@@ -6036,6 +6064,10 @@ export interface DeleteUserRequest {
    * 需要删除的用户的Id
    */
   UserIds: Array<string>
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -9322,6 +9354,10 @@ export interface UserDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogPolicyInfo?: Policys
+  /**
+   * 模型权限集合
+   */
+  ModelPolicyInfo?: Policys
 }
 
 /**
@@ -9741,6 +9777,10 @@ export interface DetachUserPolicyRequest {
    * 解绑的权限集合
    */
   PolicySet?: Array<Policy>
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -9959,6 +9999,10 @@ export interface DescribeUserTypeRequest {
    * 用户ID（UIN），如果不填默认为调用方的子UIN
    */
   UserId?: string
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -12324,24 +12368,28 @@ export interface UserMessage {
   /**
    * 用户Id，和CAM侧子用户Uin匹配
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserDescription: string
+  UserDescription?: string
   /**
    * 当前用户的创建者
    */
-  Creator: string
+  Creator?: string
   /**
    * 当前用户的创建时间，形如2021-07-28 16:19:32
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 用户别名
    */
-  UserAlias: string
+  UserAlias?: string
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**

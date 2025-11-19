@@ -47,7 +47,7 @@ Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
    */
   InputImage?: string
   /**
-   * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 示例值：url
+   * 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 示例值：url
    */
   RspImgType?: string
 }
@@ -403,7 +403,7 @@ Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
    */
   InputUrl?: string
   /**
-   * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+   * 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。
    */
   RspImgType?: string
   /**
@@ -589,9 +589,11 @@ export interface SubmitTextToImageJobRequest {
    */
   LogoParam?: LogoParam
   /**
-   * 是否开启prompt改写，默认开启，改写预计会增加20s左右耗时。
-
-如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：[改写](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/tree/main/PE)
+   * 是否开启prompt改写，为空时默认开启，改写预计会增加20s左右耗时。
+0：关闭改写
+1：开启改写
+建议默认开启，如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：[改写](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/tree/main/PE)
+示例值：1
    */
   Revise?: number
 }
@@ -1269,7 +1271,7 @@ export interface TextToImageRapidRequest {
    */
   LogoParam?: LogoParam
   /**
-   * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+   * 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。
    */
   RspImgType?: string
 }
@@ -1329,7 +1331,7 @@ Mask 的 Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
    */
   MaskUrl?: string
   /**
-   * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+   * 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。
    */
   RspImgType?: string
   /**

@@ -578,9 +578,9 @@ it("ckafka.v20190819.DescribeTaskStatus", async function () {
     }
 })
 
-it("ckafka.v20190819.DescribeAppInfo", async function () {
+it("ckafka.v20190819.CreatePostPaidInstance", async function () {
     try {
-       const data = await client.DescribeAppInfo({})
+       const data = await client.CreatePostPaidInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -821,16 +821,6 @@ it("ckafka.v20190819.DescribeTopicSubscribeGroup", async function () {
 it("ckafka.v20190819.ModifyRoutineMaintenanceTask", async function () {
     try {
        const data = await client.ModifyRoutineMaintenanceTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ckafka.v20190819.CreatePostPaidInstance", async function () {
-    try {
-       const data = await client.CreatePostPaidInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
