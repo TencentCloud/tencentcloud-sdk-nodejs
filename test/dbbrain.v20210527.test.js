@@ -238,6 +238,16 @@ it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeMongoDBProcessList", async function () {
+    try {
+       const data = await client.DescribeMongoDBProcessList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeSlowLogTimeSeriesStats", async function () {
     try {
        const data = await client.DescribeSlowLogTimeSeriesStats({})

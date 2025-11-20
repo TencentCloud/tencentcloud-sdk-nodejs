@@ -21,24 +21,29 @@ import {
   DescribeImageToVideoGeneralJobResponse,
   SubmitVideoStylizationJobRequest,
   LogoParam,
+  SubmitHumanActorJobRequest,
   SubmitImageAnimateJobRequest,
-  SubmitPortraitSingJobResponse,
-  DescribePortraitSingJobRequest,
   SubmitImageToVideoGeneralJobResponse,
+  DescribePortraitSingJobRequest,
   SubmitImageAnimateJobResponse,
   DescribeTemplateToVideoJobResponse,
   CheckAnimateImageJobResponse,
   SubmitTemplateToVideoJobResponse,
   CheckAnimateImageJobRequest,
   DescribeVideoStylizationJobRequest,
+  SubmitHumanActorJobResponse,
   DescribeImageAnimateJobResponse,
   SubmitPortraitSingJobRequest,
   LogoRect,
+  DescribeHumanActorJobResponse,
+  ExtraParam,
   DescribeVideoStylizationJobResponse,
   SubmitVideoStylizationJobResponse,
+  SubmitPortraitSingJobResponse,
   SubmitTemplateToVideoJobRequest,
   SubmitImageToVideoGeneralJobRequest,
   Image,
+  DescribeHumanActorJobRequest,
   DescribeImageToVideoGeneralJobRequest,
   DescribeTemplateToVideoJobRequest,
   DescribeImageAnimateJobRequest,
@@ -94,6 +99,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePortraitSingJobResponse) => void
   ): Promise<DescribePortraitSingJobResponse> {
     return this.request("DescribePortraitSingJob", req, cb)
+  }
+
+  /**
+     * 用于提交人像驱动任务
+支持提交音频和图文来生成对应视频，满足动态交互、内容生产等场景需求。
+     */
+  async SubmitHumanActorJob(
+    req: SubmitHumanActorJobRequest,
+    cb?: (error: string, rep: SubmitHumanActorJobResponse) => void
+  ): Promise<SubmitHumanActorJobResponse> {
+    return this.request("SubmitHumanActorJob", req, cb)
   }
 
   /**
@@ -164,5 +180,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageToVideoGeneralJobResponse) => void
   ): Promise<DescribeImageToVideoGeneralJobResponse> {
     return this.request("DescribeImageToVideoGeneralJob", req, cb)
+  }
+
+  /**
+   * 通过JobId提交请求，获取人像驱动任务的结果信息。
+   */
+  async DescribeHumanActorJob(
+    req: DescribeHumanActorJobRequest,
+    cb?: (error: string, rep: DescribeHumanActorJobResponse) => void
+  ): Promise<DescribeHumanActorJobResponse> {
+    return this.request("DescribeHumanActorJob", req, cb)
   }
 }

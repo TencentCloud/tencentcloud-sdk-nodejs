@@ -158,6 +158,10 @@ export interface ServerBaseConfig {
    * 存储配置信息
    */
   VolumesConf?: Array<VolumeConf>
+  /**
+   * 关联镜像密钥
+   */
+  LinkImageRegistry?: string
 }
 
 /**

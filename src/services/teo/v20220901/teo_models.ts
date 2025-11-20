@@ -3002,6 +3002,10 @@ export interface ModifyZoneSettingRequest {
    */
   Grpc?: Grpc
   /**
+   * 网络错误日志记录配置。不填写表示保持原有配置。
+   */
+  NetworkErrorLogging?: NetworkErrorLogging
+  /**
    * 图片优化配置。
 不填写表示关闭。
    */
@@ -4968,6 +4972,11 @@ export interface ZoneConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Grpc?: GrpcParameters
+  /**
+   * 网络错误日志记录配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkErrorLogging?: NetworkErrorLoggingParameters
   /**
    * 中国大陆加速优化配置。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -11579,6 +11588,11 @@ export interface ZoneSetting {
    */
   Grpc?: Grpc
   /**
+   * 网络错误日志记录配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkErrorLogging?: NetworkErrorLogging
+  /**
    * 图片优化相关配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -13042,6 +13056,18 @@ export interface L4ProxyRule {
 }
 
 /**
+ * 网络错误日志记录配置项。
+ */
+export interface NetworkErrorLoggingParameters {
+  /**
+   * 网络错误日志记录配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * 自定义 Cache Key 查询字符串配置参数。
  */
 export interface CacheKeyQueryString {
@@ -13799,6 +13825,18 @@ export interface UpstreamRequestCookie {
    * 指定参数值。仅当查询字符串模式 Action 为 includeCustom 或者 excludeCustom 时该参数生效，用于指定需要保留或者忽略的参数。最大支持 10 个参数。
    */
   Values?: Array<string>
+}
+
+/**
+ * 网络错误日志记录配置项
+ */
+export interface NetworkErrorLogging {
+  /**
+   * 是否开启网络错误日志记录配置，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch: string
 }
 
 /**

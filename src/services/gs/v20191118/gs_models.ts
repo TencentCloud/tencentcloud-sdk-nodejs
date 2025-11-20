@@ -247,6 +247,24 @@ export interface ModifyAndroidAppVersionResponse {
 }
 
 /**
+ * RestartAndroidInstancesApp请求参数结构体
+ */
+export interface RestartAndroidInstancesAppRequest {
+  /**
+   * 实例 ID 列表
+   */
+  AndroidInstanceIds: Array<string>
+  /**
+   * 应用包名
+   */
+  PackageName: string
+  /**
+   * 启动页。建议指定启动页来启动应用，避免启动失败。如果启动页为空，系统尝试根据 PackageName 启动，但不保证成功。
+   */
+  Activity?: string
+}
+
+/**
  * CleanAndroidInstancesAppData返回参数结构体
  */
 export interface CleanAndroidInstancesAppDataResponse {
@@ -434,6 +452,24 @@ export interface CreateAndroidAppVersionRequest {
    * 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。
    */
   CleanupMode?: string
+}
+
+/**
+ * CreateAndroidInstanceAcceleratorToken返回参数结构体
+ */
+export interface CreateAndroidInstanceAcceleratorTokenResponse {
+  /**
+   * 加速信息
+   */
+  AcceleratorInfo?: string
+  /**
+   * 安卓实例错误列表。列表包含有问题的安卓实例 ID 以及发生的错误信息。
+   */
+  AndroidInstanceErrors?: Array<AndroidInstanceError>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -795,6 +831,16 @@ export interface UploadFileToAndroidInstancesRequest {
    * 目标文件名
    */
   DestinationFileName?: string
+}
+
+/**
+ * DisconnectAndroidInstanceAccelerator返回参数结构体
+ */
+export interface DisconnectAndroidInstanceAcceleratorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2088,21 +2134,17 @@ export interface Error {
 }
 
 /**
- * RestartAndroidInstancesApp请求参数结构体
+ * CreateAndroidInstanceAcceleratorToken请求参数结构体
  */
-export interface RestartAndroidInstancesAppRequest {
+export interface CreateAndroidInstanceAcceleratorTokenRequest {
   /**
-   * 实例 ID 列表
+   * 用户IP，用户客户端的公网IP，用于就近选择起始加速节点
+   */
+  UserIP: string
+  /**
+   * 实例 ID 列表。每次请求的实例的上限为 500。
    */
   AndroidInstanceIds: Array<string>
-  /**
-   * 应用包名
-   */
-  PackageName: string
-  /**
-   * 启动页。建议指定启动页来启动应用，避免启动失败。如果启动页为空，系统尝试根据 PackageName 启动，但不保证成功。
-   */
-  Activity?: string
 }
 
 /**
@@ -3122,6 +3164,20 @@ NOT_EXISTS: 要求对象标签不存在标签键 Key
    * 标签值列表
    */
   Values?: Array<string>
+}
+
+/**
+ * DisconnectAndroidInstanceAccelerator请求参数结构体
+ */
+export interface DisconnectAndroidInstanceAcceleratorRequest {
+  /**
+   * 实例ID
+   */
+  AndroidInstanceId: string
+  /**
+   * 用户 ID。用户 ID 为空，将断开该实例的所有用户连接；用户 ID 不为空，只断开该用户的连接。
+   */
+  UserId?: string
 }
 
 /**

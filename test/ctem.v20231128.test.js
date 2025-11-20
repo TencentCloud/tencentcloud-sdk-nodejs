@@ -58,6 +58,16 @@ it("ctem.v20231128.ModifyCustomer", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeApiSecs", async function () {
+    try {
+       const data = await client.DescribeApiSecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeDomains", async function () {
     try {
        const data = await client.DescribeDomains({})
@@ -138,9 +148,9 @@ it("ctem.v20231128.DescribeSubDomains", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeFakeWechatOfficials", async function () {
+it("ctem.v20231128.DescribeCustomers", async function () {
     try {
-       const data = await client.DescribeFakeWechatOfficials({})
+       const data = await client.DescribeCustomers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +198,9 @@ it("ctem.v20231128.DescribeApps", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeCustomers", async function () {
+it("ctem.v20231128.DescribeFakeWechatOfficials", async function () {
     try {
-       const data = await client.DescribeCustomers({})
+       const data = await client.DescribeFakeWechatOfficials({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +311,16 @@ it("ctem.v20231128.DescribeWechatOfficialAccounts", async function () {
 it("ctem.v20231128.DescribeEnterprises", async function () {
     try {
        const data = await client.DescribeEnterprises({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateEnterprise", async function () {
+    try {
+       const data = await client.CreateEnterprise({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

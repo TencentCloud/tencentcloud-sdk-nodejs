@@ -438,6 +438,7 @@ import {
   AiReviewTerrorismOcrTaskOutput,
   DescribeAsrHotwordsListResponse,
   AiAnalysisResult,
+  BlindWatermarkInput,
   SmartSubtitleTaskResultInput,
   ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,

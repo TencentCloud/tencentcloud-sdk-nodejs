@@ -1169,7 +1169,7 @@ export interface RedisPreKeySpaceData {
  */
 export interface DiagHistoryEventItem {
   /**
-   * 诊断类型。
+   * 诊断类型。支持值包括"高危账号","自增键耗尽","连接性检查","CPU利用率","死锁","全表扫描","高并发/压力请求","预编译语句过多","内存利用率","Metadata lock","磁盘超限","内存超限","只读锁","只读实例剔除","行锁","活跃会话","慢SQL","数据库快照","磁盘空间利用率","执行计划变化","主从切换","Table open cache命中率低","大表","事务未提交","事务导致复制延迟"等。
    */
   DiagType?: string
   /**
@@ -1589,6 +1589,44 @@ export interface TaskInfo {
 }
 
 /**
+ * DescribeMongoDBProcessList请求参数结构体
+ */
+export interface DescribeMongoDBProcessListRequest {
+  /**
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值：mongodb
+   */
+  Product: string
+  /**
+   * 线程的ID，用于筛选线程列表。
+   */
+  ID?: number
+  /**
+   * 线程的操作主机地址，用于筛选线程列表。
+   */
+  Host?: string
+  /**
+   * 线程的操作数据库，用于筛选线程列表,如果是多个 使用 ','  分割
+   */
+  DB?: string
+  /**
+   * 命令类型 ,如果是多个 使用 ','  分割
+   */
+  Type?: string
+  /**
+   * 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。
+   */
+  Time?: number
+  /**
+   * 返回数量，默认20。
+   */
+  Limit?: number
+}
+
+/**
  * ModifySqlFilters返回参数结构体
  */
 export interface ModifySqlFiltersResponse {
@@ -1955,6 +1993,63 @@ export interface ProcessStatistic {
 }
 
 /**
+ * mongodb会话详情
+ */
+export interface MongoDBProcessItem {
+  /**
+   * 是否内部IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInternalIp?: boolean
+  /**
+   * 语句类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 语句详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Command?: string
+  /**
+   * 节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceNodeId?: string
+  /**
+   * 客户端ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * 运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Time?: number
+  /**
+   * 会话ID
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: number
+  /**
+   * 分片名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShardName?: string
+  /**
+   * 用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 数据库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DB?: string
+}
+
+/**
  * CreateMailProfile返回参数结构体
  */
 export interface CreateMailProfileResponse {
@@ -2040,6 +2135,8 @@ export interface InstanceID {
 export interface DescribeDBDiagHistoryRequest {
   /**
    * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+
+查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
    */
   InstanceId: string
   /**
@@ -2051,7 +2148,7 @@ export interface DescribeDBDiagHistoryRequest {
    */
   EndTime: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -2237,7 +2334,7 @@ export interface DescribeDBDiagEventsRequest {
    */
   StartTime: string
   /**
-   * 结束时间，如“2021-05-27 01:00:00”，结束时间与开始时间的间隔最大可为7天。
+   * 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。
    */
   EndTime: string
   /**
@@ -2245,11 +2342,12 @@ export interface DescribeDBDiagEventsRequest {
    */
   Severities?: Array<number | bigint>
   /**
-   * 实例ID列表。
+   * 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
    */
   InstanceIds?: Array<string>
   /**
-   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb    默认为"mysql"。
    */
   Product?: string
   /**
@@ -3631,6 +3729,8 @@ export interface MySqlProcess {
 export interface DescribeDBDiagEventRequest {
   /**
    * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+
+查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
    */
   InstanceId: string
   /**
@@ -3638,7 +3738,7 @@ export interface DescribeDBDiagEventRequest {
    */
   EventId?: number
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
    */
   Product?: string
 }
@@ -5218,6 +5318,22 @@ export interface CancelDBAutonomyEventRequest {
 }
 
 /**
+ * mongodb 会话列表 返回数据结构
+ */
+export interface MongoDBProcessList {
+  /**
+   * 列名字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Names?: Array<string>
+  /**
+   * 接口返回数据详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<MongoDBProcessItem>
+}
+
+/**
  * DescribeTopSpaceTableTimeSeries请求参数结构体
  */
 export interface DescribeTopSpaceTableTimeSeriesRequest {
@@ -5505,6 +5621,21 @@ export interface DescribeHealthScoreResponse {
    * 健康得分以及异常扣分项。
    */
   Data?: HealthScoreInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMongoDBProcessList返回参数结构体
+ */
+export interface DescribeMongoDBProcessListResponse {
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessList?: MongoDBProcessList
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -26,17 +26,13 @@ export interface ResetDeviceAccountPasswordResponse {
 }
 
 /**
- * DescribeOperationTask返回参数结构体
+ * CreateUserDirectory返回参数结构体
  */
-export interface DescribeOperationTaskResponse {
+export interface CreateUserDirectoryResponse {
   /**
-   * 运维任务列表
+   * 目录Id
    */
-  OperationTasks?: Array<OperationTask>
-  /**
-   * 任务总数
-   */
-  TotalCount?: number
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -101,6 +97,24 @@ export interface BindDeviceAccountPasswordRequest {
    * 主机账号密码
    */
   Password: string
+}
+
+/**
+ * DescribeOperationTask返回参数结构体
+ */
+export interface DescribeOperationTaskResponse {
+  /**
+   * 运维任务列表
+   */
+  OperationTasks?: Array<OperationTask>
+  /**
+   * 任务总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -198,6 +212,32 @@ export interface DescribeDeviceGroupsResponse {
 }
 
 /**
+ * 同步的ioa用户组织信息
+ */
+export interface UserOrg {
+  /**
+   * ioa用户组织id
+   */
+  OrgId: number
+  /**
+   * ioa用户组织名称
+   */
+  OrgName: string
+  /**
+   * ioa用户组织id路径
+   */
+  OrgIdPath: string
+  /**
+   * ioa用户组织名称路径
+   */
+  OrgNamePath: string
+  /**
+   * ioa用户组织id下的用户数
+   */
+  UserTotal?: number
+}
+
+/**
  * DeleteCmdTemplates返回参数结构体
  */
 export interface DeleteCmdTemplatesResponse {
@@ -208,13 +248,13 @@ export interface DeleteCmdTemplatesResponse {
 }
 
 /**
- * DeleteDevices返回参数结构体
+ * DeleteUserDirectory请求参数结构体
  */
-export interface DeleteDevicesResponse {
+export interface DeleteUserDirectoryRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 目录id集合
    */
-  RequestId?: string
+  IdSet: Array<number | bigint>
 }
 
 /**
@@ -578,6 +618,16 @@ export interface DescribeDevicesResponse {
 }
 
 /**
+ * ResetDeviceAccountPrivateKey返回参数结构体
+ */
+export interface ResetDeviceAccountPrivateKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetUser返回参数结构体
  */
 export interface ResetUserResponse {
@@ -595,6 +645,20 @@ export interface CreateAccessWhiteListRuleResponse {
    * 新建成功后返回的记录ID
    */
   Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ImportExternalDevice返回参数结构体
+ */
+export interface ImportExternalDeviceResponse {
+  /**
+   * 资产ID列表
+   */
+  DeviceIdSet?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -644,9 +708,53 @@ export interface RunChangePwdTaskRequest {
 }
 
 /**
+ * DescribeAccountGroups请求参数结构体
+ */
+export interface DescribeAccountGroupsRequest {
+  /**
+   * 是否递归查询，0为不递归，1为递归
+   */
+  DeepIn?: number
+  /**
+   * 父账号组ID, 默认0,查询根账号组下所有分组
+   */
+  ParentId?: number
+  /**
+   * 账号组名称，模糊查询
+   */
+  GroupName?: string
+  /**
+   * 分页查询，每页条数
+   */
+  PageSize?: number
+  /**
+   * 获取第几页的数据
+   */
+  PageNum?: number
+}
+
+/**
  * ModifyAssetSyncFlag返回参数结构体
  */
 export interface ModifyAssetSyncFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSourceTypes返回参数结构体
+ */
+export interface DescribeSourceTypesResponse {
+  /**
+   * 认证源总数
+   */
+  TotalCount?: number
+  /**
+   * 认证源信息
+   */
+  SourceTypeSet?: Array<SourceType>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1009,13 +1117,33 @@ export interface BindDeviceResourceResponse {
 }
 
 /**
- * ResetDeviceAccountPrivateKey返回参数结构体
+ * CreateUserDirectory请求参数结构体
  */
-export interface ResetDeviceAccountPrivateKeyResponse {
+export interface CreateUserDirectoryRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 目录id
    */
-  RequestId?: string
+  DirId: number
+  /**
+   * 目录名称
+   */
+  DirName: string
+  /**
+   * ioa分组信息
+   */
+  UserOrgSet: Array<UserOrg>
+  /**
+   * ioa关联用户源类型
+   */
+  Source: number
+  /**
+   * ioa关联用户源名称
+   */
+  SourceName: string
+  /**
+   * 目录包含用户数
+   */
+  UserCount: number
 }
 
 /**
@@ -1224,13 +1352,9 @@ export interface DescribeLDAPUnitSetRequest {
 }
 
 /**
- * SearchSubtaskResultById返回参数结构体
+ * CreateSyncUserTask返回参数结构体
  */
-export interface SearchSubtaskResultByIdResponse {
-  /**
-   * 记录数
-   */
-  TotalCount?: number
+export interface CreateSyncUserTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1412,6 +1536,26 @@ export interface SearchCommandBySidRequest {
    * 根据拦截状态进行过滤
    */
   AuditAction?: Array<number | bigint>
+}
+
+/**
+ * SyncUserToIOA返回参数结构体
+ */
+export interface SyncUserToIOAResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDevices返回参数结构体
+ */
+export interface DeleteDevicesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1605,17 +1749,13 @@ export interface DescribeAccessWhiteListRulesRequest {
 }
 
 /**
- * ImportExternalDevice返回参数结构体
+ * DescribeUserSyncStatus请求参数结构体
  */
-export interface ImportExternalDeviceResponse {
+export interface DescribeUserSyncStatusRequest {
   /**
-   * 资产ID列表
+   * 获取用户同步状态， 1-获取ioa用户同步状态
    */
-  DeviceIdSet?: Array<number | bigint>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  UserKind: number
 }
 
 /**
@@ -1651,6 +1791,11 @@ export interface CreateUserResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeSourceTypes请求参数结构体
+ */
+export type DescribeSourceTypesRequest = null
 
 /**
  * DeleteOperationTasks请求参数结构体
@@ -1795,6 +1940,24 @@ export interface DescribeUserGroupsRequest {
 }
 
 /**
+ * DescribeUserDirectory返回参数结构体
+ */
+export interface DescribeUserDirectoryResponse {
+  /**
+   * 用户目录集
+   */
+  UserDirSet?: Array<UserDirectory>
+  /**
+   * 用户目录集总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAcl请求参数结构体
  */
 export interface CreateAclRequest {
@@ -1928,6 +2091,20 @@ export interface DescribeLoginEventResponse {
   LoginEventSet?: Array<LoginEvent>
   /**
    * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchSubtaskResultById返回参数结构体
+ */
+export interface SearchSubtaskResultByIdResponse {
+  /**
+   * 记录数
    */
   TotalCount?: number
   /**
@@ -2742,6 +2919,16 @@ export interface ModifyCmdTemplateResponse {
 }
 
 /**
+ * ModifyUserDirectory返回参数结构体
+ */
+export interface ModifyUserDirectoryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetDeviceAccountPrivateKey请求参数结构体
  */
 export interface ResetDeviceAccountPrivateKeyRequest {
@@ -2752,29 +2939,13 @@ export interface ResetDeviceAccountPrivateKeyRequest {
 }
 
 /**
- * DescribeDeviceGroups请求参数结构体
+ * DeleteUserDirectory返回参数结构体
  */
-export interface DescribeDeviceGroupsRequest {
+export interface DeleteUserDirectoryResponse {
   /**
-   * 资产组ID集合
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdSet?: Array<number | bigint>
-  /**
-   * 资产组名，最长64个字符，模糊查询
-   */
-  Name?: string
-  /**
-   * 分页偏移位置，默认值为0
-   */
-  Offset?: number
-  /**
-   * 每页条目数量，缺省20，最大500
-   */
-  Limit?: number
-  /**
-   * 部门ID，用于过滤属于某个部门的资产组
-   */
-  DepartmentId?: string
+  RequestId?: string
 }
 
 /**
@@ -3249,6 +3420,44 @@ export interface DescribeUserGroupMembersResponse {
 }
 
 /**
+ * 用户目录信息
+ */
+export interface UserDirectory {
+  /**
+   * 目录id
+   */
+  Id?: number
+  /**
+   * ioa目录id
+   */
+  DirId?: number
+  /**
+   * ioa目录名称
+   */
+  DirName?: string
+  /**
+   * ioa关联用户源类型
+   */
+  Source?: number
+  /**
+   * ioa关联用户源名称
+   */
+  SourceName?: string
+  /**
+   * 目录包含用户数
+   */
+  UserTotal?: number
+  /**
+   * 目录接入时间
+   */
+  CreateTime?: string
+  /**
+   * 目录下的组织细节信息
+   */
+  UserOrgSet?: Array<UserOrg>
+}
+
+/**
  * DescribeSecuritySetting返回参数结构体
  */
 export interface DescribeSecuritySettingResponse {
@@ -3256,6 +3465,32 @@ export interface DescribeSecuritySettingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeviceGroups请求参数结构体
+ */
+export interface DescribeDeviceGroupsRequest {
+  /**
+   * 资产组ID集合
+   */
+  IdSet?: Array<number | bigint>
+  /**
+   * 资产组名，最长64个字符，模糊查询
+   */
+  Name?: string
+  /**
+   * 分页偏移位置，默认值为0
+   */
+  Offset?: number
+  /**
+   * 每页条目数量，缺省20，最大500
+   */
+  Limit?: number
+  /**
+   * 部门ID，用于过滤属于某个部门的资产组
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -3589,6 +3824,56 @@ export interface DeleteUserGroupsRequest {
 }
 
 /**
+ * CreateSyncUserTask请求参数结构体
+ */
+export interface CreateSyncUserTaskRequest {
+  /**
+   * 同步用户类型, 1-同步ioa用户
+   */
+  UserKind: number
+}
+
+/**
+ * DescribeAccountGroups返回参数结构体
+ */
+export interface DescribeAccountGroupsResponse {
+  /**
+   * 账号组总数
+   */
+  TotalCount?: number
+  /**
+   * 账号组信息
+   */
+  AccountGroupSet?: Array<AccountGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ioa用户源信息
+ */
+export interface SourceType {
+  /**
+   * 账号组来源
+   */
+  Source?: number
+  /**
+   * 账号组来源类型
+   */
+  Type?: string
+  /**
+   * 账号组来源名称
+   */
+  Name?: string
+  /**
+   * 区分ioa原来和iam-mini
+   */
+  Target?: string
+}
+
+/**
  * CreateDeviceAccount返回参数结构体
  */
 export interface CreateDeviceAccountResponse {
@@ -3858,6 +4143,16 @@ export interface DeployResourceResponse {
  * ModifyLDAPSetting返回参数结构体
  */
 export interface ModifyLDAPSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SyncDevicesToIOA返回参数结构体
+ */
+export interface SyncDevicesToIOAResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4264,6 +4559,30 @@ export interface DescribeUserGroupsResponse {
 }
 
 /**
+ * DescribeUserDirectory请求参数结构体
+ */
+export interface DescribeUserDirectoryRequest {
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+}
+
+/**
+ * SyncUserToIOA请求参数结构体
+ */
+export interface SyncUserToIOARequest {
+  /**
+   * 需要同步到ioa的本地用户的id集合
+   */
+  UserIdSet: Array<number | bigint>
+}
+
+/**
  * AddUserGroupMembers返回参数结构体
  */
 export interface AddUserGroupMembersResponse {
@@ -4307,6 +4626,20 @@ export interface DescribeAssetSyncFlagResponse {
    * 资产同步标志
    */
   AssetSyncFlags?: AssetSyncFlags
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserSyncStatus返回参数结构体
+ */
+export interface DescribeUserSyncStatusResponse {
+  /**
+   * 用户同步状态
+   */
+  Status?: AssetSyncStatus
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4440,6 +4773,16 @@ export interface SearchTaskResultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SyncDevicesToIOA请求参数结构体
+ */
+export interface SyncDevicesToIOARequest {
+  /**
+   * 资产ID集合。资产必须已绑定支持IOA功能的堡垒机实例。每次最多同步200个资产。
+   */
+  DeviceIdSet: Array<number | bigint>
 }
 
 /**
@@ -5513,6 +5856,20 @@ export interface EnableIntranetAccessResponse {
 }
 
 /**
+ * ModifyUserDirectory请求参数结构体
+ */
+export interface ModifyUserDirectoryRequest {
+  /**
+   * 目录id
+   */
+  Id: number
+  /**
+   * ioa分组信息
+   */
+  UserOrgSet: Array<UserOrg>
+}
+
+/**
  * 文件传输检索结果
  */
 export interface SearchFileResult {
@@ -5618,6 +5975,64 @@ export interface ReplaySessionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ioa账号组
+ */
+export interface AccountGroup {
+  /**
+   * 账号组id
+   */
+  Id?: number
+  /**
+   * 账号组名称
+   */
+  Name?: string
+  /**
+   * 账号组id路径
+   */
+  IdPath?: string
+  /**
+   * 账号组名称路径
+   */
+  NamePath?: string
+  /**
+   * 父账号组id
+   */
+  ParentId?: number
+  /**
+   * 账号组来源
+   */
+  Source?: number
+  /**
+   * 账号组下用户总数
+   */
+  UserTotal?: number
+  /**
+   * 是否叶子节点
+   */
+  IsLeaf?: boolean
+  /**
+   * 账号组导入类型
+   */
+  ImportType?: string
+  /**
+   * 账号组描述
+   */
+  Description?: string
+  /**
+   * 父源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+   */
+  ParentOrgId?: string
+  /**
+   * 源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+   */
+  OrgId?: string
+  /**
+   * 账号组是否已经接入，0表示未接入，1表示接入
+   */
+  Status?: number
 }
 
 /**

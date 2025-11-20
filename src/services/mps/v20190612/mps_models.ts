@@ -11193,6 +11193,16 @@ export interface AiAnalysisResult {
 }
 
 /**
+ * 媒体处理任务中的数字水印参数类型
+ */
+export interface BlindWatermarkInput {
+  /**
+   * 数字水印模板ID
+   */
+  Definition: number
+}
+
+/**
  * 智能字幕翻译的输入。
  */
 export interface SmartSubtitleTaskResultInput {
@@ -11343,6 +11353,14 @@ export interface ProcessImageRequest {
 如果不填，则默认为相对路径：{inputName}.{format}。
    */
   OutputPath?: string
+  /**
+   * 图片处理模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+   */
+  ResourceId?: string
   /**
    * 图片处理参数。
    */
@@ -13525,6 +13543,11 @@ export interface TranscodeTaskInput {
    */
   WatermarkSet?: Array<WatermarkInput>
   /**
+   * 数字水印参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlindWatermark?: BlindWatermarkInput
+  /**
    * 马赛克列表，最大可支持 10 张。
    */
   MosaicSet?: Array<MosaicInput>
@@ -15361,6 +15384,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
    */
   WatermarkSet?: Array<WatermarkInput>
   /**
+   * 数字水印参数	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlindWatermark?: BlindWatermarkInput
+  /**
    * 转自适应码流后文件的目标存储，不填则继承上层的 OutputStorage 值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -16496,18 +16524,22 @@ export interface ImageAreaBoxInfo {
    */
   Type?: string
   /**
-   * 图片框选区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+   * 图片框选区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。注意：该字段最大值为4096。
 示例值：[101, 85, 111, 95]
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AreaCoordSet?: Array<number | bigint>
   /**
-   * 图片框选区域坐标，[x1, y1, x2, y2]，即左上角坐标、右下角坐标， 当AreaCoordSet未指定时生效。
+   * 图片框选区域坐标，[x1, y1, x2, y2]，即左上角坐标、右下角坐标， 当AreaCoordSet未指定时生效。当表示像素时，该字段最大值为4096。
 - [0.1, 0.1, 0.3, 0.3] :  表示比例 （数值小于1）
 - [50, 50, 350, 280] : 表示像素 （数值大于等于1）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BoundingBox?: Array<number>
+  /**
+   * BoundingBox字段单位。设置为0时，按照该字段规则自动选择单位；设置为1时，单位为比例；设置为2时，单位为像素。
+   */
+  BoundingBoxUnitType?: number
 }
 
 /**

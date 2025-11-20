@@ -288,6 +288,16 @@ it("ckafka.v20190819.DescribePrometheus", async function () {
     }
 })
 
+it("ckafka.v20190819.UpgradeBrokerVersion", async function () {
+    try {
+       const data = await client.UpgradeBrokerVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeDatahubTasks", async function () {
     try {
        const data = await client.DescribeDatahubTasks({})
@@ -491,6 +501,16 @@ it("ckafka.v20190819.ModifyTopicAttributes", async function () {
 it("ckafka.v20190819.CreateTopicIpWhiteList", async function () {
     try {
        const data = await client.CreateTopicIpWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.DescribeCkafkaVersion", async function () {
+    try {
+       const data = await client.DescribeCkafkaVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

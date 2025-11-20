@@ -2247,6 +2247,33 @@ export interface EnterpriseLicenseOCRRequest {
 }
 
 /**
+ * VehicleLicenseOCR请求参数结构体
+ */
+export interface VehicleLicenseOCRRequest {
+  /**
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   */
+  ImageUrl?: string
+  /**
+   * FRONT 为行驶证主页正面（有红色印章的一面），
+BACK 为行驶证副页正面（有号码号牌的一面），
+DOUBLE 为行驶证主页正面和副页正面。
+默认值为：FRONT。
+   */
+  CardSide?: string
+  /**
+   * FRONT为行驶证主页正面（有红色印章的一面），BACK 为拖拉机行驶证副页正面识别
+   */
+  TractorCardSide?: string
+}
+
+/**
  * QuestionSplitOCR返回参数结构体
  */
 export interface QuestionSplitOCRResponse {
@@ -3677,18 +3704,13 @@ export interface VatInvoiceOCRRequest {
 }
 
 /**
- * key信息组
+ * 其他票Table
  */
-export interface Key {
+export interface ElectronicTollSummaryList {
   /**
-   * 自动识别的字段名称
+   * 列表
    */
-  AutoName?: string
-  /**
-   * 定义的字段名称（传key的名称）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigName?: string
+  Items?: Array<ElectronicTollSummaryItem>
 }
 
 /**
@@ -3836,53 +3858,29 @@ export interface DutyPaidProofOCRResponse {
 }
 
 /**
- * 算式识别结果
+ * MLIDCardOCR请求参数结构体
  */
-export interface TextArithmetic {
+export interface MLIDCardOCRRequest {
   /**
-   * 识别出的文本行内容
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。
    */
-  DetectedText?: string
+  ImageBase64?: string
   /**
-   * 算式运算结果，true-正确   false-错误或非法参数
+   * 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Result?: boolean
+  BackImageBase64?: string
   /**
-   * 保留字段，暂不支持
+   * 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Confidence?: number
+  ImageUrl?: string
   /**
-   * 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Polygon?: Array<Coord>
+  BackImageUrl?: string
   /**
-   * 保留字段，暂不支持
+   * 是否返回图片，默认false
    */
-  AdvancedInfo?: string
-  /**
-   * 文本行旋转纠正之后在图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
-   */
-  ItemCoord?: ItemCoord
-  /**
-   * 算式题型编号：
-‘1’: 加减乘除四则
-‘2’: 加减乘除已知结果求运算因子
-‘3’: 判断大小
-‘4’: 约等于估算
-‘5’: 带余数除法
-‘6’: 分数四则运算
-‘7’: 单位换算
-‘8’: 竖式加减法
-‘9’: 竖式乘除法
-‘10’: 脱式计算
-‘11’: 解方程
-   */
-  ExpressionType?: string
-  /**
-   * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如`1<10<7`）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
-   */
-  Answer?: string
+  RetImage?: boolean
 }
 
 /**
@@ -4384,6 +4382,11 @@ export interface SingleInvoiceItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedCarPurchaseInvoiceElectronic?: UsedCarPurchaseInvoice
+  /**
+   * 通行费电子票据汇总单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicTollSummary?: ElectronicTollSummary
 }
 
 /**
@@ -5127,6 +5130,56 @@ export interface MotorVehicleSaleInvoice {
    * 是否存在二维码（1：有，0：无）
    */
   QRCodeMark?: number
+}
+
+/**
+ * 算式识别结果
+ */
+export interface TextArithmetic {
+  /**
+   * 识别出的文本行内容
+   */
+  DetectedText?: string
+  /**
+   * 算式运算结果，true-正确   false-错误或非法参数
+   */
+  Result?: boolean
+  /**
+   * 保留字段，暂不支持
+   */
+  Confidence?: number
+  /**
+   * 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Polygon?: Array<Coord>
+  /**
+   * 保留字段，暂不支持
+   */
+  AdvancedInfo?: string
+  /**
+   * 文本行旋转纠正之后在图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+   */
+  ItemCoord?: ItemCoord
+  /**
+   * 算式题型编号：
+‘1’: 加减乘除四则
+‘2’: 加减乘除已知结果求运算因子
+‘3’: 判断大小
+‘4’: 约等于估算
+‘5’: 带余数除法
+‘6’: 分数四则运算
+‘7’: 单位换算
+‘8’: 竖式加减法
+‘9’: 竖式乘除法
+‘10’: 脱式计算
+‘11’: 解方程
+   */
+  ExpressionType?: string
+  /**
+   * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如`1<10<7`）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
+   */
+  Answer?: string
 }
 
 /**
@@ -7432,133 +7485,21 @@ export interface DescribeExtractDocAgentJobRequest {
 }
 
 /**
- * 机票行程单
+ * ElectronicTollSummaryItem
  */
-export interface AirTransport {
+export interface ElectronicTollSummaryItem {
   /**
-   * 发票名称
+   * 票面key值
    */
-  Title?: string
+  Name?: string
   /**
-   * 电子客票号码
+   * 票面value值
    */
-  Number?: string
+  Value?: string
   /**
-   * 校验码
+   * 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1
    */
-  CheckCode?: string
-  /**
-   * 印刷序号
-   */
-  SerialNumber?: string
-  /**
-   * 开票日期
-   */
-  Date?: string
-  /**
-   * 销售单位代号
-   */
-  AgentCode?: string
-  /**
-   * 销售单位代号第一行
-   */
-  AgentCodeFirst?: string
-  /**
-   * 销售单位代号第二行
-   */
-  AgentCodeSecond?: string
-  /**
-   * 姓名
-   */
-  UserName?: string
-  /**
-   * 身份证号
-   */
-  UserID?: string
-  /**
-   * 填开单位
-   */
-  Issuer?: string
-  /**
-   * 票价
-   */
-  Fare?: string
-  /**
-   * 合计税额
-   */
-  Tax?: string
-  /**
-   * 燃油附加费
-   */
-  FuelSurcharge?: string
-  /**
-   * 民航发展基金
-   */
-  AirDevelopmentFund?: string
-  /**
-   * 保险费
-   */
-  Insurance?: string
-  /**
-   * 合计金额（小写）
-   */
-  Total?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 国内国际标签
-   */
-  DomesticInternationalTag?: string
-  /**
-   * 客票生效日期
-   */
-  DateStart?: string
-  /**
-   * 有效截止日期
-   */
-  DateEnd?: string
-  /**
-   * 签注
-   */
-  Endorsement?: string
-  /**
-   * 是否存在二维码（1：有，0：无）
-   */
-  QRCodeMark?: number
-  /**
-   * 条目
-   */
-  FlightItems?: Array<FlightItem>
-  /**
-   * 提示信息
-   */
-  PromptInformation?: string
-  /**
-   * 统一社会信用代码/纳税人识别号
-   */
-  BuyerTaxID?: string
-  /**
-   * 购买方名称
-   */
-  Buyer?: string
-  /**
-   * 发票号码
-   */
-  ReceiptNumber?: string
-  /**
-   * 开票状态
-   */
-  InvoiceStatus?: string
-  /**
-   * 增值税税率
-   */
-  TaxRate?: string
-  /**
-   * 增值税税额
-   */
-  TaxAmount?: string
+  Row?: number
 }
 
 /**
@@ -9748,29 +9689,133 @@ export interface PermitOCRRequest {
 }
 
 /**
- * MLIDCardOCR请求参数结构体
+ * 机票行程单
  */
-export interface MLIDCardOCRRequest {
+export interface AirTransport {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。
+   * 发票名称
    */
-  ImageBase64?: string
+  Title?: string
   /**
-   * 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 电子客票号码
    */
-  BackImageBase64?: string
+  Number?: string
   /**
-   * 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 校验码
    */
-  ImageUrl?: string
+  CheckCode?: string
   /**
-   * 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 印刷序号
    */
-  BackImageUrl?: string
+  SerialNumber?: string
   /**
-   * 是否返回图片，默认false
+   * 开票日期
    */
-  RetImage?: boolean
+  Date?: string
+  /**
+   * 销售单位代号
+   */
+  AgentCode?: string
+  /**
+   * 销售单位代号第一行
+   */
+  AgentCodeFirst?: string
+  /**
+   * 销售单位代号第二行
+   */
+  AgentCodeSecond?: string
+  /**
+   * 姓名
+   */
+  UserName?: string
+  /**
+   * 身份证号
+   */
+  UserID?: string
+  /**
+   * 填开单位
+   */
+  Issuer?: string
+  /**
+   * 票价
+   */
+  Fare?: string
+  /**
+   * 合计税额
+   */
+  Tax?: string
+  /**
+   * 燃油附加费
+   */
+  FuelSurcharge?: string
+  /**
+   * 民航发展基金
+   */
+  AirDevelopmentFund?: string
+  /**
+   * 保险费
+   */
+  Insurance?: string
+  /**
+   * 合计金额（小写）
+   */
+  Total?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 国内国际标签
+   */
+  DomesticInternationalTag?: string
+  /**
+   * 客票生效日期
+   */
+  DateStart?: string
+  /**
+   * 有效截止日期
+   */
+  DateEnd?: string
+  /**
+   * 签注
+   */
+  Endorsement?: string
+  /**
+   * 是否存在二维码（1：有，0：无）
+   */
+  QRCodeMark?: number
+  /**
+   * 条目
+   */
+  FlightItems?: Array<FlightItem>
+  /**
+   * 提示信息
+   */
+  PromptInformation?: string
+  /**
+   * 统一社会信用代码/纳税人识别号
+   */
+  BuyerTaxID?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 发票号码
+   */
+  ReceiptNumber?: string
+  /**
+   * 开票状态
+   */
+  InvoiceStatus?: string
+  /**
+   * 增值税税率
+   */
+  TaxRate?: string
+  /**
+   * 增值税税额
+   */
+  TaxAmount?: string
 }
 
 /**
@@ -10717,30 +10762,29 @@ export interface AdvertiseOCRResponse {
 }
 
 /**
- * VehicleLicenseOCR请求参数结构体
+ * 其他发票
  */
-export interface VehicleLicenseOCRRequest {
+export interface ElectronicTollSummary {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 发票名称
    */
-  ImageBase64?: string
+  Title?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * 金额
    */
-  ImageUrl?: string
+  Total?: string
   /**
-   * FRONT 为行驶证主页正面（有红色印章的一面），
-BACK 为行驶证副页正面（有号码号牌的一面），
-DOUBLE 为行驶证主页正面和副页正面。
-默认值为：FRONT。
+   * 列表
    */
-  CardSide?: string
+  Items?: Array<ElectronicTollSummaryItem>
   /**
-   * FRONT为行驶证主页正面（有红色印章的一面），BACK 为拖拉机行驶证副页正面识别
+   * 表格
    */
-  TractorCardSide?: string
+  TableItems?: Array<ElectronicTollSummaryList>
+  /**
+   * 发票日期
+   */
+  Date?: string
 }
 
 /**
@@ -11072,6 +11116,44 @@ MyKid 儿童卡
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 单元格数据
+ */
+export interface TableCellInfo {
+  /**
+   * 单元格左上角的列索引
+   */
+  ColTl: number
+  /**
+   * 单元格左上角的行索引
+   */
+  RowTl: number
+  /**
+   * 单元格右下角的列索引
+   */
+  ColBr: number
+  /**
+   * 单元格右下角的行索引
+   */
+  RowBr: number
+  /**
+   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+   */
+  Text: string
+  /**
+   * 单元格类型
+   */
+  Type: string
+  /**
+   * 单元格置信度
+   */
+  Confidence: number
+  /**
+   * 单元格在图像中的四点坐标
+   */
+  Polygon: Array<Coord>
 }
 
 /**
@@ -11589,41 +11671,18 @@ export interface GeneralFastOCRResponse {
 }
 
 /**
- * 单元格数据
+ * key信息组
  */
-export interface TableCellInfo {
+export interface Key {
   /**
-   * 单元格左上角的列索引
+   * 自动识别的字段名称
    */
-  ColTl: number
+  AutoName?: string
   /**
-   * 单元格左上角的行索引
+   * 定义的字段名称（传key的名称）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RowTl: number
-  /**
-   * 单元格右下角的列索引
-   */
-  ColBr: number
-  /**
-   * 单元格右下角的行索引
-   */
-  RowBr: number
-  /**
-   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
-   */
-  Text: string
-  /**
-   * 单元格类型
-   */
-  Type: string
-  /**
-   * 单元格置信度
-   */
-  Confidence: number
-  /**
-   * 单元格在图像中的四点坐标
-   */
-  Polygon: Array<Coord>
+  ConfigName?: string
 }
 
 /**

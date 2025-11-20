@@ -85,6 +85,7 @@ import {
   CreateTopicResponse,
   KafkaConnectParam,
   DatahubTaskInfo,
+  UpgradeBrokerVersionResponse,
   DescribeConsumerGroupResponse,
   CreateInstancePostData,
   DeleteDatahubTaskResponse,
@@ -199,6 +200,7 @@ import {
   DescribeDatahubTopicsResp,
   ModifyDatahubTaskResponse,
   DescribeConnectResourcesResponse,
+  DescribeCkafkaVersionResponse,
   TopicDetail,
   DropCls,
   DeleteUserRequest,
@@ -216,6 +218,7 @@ import {
   TopicFlowRanking,
   GroupInfoTopics,
   TopicResult,
+  UpgradeBrokerVersionRequest,
   CreateInstancePreData,
   EsConnectParam,
   CtsdbModifyConnectParam,
@@ -373,6 +376,7 @@ import {
   ModifyDatahubTaskRequest,
   CreatePrometheusRequest,
   AclRuleResp,
+  DescribeCkafkaVersionRequest,
 } from "./ckafka_models"
 
 /**
@@ -655,6 +659,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * broker版本升级
+   */
+  async UpgradeBrokerVersion(
+    req: UpgradeBrokerVersionRequest,
+    cb?: (error: string, rep: UpgradeBrokerVersionResponse) => void
+  ): Promise<UpgradeBrokerVersionResponse> {
+    return this.request("UpgradeBrokerVersion", req, cb)
+  }
+
+  /**
    * 查询Datahub任务列表
    */
   async DescribeDatahubTasks(
@@ -862,6 +876,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTopicIpWhiteListResponse) => void
   ): Promise<CreateTopicIpWhiteListResponse> {
     return this.request("CreateTopicIpWhiteList", req, cb)
+  }
+
+  /**
+   * 查询实例版本信息
+   */
+  async DescribeCkafkaVersion(
+    req: DescribeCkafkaVersionRequest,
+    cb?: (error: string, rep: DescribeCkafkaVersionResponse) => void
+  ): Promise<DescribeCkafkaVersionResponse> {
+    return this.request("DescribeCkafkaVersion", req, cb)
   }
 
   /**

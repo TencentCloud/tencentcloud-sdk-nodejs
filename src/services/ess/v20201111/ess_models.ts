@@ -861,6 +861,28 @@ export interface DetectInfoVideoData {
 }
 
 /**
+ * 合同审查个性化参数，用于控制页面的展示内容
+ */
+export interface ContractReviewWebUrlOption {
+  /**
+   * 禁用暂存。 默认 false，设置为 true 会隐藏界面上的临时保存按钮
+   */
+  DisableTemporaryStore?: boolean
+  /**
+   * 禁用导出。默认 false，设置为 true 会隐藏界面上的导出按钮
+   */
+  DisableExport?: boolean
+  /**
+   * 禁用重新审查。默认 false，设置为 true 会隐藏界面上的重新审查按钮
+   */
+  DisableReviewAgain?: boolean
+  /**
+   * 禁用二维码分享。默认 false，设置为 true 会隐藏界面上的分享二维码
+   */
+  DisableWxQrcode?: boolean
+}
+
+/**
  * ModifySingleSignOnEmployees返回参数结构体
  */
 export interface ModifySingleSignOnEmployeesResponse {
@@ -5633,7 +5655,6 @@ export interface CreateBatchSignUrlRequest {
 <ul>
 <li>请确认该名称与企业营业执照中注册的名称一致。</li>
 <li>如果名称中包含英文括号()，请使用中文括号（）代替。</li>
-<li>请确保此企业已完成腾讯电子签企业认证。</li>
 </ul>
    */
   OrganizationName?: string
@@ -10744,6 +10765,10 @@ export interface CreateContractReviewWebUrlRequest {
 在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。
    */
   UserData?: string
+  /**
+   * 个性化参数，用于控制页面展示内容
+   */
+  Option?: ContractReviewWebUrlOption
 }
 
 /**
@@ -10926,11 +10951,15 @@ export interface CreateBatchAdminChangeInvitationsUrlRequest {
  SMS  - 如果使用这个方式，则会给即将变更的超管发信息。
 注意：
 发送信息的手机号，是用户传递的手机号。
-如果用户同时传递了证件号，手机号会用用户在电子签注册的手机号进行覆盖。
+如果用户同时传递了证件号，手机号会被用户在电子签注册的手机号进行覆盖。
    */
   NotifyType?: string
   /**
-   * 要跳转的链接类型<ul><li> **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型  ，此时返回长链 (默认类型)</li><li>**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链</li><li>**APP**： 第三方APP或小程序跳转电子签小程序的path,  APP或者小程序跳转适合此类型</li><li>**QR_CODE**： 跳转电子签小程序的http_url的二维码形式,  可以在页面展示适合此类型</li></ul>
+   * 要跳转的链接类型
+<ul>
+<li> **HTTP**：跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型 ，此时返回长链 （默认类型）。</li><li>**HTTP_SHORT_URL**：跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型，此时返回短链。</li><li>**APP**： 第三方APP或小程序跳转电子签小程序的path，APP或者小程序跳转适合此类型。</li>
+<li>**QR_CODE**： 跳转电子签小程序的http_url的二维码形式，可以在页面展示适合此类型。</li>
+</ul>
    */
   Endpoint?: string
 }

@@ -58,6 +58,16 @@ it("vclm.v20240523.DescribePortraitSingJob", async function () {
     }
 })
 
+it("vclm.v20240523.SubmitHumanActorJob", async function () {
+    try {
+       const data = await client.SubmitHumanActorJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.DescribeImageAnimateJob", async function () {
     try {
        const data = await client.DescribeImageAnimateJob({})
@@ -121,6 +131,16 @@ it("vclm.v20240523.DescribeVideoStylizationJob", async function () {
 it("vclm.v20240523.DescribeImageToVideoGeneralJob", async function () {
     try {
        const data = await client.DescribeImageToVideoGeneralJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeHumanActorJob", async function () {
+    try {
+       const data = await client.DescribeHumanActorJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

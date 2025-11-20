@@ -19,18 +19,20 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ResetDeviceAccountPasswordResponse,
-  DescribeOperationTaskResponse,
+  CreateUserDirectoryResponse,
   ModifyAccessWhiteListStatusResponse,
   AccessInfo,
   ModifyResourceResponse,
   BindDeviceAccountPasswordRequest,
+  DescribeOperationTaskResponse,
   DeleteAclsRequest,
   ModifyOperationTaskResponse,
   DisableIntranetAccessResponse,
   ModifyOperationTaskRequest,
   DescribeDeviceGroupsResponse,
+  UserOrg,
   DeleteCmdTemplatesResponse,
-  DeleteDevicesResponse,
+  DeleteUserDirectoryRequest,
   ChangePwdTaskInfo,
   CreateChangePwdTaskResponse,
   DescribeLoginEventRequest,
@@ -43,12 +45,16 @@ import {
   CreateResourceRequest,
   ModifyAssetSyncFlagRequest,
   DescribeDevicesResponse,
+  ResetDeviceAccountPrivateKeyResponse,
   ResetUserResponse,
   CreateAccessWhiteListRuleResponse,
+  ImportExternalDeviceResponse,
   DisableExternalAccessResponse,
   DeleteUserGroupMembersRequest,
   RunChangePwdTaskRequest,
+  DescribeAccountGroupsRequest,
   ModifyAssetSyncFlagResponse,
+  DescribeSourceTypesResponse,
   DescribeChangePwdTaskDetailResponse,
   DeleteUserGroupsResponse,
   ModifyAccessWhiteListAutoStatusResponse,
@@ -62,7 +68,7 @@ import {
   ImportExternalDeviceRequest,
   DescribeResourcesRequest,
   BindDeviceResourceResponse,
-  ResetDeviceAccountPrivateKeyResponse,
+  CreateUserDirectoryRequest,
   SetLDAPSyncFlagResponse,
   DescribeSecuritySettingRequest,
   DeleteUserGroupMembersResponse,
@@ -70,7 +76,7 @@ import {
   CmdTemplate,
   SearchCommandResult,
   DescribeLDAPUnitSetRequest,
-  SearchSubtaskResultByIdResponse,
+  CreateSyncUserTaskResponse,
   RunChangePwdTaskDetail,
   ModifyOAuthSettingRequest,
   CreateUserGroupRequest,
@@ -81,23 +87,28 @@ import {
   BindDeviceAccountPrivateKeyResponse,
   IOAUserGroup,
   SearchCommandBySidRequest,
+  SyncUserToIOAResponse,
+  DeleteDevicesResponse,
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,
   OperationEvent,
   Department,
   AccessDevicesRequest,
   DescribeAccessWhiteListRulesRequest,
-  ImportExternalDeviceResponse,
+  DescribeUserSyncStatusRequest,
   ModifyAccessWhiteListAutoStatusRequest,
   ModifyUserGroupResponse,
   CreateUserResponse,
+  DescribeSourceTypesRequest,
   DeleteOperationTasksRequest,
   AppAsset,
   DescribeAssetSyncStatusResponse,
   ModifyChangePwdTaskResponse,
   DescribeUserGroupsRequest,
+  DescribeUserDirectoryResponse,
   CreateAclRequest,
   DescribeLoginEventResponse,
+  SearchSubtaskResultByIdResponse,
   SearchSubtaskResultByIdRequest,
   CreateDeviceGroupRequest,
   DisableExternalAccessRequest,
@@ -127,8 +138,9 @@ import {
   AssetSyncFlags,
   CreateCmdTemplateRequest,
   ModifyCmdTemplateResponse,
+  ModifyUserDirectoryResponse,
   ResetDeviceAccountPrivateKeyRequest,
-  DescribeDeviceGroupsRequest,
+  DeleteUserDirectoryResponse,
   CreateAssetSyncJobResponse,
   BindDeviceAccountPrivateKeyRequest,
   ModifyLDAPSettingRequest,
@@ -149,7 +161,9 @@ import {
   DescribeOperationTaskRequest,
   DescribeLDAPUnitSetResponse,
   DescribeUserGroupMembersResponse,
+  UserDirectory,
   DescribeSecuritySettingResponse,
+  DescribeDeviceGroupsRequest,
   ModifyAccessWhiteListRuleRequest,
   SearchSessionCommandResponse,
   DeleteAccessWhiteListRulesRequest,
@@ -158,6 +172,9 @@ import {
   ResetUserRequest,
   Device,
   DeleteUserGroupsRequest,
+  CreateSyncUserTaskRequest,
+  DescribeAccountGroupsResponse,
+  SourceType,
   CreateDeviceAccountResponse,
   ExternalDevice,
   SearchSessionRequest,
@@ -167,6 +184,7 @@ import {
   DescribeUsersResponse,
   DeployResourceResponse,
   ModifyLDAPSettingResponse,
+  SyncDevicesToIOAResponse,
   DescribeAssetSyncFlagRequest,
   CreateUserRequest,
   DescribeChangePwdTaskRequest,
@@ -188,13 +206,17 @@ import {
   AddDeviceGroupMembersResponse,
   DeleteCmdTemplatesRequest,
   DescribeUserGroupsResponse,
+  DescribeUserDirectoryRequest,
+  SyncUserToIOARequest,
   AddUserGroupMembersResponse,
   DescribeDeviceAccountsRequest,
   DescribeAssetSyncFlagResponse,
+  DescribeUserSyncStatusResponse,
   DeleteChangePwdTaskRequest,
   ModifyUserGroupRequest,
   CreateChangePwdTaskRequest,
   SearchTaskResultResponse,
+  SyncDevicesToIOARequest,
   LoginEvent,
   DeleteChangePwdTaskResponse,
   CreateUserGroupResponse,
@@ -226,8 +248,10 @@ import {
   DescribeOperationEventResponse,
   DescribeDomainsResponse,
   EnableIntranetAccessResponse,
+  ModifyUserDirectoryRequest,
   SearchFileResult,
   ReplaySessionResponse,
+  AccountGroup,
   DeleteAclsResponse,
   DescribeDeviceGroupMembersRequest,
   DeleteDeviceGroupsResponse,
@@ -287,6 +311,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户目录信息
+   */
+  async ModifyUserDirectory(
+    req: ModifyUserDirectoryRequest,
+    cb?: (error: string, rep: ModifyUserDirectoryResponse) => void
+  ): Promise<ModifyUserDirectoryResponse> {
+    return this.request("ModifyUserDirectory", req, cb)
+  }
+
+  /**
    * 导入外部资产信息
    */
   async ImportExternalDevice(
@@ -297,13 +331,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询登录日志
+   * 获取用户目录
    */
-  async DescribeLoginEvent(
-    req: DescribeLoginEventRequest,
-    cb?: (error: string, rep: DescribeLoginEventResponse) => void
-  ): Promise<DescribeLoginEventResponse> {
-    return this.request("DescribeLoginEvent", req, cb)
+  async DescribeUserDirectory(
+    req: DescribeUserDirectoryRequest,
+    cb?: (error: string, rep: DescribeUserDirectoryResponse) => void
+  ): Promise<DescribeUserDirectoryResponse> {
+    return this.request("DescribeUserDirectory", req, cb)
+  }
+
+  /**
+   * 删除用户组成员
+   */
+  async DeleteUserGroupMembers(
+    req: DeleteUserGroupMembersRequest,
+    cb?: (error: string, rep: DeleteUserGroupMembersResponse) => void
+  ): Promise<DeleteUserGroupMembersResponse> {
+    return this.request("DeleteUserGroupMembers", req, cb)
   }
 
   /**
@@ -314,6 +358,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAssetSyncJobResponse) => void
   ): Promise<CreateAssetSyncJobResponse> {
     return this.request("CreateAssetSyncJob", req, cb)
+  }
+
+  /**
+   * 创建用户同步任务
+   */
+  async CreateSyncUserTask(
+    req: CreateSyncUserTaskRequest,
+    cb?: (error: string, rep: CreateSyncUserTaskResponse) => void
+  ): Promise<CreateSyncUserTaskResponse> {
+    return this.request("CreateSyncUserTask", req, cb)
   }
 
   /**
@@ -387,6 +441,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取账号组信息
+   */
+  async DescribeAccountGroups(
+    req: DescribeAccountGroupsRequest,
+    cb?: (error: string, rep: DescribeAccountGroupsResponse) => void
+  ): Promise<DescribeAccountGroupsResponse> {
+    return this.request("DescribeAccountGroups", req, cb)
+  }
+
+  /**
    * 删除高危命令模板
    */
   async DeleteCmdTemplates(
@@ -404,6 +468,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccessWhiteListStatusResponse) => void
   ): Promise<ModifyAccessWhiteListStatusResponse> {
     return this.request("ModifyAccessWhiteListStatus", req, cb)
+  }
+
+  /**
+   * 查询登录日志
+   */
+  async DescribeLoginEvent(
+    req: DescribeLoginEventRequest,
+    cb?: (error: string, rep: DescribeLoginEventResponse) => void
+  ): Promise<DescribeLoginEventResponse> {
+    return this.request("DescribeLoginEvent", req, cb)
   }
 
   /**
@@ -454,6 +528,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchTaskResultResponse) => void
   ): Promise<SearchTaskResultResponse> {
     return this.request("SearchTaskResult", req, cb)
+  }
+
+  /**
+   * 同步堡垒机本地用户到IOA
+   */
+  async SyncUserToIOA(
+    req: SyncUserToIOARequest,
+    cb?: (error: string, rep: SyncUserToIOAResponse) => void
+  ): Promise<SyncUserToIOAResponse> {
+    return this.request("SyncUserToIOA", req, cb)
   }
 
   /**
@@ -697,13 +781,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户组成员
+   * 创建用户目录
    */
-  async DeleteUserGroupMembers(
-    req: DeleteUserGroupMembersRequest,
-    cb?: (error: string, rep: DeleteUserGroupMembersResponse) => void
-  ): Promise<DeleteUserGroupMembersResponse> {
-    return this.request("DeleteUserGroupMembers", req, cb)
+  async CreateUserDirectory(
+    req: CreateUserDirectoryRequest,
+    cb?: (error: string, rep: CreateUserDirectoryResponse) => void
+  ): Promise<CreateUserDirectoryResponse> {
+    return this.request("CreateUserDirectory", req, cb)
   }
 
   /**
@@ -767,6 +851,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户目录
+   */
+  async DeleteUserDirectory(
+    req: DeleteUserDirectoryRequest,
+    cb?: (error: string, rep: DeleteUserDirectoryResponse) => void
+  ): Promise<DeleteUserDirectoryResponse> {
+    return this.request("DeleteUserDirectory", req, cb)
+  }
+
+  /**
    * 修改用户组
    */
   async ModifyUserGroup(
@@ -774,6 +868,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserGroupResponse) => void
   ): Promise<ModifyUserGroupResponse> {
     return this.request("ModifyUserGroup", req, cb)
+  }
+
+  /**
+   * 获取认证源信息
+   */
+  async DescribeSourceTypes(
+    req?: DescribeSourceTypesRequest,
+    cb?: (error: string, rep: DescribeSourceTypesResponse) => void
+  ): Promise<DescribeSourceTypesResponse> {
+    return this.request("DescribeSourceTypes", req, cb)
   }
 
   /**
@@ -977,6 +1081,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 同步资产到IOA
+   */
+  async SyncDevicesToIOA(
+    req: SyncDevicesToIOARequest,
+    cb?: (error: string, rep: SyncDevicesToIOAResponse) => void
+  ): Promise<SyncDevicesToIOAResponse> {
+    return this.request("SyncDevicesToIOA", req, cb)
+  }
+
+  /**
    * 更新修改密码任务
    */
   async ModifyChangePwdTask(
@@ -1024,6 +1138,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAccessWhiteListRulesResponse) => void
   ): Promise<DeleteAccessWhiteListRulesResponse> {
     return this.request("DeleteAccessWhiteListRules", req, cb)
+  }
+
+  /**
+   * 获取用户同步状态
+   */
+  async DescribeUserSyncStatus(
+    req: DescribeUserSyncStatusRequest,
+    cb?: (error: string, rep: DescribeUserSyncStatusResponse) => void
+  ): Promise<DescribeUserSyncStatusResponse> {
+    return this.request("DescribeUserSyncStatus", req, cb)
   }
 
   /**

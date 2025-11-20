@@ -58,6 +58,16 @@ it("bh.v20230418.DescribeDomains", async function () {
     }
 })
 
+it("bh.v20230418.ModifyUserDirectory", async function () {
+    try {
+       const data = await client.ModifyUserDirectory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ImportExternalDevice", async function () {
     try {
        const data = await client.ImportExternalDevice({})
@@ -68,9 +78,19 @@ it("bh.v20230418.ImportExternalDevice", async function () {
     }
 })
 
-it("bh.v20230418.DescribeLoginEvent", async function () {
+it("bh.v20230418.DescribeUserDirectory", async function () {
     try {
-       const data = await client.DescribeLoginEvent({})
+       const data = await client.DescribeUserDirectory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DeleteUserGroupMembers", async function () {
+    try {
+       const data = await client.DeleteUserGroupMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +101,16 @@ it("bh.v20230418.DescribeLoginEvent", async function () {
 it("bh.v20230418.CreateAssetSyncJob", async function () {
     try {
        const data = await client.CreateAssetSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.CreateSyncUserTask", async function () {
+    try {
+       const data = await client.CreateSyncUserTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +188,16 @@ it("bh.v20230418.DescribeOperationEvent", async function () {
     }
 })
 
+it("bh.v20230418.DescribeAccountGroups", async function () {
+    try {
+       const data = await client.DescribeAccountGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DeleteCmdTemplates", async function () {
     try {
        const data = await client.DeleteCmdTemplates({})
@@ -171,6 +211,16 @@ it("bh.v20230418.DeleteCmdTemplates", async function () {
 it("bh.v20230418.ModifyAccessWhiteListStatus", async function () {
     try {
        const data = await client.ModifyAccessWhiteListStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeLoginEvent", async function () {
+    try {
+       const data = await client.DescribeLoginEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +271,16 @@ it("bh.v20230418.CreateUser", async function () {
 it("bh.v20230418.SearchTaskResult", async function () {
     try {
        const data = await client.SearchTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.SyncUserToIOA", async function () {
+    try {
+       const data = await client.SyncUserToIOA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +528,9 @@ it("bh.v20230418.ModifyOAuthSetting", async function () {
     }
 })
 
-it("bh.v20230418.DeleteUserGroupMembers", async function () {
+it("bh.v20230418.CreateUserDirectory", async function () {
     try {
-       const data = await client.DeleteUserGroupMembers({})
+       const data = await client.CreateUserDirectory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +598,29 @@ it("bh.v20230418.DeleteAcls", async function () {
     }
 })
 
+it("bh.v20230418.DeleteUserDirectory", async function () {
+    try {
+       const data = await client.DeleteUserDirectory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ModifyUserGroup", async function () {
     try {
        const data = await client.ModifyUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeSourceTypes", async function () {
+    try {
+       const data = await client.DescribeSourceTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,6 +828,16 @@ it("bh.v20230418.CreateChangePwdTask", async function () {
     }
 })
 
+it("bh.v20230418.SyncDevicesToIOA", async function () {
+    try {
+       const data = await client.SyncDevicesToIOA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ModifyChangePwdTask", async function () {
     try {
        const data = await client.ModifyChangePwdTask({})
@@ -791,6 +881,16 @@ it("bh.v20230418.DeleteDeviceGroups", async function () {
 it("bh.v20230418.DeleteAccessWhiteListRules", async function () {
     try {
        const data = await client.DeleteAccessWhiteListRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeUserSyncStatus", async function () {
+    try {
+       const data = await client.DescribeUserSyncStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -494,6 +494,16 @@ export interface SetInstanceMaintenanceResponse {
 }
 
 /**
+ * DescribeInstanceSSL请求参数结构体
+ */
+export interface DescribeInstanceSSLRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+}
+
+/**
  * EnableTransparentDataEncryption请求参数结构体
  */
 export interface EnableTransparentDataEncryptionRequest {
@@ -953,6 +963,22 @@ export interface CreateDBInstanceHourResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InstanceEnableSSL请求参数结构体
+ */
+export interface InstanceEnableSSLRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 配置是否要开启SSL访问。
+- true：开启。
+- false：关闭。
+   */
+  Enable: boolean
 }
 
 /**
@@ -1539,6 +1565,37 @@ export interface DescribeDBInstancesRequest {
    * 标签信息，包含标签键与标签值。
    */
   Tags?: Array<TagInfo>
+}
+
+/**
+ * InstanceEnableSSL返回参数结构体
+ */
+export interface InstanceEnableSSLResponse {
+  /**
+   * SSL开启状态。
+- 0：关闭。
+- 1：开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 证书文件过期时间，格式为：2023-05-01 12:00:00。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime?: string
+  /**
+   * 证书文件的下载链接。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertUrl?: string
+  /**
+   * 流程id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2799,6 +2856,31 @@ export interface DeliverSummary {
    * 投递子类型：cls，ckafka。
    */
   DeliverSubType?: string
+}
+
+/**
+ * DescribeInstanceSSL返回参数结构体
+ */
+export interface DescribeInstanceSSLResponse {
+  /**
+   * SSL开启状态。0为关闭，1为开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 证书过期时间，格式为2023-05-01 12:00:00
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime?: string
+  /**
+   * 证书下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

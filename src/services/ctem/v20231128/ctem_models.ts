@@ -35,6 +35,16 @@ export interface DescribeFakeWechatOfficialsResponse {
 }
 
 /**
+ * CreateEnterprise返回参数结构体
+ */
+export interface CreateEnterpriseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeManages请求参数结构体
  */
 export interface DescribeManagesRequest {
@@ -2309,6 +2319,24 @@ export interface DisplayApp {
 }
 
 /**
+ * DescribeApiSecs返回参数结构体
+ */
+export interface DescribeApiSecsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * API安全数组
+   */
+  List?: Array<DisplayApiSec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 网盘泄露详情
  */
 export interface DisplayNetDisk {
@@ -2850,6 +2878,56 @@ export interface DescribeConfigsRequest {
 }
 
 /**
+ * CreateEnterprise请求参数结构体
+ */
+export interface CreateEnterpriseRequest {
+  /**
+   * 企业ID
+   */
+  CustomerId: number
+  /**
+   * 名称
+   */
+  Name: string
+  /**
+   * 上一级企业
+   */
+  ParentEnterpriseUid?: string
+  /**
+   * 统一社会信用代码
+   */
+  CreditCode?: string
+  /**
+   * 企业状态:存续、已注销
+   */
+  Status?: string
+  /**
+   * 注册资本（单位:元）
+   */
+  RegisteredCapital?: string
+  /**
+   * 持股比例
+   */
+  ShareholdingRatio?: string
+  /**
+   * 法人代表
+   */
+  LegalPerson?: string
+  /**
+   * 类型
+   */
+  Type?: string
+  /**
+   * 行业类型
+   */
+  Industry?: string
+  /**
+   * 子公司ID
+   */
+  EnterpriseUid?: string
+}
+
+/**
  * DescribeWeakPasswords请求参数结构体
  */
 export interface DescribeWeakPasswordsRequest {
@@ -3339,6 +3417,56 @@ export interface DisplayGithub {
    * 公共字段
    */
   DisplayToolCommon?: DisplayToolCommon
+}
+
+/**
+ * API安全详情
+ */
+export interface DisplayApiSec {
+  /**
+   * 主键ID
+   */
+  Id?: number
+  /**
+   * 公共字段
+   */
+  DisplayToolCommon?: DisplayToolCommon
+  /**
+   * Url
+   */
+  Url?: string
+  /**
+   * Host地址
+   */
+  Host?: string
+  /**
+   * Path路径
+   */
+  Path?: string
+  /**
+   * 方法：POST、GET、DELETE等
+   */
+  Method?: string
+  /**
+   * 修复状态：unrepaired:未修复，repaired:已修复, ignore:已忽略,checking:复测中
+   */
+  Status?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 请求体
+   */
+  Request?: string
+  /**
+   * 响应体
+   */
+  Response?: string
+  /**
+   * 是否风险API
+   */
+  IsRiskAPI?: boolean
 }
 
 /**
@@ -3835,6 +3963,68 @@ export interface DisplaySuspiciousAsset {
    * 根域名
    */
   RootDomain?: string
+}
+
+/**
+ * DescribeApiSecs请求参数结构体
+ */
+export interface DescribeApiSecsRequest {
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 数据输出格式：json、file，默认不填为json
+   */
+  Format?: string
+  /**
+   * 是否新增数据
+   */
+  IsNew?: boolean
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 子公司ID列表
+   */
+  EnterpriseUidList?: Array<string>
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
 }
 
 /**

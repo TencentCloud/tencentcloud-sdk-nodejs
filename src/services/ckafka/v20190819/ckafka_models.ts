@@ -1360,6 +1360,10 @@ export interface CreateTopicRequest {
    * 标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * 消息保存的时间类型:CreateTime/LogAppendTime
+   */
+  LogMsgTimestampType?: string
 }
 
 /**
@@ -1899,6 +1903,20 @@ export interface DatahubTaskInfo {
 }
 
 /**
+ * UpgradeBrokerVersion返回参数结构体
+ */
+export interface UpgradeBrokerVersionResponse {
+  /**
+   * 升配结果
+   */
+  Result?: JgwOperateResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeConsumerGroup返回参数结构体
  */
 export interface DescribeConsumerGroupResponse {
@@ -2096,6 +2114,14 @@ serverless  :serverless版
    * 动态硬盘扩容策略
    */
   DynamicDiskConfig?: DynamicDiskConfig
+  /**
+   * 系统维护时间
+   */
+  SystemMaintenanceTime?: string
+  /**
+   * 实例级别消息最大大小
+   */
+  MaxMessageByte?: number
   /**
    * 实例计费类型  POSTPAID_BY_HOUR 按小时付费; PREPAID 包年包月
    */
@@ -4864,6 +4890,16 @@ export interface DescribeConnectResourcesResponse {
 }
 
 /**
+ * DescribeCkafkaVersion返回参数结构体
+ */
+export interface DescribeCkafkaVersionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 主题详情
  */
 export interface TopicDetail {
@@ -5212,6 +5248,32 @@ export interface TopicResult {
    * 符合条件的 topic 数量
    */
   TotalCount?: number
+}
+
+/**
+ * UpgradeBrokerVersion请求参数结构体
+ */
+export interface UpgradeBrokerVersionRequest {
+  /**
+   * ckafka集群实例Id
+   */
+  InstanceId: string
+  /**
+   * 1.平滑升配.2.垂直升配
+   */
+  Type: number
+  /**
+   * 版本号
+   */
+  SourceVersion: string
+  /**
+   * 版本号
+   */
+  TargetVersion: string
+  /**
+   * 延迟时间
+   */
+  DelayTimeStamp?: string
 }
 
 /**
@@ -6419,6 +6481,10 @@ export interface DescribeRouteRequest {
    * 路由Id
    */
   RouteId?: number
+  /**
+   * 是否显示主路由，true时会在返回原路由列表的基础上,再额外展示实例创建时的主路由信息(且不被InternalFlag/UsedFor等参数过滤影响)
+   */
+  MainRouteFlag?: boolean
 }
 
 /**
@@ -6795,6 +6861,10 @@ export interface ModifyTopicAttributesRequest {
    * topic副本数  最小值 1,最大值 3
    */
   ReplicaNum?: number
+  /**
+   * 消息保存的时间类型：CreateTime/LogAppendTime
+   */
+  LogMsgTimestampType?: string
 }
 
 /**
@@ -9077,4 +9147,14 @@ export interface AclRuleResp {
    * AclRule列表
    */
   AclRuleList?: Array<AclRule>
+}
+
+/**
+ * DescribeCkafkaVersion请求参数结构体
+ */
+export interface DescribeCkafkaVersionRequest {
+  /**
+   * ckafka集群实例Id
+   */
+  InstanceId: string
 }

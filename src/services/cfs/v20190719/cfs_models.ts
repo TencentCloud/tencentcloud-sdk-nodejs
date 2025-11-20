@@ -651,6 +651,10 @@ export interface AutoSnapshotPolicyInfo {
    * 跨地域复制的快照保留时间，单位天
    */
   CrossRegionsAliveDays?: number
+  /**
+   * 快照策略标签
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -3172,6 +3176,10 @@ export interface CreateAutoSnapshotPolicyRequest {
    * 间隔天数，与DayOfWeek，DayOfMonth 三者选一
    */
   IntervalDays?: number
+  /**
+   * 快照策略标签
+   */
+  ResourceTags?: Array<TagInfo>
 }
 
 /**

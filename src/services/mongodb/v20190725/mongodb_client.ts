@@ -36,6 +36,7 @@ import {
   InstanceMultiParam,
   ModifyInstanceParamsResponse,
   SetInstanceMaintenanceResponse,
+  DescribeInstanceSSLRequest,
   EnableTransparentDataEncryptionRequest,
   DescribeBackupRulesResponse,
   SlowLogPattern,
@@ -58,6 +59,7 @@ import {
   FlashbackDatabase,
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
+  InstanceEnableSSLRequest,
   DescribeDBInstanceNamespaceRequest,
   DescribeDBInstanceNodePropertyRequest,
   LogInfo,
@@ -75,6 +77,7 @@ import {
   InquirePriceModifyDBInstanceSpecRequest,
   BackupInfo,
   DescribeDBInstancesRequest,
+  InstanceEnableSSLResponse,
   CurrentOp,
   ModifyDBInstanceSpecRequest,
   DescribeLogDownloadTasksRequest,
@@ -126,6 +129,7 @@ import {
   DescribeDBInstanceParamTplDetailResponse,
   DescribeMongodbLogsResponse,
   DeliverSummary,
+  DescribeInstanceSSLResponse,
   ModifyDBInstanceParamTplRequest,
   DescribeCurrentOpRequest,
   BackupDownloadTask,
@@ -376,13 +380,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SetBackupRules)用于设置 MongoDB 云数据库的自动备份规则。
+   * 本接口（InstanceEnableSSL）用于设置实例SSL状态。
    */
-  async SetBackupRules(
-    req: SetBackupRulesRequest,
-    cb?: (error: string, rep: SetBackupRulesResponse) => void
-  ): Promise<SetBackupRulesResponse> {
-    return this.request("SetBackupRules", req, cb)
+  async InstanceEnableSSL(
+    req: InstanceEnableSSLRequest,
+    cb?: (error: string, rep: InstanceEnableSSLResponse) => void
+  ): Promise<InstanceEnableSSLResponse> {
+    return this.request("InstanceEnableSSL", req, cb)
   }
 
   /**
@@ -687,6 +691,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceCreateDBInstancesResponse) => void
   ): Promise<InquirePriceCreateDBInstancesResponse> {
     return this.request("InquirePriceCreateDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口(SetBackupRules)用于设置 MongoDB 云数据库的自动备份规则。
+   */
+  async SetBackupRules(
+    req: SetBackupRulesRequest,
+    cb?: (error: string, rep: SetBackupRulesResponse) => void
+  ): Promise<SetBackupRulesResponse> {
+    return this.request("SetBackupRules", req, cb)
+  }
+
+  /**
+   * 查看实例SSL开启状态
+   */
+  async DescribeInstanceSSL(
+    req: DescribeInstanceSSLRequest,
+    cb?: (error: string, rep: DescribeInstanceSSLResponse) => void
+  ): Promise<DescribeInstanceSSLResponse> {
+    return this.request("DescribeInstanceSSL", req, cb)
   }
 
   /**

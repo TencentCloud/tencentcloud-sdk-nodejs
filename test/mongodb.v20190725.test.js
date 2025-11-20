@@ -188,9 +188,9 @@ it("mongodb.v20190725.DescribeDetailedSlowLogs", async function () {
     }
 })
 
-it("mongodb.v20190725.SetBackupRules", async function () {
+it("mongodb.v20190725.InstanceEnableSSL", async function () {
     try {
-       const data = await client.SetBackupRules({})
+       const data = await client.InstanceEnableSSL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +491,26 @@ it("mongodb.v20190725.DescribeBackupDownloadTask", async function () {
 it("mongodb.v20190725.InquirePriceCreateDBInstances", async function () {
     try {
        const data = await client.InquirePriceCreateDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.SetBackupRules", async function () {
+    try {
+       const data = await client.SetBackupRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeInstanceSSL", async function () {
+    try {
+       const data = await client.DescribeInstanceSSL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

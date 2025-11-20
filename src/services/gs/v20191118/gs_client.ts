@@ -35,6 +35,7 @@ import {
   StopAndroidInstancesAppResponse,
   FileCosInfo,
   ModifyAndroidAppVersionResponse,
+  RestartAndroidInstancesAppRequest,
   CleanAndroidInstancesAppDataResponse,
   DeleteAndroidAppResponse,
   DescribeAndroidInstanceLabelsResponse,
@@ -45,6 +46,7 @@ import {
   DescribeAndroidAppsResponse,
   StopAndroidInstancesAppRequest,
   CreateAndroidAppVersionRequest,
+  CreateAndroidInstanceAcceleratorTokenResponse,
   ModifyAndroidInstancesResourcesRequest,
   ModifyAndroidInstancesLabelsRequest,
   BackUpAndroidInstanceToStorageRequest,
@@ -64,6 +66,7 @@ import {
   CreateAndroidInstanceWebShellRequest,
   ResetAndroidInstancesRequest,
   UploadFileToAndroidInstancesRequest,
+  DisconnectAndroidInstanceAcceleratorResponse,
   CleanAndroidInstancesAppDataRequest,
   DisableAndroidInstancesAppRequest,
   DisconnectAndroidInstanceResponse,
@@ -144,7 +147,7 @@ import {
   DistributeFileToAndroidInstancesRequest,
   EnableAndroidInstancesAppRequest,
   Error,
-  RestartAndroidInstancesAppRequest,
+  CreateAndroidInstanceAcceleratorTokenRequest,
   ModifyAndroidInstancesResolutionRequest,
   DescribeAndroidAppsRequest,
   StopGameRequest,
@@ -197,6 +200,7 @@ import {
   AndroidInstanceAppInfo,
   DeleteAndroidAppRequest,
   LabelRequirement,
+  DisconnectAndroidInstanceAcceleratorRequest,
   CreateAndroidAppVersionResponse,
   FetchAndroidInstancesLogsRequest,
   DeleteAndroidInstanceBackupFilesResponse,
@@ -257,13 +261,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 强制退出游戏
+   * 关机安卓实例
    */
-  async StopGame(
-    req: StopGameRequest,
-    cb?: (error: string, rep: StopGameResponse) => void
-  ): Promise<StopGameResponse> {
-    return this.request("StopGame", req, cb)
+  async StopAndroidInstances(
+    req: StopAndroidInstancesRequest,
+    cb?: (error: string, rep: StopAndroidInstancesResponse) => void
+  ): Promise<StopAndroidInstancesResponse> {
+    return this.request("StopAndroidInstances", req, cb)
   }
 
   /**
@@ -467,6 +471,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 续期安卓实例访问Token
+   */
+  async RenewAndroidInstancesAccessToken(
+    req: RenewAndroidInstancesAccessTokenRequest,
+    cb?: (error: string, rep: RenewAndroidInstancesAccessTokenResponse) => void
+  ): Promise<RenewAndroidInstancesAccessTokenResponse> {
+    return this.request("RenewAndroidInstancesAccessToken", req, cb)
+  }
+
+  /**
    * 启动安卓实例应用
    */
   async StartAndroidInstancesApp(
@@ -537,13 +551,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续期安卓实例访问Token
+   * 创建安卓实例加速Token
    */
-  async RenewAndroidInstancesAccessToken(
-    req: RenewAndroidInstancesAccessTokenRequest,
-    cb?: (error: string, rep: RenewAndroidInstancesAccessTokenResponse) => void
-  ): Promise<RenewAndroidInstancesAccessTokenResponse> {
-    return this.request("RenewAndroidInstancesAccessToken", req, cb)
+  async CreateAndroidInstanceAcceleratorToken(
+    req: CreateAndroidInstanceAcceleratorTokenRequest,
+    cb?: (error: string, rep: CreateAndroidInstanceAcceleratorTokenResponse) => void
+  ): Promise<CreateAndroidInstanceAcceleratorTokenResponse> {
+    return this.request("CreateAndroidInstanceAcceleratorToken", req, cb)
   }
 
   /**
@@ -647,13 +661,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 关机安卓实例
+   * 断开安卓实例加速节点
    */
-  async StopAndroidInstances(
-    req: StopAndroidInstancesRequest,
-    cb?: (error: string, rep: StopAndroidInstancesResponse) => void
-  ): Promise<StopAndroidInstancesResponse> {
-    return this.request("StopAndroidInstances", req, cb)
+  async DisconnectAndroidInstanceAccelerator(
+    req: DisconnectAndroidInstanceAcceleratorRequest,
+    cb?: (error: string, rep: DisconnectAndroidInstanceAcceleratorResponse) => void
+  ): Promise<DisconnectAndroidInstanceAcceleratorResponse> {
+    return this.request("DisconnectAndroidInstanceAccelerator", req, cb)
   }
 
   /**
@@ -931,6 +945,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetAndroidInstancesBGAppKeepAliveResponse) => void
   ): Promise<SetAndroidInstancesBGAppKeepAliveResponse> {
     return this.request("SetAndroidInstancesBGAppKeepAlive", req, cb)
+  }
+
+  /**
+   * 强制退出游戏
+   */
+  async StopGame(
+    req: StopGameRequest,
+    cb?: (error: string, rep: StopGameResponse) => void
+  ): Promise<StopGameResponse> {
+    return this.request("StopGame", req, cb)
   }
 
   /**

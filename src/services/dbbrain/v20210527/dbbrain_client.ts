@@ -77,6 +77,7 @@ import {
   AutonomyEventVo,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
+  DescribeMongoDBProcessListRequest,
   ModifySqlFiltersResponse,
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
@@ -95,6 +96,7 @@ import {
   DescribeSecurityAuditLogDownloadUrlsRequest,
   CreateDBDiagReportTaskResponse,
   ProcessStatistic,
+  MongoDBProcessItem,
   CreateMailProfileResponse,
   UpdateMonitorSwitchResponse,
   DescribeDBAutonomyActionRequest,
@@ -231,6 +233,7 @@ import {
   SQLFilter,
   GroupItem,
   CancelDBAutonomyEventRequest,
+  MongoDBProcessList,
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeUserSqlAdviceRequest,
   DescribeDBAutonomyActionResponse,
@@ -242,6 +245,7 @@ import {
   RedisCostCmd,
   IndexesToDrop,
   DescribeHealthScoreResponse,
+  DescribeMongoDBProcessListResponse,
   CancelRedisBigKeyAnalysisTasksResponse,
   DescribeSecurityAuditLogExportTasksResponse,
   DescribeDBDiagReportContentResponse,
@@ -486,6 +490,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
   ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
     return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
+   * 查询MongoDB实时会话列表
+   */
+  async DescribeMongoDBProcessList(
+    req: DescribeMongoDBProcessListRequest,
+    cb?: (error: string, rep: DescribeMongoDBProcessListResponse) => void
+  ): Promise<DescribeMongoDBProcessListResponse> {
+    return this.request("DescribeMongoDBProcessList", req, cb)
   }
 
   /**

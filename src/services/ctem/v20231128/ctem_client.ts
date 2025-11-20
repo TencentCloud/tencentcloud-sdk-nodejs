@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeFakeWechatOfficialsResponse,
+  CreateEnterpriseResponse,
   DescribeManagesRequest,
   DescribeFakeAppsRequest,
   DescribeJobRecordsResponse,
@@ -77,6 +78,7 @@ import {
   DescribeNetDisksRequest,
   ModifyCustomerRequest,
   DisplayApp,
+  DescribeApiSecsResponse,
   DisplayNetDisk,
   DisplaySubDomain,
   DescribeSuspiciousAssetsRequest,
@@ -89,6 +91,7 @@ import {
   CreateCustomerResponse,
   DescribeManagesResponse,
   DescribeConfigsRequest,
+  CreateEnterpriseRequest,
   DescribeWeakPasswordsRequest,
   DisplayPort,
   StopJobRecordResponse,
@@ -99,6 +102,7 @@ import {
   DescribeJobRecordDetailsResponse,
   DescribeVulsRequest,
   DisplayGithub,
+  DisplayApiSec,
   DisplayToolCommon,
   Customer,
   DisplayManage,
@@ -111,6 +115,7 @@ import {
   DescribeWeakPasswordsResponse,
   DescribeFakeWechatOfficialsRequest,
   DisplaySuspiciousAsset,
+  DescribeApiSecsRequest,
   DescribeJobRecordsRequest,
   DescribeLeakageCodesResponse,
   DescribeDomainsRequest,
@@ -165,6 +170,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomerResponse) => void
   ): Promise<ModifyCustomerResponse> {
     return this.request("ModifyCustomer", req, cb)
+  }
+
+  /**
+   * 查看API安全数据
+   */
+  async DescribeApiSecs(
+    req: DescribeApiSecsRequest,
+    cb?: (error: string, rep: DescribeApiSecsResponse) => void
+  ): Promise<DescribeApiSecsResponse> {
+    return this.request("DescribeApiSecs", req, cb)
   }
 
   /**
@@ -248,13 +263,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询仿冒公众号
+   * 查看企业列表
    */
-  async DescribeFakeWechatOfficials(
-    req: DescribeFakeWechatOfficialsRequest,
-    cb?: (error: string, rep: DescribeFakeWechatOfficialsResponse) => void
-  ): Promise<DescribeFakeWechatOfficialsResponse> {
-    return this.request("DescribeFakeWechatOfficials", req, cb)
+  async DescribeCustomers(
+    req: DescribeCustomersRequest,
+    cb?: (error: string, rep: DescribeCustomersResponse) => void
+  ): Promise<DescribeCustomersResponse> {
+    return this.request("DescribeCustomers", req, cb)
   }
 
   /**
@@ -298,13 +313,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看企业列表
+   * 查询仿冒公众号
    */
-  async DescribeCustomers(
-    req: DescribeCustomersRequest,
-    cb?: (error: string, rep: DescribeCustomersResponse) => void
-  ): Promise<DescribeCustomersResponse> {
-    return this.request("DescribeCustomers", req, cb)
+  async DescribeFakeWechatOfficials(
+    req: DescribeFakeWechatOfficialsRequest,
+    cb?: (error: string, rep: DescribeFakeWechatOfficialsResponse) => void
+  ): Promise<DescribeFakeWechatOfficialsResponse> {
+    return this.request("DescribeFakeWechatOfficials", req, cb)
   }
 
   /**
@@ -415,6 +430,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnterprisesResponse) => void
   ): Promise<DescribeEnterprisesResponse> {
     return this.request("DescribeEnterprises", req, cb)
+  }
+
+  /**
+   * 添加企业架构数据
+   */
+  async CreateEnterprise(
+    req: CreateEnterpriseRequest,
+    cb?: (error: string, rep: CreateEnterpriseResponse) => void
+  ): Promise<CreateEnterpriseResponse> {
+    return this.request("CreateEnterprise", req, cb)
   }
 
   /**

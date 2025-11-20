@@ -58,9 +58,9 @@ it("gs.v20191118.ModifyAndroidInstancesProperties", async function () {
     }
 })
 
-it("gs.v20191118.StopGame", async function () {
+it("gs.v20191118.StopAndroidInstances", async function () {
     try {
-       const data = await client.StopGame({})
+       const data = await client.StopAndroidInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +268,16 @@ it("gs.v20191118.DescribeAndroidInstanceImages", async function () {
     }
 })
 
+it("gs.v20191118.RenewAndroidInstancesAccessToken", async function () {
+    try {
+       const data = await client.RenewAndroidInstancesAccessToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.StartAndroidInstancesApp", async function () {
     try {
        const data = await client.StartAndroidInstancesApp({})
@@ -338,9 +348,9 @@ it("gs.v20191118.CreateAndroidInstanceLabel", async function () {
     }
 })
 
-it("gs.v20191118.RenewAndroidInstancesAccessToken", async function () {
+it("gs.v20191118.CreateAndroidInstanceAcceleratorToken", async function () {
     try {
-       const data = await client.RenewAndroidInstancesAccessToken({})
+       const data = await client.CreateAndroidInstanceAcceleratorToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +458,9 @@ it("gs.v20191118.DescribeAndroidInstancesAppBlacklist", async function () {
     }
 })
 
-it("gs.v20191118.StopAndroidInstances", async function () {
+it("gs.v20191118.DisconnectAndroidInstanceAccelerator", async function () {
     try {
-       const data = await client.StopAndroidInstances({})
+       const data = await client.DisconnectAndroidInstanceAccelerator({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -721,6 +731,16 @@ it("gs.v20191118.CreateAndroidInstanceADB", async function () {
 it("gs.v20191118.SetAndroidInstancesBGAppKeepAlive", async function () {
     try {
        const data = await client.SetAndroidInstancesBGAppKeepAlive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StopGame", async function () {
+    try {
+       const data = await client.StopGame({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
