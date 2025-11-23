@@ -36,6 +36,20 @@ failed 执行失败
 }
 
 /**
+ * CreatePrivateZoneRecordList请求参数结构体
+ */
+export interface CreatePrivateZoneRecordListRequest {
+  /**
+   * 私有域ID数组
+   */
+  ZoneIds: Array<string>
+  /**
+   * 私有域解析记录数据
+   */
+  RecordsInfo: Array<RecordsInfo>
+}
+
+/**
  * 终端节点信息
  */
 export interface SubnetIpInfo {
@@ -104,11 +118,11 @@ export interface DescribePrivateZoneRequest {
  */
 export interface DescribeAccountVpcListResponse {
   /**
-   * VPC数量
+   * 关联账号VPC数量
    */
   TotalCount?: number
   /**
-   * VPC 列表
+   * 关联账号VPC 列表
    */
   VpcSet?: Array<AccountVpcInfoOut>
   /**
@@ -147,6 +161,21 @@ export interface AddSpecifyPrivateZoneVpcRequest {
    * 是否为同步操作
    */
   Sync?: boolean
+}
+
+/**
+ * DescribeCreateRecordListResult返回参数结构体
+ */
+export interface DescribeCreateRecordListResultResponse {
+  /**
+   * 批量添加解析记录结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordsResult?: Array<RecordsInfoResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -191,6 +220,41 @@ export interface CreatePrivateDNSAccountResponse {
  * SubscribePrivateZoneService请求参数结构体
  */
 export type SubscribePrivateZoneServiceRequest = null
+
+/**
+ * DescribeCreateZoneListResult返回参数结构体
+ */
+export interface DescribeCreateZoneListResultResponse {
+  /**
+   * 私有域域名和zoneId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZonesInfo?: Array<ZoneInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 创建私有域成功后返回私有域信息
+ */
+export interface ZoneInfo {
+  /**
+   * 私有域ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneId: string
+  /**
+   * 私有域域名
+   */
+  Domain: string
+  /**
+   * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason: string
+}
 
 /**
  * 私有域信息
@@ -374,6 +438,20 @@ export interface DescribePrivateDNSAccountListResponse {
  * CreateExtendEndpoint请求参数结构体
  */
 export type CreateExtendEndpointRequest = null
+
+/**
+ * DescribeCreateRecordListResult请求参数结构体
+ */
+export interface DescribeCreateRecordListResultRequest {
+  /**
+   * 私有域ID数组
+   */
+  ZoneIds: Array<string>
+  /**
+   * 私有域解析记录数据
+   */
+  RecordsInfo: Array<RecordsInfo>
+}
 
 /**
  * 私有域信息
@@ -630,6 +708,32 @@ export interface DescribeRecordResponse {
 }
 
 /**
+ * DescribeDashboard返回参数结构体
+ */
+export interface DescribeDashboardResponse {
+  /**
+   * 私有域解析总数
+   */
+  ZoneTotal?: number
+  /**
+   * 私有域关联VPC数量
+   */
+  ZoneVpcCount?: number
+  /**
+   * 历史请求量总数
+   */
+  RequestTotalCount?: number
+  /**
+   * 流量包用量
+   */
+  FlowUsage?: Array<FlowUsage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 私有域信息
  */
 export interface RecordInfo {
@@ -681,32 +785,6 @@ export interface RecordInfo {
    * 备注
    */
   Remark?: string
-}
-
-/**
- * DescribeDashboard返回参数结构体
- */
-export interface DescribeDashboardResponse {
-  /**
-   * 私有域解析总数
-   */
-  ZoneTotal?: number
-  /**
-   * 私有域关联VPC数量
-   */
-  ZoneVpcCount?: number
-  /**
-   * 历史请求量总数
-   */
-  RequestTotalCount?: number
-  /**
-   * 流量包用量
-   */
-  FlowUsage?: Array<FlowUsage>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1084,6 +1162,16 @@ export interface InboundEndpointSet {
 }
 
 /**
+ * CreatePrivateZoneRecordList返回参数结构体
+ */
+export interface CreatePrivateZoneRecordListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询关联账号VPC列表出参
  */
 export interface AccountVpcInfoOut {
@@ -1103,6 +1191,29 @@ export interface AccountVpcInfoOut {
    * vpc资源名称：testname
    */
   VpcName?: string
+}
+
+/**
+ * 批量添加解析记录返回结果
+ */
+export interface RecordsInfoResult {
+  /**
+   * 私有域ID
+   */
+  ZoneId: string
+  /**
+   * 私有域域名
+   */
+  Domain: string
+  /**
+   * 私有域解析记录创建结果
+   */
+  RecordsStatus: Array<RecordsInfoStatus>
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
 }
 
 /**
@@ -1218,6 +1329,49 @@ export interface DescribePrivateZoneServiceResponse {
 export type DescribeDashboardRequest = null
 
 /**
+ * 批量添加解析记录结果
+ */
+export interface RecordsInfoStatus {
+  /**
+   * 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR"
+   */
+  RecordType: string
+  /**
+   * 子域名，例如 "www", "m", "@"
+   */
+  SubDomain: string
+  /**
+   * 记录值，例如 IP：192.168.10.2，CNAME：cname.qcloud.com.，MX：mail.qcloud.com.
+   */
+  RecordValue: string
+  /**
+   * 记录权重，值为1-100
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight: number
+  /**
+   * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TTL: number
+  /**
+   * MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MX: number
+  /**
+   * 是否添加成功：0是失败，1是成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
+  /**
+   * 若status为0，则此处为失败原因描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message: string
+}
+
+/**
  * DescribeInboundEndpointList返回参数结构体
  */
 export interface DescribeInboundEndpointListResponse {
@@ -1246,6 +1400,39 @@ export interface DeletePrivateZoneResponse {
 }
 
 /**
+ * 私有域解析记录信息
+ */
+export interface RecordsInfo {
+  /**
+   * 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR"
+   */
+  RecordType: string
+  /**
+   * 子域名，例如 "www", "m", "@"
+   */
+  SubDomain: string
+  /**
+   * 记录值，例如 IP：192.168.10.2，CNAME：cname.qcloud.com.，MX：mail.qcloud.com.
+   */
+  RecordValue: string
+  /**
+   * 记录权重，值为1-100
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TTL?: number
+  /**
+   * MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MX?: number
+}
+
+/**
  * DescribePrivateZoneList返回参数结构体
  */
 export interface DescribePrivateZoneListResponse {
@@ -1267,6 +1454,16 @@ export interface DescribePrivateZoneListResponse {
  * DescribePrivateZoneService请求参数结构体
  */
 export type DescribePrivateZoneServiceRequest = null
+
+/**
+ * CreatePrivateZoneList返回参数结构体
+ */
+export interface CreatePrivateZoneListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DeleteInboundEndpoint请求参数结构体
@@ -1348,6 +1545,16 @@ export interface CreateForwardRuleRequest {
    * 终端节点ID
    */
   EndPointId: string
+}
+
+/**
+ * CreatePrivateZoneList请求参数结构体
+ */
+export interface CreatePrivateZoneListRequest {
+  /**
+   * 私有域域名数组，域名格式必须是标准的TLD
+   */
+  Domains: Array<string>
 }
 
 /**
@@ -1529,6 +1736,16 @@ export interface ForwardRule {
 }
 
 /**
+ * DescribeCreateZoneListResult请求参数结构体
+ */
+export interface DescribeCreateZoneListResultRequest {
+  /**
+   * 私有域域名数组，域名格式必须是标准的TLD
+   */
+  Domains: Array<string>
+}
+
+/**
  * CreatePrivateZone返回参数结构体
  */
 export interface CreatePrivateZoneResponse {
@@ -1632,7 +1849,7 @@ export interface DescribeInboundEndpointListRequest {
    */
   Limit?: number
   /**
-   * 过滤参数，支持EndPointName，EndpointName，EndpointId
+   * 过滤参数，支持EndPointName，EndpointName，EndPointId
    */
   Filters?: Array<Filter>
 }
@@ -1748,13 +1965,13 @@ export interface MetricData {
 }
 
 /**
- * DeletePrivateZoneRecord返回参数结构体
+ * QueryAsyncBindVpcStatus请求参数结构体
  */
-export interface DeletePrivateZoneRecordResponse {
+export interface QueryAsyncBindVpcStatusRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 唯一ID
    */
-  RequestId?: string
+  UniqId: string
 }
 
 /**
@@ -1768,11 +1985,11 @@ export interface DeletePrivateDNSAccountResponse {
 }
 
 /**
- * QueryAsyncBindVpcStatus请求参数结构体
+ * DeletePrivateZoneRecord返回参数结构体
  */
-export interface QueryAsyncBindVpcStatusRequest {
+export interface DeletePrivateZoneRecordResponse {
   /**
-   * 唯一ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UniqId: string
+  RequestId?: string
 }

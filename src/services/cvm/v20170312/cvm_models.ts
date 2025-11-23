@@ -3167,7 +3167,7 @@ export interface Externals {
  */
 export interface ConvertOperatingSystemsResponse {
   /**
-   * 转换的目标操系统信息，仅在入参 DryRun 为 true 时返回。
+   * 转换的目标操作系统信息，仅在入参 DryRun 为 true 时返回。
    */
   SupportTargetOSList?: Array<TargetOS>
   /**

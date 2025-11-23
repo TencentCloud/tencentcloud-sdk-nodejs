@@ -304,7 +304,7 @@ export interface DescribeTaskDetailResponse {
    */
   Status?: string
   /**
-   * 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）和**LIVE_VIDEO**（直播视频），默认值为VIDEO。
+   * 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）、**LIVE_VIDEO**（直播视频）和**VIDEO_AIGC**（AI生成检测），默认值为VIDEO。
    */
   Type?: string
   /**

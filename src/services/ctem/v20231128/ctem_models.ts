@@ -39,71 +39,27 @@ export interface DescribeFakeWechatOfficialsResponse {
  */
 export interface CreateEnterpriseResponse {
   /**
+   * Id
+   */
+  Id?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
 
 /**
- * DescribeManages请求参数结构体
+ * CreateAsset返回参数结构体
  */
-export interface DescribeManagesRequest {
+export interface CreateAssetResponse {
   /**
-   * 企业ID列表，可多选
+   * Id
    */
-  CustomerIdList?: Array<number | bigint>
+  Id?: number
   /**
-   * 是否聚合数据
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsAggregation?: boolean
-  /**
-   * 是否新增数据
-   */
-  IsNew?: boolean
-  /**
-   * 企业ID
-   */
-  CustomerId?: number
-  /**
-   * 分页大小
-   */
-  Limit?: number
-  /**
-   * 分页偏移
-   */
-  Offset?: number
-  /**
-   * 子公司ID列表
-   */
-  EnterpriseUidList?: Array<string>
-  /**
-   * 数据输出格式：json、file，默认不填为json
-   */
-  Format?: string
-  /**
-   * 创建时间-开始
-   */
-  CreateAtStart?: string
-  /**
-   * 创建时间-结束
-   */
-  CreateAtEnd?: string
-  /**
-   * 更新时间-开始
-   */
-  UpdateAtStart?: string
-  /**
-   * 更新时间-结束
-   */
-  UpdateAtEnd?: string
-  /**
-   * 查询数组
-   */
-  Filters?: Array<Filter>
-  /**
-   * 是否显示被忽略的数据
-   */
-  Ignored?: boolean
+  RequestId?: string
 }
 
 /**
@@ -241,6 +197,48 @@ export interface DisplayLeakageCode {
 }
 
 /**
+ * CreateWechatApplet请求参数结构体
+ */
+export interface CreateWechatAppletRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 图片地址
+   */
+  Logo?: string
+  /**
+   * 账号
+   */
+  AccountId?: string
+  /**
+   * 二维码
+   */
+  QrCode?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
+  /**
+   * 账号Appid
+   */
+  AccountAppid?: string
+  /**
+   * 认证主体
+   */
+  RecordSubject?: string
+}
+
+/**
  * DescribeApps请求参数结构体
  */
 export interface DescribeAppsRequest {
@@ -358,6 +356,16 @@ export interface DescribeSensitiveInfosRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * DeleteAssets请求参数结构体
+ */
+export interface DeleteAssetsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -570,6 +578,110 @@ export interface DescribeFakeWebsitesResponse {
 }
 
 /**
+ * CreatePort返回参数结构体
+ */
+export interface CreatePortResponse {
+  /**
+   * Id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeletePorts返回参数结构体
+ */
+export interface DeletePortsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteManages请求参数结构体
+ */
+export interface DeleteManagesRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+}
+
+/**
+ * DescribeManages请求参数结构体
+ */
+export interface DescribeManagesRequest {
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 是否新增数据
+   */
+  IsNew?: boolean
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 子公司ID列表
+   */
+  EnterpriseUidList?: Array<string>
+  /**
+   * 数据输出格式：json、file，默认不填为json
+   */
+  Format?: string
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
+}
+
+/**
  * 微信公众号详情
  */
 export interface DisplayWechatOfficialAccount {
@@ -764,6 +876,64 @@ export interface DisplayDarkWeb {
 }
 
 /**
+ * ModifySeedStatus返回参数结构体
+ */
+export interface ModifySeedStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteEnterprises返回参数结构体
+ */
+export interface DeleteEnterprisesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSeeds请求参数结构体
+ */
+export interface CreateSeedsRequest {
+  /**
+   * 企业ID
+   */
+  CustomerId: number
+  /**
+   * ip种子数组
+   */
+  Ips?: Array<string>
+  /**
+   * icon种子数组
+   */
+  Icons?: Array<string>
+  /**
+   * 主域名种子数组
+   */
+  Domains?: Array<string>
+  /**
+   * title种子数组
+   */
+  Titles?: Array<string>
+  /**
+   * 子域名种子数组
+   */
+  SubDomains?: Array<string>
+  /**
+   * 关键词种子数组
+   */
+  Keywords?: Array<string>
+  /**
+   * 母公司种子数组
+   */
+  ParentCompanies?: Array<string>
+}
+
+/**
  * DescribePorts返回参数结构体
  */
 export interface DescribePortsResponse {
@@ -779,6 +949,16 @@ export interface DescribePortsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteWechatApplets请求参数结构体
+ */
+export interface DeleteWechatAppletsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -826,19 +1006,17 @@ export interface DescribeConfigsResponse {
 }
 
 /**
- * 链路详情扫描目标和ID
+ * CreateApp返回参数结构体
  */
-export interface IdndValue {
+export interface CreateAppResponse {
   /**
-   * 详情ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * Id
    */
   Id?: number
   /**
-   * 目标
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value?: string
+  RequestId?: string
 }
 
 /**
@@ -885,6 +1063,44 @@ export interface DisplayLeakageEmail {
    * 备注
    */
   Remark?: string
+}
+
+/**
+ * DeleteSubDomains返回参数结构体
+ */
+export interface DeleteSubDomainsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSeeds返回参数结构体
+ */
+export interface CreateSeedsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteSuspiciousAssets请求参数结构体
+ */
+export interface DeleteSuspiciousAssetsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
 }
 
 /**
@@ -946,6 +1162,22 @@ export interface DescribeFakeWebsitesRequest {
 }
 
 /**
+ * 链路详情扫描目标和ID
+ */
+export interface IdndValue {
+  /**
+   * 详情ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 目标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * ModifyCustomer返回参数结构体
  */
 export interface ModifyCustomerResponse {
@@ -997,6 +1229,24 @@ export interface DescribeSuspiciousAssetsResponse {
    * 数组
    */
   List?: Array<DisplaySuspiciousAsset>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSeeds返回参数结构体
+ */
+export interface DescribeSeedsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 种子列表
+   */
+  List?: Array<DisplaySeed>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1233,17 +1483,13 @@ export interface DescribeVulsResponse {
 }
 
 /**
- * DescribeGithubs返回参数结构体
+ * CreateSuspiciousAsset返回参数结构体
  */
-export interface DescribeGithubsResponse {
+export interface CreateSuspiciousAssetResponse {
   /**
-   * 总数
+   * Id
    */
-  Total?: number
-  /**
-   * 数组
-   */
-  List?: Array<DisplayGithub>
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1270,6 +1516,60 @@ export interface DescribeLeakageEmailsResponse {
 }
 
 /**
+ * CreateHttp请求参数结构体
+ */
+export interface CreateHttpRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * Url
+   */
+  Url: string
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
+  /**
+   * 标题
+   */
+  Title?: string
+  /**
+   * 报文长度
+   */
+  ContentLength?: number
+  /**
+   * 报文内容
+   */
+  Content?: string
+  /**
+   * 缩略图Url
+   */
+  ScreenshotUrl?: string
+  /**
+   * 标签
+   */
+  Tags?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 解析的IP
+   */
+  Ip?: string
+  /**
+   * 证书信息
+   */
+  Ssl?: string
+  /**
+   * ssl证书过期时间
+   */
+  SslExpiredTime?: string
+}
+
+/**
  * DescribeAssets返回参数结构体
  */
 export interface DescribeAssetsResponse {
@@ -1285,6 +1585,34 @@ export interface DescribeAssetsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteAssets返回参数结构体
+ */
+export interface DeleteAssetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeletePorts请求参数结构体
+ */
+export interface DeletePortsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
 }
 
 /**
@@ -1359,6 +1687,16 @@ export interface DisplayEnterprise {
    * 漏洞数量
    */
   VulCount?: number
+}
+
+/**
+ * DeleteManages返回参数结构体
+ */
+export interface DeleteManagesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1544,6 +1882,24 @@ export interface DescribeLeakageCodesRequest {
 }
 
 /**
+ * DeleteHttps请求参数结构体
+ */
+export interface DeleteHttpsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+}
+
+/**
  * 仿冒小程序详情
  */
 export interface DisplayFakeMiniProgram {
@@ -1625,6 +1981,56 @@ export interface DisplayFakeWechatOfficial {
    * 关停时间
    */
   ShutdownTime?: string
+}
+
+/**
+ * CreateApp请求参数结构体
+ */
+export interface CreateAppRequest {
+  /**
+   * 企业ID
+   */
+  CustomerId: number
+  /**
+   * 移动端名称
+   */
+  Name?: string
+  /**
+   * 图片地址
+   */
+  Logo?: string
+  /**
+   * 平台，ios或android
+   */
+  Platform?: string
+  /**
+   * 版本
+   */
+  AppVersion?: string
+  /**
+   * 下载地址
+   */
+  DownloadUrl?: string
+  /**
+   * 安装包名
+   */
+  PackageName?: string
+  /**
+   * 开发者
+   */
+  Developer?: string
+  /**
+   * 移动端地址
+   */
+  ServerUrl?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 子公司ID
+   */
+  EnterpriseUid?: string
 }
 
 /**
@@ -1712,6 +2118,40 @@ export interface DisplayHttp {
    * 域名解析状态 1:异常 0:正常
    */
   AnalysisState?: number
+}
+
+/**
+ * CreateDomain返回参数结构体
+ */
+export interface CreateDomainResponse {
+  /**
+   * Id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteWechatOfficialAccounts请求参数结构体
+ */
+export interface DeleteWechatOfficialAccountsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+}
+
+/**
+ * DeleteSeeds返回参数结构体
+ */
+export interface DeleteSeedsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1873,21 +2313,161 @@ export interface DescribeGithubsRequest {
 }
 
 /**
- * DescribeWechatOfficialAccounts返回参数结构体
+ * DescribeConfigs请求参数结构体
  */
-export interface DescribeWechatOfficialAccountsResponse {
+export interface DescribeConfigsRequest {
   /**
-   * 总数
+   * 企业ID列表，可多选
    */
-  Total?: number
+  CustomerIdList?: Array<number | bigint>
   /**
-   * 数组
+   * 是否聚合数据
    */
-  List?: Array<DisplayWechatOfficialAccount>
+  IsAggregation?: boolean
+  /**
+   * 是否新增数据
+   */
+  IsNew?: boolean
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 子公司ID列表
+   */
+  EnterpriseUidList?: Array<string>
+  /**
+   * 数据输出格式：json、file，默认不填为json
+   */
+  Format?: string
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 更新时间-开始
+   */
+  UpdateAtStart?: string
+  /**
+   * 更新时间-结束
+   */
+  UpdateAtEnd?: string
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
+  /**
+   * 支持按照响应长度排序，例如：+ContentLength或-ContentLength，+是递增，-是递减
+   */
+  OrderBy?: string
+}
+
+/**
+ * DeleteSeeds请求参数结构体
+ */
+export interface DeleteSeedsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+}
+
+/**
+ * CreateHttp返回参数结构体
+ */
+export interface CreateHttpResponse {
+  /**
+   * Id
+   */
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSeeds请求参数结构体
+ */
+export interface DescribeSeedsRequest {
+  /**
+   * 企业ID
+   */
+  CustomerId: number
+  /**
+   * 创建时间-开始
+   */
+  CreateAtStart?: string
+  /**
+   * 创建时间-结束
+   */
+  CreateAtEnd?: string
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 查询数组
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * CreateSubDomain请求参数结构体
+ */
+export interface CreateSubDomainRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * 子域名
+   */
+  SubDomain: string
+  /**
+   * Ip
+   */
+  Ip?: string
+  /**
+   * 国家
+   */
+  Country?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 城市
+   */
+  City?: string
+  /**
+   * Isp
+   */
+  Isp?: string
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
 }
 
 /**
@@ -2137,6 +2717,16 @@ export interface DescribeEnterprisesResponse {
 }
 
 /**
+ * DeleteSuspiciousAssets返回参数结构体
+ */
+export interface DeleteSuspiciousAssetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNetDisks请求参数结构体
  */
 export interface DescribeNetDisksRequest {
@@ -2192,6 +2782,80 @@ export interface DescribeNetDisksRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * IgnoreData请求参数结构体
+ */
+export interface IgnoreDataRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 模块，包括：enterprise：企业架构，domain：主域名，sub_domain：子域名，asset：IP资产，port：端口服务，http：HTTP资产，vul：漏洞信息，app：APP，wechat_applet：微信小程序，wechat_official_account：微信公众号，github：Github信息泄露，manage：管理后台暴露，config：目录爆破，dark_web：暗网泄露，net_disk：文库网盘泄露，supply_chain：供应链，weak_password：弱口令，sensitive_info：敏感信息泄露
+   */
+  Module: string
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+  /**
+   * 是否显示被忽略的数据
+   */
+  Ignored?: boolean
+  /**
+   * 是否忽略全部
+   */
+  IsAffectOther?: boolean
+}
+
+/**
+ * CreateDomain请求参数结构体
+ */
+export interface CreateDomainRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * 主域名
+   */
+  Domain: string
+  /**
+   * ICP
+   */
+  ICP?: string
+  /**
+   * 注册时间
+   */
+  RegisteredTime?: string
+  /**
+   * 过期时间
+   */
+  ExpiredTime?: string
+  /**
+   * 公司
+   */
+  Company?: string
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
+}
+
+/**
+ * DeleteDomains请求参数结构体
+ */
+export interface DeleteDomainsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -2337,6 +3001,44 @@ export interface DescribeApiSecsResponse {
 }
 
 /**
+ * CreateAsset请求参数结构体
+ */
+export interface CreateAssetRequest {
+  /**
+   * IP地址
+   */
+  Ip: string
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * 类型
+   */
+  Os?: string
+  /**
+   * 国家
+   */
+  Country?: string
+  /**
+   * 省份
+   */
+  Province?: string
+  /**
+   * 城市
+   */
+  City?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 子公司Id
+   */
+  EnterpriseUid?: string
+}
+
+/**
  * 网盘泄露详情
  */
 export interface DisplayNetDisk {
@@ -2437,6 +3139,58 @@ export interface DisplaySubDomain {
 }
 
 /**
+ * DeleteHttps返回参数结构体
+ */
+export interface DeleteHttpsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreatePort请求参数结构体
+ */
+export interface CreatePortRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * 端口
+   */
+  Port: number
+  /**
+   * IP或域名地址
+   */
+  Asset: string
+  /**
+   * 是否高危
+   */
+  IsHighRisk: boolean
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
+  /**
+   * base64编码后的指纹
+   */
+  Banner?: string
+  /**
+   * 解析的IP
+   */
+  Ip?: string
+  /**
+   * 组件名称
+   */
+  App?: string
+  /**
+   * 服务名称
+   */
+  Service?: string
+}
+
+/**
  * DescribeSuspiciousAssets请求参数结构体
  */
 export interface DescribeSuspiciousAssetsRequest {
@@ -2496,6 +3250,30 @@ export interface DescribeSuspiciousAssetsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * IgnoreData返回参数结构体
+ */
+export interface IgnoreDataResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateWechatApplet返回参数结构体
+ */
+export interface CreateWechatAppletResponse {
+  /**
+   * Id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2784,9 +3562,75 @@ export interface DescribeLeakageEmailsRequest {
 }
 
 /**
+ * DescribeGithubs返回参数结构体
+ */
+export interface DescribeGithubsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数组
+   */
+  List?: Array<DisplayGithub>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCustomer返回参数结构体
  */
 export interface CreateCustomerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateWechatOfficialAccount请求参数结构体
+ */
+export interface CreateWechatOfficialAccountRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 图片地址
+   */
+  Logo?: string
+  /**
+   * 账号
+   */
+  AccountId?: string
+  /**
+   * 二维码
+   */
+  QrCode?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
+  /**
+   * 认证主体
+   */
+  RecordSubject?: string
+}
+
+/**
+ * DeleteWechatOfficialAccounts返回参数结构体
+ */
+export interface DeleteWechatOfficialAccountsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2809,72 +3653,6 @@ export interface DescribeManagesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeConfigs请求参数结构体
- */
-export interface DescribeConfigsRequest {
-  /**
-   * 企业ID列表，可多选
-   */
-  CustomerIdList?: Array<number | bigint>
-  /**
-   * 是否聚合数据
-   */
-  IsAggregation?: boolean
-  /**
-   * 是否新增数据
-   */
-  IsNew?: boolean
-  /**
-   * 企业ID
-   */
-  CustomerId?: number
-  /**
-   * 分页大小
-   */
-  Limit?: number
-  /**
-   * 分页偏移
-   */
-  Offset?: number
-  /**
-   * 子公司ID列表
-   */
-  EnterpriseUidList?: Array<string>
-  /**
-   * 数据输出格式：json、file，默认不填为json
-   */
-  Format?: string
-  /**
-   * 创建时间-开始
-   */
-  CreateAtStart?: string
-  /**
-   * 创建时间-结束
-   */
-  CreateAtEnd?: string
-  /**
-   * 更新时间-开始
-   */
-  UpdateAtStart?: string
-  /**
-   * 更新时间-结束
-   */
-  UpdateAtEnd?: string
-  /**
-   * 查询数组
-   */
-  Filters?: Array<Filter>
-  /**
-   * 是否显示被忽略的数据
-   */
-  Ignored?: boolean
-  /**
-   * 支持按照响应长度排序，例如：+ContentLength或-ContentLength，+是递增，-是递减
-   */
-  OrderBy?: string
 }
 
 /**
@@ -2925,6 +3703,16 @@ export interface CreateEnterpriseRequest {
    * 子公司ID
    */
   EnterpriseUid?: string
+}
+
+/**
+ * DeleteDomains返回参数结构体
+ */
+export interface DeleteDomainsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3058,6 +3846,20 @@ export interface StopJobRecordResponse {
 }
 
 /**
+ * CreateManage返回参数结构体
+ */
+export interface CreateManageResponse {
+  /**
+   * Id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFakeMiniPrograms请求参数结构体
  */
 export interface DescribeFakeMiniProgramsRequest {
@@ -3113,6 +3915,36 @@ export interface DescribeFakeMiniProgramsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * CreateManage请求参数结构体
+ */
+export interface CreateManageRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * Url
+   */
+  Url: string
+  /**
+   * 标题
+   */
+  Title?: string
+  /**
+   * Screenshot
+   */
+  Screenshot?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
 }
 
 /**
@@ -3175,6 +4007,20 @@ export interface DisplayJobRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
+}
+
+/**
+ * ModifySeedStatus请求参数结构体
+ */
+export interface ModifySeedStatusRequest {
+  /**
+   * ID
+   */
+  Id: number
+  /**
+   * 是否可信
+   */
+  IsValid?: boolean
 }
 
 /**
@@ -3249,6 +4095,16 @@ export interface CreateCustomerRequest {
    * 是否以企业名称为起点做完整扫描(包含手动上传),如只想扫描特定的某几个域名，则传false。
    */
   IsIncludeFullScan?: boolean
+}
+
+/**
+ * DeleteEnterprises请求参数结构体
+ */
+export interface DeleteEnterprisesRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3332,6 +4188,24 @@ export interface DescribeJobRecordDetailsResponse {
 }
 
 /**
+ * DeleteSubDomains请求参数结构体
+ */
+export interface DeleteSubDomainsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
+  /**
+   * 企业ID列表，可多选
+   */
+  CustomerIdList?: Array<number | bigint>
+  /**
+   * 是否聚合数据
+   */
+  IsAggregation?: boolean
+}
+
+/**
  * DescribeVuls请求参数结构体
  */
 export interface DescribeVulsRequest {
@@ -3387,6 +4261,20 @@ export interface DescribeVulsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * CreateWechatOfficialAccount返回参数结构体
+ */
+export interface CreateWechatOfficialAccountResponse {
+  /**
+   * Id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3470,6 +4358,20 @@ export interface DisplayApiSec {
 }
 
 /**
+ * CreateSubDomain返回参数结构体
+ */
+export interface CreateSubDomainResponse {
+  /**
+   * Id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据管理公共字段
  */
 export interface DisplayToolCommon {
@@ -3525,6 +4427,16 @@ export interface DisplayToolCommon {
    * 标签列表，json格式：{\"tag1\":[\"责任人xxx\"],\"tag2\":[\"测试站\"]}
    */
   Labels?: string
+}
+
+/**
+ * DeleteApps返回参数结构体
+ */
+export interface DeleteAppsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3775,6 +4687,24 @@ export interface DescribeHttpsResponse {
 }
 
 /**
+ * DescribeWechatOfficialAccounts返回参数结构体
+ */
+export interface DescribeWechatOfficialAccountsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数组
+   */
+  List?: Array<DisplayWechatOfficialAccount>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLeakageDatas返回参数结构体
  */
 export interface DescribeLeakageDatasResponse {
@@ -3791,6 +4721,58 @@ export interface DescribeLeakageDatasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteWechatApplets返回参数结构体
+ */
+export interface DeleteWechatAppletsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSuspiciousAsset请求参数结构体
+ */
+export interface CreateSuspiciousAssetRequest {
+  /**
+   * 企业Id
+   */
+  CustomerId: number
+  /**
+   * Url
+   */
+  Url?: string
+  /**
+   * 子公司
+   */
+  EnterpriseUid?: string
+  /**
+   * 标题
+   */
+  Title?: string
+  /**
+   * 标签
+   */
+  Tags?: string
+  /**
+   * 所属者
+   */
+  Owner?: string
+  /**
+   * 来源类型
+   */
+  SourceType?: string
+  /**
+   * 来源值
+   */
+  SourceValue?: string
+  /**
+   * 是否信任
+   */
+  Trusted?: boolean
 }
 
 /**
@@ -4120,6 +5102,55 @@ export interface DescribeDomainsRequest {
    * 是否显示被忽略的数据
    */
   Ignored?: boolean
+}
+
+/**
+ * 种子详情
+ */
+export interface DisplaySeed {
+  /**
+   * 主键ID
+   */
+  Id?: number
+  /**
+   * 企业ID
+   */
+  CustomerId?: number
+  /**
+   * 分类，包括：domain(主域名)、icon(图标)、ip(IP)、
+keyword(关键词)、parent_company(母公司)、sub_domain(子域名)、title(标题)
+   */
+  Category?: string
+  /**
+   * 值
+   */
+  Value?: string
+  /**
+   * md5值
+   */
+  Md5?: string
+  /**
+   * 来源
+   */
+  Source?: string
+  /**
+   * 创建时间
+   */
+  CreateAt?: string
+  /**
+   * 是否可信
+   */
+  IsValid?: boolean
+}
+
+/**
+ * DeleteApps请求参数结构体
+ */
+export interface DeleteAppsRequest {
+  /**
+   * ID列表
+   */
+  Ids: Array<number | bigint>
 }
 
 /**

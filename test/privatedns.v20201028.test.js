@@ -68,9 +68,9 @@ it("privatedns.v20201028.DescribeQuotaUsage", async function () {
     }
 })
 
-it("privatedns.v20201028.DescribeAuditLog", async function () {
+it("privatedns.v20201028.DescribeCreateZoneListResult", async function () {
     try {
-       const data = await client.DescribeAuditLog({})
+       const data = await client.DescribeCreateZoneListResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("privatedns.v20201028.ModifyForwardRule", async function () {
     }
 })
 
-it("privatedns.v20201028.QueryAsyncBindVpcStatus", async function () {
+it("privatedns.v20201028.CreatePrivateZoneRecordList", async function () {
     try {
-       const data = await client.QueryAsyncBindVpcStatus({})
+       const data = await client.CreatePrivateZoneRecordList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +238,26 @@ it("privatedns.v20201028.DeletePrivateZone", async function () {
     }
 })
 
+it("privatedns.v20201028.QueryAsyncBindVpcStatus", async function () {
+    try {
+       const data = await client.QueryAsyncBindVpcStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DescribeAuditLog", async function () {
+    try {
+       const data = await client.DescribeAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.DescribeAccountVpcList", async function () {
     try {
        const data = await client.DescribeAccountVpcList({})
@@ -278,6 +298,16 @@ it("privatedns.v20201028.ModifyRecordsStatus", async function () {
     }
 })
 
+it("privatedns.v20201028.CreatePrivateZoneList", async function () {
+    try {
+       const data = await client.CreatePrivateZoneList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.DeleteSpecifyPrivateZoneVpc", async function () {
     try {
        const data = await client.DeleteSpecifyPrivateZoneVpc({})
@@ -311,6 +341,16 @@ it("privatedns.v20201028.DescribePrivateZoneService", async function () {
 it("privatedns.v20201028.DescribeExtendEndpointList", async function () {
     try {
        const data = await client.DescribeExtendEndpointList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DescribeCreateRecordListResult", async function () {
+    try {
+       const data = await client.DescribeCreateRecordListResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

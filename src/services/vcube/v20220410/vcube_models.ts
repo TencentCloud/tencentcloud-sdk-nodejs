@@ -54,43 +54,9 @@ export interface DescribeVcubeApplicationAndLicenseRequest {
 }
 
 /**
- * CreateLicense返回参数结构体
+ * ModifyXMagic返回参数结构体
  */
-export interface CreateLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateApplicationAndVideo返回参数结构体
- */
-export interface CreateApplicationAndVideoResponse {
-  /**
-   * license唯一标识
-   */
-  LicenseId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateApplicationAndBindLicense返回参数结构体
- */
-export interface CreateApplicationAndBindLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyFormalApplication返回参数结构体
- */
-export interface ModifyFormalApplicationResponse {
+export interface ModifyXMagicResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -179,86 +145,9 @@ export interface XMagicResourceSimpleInfo {
 }
 
 /**
- * DescribeXMagicResourceList请求参数结构体
+ * DeleteApplicationAndWebPlayerLicense返回参数结构体
  */
-export interface DescribeXMagicResourceListRequest {
-  /**
-   * 分页页码 第一页是0
-   */
-  PageNumber: number
-  /**
-   * 每页数量
-   */
-  PageSize: number
-  /**
-   * 关联的应用名称
-   */
-  AppName?: string
-  /**
-   * 优图资源Id
-   */
-  ResourceId?: string
-  /**
-   * 查询关键字，资源Id、应用名称、包名
-   */
-  Word?: string
-  /**
-   * 平台信息，pc 或者 mobile
-   */
-  Platform?: string
-  /**
-   * 所属业务，xmagic：优图， avatar：虚拟人，不传查全部
-   */
-  BizType?: string
-}
-
-/**
- * DescribeVcubeResourcesList请求参数结构体
- */
-export interface DescribeVcubeResourcesListRequest {
-  /**
-   * 查询资源页码
-   */
-  PageNumber: number
-  /**
-   * 每页的数据量
-   */
-  PageSize: number
-  /**
-   * 应用名称，模块查询
-   */
-  AppName?: string
-  /**
-   * 资源Id，资源包id或者license资源id
-   */
-  ResourceId?: string
-  /**
-   * 资源Id、应用名称、包名
-   */
-  Word?: string
-  /**
-   * 查询资源所属平台，web、mobile
-   */
-  Platform?: string
-}
-
-/**
- * DescribeTrialFeature返回参数结构体
- */
-export interface DescribeTrialFeatureResponse {
-  /**
-   * 功能列表
-   */
-  FeatureList?: Array<Feature>
-  /**
-   * 可以开通的优图测试功能
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  XMagicTrial?: XMagicTrial
-  /**
-   * 可以开通的优图测试功能列表
-   */
-  XMagicTrialList?: Array<XMagicTrial>
+export interface DeleteApplicationAndWebPlayerLicenseResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -266,279 +155,13 @@ export interface DescribeTrialFeatureResponse {
 }
 
 /**
- * CreateTrialLicense返回参数结构体
+ * DeleteApplicationAndVideoLicense返回参数结构体
  */
-export interface CreateTrialLicenseResponse {
+export interface DeleteApplicationAndVideoLicenseResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeUserConfig返回参数结构体
- */
-export interface DescribeUserConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RenewTestXMagic返回参数结构体
- */
-export interface RenewTestXMagicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RenewVideo返回参数结构体
- */
-export interface RenewVideoResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateXMagic请求参数结构体
- */
-export interface UpdateXMagicRequest {
-  /**
-   * 要修改的XMagic Id
-   */
-  XMagicId: number
-  /**
-   * 资源id
-   */
-  XMagicResourceId?: string
-  /**
-   * 营业执照地址
-   */
-  CompanyPermit?: string
-  /**
-   * 公司类型
-   */
-  CompanyType?: string
-  /**
-   * 公司名称
-   */
-  CompanyName?: string
-}
-
-/**
- * DescribeVcubeResources请求参数结构体
- */
-export interface DescribeVcubeResourcesRequest {
-  /**
-   * 查找那个平台的资源
-   */
-  Platform?: string
-}
-
-/**
- * CreateLicense请求参数结构体
- */
-export interface CreateLicenseRequest {
-  /**
-   * 应用ID
-   */
-  ApplicationId: string
-  /**
-   * 资源包ID
-   */
-  ResourceIds: Array<string>
-  /**
-   * url地址分组
-   */
-  Group?: number
-}
-
-/**
- * CreateTrialApplicationAndLicense请求参数结构体
- */
-export interface CreateTrialApplicationAndLicenseRequest {
-  /**
-   * 应用名
-   */
-  AppName: string
-  /**
-   * 应用ID
-   */
-  BundleId?: string
-  /**
-   * 包名
-   */
-  PackageName?: string
-  /**
-   * 功能 id 数组
-   */
-  FeatureIds?: Array<number | bigint>
-  /**
-   * 是否要开通优图功能
-   */
-  XMagic?: boolean
-  /**
-   * 营业执照
-   */
-  CompanyPermit?: string
-  /**
-   * 公司类型
-   */
-  CompanyType?: string
-  /**
-   * 公司名称
-   */
-  CompanyName?: string
-  /**
-   * 要开通的测试功能名称，基础套餐只能有一个
-   */
-  PlanList?: Array<string>
-  /**
-   * Mac 进程名
-   */
-  MacBundleId?: string
-  /**
-   * Windows 进程名
-   */
-  WinProcessName?: string
-  /**
-   * 要创建到哪个平台，web、mobile、pc，默认mobile
-   */
-  Platform?: string
-  /**
-   * 授权域名列表
-   */
-  DomainList?: Array<string>
-}
-
-/**
- * ModifyFormalApplication请求参数结构体
- */
-export interface ModifyFormalApplicationRequest {
-  /**
-   * 应用Id
-   */
-  ApplicationId: number
-  /**
-   * 应用名称
-   */
-  AppName?: string
-  /**
-   * Ios 包名称
-   */
-  BundleId?: string
-  /**
-   * Android  包名称
-   */
-  PackageName?: string
-}
-
-/**
- * DescribeLicenseList请求参数结构体
- */
-export type DescribeLicenseListRequest = null
-
-/**
- * DescribeSTS请求参数结构体
- */
-export type DescribeSTSRequest = null
-
-/**
- * RenewLicense请求参数结构体
- */
-export interface RenewLicenseRequest {
-  /**
-   * License 功能模块 Id
-   */
-  LicenseId: string
-  /**
-   * 资源包 Id
-   */
-  ResourceId: string
-}
-
-/**
- * license 资源信息
- */
-export interface LicenseResourceInfo {
-  /**
-   * 授权功能Id
-   */
-  Id?: number
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * 有效期时长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Duration?: string
-  /**
-   * 功能Id
-   */
-  FeatureId?: number
-  /**
-   * 此license资源的开始生效时间
-   */
-  StartTime?: string
-  /**
-   * 此license资源的生效结束时间
-   */
-  EndTime?: string
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间
-   */
-  UpdatedAt?: string
-  /**
-   * 此资源是否可用于续期和更新有效期
-   */
-  IsUse?: boolean
-  /**
-   * 此资源的状态
-   */
-  Status?: number
-  /**
-   * 销毁时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsolatedTimestamp?: string
-  /**
-   * 功能模块名称
-   */
-  Name?: string
-  /**
-   * 功能模块类型
-   */
-  Type?: string
-  /**
-   * 资源包信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Package?: Package
-  /**
-   * 应用信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Application?: AppInfo
-  /**
-   * 资源Id
-   */
-  ResourceId?: string
-  /**
-   * 自动续费状态
-   */
-  AutoRenewFlag?: number
 }
 
 /**
@@ -615,88 +238,6 @@ export interface LicenseResourceSimpleInfo {
 }
 
 /**
- * RenewLicense返回参数结构体
- */
-export interface RenewLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeVcubeApplicationAndPlayList请求参数结构体
- */
-export interface DescribeVcubeApplicationAndPlayListRequest {
-  /**
-   * 查询对应业务方的license，直播:live 点播：vod
-   */
-  BizType?: string
-  /**
-   * 应用类型测试：test，正式：formal
-   */
-  AppType?: string
-  /**
-   * 应用名称，模糊查询
-   */
-  AppName?: string
-  /**
-   * Ios包名，模糊查询
-   */
-  BundleId?: string
-  /**
-   * Android 包名，模糊查询
-   */
-  PackageName?: string
-  /**
-   * 平台信息，pc 或者 mobile
-   */
-  Platform?: string
-  /**
-   * Mac 进程名
-   */
-  MacBundleId?: string
-  /**
-   * Windows 进程名
-   */
-  WinProcessName?: string
-  /**
-   * license唯一标识
-   */
-  LicenseId?: number
-}
-
-/**
- * 可以开通测试的功能
- */
-export interface XMagicTrial {
-  /**
-   * 功能名称
-   */
-  Name?: string
-  /**
-   * 可以申请的次数
-   */
-  TrialCount?: number
-  /**
-   * 每次申请的时长单位：天
-   */
-  Duration?: number
-  /**
-   * 功能类别
-   */
-  Plan?: string
-  /**
-   * single: 原子能力,combined:套餐
-   */
-  XMagicType?: string
-  /**
-   * vod：点播 live：直播
-   */
-  BizType?: string
-}
-
-/**
  * DescribeVcubeApplicationAndXMagicList请求参数结构体
  */
 export interface DescribeVcubeApplicationAndXMagicListRequest {
@@ -753,99 +294,6 @@ export interface DescribeVcubeResourcesListResponse {
 }
 
 /**
- * 视立方应用license
- */
-export interface License {
-  /**
-   * license类型
-   */
-  Type?: string
-  /**
-   * 老系统迁移备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * license生效时间
-   */
-  StartTime?: string
-  /**
-   * license失效时间
-   */
-  EndTime?: string
-  /**
-   * license对应的功能Id
-   */
-  FeatureId?: number
-  /**
-   * license是测试：test还是正式：formal
-   */
-  LicenseType?: string
-  /**
-   * 测试license 是否可以续期
-   */
-  Renewal?: boolean
-  /**
-   * license索引
-   */
-  LicenseId?: number
-  /**
-   * license名称
-   */
-  Name?: string
-  /**
-   * 测试license 是否升级
-   */
-  Update?: boolean
-  /**
-   * 兼容老的licenseUrl
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OldLicenseUrl?: string
-  /**
-   * 视立方url分组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Group?: number
-  /**
-   * 过期：true ，未过期：其它
-   */
-  Expired?: boolean
-  /**
-   * 返回还有多少秒过期，过期返回0
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RestTime?: number
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间
-   */
-  UpdatedAt?: string
-  /**
-   * 计费资源相关信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Resource?: RenewResource
-  /**
-   * 是否为马甲包
-   */
-  IsVest?: boolean
-}
-
-/**
- * DescribeLicenseList返回参数结构体
- */
-export interface DescribeLicenseListResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyApplication返回参数结构体
  */
 export interface ModifyApplicationResponse {
@@ -856,84 +304,369 @@ export interface ModifyApplicationResponse {
 }
 
 /**
- * ModifyXMagic请求参数结构体
+ * RenewVideo返回参数结构体
  */
-export interface ModifyXMagicRequest {
+export interface RenewVideoResponse {
   /**
-   * 资源Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceId: string
-  /**
-   * 优图licenseId
-   */
-  XMagicId: string
+  RequestId?: string
 }
 
 /**
- * 优图美视资源包
+ * 可以开通测试的功能
  */
-export interface XMagicResource {
+export interface XMagicTrial {
   /**
-   * 资源Id
-   */
-  Id?: number
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * 套餐类别
-   */
-  Plan?: string
-  /**
-   * 单位：年
-   */
-  Duration?: string
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间
-   */
-  UpdatedAt?: string
-  /**
-   * 资源是否已使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  XMagic?: boolean
-  /**
-   * 资源开始生效时间
-   */
-  StartTime?: string
-  /**
-   * 资源结束生效时间
-   */
-  EndTime?: string
-  /**
-   * 资源包是否过期
-   */
-  Expired?: boolean
-  /**
-   * 功能模块名称
+   * 功能名称
    */
   Name?: string
+  /**
+   * 可以申请的次数
+   */
+  TrialCount?: number
+  /**
+   * 每次申请的时长单位：天
+   */
+  Duration?: number
+  /**
+   * 功能类别
+   */
+  Plan?: string
   /**
    * single: 原子能力,combined:套餐
    */
   XMagicType?: string
   /**
-   * xmagic:优图， avatar：虚拟人
+   * vod：点播 live：直播
    */
   BizType?: string
+}
+
+/**
+ * RenewTestXMagic请求参数结构体
+ */
+export interface RenewTestXMagicRequest {
   /**
-   * 资源Id
+   * 优图美视Id
    */
-  ResourceId?: string
+  XMagicId: number
+}
+
+/**
+ * UpdateTrialLicense返回参数结构体
+ */
+export interface UpdateTrialLicenseResponse {
   /**
-   * 资源是否可以使用
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsUse?: boolean
+  RequestId?: string
+}
+
+/**
+ * CreateXMagic请求参数结构体
+ */
+export interface CreateXMagicRequest {
+  /**
+   * 应用ApplicationId
+   */
+  ApplicationId: number
+  /**
+   * 营业执照
+   */
+  CompanyPermit?: string
+  /**
+   * 公司类型
+   */
+  CompanyType?: string
+  /**
+   * 公司名称
+   */
+  CompanyName?: string
+  /**
+   * 优图资源id列表
+   */
+  XMagicResourceIds?: Array<string>
+}
+
+/**
+ * RenewLicense返回参数结构体
+ */
+export interface RenewLicenseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateActivityLicense请求参数结构体
+ */
+export interface CreateActivityLicenseRequest {
+  /**
+   * 活动Id
+   */
+  Activity: string
+}
+
+/**
+ * 优图简单信息
+ */
+export interface XMagicSimpleInfo {
+  /**
+   * XMagic 的Id
+   */
+  Id: number
+  /**
+   * XMagic 状态
+   */
+  Status: number
+}
+
+/**
+ * CreateTrialApplicationAndLicense请求参数结构体
+ */
+export interface CreateTrialApplicationAndLicenseRequest {
+  /**
+   * 应用名
+   */
+  AppName: string
+  /**
+   * 应用ID
+   */
+  BundleId?: string
+  /**
+   * 包名
+   */
+  PackageName?: string
+  /**
+   * 功能 id 数组
+   */
+  FeatureIds?: Array<number | bigint>
+  /**
+   * 是否要开通优图功能
+   */
+  XMagic?: boolean
+  /**
+   * 营业执照
+   */
+  CompanyPermit?: string
+  /**
+   * 公司类型
+   */
+  CompanyType?: string
+  /**
+   * 公司名称
+   */
+  CompanyName?: string
+  /**
+   * 要开通的测试功能名称，基础套餐只能有一个
+   */
+  PlanList?: Array<string>
+  /**
+   * Mac 进程名
+   */
+  MacBundleId?: string
+  /**
+   * Windows 进程名
+   */
+  WinProcessName?: string
+  /**
+   * 要创建到哪个平台，web、mobile、pc，默认mobile
+   */
+  Platform?: string
+  /**
+   * 授权域名列表
+   */
+  DomainList?: Array<string>
+}
+
+/**
+ * CreateApplicationAndBindLicense请求参数结构体
+ */
+export interface CreateApplicationAndBindLicenseRequest {
+  /**
+   * 应用名
+   */
+  AppName: string
+  /**
+   * 应用ID
+   */
+  BundleId?: string
+  /**
+   * 包名
+   */
+  PackageName?: string
+  /**
+   * 资源包ID
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 营业执照
+   */
+  CompanyPermit?: string
+  /**
+   * 公司类型
+   */
+  CompanyType?: string
+  /**
+   * 公司名称
+   */
+  CompanyName?: string
+  /**
+   * 优图资源id列表
+   */
+  XMagicResourceIds?: Array<string>
+  /**
+   * Mac 进程名
+   */
+  MacBundleId?: string
+  /**
+   * Windows 进程名
+   */
+  WinProcessName?: string
+  /**
+   * 要开通的域名列表
+   */
+  DomainList?: Array<string>
+  /**
+   * 要开通的端，web/mobile/pc
+   */
+  Platform?: string
+}
+
+/**
+ * DescribeFeatureList返回参数结构体
+ */
+export interface DescribeFeatureListResponse {
+  /**
+   * 功能列表
+   */
+  FeatureList?: Array<VideoFeature>
+  /**
+   * 优图功能列表
+   */
+  XMagicFeatureList?: Array<XMagicFeature>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateApplicationAndVideo返回参数结构体
+ */
+export interface CreateApplicationAndVideoResponse {
+  /**
+   * license唯一标识
+   */
+  LicenseId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTrialFeature返回参数结构体
+ */
+export interface DescribeTrialFeatureResponse {
+  /**
+   * 功能列表
+   */
+  FeatureList?: Array<Feature>
+  /**
+   * 可以开通的优图测试功能
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  XMagicTrial?: XMagicTrial
+  /**
+   * 可以开通的优图测试功能列表
+   */
+  XMagicTrialList?: Array<XMagicTrial>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewTestXMagic返回参数结构体
+ */
+export interface RenewTestXMagicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateLicense请求参数结构体
+ */
+export interface CreateLicenseRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
+  /**
+   * 资源包ID
+   */
+  ResourceIds: Array<string>
+  /**
+   * url地址分组
+   */
+  Group?: number
+}
+
+/**
+ * DeleteApplicationAndWebPlayerLicense请求参数结构体
+ */
+export interface DeleteApplicationAndWebPlayerLicenseRequest {
+  /**
+   * license唯一标识
+   */
+  LicenseId: number
+}
+
+/**
+ * ModifyFormalApplication请求参数结构体
+ */
+export interface ModifyFormalApplicationRequest {
+  /**
+   * 应用Id
+   */
+  ApplicationId: number
+  /**
+   * 应用名称
+   */
+  AppName?: string
+  /**
+   * Ios 包名称
+   */
+  BundleId?: string
+  /**
+   * Android  包名称
+   */
+  PackageName?: string
+}
+
+/**
+ * DescribeSTS请求参数结构体
+ */
+export type DescribeSTSRequest = null
+
+/**
+ * RenewLicense请求参数结构体
+ */
+export interface RenewLicenseRequest {
+  /**
+   * License 功能模块 Id
+   */
+  LicenseId: string
+  /**
+   * 资源包 Id
+   */
+  ResourceId: string
 }
 
 /**
@@ -969,191 +702,6 @@ export interface RenewResource {
 }
 
 /**
- * DescribeVcubeResources返回参数结构体
- */
-export interface DescribeVcubeResourcesResponse {
-  /**
-   * 资源列表
-   */
-  ResourceList?: Array<LicenseResourceSimpleInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeNews请求参数结构体
- */
-export interface DescribeNewsRequest {
-  /**
-   * 页码，从0开始
-   */
-  PageNumber: number
-  /**
-   * 每页数据量
-   */
-  PageSize: number
-}
-
-/**
- * CreateTestXMagic返回参数结构体
- */
-export interface CreateTestXMagicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeUserConfig请求参数结构体
- */
-export type DescribeUserConfigRequest = null
-
-/**
- * RenewTestXMagic请求参数结构体
- */
-export interface RenewTestXMagicRequest {
-  /**
-   * 优图美视Id
-   */
-  XMagicId: number
-}
-
-/**
- * UpdateXMagic返回参数结构体
- */
-export interface UpdateXMagicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyLicense请求参数结构体
- */
-export interface ModifyLicenseRequest {
-  /**
-   * License 功能模块 Id
-   */
-  LicenseId: string
-  /**
-   * 资源包 Id
-   */
-  ResourceId: string
-}
-
-/**
- * CreateActivityLicense返回参数结构体
- */
-export interface CreateActivityLicenseResponse {
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * app名称
-   */
-  AppName?: string
-  /**
-   * ios包名
-   */
-  BundleId?: string
-  /**
-   * 安卓包名
-   */
-  PackageName?: string
-  /**
-   * 有效时长
-   */
-  Duration?: number
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * license秘钥
-   */
-  LicenseKey?: string
-  /**
-   * license 授权文件下载链接
-   */
-  LicenseUrl?: string
-  /**
-   * license剩余天数，最后一天以及过期显示0
-   */
-  ResidueDay?: number
-  /**
-   * license剩余秒数
-   */
-  Residue?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateTestXMagic返回参数结构体
- */
-export interface UpdateTestXMagicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTrialApplicationAndLicense返回参数结构体
- */
-export interface CreateTrialApplicationAndLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeXMagicResource请求参数结构体
- */
-export interface DescribeXMagicResourceRequest {
-  /**
-   * 分页页码 第一页是0
-   */
-  PageNumber: number
-  /**
-   * 每页数量
-   */
-  PageSize: number
-}
-
-/**
- * ModifyPresetApplication返回参数结构体
- */
-export interface ModifyPresetApplicationResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateXMagic返回参数结构体
- */
-export interface CreateXMagicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyPresetApplication请求参数结构体
  */
 export interface ModifyPresetApplicationRequest {
@@ -1176,405 +724,31 @@ export interface ModifyPresetApplicationRequest {
 }
 
 /**
- * 应用包名信息
+ * DescribeNews请求参数结构体
  */
-export interface AppInfo {
+export interface DescribeNewsRequest {
   /**
-   * 应用Id
+   * 页码，从0开始
    */
-  Id?: number
+  PageNumber: number
   /**
-   * 用户appid
+   * 每页数据量
    */
-  AppId?: string
-  /**
-   * 应用名称
-   */
-  AppName?: string
-  /**
-   * Ios 包名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BundleId?: string
-  /**
-   * Andorid 包名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageName?: string
-  /**
-   * 应用详情
-   */
-  AppType?: string
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间
-   */
-  UpdatedAt?: string
-  /**
-   * Mac 进程名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MacBundleId?: string
-  /**
-   * windows 进程名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WinProcessName?: string
-  /**
-   * 允许的web域名列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DomainList?: Array<string>
+  PageSize: number
 }
 
 /**
- * DescribeNews返回参数结构体
+ * ModifyXMagic请求参数结构体
  */
-export interface DescribeNewsResponse {
+export interface ModifyXMagicRequest {
   /**
-   * 产品动态详情列表
+   * 资源Id
    */
-  NewsList?: Array<NewsInfo>
+  ResourceId: string
   /**
-   * 总数据量
+   * 优图licenseId
    */
-  Count?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSTS返回参数结构体
- */
-export interface DescribeSTSResponse {
-  /**
-   * 桶名称
-   */
-  Bucket?: string
-  /**
-   * 地区
-   */
-  Region?: string
-  /**
-   * 开始生效时间
-   */
-  StartTime?: number
-  /**
-   * 临时token过期时间
-   */
-  ExpiredTime?: number
-  /**
-   * 临时token
-   */
-  SessionToken?: string
-  /**
-   * 临时SecretId
-   */
-  TmpSecretId?: string
-  /**
-   * 临时秘钥
-   */
-  TmpSecretKey?: string
-  /**
-   * 上传的根路径，底下可以多层
-   */
-  Path?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 资源包结构
- */
-export interface Package {
-  /**
-   * 资源包Id
-   */
-  Id?: number
-  /**
-   * 资源包资源Id
-   */
-  BizResourceId?: string
-  /**
-   * 站点 中国站还是国际站
-   */
-  Site?: string
-  /**
-   * 资源包开始生效时间
-   */
-  StartTime?: string
-  /**
-   * 资源包过期时间
-   */
-  EndTime?: string
-  /**
-   * 资源包退费时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RefundTime?: string
-  /**
-   * 资源包名称
-   */
-  Name?: string
-  /**
-   * 资源包类型ID,对应点播：PackageId 对应直播：TypeId
-   */
-  Type?: string
-}
-
-/**
- * DescribeXMagicResource返回参数结构体
- */
-export interface DescribeXMagicResourceResponse {
-  /**
-   * 优图资源包信息
-   */
-  Resources?: Array<XMagicResource>
-  /**
-   * 资源数量
-   */
-  Count?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeVcubeApplicationAndPlayList返回参数结构体
- */
-export interface DescribeVcubeApplicationAndPlayListResponse {
-  /**
-   * 应用license列表
-   */
-  ApplicationInfoList?: Array<ApplicationInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 视频功能描述模型
- */
-export interface VideoFeature {
-  /**
-   * 索引
-   */
-  Id?: number
-  /**
-   * 功能ID
-   */
-  FeatureId?: number
-  /**
-   * 功能名称
-   */
-  Name?: string
-  /**
-   * 功能类型
-   */
-  Type?: string
-  /**
-   * 是否可以申请试用
-   */
-  Trial?: boolean
-  /**
-   * 可以试用的次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrialCount?: number
-  /**
-   * 可以试用的时长，单位天
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Duration?: number
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间
-   */
-  UpdatedAt?: string
-  /**
-   * 功能所属业务方
-   */
-  BizType?: string
-  /**
-   * 平台类型
-   */
-  Platform?: string
-}
-
-/**
- * 功能描述模型
- */
-export interface Feature {
-  /**
-   * 索引
-   */
-  Id?: number
-  /**
-   * 功能ID
-   */
-  FeatureId?: number
-  /**
-   * 功能名称
-   */
-  Name?: string
-  /**
-   * 功能类型
-   */
-  Type?: string
-  /**
-   * 是否可以申请试用
-   */
-  Trial?: boolean
-  /**
-   * 可以试用的次数
-   */
-  TrialCount?: number
-  /**
-   * 可以试用的时长，单位天
-   */
-  Duration?: number
-  /**
-   * 创建时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间
-   */
-  UpdatedAt?: string
-}
-
-/**
- * ModifyTrialLicense返回参数结构体
- */
-export interface ModifyTrialLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateTrialLicense返回参数结构体
- */
-export interface UpdateTrialLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyApplication请求参数结构体
- */
-export interface ModifyApplicationRequest {
-  /**
-   * 应用ID
-   */
-  ApplicationId: number
-  /**
-   * 应用名
-   */
-  AppName?: string
-  /**
-   * 应用ID
-   */
-  BundleId?: string
-  /**
-   * 包名
-   */
-  PackageName?: string
-  /**
-   * Windows 进程名
-   */
-  WinProcessName?: string
-  /**
-   * Mac 进程名
-   */
-  MacBundleId?: string
-  /**
-   * 要追加的web域名列表
-   */
-  DomainList?: Array<string>
-}
-
-/**
- * CreateXMagic请求参数结构体
- */
-export interface CreateXMagicRequest {
-  /**
-   * 应用ApplicationId
-   */
-  ApplicationId: number
-  /**
-   * 营业执照
-   */
-  CompanyPermit?: string
-  /**
-   * 公司类型
-   */
-  CompanyType?: string
-  /**
-   * 公司名称
-   */
-  CompanyName?: string
-  /**
-   * 优图资源id列表
-   */
-  XMagicResourceIds?: Array<string>
-}
-
-/**
- * RenewVideo请求参数结构体
- */
-export interface RenewVideoRequest {
-  /**
-   * 要续期的视频播放license Id
-   */
-  LicenseId: number
-}
-
-/**
- * CreateApplicationAndVideo请求参数结构体
- */
-export interface CreateApplicationAndVideoRequest {
-  /**
-   * 应用名称
-   */
-  AppName: string
-  /**
-   * Ios 包名
-   */
-  BundleId?: string
-  /**
-   * Android 包名
-   */
-  PackageName?: string
-}
-
-/**
- * DescribeVcubeApplicationAndLicense返回参数结构体
- */
-export interface DescribeVcubeApplicationAndLicenseResponse {
-  /**
-   * 应用license列表
-   */
-  ApplicationInfoList?: Array<ApplicationInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  XMagicId: string
 }
 
 /**
@@ -1604,13 +778,14 @@ export interface CreateTestXMagicRequest {
 }
 
 /**
- * DescribeVcubeApplicationAndXMagicList返回参数结构体
+ * DescribeUserConfig请求参数结构体
  */
-export interface DescribeVcubeApplicationAndXMagicListResponse {
-  /**
-   * 应用license列表
-   */
-  ApplicationInfoList?: Array<ApplicationInfo>
+export type DescribeUserConfigRequest = null
+
+/**
+ * CreateTrialApplicationAndLicense返回参数结构体
+ */
+export interface CreateTrialApplicationAndLicenseResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1618,35 +793,27 @@ export interface DescribeVcubeApplicationAndXMagicListResponse {
 }
 
 /**
- * CreateTrialLicense请求参数结构体
+ * DescribeXMagicResource请求参数结构体
  */
-export interface CreateTrialLicenseRequest {
+export interface DescribeXMagicResourceRequest {
   /**
-   * 应用ID
+   * 分页页码 第一页是0
    */
-  ApplicationId: string
+  PageNumber: number
   /**
-   * 功能 ID 数组
+   * 每页数量
    */
-  FeatureIds: Array<number | bigint>
-  /**
-   * Url分组
-   */
-  Group?: number
+  PageSize: number
 }
 
 /**
- * 优图简单信息
+ * CreateTrialLicense返回参数结构体
  */
-export interface XMagicSimpleInfo {
+export interface CreateTrialLicenseResponse {
   /**
-   * XMagic 的Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: number
-  /**
-   * XMagic 状态
-   */
-  Status: number
+  RequestId?: string
 }
 
 /**
@@ -1755,9 +922,644 @@ export interface XMagicInfo {
 }
 
 /**
- * DescribeFeatureList请求参数结构体
+ * ModifyTrialLicense返回参数结构体
  */
-export type DescribeFeatureListRequest = null
+export interface ModifyTrialLicenseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVcubeApplicationAndXMagicList返回参数结构体
+ */
+export interface DescribeVcubeApplicationAndXMagicListResponse {
+  /**
+   * 应用license列表
+   */
+  ApplicationInfoList?: Array<ApplicationInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTrialLicense请求参数结构体
+ */
+export interface CreateTrialLicenseRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
+  /**
+   * 功能 ID 数组
+   */
+  FeatureIds: Array<number | bigint>
+  /**
+   * Url分组
+   */
+  Group?: number
+}
+
+/**
+ * 优图的的功能，Trial 为true的可以开通测试
+ */
+export interface XMagicFeature {
+  /**
+   * 功能名称
+   */
+  Name?: string
+  /**
+   * 可以申请的次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrialCount?: number
+  /**
+   * 每次申请的时长单位：天
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 功能类别
+   */
+  Plan?: string
+  /**
+   * single: 原子能力,combined:套餐
+   */
+  XMagicType?: string
+  /**
+   * 此功能是否支持开通测试
+   */
+  Trial?: boolean
+  /**
+   * 功能所属业务方
+   */
+  BizType?: string
+}
+
+/**
+ * ModifyLicense返回参数结构体
+ */
+export interface ModifyLicenseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateApplicationAndWebPlayerLicense返回参数结构体
+ */
+export interface CreateApplicationAndWebPlayerLicenseResponse {
+  /**
+   * license的唯一标识
+   */
+  LicenseId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTrialLicense请求参数结构体
+ */
+export interface ModifyTrialLicenseRequest {
+  /**
+   * 授权ID
+   */
+  LicenseId: string
+}
+
+/**
+ * DeleteApplicationAndVideoLicense请求参数结构体
+ */
+export type DeleteApplicationAndVideoLicenseRequest = null
+
+/**
+ * CreateApplicationAndVideo请求参数结构体
+ */
+export interface CreateApplicationAndVideoRequest {
+  /**
+   * 应用名称
+   */
+  AppName: string
+  /**
+   * Ios 包名
+   */
+  BundleId?: string
+  /**
+   * Android 包名
+   */
+  PackageName?: string
+}
+
+/**
+ * DescribeXMagicResourceList返回参数结构体
+ */
+export interface DescribeXMagicResourceListResponse {
+  /**
+   * 优图资源包信息
+   */
+  Resources?: Array<XMagicResourceSimpleInfo>
+  /**
+   * 资源数量
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTrialFeature请求参数结构体
+ */
+export type DescribeTrialFeatureRequest = null
+
+/**
+ * CreateLicense返回参数结构体
+ */
+export interface CreateLicenseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateApplicationAndBindLicense返回参数结构体
+ */
+export interface CreateApplicationAndBindLicenseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyFormalApplication返回参数结构体
+ */
+export interface ModifyFormalApplicationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVcubeResources返回参数结构体
+ */
+export interface DescribeVcubeResourcesResponse {
+  /**
+   * 资源列表
+   */
+  ResourceList?: Array<LicenseResourceSimpleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVcubeResources请求参数结构体
+ */
+export interface DescribeVcubeResourcesRequest {
+  /**
+   * 查找那个平台的资源
+   */
+  Platform?: string
+}
+
+/**
+ * license 资源信息
+ */
+export interface LicenseResourceInfo {
+  /**
+   * 授权功能Id
+   */
+  Id?: number
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 有效期时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: string
+  /**
+   * 功能Id
+   */
+  FeatureId?: number
+  /**
+   * 此license资源的开始生效时间
+   */
+  StartTime?: string
+  /**
+   * 此license资源的生效结束时间
+   */
+  EndTime?: string
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * 此资源是否可用于续期和更新有效期
+   */
+  IsUse?: boolean
+  /**
+   * 此资源的状态
+   */
+  Status?: number
+  /**
+   * 销毁时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsolatedTimestamp?: string
+  /**
+   * 功能模块名称
+   */
+  Name?: string
+  /**
+   * 功能模块类型
+   */
+  Type?: string
+  /**
+   * 资源包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Package?: Package
+  /**
+   * 应用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Application?: AppInfo
+  /**
+   * 资源Id
+   */
+  ResourceId?: string
+  /**
+   * 自动续费状态
+   */
+  AutoRenewFlag?: number
+}
+
+/**
+ * 优图美视资源包
+ */
+export interface XMagicResource {
+  /**
+   * 资源Id
+   */
+  Id?: number
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 套餐类别
+   */
+  Plan?: string
+  /**
+   * 单位：年
+   */
+  Duration?: string
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * 资源是否已使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  XMagic?: boolean
+  /**
+   * 资源开始生效时间
+   */
+  StartTime?: string
+  /**
+   * 资源结束生效时间
+   */
+  EndTime?: string
+  /**
+   * 资源包是否过期
+   */
+  Expired?: boolean
+  /**
+   * 功能模块名称
+   */
+  Name?: string
+  /**
+   * single: 原子能力,combined:套餐
+   */
+  XMagicType?: string
+  /**
+   * xmagic:优图， avatar：虚拟人
+   */
+  BizType?: string
+  /**
+   * 资源Id
+   */
+  ResourceId?: string
+  /**
+   * 资源是否可以使用
+   */
+  IsUse?: boolean
+}
+
+/**
+ * DescribeLicenseList返回参数结构体
+ */
+export interface DescribeLicenseListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeXMagicResourceList请求参数结构体
+ */
+export interface DescribeXMagicResourceListRequest {
+  /**
+   * 分页页码 第一页是0
+   */
+  PageNumber: number
+  /**
+   * 每页数量
+   */
+  PageSize: number
+  /**
+   * 关联的应用名称
+   */
+  AppName?: string
+  /**
+   * 优图资源Id
+   */
+  ResourceId?: string
+  /**
+   * 查询关键字，资源Id、应用名称、包名
+   */
+  Word?: string
+  /**
+   * 平台信息，pc 或者 mobile
+   */
+  Platform?: string
+  /**
+   * 所属业务，xmagic：优图， avatar：虚拟人，不传查全部
+   */
+  BizType?: string
+}
+
+/**
+ * CreateTestXMagic返回参数结构体
+ */
+export interface CreateTestXMagicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateActivityLicense返回参数结构体
+ */
+export interface CreateActivityLicenseResponse {
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * app名称
+   */
+  AppName?: string
+  /**
+   * ios包名
+   */
+  BundleId?: string
+  /**
+   * 安卓包名
+   */
+  PackageName?: string
+  /**
+   * 有效时长
+   */
+  Duration?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * license秘钥
+   */
+  LicenseKey?: string
+  /**
+   * license 授权文件下载链接
+   */
+  LicenseUrl?: string
+  /**
+   * license剩余天数，最后一天以及过期显示0
+   */
+  ResidueDay?: number
+  /**
+   * license剩余秒数
+   */
+  Residue?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 应用包名信息
+ */
+export interface AppInfo {
+  /**
+   * 应用Id
+   */
+  Id?: number
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 应用名称
+   */
+  AppName?: string
+  /**
+   * Ios 包名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleId?: string
+  /**
+   * Andorid 包名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageName?: string
+  /**
+   * 应用详情
+   */
+  AppType?: string
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * Mac 进程名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MacBundleId?: string
+  /**
+   * windows 进程名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WinProcessName?: string
+  /**
+   * 允许的web域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainList?: Array<string>
+}
+
+/**
+ * DescribeVcubeApplicationAndPlayList返回参数结构体
+ */
+export interface DescribeVcubeApplicationAndPlayListResponse {
+  /**
+   * 应用license列表
+   */
+  ApplicationInfoList?: Array<ApplicationInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateXMagic返回参数结构体
+ */
+export interface UpdateXMagicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 视频功能描述模型
+ */
+export interface VideoFeature {
+  /**
+   * 索引
+   */
+  Id?: number
+  /**
+   * 功能ID
+   */
+  FeatureId?: number
+  /**
+   * 功能名称
+   */
+  Name?: string
+  /**
+   * 功能类型
+   */
+  Type?: string
+  /**
+   * 是否可以申请试用
+   */
+  Trial?: boolean
+  /**
+   * 可以试用的次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrialCount?: number
+  /**
+   * 可以试用的时长，单位天
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * 功能所属业务方
+   */
+  BizType?: string
+  /**
+   * 平台类型
+   */
+  Platform?: string
+}
+
+/**
+ * ModifyApplication请求参数结构体
+ */
+export interface ModifyApplicationRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: number
+  /**
+   * 应用名
+   */
+  AppName?: string
+  /**
+   * 应用ID
+   */
+  BundleId?: string
+  /**
+   * 包名
+   */
+  PackageName?: string
+  /**
+   * Windows 进程名
+   */
+  WinProcessName?: string
+  /**
+   * Mac 进程名
+   */
+  MacBundleId?: string
+  /**
+   * 要追加的web域名列表
+   */
+  DomainList?: Array<string>
+}
+
+/**
+ * UpdateTestXMagic返回参数结构体
+ */
+export interface UpdateTestXMagicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 视立方license用户 应用结构
@@ -1837,14 +1639,9 @@ export interface ApplicationInfo {
 }
 
 /**
- * CreateActivityLicense请求参数结构体
+ * DescribeFeatureList请求参数结构体
  */
-export interface CreateActivityLicenseRequest {
-  /**
-   * 活动Id
-   */
-  Activity: string
-}
+export type DescribeFeatureListRequest = null
 
 /**
  * UpdateTrialLicense请求参数结构体
@@ -1858,100 +1655,6 @@ export interface UpdateTrialLicenseRequest {
    * 资源包ID
    */
   ResourceId: string
-}
-
-/**
- * UpdateTestXMagic请求参数结构体
- */
-export interface UpdateTestXMagicRequest {
-  /**
-   * 优图美视功能Id
-   */
-  XMagicId: number
-  /**
-   * XMagic套餐包Id
-   */
-  ResourceId: string
-}
-
-/**
- * ModifyLicense返回参数结构体
- */
-export interface ModifyLicenseResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateApplicationAndWebPlayerLicense返回参数结构体
- */
-export interface CreateApplicationAndWebPlayerLicenseResponse {
-  /**
-   * license的唯一标识
-   */
-  LicenseId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyTrialLicense请求参数结构体
- */
-export interface ModifyTrialLicenseRequest {
-  /**
-   * 授权ID
-   */
-  LicenseId: string
-}
-
-/**
- * 优图的的功能，Trial 为true的可以开通测试
- */
-export interface XMagicFeature {
-  /**
-   * 功能名称
-   */
-  Name?: string
-  /**
-   * 可以申请的次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrialCount?: number
-  /**
-   * 每次申请的时长单位：天
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Duration?: number
-  /**
-   * 功能类别
-   */
-  Plan?: string
-  /**
-   * single: 原子能力,combined:套餐
-   */
-  XMagicType?: string
-  /**
-   * 此功能是否支持开通测试
-   */
-  Trial?: boolean
-  /**
-   * 功能所属业务方
-   */
-  BizType?: string
-}
-
-/**
- * ModifyXMagic返回参数结构体
- */
-export interface ModifyXMagicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1969,27 +1672,101 @@ export interface CreateApplicationAndWebPlayerLicenseRequest {
 }
 
 /**
- * CreateApplicationAndBindLicense请求参数结构体
+ * DescribeVcubeResourcesList请求参数结构体
  */
-export interface CreateApplicationAndBindLicenseRequest {
+export interface DescribeVcubeResourcesListRequest {
   /**
-   * 应用名
+   * 查询资源页码
    */
-  AppName: string
+  PageNumber: number
   /**
-   * 应用ID
+   * 每页的数据量
    */
-  BundleId?: string
+  PageSize: number
   /**
-   * 包名
+   * 应用名称，模块查询
    */
-  PackageName?: string
+  AppName?: string
   /**
-   * 资源包ID
+   * 资源Id，资源包id或者license资源id
    */
-  ResourceIds?: Array<string>
+  ResourceId?: string
   /**
-   * 营业执照
+   * 资源Id、应用名称、包名
+   */
+  Word?: string
+  /**
+   * 查询资源所属平台，web、mobile
+   */
+  Platform?: string
+}
+
+/**
+ * 功能描述模型
+ */
+export interface Feature {
+  /**
+   * 索引
+   */
+  Id?: number
+  /**
+   * 功能ID
+   */
+  FeatureId?: number
+  /**
+   * 功能名称
+   */
+  Name?: string
+  /**
+   * 功能类型
+   */
+  Type?: string
+  /**
+   * 是否可以申请试用
+   */
+  Trial?: boolean
+  /**
+   * 可以试用的次数
+   */
+  TrialCount?: number
+  /**
+   * 可以试用的时长，单位天
+   */
+  Duration?: number
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+}
+
+/**
+ * DescribeUserConfig返回参数结构体
+ */
+export interface DescribeUserConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateXMagic请求参数结构体
+ */
+export interface UpdateXMagicRequest {
+  /**
+   * 要修改的XMagic Id
+   */
+  XMagicId: number
+  /**
+   * 资源id
+   */
+  XMagicResourceId?: string
+  /**
+   * 营业执照地址
    */
   CompanyPermit?: string
   /**
@@ -2000,10 +1777,41 @@ export interface CreateApplicationAndBindLicenseRequest {
    * 公司名称
    */
   CompanyName?: string
+}
+
+/**
+ * DescribeLicenseList请求参数结构体
+ */
+export type DescribeLicenseListRequest = null
+
+/**
+ * DescribeVcubeApplicationAndPlayList请求参数结构体
+ */
+export interface DescribeVcubeApplicationAndPlayListRequest {
   /**
-   * 优图资源id列表
+   * 查询对应业务方的license，直播:live 点播：vod
    */
-  XMagicResourceIds?: Array<string>
+  BizType?: string
+  /**
+   * 应用类型测试：test，正式：formal
+   */
+  AppType?: string
+  /**
+   * 应用名称，模糊查询
+   */
+  AppName?: string
+  /**
+   * Ios包名，模糊查询
+   */
+  BundleId?: string
+  /**
+   * Android 包名，模糊查询
+   */
+  PackageName?: string
+  /**
+   * 平台信息，pc 或者 mobile
+   */
+  Platform?: string
   /**
    * Mac 进程名
    */
@@ -2013,13 +1821,23 @@ export interface CreateApplicationAndBindLicenseRequest {
    */
   WinProcessName?: string
   /**
-   * 要开通的域名列表
+   * license唯一标识
    */
-  DomainList?: Array<string>
+  LicenseId?: number
+}
+
+/**
+ * ModifyLicense请求参数结构体
+ */
+export interface ModifyLicenseRequest {
   /**
-   * 要开通的端，web/mobile/pc
+   * License 功能模块 Id
    */
-  Platform?: string
+  LicenseId: string
+  /**
+   * 资源包 Id
+   */
+  ResourceId: string
 }
 
 /**
@@ -2033,17 +1851,9 @@ export interface NewsInfo {
 }
 
 /**
- * DescribeFeatureList返回参数结构体
+ * ModifyPresetApplication返回参数结构体
  */
-export interface DescribeFeatureListResponse {
-  /**
-   * 功能列表
-   */
-  FeatureList?: Array<VideoFeature>
-  /**
-   * 优图功能列表
-   */
-  XMagicFeatureList?: Array<XMagicFeature>
+export interface ModifyPresetApplicationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2051,13 +1861,229 @@ export interface DescribeFeatureListResponse {
 }
 
 /**
- * DescribeXMagicResourceList返回参数结构体
+ * CreateXMagic返回参数结构体
  */
-export interface DescribeXMagicResourceListResponse {
+export interface CreateXMagicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeNews返回参数结构体
+ */
+export interface DescribeNewsResponse {
+  /**
+   * 产品动态详情列表
+   */
+  NewsList?: Array<NewsInfo>
+  /**
+   * 总数据量
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 视立方应用license
+ */
+export interface License {
+  /**
+   * license类型
+   */
+  Type?: string
+  /**
+   * 老系统迁移备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * license生效时间
+   */
+  StartTime?: string
+  /**
+   * license失效时间
+   */
+  EndTime?: string
+  /**
+   * license对应的功能Id
+   */
+  FeatureId?: number
+  /**
+   * license是测试：test还是正式：formal
+   */
+  LicenseType?: string
+  /**
+   * 测试license 是否可以续期
+   */
+  Renewal?: boolean
+  /**
+   * license索引
+   */
+  LicenseId?: number
+  /**
+   * license名称
+   */
+  Name?: string
+  /**
+   * 测试license 是否升级
+   */
+  Update?: boolean
+  /**
+   * 兼容老的licenseUrl
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldLicenseUrl?: string
+  /**
+   * 视立方url分组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: number
+  /**
+   * 过期：true ，未过期：其它
+   */
+  Expired?: boolean
+  /**
+   * 返回还有多少秒过期，过期返回0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestTime?: number
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * 计费资源相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource?: RenewResource
+  /**
+   * 是否为马甲包
+   */
+  IsVest?: boolean
+}
+
+/**
+ * 资源包结构
+ */
+export interface Package {
+  /**
+   * 资源包Id
+   */
+  Id?: number
+  /**
+   * 资源包资源Id
+   */
+  BizResourceId?: string
+  /**
+   * 站点 中国站还是国际站
+   */
+  Site?: string
+  /**
+   * 资源包开始生效时间
+   */
+  StartTime?: string
+  /**
+   * 资源包过期时间
+   */
+  EndTime?: string
+  /**
+   * 资源包退费时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefundTime?: string
+  /**
+   * 资源包名称
+   */
+  Name?: string
+  /**
+   * 资源包类型ID,对应点播：PackageId 对应直播：TypeId
+   */
+  Type?: string
+}
+
+/**
+ * RenewVideo请求参数结构体
+ */
+export interface RenewVideoRequest {
+  /**
+   * 要续期的视频播放license Id
+   */
+  LicenseId: number
+}
+
+/**
+ * DescribeVcubeApplicationAndLicense返回参数结构体
+ */
+export interface DescribeVcubeApplicationAndLicenseResponse {
+  /**
+   * 应用license列表
+   */
+  ApplicationInfoList?: Array<ApplicationInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSTS返回参数结构体
+ */
+export interface DescribeSTSResponse {
+  /**
+   * 桶名称
+   */
+  Bucket?: string
+  /**
+   * 地区
+   */
+  Region?: string
+  /**
+   * 开始生效时间
+   */
+  StartTime?: number
+  /**
+   * 临时token过期时间
+   */
+  ExpiredTime?: number
+  /**
+   * 临时token
+   */
+  SessionToken?: string
+  /**
+   * 临时SecretId
+   */
+  TmpSecretId?: string
+  /**
+   * 临时秘钥
+   */
+  TmpSecretKey?: string
+  /**
+   * 上传的根路径，底下可以多层
+   */
+  Path?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeXMagicResource返回参数结构体
+ */
+export interface DescribeXMagicResourceResponse {
   /**
    * 优图资源包信息
    */
-  Resources?: Array<XMagicResourceSimpleInfo>
+  Resources?: Array<XMagicResource>
   /**
    * 资源数量
    */
@@ -2069,6 +2095,15 @@ export interface DescribeXMagicResourceListResponse {
 }
 
 /**
- * DescribeTrialFeature请求参数结构体
+ * UpdateTestXMagic请求参数结构体
  */
-export type DescribeTrialFeatureRequest = null
+export interface UpdateTestXMagicRequest {
+  /**
+   * 优图美视功能Id
+   */
+  XMagicId: number
+  /**
+   * XMagic套餐包Id
+   */
+  ResourceId: string
+}

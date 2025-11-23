@@ -16,6 +16,52 @@
  */
 
 /**
+ * api安全自定义事件规则结构体
+ */
+export interface ApiSecCustomEventRule {
+  /**
+   * 规则名称
+   */
+  RuleName: string
+  /**
+   * 开关，1：开，0:关
+   */
+  Status: number
+  /**
+   * api匹配列表
+   */
+  ApiNameOp?: Array<ApiNameOp>
+  /**
+   * 事件详情
+   */
+  Description?: string
+  /**
+   * 时间戳，出参有该值，入参不需要传没有
+   */
+  UpdateTime?: number
+  /**
+   * 匹配规则列表
+   */
+  MatchRuleList?: Array<ApiSecSceneRuleEntry>
+  /**
+   * 统计规则列表
+   */
+  StatRuleList?: Array<ApiSecSceneRuleEntry>
+  /**
+   * 访问频次，第一个字段表示次数，第二个字段表示分钟
+   */
+  ReqFrequency?: Array<number | bigint>
+  /**
+   * 风险等级，取值为100,200,300，分别表示低位、中危、高危
+   */
+  RiskLevel?: string
+  /**
+   * 规则来源
+   */
+  Source?: string
+}
+
+/**
  * DeleteOwaspWhiteRule请求参数结构体
  */
 export interface DeleteOwaspWhiteRuleRequest {
@@ -37,6 +83,20 @@ export interface ModifyUserLevelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 指定限流path和对应的method
+ */
+export interface PathItem {
+  /**
+   * 请求路径
+   */
+  Path?: string
+  /**
+   * 请求方法
+   */
+  Method?: string
 }
 
 /**
@@ -238,21 +298,17 @@ export interface DescribeOwaspWhiteRulesResponse {
 }
 
 /**
- * DescribeApiListVersionTwo返回参数结构体
+ * DeleteRateLimitsV2请求参数结构体
  */
-export interface DescribeApiListVersionTwoResponse {
+export interface DeleteRateLimitsV2Request {
   /**
-   * api资产列表
+   * 域名
    */
-  Data?: Array<ApiAsset>
+  Domain: string
   /**
-   * 总数
+   * 要删除的限流ID列表
    */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  LimitRuleIds: Array<number | bigint>
 }
 
 /**
@@ -557,6 +613,16 @@ export interface UpdateProtectionModesResponse {
    * 操作结果
    */
   CommonRsp?: CommonRspData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyApiSecSensitiveRule返回参数结构体
+ */
+export interface ModifyApiSecSensitiveRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -953,24 +1019,6 @@ export interface AccessKeyValueInfo {
 }
 
 /**
- * DescribeExports请求参数结构体
- */
-export interface DescribeExportsRequest {
-  /**
-   * 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法
-   */
-  TopicId: string
-  /**
-   * 分页的偏移量，默认值为0
-   */
-  Offset?: number
-  /**
-   * 分页单页限制数目，默认值为20，最大值100
-   */
-  Limit?: number
-}
-
-/**
  * JWT显示设置（只有当校验方式为JWS/JWE的时候才会有该配置信息）
  */
 export interface TokenDisplaySetting {
@@ -1072,6 +1120,104 @@ export interface BotToken {
    * token有效性配置信息
    */
   TokenValidation?: TokenValidation
+}
+
+/**
+ * UpdateRateLimitV2请求参数结构体
+ */
+export interface UpdateRateLimitV2Request {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则ID
+   */
+  LimitRuleId: number
+  /**
+   * 规则名
+   */
+  Name: string
+  /**
+   * 优先级
+   */
+  Priority: number
+  /**
+   * 开关，0关闭，1开启
+   */
+  Status: number
+  /**
+   * 支持API，Domain。如果基于API，则LimitPaths不能为空，否则LimitPaths为空
+   */
+  LimitObject: string
+  /**
+   * 限流策略，0:观察,1:拦截，2:人机
+   */
+  LimitStrategy: number
+  /**
+   * 基于Header参数名限流
+   */
+  LimitHeaderName?: LimitHeaderName
+  /**
+   * 限流方法
+   */
+  LimitMethod?: LimitMethod
+  /**
+   * 限流路径
+   */
+  LimitPaths?: LimitPath
+  /**
+   * 限流Headers
+   */
+  LimitHeaders?: Array<LimitHeader>
+  /**
+   * 限流窗口
+   */
+  LimitWindow?: LimitWindow
+  /**
+   * 基于Get参数名限流
+   */
+  GetParamsName?: MatchOption
+  /**
+   * 基于Get参数值限流
+   */
+  GetParamsValue?: MatchOption
+  /**
+   * 基于Post参数名限流
+   */
+  PostParamsName?: MatchOption
+  /**
+   * 基于Post参数值限流
+   */
+  PostParamsValue?: MatchOption
+  /**
+   * 基于IP归属地限流
+   */
+  IpLocation?: MatchOption
+  /**
+   * 重定向信息,当LimitStrategy为重定向时，此字段必填
+   */
+  RedirectInfo?: RedirectInfo
+  /**
+   * 拦截页面,0表示429，否则填写blockPageID
+   */
+  BlockPage?: number
+  /**
+   * 限流对象来源，0：手动填写，1：API资产
+   */
+  ObjectSrc?: number
+  /**
+   * 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额
+   */
+  QuotaShare?: boolean
+  /**
+   * 路径选项,可配置每个路径的请求方法
+   */
+  PathsOption?: Array<PathItem>
+  /**
+   * 限流执行顺序，0：默认情况，限流优先，1：安全防护优先
+   */
+  Order?: number
 }
 
 /**
@@ -1382,17 +1528,17 @@ export interface DescribeBotUCBRuleRsp {
 }
 
 /**
- * 批量防护失败的域名以及对应的原因。
+ * FreshAntiFakeUrl请求参数结构体
  */
-export interface BatchDomainResult {
+export interface FreshAntiFakeUrlRequest {
   /**
-   * 批量操作中失败的域名
+   * 域名
    */
-  Domain?: string
+  Domain: string
   /**
-   * 操作失败的原因
+   * Id
    */
-  Message?: string
+  Id: number
 }
 
 /**
@@ -1483,6 +1629,36 @@ export interface ModifyOwaspWhiteRuleRequest {
    * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
    */
   LogicalOp?: string
+}
+
+/**
+ * api安全客户自定义敏感检测规则
+ */
+export interface ApiSecCustomSensitiveRule {
+  /**
+   * 参数位置
+   */
+  Position: Array<string>
+  /**
+   * 匹配条件
+   */
+  MatchKey: string
+  /**
+   * 匹配值
+   */
+  MatchValue: Array<string>
+  /**
+   * 风险等级
+   */
+  Level: string
+  /**
+   * 匹配符号，当匹配条件为关键字匹配和字符匹配的时候传该值,可传多个
+   */
+  MatchCond?: Array<string>
+  /**
+   * 规则是否泛化，默认0表示不泛化
+   */
+  IsPan?: number
 }
 
 /**
@@ -1642,6 +1818,24 @@ export interface DeleteIpAccessControlRequest {
    * IP黑白名单类型，40为IP白名单，42为IP黑名单
    */
   ActionType?: number
+}
+
+/**
+ * DescribeApiListVersionTwo返回参数结构体
+ */
+export interface DescribeApiListVersionTwoResponse {
+  /**
+   * api资产列表
+   */
+  Data?: Array<ApiAsset>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1974,6 +2168,33 @@ export interface PostAttackDownloadTaskRequest {
 }
 
 /**
+ * api安全自定义场景规则
+ */
+export interface ApiSecSceneRule {
+  /**
+   * 场景名称
+   */
+  RuleName?: string
+  /**
+   * 开关状态，1表示开，0表示关
+   */
+  Status?: number
+  /**
+   * 更新时间，10位时间戳
+   */
+  UpdateTime?: number
+  /**
+   * 规则列表
+   */
+  RuleList?: Array<ApiSecSceneRuleEntry>
+  /**
+   * 规则来源，系统内置:OS
+客户自定义：custom
+   */
+  Source?: string
+}
+
+/**
  * DescribeHost返回参数结构体
  */
 export interface DescribeHostResponse {
@@ -1985,6 +2206,20 @@ export interface DescribeHostResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 限流相关通用返回
+ */
+export interface RateLimitCommonRsp {
+  /**
+   * 响应码
+   */
+  Code?: number
+  /**
+   * 提示信息
+   */
+  Info?: string
 }
 
 /**
@@ -2410,6 +2645,20 @@ export interface ModifyAreaBanRuleRequest {
 }
 
 /**
+ * UpdateRateLimitV2返回参数结构体
+ */
+export interface UpdateRateLimitV2Response {
+  /**
+   * 操作结果
+   */
+  BaseInfo?: RateLimitCommonRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Clb-waf地域信息
  */
 export interface ClbWafRegionItem {
@@ -2550,9 +2799,80 @@ export interface DescribeBotSceneUCBRuleRequest {
 }
 
 /**
- * DescribeDomainCountInfo请求参数结构体
+ * api列表
  */
-export type DescribeDomainCountInfoRequest = null
+export interface ApiSecKey {
+  /**
+   * api名称
+   */
+  ApiName: string
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 请求方法
+   */
+  Method: string
+}
+
+/**
+ * ModifyApiSecSensitiveRule请求参数结构体
+ */
+export interface ModifyApiSecSensitiveRuleRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 1表示开，0表示关，3表示删除
+   */
+  Status: number
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 客户自定义配置
+   */
+  CustomRule?: ApiSecCustomSensitiveRule
+  /**
+   * rulename列表，批量操作的时候填改值
+   */
+  RuleNameList?: Array<string>
+  /**
+   * api提取规则内容
+   */
+  CustomApiExtractRule?: ApiSecExtractRule
+  /**
+   * 批量操作的时候的api提取规则
+   */
+  ApiExtractRuleName?: Array<string>
+  /**
+   * 自定义api鉴权规则
+   */
+  ApiSecPrivilegeRule?: ApiSecPrivilegeRule
+  /**
+   * 匹配操作时候的api鉴权规则
+   */
+  ApiSecPrivilegeRuleName?: Array<string>
+  /**
+   * 批量操作的时候的自定义场景列表
+   */
+  ApiSecSceneRuleNameList?: Array<string>
+  /**
+   * 单条自定义api场景规则
+   */
+  ApiSecSceneRule?: ApiSecSceneRule
+  /**
+   * 批量操作的时候的自定义事件规则列表
+   */
+  ApiSecCustomEventRuleNameList?: Array<string>
+  /**
+   * 自定义事件规则
+   */
+  ApiSecCustomEventRuleRule?: ApiSecCustomEventRule
+}
 
 /**
  * DescribeCustomWhiteRule返回参数结构体
@@ -2965,33 +3285,13 @@ export interface ModifyUserSignatureRuleRequest {
 }
 
 /**
- * BatchOperateUserSignatureRules请求参数结构体
+ * CreatePostCKafkaFlow返回参数结构体
  */
-export interface BatchOperateUserSignatureRulesRequest {
+export interface CreatePostCKafkaFlowResponse {
   /**
-   * 域名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain: string
-  /**
-   * 0:关闭，1:开启，2:仅观察
-   */
-  Status: string
-  /**
-   * 如果SelectedAll为true，则表示反选的规则，否则表示手动选择的规则ID
-   */
-  RuleIds?: Array<string>
-  /**
-   * 仅观察原因
-   */
-  Reason?: number
-  /**
-   * 是否全选
-   */
-  SelectedAll?: boolean
-  /**
-   * 过滤
-   */
-  Filters?: Array<FiltersItemNew>
+  RequestId?: string
 }
 
 /**
@@ -3041,17 +3341,24 @@ export interface DescribeUserDomainInfoResponse {
 }
 
 /**
- * TLS信息
+ * 限流规则中匹配条件
  */
-export interface TLSVersion {
+export interface MatchOption {
   /**
-   * TLSVERSION的ID
+   * 匹配参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId?: number
+  Params?: string
   /**
-   * TLSVERSION的NAME
+   * 逻辑符号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionName?: string
+  Func?: string
+  /**
+   * 匹配内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
 }
 
 /**
@@ -3154,6 +3461,60 @@ export interface PostCLSFlowInfo {
    * CLS日志集合ID
    */
   LogTopicID?: string
+}
+
+/**
+ * 日志结果信息
+ */
+export interface LogInfo {
+  /**
+   * 日志时间，单位ms
+   */
+  Time?: number
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志主题名称
+   */
+  TopicName?: string
+  /**
+   * 日志来源IP
+   */
+  Source?: string
+  /**
+   * 日志文件名称
+   */
+  FileName?: string
+  /**
+   * 日志上报请求包的ID
+   */
+  PkgId?: string
+  /**
+   * 请求包内日志的ID
+   */
+  PkgLogId?: string
+  /**
+   * 日志内容的Json序列化字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogJson?: string
+  /**
+   * 日志来源主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostName?: string
+  /**
+   * 原始日志(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawLog?: string
+  /**
+   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexStatus?: string
 }
 
 /**
@@ -3293,6 +3654,32 @@ export interface DeleteBotSceneUCBRuleRequest {
 }
 
 /**
+ * BOT-ID规则信息
+ */
+export interface BotIdConfig {
+  /**
+   * 规则ID
+   */
+  RuleId: string
+  /**
+   * 规则开关
+   */
+  Status: boolean
+  /**
+   * 动作配置
+   */
+  Action: string
+  /**
+   * 规则名称
+   */
+  BotId?: string
+  /**
+   * 重定向路径
+   */
+  Redirect?: string
+}
+
+/**
  * DeleteHost请求参数结构体
  */
 export interface DeleteHostRequest {
@@ -3393,6 +3780,20 @@ export interface DescribeModuleStatusRequest {
 }
 
 /**
+ * DeleteRateLimitsV2返回参数结构体
+ */
+export interface DeleteRateLimitsV2Response {
+  /**
+   * 操作结果
+   */
+  BaseInfo?: RateLimitCommonRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAttackWhiteRule请求参数结构体
  */
 export interface DeleteAttackWhiteRuleRequest {
@@ -3404,6 +3805,100 @@ export interface DeleteAttackWhiteRuleRequest {
    * 用户域名
    */
   Domain: string
+}
+
+/**
+ * CreateRateLimitV2请求参数结构体
+ */
+export interface CreateRateLimitV2Request {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则名
+   */
+  Name: string
+  /**
+   * 规则优先级
+   */
+  Priority: number
+  /**
+   * 规则开关，0关闭，1开启
+   */
+  Status: number
+  /**
+   * 限流窗口
+   */
+  LimitWindow: LimitWindow
+  /**
+   * 支持API或Domain，如果是基于API，则LimitPaths不能为空，否则LimitPaths为空
+   */
+  LimitObject: string
+  /**
+   * 限流策略，0:观察,1:拦截，2:人机
+   */
+  LimitStrategy: number
+  /**
+   * 限流方法
+   */
+  LimitMethod?: LimitMethod
+  /**
+   * 限流路径列表
+   */
+  LimitPaths?: LimitPath
+  /**
+   * 限流Headers
+   */
+  LimitHeaders?: Array<LimitHeader>
+  /**
+   * 基于Header参数名限流
+   */
+  LimitHeaderName?: LimitHeaderName
+  /**
+   * 基于Get参数名限流
+   */
+  GetParamsName?: MatchOption
+  /**
+   * 基于Get参数值限流
+   */
+  GetParamsValue?: MatchOption
+  /**
+   * 基于Post参数名限流
+   */
+  PostParamsName?: MatchOption
+  /**
+   * 基于Post参数值限流
+   */
+  PostParamsValue?: MatchOption
+  /**
+   * 基于IP归属地限流
+   */
+  IpLocation?: MatchOption
+  /**
+   * 重定向信息,当LimitStrategy为重定向时，此字段必填
+   */
+  RedirectInfo?: RedirectInfo
+  /**
+   * 拦截页面,0表示429，否则填写blockPageID
+   */
+  BlockPage?: number
+  /**
+   * 限流对象来源，0：手动填写，1：API资产
+   */
+  ObjectSrc?: number
+  /**
+   * 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额
+   */
+  QuotaShare?: boolean
+  /**
+   * 路径选项,可配置每个路径的请求方法
+   */
+  PathsOption?: Array<PathItem>
+  /**
+   * 限流执行顺序，0：默认情况，限流优先，1：安全防护优先
+   */
+  Order?: number
 }
 
 /**
@@ -3888,57 +4383,17 @@ export interface CCRuleLists {
 }
 
 /**
- * 日志结果信息
+ * BatchOperateUserSignatureRules返回参数结构体
  */
-export interface LogInfo {
+export interface BatchOperateUserSignatureRulesResponse {
   /**
-   * 日志时间，单位ms
+   * 操作结果
    */
-  Time?: number
+  CommonRsp?: CommonRspData
   /**
-   * 日志主题ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId?: string
-  /**
-   * 日志主题名称
-   */
-  TopicName?: string
-  /**
-   * 日志来源IP
-   */
-  Source?: string
-  /**
-   * 日志文件名称
-   */
-  FileName?: string
-  /**
-   * 日志上报请求包的ID
-   */
-  PkgId?: string
-  /**
-   * 请求包内日志的ID
-   */
-  PkgLogId?: string
-  /**
-   * 日志内容的Json序列化字符串
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogJson?: string
-  /**
-   * 日志来源主机名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HostName?: string
-  /**
-   * 原始日志(仅在日志创建索引异常时有值)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RawLog?: string
-  /**
-   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IndexStatus?: string
+  RequestId?: string
 }
 
 /**
@@ -4338,6 +4793,20 @@ export interface CreateHostResponse {
  * 创建资源实例时同时绑定的标签对说明
  */
 export type Tag = null
+
+/**
+ * EnableRateLimitsV2请求参数结构体
+ */
+export interface EnableRateLimitsV2Request {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 具体规则列表
+   */
+  EnableItems: Array<EnableLimitRuleItem>
+}
 
 /**
  * ModifyBotStatus请求参数结构体
@@ -4793,6 +5262,11 @@ export interface ModifyObjectRequest {
 }
 
 /**
+ * DescribeDomainCountInfo请求参数结构体
+ */
+export type DescribeDomainCountInfoRequest = null
+
+/**
  * 产品明细
  */
 export interface CreateDealsGoodsDetail {
@@ -5212,127 +5686,75 @@ export interface DeleteIpAccessControlResponse {
 }
 
 /**
- * Clb类型防护对象
+ * 批量多域名黑白名单列表Ip
  */
-export interface ClbObject {
+export interface BatchIpAccessControlItem {
   /**
-   * 对象ID
+   * mongo表自增Id
+   * @deprecated
    */
-  ObjectId?: string
+  Id?: string
   /**
-   * 实例ID
+   * 黑名单42或白名单40
    */
-  InstanceId?: string
+  ActionType?: number
   /**
-   * 实例名称
+   * 黑白名单的IP
+   * @deprecated
    */
-  InstanceName?: string
+  Ip?: string
   /**
-   * 精准域名列表
+   * 备注
    */
-  PreciseDomains?: Array<string>
+  Note?: string
   /**
-   * WAF功能开关状态，0关闭1开启
+   * batch为批量域名，batch-group为防护对象组
    */
-  Status?: number
-  /**
-   * WAF日志开关状态，0关闭1开启
-   */
-  ClsStatus?: number
-  /**
-   * CLB对象对应的虚拟域名
-   */
-  VirtualDomain?: string
-  /**
-   * 对象名称
-   */
-  ObjectName?: string
-  /**
-   * 公网地址
-   */
-  PublicIp?: Array<string>
-  /**
-   * 内网地址
-   */
-  PrivateIp?: Array<string>
-  /**
-   * VPC名称
-   */
-  VpcName?: string
-  /**
-   * VPC ID
-   */
-  Vpc?: string
-  /**
-   * waf实例等级，如果未绑定实例为0
-   */
-  InstanceLevel?: number
-  /**
-   * clb投递开关
-   */
-  PostCLSStatus?: number
-  /**
-   * kafka投递开关
-   */
-  PostCKafkaStatus?: number
-  /**
-   * 对象类型：CLB:负载均衡器，TSE:云原生网关
-   */
-  Type?: string
-  /**
-   * 对象地域
-   */
-  Region?: string
-  /**
-   * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
-   */
-  Proxy?: number
-  /**
-   * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
-   */
-  IpHeaders?: Array<string>
-  /**
-   * bot防护开关
-   */
-  BotStatus?: number
-  /**
-   * api防护开关
-   */
-  ApiStatus?: number
-  /**
-   * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
-   */
-  ObjectFlowMode?: number
-  /**
-   * 数值形式的私有网络 ID
-   */
-  NumericalVpcId?: number
+  Source?: string
   /**
    * 修改时间
    */
-  ModifyTime?: string
+  TsVersion?: number
+  /**
+   * 超时时间
+   */
+  ValidTs?: number
+  /**
+   * 域名列表
+   */
+  Hosts?: Array<string>
+  /**
+   * 55101145
+   */
+  RuleId?: number
+  /**
+   * IP列表
+   */
+  IpList?: Array<string>
   /**
    * 创建时间
    */
-  AddTime?: string
-}
-
-/**
- * api列表
- */
-export interface ApiSecKey {
+  CreateTime?: number
   /**
-   * api名称
+   * 定时任务类型
    */
-  ApiName: string
+  JobType?: string
   /**
-   * 域名
+   * 周期任务类型
    */
-  Domain: string
+  CronType?: string
   /**
-   * 请求方法
+   * 定时任务配置详情
    */
-  Method: string
+  JobDateTime?: JobDateTime
+  /**
+   * 生效状态
+   */
+  ValidStatus?: number
+  /**
+   * 防护对象组ID列表，如果绑定的是防护对象组
+   */
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -5703,6 +6125,20 @@ export interface DescribeIpAccessControlRequest {
    * 0表示全部，1表示永久生效，2表示定时生效，3表示周粒度生效，4表示月粒度生效
    */
   TimerType?: number
+}
+
+/**
+ * CreateRateLimitV2返回参数结构体
+ */
+export interface CreateRateLimitV2Response {
+  /**
+   * 操作结果
+   */
+  BaseInfo?: RateLimitCommonRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6136,6 +6572,20 @@ export interface AddAntiInfoLeakRulesResponse {
 }
 
 /**
+ * EnableLimitRuleItem
+ */
+export interface EnableLimitRuleItem {
+  /**
+   * 规则ID
+   */
+  LimitRuleId?: number
+  /**
+   * 规则开关，0开启，1关闭
+   */
+  Status?: number
+}
+
+/**
  * DescribeWafThreatenIntelligence返回参数结构体
  */
 export interface DescribeWafThreatenIntelligenceResponse {
@@ -6348,6 +6798,36 @@ export interface CreateAccessExportResponse {
 }
 
 /**
+ * 限流Path
+ */
+export interface LimitPath {
+  /**
+   * 限流路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 匹配方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
+ * TLS信息
+ */
+export interface TLSVersion {
+  /**
+   * TLSVERSION的ID
+   */
+  VersionId?: number
+  /**
+   * TLSVERSION的NAME
+   */
+  VersionName?: string
+}
+
+/**
  * ModifyOwaspRuleTypeLevel请求参数结构体
  */
 export interface ModifyOwaspRuleTypeLevelRequest {
@@ -6461,75 +6941,109 @@ export interface DeleteSpartaProtectionResponse {
 }
 
 /**
- * 批量多域名黑白名单列表Ip
+ * Clb类型防护对象
  */
-export interface BatchIpAccessControlItem {
+export interface ClbObject {
   /**
-   * mongo表自增Id
-   * @deprecated
+   * 对象ID
    */
-  Id?: string
+  ObjectId?: string
   /**
-   * 黑名单42或白名单40
+   * 实例ID
    */
-  ActionType?: number
+  InstanceId?: string
   /**
-   * 黑白名单的IP
-   * @deprecated
+   * 实例名称
    */
-  Ip?: string
+  InstanceName?: string
   /**
-   * 备注
+   * 精准域名列表
    */
-  Note?: string
+  PreciseDomains?: Array<string>
   /**
-   * batch为批量域名，batch-group为防护对象组
+   * WAF功能开关状态，0关闭1开启
    */
-  Source?: string
+  Status?: number
+  /**
+   * WAF日志开关状态，0关闭1开启
+   */
+  ClsStatus?: number
+  /**
+   * CLB对象对应的虚拟域名
+   */
+  VirtualDomain?: string
+  /**
+   * 对象名称
+   */
+  ObjectName?: string
+  /**
+   * 公网地址
+   */
+  PublicIp?: Array<string>
+  /**
+   * 内网地址
+   */
+  PrivateIp?: Array<string>
+  /**
+   * VPC名称
+   */
+  VpcName?: string
+  /**
+   * VPC ID
+   */
+  Vpc?: string
+  /**
+   * waf实例等级，如果未绑定实例为0
+   */
+  InstanceLevel?: number
+  /**
+   * clb投递开关
+   */
+  PostCLSStatus?: number
+  /**
+   * kafka投递开关
+   */
+  PostCKafkaStatus?: number
+  /**
+   * 对象类型：CLB:负载均衡器，TSE:云原生网关
+   */
+  Type?: string
+  /**
+   * 对象地域
+   */
+  Region?: string
+  /**
+   * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
+   */
+  Proxy?: number
+  /**
+   * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
+   */
+  IpHeaders?: Array<string>
+  /**
+   * bot防护开关
+   */
+  BotStatus?: number
+  /**
+   * api防护开关
+   */
+  ApiStatus?: number
+  /**
+   * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
+   */
+  ObjectFlowMode?: number
+  /**
+   * 数值形式的私有网络 ID
+   */
+  NumericalVpcId?: number
   /**
    * 修改时间
    */
-  TsVersion?: number
-  /**
-   * 超时时间
-   */
-  ValidTs?: number
-  /**
-   * 域名列表
-   */
-  Hosts?: Array<string>
-  /**
-   * 55101145
-   */
-  RuleId?: number
-  /**
-   * IP列表
-   */
-  IpList?: Array<string>
+  ModifyTime?: string
   /**
    * 创建时间
    */
-  CreateTime?: number
-  /**
-   * 定时任务类型
-   */
-  JobType?: string
-  /**
-   * 周期任务类型
-   */
-  CronType?: string
-  /**
-   * 定时任务配置详情
-   */
-  JobDateTime?: JobDateTime
-  /**
-   * 生效状态
-   */
-  ValidStatus?: number
-  /**
-   * 防护对象组ID列表，如果绑定的是防护对象组
-   */
-  GroupIds?: Array<number | bigint>
+  AddTime?: string
 }
 
 /**
@@ -7088,6 +7602,36 @@ export interface DestroyPostCLSFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * api提取规则内容
+ */
+export interface ApiSecExtractRule {
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * api名称
+   */
+  ApiName?: string
+  /**
+   * 请求方法列表
+   */
+  Methods?: Array<string>
+  /**
+   * 开关状态，0是关，1是开
+   */
+  Status?: number
+  /**
+   * 正则匹配内容
+   */
+  Regex?: string
+  /**
+   * 10更新时间戳
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -7827,6 +8371,48 @@ export interface LogItem {
 }
 
 /**
+ * 自定义api鉴权规则
+ */
+export interface ApiSecPrivilegeRule {
+  /**
+   * 规则名称，不可重复
+   */
+  RuleName: string
+  /**
+   * 1:开，0:关
+   */
+  Status: number
+  /**
+   * 最多输入20个api
+   */
+  ApiName?: Array<string>
+  /**
+   * 鉴权位置
+   */
+  Position?: string
+  /**
+   * 鉴权参数列表
+   */
+  ParameterList?: Array<string>
+  /**
+   * 更新时间戳
+   */
+  UpdateTime?: number
+  /**
+   * 规则来源
+   */
+  Source?: string
+  /**
+   * 带有匹配方式的api列表
+   */
+  ApiNameOp?: Array<ApiNameOp>
+  /**
+   * 应用对象取值，1表示手动填写，2表示从api资产中获取
+   */
+  Option?: number
+}
+
+/**
  * ip黑白名单
  */
 export interface IpAccessControlItem {
@@ -8029,17 +8615,35 @@ export interface DescribeTopicsRequest {
 }
 
 /**
- * FreshAntiFakeUrl请求参数结构体
+ * 批量防护失败的域名以及对应的原因。
  */
-export interface FreshAntiFakeUrlRequest {
+export interface BatchDomainResult {
   /**
-   * 域名
+   * 批量操作中失败的域名
    */
-  Domain: string
+  Domain?: string
   /**
-   * Id
+   * 操作失败的原因
    */
-  Id: number
+  Message?: string
+}
+
+/**
+ * 带有匹配方式的apiname列表
+ */
+export interface ApiNameOp {
+  /**
+   * 匹配值列表
+   */
+  Value?: Array<string>
+  /**
+   * 匹配方式，如属于和正则等
+   */
+  Op?: string
+  /**
+   * 手动筛选的时候，要传该结构体
+   */
+  ApiNameMethod?: Array<ApiNameMethod>
 }
 
 /**
@@ -8274,6 +8878,20 @@ export interface PeakPointsItem {
    * 小程序下行带宽峰值，单位B
    */
   WxDown?: number
+}
+
+/**
+ * EnableRateLimitsV2返回参数结构体
+ */
+export interface EnableRateLimitsV2Response {
+  /**
+   * 操作结果
+   */
+  BaseInfo?: RateLimitCommonRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8696,6 +9314,27 @@ export interface ModifySpartaProtectionModeRequest {
 }
 
 /**
+ * 重定向信息
+ */
+export interface RedirectInfo {
+  /**
+   * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol: string
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain: string
+  /**
+   * url路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+}
+
+/**
  * DescribeAttackOverview请求参数结构体
  */
 export interface DescribeAttackOverviewRequest {
@@ -9059,6 +9698,44 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * ModifyBotIdRule请求参数结构体
+ */
+export interface ModifyBotIdRuleRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 场景ID
+   */
+  SceneId: string
+  /**
+   * 配置信息，支持批量
+   */
+  Data?: Array<BotIdConfig>
+  /**
+   * 0-全局设置不生效 1-全局开关配置字段生效 2-全局动作配置字段生效 3-全局开关和动作字段都生效 4-只修改全局重定向路径 5-只修改全局防护等级
+   */
+  GlobalSwitch?: number
+  /**
+   * 全局开关
+   */
+  Status?: boolean
+  /**
+   * 全局动作
+   */
+  RuleAction?: string
+  /**
+   * 全局重定向路径
+   */
+  GlobalRedirect?: string
+  /**
+   * 防护等级：normal-正常；strict-严格
+   */
+  ProtectLevel?: string
+}
+
+/**
  * ModifyAntiInfoLeakRules请求参数结构体
  */
 export interface ModifyAntiInfoLeakRulesRequest {
@@ -9341,6 +10018,115 @@ export interface ModifyAntiInfoLeakRuleStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自研版限流规则数据结构
+ */
+export interface LimitRuleV2 {
+  /**
+   * 规则ID
+   */
+  LimitRuleID?: number
+  /**
+   * 规则名
+   */
+  Name?: string
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 规则开关，0表示关闭，1表示开启
+   */
+  Status?: number
+  /**
+   * 时间戳
+   */
+  TsVersion?: number
+  /**
+   * 限流对象，API或Domain
+   */
+  LimitObject?: string
+  /**
+   * 限流方法名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitMethod?: LimitMethod
+  /**
+   * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitPaths?: LimitPath
+  /**
+   * Header参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitHeaders?: Array<LimitHeader>
+  /**
+   * 限流窗口
+   */
+  LimitWindow?: LimitWindow
+  /**
+   * 限流策略，0:观察,1:拦截，2:人机
+   */
+  LimitStrategy?: number
+  /**
+   * Header参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitHeaderName?: LimitHeaderName
+  /**
+   * Get参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GetParamsName?: MatchOption
+  /**
+   * Get参数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GetParamsValue?: MatchOption
+  /**
+   * Post参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostParamsName?: MatchOption
+  /**
+   * Post参数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostParamsValue?: MatchOption
+  /**
+   * Ip属地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpLocation?: MatchOption
+  /**
+   * 重定向信息，当LimitStrategy为2时，此字段不为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedirectInfo?: RedirectInfo
+  /**
+   * 拦截页面，0表示429，否则为BlockPageID
+   */
+  BlockPage?: number
+  /**
+   * 限流对象来源，0：手动填写，1：API资产
+   */
+  ObjectSrc?: number
+  /**
+   * 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额
+   */
+  QuotaShare?: boolean
+  /**
+   * 路径选项,可配置每个路径的请求方法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathsOption?: Array<PathItem>
+  /**
+   * 574新增需求，限流执行顺序，0：默认情况，限流优先，1：安全防护优先
+   */
+  Order?: number
 }
 
 /**
@@ -9698,13 +10484,33 @@ export interface DescribeCCRuleRequest {
 }
 
 /**
- * CreatePostCKafkaFlow返回参数结构体
+ * BatchOperateUserSignatureRules请求参数结构体
  */
-export interface CreatePostCKafkaFlowResponse {
+export interface BatchOperateUserSignatureRulesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 域名
    */
-  RequestId?: string
+  Domain: string
+  /**
+   * 0:关闭，1:开启，2:仅观察
+   */
+  Status: string
+  /**
+   * 如果SelectedAll为true，则表示反选的规则，否则表示手动选择的规则ID
+   */
+  RuleIds?: Array<string>
+  /**
+   * 仅观察原因
+   */
+  Reason?: number
+  /**
+   * 是否全选
+   */
+  SelectedAll?: boolean
+  /**
+   * 过滤
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -9969,6 +10775,32 @@ export interface NetworkConfig {
 1：绑定
    */
   VipStatus?: number
+}
+
+/**
+ * 限流窗口大小
+ */
+export interface LimitWindow {
+  /**
+   * 每秒允许通过的最大请求数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Second?: number
+  /**
+   * 每分钟允许通过的最大请求数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Minute?: number
+  /**
+   * 每小时允许通过的最大请求数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hour?: number
+  /**
+   * 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuotaShare?: boolean
 }
 
 /**
@@ -10448,6 +11280,16 @@ export interface DescribeWafAutoDenyRulesResponse {
 }
 
 /**
+ * ModifyDomainPostAction返回参数结构体
+ */
+export interface ModifyDomainPostActionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RefreshAccessCheckResult请求参数结构体
  */
 export interface RefreshAccessCheckResultRequest {
@@ -10593,6 +11435,29 @@ export interface DescribeSpartaProtectionInfoResponse {
    * 0：BGP 1：Anycast
    */
   Anycast?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRateLimitsV2返回参数结构体
+ */
+export interface DescribeRateLimitsV2Response {
+  /**
+   * 查询结果中规则数量
+   */
+  Total?: number
+  /**
+   * 操作结果
+   */
+  BaseInfo?: RateLimitCommonRsp
+  /**
+   * 规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RateLimits?: Array<LimitRuleV2>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11587,6 +12452,22 @@ export interface DeleteOwaspWhiteRuleResponse {
 }
 
 /**
+ * 限流Header参数名
+ */
+export interface LimitHeaderName {
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamsName?: string
+  /**
+   * 操作符号,支持REGEX(正则),IN(属于),NOT_IN(不属于), EACH(每个参数值)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
  * SaaS型WAF域名详情
  */
 export interface DomainsPartInfo {
@@ -12215,17 +13096,21 @@ cdn-waf：CDN上的Web防护能力
 }
 
 /**
- * BatchOperateUserSignatureRules返回参数结构体
+ * DescribeExports请求参数结构体
  */
-export interface BatchOperateUserSignatureRulesResponse {
+export interface DescribeExportsRequest {
   /**
-   * 操作结果
+   * 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法
    */
-  CommonRsp?: CommonRspData
+  TopicId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页的偏移量，默认值为0
    */
-  RequestId?: string
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为20，最大值100
+   */
+  Limit?: number
 }
 
 /**
@@ -12545,9 +13430,40 @@ export interface TokenRuleEntryValue {
 }
 
 /**
+ * 限流Header数据结构
+ */
+export interface LimitHeader {
+  /**
+   * key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 匹配方式，支持EXACT(等于), REGEX（正则） , IN（属于） , NOT_IN（不属于）, CONTAINS（包含）, NOT_CONTAINS（不包含）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
  * ModifyOwaspWhiteRule返回参数结构体
  */
 export interface ModifyOwaspWhiteRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBotIdRule返回参数结构体
+ */
+export interface ModifyBotIdRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12762,6 +13678,28 @@ export interface CdcRegion {
 }
 
 /**
+ * 带有请求方式的apiname结构体
+ */
+export interface ApiNameMethod {
+  /**
+   * api名称
+   */
+  ApiName?: string
+  /**
+   * api请求方式
+   */
+  Method?: string
+  /**
+   * api近30天请求数量
+   */
+  Count?: number
+  /**
+   * api标签
+   */
+  Label?: Array<string>
+}
+
+/**
  * GetAttackTotalCount返回参数结构体
  */
 export interface GetAttackTotalCountResponse {
@@ -12957,6 +13895,28 @@ export interface DescribeAttackTypeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * api安全用户自定义场景规则结构体
+ */
+export interface ApiSecSceneRuleEntry {
+  /**
+   * 匹配字段
+   */
+  Key?: string
+  /**
+   * 匹配值
+   */
+  Value?: Array<string>
+  /**
+   * 操作符
+   */
+  Operate?: string
+  /**
+   * 当匹配字段是get参数值，post参数值，cookie参数值，header参数值，rsp参数值的时候，可填充此字段
+   */
+  Name?: string
 }
 
 /**
@@ -13364,13 +14324,19 @@ export interface DescribeRuleLimitRequest {
 }
 
 /**
- * ModifyDomainPostAction返回参数结构体
+ * 限流方法数据结构
  */
-export interface ModifyDomainPostActionResponse {
+export interface LimitMethod {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 需要限流的请求方式
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Method?: string
+  /**
+   * 匹配方式，支持EXACT(等于), REGEX（正则） , IN（属于） , NOT_IN（不属于）, CONTAINS（包含）, NOT_CONTAINS（不包含）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
 }
 
 /**
@@ -13557,6 +14523,56 @@ export interface DescribeBotSceneOverviewRequest {
    * 域名
    */
   Domain: string
+}
+
+/**
+ * DescribeRateLimitsV2请求参数结构体
+ */
+export interface DescribeRateLimitsV2Request {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 限流规则ID
+   */
+  Id?: number
+  /**
+   * 规则名
+   */
+  Name?: string
+  /**
+   * 限流接口名
+   */
+  Method?: string
+  /**
+   * 限流对象，可选API、Domain
+   */
+  LimitObject?: string
+  /**
+   * 规则开关，0表示关闭，1表示开启
+   */
+  Status?: number
+  /**
+   * 排序方式，可选desc、asc
+   */
+  Order?: string
+  /**
+   * 排序字段，可选Priority、Timestamp、ID
+   */
+  By?: string
+  /**
+   * 分页的起始位置
+   */
+  Offset?: number
+  /**
+   * 每页行数
+   */
+  Limit?: number
+  /**
+   * 过滤器
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**

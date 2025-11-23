@@ -19,89 +19,93 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeVcubeApplicationAndLicenseRequest,
-  CreateLicenseResponse,
-  CreateApplicationAndVideoResponse,
-  CreateApplicationAndBindLicenseResponse,
-  ModifyFormalApplicationResponse,
+  ModifyXMagicResponse,
   XMagicResourceSimpleInfo,
-  DescribeXMagicResourceListRequest,
-  DescribeVcubeResourcesListRequest,
-  DescribeTrialFeatureResponse,
-  CreateTrialLicenseResponse,
-  DescribeUserConfigResponse,
-  RenewTestXMagicResponse,
-  RenewVideoResponse,
-  UpdateXMagicRequest,
-  DescribeVcubeResourcesRequest,
-  CreateLicenseRequest,
-  CreateTrialApplicationAndLicenseRequest,
-  ModifyFormalApplicationRequest,
-  DescribeLicenseListRequest,
-  DescribeSTSRequest,
-  RenewLicenseRequest,
-  LicenseResourceInfo,
+  DeleteApplicationAndWebPlayerLicenseResponse,
+  DeleteApplicationAndVideoLicenseResponse,
   LicenseResourceSimpleInfo,
-  RenewLicenseResponse,
-  DescribeVcubeApplicationAndPlayListRequest,
-  XMagicTrial,
   DescribeVcubeApplicationAndXMagicListRequest,
   DescribeVcubeResourcesListResponse,
-  License,
-  DescribeLicenseListResponse,
   ModifyApplicationResponse,
-  ModifyXMagicRequest,
-  XMagicResource,
-  RenewResource,
-  DescribeVcubeResourcesResponse,
-  DescribeNewsRequest,
-  CreateTestXMagicResponse,
-  DescribeUserConfigRequest,
+  RenewVideoResponse,
+  XMagicTrial,
   RenewTestXMagicRequest,
-  UpdateXMagicResponse,
-  ModifyLicenseRequest,
-  CreateActivityLicenseResponse,
-  UpdateTestXMagicResponse,
+  UpdateTrialLicenseResponse,
+  CreateXMagicRequest,
+  RenewLicenseResponse,
+  CreateActivityLicenseRequest,
+  XMagicSimpleInfo,
+  CreateTrialApplicationAndLicenseRequest,
+  CreateApplicationAndBindLicenseRequest,
+  DescribeFeatureListResponse,
+  CreateApplicationAndVideoResponse,
+  DescribeTrialFeatureResponse,
+  RenewTestXMagicResponse,
+  CreateLicenseRequest,
+  DeleteApplicationAndWebPlayerLicenseRequest,
+  ModifyFormalApplicationRequest,
+  DescribeSTSRequest,
+  RenewLicenseRequest,
+  RenewResource,
+  ModifyPresetApplicationRequest,
+  DescribeNewsRequest,
+  ModifyXMagicRequest,
+  CreateTestXMagicRequest,
+  DescribeUserConfigRequest,
   CreateTrialApplicationAndLicenseResponse,
   DescribeXMagicResourceRequest,
-  ModifyPresetApplicationResponse,
-  CreateXMagicResponse,
-  ModifyPresetApplicationRequest,
-  AppInfo,
-  DescribeNewsResponse,
-  DescribeSTSResponse,
-  Package,
-  DescribeXMagicResourceResponse,
-  DescribeVcubeApplicationAndPlayListResponse,
-  VideoFeature,
-  Feature,
+  CreateTrialLicenseResponse,
+  XMagicInfo,
   ModifyTrialLicenseResponse,
-  UpdateTrialLicenseResponse,
-  ModifyApplicationRequest,
-  CreateXMagicRequest,
-  RenewVideoRequest,
-  CreateApplicationAndVideoRequest,
-  DescribeVcubeApplicationAndLicenseResponse,
-  CreateTestXMagicRequest,
   DescribeVcubeApplicationAndXMagicListResponse,
   CreateTrialLicenseRequest,
-  XMagicSimpleInfo,
-  XMagicInfo,
-  DescribeFeatureListRequest,
-  ApplicationInfo,
-  CreateActivityLicenseRequest,
-  UpdateTrialLicenseRequest,
-  UpdateTestXMagicRequest,
+  XMagicFeature,
   ModifyLicenseResponse,
   CreateApplicationAndWebPlayerLicenseResponse,
   ModifyTrialLicenseRequest,
-  XMagicFeature,
-  ModifyXMagicResponse,
-  CreateApplicationAndWebPlayerLicenseRequest,
-  CreateApplicationAndBindLicenseRequest,
-  NewsInfo,
-  DescribeFeatureListResponse,
+  DeleteApplicationAndVideoLicenseRequest,
+  CreateApplicationAndVideoRequest,
   DescribeXMagicResourceListResponse,
   DescribeTrialFeatureRequest,
+  CreateLicenseResponse,
+  CreateApplicationAndBindLicenseResponse,
+  ModifyFormalApplicationResponse,
+  DescribeVcubeResourcesResponse,
+  DescribeVcubeResourcesRequest,
+  LicenseResourceInfo,
+  XMagicResource,
+  DescribeLicenseListResponse,
+  DescribeXMagicResourceListRequest,
+  CreateTestXMagicResponse,
+  CreateActivityLicenseResponse,
+  AppInfo,
+  DescribeVcubeApplicationAndPlayListResponse,
+  UpdateXMagicResponse,
+  VideoFeature,
+  ModifyApplicationRequest,
+  UpdateTestXMagicResponse,
+  ApplicationInfo,
+  DescribeFeatureListRequest,
+  UpdateTrialLicenseRequest,
+  CreateApplicationAndWebPlayerLicenseRequest,
+  DescribeVcubeResourcesListRequest,
+  Feature,
+  DescribeUserConfigResponse,
+  UpdateXMagicRequest,
+  DescribeLicenseListRequest,
+  DescribeVcubeApplicationAndPlayListRequest,
+  ModifyLicenseRequest,
+  NewsInfo,
+  ModifyPresetApplicationResponse,
+  CreateXMagicResponse,
+  DescribeNewsResponse,
+  License,
+  Package,
+  RenewVideoRequest,
+  DescribeVcubeApplicationAndLicenseResponse,
+  DescribeSTSResponse,
+  DescribeXMagicResourceResponse,
+  UpdateTestXMagicRequest,
 } from "./vcube_models"
 
 /**
@@ -121,6 +125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTrialLicenseResponse) => void
   ): Promise<ModifyTrialLicenseResponse> {
     return this.request("ModifyTrialLicense", req, cb)
+  }
+
+  /**
+   * 删除web播放器license和应用
+   */
+  async DeleteApplicationAndWebPlayerLicense(
+    req: DeleteApplicationAndWebPlayerLicenseRequest,
+    cb?: (error: string, rep: DeleteApplicationAndWebPlayerLicenseResponse) => void
+  ): Promise<DeleteApplicationAndWebPlayerLicenseResponse> {
+    return this.request("DeleteApplicationAndWebPlayerLicense", req, cb)
   }
 
   /**
@@ -144,13 +158,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建应用并绑定license或者XMagic
+   * 查询产品动态
    */
-  async CreateApplicationAndBindLicense(
-    req: CreateApplicationAndBindLicenseRequest,
-    cb?: (error: string, rep: CreateApplicationAndBindLicenseResponse) => void
-  ): Promise<CreateApplicationAndBindLicenseResponse> {
-    return this.request("CreateApplicationAndBindLicense", req, cb)
+  async DescribeNews(
+    req: DescribeNewsRequest,
+    cb?: (error: string, rep: DescribeNewsResponse) => void
+  ): Promise<DescribeNewsResponse> {
+    return this.request("DescribeNews", req, cb)
   }
 
   /**
@@ -251,6 +265,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLicenseResponse) => void
   ): Promise<ModifyLicenseResponse> {
     return this.request("ModifyLicense", req, cb)
+  }
+
+  /**
+   * 删除视频播放器 License 和相关应用
+   */
+  async DeleteApplicationAndVideoLicense(
+    req?: DeleteApplicationAndVideoLicenseRequest,
+    cb?: (error: string, rep: DeleteApplicationAndVideoLicenseResponse) => void
+  ): Promise<DeleteApplicationAndVideoLicenseResponse> {
+    return this.request("DeleteApplicationAndVideoLicense", req, cb)
   }
 
   /**
@@ -434,13 +458,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询产品动态
+   * 创建应用并绑定license或者XMagic
    */
-  async DescribeNews(
-    req: DescribeNewsRequest,
-    cb?: (error: string, rep: DescribeNewsResponse) => void
-  ): Promise<DescribeNewsResponse> {
-    return this.request("DescribeNews", req, cb)
+  async CreateApplicationAndBindLicense(
+    req: CreateApplicationAndBindLicenseRequest,
+    cb?: (error: string, rep: CreateApplicationAndBindLicenseResponse) => void
+  ): Promise<CreateApplicationAndBindLicenseResponse> {
+    return this.request("CreateApplicationAndBindLicense", req, cb)
   }
 
   /**

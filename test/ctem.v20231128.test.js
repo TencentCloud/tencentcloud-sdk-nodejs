@@ -18,9 +18,29 @@ const client = new tencentcloud.ctem.v20231128.Client({
 })
 describe("ctem.v20231128.test.js", function () {
 
+it("ctem.v20231128.CreateWechatApplet", async function () {
+    try {
+       const data = await client.CreateWechatApplet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeNetDisks", async function () {
     try {
        const data = await client.DescribeNetDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateManage", async function () {
+    try {
+       const data = await client.CreateManage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +68,69 @@ it("ctem.v20231128.DescribeLeakageDatas", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeHttps", async function () {
+    try {
+       const data = await client.DescribeHttps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.ModifyCustomer", async function () {
     try {
        const data = await client.ModifyCustomer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateAsset", async function () {
+    try {
+       const data = await client.CreateAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteManages", async function () {
+    try {
+       const data = await client.DeleteManages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteHttps", async function () {
+    try {
+       const data = await client.DeleteHttps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateSuspiciousAsset", async function () {
+    try {
+       const data = await client.CreateSuspiciousAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteSuspiciousAssets", async function () {
+    try {
+       const data = await client.DeleteSuspiciousAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +158,39 @@ it("ctem.v20231128.DescribeDomains", async function () {
     }
 })
 
+it("ctem.v20231128.DescribeAssets", async function () {
+    try {
+       const data = await client.DescribeAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteSubDomains", async function () {
+    try {
+       const data = await client.DeleteSubDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeVuls", async function () {
     try {
        const data = await client.DescribeVuls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeSeeds", async function () {
+    try {
+       const data = await client.DescribeSeeds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +208,19 @@ it("ctem.v20231128.DescribeConfigs", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeWechatApplets", async function () {
+it("ctem.v20231128.DeleteWechatOfficialAccounts", async function () {
     try {
-       const data = await client.DescribeWechatApplets({})
+       const data = await client.DeleteWechatOfficialAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteWechatApplets", async function () {
+    try {
+       const data = await client.DeleteWechatApplets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +238,29 @@ it("ctem.v20231128.DescribeFakeWebsites", async function () {
     }
 })
 
+it("ctem.v20231128.IgnoreData", async function () {
+    try {
+       const data = await client.IgnoreData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeSensitiveInfos", async function () {
     try {
        const data = await client.DescribeSensitiveInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateSubDomain", async function () {
+    try {
+       const data = await client.CreateSubDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +308,26 @@ it("ctem.v20231128.DescribeLeakageEmails", async function () {
     }
 })
 
+it("ctem.v20231128.DeletePorts", async function () {
+    try {
+       const data = await client.DeletePorts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreatePort", async function () {
+    try {
+       const data = await client.CreatePort({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctem.v20231128.DescribeFakeApps", async function () {
     try {
        const data = await client.DescribeFakeApps({})
@@ -191,6 +351,16 @@ it("ctem.v20231128.ModifyLabel", async function () {
 it("ctem.v20231128.DescribeApps", async function () {
     try {
        const data = await client.DescribeApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateWechatOfficialAccount", async function () {
+    try {
+       const data = await client.CreateWechatOfficialAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +428,9 @@ it("ctem.v20231128.CreateJobRecord", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeHttps", async function () {
+it("ctem.v20231128.CreateHttp", async function () {
     try {
-       const data = await client.DescribeHttps({})
+       const data = await client.CreateHttp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +438,69 @@ it("ctem.v20231128.DescribeHttps", async function () {
     }
 })
 
-it("ctem.v20231128.DescribeAssets", async function () {
+it("ctem.v20231128.DeleteApps", async function () {
     try {
-       const data = await client.DescribeAssets({})
+       const data = await client.DeleteApps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateSeeds", async function () {
+    try {
+       const data = await client.CreateSeeds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteEnterprises", async function () {
+    try {
+       const data = await client.DeleteEnterprises({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.ModifySeedStatus", async function () {
+    try {
+       const data = await client.ModifySeedStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteDomains", async function () {
+    try {
+       const data = await client.DeleteDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteAssets", async function () {
+    try {
+       const data = await client.DeleteAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateApp", async function () {
+    try {
+       const data = await client.CreateApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +511,16 @@ it("ctem.v20231128.DescribeAssets", async function () {
 it("ctem.v20231128.DescribeDarkWebs", async function () {
     try {
        const data = await client.DescribeDarkWebs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.CreateDomain", async function () {
+    try {
+       const data = await client.CreateDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +601,26 @@ it("ctem.v20231128.DescribeJobRecords", async function () {
 it("ctem.v20231128.DescribeWeakPasswords", async function () {
     try {
        const data = await client.DescribeWeakPasswords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DescribeWechatApplets", async function () {
+    try {
+       const data = await client.DescribeWechatApplets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ctem.v20231128.DeleteSeeds", async function () {
+    try {
+       const data = await client.DeleteSeeds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -20,18 +20,24 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeFakeWechatOfficialsResponse,
   CreateEnterpriseResponse,
-  DescribeManagesRequest,
+  CreateAssetResponse,
   DescribeFakeAppsRequest,
   DescribeJobRecordsResponse,
   DisplayLeakageCode,
+  CreateWechatAppletRequest,
   DescribeAppsRequest,
   DescribeSensitiveInfosRequest,
+  DeleteAssetsRequest,
   DisplayAsset,
   DescribeWechatAppletsResponse,
   DescribeCustomersRequest,
   ModifyLabelRequest,
   DisplayLeakageData,
   DescribeFakeWebsitesResponse,
+  CreatePortResponse,
+  DeletePortsResponse,
+  DeleteManagesRequest,
+  DescribeManagesRequest,
   DisplayWechatOfficialAccount,
   DisplayConfig,
   DescribeNetDisksResponse,
@@ -39,78 +45,123 @@ import {
   DescribeCustomersResponse,
   DescribeDomainsResponse,
   DisplayDarkWeb,
+  ModifySeedStatusResponse,
+  DeleteEnterprisesResponse,
+  CreateSeedsRequest,
   DescribePortsResponse,
+  DeleteWechatAppletsRequest,
   DescribeSensitiveInfosResponse,
   DescribeConfigsResponse,
-  IdndValue,
+  CreateAppResponse,
   DisplayLeakageEmail,
+  DeleteSubDomainsResponse,
+  CreateSeedsResponse,
+  DeleteSuspiciousAssetsRequest,
   DescribeFakeWebsitesRequest,
+  IdndValue,
   ModifyCustomerResponse,
   CreateJobRecordRequest,
   DescribeSuspiciousAssetsResponse,
+  DescribeSeedsResponse,
   DisplayJobRecordDetail,
   DescribeAssetsRequest,
   DescribeJobRecordDetailsRequest,
   DescribeSubDomainsRequest,
   DisplayFakeWebsite,
   DescribeVulsResponse,
-  DescribeGithubsResponse,
+  CreateSuspiciousAssetResponse,
   DescribeLeakageEmailsResponse,
+  CreateHttpRequest,
   DescribeAssetsResponse,
+  DeleteAssetsResponse,
+  DeletePortsRequest,
   DisplayEnterprise,
+  DeleteManagesResponse,
   StopJobRecordRequest,
   DisplaySensitiveInfo,
   ModifyLabelResponse,
   DescribeEnterprisesRequest,
   DescribeLeakageCodesRequest,
+  DeleteHttpsRequest,
   DisplayFakeMiniProgram,
   DisplayFakeWechatOfficial,
+  CreateAppRequest,
   DisplayHttp,
+  CreateDomainResponse,
+  DeleteWechatOfficialAccountsRequest,
+  DeleteSeedsResponse,
   DescribePortsRequest,
   DisplayWechatApplet,
   DescribeGithubsRequest,
-  DescribeWechatOfficialAccountsResponse,
+  DescribeConfigsRequest,
+  DeleteSeedsRequest,
+  CreateHttpResponse,
+  DescribeSeedsRequest,
+  CreateSubDomainRequest,
   DescribeWechatOfficialAccountsRequest,
   DisplayFakeApp,
   DescribeDarkWebsRequest,
   DescribeHttpsRequest,
   DescribeEnterprisesResponse,
+  DeleteSuspiciousAssetsResponse,
   DescribeNetDisksRequest,
+  IgnoreDataRequest,
+  CreateDomainRequest,
+  DeleteDomainsRequest,
   ModifyCustomerRequest,
   DisplayApp,
   DescribeApiSecsResponse,
+  CreateAssetRequest,
   DisplayNetDisk,
   DisplaySubDomain,
+  DeleteHttpsResponse,
+  CreatePortRequest,
   DescribeSuspiciousAssetsRequest,
+  IgnoreDataResponse,
+  CreateWechatAppletResponse,
   Filter,
   DisplayVul,
   DescribeWechatAppletsRequest,
   DescribeFakeAppsResponse,
   DisplayWeakPassword,
   DescribeLeakageEmailsRequest,
+  DescribeGithubsResponse,
   CreateCustomerResponse,
+  CreateWechatOfficialAccountRequest,
+  DeleteWechatOfficialAccountsResponse,
   DescribeManagesResponse,
-  DescribeConfigsRequest,
   CreateEnterpriseRequest,
+  DeleteDomainsResponse,
   DescribeWeakPasswordsRequest,
   DisplayPort,
   StopJobRecordResponse,
+  CreateManageResponse,
   DescribeFakeMiniProgramsRequest,
+  CreateManageRequest,
   DisplayJobRecord,
+  ModifySeedStatusRequest,
   CreateCustomerRequest,
+  DeleteEnterprisesRequest,
   DescribeLeakageDatasRequest,
   DescribeJobRecordDetailsResponse,
+  DeleteSubDomainsRequest,
   DescribeVulsRequest,
+  CreateWechatOfficialAccountResponse,
   DisplayGithub,
   DisplayApiSec,
+  CreateSubDomainResponse,
   DisplayToolCommon,
+  DeleteAppsResponse,
   Customer,
   DisplayManage,
   DisplayDomain,
   DescribeFakeMiniProgramsResponse,
   DescribeSubDomainsResponse,
   DescribeHttpsResponse,
+  DescribeWechatOfficialAccountsResponse,
   DescribeLeakageDatasResponse,
+  DeleteWechatAppletsResponse,
+  CreateSuspiciousAssetRequest,
   DescribeAppsResponse,
   DescribeWeakPasswordsResponse,
   DescribeFakeWechatOfficialsRequest,
@@ -119,6 +170,8 @@ import {
   DescribeJobRecordsRequest,
   DescribeLeakageCodesResponse,
   DescribeDomainsRequest,
+  DisplaySeed,
+  DeleteAppsRequest,
   JobRecordProgress,
   DescribeDarkWebsResponse,
 } from "./ctem_models"
@@ -133,6 +186,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加微信小程序资产
+   */
+  async CreateWechatApplet(
+    req: CreateWechatAppletRequest,
+    cb?: (error: string, rep: CreateWechatAppletResponse) => void
+  ): Promise<CreateWechatAppletResponse> {
+    return this.request("CreateWechatApplet", req, cb)
+  }
+
+  /**
    * 查看网盘泄露数据
    */
   async DescribeNetDisks(
@@ -140,6 +203,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNetDisksResponse) => void
   ): Promise<DescribeNetDisksResponse> {
     return this.request("DescribeNetDisks", req, cb)
+  }
+
+  /**
+   * 添加后台数据
+   */
+  async CreateManage(
+    req: CreateManageRequest,
+    cb?: (error: string, rep: CreateManageResponse) => void
+  ): Promise<CreateManageResponse> {
+    return this.request("CreateManage", req, cb)
   }
 
   /**
@@ -163,6 +236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看http数据
+   */
+  async DescribeHttps(
+    req: DescribeHttpsRequest,
+    cb?: (error: string, rep: DescribeHttpsResponse) => void
+  ): Promise<DescribeHttpsResponse> {
+    return this.request("DescribeHttps", req, cb)
+  }
+
+  /**
    * 编辑企业
    */
   async ModifyCustomer(
@@ -170,6 +253,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomerResponse) => void
   ): Promise<ModifyCustomerResponse> {
     return this.request("ModifyCustomer", req, cb)
+  }
+
+  /**
+   * 添加主机资产
+   */
+  async CreateAsset(
+    req: CreateAssetRequest,
+    cb?: (error: string, rep: CreateAssetResponse) => void
+  ): Promise<CreateAssetResponse> {
+    return this.request("CreateAsset", req, cb)
+  }
+
+  /**
+   * 删除后台数据
+   */
+  async DeleteManages(
+    req: DeleteManagesRequest,
+    cb?: (error: string, rep: DeleteManagesResponse) => void
+  ): Promise<DeleteManagesResponse> {
+    return this.request("DeleteManages", req, cb)
+  }
+
+  /**
+   * 删除网站资产数据
+   */
+  async DeleteHttps(
+    req: DeleteHttpsRequest,
+    cb?: (error: string, rep: DeleteHttpsResponse) => void
+  ): Promise<DeleteHttpsResponse> {
+    return this.request("DeleteHttps", req, cb)
+  }
+
+  /**
+   * 添加影子资产
+   */
+  async CreateSuspiciousAsset(
+    req: CreateSuspiciousAssetRequest,
+    cb?: (error: string, rep: CreateSuspiciousAssetResponse) => void
+  ): Promise<CreateSuspiciousAssetResponse> {
+    return this.request("CreateSuspiciousAsset", req, cb)
+  }
+
+  /**
+   * 删除影子资产数据
+   */
+  async DeleteSuspiciousAssets(
+    req: DeleteSuspiciousAssetsRequest,
+    cb?: (error: string, rep: DeleteSuspiciousAssetsResponse) => void
+  ): Promise<DeleteSuspiciousAssetsResponse> {
+    return this.request("DeleteSuspiciousAssets", req, cb)
   }
 
   /**
@@ -193,6 +326,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看主机资产
+   */
+  async DescribeAssets(
+    req: DescribeAssetsRequest,
+    cb?: (error: string, rep: DescribeAssetsResponse) => void
+  ): Promise<DescribeAssetsResponse> {
+    return this.request("DescribeAssets", req, cb)
+  }
+
+  /**
+   * 删除子域名数据
+   */
+  async DeleteSubDomains(
+    req: DeleteSubDomainsRequest,
+    cb?: (error: string, rep: DeleteSubDomainsResponse) => void
+  ): Promise<DeleteSubDomainsResponse> {
+    return this.request("DeleteSubDomains", req, cb)
+  }
+
+  /**
    * 查看漏洞数据
    */
   async DescribeVuls(
@@ -200,6 +353,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulsResponse) => void
   ): Promise<DescribeVulsResponse> {
     return this.request("DescribeVuls", req, cb)
+  }
+
+  /**
+   * 查看种子列表
+   */
+  async DescribeSeeds(
+    req: DescribeSeedsRequest,
+    cb?: (error: string, rep: DescribeSeedsResponse) => void
+  ): Promise<DescribeSeedsResponse> {
+    return this.request("DescribeSeeds", req, cb)
   }
 
   /**
@@ -213,13 +376,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看微信小程序
+   * 删除微信公众号数据
    */
-  async DescribeWechatApplets(
-    req: DescribeWechatAppletsRequest,
-    cb?: (error: string, rep: DescribeWechatAppletsResponse) => void
-  ): Promise<DescribeWechatAppletsResponse> {
-    return this.request("DescribeWechatApplets", req, cb)
+  async DeleteWechatOfficialAccounts(
+    req: DeleteWechatOfficialAccountsRequest,
+    cb?: (error: string, rep: DeleteWechatOfficialAccountsResponse) => void
+  ): Promise<DeleteWechatOfficialAccountsResponse> {
+    return this.request("DeleteWechatOfficialAccounts", req, cb)
+  }
+
+  /**
+   * 删除微信小程序数据
+   */
+  async DeleteWechatApplets(
+    req: DeleteWechatAppletsRequest,
+    cb?: (error: string, rep: DeleteWechatAppletsResponse) => void
+  ): Promise<DeleteWechatAppletsResponse> {
+    return this.request("DeleteWechatApplets", req, cb)
   }
 
   /**
@@ -233,6 +406,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 忽略数据
+   */
+  async IgnoreData(
+    req: IgnoreDataRequest,
+    cb?: (error: string, rep: IgnoreDataResponse) => void
+  ): Promise<IgnoreDataResponse> {
+    return this.request("IgnoreData", req, cb)
+  }
+
+  /**
    * 查看敏感信息泄露数据
    */
   async DescribeSensitiveInfos(
@@ -240,6 +423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSensitiveInfosResponse) => void
   ): Promise<DescribeSensitiveInfosResponse> {
     return this.request("DescribeSensitiveInfos", req, cb)
+  }
+
+  /**
+   * 添加子域名数据
+   */
+  async CreateSubDomain(
+    req: CreateSubDomainRequest,
+    cb?: (error: string, rep: CreateSubDomainResponse) => void
+  ): Promise<CreateSubDomainResponse> {
+    return this.request("CreateSubDomain", req, cb)
   }
 
   /**
@@ -283,6 +476,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除端口数据
+   */
+  async DeletePorts(
+    req: DeletePortsRequest,
+    cb?: (error: string, rep: DeletePortsResponse) => void
+  ): Promise<DeletePortsResponse> {
+    return this.request("DeletePorts", req, cb)
+  }
+
+  /**
+   * 添加端口服务资产
+   */
+  async CreatePort(
+    req: CreatePortRequest,
+    cb?: (error: string, rep: CreatePortResponse) => void
+  ): Promise<CreatePortResponse> {
+    return this.request("CreatePort", req, cb)
+  }
+
+  /**
    * 查询仿冒应用
    */
   async DescribeFakeApps(
@@ -310,6 +523,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppsResponse) => void
   ): Promise<DescribeAppsResponse> {
     return this.request("DescribeApps", req, cb)
+  }
+
+  /**
+   * 添加微信公众号资产
+   */
+  async CreateWechatOfficialAccount(
+    req: CreateWechatOfficialAccountRequest,
+    cb?: (error: string, rep: CreateWechatOfficialAccountResponse) => void
+  ): Promise<CreateWechatOfficialAccountResponse> {
+    return this.request("CreateWechatOfficialAccount", req, cb)
   }
 
   /**
@@ -373,23 +596,83 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看http数据
+   * 添加网站资产
    */
-  async DescribeHttps(
-    req: DescribeHttpsRequest,
-    cb?: (error: string, rep: DescribeHttpsResponse) => void
-  ): Promise<DescribeHttpsResponse> {
-    return this.request("DescribeHttps", req, cb)
+  async CreateHttp(
+    req: CreateHttpRequest,
+    cb?: (error: string, rep: CreateHttpResponse) => void
+  ): Promise<CreateHttpResponse> {
+    return this.request("CreateHttp", req, cb)
   }
 
   /**
-   * 查看主机资产
+   * 删除APP数据
    */
-  async DescribeAssets(
-    req: DescribeAssetsRequest,
-    cb?: (error: string, rep: DescribeAssetsResponse) => void
-  ): Promise<DescribeAssetsResponse> {
-    return this.request("DescribeAssets", req, cb)
+  async DeleteApps(
+    req: DeleteAppsRequest,
+    cb?: (error: string, rep: DeleteAppsResponse) => void
+  ): Promise<DeleteAppsResponse> {
+    return this.request("DeleteApps", req, cb)
+  }
+
+  /**
+   * 创建种子
+   */
+  async CreateSeeds(
+    req: CreateSeedsRequest,
+    cb?: (error: string, rep: CreateSeedsResponse) => void
+  ): Promise<CreateSeedsResponse> {
+    return this.request("CreateSeeds", req, cb)
+  }
+
+  /**
+   * 删除企业架构数据
+   */
+  async DeleteEnterprises(
+    req: DeleteEnterprisesRequest,
+    cb?: (error: string, rep: DeleteEnterprisesResponse) => void
+  ): Promise<DeleteEnterprisesResponse> {
+    return this.request("DeleteEnterprises", req, cb)
+  }
+
+  /**
+   * 修改种子状态
+   */
+  async ModifySeedStatus(
+    req: ModifySeedStatusRequest,
+    cb?: (error: string, rep: ModifySeedStatusResponse) => void
+  ): Promise<ModifySeedStatusResponse> {
+    return this.request("ModifySeedStatus", req, cb)
+  }
+
+  /**
+   * 删除主域名数据
+   */
+  async DeleteDomains(
+    req: DeleteDomainsRequest,
+    cb?: (error: string, rep: DeleteDomainsResponse) => void
+  ): Promise<DeleteDomainsResponse> {
+    return this.request("DeleteDomains", req, cb)
+  }
+
+  /**
+   * 删除主机资产数据
+   */
+  async DeleteAssets(
+    req: DeleteAssetsRequest,
+    cb?: (error: string, rep: DeleteAssetsResponse) => void
+  ): Promise<DeleteAssetsResponse> {
+    return this.request("DeleteAssets", req, cb)
+  }
+
+  /**
+   * 添加APP资产
+   */
+  async CreateApp(
+    req: CreateAppRequest,
+    cb?: (error: string, rep: CreateAppResponse) => void
+  ): Promise<CreateAppResponse> {
+    return this.request("CreateApp", req, cb)
   }
 
   /**
@@ -400,6 +683,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDarkWebsResponse) => void
   ): Promise<DescribeDarkWebsResponse> {
     return this.request("DescribeDarkWebs", req, cb)
+  }
+
+  /**
+   * 添加主域名数据
+   */
+  async CreateDomain(
+    req: CreateDomainRequest,
+    cb?: (error: string, rep: CreateDomainResponse) => void
+  ): Promise<CreateDomainResponse> {
+    return this.request("CreateDomain", req, cb)
   }
 
   /**
@@ -433,7 +726,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加企业架构数据
+   * 添加企业架构资产
    */
   async CreateEnterprise(
     req: CreateEnterpriseRequest,
@@ -480,5 +773,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWeakPasswordsResponse) => void
   ): Promise<DescribeWeakPasswordsResponse> {
     return this.request("DescribeWeakPasswords", req, cb)
+  }
+
+  /**
+   * 查看微信小程序
+   */
+  async DescribeWechatApplets(
+    req: DescribeWechatAppletsRequest,
+    cb?: (error: string, rep: DescribeWechatAppletsResponse) => void
+  ): Promise<DescribeWechatAppletsResponse> {
+    return this.request("DescribeWechatApplets", req, cb)
+  }
+
+  /**
+   * 删除种子
+   */
+  async DeleteSeeds(
+    req: DeleteSeedsRequest,
+    cb?: (error: string, rep: DeleteSeedsResponse) => void
+  ): Promise<DeleteSeedsResponse> {
+    return this.request("DeleteSeeds", req, cb)
   }
 }

@@ -28,6 +28,16 @@ it("vcube.v20220410.ModifyTrialLicense", async function () {
     }
 })
 
+it("vcube.v20220410.DeleteApplicationAndWebPlayerLicense", async function () {
+    try {
+       const data = await client.DeleteApplicationAndWebPlayerLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vcube.v20220410.RenewTestXMagic", async function () {
     try {
        const data = await client.RenewTestXMagic({})
@@ -48,9 +58,9 @@ it("vcube.v20220410.DescribeVcubeResources", async function () {
     }
 })
 
-it("vcube.v20220410.CreateApplicationAndBindLicense", async function () {
+it("vcube.v20220410.DescribeNews", async function () {
     try {
-       const data = await client.CreateApplicationAndBindLicense({})
+       const data = await client.DescribeNews({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +161,16 @@ it("vcube.v20220410.CreateTrialLicense", async function () {
 it("vcube.v20220410.ModifyLicense", async function () {
     try {
        const data = await client.ModifyLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vcube.v20220410.DeleteApplicationAndVideoLicense", async function () {
+    try {
+       const data = await client.DeleteApplicationAndVideoLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +358,9 @@ it("vcube.v20220410.DescribeFeatureList", async function () {
     }
 })
 
-it("vcube.v20220410.DescribeNews", async function () {
+it("vcube.v20220410.CreateApplicationAndBindLicense", async function () {
     try {
-       const data = await client.DescribeNews({})
+       const data = await client.CreateApplicationAndBindLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

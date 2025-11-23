@@ -768,30 +768,6 @@ export interface DeletePersonRequest {
 }
 
 /**
- * DetectLiveFace返回参数结构体
- */
-export interface DetectLiveFaceResponse {
-  /**
-   * 活体打分，取值范围 [0,100]，分数一般落于[80, 100]区间内，0分也为常见值。推荐相大于 87 时可判断为活体。可根据具体场景自行调整阈值。
-本字段当且仅当FaceModelVersion为2.0时才具备参考意义。
-   */
-  Score?: number
-  /**
-   * 人脸识别所用的算法模型版本。
-   */
-  FaceModelVersion?: string
-  /**
-   * 活体检测是否通过。
-本字段只有FaceModelVersion为3.0时才具备参考意义。
-   */
-  IsLiveness?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteFace请求参数结构体
  */
 export interface DeleteFaceRequest {
@@ -849,40 +825,6 @@ export interface UpgradeGroupFaceModelVersionRequest {
    * 需要升级至的算法模型版本。默认为最新版本。不可逆向升级
    */
   FaceModelVersion: string
-}
-
-/**
- * DetectLiveFace请求参数结构体
- */
-export interface DetectLiveFaceRequest {
-  /**
-   * 图片 base64 数据，base64 编码后大小不可超过5M。
-jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。（图片的宽高比请接近3:4，不符合宽高比的图片返回的分值不具备参考意义）。
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-   */
-  Image?: string
-  /**
-   * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
-Url、Image必须提供一个，如果都提供，只使用 Url。 
-（图片的宽高比请接近 3:4，不符合宽高比的图片返回的分值不具备参考意义） 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-   */
-  Url?: string
-  /**
-   * 人脸识别服务所用的算法模型版本。
-
-目前入参支持 “2.0”和“3.0“ 两个输入。
-
-2020年4月2日开始，默认为“3.0”，之前使用过本接口的账号若未填写本参数默认为“2.0”。
-
-2020年11月26日后开通服务的账号仅支持输入“3.0”。
-
-不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。
-   */
-  FaceModelVersion?: string
 }
 
 /**
