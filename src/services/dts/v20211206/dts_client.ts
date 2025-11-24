@@ -21,23 +21,27 @@ import {
   ModifyCompareTaskResponse,
   DescribeSyncJobsResponse,
   ModifyMigrationJobResponse,
+  CreateSyncCompareTaskResponse,
   ResetConsumerGroupOffsetResponse,
   ModifyMigrateRateLimitResponse,
   IsolateMigrateJobResponse,
   SubscribeInfo,
   ModifyMigrateJobSpecRequest,
+  DeleteSyncCompareTaskResponse,
   IsolateSubscribeResponse,
   ModifyConsumerGroupPasswordRequest,
   StepTip,
   ModifySyncRateLimitResponse,
+  DescribeSyncCompareTasksResponse,
   DestroyMigrateJobRequest,
-  ModifySubscribeNameRequest,
+  CreateSyncCompareTaskRequest,
   OffsetTimeMap,
   SkipCheckItemResponse,
   ResumeSyncJobRequest,
   PartitionAssignment,
   RowsCountDifference,
   DifferenceOwnerDetail,
+  DescribeSyncCompareTasksRequest,
   ResizeSyncJobResponse,
   CreateSubscribeCheckJobRequest,
   ResumeMigrateJobResponse,
@@ -63,10 +67,12 @@ import {
   KeyValuePairOption,
   DifferenceData,
   CreateCheckSyncJobRequest,
+  StopSyncCompareRequest,
   DescribeModifyCheckSyncJobResultResponse,
   StartModifySyncJobResponse,
   DescribeSubscribeReturnableRequest,
   DescribeMigrationDetailRequest,
+  StartSyncCompareRequest,
   CreateConsumerGroupRequest,
   ResizeSyncJobRequest,
   DifferenceRowDetail,
@@ -77,8 +83,10 @@ import {
   ResumeSyncJobResponse,
   RecoverMigrateJobResponse,
   ModifyCompareTaskNameResponse,
-  StartSyncJobRequest,
+  IncCompareAbstractInfo,
+  SyncJobInfo,
   StartSubscribeRequest,
+  DescribeSubscribeReturnableResponse,
   ModifyMigrateRuntimeAttributeResponse,
   DescribeOffsetByTimeResponse,
   PauseSyncJobRequest,
@@ -106,6 +114,7 @@ import {
   ContinueSyncJobResponse,
   TradeInfo,
   DifferenceDataDetail,
+  StartSyncCompareResponse,
   DeleteConsumerGroupRequest,
   ModifySubscribeAutoRenewFlagRequest,
   CompleteMigrateJobRequest,
@@ -130,9 +139,11 @@ import {
   SkipSyncCheckItemRequest,
   DescribeModifyCheckSyncJobResultRequest,
   SkipSyncCheckItemResponse,
+  ModifySubscribeNameRequest,
   IsolateSyncJobResponse,
   CreateMigrateCheckJobRequest,
   ModifyConsumerGroupPasswordResponse,
+  ModifySyncCompareTaskResponse,
   DescribeMigrationJobsRequest,
   CompareTaskInfo,
   ModifyConsumerGroupDescriptionRequest,
@@ -162,6 +173,7 @@ import {
   ModifyCompareTaskRequest,
   StopMigrateJobRequest,
   RecoverSyncJobRequest,
+  SubscribeCheckStepTip,
   Database,
   Column,
   JobItem,
@@ -174,6 +186,7 @@ import {
   DescribeConsumerGroupsResponse,
   ModifyMigrateRateLimitRequest,
   CompareTableItem,
+  DescribeSyncCompareReportResponse,
   ConfigureSyncJobResponse,
   CompareViewItem,
   StepInfo,
@@ -198,13 +211,16 @@ import {
   CompareTaskItem,
   ModifyMigrateJobSpecResponse,
   CreateSyncJobResponse,
+  ModifySyncCompareTaskNameRequest,
   CreateCompareTaskRequest,
   ErrInfo,
   StartCompareRequest,
+  StopSyncCompareResponse,
   EndpointItem,
   DescribeMigrationCheckJobRequest,
   DescribeMigrationDetailResponse,
   CreateModifyCheckSyncJobResponse,
+  ModifySyncCompareTaskRequest,
   ModifyMigrateNameRequest,
   CreateSubscribeRequest,
   StartSyncJobResponse,
@@ -212,6 +228,7 @@ import {
   StartSubscribeResponse,
   DistributeRule,
   Objects,
+  DescribeSyncCompareReportRequest,
   DeleteConsumerGroupResponse,
   DBItem,
   DeleteCompareTaskRequest,
@@ -219,7 +236,7 @@ import {
   ResetSyncJobResponse,
   Endpoint,
   ConfigureSubscribeJobRequest,
-  SyncJobInfo,
+  ModifySyncCompareTaskNameResponse,
   DescribeSubscribeCheckJobResponse,
   RoleItem,
   TagFilter,
@@ -229,7 +246,7 @@ import {
   DescribeCompareReportRequest,
   SkippedItem,
   IsolateSubscribeRequest,
-  DescribeSubscribeReturnableResponse,
+  DeleteSyncCompareTaskRequest,
   TagItem,
   RecoverMigrateJobRequest,
   OnlineDDL,
@@ -239,7 +256,7 @@ import {
   ModifyMigrateRuntimeAttributeRequest,
   PauseMigrateJobResponse,
   Table,
-  SubscribeCheckStepTip,
+  StartSyncJobRequest,
   CompareDetailInfo,
   DescribeSubscribeJobsRequest,
   StartMigrateJobResponse,
@@ -467,13 +484,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 结束同步任务，操作后可通过查询同步任务信息接口DescribeSyncJobs，获取操作后的状态。
+   * 查询一致性校验任务列表。通过该接口可查看改任务下所有一致性校验任务。
    */
-  async StopSyncJob(
-    req: StopSyncJobRequest,
-    cb?: (error: string, rep: StopSyncJobResponse) => void
-  ): Promise<StopSyncJobResponse> {
-    return this.request("StopSyncJob", req, cb)
+  async DescribeSyncCompareTasks(
+    req: DescribeSyncCompareTasksRequest,
+    cb?: (error: string, rep: DescribeSyncCompareTasksResponse) => void
+  ): Promise<DescribeSyncCompareTasksResponse> {
+    return this.request("DescribeSyncCompareTasks", req, cb)
   }
 
   /**
@@ -547,6 +564,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 结束同步任务，操作后可通过查询同步任务信息接口DescribeSyncJobs，获取操作后的状态。
+   */
+  async StopSyncJob(
+    req: StopSyncJobRequest,
+    cb?: (error: string, rep: StopSyncJobResponse) => void
+  ): Promise<StopSyncJobResponse> {
+    return this.request("StopSyncJob", req, cb)
+  }
+
+  /**
    * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
    */
   async StartModifySyncJob(
@@ -554,6 +581,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartModifySyncJobResponse) => void
   ): Promise<StartModifySyncJobResponse> {
     return this.request("StartModifySyncJob", req, cb)
+  }
+
+  /**
+   * 重置已经结束的同步任务，重置后可以重新配置启动任务。
+   */
+  async ResetSyncJob(
+    req: ResetSyncJobRequest,
+    cb?: (error: string, rep: ResetSyncJobResponse) => void
+  ): Promise<ResetSyncJobResponse> {
+    return this.request("ResetSyncJob", req, cb)
+  }
+
+  /**
+   * 启动一致性校验任务，启动之前需要先通过接口 [CreateCompareTask](https://cloud.tencent.com/document/product/571/82093) 创建一致性校验任务，启动后可通过接口 [DescribeCompareTasks](https://cloud.tencent.com/document/product/571/82088) 查询一致性校验任务列表来获得启动后的状态
+   */
+  async StartCompare(
+    req: StartCompareRequest,
+    cb?: (error: string, rep: StartCompareResponse) => void
+  ): Promise<StartCompareResponse> {
+    return this.request("StartCompare", req, cb)
   }
 
   /**
@@ -629,13 +676,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动一致性校验任务，启动之前需要先通过接口 [CreateCompareTask](https://cloud.tencent.com/document/product/571/82093) 创建一致性校验任务，启动后可通过接口 [DescribeCompareTasks](https://cloud.tencent.com/document/product/571/82088) 查询一致性校验任务列表来获得启动后的状态
+   * 修改同步一致性校验任务名称
    */
-  async StartCompare(
-    req: StartCompareRequest,
-    cb?: (error: string, rep: StartCompareResponse) => void
-  ): Promise<StartCompareResponse> {
-    return this.request("StartCompare", req, cb)
+  async ModifySyncCompareTaskName(
+    req: ModifySyncCompareTaskNameRequest,
+    cb?: (error: string, rep: ModifySyncCompareTaskNameResponse) => void
+  ): Promise<ModifySyncCompareTaskNameResponse> {
+    return this.request("ModifySyncCompareTaskName", req, cb)
   }
 
   /**
@@ -679,6 +726,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询一致性校验任务详情
+   */
+  async DescribeSyncCompareReport(
+    req: DescribeSyncCompareReportRequest,
+    cb?: (error: string, rep: DescribeSyncCompareReportResponse) => void
+  ): Promise<DescribeSyncCompareReportResponse> {
+    return this.request("DescribeSyncCompareReport", req, cb)
+  }
+
+  /**
    * 本接口(ModifyConsumerGroupDescription)用于修改指定订阅消费组备注。
    */
   async ModifyConsumerGroupDescription(
@@ -699,13 +756,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置已经结束的同步任务，重置后可以重新配置启动任务。
+   * 删除一致性校验任务。当一致性校验任务状态为success、failed、canceled 时可以执行此操作。
    */
-  async ResetSyncJob(
-    req: ResetSyncJobRequest,
-    cb?: (error: string, rep: ResetSyncJobResponse) => void
-  ): Promise<ResetSyncJobResponse> {
-    return this.request("ResetSyncJob", req, cb)
+  async DeleteSyncCompareTask(
+    req: DeleteSyncCompareTaskRequest,
+    cb?: (error: string, rep: DeleteSyncCompareTaskResponse) => void
+  ): Promise<DeleteSyncCompareTaskResponse> {
+    return this.request("DeleteSyncCompareTask", req, cb)
   }
 
   /**
@@ -781,6 +838,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启动一致性校验任务，启动之前需要先通过接口`CreateSyncCompareTask` 创建一致性校验任务，启动后可通过接口`DescribeSyncCompareTasks` 查询一致性校验任务列表来获得启动后的状态
+   */
+  async StartSyncCompare(
+    req: StartSyncCompareRequest,
+    cb?: (error: string, rep: StartSyncCompareResponse) => void
+  ): Promise<StartSyncCompareResponse> {
+    return this.request("StartSyncCompare", req, cb)
+  }
+
+  /**
    * 本接口(DeleteConsumerGroup)用于删除一个订阅任务的消费组。
    */
   async DeleteConsumerGroup(
@@ -839,6 +906,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetSubscribeResponse) => void
   ): Promise<ResetSubscribeResponse> {
     return this.request("ResetSubscribe", req, cb)
+  }
+
+  /**
+   * 修改一致性校验任务，在任务创建后启动之前，可修改一致性校验参数
+   */
+  async ModifySyncCompareTask(
+    req: ModifySyncCompareTaskRequest,
+    cb?: (error: string, rep: ModifySyncCompareTaskResponse) => void
+  ): Promise<ModifySyncCompareTaskResponse> {
+    return this.request("ModifySyncCompareTask", req, cb)
   }
 
   /**
@@ -965,6 +1042,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCompareTaskNameResponse) => void
   ): Promise<ModifyCompareTaskNameResponse> {
     return this.request("ModifyCompareTaskName", req, cb)
+  }
+
+  /**
+   * 终止一致性校验任务
+   */
+  async StopSyncCompare(
+    req: StopSyncCompareRequest,
+    cb?: (error: string, rep: StopSyncCompareResponse) => void
+  ): Promise<StopSyncCompareResponse> {
+    return this.request("StopSyncCompare", req, cb)
+  }
+
+  /**
+   * 本接口用于创建数据对比任务，创建成功后会返回数据对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9，创建成功后可通过StartSyncCompare启动一致性校验任务
+   */
+  async CreateSyncCompareTask(
+    req: CreateSyncCompareTaskRequest,
+    cb?: (error: string, rep: CreateSyncCompareTaskResponse) => void
+  ): Promise<CreateSyncCompareTaskResponse> {
+    return this.request("CreateSyncCompareTask", req, cb)
   }
 
   /**

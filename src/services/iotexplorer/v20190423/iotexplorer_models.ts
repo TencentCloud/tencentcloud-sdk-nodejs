@@ -5066,6 +5066,10 @@ export interface CreateTWeSeeRecognitionTaskRequest {
    */
   InputURL: string
   /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
    * 自定义事件 ID
    */
   CustomId?: string

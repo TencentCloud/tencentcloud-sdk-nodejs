@@ -58,16 +58,6 @@ it("iai.v20180301.GetPersonBaseInfo", async function () {
     }
 })
 
-it("iai.v20180301.DetectLiveFace", async function () {
-    try {
-       const data = await client.DetectLiveFace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iai.v20180301.CreateFace", async function () {
     try {
        const data = await client.CreateFace({})

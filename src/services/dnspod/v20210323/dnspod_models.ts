@@ -3100,7 +3100,7 @@ export interface RecordListItem {
    */
   Remark?: string
   /**
-   * 记录缓存时间
+   * 记录缓存时间，单位：秒
    */
   TTL?: number
   /**

@@ -451,15 +451,15 @@ export interface EmbeddingData {
  */
 export interface ChunkConfig {
   /**
-   * 最大分片长度
+   * 按照分隔符切片后，对分片长度会进行校验，当超过最大分片长度时，则用下一级分隔符分割，如无下一级分隔符，则保留原长度；默认值：1000
    */
   MaxChunkSize?: number
   /**
-   * 分隔符列表
+   * 分隔符列表，优先靠前的分隔符；文件类型为TXT时，默认值：["\n\n", "\n", "。", "！", "？", "，", ""]
    */
   Delimiters?: Array<string>
   /**
-   * 相邻切片重合字符数，需要小于分片长度
+   * 相邻切片重合字符数，需要小于分片长度，若形成完全冗余的切片，则会自动过滤；默认值：0.2*MaxChunkSize
    */
   ChunkOverlap?: number
 }

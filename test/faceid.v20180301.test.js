@@ -268,16 +268,6 @@ it("faceid.v20180301.GetFaceidRiskInfoToken", async function () {
     }
 })
 
-it("faceid.v20180301.Liveness", async function () {
-    try {
-       const data = await client.Liveness({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("faceid.v20180301.PhoneVerificationCUCC", async function () {
     try {
        const data = await client.PhoneVerificationCUCC({})

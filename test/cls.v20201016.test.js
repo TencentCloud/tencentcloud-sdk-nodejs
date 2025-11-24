@@ -78,9 +78,9 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
-it("cls.v20201016.QueryMetric", async function () {
+it("cls.v20201016.DescribeDlcDelivers", async function () {
     try {
-       const data = await client.QueryMetric({})
+       const data = await client.DescribeDlcDelivers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("cls.v20201016.QueryMetric", async function () {
     }
 })
 
-it("cls.v20201016.ModifyShipper", async function () {
+it("cls.v20201016.ModifyDlcDeliver", async function () {
     try {
-       const data = await client.ModifyShipper({})
+       const data = await client.ModifyDlcDeliver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +191,16 @@ it("cls.v20201016.DescribeCloudProductLogTasks", async function () {
 it("cls.v20201016.DeleteAlarmNotice", async function () {
     try {
        const data = await client.DeleteAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.QueryMetric", async function () {
+    try {
+       const data = await client.QueryMetric({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +318,16 @@ it("cls.v20201016.CloseKafkaConsumer", async function () {
     }
 })
 
+it("cls.v20201016.CreateDlcDeliver", async function () {
+    try {
+       const data = await client.CreateDlcDeliver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyIndex", async function () {
     try {
        const data = await client.ModifyIndex({})
@@ -341,6 +361,16 @@ it("cls.v20201016.ModifyCloudProductLogCollection", async function () {
 it("cls.v20201016.CreateAlarmShield", async function () {
     try {
        const data = await client.CreateAlarmShield({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteDlcDeliver", async function () {
+    try {
+       const data = await client.DeleteDlcDeliver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +521,16 @@ it("cls.v20201016.OpenKafkaConsumer", async function () {
 it("cls.v20201016.DescribeShipperTasks", async function () {
     try {
        const data = await client.DescribeShipperTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyShipper", async function () {
+    try {
+       const data = await client.ModifyShipper({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

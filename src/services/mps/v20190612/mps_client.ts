@@ -28,6 +28,7 @@ import {
   AiRecognitionTaskAsrFullTextSegmentItem,
   DeleteStreamLinkFlowRequest,
   FrameRateConfig,
+  ExtractBlindWatermarkRequest,
   AiAnalysisTaskVideoComprehensionResult,
   DeleteStreamLinkSecurityGroupResponse,
   AiAnalysisTaskClassificationInput,
@@ -112,7 +113,7 @@ import {
   AudioTemplateInfoForUpdate,
   UpdateSmartEraseWatermarkConfig,
   WorkflowInfo,
-  SuperResolutionConfig,
+  ModifyProcessImageTemplateRequest,
   DeletePersonSampleRequest,
   DescribeStreamLinkFlowsResponse,
   AiRecognitionTaskAsrWordsSegmentItem,
@@ -128,12 +129,13 @@ import {
   AiReviewPornAsrTaskInput,
   AiRecognitionTaskFaceResult,
   CreateAdaptiveDynamicStreamingTemplateRequest,
+  CreateProcessImageTemplateResponse,
   CreateInputRTMPPullSettings,
   TerrorismImgReviewTemplateInfoForUpdate,
   ModifyTranscodeTemplateRequest,
   ModifyStreamLinkFlowRequest,
   EditMediaTaskInput,
-  DeleteAIAnalysisTemplateResponse,
+  DescribeImageSpriteTemplatesRequest,
   DescribeEvent,
   TextWatermarkTemplateInputForUpdate,
   SubtitleTransResultItem,
@@ -145,13 +147,13 @@ import {
   HdrConfig,
   ScheduleTask,
   CreateStreamLinkEventRequest,
-  CreatePersonSampleRequest,
+  DeleteProcessImageTemplateRequest,
   ImageTaskInput,
   DescribeOutputHLSPullServerUrl,
   DescribeStreamLinkFlowSRTStatisticsRequest,
   MediaAiAnalysisCoverItem,
   CosInputInfo,
-  CreateScheduleResponse,
+  DescribeBlindWatermarkTemplatesRequest,
   TagConfigureInfo,
   AiRecognitionTaskOcrWordsResultOutput,
   ModifyLiveRecordTemplateResponse,
@@ -181,6 +183,7 @@ import {
   CreateVideoDatabaseEntryTaskRequest,
   CreateStreamLinkFlowRequest,
   CreateOutputSRTSettingsDestinations,
+  CreateBlindWatermarkTemplateRequest,
   RecognizeMediaForZhiXueRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
@@ -195,6 +198,7 @@ import {
   DescribeImageTaskDetailRequest,
   EditMediaResponse,
   PoliticalOcrReviewTemplateInfoForUpdate,
+  ExtractBlindWatermarkResponse,
   TEHDConfig,
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
@@ -213,7 +217,7 @@ import {
   MediaProcessTaskInput,
   DisableScheduleRequest,
   AiAnalysisTaskHorizontalToVerticalResult,
-  AiAnalysisTaskVideoRemakeResult,
+  DescribeInputRISTSettings,
   RTMPPullSourceAddress,
   CosOutputStorage,
   MediaProcessTaskAnimatedGraphicResult,
@@ -245,6 +249,7 @@ import {
   AiRecognitionTaskOcrFullTextSegmentItem,
   EditMediaOutputConfig,
   ModifyPersonSampleResponse,
+  ScheduleQualityControlTaskResult,
   AiQualityControlTaskInput,
   VideoDBEntryTaskResult,
   PornConfigureInfoForUpdate,
@@ -263,7 +268,9 @@ import {
   RTPAddressDestination,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   MediaContentReviewOcrTextSegmentItem,
+  AiAnalysisTaskHighlightOutput,
   StopStreamLinkFlowRequest,
+  SmartSubtitleTaskResultInput,
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
   ImageWatermarkInput,
   SRTFECSimpleOptions,
@@ -275,6 +282,7 @@ import {
   TagConfigureInfoForUpdate,
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
+  ModifyBlindWatermarkTemplateResponse,
   ProhibitedConfigureInfoForUpdate,
   ComposeEmptyItem,
   PidSelector,
@@ -321,16 +329,19 @@ import {
   PureSubtitleTransResult,
   AiAnalysisTaskTagOutput,
   CreateAsrHotwordsResponse,
-  AiAnalysisTaskHighlightOutput,
+  DeleteBlindWatermarkTemplateResponse,
   QualityControlItemConfig,
   CreateStreamLinkEventResponse,
   AdaptiveDynamicStreamingInfoItem,
+  DescribeProcessImageTemplatesResponse,
   ProcessMediaRequest,
   ProcessImageResponse,
   DescribeRTSPPullSourceAddress,
   DescribeOutputRTSPPullSettings,
+  CreateBlindWatermarkTemplateResponse,
   AiRecognitionTaskOcrFullTextResult,
   AiAnalysisTaskSegmentOutput,
+  ModifyProcessImageTemplateResponse,
   ComposeVideoItem,
   LiveStreamOcrFullTextRecognitionResult,
   VODOutputStorage,
@@ -396,7 +407,7 @@ import {
   ComposeMediaItem,
   AdvancedSuperResolutionConfig,
   CreateMediaEvaluationRequest,
-  ScheduleQualityControlTaskResult,
+  BlindWatermarkTemplate,
   TerrorismConfigureInfoForUpdate,
   DescribePersonSamplesRequest,
   EnableScheduleResponse,
@@ -421,26 +432,29 @@ import {
   ComposeMediaConfig,
   LiveStreamAiReviewImagePoliticalResult,
   RawImageWatermarkInput,
-  DescribeImageSpriteTemplatesRequest,
+  DeleteAIAnalysisTemplateResponse,
   CreateQualityControlTemplateRequest,
   AiSampleTagOperation,
   RawSmartEraseParameter,
   SRTSourceAddressResp,
   CreateAIRecognitionTemplateResponse,
   DescribeInput,
+  DeleteBlindWatermarkTemplateRequest,
   DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
   ModifyAsrHotwordsRequest,
   BatchStartStreamLinkFlowResponse,
   DisassociateSecurityGroupRequest,
   ProhibitedConfigureInfo,
+  CreateProcessImageTemplateRequest,
   DescribeStreamLinkFlowSRTStatisticsResponse,
   AiReviewTerrorismOcrTaskOutput,
   DescribeAsrHotwordsListResponse,
   AiAnalysisResult,
   BlindWatermarkInput,
-  SmartSubtitleTaskResultInput,
+  DescribeBlindWatermarkTemplatesResponse,
   ImageWatermarkInputForUpdate,
+  CreateScheduleResponse,
   DescribeAIAnalysisTemplatesRequest,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
@@ -473,6 +487,7 @@ import {
   DeleteSampleSnapshotTemplateRequest,
   TerrorismOcrReviewTemplateInfoForUpdate,
   DescribeTranscodeTemplatesResponse,
+  LiveStreamTransTextRecognitionResult,
   ImageSpriteTemplate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   BlindWatermarkConfig,
@@ -539,6 +554,7 @@ import {
   RemoveBlindWatermarkConfig,
   ComposeImageOperation,
   CreateSampleSnapshotTemplateResponse,
+  SuperResolutionConfig,
   CreateLiveRecordTemplateResponse,
   TrackSelector,
   ActivityResult,
@@ -561,7 +577,7 @@ import {
   DeleteStreamLinkOutputRequest,
   ModifyPersonSampleRequest,
   AsrFullTextConfigureInfo,
-  DescribeInputRISTSettings,
+  AiAnalysisTaskVideoRemakeResult,
   ArtifactRepairConfig,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
@@ -625,7 +641,7 @@ import {
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
   DescribeInputRTMPSettings,
-  LiveStreamTransTextRecognitionResult,
+  DeleteProcessImageTemplateResponse,
   DescribeStreamLinkSecurityGroupsRequest,
   OcrFullTextConfigureInfoForUpdate,
   FlowSRTInfo,
@@ -685,6 +701,7 @@ import {
   DescribeOutputRISTSettings,
   DrmInfo,
   DescribeSampleSnapshotTemplatesResponse,
+  DescribeProcessImageTemplatesRequest,
   ComposeImageItem,
   TaskSimpleInfo,
   MediaContentReviewSegmentItem,
@@ -737,6 +754,7 @@ import {
   FlowMediaVideo,
   DeleteSmartEraseTemplateResponse,
   AiReviewTaskPornAsrResult,
+  ModifyBlindWatermarkTemplateRequest,
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
   ComposeAudioStream,
@@ -772,6 +790,7 @@ import {
   QualityControlTemplate,
   TerrorismConfigureInfo,
   PoliticalAsrReviewTemplateInfo,
+  CreatePersonSampleRequest,
   SmartSubtitlesTaskInput,
   CreateAnimatedGraphicsTemplateResponse,
   TranslateConfigureInfoForUpdate,
@@ -793,6 +812,7 @@ import {
   DescribeGroupAttachFlowsByIdResponse,
   BatchStopStreamLinkFlowResponse,
   EditMediaTaskOutput,
+  ProcessImageTemplate,
   HighlightSegmentItem,
   SmartEraseTemplateItem,
   DeleteWatermarkTemplateResponse,
@@ -1158,13 +1178,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+   * 批量启动媒体传输流。
    */
-  async CreateWordSamples(
-    req: CreateWordSamplesRequest,
-    cb?: (error: string, rep: CreateWordSamplesResponse) => void
-  ): Promise<CreateWordSamplesResponse> {
-    return this.request("CreateWordSamples", req, cb)
+  async BatchStartStreamLinkFlow(
+    req: BatchStartStreamLinkFlowRequest,
+    cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void
+  ): Promise<BatchStartStreamLinkFlowResponse> {
+    return this.request("BatchStartStreamLinkFlow", req, cb)
   }
 
   /**
@@ -1195,6 +1215,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExecuteFunctionResponse) => void
   ): Promise<ExecuteFunctionResponse> {
     return this.request("ExecuteFunction", req, cb)
+  }
+
+  /**
+   * 删除图片处理模板
+   */
+  async DeleteProcessImageTemplate(
+    req: DeleteProcessImageTemplateRequest,
+    cb?: (error: string, rep: DeleteProcessImageTemplateResponse) => void
+  ): Promise<DeleteProcessImageTemplateResponse> {
+    return this.request("DeleteProcessImageTemplate", req, cb)
+  }
+
+  /**
+   * 修改图片处理模板。
+   */
+  async ModifyProcessImageTemplate(
+    req: ModifyProcessImageTemplateRequest,
+    cb?: (error: string, rep: ModifyProcessImageTemplateResponse) => void
+  ): Promise<ModifyProcessImageTemplateResponse> {
+    return this.request("ModifyProcessImageTemplate", req, cb)
   }
 
   /**
@@ -1266,6 +1306,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
   ): Promise<ModifyStreamLinkOutputInfoResponse> {
     return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  }
+
+  /**
+   * 修改用户自定义数字水印模板，数字水印类型不允许修改。
+   */
+  async ModifyBlindWatermarkTemplate(
+    req: ModifyBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: ModifyBlindWatermarkTemplateResponse) => void
+  ): Promise<ModifyBlindWatermarkTemplateResponse> {
+    return this.request("ModifyBlindWatermarkTemplate", req, cb)
   }
 
   /**
@@ -1537,6 +1587,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户自定义数字水印模板，数量上限：1000。
+   */
+  async CreateBlindWatermarkTemplate(
+    req: CreateBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: CreateBlindWatermarkTemplateResponse) => void
+  ): Promise<CreateBlindWatermarkTemplateResponse> {
+    return this.request("CreateBlindWatermarkTemplate", req, cb)
+  }
+
+  /**
    * 批量查询安全组信息。
    */
   async DescribeStreamLinkSecurityGroups(
@@ -1617,6 +1677,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据工作流 ID，获取工作流详情列表。
+   */
+  async DescribeWorkflows(
+    req: DescribeWorkflowsRequest,
+    cb?: (error: string, rep: DescribeWorkflowsResponse) => void
+  ): Promise<DescribeWorkflowsResponse> {
+    return this.request("DescribeWorkflows", req, cb)
+  }
+
+  /**
    * 查询指定时间点截图模板，支持根据条件，分页查询。
    */
   async DescribeSnapshotByTimeOffsetTemplates(
@@ -1687,13 +1757,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据工作流 ID，获取工作流详情列表。
+   * 删除用户自定义数字水印模板。
    */
-  async DescribeWorkflows(
-    req: DescribeWorkflowsRequest,
-    cb?: (error: string, rep: DescribeWorkflowsResponse) => void
-  ): Promise<DescribeWorkflowsResponse> {
-    return this.request("DescribeWorkflows", req, cb)
+  async DeleteBlindWatermarkTemplate(
+    req: DeleteBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: DeleteBlindWatermarkTemplateResponse) => void
+  ): Promise<DeleteBlindWatermarkTemplateResponse> {
+    return this.request("DeleteBlindWatermarkTemplate", req, cb)
   }
 
   /**
@@ -1724,6 +1794,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkActivateStateResponse) => void
   ): Promise<DescribeStreamLinkActivateStateResponse> {
     return this.request("DescribeStreamLinkActivateState", req, cb)
+  }
+
+  /**
+   * 用于发起提取视频数字水印任务，提取结果可以通过DescribeTaskDetail查询。
+   */
+  async ExtractBlindWatermark(
+    req: ExtractBlindWatermarkRequest,
+    cb?: (error: string, rep: ExtractBlindWatermarkResponse) => void
+  ): Promise<ExtractBlindWatermarkResponse> {
+    return this.request("ExtractBlindWatermark", req, cb)
   }
 
   /**
@@ -1818,13 +1898,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量启动媒体传输流。
+   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
    */
-  async BatchStartStreamLinkFlow(
-    req: BatchStartStreamLinkFlowRequest,
-    cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void
-  ): Promise<BatchStartStreamLinkFlowResponse> {
-    return this.request("BatchStartStreamLinkFlow", req, cb)
+  async CreateWordSamples(
+    req: CreateWordSamplesRequest,
+    cb?: (error: string, rep: CreateWordSamplesResponse) => void
+  ): Promise<CreateWordSamplesResponse> {
+    return this.request("CreateWordSamples", req, cb)
   }
 
   /**
@@ -1846,6 +1926,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkflowResponse) => void
   ): Promise<CreateWorkflowResponse> {
     return this.request("CreateWorkflow", req, cb)
+  }
+
+  /**
+   * 创建图片处理模板
+   */
+  async CreateProcessImageTemplate(
+    req: CreateProcessImageTemplateRequest,
+    cb?: (error: string, rep: CreateProcessImageTemplateResponse) => void
+  ): Promise<CreateProcessImageTemplateResponse> {
+    return this.request("CreateProcessImageTemplate", req, cb)
   }
 
   /**
@@ -1940,6 +2030,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIRecognitionTemplatesResponse) => void
   ): Promise<DescribeAIRecognitionTemplatesResponse> {
     return this.request("DescribeAIRecognitionTemplates", req, cb)
+  }
+
+  /**
+   * 查询用户自定义数字水印模板，支持根据条件，分页查询。
+   */
+  async DescribeBlindWatermarkTemplates(
+    req: DescribeBlindWatermarkTemplatesRequest,
+    cb?: (error: string, rep: DescribeBlindWatermarkTemplatesResponse) => void
+  ): Promise<DescribeBlindWatermarkTemplatesResponse> {
+    return this.request("DescribeBlindWatermarkTemplates", req, cb)
   }
 
   /**
@@ -2159,6 +2259,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStreamLinkInputResponse) => void
   ): Promise<CreateStreamLinkInputResponse> {
     return this.request("CreateStreamLinkInput", req, cb)
+  }
+
+  /**
+   * 查询图片处理模板列表。
+   */
+  async DescribeProcessImageTemplates(
+    req: DescribeProcessImageTemplatesRequest,
+    cb?: (error: string, rep: DescribeProcessImageTemplatesResponse) => void
+  ): Promise<DescribeProcessImageTemplatesResponse> {
+    return this.request("DescribeProcessImageTemplates", req, cb)
   }
 
   /**

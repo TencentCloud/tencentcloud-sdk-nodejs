@@ -38,11 +38,9 @@ import {
   LivenessCompareResponse,
   BankCard2EVerificationResponse,
   MobileStatusResponse,
-  LivenessResponse,
   EncryptedPhoneVerificationRequest,
   EncryptedPhoneVerificationResponse,
   DetectInfoVideoData,
-  LivenessRequest,
   DetectAIFakeFacesRequest,
   CheckBankCardInformationResponse,
   GetEidTokenRequest,
@@ -372,16 +370,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFaceidRiskInfoTokenResponse) => void
   ): Promise<GetFaceidRiskInfoTokenResponse> {
     return this.request("GetFaceidRiskInfoToken", req, cb)
-  }
-
-  /**
-   * 活体检测
-   */
-  async Liveness(
-    req: LivenessRequest,
-    cb?: (error: string, rep: LivenessResponse) => void
-  ): Promise<LivenessResponse> {
-    return this.request("Liveness", req, cb)
   }
 
   /**

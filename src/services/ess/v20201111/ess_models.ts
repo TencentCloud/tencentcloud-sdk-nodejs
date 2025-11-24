@@ -7266,6 +7266,7 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
   Offset: number
   /**
    * 查询成员企业的企业名，模糊匹配
+   * @deprecated
    */
   Name?: string
   /**

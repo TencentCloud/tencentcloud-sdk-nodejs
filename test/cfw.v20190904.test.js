@@ -478,9 +478,9 @@ it("cfw.v20190904.DeleteResourceGroup", async function () {
     }
 })
 
-it("cfw.v20190904.RemoveAcRule", async function () {
+it("cfw.v20190904.DescribeNatFwSwitch", async function () {
     try {
-       const data = await client.RemoveAcRule({})
+       const data = await client.DescribeNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +501,16 @@ it("cfw.v20190904.ModifyVpcFwSequenceRules", async function () {
 it("cfw.v20190904.CreateAlertCenterOmit", async function () {
     try {
        const data = await client.CreateAlertCenterOmit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.RemoveAcRule", async function () {
+    try {
+       const data = await client.RemoveAcRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

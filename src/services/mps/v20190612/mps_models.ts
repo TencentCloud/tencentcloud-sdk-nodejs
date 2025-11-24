@@ -282,6 +282,32 @@ export interface FrameRateConfig {
 }
 
 /**
+ * ExtractBlindWatermark请求参数结构体
+ */
+export interface ExtractBlindWatermarkRequest {
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-abseq：ab序列版权数字水印；</li>
+   */
+  Type: string
+  /**
+   * 媒体处理的文件输入信息。
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * 任务的事件通知信息，不填代表不获取事件通知。
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 提取数字水印任务配置
+   */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
+  /**
+   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
+   */
+  ResourceId?: string
+}
+
+/**
  * 视频（音频）理解结果
  */
 export interface AiAnalysisTaskVideoComprehensionResult {
@@ -2728,31 +2754,25 @@ export interface WorkflowInfo {
 }
 
 /**
- * 超分配置
+ * ModifyProcessImageTemplate请求参数结构体
  */
-export interface SuperResolutionConfig {
+export interface ModifyProcessImageTemplateRequest {
   /**
-   * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
+   * 图片处理模板唯一标识。
    */
-  Switch?: string
+  Definition: number
   /**
-   * 类型，可选值：
-<li>lq：针对低清晰度有较多噪声视频的超分；</li>
-<li>hq：针对高清晰度视频超分。</li>
-默认值：lq。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片处理模板名称，长度限制：64个字符。
    */
-  Type?: string
+  Name?: string
   /**
-   * 超分倍数，可选值：
-<li>2：目前只支持 2 倍超分。</li>
-默认值：2。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 模板描述信息，长度限制256个字符。
    */
-  Size?: number
+  Comment?: string
+  /**
+   * 图片处理模板参数。
+   */
+  ProcessImageTemplate?: ImageTaskInput
 }
 
 /**
@@ -3249,6 +3269,20 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
 }
 
 /**
+ * CreateProcessImageTemplate返回参数结构体
+ */
+export interface CreateProcessImageTemplateResponse {
+  /**
+   * 图片处理模板唯一标识
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建的输入RTMP拉流的配置信息。
  */
 export interface CreateInputRTMPPullSettings {
@@ -3365,13 +3399,31 @@ export interface EditMediaTaskInput {
 }
 
 /**
- * DeleteAIAnalysisTemplate返回参数结构体
+ * DescribeImageSpriteTemplates请求参数结构体
  */
-export interface DeleteAIAnalysisTemplateResponse {
+export interface DescribeImageSpriteTemplatesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 雪碧图模板唯一标识过滤条件，数组长度限制：100。
    */
-  RequestId?: string
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+   */
+  Type?: string
+  /**
+   * 雪碧图模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -3615,35 +3667,13 @@ export interface CreateStreamLinkEventRequest {
 }
 
 /**
- * CreatePersonSample请求参数结构体
+ * DeleteProcessImageTemplate请求参数结构体
  */
-export interface CreatePersonSampleRequest {
+export interface DeleteProcessImageTemplateRequest {
   /**
-   * 素材名称，长度限制：20 个字符。
+   * 图片处理模板唯一标识。
    */
-  Name: string
-  /**
-   * 素材应用场景，可选值：
-1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于不适宜内容识别，等价于 Review.Face。
-3. All：包含以上全部，等价于 1+2。
-   */
-  Usages: Array<string>
-  /**
-   * 素材描述，长度限制：1024 个字符。
-   */
-  Description?: string
-  /**
-   * 素材图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
-注意：图片必须是单人像五官较清晰的照片，像素不低于 200*200。
-   */
-  FaceContents?: Array<string>
-  /**
-   * 素材标签
-<li>数组长度限制：20 个标签；</li>
-<li>单个标签长度限制：128 个字符。</li>
-   */
-  Tags?: Array<string>
+  Definition?: number
 }
 
 /**
@@ -3759,17 +3789,31 @@ export interface CosInputInfo {
 }
 
 /**
- * CreateSchedule返回参数结构体
+ * DescribeBlindWatermarkTemplates请求参数结构体
  */
-export interface CreateScheduleResponse {
+export interface DescribeBlindWatermarkTemplatesRequest {
   /**
-   * 编排 ID。
+   * 数字水印模板唯一标识过滤条件，数组长度限制：100。
    */
-  ScheduleId?: number
+  Definitions?: Array<number | bigint>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数字水印模板标识过滤条件，长度限制：64 个字符。
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：Nagra取证水印；</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+   */
+  Limit?: number
 }
 
 /**
@@ -4363,6 +4407,28 @@ export interface CreateOutputSRTSettingsDestinations {
 }
 
 /**
+ * CreateBlindWatermarkTemplate请求参数结构体
+ */
+export interface CreateBlindWatermarkTemplateRequest {
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：NAGRA水印；</li>
+   */
+  Type: string
+  /**
+   * 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板创建后不支持修改文字内容。
+   */
+  TextContent: string
+  /**
+   * 数字水印模板名称，支持中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 数字水印模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+}
+
+/**
  * RecognizeMediaForZhiXue请求参数结构体
  */
 export interface RecognizeMediaForZhiXueRequest {
@@ -4700,6 +4766,20 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * ExtractBlindWatermark返回参数结构体
+ */
+export interface ExtractBlindWatermarkResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5136,30 +5216,21 @@ export interface AiAnalysisTaskHorizontalToVerticalResult {
 }
 
 /**
- * 视频去重结果数据结构
+ * 查询输入的RIST配置信息。
  */
-export interface AiAnalysisTaskVideoRemakeResult {
+export interface DescribeInputRISTSettings {
   /**
-   * 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种
+   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
    */
-  Status?: string
+  Mode?: string
   /**
-   * 错误码，0：成功，其他值：失败
+   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
    */
-  ErrCode?: number
+  Profile?: string
   /**
-   * 错误信息
+   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
    */
-  Message?: string
-  /**
-   * 去重任务输入
-   */
-  Input?: AiAnalysisTaskVideoRemakeInput
-  /**
-   * 去重任务输出
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: AiAnalysisTaskVideoRemakeOutput
+  Buffer?: number
 }
 
 /**
@@ -5812,6 +5883,37 @@ export interface ModifyPersonSampleResponse {
 }
 
 /**
+ * 媒体质检任务结果类型
+ */
+export interface ScheduleQualityControlTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 媒体质检任务的输入。
+   */
+  Input?: AiQualityControlTaskInput
+  /**
+   * 媒体质检任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: QualityControlData
+}
+
+/**
  * 媒体质检输入参数类型
  */
 export interface AiQualityControlTaskInput {
@@ -6230,6 +6332,21 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
+ * 智能精彩片段结果信息
+ */
+export interface AiAnalysisTaskHighlightOutput {
+  /**
+   * 视频智能精彩片段列表。
+   */
+  HighlightSet?: Array<MediaAiAnalysisHighlightItem>
+  /**
+   * 精彩片段的存储位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+}
+
+/**
  * StopStreamLinkFlow请求参数结构体
  */
 export interface StopStreamLinkFlowRequest {
@@ -6237,6 +6354,22 @@ export interface StopStreamLinkFlowRequest {
    * 流Id。
    */
   FlowId: string
+}
+
+/**
+ * 智能字幕翻译的输入。
+ */
+export interface SmartSubtitleTaskResultInput {
+  /**
+   * 智能字幕模板 ID。
+   */
+  Definition?: number
+  /**
+   * 智能字幕自定义参数，当 Definition 填 0 时有效。
+该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawParameter?: RawSmartSubtitleParameter
 }
 
 /**
@@ -6459,6 +6592,16 @@ export interface CreateContentReviewTemplateResponse {
    * 内容审核模板唯一标识。
    */
   Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBlindWatermarkTemplate返回参数结构体
+ */
+export interface ModifyBlindWatermarkTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7851,18 +7994,13 @@ export interface CreateAsrHotwordsResponse {
 }
 
 /**
- * 智能精彩片段结果信息
+ * DeleteBlindWatermarkTemplate返回参数结构体
  */
-export interface AiAnalysisTaskHighlightOutput {
+export interface DeleteBlindWatermarkTemplateResponse {
   /**
-   * 视频智能精彩片段列表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HighlightSet?: Array<MediaAiAnalysisHighlightItem>
-  /**
-   * 精彩片段的存储位置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputStorage?: TaskOutputStorage
+  RequestId?: string
 }
 
 /**
@@ -8005,6 +8143,24 @@ export interface AdaptiveDynamicStreamingInfoItem {
 }
 
 /**
+ * DescribeProcessImageTemplates返回参数结构体
+ */
+export interface DescribeProcessImageTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 图片处理模板详情列表。
+   */
+  ProcessImageTemplateSet?: Array<ProcessImageTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ProcessMedia请求参数结构体
  */
 export interface ProcessMediaRequest {
@@ -8133,6 +8289,20 @@ export interface DescribeOutputRTSPPullSettings {
 }
 
 /**
+ * CreateBlindWatermarkTemplate返回参数结构体
+ */
+export interface CreateBlindWatermarkTemplateResponse {
+  /**
+   * 数字水印模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文本全文识别结果。
  */
 export interface AiRecognitionTaskOcrFullTextResult {
@@ -8176,6 +8346,16 @@ export interface AiAnalysisTaskSegmentOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Abstract?: string
+}
+
+/**
+ * ModifyProcessImageTemplate返回参数结构体
+ */
+export interface ModifyProcessImageTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10129,34 +10309,37 @@ export interface CreateMediaEvaluationRequest {
 }
 
 /**
- * 媒体质检任务结果类型
+ * 数字水印模板详情
  */
-export interface ScheduleQualityControlTaskResult {
+export interface BlindWatermarkTemplate {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 数字水印模板唯一标识。
    */
-  Status?: string
+  Definition?: number
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：NAGRA取证水印；</li>
    */
-  ErrCodeExt?: string
+  Type?: string
   /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   * 数字水印模板名称。
    */
-  ErrCode?: number
+  Name?: string
   /**
-   * 错误信息。
+   * 数字水印模板文本内容，长度不超过64个字符。
    */
-  Message?: string
+  TextContent?: string
   /**
-   * 媒体质检任务的输入。
+   * 数字水印模板描述信息。
    */
-  Input?: AiQualityControlTaskInput
+  Comment?: string
   /**
-   * 媒体质检任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数字水印模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  Output?: QualityControlData
+  CreateTime?: string
+  /**
+   * 数字水印模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -10709,31 +10892,13 @@ export interface RawImageWatermarkInput {
 }
 
 /**
- * DescribeImageSpriteTemplates请求参数结构体
+ * DeleteAIAnalysisTemplate返回参数结构体
  */
-export interface DescribeImageSpriteTemplatesRequest {
+export interface DeleteAIAnalysisTemplateResponse {
   /**
-   * 雪碧图模板唯一标识过滤条件，数组长度限制：100。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Definitions?: Array<number | bigint>
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：10，最大值：100。
-   */
-  Limit?: number
-  /**
-   * 模板类型过滤条件，可选值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
-   */
-  Type?: string
-  /**
-   * 雪碧图模板标识过滤条件，长度限制：64 个字符。
-   */
-  Name?: string
+  RequestId?: string
 }
 
 /**
@@ -10931,6 +11096,16 @@ export interface DescribeInput {
 }
 
 /**
+ * DeleteBlindWatermarkTemplate请求参数结构体
+ */
+export interface DeleteBlindWatermarkTemplateRequest {
+  /**
+   * 数字水印模板唯一标识。
+   */
+  Definition: number
+}
+
+/**
  * DeleteTranscodeTemplate请求参数结构体
  */
 export interface DeleteTranscodeTemplateRequest {
@@ -11044,6 +11219,24 @@ export interface ProhibitedConfigureInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrReviewInfo?: ProhibitedOcrReviewTemplateInfo
+}
+
+/**
+ * CreateProcessImageTemplate请求参数结构体
+ */
+export interface CreateProcessImageTemplateRequest {
+  /**
+   * 图片处理模板。
+   */
+  ProcessImageTemplate: ImageTaskInput
+  /**
+   * 图片处理模板名称，长度限制：64个字符。
+   */
+  Name?: string
+  /**
+   * 图片处理模板描述信息，长度限制：256个字符。
+   */
+  Comment?: string
 }
 
 /**
@@ -11203,19 +11396,21 @@ export interface BlindWatermarkInput {
 }
 
 /**
- * 智能字幕翻译的输入。
+ * DescribeBlindWatermarkTemplates返回参数结构体
  */
-export interface SmartSubtitleTaskResultInput {
+export interface DescribeBlindWatermarkTemplatesResponse {
   /**
-   * 智能字幕模板 ID。
+   * 符合过滤条件的记录总数。
    */
-  Definition?: number
+  TotalCount?: number
   /**
-   * 智能字幕自定义参数，当 Definition 填 0 时有效。
-该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数字水印模板详情列表。
    */
-  RawParameter?: RawSmartSubtitleParameter
+  BlindWatermarkTemplateSet?: Array<BlindWatermarkTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11246,6 +11441,20 @@ export interface ImageWatermarkInputForUpdate {
 <li>repeat：水印循环播放，直到视频结束。</li>
    */
   RepeatType?: string
+}
+
+/**
+ * CreateSchedule返回参数结构体
+ */
+export interface CreateScheduleResponse {
+  /**
+   * 编排 ID。
+   */
+  ScheduleId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12005,6 +12214,52 @@ export interface DescribeTranscodeTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 直播实时翻译结果
+ */
+export interface LiveStreamTransTextRecognitionResult {
+  /**
+   * 识别文本。
+   */
+  Text?: string
+  /**
+   * 翻译片段起始的 PTS 时间，单位：秒。
+   */
+  StartPtsTime?: number
+  /**
+   * 翻译片段终止的 PTS 时间，单位：秒。
+   */
+  EndPtsTime?: number
+  /**
+   * 翻译片段置信度。取值：0~100。
+   */
+  Confidence?: number
+  /**
+   * 翻译文本。
+   */
+  Trans?: string
+  /**
+   * 翻译开始UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 翻译结束UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 稳态标记。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SteadyState?: boolean
+  /**
+   * websocket与trtc实时翻译的UserId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
 }
 
 /**
@@ -13908,6 +14163,34 @@ export interface CreateSampleSnapshotTemplateResponse {
 }
 
 /**
+ * 超分配置
+ */
+export interface SuperResolutionConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 类型，可选值：
+<li>lq：针对低清晰度有较多噪声视频的超分；</li>
+<li>hq：针对高清晰度视频超分。</li>
+默认值：lq。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 超分倍数，可选值：
+<li>2：目前只支持 2 倍超分。</li>
+默认值：2。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+}
+
+/**
  * CreateLiveRecordTemplate返回参数结构体
  */
 export interface CreateLiveRecordTemplateResponse {
@@ -14404,21 +14687,30 @@ export interface AsrFullTextConfigureInfo {
 }
 
 /**
- * 查询输入的RIST配置信息。
+ * 视频去重结果数据结构
  */
-export interface DescribeInputRISTSettings {
+export interface AiAnalysisTaskVideoRemakeResult {
   /**
-   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
+   * 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种
    */
-  Mode?: string
+  Status?: string
   /**
-   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   * 错误码，0：成功，其他值：失败
    */
-  Profile?: string
+  ErrCode?: number
   /**
-   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
+   * 错误信息
    */
-  Buffer?: number
+  Message?: string
+  /**
+   * 去重任务输入
+   */
+  Input?: AiAnalysisTaskVideoRemakeInput
+  /**
+   * 去重任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskVideoRemakeOutput
 }
 
 /**
@@ -15979,49 +16271,13 @@ RTMP的推流地址拼接规则为：rtmp://Ip:1935/AppName/StreamKey
 }
 
 /**
- * 直播实时翻译结果
+ * DeleteProcessImageTemplate返回参数结构体
  */
-export interface LiveStreamTransTextRecognitionResult {
+export interface DeleteProcessImageTemplateResponse {
   /**
-   * 识别文本。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Text?: string
-  /**
-   * 翻译片段起始的 PTS 时间，单位：秒。
-   */
-  StartPtsTime?: number
-  /**
-   * 翻译片段终止的 PTS 时间，单位：秒。
-   */
-  EndPtsTime?: number
-  /**
-   * 翻译片段置信度。取值：0~100。
-   */
-  Confidence?: number
-  /**
-   * 翻译文本。
-   */
-  Trans?: string
-  /**
-   * 翻译开始UTC时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * 翻译结束UTC时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * 稳态标记。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SteadyState?: boolean
-  /**
-   * websocket与trtc实时翻译的UserId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserId?: string
+  RequestId?: string
 }
 
 /**
@@ -17766,6 +18022,42 @@ export interface DescribeSampleSnapshotTemplatesResponse {
 }
 
 /**
+ * DescribeProcessImageTemplates请求参数结构体
+ */
+export interface DescribeProcessImageTemplatesRequest {
+  /**
+   * 图片处理模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数 默认值：10；最大值：100。
+   */
+  Limit?: number
+  /**
+   * 图片处理模板标识过滤条件。
+   */
+  Name?: string
+  /**
+   * 排序方式，OrderBy设置后才有效，可选值：   0：升序   1：降序  默认 0。
+   */
+  OrderType?: number
+  /**
+   * 排序字段，可选值：  
+Definition：模板唯一标识； 
+默认值：创建时间。
+   */
+  OrderBy?: string
+  /**
+   * 模板类型过滤条件，可选值： <li>Preset：系统预置模板；</li> <li>Custom：用户自定义模板。</li>
+   */
+  Type?: string
+}
+
+/**
  * 视频编辑/合成任务 图片元素信息。
  */
 export interface ComposeImageItem {
@@ -19292,6 +19584,28 @@ export interface AiReviewTaskPornAsrResult {
 }
 
 /**
+ * ModifyBlindWatermarkTemplate请求参数结构体
+ */
+export interface ModifyBlindWatermarkTemplateRequest {
+  /**
+   * 数字水印模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 数字水印模板名称，支持 中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 数字水印模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板不支持修改文字内容。
+   */
+  TextContent?: string
+}
+
+/**
  * DescribeStreamLinkFlow请求参数结构体
  */
 export interface DescribeStreamLinkFlowRequest {
@@ -20262,6 +20576,38 @@ export interface PoliticalAsrReviewTemplateInfo {
 }
 
 /**
+ * CreatePersonSample请求参数结构体
+ */
+export interface CreatePersonSampleRequest {
+  /**
+   * 素材名称，长度限制：20 个字符。
+   */
+  Name: string
+  /**
+   * 素材应用场景，可选值：
+1. Recognition：用于内容识别，等价于 Recognition.Face。
+2. Review：用于不适宜内容识别，等价于 Review.Face。
+3. All：包含以上全部，等价于 1+2。
+   */
+  Usages: Array<string>
+  /**
+   * 素材描述，长度限制：1024 个字符。
+   */
+  Description?: string
+  /**
+   * 素材图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
+注意：图片必须是单人像五官较清晰的照片，像素不低于 200*200。
+   */
+  FaceContents?: Array<string>
+  /**
+   * 素材标签
+<li>数组长度限制：20 个标签；</li>
+<li>单个标签长度限制：128 个字符。</li>
+   */
+  Tags?: Array<string>
+}
+
+/**
  * 智能字幕输入结构体
  */
 export interface SmartSubtitlesTaskInput {
@@ -20764,6 +21110,40 @@ export interface EditMediaTaskOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaData?: MediaMetaData
+}
+
+/**
+ * 图片处理模板
+ */
+export interface ProcessImageTemplate {
+  /**
+   * 图片处理模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 图片处理模板名称。
+   */
+  Name?: string
+  /**
+   * 图片处理模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 模板类型。
+   */
+  Type?: string
+  /**
+   * 图片处理模板配置参数。
+   */
+  ProcessImageConfig?: ImageTaskInput
+  /**
+   * 模板创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间。
+   */
+  UpdateTime?: string
 }
 
 /**

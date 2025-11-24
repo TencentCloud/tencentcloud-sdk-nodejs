@@ -2285,6 +2285,10 @@ export interface AssetRiskItem {
    * 风险规则ID
    */
   RiskRuleId?: string
+  /**
+   * 处置分类
+   */
+  Classify?: string
 }
 
 /**
@@ -2937,6 +2941,10 @@ export interface GateWayAsset {
    * TSE的网关真实地域
    */
   EngineRegion?: string
+  /**
+   * 弱口令风险
+   */
+  WeakPasswordRisk?: number
 }
 
 /**
@@ -3093,6 +3101,10 @@ export interface CheckViewRiskItem {
    * 事件类型
    */
   EventType?: string
+  /**
+   * 处置分类
+   */
+  Classify?: string
 }
 
 /**
@@ -4360,6 +4372,22 @@ export interface ExposesItem {
    * 端口开放结果
    */
   PortDetectResult?: string
+  /**
+   * 标签
+   */
+  Tag?: string
+  /**
+   * 备注
+   */
+  Comment?: string
+  /**
+   * 待治理风险数量
+   */
+  ToGovernedRiskCount?: number
+  /**
+   * 待治理风险内容
+   */
+  ToGovernedRiskContent?: string
 }
 
 /**

@@ -1051,6 +1051,10 @@ export interface CreateMonitorRequest {
  */
 export interface DescribeDetectTaskPackageListRequest {
   /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
    * 每页条数
    */
   Limit?: number
@@ -1157,7 +1161,12 @@ export interface DescribeMonitorDetailResponse {
 /**
  * DescribeInstanceDetail请求参数结构体
  */
-export type DescribeInstanceDetailRequest = null
+export interface DescribeInstanceDetailRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+}
 
 /**
  * 线路列表
@@ -1241,6 +1250,10 @@ export interface Address {
  * CreateInstance返回参数结构体
  */
 export interface CreateInstanceResponse {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1332,6 +1345,10 @@ export interface CreateAddressPoolResponse {
  */
 export interface DescribeInstancePackageListRequest {
   /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
    * 每页条数
    */
   Limit?: number
@@ -1371,6 +1388,10 @@ export interface DescribeMonitorsRequest {
    * 分页，当前分页记录数
    */
   Limit?: number
+  /**
+   * 查询过滤条件：MonitorName：监控器名称；MonitorId：监控器id
+   */
+  Filters?: Array<ResourceFilter>
   /**
    * 是否查探测次数0否1是
    */
@@ -1861,6 +1882,10 @@ export interface DescribeQuotasResponse {
  * ModifyInstanceConfig请求参数结构体
  */
 export interface ModifyInstanceConfigRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
   /**
    * 实例配置详情
    */

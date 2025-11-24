@@ -558,6 +558,16 @@ it("emr.v20190103.InquiryPriceUpdateInstance", async function () {
     }
 })
 
+it("emr.v20190103.DescribeInstanceOplog", async function () {
+    try {
+       const data = await client.DescribeInstanceOplog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.CreateCloudInstance", async function () {
     try {
        const data = await client.CreateCloudInstance({})

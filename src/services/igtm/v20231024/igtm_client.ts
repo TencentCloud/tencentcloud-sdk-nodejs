@@ -156,7 +156,7 @@ export class Client extends AbstractClient {
    * 实例详情
    */
   async DescribeInstanceDetail(
-    req?: DescribeInstanceDetailRequest,
+    req: DescribeInstanceDetailRequest,
     cb?: (error: string, rep: DescribeInstanceDetailResponse) => void
   ): Promise<DescribeInstanceDetailResponse> {
     return this.request("DescribeInstanceDetail", req, cb)

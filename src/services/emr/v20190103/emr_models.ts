@@ -3631,6 +3631,48 @@ export interface HostPathVolumeSource {
 }
 
 /**
+ * 操作日志描述
+ */
+export interface OperationLog {
+  /**
+   * EMR实例ID
+   */
+  InstanceId?: number
+  /**
+   * 操作名称
+   */
+  Operation?: string
+  /**
+   * 操作类型
+   */
+  OperationType?: number
+  /**
+   * 用户类型
+   */
+  UserType?: number
+  /**
+   * 操作者
+   */
+  Operator?: string
+  /**
+   * 操作时间
+   */
+  CreateTime?: string
+  /**
+   * 操作对象
+   */
+  Operand?: string
+  /**
+   * 操作详情
+   */
+  OperationDesc?: string
+  /**
+   * 安全级别
+   */
+  SecurityLevel?: string
+}
+
+/**
  * DescribeServiceConfGroupInfos返回参数结构体
  */
 export interface DescribeServiceConfGroupInfosResponse {
@@ -3705,6 +3747,44 @@ export interface PodSpec {
    * pod name
    */
   PodName?: string
+}
+
+/**
+ * DescribeInstanceOplog请求参数结构体
+ */
+export interface DescribeInstanceOplogRequest {
+  /**
+   * EMR实例ID
+   */
+  InstanceId: string
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 页大小
+   */
+  Limit: number
+  /**
+   * 开头时间时间戳
+   */
+  StartTime?: number
+  /**
+   * 结尾时间时间戳
+   */
+  EndTime?: number
+  /**
+   * 搜索项数组
+   */
+  SearchFields?: Array<SearchItem>
+  /**
+   * 集群、节点、组件
+   */
+  Operand?: string
+  /**
+   * 一般、危险、高危
+   */
+  SecurityLevel?: string
 }
 
 /**
@@ -5787,6 +5867,32 @@ export interface JobFlowResourceSpec {
    * Common节点配置。
    */
   CommonResourceSpec?: JobFlowResource
+}
+
+/**
+ * DescribeInstanceOplog返回参数结构体
+ */
+export interface DescribeInstanceOplogResponse {
+  /**
+   * 操作日志数量
+   */
+  TotalCnt?: number
+  /**
+   * 操作日志列表
+   */
+  LogList?: Array<OperationLog>
+  /**
+   * 操作对象筛选项数组
+   */
+  OperandList?: Array<string>
+  /**
+   * 安全级别筛选数组
+   */
+  SecurityLevelList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

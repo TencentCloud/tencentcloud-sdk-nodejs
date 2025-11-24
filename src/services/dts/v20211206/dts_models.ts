@@ -54,6 +54,21 @@ export interface ModifyMigrationJobResponse {
 }
 
 /**
+ * CreateSyncCompareTask返回参数结构体
+ */
+export interface CreateSyncCompareTaskResponse {
+  /**
+   * 数据对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompareTaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetConsumerGroupOffset返回参数结构体
  */
 export interface ResetConsumerGroupOffsetResponse {
@@ -195,6 +210,16 @@ export interface ModifyMigrateJobSpecRequest {
 }
 
 /**
+ * DeleteSyncCompareTask返回参数结构体
+ */
+export interface DeleteSyncCompareTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IsolateSubscribe返回参数结构体
  */
 export interface IsolateSubscribeResponse {
@@ -264,6 +289,26 @@ export interface ModifySyncRateLimitResponse {
 }
 
 /**
+ * DescribeSyncCompareTasks返回参数结构体
+ */
+export interface DescribeSyncCompareTasksResponse {
+  /**
+   * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 一致性校验任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<CompareTaskItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DestroyMigrateJob请求参数结构体
  */
 export interface DestroyMigrateJobRequest {
@@ -275,17 +320,29 @@ export interface DestroyMigrateJobRequest {
 }
 
 /**
- * ModifySubscribeName请求参数结构体
+ * CreateSyncCompareTask请求参数结构体
  */
-export interface ModifySubscribeNameRequest {
+export interface CreateSyncCompareTaskRequest {
   /**
-   * 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
+   * 任务 Id
    */
-  SubscribeId: string
+  JobId: string
   /**
-   * 修改后的数据订阅实例的名称，长度限制为[1,60]
+   * 数据对比任务名称，若为空则默认给CompareTaskId相同值
    */
-  SubscribeName: string
+  TaskName?: string
+  /**
+   * 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)，custom(自定义模式)
+   */
+  ObjectMode?: string
+  /**
+   * 对比对象，当ObjectMode值为custom时，此项需要填写
+   */
+  Objects?: CompareObject
+  /**
+   * 一致性校验选项
+   */
+  Options?: CompareOptions
 }
 
 /**
@@ -377,6 +434,32 @@ export interface DifferenceOwnerDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<OwnerDifference>
+}
+
+/**
+ * DescribeSyncCompareTasks请求参数结构体
+ */
+export interface DescribeSyncCompareTasksRequest {
+  /**
+   * 任务 Id
+   */
+  JobId: string
+  /**
+   * 分页设置，表示每页显示多少条任务，默认为 20
+   */
+  Limit?: number
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+  /**
+   * 校验任务 ID
+   */
+  CompareTaskId?: string
+  /**
+   * 任务状态过滤，可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止
+   */
+  Status?: Array<string>
 }
 
 /**
@@ -810,6 +893,24 @@ export interface CreateCheckSyncJobRequest {
 }
 
 /**
+ * StopSyncCompare请求参数结构体
+ */
+export interface StopSyncCompareRequest {
+  /**
+   * 任务 Id
+   */
+  JobId: string
+  /**
+   * 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9
+   */
+  CompareTaskId: string
+  /**
+   * 是否强制停止。如果填true，迁移任务增量阶段会跳过一致性校验产生的binlog，达到快速恢复任务的效果
+   */
+  ForceStop?: boolean
+}
+
+/**
  * DescribeModifyCheckSyncJobResult返回参数结构体
  */
 export interface DescribeModifyCheckSyncJobResultResponse {
@@ -869,6 +970,20 @@ export interface DescribeMigrationDetailRequest {
 
    */
   JobId: string
+}
+
+/**
+ * StartSyncCompare请求参数结构体
+ */
+export interface StartSyncCompareRequest {
+  /**
+   * 任务 Id
+   */
+  JobId: string
+  /**
+   * 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9
+   */
+  CompareTaskId: string
 }
 
 /**
@@ -1016,13 +1131,180 @@ export interface ModifyCompareTaskNameResponse {
 }
 
 /**
- * StartSyncJob请求参数结构体
+ * 增量校验阶段的摘要信息
  */
-export interface StartSyncJobRequest {
+export interface IncCompareAbstractInfo {
   /**
-   * 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
+   * 增量起始位点
+   */
+  StartPosition?: string
+  /**
+   * 增量当前位点
+   */
+  CurrentPosition?: string
+  /**
+   * 已校验行数
+   */
+  CheckedRecord?: number
+  /**
+   * 不一致行数
+   */
+  DiffRecord?: number
+  /**
+   * 不一致表的数量
+   */
+  DiffTable?: number
+}
+
+/**
+ * 同步任务信息
+ */
+export interface SyncJobInfo {
+  /**
+   * 同步任务id，如：sync-btso140
    */
   JobId?: string
+  /**
+   * 同步任务名
+   */
+  JobName?: string
+  /**
+   * 付款方式，PostPay(按量付费)、PrePay(包年包月)
+   */
+  PayMode?: string
+  /**
+   * 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
+   */
+  RunMode?: string
+  /**
+   * 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss
+   */
+  ExpectRunTime?: string
+  /**
+   * 支持的所有操作
+   */
+  AllActions?: Array<string>
+  /**
+   * 当前状态能进行的操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Actions?: Array<string>
+  /**
+   * 同步选项
+   */
+  Options?: Options
+  /**
+   * 同步库表对象
+   */
+  Objects?: Objects
+  /**
+   * 任务规格
+   */
+  Specification?: string
+  /**
+   * 过期时间，格式为 yyyy-mm-dd hh:mm:ss
+   */
+  ExpireTime?: string
+  /**
+   * 源端地域，如：ap-guangzhou等
+   */
+  SrcRegion?: string
+  /**
+   * 源端数据库类型，mysql,tdsqlmysql,mariadb,cynosdbmysql(表示tdsql-c实例),tdstore,percona,postgresql,mongodb等。
+   */
+  SrcDatabaseType?: string
+  /**
+   * 源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
+   */
+  SrcAccessType?: string
+  /**
+   * 源端信息，单节点数据库使用
+   */
+  SrcInfo?: Endpoint
+  /**
+   * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
+   */
+  SrcNodeType?: string
+  /**
+   * 源端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。
+   */
+  SrcInfos?: SyncDBEndpointInfos
+  /**
+   * 目标端地域，如：ap-guangzhou等
+   */
+  DstRegion?: string
+  /**
+   * 目标端数据库类型，mysql,tdsqlmysql,mariadb,cynosdbmysql(表示tdsql-c实例),tdstore,percona,postgresql,mongodb等。
+   */
+  DstDatabaseType?: string
+  /**
+   * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
+   */
+  DstAccessType?: string
+  /**
+   * 目标端信息，单节点数据库使用
+   */
+  DstInfo?: Endpoint
+  /**
+   * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
+   */
+  DstNodeType?: string
+  /**
+   * 目标端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。
+   */
+  DstInfos?: SyncDBEndpointInfos
+  /**
+   * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
+   */
+  CreateTime?: string
+  /**
+   * 开始时间，格式为 yyyy-mm-dd hh:mm:ss
+   */
+  StartTime?: string
+  /**
+   * 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知)
+   */
+  Status?: string
+  /**
+   * 结束时间，格式为 yyyy-mm-dd hh:mm:ss
+   */
+  EndTime?: string
+  /**
+   * 标签相关信息
+   */
+  Tags?: Array<TagItem>
+  /**
+   * 同步任务运行步骤信息
+   */
+  Detail?: SyncDetailInfo
+  /**
+   * 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中)
+   */
+  TradeStatus?: string
+  /**
+   * 同步链路规格，如micro,small,medium,large
+   */
+  InstanceClass?: string
+  /**
+   * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费）
+   */
+  AutoRenew?: number
+  /**
+   * 下线时间，格式为 yyyy-mm-dd hh:mm:ss
+   */
+  OfflineTime?: string
+  /**
+   * 动态修改对象，修改任务的状态等
+   */
+  OptObjStatus?: string
+  /**
+   * 自动重试时间段设置
+   */
+  AutoRetryTimeRangeMinutes?: number
+  /**
+   * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
+   */
+  DumperResumeCtrl?: string
 }
 
 /**
@@ -1033,6 +1315,24 @@ export interface StartSubscribeRequest {
    * 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
    */
   SubscribeId: string
+}
+
+/**
+ * DescribeSubscribeReturnable返回参数结构体
+ */
+export interface DescribeSubscribeReturnableResponse {
+  /**
+   * 实例是否支持退还/退货
+   */
+  IsReturnable?: boolean
+  /**
+   * 不支持退还的原因
+   */
+  ReturnFailMessage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1683,6 +1983,16 @@ export interface DifferenceDataDetail {
 }
 
 /**
+ * StartSyncCompare返回参数结构体
+ */
+export interface StartSyncCompareResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteConsumerGroup请求参数结构体
  */
 export interface DeleteConsumerGroupRequest {
@@ -2125,6 +2435,20 @@ export interface SkipSyncCheckItemResponse {
 }
 
 /**
+ * ModifySubscribeName请求参数结构体
+ */
+export interface ModifySubscribeNameRequest {
+  /**
+   * 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
+   */
+  SubscribeId: string
+  /**
+   * 修改后的数据订阅实例的名称，长度限制为[1,60]
+   */
+  SubscribeName: string
+}
+
+/**
  * IsolateSyncJob返回参数结构体
  */
 export interface IsolateSyncJobResponse {
@@ -2149,6 +2473,16 @@ export interface CreateMigrateCheckJobRequest {
  * ModifyConsumerGroupPassword返回参数结构体
  */
 export interface ModifyConsumerGroupPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySyncCompareTask返回参数结构体
+ */
+export interface ModifySyncCompareTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2978,6 +3312,20 @@ export interface RecoverSyncJobRequest {
 }
 
 /**
+ * 订阅校验任务的提示信息
+ */
+export interface SubscribeCheckStepTip {
+  /**
+   * 错误或告警的详细信息
+   */
+  Message?: string
+  /**
+   * 帮助文档
+   */
+  HelpDoc?: string
+}
+
+/**
  * 需要同步的库表对象
  */
 export interface Database {
@@ -3380,6 +3728,38 @@ export interface CompareTableItem {
    * 当 ColumnMode 为 partial 时必填(该参数仅对数据同步任务有效)
    */
   Columns?: Array<CompareColumnItem>
+  /**
+   * 过滤条件
+   */
+  FilterCondition?: string
+  /**
+   * 时区选择。如 "+08:00", "-08:00", "+00:00"（空值等价于"+00:00"）
+   */
+  FilterTimeZone?: string
+}
+
+/**
+ * DescribeSyncCompareReport返回参数结构体
+ */
+export interface DescribeSyncCompareReportResponse {
+  /**
+   * 一致性校验摘要信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Abstract?: CompareAbstractInfo
+  /**
+   * 一致性校验详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Detail?: CompareDetailInfo
+  /**
+   * 增量校验阶段的摘要
+   */
+  IncAbstract?: IncCompareAbstractInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3931,6 +4311,24 @@ export interface CreateSyncJobResponse {
 }
 
 /**
+ * ModifySyncCompareTaskName请求参数结构体
+ */
+export interface ModifySyncCompareTaskNameRequest {
+  /**
+   * 任务 Id
+   */
+  JobId: string
+  /**
+   * 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9
+   */
+  CompareTaskId: string
+  /**
+   * 一致性校验任务名称
+   */
+  TaskName: string
+}
+
+/**
  * CreateCompareTask请求参数结构体
  */
 export interface CreateCompareTaskRequest {
@@ -3989,6 +4387,16 @@ export interface StartCompareRequest {
 
    */
   CompareTaskId: string
+}
+
+/**
+ * StopSyncCompare返回参数结构体
+ */
+export interface StopSyncCompareResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4194,6 +4602,36 @@ export interface CreateModifyCheckSyncJobResponse {
 }
 
 /**
+ * ModifySyncCompareTask请求参数结构体
+ */
+export interface ModifySyncCompareTaskRequest {
+  /**
+   * 任务 Id
+   */
+  JobId: string
+  /**
+   * 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9
+   */
+  CompareTaskId: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)、custom(自定义)，注意自定义对比对象必须是迁移对象的子集
+   */
+  ObjectMode?: string
+  /**
+   * 对比对象，若CompareObjectMode取值为custom，则此项必填
+   */
+  Objects?: CompareObject
+  /**
+   * 一致性校验选项
+   */
+  Options?: CompareOptions
+}
+
+/**
  * ModifyMigrateName请求参数结构体
  */
 export interface ModifyMigrateNameRequest {
@@ -4320,6 +4758,52 @@ export interface Objects {
    * OnlineDDL类型，冗余字段不做配置用途
    */
   OnlineDDL?: OnlineDDL
+}
+
+/**
+ * DescribeSyncCompareReport请求参数结构体
+ */
+export interface DescribeSyncCompareReportRequest {
+  /**
+   * 任务 Id
+   */
+  JobId: string
+  /**
+   * 校验任务 Id
+   */
+  CompareTaskId: string
+  /**
+   * 校验不一致结果的 limit
+   */
+  DifferenceLimit?: number
+  /**
+   * 不一致的 Offset
+   */
+  DifferenceOffset?: number
+  /**
+   * 搜索条件，不一致的库名
+   */
+  DifferenceDB?: string
+  /**
+   * 搜索条件，不一致的表名
+   */
+  DifferenceTable?: string
+  /**
+   * 未校验的 Limit
+   */
+  SkippedLimit?: number
+  /**
+   * 未校验的 Offset
+   */
+  SkippedOffset?: number
+  /**
+   * 搜索条件，未校验的库名
+   */
+  SkippedDB?: string
+  /**
+   * 搜索条件，未校验的表名
+   */
+  SkippedTable?: string
 }
 
 /**
@@ -4648,154 +5132,13 @@ mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream，�
 }
 
 /**
- * 同步任务信息
+ * ModifySyncCompareTaskName返回参数结构体
  */
-export interface SyncJobInfo {
+export interface ModifySyncCompareTaskNameResponse {
   /**
-   * 同步任务id，如：sync-btso140
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  JobId?: string
-  /**
-   * 同步任务名
-   */
-  JobName?: string
-  /**
-   * 付款方式，PostPay(按量付费)、PrePay(包年包月)
-   */
-  PayMode?: string
-  /**
-   * 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
-   */
-  RunMode?: string
-  /**
-   * 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss
-   */
-  ExpectRunTime?: string
-  /**
-   * 支持的所有操作
-   */
-  AllActions?: Array<string>
-  /**
-   * 当前状态能进行的操作
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Actions?: Array<string>
-  /**
-   * 同步选项
-   */
-  Options?: Options
-  /**
-   * 同步库表对象
-   */
-  Objects?: Objects
-  /**
-   * 任务规格
-   */
-  Specification?: string
-  /**
-   * 过期时间，格式为 yyyy-mm-dd hh:mm:ss
-   */
-  ExpireTime?: string
-  /**
-   * 源端地域，如：ap-guangzhou等
-   */
-  SrcRegion?: string
-  /**
-   * 源端数据库类型，mysql,tdsqlmysql,mariadb,cynosdbmysql(表示tdsql-c实例),tdstore,percona,postgresql,mongodb等。
-   */
-  SrcDatabaseType?: string
-  /**
-   * 源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
-   */
-  SrcAccessType?: string
-  /**
-   * 源端信息，单节点数据库使用
-   */
-  SrcInfo?: Endpoint
-  /**
-   * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
-   */
-  SrcNodeType?: string
-  /**
-   * 源端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。
-   */
-  SrcInfos?: SyncDBEndpointInfos
-  /**
-   * 目标端地域，如：ap-guangzhou等
-   */
-  DstRegion?: string
-  /**
-   * 目标端数据库类型，mysql,tdsqlmysql,mariadb,cynosdbmysql(表示tdsql-c实例),tdstore,percona,postgresql,mongodb等。
-   */
-  DstDatabaseType?: string
-  /**
-   * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
-   */
-  DstAccessType?: string
-  /**
-   * 目标端信息，单节点数据库使用
-   */
-  DstInfo?: Endpoint
-  /**
-   * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
-   */
-  DstNodeType?: string
-  /**
-   * 目标端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。
-   */
-  DstInfos?: SyncDBEndpointInfos
-  /**
-   * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
-   */
-  CreateTime?: string
-  /**
-   * 开始时间，格式为 yyyy-mm-dd hh:mm:ss
-   */
-  StartTime?: string
-  /**
-   * 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知)
-   */
-  Status?: string
-  /**
-   * 结束时间，格式为 yyyy-mm-dd hh:mm:ss
-   */
-  EndTime?: string
-  /**
-   * 标签相关信息
-   */
-  Tags?: Array<TagItem>
-  /**
-   * 同步任务运行步骤信息
-   */
-  Detail?: SyncDetailInfo
-  /**
-   * 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中)
-   */
-  TradeStatus?: string
-  /**
-   * 同步链路规格，如micro,small,medium,large
-   */
-  InstanceClass?: string
-  /**
-   * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费）
-   */
-  AutoRenew?: number
-  /**
-   * 下线时间，格式为 yyyy-mm-dd hh:mm:ss
-   */
-  OfflineTime?: string
-  /**
-   * 动态修改对象，修改任务的状态等
-   */
-  OptObjStatus?: string
-  /**
-   * 自动重试时间段设置
-   */
-  AutoRetryTimeRangeMinutes?: number
-  /**
-   * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
-   */
-  DumperResumeCtrl?: string
+  RequestId?: string
 }
 
 /**
@@ -5063,21 +5406,17 @@ export interface IsolateSubscribeRequest {
 }
 
 /**
- * DescribeSubscribeReturnable返回参数结构体
+ * DeleteSyncCompareTask请求参数结构体
  */
-export interface DescribeSubscribeReturnableResponse {
+export interface DeleteSyncCompareTaskRequest {
   /**
-   * 实例是否支持退还/退货
+   * 任务 Id
    */
-  IsReturnable?: boolean
+  JobId: string
   /**
-   * 不支持退还的原因
+   * 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9
    */
-  ReturnFailMessage?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CompareTaskId: string
 }
 
 /**
@@ -5225,17 +5564,13 @@ export interface Table {
 }
 
 /**
- * 订阅校验任务的提示信息
+ * StartSyncJob请求参数结构体
  */
-export interface SubscribeCheckStepTip {
+export interface StartSyncJobRequest {
   /**
-   * 错误或告警的详细信息
+   * 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
-  Message?: string
-  /**
-   * 帮助文档
-   */
-  HelpDoc?: string
+  JobId?: string
 }
 
 /**

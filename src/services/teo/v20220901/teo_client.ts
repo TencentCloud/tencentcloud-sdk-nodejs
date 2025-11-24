@@ -327,6 +327,7 @@ import {
   DescribeSecurityPolicyRequest,
   DescribeEnvironmentsResponse,
   CacheParameters,
+  OriginAuthenticationRequestProperties,
   TimingDataItem,
   RateLimitUserRule,
   DeployRecord,
@@ -743,6 +744,7 @@ import {
   DescribeTimingL4DataRequest,
   DescribeTimingL4DataResponse,
   CNAMEDetail,
+  OriginAuthenticationParameters,
   RuleEngineAction,
   VanityNameServersIps,
 } from "./teo_models"

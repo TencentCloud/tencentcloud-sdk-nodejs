@@ -228,9 +228,9 @@ it("dts.v20211206.StartSyncJob", async function () {
     }
 })
 
-it("dts.v20211206.StopSyncJob", async function () {
+it("dts.v20211206.DescribeSyncCompareTasks", async function () {
     try {
-       const data = await client.StopSyncJob({})
+       const data = await client.DescribeSyncCompareTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,39 @@ it("dts.v20211206.IsolateSubscribe", async function () {
     }
 })
 
+it("dts.v20211206.StopSyncJob", async function () {
+    try {
+       const data = await client.StopSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.StartModifySyncJob", async function () {
     try {
        const data = await client.StartModifySyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ResetSyncJob", async function () {
+    try {
+       const data = await client.ResetSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.StartCompare", async function () {
+    try {
+       const data = await client.StartCompare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +418,9 @@ it("dts.v20211206.ModifySyncRateLimit", async function () {
     }
 })
 
-it("dts.v20211206.StartCompare", async function () {
+it("dts.v20211206.ModifySyncCompareTaskName", async function () {
     try {
-       const data = await client.StartCompare({})
+       const data = await client.ModifySyncCompareTaskName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +468,16 @@ it("dts.v20211206.IsolateMigrateJob", async function () {
     }
 })
 
+it("dts.v20211206.DescribeSyncCompareReport", async function () {
+    try {
+       const data = await client.DescribeSyncCompareReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ModifyConsumerGroupDescription", async function () {
     try {
        const data = await client.ModifyConsumerGroupDescription({})
@@ -458,9 +498,9 @@ it("dts.v20211206.DescribeMigrateDBInstances", async function () {
     }
 })
 
-it("dts.v20211206.ResetSyncJob", async function () {
+it("dts.v20211206.DeleteSyncCompareTask", async function () {
     try {
-       const data = await client.ResetSyncJob({})
+       const data = await client.DeleteSyncCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,6 +578,16 @@ it("dts.v20211206.DescribeSubscribeDetail", async function () {
     }
 })
 
+it("dts.v20211206.StartSyncCompare", async function () {
+    try {
+       const data = await client.StartSyncCompare({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DeleteConsumerGroup", async function () {
     try {
        const data = await client.DeleteConsumerGroup({})
@@ -591,6 +641,16 @@ it("dts.v20211206.RecoverSyncJob", async function () {
 it("dts.v20211206.ResetSubscribe", async function () {
     try {
        const data = await client.ResetSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ModifySyncCompareTask", async function () {
+    try {
+       const data = await client.ModifySyncCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +771,26 @@ it("dts.v20211206.DestroySyncJob", async function () {
 it("dts.v20211206.ModifyCompareTaskName", async function () {
     try {
        const data = await client.ModifyCompareTaskName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.StopSyncCompare", async function () {
+    try {
+       const data = await client.StopSyncCompare({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.CreateSyncCompareTask", async function () {
+    try {
+       const data = await client.CreateSyncCompareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

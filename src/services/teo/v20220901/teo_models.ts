@@ -7003,6 +7003,24 @@ export interface CacheParameters {
 }
 
 /**
+ * 回源鉴权请求属性。
+ */
+export interface OriginAuthenticationRequestProperties {
+  /**
+   * 设置回源鉴权参数类型，取值有：<li>QueryString：表示设置回源鉴权参数类型为查询字符串；</li><li>Header：表示设置回源鉴权参数类型为请求头。</li>
+   */
+  Type: string
+  /**
+   * 设置回源鉴权类型对应的参数名称。
+   */
+  Name: string
+  /**
+   * 设置回源鉴权类型对应的参数值。
+   */
+  Value: string
+}
+
+/**
  * 统计曲线数据项
  */
 export interface TimingDataItem {
@@ -16342,6 +16360,16 @@ export interface CNAMEDetail {
 }
 
 /**
+ * 回源鉴权参数。
+ */
+export interface OriginAuthenticationParameters {
+  /**
+   * 回源鉴权请求属性。
+   */
+  RequestProperties: Array<OriginAuthenticationRequestProperties>
+}
+
+/**
  * 规则引擎操作。
  */
 export interface RuleEngineAction {
@@ -16382,7 +16410,9 @@ export interface RuleEngineAction {
 <li>ModifyRequestHeader：修改 HTTP 节点请求头；</li>
 <li>ResponseSpeedLimit：单连接下载限速；</li>
 <li>SetContentIdentifier：设置内容标识符；</li>
-<li>Vary：Vary 特性配置。</li>
+<li>Vary：Vary 特性配置；</li>
+<li>ContentCompression：内容压缩配置；</li>
+<li>OriginAuthentication：回源鉴权配置。</li>
    */
   Name: string
   /**
@@ -16569,6 +16599,10 @@ export interface RuleEngineAction {
    * 内容压缩配置参数，当 Name 取值为 ContentCompression 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。
    */
   ContentCompressionParameters?: ContentCompressionParameters
+  /**
+   * 回源鉴权配置参数，当 Name 取值为 OriginAuthentication 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。
+   */
+  OriginAuthenticationParameters?: OriginAuthenticationParameters
 }
 
 /**

@@ -61,6 +61,7 @@ import {
   DescribeNatFwVpcDnsLstRequest,
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
+  CommonIdNameStatus,
   DescribeUnHandleEventTabListRequest,
   ModifyNatInstanceRequest,
   DescribeNatFwDnatRuleRequest,
@@ -160,6 +161,7 @@ import {
   DeleteVpcFwGroupRequest,
   IPDefendStatus,
   RuleInfoData,
+  NatSwitchListData,
   DescribeAcListsResponse,
   ModifyAllPublicIPSwitchStatusRequest,
   ModifySequenceAclRulesResponse,
@@ -219,7 +221,7 @@ import {
   DescribeAcListsRequest,
   DescribeGuideScanInfoRequest,
   UnHandleEvent,
-  DescribeBlockIgnoreListResponse,
+  DescribeAssociatedInstanceListRequest,
   ModifyVpcAcRuleResponse,
   ModifyBlockIgnoreRuleNewRequest,
   ModifyEWRuleStatusRequest,
@@ -276,6 +278,7 @@ import {
   CreateNatFwInstanceWithDomainRequest,
   DescribeRuleOverviewRequest,
   TagInfo,
+  DescribeNatFwSwitchResponse,
   DescribeResourceGroupResponse,
   DeleteAddressTemplateResponse,
   CreateBlockIgnoreRuleListResponse,
@@ -293,6 +296,7 @@ import {
   DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
   DescribeEnterpriseSGRuleProgressResponse,
+  CommonIdName,
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
   RemoveVpcAcRuleResponse,
@@ -308,10 +312,11 @@ import {
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   DescNatDnatRule,
-  DescribeAssociatedInstanceListRequest,
+  DescribeBlockIgnoreListResponse,
   ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
+  DescribeNatFwSwitchRequest,
   DescribeBlockStaticListResponse,
   DescribeGuideScanInfoResponse,
   StorageHistogram,
@@ -791,13 +796,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 删除互联网边界规则
+   * 查询NAT边界防火墙开关列表
    */
-  async RemoveAcRule(
-    req: RemoveAcRuleRequest,
-    cb?: (error: string, rep: RemoveAcRuleResponse) => void
-  ): Promise<RemoveAcRuleResponse> {
-    return this.request("RemoveAcRule", req, cb)
+  async DescribeNatFwSwitch(
+    req: DescribeNatFwSwitchRequest,
+    cb?: (error: string, rep: DescribeNatFwSwitchResponse) => void
+  ): Promise<DescribeNatFwSwitchResponse> {
+    return this.request("DescribeNatFwSwitch", req, cb)
   }
 
   /**
@@ -818,6 +823,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateAlertCenterOmitResponse) => void
   ): Promise<CreateAlertCenterOmitResponse> {
     return this.request("CreateAlertCenterOmit", req, cb)
+  }
+
+  /**
+   * 删除互联网边界规则
+   */
+  async RemoveAcRule(
+    req: RemoveAcRuleRequest,
+    cb?: (error: string, rep: RemoveAcRuleResponse) => void
+  ): Promise<RemoveAcRuleResponse> {
+    return this.request("RemoveAcRule", req, cb)
   }
 
   /**

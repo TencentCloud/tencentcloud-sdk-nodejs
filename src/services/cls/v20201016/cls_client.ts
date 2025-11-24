@@ -40,6 +40,7 @@ import {
   DeleteMachineGroupResponse,
   Tag,
   ScheduledSqlTaskInfo,
+  CreateDlcDeliverResponse,
   DeleteConfigFromMachineGroupResponse,
   ModifyMachineGroupResponse,
   RuleInfo,
@@ -58,13 +59,16 @@ import {
   DeleteAlarmShieldResponse,
   CreateIndexRequest,
   CreateTopicRequest,
+  CreateDlcDeliverRequest,
   DescribeMachineGroupsRequest,
   ModifyScheduledSqlRequest,
   DeleteConfigResponse,
   CreateDeliverCloudFunctionRequest,
+  ModifyDlcDeliverResponse,
   ModifyWebCallbackResponse,
   CreateWebCallbackRequest,
   DescribeConfigsRequest,
+  DlcPartitionExtra,
   DashboardTopicInfo,
   QueryMetricRequest,
   CloudProductLogTaskInfo,
@@ -76,11 +80,13 @@ import {
   DeleteAlarmResponse,
   DeleteConsoleSharingResponse,
   DescribeDashboardsResponse,
+  DescribeDlcDeliversResponse,
   ModifyIndexRequest,
   MachineInfo,
   ValueInfo,
   GetAlarmLogRequest,
   DeleteCosRechargeResponse,
+  DlcPartitionInfo,
   GroupTriggerConditionInfo,
   KafkaRechargeInfo,
   ConfigInfo,
@@ -100,7 +106,7 @@ import {
   DeleteAlarmNoticeRequest,
   DescribeScheduledSqlInfoResponse,
   CreateMachineGroupRequest,
-  TopicExtendInfo,
+  DescribeExportsResponse,
   CreateNoticeContentRequest,
   CsvInfo,
   DescribeCloudProductLogTasksRequest,
@@ -116,6 +122,7 @@ import {
   DeleteAlarmNoticeResponse,
   DeleteAlarmShieldRequest,
   DeleteLogsetResponse,
+  DeleteDlcDeliverResponse,
   ParquetKeyInfo,
   DescribeShipperTasksResponse,
   DescribeAlarmShieldsResponse,
@@ -146,8 +153,9 @@ import {
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
   ModifyAlarmNoticeRequest,
-  DescribeExportsResponse,
+  TopicExtendInfo,
   CreateAlarmRequest,
+  DlcFiledInfo,
   DeleteScheduledSqlResponse,
   EscalateNoticeInfo,
   ExcludePathInfo,
@@ -161,7 +169,7 @@ import {
   OpenKafkaConsumerRequest,
   NoticeContentInfo,
   AnonymousInfo,
-  DescribeNoticeContentsResponse,
+  UploadLogRequest,
   CreateIndexResponse,
   ModifyDashboardSubscribeResponse,
   ModifyConfigRequest,
@@ -213,6 +221,7 @@ import {
   DescribeKafkaConsumerResponse,
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
+  DeleteDlcDeliverRequest,
   CallBackInfo,
   AlarmClassification,
   WebCallbackInfo,
@@ -222,7 +231,7 @@ import {
   KafkaProtocolInfo,
   ModifyAlarmShieldResponse,
   CreateCosRechargeRequest,
-  UploadLogRequest,
+  DescribeNoticeContentsResponse,
   CreateAlarmShieldResponse,
   DescribeConsumerRequest,
   DeleteConfigExtraResponse,
@@ -247,11 +256,12 @@ import {
   DashboardTemplateVariable,
   DescribeConsoleSharingListRequest,
   DescribeLogsetsResponse,
-  DescribeMachinesResponse,
+  WebCallback,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
   CreateConfigRequest,
   DescribeKafkaRechargesResponse,
+  ModifyDlcDeliverRequest,
   ConsoleSharingInfo,
   DeleteCloudProductLogCollectionResponse,
   ExportInfo,
@@ -290,6 +300,7 @@ import {
   RuleTagInfo,
   SearchCosRechargeInfoRequest,
   DescribeNoticeContentsRequest,
+  DescribeDlcDeliversRequest,
   DescribeShipperTasksRequest,
   CreateCloudProductLogCollectionRequest,
   DescribeIndexRequest,
@@ -303,6 +314,7 @@ import {
   DescribeTopicsResponse,
   EventLog,
   HighLightItem,
+  DlcDeliverInfo,
   DescribeShippersRequest,
   DescribeCloudProductLogTasksResponse,
   CollectConfig,
@@ -328,6 +340,7 @@ import {
   CloseKafkaConsumerRequest,
   AlarmNoticeDeliverConfig,
   DeleteConfigExtraRequest,
+  DlcTableInfo,
   CheckRechargeKafkaServerResponse,
   CreateShipperRequest,
   CreateShipperResponse,
@@ -340,11 +353,12 @@ import {
   SplitPartitionResponse,
   CreateKafkaRechargeRequest,
   DeleteKafkaRechargeRequest,
+  DlcInfo,
   AlertHistoryRecord,
   DescribeDataTransformInfoResponse,
   AlarmNotice,
   ModifyNoticeContentRequest,
-  WebCallback,
+  DescribeMachinesResponse,
   LogContextInfo,
   DeleteConfigFromMachineGroupRequest,
   AddMachineGroupInfoResponse,
@@ -433,24 +447,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询指定时刻指标的最新值。
-如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
-     */
-  async QueryMetric(
-    req: QueryMetricRequest,
-    cb?: (error: string, rep: QueryMetricResponse) => void
-  ): Promise<QueryMetricResponse> {
-    return this.request("QueryMetric", req, cb)
+   * 获取告警渠道回调配置列表。
+   */
+  async DescribeDlcDelivers(
+    req: DescribeDlcDeliversRequest,
+    cb?: (error: string, rep: DescribeDlcDeliversResponse) => void
+  ): Promise<DescribeDlcDeliversResponse> {
+    return this.request("DescribeDlcDelivers", req, cb)
   }
 
   /**
-   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   * 修改DLC投递任务
    */
-  async ModifyShipper(
-    req: ModifyShipperRequest,
-    cb?: (error: string, rep: ModifyShipperResponse) => void
-  ): Promise<ModifyShipperResponse> {
-    return this.request("ModifyShipper", req, cb)
+  async ModifyDlcDeliver(
+    req: ModifyDlcDeliverRequest,
+    cb?: (error: string, rep: ModifyDlcDeliverResponse) => void
+  ): Promise<ModifyDlcDeliverResponse> {
+    return this.request("ModifyDlcDeliver", req, cb)
   }
 
   /**
@@ -551,6 +564,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void
   ): Promise<DeleteAlarmNoticeResponse> {
     return this.request("DeleteAlarmNotice", req, cb)
+  }
+
+  /**
+     * 查询指定时刻指标的最新值。
+如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
+     */
+  async QueryMetric(
+    req: QueryMetricRequest,
+    cb?: (error: string, rep: QueryMetricResponse) => void
+  ): Promise<QueryMetricResponse> {
+    return this.request("QueryMetric", req, cb)
   }
 
   /**
@@ -664,6 +688,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建DLC投递任务
+   */
+  async CreateDlcDeliver(
+    req: CreateDlcDeliverRequest,
+    cb?: (error: string, rep: CreateDlcDeliverResponse) => void
+  ): Promise<CreateDlcDeliverResponse> {
+    return this.request("CreateDlcDeliver", req, cb)
+  }
+
+  /**
    * 本接口用于修改索引配置，该接口除受默认接口请求频率限制外，针对单个日志主题，并发数不能超过1，即同一时间同一个日志主题只能有一个正在执行的索引配置修改操作。
    */
   async ModifyIndex(
@@ -701,6 +735,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAlarmShieldResponse) => void
   ): Promise<CreateAlarmShieldResponse> {
     return this.request("CreateAlarmShield", req, cb)
+  }
+
+  /**
+   * 删除DLC投递任务
+   */
+  async DeleteDlcDeliver(
+    req: DeleteDlcDeliverRequest,
+    cb?: (error: string, rep: DeleteDlcDeliverResponse) => void
+  ): Promise<DeleteDlcDeliverResponse> {
+    return this.request("DeleteDlcDeliver", req, cb)
   }
 
   /**
@@ -851,6 +895,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeShipperTasksResponse) => void
   ): Promise<DescribeShipperTasksResponse> {
     return this.request("DescribeShipperTasks", req, cb)
+  }
+
+  /**
+   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   */
+  async ModifyShipper(
+    req: ModifyShipperRequest,
+    cb?: (error: string, rep: ModifyShipperResponse) => void
+  ): Promise<ModifyShipperResponse> {
+    return this.request("ModifyShipper", req, cb)
   }
 
   /**

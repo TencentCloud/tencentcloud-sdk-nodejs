@@ -608,6 +608,20 @@ export interface ScheduledSqlTaskInfo {
 }
 
 /**
+ * CreateDlcDeliver返回参数结构体
+ */
+export interface CreateDlcDeliverResponse {
+  /**
+   * 配置id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteConfigFromMachineGroup返回参数结构体
  */
 export interface DeleteConfigFromMachineGroupResponse {
@@ -1210,6 +1224,49 @@ export interface CreateTopicRequest {
 }
 
 /**
+ * CreateDlcDeliver请求参数结构体
+ */
+export interface CreateDlcDeliverRequest {
+  /**
+   * 日志主题id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。
+   */
+  Name: string
+  /**
+   * 投递类型。0:批投递,1:实时投递
+   */
+  DeliverType: number
+  /**
+   * 投递时间范围的开始时间
+   */
+  StartTime: number
+  /**
+   * dlc配置信息
+   */
+  DlcInfo: DlcInfo
+  /**
+   * 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。
+   */
+  MaxSize?: number
+  /**
+   * 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。
+   */
+  Interval?: number
+  /**
+   * 投递时间范围的结束时间。 如果为空，则表示不限时。EndTime不为空时，需要大于StartTime。
+   */
+  EndTime?: number
+  /**
+   * 是否开启投递服务日志。1关闭，2开启。默认开启
+   */
+  HasServicesLog?: number
+}
+
+/**
  * DescribeMachineGroups请求参数结构体
  */
 export interface DescribeMachineGroupsRequest {
@@ -1349,6 +1406,16 @@ export interface CreateDeliverCloudFunctionRequest {
 }
 
 /**
+ * ModifyDlcDeliver返回参数结构体
+ */
+export interface ModifyDlcDeliverResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyWebCallback返回参数结构体
  */
 export interface ModifyWebCallbackResponse {
@@ -1423,6 +1490,20 @@ topicId
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据分区额外信息
+ */
+export interface DlcPartitionExtra {
+  /**
+   * 时间格式	eg: %Y-%m-%d %H:%M:%S.%f
+   */
+  TimeFormat?: string
+  /**
+   * 时间时区
+   */
+  TimeZone?: string
 }
 
 /**
@@ -1639,6 +1720,24 @@ export interface DescribeDashboardsResponse {
 }
 
 /**
+ * DescribeDlcDelivers返回参数结构体
+ */
+export interface DescribeDlcDeliversResponse {
+  /**
+   * 告警渠道回调配置列表。
+   */
+  Infos?: Array<DlcDeliverInfo>
+  /**
+   * 符合条件的通知内容配置总数。
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyIndex请求参数结构体
  */
 export interface ModifyIndexRequest {
@@ -1800,6 +1899,24 @@ export interface DeleteCosRechargeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据分区配置
+ */
+export interface DlcPartitionInfo {
+  /**
+   * cls日志中的字段名
+   */
+  ClsField: string
+  /**
+   * dlc表的列名
+   */
+  DlcField: string
+  /**
+   * dlc字段类型
+   */
+  DlcFieldType: string
 }
 
 /**
@@ -2478,14 +2595,21 @@ export interface CreateMachineGroupRequest {
 }
 
 /**
- * 日志主题扩展信息
+ * DescribeExports返回参数结构体
  */
-export interface TopicExtendInfo {
+export interface DescribeExportsResponse {
   /**
-   * 日志主题免鉴权配置信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志导出列表
    */
-  AnonymousAccess?: AnonymousInfo
+  Exports?: Array<ExportInfo>
+  /**
+   * 总数目
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2954,6 +3078,16 @@ export interface DeleteAlarmShieldRequest {
  * DeleteLogset返回参数结构体
  */
 export interface DeleteLogsetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDlcDeliver返回参数结构体
+ */
+export interface DeleteDlcDeliverResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3844,21 +3978,14 @@ export interface ModifyAlarmNoticeRequest {
 }
 
 /**
- * DescribeExports返回参数结构体
+ * 日志主题扩展信息
  */
-export interface DescribeExportsResponse {
+export interface TopicExtendInfo {
   /**
-   * 日志导出列表
+   * 日志主题免鉴权配置信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Exports?: Array<ExportInfo>
-  /**
-   * 总数目
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AnonymousAccess?: AnonymousInfo
 }
 
 /**
@@ -3964,6 +4091,32 @@ Classifications元素的Key不能为空，不能重复，长度不能超过50个
 Classifications元素的Value长度不能超过200个字符。
    */
   Classifications?: Array<AlarmClassification>
+}
+
+/**
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据字段配置信息
+ */
+export interface DlcFiledInfo {
+  /**
+   * cls日志中的字段名
+   */
+  ClsField: string
+  /**
+   * 数据湖计算服务表的列名
+   */
+  DlcField: string
+  /**
+   * 数据湖计算服务字段类型
+   */
+  DlcFieldType: string
+  /**
+   * 解析失败填充字段
+   */
+  FillField?: string
+  /**
+   * 是否禁用
+   */
+  Disable?: boolean
 }
 
 /**
@@ -4243,21 +4396,25 @@ export interface AnonymousInfo {
 }
 
 /**
- * DescribeNoticeContents返回参数结构体
+ * UploadLog请求参数结构体
  */
-export interface DescribeNoticeContentsResponse {
+export interface UploadLogRequest {
   /**
-   * 通知内容模板列表。
+   * 日志主题id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  NoticeContents?: Array<NoticeContentTemplate>
+  TopicId: string
   /**
-   * 符合条件的通知内容模板总数。
+   * 该参数已废弃，请勿使用
+   * @deprecated
    */
-  TotalCount?: number
+  HashKey?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 压缩方法，目前支持
+- lz4
+- zstd
    */
-  RequestId?: string
+  CompressType?: string
 }
 
 /**
@@ -5766,6 +5923,21 @@ export interface ContainerWorkLoadInfo {
 }
 
 /**
+ * DeleteDlcDeliver请求参数结构体
+ */
+export interface DeleteDlcDeliverRequest {
+  /**
+   * 日志主题id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 任务id。
+   */
+  TaskId: string
+}
+
+/**
  * 回调配置
  */
 export interface CallBackInfo {
@@ -6038,25 +6210,21 @@ export interface CreateCosRechargeRequest {
 }
 
 /**
- * UploadLog请求参数结构体
+ * DescribeNoticeContents返回参数结构体
  */
-export interface UploadLogRequest {
+export interface DescribeNoticeContentsResponse {
   /**
-   * 日志主题id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * 通知内容模板列表。
    */
-  TopicId: string
+  NoticeContents?: Array<NoticeContentTemplate>
   /**
-   * 该参数已废弃，请勿使用
-   * @deprecated
+   * 符合条件的通知内容模板总数。
    */
-  HashKey?: string
+  TotalCount?: number
   /**
-   * 压缩方法，目前支持
-- lz4
-- zstd
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CompressType?: string
+  RequestId?: string
 }
 
 /**
@@ -6559,41 +6727,70 @@ export interface DescribeLogsetsResponse {
 }
 
 /**
- * DescribeMachines返回参数结构体
+ * 回调地址
  */
-export interface DescribeMachinesResponse {
+export interface WebCallback {
   /**
-   * 机器状态信息组
+   * 回调的类型。可选值：
+- Http(自定义接口回调)
+- WeCom(企业微信)
+- DingTalk(钉钉)
+- Lark(飞书)
    */
-  Machines?: Array<MachineInfo>
+  CallbackType: string
   /**
-   * 机器组是否开启自动升级功能。 0：未开启自动升级；1：开启了自动升级。
+   * 回调地址，最大支持1024个字节。
+也可使用WebCallbackId引用集成配置中的URL，此时该字段请填写为空字符串。
    */
-  AutoUpdate?: number
+  Url: string
   /**
-   * 机器组自动升级功能预设开始时间
+   * 集成配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/product/614/115229)获取集成配置ID
    */
-  UpdateStartTime?: string
+  WebCallbackId?: string
   /**
-   * 机器组自动升级功能预设结束时间
+   * 回调方法。可选值：
+- POST（默认值）
+- PUT
+
+注意：
+- 参数CallbackType为Http时为必选，其它回调方式无需填写。
    */
-  UpdateEndTime?: string
+  Method?: string
   /**
-   * 当前用户可用最新的Loglistener版本
+   * 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。
    */
-  LatestAgentVersion?: string
+  NoticeContentId?: string
   /**
-   * 是否开启服务日志
+   * 提醒类型。
+
+0：不提醒；1：指定人；2：所有人
    */
-  ServiceLogging?: boolean
+  RemindType?: number
   /**
-   * 总数目
+   * 电话列表。
    */
-  TotalCount?: number
+  Mobiles?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 用户ID列表。
    */
-  RequestId?: string
+  UserIds?: Array<string>
+  /**
+   * 该参数已废弃，请使用NoticeContentId。
+   * @deprecated
+   */
+  Headers?: Array<string>
+  /**
+   * 该参数已废弃，请使用NoticeContentId。
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Body?: string
+  /**
+   * 序号。
+- 入参无效。
+- 出参有效。
+   */
+  Index?: number
 }
 
 /**
@@ -6700,6 +6897,57 @@ export interface DescribeKafkaRechargesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDlcDeliver请求参数结构体
+ */
+export interface ModifyDlcDeliverRequest {
+  /**
+   * 日志主题id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 任务id。
+   */
+  TaskId: string
+  /**
+   * 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。
+   */
+  Name?: string
+  /**
+   * 投递类型。0:批投递,1:实时投递
+   */
+  DeliverType?: number
+  /**
+   * 投递时间范围的开始时间
+   */
+  StartTime?: number
+  /**
+   * 投递时间范围的结束时间。 如果为空，则表示不限时
+   */
+  EndTime?: number
+  /**
+   * 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。
+   */
+  MaxSize?: number
+  /**
+   * 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。
+   */
+  Interval?: number
+  /**
+   * dlc配置信息
+   */
+  DlcInfo?: DlcInfo
+  /**
+   * 是否开启投递服务日志。1关闭，2开启。默认开启
+   */
+  HasServicesLog?: number
+  /**
+   * 任务状态。
+   */
+  Status?: number
 }
 
 /**
@@ -7696,6 +7944,49 @@ export interface DescribeNoticeContentsRequest {
 }
 
 /**
+ * DescribeDlcDelivers请求参数结构体
+ */
+export interface DescribeDlcDeliversRequest {
+  /**
+   * 日志主题id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * - taskId
+按照【任务id】进行过滤。
+类型：String
+必选：否
+
+- name
+按照【任务名称】进行过滤。
+类型：String
+必选：否
+
+- tableName
+按照【数据表】进行过滤。
+类型：String
+必选：否
+
+- statusFlag
+按照【状态】进行过滤。支持："1","2","3","4"。含义：1：RUNNING，2：STOPPED，3：FINISHED，4：FAILED
+类型：String
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为10。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为20，最大值100。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeShipperTasks请求参数结构体
  */
 export interface DescribeShipperTasksRequest {
@@ -7969,6 +8260,76 @@ export interface HighLightItem {
    * 高亮的关键词
    */
   Values?: Array<string>
+}
+
+/**
+ * 投递DLC任务配置信息
+ */
+export interface DlcDeliverInfo {
+  /**
+   * 任务id。
+   */
+  TaskId?: string
+  /**
+   * 账号id。
+   */
+  Uin?: number
+  /**
+   * 日志主题id。
+   */
+  TopicId?: string
+  /**
+   * 任务名称。
+   */
+  Name?: string
+  /**
+   * 投递类型，0：实时投递，1：历史投递
+   */
+  DeliverType?: number
+  /**
+   * 投递文件大小，单位MB
+   */
+  MaxSize?: number
+  /**
+   * 投递间隔 单位秒
+   */
+  Interval?: number
+  /**
+   * 投递时间范围的开始时间
+   */
+  StartTime?: number
+  /**
+   * 投递时间范围的结束时间
+   */
+  EndTime?: number
+  /**
+   * dlc配置信息
+   */
+  DlcInfo?: DlcInfo
+  /**
+   * 是否开启投递服务日志。1关闭，2开启
+   */
+  HasServicesLog?: number
+  /**
+   * 任务状态。
+   */
+  Status?: number
+  /**
+   * 任务进度。历史投递任务生效。
+   */
+  Progress?: number
+  /**
+   * 日志主题类型。0:标准主题，1:指标主题
+   */
+  BizType?: number
+  /**
+   * 任务创建时间。
+   */
+  CreateTime?: number
+  /**
+   * 任务修改时间。
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -8657,6 +9018,24 @@ export interface DeleteConfigExtraRequest {
 }
 
 /**
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据表配置信息
+ */
+export interface DlcTableInfo {
+  /**
+   * 数据目录
+   */
+  DataDirectory: string
+  /**
+   * 数据库
+   */
+  DatabaseName: string
+  /**
+   * 数据表
+   */
+  TableName: string
+}
+
+/**
  * CheckRechargeKafkaServer返回参数结构体
  */
 export interface CheckRechargeKafkaServerResponse {
@@ -9151,6 +9530,28 @@ export interface DeleteKafkaRechargeRequest {
 }
 
 /**
+ * 数据湖计算服务（Data Lake Compute，简称DLC）导入配置信息
+ */
+export interface DlcInfo {
+  /**
+   * dlc表信息
+   */
+  TableInfo: DlcTableInfo
+  /**
+   * dlc数据字段信息
+   */
+  FieldInfos: Array<DlcFiledInfo>
+  /**
+   * dlc分区信息
+   */
+  PartitionInfos: Array<DlcPartitionInfo>
+  /**
+   * dlc分区额外信息
+   */
+  PartitionExtra?: DlcPartitionExtra
+}
+
+/**
  * 告警历史详情
  */
 export interface AlertHistoryRecord {
@@ -9327,70 +9728,41 @@ export interface ModifyNoticeContentRequest {
 }
 
 /**
- * 回调地址
+ * DescribeMachines返回参数结构体
  */
-export interface WebCallback {
+export interface DescribeMachinesResponse {
   /**
-   * 回调的类型。可选值：
-- Http(自定义接口回调)
-- WeCom(企业微信)
-- DingTalk(钉钉)
-- Lark(飞书)
+   * 机器状态信息组
    */
-  CallbackType: string
+  Machines?: Array<MachineInfo>
   /**
-   * 回调地址，最大支持1024个字节。
-也可使用WebCallbackId引用集成配置中的URL，此时该字段请填写为空字符串。
+   * 机器组是否开启自动升级功能。 0：未开启自动升级；1：开启了自动升级。
    */
-  Url: string
+  AutoUpdate?: number
   /**
-   * 集成配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/product/614/115229)获取集成配置ID
+   * 机器组自动升级功能预设开始时间
    */
-  WebCallbackId?: string
+  UpdateStartTime?: string
   /**
-   * 回调方法。可选值：
-- POST（默认值）
-- PUT
-
-注意：
-- 参数CallbackType为Http时为必选，其它回调方式无需填写。
+   * 机器组自动升级功能预设结束时间
    */
-  Method?: string
+  UpdateEndTime?: string
   /**
-   * 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。
+   * 当前用户可用最新的Loglistener版本
    */
-  NoticeContentId?: string
+  LatestAgentVersion?: string
   /**
-   * 提醒类型。
-
-0：不提醒；1：指定人；2：所有人
+   * 是否开启服务日志
    */
-  RemindType?: number
+  ServiceLogging?: boolean
   /**
-   * 电话列表。
+   * 总数目
    */
-  Mobiles?: Array<string>
+  TotalCount?: number
   /**
-   * 用户ID列表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserIds?: Array<string>
-  /**
-   * 该参数已废弃，请使用NoticeContentId。
-   * @deprecated
-   */
-  Headers?: Array<string>
-  /**
-   * 该参数已废弃，请使用NoticeContentId。
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  Body?: string
-  /**
-   * 序号。
-- 入参无效。
-- 出参有效。
-   */
-  Index?: number
+  RequestId?: string
 }
 
 /**

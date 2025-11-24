@@ -1028,6 +1028,27 @@ export interface DescribeTLogInfoResponse {
 }
 
 /**
+ * ID NAME STATUS 组合结构
+ */
+export interface CommonIdNameStatus {
+  /**
+   * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 资源name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+}
+
+/**
  * DescribeUnHandleEventTabList请求参数结构体
  */
 export interface DescribeUnHandleEventTabListRequest {
@@ -3813,6 +3834,111 @@ export interface RuleInfoData {
 }
 
 /**
+ * NAT防火墙开关列表数据
+ */
+export interface NatSwitchListData {
+  /**
+   * 列表ID
+   */
+  Id?: number
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 子网名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetName?: string
+  /**
+   * IPv4 CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetCidr?: string
+  /**
+   * 关联路由ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteId?: string
+  /**
+   * 关联路由名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteName?: string
+  /**
+   * 云服务器个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CvmNum?: number
+  /**
+   * 所属VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 所属VPC名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcName?: string
+  /**
+   * 是否生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: number
+  /**
+   * 开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * NAT网关ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatId?: string
+  /**
+   * NAT网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatName?: string
+  /**
+   * NAT防火墙实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatInsId?: string
+  /**
+   * NAT防火墙实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatInsName?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 开关是否异常,0:正常,1:异常
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Abnormal?: number
+  /**
+   * nat防火墙出口路由表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ORTableId?: string
+  /**
+   * nat防火墙出口路由表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ORTableName?: string
+  /**
+   * 出口Snat Ip列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ohavips?: Array<string>
+}
+
+/**
  * DescribeAcLists返回参数结构体
  */
 export interface DescribeAcListsResponse {
@@ -5263,37 +5389,41 @@ export interface UnHandleEvent {
 }
 
 /**
- * DescribeBlockIgnoreList返回参数结构体
+ * DescribeAssociatedInstanceList请求参数结构体
  */
-export interface DescribeBlockIgnoreListResponse {
+export interface DescribeAssociatedInstanceListRequest {
   /**
-   * 列表数据
+   * 列表偏移量
    */
-  Data?: Array<BlockIgnoreRule>
+  Offset: number
   /**
-   * 查询结果总数，用于分页
+   * 每页记录条数
    */
-  Total?: number
+  Limit: number
   /**
-   * 状态值，0：查询成功，非0：查询失败
+   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
    */
-  ReturnCode?: number
+  Area: string
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * 额外检索条件（JSON字符串）
    */
-  ReturnMsg?: string
+  SearchValue?: string
   /**
-   * 安全事件来源下拉框
+   * 排序字段
    */
-  SourceList?: Array<string>
+  By?: string
   /**
-   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
+   * 排序方式（asc:升序,desc:降序）
    */
-  RuleTypeDataList?: Array<number | bigint>
+  Order?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 安全组ID
    */
-  RequestId?: string
+  SecurityGroupId?: string
+  /**
+   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
+   */
+  Type?: string
 }
 
 /**
@@ -6738,6 +6868,56 @@ export interface TagInfo {
 }
 
 /**
+ * DescribeNatFwSwitch返回参数结构体
+ */
+export interface DescribeNatFwSwitchResponse {
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * NAT边界防火墙开关列表数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<NatSwitchListData>
+  /**
+   * 开关相关VPC列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcList?: Array<CommonIdName>
+  /**
+   * 开关相关NAT列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatList?: Array<CommonIdName>
+  /**
+   * 开关相关ROUTE列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteList?: Array<CommonIdName>
+  /**
+   * 开启开关个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnNum?: number
+  /**
+   * 关闭开关个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OffNum?: number
+  /**
+   * 失败开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailData?: Array<CommonIdNameStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeResourceGroup返回参数结构体
  */
 export interface DescribeResourceGroupResponse {
@@ -7122,6 +7302,22 @@ export interface DescribeEnterpriseSGRuleProgressResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ID NAME 组合
+ */
+export interface CommonIdName {
+  /**
+   * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 资源名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
 }
 
 /**
@@ -7510,41 +7706,37 @@ export interface DescNatDnatRule {
 }
 
 /**
- * DescribeAssociatedInstanceList请求参数结构体
+ * DescribeBlockIgnoreList返回参数结构体
  */
-export interface DescribeAssociatedInstanceListRequest {
+export interface DescribeBlockIgnoreListResponse {
   /**
-   * 列表偏移量
+   * 列表数据
    */
-  Offset: number
+  Data?: Array<BlockIgnoreRule>
   /**
-   * 每页记录条数
+   * 查询结果总数，用于分页
    */
-  Limit: number
+  Total?: number
   /**
-   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
+   * 状态值，0：查询成功，非0：查询失败
    */
-  Area: string
+  ReturnCode?: number
   /**
-   * 额外检索条件（JSON字符串）
+   * 状态信息，success：查询成功，fail：查询失败
    */
-  SearchValue?: string
+  ReturnMsg?: string
   /**
-   * 排序字段
+   * 安全事件来源下拉框
    */
-  By?: string
+  SourceList?: Array<string>
   /**
-   * 排序方式（asc:升序,desc:降序）
+   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
    */
-  Order?: string
+  RuleTypeDataList?: Array<number | bigint>
   /**
-   * 安全组ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SecurityGroupId?: string
-  /**
-   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -7600,6 +7792,32 @@ export interface ModifyTableStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeNatFwSwitch请求参数结构体
+ */
+export interface DescribeNatFwSwitchRequest {
+  /**
+   * 偏移量，分页用
+   */
+  Offset: number
+  /**
+   * 条数，分页用
+   */
+  Limit: number
+  /**
+   * 过滤条件组合
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
 }
 
 /**

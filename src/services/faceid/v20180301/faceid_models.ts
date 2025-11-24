@@ -823,34 +823,6 @@ export interface MobileStatusResponse {
 }
 
 /**
- * Liveness返回参数结构体
- */
-export interface LivenessResponse {
-  /**
-   * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BestFrameBase64?: string
-  /**
-   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-   */
-  Result?: string
-  /**
-   * 业务结果描述。
-   */
-  Description?: string
-  /**
-   * 最佳最佳截图列表，仅在配置了返回多张最佳截图时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BestFrameList?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * EncryptedPhoneVerification请求参数结构体
  */
 export interface EncryptedPhoneVerificationRequest {
@@ -926,35 +898,6 @@ export interface DetectInfoVideoData {
 }
 
 /**
- * Liveness请求参数结构体
- */
-export interface LivenessRequest {
-  /**
-   * 用于活体检测的视频，视频的BASE64值；
-BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。
-   */
-  VideoBase64: string
-  /**
-   * 活体检测类型，取值：LIP/ACTION/SILENT。
-LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
-   */
-  LivenessType: string
-  /**
-   * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
-动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
-静默模式传参：不需要传递此参数。
-   */
-  ValidateData?: string
-  /**
-   * 额外配置，传入JSON字符串。
-{
-"BestFrameNum": 2  //需要返回多张最佳截图，取值范围1-10
-}
-   */
-  Optional?: string
-}
-
-/**
  * DetectAIFakeFaces请求参数结构体
  */
 export interface DetectAIFakeFacesRequest {
@@ -972,7 +915,7 @@ Base64编码后的大小建议在8M以内、最大不可超过10M，支持mp4、
 视频分辨率建议为480x640（最大支持720p），帧率在25fps~30fps之间。
 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
 
-示例值：/9j/4AAQSkZJRg.....s97n//2Q==
+若您未使用Encryption进行加密传输，则本字段为必填参数。
    */
   FaceInput?: string
   /**
@@ -981,6 +924,8 @@ Base64编码后的大小建议在8M以内、最大不可超过10M，支持mp4、
 1：传入的是图片类型。
 2：传入的是视频类型。
 其他：返回错误码InvalidParameter。
+
+若您未使用Encryption进行加密传输，则本字段为必填参数。
    */
   FaceInputType?: number
   /**
@@ -1545,7 +1490,7 @@ export interface RetrievalLivenessExtraInfo {
  */
 export interface IntentionActionConfig {
   /**
-   * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
+   * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为250个字符。
    */
   Text: string
 }
@@ -2437,7 +2382,7 @@ export interface DetectInfoText {
   /**
    * 本次流程活体一比一的分数。
 - 取值范围 [0.00, 100.00]。
-- 相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值。
+- 相似度大于等于70时才判断为同一人，阈值不支持自定义。
 - 阈值70的误通过率为千分之一，阈值80的误通过率是万分之一。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2524,6 +2469,19 @@ export interface DetectInfoText {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VisaNum?: string
+  /**
+   * 活体检测的动作顺序，多动作以“,”分隔。
+输出格式如：“1,2”表示“张嘴+眨眼”。
+- 详细序列值含义如下： 
+   1：张嘴
+2：眨眼
+3：点头
+4：摇头
+5：静默
+注：仅浮层H5产品返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LivenessActionSequence?: string
 }
 
 /**
@@ -3502,7 +3460,7 @@ export interface GetEidTokenResponse {
 export interface IntentionQuestion {
   /**
    * 当选择语音问答模式时，系统自动播报的问题文本。
-- 最大长度为150个字符。
+- 最大长度为250个字符。
    */
   Question: string
   /**

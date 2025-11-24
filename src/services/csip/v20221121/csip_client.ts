@@ -643,7 +643,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查视角下云资源配置风险列表示例
+   * 检查视角下云资源配置风险列表
    */
   async DescribeCheckViewRisks(
     req: DescribeCheckViewRisksRequest,

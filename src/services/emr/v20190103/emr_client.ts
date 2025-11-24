@@ -134,8 +134,10 @@ import {
   TimeAutoScaleStrategy,
   EmrProductConfigOutter,
   HostPathVolumeSource,
+  OperationLog,
   DescribeServiceConfGroupInfosResponse,
   PodSpec,
+  DescribeInstanceOplogRequest,
   InspectionTaskSettings,
   GroupInfo,
   ModifyYarnDeployRequest,
@@ -205,6 +207,7 @@ import {
   UserManagerFilter,
   MetaDbInfo,
   JobFlowResourceSpec,
+  DescribeInstanceOplogResponse,
   ZoneDetailPriceResult,
   DescribeAutoScaleGroupGlobalConfRequest,
   ModifyResourceScheduleConfigResponse,
@@ -929,6 +932,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceUpdateInstanceResponse) => void
   ): Promise<InquiryPriceUpdateInstanceResponse> {
     return this.request("InquiryPriceUpdateInstance", req, cb)
+  }
+
+  /**
+   * 获取实例操作日志
+   */
+  async DescribeInstanceOplog(
+    req: DescribeInstanceOplogRequest,
+    cb?: (error: string, rep: DescribeInstanceOplogResponse) => void
+  ): Promise<DescribeInstanceOplogResponse> {
+    return this.request("DescribeInstanceOplog", req, cb)
   }
 
   /**
