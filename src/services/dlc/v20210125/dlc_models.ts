@@ -406,6 +406,24 @@ export interface DescribeDMSDatabaseResponse {
 }
 
 /**
+ * DescribeTaskList返回参数结构体
+ */
+export interface DescribeTaskListResponse {
+  /**
+   * 任务对象列表。
+   */
+  TaskList?: Array<TaskFullRespInfo>
+  /**
+   * 实例总数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 策略集合
  */
 export interface Policys {
@@ -1440,6 +1458,57 @@ export interface DescribeUserInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTaskList请求参数结构体
+ */
+export interface DescribeTaskListRequest {
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。
+task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。
+task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。
+task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。
+task-operator- string （子uin过滤）
+task-kind - string （任务类型过滤）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段，支持如下字段类型，create-time（创建时间，默认）、update-time（更新时间）
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc。
+   */
+  Sorting?: string
+  /**
+   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻
+   */
+  StartTime?: string
+  /**
+   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻
+   */
+  EndTime?: string
+  /**
+   * 数据引擎名称，用于筛选
+   */
+  DataEngineName?: string
+  /**
+   * spark引擎资源组名称
+   */
+  ResourceGroupName?: string
+  /**
+   * 引擎id列表
+   */
+  HouseIds?: Array<string>
 }
 
 /**
@@ -5035,6 +5104,313 @@ export interface FavorInfo {
 }
 
 /**
+ * 任务实例。
+ */
+export interface TaskFullRespInfo {
+  /**
+   * 任务所属Database的名称。
+   */
+  DatabaseName?: string
+  /**
+   * 任务数据量。
+   */
+  DataAmount?: number
+  /**
+   * 任务Id。
+   */
+  Id?: string
+  /**
+   * 计算耗时，单位： ms
+   */
+  UsedTime?: number
+  /**
+   * 任务输出路径。
+   */
+  OutputPath?: string
+  /**
+   * 任务创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。
+   */
+  State?: number
+  /**
+   * 任务SQL类型，DDL|DML等
+   */
+  SQLType?: string
+  /**
+   * 任务SQL语句
+   */
+  SQL?: string
+  /**
+   * 结果是否过期。
+   */
+  ResultExpired?: boolean
+  /**
+   * 数据影响统计信息。
+   */
+  RowAffectInfo?: string
+  /**
+   * 任务结果数据表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSet?: string
+  /**
+   * 失败信息, 例如：errorMessage。该字段已废弃。
+   */
+  Error?: string
+  /**
+   * 任务执行进度num/100(%)
+   */
+  Percentage?: number
+  /**
+   * 任务执行输出信息。
+   */
+  OutputMessage?: string
+  /**
+   * 执行SQL的引擎类型
+   */
+  TaskType?: string
+  /**
+   * 任务进度明细
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgressDetail?: string
+  /**
+   * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 计算资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineId?: string
+  /**
+   * 执行sql的子uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateUin?: string
+  /**
+   * 计算资源名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineName?: string
+  /**
+   * 导入类型是本地导入还是cos
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputType?: string
+  /**
+   * 导入配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputConf?: string
+  /**
+   * 数据条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataNumber?: number
+  /**
+   * 查询数据能不能下载
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanDownload?: boolean
+  /**
+   * 用户别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAlias?: string
+  /**
+   * spark应用作业名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkJobName?: string
+  /**
+   * spark应用作业Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkJobId?: string
+  /**
+   * spark应用入口jar文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkJobFile?: string
+  /**
+   * spark ui url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UiUrl?: string
+  /**
+   * 任务耗时，单位： ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalTime?: number
+  /**
+   * spark app job执行task的程序入口参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CmdArgs?: string
+  /**
+   * 集群镜像大版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageVersion?: string
+  /**
+   * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DriverSize?: string
+  /**
+   * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorSize?: string
+  /**
+   * 指定executor数量，最小值为1，最大值小于集群规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorNums?: number
+  /**
+   * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutorMaxNumbers?: number
+  /**
+   * 任务公共指标数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommonMetrics?: CommonMetrics
+  /**
+   * spark任务指标数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkMonitorMetrics?: SparkMonitorMetrics
+  /**
+   * presto任务指标数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrestoMonitorMetrics?: PrestoMonitorMetrics
+  /**
+   * 结果文件格式：默认为csv
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultFormat?: string
+  /**
+   * 引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineTypeDetail?: string
+  /**
+   * spark引擎资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
+  /**
+   * 任务来源信息,如thirdPartyApi,dataExploration, sparkAppTask等
+   */
+  Source?: string
+  /**
+   * 子渠道信息，一般由第三方调用定义
+   */
+  SourceExtra?: string
+  /**
+   * 创建人uin
+   */
+  CreatorUin?: string
+  /**
+   * 创建人名字
+   */
+  CreatorAlias?: string
+  /**
+   * 引擎参数
+   */
+  CustomizedConf?: string
+  /**
+   * 单位秒，累计 CPU* 秒 ( 累计 CPU * 时 = 累计 CPU* 秒/ 3600)，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和
+示例值：4329
+   */
+  TaskTimeSum?: number
+  /**
+   * 引擎执行时间
+   */
+  StageStartTime?: number
+  /**
+   * 数据扫描条数
+   */
+  InputRecordsSum?: number
+  /**
+   * 健康状态
+   */
+  AnalysisStatusType?: number
+  /**
+   * 输出总行数
+   */
+  OutputRecordsSum?: number
+  /**
+   * 输出总大小
+   */
+  OutputBytesSum?: number
+  /**
+   * 输出文件个数
+   */
+  OutputFilesNum?: number
+  /**
+   * 输出小文件个数
+   */
+  OutputSmallFilesNum?: number
+  /**
+   * 数据shuffle行数
+   */
+  ShuffleReadRecordsSum?: number
+  /**
+   * 数据shuffle大小
+   */
+  ShuffleReadBytesSum?: number
+  /**
+   * spark作业id
+   */
+  SparkAppId?: string
+  /**
+   * 任务大类，DLC2.0中任务区分为两大类，sql任务和作业任务
+   */
+  TaskCategory?: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 引擎类型，用做任务详情页跳转引擎tab
+   */
+  EngineType?: string
+  /**
+   * 引擎是否支持洞察数据采集
+   */
+  EngineHasListenerConfig?: boolean
+  /**
+   * spark引擎资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * 任务计算耗时
+   */
+  JobTimeSum?: number
+  /**
+   * 任务启动耗时
+   */
+  LaunchTime?: string
+  /**
+   * Gpu Driver 规格
+   */
+  GpuDriverSize?: number
+  /**
+   * Gpu Executor 规格
+   */
+  GpuExecutorSize?: number
+}
+
+/**
  * DeleteDataEngine请求参数结构体
  */
 export interface DeleteDataEngineRequest {
@@ -7777,7 +8153,7 @@ export interface DescribeUserRolesRequest {
 }
 
 /**
- * ResourceInfo
+ * 数据优化资源信息结构
  */
 export interface ResourceInfo {
   /**
@@ -7809,6 +8185,10 @@ export interface ResourceInfo {
    * 标准引擎资源组信息
    */
   ResourceGroupName?: string
+  /**
+   * 资源配置信息
+   */
+  ResourceConf?: ResourceConf
 }
 
 /**
@@ -12163,6 +12543,16 @@ export interface DescribeDataEngineSessionParametersRequest {
    * 引擎名称，当指定引擎名称后优先使用名称获取配置
    */
   DataEngineName?: string
+}
+
+/**
+ * 数据治理资源配置项
+ */
+export interface ResourceConf {
+  /**
+   * 当为TCLake优化资源时，优化任务的并行度
+   */
+  Parallelism?: number
 }
 
 /**

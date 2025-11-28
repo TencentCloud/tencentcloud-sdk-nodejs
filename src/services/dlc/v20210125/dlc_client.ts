@@ -31,6 +31,7 @@ import {
   DescribeNotebookSessionsRequest,
   SmartOptimizerLifecyclePolicy,
   DescribeDMSDatabaseResponse,
+  DescribeTaskListResponse,
   Policys,
   DropDMSDatabaseRequest,
   NotebookSessionStatementBatchInformation,
@@ -70,6 +71,7 @@ import {
   SmartOptimizerPolicy,
   UnboundDatasourceHouseResponse,
   DescribeUserInfoResponse,
+  DescribeTaskListRequest,
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
   CreateImportTaskRequest,
@@ -228,6 +230,7 @@ import {
   DescribeTasksOverviewResponse,
   KafkaInfo,
   FavorInfo,
+  TaskFullRespInfo,
   DeleteDataEngineRequest,
   SmartPolicy,
   CreateSparkSessionBatchSQLResponse,
@@ -507,6 +510,7 @@ import {
   DescribeDataEngineResponse,
   DataEngineScaleInfo,
   DescribeDataEngineSessionParametersRequest,
+  ResourceConf,
   QueryTaskCostDetailRequest,
   ModifyDataEngineDescriptionResponse,
   UpdateDataEngineConfigRequest,
@@ -604,6 +608,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LaunchStandardEngineResourceGroupsResponse) => void
   ): Promise<LaunchStandardEngineResourceGroupsResponse> {
     return this.request("LaunchStandardEngineResourceGroups", req, cb)
+  }
+
+  /**
+   * 该接口（DescribleTasks）用于查询任务列表
+   */
+  async DescribeTaskList(
+    req: DescribeTaskListRequest,
+    cb?: (error: string, rep: DescribeTaskListResponse) => void
+  ): Promise<DescribeTaskListResponse> {
+    return this.request("DescribeTaskList", req, cb)
   }
 
   /**

@@ -3237,6 +3237,10 @@ RESET：对原有不健康实例进行重装系统操作，可保持数据盘、
 <li>False: 修改最大值或最小值时，如与当前期望数存在冲突，报错提示不允许修改。</li>
    */
   DesiredCapacitySyncWithMaxMinSize?: boolean
+  /**
+   * 优先缩容不健康实例。若开启，缩容时会优先选择不健康实例。默认值为 False。
+   */
+  PriorityScaleInUnhealthy?: boolean
 }
 
 /**

@@ -10332,44 +10332,6 @@ export interface DescribeLiveTimeShiftBillInfoListRequest {
 }
 
 /**
- * 录制任务
- */
-export interface RecordTask {
-  /**
-   * 录制任务ID。
-   */
-  TaskId?: string
-  /**
-   * 推流域名。
-   */
-  DomainName?: string
-  /**
-   * 推流路径。
-   */
-  AppName?: string
-  /**
-   * 流名称。
-   */
-  StreamName?: string
-  /**
-   * 任务开始时间，Unix时间戳。
-   */
-  StartTime?: number
-  /**
-   * 任务结束时间，Unix时间戳。
-   */
-  EndTime?: number
-  /**
-   * 录制模板ID。
-   */
-  TemplateId?: number
-  /**
-   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
-   */
-  Stopped?: number
-}
-
-/**
  * ModifyCaster请求参数结构体
  */
 export interface ModifyCasterRequest {
@@ -11065,36 +11027,6 @@ export interface StartLiveStreamMonitorResponse {
 }
 
 /**
- * DescribeLiveForbidStreamList返回参数结构体
- */
-export interface DescribeLiveForbidStreamListResponse {
-  /**
-   * 符合条件的总个数。
-   */
-  TotalNum: number
-  /**
-   * 总页数。
-   */
-  TotalPage: number
-  /**
-   * 分页的页码。
-   */
-  PageNum: number
-  /**
-   * 每页显示的条数。
-   */
-  PageSize: number
-  /**
-   * 禁推流列表。
-   */
-  ForbidStreamList: Array<ForbidStreamInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateLivePadRule返回参数结构体
  */
 export interface CreateLivePadRuleResponse {
@@ -11181,26 +11113,6 @@ export interface ModifyCasterInputInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeLiveForbidStreamList请求参数结构体
- */
-export interface DescribeLiveForbidStreamListRequest {
-  /**
-   * 取得第几页，默认1。
-   */
-  PageNum?: number
-  /**
-   * 每页大小，最大100。 
-取值：1~100之前的任意整数。
-默认值：10。
-   */
-  PageSize?: number
-  /**
-   * 按流名称查询。
-   */
-  StreamName?: string
 }
 
 /**
@@ -12109,33 +12021,41 @@ export interface DeleteCasterOutputInfoRequest {
 }
 
 /**
- * 禁推流列表
+ * 录制任务
  */
-export interface ForbidStreamInfo {
+export interface RecordTask {
+  /**
+   * 录制任务ID。
+   */
+  TaskId?: string
+  /**
+   * 推流域名。
+   */
+  DomainName?: string
+  /**
+   * 推流路径。
+   */
+  AppName?: string
   /**
    * 流名称。
    */
   StreamName?: string
   /**
-   * 创建时间。
-注：此字段为北京时间（UTC+8时区）。
+   * 任务开始时间，Unix时间戳。
    */
-  CreateTime?: string
+  StartTime?: number
   /**
-   * 禁推过期时间。
-注：此字段为北京时间（UTC+8时区）。
+   * 任务结束时间，Unix时间戳。
    */
-  ExpireTime?: string
+  EndTime?: number
   /**
-   * 推流路径。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 录制模板ID。
    */
-  AppName?: string
+  TemplateId?: number
   /**
-   * 推流域名。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
    */
-  DomainName?: string
+  Stopped?: number
 }
 
 /**

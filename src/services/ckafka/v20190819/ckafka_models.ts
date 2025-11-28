@@ -1953,6 +1953,35 @@ export interface CreateInstancePostData {
 }
 
 /**
+ * 变配类型查询出参
+ */
+export interface DescModifyType {
+  /**
+   * 变配类型
+   */
+  ModifyType: number
+  /**
+   * 是否迁移标志
+   */
+  MigrateFlag: boolean
+  /**
+   * 迁移预计耗时(稳定模式)秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrateCostTime: number
+  /**
+   * 升配模式(1:稳定模式，2:高速模式)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpgradeStrategy: number
+  /**
+   * 迁移预计耗时(高速模式)秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrateCostTimeHighSpeed: number
+}
+
+/**
  * DeleteDatahubTask返回参数结构体
  */
 export interface DeleteDatahubTaskResponse {
@@ -5703,6 +5732,44 @@ export interface DescribeTaskStatusResponse {
 }
 
 /**
+ * DescribeModifyType请求参数结构体
+ */
+export interface DescribeModifyTypeRequest {
+  /**
+   * ckafka集群实例Id
+   */
+  InstanceId: string
+  /**
+   * 升配后的带宽，单位mb
+   */
+  BandWidth: number
+  /**
+   * 升配后的磁盘，单位G
+   */
+  DiskSize: number
+  /**
+   * 磁盘类型，例如 CLOUD_PREMIUM
+   */
+  DiskType: string
+  /**
+   * 分区数量
+   */
+  Partition: number
+  /**
+   * topic数量
+   */
+  Topic: number
+  /**
+   * 实例类型例如 sp_ckafka_profession
+   */
+  Type: string
+  /**
+   * 变配入口
+   */
+  ModifyEntry?: string
+}
+
+/**
  * CreateUser返回参数结构体
  */
 export interface CreateUserResponse {
@@ -6143,25 +6210,21 @@ export interface DeleteInstancePreRequest {
 }
 
 /**
- * ClickHouse的Schema
+ * DeleteGroupSubscribeTopic请求参数结构体
  */
-export interface ClickHouseSchema {
+export interface DeleteGroupSubscribeTopicRequest {
   /**
-   * 表的列名
+   * ckafka集群实例Id
    */
-  ColumnName: string
+  InstanceId: string
   /**
-   * 该列对应的jsonKey名
+   * 消费分组名称
    */
-  JsonKey: string
+  Group: string
   /**
-   * 表列项的类型
+   * 主题名
    */
-  Type: string
-  /**
-   * 列项是否允许为空
-   */
-  AllowNull: boolean
+  Topic: string
 }
 
 /**
@@ -7963,6 +8026,28 @@ export interface DeleteGroupRequest {
 }
 
 /**
+ * ClickHouse的Schema
+ */
+export interface ClickHouseSchema {
+  /**
+   * 表的列名
+   */
+  ColumnName: string
+  /**
+   * 该列对应的jsonKey名
+   */
+  JsonKey: string
+  /**
+   * 表列项的类型
+   */
+  Type: string
+  /**
+   * 列项是否允许为空
+   */
+  AllowNull: boolean
+}
+
+/**
  * DescribeConnectResource请求参数结构体
  */
 export interface DescribeConnectResourceRequest {
@@ -8301,6 +8386,20 @@ export interface DescribeUserRequest {
 }
 
 /**
+ * DescribeModifyType返回参数结构体
+ */
+export interface DescribeModifyTypeResponse {
+  /**
+   * 返回的变配类型结构
+   */
+  Result?: DescModifyType
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatahubTopic请求参数结构体
  */
 export interface DescribeDatahubTopicRequest {
@@ -8587,6 +8686,20 @@ export interface DescribeSecurityGroupRoutesRequest {
  * ModifyPassword返回参数结构体
  */
 export interface ModifyPasswordResponse {
+  /**
+   * 返回结果
+   */
+  Result?: JgwOperateResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteGroupSubscribeTopic返回参数结构体
+ */
+export interface DeleteGroupSubscribeTopicResponse {
   /**
    * 返回结果
    */

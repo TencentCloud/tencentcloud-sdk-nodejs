@@ -3656,7 +3656,7 @@ export interface EnableTransparentDataEncryptionResponse {
  */
 export interface SetBackupRulesRequest {
   /**
-   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 实例id，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
   /**
@@ -3668,11 +3668,15 @@ export interface SetBackupRulesRequest {
 1. 通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。
 2. 实例开通存储加密，则备份方式不能为物理备份。
    */
-  BackupMethod: number
+  BackupMethod?: number
   /**
    * 设置自动备份开始时间。取值范围为：[0,23]，例如：该参数设置为2，表示02:00开始备份。
    */
-  BackupTime: number
+  BackupTime?: number
+  /**
+   * 自动备份频率，内部展示，默认取值为24h。
+   */
+  BackupFrequency?: number
   /**
    * 设置自动备份发生错误时，是否发送失败告警。
 - true：发送。
@@ -3683,6 +3687,34 @@ export interface SetBackupRulesRequest {
    * 指定备份数据保存天数。默认为 7 天，支持设置为7、30、90、180、365。
    */
   BackupRetentionPeriod?: number
+  /**
+   * 周几备份，0-6，逗号分割。仅对高级备份生效
+   */
+  ActiveWeekdays?: string
+  /**
+   * 长期保留周期，周weekly，月monthly，空不开启
+   */
+  LongTermUnit?: string
+  /**
+   * 长期保留哪些天的，周0-6，月1-31，逗号分割
+   */
+  LongTermActiveDays?: string
+  /**
+   * 长期备份保留多少天
+   */
+  LongTermExpiredDays?: number
+  /**
+   * 增量保留多少天
+   */
+  OplogExpiredDays?: number
+  /**
+   * 备份版本。旧版本备份为0，高级备份为1。开启高级备份此值传1
+   */
+  BackupVersion?: number
+  /**
+   * 告警额度。50-300
+   */
+  AlarmWaterLevel?: number
 }
 
 /**

@@ -447,6 +447,16 @@ export interface ResourceInfo {
    * 告警状态，0：停用，1：启用
    */
   AlarmStatus?: number
+  /**
+   * 0不支持
+1关闭
+2开启
+   */
+  PqcStatus?: number
+  /**
+   * 0关闭，1开启
+   */
+  PqcFlag?: number
 }
 
 /**
@@ -651,6 +661,10 @@ export interface DescribeVsmAttributesResponse {
    * 厂商
    */
   Manufacturer?: string
+  /**
+   * 0-关闭，1-开启
+   */
+  PqcFlag?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -88,6 +88,7 @@ import {
   UpgradeBrokerVersionResponse,
   DescribeConsumerGroupResponse,
   CreateInstancePostData,
+  DescModifyType,
   DeleteDatahubTaskResponse,
   InstanceAttributesResponse,
   DescribeDatahubTopicsResponse,
@@ -235,6 +236,7 @@ import {
   DescribeCvmInfoRequest,
   CdcClusterResponse,
   DescribeTaskStatusResponse,
+  DescribeModifyTypeRequest,
   CreateUserResponse,
   BrokerTopicData,
   BatchAnalyseParam,
@@ -255,7 +257,7 @@ import {
   CosParam,
   ZoneResponse,
   DeleteInstancePreRequest,
-  ClickHouseSchema,
+  DeleteGroupSubscribeTopicRequest,
   ConsumerGroupTopic,
   TransformsParam,
   PauseDatahubTaskRequest,
@@ -323,6 +325,7 @@ import {
   OperateResponseData,
   ClusterInfo,
   DeleteGroupRequest,
+  ClickHouseSchema,
   DescribeConnectResourceRequest,
   DeleteRouteResponse,
   CreatePrometheusResponse,
@@ -338,6 +341,7 @@ import {
   DealInstanceDTO,
   DescribeConnectResource,
   DescribeUserRequest,
+  DescribeModifyTypeResponse,
   DescribeDatahubTopicRequest,
   Config,
   ModifyPasswordRequest,
@@ -354,6 +358,7 @@ import {
   Filter,
   DescribeSecurityGroupRoutesRequest,
   ModifyPasswordResponse,
+  DeleteGroupSubscribeTopicResponse,
   InquireCkafkaPriceResponse,
   ListCvmAndIpInfoRsp,
   CreateRouteResponse,
@@ -436,6 +441,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConnectResourceResponse) => void
   ): Promise<DeleteConnectResourceResponse> {
     return this.request("DeleteConnectResource", req, cb)
+  }
+
+  /**
+   * 删除消费分组订阅的topic(消费分组必须是Empty 状态)
+   */
+  async DeleteGroupSubscribeTopic(
+    req: DeleteGroupSubscribeTopicRequest,
+    cb?: (error: string, rep: DeleteGroupSubscribeTopicResponse) => void
+  ): Promise<DeleteGroupSubscribeTopicResponse> {
+    return this.request("DeleteGroupSubscribeTopic", req, cb)
   }
 
   /**
@@ -789,13 +804,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暂停Dip任务
+   * 获取DIP主题属性
    */
-  async PauseDatahubTask(
-    req: PauseDatahubTaskRequest,
-    cb?: (error: string, rep: PauseDatahubTaskResponse) => void
-  ): Promise<PauseDatahubTaskResponse> {
-    return this.request("PauseDatahubTask", req, cb)
+  async DescribeDatahubTopic(
+    req: DescribeDatahubTopicRequest,
+    cb?: (error: string, rep: DescribeDatahubTopicResponse) => void
+  ): Promise<DescribeDatahubTopicResponse> {
+    return this.request("DescribeDatahubTopic", req, cb)
   }
 
   /**
@@ -806,6 +821,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void
   ): Promise<DescribeCkafkaZoneResponse> {
     return this.request("DescribeCkafkaZone", req, cb)
+  }
+
+  /**
+   * Datahub任务异常时，重启Datahub任务
+   */
+  async RestartDatahubTask(
+    req: RestartDatahubTaskRequest,
+    cb?: (error: string, rep: RestartDatahubTaskResponse) => void
+  ): Promise<RestartDatahubTaskResponse> {
+    return this.request("RestartDatahubTask", req, cb)
   }
 
   /**
@@ -1060,13 +1085,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Datahub任务异常时，重启Datahub任务
+   * 查询实例变配类型
    */
-  async RestartDatahubTask(
-    req: RestartDatahubTaskRequest,
-    cb?: (error: string, rep: RestartDatahubTaskResponse) => void
-  ): Promise<RestartDatahubTaskResponse> {
-    return this.request("RestartDatahubTask", req, cb)
+  async DescribeModifyType(
+    req: DescribeModifyTypeRequest,
+    cb?: (error: string, rep: DescribeModifyTypeResponse) => void
+  ): Promise<DescribeModifyTypeResponse> {
+    return this.request("DescribeModifyType", req, cb)
+  }
+
+  /**
+   * 暂停Dip任务
+   */
+  async PauseDatahubTask(
+    req: PauseDatahubTaskRequest,
+    cb?: (error: string, rep: PauseDatahubTaskResponse) => void
+  ): Promise<PauseDatahubTaskResponse> {
+    return this.request("PauseDatahubTask", req, cb)
   }
 
   /**
@@ -1137,16 +1172,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
-  }
-
-  /**
-   * 获取DIP主题属性
-   */
-  async DescribeDatahubTopic(
-    req: DescribeDatahubTopicRequest,
-    cb?: (error: string, rep: DescribeDatahubTopicResponse) => void
-  ): Promise<DescribeDatahubTopicResponse> {
-    return this.request("DescribeDatahubTopic", req, cb)
   }
 
   /**

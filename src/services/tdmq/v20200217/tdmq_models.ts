@@ -165,6 +165,14 @@ export interface ModifyRabbitMQVipInstanceRequest {
    * 是否开启删除保护，不填则不修改
    */
   EnableDeletionProtection?: boolean
+  /**
+   * 是否删除所有标签，默认为false
+   */
+  RemoveAllTags?: boolean
+  /**
+   * 修改实例的标签信息，全量标签信息，非增量
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -545,6 +553,10 @@ export interface RocketMQGroup {
    * 订阅的主题个数
    */
   SubscribeTopicNum?: number
+  /**
+   * 绑定的标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**
@@ -677,16 +689,16 @@ export interface RabbitMQVipInstance {
    */
   Remark?: string
   /**
-   * 集群的节点规格，需要输入对应的规格标识：
-2C8G：rabbit-vip-basic-2c8g
-4C16G：rabbit-vip-basic-4c16g
-8C32G：rabbit-vip-basic-8c32g
+   * 集群的节点规格，对应的规格标识：
+2C8G：rabbit-vip-profession-2c8g
+4C16G：rabbit-vip-profession-4c16g
+8C32G：rabbit-vip-profession-8c32g
 16C32G：rabbit-vip-basic-4
-16C64G：rabbit-vip-basic-16c64g
+16C64G：rabbit-vip-profession-16c64g
 2C4G：rabbit-vip-basic-5
 4C8G：rabbit-vip-basic-1
 8C16G（已售罄）：rabbit-vip-basic-2
-不传默认为4C8G：rabbit-vip-basic-1
+不传默认为 4C8G：rabbit-vip-basic-1
    */
   SpecName?: string
   /**
@@ -1403,29 +1415,21 @@ export interface DescribeRocketMQMsgRequest {
 }
 
 /**
- * RocketMQ消费组配置信息
+ * SendMessages返回参数结构体
  */
-export interface RocketMQGroupConfigOutput {
+export interface SendMessagesResponse {
   /**
-   * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
    */
-  Namespace?: string
+  MessageId?: string
   /**
-   * 消费组名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回的错误消息，如果返回为 “”，说明没有错误
    */
-  GroupName?: string
+  ErrorMsg?: string
   /**
-   * 是否已导入
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Imported?: boolean
-  /**
-   * remark
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
+  RequestId?: string
 }
 
 /**
@@ -1843,42 +1847,6 @@ export interface DeleteRocketMQNamespaceRequest {
    * 命名空间名称
    */
   NamespaceId: string
-}
-
-/**
- * DescribeRocketMQSmoothMigrationTaskList返回参数结构体
- */
-export interface DescribeRocketMQSmoothMigrationTaskListResponse {
-  /**
-   * 任务总数
-   */
-  TotalCount?: number
-  /**
-   * 任务列表
-   */
-  Data?: Array<RocketMQSmoothMigrationTaskItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeRocketMQSourceClusterTopicList返回参数结构体
- */
-export interface DescribeRocketMQSourceClusterTopicListResponse {
-  /**
-   * topic层列表
-   */
-  Topics?: Array<RocketMQTopicConfigOutput>
-  /**
-   * 总条数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2384,28 +2352,6 @@ export interface ModifyRabbitMQVipInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeRocketMQSourceClusterGroupList请求参数结构体
- */
-export interface DescribeRocketMQSourceClusterGroupListRequest {
-  /**
-   * 页大小
-   */
-  Limit: number
-  /**
-   * 偏移量
-   */
-  Offset: number
-  /**
-   * 迁移任务名称
-   */
-  TaskId: string
-  /**
-   * 查询过滤器，支持字段groupName，imported
-   */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -3187,6 +3133,10 @@ OFF/ON/CREATING/DELETING
    * TLS加密的数据流公网接入点
    */
   PublicTlsAccessEndpoint?: string
+  /**
+   * 公网IP是否复用
+   */
+  PublicIpReused?: boolean
 }
 
 /**
@@ -3375,11 +3325,11 @@ export interface CreateRabbitMQVipInstanceRequest {
   ClusterName: string
   /**
    * 集群的节点规格，需要输入对应的规格标识：
-2C8G：rabbit-vip-basic-2c8g
-4C16G：rabbit-vip-basic-4c16g
-8C32G：rabbit-vip-basic-8c32g
+2C8G：rabbit-vip-profession-2c8g
+4C16G：rabbit-vip-profession-4c16g
+8C32G：rabbit-vip-profession-8c32g
 16C32G：rabbit-vip-basic-4
-16C64G：rabbit-vip-basic-16c64g
+16C64G：rabbit-vip-profession-16c64g
 2C4G：rabbit-vip-basic-5
 4C8G：rabbit-vip-basic-1
 8C16G（已售罄）：rabbit-vip-basic-2
@@ -3411,7 +3361,7 @@ export interface CreateRabbitMQVipInstanceRequest {
    */
   PayMode?: number
   /**
-   * 集群版本，不传默认为 3.8.30，可选值为 3.8.30 和 3.11.8
+   * 集群版本，不传默认为 3.8.30，可选值为 3.8.30、3.11.8和3.13.7
    */
   ClusterVersion?: string
   /**
@@ -3536,98 +3486,6 @@ filterType = 2表示用户使用 bindingKey 过滤。
    * 订阅所属的主题名称
    */
   TopicName?: string
-}
-
-/**
- * RocketMQ主题配置信息
- */
-export interface RocketMQTopicConfigOutput {
-  /**
-   * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 主题名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicName?: string
-  /**
-   * 主题类型：
-Normal，普通
-GlobalOrder， 全局顺序
-PartitionedOrder, 分区顺序
-Transaction，事务消息
-DelayScheduled，延迟/定时消息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 分区个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Partitions?: number
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 是否导入
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Imported?: boolean
-}
-
-/**
- * RocketMQ平滑迁移任务
- */
-export interface RocketMQSmoothMigrationTaskItem {
-  /**
-   * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId?: string
-  /**
-   * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * 源集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceClusterName?: string
-  /**
-   * 目标集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterId?: string
-  /**
-   * 网络连接类型，
-PUBLIC 公网
-VPC 私有网络
-OTHER 其他
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConnectionType?: string
-  /**
-   * 源集群NameServer地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceNameServer?: string
-  /**
-   * 任务状态
-Configuration 迁移配置
-SourceConnecting 连接源集群中
-MetaDataImport 元数据导入
-EndpointSetup 切换接入点
-ServiceMigration 切流中
-Completed 已完成
-Cancelled 已取消
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskStatus?: string
 }
 
 /**
@@ -4167,6 +4025,16 @@ export interface DescribeMsgResponse {
    */
   ProducerName?: string
   /**
+   * 消息 key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 消息的元数据信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadata?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4222,6 +4090,10 @@ export interface ModifyRocketMQInstanceRequest {
    * 是否开启删除保护
    */
   EnableDeletionProtection?: boolean
+  /**
+   * 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5
+   */
+  SendReceiveRatio?: number
 }
 
 /**
@@ -4438,6 +4310,20 @@ export interface FilterSubscription {
    * 按照订阅名过滤，精确查询。
    */
   SubscriptionNames?: Array<string>
+}
+
+/**
+ * DescribeRocketMQTopic返回参数结构体
+ */
+export interface DescribeRocketMQTopicResponse {
+  /**
+   * Topic详情
+   */
+  Topic?: RocketMQTopic
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5385,6 +5271,10 @@ export interface RocketMQInstanceConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicNumUpperLimit?: number
+  /**
+   * 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5
+   */
+  SendReceiveRatio?: number
 }
 
 /**
@@ -6275,6 +6165,10 @@ export interface DescribeRocketMQTopicsRequest {
    * 按订阅消费组名称过滤
    */
   FilterGroup?: string
+  /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -7877,13 +7771,33 @@ export interface CmqDeadLetterSource {
 }
 
 /**
- * ClearCmqSubscriptionFilterTags返回参数结构体
+ * DescribeRocketMQTopic请求参数结构体
  */
-export interface ClearCmqSubscriptionFilterTagsResponse {
+export interface DescribeRocketMQTopicRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId: string
+  /**
+   * 命名空间
+   */
+  NamespaceId: string
+  /**
+   * 主题名称
+   */
+  TopicName: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
+  /**
+   * 订阅列表分页参数Offset
+   */
+  Offset?: number
+  /**
+   * 订阅列表分页参数Limit
+   */
+  Limit?: number
 }
 
 /**
@@ -8339,24 +8253,6 @@ export interface DescribeRocketMQConsumeStatsRequest {
 }
 
 /**
- * SendMessages返回参数结构体
- */
-export interface SendMessagesResponse {
-  /**
-   * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
-   */
-  MessageId?: string
-  /**
-   * 返回的错误消息，如果返回为 “”，说明没有错误
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * SendCmqMsg返回参数结构体
  */
 export interface SendCmqMsgResponse {
@@ -8372,6 +8268,20 @@ export interface SendCmqMsgResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签过滤器
+ */
+export interface TagFilter {
+  /**
+   * 标签键名称
+   */
+  TagKey: string
+  /**
+   * 标签值列表
+   */
+  TagValues: Array<string>
 }
 
 /**
@@ -8855,24 +8765,6 @@ export interface RetryRocketMQDlqMessageRequest {
    * 死信消息ID
    */
   MessageIds: Array<string>
-}
-
-/**
- * DescribeRocketMQSourceClusterGroupList返回参数结构体
- */
-export interface DescribeRocketMQSourceClusterGroupListResponse {
-  /**
-   * group列表
-   */
-  Groups?: Array<RocketMQGroupConfigOutput>
-  /**
-   * 总条数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -9361,30 +9253,6 @@ export interface DescribeCmqQueueDetailResponse {
 }
 
 /**
- * DescribeRocketMQSourceClusterTopicList请求参数结构体
- */
-export interface DescribeRocketMQSourceClusterTopicListRequest {
-  /**
-   * 分页大小
-   */
-  Limit: number
-  /**
-   * 偏移量
-   */
-  Offset: number
-  /**
-   * 迁移任务名
-   */
-  TaskId: string
-  /**
-   * 查询过滤器，支持字段如下
-TopicName,
-Type，Imported
-   */
-  Filters?: Array<Filter>
-}
-
-/**
  * ModifyCmqTopicAttribute返回参数结构体
  */
 export interface ModifyCmqTopicAttributeResponse {
@@ -9452,6 +9320,10 @@ export interface RocketMQTopic {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscriptionData?: Array<RocketMQSubscription>
+  /**
+   * 绑定的标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**
@@ -10034,29 +9906,6 @@ export interface DescribeRocketMQConsumerConnectionDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeRocketMQSmoothMigrationTaskList请求参数结构体
- */
-export interface DescribeRocketMQSmoothMigrationTaskListRequest {
-  /**
-   * 查询起始偏移量
-   */
-  Offset: number
-  /**
-   * 查询最大数量
-   */
-  Limit: number
-  /**
-   * 查询过滤器，
-支持的字段如下
-TaskStatus, 支持多选
-ConnectionType，支持多选
-ClusterId，精确搜索
-TaskName，支持模糊搜索
-   */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -10671,6 +10520,10 @@ export interface DescribeRocketMQGroupsRequest {
    * group类型
    */
   Types?: Array<string>
+  /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -10695,6 +10548,16 @@ export interface DescribeRocketMQMsgTraceResponse {
  * ImportRocketMQTopics返回参数结构体
  */
 export interface ImportRocketMQTopicsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ClearCmqSubscriptionFilterTags返回参数结构体
+ */
+export interface ClearCmqSubscriptionFilterTagsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

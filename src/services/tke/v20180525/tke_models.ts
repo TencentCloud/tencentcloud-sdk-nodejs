@@ -388,69 +388,21 @@ export interface SwitchInfo {
 }
 
 /**
- * CreateClusterNodePool请求参数结构体
+ * DescribeEdgeClusterInstances返回参数结构体
  */
-export interface CreateClusterNodePoolRequest {
+export interface DescribeEdgeClusterInstancesResponse {
   /**
-   * cluster id
+   * 该集群总数
    */
-  ClusterId: string
+  TotalCount?: number
   /**
-   * AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440
+   * 节点信息集合
    */
-  AutoScalingGroupPara: string
+  InstanceInfoSet?: string
   /**
-   * LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LaunchConfigurePara: string
-  /**
-   * InstanceAdvancedSettings
-   */
-  InstanceAdvancedSettings: InstanceAdvancedSettings
-  /**
-   * 是否启用自动伸缩
-   */
-  EnableAutoscale: boolean
-  /**
-   * 节点池名称
-   */
-  Name?: string
-  /**
-   * Labels标签
-   */
-  Labels?: Array<Label>
-  /**
-   * Taints互斥
-   */
-  Taints?: Array<Taint>
-  /**
-   * 节点Annotation 列表
-   */
-  Annotations?: Array<AnnotationValue>
-  /**
-   * 节点池纬度运行时类型及版本
-   */
-  ContainerRuntime?: string
-  /**
-   * 运行时版本
-   */
-  RuntimeVersion?: string
-  /**
-   * 节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName
-   */
-  NodePoolOs?: string
-  /**
-   * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-   */
-  OsCustomizeType?: string
-  /**
-   * 资源标签
-   */
-  Tags?: Array<Tag>
-  /**
-   * 删除保护开关
-   */
-  DeletionProtection?: boolean
+  RequestId?: string
 }
 
 /**
@@ -867,6 +819,20 @@ export interface ModifyPrometheusAlertRuleResponse {
 }
 
 /**
+ * DescribeUpgradeTasks请求参数结构体
+ */
+export interface DescribeUpgradeTasksRequest {
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
+}
+
+/**
  * DescribeEKSContainerInstanceEvent返回参数结构体
  */
 export interface DescribeEKSContainerInstanceEventResponse {
@@ -936,6 +902,16 @@ export interface ClusterAsGroup {
    * 创建时间
    */
   CreatedTime?: string
+}
+
+/**
+ * DeleteRollOutSequence返回参数结构体
+ */
+export interface DeleteRollOutSequenceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1480,6 +1456,24 @@ export interface SyncPrometheusTempResponse {
 }
 
 /**
+ * SwitchClusterEndpoint请求参数结构体
+ */
+export interface SwitchClusterEndpointRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+   */
+  IsExtranet?: boolean
+  /**
+   * 切换回滚至非直连
+   */
+  Rollback?: boolean
+}
+
+/**
  * CreateEdgeLogConfig请求参数结构体
  */
 export interface CreateEdgeLogConfigRequest {
@@ -1594,6 +1588,20 @@ export interface CreateBackupStorageLocationRequest {
 }
 
 /**
+ * CancelUpgradePlan请求参数结构体
+ */
+export interface CancelUpgradePlanRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+  /**
+   * 升级计划ID
+   */
+  PlanID: number
+}
+
+/**
  * prometheus配置
  */
 export interface PrometheusConfigItem {
@@ -1610,6 +1618,24 @@ export interface PrometheusConfigItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateId?: string
+}
+
+/**
+ * DescribeUpgradeTaskDetail请求参数结构体
+ */
+export interface DescribeUpgradeTaskDetailRequest {
+  /**
+   * 升级任务ID
+   */
+  ID: number
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
 }
 
 /**
@@ -1658,6 +1684,16 @@ export interface DescribeEKSClusterCredentialResponse {
    * 连接用户集群k8s 的Config
    */
   Kubeconfig?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateClusterMaintenanceWindowAndExclusions返回参数结构体
+ */
+export interface CreateClusterMaintenanceWindowAndExclusionsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1782,6 +1818,24 @@ export interface DeleteAddonRequest {
    * addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。
    */
   AddonName: string
+}
+
+/**
+ * DescribeUpgradeTasks返回参数结构体
+ */
+export interface DescribeUpgradeTasksResponse {
+  /**
+   * 升级任务
+   */
+  UpgradeTasks?: Array<UpgradeTask>
+  /**
+   * 总条目数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2633,6 +2687,24 @@ export interface DeletePrometheusTempSyncResponse {
 }
 
 /**
+ * DescribeClusterMaintenanceWindowAndExclusions请求参数结构体
+ */
+export interface DescribeClusterMaintenanceWindowAndExclusionsRequest {
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
+  /**
+   * 过滤项
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribePrometheusRecordRules请求参数结构体
  */
 export interface DescribePrometheusRecordRulesRequest {
@@ -2711,21 +2783,25 @@ export interface AcquireClusterAdminRoleResponse {
 }
 
 /**
- * DescribeEdgeClusterInstances返回参数结构体
+ * 集群发布序列标签
  */
-export interface DescribeEdgeClusterInstancesResponse {
+export interface ClusterRollOutSequenceTag {
   /**
-   * 该集群总数
+   * 集群ID
    */
-  TotalCount?: number
+  ClusterID?: string
   /**
-   * 节点信息集合
+   * 集群名称
    */
-  InstanceInfoSet?: string
+  ClusterName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群发布序列标签
    */
-  RequestId?: string
+  Tags?: Array<Tag>
+  /**
+   * 地域
+   */
+  Region?: string
 }
 
 /**
@@ -2782,6 +2858,32 @@ export interface DescribeExternalNodeSupportConfigRequest {
    * 集群Id
    */
   ClusterId: string
+}
+
+/**
+ * CreateGlobalMaintenanceWindowAndExclusions请求参数结构体
+ */
+export interface CreateGlobalMaintenanceWindowAndExclusionsRequest {
+  /**
+   * 维护开始时间
+   */
+  MaintenanceTime: string
+  /**
+   * 维护时长(小时)
+   */
+  Duration: number
+  /**
+   * 维护周期（一周中的哪几天）
+   */
+  DayOfWeek: Array<string>
+  /**
+   * 地域
+   */
+  TargetRegions: Array<string>
+  /**
+   * 维护排除项
+   */
+  Exclusions?: Array<MaintenanceExclusion>
 }
 
 /**
@@ -3030,6 +3132,11 @@ export interface DescribeClusterNodePoolsRequest {
  * DescribeClusterRouteTables请求参数结构体
  */
 export type DescribeClusterRouteTablesRequest = null
+
+/**
+ * DescribeRegions请求参数结构体
+ */
+export type DescribeRegionsRequest = null
 
 /**
  * DeleteClusterRoute请求参数结构体
@@ -3352,6 +3459,24 @@ export interface ListClusterInspectionResultsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeClusterRollOutSequenceTags请求参数结构体
+ */
+export interface DescribeClusterRollOutSequenceTagsRequest {
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
+  /**
+   * 过滤项
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3976,6 +4101,16 @@ webhook
 }
 
 /**
+ * CreateGlobalMaintenanceWindowAndExclusions返回参数结构体
+ */
+export interface CreateGlobalMaintenanceWindowAndExclusionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRIUtilizationDetail请求参数结构体
  */
 export interface DescribeRIUtilizationDetailRequest {
@@ -4077,6 +4212,16 @@ export interface BackupStorageLocation {
 }
 
 /**
+ * DeleteClusterMaintenanceWindowAndExclusion请求参数结构体
+ */
+export interface DeleteClusterMaintenanceWindowAndExclusionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+}
+
+/**
  * DescribeEKSClusters返回参数结构体
  */
 export interface DescribeEKSClustersResponse {
@@ -4128,6 +4273,24 @@ export interface VolumeMount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubPathExpr?: string
+}
+
+/**
+ * DescribeClusterRollOutSequenceTags返回参数结构体
+ */
+export interface DescribeClusterRollOutSequenceTagsResponse {
+  /**
+   * 集群发布序列标签
+   */
+  ClusterTags?: Array<ClusterRollOutSequenceTag>
+  /**
+   * 总条目数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4414,6 +4577,16 @@ export interface DescribeEdgeClusterInstancesRequest {
    * 过滤条件，仅支持NodeName过滤
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DeleteGlobalMaintenanceWindowAndExclusion请求参数结构体
+ */
+export interface DeleteGlobalMaintenanceWindowAndExclusionRequest {
+  /**
+   * 全局维护时间窗口ID
+   */
+  ID: number
 }
 
 /**
@@ -4773,6 +4946,32 @@ export interface CreateClusterInstancesRequest {
 }
 
 /**
+ * CreateClusterMaintenanceWindowAndExclusions请求参数结构体
+ */
+export interface CreateClusterMaintenanceWindowAndExclusionsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+  /**
+   * 维护开始时间
+   */
+  MaintenanceTime: string
+  /**
+   * 维护时长（小时）
+   */
+  Duration: number
+  /**
+   * 维护周期（一周中的哪几天）
+   */
+  DayOfWeek: Array<string>
+  /**
+   * 维护排除项
+   */
+  Exclusions?: Array<MaintenanceExclusion>
+}
+
+/**
  * DeleteBackupStorageLocation请求参数结构体
  */
 export interface DeleteBackupStorageLocationRequest {
@@ -4780,6 +4979,16 @@ export interface DeleteBackupStorageLocationRequest {
    * 备份仓库名称
    */
   Name: string
+}
+
+/**
+ * ModifyClusterMaintenanceWindowAndExclusions返回参数结构体
+ */
+export interface ModifyClusterMaintenanceWindowAndExclusionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4816,6 +5025,16 @@ export interface UninstallClusterReleaseResponse {
    * 应用详情
    */
   Release?: PendingRelease
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelUpgradePlan返回参数结构体
+ */
+export interface CancelUpgradePlanResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5134,35 +5353,17 @@ export interface DescribeEdgeClusterExtraArgsRequest {
 }
 
 /**
- * DescribeRouteTableConflicts返回参数结构体
+ * DescribePrometheusClusterAgents返回参数结构体
  */
-export interface DescribeRouteTableConflictsResponse {
+export interface DescribePrometheusClusterAgentsResponse {
   /**
-   * 路由表是否冲突。
+   * 被关联集群信息
    */
-  HasConflict?: boolean
+  Agents?: Array<PrometheusAgentOverview>
   /**
-   * 路由表冲突列表。
+   * 被关联集群总量
    */
-  RouteTableConflictSet?: Array<RouteTableConflict>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClusters返回参数结构体
- */
-export interface DescribeClustersResponse {
-  /**
-   * 集群总个数
-   */
-  TotalCount?: number
-  /**
-   * 集群信息列表
-   */
-  Clusters?: Array<Cluster>
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5501,6 +5702,32 @@ export interface UpgradeClusterReleaseResponse {
 }
 
 /**
+ * ModifyClusterMaintenanceWindowAndExclusions请求参数结构体
+ */
+export interface ModifyClusterMaintenanceWindowAndExclusionsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+  /**
+   * 维护开始时间
+   */
+  MaintenanceTime: string
+  /**
+   * 维护时长（小时）
+   */
+  Duration: number
+  /**
+   * 维护周期（一周中的哪几天）
+   */
+  DayOfWeek: Array<string>
+  /**
+   * 维护排除项
+   */
+  Exclusions?: Array<MaintenanceExclusion>
+}
+
+/**
  * DescribePrometheusAlertPolicy请求参数结构体
  */
 export interface DescribePrometheusAlertPolicyRequest {
@@ -5553,6 +5780,44 @@ export interface ModifyClusterRuntimeConfigRequest {
    * 需要修改节点池运行时，填需要修改的部分
    */
   NodePoolRuntimeConfig?: Array<NodePoolRuntime>
+}
+
+/**
+ * 升级计划
+ */
+export interface UpgradePlan {
+  /**
+   * 升级计划ID
+   */
+  ID?: number
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 预计开始时间
+   */
+  PlanedStartAt?: string
+  /**
+   * 升级开始时间
+   */
+  UpgradeStartAt?: string
+  /**
+   * 升级结束时间
+   */
+  UpgradeEndAt?: string
+  /**
+   * 升级状态
+   */
+  Status?: string
+  /**
+   * 原因
+   */
+  Reason?: string
 }
 
 /**
@@ -6240,6 +6505,44 @@ export interface DescribeClusterRoutesRequest {
 }
 
 /**
+ * 维护时间窗口和排除项
+ */
+export interface MaintenanceWindowAndExclusion {
+  /**
+   * 维护开始时间
+   */
+  MaintenanceTime: string
+  /**
+   * 维护时长（小时）
+   */
+  Duration: number
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+  /**
+   * 维护周期（一周中的哪几天）
+   */
+  DayOfWeek: Array<string>
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群版本
+   */
+  ClusterVersion?: string
+  /**
+   * 排除项
+   */
+  Exclusions?: Array<MaintenanceExclusion>
+}
+
+/**
  * DeleteECMInstances请求参数结构体
  */
 export interface DeleteECMInstancesRequest {
@@ -6582,6 +6885,94 @@ export interface InstanceUpgradePreCheckResultItem {
 }
 
 /**
+ * ModifyRollOutSequence请求参数结构体
+ */
+export interface ModifyRollOutSequenceRequest {
+  /**
+   * 发布序列ID
+   */
+  ID: number
+  /**
+   * 发布序列名称
+   */
+  Name: string
+  /**
+   * 发布序列步骤
+   */
+  SequenceFlows: Array<SequenceFlow>
+  /**
+   * 是否启用
+   */
+  Enabled: boolean
+}
+
+/**
+ * CreateClusterNodePool请求参数结构体
+ */
+export interface CreateClusterNodePoolRequest {
+  /**
+   * cluster id
+   */
+  ClusterId: string
+  /**
+   * AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440
+   */
+  AutoScalingGroupPara: string
+  /**
+   * LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447
+   */
+  LaunchConfigurePara: string
+  /**
+   * InstanceAdvancedSettings
+   */
+  InstanceAdvancedSettings: InstanceAdvancedSettings
+  /**
+   * 是否启用自动伸缩
+   */
+  EnableAutoscale: boolean
+  /**
+   * 节点池名称
+   */
+  Name?: string
+  /**
+   * Labels标签
+   */
+  Labels?: Array<Label>
+  /**
+   * Taints互斥
+   */
+  Taints?: Array<Taint>
+  /**
+   * 节点Annotation 列表
+   */
+  Annotations?: Array<AnnotationValue>
+  /**
+   * 节点池纬度运行时类型及版本
+   */
+  ContainerRuntime?: string
+  /**
+   * 运行时版本
+   */
+  RuntimeVersion?: string
+  /**
+   * 节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName
+   */
+  NodePoolOs?: string
+  /**
+   * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+   */
+  OsCustomizeType?: string
+  /**
+   * 资源标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 删除保护开关
+   */
+  DeletionProtection?: boolean
+}
+
+/**
  * DeleteClusterNodePool返回参数结构体
  */
 export interface DeleteClusterNodePoolResponse {
@@ -6658,9 +7049,9 @@ export interface KMSConfiguration {
 }
 
 /**
- * UpdateTKEEdgeCluster返回参数结构体
+ * CreateRollOutSequence返回参数结构体
  */
-export interface UpdateTKEEdgeClusterResponse {
+export interface CreateRollOutSequenceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7083,24 +7474,6 @@ export interface DescribeClusterVirtualNodePoolsRequest {
    * 集群ID，通过DescribeClusters接口获取
    */
   ClusterId: string
-}
-
-/**
- * DescribePrometheusRecordRules返回参数结构体
- */
-export interface DescribePrometheusRecordRulesResponse {
-  /**
-   * 聚合规则
-   */
-  Records?: Array<PrometheusRecordRuleYamlItem>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7556,6 +7929,40 @@ export interface ModifyPrometheusTempResponse {
 }
 
 /**
+ * 升级任务
+ */
+export interface UpgradeTask {
+  /**
+   * 任务ID
+   */
+  ID?: number
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 组件名称
+   */
+  Component?: string
+  /**
+   * 关联资源
+   */
+  RelatedResources?: Array<string>
+  /**
+   * 升级影响
+   */
+  UpgradeImpact?: string
+  /**
+   * 预计开始时间
+   */
+  PlanedStartAt?: string
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+}
+
+/**
  * 虚拟节点
  */
 export interface VirtualNode {
@@ -7732,6 +8139,16 @@ export interface AutoScalingGroupRange {
 }
 
 /**
+ * ModifyRollOutSequence返回参数结构体
+ */
+export interface ModifyRollOutSequenceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePrometheusGlobalNotification请求参数结构体
  */
 export interface DescribePrometheusGlobalNotificationRequest {
@@ -7813,6 +8230,24 @@ export interface ModifyPrometheusAlertPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateRollOutSequence请求参数结构体
+ */
+export interface CreateRollOutSequenceRequest {
+  /**
+   * 发布序列名称
+   */
+  Name: string
+  /**
+   * 发布序列步骤
+   */
+  SequenceFlows: Array<SequenceFlow>
+  /**
+   * 是否启用
+   */
+  Enabled: boolean
 }
 
 /**
@@ -8256,6 +8691,36 @@ export interface ImageCacheEvent {
 }
 
 /**
+ * ModifyGlobalMaintenanceWindowAndExclusions请求参数结构体
+ */
+export interface ModifyGlobalMaintenanceWindowAndExclusionsRequest {
+  /**
+   * 维护窗口ID
+   */
+  ID: number
+  /**
+   * 地域
+   */
+  TargetRegions: Array<string>
+  /**
+   * 维护开始时间
+   */
+  MaintenanceTime: string
+  /**
+   * 维护时长（小时）
+   */
+  Duration: number
+  /**
+   * 维护周期（一周中的哪几天）
+   */
+  DayOfWeek: Array<string>
+  /**
+   * 维护排除项
+   */
+  Exclusions?: Array<MaintenanceExclusion>
+}
+
+/**
  * CreatePrometheusClusterAgent请求参数结构体
  */
 export interface CreatePrometheusClusterAgentRequest {
@@ -8350,6 +8815,24 @@ export interface DescribeClusterLevelAttributeRequest {
    * 集群ID，变配时使用
    */
   ClusterID?: string
+}
+
+/**
+ * DescribeClusterMaintenanceWindowAndExclusions返回参数结构体
+ */
+export interface DescribeClusterMaintenanceWindowAndExclusionsResponse {
+  /**
+   * 维护时间窗口和排除项
+   */
+  MaintenanceWindowAndExclusions?: Array<MaintenanceWindowAndExclusion>
+  /**
+   * 总条目数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8866,6 +9349,24 @@ export interface DescribePrometheusAlertRuleRequest {
 }
 
 /**
+ * ModifyPrometheusRecordRuleYaml请求参数结构体
+ */
+export interface ModifyPrometheusRecordRuleYamlRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 聚合实例名称
+   */
+  Name: string
+  /**
+   * 新的内容
+   */
+  Content: string
+}
+
+/**
  * UninstallLogAgent请求参数结构体
  */
 export interface UninstallLogAgentRequest {
@@ -9265,6 +9766,36 @@ export interface ImageInstance {
    * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
    */
   OsCustomizeType?: string
+}
+
+/**
+ * 全局维护时间窗口和排除项
+ */
+export interface GlobalMaintenanceWindowAndExclusion {
+  /**
+   * 地域
+   */
+  TargetRegions?: Array<string>
+  /**
+   * 维护开始时间
+   */
+  MaintenanceTime?: string
+  /**
+   * 维护时长（小时）
+   */
+  Duration?: number
+  /**
+   * 维护周期（一周中的哪几天）
+   */
+  DayOfWeek?: Array<string>
+  /**
+   * 排除项
+   */
+  Exclusions?: Array<MaintenanceExclusion>
+  /**
+   * 维护窗口ID
+   */
+  ID?: number
 }
 
 /**
@@ -9856,6 +10387,16 @@ export interface ClusterAsGroupAttribute {
 }
 
 /**
+ * SwitchClusterEndpoint返回参数结构体
+ */
+export interface SwitchClusterEndpointResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ForwardTKEEdgeApplicationRequestV3请求参数结构体
  */
 export interface ForwardTKEEdgeApplicationRequestV3Request {
@@ -10166,6 +10707,16 @@ export interface DescribeClusterExtraArgsRequest {
 }
 
 /**
+ * ModifyGlobalMaintenanceWindowAndExclusions返回参数结构体
+ */
+export interface ModifyGlobalMaintenanceWindowAndExclusionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterAsGroups返回参数结构体
  */
 export interface DescribeClusterAsGroupsResponse {
@@ -10177,6 +10728,16 @@ export interface DescribeClusterAsGroupsResponse {
    * 集群关联的伸缩组列表
    */
   ClusterAsGroupSet?: Array<ClusterAsGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteClusterMaintenanceWindowAndExclusion返回参数结构体
+ */
+export interface DeleteClusterMaintenanceWindowAndExclusionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10634,21 +11195,13 @@ export interface DescribeAvailableTKEEdgeVersionResponse {
 }
 
 /**
- * ModifyPrometheusRecordRuleYaml请求参数结构体
+ * DeleteGlobalMaintenanceWindowAndExclusion返回参数结构体
  */
-export interface ModifyPrometheusRecordRuleYamlRequest {
+export interface DeleteGlobalMaintenanceWindowAndExclusionResponse {
   /**
-   * 实例id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 聚合实例名称
-   */
-  Name: string
-  /**
-   * 新的内容
-   */
-  Content: string
+  RequestId?: string
 }
 
 /**
@@ -10815,6 +11368,24 @@ export interface CreateEKSClusterRequest {
    * 子网信息列表
    */
   SubnetInfos?: Array<SubnetInfos>
+}
+
+/**
+ * DescribeUpgradeTaskDetail返回参数结构体
+ */
+export interface DescribeUpgradeTaskDetailResponse {
+  /**
+   * 升级计划
+   */
+  UpgradePlans?: Array<UpgradePlan>
+  /**
+   * 总条目数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11019,6 +11590,16 @@ export interface Release {
    * 应用描述
    */
   Description?: string
+}
+
+/**
+ * UninstallEdgeLogAgent请求参数结构体
+ */
+export interface UninstallEdgeLogAgentRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -11328,31 +11909,31 @@ export interface ClusterNetworkSettings {
 }
 
 /**
- * DescribeImages返回参数结构体
+ * DeleteRollOutSequence请求参数结构体
  */
-export interface DescribeImagesResponse {
+export interface DeleteRollOutSequenceRequest {
   /**
-   * 镜像数量
+   * 发布序列ID
    */
-  TotalCount?: number
-  /**
-   * 镜像信息列表
-   */
-  ImageInstanceSet?: Array<ImageInstance>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ID: number
 }
 
 /**
- * UninstallEdgeLogAgent请求参数结构体
+ * DescribeGlobalMaintenanceWindowAndExclusions请求参数结构体
  */
-export interface UninstallEdgeLogAgentRequest {
+export interface DescribeGlobalMaintenanceWindowAndExclusionsRequest {
   /**
-   * 集群ID
+   * 偏移量，默认为0
    */
-  ClusterId: string
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
+  /**
+   * 筛选项
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -11523,6 +12104,28 @@ export interface AvailableExtraArgs {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Kubelet?: Array<Flag>
+}
+
+/**
+ * 维护时间排除项
+ */
+export interface MaintenanceExclusion {
+  /**
+   * 维护排除项名称
+   */
+  Name: string
+  /**
+   * 维护排除项开始时间
+   */
+  StartAt: string
+  /**
+   * 维护排除项结束时间
+   */
+  EndAt: string
+  /**
+   * 维护排除项ID
+   */
+  ID?: number
 }
 
 /**
@@ -11982,6 +12585,24 @@ export interface UnavailableReason {
 }
 
 /**
+ * DescribeImages返回参数结构体
+ */
+export interface DescribeImagesResponse {
+  /**
+   * 镜像数量
+   */
+  TotalCount?: number
+  /**
+   * 镜像信息列表
+   */
+  ImageInstanceSet?: Array<ImageInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetUpgradeInstanceProgress请求参数结构体
  */
 export interface GetUpgradeInstanceProgressRequest {
@@ -12042,9 +12663,36 @@ export interface DescribeEdgeCVMInstancesResponse {
 }
 
 /**
- * DescribeRegions请求参数结构体
+ * DescribePrometheusRecordRules返回参数结构体
  */
-export type DescribeRegionsRequest = null
+export interface DescribePrometheusRecordRulesResponse {
+  /**
+   * 聚合规则
+   */
+  Records?: Array<PrometheusRecordRuleYamlItem>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRollOutSequences请求参数结构体
+ */
+export interface DescribeRollOutSequencesRequest {
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
+}
 
 /**
  * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
@@ -12421,6 +13069,20 @@ export interface DescribeClusterEndpointStatusRequest {
 }
 
 /**
+ * 发布序列标签
+ */
+export interface SequenceTag {
+  /**
+   * 标签键
+   */
+  Key?: string
+  /**
+   * 标签值
+   */
+  Value?: Array<string>
+}
+
+/**
  * DescribeClusterStatus返回参数结构体
  */
 export interface DescribeClusterStatusResponse {
@@ -12461,17 +13123,17 @@ export interface ImageRegistryCredential {
 }
 
 /**
- * DescribePrometheusClusterAgents返回参数结构体
+ * DescribeRouteTableConflicts返回参数结构体
  */
-export interface DescribePrometheusClusterAgentsResponse {
+export interface DescribeRouteTableConflictsResponse {
   /**
-   * 被关联集群信息
+   * 路由表是否冲突。
    */
-  Agents?: Array<PrometheusAgentOverview>
+  HasConflict?: boolean
   /**
-   * 被关联集群总量
+   * 路由表冲突列表。
    */
-  Total?: number
+  RouteTableConflictSet?: Array<RouteTableConflict>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13279,6 +13941,34 @@ export interface DescribeClusterLevelChangeRecordsResponse {
 }
 
 /**
+ * DescribeRollOutSequences返回参数结构体
+ */
+export interface DescribeRollOutSequencesResponse {
+  /**
+   * 发布序列
+   */
+  Sequences?: Array<RollOutSequence>
+  /**
+   * 总条目数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateTKEEdgeCluster返回参数结构体
+ */
+export interface UpdateTKEEdgeClusterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群状态信息
  */
 export interface ClusterStatus {
@@ -13382,6 +14072,16 @@ export interface EtcdOverrideConfig {
    * k8s资源，支持核心资源，控制类资源，配置及敏感资源
    */
   Resources: Array<string>
+}
+
+/**
+ * ModifyClusterRollOutSequenceTags返回参数结构体
+ */
+export interface ModifyClusterRollOutSequenceTagsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13562,6 +14262,28 @@ export interface DescribeClusterInspectionResultsOverviewResponse {
 }
 
 /**
+ * 发布序列
+ */
+export interface RollOutSequence {
+  /**
+   * 发布序列名称
+   */
+  Name: string
+  /**
+   * 发布序列步骤
+   */
+  SequenceFlows: Array<SequenceFlow>
+  /**
+   * 是否启用
+   */
+  Enabled: boolean
+  /**
+   * 发布序列ID
+   */
+  ID?: number
+}
+
+/**
  * DescribePodChargeInfo返回参数结构体
  */
 export interface DescribePodChargeInfoResponse {
@@ -13590,6 +14312,24 @@ export interface DeletePrometheusRecordRuleYamlRequest {
 }
 
 /**
+ * DescribeClusters返回参数结构体
+ */
+export interface DescribeClustersResponse {
+  /**
+   * 集群总个数
+   */
+  TotalCount?: number
+  /**
+   * 集群信息列表
+   */
+  Clusters?: Array<Cluster>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InstallAddon请求参数结构体
  */
 export interface InstallAddonRequest {
@@ -13613,6 +14353,24 @@ export interface InstallAddonRequest {
    * 是否仅做安装检查，设置为true时仅做检查，不会安装组件。默认值为 false。
    */
   DryRun?: boolean
+}
+
+/**
+ * DescribeGlobalMaintenanceWindowAndExclusions返回参数结构体
+ */
+export interface DescribeGlobalMaintenanceWindowAndExclusionsResponse {
+  /**
+   * 总条目数
+   */
+  TotalCount?: number
+  /**
+   * 维护时间窗口
+   */
+  MaintenanceWindowAndExclusions?: Array<GlobalMaintenanceWindowAndExclusion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13698,6 +14456,34 @@ export interface DescribeClusterCommonNamesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyClusterRollOutSequenceTags请求参数结构体
+ */
+export interface ModifyClusterRollOutSequenceTagsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+  /**
+   * 集群发布序列标签（为空时表示移除集群标签）
+   */
+  Tags?: Array<Tag>
+}
+
+/**
+ * 发布序列步骤
+ */
+export interface SequenceFlow {
+  /**
+   * 发布序列步骤标签
+   */
+  Tags: Array<SequenceTag>
+  /**
+   * 等待时间（秒）
+   */
+  SoakTime: number
 }
 
 /**

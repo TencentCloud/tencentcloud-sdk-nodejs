@@ -808,16 +808,6 @@ it("live.v20180801.DeleteLivePullStreamTask", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveForbidStreamList", async function () {
-    try {
-       const data = await client.DescribeLiveForbidStreamList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("live.v20180801.ModifyLivePadTemplate", async function () {
     try {
        const data = await client.ModifyLivePadTemplate({})

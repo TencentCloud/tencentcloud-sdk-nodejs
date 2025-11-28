@@ -271,6 +271,10 @@ export interface ServerPushText {
    * 是否将文本加入到llm历史上下文中
    */
   AddHistory?: boolean
+  /**
+   * 如果填写，会和字幕绑定发送到端上，注意确保内容为json字符串
+   */
+  MetaInfo?: string
 }
 
 /**
@@ -337,7 +341,7 @@ export interface MixLayout {
    */
   ImageLayer?: number
   /**
-   * 图片的url地址， 只支持jpg, png, jpeg，大小限制不超过5M。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
+   * 图片的url地址， 只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
    */
   SubBackgroundImage?: string
 }
@@ -3013,7 +3017,7 @@ export interface MixLayoutParams {
    */
   MediaId?: number
   /**
-   * 图片的url地址，只支持jpg, png, jpeg，大小限制不超过5M。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
+   * 图片的url地址，只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
    */
   BackgroundImageUrl?: string
   /**
@@ -3025,7 +3029,7 @@ export interface MixLayoutParams {
    */
   BackgroundImageRenderMode?: number
   /**
-   * 子画面占位图url地址，只支持jpg, png, jpeg，大小限制不超过5M。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
+   * 子画面占位图url地址，只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '='
    */
   DefaultSubBackgroundImage?: string
   /**

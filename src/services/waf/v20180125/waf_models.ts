@@ -1356,6 +1356,16 @@ export interface ModifyApiAnalyzeStatusResponse {
 }
 
 /**
+ * RemoveBypassAllRule返回参数结构体
+ */
+export interface RemoveBypassAllRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAttackWhiteRule请求参数结构体
  */
 export interface ModifyAttackWhiteRuleRequest {
@@ -2223,6 +2233,16 @@ export interface RateLimitCommonRsp {
 }
 
 /**
+ * AddBypassAllRule返回参数结构体
+ */
+export interface AddBypassAllRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyWafAutoDenyRules返回参数结构体
  */
 export interface ModifyWafAutoDenyRulesResponse {
@@ -2394,6 +2414,11 @@ export interface Strategy {
    */
   CaseNotSensitive?: number
 }
+
+/**
+ * RemoveBypassAllRule请求参数结构体
+ */
+export type RemoveBypassAllRuleRequest = null
 
 /**
  * ModifyInstanceAttackLogPost返回参数结构体
@@ -3334,6 +3359,20 @@ export interface DescribeUserDomainInfoResponse {
    * saas和clb域名信息
    */
   UsersInfo?: Array<UserDomainInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryBypassAllStatus返回参数结构体
+ */
+export interface QueryBypassAllStatusResponse {
+  /**
+   * 该用户是否被加入了全局的bypass列表
+   */
+  Result: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5996,6 +6035,11 @@ export interface DescribeDomainDetailsClbResponse {
    */
   RequestId?: string
 }
+
+/**
+ * AddBypassAllRule请求参数结构体
+ */
+export type AddBypassAllRuleRequest = null
 
 /**
  * DescribeAccessExports接口
@@ -11987,6 +12031,11 @@ export interface ModifyDomainIpv6StatusRequest {
    */
   Status: number
 }
+
+/**
+ * QueryBypassAllStatus请求参数结构体
+ */
+export type QueryBypassAllStatusRequest = null
 
 /**
  * DescribeAntiInfoLeakageRules返回参数结构体

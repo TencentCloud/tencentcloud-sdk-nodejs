@@ -88,6 +88,16 @@ it("dlc.v20210125.LaunchStandardEngineResourceGroups", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeTaskList", async function () {
+    try {
+       const data = await client.DescribeTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeWorkGroupInfo", async function () {
     try {
        const data = await client.DescribeWorkGroupInfo({})

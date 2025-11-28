@@ -73,6 +73,7 @@ import {
   PiechartItem,
   DeleteHostResponse,
   ModifyApiAnalyzeStatusResponse,
+  RemoveBypassAllRuleResponse,
   ModifyAttackWhiteRuleRequest,
   HostRecord,
   DescribeBotUCBRuleRsp,
@@ -106,12 +107,14 @@ import {
   ApiSecSceneRule,
   DescribeHostResponse,
   RateLimitCommonRsp,
+  AddBypassAllRuleResponse,
   ModifyWafAutoDenyRulesResponse,
   DescribeUserSignatureRuleResponse,
   AccessValueInfo,
   Rule,
   DescribePostCKafkaFlowsResponse,
   Strategy,
+  RemoveBypassAllRuleRequest,
   ModifyInstanceAttackLogPostResponse,
   UpsertCCRuleResponse,
   DescribeHostRequest,
@@ -149,6 +152,7 @@ import {
   FieldWriteConfig,
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
+  QueryBypassAllStatusResponse,
   MatchOption,
   ModifyOwaspRuleTypeActionResponse,
   LoadBalancer,
@@ -245,6 +249,7 @@ import {
   JWTConfig,
   UCBEntryValue,
   DescribeDomainDetailsClbResponse,
+  AddBypassAllRuleRequest,
   ExportAccessInfo,
   DescribeIpAccessControlRequest,
   CreateRateLimitV2Response,
@@ -469,6 +474,7 @@ import {
   CreatePostCLSFlowRequest,
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
+  QueryBypassAllStatusRequest,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
@@ -848,6 +854,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加一键bypass能力支持,直接添加APPID
+   */
+  async AddBypassAllRule(
+    req?: AddBypassAllRuleRequest,
+    cb?: (error: string, rep: AddBypassAllRuleResponse) => void
+  ): Promise<AddBypassAllRuleResponse> {
+    return this.request("AddBypassAllRule", req, cb)
+  }
+
+  /**
    * 编辑防篡改url
    */
   async ModifyAntiFakeUrl(
@@ -945,6 +961,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWafThreatenIntelligenceResponse) => void
   ): Promise<DescribeWafThreatenIntelligenceResponse> {
     return this.request("DescribeWafThreatenIntelligence", req, cb)
+  }
+
+  /**
+   * 删除一键bypass规则
+   */
+  async RemoveBypassAllRule(
+    req?: RemoveBypassAllRuleRequest,
+    cb?: (error: string, rep: RemoveBypassAllRuleResponse) => void
+  ): Promise<RemoveBypassAllRuleResponse> {
+    return this.request("RemoveBypassAllRule", req, cb)
   }
 
   /**
@@ -1859,6 +1885,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpsertCCAutoStatusResponse) => void
   ): Promise<UpsertCCAutoStatusResponse> {
     return this.request("UpsertCCAutoStatus", req, cb)
+  }
+
+  /**
+   * 查询该用户是否被加入了全局的bypass列表
+   */
+  async QueryBypassAllStatus(
+    req?: QueryBypassAllStatusRequest,
+    cb?: (error: string, rep: QueryBypassAllStatusResponse) => void
+  ): Promise<QueryBypassAllStatusResponse> {
+    return this.request("QueryBypassAllStatus", req, cb)
   }
 
   /**

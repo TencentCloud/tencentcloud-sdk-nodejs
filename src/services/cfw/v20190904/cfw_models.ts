@@ -56,7 +56,7 @@ export interface DescribeLogsRequest {
    */
   Index: string
   /**
-   * 每页条数，最大支持2000
+   * 每页条数，最大支持1000
    */
   Limit: number
   /**

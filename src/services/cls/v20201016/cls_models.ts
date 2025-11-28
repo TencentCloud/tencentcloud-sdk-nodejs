@@ -1196,6 +1196,14 @@ export interface CreateTopicRequest {
    */
   HotPeriod?: number
   /**
+   * 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。
+0或者不传： 不加密
+1：kms-cls 云产品密钥加密
+
+支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo
+   */
+  Encryption?: number
+  /**
    * 主题类型
 - 0:日志主题，默认值
 - 1:指标主题

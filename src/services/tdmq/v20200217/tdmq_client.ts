@@ -62,7 +62,7 @@ import {
   Publisher,
   ModifyRoleRequest,
   DescribeRocketMQMsgRequest,
-  RocketMQGroupConfigOutput,
+  SendMessagesResponse,
   CreateTopicRequest,
   DescribeCmqTopicsResponse,
   DescribeRocketMQMsgTraceRequest,
@@ -78,8 +78,6 @@ import {
   SendRocketMQMessageRequest,
   CreateClusterResponse,
   DeleteRocketMQNamespaceRequest,
-  DescribeRocketMQSmoothMigrationTaskListResponse,
-  DescribeRocketMQSourceClusterTopicListResponse,
   DeleteRabbitMQPermissionRequest,
   CreateTopicResponse,
   ReceiveMessageResponse,
@@ -97,7 +95,6 @@ import {
   DeleteRabbitMQPermissionResponse,
   DeleteRabbitMQBindingResponse,
   ModifyRabbitMQVipInstanceResponse,
-  DescribeRocketMQSourceClusterGroupListRequest,
   DescribePulsarProInstancesRequest,
   RocketMQGroupConfig,
   VpcEndpointInfo,
@@ -135,8 +132,6 @@ import {
   DescribeRocketMQSmoothMigrationTaskRequest,
   DeleteClusterRequest,
   CmqSubscription,
-  RocketMQTopicConfigOutput,
-  RocketMQSmoothMigrationTaskItem,
   VpcInfo,
   DeleteCmqTopicResponse,
   CreateRocketMQNamespaceRequest,
@@ -170,6 +165,7 @@ import {
   DeleteEnvironmentsResponse,
   DescribeRabbitMQBindingsResponse,
   FilterSubscription,
+  DescribeRocketMQTopicResponse,
   TopicStats,
   DescribeClustersResponse,
   ClearCmqSubscriptionFilterTagsRequest,
@@ -293,7 +289,7 @@ import {
   DeleteRocketMQClusterResponse,
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
-  ClearCmqSubscriptionFilterTagsResponse,
+  DescribeRocketMQTopicRequest,
   DescribeRocketMQSubscriptionsRequest,
   ResetMsgSubOffsetByTimestampRequest,
   DescribeBindVpcsResponse,
@@ -315,8 +311,8 @@ import {
   DescribeMqMsgTraceResponse,
   CreateRabbitMQUserRequest,
   DescribeRocketMQConsumeStatsRequest,
-  SendMessagesResponse,
   SendCmqMsgResponse,
+  TagFilter,
   ModifyCmqQueueAttributeRequest,
   RabbitMQClusterSpecInfo,
   DeleteCmqSubscribeResponse,
@@ -339,7 +335,6 @@ import {
   DescribeRocketMQPublicAccessPointRequest,
   RabbitMQPrivateNode,
   RetryRocketMQDlqMessageRequest,
-  DescribeRocketMQSourceClusterGroupListResponse,
   DescribeRocketMQTopicsByGroupRequest,
   DescribeRocketMQConsumeStatsResponse,
   DescribeRocketMQPublicAccessMonitorDataResponse,
@@ -349,7 +344,6 @@ import {
   Topic,
   ModifyRabbitMQPermissionResponse,
   DescribeCmqQueueDetailResponse,
-  DescribeRocketMQSourceClusterTopicListRequest,
   ModifyCmqTopicAttributeResponse,
   RocketMQTopic,
   DeleteRocketMQVipInstanceResponse,
@@ -376,7 +370,6 @@ import {
   RocketMQClusterDetail,
   DescribeRocketMQGroupsResponse,
   DescribeRocketMQConsumerConnectionDetailResponse,
-  DescribeRocketMQSmoothMigrationTaskListRequest,
   CreateClusterRequest,
   DeleteProClusterResponse,
   ModifyCmqQueueAttributeResponse,
@@ -405,6 +398,7 @@ import {
   DescribeRocketMQGroupsRequest,
   DescribeRocketMQMsgTraceResponse,
   ImportRocketMQTopicsResponse,
+  ClearCmqSubscriptionFilterTagsResponse,
   DescribePublisherSummaryResponse,
   DeleteCmqTopicRequest,
   DescribePulsarProInstanceDetailResponse,
@@ -867,13 +861,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改cmq主题属性
+   * 获取RocketMQ主题详情
    */
-  async ModifyCmqTopicAttribute(
-    req: ModifyCmqTopicAttributeRequest,
-    cb?: (error: string, rep: ModifyCmqTopicAttributeResponse) => void
-  ): Promise<ModifyCmqTopicAttributeResponse> {
-    return this.request("ModifyCmqTopicAttribute", req, cb)
+  async DescribeRocketMQTopic(
+    req: DescribeRocketMQTopicRequest,
+    cb?: (error: string, rep: DescribeRocketMQTopicResponse) => void
+  ): Promise<DescribeRocketMQTopicResponse> {
+    return this.request("DescribeRocketMQTopic", req, cb)
   }
 
   /**
@@ -894,16 +888,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCmqSubscriptionDetailResponse) => void
   ): Promise<DescribeCmqSubscriptionDetailResponse> {
     return this.request("DescribeCmqSubscriptionDetail", req, cb)
-  }
-
-  /**
-   * 获取环境下主题列表
-   */
-  async GetTopicList(
-    req: GetTopicListRequest,
-    cb?: (error: string, rep: GetTopicListResponse) => void
-  ): Promise<GetTopicListResponse> {
-    return this.request("GetTopicList", req, cb)
   }
 
   /**
@@ -947,15 +931,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 平滑迁移相关接口已迁移至trocket产品下，该接口已废弃
-
-平滑迁移过程获取源集群topic列表接口
-     */
-  async DescribeRocketMQSourceClusterTopicList(
-    req: DescribeRocketMQSourceClusterTopicListRequest,
-    cb?: (error: string, rep: DescribeRocketMQSourceClusterTopicListResponse) => void
-  ): Promise<DescribeRocketMQSourceClusterTopicListResponse> {
-    return this.request("DescribeRocketMQSourceClusterTopicList", req, cb)
+   * 获取环境下主题列表
+   */
+  async GetTopicList(
+    req: GetTopicListRequest,
+    cb?: (error: string, rep: GetTopicListResponse) => void
+  ): Promise<GetTopicListResponse> {
+    return this.request("GetTopicList", req, cb)
   }
 
   /**
@@ -1036,6 +1018,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSubscriptionsResponse) => void
   ): Promise<DescribeSubscriptionsResponse> {
     return this.request("DescribeSubscriptions", req, cb)
+  }
+
+  /**
+     * 批量发送消息
+
+注意：TDMQ 批量发送消息的接口是在 TDMQ-HTTP 的服务侧将消息打包为一个 Batch，然后将该 Batch 在服务内部当作一次 TCP 请求发送出去。所以在使用过程中，用户还是按照单条消息发送的逻辑，每一条消息是一个独立的 HTTP 的请求，在 TDMQ-HTTP 的服务内部，会将多个 HTTP 的请求聚合为一个 Batch 发送到服务端。即，批量发送消息在使用上与发送单条消息是一致的，batch 的聚合是在 TDMQ-HTTP 的服务内部完成的。
+     */
+  async SendBatchMessages(
+    req: SendBatchMessagesRequest,
+    cb?: (error: string, rep: SendBatchMessagesResponse) => void
+  ): Promise<SendBatchMessagesResponse> {
+    return this.request("SendBatchMessages", req, cb)
   }
 
   /**
@@ -1236,18 +1230,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RetryRocketMQDlqMessageResponse) => void
   ): Promise<RetryRocketMQDlqMessageResponse> {
     return this.request("RetryRocketMQDlqMessage", req, cb)
-  }
-
-  /**
-     * 平滑迁移相关接口已迁移至trocket产品下，该接口已废弃
-
-用于查询RocketMQ平滑迁移任务列表
-     */
-  async DescribeRocketMQSmoothMigrationTaskList(
-    req: DescribeRocketMQSmoothMigrationTaskListRequest,
-    cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskListResponse) => void
-  ): Promise<DescribeRocketMQSmoothMigrationTaskListResponse> {
-    return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb)
   }
 
   /**
@@ -1562,15 +1544,13 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-     * 批量发送消息
-
-注意：TDMQ 批量发送消息的接口是在 TDMQ-HTTP 的服务侧将消息打包为一个 Batch，然后将该 Batch 在服务内部当作一次 TCP 请求发送出去。所以在使用过程中，用户还是按照单条消息发送的逻辑，每一条消息是一个独立的 HTTP 的请求，在 TDMQ-HTTP 的服务内部，会将多个 HTTP 的请求聚合为一个 Batch 发送到服务端。即，批量发送消息在使用上与发送单条消息是一致的，batch 的聚合是在 TDMQ-HTTP 的服务内部完成的。
-     */
-  async SendBatchMessages(
-    req: SendBatchMessagesRequest,
-    cb?: (error: string, rep: SendBatchMessagesResponse) => void
-  ): Promise<SendBatchMessagesResponse> {
-    return this.request("SendBatchMessages", req, cb)
+   * 修改cmq主题属性
+   */
+  async ModifyCmqTopicAttribute(
+    req: ModifyCmqTopicAttributeRequest,
+    cb?: (error: string, rep: ModifyCmqTopicAttributeResponse) => void
+  ): Promise<ModifyCmqTopicAttributeResponse> {
+    return this.request("ModifyCmqTopicAttribute", req, cb)
   }
 
   /**
@@ -1812,18 +1792,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DescribeCmqQueueDetailResponse) => void
   ): Promise<DescribeCmqQueueDetailResponse> {
     return this.request("DescribeCmqQueueDetail", req, cb)
-  }
-
-  /**
-     * 平滑迁移相关接口已迁移至trocket产品下，该接口已废弃
-
-平滑迁移过程获取源集群group列表接口
-     */
-  async DescribeRocketMQSourceClusterGroupList(
-    req: DescribeRocketMQSourceClusterGroupListRequest,
-    cb?: (error: string, rep: DescribeRocketMQSourceClusterGroupListResponse) => void
-  ): Promise<DescribeRocketMQSourceClusterGroupListResponse> {
-    return this.request("DescribeRocketMQSourceClusterGroupList", req, cb)
   }
 
   /**

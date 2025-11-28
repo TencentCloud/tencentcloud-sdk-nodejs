@@ -212,6 +212,7 @@ import {
   SmartSubtitleTaskTransTextResultOutput,
   ImageProcessTaskOutput,
   ComposeTargetInfo,
+  TaskStatData,
   EvaluationTaskInput,
   DescribeInputRTMPPullSettings,
   MediaProcessTaskInput,
@@ -494,6 +495,7 @@ import {
   DeleteAsrHotwordsResponse,
   SmartSubtitleTaskAsrFullTextSegmentItem,
   QualityControlItem,
+  TaskStatDataItem,
   SpekeDrm,
   DeleteStreamLinkFlowResponse,
   LiveStreamAsrFullTextRecognitionResult,
@@ -530,6 +532,7 @@ import {
   AiRecognitionTaskObjectResultOutput,
   AiAnalysisTaskDelLogoOutput,
   DescribeBatchTaskDetailRequest,
+  DescribeUsageDataResponse,
   AiReviewProhibitedAsrTaskOutput,
   LiveStreamFaceRecognitionResult,
   SmartEraseTaskResult,
@@ -573,6 +576,7 @@ import {
   CosFileUploadTrigger,
   AiReviewPoliticalAsrTaskOutput,
   FlowRealtimeStatusSRT,
+  SpecificationDataItem,
   TEHDConfigForUpdate,
   DeleteStreamLinkOutputRequest,
   ModifyPersonSampleRequest,
@@ -713,6 +717,7 @@ import {
   FlowMediaAudio,
   DescribeTranscodeTemplatesRequest,
   DescribeSmartSubtitleTemplatesResponse,
+  DescribeUsageDataRequest,
   DescribeStreamLinkSecurityGroupsResponse,
   BatchDeleteStreamLinkFlowResponse,
   SchedulesInfo,
@@ -1970,6 +1975,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateScheduleResponse) => void
   ): Promise<CreateScheduleResponse> {
     return this.request("CreateSchedule", req, cb)
+  }
+
+  /**
+     * 该接口返回查询时间范围内每天使用的媒体处理用量信息。
+   1. 可以查询最近365天内的媒体处理统计数据。
+   2. 查询时间跨度不超过90天。
+     */
+  async DescribeUsageData(
+    req: DescribeUsageDataRequest,
+    cb?: (error: string, rep: DescribeUsageDataResponse) => void
+  ): Promise<DescribeUsageDataResponse> {
+    return this.request("DescribeUsageData", req, cb)
   }
 
   /**

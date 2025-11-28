@@ -448,7 +448,6 @@ import {
   DescribeLiveTimeShiftRulesRequest,
   ForbidLiveDomainResponse,
   DescribeLiveTimeShiftBillInfoListRequest,
-  RecordTask,
   ModifyCasterRequest,
   PushQualityData,
   DescribeLiveCertRequest,
@@ -473,13 +472,11 @@ import {
   ModifyPullStreamConfigResponse,
   DescribeProvinceIspPlayInfoListRequest,
   StartLiveStreamMonitorResponse,
-  DescribeLiveForbidStreamListResponse,
   CreateLivePadRuleResponse,
   DescribeLiveWatermarkResponse,
   DescribeTimeShiftStreamListResponse,
   DescribeLiveStreamPushInfoListRequest,
   ModifyCasterInputInfoResponse,
-  DescribeLiveForbidStreamListRequest,
   StartLivePadStreamResponse,
   LiveStreamMonitorNotifyPolicy,
   LiveStreamMonitorInfo,
@@ -519,7 +516,7 @@ import {
   CreateCasterPgmFromPvwRequest,
   GroupProIspDataInfo,
   DeleteCasterOutputInfoRequest,
-  ForbidStreamInfo,
+  RecordTask,
   DescribeTimeShiftRecordDetailResponse,
   DeleteLiveDomainResponse,
   AddCasterMarkPicInfoRequest,
@@ -1382,18 +1379,6 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DeleteLivePullStreamTaskResponse) => void
   ): Promise<DeleteLivePullStreamTaskResponse> {
     return this.request("DeleteLivePullStreamTask", req, cb)
-  }
-
-  /**
-     * 获取禁推流列表。
-
-注意：该接口仅作为直播辅助查询接口，重要业务场景不可强依赖该接口。
-     */
-  async DescribeLiveForbidStreamList(
-    req: DescribeLiveForbidStreamListRequest,
-    cb?: (error: string, rep: DescribeLiveForbidStreamListResponse) => void
-  ): Promise<DescribeLiveForbidStreamListResponse> {
-    return this.request("DescribeLiveForbidStreamList", req, cb)
   }
 
   /**

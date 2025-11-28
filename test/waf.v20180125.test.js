@@ -278,6 +278,16 @@ it("waf.v20180125.DeleteCustomRule", async function () {
     }
 })
 
+it("waf.v20180125.AddBypassAllRule", async function () {
+    try {
+       const data = await client.AddBypassAllRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAntiFakeUrl", async function () {
     try {
        const data = await client.ModifyAntiFakeUrl({})
@@ -371,6 +381,16 @@ it("waf.v20180125.SearchAccessLog", async function () {
 it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
     try {
        const data = await client.DescribeWafThreatenIntelligence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.RemoveBypassAllRule", async function () {
+    try {
+       const data = await client.RemoveBypassAllRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1301,16 @@ it("waf.v20180125.SwitchDomainRules", async function () {
 it("waf.v20180125.UpsertCCAutoStatus", async function () {
     try {
        const data = await client.UpsertCCAutoStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.QueryBypassAllStatus", async function () {
+    try {
+       const data = await client.QueryBypassAllStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

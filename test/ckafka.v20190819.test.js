@@ -68,6 +68,16 @@ it("ckafka.v20190819.DeleteConnectResource", async function () {
     }
 })
 
+it("ckafka.v20190819.DeleteGroupSubscribeTopic", async function () {
+    try {
+       const data = await client.DeleteGroupSubscribeTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeUser", async function () {
     try {
        const data = await client.DescribeUser({})
@@ -418,9 +428,9 @@ it("ckafka.v20190819.AuthorizeToken", async function () {
     }
 })
 
-it("ckafka.v20190819.PauseDatahubTask", async function () {
+it("ckafka.v20190819.DescribeDatahubTopic", async function () {
     try {
-       const data = await client.PauseDatahubTask({})
+       const data = await client.DescribeDatahubTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +441,16 @@ it("ckafka.v20190819.PauseDatahubTask", async function () {
 it("ckafka.v20190819.DescribeCkafkaZone", async function () {
     try {
        const data = await client.DescribeCkafkaZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.RestartDatahubTask", async function () {
+    try {
+       const data = await client.RestartDatahubTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +708,19 @@ it("ckafka.v20190819.DescribeConnectResources", async function () {
     }
 })
 
-it("ckafka.v20190819.RestartDatahubTask", async function () {
+it("ckafka.v20190819.DescribeModifyType", async function () {
     try {
-       const data = await client.RestartDatahubTask({})
+       const data = await client.DescribeModifyType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.PauseDatahubTask", async function () {
+    try {
+       const data = await client.PauseDatahubTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,16 +791,6 @@ it("ckafka.v20190819.DescribeGroup", async function () {
 it("ckafka.v20190819.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ckafka.v20190819.DescribeDatahubTopic", async function () {
-    try {
-       const data = await client.DescribeDatahubTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

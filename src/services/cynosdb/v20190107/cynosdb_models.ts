@@ -980,6 +980,14 @@ export interface UpgradeProxyRequest {
    * 数据库代理节点信息
    */
   ProxyZones?: Array<ProxyZone>
+  /**
+   * 是否滚动升级
+   */
+  IsRollUpgrade?: string
+  /**
+   * 滚动升级等待时间，单位：秒
+   */
+  RollUpgradeWaitingTime?: number
 }
 
 /**
@@ -5034,7 +5042,7 @@ export interface GdnTaskInfo {
    */
   StandbyClusterId?: string
   /**
-   * 从集群别名
+   * 从集群名称
    */
   StandbyClusterName?: string
 }
@@ -5473,6 +5481,15 @@ export interface CynosdbInstanceDetail {
   Zone?: string
   /**
    * 实例状态
+creating：创建中
+running：运行中
+isolating：隔离中
+isolated：已隔离
+activating：解隔离中
+offlining：下线中
+offlined：已下线
+deleting：删除中
+deleted：已删除
    */
   Status?: string
   /**
@@ -6586,6 +6603,7 @@ export interface QueryFilter {
   Name?: string
   /**
    * 操作符
+   * @deprecated
    */
   Operator?: string
 }
@@ -8034,6 +8052,18 @@ export interface TradePrice {
    * 计费价格单位
    */
   ChargeUnit?: string
+  /**
+   * 高精度下不包含优惠价格
+   */
+  UnitPriceHighPrecision?: string
+  /**
+   * 高精度下优惠后价格
+   */
+  UnitPriceDiscountHighPrecision?: string
+  /**
+   * 货币单位
+   */
+  AmountUnit?: string
 }
 
 /**

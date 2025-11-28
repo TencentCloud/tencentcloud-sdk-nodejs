@@ -1162,13 +1162,17 @@ export interface OperateChannelTemplateResponse {
    */
   AuthTag?: string
   /**
-   * 第三方平台子客企业标识列表
+   * 第三方平台子客企业标识列表，仅在select 模式下返回
    */
   ProxyOrganizationOpenIds?: Array<string>
   /**
    * 操作失败信息数组
    */
   FailMessageList?: Array<AuthFailMessage>
+  /**
+   * 授权的平台子企业数量，OperateType 为select 时返回。
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9880,7 +9884,8 @@ export interface OperateChannelTemplateRequest {
    */
   TemplateId: string
   /**
-   * 第三方平台子客企业的唯一标识，支持批量(用,分割)，
+   * 第三方平台子客企业的唯一标识，支持批量(用,分割) 
+一次批量操作最多支持100个第三方平台子客
    */
   ProxyOrganizationOpenIds?: string
   /**
@@ -9912,6 +9917,15 @@ export interface OperateChannelTemplateRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 指定分页每页返回的数据条数，单页最大支持 100。
+不传默认值为 20
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量，默认为0
+   */
+  Offset?: number
 }
 
 /**

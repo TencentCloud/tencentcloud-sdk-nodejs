@@ -362,6 +362,20 @@ export interface ModifyPositionFenceResponse {
 }
 
 /**
+ * DescribeTWeSeeRecognitionTask返回参数结构体
+ */
+export interface DescribeTWeSeeRecognitionTaskResponse {
+  /**
+   * 任务信息
+   */
+  TaskInfo?: VisionRecognitionTask
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudStorageAIServiceTask请求参数结构体
  */
 export interface DescribeCloudStorageAIServiceTaskRequest {
@@ -1172,6 +1186,20 @@ export interface TopicItem {
    * Topic权限 , 1上报  2下发
    */
   Privilege?: number
+}
+
+/**
+ * CreateTWeTalkAIBot返回参数结构体
+ */
+export interface CreateTWeTalkAIBotResponse {
+  /**
+   * 智能体ID
+   */
+  BotId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2074,25 +2102,21 @@ export interface InstanceDetail {
 }
 
 /**
- * ListEventHistory返回参数结构体
+ * InvokeTWeSeeRecognitionTaskWithFile返回参数结构体
  */
-export interface ListEventHistoryResponse {
+export interface InvokeTWeSeeRecognitionTaskWithFileResponse {
   /**
-   * 搜索上下文, 用作查询游标
+   * 任务 ID
    */
-  Context?: string
+  TaskId?: string
   /**
-   * 搜索结果数量
+   * 任务是否执行完成
    */
-  Total?: number
+  Completed?: boolean
   /**
-   * 搜索结果是否已经结束
+   * 语义理解任务结果（仅当 Completed 为 true 时包含该出参）
    */
-  Listover?: boolean
-  /**
-   * 搜集结果集
-   */
-  EventHistory?: Array<EventHistoryItem>
+  Result?: VisionRecognitionResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2599,6 +2623,68 @@ export interface BindProductInfo {
 }
 
 /**
+ * Talk配置信息描述。
+ */
+export interface TalkAIBotInfo {
+  /**
+   * UIN
+   */
+  Uin?: number
+  /**
+   * APPID
+   */
+  AppId?: number
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 智能体ID
+   */
+  BotId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 语言
+   */
+  TargetLanguage?: string
+  /**
+   * 语音识别
+   */
+  STTConfig?: TalkSTTConfigInfo
+  /**
+   * 大模型
+   */
+  LLMConfig?: TalkLLMConfigInfo
+  /**
+   * 语音合成
+   */
+  TTSConfig?: TalkTTSConfigInfo
+  /**
+   * 智能体配置
+   */
+  AgentConfig?: TalkAgentConfigInfo
+  /**
+   * 产品信息列表
+   */
+  ProductList?: TalkProductInfo
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeFreeCloudStorageNum请求参数结构体
  */
 export type DescribeFreeCloudStorageNumRequest = null
@@ -2615,6 +2701,44 @@ export interface InvokeVideosKeywordsAnalyzerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyTWeTalkAIBot请求参数结构体
+ */
+export interface ModifyTWeTalkAIBotRequest {
+  /**
+   * 智能体ID
+   */
+  BotId: string
+  /**
+   * 产品ID
+   */
+  Name?: string
+  /**
+   * 名称
+   */
+  Description?: string
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
+  /**
+   * 自定义语音识别配置
+   */
+  STTConfig?: TalkSTTConfigInfo
+  /**
+   * 自定义大模型配置
+   */
+  LLMConfig?: TalkLLMConfigInfo
+  /**
+   * 语音合成配置
+   */
+  TTSConfig?: TalkTTSConfigInfo
+  /**
+   * 智能体配置
+   */
+  AgentConfig?: TalkAgentConfigInfo
 }
 
 /**
@@ -2930,6 +3054,34 @@ export interface SearchStudioProductResponse {
 }
 
 /**
+ * DescribeTWeTalkAIBot返回参数结构体
+ */
+export interface DescribeTWeTalkAIBotResponse {
+  /**
+   * 无
+   */
+  Data?: TalkAIBotInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 智能体产品信息。
+ */
+export interface TalkProductInfo {
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+}
+
+/**
  * 围栏绑定的设备信息
  */
 export interface FenceBindDeviceItem {
@@ -3111,6 +3263,16 @@ export interface DescribeCloudStorageAIServiceCallbackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTWeTalkAIBot请求参数结构体
+ */
+export interface DescribeTWeTalkAIBotRequest {
+  /**
+   * 智能体ID
+   */
+  BotId: string
 }
 
 /**
@@ -3819,6 +3981,20 @@ export interface DescribeProjectRequest {
 }
 
 /**
+ * DescribeSubscribedTopicPolicy请求参数结构体
+ */
+export interface DescribeSubscribedTopicPolicyRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+}
+
+/**
  * UploadFirmware返回参数结构体
  */
 export interface UploadFirmwareResponse {
@@ -3947,7 +4123,7 @@ pushResult 是表示发送结果，其中 0 表示成功， 23101 表示设备�
  */
 export interface TalkLLMConfigInfo {
   /**
-   * 支持的LLM类型，tencent-腾讯；openai-OPENAI格式；anthropic-ANTHROPIC；gemini-GEMINI;gemini-GEMINI;coze-扣子;dify-DIFY；tencent_lke-腾讯智能体平台；系统默认-openai。
+   * 支持的LLM类型，openai-OPENAI格式。
    */
   LLMType?: string
   /**
@@ -3976,54 +4152,6 @@ export interface TalkLLMConfigInfo {
   "MetaInfo":{}
 }
 ```
-
-## anthropic
-```
-{
-   "ApiKey": "sk-XXXXXXXXXXXX",
-   "ApiUrl": "https://api.openai.com/v1",
-   "SystemPrompt": "一个小小助手"
-}
-```
-## gemini
-```
-{
-  "AppId": 123456,
-  "AccessToken": "*****",
-  "ResourceId": "SecretKey****",
-  "ModelName": "16k_zh",
-  "Language":""
-}
-```
-## coze
-```
-{
-   "ApiKey": "sk-XXXXXXXXXXXX",
-   "BotId": "v1",
-   "UserId": "xxx",
-  "ApiUrl": "https://api.coze.cn/v3/chat"
-}
-```
-## dify
-```
-{
-   "ApiKey": "sk-XXXXXXXXXXXX",
-   "ApiUrl": "https://api.openai.com/v1",
-   "User": "xxx",
-  "Inputs":{},
-  "ConversationId":"c1"
-}
-```
-## tencent_lke
-```
-{
-   "ApiKey": "sk-XXXXXXXXXXXX",
-   "ApiUrl": "https://api.openai.com/v1",
-   "SystemRole": "一个小小助手",
-  "SessionId":"123456"
-}
-```
-
    */
   Config?: string
   /**
@@ -4038,6 +4166,10 @@ export interface TalkLLMConfigInfo {
    * topP
    */
   TopP?: number
+  /**
+   * 工具ID列表
+   */
+  Tools?: Array<string>
 }
 
 /**
@@ -4124,6 +4256,68 @@ export interface AISearchInfo {
    * 视频回放URL
    */
   VideoURL?: string
+}
+
+/**
+ * 智能体配置信息。
+ */
+export interface TalkAgentConfigInfo {
+  /**
+   * 会话超时（秒），指连接会话的时间，例如30秒是指会话在30秒后断开
+   */
+  SessionTimeout?: number
+  /**
+   * 允许打断
+   */
+  InterruptionEnabled?: boolean
+  /**
+   * 最大上下文
+   */
+  MaxContextTokens?: number
+  /**
+   * 空闲检测配置
+   */
+  IdleDetection?: TalkIdleDetectionConfigInfo
+  /**
+   * 是否启用情绪识别
+   */
+  EmotionEnabled?: boolean
+  /**
+   * 是否启用语义vad
+   */
+  SemanticVADEnabled?: boolean
+  /**
+   * 语义vad灵敏度， 1-慢 2-适中 3-快
+   */
+  SemanticVADSensitivity?: number
+  /**
+   * VAD 静默检测时间， 当开启语义vad此配置失效
+   */
+  SilenceTime?: number
+  /**
+   * 是否启用噪声过滤
+   */
+  NoiseFilterEnabled?: boolean
+  /**
+   * 是否开启长记忆，默认开启
+   */
+  LongTermMemoryEnabled?: boolean
+  /**
+   * 系统提示词，仅当未配置LLMConfig时使用
+   */
+  SystemPrompt?: string
+  /**
+   * 开机问候语，如果未配置默认不开启
+   */
+  GreetingMessage?: string
+  /**
+   * 系统默认音色，当配置复刻音色时，默认值为200000000
+   */
+  DefaultVoiceType?: number
+  /**
+   * 复刻音色
+   */
+  FastVoiceType?: string
 }
 
 /**
@@ -4283,21 +4477,25 @@ export interface DescribeCloudStorageStreamDataRequest {
 }
 
 /**
- * InvokeTWeSeeRecognitionTaskWithFile返回参数结构体
+ * ListEventHistory返回参数结构体
  */
-export interface InvokeTWeSeeRecognitionTaskWithFileResponse {
+export interface ListEventHistoryResponse {
   /**
-   * 任务 ID
+   * 搜索上下文, 用作查询游标
    */
-  TaskId?: string
+  Context?: string
   /**
-   * 任务是否执行完成
+   * 搜索结果数量
    */
-  Completed?: boolean
+  Total?: number
   /**
-   * 语义理解任务结果（仅当 Completed 为 true 时包含该出参）
+   * 搜索结果是否已经结束
    */
-  Result?: VisionRecognitionResult
+  Listover?: boolean
+  /**
+   * 搜集结果集
+   */
+  EventHistory?: Array<EventHistoryItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5000,6 +5198,16 @@ export interface DeviceFirmwareInfo {
 }
 
 /**
+ * UnbindTWeTalkAIBot返回参数结构体
+ */
+export interface UnbindTWeTalkAIBotResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CallDeviceActionSync请求参数结构体
  */
 export interface CallDeviceActionSyncRequest {
@@ -5195,6 +5403,20 @@ export interface ModifyFenceBindResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnbindTWeTalkAIBot请求参数结构体
+ */
+export interface UnbindTWeTalkAIBotRequest {
+  /**
+   * 智能体ID
+   */
+  BotId: string
+  /**
+   * 产品ID
+   */
+  ProductId: string
 }
 
 /**
@@ -5544,17 +5766,21 @@ export interface DeviceDataHistoryItem {
 }
 
 /**
- * DescribeSubscribedTopicPolicy请求参数结构体
+ * GetTWeTalkAIBotList返回参数结构体
  */
-export interface DescribeSubscribedTopicPolicyRequest {
+export interface GetTWeTalkAIBotListResponse {
   /**
-   * 产品ID
+   * 无
    */
-  ProductId: string
+  Data?: Array<TalkAIBotInfo>
   /**
-   * 设备名称
+   * 1
    */
-  DeviceName: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5958,7 +6184,7 @@ export interface DescribeFenceEventListResponse {
  */
 export interface TalkSTTConfigInfo {
   /**
-   * 支持的STT类型，tencent-腾讯；azure-亚马逊；volcengine-火山引擎；deepgram-Deepgram;系统默认-tencent。
+   * 支持的STT类型，tencent-腾讯；azure-亚马逊；deepgram-Deepgram;系统默认-tencent。
    */
   STTType?: string
   /**
@@ -5987,16 +6213,7 @@ export interface TalkSTTConfigInfo {
   "SubscriptionKey": "*****"
 }
 ```
-## volcengine
-```
-{
-  "AppId": 123456,
-  "AccessToken": "*****",
-  "ResourceId": "SecretKey****",
-  "ModelName": "16k_zh",
-  "Language":""
-}
-```
+
 ## deepgram
 ```
 {
@@ -7066,6 +7283,20 @@ export interface LoRaGatewayItem {
 }
 
 /**
+ * BindTWeTalkAIBot请求参数结构体
+ */
+export interface BindTWeTalkAIBotRequest {
+  /**
+   * 智能体ID
+   */
+  BotId: string
+  /**
+   * 产品ID
+   */
+  ProductId: string
+}
+
+/**
  * UpdateOtaModule请求参数结构体
  */
 export interface UpdateOtaModuleRequest {
@@ -7225,6 +7456,16 @@ export interface VisionRecognitionTask {
    * 任务输出文件信息列表
    */
   FilesInfo?: Array<CloudStorageAIServiceTaskFileInfo>
+}
+
+/**
+ * ModifyTWeTalkAIBot返回参数结构体
+ */
+export interface ModifyTWeTalkAIBotResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8114,9 +8355,14 @@ export interface BatchInvokeTWeSeeRecognitionTaskResponse {
 }
 
 /**
- * ModifyPositionFence请求参数结构体
+ * BindTWeTalkAIBot返回参数结构体
  */
-export type ModifyPositionFenceRequest = null
+export interface BindTWeTalkAIBotResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 围栏信息
@@ -8891,17 +9137,13 @@ export interface DeleteLoRaGatewayRequest {
 }
 
 /**
- * DescribeTWeSeeRecognitionTask返回参数结构体
+ * DeleteTWeTalkAIBot请求参数结构体
  */
-export interface DescribeTWeSeeRecognitionTaskResponse {
+export interface DeleteTWeTalkAIBotRequest {
   /**
-   * 任务信息
+   * 智能体ID
    */
-  TaskInfo?: VisionRecognitionTask
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  BotId: string
 }
 
 /**
@@ -9226,6 +9468,44 @@ export interface CreateFenceBindRequest {
    * 围栏绑定的产品列表
    */
   Items: Array<FenceBindProductItem>
+}
+
+/**
+ * CreateTWeTalkAIBot请求参数结构体
+ */
+export interface CreateTWeTalkAIBotRequest {
+  /**
+   * 产品ID
+   */
+  Name: string
+  /**
+   * 名称
+   */
+  Description?: string
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
+  /**
+   * 自定义语音识别配置
+   */
+  STTConfig?: TalkSTTConfigInfo
+  /**
+   * 自定义大模型配置
+   */
+  LLMConfig?: TalkLLMConfigInfo
+  /**
+   * 语音合成配置
+   */
+  TTSConfig?: TalkTTSConfigInfo
+  /**
+   * 智能体配置
+   */
+  AgentConfig?: TalkAgentConfigInfo
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -9758,6 +10038,11 @@ export interface PositionSpaceInfo {
    */
   Zoom?: number
 }
+
+/**
+ * ModifyPositionFence请求参数结构体
+ */
+export type ModifyPositionFenceRequest = null
 
 /**
  * CreateDeviceChannel返回参数结构体
@@ -10352,6 +10637,40 @@ export interface BatchUpdateFirmwareRequest {
    * 用户自定义信息
    */
   TaskUserDefine?: string
+  /**
+   * 每分钟下发设备量
+   */
+  RateLimit?: number
+}
+
+/**
+ * GetTWeTalkAIBotList请求参数结构体
+ */
+export interface GetTWeTalkAIBotListRequest {
+  /**
+   * 智能体ID
+   */
+  BotId?: string
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 是否脱敏
+   */
+  IncludeCredentials?: boolean
+  /**
+   * 1
+   */
+  Offset?: number
+  /**
+   * 10
+   */
+  Limit?: number
 }
 
 /**
@@ -10536,6 +10855,16 @@ export interface UpdateDevicesEnableStateRequest {
    * 1：启用；0：禁用
    */
   Status: number
+}
+
+/**
+ * DeleteTWeTalkAIBot返回参数结构体
+ */
+export interface DeleteTWeTalkAIBotResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
