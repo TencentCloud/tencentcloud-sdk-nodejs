@@ -11567,7 +11567,7 @@ export interface CreateScheduleResponse {
  */
 export interface DescribeAIAnalysisTemplatesRequest {
   /**
-   * 视频内容分析模板唯一标识过滤条件，数组长度限制：10。
+   * 视频内容分析模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number | bigint>
   /**
@@ -21555,7 +21555,7 @@ export interface CreateImageSpriteTemplateResponse {
  */
 export interface DescribeAIRecognitionTemplatesRequest {
   /**
-   * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
+   * 视频内容识别模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number | bigint>
   /**

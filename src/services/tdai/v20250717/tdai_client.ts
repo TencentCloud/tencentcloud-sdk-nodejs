@@ -159,7 +159,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于创建一次回话的SSE接口
+   * 用于创建一次会话的SSE接口
    */
   async CreateChatCompletion(
     req: CreateChatCompletionRequest,

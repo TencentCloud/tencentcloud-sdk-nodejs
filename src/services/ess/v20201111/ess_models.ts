@@ -4050,6 +4050,18 @@ export interface FlowCreateApprover {
 <ul><li> <b>空值（默认）</b> :无限制，可在任何场景进入签署流程。</li><li> <b>link</b> :选择此选项后，将无法通过控制台或电子签小程序列表进入填写或签署操作，仅可预览合同。填写或签署流程只能通过短信或发起方提供的专用链接进行。</li></ul>
    */
   SignEndpoints?: Array<string>
+  /**
+   * 是否不保存联系人
+默认 false 保存联系人  true 不保存联系人
+
+设置这个参数为保存联系人的时候,他方企业签署人会被保存进发起人的联系人中。
+联系人查看可登录[电子签控制台](https://test.qian.tencent.cn/console/) 进行查看。
+如下图位置：
+![](https://qcloudimg.tencent-cloud.cn/raw/fb8a22cd615d24c21acfa0e37e2cd873.png)
+
+
+   */
+  NotSaveContact?: boolean
 }
 
 /**
@@ -7109,8 +7121,38 @@ p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，
   JumpEvents?: Array<JumpEvent>
   /**
    * 企业证照类型：<ul><li> **USCC** :(默认)工商组织营业执照</li><li> **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证</li></ul>
+
+注意 ：
+如果企业证照类型是医疗机构，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.
+医疗机构的企业授权方式  仅有授权书的方式。企业认证仅有上传营业执照的方式。
    */
   OrganizationIdCardType?: string
+  /**
+   * 是否允许编辑企业注册时的证照类型
+
+true:不允许编辑。
+
+false:允许编辑（默认值）。
+
+
+注意：
+入参中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。
+   */
+  OrganizationIdCardTypeSame?: boolean
+  /**
+   * 指定企业认证的授权方式 支持多选:
+
+<ul>
+<li><strong>1</strong>: 上传营业执照</li>
+<li><strong>2</strong>: 腾讯云快速认证</li>
+<li><strong>3</strong>: 腾讯商户号授权<font color="red">（仅支持小程序端）</font></li>
+</ul>
+
+注意：
+1.如果没有指定，则默认是1,仅有上传营业执照。
+2.H5 仅支持上传营业执照。
+   */
+  AuthorizationMethod?: Array<number | bigint>
 }
 
 /**
@@ -8450,7 +8492,8 @@ export interface FlowGroupOptions {
 }
 
 /**
- * 发起流程快速注册相关信息
+ * 创建合同，若对方签署人的企业信息还未在腾讯电子签注册。则在进行引导企业注册时控制企业填写的信息。
+具体可查看[视频](https://qian.tencent.com/developers/video/?menu=scene&id=6)
  */
 export interface RegisterInfo {
   /**
@@ -8478,7 +8521,6 @@ export interface RegisterInfo {
 <li><strong>2</strong>: 法人授权方式</li>
 <li><strong>5</strong>: 授权书+对公打款方式</li>
 </ul>
-   * @deprecated
    */
   AuthorizationTypes?: Array<number | bigint>
   /**
@@ -8488,8 +8530,34 @@ export interface RegisterInfo {
 <li><strong>2</strong>: 法人授权方式</li>
 <li><strong>5</strong>: 授权书+对公打款方式</li>
 </ul>
+   * @deprecated
    */
   AuthorizationType?: number
+  /**
+   * 指定企业认证的授权方式 支持多选:
+
+<ul>
+<li><strong>1</strong>: 上传营业执照</li>
+<li><strong>2</strong>: 腾讯云快速认证</li>
+<li><strong>3</strong>: 腾讯商户号授权<font color="red">（仅支持小程序端）</font></li>
+</ul>
+   */
+  AuthorizationMethods?: Array<number | bigint>
+  /**
+   * 企业证照类型：
+
+USCC :(默认)工商组织营业执照
+PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证
+   */
+  OrganizationIdCardType?: string
+  /**
+   * 企业创建时候的个性化参数。
+其中，包括一下内容：
+LegalNameSame  是否可以编辑法人。
+UnifiedSocialCreditCodeSame  是否可以编辑证件号码。
+OrganizationIdCardTypeSame  是否可以更改证照类型。
+   */
+  RegisterInfoOption?: RegisterInfoOption
 }
 
 /**
@@ -12393,6 +12461,16 @@ export interface ApproverInfo {
 
    */
   RegisterInfo?: RegisterInfo
+  /**
+   * 是否不保存联系人
+默认 false 保存联系人  true 不保存联系人
+
+设置这个参数为保存联系人的时候,他方企业签署人会被保存进发起人的联系人中。
+联系人查看可登录[电子签控制台](https://test.qian.tencent.cn/console/) 进行查看。
+如下图位置：
+![](https://qcloudimg.tencent-cloud.cn/raw/fb8a22cd615d24c21acfa0e37e2cd873.png)
+   */
+  NotSaveContact?: boolean
 }
 
 /**
@@ -12407,6 +12485,43 @@ export interface Filter {
    * 查询过滤条件的Value列表
    */
   Values: Array<string>
+}
+
+/**
+ * 创建合同，若对方签署人的企业信息还未在腾讯电子签注册。则在进行引导企业注册时控制企业填写信息的个性化参数。
+具体可查看[视频](https://qian.tencent.com/developers/video/?menu=scene&id=6)
+ */
+export interface RegisterInfoOption {
+  /**
+   * 是否允许编辑企业注册时的法人姓名。
+<br/>true：允许编辑<br/>false：不允许编辑（默认值）<br/>
+
+注意：
+RegisterInfo 中的LegalName值不为空的时候，才可设置为不可编辑。
+   */
+  LegalNameSame?: boolean
+  /**
+   * 是否允许编辑企业注册时统一社会信用代码。
+<br/>true:不允许编辑。
+<br/>false:允许编辑（默认值）。
+<br/>
+
+
+注意：
+RegisterInfo 中的UnifiedSocialCreditCode值不为空的时候，才可设置为不可编辑。
+
+   */
+  UnifiedSocialCreditCodeCNameSame?: boolean
+  /**
+   * 是否允许编辑企业注册时的证照类型
+<br/>true:不允许编辑。
+<br/>false:允许编辑（默认值）。
+<br/>
+
+注意：
+RegisterInfo 中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。
+   */
+  OrganizationIdCardTypeSame?: boolean
 }
 
 /**

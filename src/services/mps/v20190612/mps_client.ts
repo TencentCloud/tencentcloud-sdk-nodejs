@@ -1592,7 +1592,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义数字水印模板，数量上限：1000。
+   * 创建用户自定义数字水印模板。
    */
   async CreateBlindWatermarkTemplate(
     req: CreateBlindWatermarkTemplateRequest,

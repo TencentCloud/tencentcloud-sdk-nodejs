@@ -4061,6 +4061,10 @@ export interface CreateDSPADbMetaResourcesRequest {
    */
   MetaType: string
   /**
+   * 必填，云数据库资源列表。
+   */
+  CloudResourceItems: Array<CloudResourceItem>
+  /**
    * 资源所处地域。
    * @deprecated
    */
@@ -4080,10 +4084,6 @@ export interface CreateDSPADbMetaResourcesRequest {
    * @deprecated
    */
   Items?: Array<DspaCloudResourceMeta>
-  /**
-   * 必填，云数据库资源列表。
-   */
-  CloudResourceItems?: Array<CloudResourceItem>
 }
 
 /**
@@ -5598,6 +5598,10 @@ export interface CreateDSPACosMetaResourcesRequest {
    */
   DspaId: string
   /**
+   * 必填，COS资源列表
+   */
+  CosBucketItems: Array<CosBucketItem>
+  /**
    * 资源所处地域。
    * @deprecated
    */
@@ -5607,10 +5611,6 @@ export interface CreateDSPACosMetaResourcesRequest {
    * @deprecated
    */
   Buckets?: Array<string>
-  /**
-   * 必填，COS资源列表
-   */
-  CosBucketItems?: Array<CosBucketItem>
 }
 
 /**

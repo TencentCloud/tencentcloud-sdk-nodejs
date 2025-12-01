@@ -8592,6 +8592,72 @@ export interface CreateRabbitMQUserResponse {
 }
 
 /**
+ * RabbitMQ的vhost详情
+ */
+export interface RabbitMQVirtualHostInfo {
+  /**
+   * 集群实例Id
+   */
+  InstanceId?: string
+  /**
+   * vhost名
+   */
+  VirtualHost?: string
+  /**
+   * vhost描述信息
+   */
+  Description?: string
+  /**
+   * vhost标签
+   */
+  Tags?: Array<string>
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
+  /**
+   * vhost概览统计信息
+   */
+  VirtualHostStatistics?: RabbitMQVirtualHostStatistics
+  /**
+   * 消息轨迹开关,true打开,false关闭
+   */
+  TraceFlag?: boolean
+  /**
+   * vhost状态，与原生控制台对应，有running、partial、stopped、unknown
+   */
+  Status?: string
+  /**
+   * 消息堆积数
+   */
+  MessageHeapCount?: number
+  /**
+   * 输入消息速率
+   */
+  MessageRateIn?: number
+  /**
+   * 输出消息速率
+   */
+  MessageRateOut?: number
+  /**
+   * 是否存在镜像队列策略，true 为存在，false 为不存
+   */
+  MirrorQueuePolicyFlag?: boolean
+  /**
+   * 创建时间时间戳
+   */
+  CreateTs?: number
+  /**
+   * 修改时间时间戳
+   */
+  ModifyTs?: number
+}
+
+/**
  * ModifyRocketMQRole返回参数结构体
  */
 export interface ModifyRocketMQRoleResponse {
@@ -8848,69 +8914,37 @@ export interface DescribeRocketMQPublicAccessMonitorDataResponse {
 }
 
 /**
- * RabbitMQ的vhost详情
+ * CreateRocketMQTopicV2请求参数结构体
  */
-export interface RabbitMQVirtualHostInfo {
+export interface CreateRocketMQTopicV2Request {
   /**
-   * 集群实例Id
+   * 主题名称
    */
-  InstanceId?: string
+  Topic: string
   /**
-   * vhost名
+   * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder, Transaction, DelayScheduled。Transaction仅在专享版支持。
    */
-  VirtualHost?: string
+  Type: string
   /**
-   * vhost描述信息
+   * 集群ID
    */
-  Description?: string
+  ClusterId: string
   /**
-   * vhost标签
+   * 命名空间
    */
-  Tags?: Array<string>
+  Namespace: string
   /**
-   * 创建时间
+   * 备注
    */
-  CreateTime?: string
+  Remark?: string
   /**
-   * 修改时间
+   * 分区数，全局顺序无效
    */
-  ModifyTime?: string
+  PartitionNum?: number
   /**
-   * vhost概览统计信息
+   * 标签列表
    */
-  VirtualHostStatistics?: RabbitMQVirtualHostStatistics
-  /**
-   * 消息轨迹开关,true打开,false关闭
-   */
-  TraceFlag?: boolean
-  /**
-   * vhost状态，与原生控制台对应，有running、partial、stopped、unknown
-   */
-  Status?: string
-  /**
-   * 消息堆积数
-   */
-  MessageHeapCount?: number
-  /**
-   * 输入消息速率
-   */
-  MessageRateIn?: number
-  /**
-   * 输出消息速率
-   */
-  MessageRateOut?: number
-  /**
-   * 是否存在镜像队列策略，true 为存在，false 为不存
-   */
-  MirrorQueuePolicyFlag?: boolean
-  /**
-   * 创建时间时间戳
-   */
-  CreateTs?: number
-  /**
-   * 修改时间时间戳
-   */
-  ModifyTs?: number
+  TagList?: Array<Tag>
 }
 
 /**
@@ -10588,6 +10622,16 @@ export interface DescribePublisherSummaryResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageSize?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRocketMQTopicV2返回参数结构体
+ */
+export interface CreateRocketMQTopicV2Response {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

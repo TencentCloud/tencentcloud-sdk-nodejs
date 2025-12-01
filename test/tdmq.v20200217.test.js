@@ -1118,6 +1118,16 @@ it("tdmq.v20200217.DescribeMsg", async function () {
     }
 })
 
+it("tdmq.v20200217.CreateRocketMQTopicV2", async function () {
+    try {
+       const data = await client.CreateRocketMQTopicV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyCmqTopicAttribute", async function () {
     try {
        const data = await client.ModifyCmqTopicAttribute({})

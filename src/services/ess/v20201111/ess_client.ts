@@ -372,6 +372,7 @@ import {
   CreateModifyAdminAuthorizationUrlRequest,
   ApproverInfo,
   Filter,
+  RegisterInfoOption,
   DynamicFlowApproverResult,
   DeleteOrganizationAuthorizationsRequest,
   CancelUserAutoSignEnableUrlRequest,
