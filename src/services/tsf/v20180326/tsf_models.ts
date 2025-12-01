@@ -8321,11 +8321,11 @@ export interface CreateTaskFlowRequest {
    */
   FlowEdges: Array<TaskFlowEdge>
   /**
-   * 工作流执行超时时间
+   * 工作流执行超时时间，单位：毫秒
    */
   TimeOut: number
   /**
-   * 无
+   * 数据集列表
    */
   ProgramIdList?: Array<string>
 }
