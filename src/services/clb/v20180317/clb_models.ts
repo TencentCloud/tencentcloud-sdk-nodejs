@@ -3211,6 +3211,11 @@ export interface Backend {
    * 标签。
    */
   Tag?: string
+  /**
+   * 后端服务所在的可用区，如ap-guangzhou-1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
 }
 
 /**
@@ -4674,6 +4679,11 @@ Public：公网属性，Private：内网属性；对于内网属性的负载均�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Exclusive?: number
+  /**
+   * 可用区转发亲和信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
 }
 
 /**
@@ -5562,6 +5572,26 @@ export interface Quota {
    * 配额数量。
    */
   QuotaLimit?: number
+}
+
+/**
+ * 可用区转发亲和信息
+ */
+export interface AvailableZoneAffinityInfo {
+  /**
+   * 是否开启可用区转发亲和。true：开启可用区转发亲和；false：开启可用区转发亲和。
+   */
+  Enable?: boolean
+  /**
+   * 可用区转发亲和失效阈值，当可用区内后端服务健康比例小于该阈值时，负载均衡会退出可用区转发亲和，转为全可用区转发。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExitRatio?: number
+  /**
+   * 可用区转发亲和的重新生效阈值，当处于全可用区转发，且负载均衡可用区内的后端服务健康比例大于等于该阈值时，负载均衡会重新进入可用区转发亲和。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReentryRatio?: number
 }
 
 /**
@@ -6471,4 +6501,8 @@ ToaClean: TOA（TCP Option Address）清理，清除TCP选项中的地址信息�
    * 负载均衡实例关联的Endpoint id。
    */
   AssociateEndpoint?: string
+  /**
+   * 可用区转发亲和信息
+   */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
 }

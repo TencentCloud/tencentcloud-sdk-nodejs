@@ -68,6 +68,26 @@ it("vclm.v20240523.SubmitHumanActorJob", async function () {
     }
 })
 
+it("vclm.v20240523.SubmitVideoFaceFusionJob", async function () {
+    try {
+       const data = await client.SubmitVideoFaceFusionJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeVideoFaceFusionJob", async function () {
+    try {
+       const data = await client.DescribeVideoFaceFusionJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.DescribeImageAnimateJob", async function () {
     try {
        const data = await client.DescribeImageAnimateJob({})

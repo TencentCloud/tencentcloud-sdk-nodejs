@@ -5734,11 +5734,14 @@ export interface Filter {
  */
 export interface DescribeRocketMQPublicAccessMonitorDataRequest {
   /**
-   * 专享集群ID
+   * 集群 ID
    */
   InstanceId: string
   /**
-   * 指标名称，仅支持单指标拉取。目前仅支持：ClientIntraffic; ClientOuttraffic
+   * 指标名称，仅支持单指标拉取。指标枚举如下：
+
+- ClientIntraffic：入流量
+- ClientOuttraffic：出流量
    */
   MetricName: string
   /**

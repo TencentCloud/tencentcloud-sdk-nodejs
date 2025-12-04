@@ -237,6 +237,7 @@ import {
   ModifyFunctionTargetsRequest,
   DescribeRewriteResponse,
   Quota,
+  AvailableZoneAffinityInfo,
   SetLoadBalancerClsLogRequest,
   LBItem,
   ModifyTargetGroupAttributeResponse,

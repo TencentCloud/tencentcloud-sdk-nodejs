@@ -156,7 +156,7 @@ import {
   ListAttributeLabelResponse,
   ModifyQAAttrRangeRequest,
   CateInfo,
-  AICallConfig,
+  DeleteRejectedQuestionResponse,
   ListRejectedQuestionPreviewRequest,
   ListSelectDocRequest,
   FileInfo,
@@ -218,7 +218,7 @@ import {
   AgentProcedureDebugging,
   DescribeTokenUsageGraphRequest,
   DescribeConcurrencyUsageGraphRequest,
-  YuanQi,
+  DescribeReleaseRequest,
   ReleaseQA,
   UnsatisfiedReply,
   AgentToolRspParam,
@@ -252,7 +252,7 @@ import {
   ModifyDocRequest,
   KnowledgeModelConfig,
   ListWorkflowRunsResponse,
-  DescribeReleaseRequest,
+  YuanQi,
   NodeRunDetail,
   BaseConfig,
   SimilarQuestion,
@@ -330,7 +330,7 @@ import {
   RetryDocAuditResponse,
   RetryReleaseResponse,
   NodeRunBase,
-  DeleteRejectedQuestionResponse,
+  AICallConfig,
   Credentials,
   AppInfo,
   DescribeSharedKnowledgeResponse,
@@ -360,6 +360,7 @@ import {
   DescribeSegmentsRequest,
   Filters,
   IgnoreUnsatisfiedReplyResponse,
+  AgentHandoffAdvancedSetting,
 } from "./lke_models"
 
 /**

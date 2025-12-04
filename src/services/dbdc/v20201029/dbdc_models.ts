@@ -170,6 +170,14 @@ export interface DescribeInstanceDetailResponse {
    */
   ClusterId?: string
   /**
+   * 独享集群的标签信息
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * CPU类型，Intel/AMD,Hygon
+   */
+  CpuType?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -283,6 +291,14 @@ export interface DescribeInstanceDetail {
    * 所属集群ID(默认集群为空)
    */
   ClusterId?: string
+  /**
+   * 实例标签
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * CPU类型：Intel/AMD,Hygon
+   */
+  CpuType?: string
 }
 
 /**
@@ -725,6 +741,20 @@ export interface DescribeInstanceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签对象，包含tagKey & tagValue
+ */
+export interface ResourceTag {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue: string
 }
 
 /**

@@ -248,13 +248,13 @@ export interface DeleteCmdTemplatesResponse {
 }
 
 /**
- * DeleteUserDirectory请求参数结构体
+ * DeleteDevices返回参数结构体
  */
-export interface DeleteUserDirectoryRequest {
+export interface DeleteDevicesResponse {
   /**
-   * 目录id集合
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdSet: Array<number | bigint>
+  RequestId?: string
 }
 
 /**
@@ -1549,13 +1549,13 @@ export interface SyncUserToIOAResponse {
 }
 
 /**
- * DeleteDevices返回参数结构体
+ * DeleteUserDirectory请求参数结构体
  */
-export interface DeleteDevicesResponse {
+export interface DeleteUserDirectoryRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 目录id集合
    */
-  RequestId?: string
+  IdSet: Array<number | bigint>
 }
 
 /**
@@ -2263,6 +2263,20 @@ export interface DescribeChangePwdTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 系统安全设置
+ */
+export interface SecuritySetting {
+  /**
+   * 国密认证方式设置
+   */
+  AuthModeGM?: AuthModeSetting
+  /**
+   * 资产重连次数
+   */
+  Reconnection?: ReconnectionSetting
 }
 
 /**
@@ -3294,45 +3308,13 @@ export interface SearchTaskResultRequest {
 }
 
 /**
- * 运维父任务执行结果
+ * 认证方式设置
  */
-export interface TaskResult {
+export interface AuthModeSetting {
   /**
-   * 运维任务结果日志ID
+   * 双因子认证，0-不开启，1-OTP，2-短信
    */
-  Id?: string
-  /**
-   * 运维任务ID
-   */
-  OperationId?: string
-  /**
-   * 运维任务名称
-   */
-  Name?: string
-  /**
-   * 执行任务来源IP
-   */
-  FromIp?: string
-  /**
-   * 运维任务所属用户
-   */
-  UserName?: string
-  /**
-   * 运维任务所属用户的姓名
-   */
-  RealName?: string
-  /**
-   * 运维任务执行状态 1 - 执行中，2 - 成功，3 - 失败，4 - 部分失败
-   */
-  Status?: number
-  /**
-   * 运维任务开始时间
-   */
-  StartTime?: string
-  /**
-   * 运维任务结束时间
-   */
-  EndTime?: string
+  AuthMode?: number
 }
 
 /**
@@ -3462,6 +3444,10 @@ export interface UserDirectory {
  */
 export interface DescribeSecuritySettingResponse {
   /**
+   * 无
+   */
+  SecuritySetting?: SecuritySetting
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3586,7 +3572,8 @@ export interface CheckLDAPConnectionRequest {
  */
 export interface User {
   /**
-   * 用户名, 3-20个字符 必须以英文字母开头，且不能包含字母、数字、.、_、-以外的字符
+   * 用户名,1 - 128个字符 必须以英文字母开头，只能由a-zA-Z0-9以及+=,.@_-组成，支持邮箱格式
+
    */
   UserName: string
   /**
@@ -3663,6 +3650,10 @@ export interface User {
    * ioa同步过来的用户相关信息
    */
   IOAUserGroup?: IOAUserGroup
+  /**
+   * cam角色用户载体
+   */
+  RoleArn?: string
 }
 
 /**
@@ -4675,6 +4666,48 @@ export interface ModifyUserGroupRequest {
 }
 
 /**
+ * 运维父任务执行结果
+ */
+export interface TaskResult {
+  /**
+   * 运维任务结果日志ID
+   */
+  Id?: string
+  /**
+   * 运维任务ID
+   */
+  OperationId?: string
+  /**
+   * 运维任务名称
+   */
+  Name?: string
+  /**
+   * 执行任务来源IP
+   */
+  FromIp?: string
+  /**
+   * 运维任务所属用户
+   */
+  UserName?: string
+  /**
+   * 运维任务所属用户的姓名
+   */
+  RealName?: string
+  /**
+   * 运维任务执行状态 1 - 执行中，2 - 成功，3 - 失败，4 - 部分失败
+   */
+  Status?: number
+  /**
+   * 运维任务开始时间
+   */
+  StartTime?: string
+  /**
+   * 运维任务结束时间
+   */
+  EndTime?: string
+}
+
+/**
  * CreateChangePwdTask请求参数结构体
  */
 export interface CreateChangePwdTaskRequest {
@@ -4813,6 +4846,20 @@ export interface LoginEvent {
    * 操作结果，1-成功，2-失败
    */
   Result?: number
+}
+
+/**
+ * 运维资产重连次数
+ */
+export interface ReconnectionSetting {
+  /**
+   * 重连次数
+   */
+  ReconnectionMaxCount?: number
+  /**
+   * true：可以重连，false：不可以重连
+   */
+  Enable?: boolean
 }
 
 /**

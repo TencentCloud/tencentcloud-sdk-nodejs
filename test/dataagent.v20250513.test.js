@@ -18,6 +18,16 @@ const client = new tencentcloud.dataagent.v20250513.Client({
 })
 describe("dataagent.v20250513.test.js", function () {
 
+it("dataagent.v20250513.UploadAndCommitFile", async function () {
+    try {
+       const data = await client.UploadAndCommitFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.ModifyChunk", async function () {
     try {
        const data = await client.ModifyChunk({})
@@ -31,6 +41,16 @@ it("dataagent.v20250513.ModifyChunk", async function () {
 it("dataagent.v20250513.DeleteChunk", async function () {
     try {
        const data = await client.DeleteChunk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.GetUploadJobDetails", async function () {
+    try {
+       const data = await client.GetUploadJobDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

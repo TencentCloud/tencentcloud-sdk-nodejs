@@ -22,11 +22,17 @@ import {
   SubmitVideoStylizationJobRequest,
   LogoParam,
   SubmitHumanActorJobRequest,
+  DescribeImageAnimateJobRequest,
+  FaceTemplateInfo,
   SubmitImageAnimateJobRequest,
   SubmitImageToVideoGeneralJobResponse,
+  DescribeVideoFaceFusionJobResponse,
+  DescribeVideoFaceFusionJobRequest,
   DescribePortraitSingJobRequest,
   SubmitImageAnimateJobResponse,
+  SubmitVideoFaceFusionJobResponse,
   DescribeTemplateToVideoJobResponse,
+  FaceMergeInfo,
   CheckAnimateImageJobResponse,
   SubmitTemplateToVideoJobResponse,
   CheckAnimateImageJobRequest,
@@ -39,6 +45,7 @@ import {
   ExtraParam,
   DescribeVideoStylizationJobResponse,
   SubmitVideoStylizationJobResponse,
+  SubmitVideoFaceFusionJobRequest,
   SubmitPortraitSingJobResponse,
   SubmitTemplateToVideoJobRequest,
   SubmitImageToVideoGeneralJobRequest,
@@ -46,7 +53,7 @@ import {
   DescribeHumanActorJobRequest,
   DescribeImageToVideoGeneralJobRequest,
   DescribeTemplateToVideoJobRequest,
-  DescribeImageAnimateJobRequest,
+  FaceRect,
   DescribePortraitSingJobResponse,
 } from "./vclm_models"
 
@@ -110,6 +117,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitHumanActorJobResponse) => void
   ): Promise<SubmitHumanActorJobResponse> {
     return this.request("SubmitHumanActorJob", req, cb)
+  }
+
+  /**
+   * 提交视频人脸融合任务
+   */
+  async SubmitVideoFaceFusionJob(
+    req: SubmitVideoFaceFusionJobRequest,
+    cb?: (error: string, rep: SubmitVideoFaceFusionJobResponse) => void
+  ): Promise<SubmitVideoFaceFusionJobResponse> {
+    return this.request("SubmitVideoFaceFusionJob", req, cb)
+  }
+
+  /**
+   * 查询视频人脸融合任务
+   */
+  async DescribeVideoFaceFusionJob(
+    req: DescribeVideoFaceFusionJobRequest,
+    cb?: (error: string, rep: DescribeVideoFaceFusionJobResponse) => void
+  ): Promise<DescribeVideoFaceFusionJobResponse> {
+    return this.request("DescribeVideoFaceFusionJob", req, cb)
   }
 
   /**

@@ -1870,34 +1870,21 @@ export interface CcnRegionBandwidthLimitInfo {
 }
 
 /**
- * CloneSecurityGroup请求参数结构体
+ * NAT网关超时时间
  */
-export interface CloneSecurityGroupRequest {
+export interface ConnectionStateTimeouts {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
+   * UDP映射空闲时间，指多少秒以后UDP流停止向端点发送。取值范围为：3-7200秒，默认为10秒。
    */
-  SecurityGroupId: string
+  UDPMappingTimeout?: number
   /**
-   * 安全组名称，可任意命名，但不得超过60个字符。未提供参数时，克隆后的安全组名称和SecurityGroupId对应的安全组名称相同。
+   * TCP已建立的连接空闲超时，指多少秒以后连接变为空闲状态。取值范围为：40-10800秒，默认为10800秒。
    */
-  GroupName?: string
+  TCPEstablishedConnectionTimeout?: number
   /**
-   * 安全组备注，最多100个字符。未提供参数时，克隆后的安全组备注和SecurityGroupId对应的安全组备注相同。
+   * TCP TIME_WAIT超时，指完全关闭的TCP连接在到期后保留在NAT映射中的秒数。取值范围为：10-600秒，默认为120秒。
    */
-  GroupDescription?: string
-  /**
-   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
-   */
-  ProjectId?: string
-  /**
-   * 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。
-   */
-  RemoteRegion?: string
-  /**
-   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
-若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。
-   */
-  Tags?: Array<Tag>
+  TcpTimeWaitTimeout?: number
 }
 
 /**
@@ -4495,6 +4482,10 @@ export interface ResetNatGatewayConnectionRequest {
    * NAT网关并发连接上限，形如：1000000、3000000、10000000。
    */
   MaxConcurrentConnection: number
+  /**
+   * 独享实例规格。如果要变配到独享实例，此参数必选，取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1
+   */
+  ExclusiveType?: string
 }
 
 /**
@@ -5256,29 +5247,21 @@ export interface UpdateTrafficMirrorDirectionResponse {
 }
 
 /**
- * 占用ip的资源信息
+ * DescribeCcnRouteTableInputPolicys请求参数结构体
  */
-export interface IpAddressStates {
+export interface DescribeCcnRouteTableInputPolicysRequest {
   /**
-   * VPC实例ID。
+   * 云联网ID。
    */
-  VpcId: string
+  CcnId: string
   /**
-   * 子网实例ID。
+   * 云联网路由表ID。
    */
-  SubnetId: string
+  RouteTableId: string
   /**
-   * IP地址。
+   * 路由接收策略版本号。
    */
-  IpAddress: string
-  /**
-   * 资源类型
-   */
-  ResourceType: string
-  /**
-   * 资源ID
-   */
-  ResourceId: string
+  PolicyVersion?: number
 }
 
 /**
@@ -5936,6 +5919,10 @@ export interface Vpc {
    * 返回多运营商IPv6 Cidr Block
    */
   Ipv6CidrBlockSet?: Array<ISPIPv6CidrBlock>
+  /**
+   * vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。
+   */
+  EnableRouteVpcPublishIpv6?: boolean
 }
 
 /**
@@ -6690,6 +6677,14 @@ export interface NatGateway {
    * NAT实例是否开启删除保护
    */
   DeletionProtectionEnabled?: boolean
+  /**
+   * NAT实例连接超时时间
+   */
+  ConnectionStateTimeouts?: ConnectionStateTimeouts
+  /**
+   * 独享实例规格。取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1
+   */
+  ExclusiveType?: string
 }
 
 /**
@@ -7355,10 +7350,6 @@ export interface TranslationAclRule {
    */
   SourcePort: string
   /**
-   * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
-   */
-  SourceCidr: string
-  /**
    * 目的端口。
    */
   DestinationPort: string
@@ -7367,9 +7358,13 @@ export interface TranslationAclRule {
    */
   DestinationCidr: string
   /**
+   * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
+   */
+  SourceCidr?: string
+  /**
    * ACL规则`ID`。
    */
-  AclRuleId: number
+  AclRuleId?: number
   /**
    * 是否匹配。
    */
@@ -11167,21 +11162,34 @@ export interface RejectAttachCcnInstancesResponse {
 }
 
 /**
- * DescribeCcnRouteTableInputPolicys请求参数结构体
+ * CloneSecurityGroup请求参数结构体
  */
-export interface DescribeCcnRouteTableInputPolicysRequest {
+export interface CloneSecurityGroupRequest {
   /**
-   * 云联网ID。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
-  CcnId: string
+  SecurityGroupId: string
   /**
-   * 云联网路由表ID。
+   * 安全组名称，可任意命名，但不得超过60个字符。未提供参数时，克隆后的安全组名称和SecurityGroupId对应的安全组名称相同。
    */
-  RouteTableId: string
+  GroupName?: string
   /**
-   * 路由接收策略版本号。
+   * 安全组备注，最多100个字符。未提供参数时，克隆后的安全组备注和SecurityGroupId对应的安全组备注相同。
    */
-  PolicyVersion?: number
+  GroupDescription?: string
+  /**
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
+   */
+  ProjectId?: string
+  /**
+   * 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。
+   */
+  RemoteRegion?: string
+  /**
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -11343,6 +11351,32 @@ export interface CcnInstanceWithoutRegion {
    * 实例ID。
    */
   InstanceId: string
+}
+
+/**
+ * 占用ip的资源信息
+ */
+export interface IpAddressStates {
+  /**
+   * VPC实例ID。
+   */
+  VpcId: string
+  /**
+   * 子网实例ID。
+   */
+  SubnetId: string
+  /**
+   * IP地址。
+   */
+  IpAddress: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 资源ID
+   */
+  ResourceId: string
 }
 
 /**
@@ -11644,6 +11678,11 @@ export interface AllocateAddressesRequest {
    */
   InternetChargeType?: string
   /**
+   * IP 资源计费模式，当前仅支持原生 IP。
+<ul style="margin:0"><li>账号为标准账户类型的用户，可选值：<ul><li>IP_POSTPAID_BY_HOUR：IP资源按小时后付费</li><li>IP_PREPAID_BY_MONTH：IP资源包月预付费</li></ul></li></ul>
+   */
+  IPChargeType?: string
+  /**
    * EIP出带宽上限，单位：Mbps。
 <ul style="margin:0"><li>标准账户类型EIP出带宽上限，可选值范围取决于EIP计费方式：<ul><li>BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps</li>
 <li>BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li>
@@ -11661,7 +11700,9 @@ export interface AllocateAddressesRequest {
 <li>EIP：弹性公网 IP。 </li>
 <li>AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。</li>
 <li>HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。</li>
-<li>AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。</li>
+<li>AntiDDoSEIP：高防 IP。仅部分地域支持高防IP。</li>
+<li>ResidentialEIP：原生 IP。仅部分地域支持原生IP。</li>
+关于弹性公网 IP 支持的 IP 类型，请见[产品概述](https://cloud.tencent.com/document/product/1199/41646)。
    */
   AddressType?: string
   /**
@@ -11717,15 +11758,6 @@ AnycastEIP是否用于绑定负载均衡。
    * 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。
    */
   ClientToken?: string
-  /**
-   * 原生EIP IP资源的计费方式。
-<ul style="margin:0"><li>账号为标准账户类型的用户，可选值：<ul>
-<li>IP_POSTPAID_BY_HOUR：IP资源按小时后付费</li>
-<li>IP_PREPAID_BY_MONTH：IP资源包月预付费</li>
-</ul></li>
-</ul>
-   */
-  IPChargeType?: string
 }
 
 /**
@@ -14532,6 +14564,10 @@ export interface CreateNatGatewayRequest {
    * NAT实例是否开启删除保护
    */
   DeletionProtectionEnabled?: boolean
+  /**
+   * 独享实例规格。取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1
+   */
+  ExclusiveType?: string
 }
 
 /**
@@ -15576,6 +15612,10 @@ export interface ModifyVpcAttributeRequest {
    * 发布cdc 子网到云联网的开关。true: 发布, false: 不发布。
    */
   EnableCdcPublish?: boolean
+  /**
+   * vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。
+   */
+  EnableRouteVpcPublishIpv6?: boolean
 }
 
 /**
@@ -20242,6 +20282,10 @@ export interface CreateVpcRequest {
    * vpc关联云联网时路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时,请通过工单加入白名单
    */
   EnableRouteVpcPublish?: boolean
+  /**
+   * vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。
+   */
+  EnableRouteVpcPublishIpv6?: boolean
 }
 
 /**

@@ -16,6 +16,24 @@
  */
 
 /**
+ * UploadAndCommitFile请求参数结构体
+ */
+export interface UploadAndCommitFileRequest {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 上传文件列表
+   */
+  CosFiles?: Array<CosFileInfo>
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
+}
+
+/**
  * GetKnowledgeBaseList请求参数结构体
  */
 export interface GetKnowledgeBaseListRequest {
@@ -144,6 +162,56 @@ export interface QueryChunkListResponse {
 }
 
 /**
+ * 上传任务
+ */
+export interface UploadJob {
+  /**
+   * id
+   */
+  Id?: number
+  /**
+   * 任务id
+   */
+  JobId?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
+  /**
+   * uin
+   */
+  Uin?: string
+  /**
+   * subuin
+   */
+  SubUin?: string
+  /**
+   * Pending、FileUploading、
+FileParsing、
+Success、
+Failed 
+	
+   */
+  Status?: string
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 错误信息
+   */
+  Message?: string
+}
+
+/**
  * QueryChunkList请求参数结构体
  */
 export interface QueryChunkListRequest {
@@ -204,6 +272,42 @@ export interface GetSessionDetailsRequest {
 }
 
 /**
+ * CreateDataAgentSession返回参数结构体
+ */
+export interface CreateDataAgentSessionResponse {
+  /**
+   * 会话
+   */
+  SessionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyChunk请求参数结构体
+ */
+export interface ModifyChunkRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 文件ID
+   */
+  FileId: string
+  /**
+   * 切片ID
+   */
+  ChunkId?: string
+  /**
+   * 编辑后的文本
+   */
+  Content?: string
+}
+
+/**
  * ModifyKnowledgeBase请求参数结构体
  */
 export interface ModifyKnowledgeBaseRequest {
@@ -230,39 +334,21 @@ export interface ModifyKnowledgeBaseRequest {
 }
 
 /**
- * ModifyChunk请求参数结构体
+ * cos 文件信息
  */
-export interface ModifyChunkRequest {
+export interface CosFileInfo {
   /**
-   * 实例ID
+   * 文件名称，包含后缀
    */
-  InstanceId: string
+  FileName?: string
   /**
-   * 文件ID
+   * 文件类型，"PDF", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "MD", "TXT", "PNG", "JPG", "JPEG", "CSV"
    */
-  FileId: string
+  FileType?: string
   /**
-   * 切片ID
+   * 用户文件的cosurl
    */
-  ChunkId?: string
-  /**
-   * 编辑后的文本
-   */
-  Content?: string
-}
-
-/**
- * CreateDataAgentSession返回参数结构体
- */
-export interface CreateDataAgentSessionResponse {
-  /**
-   * 会话
-   */
-  SessionId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  UserCosUrl?: string
 }
 
 /**
@@ -308,6 +394,20 @@ export interface StopChatAIResponse {
    * 会话
    */
   SessionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetUploadJobDetails返回参数结构体
+ */
+export interface GetUploadJobDetailsResponse {
+  /**
+   * 任务详情
+   */
+  Job?: UploadJob
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -463,6 +563,20 @@ export interface ChatAIRequest {
 }
 
 /**
+ * GetUploadJobDetails请求参数结构体
+ */
+export interface GetUploadJobDetailsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 任务id
+   */
+  JobId?: string
+}
+
+/**
  * AddChunk返回参数结构体
  */
 export interface AddChunkResponse {
@@ -530,6 +644,20 @@ export interface Chunk {
    * 切片概要
    */
   Summary?: string
+}
+
+/**
+ * UploadAndCommitFile返回参数结构体
+ */
+export interface UploadAndCommitFileResponse {
+  /**
+   * 上传任务
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

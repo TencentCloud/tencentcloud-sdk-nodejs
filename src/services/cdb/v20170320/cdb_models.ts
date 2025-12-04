@@ -6112,6 +6112,10 @@ export interface SwitchForUpgradeRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
+  /**
+   * 是否开启关联切换，true为开启，false为关闭，默认false
+   */
+  IsRelatedSwitch?: boolean
 }
 
 /**
@@ -10524,6 +10528,10 @@ export interface ModifyAccountPasswordRequest {
    * 云数据库账号。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。
    */
   Accounts: Array<Account>
+  /**
+   * 是否跳过校验密码复杂度
+   */
+  SkipValidatePassword?: boolean
 }
 
 /**

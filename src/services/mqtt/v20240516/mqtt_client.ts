@@ -24,10 +24,12 @@ import {
   DeleteUserRequest,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
+  MessageEnrichmentRulePriority,
   ModifyAuthorizationPolicyResponse,
   ActivateDeviceCertificateRequest,
   CreateInstanceResponse,
   ApplyRegistrationCodeRequest,
+  MessageEnrichmentRuleItem,
   DescribeMessageListRequest,
   DeleteDeviceIdentityRequest,
   ModifyJWTAuthenticatorRequest,
@@ -39,12 +41,14 @@ import {
   DescribeCaCertificateResponse,
   DescribeDeviceCertificatesRequest,
   DeleteAuthenticatorRequest,
+  DeleteMessageEnrichmentRuleRequest,
   PublicAccessRule,
   VpcInfo,
   DeleteAuthorizationPolicyResponse,
   ProductSkuItem,
   ModifyJWKSAuthenticatorRequest,
   DescribeDeviceIdentitiesRequest,
+  CreateMessageEnrichmentRuleResponse,
   RegisterCaCertificateResponse,
   UserProperty,
   KickOutClientResponse,
@@ -61,17 +65,20 @@ import {
   MQTTInstanceItem,
   DescribeInstanceListResponse,
   ApplyRegistrationCodeResponse,
+  ModifyMessageEnrichmentRuleRequest,
   ModifyInstanceResponse,
   AddClientSubscriptionRequest,
   CreateHttpAuthenticatorResponse,
   MQTTMessage,
   MQTTMessageItem,
+  UpdateMessageEnrichmentRulePriorityResponse,
   ModifyJWKSAuthenticatorResponse,
   DeleteDeviceIdentityResponse,
   CreateInsPublicEndpointResponse,
   CreateUserResponse,
   CreateAuthorizationPolicyRequest,
   PublishMessageResponse,
+  DescribeMessageEnrichmentRulesResponse,
   DescribeAuthenticatorResponse,
   DeactivateCaCertificateResponse,
   DeleteCaCertificateRequest,
@@ -95,7 +102,7 @@ import {
   TagFilter,
   DescribeMessageDetailsResponse,
   DescribeUserListResponse,
-  ModifyTopicResponse,
+  DeleteMessageEnrichmentRuleResponse,
   DeactivateDeviceCertificateResponse,
   MQTTUserItem,
   ActivateCaCertificateRequest,
@@ -127,6 +134,7 @@ import {
   CreateUserRequest,
   DescribeInstanceResponse,
   ModifyInstanceCertBindingResponse,
+  UpdateMessageEnrichmentRulePriorityRequest,
   DescribeInsVPCEndpointsResponse,
   DescribeDeviceCertificateRequest,
   ModifyInsPublicEndpointRequest,
@@ -135,9 +143,12 @@ import {
   CreateDeviceIdentityResponse,
   KickOutClientRequest,
   DescribeDeviceIdentityResponse,
+  ModifyTopicResponse,
   DeleteClientSubscriptionResponse,
   DescribeCaCertificateRequest,
+  DescribeMessageEnrichmentRulesRequest,
   UpdateAuthorizationPolicyPriorityRequest,
+  CreateMessageEnrichmentRuleRequest,
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   DescribeDeviceIdentityRequest,
@@ -155,6 +166,7 @@ import {
   DescribeCaCertificatesRequest,
   DeviceCertificateItem,
   SubscriptionUserProperty,
+  ModifyMessageEnrichmentRuleResponse,
   MQTTClientInfo,
   MQTTTopicItem,
   PriceTag,
@@ -201,15 +213,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询用户列表，Filter参数使用说明如下：
-
-1. Username，用户名称模糊搜索
-     */
-  async DescribeUserList(
-    req: DescribeUserListRequest,
-    cb?: (error: string, rep: DescribeUserListResponse) => void
-  ): Promise<DescribeUserListResponse> {
-    return this.request("DescribeUserList", req, cb)
+   * 查询消息属性增强规则
+   */
+  async DescribeMessageEnrichmentRules(
+    req: DescribeMessageEnrichmentRulesRequest,
+    cb?: (error: string, rep: DescribeMessageEnrichmentRulesResponse) => void
+  ): Promise<DescribeMessageEnrichmentRulesResponse> {
+    return this.request("DescribeMessageEnrichmentRules", req, cb)
   }
 
   /**
@@ -333,13 +343,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页查询设备证书
+   * 创建一条消息属性增强规则
    */
-  async DescribeDeviceCertificates(
-    req: DescribeDeviceCertificatesRequest,
-    cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void
-  ): Promise<DescribeDeviceCertificatesResponse> {
-    return this.request("DescribeDeviceCertificates", req, cb)
+  async CreateMessageEnrichmentRule(
+    req: CreateMessageEnrichmentRuleRequest,
+    cb?: (error: string, rep: CreateMessageEnrichmentRuleResponse) => void
+  ): Promise<CreateMessageEnrichmentRuleResponse> {
+    return this.request("CreateMessageEnrichmentRule", req, cb)
   }
 
   /**
@@ -350,6 +360,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInsPublicEndpointsResponse) => void
   ): Promise<DescribeInsPublicEndpointsResponse> {
     return this.request("DescribeInsPublicEndpoints", req, cb)
+  }
+
+  /**
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
+     */
+  async DescribeUserList(
+    req: DescribeUserListRequest,
+    cb?: (error: string, rep: DescribeUserListResponse) => void
+  ): Promise<DescribeUserListResponse> {
+    return this.request("DescribeUserList", req, cb)
   }
 
   /**
@@ -421,6 +443,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductSKUListResponse) => void
   ): Promise<DescribeProductSKUListResponse> {
     return this.request("DescribeProductSKUList", req, cb)
+  }
+
+  /**
+   * 分页查询设备证书
+   */
+  async DescribeDeviceCertificates(
+    req: DescribeDeviceCertificatesRequest,
+    cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void
+  ): Promise<DescribeDeviceCertificatesResponse> {
+    return this.request("DescribeDeviceCertificates", req, cb)
   }
 
   /**
@@ -542,6 +574,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询共享订阅消息堆积量
+   */
+  async DescribeSharedSubscriptionLag(
+    req: DescribeSharedSubscriptionLagRequest,
+    cb?: (error: string, rep: DescribeSharedSubscriptionLagResponse) => void
+  ): Promise<DescribeSharedSubscriptionLagResponse> {
+    return this.request("DescribeSharedSubscriptionLag", req, cb)
+  }
+
+  /**
    * 查询实例信息
    */
   async DescribeInstance(
@@ -632,6 +674,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改消息属性增强规则
+注意：需要提交当前规则的所有属性，即使某些字段没有修改。
+     */
+  async ModifyMessageEnrichmentRule(
+    req: ModifyMessageEnrichmentRuleRequest,
+    cb?: (error: string, rep: ModifyMessageEnrichmentRuleResponse) => void
+  ): Promise<ModifyMessageEnrichmentRuleResponse> {
+    return this.request("ModifyMessageEnrichmentRule", req, cb)
+  }
+
+  /**
    * 踢出客户端
    */
   async KickOutClient(
@@ -639,6 +692,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: KickOutClientResponse) => void
   ): Promise<KickOutClientResponse> {
     return this.request("KickOutClient", req, cb)
+  }
+
+  /**
+   * 修改消息属性增强规则优先级
+   */
+  async UpdateMessageEnrichmentRulePriority(
+    req: UpdateMessageEnrichmentRulePriorityRequest,
+    cb?: (error: string, rep: UpdateMessageEnrichmentRulePriorityResponse) => void
+  ): Promise<UpdateMessageEnrichmentRulePriorityResponse> {
+    return this.request("UpdateMessageEnrichmentRulePriority", req, cb)
   }
 
   /**
@@ -742,13 +805,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询共享订阅消息堆积量
+   * 删除消息属性增强规则
    */
-  async DescribeSharedSubscriptionLag(
-    req: DescribeSharedSubscriptionLagRequest,
-    cb?: (error: string, rep: DescribeSharedSubscriptionLagResponse) => void
-  ): Promise<DescribeSharedSubscriptionLagResponse> {
-    return this.request("DescribeSharedSubscriptionLag", req, cb)
+  async DeleteMessageEnrichmentRule(
+    req: DeleteMessageEnrichmentRuleRequest,
+    cb?: (error: string, rep: DeleteMessageEnrichmentRuleResponse) => void
+  ): Promise<DeleteMessageEnrichmentRuleResponse> {
+    return this.request("DeleteMessageEnrichmentRule", req, cb)
   }
 
   /**

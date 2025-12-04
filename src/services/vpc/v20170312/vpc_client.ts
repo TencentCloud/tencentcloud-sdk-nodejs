@@ -104,7 +104,7 @@ import {
   CreateIp6TranslatorsResponse,
   DescribeFlowLogsRequest,
   CcnRegionBandwidthLimitInfo,
-  CloneSecurityGroupRequest,
+  ConnectionStateTimeouts,
   AssociateNatGatewayAddressRequest,
   DescribeFlowLogsResponse,
   InstanceBind,
@@ -283,7 +283,7 @@ import {
   DescribeAssistantCidrResponse,
   DescribeHaVipsRequest,
   UpdateTrafficMirrorDirectionResponse,
-  IpAddressStates,
+  DescribeCcnRouteTableInputPolicysRequest,
   DescribeRouteTableSelectionPoliciesRequest,
   InstanceStatistic,
   InternetPriceDetail,
@@ -554,7 +554,7 @@ import {
   ModifyAddressesBandwidthResponse,
   LocalGateway,
   RejectAttachCcnInstancesResponse,
-  DescribeCcnRouteTableInputPolicysRequest,
+  CloneSecurityGroupRequest,
   ModifySnapshotPoliciesResponse,
   ResetRoutePolicyEntriesRequest,
   InquiryPriceRenewAddressesResponse,
@@ -564,6 +564,7 @@ import {
   RenewAddressesResponse,
   ModifyVpnGatewaySslServerRequest,
   CcnInstanceWithoutRegion,
+  IpAddressStates,
   DescribeCcnRoutesRequest,
   GenerateVpnConnectionDefaultHealthCheckIpResponse,
   CheckTrafficMirrorResponse,
@@ -3448,7 +3449,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（ResetNatGatewayConnection）用来NAT网关并发连接上限。
+   * 本接口（ResetNatGatewayConnection）用于调整传统型NAT网关并发连接数上限。
    */
   async ResetNatGatewayConnection(
     req: ResetNatGatewayConnectionRequest,

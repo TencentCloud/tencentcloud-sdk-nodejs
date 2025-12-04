@@ -6619,6 +6619,20 @@ export interface CreateAccountsResponse {
 }
 
 /**
+ * ModifyClusterGlobalEncryption返回参数结构体
+ */
+export interface ModifyClusterGlobalEncryptionResponse {
+  /**
+   * 异步任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CloseWan返回参数结构体
  */
 export interface CloseWanResponse {
@@ -8357,6 +8371,20 @@ export interface ClusterTaskId {
    * 任务ID
    */
   TaskId?: string
+}
+
+/**
+ * ModifyClusterGlobalEncryption请求参数结构体
+ */
+export interface ModifyClusterGlobalEncryptionRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 开启或关闭全局加密
+   */
+  IsOpenGlobalEncryption?: boolean
 }
 
 /**

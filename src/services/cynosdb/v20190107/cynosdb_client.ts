@@ -267,6 +267,7 @@ import {
   DescribeClusterPasswordComplexityRequest,
   QueryFilter,
   CreateAccountsResponse,
+  ModifyClusterGlobalEncryptionResponse,
   CloseWanResponse,
   DescribeInstancesResponse,
   SalePackageSpec,
@@ -336,6 +337,7 @@ import {
   OpenWanResponse,
   OfflineClusterResponse,
   ClusterTaskId,
+  ModifyClusterGlobalEncryptionRequest,
   ModifyAccountHostRequest,
   DescribeFlowRequest,
   DescribeClusterDatabaseTablesResponse,
@@ -1116,6 +1118,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（StopCLSDelivery）用于停止日志投递功能。
+   */
+  async StopCLSDelivery(
+    req: StopCLSDeliveryRequest,
+    cb?: (error: string, rep: StopCLSDeliveryResponse) => void
+  ): Promise<StopCLSDeliveryResponse> {
+    return this.request("StopCLSDelivery", req, cb)
+  }
+
+  /**
    * 本接口（CloseWan）用于关闭外网。
    */
   async CloseWan(
@@ -1746,13 +1758,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（StopCLSDelivery）用于停止日志投递功能。
+   * 开关全局加密
    */
-  async StopCLSDelivery(
-    req: StopCLSDeliveryRequest,
-    cb?: (error: string, rep: StopCLSDeliveryResponse) => void
-  ): Promise<StopCLSDeliveryResponse> {
-    return this.request("StopCLSDelivery", req, cb)
+  async ModifyClusterGlobalEncryption(
+    req: ModifyClusterGlobalEncryptionRequest,
+    cb?: (error: string, rep: ModifyClusterGlobalEncryptionResponse) => void
+  ): Promise<ModifyClusterGlobalEncryptionResponse> {
+    return this.request("ModifyClusterGlobalEncryption", req, cb)
   }
 
   /**

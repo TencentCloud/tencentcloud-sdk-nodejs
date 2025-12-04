@@ -1089,7 +1089,7 @@ export interface DescribeSingleSignOnEmployeesRequest {
    */
   SsoApplicationId: string
   /**
-   * 需要删除的单点登录员工的唯一Id 值.不能超过 200 个。
+   * 需要查询的单点登录员工的唯一Id 值.不能超过 200 个。
 如果传递了 openIds，limit 和 offset 参数无效，
    */
   OpenIds?: Array<string>

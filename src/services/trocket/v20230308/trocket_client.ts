@@ -432,8 +432,9 @@ Filters示例：
   }
 
   /**
-   * 查询消息详情
-   */
+     * 查询消息详情。
+当前 API 适用集群：5.x 集群。4.x 集群的查询消息详情接口文档见 [DescribeRocketMQMsg](https://cloud.tencent.com/document/product/1179/91055)。
+     */
   async DescribeMessage(
     req: DescribeMessageRequest,
     cb?: (error: string, rep: DescribeMessageResponse) => void

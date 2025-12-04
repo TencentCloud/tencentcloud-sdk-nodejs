@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UploadAndCommitFileRequest,
   GetKnowledgeBaseListRequest,
   AddChunkRequest,
   ModifyChunkResponse,
@@ -26,22 +27,27 @@ import {
   GetSessionDetailsResponse,
   DeleteChunkResponse,
   QueryChunkListResponse,
+  UploadJob,
   QueryChunkListRequest,
   StopChatAIRequest,
   StepExpand,
   GetSessionDetailsRequest,
-  ModifyKnowledgeBaseRequest,
-  ModifyChunkRequest,
   CreateDataAgentSessionResponse,
+  ModifyChunkRequest,
+  ModifyKnowledgeBaseRequest,
+  CosFileInfo,
   KnowledgeBase,
   StopChatAIResponse,
+  GetUploadJobDetailsResponse,
   Task,
   DeleteDataAgentSessionResponse,
   Record,
   ChatAIRequest,
+  GetUploadJobDetailsRequest,
   AddChunkResponse,
   StepInfo,
   Chunk,
+  UploadAndCommitFileResponse,
   CreateDataAgentSessionRequest,
   ModifyKnowledgeBaseResponse,
   DeleteDataAgentSessionRequest,
@@ -55,6 +61,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dataagent.tencentcloudapi.com", "2025-05-13", clientConfig)
+  }
+
+  /**
+   * 上传提交文件
+   */
+  async UploadAndCommitFile(
+    req: UploadAndCommitFileRequest,
+    cb?: (error: string, rep: UploadAndCommitFileResponse) => void
+  ): Promise<UploadAndCommitFileResponse> {
+    return this.request("UploadAndCommitFile", req, cb)
   }
 
   /**
@@ -75,6 +91,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteChunkResponse) => void
   ): Promise<DeleteChunkResponse> {
     return this.request("DeleteChunk", req, cb)
+  }
+
+  /**
+   * 查询上传任务
+   */
+  async GetUploadJobDetails(
+    req: GetUploadJobDetailsRequest,
+    cb?: (error: string, rep: GetUploadJobDetailsResponse) => void
+  ): Promise<GetUploadJobDetailsResponse> {
+    return this.request("GetUploadJobDetails", req, cb)
   }
 
   /**

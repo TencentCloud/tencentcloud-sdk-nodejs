@@ -18,6 +18,16 @@ const client = new tencentcloud.tke.v20220501.Client({
 })
 describe("tke.v20220501.test.js", function () {
 
+it("tke.v20220501.ModifyClusterMachine", async function () {
+    try {
+       const data = await client.ModifyClusterMachine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.DescribeNodePools", async function () {
     try {
        const data = await client.DescribeNodePools({})

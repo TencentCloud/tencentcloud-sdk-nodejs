@@ -32,6 +32,7 @@ import {
   InstanceExpand,
   DescribeHostListResponse,
   DescribeInstanceListResponse,
+  ResourceTag,
   DescribeDBInstancesResponse,
   DescribeHostListRequest,
   DescribeInstancesResponse,

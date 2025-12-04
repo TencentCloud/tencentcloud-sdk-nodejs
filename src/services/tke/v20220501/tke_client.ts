@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  TagSpecification,
   StartMachinesResponse,
   NativeNodeInfo,
   HealthCheckTemplateRule,
@@ -26,7 +27,7 @@ import {
   HealthCheckPolicyRule,
   DeleteHealthCheckPolicyRequest,
   CreateNodePoolResponse,
-  TagSpecification,
+  SetMachineLoginResponse,
   CreateNativeNodePoolParam,
   DescribeNodePoolsResponse,
   ExternalNodeInfo,
@@ -41,7 +42,7 @@ import {
   Label,
   HealthCheckPolicyBinding,
   CreateHealthCheckPolicyRequest,
-  SetMachineLoginResponse,
+  ModifyClusterMachineRequest,
   InstanceExtraArgs,
   MachineUpgradeSettings,
   DeleteClusterMachinesResponse,
@@ -55,6 +56,7 @@ import {
   SuperNodeInfo,
   UpdateNativeNodePoolParam,
   Annotation,
+  ModifyClusterMachineResponse,
   DescribeClusterInstancesRequest,
   DeleteHealthCheckPolicyResponse,
   SetMachineLoginRequest,
@@ -104,6 +106,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2022-05-01", clientConfig)
+  }
+
+  /**
+   * 修改原生节点
+   */
+  async ModifyClusterMachine(
+    req: ModifyClusterMachineRequest,
+    cb?: (error: string, rep: ModifyClusterMachineResponse) => void
+  ): Promise<ModifyClusterMachineResponse> {
+    return this.request("ModifyClusterMachine", req, cb)
   }
 
   /**

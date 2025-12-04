@@ -151,6 +151,20 @@ export interface CaCertificateItem {
 }
 
 /**
+ * 消息属性增强规则优先级
+ */
+export interface MessageEnrichmentRulePriority {
+  /**
+   * 消息属性增强规则id
+   */
+  Id: number
+  /**
+   * 优先级
+   */
+  Priority: number
+}
+
+/**
  * ModifyAuthorizationPolicy返回参数结构体
  */
 export interface ModifyAuthorizationPolicyResponse {
@@ -196,6 +210,57 @@ export interface ApplyRegistrationCodeRequest {
    * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
+}
+
+/**
+ * MessageEnrichmentRuleItem
+ */
+export interface MessageEnrichmentRuleItem {
+  /**
+   * 策略规则ID
+   */
+  Id?: number
+  /**
+   * MQTT集群ID
+   */
+  InstanceId?: string
+  /**
+   * 策略规则名
+   */
+  RuleName?: string
+  /**
+   * 规则匹配条件，JSON格式，需要Base64编码 
+样例 {"clientId":"client-1","username":"client-1","topic":"home/room1"}
+Base64后 eyJjbGllbnRJZCI6ImNsaWVudC0xIiwidXNlcm5hbWUiOiJjbGllbnQtMSIsInRvcGljIjoiaG9tZS9yb29tMSJ9
+   */
+  Condition?: string
+  /**
+   * 规则执行的动作，JSON格式，需要Base64编码
+ 样例
+{"messageExpiryInterval":360,"response Topic":"replies/devices/${clientid}","correlationData":"${traceid}","userProperty":[{"key":"trace-id","value":"${traceid}"},{"key":"data-source","value":"rule-engine"}]}
+BASE64后 eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2UgVG9waWMiOiJyZXBsaWVzL2RldmljZXMvJHtjbGllbnRpZH0iLCJjb3JyZWxhdGlvbkRhdGEiOiIke3RyYWNlaWR9IiwidXNlclByb3BlcnR5IjpbeyJrZXkiOiJ0cmFjZS1pZCIsInZhbHVlIjoiJHt0cmFjZWlkfSJ9LHsia2V5IjoiZGF0YS1zb3VyY2UiLCJ2YWx1ZSI6InJ1bGUtZW5naW5lIn1dfQ==
+   */
+  Actions?: string
+  /**
+   * 规则优先级，数字越小，优先级越高，高优先级覆盖低优先级。UserProperty字段会合并
+   */
+  Priority?: number
+  /**
+   * 策略状态。 0:未定义；1:激活；2:不激活；默认不激活
+   */
+  Status?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 创建时间。毫秒级时间戳 。
+   */
+  CreatedTime?: number
+  /**
+   * 更新时间。毫秒级时间戳 。
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -492,6 +557,20 @@ HTTP：HTTP认证器
 }
 
 /**
+ * DeleteMessageEnrichmentRule请求参数结构体
+ */
+export interface DeleteMessageEnrichmentRuleRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 消息属性增强规则id
+   */
+  Id: number
+}
+
+/**
  * 公网访问安全规则
  */
 export interface PublicAccessRule {
@@ -632,6 +711,24 @@ export interface DescribeDeviceIdentitiesRequest {
    * 查询结果限制数量
    */
   Limit?: number
+}
+
+/**
+ * CreateMessageEnrichmentRule返回参数结构体
+ */
+export interface CreateMessageEnrichmentRuleResponse {
+  /**
+   * 集群id
+   */
+  InstanceId?: string
+  /**
+   * 规则id
+   */
+  Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1087,6 +1184,52 @@ export interface ApplyRegistrationCodeResponse {
 }
 
 /**
+ * ModifyMessageEnrichmentRule请求参数结构体
+ */
+export interface ModifyMessageEnrichmentRuleRequest {
+  /**
+   * 消息属性增强规则ID
+   */
+  Id: number
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+
+   */
+  InstanceId: string
+  /**
+   * 策略名称，不能为空，3-64个字符，支持中文、字母、数字、“-”及“_”。
+   */
+  RuleName?: string
+  /**
+   * 规则匹配条件，JSON格式，需要Base64编码
+样例
+{"clientId":"client-1","username":"client-1","topic":"home/room1"}
+Base64后
+eyJjbGllbnRJZCI6ImNsaWVudC0xIiwidXNlcm5hbWUiOiJjbGllbnQtMSIsInRvcGljIjoiaG9tZS9yb29tMSJ9
+   */
+  Condition?: string
+  /**
+   * 规则执行的动作，JSON格式，需要Base64编码 
+样例
+{"messageExpiryInterval":360,"responseTopic":"replies/${clientid}","correlationData":"${traceid}","userProperty":[{"key":"trace-id","value":"${traceid}"}]}
+ BASE64后 eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2VUb3BpYyI6InJlcGxpZXMvJHtjbGllbnRpZH0iLCJjb3JyZWxhdGlvbkRhdGEiOiIke3RyYWNlaWR9IiwidXNlclByb3BlcnR5IjpbeyJrZXkiOiJ0cmFjZS1pZCIsInZhbHVlIjoiJHt0cmFjZWlkfSJ9XX0=
+   */
+  Actions?: string
+  /**
+   * 规则优先级，数字越小，优先级越高，高优先级覆盖低优先级。UserProperty字段会合并
+   */
+  Priority?: number
+  /**
+   * 策略状态。 0:未定义；1:激活；2:不激活；默认不激活
+   */
+  Status?: number
+  /**
+   * 备注信息，最长 128 字符
+   */
+  Remark?: string
+}
+
+/**
  * ModifyInstance返回参数结构体
  */
 export interface ModifyInstanceResponse {
@@ -1200,6 +1343,16 @@ export interface MQTTMessageItem {
 2：精确一次
    */
   Qos?: string
+}
+
+/**
+ * UpdateMessageEnrichmentRulePriority返回参数结构体
+ */
+export interface UpdateMessageEnrichmentRulePriorityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1318,6 +1471,20 @@ sub：订阅
  * PublishMessage返回参数结构体
  */
 export interface PublishMessageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMessageEnrichmentRules返回参数结构体
+ */
+export interface DescribeMessageEnrichmentRulesResponse {
+  /**
+   * 消息增强策略
+   */
+  Data?: Array<MessageEnrichmentRuleItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1757,9 +1924,9 @@ export interface DescribeUserListResponse {
 }
 
 /**
- * ModifyTopic返回参数结构体
+ * DeleteMessageEnrichmentRule返回参数结构体
  */
-export interface ModifyTopicResponse {
+export interface DeleteMessageEnrichmentRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2575,6 +2742,20 @@ export interface ModifyInstanceCertBindingResponse {
 }
 
 /**
+ * UpdateMessageEnrichmentRulePriority请求参数结构体
+ */
+export interface UpdateMessageEnrichmentRulePriorityRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 策略ID和优先级
+   */
+  Priorities?: Array<MessageEnrichmentRulePriority>
+}
+
+/**
  * DescribeInsVPCEndpoints返回参数结构体
  */
 export interface DescribeInsVPCEndpointsResponse {
@@ -2704,6 +2885,16 @@ export interface DescribeDeviceIdentityResponse {
 }
 
 /**
+ * ModifyTopic返回参数结构体
+ */
+export interface ModifyTopicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteClientSubscription返回参数结构体
  */
 export interface DeleteClientSubscriptionResponse {
@@ -2728,6 +2919,16 @@ export interface DescribeCaCertificateRequest {
 }
 
 /**
+ * DescribeMessageEnrichmentRules请求参数结构体
+ */
+export interface DescribeMessageEnrichmentRulesRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。
+   */
+  InstanceId: string
+}
+
+/**
  * UpdateAuthorizationPolicyPriority请求参数结构体
  */
 export interface UpdateAuthorizationPolicyPriorityRequest {
@@ -2739,6 +2940,48 @@ export interface UpdateAuthorizationPolicyPriorityRequest {
    * 策略ID和优先级
    */
   Priorities?: Array<AuthorizationPolicyPriority>
+}
+
+/**
+ * CreateMessageEnrichmentRule请求参数结构体
+ */
+export interface CreateMessageEnrichmentRuleRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 规则名称
+   */
+  RuleName: string
+  /**
+   * 规则匹配条件，JSON格式，需要Base64编码
+样例
+{"clientId":"client-1","username":"client-1","topic":"home/room1"}
+Base64后
+eyJjbGllbnRJZCI6ImNsaWVudC0xIiwidXNlcm5hbWUiOiJjbGllbnQtMSIsInRvcGljIjoiaG9tZS9yb29tMSJ9
+   */
+  Condition: string
+  /**
+   * 规则执行的动作，JSON格式，需要Base64编码
+样例
+{"messageExpiryInterval":360,"responseTopic":"replies/devices/${clientid}","correlationData":"${traceid}","userProperty":[{"key":"trace-id","value":"${traceid}"}]}
+BASE64后
+eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2VUb3BpYyI6InJlcGxpZXMvZGV2aWNlcy8ke2NsaWVudGlkfSIsImNvcnJlbGF0aW9uRGF0YSI6IiR7dHJhY2VpZH0iLCJ1c2VyUHJvcGVydHkiOlt7ImtleSI6InRyYWNlLWlkIiwidmFsdWUiOiIke3RyYWNlaWR9In1dfQ==
+   */
+  Actions: string
+  /**
+   * 规则优先级，数字越小，优先级越高，高优先级覆盖低低优先级。UserPropertiy字段会合并
+   */
+  Priority: number
+  /**
+   * 策略状态。 0:未定义；1:激活；2:不激活；默认不激活
+   */
+  Status?: number
+  /**
+   * 备注，长度不超过128个字符。
+   */
+  Remark?: string
 }
 
 /**
@@ -3157,6 +3400,16 @@ export interface SubscriptionUserProperty {
    * 订阅的UserProperty值
    */
   Value?: string
+}
+
+/**
+ * ModifyMessageEnrichmentRule返回参数结构体
+ */
+export interface ModifyMessageEnrichmentRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

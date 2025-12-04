@@ -16,6 +16,24 @@
  */
 
 /**
+ * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ */
+export interface TagSpecification {
+  /**
+   * 标签绑定的资源类型，当前支持类型：
+1.cluster：集群相关接口，TagSpecification 的 ResourceType 传参为 cluster
+2.machine：节点池相关接口，如：CreateNodePool, DescribeNodePools 等，TagSpecification 的 ResourceType 传参为 machine
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType?: string
+  /**
+   * 标签对列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * StartMachines返回参数结构体
  */
 export interface StartMachinesResponse {
@@ -327,21 +345,13 @@ export interface CreateNodePoolResponse {
 }
 
 /**
- * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ * SetMachineLogin返回参数结构体
  */
-export interface TagSpecification {
+export interface SetMachineLoginResponse {
   /**
-   * 标签绑定的资源类型，当前支持类型：
-1.cluster：集群相关接口，TagSpecification 的 ResourceType 传参为 cluster
-2.machine：节点池相关接口，如：CreateNodePool, DescribeNodePools 等，TagSpecification 的 ResourceType 传参为 machine
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceType?: string
-  /**
-   * 标签对列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
+  RequestId?: string
 }
 
 /**
@@ -745,13 +755,25 @@ export interface CreateHealthCheckPolicyRequest {
 }
 
 /**
- * SetMachineLogin返回参数结构体
+ * ModifyClusterMachine请求参数结构体
  */
-export interface SetMachineLoginResponse {
+export interface ModifyClusterMachineRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群 ID
    */
-  RequestId?: string
+  ClusterId: string
+  /**
+   * 节点名列表
+   */
+  MachineNames: Array<string>
+  /**
+   * machine的display name
+   */
+  DisplayName?: string
+  /**
+   * 节点预付费信息
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
 }
 
 /**
@@ -1111,6 +1133,16 @@ export interface Annotation {
    * map表中的Value
    */
   Value: string
+}
+
+/**
+ * ModifyClusterMachine返回参数结构体
+ */
+export interface ModifyClusterMachineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

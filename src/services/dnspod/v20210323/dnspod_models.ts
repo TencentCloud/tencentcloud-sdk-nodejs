@@ -3437,7 +3437,7 @@ export interface DescribeDomainGroupListResponse {
  */
 export interface ModifyPackageAutoRenewRequest {
   /**
-   * 资源ID。可以在控制台查看所有的资源
+   * 计费资源ID
    */
   ResourceId: string
   /**
@@ -4835,7 +4835,7 @@ export interface ModifyDomainStatusRequest {
    */
   Domain: string
   /**
-   * 域名状态，”enable” 、”disable” 分别代表启用和暂停
+   * 域名状态，"enable"、"disable" 分别代表启用和暂停
    */
   Status: string
   /**
@@ -5419,7 +5419,7 @@ export interface DomainShareUserInfo {
    */
   DomainShareId?: number
   /**
-   * 共享模式。r-只读；w-可写；rw-可读写。
+   * 共享模式。r-只读；rw-可读写。
    */
   Mode?: string
   /**

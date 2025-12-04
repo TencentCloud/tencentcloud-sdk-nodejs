@@ -147,6 +147,34 @@ export interface SubmitHumanActorJobRequest {
 }
 
 /**
+ * DescribeImageAnimateJob请求参数结构体
+ */
+export interface DescribeImageAnimateJobRequest {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
+}
+
+/**
+ * 模板信息
+ */
+export interface FaceTemplateInfo {
+  /**
+   * 角色ID。需要与MergeInfos中的TemplateFaceID依次对应。需要填数字，建议填"0"、"1"，依次累加。
+   */
+  TemplateFaceID?: string
+  /**
+   * 视频模板中要替换的人脸图片
+   */
+  TemplateFaceImage?: Image
+  /**
+   * 视频模板中要替换的人脸图片的人脸框。不填默认取要替换的人脸图片中最大人脸。
+   */
+  TemplateFaceRect?: FaceRect
+}
+
+/**
  * SubmitImageAnimateJob请求参数结构体
  */
 export interface SubmitImageAnimateJobRequest {
@@ -224,6 +252,42 @@ export interface SubmitImageToVideoGeneralJobResponse {
 }
 
 /**
+ * DescribeVideoFaceFusionJob返回参数结构体
+ */
+export interface DescribeVideoFaceFusionJobResponse {
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  Status?: string
+  /**
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorCode?: string
+  /**
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorMessage?: string
+  /**
+   * 结果视频 URL。有效期 24 小时。
+   */
+  ResultVideoUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVideoFaceFusionJob请求参数结构体
+ */
+export interface DescribeVideoFaceFusionJobRequest {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+}
+
+/**
  * DescribePortraitSingJob请求参数结构体
  */
 export interface DescribePortraitSingJobRequest {
@@ -239,6 +303,20 @@ export interface DescribePortraitSingJobRequest {
 export interface SubmitImageAnimateJobResponse {
   /**
    * 图片跳舞任务ID。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitVideoFaceFusionJob返回参数结构体
+ */
+export interface SubmitVideoFaceFusionJobResponse {
+  /**
+   * 视频人脸融合任务的job id（job有效期24小时）
    */
   JobId?: string
   /**
@@ -271,6 +349,25 @@ export interface DescribeTemplateToVideoJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 人脸图片和待被融合的素材模板图的人脸位置信息。
+ */
+export interface FaceMergeInfo {
+  /**
+   * 融合图片
+   */
+  MergeFaceImage?: Image
+  /**
+   * 上传的图片人脸位置信息（人脸框）
+Width、Height >= 30。
+   */
+  MergeFaceRect?: FaceRect
+  /**
+   * 素材人脸ID，不填默认取上传图片中最大人脸。
+   */
+  TemplateFaceID?: string
 }
 
 /**
@@ -555,6 +652,54 @@ export interface SubmitVideoStylizationJobResponse {
 }
 
 /**
+ * SubmitVideoFaceFusionJob请求参数结构体
+ */
+export interface SubmitVideoFaceFusionJobRequest {
+  /**
+   * 视频素材下载地址。用户自定义模版视频下载地址，使用前需要先调用视频审核接口进行内容审核。视频限制：分辨率≤4k，fps≤25，视频大小≤1G，时长≤20 秒，支持格式mp4。
+
+输入视频建议：
+姿态：人脸相对镜头水平方向角度转动不超过 90°,垂直方向角度转动不超过 20°。遮挡：脸部遮挡面积不超过 50%，不要完全遮挡五官，不要有半透明遮挡（强光，玻璃，透明眼镜等）、以及细碎离散的脸部遮挡（如飘落的花瓣）。妆容及光照：避免浓妆、复杂妆容，避免复杂光照、闪烁，这些属性无法完全恢复，并对稳定性有影响。针对特殊表情和微表情，针对局部肌肉控制下的微表情，以及过于夸张的特殊表情等不保证表情效果完全恢复。
+   */
+  VideoUrl?: string
+  /**
+   * 视频素材模板的人脸位置信息。
+目前最多支持融合视频素材中的 6 张人脸  
+输入图片要求：  
+1、用户图限制大小不超过 10MB  
+2、图片最大分辨率不超过 4k，建议最小为 128，  人脸框最小为 68
+3、支持格式 jpg，png  
+4、如果用户图中未指定人脸且有多张人脸，  默认融合最大人脸  
+输入图片建议：  包含上述视频中出现的人物的单人照，并且正面、清晰、无遮挡
+   */
+  TemplateInfos?: Array<FaceTemplateInfo>
+  /**
+   * 用户人脸图片位置信息。
+输入图片要求：
+1、用户图限制大小不超过 10MB
+2、图片最大分辨率不超过 4k，建议最小为 128，人脸框最小为 68
+3、支持格式 jpg，png
+4、如果未指定人脸且用户图中有多张人脸，
+默认融合最大人脸
+输入图建议：
+正脸无遮挡
+   */
+  MergeInfos?: Array<FaceMergeInfo>
+  /**
+   * 为生成视频添加标识的开关，默认为1。 
+1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 
+建议您使用显著标识来提示，该视频是 AI 生成的视频。
+   */
+  LogoAdd?: number
+  /**
+   * 视频水印Logo参数标识内容设置。   
+默认在融合结果图右下角添加“AI生成”类似字样，您可根据自身需要替换为其他的Logo图片。   
+输入建议：输入水印图片宽高需小于视频宽高
+   */
+  LogoParam?: LogoParam
+}
+
+/**
  * SubmitPortraitSingJob返回参数结构体
  */
 export interface SubmitPortraitSingJobResponse {
@@ -682,13 +827,25 @@ export interface DescribeTemplateToVideoJobRequest {
 }
 
 /**
- * DescribeImageAnimateJob请求参数结构体
+ * 人脸框信息。
  */
-export interface DescribeImageAnimateJobRequest {
+export interface FaceRect {
   /**
-   * 任务ID。
+   * 人脸框左上角横坐标。
    */
-  JobId?: string
+  X?: number
+  /**
+   * 人脸框左上角纵坐标。
+   */
+  Y?: number
+  /**
+   * 人脸框宽度。
+   */
+  Width?: number
+  /**
+   * 人脸框高度。
+   */
+  Height?: number
 }
 
 /**

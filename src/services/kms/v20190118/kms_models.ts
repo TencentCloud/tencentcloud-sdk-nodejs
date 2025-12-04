@@ -473,6 +473,10 @@ export interface GenerateDataKeyRequest {
    * KMS 独享版对应的 HSM 集群 ID。如果指定HsmClusterId，表明根密钥在此集群里，会校验KeyId是否和HsmClusterId对应。
    */
   HsmClusterId?: string
+  /**
+   * 标签列表,当参数IsHostedByKms=1，数据密钥托管到kms时有效.
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -966,6 +970,10 @@ export interface DataKeyMetadata {
    */
   KeyId?: string
   /**
+   * CMK的名称
+   */
+  KeyName?: string
+  /**
    * 作为密钥更容易辨识，更容易被人看懂的数据密钥名称
    */
   DataKeyName?: string
@@ -1104,6 +1112,10 @@ export interface ImportDataKeyRequest {
    * KMS 独享版对应的 HSM 集群 ID。如果指定HsmClusterId，表明根密钥在此集群里，会校验KeyId是否和HsmClusterId对应。
    */
   HsmClusterId?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1255,6 +1267,14 @@ export interface GenerateDataKeyResponse {
    * DataKey的全局唯一标识,当KMS托管数据密钥时返回。
    */
   DataKeyId?: string
+  /**
+   * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
+   */
+  TagCode?: number
+  /**
+   * 标签操作的返回信息
+   */
+  TagMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1516,6 +1536,14 @@ export interface ImportDataKeyResponse {
    */
   DataKeyId?: string
   /**
+   * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
+   */
+  TagCode?: number
+  /**
+   * 标签操作的返回信息
+   */
+  TagMsg?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1739,6 +1767,10 @@ export interface ListDataKeyDetailRequest {
    * 数据密钥的长度
    */
   DataKeyLen?: number
+  /**
+   * 标签过滤条件
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -2452,7 +2484,7 @@ export interface UnbindCloudResourceResponse {
  */
 export interface DescribeKeyResponse {
   /**
-   * 密钥属性信息
+   * 密钥属性信息。
    */
   KeyMetadata?: KeyMetadata
   /**

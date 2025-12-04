@@ -638,6 +638,16 @@ it("cynosdb.v20190107.DescribeClusters", async function () {
     }
 })
 
+it("cynosdb.v20190107.StopCLSDelivery", async function () {
+    try {
+       const data = await client.StopCLSDelivery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CloseWan", async function () {
     try {
        const data = await client.CloseWan({})
@@ -1268,9 +1278,9 @@ it("cynosdb.v20190107.DescribeClusterDatabaseTables", async function () {
     }
 })
 
-it("cynosdb.v20190107.StopCLSDelivery", async function () {
+it("cynosdb.v20190107.ModifyClusterGlobalEncryption", async function () {
     try {
-       const data = await client.StopCLSDelivery({})
+       const data = await client.ModifyClusterGlobalEncryption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

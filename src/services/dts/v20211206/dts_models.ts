@@ -309,6 +309,20 @@ export interface DescribeSyncCompareTasksResponse {
 }
 
 /**
+ * 表级 DDL/DML 过滤信息
+ */
+export interface TableFilter {
+  /**
+   * 规则生效的表名
+   */
+  TableName: string
+  /**
+   * 表级 DDL/DML 过滤规则
+   */
+  OpFilter?: OpFilter
+}
+
+/**
  * DestroyMigrateJob请求参数结构体
  */
 export interface DestroyMigrateJobRequest {
@@ -466,6 +480,16 @@ export interface DescribeSyncCompareTasksRequest {
  * ResizeSyncJob返回参数结构体
  */
 export interface ResizeSyncJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopMigrateJob返回参数结构体
+ */
+export interface StopMigrateJobResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -735,13 +759,25 @@ export interface IsolateMigrateJobRequest {
 }
 
 /**
- * StopMigrateJob返回参数结构体
+ * 库/表/视图级别的 DDL/DML 白名单
  */
-export interface StopMigrateJobResponse {
+export interface DBOpFilter {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则生效的库名
    */
-  RequestId?: string
+  DbName: string
+  /**
+   * 库级 DDL/DML 过滤规则
+   */
+  OpFilter?: OpFilter
+  /**
+   * 表级 DDL/DML 过滤信息
+   */
+  Tables?: Array<TableFilter>
+  /**
+   * 视图级 DDL/DML 过滤信息
+   */
+  Views?: Array<ViewFilter>
 }
 
 /**
@@ -3301,6 +3337,20 @@ export interface StopMigrateJobRequest {
 }
 
 /**
+ * DDL/DML 过滤规则
+ */
+export interface OpFilter {
+  /**
+   * DML 白名单
+   */
+  OpTypes?: Array<string>
+  /**
+   * DDL 白名单
+   */
+  DdlOptions?: Array<DdlOption>
+}
+
+/**
  * RecoverSyncJob请求参数结构体
  */
 export interface RecoverSyncJobRequest {
@@ -4191,6 +4241,20 @@ export interface CompareAbstractInfo {
 }
 
 /**
+ * 视图级 DDL/DML 过滤信息
+ */
+export interface ViewFilter {
+  /**
+   * 规则生效的视图名
+   */
+  ViewName: string
+  /**
+   * 视图级 DDL/DML 过滤规则
+   */
+  OpFilter?: OpFilter
+}
+
+/**
  * 检查步骤
  */
 export interface CheckStep {
@@ -4758,6 +4822,10 @@ export interface Objects {
    * OnlineDDL类型，冗余字段不做配置用途
    */
   OnlineDDL?: OnlineDDL
+  /**
+   * 库/表/视图级 DML/DDL 白名单
+   */
+  DatabasesOpFilter?: Array<DBOpFilter>
 }
 
 /**

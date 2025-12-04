@@ -837,6 +837,10 @@ export interface AgentToolInfo {
    * 工具来源: 0-来自插件，1-来自工作流
    */
   ToolSource?: number
+  /**
+   * 计费状态；0-不计费，1-限时免费，2-官方收费
+   */
+  FinanceType?: number
 }
 
 /**
@@ -3972,34 +3976,13 @@ export interface CateInfo {
 }
 
 /**
- * 智能通话
+ * DeleteRejectedQuestion返回参数结构体
  */
-export interface AICallConfig {
+export interface DeleteRejectedQuestionResponse {
   /**
-   * 启用语音互动功能
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnableVoiceInteract?: boolean
-  /**
-   * 启用语音通话
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableVoiceCall?: boolean
-  /**
-   * 启用数智人
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableDigitalHuman?: boolean
-  /**
-   * 音色配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Voice?: VoiceConfig
-  /**
-   * 数智人配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DigitalHuman?: DigitalHumanConfig
+  RequestId?: string
 }
 
 /**
@@ -4690,6 +4673,10 @@ export interface DescribeAppAgentListResponse {
    * 应用Agent信息列表
    */
   Agents?: Array<Agent>
+  /**
+   * Agent转交高级设置
+   */
+  HandoffAdvancedSetting?: AgentHandoffAdvancedSetting
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5912,13 +5899,17 @@ export interface DescribeConcurrencyUsageGraphRequest {
 }
 
 /**
- * //智能体应用可见范围，public-所有人可见 private-仅自己可见 share-通过分享可见
+ * DescribeRelease请求参数结构体
  */
-export interface YuanQi {
+export interface DescribeReleaseRequest {
   /**
-   * public-所有人可见
+   * 应用ID
    */
-  VisibleRange?: string
+  BotBizId: string
+  /**
+   * 发布详情
+   */
+  ReleaseBizId?: string
 }
 
 /**
@@ -7061,17 +7052,13 @@ export interface ListWorkflowRunsResponse {
 }
 
 /**
- * DescribeRelease请求参数结构体
+ * //智能体应用可见范围，public-所有人可见 private-仅自己可见 share-通过分享可见
  */
-export interface DescribeReleaseRequest {
+export interface YuanQi {
   /**
-   * 应用ID
+   * public-所有人可见
    */
-  BotBizId: string
-  /**
-   * 发布详情
-   */
-  ReleaseBizId?: string
+  VisibleRange?: string
 }
 
 /**
@@ -9143,13 +9130,34 @@ export interface NodeRunBase {
 }
 
 /**
- * DeleteRejectedQuestion返回参数结构体
+ * 智能通话
  */
-export interface DeleteRejectedQuestionResponse {
+export interface AICallConfig {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 启用语音互动功能
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  EnableVoiceInteract?: boolean
+  /**
+   * 启用语音通话
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableVoiceCall?: boolean
+  /**
+   * 启用数智人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableDigitalHuman?: boolean
+  /**
+   * 音色配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Voice?: VoiceConfig
+  /**
+   * 数智人配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DigitalHuman?: DigitalHumanConfig
 }
 
 /**
@@ -9951,4 +9959,14 @@ export interface IgnoreUnsatisfiedReplyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Agent转交高级设置
+ */
+export interface AgentHandoffAdvancedSetting {
+  /**
+   * 对话流转策略；0-由上一轮回复用户的 Agent 继续发起，1- 回到主Agent
+   */
+  ConversationPolicy?: number
 }

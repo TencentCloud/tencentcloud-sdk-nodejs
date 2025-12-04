@@ -38,9 +38,9 @@ it("mqtt.v20240516.PublishMessage", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeUserList", async function () {
+it("mqtt.v20240516.DescribeMessageEnrichmentRules", async function () {
     try {
-       const data = await client.DescribeUserList({})
+       const data = await client.DescribeMessageEnrichmentRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("mqtt.v20240516.ModifyJWKSAuthenticator", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeDeviceCertificates", async function () {
+it("mqtt.v20240516.CreateMessageEnrichmentRule", async function () {
     try {
-       const data = await client.DescribeDeviceCertificates({})
+       const data = await client.CreateMessageEnrichmentRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,16 @@ it("mqtt.v20240516.DescribeDeviceCertificates", async function () {
 it("mqtt.v20240516.DescribeInsPublicEndpoints", async function () {
     try {
        const data = await client.DescribeInsPublicEndpoints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeUserList", async function () {
+    try {
+       const data = await client.DescribeUserList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +261,16 @@ it("mqtt.v20240516.DescribeClientList", async function () {
 it("mqtt.v20240516.DescribeProductSKUList", async function () {
     try {
        const data = await client.DescribeProductSKUList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeDeviceCertificates", async function () {
+    try {
+       const data = await client.DescribeDeviceCertificates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,6 +388,16 @@ it("mqtt.v20240516.RevokedDeviceCertificate", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeSharedSubscriptionLag", async function () {
+    try {
+       const data = await client.DescribeSharedSubscriptionLag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeInstance", async function () {
     try {
        const data = await client.DescribeInstance({})
@@ -458,9 +488,29 @@ it("mqtt.v20240516.DeleteUser", async function () {
     }
 })
 
+it("mqtt.v20240516.ModifyMessageEnrichmentRule", async function () {
+    try {
+       const data = await client.ModifyMessageEnrichmentRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.KickOutClient", async function () {
     try {
        const data = await client.KickOutClient({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.UpdateMessageEnrichmentRulePriority", async function () {
+    try {
+       const data = await client.UpdateMessageEnrichmentRulePriority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +618,9 @@ it("mqtt.v20240516.CreateUser", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeSharedSubscriptionLag", async function () {
+it("mqtt.v20240516.DeleteMessageEnrichmentRule", async function () {
     try {
-       const data = await client.DescribeSharedSubscriptionLag({})
+       const data = await client.DeleteMessageEnrichmentRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
