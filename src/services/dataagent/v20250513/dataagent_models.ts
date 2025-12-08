@@ -272,17 +272,29 @@ export interface GetSessionDetailsRequest {
 }
 
 /**
- * CreateDataAgentSession返回参数结构体
+ * ModifyKnowledgeBase请求参数结构体
  */
-export interface CreateDataAgentSessionResponse {
+export interface ModifyKnowledgeBaseRequest {
   /**
-   * 会话
+   * 实例id
    */
-  SessionId?: string
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 操作类型：Create，Update，Delete
    */
-  RequestId?: string
+  OperateType: string
+  /**
+   * 知识库id，update和delete时必填
+   */
+  KnowledgeBaseId?: string
+  /**
+   * 知识库名称，create和update时必填。只允许字母、数字、汉字、下划线
+   */
+  KnowledgeBaseName?: string
+  /**
+   * 知识库描述，create和update时必填
+   */
+  KnowledgeBaseDesc?: string
 }
 
 /**
@@ -308,29 +320,17 @@ export interface ModifyChunkRequest {
 }
 
 /**
- * ModifyKnowledgeBase请求参数结构体
+ * CreateDataAgentSession返回参数结构体
  */
-export interface ModifyKnowledgeBaseRequest {
+export interface CreateDataAgentSessionResponse {
   /**
-   * 实例id
+   * 会话
    */
-  InstanceId: string
+  SessionId?: string
   /**
-   * 操作类型：Create，Update，Delete
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OperateType: string
-  /**
-   * 知识库id，update和delete时必填
-   */
-  KnowledgeBaseId?: string
-  /**
-   * 知识库名称，create和update时必填。只允许字母、数字、汉字、下划线
-   */
-  KnowledgeBaseName?: string
-  /**
-   * 知识库描述，create和update时必填
-   */
-  KnowledgeBaseDesc?: string
+  RequestId?: string
 }
 
 /**
@@ -451,6 +451,16 @@ export interface DeleteDataAgentSessionResponse {
 }
 
 /**
+ * GetKnowledgeBaseFileList返回参数结构体
+ */
+export interface GetKnowledgeBaseFileListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 问答结构
  */
 export interface Record {
@@ -560,6 +570,28 @@ export interface ChatAIRequest {
    * 知识库id列表
    */
   KnowledgeBaseIds?: Array<string>
+}
+
+/**
+ * GetKnowledgeBaseFileList请求参数结构体
+ */
+export interface GetKnowledgeBaseFileListRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 默认 1 表示第一页，可以不填
+   */
+  Page?: number
+  /**
+   * 默认 10 一页展示 10 条，可以不填
+   */
+  PageSize?: number
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
 }
 
 /**

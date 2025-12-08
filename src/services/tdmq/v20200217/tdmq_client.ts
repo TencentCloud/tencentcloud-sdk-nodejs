@@ -483,8 +483,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建角色
-   */
+     * 创建角色。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的创建角色接口文档见 [CreateRole](https://cloud.tencent.com/document/api/1493/98864)。
+     */
   async CreateRocketMQRole(
     req: CreateRocketMQRoleRequest,
     cb?: (error: string, rep: CreateRocketMQRoleResponse) => void
@@ -563,8 +564,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除角色，支持批量。
-   */
+     * 批量删除角色。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的删除角色接口文档见 [DeleteRole](https://cloud.tencent.com/document/api/1493/98863)。
+     */
   async DeleteRocketMQRoles(
     req: DeleteRocketMQRolesRequest,
     cb?: (error: string, rep: DeleteRocketMQRolesResponse) => void
@@ -723,8 +725,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改环境角色授权。
-   */
+     * 修改角色授权。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的修改角色接口文档见 [ModifyRole](https://cloud.tencent.com/document/api/1493/98861)。
+     */
   async ModifyRocketMQEnvironmentRole(
     req: ModifyRocketMQEnvironmentRoleRequest,
     cb?: (error: string, rep: ModifyRocketMQEnvironmentRoleResponse) => void
@@ -903,8 +906,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置指定Group的消费位点到指定时间戳
-   */
+     * 重置消费位点。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的重置消费位点接口文档见 [ResetConsumerGroupOffset](https://cloud.tencent.com/document/api/1493/116942)。
+     */
   async ResetRocketMQConsumerOffSet(
     req: ResetRocketMQConsumerOffSetRequest,
     cb?: (error: string, rep: ResetRocketMQConsumerOffSetResponse) => void
@@ -943,8 +947,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建环境角色授权
-   */
+     * 创建角色授权。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的创建角色接口文档见 [CreateRole](https://cloud.tencent.com/document/api/1493/98864)。
+     */
   async CreateRocketMQEnvironmentRole(
     req: CreateRocketMQEnvironmentRoleRequest,
     cb?: (error: string, rep: CreateRocketMQEnvironmentRoleResponse) => void
@@ -1056,8 +1061,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取角色列表
-   */
+     * 查询角色列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的查询角色列表接口文档见 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862)。
+     */
   async DescribeRocketMQRoles(
     req: DescribeRocketMQRolesRequest,
     cb?: (error: string, rep: DescribeRocketMQRolesResponse) => void
@@ -1176,7 +1182,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询消息轨迹
+   * 查询单条消息的消息轨迹
    */
   async DescribeMsgTrace(
     req: DescribeMsgTraceRequest,
@@ -1186,8 +1192,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 角色修改
-   */
+     * 修改角色。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的修改角色接口文档见 [ModifyRole](https://cloud.tencent.com/document/api/1493/98861)。
+     */
   async ModifyRocketMQRole(
     req: ModifyRocketMQRoleRequest,
     cb?: (error: string, rep: ModifyRocketMQRoleResponse) => void
@@ -1378,8 +1385,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取命名空间角色列表
-   */
+     * 查询角色授权列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的查询角色列表接口文档见 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862)。
+     */
   async DescribeRocketMQEnvironmentRoles(
     req: DescribeRocketMQEnvironmentRolesRequest,
     cb?: (error: string, rep: DescribeRocketMQEnvironmentRolesResponse) => void
@@ -1898,8 +1906,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 删除环境角色授权。
-   */
+     * 批量删除角色授权。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的删除角色接口文档见 [DeleteRole](https://cloud.tencent.com/document/api/1493/98863)。
+     */
   async DeleteRocketMQEnvironmentRoles(
     req: DeleteRocketMQEnvironmentRolesRequest,
     cb?: (error: string, rep: DeleteRocketMQEnvironmentRolesResponse) => void

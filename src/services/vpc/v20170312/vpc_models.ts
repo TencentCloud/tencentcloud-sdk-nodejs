@@ -16247,9 +16247,17 @@ export interface CCN {
    */
   MrtbAggregatePolicyFlag?: boolean
   /**
-   * 是否支持策略值
+   * 是否支持AsPath策略值
    */
   MrtbPolicyValueFlag?: boolean
+  /**
+   * 是否支持Community策略值
+   */
+  RouteTablePolicyValueCommunityFlag?: boolean
+  /**
+   * 是否支持策略路由
+   */
+  PolicyBasedRoutingFlag?: boolean
 }
 
 /**

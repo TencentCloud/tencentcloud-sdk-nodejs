@@ -91,6 +91,32 @@ export interface LogoParam {
 }
 
 /**
+ * DescribeVideoVoiceJob返回参数结构体
+ */
+export interface DescribeVideoVoiceJobResponse {
+  /**
+   * 任务状态。  WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  Status?: string
+  /**
+   * 结果视频URL。有效期 24 小时。
+   */
+  ResultVideoUrl?: string
+  /**
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorCode?: string
+  /**
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorMessage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SubmitHumanActorJob请求参数结构体
  */
 export interface SubmitHumanActorJobRequest {
@@ -147,13 +173,17 @@ export interface SubmitHumanActorJobRequest {
 }
 
 /**
- * DescribeImageAnimateJob请求参数结构体
+ * SubmitImageAnimateJob返回参数结构体
  */
-export interface DescribeImageAnimateJobRequest {
+export interface SubmitImageAnimateJobResponse {
   /**
-   * 任务ID。
+   * 图片跳舞任务ID。
    */
   JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -238,6 +268,16 @@ false：不分割结果视频，结果视频（ResultVideoUrl）为带背景的�
 }
 
 /**
+ * DescribeVideoVoiceJob请求参数结构体
+ */
+export interface DescribeVideoVoiceJobRequest {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
+}
+
+/**
  * SubmitImageToVideoGeneralJob返回参数结构体
  */
 export interface SubmitImageToVideoGeneralJobResponse {
@@ -288,6 +328,28 @@ export interface DescribeVideoFaceFusionJobRequest {
 }
 
 /**
+ * 人脸框信息。
+ */
+export interface FaceRect {
+  /**
+   * 人脸框左上角横坐标。
+   */
+  X?: number
+  /**
+   * 人脸框左上角纵坐标。
+   */
+  Y?: number
+  /**
+   * 人脸框宽度。
+   */
+  Width?: number
+  /**
+   * 人脸框高度。
+   */
+  Height?: number
+}
+
+/**
  * DescribePortraitSingJob请求参数结构体
  */
 export interface DescribePortraitSingJobRequest {
@@ -298,17 +360,13 @@ export interface DescribePortraitSingJobRequest {
 }
 
 /**
- * SubmitImageAnimateJob返回参数结构体
+ * DescribeHunyuanToVideoJob请求参数结构体
  */
-export interface SubmitImageAnimateJobResponse {
+export interface DescribeHunyuanToVideoJobRequest {
   /**
-   * 图片跳舞任务ID。
+   * 任务ID
    */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  JobId: string
 }
 
 /**
@@ -345,6 +403,20 @@ export interface DescribeTemplateToVideoJobResponse {
    * 结果视频 URL。有效期 24 小时。
    */
   ResultVideoUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitVideoVoiceJob返回参数结构体
+ */
+export interface SubmitVideoVoiceJobResponse {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -566,6 +638,46 @@ export interface LogoRect {
 }
 
 /**
+ * SubmitVideoVoiceJob请求参数结构体
+ */
+export interface SubmitVideoVoiceJobRequest {
+  /**
+   * 输入视频的Url  上传视频时长限制：1-15s 视频格式：MP4，MOV 视频大小：不超过1 GB URL地址中不能包含中文字符。
+   */
+  VideoUrl?: string
+  /**
+   * 描述音效内容的正向提示词。输入上限50个字符。
+   */
+  Prompt?: string
+  /**
+   * 音效内容的原始负向提示词。输入上限50个字符。
+   */
+  NegativePrompt?: string
+  /**
+   * 为生成视频添加标识的开关，默认为1。 1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 建议您使用显著标识来提示，该视频是 AI 生成的视频。
+   */
+  LogoAdd?: number
+  /**
+   * 标识内容设置。 默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+   */
+  LogoParam?: LogoParam
+}
+
+/**
+ * SubmitHunyuanToVideoJob返回参数结构体
+ */
+export interface SubmitHunyuanToVideoJobResponse {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHumanActorJob返回参数结构体
  */
 export interface DescribeHumanActorJobResponse {
@@ -783,6 +895,36 @@ Base64 和 Url 必须提供一个，如果都提供以ImageUrl为准。
 }
 
 /**
+ * SubmitHunyuanToVideoJob请求参数结构体
+ */
+export interface SubmitHunyuanToVideoJobRequest {
+  /**
+   * 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。 示例值：一只猫在草原上奔跑，写实风格
+   */
+  Prompt: string
+  /**
+   * 输入图片
+上传图url大小不超过 10M，base64不超过8M。
+支持jpg，png，jpeg，webp，bmp，tiff 格式
+单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1
+   */
+  Image?: Image
+  /**
+   * 目前仅支持720p视频分辨率，默认720p。
+   */
+  Resolution?: string
+  /**
+   * 为生成视频添加标识的开关，默认为1，0 需前往 控制台 申请开启显示标识自主完成方可生效。
+ 1：添加标识； 0：不添加标识； 其他数值：默认按1处理。
+   */
+  LogoAdd?: number
+  /**
+   * 默认在生成视频的右下角添加“ AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显示标识自主完成。
+   */
+  LogoParam?: LogoParam
+}
+
+/**
  * 图片
  */
 export interface Image {
@@ -827,25 +969,13 @@ export interface DescribeTemplateToVideoJobRequest {
 }
 
 /**
- * 人脸框信息。
+ * DescribeImageAnimateJob请求参数结构体
  */
-export interface FaceRect {
+export interface DescribeImageAnimateJobRequest {
   /**
-   * 人脸框左上角横坐标。
+   * 任务ID。
    */
-  X?: number
-  /**
-   * 人脸框左上角纵坐标。
-   */
-  Y?: number
-  /**
-   * 人脸框宽度。
-   */
-  Width?: number
-  /**
-   * 人脸框高度。
-   */
-  Height?: number
+  JobId?: string
 }
 
 /**
@@ -878,6 +1008,32 @@ export interface DescribePortraitSingJobResponse {
   ErrorMessage?: string
   /**
    * 生成视频的URL地址。有效期24小时。
+   */
+  ResultVideoUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHunyuanToVideoJob返回参数结构体
+ */
+export interface DescribeHunyuanToVideoJobResponse {
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  Status?: string
+  /**
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorCode?: string
+  /**
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorMessage?: string
+  /**
+   * 结果视频 URL。有效期 24 小时。
    */
   ResultVideoUrl?: string
   /**

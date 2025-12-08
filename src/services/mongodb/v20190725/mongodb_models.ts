@@ -50,6 +50,7 @@ export interface CreateDBInstanceRequest {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion: string
   /**
@@ -242,6 +243,7 @@ export interface DescribeDBInstanceParamTplRequest {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion?: Array<string>
   /**
@@ -770,6 +772,7 @@ export interface CreateDBInstanceParamTplRequest {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion?: string
   /**
@@ -1103,7 +1106,7 @@ export interface SpecItem {
   SpecCode?: string
   /**
    * 售卖规格有效标志，取值范围如下：
-- 0：停止售卖，
+- 0：停止售卖。
 - 1：开放售卖。
    */
   Status?: number
@@ -1143,18 +1146,28 @@ export interface SpecItem {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersionCode?: string
   /**
    * 实例版本对应的数字版本。
+- MongoDB 3.2 版本：2。
+- MongoDB 3.6 版本：4。
+- MongoDB 4.0 版本：5。
+- MongoDB 4.2 版本：9。
+- MongoDB 4.4 版本：10。
+- MongoDB 5.0 版本：11。
+- MongoDB 6.0 版本：12。
+- MongoDB 7.0 版本：13。
+- MongoDB 8.0 版本：14。
    */
   MongoVersionValue?: number
   /**
-   * 实例版本信息。支持：4.2、4.4、5.0、6.0、7.0。
+   * 实例版本信息。支持：4.2、4.4、5.0、6.0、7.0、8.0。
    */
   Version?: string
   /**
-   * 存储引擎。
+   * 存储引擎，仅支持 WiredTiger。
    */
   EngineName?: string
   /**
@@ -2609,6 +2622,7 @@ export interface ParamTpl {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion?: string
   /**
@@ -2806,6 +2820,7 @@ export interface DescribeDBInstanceParamTplDetailResponse {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion?: string
   /**
@@ -3509,6 +3524,7 @@ export interface CreateDBInstanceHourRequest {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion: string
   /**
@@ -4121,6 +4137,7 @@ export interface InquirePriceCreateDBInstancesRequest {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion: string
   /**
@@ -4488,6 +4505,7 @@ export interface InstanceDetail {
 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
 - MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
    */
   MongoVersion?: string
   /**

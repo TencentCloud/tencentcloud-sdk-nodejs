@@ -1085,6 +1085,32 @@ export interface DescribeConsumerLagRequest {
 }
 
 /**
+ * SendMessage请求参数结构体
+ */
+export interface SendMessageRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
+   */
+  Topic: string
+  /**
+   * 消息内容
+   */
+  MsgBody: string
+  /**
+   * 消息Key
+   */
+  MsgKey?: string
+  /**
+   * 消息Tag
+   */
+  MsgTag?: string
+}
+
+/**
  * DescribeMigratingGroupStats请求参数结构体
  */
 export interface DescribeMigratingGroupStatsRequest {
@@ -1625,6 +1651,16 @@ export interface ModifyMQTTInstanceCertBindingRequest {
    * CA证书id
    */
   SSLCaCertId: string
+}
+
+/**
+ * VerifyMessageConsumption返回参数结构体
+ */
+export interface VerifyMessageConsumptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2416,6 +2452,32 @@ export interface DeleteMQTTInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VerifyMessageConsumption请求参数结构体
+ */
+export interface VerifyMessageConsumptionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 客户端ID
+   */
+  ClientId: string
+  /**
+   * 消息ID
+   */
+  MsgId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
 }
 
 /**
@@ -3300,6 +3362,20 @@ export interface DescribeConsumerClientRequest {
  * ModifyTopic返回参数结构体
  */
 export interface ModifyTopicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SendMessage返回参数结构体
+ */
+export interface SendMessageResponse {
+  /**
+   * 消息ID
+   */
+  MsgId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

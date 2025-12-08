@@ -5643,7 +5643,7 @@ export interface Events {
    */
   EventType?: string
   /**
-   * 事件记录状态，1-成功，2-失败，3-文件待删除，4-写入中
+   * 事件记录状态，1-成功，4-写入中
    */
   Status?: number
   /**

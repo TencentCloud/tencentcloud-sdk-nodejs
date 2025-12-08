@@ -120,7 +120,7 @@ export interface DeleteClusterResponse {
  */
 export interface CreateCmqTopicRequest {
   /**
-   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
+   * 主题名字，在单个地域同一账号下唯一。主题名称只能包含字母、数字、“-”及“_”，最大64字符，创建后不能修改，不区分大小写。
    */
   TopicName: string
   /**
@@ -429,7 +429,8 @@ export interface DescribeRocketMQEnvironmentRolesRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
+
    */
   EnvironmentId?: string
   /**
@@ -1008,6 +1009,14 @@ export interface CreateEnvironmentRequest {
    * 是否开启自动创建订阅
    */
   AutoSubscriptionCreation?: boolean
+  /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTime?: number
+  /**
+   * 离线订阅过期自动清理时间开关
+   */
+  SubscriptionExpirationTimeEnable?: boolean
 }
 
 /**
@@ -1078,6 +1087,14 @@ export interface ModifyEnvironmentAttributesRequest {
    * 是否开启自动创建订阅
    */
   AutoSubscriptionCreation?: boolean
+  /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTime?: number
+  /**
+   * 离线订阅过期自动清理时间开关
+   */
+  SubscriptionExpirationTimeEnable?: boolean
 }
 
 /**
@@ -1489,6 +1506,10 @@ export interface CreateTopicRequest {
    * 消费者 Ack 超时时间，单位：秒，范围60-（3600*24）
    */
   AckTimeOut?: number
+  /**
+   * Pulsar主题消息类型0: 混合消息1:普通消息2:延迟消息
+   */
+  PulsarTopicMessageType?: number
 }
 
 /**
@@ -1603,7 +1624,7 @@ export interface UnbindCmqDeadLetterResponse {
  */
 export interface ModifyRocketMQEnvironmentRoleRequest {
   /**
-   * 环境（命名空间）名称。
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   EnvironmentId: string
   /**
@@ -1741,6 +1762,14 @@ export interface InternalTenant {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicAccessEnabled?: boolean
+  /**
+   * 实例标签列表
+   */
+  TagList?: Array<string>
+  /**
+   * 实例规格
+   */
+  TenantSpec?: string
 }
 
 /**
@@ -2064,6 +2093,10 @@ export interface PulsarNetworkAccessPointInfo {
    * 接入点自定义域名
    */
   CustomUrl?: string
+  /**
+   * 接入点绑定的安全组id列表，仅限vpc接入点有效
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -2598,11 +2631,11 @@ export interface ModifyEnvironmentRoleRequest {
  */
 export interface DescribeRocketMQRolesResponse {
   /**
-   * 记录数。
+   * 总数
    */
   TotalCount?: number
   /**
-   * 角色数组。
+   * 角色列表
    */
   RoleSets?: Array<Role>
   /**
@@ -3058,7 +3091,10 @@ export interface DetailedRolePerm {
    */
   PermRead: boolean
   /**
-   * 授权资源类型（Topic:主题; Group:消费组）
+   * 授权资源类型，枚举值如下：
+- Topic：主题维度
+- Group：消费组维度
+- Cluster：集群维度（默认值）
    */
   ResourceType: string
   /**
@@ -4128,11 +4164,6 @@ export interface CreateProClusterRequest {
    */
   ProductName: string
   /**
-   * 存储规格
-参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
-   */
-  StorageSize: number
-  /**
    * 1: true，开启自动按月续费
 
 0: false，关闭自动按月续费
@@ -4150,6 +4181,11 @@ export interface CreateProClusterRequest {
    * 是否自动选择代金券 1是 0否 默认为0
    */
   AutoVoucher: number
+  /**
+   * 存储规格
+参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
+   */
+  StorageSize?: number
   /**
    * vpc网络标签
    */
@@ -4207,7 +4243,7 @@ export interface ClearCmqQueueRequest {
  */
 export interface CreateRocketMQEnvironmentRoleRequest {
   /**
-   * 命名空间
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   EnvironmentId: string
   /**
@@ -4780,6 +4816,10 @@ export interface DescribeMsgTraceRequest {
    * Pulsar 集群的ID
    */
   ClusterId?: string
+  /**
+   * topic 名字
+   */
+  TopicName?: string
 }
 
 /**
@@ -4969,10 +5009,18 @@ export interface Cluster {
    */
   PublicEndPoint?: string
   /**
+   * 旧的公网访问接入点
+   */
+  OldPublicEndPoint?: string
+  /**
    * VPC访问接入点
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcEndPoint?: string
+  /**
+   * 旧的VPC访问接入点
+   */
+  OldVpcEndPoint?: string
   /**
    * 命名空间数量
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5023,6 +5071,14 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * 旧的支撑网 Pulsar 接入点
+   */
+  OldInternalPulsarEndPoint?: string
+  /**
+   * 旧的支撑网 HTTP 接入点
+   */
+  OldInternalHttpEndPoint?: string
   /**
    * 计费模式：
 0: 按量计费
@@ -5523,7 +5579,7 @@ export interface DescribeRabbitMQQueueDetailRequest {
  */
 export interface DescribePulsarProInstanceDetailRequest {
   /**
-   * 集群ID
+   * 集群id
    */
   ClusterId: string
 }
@@ -5616,6 +5672,14 @@ export interface DescribeEnvironmentAttributesResponse {
    * 备注。
    */
   Remark?: string
+  /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTime?: number
+  /**
+   * 离线订阅过期自动清理时间开关
+   */
+  SubscriptionExpirationTimeEnable?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8071,11 +8135,11 @@ export interface SendMsgRequest {
  */
 export interface DescribeRocketMQEnvironmentRolesResponse {
   /**
-   * 记录数。
+   * 总数
    */
   TotalCount?: number
   /**
-   * 命名空间角色集合。
+   * 角色授权列表
    */
   EnvironmentRoleSets?: Array<EnvironmentRole>
   /**
@@ -8402,7 +8466,7 @@ export interface DeleteCmqSubscribeResponse {
  */
 export interface DeleteRocketMQEnvironmentRolesRequest {
   /**
-   * 环境（命名空间）名称。
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   EnvironmentId: string
   /**
@@ -9112,6 +9176,14 @@ export interface CreateEnvironmentResponse {
    */
   NamespaceId?: string
   /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTime?: number
+  /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTimeEnable?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9263,6 +9335,10 @@ export interface Topic {
    * 消费者 Ack 超时时间，单位：秒
    */
   AckTimeOut?: number
+  /**
+   * Pulsar主题消息类型0: 混合消息1:普通消息2:延迟消息
+   */
+  PulsarTopicMessageType?: number
 }
 
 /**
@@ -9888,6 +9964,14 @@ export interface Environment {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoSubscriptionCreation?: boolean
+  /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTime?: number
+  /**
+   * 离线订阅过期自动清理时间开关
+   */
+  SubscriptionExpirationTimeEnable?: boolean
 }
 
 /**
@@ -10167,6 +10251,14 @@ export interface ModifyEnvironmentAttributesResponse {
    */
   NamespaceId?: string
   /**
+   * 离线订阅过期自动清理时间
+   */
+  SubscriptionExpirationTime?: number
+  /**
+   * 离线订阅过期自动清理时间开关
+   */
+  SubscriptionExpirationTimeEnable?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10269,7 +10361,7 @@ export interface CreateCmqSubscribeRequest {
    */
   TopicName: string
   /**
-   * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称以字母起始，只能包含字母、数字、“-”及“_”，最大64字符，创建后不能修改。
    */
   SubscriptionName: string
   /**
@@ -10434,7 +10526,7 @@ export interface CreateRocketMQTopicResponse {
  */
 export interface CreateCmqQueueRequest {
   /**
-   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 队列名字，在单个地域同一账号下唯一。队列名称以字母起始，只能包含字母、数字、“-”及“_”，最大64字符，不区分大小写。
    */
   QueueName: string
   /**
@@ -10670,6 +10762,10 @@ export interface DescribePulsarProInstanceDetailResponse {
    */
   ClusterSpecInfo?: PulsarProClusterSpecInfo
   /**
+   * 集群的证书列表
+   */
+  CertificateList?: Array<CertificateInfo>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10783,7 +10879,7 @@ export interface ResetRocketMQConsumerOffSetRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -10799,7 +10895,7 @@ export interface ResetRocketMQConsumerOffSetRequest {
    */
   Topic?: string
   /**
-   * 重置指定的时间戳，仅在 Type 为1是生效，以毫秒为单位
+   * 重置指定的时间戳，仅在 Type 为1时生效，以毫秒为单位
    */
   ResetTimestamp?: number
   /**

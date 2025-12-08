@@ -3292,7 +3292,7 @@ export interface ModifyProxyRwSplitRequest {
   WeightMode?: string
   /**
    * 实例只读权重。
-该参数必填。
+
    */
   InstanceWeights?: Array<ProxyInstanceWeight>
   /**

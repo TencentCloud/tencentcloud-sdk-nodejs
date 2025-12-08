@@ -18,6 +18,16 @@ const client = new tencentcloud.trocket.v20230308.Client({
 })
 describe("trocket.v20230308.test.js", function () {
 
+it("trocket.v20230308.VerifyMessageConsumption", async function () {
+    try {
+       const data = await client.VerifyMessageConsumption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeMQTTMessageList", async function () {
     try {
        const data = await client.DescribeMQTTMessageList({})
@@ -141,6 +151,16 @@ it("trocket.v20230308.ImportSourceClusterConsumerGroups", async function () {
 it("trocket.v20230308.DescribeSmoothMigrationTaskList", async function () {
     try {
        const data = await client.DescribeSmoothMigrationTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.SendMessage", async function () {
+    try {
+       const data = await client.SendMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

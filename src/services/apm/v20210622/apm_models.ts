@@ -981,6 +981,14 @@ export interface ApmApplicationConfigView {
    * 探针熔断CPU阈值
    */
   DisableCpuUsed?: number
+  /**
+   * 是否开启SQL参数获取
+   */
+  DbStatementParametersEnabled?: boolean
+  /**
+   * 慢SQL阈值
+   */
+  SlowSQLThresholds?: Array<ApmTag>
 }
 
 /**
@@ -1411,6 +1419,14 @@ export interface ApmAppConfig {
    * 探针熔断CPU阈值
    */
   DisableCpuUsed?: number
+  /**
+   * 是否开启SQL参数获取
+   */
+  DbStatementParametersEnabled?: boolean
+  /**
+   * 慢SQL阈值
+   */
+  SlowSQLThresholds?: Array<ApmTag>
 }
 
 /**
@@ -2012,6 +2028,14 @@ export interface ModifyApmApplicationConfigRequest {
    * 探针熔断CPU阈值
    */
   DisableCpuUsed?: number
+  /**
+   * 是否开启SQL参数获取
+   */
+  DbStatementParametersEnabled?: boolean
+  /**
+   * 慢SQL阈值
+   */
+  SlowSQLThresholds?: Array<ApmTag>
 }
 
 /**
@@ -2352,11 +2376,11 @@ export interface DeleteApmSampleConfigResponse {
  */
 export interface ModifyApmAssociationRequest {
   /**
-   * 关联的产品名，当前只支持Prometheus
+   * 关联的产品名，当前只支持Prometheus、CKafka
    */
   ProductName: string
   /**
-   * 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）、4（已删除）
+   * 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）
    */
   Status: number
   /**
@@ -2623,6 +2647,10 @@ export interface APMKVItem {
  * CreateApmPrometheusRule返回参数结构体
  */
 export interface CreateApmPrometheusRuleResponse {
+  /**
+   * 指标匹配规则的ID
+   */
+  RuleId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -541,6 +541,10 @@ export interface NotebookSetItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
+  /**
+   * 容器服务暴露端口配置
+   */
+  ExposePortConfig?: ExposePortConfig
 }
 
 /**
@@ -1779,6 +1783,7 @@ export interface DescribeModelServiceCallInfoRequest {
   ServiceGroupId: string
   /**
    * 服务分类
+   * @deprecated
    */
   ServiceCategory?: string
 }
@@ -1875,7 +1880,7 @@ EXIST：导入现有版本
    */
   TrainingModelCosPath?: CosPathInfo
   /**
-   * 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION)
+   * 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION/ONNX)
    */
   AlgorithmFramework?: string
   /**
@@ -1933,7 +1938,7 @@ EXIST：导入现有版本
    */
   ModelVersionType?: string
   /**
-   * 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACE）
+   * 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACE_BERT/HUGGING_FACE_STABLE_DIFFUSION/HUGGING_FACE_STABLE_DIFFUSION_LORA/WEB_UI_STABLE_DIFFUSION）
    */
   ModelFormat?: string
   /**
@@ -2377,30 +2382,9 @@ export interface PublicDataSourceFS {
 }
 
 /**
- * 配置GooseFS参数
+ * 暴露端口信息
  */
-export interface GooseFS {
-  /**
-   * goosefs实例id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: string
-  /**
-   * GooseFS类型，包括GooseFS和GooseFSx
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * GooseFSx实例需要挂载的路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Path?: string
-  /**
-   * GooseFS命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NameSpace?: string
-}
+export type ExposePortConfig = null
 
 /**
  * DescribeBillingResourceGroups请求参数结构体
@@ -2876,7 +2860,7 @@ export interface PrivateLinkInfo {
  */
 export interface DescribeNotebooksResponse {
   /**
-   * 详情
+   * notebook详情
    */
   NotebookSet?: Array<NotebookSetItem>
   /**
@@ -3108,22 +3092,22 @@ export interface DescribeModelAccelerateTaskResponse {
    * 模型加速任务详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelAccelerateTask: ModelAccelerateTask
+  ModelAccelerateTask?: ModelAccelerateTask
   /**
    * 模型加速时长，单位s
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelAccRuntimeInSecond: number
+  ModelAccRuntimeInSecond?: number
   /**
    * 模型加速任务开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelAccStartTime: string
+  ModelAccStartTime?: string
   /**
    * 模型加速任务结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelAccEndTime: string
+  ModelAccEndTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3193,6 +3177,7 @@ export interface DescribeModelServiceGroupsRequest {
   TagFilters?: Array<TagFilter>
   /**
    * 服务分类
+   * @deprecated
    */
   ServiceCategory?: string
 }
@@ -3465,6 +3450,7 @@ export interface DescribeModelServiceRequest {
   ServiceId: string
   /**
    * 服务分类
+   * @deprecated
    */
   ServiceCategory?: string
 }
@@ -3513,6 +3499,7 @@ export interface DeleteModelServiceRequest {
   ServiceId: string
   /**
    * 服务分类
+   * @deprecated
    */
   ServiceCategory?: string
 }
@@ -3527,6 +3514,7 @@ export interface DescribeModelServiceGroupRequest {
   ServiceGroupId: string
   /**
    * 服务分类
+   * @deprecated
    */
   ServiceCategory?: string
 }
@@ -4482,6 +4470,32 @@ export interface CreateModelServiceAuthTokenResponse {
 }
 
 /**
+ * 配置GooseFS参数
+ */
+export interface GooseFS {
+  /**
+   * goosefs实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * GooseFS类型，包括GooseFS和GooseFSx
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * GooseFSx实例需要挂载的路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * GooseFS命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NameSpace?: string
+}
+
+/**
  * 类型NotebookDetail
  */
 export interface NotebookDetail {
@@ -5254,12 +5268,12 @@ export interface StopModelAccelerateTaskResponse {
    * 模型加速任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelAccTaskId: string
+  ModelAccTaskId?: string
   /**
    * 异步任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncTaskId: string
+  AsyncTaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5379,7 +5393,7 @@ export interface DeleteDatasetResponse {
   /**
    * 删除的datasetId
    */
-  DatasetId: string
+  DatasetId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6874,7 +6888,7 @@ export interface DescribeTrainingModelVersionResponse {
   /**
    * 模型版本
    */
-  TrainingModelVersion: TrainingModelVersionDTO
+  TrainingModelVersion?: TrainingModelVersionDTO
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

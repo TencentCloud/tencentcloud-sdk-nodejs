@@ -88,6 +88,7 @@ import {
   ModifyDomainOwnerRequest,
   DescribeSubdomainAnalyticsResponse,
   DeleteRecordBatchDetail,
+  ModifyPackageDomainResponse,
   DomainShareInfo,
   DescribeSnapshotConfigRequest,
   VasListItem,
@@ -200,6 +201,7 @@ import {
   DescribeSubdomainValidateStatusRequest,
   CreateDomainGroupRequest,
   CreateSnapshotRequest,
+  ModifyPackageDomainRequest,
   DeleteDomainResponse,
   DescribeRecordSnapshotRollbackResultResponse,
   DescribeVasListResponse,
@@ -1205,6 +1207,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainFilterListResponse) => void
   ): Promise<DescribeDomainFilterListResponse> {
     return this.request("DescribeDomainFilterList", req, cb)
+  }
+
+  /**
+   * 套餐绑定、解绑、更换域名
+   */
+  async ModifyPackageDomain(
+    req: ModifyPackageDomainRequest,
+    cb?: (error: string, rep: ModifyPackageDomainResponse) => void
+  ): Promise<ModifyPackageDomainResponse> {
+    return this.request("ModifyPackageDomain", req, cb)
   }
 
   /**

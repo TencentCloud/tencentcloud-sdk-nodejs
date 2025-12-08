@@ -4760,9 +4760,9 @@ export interface ChannelDescribeOrganizationSealsRequest {
    */
   Agent: Agent
   /**
-   * 指定分页每页返回的数据条数，单页最大支持 100。
+   * 指定分页每页返回的数据条数，单页最大支持 100。默认值为20
    */
-  Limit: number
+  Limit?: number
   /**
    * 分页查询偏移量，默认为0，最大为20000
    */
@@ -6445,7 +6445,7 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
 
 
    */
-  SealImage: string
+  SealImage?: string
   /**
    * 执行本接口操作的员工信息。
 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
@@ -6481,6 +6481,10 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
    * <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
    */
   SceneKey?: string
+  /**
+   * 印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。
+   */
+  FileId?: string
 }
 
 /**

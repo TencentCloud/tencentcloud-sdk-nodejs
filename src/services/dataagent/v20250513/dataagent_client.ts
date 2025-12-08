@@ -32,17 +32,19 @@ import {
   StopChatAIRequest,
   StepExpand,
   GetSessionDetailsRequest,
-  CreateDataAgentSessionResponse,
-  ModifyChunkRequest,
   ModifyKnowledgeBaseRequest,
+  ModifyChunkRequest,
+  CreateDataAgentSessionResponse,
   CosFileInfo,
   KnowledgeBase,
   StopChatAIResponse,
   GetUploadJobDetailsResponse,
   Task,
   DeleteDataAgentSessionResponse,
+  GetKnowledgeBaseFileListResponse,
   Record,
   ChatAIRequest,
+  GetKnowledgeBaseFileListRequest,
   GetUploadJobDetailsRequest,
   AddChunkResponse,
   StepInfo,
@@ -171,6 +173,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryChunkListResponse) => void
   ): Promise<QueryChunkListResponse> {
     return this.request("QueryChunkList", req, cb)
+  }
+
+  /**
+   * 获取知识库文件信息列表
+   */
+  async GetKnowledgeBaseFileList(
+    req: GetKnowledgeBaseFileListRequest,
+    cb?: (error: string, rep: GetKnowledgeBaseFileListResponse) => void
+  ): Promise<GetKnowledgeBaseFileListResponse> {
+    return this.request("GetKnowledgeBaseFileList", req, cb)
   }
 
   /**

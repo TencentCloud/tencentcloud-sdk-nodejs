@@ -807,6 +807,18 @@ export interface MediaAiAnalysisDescriptionItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MindMapUrl?: string
+  /**
+   * 摘要思维导图路径。
+   */
+  MindMapPath?: string
+  /**
+   * 视频字幕文件路径。
+   */
+  SubtitlePath?: string
+  /**
+   * 摘要文件存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -3262,8 +3274,9 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
    */
   PureAudio?: number
   /**
-   * 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS+MP4 byte range</li> <li>ts-packed-audio：TS+Packed Audio</li> <li>mp4-packed-audio：MP4+Packed Audio</li> 默认值：ts-segment 
-注：自适应码流的分片格式以此字段为准
+   * 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS/DASH+MP4 byte range</li> <li>ts-packed-audio：TS+Packed Audio</li> <li>mp4-packed-audio：MP4+Packed Audio</li> 默认值：ts-segment
+ 
+注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange。
    */
   SegmentType?: string
 }
@@ -7740,8 +7753,8 @@ export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
    */
   PureAudio?: number
   /**
-   * hls 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS+MP4 byte range</li> <li>ts-packed-audio：TS+Packed Audio</li> <li>mp4-packed-audio：MP4+Packed Audio</li> 默认值：ts-segment 
-注：自适应码流的hls分片格式已此字段为准
+   * 分片类型，可选值： <li>ts-segment：HLS+TS 切片</li> <li>ts-byterange：HLS+TS byte range</li> <li>mp4-segment：HLS+MP4 切片</li> <li>mp4-byterange：HLS/DASH+MP4 byte range</li> <li>ts-packed-audio：TS+Packed Audio</li> <li>mp4-packed-audio：MP4+Packed Audio</li> 默认值：ts-segment 
+注：自适应码流的hls分片格式已此字段为准。DASH格式下SegmentType只能为mp4-byterange。
    */
   SegmentType?: string
 }

@@ -18,6 +18,26 @@ const client = new tencentcloud.vclm.v20240523.Client({
 })
 describe("vclm.v20240523.test.js", function () {
 
+it("vclm.v20240523.SubmitHunyuanToVideoJob", async function () {
+    try {
+       const data = await client.SubmitHunyuanToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitVideoVoiceJob", async function () {
+    try {
+       const data = await client.SubmitVideoVoiceJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.DescribeTemplateToVideoJob", async function () {
     try {
        const data = await client.DescribeTemplateToVideoJob({})
@@ -68,9 +88,19 @@ it("vclm.v20240523.SubmitHumanActorJob", async function () {
     }
 })
 
-it("vclm.v20240523.SubmitVideoFaceFusionJob", async function () {
+it("vclm.v20240523.SubmitTemplateToVideoJob", async function () {
     try {
-       const data = await client.SubmitVideoFaceFusionJob({})
+       const data = await client.SubmitTemplateToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeVideoVoiceJob", async function () {
+    try {
+       const data = await client.DescribeVideoVoiceJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +138,9 @@ it("vclm.v20240523.SubmitImageAnimateJob", async function () {
     }
 })
 
-it("vclm.v20240523.SubmitTemplateToVideoJob", async function () {
+it("vclm.v20240523.DescribeHunyuanToVideoJob", async function () {
     try {
-       const data = await client.SubmitTemplateToVideoJob({})
+       const data = await client.DescribeHunyuanToVideoJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +181,16 @@ it("vclm.v20240523.DescribeVideoStylizationJob", async function () {
 it("vclm.v20240523.DescribeImageToVideoGeneralJob", async function () {
     try {
        const data = await client.DescribeImageToVideoGeneralJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitVideoFaceFusionJob", async function () {
+    try {
+       const data = await client.SubmitVideoFaceFusionJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

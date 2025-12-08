@@ -52,6 +52,7 @@ import {
   DescribeMigratingTopicStatsResponse,
   DescribeMQTTProductSKUListRequest,
   DescribeConsumerLagRequest,
+  SendMessageRequest,
   DescribeMigratingGroupStatsRequest,
   Tag,
   DescribeSourceClusterGroupListResponse,
@@ -75,6 +76,7 @@ import {
   DescribeMigrationTaskListRequest,
   DeleteMQTTUserRequest,
   ModifyMQTTInstanceCertBindingRequest,
+  VerifyMessageConsumptionResponse,
   CreateMQTTTopicResponse,
   DescribeMQTTInstanceRequest,
   ImportSourceClusterTopicsRequest,
@@ -109,6 +111,7 @@ import {
   ModifyMQTTInstanceCertBindingResponse,
   InstanceItem,
   DeleteMQTTInstanceResponse,
+  VerifyMessageConsumptionRequest,
   DescribeTopicRequest,
   DeleteMQTTInstanceRequest,
   DescribeMessageTraceRequest,
@@ -137,6 +140,7 @@ import {
   DescribeConsumerGroupResponse,
   DescribeConsumerClientRequest,
   ModifyTopicResponse,
+  SendMessageResponse,
   DescribeConsumerLagResponse,
   DescribeMQTTInsPublicEndpointsRequest,
   DeleteRoleResponse,
@@ -208,6 +212,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trocket.tencentcloudapi.com", "2023-03-08", clientConfig)
+  }
+
+  /**
+   * 消息消费验证
+   */
+  async VerifyMessageConsumption(
+    req: VerifyMessageConsumptionRequest,
+    cb?: (error: string, rep: VerifyMessageConsumptionResponse) => void
+  ): Promise<VerifyMessageConsumptionResponse> {
+    return this.request("VerifyMessageConsumption", req, cb)
   }
 
   /**
@@ -367,6 +381,16 @@ Filters示例：
     cb?: (error: string, rep: DescribeSmoothMigrationTaskListResponse) => void
   ): Promise<DescribeSmoothMigrationTaskListResponse> {
     return this.request("DescribeSmoothMigrationTaskList", req, cb)
+  }
+
+  /**
+   * 发送 RocketMQ 消息，该接口仅用于控制台发送少量测试消息，不保证SLA，且云 API 存在限流，在真实业务场景下，请使用 RocketMQ SDK 发送消息。
+   */
+  async SendMessage(
+    req: SendMessageRequest,
+    cb?: (error: string, rep: SendMessageResponse) => void
+  ): Promise<SendMessageResponse> {
+    return this.request("SendMessage", req, cb)
   }
 
   /**

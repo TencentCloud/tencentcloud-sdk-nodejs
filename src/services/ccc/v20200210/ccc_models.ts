@@ -2118,13 +2118,13 @@ export interface CreateUserSigRequest {
    */
   Uid: string
   /**
+   * 用户签名数据，必填字段，为标准 JSON 格式
+   */
+  ClientData: string
+  /**
    * 有效期，单位秒，不超过 1 小时
    */
   ExpiredTime: number
-  /**
-   * 用户签名数据，必填字段，为标准 JSON 格式
-   */
-  ClientData?: string
 }
 
 /**
@@ -2992,6 +2992,18 @@ export interface DescribeTelCdrRequest {
    */
   EndTimeStamp: number
   /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 分页尺寸（必填），上限 100
+   */
+  PageSize: number
+  /**
+   * 分页页码（必填），从 0 开始
+   */
+  PageNumber: number
+  /**
    * 实例 ID（废弃）
    * @deprecated
    */
@@ -3004,18 +3016,6 @@ export interface DescribeTelCdrRequest {
    * 偏移（废弃）
    */
   Offset?: number
-  /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-   */
-  SdkAppId?: number
-  /**
-   * 分页尺寸（必填），上限 100
-   */
-  PageSize?: number
-  /**
-   * 分页页码（必填），从 0 开始
-   */
-  PageNumber?: number
   /**
    * 按手机号筛选
    */
@@ -4149,6 +4149,8 @@ export interface TelCdrInfo {
 
 电话呼出        221     callerCancelWithoutRing      **未振铃被叫号码异常**
 
+电话呼出        222     voiceMailReached      **语音信箱挂断**
+
 音频呼入        501     callConflict      **VoIP用户呼叫冲突终止**
 
 音频呼入        502     clientTimeout      **VoIP用户客户端超时**
@@ -4559,14 +4561,14 @@ export interface BindStaffSkillGroupListRequest {
    */
   StaffEmail: string
   /**
+   * 绑定技能组列表(必填)
+   */
+  StaffSkillGroupList: Array<StaffSkillGroupList>
+  /**
    * 绑定技能组列表
    * @deprecated
    */
   SkillGroupList?: Array<number | bigint>
-  /**
-   * 绑定技能组列表(必填)
-   */
-  StaffSkillGroupList?: Array<StaffSkillGroupList>
 }
 
 /**

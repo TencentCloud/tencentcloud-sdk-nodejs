@@ -7058,6 +7058,20 @@ export interface EmptyTrackItem {
 }
 
 /**
+ * ProcessMediaByUrl返回参数结构体
+ */
+export interface ProcessMediaByUrlResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 贴图轨上的贴图信息。
  */
 export interface StickerTrackItem {
@@ -9761,6 +9775,10 @@ export interface MPSTaskOutput {
    * 任务返回结果中的文件类型结果。如智能擦除中，擦除后的视频文件将被存入媒资，并在此字段中给出 FileId；基于画面提取的字幕文件 Url 将在此字段中给出。
    */
   OutputFiles?: Array<MPSOutputFile>
+  /**
+   * 任务返回的结果JSON
+   */
+  OutputText?: string
 }
 
 /**
@@ -11924,17 +11942,21 @@ export interface AiReviewTaskTerrorismResult {
 }
 
 /**
- * ProcessMediaByUrl返回参数结构体
+ * MPS智能任务
  */
-export interface ProcessMediaByUrlResponse {
+export interface MPSAiMediaTask {
   /**
-   * 任务 ID
+   * MPS智能任务的模板 ID
    */
-  TaskId?: string
+  Definition?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * MPS智能任务输出文件集合
    */
-  RequestId?: string
+  OutputFile?: Array<MPSOutputFileInfo>
+  /**
+   * MPS智能任务输出
+   */
+  OutputText?: string
 }
 
 /**
@@ -14844,6 +14866,20 @@ export interface DescribeQualityInspectTemplatesRequest {
 }
 
 /**
+ * MPS输出文件信息
+ */
+export interface MPSOutputFileInfo {
+  /**
+   * MPS输出文件类型
+   */
+  FileType?: string
+  /**
+   * MPS输出文件的URL
+   */
+  Url?: string
+}
+
+/**
  * DescribeMediaInfos请求参数结构体
  */
 export interface DescribeMediaInfosRequest {
@@ -15162,6 +15198,16 @@ export interface AiAnalysisTaskFrameTagResult {
    * 智能按帧标签任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   FinishTime?: string
+}
+
+/**
+ * 使用MPS进行处理后的智能媒体信息
+ */
+export interface MPSAiMediaInfo {
+  /**
+   * MPS处理后的智能媒体信息列表
+   */
+  AiMediaList?: Array<MPSAiMediaItem>
 }
 
 /**
@@ -15902,6 +15948,10 @@ export interface MediaInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReviewInfo?: FileReviewInfo
+  /**
+   * MPS智能媒资信息
+   */
+  MPSAiMediaInfo?: MPSAiMediaInfo
 }
 
 /**
@@ -18481,6 +18531,20 @@ export interface TerrorismImgReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * MPS AI媒资任务项
+ */
+export interface MPSAiMediaItem {
+  /**
+   * MPS智能处理任务类型
+   */
+  TaskType?: string
+  /**
+   * MPS 智能媒资任务输出
+   */
+  AiMediaTasks?: Array<MPSAiMediaTask>
 }
 
 /**

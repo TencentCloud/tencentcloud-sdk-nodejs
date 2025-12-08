@@ -21,17 +21,21 @@ import {
   DescribeImageToVideoGeneralJobResponse,
   SubmitVideoStylizationJobRequest,
   LogoParam,
+  DescribeVideoVoiceJobResponse,
   SubmitHumanActorJobRequest,
-  DescribeImageAnimateJobRequest,
+  SubmitImageAnimateJobResponse,
   FaceTemplateInfo,
   SubmitImageAnimateJobRequest,
+  DescribeVideoVoiceJobRequest,
   SubmitImageToVideoGeneralJobResponse,
   DescribeVideoFaceFusionJobResponse,
   DescribeVideoFaceFusionJobRequest,
+  FaceRect,
   DescribePortraitSingJobRequest,
-  SubmitImageAnimateJobResponse,
+  DescribeHunyuanToVideoJobRequest,
   SubmitVideoFaceFusionJobResponse,
   DescribeTemplateToVideoJobResponse,
+  SubmitVideoVoiceJobResponse,
   FaceMergeInfo,
   CheckAnimateImageJobResponse,
   SubmitTemplateToVideoJobResponse,
@@ -41,6 +45,8 @@ import {
   DescribeImageAnimateJobResponse,
   SubmitPortraitSingJobRequest,
   LogoRect,
+  SubmitVideoVoiceJobRequest,
+  SubmitHunyuanToVideoJobResponse,
   DescribeHumanActorJobResponse,
   ExtraParam,
   DescribeVideoStylizationJobResponse,
@@ -49,12 +55,14 @@ import {
   SubmitPortraitSingJobResponse,
   SubmitTemplateToVideoJobRequest,
   SubmitImageToVideoGeneralJobRequest,
+  SubmitHunyuanToVideoJobRequest,
   Image,
   DescribeHumanActorJobRequest,
   DescribeImageToVideoGeneralJobRequest,
   DescribeTemplateToVideoJobRequest,
-  FaceRect,
+  DescribeImageAnimateJobRequest,
   DescribePortraitSingJobResponse,
+  DescribeHunyuanToVideoJobResponse,
 } from "./vclm_models"
 
 /**
@@ -64,6 +72,28 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("vclm.tencentcloudapi.com", "2024-05-23", clientConfig)
+  }
+
+  /**
+     * ●混元生视频接口，基于混元大模型，根据输入的文本或图片智能生成视频。
+
+●默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async SubmitHunyuanToVideoJob(
+    req: SubmitHunyuanToVideoJobRequest,
+    cb?: (error: string, rep: SubmitHunyuanToVideoJobResponse) => void
+  ): Promise<SubmitHunyuanToVideoJobResponse> {
+    return this.request("SubmitHunyuanToVideoJob", req, cb)
+  }
+
+  /**
+   * 提交视频配音效任务，输入视频后提交请求，会返回一个JobId，用于查询视频配音效的处理进度。
+   */
+  async SubmitVideoVoiceJob(
+    req: SubmitVideoVoiceJobRequest,
+    cb?: (error: string, rep: SubmitVideoVoiceJobResponse) => void
+  ): Promise<SubmitVideoVoiceJobResponse> {
+    return this.request("SubmitVideoVoiceJob", req, cb)
   }
 
   /**
@@ -120,13 +150,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交视频人脸融合任务
+   * 提交视频特效任务接口
    */
-  async SubmitVideoFaceFusionJob(
-    req: SubmitVideoFaceFusionJobRequest,
-    cb?: (error: string, rep: SubmitVideoFaceFusionJobResponse) => void
-  ): Promise<SubmitVideoFaceFusionJobResponse> {
-    return this.request("SubmitVideoFaceFusionJob", req, cb)
+  async SubmitTemplateToVideoJob(
+    req: SubmitTemplateToVideoJobRequest,
+    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
+  ): Promise<SubmitTemplateToVideoJobResponse> {
+    return this.request("SubmitTemplateToVideoJob", req, cb)
+  }
+
+  /**
+   * 通过JobId提交请求，获取视频配音频任务的结果信息。
+   */
+  async DescribeVideoVoiceJob(
+    req: DescribeVideoVoiceJobRequest,
+    cb?: (error: string, rep: DescribeVideoVoiceJobResponse) => void
+  ): Promise<DescribeVideoVoiceJobResponse> {
+    return this.request("DescribeVideoVoiceJob", req, cb)
   }
 
   /**
@@ -160,13 +200,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交视频特效任务接口
+   * 查询混元生视频任务
    */
-  async SubmitTemplateToVideoJob(
-    req: SubmitTemplateToVideoJobRequest,
-    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
-  ): Promise<SubmitTemplateToVideoJobResponse> {
-    return this.request("SubmitTemplateToVideoJob", req, cb)
+  async DescribeHunyuanToVideoJob(
+    req: DescribeHunyuanToVideoJobRequest,
+    cb?: (error: string, rep: DescribeHunyuanToVideoJobResponse) => void
+  ): Promise<DescribeHunyuanToVideoJobResponse> {
+    return this.request("DescribeHunyuanToVideoJob", req, cb)
   }
 
   /**
@@ -207,6 +247,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageToVideoGeneralJobResponse) => void
   ): Promise<DescribeImageToVideoGeneralJobResponse> {
     return this.request("DescribeImageToVideoGeneralJob", req, cb)
+  }
+
+  /**
+   * 提交视频人脸融合任务
+   */
+  async SubmitVideoFaceFusionJob(
+    req: SubmitVideoFaceFusionJobRequest,
+    cb?: (error: string, rep: SubmitVideoFaceFusionJobResponse) => void
+  ): Promise<SubmitVideoFaceFusionJobResponse> {
+    return this.request("SubmitVideoFaceFusionJob", req, cb)
   }
 
   /**

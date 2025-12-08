@@ -1586,6 +1586,16 @@ export interface DeleteRecordBatchDetail {
 }
 
 /**
+ * ModifyPackageDomain返回参数结构体
+ */
+export interface ModifyPackageDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 域名共享信息
  */
 export interface DomainShareInfo {
@@ -4265,6 +4275,28 @@ export interface CreateSnapshotRequest {
    * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
    */
   DomainId?: number
+}
+
+/**
+ * ModifyPackageDomain请求参数结构体
+ */
+export interface ModifyPackageDomainRequest {
+  /**
+   * 操作类型：change: 套餐换域名；unbind: 解绑套餐域名；bind: 套餐绑定域名。
+   */
+  Operation: string
+  /**
+   * 域名ID。Operation为change时必传，代表更换前的域名。
+   */
+  DomainId?: number
+  /**
+   * 域名ID。Operation为change或bind时必传，代表更换后或要绑定的域名。
+   */
+  NewDomainId?: number
+  /**
+   * 套餐资源ID。Operation为bind或unbind时必传，代表将要操作的套餐资源。
+   */
+  ResourceId?: string
 }
 
 /**

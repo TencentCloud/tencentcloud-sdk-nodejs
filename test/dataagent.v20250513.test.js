@@ -128,6 +128,16 @@ it("dataagent.v20250513.QueryChunkList", async function () {
     }
 })
 
+it("dataagent.v20250513.GetKnowledgeBaseFileList", async function () {
+    try {
+       const data = await client.GetKnowledgeBaseFileList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.GetSessionDetails", async function () {
     try {
        const data = await client.GetSessionDetails({})
