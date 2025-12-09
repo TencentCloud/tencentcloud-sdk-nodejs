@@ -2459,11 +2459,11 @@ export interface DeleteMQTTInstanceResponse {
  */
 export interface VerifyMessageConsumptionRequest {
   /**
-   * 实例ID
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
   /**
@@ -2475,7 +2475,7 @@ export interface VerifyMessageConsumptionRequest {
    */
   MsgId: string
   /**
-   * 消费组名称
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
 }

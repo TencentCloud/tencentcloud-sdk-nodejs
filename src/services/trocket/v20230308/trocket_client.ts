@@ -215,8 +215,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 消息消费验证
-   */
+     * 消息消费验证。
+当前 API 适用集群：5.x 集群。4.x 集群的消息消费验证接口文档见 [VerifyRocketMQConsume](https://cloud.tencent.com/document/api/1179/101061)。
+     */
   async VerifyMessageConsumption(
     req: VerifyMessageConsumptionRequest,
     cb?: (error: string, rep: VerifyMessageConsumptionResponse) => void
@@ -225,8 +226,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询消息列表，如查询死信，请设置ConsumerGroup参数
-   */
+     * 下线trocket下mqtt接口
+
+查询消息列表，如查询死信，请设置ConsumerGroup参数
+     */
   async DescribeMQTTMessageList(
     req: DescribeMQTTMessageListRequest,
     cb?: (error: string, rep: DescribeMQTTMessageListResponse) => void
@@ -235,7 +238,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 更新MQTT集群绑定证书
+     * 下线trocket下mqtt接口
+
+更新MQTT集群绑定证书
 参数传空，则为删除证书
      */
   async ModifyMQTTInstanceCertBinding(
@@ -312,8 +317,10 @@ Filters示例：
   }
 
   /**
-   * 修改主题属性
-   */
+     * 下线trocket下mqtt接口
+
+修改主题属性
+     */
   async ModifyMQTTTopic(
     req: ModifyMQTTTopicRequest,
     cb?: (error: string, rep: ModifyMQTTTopicResponse) => void
@@ -332,8 +339,10 @@ Filters示例：
   }
 
   /**
-   * 删除MQTT访问用户
-   */
+     * 下线trocket下mqtt接口
+
+删除MQTT访问用户
+     */
   async DeleteMQTTUser(
     req: DeleteMQTTUserRequest,
     cb?: (error: string, rep: DeleteMQTTUserResponse) => void
@@ -384,8 +393,9 @@ Filters示例：
   }
 
   /**
-   * 发送 RocketMQ 消息，该接口仅用于控制台发送少量测试消息，不保证SLA，且云 API 存在限流，在真实业务场景下，请使用 RocketMQ SDK 发送消息。
-   */
+     * 发送 RocketMQ 消息，该接口仅用于控制台发送少量测试消息，不保证 SLA，且云 API 存在限流，在真实业务场景下，请使用 RocketMQ SDK 发送消息。
+当前 API 适用集群：5.x 集群。4.x 集群的发送消息接口文档见 [SendRocketMQMessage](https://cloud.tencent.com/document/api/1179/94179)。
+     */
   async SendMessage(
     req: SendMessageRequest,
     cb?: (error: string, rep: SendMessageResponse) => void
@@ -414,8 +424,10 @@ Filters示例：
   }
 
   /**
-   * 获取产品售卖规格
-   */
+     * 下线trocket下mqtt接口
+
+获取产品售卖规格
+     */
   async DescribeMQTTProductSKUList(
     req?: DescribeMQTTProductSKUListRequest,
     cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void
@@ -467,7 +479,9 @@ Filters示例：
   }
 
   /**
-     * 查询用户列表，Filter参数使用说明如下：
+     * 下线trocket下mqtt接口
+
+查询用户列表，Filter参数使用说明如下：
 
 1. Username，用户名称模糊搜索
      */
@@ -479,8 +493,10 @@ Filters示例：
   }
 
   /**
-   * 删除MQTT实例的公网接入点
-   */
+     * 下线trocket下mqtt接口
+
+删除MQTT实例的公网接入点
+     */
   async DeleteMQTTInsPublicEndpoint(
     req: DeleteMQTTInsPublicEndpointRequest,
     cb?: (error: string, rep: DeleteMQTTInsPublicEndpointResponse) => void
@@ -505,8 +521,10 @@ Filters示例：
   }
 
   /**
-   * 修改MQTT角色
-   */
+     * 下线trocket下mqtt接口
+
+修改MQTT角色
+     */
   async ModifyMQTTUser(
     req: ModifyMQTTUserRequest,
     cb?: (error: string, rep: ModifyMQTTUserResponse) => void
@@ -528,6 +546,7 @@ Filters示例：
      * 查询主题关联的生产者列表信息，Filters支持以下筛选条件：
 - ClientIP，客户端IP
 - ClientID，客户端ID
+当前 API 适用集群：5.x 集群。4.x 集群的查询生产者客户端列表接口文档见 [DescribeRocketMQProducers](https://cloud.tencent.com/document/api/1179/122749)。
      */
   async DescribeProducerList(
     req: DescribeProducerListRequest,
@@ -547,8 +566,10 @@ Filters示例：
   }
 
   /**
-   * 查询MQTT实例公网接入点
-   */
+     * 下线trocket下mqtt接口
+
+查询MQTT实例公网接入点
+     */
   async DescribeMQTTInsVPCEndpoints(
     req: DescribeMQTTInsVPCEndpointsRequest,
     cb?: (error: string, rep: DescribeMQTTInsVPCEndpointsResponse) => void
@@ -587,8 +608,10 @@ Filters示例：
   }
 
   /**
-   * 删除MQTT实例
-   */
+     * 下线trocket下mqtt接口
+
+删除MQTT实例
+     */
   async DeleteMQTTInstance(
     req: DeleteMQTTInstanceRequest,
     cb?: (error: string, rep: DeleteMQTTInstanceResponse) => void
@@ -597,8 +620,10 @@ Filters示例：
   }
 
   /**
-   * 查询MQTT消息详情
-   */
+     * 下线trocket下mqtt接口
+
+查询MQTT消息详情
+     */
   async DescribeMQTTMessage(
     req: DescribeMQTTMessageRequest,
     cb?: (error: string, rep: DescribeMQTTMessageResponse) => void
@@ -607,8 +632,10 @@ Filters示例：
   }
 
   /**
-   * 更新MQTT实例公网接入点
-   */
+     * 下线trocket下mqtt接口
+
+更新MQTT实例公网接入点
+     */
   async ModifyMQTTInsPublicEndpoint(
     req: ModifyMQTTInsPublicEndpointRequest,
     cb?: (error: string, rep: ModifyMQTTInsPublicEndpointResponse) => void
@@ -637,8 +664,10 @@ Filters示例：
   }
 
   /**
-   * 查询mqtt主题详情
-   */
+     * 下线trocket下mqtt接口
+
+查询mqtt主题详情
+     */
   async DescribeMQTTTopic(
     req: DescribeMQTTTopicRequest,
     cb?: (error: string, rep: DescribeMQTTTopicResponse) => void
@@ -707,7 +736,9 @@ Filters示例：
   }
 
   /**
-     * 获取主题列表，Filter参数使用说明如下：
+     * 下线trocket下mqtt接口
+
+获取主题列表，Filter参数使用说明如下：
 
 1. TopicName，主题名称模糊搜索
 2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
@@ -720,8 +751,10 @@ Filters示例：
   }
 
   /**
-   * 查询实例信息
-   */
+     * 下线trocket下mqtt接口
+
+查询实例信息
+     */
   async DescribeMQTTInstance(
     req: DescribeMQTTInstanceRequest,
     cb?: (error: string, rep: DescribeMQTTInstanceResponse) => void
@@ -730,8 +763,10 @@ Filters示例：
   }
 
   /**
-   * 创建主题
-   */
+     * 下线trocket下mqtt接口
+
+创建主题
+     */
   async CreateMQTTTopic(
     req: CreateMQTTTopicRequest,
     cb?: (error: string, rep: CreateMQTTTopicResponse) => void
@@ -750,8 +785,10 @@ Filters示例：
   }
 
   /**
-   * 删除MQTT主题
-   */
+     * 下线trocket下mqtt接口
+
+删除MQTT主题
+     */
   async DeleteMQTTTopic(
     req: DeleteMQTTTopicRequest,
     cb?: (error: string, rep: DeleteMQTTTopicResponse) => void
@@ -796,8 +833,9 @@ Filters示例：
   }
 
   /**
-   * 重新发送死信消息
-   */
+     * 重新发送死信消息。
+当前 API 适用集群：5.x集群。4.x 集群的重发死信消息接口文档见 [RetryRocketMQDlqMessage](https://cloud.tencent.com/document/api/1179/114595)。
+     */
   async ResendDeadLetterMessage(
     req: ResendDeadLetterMessageRequest,
     cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void
@@ -806,8 +844,10 @@ Filters示例：
   }
 
   /**
-   * 查询MQTT实例公网接入点
-   */
+     * 下线trocket下mqtt接口
+
+查询MQTT实例公网接入点
+     */
   async DescribeMQTTInsPublicEndpoints(
     req: DescribeMQTTInsPublicEndpointsRequest,
     cb?: (error: string, rep: DescribeMQTTInsPublicEndpointsResponse) => void
@@ -816,8 +856,10 @@ Filters示例：
   }
 
   /**
-   * 查询MQTT集群证书列表
-   */
+     * 下线trocket下mqtt接口
+
+查询MQTT集群证书列表
+     */
   async DescribeMQTTInstanceCert(
     req: DescribeMQTTInstanceCertRequest,
     cb?: (error: string, rep: DescribeMQTTInstanceCertResponse) => void
@@ -826,8 +868,10 @@ Filters示例：
   }
 
   /**
-   * 修改实例属性
-   */
+     * 下线trocket下mqtt接口
+
+修改实例属性
+     */
   async ModifyMQTTInstance(
     req: ModifyMQTTInstanceRequest,
     cb?: (error: string, rep: ModifyMQTTInstanceResponse) => void
@@ -836,7 +880,9 @@ Filters示例：
   }
 
   /**
-     * 获取实例列表，Filters参数使用说明如下：
+     * 下线trocket下mqtt接口
+
+获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，实例ID查询
 3. InstanceType, 实例类型查询，支持多选
@@ -870,8 +916,10 @@ Filters示例：
   }
 
   /**
-   * 购买新的MQTT实例
-   */
+     * 下线trocket下mqtt接口
+
+购买新的MQTT实例
+     */
   async CreateMQTTInstance(
     req: CreateMQTTInstanceRequest,
     cb?: (error: string, rep: CreateMQTTInstanceResponse) => void
@@ -921,8 +969,10 @@ Filters示例：
   }
 
   /**
-   * 添加mqtt角色
-   */
+     * 下线trocket下mqtt接口
+
+添加mqtt角色
+     */
   async CreateMQTTUser(
     req: CreateMQTTUserRequest,
     cb?: (error: string, rep: CreateMQTTUserResponse) => void
@@ -941,8 +991,10 @@ Filters示例：
   }
 
   /**
-   * 查询 MQTT 客户端详情
-   */
+     * 下线trocket下mqtt接口
+
+查询 MQTT 客户端详情
+     */
   async DescribeMQTTClient(
     req: DescribeMQTTClientRequest,
     cb?: (error: string, rep: DescribeMQTTClientResponse) => void
@@ -1030,8 +1082,10 @@ Type，根据任务类型精确查找
   }
 
   /**
-   * 为MQTT实例创建公网接入点
-   */
+     * 下线trocket下mqtt接口
+
+为MQTT实例创建公网接入点
+     */
   async CreateMQTTInsPublicEndpoint(
     req: CreateMQTTInsPublicEndpointRequest,
     cb?: (error: string, rep: CreateMQTTInsPublicEndpointResponse) => void

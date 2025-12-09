@@ -1393,7 +1393,7 @@ export interface DescribeRocketMQMsgRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   EnvironmentId: string
   /**
@@ -4489,7 +4489,7 @@ export interface DescribeRocketMQProducersRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**

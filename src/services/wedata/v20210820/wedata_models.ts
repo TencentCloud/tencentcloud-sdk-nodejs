@@ -15460,6 +15460,10 @@ export interface UpdateWorkflowInfoRequest {
    * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
    */
   GeneralTaskParams?: Array<GeneralTaskParam>
+  /**
+   * 工作流依赖，yes/no。开启后表示当前任务依赖本工作流上个周期的所有任务。仅支持当前任务所在工作流的任务全部为同周期的情况，如果非同周期则不生效，请在工作流-统一调度上进行配置。
+   */
+  DependencyWorkflow?: string
 }
 
 /**
@@ -17586,6 +17590,14 @@ export interface DescribeTestRunningRecordRequest {
    * 分页索引
    */
   PageIndex?: number
+  /**
+   * 状态列表  LAUNCHED:等待运行 RUNNING:运行中 KILLING:终止中 KILLED:已终止 SUCCESS:成功 FAILED:失败 SKIP_RUNNING 跳过运行 NEVER_RUN:未运行
+   */
+  StatusList?: Array<string>
+  /**
+   * 排序条件 排序的key：timeCost,startTime
+   */
+  OrderConditionList?: Array<OrderCondition>
 }
 
 /**

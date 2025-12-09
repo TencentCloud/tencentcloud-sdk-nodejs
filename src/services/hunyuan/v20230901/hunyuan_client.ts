@@ -26,6 +26,7 @@ import {
   RunThreadRequest,
   SubmitHunyuanImageChatJobRequest,
   QueryHunyuanImageJobRequest,
+  PromptTokensDetails,
   QueryHunyuanImageChatJobRequest,
   EmbeddingData,
   SetPayModeResponse,

@@ -919,7 +919,7 @@ export interface DescribeDBInstancesRequest {
    */
   CdbErrors?: Array<number | bigint>
   /**
-   * 返回结果集排序的字段，目前支持："InstanceId"，"InstanceName"，"CreateTime"，"DeadlineTime"。
+   * 返回结果集排序的字段，目前支持："instanceId"，"instanceName"，"createTime"，"deadlineTime"。
    */
   OrderBy?: string
   /**
@@ -1001,7 +1001,7 @@ export interface DescribeDBInstancesRequest {
    */
   EngineTypes?: Array<string>
   /**
-   * 是否获取集群版实例节点信息，可填：true 或 false。默认为 false。
+   * 是否获取云盘版实例节点信息，可填：true 或 false。默认为 false。
    */
   QueryClusterInfo?: boolean
 }
@@ -7482,11 +7482,11 @@ export interface DescribeAuditPoliciesRequest {
  */
 export interface DescribeInstancePasswordComplexityResponse {
   /**
-   * 实例的参数总数
+   * 密码复杂度相关参数总数
    */
   TotalCount?: number
   /**
-   * 参数详情
+   * 密码复杂度参数详情，policy取值范围["","LOW","MEDIUM"],空或者LOW表示：密码复杂度关，MEDIUM表示：密码复杂度开；当policy参数值是MEDIUM时，以下参数才有意义，length:取值范围[8-64],表示：最少字符数；mixed_case_count：取值范围[1-16]，表示大写字母和小写字母的最少个数。number_count：取值范围[1-16]，表示数字字符的最少个数。special_char_count：取值范围[1-16]，表示特殊字符的最少个数。
    */
   Items?: Array<ParameterDetail>
   /**

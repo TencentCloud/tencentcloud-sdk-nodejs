@@ -829,6 +829,10 @@ export interface SecurityGroupPolicy {
    * 安全组最近修改时间。
    */
   ModifyTime?: string
+  /**
+   * 安全组规则优先级，值会随着安全组规则的变更动态变化。使用Priority时，请先调用`DescribeSecurityGroupPolicies`获取到规则的Priority，并且结合返回值中的Version一起使用处理规则。
+   */
+  Priority?: number
 }
 
 /**

@@ -4844,7 +4844,9 @@ export interface InquirePriceCreateRequest {
    */
   StoragePayMode: string
   /**
-   * 实例设备类型
+   * 实例设备类型，支持值如下：
+- common：表示通用型
+- exclusive：表示独享型
    */
   DeviceType?: string
   /**
@@ -5380,7 +5382,9 @@ export interface AddInstancesRequest {
    */
   ReadOnlyCount: number
   /**
-   * 实例机器类型
+   * 实例机器类型，支持值如下：
+- common：表示通用型
+- exclusive：表示独享型
    */
   DeviceType?: string
   /**
@@ -7720,6 +7724,10 @@ export interface BinlogItem {
    * Binlog文件ID
    */
   BinlogId?: number
+  /**
+   * binlog所跨地域
+   */
+  CrossRegions?: Array<string>
 }
 
 /**
@@ -8805,7 +8813,16 @@ export interface CynosdbClusterDetail {
    */
   PhysicalZone?: string
   /**
-   * 状态
+   * 状态，支持的值如下：
+- creating：创建中
+- running：运行中
+- isolating：隔离中
+- isolated：已隔离
+- activating：从回收站重新恢复
+- offlining：下线中
+- offlined：已下线
+- deleting：删除中
+- deleted：已删除
    */
   Status?: string
   /**

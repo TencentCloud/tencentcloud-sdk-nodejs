@@ -95,6 +95,10 @@ export interface Usage {
    * 总 Token 数量。
    */
   TotalTokens?: number
+  /**
+   * 输入 token 的详情。
+   */
+  PromptTokensDetails?: PromptTokensDetails
 }
 
 /**
@@ -208,6 +212,16 @@ export interface QueryHunyuanImageJobRequest {
    * 任务 ID。
    */
   JobId: string
+}
+
+/**
+ * 输入token的详细信息。
+ */
+export interface PromptTokensDetails {
+  /**
+   * 缓存 token 的数量。
+   */
+  CachedTokens?: string
 }
 
 /**
@@ -1318,6 +1332,7 @@ export interface ChatCompletionsRequest {
   EnableMultimedia?: boolean
   /**
    * 是否开启深度研究该问题，默认是false，在值为true且命中深度研究该问题时，会返回深度研究该问题信息。
+   * @deprecated
    */
   EnableDeepSearch?: boolean
   /**
@@ -1351,6 +1366,7 @@ export interface ChatCompletionsRequest {
   EnableRecommendedQuestions?: boolean
   /**
    * 是否开启深度阅读，默认是false，在值为true时，会返回深度阅读的结果信息。说明:1.深度阅读需要开启插件增强,即设置EnableEnhancement为true,当设置EnableDeepRead为true时EnableEnhancement默认为true；2.目前暂时只支持单文档单轮的深度阅读；3.深度阅读功能的文件上传可以使用FilesUploads接口，具体参数详见FilesUploads接口文档
+   * @deprecated
    */
   EnableDeepRead?: boolean
   /**
