@@ -134,13 +134,25 @@ export interface GetSessionDetailsResponse {
 }
 
 /**
- * DeleteChunk返回参数结构体
+ * ModifyChunk请求参数结构体
  */
-export interface DeleteChunkResponse {
+export interface ModifyChunkRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 文件ID
+   */
+  FileId: string
+  /**
+   * 切片ID
+   */
+  ChunkId?: string
+  /**
+   * 编辑后的文本
+   */
+  Content?: string
 }
 
 /**
@@ -298,25 +310,13 @@ export interface ModifyKnowledgeBaseRequest {
 }
 
 /**
- * ModifyChunk请求参数结构体
+ * DeleteChunk返回参数结构体
  */
-export interface ModifyChunkRequest {
+export interface DeleteChunkResponse {
   /**
-   * 实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 文件ID
-   */
-  FileId: string
-  /**
-   * 切片ID
-   */
-  ChunkId?: string
-  /**
-   * 编辑后的文本
-   */
-  Content?: string
+  RequestId?: string
 }
 
 /**
@@ -455,6 +455,14 @@ export interface DeleteDataAgentSessionResponse {
  */
 export interface GetKnowledgeBaseFileListResponse {
   /**
+   * 文件信息列表
+   */
+  FileList?: Array<FileInfo>
+  /**
+   * 文件信息总数
+   */
+  Total?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -573,6 +581,62 @@ export interface ChatAIRequest {
 }
 
 /**
+ * 知识库文件信息
+ */
+export interface FileInfo {
+  /**
+   * 文件名称
+   */
+  FileName: string
+  /**
+   * 文件大小，字节
+   */
+  FileSize: number
+  /**
+   * 文件类型,0=文本,1=表格，默认0
+
+   */
+  Type: number
+  /**
+   * 文件ID
+   */
+  FileId: string
+  /**
+   * 状态，0：数据处理中  1：可用 -1：错误
+   */
+  Status?: number
+  /**
+   * 操作者
+
+   */
+  CreateUser?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 分片策略
+   */
+  ChunkConfig?: KnowledgeTaskConfig
+  /**
+   * 文件来源0=unknow,1=user_cos,2=local
+   */
+  Source?: number
+  /**
+   * 文件url
+   */
+  FileUrl?: string
+  /**
+   * 是否官方示例，0=否，1=是
+   */
+  IsShowCase?: number
+  /**
+   * 文档摘要
+   */
+  DocumentSummary?: string
+}
+
+/**
  * GetKnowledgeBaseFileList请求参数结构体
  */
 export interface GetKnowledgeBaseFileListRequest {
@@ -657,25 +721,17 @@ export interface StepInfo {
 }
 
 /**
- * 文件分片
+ * GetKnowledgeBaseList返回参数结构体
  */
-export interface Chunk {
+export interface GetKnowledgeBaseListResponse {
   /**
-   * 切片ID
+   * 用户实例所有知识库列表
    */
-  Id?: string
+  KnowledgeBaseList?: Array<KnowledgeBase>
   /**
-   * 切片内容
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Content?: string
-  /**
-   * 切片的字数
-   */
-  Size?: number
-  /**
-   * 切片概要
-   */
-  Summary?: string
+  RequestId?: string
 }
 
 /**
@@ -690,6 +746,45 @@ export interface UploadAndCommitFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务配置
+ */
+export interface KnowledgeTaskConfig {
+  /**
+   * 切片类型  0:自定义切片，1：智能切片
+   */
+  ChunkType?: number
+  /**
+   * /智能切片：最小值 1000，默认 4800 自定义切片：正整数即可,默认值 1000
+   */
+  MaxChunkSize?: number
+  /**
+   *  切片分隔符,自定义切片使用：默认值为：["\n\n", "\n", "。", "！", "？", "，", ""]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Delimiters?: Array<string>
+  /**
+   * 自定义切片使用:默认0 可重叠字符长度
+   */
+  ChunkOverlap?: number
+  /**
+   * 表格类文档解析
+   */
+  Columns?: Array<ColumnInfo>
+  /**
+   * 带检索的索引列表
+   */
+  Indexes?: Array<number | bigint>
+  /**
+   * 0：不生成文档摘要，1：生成文档概要。默认0，当取1时，GenParaSummary必须也为1
+   */
+  GenDocSummary?: number
+  /**
+   * 0：不生成段落摘要，1：生成段落概要。默认0
+   */
+  GenParaSummary?: number
 }
 
 /**
@@ -731,15 +826,49 @@ export interface DeleteDataAgentSessionRequest {
 }
 
 /**
- * GetKnowledgeBaseList返回参数结构体
+ * 知识库文档表列信息
  */
-export interface GetKnowledgeBaseListResponse {
+export interface ColumnInfo {
   /**
-   * 用户实例所有知识库列表
+   * 列名称
    */
-  KnowledgeBaseList?: Array<KnowledgeBase>
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 列类型：int, bigint, double, date, datetime, string，decimal
    */
-  RequestId?: string
+  Type?: string
+  /**
+   * 列名称描述
+   */
+  Description?: string
+  /**
+   * 列索引
+   */
+  Index?: number
+  /**
+   * 原始字段名称
+   */
+  OriginalName?: string
+}
+
+/**
+ * 文件分片
+ */
+export interface Chunk {
+  /**
+   * 切片ID
+   */
+  Id?: string
+  /**
+   * 切片内容
+   */
+  Content?: string
+  /**
+   * 切片的字数
+   */
+  Size?: number
+  /**
+   * 切片概要
+   */
+  Summary?: string
 }

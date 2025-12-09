@@ -8059,13 +8059,13 @@ export interface CreateClusterVirtualNodePoolRequest {
    */
   Name: string
   /**
+   * 安全组ID列表
+   */
+  SecurityGroupIds: Array<string>
+  /**
    * 子网ID列表
    */
   SubnetIds?: Array<string>
-  /**
-   * 安全组ID列表，必选参数
-   */
-  SecurityGroupIds?: Array<string>
   /**
    * 虚拟节点label
    */

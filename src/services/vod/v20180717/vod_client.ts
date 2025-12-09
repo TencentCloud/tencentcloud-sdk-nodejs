@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   Canvas,
   ModifySampleSnapshotTemplateResponse,
+  AigcVideoOutputConfig,
   ModifyWatermarkTemplateRequest,
   DomainCLSTargetInfo,
   CreateStorageRegionRequest,
@@ -28,6 +29,7 @@ import {
   QualityEvaluationConfigureInfo,
   ReviewAudioVideoTaskInput,
   DescribeAllClassRequest,
+  AigcImageTaskOutput,
   DescribeRoundPlaysRequest,
   WeChatMiniProgramPublishRequest,
   AiAnalysisTaskClassificationInput,
@@ -63,16 +65,19 @@ import {
   CreateImageSpriteTask2017,
   DescribeImageReviewUsageDataResponse,
   TempCertificate,
+  RebuildMediaRequest,
   DescribeDefaultDistributionConfigRequest,
   AiReviewTaskPoliticalOcrResult,
   QualityEnhanceTask,
   AiSampleWord,
+  PoliticalOcrReviewTemplateInfo,
   CreateImageSpriteTemplateRequest,
   MediaSnapshotByTimePicInfoItem,
   DescribeDailyMostPlayedStatRequest,
   UserDefineFaceReviewTemplateInfo,
   RefreshUrlCacheRequest,
   ContentReviewTemplateItem,
+  AigcImageTaskOutputFileInfo,
   DeleteAIRecognitionTemplateResponse,
   DeleteContentReviewTemplateRequest,
   NoiseConfigureInfo,
@@ -167,6 +172,7 @@ import {
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
   SetVodDomainCertificateRequest,
+  CreateAigcVideoTaskResponse,
   CreateRebuildMediaTemplateResponse,
   AiRecognitionTaskOcrWordsResultOutput,
   AiSampleFaceInfo,
@@ -232,10 +238,12 @@ import {
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
+  AigcImageOutputConfig,
   WatermarkConfigureInfoForUpdate,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   AiRecognitionTaskSegmentResult,
+  CreateAigcImageTaskResponse,
   JitterConfigureInfo,
   MediaSubtitleItem,
   ReviewAudioVideoTaskOutput,
@@ -251,8 +259,9 @@ import {
   EditMediaOutputConfig,
   SplitMediaTaskSegmentInfo,
   AiReviewPornAsrTaskOutput,
-  AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
+  AigcImageTask,
   SimpleHlsClipResponse,
+  AigcVideoTaskOutputFileInfo,
   DeleteAIAnalysisTemplateRequest,
   VideoFrameInterpolationInfo,
   EditMediaRequest,
@@ -287,19 +296,20 @@ import {
   CreateContentReviewTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeAIAnalysisTemplatesRequest,
-  CreateHeadTailTemplateRequest,
+  AigcImageTaskInputFileInfo,
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
   FastEditMediaResponse,
   EmptyTrackItem,
-  ProcessMediaByUrlResponse,
+  AigcVideoTaskInputFileInfo,
   StickerTrackItem,
   DescribeDrmDataKeyResponse,
   ProcessMediaRequest,
+  ReduceMediaBitrateTask,
   DescribeMediaPlayStatDetailsResponse,
   VideoTemplateInfo,
-  PoliticalOcrReviewTemplateInfo,
+  AigcVideoTask,
   PornOcrReviewTemplateInfoForUpdate,
   AiReviewTaskPornOcrResult,
   ModifyContentReviewTemplateResponse,
@@ -361,6 +371,7 @@ import {
   ModifyEnhanceMediaTemplateResponse,
   EnhanceMediaByTemplateResponse,
   CreateJustInTimeTranscodeTemplateRequest,
+  CreateAigcVideoTaskRequest,
   ComplexAdaptiveDynamicStreamingTaskAudioInput,
   ManageTaskRequest,
   RoundPlayListItemInfo,
@@ -370,6 +381,7 @@ import {
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
   BlurConfigureInfoForUpdate,
+  ProcessMediaByUrlResponse,
   EditMediaVideoStream,
   ExtractTraceWatermarkTask,
   AiRecognitionTaskSegmentResultOutput,
@@ -493,7 +505,9 @@ import {
   DescribeEventConfigResponse,
   DescribeCdnLogsResponse,
   MediaContentReviewPoliticalSegmentItem,
+  AigcVideoTaskOutput,
   DeletePersonSampleResponse,
+  ReviewInfo,
   CreateSnapshotByTimeOffsetTemplateResponse,
   VoiceConfigureInfoForUpdate,
   ModifyContentReviewTemplateRequest,
@@ -639,6 +653,7 @@ import {
   DeleteRebuildMediaTemplateRequest,
   CreateDomainVerifyRecordRequest,
   MediaInfo,
+  AigcImageTaskInput,
   VideoTemplateInfoForUpdate,
   CreateContentReviewTemplateRequest,
   DescribeContentReviewTemplatesRequest,
@@ -655,7 +670,7 @@ import {
   CreateQualityInspectTemplateResponse,
   RebuildMediaTaskOutput,
   EnhanceMediaQualityOutputConfig,
-  RebuildMediaRequest,
+  AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
   DescribeTaskDetailResponse,
   MediaKeyFrameDescInfo,
   DeleteImageSpriteTemplateRequest,
@@ -729,7 +744,7 @@ import {
   DescribeSampleSnapshotTemplatesResponse,
   MediaContentReviewSegmentItem,
   AiContentReviewResult,
-  ReduceMediaBitrateTask,
+  CreateAigcImageTaskRequest,
   TerrorismImgReviewTemplateInfo,
   MPSAiMediaItem,
   ApplyUploadResponse,
@@ -806,7 +821,7 @@ import {
   CommitUploadRequest,
   WatermarkCycleConfigForUpdate,
   SnapshotByTimeOffsetTask2017,
-  ReviewInfo,
+  ProhibitedConfigureInfoForUpdate,
   MediaClassInfo,
   AiAnalysisTaskInput,
   DeleteAnimatedGraphicsTemplateRequest,
@@ -829,6 +844,7 @@ import {
   PoliticalAsrReviewTemplateInfo,
   CreateAnimatedGraphicsTemplateResponse,
   SampleSnapshotTemplate,
+  AigcVideoTaskInput,
   AiRecognitionTaskHeadTailResult,
   DescribePersonSamplesRequest,
   AiRecognitionTaskFaceResultItem,
@@ -854,7 +870,7 @@ import {
   DeleteJustInTimeTranscodeTemplateResponse,
   ModifyWatermarkTemplateResponse,
   DescribeJustInTimeTranscodeTemplatesRequest,
-  ProhibitedConfigureInfoForUpdate,
+  CreateHeadTailTemplateRequest,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
   DescribeAIRecognitionTemplatesRequest,
@@ -958,6 +974,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EditMediaResponse) => void
   ): Promise<EditMediaResponse> {
     return this.request("EditMedia", req, cb)
+  }
+
+  /**
+   * 该接口用于[生成 AIGC 图片](https://cloud.tencent.com/document/product/266/124473)。<b>接口处于内测阶段，如需使用请[联系我们](https://cloud.tencent.com/online-service?from=sales_sales&source=PRESALE)，接口调用会产生实际费用，</b>请参考点播 [AIGC 生图片计费文档](https://cloud.tencent.com/document/product/266/95125#9c4dc6ff-4b3f-4b25-bf2d-393889dfb9ac)。该功能结算模式为[后付费](https://cloud.tencent.com/document/product/266/2838)，日结客户当天使用将在第二天出账，月结客户将在次月1日统一出上月使用费用。
+   */
+  async CreateAigcImageTask(
+    req: CreateAigcImageTaskRequest,
+    cb?: (error: string, rep: CreateAigcImageTaskResponse) => void
+  ): Promise<CreateAigcImageTaskResponse> {
+    return this.request("CreateAigcImageTask", req, cb)
   }
 
   /**
@@ -2270,6 +2296,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePersonSamplesResponse) => void
   ): Promise<DescribePersonSamplesResponse> {
     return this.request("DescribePersonSamples", req, cb)
+  }
+
+  /**
+   * 该接口用于[生成 AIGC 视频](https://cloud.tencent.com/document/product/266/124474)。<b>接口处于内测阶段，如需使用请[联系我们](https://cloud.tencent.com/online-service?from=sales_sales&source=PRESALE)，接口调用会产生实际费用</b>，请参考点播 [AIGC 生视频计费文档](https://cloud.tencent.com/document/product/266/95125#96b3b59a-f9e1-49e9-966a-bedb70a4bf12)。该功能结算模式为[后付费](https://cloud.tencent.com/document/product/266/2838)，日结客户当天使用将在第二天出账，月结客户将在次月1日统一出上月使用费用。
+   */
+  async CreateAigcVideoTask(
+    req: CreateAigcVideoTaskRequest,
+    cb?: (error: string, rep: CreateAigcVideoTaskResponse) => void
+  ): Promise<CreateAigcVideoTaskResponse> {
+    return this.request("CreateAigcVideoTask", req, cb)
   }
 
   /**

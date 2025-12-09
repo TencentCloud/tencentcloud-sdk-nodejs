@@ -88,6 +88,16 @@ it("vod.v20180717.EditMedia", async function () {
     }
 })
 
+it("vod.v20180717.CreateAigcImageTask", async function () {
+    try {
+       const data = await client.CreateAigcImageTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyJustInTimeTranscodeTemplate", async function () {
     try {
        const data = await client.ModifyJustInTimeTranscodeTemplate({})
@@ -1191,6 +1201,16 @@ it("vod.v20180717.CreateImageSpriteTemplate", async function () {
 it("vod.v20180717.DescribePersonSamples", async function () {
     try {
        const data = await client.DescribePersonSamples({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateAigcVideoTask", async function () {
+    try {
+       const data = await client.CreateAigcVideoTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

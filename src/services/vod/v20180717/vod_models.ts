@@ -49,6 +49,79 @@ export interface ModifySampleSnapshotTemplateResponse {
 }
 
 /**
+ * AIGC 生视频任务的输出媒体文件配置。
+ */
+export interface AigcVideoOutputConfig {
+  /**
+   * 存储模式。取值有： <li>Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li>
+默认值：Temporary
+   */
+  StorageMode?: string
+  /**
+   * 输出媒体文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+  /**
+   * 生成视频的时长，单位：秒。<li>当 ModelName 是 Kling，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Jimeng，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li>
+   */
+  Duration?: number
+  /**
+   * 生成视频的分辨率。
+<li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li>
+<li>当 ModelName 是 Jimeng，可选值为 768P、1080P，默认为 768P；</li>
+<li>当 ModelName 是 Hailuo，可选值为 1080P；</li>
+<li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li>
+<li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li>
+<li>当 ModelName 是 OS，可选值为 720P；</li>
+说明：除模型可支持的分辨率外，还支持 2K、4K分辨率。
+   */
+  Resolution?: string
+  /**
+   * 指定所生成视频的宽高比。
+<li>当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；</li>
+<li>当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9</li>
+<li>当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4</li>
+<li>当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；</li>
+<li>当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；</li>
+<li>当 ModelName 是 Hailuo，则暂不支持。</li>
+   */
+  AspectRatio?: string
+  /**
+   * 是否生成音频。支持的模型包括 GV、OS。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+默认值：Enabled
+   */
+  AudioGeneration?: string
+  /**
+   * 是否允许人物或人脸生成。取值有： <li>AllowAdult：允许生成成人；</li> <li>Disallowed：禁止在图片中包含人物或人脸；</li>
+   */
+  PersonGeneration?: string
+  /**
+   * 是否开启输入内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  InputComplianceCheck?: string
+  /**
+   * 是否开启输出内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  OutputComplianceCheck?: string
+  /**
+   * 是否启用视频增强。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li> 
+说明：
+1. 对于选择的分辨率超过模型可生成分辨率时，默认会启用增强。
+2. 对于模型可以直出的分辨率，也可以主动选择模型直出低分辨率，使用增强获得指定分辨率。
+   */
+  EnhanceSwitch?: string
+}
+
+/**
  * ModifyWatermarkTemplate请求参数结构体
  */
 export interface ModifyWatermarkTemplateRequest {
@@ -250,6 +323,16 @@ export interface DescribeAllClassRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * AIGC 生图任务的输出。
+ */
+export interface AigcImageTaskOutput {
+  /**
+   * AIGC 生图任务的输出文件信息。
+   */
+  FileInfos?: Array<AigcImageTaskOutputFileInfo>
 }
 
 /**
@@ -1197,6 +1280,96 @@ export interface TempCertificate {
 }
 
 /**
+ * RebuildMedia请求参数结构体
+ */
+export interface RebuildMediaRequest {
+  /**
+   * 媒体文件 ID。
+   */
+  FileId: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 起始偏移时间，单位：秒，不填表示从视频开始截取。
+   */
+  StartTimeOffset?: number
+  /**
+   * 结束偏移时间，单位：秒，不填表示截取到视频末尾。
+   */
+  EndTimeOffset?: number
+  /**
+   * 画质修复控制参数。
+   */
+  RepairInfo?: RepairInfo
+  /**
+   * 智能插帧控制参数。
+   */
+  VideoFrameInterpolationInfo?: VideoFrameInterpolationInfo
+  /**
+   * 画面超分控制参数。
+   */
+  SuperResolutionInfo?: SuperResolutionInfo
+  /**
+   * 高动态范围类型控制参数。
+   */
+  HDRInfo?: HDRInfo
+  /**
+   * 视频降噪控制参数。
+   */
+  VideoDenoiseInfo?: VideoDenoiseInfo
+  /**
+   * 音频降噪控制参数。
+   */
+  AudioDenoiseInfo?: AudioDenoiseInfo
+  /**
+   * 色彩增强控制参数。
+   */
+  ColorInfo?: ColorEnhanceInfo
+  /**
+   * 细节增强控制参数。
+   */
+  SharpInfo?: SharpEnhanceInfo
+  /**
+   * 人脸增强控制参数。
+   */
+  FaceInfo?: FaceEnhanceInfo
+  /**
+   * 低光照控制参数。
+   */
+  LowLightInfo?: LowLightEnhanceInfo
+  /**
+   * 去划痕控制参数。
+   */
+  ScratchRepairInfo?: ScratchRepairInfo
+  /**
+   * 去伪影（毛刺）控制参数。
+   */
+  ArtifactRepairInfo?: ArtifactRepairInfo
+  /**
+   * 音画质重生输出目标参数。
+   */
+  TargetInfo?: RebuildMediaTargetInfo
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
+}
+
+/**
  * DescribeDefaultDistributionConfig请求参数结构体
  */
 export interface DescribeDefaultDistributionConfigRequest {
@@ -1319,6 +1492,26 @@ export interface AiSampleWord {
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   UpdateTime?: string
+}
+
+/**
+ * 文本鉴别涉及令人不适宜的信息的任务控制参数
+ */
+export interface PoliticalOcrReviewTemplateInfo {
+  /**
+   * 文本鉴别涉及令人不适宜的信息的任务开关，可选值：
+<li>ON：开启文本鉴别涉及令人不适宜的信息的任务；</li>
+<li>OFF：关闭文本鉴别涉及令人不适宜的信息的任务。</li>
+   */
+  Switch: string
+  /**
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   */
+  ReviewConfidence?: number
 }
 
 /**
@@ -1541,6 +1734,46 @@ export interface ContentReviewTemplateItem {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   UpdateTime?: string
+}
+
+/**
+ * AIGC 生图任务的输出文件信息。
+ */
+export interface AigcImageTaskOutputFileInfo {
+  /**
+   * 存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li>
+
+   */
+  StorageMode?: string
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。
+
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+  /**
+   * 文件类型，例如 mp4、flv 等。
+   */
+  FileType?: string
+  /**
+   * 媒体文件播放地址。
+   */
+  FileUrl?: string
+  /**
+   * 媒体文件 ID。当 StorageMode 为 Permanent 时有效。
+   */
+  FileId?: string
+  /**
+   * 输出视频的元信息。当 StorageMode 为 Permanent 时有效。
+   */
+  MetaData?: MediaMetaData
 }
 
 /**
@@ -3820,6 +4053,20 @@ export interface SetVodDomainCertificateRequest {
 }
 
 /**
+ * CreateAigcVideoTask返回参数结构体
+ */
+export interface CreateAigcVideoTaskResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRebuildMediaTemplate返回参数结构体
  */
 export interface CreateRebuildMediaTemplateResponse {
@@ -5479,6 +5726,50 @@ export interface AiReviewTaskTerrorismOcrResult {
 }
 
 /**
+ * AIGC 生图任务的输出媒体文件配置。
+ */
+export interface AigcImageOutputConfig {
+  /**
+   * 存储模式。取值有： <li>Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li>
+默认值：Temporary
+   */
+  StorageMode?: string
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+  /**
+   * 生成图片的分辨率。可选值为 720P、1080P、2K、4K、1024x1024、2048x2048、2304x1728、2496x1664、2560x1440、3024x1296、4096x4096、4694x3520、4992x3328、5404x3040、6198x2656，其中使用模型 Jimeng 时，推荐通过 Prompt 指定图片分辨率和宽高比。
+   */
+  Resolution?: string
+  /**
+   * 指定所生成图片的宽高比。<li>当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；</li><li>当 ModelName 是 Qwen、Jimeng，则暂不支持，其中 Jimeng 会结合 Prompt意图、参考图片尺寸，由模型智能判断输出图片的宽高比。</li>
+   */
+  AspectRatio?: string
+  /**
+   * 是否允许人物或人脸生成。取值有： <li>AllowAdult：允许生成成人；</li> <li>Disallowed：禁止在图片中包含人物或人脸；</li>
+   */
+  PersonGeneration?: string
+  /**
+   * 是否开启输入内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  InputComplianceCheck?: string
+  /**
+   * 是否开启输出内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  OutputComplianceCheck?: string
+}
+
+/**
  * 即时转码水印模板更新配置。
  */
 export interface WatermarkConfigureInfoForUpdate {
@@ -5614,6 +5905,20 @@ export interface AiRecognitionTaskSegmentResult {
    * 视频拆条任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   FinishTime?: string
+}
+
+/**
+ * CreateAigcImageTask返回参数结构体
+ */
+export interface CreateAigcImageTaskResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6003,33 +6308,45 @@ export interface AiReviewPornAsrTaskOutput {
 }
 
 /**
- * 字幕信息。
+ * AIGC 生图任务信息
  */
-export interface AiRecognitionTaskAsrFullTextResultOutputSubtitleItem {
+export interface AigcImageTask {
   /**
-   * 媒资字幕 ID，用于媒资字幕管理，仅当 Format 为 vtt 时有效。
-<font color=red>注意：</font>2024-11-01T10:00:00Z 之前的任务返回此字段无效。
+   * 任务 ID。
    */
-  Id?: string
+  TaskId?: string
   /**
-   * 媒资字幕名字，用于播放器展示，仅当 Format 为 vtt 时有效。
-<font color=red>注意：</font>2024-11-01T10:00:00Z 之前的任务返回此字段无效。
+   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
    */
-  Name?: string
+  Status?: string
   /**
-   * 字幕语言。
+   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
    */
-  Language?: string
+  ErrCode?: number
   /**
-   * 字幕文件格式，取值范围：
-<li>vtt：WebVTT 字幕文件；</li>
-<li>srt：SRT 字幕文件。</li>
+   * 错误信息。
    */
-  Format?: string
+  Message?: string
   /**
-   * 字幕文件 Url。
+   * 任务进度，取值范围 [0-100] 。
    */
-  Url?: string
+  Progress?: number
+  /**
+   * AIGC 生图任务的输入信息。
+   */
+  Input?: AigcImageTaskInput
+  /**
+   * AIGC 生图任务的输出信息。
+   */
+  Output?: AigcImageTaskOutput
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -6056,6 +6373,46 @@ export interface SimpleHlsClipResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AIGC 生视频任务的输出文件信息。
+ */
+export interface AigcVideoTaskOutputFileInfo {
+  /**
+   * 存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li>
+默认值：Temporary
+   */
+  StorageMode?: string
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。
+
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+  /**
+   * 文件类型，例如 mp4、flv 等。
+   */
+  FileType?: string
+  /**
+   * 媒体文件播放地址。
+   */
+  FileUrl?: string
+  /**
+   * 媒体文件 ID。当 StorageMode 为 Permanent 时有效。
+   */
+  FileId?: string
+  /**
+   * 输出视频的元信息。当 StorageMode 为 Permanent 时有效。
+   */
+  MetaData?: MediaMetaData
 }
 
 /**
@@ -6939,38 +7296,27 @@ export interface DescribeAIAnalysisTemplatesRequest {
 }
 
 /**
- * CreateHeadTailTemplate请求参数结构体
+ * AIGC生图任务输入文件信息
  */
-export interface CreateHeadTailTemplateRequest {
+export interface AigcImageTaskInputFileInfo {
   /**
-   * 模板名，长度限制 64 个字符。
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 URL；</li>
    */
-  Name: string
+  Type?: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
+说明：
+1. 推荐使用小于7M的图片；
+2. 图片格式的取值为：jpeg，jpg, png, webp。
    */
-  SubAppId?: number
+  FileId?: string
   /**
-   * 模板描述信息，长度限制 256 个字符。
+   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
+说明：
+1. 推荐使用小于7M的图片；
+2. 图片格式的取值为：jpeg，jpg, png, webp。
    */
-  Comment?: string
-  /**
-   * 片头候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片头（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片头。
-   */
-  HeadCandidateSet?: Array<string>
-  /**
-   * 片尾候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片尾（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片尾。
-   */
-  TailCandidateSet?: Array<string>
-  /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
-<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
-<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：stretch 。
-   */
-  FillType?: string
+  Url?: string
 }
 
 /**
@@ -7058,17 +7404,26 @@ export interface EmptyTrackItem {
 }
 
 /**
- * ProcessMediaByUrl返回参数结构体
+ * AIGC 生视频任务输入的图片文件信息。
  */
-export interface ProcessMediaByUrlResponse {
+export interface AigcVideoTaskInputFileInfo {
   /**
-   * 任务 ID
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 URL；</li>
    */
-  TaskId?: string
+  Type?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：
+1. 推荐使用小于10M的图片；
+2. 图片格式的取值为：jpeg，jpg, png。
    */
-  RequestId?: string
+  FileId?: string
+  /**
+   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
+说明：
+1. 推荐使用小于10M的图片；
+2. 图片格式的取值为：jpeg，jpg, png。
+   */
+  Url?: string
 }
 
 /**
@@ -7199,6 +7554,60 @@ export interface ProcessMediaRequest {
 }
 
 /**
+ * 降码率任务信息
+ */
+export interface ReduceMediaBitrateTask {
+  /**
+   * 视频处理任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 媒体文件 ID。
+   */
+  FileId?: string
+  /**
+   * 媒体文件名称。
+   */
+  FileName?: string
+  /**
+   * 媒体文件地址。
+   */
+  FileUrl?: string
+  /**
+   * 原始视频的元信息。
+   */
+  MetaData?: MediaMetaData
+  /**
+   * 降码率任务执行状态与结果。
+   */
+  MediaProcessResultSet?: Array<ReduceMediaBitrateMediaProcessTaskResult>
+  /**
+   * 任务流的优先级，取值范围为 [-10, 10]。
+   */
+  TasksPriority?: number
+  /**
+   * 任务流状态变更通知模式。
+<li>Finish：只有当任务流全部执行完毕时，才发起一次事件通知；</li>
+<li>None：不接受该任务流回调。</li>
+   */
+  TasksNotifyMode?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+}
+
+/**
  * DescribeMediaPlayStatDetails返回参数结构体
  */
 export interface DescribeMediaPlayStatDetailsResponse {
@@ -7302,23 +7711,45 @@ export interface VideoTemplateInfo {
 }
 
 /**
- * 文本鉴别涉及令人不适宜的信息的任务控制参数
+ * AIGC 生视频任务信息
  */
-export interface PoliticalOcrReviewTemplateInfo {
+export interface AigcVideoTask {
   /**
-   * 文本鉴别涉及令人不适宜的信息的任务开关，可选值：
-<li>ON：开启文本鉴别涉及令人不适宜的信息的任务；</li>
-<li>OFF：关闭文本鉴别涉及令人不适宜的信息的任务。</li>
+   * 任务 ID。
    */
-  Switch: string
+  TaskId?: string
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
    */
-  BlockConfidence?: number
+  Status?: string
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
    */
-  ReviewConfidence?: number
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * AIGC 生视频任务的输入信息。
+   */
+  Input?: AigcVideoTaskInput
+  /**
+   * AIGC 生视频任务的输出信息。
+   */
+  Output?: AigcVideoTaskOutput
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -8760,6 +9191,69 @@ export interface CreateJustInTimeTranscodeTemplateRequest {
 }
 
 /**
+ * CreateAigcVideoTask请求参数结构体
+ */
+export interface CreateAigcVideoTaskRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>GV：Google Veo；</li><li>OS：OpenAI Sora。</li>
+   */
+  ModelName: string
+  /**
+   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1；</li><li>当 ModelName 是 OS，可选值为 2.0；</li>
+   */
+  ModelVersion: string
+  /**
+   * AIGC 生视频任务的输入图片的文件信息。说明
+1. 当 ModelName 是 GV 时，最大长度为 3；其他情况下最大长度为1。
+2. 当 ModelName 是 GV 时，并且长度大于1时，则不能再指定 LastFrameFileId 参数。
+   */
+  FileInfos?: Array<AigcVideoTaskInputFileInfo>
+  /**
+   * 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。说明：
+1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。
+2. 图片大小需小于5M。
+3. 图片格式的取值为：jpeg，jpg, png, webp。
+   */
+  LastFrameFileId?: string
+  /**
+   * 生成图片的提示词。最大支持2000个字符，当 FileInfos 为空时，此参数必填。
+   */
+  Prompt?: string
+  /**
+   * 要阻止模型生成图片的提示词。最大支持500个字符。
+   */
+  NegativePrompt?: string
+  /**
+   * 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  EnhancePrompt?: string
+  /**
+   * 生视频任务的输出媒体文件配置。
+   */
+  OutputConfig?: AigcVideoOutputConfig
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
+}
+
+/**
  * 自适应码流任务多语言音频流输入参数。
  */
 export interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
@@ -8969,6 +9463,20 @@ export interface BlurConfigureInfoForUpdate {
 <li>OFF：关闭。</li>
    */
   Switch?: string
+}
+
+/**
+ * ProcessMediaByUrl返回参数结构体
+ */
+export interface ProcessMediaByUrlResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12133,6 +12641,16 @@ military：
 }
 
 /**
+ * AIGC 生视频任务的输出信息。
+ */
+export interface AigcVideoTaskOutput {
+  /**
+   * AIGC 生视频任务的输出文件信息。
+   */
+  FileInfos?: Array<AigcVideoTaskOutputFileInfo>
+}
+
+/**
  * DeletePersonSample返回参数结构体
  */
 export interface DeletePersonSampleResponse {
@@ -12140,6 +12658,44 @@ export interface DeletePersonSampleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 审核信息。
+ */
+export interface ReviewInfo {
+  /**
+   * 审核模板 ID。
+   */
+  Definition?: number
+  /**
+   * 审核的结果建议，取值范围：
+<li>pass：建议通过；</li>
+<li>review：建议复审；</li>
+<li>block：建议封禁。</li>
+   */
+  Suggestion?: string
+  /**
+   * 审核类型，当 Suggestion 为 review 或 block 时有效，格式为：Form.Label。
+Form 表示违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字；</li>
+<li>ASR：语音中的文字；</li>
+<li>Voice：声音。</li>
+Label 表示违禁的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terror：暴力；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Abuse：谩骂；</li>
+<li>Moan：娇喘。</li>
+   */
+  TypeSet?: Array<string>
+  /**
+   * 审核时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ReviewTime?: string
 }
 
 /**
@@ -14468,8 +15024,8 @@ export interface EventContent {
 <li>PersistenceComplete：剪辑固化完成；</li>
 <li>ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。</li>
 <li>ProcessMediaByMPSComplete：MPS视频处理完成。</li>
-<li>AigcImageComplete：AIGC 生图任务完成。</li>
-<li>AigcVideoComplete：AIGC 生视频任务完成。</li>
+<li>AigcImageTaskComplete：AIGC 生图任务完成。</li>
+<li>AigcVideoTaskComplete：AIGC 生视频任务完成。</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -14617,6 +15173,14 @@ export interface EventContent {
    * MPS 视频处理任务信息，仅当 EventType 为 ProcessMediaByMPSComplete 时有效。
    */
   ProcessMediaByMPSCompleteEvent?: ProcessMediaByMPS
+  /**
+   * AIGC 生图任务信息，仅当 EventType 为 AigcImageTaskComplete 时有效。
+   */
+  AigcImageCompleteEvent?: AigcImageTask
+  /**
+   * AIGC 生视频任务信息，仅当 EventType 为 AigcVideoTaskComplete 时有效。
+   */
+  AigcVideoCompleteEvent?: AigcVideoTask
 }
 
 /**
@@ -15955,6 +16519,44 @@ export interface MediaInfo {
 }
 
 /**
+ * AIGC 生图任务的输入。
+ */
+export interface AigcImageTaskInput {
+  /**
+   * 模型名称。
+   */
+  ModelName?: string
+  /**
+   * 模型版本。
+   */
+  ModelVersion?: string
+  /**
+   * AIGC生图任务输入文件信息。
+   */
+  FileInfos?: Array<AigcImageTaskInputFileInfo>
+  /**
+   * 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。
+   */
+  Prompt?: string
+  /**
+   * 要阻止模型生成图片的提示词。最大支持1000字符。
+   */
+  NegativePrompt?: string
+  /**
+   * 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  EnhancePrompt?: string
+  /**
+   * 生成模式。取值有： <li>Standard：标准模式；</li> <li>Professional：高品质模式；</li>
+   */
+  GenerationMode?: string
+  /**
+   * AIGC 生图输出结果文件输出。
+   */
+  OutputConfig?: AigcImageOutputConfig
+}
+
+/**
  * 视频流配置参数
  */
 export interface VideoTemplateInfoForUpdate {
@@ -16405,93 +17007,33 @@ export interface EnhanceMediaQualityOutputConfig {
 }
 
 /**
- * RebuildMedia请求参数结构体
+ * 字幕信息。
  */
-export interface RebuildMediaRequest {
+export interface AiRecognitionTaskAsrFullTextResultOutputSubtitleItem {
   /**
-   * 媒体文件 ID。
+   * 媒资字幕 ID，用于媒资字幕管理，仅当 Format 为 vtt 时有效。
+<font color=red>注意：</font>2024-11-01T10:00:00Z 之前的任务返回此字段无效。
    */
-  FileId: string
+  Id?: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 媒资字幕名字，用于播放器展示，仅当 Format 为 vtt 时有效。
+<font color=red>注意：</font>2024-11-01T10:00:00Z 之前的任务返回此字段无效。
    */
-  SubAppId?: number
+  Name?: string
   /**
-   * 起始偏移时间，单位：秒，不填表示从视频开始截取。
+   * 字幕语言。
    */
-  StartTimeOffset?: number
+  Language?: string
   /**
-   * 结束偏移时间，单位：秒，不填表示截取到视频末尾。
+   * 字幕文件格式，取值范围：
+<li>vtt：WebVTT 字幕文件；</li>
+<li>srt：SRT 字幕文件。</li>
    */
-  EndTimeOffset?: number
+  Format?: string
   /**
-   * 画质修复控制参数。
+   * 字幕文件 Url。
    */
-  RepairInfo?: RepairInfo
-  /**
-   * 智能插帧控制参数。
-   */
-  VideoFrameInterpolationInfo?: VideoFrameInterpolationInfo
-  /**
-   * 画面超分控制参数。
-   */
-  SuperResolutionInfo?: SuperResolutionInfo
-  /**
-   * 高动态范围类型控制参数。
-   */
-  HDRInfo?: HDRInfo
-  /**
-   * 视频降噪控制参数。
-   */
-  VideoDenoiseInfo?: VideoDenoiseInfo
-  /**
-   * 音频降噪控制参数。
-   */
-  AudioDenoiseInfo?: AudioDenoiseInfo
-  /**
-   * 色彩增强控制参数。
-   */
-  ColorInfo?: ColorEnhanceInfo
-  /**
-   * 细节增强控制参数。
-   */
-  SharpInfo?: SharpEnhanceInfo
-  /**
-   * 人脸增强控制参数。
-   */
-  FaceInfo?: FaceEnhanceInfo
-  /**
-   * 低光照控制参数。
-   */
-  LowLightInfo?: LowLightEnhanceInfo
-  /**
-   * 去划痕控制参数。
-   */
-  ScratchRepairInfo?: ScratchRepairInfo
-  /**
-   * 去伪影（毛刺）控制参数。
-   */
-  ArtifactRepairInfo?: ArtifactRepairInfo
-  /**
-   * 音画质重生输出目标参数。
-   */
-  TargetInfo?: RebuildMediaTargetInfo
-  /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-   */
-  TasksPriority?: number
-  /**
-   * 保留字段，特殊用途时使用。
-   */
-  ExtInfo?: string
+  Url?: string
 }
 
 /**
@@ -16636,6 +17178,14 @@ export interface DescribeTaskDetailResponse {
    * MPS 视频处理任务信息，仅当 TaskType 为 ProcessMediaByMPS，该字段有值。
    */
   ProcessMediaByMPSTask?: ProcessMediaByMPS
+  /**
+   * AIGC 生图任务信息，仅当 TaskType 为 AigcImageTask，该字段有值。
+   */
+  AigcImageTask?: AigcImageTask
+  /**
+   * AIGC 生视频任务信息，仅当 TaskType 为 AigcVideoTask，该字段有值。
+   */
+  AigcVideoTask?: AigcVideoTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18447,57 +18997,63 @@ export interface AiContentReviewResult {
 }
 
 /**
- * 降码率任务信息
+ * CreateAigcImageTask请求参数结构体
  */
-export interface ReduceMediaBitrateTask {
+export interface CreateAigcImageTaskRequest {
   /**
-   * 视频处理任务 ID。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  TaskId?: string
+  SubAppId: number
   /**
-   * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * 模型名称。取值：
+<li>GEM：Gemini；</li>
+<li>Jimeng：即梦；</li>
+<li>Qwen：千问。</li>
    */
-  Status?: string
+  ModelName: string
   /**
-   * 媒体文件 ID。
+   * 模型版本。取值：
+<li>当 ModelName 是 GEM，可选值为 2.5、3.0；</li>
+<li>当 ModelName 是 Jimeng，可选值为 4.0；</li>
+<li>当 ModelName 是 Qwen，可选值为 0925；</li>
    */
-  FileId?: string
+  ModelVersion: string
   /**
-   * 媒体文件名称。
+   * AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时最多指定3个。
    */
-  FileName?: string
+  FileInfos?: Array<AigcImageTaskInputFileInfo>
   /**
-   * 媒体文件地址。
+   * 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。
    */
-  FileUrl?: string
+  Prompt?: string
   /**
-   * 原始视频的元信息。
+   * 要阻止模型生成图片的提示词。最大支持500个字符。
    */
-  MetaData?: MediaMetaData
+  NegativePrompt?: string
   /**
-   * 降码率任务执行状态与结果。
+   * 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
    */
-  MediaProcessResultSet?: Array<ReduceMediaBitrateMediaProcessTaskResult>
+  EnhancePrompt?: string
   /**
-   * 任务流的优先级，取值范围为 [-10, 10]。
+   * 生图任务的输出媒体文件配置。
    */
-  TasksPriority?: number
+  OutputConfig?: AigcImageOutputConfig
   /**
-   * 任务流状态变更通知模式。
-<li>Finish：只有当任务流全部执行完毕时，才发起一次事件通知；</li>
-<li>None：不接受该任务流回调。</li>
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
-  TasksNotifyMode?: string
+  SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
    */
   SessionContext?: string
   /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
    */
-  SessionId?: string
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -20667,41 +21223,17 @@ export interface SnapshotByTimeOffsetTask2017 {
 }
 
 /**
- * 审核信息。
+ * 违禁任务控制参数
  */
-export interface ReviewInfo {
+export interface ProhibitedConfigureInfoForUpdate {
   /**
-   * 审核模板 ID。
+   * 语音违禁控制参数。
    */
-  Definition?: number
+  AsrReviewInfo?: ProhibitedAsrReviewTemplateInfoForUpdate
   /**
-   * 审核的结果建议，取值范围：
-<li>pass：建议通过；</li>
-<li>review：建议复审；</li>
-<li>block：建议封禁。</li>
+   * 文本违禁控制参数。
    */
-  Suggestion?: string
-  /**
-   * 审核类型，当 Suggestion 为 review 或 block 时有效，格式为：Form.Label。
-Form 表示违禁的形式，取值范围：
-<li>Image：画面上的人物或图标；</li>
-<li>OCR：画面上的文字；</li>
-<li>ASR：语音中的文字；</li>
-<li>Voice：声音。</li>
-Label 表示违禁的标签，取值范围：
-<li>Porn：色情；</li>
-<li>Terror：暴力；</li>
-<li>Polity：不适宜的信息；</li>
-<li>Ad：广告；</li>
-<li>Illegal：违法；</li>
-<li>Abuse：谩骂；</li>
-<li>Moan：娇喘。</li>
-   */
-  TypeSet?: Array<string>
-  /**
-   * 审核时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  ReviewTime?: string
+  OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate
 }
 
 /**
@@ -21294,6 +21826,48 @@ export interface SampleSnapshotTemplate {
 默认值：black 。
    */
   FillType: string
+}
+
+/**
+ * AIGC 生视频任务的输入。
+ */
+export interface AigcVideoTaskInput {
+  /**
+   * 模型名称。
+   */
+  ModelName?: string
+  /**
+   * 模型版本。
+   */
+  ModelVersion?: string
+  /**
+   * AIGC生图任务输入文件信息。
+   */
+  FileInfos?: Array<AigcVideoTaskInputFileInfo>
+  /**
+   * 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   */
+  LastFrameFileId?: string
+  /**
+   * 生成视频的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。
+   */
+  Prompt?: string
+  /**
+   * 要阻止模型生成视频的提示词。最大支持1000字符。
+   */
+  NegativePrompt?: string
+  /**
+   * 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  EnhancePrompt?: string
+  /**
+   * 生成模式。取值有： <li>Standard：标准模式；</li> <li>Professional：高品质模式；</li>
+   */
+  GenerationMode?: string
+  /**
+   * AIGC 生图输出结果文件输出。
+   */
+  OutputConfig?: AigcVideoOutputConfig
 }
 
 /**
@@ -21903,17 +22477,38 @@ export interface DescribeJustInTimeTranscodeTemplatesRequest {
 }
 
 /**
- * 违禁任务控制参数
+ * CreateHeadTailTemplate请求参数结构体
  */
-export interface ProhibitedConfigureInfoForUpdate {
+export interface CreateHeadTailTemplateRequest {
   /**
-   * 语音违禁控制参数。
+   * 模板名，长度限制 64 个字符。
    */
-  AsrReviewInfo?: ProhibitedAsrReviewTemplateInfoForUpdate
+  Name: string
   /**
-   * 文本违禁控制参数。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate
+  SubAppId?: number
+  /**
+   * 模板描述信息，长度限制 256 个字符。
+   */
+  Comment?: string
+  /**
+   * 片头候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片头（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片头。
+   */
+  HeadCandidateSet?: Array<string>
+  /**
+   * 片尾候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片尾（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片尾。
+   */
+  TailCandidateSet?: Array<string>
+  /**
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
+<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
+<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：stretch 。
+   */
+  FillType?: string
 }
 
 /**

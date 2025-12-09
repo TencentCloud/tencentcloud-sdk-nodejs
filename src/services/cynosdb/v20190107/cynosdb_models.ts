@@ -5485,11 +5485,10 @@ creating：创建中
 running：运行中
 isolating：隔离中
 isolated：已隔离
-activating：解隔离中
+activating：恢复中
 offlining：下线中
 offlined：已下线
-deleting：删除中
-deleted：已删除
+
    */
   Status?: string
   /**

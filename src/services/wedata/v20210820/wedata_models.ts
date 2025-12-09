@@ -3301,6 +3301,10 @@ export interface DataSourceEnvInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BizParams?: string
+  /**
+   * 是否支持tccatalog
+   */
+  TcCatalogOpen?: boolean
 }
 
 /**
@@ -4069,6 +4073,10 @@ export interface InstanceOpsDto {
    * 实例执行计划描述
    */
   InstanceSchedulerDesc?: string
+  /**
+   * 当前用户对该实例的权限列表
+   */
+  Privileges?: Array<string>
 }
 
 /**
@@ -4892,11 +4900,11 @@ export interface RegisterEventRequest {
    */
   Owner: string
   /**
-   * 必填，事件类型，默认值：TIME_SERIES
+   * 事件类型，不填会使用默认值 TIME_SERIES 填充
    */
   EventType?: string
   /**
-   * 必填，对应day： yyyyMMdd，对应HOUR：yyyyMMddHH，对应MIN：yyyyMMddHHmm，对应SECOND：yyyyMMddHHmmss，默认值：yyyyMMdd
+   * 对应day： yyyyMMdd，对应HOUR：yyyyMMddHH，对应MIN：yyyyMMddHHmm，对应SECOND：yyyyMMddHHmmss，默认值：yyyyMMdd
    */
   DimensionFormat?: string
   /**
@@ -6030,6 +6038,27 @@ export interface AgentStatus {
 }
 
 /**
+ * 读写权限状态
+ */
+export interface PermissionStatus {
+  /**
+   * 写权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanWrite?: boolean
+  /**
+   * 写权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanDelete?: boolean
+  /**
+   * 写权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanRead?: boolean
+}
+
+/**
  * DescribeInstanceLogDetail请求参数结构体
  */
 export interface DescribeInstanceLogDetailRequest {
@@ -6317,6 +6346,16 @@ export interface ProdSchedulerTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
+  /**
+   * 负责人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeIdList?: Array<string>
+  /**
+   * 负责人name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeNameList?: Array<string>
 }
 
 /**
@@ -6337,6 +6376,32 @@ export interface DeleteCustomFunctionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 维度关联单个表字段
+ */
+export interface DimTableLink {
+  /**
+   * 维度主键KEY对应的表列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 维度值对应的表列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+  /**
+   * 表 GUID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableGuid: string
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
 }
 
 /**
@@ -7393,6 +7458,14 @@ export interface WorkflowExtOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowType?: string
+  /**
+   * bundle客户端绑定唯一id
+   */
+  BundleId?: string
+  /**
+   * bundle客户端扩展信息，json格式
+   */
+  BundleInfo?: string
 }
 
 /**
@@ -9244,6 +9317,12 @@ export interface DescribeOpsWorkflowsRequest {
    * **时区** timeZone, 默认UTC+8
    */
   ScheduleTimeZone?: string
+  /**
+   * 是否过滤无权限的工作流
+true: 过滤无权限的仅返回有权限的工作流列表(默认)
+false： 返回所有的工作流列表
+   */
+  CheckPrivilege?: boolean
 }
 
 /**
@@ -9673,6 +9752,10 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: string
+  /**
+   * 是否开通tccatalog,默认没有开启
+   */
+  TcCatalogOpen?: boolean
 }
 
 /**
@@ -13539,6 +13622,52 @@ export interface DescribeFunctionTypesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资产维度关联数据表字段结构定义
+ */
+export interface AssetDimTableColumn {
+  /**
+   * 表字段名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnName?: string
+  /**
+   * 表字段中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnNameCn?: string
+  /**
+   * 表字段类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnType?: string
+  /**
+   * 表字段描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnDescription?: string
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 表GUID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableGuid?: string
+  /**
+   * 表归属的数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 表归属的Schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
 }
 
 /**
@@ -19018,6 +19147,12 @@ export interface SuccessorTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeDesc?: string
+  /**
+   * 当前用户对该资源的权限列表
+CAN_MANAGE 有修改操作权限
+NO_PERMISSION 无权限
+   */
+  Privileges?: Array<string>
 }
 
 /**
@@ -22227,6 +22362,11 @@ export interface CommonIdOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
+  /**
+   * 补录计划Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MakeId?: string
 }
 
 /**
@@ -23579,6 +23719,14 @@ export interface DescribeOperateOpsTasksRequest {
    * 根据任务优先级筛选
    */
   RunPriorityList?: Array<number | bigint>
+  /**
+   * 是否包含手动工作流
+   */
+  IncludeManualTask?: string
+  /**
+   * 是否检查权限
+   */
+  CheckPrivilege?: boolean
 }
 
 /**
@@ -23803,6 +23951,120 @@ export interface DescribeRuleExecDetailRequest {
 }
 
 /**
+ * 资产维度信息结构定义
+ */
+export interface AssetDim {
+  /**
+   * 文件夹 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: number
+  /**
+   * 维度编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimCode?: string
+  /**
+   * 维度名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimName?: string
+  /**
+   * 维度描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 维度负责人UserId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerAccount?: number
+  /**
+   * 维度负责人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 变更人ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyUserId?: number
+  /**
+   * 维度最近修改人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyUser?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 维度录入方式， 取值：manual-手动录入；dict-关联字典表；
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimType?: string
+  /**
+   * 枚举值数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValuePairCount?: number
+  /**
+   * 关联指标数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorPairCount?: number
+  /**
+   * 关联字段数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableColumnCount?: number
+  /**
+   * 维度 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimId?: number
+  /**
+   * 维度关联表字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimTableLink?: DimTableLink
+  /**
+   * 枚举值列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValuePairs?: Array<Pair>
+  /**
+   * 维度关联字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableColumns?: Array<AssetDimTableColumn>
+  /**
+   * 关联指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceIndicatorIds?: Array<IndicatorBaseSimpleInfo>
+  /**
+   * 权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimPermission?: PermissionStatus
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 项目名称
+   */
+  ProjectName?: string
+}
+
+/**
  * DeleteResource请求参数结构体
  */
 export interface DeleteResourceRequest {
@@ -23933,6 +24195,56 @@ export interface MakePlanInstanceOpsDtoCollection {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<InstanceOpsDto>
+}
+
+/**
+ * 指标列表简单结构
+ */
+export interface IndicatorBaseSimpleInfo {
+  /**
+   * ID
+   */
+  Id?: number
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MeasureUnit?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorCode?: string
+  /**
+   * 业务负责人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizOwnerName?: string
+  /**
+   * 技术服务站名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TechOwnerName?: string
+  /**
+   * 业务口径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizCaliber?: string
+  /**
+   * 指标类型（1-原子指标 2-衍生指标 3-复合指标）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorType?: number
 }
 
 /**
@@ -24505,6 +24817,26 @@ export interface ColumnMeta {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Specification?: string
+  /**
+   * 目录名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryName?: string
+  /**
+   * 源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginType?: string
+  /**
+   * 列绑定的指标信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorBase?: IndicatorBaseSimpleInfo
+  /**
+   * 列绑定的维度信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetDim?: AssetDim
 }
 
 /**
@@ -29341,6 +29673,21 @@ no：任务无需满足自依赖
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerId?: string
+  /**
+   * 当前用户对该任务的权限列表， 当前支持
+CAN_MANAGE : 有权限管理操作
+   */
+  Privileges?: Array<string>
+  /**
+   * bundle客户端唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleId?: string
+  /**
+   * bundle客户端信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BundleInfo?: string
 }
 
 /**
@@ -31767,13 +32114,17 @@ export interface RealTimeTaskSpeed {
 }
 
 /**
- * 基于表的标签统计信息
+ * 基于资产的标签统计信息
  */
 export interface TagVoteSum {
   /**
    * 标签id
    */
-  TagId?: number
+  TagId: number
+  /**
+   * 标签名
+   */
+  TagName: string
   /**
    * 该表该标签投票次数
    */
@@ -31783,14 +32134,30 @@ export interface TagVoteSum {
    */
   Status?: boolean
   /**
-   * 标签名
-   */
-  TagName?: string
-  /**
    * 标签描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagDesc?: string
+  /**
+   * 标签值Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValueId?: number
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue?: string
+  /**
+   * 标签是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagIsDeleted?: boolean
+  /**
+   * 标签值是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValueIsDeleted?: boolean
 }
 
 /**

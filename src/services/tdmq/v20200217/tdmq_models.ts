@@ -460,7 +460,7 @@ export interface DeleteRocketMQGroupRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -1539,7 +1539,7 @@ export interface DescribeRocketMQMsgTraceRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   EnvironmentId: string
   /**
@@ -1574,7 +1574,7 @@ export interface ModifyRocketMQGroupRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -2550,7 +2550,7 @@ export interface DescribeRocketMQTopicMsgsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   EnvironmentId: string
   /**
@@ -5182,7 +5182,7 @@ export interface CreateRocketMQTopicRequest {
    */
   Topic: string
   /**
-   * 主题所在的命名空间，目前支持在单个命名空间下创建主题
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   Namespaces: Array<string>
   /**
@@ -5593,7 +5593,7 @@ export interface DescribeRocketMQConsumerConnectionsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -5950,7 +5950,7 @@ export interface CreateRocketMQGroupRequest {
    */
   GroupId: string
   /**
-   * 命名空间，目前只支持单个命名空间
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   Namespaces: Array<string>
   /**
@@ -6217,7 +6217,7 @@ export interface DescribeRocketMQTopicsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -6547,7 +6547,7 @@ export interface DescribeRocketMQTopicStatsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -7159,7 +7159,7 @@ export interface DescribeRocketMQConsumerConnectionDetailRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -7279,7 +7279,7 @@ export interface ModifyRocketMQTopicRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -7876,7 +7876,7 @@ export interface DescribeRocketMQSubscriptionsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   Namespace: string
   /**
@@ -8310,7 +8310,7 @@ export interface DescribeRocketMQConsumeStatsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -8887,7 +8887,7 @@ export interface RetryRocketMQDlqMessageRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -8909,7 +8909,7 @@ export interface DescribeRocketMQTopicsByGroupRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -8997,7 +8997,7 @@ export interface CreateRocketMQTopicV2Request {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   Namespace: string
   /**
@@ -10413,7 +10413,7 @@ export interface DeleteRocketMQTopicRequest {
    */
   ClusterId: string
   /**
-   * 命名空间名称
+   * 主题所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**
@@ -10614,7 +10614,7 @@ export interface DescribeRocketMQGroupsRequest {
    */
   ClusterId: string
   /**
-   * 命名空间
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
    */
   NamespaceId: string
   /**

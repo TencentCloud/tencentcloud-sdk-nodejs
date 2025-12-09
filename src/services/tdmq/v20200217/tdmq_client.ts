@@ -443,8 +443,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取消费详情列表
-   */
+     * 查询 RocketMQ 消费详情列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。查询 5.x 集群消费详情的接口文档见 [DescribeConsumerGroup](https://cloud.tencent.com/document/api/1493/97941)。
+     */
   async DescribeRocketMQConsumeStats(
     req: DescribeRocketMQConsumeStatsRequest,
     cb?: (error: string, rep: DescribeRocketMQConsumeStatsResponse) => void
@@ -473,8 +474,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询消息轨迹
-   */
+     * 查询消息轨迹。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群查询消息轨迹的接口文档见 [DescribeMessageTrace](https://cloud.tencent.com/document/api/1493/114302)。
+     */
   async DescribeRocketMQMsgTrace(
     req: DescribeRocketMQMsgTraceRequest,
     cb?: (error: string, rep: DescribeRocketMQMsgTraceResponse) => void
@@ -544,8 +546,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除RocketMQ消费组
-   */
+     * 删除 RocketMQ 消费组。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。删除 5.x 集群消费组的接口文档见 [DeleteConsumerGroup](https://cloud.tencent.com/document/api/1493/97942)。
+     */
   async DeleteRocketMQGroup(
     req: DeleteRocketMQGroupRequest,
     cb?: (error: string, rep: DeleteRocketMQGroupResponse) => void
@@ -575,8 +578,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定消费组下当前客户端的连接情况
-   */
+     * 查询 RocketMQ 消费组下的客户端连接列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群查询消费组下的客户端连接列表接口文档见 [DescribeConsumerClientList](https://cloud.tencent.com/document/api/1493/120140)。
+     */
   async DescribeRocketMQConsumerConnections(
     req: DescribeRocketMQConsumerConnectionsRequest,
     cb?: (error: string, rep: DescribeRocketMQConsumerConnectionsResponse) => void
@@ -615,8 +619,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Topic生产详情列表
-   */
+     * 查询 RocketMQ 主题生产详情列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群暂不支持该功能。
+     */
   async DescribeRocketMQTopicStats(
     req: DescribeRocketMQTopicStatsRequest,
     cb?: (error: string, rep: DescribeRocketMQTopicStatsResponse) => void
@@ -635,8 +640,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取RocketMQ命名空间列表
-   */
+     * 获取 RocketMQ 命名空间列表。
+当前 API 适用集群：4.x 虚拟集群和 4.x 专享集群，其他集群类型均不支持该功能。
+     */
   async DescribeRocketMQNamespaces(
     req: DescribeRocketMQNamespacesRequest,
     cb?: (error: string, rep: DescribeRocketMQNamespacesResponse) => void
@@ -675,8 +681,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建RocketMQ消费组
-   */
+     * 创建 RocketMQ 消费组。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。创建 5.x 集群消费组的接口文档见 [CreateConsumerGroup](https://cloud.tencent.com/document/api/1493/97943)。
+     */
   async CreateRocketMQGroup(
     req: CreateRocketMQGroupRequest,
     cb?: (error: string, rep: CreateRocketMQGroupResponse) => void
@@ -736,8 +743,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新RocketMQ主题信息
-   */
+     * 修改 RocketMQ 主题属性。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。修改 5.x 集群主题属性的接口文档见 [ModifyTopic](https://cloud.tencent.com/document/api/1493/97944)。
+     */
   async ModifyRocketMQTopic(
     req: ModifyRocketMQTopicRequest,
     cb?: (error: string, rep: ModifyRocketMQTopicResponse) => void
@@ -756,8 +764,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * rocketmq 消息查询
-   */
+     * 查询 RocketMQ 消息列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的查询消息列表接口文档见 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593)。
+     */
   async DescribeRocketMQTopicMsgs(
     req: DescribeRocketMQTopicMsgsRequest,
     cb?: (error: string, rep: DescribeRocketMQTopicMsgsResponse) => void
@@ -806,8 +815,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除RocketMQ命名空间
-   */
+     * 删除 RocketMQ 命名空间。
+当前 API 适用集群：4.x 虚拟集群和 4.x 专享集群，其他集群类型均不支持该功能。
+     */
   async DeleteRocketMQNamespace(
     req: DeleteRocketMQNamespaceRequest,
     cb?: (error: string, rep: DeleteRocketMQNamespaceResponse) => void
@@ -856,8 +866,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新RocketMQ消费组信息
-   */
+     * 修改 RocketMQ 消费组属性。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。修改 5.x 集群消费组属性的接口文档见 [ModifyConsumerGroup](https://cloud.tencent.com/document/api/1493/97940)。
+     */
   async ModifyRocketMQGroup(
     req: ModifyRocketMQGroupRequest,
     cb?: (error: string, rep: ModifyRocketMQGroupResponse) => void
@@ -958,8 +969,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取在线消费端详情
-   */
+     * 查询 RocketMQ 消费者客户端详情。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的查询消费者客户端详情接口文档见 [DescribeConsumerClient](https://cloud.tencent.com/document/api/1493/115240)。
+     */
   async DescribeRocketMQConsumerConnectionDetail(
     req: DescribeRocketMQConsumerConnectionDetailRequest,
     cb?: (error: string, rep: DescribeRocketMQConsumerConnectionDetailResponse) => void
@@ -978,8 +990,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定消费组下订阅的主题列表
-   */
+     * 查询 RocketMQ 消费组订阅的主题列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群查询消费组订阅的主题列表接口文档见 [DescribeTopicListByGroup](https://cloud.tencent.com/document/api/1493/115314)。
+     */
   async DescribeRocketMQTopicsByGroup(
     req: DescribeRocketMQTopicsByGroupRequest,
     cb?: (error: string, rep: DescribeRocketMQTopicsByGroupResponse) => void
@@ -1122,8 +1135,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取RocketMQ消费组订阅关系数据
-   */
+     * 查询 RocketMQ 消费组订阅关系列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群查询消费组订阅的主题列表接口文档见 [DescribeTopicListByGroup](https://cloud.tencent.com/document/api/1493/115314)。
+     */
   async DescribeRocketMQSubscriptions(
     req: DescribeRocketMQSubscriptionsRequest,
     cb?: (error: string, rep: DescribeRocketMQSubscriptionsResponse) => void
@@ -1223,8 +1237,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除RocketMQ主题
-   */
+     * 删除 RocketMQ 主题。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。删除 5.x 集群主题的接口文档见 [DeleteTopic](https://cloud.tencent.com/document/api/1493/97946)。
+     */
   async DeleteRocketMQTopic(
     req: DeleteRocketMQTopicRequest,
     cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void
@@ -1233,8 +1248,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重发RocketMQ死信消息
-   */
+     * 重发 RocketMQ 死信消息。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的重发死信消息接口文档见 [ResendDeadLetterMessage](https://cloud.tencent.com/document/api/1493/114592)。
+     */
   async RetryRocketMQDlqMessage(
     req: RetryRocketMQDlqMessageRequest,
     cb?: (error: string, rep: RetryRocketMQDlqMessageResponse) => void
@@ -1365,8 +1381,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取RocketMQ消费组列表
-   */
+     * 查询 RocketMQ 消费组列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。查询 5.x 集群的消费组列表接口文档见 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535)。
+     */
   async DescribeRocketMQGroups(
     req: DescribeRocketMQGroupsRequest,
     cb?: (error: string, rep: DescribeRocketMQGroupsResponse) => void
@@ -1375,8 +1392,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建RocketMQ主题
-   */
+     * 批量创建 RocketMQ 主题。
+当前云 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的创建 Topic 接口文档见 [CreateTopic](https://cloud.tencent.com/document/api/1493/97947)。
+     */
   async CreateRocketMQTopic(
     req: CreateRocketMQTopicRequest,
     cb?: (error: string, rep: CreateRocketMQTopicResponse) => void
@@ -1396,8 +1414,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除RocketMQ集群
-   */
+     * 删除 RocketMQ 集群。
+当前 API 适用集群：4.x 虚拟集群。删除 4.x 专享或通用集群的接口文档见 [DeleteRocketMQVipInstance](https://cloud.tencent.com/document/api/1179/95802)，删除 5.x 集群的接口文档见 [DeleteInstance](https://cloud.tencent.com/document/product/1493/97867)。
+     */
   async DeleteRocketMQCluster(
     req: DeleteRocketMQClusterRequest,
     cb?: (error: string, rep: DeleteRocketMQClusterResponse) => void
@@ -1535,8 +1554,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 创建RocketMQ命名空间
-   */
+     * 创建 RocketMQ 命名空间。
+当前 API 适用集群：4.x 虚拟集群和 4.x 专享集群，其他集群类型均不支持该功能。
+     */
   async CreateRocketMQNamespace(
     req: CreateRocketMQNamespaceRequest,
     cb?: (error: string, rep: CreateRocketMQNamespaceResponse) => void
@@ -1555,8 +1575,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 创建RocketMQ主题
-   */
+     * 创建 RocketMQ 主题。
+当前云 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。5.x 集群的创建 Topic 接口文档见 [CreateTopic](https://cloud.tencent.com/document/api/1493/97947)。
+     */
   async CreateRocketMQTopicV2(
     req: CreateRocketMQTopicV2Request,
     cb?: (error: string, rep: CreateRocketMQTopicV2Response) => void
@@ -1595,8 +1616,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 获取RocketMQ主题列表
-   */
+     * 查询 RocketMQ 主题列表。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。查询 5.x 集群的主题列表接口文档见 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030)。
+     */
   async DescribeRocketMQTopics(
     req: DescribeRocketMQTopicsRequest,
     cb?: (error: string, rep: DescribeRocketMQTopicsResponse) => void
@@ -1676,8 +1698,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 更新RocketMQ命名空间
-   */
+     * 更新 RocketMQ 命名空间。
+当前 API 适用集群：4.x 虚拟集群和 4.x 专享集群，其他集群类型均不支持该功能。
+     */
   async ModifyRocketMQNamespace(
     req: ModifyRocketMQNamespaceRequest,
     cb?: (error: string, rep: ModifyRocketMQNamespaceResponse) => void
@@ -1726,8 +1749,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 此接口用于创建一个RocketMQ集群
-   */
+     * 创建 RocketMQ 集群。
+当前 API 适用集群：4.x 虚拟集群。创建 4.x 专享或通用集群的接口文档见 [CreateRocketMQVipInstance](https://cloud.tencent.com/document/api/1179/95721)，创建 5.x 集群接口文档见 [CreateInstance](https://cloud.tencent.com/document/api/1493/97868)。
+     */
   async CreateRocketMQCluster(
     req: CreateRocketMQClusterRequest,
     cb?: (error: string, rep: CreateRocketMQClusterResponse) => void
