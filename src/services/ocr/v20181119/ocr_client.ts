@@ -133,6 +133,7 @@ import {
   MixedInvoiceOCRResponse,
   ClassifyDetectOCRResponse,
   VinOCRRequest,
+  ExtractDocAgentResponse,
   OCRResult,
   VehicleLicenseOCRResponse,
   VatInvoiceOCRRequest,
@@ -311,6 +312,7 @@ import {
   QuestionBlockObj,
   Element,
   SubmitExtractDocAgentJobRequest,
+  ExtractDocAgentRequest,
   AdvertiseOCRResponse,
   ElectronicTollSummary,
   RecognizeTravelCardOCRResponse,
@@ -422,7 +424,7 @@ export class Client extends AbstractClient {
         </tr>
         <tr>
           <td>支持的语言</td>
-          <td>中文、英文、中英文、泰语、印尼语、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、哈萨克语</td>
+          <td>中文、英文、中英文、泰语、印尼语、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、哈萨克语、阿拉伯语、维吾尔语、藏语、捷克语、希腊语、西班牙语（智利）、西班牙语（墨西哥）、希伯来语、克罗地亚语、波兰语、葡萄牙语（巴西）、罗马尼亚语、斯洛伐克语、斯洛文尼亚语、土耳其语、保加利亚语、爱沙尼亚语、拉脱维亚语、立陶宛语</td>
           <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>  
         </tr>
         <tr>
@@ -466,7 +468,7 @@ export class Client extends AbstractClient {
   /**
      * 身份证识别（安全加密版）接口实现了数据加密传输，能够有效防止个人身份证隐私信息不被窃取泄露。
 
-本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
+本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别速度快、准确度高。
 
 另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
 
@@ -925,7 +927,12 @@ export class Client extends AbstractClient {
           <td> 25 </td>
         </tr>
         <tr>
-          <td> OtherInvoice </td>
+           <td> ElectronicTollSummary </td>
+          <td> 通行费电子票据汇总单 </td>
+          <td> 26 </td>
+        </tr>
+        <tr>
+           <td> OtherInvoice </td>
           <td> 其他发票 </td>
           <td> -1 </td>
         </tr>
@@ -1359,6 +1366,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于查询文档处理任务。文档处理领域里常见的通用Agent 如抽取、比对之类的，目前我们提供的抽取，但未来可以根据实际情况和客户需求扩展。
+   */
+  async ExtractDocAgent(
+    req: ExtractDocAgentRequest,
+    cb?: (error: string, rep: ExtractDocAgentResponse) => void
+  ): Promise<ExtractDocAgentResponse> {
+    return this.request("ExtractDocAgent", req, cb)
+  }
+
+  /**
      * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
 
 默认接口请求频率限制：10次/秒。
@@ -1768,9 +1785,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。
+     * <b>此接口不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/33526">通用印刷体识别</a>。</b>
 
-产品优势：针对广告商品图片普遍存在较多繁体字、艺术字的特点，进行了识别能力的增强。支持中英文、横排、竖排以及倾斜场景文字识别。文字识别的召回率和准确率能达到96%以上。
+支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。支持中英文、横排、竖排以及倾斜场景文字识别，支持90度、180度、270度翻转以及倾斜场景文字识别，具有较高召回率和准确率。
 
 默认接口请求频率限制：20次/秒。
      */

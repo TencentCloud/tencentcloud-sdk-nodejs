@@ -7553,10 +7553,12 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
 all：所有协议
 http：指定查询 HTTP 对应指标
 https：指定查询 HTTPS 对应指标
+quic：指定查询 QUIC 对应指标
    */
   Protocol?: string
   /**
-   * 指定数据源查询，白名单功能
+   * 指定数据源查询
+monitor：监控数据
    */
   DataSource?: string
   /**

@@ -221,9 +221,34 @@ export interface CbrPackageInfo {
 }
 
 /**
- * DescribeEnvLimit请求参数结构体
+ * 后付费计费详情
  */
-export type DescribeEnvLimitRequest = null
+export interface PostPaidEnvDeductInfo {
+  /**
+   * 资源方
+   */
+  ResourceType?: string
+  /**
+   * 指标名
+   */
+  MetricName?: string
+  /**
+   * 按量计费详情
+   */
+  ResQuota?: number
+  /**
+   * 资源包抵扣详情
+   */
+  PkgQuota?: number
+  /**
+   * 免费额度抵扣详情
+   */
+  FreeQuota?: number
+  /**
+   * 环境id
+   */
+  EnvId?: string
+}
 
 /**
  * DescribeEnvDealRegion返回参数结构体
@@ -312,60 +337,6 @@ export interface ModifyClsTopicResponse {
 }
 
 /**
- * 独立网关信息
- */
-export interface StandaloneGatewayInfo {
-  /**
-   * 独立网关名称
-   */
-  GatewayName: string
-  /**
-   * CPU核心数
-   */
-  CPU: number
-  /**
-   * 内存大小，单位MB
-   */
-  Mem: number
-  /**
-   * 套餐包版本名称
-   */
-  PackageVersion: string
-  /**
-   * 网关别名
-   */
-  GatewayAlias: string
-  /**
-   * 私有网络ID
-   */
-  VpcId: string
-  /**
-   * 子网ID列表
-   */
-  SubnetIds: Array<string>
-  /**
-   * 网关描述
-   */
-  GatewayDesc: string
-  /**
-   * 网关状态
-   */
-  GateWayStatus: string
-  /**
-   * 服务信息
-   */
-  ServiceInfo: BackendServiceInfo
-  /**
-   * 公网CLBIP
-   */
-  PublicClbIp: string
-  /**
-   * 内网CLBIP
-   */
-  InternalClbIp: string
-}
-
-/**
  * EditAuthConfig返回参数结构体
  */
 export interface EditAuthConfigResponse {
@@ -432,38 +403,6 @@ export interface CommonServiceAPIResponse {
 }
 
 /**
- * DescribeStandaloneGateway请求参数结构体
- */
-export interface DescribeStandaloneGatewayRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 网关名称
-   */
-  GatewayName?: string
-  /**
-   * 网关别名
-   */
-  GatewayAlias?: string
-}
-
-/**
- * DescribeStandaloneGatewayPackage请求参数结构体
- */
-export interface DescribeStandaloneGatewayPackageRequest {
-  /**
-   * 环境ID
-   */
-  EnvId?: string
-  /**
-   * 套餐版本，包含starter、basic、advanced、enterprise
-   */
-  PackageVersion?: string
-}
-
-/**
  * DescribeGraphData返回参数结构体
  */
 export interface DescribeGraphDataResponse {
@@ -512,20 +451,9 @@ export interface DescribePostpayPackageFreeQuotasRequest {
 }
 
 /**
- * DescribeEndUserLoginStatistic请求参数结构体
+ * DescribeEnvLimit请求参数结构体
  */
-export interface DescribeEndUserLoginStatisticRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
-  /**
-   * 终端用户来源
-<li> qcloud </li>
-<li>miniapp</li>
-   */
-  Source?: string
-}
+export type DescribeEnvLimitRequest = null
 
 /**
  * DescribeCloudBaseBuildService返回参数结构体
@@ -563,28 +491,6 @@ export interface DescribeCloudBaseBuildServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeEndUsers请求参数结构体
- */
-export interface DescribeEndUsersRequest {
-  /**
-   * 开发者的环境ID
-   */
-  EnvId: string
-  /**
-   * 可选参数，偏移量，默认 0
-   */
-  Offset?: number
-  /**
-   * 可选参数，拉取数量，默认 20
-   */
-  Limit?: number
-  /**
-   * 按照 uuid 列表过滤，最大个数为100
-   */
-  UUIds?: Array<string>
 }
 
 /**
@@ -677,24 +583,6 @@ export interface LogResObject {
    * 日志聚合结果
    */
   AnalysisRecords?: Array<string>
-}
-
-/**
- * DestroyStandaloneGateway请求参数结构体
- */
-export interface DestroyStandaloneGatewayRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 网名名称
-   */
-  GatewayName: string
-  /**
-   * 是否强制释放
-   */
-  IsForce: boolean
 }
 
 /**
@@ -858,24 +746,6 @@ export interface DescribeSpecialCostItemsRequest {
 }
 
 /**
- * TurnOnStandaloneGateway请求参数结构体
- */
-export interface TurnOnStandaloneGatewayRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 网关名称
-   */
-  GatewayName: string
-  /**
-   * 服务名称列表
-   */
-  ServiceNameList: Array<string>
-}
-
-/**
  * CreatePostpayPackage请求参数结构体
  */
 export interface CreatePostpayPackageRequest {
@@ -947,26 +817,6 @@ export interface DescribeWxCloudBaseRunSubNetsRequest {
    * 查询个数限制，不填或小于等于0，等于不限制
    */
   Limit?: number
-}
-
-/**
- * ModifyEndUser请求参数结构体
- */
-export interface ModifyEndUserRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * C端用户端的唯一ID
-   */
-  UUId: string
-  /**
-   * 账号的状态
-<li>ENABLE</li>
-<li>DISABLE</li>
-   */
-  Status?: string
 }
 
 /**
@@ -1182,24 +1032,6 @@ export interface ModifyClsTopicRequest {
 }
 
 /**
- * DescribeStandaloneGateway返回参数结构体
- */
-export interface DescribeStandaloneGatewayResponse {
-  /**
-   * 独立网关信息列表
-   */
-  StandaloneGatewayList: Array<StandaloneGatewayInfo>
-  /**
-   * 总数
-   */
-  Total: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeWxCloudBaseRunEnvs返回参数结构体
  */
 export interface DescribeWxCloudBaseRunEnvsResponse {
@@ -1313,17 +1145,21 @@ export interface CloudBaseRunVolumeMount {
 }
 
 /**
- * 网关服务信息
+ * CreatePostpayPackage返回参数结构体
  */
-export interface BackendServiceInfo {
+export interface CreatePostpayPackageResponse {
   /**
-   * 服务名称
+   * 后付费订单号
    */
-  ServiceName: string
+  TranId?: string
   /**
-   * 服务状态
+   * 环境ID
    */
-  Status: string
+  EnvId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1397,17 +1233,25 @@ export interface CloudBaseRunImageInfo {
 }
 
 /**
- * DestroyStandaloneGateway返回参数结构体
+ * ModifyDatabaseACL请求参数结构体
  */
-export interface DestroyStandaloneGatewayResponse {
+export interface ModifyDatabaseACLRequest {
   /**
-   * 删除独立网关状态
+   * 环境ID
    */
-  Status: string
+  EnvId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集合名称
    */
-  RequestId?: string
+  CollectionName: string
+  /**
+   * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+   */
+  AclTag: string
 }
 
 /**
@@ -1580,68 +1424,6 @@ export interface DescribeCloudBaseRunServerVersionResponse {
 }
 
 /**
- * 终端用户信息
- */
-export interface EndUserInfo {
-  /**
-   * 用户唯一ID
-   */
-  UUId?: string
-  /**
-   * 微信ID
-   */
-  WXOpenId?: string
-  /**
-   * qq ID
-   */
-  QQOpenId?: string
-  /**
-   * 手机号
-   */
-  Phone?: string
-  /**
-   * 邮箱
-   */
-  Email?: string
-  /**
-   * 昵称
-   */
-  NickName?: string
-  /**
-   * 性别
-   */
-  Gender?: string
-  /**
-   * 头像地址
-   */
-  AvatarUrl?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 是否为匿名用户
-   */
-  IsAnonymous?: boolean
-  /**
-   * 是否禁用账户
-   */
-  IsDisabled?: boolean
-  /**
-   * 是否设置过密码
-   */
-  HasPassword?: boolean
-  /**
-   * 用户名
-   */
-  UserName?: string
-}
-
-/**
  * DescribeGatewayVersions返回参数结构体
  */
 export interface DescribeGatewayVersionsResponse {
@@ -1682,17 +1464,13 @@ export interface DescribeGatewayVersionsRequest {
 }
 
 /**
- * DeleteEndUser请求参数结构体
+ * DescribeSmsQuotas请求参数结构体
  */
-export interface DeleteEndUserRequest {
+export interface DescribeSmsQuotasRequest {
   /**
    * 环境ID
    */
   EnvId: string
-  /**
-   * 用户列表，每一项都是uuid
-   */
-  UserList: Array<string>
 }
 
 /**
@@ -2180,28 +1958,6 @@ export interface CreateAuthDomainResponse {
 }
 
 /**
- * ModifyDatabaseACL请求参数结构体
- */
-export interface ModifyDatabaseACLRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 集合名称
-   */
-  CollectionName: string
-  /**
-   * 权限标签。包含以下取值：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-   */
-  AclTag: string
-}
-
-/**
  * DescribeEnvs请求参数结构体
  */
 export interface DescribeEnvsRequest {
@@ -2364,42 +2120,6 @@ export interface CloudBaseCapabilities {
 }
 
 /**
- * 仓库信息
- */
-export interface CbrRepoInfo {
-  /**
-   * 仓库名称
-   */
-  Repo?: string
-  /**
-   * 仓库平台
-   */
-  RepoType?: string
-  /**
-   * 仓库语言
-   */
-  RepoLanguage?: string
-  /**
-   * 分支名称
-   */
-  Branch?: string
-}
-
-/**
- * DescribeEndUserLoginStatistic返回参数结构体
- */
-export interface DescribeEndUserLoginStatisticResponse {
-  /**
-   * 环境终端用户新增与登录统计
-   */
-  LoginStatistics?: Array<LoginStatistic>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeExtensionUploadInfo请求参数结构体
  */
 export interface DescribeExtensionUploadInfoRequest {
@@ -2441,24 +2161,6 @@ export interface CreateCloudBaseRunResourceResponse {
    * 返回集群创建是否成功 succ为成功。并且中间无err
    */
   Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeStandaloneGatewayPackage返回参数结构体
- */
-export interface DescribeStandaloneGatewayPackageResponse {
-  /**
-   * 总数
-   */
-  Total: number
-  /**
-   * 套餐详情
-   */
-  StandaloneGatewayPackageList: Array<StandaloneGatewayPackageInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2510,9 +2212,41 @@ export interface DestroyStaticStoreResponse {
 }
 
 /**
- * DeleteEndUser返回参数结构体
+ * DescribeCloudBaseRunServer返回参数结构体
  */
-export interface DeleteEndUserResponse {
+export interface DescribeCloudBaseRunServerResponse {
+  /**
+   * 个数
+   */
+  TotalCount?: number
+  /**
+   * 版本列表
+   */
+  VersionItems?: Array<CloudBaseRunServerVersionItem>
+  /**
+   * 服务名称
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+   */
+  IsPublic?: boolean
+  /**
+   * 镜像仓库
+   */
+  ImageRepo?: string
+  /**
+   * 流量配置的类型（FLOW,URL_PARAMS)
+   */
+  TrafficType?: string
+  /**
+   * 服务创建类型，默认为空，一键部署为oneclick
+   */
+  SourceType?: string
+  /**
+   * 服务标签, function: 托管函数
+   */
+  Tag?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2561,36 +2295,6 @@ export interface CloudBaseEsInfo {
    * 密码
    */
   Password?: string
-}
-
-/**
- * 后付费计费详情
- */
-export interface PostPaidEnvDeductInfo {
-  /**
-   * 资源方
-   */
-  ResourceType?: string
-  /**
-   * 指标名
-   */
-  MetricName?: string
-  /**
-   * 按量计费详情
-   */
-  ResQuota?: number
-  /**
-   * 资源包抵扣详情
-   */
-  PkgQuota?: number
-  /**
-   * 免费额度抵扣详情
-   */
-  FreeQuota?: number
-  /**
-   * 环境id
-   */
-  EnvId?: string
 }
 
 /**
@@ -2943,20 +2647,6 @@ finished
 }
 
 /**
- * TurnOffStandaloneGateway返回参数结构体
- */
-export interface TurnOffStandaloneGatewayResponse {
-  /**
-   * 关闭独立网关状态
-   */
-  Status: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeEnvs返回参数结构体
  */
 export interface DescribeEnvsResponse {
@@ -3295,28 +2985,6 @@ export interface CreateCloudBaseRunServerVersionRequest {
 }
 
 /**
- * 终端用户登录新增统计
- */
-export interface LoginStatistic {
-  /**
-   * 统计类型 新增NEWUSER 和登录 LOGIN
-   */
-  StatisticalType?: string
-  /**
-   * 统计周期：日DAY，周WEEK，月MONTH
-   */
-  StatisticalCycle?: string
-  /**
-   * 统计总量
-   */
-  Count?: number
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-}
-
-/**
  * DescribeCloudBaseRunServerDomainName请求参数结构体
  */
 export interface DescribeCloudBaseRunServerDomainNameRequest {
@@ -3349,21 +3017,25 @@ export interface DescribeCloudBaseRunAllVpcsRequest {
 }
 
 /**
- * CreatePostpayPackage返回参数结构体
+ * 仓库信息
  */
-export interface CreatePostpayPackageResponse {
+export interface CbrRepoInfo {
   /**
-   * 后付费订单号
+   * 仓库名称
    */
-  TranId?: string
+  Repo?: string
   /**
-   * 环境ID
+   * 仓库平台
    */
-  EnvId?: string
+  RepoType?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 仓库语言
    */
-  RequestId?: string
+  RepoLanguage?: string
+  /**
+   * 分支名称
+   */
+  Branch?: string
 }
 
 /**
@@ -3417,21 +3089,21 @@ export interface DeleteWxGatewayRouteResponse {
 }
 
 /**
- * DescribeCloudBaseProjectVersionList返回参数结构体
+ * KV参数的优先级
  */
-export interface DescribeCloudBaseProjectVersionListResponse {
+export interface CloudBaseRunKVPriority {
   /**
-   * 版本列表
+   * 参数的Key
    */
-  ProjectVersions?: Array<CloudBaseProjectVersion>
+  Key?: string
   /**
-   * 总个数
+   * 参数的Value
    */
-  TotalCount?: number
+  Value?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 优先级
    */
-  RequestId?: string
+  Priority?: number
 }
 
 /**
@@ -3541,16 +3213,6 @@ export interface EstablishCloudBaseRunServerRequest {
 }
 
 /**
- * ReinstateEnv返回参数结构体
- */
-export interface ReinstateEnvResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 对标 EKS VolumeMount
  */
 export interface CloudBaseRunServiceVolumeMount {
@@ -3588,36 +3250,6 @@ export interface DescribeSpecialCostItemsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateStandaloneGateway请求参数结构体
- */
-export interface CreateStandaloneGatewayRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 网关名
-   */
-  GatewayAlias: string
-  /**
-   * 私有网络ID
-   */
-  VpcId: string
-  /**
-   * 子网ID
-   */
-  SubnetIds: Array<string>
-  /**
-   * 网关描述
-   */
-  GatewayDesc: string
-  /**
-   * 网关套餐版本
-   */
-  PackageVersion: string
 }
 
 /**
@@ -3669,21 +3301,21 @@ export interface DescribeWxGatewaysRequest {
 }
 
 /**
- * KV参数的优先级
+ * DescribeCloudBaseProjectVersionList返回参数结构体
  */
-export interface CloudBaseRunKVPriority {
+export interface DescribeCloudBaseProjectVersionListResponse {
   /**
-   * 参数的Key
+   * 版本列表
    */
-  Key?: string
+  ProjectVersions?: Array<CloudBaseProjectVersion>
   /**
-   * 参数的Value
+   * 总个数
    */
-  Value?: string
+  TotalCount?: number
   /**
-   * 优先级
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Priority?: number
+  RequestId?: string
 }
 
 /**
@@ -3697,13 +3329,13 @@ export interface DescribeDownloadFileRequest {
 }
 
 /**
- * DescribeEndUserStatistic请求参数结构体
+ * ReinstateEnv返回参数结构体
  */
-export interface DescribeEndUserStatisticRequest {
+export interface ReinstateEnvResponse {
   /**
-   * 环境id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
+  RequestId?: string
 }
 
 /**
@@ -4097,24 +3729,6 @@ export interface ExtensionFile {
 }
 
 /**
- * TurnOffStandaloneGateway请求参数结构体
- */
-export interface TurnOffStandaloneGatewayRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 网关名称
-   */
-  GatewayName: string
-  /**
-   * 服务名称列表
-   */
-  ServiceNameList: Array<string>
-}
-
-/**
  * DeleteGatewayVersion返回参数结构体
  */
 export interface DeleteGatewayVersionResponse {
@@ -4254,24 +3868,6 @@ export interface CloudBaseRunServerVersionItem {
 }
 
 /**
- * 终端用户平台统计信息
- */
-export interface PlatformStatistic {
-  /**
-   * 终端用户从属平台
-   */
-  Platform?: string
-  /**
-   * 平台终端用户数
-   */
-  Count?: number
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-}
-
-/**
  * DeleteCloudBaseProjectLatestVersion请求参数结构体
  */
 export interface DeleteCloudBaseProjectLatestVersionRequest {
@@ -4345,24 +3941,6 @@ export interface DescribeDownloadFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 小租户网关套餐配置
- */
-export interface StandaloneGatewayPackageInfo {
-  /**
-   * CPU核心数
-   */
-  CPU: number
-  /**
-   * 内存大小，单位MB
-   */
-  Mem: number
-  /**
-   * 套餐包版本名称
-   */
-  PackageVersion: string
 }
 
 /**
@@ -4683,20 +4261,6 @@ export interface DescribeCbrServerVersionResponse {
 }
 
 /**
- * CreateStandaloneGateway返回参数结构体
- */
-export interface CreateStandaloneGatewayResponse {
-  /**
-   * 网关名称
-   */
-  GatewayName: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeQuotaData请求参数结构体
  */
 export interface DescribeQuotaDataRequest {
@@ -5010,9 +4574,17 @@ export interface ActivityRecordItem {
    */
   Uin?: string
   /**
+   * 环境ID
+   */
+  EnvId?: string
+  /**
    * 活动id
    */
   ActivityId?: number
+  /**
+   * 活动名称（唯一英文标识）
+   */
+  ActivityName?: string
   /**
    * 自定义状态码
    */
@@ -5026,9 +4598,13 @@ export interface ActivityRecordItem {
    */
   SubStatusInt?: number
   /**
-   * 是否软删除
+   * 是否已删除
    */
   IsDeleted?: boolean
+  /**
+   * 活动参与时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -5144,24 +4720,6 @@ export interface FrequencyLimitConfig {
 }
 
 /**
- * DescribeEndUsers返回参数结构体
- */
-export interface DescribeEndUsersResponse {
-  /**
-   * 用户总数
-   */
-  Total?: number
-  /**
-   * 用户列表
-   */
-  Users?: Array<EndUserInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeHostingDomainTask返回参数结构体
  */
 export interface DescribeHostingDomainTaskResponse {
@@ -5257,24 +4815,6 @@ export interface EnvBillingInfoItem {
 }
 
 /**
- * DescribeEndUserStatistic返回参数结构体
- */
-export interface DescribeEndUserStatisticResponse {
-  /**
-   * 终端用户各平台统计
-   */
-  PlatformStatistics?: Array<PlatformStatistic>
-  /**
-   * 终端用户总数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 安全网关路由
  */
 export interface WxGatewayRountItem {
@@ -5346,16 +4886,6 @@ export interface WxGatewayRountItem {
    * 安全网关自定义头部
    */
   CustomHeader?: CustomHeader
-}
-
-/**
- * DescribeSmsQuotas请求参数结构体
- */
-export interface DescribeSmsQuotasRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
 }
 
 /**
@@ -5612,48 +5142,6 @@ export interface DescribeCloudBaseRunVersionRsByConditionRequest {
 }
 
 /**
- * DescribeCloudBaseRunServer返回参数结构体
- */
-export interface DescribeCloudBaseRunServerResponse {
-  /**
-   * 个数
-   */
-  TotalCount?: number
-  /**
-   * 版本列表
-   */
-  VersionItems?: Array<CloudBaseRunServerVersionItem>
-  /**
-   * 服务名称
-   */
-  ServerName?: string
-  /**
-   * 是否对于外网开放
-   */
-  IsPublic?: boolean
-  /**
-   * 镜像仓库
-   */
-  ImageRepo?: string
-  /**
-   * 流量配置的类型（FLOW,URL_PARAMS)
-   */
-  TrafficType?: string
-  /**
-   * 服务创建类型，默认为空，一键部署为oneclick
-   */
-  SourceType?: string
-  /**
-   * 服务标签, function: 托管函数
-   */
-  Tag?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeUserActivityInfo请求参数结构体
  */
 export interface DescribeUserActivityInfoRequest {
@@ -5753,16 +5241,6 @@ export interface CreateCloudBaseRunResourceRequest {
    * 子网ID列表，当VpcId不为空，SubnetIds也不能为空
    */
   SubnetIds?: Array<string>
-}
-
-/**
- * ModifyEndUser返回参数结构体
- */
-export interface ModifyEndUserResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6270,20 +5748,6 @@ export interface DescribeExtensionUploadInfoResponse {
    * 待上传文件的信息数组
    */
   FilesData?: Array<ExtensionFileInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * TurnOnStandaloneGateway返回参数结构体
- */
-export interface TurnOnStandaloneGatewayResponse {
-  /**
-   * 小租户网关开启状态
-   */
-  Status: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

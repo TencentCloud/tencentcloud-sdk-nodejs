@@ -1,29 +1,27 @@
-# Release 4.1.156
+# Release 4.1.157
 
-## TDSQL-C MySQL 版(cynosdb) 版本：2019-01-07
+## 腾讯混元生图(aiart) 版本：2022-12-29
 
-### 第 148 次发布
+### 第 25 次发布
 
-发布时间：2025-12-10 01:31:14
+发布时间：2025-12-23 11:08:13
 
 本次发布包含了以下内容：
 
 改善已有的文档。
 
-修改数据结构：
+新增接口：
 
-* [BinlogItem](https://cloud.tencent.com/document/api/1003/48097#BinlogItem)
-
-	* 新增成员：CrossRegions
-
+* [DescribeTemplateToImageJob](https://cloud.tencent.com/document/api/1668/126767)
+* [SubmitTemplateToImageJob](https://cloud.tencent.com/document/api/1668/126766)
 
 
 
-## 腾讯混元大模型(hunyuan) 版本：2023-09-01
+## 费用中心(billing) 版本：2018-07-09
 
-### 第 48 次发布
+### 第 80 次发布
 
-发布时间：2025-12-10 01:49:36
+发布时间：2025-12-24 01:14:03
 
 本次发布包含了以下内容：
 
@@ -31,90 +29,141 @@
 
 修改接口：
 
-* [ChatCompletions](https://cloud.tencent.com/document/api/1729/105701)
+* [DescribeAccountBalance](https://cloud.tencent.com/document/api/555/20253)
+
+	* 新增入参：TempCredit
+
+	* 新增出参：TempCredit, TempAmountInfoList
 
 
 新增数据结构：
 
-* [PromptTokensDetails](https://cloud.tencent.com/document/api/1729/101838#PromptTokensDetails)
+* [UinTempAmountModel](https://cloud.tencent.com/document/api/555/19183#UinTempAmountModel)
+
+
+
+## 数据湖计算 DLC(dlc) 版本：2021-01-25
+
+### 第 144 次发布
+
+发布时间：2025-12-24 01:36:51
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeNativeSparkSessions](https://cloud.tencent.com/document/api/1342/122148)
+
+	* 新增入参：ProjectId, UserUin
+
+
+
+
+## 腾讯云可观测平台(monitor) 版本：2023-06-16
+
+
+
+## 腾讯云可观测平台(monitor) 版本：2018-07-24
+
+### 第 146 次发布
+
+发布时间：2025-12-24 02:10:14
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeClusterAgentCreatingProgress](https://cloud.tencent.com/document/api/248/90977)
+
+	* 新增入参：InstanceId, ClusterIds
+
+	* 新增出参：Response
+
+
+新增数据结构：
+
+* [BindProgressResponse](https://cloud.tencent.com/document/api/248/30354#BindProgressResponse)
+* [BindProgressStep](https://cloud.tencent.com/document/api/248/30354#BindProgressStep)
+
+
+
+## 腾讯云数据库 AI 服务(tdai) 版本：2025-07-17
+
+### 第 8 次发布
+
+发布时间：2025-12-24 02:54:31
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeAgentDutyTaskDetail](https://cloud.tencent.com/document/api/1813/123267)
+
+	* 新增出参：AgentDutyTask
+
+
+新增数据结构：
+
+* [AgentDutyTask](https://cloud.tencent.com/document/api/1813/123239#AgentDutyTask)
+* [ExtraInfo](https://cloud.tencent.com/document/api/1813/123239#ExtraInfo)
+
+
+
+## 消息队列 TDMQ(tdmq) 版本：2020-02-17
+
+### 第 161 次发布
+
+发布时间：2025-12-24 02:55:53
+
+本次发布包含了以下内容：
+
+改善已有的文档。
 
 修改数据结构：
 
-* [Usage](https://cloud.tencent.com/document/api/1729/101838#Usage)
+* [RocketMQMessageTrack](https://cloud.tencent.com/document/api/1179/46089#RocketMQMessageTrack)
 
-	* 新增成员：PromptTokensDetails
+	* 新增成员：ConsumeStatusSource
 
+
+
+
+## 边缘安全加速平台(teo) 版本：2022-09-01
+
+### 第 130 次发布
+
+发布时间：2025-12-24 03:00:02
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribePrefetchOriginLimit](https://cloud.tencent.com/document/api/1552/126842)
+* [ModifyPrefetchOriginLimit](https://cloud.tencent.com/document/api/1552/126841)
+
+新增数据结构：
+
+* [PrefetchOriginLimit](https://cloud.tencent.com/document/api/1552/80721#PrefetchOriginLimit)
+
+
+
+## 边缘安全加速平台(teo) 版本：2022-01-06
 
 
 
 ## 消息队列 RocketMQ 版(trocket) 版本：2023-03-08
 
-### 第 48 次发布
+### 第 49 次发布
 
-发布时间：2025-12-10 03:10:46
-
-本次发布包含了以下内容：
-
-改善已有的文档。
-
-<font color="#dd0000">**预下线接口**：</font>
-
-* CreateMQTTInsPublicEndpoint
-* CreateMQTTInstance
-* CreateMQTTTopic
-* CreateMQTTUser
-* DeleteMQTTInsPublicEndpoint
-* DeleteMQTTInstance
-* DeleteMQTTTopic
-* DeleteMQTTUser
-* DescribeMQTTClient
-* DescribeMQTTInsPublicEndpoints
-* DescribeMQTTInsVPCEndpoints
-* DescribeMQTTInstance
-* DescribeMQTTInstanceCert
-* DescribeMQTTInstanceList
-* DescribeMQTTMessage
-* DescribeMQTTMessageList
-* DescribeMQTTProductSKUList
-* DescribeMQTTTopic
-* DescribeMQTTTopicList
-* DescribeMQTTUserList
-* ModifyMQTTInsPublicEndpoint
-* ModifyMQTTInstance
-* ModifyMQTTInstanceCertBinding
-* ModifyMQTTTopic
-* ModifyMQTTUser
-
-
-
-## 私有网络(vpc) 版本：2017-03-12
-
-### 第 281 次发布
-
-发布时间：2025-12-10 03:27:47
-
-本次发布包含了以下内容：
-
-改善已有的文档。
-
-修改数据结构：
-
-* [SecurityGroupPolicy](https://cloud.tencent.com/document/api/215/15824#SecurityGroupPolicy)
-
-	* 新增成员：Priority
-
-
-
-
-## 数据开发治理平台 WeData(wedata) 版本：2025-08-06
-
-
-
-## 数据开发治理平台 WeData(wedata) 版本：2021-08-20
-
-### 第 172 次发布
-
-发布时间：2025-12-10 03:38:55
+发布时间：2025-12-24 03:13:28
 
 本次发布包含了以下内容：
 
@@ -122,13 +171,16 @@
 
 修改接口：
 
-* [DescribeTestRunningRecord](https://cloud.tencent.com/document/api/1267/122750)
+* [ModifyConsumerGroup](https://cloud.tencent.com/document/api/1493/97940)
 
-	* 新增入参：StatusList, OrderConditionList
+	* <font color="#dd0000">**修改入参**：</font>ConsumeEnable, ConsumeMessageOrderly
 
-* [UpdateWorkflowInfo](https://cloud.tencent.com/document/api/1267/118382)
 
-	* 新增入参：DependencyWorkflow
+修改数据结构：
+
+* [MessageTrackItem](https://cloud.tencent.com/document/api/1493/96031#MessageTrackItem)
+
+	* 新增成员：ConsumeStatusSource
 
 
 

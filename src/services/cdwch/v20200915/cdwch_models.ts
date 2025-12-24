@@ -350,6 +350,14 @@ export interface CnInstanceInfo {
    * 无
    */
   Resources?: Array<CNResource>
+  /**
+   * desc
+   */
+  IsSecondaryZone?: string
+  /**
+   * desc
+   */
+  SecondaryZoneInfo?: string
 }
 
 /**
@@ -408,6 +416,10 @@ export interface CkUserAlterInfo {
    * 描述
    */
   Describe?: string
+  /**
+   * 账户的当前密码
+   */
+  OriginalPassword?: string
 }
 
 /**

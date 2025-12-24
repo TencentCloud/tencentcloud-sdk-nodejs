@@ -158,15 +158,15 @@ export interface DescribeAgentAuditedClientsRequest {
  */
 export interface DescribeRebateInfosNewRequest {
   /**
-   * 返佣月份，如2018-02
+   * <p>返佣月份，如2018-02</p>
    */
   RebateMonth?: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 限制数目
+   * <p>限制数目</p>
    */
   Limit?: number
 }
@@ -200,11 +200,11 @@ export interface DescribeClientJoinIncreaseListResponse {
  */
 export interface DescribeRebateInfosNewResponse {
   /**
-   * 返佣信息列表
+   * <p>返佣信息列表</p>
    */
   RebateInfoSet?: Array<RebateInfoElemNew>
   /**
-   * 符合查询条件返佣信息数目
+   * <p>符合查询条件返佣信息数目</p>
    */
   TotalCount?: number
   /**
@@ -262,11 +262,11 @@ export interface DescribeAgentClientGradeResponse {
  */
 export interface DescribeAgentDealsByCacheResponse {
   /**
-   * 订单数组
+   * <p>订单数组</p>
    */
   AgentDealSet?: Array<AgentDealNewElem>
   /**
-   * 符合条件的订单总数量
+   * <p>符合条件的订单总数量</p>
    */
   TotalCount?: number
   /**
@@ -393,11 +393,11 @@ export interface DescribeClientSwitchTraTaskInfoResponse {
  */
 export interface DescribeAgentPayDealsV2Response {
   /**
-   * 订单数组
+   * <p>订单数组</p>
    */
   AgentPayDealSet?: Array<AgentDealNewElem>
   /**
-   * 符合条件的订单总数量
+   * <p>符合条件的订单总数量</p>
    */
   TotalCount?: number
   /**
@@ -425,39 +425,39 @@ export interface AgentTransferMoneyRequest {
  */
 export interface DescribeAgentPayDealsV2Request {
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 限制数目 最大100
+   * <p>限制数目 最大100</p>
    */
   Limit: number
   /**
-   * 下单时间范围起始点(不传时会默认查最近15天内订单，传值时需要传最近15天内的起始时间)
+   * <p>下单时间范围起始点(不传时会默认查最近15天内订单，传值时需要传最近15天内的起始时间)</p>
    */
   CreatTimeRangeStart?: string
   /**
-   * 下单时间范围终止点
+   * <p>下单时间范围终止点</p>
    */
   CreatTimeRangeEnd?: string
   /**
-   * 0:下单时间降序；其他：下单时间升序
+   * <p>0:下单时间降序；其他：下单时间升序</p>
    */
   Order?: number
   /**
-   * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
+   * <p>订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)</p>
    */
   Status?: number
   /**
-   * 下单人账号ID列表
+   * <p>下单人账号ID列表</p>
    */
   OwnerUins?: Array<string>
   /**
-   * 子订单号列表
+   * <p>子订单号列表</p>
    */
   DealNames?: Array<string>
   /**
-   * 大订单号列表
+   * <p>大订单号列表</p>
    */
   BigDealIds?: Array<string>
 }
@@ -537,15 +537,15 @@ export interface DescribeClientJoinIncreaseListRequest {
  */
 export interface DescribeRebateInfosRequest {
   /**
-   * 返佣月份，如2018-02
+   * <p>返佣月份，如2018-02</p>
    */
   RebateMonth?: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 限制数目
+   * <p>限制数目</p>
    */
   Limit?: number
 }
@@ -831,39 +831,39 @@ export interface DescribeAgentRelateBigDealIdsResponse {
  */
 export interface DescribeAgentSelfPayDealsV2Request {
   /**
-   * 下单人账号ID
+   * <p>下单人账号ID</p>
    */
   OwnerUin: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 限制数目 最大100
+   * <p>限制数目 最大100</p>
    */
   Limit: number
   /**
-   * 下单时间范围起始点(不传时会默认查最近15天内订单，传值时需要传最近15天内的起始时间)
+   * <p>下单时间范围起始点(不传时会默认查最近15天内订单，传值时需要传最近15天内的起始时间)</p>
    */
   CreatTimeRangeStart?: string
   /**
-   * 下单时间范围终止点
+   * <p>下单时间范围终止点</p>
    */
   CreatTimeRangeEnd?: string
   /**
-   * 0:下单时间降序；其他：下单时间升序
+   * <p>0:下单时间降序；其他：下单时间升序</p>
    */
   Order?: number
   /**
-   * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
+   * <p>订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)</p>
    */
   Status?: number
   /**
-   * 子订单号列表
+   * <p>子订单号列表</p>
    */
   DealNames?: Array<string>
   /**
-   * 大订单号列表
+   * <p>大订单号列表</p>
    */
   BigDealIds?: Array<string>
 }
@@ -999,11 +999,11 @@ export interface DescribeUnbindClientListRequest {
  */
 export interface DescribeRebateInfosResponse {
   /**
-   * 返佣信息列表
+   * <p>返佣信息列表</p>
    */
   RebateInfoSet?: Array<RebateInfoElem>
   /**
-   * 符合查询条件返佣信息数目
+   * <p>符合查询条件返佣信息数目</p>
    */
   TotalCount?: number
   /**
@@ -1017,45 +1017,43 @@ export interface DescribeRebateInfosResponse {
  */
 export interface DescribeAgentDealsByCacheRequest {
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 限制数目 最大200
+   * <p>限制数目 最大200</p>
    */
   Limit: number
   /**
-   * 下单时间范围起始点【*请必传并控制时间范围最大90天，避免出现超时】
+   * <p>下单时间范围起始点【*请必传并控制时间范围最大90天，避免出现超时】</p>
    */
   CreatTimeRangeStart?: string
   /**
-   * 下单时间范围终止点【*请必传并控制时间范围最大90天，避免出现超时】
+   * <p>下单时间范围终止点【*请必传并控制时间范围最大90天，避免出现超时】</p>
    */
   CreatTimeRangeEnd?: string
   /**
-   * 0:下单时间降序；其他：下单时间升序
+   * <p>0:下单时间降序；其他：下单时间升序</p>
    */
   Order?: number
   /**
-   * 子订单状态(1-待支付,2-已支付,3-发货中,4-已发货,5-发货失败,6-已退款,7-已取消,8-已过期,9-已失效,12-支付中,13-退款中,30-处理中)
-
-控制台订单状态为以上状态的组合：未支付(1) 处理中(2,3,5,12,13,30) 已取消(7) 交易成功(4) 已过期(8) 已退款(6) 订单错误(9)
+   * <p>子订单状态(1-待支付,2-已支付,3-发货中,4-已发货,5-发货失败,6-已退款,7-已取消,8-已过期,9-已失效,12-支付中,13-退款中,30-处理中)</p><p>控制台订单状态为以上状态的组合：未支付(1) 处理中(2,3,5,12,13,30) 已取消(7) 交易成功(4) 已过期(8) 已退款(6) 订单错误(9)</p>
    */
   Status?: number
   /**
-   * 下单人账号ID列表
+   * <p>下单人账号ID列表</p>
    */
   OwnerUins?: Array<string>
   /**
-   * 子订单号列表
+   * <p>子订单号列表</p>
    */
   DealNames?: Array<string>
   /**
-   * 大订单号列表
+   * <p>大订单号列表</p>
    */
   BigDealIds?: Array<string>
   /**
-   * 支付方式，0：自付；1：代付
+   * <p>支付方式，0：自付；1：代付</p>
    */
   PayerMode?: number
 }
@@ -1135,11 +1133,11 @@ export interface DescribeUnbindClientListResponse {
  */
 export interface DescribeAgentSelfPayDealsV2Response {
   /**
-   * 订单数组
+   * <p>订单数组</p>
    */
   AgentPayDealSet?: Array<AgentDealNewElem>
   /**
-   * 符合条件的订单总数量
+   * <p>符合条件的订单总数量</p>
    */
   TotalCount?: number
   /**

@@ -108,12 +108,12 @@ import {
   ModifySecurityAPIResourceRequest,
   IPv6Parameters,
   CreateFunctionRequest,
-  SessionRateControl,
+  PrefetchOriginLimit,
   PostMaxSizeParameters,
   S3,
   DescribeDDoSAttackEventResponse,
   DescribeTimingL7OriginPullDataResponse,
-  DeleteL4ProxyRulesResponse,
+  DescribePrefetchTasksRequest,
   ForceRedirect,
   CodeAction,
   ZoneConfigParameters,
@@ -204,6 +204,7 @@ import {
   CreateL4ProxyRulesRequest,
   DescribeDDoSAttackTopDataResponse,
   SubRule,
+  ModifyPrefetchOriginLimitResponse,
   ModifyMultiPathGatewayRequest,
   LoadBalancer,
   CreateSecurityAPIServiceResponse,
@@ -574,7 +575,9 @@ import {
   ModifyZoneResponse,
   DeleteMultiPathGatewayLineResponse,
   ClientFiltering,
+  DescribePrefetchOriginLimitRequest,
   DescribeTopL7CacheDataRequest,
+  SessionRateControl,
   CreateLoadBalancerRequest,
   Https,
   DescribeOriginGroupHealthStatusRequest,
@@ -608,6 +611,7 @@ import {
   RefreshMultiPathGatewaySecretKeyRequest,
   CreateContentIdentifierRequest,
   OriginProtectionInfo,
+  ModifyPrefetchOriginLimitRequest,
   ModifyDnsRecordsStatusResponse,
   ModifySecurityJSInjectionRuleResponse,
   AliasDomain,
@@ -647,7 +651,7 @@ import {
   DescribeMultiPathGatewaySecretKeyRequest,
   DDoSBlockData,
   DescribeMultiPathGatewaysRequest,
-  DescribePrefetchTasksRequest,
+  DeleteL4ProxyRulesResponse,
   ModifyMultiPathGatewaySecretKeyRequest,
   DnsRecord,
   OriginPrivateParameters,
@@ -713,6 +717,7 @@ import {
   AiRule,
   Function,
   DescribeWebSecurityTemplatesResponse,
+  DescribePrefetchOriginLimitResponse,
   Quota,
   CheckCnameStatusRequest,
   CheckFreeCertificateVerificationRequest,
@@ -1507,6 +1512,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+     * 本接口用于配置回源限速限制，该功能白名单内测中。
+可通过此接口创建、修改与删除预热回源限速限制，每个账号最多支持 100 条限制。
+     */
+  async ModifyPrefetchOriginLimit(
+    req: ModifyPrefetchOriginLimitRequest,
+    cb?: (error: string, rep: ModifyPrefetchOriginLimitResponse) => void
+  ): Promise<ModifyPrefetchOriginLimitResponse> {
+    return this.request("ModifyPrefetchOriginLimit", req, cb)
+  }
+
+  /**
      * 创建别称域名。
 该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
      */
@@ -1784,6 +1800,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeApplicationProxiesResponse) => void
   ): Promise<DescribeApplicationProxiesResponse> {
     return this.request("DescribeApplicationProxies", req, cb)
+  }
+
+  /**
+   * 本接口用于查询回源限速限制，该功能白名单内测中。
+   */
+  async DescribePrefetchOriginLimit(
+    req: DescribePrefetchOriginLimitRequest,
+    cb?: (error: string, rep: DescribePrefetchOriginLimitResponse) => void
+  ): Promise<DescribePrefetchOriginLimitResponse> {
+    return this.request("DescribePrefetchOriginLimit", req, cb)
   }
 
   /**

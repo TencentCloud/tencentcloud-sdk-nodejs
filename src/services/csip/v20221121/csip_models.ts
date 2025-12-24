@@ -296,6 +296,20 @@ export interface DescribeVULRiskAdvanceCFGListResponse {
 }
 
 /**
+ * CSPM规范
+ */
+export interface StandardItem {
+  /**
+   * 规范ID
+   */
+  ID?: number
+  /**
+   * 规范名称
+   */
+  Name?: string
+}
+
+/**
  * 高危基线风险内容
  */
 export interface HighBaseLineRiskItem {
@@ -1460,6 +1474,10 @@ export interface DescribeCheckViewRisksResponse {
    */
   CheckViewRiskList?: Array<CheckViewRiskItem>
   /**
+   * 检查视角下cspm规范标签列表
+   */
+  StandardNameList?: Array<StandardItem>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2289,6 +2307,10 @@ export interface AssetRiskItem {
    * 处置分类
    */
   Classify?: string
+  /**
+   * 等保合规
+   */
+  StandardTerms?: Array<StandardTerm>
 }
 
 /**
@@ -3105,6 +3127,10 @@ export interface CheckViewRiskItem {
    * 处置分类
    */
   Classify?: string
+  /**
+   * cspm规范条款
+   */
+  StandardTerms?: Array<StandardTerm>
 }
 
 /**
@@ -4045,17 +4071,17 @@ export interface DescribeRiskCenterAssetViewPortRiskListRequest {
 }
 
 /**
- * StopRiskCenterTask返回参数结构体
+ * CSPM条款
  */
-export interface StopRiskCenterTaskResponse {
+export interface StandardTerm {
   /**
-   * Status为0， 停止成功
+   * 标签
    */
-  Status?: number
+  Tag?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 条款
    */
-  RequestId?: string
+  Terms?: Array<string>
 }
 
 /**
@@ -5472,6 +5498,10 @@ export interface DescribeAssetRiskListResponse {
    * 资产视角下风险列表
    */
   AssetRiskList?: Array<AssetRiskItem>
+  /**
+   * 等保规范名称集合
+   */
+  StandardNameList?: Array<StandardItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7997,6 +8027,20 @@ export interface DescribeExposeAssetCategoryResponse {
 export interface AddNewBindRoleUserResponse {
   /**
    * 0成功，其他失败
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopRiskCenterTask返回参数结构体
+ */
+export interface StopRiskCenterTaskResponse {
+  /**
+   * Status为0， 停止成功
    */
   Status?: number
   /**

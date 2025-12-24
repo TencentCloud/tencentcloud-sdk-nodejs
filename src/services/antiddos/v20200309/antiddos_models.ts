@@ -91,6 +91,46 @@ export interface ModifyNewDomainRulesRequest {
 }
 
 /**
+ * {
+    "Region": "ap-guangzhou",
+    "ProtectCount": "TWO_TIMES",
+    "ProtectIpCount": 1,
+    "Bandwidth": 50,
+    "ElasticBandwidthFlag": true
+}
+ */
+export interface StandardPlusPackageConfig {
+  /**
+   * 购买高防包所属地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region: string
+  /**
+   * 防护次数：TWO_TIMES:两次全力防 UNLIMITED无限次防
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtectCount: string
+  /**
+   * 防护IP数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtectIpCount: number
+  /**
+   * 防护带宽50Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bandwidth: number
+  /**
+   * 是否开启弹性业务带宽
+true 开启
+false 不开启 
+默认不开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticBandwidthFlag?: boolean
+}
+
+/**
  * 特征过滤配置
  */
 export interface PacketFilterConfig {
@@ -427,24 +467,76 @@ export interface CreateBlackWhiteIpListResponse {
 }
 
 /**
- * 单IP告警阈值配置
+ * {
+    "InstanceId": "bgp-00000436",
+    "InstanceChargePrepaid": {
+        "Period": 3,
+        "RenewFlag": "NOTIFY_AND_AUTO_RENEW"
+    },
+    "EnterprisePackageConfig": null,
+    "StandardPackageConfig": null,
+    "StandardPlusPackageConfig": {
+        "Region": "ap-guangzhou",
+        "ProtectCount": "TWO_TIMES",
+        "ProtectIpCount": 1,
+        "Bandwidth": 100,
+        "ElasticBandwidthFlag": true
+    },
+    "TagInfoList": [
+    ],
+    "PackageType": "StandardPlus",
+    "InstanceCount": 1,
+    "InstanceChargeType": "PREPAID",
+    "DryRun": false
+}
  */
-export interface IPAlarmThresholdRelation {
+export interface BGPInstanceInfo {
   /**
-   * 告警阈值类型，取值[
-1(入流量告警阈值)
-2(攻击清洗流量告警阈值)
-]
+   * 实例Id
    */
-  AlarmType: number
+  InstanceId?: string
   /**
-   * 告警阈值，单位Mbps，取值>=0；当作为输入参数时，设置0会删除告警阈值配置；
+   * 续费周期相关
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmThreshold: number
+  InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 告警阈值所属的资源实例
+   * 企业版高防包配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceDetailList: Array<InstanceRelation>
+  EnterprisePackageConfig?: EnterprisePackageConfig
+  /**
+   * 标准版高防包配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StandardPackageConfig?: StandardPackageConfig
+  /**
+   * 标准版2.0高防包配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StandardPlusPackageConfig?: StandardPlusPackageConfig
+  /**
+   * tag信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagInfoList?: Array<TagInfo>
+  /**
+   * 高防包类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 数量1
+   */
+  InstanceCount?: number
+  /**
+   * 付费方式
+   */
+  InstanceChargeType?: string
+  /**
+   * 无实际意义，创建时如果为true，只进行参数校验，默认为false
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -462,17 +554,29 @@ export interface DeleteCCRequestLimitPolicyRequest {
 }
 
 /**
- * DescribeL7RulesBySSLCertId返回参数结构体
+ * DescribeBgpInstances请求参数结构体
  */
-export interface DescribeL7RulesBySSLCertIdResponse {
+export interface DescribeBgpInstancesRequest {
   /**
-   * 证书规则集合
+   * 地域
    */
-  CertSet?: Array<CertIdInsL7Rules>
+  FilterRegion: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * ["bgp-0000041i"]
    */
-  RequestId?: string
+  FilterInstanceIdList?: Array<string>
+  /**
+   * [{}]
+   */
+  FilterTag?: Array<TagInfo>
+  /**
+   * 分页数量
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
 }
 
 /**
@@ -919,6 +1023,114 @@ off(关闭)
 }
 
 /**
+ * 操作返回码，只用于返回成功的情况
+ */
+export interface SuccessCode {
+  /**
+   * 描述
+   */
+  Message?: string
+  /**
+   * 成功/错误码
+   */
+  Code?: string
+}
+
+/**
+ * 防护阈值配置相关信息
+ */
+export interface ProtectThresholdRelationNew {
+  /**
+   * DDoS防护等级，取值[
+low(宽松)
+middle(适中)
+high(严格)
+]
+   */
+  DDoSLevel: string
+  /**
+   * DDoS清洗阈值，单位Mbps
+   */
+  DDoSThreshold: number
+  /**
+   * DDoS的AI防护开关，取值[
+on(开启)
+off(关闭)
+]
+   */
+  DDoSAI: string
+  /**
+   * CC清洗开关，取值[
+0(关闭)
+1(开启)
+]
+   */
+  CCEnable: number
+  /**
+   * CC清洗阈值，单位QPS
+   */
+  CCThreshold: number
+  /**
+   * 所属的资源实例
+   */
+  InstanceDetailList: Array<InstanceRelation>
+  /**
+   * 域名与协议纬度的防护阈值
+   */
+  ListenerCcThresholdList: Array<ListenerCcThresholdConfig>
+  /**
+   * SYN FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SynFloodThreshold: number
+  /**
+   * SYN FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SynFloodPktThreshold: number
+  /**
+   * UDP FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UdpFloodThreshold: number
+  /**
+   * UDP FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UdpFloodPktThreshold: number
+  /**
+   * ACK FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AckFloodThreshold: number
+  /**
+   * ACK FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AckFloodPktThreshold: number
+  /**
+   * SYNACK FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SynAckFloodThreshold: number
+  /**
+   * SYNACK FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SynAckFloodPktThreshold: number
+  /**
+   * RST FLOOD流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RstFloodThreshold: number
+  /**
+   * RST FLOOD包量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RstFloodPktThreshold: number
+}
+
+/**
  * DescribeListWaterPrintConfig返回参数结构体
  */
 export interface DescribeListWaterPrintConfigResponse {
@@ -1085,9 +1297,21 @@ export interface L7RuleHealth {
 }
 
 /**
- * ModifyPacketFilterConfig返回参数结构体
+ * DescribeBizMonitorTrend返回参数结构体
  */
-export interface ModifyPacketFilterConfigResponse {
+export interface DescribeBizMonitorTrendResponse {
+  /**
+   * 曲线图各个时间点的值
+   */
+  DataList?: Array<number>
+  /**
+   * 统计纬度
+   */
+  MetricName?: string
+  /**
+   * 返回DataList中的最大值
+   */
+  MaxData?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1373,17 +1597,17 @@ export interface DescribeL7RulesBySSLCertIdRequest {
 }
 
 /**
- * 标签类型
+ * CreateBgpInstance返回参数结构体
  */
-export interface TagFilter {
+export interface CreateBgpInstanceResponse {
   /**
-   * 标签键
+   * bgpIds
    */
-  TagKey: string
+  ResourceIds?: Array<string>
   /**
-   * 标签键值列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TagValue: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1492,6 +1716,20 @@ export interface BoundIpInfo {
    * 域名化资产对应的域名
    */
   Domain?: string
+}
+
+/**
+ * DescribeL7RulesBySSLCertId返回参数结构体
+ */
+export interface DescribeL7RulesBySSLCertIdResponse {
+  /**
+   * 证书规则集合
+   */
+  CertSet?: Array<CertIdInsL7Rules>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1831,6 +2069,23 @@ export interface SwitchWaterPrintConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 套餐包信息
+ */
+export interface PackInfo {
+  /**
+   * 套餐包的类型，取值[
+staticpack：高防IP三网套餐包
+insurance：保险套餐包
+]
+   */
+  PackType: string
+  /**
+   * 套餐包的ID
+   */
+  PackId: string
 }
 
 /**
@@ -2286,6 +2541,28 @@ export interface CreateDDoSSpeedLimitConfigRequest {
 }
 
 /**
+ * 域名与协议纬度的CC防护阈值
+ */
+export interface ListenerCcThresholdConfig {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 协议（可取值https）
+   */
+  Protocol: string
+  /**
+   * 开关状态（0：关闭，1：开启）
+   */
+  CCEnable: number
+  /**
+   * cc防护阈值
+   */
+  CCThreshold: number
+}
+
+/**
  * CreateDDoSGeoIPBlockConfig请求参数结构体
  */
 export interface CreateDDoSGeoIPBlockConfigRequest {
@@ -2328,17 +2605,33 @@ export interface DeleteWaterPrintKeyRequest {
 }
 
 /**
- * 操作返回码，只用于返回成功的情况
+ * DescribeListProtectThresholdConfigNew请求参数结构体
  */
-export interface SuccessCode {
+export interface DescribeListProtectThresholdConfigNewRequest {
   /**
-   * 描述
+   * 页起始偏移，取值为(页码-1)*一页条数
    */
-  Message?: string
+  Offset: number
   /**
-   * 成功/错误码
+   * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
    */
-  Code?: string
+  Limit: number
+  /**
+   * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
+   */
+  FilterInstanceId: string
+  /**
+   * IP搜索
+   */
+  FilterIp?: string
+  /**
+   * 域名搜索，查询域名与协议的CC防护阈值时使用
+   */
+  FilterDomain?: string
+  /**
+   * 协议搜索，查询域名与协议的CC防护阈值时使用
+   */
+  FilterProtocol?: string
 }
 
 /**
@@ -2413,6 +2706,56 @@ export interface CreateCcGeoIPBlockConfigRequest {
    * CC区域封禁配置
    */
   CcGeoIPBlockConfig: CcGeoIPBlockConfig
+}
+
+/**
+ * DescribeListProtectThresholdConfigNew返回参数结构体
+ */
+export interface DescribeListProtectThresholdConfigNewResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 防护阈值配置列表
+   */
+  ConfigList?: Array<ProtectThresholdRelationNew>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * {
+    "Region": "ap-guangzhou",
+    "ProtectIpCount": 1,
+    "Bandwidth": 100,
+    "ElasticBandwidthFlag": true
+}
+ */
+export interface StandardPackageConfig {
+  /**
+   * 高防包购买地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region: string
+  /**
+   * 防护IP数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtectIpCount: number
+  /**
+   * 防护业务带宽 50Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bandwidth: number
+  /**
+   * 是否开启弹性防护带宽 true 开启 
+默认为false 不开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticBandwidthFlag?: boolean
 }
 
 /**
@@ -2621,6 +2964,27 @@ export interface ProtocolBlockConfig {
    * tear drop防护，取值[0(防护关)，1(防护开)]
    */
   TearDrop?: number
+}
+
+/**
+ * 单IP告警阈值配置
+ */
+export interface IPAlarmThresholdRelation {
+  /**
+   * 告警阈值类型，取值[
+1(入流量告警阈值)
+2(攻击清洗流量告警阈值)
+]
+   */
+  AlarmType: number
+  /**
+   * 告警阈值，单位Mbps，取值>=0；当作为输入参数时，设置0会删除告警阈值配置；
+   */
+  AlarmThreshold: number
+  /**
+   * 告警阈值所属的资源实例
+   */
+  InstanceDetailList: Array<InstanceRelation>
 }
 
 /**
@@ -2877,6 +3241,54 @@ export interface CreateIPAlarmThresholdConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBizTrend请求参数结构体
+ */
+export interface DescribeBizTrendRequest {
+  /**
+   * 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max
+   */
+  Statistics: string
+  /**
+   * DDoS防护子产品代号（bgpip表示高防IP）
+   */
+  Business: string
+  /**
+   * 统计周期，可取值60，300，1800，3600，21600，86400，单位秒
+   */
+  Period: number
+  /**
+   * 统计开始时间。 例：“2020-09-22 00:00:00”
+   */
+  StartTime: string
+  /**
+   * 统计结束时间。 例：“2020-09-22 00:00:00”
+   */
+  EndTime: string
+  /**
+   * 资源实例ID
+   */
+  Id: string
+  /**
+   * 统计纬度，可取值connum, new_conn, inactive_conn, intraffic, outtraffic, inpkg, outpkg, qps
+   */
+  MetricName: string
+  /**
+   * 统计纬度为qps时，可选特定域名查询
+   */
+  Domain?: string
+  /**
+   * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+   */
+  ProtoInfo?: Array<ProtocolPort>
+  /**
+   * 业务类型：</br>
+port：端口业务
+domain：域名业务
+   */
+  BusinessType?: string
 }
 
 /**
@@ -3179,20 +3591,13 @@ export interface DeleteDDoSBlackWhiteIpListRequest {
 }
 
 /**
- * 套餐包信息
+ * ModifyPacketFilterConfig返回参数结构体
  */
-export interface PackInfo {
+export interface ModifyPacketFilterConfigResponse {
   /**
-   * 套餐包的类型，取值[
-staticpack：高防IP三网套餐包
-insurance：保险套餐包
-]
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PackType: string
-  /**
-   * 套餐包的ID
-   */
-  PackId: string
+  RequestId?: string
 }
 
 /**
@@ -5032,11 +5437,11 @@ export interface DescribeListBGPInstancesResponse {
  */
 export interface TagInfo {
   /**
-   * 标签键
+   * 标签键。
    */
   TagKey: string
   /**
-   * 标签值
+   * 标签值。
    */
   TagValue: string
 }
@@ -5238,21 +5643,17 @@ export interface BGPInstance {
 }
 
 /**
- * DescribeBizMonitorTrend返回参数结构体
+ * DescribeBgpInstances返回参数结构体
  */
-export interface DescribeBizMonitorTrendResponse {
+export interface DescribeBgpInstancesResponse {
   /**
-   * 曲线图各个时间点的值
+   * 返回数量
    */
-  DataList?: Array<number>
+  Total?: number
   /**
-   * 统计纬度
+   * 返回购买高防包信息
    */
-  MetricName?: string
-  /**
-   * 返回DataList中的最大值
-   */
-  MaxData?: number
+  BGPInstanceList?: Array<BGPInstanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5318,51 +5719,45 @@ export interface DescribeCCPrecisionPlyListResponse {
 }
 
 /**
- * DescribeBizTrend请求参数结构体
+ * CreateBgpInstance请求参数结构体
  */
-export interface DescribeBizTrendRequest {
+export interface CreateBgpInstanceRequest {
   /**
-   * 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max
+   * 付费类型：付费模式：PREPAID 预付费 POSTPAID_BY_MONTH 后付费
    */
-  Statistics: string
+  InstanceChargeType: string
   /**
-   * DDoS防护子产品代号（bgpip表示高防IP）
+   * 高防包类型：高防包类型，Enterprise(企业版) Standard(标准版) StandardPlus(标准版2.0)
    */
-  Business: string
+  PackageType: string
   /**
-   * 统计周期，可取值60，300，1800，3600，21600，86400，单位秒
+   * 购买高防包的数量，一次购买数量不超过10
    */
-  Period: number
+  InstanceCount: number
   /**
-   * 统计开始时间。 例：“2020-09-22 00:00:00”
+   * { "Period": 3, "RenewFlag": "NOTIFY_AND_AUTO_RENEW" }
    */
-  StartTime: string
+  InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 统计结束时间。 例：“2020-09-22 00:00:00”
+   * { "Region": "ap-guangzhou", "ProtectIpCount": 1, "BasicProtectBandwidth": 300, "Bandwidth": 100, "ElasticProtectLimit": 0, "ElasticBandwidthFlag": true }
    */
-  EndTime: string
+  EnterprisePackageConfig?: EnterprisePackageConfig
   /**
-   * 资源实例ID
+   * { "Region": "ap-guangzhou", "ProtectIpCount": 1, "BasicProtectBandwidth": 300, "Bandwidth": 100, "ElasticProtectLimit": 0, "ElasticBandwidthFlag": true }
    */
-  Id: string
+  StandardPackageConfig?: StandardPackageConfig
   /**
-   * 统计纬度，可取值connum, new_conn, inactive_conn, intraffic, outtraffic, inpkg, outpkg, qps
+   * { "Region": "ap-guangzhou", "ProtectCount": "TWO_TIMES", "ProtectIpCount": 1, "Bandwidth": 100, "ElasticBandwidthFlag": true }
    */
-  MetricName: string
+  StandardPlusPackageConfig?: StandardPlusPackageConfig
   /**
-   * 统计纬度为qps时，可选特定域名查询
+   * [ { "TagKey": "beal-test",                 "TagValue": "beal-test"               }             ]
    */
-  Domain?: string
+  TagInfoList?: Array<TagInfo>
   /**
-   * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+   * 默认为false,true表示只进行参数校验，不进行实际购买
    */
-  ProtoInfo?: Array<ProtocolPort>
-  /**
-   * 业务类型：</br>
-port：端口业务
-domain：域名业务
-   */
-  BusinessType?: string
+  DryRun?: boolean
 }
 
 /**
@@ -5461,6 +5856,20 @@ export interface DescribeOverviewDDoSTrendResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签类型
+ */
+export interface TagFilter {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签键值列表
+   */
+  TagValue: Array<string>
 }
 
 /**
@@ -5630,6 +6039,63 @@ export interface CreateWaterPrintKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * {
+    "Region": "ap-guangzhou",
+    "ProtectIpCount": 1,
+    "BasicProtectBandwidth": 300,
+    "Bandwidth": 100,
+    "ElasticProtectBandwidth": 0,
+    "ElasticBandwidthFlag": true
+}
+ */
+export interface EnterprisePackageConfig {
+  /**
+   * 购买高防包所属地域
+   */
+  Region: string
+  /**
+   * 防护IP数
+   */
+  ProtectIpCount: number
+  /**
+   * 保底防护带宽
+   */
+  BasicProtectBandwidth: number
+  /**
+   * 业务带宽规模
+   */
+  Bandwidth: number
+  /**
+   * 弹性带宽 Gbps，可选择的弹性带宽[0,400,500,600,800,1000]
+默认为0
+   */
+  ElasticProtectBandwidth?: number
+  /**
+   * 是否开启弹性业务带宽
+默认为false
+   */
+  ElasticBandwidthFlag?: boolean
+}
+
+/**
+ * 四七层规则对应实例与IP的关系
+ */
+export interface RuleInstanceRelation {
+  /**
+   * 资源实例的IP
+   */
+  EipList?: Array<string>
+  /**
+   * 资源实例的ID
+   */
+  InstanceId?: string
+  /**
+   * 资源实例的Cname
+   */
+  Cname?: string
 }
 
 /**
@@ -5917,21 +6383,25 @@ export interface PacketFilterRelation {
 }
 
 /**
- * 四七层规则对应实例与IP的关系
+ * { 
+        "Period": 12,
+        "RenewFlag": "NOTIFY_AND_AUTO_RENEW"
+}
  */
-export interface RuleInstanceRelation {
+export interface InstanceChargePrepaid {
   /**
-   * 资源实例的IP
+   * 购买时长：单位月
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EipList?: Array<string>
+  Period?: number
   /**
-   * 资源实例的ID
+   * NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+NOTIFY_AND_AUTO_RENEW：到期通知且自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+默认为：通知过期不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId?: string
-  /**
-   * 资源实例的Cname
-   */
-  Cname?: string
+  RenewFlag?: string
 }
 
 /**

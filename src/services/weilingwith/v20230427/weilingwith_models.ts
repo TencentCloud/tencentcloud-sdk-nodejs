@@ -1139,40 +1139,6 @@ export interface ElementProfileTreeNode {
 }
 
 /**
- * 工作空间信息描述
- */
-export interface WorkspaceInfo {
-  /**
-   * 工作空间Id
-   */
-  WorkspaceId?: number
-  /**
-   * 工作空间中文名字
-   */
-  ChineseName?: string
-  /**
-   * 工作空间描述
-   */
-  Description?: string
-  /**
-   * 工作空间是否删除状态
-   */
-  Status?: number
-  /**
-   * 该工作空间绑定的区/县的行政区名字
-   */
-  ParkName?: string
-  /**
-   * 该工作空间绑定的区/县的行政区编码
-   */
-  ParkNum?: string
-  /**
-   * 获取该工作空间绑定的区/县的上级行政区划信息
-   */
-  AdministrativeDetailSet?: Array<AdministrativeDetail>
-}
-
-/**
  * DescribeSceneList请求参数结构体
  */
 export interface DescribeSceneListRequest {
@@ -1430,24 +1396,6 @@ export interface DescribeSpaceDeviceRelationListRequest {
    * 应用token
    */
   ApplicationToken: string
-}
-
-/**
- * 获取文件上传URL接口回包
- */
-export interface FileUploadURL {
-  /**
-   * 上传地址
-   */
-  UploadURL?: string
-  /**
-   * 文件Id
-   */
-  FileId?: string
-  /**
-   * 下载地址
-   */
-  DownloadURL?: string
 }
 
 /**
@@ -2196,6 +2144,10 @@ export interface RecordInfo {
  */
 export interface DescribeVideoRecordStreamResponse {
   /**
+   * 获取历史流结果
+   */
+  Result?: VideoRecordStreamRes
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2462,21 +2414,21 @@ export interface SsoUser {
 }
 
 /**
- * 行政区划详情
+ * 获取文件上传URL接口回包
  */
-export interface AdministrativeDetail {
+export interface FileUploadURL {
   /**
-   * 行政区域类型编码
+   * 上传地址
    */
-  AdministrativeTypeCode?: string
+  UploadURL?: string
   /**
-   * 行政区域编码
+   * 文件Id
    */
-  AdministrativeCode?: string
+  FileId?: string
   /**
-   * 行政区域名称
+   * 下载地址
    */
-  AdministrativeName?: string
+  DownloadURL?: string
 }
 
 /**
@@ -2722,13 +2674,33 @@ export interface SpaceDataTotalStatsRes {
 }
 
 /**
- * 通过城市id查询工作空间列表
+ * 设备类型概览信息
  */
-export interface DescribeCityWorkspaceListRes {
+export interface DeviceTypeOverview {
   /**
-   * 通过城市id查询工作空间列表结果
+   * 设备类型值
    */
-  WorkspaceSet?: Array<WorkspaceInfo>
+  DeviceType?: string
+  /**
+   * 设备类型名称
+   */
+  Name?: string
+  /**
+   * 汇总数。在线（正常+故障） + 离线
+   */
+  Total?: number
+  /**
+   * 正常数
+   */
+  Normal?: number
+  /**
+   * 离线数
+   */
+  Offline?: number
+  /**
+   * 故障数
+   */
+  Fault?: number
 }
 
 /**
@@ -3257,20 +3229,6 @@ export interface DescribeAdministrationByTagRes {
 }
 
 /**
- * DescribeCityWorkspaceList请求参数结构体
- */
-export interface DescribeCityWorkspaceListRequest {
-  /**
-   * 行政区编码集合
-   */
-  AdministrativeCodeSet: Array<string>
-  /**
-   * 应用token
-   */
-  ApplicationToken: string
-}
-
-/**
  * UpdateWorkspaceParkAttributes返回参数结构体
  */
 export interface UpdateWorkspaceParkAttributesResponse {
@@ -3303,18 +3261,21 @@ export interface DeleteDeviceGroupRequest {
 }
 
 /**
- * DescribeCityWorkspaceList返回参数结构体
+ * DescribeSpaceInfoByDeviceId请求参数结构体
  */
-export interface DescribeCityWorkspaceListResponse {
+export interface DescribeSpaceInfoByDeviceIdRequest {
   /**
-   * 工作空间信息集合
-注意：此字段可能返回 null，表示取不到有效值。
+   * 设备id
    */
-  Result?: DescribeCityWorkspaceListRes
+  DeviceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 项目空间id
    */
-  RequestId?: string
+  WorkspaceId: string
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
 }
 
 /**
@@ -4214,36 +4175,6 @@ export interface DescribeInterfaceListRequest {
    * 接口分类0. 其他服务 1. IOT服务 2. 空间服务 3.微应用服务 4.场景服务 5.AI算法服务 6.任务算法服务 7.第三方服务 8.3DTiles服务
    */
   Type?: Array<number | bigint>
-}
-
-/**
- * 设备类型概览信息
- */
-export interface DeviceTypeOverview {
-  /**
-   * 设备类型值
-   */
-  DeviceType?: string
-  /**
-   * 设备类型名称
-   */
-  Name?: string
-  /**
-   * 汇总数。在线（正常+故障） + 离线
-   */
-  Total?: number
-  /**
-   * 正常数
-   */
-  Normal?: number
-  /**
-   * 离线数
-   */
-  Offline?: number
-  /**
-   * 故障数
-   */
-  Fault?: number
 }
 
 /**
@@ -5293,24 +5224,6 @@ export interface DescribeCameraExtendInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeSpaceInfoByDeviceId请求参数结构体
- */
-export interface DescribeSpaceInfoByDeviceIdRequest {
-  /**
-   * 设备id
-   */
-  DeviceId: string
-  /**
-   * 项目空间id
-   */
-  WorkspaceId: string
-  /**
-   * 应用token
-   */
-  ApplicationToken: string
 }
 
 /**

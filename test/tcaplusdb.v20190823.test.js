@@ -128,16 +128,6 @@ it("tcaplusdb.v20190823.DisableRestProxy", async function () {
     }
 })
 
-it("tcaplusdb.v20190823.RollbackTables", async function () {
-    try {
-       const data = await client.RollbackTables({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcaplusdb.v20190823.DeleteBackupRecords", async function () {
     try {
        const data = await client.DeleteBackupRecords({})

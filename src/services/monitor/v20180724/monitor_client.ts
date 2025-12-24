@@ -127,7 +127,7 @@ import {
   DescribePrometheusAlertGroupsResponse,
   CreateConditionsTemplateResponse,
   DescribePrometheusTempSyncRequest,
-  DescribePrometheusGlobalConfigResponse,
+  DescribePrometheusClusterAgentsResponse,
   CreateRecordingRuleResponse,
   CreateGrafanaNotificationChannelResponse,
   DescribeGrafanaNotificationChannelsRequest,
@@ -204,7 +204,7 @@ import {
   ModifyPolicyGroupEventCondition,
   Metric,
   DescribePrometheusTargetsTMPResponse,
-  DescribePrometheusClusterAgentsResponse,
+  DescribePrometheusGlobalConfigResponse,
   UpdatePrometheusScrapeJobRequest,
   PrometheusAgentInfo,
   SingleOrderedDataPoint,
@@ -217,6 +217,7 @@ import {
   PrometheusAlertManagerConfig,
   CreateGrafanaInstanceRequest,
   DescribePrometheusInstanceUsageResponse,
+  BindProgressStep,
   DescribePrometheusGlobalNotificationRequest,
   DeleteExporterIntegrationResponse,
   UpdateRecordingRuleResponse,
@@ -251,9 +252,10 @@ import {
   DescribePrometheusTargetsTMPRequest,
   DescribeBindingPolicyObjectListInstanceGroup,
   DescribeRemoteWritesRequest,
-  ModifyAlarmPolicyTasksRequest,
+  DescribeAlarmNoticeRequest,
   GetPrometheusAgentManagementCommandRequest,
   DescribeBindingPolicyObjectListDimension,
+  BindProgressResponse,
   DescribePolicyGroupInfoEventCondition,
   GetPrometheusAgentManagementCommandResponse,
   MetricData,
@@ -426,7 +428,7 @@ import {
   TaskStepInfo,
   DescribePrometheusTempResponse,
   DescribeGrafanaConfigResponse,
-  DescribeAlarmNoticeRequest,
+  ModifyAlarmPolicyTasksRequest,
   DescribePrometheusIntegrationMetricsRequest,
   PrometheusTemp,
   DescribePolicyConditionListCondition,
@@ -1937,8 +1939,6 @@ export class Client extends AbstractClient {
 传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用限制：单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
-参数SpecifyStatistics目前可支持返回三种统计方式（avg，max，min），分别为二进制1，2，4。
-例子：3:avg+max，5:avg+min，6:max+min，7:avg+max+min
 拉取数据的粒度和统计方式的对应关系尽量在接入平台进行配置，如果没有配置对应统计方式，请提工单反馈。
 
 >?
@@ -2189,7 +2189,7 @@ export class Client extends AbstractClient {
    * 获取prom实例中集群详细的关联状态
    */
   async DescribeClusterAgentCreatingProgress(
-    req?: DescribeClusterAgentCreatingProgressRequest,
+    req: DescribeClusterAgentCreatingProgressRequest,
     cb?: (error: string, rep: DescribeClusterAgentCreatingProgressResponse) => void
   ): Promise<DescribeClusterAgentCreatingProgressResponse> {
     return this.request("DescribeClusterAgentCreatingProgress", req, cb)

@@ -2320,6 +2320,14 @@ export interface DescribeAccountBalanceResponse {
    */
   RealCreditBalance?: number
   /**
+   * 临时额度，单位 分
+   */
+  TempCredit?: number
+  /**
+   * 临时额度详情
+   */
+  TempAmountInfoList?: Array<UinTempAmountModel>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4352,6 +4360,10 @@ postMoveIn 按量计费迁入资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: Array<string>
+  /**
+   * 订单对应的可用区Id
+   */
+  ZoneCode?: string
 }
 
 /**
@@ -6255,11 +6267,11 @@ export interface DescribeCostDetailRequest {
    */
   Offset: number
   /**
-   * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通成本分析后，且距今 24 个月内的数据。
+   * 周期开始时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。
    */
   BeginTime?: string
   /**
-   * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通成本分析后，且距今 24 个月内的数据。
+   * 周期结束时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。
    */
   EndTime?: string
   /**
@@ -6268,7 +6280,7 @@ export interface DescribeCostDetailRequest {
    */
   NeedRecordNum?: number
   /**
-   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通成本分析的月份，最多可拉取24个月内的数据。
+   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通消耗账单的月份，最多可拉取18个月内的数据。
    */
   Month?: string
   /**
@@ -6879,6 +6891,10 @@ export interface CostDetail {
    * 子产品名称代码
    */
   ProductCode?: string
+  /**
+   * 标签信息
+   */
+  Tags?: Array<BillTagInfo>
 }
 
 /**
@@ -6951,6 +6967,28 @@ export interface DescribeAllocationRuleSummaryRequest {
    * 公摊规则名称或分账单元名称，用于模糊筛选。
    */
   Name?: string
+}
+
+/**
+ * 临时额度详情
+ */
+export interface UinTempAmountModel {
+  /**
+   * 用户uin
+   */
+  Uin?: string
+  /**
+   * 临时额度
+   */
+  TempAmount?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
 }
 
 /**
@@ -7191,7 +7229,12 @@ export interface ModifyGatherRuleResponse {
 /**
  * DescribeAccountBalance请求参数结构体
  */
-export type DescribeAccountBalanceRequest = null
+export interface DescribeAccountBalanceRequest {
+  /**
+   * 是否查询临时额度
+   */
+  TempCredit?: boolean
+}
 
 /**
  * DescribeBillDetail请求参数结构体
@@ -8145,6 +8188,10 @@ export interface DescribeDealsByCondRequest {
    * 资源id
    */
   ResourceId?: string
+  /**
+   * 订单状态
+   */
+  StatusSet?: Array<number | bigint>
 }
 
 /**

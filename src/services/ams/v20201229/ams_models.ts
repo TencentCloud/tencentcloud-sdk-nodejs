@@ -324,6 +324,40 @@ export interface CreateAudioModerationTaskRequest {
 }
 
 /**
+ * 出行结果
+ */
+export interface TravelResults {
+  /**
+   * 一级标签
+   */
+  Label?: string
+  /**
+   * 二级标签
+   */
+  SubLabel?: string
+  /**
+   * 风险等级
+   */
+  RiskLevel?: string
+  /**
+   * 出行音频角色
+   */
+  AudioRole?: string
+  /**
+   * 出行语音文本
+   */
+  AudioText?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+}
+
+/**
  * 音视频任务数据结构
  */
 export interface TaskInput {
@@ -822,37 +856,21 @@ export interface SpeakerResults {
 }
 
 /**
- * 出行结果
+ * ASR识别结果在音频中的起止时间
  */
-export interface TravelResults {
+export interface Sentence {
   /**
-   * 一级标签
+   * ASR句子
    */
-  Label?: string
+  Text?: string
   /**
-   * 二级标签
+   * 起始时间
    */
-  SubLabel?: string
-  /**
-   * 风险等级
-   */
-  RiskLevel?: string
-  /**
-   * 出行音频角色
-   */
-  AudioRole?: string
-  /**
-   * 出行语音文本
-   */
-  AudioText?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: number
+  StartTime?: string
   /**
    * 结束时间
    */
-  EndTime?: number
+  EndTime?: string
 }
 
 /**
@@ -936,6 +954,10 @@ export interface AudioResult {
    * 审核检测类型
    */
   HitType?: string
+  /**
+   * ASR句子的起止时间
+   */
+  Sentences?: Array<Sentence>
 }
 
 /**

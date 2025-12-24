@@ -41,6 +41,11 @@ export interface GetWsTokenResponse {
    */
   SingleWorkflow?: KnowledgeQaSingleWorkflow
   /**
+   * 使用视觉模型时对话窗口输入字符限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VisionModelInputLimit?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -382,15 +387,15 @@ export interface DeleteSharedKnowledgeResponse {
  */
 export interface ListUnsatisfiedReplyRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码，取值范围：大于0
    */
   PageNumber: number
   /**
-   * 分页数量
+   * 分页数量，取值范围：大于0
    */
   PageSize: number
   /**
@@ -402,17 +407,21 @@ export interface ListUnsatisfiedReplyRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 用户请求(问题或答案)
+   * 用户请求(问题或答案)，按关键词检索，可匹配用户问题或答案
    */
   Query?: string
   /**
-   * 错误类型检索
+   * 按错误类型检索
    */
   Reasons?: Array<string>
   /**
-   * 操作状态  0-全部 1-待处理  2-已处理【包括答案纠错，拒答，忽略】
+   * 按操作状态检索  0-全部 1-待处理  2-已处理【包括答案纠错，拒答，忽略】，不填时默认值为0
    */
   Status?: number
+  /**
+   * 处理状态 0-待处理 1-已拒答 2-已忽略 3-已添加为新问答 4-已添加为相似问
+   */
+  HandlingStatuses?: Array<number | bigint>
 }
 
 /**
@@ -471,7 +480,7 @@ export interface ListRejectedQuestionPreviewResponse {
  */
 export interface DeleteAttributeLabelRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -651,6 +660,20 @@ export interface DescribeDocResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatePeriodInfo?: UpdatePeriodInfo
+  /**
+   * 从根节点开始的路径分类ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CateBizIdPath?: Array<string>
+  /**
+   * 从根节点开始的路径分类名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CateNamePath?: Array<string>
+  /**
+   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   */
+  EnableScope?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -943,11 +966,11 @@ export interface AgentInputSystemVariable {
  */
 export interface SaveDocRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看[如何获取   BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 文件名
+   * 文件名，需要包含文件扩展名
    */
   FileName: string
   /**
@@ -980,7 +1003,7 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    */
   Size: string
   /**
-   * 标签适用范围，需要传参为1
+   * 标签适用范围，1:全部，2:按条件。默认为1。
    */
   AttrRange?: number
   /**
@@ -1001,19 +1024,19 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    */
   ReferUrlType?: number
   /**
-   * 有效开始时间，unix秒级时间戳
+   * 有效开始时间，unix秒级时间戳，默认为0
    */
   ExpireStart?: string
   /**
-   * 有效结束时间，unix秒级时间戳，0代表永久有效
+   * 有效结束时间，unix秒级时间戳，默认为0代表永久有效
    */
   ExpireEnd?: string
   /**
-   * 是否引用链接
+   * 是否显示引用的文档来源(false不显示 true显示）默认false
    */
   IsRefer?: boolean
   /**
-   * 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为1  <br> 请注意，opt=1的时候请从腾讯云智能体开发平台页面下载excel模板
+   * 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为2 <br> 请注意，opt=1的时候请从腾讯云智能体开发平台页面下载excel模板
    */
   Opt?: number
   /**
@@ -1117,9 +1140,13 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    */
   SplitRule?: string
   /**
-   * 文档更新频率
+   * 文档更新频率，默认值为0不更新
    */
   UpdatePeriodInfo?: UpdatePeriodInfo
+  /**
+   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   */
+  EnableScope?: number
 }
 
 /**
@@ -1350,6 +1377,7 @@ export interface AttrLabelDetail {
   /**
    * 标签标识
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   AttrKey?: string
   /**
@@ -1368,7 +1396,7 @@ export interface AttrLabelDetail {
    */
   IsUpdating?: boolean
   /**
-   * 状态
+   * 发布状态(1 待发布 2 发布中 3 已发布 4 发布失败)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -1653,6 +1681,11 @@ export interface ListDocItem {
    * 员工名称
    */
   StaffName?: string
+  /**
+   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableScope?: number
 }
 
 /**
@@ -1712,7 +1745,7 @@ export interface StatisticInfo {
  */
 export interface CreateAttributeLabelRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -1973,13 +2006,13 @@ export interface KnowledgeDetail {
  */
 export interface GenerateQARequest {
   /**
-   * 应用ID
+   * 应用ID,获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
    * 文档ID
    */
-  DocBizIds?: Array<string>
+  DocBizIds: Array<string>
 }
 
 /**
@@ -2005,15 +2038,15 @@ export interface ListReferShareKnowledgeRequest {
  */
 export interface ListAttributeLabelRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码，取值范围：大于0
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量，取值范围：大于0
    */
   PageSize: number
   /**
@@ -2025,11 +2058,11 @@ export interface ListAttributeLabelRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 查询内容
+   * 查询内容，同时匹配标签内容和标签值内容
    */
   Query?: string
   /**
-   * 每个属性同步拉取的标签值数量
+   * 每个标签同步拉取的标签值数量。即在展示标签列表时，为每一个标签加载多少个具体的标签值。
    */
   LabelSize?: number
 }
@@ -2241,7 +2274,7 @@ export interface DescribeReleaseInfoResponse {
  */
 export interface ModifyRejectedQuestionRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -2251,7 +2284,7 @@ export interface ModifyRejectedQuestionRequest {
    */
   Question: string
   /**
-   * 拒答问题来源的数据源唯一id
+   * 拒答问题来源的数据源唯一id, 通过[ListRejectedQuestion](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListRejectedQuestion)接口获取
 
 
 
@@ -2264,7 +2297,7 @@ export interface ModifyRejectedQuestionRequest {
  */
 export interface DescribeWorkflowRunResponse {
   /**
-   * 工作流的详情
+   * 工作流运行实例详情
    */
   WorkflowRun?: WorkflowRunDetail
   /**
@@ -2383,6 +2416,11 @@ export interface SearchStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RerankModel?: string
+  /**
+   * NL2SQL模型配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatureLanguageToSqlModelConfig?: NL2SQLModelConfig
 }
 
 /**
@@ -2827,6 +2865,15 @@ export interface ListQaItem {
    * 员工名称
    */
   StaffName?: string
+  /**
+   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableScope?: number
+  /**
+   * 问答关联的文档生效域
+   */
+  DocEnableScope?: number
 }
 
 /**
@@ -2853,7 +2900,7 @@ export interface ListUnsatisfiedReplyResponse {
  */
 export interface CreateWorkflowRunRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   AppBizId: string
   /**
@@ -2891,14 +2938,15 @@ export interface DescribeQARequest {
 export interface ListQARequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码（取值范围>0）
    */
   PageNumber: number
   /**
-   * 每页大小
+   * 每页大小(取值范围1-200)
    */
   PageSize: number
   /**
@@ -2909,10 +2957,12 @@ export interface ListQARequest {
   Query?: string
   /**
    * 校验状态(1未校验2采纳3不采纳)
+如果不填默认值为空数组，表示不筛选，返回所有状态
    */
   AcceptStatus?: Array<number | bigint>
   /**
    * 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复)
+如果不填默认值为空数组，表示不筛选返回所有状态
    */
   ReleaseStatus?: Array<number | bigint>
   /**
@@ -2921,6 +2971,7 @@ export interface ListQARequest {
   DocBizId?: string
   /**
    * 来源(1 文档生成 2 批量导入 3 手动添加)
+不填默认值为0，表示不过滤，返回所有状态
    */
   Source?: number
   /**
@@ -2937,12 +2988,17 @@ export interface ListQARequest {
   QaBizIds?: Array<string>
   /**
    * 查询类型 filename 名称、 attribute 标签
+如果不填默认值为"filename"
    */
   QueryType?: string
   /**
    * 是否只展示当前分类的数据 0不是，1是
    */
   ShowCurrCate?: number
+  /**
+   * // 知识生效作用域枚举值 enum RetrievalEnableScope {   ENABLE_SCOPE_TYPE_UNKNOWN = 0; // 未知类型   ENABLE_SCOPE_TYPE_NONE = 1; // 停用   ENABLE_SCOPE_TYPE_DEV = 2; // 仅开发域   ENABLE_SCOPE_TYPE_RELEASE = 3; // 仅发布域   ENABLE_SCOPE_TYPE_ALL = 4; // 全域 }  问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   */
+  EnableScope?: number
 }
 
 /**
@@ -3239,7 +3295,7 @@ export interface AgentThought {
  */
 export interface CheckAttributeLabelReferRequest {
   /**
-   * 应用ID
+   * 应用ID,获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -3251,11 +3307,11 @@ export interface CheckAttributeLabelReferRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 属性标签
+   * 属性标签ID
    */
   LabelBizId?: string
   /**
-   * 属性ID
+   * 标签ID
    */
   AttributeBizId?: Array<string>
 }
@@ -3313,11 +3369,11 @@ export interface UpdateVarResponse {
  */
 export interface ListWorkflowRunsRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   AppBizId: string
   /**
-   * 每页数量
+   * 每页数量(取值范围1-200)
    */
   PageSize: number
   /**
@@ -3325,7 +3381,7 @@ export interface ListWorkflowRunsRequest {
    */
   RunEnv?: number
   /**
-   * 页码
+   * 页码(必须大于0)
    */
   Page?: number
   /**
@@ -3990,23 +4046,23 @@ export interface DeleteRejectedQuestionResponse {
  */
 export interface ListRejectedQuestionPreviewRequest {
   /**
-   * 应用ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码（必须大于0）
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量（取值范围为1-200）
    */
   PageSize: number
   /**
-   * 查询内容
+   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
    */
   Query?: string
   /**
-   * 发布单ID
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
    */
   ReleaseBizId?: string
   /**
@@ -4014,11 +4070,11 @@ export interface ListRejectedQuestionPreviewRequest {
    */
   Actions?: Array<number | bigint>
   /**
-   * 开始时间
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StartTime?: string
   /**
-   * 结束时间
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   EndTime?: string
 }
@@ -4028,7 +4084,7 @@ export interface ListRejectedQuestionPreviewRequest {
  */
 export interface ListSelectDocRequest {
   /**
-   * 应用ID
+   * 应用ID,获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -4036,7 +4092,7 @@ export interface ListSelectDocRequest {
    */
   FileName?: string
   /**
-   * 文档状态筛选。文档状态对应码为7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期。其中仅状态为10 待发布、12 已发布的文档支持生成问答
+   * 文档状态筛选。文档状态对应码为7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期。其中仅状态为10 待发布、12 已发布的文档支持生成问答（未填写时默认值为空数组）
    */
   Status?: Array<number | bigint>
 }
@@ -4267,39 +4323,39 @@ export interface ListQACateRequest {
  */
 export interface ListReleaseQAPreviewRequest {
   /**
-   * 应用ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码（必须大于0）
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量（取值范围为1-200）
    */
   PageSize: number
   /**
-   * 查询内容
+   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
    */
   Query?: string
   /**
-   * 发布单ID
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
    */
   ReleaseBizId?: string
   /**
-   * 开始时间
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StartTime?: string
   /**
-   * 结束时间
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   EndTime?: string
   /**
-   * 状态(1新增2修改3删除)
+   * 状态(1新增2修改3删除)，其和ReleaseStatus的区别为：Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据/内容本身的发布状态
    */
   Actions?: Array<number | bigint>
   /**
-   * 发布状态(4发布成功5发布失败)
+   * 发布状态(4发布成功5发布失败)。其和Actions的区别为：Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据/内容本身的发布状态
    */
   ReleaseStatus?: Array<number | bigint>
 }
@@ -4823,6 +4879,25 @@ export interface DescribeQAResponse {
    */
   IsDisabled?: boolean
   /**
+   * 从根节点开始的路径分类ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CateBizIdPath?: Array<string>
+  /**
+   * 从根节点开始的路径分类名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CateNamePath?: Array<string>
+  /**
+   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableScope?: number
+  /**
+   * 问答关联的文档生效域
+   */
+  DocEnableScope?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4844,6 +4919,7 @@ export interface DescribeReleaseInfoRequest {
 export interface ModifyQARequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
@@ -4864,6 +4940,8 @@ export interface ModifyQARequest {
   CustomParam?: string
   /**
    * 标签适用范围 1：全部，2：按条件
+默认值：当没有属性标签，labelRefers为空时，默认值为1
+有属性标签，labelRefers不为空，默认值为2
    */
   AttrRange?: number
   /**
@@ -4879,11 +4957,11 @@ export interface ModifyQARequest {
    */
   CateBizId?: string
   /**
-   * 有效开始时间，unix时间戳
+   * 有效开始时间，单位是unix时间戳，默认值为0，代表永久有效
    */
   ExpireStart?: string
   /**
-   * 有效结束时间，unix时间戳，0代表永久有效
+   * 有效结束时间，单位是unix时间戳，默认值为0，代表永久有效
    */
   ExpireEnd?: string
   /**
@@ -4894,6 +4972,10 @@ export interface ModifyQARequest {
    * 问题描述
    */
   QuestionDesc?: string
+  /**
+   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   */
+  EnableScope?: number
 }
 
 /**
@@ -5087,7 +5169,7 @@ export interface KnowledgeQaWorkflowInfo {
  */
 export interface DescribeWorkflowRunRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
    */
   AppBizId: string
   /**
@@ -5118,11 +5200,11 @@ export interface DescribeWorkflowRunRequest {
  */
 export interface DescribeUnsatisfiedReplyContextRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 回复ID
+   * 回复ID，调用这个接口获得：[ListUnsatisfiedReply](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListUnsatisfiedReply)
    */
   ReplyBizId: string
   /**
@@ -5375,6 +5457,7 @@ export interface Agent {
 export interface CreateQARequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
@@ -5406,7 +5489,7 @@ export interface CreateQARequest {
    */
   CateBizId?: string
   /**
-   * 有效开始时间，unix时间戳
+   * 有效开始时间，单位是unix时间戳。默认值为0，表示问答为永久有效.
    */
   ExpireStart?: string
   /**
@@ -5421,6 +5504,10 @@ export interface CreateQARequest {
    * 问题描述
    */
   QuestionDesc?: string
+  /**
+   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   */
+  EnableScope?: number
 }
 
 /**
@@ -5428,35 +5515,35 @@ export interface CreateQARequest {
  */
 export interface ListReleaseDocPreviewRequest {
   /**
-   * 应用ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码（必须大于0）
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量（取值范围为1-200）
    */
   PageSize: number
   /**
-   * 查询内容
+   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
    */
   Query?: string
   /**
-   * 发布单ID
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
    */
   ReleaseBizId?: string
   /**
-   * 开始时间
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StartTime?: string
   /**
-   * 结束时间
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   EndTime?: string
   /**
-   * 状态(1新增2修改3删除)
+   * 状态(1新增2修改3删除)，其和ReleaseStatus的区别为： Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据 / 内容本身的发布状态
    */
   Actions?: Array<number | bigint>
 }
@@ -5470,7 +5557,7 @@ export interface RateMsgRecordRequest {
    */
   BotAppKey: string
   /**
-   * 消息ID 【大模型回复答案的RecordID】
+   * 消息ID 【大模型回复答案的RecordID】可以通过[GetMsgRecord](https://cloud.tencent.com/document/product/1759/105090)接口获取
    */
   RecordId: string
   /**
@@ -5646,7 +5733,7 @@ export interface AgentProcedure {
  */
 export interface ExportAttributeLabelRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -5658,7 +5745,7 @@ export interface ExportAttributeLabelRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 属性ID
+   * 标签ID
    */
   AttributeBizIds?: Array<string>
   /**
@@ -6057,7 +6144,7 @@ export interface AgentToolRspParam {
  */
 export interface CreateRejectedQuestionRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方式参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -6067,7 +6154,7 @@ export interface CreateRejectedQuestionRequest {
    */
   Question: string
   /**
-   * 拒答问题来源的数据源唯一id， - 拒答来源于不满意回复  2 - 拒答来源于手动添加
+   * 拒答问题来源， 1- 来源于不满意回复;  2 - 来源于手动添加
    */
   BusinessSource: number
   /**
@@ -6226,6 +6313,10 @@ export interface VerifyQARequest {
    * 登录用户子账号(集成商模式必填)
    */
   LoginSubAccountUin?: string
+  /**
+   * 用于操作共享知识库
+   */
+  KnowledgeBizId?: string
 }
 
 /**
@@ -6709,7 +6800,7 @@ export interface ModelInfo {
  */
 export interface DeleteRejectedQuestionRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
    */
   BotBizId: string
   /**
@@ -6881,7 +6972,7 @@ export interface GetLikeDataCountResponse {
  */
 export interface ListChannelRequest {
   /**
-   * 应用ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   AppBizId: string
   /**
@@ -6890,19 +6981,19 @@ export interface ListChannelRequest {
    */
   BotBizId?: string
   /**
-   * 页码
+   * 页码（必须大于0）
    */
   PageNumber?: number
   /**
-   * 分页数量
+   * 分页数量（取值范围为1-200）
    */
   PageSize?: number
   /**
-   * 渠道类型, 10000: 微信订阅号，10001: 微信服务号，10002：企微应用，10004：微信客服，10005：小程序，10009：企微智能机器人
+   * 渠道类型, 10000: 微信订阅号，10001: 微信服务号，10002：企微应用，10004：微信客服，10005：小程序，10009：企微智能机器人 。（默认为[]）
    */
   ChannelType?: Array<number | bigint>
   /**
-   * 渠道状态 1未发布 2运行中 3已下线
+   * 渠道状态 1未发布 2运行中 3已下线 （默认为[]）
    */
   ChannelStatus?: Array<number | bigint>
 }
@@ -6946,7 +7037,7 @@ export interface DescribeSharedKnowledgeRequest {
  */
 export interface ModifyDocRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看[如何获取   BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -6958,7 +7049,7 @@ export interface ModifyDocRequest {
    */
   IsRefer: boolean
   /**
-   * 标签适用范围，需要传参为1
+   * 标签适用范围，1:全部，2:按条件。默认为1。
    */
   AttrRange: number
   /**
@@ -6983,11 +7074,11 @@ export interface ModifyDocRequest {
    */
   ReferUrlType?: number
   /**
-   * 有效开始时间，unix时间戳
+   * 有效开始时间，单位为unix时间戳
    */
   ExpireStart?: string
   /**
-   * 有效结束时间，unix时间戳，0代表永久有效
+   * 有效结束时间，单位为unix时间戳，默认值为0代表永久有效
    */
   ExpireEnd?: string
   /**
@@ -7010,6 +7101,10 @@ export interface ModifyDocRequest {
    * 自定义切分规则
    */
   SplitRule?: string
+  /**
+   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   */
+  EnableScope?: number
 }
 
 /**
@@ -7606,17 +7701,15 @@ export interface QACate {
  */
 export interface ListRejectedQuestionRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
    */
   BotBizId: string
   /**
-   * 页码
-
+   * 页码（必须大于0）
    */
   PageNumber: number
   /**
-   * 每页数量
-
+   * 每页数量（取值范围1-200）
    */
   PageSize: number
   /**
@@ -7725,15 +7818,15 @@ export interface DeleteAgentRequest {
  */
 export interface CheckAttributeLabelExistRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 属性名称
+   * 标签名称
    */
   LabelName: string
   /**
-   * 属性ID
+   * 标签ID
    */
   AttributeBizId: string
   /**
@@ -7745,9 +7838,31 @@ export interface CheckAttributeLabelExistRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 滚动加载，最后一个属性标签ID
+   * 最后一个标签ID。用于滚动加载：是一种分批、滚动式的存在性检查机制。客户端需要持续调用接口，并每次传入上一次返回的最后一个记录的ID，直到接口明确返回“存在”或“已检查全部数据且不存在”为止。
    */
   LastLabelBizId?: string
+}
+
+/**
+ * 模型详情
+ */
+export interface AppModelDetailInfo {
+  /**
+   * 模型名称
+   */
+  ModelName?: string
+  /**
+   * 模型参数
+   */
+  ModelParams?: ModelParams
+  /**
+   * 限制
+   */
+  HistoryLimit?: number
+  /**
+   * 模型别名
+   */
+  AliasName?: string
 }
 
 /**
@@ -7977,15 +8092,15 @@ export interface CreateQACateResponse {
  */
 export interface ListDocRequest {
   /**
-   * 应用ID
+   * 应用ID, 获取方式参看 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码(必须大于0)
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量(取值范围1-200)
    */
   PageSize: number
   /**
@@ -8003,7 +8118,7 @@ export interface ListDocRequest {
    */
   QueryType?: string
   /**
-   * 分类ID
+   * 分类ID, 调用接口[ListDocCate](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListDocCate)获取
    */
   CateBizId?: string
   /**
@@ -8018,6 +8133,10 @@ export interface ListDocRequest {
    * 是否只展示当前分类的数据 0不是，1是
    */
   ShowCurrCate?: number
+  /**
+   * 文档生效域；不检索默认为0
+   */
+  EnableScope?: number
 }
 
 /**
@@ -8284,15 +8403,16 @@ export interface GetDocPreviewRequest {
  */
 export interface DescribeAttributeLabelRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 属性ID
+   * 标签ID
    */
   AttributeBizId: string
   /**
-   * 每次加载的数量
+   * 每次请求返回的最大标签数量​，限制单次接口返回的标签数量，避免数据量过大。取值范围：大于0。
+
    */
   Limit: number
   /**
@@ -8304,11 +8424,11 @@ export interface DescribeAttributeLabelRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 查询标签或相似标签
+   * 搜索关键词，用于查询标签标准词或相似词
    */
   Query?: string
   /**
-   * 滚动加载游标的标签ID
+   * 滚动加载游标，上一次请求返回的最后一个标签ID
    */
   LastLabelBizId?: string
   /**
@@ -9287,6 +9407,17 @@ export interface DescribeSharedKnowledgeResponse {
 }
 
 /**
+ * Nl2Sql模型配置
+ */
+export interface NL2SQLModelConfig {
+  /**
+   * 模型配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model?: AppModelDetailInfo
+}
+
+/**
  * 发布列表详情
  */
 export interface ListReleaseItem {
@@ -9544,23 +9675,23 @@ export interface DescribeTokenUsageResponse {
  */
 export interface ListReleaseConfigPreviewRequest {
   /**
-   * 应用ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码（必须大于0）
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量（取值范围为1-200）
    */
   PageSize: number
   /**
-   * 查询内容
+   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
    */
   Query?: string
   /**
-   * 发布单ID
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
    */
   ReleaseBizId?: string
   /**
@@ -9568,15 +9699,15 @@ export interface ListReleaseConfigPreviewRequest {
    */
   Actions?: Array<number | bigint>
   /**
-   * 开始时间
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StartTime?: string
   /**
-   * 结束时间
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   EndTime?: string
   /**
-   * 发布状态
+   * 发布状态(2 待发布 3 发布中 4 已发布 5 发布失败)，默认为空
    */
   ReleaseStatus?: Array<number | bigint>
 }
@@ -9949,6 +10080,10 @@ export interface Filters {
 
    */
   Reasons?: Array<string>
+  /**
+   * 处理状态 0-待处理 1-已拒答 2-已忽略 3-已添加为新问答 4-已添加为相似问
+   */
+  HandlingStatuses?: Array<number | bigint>
 }
 
 /**

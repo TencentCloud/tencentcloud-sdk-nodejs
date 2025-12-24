@@ -26,6 +26,7 @@ import {
   QueryTrainPortraitModelJobRequest,
   GenerateAvatarRequest,
   UploadTrainPortraitImagesResponse,
+  SubmitTemplateToImageJobRequest,
   UploadTrainPortraitImagesRequest,
   ResultConfig,
   QueryMemeJobRequest,
@@ -35,21 +36,23 @@ import {
   QueryMemeJobResponse,
   QueryDrawPortraitJobResponse,
   QueryTrainPortraitModelJobResponse,
+  SubmitTextToImageProJobResponse,
   ChangeClothesResponse,
   SubmitTextToImageJobRequest,
   SubmitGlamPicJobResponse,
   SubmitMemeJobResponse,
-  SubmitTrainPortraitModelJobRequest,
+  DescribeTemplateToImageJobRequest,
   SketchToImageRequest,
   Rect,
+  DescribeTemplateToImageJobResponse,
   FaceInfo,
-  SubmitTextToImageProJobResponse,
+  SubmitTemplateToImageJobResponse,
   SubmitGlamPicJobRequest,
   QueryTextToImageProJobResponse,
   LogoRect,
   TextToImageLiteRequest,
   Filter,
-  TextToImageRapidResponse,
+  SubmitTrainPortraitModelJobRequest,
   SubmitTextToImageJobResponse,
   ImageInpaintingRemovalResponse,
   SubmitMemeJobRequest,
@@ -69,6 +72,7 @@ import {
   QueryTextToImageProJobRequest,
   GenerateAvatarResponse,
   RefineImageResponse,
+  TextToImageRapidResponse,
   SketchToImageResponse,
   SubmitDrawPortraitJobRequest,
 } from "./aiart_models"
@@ -109,6 +113,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitTrainPortraitModelJobResponse) => void
   ): Promise<SubmitTrainPortraitModelJobResponse> {
     return this.request("SubmitTrainPortraitModelJob", req, cb)
+  }
+
+  /**
+     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
+本接口用于上传人像图片并指定对应的写真模型 ID。上传的图片要求是同一个人，建议上传单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图片。
+可选模式：
+- 常规训练模式：上传20 - 25张图片用于模型训练，完成训练后可生成写真图片。
+- 快速训练模式：仅需上传1张图片用于模型训练，训练速度更快，完成训练后可生成写真图片。
+- 免训练模式：仅需上传1张图片，跳过训练环节，直接生成写真图片。
+
+上传写真训练图片默认提供1个并发。
+     */
+  async UploadTrainPortraitImages(
+    req: UploadTrainPortraitImagesRequest,
+    cb?: (error: string, rep: UploadTrainPortraitImagesResponse) => void
+  ): Promise<UploadTrainPortraitImagesResponse> {
+    return this.request("UploadTrainPortraitImages", req, cb)
   }
 
   /**
@@ -170,6 +191,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenerateAvatarResponse) => void
   ): Promise<GenerateAvatarResponse> {
     return this.request("GenerateAvatar", req, cb)
+  }
+
+  /**
+   * 查询图片特效任务
+   */
+  async DescribeTemplateToImageJob(
+    req: DescribeTemplateToImageJobRequest,
+    cb?: (error: string, rep: DescribeTemplateToImageJobResponse) => void
+  ): Promise<DescribeTemplateToImageJobResponse> {
+    return this.request("DescribeTemplateToImageJob", req, cb)
   }
 
   /**
@@ -316,20 +347,13 @@ AI 美照默认提供1个并发，代表最多能同时处理1个已提交的任
   }
 
   /**
-     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
-本接口用于上传人像图片并指定对应的写真模型 ID。上传的图片要求是同一个人，建议上传单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图片。
-可选模式：
-- 常规训练模式：上传20 - 25张图片用于模型训练，完成训练后可生成写真图片。
-- 快速训练模式：仅需上传1张图片用于模型训练，训练速度更快，完成训练后可生成写真图片。
-- 免训练模式：仅需上传1张图片，跳过训练环节，直接生成写真图片。
-
-上传写真训练图片默认提供1个并发。
-     */
-  async UploadTrainPortraitImages(
-    req: UploadTrainPortraitImagesRequest,
-    cb?: (error: string, rep: UploadTrainPortraitImagesResponse) => void
-  ): Promise<UploadTrainPortraitImagesResponse> {
-    return this.request("UploadTrainPortraitImages", req, cb)
+   * 提交图片特效任务
+   */
+  async SubmitTemplateToImageJob(
+    req: SubmitTemplateToImageJobRequest,
+    cb?: (error: string, rep: SubmitTemplateToImageJobResponse) => void
+  ): Promise<SubmitTemplateToImageJobResponse> {
+    return this.request("SubmitTemplateToImageJob", req, cb)
   }
 
   /**

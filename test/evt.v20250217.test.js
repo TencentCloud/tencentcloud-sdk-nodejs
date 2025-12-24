@@ -18,9 +18,29 @@ const client = new tencentcloud.evt.v20250217.Client({
 })
 describe("evt.v20250217.test.js", function () {
 
+it("evt.v20250217.DeleteRoleUser", async function () {
+    try {
+       const data = await client.DeleteRoleUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("evt.v20250217.CreateRoleUser", async function () {
     try {
        const data = await client.CreateRoleUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("evt.v20250217.CompleteApproval", async function () {
+    try {
+       const data = await client.CompleteApproval({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

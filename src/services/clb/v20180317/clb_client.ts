@@ -35,6 +35,7 @@ import {
   DisassociateTargetGroupsResponse,
   SetLoadBalancerStartStatusResponse,
   SetLoadBalancerClsLogResponse,
+  TargetGroupInstance,
   DescribeLoadBalancerTrafficResponse,
   MultiCertInfo,
   RsTagRule,
@@ -58,7 +59,7 @@ import {
   ModifyTargetWeightResponse,
   ZoneResource,
   DescribeTaskStatusRequest,
-  TargetGroupInstance,
+  DescribeTargetGroupInstanceStatusResponse,
   DescribeClassicalLBByInstanceIdResponse,
   CreateRuleResponse,
   CrossTargets,
@@ -75,6 +76,7 @@ import {
   DescribeTargetGroupsResponse,
   LoadBalancerHealth,
   InquiryPriceCreateLoadBalancerRequest,
+  TargetGroupInstanceStatus,
   DeleteLoadBalancerListenersRequest,
   BlockedIP,
   ModifyRuleResponse,
@@ -197,6 +199,7 @@ import {
   LoadBalancerDetail,
   LbRsTargets,
   BatchModifyTargetWeightRequest,
+  DescribeTargetGroupInstanceStatusRequest,
   BatchModifyTargetTagResponse,
   DeleteRewriteResponse,
   BatchTarget,
@@ -423,6 +426,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetCustomizedConfigForLoadBalancerResponse) => void
   ): Promise<SetCustomizedConfigForLoadBalancerResponse> {
     return this.request("SetCustomizedConfigForLoadBalancer", req, cb)
+  }
+
+  /**
+   * 查询目标组后端服务状态。目前仅支持网关负载均衡类型的目标组支持查询后端服务状态。
+   */
+  async DescribeTargetGroupInstanceStatus(
+    req: DescribeTargetGroupInstanceStatusRequest,
+    cb?: (error: string, rep: DescribeTargetGroupInstanceStatusResponse) => void
+  ): Promise<DescribeTargetGroupInstanceStatusResponse> {
+    return this.request("DescribeTargetGroupInstanceStatus", req, cb)
   }
 
   /**

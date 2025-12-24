@@ -398,6 +398,16 @@ it("vod.v20180717.ResetProcedureTemplate", async function () {
     }
 })
 
+it("vod.v20180717.DescribeAigcUsageData", async function () {
+    try {
+       const data = await client.DescribeAigcUsageData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeCDNUsageData", async function () {
     try {
        const data = await client.DescribeCDNUsageData({})
@@ -1258,6 +1268,16 @@ it("vod.v20180717.ForbidMediaDistribution", async function () {
     }
 })
 
+it("vod.v20180717.ImportMediaKnowledge", async function () {
+    try {
+       const data = await client.ImportMediaKnowledge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ManageTask", async function () {
     try {
        const data = await client.ManageTask({})
@@ -1781,6 +1801,16 @@ it("vod.v20180717.DeleteHeadTailTemplate", async function () {
 it("vod.v20180717.CreatePersonSample", async function () {
     try {
        const data = await client.CreatePersonSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.SearchMediaBySemantics", async function () {
+    try {
+       const data = await client.SearchMediaBySemantics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CosStorageSource,
   StartSandboxInstanceRequest,
   SandboxInstance,
   StopSandboxInstanceRequest,
@@ -28,11 +29,13 @@ import {
   DeleteAPIKeyResponse,
   APIKeyInfo,
   UpdateSandboxInstanceResponse,
+  StorageSource,
   DeleteSandboxToolRequest,
   CreateAPIKeyRequest,
   NetworkConfiguration,
   DeleteSandboxToolResponse,
   SandboxTool,
+  MountOption,
   Filter,
   StartSandboxInstanceResponse,
   AcquireSandboxInstanceTokenRequest,
@@ -42,9 +45,11 @@ import {
   UpdateSandboxInstanceRequest,
   CreateSandboxToolResponse,
   UpdateSandboxToolResponse,
+  VPCConfig,
   DeleteAPIKeyRequest,
   AcquireSandboxInstanceTokenResponse,
   StopSandboxInstanceResponse,
+  StorageMount,
   Tag,
   UpdateSandboxToolRequest,
   DescribeSandboxInstanceListResponse,

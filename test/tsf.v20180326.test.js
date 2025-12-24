@@ -1028,16 +1028,6 @@ it("tsf.v20180326.BindApiGroup", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeInovcationIndicators", async function () {
-    try {
-       const data = await client.DescribeInovcationIndicators({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.DescribeDeliveryConfigByGroupId", async function () {
     try {
        const data = await client.DescribeDeliveryConfigByGroupId({})

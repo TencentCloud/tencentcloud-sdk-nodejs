@@ -279,6 +279,7 @@ import {
   UpdateSharedKnowledgeResponse,
   DeleteAgentRequest,
   CheckAttributeLabelExistRequest,
+  AppModelDetailInfo,
   ListAppRequest,
   GetWsTokenReq_Label,
   ListReferShareKnowledgeResponse,
@@ -334,6 +335,7 @@ import {
   Credentials,
   AppInfo,
   DescribeSharedKnowledgeResponse,
+  NL2SQLModelConfig,
   ListReleaseItem,
   DescribeConcurrencyUsageResponse,
   KnowledgeQaPlugin,
@@ -423,7 +425,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档生成问答时，可通过该接口获得当前支持生成问答的文档列表，当前不支持xlsx、xls、csv格式的文档生成问答，且文档需处于待发布或已发布状态才可生成问答。
+   * 获取文档下拉列表。
    */
   async ListSelectDoc(
     req: ListSelectDocRequest,
@@ -543,8 +545,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 录入问答
-   */
+     * 录入问答
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async CreateQA(
     req: CreateQARequest,
     cb?: (error: string, rep: CreateQAResponse) => void
@@ -643,8 +648,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 校验问答
-   */
+     * 校验问答
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async VerifyQA(
     req: VerifyQARequest,
     cb?: (error: string, rep: VerifyQAResponse) => void
@@ -913,7 +921,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出属性标签
+   * 导出标签
    */
   async ExportAttributeLabel(
     req: ExportAttributeLabelRequest,
@@ -984,8 +992,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 问答列表
-   */
+     * 问答列表
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async ListQA(
     req: ListQARequest,
     cb?: (error: string, rep: ListQAResponse) => void

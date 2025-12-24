@@ -666,8 +666,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 全部删除规则
-   */
+     * 业务废弃
+
+全部删除规则
+     */
   async DeleteAllAccessControlRule(
     req: DeleteAllAccessControlRuleRequest,
     cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void

@@ -484,6 +484,30 @@ export interface SetLoadBalancerClsLogResponse {
 }
 
 /**
+ * 目标组实例
+ */
+export interface TargetGroupInstance {
+  /**
+   * 目标组实例的内网IP
+   */
+  BindIP: string
+  /**
+   * 目标组实例的端口，全监听目标组不支持传此字段。
+   */
+  Port?: number
+  /**
+   * 目标组实例的权重
+v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。
+取值范围：0-100
+   */
+  Weight?: number
+  /**
+   * 目标组实例的新端口，全监听目标组不支持传此字段。
+   */
+  NewPort?: number
+}
+
+/**
  * DescribeLoadBalancerTraffic返回参数结构体
  */
 export interface DescribeLoadBalancerTrafficResponse {
@@ -1111,27 +1135,17 @@ export interface DescribeTaskStatusRequest {
 }
 
 /**
- * 目标组实例
+ * DescribeTargetGroupInstanceStatus返回参数结构体
  */
-export interface TargetGroupInstance {
+export interface DescribeTargetGroupInstanceStatusResponse {
   /**
-   * 目标组实例的内网IP
+   * 健康检查后端rs状态列表
    */
-  BindIP: string
+  TargetGroupInstanceSet?: Array<TargetGroupInstanceStatus>
   /**
-   * 目标组实例的端口，全监听目标组不支持传此字段。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Port?: number
-  /**
-   * 目标组实例的权重
-v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。
-取值范围：0-100
-   */
-  Weight?: number
-  /**
-   * 目标组实例的新端口，全监听目标组不支持传此字段。
-   */
-  NewPort?: number
+  RequestId?: string
 }
 
 /**
@@ -1492,6 +1506,37 @@ export interface InquiryPriceCreateLoadBalancerRequest {
    * 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。
    */
   VipIsp?: string
+}
+
+/**
+ * 用于目标组后端rs健康检查状态。
+ */
+export interface TargetGroupInstanceStatus {
+  /**
+   * 后端rs的IP
+   */
+  InstanceIp?: string
+  /**
+   * 健康检查状态，参数值及含义如下：
+● on：表示探测中。
+● off：表示健康检查关闭。
+● health：表示健康。
+● unhealth：表示异常。
+   */
+  Status?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 网卡ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EniId?: string
 }
 
 /**
@@ -4724,6 +4769,20 @@ export interface BatchModifyTargetWeightRequest {
    * 要批量修改权重的列表。
    */
   ModifyList: Array<RsWeightRule>
+}
+
+/**
+ * DescribeTargetGroupInstanceStatus请求参数结构体
+ */
+export interface DescribeTargetGroupInstanceStatusRequest {
+  /**
+   * 目标组唯一id
+   */
+  TargetGroupId: string
+  /**
+   * 目标组绑定的后端服务ip列表
+   */
+  TargetGroupInstanceIps?: Array<string>
 }
 
 /**

@@ -3419,60 +3419,6 @@ export interface ImageRepository {
 }
 
 /**
- * DescribeInovcationIndicators请求参数结构体
- */
-export interface DescribeInovcationIndicatorsRequest {
-  /**
-   * 维度
-   */
-  Dimension: string
-  /**
-   * 开始时间
-   */
-  StartTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
-  /**
-   * 命名空间ID
-   */
-  NamespaceId?: string
-  /**
-   * 微服务ID
-   */
-  ServiceId?: string
-  /**
-   * 调用方服务名
-   */
-  CallerServiceName?: string
-  /**
-   * 被调方服务名
-   */
-  CalleeServiceName?: string
-  /**
-   * 调用方接口名
-   */
-  CallerInterfaceName?: string
-  /**
-   * 被调方接口名
-   */
-  CalleeInterfaceName?: string
-  /**
-   * 应用ID
-   */
-  ApplicationId?: string
-  /**
-   * 部署组ID
-   */
-  GroupId?: string
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-}
-
-/**
  * 通用选项
  */
 export interface CommonOption {
@@ -6860,24 +6806,6 @@ export interface DescribeImageRepositoryRequest {
 }
 
 /**
- * 监控指标坐标
- */
-export interface IndicatorCoord {
-  /**
-   * 指标横坐标值
-   */
-  CoordX?: string
-  /**
-   * 指标纵坐标值
-   */
-  CoordY?: string
-  /**
-   * 指标标签，用于标识附加信息
-   */
-  CoordTag?: string
-}
-
-/**
  * 单元化规则翻页对象
  */
 export interface TsfPageUnitRule {
@@ -9829,17 +9757,14 @@ export interface BusinessLogConfigSchema {
   SchemaType: number
   /**
    * 解析规则内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaContent?: string
   /**
    * 解析规则时间格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaDateFormat?: string
   /**
    * 解析规则对应的多行匹配规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaMultilinePattern?: string
   /**
@@ -9848,7 +9773,6 @@ export interface BusinessLogConfigSchema {
   SchemaCreateTime?: string
   /**
    * 用户填写的解析规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaPatternLayout?: string
 }
@@ -10742,21 +10666,6 @@ export interface DeliveryConfigBindGroups {
    * 内容
    */
   Content?: Array<DeliveryConfigBindGroup>
-}
-
-/**
- * DescribeInovcationIndicators返回参数结构体
- */
-export interface DescribeInovcationIndicatorsResponse {
-  /**
-   * 服务调用监控指标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Result?: InvocationIndicator
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -12984,47 +12893,6 @@ export interface DescribeApplicationsResponse {
 }
 
 /**
- * 服务调用监控指标
- */
-export interface InvocationIndicator {
-  /**
-   * 总请求数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InvocationQuantity?: number
-  /**
-   * 请求成功率，百分比
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InvocationSuccessRate?: number
-  /**
-   * 请求平均耗时，单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InvocationAvgDuration?: number
-  /**
-   * 成功请求数时间分布
-   */
-  InvocationSuccessDistribution?: Array<IndicatorCoord>
-  /**
-   * 失败请求数时间分布
-   */
-  InvocationFailedDistribution?: Array<IndicatorCoord>
-  /**
-   * 状态码分布
-   */
-  InvocationStatusDistribution?: Array<IndicatorCoord>
-  /**
-   * 时延分布
-   */
-  InvocationDurationDistribution?: Array<IndicatorCoord>
-  /**
-   * 并发请求次数时间分布
-   */
-  InvocationQuantityDistribution?: Array<IndicatorCoord>
-}
-
-/**
  * DescribeStatistics请求参数结构体
  */
 export interface DescribeStatisticsRequest {
@@ -14588,12 +14456,10 @@ export interface BusinessLogConfig {
   ConfigPath?: string
   /**
    * 配置项描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigDesc?: string
   /**
    * 配置项标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigTags?: string
   /**
@@ -14602,12 +14468,10 @@ export interface BusinessLogConfig {
   ConfigPipeline?: string
   /**
    * 配置项创建时间，格式为yyyy-MM-dd HH:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigCreateTime?: string
   /**
    * 配置项更新时间，格式为yyyy-MM-dd HH:mm:ss
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigUpdateTime?: string
   /**
@@ -14648,6 +14512,10 @@ export interface BusinessLogConfig {
    * filebeat clean_inactive参数
    */
   FilebeatCleanInactive?: number
+  /**
+   * 是否开启自定义pattern
+   */
+  CustomMultilinePattern?: boolean
 }
 
 /**

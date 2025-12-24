@@ -299,6 +299,47 @@ export interface GPUConfig {
 }
 
 /**
+ * DescribeClusterMachines请求参数结构体
+ */
+export interface DescribeClusterMachinesRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 节点过滤条件，支持以下过滤条件：
+·  NodePoolsName
+    按照【节点池名】进行过滤。
+    类型：String
+    必选：否
+
+·  NodePoolsId
+    按照【节点池id】进行过滤。
+    类型：String
+    必选：否
+
+·  tags
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+
+·  tag:tag-key
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认0
+   */
+  Limit?: number
+  /**
+   * 最大输出条数，默认20，最大为100
+   */
+  Offset?: number
+}
+
+/**
  * 健康检测规则
  */
 export interface HealthCheckPolicyRule {
@@ -450,6 +491,10 @@ export interface CreateNativeNodePoolParam {
    * 原生节点池安装节点自动化助手开关
    */
   AutomationService?: boolean
+  /**
+   * 原生节点池密码
+   */
+  Password?: string
 }
 
 /**
@@ -770,6 +815,10 @@ export interface ModifyClusterMachineRequest {
    * machine的display name
    */
   DisplayName?: string
+  /**
+   * 系统盘的信息
+   */
+  SystemDisk?: Disk
   /**
    * 节点预付费信息
    */
@@ -1119,6 +1168,24 @@ export interface UpdateNativeNodePoolParam {
    * 节点池 GPU 配置
    */
   GPUConfigs?: Array<GPUConfig>
+  /**
+   * 原生节点池密码
+   */
+  Password?: string
+}
+
+/**
+ * DeleteNodePool请求参数结构体
+ */
+export interface DeleteNodePoolRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 节点池 ID
+   */
+  NodePoolId: string
 }
 
 /**
@@ -1180,6 +1247,93 @@ export interface DeleteHealthCheckPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点信息
+ */
+export interface Machine {
+  /**
+   * 节点名称
+   */
+  MachineName?: string
+  /**
+   * Machine 状态
+   */
+  MachineState?: string
+  /**
+   * Machine 所在可用区
+   */
+  Zone?: string
+  /**
+   * 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；
+   */
+  InstanceChargeType?: string
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * Machine 登录状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoginStatus?: string
+  /**
+   * 是否开启缩容保护
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsProtectedFromScaleIn?: boolean
+  /**
+   * Machine 名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * CPU核数，单位：核
+   */
+  CPU?: number
+  /**
+   * GPU核数，单位：核
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GPU?: number
+  /**
+   * 自动续费标识
+   */
+  RenewFlag?: string
+  /**
+   * 节点计费模式（已弃用）
+   */
+  PayMode?: string
+  /**
+   * 节点内存容量，单位：`GB`
+   */
+  Memory?: number
+  /**
+   * 节点系统盘配置信息
+   */
+  SystemDisk?: Disk
+  /**
+   * 公网带宽相关信息设置
+   */
+  InternetAccessible?: InternetAccessible
+  /**
+   * 机型所属机型族
+   */
+  InstanceFamily?: string
+  /**
+   * 节点内网 IP
+   */
+  LanIP?: string
+  /**
+   * 机型
+   */
+  InstanceType?: string
+  /**
+   * 包年包月节点计费过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime?: string
 }
 
 /**
@@ -1749,17 +1903,22 @@ export interface NodePool {
 }
 
 /**
- * DeleteNodePool请求参数结构体
+ * DescribeClusterMachines返回参数结构体
  */
-export interface DeleteNodePoolRequest {
+export interface DescribeClusterMachinesResponse {
   /**
-   * 集群 ID
+   * 节点池节点列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  Machines?: Array<Machine>
   /**
-   * 节点池 ID
+   * 资源总数
    */
-  NodePoolId: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -144,7 +144,8 @@ import {
   UserDefineAsrTextReviewTemplateInfo,
   CreateProcedureTemplateRequest,
   MediaProcessTaskAnimatedGraphicResult,
-  DescribeMediaProcessUsageDataRequest,
+  DescribeAigcUsageDataResponse,
+  AigcUsageDataItem,
   MPSOutputFile,
   CreatePersonSampleRequest,
   RemoveWatermarkTask,
@@ -169,6 +170,7 @@ import {
   AiAnalysisTaskClassificationOutput,
   FileDeleteTask,
   ResourceTag,
+  ImportMediaKnowledgeRequest,
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
   SetVodDomainCertificateRequest,
@@ -217,6 +219,7 @@ import {
   AiRecognitionTaskAsrFullTextResultInput,
   MediaMiniProgramReviewInfoItem,
   TaskStatData,
+  SplitMediaOutputConfig,
   CreateVodDomainRequest,
   OcrFullTextConfigureInfoForUpdate,
   DeleteRoundPlayRequest,
@@ -366,6 +369,7 @@ import {
   DescribeCLSTopicsResponse,
   MPSSubTaskResult,
   MediaTrackItem,
+  ImportMediaKnowledgeResponse,
   RestoreMediaResponse,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   ModifyEnhanceMediaTemplateResponse,
@@ -499,6 +503,7 @@ import {
   ProcedureTemplate,
   DomainDetailInfo,
   AiReviewTaskTerrorismResult,
+  SemanticsSearchResult,
   MPSAiMediaTask,
   DescribeImageReviewUsageDataRequest,
   MediaContentReviewAsrTextSegmentItem,
@@ -640,6 +645,7 @@ import {
   DescribeDefaultDistributionConfigResponse,
   DeleteProcedureTemplateRequest,
   WatermarkInput,
+  SearchMediaBySemanticsResponse,
   AiSampleWordInfo,
   AdaptiveDynamicStreamingInfoItem,
   CreateMPSTemplateRequest,
@@ -688,7 +694,7 @@ import {
   DescribeSuperPlayerConfigsRequest,
   ReduceMediaBitrateMediaProcessTaskResult,
   AiRecognitionTaskOcrFullTextResultInput,
-  SplitMediaOutputConfig,
+  DescribeAigcUsageDataRequest,
   CreateVodDomainResponse,
   ModifyVodDomainAccelerateConfigResponse,
   AiRecognitionTaskSegmentResultInput,
@@ -830,6 +836,7 @@ import {
   ExtractCopyRightWatermarkTask,
   MediaAiAnalysisFrameTagItem,
   QualityInspectItem,
+  DescribeMediaProcessUsageDataRequest,
   DescribeCLSPushTargetsResponse,
   PullUploadTask,
   DescribeImageProcessingTemplatesResponse,
@@ -870,6 +877,7 @@ import {
   DeleteJustInTimeTranscodeTemplateResponse,
   ModifyWatermarkTemplateResponse,
   DescribeJustInTimeTranscodeTemplatesRequest,
+  SearchMediaBySemanticsRequest,
   CreateHeadTailTemplateRequest,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
@@ -1314,6 +1322,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetProcedureTemplateResponse) => void
   ): Promise<ResetProcedureTemplateResponse> {
     return this.request("ResetProcedureTemplate", req, cb)
+  }
+
+  /**
+     * 该接口返回查询时间范围内AIGC的统计信息。
+   1. 可以查询最近365天内的AIGC统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+     */
+  async DescribeAigcUsageData(
+    req: DescribeAigcUsageDataRequest,
+    cb?: (error: string, rep: DescribeAigcUsageDataResponse) => void
+  ): Promise<DescribeAigcUsageDataResponse> {
+    return this.request("DescribeAigcUsageData", req, cb)
   }
 
   /**
@@ -2351,6 +2372,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于将智能分析的结果导入到知识库中。
+   */
+  async ImportMediaKnowledge(
+    req: ImportMediaKnowledgeRequest,
+    cb?: (error: string, rep: ImportMediaKnowledgeResponse) => void
+  ): Promise<ImportMediaKnowledgeResponse> {
+    return this.request("ImportMediaKnowledge", req, cb)
+  }
+
+  /**
    * 对已发起的任务进行管理。
    */
   async ManageTask(
@@ -2982,6 +3013,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePersonSampleResponse) => void
   ): Promise<CreatePersonSampleResponse> {
     return this.request("CreatePersonSample", req, cb)
+  }
+
+  /**
+   * 使用自然语言对媒体进行语义搜索。
+   */
+  async SearchMediaBySemantics(
+    req: SearchMediaBySemanticsRequest,
+    cb?: (error: string, rep: SearchMediaBySemanticsResponse) => void
+  ): Promise<SearchMediaBySemanticsResponse> {
+    return this.request("SearchMediaBySemantics", req, cb)
   }
 
   /**

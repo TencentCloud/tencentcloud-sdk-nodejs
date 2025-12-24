@@ -64,7 +64,6 @@ import {
   DescribeSpaceInfoByDeviceIdResponse,
   DescribeApplicationListRequest,
   ElementProfileTreeNode,
-  WorkspaceInfo,
   DescribeSceneListRequest,
   DescribeDeviceListRequest,
   DescribeSpaceRelationByDeviceIdRequest,
@@ -75,7 +74,6 @@ import {
   DescribeElementProfilePageRequest,
   DescribePropertyListResponse,
   DescribeSpaceDeviceRelationListRequest,
-  FileUploadURL,
   DescribeApplicationListResponse,
   ElementProperty,
   BuildingListRes,
@@ -125,7 +123,7 @@ import {
   DescribeAlarmTypeListRes,
   DescribeBuildingModelRequest,
   SsoUser,
-  AdministrativeDetail,
+  FileUploadURL,
   BuildingModel,
   SpaceDeviceRelation,
   ControlCameraPTZRequest,
@@ -139,7 +137,7 @@ import {
   DescribeBuildingProfileRequest,
   DescribeDeviceShadowListResponse,
   SpaceDataTotalStatsRes,
-  DescribeCityWorkspaceListRes,
+  DeviceTypeOverview,
   DeviceTypeSet,
   DescribeBuildingListRequest,
   ModifyDeviceGroupInfo,
@@ -167,10 +165,9 @@ import {
   DescribeDeviceGroupListRequest,
   ActionDetail,
   DescribeAdministrationByTagRes,
-  DescribeCityWorkspaceListRequest,
   UpdateWorkspaceParkAttributesResponse,
   DeleteDeviceGroupRequest,
-  DescribeCityWorkspaceListResponse,
+  DescribeSpaceInfoByDeviceIdRequest,
   BatchCreateDeviceRequest,
   BatchKillAlarmRequest,
   DescribeActionListRes,
@@ -208,7 +205,6 @@ import {
   AddAlarmProcessRecordResponse,
   DescribeActionListResponse,
   DescribeInterfaceListRequest,
-  DeviceTypeOverview,
   DescribeProductListResponse,
   ReportAppMessage,
   DescribeVideoRecordStreamRequest,
@@ -253,7 +249,6 @@ import {
   ChangeAlarmStatusRequest,
   DescribeAlarmTypeListRequest,
   DescribeCameraExtendInfoResponse,
-  DescribeSpaceInfoByDeviceIdRequest,
   DescribeCameraExtendInfoRequest,
   ElementCoordinates,
   DescribeVideoLiveStreamResponse,
@@ -428,13 +423,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设备分组列表
+   * 删除设备分组
    */
-  async DescribeDeviceGroupList(
-    req: DescribeDeviceGroupListRequest,
-    cb?: (error: string, rep: DescribeDeviceGroupListResponse) => void
-  ): Promise<DescribeDeviceGroupListResponse> {
-    return this.request("DescribeDeviceGroupList", req, cb)
+  async DeleteDeviceGroup(
+    req: DeleteDeviceGroupRequest,
+    cb?: (error: string, rep: DeleteDeviceGroupResponse) => void
+  ): Promise<DeleteDeviceGroupResponse> {
+    return this.request("DeleteDeviceGroup", req, cb)
   }
 
   /**
@@ -728,18 +723,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 老微瓴后续不继续更新
-
-通过城市id查询工作空间列表
-     */
-  async DescribeCityWorkspaceList(
-    req: DescribeCityWorkspaceListRequest,
-    cb?: (error: string, rep: DescribeCityWorkspaceListResponse) => void
-  ): Promise<DescribeCityWorkspaceListResponse> {
-    return this.request("DescribeCityWorkspaceList", req, cb)
-  }
-
-  /**
    * 查询边缘应用凭证
    */
   async DescribeEdgeApplicationToken(
@@ -760,13 +743,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除设备分组
+   * 设备分组列表
    */
-  async DeleteDeviceGroup(
-    req: DeleteDeviceGroupRequest,
-    cb?: (error: string, rep: DeleteDeviceGroupResponse) => void
-  ): Promise<DeleteDeviceGroupResponse> {
-    return this.request("DeleteDeviceGroup", req, cb)
+  async DescribeDeviceGroupList(
+    req: DescribeDeviceGroupListRequest,
+    cb?: (error: string, rep: DescribeDeviceGroupListResponse) => void
+  ): Promise<DescribeDeviceGroupListResponse> {
+    return this.request("DescribeDeviceGroupList", req, cb)
   }
 
   /**

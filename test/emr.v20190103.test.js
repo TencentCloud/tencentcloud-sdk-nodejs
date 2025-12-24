@@ -358,9 +358,9 @@ it("emr.v20190103.TerminateSLInstance", async function () {
     }
 })
 
-it("emr.v20190103.ModifyPodNum", async function () {
+it("emr.v20190103.SyncPodState", async function () {
     try {
-       const data = await client.ModifyPodNum({})
+       const data = await client.SyncPodState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +398,9 @@ it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
     }
 })
 
-it("emr.v20190103.SyncPodState", async function () {
+it("emr.v20190103.ModifyPodNum", async function () {
     try {
-       const data = await client.SyncPodState({})
+       const data = await client.ModifyPodNum({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +458,9 @@ it("emr.v20190103.ResizeDataDisks", async function () {
     }
 })
 
-it("emr.v20190103.StartStopServiceOrMonitor", async function () {
+it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
     try {
-       const data = await client.StartStopServiceOrMonitor({})
+       const data = await client.DescribeEmrOverviewMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +548,16 @@ it("emr.v20190103.ModifyInspectionSettings", async function () {
     }
 })
 
+it("emr.v20190103.DescribeHBaseTableStoreSizeMetric", async function () {
+    try {
+       const data = await client.DescribeHBaseTableStoreSizeMetric({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.InquiryPriceUpdateInstance", async function () {
     try {
        const data = await client.InquiryPriceUpdateInstance({})
@@ -588,9 +598,9 @@ it("emr.v20190103.InquiryPriceScaleOutInstance", async function () {
     }
 })
 
-it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
+it("emr.v20190103.StartStopServiceOrMonitor", async function () {
     try {
-       const data = await client.DescribeEmrOverviewMetrics({})
+       const data = await client.StartStopServiceOrMonitor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,6 +641,16 @@ it("emr.v20190103.ResetYarnConfig", async function () {
 it("emr.v20190103.ModifyUserGroup", async function () {
     try {
        const data = await client.ModifyUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeHBaseTableRequestMetric", async function () {
+    try {
+       const data = await client.DescribeHBaseTableRequestMetric({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

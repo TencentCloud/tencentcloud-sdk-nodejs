@@ -38,6 +38,16 @@ it("aiart.v20221229.SubmitTrainPortraitModelJob", async function () {
     }
 })
 
+it("aiart.v20221229.UploadTrainPortraitImages", async function () {
+    try {
+       const data = await client.UploadTrainPortraitImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
     try {
        const data = await client.SubmitDrawPortraitJob({})
@@ -81,6 +91,16 @@ it("aiart.v20221229.ImageOutpainting", async function () {
 it("aiart.v20221229.GenerateAvatar", async function () {
     try {
        const data = await client.GenerateAvatar({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.DescribeTemplateToImageJob", async function () {
+    try {
+       const data = await client.DescribeTemplateToImageJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +218,9 @@ it("aiart.v20221229.SubmitTextToImageJob", async function () {
     }
 })
 
-it("aiart.v20221229.UploadTrainPortraitImages", async function () {
+it("aiart.v20221229.SubmitTemplateToImageJob", async function () {
     try {
-       const data = await client.UploadTrainPortraitImages({})
+       const data = await client.SubmitTemplateToImageJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

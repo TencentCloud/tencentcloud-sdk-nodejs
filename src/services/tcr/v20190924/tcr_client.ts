@@ -29,21 +29,24 @@ import {
   WebhookTriggerLog,
   AccessVpc,
   ModifyTagRetentionRuleRequest,
+  ReplicationPolicyInfo,
   ModifyRepositoryResponse,
-  TriggerInvokePara,
+  DeleteReplicationRuleResponse,
   DescribeNamespacesResponse,
   DescribeInstanceCustomizedDomainResponse,
+  TriggerInvokePara,
   TriggerLogResp,
   DownloadHelmChartRequest,
   DuplicateImagePersonalRequest,
   RetentionRule,
   CreateInstanceResponse,
+  DescribeRepositoryOwnerPersonalResponse,
   DeleteInstanceTokenRequest,
   TagInfoResp,
   ModifyRepositoryRequest,
   RegistryCondition,
   DescribeInternalEndpointDnsStatusRequest,
-  CreateApplicationTriggerPersonalRequest,
+  DeleteReplicationRuleRequest,
   AutoDelStrategyInfo,
   DeleteInternalEndpointDnsRequest,
   ValidateNamespaceExistPersonalRequest,
@@ -105,7 +108,7 @@ import {
   ModifyInstanceTokenRequest,
   CreateNamespaceResponse,
   ModifyImmutableTagRulesRequest,
-  DescribeRepositoryOwnerPersonalResponse,
+  DescribeReplicationPoliciesRequest,
   VpcPrivateDomainStatus,
   Permission,
   DescribeSecurityPoliciesResponse,
@@ -154,6 +157,7 @@ import {
   DescribeNamespacePersonalRequest,
   DeleteRepositoryPersonalResponse,
   CreateInstanceTokenResponse,
+  CreateApplicationTriggerPersonalRequest,
   DescribeApplicationTriggerLogPersonalResp,
   DeleteImagePersonalRequest,
   DescribeApplicationTriggerPersonalResponse,
@@ -185,6 +189,7 @@ import {
   DeleteSecurityPolicyRequest,
   RepositoryInfoResp,
   CreateInstanceRequest,
+  DescribeReplicationPoliciesResponse,
   DescribeInstanceTokenRequest,
   BatchDeleteRepositoryPersonalResponse,
   CreateNamespaceRequest,
@@ -212,6 +217,7 @@ import {
   TaskDetail,
   DescribeImagePersonalRequest,
   CreateServiceAccountRequest,
+  PolicyFilter,
   DescribeRepositoryFilterPersonalResponse,
   ModifySecurityPolicyResponse,
   ModifyApplicationTriggerPersonalResponse,
@@ -442,6 +448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImmutableTagRulesResponse) => void
   ): Promise<DeleteImmutableTagRulesResponse> {
     return this.request("DeleteImmutableTagRules", req, cb)
+  }
+
+  /**
+   * 删除实例同步规则
+   */
+  async DeleteReplicationRule(
+    req: DeleteReplicationRuleRequest,
+    cb?: (error: string, rep: DeleteReplicationRuleResponse) => void
+  ): Promise<DeleteReplicationRuleResponse> {
+    return this.request("DeleteReplicationRule", req, cb)
   }
 
   /**
@@ -1162,6 +1178,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTagRetentionRuleResponse) => void
   ): Promise<ModifyTagRetentionRuleResponse> {
     return this.request("ModifyTagRetentionRule", req, cb)
+  }
+
+  /**
+   * 获取实例同步规则列表
+   */
+  async DescribeReplicationPolicies(
+    req: DescribeReplicationPoliciesRequest,
+    cb?: (error: string, rep: DescribeReplicationPoliciesResponse) => void
+  ): Promise<DescribeReplicationPoliciesResponse> {
+    return this.request("DescribeReplicationPolicies", req, cb)
   }
 
   /**

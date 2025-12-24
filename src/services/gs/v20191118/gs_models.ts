@@ -459,6 +459,10 @@ export interface CreateAndroidAppVersionRequest {
  */
 export interface CreateAndroidInstanceAcceleratorTokenResponse {
   /**
+   * token
+   */
+  Token?: string
+  /**
    * 加速信息
    */
   AcceleratorInfo?: string
@@ -703,7 +707,7 @@ export interface CreateSessionRequest {
    */
   Fps?: number
   /**
-   * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
+   * 【推荐填写】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
    */
   UserIp?: string
   /**
@@ -872,6 +876,36 @@ export interface DisableAndroidInstancesAppRequest {
 }
 
 /**
+ * 安卓实例备份
+ */
+export interface AndroidInstanceBackup {
+  /**
+   * 备份ID
+   */
+  BackupId?: string
+  /**
+   * 备份状态
+   */
+  State?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 大小，单位 Byte
+   */
+  Size?: number
+  /**
+   * 备份的安卓实例 ID
+   */
+  AndroidInstanceId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+}
+
+/**
  * DisconnectAndroidInstance返回参数结构体
  */
 export interface DisconnectAndroidInstanceResponse {
@@ -967,6 +1001,14 @@ export interface StartAndroidInstancesResponse {
  * DescribeAndroidInstanceBackups返回参数结构体
  */
 export interface DescribeAndroidInstanceBackupsResponse {
+  /**
+   * 备份列表
+   */
+  Backups?: Array<AndroidInstanceBackup>
+  /**
+   * 备份总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2148,13 +2190,13 @@ export interface Error {
  */
 export interface CreateAndroidInstanceAcceleratorTokenRequest {
   /**
-   * 用户IP，用户客户端的公网IP，用于就近选择起始加速节点
-   */
-  UserIP: string
-  /**
    * 实例 ID 列表。每次请求的实例的上限为 500。
    */
   AndroidInstanceIds: Array<string>
+  /**
+   * 用户IP，可以根据该 IP 选择就近加速点。如果不填，将自动选择就近加速点。
+   */
+  UserIP?: string
 }
 
 /**
@@ -3022,7 +3064,7 @@ export interface TrylockWorkerRequest {
    */
   SetNo?: number
   /**
-   * 【必选】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
+   * 【推荐填写】用户IP，用户客户端的公网IP，用于就近调度，不填将严重影响用户体验
    */
   UserIp?: string
   /**

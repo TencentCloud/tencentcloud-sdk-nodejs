@@ -199,6 +199,7 @@ FailedOperation.UnKnowError：表示识别失败；
   SubTypeDescription?: string
   /**
    * 该发票中所有字段坐标信息。包括字段英文名称、字段值所在位置四点坐标、字段所属行号，具体内容请点击左侧链接。
+字段在原始图的坐标可以根据Polygon转换得出。
    */
   ItemPolygon?: Array<ItemPolygonInfo>
   /**
@@ -3622,6 +3623,32 @@ export interface VinOCRRequest {
 }
 
 /**
+ * ExtractDocAgent返回参数结构体
+ */
+export interface ExtractDocAgentResponse {
+  /**
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。
+   */
+  Angle?: number
+  /**
+   * 配置结构化文本信息。
+   */
+  StructuralList?: Array<GroupInfo>
+  /**
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorCode?: string
+  /**
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorMessage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ocr结果信息
  */
 export interface OCRResult {
@@ -6639,7 +6666,7 @@ export interface GeneralAccurateOCRRequest {
    */
   ImageUrl?: string
   /**
-   * 是否返回单字信息，默认关
+   * 是否返回单字信息，默认值为false，注：仅ConfigID配置为OCR时支持。
    */
   IsWords?: boolean
   /**
@@ -6659,7 +6686,7 @@ export interface GeneralAccurateOCRRequest {
    */
   EnableDetectText?: boolean
   /**
-   * 配置ID支持：  OCR -- 通用场景  MulOCR--多语种场景，注：仅ConfigID配置为OCR时支持
+   * 配置ID支持： OCR -- 通用场景 MulOCR--多语种场景，默认值为OCR
    */
   ConfigID?: string
 }
@@ -7472,6 +7499,10 @@ SocialSecurityCard：社保卡
    */
   Watermark?: GeneralCardWarnInfo
   /**
+   * 是否电子证照（目前仅支持电子身份证、电子营业执照识别
+   */
+  Electron?: GeneralCardWarnInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7648,7 +7679,8 @@ export interface HandwritingEssayOCRRequest {
   PdfPageNumber?: number
   /**
    * 配置id支持：
-ArticleRecognize -- 手写作文模板
+ArticleRecognize -- 手写中文作文模板
+ArticleRecognizeEng -- 手写英文作文模板
 默认：ArticleRecognize
    */
   ConfigId?: string
@@ -10758,6 +10790,28 @@ export interface SubmitExtractDocAgentJobRequest {
    * 结束页
    */
   FileEndPageNumber?: number
+}
+
+/**
+ * ExtractDocAgent请求参数结构体
+ */
+export interface ExtractDocAgentRequest {
+  /**
+   * 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 自定义抽取需要的字段名称、字段类型、字段提示词。
+   */
+  ItemNames?: Array<ItemNames>
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF时有效。
+   */
+  PdfPageNumber?: number
 }
 
 /**

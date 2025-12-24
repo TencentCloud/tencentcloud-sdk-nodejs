@@ -3610,16 +3610,17 @@ export interface Staff {
   UserId?: string
   /**
    * 显示的员工名
-注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
+注意：该字段返回的是打码信息
    */
   DisplayName?: string
   /**
    * 员工手机号
-注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
+注意：该字段返回的是打码信息
    */
   Mobile?: string
   /**
    * 员工邮箱
+注意：该字段返回的是打码信息
    */
   Email?: string
   /**
@@ -4161,7 +4162,7 @@ export interface CommonFlowApprover {
 </ul>
 
    */
-  NotChannelOrganization: boolean
+  NotChannelOrganization?: boolean
   /**
    * 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:
 

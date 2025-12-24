@@ -48,6 +48,16 @@ it("cls.v20201016.DescribeExports", async function () {
     }
 })
 
+it("cls.v20201016.ModifyHostMetricConfig", async function () {
+    try {
+       const data = await client.ModifyHostMetricConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.GetAlarmLog", async function () {
     try {
        const data = await client.GetAlarmLog({})
@@ -58,9 +68,9 @@ it("cls.v20201016.GetAlarmLog", async function () {
     }
 })
 
-it("cls.v20201016.DeleteCloudProductLogCollection", async function () {
+it("cls.v20201016.CreateConsumerGroup", async function () {
     try {
-       const data = await client.DeleteCloudProductLogCollection({})
+       const data = await client.CreateConsumerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +88,9 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
-it("cls.v20201016.DescribeDlcDelivers", async function () {
+it("cls.v20201016.QueryMetric", async function () {
     try {
-       const data = await client.DescribeDlcDelivers({})
+       const data = await client.QueryMetric({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +108,9 @@ it("cls.v20201016.ModifyDlcDeliver", async function () {
     }
 })
 
-it("cls.v20201016.CreateWebCallback", async function () {
+it("cls.v20201016.DeleteConsumerGroup", async function () {
     try {
-       const data = await client.CreateWebCallback({})
+       const data = await client.DeleteConsumerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +178,16 @@ it("cls.v20201016.CreateLogset", async function () {
     }
 })
 
+it("cls.v20201016.DescribeEsRecharges", async function () {
+    try {
+       const data = await client.DescribeEsRecharges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
@@ -188,9 +208,9 @@ it("cls.v20201016.DescribeCloudProductLogTasks", async function () {
     }
 })
 
-it("cls.v20201016.DeleteAlarmNotice", async function () {
+it("cls.v20201016.DescribeHostMetricConfigs", async function () {
     try {
-       const data = await client.DeleteAlarmNotice({})
+       const data = await client.DescribeHostMetricConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +218,29 @@ it("cls.v20201016.DeleteAlarmNotice", async function () {
     }
 })
 
-it("cls.v20201016.QueryMetric", async function () {
+it("cls.v20201016.CreateMetricSubscribe", async function () {
     try {
-       const data = await client.QueryMetric({})
+       const data = await client.CreateMetricSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeKafkaConsumerPreview", async function () {
+    try {
+       const data = await client.DescribeKafkaConsumerPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeClusterMetricConfigs", async function () {
+    try {
+       const data = await client.DescribeClusterMetricConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +278,9 @@ it("cls.v20201016.CreateConfig", async function () {
     }
 })
 
-it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
+it("cls.v20201016.DescribeDlcDelivers", async function () {
     try {
-       const data = await client.DescribeMachineGroupConfigs({})
+       const data = await client.DescribeDlcDelivers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +291,16 @@ it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
 it("cls.v20201016.DescribeTopics", async function () {
     try {
        const data = await client.DescribeTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeSplunkPreview", async function () {
+    try {
+       const data = await client.DescribeSplunkPreview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +338,16 @@ it("cls.v20201016.MergePartition", async function () {
     }
 })
 
+it("cls.v20201016.DeleteHostMetricConfig", async function () {
+    try {
+       const data = await client.DeleteHostMetricConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteScheduledSql", async function () {
     try {
        const data = await client.DeleteScheduledSql({})
@@ -308,9 +368,49 @@ it("cls.v20201016.CreateExport", async function () {
     }
 })
 
-it("cls.v20201016.CloseKafkaConsumer", async function () {
+it("cls.v20201016.DeleteSplunkDeliver", async function () {
     try {
-       const data = await client.CloseKafkaConsumer({})
+       const data = await client.DeleteSplunkDeliver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeClusterBaseMetricConfigs", async function () {
+    try {
+       const data = await client.DescribeClusterBaseMetricConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConsumerOffsets", async function () {
+    try {
+       const data = await client.DescribeConsumerOffsets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeTopicMetricConfigs", async function () {
+    try {
+       const data = await client.DescribeTopicMetricConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyMetricSubscribe", async function () {
+    try {
+       const data = await client.ModifyMetricSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +468,59 @@ it("cls.v20201016.CreateAlarmShield", async function () {
     }
 })
 
+it("cls.v20201016.DeleteMetricSubscribe", async function () {
+    try {
+       const data = await client.DeleteMetricSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateEsRecharge", async function () {
+    try {
+       const data = await client.CreateEsRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyEsRecharge", async function () {
+    try {
+       const data = await client.ModifyEsRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteDlcDeliver", async function () {
     try {
        const data = await client.DeleteDlcDeliver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteCloudProductLogCollection", async function () {
+    try {
+       const data = await client.DeleteCloudProductLogCollection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeEsRechargePreview", async function () {
+    try {
+       const data = await client.DescribeEsRechargePreview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +558,39 @@ it("cls.v20201016.DeleteConsumer", async function () {
     }
 })
 
+it("cls.v20201016.DescribeConsumerPreview", async function () {
+    try {
+       const data = await client.DescribeConsumerPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteMachineGroup", async function () {
     try {
        const data = await client.DeleteMachineGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteEsRecharge", async function () {
+    try {
+       const data = await client.DeleteEsRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.SendConsumerHeartbeat", async function () {
+    try {
+       const data = await client.SendConsumerHeartbeat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +668,16 @@ it("cls.v20201016.DeleteAlarmShield", async function () {
     }
 })
 
+it("cls.v20201016.DescribeMetricCorrectDimension", async function () {
+    try {
+       const data = await client.DescribeMetricCorrectDimension({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeLogHistogram", async function () {
     try {
        const data = await client.DescribeLogHistogram({})
@@ -518,9 +708,9 @@ it("cls.v20201016.OpenKafkaConsumer", async function () {
     }
 })
 
-it("cls.v20201016.DescribeShipperTasks", async function () {
+it("cls.v20201016.CreateDashboardSubscribe", async function () {
     try {
-       const data = await client.DescribeShipperTasks({})
+       const data = await client.CreateDashboardSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +748,9 @@ it("cls.v20201016.DeleteIndex", async function () {
     }
 })
 
-it("cls.v20201016.DescribeKafkaConsumer", async function () {
+it("cls.v20201016.DeleteWebCallback", async function () {
     try {
-       const data = await client.DescribeKafkaConsumer({})
+       const data = await client.DeleteWebCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +761,16 @@ it("cls.v20201016.DescribeKafkaConsumer", async function () {
 it("cls.v20201016.PreviewKafkaRecharge", async function () {
     try {
        const data = await client.PreviewKafkaRecharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CloseKafkaConsumer", async function () {
+    try {
+       const data = await client.CloseKafkaConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +811,16 @@ it("cls.v20201016.SearchDashboardSubscribe", async function () {
 it("cls.v20201016.CreateConfigExtra", async function () {
     try {
        const data = await client.CreateConfigExtra({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateHostMetricConfig", async function () {
+    try {
+       const data = await client.CreateHostMetricConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,9 +878,9 @@ it("cls.v20201016.DescribeConsoleSharingList", async function () {
     }
 })
 
-it("cls.v20201016.CreateConsoleSharing", async function () {
+it("cls.v20201016.CommitConsumerOffsets", async function () {
     try {
-       const data = await client.CreateConsoleSharing({})
+       const data = await client.CommitConsumerOffsets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +888,9 @@ it("cls.v20201016.CreateConsoleSharing", async function () {
     }
 })
 
-it("cls.v20201016.CreateScheduledSql", async function () {
+it("cls.v20201016.CreateConsoleSharing", async function () {
     try {
-       const data = await client.CreateScheduledSql({})
+       const data = await client.CreateConsoleSharing({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,9 +908,9 @@ it("cls.v20201016.DescribeLogsets", async function () {
     }
 })
 
-it("cls.v20201016.CreateDashboardSubscribe", async function () {
+it("cls.v20201016.DescribeShipperTasks", async function () {
     try {
-       const data = await client.CreateDashboardSubscribe({})
+       const data = await client.DescribeShipperTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +948,26 @@ it("cls.v20201016.DescribeIndex", async function () {
     }
 })
 
+it("cls.v20201016.DescribeWebCallbacks", async function () {
+    try {
+       const data = await client.DescribeWebCallbacks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeSplunkDelivers", async function () {
+    try {
+       const data = await client.DescribeSplunkDelivers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateAlarmNotice", async function () {
     try {
        const data = await client.CreateAlarmNotice({})
@@ -748,9 +978,49 @@ it("cls.v20201016.CreateAlarmNotice", async function () {
     }
 })
 
+it("cls.v20201016.ModifyConsumerGroup", async function () {
+    try {
+       const data = await client.ModifyConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteDashboardSubscribe", async function () {
     try {
        const data = await client.DeleteDashboardSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeTopicBaseMetricConfigs", async function () {
+    try {
+       const data = await client.DescribeTopicBaseMetricConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteMetricConfig", async function () {
+    try {
+       const data = await client.DeleteMetricConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateSplunkDeliver", async function () {
+    try {
+       const data = await client.CreateSplunkDeliver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,9 +1128,9 @@ it("cls.v20201016.DeleteShipper", async function () {
     }
 })
 
-it("cls.v20201016.DeleteWebCallback", async function () {
+it("cls.v20201016.CreateWebCallback", async function () {
     try {
-       const data = await client.DeleteWebCallback({})
+       const data = await client.CreateWebCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -938,6 +1208,16 @@ it("cls.v20201016.CreateConsumer", async function () {
     }
 })
 
+it("cls.v20201016.DescribeMetricSubscribePreview", async function () {
+    try {
+       const data = await client.DescribeMetricSubscribePreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyTopic", async function () {
     try {
        const data = await client.ModifyTopic({})
@@ -971,6 +1251,26 @@ it("cls.v20201016.ModifyWebCallback", async function () {
 it("cls.v20201016.ModifyMachineGroup", async function () {
     try {
        const data = await client.ModifyMachineGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeKafkaConsumerTopics", async function () {
+    try {
+       const data = await client.DescribeKafkaConsumerTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConsumerGroups", async function () {
+    try {
+       const data = await client.DescribeConsumerGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,6 +1358,46 @@ it("cls.v20201016.ModifyConsoleSharing", async function () {
     }
 })
 
+it("cls.v20201016.DescribeMetricSubscribes", async function () {
+    try {
+       const data = await client.DescribeMetricSubscribes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.GetMetricLabelValues", async function () {
+    try {
+       const data = await client.GetMetricLabelValues({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConsumers", async function () {
+    try {
+       const data = await client.DescribeConsumers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifySplunkDeliver", async function () {
+    try {
+       const data = await client.ModifySplunkDeliver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeKafkaConsumerGroupDetail", async function () {
     try {
        const data = await client.DescribeKafkaConsumerGroupDetail({})
@@ -1071,6 +1411,16 @@ it("cls.v20201016.DescribeKafkaConsumerGroupDetail", async function () {
 it("cls.v20201016.DescribeDashboards", async function () {
     try {
        const data = await client.DescribeDashboards({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteAlarmNotice", async function () {
+    try {
+       const data = await client.DeleteAlarmNotice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1108,9 +1458,9 @@ it("cls.v20201016.UploadLog", async function () {
     }
 })
 
-it("cls.v20201016.DeleteTopic", async function () {
+it("cls.v20201016.CreateScheduledSql", async function () {
     try {
-       const data = await client.DeleteTopic({})
+       const data = await client.CreateScheduledSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1131,6 +1481,16 @@ it("cls.v20201016.ModifyLogset", async function () {
 it("cls.v20201016.ModifyConsumer", async function () {
     try {
        const data = await client.ModifyConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
+    try {
+       const data = await client.DescribeMachineGroupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,9 +1538,29 @@ it("cls.v20201016.DescribeConsumer", async function () {
     }
 })
 
+it("cls.v20201016.CreateMetricConfig", async function () {
+    try {
+       const data = await client.CreateMetricConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeNoticeContents", async function () {
     try {
        const data = await client.DescribeNoticeContents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyMetricConfig", async function () {
+    try {
+       const data = await client.ModifyMetricConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,6 +1588,16 @@ it("cls.v20201016.RetryShipperTask", async function () {
     }
 })
 
+it("cls.v20201016.DescribeKafkaConsumer", async function () {
+    try {
+       const data = await client.DescribeKafkaConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateAlarm", async function () {
     try {
        const data = await client.CreateAlarm({})
@@ -1218,9 +1608,9 @@ it("cls.v20201016.CreateAlarm", async function () {
     }
 })
 
-it("cls.v20201016.DescribeWebCallbacks", async function () {
+it("cls.v20201016.DeleteTopic", async function () {
     try {
-       const data = await client.DescribeWebCallbacks({})
+       const data = await client.DeleteTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

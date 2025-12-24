@@ -152,56 +152,6 @@ export interface DeleteTableIndexResponse {
 }
 
 /**
- * 表格回档结果信息
- */
-export interface TableRollbackResultNew {
-  /**
-   * 表格实例ID，形如：tcaplus-3be64cbb
-   */
-  TableInstanceId?: string
-  /**
-   * 任务ID，对于创建单任务的接口有效
-   */
-  TaskId?: string
-  /**
-   * 表格名称
-   */
-  TableName?: string
-  /**
-   * 表格数据结构类型，如：`GENERIC`或`LIST`
-   */
-  TableType?: string
-  /**
-   * 表格数据描述语言（IDL）类型，如：`PROTO`或`TDR`
-   */
-  TableIdlType?: string
-  /**
-   * 表格所属表格组ID
-   */
-  TableGroupId?: string
-  /**
-   * 错误信息
-   */
-  Error?: ErrorInfo
-  /**
-   * 任务ID列表，对于创建多任务的接口有效
-   */
-  TaskIds?: Array<string>
-  /**
-   * 上传的key文件ID
-   */
-  FileId?: string
-  /**
-   * 校验成功Key数量
-   */
-  SuccKeyNum?: number
-  /**
-   * Key文件中包含总的Key数量
-   */
-  TotalKeyNum?: number
-}
-
-/**
  * DescribeBackupRecords返回参数结构体
  */
 export interface DescribeBackupRecordsResponse {
@@ -2149,6 +2099,10 @@ export interface TableInfoNew {
    * 表格的缓写信息
    */
   SyncTableInfo?: SyncTableInfo
+  /**
+   * 表格分片数量
+   */
+  ShardNum?: number
 }
 
 /**
@@ -2756,24 +2710,6 @@ export interface ParsedTableInfoNew {
 }
 
 /**
- * RollbackTables返回参数结构体
- */
-export interface RollbackTablesResponse {
-  /**
-   * 表格回档任务结果数量
-   */
-  TotalCount?: number
-  /**
-   * 表格回档任务结果列表
-   */
-  TableResults?: Array<TableRollbackResultNew>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 机器类型和数量
  */
 export interface MachineInfo {
@@ -3041,28 +2977,6 @@ export interface DescribeMachineRequest {
    * 不为0，表示查询支持ipv6的机器
    */
   Ipv6Enable?: number
-}
-
-/**
- * RollbackTables请求参数结构体
- */
-export interface RollbackTablesRequest {
-  /**
-   * 待回档表格所在集群ID
-   */
-  ClusterId: string
-  /**
-   * 待回档表格列表
-   */
-  SelectedTables: Array<SelectedTableInfoNew>
-  /**
-   * 待回档时间
-   */
-  RollbackTime: string
-  /**
-   * 回档模式，支持：`KEYS`
-   */
-  Mode?: string
 }
 
 /**

@@ -10530,6 +10530,7 @@ export interface ModifyAccountPasswordRequest {
   Accounts: Array<Account>
   /**
    * 是否跳过校验密码复杂度
+   * @deprecated
    */
   SkipValidatePassword?: boolean
 }

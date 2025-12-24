@@ -48,6 +48,16 @@ it("bh.v20230418.DescribeOperationTask", async function () {
     }
 })
 
+it("bh.v20230418.ModifyOAuthSetting", async function () {
+    try {
+       const data = await client.ModifyOAuthSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DescribeDomains", async function () {
     try {
        const data = await client.DescribeDomains({})
@@ -518,9 +528,9 @@ it("bh.v20230418.ModifyDeviceGroup", async function () {
     }
 })
 
-it("bh.v20230418.ModifyOAuthSetting", async function () {
+it("bh.v20230418.DescribeDepartments", async function () {
     try {
-       const data = await client.ModifyOAuthSetting({})
+       const data = await client.DescribeDepartments({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

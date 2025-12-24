@@ -738,6 +738,16 @@ it("teo.v20220901.ModifyZoneSetting", async function () {
     }
 })
 
+it("teo.v20220901.ModifyPrefetchOriginLimit", async function () {
+    try {
+       const data = await client.ModifyPrefetchOriginLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateAliasDomain", async function () {
     try {
        const data = await client.CreateAliasDomain({})
@@ -1001,6 +1011,16 @@ it("teo.v20220901.CreateFunction", async function () {
 it("teo.v20220901.DescribeApplicationProxies", async function () {
     try {
        const data = await client.DescribeApplicationProxies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribePrefetchOriginLimit", async function () {
+    try {
+       const data = await client.DescribePrefetchOriginLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

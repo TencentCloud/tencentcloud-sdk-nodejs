@@ -27,6 +27,7 @@ import {
   GetSessionDetailsResponse,
   ModifyChunkRequest,
   QueryChunkListResponse,
+  GetJobsByKnowledgeBaseIdRequest,
   UploadJob,
   QueryChunkListRequest,
   StopChatAIRequest,
@@ -37,6 +38,7 @@ import {
   CreateDataAgentSessionResponse,
   CosFileInfo,
   KnowledgeBase,
+  GetJobsByKnowledgeBaseIdResponse,
   StopChatAIResponse,
   GetUploadJobDetailsResponse,
   Task,
@@ -196,6 +198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetSessionDetailsResponse) => void
   ): Promise<GetSessionDetailsResponse> {
     return this.request("GetSessionDetails", req, cb)
+  }
+
+  /**
+   * 根据知识库id查询jobs 列表
+   */
+  async GetJobsByKnowledgeBaseId(
+    req: GetJobsByKnowledgeBaseIdRequest,
+    cb?: (error: string, rep: GetJobsByKnowledgeBaseIdResponse) => void
+  ): Promise<GetJobsByKnowledgeBaseIdResponse> {
+    return this.request("GetJobsByKnowledgeBaseId", req, cb)
   }
 
   /**

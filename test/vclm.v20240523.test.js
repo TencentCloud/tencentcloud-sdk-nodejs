@@ -28,9 +28,9 @@ it("vclm.v20240523.SubmitHunyuanToVideoJob", async function () {
     }
 })
 
-it("vclm.v20240523.SubmitVideoVoiceJob", async function () {
+it("vclm.v20240523.DescribeVideoEditJob", async function () {
     try {
-       const data = await client.SubmitVideoVoiceJob({})
+       const data = await client.DescribeVideoEditJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +108,16 @@ it("vclm.v20240523.DescribeVideoVoiceJob", async function () {
     }
 })
 
+it("vclm.v20240523.SubmitVideoEditJob", async function () {
+    try {
+       const data = await client.SubmitVideoEditJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.DescribeVideoFaceFusionJob", async function () {
     try {
        const data = await client.DescribeVideoFaceFusionJob({})
@@ -131,6 +141,16 @@ it("vclm.v20240523.DescribeImageAnimateJob", async function () {
 it("vclm.v20240523.SubmitImageAnimateJob", async function () {
     try {
        const data = await client.SubmitImageAnimateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitVideoVoiceJob", async function () {
+    try {
+       const data = await client.SubmitVideoVoiceJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

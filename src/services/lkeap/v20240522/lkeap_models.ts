@@ -448,21 +448,13 @@ export interface RetrievalSetting {
 }
 
 /**
- * ListDocs请求参数结构体
+ * CancelTask请求参数结构体
  */
-export interface ListDocsRequest {
+export interface CancelTaskRequest {
   /**
-   * 知识库ID
+   * 取消任务的任务ID
    */
-  KnowledgeBaseId: string
-  /**
-   * 页码，默认1
-   */
-  PageNumber?: number
-  /**
-   * 每页数目，最大50，默认20
-   */
-  PageSize?: number
+  TaskId: string
 }
 
 /**
@@ -605,35 +597,21 @@ export interface GetReconstructDocumentResultResponse {
 }
 
 /**
- * ReconstructDocumentSSE 功能配置参数
+ * ListDocs请求参数结构体
  */
-export interface ReconstructDocumentSSEConfig {
+export interface ListDocsRequest {
   /**
-   * Markdown文件中表格返回的形式
-0，表格以MD形式返回
-1，表格以HTML形式返回
-默认为0
+   * 知识库ID
    */
-  TableResultType?: string
+  KnowledgeBaseId: string
   /**
-   * Markdown文件中图片返回的形式
-0:markdown中图片以链接形式返回
-1:markdown中图片只返回图片中提取的文本内容
-默认是0
+   * 页码，默认1
    */
-  MarkdownImageResponseType?: string
+  PageNumber?: number
   /**
-   * Markdown文件中是否包含页码信息
+   * 每页数目，最大50，默认20
    */
-  ReturnPageFormat?: boolean
-  /**
-   * 自定义输出页码样式,{{p}}为页码占位符，开启ReturnPageFormat生效。未填默认样式:<page_num>page {{p}}</page_num>
-   */
-  PageFormat?: string
-  /**
-   * 是否忽略失败页，返回已成功的页数据
-   */
-  IgnoreFailedPage?: boolean
+  PageSize?: number
 }
 
 /**
@@ -882,13 +860,13 @@ export interface ChatUsage {
 }
 
 /**
- * GetSplitDocumentResult请求参数结构体
+ * DeleteQAs返回参数结构体
  */
-export interface GetSplitDocumentResultRequest {
+export interface DeleteQAsResponse {
   /**
-   * 拆分任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: string
+  RequestId?: string
 }
 
 /**
@@ -939,9 +917,7 @@ export interface ReconstructDocumentSSERequest {
    */
   FileStartPageNumber?: number
   /**
-   * 说明：文档的结束页码。
-备注：当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值。
-默认值：无
+   * 说明：文档的结束页码。备注：当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值，文档页码大于100页建议使用异步解析接入。默认值：无
    */
   FileEndPageNumber?: number
   /**
@@ -1141,6 +1117,48 @@ export interface CreateReconstructDocumentFlowRequest {
 }
 
 /**
+ * GetSplitDocumentResult请求参数结构体
+ */
+export interface GetSplitDocumentResultRequest {
+  /**
+   * 拆分任务ID
+   */
+  TaskId: string
+}
+
+/**
+ * ReconstructDocumentSSE 功能配置参数
+ */
+export interface ReconstructDocumentSSEConfig {
+  /**
+   * Markdown文件中表格返回的形式
+0，表格以MD形式返回
+1，表格以HTML形式返回
+默认为0
+   */
+  TableResultType?: string
+  /**
+   * Markdown文件中图片返回的形式
+0:markdown中图片以链接形式返回
+1:markdown中图片只返回图片中提取的文本内容
+默认是0
+   */
+  MarkdownImageResponseType?: string
+  /**
+   * Markdown文件中是否包含页码信息
+   */
+  ReturnPageFormat?: boolean
+  /**
+   * 自定义输出页码样式,{{p}}为页码占位符，开启ReturnPageFormat生效。未填默认样式:<page_num>page {{p}}</page_num>
+   */
+  PageFormat?: string
+  /**
+   * 是否忽略失败页，返回已成功的页数据
+   */
+  IgnoreFailedPage?: boolean
+}
+
+/**
  * GetSplitDocumentResult返回参数结构体
  */
 export interface GetSplitDocumentResultResponse {
@@ -1308,9 +1326,9 @@ export interface UploadDocRequest {
 }
 
 /**
- * DeleteQAs返回参数结构体
+ * CancelTask返回参数结构体
  */
-export interface DeleteQAsResponse {
+export interface CancelTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

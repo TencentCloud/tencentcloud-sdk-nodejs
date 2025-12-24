@@ -130,6 +130,20 @@ export interface DescribeMonitorsResponse {
 }
 
 /**
+ * ModifyPackageAutoRenew请求参数结构体
+ */
+export interface ModifyPackageAutoRenewRequest {
+  /**
+   * 资源ID，续费和变配的时候需要传
+   */
+  ResourceId: string
+  /**
+   * 自动续费：1 开启自动续费；2 关闭自动续费
+   */
+  AutoRenew: number
+}
+
+/**
  * DescribeDetectors返回参数结构体
  */
 export interface DescribeDetectorsResponse {
@@ -155,6 +169,44 @@ export interface DeleteAddressPoolResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreatePackageAndPay请求参数结构体
+ */
+export interface CreatePackageAndPayRequest {
+  /**
+   * 下单类型：CREATE 新购；RENEW 续费；MODIFY 变配
+   */
+  DealType: string
+  /**
+   * 套餐类型：STANDARD 标准版；ULTIMATE 旗舰版；TASK 任务探测
+   */
+  GoodsType: string
+  /**
+   * 商品数量：STANDARD和ULTIMATE固定为1，TASK为任务探测数量。取值范围：1～10000
+   */
+  GoodsNum: number
+  /**
+   * 自动续费：1 开启自动续费；2 关闭自动续费
+   */
+  AutoRenew: number
+  /**
+   * 资源ID，续费和变配的时候需要传
+   */
+  ResourceId?: string
+  /**
+   * 套餐时长，以月为单位，创建和续费的时候需要传。取值范围：1～120
+   */
+  TimeSpan?: number
+  /**
+   * 升级的套餐类型，暂时只支持传ULTIMATE，不支持降配
+   */
+  NewPackageType?: string
+  /**
+   * 是否自动选择代金券，1 是；0否，默认为0
+   */
+  AutoVoucher?: number
 }
 
 /**
@@ -582,6 +634,20 @@ export interface DescribeAddressPoolDetailResponse {
 }
 
 /**
+ * ModifyPackageAutoRenew返回参数结构体
+ */
+export interface ModifyPackageAutoRenewResponse {
+  /**
+   * 资源id列表，目前只会返回一个资源，取第一个值即可
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeQuotas请求参数结构体
  */
 export interface DescribeQuotasRequest {
@@ -963,13 +1029,43 @@ ULTIMATE：旗舰版
 }
 
 /**
- * DescribeAddressPoolDetail请求参数结构体
+ * 添加地址池地址
  */
-export interface DescribeAddressPoolDetailRequest {
+export interface Address {
   /**
-   * 地址池id
+   * 地址值：只支持ipv4、ipv6和域名格式；
+不支持回环地址、保留地址、内网地址与腾讯保留网段
    */
-  PoolId: number
+  Addr: string
+  /**
+   * 是否启用:DISABLED不启用；ENABLED启用
+   */
+  IsEnable: string
+  /**
+   * 地址id
+   */
+  AddressId?: number
+  /**
+   * 地址名称
+   */
+  Location?: string
+  /**
+   * OK正常，DOWN故障，WARN风险，UNKNOWN探测中，UNMONITORED未知
+   */
+  Status?: string
+  /**
+   * 权重，流量策略为WEIGHT时，必填；范围1-100
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 创建时间
+   */
+  CreatedOn?: string
+  /**
+   * 修改时间
+   */
+  UpdatedOn?: string
 }
 
 /**
@@ -1207,43 +1303,13 @@ export interface GroupLine {
 }
 
 /**
- * 添加地址池地址
+ * DescribeAddressPoolDetail请求参数结构体
  */
-export interface Address {
+export interface DescribeAddressPoolDetailRequest {
   /**
-   * 地址值：只支持ipv4、ipv6和域名格式；
-不支持回环地址、保留地址、内网地址与腾讯保留网段
+   * 地址池id
    */
-  Addr: string
-  /**
-   * 是否启用:DISABLED不启用；ENABLED启用
-   */
-  IsEnable: string
-  /**
-   * 地址id
-   */
-  AddressId?: number
-  /**
-   * 地址名称
-   */
-  Location?: string
-  /**
-   * OK正常，DOWN故障，WARN风险，UNKNOWN探测中，UNMONITORED未知
-   */
-  Status?: string
-  /**
-   * 权重，流量策略为WEIGHT时，必填；范围1-100
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: number
-  /**
-   * 创建时间
-   */
-  CreatedOn?: string
-  /**
-   * 修改时间
-   */
-  UpdatedOn?: string
+  PoolId: number
 }
 
 /**
@@ -1313,13 +1379,13 @@ export interface MainPoolWeight {
 }
 
 /**
- * ModifyAddressPool返回参数结构体
+ * CreatePackageAndPay返回参数结构体
  */
-export interface ModifyAddressPoolResponse {
+export interface CreatePackageAndPayResponse {
   /**
-   * 是否修改成功
+   * 资源id列表，目前只会返回一个资源，取第一个值即可
    */
-  Msg?: string
+  ResourceIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1413,17 +1479,17 @@ export interface ModifyMonitorResponse {
 }
 
 /**
- * 计费项
+ * DescribeAddressLocation返回参数结构体
  */
-export interface CostItem {
+export interface DescribeAddressLocationResponse {
   /**
-   * 计费项名称
+   * 所属地域
    */
-  CostName?: string
+  AddressLocation?: Array<AddressLocation>
   /**
-   * 计费项值
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CostValue?: number
+  RequestId?: string
 }
 
 /**
@@ -1865,6 +1931,20 @@ export interface StrategyDetail {
 }
 
 /**
+ * ModifyAddressPool返回参数结构体
+ */
+export interface ModifyAddressPoolResponse {
+  /**
+   * 是否修改成功
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeQuotas返回参数结构体
  */
 export interface DescribeQuotasResponse {
@@ -1893,17 +1973,17 @@ export interface ModifyInstanceConfigRequest {
 }
 
 /**
- * DescribeAddressLocation返回参数结构体
+ * 计费项
  */
-export interface DescribeAddressLocationResponse {
+export interface CostItem {
   /**
-   * 所属地域
+   * 计费项名称
    */
-  AddressLocation?: Array<AddressLocation>
+  CostName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 计费项值
    */
-  RequestId?: string
+  CostValue?: number
 }
 
 /**

@@ -4582,7 +4582,7 @@ export interface ChargePrepaid {
  */
 export interface ModifyInstancesChargeTypeRequest {
   /**
-   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。
+   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为20。
    */
   InstanceIds: Array<string>
   /**
@@ -5060,7 +5060,7 @@ export interface ModifyLaunchTemplateDefaultVersionResponse {
  */
 export interface DescribeInstancesStatusRequest {
   /**
-   * 按照一个或者多个实例ID查询。实例ID形如：`ins-11112222`。此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。
+   * 按照一个或者多个实例ID查询。实例ID形如：`ins-dyzp06q6`。此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。
    */
   InstanceIds?: Array<string>
   /**

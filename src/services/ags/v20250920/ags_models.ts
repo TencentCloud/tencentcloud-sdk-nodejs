@@ -16,6 +16,24 @@
  */
 
 /**
+ * 沙箱实例对象存储挂载配置
+ */
+export interface CosStorageSource {
+  /**
+   * 对象存储访问域名
+   */
+  Endpoint?: string
+  /**
+   * 对象存储桶名称
+   */
+  BucketName?: string
+  /**
+   * 对象存储桶路径，必须为以/起始的绝对路径
+   */
+  BucketPath?: string
+}
+
+/**
  * StartSandboxInstance请求参数结构体
  */
 export interface StartSandboxInstanceRequest {
@@ -35,6 +53,10 @@ export interface StartSandboxInstanceRequest {
    * 幂等性 Token，长度不超过 64 字符
    */
   ClientToken?: string
+  /**
+   * 沙箱实例存储挂载配置
+   */
+  MountOptions?: Array<MountOption>
 }
 
 /**
@@ -77,6 +99,10 @@ export interface SandboxInstance {
    * 更新时间（ISO 8601 格式）
    */
   UpdateTime?: string
+  /**
+   * 存储挂载选项
+   */
+  MountOptions?: Array<MountOption>
 }
 
 /**
@@ -183,6 +209,14 @@ export interface CreateSandboxToolRequest {
    * 幂等性 Token，长度不超过 64 字符
    */
   ClientToken?: string
+  /**
+   * 角色ARN
+   */
+  RoleArn?: string
+  /**
+   * 沙箱工具存储配置
+   */
+  StorageMounts?: Array<StorageMount>
 }
 
 /**
@@ -232,6 +266,16 @@ export interface UpdateSandboxInstanceResponse {
 }
 
 /**
+ * 挂载存储配置
+ */
+export interface StorageSource {
+  /**
+   * 对象存储桶配置
+   */
+  Cos?: CosStorageSource
+}
+
+/**
  * DeleteSandboxTool请求参数结构体
  */
 export interface DeleteSandboxToolRequest {
@@ -256,9 +300,13 @@ export interface CreateAPIKeyRequest {
  */
 export interface NetworkConfiguration {
   /**
-   * 网络模式（当前支持 PUBLIC）
+   * 网络模式（当前支持 PUBLIC, VPC, SANDBOX）
    */
   NetworkMode: string
+  /**
+   * VPC网络相关配置
+   */
+  VpcConfig?: VPCConfig
 }
 
 /**
@@ -315,6 +363,36 @@ export interface SandboxTool {
    * 沙箱工具更新时间，格式：ISO8601
    */
   UpdateTime?: string
+  /**
+   * 沙箱工具绑定角色ARN
+   */
+  RoleArn?: string
+  /**
+   * 沙箱工具中实例存储挂载配置
+   */
+  StorageMounts?: Array<StorageMount>
+}
+
+/**
+ * 沙箱实例存储挂载配置可选项，用于覆盖沙箱工具的存储配置的部分选项，并提供子路径挂载配置。
+ */
+export interface MountOption {
+  /**
+   * 指定沙箱工具中的存储配置名称
+   */
+  Name?: string
+  /**
+   * 沙箱实例本地挂载路径（可选），默认继承工具中的存储配置
+   */
+  MountPath?: string
+  /**
+   * 沙箱实例存储挂载子路径（可选）
+   */
+  SubPath?: string
+  /**
+   * 沙箱实例存储挂载读写权限（可选），默认继承工具存储配置
+   */
+  ReadOnly?: boolean
 }
 
 /**
@@ -443,6 +521,20 @@ export interface UpdateSandboxToolResponse {
 }
 
 /**
+ * 沙箱工具VPC相关配置
+ */
+export interface VPCConfig {
+  /**
+   * VPC子网ID列表
+   */
+  SubnetIds?: Array<string>
+  /**
+   * 安全组ID列表
+   */
+  SecurityGroupIds?: Array<string>
+}
+
+/**
  * DeleteAPIKey请求参数结构体
  */
 export interface DeleteAPIKeyRequest {
@@ -478,6 +570,28 @@ export interface StopSandboxInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 沙箱工具中实例存储挂载配置
+ */
+export interface StorageMount {
+  /**
+   * 存储挂载配置名称
+   */
+  Name?: string
+  /**
+   * 存储配置
+   */
+  StorageSource?: StorageSource
+  /**
+   * 沙箱实例本地挂载路径
+   */
+  MountPath?: string
+  /**
+   * 存储挂载读写权限配置，默认为false
+   */
+  ReadOnly?: boolean
 }
 
 /**

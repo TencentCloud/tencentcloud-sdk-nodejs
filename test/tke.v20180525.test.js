@@ -438,9 +438,9 @@ it("tke.v20180525.UninstallLogAgent", async function () {
     }
 })
 
-it("tke.v20180525.DescribePodChargeInfo", async function () {
+it("tke.v20180525.DescribeControlPlaneLogs", async function () {
     try {
-       const data = await client.DescribePodChargeInfo({})
+       const data = await client.DescribeControlPlaneLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -811,6 +811,16 @@ it("tke.v20180525.UninstallClusterRelease", async function () {
 it("tke.v20180525.AddVpcCniSubnets", async function () {
     try {
        const data = await client.AddVpcCniSubnets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DisableControlPlaneLogs", async function () {
+    try {
+       const data = await client.DisableControlPlaneLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1728,9 +1738,9 @@ it("tke.v20180525.RenewReservedInstances", async function () {
     }
 })
 
-it("tke.v20180525.DescribeTasks", async function () {
+it("tke.v20180525.DescribePodChargeInfo", async function () {
     try {
-       const data = await client.DescribeTasks({})
+       const data = await client.DescribePodChargeInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1918,6 +1928,16 @@ it("tke.v20180525.DescribeClusterRoutes", async function () {
     }
 })
 
+it("tke.v20180525.EnableControlPlaneLogs", async function () {
+    try {
+       const data = await client.EnableControlPlaneLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribePrometheusGlobalConfig", async function () {
     try {
        const data = await client.DescribePrometheusGlobalConfig({})
@@ -1971,6 +1991,16 @@ it("tke.v20180525.DescribeRollOutSequences", async function () {
 it("tke.v20180525.CheckInstancesUpgradeAble", async function () {
     try {
        const data = await client.CheckInstancesUpgradeAble({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeTasks", async function () {
+    try {
+       const data = await client.DescribeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

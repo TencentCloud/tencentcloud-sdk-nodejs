@@ -1298,6 +1298,16 @@ it("mps.v20190612.DeleteSampleSnapshotTemplate", async function () {
     }
 })
 
+it("mps.v20190612.TextTranslation", async function () {
+    try {
+       const data = await client.TextTranslation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamLinkFlowMediaStatistics", async function () {
     try {
        const data = await client.DescribeStreamLinkFlowMediaStatistics({})

@@ -2767,33 +2767,25 @@ export interface DescribePrometheusTempSyncRequest {
 }
 
 /**
- * DescribePrometheusGlobalConfig返回参数结构体
+ * DescribePrometheusClusterAgents返回参数结构体
  */
-export interface DescribePrometheusGlobalConfigResponse {
+export interface DescribePrometheusClusterAgentsResponse {
   /**
-   * 配置内容
+   * 被关联集群信息
    */
-  Config?: string
+  Agents?: Array<PrometheusAgentOverview>
   /**
-   * ServiceMonitors列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 被关联集群总量
    */
-  ServiceMonitors?: Array<PrometheusConfigItem>
+  Total?: number
   /**
-   * PodMonitors列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否为首次绑定，如果是首次绑定则需要安装预聚合规则
    */
-  PodMonitors?: Array<PrometheusConfigItem>
+  IsFirstBind?: boolean
   /**
-   * RawJobs列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例组件是否需要更新镜像版本
    */
-  RawJobs?: Array<PrometheusConfigItem>
-  /**
-   * Probes列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Probes?: Array<PrometheusConfigItem>
+  ImageNeedUpdate?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4604,25 +4596,33 @@ export interface DescribePrometheusTargetsTMPResponse {
 }
 
 /**
- * DescribePrometheusClusterAgents返回参数结构体
+ * DescribePrometheusGlobalConfig返回参数结构体
  */
-export interface DescribePrometheusClusterAgentsResponse {
+export interface DescribePrometheusGlobalConfigResponse {
   /**
-   * 被关联集群信息
+   * 配置内容
    */
-  Agents?: Array<PrometheusAgentOverview>
+  Config?: string
   /**
-   * 被关联集群总量
+   * ServiceMonitors列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
+  ServiceMonitors?: Array<PrometheusConfigItem>
   /**
-   * 是否为首次绑定，如果是首次绑定则需要安装预聚合规则
+   * PodMonitors列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsFirstBind?: boolean
+  PodMonitors?: Array<PrometheusConfigItem>
   /**
-   * 实例组件是否需要更新镜像版本
+   * RawJobs列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageNeedUpdate?: boolean
+  RawJobs?: Array<PrometheusConfigItem>
+  /**
+   * Probes列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Probes?: Array<PrometheusConfigItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4875,6 +4875,42 @@ export interface DescribePrometheusInstanceUsageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 绑定进度参数
+ */
+export interface BindProgressStep {
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndAt?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedMsg?: string
+  /**
+   * 状态
+   */
+  LifeState?: string
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartAt?: string
+  /**
+   * 任务进程
+"prepare_env"   // 准备环境,安装instance EKS
+"check_target"  // 检查target是否为running
+"install_crd"   // 安装需要测crd
+"install_rbac"  // 安装rbac
+"install_agent" // 安装agent
+"install_cr"    // 安装prometheus CR
+"install_basic" // 安装基础采集信息，标记target状态为normal
+   */
+  Step?: string
 }
 
 /**
@@ -5521,21 +5557,17 @@ export interface DescribeRemoteWritesRequest {
 }
 
 /**
- * ModifyAlarmPolicyTasks请求参数结构体
+ * DescribeAlarmNotice请求参数结构体
  */
-export interface ModifyAlarmPolicyTasksRequest {
+export interface DescribeAlarmNoticeRequest {
   /**
    * 模块名，这里填“monitor”
    */
   Module: string
   /**
-   * 告警策略 ID
+   * 告警通知模板 id
    */
-  PolicyId: string
-  /**
-   * 告警策略触发任务列表，空数据代表解绑示例值： { "Type": "AS", "TaskConfig": "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0zhspjx\",\"Policy\":\"asp-ganig28\"}" }
-   */
-  TriggerTasks?: Array<AlarmPolicyTriggerTask>
+  NoticeId: string
 }
 
 /**
@@ -5572,6 +5604,27 @@ export interface DescribeBindingPolicyObjectListDimension {
    * 事件维度组合json字符串
    */
   EventDimensions: string
+}
+
+/**
+ * 绑定状态Response
+ */
+export interface BindProgressResponse {
+  /**
+   * 绑定步骤
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Steps?: Array<BindProgressStep>
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 集群绑定状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -9620,6 +9673,10 @@ export interface EventCondition {
  */
 export interface DescribeClusterAgentCreatingProgressResponse {
   /**
+   * 绑定状态response
+   */
+  Response?: Array<BindProgressResponse>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9976,17 +10033,21 @@ export interface DescribeGrafanaConfigResponse {
 }
 
 /**
- * DescribeAlarmNotice请求参数结构体
+ * ModifyAlarmPolicyTasks请求参数结构体
  */
-export interface DescribeAlarmNoticeRequest {
+export interface ModifyAlarmPolicyTasksRequest {
   /**
    * 模块名，这里填“monitor”
    */
   Module: string
   /**
-   * 告警通知模板 id
+   * 告警策略 ID
    */
-  NoticeId: string
+  PolicyId: string
+  /**
+   * 告警策略触发任务列表，空数据代表解绑示例值： { "Type": "AS", "TaskConfig": "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0zhspjx\",\"Policy\":\"asp-ganig28\"}" }
+   */
+  TriggerTasks?: Array<AlarmPolicyTriggerTask>
 }
 
 /**
@@ -10543,7 +10604,16 @@ export interface PrometheusAlertPolicyItem {
 /**
  * DescribeClusterAgentCreatingProgress请求参数结构体
  */
-export type DescribeClusterAgentCreatingProgressRequest = null
+export interface DescribeClusterAgentCreatingProgressRequest {
+  /**
+   * prom实例id
+   */
+  InstanceId: string
+  /**
+   * 集群ids
+   */
+  ClusterIds: Array<string>
+}
 
 /**
  * Prometheus 抓取任务

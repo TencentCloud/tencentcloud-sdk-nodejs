@@ -38,6 +38,7 @@ import {
   SubmitVideoVoiceJobResponse,
   FaceMergeInfo,
   CheckAnimateImageJobResponse,
+  SubmitVideoEditJobResponse,
   SubmitTemplateToVideoJobResponse,
   CheckAnimateImageJobRequest,
   DescribeVideoStylizationJobRequest,
@@ -49,6 +50,7 @@ import {
   SubmitHunyuanToVideoJobResponse,
   DescribeHumanActorJobResponse,
   ExtraParam,
+  DescribeVideoEditJobResponse,
   DescribeVideoStylizationJobResponse,
   SubmitVideoStylizationJobResponse,
   SubmitVideoFaceFusionJobRequest,
@@ -57,9 +59,11 @@ import {
   SubmitImageToVideoGeneralJobRequest,
   SubmitHunyuanToVideoJobRequest,
   Image,
+  DescribeVideoEditJobRequest,
   DescribeHumanActorJobRequest,
   DescribeImageToVideoGeneralJobRequest,
   DescribeTemplateToVideoJobRequest,
+  SubmitVideoEditJobRequest,
   DescribeImageAnimateJobRequest,
   DescribePortraitSingJobResponse,
   DescribeHunyuanToVideoJobResponse,
@@ -87,13 +91,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交视频配音效任务，输入视频后提交请求，会返回一个JobId，用于查询视频配音效的处理进度。
+   * 用于提交视频编辑任务，支持上传视频、文本及图片素材开展编辑操作，涵盖风格迁移、元素替换、内容增减等核心能力。
    */
-  async SubmitVideoVoiceJob(
-    req: SubmitVideoVoiceJobRequest,
-    cb?: (error: string, rep: SubmitVideoVoiceJobResponse) => void
-  ): Promise<SubmitVideoVoiceJobResponse> {
-    return this.request("SubmitVideoVoiceJob", req, cb)
+  async DescribeVideoEditJob(
+    req: DescribeVideoEditJobRequest,
+    cb?: (error: string, rep: DescribeVideoEditJobResponse) => void
+  ): Promise<DescribeVideoEditJobResponse> {
+    return this.request("DescribeVideoEditJob", req, cb)
   }
 
   /**
@@ -170,6 +174,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于提交视频编辑任务，支持上传视频、文本及图片素材开展编辑操作，涵盖风格迁移、元素替换、内容增减等核心能力。
+   */
+  async SubmitVideoEditJob(
+    req: SubmitVideoEditJobRequest,
+    cb?: (error: string, rep: SubmitVideoEditJobResponse) => void
+  ): Promise<SubmitVideoEditJobResponse> {
+    return this.request("SubmitVideoEditJob", req, cb)
+  }
+
+  /**
    * 查询视频人脸融合任务
    */
   async DescribeVideoFaceFusionJob(
@@ -197,6 +211,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitImageAnimateJobResponse) => void
   ): Promise<SubmitImageAnimateJobResponse> {
     return this.request("SubmitImageAnimateJob", req, cb)
+  }
+
+  /**
+   * 提交视频配音效任务，输入视频后提交请求，会返回一个JobId，用于查询视频配音效的处理进度。
+   */
+  async SubmitVideoVoiceJob(
+    req: SubmitVideoVoiceJobRequest,
+    cb?: (error: string, rep: SubmitVideoVoiceJobResponse) => void
+  ): Promise<SubmitVideoVoiceJobResponse> {
+    return this.request("SubmitVideoVoiceJob", req, cb)
   }
 
   /**

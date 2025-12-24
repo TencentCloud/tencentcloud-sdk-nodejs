@@ -7120,11 +7120,11 @@ p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，
    */
   JumpEvents?: Array<JumpEvent>
   /**
-   * 企业证照类型：<ul><li> **USCC** :(默认)工商组织营业执照</li><li> **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证</li></ul>
+   * 企业证照类型：<ul><li> **USCC** :(默认)工商组织营业执照</li><li> **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证</li><li> **CLINICFILLINGCERTIFICATE** :诊所备案证</li></ul>
 
 注意 ：
-如果企业证照类型是医疗机构，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.
-医疗机构的企业授权方式  仅有授权书的方式。企业认证仅有上传营业执照的方式。
+如果企业证照类型是医疗机构执业许可证或者诊所备案证，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.
+医疗机构执业许可证和诊所备案证的企业授权方式  仅有授权书的方式。企业认证仅有上传营业执照的方式。
    */
   OrganizationIdCardType?: string
   /**
@@ -8429,6 +8429,25 @@ export interface CreateFlowGroupByFilesRequest {
 </ul>
    */
   FlowGroupOptions?: FlowGroupOptions
+  /**
+   * 用户自定义合同类型。
+
+自定义合同类型配置的地方如链接图所示。[点击查看自定义合同类型管理的位置](https://qcloudimg.tencent-cloud.cn/raw/36582cea03ae6a2559894844942b5d5c.png)
+
+注意：
+如果传递了自定义合同类型，则每一个子合同设置的自定义合同类型将会失效，已最外层定义的为准。
+例如：
+这份合同组有三个子合同，设置合同类型为<font color="blue">人事/劳务</font>
+第一份子合同设置的合同自定义合同类型是<font color="blue">采购</font>
+第二份和第三份子合同设置的合同自定义合同类型是<font color="blue">人事/劳务</font>
+但最终这个合同组的合同类型是<font color="blue">人事/劳务</font>
+
+
+
+
+
+   */
+  UserFlowType?: UserFlowType
 }
 
 /**
@@ -8548,6 +8567,7 @@ export interface RegisterInfo {
 
 USCC :(默认)工商组织营业执照
 PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证
+CLINICFILLINGCERTIFICATE:诊所备案证
    */
   OrganizationIdCardType?: string
   /**
@@ -9442,6 +9462,13 @@ export interface CreateFlowGroupByTemplatesRequest {
 </ul>
    */
   FlowGroupOptions?: FlowGroupOptions
+  /**
+   * 用户自定义合同类型。  
+自定义合同类型配置的地方如链接图所示。[点击查看自定义合同类型管理的位置](https://qcloudimg.tencent-cloud.cn/raw/36582cea03ae6a2559894844942b5d5c.png)  
+
+注意： 如果传递了自定义合同类型，则每一个子合同对应模板上面的自定义合同类型将会失效，已最外层定义的为准。 例如： 这份合同组有三个子合同，设置合同类型为<font color="blue">人事/劳务</font> 第一份子合同选择的模板的合同自定义合同类型是<font color="blue">采购</font> 第二份和第三份子合同选择的模板的合同自定义合同类型是<font color="blue">人事/劳务</font> 但最终这个合同组的合同类型是<font color="blue">人事/劳务</font>
+   */
+  UserFlowType?: UserFlowType
 }
 
 /**
@@ -10730,7 +10757,7 @@ export interface CreateFlowRequest {
    */
   RemindedOn?: number
   /**
-   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64格式编码，支持的最大数据大小为 20480长度。
 
 在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
    */

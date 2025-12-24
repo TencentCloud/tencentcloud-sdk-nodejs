@@ -24,26 +24,33 @@ import {
   ScheduledSqlResouceInfo,
   DynamicIndex,
   CheckFunctionRequest,
+  NetInfo,
   CreateLogsetRequest,
   CreateScheduledSqlResponse,
   CreateConsoleSharingRequest,
   SearchLogResponse,
-  DeleteTopicRequest,
+  DeleteMetricSubscribeResponse,
   DescribePartitionsRequest,
   CheckFunctionResponse,
   ModifyAlarmResponse,
+  PreviewKafkaRechargeRequest,
   CollectInfo,
   TopicIdAndRegion,
   CreateConfigExtraResponse,
+  DescribeClusterBaseMetricConfigsRequest,
   DescribeConfigExtrasResponse,
+  DeleteMetricSubscribeRequest,
   ConditionInfo,
+  EsInfo,
   DeleteMachineGroupResponse,
   Tag,
   ScheduledSqlTaskInfo,
   CreateDlcDeliverResponse,
-  DeleteConfigFromMachineGroupResponse,
+  JsonInfo,
+  Label,
   ModifyMachineGroupResponse,
   RuleInfo,
+  DescribeConsumerPreviewRequest,
   LogItems,
   RuleKeyValueInfo,
   DeleteExportResponse,
@@ -59,69 +66,92 @@ import {
   DeleteAlarmShieldResponse,
   CreateIndexRequest,
   CreateTopicRequest,
+  ModifyDataTransformRequest,
   CreateDlcDeliverRequest,
   DescribeMachineGroupsRequest,
+  Dimension,
   ModifyScheduledSqlRequest,
   DeleteConfigResponse,
   CreateDeliverCloudFunctionRequest,
   ModifyDlcDeliverResponse,
   ModifyWebCallbackResponse,
+  DescribeMetricSubscribesResponse,
   CreateWebCallbackRequest,
+  DescribeClusterMetricConfigsRequest,
   DescribeConfigsRequest,
   DlcPartitionExtra,
+  DescribeKafkaConsumerTopicsResponse,
   DashboardTopicInfo,
   QueryMetricRequest,
   CloudProductLogTaskInfo,
+  Instance,
   DescribeAlarmNoticesResponse,
   DeleteDataTransformRequest,
   AddMachineGroupInfoRequest,
   DescribeKafkaConsumerGroupListResponse,
+  CreateHostMetricConfigResponse,
+  ModifyConsumerGroupRequest,
   CreateTopicResponse,
   DeleteAlarmResponse,
   DeleteConsoleSharingResponse,
-  DescribeDashboardsResponse,
+  DescribeTopicBaseMetricConfigsRequest,
+  PreviewLogStatistic,
   DescribeDlcDeliversResponse,
   ModifyIndexRequest,
   MachineInfo,
   ValueInfo,
   GetAlarmLogRequest,
   DeleteCosRechargeResponse,
+  CustomMetricSpec,
   DlcPartitionInfo,
   GroupTriggerConditionInfo,
   KafkaRechargeInfo,
   ConfigInfo,
-  PreviewKafkaRechargeRequest,
+  DeleteTopicRequest,
   ModifyShipperRequest,
   MonitorNoticeRule,
+  DescribeKafkaConsumerPreviewRequest,
   CreateDeliverCloudFunctionResponse,
-  PreviewLogStatistic,
+  DescribeDashboardsResponse,
   CompressInfo,
   CreateConfigResponse,
   CreateCloudProductLogCollectionResponse,
   SearchCosRechargeInfoResponse,
+  CreateEsRechargeResponse,
   KeyValueInfo,
   DataTransformSqlDataSource,
   ModifyMachineGroupRequest,
-  DescribeConsumerResponse,
+  AnonymousInfo,
+  DescribeHostMetricConfigsResponse,
+  CreateNoticeContentRequest,
   DeleteAlarmNoticeRequest,
   DescribeScheduledSqlInfoResponse,
+  DescribeConsumersRequest,
   CreateMachineGroupRequest,
   DescribeExportsResponse,
-  CreateNoticeContentRequest,
+  DeliverConfig,
   CsvInfo,
   DescribeCloudProductLogTasksRequest,
   CreateAlarmNoticeRequest,
   HistogramInfo,
-  QueryRangeMetricRequest,
+  DescribeTopicMetricConfigsRequest,
+  ModifyLogsetRequest,
+  SearchDashboardSubscribeResponse,
   ModifyCosRechargeRequest,
+  DescribeClusterMetricConfigsResponse,
   DescribeWebCallbacksRequest,
-  NoticeRule,
+  ConsumerContent,
+  CreateMetricSubscribeResponse,
   DescribeMachinesRequest,
   KeyRegexInfo,
+  DeleteSplunkDeliverResponse,
+  DescribeTopicMetricConfigsResponse,
   DeleteDashboardSubscribeRequest,
   DeleteAlarmNoticeResponse,
   DeleteAlarmShieldRequest,
+  ModifyEsRechargeRequest,
   DeleteLogsetResponse,
+  TopicPartitionOffsetInfo,
   DeleteDlcDeliverResponse,
   ParquetKeyInfo,
   DescribeShipperTasksResponse,
@@ -129,17 +159,22 @@ import {
   ModifyConfigExtraResponse,
   DeleteConsoleSharingRequest,
   ModifyConsoleSharingRequest,
-  ModifyDataTransformRequest,
+  AppointLabel,
+  CommitConsumerOffsetsRequest,
+  ConsumerInfo,
   DescribeAlarmsRequest,
   DescribeShippersResponse,
   ModifyShipperResponse,
   GroupPartitionInfo,
+  GetMetricLabelValuesResponse,
   QueryMetricResponse,
   DeleteLogsetRequest,
   OpenKafkaConsumerResponse,
   AlarmTargetInfo,
+  CreateSplunkDeliverResponse,
   FilePathInfo,
   ModifyScheduledSqlResponse,
+  QueryRangeMetricRequest,
   MetaTagInfo,
   LogInfo,
   DescribeConfigsResponse,
@@ -150,8 +185,11 @@ import {
   CreateConsumerResponse,
   DataTransformResouceInfo,
   DeleteMachineGroupRequest,
+  DescribeSplunkDeliversResponse,
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
+  ModifyHostMetricConfigResponse,
+  DescribeMetricCorrectDimensionResponse,
   ModifyAlarmNoticeRequest,
   TopicExtendInfo,
   CreateAlarmRequest,
@@ -159,35 +197,53 @@ import {
   DeleteScheduledSqlResponse,
   EscalateNoticeInfo,
   ExcludePathInfo,
+  DeleteConfigExtraRequest,
   FilterRuleInfo,
+  DescribeEsRechargesResponse,
   AdvanceFilterRuleInfo,
   ContainerFileInfo,
   CheckRechargeKafkaServerRequest,
   DeleteDashboardSubscribeResponse,
   DescribeLogHistogramResponse,
+  DescribeConsumerGroupsRequest,
   CreateWebCallbackResponse,
+  DeleteConsumerGroupRequest,
   OpenKafkaConsumerRequest,
+  CreateConsumerGroupResponse,
+  SplunkDeliverInfo,
   NoticeContentInfo,
-  AnonymousInfo,
+  ModifyMetricConfigResponse,
+  DescribeConsumerResponse,
   UploadLogRequest,
+  EsTimeInfo,
+  DescribeClusterBaseMetricConfigsResponse,
   CreateIndexResponse,
   ModifyDashboardSubscribeResponse,
+  DescribeSplunkPreviewRequest,
   ModifyConfigRequest,
-  JsonInfo,
+  CreateMetricConfigResponse,
+  CreateConsumerGroupRequest,
   PreviewKafkaRechargeResponse,
   MonitorNotice,
   DescribeAlarmsResponse,
+  MetricCollectConfig,
   DeleteIndexResponse,
   AlarmAnalysisConfig,
   SearchLogErrors,
+  DescribeSplunkDeliversRequest,
   DeleteScheduledSqlRequest,
+  ModifyKafkaConsumerRequest,
+  DescribeConsumerGroupsResponse,
   NoticeContent,
   CreateDataTransformResponse,
+  DescribeKafkaConsumerTopicsRequest,
   CreateConfigExtraRequest,
   CreateConsumerRequest,
+  DeleteHostMetricConfigRequest,
+  DeleteMetricConfigResponse,
   DashboardInfo,
   DataTransformTaskInfo,
-  ConsumerContent,
+  NoticeRule,
   ContentInfo,
   ApplyConfigToMachineGroupResponse,
   AlertHistoryNotice,
@@ -199,34 +255,47 @@ import {
   Ckafka,
   MultiCondition,
   ModifyLogsetResponse,
-  ModifyKafkaConsumerRequest,
+  HostMetricItem,
+  GetMetricLabelValuesRequest,
+  ModifyMetricSubscribeResponse,
   DescribeIndexResponse,
+  DescribeConsumerPreviewResponse,
   DeleteMachineGroupInfoResponse,
-  ModifyKafkaConsumerGroupOffsetResponse,
+  CheckRechargeKafkaServerResponse,
+  InstanceData,
   DeleteShipperResponse,
   DeleteNoticeContentRequest,
   DescribeKafkaConsumerRequest,
   ModifyDataTransformResponse,
-  MultiTopicSearchInformation,
+  DescribeDataTransformInfoResponse,
   ModifyCosRechargeResponse,
-  ModifyConfigExtraRequest,
+  DescribeEsRechargePreviewRequest,
+  MergePartitionResponse,
   CreateScheduledSqlRequest,
   DescribeKafkaConsumerGroupDetailResponse,
+  SendConsumerHeartbeatResponse,
+  DeleteHostMetricConfigResponse,
+  DeleteMetricConfigRequest,
+  CreateEsRechargeRequest,
   ConsumerGroup,
   ConsoleSharingConfig,
   DescribeDashboardsRequest,
   DeleteNoticeContentResponse,
   ContainerStdoutInfo,
+  MetricYamlSpec,
   DeleteCloudProductLogCollectionRequest,
   DescribeKafkaConsumerResponse,
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
   DeleteDlcDeliverRequest,
   CallBackInfo,
+  DescribeHostMetricConfigsRequest,
+  SplitPartitionResponse,
   AlarmClassification,
   WebCallbackInfo,
   DescribeConsoleSharingListResponse,
   CreateLogsetResponse,
+  ModifyHostMetricConfigRequest,
   DashboardNoticeMode,
   KafkaProtocolInfo,
   ModifyAlarmShieldResponse,
@@ -236,19 +305,27 @@ import {
   DescribeConsumerRequest,
   DeleteConfigExtraResponse,
   ModifyConsumerRequest,
+  ModifyMetricConfigRequest,
   ModifyDashboardSubscribeRequest,
   CreateDashboardSubscribeRequest,
   FullTextInfo,
   DescribeConfigMachineGroupsResponse,
+  ModifySplunkDeliverRequest,
+  EsRechargeInfo,
+  CreateMetricSubscribeRequest,
   NoticeContentTemplate,
   LogItem,
   DescribeConfigMachineGroupsRequest,
+  DescribeMetricSubscribePreviewRequest,
   DeleteConsumerResponse,
   DescribeTopicsRequest,
+  ModifySplunkDeliverResponse,
   RetryShipperTaskRequest,
   DeleteCosRechargeRequest,
+  CreateHostMetricConfigRequest,
   ModifyCloudProductLogCollectionResponse,
   DeleteConsumerRequest,
+  MetricSubscribeInfo,
   DeleteIndexRequest,
   DescribeAlertRecordHistoryRequest,
   LogsetInfo,
@@ -256,22 +333,28 @@ import {
   DashboardTemplateVariable,
   DescribeConsoleSharingListRequest,
   DescribeLogsetsResponse,
+  DescribeKafkaConsumerPreviewResponse,
   WebCallback,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
   CreateConfigRequest,
+  DeleteEsRechargeResponse,
   DescribeKafkaRechargesResponse,
   ModifyDlcDeliverRequest,
   ConsoleSharingInfo,
   DeleteCloudProductLogCollectionResponse,
   ExportInfo,
+  MetricConfigLabel,
   DashboardSubscribeInfo,
   DescribeWebCallbacksResponse,
   DeleteExportRequest,
   ModifyKafkaConsumerGroupOffsetRequest,
   AlarmShieldInfo,
+  EsImportInfo,
   ModifyConfigResponse,
+  MetricConfig,
   ModifyAlarmNoticeResponse,
+  DescribeConsumerOffsetsResponse,
   SearchLogInfos,
   CreateConsoleSharingResponse,
   EnvInfo,
@@ -279,8 +362,9 @@ import {
   MachineGroupTypeInfo,
   ShipperInfo,
   DescribeAlertRecordHistoryResponse,
-  ModifyLogsetRequest,
+  DescribeEsRechargesRequest,
   DescribeAlarmNoticesRequest,
+  DescribeEsRechargePreviewResponse,
   MergePartitionRequest,
   MonitorTime,
   ApplyConfigToMachineGroupRequest,
@@ -291,11 +375,16 @@ import {
   ModifyWebCallbackRequest,
   DeleteTopicResponse,
   CreateExportResponse,
+  DeleteConfigFromMachineGroupResponse,
   UploadLogResponse,
   CreateAlarmResponse,
+  CustomLabel,
+  MetadataInfo,
+  DescribeMetricSubscribesRequest,
   DescribeLogContextRequest,
+  DescribeMetricCorrectDimensionRequest,
   DescribeCosRechargesResponse,
-  SearchDashboardSubscribeResponse,
+  CreateSplunkDeliverRequest,
   CreateMachineGroupResponse,
   RuleTagInfo,
   SearchCosRechargeInfoRequest,
@@ -310,7 +399,7 @@ import {
   DeleteWebCallbackResponse,
   ModifyKafkaRechargeResponse,
   DescribeAlarmShieldsRequest,
-  DescribeKafkaConsumerGroupDetailRequest,
+  AdvancedConsumerConfiguration,
   DescribeTopicsResponse,
   EventLog,
   HighLightItem,
@@ -319,7 +408,9 @@ import {
   DescribeCloudProductLogTasksResponse,
   CollectConfig,
   DescribeCosRechargesRequest,
+  DescribeTopicBaseMetricConfigsResponse,
   CloseKafkaConsumerResponse,
+  Relabeling,
   GetAlarmLogResponse,
   DescribeKafkaRechargesRequest,
   CreateDashboardSubscribeResponse,
@@ -330,51 +421,70 @@ import {
   ModifyIndexResponse,
   QueryRangeMetricResponse,
   DescribeDashboardSubscribesResponse,
+  BaseMetricCollectConfig,
   SearchLogTopics,
+  CreateMetricConfigRequest,
   ModifyConsumerResponse,
+  PartitionOffsetInfo,
   KafkaConsumerContent,
   DeleteConfigRequest,
   AnalysisDimensional,
   DeleteWebCallbackRequest,
   LogRechargeRuleInfo,
   CloseKafkaConsumerRequest,
+  ModifyAlarmShieldRequest,
   AlarmNoticeDeliverConfig,
-  DeleteConfigExtraRequest,
+  DescribeConsumersResponse,
   DlcTableInfo,
-  CheckRechargeKafkaServerResponse,
+  ModifyKafkaConsumerGroupOffsetResponse,
   CreateShipperRequest,
+  ConsumerGroupInfo,
+  InstanceConfig,
+  HostMetricConfig,
   CreateShipperResponse,
   ModifyCloudProductLogCollectionRequest,
   CosRechargeInfo,
   Column,
   DescribeDataTransformInfoRequest,
+  AlarmShieldCount,
   Filter,
+  TopicPartitionInfo,
   ModifyTopicRequest,
-  SplitPartitionResponse,
+  ModifyEsRechargeResponse,
+  ModifyConsumerGroupResponse,
   CreateKafkaRechargeRequest,
   DeleteKafkaRechargeRequest,
   DlcInfo,
   AlertHistoryRecord,
-  DescribeDataTransformInfoResponse,
+  MultiTopicSearchInformation,
   AlarmNotice,
   ModifyNoticeContentRequest,
+  MetricSpec,
   DescribeMachinesResponse,
+  DeleteEsRechargeRequest,
   LogContextInfo,
+  ModifyMetricSubscribeRequest,
   DeleteConfigFromMachineGroupRequest,
   AddMachineGroupInfoResponse,
   UserKafkaMeta,
   MetricLabel,
+  DescribeMetricSubscribePreviewResponse,
   DescribeScheduledSqlInfoRequest,
+  DeleteConsumerGroupResponse,
   SearchLogRequest,
-  ModifyAlarmShieldRequest,
-  MergePartitionResponse,
+  DescribeKafkaConsumerGroupDetailRequest,
+  DescribeConsumerOffsetsRequest,
+  ModifyConfigExtraRequest,
   CreateDataTransformRequest,
   DescribeMachineGroupsResponse,
   DescribeLogsetsRequest,
   ParquetInfo,
+  DeleteSplunkDeliverRequest,
   ConsoleSharingParam,
-  DeliverConfig,
+  SendConsumerHeartbeatRequest,
+  CommitConsumerOffsetsResponse,
   HostFileInfo,
+  DescribeSplunkPreviewResponse,
 } from "./cls_models"
 
 /**
@@ -417,6 +527,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改主机指标采集配置
+   */
+  async ModifyHostMetricConfig(
+    req: ModifyHostMetricConfigRequest,
+    cb?: (error: string, rep: ModifyHostMetricConfigResponse) => void
+  ): Promise<ModifyHostMetricConfigResponse> {
+    return this.request("ModifyHostMetricConfig", req, cb)
+  }
+
+  /**
    * 本接口用于获取告警策略执行详情
    */
   async GetAlarmLog(
@@ -427,13 +547,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 内部云产品接入使用相关接口
+   * 消费组心跳
    */
-  async DeleteCloudProductLogCollection(
-    req: DeleteCloudProductLogCollectionRequest,
-    cb?: (error: string, rep: DeleteCloudProductLogCollectionResponse) => void
-  ): Promise<DeleteCloudProductLogCollectionResponse> {
-    return this.request("DeleteCloudProductLogCollection", req, cb)
+  async CreateConsumerGroup(
+    req: CreateConsumerGroupRequest,
+    cb?: (error: string, rep: CreateConsumerGroupResponse) => void
+  ): Promise<CreateConsumerGroupResponse> {
+    return this.request("CreateConsumerGroup", req, cb)
   }
 
   /**
@@ -447,13 +567,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取告警渠道回调配置列表。
-   */
-  async DescribeDlcDelivers(
-    req: DescribeDlcDeliversRequest,
-    cb?: (error: string, rep: DescribeDlcDeliversResponse) => void
-  ): Promise<DescribeDlcDeliversResponse> {
-    return this.request("DescribeDlcDelivers", req, cb)
+     * 查询指定时刻指标的最新值。
+如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
+     */
+  async QueryMetric(
+    req: QueryMetricRequest,
+    cb?: (error: string, rep: QueryMetricResponse) => void
+  ): Promise<QueryMetricResponse> {
+    return this.request("QueryMetric", req, cb)
   }
 
   /**
@@ -467,13 +588,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于创建告警渠道回调配置。
+   * 删除消费组
    */
-  async CreateWebCallback(
-    req: CreateWebCallbackRequest,
-    cb?: (error: string, rep: CreateWebCallbackResponse) => void
-  ): Promise<CreateWebCallbackResponse> {
-    return this.request("CreateWebCallback", req, cb)
+  async DeleteConsumerGroup(
+    req: DeleteConsumerGroupRequest,
+    cb?: (error: string, rep: DeleteConsumerGroupResponse) => void
+  ): Promise<DeleteConsumerGroupResponse> {
+    return this.request("DeleteConsumerGroup", req, cb)
   }
 
   /**
@@ -537,6 +658,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取es导入配置
+   */
+  async DescribeEsRecharges(
+    req: DescribeEsRechargesRequest,
+    cb?: (error: string, rep: DescribeEsRechargesResponse) => void
+  ): Promise<DescribeEsRechargesResponse> {
+    return this.request("DescribeEsRecharges", req, cb)
+  }
+
+  /**
    * 本接口用于创建日志或指标主题。
    */
   async CreateTopic(
@@ -557,24 +688,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于删除通知渠道组
+   * 获取指标订阅配置
    */
-  async DeleteAlarmNotice(
-    req: DeleteAlarmNoticeRequest,
-    cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void
-  ): Promise<DeleteAlarmNoticeResponse> {
-    return this.request("DeleteAlarmNotice", req, cb)
+  async DescribeHostMetricConfigs(
+    req: DescribeHostMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeHostMetricConfigsResponse) => void
+  ): Promise<DescribeHostMetricConfigsResponse> {
+    return this.request("DescribeHostMetricConfigs", req, cb)
   }
 
   /**
-     * 查询指定时刻指标的最新值。
-如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
-     */
-  async QueryMetric(
-    req: QueryMetricRequest,
-    cb?: (error: string, rep: QueryMetricResponse) => void
-  ): Promise<QueryMetricResponse> {
-    return this.request("QueryMetric", req, cb)
+   * 创建指标订阅配置
+   */
+  async CreateMetricSubscribe(
+    req: CreateMetricSubscribeRequest,
+    cb?: (error: string, rep: CreateMetricSubscribeResponse) => void
+  ): Promise<CreateMetricSubscribeResponse> {
+    return this.request("CreateMetricSubscribe", req, cb)
+  }
+
+  /**
+   * kafka协议消费预览接口
+   */
+  async DescribeKafkaConsumerPreview(
+    req?: DescribeKafkaConsumerPreviewRequest,
+    cb?: (error: string, rep: DescribeKafkaConsumerPreviewResponse) => void
+  ): Promise<DescribeKafkaConsumerPreviewResponse> {
+    return this.request("DescribeKafkaConsumerPreview", req, cb)
+  }
+
+  /**
+   * 获取指标订阅配置
+   */
+  async DescribeClusterMetricConfigs(
+    req: DescribeClusterMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeClusterMetricConfigsResponse) => void
+  ): Promise<DescribeClusterMetricConfigsResponse> {
+    return this.request("DescribeClusterMetricConfigs", req, cb)
   }
 
   /**
@@ -608,13 +758,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取机器组绑定的采集规则配置
+   * 获取告警渠道回调配置列表。
    */
-  async DescribeMachineGroupConfigs(
-    req: DescribeMachineGroupConfigsRequest,
-    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
-  ): Promise<DescribeMachineGroupConfigsResponse> {
-    return this.request("DescribeMachineGroupConfigs", req, cb)
+  async DescribeDlcDelivers(
+    req: DescribeDlcDeliversRequest,
+    cb?: (error: string, rep: DescribeDlcDeliversResponse) => void
+  ): Promise<DescribeDlcDeliversResponse> {
+    return this.request("DescribeDlcDelivers", req, cb)
   }
 
   /**
@@ -625,6 +775,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicsResponse) => void
   ): Promise<DescribeTopicsResponse> {
     return this.request("DescribeTopics", req, cb)
+  }
+
+  /**
+   * splunk投递任务预览
+   */
+  async DescribeSplunkPreview(
+    req: DescribeSplunkPreviewRequest,
+    cb?: (error: string, rep: DescribeSplunkPreviewResponse) => void
+  ): Promise<DescribeSplunkPreviewResponse> {
+    return this.request("DescribeSplunkPreview", req, cb)
   }
 
   /**
@@ -658,6 +818,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除主机指标采集配置
+   */
+  async DeleteHostMetricConfig(
+    req: DeleteHostMetricConfigRequest,
+    cb?: (error: string, rep: DeleteHostMetricConfigResponse) => void
+  ): Promise<DeleteHostMetricConfigResponse> {
+    return this.request("DeleteHostMetricConfig", req, cb)
+  }
+
+  /**
    * 本接口用于删除定时SQL分析任务
    */
   async DeleteScheduledSql(
@@ -678,13 +848,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 关闭Kafka协议消费
+   * 删除Splunk投递任务
    */
-  async CloseKafkaConsumer(
-    req: CloseKafkaConsumerRequest,
-    cb?: (error: string, rep: CloseKafkaConsumerResponse) => void
-  ): Promise<CloseKafkaConsumerResponse> {
-    return this.request("CloseKafkaConsumer", req, cb)
+  async DeleteSplunkDeliver(
+    req: DeleteSplunkDeliverRequest,
+    cb?: (error: string, rep: DeleteSplunkDeliverResponse) => void
+  ): Promise<DeleteSplunkDeliverResponse> {
+    return this.request("DeleteSplunkDeliver", req, cb)
+  }
+
+  /**
+   * 获取指标订阅配置
+   */
+  async DescribeClusterBaseMetricConfigs(
+    req: DescribeClusterBaseMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeClusterBaseMetricConfigsResponse) => void
+  ): Promise<DescribeClusterBaseMetricConfigsResponse> {
+    return this.request("DescribeClusterBaseMetricConfigs", req, cb)
+  }
+
+  /**
+   * 获取消费组点位信息
+   */
+  async DescribeConsumerOffsets(
+    req: DescribeConsumerOffsetsRequest,
+    cb?: (error: string, rep: DescribeConsumerOffsetsResponse) => void
+  ): Promise<DescribeConsumerOffsetsResponse> {
+    return this.request("DescribeConsumerOffsets", req, cb)
+  }
+
+  /**
+   * 获取指标订阅配置
+   */
+  async DescribeTopicMetricConfigs(
+    req: DescribeTopicMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeTopicMetricConfigsResponse) => void
+  ): Promise<DescribeTopicMetricConfigsResponse> {
+    return this.request("DescribeTopicMetricConfigs", req, cb)
+  }
+
+  /**
+   * 修改指标订阅配置
+   */
+  async ModifyMetricSubscribe(
+    req: ModifyMetricSubscribeRequest,
+    cb?: (error: string, rep: ModifyMetricSubscribeResponse) => void
+  ): Promise<ModifyMetricSubscribeResponse> {
+    return this.request("ModifyMetricSubscribe", req, cb)
   }
 
   /**
@@ -738,6 +948,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除指标订阅配置
+   */
+  async DeleteMetricSubscribe(
+    req: DeleteMetricSubscribeRequest,
+    cb?: (error: string, rep: DeleteMetricSubscribeResponse) => void
+  ): Promise<DeleteMetricSubscribeResponse> {
+    return this.request("DeleteMetricSubscribe", req, cb)
+  }
+
+  /**
+   * 创建es导入配置
+   */
+  async CreateEsRecharge(
+    req: CreateEsRechargeRequest,
+    cb?: (error: string, rep: CreateEsRechargeResponse) => void
+  ): Promise<CreateEsRechargeResponse> {
+    return this.request("CreateEsRecharge", req, cb)
+  }
+
+  /**
+   * 修改es导入配置
+   */
+  async ModifyEsRecharge(
+    req: ModifyEsRechargeRequest,
+    cb?: (error: string, rep: ModifyEsRechargeResponse) => void
+  ): Promise<ModifyEsRechargeResponse> {
+    return this.request("ModifyEsRecharge", req, cb)
+  }
+
+  /**
    * 删除DLC投递任务
    */
   async DeleteDlcDeliver(
@@ -745,6 +985,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDlcDeliverResponse) => void
   ): Promise<DeleteDlcDeliverResponse> {
     return this.request("DeleteDlcDeliver", req, cb)
+  }
+
+  /**
+   * 内部云产品接入使用相关接口
+   */
+  async DeleteCloudProductLogCollection(
+    req: DeleteCloudProductLogCollectionRequest,
+    cb?: (error: string, rep: DeleteCloudProductLogCollectionResponse) => void
+  ): Promise<DeleteCloudProductLogCollectionResponse> {
+    return this.request("DeleteCloudProductLogCollection", req, cb)
+  }
+
+  /**
+   * es导入预览
+   */
+  async DescribeEsRechargePreview(
+    req: DescribeEsRechargePreviewRequest,
+    cb?: (error: string, rep: DescribeEsRechargePreviewResponse) => void
+  ): Promise<DescribeEsRechargePreviewResponse> {
+    return this.request("DescribeEsRechargePreview", req, cb)
   }
 
   /**
@@ -778,6 +1038,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于kafka投递数据预览
+   */
+  async DescribeConsumerPreview(
+    req?: DescribeConsumerPreviewRequest,
+    cb?: (error: string, rep: DescribeConsumerPreviewResponse) => void
+  ): Promise<DescribeConsumerPreviewResponse> {
+    return this.request("DescribeConsumerPreview", req, cb)
+  }
+
+  /**
    * 删除机器组
    */
   async DeleteMachineGroup(
@@ -785,6 +1055,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMachineGroupResponse) => void
   ): Promise<DeleteMachineGroupResponse> {
     return this.request("DeleteMachineGroup", req, cb)
+  }
+
+  /**
+   * 删除es导入配置
+   */
+  async DeleteEsRecharge(
+    req: DeleteEsRechargeRequest,
+    cb?: (error: string, rep: DeleteEsRechargeResponse) => void
+  ): Promise<DeleteEsRechargeResponse> {
+    return this.request("DeleteEsRecharge", req, cb)
+  }
+
+  /**
+   * 消费组心跳
+   */
+  async SendConsumerHeartbeat(
+    req: SendConsumerHeartbeatRequest,
+    cb?: (error: string, rep: SendConsumerHeartbeatResponse) => void
+  ): Promise<SendConsumerHeartbeatResponse> {
+    return this.request("SendConsumerHeartbeat", req, cb)
   }
 
   /**
@@ -858,6 +1148,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指标订阅配置
+   */
+  async DescribeMetricCorrectDimension(
+    req?: DescribeMetricCorrectDimensionRequest,
+    cb?: (error: string, rep: DescribeMetricCorrectDimensionResponse) => void
+  ): Promise<DescribeMetricCorrectDimensionResponse> {
+    return this.request("DescribeMetricCorrectDimension", req, cb)
+  }
+
+  /**
    * 本接口用于构建日志数量直方图
    */
   async DescribeLogHistogram(
@@ -888,13 +1188,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取投递任务列表
+   * 此接口用于创建仪表盘订阅
    */
-  async DescribeShipperTasks(
-    req: DescribeShipperTasksRequest,
-    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
-  ): Promise<DescribeShipperTasksResponse> {
-    return this.request("DescribeShipperTasks", req, cb)
+  async CreateDashboardSubscribe(
+    req: CreateDashboardSubscribeRequest,
+    cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void
+  ): Promise<CreateDashboardSubscribeResponse> {
+    return this.request("CreateDashboardSubscribe", req, cb)
   }
 
   /**
@@ -928,13 +1228,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Kafka协议消费信息
+   * 该接口用于删除告警渠道回调配置。
    */
-  async DescribeKafkaConsumer(
-    req: DescribeKafkaConsumerRequest,
-    cb?: (error: string, rep: DescribeKafkaConsumerResponse) => void
-  ): Promise<DescribeKafkaConsumerResponse> {
-    return this.request("DescribeKafkaConsumer", req, cb)
+  async DeleteWebCallback(
+    req: DeleteWebCallbackRequest,
+    cb?: (error: string, rep: DeleteWebCallbackResponse) => void
+  ): Promise<DeleteWebCallbackResponse> {
+    return this.request("DeleteWebCallback", req, cb)
   }
 
   /**
@@ -945,6 +1245,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PreviewKafkaRechargeResponse) => void
   ): Promise<PreviewKafkaRechargeResponse> {
     return this.request("PreviewKafkaRecharge", req, cb)
+  }
+
+  /**
+   * 关闭Kafka协议消费
+   */
+  async CloseKafkaConsumer(
+    req: CloseKafkaConsumerRequest,
+    cb?: (error: string, rep: CloseKafkaConsumerResponse) => void
+  ): Promise<CloseKafkaConsumerResponse> {
+    return this.request("CloseKafkaConsumer", req, cb)
   }
 
   /**
@@ -985,6 +1295,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateConfigExtraResponse) => void
   ): Promise<CreateConfigExtraResponse> {
     return this.request("CreateConfigExtra", req, cb)
+  }
+
+  /**
+   * 创建主机指标采集配置
+   */
+  async CreateHostMetricConfig(
+    req: CreateHostMetricConfigRequest,
+    cb?: (error: string, rep: CreateHostMetricConfigResponse) => void
+  ): Promise<CreateHostMetricConfigResponse> {
+    return this.request("CreateHostMetricConfig", req, cb)
   }
 
   /**
@@ -1038,6 +1358,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提交消费点位
+   */
+  async CommitConsumerOffsets(
+    req: CommitConsumerOffsetsRequest,
+    cb?: (error: string, rep: CommitConsumerOffsetsResponse) => void
+  ): Promise<CommitConsumerOffsetsResponse> {
+    return this.request("CommitConsumerOffsets", req, cb)
+  }
+
+  /**
    * 创建控制台分享
    */
   async CreateConsoleSharing(
@@ -1045,16 +1375,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateConsoleSharingResponse) => void
   ): Promise<CreateConsoleSharingResponse> {
     return this.request("CreateConsoleSharing", req, cb)
-  }
-
-  /**
-   * 本接口用于创建定时SQL分析任务
-   */
-  async CreateScheduledSql(
-    req: CreateScheduledSqlRequest,
-    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
-  ): Promise<CreateScheduledSqlResponse> {
-    return this.request("CreateScheduledSql", req, cb)
   }
 
   /**
@@ -1068,13 +1388,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于创建仪表盘订阅
+   * 获取投递任务列表
    */
-  async CreateDashboardSubscribe(
-    req: CreateDashboardSubscribeRequest,
-    cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void
-  ): Promise<CreateDashboardSubscribeResponse> {
-    return this.request("CreateDashboardSubscribe", req, cb)
+  async DescribeShipperTasks(
+    req: DescribeShipperTasksRequest,
+    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
+  ): Promise<DescribeShipperTasksResponse> {
+    return this.request("DescribeShipperTasks", req, cb)
   }
 
   /**
@@ -1108,6 +1428,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取告警渠道回调配置列表。
+   */
+  async DescribeWebCallbacks(
+    req: DescribeWebCallbacksRequest,
+    cb?: (error: string, rep: DescribeWebCallbacksResponse) => void
+  ): Promise<DescribeWebCallbacksResponse> {
+    return this.request("DescribeWebCallbacks", req, cb)
+  }
+
+  /**
+   * 获取Splunk投递任务列表
+   */
+  async DescribeSplunkDelivers(
+    req: DescribeSplunkDeliversRequest,
+    cb?: (error: string, rep: DescribeSplunkDeliversResponse) => void
+  ): Promise<DescribeSplunkDeliversResponse> {
+    return this.request("DescribeSplunkDelivers", req, cb)
+  }
+
+  /**
      * 该接口用于创建通知渠道组，提供两种配置模式，二选一：
 1，简易模式，提供最基本的通知渠道功能。需填写如下参数：
 - Type
@@ -1125,6 +1465,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新消费组信息
+   */
+  async ModifyConsumerGroup(
+    req: ModifyConsumerGroupRequest,
+    cb?: (error: string, rep: ModifyConsumerGroupResponse) => void
+  ): Promise<ModifyConsumerGroupResponse> {
+    return this.request("ModifyConsumerGroup", req, cb)
+  }
+
+  /**
    * 此接口用于删除仪表盘订阅
    */
   async DeleteDashboardSubscribe(
@@ -1132,6 +1482,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDashboardSubscribeResponse) => void
   ): Promise<DeleteDashboardSubscribeResponse> {
     return this.request("DeleteDashboardSubscribe", req, cb)
+  }
+
+  /**
+   * 获取指标订阅配置
+   */
+  async DescribeTopicBaseMetricConfigs(
+    req: DescribeTopicBaseMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeTopicBaseMetricConfigsResponse) => void
+  ): Promise<DescribeTopicBaseMetricConfigsResponse> {
+    return this.request("DescribeTopicBaseMetricConfigs", req, cb)
+  }
+
+  /**
+   * 删除指标采集配置
+   */
+  async DeleteMetricConfig(
+    req: DeleteMetricConfigRequest,
+    cb?: (error: string, rep: DeleteMetricConfigResponse) => void
+  ): Promise<DeleteMetricConfigResponse> {
+    return this.request("DeleteMetricConfig", req, cb)
+  }
+
+  /**
+   * 创建Splunk投递任务
+   */
+  async CreateSplunkDeliver(
+    req: CreateSplunkDeliverRequest,
+    cb?: (error: string, rep: CreateSplunkDeliverResponse) => void
+  ): Promise<CreateSplunkDeliverResponse> {
+    return this.request("CreateSplunkDeliver", req, cb)
   }
 
   /**
@@ -1238,13 +1618,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于删除告警渠道回调配置。
+   * 该接口用于创建告警渠道回调配置。
    */
-  async DeleteWebCallback(
-    req: DeleteWebCallbackRequest,
-    cb?: (error: string, rep: DeleteWebCallbackResponse) => void
-  ): Promise<DeleteWebCallbackResponse> {
-    return this.request("DeleteWebCallback", req, cb)
+  async CreateWebCallback(
+    req: CreateWebCallbackRequest,
+    cb?: (error: string, rep: CreateWebCallbackResponse) => void
+  ): Promise<CreateWebCallbackResponse> {
+    return this.request("CreateWebCallback", req, cb)
   }
 
   /**
@@ -1318,6 +1698,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建指标订阅配置
+   */
+  async DescribeMetricSubscribePreview(
+    req: DescribeMetricSubscribePreviewRequest,
+    cb?: (error: string, rep: DescribeMetricSubscribePreviewResponse) => void
+  ): Promise<DescribeMetricSubscribePreviewResponse> {
+    return this.request("DescribeMetricSubscribePreview", req, cb)
+  }
+
+  /**
    * 本接口用于修改日志或指标主题。
    */
   async ModifyTopic(
@@ -1356,6 +1746,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMachineGroupResponse) => void
   ): Promise<ModifyMachineGroupResponse> {
     return this.request("ModifyMachineGroup", req, cb)
+  }
+
+  /**
+   * 本接口用于获取kafka协议消费主题信息列表
+   */
+  async DescribeKafkaConsumerTopics(
+    req?: DescribeKafkaConsumerTopicsRequest,
+    cb?: (error: string, rep: DescribeKafkaConsumerTopicsResponse) => void
+  ): Promise<DescribeKafkaConsumerTopicsResponse> {
+    return this.request("DescribeKafkaConsumerTopics", req, cb)
+  }
+
+  /**
+   * 获取消费组列表
+   */
+  async DescribeConsumerGroups(
+    req: DescribeConsumerGroupsRequest,
+    cb?: (error: string, rep: DescribeConsumerGroupsResponse) => void
+  ): Promise<DescribeConsumerGroupsResponse> {
+    return this.request("DescribeConsumerGroups", req, cb)
   }
 
   /**
@@ -1439,6 +1849,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指标订阅配置
+   */
+  async DescribeMetricSubscribes(
+    req: DescribeMetricSubscribesRequest,
+    cb?: (error: string, rep: DescribeMetricSubscribesResponse) => void
+  ): Promise<DescribeMetricSubscribesResponse> {
+    return this.request("DescribeMetricSubscribes", req, cb)
+  }
+
+  /**
+   * 获取时序label values列表
+   */
+  async GetMetricLabelValues(
+    req?: GetMetricLabelValuesRequest,
+    cb?: (error: string, rep: GetMetricLabelValuesResponse) => void
+  ): Promise<GetMetricLabelValuesResponse> {
+    return this.request("GetMetricLabelValues", req, cb)
+  }
+
+  /**
+   * 获取投递规则信息列表
+   */
+  async DescribeConsumers(
+    req: DescribeConsumersRequest,
+    cb?: (error: string, rep: DescribeConsumersResponse) => void
+  ): Promise<DescribeConsumersResponse> {
+    return this.request("DescribeConsumers", req, cb)
+  }
+
+  /**
+   * 修改splunk投递任务相关信息
+   */
+  async ModifySplunkDeliver(
+    req: ModifySplunkDeliverRequest,
+    cb?: (error: string, rep: ModifySplunkDeliverResponse) => void
+  ): Promise<ModifySplunkDeliverResponse> {
+    return this.request("ModifySplunkDeliver", req, cb)
+  }
+
+  /**
    * 获取Kafka协议消费组详情
    */
   async DescribeKafkaConsumerGroupDetail(
@@ -1456,6 +1906,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDashboardsResponse) => void
   ): Promise<DescribeDashboardsResponse> {
     return this.request("DescribeDashboards", req, cb)
+  }
+
+  /**
+   * 该接口用于删除通知渠道组
+   */
+  async DeleteAlarmNotice(
+    req: DeleteAlarmNoticeRequest,
+    cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void
+  ): Promise<DeleteAlarmNoticeResponse> {
+    return this.request("DeleteAlarmNotice", req, cb)
   }
 
   /**
@@ -1631,13 +2091,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于删除日志或指标主题。
+   * 本接口用于创建定时SQL分析任务
    */
-  async DeleteTopic(
-    req: DeleteTopicRequest,
-    cb?: (error: string, rep: DeleteTopicResponse) => void
-  ): Promise<DeleteTopicResponse> {
-    return this.request("DeleteTopic", req, cb)
+  async CreateScheduledSql(
+    req: CreateScheduledSqlRequest,
+    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
+  ): Promise<CreateScheduledSqlResponse> {
+    return this.request("CreateScheduledSql", req, cb)
   }
 
   /**
@@ -1658,6 +2118,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyConsumerResponse) => void
   ): Promise<ModifyConsumerResponse> {
     return this.request("ModifyConsumer", req, cb)
+  }
+
+  /**
+   * 获取机器组绑定的采集规则配置
+   */
+  async DescribeMachineGroupConfigs(
+    req: DescribeMachineGroupConfigsRequest,
+    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
+  ): Promise<DescribeMachineGroupConfigsResponse> {
+    return this.request("DescribeMachineGroupConfigs", req, cb)
   }
 
   /**
@@ -1702,6 +2172,16 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
+   * 创建指标采集配置
+   */
+  async CreateMetricConfig(
+    req: CreateMetricConfigRequest,
+    cb?: (error: string, rep: CreateMetricConfigResponse) => void
+  ): Promise<CreateMetricConfigResponse> {
+    return this.request("CreateMetricConfig", req, cb)
+  }
+
+  /**
    * 获取通知内容列表
    */
   async DescribeNoticeContents(
@@ -1709,6 +2189,16 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
     cb?: (error: string, rep: DescribeNoticeContentsResponse) => void
   ): Promise<DescribeNoticeContentsResponse> {
     return this.request("DescribeNoticeContents", req, cb)
+  }
+
+  /**
+   * 创建指标采集配置
+   */
+  async ModifyMetricConfig(
+    req: ModifyMetricConfigRequest,
+    cb?: (error: string, rep: ModifyMetricConfigResponse) => void
+  ): Promise<ModifyMetricConfigResponse> {
+    return this.request("ModifyMetricConfig", req, cb)
   }
 
   /**
@@ -1732,6 +2222,16 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
+   * 获取Kafka协议消费信息
+   */
+  async DescribeKafkaConsumer(
+    req: DescribeKafkaConsumerRequest,
+    cb?: (error: string, rep: DescribeKafkaConsumerResponse) => void
+  ): Promise<DescribeKafkaConsumerResponse> {
+    return this.request("DescribeKafkaConsumer", req, cb)
+  }
+
+  /**
    * 本接口用于创建告警策略。
    */
   async CreateAlarm(
@@ -1742,12 +2242,12 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
-   * 获取告警渠道回调配置列表。
+   * 本接口用于删除日志或指标主题。
    */
-  async DescribeWebCallbacks(
-    req: DescribeWebCallbacksRequest,
-    cb?: (error: string, rep: DescribeWebCallbacksResponse) => void
-  ): Promise<DescribeWebCallbacksResponse> {
-    return this.request("DescribeWebCallbacks", req, cb)
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
   }
 }

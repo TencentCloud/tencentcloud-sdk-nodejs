@@ -138,6 +138,16 @@ it("lkeap.v20240522.RunRerank", async function () {
     }
 })
 
+it("lkeap.v20240522.CancelTask", async function () {
+    try {
+       const data = await client.CancelTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lkeap.v20240522.ListQAs", async function () {
     try {
        const data = await client.ListQAs({})

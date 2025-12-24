@@ -54,6 +54,7 @@ import {
   RenewInstancesInfo,
   ModifyResourceRequest,
   MultiDisk,
+  DescribeHBaseTableRequestMetricRequest,
   NodeSpecDisk,
   RunJobFlowRequest,
   ScaleOutClusterRequest,
@@ -100,6 +101,7 @@ import {
   ShortNodeInfo,
   DescribeAutoScaleRecordsRequest,
   JobFlowResource,
+  DescribeHBaseTableRequestMetricResponse,
   DescribeJobFlowResponse,
   ClusterSetting,
   ModifyResourceResponse,
@@ -186,6 +188,8 @@ import {
   TagInfo,
   ModifySLInstanceResponse,
   ModifyGlobalConfigRequest,
+  DescribeHBaseTableStoreSizeMetricResponse,
+  HBaseMetricData,
   LoadMetricsCondition,
   DescribeImpalaQueriesResponse,
   SetNodeResourceConfigDefaultResponse,
@@ -202,6 +206,7 @@ import {
   ImpalaQuery,
   CreateInstanceResponse,
   DescribeServiceNodeInfosRequest,
+  DescribeHBaseTableStoreSizeMetricRequest,
   DayRepeatStrategy,
   PriceResult,
   UserManagerFilter,
@@ -731,13 +736,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调整Pod数量
+   * EMR同步TKE中POD状态
    */
-  async ModifyPodNum(
-    req: ModifyPodNumRequest,
-    cb?: (error: string, rep: ModifyPodNumResponse) => void
-  ): Promise<ModifyPodNumResponse> {
-    return this.request("ModifyPodNum", req, cb)
+  async SyncPodState(
+    req: SyncPodStateRequest,
+    cb?: (error: string, rep: SyncPodStateResponse) => void
+  ): Promise<SyncPodStateResponse> {
+    return this.request("SyncPodState", req, cb)
   }
 
   /**
@@ -773,13 +778,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * EMR同步TKE中POD状态
+   * 调整Pod数量
    */
-  async SyncPodState(
-    req: SyncPodStateRequest,
-    cb?: (error: string, rep: SyncPodStateResponse) => void
-  ): Promise<SyncPodStateResponse> {
-    return this.request("SyncPodState", req, cb)
+  async ModifyPodNum(
+    req: ModifyPodNumRequest,
+    cb?: (error: string, rep: ModifyPodNumResponse) => void
+  ): Promise<ModifyPodNumResponse> {
+    return this.request("ModifyPodNum", req, cb)
   }
 
   /**
@@ -835,13 +840,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于启停服务 重启服务等功能
+   * 查询监控概览页指标数据
    */
-  async StartStopServiceOrMonitor(
-    req: StartStopServiceOrMonitorRequest,
-    cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void
-  ): Promise<StartStopServiceOrMonitorResponse> {
-    return this.request("StartStopServiceOrMonitor", req, cb)
+  async DescribeEmrOverviewMetrics(
+    req: DescribeEmrOverviewMetricsRequest,
+    cb?: (error: string, rep: DescribeEmrOverviewMetricsResponse) => void
+  ): Promise<DescribeEmrOverviewMetricsResponse> {
+    return this.request("DescribeEmrOverviewMetrics", req, cb)
   }
 
   /**
@@ -925,6 +930,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Hbase的表粒度StoreSize大小监控指标数据
+   */
+  async DescribeHBaseTableStoreSizeMetric(
+    req: DescribeHBaseTableStoreSizeMetricRequest,
+    cb?: (error: string, rep: DescribeHBaseTableStoreSizeMetricResponse) => void
+  ): Promise<DescribeHBaseTableStoreSizeMetricResponse> {
+    return this.request("DescribeHBaseTableStoreSizeMetric", req, cb)
+  }
+
+  /**
    * 变配询价
    */
   async InquiryPriceUpdateInstance(
@@ -965,13 +980,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询监控概览页指标数据
+   * 用于启停服务 重启服务等功能
    */
-  async DescribeEmrOverviewMetrics(
-    req: DescribeEmrOverviewMetricsRequest,
-    cb?: (error: string, rep: DescribeEmrOverviewMetricsResponse) => void
-  ): Promise<DescribeEmrOverviewMetricsResponse> {
-    return this.request("DescribeEmrOverviewMetrics", req, cb)
+  async StartStopServiceOrMonitor(
+    req: StartStopServiceOrMonitorRequest,
+    cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void
+  ): Promise<StartStopServiceOrMonitorResponse> {
+    return this.request("StartStopServiceOrMonitor", req, cb)
   }
 
   /**
@@ -1012,6 +1027,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserGroupResponse) => void
   ): Promise<ModifyUserGroupResponse> {
     return this.request("ModifyUserGroup", req, cb)
+  }
+
+  /**
+   * Hbase的表粒度读取和写入速率
+   */
+  async DescribeHBaseTableRequestMetric(
+    req: DescribeHBaseTableRequestMetricRequest,
+    cb?: (error: string, rep: DescribeHBaseTableRequestMetricResponse) => void
+  ): Promise<DescribeHBaseTableRequestMetricResponse> {
+    return this.request("DescribeHBaseTableRequestMetric", req, cb)
   }
 
   /**

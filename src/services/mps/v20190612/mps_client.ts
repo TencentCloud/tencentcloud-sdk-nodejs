@@ -91,6 +91,7 @@ import {
   CreateImageSpriteTemplateRequest,
   SmartErasePrivacyConfig,
   MediaSnapshotByTimePicInfoItem,
+  AddOnParameter,
   UserDefineFaceReviewTemplateInfo,
   CreateInputHLSPullSettings,
   DeleteStreamLinkSecurityGroupRequest,
@@ -100,6 +101,7 @@ import {
   DeleteAIRecognitionTemplateResponse,
   VideoEnhanceConfig,
   DeleteContentReviewTemplateRequest,
+  SubtitleResult,
   StartStreamLinkFlowResponse,
   AiReviewPoliticalTaskInput,
   ModifyContentReviewTemplateResponse,
@@ -121,6 +123,7 @@ import {
   ParseLiveStreamProcessNotificationResponse,
   DescribeVideoDatabaseEntryTaskDetailRequest,
   AiRecognitionTaskInput,
+  SmartSubtitleTaskTextResultOutput,
   AiAnalysisTaskFrameTagResult,
   AudioTemplateInfo,
   DescribeBatchTaskDetailResponse,
@@ -549,6 +552,7 @@ import {
   AdaptiveStreamTemplate,
   ModifyStreamLinkOutputInfoRequest,
   DescribeStreamLinkEventsRequest,
+  SmartSubtitleTaskFullTextResult,
   TranscodeTaskInput,
   SmartSubtitleTemplateItem,
   CreateStreamLinkSecurityGroupResponse,
@@ -704,6 +708,7 @@ import {
   QualityControlData,
   DescribeOutputRISTSettings,
   DrmInfo,
+  TextTranslationRequest,
   DescribeSampleSnapshotTemplatesResponse,
   DescribeProcessImageTemplatesRequest,
   ComposeImageItem,
@@ -764,6 +769,7 @@ import {
   UrlInputInfo,
   ComposeAudioStream,
   SmartSubtitleTaskTransTextSegmentItem,
+  AddOnImageInput,
   FaceConfigureInfo,
   LiveAiParagraphInfo,
   AiRecognitionTaskFaceResultOutput,
@@ -774,6 +780,7 @@ import {
   AiReviewPoliticalOcrTaskOutput,
   OcrFullTextConfigureInfo,
   CreateStreamLinkInputRequest,
+  TextTranslationResponse,
   ModifyStreamLinkSecurityGroupResponse,
   ModifyLiveRecordTemplateRequest,
   ModifySmartSubtitleTemplateRequest,
@@ -799,6 +806,7 @@ import {
   SmartSubtitlesTaskInput,
   CreateAnimatedGraphicsTemplateResponse,
   TranslateConfigureInfoForUpdate,
+  ImageProcessOutputConfig,
   SampleSnapshotTemplate,
   RTSPPullSourceAddress,
   DescribeHLSPullSourceAddress,
@@ -2196,6 +2204,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSampleSnapshotTemplateResponse) => void
   ): Promise<DeleteSampleSnapshotTemplateResponse> {
     return this.request("DeleteSampleSnapshotTemplate", req, cb)
+  }
+
+  /**
+   * 文本翻译
+   */
+  async TextTranslation(
+    req: TextTranslationRequest,
+    cb?: (error: string, rep: TextTranslationResponse) => void
+  ): Promise<TextTranslationResponse> {
+    return this.request("TextTranslation", req, cb)
   }
 
   /**

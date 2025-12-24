@@ -1699,82 +1699,94 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface CreateProxyEndPointRequest {
   /**
-   * 集群ID
+   * 集群 ID。
    */
   ClusterId: string
   /**
-   * 私有网络ID，默认与集群私有网络ID保持一致
+   * 私有网络 ID，默认与集群私有网络 ID 保持一致。
    */
   UniqueVpcId: string
   /**
-   * 私有网络子网ID，默认与集群子网ID保持一致
+   * 私有网络子网 ID，默认与集群子网 ID 保持一致。
    */
   UniqueSubnetId: string
   /**
-   * 连接池类型：SessionConnectionPool(会话级别连接池 )
+   * 连接池类型：SessionConnectionPool（会话级别连接池）。
    */
   ConnectionPoolType?: string
   /**
-   * 是否开启连接池,yes-开启，no-不开启
+   * 是否开启连接池。
+yes：表示开启。
+no：表示不开启。
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阈值：单位（秒）
+   * 连接池阈值：单位（秒），可选范围：0 - 300秒。
    */
   ConnectionPoolTimeOut?: number
   /**
-   * 绑定的安全组ID数组
+   * 绑定的安全组 ID 数组。
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 描述说明
+   * 描述说明。
    */
   Description?: string
   /**
-   * 想要绑定的vip信息，需与UniqueVpcId对应。
+   * 想要绑定的 vip 信息，需与 UniqueVpcId 对应。
    */
   Vip?: string
   /**
    * 权重模式：
-system-系统分配，custom-自定义
+system：系统分配。
+custom：自定义。
    */
   WeightMode?: string
   /**
-   * 是否自动添加只读实例，yes-是，no-不自动添加
+   * 是否自动添加只读实例。
+yes：表示自动添加只读实例。
+no：表示不自动添加只读实例。
    */
   AutoAddRo?: string
   /**
    * 是否开启故障转移。
-yes：开启
-no：不开启。
-数据库代理出现故障时，链接地址将会路由到主实例
+yes：表示开启，开启后，当数据库代理出现故障时，连接地址将会路由到主实例。
+no：表示不开启。
+说明：
+仅当 RwType 参数值为 READWRITE 时，才支持设置此项。
    */
   FailOver?: string
   /**
    * 一致性类型：
-eventual,global,session
+eventual：最终一致性。
+global：全局一致性。
+session：会话一致性。
+说明：
+仅当 RwType 参数值为 READWRITE 时，才支持设置此项。
    */
   ConsistencyType?: string
   /**
    * 读写属性：
-READWRITE,READONLY
+READWRITE：表示读写分离。当此参数值为 READWRITE 时，才支持设置 FailOver、ConsistencyType 参数。
+READONLY：表示只读。
    */
   RwType?: string
   /**
-   * 一致性超时时间。取值范围：0~1000000（微秒）,设置0则表示若只读实例出现延迟, 导致一致性策略不满足, 请求将一直等待
+   * 一致性超时时间。取值范围：0 ~ 1000000（微秒）。设置为0时，表示若只读实例出现延迟导致一致性策略不满足时，请求将一直等待。
    */
   ConsistencyTimeOut?: number
   /**
-   * 是否开启事务拆分。在一个事务中拆分读和写到不同的实例上去执行
+   * 是否开启事务拆分。开启后，在一个事务中拆分读和写到不同的实例上去执行。
    */
   TransSplit?: boolean
   /**
-   * 连接模式：
-nearby,balance
+   * 接入模式：
+nearby：就近访问。
+balance：均衡分配。
    */
   AccessMode?: string
   /**
-   * 实例权重
+   * 实例权重。
    */
   InstanceWeights?: Array<ProxyInstanceWeight>
 }
@@ -2294,8 +2306,13 @@ export interface DescribeChangedParamsAfterUpgradeResponse {
 export interface ModifyServerlessStrategyResponse {
   /**
    * 异步流程id
+   * @deprecated
    */
   FlowId?: number
+  /**
+   * 任务id
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3191,7 +3208,7 @@ export interface DescribeBinlogsRequest {
    */
   Offset?: number
   /**
-   * 限制条数
+   * 限制条数，默认值为20
    */
   Limit?: number
 }
@@ -4693,15 +4710,15 @@ export interface DescribeClusterInstanceGroupsResponse {
  */
 export interface CreateProxyEndPointResponse {
   /**
-   * 异步流程ID
+   * 异步流程 ID。
    */
   FlowId?: number
   /**
-   * 异步任务ID
+   * 异步任务 ID。
    */
   TaskId?: number
   /**
-   * 数据库代理组ID
+   * 数据库代理组 ID。
    */
   ProxyGroupId?: string
   /**
@@ -9565,6 +9582,7 @@ export interface ClusterInstanceDetail {
   InstanceDeviceType?: string
   /**
    * 实例存储类型
+说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。
    */
   InstanceStorageType?: string
   /**
@@ -9573,6 +9591,7 @@ export interface ClusterInstanceDetail {
   DbMode?: string
   /**
    * 节点列表
+说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。
    */
   NodeList?: Array<string>
 }
@@ -11484,6 +11503,10 @@ export interface ModifyServerlessStrategyRequest {
    * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
    */
   AutoArchive?: string
+  /**
+   * 升级类型。 默认值：upgradeImmediate。 可选值： upgradeImmediate：立即完成修改 upgradeInMaintain：在维护时间窗口内完成修改
+   */
+  UpgradeType?: string
 }
 
 /**

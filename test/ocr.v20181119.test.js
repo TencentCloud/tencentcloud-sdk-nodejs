@@ -518,6 +518,16 @@ it("ocr.v20181119.RecognizeTableOCR", async function () {
     }
 })
 
+it("ocr.v20181119.ExtractDocAgent", async function () {
+    try {
+       const data = await client.ExtractDocAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.WaybillOCR", async function () {
     try {
        const data = await client.WaybillOCR({})

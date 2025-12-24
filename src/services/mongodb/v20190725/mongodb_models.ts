@@ -3723,8 +3723,8 @@ export interface SetBackupRulesRequest {
   LongTermUnit?: string
   /**
    * 指定用于长期保留的具体备份日期。此设置仅在 **LongTermUnit** 被设为**weekly** 或 **monthly** 时生效。
-- 按周（weekly）保留：请输入 0-6 之间的数字来代表周日至周六。多个日期请用英文逗号 , 分隔。
-- 按月（monthly）保留：请输入 1-31 之间的数字来代表月份中的具体日期。多个日期请用英文逗号 , 分隔。
+- 按周（weekly）保留：请输入 0-6 之间的数字来代表周日至周六。多个日期请用英文逗号分隔。
+- 按月（monthly）保留：请输入 1-31 之间的数字来代表月份中的具体日期。多个日期请用英文逗号分隔。
    */
   LongTermActiveDays?: string
   /**
@@ -3736,7 +3736,6 @@ export interface SetBackupRulesRequest {
 - 单位：天。
 - 默认值：7天。
 - 取值范围：[7,365]。
-
    */
   OplogExpiredDays?: number
   /**
@@ -4709,7 +4708,7 @@ export interface DescribeSlowLogPatternsRequest {
 export interface Filters {
   /**
    * 搜索字段，目前支持：
-"InstanceId"：实例Id，例如：cmgo-****）
+"InstanceId"：实例Id，例如：cmgo-****
 "InstanceName"：实例名称
 "ClusterId"：实例组Id，例如：cmgo-****
    */

@@ -1656,61 +1656,39 @@ export interface DescribeLiveDomainPlayInfoListRequest {
  */
 export interface CasterInputInfo {
   /**
-   * 输入源Index。
-范围[1, 24]
+   * <p>输入源Index。范围[1, 24]</p>
    */
   InputIndex: number
   /**
-   * 输入源类型。
-范围[0,1,2,3,4]。
-0：推流地址。
-1：点播文件地址。
-2：直播拉流地址。
-3：图片地址。
-4：webrtc协议推流地址。
+   * <p>输入源类型。范围[0,1,2,3,4]。0：推流地址。1：点播文件地址。2：直播拉流地址。3：图片地址。4：webrtc协议推流地址。</p>
    */
   InputType?: number
   /**
-   * 输入源的源地址。
-最大允许长度512。
-当InputType为0（推流地址），2（直播拉流地址），3（图片地址）,4（webrtc推流地址）这几种类型时，URL需填入该字段。
-
+   * <p>输入源的源地址。最大允许长度512。当InputType为0（推流地址），2（直播拉流地址），3（图片地址）,4（webrtc推流地址）这几种类型时，URL需填入该字段。</p>
    */
   InputUrl?: string
   /**
-   * 输入源描述。
-最大允许长度256字符。
+   * <p>输入源描述。最大允许长度256字符。</p>
    */
   Description?: string
   /**
-   * 点播地址列表。仅当input type为1（点播地址）时，将一个或多个点播地址，填入该字段。
-单个地址最大允许长度512字符。
-最多允许同时填入5个地址。
-注：此时需保持InputUrl字段为空。
+   * <p>点播地址列表。仅当input type为1（点播地址）时，将一个或多个点播地址，填入该字段。单个地址最大允许长度512字符。最多允许同时填入5个地址。注：此时需保持InputUrl字段为空。</p>
    */
   InputUrls?: Array<string>
   /**
-   * 是否启用点播无限循环播放。
-注：当前该字段未生效，默认为True。
+   * <p>是否启用点播无限循环播放。注：当前该字段未生效，默认为True。</p>
    */
   LoopEnable?: boolean
   /**
-   * 点播循环次数。
-允许值-1或正整数。
-当值为-1时，表示无限循环。
-当值为其他正整数时，表示循环对应次数。
-注：该字段暂未生效。
+   * <p>点播循环次数。允许值-1或正整数。当值为-1时，表示无限循环。当值为其他正整数时，表示循环对应次数。注：该字段暂未生效。</p>
    */
   LoopNumber?: number
   /**
-   * 是否启用拉取到导播台。
-注：该字段默认强制为true。
+   * <p>是否启用拉取到导播台。注：该字段默认强制为true。</p>
    */
   PullPushEnable?: boolean
   /**
-   * 输入源音量百分比。
-默认为100。表示音量为原始大小。
-允许值[0,200]。
+   * <p>输入源音量百分比。默认为100。表示音量为原始大小。允许值[0,200]。</p>
    */
   Volume?: number
 }
@@ -2719,11 +2697,11 @@ export interface DeleteLiveCallbackTemplateRequest {
  */
 export interface ModifyCasterInputInfoRequest {
   /**
-   * 导播台ID。
+   * <p>导播台ID。</p>
    */
   CasterId: number
   /**
-   * 修改的导播台输入源信息
+   * <p>修改的导播台输入源信息</p>
    */
   InputInfo: CasterInputInfo
 }
@@ -6212,11 +6190,11 @@ Africa 非洲。
  */
 export interface AddCasterLayoutInfoRequest {
   /**
-   * 导播台ID
+   * <p>导播台ID</p>
    */
   CasterId: number
   /**
-   * 导播台布局参数信息。
+   * <p>导播台布局参数信息。</p>
    */
   LayoutInfo: CasterLayoutInfo
 }
@@ -6236,11 +6214,11 @@ export interface FlvSpecialParam {
  */
 export interface ModifyCasterLayoutInfoRequest {
   /**
-   * 导播台ID。
+   * <p>导播台ID。</p>
    */
   CasterId: number
   /**
-   * 导播台布局参数信息。
+   * <p>导播台布局参数信息。</p>
    */
   LayoutInfo: CasterLayoutInfo
 }
@@ -7046,34 +7024,27 @@ export interface DescribeTimeShiftStreamListRequest {
  */
 export interface CasterLayoutInfo {
   /**
-   * 布局Index。
+   * <p>布局Index。</p>取值范围：[1, 1000]
    */
   LayoutIndex: number
   /**
-   * 布局模板Id。
-有效值[1，20，21，31，32，41]
-当使用布局模板时，无需LayoutParams参数，导播台将使用模板布局参数。
-
+   * <p>布局模板Id。有效值[1，20，21，31，32，41]当使用布局模板时，无需LayoutParams参数，导播台将使用模板布局参数。</p>
    */
   LayoutTemplateId?: number
   /**
-   * 布局绑定的输入列表。按布局LayerId从小到大，按顺序排列。
-已有两个画面的布局为例，输入1对应LayerId为1，输入2对应的LayerId为2，该字段应该填入"1|2"。
+   * <p>布局绑定的输入列表。按布局LayerId从小到大，按顺序排列。已有两个画面的布局为例，输入1对应LayerId为1，输入2对应的LayerId为2，该字段应该填入"1|2"。</p>
    */
   InputIndexList?: string
   /**
-   * 详细的布局参数列表。
+   * <p>详细的布局参数列表。</p>
    */
   LayoutParams?: Array<CasterLayoutParam>
   /**
-   * 布局输出的宽度，单位为像素。
-默认为1280像素。
-注：该值仅在画中画布局，且未设置PgmWidth时生效。
+   * <p>布局输出的宽度，单位为像素。默认为1280像素。注：该值仅在画中画布局，且未设置PgmWidth时生效。</p>
    */
   LayoutWidth?: number
   /**
-   * 布局输出的高度，单位为像素。
-注：该参数仅在画中画布局，且未设置PgmHeight时生效。
+   * <p>布局输出的高度，单位为像素。注：该参数仅在画中画布局，且未设置PgmHeight时生效。</p>
    */
   LayoutHeight?: number
 }
@@ -9593,11 +9564,11 @@ export interface AddCasterMarkPicInfoResponse {
  */
 export interface AddCasterInputInfoRequest {
   /**
-   * 导播台ID。
+   * <p>导播台ID。</p>
    */
   CasterId: number
   /**
-   * 导播台输入源详细信息。
+   * <p>导播台输入源详细信息。</p>
    */
   InputInfo: CasterInputInfo
 }
@@ -9876,15 +9847,11 @@ export interface AddLiveWatermarkResponse {
  */
 export interface AddCasterInputInfoResponse {
   /**
-   * rtmp协议输入源播放地址。
-注：仅可作为预览使用，不可分发。
+   * <p>rtmp协议输入源播放地址。注：仅可作为预览使用，不可分发。</p>
    */
   InputPlayUrl?: string
   /**
-   * webrtc协议播放地址。
-注：
-1. 需配合使用腾讯云快直播播放SDK使用才可正常播放。
-2. 仅作为预览使用，不可分发。
+   * <p>webrtc协议播放地址。注：1. 需配合使用腾讯云快直播播放SDK使用才可正常播放。2. 仅作为预览使用，不可分发。</p>
    */
   InputWebRTCPlayUrl?: string
   /**
@@ -10337,88 +10304,63 @@ export interface DescribeLiveTimeShiftBillInfoListRequest {
  */
 export interface ModifyCasterRequest {
   /**
-   * 导播台ID
+   * <p>导播台ID</p>
    */
   CasterId: number
   /**
-   * 导播台名称
+   * <p>导播台名称</p>
    */
   CasterName?: string
   /**
-   * 导播台的描述，最大允许长度256
+   * <p>导播台的描述，最大允许长度256</p>
    */
   Description?: string
   /**
-   * 录制模板id。
-默认为0。
-当使用直播录制功能时，可将使用的录制模版填入。
-该接口仅保存字段，不涉及任何录制功能。
+   * <p>录制模板id。默认为0。当使用直播录制功能时，可将使用的录制模版填入。该接口仅保存字段，不涉及任何录制功能。</p>
    */
   RecordTemplateId?: number
   /**
-   * 录制状态，当调用录制接口后，可通过该字段保存录制状态。
-0：未录制 
-1：录制中
-该接口仅保存字段，不涉及任何录制处理。
+   * <p>录制状态，当调用录制接口后，可通过该字段保存录制状态。0：未录制 1：录制中该接口仅保存字段，不涉及任何录制处理。</p>
    */
   RecordStatus?: number
   /**
-   * 导播台的过期时间戳。值为-1或unix时间戳。
-默认值为-1。 
-当值为-1时，表示该导播台永不过期。 
-当值为正常unix时间戳时，导播台将在该时间过期。
-导播台过期后，预监与主监画面将自动停止，转推自动停止。 
-点播、直播url将停止转拉，推流url需自行停止推流。
+   * <p>导播台的过期时间戳。值为-1或unix时间戳。默认值为-1。 当值为-1时，表示该导播台永不过期。 当值为正常unix时间戳时，导播台将在该时间过期。导播台过期后，预监与主监画面将自动停止，转推自动停止。 点播、直播url将停止转拉，推流url需自行停止推流。</p>
    */
   ExpireTime?: number
   /**
-   * 导播台延时播放时间，单位为秒。 
-默认为0，最大支持300秒
+   * <p>导播台延时播放时间，单位为秒。 默认为0，最大支持300秒</p>
    */
   DelayTime?: number
   /**
-   * 导播台转场类型。 
-默认为空。 
-允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。
+   * <p>导播台转场类型。 默认为空。 允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。</p>
    */
   TransitionType?: string
   /**
-   * 导播台主监输出的宽度，单位为像素。 
-默认为1280，最大允许4096。
+   * <p>导播台主监输出的宽度，单位为像素。 默认为1280，最大允许4096。</p>
    */
   PgmWidth?: number
   /**
-   * 导播台主监输出的高度，单位为像素。 
-默认为720，最大允许2160。
+   * <p>导播台主监输出的高度，单位为像素。 默认为720，最大允许2160。</p>
    */
   PgmHeight?: number
   /**
-   * 导播台主监输出的帧率。 
-默认为0，表示随源输出。 最大支持60。
+   * <p>导播台主监输出的帧率。 默认为0，表示随源输出。 最大支持60。</p>
    */
   PgmFps?: number
   /**
-   * 导播台主监输出的码率，单位为kbps。 
-默认为0，表示随源的码率输出。 
-最大允许10000kbps。
+   * <p>导播台主监输出的码率，单位为kbps。 默认为0，表示随源的码率输出。 最大允许10000kbps。</p>
    */
   PgmBitRate?: number
   /**
-   * 导播台的计费类型。 
-0 通用型 
-1 播单型。 
-注： 本参数暂无作用。
+   * <p>导播台的计费类型。 0 通用型 1 播单型。 注： 本参数暂无作用。</p>
    */
   FeeType?: number
   /**
-   * 录制接口返回的taskid
-注：该接口只做字段保存，不涉及录制操作。
+   * <p>录制接口返回的taskid注：该接口只做字段保存，不涉及录制操作。</p>
    */
   RecordTaskId?: string
   /**
-   * 导播台主监输出的音频码率，单位为kbps。 
-可选项：[0, 128, 192, 256] 
-默认值为0，表示随源的音频码率输出。
+   * <p>导播台主监输出的音频码率，单位为kbps。 可选项：[0, 128, 192, 256] 默认值为0，表示随源的音频码率输出。</p>
    */
   PgmAudioBitRate?: number
 }
@@ -10542,12 +10484,11 @@ export interface DescribeLiveCertRequest {
  */
 export interface DeleteCasterLayoutInfoRequest {
   /**
-   * 导播台ID。
+   * <p>导播台ID。</p>
    */
   CasterId: number
   /**
-   * 要删除的布局Index。
-注：待删除的Index对应的布局需存在。
+   * <p>要删除的布局Index。注：待删除的Index对应的布局需存在。</p>
    */
   LayoutIndex: number
 }
@@ -11103,14 +11044,11 @@ export interface DescribeLiveStreamPushInfoListRequest {
  */
 export interface ModifyCasterInputInfoResponse {
   /**
-   * 修改输入源后的预览地址。
-注：该地址仅作为预览使用，不可分发。
+   * <p>修改输入源后的预览地址。注：该地址仅作为预览使用，不可分发。</p>
    */
   InputPlayUrl?: string
   /**
-   * 修改后的输入源webrtc预览地址。
-该地址需配合腾讯云快直播播放SDK使用。
-注：该地址仅做预览使用，不可分发。
+   * <p>修改后的输入源webrtc预览地址。该地址需配合腾讯云快直播播放SDK使用。注：该地址仅做预览使用，不可分发。</p>
    */
   InputWebRTCPlayUrl?: string
   /**

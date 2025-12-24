@@ -33,7 +33,7 @@ import {
   LogContentInfo,
   ModifyIntegrationTaskRequest,
   DescribeRuleDimStatResponse,
-  RegisterEventListenerResponse,
+  LineageCommonInfoVO,
   DescribeTaskAlarmRegulationsResponse,
   ColumnBasicInfo,
   DescribeWorkflowInfoByIdRequest,
@@ -92,11 +92,12 @@ import {
   BytesSpeed,
   RegisterDsEventRequest,
   CheckTaskNameExistRequest,
-  WorkspaceExt,
+  TablePropertyScore,
   TestRunningSubRecord,
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
   DescribeInstanceDetailInfoResponse,
+  Partition,
   RelatedTask,
   DescribeTemplateDimCountRequest,
   CreateCodeTemplateVersionResponse,
@@ -106,7 +107,7 @@ import {
   DataSourceEnvInfo,
   SubmitTaskResponse,
   DescribeDataCheckStatRequest,
-  TablePropertyScore,
+  RegisterEventListenerResponse,
   SubscribeWebHook,
   OperateOption,
   RemoveSchemaResponse,
@@ -180,13 +181,14 @@ import {
   MoveTasksToFolderRequest,
   OrderFields,
   MoveTasksToFolderResponse,
+  ParameterTaskOutDsDto,
   GetOfflineDIInstanceListResponse,
   UpdateWorkflowOwnerRequest,
   DescribeSchedulerTaskTypeCntResponse,
   ProdSchedulerTask,
   DeleteCustomFunctionResponse,
   DimTableLink,
-  RulePage,
+  DescribeWorkflowSchedulerInfoDsRequest,
   ReportSchemaRequest,
   DimensionScoreInfo,
   DescribeTaskScriptResponse,
@@ -219,6 +221,7 @@ import {
   ReportTableResponse,
   IntegrationNodeInfo,
   DescribeRuleGroupResponse,
+  LineageNodeInfoVO,
   DeleteDataSourcesResponse,
   DescribeBatchOperateTaskDTO,
   DescribeReportTaskListResponse,
@@ -274,6 +277,7 @@ import {
   RegisterDsEventResponse,
   WorkflowExtOpsDtoPage,
   DataSourceInfo,
+  LineageRelationVO,
   RemoveTableResponse,
   AlarmDsVO,
   DescribeBaseBizCatalogsResponse,
@@ -337,6 +341,7 @@ import {
   SqlExpressionTable,
   UpdateCodeTemplateResponse,
   OrderFieldOptional,
+  LineageResouce,
   DryRunDIOfflineTaskRequest,
   CreateOfflineTaskRequest,
   DescribeIntegrationStatisticsRecordsTrendResponse,
@@ -356,6 +361,7 @@ import {
   GeneralTaskParam,
   CandidateDsDTo,
   DescribeTableBasicInfoResponse,
+  DescribeTaskInstancesStatusResponse,
   WorkflowScheduleDtoDs,
   Property,
   ModifyRuleTemplateRequest,
@@ -412,6 +418,7 @@ import {
   DescribeIntegrationTasksResponse,
   DeleteProjectUsersResponse,
   DescribeAlarmReceiverRequest,
+  FunctionVersion,
   InstanceVO,
   DescribeStatisticInstanceStatusTrendOpsResponse,
   MQPackageVO,
@@ -436,7 +443,7 @@ import {
   SimpleColumnInfo,
   CreateWorkflowDsRequest,
   DescribeTaskDetailDsResponse,
-  TaskTypeDsVO,
+  LineageProperty,
   CreateTaskResponse,
   ModifyIntegrationTaskResponse,
   BatchStopIntegrationTasksResponse,
@@ -446,7 +453,7 @@ import {
   CreateBaseProjectResponse,
   DisableProjectRequest,
   DescribeDataSourceInfoListRequest,
-  ParameterTaskOutDsDto,
+  DescribeTaskInstancesStatusRequest,
   TaskTableMetricInfo,
   BatchResultDs,
   DeleteDataModelResponse,
@@ -499,6 +506,7 @@ import {
   EnableProjectResponse,
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
+  ParamGetTaskInstancesStatusInfoResponseInstance,
   DescribeFieldBasicInfoRequest,
   DescribeWorkflowByFordIdsResponse,
   CreateOpsMakePlanResponse,
@@ -533,6 +541,7 @@ import {
   BatchCreateTaskVersionDTO,
   CreateTaskVersionDsRequest,
   DeleteOfflineTaskRequest,
+  DependencyConfigTimeoutDTO,
   WeightInfo,
   DescribeDatabaseInfoListResponse,
   ModifyDsFolderResponse,
@@ -611,6 +620,7 @@ import {
   TableScoreStatisticsInfo,
   FailMessage,
   RunRerunScheduleInstancesResponse,
+  WorkspaceExt,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
   GetPaginationTaskScriptRequest,
@@ -660,7 +670,7 @@ import {
   RegisterEventResponse,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
-  DescribeWorkflowSchedulerInfoDsRequest,
+  DescribeLineageInfoRequest,
   DescribeQualityScoreTrendRequest,
   RobLockState,
   SubmitTaskTestRunRequest,
@@ -672,13 +682,14 @@ import {
   DeleteProjectParamDsRequest,
   Content,
   SpeedValue,
-  FunctionVersion,
+  DescribeTaskInstancesStatusDto,
   RegisterDsEventListenerResponse,
   RuleExecDateStat,
   DescribeTenantProjectsResponse,
   DescribeTaskAlarmRegulationsRequest,
   KillScheduleInstancesRequest,
   UnboundProjectExecutorResourceResponse,
+  DescribeLineageInfoResponse,
   ModifyTaskScriptRequest,
   CreateCustomFunctionResponse,
   UpdateCodeTemplateRequest,
@@ -805,6 +816,7 @@ import {
   ResumeIntegrationTaskResponse,
   DescribeRuleResponse,
   DescribeTaskScriptRequest,
+  RulePage,
   ModifyTaskLinksDsResponse,
   SchemaDetail,
   DescribeRuleRequest,
@@ -817,7 +829,7 @@ import {
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
   DescribeRulesByPageResponse,
-  Partition,
+  LineageProcessVO,
   AttributeItemDsVO,
   DescribeTaskParamDsResponse,
   RuleDimCnt,
@@ -948,6 +960,7 @@ import {
   OrganizationalFunction,
   RemoveTableRequest,
   OrderField,
+  TaskTypeDsVO,
   BatchSuspendIntegrationTasksResponse,
   DeleteProjectUsersRequest,
   BaseTenant,
@@ -1810,6 +1823,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分组获取编排空间调试任务实例状态信息
+   */
+  async DescribeTaskInstancesStatus(
+    req: DescribeTaskInstancesStatusRequest,
+    cb?: (error: string, rep: DescribeTaskInstancesStatusResponse) => void
+  ): Promise<DescribeTaskInstancesStatusResponse> {
+    return this.request("DescribeTaskInstancesStatus", req, cb)
+  }
+
+  /**
    * 编排空间-创建文件夹
    */
   async CreateDsFolder(
@@ -2167,6 +2190,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFunctionTypesResponse) => void
   ): Promise<DescribeFunctionTypesResponse> {
     return this.request("DescribeFunctionTypes", req, cb)
+  }
+
+  /**
+   * 通用血缘查询接口
+   */
+  async DescribeLineageInfo(
+    req: DescribeLineageInfoRequest,
+    cb?: (error: string, rep: DescribeLineageInfoResponse) => void
+  ): Promise<DescribeLineageInfoResponse> {
+    return this.request("DescribeLineageInfo", req, cb)
   }
 
   /**

@@ -168,9 +168,9 @@ it("weilingwith.v20230427.DescribeDeviceTagList", async function () {
     }
 })
 
-it("weilingwith.v20230427.DescribeDeviceGroupList", async function () {
+it("weilingwith.v20230427.DeleteDeviceGroup", async function () {
     try {
-       const data = await client.DescribeDeviceGroupList({})
+       const data = await client.DeleteDeviceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,16 +468,6 @@ it("weilingwith.v20230427.DescribeFileDownloadURL", async function () {
     }
 })
 
-it("weilingwith.v20230427.DescribeCityWorkspaceList", async function () {
-    try {
-       const data = await client.DescribeCityWorkspaceList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("weilingwith.v20230427.DescribeEdgeApplicationToken", async function () {
     try {
        const data = await client.DescribeEdgeApplicationToken({})
@@ -498,9 +488,9 @@ it("weilingwith.v20230427.DescribeBuildingModel", async function () {
     }
 })
 
-it("weilingwith.v20230427.DeleteDeviceGroup", async function () {
+it("weilingwith.v20230427.DescribeDeviceGroupList", async function () {
     try {
-       const data = await client.DeleteDeviceGroup({})
+       const data = await client.DescribeDeviceGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

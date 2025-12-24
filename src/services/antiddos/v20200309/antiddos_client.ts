@@ -22,6 +22,7 @@ import {
   DescribeDDoSConnectLimitListRequest,
   DescribeListBGPIPInstancesResponse,
   ModifyNewDomainRulesRequest,
+  StandardPlusPackageConfig,
   PacketFilterConfig,
   DescribeOverviewCCTrendRequest,
   DeleteCCLevelPolicyRequest,
@@ -32,9 +33,9 @@ import {
   CreateWaterPrintConfigRequest,
   DDoSGeoIPBlockConfig,
   CreateBlackWhiteIpListResponse,
-  IPAlarmThresholdRelation,
+  BGPInstanceInfo,
   DeleteCCRequestLimitPolicyRequest,
-  DescribeL7RulesBySSLCertIdResponse,
+  DescribeBgpInstancesRequest,
   DescribeDDoSBlackWhiteIpListResponse,
   InstanceRelation,
   RegionInfo,
@@ -59,12 +60,14 @@ import {
   DescribeDefaultAlarmThresholdResponse,
   CreateNewL7RulesResponse,
   CreateDDoSAIRequest,
+  SuccessCode,
+  ProtectThresholdRelationNew,
   DescribeListWaterPrintConfigResponse,
   ModifyNewDomainRulesResponse,
   CcBlackWhiteIpPolicy,
   DescribeDDoSConnectLimitListResponse,
   L7RuleHealth,
-  ModifyPacketFilterConfigResponse,
+  DescribeBizMonitorTrendResponse,
   DescribeCCLevelPolicyRequest,
   CreateWaterPrintConfigResponse,
   DescribeOverviewAttackTrendRequest,
@@ -75,12 +78,13 @@ import {
   CreatePortAclConfigRequest,
   DescribeCCThresholdListResponse,
   DescribeL7RulesBySSLCertIdRequest,
-  TagFilter,
+  CreateBgpInstanceResponse,
   IpBlockData,
   DescribeListPacketFilterConfigResponse,
   CreateSchedulingDomainRequest,
   ModifyPortAclConfigRequest,
   BoundIpInfo,
+  DescribeL7RulesBySSLCertIdResponse,
   CreateDDoSBlackWhiteIpListRequest,
   ModifyCCReqLimitPolicyRequest,
   DescribeOverviewDDoSTrendRequest,
@@ -95,6 +99,7 @@ import {
   AclConfig,
   DisassociateDDoSEipAddressRequest,
   SwitchWaterPrintConfigResponse,
+  PackInfo,
   BlackWhiteIpRelation,
   DeleteWaterPrintKeyResponse,
   EipAddressPackRelation,
@@ -117,15 +122,18 @@ import {
   DeleteCcGeoIPBlockConfigRequest,
   DescribeCCLevelListResponse,
   CreateDDoSSpeedLimitConfigRequest,
+  ListenerCcThresholdConfig,
   CreateDDoSGeoIPBlockConfigRequest,
   CreateProtocolBlockConfigRequest,
   DeleteWaterPrintKeyRequest,
-  SuccessCode,
+  DescribeListProtectThresholdConfigNewRequest,
   AssociateDDoSEipAddressResponse,
   DDoSSpeedLimitConfigRelation,
   DeleteCCLevelPolicyResponse,
   ModifyPacketFilterConfigRequest,
   CreateCcGeoIPBlockConfigRequest,
+  DescribeListProtectThresholdConfigNewResponse,
+  StandardPackageConfig,
   DeletePortAclConfigResponse,
   CreateDDoSSpeedLimitConfigResponse,
   DescribeNewL7RulesErrHealthResponse,
@@ -136,6 +144,7 @@ import {
   L4RuleSource,
   DescribePendingRiskInfoResponse,
   ProtocolBlockConfig,
+  IPAlarmThresholdRelation,
   DeleteCCPrecisionPolicyRequest,
   BGPIPInstance,
   DeleteWaterPrintConfigResponse,
@@ -144,6 +153,7 @@ import {
   CreateProtocolBlockConfigResponse,
   BGPIPInstanceSpecification,
   CreateIPAlarmThresholdConfigResponse,
+  DescribeBizTrendRequest,
   CreatePortAclConfigListResponse,
   DeleteWaterPrintConfigRequest,
   DescribeDDoSBlackWhiteIpListRequest,
@@ -160,7 +170,7 @@ import {
   DescribeOverviewDDoSEventListRequest,
   EipAddressRelation,
   DeleteDDoSBlackWhiteIpListRequest,
-  PackInfo,
+  ModifyPacketFilterConfigResponse,
   DescribeBGPIPL7RulesResponse,
   CreateDDoSConnectLimitResponse,
   WaterPrintRelation,
@@ -244,16 +254,17 @@ import {
   DeleteCCRequestLimitPolicyResponse,
   CreateCcBlackWhiteIpListRequest,
   BGPInstance,
-  DescribeBizMonitorTrendResponse,
+  DescribeBgpInstancesResponse,
   DescribeListPortAclListResponse,
   CCPrecisionPlyRecord,
   DescribeCCPrecisionPlyListResponse,
-  DescribeBizTrendRequest,
+  CreateBgpInstanceRequest,
   DescribeListPortAclListRequest,
   DescribeIpBlockListResponse,
   DescribeCCLevelPolicyResponse,
   DescribeBizMonitorTrendRequest,
   DescribeOverviewDDoSTrendResponse,
+  TagFilter,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
   DeleteCCThresholdPolicyRequest,
@@ -261,6 +272,8 @@ import {
   L7RuleEntry,
   ModifyCCThresholdPolicyResponse,
   CreateWaterPrintKeyResponse,
+  EnterprisePackageConfig,
+  RuleInstanceRelation,
   DeleteCCPrecisionPolicyResponse,
   DescribeDDoSTrendResponse,
   DescribeListBlackWhiteIpListRequest,
@@ -272,7 +285,7 @@ import {
   ModifyCCLevelPolicyRequest,
   DescribeCcGeoIPBlockConfigListRequest,
   PacketFilterRelation,
-  RuleInstanceRelation,
+  InstanceChargePrepaid,
   CreatePacketFilterConfigRequest,
   DescribeCCTrendRequest,
 } from "./antiddos_models"
@@ -334,6 +347,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBGPIPL7RulesResponse) => void
   ): Promise<DescribeBGPIPL7RulesResponse> {
     return this.request("DescribeBGPIPL7Rules", req, cb)
+  }
+
+  /**
+   * 获取防护阈值配置列表，包括DDoS的AI、等级、CC阈值开关等。
+   */
+  async DescribeListProtectThresholdConfigNew(
+    req: DescribeListProtectThresholdConfigNewRequest,
+    cb?: (error: string, rep: DescribeListProtectThresholdConfigNewResponse) => void
+  ): Promise<DescribeListProtectThresholdConfigNewResponse> {
+    return this.request("DescribeListProtectThresholdConfigNew", req, cb)
   }
 
   /**
@@ -787,6 +810,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过API 购买高防包接口
+   */
+  async CreateBgpInstance(
+    req: CreateBgpInstanceRequest,
+    cb?: (error: string, rep: CreateBgpInstanceResponse) => void
+  ): Promise<CreateBgpInstanceResponse> {
+    return this.request("CreateBgpInstance", req, cb)
+  }
+
+  /**
    * 获取DDoS防护的区域封禁配置列表
    */
   async DescribeListDDoSGeoIPBlockConfig(
@@ -854,6 +887,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePacketFilterConfigResponse) => void
   ): Promise<CreatePacketFilterConfigResponse> {
     return this.request("CreatePacketFilterConfig", req, cb)
+  }
+
+  /**
+   * 购买后，查询购买的高防包实例信息
+   */
+  async DescribeBgpInstances(
+    req: DescribeBgpInstancesRequest,
+    cb?: (error: string, rep: DescribeBgpInstancesResponse) => void
+  ): Promise<DescribeBgpInstancesResponse> {
+    return this.request("DescribeBgpInstances", req, cb)
   }
 
   /**
@@ -1207,16 +1250,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除CC频率限制策略
-   */
-  async DeleteCCRequestLimitPolicy(
-    req: DeleteCCRequestLimitPolicyRequest,
-    cb?: (error: string, rep: DeleteCCRequestLimitPolicyResponse) => void
-  ): Promise<DeleteCCRequestLimitPolicyResponse> {
-    return this.request("DeleteCCRequestLimitPolicy", req, cb)
-  }
-
-  /**
    * 修改DDoS防护的区域封禁配置
    */
   async ModifyDDoSGeoIPBlockConfig(
@@ -1224,5 +1257,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDDoSGeoIPBlockConfigResponse) => void
   ): Promise<ModifyDDoSGeoIPBlockConfigResponse> {
     return this.request("ModifyDDoSGeoIPBlockConfig", req, cb)
+  }
+
+  /**
+   * 删除CC频率限制策略
+   */
+  async DeleteCCRequestLimitPolicy(
+    req: DeleteCCRequestLimitPolicyRequest,
+    cb?: (error: string, rep: DeleteCCRequestLimitPolicyResponse) => void
+  ): Promise<DeleteCCRequestLimitPolicyResponse> {
+    return this.request("DeleteCCRequestLimitPolicy", req, cb)
   }
 }

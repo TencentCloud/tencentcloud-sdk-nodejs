@@ -26,7 +26,6 @@ import {
   ModifyClusterPasswordResponse,
   DeleteClusterResponse,
   DeleteTableIndexResponse,
-  TableRollbackResultNew,
   DescribeBackupRecordsResponse,
   ApplyStatus,
   RegionInfo,
@@ -137,7 +136,6 @@ import {
   DescribeUinInWhitelistResponse,
   SnapshotInfo,
   ParsedTableInfoNew,
-  RollbackTablesResponse,
   MachineInfo,
   CreateBackupRequest,
   TableResultNew,
@@ -151,7 +149,6 @@ import {
   DescribeBackupRecordsRequest,
   PoolInfo,
   DescribeMachineRequest,
-  RollbackTablesRequest,
   DescribeUinInWhitelistRequest,
   CompareIdlFilesRequest,
   ProxyDetailInfo,
@@ -283,18 +280,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableRestProxyResponse) => void
   ): Promise<DisableRestProxyResponse> {
     return this.request("DisableRestProxy", req, cb)
-  }
-
-  /**
-     * 不再使用
-
-表格数据回档
-     */
-  async RollbackTables(
-    req: RollbackTablesRequest,
-    cb?: (error: string, rep: RollbackTablesResponse) => void
-  ): Promise<RollbackTablesResponse> {
-    return this.request("RollbackTables", req, cb)
   }
 
   /**

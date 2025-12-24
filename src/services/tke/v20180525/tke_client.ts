@@ -124,7 +124,7 @@ import {
   CreatePrometheusRecordRuleYamlRequest,
   DescribeMasterComponentResponse,
   Instance,
-  ModifyClusterAttributeResponse,
+  DisableControlPlaneLogsRequest,
   DescribeOSImagesRequest,
   CreateEksLogConfigRequest,
   CreateClusterResponse,
@@ -242,6 +242,7 @@ import {
   DescribeBatchModifyTagsStatusRequest,
   HttpGet,
   ResourceUsage,
+  ModifyClusterAttributeResponse,
   CreateClusterVirtualNodeRequest,
   DescribeTKEEdgeClustersRequest,
   DescribePrometheusAlertHistoryRequest,
@@ -292,6 +293,7 @@ import {
   DescribeAvailableClusterVersionRequest,
   UpgradeClusterReleaseResponse,
   ModifyClusterMaintenanceWindowAndExclusionsRequest,
+  DisableControlPlaneLogsResponse,
   DescribePrometheusAlertPolicyRequest,
   DeleteClusterAsGroupsResponse,
   ModifyClusterRuntimeConfigRequest,
@@ -315,7 +317,7 @@ import {
   Container,
   CreateClusterEndpointRequest,
   DeletePrometheusClusterAgentResponse,
-  DescribePrometheusInstanceResponse,
+  DescribeClusterLevelAttributeResponse,
   Capabilities,
   UpdateTKEEdgeClusterRequest,
   DescribeOpenPolicyListResponse,
@@ -400,6 +402,7 @@ import {
   DescribePrometheusTemplateSyncResponse,
   CreateEksLogConfigResponse,
   ModifyPrometheusTemplateResponse,
+  DescribeControlPlaneLogsRequest,
   ModifyPrometheusAlertPolicyResponse,
   CreateRollOutSequenceRequest,
   Cluster,
@@ -459,12 +462,13 @@ import {
   CreatePrometheusGlobalNotificationResponse,
   ListClusterInspectionResultsItemsRequest,
   DescribeClusterAuthenticationOptionsResponse,
+  ComponentLogConfig,
   CreateClusterReleaseRequest,
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
   ReleaseDetails,
   DescribePrometheusInstanceInitStatusRequest,
-  DescribeClusterLevelAttributeResponse,
+  DescribePrometheusInstanceResponse,
   PrometheusGrafanaInfo,
   Switch,
   ImageInstance,
@@ -530,6 +534,7 @@ import {
   UpdateEKSClusterRequest,
   CreateTKEEdgeClusterRequest,
   DescribeSupportedRuntimeResponse,
+  EnableControlPlaneLogsResponse,
   CreateClusterVirtualNodePoolResponse,
   CreateEKSClusterResponse,
   CreateImageCacheResponse,
@@ -608,6 +613,7 @@ import {
   DescribeImagesResponse,
   GetUpgradeInstanceProgressRequest,
   DescribeMasterComponentRequest,
+  DescribeControlPlaneLogsResponse,
   UpdateEKSClusterResponse,
   DescribeEdgeCVMInstancesResponse,
   DescribePrometheusRecordRulesResponse,
@@ -630,6 +636,7 @@ import {
   DescribeClusterStatusResponse,
   ImageRegistryCredential,
   DescribeRouteTableConflictsResponse,
+  EnableControlPlaneLogsRequest,
   DescribeVersionsRequest,
   DescribePrometheusTempRequest,
   DeleteAddonResponse,
@@ -1145,13 +1152,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询正在运行中Pod的计费信息。可以通过 Namespace 和 Name 来查询某个 Pod 的信息，也可以通过 Pod 的 Uid 批量查询。
+   * 查询插件日志采集配置
    */
-  async DescribePodChargeInfo(
-    req: DescribePodChargeInfoRequest,
-    cb?: (error: string, rep: DescribePodChargeInfoResponse) => void
-  ): Promise<DescribePodChargeInfoResponse> {
-    return this.request("DescribePodChargeInfo", req, cb)
+  async DescribeControlPlaneLogs(
+    req: DescribeControlPlaneLogsRequest,
+    cb?: (error: string, rep: DescribeControlPlaneLogsResponse) => void
+  ): Promise<DescribeControlPlaneLogsResponse> {
+    return this.request("DescribeControlPlaneLogs", req, cb)
   }
 
   /**
@@ -1522,6 +1529,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddVpcCniSubnetsResponse) => void
   ): Promise<AddVpcCniSubnetsResponse> {
     return this.request("AddVpcCniSubnets", req, cb)
+  }
+
+  /**
+   * 删除插件日志采集配置
+   */
+  async DisableControlPlaneLogs(
+    req: DisableControlPlaneLogsRequest,
+    cb?: (error: string, rep: DisableControlPlaneLogsResponse) => void
+  ): Promise<DisableControlPlaneLogsResponse> {
+    return this.request("DisableControlPlaneLogs", req, cb)
   }
 
   /**
@@ -2435,13 +2452,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务相关信息，只会查询对应任务类型的最新的一条任务状态
+   * 查询正在运行中Pod的计费信息。可以通过 Namespace 和 Name 来查询某个 Pod 的信息，也可以通过 Pod 的 Uid 批量查询。
    */
-  async DescribeTasks(
-    req: DescribeTasksRequest,
-    cb?: (error: string, rep: DescribeTasksResponse) => void
-  ): Promise<DescribeTasksResponse> {
-    return this.request("DescribeTasks", req, cb)
+  async DescribePodChargeInfo(
+    req: DescribePodChargeInfoRequest,
+    cb?: (error: string, rep: DescribePodChargeInfoResponse) => void
+  ): Promise<DescribePodChargeInfoResponse> {
+    return this.request("DescribePodChargeInfo", req, cb)
   }
 
   /**
@@ -2625,6 +2642,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建插件日志采集配置
+   */
+  async EnableControlPlaneLogs(
+    req: EnableControlPlaneLogsRequest,
+    cb?: (error: string, rep: EnableControlPlaneLogsResponse) => void
+  ): Promise<EnableControlPlaneLogsResponse> {
+    return this.request("EnableControlPlaneLogs", req, cb)
+  }
+
+  /**
    * 获得实例级别抓取配置
    */
   async DescribePrometheusGlobalConfig(
@@ -2682,6 +2709,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckInstancesUpgradeAbleResponse) => void
   ): Promise<CheckInstancesUpgradeAbleResponse> {
     return this.request("CheckInstancesUpgradeAble", req, cb)
+  }
+
+  /**
+   * 查询任务相关信息，只会查询对应任务类型的最新的一条任务状态
+   */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
   }
 
   /**

@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   RemoveChatRequest,
   SqlAgentParameter,
-  DescribeReportUrlResponse,
+  AgentDutyTask,
   DescribeAgentDutyTaskDetailRequest,
   UploadDelta,
   DescribeChatDetailRequest,
@@ -28,6 +28,7 @@ import {
   DescribeChatsRequest,
   ModifyChatTitleResponse,
   CreateAgentInstanceRequest,
+  ModifyChatTitleRequest,
   UploadChoice,
   DescribeAgentDutyTasksResponse,
   Parameter,
@@ -35,10 +36,12 @@ import {
   InstanceInfos,
   DescribeAgentsResponse,
   CreateChatCompletionRequest,
-  ModifyChatTitleRequest,
+  DescribeReportUrlResponse,
   DescribeAgentInstancesRequest,
   IsolateAgentInstanceResponse,
   PauseAgentWorkRequest,
+  TagItem,
+  ExtraInfo,
   CreateAgentInstanceResponse,
   DescribeAgentDutyTasksRequest,
   PauseAgentWorkResponse,
@@ -51,7 +54,7 @@ import {
   ModifyAgentInstanceParametersRequest,
   ContinueAgentWorkResponse,
   DescribeAgentInstancesResponse,
-  TagItem,
+  StartAgentTaskRequest,
   CreateChatCompletionRes,
   RecoverAgentInstanceRequest,
   CodeRepo,
@@ -67,6 +70,7 @@ import {
   ChatDetail,
   RemoveChatResponse,
   TerminateAgentInstanceRequest,
+  StartAgentTaskResponse,
 } from "./tdai_models"
 
 /**
@@ -236,6 +240,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentInstancesResponse) => void
   ): Promise<DescribeAgentInstancesResponse> {
     return this.request("DescribeAgentInstances", req, cb)
+  }
+
+  /**
+   * 该接口用于启动一个智能体的任务
+   */
+  async StartAgentTask(
+    req: StartAgentTaskRequest,
+    cb?: (error: string, rep: StartAgentTaskResponse) => void
+  ): Promise<StartAgentTaskResponse> {
+    return this.request("StartAgentTask", req, cb)
   }
 
   /**

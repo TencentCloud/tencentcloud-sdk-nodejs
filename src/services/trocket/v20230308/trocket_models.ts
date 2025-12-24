@@ -2919,18 +2919,18 @@ export interface ModifyConsumerGroupRequest {
    */
   InstanceId: string
   /**
-   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
-   */
-  ConsumerGroup?: string
-  /**
    * 是否开启消费
    */
-  ConsumeEnable?: boolean
+  ConsumeEnable: boolean
   /**
    * 顺序投递：true
 并发投递：false
    */
-  ConsumeMessageOrderly?: boolean
+  ConsumeMessageOrderly: boolean
+  /**
+   * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
+   */
+  ConsumerGroup?: string
   /**
    * 最大重试次数，取值范围0～1000
    */
@@ -3824,6 +3824,13 @@ export interface MessageTrackItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptionDesc?: string
+  /**
+   * 消费状态来源，枚举值如下：
+
+- DIFF_OFFSET：通过服务端offset计算
+- TRACE_REPORT：通过上报的轨迹判断
+   */
+  ConsumeStatusSource?: string
 }
 
 /**

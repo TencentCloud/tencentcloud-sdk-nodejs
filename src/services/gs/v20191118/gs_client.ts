@@ -69,6 +69,7 @@ import {
   DisconnectAndroidInstanceAcceleratorResponse,
   CleanAndroidInstancesAppDataRequest,
   DisableAndroidInstancesAppRequest,
+  AndroidInstanceBackup,
   DisconnectAndroidInstanceResponse,
   EnableAndroidInstancesAppResponse,
   ConnectAndroidInstanceRequest,

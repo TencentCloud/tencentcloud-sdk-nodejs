@@ -2930,6 +2930,38 @@ export interface CreateClusterSnapshotRequest {
    * 索引名称
    */
   Indices?: string
+  /**
+   * 0 腾讯云仓库; 1 客户仓库
+   */
+  EsRepositoryType?: number
+  /**
+   * 客户快照仓库名称
+   */
+  UserEsRepository?: string
+  /**
+   * 快照存储周期 单位天，范围[0, INF), 如果没有设置则默认7天
+   */
+  StorageDuration?: number
+  /**
+   * 备份锁定 0 不锁定; 1 锁定
+   */
+  CosRetention?: number
+  /**
+   * 锁定截止日期 2022-12-10T08:34:48.000Z
+   */
+  RetainUntilDate?: string
+  /**
+   * 锁定宽限期,单位天
+   */
+  RetentionGraceTime?: number
+  /**
+   * 跨地域备份 0 不跨地域; 1 跨地域
+   */
+  RemoteCos?: number
+  /**
+   * 跨地域备份地域名称 ap-guangzhou
+   */
+  RemoteCosRegion?: string
 }
 
 /**
@@ -3238,13 +3270,25 @@ export interface CosBackup {
    */
   BackupTime: string
   /**
+   * 备份快照前缀
+   */
+  SnapshotName?: string
+  /**
    * 0 腾讯云仓库; 1 客户仓库
    */
   EsRepositoryType?: number
   /**
+   * 托管快照仓库名称
+   */
+  PaasEsRepository?: string
+  /**
    * 客户快照仓库名称
    */
   UserEsRepository?: string
+  /**
+   * cos存储文件夹目录
+   */
+  CosBasePath?: string
   /**
    * 快照存储周期 单位天
    */
@@ -3253,6 +3297,38 @@ export interface CosBackup {
    * 自动备份频率单位小时
    */
   AutoBackupInterval?: number
+  /**
+   * 备份锁定 0 不锁定; 1 锁定
+   */
+  CosRetention?: number
+  /**
+   * 锁定截止日期 2022-12-10T08:34:48.000Z
+   */
+  RetainUntilDate?: string
+  /**
+   * 锁定宽限期
+   */
+  RetentionGraceTime?: number
+  /**
+   * 跨地域备份 0 不跨地域; 1 跨地域
+   */
+  RemoteCos?: number
+  /**
+   * 跨地域备份地域名称 ap-guangzhou
+   */
+  RemoteCosRegion?: string
+  /**
+   * 策略名称
+   */
+  StrategyName?: string
+  /**
+   * 备份索引列表，如果不填表示备份所有索引
+   */
+  Indices?: string
+  /**
+   * 策略创建时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -4698,6 +4774,76 @@ SUCCESS     备份成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserBackUp?: string
+  /**
+   * 0 腾讯云仓库; 1 客户仓库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsRepositoryType?: number
+  /**
+   * 托管快照仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PaasEsRepository?: string
+  /**
+   * 客户快照仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserEsRepository?: string
+  /**
+   * 快照存储周期 单位天，范围[0, INF), 如果没有设置则默认7天
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageDuration?: number
+  /**
+   * 自动备份频率, 如果是0,则等效24
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoBackupInterval?: number
+  /**
+   * 备份锁定 0 不锁定; 1 锁定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosRetention?: number
+  /**
+   * 锁定截止日期 2022-12-10T08:34:48.000Z
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetainUntilDate?: string
+  /**
+   * 锁定宽限期,单位天
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetentionGraceTime?: number
+  /**
+   * 是否已经备份锁定 0 不锁定; 1 锁定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLocked?: number
+  /**
+   * 跨地域备份 0 不跨地域; 1 跨地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteCos?: number
+  /**
+   * 跨地域备份地域名称 ap-guangzhou
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteCosRegion?: string
+  /**
+   * 备份加密 0 不加密; 1 加密
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosEncryption?: number
+  /**
+   * kms密钥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKey?: string
+  /**
+   * 策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName?: string
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   HealthCheckTemplateRule,
   DescribeClustersRequest,
   GPUConfig,
+  DescribeClusterMachinesRequest,
   HealthCheckPolicyRule,
   DeleteHealthCheckPolicyRequest,
   CreateNodePoolResponse,
@@ -55,10 +56,12 @@ import {
   ModifyNodePoolRequest,
   SuperNodeInfo,
   UpdateNativeNodePoolParam,
+  DeleteNodePoolRequest,
   Annotation,
   ModifyClusterMachineResponse,
   DescribeClusterInstancesRequest,
   DeleteHealthCheckPolicyResponse,
+  Machine,
   SetMachineLoginRequest,
   GPUParams,
   DeleteClusterMachinesRequest,
@@ -77,7 +80,7 @@ import {
   NativeNodePoolInfo,
   DescribeNodePoolsRequest,
   NodePool,
-  DeleteNodePoolRequest,
+  DescribeClusterMachinesResponse,
   InstanceAdvancedSettings,
   IntOrString,
   ExternalNodePoolInfo,
@@ -119,13 +122,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 TKE 节点池列表
+   * 查询托原生点列表
    */
-  async DescribeNodePools(
-    req: DescribeNodePoolsRequest,
-    cb?: (error: string, rep: DescribeNodePoolsResponse) => void
-  ): Promise<DescribeNodePoolsResponse> {
-    return this.request("DescribeNodePools", req, cb)
+  async DescribeClusterMachines(
+    req: DescribeClusterMachinesRequest,
+    cb?: (error: string, rep: DescribeClusterMachinesResponse) => void
+  ): Promise<DescribeClusterMachinesResponse> {
+    return this.request("DescribeClusterMachines", req, cb)
   }
 
   /**
@@ -297,5 +300,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
   ): Promise<DescribeClusterInstancesResponse> {
     return this.request("DescribeClusterInstances", req, cb)
+  }
+
+  /**
+   * 查询 TKE 节点池列表
+   */
+  async DescribeNodePools(
+    req: DescribeNodePoolsRequest,
+    cb?: (error: string, rep: DescribeNodePoolsResponse) => void
+  ): Promise<DescribeNodePoolsResponse> {
+    return this.request("DescribeNodePools", req, cb)
   }
 }

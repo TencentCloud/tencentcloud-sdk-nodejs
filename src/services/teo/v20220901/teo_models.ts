@@ -1433,31 +1433,41 @@ export interface CreatePrefetchTaskRequest {
    */
   ZoneId: string
   /**
-   * 要预热的资源列表，每个元素格式类似如下:
-http://www.example.com/example.txt。参数值当前必填。
+   * 要预热的资源列表，必填。每个元素格式类似如下:
+http://www.example.com/example.txt。
 注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。
    */
   Targets?: Array<string>
+  /**
+   * 预热模式，取值有：
+<li>default：默认模式，即预热到中间层；</li>
+<li>edge：边缘预热模式，即预热到边缘和中间层。</li>不填写时，默认值为 default。
+注意事项：
+1.预热至边缘产生的边缘层流量，会计入计费流量；
+2.边缘预热默认分配单独的预热额度 1000 条/天，不消费常规预热额度。
+说明：
+该参数为白名单功能，如有需要，请联系腾讯云工程师处理。
+   */
+  Mode?: string
   /**
    * 是否对url进行encode，若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。
    * @deprecated
    */
   EncodeUrl?: boolean
   /**
-   * 附带的http头部信息。
+   * 若需要携带 HTTP 头部信息预热，可入参该参数，否则放空即可。
    */
   Headers?: Array<Header>
   /**
    * 媒体分片预热控制，取值有：
 <li>on：开启分片预热，预热描述文件，并递归解析描述文件分片进行预热；</li>
 <li>off：仅预热提交的描述文件；</li>不填写时，默认值为 off。
-
 注意事项：
 1. 支持的描述文件为 M3U8，对应分片为 TS；
 2. 要求描述文件能正常请求，并按行业标准描述分片路径；
 3. 递归解析深度不超过 3 层；
 4. 解析获取的分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热。
-
+说明：
 该参数为白名单功能，如有需要，请联系腾讯云工程师处理。
    */
   PrefetchMediaSegments?: string
@@ -1530,7 +1540,7 @@ export interface DescribeTopL7AnalysisDataRequest {
 <li> l7Flow_request_url：按 URL Path 维度统计 L7 访问请求数指标; </li>
 <li> l7Flow_request_resourceType：按资源类型维度统计 L7 访问请求数指标；</li>
 <li> l7Flow_request_sip：按客户端 IP 维度统计 L7 访问请求数指标；</li>
-<li> l7Flow_request_referer：按 Referer 维度统计 L7 访问请求数指标；</li>
+<li> l7Flow_request_referers：按 Referer 维度统计 L7 访问请求数指标；</li>
 <li> l7Flow_request_ua_device：按设备类型维度统计 L7 访问请求数指标; </li>
 <li> l7Flow_request_ua_browser：按浏览器类型维度统计 L7 访问请求数指标；</li>
 <li> l7Flow_request_ua_os：按操作系统类型维度统计 L7 访问请求数指标；</li>
@@ -1540,7 +1550,7 @@ export interface DescribeTopL7AnalysisDataRequest {
   /**
    * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
-  ZoneIds?: Array<string>
+  ZoneIds: Array<string>
   /**
    * 查询前多少个 top 数据，最大值为1000。不填默认为10，表示查询 top10 的数据。
    */
@@ -2102,25 +2112,37 @@ export interface CreateFunctionRequest {
 }
 
 /**
- * 会话速率和周期特征校验配置。
+ * 回源限速限制详情。
  */
-export interface SessionRateControl {
+export interface PrefetchOriginLimit {
   /**
-   * 会话速率和周期特征校验配置是否开启。取值有：<li>on：启用</li><li>off：关闭</li>
+   * 站点 ID。
    */
-  Enabled?: string
+  ZoneId?: string
   /**
-   * 会话速率和周期特征校验高风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   * 加速域名。
    */
-  HighRateSessionAction?: SecurityAction
+  DomainName?: string
   /**
-   * 会话速率和周期特征校验中风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   * 回源限速限制的加速区域。
+预热时，该加速区域将会受到配置的Bandwidth值限制。取值有：
+<li>Overseas：全球可用区（不含中国大陆）；</li>
+<li>MainlandChina：中国大陆可用区。</li>
    */
-  MidRateSessionAction?: SecurityAction
+  Area?: string
   /**
-   * 会话速率和周期特征校验低风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   * 回源限速带宽。
+预热时回到源站的带宽上限值，取值范围 100 - 100,000，单位 Mbps。
    */
-  LowRateSessionAction?: SecurityAction
+  Bandwidth?: number
+  /**
+   * 回源限速限制创建的时间。
+   */
+  CreateTime?: string
+  /**
+   * 回源限速限制更新的时间。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -2205,13 +2227,33 @@ export interface DescribeTimingL7OriginPullDataResponse {
 }
 
 /**
- * DeleteL4ProxyRules返回参数结构体
+ * DescribePrefetchTasks请求参数结构体
  */
-export interface DeleteL4ProxyRulesResponse {
+export interface DescribePrefetchTasksRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
-  RequestId?: string
+  ZoneId?: string
+  /**
+   * 查询起始时间，时间与 job-id 必填一个。
+   */
+  StartTime?: string
+  /**
+   * 查询结束时间，时间与 job-id 必填一个。
+   */
+  EndTime?: string
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目，默认值：20，上限：1000。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
+   */
+  Filters?: Array<AdvancedFilter>
 }
 
 /**
@@ -2491,10 +2533,10 @@ export interface RuleCodeActionParams {
 export interface OriginGroupReference {
   /**
    * 引用服务类型，取值有：
-<li>AccelerationDomain: 加速域名；</li>
-<li>RuleEngine: 规则引擎；</li>
-<li>Loadbalance: 负载均衡；</li>
-<li>ApplicationProxy: 四层代理。</li>
+<li>acceleration-domain: 加速域名；</li>
+<li>rule-engine: 规则引擎；</li>
+<li>load-balancer: 负载均衡；</li>
+<li>application-proxy: 四层代理。</li>
    */
   InstanceType?: string
   /**
@@ -2502,9 +2544,21 @@ export interface OriginGroupReference {
    */
   InstanceId?: string
   /**
-   * 应用类型的实例名称。
+   * 引用类型的实例名称。
    */
   InstanceName?: string
+  /**
+   * 引用站点ID。
+   */
+  ZoneId?: string
+  /**
+   * 引用站点名称。
+   */
+  ZoneName?: string
+  /**
+   * 引用站点别名。
+   */
+  AliasZoneName?: string
 }
 
 /**
@@ -4089,6 +4143,16 @@ export interface SubRule {
 }
 
 /**
+ * ModifyPrefetchOriginLimit返回参数结构体
+ */
+export interface ModifyPrefetchOriginLimitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMultiPathGateway请求参数结构体
  */
 export interface ModifyMultiPathGatewayRequest {
@@ -4166,6 +4230,10 @@ export interface LoadBalancer {
    * 该负载均衡实例绑定的七层域名列表。
    */
   L7UsedList?: Array<string>
+  /**
+   * 负载均衡被引用实例的列表。
+   */
+  References?: Array<OriginGroupReference>
 }
 
 /**
@@ -12765,6 +12833,30 @@ export interface ClientFiltering {
 }
 
 /**
+ * DescribePrefetchOriginLimit请求参数结构体
+ */
+export interface DescribePrefetchOriginLimitRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目，默认值：20，上限：100。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：
+<li>domain-name：按照域名过滤。domain-name 形如：www.qq.com，不支持模糊查询；</li>
+<li>area：按照限制加速区域过滤，不支持模糊查询。可选项：<br> Overseas：全球可用区（不含中国大陆）；<br> MainlandChina：中国大陆可用区。</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeTopL7CacheData请求参数结构体
  */
 export interface DescribeTopL7CacheDataRequest {
@@ -12818,6 +12910,28 @@ export interface DescribeTopL7CacheDataRequest {
 <li>global：全球数据。</li>不填默认取值为global。
    */
   Area?: string
+}
+
+/**
+ * 会话速率和周期特征校验配置。
+ */
+export interface SessionRateControl {
+  /**
+   * 会话速率和周期特征校验配置是否开启。取值有：<li>on：启用</li><li>off：关闭</li>
+   */
+  Enabled?: string
+  /**
+   * 会话速率和周期特征校验高风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  HighRateSessionAction?: SecurityAction
+  /**
+   * 会话速率和周期特征校验中风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  MidRateSessionAction?: SecurityAction
+  /**
+   * 会话速率和周期特征校验低风险的执行动作。 SecurityAction 的 Name 取值支持：<li>Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；</li><li>Monitor：观察；</li><li>Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。</li>
+   */
+  LowRateSessionAction?: SecurityAction
 }
 
 /**
@@ -13523,6 +13637,39 @@ export interface OriginProtectionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiffIPWhitelist?: DiffIPWhitelist
+}
+
+/**
+ * ModifyPrefetchOriginLimit请求参数结构体
+ */
+export interface ModifyPrefetchOriginLimitRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 加速域名。
+   */
+  DomainName: string
+  /**
+   * 回源限速限制的加速区域。
+预热时，该加速区域将会受到配置的Bandwidth值限制。取值有：
+<li>Overseas：全球可用区（不含中国大陆）；</li>
+<li>MainlandChina：中国大陆可用区。</li>
+   */
+  Area: string
+  /**
+   * 回源限速带宽。
+预热时回到源站的带宽上限值，取值范围 100 - 100,000，单位 Mbps。
+   */
+  Bandwidth: number
+  /**
+   * 回源限速限制控制开关。
+用于启用/删除本条回源限速限制，取值有：
+<li>on：启用限制；</li>
+<li>off：删除限制。</li>
+   */
+  Enabled: string
 }
 
 /**
@@ -14517,33 +14664,13 @@ export interface DescribeMultiPathGatewaysRequest {
 }
 
 /**
- * DescribePrefetchTasks请求参数结构体
+ * DeleteL4ProxyRules返回参数结构体
  */
-export interface DescribePrefetchTasksRequest {
+export interface DeleteL4ProxyRulesResponse {
   /**
-   * 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId?: string
-  /**
-   * 查询起始时间，时间与 job-id 必填一个。
-   */
-  StartTime?: string
-  /**
-   * 查询结束时间，时间与 job-id 必填一个。
-   */
-  EndTime?: string
-  /**
-   * 分页查询偏移量，默认为 0。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目，默认值：20，上限：1000。
-   */
-  Limit?: number
-  /**
-   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
-   */
-  Filters?: Array<AdvancedFilter>
+  RequestId?: string
 }
 
 /**
@@ -15724,6 +15851,24 @@ export interface DescribeWebSecurityTemplatesResponse {
    * 策略模板列表。
    */
   SecurityPolicyTemplates?: Array<SecurityPolicyTemplateInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePrefetchOriginLimit返回参数结构体
+ */
+export interface DescribePrefetchOriginLimitResponse {
+  /**
+   * 回源限速限制总数。
+   */
+  TotalCount?: number
+  /**
+   * 回源限速限制详情List。
+   */
+  Limits?: Array<PrefetchOriginLimit>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

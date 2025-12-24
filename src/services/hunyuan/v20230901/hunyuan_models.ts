@@ -521,7 +521,7 @@ export interface ChatCompletionsResponse {
  */
 export interface VideoUrl {
   /**
-   * 视频的url，如"https://your-video-path.mp/4"
+   * 视频的url，如"https://your-video-path.mp4"，视频文件大小不超过100M。
    */
   Url?: string
   /**
@@ -1185,7 +1185,7 @@ export interface Message {
    */
   Content?: string
   /**
-   * 多种类型内容（目前支持图片和文本），仅 hunyuan-vision 和 hunyuan-turbo-vision 模型支持
+   * 多种类型内容（目前支持文本、图片和视频），图片支持混元图生文系列模型，视频支持混元视频生文系列模型，详情参考[产品概述](https://cloud.tencent.com/document/product/1729/104753)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Contents?: Array<Content>
@@ -1965,35 +1965,35 @@ export interface GetThreadRequest {
 }
 
 /**
- * 可以传入多种类型的内容，如图片、文本。
+ * 可以传入多种类型的内容，目前支持文本、图片、视频。
  */
 export interface Content {
   /**
    * 内容类型
 注意：
 需包含至少一个 Type 为"text"的参数。
-参数值可选范围：[text", "image_url","video_url"]
+参数值可选范围：["text", "image_url","video_url","video_frames"]
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
-   * 当 Type 为 text 时使用，表示具体的文本内容。当 Type 为 image_url 时，当前字段内容需保持为空，传递内容不生效。
+   * 当 Type 为 text 时使用，表示具体的文本内容。当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Text?: string
   /**
    * 图片的url，当 Type 为 image_url 时使用，表示具体的图片内容
-如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64," 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"。当 Type 为 text 时，当前字段内容需保持为空，传递内容不生效。
+如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64," 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"。当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageUrl?: ImageUrl
   /**
-   * 当type为video_url时使用，标识具体的视频链接内容
+   * 当 Type 为 video_url 时使用，标识具体的视频链接内容，如"https://your-video-path.mp4"。当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoUrl?: VideoUrl
   /**
-   * 当type为video_frames时使用，标识具体的视频内图像帧内容
+   * 当 Type 为 video_frames 时使用，标识具体的视频内图像帧内容，当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoFrames?: VideoFrames
@@ -2078,7 +2078,7 @@ export interface ImageQuestionRequest {
  */
 export interface VideoFrames {
   /**
-   * 视频图像帧列表，图像帧传url
+   * 视频图像帧列表，图像帧传url，最大支持传入数量为512帧
    */
   Frames?: Array<string>
 }

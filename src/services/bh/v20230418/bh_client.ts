@@ -39,6 +39,7 @@ import {
   DeviceAccount,
   BindDeviceAccountPasswordResponse,
   DescribeChangePwdTaskDetailRequest,
+  DescribeDepartmentsResponse,
   ResetDeviceAccountPasswordRequest,
   DescribeAccessWhiteListRulesResponse,
   AddUserGroupMembersRequest,
@@ -121,6 +122,7 @@ import {
   CreateOperationTaskResponse,
   CreateAclResponse,
   DescribeAclsResponse,
+  Departments,
   ModifyUserRequest,
   CreateCmdTemplateResponse,
   DeleteOperationTasksResponse,
@@ -206,6 +208,7 @@ import {
   CreateDeviceAccountRequest,
   AddDeviceGroupMembersResponse,
   DeleteCmdTemplatesRequest,
+  EnvInternetAccessSetting,
   DescribeUserGroupsResponse,
   DescribeUserDirectoryRequest,
   SyncUserToIOARequest,
@@ -233,6 +236,7 @@ import {
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
+  DescribeDepartmentsRequest,
   SessionResult,
   Resource,
   RunChangePwdTaskResponse,
@@ -301,6 +305,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOperationTaskResponse) => void
   ): Promise<DescribeOperationTaskResponse> {
     return this.request("DescribeOperationTask", req, cb)
+  }
+
+  /**
+   * 设置OAuth认证参数
+   */
+  async ModifyOAuthSetting(
+    req: ModifyOAuthSettingRequest,
+    cb?: (error: string, rep: ModifyOAuthSettingResponse) => void
+  ): Promise<ModifyOAuthSettingResponse> {
+    return this.request("ModifyOAuthSetting", req, cb)
   }
 
   /**
@@ -774,13 +788,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置OAuth认证参数
+   * 查询部门信息
    */
-  async ModifyOAuthSetting(
-    req: ModifyOAuthSettingRequest,
-    cb?: (error: string, rep: ModifyOAuthSettingResponse) => void
-  ): Promise<ModifyOAuthSettingResponse> {
-    return this.request("ModifyOAuthSetting", req, cb)
+  async DescribeDepartments(
+    req?: DescribeDepartmentsRequest,
+    cb?: (error: string, rep: DescribeDepartmentsResponse) => void
+  ): Promise<DescribeDepartmentsResponse> {
+    return this.request("DescribeDepartments", req, cb)
   }
 
   /**

@@ -17,7 +17,15 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { CreateRoleUserResponse, CreateRoleUserRequest, UserAttribute } from "./evt_models"
+import {
+  CreateRoleUserRequest,
+  CompleteApprovalRequest,
+  DeleteRoleUserRequest,
+  UserAttribute,
+  DeleteRoleUserResponse,
+  CreateRoleUserResponse,
+  CompleteApprovalResponse,
+} from "./evt_models"
 
 /**
  * evt client
@@ -29,6 +37,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除自定义用户
+   */
+  async DeleteRoleUser(
+    req: DeleteRoleUserRequest,
+    cb?: (error: string, rep: DeleteRoleUserResponse) => void
+  ): Promise<DeleteRoleUserResponse> {
+    return this.request("DeleteRoleUser", req, cb)
+  }
+
+  /**
    * 创建人员
    */
   async CreateRoleUser(
@@ -36,5 +54,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRoleUserResponse) => void
   ): Promise<CreateRoleUserResponse> {
     return this.request("CreateRoleUser", req, cb)
+  }
+
+  /**
+   * 执行审批
+   */
+  async CompleteApproval(
+    req: CompleteApprovalRequest,
+    cb?: (error: string, rep: CompleteApprovalResponse) => void
+  ): Promise<CompleteApprovalResponse> {
+    return this.request("CompleteApproval", req, cb)
   }
 }

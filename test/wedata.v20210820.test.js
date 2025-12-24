@@ -848,6 +848,16 @@ it("wedata.v20210820.DeleteFilePath", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTaskInstancesStatus", async function () {
+    try {
+       const data = await client.DescribeTaskInstancesStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CreateDsFolder", async function () {
     try {
        const data = await client.CreateDsFolder({})
@@ -1201,6 +1211,16 @@ it("wedata.v20210820.ModifyRule", async function () {
 it("wedata.v20210820.DescribeFunctionTypes", async function () {
     try {
        const data = await client.DescribeFunctionTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeLineageInfo", async function () {
+    try {
+       const data = await client.DescribeLineageInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

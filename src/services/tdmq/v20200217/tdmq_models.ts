@@ -6763,6 +6763,13 @@ UNKNOWN: 查询不到消费状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptionDesc?: string
+  /**
+   * 消费状态来源，枚举值如下：
+
+- DIFF_OFFSET：通过服务端offset计算
+- TRACE_REPORT：通过上报的轨迹判断
+   */
+  ConsumeStatusSource?: string
 }
 
 /**
@@ -10622,7 +10629,7 @@ export interface DescribeRocketMQGroupsRequest {
    */
   Offset: number
   /**
-   * 限制条数
+   * 单次查询最大条数。取值范围：[0~100]，默认值为20
    */
   Limit: number
   /**

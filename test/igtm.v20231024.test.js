@@ -188,6 +188,16 @@ it("igtm.v20231024.DescribeInstanceList", async function () {
     }
 })
 
+it("igtm.v20231024.ModifyPackageAutoRenew", async function () {
+    try {
+       const data = await client.ModifyPackageAutoRenew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("igtm.v20231024.DescribeMonitorDetail", async function () {
     try {
        const data = await client.DescribeMonitorDetail({})
@@ -211,6 +221,16 @@ it("igtm.v20231024.DescribeDetectTaskPackageList", async function () {
 it("igtm.v20231024.DescribeStrategyList", async function () {
     try {
        const data = await client.DescribeStrategyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("igtm.v20231024.CreatePackageAndPay", async function () {
+    try {
+       const data = await client.CreatePackageAndPay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

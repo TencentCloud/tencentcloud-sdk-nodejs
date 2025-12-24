@@ -452,18 +452,39 @@ export interface DescribeRuleDimStatResponse {
 }
 
 /**
- * RegisterEventListener返回参数结构体
+ * LineageCommonInfoVO
  */
-export interface RegisterEventListenerResponse {
+export interface LineageCommonInfoVO {
   /**
-   * 成功或者失败
+   * 当前节点
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: BatchReturn
+  CurrentResource?: LineageResouce
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 上游节点
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ParentSet?: Array<LineageNodeInfoVO>
+  /**
+   * 下游节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChildSet?: Array<LineageNodeInfoVO>
+  /**
+   * 下游数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownStreamCount?: number
+  /**
+   * 上游数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpStreamCount?: number
+  /**
+   * 父/子节点是否展示上下游数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StreamCountFlag?: boolean
 }
 
 /**
@@ -2925,24 +2946,41 @@ export interface CheckTaskNameExistRequest {
 }
 
 /**
- * 项目扩展信息
+ * 按天更新的表的资产评分
  */
-export interface WorkspaceExt {
+export interface TablePropertyScore {
   /**
-   * 2670965482618679296
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表ID
    */
-  ProjectId?: string
+  TableId: string
   /**
-   * metrics
-注意：此字段可能返回 null，表示取不到有效值。
+   * 统计日期
    */
-  Key?: string
+  DayTime: string
   /**
-   * json
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表完整性评分
    */
-  Value?: string
+  Integrity: number
+  /**
+   * 表保障性评分
+   */
+  Safety: number
+  /**
+   * 表及时性评分
+   */
+  Timeliness: number
+  /**
+   * 表稳定性评分
+   */
+  Stability: number
+  /**
+   * 表规范性评分
+   */
+  Normative: number
+  /**
+   * 资产评分平均分
+   */
+  Average: number
 }
 
 /**
@@ -3078,6 +3116,24 @@ export interface DescribeInstanceDetailInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 分区参数
+ */
+export interface Partition {
+  /**
+   * 分区转换策略
+   */
+  Transform?: string
+  /**
+   * 分区字段名
+   */
+  Name?: string
+  /**
+   * 策略参数
+   */
+  TransformArgs?: Array<string>
 }
 
 /**
@@ -3340,41 +3396,18 @@ export interface DescribeDataCheckStatRequest {
 }
 
 /**
- * 按天更新的表的资产评分
+ * RegisterEventListener返回参数结构体
  */
-export interface TablePropertyScore {
+export interface RegisterEventListenerResponse {
   /**
-   * 表ID
+   * 成功或者失败
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableId: string
+  Data?: BatchReturn
   /**
-   * 统计日期
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DayTime: string
-  /**
-   * 表完整性评分
-   */
-  Integrity: number
-  /**
-   * 表保障性评分
-   */
-  Safety: number
-  /**
-   * 表及时性评分
-   */
-  Timeliness: number
-  /**
-   * 表稳定性评分
-   */
-  Stability: number
-  /**
-   * 表规范性评分
-   */
-  Normative: number
-  /**
-   * 资产评分平均分
-   */
-  Average: number
+  RequestId?: string
 }
 
 /**
@@ -4511,6 +4544,16 @@ export interface BaseClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdwUserName?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTimestamp?: number
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTimestamp?: number
 }
 
 /**
@@ -4723,6 +4766,16 @@ export interface ProjectUserRole {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsProjectOwner?: boolean
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTimestamp?: number
+  /**
+   * 用户状态 0:历史 1:正常 2:已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
 }
 
 /**
@@ -6258,6 +6311,62 @@ export interface MoveTasksToFolderResponse {
 }
 
 /**
+ * 任务参数输出dto
+ */
+export interface ParameterTaskOutDsDto {
+  /**
+   * 唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: number
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId: string
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamKey: string
+  /**
+   * 参数描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamDesc: string
+  /**
+   * 参数定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamDefine: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 任务名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId: string
+  /**
+   * 项目名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName: string
+}
+
+/**
  * GetOfflineDIInstanceList返回参数结构体
  */
 export interface GetOfflineDIInstanceListResponse {
@@ -6405,19 +6514,17 @@ export interface DimTableLink {
 }
 
 /**
- * 数据质量规则分页
+ * DescribeWorkflowSchedulerInfoDs请求参数结构体
  */
-export interface RulePage {
+export interface DescribeWorkflowSchedulerInfoDsRequest {
   /**
-   * 记录数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目ID
    */
-  TotalCount?: number
+  ProjectId: string
   /**
-   * 规则列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流ID
    */
-  Items?: Array<Rule>
+  WorkflowId: string
 }
 
 /**
@@ -7587,6 +7694,47 @@ export interface DescribeRuleGroupResponse {
 }
 
 /**
+ * LineageNodeInfoVo
+ */
+export interface LineageNodeInfoVO {
+  /**
+   * 当前资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentResource?: LineageResouce
+  /**
+   * 关系
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Relation?: LineageRelationVO
+  /**
+   * 上游数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownStreamCount?: number
+  /**
+   * 下游数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpStreamCount?: number
+  /**
+   * 上游节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentSet?: Array<LineageNodeInfoVO>
+  /**
+   * 下游节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChildSet?: Array<LineageNodeInfoVO>
+  /**
+   * 父/子节点是否展示上下游数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StreamCountFlag?: boolean
+}
+
+/**
  * DeleteDataSources返回参数结构体
  */
 export interface DeleteDataSourcesResponse {
@@ -7677,7 +7825,15 @@ presto\SparkJob\SparkSql
    */
   CreateTime?: string
   /**
-   * 周期类型
+   * 周期类型D天周期
+H小时
+Ccrontab类型
+I分钟
+O一次性
+Y年
+R用户驱动
+W周
+M月
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleUnit?: string
@@ -7696,6 +7852,21 @@ presto\SparkJob\SparkSql
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: string
+  /**
+   * 引擎名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComputeResource?: string
+  /**
+   * dlc地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DlcRegion?: string
+  /**
+   * 资源组或自定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInherit?: string
 }
 
 /**
@@ -8558,8 +8729,19 @@ export interface Apply {
   ApplyId?: string
   /**
    * 扩展字段
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTimestamp?: number
+  /**
+   * 审批时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveTimestamp?: number
 }
 
 /**
@@ -8807,6 +8989,11 @@ export interface DependencyStrategyDs {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskDependencyExecutingTimeoutValue?: number
+  /**
+   * 超时依赖策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependencyConfigTimeoutTypeList?: Array<DependencyConfigTimeoutDTO>
 }
 
 /**
@@ -9756,6 +9943,32 @@ export interface DataSourceInfo {
    * 是否开通tccatalog,默认没有开启
    */
   TcCatalogOpen?: boolean
+}
+
+/**
+ * LineageRelationVO
+ */
+export interface LineageRelationVO {
+  /**
+   * 关联ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelationId?: string
+  /**
+   * 源端唯一血缘ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceQualifiedId?: string
+  /**
+   * 目标端唯一血缘ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetQualifiedId?: string
+  /**
+   * 血缘加工过程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Processes?: Array<LineageProcessVO>
 }
 
 /**
@@ -12008,6 +12221,59 @@ export interface OrderFieldOptional {
 }
 
 /**
+ * 血缘实体
+ */
+export interface LineageResouce {
+  /**
+   * 实体原始唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceOriId?: string
+  /**
+   * 业务名称：库名.表名｜指标名称｜模型名称|字段名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 实体类型
+TABLE|METRIC|MODEL|SERVICE|COLUMN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType?: string
+  /**
+   * 血缘全局唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualifiedId?: string
+  /**
+   * 描述：表类型｜指标描述｜模型描述|字段描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 来源：WEDATA|THIRD
+默认wedata
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Platform?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * resource 额外扩展参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceProperties?: Array<LineageProperty>
+}
+
+/**
  * DryRunDIOfflineTask请求参数结构体
  */
 export interface DryRunDIOfflineTaskRequest {
@@ -12642,6 +12908,20 @@ export interface DescribeTableBasicInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskInstancesStatus返回参数结构体
+ */
+export interface DescribeTaskInstancesStatusResponse {
+  /**
+   * 实例列表
+   */
+  Data?: Array<DescribeTaskInstancesStatusDto>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14600,6 +14880,42 @@ export interface DescribeAlarmReceiverRequest {
 }
 
 /**
+ * 函数提交版本信息
+ */
+export interface FunctionVersion {
+  /**
+   * 版本号：V0 V1 V2
+   */
+  Tag?: string
+  /**
+   * 提交人 ID
+   */
+  UserId?: string
+  /**
+   * 变更类型：ADD、MODIFY
+   */
+  Type?: string
+  /**
+   * 备注
+   */
+  Comment?: string
+  /**
+   * 提交时间: UTC 秒数
+   */
+  Timestamp?: string
+  /**
+   * 提交人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 版本内容：json string 格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+}
+
+/**
  * 调度运行实例实体
  */
 export interface InstanceVO {
@@ -15629,124 +15945,19 @@ export interface DescribeTaskDetailDsResponse {
 }
 
 /**
- * 任务类型
+ * LineageProperty额外扩展参数
  */
-export interface TaskTypeDsVO {
+export interface LineageProperty {
   /**
-   * 任务类型id
+   * 属性名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TypeId?: number
+  Name?: string
   /**
-   * TypeDesc描述
+   * 属性值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TypeDesc?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 服务器类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceServerType?: string
-  /**
-   * 目标服务器类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetServerType?: string
-  /**
-   * RunJarName名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunJarName?: string
-  /**
-   * Killable参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KillAble?: number
-  /**
-   * TypeSort类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TypeSort?: string
-  /**
-   * InCharge参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InCharge?: string
-  /**
-   * 节点对应任务类型运行上限（暂时不考虑）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BrokerParallelism?: number
-  /**
-   * 每个任务运行上限（暂时不考虑
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskParallelism?: number
-  /**
-   * 补录和重跑上限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DoRedoParallelism?: number
-  /**
-   * 0 为不可创建任务; >0 可创建任务
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DowngradePriorityTries?: number
-  /**
-   * 重试等待时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryWait?: number
-  /**
-   * 重试次数（在任务属性配置中设置）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryLimit?: number
-  /**
-   * DefaultAliveWait参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefaultAliveWait?: number
-  /**
-   * PollingSeconds秒数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PollingSeconds?: number
-  /**
-   * 参数列表xml
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamList?: string
-  /**
-   * TaskTypeExts参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskTypeExtension?: Array<TaskTypeExtParamDsVO>
-  /**
-   * 对应文件类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileType?: string
-  /**
-   * 是否选择脚本路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SelectFilePath?: boolean
-  /**
-   * classpath是否要排除掉common-lib，默认是0不排除
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExcludeCommonLib?: boolean
-  /**
-   * runner任务完成后需要触发的hook
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PostHooks?: string
+  Value?: string
 }
 
 /**
@@ -15933,59 +16144,21 @@ export interface DescribeDataSourceInfoListRequest {
 }
 
 /**
- * 任务参数输出dto
+ * DescribeTaskInstancesStatus请求参数结构体
  */
-export interface ParameterTaskOutDsDto {
+export interface DescribeTaskInstancesStatusRequest {
   /**
-   * 唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务列表
    */
-  Id: number
+  RecordIdList: Array<string>
   /**
-   * 任务id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流id
    */
-  TaskId: string
-  /**
-   * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamKey: string
-  /**
-   * 参数描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamDesc: string
-  /**
-   * 参数定义
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamDefine: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime: string
-  /**
-   * 任务名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName: string
+  WorkflowId: string
   /**
    * 项目id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId: string
-  /**
-   * 项目名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectName: string
 }
 
 /**
@@ -17810,6 +17983,32 @@ export interface DeleteResourceFilesResponse {
 }
 
 /**
+ * 根据任务信息获取实例状态信息实例
+ */
+export interface ParamGetTaskInstancesStatusInfoResponseInstance {
+  /**
+   * 实例编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 记录编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId?: string
+  /**
+   * 任务编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+}
+
+/**
  * DescribeFieldBasicInfo请求参数结构体
  */
 export interface DescribeFieldBasicInfoRequest {
@@ -18933,6 +19132,32 @@ export interface DeleteOfflineTaskRequest {
    * 虚拟任务标记(跟之前调度接口保持一致默认false)
    */
   VirtualFlag: boolean
+}
+
+/**
+ * 超时弱依赖配置
+ */
+export interface DependencyConfigTimeoutDTO {
+  /**
+   * 超时类型
+WAIT_TOTAL_TIMEOUT 等待总时长
+
+RUNNING_TIMEOUT 运行时长
+
+WAIT_TIME_POINT_TIMEOUT 等待超过配置时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeoutType?: string
+  /**
+   * 超时时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeoutValue?: number
+  /**
+   * 固定时间点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeoutPoint?: string
 }
 
 /**
@@ -20399,6 +20624,10 @@ export interface BaseProject {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model?: string
+  /**
+   * 项目调度模式，task：任务模式 workflow：工作流模式
+   */
+  ScheduleMode?: string
 }
 
 /**
@@ -21113,6 +21342,27 @@ export interface RunRerunScheduleInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 项目扩展信息
+ */
+export interface WorkspaceExt {
+  /**
+   * 2670965482618679296
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * metrics
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * json
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -22893,17 +23143,49 @@ export interface SubscribeReceiver {
 }
 
 /**
- * DescribeWorkflowSchedulerInfoDs请求参数结构体
+ * DescribeLineageInfo请求参数结构体
  */
-export interface DescribeWorkflowSchedulerInfoDsRequest {
+export interface DescribeLineageInfoRequest {
   /**
-   * 项目ID
+   * 实体原始唯一ID
    */
-  ProjectId: string
+  ResourceOriId?: string
   /**
-   * 工作流ID
+   * 实体类型
    */
-  WorkflowId: string
+  ResourceType?: string
+  /**
+   * 血缘唯一ID
+   */
+  QualifiedId?: string
+  /**
+   * 查询方向
+   */
+  Direction?: string
+  /**
+   * 查询入度
+   */
+  InputDepth?: number
+  /**
+   * 查询出度
+   */
+  OutputDepth?: number
+  /**
+   * 数据来源
+   */
+  Platform?: string
+  /**
+   * 血缘类型（分页使用）
+   */
+  LineageType?: string
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+   */
+  PageSize?: number
 }
 
 /**
@@ -23212,39 +23494,14 @@ export interface SpeedValue {
 }
 
 /**
- * 函数提交版本信息
+ * 分组获取编排空间测试运行记录
  */
-export interface FunctionVersion {
+export interface DescribeTaskInstancesStatusDto {
   /**
-   * 版本号：V0 V1 V2
-   */
-  Tag?: string
-  /**
-   * 提交人 ID
-   */
-  UserId?: string
-  /**
-   * 变更类型：ADD、MODIFY
-   */
-  Type?: string
-  /**
-   * 备注
-   */
-  Comment?: string
-  /**
-   * 提交时间: UTC 秒数
-   */
-  Timestamp?: string
-  /**
-   * 提交人名称
+   * 根据任务信息获取实例状态信息实例
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName?: string
-  /**
-   * 版本内容：json string 格式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Content?: string
+  Instances?: Array<ParamGetTaskInstancesStatusInfoResponseInstance>
 }
 
 /**
@@ -23418,6 +23675,21 @@ export interface UnboundProjectExecutorResourceResponse {
    * 是否绑定成功，失败返回异常
    */
   Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLineageInfo返回参数结构体
+ */
+export interface DescribeLineageInfoResponse {
+  /**
+   * 血缘信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: LineageCommonInfoVO
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23840,6 +24112,18 @@ presto
    * 是否筛选出可提交的任务
    */
   CanSubmit?: boolean
+  /**
+   * 返回时间字段需要转换的时区
+   */
+  TimeZone?: string
+  /**
+   * 任务最后更新时间最小值，ISO8601格式，如2025-07-16T15:00:00+08:00
+   */
+  MinUpdateTime?: string
+  /**
+   * 任务最后更新时间最大值，ISO8601格式，如2025-07-17T15:00:00+08:00
+   */
+  MaxUpdateTime?: string
 }
 
 /**
@@ -26992,6 +27276,11 @@ export interface Project {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceExt?: Array<WorkspaceExt>
+  /**
+   * 创建时间时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTimestamp?: number
 }
 
 /**
@@ -28020,6 +28309,22 @@ export interface DescribeTaskScriptRequest {
 }
 
 /**
+ * 数据质量规则分页
+ */
+export interface RulePage {
+  /**
+   * 记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<Rule>
+}
+
+/**
  * ModifyTaskLinksDs返回参数结构体
  */
 export interface ModifyTaskLinksDsResponse {
@@ -28397,21 +28702,49 @@ export interface DescribeRulesByPageResponse {
 }
 
 /**
- * 分区参数
+ * LineageProcessVO
  */
-export interface Partition {
+export interface LineageProcessVO {
   /**
-   * 分区转换策略
+   * 原始唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Transform?: string
+  ProcessId?: string
   /**
-   * 分区字段名
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  ProcessType?: string
   /**
-   * 策略参数
+   * 任务子类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransformArgs?: Array<string>
+  ProcessSubType?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessName?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualifiedId?: string
+  /**
+   * 来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Platform?: string
+  /**
+   * 额外扩展参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessProperties?: Array<LineageProperty>
 }
 
 /**
@@ -31086,6 +31419,10 @@ export interface DescribeFormVersionParamRequest {
    * 页号
    */
   Size?: number
+  /**
+   * 来源 studio(Studio脚本)/codeTemplate(代码模版)
+   */
+  Source?: string
 }
 
 /**
@@ -32585,6 +32922,127 @@ export interface OrderField {
    * 排序方向：ASC|DESC
    */
   Direction: string
+}
+
+/**
+ * 任务类型
+ */
+export interface TaskTypeDsVO {
+  /**
+   * 任务类型id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeId?: number
+  /**
+   * TypeDesc描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeDesc?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 服务器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceServerType?: string
+  /**
+   * 目标服务器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetServerType?: string
+  /**
+   * RunJarName名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunJarName?: string
+  /**
+   * Killable参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KillAble?: number
+  /**
+   * TypeSort类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeSort?: string
+  /**
+   * InCharge参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InCharge?: string
+  /**
+   * 节点对应任务类型运行上限（暂时不考虑）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerParallelism?: number
+  /**
+   * 每个任务运行上限（暂时不考虑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskParallelism?: number
+  /**
+   * 补录和重跑上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DoRedoParallelism?: number
+  /**
+   * 0 为不可创建任务; >0 可创建任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DowngradePriorityTries?: number
+  /**
+   * 重试等待时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryWait?: number
+  /**
+   * 重试次数（在任务属性配置中设置）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryLimit?: number
+  /**
+   * DefaultAliveWait参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultAliveWait?: number
+  /**
+   * PollingSeconds秒数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PollingSeconds?: number
+  /**
+   * 参数列表xml
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamList?: string
+  /**
+   * TaskTypeExts参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeExtension?: Array<TaskTypeExtParamDsVO>
+  /**
+   * 对应文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileType?: string
+  /**
+   * 是否选择脚本路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectFilePath?: boolean
+  /**
+   * classpath是否要排除掉common-lib，默认是0不排除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcludeCommonLib?: boolean
+  /**
+   * runner任务完成后需要触发的hook
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostHooks?: string
 }
 
 /**

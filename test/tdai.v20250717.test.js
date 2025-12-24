@@ -178,6 +178,16 @@ it("tdai.v20250717.DescribeAgentInstances", async function () {
     }
 })
 
+it("tdai.v20250717.StartAgentTask", async function () {
+    try {
+       const data = await client.StartAgentTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdai.v20250717.DescribeAgents", async function () {
     try {
        const data = await client.DescribeAgents({})

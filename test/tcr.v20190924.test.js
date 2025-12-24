@@ -148,6 +148,16 @@ it("tcr.v20190924.DeleteImmutableTagRules", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteReplicationRule", async function () {
+    try {
+       const data = await client.DeleteReplicationRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteImagePersonal", async function () {
     try {
        const data = await client.DeleteImagePersonal({})
@@ -861,6 +871,16 @@ it("tcr.v20190924.DeleteInternalEndpointDns", async function () {
 it("tcr.v20190924.ModifyTagRetentionRule", async function () {
     try {
        const data = await client.ModifyTagRetentionRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeReplicationPolicies", async function () {
+    try {
+       const data = await client.DescribeReplicationPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

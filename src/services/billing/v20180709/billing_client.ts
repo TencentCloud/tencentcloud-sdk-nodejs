@@ -203,6 +203,7 @@ import {
   DescribeBudgetOperationLogRequest,
   DescribeBillSummaryByProductResponse,
   DescribeAllocationRuleSummaryRequest,
+  UinTempAmountModel,
   CreateAllocationTagResponse,
   ModifyAllocationUnitRequest,
   DescribeBillDownloadUrlResponse,
@@ -614,7 +615,7 @@ export class Client extends AbstractClient {
    * 获取云账户余额信息。
    */
   async DescribeAccountBalance(
-    req?: DescribeAccountBalanceRequest,
+    req: DescribeAccountBalanceRequest,
     cb?: (error: string, rep: DescribeAccountBalanceResponse) => void
   ): Promise<DescribeAccountBalanceResponse> {
     return this.request("DescribeAccountBalance", req, cb)

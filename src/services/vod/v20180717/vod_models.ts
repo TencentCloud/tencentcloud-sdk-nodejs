@@ -77,12 +77,11 @@ export interface AigcVideoOutputConfig {
   /**
    * 生成视频的分辨率。
 <li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li>
-<li>当 ModelName 是 Jimeng，可选值为 768P、1080P，默认为 768P；</li>
-<li>当 ModelName 是 Hailuo，可选值为 1080P；</li>
+<li>当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；</li>
+<li>当 ModelName 是 Jimeng，可选值为 1080P；</li>
 <li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li>
 <li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li>
 <li>当 ModelName 是 OS，可选值为 720P；</li>
-说明：除模型可支持的分辨率外，还支持 2K、4K分辨率。
    */
   Resolution?: string
   /**
@@ -3372,50 +3371,69 @@ export interface MediaProcessTaskAnimatedGraphicResult {
 }
 
 /**
- * DescribeMediaProcessUsageData请求参数结构体
+ * DescribeAigcUsageData返回参数结构体
  */
-export interface DescribeMediaProcessUsageDataRequest {
+export interface DescribeAigcUsageDataResponse {
   /**
-   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   * AIGC统计数据。
    */
-  StartTime: string
+  AigcUsageDataSet?: Array<AigcUsageDataItem>
   /**
-   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 查询视频处理任务类型，目前支持的任务类型包括：
-<li> Transcoding: 普通转码</li>
-<li> Transcoding-TESHD: 极速高清转码</li>
-<li> Editing: 视频编辑</li>
-<li> Editing-TESHD: 极速高清视频编辑</li>
-<li> AdaptiveBitrateStreaming: 自适应码流</li>
-<li> ContentAudit: 内容审核</li>
-<li> ContentRecognition: 内容识别</li>
-<li> RemoveWatermark: 去除水印</li>
-<li> ExtractTraceWatermark: 提取水印</li>
-<li> AddTraceWatermark: 添加水印</li>
-<li> RebuildMedia: 音画质重生</li>
-<li> QualityInspect: 音画质检测</li>
-<li> VideoHighlight: 视频智能集锦</li>
-<li> VideoTag: 视频智能标签</li>
-<li> VideoClassification:  视频智能分类</li>
-<li> VideoCover: 视频智能封面</li>
-<li> VideoSegment: 视频智能拆条</li>
-<li> VideoProduce: 视频制作</li>
-<li> MediaCast: 媒体转推</li>
-<li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
-<li>VoiceTranslation: 语音翻译</li>
-<li>JITTranscoding: 即时转码</li>
-<li>VideoSnapshot: 视频截图</li>
-<li>JITEncryption: 即时加密</li>
+  RequestId?: string
+}
 
+/**
+ * AIGC 统计数据
+ */
+export interface AigcUsageDataItem {
+  /**
+   * AIGC规格。
+取值有：
+<li>Qwen2.0</li>
+<li>Gem2.5</li>
+<li>Gem3.0_1K</li>
+<li>Gem3.0_2K</li>
+<li>Gem3.0_4K</li>
+<li>Sora2</li>
+<li>Veo3.1Fast</li>
+<li>Veo3.1Standard</li>
+<li>Kling2.5pro_720P</li>
+<li>Kling2.5pro_1080P</li>
+<li>KlingO1_1080P</li>
+<li>Kling2.0&2.1std_720P</li>
+<li>Kling2.0&2.1pro_1080P</li>
+<li>KlingO1_720P</li>
+<li>Hailuo02&2.3_1080P</li>
+<li>Hailuo02&2.3_768P</li>
+<li>Hailuo2.3fast_768P</li>
+<li>Hailuo2.3fast_1080P</li>
+<li>Jimeng4.0</li>
+<li>Jimeng3.0pro</li>
+<li>Vidu2.0_720P</li>
+<li>Vidu2.0_1080P</li>
+<li>ViduQ2pro_720P</li>
+<li>ViduQ2pro_1080P</li>
+<li>ViduQ2turbo_720P</li>
+<li>ViduQ2turbo_1080P</li>
+<li>Hunyuan1.5_720P</li>
+<li>Hunyuan1.5_1080P</li>
+<li>Hunyuan3.0_1K</li>
+<li>Hunyuan3.0_2K</li>
+<li>Hunyuan3.0_4K</li>
+<li>Mingmou1.0_1080P</li>
+<li>Mingmou1.0_1K</li>
+<li>Mingmou1.0_2K</li>
+<li>Mingmou1.0_4K</li>
+<li>Mingmou1.0_720P</li>
+<li> unknown</li>
    */
-  Type?: string
+  Specification?: string
+  /**
+   * 用量数据。
+   */
+  DataSet?: Array<TaskStatDataItem>
 }
 
 /**
@@ -3965,6 +3983,26 @@ export interface ResourceTag {
    * 标签值。
    */
   TagValue: string
+}
+
+/**
+ * ImportMediaKnowledge请求参数结构体
+ */
+export interface ImportMediaKnowledgeRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   */
+  FileId: string
+  /**
+   * 需要导入知识库任务类型，可选值有：
+- AiAnalysis.DescriptionTask
+- SmartSubtitle.AsrFullTextTask
+   */
+  ImportTasks: Array<string>
 }
 
 /**
@@ -5294,6 +5332,29 @@ export interface TaskStatData {
 <li>ImageSprite: 雪碧图</li>
    */
   Details?: Array<SpecificationDataItem>
+}
+
+/**
+ * 视频拆条的结果文件输出。
+ */
+export interface SplitMediaOutputConfig {
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 输出文件格式，可选值：mp4、hls。默认是 mp4。
+   */
+  Type?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
 }
 
 /**
@@ -7317,6 +7378,10 @@ export interface AigcImageTaskInputFileInfo {
 2. 图片格式的取值为：jpeg，jpg, png, webp。
    */
   Url?: string
+  /**
+   * 输入图片的描述信息，用于帮助模型理解图片。仅GEM 2.5、GEM 3.0 有效。
+   */
+  Text?: string
 }
 
 /**
@@ -9088,6 +9153,20 @@ export interface MediaTrackItem {
 }
 
 /**
+ * ImportMediaKnowledge返回参数结构体
+ */
+export interface ImportMediaKnowledgeResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestoreMedia返回参数结构体
  */
 export interface RestoreMediaResponse {
@@ -9199,11 +9278,11 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubAppId: number
   /**
-   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>GV：Google Veo；</li><li>OS：OpenAI Sora。</li>
+   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>GV：Google Veo；</li><li>OS：OpenAI Sora；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li>
    */
   ModelName: string
   /**
-   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1；</li><li>当 ModelName 是 OS，可选值为 2.0；</li>
+   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-Fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
    */
   ModelVersion: string
   /**
@@ -9220,11 +9299,11 @@ export interface CreateAigcVideoTaskRequest {
    */
   LastFrameFileId?: string
   /**
-   * 生成图片的提示词。最大支持2000个字符，当 FileInfos 为空时，此参数必填。
+   * 生成图片的提示词。当 FileInfos 为空时，此参数必填。
    */
   Prompt?: string
   /**
-   * 要阻止模型生成图片的提示词。最大支持500个字符。
+   * 要阻止模型生成图片的提示词。
    */
   NegativePrompt?: string
   /**
@@ -12447,6 +12526,28 @@ export interface AiReviewTaskTerrorismResult {
    * 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
    */
   Progress?: number
+}
+
+/**
+ * 语义搜索结果。
+ */
+export interface SemanticsSearchResult {
+  /**
+   * 媒体文件唯一标识 ID。
+   */
+  FileId?: string
+  /**
+   * 视频在本次检索中的得分，得分越高和检索值越相似，取值范围[0,1]
+   */
+  Score?: number
+  /**
+   * 视频片段的开始时间，单位：秒
+   */
+  StartTimeOffset?: number
+  /**
+   * 视频片段的开始时间，单位：秒
+   */
+  EndTimeOffset?: number
 }
 
 /**
@@ -16187,6 +16288,20 @@ SVG 水印不支持截图打水印。
 }
 
 /**
+ * SearchMediaBySemantics返回参数结构体
+ */
+export interface SearchMediaBySemanticsResponse {
+  /**
+   * 媒体列表。
+   */
+  SearchResults?: Array<SemanticsSearchResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI 样本管理，关键词输入信息。
  */
 export interface AiSampleWordInfo {
@@ -17443,26 +17558,25 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
 }
 
 /**
- * 视频拆条的结果文件输出。
+ * DescribeAigcUsageData请求参数结构体
  */
-export interface SplitMediaOutputConfig {
+export interface DescribeAigcUsageDataRequest {
   /**
-   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
    */
-  MediaName?: string
+  StartTime: string
   /**
-   * 输出文件格式，可选值：mp4、hls。默认是 mp4。
+   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
    */
-  Type?: string
+  EndTime: string
   /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
-<li>默认值：0，表示其他分类。</li>
+   * AIGC类型，取值有：<li> Video：视频。</li><li> Image：图片。</li>
    */
-  ClassId?: number
+  AigcType: string
   /**
-   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  ExpireTime?: string
+  SubAppId?: number
 }
 
 /**
@@ -19009,6 +19123,8 @@ export interface CreateAigcImageTaskRequest {
 <li>GEM：Gemini；</li>
 <li>Jimeng：即梦；</li>
 <li>Qwen：千问。</li>
+<li>Hunyuan：混元。</li>
+<li>Mingmou：明眸。</li>
    */
   ModelName: string
   /**
@@ -19016,6 +19132,8 @@ export interface CreateAigcImageTaskRequest {
 <li>当 ModelName 是 GEM，可选值为 2.5、3.0；</li>
 <li>当 ModelName 是 Jimeng，可选值为 4.0；</li>
 <li>当 ModelName 是 Qwen，可选值为 0925；</li>
+<li>当 ModelName 是 Hunyuan，可选值为 3.0；</li>
+<li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
    */
   ModelVersion: string
   /**
@@ -19023,11 +19141,11 @@ export interface CreateAigcImageTaskRequest {
    */
   FileInfos?: Array<AigcImageTaskInputFileInfo>
   /**
-   * 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。
+   * 生成图片的提示词。当 FileInfos 为空时，此参数必填。
    */
   Prompt?: string
   /**
-   * 要阻止模型生成图片的提示词。最大支持500个字符。
+   * 要阻止模型生成图片的提示词。
    */
   NegativePrompt?: string
   /**
@@ -21422,6 +21540,53 @@ export interface QualityInspectItem {
 }
 
 /**
+ * DescribeMediaProcessUsageData请求参数结构体
+ */
+export interface DescribeMediaProcessUsageDataRequest {
+  /**
+   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  StartTime: string
+  /**
+   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  EndTime: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 查询视频处理任务类型，目前支持的任务类型包括：
+<li> Transcoding: 普通转码</li>
+<li> Transcoding-TESHD: 极速高清转码</li>
+<li> Editing: 视频编辑</li>
+<li> Editing-TESHD: 极速高清视频编辑</li>
+<li> AdaptiveBitrateStreaming: 自适应码流</li>
+<li> ContentAudit: 内容审核</li>
+<li> ContentRecognition: 内容识别</li>
+<li> RemoveWatermark: 去除水印</li>
+<li> ExtractTraceWatermark: 提取水印</li>
+<li> AddTraceWatermark: 添加水印</li>
+<li> RebuildMedia: 音画质重生</li>
+<li> QualityInspect: 音画质检测</li>
+<li> VideoHighlight: 视频智能集锦</li>
+<li> VideoTag: 视频智能标签</li>
+<li> VideoClassification:  视频智能分类</li>
+<li> VideoCover: 视频智能封面</li>
+<li> VideoSegment: 视频智能拆条</li>
+<li> VideoProduce: 视频制作</li>
+<li> MediaCast: 媒体转推</li>
+<li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
+<li>VoiceTranslation: 语音翻译</li>
+<li>JITTranscoding: 即时转码</li>
+<li>VideoSnapshot: 视频截图</li>
+<li>JITEncryption: 即时加密</li>
+
+   */
+  Type?: string
+}
+
+/**
  * DescribeCLSPushTargets返回参数结构体
  */
 export interface DescribeCLSPushTargetsResponse {
@@ -22474,6 +22639,38 @@ export interface DescribeJustInTimeTranscodeTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
+}
+
+/**
+ * SearchMediaBySemantics请求参数结构体
+ */
+export interface SearchMediaBySemanticsRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 需要进行搜索的内容
+   */
+  Text: string
+  /**
+   * 返回的记录条数，默认值：20。
+   */
+  Limit?: number
+  /**
+   * 文件类型。匹配集合中的任意元素： <li>Video: 视频文件</li> <li>Audio: 音频文件</li> <li>Image: 图片文件</li>
+   */
+  Categories?: Array<string>
+  /**
+   * 标签集合，匹配集合中任意元素。 <li>单个标签长度限制：32个字符。</li> <li>数组长度限制：16。</li>
+   */
+  Tags?: Array<string>
+  /**
+   * 搜索的任务类型，可选值有： 
+- AiAnalysis.DescriptionTask 
+- SmartSubtitle.AsrFullTextTask
+   */
+  TaskTypes?: Array<string>
 }
 
 /**

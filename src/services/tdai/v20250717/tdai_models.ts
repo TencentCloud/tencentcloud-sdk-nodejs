@@ -44,17 +44,37 @@ export interface SqlAgentParameter {
 }
 
 /**
- * DescribeReportUrl返回参数结构体
+ * 智能体值守任务信息
  */
-export interface DescribeReportUrlResponse {
+export interface AgentDutyTask {
   /**
-   * 下载地址
+   * 任务ID
    */
-  DownloadUrl?: string
+  TaskId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务创建时间
    */
-  RequestId?: string
+  CreateTime?: string
+  /**
+   * 任务开始运行时间
+   */
+  StartTime?: string
+  /**
+   * 任务结束时间
+   */
+  FinishTime?: string
+  /**
+   * 任务状态
+   */
+  Status?: string
+  /**
+   * 对外展示的Extra信息
+   */
+  ResultExtraKey?: Array<string>
+  /**
+   * 业务的额外敏感信息
+   */
+  Extra?: Array<ExtraInfo>
 }
 
 /**
@@ -100,7 +120,7 @@ export interface DescribeChatDetailRequest {
   /**
    * 开始拉取的流式TokenID。0表示从该流最早的TokenID开始获取
    */
-  BeginStreamingTokenId?: string
+  BeginStreamingTokenId?: number
   /**
    * 单次获取的token数量，默认2000
    */
@@ -189,6 +209,24 @@ export interface CreateAgentInstanceRequest {
    * 资源的标签信息
    */
   Tags?: Array<TagItem>
+}
+
+/**
+ * ModifyChatTitle请求参数结构体
+ */
+export interface ModifyChatTitleRequest {
+  /**
+   * 智能体ID
+   */
+  InstanceId: string
+  /**
+   * 会话Id
+   */
+  ChatId?: string
+  /**
+   * 标题
+   */
+  Title?: string
 }
 
 /**
@@ -321,21 +359,17 @@ export interface CreateChatCompletionRequest {
 }
 
 /**
- * ModifyChatTitle请求参数结构体
+ * DescribeReportUrl返回参数结构体
  */
-export interface ModifyChatTitleRequest {
+export interface DescribeReportUrlResponse {
   /**
-   * 智能体ID
+   * 下载地址
    */
-  InstanceId: string
+  DownloadUrl?: string
   /**
-   * 会话Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ChatId?: string
-  /**
-   * 标题
-   */
-  Title?: string
+  RequestId?: string
 }
 
 /**
@@ -402,6 +436,42 @@ export interface PauseAgentWorkRequest {
    * Agent任务类型
    */
   AgentTaskType?: string
+}
+
+/**
+ * 资源标签
+ */
+export interface TagItem {
+  /**
+   * 标签键
+   */
+  TagKey?: string
+  /**
+   * 标签值
+   */
+  TagValue?: string
+}
+
+/**
+ * 智能体值守任务额外信息
+ */
+export interface ExtraInfo {
+  /**
+   * 出参额外信息的Key
+   */
+  Key?: string
+  /**
+   * 额外信息描述
+   */
+  Description?: string
+  /**
+   * ExtraInfo的值
+   */
+  Value?: string
+  /**
+   * 值的数据结构类型
+   */
+  ValueType?: string
 }
 
 /**
@@ -593,17 +663,17 @@ export interface DescribeAgentInstancesResponse {
 }
 
 /**
- * 资源标签
+ * StartAgentTask请求参数结构体
  */
-export interface TagItem {
+export interface StartAgentTaskRequest {
   /**
-   * 标签键
+   * 实例ID
    */
-  TagKey?: string
+  InstanceId: string
   /**
-   * 标签值
+   * 配置Token
    */
-  TagValue?: string
+  InstanceToken?: string
 }
 
 /**
@@ -855,6 +925,10 @@ export type DescribeReportUrlRequest = null
  */
 export interface DescribeAgentDutyTaskDetailResponse {
   /**
+   * 任务详细信息
+   */
+  AgentDutyTask?: AgentDutyTask
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -951,4 +1025,18 @@ export interface TerminateAgentInstanceRequest {
    * 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选
    */
   InstanceId: string
+}
+
+/**
+ * StartAgentTask返回参数结构体
+ */
+export interface StartAgentTaskResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

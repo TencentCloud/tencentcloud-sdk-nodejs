@@ -205,6 +205,62 @@ export interface ModifyTagRetentionRuleRequest {
 }
 
 /**
+ * 实例复制/实例同步策略信息ID
+ */
+export interface ReplicationPolicyInfo {
+  /**
+   * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: number
+  /**
+   * 策略名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 策略描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 策略过滤条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Filters?: Array<PolicyFilter>
+  /**
+   * 是否覆盖对端同名镜像
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Override?: boolean
+  /**
+   * 是否开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * 源信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcResource?: string
+  /**
+   * 目的资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DestResource?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreationTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+}
+
+/**
  * ModifyRepository返回参数结构体
  */
 export interface ModifyRepositoryResponse {
@@ -215,33 +271,13 @@ export interface ModifyRepositoryResponse {
 }
 
 /**
- * 触发器触发参数
+ * DeleteReplicationRule返回参数结构体
  */
-export interface TriggerInvokePara {
+export interface DeleteReplicationRuleResponse {
   /**
-   * AppId
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId?: string
-  /**
-   * TKE集群ID
-   */
-  ClusterId?: string
-  /**
-   * TKE集群命名空间
-   */
-  Namespace?: string
-  /**
-   * TKE集群工作负载名称
-   */
-  ServiceName?: string
-  /**
-   * TKE集群工作负载中容器名称
-   */
-  ContainerName?: string
-  /**
-   * TKE集群地域数字ID
-   */
-  ClusterRegion?: number
+  RequestId?: string
 }
 
 /**
@@ -278,6 +314,36 @@ export interface DescribeInstanceCustomizedDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 触发器触发参数
+ */
+export interface TriggerInvokePara {
+  /**
+   * AppId
+   */
+  AppId?: string
+  /**
+   * TKE集群ID
+   */
+  ClusterId?: string
+  /**
+   * TKE集群命名空间
+   */
+  Namespace?: string
+  /**
+   * TKE集群工作负载名称
+   */
+  ServiceName?: string
+  /**
+   * TKE集群工作负载中容器名称
+   */
+  ContainerName?: string
+  /**
+   * TKE集群地域数字ID
+   */
+  ClusterRegion?: number
 }
 
 /**
@@ -387,6 +453,20 @@ export interface CreateInstanceResponse {
 }
 
 /**
+ * DescribeRepositoryOwnerPersonal返回参数结构体
+ */
+export interface DescribeRepositoryOwnerPersonalResponse {
+  /**
+   * 仓库信息
+   */
+  Data?: RepoInfoResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteInstanceToken请求参数结构体
  */
 export interface DeleteInstanceTokenRequest {
@@ -477,49 +557,21 @@ export interface DescribeInternalEndpointDnsStatusRequest {
 }
 
 /**
- * CreateApplicationTriggerPersonal请求参数结构体
+ * DeleteReplicationRule请求参数结构体
  */
-export interface CreateApplicationTriggerPersonalRequest {
+export interface DeleteReplicationRuleRequest {
   /**
-   * 触发器关联的镜像仓库，library/test格式
+   * 源实例ID
    */
-  RepoName: string
+  SourceRegistryId: string
   /**
-   * 触发器名称
+   * 同步规则名称
    */
-  TriggerName: string
+  RuleName: string
   /**
-   * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
+   * 规则描述
    */
-  InvokeMethod: string
-  /**
-   * 应用所在TKE集群ID
-   */
-  ClusterId: string
-  /**
-   * 应用所在TKE集群命名空间
-   */
-  Namespace: string
-  /**
-   * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
-   */
-  WorkloadType: string
-  /**
-   * 应用所在TKE集群工作负载名称
-   */
-  WorkloadName: string
-  /**
-   * 应用所在TKE集群工作负载下容器名称
-   */
-  ContainerName: string
-  /**
-   * 应用所在TKE集群地域
-   */
-  ClusterRegion: number
-  /**
-   * 触发方式对应的表达式
-   */
-  InvokeExpr?: string
+  Description?: string
 }
 
 /**
@@ -1625,17 +1677,21 @@ export interface ModifyImmutableTagRulesRequest {
 }
 
 /**
- * DescribeRepositoryOwnerPersonal返回参数结构体
+ * DescribeReplicationPolicies请求参数结构体
  */
-export interface DescribeRepositoryOwnerPersonalResponse {
+export interface DescribeReplicationPoliciesRequest {
   /**
-   * 仓库信息
+   * 实例ID
    */
-  Data?: RepoInfoResp
+  RegistryId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 页数，默认为1
    */
-  RequestId?: string
+  Page?: number
+  /**
+   * 每页展示个数，默认为100
+   */
+  PageSize?: number
 }
 
 /**
@@ -2499,6 +2555,52 @@ export interface CreateInstanceTokenResponse {
 }
 
 /**
+ * CreateApplicationTriggerPersonal请求参数结构体
+ */
+export interface CreateApplicationTriggerPersonalRequest {
+  /**
+   * 触发器关联的镜像仓库，library/test格式
+   */
+  RepoName: string
+  /**
+   * 触发器名称
+   */
+  TriggerName: string
+  /**
+   * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
+   */
+  InvokeMethod: string
+  /**
+   * 应用所在TKE集群ID
+   */
+  ClusterId: string
+  /**
+   * 应用所在TKE集群命名空间
+   */
+  Namespace: string
+  /**
+   * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
+   */
+  WorkloadType: string
+  /**
+   * 应用所在TKE集群工作负载名称
+   */
+  WorkloadName: string
+  /**
+   * 应用所在TKE集群工作负载下容器名称
+   */
+  ContainerName: string
+  /**
+   * 应用所在TKE集群地域
+   */
+  ClusterRegion: number
+  /**
+   * 触发方式对应的表达式
+   */
+  InvokeExpr?: string
+}
+
+/**
  * 查询应用更新触发器触发日志返回值
  */
 export interface DescribeApplicationTriggerLogPersonalResp {
@@ -3089,6 +3191,26 @@ export interface CreateInstanceRequest {
    * 是否开启实例删除保护
    */
   DeletionProtection?: boolean
+}
+
+/**
+ * DescribeReplicationPolicies返回参数结构体
+ */
+export interface DescribeReplicationPoliciesResponse {
+  /**
+   * 实例同步策略列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplicationPolicyInfoList?: Array<ReplicationPolicyInfo>
+  /**
+   * 策略总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3705,6 +3827,22 @@ export interface CreateServiceAccountRequest {
    * 是否禁用服务级账号
    */
   Disable?: boolean
+}
+
+/**
+ * 策略过滤条件
+ */
+export interface PolicyFilter {
+  /**
+   * 策略过滤类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 策略过滤值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**

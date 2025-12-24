@@ -18,6 +18,16 @@ const client = new tencentcloud.tcbr.v20220217.Client({
 })
 describe("tcbr.v20220217.test.js", function () {
 
+it("tcbr.v20220217.DeleteCloudRunVersions", async function () {
+    try {
+       const data = await client.DeleteCloudRunVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.CreateCloudRunServer", async function () {
     try {
        const data = await client.CreateCloudRunServer({})
@@ -38,9 +48,9 @@ it("tcbr.v20220217.DescribeServerManageTask", async function () {
     }
 })
 
-it("tcbr.v20220217.DescribeEnvBaseInfo", async function () {
+it("tcbr.v20220217.DescribeCloudRunPodList", async function () {
     try {
-       const data = await client.DescribeEnvBaseInfo({})
+       const data = await client.DescribeCloudRunPodList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,6 +68,36 @@ it("tcbr.v20220217.DescribeCloudRunServers", async function () {
     }
 })
 
+it("tcbr.v20220217.DescribeCloudRunProcessLog", async function () {
+    try {
+       const data = await client.DescribeCloudRunProcessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.DescribeReleaseOrder", async function () {
+    try {
+       const data = await client.DescribeReleaseOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.OperateServerManage", async function () {
+    try {
+       const data = await client.OperateServerManage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.ReleaseGray", async function () {
     try {
        const data = await client.ReleaseGray({})
@@ -68,9 +108,19 @@ it("tcbr.v20220217.ReleaseGray", async function () {
     }
 })
 
-it("tcbr.v20220217.UpdateCloudRunServer", async function () {
+it("tcbr.v20220217.DeleteCloudRunServer", async function () {
     try {
-       const data = await client.UpdateCloudRunServer({})
+       const data = await client.DeleteCloudRunServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.DescribeVersionDetail", async function () {
+    try {
+       const data = await client.DescribeVersionDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,6 +138,16 @@ it("tcbr.v20220217.CreateCloudRunEnv", async function () {
     }
 })
 
+it("tcbr.v20220217.SubmitServerRollback", async function () {
+    try {
+       const data = await client.SubmitServerRollback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.DescribeCloudRunEnvs", async function () {
     try {
        const data = await client.DescribeCloudRunEnvs({})
@@ -98,9 +158,39 @@ it("tcbr.v20220217.DescribeCloudRunEnvs", async function () {
     }
 })
 
-it("tcbr.v20220217.OperateServerManage", async function () {
+it("tcbr.v20220217.SearchClsLog", async function () {
     try {
-       const data = await client.OperateServerManage({})
+       const data = await client.SearchClsLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.DescribeCloudRunDeployRecord", async function () {
+    try {
+       const data = await client.DescribeCloudRunDeployRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.DescribeEnvBaseInfo", async function () {
+    try {
+       const data = await client.DescribeEnvBaseInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.UpdateCloudRunServer", async function () {
+    try {
+       const data = await client.UpdateCloudRunServer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

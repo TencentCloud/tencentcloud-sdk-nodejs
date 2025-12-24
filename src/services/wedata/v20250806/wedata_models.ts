@@ -3365,6 +3365,15 @@ export interface TaskBaseAttribute {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
+  /**
+   * 任务文件夹路径
+
+注意：
+- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；
+- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功；
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFolderPath?: string
 }
 
 /**
@@ -3774,10 +3783,6 @@ export interface CreateTaskSchedulerConfiguration {
    */
   ExecutionEndTime?: string
   /**
-   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
-   */
-  ScheduleRunType?: string
-  /**
    * 日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0
    */
   CalendarOpen?: string
@@ -3797,26 +3802,6 @@ export interface CreateTaskSchedulerConfiguration {
    * 事件数组
    */
   EventListenerList?: Array<EventListener>
-  /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
-   */
-  RunPriority?: string
-  /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
-   */
-  RetryWait?: string
-  /**
-   * 重试策略 最大尝试次数, 默认: 4
-   */
-  MaxRetryAttempts?: string
-  /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
-   */
-  ExecutionTTL?: string
-  /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
-   */
-  WaitExecutionTotalTTL?: string
   /**
    * 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;
    */
@@ -3839,6 +3824,60 @@ export interface CreateTaskSchedulerConfiguration {
    * T_PLUS_1: T+1生成
    */
   InitStrategy?: string
+  /**
+   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+   * @deprecated
+   */
+  ScheduleRunType?: string
+  /**
+   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * @deprecated
+   */
+  RunPriority?: string
+  /**
+   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * @deprecated
+   */
+  RetryWait?: string
+  /**
+   * 重试策略 最大尝试次数, 默认: 4
+   * @deprecated
+   */
+  MaxRetryAttempts?: string
+  /**
+   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * @deprecated
+   */
+  ExecutionTTL?: string
+  /**
+   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * @deprecated
+   */
+  WaitExecutionTotalTTL?: string
+  /**
+   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+   */
+  ScheduleType?: number
+  /**
+   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   */
+  RunPriorityType?: number
+  /**
+   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   */
+  RetryWaitMinute?: number
+  /**
+   * 重试策略 最大尝试次数, 默认: 4
+   */
+  MaxRetryNumber?: number
+  /**
+   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   */
+  ExecutionTTLMinute?: number
+  /**
+   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   */
+  WaitExecutionTotalTTLMinute?: number
 }
 
 /**
@@ -5526,6 +5565,15 @@ export interface CreateTaskBaseAttribute {
    * 任务描述
    */
   TaskDescription?: string
+  /**
+   * 任务文件夹路径
+
+注意：
+- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；
+- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功；
+
+   */
+  TaskFolderPath?: string
 }
 
 /**
@@ -5943,7 +5991,7 @@ export interface UpdateResourceFileRequest {
   ResourceId: string
   /**
    * - 上传文件及手填两种方式只能选择其一，如果两者均提供，取值顺序为文件>手填值
--  手填值必须是存在的cos路径, /datastudio/resource/ 为固定前缀, projectId 为项目ID,需传入具体值, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例:
+-  手填值必须是存在的cos路径, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例:
      /datastudio/resource/projectId/parentFolderPath/name 
 
    */
@@ -8583,6 +8631,12 @@ export interface UpdateTaskBaseAttribute {
    * 任务描述
    */
   TaskDescription: string
+  /**
+   * 注意：
+- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；
+- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功；
+   */
+  TaskFolderPath?: string
 }
 
 /**
@@ -8689,7 +8743,7 @@ export interface CreateResourceFileRequest {
   ParentFolderPath: string
   /**
    * - 上传文件及手填两种方式只能选择其一，如果两者均提供，取值顺序为文件>手填值
--   手填值必须是存在的cos路径, /datastudio/resource/ 为固定前缀, projectId 为项目ID,需传入具体值, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例:     /datastudio/resource/projectId/parentFolderPath/name 
+-   手填值必须是存在的cos路径, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例:     /datastudio/resource/projectId/parentFolderPath/name 
 
    */
   ResourceFile: string
@@ -10061,11 +10115,6 @@ CRONTAB_CYCLE: crontab表达式类型
    */
   ExecutionEndTime?: string
   /**
-   * 调度类型: 0 正常调度 1 空跑调度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduleRunType?: number
-  /**
    * 日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -10094,37 +10143,12 @@ CRONTAB_CYCLE: crontab表达式类型
    * 下游依赖数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownStreamDependencyConfigList?: Array<DependencyTaskBrief>
+  DownstreamDependencyConfigList?: Array<DependencyTaskBrief>
   /**
    * 事件数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventListenerList?: Array<EventListener>
-  /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RunPriority?: number
-  /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RetryWait?: number
-  /**
-   * 重试策略 最大尝试次数, 默认: 4
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxRetryAttempts?: number
-  /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExecutionTTL?: number
-  /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WaitExecutionTotalTTL?: string
   /**
    * 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;
 注意：此字段可能返回 null，表示取不到有效值。
@@ -10152,6 +10176,78 @@ CRONTAB_CYCLE: crontab表达式类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InitStrategy?: string
+  /**
+   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ScheduleRunType?: number
+  /**
+   * （废弃，建议使用 DownstreamDependencyConfigList）下游依赖数组
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  DownStreamDependencyConfigList?: Array<DependencyTaskBrief>
+  /**
+   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  RunPriority?: number
+  /**
+   * 重试策略 重试等待时间,单位分钟: 默认: 5
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  RetryWait?: number
+  /**
+   * 重试策略 最大尝试次数, 默认: 4
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  MaxRetryAttempts?: number
+  /**
+   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ExecutionTTL?: number
+  /**
+   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  WaitExecutionTotalTTL?: string
+  /**
+   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleType?: number
+  /**
+   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunPriorityType?: number
+  /**
+   * 重试策略 重试等待时间,单位分钟: 默认: 5
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryWaitMinute?: number
+  /**
+   * 重试策略 最大尝试次数, 默认: 4
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxRetryNumber?: number
+  /**
+   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionTTLMinute?: number
+  /**
+   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitExecutionTotalTTLMinute?: number
 }
 
 /**

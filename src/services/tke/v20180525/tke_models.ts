@@ -2316,41 +2316,25 @@ export interface Instance {
 }
 
 /**
- * ModifyClusterAttribute返回参数结构体
+ * DisableControlPlaneLogs请求参数结构体
  */
-export interface ModifyClusterAttributeResponse {
+export interface DisableControlPlaneLogsRequest {
   /**
-   * 集群所属项目
+   * 集群ID
    */
-  ProjectId?: number
+  ClusterId: string
   /**
-   * 集群名称
+   * 集群类型。当前只支持tke
    */
-  ClusterName?: string
+  ClusterType: string
   /**
-   * 集群描述
+   * 组件名称列表，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter
    */
-  ClusterDesc?: string
+  ComponentNames: Array<string>
   /**
-   * 集群等级
+   * 是否删除日志集和topic。 如果日志集和topic被其他采集规则使用，则不会被删除
    */
-  ClusterLevel?: string
-  /**
-   * 自动变配集群等级
-   */
-  AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel
-  /**
-   * 是否开启QGPU共享
-   */
-  QGPUShareEnable?: boolean
-  /**
-   * 集群属性
-   */
-  ClusterProperty?: ClusterProperty
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeleteLogSetAndTopic?: boolean
 }
 
 /**
@@ -4692,6 +4676,44 @@ export interface ResourceUsage {
 }
 
 /**
+ * ModifyClusterAttribute返回参数结构体
+ */
+export interface ModifyClusterAttributeResponse {
+  /**
+   * 集群所属项目
+   */
+  ProjectId?: number
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群描述
+   */
+  ClusterDesc?: string
+  /**
+   * 集群等级
+   */
+  ClusterLevel?: string
+  /**
+   * 自动变配集群等级
+   */
+  AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel
+  /**
+   * 是否开启QGPU共享
+   */
+  QGPUShareEnable?: boolean
+  /**
+   * 集群属性
+   */
+  ClusterProperty?: ClusterProperty
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateClusterVirtualNode请求参数结构体
  */
 export interface CreateClusterVirtualNodeRequest {
@@ -5728,6 +5750,16 @@ export interface ModifyClusterMaintenanceWindowAndExclusionsRequest {
 }
 
 /**
+ * DisableControlPlaneLogs返回参数结构体
+ */
+export interface DisableControlPlaneLogsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePrometheusAlertPolicy请求参数结构体
  */
 export interface DescribePrometheusAlertPolicyRequest {
@@ -6250,43 +6282,17 @@ export interface DeletePrometheusClusterAgentResponse {
 }
 
 /**
- * DescribePrometheusInstance返回参数结构体
+ * DescribeClusterLevelAttribute返回参数结构体
  */
-export interface DescribePrometheusInstanceResponse {
+export interface DescribeClusterLevelAttributeResponse {
   /**
-   * 实例id
+   * 总数
    */
-  InstanceId?: string
+  TotalCount?: number
   /**
-   * 实例名称
+   * 集群规模
    */
-  Name?: string
-  /**
-   * 私有网络id
-   */
-  VpcId?: string
-  /**
-   * 子网id
-   */
-  SubnetId?: string
-  /**
-   * cos桶名称
-   */
-  COSBucket?: string
-  /**
-   * 数据查询地址
-   */
-  QueryAddress?: string
-  /**
-   * 实例中grafana相关的信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Grafana?: PrometheusGrafanaInfo
-  /**
-   * 用户自定义alertmanager
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlertManagerUrl?: string
+  Items?: Array<ClusterLevelAttribute>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8223,6 +8229,20 @@ export interface ModifyPrometheusTemplateResponse {
 }
 
 /**
+ * DescribeControlPlaneLogs请求参数结构体
+ */
+export interface DescribeControlPlaneLogsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 集群类型。当前只支持tke
+   */
+  ClusterType: string
+}
+
+/**
  * ModifyPrometheusAlertPolicy返回参数结构体
  */
 export interface ModifyPrometheusAlertPolicyResponse {
@@ -9494,6 +9514,32 @@ export interface DescribeClusterAuthenticationOptionsResponse {
 }
 
 /**
+ * 组件日志采集配置
+ */
+export interface ComponentLogConfig {
+  /**
+   * 组件名称
+   */
+  Name: string
+  /**
+   * 日志级别，对于支持动态调整日志级别的组件，开启日志时可指定该参数
+   */
+  LogLevel?: number
+  /**
+   * 日志集ID。如果不指定，则自动创建
+   */
+  LogSetId?: string
+  /**
+   * 日志主题ID。如果不指定，则自动创建
+   */
+  TopicId?: string
+  /**
+   * topic 所属region。 该参数可实现日志跨地域投递
+   */
+  TopicRegion?: string
+}
+
+/**
  * CreateClusterRelease请求参数结构体
  */
 export interface CreateClusterReleaseRequest {
@@ -9674,17 +9720,43 @@ export interface DescribePrometheusInstanceInitStatusRequest {
 }
 
 /**
- * DescribeClusterLevelAttribute返回参数结构体
+ * DescribePrometheusInstance返回参数结构体
  */
-export interface DescribeClusterLevelAttributeResponse {
+export interface DescribePrometheusInstanceResponse {
   /**
-   * 总数
+   * 实例id
    */
-  TotalCount?: number
+  InstanceId?: string
   /**
-   * 集群规模
+   * 实例名称
    */
-  Items?: Array<ClusterLevelAttribute>
+  Name?: string
+  /**
+   * 私有网络id
+   */
+  VpcId?: string
+  /**
+   * 子网id
+   */
+  SubnetId?: string
+  /**
+   * cos桶名称
+   */
+  COSBucket?: string
+  /**
+   * 数据查询地址
+   */
+  QueryAddress?: string
+  /**
+   * 实例中grafana相关的信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Grafana?: PrometheusGrafanaInfo
+  /**
+   * 用户自定义alertmanager
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlertManagerUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11114,6 +11186,16 @@ export interface DescribeSupportedRuntimeResponse {
    * 可选运行时列表
    */
   OptionalRuntimes?: Array<OptionalRuntimes>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EnableControlPlaneLogs返回参数结构体
+ */
+export interface EnableControlPlaneLogsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12635,6 +12717,20 @@ export interface DescribeMasterComponentRequest {
 }
 
 /**
+ * DescribeControlPlaneLogs返回参数结构体
+ */
+export interface DescribeControlPlaneLogsResponse {
+  /**
+   * 日志采集配置查询结果
+   */
+  Details?: Array<ComponentLogConfig>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateEKSCluster返回参数结构体
  */
 export interface UpdateEKSClusterResponse {
@@ -13138,6 +13234,24 @@ export interface DescribeRouteTableConflictsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableControlPlaneLogs请求参数结构体
+ */
+export interface EnableControlPlaneLogsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 集群类型。当前只支持tke
+   */
+  ClusterType: string
+  /**
+   * 各组件日志采集配置，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter
+   */
+  Components: Array<ComponentLogConfig>
 }
 
 /**

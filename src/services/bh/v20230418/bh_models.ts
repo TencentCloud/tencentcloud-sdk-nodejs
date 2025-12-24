@@ -486,6 +486,20 @@ export interface DescribeChangePwdTaskDetailRequest {
 }
 
 /**
+ * DescribeDepartments返回参数结构体
+ */
+export interface DescribeDepartmentsResponse {
+  /**
+   * 部门列表
+   */
+  Departments?: Departments
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetDeviceAccountPassword请求参数结构体
  */
 export interface ResetDeviceAccountPasswordRequest {
@@ -1143,7 +1157,7 @@ export interface CreateUserDirectoryRequest {
   /**
    * 目录包含用户数
    */
-  UserCount: number
+  UserCount?: number
 }
 
 /**
@@ -2277,6 +2291,10 @@ export interface SecuritySetting {
    * 资产重连次数
    */
   Reconnection?: ReconnectionSetting
+  /**
+   * 大区环境网络设置
+   */
+  EnvInternetAccess?: EnvInternetAccessSetting
 }
 
 /**
@@ -2323,6 +2341,24 @@ export interface DescribeAclsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 部门列表
+ */
+export interface Departments {
+  /**
+   * 部门列表
+   */
+  DepartmentSet?: Array<Department>
+  /**
+   * 是否开启了部门管理 true - 已开启, false - 未开启
+   */
+  Enabled?: boolean
+  /**
+   * 当前操作UIN是否是根部门管理员
+   */
+  RootManager?: boolean
 }
 
 /**
@@ -4532,6 +4568,20 @@ export interface DeleteCmdTemplatesRequest {
 }
 
 /**
+ * 大区环境网络配置
+ */
+export interface EnvInternetAccessSetting {
+  /**
+   * true：不能访问公网
+   */
+  DisableExternalAccess?: boolean
+  /**
+   * true：不能创建数据下载权限
+   */
+  DisableDownloadDataAcl?: boolean
+}
+
+/**
  * DescribeUserGroups返回参数结构体
  */
 export interface DescribeUserGroupsResponse {
@@ -5099,6 +5149,11 @@ export interface SearchAuditLogResponse {
 }
 
 /**
+ * DescribeDepartments请求参数结构体
+ */
+export type DescribeDepartmentsRequest = null
+
+/**
  * 搜索字符或图形会话时返回的SessionResul结构体
  */
 export interface SessionResult {
@@ -5364,6 +5419,10 @@ export interface Resource {
    * 开通内网访问的vpc
    */
   IntranetVpcId?: string
+  /**
+   * 开通内网访问的subnetId
+   */
+  IntranetSubnetId?: string
   /**
    * 开通内网访问vpc的网段
    */

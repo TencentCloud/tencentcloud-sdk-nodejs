@@ -1139,6 +1139,28 @@ export interface DescribeInstanceNodesRequest {
 }
 
 /**
+ * 桶加密状态信息
+ */
+export interface BucketEncryptionInfo {
+  /**
+   * 是否已加密
+   */
+  IsEncrypted?: boolean
+  /**
+   * 加密类型：SSE-COS/SSE-KMS/disabled
+   */
+  EncryptionType?: string
+  /**
+   * 最后操作类型：enable/disable
+   */
+  LastOperation?: string
+  /**
+   * 最后更新时间
+   */
+  LastUpdateTime?: string
+}
+
+/**
  * 集群计费相关信息
  */
 export interface ChargeProperties {
@@ -1816,6 +1838,18 @@ export interface CreateBackUpScheduleRequest {
    * 备份数据所在地域，当前地域应该为空
    */
   DataRemoteRegion?: string
+  /**
+   * 托管桶类型：standard-标准，maz-多可用区
+   */
+  BucketType?: string
+  /**
+   * 是否开启安全锁：0-未开启，1-开启
+   */
+  EnableSecurityLock?: number
+  /**
+   * 宽限期（天数）
+   */
+  GracePeriod?: number
 }
 
 /**
@@ -1833,29 +1867,25 @@ export interface ActionAlterUserResponse {
 }
 
 /**
- * DescribeSpec请求参数结构体
+ * 备份实例中关于cos的信息
  */
-export interface DescribeSpecRequest {
+export interface BackupCosInfo {
   /**
-   * 地域信息，例如"ap-guangzhou-1"
+   * 备份文件所在的cos桶
    */
-  Zone: string
+  CosBucket?: string
   /**
-   * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
+   * 备份文件所在的完整cos路径
    */
-  PayMode?: string
+  CosPath?: string
   /**
-   * 多可用区
+   * 备份文件名称
    */
-  Zones?: Array<string>
+  SnapShotPath?: string
   /**
-   * 机型名称
+   * cos桶所在地域
    */
-  SpecName?: string
-  /**
-   * 是否存算分离
-   */
-  IsSSC?: boolean
+  Region?: string
 }
 
 /**
@@ -2188,6 +2218,14 @@ export interface ModifyInstanceKeyValConfigsResponse {
  */
 export interface DescribeBackUpSchedulesResponse {
   /**
+   * 当前系统时间
+   */
+  CurrentTime?: string
+  /**
+   * 桶加密状态信息
+   */
+  BucketEncryption?: BucketEncryptionInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2392,6 +2430,10 @@ export interface NodeInfo {
    * 虚拟可用区
    */
   VirtualZone?: string
+  /**
+   * 是否有fdb
+   */
+  HasFDB?: boolean
 }
 
 /**
@@ -2672,6 +2714,18 @@ Changing  变更中
    * 集群是否使用托管桶
    */
   UseManagedBucket?: boolean
+  /**
+   * 集群类型
+   */
+  InstanceType?: string
+  /**
+   * 对应主集群
+   */
+  MasterInstance?: string
+  /**
+   * 对应备集群
+   */
+  SlaveInstances?: Array<string>
 }
 
 /**
@@ -2751,6 +2805,10 @@ export interface DescribeBackUpSchedulesRequest {
 2-数据迁移（包括跨集群迁移和cos迁移）
    */
   ApplicationType?: number
+  /**
+   * 0-未加密；1-已加密
+   */
+  EncryptionFilters?: Array<number | bigint>
 }
 
 /**
@@ -2906,6 +2964,10 @@ export interface DescribeBackUpJobResponse {
    */
   TotalCount?: number
   /**
+   * 当前时间
+   */
+  CurrentTime?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3005,6 +3067,10 @@ export interface BackupStatus {
    * 实例对应Snapshot的id
    */
   TaskId?: number
+  /**
+   * 上传大小
+   */
+  UploadBytes?: number
 }
 
 /**
@@ -3312,25 +3378,29 @@ export interface ModifySecurityGroupsResponse {
 }
 
 /**
- * 备份实例中关于cos的信息
+ * DescribeSpec请求参数结构体
  */
-export interface BackupCosInfo {
+export interface DescribeSpecRequest {
   /**
-   * 备份文件所在的cos桶
+   * 地域信息，例如"ap-guangzhou-1"
    */
-  CosBucket?: string
+  Zone: string
   /**
-   * 备份文件所在的完整cos路径
+   * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
    */
-  CosPath?: string
+  PayMode?: string
   /**
-   * 备份文件名称
+   * 多可用区
    */
-  SnapShotPath?: string
+  Zones?: Array<string>
   /**
-   * cos桶所在地域
+   * 机型名称
    */
-  Region?: string
+  SpecName?: string
+  /**
+   * 是否存算分离
+   */
+  IsSSC?: boolean
 }
 
 /**
@@ -3933,6 +4003,58 @@ export interface BackUpJobDisplay {
    * 隔离次数
    */
   IsolationCount?: number
+  /**
+   * 是否开启安全锁
+   */
+  EnableSecurityLock?: number
+  /**
+   * 宽限期天数
+   */
+  GracePeriod?: number
+  /**
+   * 宽限期开始时间
+   */
+  GraceStartTime?: string
+  /**
+   * 是否在宽限期内
+   */
+  IsWithinGracePeriod?: boolean
+  /**
+   * 是否使用托管桶
+   */
+  UseManagedBucket?: boolean
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例状态描述
+   */
+  InstanceStatusDesc?: string
+  /**
+   * 备份远程桶地域
+   */
+  DataRemoteRegion?: string
+  /**
+   * 桶加密状态信息
+   */
+  BucketEncryption?: BucketEncryptionInfo
+  /**
+   * 备份任务创建时记录的加密类型：SSE-COS/SSE-KMS/disabled
+   */
+  Encryption?: string
+  /**
+   * 是否开通加密存储：0-未开通，1-已开通
+   */
+  EncryptionEnabled?: boolean
 }
 
 /**
@@ -4250,6 +4372,10 @@ export interface DescribeBackUpJobRequest {
    * jobid的string类型
    */
   JobIdFiltersStr?: string
+  /**
+   * 0-未加密；1-已加密
+   */
+  EncryptionFilters?: Array<number | bigint>
 }
 
 /**
@@ -4380,6 +4506,10 @@ export interface NodeInfos {
    * 虚拟可用区
    */
   VirtualZone?: string
+  /**
+   * 是否有fdb
+   */
+  HasFDB?: boolean
 }
 
 /**

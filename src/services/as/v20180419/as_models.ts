@@ -316,6 +316,14 @@ export interface ModifyAutoScalingGroupRequest {
    * 实例名称序号相关设置。开启后为伸缩组内自动创建的实例名称添加递增的数字序号。
    */
   InstanceNameIndexSettings?: InstanceNameIndexSettings
+  /**
+   * 实例主机名序号相关设置。开启后为伸缩组内自动创建的实例主机名添加递增的数字序号。
+   */
+  HostNameIndexSettings?: HostNameIndexSettings
+  /**
+   * 匹配期望数并发扩容功能，不能在InstanceAllocationPolicy为竞价混合模式时设置，也不能在ScalingMode为扩容优先开机模式时设置。目前仅支持两个匹配期望数扩容活动并发进行，不支持指定数量扩容、缩容等其他类型活动并发。设置为FALSE表示不开启。
+   */
+  ConcurrentScaleOutForDesiredCapacity?: boolean
 }
 
 /**
@@ -415,6 +423,16 @@ export interface ModifyScheduledActionRequest {
    * 定时任务的重复方式。为标准 Cron 格式，[Recurrence参数限制](https://cloud.tencent.com/document/product/377/88119)为5个字段，由空格分开，结构为：分，小时，日期，月份，星期。此参数与`EndTime`需要同时指定。
    */
   Recurrence?: string
+  /**
+   * 停用期望数更新。默认值为 False，表示定时任务触发时期望实例数正常更新。
+该值为 True 时，定时任务触发时不会主动修改期望实例数，但可能会因最大最小值机制修改期望实例数。
+以下案例的前提都是停用期望数更新为 True：
+
+- 定时任务触发时，原期望数为 5，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，但原期望数 5 小于最小值 10，最终新期望数为 10。
+- 定时任务触发时，原期望数为 25，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，但原期望数 25 大于最大值 20，最终新期望数为 20。
+- 定时任务触发时，原期望数为 13，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，期望数保持为 13 。
+   */
+  DisableUpdateDesiredCapacity?: boolean
 }
 
 /**
@@ -760,21 +778,21 @@ export interface CreateScheduledActionRequest {
    */
   ScheduledActionName: string
   /**
-   * 当定时任务触发时，设置的伸缩组最大实例数。
-   */
-  MaxSize: number
-  /**
    * 当定时任务触发时，设置的伸缩组最小实例数。
    */
   MinSize: number
+  /**
+   * 定时任务的首次触发时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
+   */
+  StartTime: string
   /**
    * 当定时任务触发时，设置的伸缩组期望实例数。
    */
   DesiredCapacity: number
   /**
-   * 定时任务的首次触发时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
+   * 当定时任务触发时，设置的伸缩组最大实例数。
    */
-  StartTime: string
+  MaxSize: number
   /**
    * 定时任务的结束时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。<br><br>此参数与`Recurrence`需要同时指定，到达结束时间之后，定时任务将不再生效。
    */
@@ -783,6 +801,16 @@ export interface CreateScheduledActionRequest {
    * 定时任务的重复方式。为标准 Cron 格式。定时任务中的 [Recurrence参数限制](https://cloud.tencent.com/document/product/377/88119) 为5个字段，由空格分开，结构为：分，小时，日期，月份，星期。此参数与`EndTime`需要同时指定。
    */
   Recurrence?: string
+  /**
+   * 停用期望数更新。默认值为 False，表示定时任务触发时期望实例数正常更新。
+该值为 True 时，定时任务触发时不会主动修改期望实例数，但可能会因最大最小值机制修改期望实例数。
+以下案例的前提都是停用期望数更新为 True：
+
+- 定时任务触发时，原期望数为 5，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，但原期望数 5 小于最小值 10，最终新期望数为 10。
+- 定时任务触发时，原期望数为 25，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，但原期望数 25 大于最大值 20，最终新期望数为 20。
+- 定时任务触发时，原期望数为 13，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，期望数保持为 13 。
+   */
+  DisableUpdateDesiredCapacity?: boolean
 }
 
 /**
@@ -899,15 +927,15 @@ UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会�
   InstanceNameStyle?: string
   /**
    * 云服务器实例名后缀。字符长度为[1,105]，且与 InstanceName 的长度和不能超过107。
-
-假设后缀名称为 suffix，原实例名为 test.0，最终实例名为 test.0.suffix。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceNameSuffix?: string
   /**
-   * 云服务器实例名分隔符。 默认的分隔符是点号（.），可选短横线（-）。仅有点号（.）和短横线（-）能作为实例名的分隔符。如果不设置，则默认采用点号（.）分隔符。 通过分割符连接多段。
-
-假设原实例名为“product-as-instance”，分隔符InstanceNameDelimiter为“-”，设置实例名后缀"suffix"，那么最终实例名为“product-as-instance-suffix”。
+   * 云服务器的实例名分隔符。默认的分隔符是点号（.），可选短横线（-）或空字符串。
+分隔符用于拼接实例名，递增序号，后缀。假设实例名为 testGpu4090 ，递增序号为 0007，后缀为 server：
+- 分隔符为英文点号（.），最终拼接为 testGpu4090.007.server
+- 分隔符为短横线（-），最终拼接为 testGpu4090-007-server
+- 分隔符为空字符串，最终拼接为 testGpu4090007server
    */
   InstanceNameDelimiter?: string
 }
@@ -1656,6 +1684,14 @@ export interface AutoScalingGroup {
    * 实例名称序号相关设置。
    */
   InstanceNameIndexSettings?: InstanceNameIndexSettings
+  /**
+   * 实例主机名序号相关设置。
+   */
+  HostNameIndexSettings?: HostNameIndexSettings
+  /**
+   * 匹配期望数并发扩容功能，不能在InstanceAllocationPolicy为竞价混合模式时设置，也不能在ScalingMode为扩容优先开机模式时设置。目前仅支持两个匹配期望数扩容活动并发进行，不支持指定数量扩容、缩容等其他类型活动并发。默认值为FALSE，表示不开启。
+   */
+  ConcurrentScaleOutForDesiredCapacity?: boolean
 }
 
 /**
@@ -1839,20 +1875,18 @@ export interface HostNameSettings {
   HostNameStyle?: string
   /**
    * 云服务器的主机名后缀。
-HostNameSettings的该入参非必选，未选时不设置主机名后缀。
-<li> 点号（.）和短横线（-）不能作为 HostNameSuffix 的首尾字符，不能连续使用。</li> 
+<li> 点号（.）和短横线（-）不能作为 HostNameSuffix 的尾字符，不能连续使用。</li> 
 <li> 不支持 Windows 实例。</li> 
 <li>其他类型（Linux 等）实例：字符长度为[1, 39]，且与 HostName 的长度和不能超过 41，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。</li> 
-假设后缀名称为 suffix，原主机名为 test.0，最终主机名为 test.0.suffix。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostNameSuffix?: string
   /**
-   * 云服务器的主机名分隔符。
-默认的分隔符是点号（.），可选短横线（-）。仅有点号（.）和短横线（-）能作为主机名的分隔符。如果不设置，则默认采用点号（.）分隔符。
-通过分割符连接多段。
-
-假设原主机名为“product-as-host”，分隔符HostNameDelimiter为“-”，设置主机名后缀"suffix"，那么最终主机名为“product-as-host-suffix”。
+   * 云服务器的主机名分隔符。默认的分隔符是点号（.），可选短横线（-）或空字符串。
+分隔符用于拼接主机名，递增序号，后缀。假设主机名为 testGpu4090 ，递增序号为 0007，后缀为 server：
+- 分隔符为英文点号（.），最终拼接为 testGpu4090.007.server
+- 分隔符为短横线（-），最终拼接为 testGpu4090-007-server
+- 分隔符为空字符串，最终拼接为 testGpu4090007server
    */
   HostNameDelimiter?: string
 }
@@ -2344,6 +2378,14 @@ export interface CreateAutoScalingGroupRequest {
    * 实例名称序号相关设置。若不指定该参数，则默认不开启。开启后为伸缩组内自动创建的实例名称添加递增的数字序号。
    */
   InstanceNameIndexSettings?: InstanceNameIndexSettings
+  /**
+   * 实例主机名序号相关设置。若不指定该参数，则默认不开启。开启后为伸缩组内自动创建的实例主机名添加递增的数字序号。
+   */
+  HostNameIndexSettings?: HostNameIndexSettings
+  /**
+   * 匹配期望数并发扩容功能，不能在InstanceAllocationPolicy为竞价混合模式时设置，也不能在ScalingMode为扩容优先开机模式时设置。目前仅支持两个匹配期望数扩容活动并发进行，不支持指定数量扩容、缩容等其他类型活动并发。默认值为FALSE，表示不开启。
+   */
+  ConcurrentScaleOutForDesiredCapacity?: boolean
 }
 
 /**
@@ -3060,6 +3102,16 @@ export interface ScheduledAction {
 <li>ONCE：代表定时任务为单次执行。</li>
    */
   ScheduledType?: string
+  /**
+   * 停用期望数更新。表示定时任务触发时期望实例数正常更新。
+该值为 True 时，定时任务触发时不会主动修改期望实例数，但可能会因最大最小值机制修改期望实例数。
+以下案例的前提都是停用期望数更新为 True：
+
+- 定时任务触发时，原期望数为 5，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，但原期望数 5 小于最小值 10，最终新期望数为 10。
+- 定时任务触发时，原期望数为 25，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，但原期望数 25 大于最大值 20，最终新期望数为 20。
+- 定时任务触发时，原期望数为 13，定时任务将最小值改为 10，最大值改为 20，期望数改为 15，由于停用期望数更新，15不生效，期望数保持为 13 。
+   */
+  DisableUpdateDesiredCapacity?: boolean
 }
 
 /**
@@ -3104,6 +3156,52 @@ export interface ModifyLifecycleHookRequest {
   NotificationTarget?: NotificationTarget
   /**
    * 远程命令执行对象。通知参数 NotificationMetadata、NotificationTarget 与 LifecycleCommand互斥，不可同时指定。
+   */
+  LifecycleCommand?: LifecycleCommand
+}
+
+/**
+ * UpgradeLifecycleHook请求参数结构体
+ */
+export interface UpgradeLifecycleHookRequest {
+  /**
+   * 生命周期挂钩ID。可以通过调用接口 [DescribeLifecycleHooks](https://cloud.tencent.com/document/api/377/34452) ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。
+   */
+  LifecycleHookId: string
+  /**
+   * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线（_）、短横线（-）、小数点（.），最大长度不能超128个字符。
+   */
+  LifecycleHookName: string
+  /**
+   * 进行生命周期挂钩的场景，取值范围如下:
+   * INSTANCE_LAUNCHING: 扩容生命周期挂钩
+   * INSTANCE_TERMINATING: 缩容生命周期挂钩
+   */
+  LifecycleTransition: string
+  /**
+   * 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围是如下：
+   * CONTINUE: 默认值，表示继续执行扩缩容活动
+   * ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。
+   */
+  DefaultResult?: string
+  /**
+   * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒
+   */
+  HeartbeatTimeout?: number
+  /**
+   * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串。NotificationMetadata 和 LifecycleCommand参数互斥，二者不可同时指定。
+   */
+  NotificationMetadata?: string
+  /**
+   * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+   */
+  NotificationTarget?: NotificationTarget
+  /**
+   * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
+   */
+  LifecycleTransitionType?: string
+  /**
+   * 远程命令执行对象。通知参数 NotificationMetadata、NotificationTarget 与 LifecycleCommand 互斥，不可同时指定。
    */
   LifecycleCommand?: LifecycleCommand
 }
@@ -3901,28 +3999,17 @@ export interface ClearLaunchConfigurationAttributesRequest {
  */
 export interface InstanceNameIndexSettings {
   /**
-   * 是否开启实例创建序号，默认不开启。取值范围：
-
-**TRUE**：表示开启实例创建序号; **FALSE**：表示不开启实例创建序号
+   * <p>是否开启实例创建序号，默认不开启。取值范围：</p><p><strong>TRUE</strong>：表示开启实例创建序号; <strong>FALSE</strong>：表示不开启实例创建序号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
   /**
-   * 初始序号。取值范围为 [0, 99999999]。
-
-当序号递增后超出取值范围时，扩容活动会失败。
-
-首次开启实例名称序号：默认值为 0。
-非首次开启实例名称序号：若不指定该参数，沿用历史序号。
-下调初始序号可能会造成伸缩组内实例名称序号重复。
+   * <p>初始序号。取值范围与 IndexLength 参数有关：- IndexLength 为 0 时，取值范围为 [0, 99999999]。- IndexLength 为 [1, 8] 时，取值范围为 [0, 10^IndexLength-1]，最大值即为指定位数的最大数字。初始序号默认值如下：- 首次启用递增序号：初始序号默认值为 0 （ 展示位数与 IndexLength 有关，例如 IndexLength 为  4，展示值为 0000）- 非首次开启递增序号：顺延之前的递增序号，例如上次使用递增至序号 069，则新的初始序号默认值为 070。注意：修改初始序号可能会造成伸缩组内序号重复。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginIndex?: number
   /**
-   * 实例名称递增序号位数，默认为0，表示不指定序号位数。不指定序号时，采用默认值0。 取值范围：0-8，最大为整数8。 采用取值1-8时，会检查序号是否超过此序号位数的最大数字。
-
-假设设置为3，那么序号形如：000、001、002 ... 010、011 ... 100 ... 999，序号上限为999; 
-假设设置为0，对应的序号为0、1、2 ... 10、11 ... 100 ... 1000 ...10000 ... 99999999，序号上限为99999999。
+   * <p>递增序号长度，默认为0，表示不指定序号长度。 取值范围：0-8，最大为整数8。 - 长度设置为3，序号展示形式为：000、001、002 ... 010、011 ... 100 ... 999，序号上限为999- 长度设置为0，序号展示形式为：0、1、2 ... 10、11 ... 100 ... 1000 ...10000 ... 99999999，序号上限为99999999注意：递增序号持续超出上限会导致扩容失败，请不要设置过小的递增序号长度。</p>
    */
   IndexLength?: number
 }
@@ -4056,49 +4143,21 @@ export interface SpotMixedAllocationPolicy {
 }
 
 /**
- * UpgradeLifecycleHook请求参数结构体
+ * 实例主机名称序号相关设置。
  */
-export interface UpgradeLifecycleHookRequest {
+export interface HostNameIndexSettings {
   /**
-   * 生命周期挂钩ID。可以通过调用接口 [DescribeLifecycleHooks](https://cloud.tencent.com/document/api/377/34452) ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。
+   * <p>是否开启实例主机名创建序号，默认不开启。取值范围：</p><p>TRUE：表示开启实例主机名创建序号FALSE：表示不开启实例主机名创建序号</p>
    */
-  LifecycleHookId: string
+  Enabled?: boolean
   /**
-   * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线（_）、短横线（-）、小数点（.），最大长度不能超128个字符。
+   * <p>初始序号。取值范围与 IndexLength 参数有关：- IndexLength 为 0 时，取值范围为 [0, 99999999]。- IndexLength 为 [1, 8] 时，取值范围为 [0, 10^IndexLength-1]，最大值即为指定位数的最大数字。初始序号默认值如下：- 首次启用递增序号：初始序号默认值为 0 （ 展示位数与 IndexLength 有关，例如 IndexLength 为  4，展示值为 0000）- 非首次开启递增序号：顺延之前的递增序号，例如上次使用递增至序号 069，则新的初始序号默认值为 070。注意：修改初始序号可能会造成伸缩组内序号重复。</p>
    */
-  LifecycleHookName: string
+  BeginIndex?: number
   /**
-   * 进行生命周期挂钩的场景，取值范围如下:
-   * INSTANCE_LAUNCHING: 扩容生命周期挂钩
-   * INSTANCE_TERMINATING: 缩容生命周期挂钩
+   * <p>递增序号长度，默认为0，表示不指定序号长度。 取值范围：0-8，最大为整数8。 - 长度设置为3，序号展示形式为：000、001、002 ... 010、011 ... 100 ... 999，序号上限为999- 长度设置为0，序号展示形式为：0、1、2 ... 10、11 ... 100 ... 1000 ...10000 ... 99999999，序号上限为99999999注意：递增序号持续超出上限会导致扩容失败，请不要设置过小的递增序号长度。</p>
    */
-  LifecycleTransition: string
-  /**
-   * 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围是如下：
-   * CONTINUE: 默认值，表示继续执行扩缩容活动
-   * ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。
-   */
-  DefaultResult?: string
-  /**
-   * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒
-   */
-  HeartbeatTimeout?: number
-  /**
-   * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串。NotificationMetadata 和 LifecycleCommand参数互斥，二者不可同时指定。
-   */
-  NotificationMetadata?: string
-  /**
-   * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
-   */
-  NotificationTarget?: NotificationTarget
-  /**
-   * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
-   */
-  LifecycleTransitionType?: string
-  /**
-   * 远程命令执行对象。通知参数 NotificationMetadata、NotificationTarget 与 LifecycleCommand 互斥，不可同时指定。
-   */
-  LifecycleCommand?: LifecycleCommand
+  IndexLength?: number
 }
 
 /**

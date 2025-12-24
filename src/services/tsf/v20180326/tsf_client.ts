@@ -160,7 +160,6 @@ import {
   DescribeProgramsRequest,
   DescribePublicConfigRequest,
   ImageRepository,
-  DescribeInovcationIndicatorsRequest,
   CommonOption,
   CreatePublicConfigResponse,
   LaneRules,
@@ -298,7 +297,6 @@ import {
   ApiDefinitionDescr,
   DescribeLaneRulesResponse,
   DescribeImageRepositoryRequest,
-  IndicatorCoord,
   TsfPageUnitRule,
   OperateApplicationTcrBindingRequest,
   DescribeApiGroupRequest,
@@ -464,7 +462,6 @@ import {
   ApiVersionArray,
   GatewayConfig,
   DeliveryConfigBindGroups,
-  DescribeInovcationIndicatorsResponse,
   MultiValueDataPoints,
   ConfigReleaseLog,
   CreateConfigRequest,
@@ -561,7 +558,6 @@ import {
   ServiceConfig,
   RedoTaskExecuteRequest,
   DescribeApplicationsResponse,
-  InvocationIndicator,
   DescribeStatisticsRequest,
   DescribeConfigRequest,
   OperateApplicationTcrBindingResponse,
@@ -1714,18 +1710,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindApiGroupResponse) => void
   ): Promise<BindApiGroupResponse> {
     return this.request("BindApiGroup", req, cb)
-  }
-
-  /**
-     * 废弃接口
-
-废弃
-     */
-  async DescribeInovcationIndicators(
-    req: DescribeInovcationIndicatorsRequest,
-    cb?: (error: string, rep: DescribeInovcationIndicatorsResponse) => void
-  ): Promise<DescribeInovcationIndicatorsResponse> {
-    return this.request("DescribeInovcationIndicators", req, cb)
   }
 
   /**

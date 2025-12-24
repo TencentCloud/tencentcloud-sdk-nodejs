@@ -457,6 +457,20 @@ export interface CheckAnimateImageJobResponse {
 }
 
 /**
+ * SubmitVideoEditJob返回参数结构体
+ */
+export interface SubmitVideoEditJobResponse {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SubmitTemplateToVideoJob返回参数结构体
  */
 export interface SubmitTemplateToVideoJobResponse {
@@ -714,6 +728,32 @@ export interface ExtraParam {
 }
 
 /**
+ * DescribeVideoEditJob返回参数结构体
+ */
+export interface DescribeVideoEditJobResponse {
+  /**
+   * 任务状态。  WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  Status?: string
+  /**
+   * 结果视频URL。有效期 24 小时。
+   */
+  ResultVideoUrl?: string
+  /**
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorCode?: string
+  /**
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorMessage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVideoStylizationJob返回参数结构体
  */
 export interface DescribeVideoStylizationJobResponse {
@@ -939,6 +979,16 @@ export interface Image {
 }
 
 /**
+ * DescribeVideoEditJob请求参数结构体
+ */
+export interface DescribeVideoEditJobRequest {
+  /**
+   * 任务ID。
+   */
+  JobId: string
+}
+
+/**
  * DescribeHumanActorJob请求参数结构体
  */
 export interface DescribeHumanActorJobRequest {
@@ -966,6 +1016,42 @@ export interface DescribeTemplateToVideoJobRequest {
    * 任务ID。
    */
   JobId: string
+}
+
+/**
+ * SubmitVideoEditJob请求参数结构体
+ */
+export interface SubmitVideoEditJobRequest {
+  /**
+   * 输入视频
+
+- 视频格式：MP4
+- 视频时长：5s以内
+- 视频分辨率：无限制（待验证是否可以无损输出）
+   */
+  VideoUrl: string
+  /**
+   * 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。
+支持风格迁移、替换、元素增加、删除控制
+   */
+  Prompt: string
+  /**
+   * 图片base64或者图片url
+
+- Base64 和 Url 必须提供一个，如果都提供以Url为准。
+- 上传图url大小不超过 8M
+- 支持jpg，png，jpeg，webp，bmp，tiff 格式
+- 单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1
+   */
+  Image?: Image
+  /**
+   * 为生成视频添加标识的开关，默认为1。 1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 建议您使用显著标识来提示，该视频是 AI 生成的视频。
+   */
+  LogoAdd?: number
+  /**
+   * 标识内容设置。 默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+   */
+  LogoParam?: LogoParam
 }
 
 /**

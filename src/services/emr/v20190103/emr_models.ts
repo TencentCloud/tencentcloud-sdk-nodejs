@@ -1194,6 +1194,36 @@ export interface MultiDisk {
 }
 
 /**
+ * DescribeHBaseTableRequestMetric请求参数结构体
+ */
+export interface DescribeHBaseTableRequestMetricRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * Hbase表名
+   */
+  TableName: string
+  /**
+   * Hbase的RegionServer服务
+   */
+  RegionServer?: string
+  /**
+   * 获取监控的数据粒度
+   */
+  Downsample?: string
+  /**
+   * 查询监控数据起始时间戳
+   */
+  StartTime?: number
+  /**
+   * 查询监控数据结束时间戳
+   */
+  EndTime?: number
+}
+
+/**
  * 节点磁盘类型
  */
 export interface NodeSpecDisk {
@@ -2447,6 +2477,21 @@ export interface JobFlowResource {
    * 磁盘描述列表。
    */
   DiskGroups: Array<DiskGroup>
+}
+
+/**
+ * DescribeHBaseTableRequestMetric返回参数结构体
+ */
+export interface DescribeHBaseTableRequestMetricResponse {
+  /**
+   * Hbase监控指标返回包装结构
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricDataList?: Array<HBaseMetricData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5332,6 +5377,43 @@ Value的取值都是字符串，对于**是否覆盖用户指定队列**、**程
 }
 
 /**
+ * DescribeHBaseTableStoreSizeMetric返回参数结构体
+ */
+export interface DescribeHBaseTableStoreSizeMetricResponse {
+  /**
+   * Hbase监控指标返回包装结构
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricDataList?: Array<HBaseMetricData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * HBase监控数据结构
+ */
+export interface HBaseMetricData {
+  /**
+   * 指标名称，如 read_request_rate
+   */
+  MetricName?: string
+  /**
+   * 指标描述，如 read request rate
+   */
+  MetricDesc?: string
+  /**
+   * 时间戳数组
+   */
+  Timestamps?: Array<number | bigint>
+  /**
+   * 数值数组
+   */
+  Values?: Array<number>
+}
+
+/**
  * 负载指标条件
  */
 export interface LoadMetricsCondition {
@@ -5765,6 +5847,36 @@ export interface DescribeServiceNodeInfosRequest {
    * 支持搜索的字段，目前支持 SearchType	：ipv4
    */
   SearchFields?: Array<SearchItem>
+}
+
+/**
+ * DescribeHBaseTableStoreSizeMetric请求参数结构体
+ */
+export interface DescribeHBaseTableStoreSizeMetricRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * Hbase表名
+   */
+  TableName: string
+  /**
+   * Hbase的RegionServer服务
+   */
+  RegionServer?: string
+  /**
+   * 获取监控的数据粒度
+   */
+  Downsample?: string
+  /**
+   * 查询监控数据起始时间戳
+   */
+  StartTime?: number
+  /**
+   * 查询监控数据结束时间戳
+   */
+  EndTime?: number
 }
 
 /**

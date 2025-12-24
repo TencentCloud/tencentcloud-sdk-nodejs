@@ -21,8 +21,10 @@ import {
   AddressPool,
   AddressPoolDetail,
   DescribeMonitorsResponse,
+  ModifyPackageAutoRenewRequest,
   DescribeDetectorsResponse,
   DeleteAddressPoolResponse,
+  CreatePackageAndPayRequest,
   Strategy,
   CreateStrategyResponse,
   DeleteAddressPoolRequest,
@@ -40,6 +42,7 @@ import {
   CreateAddressPoolRequest,
   DescribeDetectTaskPackageListResponse,
   DescribeAddressPoolDetailResponse,
+  ModifyPackageAutoRenewResponse,
   DescribeQuotasRequest,
   MainAddressPool,
   Quota,
@@ -50,7 +53,7 @@ import {
   DescribeDetectorsRequest,
   DeleteStrategyRequest,
   CreateInstanceRequest,
-  DescribeAddressPoolDetailRequest,
+  Address,
   CreateMonitorRequest,
   DescribeDetectTaskPackageListRequest,
   DescribeStrategyListResponse,
@@ -60,18 +63,18 @@ import {
   DescribeMonitorDetailResponse,
   DescribeInstanceDetailRequest,
   GroupLine,
-  Address,
+  DescribeAddressPoolDetailRequest,
   CreateInstanceResponse,
   DetectorGroup,
   DescribeDetectPackageDetailRequest,
   MainPoolWeight,
-  ModifyAddressPoolResponse,
+  CreatePackageAndPayResponse,
   CreateAddressPoolResponse,
   DescribeInstancePackageListRequest,
   DescribeStrategyDetailResponse,
   DescribeMonitorsRequest,
   ModifyMonitorResponse,
-  CostItem,
+  DescribeAddressLocationResponse,
   DescribeAddressLocationRequest,
   DescribeStrategyListRequest,
   DescribeMonitorDetailRequest,
@@ -85,9 +88,10 @@ import {
   ModifyAddressPoolRequest,
   InstanceConfig,
   StrategyDetail,
+  ModifyAddressPoolResponse,
   DescribeQuotasResponse,
   ModifyInstanceConfigRequest,
-  DescribeAddressLocationResponse,
+  CostItem,
   DescribeInstanceListResponse,
   ResourceFilter,
   DeleteMonitorResponse,
@@ -273,6 +277,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置自动续费接口
+   */
+  async ModifyPackageAutoRenew(
+    req: ModifyPackageAutoRenewRequest,
+    cb?: (error: string, rep: ModifyPackageAutoRenewResponse) => void
+  ): Promise<ModifyPackageAutoRenewResponse> {
+    return this.request("ModifyPackageAutoRenew", req, cb)
+  }
+
+  /**
    * 查询监控器详情接口
    */
   async DescribeMonitorDetail(
@@ -300,6 +314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStrategyListResponse) => void
   ): Promise<DescribeStrategyListResponse> {
     return this.request("DescribeStrategyList", req, cb)
+  }
+
+  /**
+   * 购买套餐并支付，此接口会在余额扣费，谨慎调用
+   */
+  async CreatePackageAndPay(
+    req: CreatePackageAndPayRequest,
+    cb?: (error: string, rep: CreatePackageAndPayResponse) => void
+  ): Promise<CreatePackageAndPayResponse> {
+    return this.request("CreatePackageAndPay", req, cb)
   }
 
   /**

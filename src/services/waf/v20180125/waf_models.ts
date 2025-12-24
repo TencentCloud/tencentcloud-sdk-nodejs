@@ -1700,55 +1700,45 @@ export interface DescribePolicyStatusRequest {
 }
 
 /**
- * ModifyIpAccessControl请求参数结构体
+ * BOT安全护航资源信息
  */
-export interface ModifyIpAccessControlRequest {
+export interface BotSecurityPkg {
   /**
-   * 具体域名如：test.qcloudwaf.com
-全局域名为：global
+   * 资源id
    */
-  Domain: string
+  ResourceIds?: string
   /**
-   * ip参数列表
+   * 状态
    */
-  IpList: Array<string>
+  Status?: number
   /**
-   * 42为黑名单，40为白名单
+   * 地域
    */
-  ActionType: number
+  Region?: number
   /**
-   * 规则ID
+   * 开始时间
    */
-  RuleId: number
+  BeginTime?: string
   /**
-   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
-   * @deprecated
+   * 结束时间
    */
-  ValidTS?: number
+  EndTime?: string
   /**
-   * 实例Id
+   * 申请数量
    */
-  InstanceId?: string
+  InquireNum?: number
   /**
-   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   * 使用数量
    */
-  Edition?: string
+  UsedNum?: number
   /**
-   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   * 续费标志
    */
-  SourceType?: string
+  RenewFlag?: number
   /**
-   * 备注
+   * 计费项
    */
-  Note?: string
-  /**
-   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
-   */
-  JobType?: string
-  /**
-   * 定时配置详情
-   */
-  JobDateTime?: JobDateTime
+  BillingItem?: string
 }
 
 /**
@@ -3729,29 +3719,55 @@ export interface DeleteHostRequest {
 }
 
 /**
- * 获取弹性qps的默认相关值
+ * ModifyIpAccessControl请求参数结构体
  */
-export interface QpsData {
+export interface ModifyIpAccessControlRequest {
   /**
-   * 弹性qps默认值
+   * 具体域名如：test.qcloudwaf.com
+全局域名为：global
    */
-  ElasticBillingDefault?: number
+  Domain: string
   /**
-   * 弹性qps最小值
+   * ip参数列表
    */
-  ElasticBillingMin?: number
+  IpList: Array<string>
   /**
-   * 弹性qps最大值
+   * 42为黑名单，40为白名单
    */
-  ElasticBillingMax?: number
+  ActionType: number
   /**
-   * 业务扩展包最大qps
+   * 规则ID
    */
-  QPSExtendMax?: number
+  RuleId: number
   /**
-   * 境外业务扩展包最大qps
+   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   * @deprecated
    */
-  QPSExtendIntlMax?: number
+  ValidTS?: number
+  /**
+   * 实例Id
+   */
+  InstanceId?: string
+  /**
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   */
+  Edition?: string
+  /**
+   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   */
+  SourceType?: string
+  /**
+   * 备注
+   */
+  Note?: string
+  /**
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   */
+  JobType?: string
+  /**
+   * 定时配置详情
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -8387,6 +8403,32 @@ export interface SwitchDomainRulesResponse {
 }
 
 /**
+ * 获取弹性qps的默认相关值
+ */
+export interface QpsData {
+  /**
+   * 弹性qps默认值
+   */
+  ElasticBillingDefault?: number
+  /**
+   * 弹性qps最小值
+   */
+  ElasticBillingMin?: number
+  /**
+   * 弹性qps最大值
+   */
+  ElasticBillingMax?: number
+  /**
+   * 业务扩展包最大qps
+   */
+  QPSExtendMax?: number
+  /**
+   * 境外业务扩展包最大qps
+   */
+  QPSExtendIntlMax?: number
+}
+
+/**
  * ModifyCustomRule返回参数结构体
  */
 export interface ModifyCustomRuleResponse {
@@ -8624,6 +8666,48 @@ export interface DescribeAntiFakeRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * BOT安全监测资源信息
+ */
+export interface BotMonitorPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 申请数量
+   */
+  InquireNum?: number
+  /**
+   * 使用数量
+   */
+  UsedNum?: number
+  /**
+   * 续费标志
+   */
+  RenewFlag?: number
+  /**
+   * 计费项
+   */
+  BillingItem?: string
 }
 
 /**
@@ -9641,6 +9725,14 @@ export interface InstanceInfo {
    * 地域id
    */
   RegionId?: number
+  /**
+   * BOT安全护航信息
+   */
+  BotSecurityPkg?: BotSecurityPkg
+  /**
+   * BOT安全监测资源信息
+   */
+  BotMonitorPkg?: BotMonitorPkg
 }
 
 /**

@@ -158,6 +158,16 @@ it("clb.v20180317.SetCustomizedConfigForLoadBalancer", async function () {
     }
 })
 
+it("clb.v20180317.DescribeTargetGroupInstanceStatus", async function () {
+    try {
+       const data = await client.DescribeTargetGroupInstanceStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.RegisterTargetsWithClassicalLB", async function () {
     try {
        const data = await client.RegisterTargetsWithClassicalLB({})

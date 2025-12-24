@@ -174,6 +174,20 @@ export interface QueryChunkListResponse {
 }
 
 /**
+ * GetJobsByKnowledgeBaseId请求参数结构体
+ */
+export interface GetJobsByKnowledgeBaseIdRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
+}
+
+/**
  * 上传任务
  */
 export interface UploadJob {
@@ -384,6 +398,20 @@ export interface KnowledgeBase {
    * 知识库关联的数据库列表，目前是只绑定一个数据源，数组预留拓展
    */
   DatasourceIds?: Array<string>
+}
+
+/**
+ * GetJobsByKnowledgeBaseId返回参数结构体
+ */
+export interface GetJobsByKnowledgeBaseIdResponse {
+  /**
+   * 任务列表详情
+   */
+  Jobs?: Array<UploadJob>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

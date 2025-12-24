@@ -1435,7 +1435,7 @@ export interface UserIdAndUserName {
    */
   Status?: number
   /**
-   * 首次登陆是否修改密码
+   * 首次登录是否修改密码
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstModify?: number
@@ -1460,7 +1460,7 @@ export interface UserIdAndUserName {
    */
   CreatedAt?: string
   /**
-   * 更改人
+   * 修改人
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedUser?: string
@@ -1470,12 +1470,12 @@ export interface UserIdAndUserName {
    */
   UpdatedAt?: string
   /**
-   * 全局角色
+   * 系统全局角色
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalUserName?: string
   /**
-   * 全局角色编码
+   * 系统全局角色编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalUserCode?: string

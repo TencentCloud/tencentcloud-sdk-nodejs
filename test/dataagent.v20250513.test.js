@@ -148,6 +148,16 @@ it("dataagent.v20250513.GetSessionDetails", async function () {
     }
 })
 
+it("dataagent.v20250513.GetJobsByKnowledgeBaseId", async function () {
+    try {
+       const data = await client.GetJobsByKnowledgeBaseId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.StopChatAI", async function () {
     try {
        const data = await client.StopChatAI({})

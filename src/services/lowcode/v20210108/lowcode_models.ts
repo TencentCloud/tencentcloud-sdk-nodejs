@@ -1029,6 +1029,10 @@ export interface DataSourceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DbSourceType?: string
+  /**
+   * 模型预览状态开关
+   */
+  StagingSwitch?: boolean
 }
 
 /**

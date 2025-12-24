@@ -4038,6 +4038,16 @@ it("vpc.v20170312.DescribeAddressQuota", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeRoutePolicies", async function () {
+    try {
+       const data = await client.DescribeRoutePolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.UpdateTrafficMirrorDirection", async function () {
     try {
        const data = await client.UpdateTrafficMirrorDirection({})

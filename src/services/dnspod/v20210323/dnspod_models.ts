@@ -916,7 +916,7 @@ export interface DomainListItem {
    */
   Status?: string
   /**
-   * 域名默认的解析记录默认TTL值
+   * 域名默认的解析记录默认TTL值，单位：秒
    */
   TTL?: number
   /**
@@ -4706,7 +4706,7 @@ SPAM：封禁
    */
   RecordCountEnd?: number
   /**
-   * 项目ID
+   * 项目ID，"帐号中心-项目管理"拿到项目ID
    */
   ProjectId?: number
   /**
