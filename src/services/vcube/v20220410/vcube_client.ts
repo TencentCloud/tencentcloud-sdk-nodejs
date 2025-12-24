@@ -271,7 +271,7 @@ export class Client extends AbstractClient {
    * 删除视频播放器 License 和相关应用
    */
   async DeleteApplicationAndVideoLicense(
-    req?: DeleteApplicationAndVideoLicenseRequest,
+    req: DeleteApplicationAndVideoLicenseRequest,
     cb?: (error: string, rep: DeleteApplicationAndVideoLicenseResponse) => void
   ): Promise<DeleteApplicationAndVideoLicenseResponse> {
     return this.request("DeleteApplicationAndVideoLicense", req, cb)

@@ -128,6 +128,7 @@ import {
   AudioTemplateInfo,
   DescribeBatchTaskDetailResponse,
   CoverConfigureInfo,
+  RecognizeAudioResponse,
   AIRecognitionTemplateItem,
   AiReviewPornAsrTaskInput,
   AiRecognitionTaskFaceResult,
@@ -529,6 +530,7 @@ import {
   SmartSubtitleTaskAsrFullTextResultOutput,
   TerrorismOcrReviewTemplateInfo,
   ExtractBlindWatermarkTaskConfig,
+  RecognizeAudioSentence,
   SharpEnhanceConfig,
   ImageEncodeConfig,
   AiReviewTaskPornResult,
@@ -815,6 +817,7 @@ import {
   AiRecognitionTaskFaceResultItem,
   AiAnalysisTaskDescriptionInput,
   AiAnalysisTaskCoverInput,
+  RecognizeAudioRequest,
   RegionInfo,
   StreamSelector,
   CreateStreamLinkInputResponse,
@@ -1391,6 +1394,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoSearchTaskDetailResponse) => void
   ): Promise<DescribeVideoSearchTaskDetailResponse> {
     return this.request("DescribeVideoSearchTaskDetail", req, cb)
+  }
+
+  /**
+   * 同步接口，返回语音识别结果
+   */
+  async RecognizeAudio(
+    req: RecognizeAudioRequest,
+    cb?: (error: string, rep: RecognizeAudioResponse) => void
+  ): Promise<RecognizeAudioResponse> {
+    return this.request("RecognizeAudio", req, cb)
   }
 
   /**

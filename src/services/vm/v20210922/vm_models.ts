@@ -944,6 +944,10 @@ export interface AudioResult {
    * ASR句子的起止时间
    */
   Sentences?: Array<Sentence>
+  /**
+   * 切片请求ID
+   */
+  RequestId?: string
 }
 
 /**
@@ -1187,4 +1191,8 @@ Block 确认违规
    * 审核命中类型
    */
   HitType?: string
+  /**
+   * 截帧请求ID
+   */
+  RequestId?: string
 }

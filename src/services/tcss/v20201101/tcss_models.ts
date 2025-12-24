@@ -9924,6 +9924,10 @@ export interface HostInfo {
    * 核数
    */
   CoresCnt?: number
+  /**
+   * 最近在线时间
+   */
+  LastOnlineTime?: string
 }
 
 /**

@@ -1028,9 +1028,9 @@ it("live.v20180801.DescribeGroupProIspPlayInfoList", async function () {
     }
 })
 
-it("live.v20180801.DescribeStreamPlayInfoList", async function () {
+it("live.v20180801.DescribePullTransformPushInfoList", async function () {
     try {
-       const data = await client.DescribeStreamPlayInfoList({})
+       const data = await client.DescribePullTransformPushInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1971,6 +1971,16 @@ it("live.v20180801.DescribeLivePackageInfo", async function () {
 it("live.v20180801.CreatePullStreamConfig", async function () {
     try {
        const data = await client.CreatePullStreamConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeStreamPlayInfoList", async function () {
+    try {
+       const data = await client.DescribeStreamPlayInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1561,6 +1561,14 @@ export interface SoftwareInformationData {
    * 盗版风险（0:未支持，1:风险，2:未发现，3:未开启）
    */
   PiracyRisk?: number
+  /**
+   * 设备id
+   */
+  DeviceId?: number
+  /**
+   * 平台类型
+   */
+  OsType?: number
 }
 
 /**
@@ -1814,6 +1822,14 @@ export interface AggrSoftDeviceRow {
    * 终端备注名
    */
   RemarkName?: string
+  /**
+   * 软件id
+   */
+  SoftwareId?: number
+  /**
+   * 0:win 2:mac
+   */
+  OsType?: number
 }
 
 /**

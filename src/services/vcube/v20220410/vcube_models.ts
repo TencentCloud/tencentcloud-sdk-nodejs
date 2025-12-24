@@ -1036,7 +1036,12 @@ export interface ModifyTrialLicenseRequest {
 /**
  * DeleteApplicationAndVideoLicense请求参数结构体
  */
-export type DeleteApplicationAndVideoLicenseRequest = null
+export interface DeleteApplicationAndVideoLicenseRequest {
+  /**
+   * license唯一标识
+   */
+  LicenseId: number
+}
 
 /**
  * CreateApplicationAndVideo请求参数结构体

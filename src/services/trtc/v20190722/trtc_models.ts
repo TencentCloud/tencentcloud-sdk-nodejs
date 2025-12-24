@@ -560,7 +560,7 @@ export interface VoiceCloneRequest {
    */
   VoiceName: string
   /**
-   * 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在5秒～12秒之间
+   * 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在10秒～180秒之间
    */
   PromptAudio: string
   /**
@@ -2808,6 +2808,14 @@ export interface StartStreamIngestRequest {
    * 音量，取值范围[0, 100]，默认100，表示原音量。
    */
   Volume?: number
+  /**
+   * 开启播放进度回调, 默认false，当开启后，播放进度会通过trtc custom data 回调给播放端
+   */
+  EnableProgress?: boolean
+  /**
+   * 播放倍速，默认1.0，可取[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+   */
+  Tempo?: number
 }
 
 /**
@@ -4829,6 +4837,14 @@ export interface UpdateStreamIngestRequest {
    * 是否暂停，默认false表示不暂停。暂停期间任务仍在进行中仍会计费，暂停超过12小时会自动销毁任务, 建议主动调用停止任务接口。
    */
   IsPause?: boolean
+  /**
+   * 是否开启播放进度回调, 默认false，当开启后，播放进度会通过trtc custom data 回调给播放端
+   */
+  EnableProgress?: boolean
+  /**
+   * 播放倍速，默认1.0，可取[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+   */
+  Tempo?: number
 }
 
 /**

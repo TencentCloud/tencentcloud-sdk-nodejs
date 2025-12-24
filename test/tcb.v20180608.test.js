@@ -18,29 +18,9 @@ const client = new tencentcloud.tcb.v20180608.Client({
 })
 describe("tcb.v20180608.test.js", function () {
 
-it("tcb.v20180608.DescribeWxCloudBaseRunSubNets", async function () {
-    try {
-       const data = await client.DescribeWxCloudBaseRunSubNets({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeSpecialCostItems", async function () {
     try {
        const data = await client.DescribeSpecialCostItems({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DescribeCloudBaseRunAllVpcs", async function () {
-    try {
-       const data = await client.DescribeCloudBaseRunAllVpcs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,36 +128,6 @@ it("tcb.v20180608.DescribeCbrServerVersion", async function () {
     }
 })
 
-it("tcb.v20180608.RollUpdateCloudBaseRunServerVersion", async function () {
-    try {
-       const data = await client.RollUpdateCloudBaseRunServerVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.ModifyCloudBaseRunServerVersion", async function () {
-    try {
-       const data = await client.ModifyCloudBaseRunServerVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.CreateWxCloudBaseRunServerDBCluster", async function () {
-    try {
-       const data = await client.CreateWxCloudBaseRunServerDBCluster({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeBaasPackageList", async function () {
     try {
        const data = await client.DescribeBaasPackageList({})
@@ -211,26 +161,6 @@ it("tcb.v20180608.DescribeEnvs", async function () {
 it("tcb.v20180608.ModifyGatewayVersionTraffic", async function () {
     try {
        const data = await client.ModifyGatewayVersionTraffic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DescribeCloudBaseRunServerDomainName", async function () {
-    try {
-       const data = await client.DescribeCloudBaseRunServerDomainName({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
-    try {
-       const data = await client.DescribeCloudBaseRunResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +258,9 @@ it("tcb.v20180608.DescribeBillingInfo", async function () {
     }
 })
 
-it("tcb.v20180608.CreateWxCloudBaseRunEnv", async function () {
+it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
     try {
-       const data = await client.CreateWxCloudBaseRunEnv({})
+       const data = await client.DescribeCloudBaseRunResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,16 +288,6 @@ it("tcb.v20180608.DescribeCloudBaseProjectVersionList", async function () {
     }
 })
 
-it("tcb.v20180608.EditAuthConfig", async function () {
-    try {
-       const data = await client.EditAuthConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeCloudBaseProjectLatestVersionList", async function () {
     try {
        const data = await client.DescribeCloudBaseProjectLatestVersionList({})
@@ -378,9 +298,9 @@ it("tcb.v20180608.DescribeCloudBaseProjectLatestVersionList", async function () 
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunConfForGateWay", async function () {
+it("tcb.v20180608.DescribeHostingDomainTask", async function () {
     try {
-       const data = await client.DescribeCloudBaseRunConfForGateWay({})
+       const data = await client.DescribeHostingDomainTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,19 +448,9 @@ it("tcb.v20180608.DescribePostpayPackageFreeQuotas", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvLimit", async function () {
+it("tcb.v20180608.ModifyCloudBaseRunServerVersion", async function () {
     try {
-       const data = await client.DescribeEnvLimit({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DescribeHostingDomainTask", async function () {
-    try {
-       const data = await client.DescribeHostingDomainTask({})
+       const data = await client.ModifyCloudBaseRunServerVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,16 +518,6 @@ it("tcb.v20180608.DescribeDownloadFile", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunOperationTypes", async function () {
-    try {
-       const data = await client.DescribeCloudBaseRunOperationTypes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeCloudBaseRunServer", async function () {
     try {
        const data = await client.DescribeCloudBaseRunServer({})
@@ -678,16 +578,6 @@ it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunOneClickTaskExternal", async function () {
-    try {
-       const data = await client.DescribeCloudBaseRunOneClickTaskExternal({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
     try {
        const data = await client.DescribeCloudBaseRunVersionSnapshot({})
@@ -728,16 +618,6 @@ it("tcb.v20180608.ModifyDatabaseACL", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeWxCloudBaseRunEnvs", async function () {
-    try {
-       const data = await client.DescribeWxCloudBaseRunEnvs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.CreateStaticStore", async function () {
     try {
        const data = await client.CreateStaticStore({})
@@ -748,9 +628,9 @@ it("tcb.v20180608.CreateStaticStore", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunVersionRsByCondition", async function () {
+it("tcb.v20180608.DescribeEnvLimit", async function () {
     try {
-       const data = await client.DescribeCloudBaseRunVersionRsByCondition({})
+       const data = await client.DescribeEnvLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +638,9 @@ it("tcb.v20180608.DescribeCloudBaseRunVersionRsByCondition", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunPodList", async function () {
+it("tcb.v20180608.EditAuthConfig", async function () {
     try {
-       const data = await client.DescribeCloudBaseRunPodList({})
+       const data = await client.EditAuthConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

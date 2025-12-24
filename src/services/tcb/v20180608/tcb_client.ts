@@ -19,16 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeEnvLimitResponse,
-  DescribeCloudBaseRunAllVpcsResponse,
   OrderInfo,
   CheckTcbServiceResponse,
-  DescribeCloudBaseRunConfForGateWayRequest,
   DescribeCloudBaseRunServerVersionRequest,
   CbrPackageInfo,
   PostPaidEnvDeductInfo,
   DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
-  RollUpdateCloudBaseRunServerVersionResponse,
   SearchClsLogResponse,
   ModifyClsTopicResponse,
   EditAuthConfigResponse,
@@ -38,26 +35,22 @@ import {
   DescribePostpayPackageFreeQuotasRequest,
   DescribeEnvLimitRequest,
   DescribeCloudBaseBuildServiceResponse,
-  DescribeCloudBaseRunPodListResponse,
-  DescribeCloudBaseRunServerDomainNameResponse,
+  DescribeSpecialCostItemsRequest,
+  DescribeCloudBaseRunVersionRequest,
   BanConfig,
   LogResObject,
   CloudRunServiceSimpleVersionSnapshot,
-  CreateWxCloudBaseRunServerDBClusterResponse,
+  DestroyStaticStoreRequest,
   ReplaceActivityRecordResponse,
-  DescribeSpecialCostItemsRequest,
+  LogServiceInfo,
   CreatePostpayPackageRequest,
-  DescribeWxCloudBaseRunSubNetsRequest,
   DescribeCurveDataResponse,
   DescribeBaasPackageListRequest,
   ClsInfo,
-  DescribeCloudBaseRunOperationTypesRequest,
   GatewayVersionItem,
   DescribeAuthDomainsResponse,
   ReinstateEnvRequest,
-  DescribeCloudBaseRunOneClickTaskExternalRequest,
   ModifyClsTopicRequest,
-  DescribeWxCloudBaseRunEnvsResponse,
   CreateHostingDomainRequest,
   DescribeCloudBaseRunResourceRequest,
   DescribeCloudBaseRunServerRequest,
@@ -70,7 +63,6 @@ import {
   ModifyDatabaseACLRequest,
   DescribeCloudBaseRunServerVersionResponse,
   DescribeGatewayVersionsResponse,
-  DescribeGatewayVersionsRequest,
   DescribeSmsQuotasRequest,
   DescribeHostingDomainTaskRequest,
   FreezeCloudBaseRunServersRequest,
@@ -82,13 +74,9 @@ import {
   SmsFreeQuota,
   FunctionInfo,
   CommonServiceAPIRequest,
-  DestroyStaticStoreRequest,
-  CreateWxCloudBaseRunEnvRequest,
   ModifyCloudBaseRunServerFlowConfRequest,
   DescribeActivityRecordResponse,
-  DescribeCloudBaseRunVersionRsByConditionResponse,
   CreateStaticStoreRequest,
-  CreateWxCloudBaseRunServerDBClusterRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   DescribeGatewayCurveDataRequest,
   DescribeGraphDataRequest,
@@ -101,7 +89,7 @@ import {
   CustomHeader,
   DescribeExtraPkgBillingInfoRequest,
   BindEnvGatewayResponse,
-  DescribeWxCloudBaseRunSubNetsResponse,
+  DescribeWxGatewaysRequest,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
   DescribeExtensionUploadInfoRequest,
@@ -110,11 +98,11 @@ import {
   CreateCloudBaseRunResourceResponse,
   LogObject,
   DestroyStaticStoreResponse,
-  DescribeCloudBaseRunServerResponse,
+  BindEnvGatewayRequest,
   ModifyDatabaseACLResponse,
   CloudBaseEsInfo,
   ModifyCloudBaseRunServerFlowConfResponse,
-  DescribeCloudBaseRunOperationTypesResponse,
+  DescribeDownloadFileResponse,
   SpecialCostItem,
   EstablishCloudBaseRunServerResponse,
   EnvInfo,
@@ -122,18 +110,14 @@ import {
   DestroyEnvResponse,
   DescribeCloudBaseProjectVersionListRequest,
   CodeSource,
-  DescribeCloudBaseRunOneClickTaskExternalResponse,
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
   DescribeEnvPostpaidDeductResponse,
   CreateHostingDomainResponse,
   TkeClusterInfo,
   DescribeActivityRecordRequest,
-  CreateWxCloudBaseRunEnvResponse,
   DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
-  DescribeCloudBaseRunServerDomainNameRequest,
-  DescribeCloudBaseRunAllVpcsRequest,
   CbrRepoInfo,
   DescribeBaasPackageListResponse,
   ReplaceActivityRecordRequest,
@@ -145,7 +129,6 @@ import {
   CloudBaseRunServiceVolumeMount,
   DescribeSpecialCostItemsResponse,
   DescribeWxGatewayRoutesRequest,
-  DescribeWxGatewaysRequest,
   DescribeCloudBaseProjectVersionListResponse,
   DescribeDownloadFileRequest,
   ReinstateEnvResponse,
@@ -156,10 +139,9 @@ import {
   StaticStorageInfo,
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
-  DescribeCloudBaseRunVersionRequest,
+  ModifyCloudBaseRunServerVersionRequest,
   EstablishWxGatewayRouteRequest,
   UnfreezeCloudBaseRunServersResponse,
-  DescribeCloudBaseRunConfForGateWayResponse,
   DescribeCbrServerVersionRequest,
   DescribeWxGatewayRoutesResponse,
   DatabasesInfo,
@@ -173,14 +155,13 @@ import {
   DeleteCloudBaseProjectLatestVersionRequest,
   DescribeCloudBaseProjectLatestVersionListResponse,
   DescribeWxGatewaysResponse,
-  DescribeDownloadFileResponse,
+  DescribeGatewayVersionsRequest,
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
-  DescribeWxCloudBaseRunEnvsRequest,
   CloudBaseRunServiceVolumeHostPath,
   DescribeCurveDataRequest,
   CloudBaseRunImageSecretInfo,
-  BindEnvGatewayRequest,
+  DescribeCloudBaseRunServerResponse,
   ModifyEnvResponse,
   DescribeCbrServerVersionResponse,
   DescribeQuotaDataRequest,
@@ -191,14 +172,12 @@ import {
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
   FreequotaInfo,
-  CloudBaseRunVersionPod,
   DescribeUserActivityInfoResponse,
   DescribePostpayFreeQuotasResponse,
   ModifyGatewayVersionTrafficResponse,
   ActivityRecordItem,
   AuthDomain,
   DescribeCloudBaseProjectLatestVersionListRequest,
-  LogServiceInfo,
   FrequencyLimitConfig,
   DescribeHostingDomainTaskResponse,
   EnvBillingInfoItem,
@@ -209,16 +188,13 @@ import {
   SearchClsLogRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
-  DescribeCloudBaseRunVersionRsByConditionRequest,
   DescribeUserActivityInfoRequest,
   Tag,
   DescribeCloudBaseRunVersionSnapshotResponse,
-  DescribeCloudBaseRunPodListRequest,
   CreateCloudBaseRunResourceRequest,
   DescribeAuthDomainsRequest,
   FreezeCloudBaseRunServersResponse,
   CloudRunServiceVolume,
-  CloudBaseRunForGatewayConf,
   GatewayItem,
   ExtensionFileInfo,
   WxGatewayCustomConfig,
@@ -232,11 +208,8 @@ import {
   PostpayEnvQuota,
   CustomRequestToAdd,
   DescribePostpayPackageFreeQuotasResponse,
-  OneClickTaskStepInfo,
   DescribeExtraPkgBillingInfoResponse,
   CloudBaseCodeRepoName,
-  ModifyCloudBaseRunServerVersionRequest,
-  RollUpdateCloudBaseRunServerVersionRequest,
 } from "./tcb_models"
 
 /**
@@ -249,16 +222,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询微信云托管子网
-   */
-  async DescribeWxCloudBaseRunSubNets(
-    req: DescribeWxCloudBaseRunSubNetsRequest,
-    cb?: (error: string, rep: DescribeWxCloudBaseRunSubNetsResponse) => void
-  ): Promise<DescribeWxCloudBaseRunSubNetsResponse> {
-    return this.request("DescribeWxCloudBaseRunSubNets", req, cb)
-  }
-
-  /**
    * 查询环境1分钱抵扣信息
    */
   async DescribeSpecialCostItems(
@@ -266,16 +229,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSpecialCostItemsResponse) => void
   ): Promise<DescribeSpecialCostItemsResponse> {
     return this.request("DescribeSpecialCostItems", req, cb)
-  }
-
-  /**
-   * 查询环境下所有的vpc列表
-   */
-  async DescribeCloudBaseRunAllVpcs(
-    req: DescribeCloudBaseRunAllVpcsRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunAllVpcsResponse) => void
-  ): Promise<DescribeCloudBaseRunAllVpcsResponse> {
-    return this.request("DescribeCloudBaseRunAllVpcs", req, cb)
   }
 
   /**
@@ -383,36 +336,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 针对特定的版本，进行滚动更新
-   */
-  async RollUpdateCloudBaseRunServerVersion(
-    req: RollUpdateCloudBaseRunServerVersionRequest,
-    cb?: (error: string, rep: RollUpdateCloudBaseRunServerVersionResponse) => void
-  ): Promise<RollUpdateCloudBaseRunServerVersionResponse> {
-    return this.request("RollUpdateCloudBaseRunServerVersion", req, cb)
-  }
-
-  /**
-   * 修改服务版本的副本数，环境变量
-   */
-  async ModifyCloudBaseRunServerVersion(
-    req: ModifyCloudBaseRunServerVersionRequest,
-    cb?: (error: string, rep: ModifyCloudBaseRunServerVersionResponse) => void
-  ): Promise<ModifyCloudBaseRunServerVersionResponse> {
-    return this.request("ModifyCloudBaseRunServerVersion", req, cb)
-  }
-
-  /**
-   * 开通微信云托管MySQL数据库服务
-   */
-  async CreateWxCloudBaseRunServerDBCluster(
-    req: CreateWxCloudBaseRunServerDBClusterRequest,
-    cb?: (error: string, rep: CreateWxCloudBaseRunServerDBClusterResponse) => void
-  ): Promise<CreateWxCloudBaseRunServerDBClusterResponse> {
-    return this.request("CreateWxCloudBaseRunServerDBCluster", req, cb)
-  }
-
-  /**
    * 获取新套餐列表，含详情，如果传了PackageId，则只获取指定套餐详情
    */
   async DescribeBaasPackageList(
@@ -450,26 +373,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyGatewayVersionTrafficResponse) => void
   ): Promise<ModifyGatewayVersionTrafficResponse> {
     return this.request("ModifyGatewayVersionTraffic", req, cb)
-  }
-
-  /**
-   * 查询微信云托管服务域名
-   */
-  async DescribeCloudBaseRunServerDomainName(
-    req: DescribeCloudBaseRunServerDomainNameRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunServerDomainNameResponse) => void
-  ): Promise<DescribeCloudBaseRunServerDomainNameResponse> {
-    return this.request("DescribeCloudBaseRunServerDomainName", req, cb)
-  }
-
-  /**
-   * 查看容器托管的集群状态
-   */
-  async DescribeCloudBaseRunResource(
-    req: DescribeCloudBaseRunResourceRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void
-  ): Promise<DescribeCloudBaseRunResourceResponse> {
-    return this.request("DescribeCloudBaseRunResource", req, cb)
   }
 
   /**
@@ -563,13 +466,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建微信云托管
+   * 查看容器托管的集群状态
    */
-  async CreateWxCloudBaseRunEnv(
-    req: CreateWxCloudBaseRunEnvRequest,
-    cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void
-  ): Promise<CreateWxCloudBaseRunEnvResponse> {
-    return this.request("CreateWxCloudBaseRunEnv", req, cb)
+  async DescribeCloudBaseRunResource(
+    req: DescribeCloudBaseRunResourceRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void
+  ): Promise<DescribeCloudBaseRunResourceResponse> {
+    return this.request("DescribeCloudBaseRunResource", req, cb)
   }
 
   /**
@@ -593,16 +496,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改登录配置
-   */
-  async EditAuthConfig(
-    req: EditAuthConfigRequest,
-    cb?: (error: string, rep: EditAuthConfigResponse) => void
-  ): Promise<EditAuthConfigResponse> {
-    return this.request("EditAuthConfig", req, cb)
-  }
-
-  /**
    * 获取云开发项目列表
    */
   async DescribeCloudBaseProjectLatestVersionList(
@@ -613,13 +506,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 独立网关中拉取云托管服务对应的配置信息
+   * 查询静态托管域名任务状态
    */
-  async DescribeCloudBaseRunConfForGateWay(
-    req: DescribeCloudBaseRunConfForGateWayRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunConfForGateWayResponse) => void
-  ): Promise<DescribeCloudBaseRunConfForGateWayResponse> {
-    return this.request("DescribeCloudBaseRunConfForGateWay", req, cb)
+  async DescribeHostingDomainTask(
+    req: DescribeHostingDomainTaskRequest,
+    cb?: (error: string, rep: DescribeHostingDomainTaskResponse) => void
+  ): Promise<DescribeHostingDomainTaskResponse> {
+    return this.request("DescribeHostingDomainTask", req, cb)
   }
 
   /**
@@ -763,23 +656,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询环境个数上限
+   * 修改服务版本的副本数，环境变量
    */
-  async DescribeEnvLimit(
-    req?: DescribeEnvLimitRequest,
-    cb?: (error: string, rep: DescribeEnvLimitResponse) => void
-  ): Promise<DescribeEnvLimitResponse> {
-    return this.request("DescribeEnvLimit", req, cb)
-  }
-
-  /**
-   * 查询静态托管域名任务状态
-   */
-  async DescribeHostingDomainTask(
-    req: DescribeHostingDomainTaskRequest,
-    cb?: (error: string, rep: DescribeHostingDomainTaskResponse) => void
-  ): Promise<DescribeHostingDomainTaskResponse> {
-    return this.request("DescribeHostingDomainTask", req, cb)
+  async ModifyCloudBaseRunServerVersion(
+    req: ModifyCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: ModifyCloudBaseRunServerVersionResponse) => void
+  ): Promise<ModifyCloudBaseRunServerVersionResponse> {
+    return this.request("ModifyCloudBaseRunServerVersion", req, cb)
   }
 
   /**
@@ -843,16 +726,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询服务、版本和操作类型
-   */
-  async DescribeCloudBaseRunOperationTypes(
-    req: DescribeCloudBaseRunOperationTypesRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunOperationTypesResponse) => void
-  ): Promise<DescribeCloudBaseRunOperationTypesResponse> {
-    return this.request("DescribeCloudBaseRunOperationTypes", req, cb)
-  }
-
-  /**
    * 查询单个服务的详情，版本以及详情
    */
   async DescribeCloudBaseRunServer(
@@ -913,16 +786,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询一键部署任务 （特定接口：外部查询使用）
-   */
-  async DescribeCloudBaseRunOneClickTaskExternal(
-    req: DescribeCloudBaseRunOneClickTaskExternalRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunOneClickTaskExternalResponse) => void
-  ): Promise<DescribeCloudBaseRunOneClickTaskExternalResponse> {
-    return this.request("DescribeCloudBaseRunOneClickTaskExternal", req, cb)
-  }
-
-  /**
    * 查询版本历史
    */
   async DescribeCloudBaseRunVersionSnapshot(
@@ -963,16 +826,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询微信云托管环境信息
-   */
-  async DescribeWxCloudBaseRunEnvs(
-    req: DescribeWxCloudBaseRunEnvsRequest,
-    cb?: (error: string, rep: DescribeWxCloudBaseRunEnvsResponse) => void
-  ): Promise<DescribeWxCloudBaseRunEnvsResponse> {
-    return this.request("DescribeWxCloudBaseRunEnvs", req, cb)
-  }
-
-  /**
    * 创建静态托管资源，包括COS和CDN，异步任务创建，查看创建结果需要根据DescribeStaticStore接口来查看
    */
   async CreateStaticStore(
@@ -983,23 +836,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeCloudBaseRunVersionRsByCondition 获取云托管详情
+   * 查询环境个数上限
    */
-  async DescribeCloudBaseRunVersionRsByCondition(
-    req: DescribeCloudBaseRunVersionRsByConditionRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunVersionRsByConditionResponse) => void
-  ): Promise<DescribeCloudBaseRunVersionRsByConditionResponse> {
-    return this.request("DescribeCloudBaseRunVersionRsByCondition", req, cb)
+  async DescribeEnvLimit(
+    req?: DescribeEnvLimitRequest,
+    cb?: (error: string, rep: DescribeEnvLimitResponse) => void
+  ): Promise<DescribeEnvLimitResponse> {
+    return this.request("DescribeEnvLimit", req, cb)
   }
 
   /**
-   * 查询云托管服务版本容器列表
+   * 修改登录配置
    */
-  async DescribeCloudBaseRunPodList(
-    req: DescribeCloudBaseRunPodListRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunPodListResponse) => void
-  ): Promise<DescribeCloudBaseRunPodListResponse> {
-    return this.request("DescribeCloudBaseRunPodList", req, cb)
+  async EditAuthConfig(
+    req: EditAuthConfigRequest,
+    cb?: (error: string, rep: EditAuthConfigResponse) => void
+  ): Promise<EditAuthConfigResponse> {
+    return this.request("EditAuthConfig", req, cb)
   }
 
   /**

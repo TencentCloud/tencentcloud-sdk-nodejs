@@ -298,6 +298,16 @@ it("billing.v20180709.ModifyGatherRule", async function () {
     }
 })
 
+it("billing.v20180709.ModifyAllocationUnit", async function () {
+    try {
+       const data = await client.ModifyAllocationUnit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeAllocationTrendByMonth", async function () {
     try {
        const data = await client.DescribeAllocationTrendByMonth({})
@@ -528,9 +538,9 @@ it("billing.v20180709.DescribeBudget", async function () {
     }
 })
 
-it("billing.v20180709.ModifyAllocationUnit", async function () {
+it("billing.v20180709.DescribeCostSummaryByTag", async function () {
     try {
-       const data = await client.ModifyAllocationUnit({})
+       const data = await client.DescribeCostSummaryByTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

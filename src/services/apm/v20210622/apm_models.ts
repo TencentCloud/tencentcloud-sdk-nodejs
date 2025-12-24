@@ -30,416 +30,6 @@ export interface DescribeApmAssociationResponse {
 }
 
 /**
- * ModifyApmInstance请求参数结构体
- */
-export interface ModifyApmInstanceRequest {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId: string
-  /**
-   * 业务系统名
-   */
-  Name: string
-  /**
-   * Tag 列表
-   */
-  Tags?: Array<ApmTag>
-  /**
-   * 业务系统描述
-   */
-  Description?: string
-  /**
-   * Trace 数据保存时长（单位：天）
-   */
-  TraceDuration?: number
-  /**
-   * 是否开启计费
-   */
-  OpenBilling?: boolean
-  /**
-   * 业务系统上报额度
-   */
-  SpanDailyCounters?: number
-  /**
-   * 错误率警示线，当应用的平均错误率超出该阈值时，系统会给出异常提示。
-   */
-  ErrRateThreshold?: number
-  /**
-   * 采样率（单位：%）
-   */
-  SampleRate?: number
-  /**
-   * 是否开启错误采样（0=关, 1=开）
-   */
-  ErrorSample?: number
-  /**
-   * 采样慢调用保存阈值（单位：ms）
-   */
-  SlowRequestSavedThreshold?: number
-  /**
-   * 是否开启日志功能（0=关, 1=开）
-   */
-  IsRelatedLog?: number
-  /**
-   * 日志地域，开启日志功能后才会生效
-   */
-  LogRegion?: string
-  /**
-   * CLS 日志主题 ID，开启日志功能后才会生效
-   */
-  LogTopicID?: string
-  /**
-   * 日志集，开启日志功能后才会生效
-   */
-  LogSet?: string
-  /**
-   * 日志源，开启日志功能后才会生效
-   */
-  LogSource?: string
-  /**
-   * 用户自定义展示标签列表
-   */
-  CustomShowTags?: Array<string>
-  /**
-   * 修改计费模式（1为预付费，0为按量付费）
-   */
-  PayMode?: number
-  /**
-   * 响应时间警示线
-   */
-  ResponseDurationWarningThreshold?: number
-  /**
-   * 是否免费（0=付费版；1=TSF 受限免费版；2=免费版），默认0
-   */
-  Free?: number
-  /**
-   * 是否关联 Dashboard（0=关,1=开）
-   */
-  IsRelatedDashboard?: number
-  /**
-   * 关联的 Dashboard ID，开启关联 Dashboard 后才会生效
-   */
-  DashboardTopicID?: string
-  /**
-   * 是否开启 SQL 注入检测（0=关,1=开）
-   */
-  IsSqlInjectionAnalysis?: number
-  /**
-   * 是否开启组件漏洞检测（0=关,1=开）
-   */
-  IsInstrumentationVulnerabilityScan?: number
-  /**
-   * 是否开启远程命令攻击检测
-   */
-  IsRemoteCommandExecutionAnalysis?: number
-  /**
-   * 是否开启内存马检测
-   */
-  IsMemoryHijackingAnalysis?: number
-  /**
-   * CLS索引类型(0=全文索引，1=键值索引)
-   */
-  LogIndexType?: number
-  /**
-   * traceId的索引key: 当CLS索引类型为键值索引时生效
-   */
-  LogTraceIdKey?: string
-  /**
-   * 是否开启删除任意文件检测（0-关闭，1-开启）
-   */
-  IsDeleteAnyFileAnalysis?: number
-  /**
-   * 是否开启读取任意文件检测（0-关闭，1-开启）
-   */
-  IsReadAnyFileAnalysis?: number
-  /**
-   * 是否开启上传任意文件检测（0-关闭，1-开启）
-   */
-  IsUploadAnyFileAnalysis?: number
-  /**
-   * 是否开启包含任意文件检测（0-关闭，1-开启）
-   */
-  IsIncludeAnyFileAnalysis?: number
-  /**
-   * 是否开启目录遍历检测（0-关闭，1-开启）
-   */
-  IsDirectoryTraversalAnalysis?: number
-  /**
-   * 是否开启模板引擎注入检测（0-关闭，1-开启）
-   */
-  IsTemplateEngineInjectionAnalysis?: number
-  /**
-   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
-   */
-  IsScriptEngineInjectionAnalysis?: number
-  /**
-   * 是否开启表达式注入检测（0-关闭，1-开启）
-   */
-  IsExpressionInjectionAnalysis?: number
-  /**
-   * 是否开启JNDI注入检测（0-关闭，1-开启）
-   */
-  IsJNDIInjectionAnalysis?: number
-  /**
-   * 是否开启JNI注入检测（0-关闭，1-开启）
-   */
-  IsJNIInjectionAnalysis?: number
-  /**
-   * 是否开启Webshell后门检测（0-关闭，1-开启）
-   */
-  IsWebshellBackdoorAnalysis?: number
-  /**
-   * 是否开启反序列化检测（0-关闭，1-开启）
-   */
-  IsDeserializationAnalysis?: number
-  /**
-   * URL长分段收敛阈值
-   */
-  UrlLongSegmentThreshold?: number
-  /**
-   * URL数字分段收敛阈值
-   */
-  UrlNumberSegmentThreshold?: number
-}
-
-/**
- * APM 业务系统信息
- */
-export interface ApmInstanceDetail {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId?: string
-  /**
-   * 业务系统名
-   */
-  Name?: string
-  /**
-   * 业务系统描述信息
-   */
-  Description?: string
-  /**
-   * 业务系统状态。{
-1: 初始化中; 2: 运行中; 4: 限流}
-   */
-  Status?: number
-  /**
-   * 业务系统所属地域
-   */
-  Region?: string
-  /**
-   * 业务系统 Tag 列表
-   */
-  Tags?: Array<ApmTag>
-  /**
-   * AppID 信息
-   */
-  AppId?: number
-  /**
-   * 创建人 Uin
-   */
-  CreateUin?: string
-  /**
-   * 存储使用量(单位：MB)
-   */
-  AmountOfUsedStorage?: number
-  /**
-   * 该业务系统服务端应用数量
-   */
-  ServiceCount?: number
-  /**
-   * 日均上报 Span 数
-   */
-  CountOfReportSpanPerDay?: number
-  /**
-   * Trace 数据保存时长（单位：天）
-   */
-  TraceDuration?: number
-  /**
-   * 业务系统上报额度
-   */
-  SpanDailyCounters?: number
-  /**
-   * 业务系统是否已开通计费（0=未开通，1=已开通）
-   */
-  BillingInstance?: number
-  /**
-   * 错误警示线（单位：%）
-   */
-  ErrRateThreshold?: number
-  /**
-   * 采样率（单位：%）
-   */
-  SampleRate?: number
-  /**
-   * 是否开启错误采样（0=关, 1=开）
-   */
-  ErrorSample?: number
-  /**
-   * 采样慢调用保存阈值（单位：ms）
-   */
-  SlowRequestSavedThreshold?: number
-  /**
-   * CLS 日志所在地域
-   */
-  LogRegion?: string
-  /**
-   * 日志源
-   */
-  LogSource?: string
-  /**
-   * 日志功能开关（0=关， 1=开）
-   */
-  IsRelatedLog?: number
-  /**
-   * 日志主题 ID
-   */
-  LogTopicID?: string
-  /**
-   * 该业务系统客户端应用数量
-   */
-  ClientCount?: number
-  /**
-   * 该业务系统最近2天活跃应用数量
-   */
-  TotalCount?: number
-  /**
-   * CLS 日志集
-   */
-  LogSet?: string
-  /**
-   * Metric 数据保存时长（单位：天）
-   */
-  MetricDuration?: number
-  /**
-   * 用户自定义展示标签列表
-   */
-  CustomShowTags?: Array<string>
-  /**
-   * 业务系统计费模式（1为预付费，0为按量付费）
-   */
-  PayMode?: number
-  /**
-   * 业务系统计费模式是否生效
-   */
-  PayModeEffective?: boolean
-  /**
-   * 响应时间警示线（单位：ms）
-   */
-  ResponseDurationWarningThreshold?: number
-  /**
-   * 是否免费（0=否，1=限额免费，2=完全免费），默认0
-   */
-  Free?: number
-  /**
-   * 是否 TSF 默认业务系统（0=否，1=是）
-   */
-  DefaultTSF?: number
-  /**
-   * 是否关联 Dashboard（0=关, 1=开）
-   */
-  IsRelatedDashboard?: number
-  /**
-   * 关联的 Dashboard ID
-   */
-  DashboardTopicID?: string
-  /**
-   * 是否开启组件漏洞检测（0=关， 1=开）
-   */
-  IsInstrumentationVulnerabilityScan?: number
-  /**
-   * 是否开启 SQL 注入分析（0=关， 1=开）
-   */
-  IsSqlInjectionAnalysis?: number
-  /**
-   * 限流原因。{
-1: 正式版限额;
-2: 试用版限额;
-4: 试用版到期;
-8: 账号欠费
-}
-   */
-  StopReason?: number
-  /**
-   * 是否开远程命令执行检测（0=关， 1=开）
-   */
-  IsRemoteCommandExecutionAnalysis?: number
-  /**
-   * 是否开内存马执行检测（0=关， 1=开）
-   */
-  IsMemoryHijackingAnalysis?: number
-  /**
-   * CLS索引类型(0=全文索引，1=键值索引)
-   */
-  LogIndexType?: number
-  /**
-   * traceId的索引key: 当CLS索引类型为键值索引时生效
-   */
-  LogTraceIdKey?: string
-  /**
-   * 是否开启删除任意文件检测（0-关闭，1-开启）
-   */
-  IsDeleteAnyFileAnalysis?: number
-  /**
-   * 是否开启读取任意文件检测（0-关闭，1-开启）
-   */
-  IsReadAnyFileAnalysis?: number
-  /**
-   * 是否开启上传任意文件检测（0-关闭，1-开启）
-   */
-  IsUploadAnyFileAnalysis?: number
-  /**
-   * 是否开启包含任意文件检测（0-关闭，1-开启）
-   */
-  IsIncludeAnyFileAnalysis?: number
-  /**
-   * 是否开启目录遍历检测（0-关闭，1-开启）
-   */
-  IsDirectoryTraversalAnalysis?: number
-  /**
-   * 是否开启模板引擎注入检测（0-关闭，1-开启）
-   */
-  IsTemplateEngineInjectionAnalysis?: number
-  /**
-   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
-   */
-  IsScriptEngineInjectionAnalysis?: number
-  /**
-   * 是否开启表达式注入检测（0-关闭，1-开启）
-   */
-  IsExpressionInjectionAnalysis?: number
-  /**
-   * 是否开启JNDI注入检测（0-关闭，1-开启）
-   */
-  IsJNDIInjectionAnalysis?: number
-  /**
-   * 是否开启JNI注入检测（0-关闭，1-开启）
-   */
-  IsJNIInjectionAnalysis?: number
-  /**
-   * 是否开启Webshell后门检测（0-关闭，1-开启）
-   */
-  IsWebshellBackdoorAnalysis?: number
-  /**
-   * 是否开启反序列化检测（0-关闭，1-开启）
-   */
-  IsDeserializationAnalysis?: number
-  /**
-   * 业务系统鉴权 token
-   */
-  Token?: string
-  /**
-   * URL长分段收敛阈值
-   */
-  UrlLongSegmentThreshold?: number
-  /**
-   * URL数字分段收敛阈值
-   */
-  UrlNumberSegmentThreshold?: number
-}
-
-/**
  * CreateApmInstance请求参数结构体
  */
 export interface CreateApmInstanceRequest {
@@ -474,182 +64,66 @@ export interface CreateApmInstanceRequest {
 }
 
 /**
- * ModifyGeneralApmApplicationConfig请求参数结构体
+ * DescribeServiceOverview返回参数结构体
  */
-export interface ModifyGeneralApmApplicationConfigRequest {
+export interface DescribeServiceOverviewResponse {
   /**
-   * 业务系统Id
+   * 指标结果集
    */
-  InstanceId: string
+  Records?: Array<ApmMetricRecord>
   /**
-   * 需要修改的字段key value分别指定字段名、字段值
-[具体字段请见](https://cloud.tencent.com/document/product/248/111241)
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Tags: Array<ApmTag>
-  /**
-   * 需要修改配置的应用列表名称
-   */
-  ServiceNames: Array<string>
+  RequestId?: string
 }
 
 /**
- * DescribeApmServiceMetric请求参数结构体
+ * 采样配置信息
  */
-export interface DescribeApmServiceMetricRequest {
+export interface ApmSampleConfig {
   /**
-   * 业务系统ID
+   * 实例ID
    */
-  InstanceId: string
+  InstanceKey?: string
   /**
-   * 应用名
+   * 服务名
    */
   ServiceName?: string
   /**
-   * 应用ID
+   * 采样名字
    */
-  ServiceID?: string
+  SampleName?: string
   /**
-   * 开始时间
+   * 接口名
    */
-  StartTime?: number
+  OperationName?: string
   /**
-   * 结束时间
+   * 采样的span数
    */
-  EndTime?: number
+  SpanNum?: number
   /**
-   * 排序
-   */
-  OrderBy?: OrderBy
-  /**
-   * 是否demo模式
-   */
-  Demo?: boolean
-  /**
-   * 应用状态筛选，可枚举的值为：health、warning、error。如果选中多个状态用逗号隔开，例如："warning,error"
-   */
-  ServiceStatus?: string
-  /**
-   * 标签列表
-   */
-  Tags?: Array<ApmTag>
-  /**
-   * 页码
-   */
-  Page?: number
-  /**
-   * 页大小
-   */
-  PageSize?: number
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * CreateApmPrometheusRule请求参数结构体
- */
-export interface CreateApmPrometheusRuleRequest {
-  /**
-   * 指标匹配规则名
-   */
-  Name: string
-  /**
-   * 规则生效的应用。作用全部应用就传空字符串
-   */
-  ServiceName: string
-  /**
-   * 指标匹配类型：0精准匹配，1前缀匹配，2后缀匹配
-   */
-  MetricMatchType: number
-  /**
-   * 客户定义的命中指标名规则。
-   */
-  MetricNameRule: string
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-}
-
-/**
- * 查询
- */
-export interface QueryMetricItem {
-  /**
-   * 指标名
-   */
-  MetricName: string
-  /**
-   * 同比，现支持 CompareByYesterday (与昨天相比)和CompareByLastWeek (与上周相比)
-   */
-  Compares?: Array<string>
-  /**
-   * 同比，已弃用，不建议使用
-   */
-  Compare?: string
-}
-
-/**
- * ModifyApmPrometheusRule请求参数结构体
- */
-export interface ModifyApmPrometheusRuleRequest {
-  /**
-   * 规则ID
-   */
-  Id: number
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-  /**
-   * 所要修改的规则名
-   */
-  Name?: string
-  /**
-   * 规则状态：1(启用)、2（不启用）、3（删除）
+   * 采样配置开关 0 关 1 开
    */
   Status?: number
   /**
-   * 规则生效的应用。生效于全部应用就传空（这个如果不修改也要传旧的规则）
+   * tags数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceName?: string
+  Tags?: Array<APMKVItem>
   /**
-   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配（这个如果不修改也要传旧的规则）
+   * 采样率
    */
-  MetricMatchType?: number
+  SampleRate?: number
   /**
-   * 客户定义的命中指标名规则。
+   * 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricNameRule?: string
-}
-
-/**
- * ModifyGeneralApmApplicationConfig返回参数结构体
- */
-export interface ModifyGeneralApmApplicationConfigResponse {
+  OperationType?: number
   /**
-   * 返回值描述
+   * 配置Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeApmInstances返回参数结构体
- */
-export interface DescribeApmInstancesResponse {
-  /**
-   * APM 业务系统列表
-   */
-  Instances?: Array<ApmInstanceDetail>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Id?: number
 }
 
 /**
@@ -674,335 +148,43 @@ export interface AgentOperationConfigView {
 }
 
 /**
- * 组件
+ * 包含了节点的组件数量和健康度数量
  */
-export interface Instrument {
+export interface SelectorView {
   /**
-   * 组件名称
+   * 组件数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
-  /**
-   * 组件开关
-   */
-  Enable?: boolean
+  Component?: ComponentTopologyView
 }
 
 /**
- * DescribeTagValues返回参数结构体
+ * DescribeApmSampleConfig请求参数结构体
  */
-export interface DescribeTagValuesResponse {
-  /**
-   * 维度值列表
-   */
-  Values?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTagValues请求参数结构体
- */
-export interface DescribeTagValuesRequest {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId: string
-  /**
-   * 维度名
-   */
-  TagKey: string
-  /**
-   * 开始时间（单位为秒）
-   */
-  StartTime: number
-  /**
-   * 结束时间（单位为秒）
-   */
-  EndTime: number
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-  /**
-   * Or 过滤条件
-   */
-  OrFilters?: Array<Filter>
-  /**
-   * 使用类型
-   */
-  Type?: string
-}
-
-/**
- * DescribeApmPrometheusRule返回参数结构体
- */
-export interface DescribeApmPrometheusRuleResponse {
-  /**
-   * 指标匹配规则
-   */
-  ApmPrometheusRules?: Array<ApmPrometheusRules>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 应用详细信息
- */
-export interface ServiceDetail {
-  /**
-   * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceID?: string
-  /**
-   * 业务系统ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceKey?: string
-  /**
-   * 用户appid
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppID?: number
-  /**
-   * 主账号uin
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateUIN?: string
-  /**
-   * 应用名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceName?: string
-  /**
-   * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceDescription?: string
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-  /**
-   * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<ApmTag>
-  /**
-   * 业务系统名称
-   */
-  InstanceName?: string
-}
-
-/**
- * Span 对象
- */
-export interface Span {
-  /**
-   * Trace ID
-   */
-  TraceID?: string
-  /**
-   * 日志
-   */
-  Logs?: Array<SpanLog>
-  /**
-   * 标签
-   */
-  Tags?: Array<SpanTag>
-  /**
-   * 上报应用服务信息
-   */
-  Process?: SpanProcess
-  /**
-   * 产生时间戳(毫秒)
-   */
-  Timestamp?: number
-  /**
-   * Span 名称
-   */
-  OperationName?: string
-  /**
-   * 关联关系
-   */
-  References?: Array<SpanReference>
-  /**
-   * 产生时间戳(微秒)
-   */
-  StartTime?: number
-  /**
-   * 持续耗时(微妙)
-   */
-  Duration?: number
-  /**
-   * Span ID
-   */
-  SpanID?: string
-  /**
-   * 产生时间戳(毫秒)
-   */
-  StartTimeMillis?: number
-  /**
-   * Parent Span ID
-   */
-  ParentSpanID?: string
-}
-
-/**
- * APM Agent 信息
- */
-export interface ApmAgentInfo {
-  /**
-   * Agent 下载地址
-   */
-  AgentDownloadURL?: string
-  /**
-   * Collector 上报地址
-   */
-  CollectorURL?: string
-  /**
-   * Token 信息
-   */
-  Token?: string
-  /**
-   * 外网上报地址
-   */
-  PublicCollectorURL?: string
-  /**
-   * 自研 VPC 上报地址
-   */
-  InnerCollectorURL?: string
-  /**
-   * 内网上报地址( Private Link 上报地址)
-   */
-  PrivateLinkCollectorURL?: string
-}
-
-/**
- * TerminateApmInstance请求参数结构体
- */
-export interface TerminateApmInstanceRequest {
+export interface DescribeApmSampleConfigRequest {
   /**
    * 业务系统ID
    */
   InstanceId: string
+  /**
+   * 采样规则名
+   */
+  SampleName?: string
 }
 
 /**
- * 应用相关的配置列表项
+ * DescribeApmSampleConfig返回参数结构体
  */
-export interface ApmApplicationConfigView {
+export interface DescribeApmSampleConfigResponse {
   /**
-   * 业务系统 ID
+   * 采样配置列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceKey?: string
+  ApmSampleConfigs?: Array<ApmSampleConfig>
   /**
-   * 应用名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ServiceName?: string
-  /**
-   * 接口过滤
-   */
-  OperationNameFilter?: string
-  /**
-   * 错误类型过滤
-   */
-  ExceptionFilter?: string
-  /**
-   * HTTP 状态码过滤
-   */
-  ErrorCodeFilter?: string
-  /**
-   * 应用诊断开关（已废弃）
-   */
-  EventEnable?: boolean
-  /**
-   * URL 收敛开关 0 关 1 开
-   */
-  UrlConvergenceSwitch?: number
-  /**
-   * URL 收敛阈值
-   */
-  UrlConvergenceThreshold?: number
-  /**
-   * URL 收敛规则正则
-   */
-  UrlConvergence?: string
-  /**
-   * URL 排除规则正则
-   */
-  UrlExclude?: string
-  /**
-   * 是否开启日志 0 关 1 开
-   */
-  IsRelatedLog?: number
-  /**
-   * 日志源
-   */
-  LogSource?: string
-  /**
-   * 日志集
-   */
-  LogSet?: string
-  /**
-   * 日志主题
-   */
-  LogTopicID?: string
-  /**
-   * 方法栈快照开关 true 开启 false 关闭
-   */
-  SnapshotEnable?: boolean
-  /**
-   * 慢调用监听触发阈值
-   */
-  SnapshotTimeout?: number
-  /**
-   * 探针总开关
-   */
-  AgentEnable?: boolean
-  /**
-   * 组件列表开关（已废弃）
-   */
-  InstrumentList?: Array<Instrument>
-  /**
-   * 链路压缩开关（已废弃）
-   */
-  TraceSquash?: boolean
-  /**
-   * 探针熔断内存阈值
-   */
-  DisableMemoryUsed?: number
-  /**
-   * 探针熔断CPU阈值
-   */
-  DisableCpuUsed?: number
-  /**
-   * 是否开启SQL参数获取
-   */
-  DbStatementParametersEnabled?: boolean
-  /**
-   * 慢SQL阈值
-   */
-  SlowSQLThresholds?: Array<ApmTag>
-}
-
-/**
- * 指标列表单元
- */
-export interface ApmMetricRecord {
-  /**
-   * field数组，用于指标的查询结果
-   */
-  Fields?: Array<ApmField>
-  /**
-   * tag数组，用于区分 Groupby 的对象
-   */
-  Tags?: Array<ApmTag>
+  RequestId?: string
 }
 
 /**
@@ -1051,18 +233,498 @@ Value 填写：
 }
 
 /**
- * DescribeApmSampleConfig返回参数结构体
+ * DescribeTopologyNew返回参数结构体
  */
-export interface DescribeApmSampleConfigResponse {
+export interface DescribeTopologyNewResponse {
   /**
-   * 采样配置列表
+   * 节点集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApmSampleConfigs?: Array<ApmSampleConfig>
+  Nodes?: Array<TopologyNode>
+  /**
+   * 边集合
+   */
+  Edges?: Array<TopologyEdgeNew>
+  /**
+   * 拓扑图是否有修改
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopologyModifyFlag?: number
+  /**
+   * 节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Selectors?: SelectorView
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyApmApplicationConfig返回参数结构体
+ */
+export interface ModifyApmApplicationConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApmServiceMetric返回参数结构体
+ */
+export interface DescribeApmServiceMetricResponse {
+  /**
+   * 应用指标列表
+   */
+  ServiceMetricList?: Array<ApmServiceMetric>
+  /**
+   * 符合筛选条件的应用数
+   */
+  TotalCount?: number
+  /**
+   * 警示异常应用数
+   */
+  WarningErrorCount?: number
+  /**
+   * 应用总数
+   */
+  ApplicationCount?: number
+  /**
+   * 页码
+   */
+  Page?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 异常应用数
+   */
+  ErrorCount?: number
+  /**
+   * 警示应用数
+   */
+  WarningCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyApmAssociation请求参数结构体
+ */
+export interface ModifyApmAssociationRequest {
+  /**
+   * 关联的产品名，当前只支持Prometheus、CKafka
+   */
+  ProductName: string
+  /**
+   * 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）
+   */
+  Status: number
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 关联的产品实例ID
+   */
+  PeerId?: string
+  /**
+   * CKafka消息主题
+   */
+  Topic?: string
+}
+
+/**
+ * DescribeGeneralOTSpanList返回参数结构体
+ */
+export interface DescribeGeneralOTSpanListResponse {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。
+1. 将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。
+2. 使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。
+3. 使用 UTF-8 字符集，将压缩前的字节数组转换为文本。
+
+   */
+  Spans?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApmApplicationConfig返回参数结构体
+ */
+export interface DescribeApmApplicationConfigResponse {
+  /**
+   * Apm应用配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApmAppConfig: ApmAppConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApmAssociation请求参数结构体
+ */
+export interface DescribeApmAssociationRequest {
+  /**
+   * 关联的产品名，当前只支持Prometheus
+   */
+  ProductName: string
+  /**
+   * 业务系统名
+   */
+  InstanceId: string
+}
+
+/**
+ * APM 浮点数类型键值对
+ */
+export interface APMKV {
+  /**
+   * Key 值定义
+   */
+  Key?: string
+  /**
+   * Value 值定义
+   */
+  Value?: number
+}
+
+/**
+ * 节点位置信息
+ */
+export interface Position {
+  /**
+   * 节点位置横坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  X?: number
+  /**
+   * 节点位置纵坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Y?: number
+}
+
+/**
+ * 包含了视图中节点组件类型的数量
+ */
+export interface ComponentTopologyView {
+  /**
+   * 服务纬度的节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Service?: number
+  /**
+   * 数据库节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Database?: number
+  /**
+   * 消息队列节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MQ?: number
+}
+
+/**
+ * CreateProfileTask请求参数结构体
+ */
+export interface CreateProfileTaskRequest {
+  /**
+   * 应用名称
+   */
+  ServiceName: string
+  /**
+   * APM业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 应用实例（在线）
+   */
+  ServiceInstance: string
+  /**
+   * 事件类型（cpu、alloc）
+   */
+  Event: string
+  /**
+   * 任务持续时长(单位：毫秒)，范围限制在5~180秒
+   */
+  Duration: number
+  /**
+   * 执行次数，范围限制在1~100次
+   */
+  AllTimes: number
+  /**
+   * 开始时间戳，0代表从当前开始(单位：秒)
+   */
+  StartTime?: number
+  /**
+   * 任务执行间隔(单位：毫秒)，范围限制在10~600秒，不可小于1.5倍的Duration
+   */
+  TaskInterval?: number
+}
+
+/**
+ * 展示apm业务系统关联prometheus关系返回体
+ */
+export interface ApmPrometheusRules {
+  /**
+   * 指标匹配规则ID
+   */
+  Id?: number
+  /**
+   * 指标匹配规则名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 规则生效的应用。生效于全部应用就传空字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * 指标匹配规则状态：1(启用)、2（不启用）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 指标匹配规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricNameRule?: string
+  /**
+   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricMatchType?: number
+}
+
+/**
+ * 拓扑图边定义
+ */
+export interface TopologyEdgeNew {
+  /**
+   * 源节点
+   */
+  Source?: string
+  /**
+   * 边ID
+   */
+  Id?: string
+  /**
+   * 边权重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 目标节点
+   */
+  Target?: string
+  /**
+   * 响应时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 错误率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrRate?: number
+  /**
+   * 吞吐量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qps?: number
+  /**
+   * 边类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 边颜色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Color?: string
+  /**
+   * Sql调用数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlRequestCount?: number
+  /**
+   * Sql调用错误数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlErrorRequestCount?: number
+  /**
+   * 边上源节点类型 应用/MQ/DB
+   */
+  SourceComp?: string
+  /**
+   * 边上目标节点类型 应用/MQ/DB
+   */
+  TargetComp?: string
+}
+
+/**
+ * DescribeApmPrometheusRule请求参数结构体
+ */
+export interface DescribeApmPrometheusRuleRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+}
+
+/**
+ * CreateApmPrometheusRule返回参数结构体
+ */
+export interface CreateApmPrometheusRuleResponse {
+  /**
+   * 指标匹配规则的ID
+   */
+  RuleId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TerminateApmInstance返回参数结构体
+ */
+export interface TerminateApmInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 指标列表单元
+ */
+export interface ApmMetricRecord {
+  /**
+   * field数组，用于指标的查询结果
+   */
+  Fields?: Array<ApmField>
+  /**
+   * tag数组，用于区分 Groupby 的对象
+   */
+  Tags?: Array<ApmTag>
+}
+
+/**
+ * 拓扑图边节点
+ */
+export interface TopologyNode {
+  /**
+   * 错误率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrRate?: number
+  /**
+   * 节点类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Kind?: string
+  /**
+   * 节点名
+   */
+  Name?: string
+  /**
+   * 节点权重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 节点颜色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Color?: string
+  /**
+   * 响应时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 吞吐量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qps?: number
+  /**
+   * 节点类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 节点ID
+   */
+  Id?: string
+  /**
+   * 节点大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: string
+  /**
+   * 节点是否为组件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsModule?: boolean
+  /**
+   * 节点位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Position?: Position
+  /**
+   * 节点标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 节点是否可以下钻
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanDrillDown?: boolean
+  /**
+   * 资源层信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource?: Resource
+  /**
+   * 拓扑节点视图名字
+   */
+  NodeView?: string
+  /**
+   * MQ 消费者视角的响应时间 ms
+   */
+  ConsumerDuration?: number
+  /**
+   * MQ 消费者视角的错误率 %
+   */
+  ConsumerErrRate?: number
+  /**
+   * MQ 消费者视角的吞吐量
+   */
+  ConsumerQps?: number
+  /**
+   * 应用 ID
+   */
+  ServiceId?: string
 }
 
 /**
@@ -1114,43 +776,37 @@ export interface CreateApmSampleConfigRequest {
 }
 
 /**
- * DescribeApmSampleConfig请求参数结构体
+ * DescribeTagValues请求参数结构体
  */
-export interface DescribeApmSampleConfigRequest {
+export interface DescribeTagValuesRequest {
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId: string
   /**
-   * 采样规则名
+   * 维度名
    */
-  SampleName?: string
-}
-
-/**
- * ModifyApmInstance返回参数结构体
- */
-export interface ModifyApmInstanceResponse {
+  TagKey: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开始时间（单位为秒）
    */
-  RequestId?: string
-}
-
-/**
- * Span日志部分
-
-
- */
-export interface SpanLog {
+  StartTime: number
   /**
-   * 日志时间戳
+   * 结束时间（单位为秒）
    */
-  Timestamp: number
+  EndTime: number
   /**
-   * 标签
+   * 过滤条件
    */
-  Fields: Array<SpanTag>
+  Filters?: Array<Filter>
+  /**
+   * Or 过滤条件
+   */
+  OrFilters?: Array<Filter>
+  /**
+   * 使用类型
+   */
+  Type?: string
 }
 
 /**
@@ -1172,16 +828,6 @@ export interface ApmServiceMetric {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceDetail?: ServiceDetail
-}
-
-/**
- * ModifyApmSampleConfig返回参数结构体
- */
-export interface ModifyApmSampleConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1444,78 +1090,6 @@ export interface CreateApmSampleConfigResponse {
 }
 
 /**
- * DescribeApmApplicationConfig请求参数结构体
- */
-export interface DescribeApmApplicationConfigRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 服务名称
-   */
-  ServiceName: string
-}
-
-/**
- * 查询过滤参数
- */
-export interface Filter {
-  /**
-   * 过滤方式（=, !=, in）
-   */
-  Type: string
-  /**
-   * 过滤维度名
-   */
-  Key: string
-  /**
-   * 过滤值，in过滤方式用逗号分割多个值
-   */
-  Value: string
-}
-
-/**
- * 指标维度信息
- */
-export interface ApmField {
-  /**
-   * 指标名
-   */
-  Key?: string
-  /**
-   * 指标数值
-   */
-  Value?: number
-  /**
-   * 指标所对应的单位
-   */
-  Unit?: string
-  /**
-   * 同比结果数组，推荐使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CompareVals?: Array<APMKVItem>
-  /**
-   * 同比上一个周期的具体指标数值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastPeriodValue?: Array<APMKV>
-  /**
-   * 同比指标值，已弃用，不建议使用
-   */
-  CompareVal?: string
-  /**
-   * 指标中文名
-   */
-  NameCN?: string
-  /**
-   * 指标英文名
-   */
-  NameEN?: string
-}
-
-/**
  * 指标曲线数据
  */
 export interface Line {
@@ -1546,17 +1120,9 @@ export interface Line {
 }
 
 /**
- * DescribeGeneralSpanList返回参数结构体
+ * ModifyApmAssociation返回参数结构体
  */
-export interface DescribeGeneralSpanListResponse {
-  /**
-   * 总数量
-   */
-  TotalCount?: number
-  /**
-   * Span 分页列表
-   */
-  Spans?: Array<Span>
+export interface ModifyApmAssociationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1564,17 +1130,17 @@ export interface DescribeGeneralSpanListResponse {
 }
 
 /**
- * CreateProfileTask返回参数结构体
+ * APM 通用 KV 结构
  */
-export interface CreateProfileTaskResponse {
+export interface APMKVItem {
   /**
-   * 任务ID
+   * Key 值定义
    */
-  TaskId?: number
+  Key: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Value 值定义
    */
-  RequestId?: string
+  Value: string
 }
 
 /**
@@ -1626,9 +1192,1535 @@ export interface DescribeGeneralSpanListRequest {
 }
 
 /**
+ * DescribeApmAgent请求参数结构体
+ */
+export interface DescribeApmAgentRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * 接入方式，现支持 skywalking, ot, ebpf 方式接入上报，不填默认为 ot
+   */
+  AgentType?: string
+  /**
+   * 上报环境，现支持 pl (内网上报), public (外网), inner (自研 VPC )环境上报，不传默认为 public
+   */
+  NetworkMode?: string
+  /**
+   * 语言，现支持 java, golang, php, python, dotNet, nodejs 语言上报，不传默认为 golang
+   */
+  LanguageEnvironment?: string
+  /**
+   * 上报方式，已弃用
+   */
+  ReportMethod?: string
+}
+
+/**
+ * DescribeMetricRecords请求参数结构体
+ */
+export interface DescribeMetricRecordsRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * 指标列表
+   */
+  Metrics: Array<QueryMetricItem>
+  /**
+   * 开始时间（单位为秒）
+   */
+  StartTime: number
+  /**
+   * 结束时间（单位为秒）
+   */
+  EndTime: number
+  /**
+   * 聚合维度
+   */
+  GroupBy: Array<string>
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * Or 过滤条件
+   */
+  OrFilters?: Array<Filter>
+  /**
+   * 排序
+现支持的 Key 有：
+
+- startTime(开始时间)
+- endTime(结束时间)
+- duration(响应时间)
+
+现支持的 Value 有：
+
+- desc(降序排序)
+- asc(升序排序)
+   */
+  OrderBy?: OrderBy
+  /**
+   * 业务名称，控制台用户请填写taw。
+   */
+  BusinessName?: string
+  /**
+   * 特殊处理查询结果
+   */
+  Type?: string
+  /**
+   * 每页大小，默认为1000，合法取值范围为0~1000
+   */
+  Limit?: number
+  /**
+   * 分页起始点
+   */
+  Offset?: number
+  /**
+   * 页码
+   */
+  PageIndex?: number
+  /**
+   * 页长
+   */
+  PageSize?: number
+}
+
+/**
+ * DescribeGeneralMetricData请求参数结构体
+ */
+export interface DescribeGeneralMetricDataRequest {
+  /**
+   * 需要查询的指标名称，不可自定义输入，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
+   */
+  Metrics: Array<string>
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * 视图名称，不可自定义输入。[详情请见。](https://cloud.tencent.com/document/product/248/101681)
+   */
+  ViewName: string
+  /**
+   * 要过滤的维度信息，不同视图有对应的指标维度，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
+   */
+  Filters: Array<GeneralFilter>
+  /**
+   * 聚合维度，不同视图有对应的指标维度，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
+   */
+  GroupBy?: Array<string>
+  /**
+   * 起始时间的时间戳，支持查询30天内的指标数据。（单位：秒）
+   */
+  StartTime?: number
+  /**
+   * 结束时间的时间戳，支持查询30天内的指标数据。（单位：秒）
+   */
+  EndTime?: number
+  /**
+   * 是否按固定时间跨度聚合，填入1及大于1的值按1处理，不填按0处理。
+- 填入0，则计算开始时间到截止时间的指标数据。
+- 填入1，则会按照开始时间到截止时间的时间跨度选择聚合粒度：
+ - 时间跨度 (0,12) 小时，则按一分钟粒度聚合。
+ - 时间跨度 [12,48] 小时，则按五分钟粒度聚合。
+ - 时间跨度 (48, +∞) 小时，则按一小时粒度聚合。
+   */
+  Period?: number
+  /**
+   * 对查询指标进行排序：
+Key 填写云 API 指标名称，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
+Value 填写排序方式：     
+- asc：对查询指标进行升序排序
+- desc：对查询指标进行降序排序
+   */
+  OrderBy?: OrderBy
+  /**
+   * 查询指标的限制条数，目前最多展示50条数据，PageSize取值为1-50，上送PageSize则根据PageSize的值展示限制条数。
+   */
+  PageSize?: number
+}
+
+/**
+ * ModifyApmPrometheusRule请求参数结构体
+ */
+export interface ModifyApmPrometheusRuleRequest {
+  /**
+   * 规则ID
+   */
+  Id: number
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 所要修改的规则名
+   */
+  Name?: string
+  /**
+   * 规则状态：1(启用)、2（不启用）、3（删除）
+   */
+  Status?: number
+  /**
+   * 规则生效的应用。生效于全部应用就传空（这个如果不修改也要传旧的规则）
+   */
+  ServiceName?: string
+  /**
+   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配（这个如果不修改也要传旧的规则）
+   */
+  MetricMatchType?: number
+  /**
+   * 客户定义的命中指标名规则。
+   */
+  MetricNameRule?: string
+}
+
+/**
+ * ModifyApmInstance返回参数结构体
+ */
+export interface ModifyApmInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface SpanTag {
+  /**
+   * 标签类型
+   */
+  Type: string
+  /**
+   * 标签Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+}
+
+/**
+ * DescribeGeneralMetricData返回参数结构体
+ */
+export interface DescribeGeneralMetricDataResponse {
+  /**
+   * 指标结果集
+   */
+  Records?: Array<Line>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyApmInstance请求参数结构体
+ */
+export interface ModifyApmInstanceRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * 业务系统名
+   */
+  Name: string
+  /**
+   * Tag 列表
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 业务系统描述
+   */
+  Description?: string
+  /**
+   * Trace 数据保存时长（单位：天）
+   */
+  TraceDuration?: number
+  /**
+   * 是否开启计费
+   */
+  OpenBilling?: boolean
+  /**
+   * 业务系统上报额度
+   */
+  SpanDailyCounters?: number
+  /**
+   * 错误率警示线，当应用的平均错误率超出该阈值时，系统会给出异常提示。
+   */
+  ErrRateThreshold?: number
+  /**
+   * 采样率（单位：%）
+   */
+  SampleRate?: number
+  /**
+   * 是否开启错误采样（0=关, 1=开）
+   */
+  ErrorSample?: number
+  /**
+   * 采样慢调用保存阈值（单位：ms）
+   */
+  SlowRequestSavedThreshold?: number
+  /**
+   * 是否开启日志功能（0=关, 1=开）
+   */
+  IsRelatedLog?: number
+  /**
+   * 日志地域，开启日志功能后才会生效
+   */
+  LogRegion?: string
+  /**
+   * CLS 日志主题 ID，开启日志功能后才会生效
+   */
+  LogTopicID?: string
+  /**
+   * 日志集，开启日志功能后才会生效
+   */
+  LogSet?: string
+  /**
+   * 日志源，开启日志功能后才会生效
+   */
+  LogSource?: string
+  /**
+   * 用户自定义展示标签列表
+   */
+  CustomShowTags?: Array<string>
+  /**
+   * 修改计费模式（1为预付费，0为按量付费）
+   */
+  PayMode?: number
+  /**
+   * 响应时间警示线
+   */
+  ResponseDurationWarningThreshold?: number
+  /**
+   * 是否免费（0=付费版；1=TSF 受限免费版；2=免费版），默认0
+   */
+  Free?: number
+  /**
+   * 是否关联 Dashboard（0=关,1=开）
+   */
+  IsRelatedDashboard?: number
+  /**
+   * 关联的 Dashboard ID，开启关联 Dashboard 后才会生效
+   */
+  DashboardTopicID?: string
+  /**
+   * 是否开启 SQL 注入检测（0=关,1=开）
+   */
+  IsSqlInjectionAnalysis?: number
+  /**
+   * 是否开启组件漏洞检测（0=关,1=开）
+   */
+  IsInstrumentationVulnerabilityScan?: number
+  /**
+   * 是否开启远程命令攻击检测
+   */
+  IsRemoteCommandExecutionAnalysis?: number
+  /**
+   * 是否开启内存马检测
+   */
+  IsMemoryHijackingAnalysis?: number
+  /**
+   * CLS索引类型(0=全文索引，1=键值索引)
+   */
+  LogIndexType?: number
+  /**
+   * traceId的索引key: 当CLS索引类型为键值索引时生效
+   */
+  LogTraceIdKey?: string
+  /**
+   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   */
+  IsDeleteAnyFileAnalysis?: number
+  /**
+   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   */
+  IsReadAnyFileAnalysis?: number
+  /**
+   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   */
+  IsUploadAnyFileAnalysis?: number
+  /**
+   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   */
+  IsIncludeAnyFileAnalysis?: number
+  /**
+   * 是否开启目录遍历检测（0-关闭，1-开启）
+   */
+  IsDirectoryTraversalAnalysis?: number
+  /**
+   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   */
+  IsTemplateEngineInjectionAnalysis?: number
+  /**
+   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   */
+  IsScriptEngineInjectionAnalysis?: number
+  /**
+   * 是否开启表达式注入检测（0-关闭，1-开启）
+   */
+  IsExpressionInjectionAnalysis?: number
+  /**
+   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   */
+  IsJNDIInjectionAnalysis?: number
+  /**
+   * 是否开启JNI注入检测（0-关闭，1-开启）
+   */
+  IsJNIInjectionAnalysis?: number
+  /**
+   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   */
+  IsWebshellBackdoorAnalysis?: number
+  /**
+   * 是否开启反序列化检测（0-关闭，1-开启）
+   */
+  IsDeserializationAnalysis?: number
+  /**
+   * URL长分段收敛阈值
+   */
+  UrlLongSegmentThreshold?: number
+  /**
+   * URL数字分段收敛阈值
+   */
+  UrlNumberSegmentThreshold?: number
+}
+
+/**
+ * ModifyApmSampleConfig请求参数结构体
+ */
+export interface ModifyApmSampleConfigRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 采样规则名
+   */
+  SampleName: string
+  /**
+   * 采样率
+   */
+  SampleRate: number
+  /**
+   * 应用名，生效于所有应用则填空
+   */
+  ServiceName?: string
+  /**
+   * 接口名
+   */
+  OperationName?: string
+  /**
+   * 采样tag
+   */
+  Tags?: Array<APMKVItem>
+  /**
+   * 采样开关 0关 1开 2删除
+   */
+  Status?: number
+  /**
+   * 配置Id
+   */
+  Id?: number
+  /**
+   * 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配
+   */
+  OperationType?: number
+}
+
+/**
+ * 查询
+ */
+export interface QueryMetricItem {
+  /**
+   * 指标名
+   */
+  MetricName: string
+  /**
+   * 同比，现支持 CompareByYesterday (与昨天相比)和CompareByLastWeek (与上周相比)
+   */
+  Compares?: Array<string>
+  /**
+   * 同比，已弃用，不建议使用
+   */
+  Compare?: string
+}
+
+/**
+ * 应用详细信息
+ */
+export interface ServiceDetail {
+  /**
+   * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceID?: string
+  /**
+   * 业务系统ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceKey?: string
+  /**
+   * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppID?: number
+  /**
+   * 主账号uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUIN?: string
+  /**
+   * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceDescription?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 业务系统名称
+   */
+  InstanceName?: string
+}
+
+/**
+ * DescribeApmInstances返回参数结构体
+ */
+export interface DescribeApmInstancesResponse {
+  /**
+   * APM 业务系统列表
+   */
+  Instances?: Array<ApmInstanceDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApmPrometheusRule返回参数结构体
+ */
+export interface DescribeApmPrometheusRuleResponse {
+  /**
+   * 指标匹配规则
+   */
+  ApmPrometheusRules?: Array<ApmPrometheusRules>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyApmSampleConfig返回参数结构体
+ */
+export interface ModifyApmSampleConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApmApplicationConfig请求参数结构体
+ */
+export interface DescribeApmApplicationConfigRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 服务名称
+   */
+  ServiceName: string
+}
+
+/**
+ * CreateProfileTask返回参数结构体
+ */
+export interface CreateProfileTaskResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyApmPrometheusRule返回参数结构体
  */
 export interface ModifyApmPrometheusRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMetricRecords返回参数结构体
+ */
+export interface DescribeMetricRecordsResponse {
+  /**
+   * 指标结果集
+   */
+  Records?: Array<ApmMetricRecord>
+  /**
+   * 查询指标结果集条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 维度（标签）对象
+ */
+export interface ApmTag {
+  /**
+   * 维度Key(列名，标签Key)
+   */
+  Key: string
+  /**
+   * 维度值（标签值）
+   */
+  Value: string
+}
+
+/**
+ * 查询过滤参数
+ */
+export interface Filter {
+  /**
+   * 过滤方式（=, !=, in）
+   */
+  Type: string
+  /**
+   * 过滤维度名
+   */
+  Key: string
+  /**
+   * 过滤值，in过滤方式用逗号分割多个值
+   */
+  Value: string
+}
+
+/**
+ * DescribeGeneralOTSpanList请求参数结构体
+ */
+export interface DescribeGeneralOTSpanListRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * Span 查询开始时间戳（单位：秒）
+   */
+  StartTime: number
+  /**
+   * Span 查询结束时间戳（单位：秒）
+   */
+  EndTime: number
+  /**
+   * 通用过滤参数
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序
+现支持的 Key 有：
+
+- startTime(开始时间)
+- endTime(结束时间)
+- duration(响应时间)
+
+现支持的 Value 有：
+
+- desc(降序排序)
+- asc(升序排序)
+   */
+  OrderBy?: OrderBy
+  /**
+   * 业务自身服务名，控制台用户请填写taw
+   */
+  BusinessName?: string
+  /**
+   * 单页项目个数，默认为10000，合法取值范围为0～10000
+   */
+  Limit?: number
+  /**
+   * 分页
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeGeneralApmApplicationConfig返回参数结构体
+ */
+export interface DescribeGeneralApmApplicationConfigResponse {
+  /**
+   * 应用配置项
+   */
+  ApmApplicationConfigView?: ApmApplicationConfigView
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateApmInstance返回参数结构体
+ */
+export interface CreateApmInstanceResponse {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteApmSampleConfig返回参数结构体
+ */
+export interface DeleteApmSampleConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGeneralApmApplicationConfig请求参数结构体
+ */
+export interface DescribeGeneralApmApplicationConfigRequest {
+  /**
+   * 应用名
+   */
+  ServiceName: string
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+}
+
+/**
+ * DescribeTopologyNew请求参数结构体
+ */
+export interface DescribeTopologyNewRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * 查询开始时间
+   */
+  StartTime: number
+  /**
+   * 查询结束时间
+   */
+  EndTime: number
+  /**
+   * 应用名
+   */
+  ServiceName?: string
+  /**
+   * 上游层级
+   */
+  UpLevel?: number
+  /**
+   * 应用实例信息
+   */
+  ServiceInstance?: string
+  /**
+   * 下游层级
+   */
+  DownLevel?: number
+  /**
+   * 视角
+   */
+  View?: string
+  /**
+   * 过滤器
+   */
+  Filters?: Array<Filter>
+  /**
+   * 表示Topic（MQ拓扑图用）
+   */
+  Topic?: string
+  /**
+   * 视图筛选列表
+   */
+  Selectors?: Selectors
+  /**
+   * 视图ID
+   */
+  Id?: string
+  /**
+   * TraceID
+   */
+  TraceID?: string
+  /**
+   * 查询top5慢响应节点
+   */
+  IsSlowTopFive?: boolean
+  /**
+   * 是否获取资源层信息
+   */
+  GetResource?: boolean
+  /**
+   * 根据应用标签过滤
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 不显示的节点类型
+   */
+  Hidden?: Selectors
+}
+
+/**
+ * DescribeApmInstances请求参数结构体
+ */
+export interface DescribeApmInstancesRequest {
+  /**
+   * Tag 列表
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 按业务系统名过滤，支持模糊检索
+   */
+  InstanceName?: string
+  /**
+   * 按业务系统 ID 过滤，支持模糊检索
+   */
+  InstanceId?: string
+  /**
+   * 按业务系统 ID 过滤
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 是否查询官方 Demo 业务系统（0=非 Demo 业务系统，1=Demo 业务系统，默认为0）
+   */
+  DemoInstanceFlag?: number
+  /**
+   * 是否查询全地域业务系统（0=不查询全地域，1=查询全地域，默认为0）
+   */
+  AllRegionsFlag?: number
+}
+
+/**
+ * DeleteApmSampleConfig请求参数结构体
+ */
+export interface DeleteApmSampleConfigRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 采样规则名
+   */
+  SampleName: string
+}
+
+/**
+ * Span日志部分
+
+
+ */
+export interface SpanLog {
+  /**
+   * 日志时间戳
+   */
+  Timestamp: number
+  /**
+   * 标签
+   */
+  Fields: Array<SpanTag>
+}
+
+/**
+ * TerminateApmInstance请求参数结构体
+ */
+export interface TerminateApmInstanceRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+}
+
+/**
+ * APM 业务系统信息
+ */
+export interface ApmInstanceDetail {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId?: string
+  /**
+   * 业务系统名
+   */
+  Name?: string
+  /**
+   * 业务系统描述信息
+   */
+  Description?: string
+  /**
+   * 业务系统状态。{
+1: 初始化中; 2: 运行中; 4: 限流}
+   */
+  Status?: number
+  /**
+   * 业务系统所属地域
+   */
+  Region?: string
+  /**
+   * 业务系统 Tag 列表
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * AppID 信息
+   */
+  AppId?: number
+  /**
+   * 创建人 Uin
+   */
+  CreateUin?: string
+  /**
+   * 存储使用量(单位：MB)
+   */
+  AmountOfUsedStorage?: number
+  /**
+   * 该业务系统服务端应用数量
+   */
+  ServiceCount?: number
+  /**
+   * 日均上报 Span 数
+   */
+  CountOfReportSpanPerDay?: number
+  /**
+   * Trace 数据保存时长（单位：天）
+   */
+  TraceDuration?: number
+  /**
+   * 业务系统上报额度
+   */
+  SpanDailyCounters?: number
+  /**
+   * 业务系统是否已开通计费（0=未开通，1=已开通）
+   */
+  BillingInstance?: number
+  /**
+   * 错误警示线（单位：%）
+   */
+  ErrRateThreshold?: number
+  /**
+   * 采样率（单位：%）
+   */
+  SampleRate?: number
+  /**
+   * 是否开启错误采样（0=关, 1=开）
+   */
+  ErrorSample?: number
+  /**
+   * 采样慢调用保存阈值（单位：ms）
+   */
+  SlowRequestSavedThreshold?: number
+  /**
+   * CLS 日志所在地域
+   */
+  LogRegion?: string
+  /**
+   * 日志源
+   */
+  LogSource?: string
+  /**
+   * 日志功能开关（0=关， 1=开）
+   */
+  IsRelatedLog?: number
+  /**
+   * 日志主题 ID
+   */
+  LogTopicID?: string
+  /**
+   * 该业务系统客户端应用数量
+   */
+  ClientCount?: number
+  /**
+   * 该业务系统最近2天活跃应用数量
+   */
+  TotalCount?: number
+  /**
+   * CLS 日志集
+   */
+  LogSet?: string
+  /**
+   * Metric 数据保存时长（单位：天）
+   */
+  MetricDuration?: number
+  /**
+   * 用户自定义展示标签列表
+   */
+  CustomShowTags?: Array<string>
+  /**
+   * 业务系统计费模式（1为预付费，0为按量付费）
+   */
+  PayMode?: number
+  /**
+   * 业务系统计费模式是否生效
+   */
+  PayModeEffective?: boolean
+  /**
+   * 响应时间警示线（单位：ms）
+   */
+  ResponseDurationWarningThreshold?: number
+  /**
+   * 是否免费（0=否，1=限额免费，2=完全免费），默认0
+   */
+  Free?: number
+  /**
+   * 是否 TSF 默认业务系统（0=否，1=是）
+   */
+  DefaultTSF?: number
+  /**
+   * 是否关联 Dashboard（0=关, 1=开）
+   */
+  IsRelatedDashboard?: number
+  /**
+   * 关联的 Dashboard ID
+   */
+  DashboardTopicID?: string
+  /**
+   * 是否开启组件漏洞检测（0=关， 1=开）
+   */
+  IsInstrumentationVulnerabilityScan?: number
+  /**
+   * 是否开启 SQL 注入分析（0=关， 1=开）
+   */
+  IsSqlInjectionAnalysis?: number
+  /**
+   * 限流原因。{
+1: 正式版限额;
+2: 试用版限额;
+4: 试用版到期;
+8: 账号欠费
+}
+   */
+  StopReason?: number
+  /**
+   * 是否开远程命令执行检测（0=关， 1=开）
+   */
+  IsRemoteCommandExecutionAnalysis?: number
+  /**
+   * 是否开内存马执行检测（0=关， 1=开）
+   */
+  IsMemoryHijackingAnalysis?: number
+  /**
+   * CLS索引类型(0=全文索引，1=键值索引)
+   */
+  LogIndexType?: number
+  /**
+   * traceId的索引key: 当CLS索引类型为键值索引时生效
+   */
+  LogTraceIdKey?: string
+  /**
+   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   */
+  IsDeleteAnyFileAnalysis?: number
+  /**
+   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   */
+  IsReadAnyFileAnalysis?: number
+  /**
+   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   */
+  IsUploadAnyFileAnalysis?: number
+  /**
+   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   */
+  IsIncludeAnyFileAnalysis?: number
+  /**
+   * 是否开启目录遍历检测（0-关闭，1-开启）
+   */
+  IsDirectoryTraversalAnalysis?: number
+  /**
+   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   */
+  IsTemplateEngineInjectionAnalysis?: number
+  /**
+   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   */
+  IsScriptEngineInjectionAnalysis?: number
+  /**
+   * 是否开启表达式注入检测（0-关闭，1-开启）
+   */
+  IsExpressionInjectionAnalysis?: number
+  /**
+   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   */
+  IsJNDIInjectionAnalysis?: number
+  /**
+   * 是否开启JNI注入检测（0-关闭，1-开启）
+   */
+  IsJNIInjectionAnalysis?: number
+  /**
+   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   */
+  IsWebshellBackdoorAnalysis?: number
+  /**
+   * 是否开启反序列化检测（0-关闭，1-开启）
+   */
+  IsDeserializationAnalysis?: number
+  /**
+   * 业务系统鉴权 token
+   */
+  Token?: string
+  /**
+   * URL长分段收敛阈值
+   */
+  UrlLongSegmentThreshold?: number
+  /**
+   * URL数字分段收敛阈值
+   */
+  UrlNumberSegmentThreshold?: number
+}
+
+/**
+ * Span 对象
+ */
+export interface Span {
+  /**
+   * Trace ID
+   */
+  TraceID?: string
+  /**
+   * 日志
+   */
+  Logs?: Array<SpanLog>
+  /**
+   * 标签
+   */
+  Tags?: Array<SpanTag>
+  /**
+   * 上报应用服务信息
+   */
+  Process?: SpanProcess
+  /**
+   * 产生时间戳(毫秒)
+   */
+  Timestamp?: number
+  /**
+   * Span 名称
+   */
+  OperationName?: string
+  /**
+   * 关联关系
+   */
+  References?: Array<SpanReference>
+  /**
+   * 产生时间戳(微秒)
+   */
+  StartTime?: number
+  /**
+   * 持续耗时(微妙)
+   */
+  Duration?: number
+  /**
+   * Span ID
+   */
+  SpanID?: string
+  /**
+   * 产生时间戳(毫秒)
+   */
+  StartTimeMillis?: number
+  /**
+   * Parent Span ID
+   */
+  ParentSpanID?: string
+}
+
+/**
+ * ModifyGeneralApmApplicationConfig请求参数结构体
+ */
+export interface ModifyGeneralApmApplicationConfigRequest {
+  /**
+   * 业务系统Id
+   */
+  InstanceId: string
+  /**
+   * 需要修改的字段key value分别指定字段名、字段值
+[具体字段请见](https://cloud.tencent.com/document/product/248/111241)
+   */
+  Tags: Array<ApmTag>
+  /**
+   * 需要修改配置的应用列表名称
+   */
+  ServiceNames: Array<string>
+}
+
+/**
+ * DescribeApmServiceMetric请求参数结构体
+ */
+export interface DescribeApmServiceMetricRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 应用名
+   */
+  ServiceName?: string
+  /**
+   * 应用ID
+   */
+  ServiceID?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+  /**
+   * 排序
+   */
+  OrderBy?: OrderBy
+  /**
+   * 是否demo模式
+   */
+  Demo?: boolean
+  /**
+   * 应用状态筛选，可枚举的值为：health、warning、error。如果选中多个状态用逗号隔开，例如："warning,error"
+   */
+  ServiceStatus?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 页码
+   */
+  Page?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * CreateApmPrometheusRule请求参数结构体
+ */
+export interface CreateApmPrometheusRuleRequest {
+  /**
+   * 指标匹配规则名
+   */
+  Name: string
+  /**
+   * 规则生效的应用。作用全部应用就传空字符串
+   */
+  ServiceName: string
+  /**
+   * 指标匹配类型：0精准匹配，1前缀匹配，2后缀匹配
+   */
+  MetricMatchType: number
+  /**
+   * 客户定义的命中指标名规则。
+   */
+  MetricNameRule: string
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+}
+
+/**
+ * tke资源元数据
+ */
+export interface TkeMeta {
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * pod name
+   */
+  PodName?: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 工作负载
+   */
+  Deployment?: string
+  /**
+   * pod ip
+   */
+  PodIP?: string
+  /**
+   * node ip
+   */
+  NodeIP?: string
+}
+
+/**
+ * 组件
+ */
+export interface Instrument {
+  /**
+   * 组件名称
+   */
+  Name?: string
+  /**
+   * 组件开关
+   */
+  Enable?: boolean
+}
+
+/**
+ * DescribeTagValues返回参数结构体
+ */
+export interface DescribeTagValuesResponse {
+  /**
+   * 维度值列表
+   */
+  Values?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * APM Agent 信息
+ */
+export interface ApmAgentInfo {
+  /**
+   * Agent 下载地址
+   */
+  AgentDownloadURL?: string
+  /**
+   * Collector 上报地址
+   */
+  CollectorURL?: string
+  /**
+   * Token 信息
+   */
+  Token?: string
+  /**
+   * 外网上报地址
+   */
+  PublicCollectorURL?: string
+  /**
+   * 自研 VPC 上报地址
+   */
+  InnerCollectorURL?: string
+  /**
+   * 内网上报地址( Private Link 上报地址)
+   */
+  PrivateLinkCollectorURL?: string
+}
+
+/**
+ * 应用相关的配置列表项
+ */
+export interface ApmApplicationConfigView {
+  /**
+   * 业务系统 ID
+   */
+  InstanceKey?: string
+  /**
+   * 应用名
+   */
+  ServiceName?: string
+  /**
+   * 接口过滤
+   */
+  OperationNameFilter?: string
+  /**
+   * 错误类型过滤
+   */
+  ExceptionFilter?: string
+  /**
+   * HTTP 状态码过滤
+   */
+  ErrorCodeFilter?: string
+  /**
+   * 应用诊断开关（已废弃）
+   */
+  EventEnable?: boolean
+  /**
+   * URL 收敛开关 0 关 1 开
+   */
+  UrlConvergenceSwitch?: number
+  /**
+   * URL 收敛阈值
+   */
+  UrlConvergenceThreshold?: number
+  /**
+   * URL 收敛规则正则
+   */
+  UrlConvergence?: string
+  /**
+   * URL 排除规则正则
+   */
+  UrlExclude?: string
+  /**
+   * 是否开启日志 0 关 1 开
+   */
+  IsRelatedLog?: number
+  /**
+   * 日志源
+   */
+  LogSource?: string
+  /**
+   * 日志集
+   */
+  LogSet?: string
+  /**
+   * 日志主题
+   */
+  LogTopicID?: string
+  /**
+   * 方法栈快照开关 true 开启 false 关闭
+   */
+  SnapshotEnable?: boolean
+  /**
+   * 慢调用监听触发阈值
+   */
+  SnapshotTimeout?: number
+  /**
+   * 探针总开关
+   */
+  AgentEnable?: boolean
+  /**
+   * 组件列表开关（已废弃）
+   */
+  InstrumentList?: Array<Instrument>
+  /**
+   * 链路压缩开关（已废弃）
+   */
+  TraceSquash?: boolean
+  /**
+   * 探针熔断内存阈值
+   */
+  DisableMemoryUsed?: number
+  /**
+   * 探针熔断CPU阈值
+   */
+  DisableCpuUsed?: number
+  /**
+   * 是否开启SQL参数获取
+   */
+  DbStatementParametersEnabled?: boolean
+  /**
+   * 慢SQL阈值
+   */
+  SlowSQLThresholds?: Array<ApmTag>
+}
+
+/**
+ * 排序字段
+ */
+export interface OrderBy {
+  /**
+   * 需要排序的字段，现支持 startTIme, endTime, duration
+   */
+  Key: string
+  /**
+   * asc 顺序排序 / desc 倒序排序
+   */
+  Value: string
+}
+
+/**
+ * 指标维度信息
+ */
+export interface ApmField {
+  /**
+   * 指标名
+   */
+  Key?: string
+  /**
+   * 指标数值
+   */
+  Value?: number
+  /**
+   * 指标所对应的单位
+   */
+  Unit?: string
+  /**
+   * 同比结果数组，推荐使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompareVals?: Array<APMKVItem>
+  /**
+   * 同比上一个周期的具体指标数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastPeriodValue?: Array<APMKV>
+  /**
+   * 同比指标值，已弃用，不建议使用
+   */
+  CompareVal?: string
+  /**
+   * 指标中文名
+   */
+  NameCN?: string
+  /**
+   * 指标英文名
+   */
+  NameEN?: string
+}
+
+/**
+ * DescribeGeneralSpanList返回参数结构体
+ */
+export interface DescribeGeneralSpanListResponse {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * Span 分页列表
+   */
+  Spans?: Array<Span>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1656,176 +2748,34 @@ export interface ApmAssociation {
 }
 
 /**
- * 排序字段
+ * 资源层信息
  */
-export interface OrderBy {
+export interface Resource {
   /**
-   * 需要排序的字段，现支持 startTIme, endTime, duration
-   */
-  Key: string
-  /**
-   * asc 顺序排序 / desc 倒序排序
-   */
-  Value: string
-}
-
-/**
- * DescribeServiceOverview返回参数结构体
- */
-export interface DescribeServiceOverviewResponse {
-  /**
-   * 指标结果集
-   */
-  Records?: Array<ApmMetricRecord>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeApmServiceMetric返回参数结构体
- */
-export interface DescribeApmServiceMetricResponse {
-  /**
-   * 应用指标列表
-   */
-  ServiceMetricList?: Array<ApmServiceMetric>
-  /**
-   * 符合筛选条件的应用数
-   */
-  TotalCount?: number
-  /**
-   * 警示异常应用数
-   */
-  WarningErrorCount?: number
-  /**
-   * 应用总数
-   */
-  ApplicationCount?: number
-  /**
-   * 页码
-   */
-  Page?: number
-  /**
-   * 页大小
-   */
-  PageSize?: number
-  /**
-   * 异常应用数
-   */
-  ErrorCount?: number
-  /**
-   * 警示应用数
-   */
-  WarningCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyApmAssociation返回参数结构体
- */
-export interface ModifyApmAssociationResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMetricRecords返回参数结构体
- */
-export interface DescribeMetricRecordsResponse {
-  /**
-   * 指标结果集
-   */
-  Records?: Array<ApmMetricRecord>
-  /**
-   * 查询指标结果集条数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeGeneralOTSpanList返回参数结构体
- */
-export interface DescribeGeneralOTSpanListResponse {
-  /**
-   * 总数量
-   */
-  TotalCount?: number
-  /**
-   * Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。
-1. 将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。
-2. 使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。
-3. 使用 UTF-8 字符集，将压缩前的字节数组转换为文本。
-
-   */
-  Spans?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 维度（标签）对象
- */
-export interface ApmTag {
-  /**
-   * 维度Key(列名，标签Key)
-   */
-  Key: string
-  /**
-   * 维度值（标签值）
-   */
-  Value: string
-}
-
-/**
- * ModifyApmApplicationConfig返回参数结构体
- */
-export interface ModifyApmApplicationConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeApmApplicationConfig返回参数结构体
- */
-export interface DescribeApmApplicationConfigResponse {
-  /**
-   * Apm应用配置
+   * 资源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApmAppConfig: ApmAppConfig
+  Type?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * tke资源层信息
    */
-  RequestId?: string
+  TKEMeta?: Array<TkeMeta>
+  /**
+   * cvm资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CVMMeta?: Array<CVMMeta>
 }
 
 /**
- * DescribeApmAssociation请求参数结构体
+ * 视图方案勾选情况
  */
-export interface DescribeApmAssociationRequest {
+export interface Selectors {
   /**
-   * 关联的产品名，当前只支持Prometheus
+   * 组件勾选情况
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
-  /**
-   * 业务系统名
-   */
-  InstanceId: string
+  Component?: Array<string>
 }
 
 /**
@@ -2039,173 +2989,13 @@ export interface ModifyApmApplicationConfigRequest {
 }
 
 /**
- * APM 浮点数类型键值对
+ * ModifyGeneralApmApplicationConfig返回参数结构体
  */
-export interface APMKV {
+export interface ModifyGeneralApmApplicationConfigResponse {
   /**
-   * Key 值定义
+   * 返回值描述
    */
-  Key?: string
-  /**
-   * Value 值定义
-   */
-  Value?: number
-}
-
-/**
- * DescribeGeneralOTSpanList请求参数结构体
- */
-export interface DescribeGeneralOTSpanListRequest {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId: string
-  /**
-   * Span 查询开始时间戳（单位：秒）
-   */
-  StartTime: number
-  /**
-   * Span 查询结束时间戳（单位：秒）
-   */
-  EndTime: number
-  /**
-   * 通用过滤参数
-   */
-  Filters?: Array<Filter>
-  /**
-   * 排序
-现支持的 Key 有：
-
-- startTime(开始时间)
-- endTime(结束时间)
-- duration(响应时间)
-
-现支持的 Value 有：
-
-- desc(降序排序)
-- asc(升序排序)
-   */
-  OrderBy?: OrderBy
-  /**
-   * 业务自身服务名，控制台用户请填写taw
-   */
-  BusinessName?: string
-  /**
-   * 单页项目个数，默认为10000，合法取值范围为0～10000
-   */
-  Limit?: number
-  /**
-   * 分页
-   */
-  Offset?: number
-}
-
-/**
- * DescribeApmAgent请求参数结构体
- */
-export interface DescribeApmAgentRequest {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId: string
-  /**
-   * 接入方式，现支持 skywalking, ot, ebpf 方式接入上报，不填默认为 ot
-   */
-  AgentType?: string
-  /**
-   * 上报环境，现支持 pl (内网上报), public (外网), inner (自研 VPC )环境上报，不传默认为 public
-   */
-  NetworkMode?: string
-  /**
-   * 语言，现支持 java, golang, php, python, dotNet, nodejs 语言上报，不传默认为 golang
-   */
-  LanguageEnvironment?: string
-  /**
-   * 上报方式，已弃用
-   */
-  ReportMethod?: string
-}
-
-/**
- * DescribeMetricRecords请求参数结构体
- */
-export interface DescribeMetricRecordsRequest {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId: string
-  /**
-   * 指标列表
-   */
-  Metrics: Array<QueryMetricItem>
-  /**
-   * 开始时间（单位为秒）
-   */
-  StartTime: number
-  /**
-   * 结束时间（单位为秒）
-   */
-  EndTime: number
-  /**
-   * 聚合维度
-   */
-  GroupBy: Array<string>
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-  /**
-   * Or 过滤条件
-   */
-  OrFilters?: Array<Filter>
-  /**
-   * 排序
-现支持的 Key 有：
-
-- startTime(开始时间)
-- endTime(结束时间)
-- duration(响应时间)
-
-现支持的 Value 有：
-
-- desc(降序排序)
-- asc(升序排序)
-   */
-  OrderBy?: OrderBy
-  /**
-   * 业务名称，控制台用户请填写taw。
-   */
-  BusinessName?: string
-  /**
-   * 特殊处理查询结果
-   */
-  Type?: string
-  /**
-   * 每页大小，默认为1000，合法取值范围为0~1000
-   */
-  Limit?: number
-  /**
-   * 分页起始点
-   */
-  Offset?: number
-  /**
-   * 页码
-   */
-  PageIndex?: number
-  /**
-   * 页长
-   */
-  PageSize?: number
-}
-
-/**
- * DescribeGeneralApmApplicationConfig返回参数结构体
- */
-export interface DescribeGeneralApmApplicationConfigResponse {
-  /**
-   * 应用配置项
-   */
-  ApmApplicationConfigView?: ApmApplicationConfigView
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2213,82 +3003,19 @@ export interface DescribeGeneralApmApplicationConfigResponse {
 }
 
 /**
- * DescribeGeneralMetricData请求参数结构体
+ * CVM元数据
  */
-export interface DescribeGeneralMetricDataRequest {
+export interface CVMMeta {
   /**
-   * 需要查询的指标名称，不可自定义输入，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Metrics: Array<string>
+  Region?: string
   /**
-   * 业务系统 ID
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
-  /**
-   * 视图名称，不可自定义输入。[详情请见。](https://cloud.tencent.com/document/product/248/101681)
-   */
-  ViewName: string
-  /**
-   * 要过滤的维度信息，不同视图有对应的指标维度，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
-   */
-  Filters: Array<GeneralFilter>
-  /**
-   * 聚合维度，不同视图有对应的指标维度，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
-   */
-  GroupBy?: Array<string>
-  /**
-   * 起始时间的时间戳，支持查询30天内的指标数据。（单位：秒）
-   */
-  StartTime?: number
-  /**
-   * 结束时间的时间戳，支持查询30天内的指标数据。（单位：秒）
-   */
-  EndTime?: number
-  /**
-   * 是否按固定时间跨度聚合，填入1及大于1的值按1处理，不填按0处理。
-- 填入0，则计算开始时间到截止时间的指标数据。
-- 填入1，则会按照开始时间到截止时间的时间跨度选择聚合粒度：
- - 时间跨度 (0,12) 小时，则按一分钟粒度聚合。
- - 时间跨度 [12,48] 小时，则按五分钟粒度聚合。
- - 时间跨度 (48, +∞) 小时，则按一小时粒度聚合。
-   */
-  Period?: number
-  /**
-   * 对查询指标进行排序：
-Key 填写云 API 指标名称，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
-Value 填写排序方式：     
-- asc：对查询指标进行升序排序
-- desc：对查询指标进行降序排序
-   */
-  OrderBy?: OrderBy
-  /**
-   * 查询指标的限制条数，目前最多展示50条数据，PageSize取值为1-50，上送PageSize则根据PageSize的值展示限制条数。
-   */
-  PageSize?: number
-}
-
-/**
- * DescribeApmPrometheusRule请求参数结构体
- */
-export interface DescribeApmPrometheusRuleRequest {
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-}
-
-/**
- * CreateApmInstance返回参数结构体
- */
-export interface CreateApmInstanceResponse {
-  /**
-   * 业务系统 ID
-   */
-  InstanceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceID?: string
 }
 
 /**
@@ -2310,44 +3037,6 @@ export interface SpanReference {
 }
 
 /**
- * CreateProfileTask请求参数结构体
- */
-export interface CreateProfileTaskRequest {
-  /**
-   * 应用名称
-   */
-  ServiceName: string
-  /**
-   * APM业务系统ID
-   */
-  InstanceId: string
-  /**
-   * 应用实例（在线）
-   */
-  ServiceInstance: string
-  /**
-   * 事件类型（cpu、alloc）
-   */
-  Event: string
-  /**
-   * 任务持续时长(单位：毫秒)，范围限制在5~180秒
-   */
-  Duration: number
-  /**
-   * 执行次数，范围限制在1~100次
-   */
-  AllTimes: number
-  /**
-   * 开始时间戳，0代表从当前开始(单位：秒)
-   */
-  StartTime?: number
-  /**
-   * 任务执行间隔(单位：毫秒)，范围限制在10~600秒，不可小于1.5倍的Duration
-   */
-  TaskInterval?: number
-}
-
-/**
  * 服务相关信息
  */
 export interface SpanProcess {
@@ -2362,182 +3051,6 @@ export interface SpanProcess {
 }
 
 /**
- * DeleteApmSampleConfig返回参数结构体
- */
-export interface DeleteApmSampleConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyApmAssociation请求参数结构体
- */
-export interface ModifyApmAssociationRequest {
-  /**
-   * 关联的产品名，当前只支持Prometheus、CKafka
-   */
-  ProductName: string
-  /**
-   * 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）
-   */
-  Status: number
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-  /**
-   * 关联的产品实例ID
-   */
-  PeerId?: string
-  /**
-   * CKafka消息主题
-   */
-  Topic?: string
-}
-
-/**
- * 展示apm业务系统关联prometheus关系返回体
- */
-export interface ApmPrometheusRules {
-  /**
-   * 指标匹配规则ID
-   */
-  Id?: number
-  /**
-   * 指标匹配规则名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 规则生效的应用。生效于全部应用就传空字符串
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceName?: string
-  /**
-   * 指标匹配规则状态：1(启用)、2（不启用）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 指标匹配规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetricNameRule?: string
-  /**
-   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetricMatchType?: number
-}
-
-/**
- * ModifyApmSampleConfig请求参数结构体
- */
-export interface ModifyApmSampleConfigRequest {
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-  /**
-   * 采样规则名
-   */
-  SampleName: string
-  /**
-   * 采样率
-   */
-  SampleRate: number
-  /**
-   * 应用名，生效于所有应用则填空
-   */
-  ServiceName?: string
-  /**
-   * 接口名
-   */
-  OperationName?: string
-  /**
-   * 采样tag
-   */
-  Tags?: Array<APMKVItem>
-  /**
-   * 采样开关 0关 1开 2删除
-   */
-  Status?: number
-  /**
-   * 配置Id
-   */
-  Id?: number
-  /**
-   * 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配
-   */
-  OperationType?: number
-}
-
-/**
- * DescribeGeneralApmApplicationConfig请求参数结构体
- */
-export interface DescribeGeneralApmApplicationConfigRequest {
-  /**
-   * 应用名
-   */
-  ServiceName: string
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-}
-
-/**
- * 采样配置信息
- */
-export interface ApmSampleConfig {
-  /**
-   * 实例ID
-   */
-  InstanceKey?: string
-  /**
-   * 服务名
-   */
-  ServiceName?: string
-  /**
-   * 采样名字
-   */
-  SampleName?: string
-  /**
-   * 接口名
-   */
-  OperationName?: string
-  /**
-   * 采样的span数
-   */
-  SpanNum?: number
-  /**
-   * 采样配置开关 0 关 1 开
-   */
-  Status?: number
-  /**
-   * tags数组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<APMKVItem>
-  /**
-   * 采样率
-   */
-  SampleRate?: number
-  /**
-   * 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OperationType?: number
-  /**
-   * 配置Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: number
-}
-
-/**
  * 查询过滤参数
  */
 export interface GeneralFilter {
@@ -2549,120 +3062,4 @@ export interface GeneralFilter {
    * 过滤值
    */
   Value: string
-}
-
-/**
- * DescribeApmInstances请求参数结构体
- */
-export interface DescribeApmInstancesRequest {
-  /**
-   * Tag 列表
-   */
-  Tags?: Array<ApmTag>
-  /**
-   * 按业务系统名过滤，支持模糊检索
-   */
-  InstanceName?: string
-  /**
-   * 按业务系统 ID 过滤，支持模糊检索
-   */
-  InstanceId?: string
-  /**
-   * 按业务系统 ID 过滤
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 是否查询官方 Demo 业务系统（0=非 Demo 业务系统，1=Demo 业务系统，默认为0）
-   */
-  DemoInstanceFlag?: number
-  /**
-   * 是否查询全地域业务系统（0=不查询全地域，1=查询全地域，默认为0）
-   */
-  AllRegionsFlag?: number
-}
-
-/**
- * 标签
- */
-export interface SpanTag {
-  /**
-   * 标签类型
-   */
-  Type: string
-  /**
-   * 标签Key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Key: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value: string
-}
-
-/**
- * DescribeGeneralMetricData返回参数结构体
- */
-export interface DescribeGeneralMetricDataResponse {
-  /**
-   * 指标结果集
-   */
-  Records?: Array<Line>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteApmSampleConfig请求参数结构体
- */
-export interface DeleteApmSampleConfigRequest {
-  /**
-   * 业务系统ID
-   */
-  InstanceId: string
-  /**
-   * 采样规则名
-   */
-  SampleName: string
-}
-
-/**
- * APM 通用 KV 结构
- */
-export interface APMKVItem {
-  /**
-   * Key 值定义
-   */
-  Key: string
-  /**
-   * Value 值定义
-   */
-  Value: string
-}
-
-/**
- * CreateApmPrometheusRule返回参数结构体
- */
-export interface CreateApmPrometheusRuleResponse {
-  /**
-   * 指标匹配规则的ID
-   */
-  RuleId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * TerminateApmInstance返回参数结构体
- */
-export interface TerminateApmInstanceResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }

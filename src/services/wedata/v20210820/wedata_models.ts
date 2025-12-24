@@ -2649,6 +2649,61 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColumnCount?: number
+  /**
+   * 权限标记
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TablePermissionFlag?: boolean
+  /**
+   * 资产状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetStatus?: number
+  /**
+   * 资产等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetLevel?: number
+  /**
+   * 资产code
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetCode?: string
+  /**
+   * 审批状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetAuditStatus?: string
+  /**
+   * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishedTime?: string
+  /**
+   * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagInfoList?: Array<LabelTag>
+  /**
+   * 标签值选择列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueSelections?: Array<LabelValueSelection>
+  /**
+   * 命名空间 - 对应TC-Catalog
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * Catalog来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaFrom?: string
+  /**
+   * 引擎侧创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineCreator?: string
 }
 
 /**
@@ -3378,6 +3433,43 @@ export interface SubmitTaskResponse {
 }
 
 /**
+ * 任务扩展信息
+ */
+export interface AttributeItemOpsDto {
+  /**
+   * 属性键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 属性值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 属性描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
+ * 标签值选择列表
+ */
+export interface LabelValueSelection {
+  /**
+   * 标签ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelId?: number
+  /**
+   * 标签值ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
+}
+
+/**
  * DescribeDataCheckStat请求参数结构体
  */
 export interface DescribeDataCheckStatRequest {
@@ -3682,6 +3774,14 @@ export interface DescribeRuleExecResultsRequest {
    * 项目Id
    */
   ProjectId?: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段
+   */
+  OrderFields?: Array<OrderField>
 }
 
 /**
@@ -4110,6 +4210,26 @@ export interface InstanceOpsDto {
    * 当前用户对该实例的权限列表
    */
   Privileges?: Array<string>
+  /**
+   * 任务执行id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskExecutionId?: string
+  /**
+   * dlc taskid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DlcTaskId?: string
+  /**
+   * dlc jobid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DlcSparkJobId?: string
+  /**
+   * 扩展属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ext?: StrToStrMap
 }
 
 /**
@@ -4193,7 +4313,17 @@ export interface WorkflowTaskCountOpsDto {
  */
 export interface RuleGroupConfig {
   /**
-   * 模型检测类型
+   * 分析类型，可选值：
+INFERENCE-推理表
+TIME_SERIES-时序表
+SNAPSHOT-快照表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisType?: string
+  /**
+   * 模型检测类型，分析类型为推理表（INFERENCE）时必填，可选值：
+CLAASSIFICATION-分类
+REGRESSION-回归
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelMonitorType?: string
@@ -4278,10 +4408,20 @@ export interface RuleGroupConfig {
    */
   PositiveValue?: string
   /**
-   * 特征列
+   * 数值型特征列
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureColumn?: string
+  /**
+   * 分类型特征列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoricalFeatureColumn?: string
+  /**
+   * 目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BaseCatalog?: string
 }
 
 /**
@@ -4696,10 +4836,15 @@ export interface MakePlanTaskOpsDto {
    */
   SuccessPercent?: number
   /**
-   * 预计生成的总实例个数，由于是异步生成，-1代表实例还未完完全生成
+   * 预计生成的总实例个数，由于是异步生成，-1代表实例还未完全生成
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceTotalCount?: number
+  /**
+   * 补录任务实例失败百分数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailurePercent?: number
 }
 
 /**
@@ -5996,6 +6141,26 @@ export interface Rule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailMsg?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupType?: string
+  /**
+   * 编排任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AspectTaskId?: string
+  /**
+   * 目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
+  /**
+   * 目标目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetCatalogName?: string
 }
 
 /**
@@ -9151,6 +9316,32 @@ export interface ModifyTaskInfoRequest {
 }
 
 /**
+ * 任务扩展信息
+ */
+export interface TaskExtOpsDto {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务属性（key-value 形式）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: StrToStrMap
+  /**
+   * 任务试运行-扩展业务属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DryRunExtAttributes?: Array<AttributeItemOpsDto>
+  /**
+   * 任务试运行动态传参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DryRunParameter?: Array<AttributeItemOpsDto>
+}
+
+/**
  * 数据质量规则组
  */
 export interface RuleGroup {
@@ -9304,6 +9495,21 @@ export interface RuleGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserName?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupType?: string
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AspectTaskId?: string
+  /**
+   * catalog名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
 }
 
 /**
@@ -9693,6 +9899,14 @@ export interface ModifyRuleRequest {
    * 目标表名
    */
   TargetTableName?: string
+  /**
+   * 目录
+   */
+  CatalogName?: string
+  /**
+   * 目标目录
+   */
+  TargetCatalogName?: string
 }
 
 /**
@@ -11882,6 +12096,20 @@ export interface DeleteCustomFunctionRequest {
 }
 
 /**
+ * RobAndLockIntegrationTask返回参数结构体
+ */
+export interface RobAndLockIntegrationTaskResponse {
+  /**
+   * 抢锁状态
+   */
+  RobLockState?: RobLockState
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例日志简述信息
  */
 export interface InstanceLogInfo {
@@ -13564,6 +13792,47 @@ export interface IntegrationNodeDetail {
 }
 
 /**
+ * 资产标签
+ */
+export interface LabelTag {
+  /**
+   * 标签id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagId?: number
+  /**
+   * 标签名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagName?: string
+  /**
+   * 标签描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagDesc?: string
+  /**
+   * 标签值Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValueId?: number
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue?: string
+  /**
+   * 标签是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagIsDeleted?: boolean
+  /**
+   * 标签值是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValueIsDeleted?: boolean
+}
+
+/**
  * DescribeEvent返回参数结构体
  */
 export interface DescribeEventResponse {
@@ -13606,6 +13875,27 @@ export interface DescribeOpsMakePlanInstancesRequest {
    * 实例状态列表
    */
   StateList?: Array<number | bigint>
+}
+
+/**
+ * 告警免打扰时间区间
+ */
+export interface AlarmQuietInterval {
+  /**
+   * ISO标准，1表示周一，7表示周日。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DaysOfWeek?: Array<number | bigint>
+  /**
+   * 开始时间，精度时分秒，格式 HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 结束时间，精度时分秒，格式 HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
 }
 
 /**
@@ -14318,6 +14608,36 @@ export interface GetPaginationTaskScriptResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Base64ScriptContent?: string
+}
+
+/**
+ * 补录计划告警规则
+ */
+export interface MakePlanAlarmRule {
+  /**
+   * 告警的级别
+1 -- 普通
+2 -- 重要
+3 -- 紧急
+   */
+  AlarmLevel?: number
+  /**
+   * 告警的类型，补录计划支持：
+start：启动告警
+failure：失败告警
+success：成功告警
+overtime：超过配置时间告警
+
+   */
+  AlarmTypes?: Array<string>
+  /**
+   * 告警超时时间
+   */
+  ExtInfo?: string
+  /**
+   * 告警接受人 升级人配置信息
+   */
+  AlarmGroup?: Array<AlarmGroup>
 }
 
 /**
@@ -15401,6 +15721,34 @@ REVERSE： 实例数据时间逆序
 DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间
    */
   TimeType?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 失败百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailurePercent?: number
+  /**
+   * 补录计划的告警规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmRule?: MakePlanAlarmRule
+  /**
+   * 运行类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunType?: number
+  /**
+   * 定时运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunDateTime?: string
 }
 
 /**
@@ -18624,6 +18972,20 @@ export interface SubmitTaskTestRunResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则维度数统计
+ */
+export interface RuleDimStat {
+  /**
+   * 总数
+   */
+  TotalCnt: number
+  /**
+   * 维度统计数
+   */
+  DimCntList: Array<RuleDimCnt>
 }
 
 /**
@@ -24215,6 +24577,11 @@ export interface TableQualityDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupTableId?: string
+  /**
+   * catalog名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
 }
 
 /**
@@ -24444,17 +24811,45 @@ export interface CheckIntegrationNodeNameExistsResponse {
 }
 
 /**
- * RobAndLockIntegrationTask返回参数结构体
+ * 告警分组信息
  */
-export interface RobAndLockIntegrationTaskResponse {
+export interface AlarmGroup {
   /**
-   * 抢锁状态
+   * 告警方式,1.邮件，2.短信，3.微信，4.语音，5.企业微信，6.Http，7.企业微信群；告警方式code列表（默认1.邮件）
    */
-  RobLockState?: RobLockState
+  AlarmWays?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 告警接收人类型：1.指定人员，2.任务责任人，3.值班表（默认1.指定人员）
    */
-  RequestId?: string
+  AlarmRecipientType?: number
+  /**
+   * 告警接收人
+   */
+  AlarmRecipients?: Array<string>
+  /**
+   * 告警接收人ID
+   */
+  AlarmRecipientIds?: Array<string>
+  /**
+   * 告警升级人
+   */
+  AlarmEscalationRecipients?: Array<string>
+  /**
+   * 告警升级人ID
+   */
+  AlarmEscalationRecipientIds?: Array<string>
+  /**
+   * 告警升级间隔
+   */
+  AlarmEscalationInterval?: number
+  /**
+   * 告警通知疲劳度配置。
+   */
+  NotificationFatigue?: NotificationFatigue
+  /**
+   * 告警渠道规则 json 格式
+   */
+  AlarmMessageRule?: string
 }
 
 /**
@@ -24636,7 +25031,7 @@ export interface DescribeInstanceLogFileRequest {
   /**
    * 实例数据时间
    */
-  CurRunDate: string
+  CurRunDate?: string
   /**
    * 请求来源，WEB 前端；CLIENT 客户端
    */
@@ -25570,6 +25965,21 @@ export interface RuleExecResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupType?: string
+  /**
+   * 编排任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AspectTaskId?: string
+  /**
+   * 目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
 }
 
 /**
@@ -28263,6 +28673,11 @@ export interface RuleGroupExecStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineParam?: string
+  /**
+   * catalog名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
 }
 
 /**
@@ -30033,6 +30448,16 @@ CAN_MANAGE : 有权限管理操作
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleInfo?: string
+  /**
+   * 工作流类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowType?: string
+  /**
+   * 任务扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskExtDTO?: TaskExtOpsDto
 }
 
 /**
@@ -31324,17 +31749,24 @@ export interface DescribeCodeTemplateDetailResponse {
 }
 
 /**
- * 规则维度数统计
+ * 任务告警通知疲劳度配置，包括通知次数、间隔、免打扰时间。
  */
-export interface RuleDimStat {
+export interface NotificationFatigue {
   /**
-   * 总数
+   * 通知次数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCnt: number
+  NotifyCount?: number
   /**
-   * 维度统计数
+   * 通知间隔，单位分钟。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DimCntList: Array<RuleDimCnt>
+  NotifyInterval?: number
+  /**
+   * 免打扰时间，例如示例值每周一、周二的00:00到09:00免打扰
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuietIntervals?: Array<AlarmQuietInterval>
 }
 
 /**
@@ -31484,6 +31916,11 @@ export interface DatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
+  /**
+   * 是否展示目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShowEnableCatalog?: boolean
 }
 
 /**

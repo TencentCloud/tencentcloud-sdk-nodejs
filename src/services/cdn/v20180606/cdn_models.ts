@@ -2973,6 +2973,14 @@ global：全球加速
    * 参数黑名单
    */
   ParamFilter?: ParamFilter
+  /**
+   * 流量防盗刷配置
+   */
+  AutoGuard?: AutoGuard
+  /**
+   * 区域访问控制配置
+   */
+  GeoBlocker?: GeoBlocker
 }
 
 /**
@@ -4348,6 +4356,14 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamFilter?: ParamFilter
+  /**
+   * 流量一键防盗刷配置
+   */
+  AutoGuard?: AutoGuard
+  /**
+   * 区域访问控制配置
+   */
+  GeoBlocker?: GeoBlocker
 }
 
 /**
@@ -5450,6 +5466,28 @@ district：省份（中国境内）、国家/地区（中国境外）映射查�
 }
 
 /**
+ * PurgeUrlsCache请求参数结构体
+ */
+export interface PurgeUrlsCacheRequest {
+  /**
+   * URL 列表，需要包含协议头部 http:// 或 https://
+   */
+  Urls: Array<string>
+  /**
+   * 刷新区域
+无此参数时，默认刷新加速域名所在加速区域
+填充 mainland 时，仅刷新中国境内加速节点上缓存内容
+填充 overseas 时，仅刷新中国境外加速节点上缓存内容
+指定刷新区域时，需要与域名加速区域匹配
+   */
+  Area?: string
+  /**
+   * 是否对中文字符进行编码后刷新
+   */
+  UrlEncode?: boolean
+}
+
+/**
  * 路径保留参数配置
  */
 export interface RuleQueryString {
@@ -5696,6 +5734,33 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Switch: string
+}
+
+/**
+ * 区域访问控制配置，默认为关闭状态
+ */
+export interface GeoBlocker {
+  /**
+   * IP 黑白名单配置开关，取值有
+on：开启
+off：关闭
+   */
+  Switch: string
+  /**
+   * [
+    {
+      "BlockType": "whitelist",
+      "RulePaths": [
+        "*"
+      ],
+      "RuleType": "all",
+      "Districts": [
+        "CN-HK"
+      ]
+    }
+  ]
+   */
+  BlockRules?: Array<GeoBlockStrategy>
 }
 
 /**
@@ -6177,6 +6242,17 @@ global：全球
 }
 
 /**
+ * 流量防盗刷配置（仅限大陆地区）
+ */
+export interface AutoGuard {
+  /**
+   * 流量防盗刷配置开关，取值有： on：开启 off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch: string
+}
+
+/**
  * ListClsLogTopics请求参数结构体
  */
 export interface ListClsLogTopicsRequest {
@@ -6435,25 +6511,29 @@ statusCode：状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 �
 }
 
 /**
- * PurgeUrlsCache请求参数结构体
+ * 区域访问控制策略
  */
-export interface PurgeUrlsCacheRequest {
+export interface GeoBlockStrategy {
   /**
-   * URL 列表，需要包含协议头部 http:// 或 https://
+   * 规则类型
+whitelist: 白名单
+blacklist: 黑名单
    */
-  Urls: Array<string>
+  BlockType: string
   /**
-   * 刷新区域
-无此参数时，默认刷新加速域名所在加速区域
-填充 mainland 时，仅刷新中国境内加速节点上缓存内容
-填充 overseas 时，仅刷新中国境外加速节点上缓存内容
-指定刷新区域时，需要与域名加速区域匹配
+   * 生效规则
    */
-  Area?: string
+  RulePaths: Array<string>
   /**
-   * 是否对中文字符进行编码后刷新
+   * 生效类型
+all: 全部
+directory: 目录
    */
-  UrlEncode?: boolean
+  RuleType: string
+  /**
+   * 生效区域，可选值有: CN-AH CN-BJ CN-CQ CN-FJ CN-GD CN-GS CN-GX CN-GZ CN-HA CN-HB CN-HE CN-HI CN-HK CN-HL CN-HN CN-JL CN-JS CN-JX CN-LN CN-MO CN-NM CN-NX CN-QH CN-SC CN-SD CN-SH CN-SN CN-SX CN-TJ CN-TW CN-XJ CN-XZ CN-YN CN-ZJ AF AX AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BQ BA BW BV BR IO BN BG BF BI CV KH CM CA KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CW CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GG GN GW GY HT HM VA HN HK HU IS IN ID IR IQ IE IM IL IT JM JP JE JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL NC NZ NI NE NG NU NF MK MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RE RO RU RW BL SH KN LC MF PM VC WS SM ST SA SN RS SC SL SG SX SK SI SB SO ZA GS SS ES LK SD SR SJ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW
+   */
+  Districts: Array<string>
 }
 
 /**

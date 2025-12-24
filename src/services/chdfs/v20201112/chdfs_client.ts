@@ -310,7 +310,7 @@ export class Client extends AbstractClient {
    * 查看文件系统列表。
    */
   async DescribeFileSystems(
-    req?: DescribeFileSystemsRequest,
+    req: DescribeFileSystemsRequest,
     cb?: (error: string, rep: DescribeFileSystemsResponse) => void
   ): Promise<DescribeFileSystemsResponse> {
     return this.request("DescribeFileSystems", req, cb)

@@ -1934,9 +1934,13 @@ export interface DomainCertInfo {
 }
 
 /**
- * DeleteLiveSnapshotRule返回参数结构体
+ * DescribePullTransformPushInfoList返回参数结构体
  */
-export interface DeleteLiveSnapshotRuleResponse {
+export interface DescribePullTransformPushInfoListResponse {
+  /**
+   * 拉流任务流信息列表。
+   */
+  DataInfoList: Array<TurnPushInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6492,6 +6496,20 @@ export interface CreateScreenshotTaskRequest {
 }
 
 /**
+ * DescribeAreaBillBandwidthAndFluxList返回参数结构体
+ */
+export interface DescribeAreaBillBandwidthAndFluxListResponse {
+  /**
+   * 明细数据信息。
+   */
+  DataInfoList: Array<BillAreaInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCaster返回参数结构体
  */
 export interface DescribeCasterResponse {
@@ -9234,6 +9252,28 @@ export interface DeleteCasterOutputInfoResponse {
 export type DescribeLivePadRulesRequest = null
 
 /**
+ * DescribePullTransformPushInfoList请求参数结构体
+ */
+export interface DescribePullTransformPushInfoListRequest {
+  /**
+   * utc开始时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I，
+例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
+支持最近一个月的查询。
+   */
+  StartTime: string
+  /**
+   * utc结束时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I，
+例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
+支持最近一个月的查询，时间跨度为一个月。
+   */
+  EndTime: string
+  /**
+   * 拉流转推任务Id。
+   */
+  TaskId: string
+}
+
+/**
  * DescribePullStreamConfigs返回参数结构体
  */
 export interface DescribePullStreamConfigsResponse {
@@ -10565,6 +10605,36 @@ export interface DeleteAuditKeywordsResponse {
 }
 
 /**
+ * 拉流转推任务流数据信息。
+ */
+export interface TurnPushInfo {
+  /**
+   * 视频帧率，单位fps。
+   */
+  VideoFps: number
+  /**
+   * 音频帧率，单位fps。
+   */
+  AudioFps: number
+  /**
+   * 视频码率，单位bps。
+   */
+  VideoRate: number
+  /**
+   * 音频码率，单位bps。
+   */
+  AudioRate: number
+  /**
+   * 流标识。
+   */
+  StreamFlag: string
+  /**
+   * 时间，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I。
+   */
+  Time: string
+}
+
+/**
  * 直播域名Referer黑白名单配置
  */
 export interface RefererAuthConfig {
@@ -11282,13 +11352,9 @@ export interface DescribeCasterPlayUrlRequest {
 }
 
 /**
- * DescribeAreaBillBandwidthAndFluxList返回参数结构体
+ * DeleteLiveSnapshotRule返回参数结构体
  */
-export interface DescribeAreaBillBandwidthAndFluxListResponse {
-  /**
-   * 明细数据信息。
-   */
-  DataInfoList: Array<BillAreaInfo>
+export interface DeleteLiveSnapshotRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

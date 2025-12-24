@@ -82,6 +82,22 @@ export interface DescribeCostSummaryByProductRequest {
 }
 
 /**
+ * 字段排序
+ */
+export interface OrderDto {
+  /**
+   * 字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Column: string
+  /**
+   * 是否升序
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Asc: boolean
+}
+
+/**
  * DescribeBudget返回参数结构体
  */
 export interface DescribeBudgetResponse {
@@ -1678,19 +1694,21 @@ export interface DeleteAllocationTagRequest {
 }
 
 /**
- * 字段排序
+ * DescribeCostSummaryByTag请求参数结构体
  */
-export interface OrderDto {
+export interface DescribeCostSummaryByTagRequest {
   /**
-   * 字段
-注意：此字段可能返回 null，表示取不到有效值。
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2025-12，EndTime 为 2025-12，查询结果是 2025 年 12 月数据。
    */
-  Column: string
+  BeginTime: string
   /**
-   * 是否升序
-注意：此字段可能返回 null，表示取不到有效值。
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2025-12，EndTime 为 2025-12，查询结果是 2025 年 12 月数据。
    */
-  Asc: boolean
+  EndTime: string
+  /**
+   * 分账标签键，用户自定义
+   */
+  TagKey: string
 }
 
 /**
@@ -3326,6 +3344,32 @@ export interface DescribeBillResourceSummaryForOrganizationRequest {
 （支持2021-01以后账单查询）
    */
   TagValue?: string
+}
+
+/**
+ * DescribeDosageDetailByDate返回参数结构体
+ */
+export interface DescribeDosageDetailByDateResponse {
+  /**
+   * 计量单位
+   */
+  Unit?: string
+  /**
+   * 用量数组
+   */
+  DetailSets?: Array<DetailSet>
+  /**
+   * 错误码
+   */
+  RetCode?: number
+  /**
+   * 错误信息
+   */
+  RetMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7335,25 +7379,21 @@ export interface DescribeBillDetailRequest {
 }
 
 /**
- * DescribeDosageDetailByDate返回参数结构体
+ * DescribeCostSummaryByTag返回参数结构体
  */
-export interface DescribeDosageDetailByDateResponse {
+export interface DescribeCostSummaryByTagResponse {
   /**
-   * 计量单位
+   * 数据是否准备好，0准备中，1已就绪。
    */
-  Unit?: string
+  Ready?: number
   /**
-   * 用量数组
+   * 各标签值消耗分布详情
    */
-  DetailSets?: Array<DetailSet>
+  SummaryOverview?: Array<TagSummaryOverviewItem>
   /**
-   * 错误码
+   * 总计
    */
-  RetCode?: number
-  /**
-   * 错误信息
-   */
-  RetMsg?: string
+  SummaryTotal?: SummaryTotal
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

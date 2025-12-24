@@ -21,6 +21,7 @@ import {
   CreateAllocationUnitRequest,
   DescribeBillAdjustInfoResponse,
   DescribeCostSummaryByProductRequest,
+  OrderDto,
   DescribeBudgetResponse,
   DescribeCostExplorerSummaryResponse,
   ConsumptionBusinessSummaryDataItem,
@@ -62,7 +63,7 @@ import {
   DescribeAllocationOverviewResponse,
   DescribeDosageCosDetailByDateRequest,
   DeleteAllocationTagRequest,
-  OrderDto,
+  DescribeCostSummaryByTagRequest,
   DescribeBillSummaryByProductRequest,
   BillDistributionResourceSummary,
   WaveThresholdForm,
@@ -105,6 +106,7 @@ import {
   DescribeBillSummaryByProjectRequest,
   CreateGatherRuleRequest,
   DescribeBillResourceSummaryForOrganizationRequest,
+  DescribeDosageDetailByDateResponse,
   DescribeBudgetRemindRecordListRequest,
   DescribeCostSummaryByRegionRequest,
   ConsumptionSummaryTrend,
@@ -211,7 +213,7 @@ import {
   ModifyGatherRuleResponse,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
-  DescribeDosageDetailByDateResponse,
+  DescribeCostSummaryByTagResponse,
   DescribeSavingPlanResourceInfoRequest,
   AnalyseZoneDetail,
   DescribeVoucherInfoResponse,
@@ -552,6 +554,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改分账单元信息
+   */
+  async ModifyAllocationUnit(
+    req: ModifyAllocationUnitRequest,
+    cb?: (error: string, rep: ModifyAllocationUnitResponse) => void
+  ): Promise<ModifyAllocationUnitResponse> {
+    return this.request("ModifyAllocationUnit", req, cb)
+  }
+
+  /**
    * 查询分账账单费用趋势
    */
   async DescribeAllocationTrendByMonth(
@@ -782,13 +794,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改分账单元信息
+   * 获取按标签汇总消耗详情
    */
-  async ModifyAllocationUnit(
-    req: ModifyAllocationUnitRequest,
-    cb?: (error: string, rep: ModifyAllocationUnitResponse) => void
-  ): Promise<ModifyAllocationUnitResponse> {
-    return this.request("ModifyAllocationUnit", req, cb)
+  async DescribeCostSummaryByTag(
+    req: DescribeCostSummaryByTagRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByTagResponse) => void
+  ): Promise<DescribeCostSummaryByTagResponse> {
+    return this.request("DescribeCostSummaryByTag", req, cb)
   }
 
   /**

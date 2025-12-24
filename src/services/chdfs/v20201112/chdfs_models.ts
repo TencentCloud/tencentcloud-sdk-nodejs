@@ -277,6 +277,14 @@ export interface DescribeFileSystemsResponse {
    */
   FileSystems?: Array<FileSystem>
   /**
+   * 标识是否已获取全量
+   */
+  IsOver?: boolean
+  /**
+   * 下一次请求起始文件系统ID标记
+   */
+  NextFileSystemIdMarker?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -392,6 +400,10 @@ export interface DescribeAccessGroupsRequest {
    * 资源所属者Uin
    */
   OwnerUin?: number
+  /**
+   * 起始权限组ID标记
+   */
+  AccessGroupIdMarker?: string
 }
 
 /**
@@ -520,6 +532,14 @@ export interface DescribeAccessGroupsResponse {
    * 权限组列表
    */
   AccessGroups?: Array<AccessGroup>
+  /**
+   * 标识是否已获取全量
+   */
+  IsOver?: boolean
+  /**
+   * 下一次请求起始权限组ID标记
+   */
+  NextAccessGroupIdMarker?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -749,7 +769,15 @@ export interface DescribeRestoreTasksResponse {
   /**
    * 回热任务列表
    */
-  RestoreTasks: Array<RestoreTask>
+  RestoreTasks?: Array<RestoreTask>
+  /**
+   * 标识是否已获取全量
+   */
+  IsOver?: boolean
+  /**
+   * 下一次请求起始回热任务ID标记
+   */
+  NextRestoreTaskIdMarker?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -817,7 +845,12 @@ export interface DeleteAccessRulesResponse {
 /**
  * DescribeFileSystems请求参数结构体
  */
-export type DescribeFileSystemsRequest = null
+export interface DescribeFileSystemsRequest {
+  /**
+   * 起始文件系统ID标记
+   */
+  FileSystemIdMarker?: string
+}
 
 /**
  * DescribeResourceTags请求参数结构体
@@ -957,6 +990,10 @@ export interface DescribeRestoreTasksRequest {
    * 文件系统ID
    */
   FileSystemId: string
+  /**
+   * 起始回热任务ID标记
+   */
+  RestoreTaskIdMarker?: number
 }
 
 /**

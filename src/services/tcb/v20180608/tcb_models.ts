@@ -82,20 +82,6 @@ export interface DescribeEnvLimitResponse {
 }
 
 /**
- * DescribeCloudBaseRunAllVpcs返回参数结构体
- */
-export interface DescribeCloudBaseRunAllVpcsResponse {
-  /**
-   * 所有vpcid
-   */
-  Vpcs?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 订单信息
  */
 export interface OrderInfo {
@@ -172,20 +158,6 @@ export interface CheckTcbServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeCloudBaseRunConfForGateWay请求参数结构体
- */
-export interface DescribeCloudBaseRunConfForGateWayRequest {
-  /**
-   * 环境ID
-   */
-  EnvID: string
-  /**
-   * vpc信息
-   */
-  VpcID?: string
 }
 
 /**
@@ -284,28 +256,6 @@ export interface DeleteCloudBaseRunServerVersionResponse {
    * 返回结果，succ为成功
    */
   Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RollUpdateCloudBaseRunServerVersion返回参数结构体
- */
-export interface RollUpdateCloudBaseRunServerVersionResponse {
-  /**
-   * succ为成功
-   */
-  Result?: string
-  /**
-   * 滚动更新的VersionName
-   */
-  VersionName?: string
-  /**
-   * 操作记录id
-   */
-  RunId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -494,51 +444,39 @@ export interface DescribeCloudBaseBuildServiceResponse {
 }
 
 /**
- * DescribeCloudBaseRunPodList返回参数结构体
+ * DescribeSpecialCostItems请求参数结构体
  */
-export interface DescribeCloudBaseRunPodListResponse {
+export interface DescribeSpecialCostItemsRequest {
   /**
-   * 偏移量
+   * 环境id
    */
-  Offset?: number
+  EnvId?: string
   /**
-   * 分页大小
+   * 查询开始时间
    */
-  Limit?: number
+  StartTime?: string
   /**
-   * 总数
+   * 查询结束时间
    */
-  TotalCount?: number
-  /**
-   * 容器列表
-   */
-  PodList?: Array<CloudBaseRunVersionPod>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EndTime?: string
 }
 
 /**
- * DescribeCloudBaseRunServerDomainName返回参数结构体
+ * DescribeCloudBaseRunVersion请求参数结构体
  */
-export interface DescribeCloudBaseRunServerDomainNameResponse {
+export interface DescribeCloudBaseRunVersionRequest {
   /**
-   * 公网服务域名
+   * 环境ID
    */
-  PublicDomain?: string
+  EnvId: string
   /**
-   * 内部服务域名
+   * 服务名称
    */
-  InternalDomain?: string
+  ServerName: string
   /**
-   * 弃用
+   * 版本名称
    */
-  DomainName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  VersionName: string
 }
 
 /**
@@ -708,13 +646,17 @@ export interface CloudRunServiceSimpleVersionSnapshot {
 }
 
 /**
- * CreateWxCloudBaseRunServerDBCluster返回参数结构体
+ * DestroyStaticStore请求参数结构体
  */
-export interface CreateWxCloudBaseRunServerDBClusterResponse {
+export interface DestroyStaticStoreRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 环境ID
    */
-  RequestId?: string
+  EnvId: string
+  /**
+   * cdn域名
+   */
+  CdnDomain?: string
 }
 
 /**
@@ -728,21 +670,33 @@ export interface ReplaceActivityRecordResponse {
 }
 
 /**
- * DescribeSpecialCostItems请求参数结构体
+ * 云日志服务相关信息
  */
-export interface DescribeSpecialCostItemsRequest {
+export interface LogServiceInfo {
   /**
-   * 环境id
+   * log名
    */
-  EnvId?: string
+  LogsetName?: string
   /**
-   * 查询开始时间
+   * log-id
    */
-  StartTime?: string
+  LogsetId?: string
   /**
-   * 查询结束时间
+   * topic名
    */
-  EndTime?: string
+  TopicName?: string
+  /**
+   * topic-id
+   */
+  TopicId?: string
+  /**
+   * cls日志所属地域
+   */
+  Region?: string
+  /**
+   * topic保存时长 默认7天
+   */
+  Period?: number
 }
 
 /**
@@ -803,20 +757,6 @@ export interface CreatePostpayPackageRequest {
    * 附加字段，用于透传额外的自定义信息
    */
   Extra?: string
-}
-
-/**
- * DescribeWxCloudBaseRunSubNets请求参数结构体
- */
-export interface DescribeWxCloudBaseRunSubNetsRequest {
-  /**
-   * VPC id
-   */
-  VpcId: string
-  /**
-   * 查询个数限制，不填或小于等于0，等于不限制
-   */
-  Limit?: number
 }
 
 /**
@@ -924,20 +864,6 @@ export interface ClsInfo {
 }
 
 /**
- * DescribeCloudBaseRunOperationTypes请求参数结构体
- */
-export interface DescribeCloudBaseRunOperationTypesRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 服务名称，精确匹配
-   */
-  ServerName?: string
-}
-
-/**
  * 网关版本详情
  */
 export interface GatewayVersionItem {
@@ -1008,16 +934,6 @@ export interface ReinstateEnvRequest {
 }
 
 /**
- * DescribeCloudBaseRunOneClickTaskExternal请求参数结构体
- */
-export interface DescribeCloudBaseRunOneClickTaskExternalRequest {
-  /**
-   * 外部任务Id 最长64字节
-   */
-  ExternalId: string
-}
-
-/**
  * ModifyClsTopic请求参数结构体
  */
 export interface ModifyClsTopicRequest {
@@ -1029,20 +945,6 @@ export interface ModifyClsTopicRequest {
    * 日志生命周期，单位天，可取值范围1~3600，取值为3640时代表永久保存
    */
   Period?: number
-}
-
-/**
- * DescribeWxCloudBaseRunEnvs返回参数结构体
- */
-export interface DescribeWxCloudBaseRunEnvsResponse {
-  /**
-   * env列表
-   */
-  EnvList?: Array<EnvInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1446,24 +1348,6 @@ export interface DescribeGatewayVersionsResponse {
 }
 
 /**
- * DescribeGatewayVersions请求参数结构体
- */
-export interface DescribeGatewayVersionsRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
-  /**
-   * 网关id
-   */
-  GatewayId: string
-  /**
-   * 版本名
-   */
-  VersionName?: string
-}
-
-/**
  * DescribeSmsQuotas请求参数结构体
  */
 export interface DescribeSmsQuotasRequest {
@@ -1690,64 +1574,6 @@ export interface CommonServiceAPIRequest {
 }
 
 /**
- * DestroyStaticStore请求参数结构体
- */
-export interface DestroyStaticStoreRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * cdn域名
-   */
-  CdnDomain?: string
-}
-
-/**
- * CreateWxCloudBaseRunEnv请求参数结构体
- */
-export interface CreateWxCloudBaseRunEnvRequest {
-  /**
-   * wx应用Id
-   */
-  WxAppId: string
-  /**
-   * 环境别名，要以a-z开头，不能包含 a-z,0-9,- 以外的字符
-   */
-  Alias?: string
-  /**
-   * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
-   */
-  FreeQuota?: string
-  /**
-   * 订单标记。建议使用方统一转大小写之后再判断。
-QuickStart：快速启动来源
-Activity：活动来源
-   */
-  Flag?: string
-  /**
-   * 私有网络Id
-   */
-  VpcId?: string
-  /**
-   * 子网列表
-   */
-  SubNetIds?: Array<string>
-  /**
-   * 是否打开云调用
-   */
-  IsOpenCloudInvoke?: boolean
-  /**
-   * 创建来源：wechat | cloud
-   */
-  Source?: string
-  /**
-   * 渠道：wechat | cloud
-   */
-  Channel?: string
-}
-
-/**
  * ModifyCloudBaseRunServerFlowConf请求参数结构体
  */
 export interface ModifyCloudBaseRunServerFlowConfRequest {
@@ -1788,16 +1614,6 @@ export interface DescribeActivityRecordResponse {
 }
 
 /**
- * DescribeCloudBaseRunVersionRsByCondition返回参数结构体
- */
-export interface DescribeCloudBaseRunVersionRsByConditionResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -1809,34 +1625,6 @@ export interface CreateStaticStoreRequest {
    * 是否启用统一域名
    */
   EnableUnion?: boolean
-}
-
-/**
- * CreateWxCloudBaseRunServerDBCluster请求参数结构体
- */
-export interface CreateWxCloudBaseRunServerDBClusterRequest {
-  /**
-   * 账户密码
-   */
-  AccountPassword: string
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 微信appid
-   */
-  WxAppId?: string
-  /**
-   * mysql内核版本，支持5.7,8.0
-   */
-  DbVersion?: string
-  /**
-   * 0: 大小写敏感
-1: 非大小写敏感
-默认为0
-   */
-  LowerCaseTableName?: string
 }
 
 /**
@@ -2077,17 +1865,29 @@ export interface BindEnvGatewayResponse {
 }
 
 /**
- * DescribeWxCloudBaseRunSubNets返回参数结构体
+ * DescribeWxGateways请求参数结构体
  */
-export interface DescribeWxCloudBaseRunSubNetsResponse {
+export interface DescribeWxGatewaysRequest {
   /**
-   * 子网Id列表
+   * 环境ID
    */
-  SubNetIds?: Array<string>
+  EnvId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 网关ID
    */
-  RequestId?: string
+  GatewayId?: string
+  /**
+   * 服务名称，精确匹配
+   */
+  GatewayName?: string
+  /**
+   * 分页参数
+   */
+  Limit?: number
+  /**
+   * 分页参数
+   */
+  Offset?: number
 }
 
 /**
@@ -2212,45 +2012,13 @@ export interface DestroyStaticStoreResponse {
 }
 
 /**
- * DescribeCloudBaseRunServer返回参数结构体
+ * BindEnvGateway请求参数结构体
  */
-export interface DescribeCloudBaseRunServerResponse {
+export interface BindEnvGatewayRequest {
   /**
-   * 个数
+   * 子环境id
    */
-  TotalCount?: number
-  /**
-   * 版本列表
-   */
-  VersionItems?: Array<CloudBaseRunServerVersionItem>
-  /**
-   * 服务名称
-   */
-  ServerName?: string
-  /**
-   * 是否对于外网开放
-   */
-  IsPublic?: boolean
-  /**
-   * 镜像仓库
-   */
-  ImageRepo?: string
-  /**
-   * 流量配置的类型（FLOW,URL_PARAMS)
-   */
-  TrafficType?: string
-  /**
-   * 服务创建类型，默认为空，一键部署为oneclick
-   */
-  SourceType?: string
-  /**
-   * 服务标签, function: 托管函数
-   */
-  Tag?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SubEnvId: string
 }
 
 /**
@@ -2312,17 +2080,21 @@ export interface ModifyCloudBaseRunServerFlowConfResponse {
 }
 
 /**
- * DescribeCloudBaseRunOperationTypes返回参数结构体
+ * DescribeDownloadFile返回参数结构体
  */
-export interface DescribeCloudBaseRunOperationTypesResponse {
+export interface DescribeDownloadFileResponse {
   /**
-   * 操作类型
+   * 文件路径，该字段已废弃
    */
-  Action?: Array<string>
+  FilePath?: string
   /**
-   * 服务名列表
+   * 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728#sse-c
    */
-  ServerName?: Array<string>
+  CustomKey?: string
+  /**
+   * 下载链接
+   */
+  DownloadUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2582,71 +2354,6 @@ export interface CodeSource {
 }
 
 /**
- * DescribeCloudBaseRunOneClickTaskExternal返回参数结构体
- */
-export interface DescribeCloudBaseRunOneClickTaskExternalResponse {
-  /**
-   * 外部任务Id
-   */
-  ExternalId?: string
-  /**
-   * 弃用
-   */
-  EnvId?: string
-  /**
-   * 用户uin
-   */
-  UserUin?: string
-  /**
-   * 服务名
-   */
-  ServerName?: string
-  /**
-   * 版本名
-   */
-  VersionName?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 当前阶段
-微信云托管环境创建阶段：envStage
-存储资源创建阶段：storageStage
-服务创建阶段：serverStage
-   */
-  Stage?: string
-  /**
-   * 状态
-running
-stopped
-failed
-finished
-   */
-  Status?: string
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-  /**
-   * 用户envId
-   */
-  UserEnvId?: string
-  /**
-   * 创建时间
-   */
-  StartTime?: string
-  /**
-   * 步骤信息
-   */
-  Steps?: Array<OneClickTaskStepInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeEnvs返回参数结构体
  */
 export interface DescribeEnvsResponse {
@@ -2748,24 +2455,6 @@ export interface DescribeActivityRecordRequest {
    * 根据是否软删除进行过滤，[0]未删除, [1] 删除，不传不过滤
    */
   IsDeletedList?: Array<number | bigint>
-}
-
-/**
- * CreateWxCloudBaseRunEnv返回参数结构体
- */
-export interface CreateWxCloudBaseRunEnvResponse {
-  /**
-   * 环境Id
-   */
-  EnvId?: string
-  /**
-   * 后付费订单号
-   */
-  TranId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2982,38 +2671,6 @@ export interface CreateCloudBaseRunServerVersionRequest {
    * 自动扩缩容策略组
    */
   PolicyDetail?: Array<HpaPolicy>
-}
-
-/**
- * DescribeCloudBaseRunServerDomainName请求参数结构体
- */
-export interface DescribeCloudBaseRunServerDomainNameRequest {
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 环境Id
-   */
-  UserEnvId: string
-  /**
-   * 用户Uin
-   */
-  UserUin: string
-  /**
-   * 外部Id
-   */
-  ExternalId: string
-}
-
-/**
- * DescribeCloudBaseRunAllVpcs请求参数结构体
- */
-export interface DescribeCloudBaseRunAllVpcsRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
 }
 
 /**
@@ -3275,32 +2932,6 @@ export interface DescribeWxGatewayRoutesRequest {
 }
 
 /**
- * DescribeWxGateways请求参数结构体
- */
-export interface DescribeWxGatewaysRequest {
-  /**
-   * 环境ID
-   */
-  EnvId?: string
-  /**
-   * 网关ID
-   */
-  GatewayId?: string
-  /**
-   * 服务名称，精确匹配
-   */
-  GatewayName?: string
-  /**
-   * 分页参数
-   */
-  Limit?: number
-  /**
-   * 分页参数
-   */
-  Offset?: number
-}
-
-/**
  * DescribeCloudBaseProjectVersionList返回参数结构体
  */
 export interface DescribeCloudBaseProjectVersionListResponse {
@@ -3553,9 +3184,9 @@ export interface CreateAndDeployCloudBaseProjectRequest {
 }
 
 /**
- * DescribeCloudBaseRunVersion请求参数结构体
+ * ModifyCloudBaseRunServerVersion请求参数结构体
  */
-export interface DescribeCloudBaseRunVersionRequest {
+export interface ModifyCloudBaseRunServerVersionRequest {
   /**
    * 环境ID
    */
@@ -3568,6 +3199,42 @@ export interface DescribeCloudBaseRunVersionRequest {
    * 版本名称
    */
   VersionName: string
+  /**
+   * 环境变量
+   */
+  EnvParams?: string
+  /**
+   * 最小副本数
+   */
+  MinNum?: string
+  /**
+   * 最大副本数
+   */
+  MaxNum?: string
+  /**
+   * 端口
+   */
+  ContainerPort?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 日志采集路径
+   */
+  CustomLogs?: string
+  /**
+   * 是否重设备注
+   */
+  IsResetRemark?: boolean
+  /**
+   * 修改基础信息
+   */
+  BasicModify?: boolean
+  /**
+   * 操作备注
+   */
+  OperatorRemark?: string
 }
 
 /**
@@ -3613,25 +3280,6 @@ export interface UnfreezeCloudBaseRunServersResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailServerList?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCloudBaseRunConfForGateWay返回参数结构体
- */
-export interface DescribeCloudBaseRunConfForGateWayResponse {
-  /**
-   * 最近更新时间
-   */
-  LastUpTime?: string
-  /**
-   * 配置信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<CloudBaseRunForGatewayConf>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3922,25 +3570,21 @@ export interface DescribeWxGatewaysResponse {
 }
 
 /**
- * DescribeDownloadFile返回参数结构体
+ * DescribeGatewayVersions请求参数结构体
  */
-export interface DescribeDownloadFileResponse {
+export interface DescribeGatewayVersionsRequest {
   /**
-   * 文件路径，该字段已废弃
+   * 环境id
    */
-  FilePath?: string
+  EnvId: string
   /**
-   * 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728#sse-c
+   * 网关id
    */
-  CustomKey?: string
+  GatewayId: string
   /**
-   * 下载链接
+   * 版本名
    */
-  DownloadUrl?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  VersionName?: string
 }
 
 /**
@@ -3981,20 +3625,6 @@ export interface DescribeSmsQuotasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeWxCloudBaseRunEnvs请求参数结构体
- */
-export interface DescribeWxCloudBaseRunEnvsRequest {
-  /**
-   * wx应用Id
-   */
-  WxAppId?: string
-  /**
-   * 是否查询全地域
-   */
-  AllRegions?: boolean
 }
 
 /**
@@ -4107,13 +3737,45 @@ export interface CloudBaseRunImageSecretInfo {
 }
 
 /**
- * BindEnvGateway请求参数结构体
+ * DescribeCloudBaseRunServer返回参数结构体
  */
-export interface BindEnvGatewayRequest {
+export interface DescribeCloudBaseRunServerResponse {
   /**
-   * 子环境id
+   * 个数
    */
-  SubEnvId: string
+  TotalCount?: number
+  /**
+   * 版本列表
+   */
+  VersionItems?: Array<CloudBaseRunServerVersionItem>
+  /**
+   * 服务名称
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+   */
+  IsPublic?: boolean
+  /**
+   * 镜像仓库
+   */
+  ImageRepo?: string
+  /**
+   * 流量配置的类型（FLOW,URL_PARAMS)
+   */
+  TrafficType?: string
+  /**
+   * 服务创建类型，默认为空，一键部署为oneclick
+   */
+  SourceType?: string
+  /**
+   * 服务标签, function: 托管函数
+   */
+  Tag?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4486,32 +4148,6 @@ export interface FreequotaInfo {
 }
 
 /**
- * pod信息
- */
-export interface CloudBaseRunVersionPod {
-  /**
-   * webshell链接
-   */
-  Webshell?: string
-  /**
-   * pod name
-   */
-  PodId?: string
-  /**
-   * pod ip
-   */
-  PodIp?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-}
-
-/**
  * DescribeUserActivityInfo返回参数结构体
  */
 export interface DescribeUserActivityInfoResponse {
@@ -4673,36 +4309,6 @@ export interface DescribeCloudBaseProjectLatestVersionListRequest {
    * ci的id
    */
   CiId?: string
-}
-
-/**
- * 云日志服务相关信息
- */
-export interface LogServiceInfo {
-  /**
-   * log名
-   */
-  LogsetName?: string
-  /**
-   * log-id
-   */
-  LogsetId?: string
-  /**
-   * topic名
-   */
-  TopicName?: string
-  /**
-   * topic-id
-   */
-  TopicId?: string
-  /**
-   * cls日志所属地域
-   */
-  Region?: string
-  /**
-   * topic保存时长 默认7天
-   */
-  Period?: number
 }
 
 /**
@@ -5124,24 +4730,6 @@ export interface CloudBaseCodeRepoDetail {
 export type CheckTcbServiceRequest = null
 
 /**
- * DescribeCloudBaseRunVersionRsByCondition请求参数结构体
- */
-export interface DescribeCloudBaseRunVersionRsByConditionRequest {
-  /**
-   * 环境ID；EnvId和ClusterId不能同时为空
-   */
-  EnvId?: string
-  /**
-   * 集群ID；EnvId和ClusterId不能同时为空
-   */
-  ClusterId?: string
-  /**
-   * 过滤网关服务开关
-   */
-  FilterGwSwitch?: boolean
-}
-
-/**
  * DescribeUserActivityInfo请求参数结构体
  */
 export interface DescribeUserActivityInfoRequest {
@@ -5189,40 +4777,6 @@ export interface DescribeCloudBaseRunVersionSnapshotResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeCloudBaseRunPodList请求参数结构体
- */
-export interface DescribeCloudBaseRunPodListRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
-  /**
-   * 服务名
-   */
-  ServerName: string
-  /**
-   * 版本名
-   */
-  VersionName: string
-  /**
-   * 分页限制
-   */
-  Limit?: number
-  /**
-   * 分页偏移量
-   */
-  Offset?: number
-  /**
-   * 容器状态
-   */
-  Status?: string
-  /**
-   * 容器名
-   */
-  PodName?: string
 }
 
 /**
@@ -5304,64 +4858,6 @@ export interface CloudRunServiceVolume {
    * 主机路径挂载信息
    */
   HostPath?: CloudBaseRunServiceVolumeHostPath
-}
-
-/**
- * 独立网关云托管服务配置信息
- */
-export interface CloudBaseRunForGatewayConf {
-  /**
-   * 是否缩容到0
-   */
-  IsZero: boolean
-  /**
-   * 按百分比灰度的权重
-   */
-  Weight: number
-  /**
-   * 按请求/header参数的灰度Key
-   */
-  GrayKey: string
-  /**
-   * 按请求/header参数的灰度Value
-   */
-  GrayValue: string
-  /**
-   * 是否为默认版本(按请求/header参数)
-   */
-  IsDefault: boolean
-  /**
-   * 访问权限，对应二进制分多段，vpc内网｜公网｜oa
-   */
-  AccessType: number
-  /**
-   * 访问的URL（域名＋路径）列表
-   */
-  URLs: Array<string>
-  /**
-   * 环境ID
-   */
-  EnvId?: string
-  /**
-   * 服务名称
-   */
-  ServerName?: string
-  /**
-   * 版本名称
-   */
-  VersionName?: string
-  /**
-   * 灰度类型：FLOW(权重), URL_PARAMS/HEAD_PARAMS
-   */
-  GrayType?: string
-  /**
-   * CLB的IP:Port
-   */
-  LbAddr?: string
-  /**
-   * 0:http访问服务配置信息, 1: 服务域名
-   */
-  ConfigType?: number
 }
 
 /**
@@ -5829,39 +5325,6 @@ export interface DescribePostpayPackageFreeQuotasResponse {
 }
 
 /**
- * 一键部署步骤信息
- */
-export interface OneClickTaskStepInfo {
-  /**
-   * 未启动："todo"
-运行中："running"
-失败："failed"
-成功结束："finished"
-   */
-  Status?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 耗时：秒
-   */
-  CostTime?: number
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-  /**
-   * 步骤名
-   */
-  Name?: string
-}
-
-/**
  * DescribeExtraPkgBillingInfo返回参数结构体
  */
 export interface DescribeExtraPkgBillingInfoResponse {
@@ -5891,201 +5354,4 @@ export interface CloudBaseCodeRepoName {
    * repo的完整全名
    */
   FullName?: string
-}
-
-/**
- * ModifyCloudBaseRunServerVersion请求参数结构体
- */
-export interface ModifyCloudBaseRunServerVersionRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 服务名称
-   */
-  ServerName: string
-  /**
-   * 版本名称
-   */
-  VersionName: string
-  /**
-   * 环境变量
-   */
-  EnvParams?: string
-  /**
-   * 最小副本数
-   */
-  MinNum?: string
-  /**
-   * 最大副本数
-   */
-  MaxNum?: string
-  /**
-   * 端口
-   */
-  ContainerPort?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 日志采集路径
-   */
-  CustomLogs?: string
-  /**
-   * 是否重设备注
-   */
-  IsResetRemark?: boolean
-  /**
-   * 修改基础信息
-   */
-  BasicModify?: boolean
-  /**
-   * 操作备注
-   */
-  OperatorRemark?: string
-}
-
-/**
- * RollUpdateCloudBaseRunServerVersion请求参数结构体
- */
-export interface RollUpdateCloudBaseRunServerVersionRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 要替换的版本名称，可以为latest
-   */
-  VersionName: string
-  /**
-   * 枚举（package/repository/image)
-   */
-  UploadType?: string
-  /**
-   * repository的类型(coding/gitlab/github)
-   */
-  RepositoryType?: string
-  /**
-   * 流量占比
-   */
-  FlowRatio?: number
-  /**
-   * dockerfile地址
-   */
-  DockerfilePath?: string
-  /**
-   * 构建目录
-   */
-  BuildDir?: string
-  /**
-   * Cpu的大小，单位：核
-   */
-  Cpu?: string
-  /**
-   * Mem的大小，单位：G
-   */
-  Mem?: string
-  /**
-   * 最小副本数，最小值：0
-   */
-  MinNum?: string
-  /**
-   * 最大副本数
-   */
-  MaxNum?: string
-  /**
-   * 策略类型
-cpu/mem
-   */
-  PolicyType?: string
-  /**
-   * 策略阈值
-   */
-  PolicyThreshold?: string
-  /**
-   * 环境变量
-   */
-  EnvParams?: string
-  /**
-   * 容器端口
-   */
-  ContainerPort?: number
-  /**
-   * 服务名称
-   */
-  ServerName?: string
-  /**
-   * repository地址
-   */
-  Repository?: string
-  /**
-   * 分支
-   */
-  Branch?: string
-  /**
-   * 版本备注
-   */
-  VersionRemark?: string
-  /**
-   * 代码包名字
-   */
-  PackageName?: string
-  /**
-   * 代码包版本
-   */
-  PackageVersion?: string
-  /**
-   * Image的详情
-   */
-  ImageInfo?: CloudBaseRunImageInfo
-  /**
-   * Github等拉取代码的详情
-   */
-  CodeDetail?: CloudBaseCodeRepoDetail
-  /**
-   * 是否回放流量
-   */
-  IsRebuild?: boolean
-  /**
-   * 延迟多长时间开始健康检查（单位s）
-   */
-  InitialDelaySeconds?: number
-  /**
-   * cfs挂载信息
-   */
-  MountVolumeInfo?: Array<CloudBaseRunVolumeMount>
-  /**
-   * 是否回滚
-   */
-  Rollback?: boolean
-  /**
-   * 版本历史名
-   */
-  SnapshotName?: string
-  /**
-   * 自定义采集路径
-   */
-  CustomLogs?: string
-  /**
-   * 是否启用统一域名
-   */
-  EnableUnion?: boolean
-  /**
-   * 操作备注
-   */
-  OperatorRemark?: string
-  /**
-   * 服务路径（只会第一次生效）
-   */
-  ServerPath?: string
-  /**
-   * 是否更新Cls
-   */
-  IsUpdateCls?: boolean
-  /**
-   * 自动扩缩容策略组
-   */
-  PolicyDetail?: Array<HpaPolicy>
 }

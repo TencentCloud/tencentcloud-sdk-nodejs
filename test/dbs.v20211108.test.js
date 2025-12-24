@@ -18,9 +18,19 @@ const client = new tencentcloud.dbs.v20211108.Client({
 })
 describe("dbs.v20211108.test.js", function () {
 
-it("dbs.v20211108.ConfigureBackupPlan", async function () {
+it("dbs.v20211108.CreateConnectTestJob", async function () {
     try {
-       const data = await client.ConfigureBackupPlan({})
+       const data = await client.CreateConnectTestJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbs.v20211108.StartBackupCheckJob", async function () {
+    try {
+       const data = await client.StartBackupCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,6 +48,26 @@ it("dbs.v20211108.StartBackupPlan", async function () {
     }
 })
 
+it("dbs.v20211108.DescribeBackupPlans", async function () {
+    try {
+       const data = await client.DescribeBackupPlans({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbs.v20211108.ConfigureBackupPlan", async function () {
+    try {
+       const data = await client.ConfigureBackupPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbs.v20211108.DescribeBackupCheckJob", async function () {
     try {
        const data = await client.DescribeBackupCheckJob({})
@@ -48,9 +78,9 @@ it("dbs.v20211108.DescribeBackupCheckJob", async function () {
     }
 })
 
-it("dbs.v20211108.CreateConnectTestJob", async function () {
+it("dbs.v20211108.CreateBackupPlan", async function () {
     try {
-       const data = await client.CreateConnectTestJob({})
+       const data = await client.CreateBackupPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +88,9 @@ it("dbs.v20211108.CreateConnectTestJob", async function () {
     }
 })
 
-it("dbs.v20211108.StartBackupCheckJob", async function () {
+it("dbs.v20211108.DescribeConnectTestResult", async function () {
     try {
-       const data = await client.StartBackupCheckJob({})
+       const data = await client.DescribeConnectTestResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

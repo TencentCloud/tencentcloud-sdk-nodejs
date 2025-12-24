@@ -96,7 +96,7 @@ import {
   TransitionTypeInfo,
   DeleteLivePadTemplateResponse,
   DomainCertInfo,
-  DeleteLiveSnapshotRuleResponse,
+  DescribePullTransformPushInfoListResponse,
   BandwidthInfo,
   LiveStreamMonitorOutputInfo,
   DeleteLiveTranscodeTemplateRequest,
@@ -290,6 +290,7 @@ import {
   DeleteLiveSnapshotTemplateRequest,
   DomainInfoList,
   CreateScreenshotTaskRequest,
+  DescribeAreaBillBandwidthAndFluxListResponse,
   DescribeCasterResponse,
   RecordTemplateInfo,
   ProIspPlayCodeDataInfo,
@@ -395,6 +396,7 @@ import {
   CreateLiveTimeShiftTemplateResponse,
   DeleteCasterOutputInfoResponse,
   DescribeLivePadRulesRequest,
+  DescribePullTransformPushInfoListRequest,
   DescribePullStreamConfigsResponse,
   DescribeTranscodeTaskNumRequest,
   DescribeLiveCallbackRulesResponse,
@@ -456,6 +458,7 @@ import {
   PlaySumStatInfo,
   DescribeDeliverBandwidthListRequest,
   DeleteAuditKeywordsResponse,
+  TurnPushInfo,
   RefererAuthConfig,
   TranscodeDetailInfo,
   DeleteCasterMarkWordInfoRequest,
@@ -486,7 +489,7 @@ import {
   DescribeLiveSnapshotTemplatesResponse,
   DescribeRecordTaskResponse,
   DescribeCasterPlayUrlRequest,
-  DescribeAreaBillBandwidthAndFluxListResponse,
+  DeleteLiveSnapshotRuleResponse,
   ForbidLiveDomainRequest,
   DescribeLiveTimeShiftWriteSizeInfoListResponse,
   DescribeCasterListResponse,
@@ -1608,14 +1611,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
-查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
-     */
-  async DescribeStreamPlayInfoList(
-    req: DescribeStreamPlayInfoListRequest,
-    cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void
-  ): Promise<DescribeStreamPlayInfoListResponse> {
-    return this.request("DescribeStreamPlayInfoList", req, cb)
+   * 查询拉流转推任务流数据统计信息。
+   */
+  async DescribePullTransformPushInfoList(
+    req: DescribePullTransformPushInfoListRequest,
+    cb?: (error: string, rep: DescribePullTransformPushInfoListResponse) => void
+  ): Promise<DescribePullTransformPushInfoListResponse> {
+    return this.request("DescribePullTransformPushInfoList", req, cb)
   }
 
   /**
@@ -2621,6 +2623,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CreatePullStreamConfigResponse) => void
   ): Promise<CreatePullStreamConfigResponse> {
     return this.request("CreatePullStreamConfig", req, cb)
+  }
+
+  /**
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
+     */
+  async DescribeStreamPlayInfoList(
+    req: DescribeStreamPlayInfoListRequest,
+    cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void
+  ): Promise<DescribeStreamPlayInfoListResponse> {
+    return this.request("DescribeStreamPlayInfoList", req, cb)
   }
 
   /**

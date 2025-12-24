@@ -958,6 +958,10 @@ export interface AudioResult {
    * ASR句子的起止时间
    */
   Sentences?: Array<Sentence>
+  /**
+   * 切片请求ID
+   */
+  RequestId?: string
 }
 
 /**
