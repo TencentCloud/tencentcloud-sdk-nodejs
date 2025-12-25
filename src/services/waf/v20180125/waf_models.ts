@@ -334,6 +334,28 @@ export interface GlobalSceneInfo {
 }
 
 /**
+ * 对象
+ */
+export interface Object {
+  /**
+   * 对象id
+   */
+  ObjectId?: string
+  /**
+   * 成员appid
+   */
+  MemberAppId?: number
+  /**
+   * 成员uin
+   */
+  MemberUin?: string
+  /**
+   * 成员昵称
+   */
+  MemberNickName?: string
+}
+
+/**
  * DescribePeakValue返回参数结构体
  */
 export interface DescribePeakValueResponse {
@@ -1551,6 +1573,28 @@ export interface DescribeBotUCBRuleRsp {
    * 规则总数
    */
   TotalCount?: number
+}
+
+/**
+ * ModifyObjects请求参数结构体
+ */
+export interface ModifyObjectsRequest {
+  /**
+   * 修改对象标识
+   */
+  ObjectId: Array<string>
+  /**
+   * 改动作类型:InstanceId绑定实例；UnbindInstance解绑实例。
+   */
+  OpType: string
+  /**
+   * 新的实例ID，如果和已绑定的实例相同认为修改成功
+   */
+  InstanceId?: string
+  /**
+   * 对象列表，仅跨账号接入使用
+   */
+  Objects?: Array<Object>
 }
 
 /**
@@ -8829,6 +8873,20 @@ export interface CreateAreaBanRuleResponse {
 }
 
 /**
+ * ModifyProtectionLevel请求参数结构体
+ */
+export interface ModifyProtectionLevelRequest {
+  /**
+   * 客户域名
+   */
+  Domain?: string
+  /**
+   * 防护等级,100,200,300
+   */
+  Level?: number
+}
+
+/**
  * GetAttackTotalCount请求参数结构体
  */
 export interface GetAttackTotalCountRequest {
@@ -14183,17 +14241,13 @@ export interface ModifyObjectResponse {
 }
 
 /**
- * ModifyProtectionLevel请求参数结构体
+ * ModifyObjects返回参数结构体
  */
-export interface ModifyProtectionLevelRequest {
+export interface ModifyObjectsResponse {
   /**
-   * 客户域名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain?: string
-  /**
-   * 防护等级,100,200,300
-   */
-  Level?: number
+  RequestId?: string
 }
 
 /**

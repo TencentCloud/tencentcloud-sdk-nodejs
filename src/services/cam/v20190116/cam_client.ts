@@ -102,6 +102,7 @@ import {
   CreatePolicyResponse,
   ListGroupsResponse,
   DetachRolePolicyRequest,
+  Tag,
   UntagRoleResponse,
   ListPoliciesGrantingServiceAccessResponse,
   DeleteRolePermissionsBoundaryRequest,

@@ -59,6 +59,7 @@ import {
   CreateNotebookSessionRequest,
   UnboundDatasourceHouseRequest,
   DeleteUserVpcConnectionResponse,
+  SetOptimizerPolicyRequest,
   UpdateDataEngineRequest,
   SmartOptimizerWrittenPolicy,
   DescribeSparkAppJobsRequest,
@@ -252,6 +253,7 @@ import {
   DataEngineInfo,
   DescribeSessionImageVersionResponse,
   LockMetaDataResponse,
+  SetOptimizerPolicyResponse,
   CreateUserRequest,
   AlterDMSDatabaseRequest,
   DescribeOtherCHDFSBindingListResponse,
@@ -2300,6 +2302,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSparkAppJobResponse) => void
   ): Promise<DescribeSparkAppJobResponse> {
     return this.request("DescribeSparkAppJob", req, cb)
+  }
+
+  /**
+   * 设置优化策略的接口
+   */
+  async SetOptimizerPolicy(
+    req: SetOptimizerPolicyRequest,
+    cb?: (error: string, rep: SetOptimizerPolicyResponse) => void
+  ): Promise<SetOptimizerPolicyResponse> {
+    return this.request("SetOptimizerPolicy", req, cb)
   }
 
   /**

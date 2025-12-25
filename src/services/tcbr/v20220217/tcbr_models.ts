@@ -429,19 +429,19 @@ export interface VersionPodInstance {
  */
 export interface DescribeVersionDetailRequest {
   /**
-   * 环境Id
+   * <p>环境Id</p>
    */
   EnvId: string
   /**
-   * 服务名
+   * <p>服务名</p>
    */
   ServerName: string
   /**
-   * 版本名
+   * <p>版本名</p>
    */
   VersionName: string
   /**
-   * channel
+   * <p>channel</p>
    */
   Channel?: string
 }
@@ -1813,81 +1813,86 @@ export interface UpdateCloudRunServerResponse {
  */
 export interface DescribeVersionDetailResponse {
   /**
-   * 版本名
+   * <p>版本名</p>
    */
   Name?: string
   /**
-   * 端口号
+   * <p>端口号</p>
    */
   Port?: number
   /**
-   * cpu 规格
+   * <p>cpu 规格</p>
    */
   Cpu?: number
   /**
-   * mem 规格
+   * <p>mem 规格</p>
    */
   Mem?: number
   /**
-   * 最小副本数
+   * <p>最小副本数</p>
    */
   MinNum?: number
   /**
-   * 最大副本数
+   * <p>最大副本数</p>
    */
   MaxNum?: number
   /**
-   * 扩缩容策略
+   * <p>扩缩容策略</p>
    */
   PolicyDetails?: Array<HpaPolicy>
   /**
-   * Dockerfile path
+   * <p>Dockerfile path</p>
    */
   Dockerfile?: string
   /**
-   * 目标目录
+   * <p>目标目录</p>
    */
   BuildDir?: string
   /**
-   * 环境变量
+   * <p>环境变量</p>
    */
   EnvParams?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdatedTime?: string
   /**
-   * 日志采集路径
+   * <p>日志采集路径</p>
    */
   LogPath?: string
   /**
-   * entryPoint
+   * <p>entryPoint</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EntryPoint?: string
   /**
-   * Cmd
+   * <p>Cmd</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cmd?: string
   /**
-   * vpc conf
+   * <p>vpc conf</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcConf?: VpcConf
   /**
-   * volume conf
+   * <p>volume conf</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumesConf?: Array<VolumeConf>
+  /**
+   * <p>buildpack 信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuildPacks?: BuildPacksInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

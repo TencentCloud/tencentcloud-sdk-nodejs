@@ -2726,6 +2726,10 @@ Changing  变更中
    * 对应备集群
    */
   SlaveInstances?: Array<string>
+  /**
+   * ccr服务部署节点ip
+   */
+  SyncerIp?: string
 }
 
 /**

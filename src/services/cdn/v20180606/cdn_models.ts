@@ -2261,6 +2261,27 @@ export interface DescribeHttpsPackagesRequest {
 }
 
 /**
+ * 防盗刷配置规则
+ */
+export interface FilterRules {
+  /**
+   * 封禁类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterType: string
+  /**
+   * 封禁规则类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleType: string
+  /**
+   * 封禁规则路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RulePaths: Array<string>
+}
+
+/**
  * DescribeTrafficPackages请求参数结构体
  */
 export interface DescribeTrafficPackagesRequest {
@@ -6250,6 +6271,11 @@ export interface AutoGuard {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Switch: string
+  /**
+   * 流量防盗刷配置规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterRules: Array<FilterRules>
 }
 
 /**

@@ -32,6 +32,7 @@ import {
   DescribeOwaspWhiteRulesResponse,
   DeleteRateLimitsV2Request,
   GlobalSceneInfo,
+  Object,
   DescribePeakValueResponse,
   ProductInfo,
   DescribeAntiLeakageItem,
@@ -77,6 +78,7 @@ import {
   ModifyAttackWhiteRuleRequest,
   HostRecord,
   DescribeBotUCBRuleRsp,
+  ModifyObjectsRequest,
   FreshAntiFakeUrlRequest,
   ModifyAreaBanStatusRequest,
   SpartaProtectionPort,
@@ -358,6 +360,7 @@ import {
   BatchDomainResult,
   ApiNameOp,
   CreateAreaBanRuleResponse,
+  ModifyProtectionLevelRequest,
   GetAttackTotalCountRequest,
   DeleteDomainWhiteRulesResponse,
   DescribeAttackOverviewResponse,
@@ -544,7 +547,7 @@ import {
   ModifyGenerateDealsRequest,
   ModifyDomainWhiteRuleResponse,
   ModifyObjectResponse,
-  ModifyProtectionLevelRequest,
+  ModifyObjectsResponse,
   ModifyAntiFakeUrlStatusResponse,
   DescribeOwaspRuleTypesResponse,
   ModifyInstanceElasticModeRequest,
@@ -913,6 +916,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyWafAutoDenyRulesResponse) => void
   ): Promise<ModifyWafAutoDenyRulesResponse> {
     return this.request("ModifyWafAutoDenyRules", req, cb)
+  }
+
+  /**
+   * 批量修改防护对象
+   */
+  async ModifyObjects(
+    req: ModifyObjectsRequest,
+    cb?: (error: string, rep: ModifyObjectsResponse) => void
+  ): Promise<ModifyObjectsResponse> {
+    return this.request("ModifyObjects", req, cb)
   }
 
   /**

@@ -93,6 +93,7 @@ import {
   DescribeCdnIpRequest,
   Ipv6,
   DescribeHttpsPackagesRequest,
+  FilterRules,
   DescribeTrafficPackagesRequest,
   StatusCodeCache,
   DescribeIpVisitResponse,

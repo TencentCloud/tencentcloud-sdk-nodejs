@@ -136,3 +136,35 @@ export interface CompleteApprovalResponse {
    */
   RequestId?: string
 }
+
+/**
+ * PutMessage返回参数结构体
+ */
+export interface PutMessageResponse {
+  /**
+   * <p>满足条件时生成的事件单id，不满足条件时为空</p>
+   */
+  TicketId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * PutMessage请求参数结构体
+ */
+export interface PutMessageRequest {
+  /**
+   * <p>事件ID</p>
+   */
+  EventId: string
+  /**
+   * <p>需要推送的事件数据内容，格式为json，字段定义需要与事件中的定义一致</p>
+   */
+  Data?: string
+  /**
+   * <p>数据推送来源，会在生成的单据中展示数据来源</p>
+   */
+  Source?: string
+}

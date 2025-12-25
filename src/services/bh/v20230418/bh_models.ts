@@ -3207,7 +3207,7 @@ export interface ModifyChangePwdTaskRequest {
  */
 export interface CreateAssetSyncJobRequest {
   /**
-   * 同步资产类别，1 - 主机资产, 2 - 数据库资产
+   * 同步资产类别，1 - 主机资产, 2 - 数据库资产，3-容器资产
    */
   Category: number
 }
@@ -3919,7 +3919,7 @@ export interface CreateDeviceAccountResponse {
  */
 export interface ExternalDevice {
   /**
-   * 操作系统名称，只能是Linux、Windows或MySQL
+   * 操作系统名称，只能是主机（Linux、Windows）、数据库（MySQL、SQL Server、MariaDB、PostgreSQL、MongoDBReplicaSet、MongoDBSharded、Redis）、容器（TKE、EKS）
    */
   OsName: string
   /**

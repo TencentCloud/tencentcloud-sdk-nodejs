@@ -680,7 +680,7 @@ export interface DescribeRewriteRequest {
  */
 export interface ModifyLoadBalancerAttributesResponse {
   /**
-   * 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。
+   * <p>切换负载均衡计费方式时，可用此参数查询切换任务是否成功。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealName?: string
@@ -1935,42 +1935,43 @@ export interface BatchRegisterTargetsResponse {
  */
 export interface ModifyLoadBalancerAttributesRequest {
   /**
-   * 负载均衡的唯一ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
+   * <p>负载均衡的唯一ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
    */
   LoadBalancerId: string
   /**
-   * 负载均衡实例名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。
+   * <p>负载均衡实例名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。</p>
    */
   LoadBalancerName?: string
   /**
-   * 设置负载均衡跨地域绑定1.0的后端服务信息
+   * <p>设置负载均衡跨地域绑定1.0的后端服务信息</p>
    */
   TargetRegionInfo?: TargetRegionInfo
   /**
-   * 网络计费相关参数
+   * <p>网络计费相关参数</p>
    */
   InternetChargeInfo?: InternetAccessible
   /**
-   * Target是否放通来自CLB的流量。
-开启放通（true）：只验证CLB上的安全组；
-不开启放通（false）：需同时验证CLB和后端实例上的安全组。
-不填则不修改。
+   * <p>Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。不填则不修改。</p>
    */
   LoadBalancerPassToTarget?: boolean
   /**
-   * 是否开启跨地域绑定2.0功能。不填则不修改。
+   * <p>不同计费模式之间的切换：0表示不切换，1表示预付费和后付费切换，2表示后付费之间切换。默认值：0</p>
+   */
+  SwitchFlag?: number
+  /**
+   * <p>是否开启跨地域绑定2.0功能。不填则不修改。</p>
    */
   SnatPro?: boolean
   /**
-   * 是否开启删除保护，不填则不修改。
+   * <p>是否开启删除保护，不填则不修改。</p>
    */
   DeleteProtect?: boolean
   /**
-   * 将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。
+   * <p>将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。</p>
    */
   ModifyClassicDomain?: boolean
   /**
-   * 关联的终端节点Id，可通过[DescribeVpcEndPoint](https://cloud.tencent.com/document/product/215/54679)接口查询。传空字符串代表解除关联。
+   * <p>关联的终端节点Id，可通过<a href="https://cloud.tencent.com/document/product/215/54679">DescribeVpcEndPoint</a>接口查询。传空字符串代表解除关联。</p>
    */
   AssociateEndpoint?: string
 }

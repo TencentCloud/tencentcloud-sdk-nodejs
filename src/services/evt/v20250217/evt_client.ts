@@ -25,6 +25,8 @@ import {
   DeleteRoleUserResponse,
   CreateRoleUserResponse,
   CompleteApprovalResponse,
+  PutMessageResponse,
+  PutMessageRequest,
 } from "./evt_models"
 
 /**
@@ -64,5 +66,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CompleteApprovalResponse) => void
   ): Promise<CompleteApprovalResponse> {
     return this.request("CompleteApproval", req, cb)
+  }
+
+  /**
+   * 推送事件数据
+   */
+  async PutMessage(
+    req: PutMessageRequest,
+    cb?: (error: string, rep: PutMessageResponse) => void
+  ): Promise<PutMessageResponse> {
+    return this.request("PutMessage", req, cb)
   }
 }

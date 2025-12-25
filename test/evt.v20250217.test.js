@@ -48,4 +48,14 @@ it("evt.v20250217.CompleteApproval", async function () {
     }
 })
 
+it("evt.v20250217.PutMessage", async function () {
+    try {
+       const data = await client.PutMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

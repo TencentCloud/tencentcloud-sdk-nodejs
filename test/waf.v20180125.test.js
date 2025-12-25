@@ -338,6 +338,16 @@ it("waf.v20180125.ModifyWafAutoDenyRules", async function () {
     }
 })
 
+it("waf.v20180125.ModifyObjects", async function () {
+    try {
+       const data = await client.ModifyObjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeUserDomainInfo", async function () {
     try {
        const data = await client.DescribeUserDomainInfo({})

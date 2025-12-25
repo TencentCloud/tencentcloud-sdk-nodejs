@@ -268,6 +268,10 @@ export interface DescribeAgentDutyTasksResponse {
    */
   TotalCount?: number
   /**
+   * 任务详细信息
+   */
+  DutyTasks?: Array<AgentDutyTask>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -497,6 +501,14 @@ export interface CreateAgentInstanceResponse {
  */
 export interface DescribeAgentDutyTasksRequest {
   /**
+   * agent实例ID
+   */
+  InstanceId: string
+  /**
+   * 会话ID
+   */
+  ChatId?: string
+  /**
    * 查询开始位置
    */
   Offset?: number
@@ -504,6 +516,22 @@ export interface DescribeAgentDutyTasksRequest {
    * 列表查询数量
    */
   Limit?: number
+  /**
+   * 任务启动时间
+   */
+  StartTime?: string
+  /**
+   * 任务结束时间
+   */
+  EndTime?: string
+  /**
+   * 任务类型
+   */
+  AgentTaskType?: string
+  /**
+   * 业务参数
+   */
+  Parameters?: Array<Parameter>
 }
 
 /**

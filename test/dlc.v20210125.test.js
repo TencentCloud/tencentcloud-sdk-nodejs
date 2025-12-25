@@ -1778,6 +1778,16 @@ it("dlc.v20210125.DescribeSparkAppJob", async function () {
     }
 })
 
+it("dlc.v20210125.SetOptimizerPolicy", async function () {
+    try {
+       const data = await client.SetOptimizerPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateDataEngine", async function () {
     try {
        const data = await client.CreateDataEngine({})
