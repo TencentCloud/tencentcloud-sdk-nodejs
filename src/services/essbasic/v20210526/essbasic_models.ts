@@ -197,8 +197,10 @@ export interface Component {
 <ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li>
 <li> <b>FontSize</b>： 范围6 :72</li>
 <li> <b>FontAlign</b>： Left/Right/Center，左对齐/居中/右对齐</li>
-<li> <b>FontColor</b>：字符串类型，格式为RGB颜色数字</li></ul>
-<b>参数样例</b>：`{"FontColor":"255,0,0","FontSize":12}`
+<li> <b>FontColor</b>：字符串类型，格式为RGB颜色数字</li>
+<li> <b>Bold</b>是否加粗：true/false</li>
+</ul>
+<b>参数样例</b>：`{"FontColor":"255,0,0","FontSize":12,"Bold":false}`
 
 <font color="red">ComponentType为DATE时</font>，支持以下参数：
 <ul><li> <b>Font</b>：目前只支持黑体、宋体、仿宋</li>
@@ -1575,7 +1577,7 @@ export interface BaseFlowInfo {
  - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。
 
 如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：
-(`ApproverNumber`, `ReleasedApproverRecipientId`这两个二选一), `OrganizationName`, `ApproverType`必传。</br>
+`ApproverNumber`, `OrganizationName`, `ApproverType`必传。</br>
 对于其他身份标识：
 - **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；
 - **非子客企业经办人**：Name、Mobile必传。
@@ -1593,8 +1595,7 @@ export interface ReleasedApprover {
    */
   ApproverType: string
   /**
-   * 签署人在原合同中的RecipientId，可以通过<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo" target="_blank">DescribeFlowDetailInfo</a>接口查看原流程中的签署人信息，可参考返回结构体<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#flowapproverdetail" target="_blank">FlowApproverDetail</a>中的RecipientId。
-   **注意**：当指定了此参数后，ApproverNumber即失效，会以本参数作为原合同参与人的选取。与ApproverNumber二选一。
+   * <font color="red">【已废弃】</font>请用ApproverNumber来指定替换的参与方的位置
    */
   ReleasedApproverRecipientId?: string
   /**

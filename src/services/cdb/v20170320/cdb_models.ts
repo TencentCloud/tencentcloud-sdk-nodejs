@@ -9543,7 +9543,7 @@ export interface CreateCloneInstanceRequest {
   SpecifiedRollbackTime?: string
   /**
    * 如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 [查询数据备份文件列表](/document/api/236/15842)。
-说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、集群版实例，备份文件为快照备份。
+说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、云盘版实例，备份文件为快照备份。
    */
   SpecifiedBackupId?: number
   /**
@@ -9595,7 +9595,7 @@ export interface CreateCloneInstanceRequest {
    */
   BackupZone?: string
   /**
-   * 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型。
+   * 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 云盘版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 云盘版加强型。不指定则默认为通用型。
    */
   DeviceType?: string
   /**
@@ -9627,7 +9627,7 @@ export interface CreateCloneInstanceRequest {
    */
   Period?: number
   /**
-   * 集群版节点拓扑配置。
+   * 云盘版节点拓扑配置。
    */
   ClusterTopology?: ClusterTopology
   /**
@@ -9638,6 +9638,10 @@ export interface CreateCloneInstanceRequest {
    * 异地数据备份id
    */
   SpecifiedSubBackupId?: number
+  /**
+   * 新产生的克隆实例主库的可用区信息，默认同源实例 Zone 的值。
+   */
+  MasterZone?: string
 }
 
 /**
@@ -9958,7 +9962,10 @@ export interface ReloadBalanceProxyNodeRequest {
    */
   ProxyGroupId: string
   /**
-   * 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。如果不传则会对所有代理组地址进行负载均衡。
+   * 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。
+说明：
+1. 对于双节点实例而言，此参数为非必填，如果不传则会对所有代理组地址进行负载均衡。
+2. 对于云盘版实例而言，此参数为必填。
    */
   ProxyAddressId?: string
 }
@@ -11154,19 +11161,19 @@ export interface DescribeDeviceMonitorInfoResponse {
   /**
    * 实例CPU监控数据
    */
-  Cpu: DeviceCpuInfo
+  Cpu?: DeviceCpuInfo
   /**
    * 实例内存监控数据
    */
-  Mem: DeviceMemInfo
+  Mem?: DeviceMemInfo
   /**
    * 实例网络监控数据
    */
-  Net: DeviceNetInfo
+  Net?: DeviceNetInfo
   /**
    * 实例磁盘监控数据
    */
-  Disk: DeviceDiskInfo
+  Disk?: DeviceDiskInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

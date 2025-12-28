@@ -778,6 +778,25 @@ export interface AdaptiveDynamicStreamingTemplate {
 }
 
 /**
+ * 智能成片结果信息
+ */
+export interface AiAnalysisTaskReelOutput {
+  /**
+   * 成片视频路径。
+   */
+  VideoPath?: string
+  /**
+   * 脚本文件路径
+
+   */
+  ScriptPath?: string
+  /**
+   * 成片视频存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
+}
+
+/**
  * 智能描述信息
  */
 export interface MediaAiAnalysisDescriptionItem {
@@ -1710,73 +1729,17 @@ track_channel： 表示使用音轨id和声道id；
 }
 
 /**
- * 转码信息
+ * 视频抠图结果信息
  */
-export interface MediaTranscodeItem {
+export interface AiAnalysisTaskCutoutOutput {
   /**
-   * 转码后文件的目标存储。
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 转码后的视频文件路径。
+   * 视频智能抠图文件路径。
    */
   Path?: string
   /**
-   * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。
+   * 视频智能抠图的存储位置。
    */
-  Definition?: number
-  /**
-   * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
-   */
-  Bitrate?: number
-  /**
-   * 视频流高度的最大值，单位：px。
-   */
-  Height?: number
-  /**
-   * 视频流宽度的最大值，单位：px。
-   */
-  Width?: number
-  /**
-   * 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
-   */
-  Size?: number
-  /**
-   * 视频时长，单位：秒。
-   */
-  Duration?: number
-  /**
-   * 容器类型，例如 m4a，mp4 等。
-   */
-  Container?: string
-  /**
-   * 视频的 md5 值。
-   */
-  Md5?: string
-  /**
-   * 音频流信息。
-   */
-  AudioStreamSet?: Array<MediaAudioStreamItem>
-  /**
-   * 视频流信息。
-   */
-  VideoStreamSet?: Array<MediaVideoStreamItem>
-  /**
-   * 视频转码使用增强项说明，增强项解释
-<li>hdr：HDR配置</li>
-<li>wd_fps：插帧帧率配置</li>
-<li>video_super_resolution：	超分配置</li>
-<li>repair：综合增强配置</li>
-<li>denoise：视频降噪配置</li>
-<li>color_enhance：色彩增强配置</li>
-<li>scratch：去划痕配置</li>
-<li>artifact：去伪影（毛刺）配置</li>
-<li>sharp：细节增强配置</li>
-<li>low_light：低光照增强配置</li>
-<li>face_enhance：人脸增强配置</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CallBackExtInfo?: string
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -2598,6 +2561,76 @@ export interface SRTFECFullOptions {
    * FEC 数据包 Layout 组织形式，取值 "even", "staircase"
    */
   Layout?: string
+}
+
+/**
+ * 转码信息
+ */
+export interface MediaTranscodeItem {
+  /**
+   * 转码后文件的目标存储。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 转码后的视频文件路径。
+   */
+  Path?: string
+  /**
+   * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。
+   */
+  Definition?: number
+  /**
+   * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
+   */
+  Bitrate?: number
+  /**
+   * 视频流高度的最大值，单位：px。
+   */
+  Height?: number
+  /**
+   * 视频流宽度的最大值，单位：px。
+   */
+  Width?: number
+  /**
+   * 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
+   */
+  Size?: number
+  /**
+   * 视频时长，单位：秒。
+   */
+  Duration?: number
+  /**
+   * 容器类型，例如 m4a，mp4 等。
+   */
+  Container?: string
+  /**
+   * 视频的 md5 值。
+   */
+  Md5?: string
+  /**
+   * 音频流信息。
+   */
+  AudioStreamSet?: Array<MediaAudioStreamItem>
+  /**
+   * 视频流信息。
+   */
+  VideoStreamSet?: Array<MediaVideoStreamItem>
+  /**
+   * 视频转码使用增强项说明，增强项解释
+<li>hdr：HDR配置</li>
+<li>wd_fps：插帧帧率配置</li>
+<li>video_super_resolution：	超分配置</li>
+<li>repair：综合增强配置</li>
+<li>denoise：视频降噪配置</li>
+<li>color_enhance：色彩增强配置</li>
+<li>scratch：去划痕配置</li>
+<li>artifact：去伪影（毛刺）配置</li>
+<li>sharp：细节增强配置</li>
+<li>low_light：低光照增强配置</li>
+<li>face_enhance：人脸增强配置</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CallBackExtInfo?: string
 }
 
 /**
@@ -3636,6 +3669,16 @@ export interface CreateQualityControlTemplateResponse {
 }
 
 /**
+ * 智能成片任务输入类型
+ */
+export interface AiAnalysisTaskReelInput {
+  /**
+   * 智能成片模板 ID。
+   */
+  Definition?: number
+}
+
+/**
  * 质检异常项。
  */
 export interface QualityControlResult {
@@ -3877,31 +3920,17 @@ export interface CosInputInfo {
 }
 
 /**
- * DescribeBlindWatermarkTemplates请求参数结构体
+ * CreateSchedule返回参数结构体
  */
-export interface DescribeBlindWatermarkTemplatesRequest {
+export interface CreateScheduleResponse {
   /**
-   * 数字水印模板唯一标识过滤条件，数组长度限制：100。
+   * 编排 ID。
    */
-  Definitions?: Array<number | bigint>
+  ScheduleId?: number
   /**
-   * 数字水印模板标识过滤条件，长度限制：64 个字符。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：Nagra取证水印；</li>
-   */
-  Type?: string
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数
-<li>默认值：10；</li>
-<li>最大值：100。</li>
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -5977,17 +6006,13 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
 }
 
 /**
- * DescribeStreamLinkFlow返回参数结构体
+ * 智能抠图任务输入类型
  */
-export interface DescribeStreamLinkFlowResponse {
+export interface AiAnalysisTaskCutoutInput {
   /**
-   * 流的配置信息。
+   * 视频智能抠图模板 ID。
    */
-  Info?: DescribeFlow
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Definition: number
 }
 
 /**
@@ -6275,6 +6300,34 @@ export interface EditMediaRequest {
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
   SessionContext?: string
+}
+
+/**
+ * DescribeBlindWatermarkTemplates请求参数结构体
+ */
+export interface DescribeBlindWatermarkTemplatesRequest {
+  /**
+   * 数字水印模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 数字水印模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：Nagra取证水印；</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+   */
+  Limit?: number
 }
 
 /**
@@ -9153,7 +9206,6 @@ ASR识别和纯字幕翻译当前支持以下语言：
 `iw`：希伯来语
 `ja`：日语
 `jv`：爪哇语
-`jw`：爪哇语
 `ka`：格鲁吉亚语
 `kk`：哈萨克语
 `km`：高棉语
@@ -9240,7 +9292,6 @@ ASR识别和纯字幕翻译当前支持以下语言：
 `th`：泰语
 `ti`：提格里尼亚语
 `tk`：土库曼语
-`tl`：菲律宾语（塔加拉语）
 `tn`：茨瓦纳语
 `tr`：土耳其语
 `ts`：聪加语
@@ -9281,6 +9332,11 @@ ASR识别和纯字幕翻译当前支持以下语言：
 **注意**：不传的情况下默认类型为 ASR识别字幕
    */
   ProcessType?: number
+  /**
+   * 字幕OCR提取框选区域配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig
 }
 
 /**
@@ -11825,6 +11881,8 @@ export interface AiAnalysisResult {
 <li>Dubbing：智能译制</li>
 <li>VideoRemake: 视频去重</li>
 <li>VideoComprehension: 视频（音频）理解</li>
+<li>Cutout：视频抠图</li>
+<li>Reel：智能成片</li>
    */
   Type?: string
   /**
@@ -11892,6 +11950,16 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoComprehensionTask?: AiAnalysisTaskVideoComprehensionResult
+  /**
+   * 视频内容分析抠图任务的查询结果，当任务类型为Cutout时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CutoutTask?: AiAnalysisTaskCutoutResult
+  /**
+   * 视频内容分析成片任务的查询结果，当任务类型为Reel时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReelTask?: AiAnalysisTaskReelResult
 }
 
 /**
@@ -11950,20 +12018,6 @@ export interface ImageWatermarkInputForUpdate {
 <li>repeat：水印循环播放，直到视频结束。</li>
    */
   RepeatType?: string
-}
-
-/**
- * CreateSchedule返回参数结构体
- */
-export interface CreateScheduleResponse {
-  /**
-   * 编排 ID。
-   */
-  ScheduleId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -12042,6 +12096,53 @@ export interface UpdateSmartErasePrivacyConfig {
 - plate 车牌
    */
   PrivacyTargets?: Array<string>
+}
+
+/**
+ * 智能成片结果类型
+ */
+export interface AiAnalysisTaskReelResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，0：成功，其他值：失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 智能成片任务输入。
+   */
+  Input?: AiAnalysisTaskReelInput
+  /**
+   * 智能成片任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskReelOutput
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCodeExt?: string
+  /**
+   * 任务进度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
+  /**
+   * 任务开始执行的时间，采用 ISO 日期格式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 ISO 日期格式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -14536,7 +14637,7 @@ export interface SmartSubtitleTemplateItem {
    * 智能字幕文件格式
 - vtt: WebVTT 格式
 - srt: SRT格式
-- original：与源字幕文件一致（用于纯字幕翻译模版）
+- original：与源字幕文件一致（用于纯字幕翻译模板）
 - 不填或填空：不生成字幕文件
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -14604,8 +14705,14 @@ OFF: 关闭翻译
    * 字幕处理类型：
 - 0：ASR识别字幕
 - 1：纯字幕翻译
+- 2:  OCR识别字幕
    */
   ProcessType?: number
+  /**
+   * 字幕OCR提取框选区域配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig
 }
 
 /**
@@ -17235,6 +17342,25 @@ export interface AiReviewTaskPoliticalResult {
 }
 
 /**
+ * 字幕OCR提取框选区域配置
+ */
+export interface SelectingSubtitleAreasConfig {
+  /**
+   * 自动选择自定义区域。
+对选定区域，利用AI模型自动检测其中存在的选择目标并提取。
+   */
+  AutoAreas?: Array<EraseArea>
+  /**
+   * 示例视频或图片的宽，单位像素值
+   */
+  SampleWidth?: number
+  /**
+   * 示例视频或图片的高，单位像素值
+   */
+  SampleHeight?: number
+}
+
+/**
  * 美颜效果配置项
  */
 export interface BeautyEffectItemConfig {
@@ -17870,18 +17996,17 @@ export interface CreateTranscodeTemplateResponse {
 }
 
 /**
- * 媒体质检检测策略。
+ * DescribeStreamLinkFlow返回参数结构体
  */
-export interface QualityControlStrategy {
+export interface DescribeStreamLinkFlowResponse {
   /**
-   * 策略类型。取值：
-- TimeSpotCheck
+   * 流的配置信息。
    */
-  StrategyType?: string
+  Info?: DescribeFlow
   /**
-   * 根据时间的抽检策略。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TimeSpotCheck?: TimeSpotCheck
+  RequestId?: string
 }
 
 /**
@@ -19743,6 +19868,21 @@ export interface FlowMediaAudio {
    * 标志同一次推流。
    */
   SessionId: string
+}
+
+/**
+ * 媒体质检检测策略。
+ */
+export interface QualityControlStrategy {
+  /**
+   * 策略类型。取值：
+- TimeSpotCheck
+   */
+  StrategyType?: string
+  /**
+   * 根据时间的抽检策略。
+   */
+  TimeSpotCheck?: TimeSpotCheck
 }
 
 /**
@@ -23068,6 +23208,45 @@ export interface HighlightSegmentItem {
    * 集锦概要。
    */
   Summary?: string
+}
+
+/**
+ * 视频抠图结果数据结构
+ */
+export interface AiAnalysisTaskCutoutResult {
+  /**
+   * 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息
+   */
+  Message?: string
+  /**
+   * 抠图任务输入
+   */
+  Input?: AiAnalysisTaskCutoutInput
+  /**
+   * 抠图任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskCutoutOutput
+  /**
+   * 任务进度
+   */
+  Progress?: number
+  /**
+   * 任务开始执行的时间，采用 ISO 日期格式。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务结束执行的时间，采用 ISO 日期格式。
+   */
+  FinishTime?: string
 }
 
 /**

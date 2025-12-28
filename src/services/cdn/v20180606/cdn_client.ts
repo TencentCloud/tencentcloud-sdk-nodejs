@@ -54,7 +54,6 @@ import {
   AccessControl,
   DescribeCdnOriginIpResponse,
   DescribePayTypeResponse,
-  ForceRedirect,
   PathRule,
   ListTopDataRequest,
   ListClsTopicDomainsRequest,
@@ -78,8 +77,6 @@ import {
   TopDetailDataMore,
   TopicInfo,
   DescribeDomainsConfigResponse,
-  DescribeDiagnoseReportRequest,
-  ResourceBillingData,
   BriefDomain,
   TimestampData,
   TpgAdapter,
@@ -153,12 +150,11 @@ import {
   VerifyDomainRecordResponse,
   ManageClsTopicDomainsRequest,
   AddCLSTopicDomainsRequest,
-  ListDiagnoseReportRequest,
   UrlRedirectRule,
   Quota,
   PostSize,
   Cache,
-  DiagnoseData,
+  ForceRedirect,
   DescribeOriginDataRequest,
   FollowRedirect,
   ViolationUrl,
@@ -173,7 +169,7 @@ import {
   DescribeUrlViolationsRequest,
   RefererRule,
   IpFreqLimit,
-  CreateDiagnoseUrlResponse,
+  CreateEdgePackTaskRequest,
   CreateClsLogTopicRequest,
   UpdatePayTypeResponse,
   RequestHeader,
@@ -192,7 +188,6 @@ import {
   ClientCert,
   DomainLog,
   DescribeEdgePackTaskStatusRequest,
-  CreateDiagnoseUrlRequest,
   PurgeUrlsCacheResponse,
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
@@ -222,7 +217,6 @@ import {
   ClsLogObject,
   RegionMapRelation,
   PurgePathCacheRequest,
-  DescribeDiagnoseReportResponse,
   ModifyDomainConfigResponse,
   Quic,
   CdnData,
@@ -239,7 +233,6 @@ import {
   ResponseHeaderCache,
   EdgePackTaskStatus,
   Sort,
-  ClientInfo,
   DescribePurgeTasksRequest,
   HwPrivateAccess,
   CacheConfig,
@@ -251,7 +244,7 @@ import {
   UpdateDomainConfigResponse,
   OssPrivateAccess,
   LogSetInfo,
-  ListDiagnoseReportResponse,
+  ResourceBillingData,
   SearchClsLogRequest,
   AdvanceConfig,
   AwsPrivateAccess,
@@ -264,8 +257,6 @@ import {
   DescribeUrlViolationsResponse,
   IpFilter,
   UpdatePayTypeRequest,
-  DiagnoseUnit,
-  DiagnoseInfo,
   DescribePurgeTasksResponse,
   OriginAuthentication,
   ErrorPageRule,
@@ -283,10 +274,8 @@ import {
   DescribeTopDataResponse,
   DescribeDomainsRequest,
   OfflineCache,
-  CreateEdgePackTaskRequest,
   StopCdnDomainResponse,
   TopDataMore,
-  DiagnoseList,
   HTTPHeader,
   IpFilterPathRule,
 } from "./cdn_models"
@@ -497,19 +486,6 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
   }
 
   /**
-     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
-
-### <font color=red>**该接口已废弃** </font><br>
-CreateDiagnoseUrl 用于添加域名诊断任务URL。
-     */
-  async CreateDiagnoseUrl(
-    req: CreateDiagnoseUrlRequest,
-    cb?: (error: string, rep: CreateDiagnoseUrlResponse) => void
-  ): Promise<CreateDiagnoseUrlResponse> {
-    return this.request("CreateDiagnoseUrl", req, cb)
-  }
-
-  /**
    * StartCdnDomain 用于启用已停用域名的加速服务
    */
   async StartCdnDomain(
@@ -530,16 +506,6 @@ CreateDiagnoseUrl 用于添加域名诊断任务URL。
   }
 
   /**
-   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
-   */
-  async DescribeCertDomains(
-    req: DescribeCertDomainsRequest,
-    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
-  ): Promise<DescribeCertDomainsResponse> {
-    return this.request("DescribeCertDomains", req, cb)
-  }
-
-  /**
    * 通过CLS日志计算Top信息。支持近7天的日志数据。
    */
   async ListTopClsLogData(
@@ -547,19 +513,6 @@ CreateDiagnoseUrl 用于添加域名诊断任务URL。
     cb?: (error: string, rep: ListTopClsLogDataResponse) => void
   ): Promise<ListTopClsLogDataResponse> {
     return this.request("ListTopClsLogData", req, cb)
-  }
-
-  /**
-     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
-
-### <font color=red>**该接口已废弃** </font><br>
-ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
-     */
-  async ListDiagnoseReport(
-    req: ListDiagnoseReportRequest,
-    cb?: (error: string, rep: ListDiagnoseReportResponse) => void
-  ): Promise<ListDiagnoseReportResponse> {
-    return this.request("ListDiagnoseReport", req, cb)
   }
 
   /**
@@ -757,16 +710,13 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
   }
 
   /**
-     * 以上诊断报告, 域名版本管理相关接口功能均废弃,  已确认现网0调用, 申请预下线,(预下线不会影响调用, 只会在接口中添加提示信息, 正式下线仍需人工确认)
-
-### <font color=red>**该接口已废弃** </font><br>
-DescribeDiagnoseReport 用于获取指定报告id的内容。
-     */
-  async DescribeDiagnoseReport(
-    req: DescribeDiagnoseReportRequest,
-    cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
-  ): Promise<DescribeDiagnoseReportResponse> {
-    return this.request("DescribeDiagnoseReport", req, cb)
+   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+   */
+  async DescribeCertDomains(
+    req: DescribeCertDomainsRequest,
+    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
+  ): Promise<DescribeCertDomainsResponse> {
+    return this.request("DescribeCertDomains", req, cb)
   }
 
   /**

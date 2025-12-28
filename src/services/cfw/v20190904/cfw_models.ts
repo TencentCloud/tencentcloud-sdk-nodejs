@@ -852,21 +852,21 @@ export interface DeleteBlockIgnoreRuleNewResponse {
 }
 
 /**
- * DeleteAllAccessControlRule请求参数结构体
+ * DescribeEnterpriseSGRuleProgress返回参数结构体
  */
-export interface DeleteAllAccessControlRuleRequest {
+export interface DescribeEnterpriseSGRuleProgressResponse {
   /**
-   * 方向，0：出站，1：入站  默认值是 0
+   * 0-100，代表下发进度百分比
    */
-  Direction?: number
+  Progress?: number
   /**
-   * VPC间防火墙开关ID  全部删除 EdgeId和Area只填写一个，不填写则不删除vpc间防火墙开关 ，默认值为‘’
+   * 是否用户中止 用户中止返回true
    */
-  EdgeId?: string
+  UserStopped?: boolean
   /**
-   * nat地域 全部删除 EdgeId和Area只填写一个，不填写则不删除nat防火墙开关 默认值为‘’
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Area?: string
+  RequestId?: string
 }
 
 /**
@@ -5389,41 +5389,37 @@ export interface UnHandleEvent {
 }
 
 /**
- * DescribeAssociatedInstanceList请求参数结构体
+ * DescribeBlockIgnoreList返回参数结构体
  */
-export interface DescribeAssociatedInstanceListRequest {
+export interface DescribeBlockIgnoreListResponse {
   /**
-   * 列表偏移量
+   * 列表数据
    */
-  Offset: number
+  Data?: Array<BlockIgnoreRule>
   /**
-   * 每页记录条数
+   * 查询结果总数，用于分页
    */
-  Limit: number
+  Total?: number
   /**
-   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
+   * 状态值，0：查询成功，非0：查询失败
    */
-  Area: string
+  ReturnCode?: number
   /**
-   * 额外检索条件（JSON字符串）
+   * 状态信息，success：查询成功，fail：查询失败
    */
-  SearchValue?: string
+  ReturnMsg?: string
   /**
-   * 排序字段
+   * 安全事件来源下拉框
    */
-  By?: string
+  SourceList?: Array<string>
   /**
-   * 排序方式（asc:升序,desc:降序）
+   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
    */
-  Order?: string
+  RuleTypeDataList?: Array<number | bigint>
   /**
-   * 安全组ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SecurityGroupId?: string
-  /**
-   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -5500,24 +5496,6 @@ export interface DeleteAcRuleRequest {
    * NAT地域， 如ap-shanghai/ap-guangzhou/ap-chongqing等
    */
   Area?: string
-}
-
-/**
- * DeleteAllAccessControlRule返回参数结构体
- */
-export interface DeleteAllAccessControlRuleResponse {
-  /**
-   * 状态值 0: 修改成功, 非0: 修改失败
-   */
-  Status?: number
-  /**
-   * 删除了几条访问控制规则
-   */
-  Info?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7287,24 +7265,6 @@ export interface CreateAcRulesResponse {
 }
 
 /**
- * DescribeEnterpriseSGRuleProgress返回参数结构体
- */
-export interface DescribeEnterpriseSGRuleProgressResponse {
-  /**
-   * 0-100，代表下发进度百分比
-   */
-  Progress?: number
-  /**
-   * 是否用户中止 用户中止返回true
-   */
-  UserStopped?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ID NAME 组合
  */
 export interface CommonIdName {
@@ -7706,37 +7666,41 @@ export interface DescNatDnatRule {
 }
 
 /**
- * DescribeBlockIgnoreList返回参数结构体
+ * DescribeAssociatedInstanceList请求参数结构体
  */
-export interface DescribeBlockIgnoreListResponse {
+export interface DescribeAssociatedInstanceListRequest {
   /**
-   * 列表数据
+   * 列表偏移量
    */
-  Data?: Array<BlockIgnoreRule>
+  Offset: number
   /**
-   * 查询结果总数，用于分页
+   * 每页记录条数
    */
-  Total?: number
+  Limit: number
   /**
-   * 状态值，0：查询成功，非0：查询失败
+   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
    */
-  ReturnCode?: number
+  Area: string
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * 额外检索条件（JSON字符串）
    */
-  ReturnMsg?: string
+  SearchValue?: string
   /**
-   * 安全事件来源下拉框
+   * 排序字段
    */
-  SourceList?: Array<string>
+  By?: string
   /**
-   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
+   * 排序方式（asc:升序,desc:降序）
    */
-  RuleTypeDataList?: Array<number | bigint>
+  Order?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 安全组ID
    */
-  RequestId?: string
+  SecurityGroupId?: string
+  /**
+   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
+   */
+  Type?: string
 }
 
 /**

@@ -378,9 +378,9 @@ it("clb.v20180317.ModifyBlockIPList", async function () {
     }
 })
 
-it("clb.v20180317.DescribeRewrite", async function () {
+it("clb.v20180317.RenewLoadBalancers", async function () {
     try {
-       const data = await client.DescribeRewrite({})
+       const data = await client.RenewLoadBalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +601,16 @@ it("clb.v20180317.DescribeTaskStatus", async function () {
 it("clb.v20180317.DescribeTargetGroupList", async function () {
     try {
        const data = await client.DescribeTargetGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeRewrite", async function () {
+    try {
+       const data = await client.DescribeRewrite({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

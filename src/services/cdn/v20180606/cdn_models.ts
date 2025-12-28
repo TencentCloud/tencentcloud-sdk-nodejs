@@ -993,37 +993,6 @@ bandwidth_sep：动静分离带宽计费
 }
 
 /**
- * 访问协议强制跳转配置，默认为关闭状态
- */
-export interface ForceRedirect {
-  /**
-   * 访问强制跳转配置开关，取值有：
-on：开启
-off：关闭
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Switch: string
-  /**
-   * 访问强制跳转类型
-http：强制 http 跳转
-https：强制 https 跳转
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RedirectType?: string
-  /**
-   * 强制跳转时返回状态码 
-支持 301、302、307、308
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RedirectStatusCode?: number
-  /**
-   * 强制跳转时是否返回增加的头部。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CarryHeaders?: string
-}
-
-/**
  * 分路径回源配置规则。
  */
 export interface PathRule {
@@ -1810,34 +1779,6 @@ export interface DescribeDomainsConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeDiagnoseReport请求参数结构体
- */
-export interface DescribeDiagnoseReportRequest {
-  /**
-   * 报告ID
-   */
-  ReportId: string
-}
-
-/**
- * 计费数据明细
- */
-export interface ResourceBillingData {
-  /**
-   * 资源名称，根据查询条件不同分为以下几类：
-某一个具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-某一个项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度数据明细
-   */
-  Resource?: string
-  /**
-   * 计费数据详情
-   */
-  BillingData?: Array<CdnData>
 }
 
 /**
@@ -4547,24 +4488,6 @@ export interface AddCLSTopicDomainsRequest {
 }
 
 /**
- * ListDiagnoseReport请求参数结构体
- */
-export interface ListDiagnoseReportRequest {
-  /**
-   * 用于搜索诊断URL的关键字，不填时返回用户所有的诊断任务。
-   */
-  KeyWords?: string
-  /**
-   * 用于搜索诊断系统返回的诊断链接，形如：http://cdn.cloud.tencent.com/self_diagnose/xxxxx
-   */
-  DiagnoseLink?: string
-  /**
-   * 请求源带协议头，形如：https://console.cloud.tencent.com
-   */
-  Origin?: string
-}
-
-/**
  * Url重定向规则配置
  */
 export interface UrlRedirectRule {
@@ -4660,22 +4583,34 @@ export interface Cache {
 }
 
 /**
- * 诊断报告内容数据
+ * 访问协议强制跳转配置，默认为关闭状态
  */
-export interface DiagnoseData {
+export interface ForceRedirect {
   /**
-   * 诊断报告内容
+   * 访问强制跳转配置开关，取值有：
+on：开启
+off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<DiagnoseUnit>
+  Switch: string
   /**
-   * 当前诊断项是否正常。
-"ok"：正常
-"error"：异常
-"warning"："警告"
+   * 访问强制跳转类型
+http：强制 http 跳转
+https：强制 https 跳转
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  RedirectType?: string
+  /**
+   * 强制跳转时返回状态码 
+支持 301、302、307、308
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedirectStatusCode?: number
+  /**
+   * 强制跳转时是否返回增加的头部。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CarryHeaders?: string
 }
 
 /**
@@ -5242,17 +5177,25 @@ off：关闭
 }
 
 /**
- * CreateDiagnoseUrl返回参数结构体
+ * CreateEdgePackTask请求参数结构体
  */
-export interface CreateDiagnoseUrlResponse {
+export interface CreateEdgePackTaskRequest {
   /**
-   * 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。
+   * apk 所在的 cos 存储桶, 如 edgepack-xxxxxxxx
    */
-  DiagnoseLink?: string
+  CosBucket: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * apk 源文件的存储路径, 如 /apk/xxxx.apk
    */
-  RequestId?: string
+  CosUriFrom: string
+  /**
+   * BlockID 的值, WALLE为1903654775(0x71777777)，VasDolly为2282837503(0x881155ff),传0或不传时默认为 WALLE 方案
+   */
+  BlockID?: number
+  /**
+   * 拓展之后的 apk 目标存储路径,如 /out/xxxx.apk
+   */
+  CosUriTo?: string
 }
 
 /**
@@ -5682,20 +5625,6 @@ export interface DescribeEdgePackTaskStatusRequest {
    * 查询条件过滤器
    */
   Filters?: Array<EdgePackTaskFilter>
-}
-
-/**
- * CreateDiagnoseUrl请求参数结构体
- */
-export interface CreateDiagnoseUrlRequest {
-  /**
-   * 需诊断的url，形如：http://www.test.com/test.txt。
-   */
-  Url: string
-  /**
-   * 请求源带协议头，形如：https://console.cloud.tencent.com
-   */
-  Origin?: string
 }
 
 /**
@@ -6441,52 +6370,6 @@ delete：刷新全部资源
 }
 
 /**
- * DescribeDiagnoseReport返回参数结构体
- */
-export interface DescribeDiagnoseReportResponse {
-  /**
-   * 诊断报告基础信息
-   */
-  BaskInfo?: DiagnoseData
-  /**
-   * CNAME检测信息
-   */
-  CnameInfo?: DiagnoseData
-  /**
-   * 客户端检测信息
-   */
-  ClientInfo?: DiagnoseData
-  /**
-   * DNS检测信息
-   */
-  DnsInfo?: DiagnoseData
-  /**
-   * 网络检测信息
-   */
-  NetworkInfo?: DiagnoseData
-  /**
-   * 边缘节点检测信息
-   */
-  OcNodeInfo?: DiagnoseData
-  /**
-   * 中间源节点检测信息
-   */
-  MidNodeInfo?: DiagnoseData
-  /**
-   * 源站检测信息
-   */
-  OriginInfo?: DiagnoseData
-  /**
-   * 刷新检测信息
-   */
-  PurgeInfo?: DiagnoseData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyDomainConfig返回参数结构体
  */
 export interface ModifyDomainConfigResponse {
@@ -6751,32 +6634,6 @@ certExpireTime，证书过期时间
    * asc/desc，默认desc。
    */
   Sequence?: string
-}
-
-/**
- * 客户端信息
- */
-export interface ClientInfo {
-  /**
-   * 省份。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProvName?: string
-  /**
-   * 国家。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Country?: string
-  /**
-   * 运营商。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IspName?: string
-  /**
-   * 客户端IP
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ip?: string
 }
 
 /**
@@ -7062,17 +6919,21 @@ export interface LogSetInfo {
 }
 
 /**
- * ListDiagnoseReport返回参数结构体
+ * 计费数据明细
  */
-export interface ListDiagnoseReportResponse {
+export interface ResourceBillingData {
   /**
-   * 诊断信息。
+   * 资源名称，根据查询条件不同分为以下几类：
+某一个具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+某一个项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度数据明细
    */
-  Data?: Array<DiagnoseInfo>
+  Resource?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 计费数据详情
    */
-  RequestId?: string
+  BillingData?: Array<CdnData>
 }
 
 /**
@@ -7324,73 +7185,6 @@ export interface UpdatePayTypeRequest {
    * 计费类型，flux或bandwidth。
    */
   PayType: string
-}
-
-/**
- * 诊断报告单元信息
- */
-export interface DiagnoseUnit {
-  /**
-   * 内容单元英文名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Key?: string
-  /**
-   * 内容单元中文名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeyText?: string
-  /**
-   * 报告内容。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-  /**
-   * 报告内容。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueText?: string
-}
-
-/**
- * 诊断信息
- */
-export interface DiagnoseInfo {
-  /**
-   * 待诊断的URL。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiagnoseUrl?: string
-  /**
-   * 由系统生成的诊断链接。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiagnoseLink?: string
-  /**
-   * 诊断创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 诊断链接过期时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExpireDate?: string
-  /**
-   * 诊断链接当前访问次数，一个诊断链接最多可访问10次。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VisitCount?: number
-  /**
-   * 访问诊断链接的客户端简易信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientList?: Array<DiagnoseList>
-  /**
-   * 域名加速区域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Area?: string
 }
 
 /**
@@ -7819,28 +7613,6 @@ off：关闭
 }
 
 /**
- * CreateEdgePackTask请求参数结构体
- */
-export interface CreateEdgePackTaskRequest {
-  /**
-   * apk 所在的 cos 存储桶, 如 edgepack-xxxxxxxx
-   */
-  CosBucket: string
-  /**
-   * apk 源文件的存储路径, 如 /apk/xxxx.apk
-   */
-  CosUriFrom: string
-  /**
-   * BlockID 的值, WALLE为1903654775(0x71777777)，VasDolly为2282837503(0x881155ff),传0或不传时默认为 WALLE 方案
-   */
-  BlockID?: number
-  /**
-   * 拓展之后的 apk 目标存储路径,如 /out/xxxx.apk
-   */
-  CosUriTo?: string
-}
-
-/**
  * StopCdnDomain返回参数结构体
  */
 export interface StopCdnDomainResponse {
@@ -7862,42 +7634,6 @@ export interface TopDataMore {
    * 排序结果详情
    */
   DetailData: Array<TopDetailDataMore>
-}
-
-/**
- * 客户端访问诊断URL信息列表
- */
-export interface DiagnoseList {
-  /**
-   * 诊断任务标签。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiagnoseTag?: string
-  /**
-   * 报告ID，用于获取详细诊断报告。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReportId?: string
-  /**
-   * 客户端信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientInfo?: Array<ClientInfo>
-  /**
-   * 最终诊断结果。
--1：已提交
-0  ：检测中
-1  ：检测正常
-2  ： 检测异常
-3  ： 诊断页面异常关闭
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FinalDiagnose?: number
-  /**
-   * 诊断任务创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
 }
 
 /**

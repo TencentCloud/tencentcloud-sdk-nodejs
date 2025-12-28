@@ -7502,6 +7502,24 @@ export interface AigcVideoTaskInputFileInfo {
 2. 图片格式的取值为：jpeg，jpg, png。
    */
   Url?: string
+  /**
+   * 参考类型，GV模型适用。
+注意：
+
+当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。
+   */
+  ReferenceType?: string
+  /**
+   * 主体id.
+适用模型：Vidu-q2.
+当需要对图片标识主体时，需要每个图片都带主体id，后续生成时可以通过@主体id的方式使用。
+   */
+  ObjectId?: string
+  /**
+   * 适用于Vidu-q2模型。
+当全部图片携带主体id时，可针对主体设置音色id。 音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg
+   */
+  VoiceId?: string
 }
 
 /**
@@ -9299,9 +9317,15 @@ export interface CreateAigcVideoTaskRequest {
    */
   ModelVersion: string
   /**
-   * AIGC 生视频任务的输入图片的文件信息。说明
-1. 当 ModelName 是 GV 时，最大长度为 3；其他情况下最大长度为1。
-2. 当 ModelName 是 GV 时，并且长度大于1时，则不能再指定 LastFrameFileId 参数。
+   * 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。
+
+支持多图输入的模型：
+1. GV，使用多图输入时，不可使用LastFrameFileId和LastFrameUrl。
+2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过FileInfos里面的ObjectId作为主体id来传入。
+
+注意：
+1. 图片大小不超过10M。
+2. 支持的图片格式：jpeg、png。
    */
   FileInfos?: Array<AigcVideoTaskInputFileInfo>
   /**
@@ -9319,11 +9343,12 @@ export interface CreateAigcVideoTaskRequest {
    */
   LastFrameUrl?: string
   /**
-   * 生成图片的提示词。当 FileInfos 为空时，此参数必填。
+   * 生成视频的提示词。当 FileInfos 为空时，此参数必填。
+示例值：move the picture
    */
   Prompt?: string
   /**
-   * 要阻止模型生成图片的提示词。
+   * 要阻止模型生成视频的提示词。
    */
   NegativePrompt?: string
   /**
@@ -9350,6 +9375,10 @@ export interface CreateAigcVideoTaskRequest {
    * 保留字段，特殊用途时使用。
    */
   ExtInfo?: string
+  /**
+   * 输入图片的区域信息。当图片url是国外地址时候，可选Oversea。默认Mainland。
+   */
+  InputRegion?: string
 }
 
 /**

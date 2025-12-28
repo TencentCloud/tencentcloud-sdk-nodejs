@@ -3943,13 +3943,17 @@ export interface LicensePlateOCRResponse {
    */
   Rect?: Rect
   /**
-   * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
+   * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿”、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
    */
   Color?: string
   /**
    * 全部车牌信息。
    */
   LicensePlateInfos?: Array<LicensePlateInfo>
+  /**
+   * 车牌类别， 如： 实体车牌、非实体车牌 示例值：实体车牌
+   */
+  LicensePlateCategory?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10704,6 +10708,10 @@ export interface LicensePlateInfo {
    * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
    */
   Color?: string
+  /**
+   * 车牌类别， 如： 实体车牌、非实体车牌
+   */
+  LicensePlateCategory?: string
 }
 
 /**

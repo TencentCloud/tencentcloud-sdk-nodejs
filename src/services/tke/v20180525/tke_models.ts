@@ -2328,7 +2328,7 @@ export interface DisableControlPlaneLogsRequest {
    */
   ClusterType: string
   /**
-   * 组件名称列表，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter
+   * 组件名称列表，目前支持的组件有：cluster-autoscaler、kapenter
    */
   ComponentNames: Array<string>
   /**
@@ -13249,7 +13249,7 @@ export interface EnableControlPlaneLogsRequest {
    */
   ClusterType: string
   /**
-   * 各组件日志采集配置，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter
+   * 组件名称列表，目前支持的组件有：cluster-autoscaler、kapenter
    */
   Components: Array<ComponentLogConfig>
 }

@@ -124,6 +124,7 @@ import {
   DeleteListenerRequest,
   ClassicalHealth,
   DescribeCustomizedConfigAssociateListRequest,
+  RenewLoadBalancersResponse,
   ModifyTargetPortResponse,
   MigrateClassicalLoadBalancersRequest,
   DescribeLoadBalancersDetailRequest,
@@ -152,6 +153,7 @@ import {
   ResourceAvailability,
   SetLoadBalancerSecurityGroupsRequest,
   DescribeCustomizedConfigAssociateListResponse,
+  RenewLoadBalancersRequest,
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
   CreateTargetGroupResponse,
@@ -674,13 +676,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeRewrite 接口可根据负载均衡实例ID，查询一个负载均衡实例下转发规则的重定向关系。如果不指定监听器ID或转发规则ID，则返回该负载均衡实例下的所有重定向关系。
+   * API接口续费包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)
    */
-  async DescribeRewrite(
-    req: DescribeRewriteRequest,
-    cb?: (error: string, rep: DescribeRewriteResponse) => void
-  ): Promise<DescribeRewriteResponse> {
-    return this.request("DescribeRewrite", req, cb)
+  async RenewLoadBalancers(
+    req: RenewLoadBalancersRequest,
+    cb?: (error: string, rep: RenewLoadBalancersResponse) => void
+  ): Promise<RenewLoadBalancersResponse> {
+    return this.request("RenewLoadBalancers", req, cb)
   }
 
   /**
@@ -925,6 +927,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTargetGroupListResponse) => void
   ): Promise<DescribeTargetGroupListResponse> {
     return this.request("DescribeTargetGroupList", req, cb)
+  }
+
+  /**
+   * DescribeRewrite 接口可根据负载均衡实例ID，查询一个负载均衡实例下转发规则的重定向关系。如果不指定监听器ID或转发规则ID，则返回该负载均衡实例下的所有重定向关系。
+   */
+  async DescribeRewrite(
+    req: DescribeRewriteRequest,
+    cb?: (error: string, rep: DescribeRewriteResponse) => void
+  ): Promise<DescribeRewriteResponse> {
+    return this.request("DescribeRewrite", req, cb)
   }
 
   /**

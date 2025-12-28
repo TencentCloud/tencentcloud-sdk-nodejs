@@ -54,7 +54,7 @@ import {
   ModifyBlockIgnoreRuleRequest,
   SearchLogResponse,
   DeleteBlockIgnoreRuleNewResponse,
-  DeleteAllAccessControlRuleRequest,
+  DescribeEnterpriseSGRuleProgressResponse,
   ModifyEdgeIpSwitchRequest,
   VpcZoneData,
   DatabaseWhiteListRuleData,
@@ -221,12 +221,11 @@ import {
   DescribeAcListsRequest,
   DescribeGuideScanInfoRequest,
   UnHandleEvent,
-  DescribeAssociatedInstanceListRequest,
+  DescribeBlockIgnoreListResponse,
   ModifyVpcAcRuleResponse,
   ModifyBlockIgnoreRuleNewRequest,
   ModifyEWRuleStatusRequest,
   DeleteAcRuleRequest,
-  DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
   DeleteBlockIgnoreRuleNewRequest,
   RemoveNatAcRuleResponse,
@@ -295,7 +294,6 @@ import {
   ModifyRunSyncAssetRequest,
   DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
-  DescribeEnterpriseSGRuleProgressResponse,
   CommonIdName,
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
@@ -312,7 +310,7 @@ import {
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   DescNatDnatRule,
-  DescribeBlockIgnoreListResponse,
+  DescribeAssociatedInstanceListRequest,
   ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
@@ -663,18 +661,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifySecurityGroupRuleResponse) => void
   ): Promise<ModifySecurityGroupRuleResponse> {
     return this.request("ModifySecurityGroupRule", req, cb)
-  }
-
-  /**
-     * 业务废弃
-
-全部删除规则
-     */
-  async DeleteAllAccessControlRule(
-    req: DeleteAllAccessControlRuleRequest,
-    cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void
-  ): Promise<DeleteAllAccessControlRuleResponse> {
-    return this.request("DeleteAllAccessControlRule", req, cb)
   }
 
   /**

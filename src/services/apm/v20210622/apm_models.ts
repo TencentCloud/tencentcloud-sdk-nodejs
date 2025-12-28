@@ -1073,6 +1073,14 @@ export interface ApmAppConfig {
    * 慢SQL阈值
    */
   SlowSQLThresholds?: Array<ApmTag>
+  /**
+   * 是否开启脱敏规则
+   */
+  EnableDesensitizationRule?: number
+  /**
+   * 脱敏规则
+   */
+  DesensitizationRule?: string
 }
 
 /**
@@ -2653,6 +2661,14 @@ export interface ApmApplicationConfigView {
    * 慢SQL阈值
    */
   SlowSQLThresholds?: Array<ApmTag>
+  /**
+   * 是否开启脱敏规则
+   */
+  EnableDesensitizationRule?: number
+  /**
+   * 脱敏规则
+   */
+  DesensitizationRule?: string
 }
 
 /**
@@ -2986,6 +3002,14 @@ export interface ModifyApmApplicationConfigRequest {
    * 慢SQL阈值
    */
   SlowSQLThresholds?: Array<ApmTag>
+  /**
+   * 是否开启脱敏规则
+   */
+  EnableDesensitizationRule?: number
+  /**
+   * 脱敏规则
+   */
+  DesensitizationRule?: string
 }
 
 /**

@@ -2760,6 +2760,20 @@ export interface DescribeCustomizedConfigAssociateListRequest {
 }
 
 /**
+ * RenewLoadBalancers返回参数结构体
+ */
+export interface RenewLoadBalancersResponse {
+  /**
+   * 订单号。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyTargetPort返回参数结构体
  */
 export interface ModifyTargetPortResponse {
@@ -3478,6 +3492,20 @@ export interface DescribeCustomizedConfigAssociateListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RenewLoadBalancers请求参数结构体
+ */
+export interface RenewLoadBalancersRequest {
+  /**
+   * 负载均衡实例唯一ID数组，最多支持20个。
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 负载均衡实例的预付费相关属性。
+   */
+  LBChargePrepaid: LBChargePrepaid
 }
 
 /**
