@@ -2014,6 +2014,22 @@ export interface InstallInstanceModelRequest {
    * 模型使用的任务类型，包括：fill_mask, ner, question_answering, text_classification, text_embedding, text_expansion, text_similarity和zero_shot_classification，默认为text_embedding
    */
   TaskTypes?: Array<string>
+  /**
+   * HuggingFace模型名称
+   */
+  HuggingFaceModelNames?: Array<string>
+  /**
+   * 模型描述
+   */
+  ModelDescription?: string
+  /**
+   * 模型来源：UserModel、HuggingFace和PlatformModel
+   */
+  ModelSourceType?: string
+  /**
+   * 已上传的模型路径
+   */
+  UploadedCosPaths?: Array<string>
 }
 
 /**

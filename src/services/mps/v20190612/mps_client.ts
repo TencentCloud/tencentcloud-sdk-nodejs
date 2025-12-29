@@ -92,6 +92,7 @@ import {
   CreateImageSpriteTemplateRequest,
   SmartErasePrivacyConfig,
   MediaSnapshotByTimePicInfoItem,
+  DescribeAigcImageTaskRequest,
   AddOnParameter,
   UserDefineFaceReviewTemplateInfo,
   CreateInputHLSPullSettings,
@@ -174,6 +175,7 @@ import {
   DescribeStreamLinkEventResponse,
   EnableWorkflowRequest,
   CreateStreamLinkFlowResponse,
+  AigcImageExtraParam,
   AiAnalysisTaskClassificationOutput,
   SRTAddressDestination,
   DescribeFlowId,
@@ -183,6 +185,7 @@ import {
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
   ComposeTransitionOperation,
+  CreateAigcVideoTaskResponse,
   UserDefineAsrTextReviewTemplateInfo,
   ComposeTrackTime,
   AiSampleFaceInfo,
@@ -248,6 +251,7 @@ import {
   Rules,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
+  CreateAigcImageTaskResponse,
   ComposeVideoStream,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   AiAnalysisTaskCutoutInput,
@@ -332,6 +336,7 @@ import {
   CreateMediaEvaluationResponse,
   AiAnalysisTaskTagResult,
   AiAnalysisTaskDelLogoInput,
+  DescribeAigcImageTaskResponse,
   SmartSubtitleTaskBatchOutput,
   BatchStopStreamLinkFlowRequest,
   RTMPAddressDestination,
@@ -340,6 +345,7 @@ import {
   CreateAsrHotwordsResponse,
   DeleteBlindWatermarkTemplateResponse,
   QualityControlItemConfig,
+  CreateSnapshotByTimeOffsetTemplateRequest,
   CreateStreamLinkEventResponse,
   AdaptiveDynamicStreamingInfoItem,
   DescribeProcessImageTemplatesResponse,
@@ -357,6 +363,7 @@ import {
   MediaProcessTaskSnapshotByTimeOffsetResult,
   DescribeOutputHLSPullSettings,
   AddBlindWatermarkConfig,
+  CreateAigcVideoTaskRequest,
   AiRecognitionTaskTransTextResultInput,
   DescribeSchedulesResponse,
   ImageQualityEnhanceConfig,
@@ -374,6 +381,7 @@ import {
   MediaProcessTaskTranscodeResult,
   SnapshotByTimeOffsetTaskInput,
   ImageSpriteTaskInput,
+  AigcImageInfo,
   DeleteContentReviewTemplateResponse,
   VODInputInfo,
   ImageWatermarkTemplate,
@@ -382,6 +390,7 @@ import {
   AiAnalysisTaskVideoRemakeInput,
   LiveStreamAsrWordsRecognitionResult,
   MediaAiAnalysisFrameTagItem,
+  FlowMediaVideo,
   RecognizeMediaForZhiXueResponse,
   AiSamplePerson,
   FlowStatistics,
@@ -464,6 +473,7 @@ import {
   DescribeBlindWatermarkTemplatesResponse,
   ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,
+  AigcStoreCosParam,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
   UpdateSmartErasePrivacyConfig,
@@ -723,6 +733,7 @@ import {
   MediaContentReviewSegmentItem,
   AiContentReviewResult,
   LiveActivityResult,
+  CreateAigcImageTaskRequest,
   TerrorismImgReviewTemplateInfo,
   AsrHotwordsSet,
   AiAnalysisTaskHeadTailInput,
@@ -763,13 +774,14 @@ import {
   AiRecognitionTaskObjectResult,
   DescribeStreamLinkFlowRealtimeStatusRequest,
   DescribeAIAnalysisTemplatesResponse,
-  CreateSnapshotByTimeOffsetTemplateRequest,
+  AigcVideoExtraParam,
   ParseLiveStreamProcessNotificationRequest,
   AiRecognitionTaskAsrWordsResult,
+  DescribeAigcVideoTaskRequest,
   AiAnalysisTaskHeadTailResult,
   CreateSampleSnapshotTemplateRequest,
   WorkflowTask,
-  FlowMediaVideo,
+  DescribeAigcVideoTaskResponse,
   DeleteSmartEraseTemplateResponse,
   AiReviewTaskPornAsrResult,
   ModifyBlindWatermarkTemplateRequest,
@@ -844,6 +856,7 @@ import {
   FailOverOption,
   LowLightEnhanceConfig,
   DescribeMediaMetaDataRequest,
+  AigcVideoReferenceImageInfo,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
   DescribeAIRecognitionTemplatesRequest,
@@ -961,6 +974,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkEventResponse) => void
   ): Promise<DescribeStreamLinkEventResponse> {
     return this.request("DescribeStreamLinkEvent", req, cb)
+  }
+
+  /**
+   * 调用该接口用于创建AIGC生图片任务。
+   */
+  async CreateAigcImageTask(
+    req: CreateAigcImageTaskRequest,
+    cb?: (error: string, rep: CreateAigcImageTaskResponse) => void
+  ): Promise<CreateAigcImageTaskResponse> {
+    return this.request("CreateAigcImageTask", req, cb)
   }
 
   /**
@@ -1404,13 +1427,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步接口，返回语音识别结果
+   * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。
    */
-  async RecognizeAudio(
-    req: RecognizeAudioRequest,
-    cb?: (error: string, rep: RecognizeAudioResponse) => void
-  ): Promise<RecognizeAudioResponse> {
-    return this.request("RecognizeAudio", req, cb)
+  async ModifyWordSample(
+    req: ModifyWordSampleRequest,
+    cb?: (error: string, rep: ModifyWordSampleResponse) => void
+  ): Promise<ModifyWordSampleResponse> {
+    return this.request("ModifyWordSample", req, cb)
   }
 
   /**
@@ -1567,6 +1590,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySmartEraseTemplateResponse) => void
   ): Promise<ModifySmartEraseTemplateResponse> {
     return this.request("ModifySmartEraseTemplate", req, cb)
+  }
+
+  /**
+   * 同步接口，返回语音识别结果
+   */
+  async RecognizeAudio(
+    req: RecognizeAudioRequest,
+    cb?: (error: string, rep: RecognizeAudioResponse) => void
+  ): Promise<RecognizeAudioResponse> {
+    return this.request("RecognizeAudio", req, cb)
   }
 
   /**
@@ -1860,14 +1893,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 中的解析函数，实现事件通知的解析。
-     */
-  async ParseNotification(
-    req: ParseNotificationRequest,
-    cb?: (error: string, rep: ParseNotificationResponse) => void
-  ): Promise<ParseNotificationResponse> {
-    return this.request("ParseNotification", req, cb)
+   * 调用该接口，用于创建AI生视频任务。
+   */
+  async CreateAigcVideoTask(
+    req: CreateAigcVideoTaskRequest,
+    cb?: (error: string, rep: CreateAigcVideoTaskResponse) => void
+  ): Promise<CreateAigcVideoTaskResponse> {
+    return this.request("CreateAigcVideoTask", req, cb)
   }
 
   /**
@@ -1898,6 +1930,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWordSamplesResponse) => void
   ): Promise<DeleteWordSamplesResponse> {
     return this.request("DeleteWordSamples", req, cb)
+  }
+
+  /**
+   * 调用该接口，用于查询AIGC生视频任务的进度以及获取生成结果。
+   */
+  async DescribeAigcVideoTask(
+    req: DescribeAigcVideoTaskRequest,
+    cb?: (error: string, rep: DescribeAigcVideoTaskResponse) => void
+  ): Promise<DescribeAigcVideoTaskResponse> {
+    return this.request("DescribeAigcVideoTask", req, cb)
   }
 
   /**
@@ -2018,13 +2060,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。
+   * 调用该接口，查询AIGC生图片任务进度以及获取生成结果。
    */
-  async ModifyWordSample(
-    req: ModifyWordSampleRequest,
-    cb?: (error: string, rep: ModifyWordSampleResponse) => void
-  ): Promise<ModifyWordSampleResponse> {
-    return this.request("ModifyWordSample", req, cb)
+  async DescribeAigcImageTask(
+    req: DescribeAigcImageTaskRequest,
+    cb?: (error: string, rep: DescribeAigcImageTaskResponse) => void
+  ): Promise<DescribeAigcImageTaskResponse> {
+    return this.request("DescribeAigcImageTask", req, cb)
   }
 
   /**
@@ -2075,6 +2117,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIRecognitionTemplatesResponse) => void
   ): Promise<DescribeAIRecognitionTemplatesResponse> {
     return this.request("DescribeAIRecognitionTemplates", req, cb)
+  }
+
+  /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 中的解析函数，实现事件通知的解析。
+     */
+  async ParseNotification(
+    req: ParseNotificationRequest,
+    cb?: (error: string, rep: ParseNotificationResponse) => void
+  ): Promise<ParseNotificationResponse> {
+    return this.request("ParseNotification", req, cb)
   }
 
   /**

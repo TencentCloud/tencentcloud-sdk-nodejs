@@ -593,6 +593,10 @@ export interface ElasticPlan {
    * 结束时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
    */
   EndTime?: string
+  /**
+   * 分时弹性上限
+   */
+  ElasticLimit?: number
 }
 
 /**
@@ -1280,6 +1284,11 @@ export interface SmartOptimizerWrittenPolicy {
    * none/enable/disable/default
    */
   WrittenEnable?: string
+  /**
+   * 用户自定义高级参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvancePolicy?: WrittenAdvancePolicy
 }
 
 /**
@@ -4551,6 +4560,24 @@ export interface DataEngineConfigPair {
 }
 
 /**
+ * 合并策略sort类型的规则定义
+ */
+export interface SortOrder {
+  /**
+   * sort的数据表列名称
+   */
+  Column?: string
+  /**
+   * 按照升序或者降序进行排序
+   */
+  SortDirection?: string
+  /**
+   * null值放在开头或者末尾
+   */
+  NullOrder?: string
+}
+
+/**
  * SuspendResumeDataEngine返回参数结构体
  */
 export interface SuspendResumeDataEngineResponse {
@@ -6013,6 +6040,34 @@ export interface DataEngineInfo {
    * 引擎资源弹性伸缩策略
    */
   ScheduleElasticityConf?: ScheduleElasticityConf
+  /**
+   * GPU 信息
+   */
+  GPUInfo?: GPUInfo
+  /**
+   * GPU 使用量
+   */
+  EngineResourceUsedGPU?: number
+  /**
+   * GPU 总规格
+   */
+  GPUTotalSize?: number
+  /**
+   * GPU 机型
+   */
+  InstanceModel?: string
+  /**
+   * 节点数量
+   */
+  NodeNum?: number
+  /**
+   * 引擎规格，包含负载弹性或分时弹性
+   */
+  SizeWithElastic?: number
+  /**
+   * 最大弹性值，包含负载弹性或分时弹性
+   */
+  MaxElasticSize?: number
 }
 
 /**
@@ -7354,6 +7409,65 @@ export interface CreateTaskRequest {
 }
 
 /**
+ * spark session详细信息
+ */
+export interface SparkSessionInfo {
+  /**
+   * spark session id
+   */
+  SparkSessionId?: string
+  /**
+   * spark session名称
+   */
+  SparkSessionName?: string
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * engine session id
+   */
+  EngineSessionId?: string
+  /**
+   * engine session   
+name
+   */
+  EngineSessionName?: string
+  /**
+   * 自动销毁时间
+   */
+  IdleTimeoutMin?: number
+  /**
+   * driver规格
+   */
+  DriverSpec?: string
+  /**
+   * executor规格
+   */
+  ExecutorSpec?: string
+  /**
+   * executor最小数量
+   */
+  ExecutorNumMin?: number
+  /**
+   * executor最大数量
+   */
+  ExecutorNumMax?: number
+  /**
+   * 总规格最小
+   */
+  TotalSpecMin?: number
+  /**
+   * 总规格最大
+   */
+  TotalSpecMax?: number
+  /**
+   * 状态，STARTING、RUNNING、TERMINATED
+   */
+  State?: string
+}
+
+/**
  * DescribeClusterMonitorInfos请求参数结构体
  */
 export interface DescribeClusterMonitorInfosRequest {
@@ -7876,65 +7990,13 @@ export interface AttachWorkGroupPolicyResponse {
 }
 
 /**
- * DescribeDMSTables请求参数结构体
+ * AddUsersToWorkGroup返回参数结构体
  */
-export interface DescribeDMSTablesRequest {
+export interface AddUsersToWorkGroupResponse {
   /**
-   * 数据库名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DbName?: string
-  /**
-   * 数据库schema名称
-   */
-  SchemaName?: string
-  /**
-   * 表名称
-   */
-  Name?: string
-  /**
-   * catalog类型
-   */
-  Catalog?: string
-  /**
-   * 查询关键词
-   */
-  Keyword?: string
-  /**
-   * 查询模式，只支持填*
-   */
-  Pattern?: string
-  /**
-   * 表类型
-   */
-  Type?: string
-  /**
-   * 筛选参数：更新开始时间
-   */
-  StartTime?: string
-  /**
-   * 筛选参数：更新结束时间
-   */
-  EndTime?: string
-  /**
-   * 分页参数
-   */
-  Limit?: number
-  /**
-   * 分页参数
-   */
-  Offset?: number
-  /**
-   * 排序字段：create_time：创建时间
-   */
-  Sort?: string
-  /**
-   * 排序字段：true：升序（默认），false：降序
-   */
-  Asc?: boolean
-  /**
-   * 数据源连接名
-   */
-  DatasourceConnectionName?: string
+  RequestId?: string
 }
 
 /**
@@ -9070,13 +9132,41 @@ export interface DeleteThirdPartyAccessUserResponse {
 }
 
 /**
- * AddUsersToWorkGroup返回参数结构体
+ * GPU 机型
  */
-export interface AddUsersToWorkGroupResponse {
+export interface GPUInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 计费项
    */
-  RequestId?: string
+  BillingItem?: string
+  /**
+   * 机型
+   */
+  Model?: string
+  /**
+   * cu
+   */
+  CU?: number
+  /**
+   * gpu 机型
+   */
+  Type?: string
+  /**
+   * 数量
+   */
+  Num?: number
+  /**
+   * 显存
+   */
+  GPUMemory?: number
+  /**
+   * 机型
+   */
+  InstanceType?: string
+  /**
+   * 售卖情况（1-缺货，2-低库存，3-充足）
+   */
+  SaleStatus?: number
 }
 
 /**
@@ -10065,62 +10155,65 @@ export interface TagInfo {
 }
 
 /**
- * spark session详细信息
+ * DescribeDMSTables请求参数结构体
  */
-export interface SparkSessionInfo {
+export interface DescribeDMSTablesRequest {
   /**
-   * spark session id
+   * 数据库名称
    */
-  SparkSessionId?: string
+  DbName?: string
   /**
-   * spark session名称
+   * 数据库schema名称
    */
-  SparkSessionName?: string
+  SchemaName?: string
   /**
-   * 资源组id
+   * 表名称
    */
-  ResourceGroupId?: string
+  Name?: string
   /**
-   * engine session id
+   * catalog类型
    */
-  EngineSessionId?: string
+  Catalog?: string
   /**
-   * engine session   
-name
+   * 查询关键词
    */
-  EngineSessionName?: string
+  Keyword?: string
   /**
-   * 自动销毁时间
+   * 查询模式，只支持填*
    */
-  IdleTimeoutMin?: number
+  Pattern?: string
   /**
-   * driver规格
+   * 表类型
    */
-  DriverSpec?: string
+  Type?: string
   /**
-   * executor规格
+   * 筛选参数：更新开始时间
    */
-  ExecutorSpec?: string
+  StartTime?: string
   /**
-   * executor最小数量
+   * 筛选参数：更新结束时间
    */
-  ExecutorNumMin?: number
+  EndTime?: string
   /**
-   * executor最大数量
+   * 分页参数
    */
-  ExecutorNumMax?: number
+  Limit?: number
   /**
-   * 总规格最小
+   * 分页参数
    */
-  TotalSpecMin?: number
+  Offset?: number
   /**
-   * 总规格最大
+   * 排序字段：create_time：创建时间
    */
-  TotalSpecMax?: number
+  Sort?: string
   /**
-   * 状态，STARTING、RUNNING、TERMINATED
+   * 排序字段：true：升序（默认），false：降序
    */
-  State?: string
+  Asc?: boolean
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -12061,6 +12154,57 @@ export interface Column {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataMaskStrategyInfo?: DataMaskStrategyInfo
+}
+
+/**
+ * Smart Optimizer高级参数配置数据结构
+ */
+export interface WrittenAdvancePolicy {
+  /**
+   * 是否启用合并
+   */
+  CompactEnable?: string
+  /**
+   * 是否启用历史数据清理
+   */
+  DeleteEnable?: string
+  /**
+   * 合并最新文件数量
+   */
+  MinInputFiles?: number
+  /**
+   * 合并文件目录文件大小
+   */
+  TargetFileSizeBytes?: number
+  /**
+   * 保留过期时间的快照数量
+   */
+  RetainLast?: number
+  /**
+   * 快照过期时间
+   */
+  BeforeDays?: number
+  /**
+   * 快照过期执行周期
+   */
+  ExpiredSnapshotsIntervalMin?: number
+  /**
+   * 移除孤立文件执行周期
+   */
+  RemoveOrphanIntervalMin?: number
+  /**
+   * 是否开启COW表合并
+   */
+  CowCompactEnable?: string
+  /**
+   * 文件合并策略
+   */
+  CompactStrategy?: string
+  /**
+   * sort合并策略的规则定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SortOrders?: Array<SortOrder>
 }
 
 /**

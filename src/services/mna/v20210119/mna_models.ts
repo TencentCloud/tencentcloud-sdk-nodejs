@@ -460,10 +460,12 @@ export interface AddGroupRequest {
 export interface GetGroupListRequest {
   /**
    * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+示例值：10
    */
   PageSize: number
   /**
    * 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+示例值：1
    */
   PageNumber: number
   /**
@@ -548,11 +550,15 @@ export interface GetGroupDetailRequest {
    */
   GroupId: string
   /**
-   * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+   * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备	
+示例值：1
+
    */
   PageSize: number
   /**
-   * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+   * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备	
+示例值：10
+
    */
   PageNumber: number
   /**
@@ -1616,7 +1622,9 @@ export interface AddDeviceRequest {
    */
   DataKey?: string
   /**
-   * 是否设置预置密钥
+   * 是否设置预置密钥。
+true：设置预置密钥；
+false：不设置预置密钥。
    */
   Encrypted?: boolean
   /**

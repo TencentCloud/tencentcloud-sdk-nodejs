@@ -1608,15 +1608,15 @@ export interface MQTTMessageItem {
  */
 export interface DescribeMigrationTaskListRequest {
   /**
-   * 查询条件列表
+   * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
   Filters?: Array<Filter>
   /**
-   * 查询起始位置
+   * 查询起始位置，默认为0。
    */
   Offset?: number
   /**
-   * 查询结果限制数量
+   * 查询结果限制数量，默认20。
    */
   Limit?: number
 }

@@ -2147,6 +2147,16 @@ export interface MediaSnapshotByTimePicInfoItem {
 }
 
 /**
+ * DescribeAigcImageTask请求参数结构体
+ */
+export interface DescribeAigcImageTaskRequest {
+  /**
+   * 创建的AIGC生图片任务ID。
+   */
+  TaskId: string
+}
+
+/**
  * 图片处理附加输入参数。
  */
 export interface AddOnParameter {
@@ -4186,6 +4196,43 @@ export interface CreateStreamLinkFlowResponse {
 }
 
 /**
+ * 用于AIGC创作图片时用到的扩展参数信息。
+ */
+export interface AigcImageExtraParam {
+  /**
+   * 指定所生成视频的宽高比。
+
+不同模型支持的宽高比:
+1. GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。
+2. Jimeng：合用户prompt意图、参考图尺寸，由模型智能判断生图宽高比。
+
+注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。
+   */
+  AspectRatio?: string
+  /**
+   * 指定图片输出分辨率。
+
+支持该参数的模型：
+支持选择: 720P, 1080P, 2K, 4K。
+
+1. Jimeng推荐通过prompt指定图片分辨率和宽高比。
+    2K
+    2048x2048 （1:1）
+    2304x1728（4:3）
+    2496x1664 （3:2）
+    2560x1440 （16:9）
+    3024x1296 （21:9）
+    4K
+    4096x4096 （1:1）
+    4694x3520（4:3）
+    4992x3328 （3:2）
+    5404x3040 （16:9）
+    6198x2656 （21:9）
+   */
+  Resolution?: string
+}
+
+/**
  * 智能分类结果信息
  */
 export interface AiAnalysisTaskClassificationOutput {
@@ -4400,6 +4447,21 @@ export interface ComposeTransitionOperation {
 <li>AudioFadeInFadeOut：声音淡入淡出。</li>
    */
   Type: string
+}
+
+/**
+ * CreateAigcVideoTask返回参数结构体
+ */
+export interface CreateAigcVideoTaskResponse {
+  /**
+   * 任务创建成功后，返回的任务ID。
+调用查询接口，轮询获取任务进度及生成结果。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5961,6 +6023,20 @@ export interface PornAsrReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * CreateAigcImageTask返回参数结构体
+ */
+export interface CreateAigcImageTaskResponse {
+  /**
+   * 返回的任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8118,6 +8194,28 @@ export interface AiAnalysisTaskDelLogoInput {
 }
 
 /**
+ * DescribeAigcImageTask返回参数结构体
+ */
+export interface DescribeAigcImageTaskResponse {
+  /**
+   * 任务当前状态。 WAIT：等待中， RUN：执行中， FAIL：任务失败， DONE：任务成功。
+   */
+  Status?: string
+  /**
+   * 当任务状态为 DONE时，返回的图片Url列表，图片存储12小时，请尽快取走使用。
+   */
+  ImageUrls?: Array<string>
+  /**
+   * 当任务状态为 FAIL时，返回失败信息。
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能字幕输出信息
  */
 export interface SmartSubtitleTaskBatchOutput {
@@ -8350,6 +8448,58 @@ export interface QualityControlItemConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Threshold?: string
+}
+
+/**
+ * CreateSnapshotByTimeOffsetTemplate请求参数结构体
+ */
+export interface CreateSnapshotByTimeOffsetTemplateRequest {
+  /**
+   * 指定时间点截图模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Width?: number
+  /**
+   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Height?: number
+  /**
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+   */
+  ResolutionAdaptive?: string
+  /**
+   * 图片格式，取值可以为 jpg、png、webp。默认为 jpg。
+   */
+  Format?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+   */
+  FillType?: string
 }
 
 /**
@@ -8771,6 +8921,105 @@ export interface AddBlindWatermarkConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EmbedInfo?: BlindWatermarkEmbedInfo
+}
+
+/**
+ * CreateAigcVideoTask请求参数结构体
+ */
+export interface CreateAigcVideoTaskRequest {
+  /**
+   * 模型名称。
+当前支持的模型列表:
+Hailuo，
+Kling，
+Jimeng，
+Vidu，
+OS，
+GV。
+   */
+  ModelName?: string
+  /**
+   * 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。
+1. Hailuo， 可选[02、2.3]。
+2. Kling，可选[2.0、2.1、2.5]。
+3. Jimeng, 可选[3.0pro]。
+4. Vidu,可选[q2、q2-pro、q2-turbo]。
+4. GV, 可选[3.1]。
+5. OS，可选[2.0]。
+   */
+  ModelVersion?: string
+  /**
+   * 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。
+   */
+  Prompt?: string
+  /**
+   * 用于描述您想要阻止模型生成的内容。
+注意：部分模型支持。
+例如：
+顶部照明、明亮的色彩
+人物、动物
+多辆汽车、风。
+   */
+  NegativePrompt?: string
+  /**
+   * 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。
+   */
+  EnhancePrompt?: boolean
+  /**
+   * 用于指导视频生成的图片 URL。该URL需外网可访问。
+注意：
+1. 推荐图片大小不超过10M，不同模型大小限制不相同。
+2. 支持的图片格式：jpeg、png。
+3. 使用OS模型时，需输入图片尺寸为: 1280x720、720x1280。
+   */
+  ImageUrl?: string
+  /**
+   * 模型将以此参数传入的图片作为尾帧画面来生成视频。
+支持此参数的模型：
+1. GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。
+2. Kling， 在Resolution:1080P的情况下 2.1版本支持首位帧。
+3. Vidu, q2-pro, q2-turbo 支持首尾帧。
+
+注意：
+1. 推荐图片大小不超过10M，各模型限制不同。
+2. 支持的图片格式：jpeg、png。
+   */
+  LastImageUrl?: string
+  /**
+   * 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。
+
+支持多图输入的模型：
+1. GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。
+2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。
+
+注意：
+1. 图片大小不超过10M。
+2. 支持的图片格式：jpeg、png。
+   */
+  ImageInfos?: Array<AigcVideoReferenceImageInfo>
+  /**
+   * 生成视频的时长。
+注意：
+1. Kling支持 5、10秒。默认: 5秒。
+2. Jimeng支持5、10秒。 默认: 5秒。
+3. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。
+4. Vidu支持1-10秒。
+4. GV支持 8秒。 默认：8秒。
+5. OS支持4、8、12秒。 默认：8秒。
+   */
+  Duration?: number
+  /**
+   * 用于传入模型要求的额外参数。
+   */
+  ExtraParameters?: AigcVideoExtraParam
+  /**
+   * 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。
+   */
+  StoreCosParam?: AigcStoreCosParam
+  /**
+   * 接口操作者名称。
+   */
+  Operator?: string
 }
 
 /**
@@ -9541,6 +9790,23 @@ export interface ImageSpriteTaskInput {
 }
 
 /**
+ * 用于AIGC创作的图片信息。
+ */
+export interface AigcImageInfo {
+  /**
+   * 用于指导视频生成的图片 URL。该URL需外网可访问。同时允许爬虫拉取。
+   */
+  ImageUrl?: string
+  /**
+   * 参考类型。
+注意：
+1. 当模型使用Vidu的q2多参考生图时，也可用于指定主体id。
+2. 当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。
+   */
+  ReferenceType?: string
+}
+
+/**
  * DeleteContentReviewTemplate返回参数结构体
  */
 export interface DeleteContentReviewTemplateResponse {
@@ -9678,6 +9944,28 @@ export interface MediaAiAnalysisFrameTagItem {
    * 按帧标签的可信度，取值范围是 0 到 100。
    */
   Confidence?: number
+}
+
+/**
+ * 传输流媒体的视频数据。
+ */
+export interface FlowMediaVideo {
+  /**
+   * 帧率。
+   */
+  Fps: number
+  /**
+   * 码率，单位是bps。
+   */
+  Rate: number
+  /**
+   * 视频Pid。
+   */
+  Pid: number
+  /**
+   * 标志同一次推流。
+   */
+  SessionId: string
 }
 
 /**
@@ -12046,6 +12334,26 @@ export interface DescribeAIAnalysisTemplatesRequest {
    * 视频内容分析模板标识过滤条件，长度限制：64 个字符。
    */
   Name?: string
+}
+
+/**
+ * Aigc结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。
+ */
+export interface AigcStoreCosParam {
+  /**
+   * 存储至 cos 的 bucket 桶名称。需要cos存储时，该值必填。 示例值：bucket。
+   */
+  CosBucketName?: string
+  /**
+   * 存储至 cos 的 bucket 区域。与bucket所属区域相同，上传cos时必填。 示例值：ap-guangzhou
+   */
+  CosBucketRegion?: string
+  /**
+   * 存储至 cos 的 bucket 路径。
+可选。
+示例值：my_file
+   */
+  CosBucketPath?: string
 }
 
 /**
@@ -18831,7 +19139,6 @@ ASR识别和纯字幕翻译当前支持以下语言：
 `iw`：希伯来语
 `ja`：日语
 `jv`：爪哇语
-`jw`：爪哇语
 `ka`：格鲁吉亚语
 `kk`：哈萨克语
 `km`：高棉语
@@ -18918,7 +19225,6 @@ ASR识别和纯字幕翻译当前支持以下语言：
 `th`：泰语
 `ti`：提格里尼亚语
 `tk`：土库曼语
-`tl`：菲律宾语（塔加拉语）
 `tn`：茨瓦纳语
 `tr`：土耳其语
 `ts`：聪加语
@@ -18949,6 +19255,10 @@ ASR识别和纯字幕翻译当前支持以下语言：
 **注意**：不传的情况下默认类型为 ASR识别字幕
    */
   ProcessType?: number
+  /**
+   * 字幕OCR提取框选区域配置
+   */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig
 }
 
 /**
@@ -19755,6 +20065,62 @@ export interface LiveActivityResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveActivityResItem?: LiveActivityResItem
+}
+
+/**
+ * CreateAigcImageTask请求参数结构体
+ */
+export interface CreateAigcImageTaskRequest {
+  /**
+   * 模型名称。
+当前支持的模型列表：
+GEM，
+Jimeng，
+Qwen。
+   */
+  ModelName?: string
+  /**
+   * 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。
+
+1. GEM， 可选[2.5,3.0]。
+2. Jimeng，可选[4.0]。
+   */
+  ModelVersion?: string
+  /**
+   * 生成图片的描述。(注：最大支持1000字符)。当未传入参考图片时，此参数必填。
+   */
+  Prompt?: string
+  /**
+   * 用于描述您想要阻止模型生成的内容。 注意：部分模型支持。 例如： 顶部照明、明亮的色彩 人物、动物 多辆汽车、风。
+   */
+  NegativePrompt?: string
+  /**
+   * 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。
+   */
+  EnhancePrompt?: boolean
+  /**
+   * 用于传入参考的资源图片信息，默认支持传入一张图片。
+
+支持多图输入的模型：
+1. GEM，可支持最多3张图片输入作为资源图。
+
+注意：
+1. 推荐图片小于7M，各模型限制不同。
+2. 图片格式支持：jpeg, png, webp。
+   */
+  ImageInfos?: Array<AigcImageInfo>
+  /**
+   * 用于传入模型要求的额外参数。
+   */
+  ExtraParameters?: AigcImageExtraParam
+  /**
+   * 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。
+   */
+  StoreCosParam?: AigcStoreCosParam
+  /**
+   * 接口操作者名称。
+   */
+  Operator?: string
 }
 
 /**
@@ -20820,55 +21186,37 @@ export interface DescribeAIAnalysisTemplatesResponse {
 }
 
 /**
- * CreateSnapshotByTimeOffsetTemplate请求参数结构体
+ * 用于AIGC创作视频时用到的扩展参数信息。
  */
-export interface CreateSnapshotByTimeOffsetTemplateRequest {
+export interface AigcVideoExtraParam {
   /**
-   * 指定时间点截图模板名称，长度限制：64 个字符。
+   * 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 
+
+不同模型支持的分辨率选项:
+1. Kling 720P(默认), 1080P。
+2. Hailuo 768P(默认), 1080P。
+3. Jimeng 1080P(默认)。
+4. Vidu 720P(默认)，1080P。
+5. GV 720P(默认),1080P。
+6. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。
+
+注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。
    */
-  Name?: string
+  Resolution?: string
   /**
-   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 指定所生成视频的宽高比。 
+
+不同模型对于此参数的支持：
+1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。
+2. Hailuo 暂不支持。
+3. Jimeng ["16:9"、"4:3"、"1:1"、"3:4"、"9:16"、"21:9"]
+4. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。
+5. GV 16:9(默认值)、9:16。
+6. OS 仅文生视频支持, 16:9(默认), 9:16。
+
+注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。
    */
-  Width?: number
-  /**
-   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Height?: number
-  /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-   */
-  ResolutionAdaptive?: string
-  /**
-   * 图片格式，取值可以为 jpg、png、webp。默认为 jpg。
-   */
-  Format?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
-默认值：black 。
-   */
-  FillType?: string
+  AspectRatio?: string
 }
 
 /**
@@ -20910,6 +21258,16 @@ export interface AiRecognitionTaskAsrWordsResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskAsrWordsResultOutput
+}
+
+/**
+ * DescribeAigcVideoTask请求参数结构体
+ */
+export interface DescribeAigcVideoTaskRequest {
+  /**
+   * 创建AIGC生视频任务时，返回的任务ID。
+   */
+  TaskId: string
 }
 
 /**
@@ -21069,25 +21427,29 @@ export interface WorkflowTask {
 }
 
 /**
- * 传输流媒体的视频数据。
+ * DescribeAigcVideoTask返回参数结构体
  */
-export interface FlowMediaVideo {
+export interface DescribeAigcVideoTaskResponse {
   /**
-   * 帧率。
+   * 任务当前状态。 WAIT：等待中， RUN：执行中， FAIL：任务失败， DONE：任务成功。
    */
-  Fps: number
+  Status?: string
   /**
-   * 码率，单位是bps。
+   * 当任务状态为 DONE时，返回视频Url列表，视频存储12小时，请尽快取走使用。
    */
-  Rate: number
+  VideoUrls?: Array<string>
   /**
-   * 视频Pid。
+   * 输出视频的分辨率。示例：1080*720；
    */
-  Pid: number
+  Resolution?: string
   /**
-   * 标志同一次推流。
+   * 当任务状态为 FAIL时，返回失败信息。
    */
-  SessionId: string
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -21842,7 +22204,6 @@ ASR识别和纯字幕翻译当前支持以下语言：
 `iw`：希伯来语
 `ja`：日语
 `jv`：爪哇语
-`jw`：爪哇语
 `ka`：格鲁吉亚语
 `kk`：哈萨克语
 `km`：高棉语
@@ -21929,7 +22290,6 @@ ASR识别和纯字幕翻译当前支持以下语言：
 `th`：泰语
 `ti`：提格里尼亚语
 `tk`：土库曼语
-`tl`：菲律宾语（塔加拉语）
 `tn`：茨瓦纳语
 `tr`：土耳其语
 `ts`：聪加语
@@ -21960,6 +22320,10 @@ ASR识别和纯字幕翻译当前支持以下语言：
 **注意**：不传的情况下，默认是ASR方式
    */
   ProcessType?: number
+  /**
+   * 字幕OCR提取框选区域配置
+   */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig
 }
 
 /**
@@ -23382,6 +23746,22 @@ export interface DescribeMediaMetaDataRequest {
    * 需要获取元信息的文件输入信息。
    */
   InputInfo: MediaInputInfo
+}
+
+/**
+ * 用于AIGC生视频创作的参考图片信息。
+ */
+export interface AigcVideoReferenceImageInfo {
+  /**
+   * 用于指导视频生成的图片 URL。该URL需外网可访问。同时允许爬虫拉取。
+   */
+  ImageUrl?: string
+  /**
+   * 参考类型。
+注意：
+1. 当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。
+   */
+  ReferenceType?: string
 }
 
 /**

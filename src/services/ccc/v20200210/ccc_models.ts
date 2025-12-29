@@ -1363,6 +1363,16 @@ export interface ServeParticipant {
 }
 
 /**
+ * PlaySoundCall返回参数结构体
+ */
+export interface PlaySoundCallResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI 通话提取结果。
  */
 export interface AICallExtractResultElement {
@@ -4281,6 +4291,14 @@ NotExists
    * 通话中语音留言ASR文本信息地址
    */
   VoicemailAsrURL?: Array<string>
+  /**
+   * 如果是智能体相关通话，这里是智能体 ID
+   */
+  AIAgentId?: number
+  /**
+   * 如果是智能体相关通话，这里是智能体名称
+   */
+  AIAgentName?: string
 }
 
 /**
@@ -5182,6 +5200,28 @@ export interface DescribeAutoCalloutTasksRequest {
    * 页数
    */
   PageNumber: number
+}
+
+/**
+ * PlaySoundCall请求参数结构体
+ */
+export interface PlaySoundCallRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 会话ID
+   */
+  SessionId: string
+  /**
+   * 音频文件 ID，参见管理端-电话客服-放音文件管理
+   */
+  FileId?: number
+  /**
+   * 放音次数，默认 1 次
+   */
+  PlayTimes?: number
 }
 
 /**

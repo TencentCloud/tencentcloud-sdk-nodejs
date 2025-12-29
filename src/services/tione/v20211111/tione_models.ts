@@ -210,6 +210,10 @@ HYBRID_PAID:
    * 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。
    */
   VolumeMounts?: Array<VolumeMount>
+  /**
+   * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
+   */
+  SchedulingStrategy?: string
 }
 
 /**
@@ -837,13 +841,11 @@ export interface Service {
   BusinessStatus?: string
   /**
    * 已废弃,以ServiceInfo中的对应为准
-注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ServiceLimit?: ServiceLimit
   /**
    * 已废弃,以ServiceInfo中的对应为准
-注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ScheduledAction?: ScheduledAction
@@ -1614,6 +1616,10 @@ HYBRID_PAID:
    * 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。
    */
   VolumeMounts?: Array<VolumeMount>
+  /**
+   * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
+   */
+  SchedulingStrategy?: string
 }
 
 /**
@@ -2384,7 +2390,28 @@ export interface PublicDataSourceFS {
 /**
  * 暴露端口信息
  */
-export type ExposePortConfig = null
+export interface ExposePortConfig {
+  /**
+   * 是否开启暴露容器服务端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * clb id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClbId?: string
+  /**
+   * clb domain
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClbHost?: string
+}
 
 /**
  * DescribeBillingResourceGroups请求参数结构体
@@ -3270,32 +3297,26 @@ HYBRID_PAID:
   Resources: ResourceInfo
   /**
    * 后付费实例对应的机型规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType: string
   /**
    * 模型信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelInfo: ModelInfo
   /**
    * 是否启用日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogEnable: boolean
   /**
    * 日志配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogConfig: LogConfig
   /**
    * 是否开启鉴权
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthorizationEnable: boolean
   /**
    * hpa配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HorizontalPodAutoscaler: HorizontalPodAutoscaler
   /**
@@ -3438,6 +3459,14 @@ HYBRID_PAID:
    * 批量数据盘挂载配置
    */
   VolumeMounts?: Array<VolumeMount>
+  /**
+   * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
+   */
+  SchedulingStrategy?: string
+  /**
+   * 服务实际运行的节点数
+   */
+  NodeCount?: number
 }
 
 /**
@@ -4308,6 +4337,14 @@ RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableRDMA?: boolean
+  /**
+   * root disk size(GB)
+   */
+  RootDisk?: number
+  /**
+   * data disk size(GB)
+   */
+  DataDisk?: number
 }
 
 /**

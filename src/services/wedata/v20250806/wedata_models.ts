@@ -2253,6 +2253,26 @@ export interface AlarmRuleDetail {
    * 监控对象的白名单配置
    */
   MonitorWhiteTasks?: Array<MonitorWhiteTask>
+  /**
+   * 3.0 Workflow 完成时间（周期）告警策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowCompletionTimeCycleExtInfo?: Array<TimeOutStrategyInfo>
+  /**
+   * 工作流执行触发告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowExecutionTrigger?: number
+  /**
+   * 工作流执行失败告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowExecutionFailureTrigger?: number
+  /**
+   * 工作流执行成功告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowExecutionSuccessTrigger?: number
 }
 
 /**
@@ -3425,6 +3445,23 @@ export interface TimeOutStrategyInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
+  /**
+   * 秒（用于 Spark Streaming 策略）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Second?: number
+  /**
+   * 次数（用于 Spark Streaming 重试次数超限策略，ruleType=10）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Times?: number
+  /**
+   * 告警触发频率（用于 Spark Streaming 策略 ruleType=8/9/10）
+         * 单位：分钟，范围：5-1440
+         * 告警触发后，在该时间内暂停检测，避免告警风暴
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmTriggerFrequency?: number
 }
 
 /**

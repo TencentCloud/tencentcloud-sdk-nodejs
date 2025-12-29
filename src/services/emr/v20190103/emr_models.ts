@@ -2508,15 +2508,41 @@ JobFlowStepsComplete，流程任务步骤已完成。
 JobFlowTerminating，流程任务所需资源销毁中。
 JobFlowFinish，流程任务已完成。
    */
-  State: string
+  State?: string
   /**
    * 流程任务步骤结果。
    */
-  Details: Array<JobResult>
+  Details?: Array<JobResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Tolerations
+ */
+export interface Toleration {
+  /**
+   * 键
+   */
+  Key?: string
+  /**
+   * 值
+   */
+  Value?: string
+  /**
+   * 操作符
+   */
+  Operator?: string
+  /**
+   * 污点排斥效果
+   */
+  Effect?: string
+  /**
+   * 驱逐等待时间
+   */
+  TolerationSeconds?: number
 }
 
 /**
@@ -2801,6 +2827,10 @@ export interface PodNewSpec {
    * pod name
    */
   PodName?: string
+  /**
+   * 其他账号授权信息
+   */
+  OtherAccountInfo?: OtherAccountInfo
 }
 
 /**
@@ -5830,7 +5860,7 @@ export interface DescribeServiceNodeInfosRequest {
    */
   HealthStateId?: string
   /**
-   * 服务组件名称，都是大写例如YARN
+   * 服务组件名称应采用全大写形式（例如：YARN），api调用时须与 ServiceGroupType 在两者之中任选其一并保证必填。
    */
   ServiceName?: string
   /**
@@ -6382,6 +6412,11 @@ export interface CloudResource {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Disks?: Array<Disk>
+  /**
+   * 容忍
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tolerations?: Array<Toleration>
 }
 
 /**
@@ -10329,6 +10364,22 @@ export interface TerminateSLInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 其他账号信息
+ */
+export interface OtherAccountInfo {
+  /**
+   * 其他账号UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OtherUin?: string
+  /**
+   * 其他账号授权角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleName?: string
 }
 
 /**

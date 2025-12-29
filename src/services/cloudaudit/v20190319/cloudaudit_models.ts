@@ -579,7 +579,7 @@ export interface CreateAuditTrackRequest {
  */
 export interface LookupAttribute {
   /**
-   * AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId
+   * AttributeKey的有效取值范围是:RequestId、EventName、ActionType、PrincipalId、ResourceId、ResourceName、AccessKeyId、SensitiveAction、ApiErrorCode、CamErrorCode、SourceIPAddress、Tags
    */
   AttributeKey: string
   /**
@@ -637,7 +637,20 @@ export interface DescribeEventsRequest {
    */
   MaxResults?: number
   /**
-   * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceId：资源Id、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码、Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系）
+   * 检索条件（目前支持：
+RequestId：请求 ID
+EventName：事件名称
+ActionType：操作类型（Write：写；Read：读）
+PrincipalId：子账号、ResourceType：资源类型
+ResourceId：资源Id
+ResourceName：资源名称
+AccessKeyId：密钥 ID
+SensitiveAction：是否敏感操作
+ApiErrorCode：API 错误码
+CamErrorCode：CAM 错误码
+SourceIPAddress：请求IP
+Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）
+备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系）
    */
   LookupAttributes?: Array<LookupAttribute>
   /**

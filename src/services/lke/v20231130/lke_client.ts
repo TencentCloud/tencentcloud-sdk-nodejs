@@ -25,8 +25,9 @@ import {
   DeleteDocRequest,
   AgentAdvancedConfig,
   WorkflowInfo,
+  DocReference,
   GetAppSecretResponse,
-  ExportQAListRequest,
+  UploadAttributeLabelResponse,
   CreateSharedKnowledgeRequest,
   AttrLabelRefer,
   CustomVariable,
@@ -55,6 +56,7 @@ import {
   TaskFlowInfo,
   GenerateQAResponse,
   AgentInputSystemVariable,
+  ClarificationConfig,
   SaveDocRequest,
   ListSharedKnowledgeResponse,
   DescribeAttributeLabelResponse,
@@ -65,7 +67,9 @@ import {
   GroupQAResponse,
   RetryReleaseRequest,
   AppConfig,
+  ContentReference,
   AgentToolReqParam,
+  QaReference,
   AttrLabelDetail,
   QAQuery,
   DescribeKnowledgeUsageRequest,
@@ -78,13 +82,15 @@ import {
   ListAppResponse,
   ValueInfo,
   RejectedQuestion,
-  UploadAttributeLabelResponse,
+  ExportQAListRequest,
   Procedure,
   CreateReleaseResponse,
   KnowledgeDetail,
+  FileInfoContent,
   GenerateQARequest,
   ListReferShareKnowledgeRequest,
   ListAttributeLabelRequest,
+  AgentOutputConfig,
   AgentReference,
   DeleteDocResponse,
   DescribeSegmentsResponse,
@@ -96,10 +102,11 @@ import {
   ModifyRejectedQuestionRequest,
   DescribeWorkflowRunResponse,
   OptionCardIndex,
-  VerifyQAResponse,
+  ListReleaseDocPreviewRequest,
   AgentPluginHeader,
   DescribeStorageCredentialRequest,
   SearchStrategy,
+  OutputWidgetConfig,
   ListReleaseResponse,
   ListModelResponse,
   DocFilterFlag,
@@ -117,8 +124,11 @@ import {
   GetAnswerTypeDataCountRequest,
   ListQaItem,
   ListUnsatisfiedReplyResponse,
+  Widget,
   CreateWorkflowRunRequest,
   DescribeQARequest,
+  WidgetParam,
+  WebSearchReference,
   ListQARequest,
   KnowledgeCapacityPieGraphDetail,
   ModelParameter,
@@ -141,6 +151,7 @@ import {
   AttributeLabelRefByWorkflow,
   RetryDocAuditRequest,
   ExportUnsatisfiedReplyRequest,
+  FileCollection,
   TokenStat,
   DigitalHumanConfig,
   ExportUnsatisfiedReplyResponse,
@@ -156,9 +167,11 @@ import {
   ListAttributeLabelResponse,
   ModifyQAAttrRangeRequest,
   CateInfo,
+  WebSearchContent,
   DeleteRejectedQuestionResponse,
   ListRejectedQuestionPreviewRequest,
   ListSelectDocRequest,
+  ToolAdvanceConfig,
   FileInfo,
   ModifyAppRequest,
   StrValue,
@@ -202,7 +215,6 @@ import {
   CreateAppResponse,
   Agent,
   CreateQARequest,
-  ListReleaseDocPreviewRequest,
   RateMsgRecordRequest,
   RenameDocResponse,
   MsgRecordReference,
@@ -238,6 +250,7 @@ import {
   AgentInput,
   DeleteVarRequest,
   KnowledgeQaConfig,
+  ImageInfoContent,
   GetDocPreviewResponse,
   ModelInfo,
   DeleteRejectedQuestionRequest,
@@ -248,6 +261,7 @@ import {
   ListChannelRequest,
   DeleteAttributeLabelResponse,
   IntentAchievement,
+  VerifyQAResponse,
   DescribeSharedKnowledgeRequest,
   ModifyDocRequest,
   KnowledgeModelConfig,
@@ -257,11 +271,13 @@ import {
   BaseConfig,
   SimilarQuestion,
   MsgFileInfo,
+  Content,
   DescribeTokenUsageRequest,
   AgentKnowledgeFilterDocAndAnswer,
   CreateAttributeLabelResponse,
   IsTransferIntentRequest,
   ModifyRejectedQuestionResponse,
+  ClarificationWidgetConfig,
   ModifyDocCateResponse,
   QuoteInfo,
   DescribeCallStatsGraphResponse,
@@ -295,6 +311,7 @@ import {
   ReferShareKnowledgeResponse,
   AgentModelInfo,
   AgentKnowledgeQAPlugin,
+  SandboxContent,
   ReferDetail,
   KnowledgeUpdateInfo,
   GetDocPreviewRequest,
@@ -302,6 +319,7 @@ import {
   KnowledgeSummary,
   ListSharedKnowledgeRequest,
   RetryDocParseRequest,
+  WidgetAction,
   GroupDocRequest,
   GroupQARequest,
   ModifyAttributeLabelRequest,
@@ -841,8 +859,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取QA分类
-   */
+     * 获取QA分类
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async ListQACate(
     req: ListQACateRequest,
     cb?: (error: string, rep: ListQACateResponse) => void
@@ -891,8 +912,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建QA分类
-   */
+     * 创建QA分类
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async CreateQACate(
     req: CreateQACateRequest,
     cb?: (error: string, rep: CreateQACateResponse) => void
@@ -1035,8 +1059,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出QA列表
-   */
+     * 导出QA列表
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async ExportQAList(
     req: ExportQAListRequest,
     cb?: (error: string, rep: ExportQAListResponse) => void
@@ -1165,8 +1192,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出不满意回复
-   */
+     * 导出不满意回复
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async ExportUnsatisfiedReply(
     req: ExportUnsatisfiedReplyRequest,
     cb?: (error: string, rep: ExportUnsatisfiedReplyResponse) => void
@@ -1381,8 +1411,11 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * QA分组
-   */
+     * 用户将多个问答批量的分类到知识库的具体分类
+知识库相关背景知识介绍
+“知识库检索范围”文档：https://cloud.tencent.com/document/product/1759/112704
+“标签”文档：https://cloud.tencent.com/document/product/1759/112956
+     */
   async GroupQA(
     req: GroupQARequest,
     cb?: (error: string, rep: GroupQAResponse) => void

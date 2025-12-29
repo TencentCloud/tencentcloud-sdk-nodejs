@@ -5005,6 +5005,20 @@ export interface GetTaskResultApiRequest {
 }
 
 /**
+ * 动态签署领取链接配置，当全部签署方均为动态签署方时生效。
+ */
+export interface DynamicSignOption {
+  /**
+   * 多份合同批量签署时，动态签署领取要求：<ul><li><b>0（默认值）</b>: 可以领取部分合同进入签署。</li><li><b>1 </b>: 必须全部领取进入签署，生成链接的所有合同必须相同经办人完成合同的领取签署。</li></ul>
+   */
+  DynamicReceiveType?: number
+  /**
+   * 动态签署方时，预设的企业名称，预设企业名称后，只允许对应的企业员工进行领取签署。
+   */
+  OrganizationName?: string
+}
+
+/**
  * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
  */
 export interface FlowDetailInfo {
@@ -5402,9 +5416,7 @@ export interface CreateOrganizationBatchSignUrlRequest {
    */
   Operator: UserInfo
   /**
-   * 请指定需执行批量签署的流程ID，数量范围为1-100。
-您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。
-用户将利用链接对这些合同实施批量操作。
+   * 请指定需执行批量签署的流程ID，数量范围为1-100。您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。用户将利用链接对这些合同实施批量操作。  注：生成动态签署方领取时此参数必传。
    */
   FlowIds?: Array<string>
   /**
@@ -5434,9 +5446,7 @@ UserId必须是传入合同（FlowId）中的签署人。
    */
   Mobile?: string
   /**
-   * 为签署方经办人在签署合同中的参与方ID，必须与参数FlowIds数组一一对应。
-您可以通过查询合同接口（DescribeFlowInfo）查询此参数。
-若传了此参数，则可以不传 UserId, Name, Mobile等参数
+   * 为签署方经办人在签署合同中的参与方ID，必须与参数FlowIds数组一一对应。您可以通过查询合同接口（DescribeFlowInfo）查询此参数。若传了此参数，则可以不传 UserId, Name, Mobile等参数  注：生成动态签署方领取时此参数必传。
    */
   RecipientIds?: Array<string>
   /**
@@ -5447,6 +5457,10 @@ UserId必须是传入合同（FlowId）中的签署人。
    * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。`
    */
   CanBatchReject?: boolean
+  /**
+   * 动态签署方领取链接配置。
+   */
+  DynamicSignOption?: DynamicSignOption
 }
 
 /**
@@ -13382,7 +13396,7 @@ export interface DescribeOrganizationGroupOrganizationsResponse {
  */
 export interface IntentionQuestion {
   /**
-   * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。
+   * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为250个字符。
    */
   Question?: string
   /**

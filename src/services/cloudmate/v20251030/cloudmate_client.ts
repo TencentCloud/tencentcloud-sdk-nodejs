@@ -18,29 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ManageIPPortraitRiskOutput,
-  ManageIPPortraitRiskInput,
-  ManageIPPortraitRiskResponse,
-  ManageIPPortraitRiskRequest,
-  ManageIPPortraitRiskValueOutput,
-} from "./rce_models"
+  CloudMateAgentRequest,
+  CloudMateAgentResponse,
+  ChatEventContentPart,
+  ChatContent,
+} from "./cloudmate_models"
 
 /**
- * rce client
+ * cloudmate client
  * @class
  */
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
-    super("rce.tencentcloudapi.com", "2025-04-25", clientConfig)
+    super("cloudmate.tencentcloudapi.com", "2025-10-30", clientConfig)
   }
 
   /**
-   * IP画像接口
-   */
-  async ManageIPPortraitRisk(
-    req: ManageIPPortraitRiskRequest,
-    cb?: (error: string, rep: ManageIPPortraitRiskResponse) => void
-  ): Promise<ManageIPPortraitRiskResponse> {
-    return this.request("ManageIPPortraitRisk", req, cb)
+     * 发起智能诊断对话
+注意：使用该API时，请务必设置请求域名（Endpoint）为 cloudmate.ai.tencentcloudapi.com
+     */
+  async CloudMateAgent(
+    req: CloudMateAgentRequest,
+    cb?: (error: string, rep: CloudMateAgentResponse) => void
+  ): Promise<CloudMateAgentResponse> {
+    return this.request("CloudMateAgent", req, cb)
   }
 }

@@ -108,6 +108,16 @@ it("mps.v20190612.DescribeStreamLinkEvent", async function () {
     }
 })
 
+it("mps.v20190612.CreateAigcImageTask", async function () {
+    try {
+       const data = await client.CreateAigcImageTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteAnimatedGraphicsTemplate", async function () {
     try {
        const data = await client.DeleteAnimatedGraphicsTemplate({})
@@ -528,9 +538,9 @@ it("mps.v20190612.DescribeVideoSearchTaskDetail", async function () {
     }
 })
 
-it("mps.v20190612.RecognizeAudio", async function () {
+it("mps.v20190612.ModifyWordSample", async function () {
     try {
-       const data = await client.RecognizeAudio({})
+       const data = await client.ModifyWordSample({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +691,16 @@ it("mps.v20190612.DescribeSmartEraseTemplates", async function () {
 it("mps.v20190612.ModifySmartEraseTemplate", async function () {
     try {
        const data = await client.ModifySmartEraseTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.RecognizeAudio", async function () {
+    try {
+       const data = await client.RecognizeAudio({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,9 +998,9 @@ it("mps.v20190612.DescribePersonSamples", async function () {
     }
 })
 
-it("mps.v20190612.ParseNotification", async function () {
+it("mps.v20190612.CreateAigcVideoTask", async function () {
     try {
-       const data = await client.ParseNotification({})
+       const data = await client.CreateAigcVideoTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1011,6 +1031,16 @@ it("mps.v20190612.DescribeAnimatedGraphicsTemplates", async function () {
 it("mps.v20190612.DeleteWordSamples", async function () {
     try {
        const data = await client.DeleteWordSamples({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeAigcVideoTask", async function () {
+    try {
+       const data = await client.DescribeAigcVideoTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1108,9 +1138,9 @@ it("mps.v20190612.DescribeUsageData", async function () {
     }
 })
 
-it("mps.v20190612.ModifyWordSample", async function () {
+it("mps.v20190612.DescribeAigcImageTask", async function () {
     try {
-       const data = await client.ModifyWordSample({})
+       const data = await client.DescribeAigcImageTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1161,6 +1191,16 @@ it("mps.v20190612.ModifyStreamLinkEvent", async function () {
 it("mps.v20190612.DescribeAIRecognitionTemplates", async function () {
     try {
        const data = await client.DescribeAIRecognitionTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ParseNotification", async function () {
+    try {
+       const data = await client.ParseNotification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

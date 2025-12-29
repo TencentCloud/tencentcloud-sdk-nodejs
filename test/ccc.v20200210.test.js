@@ -28,6 +28,16 @@ it("ccc.v20200210.TransferToManual", async function () {
     }
 })
 
+it("ccc.v20200210.PlaySoundCall", async function () {
+    try {
+       const data = await client.PlaySoundCall({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.ModifyCompanyApply", async function () {
     try {
        const data = await client.ModifyCompanyApply({})

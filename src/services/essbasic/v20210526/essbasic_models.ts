@@ -10165,7 +10165,7 @@ export interface ModifyPartnerAutoSignAuthUrlResponse {
  */
 export interface IntentionQuestion {
   /**
-   * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。
+   * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为250个字符。
    */
   Question?: string
   /**

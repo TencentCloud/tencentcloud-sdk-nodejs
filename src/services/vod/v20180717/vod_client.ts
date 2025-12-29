@@ -124,6 +124,7 @@ import {
   DescribeDailyMediaPlayStatRequest,
   TerrorismImgReviewTemplateInfoForUpdate,
   FaceConfigureInfoForUpdate,
+  AiRecognitionTaskOcrFullTextResultOutput,
   ModifyTranscodeTemplateRequest,
   ModifyMPSTemplateRequest,
   ProcessMediaByMPS,
@@ -171,7 +172,7 @@ import {
   FileDeleteTask,
   ResourceTag,
   ImportMediaKnowledgeRequest,
-  AiRecognitionTaskOcrFullTextResultOutput,
+  AigcImageSceneInfo,
   AiAnalysisTaskHighlightResult,
   SetVodDomainCertificateRequest,
   CreateAigcVideoTaskResponse,
@@ -252,6 +253,7 @@ import {
   ReviewAudioVideoTaskOutput,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   ModifyAnimatedGraphicsTemplateResponse,
+  CreateSceneAigcImageTaskResponse,
   AiRecognitionTaskAsrTranslateSegmentItem,
   DeleteCLSTopicResponse,
   LiveRealTimeClipRequest,
@@ -425,6 +427,7 @@ import {
   CopyRightWatermarkInput,
   AiRecognitionTaskHeadTailResultOutput,
   ModifyImageSpriteTemplateResponse,
+  SceneAigcImageOutputConfig,
   SetVodDomainCertificateResponse,
   ExtractTraceWatermarkTaskOutput,
   MediaProcessTaskCoverBySnapshotResult,
@@ -432,6 +435,7 @@ import {
   ComplexAdaptiveDynamicStreamingTaskInput,
   SortBy,
   DescribeMPSTemplatesRequest,
+  CreateSceneAigcImageTaskRequest,
   TerrorismConfigureInfoForUpdate,
   DescribeEventsStateRequest,
   WechatMiniProgramPublishTask,
@@ -610,6 +614,7 @@ import {
   OutputAudioStream,
   ModifyClassRequest,
   QRCodeConfigureInfoForUpdate,
+  SceneAigcImageTaskInputFileInfo,
   SpecificationDataItem,
   TEHDConfigForUpdate,
   ComposeMediaTaskOutput,
@@ -707,6 +712,7 @@ import {
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
   ModifySubAppIdStatusResponse,
+  ChangeClothesConfig,
   ReviewImageResponse,
   DescribeStorageRegionsResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
@@ -2066,6 +2072,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageReviewUsageDataResponse) => void
   ): Promise<DescribeImageReviewUsageDataResponse> {
     return this.request("DescribeImageReviewUsageData", req, cb)
+  }
+
+  /**
+   * 该接口用于生成场景化 AIGC 图片。<b>接口处于内测阶段，如需使用请[联系我们](https://cloud.tencent.com/online-service?from=sales_sales&source=PRESALE)，接口调用会产生实际费用。</b>
+   */
+  async CreateSceneAigcImageTask(
+    req: CreateSceneAigcImageTaskRequest,
+    cb?: (error: string, rep: CreateSceneAigcImageTaskResponse) => void
+  ): Promise<CreateSceneAigcImageTaskResponse> {
+    return this.request("CreateSceneAigcImageTask", req, cb)
   }
 
   /**

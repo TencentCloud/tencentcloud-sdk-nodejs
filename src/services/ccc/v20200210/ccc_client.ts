@@ -57,6 +57,7 @@ import {
   DescribeChatMessagesResponse,
   DescribeSessionDetailResponse,
   ServeParticipant,
+  PlaySoundCallResponse,
   AICallExtractResultElement,
   DescribeTelCallInfoResponse,
   DescribeExtensionsResponse,
@@ -223,6 +224,7 @@ import {
   DescribeIMCdrListRequest,
   AIAnalysisResult,
   DescribeAutoCalloutTasksRequest,
+  PlaySoundCallRequest,
   DescribeChatMessagesRequest,
   DescribeTelSessionResponse,
   SetStaffStatusRspItem,
@@ -264,6 +266,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TransferToManualResponse) => void
   ): Promise<TransferToManualResponse> {
     return this.request("TransferToManual", req, cb)
+  }
+
+  /**
+   * 对与座席通话中的会话，进行放音
+   */
+  async PlaySoundCall(
+    req: PlaySoundCallRequest,
+    cb?: (error: string, rep: PlaySoundCallResponse) => void
+  ): Promise<PlaySoundCallResponse> {
+    return this.request("PlaySoundCall", req, cb)
   }
 
   /**

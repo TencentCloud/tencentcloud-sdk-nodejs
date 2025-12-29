@@ -163,6 +163,7 @@ import {
   DeleteIntegrationEmployeesRequest,
   FailedUpdateStaffData,
   GetTaskResultApiRequest,
+  DynamicSignOption,
   FlowDetailInfo,
   CreatePersonAuthCertificateImageRequest,
   CreateFlowByFilesResponse,

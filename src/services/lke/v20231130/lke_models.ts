@@ -128,6 +128,14 @@ export interface AgentAdvancedConfig {
    * 结构化输出配置
    */
   StructuredOutputConfig?: StructuredOutputConfig
+  /**
+   * Agent输出配置
+   */
+  AgentOutputConfig?: AgentOutputConfig
+  /**
+   * 澄清询问配置
+   */
+  ClarificationConfig?: ClarificationConfig
 }
 
 /**
@@ -164,6 +172,46 @@ export interface WorkflowInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowReleaseTime?: string
+  /**
+   * 工作流多气泡输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Contents?: Array<Content>
+}
+
+/**
+ * 文档类参考来源信息
+ */
+export interface DocReference {
+  /**
+   * 文档业务ID
+   */
+  DocBizId?: number
+  /**
+   * 文档片段参考ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReferBizId?: number
+  /**
+   * 文档名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocName?: string
+  /**
+   * 文档所在知识库业务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeBizId?: number
+  /**
+   * 文档所在知识库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeName?: string
+  /**
+   * 文档访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
 }
 
 /**
@@ -193,21 +241,25 @@ export interface GetAppSecretResponse {
 }
 
 /**
- * ExportQAList请求参数结构体
+ * UploadAttributeLabel返回参数结构体
  */
-export interface ExportQAListRequest {
+export interface UploadAttributeLabelResponse {
   /**
-   * 应用ID
+   * 导入错误
    */
-  BotBizId: string
+  ErrorMsg?: string
   /**
-   * QA业务ID
+   * 错误链接
    */
-  QaBizIds: Array<string>
+  ErrorLink?: string
   /**
-   * 查询参数
+   * 错误链接文本
    */
-  Filters?: QAQuery
+  ErrorLinkText?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -671,7 +723,7 @@ export interface DescribeDocResponse {
    */
   CateNamePath?: Array<string>
   /**
-   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   * 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
    */
   EnableScope?: number
   /**
@@ -864,6 +916,10 @@ export interface AgentToolInfo {
    * 计费状态；0-不计费，1-限时免费，2-官方收费
    */
   FinanceType?: number
+  /**
+   * 工具高级设置
+   */
+  ToolAdvanceConfig?: ToolAdvanceConfig
 }
 
 /**
@@ -959,6 +1015,20 @@ export interface AgentInputSystemVariable {
    * 对话历史轮数的配置；如果Input是系统变量中的“对话历史”时才使用；
    */
   DialogHistoryLimit?: number
+}
+
+/**
+ * 澄清询问配置
+ */
+export interface ClarificationConfig {
+  /**
+   * 输出类型，1-文本 3-widget
+   */
+  OutputType?: number
+  /**
+   * 澄清widget配置
+   */
+  WidgetConfigs?: Array<ClarificationWidgetConfig>
 }
 
 /**
@@ -1144,7 +1214,8 @@ cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判
    */
   UpdatePeriodInfo?: UpdatePeriodInfo
   /**
-   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   * 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
+默认值：应用内默认知识库为2，共享知识库为4。
    */
   EnableScope?: number
 }
@@ -1285,11 +1356,11 @@ export interface GroupQAResponse {
  */
 export interface RetryReleaseRequest {
   /**
-   * 机器人ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   BotBizId: string
   /**
-   * 发布业务ID
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
    */
   ReleaseBizId: string
 }
@@ -1313,6 +1384,43 @@ export interface AppConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Classify?: ClassifyConfig
+}
+
+/**
+ * 会话内容参考文献信息
+ */
+export interface ContentReference {
+  /**
+   * 引用来源索引ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: number
+  /**
+   * 参考来源名称
+   */
+  Name?: string
+  /**
+   * 参考来源类型
+1：问答
+2：文档片段
+4：联网检索到的内容
+   */
+  Type?: number
+  /**
+   * 文档片段参考信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocRefer?: DocReference
+  /**
+   * 问答参考信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QaRefer?: QaReference
+  /**
+   * 联网检索内容参考信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebSearchRefer?: WebSearchReference
 }
 
 /**
@@ -1363,6 +1471,31 @@ export interface AgentToolReqParam {
    * 输入
    */
   Input?: AgentInput
+}
+
+/**
+ * 问答对参考信息
+ */
+export interface QaReference {
+  /**
+   * 问答业务ID
+   */
+  QaBizId?: number
+  /**
+   * 文档片段参考ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReferBizId?: number
+  /**
+   * 问答所在知识库业务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeBizId?: number
+  /**
+   * 问答所在知识库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgeName?: string
 }
 
 /**
@@ -1887,25 +2020,29 @@ export interface RejectedQuestion {
 }
 
 /**
- * UploadAttributeLabel返回参数结构体
+ * ExportQAList请求参数结构体
  */
-export interface UploadAttributeLabelResponse {
+export interface ExportQAListRequest {
   /**
-   * 导入错误
+   * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
-  ErrorMsg?: string
+  BotBizId: string
   /**
-   * 错误链接
+   * QA业务ID
    */
-  ErrorLink?: string
+  QaBizIds: Array<string>
   /**
-   * 错误链接文本
+   * 查询参数
+Filters.pageNumber范围是>0,0<Filters.pageSize<=200
+Filters.query用于内容检索，模糊匹配
+Filters.AcceptStatus默认值是0，表示不筛选，返回所有状态
+Filters.ReleaseStatus默认值是0，表示不筛选，返回所有状态
+Filters.Source默认值是0，表示不筛选，返回所有来源。表示来源(1 文档生成 2 批量导入 3 手动添加)。
+Filter.QueryType默认值是"filename"，表示查询类型。
+ShowCurrCate表示，是否只展示当前分类的数据 0不是，1是
    */
-  ErrorLinkText?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Filters?: QAQuery
 }
 
 /**
@@ -2002,6 +2139,36 @@ export interface KnowledgeDetail {
 }
 
 /**
+ * 文件信息内容
+ */
+export interface FileInfoContent {
+  /**
+   * 实时文档解析接口返回的 DocBizId
+   */
+  DocBizId?: number
+  /**
+   * 文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileType?: string
+  /**
+   * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: number
+  /**
+   * 文件 URL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileUrl?: string
+}
+
+/**
  * GenerateQA请求参数结构体
  */
 export interface GenerateQARequest {
@@ -2065,6 +2232,24 @@ export interface ListAttributeLabelRequest {
    * 每个标签同步拉取的标签值数量。即在展示标签列表时，为每一个标签加载多少个具体的标签值。
    */
   LabelSize?: number
+}
+
+/**
+ * Agent输出配置
+ */
+export interface AgentOutputConfig {
+  /**
+   * 输出类型，1-文本 2-json 3-widget
+   */
+  OutputType?: number
+  /**
+   * Json结构化输出参数列表
+   */
+  StructuredOutputParams?: Array<ParameterConfig>
+  /**
+   * widget id
+   */
+  WidgetId?: string
 }
 
 /**
@@ -2284,7 +2469,7 @@ export interface ModifyRejectedQuestionRequest {
    */
   Question: string
   /**
-   * 拒答问题来源的数据源唯一id, 通过[ListRejectedQuestion](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListRejectedQuestion)接口获取
+   * 拒答问题来源的数据源唯一id, 通过调用ListRejectedQuestion接口获取
 
 
 
@@ -2329,13 +2514,41 @@ export interface OptionCardIndex {
 }
 
 /**
- * VerifyQA返回参数结构体
+ * ListReleaseDocPreview请求参数结构体
  */
-export interface VerifyQAResponse {
+export interface ListReleaseDocPreviewRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
-  RequestId?: string
+  BotBizId: string
+  /**
+   * 页码（必须大于0）
+   */
+  PageNumber: number
+  /**
+   * 每页数量（取值范围为1-200）
+   */
+  PageSize: number
+  /**
+   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
+   */
+  Query?: string
+  /**
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
+   */
+  ReleaseBizId?: string
+  /**
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
+   */
+  StartTime?: string
+  /**
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
+   */
+  EndTime?: string
+  /**
+   * 状态(1新增2修改3删除)，其和ReleaseStatus的区别为： Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据 / 内容本身的发布状态
+   */
+  Actions?: Array<number | bigint>
 }
 
 /**
@@ -2424,6 +2637,24 @@ export interface SearchStrategy {
 }
 
 /**
+ * Widget输出参数配置
+ */
+export interface OutputWidgetConfig {
+  /**
+   * widget id
+   */
+  WidgetId?: string
+  /**
+   * widget名字
+   */
+  WidgetName?: string
+  /**
+   * 展示结果
+   */
+  WidgetParam?: Array<WidgetParam>
+}
+
+/**
  * ListRelease返回参数结构体
  */
 export interface ListReleaseResponse {
@@ -2489,6 +2720,7 @@ export interface CreateVarResponse {
 export interface CreateQACateRequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
@@ -2496,8 +2728,7 @@ export interface CreateQACateRequest {
    */
   ParentBizId: string
   /**
-   * 分类名称
-
+   * 创建的分类名称
    */
   Name: string
 }
@@ -2896,6 +3127,41 @@ export interface ListUnsatisfiedReplyResponse {
 }
 
 /**
+ * 对话端Widget结构
+ */
+export interface Widget {
+  /**
+   * Widget配置ID
+
+   */
+  WidgetId?: string
+  /**
+   * Widget实例ID
+   */
+  WidgetRunId?: string
+  /**
+   * Widget状态数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * Widget位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Position?: number
+  /**
+   * Base64编码的Widget信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncodedWidget?: string
+  /**
+   * 用户最近一次提交的payload
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Payload?: string
+}
+
+/**
  * CreateWorkflowRun请求参数结构体
  */
 export interface CreateWorkflowRunRequest {
@@ -2930,6 +3196,42 @@ export interface DescribeQARequest {
    * 应用ID
    */
   BotBizId: string
+}
+
+/**
+ * Widget参数配置
+ */
+export interface WidgetParam {
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
+   * 参数类型
+   */
+  Type?: number
+  /**
+   * 子参数
+   */
+  SubParams?: Array<WidgetParam>
+  /**
+   * 默认值, Input未指定时，使用该值
+   */
+  DefaultValue?: string
+  /**
+   * 输入的值
+   */
+  Input?: AgentInput
+}
+
+/**
+ * 联网检索内容参考详情
+ */
+export interface WebSearchReference {
+  /**
+   * 网页URL
+   */
+  Url?: string
 }
 
 /**
@@ -3031,6 +3333,23 @@ export interface KnowledgeCapacityPieGraphDetail {
  */
 export interface ModelParameter {
   /**
+   * 超参名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 类型
+   */
+  Type?: string
+  /**
+   * 默认值
+   */
+  DefaultValue?: string
+  /**
+   * 枚举值
+   */
+  EnumValues?: Array<string>
+  /**
    * 默认值
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3045,11 +3364,6 @@ export interface ModelParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Max?: number
-  /**
-   * 超参名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
 }
 
 /**
@@ -3486,10 +3800,11 @@ export interface RetryDocAuditRequest {
 export interface ExportUnsatisfiedReplyRequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
-   * 勾选导出ID列表
+   * 勾选导出不满意回复的ID列表
    */
   ReplyBizIds: Array<string>
   /**
@@ -3504,6 +3819,21 @@ export interface ExportUnsatisfiedReplyRequest {
    * 检索过滤器
    */
   Filters?: Filters
+}
+
+/**
+ * 文件收集信息
+ */
+export interface FileCollection {
+  /**
+   * 最大上传文件的数量
+   */
+  MaxFileCount: number
+  /**
+   * 支持的上传文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportedFileTypes: Array<string>
 }
 
 /**
@@ -4032,6 +4362,16 @@ export interface CateInfo {
 }
 
 /**
+ * 网页搜索内容
+ */
+export interface WebSearchContent {
+  /**
+   * 网页搜索结果，json格式的string
+   */
+  Content?: string
+}
+
+/**
  * DeleteRejectedQuestion返回参数结构体
  */
 export interface DeleteRejectedQuestionResponse {
@@ -4098,6 +4438,32 @@ export interface ListSelectDocRequest {
 }
 
 /**
+ * 工具高级设置
+ */
+export interface ToolAdvanceConfig {
+  /**
+   * 工具调用结果是否直接返回给用户
+   */
+  EnableDirectResultReturn?: boolean
+  /**
+   * 输出样式 1-文本 2-json 3-widget
+   */
+  OutputType?: number
+  /**
+   * 原始结构化JSON输出
+   */
+  RawStructuredOutput?: string
+  /**
+   * 自定义文本输出，多行展示
+   */
+  CustomTextOutputs?: string
+  /**
+   * Widget输出配置
+   */
+  OutputWidgetConfig?: OutputWidgetConfig
+}
+
+/**
  * 实时上传的文件信息
  */
 export interface FileInfo {
@@ -4138,11 +4504,11 @@ export interface FileInfo {
  */
 export interface ModifyAppRequest {
   /**
-   * 应用 ID
+   * 应用ID, 获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
    */
   AppBizId: string
   /**
-   * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classify-知识标签提取
+   * 应用类型；"knowledge_qa" 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式）
    */
   AppType: string
   /**
@@ -4294,6 +4660,7 @@ export interface DescribeConcurrencyUsageRequest {
 export interface ListQACateRequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
@@ -4509,6 +4876,11 @@ export interface WorkFlowSummary {
    * 选项卡索引
    */
   OptionCardIndex?: OptionCardIndex
+  /**
+   * 工作流多气泡输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Contents?: Array<Content>
 }
 
 /**
@@ -4596,7 +4968,7 @@ export interface ProcedureDebugging {
  */
 export interface GetMsgRecordRequest {
   /**
-   * 类型
+   * 接入类型， 5-API 访客，目前仅支持传5
    */
   Type: number
   /**
@@ -4604,7 +4976,7 @@ export interface GetMsgRecordRequest {
    */
   Count: number
   /**
-   * 会话sessionid
+   * 会话sessionid。
    */
   SessionId: string
   /**
@@ -4612,7 +4984,9 @@ export interface GetMsgRecordRequest {
    */
   BotAppKey?: string
   /**
-   * 场景, 体验: 1; 正式: 2
+   * 场景, 体验: 1; 正式: 2 。
+
+体验用于创建应用测试的时候使用，正式是应用发布后对外的时候使用
    */
   Scene?: number
   /**
@@ -4620,12 +4994,15 @@ export interface GetMsgRecordRequest {
 
 MidRecordId与LastRecordId只能选择一个
 
+LastRecordId 和MidRecordId都不填的时候，默认从最新的消息ID开始取。
    */
   LastRecordId?: string
   /**
    * 传该值，代表拉取该记录id的前后总共count条消息记录
 
 MidRecordId与LastRecordId只能选择一个
+
+LastRecordId 和MidRecordId都不填的时候，默认从最新的消息Id开始取
 
    */
   MidRecordId?: string
@@ -4889,12 +5266,13 @@ export interface DescribeQAResponse {
    */
   CateNamePath?: Array<string>
   /**
-   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   * 问答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableScope?: number
   /**
-   * 问答关联的文档生效域
+   * 问答关联的文档生效域:1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效.
+若问答未关联文档，则该字段值同问答生效域
    */
   DocEnableScope?: number
   /**
@@ -4973,7 +5351,7 @@ export interface ModifyQARequest {
    */
   QuestionDesc?: string
   /**
-   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   * 问答生效范围: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。若不传该字段，则不修改问答的生效范围。
    */
   EnableScope?: number
 }
@@ -5112,6 +5490,16 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkFlow?: WorkflowInfo
+  /**
+   * Widget信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Widgets?: Array<Widget>
+  /**
+   * Widget动作信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WidgetAction?: WidgetAction
 }
 
 /**
@@ -5204,7 +5592,7 @@ export interface DescribeUnsatisfiedReplyContextRequest {
    */
   BotBizId: string
   /**
-   * 回复ID，调用这个接口获得：[ListUnsatisfiedReply](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListUnsatisfiedReply)
+   * 回复ID
    */
   ReplyBizId: string
   /**
@@ -5291,15 +5679,15 @@ export interface KnowledgeQaSearch {
  */
 export interface ListReleaseRequest {
   /**
-   * 应用ID
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
   BotBizId: string
   /**
-   * 页码
+   * 页码(必须大于0)
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 每页数量（取值范围为1-200）
    */
   PageSize: number
 }
@@ -5505,47 +5893,10 @@ export interface CreateQARequest {
    */
   QuestionDesc?: string
   /**
-   * 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   * 问答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
+默认值：应用内默认知识库为2，共享知识库为4。
    */
   EnableScope?: number
-}
-
-/**
- * ListReleaseDocPreview请求参数结构体
- */
-export interface ListReleaseDocPreviewRequest {
-  /**
-   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
-   */
-  BotBizId: string
-  /**
-   * 页码（必须大于0）
-   */
-  PageNumber: number
-  /**
-   * 每页数量（取值范围为1-200）
-   */
-  PageSize: number
-  /**
-   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
-   */
-  Query?: string
-  /**
-   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
-   */
-  ReleaseBizId?: string
-  /**
-   * 开始时间。Unix 时间戳，单位是秒，默认为空。
-   */
-  StartTime?: string
-  /**
-   * 结束时间。Unix 时间戳，单位是秒，默认为空。
-   */
-  EndTime?: string
-  /**
-   * 状态(1新增2修改3删除)，其和ReleaseStatus的区别为： Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据 / 内容本身的发布状态
-   */
-  Actions?: Array<number | bigint>
 }
 
 /**
@@ -5894,7 +6245,7 @@ export interface AgentProcedureDebugging {
  */
 export interface DescribeTokenUsageGraphRequest {
   /**
-   * 腾讯云主账号
+   * 子账号标识列表，支持批量查询多个子账号。不填时查询主账号下所有子账号的汇总数据
    */
   UinAccount?: Array<string>
   /**
@@ -5907,18 +6258,20 @@ export interface DescribeTokenUsageGraphRequest {
   ModelName?: string
   /**
    * 开始时间戳, 单位为秒(废弃)
+   * @deprecated
    */
   StartTime?: string
   /**
    * 结束时间戳, 单位为秒(废弃)
+   * @deprecated
    */
   EndTime?: string
   /**
-   * 应用id列表
+   * 应用ID列表。不填时：若指定SpaceId则查该空间所有应用；否则查用户下所有应用
    */
   AppBizIds?: Array<string>
   /**
-   * 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库)
+   * 应用类型。可选值：knowledge_qa(知识问答)/plugin_parsing_qa(插件)/shared_knowledge(知识库)/evaluate_test(评测)。不填时查所有类型
    */
   AppType?: string
   /**
@@ -5926,11 +6279,11 @@ export interface DescribeTokenUsageGraphRequest {
    */
   SubScenes?: Array<string>
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatStartTime?: number
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatEndTime?: number
 }
@@ -5990,11 +6343,11 @@ export interface DescribeConcurrencyUsageGraphRequest {
  */
 export interface DescribeReleaseRequest {
   /**
-   * 应用ID
+   * 应用ID。获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
-   * 发布详情
+   * 发布ID
    */
   ReleaseBizId?: string
 }
@@ -6206,7 +6559,7 @@ export interface ModifyDocAttrRangeResponse {
  */
 export interface DescribeCallStatsGraphRequest {
   /**
-   * uin
+   * 子账号标识列表，支持批量查询多个子账号。不填时查询主账号下所有子账号的汇总数据
    */
   UinAccount?: Array<string>
   /**
@@ -6218,7 +6571,7 @@ export interface DescribeCallStatsGraphRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * 子业务类型
+   * 子业务类型，用于筛选不同业务场景的调用统计
    */
   SubBizType?: string
   /**
@@ -6227,10 +6580,12 @@ export interface DescribeCallStatsGraphRequest {
   ModelName?: string
   /**
    * 开始时间戳, 单位为秒(废弃)
+   * @deprecated
    */
   StartTime?: string
   /**
    * 结束时间戳, 单位为秒(废弃)
+   * @deprecated
    */
   EndTime?: string
   /**
@@ -6246,15 +6601,15 @@ export interface DescribeCallStatsGraphRequest {
    */
   AppType?: string
   /**
-   * 空间id
+   * 空间ID，用于限定查询范围。不填时查询所有空间的数据
    */
   SpaceId?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatStartTime?: number
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatEndTime?: number
 }
@@ -6446,6 +6801,18 @@ export interface ModelParams {
    * 输出格式
    */
   ReplyFormat?: string
+  /**
+   * 深度思考值
+disabled
+enabled
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeepThinking?: string
+  /**
+   * 效果 disabled low medium high
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReasoningEffort?: string
 }
 
 /**
@@ -6476,6 +6843,10 @@ export interface AgentInput {
    * 系统参数
    */
   SystemVariable?: AgentInputSystemVariable
+  /**
+   * 工具参数
+   */
+  ToolParam?: string
 }
 
 /**
@@ -6625,6 +6996,16 @@ export interface KnowledgeQaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeAdvancedConfig?: KnowledgeAdvancedConfig
+}
+
+/**
+ * 图片信息
+ */
+export interface ImageInfoContent {
+  /**
+   * 图片文件链接
+   */
+  Url?: string
 }
 
 /**
@@ -7023,6 +7404,16 @@ export interface IntentAchievement {
 }
 
 /**
+ * VerifyQA返回参数结构体
+ */
+export interface VerifyQAResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSharedKnowledge请求参数结构体
  */
 export interface DescribeSharedKnowledgeRequest {
@@ -7102,7 +7493,8 @@ export interface ModifyDocRequest {
    */
   SplitRule?: string
   /**
-   * 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域
+   * 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。
+若不传，则不会修改文档生效域。
    */
   EnableScope?: number
 }
@@ -7339,11 +7731,97 @@ export interface MsgFileInfo {
 }
 
 /**
+ * 对话记录内容详情
+ */
+export interface Content {
+  /**
+   * 消息内容类型
+text：文本
+image：图片
+file：文件
+option_cards：选项卡
+custom_params：用户自定义业务参数
+sandbox：云桌面
+custom_variables：自定义输入参数
+web_search: 网页搜索内容
+file_collection：文件收集信息
+widget：widget信息
+widget_action：用户端widget动作信息
+   */
+  Type?: string
+  /**
+   * 文本内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * 引用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuoteInfos?: Array<QuoteInfo>
+  /**
+   * 参考文献信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  References?: Array<ContentReference>
+  /**
+   * 图片信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Image?: ImageInfoContent
+  /**
+   * 文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  File?: FileInfoContent
+  /**
+   * 选项卡信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionCards?: Array<string>
+  /**
+   * 用户自定义业务参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomParams?: Array<string>
+  /**
+   * 自定义变量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomVariables?: Array<string>
+  /**
+   * 沙盒信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sandbox?: SandboxContent
+  /**
+   * 网页搜索内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebSearch?: WebSearchContent
+  /**
+   * 文件收集信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileCollection?: FileCollection
+  /**
+   * Widget信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Widget?: Widget
+  /**
+   * Widget动作信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WidgetAction?: WidgetAction
+}
+
+/**
  * DescribeTokenUsage请求参数结构体
  */
 export interface DescribeTokenUsageRequest {
   /**
-   * 腾讯云主账号
+   * 子账号标识列表，用于筛选指定子账号的统计数据，不填时查询主账号下所有子账号的汇总数据
    */
   UinAccount?: Array<string>
   /**
@@ -7364,10 +7842,12 @@ export interface DescribeTokenUsageRequest {
   ModelName?: string
   /**
    * 开始时间戳, 单位为秒(默认值0)(废弃)
+   * @deprecated
    */
   StartTime?: string
   /**
    * 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳)(废弃)
+   * @deprecated
    */
   EndTime?: string
   /**
@@ -7383,15 +7863,15 @@ export interface DescribeTokenUsageRequest {
    */
   AppType?: string
   /**
-   * 空间id
+   * 空间ID，用于限定查询范围。不填时查询所有空间的数据
    */
   SpaceId?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatStartTime?: number
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatEndTime?: number
 }
@@ -7450,6 +7930,32 @@ export interface ModifyRejectedQuestionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 澄清widget配置
+ */
+export interface ClarificationWidgetConfig {
+  /**
+   * widget id
+   */
+  WidgetId?: string
+  /**
+   * 澄清widget类型
+   */
+  ClarificationWidgetType?: number
+  /**
+   * Widget名称
+   */
+  WidgetName?: string
+  /**
+   * Widget预览
+   */
+  WidgetPreview?: string
+  /**
+   * 是否启用该Widget作为澄清样式
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -8275,6 +8781,27 @@ export interface AgentKnowledgeQAPlugin {
 }
 
 /**
+ * 沙盒信息内容
+ */
+export interface SandboxContent {
+  /**
+   * 沙盒的URL地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 沙盒通过浏览器打开的URL地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayUrl?: string
+  /**
+   * 沙盒输出内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+}
+
+/**
  * 引用来源详情
  */
 export interface ReferDetail {
@@ -8494,6 +9021,30 @@ export interface RetryDocParseRequest {
 }
 
 /**
+ * 对话端Widget动作提交结构
+ */
+export interface WidgetAction {
+  /**
+   * Widget配置ID
+   */
+  WidgetId?: string
+  /**
+   * Widget实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WidgetRunId?: string
+  /**
+   * Widget动作
+   */
+  ActionType?: string
+  /**
+   * Widget动作提交的数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Payload?: string
+}
+
+/**
  * GroupDoc请求参数结构体
  */
 export interface GroupDocRequest {
@@ -8517,6 +9068,7 @@ export interface GroupDocRequest {
 export interface GroupQARequest {
   /**
    * 应用ID
+若要操作共享知识库，传KnowledgeBizId
    */
   BotBizId: string
   /**
@@ -9010,7 +9562,7 @@ export interface DescribeKnowledgeUsagePieGraphRequest {
    */
   AppBizIds?: Array<string>
   /**
-   * 空间列表
+   * 空间ID，用于限定查询范围。不填时查询所有空间的数据
    */
   SpaceId?: string
 }
@@ -9457,6 +10009,14 @@ export interface ListReleaseItem {
    * 发布失败数
    */
   FailCount?: number
+  /**
+   * 版本号，格式是 v{date}{time}
+   */
+  ReleaseVersion?: string
+  /**
+   * 是否可还原
+   */
+  CanRollback?: boolean
 }
 
 /**
@@ -9586,11 +10146,12 @@ export interface GetWsTokenRequest {
   BotAppKey?: string
   /**
    * 访客ID（外部输入，建议唯一，标识当前接入会话的用户）
-长度限制： string(64)
+长度限制： string(64)，即最长不超过64个字符
    */
   VisitorBizId?: string
   /**
    * 知识标签，用于知识库中知识的检索过滤。该字段即将下线，请使用对话端接口中的 custom_variables 字段替代该字段。
+   * @deprecated
    */
   VisitorLabels?: Array<GetWsTokenReq_Label>
 }

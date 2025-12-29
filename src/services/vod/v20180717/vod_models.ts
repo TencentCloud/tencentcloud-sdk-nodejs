@@ -2945,6 +2945,25 @@ export interface FaceConfigureInfoForUpdate {
 }
 
 /**
+ * 文本全文识别输出。
+ */
+export interface AiRecognitionTaskOcrFullTextResultOutput {
+  /**
+   * 文本全文识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   */
+  SegmentSet: Array<AiRecognitionTaskOcrFullTextSegmentItem>
+  /**
+   * 文本全文识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   */
+  SegmentSetFileUrl: string
+  /**
+   * 文本全文识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  SegmentSetFileUrlExpireTime: string
+}
+
+/**
  * ModifyTranscodeTemplate请求参数结构体
  */
 export interface ModifyTranscodeTemplateRequest {
@@ -4019,22 +4038,20 @@ export interface ImportMediaKnowledgeRequest {
 }
 
 /**
- * 文本全文识别输出。
+ * 场景化 AIGC 生图配置。
  */
-export interface AiRecognitionTaskOcrFullTextResultOutput {
+export interface AigcImageSceneInfo {
   /**
-   * 文本全文识别结果集。
-<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   * AI生图场景类型，可选值：
+- change_clothes：AI换衣。
    */
-  SegmentSet: Array<AiRecognitionTaskOcrFullTextSegmentItem>
+  Type: string
   /**
-   * 文本全文识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   * 当 Type 为 change_clothes 时有效，则该项为必填，表示AI 换衣生图配置参数。
+
+
    */
-  SegmentSetFileUrl: string
-  /**
-   * 文本全文识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  SegmentSetFileUrlExpireTime: string
+  ChangeClothesConfig?: ChangeClothesConfig
 }
 
 /**
@@ -6128,6 +6145,20 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
  * ModifyAnimatedGraphicsTemplate返回参数结构体
  */
 export interface ModifyAnimatedGraphicsTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSceneAigcImageTask返回参数结构体
+ */
+export interface CreateSceneAigcImageTaskResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10544,6 +10575,30 @@ export interface ModifyImageSpriteTemplateResponse {
 }
 
 /**
+ * AIGC 场景化生图任务的输出媒体文件配置。
+ */
+export interface SceneAigcImageOutputConfig {
+  /**
+   * 存储模式。取值有： <li>Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li>
+默认值：Temporary
+   */
+  StorageMode?: string
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+}
+
+/**
  * SetVodDomainCertificate返回参数结构体
  */
 export interface SetVodDomainCertificateResponse {
@@ -10712,6 +10767,46 @@ export interface DescribeMPSTemplatesRequest {
 1. 音视频增强：仅支持填写“[获取转码模板列表](https://cloud.tencent.com/document/product/862/37593)”接口中的 Definitions、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
    */
   MPSDescribeTemplateParams?: string
+}
+
+/**
+ * CreateSceneAigcImageTask请求参数结构体
+ */
+export interface CreateSceneAigcImageTaskRequest {
+  /**
+   * **点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。**
+   */
+  SubAppId: number
+  /**
+   * 场景化生图参数配置。
+   */
+  SceneInfo: AigcImageSceneInfo
+  /**
+   * 输入图片列表，支持的图片格式：jpg、jpeg、png、webp。不同的场景需要不同的输入数据：
+
+- change_clothes：只能输入1张**模特**图片。
+   */
+  FileInfos?: Array<SceneAigcImageTaskInputFileInfo>
+  /**
+   * 场景化生图任务的输出媒体文件配置。
+   */
+  OutputConfig?: SceneAigcImageOutputConfig
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -15493,6 +15588,30 @@ export interface QRCodeConfigureInfoForUpdate {
 }
 
 /**
+ * AIGC场景化生图任务输入文件信息
+ */
+export interface SceneAigcImageTaskInputFileInfo {
+  /**
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 URL；</li>
+   */
+  Type?: string
+  /**
+   * 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
+说明：
+1. 推荐使用小于7M的图片；
+2. 图片格式的取值为：jpeg，jpg, png, webp。
+   */
+  FileId?: string
+  /**
+   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
+说明：
+1. 推荐使用小于7M的图片；
+2. 图片格式的取值为：jpeg，jpg, png, webp。
+   */
+  Url?: string
+}
+
+/**
  * 指定规格任务统计数据。
  */
 export interface SpecificationDataItem {
@@ -17856,6 +17975,16 @@ export interface ModifySubAppIdStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI 换衣参数配置
+ */
+export interface ChangeClothesConfig {
+  /**
+   * 输入需要更换的**衣物**图片列表。目前最大支持4张图片。
+   */
+  ClothesFileInfos?: Array<SceneAigcImageTaskInputFileInfo>
 }
 
 /**
