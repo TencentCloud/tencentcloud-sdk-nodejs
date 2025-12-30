@@ -24,6 +24,7 @@ import {
   CompleteCertificateRequest,
   UploadUpdateCertificateRecordRetryRequest,
   DownloadCertificateResponse,
+  MQTTInstanceList,
   ManagerInfo,
   DescribeHostDeployRecordDetailResponse,
   TCBAccessInstance,
@@ -77,6 +78,7 @@ import {
   DescribeCertificateBindResourceTaskResultRequest,
   UpdateRecordDetail,
   BindResourceResult,
+  TDMQInstanceDetail,
   ApplyCertificateResponse,
   DescribeHostDeployRecordRequest,
   UpdateSyncProgressRegion,
@@ -88,6 +90,7 @@ import {
   SyncTaskBindResourceResult,
   ClbInstanceDetail,
   UpdateSyncProgress,
+  GAAPInstanceList,
   DescribeManagersResponse,
   VodInstanceDetail,
   CompanyInfo,
@@ -154,6 +157,7 @@ import {
   DescribePackagesRequest,
   UploadUpdateCertificateRecordRetryResponse,
   DescribeCertificateRequest,
+  MQTTInstanceDetail,
   DescribeHostVodInstanceListResponse,
   WafInstanceList,
   ModifyCertificatesExpiringNotificationSwitchRequest,
@@ -179,6 +183,7 @@ import {
   TCBInstanceList,
   DescribeHostCosInstanceListRequest,
   DescribeHostCdnInstanceListResponse,
+  TDMQInstanceList,
   TkeIngressDetail,
   DeployCertificateInstanceRequest,
   ApiGatewayInstanceDetail,
@@ -223,16 +228,20 @@ import {
   TCBHostService,
   CheckCertificateChainRequest,
   CheckCertificateExistRequest,
+  SCFInstanceList,
   DescribeCompaniesRequest,
   ManagerStatusInfo,
   CancelAuditCertificateResponse,
   DeployRecordInfo,
   DescribePackagesResponse,
+  GAAPListenerDetail,
+  GAAPInstanceDetail,
   DescribeHostUploadUpdateRecordResponse,
   TSEInstanceList,
   DescribeHostLighthouseInstanceListResponse,
   CompleteCertificateResponse,
   VODInstanceList,
+  SCFInstanceDetail,
 } from "./ssl_models"
 
 /**
@@ -912,7 +921,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos
+   * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos、gaap、mqtt、scf、tdmq
    */
   async DescribeCertificateBindResourceTaskDetail(
     req: DescribeCertificateBindResourceTaskDetailRequest,

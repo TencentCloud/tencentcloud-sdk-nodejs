@@ -1208,6 +1208,16 @@ it("dlc.v20210125.GetOptimizerPolicy", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeResourceGroupUsageInfo", async function () {
+    try {
+       const data = await client.DescribeResourceGroupUsageInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteUserVpcConnection", async function () {
     try {
        const data = await client.DeleteUserVpcConnection({})

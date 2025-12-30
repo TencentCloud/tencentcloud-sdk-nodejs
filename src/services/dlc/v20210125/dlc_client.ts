@@ -228,6 +228,7 @@ import {
   CancelTaskResponse,
   TableInfo,
   DescribeSparkSessionBatchSQLResponse,
+  DescribeResourceGroupUsageInfoResponse,
   DescribeSparkSessionBatchSQLCostResponse,
   DescribeTasksOverviewResponse,
   KafkaInfo,
@@ -509,6 +510,7 @@ import {
   LockComponentInfo,
   DescribeWorkGroupsRequest,
   LockMetaDataRequest,
+  DescribeResourceGroupUsageInfoRequest,
   DescribeSparkSessionBatchSQLCostRequest,
   CreateNotebookSessionResponse,
   DataMaskStrategyPolicy,
@@ -1733,6 +1735,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetOptimizerPolicyResponse) => void
   ): Promise<GetOptimizerPolicyResponse> {
     return this.request("GetOptimizerPolicy", req, cb)
+  }
+
+  /**
+   * 本接口根据资源组ID查询资源组CU使用情况
+   */
+  async DescribeResourceGroupUsageInfo(
+    req: DescribeResourceGroupUsageInfoRequest,
+    cb?: (error: string, rep: DescribeResourceGroupUsageInfoResponse) => void
+  ): Promise<DescribeResourceGroupUsageInfoResponse> {
+    return this.request("DescribeResourceGroupUsageInfo", req, cb)
   }
 
   /**

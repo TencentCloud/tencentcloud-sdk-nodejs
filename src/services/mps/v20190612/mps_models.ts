@@ -8930,6 +8930,7 @@ export interface CreateAigcVideoTaskRequest {
   /**
    * 模型名称。
 当前支持的模型列表:
+Hunyuan,
 Hailuo，
 Kling，
 Jimeng，
@@ -20074,6 +20075,7 @@ export interface CreateAigcImageTaskRequest {
   /**
    * 模型名称。
 当前支持的模型列表：
+Hunyuan,
 GEM，
 Jimeng，
 Qwen。

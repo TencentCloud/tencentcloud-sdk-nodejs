@@ -725,6 +725,19 @@ export interface ExtraParam {
    * 预签名的上传url，支持把视频直接传到客户指定的地址。
    */
   UserDesignatedUrl?: string
+  /**
+   * 回调地址
+需要您在创建任务时主动设置 CallbackUrl，请求方法为 POST，当视频生成结束时，我们将向此地址发送生成结果。
+数据格式如下：
+{
+    "JobId": "1397428070633955328",
+    "Status": "DONE",
+    "ErrorCode": "",
+    "ErrorMessage": "",
+    "ResultVideoUrl": "https://vcg.cos.tencentcos.cn/template_to_video/fa80b846-b933-4981-afad-8a39b46ef2ca.mp4"
+}
+   */
+  CallbackUrl?: string
 }
 
 /**
@@ -1038,7 +1051,11 @@ export interface SubmitVideoEditJobRequest {
    * 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。
 支持风格迁移、替换、元素增加、删除控制
    */
-  Prompt: string
+  Prompt?: string
+  /**
+   * 图片数组
+   */
+  Images?: Array<Image>
   /**
    * 图片base64或者图片url
 

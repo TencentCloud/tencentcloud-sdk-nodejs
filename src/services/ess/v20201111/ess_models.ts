@@ -2087,6 +2087,25 @@ export interface DescribeFileUrlsResponse {
 }
 
 /**
+ * 合同摘要信息
+ */
+export interface ContractSummaryInfo {
+  /**
+   * 字段 key
+   */
+  Key?: string
+  /**
+   * 字段值
+   */
+  Value?: string
+  /**
+   * 主体信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Identity?: Identity
+}
+
+/**
  * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：
 
 ![image](https://qcloudimg.tencent-cloud.cn/raw/5087164cfe5a15fa3ced3180842d5da9.png)
@@ -2602,6 +2621,18 @@ export interface PositionInfo {
    * 系统生成的唯一ID值
    */
   Id?: string
+  /**
+   * 开始位置
+   */
+  Begin?: number
+  /**
+   * 结束位置
+   */
+  End?: number
+  /**
+   * 文档类型，1：pdf，2：doc 文档
+   */
+  DocType?: number
 }
 
 /**
@@ -2956,6 +2987,23 @@ export interface DescribeBillUsageDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 合同摘要
+ */
+export interface ContractSummary {
+  /**
+   * 提取内容分类：
+Base 合同信息
+Identity 主体信息
+Performance 履约条款
+   */
+  Name?: string
+  /**
+   * 详细信息
+   */
+  Infos?: Array<ContractSummaryInfo>
 }
 
 /**
@@ -8721,6 +8769,127 @@ export interface SuccessCreateStaffData {
 }
 
 /**
+ * 主体信息
+ */
+export interface Identity {
+  /**
+   * 统一社会信用代码
+   */
+  CreditCode?: string
+  /**
+   * 组织机构代码
+   */
+  OrgCode?: string
+  /**
+   * 营业执照注册编号
+   */
+  RegNo?: string
+  /**
+   * 企业名称
+   */
+  EntName?: string
+  /**
+   * 修改人法人代表姓名
+   */
+  LegalRepName?: string
+  /**
+   * 渠道经营状态
+   */
+  OpState?: string
+  /**
+   * 经营期限自(格式YYYY-MM-DD)
+   */
+  OpFromDate?: string
+  /**
+   * 经营期限至
+   */
+  OpToDate?: string
+  /**
+   * 成立日期(格式YYYY-MM-DD)
+   */
+  EstabDate?: string
+  /**
+   * 核准日期(格式YYYY-MM-DD)
+   */
+  ApprDate?: string
+  /**
+   * 吊销日期(格式YYYY-MM-DD)
+   */
+  RevoDate?: string
+  /**
+   * 注销日期(格式YYYY-MM-DD)
+   */
+  CancelDate?: string
+  /**
+   * 登记机关
+   */
+  RegOrg?: string
+  /**
+   * 企业类型编码
+   */
+  EntTypeCode?: string
+  /**
+   * 企业类型
+   */
+  EntType?: string
+  /**
+   * 经营业务范围
+   */
+  BizScope?: string
+  /**
+   * 许可经营项目
+   */
+  LicenseBizItem?: string
+  /**
+   * 注册地址行政编号
+   */
+  RegAreaCode?: string
+  /**
+   * 注册地址
+   */
+  RegAddress?: string
+  /**
+   * 注册资本币种
+   */
+  RegCapitalCurtype?: string
+  /**
+   * 注册资本（万元）
+   */
+  RegCapital?: string
+  /**
+   * 实收资本（万元）
+   */
+  PaidCapital?: string
+  /**
+   * 原注册号
+   */
+  OriRegNo?: string
+  /**
+   * 企业英文名称
+   */
+  EntNameEng?: string
+  /**
+   * 曾用名
+   */
+  OriEntName?: string
+  /**
+   * 企业经营状态枚举。常见值如下：
+未定义的状态 = 0
+正常  = 1
+注销 = 2
+吊销 = 3
+吊销后注销 = 4
+撤销 = 5
+其他 = 99
+   */
+  OpStateCode?: number
+  /**
+   * 查询日期(格式YYYY-MM-DD)
+   */
+  SearchDate?: string
+}
+
+/**
  * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
  */
 export interface UploadFile {
@@ -9337,6 +9506,10 @@ export interface DescribeContractReviewTaskResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApprovedLists?: Array<OutputReference>
+  /**
+   * 摘要信息
+   */
+  Summaries?: Array<ContractSummary>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11330,6 +11503,26 @@ export interface OutputRisk {
    * 风险等级id。1 为最高风险等级，0 为最低风险等级，从[2,n]数字越大风险等级逐渐降低。
    */
   RiskLevelId?: number
+  /**
+   * 风险标签
+   */
+  RiskLabels?: Array<string>
+  /**
+   * 风险来源 0:模型标注的风险 1:人工标注的风险
+   */
+  RiskOrigin?: number
+  /**
+   * 创建人
+   */
+  Creator?: string
+  /**
+   * 创建人ID
+   */
+  CreatorId?: string
+  /**
+   * 创建时间
+   */
+  CreatedOn?: number
 }
 
 /**

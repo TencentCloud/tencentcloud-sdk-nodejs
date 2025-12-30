@@ -62,6 +62,7 @@ import {
   DescribeAttributeLabelResponse,
   ModifyAttributeLabelResponse,
   KnowledgeQaSingleWorkflow,
+  CallbackWorkflowToolNodeRequest,
   RetryDocParseResponse,
   DeleteAgentResponse,
   GroupQAResponse,
@@ -189,7 +190,7 @@ import {
   DescribeNodeRunResponse,
   ModifyQAResponse,
   DeleteQAResponse,
-  ProcedureDebugging,
+  UpdateSharedKnowledgeRequest,
   GetMsgRecordRequest,
   InputBoxConfig,
   ReleaseConfigs,
@@ -222,7 +223,7 @@ import {
   AgentProcedure,
   ExportAttributeLabelRequest,
   ModifyQACateRequest,
-  UpdateSharedKnowledgeRequest,
+  ProcedureDebugging,
   StopDocParseRequest,
   DeleteQACateResponse,
   ListChannelResponse,
@@ -314,6 +315,7 @@ import {
   SandboxContent,
   ReferDetail,
   KnowledgeUpdateInfo,
+  CallbackWorkflowToolNodeResponse,
   GetDocPreviewRequest,
   DescribeAttributeLabelRequest,
   KnowledgeSummary,
@@ -480,6 +482,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteQAResponse) => void
   ): Promise<DeleteQAResponse> {
     return this.request("DeleteQA", req, cb)
+  }
+
+  /**
+   * 工作流工具节点异步回调
+   */
+  async CallbackWorkflowToolNode(
+    req: CallbackWorkflowToolNodeRequest,
+    cb?: (error: string, rep: CallbackWorkflowToolNodeResponse) => void
+  ): Promise<CallbackWorkflowToolNodeResponse> {
+    return this.request("CallbackWorkflowToolNode", req, cb)
   }
 
   /**

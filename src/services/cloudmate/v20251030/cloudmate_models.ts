@@ -53,7 +53,7 @@ export interface CloudMateAgentResponse {
    */
   SessionId?: string
   /**
-   * unix时间戳
+   * Unix 时间戳
    */
   Timestamp?: number
   /**

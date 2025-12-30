@@ -154,6 +154,7 @@ import {
   NotificationHook,
   DescribeJobsResponse,
   GenerateTmpKeyRequest,
+  UpdateProjectResponse,
   DescribeSampleBatchQueryResponse,
   StartJobResponse,
   UpdateScenarioRequest,
@@ -165,7 +166,7 @@ import {
   Concurrency,
   DeleteAlertChannelRequest,
   DescribeErrorSummaryResponse,
-  UpdateProjectResponse,
+  EnvVar,
   UpdateFileScenarioRelationResponse,
 } from "./pts_models"
 
@@ -532,7 +533,7 @@ export class Client extends AbstractClient {
    * 创建环境
    */
   async CreateEnvironment(
-    req?: CreateEnvironmentRequest,
+    req: CreateEnvironmentRequest,
     cb?: (error: string, rep: CreateEnvironmentResponse) => void
   ): Promise<CreateEnvironmentResponse> {
     return this.request("CreateEnvironment", req, cb)

@@ -236,6 +236,7 @@ import {
   ChannelCreateReleaseFlowRequest,
   ChannelDescribeFlowComponentsResponse,
   UserFlowType,
+  DynamicSignOption,
   DeleteOrganizationAuthorizationsRequest,
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,

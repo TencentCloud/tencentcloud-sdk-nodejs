@@ -191,7 +191,7 @@ export interface DescribeGatewayLoadBalancersResourcesRequest {
  */
 export interface CreateTargetGroupResponse {
   /**
-   * 创建目标组后生成的id
+   * <p>创建目标组后生成的id</p>
    */
   TargetGroupId?: string
   /**
@@ -533,73 +533,67 @@ export interface DescribeTargetGroupInstancesResponse {
  */
 export interface CreateTargetGroupRequest {
   /**
-   * 目标组名称，限定60个字符。
+   * <p>目标组名称，限定60个字符。</p>
    */
   TargetGroupName?: string
   /**
-   * 网关负载均衡后端目标组所属的网络 ID，如vpc-12345678，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)  接口获取。 不填此参数则默认为DefaultVPC。
+   * <p>网关负载均衡后端目标组所属的网络 ID，如vpc-12345678，可以通过 <a href="https://cloud.tencent.com/document/product/215/15778">DescribeVpcs</a>  接口获取。 不填此参数则默认为DefaultVPC。</p>
    */
   VpcId?: string
   /**
-   * 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。仅支持6081。
+   * <p>目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。仅支持6081。</p>
    */
   Port?: number
   /**
-   * 目标组绑定的后端服务器
+   * <p>目标组绑定的后端服务器</p>
    */
   TargetGroupInstances?: Array<TargetGroupInstance>
   /**
-   * 网关负载均衡目标组协议。
-- TENCENT_GENEVE ：GENEVE 标准协议
-- AWS_GENEVE：GENEVE 兼容协议
+   * <p>网关负载均衡目标组协议。- TENCENT_GENEVE ：GENEVE 标准协议- AWS_GENEVE：GENEVE 兼容协议</p>
    */
   Protocol?: string
   /**
-   * 健康检查设置。
+   * <p>健康检查设置。</p>
    */
   HealthCheck?: TargetGroupHealthCheck
   /**
-   * 均衡算法。
-- IP_HASH_3_ELASTIC：弹性哈希
+   * <p>均衡算法。</p><ul><li>IP_HASH_2_CONSISTENT：二元组一致性哈希</li><li>IP_HASH_3_CONSISTENT：三元组一致性哈希</li><li>IP_HASH_5_CONSISTENT：五元组一致性哈希</li></ul>
    */
   ScheduleAlgorithm?: string
   /**
-   * 是否支持全死全活。默认支持。
+   * <p>是否支持全死全活。默认支持。</p>
    */
   AllDeadToAlive?: boolean
   /**
-   * 标签。
+   * <p>标签。</p>
    */
   Tags?: Array<TagInfo>
   /**
-   * 流量分发方式
-
-- STATELESS：无状态
-- STATEFUL： 有状态
+   * <p>流量分发方式</p><ul><li>STATELESS：无状态</li><li>STATEFUL： 有状态</li></ul>
    */
   ForwardingMode?: string
   /**
-   * TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。
+   * <p>TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。</p>
    */
   TcpIdleConnectTimeout?: number
   /**
-   * 其他协议连接空闲超时时间，可配置5s-180s，默认120s
+   * <p>其他协议连接空闲超时时间，可配置5s-180s，默认120s</p>
    */
   OthersIdleConnectTimeout?: number
   /**
-   * 重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。
+   * <p>重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。</p>
    */
   RescheduleUnbindRs?: boolean
   /**
-   * 解绑RS后开启重调度的时间，可配置0s-3600s，默认0s
+   * <p>解绑RS后开启重调度的时间，可配置0s-3600s，默认0s</p>
    */
   RescheduleUnbindRsStartTime?: number
   /**
-   * 重新调度功能内的后端服务健康探测异常开关，开关打开后后端服务健康检查异常会触发重新调度。
+   * <p>重新调度功能内的后端服务健康探测异常开关，开关打开后后端服务健康检查异常会触发重新调度。</p>
    */
   RescheduleUnhealthy?: boolean
   /**
-   * 后端服务健康探测异常后开启重调度的时间，可配置0s-3600s，默认0s
+   * <p>后端服务健康探测异常后开启重调度的时间，可配置0s-3600s，默认0s</p>
    */
   RescheduleUnhealthyStartTime?: number
 }

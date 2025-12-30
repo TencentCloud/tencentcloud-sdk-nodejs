@@ -3053,6 +3053,14 @@ export interface ChannelCreateOrganizationBatchSignUrlRequest {
    * 是否允许此链接中签署方批量拒签。 <ul><li>false (默认): 不允许批量拒签</li> <li>true : 允许批量拒签。</li></ul>注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。`
    */
   CanBatchReject?: boolean
+  /**
+   * 动态签署方领取链接配置。
+   */
+  DynamicSignOption?: DynamicSignOption
+  /**
+   * 为签署方经办人在签署合同中的参与方ID，必须与参数FlowIds数组一一对应。 注：生成动态签署方领取时此参数必传。
+   */
+  RecipientIds?: Array<string>
 }
 
 /**
@@ -8203,6 +8211,20 @@ export interface UserFlowType {
    * 用户合同类型的描述信息
    */
   Description?: string
+}
+
+/**
+ * 动态签署领取链接配置，当全部签署方均为动态签署方时生效。
+ */
+export interface DynamicSignOption {
+  /**
+   * 多份合同批量签署时，动态签署领取要求：<ul><li><b>0（默认值）</b>: 可以领取部分合同进入签署。</li><li><b>1 </b>: 必须全部领取进入签署，生成链接的所有合同必须相同经办人完成合同的领取签署。</li></ul>
+   */
+  DynamicReceiveType?: number
+  /**
+   * 动态签署方时，预设的企业OpenId，预设企业OpenId后，只允许对应的企业员工进行领取签署。
+   */
+  OrganizationOpenId?: string
 }
 
 /**

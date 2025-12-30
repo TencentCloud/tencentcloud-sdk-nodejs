@@ -1318,6 +1318,32 @@ export interface KnowledgeQaSingleWorkflow {
 }
 
 /**
+ * CallbackWorkflowToolNode请求参数结构体
+ */
+export interface CallbackWorkflowToolNodeRequest {
+  /**
+   * ADP调用外部API时,通过HTTP Header(X-ADP-Callback-Token)传递回调CallbackToken
+   */
+  CallbackToken: string
+  /**
+   * 回调结果,可选,为JSON字符串
+   */
+  Result: string
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+  /**
+   * 应用ID
+   */
+  AppBizId?: string
+}
+
+/**
  * RetryDocParse返回参数结构体
  */
 export interface RetryDocParseResponse {
@@ -4918,49 +4944,17 @@ export interface DeleteQAResponse {
 }
 
 /**
- * 调试信息
+ * UpdateSharedKnowledge请求参数结构体
  */
-export interface ProcedureDebugging {
+export interface UpdateSharedKnowledgeRequest {
   /**
-   * 检索query
-注意：此字段可能返回 null，表示取不到有效值。
+   * 共享知识库业务ID
    */
-  Content?: string
+  KnowledgeBizId: string
   /**
-   * 系统prompt
-注意：此字段可能返回 null，表示取不到有效值。
+   * 共享知识库更新信息
    */
-  System?: string
-  /**
-   * 多轮历史信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Histories?: Array<HistorySummary>
-  /**
-   * 检索知识
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Knowledge?: Array<KnowledgeSummary>
-  /**
-   * 任务流程
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskFlow?: TaskFlowSummary
-  /**
-   * 工作流调试信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WorkFlow?: WorkFlowSummary
-  /**
-   * Agent调试信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Agent?: AgentDebugInfo
-  /**
-   * 自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomVariables?: Array<string>
+  Info?: KnowledgeUpdateInfo
 }
 
 /**
@@ -6125,17 +6119,49 @@ export interface ModifyQACateRequest {
 }
 
 /**
- * UpdateSharedKnowledge请求参数结构体
+ * 调试信息
  */
-export interface UpdateSharedKnowledgeRequest {
+export interface ProcedureDebugging {
   /**
-   * 共享知识库业务ID
+   * 检索query
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  KnowledgeBizId: string
+  Content?: string
   /**
-   * 共享知识库更新信息
+   * 系统prompt
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Info?: KnowledgeUpdateInfo
+  System?: string
+  /**
+   * 多轮历史信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Histories?: Array<HistorySummary>
+  /**
+   * 检索知识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Knowledge?: Array<KnowledgeSummary>
+  /**
+   * 任务流程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlow?: TaskFlowSummary
+  /**
+   * 工作流调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlow?: WorkFlowSummary
+  /**
+   * Agent调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Agent?: AgentDebugInfo
+  /**
+   * 自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomVariables?: Array<string>
 }
 
 /**
@@ -8905,6 +8931,24 @@ export interface KnowledgeUpdateInfo {
    * 拥有者id
    */
   OwnerStaffId?: string
+}
+
+/**
+ * CallbackWorkflowToolNode返回参数结构体
+ */
+export interface CallbackWorkflowToolNodeResponse {
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 状态详情
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

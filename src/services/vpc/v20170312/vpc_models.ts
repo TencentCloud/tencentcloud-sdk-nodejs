@@ -7971,7 +7971,11 @@ export interface VpnGatewayRouteModify {
   /**
    * VPN网关状态, ENABLE 启用, DISABLE禁用。
    */
-  Status: string
+  Status?: string
+  /**
+   * VPN路由备注
+   */
+  Description?: string
 }
 
 /**
@@ -15374,6 +15378,10 @@ export interface VpnGatewayRoute {
    * 更新时间。
    */
   UpdateTime?: string
+  /**
+   * 路由备注
+   */
+  Description?: string
 }
 
 /**

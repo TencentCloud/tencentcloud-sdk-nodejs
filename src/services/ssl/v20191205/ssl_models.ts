@@ -20,35 +20,23 @@
  */
 export interface DescribeCertificateBindResourceTaskDetailRequest {
   /**
-   * 任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果
+   * <p>任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果</p>
    */
   TaskId: string
   /**
-   * 每页展示数量， 默认10，最大值100; 分页总数为云资源地域下实例总数， 即第一页会拉群每个云资源的地域下面Limit数量实例
+   * <p>每页展示数量， 默认10，最大值100; 分页总数为云资源地域下实例总数， 即第一页会拉群每个云资源的地域下面Limit数量实例</p>
    */
   Limit?: string
   /**
-   * 当前偏移量，默认为0
+   * <p>当前偏移量，默认为0</p>
    */
   Offset?: string
   /**
-   * 查询资源类型的结果详情， 不传则查询所有，取值支持：
-- clb
-- cdn
-- ddos
-- live
-- vod
-- waf
-- apigateway
-- teo
-- tke
-- cos
-- tse
-- tcb
+   * <p>查询资源类型的结果详情， 不传则查询所有，取值支持：- clb- cdn- ddos- live- vod- waf- apigateway- teo- tke- cos- tse- tcb</p>
    */
   ResourceTypes?: Array<string>
   /**
-   * 查询地域列表的数据，clb、tke、waf、apigateway、tcb、cos、tse支持地域查询， 其他资源类型不支持
+   * <p>查询地域列表的数据，clb、tke、waf、apigateway、tcb、cos、tse支持地域查询， 其他资源类型不支持</p>
    */
   Regions?: Array<string>
 }
@@ -153,6 +141,28 @@ export interface DownloadCertificateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MQTT实例详情 - 异步关联云资源数据结构
+ */
+export interface MQTTInstanceList {
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 实例详情
+   */
+  InstanceList?: Array<MQTTInstanceDetail>
+  /**
+   * 地域下总数
+   */
+  TotalCount?: number
+  /**
+   * 错误信息
+   */
+  Error?: string
 }
 
 /**
@@ -401,6 +411,10 @@ export interface DeployRecordDetail {
    * 实例状态，不同云产品状态不一样
    */
   InstanceStatus?: string
+  /**
+   * 监听器状态
+   */
+  ListenerStatus?: string
 }
 
 /**
@@ -2301,6 +2315,14 @@ export interface UpdateRecordDetail {
    * 旧证书加密算法
    */
   OldAlgorithm?: string
+  /**
+   * 实例状态，不同云产品状态不一样
+   */
+  InstanceStatus?: string
+  /**
+   * 监听器状态
+   */
+  ListenerStatus?: string
 }
 
 /**
@@ -2315,6 +2337,36 @@ export interface BindResourceResult {
    * 绑定资源地域结果
    */
   BindResourceRegionResult?: Array<BindResourceRegionResult>
+}
+
+/**
+ * TDMQ - Rabbit实例详情
+ */
+export interface TDMQInstanceDetail {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 服务端证书ID
+   */
+  CertId?: string
+  /**
+   * CA证书ID
+   */
+  CaCertId?: string
+  /**
+   * 不匹配的域名列表
+   */
+  NoMatchDomains?: Array<string>
 }
 
 /**
@@ -2538,6 +2590,24 @@ export interface UpdateSyncProgress {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
+}
+
+/**
+ * GAAP实例详情 - 异步关联云资源数据结构
+ */
+export interface GAAPInstanceList {
+  /**
+   * 实例详情
+   */
+  InstanceList?: Array<GAAPInstanceDetail>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 错误信息
+   */
+  Error?: string
 }
 
 /**
@@ -2812,61 +2882,77 @@ export interface DescribeHostVodInstanceListRequest {
  */
 export interface DescribeCertificateBindResourceTaskDetailResponse {
   /**
-   * 关联clb资源详情
+   * <p>关联clb资源详情   </p>
    */
   CLB?: Array<ClbInstanceList>
   /**
-   * 关联cdn资源详情
+   * <p>关联cdn资源详情   </p>
    */
   CDN?: Array<CdnInstanceList>
   /**
-   * 关联waf资源详情
+   * <p>关联waf资源详情   </p>
    */
   WAF?: Array<WafInstanceList>
   /**
-   * 关联ddos资源详情
+   * <p>关联ddos资源详情  </p>
    */
   DDOS?: Array<DdosInstanceList>
   /**
-   * 关联live资源详情
+   * <p>关联live资源详情  </p>
    */
   LIVE?: Array<LiveInstanceList>
   /**
-   * 关联vod资源详情
+   * <p>关联vod资源详情   </p>
    */
   VOD?: Array<VODInstanceList>
   /**
-   * 关联tke资源详情
+   * <p>关联tke资源详情   </p>
    */
   TKE?: Array<TkeInstanceList>
   /**
-   * 关联apigateway资源详情
+   * <p>关联apigateway资源详情    </p>
    */
   APIGATEWAY?: Array<ApiGatewayInstanceList>
   /**
-   * 关联tcb资源详情
+   * <p>关联tcb资源详情   </p>
    */
   TCB?: Array<TCBInstanceList>
   /**
-   * 关联teo资源详情
+   * <p>关联teo资源详情   </p>
    */
   TEO?: Array<TeoInstanceList>
   /**
-   * 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因
+   * <p>关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因</p>
    */
   Status?: number
   /**
-   * 当前结果缓存时间
+   * <p>当前结果缓存时间</p>
    */
   CacheTime?: string
   /**
-   * 关联tse资源详情
+   * <p>关联tse资源详情   </p>
    */
   TSE?: Array<TSEInstanceList>
   /**
-   * 关联的COS资源详情
+   * <p>关联的COS资源详情</p>
    */
   COS?: Array<COSInstanceList>
+  /**
+   * <p>关联的TDMQ - Rabbit资源详情</p>
+   */
+  TDMQ?: Array<TDMQInstanceList>
+  /**
+   * <p>关联的MQTT资源详情</p>
+   */
+  MQTT?: Array<MQTTInstanceList>
+  /**
+   * <p>关联的GAAP资源详情</p>
+   */
+  GAAP?: Array<GAAPInstanceList>
+  /**
+   * <p>关联的SCF资源详情</p>
+   */
+  SCF?: Array<SCFInstanceList>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3978,7 +4064,7 @@ export interface UpdateCertificateInstanceRequest {
    */
   Regions?: Array<string>
   /**
-   * 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb、tke、apigateway、waf、tcb、tse、cos
+   * 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb、tke、apigateway、waf、tcb、tse、cos、mqtt
    */
   ResourceTypesRegions?: Array<ResourceTypeRegions>
   /**
@@ -4381,6 +4467,36 @@ export interface DescribeCertificateRequest {
    * 证书 ID。
    */
   CertificateId: string
+}
+
+/**
+ * MQTT实例详情
+ */
+export interface MQTTInstanceDetail {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 不匹配的域名列表
+   */
+  NoMatchDomains?: Array<string>
+  /**
+   * 服务端证书列表
+   */
+  ServerCertIdList?: Array<string>
+  /**
+   * ca证书列表
+   */
+  CaCertIdList?: Array<string>
 }
 
 /**
@@ -4997,6 +5113,28 @@ export interface DescribeHostCdnInstanceListResponse {
 }
 
 /**
+ * TDMQ - Rabbit实例详情 - 异步关联云资源数据结构
+ */
+export interface TDMQInstanceList {
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 实例详情
+   */
+  InstanceList?: Array<TDMQInstanceDetail>
+  /**
+   * 地域下总数
+   */
+  TotalCount?: number
+  /**
+   * 错误信息
+   */
+  Error?: string
+}
+
+/**
  * tke ingress实例详情
  */
 export interface TkeIngressDetail {
@@ -5030,13 +5168,15 @@ export interface DeployCertificateInstanceRequest {
 - live：Domain，例：["live1.tencent.com", "live2.tencent.com"]
 - vod：Domain， 例：["vod1.tencent.com", "vod2.tencent.com"]
 - waf：Domain， 例：["waf1.tencent.com", "waf2.tencent.com"]
-- apigateway：ServiceId|Domain， 例：["service-8sk7cqmd|apigw1.tencent.com", "service-8sk7cqmd|apigw2.ninghhuang.online"]
+- apigateway：ServiceId|Domain， 例：["service-8sk7cqmd|apigw1.tencent.com", "service-8sk7cqmd|apigw2.minghuang.online"]
 - teo：Domain， 例：["edgeone1.tencent.com", "edgeone2.tencent.com"]
 - tke：ClusterId|NameSpace|SecretName， 例：["cls-42sa0ae0|default|test-tencent"]
 - cos：Region|Bucket|Domain， 例：["ap-hongkong|ssl-server-1251810746|tencent.com"]
 - lighthouse：Region|InstanceId|Domain， 例：["ap-shanghai|lhins-nh7lql34|tencent.com"]
 - tse：GatewayId|CertificateId， 例：["gateway-s1da9151|fa61bc05-cc54-4eea-c932-24de52577372"]
 - tcb：Type|Region|EnvId|Domain， 例：["AccessService|ap-shanghai|ceshi-4s5h0ymg11c839c7|tencent.com"]
+- mqtt: InstanceId|CertId, 例：["mqtt-rdnwp7kb|gehs6jsx"]
+- gaap: InstanceId|ListenerId 例：["ga-a3e4z3ae|lsr-a73amjob"]
 
    */
   InstanceIdList: Array<string>
@@ -5055,7 +5195,8 @@ export interface DeployCertificateInstanceRequest {
 - lighthouse
 - tse
 - tcb
-<dx-alert infotype="explain" title="">当云资源类型传入clb、waf、apigateway、cos、lighthouse、tke、tse、tcb 时，公共参数Region必传。</dx-alert>
+- mqtt
+<dx-alert infotype="explain" title="">当云资源类型传入clb、waf、apigateway、cos、lighthouse、tke、tse、tcb、mqtt 时，公共参数Region必传。</dx-alert>
    */
   ResourceType?: string
   /**
@@ -6455,6 +6596,28 @@ export interface CheckCertificateExistRequest {
 }
 
 /**
+ * SCF实例详情 - 异步关联云资源数据结构
+ */
+export interface SCFInstanceList {
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>SCF实例详情</p>
+   */
+  InstanceList?: Array<SCFInstanceDetail>
+  /**
+   * <p>错误信息</p>
+   */
+  Error?: string
+  /**
+   * <p>地域下总数</p>
+   */
+  TotalCount?: number
+}
+
+/**
  * DescribeCompanies请求参数结构体
  */
 export interface DescribeCompaniesRequest {
@@ -6569,6 +6732,54 @@ export interface DescribePackagesResponse {
 }
 
 /**
+ * GAAP监听器详情
+ */
+export interface GAAPListenerDetail {
+  /**
+   * 监听器状态
+   */
+  ListenerStatus?: string
+  /**
+   * 监听器ID
+   */
+  ListenerId?: string
+  /**
+   * 监听器名称
+   */
+  ListenerName?: string
+  /**
+   * 不匹配的域名列表
+   */
+  NoMatchDomains?: Array<string>
+  /**
+   * 实例绑定的证书列表
+   */
+  CertIdList?: Array<string>
+  /**
+   * 监听器协议
+   */
+  Protocol?: string
+}
+
+/**
+ * GAAP实例详情
+ */
+export interface GAAPInstanceDetail {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 监听器列表
+   */
+  ListenerList?: Array<GAAPListenerDetail>
+  /**
+   * 加速实例名称
+   */
+  InstanceName?: string
+}
+
+/**
  * DescribeHostUploadUpdateRecord返回参数结构体
  */
 export interface DescribeHostUploadUpdateRecordResponse {
@@ -6660,4 +6871,26 @@ export interface VODInstanceList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Error?: string
+}
+
+/**
+ * SCF实例详情
+ */
+export interface SCFInstanceDetail {
+  /**
+   * 证书ID
+   */
+  CertificateId?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 地域
+   */
+  Region?: string
 }

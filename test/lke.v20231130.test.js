@@ -108,6 +108,16 @@ it("lke.v20231130.DeleteQA", async function () {
     }
 })
 
+it("lke.v20231130.CallbackWorkflowToolNode", async function () {
+    try {
+       const data = await client.CallbackWorkflowToolNode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.StopWorkflowRun", async function () {
     try {
        const data = await client.StopWorkflowRun({})

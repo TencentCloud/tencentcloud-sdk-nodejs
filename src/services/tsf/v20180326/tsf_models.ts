@@ -7796,12 +7796,10 @@ export interface TsfPageStdoutLogV2 {
   Content?: Array<StdoutLogV2>
   /**
    * 游标ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScrollId?: string
   /**
    * 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -8864,7 +8862,7 @@ export interface ServiceSetting {
   /**
    * 子网ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 是否创建 k8s service，默认为 false
    */
@@ -9876,7 +9874,7 @@ export interface SchedulingStrategy {
   /**
    * NONE：不使用调度策略；CROSS_AZ：跨可用区部署
    */
-  Type: string
+  Type?: string
   /**
    * -
    */
@@ -14151,12 +14149,10 @@ export interface TsfPageBusinessLogV2 {
   Content?: Array<BusinessLogV2>
   /**
    * 游标ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScrollId?: string
   /**
    * 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
