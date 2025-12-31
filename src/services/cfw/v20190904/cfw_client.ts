@@ -26,8 +26,10 @@ import {
   ModifySecurityGroupRuleRequest,
   ModifyAssetSyncResponse,
   ModifyNatFwVpcDnsSwitchResponse,
+  UpdateCheckCcnNonDirectFlagRequest,
+  DescribeBlockIgnoreListResponse,
   CreateBlockIgnoreRuleNewRequest,
-  ModifyAddressTemplateRequest,
+  DescribeCcnInstanceRegionStatusRequest,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
   ScanInfo,
@@ -36,6 +38,7 @@ import {
   StaticInfo,
   ModifySequenceRulesRequest,
   DescribeNatAcRuleResponse,
+  UpdateClusterVpcFwRequest,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
   FwDeploy,
@@ -55,6 +58,7 @@ import {
   SearchLogResponse,
   DeleteBlockIgnoreRuleNewResponse,
   DescribeEnterpriseSGRuleProgressResponse,
+  SwitchError,
   ModifyEdgeIpSwitchRequest,
   VpcZoneData,
   DatabaseWhiteListRuleData,
@@ -63,6 +67,7 @@ import {
   DescribeTLogInfoResponse,
   CommonIdNameStatus,
   DescribeUnHandleEventTabListRequest,
+  ModifyAllPublicIPSwitchStatusRequest,
   ModifyNatInstanceRequest,
   DescribeNatFwDnatRuleRequest,
   DescribeAssociatedInstanceListResponse,
@@ -70,9 +75,9 @@ import {
   CreateBlockIgnoreRuleListRequest,
   RemoveAcRuleResponse,
   NatFwInstance,
-  ModifyNatAcRuleResponse,
+  ModifyAddressTemplateRequest,
   DescribeAclRuleRequest,
-  NatInstanceInfo,
+  ModifyClusterVpcFwSwitchResponse,
   CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
@@ -89,6 +94,7 @@ import {
   ModifyAclRuleResponse,
   SequenceData,
   CreateNatFwInstanceRequest,
+  RegionFwStatus,
   ModifySecurityGroupItemRuleStatusResponse,
   DescribeEnterpriseSecurityGroupRuleResponse,
   VpcFwGroupInfo,
@@ -101,6 +107,7 @@ import {
   SgDnsParseCount,
   ModifyNatFwReSelectResponse,
   CreateAlertCenterOmitRequest,
+  DescribeVpcFwCcnPolicyWhiteListResponse,
   DescribeVpcAcRuleRequest,
   DeleteRemoteAccessDomainResponse,
   VpcFwInstanceInfo,
@@ -110,11 +117,13 @@ import {
   RemoveVpcAcRuleRequest,
   DeleteRemoteAccessDomainRequest,
   SetNatFwEipResponse,
+  TagInfo,
   DescribeLogStorageStatisticResponse,
   AcListsData,
   LogItems,
   CreateNatRuleItem,
   ModifyStorageSettingResponse,
+  DescribeSwitchErrorRequest,
   DescribeNatFwInstancesInfoRequest,
   ModifyBlockIgnoreRuleNewResponse,
   DescribeSourceAssetRequest,
@@ -127,6 +136,7 @@ import {
   FwVpcCidr,
   EdgeIpInfo,
   AssetZone,
+  AccessInstanceInfo,
   RuleChangeItem,
   StorageHistogramShow,
   SearchLogErrors,
@@ -144,26 +154,29 @@ import {
   CreateNatFwInstanceResponse,
   LogInfo,
   DescribeNatFwInfoCountResponse,
+  UpdateClusterVpcFwResponse,
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
   ModifyResourceGroupRequest,
   SecurityGroupListData,
   EdgeIpSwitch,
-  ModifySequenceAclRulesRequest,
+  DescribeCcnAssociatedInstancesRequest,
   ModifyVpcAcRuleRequest,
   CreateNatFwInstanceWithDomainResponse,
   DescribeFwSyncStatusRequest,
   ModifyEnterpriseSecurityGroupRuleRequest,
   BetaInfoByACL,
+  TemplateListInfo,
   RemoveNatAcRuleRequest,
+  ModifySequenceRulesResponse,
   DescribeAssetSyncRequest,
   DeleteVpcFwGroupRequest,
   IPDefendStatus,
   RuleInfoData,
   NatSwitchListData,
   DescribeAcListsResponse,
-  ModifyAllPublicIPSwitchStatusRequest,
+  ModifyAcRuleRequest,
   ModifySequenceAclRulesResponse,
   CreateAddressTemplateRequest,
   CreateBlockIgnoreRuleNewResponse,
@@ -196,12 +209,13 @@ import {
   VpcDnsInfo,
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
-  ModifySequenceRulesResponse,
-  NewModeItems,
+  ModifySequenceAclRulesRequest,
+  ModifyClusterVpcFwSwitchRequest,
   CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
   ModifyEdgeIpSwitchResponse,
   DescribeResourceGroupNewRequest,
+  InterconnectPair,
   DescribeAddressTemplateListRequest,
   RemoveAclRuleRequest,
   DeleteAcRuleResponse,
@@ -221,28 +235,33 @@ import {
   DescribeAcListsRequest,
   DescribeGuideScanInfoRequest,
   UnHandleEvent,
-  DescribeBlockIgnoreListResponse,
+  DescribeAssociatedInstanceListRequest,
   ModifyVpcAcRuleResponse,
+  DescribeVpcFwCcnPolicyWhiteListRequest,
   ModifyBlockIgnoreRuleNewRequest,
   ModifyEWRuleStatusRequest,
   DeleteAcRuleRequest,
   ModifyNatFwSwitchRequest,
   DeleteBlockIgnoreRuleNewRequest,
-  RemoveNatAcRuleResponse,
+  DescribeSwitchErrorResponse,
   CustomWhiteRule,
+  DescribeCcnVpcFwSwitchRequest,
   CfwInsStatus,
   DescribeFwEdgeIpsResponse,
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,
   FwGroupSwitch,
-  TemplateListInfo,
+  CcnSwitchInfo,
   VpcFwJoinInstanceType,
   DescribeVpcFwGroupSwitchResponse,
   ModifyBlockIgnoreRuleResponse,
+  DescribeCcnAssociatedInstancesResponse,
   SearchLogInfos,
   DescribeTLogIpListResponse,
   MultiTopicSearchInformation,
   DescribeNatFwInfoCountRequest,
+  NewModeItems,
+  UpdateCheckCcnNonDirectFlagResponse,
   BanAndAllowRule,
   RemoveAcRuleRequest,
   FwGroupSwitchShow,
@@ -275,8 +294,11 @@ import {
   SwitchListsData,
   CreateVpcFwGroupRequest,
   CreateNatFwInstanceWithDomainRequest,
+  DescribeNatFwSwitchRequest,
+  RegionCidrConfig,
   DescribeRuleOverviewRequest,
-  TagInfo,
+  RemoveNatAcRuleResponse,
+  NatInstanceInfo,
   DescribeNatFwSwitchResponse,
   DescribeResourceGroupResponse,
   DeleteAddressTemplateResponse,
@@ -296,7 +318,7 @@ import {
   CreateAcRulesResponse,
   CommonIdName,
   DescribeSwitchListsResponse,
-  ModifyAcRuleRequest,
+  DescribeCcnInstanceRegionStatusResponse,
   RemoveVpcAcRuleResponse,
   IntArray,
   DescribeNatFwInstancesInfoResponse,
@@ -310,11 +332,12 @@ import {
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   DescNatDnatRule,
-  DescribeAssociatedInstanceListRequest,
+  ModifyNatAcRuleResponse,
+  CcnAssociatedInstance,
   ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
-  DescribeNatFwSwitchRequest,
+  DescribeCcnVpcFwSwitchResponse,
   DescribeBlockStaticListResponse,
   DescribeGuideScanInfoResponse,
   StorageHistogram,
@@ -484,6 +507,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 修改集群模式VPC防火墙开关
+   */
+  async ModifyClusterVpcFwSwitch(
+    req: ModifyClusterVpcFwSwitchRequest,
+    cb?: (error: string, rep: ModifyClusterVpcFwSwitchResponse) => void
+  ): Promise<ModifyClusterVpcFwSwitchResponse> {
+    return this.request("ModifyClusterVpcFwSwitch", req, cb)
+  }
+
+  /**
    * NAT防火墙规则快速排序
    */
   async ModifyNatSequenceRules(
@@ -511,6 +544,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateNatFwInstanceResponse) => void
   ): Promise<CreateNatFwInstanceResponse> {
     return this.request("CreateNatFwInstance", req, cb)
+  }
+
+  /**
+   * 重新检测CCN中接入VPC防火墙的VPC实例非同城直通标记
+   */
+  async UpdateCheckCcnNonDirectFlag(
+    req: UpdateCheckCcnNonDirectFlagRequest,
+    cb?: (error: string, rep: UpdateCheckCcnNonDirectFlagResponse) => void
+  ): Promise<UpdateCheckCcnNonDirectFlagResponse> {
+    return this.request("UpdateCheckCcnNonDirectFlag", req, cb)
   }
 
   /**
@@ -664,6 +707,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 修改更新CCN中VPC防火墙策略配置
+   */
+  async UpdateClusterVpcFw(
+    req: UpdateClusterVpcFwRequest,
+    cb?: (error: string, rep: UpdateClusterVpcFwResponse) => void
+  ): Promise<UpdateClusterVpcFwResponse> {
+    return this.request("UpdateClusterVpcFw", req, cb)
+  }
+
+  /**
    * 查询安全组规则列表
    */
   async DescribeSecurityGroupList(
@@ -731,6 +784,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyNatFwVpcDnsSwitchResponse) => void
   ): Promise<ModifyNatFwVpcDnsSwitchResponse> {
     return this.request("ModifyNatFwVpcDnsSwitch", req, cb)
+  }
+
+  /**
+   * 查询云联网关联的实例信息
+   */
+  async DescribeCcnAssociatedInstances(
+    req: DescribeCcnAssociatedInstancesRequest,
+    cb?: (error: string, rep: DescribeCcnAssociatedInstancesResponse) => void
+  ): Promise<DescribeCcnAssociatedInstancesResponse> {
+    return this.request("DescribeCcnAssociatedInstances", req, cb)
   }
 
   /**
@@ -894,6 +957,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 查询CCN VPC防火墙开关配置
+   */
+  async DescribeCcnVpcFwSwitch(
+    req: DescribeCcnVpcFwSwitchRequest,
+    cb?: (error: string, rep: DescribeCcnVpcFwSwitchResponse) => void
+  ): Promise<DescribeCcnVpcFwSwitchResponse> {
+    return this.request("DescribeCcnVpcFwSwitch", req, cb)
+  }
+
+  /**
    * 修改规则表状态
    */
   async ModifyTableStatus(
@@ -901,6 +974,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyTableStatusResponse) => void
   ): Promise<ModifyTableStatusResponse> {
     return this.request("ModifyTableStatus", req, cb)
+  }
+
+  /**
+   * 查询VPC防火墙策略路由功能开白的CCN列表
+   */
+  async DescribeVpcFwCcnPolicyWhiteList(
+    req?: DescribeVpcFwCcnPolicyWhiteListRequest,
+    cb?: (error: string, rep: DescribeVpcFwCcnPolicyWhiteListResponse) => void
+  ): Promise<DescribeVpcFwCcnPolicyWhiteListResponse> {
+    return this.request("DescribeVpcFwCcnPolicyWhiteList", req, cb)
   }
 
   /**
@@ -1287,6 +1370,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 互联网边界防火墙开关横幅错误信息
+   */
+  async DescribeSwitchError(
+    req: DescribeSwitchErrorRequest,
+    cb?: (error: string, rep: DescribeSwitchErrorResponse) => void
+  ): Promise<DescribeSwitchErrorResponse> {
+    return this.request("DescribeSwitchError", req, cb)
+  }
+
+  /**
    * DescribeTLogInfo告警中心概况查询
    */
   async DescribeTLogInfo(
@@ -1417,6 +1510,18 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeTLogIpListResponse) => void
   ): Promise<DescribeTLogIpListResponse> {
     return this.request("DescribeTLogIpList", req, cb)
+  }
+
+  /**
+     * 查询CCN关联实例的地域防火墙引流网络部署状态
+1.根据CCN ID和实例ID列表，返回实例对应地域的防火墙引流网络部署状态
+2.如果传入实例ID列表为空，则返回CCN关联的所有实例的地域防火墙引流网络部署状态
+     */
+  async DescribeCcnInstanceRegionStatus(
+    req: DescribeCcnInstanceRegionStatusRequest,
+    cb?: (error: string, rep: DescribeCcnInstanceRegionStatusResponse) => void
+  ): Promise<DescribeCcnInstanceRegionStatusResponse> {
+    return this.request("DescribeCcnInstanceRegionStatus", req, cb)
   }
 
   /**

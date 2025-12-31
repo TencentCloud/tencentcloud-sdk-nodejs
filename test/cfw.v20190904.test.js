@@ -168,6 +168,16 @@ it("cfw.v20190904.RemoveEnterpriseSecurityGroupRule", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyClusterVpcFwSwitch", async function () {
+    try {
+       const data = await client.ModifyClusterVpcFwSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyNatSequenceRules", async function () {
     try {
        const data = await client.ModifyNatSequenceRules({})
@@ -191,6 +201,16 @@ it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
 it("cfw.v20190904.CreateNatFwInstance", async function () {
     try {
        const data = await client.CreateNatFwInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.UpdateCheckCcnNonDirectFlag", async function () {
+    try {
+       const data = await client.UpdateCheckCcnNonDirectFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,6 +368,16 @@ it("cfw.v20190904.ModifySecurityGroupRule", async function () {
     }
 })
 
+it("cfw.v20190904.UpdateClusterVpcFw", async function () {
+    try {
+       const data = await client.UpdateClusterVpcFw({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeSecurityGroupList", async function () {
     try {
        const data = await client.DescribeSecurityGroupList({})
@@ -411,6 +441,16 @@ it("cfw.v20190904.DescribeFwGroupInstanceInfo", async function () {
 it("cfw.v20190904.ModifyNatFwVpcDnsSwitch", async function () {
     try {
        const data = await client.ModifyNatFwVpcDnsSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCcnAssociatedInstances", async function () {
+    try {
+       const data = await client.DescribeCcnAssociatedInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +618,29 @@ it("cfw.v20190904.DescribeSwitchLists", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeCcnVpcFwSwitch", async function () {
+    try {
+       const data = await client.DescribeCcnVpcFwSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyTableStatus", async function () {
     try {
        const data = await client.ModifyTableStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeVpcFwCcnPolicyWhiteList", async function () {
+    try {
+       const data = await client.DescribeVpcFwCcnPolicyWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +1028,16 @@ it("cfw.v20190904.ModifyEnterpriseSecurityDispatchStatus", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeSwitchError", async function () {
+    try {
+       const data = await client.DescribeSwitchError({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeTLogInfo", async function () {
     try {
        const data = await client.DescribeTLogInfo({})
@@ -1091,6 +1161,16 @@ it("cfw.v20190904.ModifyNatFwSwitch", async function () {
 it("cfw.v20190904.DescribeTLogIpList", async function () {
     try {
        const data = await client.DescribeTLogIpList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCcnInstanceRegionStatus", async function () {
+    try {
+       const data = await client.DescribeCcnInstanceRegionStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

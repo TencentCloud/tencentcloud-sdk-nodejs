@@ -57,6 +57,10 @@ export interface StartSandboxInstanceRequest {
    * 沙箱实例存储挂载配置
    */
   MountOptions?: Array<MountOption>
+  /**
+   * 沙箱实例自定义配置
+   */
+  CustomConfiguration?: CustomConfiguration
 }
 
 /**
@@ -103,6 +107,10 @@ export interface SandboxInstance {
    * 存储挂载选项
    */
   MountOptions?: Array<MountOption>
+  /**
+   * 沙箱实例自定义配置
+   */
+  CustomConfiguration?: CustomConfigurationDetail
 }
 
 /**
@@ -186,7 +194,7 @@ export interface CreateSandboxToolRequest {
    */
   ToolName: string
   /**
-   * 沙箱工具类型，目前支持：browser、code-interpreter
+   * 沙箱工具类型，目前支持：browser、code-interpreter、custom
    */
   ToolType: string
   /**
@@ -217,6 +225,28 @@ export interface CreateSandboxToolRequest {
    * 沙箱工具存储配置
    */
   StorageMounts?: Array<StorageMount>
+  /**
+   * 沙箱工具自定义配置
+   */
+  CustomConfiguration?: CustomConfiguration
+}
+
+/**
+ * HTTP GET 探测动作配置
+ */
+export interface HttpGetAction {
+  /**
+   * 路径
+   */
+  Path?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 协议
+   */
+  Scheme?: string
 }
 
 /**
@@ -273,6 +303,24 @@ export interface StorageSource {
    * 对象存储桶配置
    */
   Cos?: CosStorageSource
+  /**
+   * 镜像卷配置
+   */
+  Image?: ImageStorageSource
+}
+
+/**
+ * 资源配置
+ */
+export interface ResourceConfiguration {
+  /**
+   * cpu 资源量
+   */
+  CPU?: string
+  /**
+   * 内存资源量
+   */
+  Memory?: string
 }
 
 /**
@@ -317,6 +365,24 @@ export interface DeleteSandboxToolResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 端口配置
+ */
+export interface PortConfiguration {
+  /**
+   * 端口名
+   */
+  Name?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 协议
+   */
+  Protocol?: string
 }
 
 /**
@@ -371,6 +437,10 @@ export interface SandboxTool {
    * 沙箱工具中实例存储挂载配置
    */
   StorageMounts?: Array<StorageMount>
+  /**
+   * 沙箱工具自定义配置
+   */
+  CustomConfiguration?: CustomConfigurationDetail
 }
 
 /**
@@ -421,6 +491,66 @@ export interface StartSandboxInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 沙箱自定义配置
+ */
+export interface CustomConfiguration {
+  /**
+   * 镜像地址
+   */
+  Image?: string
+  /**
+   * 镜像仓库类型：`enterprise`、`personal`。
+   */
+  ImageRegistryType?: string
+  /**
+   * 启动命令
+   */
+  Command?: Array<string>
+  /**
+   * 启动参数
+   */
+  Args?: Array<string>
+  /**
+   * 环境变量
+   */
+  Env?: Array<EnvVar>
+  /**
+   * 端口配置
+   */
+  Ports?: Array<PortConfiguration>
+  /**
+   * 资源配置
+   */
+  Resources?: ResourceConfiguration
+  /**
+   * 探针配置
+   */
+  Probe?: ProbeConfiguration
+}
+
+/**
+ * 镜像卷挂载源配置
+ */
+export interface ImageStorageSource {
+  /**
+   * 镜像地址
+   */
+  Reference?: string
+  /**
+   * 镜像仓库类型：`enterprise`、`personal`。
+   */
+  ImageRegistryType?: string
+  /**
+   * 镜像内部的路径
+   */
+  SubPath?: string
+  /**
+   * 镜像 Digest，请求时无需传入
+   */
+  Digest?: string
 }
 
 /**
@@ -475,6 +605,48 @@ export interface DescribeSandboxInstanceListRequest {
    * 过滤条件
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 沙箱自定义配置详细信息
+ */
+export interface CustomConfigurationDetail {
+  /**
+   * 镜像地址
+   */
+  Image?: string
+  /**
+   * 镜像仓库类型：`TCR`、`CCR`。
+   */
+  ImageRegistryType?: string
+  /**
+   * 镜像 Digest
+   */
+  ImageDigest?: string
+  /**
+   * 启动命令
+   */
+  Command?: Array<string>
+  /**
+   * 启动参数
+   */
+  Args?: Array<string>
+  /**
+   * 环境变量
+   */
+  Env?: Array<EnvVar>
+  /**
+   * 端口配置
+   */
+  Ports?: Array<PortConfiguration>
+  /**
+   * 资源配置
+   */
+  Resources?: ResourceConfiguration
+  /**
+   * 探针配置
+   */
+  Probe?: ProbeConfiguration
 }
 
 /**
@@ -563,13 +735,33 @@ export interface AcquireSandboxInstanceTokenResponse {
 }
 
 /**
- * StopSandboxInstance返回参数结构体
+ * 健康检查探针配置
  */
-export interface StopSandboxInstanceResponse {
+export interface ProbeConfiguration {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * HTTP GET 探测配置
    */
-  RequestId?: string
+  HttpGet?: HttpGetAction
+  /**
+   * 健康检查就绪超时
+   */
+  ReadyTimeoutMs?: number
+  /**
+   * 健康检查单次探测超时
+   */
+  ProbeTimeoutMs?: number
+  /**
+   * 健康检查间隔
+   */
+  ProbePeriodMs?: number
+  /**
+   * 健康检查成功阈值
+   */
+  SuccessThreshold?: number
+  /**
+   * 健康检查失败阈值
+   */
+  FailureThreshold?: number
 }
 
 /**
@@ -628,6 +820,24 @@ export interface UpdateSandboxToolRequest {
    * 标签
    */
   Tags?: Array<Tag>
+  /**
+   * 沙箱工具自定义配置
+   */
+  CustomConfiguration?: CustomConfiguration
+}
+
+/**
+ * 环境变量
+ */
+export interface EnvVar {
+  /**
+   * 环境变量名
+   */
+  Name?: string
+  /**
+   * 环境变量值
+   */
+  Value?: string
 }
 
 /**
@@ -642,6 +852,16 @@ export interface DescribeSandboxInstanceListResponse {
    * 符合条件的实例总数
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopSandboxInstance返回参数结构体
+ */
+export interface StopSandboxInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
