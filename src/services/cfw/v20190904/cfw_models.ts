@@ -978,61 +978,17 @@ export interface VpcZoneData {
 }
 
 /**
- * 数据库白名单规则数据
+ * CreateChooseVpcs请求参数结构体
  */
-export interface DatabaseWhiteListRuleData {
+export interface CreateChooseVpcsRequest {
   /**
-   * 访问源
+   * vpc列表
    */
-  SourceIp: string
+  VpcList: Array<string>
   /**
-   * 访问源类型，1 ip；6 实例；100 资源分组
+   * zone列表
    */
-  SourceType: number
-  /**
-   * 访问目的
-   */
-  TargetIp: string
-  /**
-   * 访问目的类型，1 ip；6 实例；100 资源分组
-   */
-  TargetType: number
-  /**
-   * 规则描述
-   */
-  Detail: string
-  /**
-   * 是否地域规则，0不是 1是
-   */
-  IsRegionRule: number
-  /**
-   * 是否云厂商规则，0不是 1 时
-   */
-  IsCloudRule: number
-  /**
-   * 是否启用，0 不启用，1启用
-   */
-  Enable: number
-  /**
-   * 地域码1
-   */
-  FirstLevelRegionCode?: number
-  /**
-   * 地域码2
-   */
-  SecondLevelRegionCode?: number
-  /**
-   * 地域名称1
-   */
-  FirstLevelRegionName?: string
-  /**
-   * 地域名称2
-   */
-  SecondLevelRegionName?: string
-  /**
-   * 云厂商码
-   */
-  CloudCode?: string
+  AllZoneList: Array<VpcZoneData>
 }
 
 /**
@@ -1454,6 +1410,28 @@ export interface ExpandCfwVerticalRequest {
    * 按量计费标签
    */
   Tags?: Array<TagInfo>
+}
+
+/**
+ * DescribeCcnVpcFwPolicyLimit返回参数结构体
+ */
+export interface DescribeCcnVpcFwPolicyLimitResponse {
+  /**
+   * 支持的引流策略数量（最外层总条数）
+   */
+  CcnPolicyInterconnectPairLenLimit?: number
+  /**
+   * 单条引流策略中单组的最大配置数量（内层单组总条数）
+   */
+  CcnPolicyGroupLenLimit?: number
+  /**
+   * 接入的实例网段长度（网段数量）限制
+   */
+  CcnPolicyCidrLenLimit?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2768,6 +2746,91 @@ export interface DescribeSwitchErrorRequest {
 }
 
 /**
+ * 集群模式防火墙开关数据详情
+ */
+export interface ClusterSwitchDetail {
+  /**
+   * 实例对象可以是ccnid类型:ccn-ad21xuds形式;nat网关类型:nat-da12daxd形式;ip类型:1.1.1.1形式等
+   */
+  InsObj?: string
+  /**
+   * 实例对象名称
+   */
+  ObjName?: string
+  /**
+   * 防火墙类型，ew：vpc间防火墙；nat：nat防火墙；border：互联网边界防火墙
+   */
+  FwType?: string
+  /**
+   * 资产类型，ccn：ccn实例类型；nat：nat网关类型
+   */
+  AssetType?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 开关状态
+0 : 关闭
+1 : 开启
+2 : 开启中
+3 : 关闭中
+4 : 异常
+   */
+  Status?: number
+  /**
+   * 开关接入模式，1：自动接入；2，手动接入，0：未选择
+   */
+  SwitchMode?: number
+  /**
+   * 实例对象是否处于非集群接入场景（主备模式）
+   */
+  NonCluster?: number
+  /**
+   * ip版本，0：ipv4；1：ipv6
+   */
+  IpVersion?: number
+  /**
+   * 关联实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttachIns?: Array<AttachInsInfo>
+  /**
+   * 引流私有网络端点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoints?: Array<EndpointInfo>
+  /**
+   * 入侵防护模式,0:观察;1:拦截;2:严格;3:关闭
+   */
+  Idpsaction?: number
+  /**
+   * //透明模式开关,0:未开启,1:已开启
+   */
+  TransEnable?: number
+  /**
+   * 开关状态 0关闭 1开启
+   */
+  Enable?: number
+  /**
+   * 路由模式：0：多路由表，1：策略路由
+   */
+  RoutingMode?: number
+  /**
+   * 是否跨租户开关 1是 0不是
+   */
+  IsPeer?: number
+  /**
+   * 跨租户appid
+   */
+  PeerAppid?: string
+  /**
+   * 跨租户操作状态 1不允许操作 0可以
+   */
+  PeerStatus?: number
+}
+
+/**
  * DescribeNatFwInstancesInfo请求参数结构体
  */
 export interface DescribeNatFwInstancesInfoRequest {
@@ -3239,6 +3302,16 @@ enum FilterOperatorType {
 }
 
 /**
+ * ModifyVpcAcRule请求参数结构体
+ */
+export interface ModifyVpcAcRuleRequest {
+  /**
+   * 需要编辑的规则数组
+   */
+  Rules: Array<VpcRuleItem>
+}
+
+/**
  * DescribeLogStorageStatistic请求参数结构体
  */
 export type DescribeLogStorageStatisticRequest = null
@@ -3329,6 +3402,16 @@ export interface DescribeAssetSyncResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyVpcFwSequenceRules请求参数结构体
+ */
+export interface ModifyVpcFwSequenceRulesRequest {
+  /**
+   * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
+   */
+  RuleChangeItems?: Array<RuleChangeItem>
 }
 
 /**
@@ -3490,6 +3573,11 @@ export interface UpdateClusterVpcFwResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeCcnVpcFwPolicyLimit请求参数结构体
+ */
+export type DescribeCcnVpcFwPolicyLimitRequest = null
 
 /**
  * DescribeDefenseSwitch请求参数结构体
@@ -3705,13 +3793,35 @@ export interface DescribeCcnAssociatedInstancesRequest {
 }
 
 /**
- * ModifyVpcAcRule请求参数结构体
+ * ModifyClusterVpcFwSwitch请求参数结构体
  */
-export interface ModifyVpcAcRuleRequest {
+export interface ModifyClusterVpcFwSwitchRequest {
   /**
-   * 需要编辑的规则数组
+   * 开关，0：关闭，1：开启
    */
-  Rules: Array<VpcRuleItem>
+  Enable: number
+  /**
+   * 集群模式vpc间防火墙ccn开关信息
+   */
+  CcnSwitch?: Array<CcnSwitchInfo>
+}
+
+/**
+ * 多种VPC墙模式开关结构
+ */
+export interface FwGroupSwitch {
+  /**
+   * 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由
+   */
+  SwitchMode?: number
+  /**
+   * 防火墙开关ID
+支持三种类型
+1. 边开关(单点互通)
+2. 点开关(多点互通)
+3. 全开关(全互通)
+   */
+  SwitchId?: string
 }
 
 /**
@@ -3761,21 +3871,61 @@ export interface ModifyEnterpriseSecurityGroupRuleRequest {
 }
 
 /**
- * 规则关联的beta任务
+ * 数据库白名单规则数据
  */
-export interface BetaInfoByACL {
+export interface DatabaseWhiteListRuleData {
   /**
-   * 任务id
+   * 访问源
    */
-  TaskId?: number
+  SourceIp: string
   /**
-   * 任务名称
+   * 访问源类型，1 ip；6 实例；100 资源分组
    */
-  TaskName?: string
+  SourceType: number
   /**
-   * 上次执行时间
+   * 访问目的
    */
-  LastTime?: string
+  TargetIp: string
+  /**
+   * 访问目的类型，1 ip；6 实例；100 资源分组
+   */
+  TargetType: number
+  /**
+   * 规则描述
+   */
+  Detail: string
+  /**
+   * 是否地域规则，0不是 1是
+   */
+  IsRegionRule: number
+  /**
+   * 是否云厂商规则，0不是 1 时
+   */
+  IsCloudRule: number
+  /**
+   * 是否启用，0 不启用，1启用
+   */
+  Enable: number
+  /**
+   * 地域码1
+   */
+  FirstLevelRegionCode?: number
+  /**
+   * 地域码2
+   */
+  SecondLevelRegionCode?: number
+  /**
+   * 地域名称1
+   */
+  FirstLevelRegionName?: string
+  /**
+   * 地域名称2
+   */
+  SecondLevelRegionName?: string
+  /**
+   * 云厂商码
+   */
+  CloudCode?: string
 }
 
 /**
@@ -4678,6 +4828,28 @@ log：观察
 }
 
 /**
+ * 私有连接端点信息
+ */
+export interface EndpointInfo {
+  /**
+   * 引流私有连接端点id
+   */
+  EndpointId?: string
+  /**
+   * 引流VpcId
+   */
+  VpcId?: string
+  /**
+   * 所属地域
+   */
+  Region?: string
+  /**
+   * 引流Vpc的Cidr
+   */
+  VpcCidr?: string
+}
+
+/**
  * ModifyBlockTop请求参数结构体
  */
 export interface ModifyBlockTopRequest {
@@ -4858,17 +5030,17 @@ export interface ModifySequenceAclRulesRequest {
 }
 
 /**
- * ModifyClusterVpcFwSwitch请求参数结构体
+ * DescribeNatFwInstance返回参数结构体
  */
-export interface ModifyClusterVpcFwSwitchRequest {
+export interface DescribeNatFwInstanceResponse {
   /**
-   * 开关，0：关闭，1：开启
+   * 实例数组
    */
-  Enable: number
+  NatinsLst?: Array<NatFwInstance>
   /**
-   * 集群模式vpc间防火墙ccn开关信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CcnSwitch?: Array<CcnSwitchInfo>
+  RequestId?: string
 }
 
 /**
@@ -5366,17 +5538,13 @@ export interface DescribeFwSyncStatusResponse {
 }
 
 /**
- * DescribeBlockByIpTimesList返回参数结构体
+ * DeleteNatFwInstance请求参数结构体
  */
-export interface DescribeBlockByIpTimesListResponse {
+export interface DeleteNatFwInstanceRequest {
   /**
-   * 返回数据
+   * 防火墙实例id
    */
-  Data?: Array<IpStatic>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CfwInstance: string
 }
 
 /**
@@ -5871,21 +6039,21 @@ export interface CreateDatabaseWhiteListRulesRequest {
 }
 
 /**
- * 多种VPC墙模式开关结构
+ * DescribeResourceGroup请求参数结构体
  */
-export interface FwGroupSwitch {
+export interface DescribeResourceGroupRequest {
   /**
-   * 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由
+   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
    */
-  SwitchMode?: number
+  QueryType: string
   /**
-   * 防火墙开关ID
-支持三种类型
-1. 边开关(单点互通)
-2. 点开关(多点互通)
-3. 全开关(全互通)
+   * 资产组id  全部传0
    */
-  SwitchId?: string
+  GroupId?: string
+  /**
+   * all  包含子组 own自己
+   */
+  ShowType?: string
 }
 
 /**
@@ -6455,6 +6623,25 @@ whitelist 白名单列表
 }
 
 /**
+ * DescribeClusterVpcFwSwitchs返回参数结构体
+ */
+export interface DescribeClusterVpcFwSwitchsResponse {
+  /**
+   * 总条数
+   */
+  Total?: number
+  /**
+   * 防火墙开关列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ClusterSwitchDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 安全组规则
  */
 export interface SecurityGroupSimplifyRule {
@@ -6521,23 +6708,35 @@ export interface RemoveAclRuleResponse {
 }
 
 /**
- * DeleteNatFwInstance请求参数结构体
+ * DescribeBlockByIpTimesList返回参数结构体
  */
-export interface DeleteNatFwInstanceRequest {
+export interface DescribeBlockByIpTimesListResponse {
   /**
-   * 防火墙实例id
+   * 返回数据
    */
-  CfwInstance: string
+  Data?: Array<IpStatic>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * ModifyVpcFwSequenceRules请求参数结构体
+ * 规则关联的beta任务
  */
-export interface ModifyVpcFwSequenceRulesRequest {
+export interface BetaInfoByACL {
   /**
-   * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
+   * 任务id
    */
-  RuleChangeItems?: Array<RuleChangeItem>
+  TaskId?: number
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 上次执行时间
+   */
+  LastTime?: string
 }
 
 /**
@@ -6746,17 +6945,17 @@ export interface DescAcItem {
 }
 
 /**
- * CreateChooseVpcs请求参数结构体
+ * CreateBlockIgnoreRuleList返回参数结构体
  */
-export interface CreateChooseVpcsRequest {
+export interface CreateBlockIgnoreRuleListResponse {
   /**
-   * vpc列表
+   * 成功返回
    */
-  VpcList: Array<string>
+  List?: Array<IocListData>
   /**
-   * zone列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AllZoneList: Array<VpcZoneData>
+  RequestId?: string
 }
 
 /**
@@ -7318,20 +7517,6 @@ export interface DeleteAddressTemplateResponse {
 }
 
 /**
- * CreateBlockIgnoreRuleList返回参数结构体
- */
-export interface CreateBlockIgnoreRuleListResponse {
-  /**
-   * 成功返回
-   */
-  List?: Array<IocListData>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeCfwEips返回参数结构体
  */
 export interface DescribeCfwEipsResponse {
@@ -7798,17 +7983,21 @@ export interface ModifyBlockIgnoreListResponse {
 }
 
 /**
- * DescribeNatFwInstance返回参数结构体
+ * 关联实例信息
  */
-export interface DescribeNatFwInstanceResponse {
+export interface AttachInsInfo {
   /**
-   * 实例数组
+   * 实例对象可以是cvm类型:ins-ad21xuds1形式;路由表类型:rtb-da12daxd形式;vpc类型:vpc-1dxdad2d形式
    */
-  NatinsLst?: Array<NatFwInstance>
+  InsId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例对象名称
    */
-  RequestId?: string
+  InsName?: string
+  /**
+   * 实例的cidr
+   */
+  Cidr?: string
 }
 
 /**
@@ -7940,21 +8129,41 @@ export interface CreateRuleItem {
 }
 
 /**
- * DescribeResourceGroup请求参数结构体
+ * DescribeClusterVpcFwSwitchs请求参数结构体
  */
-export interface DescribeResourceGroupRequest {
+export interface DescribeClusterVpcFwSwitchsRequest {
   /**
-   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
+   * 需要查询的索引，特定场景使用，可不填
    */
-  QueryType: string
+  Index?: string
   /**
-   * 资产组id  全部传0
+   * 过滤条件组合
    */
-  GroupId?: string
+  Filters?: Array<CommonFilter>
   /**
-   * all  包含子组 own自己
+   * 每页条数
    */
-  ShowType?: string
+  Limit?: number
+  /**
+   * 偏移值
+   */
+  Offset?: number
+  /**
+   * 检索的起始时间，可不传
+   */
+  StartTime?: string
+  /**
+   * 检索的截止时间，可不传
+   */
+  EndTime?: string
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
 }
 
 /**

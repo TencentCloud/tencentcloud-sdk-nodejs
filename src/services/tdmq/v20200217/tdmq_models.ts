@@ -1114,21 +1114,17 @@ export interface RocketMQDataPoint {
 }
 
 /**
- * DescribeSubscriptions返回参数结构体
+ * RewindCmqQueue请求参数结构体
  */
-export interface DescribeSubscriptionsResponse {
+export interface RewindCmqQueueRequest {
   /**
-   * 订阅者集合数组。
+   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
-  SubscriptionSets?: Array<Subscription>
+  QueueName: string
   /**
-   * 数量。
+   * 设定该时间，则（Batch）receiveMessage接口，会按照生产消息的先后顺序消费该时间戳以后的消息。
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  StartConsumeTime: number
 }
 
 /**
@@ -2835,6 +2831,31 @@ DelayScheduled，延迟/定时消息
    * 备注信息
    */
   Remark?: string
+}
+
+/**
+ * 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。
+ */
+export interface PriceTag {
+  /**
+   * 计价名称。枚举值如下：
+
+- tps：TPS基础价
+- stepTps：TPS步长
+   */
+  Name?: string
+  /**
+   * 计价类别
+   */
+  Category?: string
+  /**
+   * 计费项标签
+   */
+  Code?: string
+  /**
+   * 计费项对应的步长数
+   */
+  Step?: number
 }
 
 /**
@@ -5723,6 +5744,16 @@ export interface CreateRocketMQNamespaceResponse {
 }
 
 /**
+ * DeleteCmqTopic请求参数结构体
+ */
+export interface DeleteCmqTopicRequest {
+  /**
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   */
+  TopicName: string
+}
+
+/**
  * 主题实例
  */
 export interface Topic_Simplification {
@@ -7620,6 +7651,11 @@ export interface DescribeRocketMQProducersResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeRocketMQGeneralSKUs请求参数结构体
+ */
+export type DescribeRocketMQGeneralSKUsRequest = null
 
 /**
  * DescribeNodeHealthOpt返回参数结构体
@@ -9603,17 +9639,21 @@ export interface DeleteTopicsResponse {
 }
 
 /**
- * RewindCmqQueue请求参数结构体
+ * DescribeSubscriptions返回参数结构体
  */
-export interface RewindCmqQueueRequest {
+export interface DescribeSubscriptionsResponse {
   /**
-   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 订阅者集合数组。
    */
-  QueueName: string
+  SubscriptionSets?: Array<Subscription>
   /**
-   * 设定该时间，则（Batch）receiveMessage接口，会按照生产消息的先后顺序消费该时间戳以后的消息。
+   * 数量。
    */
-  StartConsumeTime: number
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9873,6 +9913,40 @@ export interface DescribeEnvironmentRolesRequest {
 必选：否
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 通用集群售卖信息
+ */
+export interface GeneralSKU {
+  /**
+   * 规格标识
+   */
+  SkuCode?: string
+  /**
+   * 是否可售卖
+   */
+  OnSale?: boolean
+  /**
+   * TPS上限
+   */
+  TpsLimit?: number
+  /**
+   * 主题数免费额度
+   */
+  TopicNumLimit?: number
+  /**
+   * 主题数上限
+   */
+  TopicNumUpperLimit?: number
+  /**
+   * 计费项信息
+   */
+  PriceTags?: Array<PriceTag>
+  /**
+   * 存储节点个数
+   */
+  NodeCount?: number
 }
 
 /**
@@ -10741,13 +10815,17 @@ export interface CreateRocketMQTopicV2Response {
 }
 
 /**
- * DeleteCmqTopic请求参数结构体
+ * DescribeRocketMQGeneralSKUs返回参数结构体
  */
-export interface DeleteCmqTopicRequest {
+export interface DescribeRocketMQGeneralSKUsResponse {
   /**
-   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 商品配置信息
    */
-  TopicName: string
+  Skus?: Array<GeneralSKU>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

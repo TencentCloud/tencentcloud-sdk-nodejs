@@ -19510,7 +19510,7 @@ export interface CreateAigcImageTaskRequest {
    */
   ModelVersion: string
   /**
-   * AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时最多指定3个。
+   * AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时，版本2.5最多指定3个，版本3.0最多指定14个。
    */
   FileInfos?: Array<AigcImageTaskInputFileInfo>
   /**

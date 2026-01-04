@@ -38,6 +38,16 @@ it("cfw.v20190904.DeleteBlockIgnoreRuleNew", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeClusterVpcFwSwitchs", async function () {
+    try {
+       const data = await client.DescribeClusterVpcFwSwitchs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeVpcFwGroupSwitch", async function () {
     try {
        const data = await client.DescribeVpcFwGroupSwitch({})
@@ -551,6 +561,16 @@ it("cfw.v20190904.RemoveAcRule", async function () {
 it("cfw.v20190904.DescribeVpcAcRule", async function () {
     try {
        const data = await client.DescribeVpcAcRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCcnVpcFwPolicyLimit", async function () {
+    try {
+       const data = await client.DescribeCcnVpcFwPolicyLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

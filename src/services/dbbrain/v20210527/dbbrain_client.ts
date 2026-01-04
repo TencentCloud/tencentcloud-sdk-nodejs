@@ -108,12 +108,13 @@ import {
   CreateAuditLogFileResponse,
   AuditInstance,
   IndexesToBuild,
+  OpenAuditServiceRequest,
   DeleteSqlFiltersResponse,
   DescribeHealthScoreTimeSeriesRequest,
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
   ScoreDetail,
-  OpenAuditServiceRequest,
+  DescribeRedisUnExpiredKeyStatisticsResponse,
   CreateProxySessionKillTaskRequest,
   DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
@@ -129,6 +130,7 @@ import {
   VerifyUserAccountRequest,
   DescribeSlowLogUserHostStatsResponse,
   TableSpaceData,
+  RedisGlobalKeyInfo,
   EventInfo,
   DescribeIndexRecommendInfoRequest,
   AuditInstanceFilter,
@@ -180,6 +182,7 @@ import {
   DescribeRedisBigKeyAnalysisTasksRequest,
   DescribeSqlFiltersRequest,
   DescribeSecurityAuditLogExportTasksRequest,
+  DescribeRedisUnExpiredKeyStatisticsRequest,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
   RedisCmdInfo,
@@ -600,6 +603,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelKillTaskResponse) => void
   ): Promise<CancelKillTaskResponse> {
     return this.request("CancelKillTask", req, cb)
+  }
+
+  /**
+   * 更改实例限流任务状态，目前仅用于终止限流。
+   */
+  async ModifySqlFilters(
+    req: ModifySqlFiltersRequest,
+    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
+  ): Promise<ModifySqlFiltersResponse> {
+    return this.request("ModifySqlFilters", req, cb)
   }
 
   /**
@@ -1073,13 +1086,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更改实例限流任务状态，目前仅用于终止限流。
+   * 查询Redis全量Key的内存分布情况。
    */
-  async ModifySqlFilters(
-    req: ModifySqlFiltersRequest,
-    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
-  ): Promise<ModifySqlFiltersResponse> {
-    return this.request("ModifySqlFilters", req, cb)
+  async DescribeRedisUnExpiredKeyStatistics(
+    req: DescribeRedisUnExpiredKeyStatisticsRequest,
+    cb?: (error: string, rep: DescribeRedisUnExpiredKeyStatisticsResponse) => void
+  ): Promise<DescribeRedisUnExpiredKeyStatisticsResponse> {
+    return this.request("DescribeRedisUnExpiredKeyStatistics", req, cb)
   }
 
   /**

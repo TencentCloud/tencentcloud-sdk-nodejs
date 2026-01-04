@@ -2649,11 +2649,11 @@ export interface VerifyPersonResponse {
  */
 export interface DetectFaceResponse {
   /**
-   * ，单位为：像素（px）。
+   * 请求的图片宽度，单位为：像素（px）。
    */
   ImageWidth?: number
   /**
-   * ，单位为：像素（px）。
+   * 请求的图片高度，单位为：像素（px）。
    */
   ImageHeight?: number
   /**

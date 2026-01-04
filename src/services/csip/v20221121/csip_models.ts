@@ -2061,6 +2061,18 @@ export interface AccessKeyAlarmCount {
    * 告警数量
    */
   AlarmCount?: number
+  /**
+   * 访问密钥状态 0 禁用 1 已启用 2 已删除
+   */
+  AccessKeyStatus?: number
+  /**
+   * AK创建时间
+   */
+  AccessKeyCreateTime?: string
+  /**
+   * AK最后使用时间，从未使用过则返回“-”
+   */
+  LastAccessTime?: string
 }
 
 /**
@@ -3590,6 +3602,14 @@ export interface AccessKeyRisk {
    * 对应风险的查询参数
    */
   QueryParam?: string
+  /**
+   * 云类型 0-腾讯云 4-阿里云
+   */
+  CloudType?: number
+  /**
+   * 相关的AK列表，包含AK名和AK备注
+   */
+  RelatedAK?: Array<AKInfo>
 }
 
 /**

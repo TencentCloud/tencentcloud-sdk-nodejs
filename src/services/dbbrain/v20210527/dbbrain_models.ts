@@ -2294,6 +2294,32 @@ export interface IndexesToBuild {
 }
 
 /**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+  /**
+   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   */
+  Product: string
+  /**
+   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   */
+  NodeRequestType: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
+   */
+  LogExpireDay: number
+  /**
+   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
+   */
+  HotLogExpireDay: number
+}
+
+/**
  * DeleteSqlFilters返回参数结构体
  */
 export interface DeleteSqlFiltersResponse {
@@ -2401,29 +2427,17 @@ export interface ScoreDetail {
 }
 
 /**
- * OpenAuditService请求参数结构体
+ * DescribeRedisUnExpiredKeyStatistics返回参数结构体
  */
-export interface OpenAuditServiceRequest {
+export interface DescribeRedisUnExpiredKeyStatisticsResponse {
   /**
-   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   * 全量Key的聚合分布信息列表。
    */
-  Product: string
+  SeriesData?: Array<RedisGlobalKeyInfo>
   /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NodeRequestType: string
-  /**
-   * 实例ID。
-   */
-  InstanceId: string
-  /**
-   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
-   */
-  LogExpireDay: number
-  /**
-   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
-   */
-  HotLogExpireDay: number
+  RequestId?: string
 }
 
 /**
@@ -2730,6 +2744,30 @@ export interface TableSpaceData {
    * 表对应的独立物理文件大小（MB）。
    */
   PhysicalFileSize?: number
+}
+
+/**
+ * Redis全量Key的聚合信息。
+ */
+export interface RedisGlobalKeyInfo {
+  /**
+   * 占用内存大小，单位Byte。
+   */
+  Capacity?: number
+  /**
+   * Key个数。
+   */
+  Count?: number
+  /**
+   * 剩余过期时间范围的结束时间，当小于0时，代表已过期时间，单位：小时。当RangeMin与RangeMax同时为空时，代表未设置过期时间。当RangeMax为空时，代表剩余过期时间大于等于RangeMin小时。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RangeMax?: number
+  /**
+   * 剩余过期时间范围的起始时间，当小于0时，代表已过期时间，单位：小时。当RangeMin与RangeMax同时为空时，代表未设置过期时间。当RangeMin为空时，代表已过期。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RangeMin?: number
 }
 
 /**
@@ -4149,6 +4187,32 @@ export interface DescribeSecurityAuditLogExportTasksRequest {
 }
 
 /**
+ * DescribeRedisUnExpiredKeyStatistics请求参数结构体
+ */
+export interface DescribeRedisUnExpiredKeyStatisticsRequest {
+  /**
+   * 实例 ID。可通过接口获取。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 查询某个日期最新的任务，如2021-05-27，最早可为前30天的日期。该参数与AsyncRequestId参数不可同时为空。
+   */
+  Date?: string
+  /**
+   * 异步任务ID。当为空时，选择最近任务的ID。
+   */
+  AsyncRequestId?: number
+  /**
+   * 分片节点序号列表。当列表为空时，选择所有分片节点。
+   */
+  ShardIds?: Array<number | bigint>
+}
+
+/**
  * DeleteSecurityAuditLogExportTasks请求参数结构体
  */
 export interface DeleteSecurityAuditLogExportTasksRequest {
@@ -4337,13 +4401,13 @@ export interface DescribeRedisTopBigKeysRequest {
    */
   InstanceId: string
   /**
-   * 查询日期，如2021-05-27，最早可为前30天的日期。
-   */
-  Date: string
-  /**
    * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
    */
   Product: string
+  /**
+   * 查询某个日期最新的任务，如2021-05-27，最早可为前30天的日期。该参数与AsyncRequestId参数不可同时为空。
+   */
+  Date?: string
   /**
    * 排序字段，取值包括Capacity - 内存，ItemCount - 元素数量，默认为Capacity。
    */
@@ -4364,6 +4428,11 @@ export interface DescribeRedisTopBigKeysRequest {
    * 分片节点序号列表。当列表为空时，选择所有分片节点。
    */
   ShardIds?: Array<number | bigint>
+  /**
+   * 是否仅查询未设置过期时间的大Key。
+当为true时，仅查询未设置过期时间的大Key，默认为false。
+   */
+  UnExpireKey?: boolean
 }
 
 /**

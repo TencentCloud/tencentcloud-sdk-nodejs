@@ -61,7 +61,7 @@ import {
   SwitchError,
   ModifyEdgeIpSwitchRequest,
   VpcZoneData,
-  DatabaseWhiteListRuleData,
+  CreateChooseVpcsRequest,
   DescribeNatFwVpcDnsLstRequest,
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
@@ -80,6 +80,7 @@ import {
   ModifyClusterVpcFwSwitchResponse,
   CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
+  DescribeCcnVpcFwPolicyLimitResponse,
   ModifyAllPublicIPSwitchStatusResponse,
   SyncFwOperateRequest,
   ModifyAssetScanRequest,
@@ -124,6 +125,7 @@ import {
   CreateNatRuleItem,
   ModifyStorageSettingResponse,
   DescribeSwitchErrorRequest,
+  ClusterSwitchDetail,
   DescribeNatFwInstancesInfoRequest,
   ModifyBlockIgnoreRuleNewResponse,
   DescribeSourceAssetRequest,
@@ -143,18 +145,21 @@ import {
   IntrusionDefenseRule,
   DescribeTLogIpListRequest,
   CommonFilter,
+  ModifyVpcAcRuleRequest,
   DescribeLogStorageStatisticRequest,
   AddVpcAcRuleRequest,
   DescribeTableStatusRequest,
   ModifyNatSequenceRulesResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeAssetSyncResponse,
+  ModifyVpcFwSequenceRulesRequest,
   DescribeSecurityGroupListRequest,
   ModifyAddressTemplateResponse,
   CreateNatFwInstanceResponse,
   LogInfo,
   DescribeNatFwInfoCountResponse,
   UpdateClusterVpcFwResponse,
+  DescribeCcnVpcFwPolicyLimitRequest,
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
@@ -162,11 +167,12 @@ import {
   SecurityGroupListData,
   EdgeIpSwitch,
   DescribeCcnAssociatedInstancesRequest,
-  ModifyVpcAcRuleRequest,
+  ModifyClusterVpcFwSwitchRequest,
+  FwGroupSwitch,
   CreateNatFwInstanceWithDomainResponse,
   DescribeFwSyncStatusRequest,
   ModifyEnterpriseSecurityGroupRuleRequest,
-  BetaInfoByACL,
+  DatabaseWhiteListRuleData,
   TemplateListInfo,
   RemoveNatAcRuleRequest,
   ModifySequenceRulesResponse,
@@ -202,6 +208,7 @@ import {
   DescribeFwGroupInstanceInfoResponse,
   DescribeBlockByIpTimesListRequest,
   VpcRuleItem,
+  EndpointInfo,
   ModifyBlockTopRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
   NetInstancesInfo,
@@ -210,7 +217,7 @@ import {
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
   ModifySequenceAclRulesRequest,
-  ModifyClusterVpcFwSwitchRequest,
+  DescribeNatFwInstanceResponse,
   CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
   ModifyEdgeIpSwitchResponse,
@@ -226,7 +233,7 @@ import {
   DescribeNatFwDnatRuleResponse,
   ModifyNatFwVpcDnsSwitchRequest,
   DescribeFwSyncStatusResponse,
-  DescribeBlockByIpTimesListResponse,
+  DeleteNatFwInstanceRequest,
   ModifyAllRuleStatusRequest,
   SetNatFwDnatRuleResponse,
   VpcFwInstanceShow,
@@ -250,7 +257,7 @@ import {
   DescribeFwEdgeIpsResponse,
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,
-  FwGroupSwitch,
+  DescribeResourceGroupRequest,
   CcnSwitchInfo,
   VpcFwJoinInstanceType,
   DescribeVpcFwGroupSwitchResponse,
@@ -274,17 +281,18 @@ import {
   EnterpriseSecurityGroupRuleBetaInfo,
   SetNatFwEipRequest,
   DescribeBlockIgnoreListRequest,
+  DescribeClusterVpcFwSwitchsResponse,
   SecurityGroupSimplifyRule,
   ModifyBlockTopResponse,
   RemoveAclRuleResponse,
-  DeleteNatFwInstanceRequest,
-  ModifyVpcFwSequenceRulesRequest,
+  DescribeBlockByIpTimesListResponse,
+  BetaInfoByACL,
   ModifySecurityGroupItemRuleStatusRequest,
   ModifyStorageSettingRequest,
   ModifyAssetSyncRequest,
   DescribeNatFwVpcDnsLstResponse,
   DescAcItem,
-  CreateChooseVpcsRequest,
+  CreateBlockIgnoreRuleListResponse,
   ExpandCfwVerticalResponse,
   DescribeBlockStaticListRequest,
   TLogInfo,
@@ -302,7 +310,6 @@ import {
   DescribeNatFwSwitchResponse,
   DescribeResourceGroupResponse,
   DeleteAddressTemplateResponse,
-  CreateBlockIgnoreRuleListResponse,
   DescribeCfwEipsResponse,
   ModifyResourceGroupResponse,
   ModifyVpcFwGroupResponse,
@@ -324,11 +331,11 @@ import {
   DescribeNatFwInstancesInfoResponse,
   AddNatAcRuleResponse,
   ModifyBlockIgnoreListResponse,
-  DescribeNatFwInstanceResponse,
+  AttachInsInfo,
   ModifySecurityGroupRuleResponse,
   DescribeFwEdgeIpsRequest,
   CreateRuleItem,
-  DescribeResourceGroupRequest,
+  DescribeClusterVpcFwSwitchsRequest,
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   DescNatDnatRule,
@@ -373,6 +380,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBlockIgnoreRuleNewResponse) => void
   ): Promise<DeleteBlockIgnoreRuleNewResponse> {
     return this.request("DeleteBlockIgnoreRuleNew", req, cb)
+  }
+
+  /**
+   * 查询集群模式Vpc间防火墙开关
+   */
+  async DescribeClusterVpcFwSwitchs(
+    req: DescribeClusterVpcFwSwitchsRequest,
+    cb?: (error: string, rep: DescribeClusterVpcFwSwitchsResponse) => void
+  ): Promise<DescribeClusterVpcFwSwitchsResponse> {
+    return this.request("DescribeClusterVpcFwSwitchs", req, cb)
   }
 
   /**
@@ -894,6 +911,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeVpcAcRuleResponse) => void
   ): Promise<DescribeVpcAcRuleResponse> {
     return this.request("DescribeVpcAcRule", req, cb)
+  }
+
+  /**
+   * 查询CCN中VPC防火墙接入策略配置时的规则数量限制
+   */
+  async DescribeCcnVpcFwPolicyLimit(
+    req?: DescribeCcnVpcFwPolicyLimitRequest,
+    cb?: (error: string, rep: DescribeCcnVpcFwPolicyLimitResponse) => void
+  ): Promise<DescribeCcnVpcFwPolicyLimitResponse> {
+    return this.request("DescribeCcnVpcFwPolicyLimit", req, cb)
   }
 
   /**

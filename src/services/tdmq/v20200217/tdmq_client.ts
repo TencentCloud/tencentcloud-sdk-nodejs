@@ -49,7 +49,7 @@ import {
   DescribeClustersRequest,
   ModifyEnvironmentAttributesRequest,
   RocketMQDataPoint,
-  DescribeSubscriptionsResponse,
+  RewindCmqQueueRequest,
   ModifyRocketMQClusterRequest,
   SendBatchMessagesResponse,
   DescribeRocketMQVipInstanceDetailResponse,
@@ -112,6 +112,7 @@ import {
   SendBatchMessagesRequest,
   DescribeRabbitMQNodeListResponse,
   RocketMQTopicConfig,
+  PriceTag,
   ProducerInfo,
   ProducerLog,
   DescribePublisherSummaryRequest,
@@ -212,6 +213,7 @@ import {
   DescribeEnvironmentAttributesResponse,
   DescribeRocketMQRolesRequest,
   CreateRocketMQNamespaceResponse,
+  DeleteCmqTopicRequest,
   Topic_Simplification,
   ModifyRocketMQEnvironmentRoleResponse,
   CreateCmqQueueResponse,
@@ -279,6 +281,7 @@ import {
   SendMessagesRequest,
   CreateRocketMQRoleRequest,
   DescribeRocketMQProducersResponse,
+  DescribeRocketMQGeneralSKUsRequest,
   DescribeNodeHealthOptResponse,
   DescribeRabbitMQVipInstanceResponse,
   ModifyCmqSubscriptionAttributeRequest,
@@ -357,7 +360,7 @@ import {
   PublishCmqMsgRequest,
   ModifyCmqTopicAttributeRequest,
   DeleteTopicsResponse,
-  RewindCmqQueueRequest,
+  DescribeSubscriptionsResponse,
   DeleteRocketMQVipInstanceRequest,
   MsgLog,
   CmqTopic,
@@ -365,6 +368,7 @@ import {
   DescribeBindVpcsRequest,
   TopicRecord,
   DescribeEnvironmentRolesRequest,
+  GeneralSKU,
   DescribeRabbitMQUserRequest,
   DescribeRocketMQTopicsResponse,
   Environment,
@@ -402,7 +406,7 @@ import {
   ClearCmqSubscriptionFilterTagsResponse,
   DescribePublisherSummaryResponse,
   CreateRocketMQTopicV2Response,
-  DeleteCmqTopicRequest,
+  DescribeRocketMQGeneralSKUsResponse,
   DescribePulsarProInstanceDetailResponse,
   UnbindCmqDeadLetterRequest,
   DescribeRolesRequest,
@@ -516,13 +520,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改RabbitMQ的vhost
-   */
-  async ModifyRabbitMQVirtualHost(
-    req: ModifyRabbitMQVirtualHostRequest,
-    cb?: (error: string, rep: ModifyRabbitMQVirtualHostResponse) => void
-  ): Promise<ModifyRabbitMQVirtualHostResponse> {
-    return this.request("ModifyRabbitMQVirtualHost", req, cb)
+     * 查询通用集群售卖规格。
+当前 API 适用集群：4.x 通用集群。查询 5.x 集群的售卖规格接口文档见 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676)。
+     */
+  async DescribeRocketMQGeneralSKUs(
+    req?: DescribeRocketMQGeneralSKUsRequest,
+    cb?: (error: string, rep: DescribeRocketMQGeneralSKUsResponse) => void
+  ): Promise<DescribeRocketMQGeneralSKUsResponse> {
+    return this.request("DescribeRocketMQGeneralSKUs", req, cb)
   }
 
   /**
@@ -1032,6 +1037,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetRocketMQPublicAccessPointResponse) => void
   ): Promise<SetRocketMQPublicAccessPointResponse> {
     return this.request("SetRocketMQPublicAccessPoint", req, cb)
+  }
+
+  /**
+   * 修改RabbitMQ的vhost
+   */
+  async ModifyRabbitMQVirtualHost(
+    req: ModifyRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: ModifyRabbitMQVirtualHostResponse) => void
+  ): Promise<ModifyRabbitMQVirtualHostResponse> {
+    return this.request("ModifyRabbitMQVirtualHost", req, cb)
   }
 
   /**

@@ -11353,6 +11353,11 @@ export interface PermanentResidencePermitInfo {
    * 国籍，外国人永久居留证 返回该字段
    */
   Nationality?: ContentInfo
+  /**
+   * 英文名
+示例值：Ming Li
+   */
+  EnName?: ContentInfo
 }
 
 /**

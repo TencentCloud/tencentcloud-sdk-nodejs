@@ -108,9 +108,9 @@ it("tdmq.v20200217.DeleteCmqQueue", async function () {
     }
 })
 
-it("tdmq.v20200217.ModifyRabbitMQVirtualHost", async function () {
+it("tdmq.v20200217.DescribeRocketMQGeneralSKUs", async function () {
     try {
-       const data = await client.ModifyRabbitMQVirtualHost({})
+       const data = await client.DescribeRocketMQGeneralSKUs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +601,16 @@ it("tdmq.v20200217.ImportRocketMQTopics", async function () {
 it("tdmq.v20200217.SetRocketMQPublicAccessPoint", async function () {
     try {
        const data = await client.SetRocketMQPublicAccessPoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ModifyRabbitMQVirtualHost", async function () {
+    try {
+       const data = await client.ModifyRabbitMQVirtualHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

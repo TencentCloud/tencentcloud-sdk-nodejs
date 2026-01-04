@@ -348,6 +348,16 @@ it("dbbrain.v20210527.CancelKillTask", async function () {
     }
 })
 
+it("dbbrain.v20210527.ModifySqlFilters", async function () {
+    try {
+       const data = await client.ModifySqlFilters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateSecurityAuditLogExportTask", async function () {
     try {
        const data = await client.CreateSecurityAuditLogExportTask({})
@@ -818,9 +828,9 @@ it("dbbrain.v20210527.DescribeDBAutonomyAction", async function () {
     }
 })
 
-it("dbbrain.v20210527.ModifySqlFilters", async function () {
+it("dbbrain.v20210527.DescribeRedisUnExpiredKeyStatistics", async function () {
     try {
-       const data = await client.ModifySqlFilters({})
+       const data = await client.DescribeRedisUnExpiredKeyStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
