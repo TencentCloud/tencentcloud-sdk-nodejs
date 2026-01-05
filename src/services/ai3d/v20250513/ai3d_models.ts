@@ -412,6 +412,10 @@ triangle: 三角形面。
 quadrilateral: 四边形面与三角形面混合生成。
    */
   PolygonType?: string
+  /**
+   * 生成模型的格式，仅限制生成一种格式； 生成模型文件组默认返回obj、glb格式（开启时Geometry参数时，默认为glb格式）； 可选值：STL，USDZ，FBX；
+   */
+  ResultFormat?: string
 }
 
 /**

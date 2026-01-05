@@ -204,6 +204,28 @@ export interface DescribeInstanceNodesRequest {
 }
 
 /**
+ * DescribePriceResizeInstance返回参数结构体
+ */
+export interface DescribePriceResizeInstanceResponse {
+  /**
+   * 优惠后价格，单位：分
+   */
+  Price?: number
+  /**
+   * 原价格，单位：分
+   */
+  OriginalPrice?: number
+  /**
+   * 币种。CNY-人民币，USD-美元
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateInstance返回参数结构体
  */
 export interface CreateInstanceResponse {
@@ -215,16 +237,6 @@ export interface CreateInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DestroyInstances请求参数结构体
- */
-export interface DestroyInstancesRequest {
-  /**
-   * 以数组形式指定待销毁下线的实例 ID。
-   */
-  InstanceIds: Array<string>
 }
 
 /**
@@ -648,21 +660,104 @@ export interface InstanceInfo {
 }
 
 /**
- * DescribeInstances返回参数结构体
+ * DescribePriceResizeInstance请求参数结构体
  */
-export interface DescribeInstancesResponse {
+export interface DescribePriceResizeInstanceRequest {
   /**
-   * 实例列表。
+   * 实例ID
    */
-  Items?: Array<InstanceInfo>
+  InstanceId: string
   /**
-   * 实例总数。
+   * 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。
+- 计算型： 1、2、4、8、16、24、32。
+- 标准型： 1、2、4、8、12、16。
+- 存储型： 1、2、4、6、8。
    */
-  TotalCount?: number
+  Cpu?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 指定实例所需的内存大小。单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
    */
-  RequestId?: string
+  Memory?: number
+  /**
+   * 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   */
+  DiskSize?: number
+  /**
+   * 指定实例所需配置的节点数量。选择方法，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   */
+  WorkerNodeNum?: number
+}
+
+/**
+ * DescribePriceRenewInstance请求参数结构体
+ */
+export interface DescribePriceRenewInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 包年包月的时长，单位：月
+   */
+  PayPeriod: number
+}
+
+/**
+ * DescribePriceCreateInstance请求参数结构体
+ */
+export interface DescribePriceCreateInstanceRequest {
+  /**
+   * 实例类型。
+- base：免费测试版。
+- single：单机版。
+- cluster：高可用版。
+   */
+  InstanceType: string
+  /**
+   * 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。
+- 计算型： 1、2、4、8、16、24、32。
+- 标准型： 1、2、4、8、12、16。
+- 存储型： 1、2、4、6、8。
+   */
+  Cpu: number
+  /**
+   * 指定实例所需的内存大小。单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   */
+  Memory: number
+  /**
+   * 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   */
+  DiskSize: number
+  /**
+   * 指定实例所需配置的节点数量。选择方法，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   */
+  WorkerNodeNum: number
+  /**
+   * 指定实例计费方式。
+- 0：按量付费。
+- 1：包年包月。
+   */
+  PayMode: number
+  /**
+   * 购买实例数量。
+   */
+  GoodsNum: number
+  /**
+   * 产品版本，0-标准版，1-容量增强版
+   */
+  ProductType?: number
+  /**
+   * 实例类型为高可用版，需指定可用区选项。
+- two：两可用区。
+- three：三可用区。
+   */
+  Mode?: string
+  /**
+   * 若计费方式为包年包月，指定包年包月续费的时长。
+- 单位：月。
+- 取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。
+   */
+  PayPeriod?: number
 }
 
 /**
@@ -762,6 +857,16 @@ export interface DisassociateSecurityGroupsRequest {
 }
 
 /**
+ * DisassociateSecurityGroups返回参数结构体
+ */
+export interface DisassociateSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IsolateInstance返回参数结构体
  */
 export interface IsolateInstanceResponse {
@@ -825,6 +930,28 @@ export interface ScaleOutInstanceRequest {
 - true：立即执行增加节点数的任务，请确保此时没有重大业务操作。
    */
   RunNow?: boolean
+}
+
+/**
+ * DescribePriceCreateInstance返回参数结构体
+ */
+export interface DescribePriceCreateInstanceResponse {
+  /**
+   * 优惠后价格，单位：分
+   */
+  Price?: number
+  /**
+   * 原价格，单位：分
+   */
+  OriginalPrice?: number
+  /**
+   * 币种。CNY-人民币，USD-美元
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -912,6 +1039,24 @@ export interface CreateInstancesComponent {
 }
 
 /**
+ * DescribeInstances返回参数结构体
+ */
+export interface DescribeInstancesResponse {
+  /**
+   * 实例列表。
+   */
+  Items?: Array<InstanceInfo>
+  /**
+   * 实例总数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RecoverInstance返回参数结构体
  */
 export interface RecoverInstanceResponse {
@@ -942,19 +1087,21 @@ export interface ModifyInstanceMaintenanceWindowRequest {
 }
 
 /**
- * DisassociateSecurityGroups返回参数结构体
+ * DescribePriceRenewInstance返回参数结构体
  */
-export interface DisassociateSecurityGroupsResponse {
+export interface DescribePriceRenewInstanceResponse {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 优惠后价格，单位：分
    */
-  RequestId?: string
-}
-
-/**
- * ScaleUpInstance返回参数结构体
- */
-export interface ScaleUpInstanceResponse {
+  Price?: number
+  /**
+   * 原价格，单位：分
+   */
+  OriginalPrice?: number
+  /**
+   * 币种。CNY-人民币，USD-美元
+   */
+  Currency?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -972,6 +1119,26 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
   SecurityGroupIds: Array<string>
   /**
    * 实例ID，格式如：vdb-c9s3****。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * ScaleUpInstance返回参数结构体
+ */
+export interface ScaleUpInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DestroyInstances请求参数结构体
+ */
+export interface DestroyInstancesRequest {
+  /**
+   * 以数组形式指定待销毁下线的实例 ID。
    */
   InstanceIds: Array<string>
 }

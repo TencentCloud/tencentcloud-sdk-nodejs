@@ -4973,38 +4973,41 @@ export interface DescribeClsLogSetResponse {
  */
 export interface ModifyTargetGroupAttributeRequest {
   /**
-   * 目标组的ID。
+   * <p>目标组的ID。</p>
    */
   TargetGroupId: string
   /**
-   * 目标组的新名称。
+   * <p>目标组的新名称。</p>
    */
   TargetGroupName?: string
   /**
-   * 目标组的新默认端口。全监听目标组不支持此参数。
+   * <p>目标组的新默认端口。全监听目标组不支持此参数。</p>
    */
   Port?: number
   /**
-   * 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：
-<ur><li>WRR:按权重轮询。</li><li>LEAST_CONN:最小连接数。</li><li>IP_HASH:按IP哈希。</li><li>默认为 WRR。</li><ur>
+   * <p>调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：<ur><li>WRR:按权重轮询。</li><li>LEAST_CONN:最小连接数。</li><li>IP_HASH:按IP哈希。</li><li>默认为 WRR。</li><ur></p>
    */
   ScheduleAlgorithm?: string
   /**
-   * 健康检查详情。
+   * <p>健康检查详情。</p>
    */
   HealthCheck?: TargetGroupHealthCheck
   /**
-   * 后端服务默认权重, 其中：<ul><li>取值范围[0, 100]</li><li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li><li>v1目标组类型不支持设置Weight参数。</li> </ul>
+   * <p>后端服务默认权重, 其中：<ul><li>取值范围[0, 100]</li><li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li><li>v1目标组类型不支持设置Weight参数。</li> </ul></p>
    */
   Weight?: number
   /**
-   * 是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，true:关闭；false:开启， 默认关闭。
+   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，true:关闭；false:开启， 默认关闭。</p>
    */
   KeepaliveEnable?: boolean
   /**
-   * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。TCP/UDP目标组不支持该参数。
+   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。TCP/UDP目标组不支持该参数。</p>
    */
   SessionExpireTime?: number
+  /**
+   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
+   */
+  SnatEnable?: boolean
 }
 
 /**

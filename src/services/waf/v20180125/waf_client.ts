@@ -133,6 +133,7 @@ import {
   ClbWafRegionItem,
   DescribeFindDomainListRequest,
   ModifyInstanceElasticModeResponse,
+  BotIdDetail,
   DescribePostCLSFlowsResponse,
   TargetEntity,
   DescribeBotSceneUCBRuleRequest,
@@ -285,6 +286,7 @@ import {
   LimitPath,
   TLSVersion,
   ModifyOwaspRuleTypeLevelRequest,
+  GetInstanceQpsLimitRequest,
   LLMMonPkg,
   ModifyHostRequest,
   DestroyPostCKafkaFlowRequest,
@@ -335,13 +337,15 @@ import {
   DescribeAccessExportsRequest,
   DescribeCustomWhiteRuleRequest,
   DeleteAntiFakeUrlResponse,
+  DescribeBotIdRuleResponse,
   CreateAreaBanRuleRequest,
   Area,
   DescribeUserLevelResponse,
   IpAccessControlParam,
   TokenValidation,
+  DescribeBotIdRuleRequest,
   DescribeCustomRuleListResponse,
-  GetInstanceQpsLimitRequest,
+  BotIdStat,
   BotSceneInfo,
   SessionData,
   DescribeAutoDenyIPResponse,
@@ -2312,6 +2316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomWhiteRuleStatusResponse) => void
   ): Promise<ModifyCustomWhiteRuleStatusResponse> {
     return this.request("ModifyCustomWhiteRuleStatus", req, cb)
+  }
+
+  /**
+   * 获取BotId规则列表1
+   */
+  async DescribeBotIdRule(
+    req: DescribeBotIdRuleRequest,
+    cb?: (error: string, rep: DescribeBotIdRuleResponse) => void
+  ): Promise<DescribeBotIdRuleResponse> {
+    return this.request("DescribeBotIdRule", req, cb)
   }
 
   /**

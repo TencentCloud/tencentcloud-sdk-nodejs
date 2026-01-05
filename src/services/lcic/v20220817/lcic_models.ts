@@ -2583,6 +2583,10 @@ export interface EventDataInfo {
    * 录制url
    */
   RecordUrl?: string
+  /**
+   * MemberQuit事件，对应Reason（0:主动退出 1:被踢 2:永久被踢 4:失去心跳下线 5:房间结束，成员自动退出）
+   */
+  Reason?: number
 }
 
 /**

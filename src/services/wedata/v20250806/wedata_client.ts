@@ -19,8 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateTaskResult,
+  SystemRole,
+  ListOpsTriggerWorkflowsResponse,
+  ListWorkflowPermissionsResponse,
   ListProcessLineageResponse,
-  SetSuccessTaskInstancesAsyncRequest,
+  GetWorkflowFolderRequest,
   WorkflowInfo,
   ListTableResponse,
   CreateDataSourceRequest,
@@ -29,6 +32,8 @@ import {
   ListDataSourcesRequest,
   OpsWorkflows,
   ProjectRequest,
+  WorkflowGeneralTaskParam,
+  GetMyCodeMaxPermissionRequest,
   DeleteResourceFolderResponse,
   UpdateTaskRequest,
   KVMap,
@@ -37,69 +42,120 @@ import {
   UpdateProjectRequest,
   DeleteWorkflowRequest,
   ListProjectMembersRequest,
+  DeleteDataBackfillPlanAsyncRequest,
+  DeleteTriggerWorkflowResponse,
+  TriggerTaskRunBrief,
+  ListTriggerWorkflowsRequest,
   PauseOpsTasksAsyncRequest,
+  TaskConfiguration,
+  DependencyTriggerTaskBrief,
   DissociateResourceGroupFromProjectRequest,
   DLCClusterInfo,
+  UpdateTriggerWorkflowResult,
   CreateWorkflowRequest,
   TaskSchedulingParameter,
   SubmitTaskRequest,
+  RemoveMemberProjectRoleResponse,
+  SchedulingParameter,
   UpdateSQLFolderRequest,
   BackfillInstance,
   OpsWorkflow,
   CreateSQLFolderRequest,
   GetOpsTaskResponse,
+  UpdateTriggerTaskResponse,
+  DeleteQualityRuleGroupRequest,
+  ListTriggerTaskInfo,
   SQLStopResult,
   ResourceStatus,
+  QualityRule,
   EnableProjectResponse,
   ListCatalogPage,
-  GetDataSourceRelatedTasksResponse,
+  CreateProjectMemberRequest,
   DeleteLineageResponse,
   TaskInstanceDetail,
-  ListTaskInstancesRequest,
+  CreateTaskFolderResult,
+  QualityRuleExecResult,
   ProjectUserRole,
   TaskDependDto,
+  DeleteWorkflowPermissionsResult,
+  SetSuccessTaskInstancesAsyncRequest,
   GetOpsTaskCodeResponse,
   ListWorkflowsResponse,
   CreateProjectResponse,
   ProjectInstanceStatisticsAlarmInfo,
+  QualityRuleFieldConfig,
+  TriggerWorkflowResult,
+  CodePermissionsResultItem,
   GetTaskVersionResponse,
   GetOpsWorkflowRequest,
-  ListWorkflowInfo,
+  ListTaskVersionsResponse,
   ProjectBrief,
+  UpdateOpsTriggerTasksOwnerResponse,
+  RevokeDataSourceAuthorizationResponse,
   TaskCode,
-  GetTaskCodeResponse,
+  BriefTask,
+  UpdateTaskPartiallyResponse,
+  UpdateTriggerTaskPartiallyRequest,
   DeleteResourceFileRequest,
+  QualitySubscribeReceiver,
+  DeleteCodePermissionsRequest,
   SQLScriptConfig,
-  ResourceNumber,
+  CodeFile,
   AddCalcEnginesToProjectRequest,
   CreateWorkflowResult,
-  TaskDataRegistry,
-  ListDatabaseResponse,
+  RelateTask,
+  QualityThresholdValue,
+  KillTriggerWorkflowRunsRequest,
+  QualityFieldConfig,
+  AuthInfo,
   DeleteCodeFolderRequest,
+  CommonQualityOperateResult,
+  DeleteResourceFileResult,
+  UpdateTaskFolderRequest,
+  QualityColumnValueConfig,
   ListOpsWorkflowsResponse,
+  DeleteQualityRuleGroupResponse,
   BackfillInstanceCollection,
   CreateSQLFolderResponse,
   ListDownstreamTaskInstancesResponse,
   GetWorkflowRequest,
+  ListQualityRuleGroupsTableResponse,
   ListResourceFoldersResponse,
   UpdateResourceGroupResponse,
+  CreateTriggerTaskSchedulerConfiguration,
+  GetTriggerTaskResponse,
   ListSQLFolderContentsResponse,
-  TaskConfiguration,
+  GetTriggerTaskCodeResponse,
+  ListWorkflowFoldersRequest,
+  GetDataSourceRelatedTasksResponse,
   DeleteWorkflowFolderResponse,
-  SubmitTaskResult,
+  ListTaskInstancesRequest,
   RerunTaskInstancesAsyncResponse,
-  ListLineagePage,
-  RelateTask,
+  ListUpstreamTriggerTasksRequest,
+  ExploreFilePermissionsPage,
+  ExploreAuthorizationObject,
+  GetTriggerTaskCodeRequest,
+  QualityRuleGroupExecStrategy,
+  GetTriggerWorkflowRunRequest,
   UpdateWorkflowResult,
+  DescribeDataSourceAuthorityResponse,
   AlarmRuleDetail,
   StopOpsTasksAsyncRequest,
+  GetTriggerTaskRunResponse,
+  UpdateTaskPartiallyRequest,
   GetSQLScriptRequest,
   ExecutorResourceGroupInfo,
-  GrantMemberProjectRoleResponse,
+  DeleteQualityRuleResponse,
+  InstanceExecution,
+  UpdateTriggerTaskRequest,
   TaskInstance,
+  TriggerWorkflowDetail,
   IntegrationResource,
-  ListTaskInfo,
+  DataSource,
+  CompareQualityResultItem,
+  QualitySqlExpressionTable,
   OpsTaskDepend,
+  ListQualityRulesResponse,
   ListTaskInstancesResponse,
   DataSourceResult,
   CreateCodeFolderRequest,
@@ -107,112 +163,174 @@ import {
   ListTableRequest,
   UpdateResourceGroupRequest,
   DeleteCodeFileRequest,
+  UpdateTriggerWorkflowResponse,
   ListOpsAlarmRulesRequest,
-  GetProjectResponse,
-  InstanceExecution,
+  ListTenantRolesRequest,
+  UpdateTriggerTaskBrief,
+  GrantMemberProjectRoleResponse,
+  QualityRuleTemplate,
+  ExploreFileResource,
   JobDto,
   DeleteResourceFileResponse,
   ListDownstreamOpsTasksRequest,
+  UpdateOpsTriggerTasksOwnerRequest,
   UpdateCodeFileRequest,
   LineageResource,
   TaskBaseAttribute,
+  CreateQualityRuleGroupResultVO,
   ListDataSourcesResponse,
   TimeOutStrategyInfo,
   GetCodeFileRequest,
+  ExploreAuthorizationRecycleObject,
   OperateResult,
   ListSchemaPage,
+  GetTriggerWorkflowRunResponse,
   RegisterLineageResponse,
+  ListTriggerWorkflowRunsResponse,
   CreateCodeFileResponse,
   ListResourceGroupsResponse,
   UpdateResourceFolderRequest,
+  UpdateTriggerTaskBaseAttributePart,
   ListTaskInstanceExecutionsRequest,
-  MonitorWhiteTask,
+  StopOpsTasksAsyncResponse,
   ProjectUsersBrief,
-  CodeStudioFolderResult,
+  ListLineageRequest,
   ListOpsTasksPage,
   CreateOpsAlarmRuleResponse,
+  AuthorizeDataSourceRequest,
+  ExploreAuthorizeSubject,
+  GetTriggerTaskRunRequest,
+  SubmitTriggerTaskResponse,
+  ListQualityRuleGroupExecResultsByPageResponse,
   GetSQLFolderRequest,
+  TaskFolder,
   AlarmWayWebHook,
   GetResourceFileResponse,
   GetTaskCodeRequest,
+  CreateSQLScriptResponse,
+  TriggerTaskSchedulerConfiguration,
+  TriggerDependencyConfigPage,
   ListLineageResponse,
   CreateTaskSchedulerConfiguration,
   CreateCodeFolderResponse,
   ExecutorResourceGroupData,
-  SQLContentActionResult,
+  CreateTriggerTaskBaseAttribute,
+  LineageProcess,
+  DeleteQualityRuleGroupResultVO,
+  ListTriggerWorkflowInfo,
   DataBackfill,
   RemoveMemberProjectRoleRequest,
+  ListTriggerTaskVersionsRequest,
   RunSQLScriptRequest,
   AssociateResourceGroupToProjectResponse,
   CreateResourceGroupResponse,
+  TriggerWorkflowRunBrief,
+  QualitySubscribeWebHook,
+  GetTriggerTaskRequest,
   DeleteSQLScriptRequest,
   ListTasksResponse,
   UpdateResourceFolderResponse,
+  ListCodePermissionsRequest,
   DataSourceFileUpload,
-  DeleteResourceFileResult,
+  ListTriggerWorkflowsResponse,
+  DeleteDataBackfillPlanAsyncResponse,
   ListSchemaResponse,
   GetCodeFolderResponse,
   DeleteSQLFolderResponse,
-  ListWorkflowFoldersRequest,
+  GetTaskVersionRequest,
   GetTableColumnsRequest,
   ListAlarmMessagesRequest,
-  DataSource,
+  ModifyQualityRuleGroupResultVO,
+  ListDatabaseResponse,
   ListSQLScriptRunsResponse,
-  ListTenantRolesRequest,
+  GetProjectResponse,
   GetTaskInstanceLogRequest,
+  QualityCompareRuleItem,
+  CreateTaskFolderRequest,
+  GetMyCodeMaxPermissionResponse,
   ListCatalogRequest,
-  ListLineageRequest,
+  CodeStudioFolderResult,
   DeleteTaskResult,
-  CreateSQLScriptResponse,
+  ExploreFilePrivilegeItem,
+  GetResourceFolderRequest,
   AlarmQuietInterval,
+  UpdateTaskFolderResponse,
   ResourceGroupSpecification,
   DeleteResourceGroupRequest,
   ListTasksRequest,
+  ListDownstreamTriggerTasksRequest,
+  UpdateTaskPart,
   ResourceFile,
+  QualityRulePage,
+  TriggerWorkflowRunResult,
+  ExecutionActionBrief,
   GetWorkflowResponse,
   GetTaskResponse,
   CreateSQLScriptRequest,
+  UpdateTaskFolderResult,
+  DeleteTaskFolderRequest,
   GetAlarmMessageRequest,
   ListCodeFolderContentsRequest,
   ListTaskVersionsRequest,
   OpsWorkflowDetail,
+  CreateQualityRuleGroupRequest,
   TableInfo,
   ListResourceFilesRequest,
   WorkflowSchedulerConfigurationInfo,
+  CreateTriggerTaskRequest,
+  CreateWorkflowPermissionsRequest,
   ListProjectRolesResponse,
   DependencyConfigPage,
-  StartTasks,
+  CodeStudioFileActionResult,
   CreateResourceFileResponse,
+  StopSQLScriptRunRequest,
   TaskInstanceExecutions,
   ListAlarmRulesResult,
   EnableProjectRequest,
   ListTaskInstanceExecutionsResponse,
-  UpdateTaskResult,
+  GetOpsTriggerWorkflowResponse,
+  RerunTriggerWorkflowRunAsyncRequest,
+  QualityRuleTemplatePage,
   LineageProperty,
+  KillTriggerWorkflowRunsResponse,
   CreateTaskResponse,
+  CreateWorkflowPermissionsResult,
+  CreateCodePermissionsResponse,
   DisableProjectRequest,
+  GetTriggerWorkflowResponse,
   DependencyStrategyTask,
+  Task,
   CreateTaskBaseAttribute,
   CreateDataReplenishmentPlan,
   GetTableResponse,
   UpdateWorkflowFolderRequest,
-  PauseOpsTasksAsyncResponse,
+  DeleteProjectMemberRequest,
+  TriggerTaskDependDto,
+  DeleteCodePermissionsResponse,
+  BatchOperationOpsDto,
   JobExecutionDto,
-  ListUpstreamTasksResponse,
+  CreateTaskFolderResponse,
+  ListDownstreamTasksRequest,
   OutTaskParameter,
-  ModifyAlarmRuleResult,
+  DeleteTriggerWorkflowResult,
+  ListProcessLineagePage,
   UpdateFolderResult,
   ListSchemaRequest,
+  UpdateTriggerWorkflowPartiallyResponse,
   WorkflowDetail,
   DeleteProjectMemberResponse,
   CreateWorkflowFolderRequest,
+  ListOpsTriggerWorkflowsRequest,
   CreateResourceFolderRequest,
   MetricData,
   DeleteResourceFolderRequest,
+  ListQualityRuleGroupExecResult,
   UpdateCodeFolderResponse,
+  ListTaskFoldersRequest,
   UpdateResourceFileRequest,
+  ListTriggerWorkflowRunsRequest,
   TaskExtParameter,
-  CodeFile,
+  ColumnInfo,
   SubmitTaskResponse,
   ResourceFileItem,
   ListAlarmMessages,
@@ -222,14 +340,20 @@ import {
   UpdateTaskResponse,
   ResourceFolder,
   UpdateDataSourceRequest,
+  QualityRuleGroupsTableVO,
   AssociateResourceGroupToProjectRequest,
   ListOpsWorkflowsRequest,
   CreateWorkflowFolderResponse,
   GetDataSourceRelatedTasksRequest,
+  UpdateTriggerTaskBaseAttribute,
   ResourceFolderPage,
   ListDownstreamTasksResponse,
+  ListQualityRuleTemplatesRequest,
+  ListQualityRuleGroupExecResultPage,
   UpdateOpsTasksOwnerResponse,
+  DescribeDataSourceAuthorityRequest,
   NotebookSessionInfo,
+  ListTaskFoldersResponse,
   ListTenantRolesResponse,
   PageRoles,
   UpdateTaskBrief,
@@ -239,49 +363,73 @@ import {
   UpdateDataSourceResponse,
   GetOpsAsyncJobRequest,
   DeleteCodeFolderResponse,
-  CreateProjectMemberRequest,
+  TriggerWorkflowInfo,
+  ModifyQualityRuleRequest,
+  UpdateResourceFileResult,
   UpdateResourceFileResponse,
   GetOpsAlarmRuleResponse,
+  CreateTriggerTaskResponse,
+  ResourceNumber,
   CreateProjectRequest,
+  ListTriggerTaskVersions,
   InstanceLog,
   OpsAsyncResponse,
+  TriggerTaskBrief,
   UpdateWorkflowRequest,
   TrendData,
   ListColumnLineageRequest,
   UpdateOpsAlarmRuleResponse,
-  CodeStudioFileActionResult,
+  StartTasks,
   OpsAsyncJobDetail,
   ListDownstreamOpsTasksResponse,
   GetProjectRequest,
-  ListTaskVersionsResponse,
   ListSQLScriptRunsRequest,
   CreateDataBackfillPlanRequest,
+  UpdateTriggerWorkflowRequest,
   ListProjectRolesRequest,
   GetTaskInstanceRequest,
   ListSQLFolderContentsRequest,
-  UpdateResourceFileResult,
+  DeleteWorkflowPermission,
   CreateTaskRequest,
+  ListTriggerTasksResponse,
+  GetOpsTriggerWorkflowRequest,
   GetDataSourceRequest,
   ListProjectMembersResponse,
   LineageResouce,
+  TaskVersionDetail,
   ListAlarmMessagesResponse,
-  SystemRole,
+  WorkflowFolderDetail,
+  SubmitTriggerTaskRequest,
+  GetTaskFolderRequest,
+  ListDatabaseRequest,
+  RegisterLineageRequest,
   DeleteTaskRequest,
   GetCodeFolderRequest,
-  GetOpsTaskRequest,
+  ListCatalogResponse,
   DeleteAlarmRuleResult,
   ListWorkflowFoldersResponse,
+  ResourceFolderDetail,
   KillTaskInstancesAsyncResponse,
   ListTaskVersions,
+  TaskFolderDetail,
   ListUpstreamTasksRequest,
   ReconciliationStrategyInfo,
   AddCalcEnginesToProjectResponse,
+  ModifyQualityRuleGroupRequest,
   EventListener,
+  ModifyQualityRuleResponse,
   InstanceExecutionPhase,
   DatasourceRelationTaskInfo,
   UpdateWorkflowResponse,
+  ListQualityRuleTemplatesResponse,
+  DeleteTriggerTaskResponse,
+  QualityTableConfig,
+  TriggerTaskVersion,
+  UpdateTriggerWorkflowPartiallyRequest,
   ListUpstreamOpsTasksRequest,
-  RemoveMemberProjectRoleResponse,
+  SubmitTaskResult,
+  ListWorkflowPermissionsRequest,
+  CreateTriggerWorkflowResult,
   DeleteFolderResult,
   ListWorkflowsRequest,
   UpdateSQLFolderResponse,
@@ -293,128 +441,188 @@ import {
   ChildDependencyConfigPage,
   LineageRelation,
   CreateTaskConfiguration,
+  CompareQualityResult,
+  RerunTriggerWorkflowRunAsyncResponse,
+  TriggerTaskDAGBrief,
   RerunTaskInstancesAsyncRequest,
-  Task,
-  ListTablePage,
+  ListTaskInfo,
   WorkflowSchedulerConfiguration,
   CreateDataBackfillPlanResponse,
   DataSourceInfo,
-  TaskVersionDetail,
-  StopOpsTasksAsyncResponse,
+  ListCodePermissionsResponse,
+  DeleteWorkflowPermissionsRequest,
+  MonitorWhiteTask,
+  TriggerTaskLinkBrief,
   CreateWorkflowResponse,
   DeleteTaskResponse,
   SchemaInfo,
+  RevokeDataSourceAuthorizationRequest,
   DissociateResourceGroupFromProjectResponse,
   AlarmGroup,
   GrantMemberProjectRoleRequest,
-  GetTaskVersionRequest,
+  TriggerTask,
+  ListWorkflowInfo,
+  GetTriggerTaskVersionResponse,
   GetOpsAsyncJobResponse,
   DeleteSQLFolderRequest,
-  LineagePair,
+  CreateTriggerWorkflowRequest,
+  Project,
   ListDatabasePage,
   ListResourceGroupsRequest,
+  GetResourceFolderResponse,
   WorkflowFolder,
   GetAlarmMessageResponse,
   UpdateTaskBaseAttribute,
   GetOpsTaskCodeRequest,
-  RegisterLineageRequest,
+  GetTaskFolderResponse,
   GetDataBackfillPlanRequest,
   ListProcessLineageRequest,
   UpdateProjectResponse,
+  TriggerWorkflowBrief,
+  TriggerTaskBaseAttribute,
   CreateResourceFileRequest,
-  ListDatabaseRequest,
+  WorkflowPermission,
+  DeleteTaskFolderResponse,
+  DeleteWorkflowPermissionsResponse,
+  ListLineagePage,
   GetOpsAlarmRuleRequest,
   StopSQLScriptRunResponse,
   ListOpsTasksResponse,
   ListProjectsRequest,
+  ListUpstreamTriggerTasksResponse,
+  BizStateEnumInfoBrief,
   CreateProjectMemberResponse,
   ListOpsAlarmRulesResponse,
   UpdateOpsAlarmRuleRequest,
   ParentDependencyConfigPage,
   ListUpstreamOpsTasksResponse,
-  DeleteProjectMemberRequest,
+  CreateTriggerWorkflowResponse,
+  PauseOpsTasksAsyncResponse,
   GetSQLFolderResponse,
-  Project,
+  LineagePair,
   DeleteOpsAlarmRuleResponse,
   GetTaskRequest,
   AlarmMessage,
   StartOpsTasksRequest,
-  ListCatalogResponse,
+  GetOpsTaskRequest,
+  UpdateTaskResult,
   GetResourceFileRequest,
   UpdateTasksOwner,
   TaskInstancePage,
+  ListTriggerTasksRequest,
   ListColumnLineageResponse,
   SqlCreateResult,
+  DeleteQualityRuleRequest,
   CreateAlarmRuleData,
+  QualityRuleGroupSubscribe,
   SQLScript,
   CreateResourceFileResult,
-  ListUpstreamTaskInstancesResponse,
+  AuthorizeDataSourceResponse,
   KVPair,
   CreateDataSourceResponse,
-  ListUpstreamTaskInstancesRequest,
+  GetWorkflowFolderResponse,
+  CreateQualityRuleGroupResponse,
+  GetMyWorkflowMaxPermissionRequest,
+  CodeStudioMaxPermission,
+  GetTriggerTaskVersionRequest,
+  GetTriggerWorkflowRequest,
   CodeFolderNode,
   ResourceGroupMetrics,
   UpdateSQLScriptResponse,
   CreateFolderResult,
+  CreateTriggerTaskConfiguration,
+  CreateWorkflowPermissionsResponse,
   LineageNodeInfo,
+  QualityRuleGroupTableV2,
   CatalogInfo,
-  ListDownstreamTasksRequest,
+  ListUpstreamTasksResponse,
   DeleteWorkflowFolderRequest,
   RunSQLScriptResponse,
   CreateProjectResult,
   GetTableColumnsResponse,
+  ListQualityRulesRequest,
   DeleteOpsAlarmRuleRequest,
-  BriefTask,
+  GetTaskCodeResponse,
+  ModifyQualityRuleGroupResponse,
+  CreateCodePermissionsRequest,
+  SQLContentActionResult,
+  DeleteTriggerWorkflowRequest,
   ProjectResult,
+  TriggerWorkflowTaskRunDetailBrief,
   ListDataBackfillInstancesResponse,
-  ListProcessLineagePage,
+  ModifyAlarmRuleResult,
   DisableProjectResponse,
   DeleteLineageRequest,
   CreateOpsAlarmRuleRequest,
+  TaskDataRegistry,
   SetSuccessTaskInstancesAsyncResponse,
   UpdateSQLScriptRequest,
   ParamInfo,
+  ListQualityRuleGroupsTableRequest,
+  UpdateTriggerTaskPart,
+  DeleteTriggerTaskRequest,
   DeleteDataSourceResponse,
   InTaskParameter,
   ListResourceFoldersRequest,
   GetDataSourceResponse,
+  ListUpstreamTaskInstancesResponse,
   GetDataBackfillPlanResponse,
   KillTaskInstancesAsyncRequest,
   ListDataBackfillInstancesRequest,
   CodeStudioFolderActionResult,
+  TriggerTaskVersionDetail,
+  UpdateTriggerTaskPartiallyResponse,
+  Filter,
   GetResourceGroupMetricsRequest,
   BusinessMetadata,
   ListProjectsResponse,
   DeleteWorkflowResult,
+  WorkflowMaxPermission,
   TaskSchedulerConfiguration,
+  QualitySqlExpression,
   UpdateWorkflowFolderResponse,
   DeleteDataSourceRequest,
-  StopSQLScriptRunRequest,
+  UpdateTaskBaseAttributePart,
+  QualityProdSchedulerTask,
   AlarmRuleData,
   UpdateCodeFileResponse,
   NotificationFatigue,
   SQLFolderNode,
   DatabaseInfo,
+  WorkflowTriggerConfig,
   TaskVersion,
   GetCodeFileResponse,
+  ListUpstreamTaskInstancesRequest,
   WorkflowFolderPage,
   TaskCodeResult,
   DataBackfillRange,
+  QualityRuleGroupConfig,
+  ListTriggerTaskVersionsResponse,
   DeleteCodeFileResponse,
+  QualityRuleGroupResult,
   TaskOpsInfo,
+  DeleteTaskFolderResult,
+  UpdateTriggerWorkflowPartially,
   DeleteResourceGroupResponse,
-  LineageProcess,
+  ListTablePage,
   GetTaskInstanceLogResponse,
+  ListDownstreamTriggerTasksResponse,
+  QualityCompareRule,
   ListCodeFolderContentsResponse,
+  GetMyWorkflowMaxPermissionResponse,
+  OrderField,
   DependencyTaskBrief,
+  TriggerTaskConfiguration,
   UpdateCodeFolderRequest,
   ResourceFilePage,
   ResourceResult,
-  ColumnInfo,
   GetOpsWorkflowResponse,
   DataSourceStatus,
+  ListQualityRuleGroupExecResultsByPageRequest,
   GetTableRequest,
   CreateResourceFolderResponse,
+  TaskFolderPage,
+  WorkflowPermissionPage,
 } from "./wedata_models"
 
 /**
@@ -457,13 +665,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 异步批量暂停任务
+   * 获取实例直接上游
    */
-  async PauseOpsTasksAsync(
-    req: PauseOpsTasksAsyncRequest,
-    cb?: (error: string, rep: PauseOpsTasksAsyncResponse) => void
-  ): Promise<PauseOpsTasksAsyncResponse> {
-    return this.request("PauseOpsTasksAsync", req, cb)
+  async ListDownstreamTaskInstances(
+    req: ListDownstreamTaskInstancesRequest,
+    cb?: (error: string, rep: ListDownstreamTaskInstancesResponse) => void
+  ): Promise<ListDownstreamTaskInstancesResponse> {
+    return this.request("ListDownstreamTaskInstances", req, cb)
   }
 
   /**
@@ -474,6 +682,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDataSourceRelatedTasksResponse) => void
   ): Promise<GetDataSourceRelatedTasksResponse> {
     return this.request("GetDataSourceRelatedTasks", req, cb)
+  }
+
+  /**
+   * 分页查询质量规则
+   */
+  async ListQualityRules(
+    req: ListQualityRulesRequest,
+    cb?: (error: string, rep: ListQualityRulesResponse) => void
+  ): Promise<ListQualityRulesResponse> {
+    return this.request("ListQualityRules", req, cb)
   }
 
   /**
@@ -497,13 +715,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例直接上游
+   * 查询任务文件夹列表
    */
-  async ListDownstreamTaskInstances(
-    req: ListDownstreamTaskInstancesRequest,
-    cb?: (error: string, rep: ListDownstreamTaskInstancesResponse) => void
-  ): Promise<ListDownstreamTaskInstancesResponse> {
-    return this.request("ListDownstreamTaskInstances", req, cb)
+  async ListTaskFolders(
+    req: ListTaskFoldersRequest,
+    cb?: (error: string, rep: ListTaskFoldersResponse) => void
+  ): Promise<ListTaskFoldersResponse> {
+    return this.request("ListTaskFolders", req, cb)
+  }
+
+  /**
+   * 查询工作流任务详情
+   */
+  async GetOpsTriggerWorkflow(
+    req: GetOpsTriggerWorkflowRequest,
+    cb?: (error: string, rep: GetOpsTriggerWorkflowResponse) => void
+  ): Promise<GetOpsTriggerWorkflowResponse> {
+    return this.request("GetOpsTriggerWorkflow", req, cb)
+  }
+
+  /**
+   * 获取所有主账号角色列表
+   */
+  async ListTenantRoles(
+    req: ListTenantRolesRequest,
+    cb?: (error: string, rep: ListTenantRolesResponse) => void
+  ): Promise<ListTenantRolesResponse> {
+    return this.request("ListTenantRoles", req, cb)
+  }
+
+  /**
+   * 创建监控任务
+   */
+  async ModifyQualityRuleGroup(
+    req: ModifyQualityRuleGroupRequest,
+    cb?: (error: string, rep: ModifyQualityRuleGroupResponse) => void
+  ): Promise<ModifyQualityRuleGroupResponse> {
+    return this.request("ModifyQualityRuleGroup", req, cb)
+  }
+
+  /**
+   * 删除CodeStudio实体权限
+   */
+  async DeleteCodePermissions(
+    req: DeleteCodePermissionsRequest,
+    cb?: (error: string, rep: DeleteCodePermissionsResponse) => void
+  ): Promise<DeleteCodePermissionsResponse> {
+    return this.request("DeleteCodePermissions", req, cb)
   }
 
   /**
@@ -517,6 +775,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提交工作流调度任务
+   */
+  async SubmitTriggerTask(
+    req: SubmitTriggerTaskRequest,
+    cb?: (error: string, rep: SubmitTriggerTaskResponse) => void
+  ): Promise<SubmitTriggerTaskResponse> {
+    return this.request("SubmitTriggerTask", req, cb)
+  }
+
+  /**
+   * 获取实例列表
+   */
+  async ListTaskInstances(
+    req: ListTaskInstancesRequest,
+    cb?: (error: string, rep: ListTaskInstancesResponse) => void
+  ): Promise<ListTaskInstancesResponse> {
+    return this.request("ListTaskInstances", req, cb)
+  }
+
+  /**
+   * 删除工作流调度任务
+   */
+  async DeleteTriggerTask(
+    req: DeleteTriggerTaskRequest,
+    cb?: (error: string, rep: DeleteTriggerTaskResponse) => void
+  ): Promise<DeleteTriggerTaskResponse> {
+    return this.request("DeleteTriggerTask", req, cb)
+  }
+
+  /**
    * 获取资源文件列表
    */
   async ListResourceFiles(
@@ -527,13 +815,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取任务直接上游
+   * 获取任务详情接口
    */
-  async ListUpstreamOpsTasks(
-    req: ListUpstreamOpsTasksRequest,
-    cb?: (error: string, rep: ListUpstreamOpsTasksResponse) => void
-  ): Promise<ListUpstreamOpsTasksResponse> {
-    return this.request("ListUpstreamOpsTasks", req, cb)
+  async GetTriggerTask(
+    req: GetTriggerTaskRequest,
+    cb?: (error: string, rep: GetTriggerTaskResponse) => void
+  ): Promise<GetTriggerTaskResponse> {
+    return this.request("GetTriggerTask", req, cb)
+  }
+
+  /**
+   * 删除工作流
+   */
+  async DeleteTriggerWorkflow(
+    req: DeleteTriggerWorkflowRequest,
+    cb?: (error: string, rep: DeleteTriggerWorkflowResponse) => void
+  ): Promise<DeleteTriggerWorkflowResponse> {
+    return this.request("DeleteTriggerWorkflow", req, cb)
   }
 
   /**
@@ -544,6 +842,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListOpsTasksResponse) => void
   ): Promise<ListOpsTasksResponse> {
     return this.request("ListOpsTasks", req, cb)
+  }
+
+  /**
+   * 授权数据源
+   */
+  async AuthorizeDataSource(
+    req: AuthorizeDataSourceRequest,
+    cb?: (error: string, rep: AuthorizeDataSourceResponse) => void
+  ): Promise<AuthorizeDataSourceResponse> {
+    return this.request("AuthorizeDataSource", req, cb)
+  }
+
+  /**
+   * 查询当前用户对工作流文件夹的递归最大权限
+   */
+  async GetMyWorkflowMaxPermission(
+    req: GetMyWorkflowMaxPermissionRequest,
+    cb?: (error: string, rep: GetMyWorkflowMaxPermissionResponse) => void
+  ): Promise<GetMyWorkflowMaxPermissionResponse> {
+    return this.request("GetMyWorkflowMaxPermission", req, cb)
   }
 
   /**
@@ -564,6 +882,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDataBackfillPlanResponse) => void
   ): Promise<GetDataBackfillPlanResponse> {
     return this.request("GetDataBackfillPlan", req, cb)
+  }
+
+  /**
+   * 查询任务执行详情
+   */
+  async GetTriggerTaskRun(
+    req: GetTriggerTaskRunRequest,
+    cb?: (error: string, rep: GetTriggerTaskRunResponse) => void
+  ): Promise<GetTriggerTaskRunResponse> {
+    return this.request("GetTriggerTaskRun", req, cb)
   }
 
   /**
@@ -617,6 +945,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除SQL文件夹
+   */
+  async DeleteSQLFolder(
+    req: DeleteSQLFolderRequest,
+    cb?: (error: string, rep: DeleteSQLFolderResponse) => void
+  ): Promise<DeleteSQLFolderResponse> {
+    return this.request("DeleteSQLFolder", req, cb)
+  }
+
+  /**
+   * 查询文件夹详情
+   */
+  async GetWorkflowFolder(
+    req: GetWorkflowFolderRequest,
+    cb?: (error: string, rep: GetWorkflowFolderResponse) => void
+  ): Promise<GetWorkflowFolderResponse> {
+    return this.request("GetWorkflowFolder", req, cb)
+  }
+
+  /**
    * 该接口用于在指定项目中创建数据源
    */
   async CreateDataSource(
@@ -624,6 +972,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDataSourceResponse) => void
   ): Promise<CreateDataSourceResponse> {
     return this.request("CreateDataSource", req, cb)
+  }
+
+  /**
+   * 数据开发配置权限
+   */
+  async CreateWorkflowPermissions(
+    req: CreateWorkflowPermissionsRequest,
+    cb?: (error: string, rep: CreateWorkflowPermissionsResponse) => void
+  ): Promise<CreateWorkflowPermissionsResponse> {
+    return this.request("CreateWorkflowPermissions", req, cb)
   }
 
   /**
@@ -647,6 +1005,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除质量规则接口
+   */
+  async DeleteQualityRule(
+    req: DeleteQualityRuleRequest,
+    cb?: (error: string, rep: DeleteQualityRuleResponse) => void
+  ): Promise<DeleteQualityRuleResponse> {
+    return this.request("DeleteQualityRule", req, cb)
+  }
+
+  /**
    * 该接口用于将指定执行资源组绑定到项目
    */
   async AssociateResourceGroupToProject(
@@ -667,6 +1035,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询任务文件夹详情
+   */
+  async GetTaskFolder(
+    req: GetTaskFolderRequest,
+    cb?: (error: string, rep: GetTaskFolderResponse) => void
+  ): Promise<GetTaskFolderResponse> {
+    return this.request("GetTaskFolder", req, cb)
+  }
+
+  /**
    * 修改项目基础信息。
    */
   async UpdateProject(
@@ -674,6 +1052,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateProjectResponse) => void
   ): Promise<UpdateProjectResponse> {
     return this.request("UpdateProject", req, cb)
+  }
+
+  /**
+   * 查询任务执行详情
+   */
+  async UpdateOpsTriggerTasksOwner(
+    req: UpdateOpsTriggerTasksOwnerRequest,
+    cb?: (error: string, rep: UpdateOpsTriggerTasksOwnerResponse) => void
+  ): Promise<UpdateOpsTriggerTasksOwnerResponse> {
+    return this.request("UpdateOpsTriggerTasksOwner", req, cb)
+  }
+
+  /**
+   * 更新任务接口
+   */
+  async UpdateTaskPartially(
+    req: UpdateTaskPartiallyRequest,
+    cb?: (error: string, rep: UpdateTaskPartiallyResponse) => void
+  ): Promise<UpdateTaskPartiallyResponse> {
+    return this.request("UpdateTaskPartially", req, cb)
   }
 
   /**
@@ -687,13 +1085,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取所有主账号角色列表
+   * 任务保存版本列表
    */
-  async ListTenantRoles(
-    req: ListTenantRolesRequest,
-    cb?: (error: string, rep: ListTenantRolesResponse) => void
-  ): Promise<ListTenantRolesResponse> {
-    return this.request("ListTenantRoles", req, cb)
+  async ListTriggerTaskVersions(
+    req: ListTriggerTaskVersionsRequest,
+    cb?: (error: string, rep: ListTriggerTaskVersionsResponse) => void
+  ): Promise<ListTriggerTaskVersionsResponse> {
+    return this.request("ListTriggerTaskVersions", req, cb)
+  }
+
+  /**
+   * 更新质量规则接口
+   */
+  async ModifyQualityRule(
+    req: ModifyQualityRuleRequest,
+    cb?: (error: string, rep: ModifyQualityRuleResponse) => void
+  ): Promise<ModifyQualityRuleResponse> {
+    return this.request("ModifyQualityRule", req, cb)
+  }
+
+  /**
+   * 获取任务直接下游详情
+   */
+  async ListDownstreamTriggerTasks(
+    req: ListDownstreamTriggerTasksRequest,
+    cb?: (error: string, rep: ListDownstreamTriggerTasksResponse) => void
+  ): Promise<ListDownstreamTriggerTasksResponse> {
+    return this.request("ListDownstreamTriggerTasks", req, cb)
+  }
+
+  /**
+   * 更新任务接口
+   */
+  async UpdateTriggerTaskPartially(
+    req: UpdateTriggerTaskPartiallyRequest,
+    cb?: (error: string, rep: UpdateTriggerTaskPartiallyResponse) => void
+  ): Promise<UpdateTriggerTaskPartiallyResponse> {
+    return this.request("UpdateTriggerTaskPartially", req, cb)
   }
 
   /**
@@ -727,6 +1155,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取工作流调度任务代码
+   */
+  async GetTriggerTaskCode(
+    req: GetTriggerTaskCodeRequest,
+    cb?: (error: string, rep: GetTriggerTaskCodeResponse) => void
+  ): Promise<GetTriggerTaskCodeResponse> {
+    return this.request("GetTriggerTaskCode", req, cb)
+  }
+
+  /**
    * 运行SQL脚本
    */
   async RunSQLScript(
@@ -754,6 +1192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetProjectResponse) => void
   ): Promise<GetProjectResponse> {
     return this.request("GetProject", req, cb)
+  }
+
+  /**
+   * 异步批量暂停任务
+   */
+  async PauseOpsTasksAsync(
+    req: PauseOpsTasksAsyncRequest,
+    cb?: (error: string, rep: PauseOpsTasksAsyncResponse) => void
+  ): Promise<PauseOpsTasksAsyncResponse> {
+    return this.request("PauseOpsTasksAsync", req, cb)
   }
 
   /**
@@ -787,13 +1235,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取表字段血缘信息
+   * 调度实例详情
    */
-  async ListColumnLineage(
-    req: ListColumnLineageRequest,
-    cb?: (error: string, rep: ListColumnLineageResponse) => void
-  ): Promise<ListColumnLineageResponse> {
-    return this.request("ListColumnLineage", req, cb)
+  async ListTaskInstanceExecutions(
+    req: ListTaskInstanceExecutionsRequest,
+    cb?: (error: string, rep: ListTaskInstanceExecutionsResponse) => void
+  ): Promise<ListTaskInstanceExecutionsResponse> {
+    return this.request("ListTaskInstanceExecutions", req, cb)
+  }
+
+  /**
+   * 拉取任务版本列表
+   */
+  async GetTriggerTaskVersion(
+    req: GetTriggerTaskVersionRequest,
+    cb?: (error: string, rep: GetTriggerTaskVersionResponse) => void
+  ): Promise<GetTriggerTaskVersionResponse> {
+    return this.request("GetTriggerTaskVersion", req, cb)
+  }
+
+  /**
+   * 规则组执行结果分页查询接口
+   */
+  async ListQualityRuleGroupExecResultsByPage(
+    req: ListQualityRuleGroupExecResultsByPageRequest,
+    cb?: (error: string, rep: ListQualityRuleGroupExecResultsByPageResponse) => void
+  ): Promise<ListQualityRuleGroupExecResultsByPageResponse> {
+    return this.request("ListQualityRuleGroupExecResultsByPage", req, cb)
   }
 
   /**
@@ -857,6 +1325,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置告警规则
+   */
+  async CreateOpsAlarmRule(
+    req: CreateOpsAlarmRuleRequest,
+    cb?: (error: string, rep: CreateOpsAlarmRuleResponse) => void
+  ): Promise<CreateOpsAlarmRuleResponse> {
+    return this.request("CreateOpsAlarmRule", req, cb)
+  }
+
+  /**
    * 该接口用于销毁资源
    */
   async DeleteResourceGroup(
@@ -864,6 +1342,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteResourceGroupResponse) => void
   ): Promise<DeleteResourceGroupResponse> {
     return this.request("DeleteResourceGroup", req, cb)
+  }
+
+  /**
+   * 查询工作流运行
+   */
+  async ListTriggerWorkflowRuns(
+    req: ListTriggerWorkflowRunsRequest,
+    cb?: (error: string, rep: ListTriggerWorkflowRunsResponse) => void
+  ): Promise<ListTriggerWorkflowRunsResponse> {
+    return this.request("ListTriggerWorkflowRuns", req, cb)
   }
 
   /**
@@ -897,6 +1385,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取任务直接上游
+   */
+  async ListUpstreamTriggerTasks(
+    req: ListUpstreamTriggerTasksRequest,
+    cb?: (error: string, rep: ListUpstreamTriggerTasksResponse) => void
+  ): Promise<ListUpstreamTriggerTasksResponse> {
+    return this.request("ListUpstreamTriggerTasks", req, cb)
+  }
+
+  /**
    * 该接口用于查询指定项目中的数据源列表
    */
   async ListDataSources(
@@ -917,6 +1415,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除监控任务
+   */
+  async DeleteQualityRuleGroup(
+    req: DeleteQualityRuleGroupRequest,
+    cb?: (error: string, rep: DeleteQualityRuleGroupResponse) => void
+  ): Promise<DeleteQualityRuleGroupResponse> {
+    return this.request("DeleteQualityRuleGroup", req, cb)
+  }
+
+  /**
+   * 查询工作流授权权限
+   */
+  async ListWorkflowPermissions(
+    req: ListWorkflowPermissionsRequest,
+    cb?: (error: string, rep: ListWorkflowPermissionsResponse) => void
+  ): Promise<ListWorkflowPermissionsResponse> {
+    return this.request("ListWorkflowPermissions", req, cb)
+  }
+
+  /**
    * 获取资产血缘信息
    */
   async ListProcessLineage(
@@ -924,6 +1442,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListProcessLineageResponse) => void
   ): Promise<ListProcessLineageResponse> {
     return this.request("ListProcessLineage", req, cb)
+  }
+
+  /**
+   * 查看CodeStudio实体权限
+   */
+  async ListCodePermissions(
+    req: ListCodePermissionsRequest,
+    cb?: (error: string, rep: ListCodePermissionsResponse) => void
+  ): Promise<ListCodePermissionsResponse> {
+    return this.request("ListCodePermissions", req, cb)
+  }
+
+  /**
+   * 查询资源文件文件夹详情
+   */
+  async GetResourceFolder(
+    req: GetResourceFolderRequest,
+    cb?: (error: string, rep: GetResourceFolderResponse) => void
+  ): Promise<GetResourceFolderResponse> {
+    return this.request("GetResourceFolder", req, cb)
   }
 
   /**
@@ -987,6 +1525,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建任务接口
+   */
+  async CreateTriggerTask(
+    req: CreateTriggerTaskRequest,
+    cb?: (error: string, rep: CreateTriggerTaskResponse) => void
+  ): Promise<CreateTriggerTaskResponse> {
+    return this.request("CreateTriggerTask", req, cb)
+  }
+
+  /**
    * 创建资源文件文件夹
    */
   async CreateResourceFolder(
@@ -1027,6 +1575,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 【过滤条件】 {模板名称Name，查询使用Keyword进行模糊匹配} {模板类型type，1.系统模板 2.自定义模板} {质量检测维度QualityDims, 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性} 【排序字段】 { 引用数排序类型CitationOrderType，根据引用数量排序 ASC DESC}
+   */
+  async ListQualityRuleTemplates(
+    req: ListQualityRuleTemplatesRequest,
+    cb?: (error: string, rep: ListQualityRuleTemplatesResponse) => void
+  ): Promise<ListQualityRuleTemplatesResponse> {
+    return this.request("ListQualityRuleTemplates", req, cb)
+  }
+
+  /**
+   * 查看当前用户对CodeStudio实体的最大权限
+   */
+  async GetMyCodeMaxPermission(
+    req: GetMyCodeMaxPermissionRequest,
+    cb?: (error: string, rep: GetMyCodeMaxPermissionResponse) => void
+  ): Promise<GetMyCodeMaxPermissionResponse> {
+    return this.request("GetMyCodeMaxPermission", req, cb)
+  }
+
+  /**
    * 查询数据探索文件夹树，包括文件夹下的脚本
    */
   async ListSQLFolderContents(
@@ -1054,6 +1622,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSQLScriptResponse) => void
   ): Promise<CreateSQLScriptResponse> {
     return this.request("CreateSQLScript", req, cb)
+  }
+
+  /**
+   * 查询监控列表
+   */
+  async ListQualityRuleGroupsTable(
+    req: ListQualityRuleGroupsTableRequest,
+    cb?: (error: string, rep: ListQualityRuleGroupsTableResponse) => void
+  ): Promise<ListQualityRuleGroupsTableResponse> {
+    return this.request("ListQualityRuleGroupsTable", req, cb)
   }
 
   /**
@@ -1094,6 +1672,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListTaskVersionsResponse) => void
   ): Promise<ListTaskVersionsResponse> {
     return this.request("ListTaskVersions", req, cb)
+  }
+
+  /**
+   * 获取工作流信息
+   */
+  async GetTriggerWorkflow(
+    req: GetTriggerWorkflowRequest,
+    cb?: (error: string, rep: GetTriggerWorkflowResponse) => void
+  ): Promise<GetTriggerWorkflowResponse> {
+    return this.request("GetTriggerWorkflow", req, cb)
   }
 
   /**
@@ -1177,6 +1765,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资产数据库Schema信息
+   */
+  async ListSchema(
+    req: ListSchemaRequest,
+    cb?: (error: string, rep: ListSchemaResponse) => void
+  ): Promise<ListSchemaResponse> {
+    return this.request("ListSchema", req, cb)
+  }
+
+  /**
    * 修改告警规则
    */
   async UpdateOpsAlarmRule(
@@ -1197,13 +1795,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取sql文件夹详情
+   * 创建监控任务
    */
-  async GetSQLFolder(
-    req: GetSQLFolderRequest,
-    cb?: (error: string, rep: GetSQLFolderResponse) => void
-  ): Promise<GetSQLFolderResponse> {
-    return this.request("GetSQLFolder", req, cb)
+  async CreateQualityRuleGroup(
+    req: CreateQualityRuleGroupRequest,
+    cb?: (error: string, rep: CreateQualityRuleGroupResponse) => void
+  ): Promise<CreateQualityRuleGroupResponse> {
+    return this.request("CreateQualityRuleGroup", req, cb)
   }
 
   /**
@@ -1217,13 +1815,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资源管理-删除资源文件
+   * 配置CodeStudio实体权限
    */
-  async DeleteResourceFile(
-    req: DeleteResourceFileRequest,
-    cb?: (error: string, rep: DeleteResourceFileResponse) => void
-  ): Promise<DeleteResourceFileResponse> {
-    return this.request("DeleteResourceFile", req, cb)
+  async CreateCodePermissions(
+    req: CreateCodePermissionsRequest,
+    cb?: (error: string, rep: CreateCodePermissionsResponse) => void
+  ): Promise<CreateCodePermissionsResponse> {
+    return this.request("CreateCodePermissions", req, cb)
+  }
+
+  /**
+   * 查询任务分页信息
+   */
+  async ListTriggerTasks(
+    req: ListTriggerTasksRequest,
+    cb?: (error: string, rep: ListTriggerTasksResponse) => void
+  ): Promise<ListTriggerTasksResponse> {
+    return this.request("ListTriggerTasks", req, cb)
   }
 
   /**
@@ -1244,6 +1852,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateWorkflowFolderResponse) => void
   ): Promise<UpdateWorkflowFolderResponse> {
     return this.request("UpdateWorkflowFolder", req, cb)
+  }
+
+  /**
+   * 查询工作流列表
+   */
+  async ListTriggerWorkflows(
+    req: ListTriggerWorkflowsRequest,
+    cb?: (error: string, rep: ListTriggerWorkflowsResponse) => void
+  ): Promise<ListTriggerWorkflowsResponse> {
+    return this.request("ListTriggerWorkflows", req, cb)
+  }
+
+  /**
+   * 删除补录计划
+   */
+  async DeleteDataBackfillPlanAsync(
+    req: DeleteDataBackfillPlanAsyncRequest,
+    cb?: (error: string, rep: DeleteDataBackfillPlanAsyncResponse) => void
+  ): Promise<DeleteDataBackfillPlanAsyncResponse> {
+    return this.request("DeleteDataBackfillPlanAsync", req, cb)
   }
 
   /**
@@ -1297,23 +1925,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除SQL文件夹
+   * 获取任务直接上游
    */
-  async DeleteSQLFolder(
-    req: DeleteSQLFolderRequest,
-    cb?: (error: string, rep: DeleteSQLFolderResponse) => void
-  ): Promise<DeleteSQLFolderResponse> {
-    return this.request("DeleteSQLFolder", req, cb)
+  async ListUpstreamOpsTasks(
+    req: ListUpstreamOpsTasksRequest,
+    cb?: (error: string, rep: ListUpstreamOpsTasksResponse) => void
+  ): Promise<ListUpstreamOpsTasksResponse> {
+    return this.request("ListUpstreamOpsTasks", req, cb)
   }
 
   /**
-   * 调度实例详情
+   * 查看数据源权限
    */
-  async ListTaskInstanceExecutions(
-    req: ListTaskInstanceExecutionsRequest,
-    cb?: (error: string, rep: ListTaskInstanceExecutionsResponse) => void
-  ): Promise<ListTaskInstanceExecutionsResponse> {
-    return this.request("ListTaskInstanceExecutions", req, cb)
+  async DescribeDataSourceAuthority(
+    req: DescribeDataSourceAuthorityRequest,
+    cb?: (error: string, rep: DescribeDataSourceAuthorityResponse) => void
+  ): Promise<DescribeDataSourceAuthorityResponse> {
+    return this.request("DescribeDataSourceAuthority", req, cb)
+  }
+
+  /**
+   * 查询工作流列表
+   */
+  async ListOpsTriggerWorkflows(
+    req: ListOpsTriggerWorkflowsRequest,
+    cb?: (error: string, rep: ListOpsTriggerWorkflowsResponse) => void
+  ): Promise<ListOpsTriggerWorkflowsResponse> {
+    return this.request("ListOpsTriggerWorkflows", req, cb)
+  }
+
+  /**
+   * 删除数据开发任务文件夹
+   */
+  async DeleteTaskFolder(
+    req: DeleteTaskFolderRequest,
+    cb?: (error: string, rep: DeleteTaskFolderResponse) => void
+  ): Promise<DeleteTaskFolderResponse> {
+    return this.request("DeleteTaskFolder", req, cb)
   }
 
   /**
@@ -1357,13 +2005,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取资产数据库Schema信息
+   * 获取表字段血缘信息
    */
-  async ListSchema(
-    req: ListSchemaRequest,
-    cb?: (error: string, rep: ListSchemaResponse) => void
-  ): Promise<ListSchemaResponse> {
-    return this.request("ListSchema", req, cb)
+  async ListColumnLineage(
+    req: ListColumnLineageRequest,
+    cb?: (error: string, rep: ListColumnLineageResponse) => void
+  ): Promise<ListColumnLineageResponse> {
+    return this.request("ListColumnLineage", req, cb)
   }
 
   /**
@@ -1374,6 +2022,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTaskVersionResponse) => void
   ): Promise<GetTaskVersionResponse> {
     return this.request("GetTaskVersion", req, cb)
+  }
+
+  /**
+   * 更新任务接口
+   */
+  async UpdateTriggerTask(
+    req: UpdateTriggerTaskRequest,
+    cb?: (error: string, rep: UpdateTriggerTaskResponse) => void
+  ): Promise<UpdateTriggerTaskResponse> {
+    return this.request("UpdateTriggerTask", req, cb)
   }
 
   /**
@@ -1427,13 +2085,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例列表
+   * 更新工作流（包括工作流基本信息与工作流参数）
    */
-  async ListTaskInstances(
-    req: ListTaskInstancesRequest,
-    cb?: (error: string, rep: ListTaskInstancesResponse) => void
-  ): Promise<ListTaskInstancesResponse> {
-    return this.request("ListTaskInstances", req, cb)
+  async UpdateTriggerWorkflow(
+    req: UpdateTriggerWorkflowRequest,
+    cb?: (error: string, rep: UpdateTriggerWorkflowResponse) => void
+  ): Promise<UpdateTriggerWorkflowResponse> {
+    return this.request("UpdateTriggerWorkflow", req, cb)
+  }
+
+  /**
+   * 获取sql文件夹详情
+   */
+  async GetSQLFolder(
+    req: GetSQLFolderRequest,
+    cb?: (error: string, rep: GetSQLFolderResponse) => void
+  ): Promise<GetSQLFolderResponse> {
+    return this.request("GetSQLFolder", req, cb)
   }
 
   /**
@@ -1444,6 +2112,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetSQLScriptResponse) => void
   ): Promise<GetSQLScriptResponse> {
     return this.request("GetSQLScript", req, cb)
+  }
+
+  /**
+   * 更新工作流（包括工作流基本信息与工作流参数）
+   */
+  async UpdateTriggerWorkflowPartially(
+    req: UpdateTriggerWorkflowPartiallyRequest,
+    cb?: (error: string, rep: UpdateTriggerWorkflowPartiallyResponse) => void
+  ): Promise<UpdateTriggerWorkflowPartiallyResponse> {
+    return this.request("UpdateTriggerWorkflowPartially", req, cb)
+  }
+
+  /**
+   * 终止运行
+   */
+  async KillTriggerWorkflowRuns(
+    req: KillTriggerWorkflowRunsRequest,
+    cb?: (error: string, rep: KillTriggerWorkflowRunsResponse) => void
+  ): Promise<KillTriggerWorkflowRunsResponse> {
+    return this.request("KillTriggerWorkflowRuns", req, cb)
   }
 
   /**
@@ -1477,6 +2165,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 重跑运行
+   */
+  async RerunTriggerWorkflowRunAsync(
+    req: RerunTriggerWorkflowRunAsyncRequest,
+    cb?: (error: string, rep: RerunTriggerWorkflowRunAsyncResponse) => void
+  ): Promise<RerunTriggerWorkflowRunAsyncResponse> {
+    return this.request("RerunTriggerWorkflowRunAsync", req, cb)
+  }
+
+  /**
    * 根据工作流id，获取工作流调度详情。
    */
   async GetOpsWorkflow(
@@ -1497,13 +2195,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置告警规则
+   * 创建文件夹
    */
-  async CreateOpsAlarmRule(
-    req: CreateOpsAlarmRuleRequest,
-    cb?: (error: string, rep: CreateOpsAlarmRuleResponse) => void
-  ): Promise<CreateOpsAlarmRuleResponse> {
-    return this.request("CreateOpsAlarmRule", req, cb)
+  async CreateTaskFolder(
+    req: CreateTaskFolderRequest,
+    cb?: (error: string, rep: CreateTaskFolderResponse) => void
+  ): Promise<CreateTaskFolderResponse> {
+    return this.request("CreateTaskFolder", req, cb)
   }
 
   /**
@@ -1517,6 +2215,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询工作流任务详情
+   */
+  async GetTriggerWorkflowRun(
+    req: GetTriggerWorkflowRunRequest,
+    cb?: (error: string, rep: GetTriggerWorkflowRunResponse) => void
+  ): Promise<GetTriggerWorkflowRunResponse> {
+    return this.request("GetTriggerWorkflowRun", req, cb)
+  }
+
+  /**
    * 提交任务。
    */
   async SubmitTask(
@@ -1524,6 +2232,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitTaskResponse) => void
   ): Promise<SubmitTaskResponse> {
     return this.request("SubmitTask", req, cb)
+  }
+
+  /**
+   * 回收数据源权限
+   */
+  async RevokeDataSourceAuthorization(
+    req: RevokeDataSourceAuthorizationRequest,
+    cb?: (error: string, rep: RevokeDataSourceAuthorizationResponse) => void
+  ): Promise<RevokeDataSourceAuthorizationResponse> {
+    return this.request("RevokeDataSourceAuthorization", req, cb)
+  }
+
+  /**
+   * 更新任务文件夹
+   */
+  async UpdateTaskFolder(
+    req: UpdateTaskFolderRequest,
+    cb?: (error: string, rep: UpdateTaskFolderResponse) => void
+  ): Promise<UpdateTaskFolderResponse> {
+    return this.request("UpdateTaskFolder", req, cb)
   }
 
   /**
@@ -1537,6 +2265,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除工作流文件夹权限
+   */
+  async DeleteWorkflowPermissions(
+    req: DeleteWorkflowPermissionsRequest,
+    cb?: (error: string, rep: DeleteWorkflowPermissionsResponse) => void
+  ): Promise<DeleteWorkflowPermissionsResponse> {
+    return this.request("DeleteWorkflowPermissions", req, cb)
+  }
+
+  /**
    * 该接口用于购买资源
    */
   async CreateResourceGroup(
@@ -1544,6 +2282,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateResourceGroupResponse) => void
   ): Promise<CreateResourceGroupResponse> {
     return this.request("CreateResourceGroup", req, cb)
+  }
+
+  /**
+   * 资源管理-删除资源文件
+   */
+  async DeleteResourceFile(
+    req: DeleteResourceFileRequest,
+    cb?: (error: string, rep: DeleteResourceFileResponse) => void
+  ): Promise<DeleteResourceFileResponse> {
+    return this.request("DeleteResourceFile", req, cb)
   }
 
   /**
@@ -1584,6 +2332,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSQLScriptResponse) => void
   ): Promise<DeleteSQLScriptResponse> {
     return this.request("DeleteSQLScript", req, cb)
+  }
+
+  /**
+   * 创建工作流
+   */
+  async CreateTriggerWorkflow(
+    req: CreateTriggerWorkflowRequest,
+    cb?: (error: string, rep: CreateTriggerWorkflowResponse) => void
+  ): Promise<CreateTriggerWorkflowResponse> {
+    return this.request("CreateTriggerWorkflow", req, cb)
   }
 
   /**

@@ -27,8 +27,8 @@ import {
   ScaleOutInstanceResponse,
   IsolateInstanceRequest,
   DescribeInstanceNodesRequest,
+  DescribePriceResizeInstanceResponse,
   CreateInstanceResponse,
-  DestroyInstancesRequest,
   DescribeDBSecurityGroupsRequest,
   Inbound,
   AssociateSecurityGroupsRequest,
@@ -38,22 +38,28 @@ import {
   CreateInstanceRequest,
   DescribeDBSecurityGroupsResponse,
   InstanceInfo,
-  DescribeInstancesResponse,
+  DescribePriceResizeInstanceRequest,
+  DescribePriceRenewInstanceRequest,
+  DescribePriceCreateInstanceRequest,
   AssociateSecurityGroupsResponse,
   DescribeInstancesRequest,
   DisassociateSecurityGroupsRequest,
+  DisassociateSecurityGroupsResponse,
   IsolateInstanceResponse,
   DescribeInstanceMaintenanceWindowRequest,
   DescribeInstanceMaintenanceWindowResponse,
   ScaleOutInstanceRequest,
+  DescribePriceCreateInstanceResponse,
   DestroyInstancesResponse,
   ScaleUpInstanceRequest,
   CreateInstancesComponent,
+  DescribeInstancesResponse,
   RecoverInstanceResponse,
   ModifyInstanceMaintenanceWindowRequest,
-  DisassociateSecurityGroupsResponse,
-  ScaleUpInstanceResponse,
+  DescribePriceRenewInstanceResponse,
   ModifyDBInstanceSecurityGroupsRequest,
+  ScaleUpInstanceResponse,
+  DestroyInstancesRequest,
 } from "./vdb_models"
 
 /**
@@ -136,6 +142,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（RecoverInstance）用于恢复在回收站隔离的实例。
+   */
+  async RecoverInstance(
+    req: RecoverInstanceRequest,
+    cb?: (error: string, rep: RecoverInstanceResponse) => void
+  ): Promise<RecoverInstanceResponse> {
+    return this.request("RecoverInstance", req, cb)
+  }
+
+  /**
    * 查询实例pod列表
    */
   async DescribeInstanceNodes(
@@ -176,13 +192,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+   * 查询实例变配价格
    */
-  async DisassociateSecurityGroups(
-    req: DisassociateSecurityGroupsRequest,
-    cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
-  ): Promise<DisassociateSecurityGroupsResponse> {
-    return this.request("DisassociateSecurityGroups", req, cb)
+  async DescribePriceResizeInstance(
+    req: DescribePriceResizeInstanceRequest,
+    cb?: (error: string, rep: DescribePriceResizeInstanceResponse) => void
+  ): Promise<DescribePriceResizeInstanceResponse> {
+    return this.request("DescribePriceResizeInstance", req, cb)
+  }
+
+  /**
+   * 查询实例续费价格（包年包月）
+   */
+  async DescribePriceRenewInstance(
+    req: DescribePriceRenewInstanceRequest,
+    cb?: (error: string, rep: DescribePriceRenewInstanceResponse) => void
+  ): Promise<DescribePriceRenewInstanceResponse> {
+    return this.request("DescribePriceRenewInstance", req, cb)
   }
 
   /**
@@ -196,12 +222,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RecoverInstance）用于恢复在回收站隔离的实例。
+   * 查询新购实例价格
    */
-  async RecoverInstance(
-    req: RecoverInstanceRequest,
-    cb?: (error: string, rep: RecoverInstanceResponse) => void
-  ): Promise<RecoverInstanceResponse> {
-    return this.request("RecoverInstance", req, cb)
+  async DescribePriceCreateInstance(
+    req: DescribePriceCreateInstanceRequest,
+    cb?: (error: string, rep: DescribePriceCreateInstanceResponse) => void
+  ): Promise<DescribePriceCreateInstanceResponse> {
+    return this.request("DescribePriceCreateInstance", req, cb)
+  }
+
+  /**
+   * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+   */
+  async DisassociateSecurityGroups(
+    req: DisassociateSecurityGroupsRequest,
+    cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
+  ): Promise<DisassociateSecurityGroupsResponse> {
+    return this.request("DisassociateSecurityGroups", req, cb)
   }
 }

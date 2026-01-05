@@ -479,43 +479,47 @@ export interface DescribeSavingPlanOverviewRequest {
  */
 export interface SavingPlanUsageDetail {
   /**
-   * 节省计划类型
+   * <p>节省计划资源id</p>
+   */
+  SpId?: string
+  /**
+   * <p>节省计划类型</p>
    */
   SpType?: string
   /**
-   * 节省计划状态
+   * <p>节省计划状态</p>枚举值：<ul><li> 1：  生效</li><li> 2： 失效 </li><li> 3： 作废</li></ul>
    */
   Status?: number
   /**
-   * 累计抵扣的金额（单位：元）
+   * <p>累计抵扣的金额（单位：元）</p>
    */
   DeductAmount?: string
   /**
-   * 累计承诺消费金额（单位：元）
+   * <p>累计承诺消费金额（单位：元）</p>
    */
   PromiseAmount?: string
   /**
-   * 累计净节省金额（单位：元）
+   * <p>累计净节省金额（单位：元）</p>
    */
   NetSavings?: string
   /**
-   * 使用率
+   * <p>使用率</p>
    */
   UtilizationRate?: number
   /**
-   * 累计流失金额（单位：元）
+   * <p>累计流失金额（单位：元）</p>
    */
   LossAmount?: string
   /**
-   * 累计按量计费预期金额（单位：元）
+   * <p>累计按量计费预期金额（单位：元）</p>
    */
   DosageAmount?: string
   /**
-   * 累计成本金额（单位：元）
+   * <p>累计成本金额（单位：元）</p>
    */
   CostAmount?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: Array<string>
 }

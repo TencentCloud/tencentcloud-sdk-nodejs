@@ -1728,6 +1728,16 @@ it("waf.v20180125.ModifyCustomWhiteRuleStatus", async function () {
     }
 })
 
+it("waf.v20180125.DescribeBotIdRule", async function () {
+    try {
+       const data = await client.DescribeBotIdRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.PostAttackDownloadTask", async function () {
     try {
        const data = await client.PostAttackDownloadTask({})

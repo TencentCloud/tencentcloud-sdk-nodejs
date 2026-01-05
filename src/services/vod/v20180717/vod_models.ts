@@ -71,14 +71,13 @@ export interface AigcVideoOutputConfig {
    */
   ExpireTime?: string
   /**
-   * 生成视频的时长，单位：秒。<li>当 ModelName 是 Kling，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Jimeng，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li>
+   * 生成视频的时长，单位：秒。<li>当 ModelName 是 Kling，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li>
    */
   Duration?: number
   /**
    * 生成视频的分辨率。
 <li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li>
 <li>当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；</li>
-<li>当 ModelName 是 Jimeng，可选值为 1080P；</li>
 <li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li>
 <li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li>
 <li>当 ModelName 是 OS，可选值为 720P；</li>
@@ -87,7 +86,6 @@ export interface AigcVideoOutputConfig {
   /**
    * 指定所生成视频的宽高比。
 <li>当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；</li>
-<li>当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9</li>
 <li>当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4</li>
 <li>当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；</li>
 <li>当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；</li>
@@ -3488,8 +3486,6 @@ export interface AigcUsageDataItem {
 <li>Hailuo02&2.3_768P</li>
 <li>Hailuo2.3fast_768P</li>
 <li>Hailuo2.3fast_1080P</li>
-<li>Jimeng4.0</li>
-<li>Jimeng3.0pro</li>
 <li>ViduQ2_720P</li>
 <li>ViduQ2_1080P</li>
 <li>ViduQ2pro_720P</li>
@@ -3512,19 +3508,6 @@ export interface AigcUsageDataItem {
 <li>Mingmou1.0_2K</li>
 <li>Mingmou1.0_4K</li>
 <li>Mingmou1.0_720P</li>
-<li>Seedance1.5ProAudioOn_480P</li>
-<li>Seedance1.5ProAudioOff_480P</li>
-<li>Seedance1.5ProAudioOn_720P</li>
-<li>Seedance1.5ProAudioOff_720P</li>
-<li>Seedance1.0Pro_480P</li>
-<li>Seedance1.0Pro_720P</li>
-<li>Seedance1.0Pro_1080P</li>
-<li>Seedance1.0ProFast480P</li>
-<li>Seedance1.0ProFast720P</li>
-<li>Seedance1.0ProFast1080P</li>
-<li>Seedance1.0Lite480P</li>
-<li>Seedance1.0Lite720P</li>
-<li>Seedance1.0Lite1080P</li>
 <li> unknown</li>
    */
   Specification?: string
@@ -4115,14 +4098,17 @@ export interface AigcImageSceneInfo {
   /**
    * AI生图场景类型，可选值：
 - change_clothes：AI换衣。
+- product_image：AI生商品图。
    */
   Type: string
   /**
    * 当 Type 为 change_clothes 时有效，则该项为必填，表示AI 换衣生图配置参数。
-
-
    */
   ChangeClothesConfig?: ChangeClothesConfig
+  /**
+   * 当 Type 为 product_image 时有效，表示AI 生商品图配置参数。
+   */
+  ProductImageConfig?: ProductImageConfig
 }
 
 /**
@@ -5581,6 +5567,32 @@ export interface EnhanceMediaQualityRequest {
 }
 
 /**
+ * AI 生商品图参数配置
+ */
+export interface ProductImageConfig {
+  /**
+   * 生成图片背景的提示词。如果此字段缺省则内部会自行生成灵感。
+   */
+  Prompt?: string
+  /**
+   * 要阻止模型生成图片的提示词。
+   */
+  NegativePrompt?: string
+  /**
+   * 关于产品的描述，详细的描述，有助于生成更符合要求的图片。
+   */
+  ProductDesc?: string
+  /**
+   * 特殊要求。如有特殊要求，可通过该字段传入。
+   */
+  MoreRequirement?: string
+  /**
+   * 期望生成的图片张数。不传默认值为1，最大合法值为10。
+   */
+  OutputImageCount?: number
+}
+
+/**
  * 资源包中包含的资源。
  */
 export interface ProductInstanceRecource {
@@ -5910,11 +5922,11 @@ export interface AigcImageOutputConfig {
    */
   ExpireTime?: string
   /**
-   * 生成图片的分辨率。可选值为 720P、1080P、2K、4K、1024x1024、2048x2048、2304x1728、2496x1664、2560x1440、3024x1296、4096x4096、4694x3520、4992x3328、5404x3040、6198x2656，其中使用模型 Jimeng 时，推荐通过 Prompt 指定图片分辨率和宽高比。
+   * 生成图片的分辨率。可选值为 720P、1080P、2K、4K、1024x1024、2048x2048、2304x1728、2496x1664、2560x1440、3024x1296、4096x4096、4694x3520、4992x3328、5404x3040、6198x2656。
    */
   Resolution?: string
   /**
-   * 指定所生成图片的宽高比。<li>当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；</li><li>当 ModelName 是 Qwen、Jimeng，则暂不支持，其中 Jimeng 会结合 Prompt意图、参考图片尺寸，由模型智能判断输出图片的宽高比。</li>
+   * 指定所生成图片的宽高比。<li>当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；</li><li>当 ModelName 是 Qwen，则暂不支持。</li>
    */
   AspectRatio?: string
   /**
@@ -9431,11 +9443,11 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubAppId: number
   /**
-   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>GV：Google Veo；</li><li>OS：OpenAI Sora；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li><li> Seedance；</li>
+   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>GV：Google Veo；</li><li>OS：OpenAI Sora；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li>
    */
   ModelName: string
   /**
-   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-Fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li><li>当 ModelName 是 Seedance，可选值为 1.5-pro，1.0-pro，1.0-lite-i2v，1.0-pro-fast，其中1.5-pro区分有声、无声，声音参数字段：OutputConfig.AudioGeneration，开启Enabled，关闭Disabled； </li>
+   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-Fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
    */
   ModelVersion: string
   /**
@@ -10708,6 +10720,10 @@ export interface SceneAigcImageOutputConfig {
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   ExpireTime?: string
+  /**
+   * 指定所生成图片的宽高比。输入格式为 W:H。仅生商品图场景有效。
+   */
+  AspectRatio?: string
 }
 
 /**
@@ -10896,7 +10912,8 @@ export interface CreateSceneAigcImageTaskRequest {
   /**
    * 输入图片列表，支持的图片格式：jpg、jpeg、png、webp。不同的场景需要不同的输入数据：
 
-- change_clothes：只能输入1张**模特**图片。
+- AI换衣场景：只能输入 1 张**模特**图片。
+- AI生商品图场景：需输入 1～10 张**同一产品**的不同角度的图片
    */
   FileInfos?: Array<SceneAigcImageTaskInputFileInfo>
   /**
@@ -19494,7 +19511,6 @@ export interface CreateAigcImageTaskRequest {
   /**
    * 模型名称。取值：
 <li>GEM：Gemini；</li>
-<li>Jimeng：即梦；</li>
 <li>Qwen：千问。</li>
 <li>Hunyuan：混元。</li>
 <li>Mingmou：明眸。</li>
@@ -19503,7 +19519,6 @@ export interface CreateAigcImageTaskRequest {
   /**
    * 模型版本。取值：
 <li>当 ModelName 是 GEM，可选值为 2.5、3.0；</li>
-<li>当 ModelName 是 Jimeng，可选值为 4.0；</li>
 <li>当 ModelName 是 Qwen，可选值为 0925；</li>
 <li>当 ModelName 是 Hunyuan，可选值为 3.0；</li>
 <li>当 ModelName 是 Mingmou，可选值为 1.0；</li>

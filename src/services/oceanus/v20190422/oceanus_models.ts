@@ -123,7 +123,7 @@ export interface CreateResourceRequest {
  */
 export interface ModifyFolderRequest {
   /**
-   * 文件夹ID（必填）
+   * 只有移动文件夹的场景必填，如果是批量移动作业的场景，非必填。
    */
   SourceFolderId?: string
   /**
@@ -389,6 +389,10 @@ export interface CreateJobConfigRequest {
    */
   JobManagerMem?: number
   /**
+   * jdk版本
+   */
+  JdkVersion?: string
+  /**
    * TaskManager cpu
    */
   TaskManagerCpu?: number
@@ -422,12 +426,16 @@ export interface ClusterVersion {
    * 集群的Flink版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Flink: string
+  Flink?: string
   /**
    * 集群支持的Flink版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportedFlink: Array<string>
+  SupportedFlink?: Array<string>
+  /**
+   * jdk支持版本
+   */
+  JdkSupportVersion?: Array<FlinkJdkVersion>
 }
 
 /**
@@ -1400,6 +1408,10 @@ export interface SqlGatewayItem {
    * Mem
    */
   Mem?: number
+  /**
+   * jdk版本
+   */
+  JdkVersion?: string
 }
 
 /**
@@ -2796,6 +2808,10 @@ export interface ResourceRefDetail {
    * Connector
    */
   Connector?: string
+  /**
+   * Connector版本
+   */
+  ConnectorVersion?: string
 }
 
 /**
@@ -3753,6 +3769,14 @@ export interface JobV1 {
    * 作业重启次数
    */
   RestartCount?: number
+  /**
+   * 期望是开启默认告警
+   */
+  ExpectJobDefaultAlarmStatus?: number
+  /**
+   * jdk版本
+   */
+  JdkVersion?: string
 }
 
 /**
@@ -3817,7 +3841,7 @@ export interface JobConfig {
    */
   COSBucket?: string
   /**
-   * 是否启用日志收集，0-未启用，1-已启用，2-历史集群未设置日志集，3-历史集群已开启
+   * 是否启用日志收集，0-未启用，1-采集到cls，4-采集到cos，5-采集到es
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogCollect?: number
@@ -3921,6 +3945,10 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlinkVersion?: string
+  /**
+   * jdk版本
+   */
+  JdkVersion?: string
   /**
    * jm使用cpu数目
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4111,6 +4139,14 @@ export interface CreateJobRequest {
    * 开启默认告警
    */
   OpenJobDefaultAlarm?: number
+  /**
+   * 用户Uid
+   */
+  Uid?: number
+  /**
+   * jdk版本
+   */
+  JdkVersion?: string
 }
 
 /**
@@ -4315,6 +4351,10 @@ export interface ClusterSession {
    * TaskManagerMem
    */
   TaskManagerMem?: number
+  /**
+   * jdk版本
+   */
+  JdkVersion?: string
 }
 
 /**
@@ -4479,6 +4519,20 @@ export interface DescribeJobEventsRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * flink jdk版本
+ */
+export interface FlinkJdkVersion {
+  /**
+   * flink版本
+   */
+  FlinkVersion?: string
+  /**
+   * jdk版本
+   */
+  JdkVersions?: Array<string>
 }
 
 /**

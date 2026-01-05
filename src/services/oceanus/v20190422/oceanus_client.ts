@@ -160,6 +160,7 @@ import {
   JobEvent,
   DescribeResourcesRequest,
   DescribeJobEventsRequest,
+  FlinkJdkVersion,
   CheckSavepointResponse,
   DescribeJobsResponse,
   DescribeTreeResourcesResponse,

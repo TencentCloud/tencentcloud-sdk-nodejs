@@ -52,19 +52,19 @@ import {
   MaliciousRequestWhiteListInfo,
   DeleteBashEventsResponse,
   DescribeLoginWhiteCombinedListResponse,
+  PatchInfoDetail,
   DescribeAssetProcessInfoListRequest,
   ModifyBaselineRuleRequest,
   SearchLogResponse,
   ExportWebPageEventListRequest,
   AssetNetworkCardInfo,
   DescribeAssetWebFrameListRequest,
-  DescribeMonthInspectionReportResponse,
   SyncMachinesResponse,
   DescribeBaselineHostTopResponse,
   HostDesc,
   DeleteBashRulesResponse,
   DescribeDirectConnectInstallCommandResponse,
-  DescribeSecurityEventsCntResponse,
+  ModifyFileTamperEventsRequest,
   RetryVulFixResponse,
   ExportVulListResponse,
   AssetMachineBaseInfo,
@@ -126,14 +126,13 @@ import {
   VulDetailInfo,
   VulLevelCountInfo,
   DescribeRaspRulesRequest,
-  DescribeMonthInspectionReportRequest,
   DescribeDirectConnectInstallCommandRequest,
   DescribeBaselineDetectListResponse,
   DescribeNetAttackSettingResponse,
   ReverseShellRule,
   DescribeAESKeyResponse,
   DescribeBashRulesResponse,
-  DescribeAvailableExpertServiceDetailResponse,
+  MachineExtraInfo,
   DescribeLogStorageConfigRequest,
   ExportAssetWebLocationListResponse,
   ScreenBroadcasts,
@@ -155,7 +154,6 @@ import {
   DescribeVulLevelCountResponse,
   FileTamperRuleInfo,
   DescribeVersionStatisticsResponse,
-  DescribeAvailableExpertServiceDetailRequest,
   DescribeMachineFileTamperRulesResponse,
   DescribeServerRelatedDirInfoResponse,
   DeleteLogExportRequest,
@@ -168,7 +166,6 @@ import {
   EditBashRulesResponse,
   DescribeLogIndexResponse,
   DescribeRansomDefenseBackupListRequest,
-  LoginWhiteLists,
   ScanVulResponse,
   DeleteMalwareWhiteListResponse,
   DescribeOverviewStatisticsRequest,
@@ -285,15 +282,13 @@ import {
   DescribeHistoryAccountsRequest,
   DescribeAssetMachineDetailRequest,
   ExportTasksRequest,
-  CancelIgnoreVulResponse,
+  GetLocalStorageItemResponse,
   FixBaselineDetectRequest,
   DescribeSecurityBroadcastInfoRequest,
-  IgnoreImpactedHostsResponse,
   DescribeCanFixVulMachineRequest,
   DescribeRansomDefenseStrategyMachinesResponse,
   DescribeBaselineRuleIgnoreListRequest,
   DescribeAssetMachineDetailResponse,
-  RegionSet,
   DescribeRansomDefenseStrategyListResponse,
   DescribeAttackTrendsRequest,
   DescribeBaselineDownloadListRequest,
@@ -310,7 +305,7 @@ import {
   DescribeAssetWebServiceProcessListResponse,
   ChangeStrategyEnableStatusResponse,
   ExportRansomDefenseStrategyListResponse,
-  IgnoreImpactedHostsRequest,
+  ModifyRaspMaxCpuResponse,
   SearchLogRequest,
   DescribeBaselineWeakPasswordListRequest,
   VulDefenceEvent,
@@ -335,11 +330,11 @@ import {
   DescribeMalwareInfoRequest,
   DescribeVersionStatisticsRequest,
   DescribeLogTypeResponse,
-  ModifyRiskDnsPolicyStatusResponse,
+  LogInfo,
   ExportPrivilegeEventsResponse,
   ExportAssetRecentMachineInfoResponse,
   DescribeMachineRegionListRequest,
-  ExportAssetWebFrameListRequest,
+  UsualPlace,
   ModifyBaselinePolicyResponse,
   MachineSimple,
   DescribeReverseShellEventsRequest,
@@ -375,7 +370,7 @@ import {
   DescribeJavaMemShellInfoRequest,
   DescribePrivilegeRulesRequest,
   ExportAssetAppListRequest,
-  ModifyFileTamperEventsRequest,
+  TestWebHookRuleRequest,
   ModifyOrderAttributeRequest,
   JavaMemShellInfo,
   DescribeAssetSystemPackageListResponse,
@@ -388,7 +383,7 @@ import {
   WebHookReceiver,
   DescribeBaselineDetailRequest,
   NetAttackEventInfo,
-  GetLocalStorageItemResponse,
+  VulDefenceEventDetail,
   DescribeScreenDefenseTrendsRequest,
   LogStorageRecord,
   DescribeBruteAttackListResponse,
@@ -403,7 +398,6 @@ import {
   DescribeAssetAppListRequest,
   UntrustMalwaresResponse,
   ZoneInfo,
-  DescribeExpertServiceListResponse,
   DescribeAccountStatisticsResponse,
   DescribeProVersionStatusResponse,
   DescribeBashEventsInfoNewRequest,
@@ -462,7 +456,7 @@ import {
   StopAssetScanResponse,
   BruteAttackRule,
   PrivilegeEscalationProcess,
-  DescribeProtectNetListResponse,
+  LoginWhiteLists,
   TrustMalwaresRequest,
   AssetKeyVal,
   AssetWebLocationInfo,
@@ -529,7 +523,6 @@ import {
   DescribeMalwareWhiteListAffectListResponse,
   ModifyMaliciousRequestWhiteListRequest,
   DescribeRansomDefenseEventsListRequest,
-  ModifyRaspMaxCpuResponse,
   RansomDefenseStrategyMachineBackupInfo,
   DescribeBaselineItemInfoRequest,
   ExportAssetPlanTaskListResponse,
@@ -631,10 +624,9 @@ import {
   CreateLicenseOrderRequest,
   CreateNetAttackWhiteListResponse,
   CreateLogExportResponse,
-  EmergencyResponseInfo,
+  TestWebHookRuleResponse,
   ExportVulDefenceListResponse,
   ModifyLogKafkaDeliverTypeResponse,
-  DescribeProtectNetListRequest,
   DescribeBaselineScanScheduleRequest,
   RetryCreateSnapshotRequest,
   ExportVulDefenceEventRequest,
@@ -647,7 +639,7 @@ import {
   DeleteMalwaresRequest,
   RecoverMalwaresResponse,
   DeleteBaselineRuleRequest,
-  PrivilegeRule,
+  RegionSet,
   WebHookHostLabel,
   RansomDefenseStrategy,
   DescribeIgnoreHostAndItemConfigRequest,
@@ -660,7 +652,6 @@ import {
   DescribeAssetDatabaseInfoResponse,
   ExportBaselineItemListResponse,
   SyncMachinesRequest,
-  MonthInspectionReport,
   SetBashEventsStatusRequest,
   ReverseShell,
   AssetAppProcessInfo,
@@ -670,7 +661,7 @@ import {
   DescribeBaselineRuleIgnoreListResponse,
   ExportJavaMemShellsRequest,
   DescribeVersionCompareChartResponse,
-  ProtectNetInfo,
+  VertexInfo,
   NetAttackEvent,
   DescribeMachineDefenseCntResponse,
   BaselineItemInfo,
@@ -687,9 +678,7 @@ import {
   ExportPrivilegeEventsRequest,
   ModifyWebPageProtectSwitchRequest,
   DescribeScreenGeneralStatRequest,
-  DescribeExpertServiceListRequest,
   ModifyUsersConfigResponse,
-  MachineExtraInfo,
   DescribeAttackEventInfoRequest,
   FileTamperEvent,
   CreateLogExportRequest,
@@ -742,7 +731,6 @@ import {
   DeleteProtectDirResponse,
   DescribeLogExportsResponse,
   DescribeVulTrendResponse,
-  TestWebHookRuleRequest,
   DescribeOpenPortStatisticsRequest,
   OsName,
   DescribeMalwareTimingScanSettingRequest,
@@ -761,7 +749,7 @@ import {
   BaselineItemDetect,
   DescribeBaselineFixListRequest,
   DescribeAssetProcessCountResponse,
-  DescribeEmergencyResponseListRequest,
+  RansomDefenseStrategyMachineInfo,
   DescribeScanStateResponse,
   BaselineHostDetect,
   EditTagsRequest,
@@ -794,7 +782,7 @@ import {
   DescribeLogKafkaDeliverInfoRequest,
   DescribeBaselineWeakPasswordListResponse,
   DeleteNonlocalLoginPlacesResponse,
-  ModifyFileTamperRuleStatusResponse,
+  ModifyWebPageProtectSettingRequest,
   ModifyLogKafkaAccessResponse,
   DeleteMalwareScanTaskResponse,
   BaselineRule,
@@ -838,7 +826,6 @@ import {
   DescribeBaselineItemListRequest,
   DescribeScreenHostInvasionRequest,
   BashRule,
-  ModifyWebPageProtectSettingRequest,
   ExportVulInfoRequest,
   DescribeAssetUserCountResponse,
   DescribeScreenBroadcastsRequest,
@@ -889,7 +876,7 @@ import {
   ExportRansomDefenseStrategyMachinesResponse,
   DescribePrivilegeEventsRequest,
   DescribeAssetEnvListResponse,
-  DescribeVulHostCountScanTimeRequest,
+  ExportAssetWebFrameListRequest,
   DescribeSecurityBroadcastsRequest,
   DescribeVulDefenceEventResponse,
   ExportBaselineEffectHostListResponse,
@@ -914,7 +901,7 @@ import {
   AddLoginWhiteListsRequest,
   DeleteSearchTemplateResponse,
   DeleteBashPoliciesResponse,
-  DescribeEmergencyResponseListResponse,
+  DescribeVulHostCountScanTimeRequest,
   ProtectHostConfig,
   ScreenProtectionCnt,
   AssetPlanTask,
@@ -981,7 +968,6 @@ import {
   DescribeProtectDirListResponse,
   DescribeMaliciousRequestWhiteListResponse,
   DescribeBaselinePolicyListRequest,
-  VulDefenceEventDetail,
   DeleteBruteAttacksResponse,
   ExportTasksResponse,
   ExportAssetWebAppListResponse,
@@ -1049,7 +1035,6 @@ import {
   ExportProtectDirListRequest,
   CreateBaselineStrategyResponse,
   ExportAssetCoreModuleListResponse,
-  VertexInfo,
   ModifyMachineAutoClearConfigResponse,
   ModifyLogStorageConfigResponse,
   DescribeHistoryAccountsResponse,
@@ -1080,6 +1065,7 @@ import {
   DescribeVulDefencePluginExceptionCountResponse,
   DeleteLicenseRecordResponse,
   AssetProcessBaseInfo,
+  ModifyRiskDnsPolicyStatusResponse,
   DescribeVulDefenceOverviewRequest,
   DescribeCanNotSeparateMachineRequest,
   DescribeRiskDnsEventListResponse,
@@ -1107,7 +1093,7 @@ import {
   DescribeMachineListResponse,
   MalwareInfo,
   Place,
-  LogInfo,
+  IPAnalyse,
   DescribeHostInfoResponse,
   ModifyWebHookPolicyStatusResponse,
   ExportRiskDnsPolicyListResponse,
@@ -1115,7 +1101,6 @@ import {
   DescribeScreenDefenseTrendsResponse,
   KeyValueArrayInfo,
   SyncBaselineDetectSummaryRequest,
-  DescribeExpertServiceOrderListResponse,
   DeleteReverseShellRulesResponse,
   BaselineDownload,
   DescribeAssetPlanTaskListRequest,
@@ -1123,7 +1108,6 @@ import {
   DescribeMachineLicenseDetailRequest,
   DescribeVersionCompareChartRequest,
   DescribeProtectDirRelatedServerRequest,
-  TestWebHookRuleResponse,
   Tags,
   DescribeBaselineItemListResponse,
   DescribeMachinesSimpleRequest,
@@ -1145,7 +1129,6 @@ import {
   RansomDefenseRollbackTask,
   DescribeMachineRegionsResponse,
   ExportVulDefenceListRequest,
-  SecurityButlerInfo,
   WebHookReceiverUsage,
   DestroyOrderRequest,
   AssetWebAppBaseInfo,
@@ -1210,7 +1193,7 @@ import {
   BaselineDetail,
   DescribeVulDefenceOverviewResponse,
   DescribeAssetWebAppListRequest,
-  ExpertServiceOrderInfo,
+  ModifyFileTamperRuleStatusResponse,
   DescribeScreenEventsCntResponse,
   WebHookRuleDetail,
   DescribePrivilegeEventInfoRequest,
@@ -1228,11 +1211,9 @@ import {
   AssetUserKeyInfo,
   DescribeMachinesResponse,
   DescribeMalwareWhiteListResponse,
-  RansomDefenseStrategyMachineInfo,
   DescribeAssetWebLocationListRequest,
   DescribeAssetHostTotalCountRequest,
   CreateMaliciousRequestWhiteListResponse,
-  UsualPlace,
   DescribeVulLevelCountRequest,
   ScanVulRequest,
   DeleteBaselineWeakPasswordResponse,
@@ -1244,7 +1225,7 @@ import {
   DescribeJavaMemShellPluginInfoResponse,
   VulEffectHostList,
   DescribeAlarmIncidentNodesResponse,
-  DescribeExpertServiceOrderListRequest,
+  PrivilegeRule,
   DescribeFileTamperRulesRequest,
   DescribeJavaMemShellInfoResponse,
   ModifyRaspRulesResponse,
@@ -1296,12 +1277,12 @@ import {
   ModifyBruteAttackRulesResponse,
   DescribeVulHostTopRequest,
   MachineTag,
-  DescribeBaselineItemIgnoreListResponse,
+  DescribeSecurityEventsCntResponse,
   Filters,
   DescribeAssetWebServiceInfoListRequest,
   CreateSearchLogRequest,
   DescribeSearchTemplatesRequest,
-  CancelIgnoreVulRequest,
+  DescribeBaselineItemIgnoreListResponse,
   ExportAssetUserListResponse,
 } from "./cwp_models"
 
@@ -1555,13 +1536,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专家服务-旗舰重保列表
+   * 大屏可视化获取全网攻击热点
    */
-  async DescribeProtectNetList(
-    req: DescribeProtectNetListRequest,
-    cb?: (error: string, rep: DescribeProtectNetListResponse) => void
-  ): Promise<DescribeProtectNetListResponse> {
-    return this.request("DescribeProtectNetList", req, cb)
+  async DescribeScreenAttackHotspot(
+    req?: DescribeScreenAttackHotspotRequest,
+    cb?: (error: string, rep: DescribeScreenAttackHotspotResponse) => void
+  ): Promise<DescribeScreenAttackHotspotResponse> {
+    return this.request("DescribeScreenAttackHotspot", req, cb)
   }
 
   /**
@@ -2195,13 +2176,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Web站点列表
+   * 获取安全事件统计
    */
-  async DescribeAssetWebLocationList(
-    req: DescribeAssetWebLocationListRequest,
-    cb?: (error: string, rep: DescribeAssetWebLocationListResponse) => void
-  ): Promise<DescribeAssetWebLocationListResponse> {
-    return this.request("DescribeAssetWebLocationList", req, cb)
+  async DescribeSecurityEventStat(
+    req: DescribeSecurityEventStatRequest,
+    cb?: (error: string, rep: DescribeSecurityEventStatResponse) => void
+  ): Promise<DescribeSecurityEventStatResponse> {
+    return this.request("DescribeSecurityEventStat", req, cb)
   }
 
   /**
@@ -2675,6 +2656,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取Web站点列表
+   */
+  async DescribeAssetWebLocationList(
+    req: DescribeAssetWebLocationListRequest,
+    cb?: (error: string, rep: DescribeAssetWebLocationListResponse) => void
+  ): Promise<DescribeAssetWebLocationListResponse> {
+    return this.request("DescribeAssetWebLocationList", req, cb)
+  }
+
+  /**
    * 日志分析功能-获取日志类型，使用该接口返回的结果暂时可过滤的日志类型
    */
   async DescribeLogType(
@@ -2692,16 +2683,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAttackEventInfoResponse) => void
   ): Promise<DescribeAttackEventInfoResponse> {
     return this.request("DescribeAttackEventInfo", req, cb)
-  }
-
-  /**
-   * 大屏可视化获取全网攻击热点
-   */
-  async DescribeScreenAttackHotspot(
-    req?: DescribeScreenAttackHotspotRequest,
-    cb?: (error: string, rep: DescribeScreenAttackHotspotResponse) => void
-  ): Promise<DescribeScreenAttackHotspotResponse> {
-    return this.request("DescribeScreenAttackHotspot", req, cb)
   }
 
   /**
@@ -4408,16 +4389,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专家服务-可用订单详情
-   */
-  async DescribeAvailableExpertServiceDetail(
-    req?: DescribeAvailableExpertServiceDetailRequest,
-    cb?: (error: string, rep: DescribeAvailableExpertServiceDetailResponse) => void
-  ): Promise<DescribeAvailableExpertServiceDetailResponse> {
-    return this.request("DescribeAvailableExpertServiceDetail", req, cb)
-  }
-
-  /**
    * 根据事件表名和id查询告警事件详情
    */
   async DescribeEventByTable(
@@ -4445,16 +4416,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityDynamicsResponse) => void
   ): Promise<DescribeSecurityDynamicsResponse> {
     return this.request("DescribeSecurityDynamics", req, cb)
-  }
-
-  /**
-   * 获取安全事件统计
-   */
-  async DescribeSecurityEventStat(
-    req: DescribeSecurityEventStatRequest,
-    cb?: (error: string, rep: DescribeSecurityEventStatResponse) => void
-  ): Promise<DescribeSecurityEventStatResponse> {
-    return this.request("DescribeSecurityEventStat", req, cb)
   }
 
   /**
@@ -4565,18 +4526,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateBaselineStrategyResponse) => void
   ): Promise<UpdateBaselineStrategyResponse> {
     return this.request("UpdateBaselineStrategy", req, cb)
-  }
-
-  /**
-     * 产品变动切换到了\\n切换到 AddVulIgnoreRule / ModifyVulIgnoreRule  CancelVulIgnoreRule\\n相关接口
-
-取消漏洞忽略
-     */
-  async CancelIgnoreVul(
-    req: CancelIgnoreVulRequest,
-    cb?: (error: string, rep: CancelIgnoreVulResponse) => void
-  ): Promise<CancelIgnoreVulResponse> {
-    return this.request("CancelIgnoreVul", req, cb)
   }
 
   /**
@@ -5067,16 +5016,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProtectDirListResponse) => void
   ): Promise<DescribeProtectDirListResponse> {
     return this.request("DescribeProtectDirList", req, cb)
-  }
-
-  /**
-   * 专家服务-专家服务订单列表
-   */
-  async DescribeExpertServiceOrderList(
-    req: DescribeExpertServiceOrderListRequest,
-    cb?: (error: string, rep: DescribeExpertServiceOrderListResponse) => void
-  ): Promise<DescribeExpertServiceOrderListResponse> {
-    return this.request("DescribeExpertServiceOrderList", req, cb)
   }
 
   /**
@@ -5863,16 +5802,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专家服务-应急响应列表
-   */
-  async DescribeEmergencyResponseList(
-    req: DescribeEmergencyResponseListRequest,
-    cb?: (error: string, rep: DescribeEmergencyResponseListResponse) => void
-  ): Promise<DescribeEmergencyResponseListResponse> {
-    return this.request("DescribeEmergencyResponseList", req, cb)
-  }
-
-  /**
    * 网络攻击趋势数据
    */
   async DescribeAttackTrends(
@@ -5920,16 +5849,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBaselineRuleResponse) => void
   ): Promise<DescribeBaselineRuleResponse> {
     return this.request("DescribeBaselineRule", req, cb)
-  }
-
-  /**
-   * 导出基线影响主机列表
-   */
-  async ExportBaselineEffectHostList(
-    req: ExportBaselineEffectHostListRequest,
-    cb?: (error: string, rep: ExportBaselineEffectHostListResponse) => void
-  ): Promise<ExportBaselineEffectHostListResponse> {
-    return this.request("ExportBaselineEffectHostList", req, cb)
   }
 
   /**
@@ -6263,16 +6182,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专家服务-安全管家列表
-   */
-  async DescribeExpertServiceList(
-    req: DescribeExpertServiceListRequest,
-    cb?: (error: string, rep: DescribeExpertServiceListResponse) => void
-  ): Promise<DescribeExpertServiceListResponse> {
-    return this.request("DescribeExpertServiceList", req, cb)
-  }
-
-  /**
    * 获取忽略规则项列表
    */
   async DescribeBaselineItemIgnoreList(
@@ -6363,13 +6272,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专家服务-安全管家月巡检报告下载
+   * 导出基线影响主机列表
    */
-  async DescribeMonthInspectionReport(
-    req: DescribeMonthInspectionReportRequest,
-    cb?: (error: string, rep: DescribeMonthInspectionReportResponse) => void
-  ): Promise<DescribeMonthInspectionReportResponse> {
-    return this.request("DescribeMonthInspectionReport", req, cb)
+  async ExportBaselineEffectHostList(
+    req: ExportBaselineEffectHostListRequest,
+    cb?: (error: string, rep: ExportBaselineEffectHostListResponse) => void
+  ): Promise<ExportBaselineEffectHostListResponse> {
+    return this.request("ExportBaselineEffectHostList", req, cb)
   }
 
   /**
@@ -6390,18 +6299,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMalwareWhiteListAffectListResponse) => void
   ): Promise<DescribeMalwareWhiteListAffectListResponse> {
     return this.request("DescribeMalwareWhiteListAffectList", req, cb)
-  }
-
-  /**
-     * 产品变动切换到了\\n切换到 AddVulIgnoreRule / ModifyVulIgnoreRule  CancelVulIgnoreRule\\n相关接口
-
-本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
-     */
-  async IgnoreImpactedHosts(
-    req: IgnoreImpactedHostsRequest,
-    cb?: (error: string, rep: IgnoreImpactedHostsResponse) => void
-  ): Promise<IgnoreImpactedHostsResponse> {
-    return this.request("IgnoreImpactedHosts", req, cb)
   }
 
   /**

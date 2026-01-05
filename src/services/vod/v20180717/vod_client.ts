@@ -229,6 +229,7 @@ import {
   SuperResolutionInfo,
   MediaImageSpriteInfo,
   EnhanceMediaQualityRequest,
+  ProductImageConfig,
   ProductInstanceRecource,
   PersistenceCompleteTask,
   AiRecognitionTaskFaceSegmentItem,

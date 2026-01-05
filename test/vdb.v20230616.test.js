@@ -88,6 +88,16 @@ it("vdb.v20230616.DescribeDBSecurityGroups", async function () {
     }
 })
 
+it("vdb.v20230616.RecoverInstance", async function () {
+    try {
+       const data = await client.RecoverInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vdb.v20230616.DescribeInstanceNodes", async function () {
     try {
        const data = await client.DescribeInstanceNodes({})
@@ -128,9 +138,19 @@ it("vdb.v20230616.ScaleUpInstance", async function () {
     }
 })
 
-it("vdb.v20230616.DisassociateSecurityGroups", async function () {
+it("vdb.v20230616.DescribePriceResizeInstance", async function () {
     try {
-       const data = await client.DisassociateSecurityGroups({})
+       const data = await client.DescribePriceResizeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vdb.v20230616.DescribePriceRenewInstance", async function () {
+    try {
+       const data = await client.DescribePriceRenewInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,19 @@ it("vdb.v20230616.ScaleOutInstance", async function () {
     }
 })
 
-it("vdb.v20230616.RecoverInstance", async function () {
+it("vdb.v20230616.DescribePriceCreateInstance", async function () {
     try {
-       const data = await client.RecoverInstance({})
+       const data = await client.DescribePriceCreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vdb.v20230616.DisassociateSecurityGroups", async function () {
+    try {
+       const data = await client.DisassociateSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

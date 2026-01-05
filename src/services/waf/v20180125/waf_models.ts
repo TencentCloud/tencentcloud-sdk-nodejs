@@ -2796,6 +2796,60 @@ export interface ModifyInstanceElasticModeResponse {
 }
 
 /**
+ * BOT-ID规则配置详情
+ */
+export interface BotIdDetail {
+  /**
+   * 规则ID
+   */
+  RuleId?: string
+  /**
+   * 规则名称
+   */
+  BotId?: string
+  /**
+   * 规则开关
+   */
+  Status?: boolean
+  /**
+   * 规则动作
+   */
+  Action?: string
+  /**
+   * 风险等级
+   */
+  Level?: number
+  /**
+   * 规则类型
+   */
+  BotIdType?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: number
+  /**
+   * 插入时间
+   */
+  InsertTime?: number
+  /**
+   * 规则描述
+   */
+  Description?: string
+  /**
+   * 影响
+   */
+  Influence?: string
+  /**
+   * 重定向路径
+   */
+  Redirect?: string
+  /**
+   * 是否关联事件
+   */
+  HasEvent?: boolean
+}
+
+/**
  * DescribePostCLSFlows返回参数结构体
  */
 export interface DescribePostCLSFlowsResponse {
@@ -6982,6 +7036,20 @@ export interface ModifyOwaspRuleTypeLevelRequest {
 }
 
 /**
+ * GetInstanceQpsLimit请求参数结构体
+ */
+export interface GetInstanceQpsLimitRequest {
+  /**
+   * 套餐实例id
+   */
+  InstanceId: string
+  /**
+   * 套餐类型
+   */
+  Type?: string
+}
+
+/**
  * 有效预付费大模型安全包信息
  */
 export interface LLMMonPkg {
@@ -8185,6 +8253,29 @@ export interface DeleteAntiFakeUrlResponse {
 }
 
 /**
+ * DescribeBotIdRule返回参数结构体
+ */
+export interface DescribeBotIdRuleResponse {
+  /**
+   * 规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<BotIdDetail>
+  /**
+   * 符合条件的规则数量
+   */
+  TotalCount?: number
+  /**
+   * Bot规则数量统计信息
+   */
+  StatInfo?: BotIdStat
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAreaBanRule请求参数结构体
  */
 export interface CreateAreaBanRuleRequest {
@@ -8287,6 +8378,44 @@ export interface TokenValidation {
 }
 
 /**
+ * DescribeBotIdRule请求参数结构体
+ */
+export interface DescribeBotIdRuleRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 场景ID
+   */
+  SceneId: string
+  /**
+   * 规则ID
+   */
+  RuleId?: string
+  /**
+   * 规则名称
+   */
+  BotId?: string
+  /**
+   * 风险等级筛选
+   */
+  Level?: Array<number | bigint>
+  /**
+   * 规则类型筛选
+   */
+  BotIdType?: Array<string>
+  /**
+   * 规则开关-用于筛选: 0-全部 1-关闭 2-开启
+   */
+  Status?: number
+  /**
+   * 动作类型-用于筛选
+   */
+  RuleAction?: Array<string>
+}
+
+/**
  * DescribeCustomRuleList返回参数结构体
  */
 export interface DescribeCustomRuleListResponse {
@@ -8305,17 +8434,45 @@ export interface DescribeCustomRuleListResponse {
 }
 
 /**
- * GetInstanceQpsLimit请求参数结构体
+ * Bot-Id规则统计信息
  */
-export interface GetInstanceQpsLimitRequest {
+export interface BotIdStat {
   /**
-   * 套餐实例id
+   * 模式：观察/拦截/自定义
    */
-  InstanceId: string
+  Pattern?: string
   /**
-   * 套餐类型
+   * 规则总数
    */
-  Type?: string
+  TotalCount?: number
+  /**
+   * 配置观察的规则数
+   */
+  MonitorCount?: number
+  /**
+   * 配置拦截的规则数
+   */
+  InterceptCount?: number
+  /**
+   * 配置重定向的规则数
+   */
+  RedirectCount?: number
+  /**
+   * 配置人机识别的规则数
+   */
+  CaptchaCount?: number
+  /**
+   * 全局防护等级
+   */
+  ProtectLevel?: string
+  /**
+   * 全局重定向路径
+   */
+  GlobalRedirect?: string
+  /**
+   * JS挑战的数目
+   */
+  JsChallengeCount?: number
 }
 
 /**

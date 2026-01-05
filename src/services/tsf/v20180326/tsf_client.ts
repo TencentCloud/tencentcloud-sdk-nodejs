@@ -700,8 +700,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+创建任务
+     */
   async CreateTask(
     req: CreateTaskRequest,
     cb?: (error: string, rep: CreateTaskResponse) => void
@@ -830,8 +832,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重新执行工作流批次
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+重新执行工作流批次
+     */
   async RedoTaskFlowBatch(
     req: RedoTaskFlowBatchRequest,
     cb?: (error: string, rep: RedoTaskFlowBatchResponse) => void
@@ -930,8 +934,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止正在某个节点上执行的任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+停止正在某个节点上执行的任务
+     */
   async StopTaskExecute(
     req: StopTaskExecuteRequest,
     cb?: (error: string, rep: StopTaskExecuteResponse) => void
@@ -940,8 +946,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务详情
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+查询任务详情
+     */
   async DescribeTaskDetail(
     req: DescribeTaskDetailRequest,
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void
@@ -1323,8 +1331,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 翻页查询任务列表
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+翻页查询任务列表
+     */
   async DescribeTaskRecords(
     req: DescribeTaskRecordsRequest,
     cb?: (error: string, rep: DescribeTaskRecordsResponse) => void
@@ -1333,8 +1343,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 手动执行一次任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+手动执行一次任务
+     */
   async ExecuteTask(
     req: ExecuteTaskRequest,
     cb?: (error: string, rep: ExecuteTaskResponse) => void
@@ -1453,8 +1465,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+修改任务
+     */
   async ModifyTask(
     req: ModifyTaskRequest,
     cb?: (error: string, rep: ModifyTaskResponse) => void
@@ -1603,8 +1617,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止一个工作流批次
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+停止一个工作流批次
+     */
   async TerminateTaskFlowBatch(
     req: TerminateTaskFlowBatchRequest,
     cb?: (error: string, rep: TerminateTaskFlowBatchResponse) => void
@@ -1653,8 +1669,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用工作流
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+停用工作流
+     */
   async DisableTaskFlow(
     req: DisableTaskFlowRequest,
     cb?: (error: string, rep: DisableTaskFlowResponse) => void
@@ -1874,8 +1892,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重新执行任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+重新执行任务
+     */
   async RedoTask(
     req: RedoTaskRequest,
     cb?: (error: string, rep: RedoTaskResponse) => void
@@ -1974,8 +1994,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务最近一次执行状态
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+查询任务最近一次执行状态
+     */
   async DescribeTaskLastStatus(
     req: DescribeTaskLastStatusRequest,
     cb?: (error: string, rep: DescribeTaskLastStatusResponse) => void
@@ -2015,8 +2037,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止执行中的任务批次， 非运行中的任务不可调用。
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+停止执行中的任务批次， 非运行中的任务不可调用。
+     */
   async StopTaskBatch(
     req: StopTaskBatchRequest,
     cb?: (error: string, rep: StopTaskBatchResponse) => void
@@ -2105,8 +2129,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+删除任务
+     */
   async DeleteTask(
     req: DeleteTaskRequest,
     cb?: (error: string, rep: DeleteTaskResponse) => void
@@ -2238,8 +2264,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+启用任务
+     */
   async EnableTask(
     req: EnableTaskRequest,
     cb?: (error: string, rep: EnableTaskResponse) => void
@@ -2278,8 +2306,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用工作流
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+启用工作流
+     */
   async EnableTaskFlow(
     req: EnableTaskFlowRequest,
     cb?: (error: string, rep: EnableTaskFlowResponse) => void
@@ -2338,8 +2368,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重新执行任务批次
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+重新执行任务批次
+     */
   async RedoTaskBatch(
     req: RedoTaskBatchRequest,
     cb?: (error: string, rep: RedoTaskBatchResponse) => void
@@ -2408,8 +2440,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 执行一次工作流
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+执行一次工作流
+     */
   async ExecuteTaskFlow(
     req: ExecuteTaskFlowRequest,
     cb?: (error: string, rep: ExecuteTaskFlowResponse) => void
@@ -2440,8 +2474,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重新执行在某个节点上执行任务。
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+重新执行在某个节点上执行任务。
+     */
   async RedoTaskExecute(
     req: RedoTaskExecuteRequest,
     cb?: (error: string, rep: RedoTaskExecuteResponse) => void
@@ -2460,8 +2496,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询工作流最新一个批次的状态信息
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+查询工作流最新一个批次的状态信息
+     */
   async DescribeFlowLastBatchState(
     req: DescribeFlowLastBatchStateRequest,
     cb?: (error: string, rep: DescribeFlowLastBatchStateResponse) => void
@@ -2490,8 +2528,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用任务
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+停用任务
+     */
   async DisableTask(
     req: DisableTaskRequest,
     cb?: (error: string, rep: DisableTaskResponse) => void
@@ -2560,8 +2600,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建工作流
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+创建工作流
+     */
   async CreateTaskFlow(
     req: CreateTaskFlowRequest,
     cb?: (error: string, rep: CreateTaskFlowResponse) => void
@@ -2700,8 +2742,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对执行失败的任务批次执行续跑
-   */
+     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
+
+对执行失败的任务批次执行续跑
+     */
   async ContinueRunFailedTaskBatch(
     req: ContinueRunFailedTaskBatchRequest,
     cb?: (error: string, rep: ContinueRunFailedTaskBatchResponse) => void

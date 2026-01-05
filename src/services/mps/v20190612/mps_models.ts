@@ -8933,7 +8933,6 @@ export interface CreateAigcVideoTaskRequest {
 Hunyuan,
 Hailuo，
 Kling，
-Jimeng，
 Vidu，
 OS，
 GV。
@@ -8942,9 +8941,8 @@ GV。
   /**
    * 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。
 1. Hailuo， 可选[02、2.3]。
-2. Kling，可选[2.0、2.1、2.5]。
-3. Jimeng, 可选[3.0pro]。
-4. Vidu,可选[q2、q2-pro、q2-turbo]。
+2. Kling，可选[2.0、2.1、2.5、O1、2.6]。
+3. Vidu,可选[q2、q2-pro、q2-turbo]。
 4. GV, 可选[3.1]。
 5. OS，可选[2.0]。
    */
@@ -9002,21 +9000,26 @@ GV。
    * 生成视频的时长。
 注意：
 1. Kling支持 5、10秒。默认: 5秒。
-2. Jimeng支持5、10秒。 默认: 5秒。
-3. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。
-4. Vidu支持1-10秒。
+2. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。
+3. Vidu支持1-10秒。
 4. GV支持 8秒。 默认：8秒。
 5. OS支持4、8、12秒。 默认：8秒。
    */
   Duration?: number
   /**
-   * 用于传入模型要求的额外参数。
+   * 用于传入要求的额外参数。
    */
   ExtraParameters?: AigcVideoExtraParam
   /**
    * 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。
    */
   StoreCosParam?: AigcStoreCosParam
+  /**
+   * 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。
+示例：
+{\"camera_control\":{\"type\":\"simple\"}}
+   */
+  AdditionalParameters?: string
   /**
    * 接口操作者名称。
    */
@@ -20077,7 +20080,6 @@ export interface CreateAigcImageTaskRequest {
 当前支持的模型列表：
 Hunyuan,
 GEM，
-Jimeng，
 Qwen。
    */
   ModelName?: string
@@ -20085,7 +20087,6 @@ Qwen。
    * 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。
 
 1. GEM， 可选[2.5,3.0]。
-2. Jimeng，可选[4.0]。
    */
   ModelVersion?: string
   /**
@@ -21197,10 +21198,9 @@ export interface AigcVideoExtraParam {
 不同模型支持的分辨率选项:
 1. Kling 720P(默认), 1080P。
 2. Hailuo 768P(默认), 1080P。
-3. Jimeng 1080P(默认)。
-4. Vidu 720P(默认)，1080P。
-5. GV 720P(默认),1080P。
-6. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。
+3. Vidu 720P(默认)，1080P。
+4. GV 720P(默认),1080P。
+5. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。
 
 注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。
    */
@@ -21211,10 +21211,9 @@ export interface AigcVideoExtraParam {
 不同模型对于此参数的支持：
 1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。
 2. Hailuo 暂不支持。
-3. Jimeng ["16:9"、"4:3"、"1:1"、"3:4"、"9:16"、"21:9"]
-4. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。
-5. GV 16:9(默认值)、9:16。
-6. OS 仅文生视频支持, 16:9(默认), 9:16。
+3. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。
+4. GV 16:9(默认值)、9:16。
+5. OS 仅文生视频支持, 16:9(默认), 9:16。
 
 注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。
    */
