@@ -868,6 +868,16 @@ it("wedata.v20250806.CreateWorkflowFolder", async function () {
     }
 })
 
+it("wedata.v20250806.DeleteProject", async function () {
+    try {
+       const data = await client.DeleteProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.StopSQLScriptRun", async function () {
     try {
        const data = await client.StopSQLScriptRun({})

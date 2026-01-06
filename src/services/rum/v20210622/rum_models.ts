@@ -500,6 +500,10 @@ export interface DescribeScoresRequest {
    * @deprecated
    */
   IsDemo?: number
+  /**
+   * 项目 ID 列表
+   */
+  IDList?: Array<number | bigint>
 }
 
 /**

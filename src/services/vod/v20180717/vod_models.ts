@@ -116,6 +116,10 @@ export interface AigcVideoOutputConfig {
 2. 对于模型可以直出的分辨率，也可以主动选择模型直出低分辨率，使用增强获得指定分辨率。
    */
   EnhanceSwitch?: string
+  /**
+   * 是否开启vidu智能插帧。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   */
+  FrameInterpolate?: string
 }
 
 /**
@@ -19513,7 +19517,6 @@ export interface CreateAigcImageTaskRequest {
 <li>GEM：Gemini；</li>
 <li>Qwen：千问。</li>
 <li>Hunyuan：混元。</li>
-<li>Mingmou：明眸。</li>
    */
   ModelName: string
   /**
@@ -19521,7 +19524,6 @@ export interface CreateAigcImageTaskRequest {
 <li>当 ModelName 是 GEM，可选值为 2.5、3.0；</li>
 <li>当 ModelName 是 Qwen，可选值为 0925；</li>
 <li>当 ModelName 是 Hunyuan，可选值为 3.0；</li>
-<li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
    */
   ModelVersion: string
   /**

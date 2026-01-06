@@ -83,6 +83,7 @@ import {
   ListWorkflowsResponse,
   CreateProjectResponse,
   ProjectInstanceStatisticsAlarmInfo,
+  DeleteProjectResponse,
   QualityRuleFieldConfig,
   TriggerWorkflowResult,
   CodePermissionsResultItem,
@@ -480,6 +481,7 @@ import {
   UpdateProjectResponse,
   TriggerWorkflowBrief,
   TriggerTaskBaseAttribute,
+  DeleteProjectRequest,
   CreateResourceFileRequest,
   WorkflowPermission,
   DeleteTaskFolderResponse,
@@ -1482,6 +1484,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkflowFolderResponse) => void
   ): Promise<CreateWorkflowFolderResponse> {
     return this.request("CreateWorkflowFolder", req, cb)
+  }
+
+  /**
+   * 删除项目
+   */
+  async DeleteProject(
+    req: DeleteProjectRequest,
+    cb?: (error: string, rep: DeleteProjectResponse) => void
+  ): Promise<DeleteProjectResponse> {
+    return this.request("DeleteProject", req, cb)
   }
 
   /**

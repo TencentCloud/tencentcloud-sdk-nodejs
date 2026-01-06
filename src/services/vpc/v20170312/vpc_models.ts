@@ -6545,11 +6545,11 @@ export interface DescribeGatewayFlowQosResponse {
   /**
    * 实例详细信息列表。
    */
-  GatewayQosSet: Array<GatewayQos>
+  GatewayQosSet?: Array<GatewayQos>
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12725,13 +12725,17 @@ export interface GatewayQos {
    */
   IpAddress?: string
   /**
-   * 流控带宽值。
+   * 网关流控出方向带宽值，当值为-1时，代表未限速；当值大于等于0时，限速带宽上限为返回值。
    */
   Bandwidth?: number
   /**
    * 创建时间。
    */
   CreateTime?: string
+  /**
+   * 网关流控入方向带宽值，当值为-1时，代表未限速；当值大于等于0时，限速带宽上限为返回值。
+   */
+  InBandwidth?: number
 }
 
 /**
