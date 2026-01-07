@@ -82,6 +82,7 @@ import {
   ResourceGroupInfo,
   CreateNotebookRequest,
   CreatePresignedNotebookUrlResponse,
+  ModifyNotebookRequest,
   HorizontalPodAutoscaler,
   ResourceConfigInfo,
   PublicDataSourceFS,
@@ -119,6 +120,7 @@ import {
   ImageInfo,
   Tag,
   ServiceInfo,
+  StopNotebookResponse,
   DescribeModelServiceRequest,
   CreateTrainingTaskResponse,
   ModifyModelServiceAuthTokenResponse,
@@ -128,7 +130,7 @@ import {
   CreateTrainingTaskRequest,
   Message,
   CreatePresignedNotebookUrlRequest,
-  StopNotebookResponse,
+  ModifyNotebookResponse,
   DescribeModelServiceResponse,
   DescribeBuildInImagesResponse,
   DescribeDatasetsResponse,
@@ -371,6 +373,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyModelServiceAuthorizationResponse) => void
   ): Promise<ModifyModelServiceAuthorizationResponse> {
     return this.request("ModifyModelServiceAuthorization", req, cb)
+  }
+
+  /**
+   * 修改Notebook
+   */
+  async ModifyNotebook(
+    req: ModifyNotebookRequest,
+    cb?: (error: string, rep: ModifyNotebookResponse) => void
+  ): Promise<ModifyNotebookResponse> {
+    return this.request("ModifyNotebook", req, cb)
   }
 
   /**

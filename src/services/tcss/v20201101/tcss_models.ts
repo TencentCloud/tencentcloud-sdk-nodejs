@@ -5905,6 +5905,10 @@ export interface CreateAssetImageRegistryScanTaskOneKeyRequest {
    */
   Id?: Array<number | bigint>
   /**
+   * 剔除扫描的镜像id列表
+   */
+  ExcludeIDs?: Array<number | bigint>
+  /**
    * 是否最新镜像
    */
   IsLatest?: boolean

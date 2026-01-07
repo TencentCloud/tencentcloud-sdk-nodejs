@@ -71,6 +71,10 @@ export interface AddChunkRequest {
    * 新 Chunk 插入到目标 Chunk ​之后的位置。插入位置的上一个 chunkId
    */
   AfterChunkId?: string
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
 }
 
 /**
@@ -109,6 +113,10 @@ export interface DeleteChunkRequest {
    * 切片ID
    */
   ChunkIds: Array<string>
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
 }
 
 /**
@@ -153,6 +161,10 @@ export interface ModifyChunkRequest {
    * 编辑后的文本
    */
   Content?: string
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
 }
 
 /**
@@ -249,6 +261,10 @@ export interface QueryChunkListRequest {
    * 默认一页展示 10 条
    */
   PageSize?: number
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
 }
 
 /**
@@ -321,6 +337,14 @@ export interface ModifyKnowledgeBaseRequest {
    * 知识库描述，create和update时必填
    */
   KnowledgeBaseDesc?: string
+  /**
+   * 1仅自己使用，2指定用户，0全员
+   */
+  UseScope?: number
+  /**
+   * 可使用用户列表
+   */
+  AuthorityUins?: Array<string>
 }
 
 /**

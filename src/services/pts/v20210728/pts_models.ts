@@ -1734,6 +1734,10 @@ export interface RequestsPerSecond {
    * 优雅关停的等待时间
    */
   GracefulStopSeconds?: number
+  /**
+   * 场景最大执行次数
+   */
+  IterationCount?: number
 }
 
 /**
@@ -3701,6 +3705,10 @@ export interface Concurrency {
    * 资源数
    */
   Resources?: number
+  /**
+   * 压力模型
+   */
+  Mode?: string
 }
 
 /**

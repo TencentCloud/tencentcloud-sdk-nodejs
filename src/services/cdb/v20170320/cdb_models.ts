@@ -4237,7 +4237,7 @@ export interface DescribeDBInstanceConfigResponse {
    */
   DeployMode?: number
   /**
-   * 实例可用区信息，格式如 "ap-shanghai-1"。
+   * 实例可用区信息，格式如 "ap-shanghai-2"。
    */
   Zone?: string
   /**
@@ -4269,7 +4269,7 @@ export interface SlaveConfig {
    */
   ReplicationMode?: string
   /**
-   * 从库可用区的正式名称，如ap-shanghai-1
+   * 从库可用区的正式名称，如 ap-shanghai-2
    */
   Zone?: string
 }
@@ -7674,7 +7674,7 @@ export interface RoInstanceInfo {
    */
   Region?: string
   /**
-   * RO可用区的正式名称，如ap-shanghai-1
+   * RO可用区的正式名称，如 ap-shanghai-2
    */
   Zone?: string
   /**
@@ -10822,7 +10822,7 @@ export interface BackupConfig {
    */
   ReplicationMode?: string
   /**
-   * 第二个从库可用区的正式名称，如ap-shanghai-1
+   * 第二个从库可用区的正式名称，如 ap-shanghai-2
    */
   Zone?: string
   /**

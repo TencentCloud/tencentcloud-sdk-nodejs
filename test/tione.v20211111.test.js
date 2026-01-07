@@ -148,6 +148,16 @@ it("tione.v20211111.ModifyModelServiceAuthorization", async function () {
     }
 })
 
+it("tione.v20211111.ModifyNotebook", async function () {
+    try {
+       const data = await client.ModifyNotebook({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteNotebook", async function () {
     try {
        const data = await client.DeleteNotebook({})

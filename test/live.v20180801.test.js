@@ -1878,6 +1878,16 @@ it("live.v20180801.DescribeBackupStreamList", async function () {
     }
 })
 
+it("live.v20180801.InsertTaskTemporaryFiles", async function () {
+    try {
+       const data = await client.InsertTaskTemporaryFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ResumeDelayLiveStream", async function () {
     try {
        const data = await client.ResumeDelayLiveStream({})

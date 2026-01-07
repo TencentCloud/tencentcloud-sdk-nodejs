@@ -56,6 +56,7 @@ import {
   DescribeCasterPlayUrlResponse,
   CancelCommonMixStreamResponse,
   DescribeLiveCertsResponse,
+  LiveEnhanceInfo,
   ResumeDelayLiveStreamRequest,
   DescribeCallbackRecordsListRequest,
   CasterDisplayInfo,
@@ -205,7 +206,7 @@ import {
   ScreenshotTask,
   DeletePullStreamConfigResponse,
   ModifyLivePlayDomainRequest,
-  LiveEnhanceInfo,
+  InsertTaskTemporaryFilesResponse,
   DeleteLiveTimeShiftRuleResponse,
   PullPushWatermarkInfo,
   DescribeGroupProIspPlayInfoListRequest,
@@ -214,6 +215,7 @@ import {
   DescribeLiveTranscodeRulesResponse,
   DeleteAuditKeywordsRequest,
   CreateCasterPvwRequest,
+  ModifyCasterLayoutInfoRequest,
   AddCasterLayoutInfoResponse,
   DeleteLivePullStreamTaskResponse,
   DescribeStreamPushInfoListRequest,
@@ -284,7 +286,7 @@ import {
   DescribeBillBandwidthAndFluxListRequest,
   AddCasterLayoutInfoRequest,
   FlvSpecialParam,
-  ModifyCasterLayoutInfoRequest,
+  InsertTaskTemporaryFilesRequest,
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
@@ -2508,6 +2510,19 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeBackupStreamListResponse) => void
   ): Promise<DescribeBackupStreamListResponse> {
     return this.request("DescribeBackupStreamList", req, cb)
+  }
+
+  /**
+     * 可通过调用该接口，对点播源的直播拉流任务进行插播操作。
+注意：
+1. 仅支持对有效且运行中的点播源任务进行插播操作。
+2. 拉转推插播文件时，事件及回调中的索引均保持为插播前的值。
+     */
+  async InsertTaskTemporaryFiles(
+    req: InsertTaskTemporaryFilesRequest,
+    cb?: (error: string, rep: InsertTaskTemporaryFilesResponse) => void
+  ): Promise<InsertTaskTemporaryFilesResponse> {
+    return this.request("InsertTaskTemporaryFiles", req, cb)
   }
 
   /**

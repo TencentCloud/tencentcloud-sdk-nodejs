@@ -8514,6 +8514,10 @@ export interface NetAttackEventInfo {
    * IP分析
    */
   IPAnalyse?: IPAnalyse
+  /**
+   * 响应数据包 base64编码
+   */
+  NetResponsePayload?: string
 }
 
 /**

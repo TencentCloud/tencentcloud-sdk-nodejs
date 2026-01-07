@@ -2266,6 +2266,118 @@ export interface CreatePresignedNotebookUrlResponse {
 }
 
 /**
+ * ModifyNotebook请求参数结构体
+ */
+export interface ModifyNotebookRequest {
+  /**
+   * notebook id
+   */
+  Id: string
+  /**
+   * 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   */
+  Name: string
+  /**
+   * （不允许修改）计算资源付费模式 ，可选值为：
+PREPAID：预付费，即包年包月
+POSTPAID_BY_HOUR：按小时后付费
+   */
+  ChargeType: string
+  /**
+   * 计算资源配置
+   */
+  ResourceConf: ResourceConf
+  /**
+   * 是否自动停止
+   */
+  AutoStopping: boolean
+  /**
+   * 是否访问公网
+   */
+  DirectInternetAccess: boolean
+  /**
+   * 是否ROOT权限
+   */
+  RootAccess: boolean
+  /**
+   * 是否上报日志
+   */
+  LogEnable: boolean
+  /**
+   * 资源组ID(for预付费)
+   */
+  ResourceGroupId?: string
+  /**
+   * （不允许修改）Vpc-Id
+   */
+  VpcId?: string
+  /**
+   * （不允许修改）子网Id
+   */
+  SubnetId?: string
+  /**
+   * 存储卷大小，单位GB
+   */
+  VolumeSizeInGB?: number
+  /**
+   * （不允许修改）存储的类型。取值包含： 
+    FREE:    预付费的免费存储
+    CLOUD_PREMIUM： 高性能云硬盘
+    CLOUD_SSD： SSD云硬盘
+    CFS:     CFS存储，包含NFS和turbo
+   */
+  VolumeSourceType?: string
+  /**
+   * （不允许修改）CFS存储的配置
+   */
+  VolumeSourceCFS?: CFSConfig
+  /**
+   * 日志配置
+   */
+  LogConfig?: LogConfig
+  /**
+   * 生命周期脚本的ID
+   */
+  LifecycleScriptId?: string
+  /**
+   * 默认GIT存储库的ID
+   */
+  DefaultCodeRepoId?: string
+  /**
+   * 其他GIT存储库的ID，最多3个
+   */
+  AdditionalCodeRepoIds?: Array<string>
+  /**
+   * 自动停止时间，单位小时
+   */
+  AutomaticStopTime?: number
+  /**
+   * 标签配置
+   */
+  Tags?: Array<Tag>
+  /**
+   * 数据配置，只支持WEDATA_HDFS
+   */
+  DataConfigs?: Array<DataConfig>
+  /**
+   * 镜像信息
+   */
+  ImageInfo?: ImageInfo
+  /**
+   * 镜像类型，包括SYSTEM、TCR、CCR
+   */
+  ImageType?: string
+  /**
+   * SSH配置
+   */
+  SSHConfig?: SSHConfig
+  /**
+   * 自定义环境变量
+   */
+  Envs?: Array<EnvVar>
+}
+
+/**
  * hpa的描述
  */
 export interface HorizontalPodAutoscaler {
@@ -3470,6 +3582,16 @@ HYBRID_PAID:
 }
 
 /**
+ * StopNotebook返回参数结构体
+ */
+export interface StopNotebookResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeModelService请求参数结构体
  */
 export interface DescribeModelServiceRequest {
@@ -3680,9 +3802,9 @@ export interface CreatePresignedNotebookUrlRequest {
 }
 
 /**
- * StopNotebook返回参数结构体
+ * ModifyNotebook返回参数结构体
  */
-export interface StopNotebookResponse {
+export interface ModifyNotebookResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5996,7 +6118,7 @@ export interface DescribeBillingResourceGroupRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10....即每页左边为闭区间; 默认0
+   * 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10...即每页左边为闭区间; 默认0
    */
   Offset?: number
   /**

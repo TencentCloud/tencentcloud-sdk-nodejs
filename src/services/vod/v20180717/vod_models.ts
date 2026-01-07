@@ -9447,7 +9447,7 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubAppId: number
   /**
-   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>GV：Google Veo；</li><li>OS：OpenAI Sora；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li>
+   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li>
    */
   ModelName: string
   /**
@@ -10725,7 +10725,9 @@ export interface SceneAigcImageOutputConfig {
    */
   ExpireTime?: string
   /**
-   * 指定所生成图片的宽高比。输入格式为 W:H。仅生商品图场景有效。
+   * 指定所生成图片的宽高比。输入格式为 W:H。
+
+仅生商品图场景有效，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9
    */
   AspectRatio?: string
 }
