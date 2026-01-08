@@ -174,6 +174,27 @@ export interface ListTableResponse {
 }
 
 /**
+ * CreateQualityRule请求参数结构体
+ */
+export interface CreateQualityRuleRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 规则创建场景
+1：单表多规则
+2：多表单规则
+3：克隆创建规则
+   */
+  CreateRuleScene: number
+  /**
+   * 单条规则信息集合
+   */
+  RuleBOList: Array<QualityRuleInfo>
+}
+
+/**
  * CreateDataSource请求参数结构体
  */
 export interface CreateDataSourceRequest {
@@ -3130,12 +3151,12 @@ export interface RelateTask {
  */
 export interface QualityThresholdValue {
   /**
-   * 阈值类型  1.低阈值  2.高阈值   3.普通阈值  4.枚举值
+   * 阈值类型【入参必填】  1.低阈值  2.高阈值   3.普通阈值  4.枚举值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueType?: number
   /**
-   * 阈值
+   * 阈值【入参必填】
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
@@ -3939,7 +3960,7 @@ RERUN：重跑
    */
   EngineParam?: string
   /**
-   * 数据目录名称，不填默认为DataLakeCatalog
+   * 数据目录名称，不填默认为DataLakeCatalog（更新质量监控时该参数无效）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
@@ -5791,6 +5812,21 @@ export interface ListTriggerWorkflowRunsResponse {
 }
 
 /**
+ * ListQualityRuleGroups返回参数结构体
+ */
+export interface ListQualityRuleGroupsResponse {
+  /**
+   * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: QualityRuleGroupPage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCodeFile返回参数结构体
  */
 export interface CreateCodeFileResponse {
@@ -6056,6 +6092,22 @@ export interface GetTriggerTaskRunRequest {
 }
 
 /**
+ * 质量监控分页
+ */
+export interface QualityRuleGroupPage {
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 质量监控列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<QualityRuleGroup>
+}
+
+/**
  * SubmitTriggerTask返回参数结构体
  */
 export interface SubmitTriggerTaskResponse {
@@ -6083,6 +6135,42 @@ export interface ListQualityRuleGroupExecResultsByPageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据质量规则批量创建结果
+ */
+export interface CreateQualityRuleVO {
+  /**
+   * 操作结果文案
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 单条数据新增结果对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Results?: Array<QualityRuleCreateResult>
+  /**
+   * 总新增条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SumCount?: number
+  /**
+   * 新增成功条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessCount?: number
+  /**
+   * 新增失败条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedCount?: number
+  /**
+   * 新增成功的 ruleId集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessRuleIds?: Array<number | bigint>
 }
 
 /**
@@ -6138,6 +6226,21 @@ export interface AlarmWayWebHook {
    * 告警群的webhook地址列表
    */
   WebHooks?: Array<string>
+}
+
+/**
+ * CreateQualityRule返回参数结构体
+ */
+export interface CreateQualityRuleResponse {
+  /**
+   * 规则创建结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateQualityRuleVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7348,12 +7451,12 @@ export interface GetTaskInstanceLogRequest {
  */
 export interface QualityCompareRuleItem {
   /**
-   * 比较类型 1.固定值  2.波动值  3.数值范围比较  4.枚举范围比较  5.不用比较
+   * 比较类型【入参必填】，1.固定值  2.波动值  3.数值范围比较  4.枚举范围比较  5.不用比较   6.字段数据相关性  7.公平性
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompareType?: number
   /**
-   * 比较操作类型
+   * 比较操作类型【入参条件必填】，CompareType ∈ {1,2,6,7} 时必填
 <  <=  ==  =>  > !=
 IRLCRO:在区间内(左闭右开)
 IRLORC:在区间内(左开右闭)
@@ -7367,12 +7470,25 @@ NRLORO:不在区间内(左开右开)
    */
   Operator?: string
   /**
-   * 质量统计值类型 1.绝对值  2.上升 3. 下降  4._C包含   5. N_C不包含
+   * 质量统计值类型【入参条件必填】，当 CompareType ∈ {2,3,7} 时必填
+可选值：
+当 compareType = 2(波动值) 时：
+  - 1 = 绝对值(ABS)
+  - 2 = 上升(ASCEND)
+  - 3 = 下降(DESCEND)
+
+当 compareType = 3(数值范围) 时：
+  - 4 = 范围内(WITH_IN_RANGE)
+  - 5 = 范围外(OUT_OF_RANGE)
+
+当 compareType = 7(公平性) 时：
+  - 6 = 公平率(FAIRNESS_RATE)
+  - 7 = 公平差(FAIRNESS_GAP)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueComputeType?: number
   /**
-   * 比较阈值列表
+   * 比较阈值列表【入参必填】
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueList?: Array<QualityThresholdValue>
@@ -8750,6 +8866,177 @@ export interface LineageProperty {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+}
+
+/**
+ * 数据质量监控任务
+ */
+export interface QualityRuleGroup {
+  /**
+   * 规则组Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupId?: number
+  /**
+   * 数据源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceName?: string
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceType?: number
+  /**
+   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorType?: number
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 关联数据表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 关联数据表Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: string
+  /**
+   * 关联数据表负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableOwnerName?: string
+  /**
+   * 执行策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecStrategy?: QualityRuleGroupExecStrategy
+  /**
+   * 订阅信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Subscription?: QualityRuleGroupSubscribe
+  /**
+   * 数据库id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseId?: string
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 模式名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
+  /**
+   * 是否有权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permission?: boolean
+  /**
+   * 已经配置的规则数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleCount?: number
+  /**
+   * 监控状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorStatus?: boolean
+  /**
+   * 表负责人UserId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableOwnerUserId?: number
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 是否已配置执行策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyConfig?: boolean
+  /**
+   * 是否已配置执行策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeConfig?: boolean
+  /**
+   * 数据源环境：0或者未返回.未定义，1.生产 2.开发
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DsEnvType?: number
+  /**
+   * EMR集群部署方式：CVM/TKE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterDeployType?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 执行详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecDetail?: string
+  /**
+   * 事中关联任务数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PipelineTaskCount?: number
+  /**
+   * 有效规则数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableRuleCount?: number
+  /**
+   * 任务描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 监控创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserName?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupType?: string
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AspectTaskId?: string
+  /**
+   * 数据目录名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
 }
 
 /**
@@ -15587,6 +15874,201 @@ export interface TaskDataRegistry {
 }
 
 /**
+ * 数据质量规则
+ */
+export interface QualityRuleInfo {
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 规则类型 
+1：系统模版
+2：自定义模版
+3：自定义SQL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: number
+  /**
+   * 数据源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId: string
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName: string
+  /**
+   * 报警触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompareRule: QualityCompareRule
+  /**
+   * 报警触发级别 1.低, 2.中, 3.高
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmLevel: number
+  /**
+   * 该规则支持的执行引擎列表，可选值如下：
+1 - MYSQL
+2 - HIVE
+4 - SPARK
+8 - LIVY
+16 - DLC
+32 - GBASE
+64 - TCHouse-P
+128 - DORIS
+256 - TCHouse-D
+512 - EMR_STARROCKS
+1024 - TCHouse-X
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceEngineTypes: Array<number | bigint>
+  /**
+   * 表名称，TableId和TableName至少填一个
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 规则模板id，【条件必填】当Type≠3（自定义SQL）时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateId?: number
+  /**
+   * 规则所属质量维度，Type=3（自定义SQL）时必填（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityDim?: number
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 规则组Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupId?: number
+  /**
+   * 数据表ID，TableId和TableName至少要有一个
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: string
+  /**
+   * 源数据对象（表、字段等）详细类型，【条件必填】当Type=1（系统模板）时必填
+表对应固定值“table”（模板是表级的）
+字段则是对应字段类型：int、string等（模板是字段级的）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceObjectDataTypeName?: string
+  /**
+   * 源数据对象（表、字段等）名称，【条件必填】当Type=1（系统模板）时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceObjectValue?: string
+  /**
+   * 检测范围，【条件必填】当Type=1（系统模板）或2（自定义模板）时必填。 
+1.全表
+2.条件扫描
+注意：CompareType为2（波动值）或 使用用户自定义模板时包含过滤条件${FILTER}时，检测范围必须为2条件扫描
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConditionType?: number
+  /**
+   * 条件扫描WHERE条件表达式，【条件必填】ConditionType=2(条件扫描)时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConditionExpression?: string
+  /**
+   * 自定义SQL（Base64编码），【条件必填】Type=3（自定义SQL）时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomSql?: string
+  /**
+   * 规则描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 数据库Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseId?: string
+  /**
+   * 目标库Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetDatabaseId?: string
+  /**
+   * 目标表Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetTableId?: string
+  /**
+   * 目标过滤条件表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetConditionExpr?: string
+  /**
+   * 源字段与目标字段关联条件on表达式，【条件必填】仅在字段数据相关性规则时必填（ruleTemplate中qualityDim=4(一致性) 且 subQualityDim=3(字段数据相关性)），例如sourceTable.model_id=targetTable.model_id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelConditionExpr?: string
+  /**
+   * 自定义模版sql表达式字段替换参数，【条件必填】Type=2（自定义模板）时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldConfig?: QualityRuleFieldConfig
+  /**
+   * 目标字段名称  CITY
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetObjectValue?: string
+  /**
+   * 下标，新增时区分不同数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: string
+  /**
+   * 模式名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
+  /**
+   * 目标schema名称，【条件必填】仅在系统模板的“字段数据相关性”规则以及数据源为TCHouse-P时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSchemaName?: string
+  /**
+   * 目标库名称，【条件必填】仅在系统模板的“字段数据相关性”规则时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetDatabaseName?: string
+  /**
+   * 目标表名称，【条件必填】仅在系统模板的“字段数据相关性”规则时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetTableName?: string
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 数据目录名称，主要用于dlc数据源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
+  /**
+   * 目标数据目录名称，【条件必填】仅在系统模板的“字段数据相关性”规则以及数据源为DLC时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetCatalogName?: string
+}
+
+/**
  * SetSuccessTaskInstancesAsync返回参数结构体
  */
 export interface SetSuccessTaskInstancesAsyncResponse {
@@ -15931,6 +16413,80 @@ export interface CodeStudioFolderActionResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
+}
+
+/**
+ * ListQualityRuleGroups请求参数结构体
+ */
+export interface ListQualityRuleGroupsRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 分页序号，默认1
+   */
+  PageNumber?: number
+  /**
+   * 分页大小，默认10
+   */
+  PageSize?: number
+  /**
+   * 过滤条件,每次请求的Filters的上限为10，Filter.Values的上限为5，可选过滤条件如下：
+
+1. RuleGroupId
+描述：规则组ID。
+取值：整数
+
+2. RuleGroupName
+描述：规则组名称。
+取值：字符串
+
+3. TableId
+描述：数据源表id
+取值：字符串
+
+4. TableName
+描述：数据源表名称，支持模糊匹配。
+取值：字符串
+
+5. TableOwnerName
+描述：表负责人名称，支持模糊匹配。
+取值：字符串
+
+
+6. DatasourceType
+描述：数据源类型。
+取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X
+
+7. DatasourceId
+描述：数据源ID。
+取值：字符串
+
+8. DatabaseName
+描述：数据库名称。
+取值：字符串
+
+9. SchemaName
+描述：Schema名称。
+取值：字符串
+
+10. CatalogName
+描述：数据目录名称。
+取值：字符串
+
+
+   */
+  Filters?: Array<Filter>
+  /**
+   * 通用排序，支持的排序字段：
+CreateTime - 按创建时间排序
+UpdateTime - 按更新时间排序（默认）
+排序方向：
+1 - 升序（ASC）
+2 - 降序（DESC）
+   */
+  OrderFields?: Array<OrderField>
 }
 
 /**
@@ -16292,6 +16848,42 @@ export interface QualitySqlExpression {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemTemplateExpressions?: Array<string>
+}
+
+/**
+ * 批量创建规则时的单条数据创建结果
+ */
+export interface QualityRuleCreateResult {
+  /**
+   * 操作结果文案
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Success?: boolean
+  /**
+   * 规则名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 规则组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupId?: number
+  /**
+   * 本地表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleGroupTableId?: number
+  /**
+   * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
 }
 
 /**
@@ -17331,7 +17923,7 @@ export interface QualityCompareRule {
    * 比较条件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<QualityCompareRuleItem>
+  Items: Array<QualityCompareRuleItem>
   /**
    * 周期性模板默认周期，单位秒
 注意：此字段可能返回 null，表示取不到有效值。

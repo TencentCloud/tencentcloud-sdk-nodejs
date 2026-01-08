@@ -3034,6 +3034,10 @@ export interface TrinoQueryInfo {
    * 写入字节数
    */
   WrittenBytes?: number
+  /**
+   * Error日志
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -6499,6 +6503,10 @@ export interface StarRocksQueryInfo {
    * 用户
    */
   User?: string
+  /**
+   * 错误码
+   */
+  ErrorCode?: string
 }
 
 /**

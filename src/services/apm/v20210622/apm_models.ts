@@ -1081,6 +1081,10 @@ export interface ApmAppConfig {
    * 脱敏规则
    */
   DesensitizationRule?: string
+  /**
+   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   */
+  LogSpanIdKey?: string
 }
 
 /**
@@ -1602,6 +1606,10 @@ export interface ModifyApmInstanceRequest {
    * URL数字分段收敛阈值
    */
   UrlNumberSegmentThreshold?: number
+  /**
+   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   */
+  LogSpanIdKey?: string
 }
 
 /**
@@ -2318,6 +2326,10 @@ export interface ApmInstanceDetail {
    * URL数字分段收敛阈值
    */
   UrlNumberSegmentThreshold?: number
+  /**
+   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   */
+  LogSpanIdKey?: string
 }
 
 /**
@@ -3010,6 +3022,10 @@ export interface ModifyApmApplicationConfigRequest {
    * 脱敏规则
    */
   DesensitizationRule?: string
+  /**
+   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   */
+  LogSpanIdKey?: string
 }
 
 /**

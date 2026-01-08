@@ -5837,6 +5837,16 @@ export interface RouteConflict {
 }
 
 /**
+ * ReplaceRoutesWithRoutePolicy返回参数结构体
+ */
+export interface ReplaceRoutesWithRoutePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSubnet返回参数结构体
  */
 export interface DeleteSubnetResponse {
@@ -6013,6 +6023,20 @@ export interface DeleteRoutePolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 匹配路由接收策略对象
+ */
+export interface ReplaceRoutesWithRoutePolicyRoute {
+  /**
+   * 路由唯一策略ID。
+   */
+  RouteItemId?: string
+  /**
+   * 匹配路由接收策略标记。
+   */
+  ForceMatchPolicy?: boolean
 }
 
 /**
@@ -16377,6 +16401,14 @@ export interface NetworkAclQuintupleEntry {
    * 方向，INGRESS或EGRESS，用于DescribeNetworkAclQuintupleEntries的出参。
    */
   NetworkAclDirection?: string
+  /**
+   * IPv6源CIDR。
+   */
+  SourceIPv6Cidr?: string
+  /**
+   * IPv6目的CIDR。
+   */
+  DestinationIPv6Cidr?: string
 }
 
 /**
@@ -19971,6 +20003,20 @@ export interface DescribeAddressBandwidthRangeRequest {
    * EIP资源ID列表，单次查询上限20，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
    */
   AddressIds?: Array<string>
+}
+
+/**
+ * ReplaceRoutesWithRoutePolicy请求参数结构体
+ */
+export interface ReplaceRoutesWithRoutePolicyRequest {
+  /**
+   * 路由表实例ID。
+   */
+  RouteTableId: string
+  /**
+   * 路由策略对象。需要指定路由策略唯一ID（RouteItemId）。
+   */
+  Routes: Array<ReplaceRoutesWithRoutePolicyRoute>
 }
 
 /**

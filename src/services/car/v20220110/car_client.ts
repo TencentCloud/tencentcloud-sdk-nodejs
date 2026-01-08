@@ -22,14 +22,16 @@ import {
   StopPublishStreamRequest,
   StartPublishStreamWithURLResponse,
   StopPublishStreamResponse,
-  StartPublishStreamWithURLRequest,
   DestroySessionResponse,
-  StartPublishStreamResponse,
+  StartPublishStreamWithURLRequest,
   ApplyConcurrentResponse,
-  ApplyConcurrentRequest,
-  DestroySessionRequest,
-  StartPublishStreamRequest,
+  StartPublishStreamResponse,
   CreateSessionRequest,
+  ApplyConcurrentRequest,
+  DescribeConcurrentCountResponse,
+  DestroySessionRequest,
+  DescribeConcurrentCountRequest,
+  StartPublishStreamRequest,
 } from "./car_models"
 
 /**
@@ -49,6 +51,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyConcurrentResponse) => void
   ): Promise<ApplyConcurrentResponse> {
     return this.request("ApplyConcurrent", req, cb)
+  }
+
+  /**
+   * 获取并发计数
+   */
+  async DescribeConcurrentCount(
+    req: DescribeConcurrentCountRequest,
+    cb?: (error: string, rep: DescribeConcurrentCountResponse) => void
+  ): Promise<DescribeConcurrentCountResponse> {
+    return this.request("DescribeConcurrentCount", req, cb)
   }
 
   /**

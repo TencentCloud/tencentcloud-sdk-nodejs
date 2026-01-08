@@ -3105,6 +3105,23 @@ export interface DescribeLivePushAuthKeyRequest {
 }
 
 /**
+ * DescribeCasterEmergencyStatus返回参数结构体
+ */
+export interface DescribeCasterEmergencyStatusResponse {
+  /**
+   * 备播状态，范围[0,1,2]
+0. 正常直播状态
+1. 备播状态
+2. 备播切换正常直播中，在配置了延播时长时出现
+   */
+  EmergencyStatus?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCasterTransitionTypes返回参数结构体
  */
 export interface DescribeCasterTransitionTypesResponse {
@@ -6081,6 +6098,16 @@ export interface DescribeLiveStreamMonitorRequest {
  * DescribeLiveSnapshotRules请求参数结构体
  */
 export type DescribeLiveSnapshotRulesRequest = null
+
+/**
+ * SwitchCasterToEmergency请求参数结构体
+ */
+export interface SwitchCasterToEmergencyRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
+}
 
 /**
  * DeleteLiveRecordRule返回参数结构体
@@ -10445,6 +10472,16 @@ export interface ModifyCasterRequest {
 }
 
 /**
+ * DescribeCasterEmergencyStatus请求参数结构体
+ */
+export interface DescribeCasterEmergencyStatusRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
+}
+
+/**
  * 某条流的推流质量详情数据。
  */
 export interface PushQualityData {
@@ -11956,6 +11993,23 @@ export interface ModifyLiveCallbackTemplateRequest {
    * 录制异常回调级别，可选择：error、warning、info。
    */
   RecordExceptionLevels?: Array<string>
+}
+
+/**
+ * SwitchCasterToEmergency返回参数结构体
+ */
+export interface SwitchCasterToEmergencyResponse {
+  /**
+   * 备播状态，范围[0,1,2]
+0. 正常直播状态
+1. 备播状态
+2. 备播切换正常直播中，在配置了延播时长时出现
+   */
+  EmergencyStatus?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

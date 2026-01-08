@@ -26,6 +26,7 @@ import {
   GetWorkflowFolderRequest,
   WorkflowInfo,
   ListTableResponse,
+  CreateQualityRuleRequest,
   CreateDataSourceRequest,
   GetResourceGroupMetricsResponse,
   DeleteWorkflowResponse,
@@ -188,6 +189,7 @@ import {
   GetTriggerWorkflowRunResponse,
   RegisterLineageResponse,
   ListTriggerWorkflowRunsResponse,
+  ListQualityRuleGroupsResponse,
   CreateCodeFileResponse,
   ListResourceGroupsResponse,
   UpdateResourceFolderRequest,
@@ -201,11 +203,14 @@ import {
   AuthorizeDataSourceRequest,
   ExploreAuthorizeSubject,
   GetTriggerTaskRunRequest,
+  QualityRuleGroupPage,
   SubmitTriggerTaskResponse,
   ListQualityRuleGroupExecResultsByPageResponse,
+  CreateQualityRuleVO,
   GetSQLFolderRequest,
   TaskFolder,
   AlarmWayWebHook,
+  CreateQualityRuleResponse,
   GetResourceFileResponse,
   GetTaskCodeRequest,
   CreateSQLScriptResponse,
@@ -293,6 +298,7 @@ import {
   RerunTriggerWorkflowRunAsyncRequest,
   QualityRuleTemplatePage,
   LineageProperty,
+  QualityRuleGroup,
   KillTriggerWorkflowRunsResponse,
   CreateTaskResponse,
   CreateWorkflowPermissionsResult,
@@ -557,6 +563,7 @@ import {
   DeleteLineageRequest,
   CreateOpsAlarmRuleRequest,
   TaskDataRegistry,
+  QualityRuleInfo,
   SetSuccessTaskInstancesAsyncResponse,
   UpdateSQLScriptRequest,
   ParamInfo,
@@ -572,6 +579,7 @@ import {
   KillTaskInstancesAsyncRequest,
   ListDataBackfillInstancesRequest,
   CodeStudioFolderActionResult,
+  ListQualityRuleGroupsRequest,
   TriggerTaskVersionDetail,
   UpdateTriggerTaskPartiallyResponse,
   Filter,
@@ -582,6 +590,7 @@ import {
   WorkflowMaxPermission,
   TaskSchedulerConfiguration,
   QualitySqlExpression,
+  QualityRuleCreateResult,
   UpdateWorkflowFolderResponse,
   DeleteDataSourceRequest,
   UpdateTaskBaseAttributePart,
@@ -1184,6 +1193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWorkflowsResponse) => void
   ): Promise<ListWorkflowsResponse> {
     return this.request("ListWorkflows", req, cb)
+  }
+
+  /**
+   * 创建质量规则接口
+   */
+  async CreateQualityRule(
+    req: CreateQualityRuleRequest,
+    cb?: (error: string, rep: CreateQualityRuleResponse) => void
+  ): Promise<CreateQualityRuleResponse> {
+    return this.request("CreateQualityRule", req, cb)
   }
 
   /**
@@ -2054,6 +2073,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetCodeFolderResponse) => void
   ): Promise<GetCodeFolderResponse> {
     return this.request("GetCodeFolder", req, cb)
+  }
+
+  /**
+     * 【过滤条件】
+{表idTableId,支持匹配}       {任务负责人Operator,支持匹配}    
+【必要字段】
+{数据来源TableId}
+     */
+  async ListQualityRuleGroups(
+    req: ListQualityRuleGroupsRequest,
+    cb?: (error: string, rep: ListQualityRuleGroupsResponse) => void
+  ): Promise<ListQualityRuleGroupsResponse> {
+    return this.request("ListQualityRuleGroups", req, cb)
   }
 
   /**

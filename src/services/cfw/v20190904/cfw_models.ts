@@ -3050,6 +3050,7 @@ export interface EdgeIpInfo {
    * 0: 该地域暂未支持串行
 1: 该用户未在该地域配置串行带宽
 2: 该用户已在该地域配置串行带宽，可以开启串行开关
+3. 该地域可以支持串行，但是未部署公共集群
    */
   IsSerialRegion?: number
   /**
@@ -3060,7 +3061,7 @@ export interface EdgeIpInfo {
   IsPublicClb?: number
   /**
    * 0: 开启开关时提示要创建私有连接。
-1: 关闭该开关是提示删除私有连接。
+1: 关闭该开关时提示删除私有连接。
 如果大于 1: 关闭开关 、开启开关不需提示创建删除私有连接。
    */
   EndpointBindEipNum?: number
@@ -3107,6 +3108,13 @@ export interface EdgeIpInfo {
    * IP超量状态
    */
   OverUsedStatus?: number
+  /**
+   * 0 都不支持
+1 支持旁路
+2 支持串行
+3 旁路串行都支持
+   */
+  SwitchSupportType?: number
 }
 
 /**

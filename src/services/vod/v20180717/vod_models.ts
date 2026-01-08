@@ -12866,7 +12866,7 @@ export interface SemanticsSearchResult {
    */
   StartTimeOffset?: number
   /**
-   * 视频片段的开始时间，单位：秒
+   * 视频片段的结束时间，单位：秒
    */
   EndTimeOffset?: number
 }

@@ -143,6 +143,7 @@ import {
   DescribeLiveTranscodeTotalInfoRequest,
   CommonMixCropParams,
   DescribeLivePushAuthKeyRequest,
+  DescribeCasterEmergencyStatusResponse,
   DescribeCasterTransitionTypesResponse,
   CreateCasterRequest,
   AddCasterOutputInfoRequest,
@@ -279,6 +280,7 @@ import {
   TimeShiftSubStream,
   DescribeLiveStreamMonitorRequest,
   DescribeLiveSnapshotRulesRequest,
+  SwitchCasterToEmergencyRequest,
   DeleteLiveRecordRuleResponse,
   DeleteLiveRecordRuleRequest,
   StopScreenshotTaskRequest,
@@ -453,6 +455,7 @@ import {
   ForbidLiveDomainResponse,
   DescribeLiveTimeShiftBillInfoListRequest,
   ModifyCasterRequest,
+  DescribeCasterEmergencyStatusRequest,
   PushQualityData,
   DescribeLiveCertRequest,
   DeleteCasterLayoutInfoRequest,
@@ -514,6 +517,7 @@ import {
   BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
   ModifyLiveCallbackTemplateRequest,
+  SwitchCasterToEmergencyResponse,
   DescribeMonitorReportRequest,
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
@@ -1982,6 +1986,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 该接口用来将导播台切换到备播状态。
+该接口使用时，主监任务需处于运行状态。
+     */
+  async SwitchCasterToEmergency(
+    req: SwitchCasterToEmergencyRequest,
+    cb?: (error: string, rep: SwitchCasterToEmergencyResponse) => void
+  ): Promise<SwitchCasterToEmergencyResponse> {
+    return this.request("SwitchCasterToEmergency", req, cb)
+  }
+
+  /**
      * 直播推流带宽和流量数据查询。
 推流计费会先取全球推流用量和全球播放用量进行比较，满足计费条件后再按各地区用量出账。详情参见[计费文档](https://cloud.tencent.com/document/product/267/34175)。
      */
@@ -2014,6 +2029,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ForbidLiveStreamResponse) => void
   ): Promise<ForbidLiveStreamResponse> {
     return this.request("ForbidLiveStream", req, cb)
+  }
+
+  /**
+   * 该接口用查询导播台的备播状态
+   */
+  async DescribeCasterEmergencyStatus(
+    req: DescribeCasterEmergencyStatusRequest,
+    cb?: (error: string, rep: DescribeCasterEmergencyStatusResponse) => void
+  ): Promise<DescribeCasterEmergencyStatusResponse> {
+    return this.request("DescribeCasterEmergencyStatus", req, cb)
   }
 
   /**

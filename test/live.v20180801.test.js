@@ -1388,6 +1388,16 @@ it("live.v20180801.DescribeScreenshotTask", async function () {
     }
 })
 
+it("live.v20180801.SwitchCasterToEmergency", async function () {
+    try {
+       const data = await client.SwitchCasterToEmergency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribePushBandwidthAndFluxList", async function () {
     try {
        const data = await client.DescribePushBandwidthAndFluxList({})
@@ -1411,6 +1421,16 @@ it("live.v20180801.DeleteScreenshotTask", async function () {
 it("live.v20180801.ForbidLiveStream", async function () {
     try {
        const data = await client.ForbidLiveStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeCasterEmergencyStatus", async function () {
+    try {
+       const data = await client.DescribeCasterEmergencyStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

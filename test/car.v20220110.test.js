@@ -28,6 +28,16 @@ it("car.v20220110.ApplyConcurrent", async function () {
     }
 })
 
+it("car.v20220110.DescribeConcurrentCount", async function () {
+    try {
+       const data = await client.DescribeConcurrentCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("car.v20220110.DestroySession", async function () {
     try {
        const data = await client.DestroySession({})

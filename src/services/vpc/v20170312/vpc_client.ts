@@ -304,6 +304,7 @@ import {
   DescribeCustomerGatewayVendorsResponse,
   DeleteCdcLDCXListRequest,
   RouteConflict,
+  ReplaceRoutesWithRoutePolicyResponse,
   DeleteSubnetResponse,
   DeleteGlobalRoutesRequest,
   Vpc,
@@ -312,6 +313,7 @@ import {
   FlowLogStorage,
   AllocateIp6AddressesBandwidthRequest,
   DeleteRoutePolicyResponse,
+  ReplaceRoutesWithRoutePolicyRoute,
   DescribeVpcIpv6AddressesResponse,
   ResetAttachCcnInstancesResponse,
   Ip6RuleInfo,
@@ -1010,6 +1012,7 @@ import {
   InquiryPriceCreateVpnGatewayRequest,
   HealthCheckConfig,
   DescribeAddressBandwidthRangeRequest,
+  ReplaceRoutesWithRoutePolicyRequest,
   CreateAssistantCidrResponse,
   CustomerGatewayVendor,
   DescribeAddressTemplatesRequest,
@@ -5677,6 +5680,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifyIp6AddressesBandwidthResponse) => void
   ): Promise<ModifyIp6AddressesBandwidthResponse> {
     return this.request("ModifyIp6AddressesBandwidth", req, cb)
+  }
+
+  /**
+   * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
+   */
+  async ReplaceRoutesWithRoutePolicy(
+    req: ReplaceRoutesWithRoutePolicyRequest,
+    cb?: (error: string, rep: ReplaceRoutesWithRoutePolicyResponse) => void
+  ): Promise<ReplaceRoutesWithRoutePolicyResponse> {
+    return this.request("ReplaceRoutesWithRoutePolicy", req, cb)
   }
 
   /**

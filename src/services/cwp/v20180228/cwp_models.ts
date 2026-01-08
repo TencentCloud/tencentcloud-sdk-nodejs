@@ -2437,6 +2437,10 @@ export interface PrivilegeEventInfo {
    * 处理时间
    */
   ModifyTime?: string
+  /**
+   * 告警数量
+   */
+  Count?: number
 }
 
 /**
@@ -10061,6 +10065,10 @@ export interface PrivilegeEscalationProcess {
    * 进程id
    */
   Pid?: number
+  /**
+   * 告警数量
+   */
+  Count?: number
 }
 
 /**

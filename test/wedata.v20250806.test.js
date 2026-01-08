@@ -568,6 +568,16 @@ it("wedata.v20250806.ListWorkflows", async function () {
     }
 })
 
+it("wedata.v20250806.CreateQualityRule", async function () {
+    try {
+       const data = await client.CreateQualityRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.GetProject", async function () {
     try {
        const data = await client.GetProject({})
@@ -1431,6 +1441,16 @@ it("wedata.v20250806.UpdateTriggerTask", async function () {
 it("wedata.v20250806.GetCodeFolder", async function () {
     try {
        const data = await client.GetCodeFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20250806.ListQualityRuleGroups", async function () {
+    try {
+       const data = await client.ListQualityRuleGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
