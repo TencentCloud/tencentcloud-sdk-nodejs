@@ -502,6 +502,10 @@ export interface CreateTranscodeTemplateRequest {
    */
   TEHDConfig?: TEHDConfig
   /**
+   * 音视频增强配置。
+   */
+  EnhanceConfig?: EnhanceConfig
+  /**
    * 切片类型，当 Container 为 hls 时有效，可选值：
 <li>ts：ts 切片；</li>
 <li>fmp4：fmp4 切片。</li>
@@ -1207,6 +1211,22 @@ export interface ModifyJustInTimeTranscodeTemplateRequest {
 export type DescribePrepaidProductsRequest = null
 
 /**
+ * 音视频增强配置
+ */
+export interface EnhanceConfig {
+  /**
+   * 视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoEnhance?: VideoEnhanceConfig
+  /**
+   * 音频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioEnhance?: AudioEnhanceConfig
+}
+
+/**
  * 要处理的源视频信息，视频名称、视频自定义 ID。
  */
 export interface MediaInputInfo {
@@ -1700,6 +1720,41 @@ export interface RefreshUrlCacheRequest {
 }
 
 /**
+ * 人脸识别任务控制参数
+ */
+export interface FaceConfigureInfoForUpdate {
+  /**
+   * 人脸识别任务开关，可选值：
+<li>ON：开启智能人脸识别任务；</li>
+<li>OFF：关闭智能人脸识别任务。</li>
+   */
+  Switch?: string
+  /**
+   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
+   */
+  Score?: number
+  /**
+   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星；</li>
+<li>politician：相关人物。</li>
+   */
+  DefaultLibraryLabelSet?: Array<string>
+  /**
+   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
+   */
+  UserDefineLibraryLabelSet?: Array<string>
+  /**
+   * 人物库选择，可选值：
+<li>Default：使用默认人物库；</li>
+<li>UserDefine：使用用户自定义人物库。</li>
+<li>All：同时使用默认人物库和用户自定义人物库。</li>
+   */
+  FaceLibrary?: string
+}
+
+/**
  * 音视频审核模板详情
  */
 export interface ContentReviewTemplateItem {
@@ -1805,6 +1860,75 @@ export interface DeleteAIRecognitionTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频增强配置。
+ */
+export interface VideoEnhanceConfig {
+  /**
+   * 增强场景配置，可选值：
+<li>common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。</li>
+<li>AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。</li>
+<li>short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。</li>
+<li>short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。</li>
+<li>game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。</li>
+<li>HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。</li>
+<li>LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。</li>
+<li>lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。</li>
+<li>填空字符串代表不使用增强场景</li>
+   */
+  EnhanceScenarioType?: string
+  /**
+   * 超分配置。源分辨率高于目标分辨率时不对视频做处理。注意与大模型增强不可同时开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuperResolution?: SuperResolutionInfo
+  /**
+   * HDR配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hdr?: HDRInfo
+  /**
+   * 视频降噪配置。注意与大模型增强不可同时开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Denoise?: VideoDenoiseInfo
+  /**
+   * 综合增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageQualityEnhance?: ImageQualityEnhanceInfo
+  /**
+   * 色彩增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColorEnhance?: ColorEnhanceInfo
+  /**
+   * 低光照增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowLightEnhance?: LowLightEnhanceInfo
+  /**
+   * 去划痕配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScratchRepair?: ScratchRepairInfo
+  /**
+   * 去伪影（毛刺）配置。注意大模型、综合增强、去毛刺三项里最多配置一项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArtifactRepair?: ArtifactRepairInfo
+  /**
+   * 大模型增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiffusionEnhance?: DiffusionEnhanceInfo
+  /**
+   * 插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameRateWithDen?: FrameRateWithDenInfo
 }
 
 /**
@@ -2292,6 +2416,26 @@ export interface ModifySubAppIdInfoRequest {
    * 应用简介，长度限制： 300个字符。
    */
   Description?: string
+}
+
+/**
+ * 大模型增强配置。
+ */
+export interface DiffusionEnhanceInfo {
+  /**
+   * 大模型增强开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 强度类型，仅当大模型增强控制开关为 ON 时有效，可选值：
+<li>weak：弱；</li>
+<li>normal：正常；</li>
+<li>strong：强。</li>
+默认值：normal。
+   */
+  Type?: string
 }
 
 /**
@@ -2932,38 +3076,22 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
 }
 
 /**
- * 人脸识别任务控制参数
+ * 音频美化配置。
  */
-export interface FaceConfigureInfoForUpdate {
+export interface AudioBeautifyInfo {
   /**
-   * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
+   * 音频美化控制开关，可选值：
+<li>ON：开启音频美化；</li>
+<li>OFF：关闭音频美化。</li>
    */
-  Switch?: string
+  Switch: string
   /**
-   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
+   * 类型，可多选，可选值：
+<li>declick：杂音去除</li>
+<li>deesser：齿音压制</li>
+默认值：declick。
    */
-  Score?: number
-  /**
-   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainment：娱乐明星；</li>
-<li>sport：体育明星；</li>
-<li>politician：相关人物。</li>
-   */
-  DefaultLibraryLabelSet?: Array<string>
-  /**
-   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 100 个，每个标签长度最多 16 个字符。
-   */
-  UserDefineLibraryLabelSet?: Array<string>
-  /**
-   * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
-   */
-  FaceLibrary?: string
+  Types?: Array<string>
 }
 
 /**
@@ -3033,6 +3161,10 @@ export interface ModifyTranscodeTemplateRequest {
    * 极速高清转码参数。
    */
   TEHDConfig?: TEHDConfigForUpdate
+  /**
+   * 音视频增强配置。
+   */
+  EnhanceConfig?: EnhanceConfigForUpdate
   /**
    * 切片类型，当 Container 为 hls 时有效，可选值：
 <li>ts：ts 切片；</li>
@@ -4964,6 +5096,26 @@ export interface ModifyMediaInfoRequest {
 }
 
 /**
+ * 插帧帧率配置。
+ */
+export interface FrameRateWithDenInfo {
+  /**
+   * 插帧帧率配置控制开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 帧率分子，取值范围：非负数，除以分母后小于100，单位：Hz。 默认值 0。 注意：对于转码，该参数会覆盖 VideoTemplate 内部的 Fps。
+   */
+  FpsNum?: number
+  /**
+   * 帧率分母，取值范围：大于等于1。 默认值 1。
+   */
+  FpsDen?: number
+}
+
+/**
  * 溯源水印参数
  */
 export interface TraceWatermarkInput {
@@ -5300,6 +5452,16 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
 }
 
 /**
+ * ModifyReviewTemplate返回参数结构体
+ */
+export interface ModifyReviewTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 小程序音视频审核信息单元
  */
 export interface MediaMiniProgramReviewInfoItem {
@@ -5508,7 +5670,6 @@ export interface SuperResolutionInfo {
    * 画面超分控制开关，可选值：
 <li>ON：开启画面超分；</li>
 <li>OFF：关闭画面超分。</li>
-当开启画面超分时，默认2倍超分。
    */
   Switch: string
   /**
@@ -9570,28 +9731,22 @@ export interface ManageTaskRequest {
 }
 
 /**
- * 轮播播放节目信息
+ * 音量均衡配置。
  */
-export interface RoundPlayListItemInfo {
+export interface AudioVolumeBalanceInfo {
   /**
-   * 媒体文件标识。
+   * 音量均衡控制开关，可选值：
+<li>ON：开启音量均衡；</li>
+<li>OFF：关闭音量均衡。</li>
    */
-  FileId: string
+  Switch: string
   /**
-   * 播放的音视频类型，可选值：
-<li>Transcode：转码输出；转码输出会有多个模版，必须指定 Definition 字段</li>
-<li>Original：原始音视频。</li>
-Type 对应的格式必须为 HLS 格式。
+   * 类型，可选值：
+<li>loudNorm：响度标准化</li>
+<li>gainControl：减小突变</li>
+默认值：loudNorm。
    */
-  AudioVideoType: string
-  /**
-   * 播放节目的 ID，由系统分配。
-   */
-  ItemId?: string
-  /**
-   * 指定播放的转码模板，当 AudioVideoType 为 Transcode 时必须指定。
-   */
-  Definition?: number
+  Type?: string
 }
 
 /**
@@ -10218,6 +10373,22 @@ export interface MediaDeleteItem {
 默认值为0，表示删除参数Type指定种类下所有的视频。
    */
   Definition?: number
+}
+
+/**
+ * 音视频增强配置
+ */
+export interface EnhanceConfigForUpdate {
+  /**
+   * 视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoEnhance?: VideoEnhanceConfig
+  /**
+   * 音频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioEnhance?: AudioEnhanceConfig
 }
 
 /**
@@ -10956,6 +11127,45 @@ export interface TerrorismConfigureInfoForUpdate {
    * 文本鉴别涉及令人不安全的信息的任务控制参数。
    */
   OcrReviewInfo?: TerrorismOcrReviewTemplateInfoForUpdate
+}
+
+/**
+ * DescribePersonSamples请求参数结构体
+ */
+export interface DescribePersonSamplesRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 拉取的素材类型，可选值：
+<li>UserDefine：用户自定义素材库；</li>
+<li>Default：系统默认素材库。</li>
+
+默认值：UserDefine，拉取用户自定义素材库素材。
+说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且五官图片只返回一张。
+   */
+  Type?: string
+  /**
+   * 素材 ID，数组长度限制：100。
+   */
+  PersonIds?: Array<string>
+  /**
+   * 素材名称，数组长度限制：20。
+   */
+  Names?: Array<string>
+  /**
+   * 素材标签，数组长度限制：20。
+   */
+  Tags?: Array<string>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：100，最大值：100。
+   */
+  Limit?: number
 }
 
 /**
@@ -12132,13 +12342,29 @@ export interface AiReviewTerrorismTaskOutput {
 }
 
 /**
- * ModifyReviewTemplate返回参数结构体
+ * 音频分离配置。
  */
-export interface ModifyReviewTemplateResponse {
+export interface AudioSeparateInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 音频分离控制开关，可选值：
+<li>ON：开启音频分离；</li>
+<li>OFF：关闭音频分离。</li>
    */
-  RequestId?: string
+  Switch: string
+  /**
+   * 场景类型，可选值：
+<li>normal：人声背景声场景</li>
+<li>music：演唱伴奏场景</li>
+默认值：normal。
+   */
+  Type?: string
+  /**
+   * 输出音轨，可选值：
+<li>vocal：输出人声</li>
+<li>background：应用场景为normal时输出背景声，应用场景为music时输出伴奏</li>
+默认值：vocal。
+   */
+  Track?: string
 }
 
 /**
@@ -14193,6 +14419,11 @@ export interface TranscodeTemplate {
    */
   TEHDConfig?: TEHDConfig
   /**
+   * 音视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnhanceConfig?: EnhanceConfig
+  /**
    * 封装格式过滤条件，可选值：
 <li>Video：视频格式，可以同时包含视频流和音频流的封装格式；</li>
 <li>PureAudio：纯音频格式，只能包含音频流的封装格式板。</li>
@@ -14852,6 +15083,11 @@ export interface AdaptiveStreamTemplate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TEHDConfig?: TEHDConfig
+  /**
+   * 音视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnhanceConfig?: EnhanceConfig
 }
 
 /**
@@ -17922,6 +18158,26 @@ export interface ReduceMediaBitrateMediaProcessTaskResult {
 }
 
 /**
+ * 综合增强控制
+ */
+export interface ImageQualityEnhanceInfo {
+  /**
+   * 综合增强控制开关，可选值：
+<li>ON：开启综合增强；</li>
+<li>OFF：关闭综合增强。</li>
+   */
+  Switch: string
+  /**
+   * 综合增强类型，仅当综合增强控制开关为 ON 时有效，可选值：
+<li>weak：轻综合增强；</li>
+<li>normal：正常综合增强；</li>
+<li>strong：强综合增强。</li>
+默认值：weak。
+   */
+  Type?: string
+}
+
+/**
  * 文本全文识别输入。
  */
 export interface AiRecognitionTaskOcrFullTextResultInput {
@@ -18778,10 +19034,8 @@ export interface AudioDenoiseInfo {
   Switch: string
   /**
    * 音频降噪类型，仅当音频降噪控制开关为 ON 时有效，可选值：
-<li>weak：轻音频降噪；</li>
 <li>normal：正常音频降噪；</li>
-<li>strong：强音频降噪。</li>
-默认值：weak。
+默认值：normal。
    */
   Type?: string
 }
@@ -18894,6 +19148,31 @@ export interface MediaAudioStreamItem {
    * 音频流的编码格式，例如 aac。
    */
   Codec?: string
+}
+
+/**
+ * 轮播播放节目信息
+ */
+export interface RoundPlayListItemInfo {
+  /**
+   * 媒体文件标识。
+   */
+  FileId: string
+  /**
+   * 播放的音视频类型，可选值：
+<li>Transcode：转码输出；转码输出会有多个模版，必须指定 Definition 字段</li>
+<li>Original：原始音视频。</li>
+Type 对应的格式必须为 HLS 格式。
+   */
+  AudioVideoType: string
+  /**
+   * 播放节目的 ID，由系统分配。
+   */
+  ItemId?: string
+  /**
+   * 指定播放的转码模板，当 AudioVideoType 为 Transcode 时必须指定。
+   */
+  Definition?: number
 }
 
 /**
@@ -19713,6 +19992,19 @@ export interface DescribeTranscodeTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
+  /**
+   * 增强类型，可选值：
+<li>VideoEnhance（仅视频增强）</li>
+<li>AudioEnhance（仅音频增强）</li>
+<li>AudioVideoEnhance（音视频增强）</li>
+<li>AnyEnhance（包括仅视频增强、仅音频增强、音视频增强）</li>
+<li>None（非增强）</li>
+   */
+  EnhanceType?: string
+  /**
+   * 增强场景配置，可选值： <li>common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。</li> <li>AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。</li> <li>short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。</li> <li>short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。</li> <li>game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。</li> <li>HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。</li> <li>LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。</li> <li>lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。</li>
+   */
+  EnhanceScenarioType?: string
 }
 
 /**
@@ -22488,42 +22780,29 @@ export interface AiRecognitionTaskHeadTailResult {
 }
 
 /**
- * DescribePersonSamples请求参数结构体
+ * 音频增强配置。
  */
-export interface DescribePersonSamplesRequest {
+export interface AudioEnhanceConfig {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 音频降噪配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubAppId?: number
+  Denoise?: AudioDenoiseInfo
   /**
-   * 拉取的素材类型，可选值：
-<li>UserDefine：用户自定义素材库；</li>
-<li>Default：系统默认素材库。</li>
-
-默认值：UserDefine，拉取用户自定义素材库素材。
-说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且五官图片只返回一张。
+   * 音频分离配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type?: string
+  Separate?: AudioSeparateInfo
   /**
-   * 素材 ID，数组长度限制：100。
+   * 音量均衡配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PersonIds?: Array<string>
+  VolumeBalance?: AudioVolumeBalanceInfo
   /**
-   * 素材名称，数组长度限制：20。
+   * 音量美化配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Names?: Array<string>
-  /**
-   * 素材标签，数组长度限制：20。
-   */
-  Tags?: Array<string>
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：100，最大值：100。
-   */
-  Limit?: number
+  Beautify?: AudioBeautifyInfo
 }
 
 /**
@@ -23191,7 +23470,7 @@ export interface HDRInfo {
 
 注意：
 <li> 仅当高动态范围类型控制开关为 ON 时有效；</li>
-<li>当画质重生目标参数中指定视频输出参数的视频流编码格式 Codec 为 libx265 时有效。</li>
+<li>当目标参数中指定视频输出参数的视频流编码格式 Codec 为 libx264、libx265 时有效。</li>
    */
   Type?: string
 }

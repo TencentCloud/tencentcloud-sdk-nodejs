@@ -108,9 +108,29 @@ it("dataagent.v20250513.ModifyKnowledgeBase", async function () {
     }
 })
 
+it("dataagent.v20250513.ModifyUserAuthority", async function () {
+    try {
+       const data = await client.ModifyUserAuthority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.DeleteDataAgentSession", async function () {
     try {
        const data = await client.DeleteDataAgentSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.QueryUserAuthority", async function () {
+    try {
+       const data = await client.QueryUserAuthority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

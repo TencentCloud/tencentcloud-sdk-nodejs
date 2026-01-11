@@ -25,6 +25,7 @@ import {
   ChatAIResponse,
   DeleteChunkRequest,
   GetSessionDetailsResponse,
+  ModelUserAuthority,
   ModifyChunkRequest,
   QueryChunkListResponse,
   GetJobsByKnowledgeBaseIdRequest,
@@ -33,11 +34,13 @@ import {
   StopChatAIRequest,
   StepExpand,
   GetSessionDetailsRequest,
+  QueryUserAuthorityResponse,
   ModifyKnowledgeBaseRequest,
   DeleteChunkResponse,
   CreateDataAgentSessionResponse,
   CosFileInfo,
   KnowledgeBase,
+  ModifyUserAuthorityRequest,
   GetJobsByKnowledgeBaseIdResponse,
   StopChatAIResponse,
   GetUploadJobDetailsResponse,
@@ -46,9 +49,11 @@ import {
   GetKnowledgeBaseFileListResponse,
   Record,
   ChatAIRequest,
+  QueryUserAuthorityRequest,
   FileInfo,
   GetKnowledgeBaseFileListRequest,
   GetUploadJobDetailsRequest,
+  ModifyUserAuthorityResponse,
   AddChunkResponse,
   StepInfo,
   GetKnowledgeBaseListResponse,
@@ -161,6 +166,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改对象权限
+   */
+  async ModifyUserAuthority(
+    req: ModifyUserAuthorityRequest,
+    cb?: (error: string, rep: ModifyUserAuthorityResponse) => void
+  ): Promise<ModifyUserAuthorityResponse> {
+    return this.request("ModifyUserAuthority", req, cb)
+  }
+
+  /**
    * 删除会话
    */
   async DeleteDataAgentSession(
@@ -168,6 +183,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDataAgentSessionResponse) => void
   ): Promise<DeleteDataAgentSessionResponse> {
     return this.request("DeleteDataAgentSession", req, cb)
+  }
+
+  /**
+   * 查询对象权限
+   */
+  async QueryUserAuthority(
+    req?: QueryUserAuthorityRequest,
+    cb?: (error: string, rep: QueryUserAuthorityResponse) => void
+  ): Promise<QueryUserAuthorityResponse> {
+    return this.request("QueryUserAuthority", req, cb)
   }
 
   /**

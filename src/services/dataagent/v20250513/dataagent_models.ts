@@ -142,6 +142,44 @@ export interface GetSessionDetailsResponse {
 }
 
 /**
+ * 用户对象的权限
+ */
+export interface ModelUserAuthority {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 模块，分为知识库knowledge、数据源datasource、自定义场景scene
+   */
+  Module?: string
+  /**
+   * 对象创建者
+   */
+  CreatorUin?: string
+  /**
+   * 对象id,分为知识库id、数据源id、场景id
+   */
+  ObjectId?: string
+  /**
+   * 作用范围：1仅自己使用，2指定用户，0全员
+   */
+  UseScope?: number
+  /**
+   * 可使用的用户列表
+   */
+  AuthorityUins?: Array<string>
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
  * ModifyChunk请求参数结构体
  */
 export interface ModifyChunkRequest {
@@ -314,6 +352,20 @@ export interface GetSessionDetailsRequest {
 }
 
 /**
+ * QueryUserAuthority返回参数结构体
+ */
+export interface QueryUserAuthorityResponse {
+  /**
+   * 对象权限信息
+   */
+  ModelUserAuthority?: ModelUserAuthority
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyKnowledgeBase请求参数结构体
  */
 export interface ModifyKnowledgeBaseRequest {
@@ -422,6 +474,20 @@ export interface KnowledgeBase {
    * 知识库关联的数据库列表，目前是只绑定一个数据源，数组预留拓展
    */
   DatasourceIds?: Array<string>
+}
+
+/**
+ * ModifyUserAuthority请求参数结构体
+ */
+export interface ModifyUserAuthorityRequest {
+  /**
+   * 作用范围：1仅自己使用，2指定用户，0全员
+   */
+  UseScope?: number
+  /**
+   * 可使用的用户列表，UseScope=0/1,取值为[]
+   */
+  AuthorityUins?: Array<string>
 }
 
 /**
@@ -633,6 +699,11 @@ export interface ChatAIRequest {
 }
 
 /**
+ * QueryUserAuthority请求参数结构体
+ */
+export type QueryUserAuthorityRequest = null
+
+/**
  * 知识库文件信息
  */
 export interface FileInfo {
@@ -722,6 +793,16 @@ export interface GetUploadJobDetailsRequest {
    * 任务id
    */
   JobId?: string
+}
+
+/**
+ * ModifyUserAuthority返回参数结构体
+ */
+export interface ModifyUserAuthorityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -110,103 +110,95 @@ export interface TaskInfoDetail {
  */
 export interface CreateInstancesRequest {
   /**
-   * 产品版本。
-14：当前仅支持混合存储版。
+   * <p>产品版本。14：极速版。</p>
    */
   TypeId: number
   /**
-   * 私有网络唯一ID。
-请登录控制台在私有网络列表查询，如：vpc-azlk3***。
+   * <p>私有网络唯一ID。请登录控制台在私有网络列表查询，如：vpc-azlk3***。</p>
    */
   UniqVpcId: string
   /**
-   * 私有网络所属子网唯一ID。
-请登录控制台在私有网络列表查询，如：subnet-8abje***。
+   * <p>私有网络所属子网唯一ID。请登录控制台在私有网络列表查询，如：subnet-8abje***。</p>
    */
   UniqSubnetId: string
   /**
-   * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
+   * <p>计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul></p>
    */
   BillingMode: number
   /**
-   * 实例数量，单次最大购买数量以查询产品售卖规格返回的数量为准。
+   * <p>实例数量，单次最大购买数量以查询产品售卖规格返回的数量为准。</p>
    */
   GoodsNum: number
   /**
-   * 选择包年包月计费模式（BillingMode 设置为1）时，您需要选择购买实例的时长。单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。按量计费（BillingMode 设置为0）实例该参数设置为1即可。
+   * <p>选择包年包月计费模式（BillingMode 设置为1）时，您需要选择购买实例的时长。单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。按量计费（BillingMode 设置为0）实例该参数设置为1即可。</p>
    */
   Period: number
   /**
-   * 分片数量，支持选择3、5、6、8、9、10、12、15、16、18、20、21、24、25、27、30、32、33、35、36、39、40、42、45、48、50、51、54、55、56、57、60、63、64分片。
+   * <p>分片数量，支持选择3、5、6、8、9、10、12、15、16、18、20、21、24、25、27、30、32、33、35、36、39、40、42、45、48、50、51、54、55、56、57、60、63、64分片。</p>
    */
   ShardNum: number
   /**
-   * 副本数。当前仅支持设置1个副本节点，即每一个分片仅包含1个主节点与1个副本节点，数据主从实时热备。
+   * <p>副本数。当前仅支持设置1个副本节点，即每一个分片仅包含1个主节点与1个副本节点，数据主从实时热备。</p>
    */
   ReplicasNum: number
   /**
-   * 实例内存容量，单位：GB。
-KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。
+   * <p>实例内存容量，单位：GB。KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
    */
   MachineMemory: number
   /**
-   * 实例所属的可用区ID。<ul><li>具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></ul>
+   * <p>实例所属的可用区ID。<ul><li>具体取值，请参见<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a>获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></ul></p>
    */
   ZoneId?: number
   /**
-   * 实例所属的可用区名称。<ul><li>具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></ul>
+   * <p>实例所属的可用区名称。<ul><li>具体取值，请参见<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a>获取。</li><li>参数<b>ZoneId</b>和<b>ZoneName</b>至少配置其中一个。</li></ul></p>
    */
   ZoneName?: string
   /**
-   * 创建实例的名称。
-仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。
+   * <p>创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。</p>
    */
   InstanceName?: string
   /**
-   * 指明创建的实例是否需要支持免密访问。<ul><li>true：免密实例。</li><li>false：非免密实例，默认为非免密实例。此时，需要设置访问密码。</li></ul>
+   * <p>指明创建的实例是否需要支持免密访问。<ul><li>true：免密实例。</li><li>false：非免密实例，默认为非免密实例。此时，需要设置访问密码。</li></ul></p>
    */
   NoAuth?: boolean
   /**
-   * 实例访问密码。<ul><li>当参数<b>NoAuth</b>为<b>true</b>时，Password为无需设置，否则Password为必填参数。</li>
-<li>密码复杂度要求：<ul><li>8-30个字符。</li><li>至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种。</li><li>不能以"/"开头。</li></ul></li></ul>
+   * <p>实例访问密码。<ul><li>当参数<b>NoAuth</b>为<b>true</b>时，Password为无需设置，否则Password为必填参数。</li><li>密码复杂度要求：<ul><li>8-30个字符。</li><li>至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种。</li><li>不能以"/"开头。</li></ul></li></ul></p>
    */
   Password?: string
   /**
-   * 自定义端口。默认为6379，范围[1024,65535]。
+   * <p>自定义端口。默认为6379，范围[1024,65535]。</p>
    */
   VPort?: number
   /**
-   * 包年包月计费的续费模式。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</li></ul>
+   * <p>包年包月计费的续费模式。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</li></ul></p>
    */
   AutoRenew?: number
   /**
-   * 给实例设置安全组 ID 数组。
+   * <p>给实例设置安全组 ID 数组。</p>
    */
   SecurityGroupIdList?: Array<string>
   /**
-   * 给实例绑定标签。
+   * <p>给实例绑定标签。</p>
    */
   ResourceTags?: Array<ResourceTag>
   /**
-   * 混合存储版，单分片持久化内存容量，单位：GB。
-KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。
+   * <p>混合存储版，单分片持久化内存容量，单位：GB。KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
    */
   MemSize?: number
   /**
-   * 每个分片硬盘的容量。单位：GB。
-每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。
+   * <p>每个分片硬盘的容量。单位：GB。每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
    */
   DiskSize?: number
   /**
-   * 计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。
+   * <p>计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
    */
   MachineCpu?: number
   /**
-   * 项目id，取值以用户账户>用户账户相关接口查询>项目列表返回的projectId为准。
+   * <p>项目id，取值以用户账户&gt;用户账户相关接口查询&gt;项目列表返回的projectId为准。</p>
    */
   ProjectId?: number
   /**
-   * 数据压缩开关。<ul><li>ON：开启，默认开启压缩。</li><li>OFF：关闭。</li></ul>
+   * <p>数据压缩开关。<ul><li>ON：开启，默认开启压缩。</li><li>OFF：关闭。</li></ul></p>
    */
   Compression?: string
 }
@@ -1082,16 +1074,16 @@ export interface DescribeTaskListRequest {
  */
 export interface CreateInstancesResponse {
   /**
-   * 交易 ID。
+   * <p>交易 ID。</p>
    * @deprecated
    */
   DealId?: string
   /**
-   * 实例 ID 。
+   * <p>实例 ID 。</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 订单号。
+   * <p>订单号。    </p>
    */
   DealName?: string
   /**
