@@ -658,6 +658,16 @@ it("cls.v20201016.ApplyConfigToMachineGroup", async function () {
     }
 })
 
+it("cls.v20201016.CreateDashboard", async function () {
+    try {
+       const data = await client.CreateDashboard({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteAlarmShield", async function () {
     try {
        const data = await client.DeleteAlarmShield({})
@@ -708,9 +718,9 @@ it("cls.v20201016.OpenKafkaConsumer", async function () {
     }
 })
 
-it("cls.v20201016.CreateDashboardSubscribe", async function () {
+it("cls.v20201016.DeleteDashboard", async function () {
     try {
-       const data = await client.CreateDashboardSubscribe({})
+       const data = await client.DeleteDashboard({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -731,6 +741,16 @@ it("cls.v20201016.ModifyShipper", async function () {
 it("cls.v20201016.ModifyDashboardSubscribe", async function () {
     try {
        const data = await client.ModifyDashboardSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyDashboard", async function () {
+    try {
+       const data = await client.ModifyDashboard({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +928,9 @@ it("cls.v20201016.DescribeLogsets", async function () {
     }
 })
 
-it("cls.v20201016.DescribeShipperTasks", async function () {
+it("cls.v20201016.CreateDashboardSubscribe", async function () {
     try {
-       const data = await client.DescribeShipperTasks({})
+       const data = await client.CreateDashboardSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,9 +1078,9 @@ it("cls.v20201016.DeleteNoticeContent", async function () {
     }
 })
 
-it("cls.v20201016.DescribeDataTransformInfo", async function () {
+it("cls.v20201016.DeleteConsoleSharing", async function () {
     try {
-       const data = await client.DescribeDataTransformInfo({})
+       const data = await client.DeleteConsoleSharing({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,9 +1198,9 @@ it("cls.v20201016.SplitPartition", async function () {
     }
 })
 
-it("cls.v20201016.DeleteConsoleSharing", async function () {
+it("cls.v20201016.DescribeDataTransformInfo", async function () {
     try {
-       const data = await client.DeleteConsoleSharing({})
+       const data = await client.DescribeDataTransformInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1231,6 +1251,16 @@ it("cls.v20201016.ModifyTopic", async function () {
 it("cls.v20201016.DescribeDashboardSubscribes", async function () {
     try {
        const data = await client.DescribeDashboardSubscribes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeShipperTasks", async function () {
+    try {
+       const data = await client.DescribeShipperTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

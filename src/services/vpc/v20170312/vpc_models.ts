@@ -1354,6 +1354,10 @@ export interface AddBandwidthPackageResourcesRequest {
    * 带宽包协议类型。当前支持'ipv4'和'ipv6'协议类型。
    */
   Protocol?: string
+  /**
+   * 用于带宽包内添加IP资源时指定IP带宽值。<p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
+   */
+  InternetMaxBandwidthOut?: number
 }
 
 /**
@@ -16284,6 +16288,10 @@ export interface CCN {
    */
   InstanceChargeType?: string
   /**
+   * 计量类型
+   */
+  InstanceMeteringType?: string
+  /**
    * 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。
    */
   BandwidthLimitType?: string
@@ -16997,6 +17005,14 @@ export interface RemoveBandwidthPackageResourcesRequest {
 <li>LoadBalance：负载均衡</li>
    */
   ResourceType?: string
+  /**
+   * 用于移除带宽包内IP资源时指定IP的带宽值。<p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 用于移除带宽包内IP资源时指定资源移除后的计费模式。<li>小时流量：TRAFFIC_POSTPAID_BY_HOUR；</li><li>小时带宽：BANDWIDTH_POSTPAID_BY_HOUR</li><p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
+   */
+  InternetChargeType?: string
 }
 
 /**

@@ -27,12 +27,14 @@ import {
   DescribeSandboxToolListRequest,
   CreateSandboxToolRequest,
   HttpGetAction,
+  DescribePreCacheImageTaskResponse,
   DeleteAPIKeyResponse,
   APIKeyInfo,
   UpdateSandboxInstanceResponse,
+  DescribePreCacheImageTaskRequest,
   StorageSource,
   ResourceConfiguration,
-  DeleteSandboxToolRequest,
+  CreateSandboxToolResponse,
   CreateAPIKeyRequest,
   NetworkConfiguration,
   DeleteSandboxToolResponse,
@@ -45,19 +47,21 @@ import {
   ImageStorageSource,
   AcquireSandboxInstanceTokenRequest,
   DescribeAPIKeyListResponse,
+  CreatePreCacheImageTaskResponse,
   DescribeSandboxInstanceListRequest,
   CustomConfigurationDetail,
   DescribeAPIKeyListRequest,
   UpdateSandboxInstanceRequest,
-  CreateSandboxToolResponse,
+  DeleteSandboxToolRequest,
   UpdateSandboxToolResponse,
   VPCConfig,
   DeleteAPIKeyRequest,
   AcquireSandboxInstanceTokenResponse,
   ProbeConfiguration,
-  StorageMount,
+  CreatePreCacheImageTaskRequest,
   Tag,
   UpdateSandboxToolRequest,
+  StorageMount,
   EnvVar,
   DescribeSandboxInstanceListResponse,
   StopSandboxInstanceResponse,
@@ -70,6 +74,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ags.tencentcloudapi.com", "2025-09-20", clientConfig)
+  }
+
+  /**
+   * 创建镜像预热任务
+   */
+  async CreatePreCacheImageTask(
+    req: CreatePreCacheImageTaskRequest,
+    cb?: (error: string, rep: CreatePreCacheImageTaskResponse) => void
+  ): Promise<CreatePreCacheImageTaskResponse> {
+    return this.request("CreatePreCacheImageTask", req, cb)
   }
 
   /**
@@ -104,6 +118,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询镜像预热任务信息
+   */
+  async DescribePreCacheImageTask(
+    req: DescribePreCacheImageTaskRequest,
+    cb?: (error: string, rep: DescribePreCacheImageTaskResponse) => void
+  ): Promise<DescribePreCacheImageTaskResponse> {
+    return this.request("DescribePreCacheImageTask", req, cb)
+  }
+
+  /**
    * 查询沙箱工具列表
    */
   async DescribeSandboxToolList(
@@ -111,16 +135,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSandboxToolListResponse) => void
   ): Promise<DescribeSandboxToolListResponse> {
     return this.request("DescribeSandboxToolList", req, cb)
-  }
-
-  /**
-   * 停止沙箱实例
-   */
-  async StopSandboxInstance(
-    req: StopSandboxInstanceRequest,
-    cb?: (error: string, rep: StopSandboxInstanceResponse) => void
-  ): Promise<StopSandboxInstanceResponse> {
-    return this.request("StopSandboxInstance", req, cb)
   }
 
   /**
@@ -161,6 +175,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSandboxToolResponse) => void
   ): Promise<DeleteSandboxToolResponse> {
     return this.request("DeleteSandboxTool", req, cb)
+  }
+
+  /**
+   * 停止沙箱实例
+   */
+  async StopSandboxInstance(
+    req: StopSandboxInstanceRequest,
+    cb?: (error: string, rep: StopSandboxInstanceResponse) => void
+  ): Promise<StopSandboxInstanceResponse> {
+    return this.request("StopSandboxInstance", req, cb)
   }
 
   /**

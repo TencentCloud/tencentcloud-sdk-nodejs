@@ -173,6 +173,10 @@ export interface ModifyRabbitMQVipInstanceRequest {
    * 修改实例的标签信息，全量标签信息，非增量
    */
   Tags?: Array<Tag>
+  /**
+   * 是否开启集群风险提示
+   */
+  EnableRiskWarning?: boolean
 }
 
 /**
@@ -569,7 +573,7 @@ export interface ModifyRabbitMQUserRequest {
    */
   InstanceId: string
   /**
-   * 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。
+   * 用户名，形如rabbitmq。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。
    */
   User: string
   /**
@@ -860,6 +864,22 @@ export interface RabbitMQClusterInfo {
    * 是否已开启删除保护
    */
   EnableDeletionProtection?: boolean
+  /**
+   * 是否有vhost未开启镜像队列风险
+   */
+  MirroredQueueRisk?: boolean
+  /**
+   * 是否提示风险
+   */
+  EnableRiskWarning?: boolean
+  /**
+   * 消费超时时间
+   */
+  ConsumeTimeout?: number
+  /**
+   * 最大Channel数
+   */
+  ChannelMax?: number
 }
 
 /**
@@ -2457,6 +2477,10 @@ export interface VpcEndpointInfo {
    * TLS加密的数据流接入点
    */
   VpcTlsEndpoint?: string
+  /**
+   * VPC 接入点操作失败的错误信息
+   */
+  VpcErrorMessage?: string
 }
 
 /**
@@ -3194,6 +3218,18 @@ OFF/ON/CREATING/DELETING
    * 公网IP是否复用
    */
   PublicIpReused?: boolean
+  /**
+   * 公网控制台接入点操作的错误信息
+   */
+  PublicWebConsoleErrorMessage?: string
+  /**
+   * 内网控制台接入点操作的错误信息
+   */
+  VpcWebConsoleErrorMessage?: string
+  /**
+   * 公网接入点操作的错误信息
+   */
+  PublicDataStreamErrorMessage?: string
 }
 
 /**

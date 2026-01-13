@@ -329,6 +329,7 @@ import {
   DeleteLiveTimeShiftRuleRequest,
   CommonMixInputParam,
   CreateLiveCallbackTemplateRequest,
+  CreateAuditKeywordLibResponse,
   StreamEventInfo,
   DeleteRecordTaskResponse,
   CreateLiveTranscodeRuleRequest,
@@ -395,6 +396,7 @@ import {
   DropLiveStreamResponse,
   DescribeAuditKeywordsRequest,
   DescribeLiveRecordTemplatesRequest,
+  CreateAuditKeywordLibRequest,
   DescribeTimeShiftRecordDetailRequest,
   PullStreamTaskInfo,
   CreateLiveTimeShiftTemplateResponse,
@@ -863,6 +865,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopClientIpSumInfoListResponse) => void
   ): Promise<DescribeTopClientIpSumInfoListResponse> {
     return this.request("DescribeTopClientIpSumInfoList", req, cb)
+  }
+
+  /**
+   * 创建关键词库，直播审核功能使用。
+   */
+  async CreateAuditKeywordLib(
+    req?: CreateAuditKeywordLibRequest,
+    cb?: (error: string, rep: CreateAuditKeywordLibResponse) => void
+  ): Promise<CreateAuditKeywordLibResponse> {
+    return this.request("CreateAuditKeywordLib", req, cb)
   }
 
   /**

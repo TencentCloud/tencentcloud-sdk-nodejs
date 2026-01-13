@@ -250,6 +250,36 @@ export interface HttpGetAction {
 }
 
 /**
+ * DescribePreCacheImageTask返回参数结构体
+ */
+export interface DescribePreCacheImageTaskResponse {
+  /**
+   * 镜像地址
+   */
+  Image?: string
+  /**
+   * 镜像 Digest
+   */
+  ImageDigest?: string
+  /**
+   * 镜像仓库类型：`enterprise`、`personal`。
+   */
+  ImageRegistryType?: string
+  /**
+   * 镜像预热状态
+   */
+  Status?: string
+  /**
+   * 镜像预热状态描述
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAPIKey返回参数结构体
  */
 export interface DeleteAPIKeyResponse {
@@ -296,6 +326,24 @@ export interface UpdateSandboxInstanceResponse {
 }
 
 /**
+ * DescribePreCacheImageTask请求参数结构体
+ */
+export interface DescribePreCacheImageTaskRequest {
+  /**
+   * 镜像地址
+   */
+  Image: string
+  /**
+   * 镜像 Digest
+   */
+  ImageDigest: string
+  /**
+   * 镜像仓库类型：`enterprise`、`personal`。
+   */
+  ImageRegistryType: string
+}
+
+/**
  * 挂载存储配置
  */
 export interface StorageSource {
@@ -324,13 +372,17 @@ export interface ResourceConfiguration {
 }
 
 /**
- * DeleteSandboxTool请求参数结构体
+ * CreateSandboxTool返回参数结构体
  */
-export interface DeleteSandboxToolRequest {
+export interface CreateSandboxToolResponse {
   /**
-   * 沙箱工具ID
+   * 创建的沙箱工具 ID
    */
-  ToolId: string
+  ToolId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -582,6 +634,28 @@ export interface DescribeAPIKeyListResponse {
 }
 
 /**
+ * CreatePreCacheImageTask返回参数结构体
+ */
+export interface CreatePreCacheImageTaskResponse {
+  /**
+   * 镜像地址
+   */
+  Image?: string
+  /**
+   * 镜像 Digest
+   */
+  ImageDigest?: string
+  /**
+   * 镜像仓库类型：`enterprise`、`personal`。
+   */
+  ImageRegistryType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSandboxInstanceList请求参数结构体
  */
 export interface DescribeSandboxInstanceListRequest {
@@ -669,17 +743,13 @@ export interface UpdateSandboxInstanceRequest {
 }
 
 /**
- * CreateSandboxTool返回参数结构体
+ * DeleteSandboxTool请求参数结构体
  */
-export interface CreateSandboxToolResponse {
+export interface DeleteSandboxToolRequest {
   /**
-   * 创建的沙箱工具 ID
+   * 沙箱工具ID
    */
-  ToolId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ToolId: string
 }
 
 /**
@@ -765,25 +835,17 @@ export interface ProbeConfiguration {
 }
 
 /**
- * 沙箱工具中实例存储挂载配置
+ * CreatePreCacheImageTask请求参数结构体
  */
-export interface StorageMount {
+export interface CreatePreCacheImageTaskRequest {
   /**
-   * 存储挂载配置名称
+   * 镜像地址
    */
-  Name?: string
+  Image: string
   /**
-   * 存储配置
+   * 镜像仓库类型：`enterprise`、`personal`。
    */
-  StorageSource?: StorageSource
-  /**
-   * 沙箱实例本地挂载路径
-   */
-  MountPath?: string
-  /**
-   * 存储挂载读写权限配置，默认为false
-   */
-  ReadOnly?: boolean
+  ImageRegistryType: string
 }
 
 /**
@@ -824,6 +886,28 @@ export interface UpdateSandboxToolRequest {
    * 沙箱工具自定义配置
    */
   CustomConfiguration?: CustomConfiguration
+}
+
+/**
+ * 沙箱工具中实例存储挂载配置
+ */
+export interface StorageMount {
+  /**
+   * 存储挂载配置名称
+   */
+  Name?: string
+  /**
+   * 存储配置
+   */
+  StorageSource?: StorageSource
+  /**
+   * 沙箱实例本地挂载路径
+   */
+  MountPath?: string
+  /**
+   * 存储挂载读写权限配置，默认为false
+   */
+  ReadOnly?: boolean
 }
 
 /**

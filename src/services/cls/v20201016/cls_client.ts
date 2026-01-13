@@ -51,6 +51,7 @@ import {
   ModifyMachineGroupResponse,
   RuleInfo,
   DescribeConsumerPreviewRequest,
+  DeleteDashboardResponse,
   LogItems,
   RuleKeyValueInfo,
   DeleteExportResponse,
@@ -124,6 +125,7 @@ import {
   AnonymousInfo,
   DescribeHostMetricConfigsResponse,
   CreateNoticeContentRequest,
+  CreateDashboardRequest,
   DeleteAlarmNoticeRequest,
   DescribeScheduledSqlInfoResponse,
   DescribeConsumersRequest,
@@ -250,12 +252,14 @@ import {
   DeleteAlarmRequest,
   DescribeLogContextResponse,
   ModifyConsoleSharingResponse,
+  DeleteDashboardRequest,
   CreateCosRechargeResponse,
   NoticeReceiver,
   Ckafka,
   MultiCondition,
   ModifyLogsetResponse,
   HostMetricItem,
+  CreateDashboardResponse,
   GetMetricLabelValuesRequest,
   ModifyMetricSubscribeResponse,
   DescribeIndexResponse,
@@ -273,6 +277,7 @@ import {
   MergePartitionResponse,
   CreateScheduledSqlRequest,
   DescribeKafkaConsumerGroupDetailResponse,
+  ModifyDashboardRequest,
   SendConsumerHeartbeatResponse,
   DeleteHostMetricConfigResponse,
   DeleteMetricConfigRequest,
@@ -353,6 +358,7 @@ import {
   EsImportInfo,
   ModifyConfigResponse,
   MetricConfig,
+  ModifyDashboardResponse,
   ModifyAlarmNoticeResponse,
   DescribeConsumerOffsetsResponse,
   SearchLogInfos,
@@ -1138,6 +1144,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于创建仪表盘
+   */
+  async CreateDashboard(
+    req: CreateDashboardRequest,
+    cb?: (error: string, rep: CreateDashboardResponse) => void
+  ): Promise<CreateDashboardResponse> {
+    return this.request("CreateDashboard", req, cb)
+  }
+
+  /**
    * 该接口用于删除告警屏蔽规则。当告警屏蔽规则在生效中或者是在失效中，无法被删除
    */
   async DeleteAlarmShield(
@@ -1188,13 +1204,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于创建仪表盘订阅
+   * 本接口用于删除仪表盘
    */
-  async CreateDashboardSubscribe(
-    req: CreateDashboardSubscribeRequest,
-    cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void
-  ): Promise<CreateDashboardSubscribeResponse> {
-    return this.request("CreateDashboardSubscribe", req, cb)
+  async DeleteDashboard(
+    req: DeleteDashboardRequest,
+    cb?: (error: string, rep: DeleteDashboardResponse) => void
+  ): Promise<DeleteDashboardResponse> {
+    return this.request("DeleteDashboard", req, cb)
   }
 
   /**
@@ -1215,6 +1231,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDashboardSubscribeResponse) => void
   ): Promise<ModifyDashboardSubscribeResponse> {
     return this.request("ModifyDashboardSubscribe", req, cb)
+  }
+
+  /**
+   * 本接口用于修改仪表盘
+   */
+  async ModifyDashboard(
+    req: ModifyDashboardRequest,
+    cb?: (error: string, rep: ModifyDashboardResponse) => void
+  ): Promise<ModifyDashboardResponse> {
+    return this.request("ModifyDashboard", req, cb)
   }
 
   /**
@@ -1388,13 +1414,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取投递任务列表
+   * 此接口用于创建仪表盘订阅
    */
-  async DescribeShipperTasks(
-    req: DescribeShipperTasksRequest,
-    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
-  ): Promise<DescribeShipperTasksResponse> {
-    return this.request("DescribeShipperTasks", req, cb)
+  async CreateDashboardSubscribe(
+    req: CreateDashboardSubscribeRequest,
+    cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void
+  ): Promise<CreateDashboardSubscribeResponse> {
+    return this.request("CreateDashboardSubscribe", req, cb)
   }
 
   /**
@@ -1545,13 +1571,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取数据加工任务列表基本信息
+   * 删除控制台分享
    */
-  async DescribeDataTransformInfo(
-    req: DescribeDataTransformInfoRequest,
-    cb?: (error: string, rep: DescribeDataTransformInfoResponse) => void
-  ): Promise<DescribeDataTransformInfoResponse> {
-    return this.request("DescribeDataTransformInfo", req, cb)
+  async DeleteConsoleSharing(
+    req: DeleteConsoleSharingRequest,
+    cb?: (error: string, rep: DeleteConsoleSharingResponse) => void
+  ): Promise<DeleteConsoleSharingResponse> {
+    return this.request("DeleteConsoleSharing", req, cb)
   }
 
   /**
@@ -1668,13 +1694,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除控制台分享
+   * 本接口用于获取数据加工任务列表基本信息
    */
-  async DeleteConsoleSharing(
-    req: DeleteConsoleSharingRequest,
-    cb?: (error: string, rep: DeleteConsoleSharingResponse) => void
-  ): Promise<DeleteConsoleSharingResponse> {
-    return this.request("DeleteConsoleSharing", req, cb)
+  async DescribeDataTransformInfo(
+    req: DescribeDataTransformInfoRequest,
+    cb?: (error: string, rep: DescribeDataTransformInfoResponse) => void
+  ): Promise<DescribeDataTransformInfoResponse> {
+    return this.request("DescribeDataTransformInfo", req, cb)
   }
 
   /**
@@ -1725,6 +1751,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDashboardSubscribesResponse) => void
   ): Promise<DescribeDashboardSubscribesResponse> {
     return this.request("DescribeDashboardSubscribes", req, cb)
+  }
+
+  /**
+   * 获取投递任务列表
+   */
+  async DescribeShipperTasks(
+    req: DescribeShipperTasksRequest,
+    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
+  ): Promise<DescribeShipperTasksResponse> {
+    return this.request("DescribeShipperTasks", req, cb)
   }
 
   /**

@@ -26,7 +26,7 @@ import {
   LogstashInstanceInfo,
   OperationDetail,
   DiagnoseInstanceResponse,
-  CreateServerlessSpaceV2Request,
+  CreateServerlessInstanceRequest,
   EsPublicAcl,
   DictInfo,
   DescribeDiagnoseResponse,
@@ -34,6 +34,7 @@ import {
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
   RestoreClusterSnapshotResponse,
+  ModifyAutoBackUpCommonInfoRequest,
   DeleteLogstashPipelinesResponse,
   DescribeSpaceKibanaToolsRequest,
   TagInfo,
@@ -57,14 +58,13 @@ import {
   JobParam,
   Failures,
   DeleteLogstashInstanceResponse,
-  DescribeLogstashInstancesRequest,
   AutoScaleDiskInfo,
   CreateServerlessSpaceV2Response,
   ServerlessSpace,
   DeleteClusterSnapshotRequest,
   SubTaskDetail,
   CheckMigrateIndexMetaDataResponse,
-  DeleteClusterSnapshotResponse,
+  DescribeDiagnoseRequest,
   MetricAllData,
   EsConfigSetInfo,
   GetRequestTargetNodeTypesResponse,
@@ -76,13 +76,15 @@ import {
   CreateIndexResponse,
   DescribeServerlessSpaceUserResponse,
   LogDetail,
+  DescribeAutoBackUpStrategyRequest,
   DescribeLogstashInstanceLogsRequest,
   DescribeIndexMetaResponse,
   DiagnoseJobMeta,
   StartLogstashPipelinesRequest,
   DescribeServerlessMetricsRequest,
   GetDiagnoseSettingsResponse,
-  CreateServerlessInstanceRequest,
+  ModifyAutoBackUpStrategyRequest,
+  CreateServerlessSpaceV2Request,
   DiSourceTkePodLabel,
   DeleteServerlessSpaceUserResponse,
   DiData,
@@ -93,6 +95,7 @@ import {
   UpdateLogstashInstanceRequest,
   UpdateRequestTargetNodeTypesRequest,
   DescribeLogstashInstancesResponse,
+  CreateAutoBackUpStrategyRequest,
   InstallInstanceModelRequest,
   DiDataSinkServerless,
   DeleteInstanceResponse,
@@ -116,6 +119,7 @@ import {
   UpdateInstanceResponse,
   DeleteIndexRequest,
   DescribeViewsRequest,
+  ModifyAutoBackUpStrategyResponse,
   DescribeIndexListResponse,
   DescribeUserCosSnapshotListRequest,
   DescribeLogstashInstanceOperationsRequest,
@@ -126,13 +130,14 @@ import {
   DiDataSourceTke,
   ClusterView,
   CommonIndexInfo,
-  QueryIpTraceLogRequest,
+  DeleteAutoBackUpStrategyRequest,
   InquirePriceRenewInstanceResponse,
   CreateClusterSnapshotRequest,
   DeleteLogstashPipelinesRequest,
   DiagnoseResult,
   RestartKibanaRequest,
   SaveAndDeployLogstashPipelineResponse,
+  DescribeAutoBackUpStrategyResponse,
   ServerlessIndexOptionsField,
   UpdateDictionariesRequest,
   OperationDuration,
@@ -161,12 +166,13 @@ import {
   GetRequestTargetNodeTypesRequest,
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
-  DiSourceTke,
+  DescribeLogstashInstancesRequest,
   CreateCosMigrateToServerlessInstanceRequest,
   GetIpTraceStatusResponse,
   DeleteInstanceRequest,
   MetricDetail,
   UpgradeInstanceResponse,
+  DeleteAutoBackUpStrategyResponse,
   DescribeIndexMetaRequest,
   Snapshots,
   UpdateJdkResponse,
@@ -198,9 +204,11 @@ import {
   DescribeSpaceKibanaToolsResponse,
   ModifyEsVipSecurityGroupResponse,
   UpdateInstanceRequest,
+  CreateAutoBackUpStrategyResponse,
+  DiSourceTke,
   CreateServerlessInstanceResponse,
   ExportIpTraceLogResponse,
-  DescribeDiagnoseRequest,
+  DeleteClusterSnapshotResponse,
   GpuInfo,
   DescribeInstancePluginListResponse,
   DiSourceCvm,
@@ -216,6 +224,7 @@ import {
   KibanaNodeInfo,
   StartLogstashPipelinesResponse,
   GetDiagnoseSettingsRequest,
+  QueryIpTraceLogRequest,
   EsAcl,
   DescribeInstancePluginListRequest,
   RestartNodesRequest,
@@ -226,6 +235,7 @@ import {
   KibanaPublicAcl,
   CreateClusterSnapshotResponse,
   RestartLogstashInstanceResponse,
+  ModifyAutoBackUpCommonInfoResponse,
   OptionalWebServiceInfo,
 } from "./es_models"
 
@@ -299,6 +309,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改自动备份快照策略
+   */
+  async ModifyAutoBackUpStrategy(
+    req: ModifyAutoBackUpStrategyRequest,
+    cb?: (error: string, rep: ModifyAutoBackUpStrategyResponse) => void
+  ): Promise<ModifyAutoBackUpStrategyResponse> {
+    return this.request("ModifyAutoBackUpStrategy", req, cb)
+  }
+
+  /**
    * ES集群安装模型接口
    */
   async InstallInstanceModel(
@@ -329,13 +349,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新实例Jdk配置
+   * 查询IP溯源状态
    */
-  async UpdateJdk(
-    req: UpdateJdkRequest,
-    cb?: (error: string, rep: UpdateJdkResponse) => void
-  ): Promise<UpdateJdkResponse> {
-    return this.request("UpdateJdk", req, cb)
+  async GetIpTraceStatus(
+    req: GetIpTraceStatusRequest,
+    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
+  ): Promise<GetIpTraceStatusResponse> {
+    return this.request("GetIpTraceStatus", req, cb)
   }
 
   /**
@@ -389,6 +409,23 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeInfoList: 修改节点配置（节点横向扩缩容，纵向扩缩容，增加主节点，增加冷节点等）
+- EsConfig：修改集群配置
+- Password：修改默认用户elastic的密码
+- EsAcl：修改访问控制列表
+- CosBackUp: 设置集群COS自动备份信息
+以上参数组合只能传递一种，多传或少传均会导致请求失败
+     */
+  async UpdateInstance(
+    req: UpdateInstanceRequest,
+    cb?: (error: string, rep: UpdateInstanceResponse) => void
+  ): Promise<UpdateInstanceResponse> {
+    return this.request("UpdateInstance", req, cb)
+  }
+
+  /**
    * 创建索引
    */
   async CreateIndex(
@@ -436,6 +473,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCosMigrateToServerlessInstanceResponse) => void
   ): Promise<CreateCosMigrateToServerlessInstanceResponse> {
     return this.request("CreateCosMigrateToServerlessInstance", req, cb)
+  }
+
+  /**
+   * 删除自动备份快照策略
+   */
+  async DeleteAutoBackUpStrategy(
+    req: DeleteAutoBackUpStrategyRequest,
+    cb?: (error: string, rep: DeleteAutoBackUpStrategyResponse) => void
+  ): Promise<DeleteAutoBackUpStrategyResponse> {
+    return this.request("DeleteAutoBackUpStrategy", req, cb)
   }
 
   /**
@@ -534,30 +581,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询IP溯源状态
+   * 新建自动备份快照策略
    */
-  async GetIpTraceStatus(
-    req: GetIpTraceStatusRequest,
-    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
-  ): Promise<GetIpTraceStatusResponse> {
-    return this.request("GetIpTraceStatus", req, cb)
+  async CreateAutoBackUpStrategy(
+    req: CreateAutoBackUpStrategyRequest,
+    cb?: (error: string, rep: CreateAutoBackUpStrategyResponse) => void
+  ): Promise<CreateAutoBackUpStrategyResponse> {
+    return this.request("CreateAutoBackUpStrategy", req, cb)
   }
 
   /**
-     * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
-- InstanceName：修改实例名称(仅用于标识实例)
-- NodeInfoList: 修改节点配置（节点横向扩缩容，纵向扩缩容，增加主节点，增加冷节点等）
-- EsConfig：修改集群配置
-- Password：修改默认用户elastic的密码
-- EsAcl：修改访问控制列表
-- CosBackUp: 设置集群COS自动备份信息
-以上参数组合只能传递一种，多传或少传均会导致请求失败
-     */
-  async UpdateInstance(
-    req: UpdateInstanceRequest,
-    cb?: (error: string, rep: UpdateInstanceResponse) => void
-  ): Promise<UpdateInstanceResponse> {
-    return this.request("UpdateInstance", req, cb)
+   * 获取自动备份快照策略信息
+   */
+  async DescribeAutoBackUpStrategy(
+    req: DescribeAutoBackUpStrategyRequest,
+    cb?: (error: string, rep: DescribeAutoBackUpStrategyResponse) => void
+  ): Promise<DescribeAutoBackUpStrategyResponse> {
+    return this.request("DescribeAutoBackUpStrategy", req, cb)
   }
 
   /**
@@ -862,6 +902,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改自动备份快照策略公共信息
+   */
+  async ModifyAutoBackUpCommonInfo(
+    req?: ModifyAutoBackUpCommonInfoRequest,
+    cb?: (error: string, rep: ModifyAutoBackUpCommonInfoResponse) => void
+  ): Promise<ModifyAutoBackUpCommonInfoResponse> {
+    return this.request("ModifyAutoBackUpCommonInfo", req, cb)
+  }
+
+  /**
    * 查询实例插件列表
    */
   async DescribeInstancePluginList(
@@ -869,6 +919,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancePluginListResponse) => void
   ): Promise<DescribeInstancePluginListResponse> {
     return this.request("DescribeInstancePluginList", req, cb)
+  }
+
+  /**
+   * 更新实例Jdk配置
+   */
+  async UpdateJdk(
+    req: UpdateJdkRequest,
+    cb?: (error: string, rep: UpdateJdkResponse) => void
+  ): Promise<UpdateJdkResponse> {
+    return this.request("UpdateJdk", req, cb)
   }
 
   /**

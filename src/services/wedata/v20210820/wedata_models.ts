@@ -2424,11 +2424,6 @@ export interface TableMeta {
    */
   HasFavorite?: boolean
   /**
-   * 生命周期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LifeCycleTime?: number
-  /**
    * 存储量，已转为适合的单位展示
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2555,6 +2550,11 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
    */
   Location?: string
   /**
+   * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeCycleTime?: number
+  /**
    * 判断是否是分区表1 是 0否
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2564,6 +2564,11 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PartitionColumns?: Array<string>
+  /**
+   * 分区时间格式：yyyy-MM-dd
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DateFormat?: string
   /**
    * 生命周期-分区保留天数【分区保留策略时有效】
 注意：此字段可能返回 null，表示取不到有效值。
@@ -26697,11 +26702,11 @@ export interface DescribeRealTimeTaskMetricOverviewRequest {
  */
 export interface DescribeTaskDetailDsRequest {
   /**
-   * 任务Id
+   * 任务ID
    */
   TaskId: string
   /**
-   * 项目Id
+   * 项目ID （必填属性）
    */
   ProjectId?: string
   /**
@@ -31928,7 +31933,7 @@ export interface DatabaseInfo {
  */
 export interface LifecycleInfo {
   /**
-   * 生命周期值
+   * 生命周期值，如果PartitionLifeCycle=custom时，表示自定义生命周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Lifecycle?: number

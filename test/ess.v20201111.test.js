@@ -18,6 +18,16 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
+it("ess.v20201111.DescribeContractReviewTaskListWebUrl", async function () {
+    try {
+       const data = await client.DescribeContractReviewTaskListWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.StartFlow", async function () {
     try {
        const data = await client.StartFlow({})
@@ -211,6 +221,16 @@ it("ess.v20201111.CreateFlowForwards", async function () {
 it("ess.v20201111.DescribeIntegrationRoles", async function () {
     try {
        const data = await client.DescribeIntegrationRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeContractReviewChecklistsWebUrl", async function () {
+    try {
+       const data = await client.DescribeContractReviewChecklistsWebUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -441,6 +461,16 @@ it("ess.v20201111.CreateOrganizationAuthFile", async function () {
 it("ess.v20201111.DeleteIntegrationRoleUsers", async function () {
     try {
        const data = await client.DeleteIntegrationRoleUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ExportContractReviewResult", async function () {
+    try {
+       const data = await client.ExportContractReviewResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,6 +1008,16 @@ it("ess.v20201111.DescribeUserFlowType", async function () {
     }
 })
 
+it("ess.v20201111.CreateContractReviewChecklistWebUrl", async function () {
+    try {
+       const data = await client.CreateContractReviewChecklistWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     try {
        const data = await client.DescribeThirdPartyAuthCode({})
@@ -1201,6 +1241,16 @@ it("ess.v20201111.GetTaskResultApi", async function () {
 it("ess.v20201111.CreateBatchAdminChangeInvitations", async function () {
     try {
        const data = await client.CreateBatchAdminChangeInvitations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeContractReviewChecklistWebUrl", async function () {
+    try {
+       const data = await client.DescribeContractReviewChecklistWebUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

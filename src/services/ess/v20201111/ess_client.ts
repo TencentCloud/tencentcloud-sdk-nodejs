@@ -41,7 +41,7 @@ import {
   NeedReviewApproverInfo,
   CreateBatchSignUrlResponse,
   DescribeUserAutoSignStatusResponse,
-  FlowApproverDetail,
+  DescribeContractReviewChecklistWebUrlResponse,
   Tag,
   CreateFlowForwardsResponse,
   DescribeFlowEvidenceReportRequest,
@@ -55,9 +55,9 @@ import {
   OrganizationAuthUrl,
   OrganizationCommonInfo,
   ArchiveDynamicFlowResponse,
-  OrganizationInfo,
+  CreateLegalSealQrCodeRequest,
   DescribeSingleSignOnEmployeesRequest,
-  FailedDeleteStaffData,
+  PdfVerifyResult,
   CreateUserNameChangeUrlRequest,
   AuthRecord,
   UnbindEmployeeUserIdWithClientOpenIdRequest,
@@ -70,7 +70,7 @@ import {
   ContractSummaryInfo,
   RelieveInfo,
   CreateBatchAdminChangeInvitationsUrlResponse,
-  DescribeOrganizationSealsResponse,
+  CreateSingleSignOnEmployeesRequest,
   RegistrationOrganizationInfo,
   TemplateUserFlowType,
   ModifyIntegrationRoleRequest,
@@ -123,6 +123,7 @@ import {
   ReviewerInfo,
   CreateContractReviewWebUrlResponse,
   DisableUserAutoSignResponse,
+  DescribeContractReviewChecklistsWebUrlRequest,
   CreateContractComparisonTaskResponse,
   DescribeFileUrlsRequest,
   CreateMiniAppPrepareFlowResponse,
@@ -136,6 +137,7 @@ import {
   DescribeFlowEvidenceReportResponse,
   BatchOrganizationRegistrationTasksDetails,
   RecipientComponentInfo,
+  ExportContractReviewResultResponse,
   SingleSignOnEmployees,
   WebThemeConfig,
   CreateBatchContractReviewTaskRequest,
@@ -145,6 +147,7 @@ import {
   CreateBatchInitOrganizationUrlRequest,
   DeleteOrganizationAuthorizationsResponse,
   MiniAppCreateFlowPageOption,
+  FlowApproverDetail,
   CreateFlowForwardsRequest,
   CreateIntegrationDepartmentResponse,
   JumpEvent,
@@ -162,6 +165,7 @@ import {
   CreateIntegrationRoleResponse,
   DescribeFlowComponentsRequest,
   VerifyDigitFileResponse,
+  CreateContractReviewChecklistWebUrlResponse,
   DeleteIntegrationEmployeesRequest,
   FailedUpdateStaffData,
   GetTaskResultApiRequest,
@@ -171,6 +175,7 @@ import {
   CreateFlowByFilesResponse,
   UploadFilesResponse,
   PresetApproverInfo,
+  DescribeContractReviewChecklistsWebUrlResponse,
   DescribeBillUsageResponse,
   ModifyIntegrationDepartmentRequest,
   FlowForwardInfo,
@@ -185,6 +190,7 @@ import {
   IntegrateRole,
   DeleteIntegrationDepartmentRequest,
   MiniAppCreateApproverInfo,
+  ExtendScene,
   DescribeFileCounterSignResultResponse,
   IntentionActionResult,
   CreateBatchSignUrlRequest,
@@ -224,7 +230,7 @@ import {
   CreateIntegrationEmployeesRequest,
   CreateFlowOption,
   DescribeContractDiffTaskWebUrlResponse,
-  CreateLegalSealQrCodeRequest,
+  OrganizationInfo,
   ArchiveDynamicApproverData,
   CreateOrganizationAuthUrlRequest,
   CreateIntegrationRoleRequest,
@@ -243,6 +249,7 @@ import {
   StaffRole,
   UnbindEmployeeUserIdWithClientOpenIdResponse,
   CreateReleaseFlowResponse,
+  ContractReviewChecklistWebUrlOption,
   BindEmployeeUserIdWithClientOpenIdRequest,
   DescribeIntegrationDepartmentsRequest,
   DescribeExtendedServiceAuthDetailRequest,
@@ -333,20 +340,21 @@ import {
   DescribeFlowComponentsResponse,
   CancelFailureFlow,
   DescribeIntegrationEmployeesRequest,
+  DescribeContractReviewTaskListWebUrlResponse,
   CreateFlowRequest,
   FileUrl,
   CreateContractReviewWebUrlRequest,
   CreateDynamicFlowApproverResponse,
   CreateBatchOrganizationRegistrationTasksResponse,
   Option,
-  CreateSingleSignOnEmployeesRequest,
+  DescribeOrganizationSealsResponse,
   DescribeBillUsageDetailRequest,
   CreateBatchAdminChangeInvitationsUrlRequest,
   CreateUserAutoSignSealUrlResponse,
   Caller,
   IntentionActionResultDetail,
   CreateEmployeeQualificationSealQrCodeRequest,
-  PdfVerifyResult,
+  FailedDeleteStaffData,
   DescribeInformationExtractionTaskResponse,
   OutputRisk,
   CreateEmployeeChangeUrlResponse,
@@ -366,13 +374,14 @@ import {
   Intention,
   CreateFlowBlockchainEvidenceUrlResponse,
   CreateDocumentRequest,
+  CreateContractReviewChecklistWebUrlRequest,
   CreateUserMobileChangeUrlRequest,
   CreateEmbedWebUrlRequest,
   CreateFlowGroupByFilesResponse,
   DeleteIntegrationRoleUsersRequest,
   CreateFlowSignUrlRequest,
   CreateIntegrationEmployeesResponse,
-  ExtendScene,
+  ExportContractReviewResultRequest,
   CreateModifyAdminAuthorizationUrlRequest,
   ApproverInfo,
   Filter,
@@ -390,6 +399,7 @@ import {
   AdminChangeInvitationInfo,
   ApproverOption,
   DeleteIntegrationEmployeesResponse,
+  DescribeContractReviewChecklistWebUrlRequest,
   PermissionGroup,
   CreateFlowRemindsRequest,
   DescribeSignFaceVideoResponse,
@@ -402,6 +412,7 @@ import {
   Permission,
   ReleasedApprover,
   DescribeUserFlowTypeRequest,
+  DescribeContractReviewTaskListWebUrlRequest,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
   IntentionQuestion,
@@ -414,6 +425,20 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ess.tencentcloudapi.com", "2020-11-11", clientConfig)
+  }
+
+  /**
+     * 此接口（DescribeContractReviewTaskListWebUrl）用来创建合同审查记录列表web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+
+适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
+
+注意:  `如果文件资源为word类型生成的链接不能进行iframe嵌入，需要在单独窗口打开`
+     */
+  async DescribeContractReviewTaskListWebUrl(
+    req: DescribeContractReviewTaskListWebUrlRequest,
+    cb?: (error: string, rep: DescribeContractReviewTaskListWebUrlResponse) => void
+  ): Promise<DescribeContractReviewTaskListWebUrlResponse> {
+    return this.request("DescribeContractReviewTaskListWebUrl", req, cb)
   }
 
   /**
@@ -829,6 +854,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 此接口（DescribeContractReviewChecklistsWebUrl）用来创建审查要点清单列表web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+
+适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
+
+注意:  `如果文件资源为word类型生成的链接不能进行iframe嵌入，需要在单独窗口打开`
+     */
+  async DescribeContractReviewChecklistsWebUrl(
+    req: DescribeContractReviewChecklistsWebUrlRequest,
+    cb?: (error: string, rep: DescribeContractReviewChecklistsWebUrlResponse) => void
+  ): Promise<DescribeContractReviewChecklistsWebUrlResponse> {
+    return this.request("DescribeContractReviewChecklistsWebUrl", req, cb)
+  }
+
+  /**
    * 此接口（DescribeIntegrationEmployees）用于分页查询企业员工信息列表，支持设置过滤条件以筛选员工查询结果。
    */
   async DescribeIntegrationEmployees(
@@ -1163,6 +1202,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteIntegrationRoleUsersResponse) => void
   ): Promise<DeleteIntegrationRoleUsersResponse> {
     return this.request("DeleteIntegrationRoleUsers", req, cb)
+  }
+
+  /**
+   * 本接口（ExportContractReviewResult）用于导出和同审查结果。支持选择 1 “带风险批注文件”、 2 “审查结果＆摘要（.xIsx）”
+   */
+  async ExportContractReviewResult(
+    req: ExportContractReviewResultRequest,
+    cb?: (error: string, rep: ExportContractReviewResultResponse) => void
+  ): Promise<ExportContractReviewResultResponse> {
+    return this.request("ExportContractReviewResult", req, cb)
   }
 
   /**
@@ -2166,6 +2215,20 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+     * 此接口（CreateContractReviewChecklistWebUrl）用来创建新建审查要点清单web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+
+适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
+
+注意:  `如果文件资源为word类型生成的链接不能进行iframe嵌入，需要在单独窗口打开`
+     */
+  async CreateContractReviewChecklistWebUrl(
+    req: CreateContractReviewChecklistWebUrlRequest,
+    cb?: (error: string, rep: CreateContractReviewChecklistWebUrlResponse) => void
+  ): Promise<CreateContractReviewChecklistWebUrlResponse> {
+    return this.request("CreateContractReviewChecklistWebUrl", req, cb)
+  }
+
+  /**
      * 通过AuthCode查询个人用户是否实名
 
 
@@ -2574,6 +2637,20 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: CreateBatchAdminChangeInvitationsResponse) => void
   ): Promise<CreateBatchAdminChangeInvitationsResponse> {
     return this.request("CreateBatchAdminChangeInvitations", req, cb)
+  }
+
+  /**
+     * 此接口（DescribeContractReviewChecklistWebUrl）用来创建查看审查要点清单web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
+
+适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
+
+注意:  `如果文件资源为word类型生成的链接不能进行iframe嵌入，需要在单独窗口打开`
+     */
+  async DescribeContractReviewChecklistWebUrl(
+    req: DescribeContractReviewChecklistWebUrlRequest,
+    cb?: (error: string, rep: DescribeContractReviewChecklistWebUrlResponse) => void
+  ): Promise<DescribeContractReviewChecklistWebUrlResponse> {
+    return this.request("DescribeContractReviewChecklistWebUrl", req, cb)
   }
 
   /**

@@ -78,13 +78,43 @@ export interface AddChunkRequest {
 }
 
 /**
- * ModifyChunk返回参数结构体
+ * QuerySceneList返回参数结构体
  */
-export interface ModifyChunkResponse {
+export interface QuerySceneListResponse {
+  /**
+   * 总数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyChunk请求参数结构体
+ */
+export interface ModifyChunkRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 文件ID
+   */
+  FileId: string
+  /**
+   * 切片ID
+   */
+  ChunkId?: string
+  /**
+   * 编辑后的文本
+   */
+  Content?: string
+  /**
+   * 知识库id
+   */
+  KnowledgeBaseId?: string
 }
 
 /**
@@ -180,29 +210,33 @@ export interface ModelUserAuthority {
 }
 
 /**
- * ModifyChunk请求参数结构体
+ * 问答数据
  */
-export interface ModifyChunkRequest {
+export interface ExampleQA {
   /**
-   * 实例ID
+   * 示例记录的唯一业务 ID
    */
-  InstanceId: string
+  ExampleId?: string
   /**
-   * 文件ID
+   * 问题列表
    */
-  FileId: string
+  Questions?: Array<string>
   /**
-   * 切片ID
+   * 对应的标准答案或回复
    */
-  ChunkId?: string
+  Answer?: string
   /**
-   * 编辑后的文本
+   * 内容类型，类型包含 'text', 'sql', 'code'
    */
-  Content?: string
+  Type?: string
   /**
-   * 知识库id
+   * 记录的创建时间
    */
-  KnowledgeBaseId?: string
+  CreateTime?: string
+  /**
+   * 记录的最后更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -221,6 +255,28 @@ export interface QueryChunkListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AddScene请求参数结构体
+ */
+export interface AddSceneRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 场景
+   */
+  Scene?: Scene
+  /**
+   * 1仅自己使用，2指定用户，0全员
+   */
+  UseScope?: number
+  /**
+   * 可使用用户列表
+   */
+  AuthorityUins?: Array<string>
 }
 
 /**
@@ -317,6 +373,40 @@ export interface StopChatAIRequest {
    * 实例ID
    */
   InstanceId?: string
+}
+
+/**
+ * 检索配置
+ */
+export interface SearchConfig {
+  /**
+   * 检索类型：0:混合搜索 1：向量搜索 2：全文搜索
+   */
+  Type?: number
+  /**
+   * 召回数量最大值
+   */
+  Num?: number
+  /**
+   * 权重配置
+   */
+  EmbeddingWeight?: number
+  /**
+   * 0:关闭 1:开启，默认1
+   */
+  Rerank?: number
+  /**
+   * 0:关闭 1:开启，默认0
+   */
+  AutoRag?: number
+  /**
+   * AutoRag关联的知识库ID列表
+   */
+  KnowledgeBaseIds?: Array<string>
+  /**
+   * AutoRag搜索状态：0-未完成，1-已完成。仅当AutoRag=1时，该字段有效
+   */
+  SearchStatus?: number
 }
 
 /**
@@ -481,6 +571,18 @@ export interface KnowledgeBase {
  */
 export interface ModifyUserAuthorityRequest {
   /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 分为知识库knowledge、数据源datasource、自定义场景scene
+   */
+  Module: string
+  /**
+   * 对象id,分为知识库id、数据源id、场景id
+   */
+  ObjectId: string
+  /**
    * 作用范围：1仅自己使用，2指定用户，0全员
    */
   UseScope?: number
@@ -502,6 +604,32 @@ export interface GetJobsByKnowledgeBaseIdResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QuerySceneList请求参数结构体
+ */
+export interface QuerySceneListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 场景id
+   */
+  SceneId?: string
+  /**
+   * 场景名称
+   */
+  SceneName?: string
+  /**
+   * 页数
+   */
+  Page?: number
+  /**
+   * 页的大小
+   */
+  PageSize?: number
 }
 
 /**
@@ -533,25 +661,27 @@ export interface GetUploadJobDetailsResponse {
 }
 
 /**
- * 任务信息
+ * UploadAndCommitFile返回参数结构体
  */
-export interface Task {
+export interface UploadAndCommitFileResponse {
   /**
-   * 任务ID
+   * 上传任务
    */
-  Id?: number
+  JobId?: string
   /**
-   * 任务名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
+  RequestId?: string
+}
+
+/**
+ * ModifyChunk返回参数结构体
+ */
+export interface ModifyChunkResponse {
   /**
-   * 任务状态
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: string
-  /**
-   * 任务步骤列表
-   */
-  StepInfoList?: Array<StepInfo>
+  RequestId?: string
 }
 
 /**
@@ -562,6 +692,20 @@ export interface DeleteDataAgentSessionResponse {
    * 删除的会话ID
    */
   SessionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddScene返回参数结构体
+ */
+export interface AddSceneResponse {
+  /**
+   * 场景id
+   */
+  SceneId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -699,9 +843,32 @@ export interface ChatAIRequest {
 }
 
 /**
+ * DeleteScene返回参数结构体
+ */
+export interface DeleteSceneResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryUserAuthority请求参数结构体
  */
-export type QueryUserAuthorityRequest = null
+export interface QueryUserAuthorityRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 分为知识库knowledge、数据源datasource、自定义场景scene
+   */
+  Module: string
+  /**
+   * 对象id,分为知识库id、数据源id、场景id
+   */
+  ObjectId: string
+}
 
 /**
  * 知识库文件信息
@@ -854,13 +1021,31 @@ export interface StepInfo {
 }
 
 /**
- * GetKnowledgeBaseList返回参数结构体
+ * 文件分片
  */
-export interface GetKnowledgeBaseListResponse {
+export interface Chunk {
   /**
-   * 用户实例所有知识库列表
+   * 切片ID
    */
-  KnowledgeBaseList?: Array<KnowledgeBase>
+  Id?: string
+  /**
+   * 切片内容
+   */
+  Content?: string
+  /**
+   * 切片的字数
+   */
+  Size?: number
+  /**
+   * 切片概要
+   */
+  Summary?: string
+}
+
+/**
+ * UpdateScene返回参数结构体
+ */
+export interface UpdateSceneResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -868,17 +1053,49 @@ export interface GetKnowledgeBaseListResponse {
 }
 
 /**
- * UploadAndCommitFile返回参数结构体
+ * 场景
  */
-export interface UploadAndCommitFileResponse {
+export interface Scene {
   /**
-   * 上传任务
+   * 场景ID
    */
-  JobId?: string
+  SceneId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 场景名称
    */
-  RequestId?: string
+  SceneName?: string
+  /**
+   * 技能列表，包含：rag（知识检索）、data_analytics（数据分析）、data_prediction（数据预测）
+   */
+  Skills?: Array<string>
+  /**
+   * 提示词文本
+   */
+  Prompt?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 检索配置
+   */
+  SearchConfig?: SearchConfig
+  /**
+   * 示例问答列表
+   */
+  ExampleQAList?: Array<ExampleQA>
+  /**
+   * 记录的创建时间
+   */
+  CreateTime?: string
+  /**
+   * 记录的最后更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 创建者Uin
+   */
+  CreatorUin?: string
 }
 
 /**
@@ -921,6 +1138,20 @@ export interface KnowledgeTaskConfig {
 }
 
 /**
+ * UpdateScene请求参数结构体
+ */
+export interface UpdateSceneRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 场景
+   */
+  Scene?: Scene
+}
+
+/**
  * CreateDataAgentSession请求参数结构体
  */
 export interface CreateDataAgentSessionRequest {
@@ -942,6 +1173,42 @@ export interface ModifyKnowledgeBaseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteScene请求参数结构体
+ */
+export interface DeleteSceneRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 场景id
+   */
+  SceneId?: string
+}
+
+/**
+ * 任务信息
+ */
+export interface Task {
+  /**
+   * 任务ID
+   */
+  Id?: number
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 任务状态
+   */
+  Status?: string
+  /**
+   * 任务步骤列表
+   */
+  StepInfoList?: Array<StepInfo>
 }
 
 /**
@@ -985,23 +1252,15 @@ export interface ColumnInfo {
 }
 
 /**
- * 文件分片
+ * GetKnowledgeBaseList返回参数结构体
  */
-export interface Chunk {
+export interface GetKnowledgeBaseListResponse {
   /**
-   * 切片ID
+   * 用户实例所有知识库列表
    */
-  Id?: string
+  KnowledgeBaseList?: Array<KnowledgeBase>
   /**
-   * 切片内容
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Content?: string
-  /**
-   * 切片的字数
-   */
-  Size?: number
-  /**
-   * 切片概要
-   */
-  Summary?: string
+  RequestId?: string
 }

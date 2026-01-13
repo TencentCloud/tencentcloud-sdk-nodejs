@@ -21,17 +21,20 @@ import {
   UploadAndCommitFileRequest,
   GetKnowledgeBaseListRequest,
   AddChunkRequest,
-  ModifyChunkResponse,
+  QuerySceneListResponse,
+  ModifyChunkRequest,
   ChatAIResponse,
   DeleteChunkRequest,
   GetSessionDetailsResponse,
   ModelUserAuthority,
-  ModifyChunkRequest,
+  ExampleQA,
   QueryChunkListResponse,
+  AddSceneRequest,
   GetJobsByKnowledgeBaseIdRequest,
   UploadJob,
   QueryChunkListRequest,
   StopChatAIRequest,
+  SearchConfig,
   StepExpand,
   GetSessionDetailsRequest,
   QueryUserAuthorityResponse,
@@ -42,13 +45,17 @@ import {
   KnowledgeBase,
   ModifyUserAuthorityRequest,
   GetJobsByKnowledgeBaseIdResponse,
+  QuerySceneListRequest,
   StopChatAIResponse,
   GetUploadJobDetailsResponse,
-  Task,
+  UploadAndCommitFileResponse,
+  ModifyChunkResponse,
   DeleteDataAgentSessionResponse,
+  AddSceneResponse,
   GetKnowledgeBaseFileListResponse,
   Record,
   ChatAIRequest,
+  DeleteSceneResponse,
   QueryUserAuthorityRequest,
   FileInfo,
   GetKnowledgeBaseFileListRequest,
@@ -56,14 +63,18 @@ import {
   ModifyUserAuthorityResponse,
   AddChunkResponse,
   StepInfo,
-  GetKnowledgeBaseListResponse,
-  UploadAndCommitFileResponse,
+  Chunk,
+  UpdateSceneResponse,
+  Scene,
   KnowledgeTaskConfig,
+  UpdateSceneRequest,
   CreateDataAgentSessionRequest,
   ModifyKnowledgeBaseResponse,
+  DeleteSceneRequest,
+  Task,
   DeleteDataAgentSessionRequest,
   ColumnInfo,
-  Chunk,
+  GetKnowledgeBaseListResponse,
 } from "./dataagent_models"
 
 /**
@@ -156,6 +167,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询场景列表
+   */
+  async QuerySceneList(
+    req: QuerySceneListRequest,
+    cb?: (error: string, rep: QuerySceneListResponse) => void
+  ): Promise<QuerySceneListResponse> {
+    return this.request("QuerySceneList", req, cb)
+  }
+
+  /**
    * 操作知识库
    */
   async ModifyKnowledgeBase(
@@ -176,6 +197,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除场景
+   */
+  async DeleteScene(
+    req: DeleteSceneRequest,
+    cb?: (error: string, rep: DeleteSceneResponse) => void
+  ): Promise<DeleteSceneResponse> {
+    return this.request("DeleteScene", req, cb)
+  }
+
+  /**
    * 删除会话
    */
   async DeleteDataAgentSession(
@@ -186,10 +217,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新增场景
+   */
+  async AddScene(
+    req: AddSceneRequest,
+    cb?: (error: string, rep: AddSceneResponse) => void
+  ): Promise<AddSceneResponse> {
+    return this.request("AddScene", req, cb)
+  }
+
+  /**
    * 查询对象权限
    */
   async QueryUserAuthority(
-    req?: QueryUserAuthorityRequest,
+    req: QueryUserAuthorityRequest,
     cb?: (error: string, rep: QueryUserAuthorityResponse) => void
   ): Promise<QueryUserAuthorityResponse> {
     return this.request("QueryUserAuthority", req, cb)
@@ -223,6 +264,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetSessionDetailsResponse) => void
   ): Promise<GetSessionDetailsResponse> {
     return this.request("GetSessionDetails", req, cb)
+  }
+
+  /**
+   * 更新场景
+   */
+  async UpdateScene(
+    req: UpdateSceneRequest,
+    cb?: (error: string, rep: UpdateSceneResponse) => void
+  ): Promise<UpdateSceneResponse> {
+    return this.request("UpdateScene", req, cb)
   }
 
   /**

@@ -103,6 +103,10 @@ export interface CreateIVRSessionRequest {
    * 用户数据
    */
   UUI?: string
+  /**
+   * 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数
+   */
+  MaxRingTimeoutSecond?: number
 }
 
 /**
@@ -834,6 +838,10 @@ HoaiMy
    * 大模型拓展参数， 格式为json字符串
    */
   LLMExtraBody?: string
+  /**
+   * 最大通话时长， 默认不限制。单位毫秒(ms)
+   */
+  MaxCallDurationMs?: number
 }
 
 /**
@@ -1338,6 +1346,10 @@ export interface ServeParticipant {
   SkillGroupId?: number
   /**
    * 结束状态
+
+中文详情[参考](https://www.tencentcloud.com/zh/document/product/1229/71847)
+
+英文详情[参考](https://www.tencentcloud.com/document/product/1229/71847?lang=en)
    */
   EndStatusString?: string
   /**
@@ -2756,6 +2768,10 @@ export interface AutoCalloutTaskInfo {
    * 任务Id
    */
   TaskId?: number
+  /**
+   * 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数
+   */
+  MaxRingTimeoutSecond?: number
 }
 
 /**
@@ -2919,6 +2935,10 @@ export interface CreateAIAgentCallRequest {
 3.  dify-inputs-conversation_id 为dify的conversation_id值
    */
   Variables?: Array<Variable>
+  /**
+   * 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数
+   */
+  MaxRingTimeoutSecond?: number
 }
 
 /**
@@ -3882,6 +3902,10 @@ export interface CreateAutoCalloutTaskRequest {
    * 任务失败重试时间间隔，重试间隔 600秒～86400 秒
    */
   RetryInterval?: number
+  /**
+   * 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数
+   */
+  MaxRingTimeoutSecond?: number
 }
 
 /**
@@ -5360,6 +5384,10 @@ export interface DescribeAutoCalloutTaskResponse {
    */
   State?: number
   /**
+   * 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数
+   */
+  MaxRingTimeoutSecond?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5438,7 +5466,7 @@ export interface CreateCallOutSessionRequest {
    */
   SdkAppId: number
   /**
-   * 客服用户 ID，一般为客服邮箱，确保已经绑定了手机号 https://cloud.tencent.com/document/product/679/76067#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF
+   * 座席邮箱，确保已经绑定了手机号 https://cloud.tencent.com/document/product/679/76067#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF
    */
   UserId: string
   /**

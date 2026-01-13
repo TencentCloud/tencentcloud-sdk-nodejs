@@ -891,6 +891,16 @@ export interface RuleInfo {
 export type DescribeConsumerPreviewRequest = null
 
 /**
+ * DeleteDashboard返回参数结构体
+ */
+export interface DeleteDashboardResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * LogItem的数组
  */
 export interface LogItems {
@@ -2976,6 +2986,24 @@ export interface CreateNoticeContentRequest {
    * 模板详细配置。
    */
   NoticeContents?: Array<NoticeContent>
+}
+
+/**
+ * CreateDashboard请求参数结构体
+ */
+export interface CreateDashboardRequest {
+  /**
+   * 仪表盘名称
+   */
+  DashboardName: string
+  /**
+   * 仪表盘配置数据
+   */
+  Data?: string
+  /**
+   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6391,6 +6419,16 @@ export interface ModifyConsoleSharingResponse {
 }
 
 /**
+ * DeleteDashboard请求参数结构体
+ */
+export interface DeleteDashboardRequest {
+  /**
+   * 仪表盘id
+   */
+  DashboardId: string
+}
+
+/**
  * CreateCosRecharge返回参数结构体
  */
 export interface CreateCosRechargeResponse {
@@ -6534,6 +6572,20 @@ export interface HostMetricItem {
 - system：系统
    */
   Type: string
+}
+
+/**
+ * CreateDashboard返回参数结构体
+ */
+export interface CreateDashboardResponse {
+  /**
+   * 仪表盘id
+   */
+  DashboardId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6890,6 +6942,28 @@ CompletingRebalance：组正在准备重新平衡。有新成员加入或现有�
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDashboard请求参数结构体
+ */
+export interface ModifyDashboardRequest {
+  /**
+   * 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。
+   */
+  DashboardId: string
+  /**
+   * 仪表盘名称
+   */
+  DashboardName?: string
+  /**
+   * 仪表盘配置数据
+   */
+  Data?: string
+  /**
+   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -9212,6 +9286,16 @@ export interface MetricConfig {
    * 自定义指标标签
    */
   MetricLabels?: Array<MetricLabel>
+}
+
+/**
+ * ModifyDashboard返回参数结构体
+ */
+export interface ModifyDashboardResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

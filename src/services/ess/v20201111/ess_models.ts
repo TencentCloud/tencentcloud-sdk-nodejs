@@ -653,87 +653,21 @@ export interface DescribeUserAutoSignStatusResponse {
 }
 
 /**
- * 签署人详情信息
+ * DescribeContractReviewChecklistWebUrl返回参数结构体
  */
-export interface FlowApproverDetail {
+export interface DescribeContractReviewChecklistWebUrlResponse {
   /**
-   * 签署时的相关信息
+   * 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。`
    */
-  ApproveMessage?: string
+  WebUrl?: string
   /**
-   * 签署方姓名
+   * 清单 id
    */
-  ApproveName?: string
+  Id?: string
   /**
-   * 签署方的签署状态
-0：还没有发起
-1：流程中 没有开始处理
-2：待签署
-3：已签署
-4：已拒绝
-5：已过期
-6：已撤销
-7：还没有预发起
-8：待填写
-9：因为各种原因而终止
-10：填写完成
-15：已解除
-19：转他人处理
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ApproveStatus?: number
-  /**
-   * 模板配置中的参与方ID,与控件绑定
-   * @deprecated
-   */
-  ReceiptId?: string
-  /**
-   * 客户自定义的用户ID
-   */
-  CustomUserId?: string
-  /**
-   * 签署人手机号
-   */
-  Mobile?: string
-  /**
-   * 签署顺序，如果是有序签署，签署顺序从小到大
-   */
-  SignOrder?: number
-  /**
-   * 签署人签署时间，时间戳，单位秒
-   */
-  ApproveTime?: number
-  /**
-   * 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签
-   */
-  ApproveType?: string
-  /**
-   * 签署方侧用户来源，如WEWORKAPP-企业微信等
-   */
-  ApproverSource?: string
-  /**
-   * 客户自定义签署方标识
-   */
-  CustomApproverTag?: string
-  /**
-   * 签署方企业Id
-   */
-  OrganizationId?: string
-  /**
-   * 签署方企业名称
-   */
-  OrganizationName?: string
-  /**
-   * 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。
-   */
-  SignId?: string
-  /**
-   * 自定义签署人角色
-   */
-  ApproverRoleName?: string
-  /**
-   * 模板配置中的参与方ID,与控件绑定
-   */
-  RecipientId?: string
+  RequestId?: string
 }
 
 /**
@@ -1045,34 +979,24 @@ export interface ArchiveDynamicFlowResponse {
 }
 
 /**
- * 机构信息
+ * CreateLegalSealQrCode请求参数结构体
  */
-export interface OrganizationInfo {
+export interface CreateLegalSealQrCodeRequest {
   /**
-   * 机构在平台的编号，内部字段，暂未开放
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 机构信息，暂未开放
    * @deprecated
    */
-  OrganizationId?: string
-  /**
-   * 用户渠道，内部字段，暂未开放
-   * @deprecated
-   */
-  Channel?: string
-  /**
-   * 用户在渠道的机构编号，内部字段，暂未开放
-   * @deprecated
-   */
-  OrganizationOpenId?: string
-  /**
-   * 用户真实的IP，内部字段，暂未开放
-   * @deprecated
-   */
-  ClientIp?: string
-  /**
-   * 机构的代理IP，内部字段，暂未开放
-   * @deprecated
-   */
-  ProxyIp?: string
+  Organization?: OrganizationInfo
 }
 
 /**
@@ -1109,21 +1033,69 @@ export interface DescribeSingleSignOnEmployeesRequest {
 }
 
 /**
- * 删除员工失败数据
+ * 合同文件验签单个结果结构体
  */
-export interface FailedDeleteStaffData {
+export interface PdfVerifyResult {
   /**
-   * 员工在电子签的userId
+   * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
    */
-  UserId?: string
+  VerifyResult?: number
   /**
-   * 员工在第三方平台的openId
+   * 签署平台
+如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，
+如果文件不在腾讯电子签平台签署，则为**其他平台**。
    */
-  OpenId?: string
+  SignPlatform?: string
   /**
-   * 失败原因
+   * 申请证书的主体的名字
+
+如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下
+**企业**:  ESS@企业名称@编码
+**个人**: ESS@个人姓名@证件号@808854
+
+如果在其他平台签署的, 主体的名字参考其他平台的说明
    */
-  Reason?: string
+  SignerName?: string
+  /**
+   * 签署时间的Unix时间戳，单位毫秒
+   */
+  SignTime?: number
+  /**
+   * 证书签名算法,  如SHA1withRSA等算法
+   */
+  SignAlgorithm?: string
+  /**
+   * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。
+   */
+  CertSn?: string
+  /**
+   * 证书起始时间的Unix时间戳，单位毫秒
+   */
+  CertNotBefore?: number
+  /**
+   * 证书过期时间的时间戳，单位毫秒
+   */
+  CertNotAfter?: number
+  /**
+   * 签名域横坐标，单位px
+   */
+  ComponentPosX?: number
+  /**
+   * 签名域纵坐标，单位px
+   */
+  ComponentPosY?: number
+  /**
+   * 签名域宽度，单位px
+   */
+  ComponentWidth?: number
+  /**
+   * 签名域高度，单位px
+   */
+  ComponentHeight?: number
+  /**
+   * 签名域所在页码，1～N
+   */
+  ComponentPage?: number
 }
 
 /**
@@ -2159,21 +2131,32 @@ export interface CreateBatchAdminChangeInvitationsUrlResponse {
 }
 
 /**
- * DescribeOrganizationSeals返回参数结构体
+ * CreateSingleSignOnEmployees请求参数结构体
  */
-export interface DescribeOrganizationSealsResponse {
+export interface CreateSingleSignOnEmployeesRequest {
   /**
-   * 在设定了SealId时，返回值为0或1；若未设定SealId，则返回公司的总印章数量
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  TotalCount?: number
+  Operator: UserInfo
   /**
-   * 查询到的印章结果数组
+   * 待创建员工的信息最多不超过200个。
+
+注意：
+1. 传递的 openId 不能重复， 且字符不能超过64位。
+2. 传递的手机号不能重复。
+3. 绑定的角色必须存在且不能超过 10 个。
    */
-  Seals?: Array<OccupiedSeal>
+  Employees: Array<SingleSignOnEmployees>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png)
    */
-  RequestId?: string
+  SsoApplicationId: string
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -3637,6 +3620,22 @@ export interface DisableUserAutoSignResponse {
 }
 
 /**
+ * DescribeContractReviewChecklistsWebUrl请求参数结构体
+ */
+export interface DescribeContractReviewChecklistsWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 合同审查清单个性化参数
+   */
+  Option?: ContractReviewChecklistWebUrlOption
+}
+
+/**
  * CreateContractComparisonTask返回参数结构体
  */
 export interface CreateContractComparisonTaskResponse {
@@ -4320,6 +4319,20 @@ export interface RecipientComponentInfo {
 }
 
 /**
+ * ExportContractReviewResult返回参数结构体
+ */
+export interface ExportContractReviewResultResponse {
+  /**
+   * 文件下载链接
+   */
+  Url?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 单点登录企业员工信息。
  */
 export interface SingleSignOnEmployees {
@@ -4552,6 +4565,7 @@ export interface CreateBatchInitOrganizationUrlRequest {
 <li>AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业</li>
 <li>OPEN_AUTO_SIGN :开通企业自动签署</li>
 <li>PARTNER_AUTO_SIGN_AUTH :合作方企业授权自动签</li>
+<li>CHANGE_SUB_ORGANIZATION_ADMIN_AUTH :变更子企业超管授权(**授权后，主企业可变更子企业超管，此功能需联系客户经理开通白名单使用**)</li>
 </ul>
    */
   OperateTypes: Array<string>
@@ -4571,6 +4585,10 @@ export interface CreateBatchInitOrganizationUrlRequest {
 ![企业电子签账号](https://qcloudimg.tencent-cloud.cn/raw/4e6b30ee92f00671f7f1c5bd127c27db.png)
    */
   AuthorizedOrganizationId?: string
+  /**
+   * 初始化操作类型里含有CHANGE_SUB_ORGANIZATION_ADMIN_AUTH（变更子企业超管授权）操作类型时，授权协议中主企业的签署方是否使用自动签（需操作人有自动签授权）
+   */
+  ChangeAdminAuthAutoSign?: boolean
 }
 
 /**
@@ -4603,6 +4621,90 @@ export interface MiniAppCreateFlowPageOption {
    * 发起后隐藏签署码
    */
   HideSignCodeAfterStart?: boolean
+}
+
+/**
+ * 签署人详情信息
+ */
+export interface FlowApproverDetail {
+  /**
+   * 签署时的相关信息
+   */
+  ApproveMessage?: string
+  /**
+   * 签署方姓名
+   */
+  ApproveName?: string
+  /**
+   * 签署方的签署状态
+0：还没有发起
+1：流程中 没有开始处理
+2：待签署
+3：已签署
+4：已拒绝
+5：已过期
+6：已撤销
+7：还没有预发起
+8：待填写
+9：因为各种原因而终止
+10：填写完成
+15：已解除
+19：转他人处理
+   */
+  ApproveStatus?: number
+  /**
+   * 模板配置中的参与方ID,与控件绑定
+   * @deprecated
+   */
+  ReceiptId?: string
+  /**
+   * 客户自定义的用户ID
+   */
+  CustomUserId?: string
+  /**
+   * 签署人手机号
+   */
+  Mobile?: string
+  /**
+   * 签署顺序，如果是有序签署，签署顺序从小到大
+   */
+  SignOrder?: number
+  /**
+   * 签署人签署时间，时间戳，单位秒
+   */
+  ApproveTime?: number
+  /**
+   * 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签
+   */
+  ApproveType?: string
+  /**
+   * 签署方侧用户来源，如WEWORKAPP-企业微信等
+   */
+  ApproverSource?: string
+  /**
+   * 客户自定义签署方标识
+   */
+  CustomApproverTag?: string
+  /**
+   * 签署方企业Id
+   */
+  OrganizationId?: string
+  /**
+   * 签署方企业名称
+   */
+  OrganizationName?: string
+  /**
+   * 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。
+   */
+  SignId?: string
+  /**
+   * 自定义签署人角色
+   */
+  ApproverRoleName?: string
+  /**
+   * 模板配置中的参与方ID,与控件绑定
+   */
+  RecipientId?: string
 }
 
 /**
@@ -4975,6 +5077,20 @@ export interface VerifyDigitFileResponse {
 }
 
 /**
+ * CreateContractReviewChecklistWebUrl返回参数结构体
+ */
+export interface CreateContractReviewChecklistWebUrlResponse {
+  /**
+   * 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。`
+   */
+  WebUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteIntegrationEmployees请求参数结构体
  */
 export interface DeleteIntegrationEmployeesRequest {
@@ -5252,6 +5368,20 @@ export interface PresetApproverInfo {
 <ul><li><b>ID_CARD</b>: 居民身份证</li></ul>
    */
   IdCardType?: string
+}
+
+/**
+ * DescribeContractReviewChecklistsWebUrl返回参数结构体
+ */
+export interface DescribeContractReviewChecklistsWebUrlResponse {
+  /**
+   * 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。`
+   */
+  WebUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5638,6 +5768,24 @@ export interface MiniAppCreateApproverInfo {
 如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。
    */
   RecipientId?: string
+}
+
+/**
+ * 印章扩展信息
+ */
+export interface ExtendScene {
+  /**
+   * 印章来源类型
+   */
+  GenerateType?: string
+  /**
+   * 印章来源类型描述
+   */
+  GenerateTypeDesc?: string
+  /**
+   * 印章来源logo
+   */
+  GenerateTypeLogo?: string
 }
 
 /**
@@ -6988,24 +7136,34 @@ export interface DescribeContractDiffTaskWebUrlResponse {
 }
 
 /**
- * CreateLegalSealQrCode请求参数结构体
+ * 机构信息
  */
-export interface CreateLegalSealQrCodeRequest {
+export interface OrganizationInfo {
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
-   */
-  Operator?: UserInfo
-  /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-   */
-  Agent?: Agent
-  /**
-   * 机构信息，暂未开放
+   * 机构在平台的编号，内部字段，暂未开放
    * @deprecated
    */
-  Organization?: OrganizationInfo
+  OrganizationId?: string
+  /**
+   * 用户渠道，内部字段，暂未开放
+   * @deprecated
+   */
+  Channel?: string
+  /**
+   * 用户在渠道的机构编号，内部字段，暂未开放
+   * @deprecated
+   */
+  OrganizationOpenId?: string
+  /**
+   * 用户真实的IP，内部字段，暂未开放
+   * @deprecated
+   */
+  ClientIp?: string
+  /**
+   * 机构的代理IP，内部字段，暂未开放
+   * @deprecated
+   */
+  ProxyIp?: string
 }
 
 /**
@@ -7737,6 +7895,16 @@ export interface CreateReleaseFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 合同审查清单个性化参数，用于控制页面的展示内容
+ */
+export interface ContractReviewChecklistWebUrlOption {
+  /**
+   * 禁用新建清单功能。默认 false，设置为 true 会隐藏界面的新建按钮。
+   */
+  DisableCreateChecklist?: boolean
 }
 
 /**
@@ -10908,6 +11076,20 @@ export interface DescribeIntegrationEmployeesRequest {
 }
 
 /**
+ * DescribeContractReviewTaskListWebUrl返回参数结构体
+ */
+export interface DescribeContractReviewTaskListWebUrlResponse {
+  /**
+   * 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。`
+   */
+  WebUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateFlow请求参数结构体
  */
 export interface CreateFlowRequest {
@@ -11138,32 +11320,21 @@ export interface Option {
 }
 
 /**
- * CreateSingleSignOnEmployees请求参数结构体
+ * DescribeOrganizationSeals返回参数结构体
  */
-export interface CreateSingleSignOnEmployeesRequest {
+export interface DescribeOrganizationSealsResponse {
   /**
-   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * 在设定了SealId时，返回值为0或1；若未设定SealId，则返回公司的总印章数量
    */
-  Operator: UserInfo
+  TotalCount?: number
   /**
-   * 待创建员工的信息最多不超过200个。
-
-注意：
-1. 传递的 openId 不能重复， 且字符不能超过64位。
-2. 传递的手机号不能重复。
-3. 绑定的角色必须存在且不能超过 10 个。
+   * 查询到的印章结果数组
    */
-  Employees: Array<SingleSignOnEmployees>
+  Seals?: Array<OccupiedSeal>
   /**
-   * 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png)
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SsoApplicationId: string
-  /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-   */
-  Agent?: Agent
+  RequestId?: string
 }
 
 /**
@@ -11364,69 +11535,21 @@ export interface CreateEmployeeQualificationSealQrCodeRequest {
 }
 
 /**
- * 合同文件验签单个结果结构体
+ * 删除员工失败数据
  */
-export interface PdfVerifyResult {
+export interface FailedDeleteStaffData {
   /**
-   * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
+   * 员工在电子签的userId
    */
-  VerifyResult?: number
+  UserId?: string
   /**
-   * 签署平台
-如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，
-如果文件不在腾讯电子签平台签署，则为**其他平台**。
+   * 员工在第三方平台的openId
    */
-  SignPlatform?: string
+  OpenId?: string
   /**
-   * 申请证书的主体的名字
-
-如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下
-**企业**:  ESS@企业名称@编码
-**个人**: ESS@个人姓名@证件号@808854
-
-如果在其他平台签署的, 主体的名字参考其他平台的说明
+   * 失败原因
    */
-  SignerName?: string
-  /**
-   * 签署时间的Unix时间戳，单位毫秒
-   */
-  SignTime?: number
-  /**
-   * 证书签名算法,  如SHA1withRSA等算法
-   */
-  SignAlgorithm?: string
-  /**
-   * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。
-   */
-  CertSn?: string
-  /**
-   * 证书起始时间的Unix时间戳，单位毫秒
-   */
-  CertNotBefore?: number
-  /**
-   * 证书过期时间的时间戳，单位毫秒
-   */
-  CertNotAfter?: number
-  /**
-   * 签名域横坐标，单位px
-   */
-  ComponentPosX?: number
-  /**
-   * 签名域纵坐标，单位px
-   */
-  ComponentPosY?: number
-  /**
-   * 签名域宽度，单位px
-   */
-  ComponentWidth?: number
-  /**
-   * 签名域高度，单位px
-   */
-  ComponentHeight?: number
-  /**
-   * 签名域所在页码，1～N
-   */
-  ComponentPage?: number
+  Reason?: string
 }
 
 /**
@@ -12185,6 +12308,18 @@ export interface CreateDocumentRequest {
 }
 
 /**
+ * CreateContractReviewChecklistWebUrl请求参数结构体
+ */
+export interface CreateContractReviewChecklistWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+}
+
+/**
  * CreateUserMobileChangeUrl请求参数结构体
  */
 export interface CreateUserMobileChangeUrlRequest {
@@ -12462,21 +12597,27 @@ export interface CreateIntegrationEmployeesResponse {
 }
 
 /**
- * 印章扩展信息
+ * ExportContractReviewResult请求参数结构体
  */
-export interface ExtendScene {
+export interface ExportContractReviewResultRequest {
   /**
-   * 印章来源类型
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  GenerateType?: string
+  Operator: UserInfo
   /**
-   * 印章来源类型描述
+   * 合同审查任务ID
    */
-  GenerateTypeDesc?: string
+  TaskId: string
   /**
-   * 印章来源logo
+   * 导出文件类型。1  = 带风险批注文件; 2 = 审查结果＆摘要（.xIsx）
    */
-  GenerateTypeLogo?: string
+  FileType: number
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -13159,6 +13300,22 @@ export interface DeleteIntegrationEmployeesResponse {
 }
 
 /**
+ * DescribeContractReviewChecklistWebUrl请求参数结构体
+ */
+export interface DescribeContractReviewChecklistWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 清单 id
+   */
+  Id: string
+}
+
+/**
  * 权限树中的权限组
  */
 export interface PermissionGroup {
@@ -13489,6 +13646,18 @@ export interface DescribeUserFlowTypeRequest {
    * 查询绑定了模板的用户合同类型 <ul> <li>false（默认值），查询用户合同类型</li> <li>true，查询绑定了模板的用户合同类型</li> </ul>
    */
   QueryBindTemplate?: boolean
+}
+
+/**
+ * DescribeContractReviewTaskListWebUrl请求参数结构体
+ */
+export interface DescribeContractReviewTaskListWebUrlRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
 }
 
 /**

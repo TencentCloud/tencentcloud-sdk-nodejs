@@ -2708,6 +2708,10 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 暂停后的归档处理时间
    */
   AutoArchiveDelayHours?: number
+  /**
+   * 内核小版本号
+   */
+  CynosVersion?: string
 }
 
 /**
@@ -5064,6 +5068,22 @@ export interface GdnTaskInfo {
    * 从集群名称
    */
   StandbyClusterName?: string
+  /**
+   * 是否已强切
+   */
+  ForceSwitchGdn?: string
+  /**
+   * 返回码
+   */
+  Code?: number
+  /**
+   * 提示信息
+   */
+  Message?: string
+  /**
+   * 是否支持强切
+   */
+  IsSupportForce?: string
 }
 
 /**

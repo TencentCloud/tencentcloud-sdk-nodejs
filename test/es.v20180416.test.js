@@ -78,6 +78,16 @@ it("es.v20180416.DescribeServerlessSpaces", async function () {
     }
 })
 
+it("es.v20180416.ModifyAutoBackUpStrategy", async function () {
+    try {
+       const data = await client.ModifyAutoBackUpStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.InstallInstanceModel", async function () {
     try {
        const data = await client.InstallInstanceModel({})
@@ -108,9 +118,9 @@ it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
     }
 })
 
-it("es.v20180416.UpdateJdk", async function () {
+it("es.v20180416.GetIpTraceStatus", async function () {
     try {
-       const data = await client.UpdateJdk({})
+       const data = await client.GetIpTraceStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +178,16 @@ it("es.v20180416.GetDiagnoseSettings", async function () {
     }
 })
 
+it("es.v20180416.UpdateInstance", async function () {
+    try {
+       const data = await client.UpdateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.CreateIndex", async function () {
     try {
        const data = await client.CreateIndex({})
@@ -211,6 +231,16 @@ it("es.v20180416.UpdateDiagnoseSettings", async function () {
 it("es.v20180416.CreateCosMigrateToServerlessInstance", async function () {
     try {
        const data = await client.CreateCosMigrateToServerlessInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteAutoBackUpStrategy", async function () {
+    try {
+       const data = await client.DeleteAutoBackUpStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +338,9 @@ it("es.v20180416.RestartInstance", async function () {
     }
 })
 
-it("es.v20180416.GetIpTraceStatus", async function () {
+it("es.v20180416.CreateAutoBackUpStrategy", async function () {
     try {
-       const data = await client.GetIpTraceStatus({})
+       const data = await client.CreateAutoBackUpStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +348,9 @@ it("es.v20180416.GetIpTraceStatus", async function () {
     }
 })
 
-it("es.v20180416.UpdateInstance", async function () {
+it("es.v20180416.DescribeAutoBackUpStrategy", async function () {
     try {
-       const data = await client.UpdateInstance({})
+       const data = await client.DescribeAutoBackUpStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +658,29 @@ it("es.v20180416.UpgradeLicense", async function () {
     }
 })
 
+it("es.v20180416.ModifyAutoBackUpCommonInfo", async function () {
+    try {
+       const data = await client.ModifyAutoBackUpCommonInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeInstancePluginList", async function () {
     try {
        const data = await client.DescribeInstancePluginList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateJdk", async function () {
+    try {
+       const data = await client.UpdateJdk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

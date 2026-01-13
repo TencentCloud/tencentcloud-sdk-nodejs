@@ -18,6 +18,16 @@ const client = new tencentcloud.ags.v20250920.Client({
 })
 describe("ags.v20250920.test.js", function () {
 
+it("ags.v20250920.CreatePreCacheImageTask", async function () {
+    try {
+       const data = await client.CreatePreCacheImageTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.UpdateSandboxInstance", async function () {
     try {
        const data = await client.UpdateSandboxInstance({})
@@ -48,9 +58,9 @@ it("ags.v20250920.AcquireSandboxInstanceToken", async function () {
     }
 })
 
-it("ags.v20250920.DescribeSandboxToolList", async function () {
+it("ags.v20250920.DescribePreCacheImageTask", async function () {
     try {
-       const data = await client.DescribeSandboxToolList({})
+       const data = await client.DescribePreCacheImageTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,9 @@ it("ags.v20250920.DescribeSandboxToolList", async function () {
     }
 })
 
-it("ags.v20250920.StopSandboxInstance", async function () {
+it("ags.v20250920.DescribeSandboxToolList", async function () {
     try {
-       const data = await client.StopSandboxInstance({})
+       const data = await client.DescribeSandboxToolList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +111,16 @@ it("ags.v20250920.CreateAPIKey", async function () {
 it("ags.v20250920.DeleteSandboxTool", async function () {
     try {
        const data = await client.DeleteSandboxTool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.StopSandboxInstance", async function () {
+    try {
+       const data = await client.StopSandboxInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

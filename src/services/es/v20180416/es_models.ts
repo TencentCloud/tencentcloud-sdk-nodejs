@@ -304,33 +304,57 @@ export interface DiagnoseInstanceResponse {
 }
 
 /**
- * CreateServerlessSpaceV2请求参数结构体
+ * CreateServerlessInstance请求参数结构体
  */
-export interface CreateServerlessSpaceV2Request {
+export interface CreateServerlessInstanceRequest {
   /**
-   * vpc信息
+   * 索引名，需以-AppId结尾
    */
-  VpcInfo: Array<VpcInfo>
+  IndexName: string
   /**
-   * 索引空间名
-   */
-  SpaceName?: string
-  /**
-   * 空间名称
+   * 可用区
    */
   Zone?: string
   /**
-   * 白名单列表
+   * 私有网络ID
    */
-  KibanaWhiteIpList?: Array<string>
+  VpcId?: string
   /**
-   * 空间id
+   * 子网ID
    */
-  ZoneId?: number
+  SubnetId?: string
+  /**
+   * 创建的索引元数据JSON，如mappings、settings
+   */
+  IndexMetaJson?: string
+  /**
+   * 创建索引的空间ID
+   */
+  SpaceId?: string
+  /**
+   * 创建索引的用户名
+   */
+  Username?: string
+  /**
+   * 创建索引的密码
+   */
+  Password?: string
+  /**
+   * 创建数据接入
+   */
+  ServerlessDi?: ServerlessDi
+  /**
+   * 是否自行添加白名单ip
+   */
+  AutoGetIp?: number
   /**
    * 标签信息
    */
   TagList?: Array<TagInfo>
+  /**
+   * kibana公网白名单
+   */
+  KibanaWhiteIpList?: Array<string>
 }
 
 /**
@@ -497,6 +521,11 @@ export interface RestoreClusterSnapshotResponse {
    */
   RequestId?: string
 }
+
+/**
+ * ModifyAutoBackUpCommonInfo请求参数结构体
+ */
+export type ModifyAutoBackUpCommonInfoRequest = null
 
 /**
  * DeleteLogstashPipelines返回参数结构体
@@ -1005,48 +1034,6 @@ export interface DeleteLogstashInstanceResponse {
 }
 
 /**
- * DescribeLogstashInstances请求参数结构体
- */
-export interface DescribeLogstashInstancesRequest {
-  /**
-   * 实例所属可用区，不传则默认所有可用区
-   */
-  Zone?: string
-  /**
-   * 实例ID列表
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 实例名称列表
-   */
-  InstanceNames?: Array<string>
-  /**
-   * 分页起始值, 默认值0
-   */
-  Offset?: number
-  /**
-   * 分页大小，默认值20
-   */
-  Limit?: number
-  /**
-   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderKey未传递则按创建时间降序排序
-   */
-  OrderByKey?: number
-  /**
-   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
-   */
-  OrderByType?: number
-  /**
-   * VpcId 筛选项
-   */
-  VpcIds?: Array<string>
-  /**
-   * 标签信息列表
-   */
-  TagList?: Array<TagInfo>
-}
-
-/**
  * cvm 自动扩盘参数
  */
 export interface AutoScaleDiskInfo {
@@ -1289,17 +1276,21 @@ export interface CheckMigrateIndexMetaDataResponse {
 }
 
 /**
- * DeleteClusterSnapshot返回参数结构体
+ * DescribeDiagnose请求参数结构体
  */
-export interface DeleteClusterSnapshotResponse {
+export interface DescribeDiagnoseRequest {
   /**
-   * 集群id
+   * ES实例ID
    */
-  InstanceId?: string
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 报告日期，格式20210301
    */
-  RequestId?: string
+  Date?: string
+  /**
+   * 报告返回份数
+   */
+  Limit?: number
 }
 
 /**
@@ -1589,6 +1580,16 @@ export interface LogDetail {
 }
 
 /**
+ * DescribeAutoBackUpStrategy请求参数结构体
+ */
+export interface DescribeAutoBackUpStrategyRequest {
+  /**
+   * 实例名称
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeLogstashInstanceLogs请求参数结构体
  */
 export interface DescribeLogstashInstanceLogsRequest {
@@ -1735,57 +1736,51 @@ export interface GetDiagnoseSettingsResponse {
 }
 
 /**
- * CreateServerlessInstance请求参数结构体
+ * ModifyAutoBackUpStrategy请求参数结构体
  */
-export interface CreateServerlessInstanceRequest {
+export interface ModifyAutoBackUpStrategyRequest {
   /**
-   * 索引名，需以-AppId结尾
+   * 实例名称
    */
-  IndexName: string
+  InstanceId: string
   /**
-   * 可用区
+   * 当前策略名称
+   */
+  StrategyName: string
+  /**
+   * 策略信息
+   */
+  CosBackup: CosBackup
+}
+
+/**
+ * CreateServerlessSpaceV2请求参数结构体
+ */
+export interface CreateServerlessSpaceV2Request {
+  /**
+   * vpc信息
+   */
+  VpcInfo: Array<VpcInfo>
+  /**
+   * 索引空间名
+   */
+  SpaceName?: string
+  /**
+   * 空间名称
    */
   Zone?: string
   /**
-   * 私有网络ID
+   * 白名单列表
    */
-  VpcId?: string
+  KibanaWhiteIpList?: Array<string>
   /**
-   * 子网ID
+   * 空间id
    */
-  SubnetId?: string
-  /**
-   * 创建的索引元数据JSON，如mappings、settings
-   */
-  IndexMetaJson?: string
-  /**
-   * 创建索引的空间ID
-   */
-  SpaceId?: string
-  /**
-   * 创建索引的用户名
-   */
-  Username?: string
-  /**
-   * 创建索引的密码
-   */
-  Password?: string
-  /**
-   * 创建数据接入
-   */
-  ServerlessDi?: ServerlessDi
-  /**
-   * 是否自行添加白名单ip
-   */
-  AutoGetIp?: number
+  ZoneId?: number
   /**
    * 标签信息
    */
   TagList?: Array<TagInfo>
-  /**
-   * kibana公网白名单
-   */
-  KibanaWhiteIpList?: Array<string>
 }
 
 /**
@@ -1992,6 +1987,20 @@ export interface DescribeLogstashInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAutoBackUpStrategy请求参数结构体
+ */
+export interface CreateAutoBackUpStrategyRequest {
+  /**
+   * 实例名称
+   */
+  InstanceId: string
+  /**
+   * 策略信息
+   */
+  CosBackup: CosBackup
 }
 
 /**
@@ -2523,6 +2532,20 @@ export interface DescribeViewsRequest {
 }
 
 /**
+ * ModifyAutoBackUpStrategy返回参数结构体
+ */
+export interface ModifyAutoBackUpStrategyResponse {
+  /**
+   * true 成功; false 失败
+   */
+  Status?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIndexList返回参数结构体
  */
 export interface DescribeIndexListResponse {
@@ -2851,57 +2874,17 @@ export interface CommonIndexInfo {
 }
 
 /**
- * QueryIpTraceLog请求参数结构体
+ * DeleteAutoBackUpStrategy请求参数结构体
  */
-export interface QueryIpTraceLogRequest {
+export interface DeleteAutoBackUpStrategyRequest {
   /**
-   * ES集群ID
+   * 实例名称
    */
   InstanceId: string
   /**
-   * 开始时间
+   * 策略名称
    */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 起始偏移量
-   */
-  Offset?: number
-  /**
-   * 数据条数
-   */
-  Limit?: number
-  /**
-   * 访问IP
-   */
-  RemoteIp?: Array<string>
-  /**
-   * Request/Response 请求/返回, 非必填
-   */
-  TraceType?: Array<string>
-  /**
-   * Public/Private 公网访问/内网访问, 非必填
-   */
-  NetType?: Array<string>
-  /**
-   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
-   */
-  ReqTypeOrRspStatus?: Array<string>
-  /**
-   * 关键字模糊查询，支持Lucene Query String
-   */
-  SearchKey?: string
-  /**
-   * Uri搜索
-   */
-  Uri?: string
-  /**
-   * 集群节点IP
-   */
-  NodeIp?: Array<string>
+  StrategyName: Array<string>
 }
 
 /**
@@ -3046,6 +3029,20 @@ export interface RestartKibanaRequest {
  * SaveAndDeployLogstashPipeline返回参数结构体
  */
 export interface SaveAndDeployLogstashPipelineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAutoBackUpStrategy返回参数结构体
+ */
+export interface DescribeAutoBackUpStrategyResponse {
+  /**
+   * 策略信息
+   */
+  CosBackupList?: Array<CosBackup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3262,7 +3259,7 @@ export interface NodeInfo {
    */
   MemSize?: number
   /**
-   * /
+   * 硬盘额外性能
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskEnhance?: number
@@ -3532,7 +3529,7 @@ export interface CreateInstanceRequest {
    */
   EnableHybridStorage?: boolean
   /**
-   * 是否开启essd 增强型云盘
+   * 硬盘额外性能
    */
   DiskEnhance?: number
   /**
@@ -4530,49 +4527,45 @@ export interface ProcessDetail {
 }
 
 /**
- * 数据接入tke数据源
+ * DescribeLogstashInstances请求参数结构体
  */
-export interface DiSourceTke {
+export interface DescribeLogstashInstancesRequest {
   /**
-   * 数据源所属vpc id，创建后不允许修改
+   * 实例所属可用区，不传则默认所有可用区
    */
-  VpcId?: string
+  Zone?: string
   /**
-   * tke实例id，创建后不允许修改
+   * 实例ID列表
    */
-  TkeId?: string
+  InstanceIds?: Array<string>
   /**
-   * tke包含的命名空间
+   * 实例名称列表
    */
-  IncludeNamespaces?: Array<string>
+  InstanceNames?: Array<string>
   /**
-   * tke不包含的命名空间
+   * 分页起始值, 默认值0
    */
-  ExcludeNamespaces?: Array<string>
+  Offset?: number
   /**
-   * tke容器名称
+   * 分页大小，默认值20
    */
-  ContainerName?: string
+  Limit?: number
   /**
-   * tke日志内容过滤
+   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderKey未传递则按创建时间降序排序
    */
-  LogFilters?: string
+  OrderByKey?: number
   /**
-   * tke beats配置项
+   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
    */
-  ConfigContent?: string
+  OrderByType?: number
   /**
-   * tke pod标签
+   * VpcId 筛选项
    */
-  PodLabel?: Array<DiSourceTkePodLabel>
+  VpcIds?: Array<string>
   /**
-   * /
+   * 标签信息列表
    */
-  InputType?: string
-  /**
-   * tke 日志采集路径
-   */
-  InputPath?: string
+  TagList?: Array<TagInfo>
 }
 
 /**
@@ -4671,6 +4664,20 @@ export interface MetricDetail {
  * UpgradeInstance返回参数结构体
  */
 export interface UpgradeInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAutoBackUpStrategy返回参数结构体
+ */
+export interface DeleteAutoBackUpStrategyResponse {
+  /**
+   * true 成功; false 失败
+   */
+  Status?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5704,6 +5711,66 @@ CLOSE 关闭
 }
 
 /**
+ * CreateAutoBackUpStrategy返回参数结构体
+ */
+export interface CreateAutoBackUpStrategyResponse {
+  /**
+   * true 成功; false 失败
+   */
+  Status?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据接入tke数据源
+ */
+export interface DiSourceTke {
+  /**
+   * 数据源所属vpc id，创建后不允许修改
+   */
+  VpcId?: string
+  /**
+   * tke实例id，创建后不允许修改
+   */
+  TkeId?: string
+  /**
+   * tke包含的命名空间
+   */
+  IncludeNamespaces?: Array<string>
+  /**
+   * tke不包含的命名空间
+   */
+  ExcludeNamespaces?: Array<string>
+  /**
+   * tke容器名称
+   */
+  ContainerName?: string
+  /**
+   * tke日志内容过滤
+   */
+  LogFilters?: string
+  /**
+   * tke beats配置项
+   */
+  ConfigContent?: string
+  /**
+   * tke pod标签
+   */
+  PodLabel?: Array<DiSourceTkePodLabel>
+  /**
+   * /
+   */
+  InputType?: string
+  /**
+   * tke 日志采集路径
+   */
+  InputPath?: string
+}
+
+/**
  * CreateServerlessInstance返回参数结构体
  */
 export interface CreateServerlessInstanceResponse {
@@ -5737,21 +5804,17 @@ export interface ExportIpTraceLogResponse {
 }
 
 /**
- * DescribeDiagnose请求参数结构体
+ * DeleteClusterSnapshot返回参数结构体
  */
-export interface DescribeDiagnoseRequest {
+export interface DeleteClusterSnapshotResponse {
   /**
-   * ES实例ID
+   * 集群id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
-   * 报告日期，格式20210301
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Date?: string
-  /**
-   * 报告返回份数
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -6162,6 +6225,60 @@ export interface GetDiagnoseSettingsRequest {
 }
 
 /**
+ * QueryIpTraceLog请求参数结构体
+ */
+export interface QueryIpTraceLogRequest {
+  /**
+   * ES集群ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 起始偏移量
+   */
+  Offset?: number
+  /**
+   * 数据条数
+   */
+  Limit?: number
+  /**
+   * 访问IP
+   */
+  RemoteIp?: Array<string>
+  /**
+   * Request/Response 请求/返回, 非必填
+   */
+  TraceType?: Array<string>
+  /**
+   * Public/Private 公网访问/内网访问, 非必填
+   */
+  NetType?: Array<string>
+  /**
+   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
+   */
+  ReqTypeOrRspStatus?: Array<string>
+  /**
+   * 关键字模糊查询，支持Lucene Query String
+   */
+  SearchKey?: string
+  /**
+   * Uri搜索
+   */
+  Uri?: string
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: Array<string>
+}
+
+/**
  * ES集群配置项
  */
 export interface EsAcl {
@@ -6397,6 +6514,16 @@ export interface CreateClusterSnapshotResponse {
  * RestartLogstashInstance返回参数结构体
  */
 export interface RestartLogstashInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAutoBackUpCommonInfo返回参数结构体
+ */
+export interface ModifyAutoBackUpCommonInfoResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

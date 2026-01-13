@@ -308,6 +308,16 @@ it("live.v20180801.DescribeTopClientIpSumInfoList", async function () {
     }
 })
 
+it("live.v20180801.CreateAuditKeywordLib", async function () {
+    try {
+       const data = await client.CreateAuditKeywordLib({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateCasterInputPushUrl", async function () {
     try {
        const data = await client.CreateCasterInputPushUrl({})
