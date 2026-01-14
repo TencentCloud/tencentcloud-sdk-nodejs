@@ -1018,6 +1018,26 @@ it("vod.v20180717.DescribeImageReviewUsageData", async function () {
     }
 })
 
+it("vod.v20180717.CreateAigcCustomElement", async function () {
+    try {
+       const data = await client.CreateAigcCustomElement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateSceneAigcVideoTask", async function () {
+    try {
+       const data = await client.CreateSceneAigcVideoTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateSceneAigcImageTask", async function () {
     try {
        const data = await client.CreateSceneAigcImageTask({})

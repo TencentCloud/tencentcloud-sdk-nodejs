@@ -89,6 +89,7 @@ import {
   CreatePrometheusDashboardResponse,
   CancelClusterReleaseRequest,
   DescribeTKEEdgeClusterStatusResponse,
+  DeleteUserPermissionsResponse,
   ModifyClusterAsGroupOptionAttributeRequest,
   DescribeClusterStatusRequest,
   CreateBackupStorageLocationRequest,
@@ -195,7 +196,6 @@ import {
   NodeCountSummary,
   EdgeCluster,
   DescribeClusterNodePoolDetailResponse,
-  DeletePrometheusConfigRequest,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
   DeleteClusterAsGroupsRequest,
@@ -298,6 +298,7 @@ import {
   DeleteClusterAsGroupsResponse,
   ModifyClusterRuntimeConfigRequest,
   UpgradePlan,
+  DescribeUserPermissionsRequest,
   RegionInstance,
   DescribePrometheusConfigRequest,
   DescribeEdgeLogSwitchesRequest,
@@ -380,6 +381,7 @@ import {
   CreatePrometheusAlertPolicyResponse,
   DNSConfigOption,
   DescribeClusterVirtualNodeRequest,
+  DescribePrometheusInstanceInitStatusRequest,
   DescribeClusterReleasesResponse,
   AddNodeToNodePoolRequest,
   CreateReservedInstancesRequest,
@@ -418,6 +420,7 @@ import {
   CreateCLSLogConfigRequest,
   CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
+  DeleteUserPermissionsRequest,
   ModifyGlobalMaintenanceWindowAndExclusionsRequest,
   CreatePrometheusClusterAgentRequest,
   DeleteEKSContainerInstancesResponse,
@@ -467,7 +470,7 @@ import {
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
   ReleaseDetails,
-  DescribePrometheusInstanceInitStatusRequest,
+  DescribeAddonRequest,
   DescribePrometheusInstanceResponse,
   PrometheusGrafanaInfo,
   Switch,
@@ -478,6 +481,7 @@ import {
   ResourceUsageDetail,
   DescribeClusterVirtualNodePoolsResponse,
   CheckEdgeClusterCIDRResponse,
+  DescribeUserPermissionsResponse,
   DescribePrometheusClusterAgentsRequest,
   DescribeTKEEdgeExternalKubeconfigResponse,
   EdgeArgsFlag,
@@ -622,7 +626,7 @@ import {
   ReservedInstance,
   DeleteClusterRouteResponse,
   PrometheusNotificationItem,
-  DeleteECMInstancesResponse,
+  DeletePrometheusConfigRequest,
   DescribeEdgeClusterUpgradeInfoResponse,
   ModifyClusterNodePoolResponse,
   PrometheusAlertPolicyItem,
@@ -635,6 +639,7 @@ import {
   SequenceTag,
   DescribeClusterStatusResponse,
   ImageRegistryCredential,
+  GrantUserPermissionsResponse,
   DescribeRouteTableConflictsResponse,
   EnableControlPlaneLogsRequest,
   DescribeVersionsRequest,
@@ -665,6 +670,7 @@ import {
   InstallLogAgentResponse,
   GetClusterLevelPriceRequest,
   CreateClusterEndpointResponse,
+  PermissionItem,
   ClusterAdvancedSettings,
   DescribePodsBySpecRequest,
   UpdateClusterKubeconfigResponse,
@@ -690,6 +696,7 @@ import {
   ExistedInstancesForNode,
   KubeJarvisStateInspectionOverview,
   DescribePrometheusOverviewsResponse,
+  GrantUserPermissionsRequest,
   DescribeClusterInspectionResultsOverviewResponse,
   RollOutSequence,
   DescribePodChargeInfoResponse,
@@ -705,7 +712,7 @@ import {
   DescribeClusterCommonNamesResponse,
   ModifyClusterRollOutSequenceTagsRequest,
   SequenceFlow,
-  DescribeAddonRequest,
+  DeleteECMInstancesResponse,
   PrometheusTemplate,
   GPUArgs,
   RouteTableConflict,
@@ -2172,6 +2179,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询一个指定用户在当前地域下所有 TKE 集群中的聚合权限信息。返回用户在各集群中的 ClusterRoleBinding 和 RoleBinding 信息。
+   */
+  async DescribeUserPermissions(
+    req: DescribeUserPermissionsRequest,
+    cb?: (error: string, rep: DescribeUserPermissionsResponse) => void
+  ): Promise<DescribeUserPermissionsResponse> {
+    return this.request("DescribeUserPermissions", req, cb)
+  }
+
+  /**
    * 创建集群路由
    */
   async CreateClusterRoute(
@@ -2279,6 +2296,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleInClusterMasterResponse) => void
   ): Promise<ScaleInClusterMasterResponse> {
     return this.request("ScaleInClusterMaster", req, cb)
+  }
+
+  /**
+   * 使用请求中提供的权限集合，为用户授予对应的 RBAC 权限。
+   */
+  async GrantUserPermissions(
+    req: GrantUserPermissionsRequest,
+    cb?: (error: string, rep: GrantUserPermissionsResponse) => void
+  ): Promise<GrantUserPermissionsResponse> {
+    return this.request("GrantUserPermissions", req, cb)
   }
 
   /**
@@ -2899,6 +2926,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEdgeClusterUpgradeInfoResponse) => void
   ): Promise<DescribeEdgeClusterUpgradeInfoResponse> {
     return this.request("DescribeEdgeClusterUpgradeInfo", req, cb)
+  }
+
+  /**
+   * 使用请求中提供的权限集合，删除用户对应的权限
+   */
+  async DeleteUserPermissions(
+    req: DeleteUserPermissionsRequest,
+    cb?: (error: string, rep: DeleteUserPermissionsResponse) => void
+  ): Promise<DeleteUserPermissionsResponse> {
+    return this.request("DeleteUserPermissions", req, cb)
   }
 
   /**

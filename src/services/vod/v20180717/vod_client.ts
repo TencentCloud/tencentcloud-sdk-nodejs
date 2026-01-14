@@ -32,6 +32,7 @@ import {
   DescribeAllClassRequest,
   AigcImageTaskOutput,
   DescribeRoundPlaysRequest,
+  ReviewInfo,
   WeChatMiniProgramPublishRequest,
   AiAnalysisTaskClassificationInput,
   SvgWatermarkInput,
@@ -78,6 +79,7 @@ import {
   DescribeDailyMostPlayedStatRequest,
   UserDefineFaceReviewTemplateInfo,
   RefreshUrlCacheRequest,
+  SceneAigcVideoTaskInputFileInfo,
   FaceConfigureInfoForUpdate,
   ContentReviewTemplateItem,
   AigcImageTaskOutputFileInfo,
@@ -122,7 +124,7 @@ import {
   AIRecognitionTemplateItem,
   AiReviewPornAsrTaskInput,
   AiRecognitionTaskFaceResult,
-  AiRecognitionTaskHeadTailResultInput,
+  CreateAigcCustomElementResponse,
   CreateAdaptiveDynamicStreamingTemplateRequest,
   PushUrlCacheResponse,
   MediaProcessTaskSampleSnapshotResult,
@@ -191,7 +193,7 @@ import {
   ImageBlur,
   ModifyVodDomainAccelerateConfigRequest,
   PoliticalConfigureInfoForUpdate,
-  MediaProcessTaskAdaptiveDynamicStreamingResult,
+  ElementReferInfo,
   OcrWordsConfigureInfoForUpdate,
   FileReviewInfo,
   WatermarkTemplate,
@@ -211,6 +213,7 @@ import {
   SplitMediaTaskConfig,
   PlayStatFileInfo,
   ModifyMediaInfoRequest,
+  MediaProcessTaskAdaptiveDynamicStreamingResult,
   FrameRateWithDenInfo,
   TraceWatermarkInput,
   PornAsrReviewTemplateInfoForUpdate,
@@ -271,6 +274,7 @@ import {
   ColorEnhanceInfo,
   DeleteEnhanceMediaTemplateResponse,
   EditMediaOutputConfig,
+  CreateAigcCustomElementRequest,
   SplitMediaTaskSegmentInfo,
   AiReviewPornAsrTaskOutput,
   AigcImageTask,
@@ -384,6 +388,7 @@ import {
   RestoreMediaResponse,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   ModifyEnhanceMediaTemplateResponse,
+  SceneAigcVideoOutputConfig,
   EnhanceMediaByTemplateResponse,
   CreateJustInTimeTranscodeTemplateRequest,
   CreateAigcVideoTaskRequest,
@@ -528,7 +533,7 @@ import {
   MediaContentReviewPoliticalSegmentItem,
   AigcVideoTaskOutput,
   DeletePersonSampleResponse,
-  ReviewInfo,
+  ProductShowcaseConfig,
   CreateSnapshotByTimeOffsetTemplateResponse,
   VoiceConfigureInfoForUpdate,
   ModifyContentReviewTemplateRequest,
@@ -647,6 +652,7 @@ import {
   MPSAiMediaInfo,
   AiReviewPornTaskOutput,
   SDMCDrmKeyProviderInfo,
+  CreateSceneAigcVideoTaskResponse,
   AiRecognitionTaskAsrFullTextResult,
   DeleteQualityInspectTemplateResponse,
   PlayStatInfo,
@@ -686,6 +692,7 @@ import {
   DescribeCLSLogsetsRequest,
   InspectMediaQualityRequest,
   TransitionOperation,
+  AiRecognitionTaskHeadTailResultInput,
   WatermarkConfigureInfo,
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
@@ -888,11 +895,13 @@ import {
   StorageStatData,
   RoundPlayFilePlayInfo,
   DescribeFileAttributesRequest,
+  AigcVideoSceneInfo,
   QualityInspectResultItem,
   MediaOutputInfo,
   EditMediaTaskOutput,
   HighlightSegmentItem,
   CreateReviewTemplateResponse,
+  CreateSceneAigcVideoTaskRequest,
   DeleteWatermarkTemplateResponse,
   DeleteQualityInspectTemplateRequest,
   ComposeMediaOutput,
@@ -2088,6 +2097,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageReviewUsageDataResponse) => void
   ): Promise<DescribeImageReviewUsageDataResponse> {
     return this.request("DescribeImageReviewUsageData", req, cb)
+  }
+
+  /**
+   * 调用该接口，针对指定模型进行主体创建。
+   */
+  async CreateAigcCustomElement(
+    req: CreateAigcCustomElementRequest,
+    cb?: (error: string, rep: CreateAigcCustomElementResponse) => void
+  ): Promise<CreateAigcCustomElementResponse> {
+    return this.request("CreateAigcCustomElement", req, cb)
+  }
+
+  /**
+   * 该接口用于生成场景化 AIGC 图片。<b>接口处于内测阶段，如需使用请[联系我们](https://cloud.tencent.com/online-service?from=sales_sales&source=PRESALE)，接口调用会产生实际费用。</b>
+   */
+  async CreateSceneAigcVideoTask(
+    req: CreateSceneAigcVideoTaskRequest,
+    cb?: (error: string, rep: CreateSceneAigcVideoTaskResponse) => void
+  ): Promise<CreateSceneAigcVideoTaskResponse> {
+    return this.request("CreateSceneAigcVideoTask", req, cb)
   }
 
   /**

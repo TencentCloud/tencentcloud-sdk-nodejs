@@ -29,6 +29,7 @@ import {
   UpdateCheckCcnNonDirectFlagRequest,
   DescribeBlockIgnoreListResponse,
   CreateBlockIgnoreRuleNewRequest,
+  ModifyIpsModeSwitchResponse,
   DescribeCcnInstanceRegionStatusRequest,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
@@ -91,6 +92,7 @@ import {
   ModifySecurityGroupSequenceRulesResponse,
   SecurityGroupRule,
   DeleteSecurityGroupRuleResponse,
+  ModifyIpsModeSwitchRequest,
   ModifyNatFwSwitchResponse,
   ModifyAclRuleResponse,
   SequenceData,
@@ -115,6 +117,7 @@ import {
   DescribeSwitchListsRequest,
   NatFwEipsInfo,
   AddAclRuleResponse,
+  DescribeIpsModeSwitchRequest,
   RemoveVpcAcRuleRequest,
   DeleteRemoteAccessDomainRequest,
   SetNatFwEipResponse,
@@ -156,6 +159,7 @@ import {
   DescribeSecurityGroupListRequest,
   ModifyAddressTemplateResponse,
   CreateNatFwInstanceResponse,
+  ModeInfo,
   LogInfo,
   DescribeNatFwInfoCountResponse,
   UpdateClusterVpcFwResponse,
@@ -318,6 +322,7 @@ import {
   SearchLogRequest,
   DeleteSecurityGroupRuleRequest,
   CreateAlertCenterIsolateRequest,
+  DescribeIpsModeSwitchResponse,
   DescribeNatAcRuleRequest,
   DescribeEnterpriseSecurityGroupRuleListResponse,
   ModifyRunSyncAssetRequest,
@@ -564,6 +569,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 修改入侵防御防护模式
+   */
+  async ModifyIpsModeSwitch(
+    req: ModifyIpsModeSwitchRequest,
+    cb?: (error: string, rep: ModifyIpsModeSwitchResponse) => void
+  ): Promise<ModifyIpsModeSwitchResponse> {
+    return this.request("ModifyIpsModeSwitch", req, cb)
+  }
+
+  /**
    * 重新检测CCN中接入VPC防火墙的VPC实例非同城直通标记
    */
   async UpdateCheckCcnNonDirectFlag(
@@ -664,13 +679,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 查询新版安全组下发进度
+   * DescribeGuideScanInfo新手引导扫描接口信息
    */
-  async DescribeEnterpriseSGRuleProgress(
-    req?: DescribeEnterpriseSGRuleProgressRequest,
-    cb?: (error: string, rep: DescribeEnterpriseSGRuleProgressResponse) => void
-  ): Promise<DescribeEnterpriseSGRuleProgressResponse> {
-    return this.request("DescribeEnterpriseSGRuleProgress", req, cb)
+  async DescribeGuideScanInfo(
+    req?: DescribeGuideScanInfoRequest,
+    cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void
+  ): Promise<DescribeGuideScanInfoResponse> {
+    return this.request("DescribeGuideScanInfo", req, cb)
   }
 
   /**
@@ -941,6 +956,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: AddAclRuleResponse) => void
   ): Promise<AddAclRuleResponse> {
     return this.request("AddAclRule", req, cb)
+  }
+
+  /**
+   * 查询新版安全组下发进度
+   */
+  async DescribeEnterpriseSGRuleProgress(
+    req?: DescribeEnterpriseSGRuleProgressRequest,
+    cb?: (error: string, rep: DescribeEnterpriseSGRuleProgressResponse) => void
+  ): Promise<DescribeEnterpriseSGRuleProgressResponse> {
+    return this.request("DescribeEnterpriseSGRuleProgress", req, cb)
   }
 
   /**
@@ -1427,13 +1452,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * DescribeGuideScanInfo新手引导扫描接口信息
+   * 获取入侵防御防护模式
    */
-  async DescribeGuideScanInfo(
-    req?: DescribeGuideScanInfoRequest,
-    cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void
-  ): Promise<DescribeGuideScanInfoResponse> {
-    return this.request("DescribeGuideScanInfo", req, cb)
+  async DescribeIpsModeSwitch(
+    req?: DescribeIpsModeSwitchRequest,
+    cb?: (error: string, rep: DescribeIpsModeSwitchResponse) => void
+  ): Promise<DescribeIpsModeSwitchResponse> {
+    return this.request("DescribeIpsModeSwitch", req, cb)
   }
 
   /**

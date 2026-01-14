@@ -1538,6 +1538,16 @@ export interface DescribeTKEEdgeClusterStatusResponse {
 }
 
 /**
+ * DeleteUserPermissions返回参数结构体
+ */
+export interface DeleteUserPermissionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterAsGroupOptionAttribute请求参数结构体
  */
 export interface ModifyClusterAsGroupOptionAttributeRequest {
@@ -3739,40 +3749,6 @@ export interface DescribeClusterNodePoolDetailResponse {
 }
 
 /**
- * DeletePrometheusConfig请求参数结构体
- */
-export interface DeletePrometheusConfigRequest {
-  /**
-   * 实例id
-   */
-  InstanceId: string
-  /**
-   * 集群类型
-   */
-  ClusterType: string
-  /**
-   * 集群id
-   */
-  ClusterId: string
-  /**
-   * 要删除的ServiceMonitor名字列表
-   */
-  ServiceMonitors?: Array<string>
-  /**
-   * 要删除的PodMonitor名字列表
-   */
-  PodMonitors?: Array<string>
-  /**
-   * 要删除的RawJobs名字列表
-   */
-  RawJobs?: Array<string>
-  /**
-   * 要删除的Probe名字列表
-   */
-  Probes?: Array<string>
-}
-
-/**
  * DescribeEKSContainerInstanceEvent请求参数结构体
  */
 export interface DescribeEKSContainerInstanceEventRequest {
@@ -5857,6 +5833,16 @@ export interface UpgradePlan {
 }
 
 /**
+ * DescribeUserPermissions请求参数结构体
+ */
+export interface DescribeUserPermissionsRequest {
+  /**
+   * 要查询的用户的唯一标识符（支持子账号 UIN和角色UIN）
+   */
+  TargetUin: string
+}
+
+/**
  * 地域属性信息
  */
 export interface RegionInstance {
@@ -7688,6 +7674,16 @@ export interface DescribeClusterVirtualNodeRequest {
 }
 
 /**
+ * DescribePrometheusInstanceInitStatus请求参数结构体
+ */
+export interface DescribePrometheusInstanceInitStatusRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeClusterReleases返回参数结构体
  */
 export interface DescribeClusterReleasesResponse {
@@ -8719,6 +8715,20 @@ export interface ImageCacheEvent {
 }
 
 /**
+ * DeleteUserPermissions请求参数结构体
+ */
+export interface DeleteUserPermissionsRequest {
+  /**
+   * 要授权的用户的唯一标识符（支持子账号 UIN和角色UIN）
+   */
+  TargetUin: string
+  /**
+   * 用户最终应拥有的完整权限列表。采用声明式语义，传入的列表代表用户最终应该拥有的全部权限，系统会自动计算差异并执行必要的创建/删除操作。为空或不提供时将清除该用户的所有权限。最大支持 100 个权限项。
+   */
+  Permissions?: Array<PermissionItem>
+}
+
+/**
  * ModifyGlobalMaintenanceWindowAndExclusions请求参数结构体
  */
 export interface ModifyGlobalMaintenanceWindowAndExclusionsRequest {
@@ -9718,13 +9728,17 @@ export interface ReleaseDetails {
 }
 
 /**
- * DescribePrometheusInstanceInitStatus请求参数结构体
+ * DescribeAddon请求参数结构体
  */
-export interface DescribePrometheusInstanceInitStatusRequest {
+export interface DescribeAddonRequest {
   /**
-   * 实例ID
+   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
-  InstanceId: string
+  ClusterId: string
+  /**
+   * addon名称（不传时会返回集群下全部的addon）
+   */
+  AddonName?: string
 }
 
 /**
@@ -9959,6 +9973,25 @@ export interface CheckEdgeClusterCIDRResponse {
    * CIDR冲突描述信息。
    */
   ConflictMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserPermissions返回参数结构体
+ */
+export interface DescribeUserPermissionsResponse {
+  /**
+   * 用户在当前地域下所有集群中的权限列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: Array<PermissionItem>
+  /**
+   * 用户唯一标识符
+   */
+  TargetUin?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12977,13 +13010,37 @@ alertmanager
 }
 
 /**
- * DeleteECMInstances返回参数结构体
+ * DeletePrometheusConfig请求参数结构体
  */
-export interface DeleteECMInstancesResponse {
+export interface DeletePrometheusConfigRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例id
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 要删除的ServiceMonitor名字列表
+   */
+  ServiceMonitors?: Array<string>
+  /**
+   * 要删除的PodMonitor名字列表
+   */
+  PodMonitors?: Array<string>
+  /**
+   * 要删除的RawJobs名字列表
+   */
+  RawJobs?: Array<string>
+  /**
+   * 要删除的Probe名字列表
+   */
+  Probes?: Array<string>
 }
 
 /**
@@ -13225,6 +13282,16 @@ export interface ImageRegistryCredential {
    * ImageRegistryCredential的名字
    */
   Name?: string
+}
+
+/**
+ * GrantUserPermissions返回参数结构体
+ */
+export interface GrantUserPermissionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13814,6 +13881,33 @@ export interface CreateClusterEndpointResponse {
 }
 
 /**
+ * 用户权限项，定义用户在集群中的 RBAC 权限绑定
+ */
+export interface PermissionItem {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 角色名称。预置角色包括：tke:admin（集群管理员）、tke:ops（运维人员）、tke:dev（开发人员）、tke:ro（只读用户）、tke:ns:dev（命名空间开发人员）、tke:ns:ro（命名空间只读用户），其余为用户自定义角色
+   */
+  RoleName: string
+  /**
+   * 授权类型。枚举值：cluster（集群级别权限，对应 ClusterRoleBinding）、namespace（命名空间级别权限，对应 RoleBinding）
+   */
+  RoleType: string
+  /**
+   * 是否为自定义角色，默认 false
+   */
+  IsCustom?: boolean
+  /**
+   * 命名空间。当 RoleType 为 namespace 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+}
+
+/**
  * 集群高级配置
  */
 export interface ClusterAdvancedSettings {
@@ -14360,6 +14454,20 @@ export interface DescribePrometheusOverviewsResponse {
 }
 
 /**
+ * GrantUserPermissions请求参数结构体
+ */
+export interface GrantUserPermissionsRequest {
+  /**
+   * 要授权的用户的唯一标识符（支持子账号 UIN和角色UIN）
+   */
+  TargetUin: string
+  /**
+   * 用户最终应拥有的完整权限列表。采用声明式语义，传入的列表代表用户最终应该拥有的全部权限，系统会自动计算差异并执行必要的创建/删除操作。为空或不提供时将清除该用户的所有权限。最大支持 100 个权限项。
+   */
+  Permissions?: Array<PermissionItem>
+}
+
+/**
  * DescribeClusterInspectionResultsOverview返回参数结构体
  */
 export interface DescribeClusterInspectionResultsOverviewResponse {
@@ -14610,17 +14718,13 @@ export interface SequenceFlow {
 }
 
 /**
- * DescribeAddon请求参数结构体
+ * DeleteECMInstances返回参数结构体
  */
-export interface DescribeAddonRequest {
+export interface DeleteECMInstancesResponse {
   /**
-   * 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId: string
-  /**
-   * addon名称（不传时会返回集群下全部的addon）
-   */
-  AddonName?: string
+  RequestId?: string
 }
 
 /**

@@ -12881,7 +12881,7 @@ export interface DescribeTopL7CacheDataRequest {
   /**
    * 站点 ID 集合，此参数必填。
    */
-  ZoneIds?: Array<string>
+  ZoneIds: Array<string>
   /**
    * 查询前多少个数据，最大值为1000，不填默认为10， 表示查询前top 10的数据。
    */

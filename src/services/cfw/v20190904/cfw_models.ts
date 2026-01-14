@@ -223,6 +223,16 @@ export interface CreateBlockIgnoreRuleNewRequest {
 }
 
 /**
+ * ModifyIpsModeSwitch返回参数结构体
+ */
+export interface ModifyIpsModeSwitchResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCcnInstanceRegionStatus请求参数结构体
  */
 export interface DescribeCcnInstanceRegionStatusRequest {
@@ -1697,6 +1707,16 @@ export interface DeleteSecurityGroupRuleResponse {
 }
 
 /**
+ * ModifyIpsModeSwitch请求参数结构体
+ */
+export interface ModifyIpsModeSwitchRequest {
+  /**
+   * 防护模式：0-观察模式, 1-拦截模式, 2-严格模式
+   */
+  Mode?: number
+}
+
+/**
  * ModifyNatFwSwitch返回参数结构体
  */
 export interface ModifyNatFwSwitchResponse {
@@ -2418,6 +2438,11 @@ export interface AddAclRuleResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeIpsModeSwitch请求参数结构体
+ */
+export type DescribeIpsModeSwitchRequest = null
 
 /**
  * RemoveVpcAcRule请求参数结构体
@@ -3490,6 +3515,16 @@ export interface CreateNatFwInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 入侵防御防护模式相关
+ */
+export interface ModeInfo {
+  /**
+   * 0-观察模式, 1-拦截模式, 2-严格模式
+   */
+  Mode?: number
 }
 
 /**
@@ -7743,6 +7778,28 @@ export interface CreateAlertCenterIsolateRequest {
    * 运维模式 1 IP白名单 2 身份认证  0 非运维模式
    */
   OmMode?: number
+}
+
+/**
+ * DescribeIpsModeSwitch返回参数结构体
+ */
+export interface DescribeIpsModeSwitchResponse {
+  /**
+   * // Mode 取值校验：0-观察模式, 1-拦截模式, 2-严格模式
+   */
+  Data?: ModeInfo
+  /**
+   * 0 成功 非0失败
+   */
+  ReturnCode?: number
+  /**
+   * success 成功 其他失败
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -208,6 +208,20 @@ export interface DynamicIndex {
 }
 
 /**
+ * CreateRebuildIndexTask返回参数结构体
+ */
+export interface CreateRebuildIndexTaskResponse {
+  /**
+   * 索引重建任务ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckFunction请求参数结构体
  */
 export interface CheckFunctionRequest {
@@ -1573,50 +1587,6 @@ export interface CreateDlcDeliverRequest {
 }
 
 /**
- * DescribeMachineGroups请求参数结构体
- */
-export interface DescribeMachineGroupsRequest {
-  /**
-   * 过滤条件
-machineGroupName
-- 按照【机器组名称】进行过滤。
-- 类型：String
-- 必选：否
-
-machineGroupId
-- 按照【机器组ID】进行过滤。
-- 类型：String
-- 必选：否
-
-osType
-- 按照【操作系统类型】进行过滤。0： Linux；1： Windows
-- 类型：Int
-- 必选：否
-
-tagKey
-- 按照【标签键】进行过滤。
-- 类型：String
-- 必选：否
-
-tag:tagKey
-- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-- 类型：String
-- 必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 分页的偏移量，默认值为0
-   */
-  Offset?: number
-  /**
-   * 分页单页的限制数目，默认值为20，最大值100
-   */
-  Limit?: number
-}
-
-/**
  * 云产品实例维度信息
  */
 export interface Dimension {
@@ -2286,7 +2256,8 @@ export interface MachineInfo {
  */
 export interface ValueInfo {
   /**
-   * 字段类型，目前支持的类型有：long、text、double
+   * 字段类型，支持的类型有：long、text、double、json
+注意：json 类型目前仅部分用户或日志主题支持，如需使用请联系我们开启功能白名单
    */
   Type: string
   /**
@@ -2308,6 +2279,16 @@ long及double类型字段需为空；
    * 字段别名
    */
   Alias?: string
+  /**
+   * 仅为子节点开启索引，本字段不开启。
+注意：仅json类型字段可配置该参数
+   */
+  OpenIndexForChildOnly?: boolean
+  /**
+   * json子节点列表
+注意：仅json类型字段可配置该参数
+   */
+  ChildNode?: Array<KeyValueInfo>
 }
 
 /**
@@ -3637,6 +3618,60 @@ export interface DeleteDashboardSubscribeRequest {
 }
 
 /**
+ * 日志结果信息
+ */
+export interface LogInfo {
+  /**
+   * 日志时间，单位ms
+   */
+  Time?: number
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志主题名称
+   */
+  TopicName?: string
+  /**
+   * 日志来源IP
+   */
+  Source?: string
+  /**
+   * 日志文件名称
+   */
+  FileName?: string
+  /**
+   * 日志上报请求包的ID
+   */
+  PkgId?: string
+  /**
+   * 请求包内日志的ID
+   */
+  PkgLogId?: string
+  /**
+   * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
+   */
+  HighLights?: Array<HighLightItem>
+  /**
+   * 日志内容的Json序列化字符串
+   */
+  LogJson?: string
+  /**
+   * 日志来源主机名称
+   */
+  HostName?: string
+  /**
+   * 原始日志(仅在日志创建索引异常时有值)
+   */
+  RawLog?: string
+  /**
+   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
+   */
+  IndexStatus?: string
+}
+
+/**
  * DeleteAlarmNotice返回参数结构体
  */
 export interface DeleteAlarmNoticeResponse {
@@ -3815,6 +3850,28 @@ export interface DeleteConsoleSharingRequest {
 - 通过 [创建免密分享](https://cloud.tencent.com/document/product/614/109800) 获取免密分享Id。
    */
   SharingId: string
+}
+
+/**
+ * UploadLog请求参数结构体
+ */
+export interface UploadLogRequest {
+  /**
+   * 日志主题id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 该参数已废弃，请勿使用
+   * @deprecated
+   */
+  HashKey?: string
+  /**
+   * 压缩方法，目前支持
+- lz4
+- zstd
+   */
+  CompressType?: string
 }
 
 /**
@@ -4217,57 +4274,22 @@ export interface MetaTagInfo {
 }
 
 /**
- * 日志结果信息
+ * DescribeExports请求参数结构体
  */
-export interface LogInfo {
+export interface DescribeExportsRequest {
   /**
-   * 日志时间，单位ms
+   * 日志主题Id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  Time?: number
+  TopicId: string
   /**
-   * 日志主题ID
+   * 分页的偏移量，默认值为0
    */
-  TopicId?: string
+  Offset?: number
   /**
-   * 日志主题名称
+   * 分页单页限制数目，默认值为20，最大值100
    */
-  TopicName?: string
-  /**
-   * 日志来源IP
-   */
-  Source?: string
-  /**
-   * 日志文件名称
-   */
-  FileName?: string
-  /**
-   * 日志上报请求包的ID
-   */
-  PkgId?: string
-  /**
-   * 请求包内日志的ID
-   */
-  PkgLogId?: string
-  /**
-   * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
-   */
-  HighLights?: Array<HighLightItem>
-  /**
-   * 日志内容的Json序列化字符串
-   */
-  LogJson?: string
-  /**
-   * 日志来源主机名称
-   */
-  HostName?: string
-  /**
-   * 原始日志(仅在日志创建索引异常时有值)
-   */
-  RawLog?: string
-  /**
-   * 日志创建索引异常原因(仅在日志创建索引异常时有值)
-   */
-  IndexStatus?: string
+  Limit?: number
 }
 
 /**
@@ -5372,25 +5394,21 @@ export interface DescribeConsumerResponse {
 }
 
 /**
- * UploadLog请求参数结构体
+ * EstimateRebuildIndexTask请求参数结构体
  */
-export interface UploadLogRequest {
+export interface EstimateRebuildIndexTaskRequest {
   /**
-   * 日志主题id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * 日志主题ID
    */
   TopicId: string
   /**
-   * 该参数已废弃，请勿使用
-   * @deprecated
+   * 预估任务起始时间，毫秒
    */
-  HashKey?: string
+  StartTime: number
   /**
-   * 压缩方法，目前支持
-- lz4
-- zstd
+   * 预估任务结束时间，毫秒
    */
-  CompressType?: string
+  EndTime: number
 }
 
 /**
@@ -6412,6 +6430,24 @@ export interface DescribeLogContextResponse {
  * ModifyConsoleSharing返回参数结构体
  */
 export interface ModifyConsoleSharingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EstimateRebuildIndexTask返回参数结构体
+ */
+export interface EstimateRebuildIndexTaskResponse {
+  /**
+   * 预估索引重建需要时间，单位秒
+   */
+  RemainTime?: number
+  /**
+   * 预估写流量大小，单位MB
+   */
+  WriteTraffic?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7995,6 +8031,48 @@ export interface ModifyDashboardSubscribeRequest {
 }
 
 /**
+ * 索引重建任务信息
+ */
+export interface RebuildIndexTaskInfo {
+  /**
+   * 索引重建任务ID
+   */
+  TaskId: string
+  /**
+   * 索引重建任务当前状态，0:索引重建任务已创建，1:创建索引重建资源，2:索引重建资源创建完成，3:重建中，4:暂停，5:重建索引成功，6:重建成功（可检索），7:重建失败，8:撤销，9:删除元数据和索引
+   */
+  Status: number
+  /**
+   * 重建任务开始时间戳
+   */
+  StartTime: number
+  /**
+   * 重建任务结束时间戳
+   */
+  EndTime: number
+  /**
+   * 重投预估剩余时间，单位秒
+   */
+  RemainTime: number
+  /**
+   * 重建任务创建时间戳
+   */
+  CreateTime: number
+  /**
+   * 重投完成度，百分比
+   */
+  Progress: number
+  /**
+   * 重建任务更新时间
+   */
+  UpdateTime: number
+  /**
+   * 附加状态描述信息（目前仅描述失败时失败原因）
+   */
+  StatusMessage: string
+}
+
+/**
  * CreateDashboardSubscribe请求参数结构体
  */
 export interface CreateDashboardSubscribeRequest {
@@ -8658,6 +8736,20 @@ export interface DashboardTemplateVariable {
 }
 
 /**
+ * CancelRebuildIndexTask请求参数结构体
+ */
+export interface CancelRebuildIndexTaskRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 索引重建任务ID
+   */
+  TaskId: string
+}
+
+/**
  * DescribeConsoleSharingList请求参数结构体
  */
 export type DescribeConsoleSharingListRequest = null
@@ -9299,6 +9391,20 @@ export interface ModifyDashboardResponse {
 }
 
 /**
+ * DescribeRebuildIndexTasks返回参数结构体
+ */
+export interface DescribeRebuildIndexTasksResponse {
+  /**
+   * 索引重建任务列表
+   */
+  RebuildTasks?: Array<RebuildIndexTaskInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAlarmNotice返回参数结构体
  */
 export interface ModifyAlarmNoticeResponse {
@@ -9871,6 +9977,16 @@ export interface CreateExportResponse {
    * 日志导出ID。
    */
   ExportId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelRebuildIndexTask返回参数结构体
+ */
+export interface CancelRebuildIndexTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10521,6 +10637,32 @@ export interface HighLightItem {
 }
 
 /**
+ * DescribeRebuildIndexTasks请求参数结构体
+ */
+export interface DescribeRebuildIndexTasksRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 索引重建任务ID
+   */
+  TaskId?: string
+  /**
+   * 索引重建任务状态，不填返回所有状态任务列表，多种状态之间用逗号分隔，0:索引重建任务已创建，1:已创建索引重建资源，2:重建中，3:重建完成，4:重建成功（可检索），5:任务取消，6:元数据和索引已删除
+   */
+  Status?: string
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为10，最大值20。
+   */
+  Limit?: number
+}
+
+/**
  * 投递DLC任务配置信息
  */
 export interface DlcDeliverInfo {
@@ -10843,20 +10985,45 @@ export interface CreateDashboardSubscribeResponse {
 }
 
 /**
- * DescribeExports请求参数结构体
+ * DescribeMachineGroups请求参数结构体
  */
-export interface DescribeExportsRequest {
+export interface DescribeMachineGroupsRequest {
   /**
-   * 日志主题Id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * 过滤条件
+machineGroupName
+- 按照【机器组名称】进行过滤。
+- 类型：String
+- 必选：否
+
+machineGroupId
+- 按照【机器组ID】进行过滤。
+- 类型：String
+- 必选：否
+
+osType
+- 按照【操作系统类型】进行过滤。0： Linux；1： Windows
+- 类型：Int
+- 必选：否
+
+tagKey
+- 按照【标签键】进行过滤。
+- 类型：String
+- 必选：否
+
+tag:tagKey
+- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+- 类型：String
+- 必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
    */
-  TopicId: string
+  Filters?: Array<Filter>
   /**
    * 分页的偏移量，默认值为0
    */
   Offset?: number
   /**
-   * 分页单页限制数目，默认值为20，最大值100
+   * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
 }
@@ -11918,6 +12085,27 @@ export interface AlarmShieldCount {
    * 告警屏蔽已过期数量
    */
   ExpireCount?: number
+}
+
+/**
+ * CreateRebuildIndexTask请求参数结构体
+ */
+export interface CreateRebuildIndexTaskRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 重建起始时间戳，毫秒
+起始时间不允许超过日志生命周期
+   */
+  StartTime: number
+  /**
+   * 重建结束时间戳，毫秒
+结束时间不晚于当前时间往前推15分钟
+注意：建议提前使用“预估重建索引任务(EstimateRebuildIndexTask)”接口评估该时间范围重建索引涉及到的数据量及耗时，避免因数据量过大导致费用成本过高或耗时过长
+   */
+  EndTime: number
 }
 
 /**

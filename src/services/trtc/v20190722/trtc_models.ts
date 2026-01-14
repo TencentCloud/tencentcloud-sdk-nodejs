@@ -3067,6 +3067,10 @@ export interface MixLayoutParams {
    * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
    */
   MaxResolutionUserAlign?: number
+  /**
+   * 控制房间内纯音频用户是否占据混流布局，只在混流录制，模板布局生效。true: 代表纯音频用户不占位，false: 代表纯音频用户占位（默认为false）。
+   */
+  PureAudioDisableLayout?: boolean
 }
 
 /**
@@ -3359,6 +3363,10 @@ Hls 格式录制此参数不生效。
    * 上行视频停止时，录制的补帧类型，0：补最后一帧 1：补黑帧
    */
   FillType?: number
+  /**
+   * 控制录制任务是否订阅混流回推机器人，1是订阅，0是不订阅，默认是0。如果是混流录制任务，建议用订阅白名单控制订阅用户，防止同时订阅混流回推机器人和上行主播，以避免混音效果。
+   */
+  SubscribeAbility?: number
 }
 
 /**

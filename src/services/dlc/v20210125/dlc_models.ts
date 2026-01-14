@@ -8869,6 +8869,14 @@ export interface WorkGroupDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogPolicyInfo?: Policy
+  /**
+   * 数据目录权限
+   */
+  DataCatalogPolicyInfo?: Policys
+  /**
+   * 模型权限
+   */
+  ModelPolicyInfo?: Policys
 }
 
 /**

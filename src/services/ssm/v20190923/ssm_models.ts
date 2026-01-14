@@ -304,6 +304,10 @@ False -- 不开启
    * KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。
    */
   KmsHsmClusterId?: string
+  /**
+   * 账户备注
+   */
+  AccountRemark?: string
 }
 
 /**
@@ -1062,6 +1066,41 @@ Database - 显式指明所在的数据库实例。
 TableName - 显式指明所在表
    */
   ColumnName?: string
+  /**
+   * 仅当PrivilegeName为SchemaPrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  SchemaName?: string
+  /**
+   * 仅当PrivilegeName为SequencePrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  SequenceName?: string
+  /**
+   * 仅当PrivilegeName为ProcedurePrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  ProcedureName?: string
+  /**
+   * 仅当PrivilegeName为TypePrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  TypeName?: string
+  /**
+   * 仅当PrivilegeName为FunctionPrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  FunctionName?: string
+  /**
+   * 仅当PrivilegeName为ViewPrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  ViewName?: string
+  /**
+   * 仅当PrivilegeName为MatviewPrivileges时这个值才生效，并且此时必须填充：
+目前仅postgresSQL需要
+   */
+  MatviewName?: string
 }
 
 /**

@@ -218,6 +218,16 @@ it("cfw.v20190904.CreateNatFwInstance", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyIpsModeSwitch", async function () {
+    try {
+       const data = await client.ModifyIpsModeSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.UpdateCheckCcnNonDirectFlag", async function () {
     try {
        const data = await client.UpdateCheckCcnNonDirectFlag({})
@@ -318,9 +328,9 @@ it("cfw.v20190904.DescribeNatFwDnatRule", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeEnterpriseSGRuleProgress", async function () {
+it("cfw.v20190904.DescribeGuideScanInfo", async function () {
     try {
-       const data = await client.DescribeEnterpriseSGRuleProgress({})
+       const data = await client.DescribeGuideScanInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +601,16 @@ it("cfw.v20190904.ModifyEnterpriseSecurityGroupRule", async function () {
 it("cfw.v20190904.AddAclRule", async function () {
     try {
        const data = await client.AddAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeEnterpriseSGRuleProgress", async function () {
+    try {
+       const data = await client.DescribeEnterpriseSGRuleProgress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1078,9 +1098,9 @@ it("cfw.v20190904.ModifyRunSyncAsset", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeGuideScanInfo", async function () {
+it("cfw.v20190904.DescribeIpsModeSwitch", async function () {
     try {
-       const data = await client.DescribeGuideScanInfo({})
+       const data = await client.DescribeIpsModeSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

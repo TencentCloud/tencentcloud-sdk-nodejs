@@ -298,6 +298,26 @@ it("cls.v20201016.DescribeTopics", async function () {
     }
 })
 
+it("cls.v20201016.CancelRebuildIndexTask", async function () {
+    try {
+       const data = await client.CancelRebuildIndexTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.EstimateRebuildIndexTask", async function () {
+    try {
+       const data = await client.EstimateRebuildIndexTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeSplunkPreview", async function () {
     try {
        const data = await client.DescribeSplunkPreview({})
@@ -848,6 +868,16 @@ it("cls.v20201016.CreateHostMetricConfig", async function () {
     }
 })
 
+it("cls.v20201016.DescribeRebuildIndexTasks", async function () {
+    try {
+       const data = await client.DescribeRebuildIndexTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeAlarmShields", async function () {
     try {
        const data = await client.DescribeAlarmShields({})
@@ -938,6 +968,16 @@ it("cls.v20201016.CreateDashboardSubscribe", async function () {
     }
 })
 
+it("cls.v20201016.DescribeTopicBaseMetricConfigs", async function () {
+    try {
+       const data = await client.DescribeTopicBaseMetricConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyNoticeContent", async function () {
     try {
        const data = await client.ModifyNoticeContent({})
@@ -1018,9 +1058,9 @@ it("cls.v20201016.DeleteDashboardSubscribe", async function () {
     }
 })
 
-it("cls.v20201016.DescribeTopicBaseMetricConfigs", async function () {
+it("cls.v20201016.CreateRebuildIndexTask", async function () {
     try {
-       const data = await client.DescribeTopicBaseMetricConfigs({})
+       const data = await client.CreateRebuildIndexTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

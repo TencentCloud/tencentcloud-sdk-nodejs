@@ -23,6 +23,7 @@ import {
   DeleteShipperRequest,
   ScheduledSqlResouceInfo,
   DynamicIndex,
+  CreateRebuildIndexTaskResponse,
   CheckFunctionRequest,
   NetInfo,
   CreateLogsetRequest,
@@ -69,7 +70,6 @@ import {
   CreateTopicRequest,
   ModifyDataTransformRequest,
   CreateDlcDeliverRequest,
-  DescribeMachineGroupsRequest,
   Dimension,
   ModifyScheduledSqlRequest,
   DeleteConfigResponse,
@@ -149,6 +149,7 @@ import {
   DeleteSplunkDeliverResponse,
   DescribeTopicMetricConfigsResponse,
   DeleteDashboardSubscribeRequest,
+  LogInfo,
   DeleteAlarmNoticeResponse,
   DeleteAlarmShieldRequest,
   ModifyEsRechargeRequest,
@@ -160,6 +161,7 @@ import {
   DescribeAlarmShieldsResponse,
   ModifyConfigExtraResponse,
   DeleteConsoleSharingRequest,
+  UploadLogRequest,
   ModifyConsoleSharingRequest,
   AppointLabel,
   CommitConsumerOffsetsRequest,
@@ -178,7 +180,7 @@ import {
   ModifyScheduledSqlResponse,
   QueryRangeMetricRequest,
   MetaTagInfo,
-  LogInfo,
+  DescribeExportsRequest,
   DescribeConfigsResponse,
   ExtractRuleInfo,
   TopicInfo,
@@ -216,7 +218,7 @@ import {
   NoticeContentInfo,
   ModifyMetricConfigResponse,
   DescribeConsumerResponse,
-  UploadLogRequest,
+  EstimateRebuildIndexTaskRequest,
   EsTimeInfo,
   DescribeClusterBaseMetricConfigsResponse,
   CreateIndexResponse,
@@ -252,6 +254,7 @@ import {
   DeleteAlarmRequest,
   DescribeLogContextResponse,
   ModifyConsoleSharingResponse,
+  EstimateRebuildIndexTaskResponse,
   DeleteDashboardRequest,
   CreateCosRechargeResponse,
   NoticeReceiver,
@@ -312,6 +315,7 @@ import {
   ModifyConsumerRequest,
   ModifyMetricConfigRequest,
   ModifyDashboardSubscribeRequest,
+  RebuildIndexTaskInfo,
   CreateDashboardSubscribeRequest,
   FullTextInfo,
   DescribeConfigMachineGroupsResponse,
@@ -336,6 +340,7 @@ import {
   LogsetInfo,
   CreateExportRequest,
   DashboardTemplateVariable,
+  CancelRebuildIndexTaskRequest,
   DescribeConsoleSharingListRequest,
   DescribeLogsetsResponse,
   DescribeKafkaConsumerPreviewResponse,
@@ -359,6 +364,7 @@ import {
   ModifyConfigResponse,
   MetricConfig,
   ModifyDashboardResponse,
+  DescribeRebuildIndexTasksResponse,
   ModifyAlarmNoticeResponse,
   DescribeConsumerOffsetsResponse,
   SearchLogInfos,
@@ -381,6 +387,7 @@ import {
   ModifyWebCallbackRequest,
   DeleteTopicResponse,
   CreateExportResponse,
+  CancelRebuildIndexTaskResponse,
   DeleteConfigFromMachineGroupResponse,
   UploadLogResponse,
   CreateAlarmResponse,
@@ -409,6 +416,7 @@ import {
   DescribeTopicsResponse,
   EventLog,
   HighLightItem,
+  DescribeRebuildIndexTasksRequest,
   DlcDeliverInfo,
   DescribeShippersRequest,
   DescribeCloudProductLogTasksResponse,
@@ -420,7 +428,7 @@ import {
   GetAlarmLogResponse,
   DescribeKafkaRechargesRequest,
   CreateDashboardSubscribeResponse,
-  DescribeExportsRequest,
+  DescribeMachineGroupsRequest,
   AlarmTarget,
   CreateKafkaRechargeResponse,
   DashboardSubscribeData,
@@ -453,6 +461,7 @@ import {
   Column,
   DescribeDataTransformInfoRequest,
   AlarmShieldCount,
+  CreateRebuildIndexTaskRequest,
   Filter,
   TopicPartitionInfo,
   ModifyTopicRequest,
@@ -781,6 +790,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicsResponse) => void
   ): Promise<DescribeTopicsResponse> {
     return this.request("DescribeTopics", req, cb)
+  }
+
+  /**
+   * 取消重建索引任务
+   */
+  async CancelRebuildIndexTask(
+    req: CancelRebuildIndexTaskRequest,
+    cb?: (error: string, rep: CancelRebuildIndexTaskResponse) => void
+  ): Promise<CancelRebuildIndexTaskResponse> {
+    return this.request("CancelRebuildIndexTask", req, cb)
+  }
+
+  /**
+   * 预估重建索引任务
+   */
+  async EstimateRebuildIndexTask(
+    req: EstimateRebuildIndexTaskRequest,
+    cb?: (error: string, rep: EstimateRebuildIndexTaskResponse) => void
+  ): Promise<EstimateRebuildIndexTaskResponse> {
+    return this.request("EstimateRebuildIndexTask", req, cb)
   }
 
   /**
@@ -1334,6 +1363,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取重建索引任务列表
+   */
+  async DescribeRebuildIndexTasks(
+    req: DescribeRebuildIndexTasksRequest,
+    cb?: (error: string, rep: DescribeRebuildIndexTasksResponse) => void
+  ): Promise<DescribeRebuildIndexTasksResponse> {
+    return this.request("DescribeRebuildIndexTasks", req, cb)
+  }
+
+  /**
    * 获取告警屏蔽配置规则
    */
   async DescribeAlarmShields(
@@ -1424,6 +1463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指标订阅配置
+   */
+  async DescribeTopicBaseMetricConfigs(
+    req: DescribeTopicBaseMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeTopicBaseMetricConfigsResponse) => void
+  ): Promise<DescribeTopicBaseMetricConfigsResponse> {
+    return this.request("DescribeTopicBaseMetricConfigs", req, cb)
+  }
+
+  /**
    * 该接口用于修改通知内容配置
    */
   async ModifyNoticeContent(
@@ -1511,13 +1560,19 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指标订阅配置
-   */
-  async DescribeTopicBaseMetricConfigs(
-    req: DescribeTopicBaseMetricConfigsRequest,
-    cb?: (error: string, rep: DescribeTopicBaseMetricConfigsResponse) => void
-  ): Promise<DescribeTopicBaseMetricConfigsResponse> {
-    return this.request("DescribeTopicBaseMetricConfigs", req, cb)
+     * 创建重建索引任务
+注意：
+- 单个日志主题同时仅允许运行一个重建索引任务，单个日志主题最多同时拥有10个重建索引任务记录，需删除不再需要的任务记录后才能新建索引任务。
+- 同一时间范围内的日志，仅允许重建一次索引，需删除之前的任务记录后才能再次重建。
+- 删除重建索引任务记录将恢复重建索引前的索引数据。
+- 所选时间范围对应日志写流量不能超出5TB。
+- 重建索引时间范围以日志时间为准，日志上传时间与重建索引时间范围有超过1小时的偏差时（例如16:00上传了一条02:00的日志到 CLS，重建00:00～12:00的日志索引）不会被重建且后续无法进行检索。新上报一条日志到已经被重建的日志时间范围时，也不会被重建且后续无法进行检索。
+     */
+  async CreateRebuildIndexTask(
+    req: CreateRebuildIndexTaskRequest,
+    cb?: (error: string, rep: CreateRebuildIndexTaskResponse) => void
+  ): Promise<CreateRebuildIndexTaskResponse> {
+    return this.request("CreateRebuildIndexTask", req, cb)
   }
 
   /**

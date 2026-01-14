@@ -1458,6 +1458,16 @@ it("tke.v20180525.AcquireClusterAdminRole", async function () {
     }
 })
 
+it("tke.v20180525.DescribeUserPermissions", async function () {
+    try {
+       const data = await client.DescribeUserPermissions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterRoute", async function () {
     try {
        const data = await client.CreateClusterRoute({})
@@ -1561,6 +1571,16 @@ it("tke.v20180525.DescribePrometheusGlobalNotification", async function () {
 it("tke.v20180525.ScaleInClusterMaster", async function () {
     try {
        const data = await client.ScaleInClusterMaster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.GrantUserPermissions", async function () {
+    try {
+       const data = await client.GrantUserPermissions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2181,6 +2201,16 @@ it("tke.v20180525.DescribeClusterKubeconfig", async function () {
 it("tke.v20180525.DescribeEdgeClusterUpgradeInfo", async function () {
     try {
        const data = await client.DescribeEdgeClusterUpgradeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteUserPermissions", async function () {
+    try {
+       const data = await client.DeleteUserPermissions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
