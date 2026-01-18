@@ -45,6 +45,7 @@ import {
   DescribeDataCustomUrlRequest,
   DescribeUvListResponse,
   Tag,
+  DescribeDataPvUrlStatisticsV2Request,
   DescribeRumGroupLogResponse,
   DescribeDataStaticUrlRequest,
   ModifyInstanceResponse,
@@ -83,6 +84,7 @@ import {
   DescribeDataPvUrlStatisticsResponse,
   DescribeDataLogUrlInfoRequest,
   DescribeDataCustomUrlResponse,
+  DescribeDataPvUrlStatisticsV2Response,
   RumAreaInfo,
   DescribeDataSetUrlStatisticsRequest,
   ResumeInstanceResponse,
@@ -317,6 +319,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopProjectResponse) => void
   ): Promise<StopProjectResponse> {
     return this.request("StopProject", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataPvUrlStatistics信息
+   */
+  async DescribeDataPvUrlStatisticsV2(
+    req: DescribeDataPvUrlStatisticsV2Request,
+    cb?: (error: string, rep: DescribeDataPvUrlStatisticsV2Response) => void
+  ): Promise<DescribeDataPvUrlStatisticsV2Response> {
+    return this.request("DescribeDataPvUrlStatisticsV2", req, cb)
   }
 
   /**

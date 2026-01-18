@@ -268,6 +268,16 @@ it("cdwch.v20200915.DescribeInstance", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeEventTasks", async function () {
+    try {
+       const data = await client.DescribeEventTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.DescribeInstanceNodes", async function () {
     try {
        const data = await client.DescribeInstanceNodes({})

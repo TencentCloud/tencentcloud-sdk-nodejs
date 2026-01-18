@@ -3845,6 +3845,10 @@ export interface ImageTaskInput {
    * 美颜配置。
    */
   BeautyConfig?: BeautyConfig
+  /**
+   * 图片基础转换能力。
+   */
+  TransformConfig?: ImageTransformConfig
 }
 
 /**
@@ -8129,6 +8133,71 @@ export interface AiRecognitionTaskFaceSegmentItem {
 }
 
 /**
+ * 图片缩放配置
+ */
+export interface ImageResizeConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启</li>
+<li>OFF：关闭</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 输出图片模式，可选模式：
+<li>percent: 指定缩放倍率，可以为小数</li>
+<li>mfit: 缩放至指定宽高的较大矩形</li>
+<li>lfit: 缩放至指定宽高的较小矩形</li>
+<li>fill: 缩放至指定宽高的较大矩形，并居中裁剪指定宽高</li>
+<li>pad: 缩放至指定宽高的较小矩形，并填充到指定宽高</li>
+<li>fixed: 缩放至固定宽高，强制缩放</li>
+默认值：percent。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: string
+  /**
+   * 缩放倍率，可以为小数，当Mode为percent时使用。
+
+默认值：1.0。
+取值范围：[0.1，10.0]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
+  /**
+   * 目标图片宽度。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent时优先使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Width?: number
+  /**
+   * 目标图片高度。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent时优先使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Height?: number
+  /**
+   * 目标图片长边。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent且未配置Width和Height时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LongSide?: number
+  /**
+   * 目标图片短边。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent且未配置Width和Height时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShortSide?: number
+}
+
+/**
  * CreateMediaEvaluation返回参数结构体
  */
 export interface CreateMediaEvaluationResponse {
@@ -8966,7 +9035,7 @@ GV。
    * 模型将以此参数传入的图片作为尾帧画面来生成视频。
 支持此参数的模型：
 1. GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。
-2. Kling， 在Resolution:1080P的情况下 2.1版本支持首位帧。
+2. Kling， 在Resolution:1080P的情况下 2.1版本支持首尾帧。
 3. Vidu, q2-pro, q2-turbo 支持首尾帧。
 
 注意：
@@ -11087,7 +11156,8 @@ export interface AdvancedSuperResolutionConfig {
   /**
    * 类型，可选值：
 <li>standard：通用超分</li>
-<li>super：高级超分。</li>
+<li>super：高级超分super版。</li>
+<li>ultra：高级超分ultra版。</li>
 默认值：standard。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -11102,19 +11172,34 @@ export interface AdvancedSuperResolutionConfig {
   Mode?: string
   /**
    * 超分倍率，可以为小数。
+注意：当Mode等于percent时使用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
   /**
    * 目标图片宽度，不能超过4096。
+注意：当Mode等于aspect或fixed时，优先使用此配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Width?: number
   /**
    * 目标图片高度，不能超过4096。
+注意：当Mode等于aspect或fixed时，优先使用此配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Height?: number
+  /**
+   * 目标图片长边长度，不能超过4096。
+注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LongSide?: number
+  /**
+   * 目标图片短边长度，不能超过4096。
+注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShortSide?: number
 }
 
 /**
@@ -17012,6 +17097,17 @@ export interface AiRecognitionTaskAsrWordsResultItem {
 export type DescribeStreamLinkRegionsRequest = null
 
 /**
+ * 图片基础转换能力
+ */
+export interface ImageTransformConfig {
+  /**
+   * 图片缩放配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageResize?: ImageResizeConfig
+}
+
+/**
  * ModifyStreamLinkInput返回参数结构体
  */
 export interface ModifyStreamLinkInputResponse {
@@ -21208,6 +21304,21 @@ export interface AigcVideoExtraParam {
 注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。
    */
   AspectRatio?: string
+  /**
+   * 是否添加图标水印。
+1. Hailuo 支持此参数。
+2. Kling 支持此参数。
+3. Vidu 支持此参数。
+   */
+  LogoAdd?: number
+  /**
+   * 为视频生成音频。接受的值包括 true 或 false。 
+
+支持此参数的模型：
+1. GV，默认true。
+2. OS，默认true。
+   */
+  EnableAudio?: boolean
   /**
    * 错峰模型，目前仅支持Vidu模型。
 错峰模式下提交的任务，会在48小时内生成，未能完成的任务会被自动取消。

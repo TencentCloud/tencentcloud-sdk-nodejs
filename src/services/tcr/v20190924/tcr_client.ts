@@ -34,6 +34,7 @@ import {
   DeleteReplicationRuleResponse,
   DescribeNamespacesResponse,
   DescribeInstanceCustomizedDomainResponse,
+  TerminateGCJobResponse,
   TriggerInvokePara,
   TriggerLogResp,
   DownloadHelmChartRequest,
@@ -111,6 +112,7 @@ import {
   DescribeReplicationPoliciesRequest,
   VpcPrivateDomainStatus,
   Permission,
+  ModifyInstanceStorageRequest,
   DescribeSecurityPoliciesResponse,
   CreateSignatureResponse,
   DeleteRepositoryTagsRequest,
@@ -143,6 +145,7 @@ import {
   DescribeWebhookTriggerLogRequest,
   RenewInstanceRequest,
   DescribeImageFilterPersonalRequest,
+  TerminateGCJobRequest,
   DescribeTagRetentionExecutionTaskRequest,
   ReplicationRule,
   RepoInfoResp,
@@ -278,7 +281,7 @@ import {
   CreateRepositoryResponse,
   DescribeTagRetentionRulesRequest,
   ServiceAccount,
-  RespLimit,
+  ModifyInstanceStorageResponse,
   CheckInstanceNameRequest,
   DescribeInstanceAllNamespacesRequest,
   DescribeInstanceTokenResponse,
@@ -294,6 +297,7 @@ import {
   ReplicationFilter,
   TcrRepositoryInfo,
   TcrInstanceToken,
+  RespLimit,
   ModifyUserPasswordPersonalRequest,
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
@@ -1031,6 +1035,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * TCR实例存储桶切换
+   */
+  async ModifyInstanceStorage(
+    req: ModifyInstanceStorageRequest,
+    cb?: (error: string, rep: ModifyInstanceStorageResponse) => void
+  ): Promise<ModifyInstanceStorageResponse> {
+    return this.request("ModifyInstanceStorage", req, cb)
+  }
+
+  /**
    * 查询长期访问凭证信息
    */
   async DescribeInstanceToken(
@@ -1048,6 +1062,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadHelmChartResponse) => void
   ): Promise<DownloadHelmChartResponse> {
     return this.request("DownloadHelmChart", req, cb)
+  }
+
+  /**
+   * 终止制品清理任务
+   */
+  async TerminateGCJob(
+    req: TerminateGCJobRequest,
+    cb?: (error: string, rep: TerminateGCJobResponse) => void
+  ): Promise<TerminateGCJobResponse> {
+    return this.request("TerminateGCJob", req, cb)
   }
 
   /**

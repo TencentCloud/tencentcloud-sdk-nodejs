@@ -218,6 +218,16 @@ it("dlc.v20210125.AlterDMSDatabase", async function () {
     }
 })
 
+it("dlc.v20210125.CreateDatasourceConnection", async function () {
+    try {
+       const data = await client.CreateDatasourceConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeUserRegisterTime", async function () {
     try {
        const data = await client.DescribeUserRegisterTime({})

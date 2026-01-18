@@ -227,6 +227,7 @@ import {
   CreatePullStreamConfigResponse,
   ModifyLivePadTemplateResponse,
   DescribeTopClientIpSumInfoListRequest,
+  CreateLiveCloudEffectResponse,
   DescribeCallbackRecordsListResponse,
   DeleteLiveWatermarkRequest,
   UpdateLiveWatermarkRequest,
@@ -480,6 +481,7 @@ import {
   CdnPlayStatData,
   AddLiveDomainResponse,
   ModifyPullStreamConfigResponse,
+  CreateLiveCloudEffectRequest,
   DescribeProvinceIspPlayInfoListRequest,
   StartLiveStreamMonitorResponse,
   CreateLivePadRuleResponse,
@@ -1044,13 +1046,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除直播垫片模板。
+   * 查询直播转推计费带宽，查询时间范围最大支持3个月内的数据，时间跨度最长31天。
    */
-  async DeleteLivePadTemplate(
-    req: DeleteLivePadTemplateRequest,
-    cb?: (error: string, rep: DeleteLivePadTemplateResponse) => void
-  ): Promise<DeleteLivePadTemplateResponse> {
-    return this.request("DeleteLivePadTemplate", req, cb)
+  async DescribeDeliverBandwidthList(
+    req: DescribeDeliverBandwidthListRequest,
+    cb?: (error: string, rep: DescribeDeliverBandwidthListResponse) => void
+  ): Promise<DescribeDeliverBandwidthListResponse> {
+    return this.request("DescribeDeliverBandwidthList", req, cb)
   }
 
   /**
@@ -1943,6 +1945,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
+     */
+  async DescribeStreamPlayInfoList(
+    req: DescribeStreamPlayInfoListRequest,
+    cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void
+  ): Promise<DescribeStreamPlayInfoListResponse> {
+    return this.request("DescribeStreamPlayInfoList", req, cb)
+  }
+
+  /**
    * 获取回调规则列表
    */
   async DescribeLiveCallbackRules(
@@ -2074,13 +2087,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询直播转推计费带宽，查询时间范围最大支持3个月内的数据，时间跨度最长31天。
+   * 删除直播垫片模板。
    */
-  async DescribeDeliverBandwidthList(
-    req: DescribeDeliverBandwidthListRequest,
-    cb?: (error: string, rep: DescribeDeliverBandwidthListResponse) => void
-  ): Promise<DescribeDeliverBandwidthListResponse> {
-    return this.request("DescribeDeliverBandwidthList", req, cb)
+  async DeleteLivePadTemplate(
+    req: DeleteLivePadTemplateRequest,
+    cb?: (error: string, rep: DeleteLivePadTemplateResponse) => void
+  ): Promise<DeleteLivePadTemplateResponse> {
+    return this.request("DeleteLivePadTemplate", req, cb)
   }
 
   /**
@@ -2678,14 +2691,14 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
-查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
+     * 使用该接口生成云端特效。特效可用于叠加到直播流上，供播放端观看。
+注意：云端特效生成需要一定时间，调用生成接口后，可通过查询接口，获取是否特效已生成。
      */
-  async DescribeStreamPlayInfoList(
-    req: DescribeStreamPlayInfoListRequest,
-    cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void
-  ): Promise<DescribeStreamPlayInfoListResponse> {
-    return this.request("DescribeStreamPlayInfoList", req, cb)
+  async CreateLiveCloudEffect(
+    req: CreateLiveCloudEffectRequest,
+    cb?: (error: string, rep: CreateLiveCloudEffectResponse) => void
+  ): Promise<CreateLiveCloudEffectResponse> {
+    return this.request("CreateLiveCloudEffect", req, cb)
   }
 
   /**

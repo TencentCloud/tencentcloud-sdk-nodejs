@@ -278,6 +278,7 @@ import {
   DeleteDataEngineResponse,
   CosPermission,
   IpPortPair,
+  PrestoMonitorMetrics,
   DescribeTasksAnalysisResponse,
   RestartDataEngineResponse,
   DescribeNativeSparkSessionsResponse,
@@ -325,6 +326,7 @@ import {
   DescribeViewsRequest,
   StandardEngineResourceGroupInfo,
   CreateStandardEngineResourceGroupResponse,
+  CreateDatasourceConnectionRequest,
   GrantDLCCatalogAccessRequest,
   ReportHeartbeatMetaDataRequest,
   DescribeEngineNetworksResponse,
@@ -402,7 +404,7 @@ import {
   UserDetailInfo,
   DescribeTaskResultResponse,
   DescribeDatasourceConnectionResponse,
-  PrestoMonitorMetrics,
+  CreateDatasourceConnectionResponse,
   DescribeNotebookSessionStatementRequest,
   ModifyDataEngineDescriptionRequest,
   UpdateNetworkConnectionRequest,
@@ -745,6 +747,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
   ): Promise<AlterDMSDatabaseResponse> {
     return this.request("AlterDMSDatabase", req, cb)
+  }
+
+  /**
+   * 创建数据源
+   */
+  async CreateDatasourceConnection(
+    req: CreateDatasourceConnectionRequest,
+    cb?: (error: string, rep: CreateDatasourceConnectionResponse) => void
+  ): Promise<CreateDatasourceConnectionResponse> {
+    return this.request("CreateDatasourceConnection", req, cb)
   }
 
   /**

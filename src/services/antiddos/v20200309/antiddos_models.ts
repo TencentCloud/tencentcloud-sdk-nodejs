@@ -6335,7 +6335,7 @@ export interface ModifyCCLevelPolicyRequest {
  */
 export interface DescribeCcGeoIPBlockConfigListRequest {
   /**
-   * DDoS防护子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
+   * DDoS防护子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP）
    */
   Business: string
   /**

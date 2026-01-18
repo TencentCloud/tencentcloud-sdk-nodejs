@@ -4180,7 +4180,7 @@ export interface BackupStorageLocation {
  */
 export interface DeleteClusterMaintenanceWindowAndExclusionRequest {
   /**
-   * 集群ID
+   * 集群ID，可以从容器服务控制台计划升级功能集群维护窗口页面获取（https://console.cloud.tencent.com/tke2/upgrade-plan）。
    */
   ClusterID: string
 }
@@ -4952,7 +4952,7 @@ export interface CreateClusterInstancesRequest {
  */
 export interface CreateClusterMaintenanceWindowAndExclusionsRequest {
   /**
-   * 集群ID
+   * 集群ID，可以从容器服务集群控制台获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterID: string
   /**
@@ -4964,7 +4964,15 @@ export interface CreateClusterMaintenanceWindowAndExclusionsRequest {
    */
   Duration: number
   /**
-   * 维护周期（一周中的哪几天）
+   * 维护周期（一周中的哪几天），支持的参数值如下：
+
+- MO：周一
+- TU：周二
+- WE：周三
+- TH：周四
+- FR：周五
+- SA：周六
+- SU：周日
    */
   DayOfWeek: Array<string>
   /**
@@ -5720,7 +5728,15 @@ export interface ModifyClusterMaintenanceWindowAndExclusionsRequest {
    */
   Duration: number
   /**
-   * 维护周期（一周中的哪几天）
+   * 维护周期（一周中的哪几天），支持的参数值如下：
+
+- MO：周一
+- TU：周二
+- WE：周三
+- TH：周四
+- FR：周五
+- SA：周六
+- SU：周日
    */
   DayOfWeek: Array<string>
   /**
@@ -5810,6 +5826,10 @@ export interface UpgradePlan {
    * 集群名称
    */
   ClusterName?: string
+  /**
+   * 集群地域
+   */
+  Region?: string
   /**
    * 预计开始时间
    */
@@ -14694,11 +14714,13 @@ export interface DescribeClusterCommonNamesResponse {
  */
 export interface ModifyClusterRollOutSequenceTagsRequest {
   /**
-   * 集群ID
+   * 集群ID，可以从容器服务集群控制台获取（https://console.cloud.tencent.com/tke2/cluster）。
    */
   ClusterID: string
   /**
-   * 集群发布序列标签（为空时表示移除集群标签）
+   * 集群发布序列标签（为空时表示移除集群标签）。支持以下集群标签：
+- 标签键："Env"，支持的标签值：["Test","Pre-Production","Production"]
+- 标签键："Protection-Level"，支持的标签值：["Low","Medium","High"]
    */
   Tags?: Array<Tag>
 }

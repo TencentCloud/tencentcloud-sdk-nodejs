@@ -85,6 +85,20 @@ export interface DescribeLicenseResponse {
 export type VerifyLicenseRequest = null
 
 /**
+ * 元数据展示信息
+ */
+export interface DisplayMetadata {
+  /**
+   * <p>展示的名称</p>
+   */
+  Name?: string
+  /**
+   * <p>展示的值</p>
+   */
+  Value?: string
+}
+
+/**
  * 表示应用实例的软件授权，包含颁发信息、激活信息等内容。
  */
 export interface License {
@@ -162,6 +176,14 @@ export interface License {
    * <p>授权的层级：Master 主授权；Child 子授权/增强型授权</p>
    */
   LicenseLevel?: string
+  /**
+   * <p>License 内容信息</p>
+   */
+  LicenseData?: LicenseData
+  /**
+   * <p>License 颁发地址</p>
+   */
+  IssueURL?: string
 }
 
 /**
@@ -179,6 +201,24 @@ export interface Filter {
    * 字段的过滤值
    */
   Values: Array<string>
+}
+
+/**
+ * License 内容信息
+ */
+export interface LicenseData {
+  /**
+   * <p>License 文本内容。支持密钥、证书等文本形式，二进制的密钥需要伙伴进行 base64 转码</p>
+   */
+  Text: string
+  /**
+   * <p>部署服务输出信息，基于部署签发 License 时需要该参数。</p>
+   */
+  DeploymentOutput?: string
+  /**
+   * <p>License 前端展示信息。key、value 形式，比如可传入，颁发机构：XXXX 有限公司</p>
+   */
+  Metadata?: Array<DisplayMetadata>
 }
 
 /**

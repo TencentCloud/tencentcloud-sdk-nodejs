@@ -4821,6 +4821,20 @@ export interface DescribeTopClientIpSumInfoListRequest {
 }
 
 /**
+ * CreateLiveCloudEffect返回参数结构体
+ */
+export interface CreateLiveCloudEffectResponse {
+  /**
+   * <p>云端特效 ID。</p>
+   */
+  Id?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCallbackRecordsList返回参数结构体
  */
 export interface DescribeCallbackRecordsListResponse {
@@ -11061,6 +11075,32 @@ export interface ModifyPullStreamConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateLiveCloudEffect请求参数结构体
+ */
+export interface CreateLiveCloudEffectRequest {
+  /**
+   * <p>用于生成云端特效的 Prompt。示例：飞鸟。Prompt 和 ImageUrl 二选一。</p>
+   */
+  Prompt?: string
+  /**
+   * <p>模板生礼物的模板ID。目前支持的模板ID：queen_accession, wizard_of_oz，red_envelopes，fishermen，captain_america。</p>
+   */
+  TemplateId?: string
+  /**
+   * <p>输入我的图片地址，用于生成云端特效。ImageUrl 和 Prompt 二选一。</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>指定生成云端特效的方式。默认自动选取。标准方式：text2video，高品质方式：text2video_hq。</p>
+   */
+  Type?: string
+  /**
+   * <p>操作者名称。</p>
+   */
+  Operator?: string
 }
 
 /**

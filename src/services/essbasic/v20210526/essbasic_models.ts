@@ -5357,6 +5357,10 @@ export interface ChannelCreateBatchQuickSignUrlRequest {
    * 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。
    */
   PresetApproverInfo?: PresetApproverInfo
+  /**
+   * 是否允许此链接中签署方批量确认已读文件。 <ul><li>false (默认): 不允许批量确认已读文件。</li> <li>true : 允许批量确认已读文件。</li></ul>注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 若批量签署的合同中第一份待签署合同所选择的印章或者签名无法完全覆盖后续合同要求，或者当前签署人没有指定印章使用权限，则无法使用此功能，会自动退化为逐份确认。`
+   */
+  CanSkipReadFlow?: boolean
 }
 
 /**

@@ -21,8 +21,10 @@ import {
   SaleParam,
   DescribeLicenseResponse,
   VerifyLicenseRequest,
+  DisplayMetadata,
   License,
   Filter,
+  LicenseData,
   VerifyLicenseResponse,
   DescribeLicenseRequest,
 } from "./cloudapp_models"

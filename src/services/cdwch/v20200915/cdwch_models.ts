@@ -16,6 +16,76 @@
  */
 
 /**
+ * 事件任务
+ */
+export interface EventTask {
+  /**
+   * 集群id
+   */
+  InstanceId?: string
+  /**
+   * 事件任务的id
+   */
+  EventTaskId?: number
+  /**
+   * 处理人uin
+   */
+  HandleUser?: string
+  /**
+   * 事件名称
+   */
+  EventCode?: string
+  /**
+   * CVM相关事件的维修id
+   */
+  RepairId?: string
+  /**
+   * 事件名称描述
+   */
+  EventNameDescribe?: string
+  /**
+   * 事件等级（0-低；1-中；2-高；3-严重）
+   */
+  EventPriority?: number
+  /**
+   * 事件详情
+   */
+  EventDetail?: string
+  /**
+   * 影响集群节点
+   */
+  IP?: string
+  /**
+   * 事件触发时间
+   */
+  CreateTime?: string
+  /**
+   * 事件状态(1-待处理;2-已预约;3-处理中;4-已完成;5-处理中;6-自动处理中;-1-已忽略;-2-已删除)
+   */
+  Status?: number
+  /**
+   * 是否需要授权维修：1-不需要，2-需要
+   */
+  NeedAuthorization?: number
+  /**
+   * 该事件涉及到的操作类型（OnlineMigrationForInstance-实例在线迁移,OnlineMaintenanceForInstance-实例在线维修,等）
+   */
+  OperationType?: Array<string>
+  /**
+   * 完成时间
+   */
+  FinishTime?: string
+  /**
+   * 操作指引
+   */
+  OperationGuide?: string
+  /**
+   * 资源id
+   */
+  ResourceId?: string
+}
+
+/**
  * CreateInstanceNew返回参数结构体
  */
 export interface CreateInstanceNewResponse {
@@ -420,6 +490,24 @@ export interface CkUserAlterInfo {
    * 账户的当前密码
    */
   OriginalPassword?: string
+}
+
+/**
+ * DescribeEventTasks返回参数结构体
+ */
+export interface DescribeEventTasksResponse {
+  /**
+   * 产生的事件任务
+   */
+  EventTasks?: Array<EventTask>
+  /**
+   * 事件任务总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -888,29 +976,49 @@ export interface DestroyInstanceResponse {
 }
 
 /**
- * DescribeBackUpJob请求参数结构体
+ * DescribeEventTasks请求参数结构体
  */
-export interface DescribeBackUpJobRequest {
+export interface DescribeEventTasksRequest {
   /**
    * 集群id
    */
   InstanceId: string
   /**
-   * 分页大小
+   * 过滤的事件任务id
+   */
+  EventTaskId?: number
+  /**
+   * 页码，默认为1
+   */
+  PageNumber?: number
+  /**
+   * 每页数量（支持10、20、30、50、100、200），默认为100
    */
   PageSize?: number
   /**
-   * 页号
+   * 事件名称过滤
    */
-  PageNum?: number
+  EventCode?: string
   /**
-   * 开始时间
+   * (1-待处理;2-已预约;3-处理中;4-已结束;5-处理中;-1-已忽略;-2-已删除)
    */
-  BeginTime?: string
+  Status?: Array<number | bigint>
   /**
-   * 结束时间
+   * 创建时间范围开始 (格式: YYYY-MM-DD HH:MM:SS)，最大支持查询180天信息
+   */
+  StartTime?: string
+  /**
+   * 创建时间范围结束 (格式: YYYY-MM-DD HH:MM:SS)
    */
   EndTime?: string
+  /**
+   * 排序字段（事件类型：event_code；触发时间：create_time；完成时间：end_time）
+   */
+  SortField?: string
+  /**
+   * 排序顺序 (asc/desc)
+   */
+  SortOrder?: string
 }
 
 /**
@@ -1492,6 +1600,14 @@ Modify 集群变更中；
    * 可升级的zk版本
    */
   UpgradeZkVersions?: string
+  /**
+   * 是否显示rip
+   */
+  ShowRip?: string
+  /**
+   * 实例类型：标准型 standard，无keeper节点类型noKeeper；
+   */
+  InstanceType?: string
 }
 
 /**
@@ -2227,6 +2343,32 @@ export interface DescribeInstanceRequest {
    * 是否是open api查询
    */
   IsOpenApi?: boolean
+}
+
+/**
+ * DescribeBackUpJob请求参数结构体
+ */
+export interface DescribeBackUpJobRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 页号
+   */
+  PageNum?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
 }
 
 /**

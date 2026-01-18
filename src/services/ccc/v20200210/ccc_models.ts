@@ -732,7 +732,7 @@ HoaiMy
         &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
         &quot;APIKey&quot;: &quot;eyxxxx&quot;,
         &quot;GroupId&quot;: &quot;181000000000000&quot;,
-        &quot;VoiceType&quot;:&quot;female-tianmei-jingpin&quot;,
+        &quot;VoiceType&quot;:&quot;female-tianmei&quot;,
         &quot;Speed&quot;: 1.2
 }
 </code></pre>
@@ -842,6 +842,10 @@ HoaiMy
    * 最大通话时长， 默认不限制。单位毫秒(ms)
    */
   MaxCallDurationMs?: number
+  /**
+   * 最大振铃时长，达到时长阈值自动挂断。 **仅自携号码支持当前参数**
+   */
+  MaxRingTimeoutSecond?: number
 }
 
 /**

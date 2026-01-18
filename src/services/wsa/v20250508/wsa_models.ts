@@ -47,7 +47,7 @@ export interface SearchProRequest {
    */
   Cnt?: number
   /**
-   * Industry=gov/news/acad，对应党政机关、权威媒体、学术（英文），**仅限尊享版使用**
+   * Industry=gov/news/acad/finance，对应党政机关、权威媒体、学术（英文）、金融，**仅限尊享版使用**
    */
   Industry?: string
 }
@@ -73,6 +73,10 @@ images：图片列表
 favicon：网站图标链接，部分不知名站点结果可能为空
    */
   Pages?: Array<string>
+  /**
+   * 用户版本：standard/premium/lite
+   */
+  Version?: string
   /**
    * 提示信息
    */

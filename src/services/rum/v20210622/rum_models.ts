@@ -691,6 +691,138 @@ export interface Tag {
 }
 
 /**
+ * DescribeDataPvUrlStatisticsV2请求参数结构体
+ */
+export interface DescribeDataPvUrlStatisticsV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * group by 参数值枚举1:1m  2:5m  3:30m  4:1h 
+ 5:1d
+   */
+  GroupByType?: number
+  /**
+   * 1: 查询智研
+0: 走旧逻辑，已下线，勿使用
+   */
+  IsNewData?: number
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
+}
+
+/**
  * DescribeRumGroupLog返回参数结构体
  */
 export interface DescribeRumGroupLogResponse {
@@ -1760,6 +1892,20 @@ export interface DescribeDataLogUrlInfoRequest {
  * DescribeDataCustomUrl返回参数结构体
  */
 export interface DescribeDataCustomUrlResponse {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataPvUrlStatisticsV2返回参数结构体
+ */
+export interface DescribeDataPvUrlStatisticsV2Response {
   /**
    * 返回值
    */

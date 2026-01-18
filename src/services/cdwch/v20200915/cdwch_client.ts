@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  EventTask,
   CreateInstanceNewResponse,
   DescribeInstanceStateRequest,
   DescribeClusterConfigsResponse,
@@ -38,6 +39,7 @@ import {
   Tag,
   ResizeDiskResponse,
   CkUserAlterInfo,
+  DescribeEventTasksResponse,
   DescribeInstanceNodesRequest,
   ModifyUserNewPrivilegeRequest,
   DescribeCkSqlApisRequest,
@@ -54,7 +56,7 @@ import {
   ScheduleStrategy,
   DescribeInstanceStateResponse,
   DestroyInstanceResponse,
-  DescribeBackUpJobRequest,
+  DescribeEventTasksRequest,
   DescribeInstanceShardsRequest,
   ResizeDiskRequest,
   CNResource,
@@ -100,6 +102,7 @@ import {
   DescribeBackUpJobDetailRequest,
   NodeSpec,
   DescribeInstanceRequest,
+  DescribeBackUpJobRequest,
   InstanceDetail,
   TablePrivilegeInfo,
   DescribeBackUpTablesRequest,
@@ -364,6 +367,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceResponse) => void
   ): Promise<DescribeInstanceResponse> {
     return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 获取产生的事件
+   */
+  async DescribeEventTasks(
+    req: DescribeEventTasksRequest,
+    cb?: (error: string, rep: DescribeEventTasksResponse) => void
+  ): Promise<DescribeEventTasksResponse> {
+    return this.request("DescribeEventTasks", req, cb)
   }
 
   /**

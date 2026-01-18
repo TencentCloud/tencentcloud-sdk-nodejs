@@ -82,6 +82,10 @@ export interface AddChunkRequest {
  */
 export interface QuerySceneListResponse {
   /**
+   * 场景列表
+   */
+  Datas?: Array<Scene>
+  /**
    * 总数
    */
   Total?: number

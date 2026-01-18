@@ -6608,6 +6608,22 @@ export interface IpPortPair {
 }
 
 /**
+ * Presto监控指标
+ */
+export interface PrestoMonitorMetrics {
+  /**
+   * 	Alluxio本地缓存命中率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalCacheHitRate?: number
+  /**
+   * Fragment缓存命中率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentCacheHitRate?: number
+}
+
+/**
  * DescribeTasksAnalysis返回参数结构体
  */
 export interface DescribeTasksAnalysisResponse {
@@ -7881,6 +7897,52 @@ export interface CreateStandardEngineResourceGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateDatasourceConnection请求参数结构体
+ */
+export interface CreateDatasourceConnectionRequest {
+  /**
+   * 数据连接名称
+   */
+  DatasourceConnectionName: string
+  /**
+   * 数据连接类型
+   */
+  DatasourceConnectionType: string
+  /**
+   * 数据连接属性
+   */
+  DatasourceConnectionConfig: DatasourceConnectionConfig
+  /**
+   * 数据连接所属服务
+   */
+  ServiceType: string
+  /**
+   * 数据连接描述
+   */
+  DatasourceConnectionDesc?: string
+  /**
+   * 数据引擎名称数组
+   */
+  DataEngineNames?: Array<string>
+  /**
+   * 网络连接名称
+   */
+  NetworkConnectionName?: string
+  /**
+   * 网络连接描述
+   */
+  NetworkConnectionDesc?: string
+  /**
+   * 网络连接类型 （2-夸源型，4-增强型）
+   */
+  NetworkConnectionType?: number
+  /**
+   * 自定义配置
+   */
+  CustomConfig?: Array<CustomConfig>
 }
 
 /**
@@ -9918,19 +9980,17 @@ export interface DescribeDatasourceConnectionResponse {
 }
 
 /**
- * Presto监控指标
+ * CreateDatasourceConnection返回参数结构体
  */
-export interface PrestoMonitorMetrics {
+export interface CreateDatasourceConnectionResponse {
   /**
-   * 	Alluxio本地缓存命中率
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据连接Id
    */
-  LocalCacheHitRate?: number
+  DatasourceConnectionId?: string
   /**
-   * Fragment缓存命中率
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FragmentCacheHitRate?: number
+  RequestId?: string
 }
 
 /**

@@ -48,8 +48,9 @@ import {
   ServiceCallInfo,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
-  SpecPrice,
+  DescribeTrainingTaskRequest,
   StartNotebookResponse,
+  ModelInputInfo,
   CFSTurbo,
   DescribeTrainingModelVersionRequest,
   ResourceInstanceRunningJobInfo,
@@ -117,6 +118,7 @@ import {
   TagFilter,
   PodSSHInfo,
   DescribeModelServiceGroupsRequest,
+  SubAccountInfo,
   ImageInfo,
   Tag,
   ServiceInfo,
@@ -140,6 +142,7 @@ import {
   IntranetCallInfo,
   DescribeBillingSpecsPriceRequest,
   Instance,
+  SpecPrice,
   CreateExportRequest,
   DescribeBillingSpecsResponse,
   DeleteTrainingTaskResponse,
@@ -179,6 +182,7 @@ import {
   HostPath,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
+  UpdateSubAccountLinuxUserInfoResponse,
   ServiceEIPInfo,
   DescribeTrainingTasksResponse,
   DescribeModelAccelerateTaskRequest,
@@ -187,6 +191,7 @@ import {
   ExecAction,
   TrainingTaskDetail,
   DescribeExportRequest,
+  UpdateSubAccountLinuxUserInfoRequest,
   DescribeNotebookRequest,
   LocalDisk,
   DescribeLogsResponse,
@@ -198,13 +203,13 @@ import {
   Spec,
   ServiceCallInfoV2,
   DescribeBillingResourceGroupRequest,
-  DescribeTrainingTaskRequest,
+  DescribeSubAccountLinuxUserInfosRequest,
   ChatCompletionResponse,
   GooseFSx,
   DescribePlatformImagesResponse,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
-  ModelInputInfo,
+  DescribeSubAccountLinuxUserInfosResponse,
   DeleteDatasetRequest,
   DataConfig,
   ResourceConf,
@@ -303,6 +308,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelServiceCallInfoResponse) => void
   ): Promise<DescribeModelServiceCallInfoResponse> {
     return this.request("DescribeModelServiceCallInfo", req, cb)
+  }
+
+  /**
+   * 批量查询子账号Linux用户信息
+   */
+  async DescribeSubAccountLinuxUserInfos(
+    req?: DescribeSubAccountLinuxUserInfosRequest,
+    cb?: (error: string, rep: DescribeSubAccountLinuxUserInfosResponse) => void
+  ): Promise<DescribeSubAccountLinuxUserInfosResponse> {
+    return this.request("DescribeSubAccountLinuxUserInfos", req, cb)
   }
 
   /**
@@ -566,6 +581,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: CreateModelServiceResponse) => void
   ): Promise<CreateModelServiceResponse> {
     return this.request("CreateModelService", req, cb)
+  }
+
+  /**
+   * 更新子账号Linux用户信息
+   */
+  async UpdateSubAccountLinuxUserInfo(
+    req: UpdateSubAccountLinuxUserInfoRequest,
+    cb?: (error: string, rep: UpdateSubAccountLinuxUserInfoResponse) => void
+  ): Promise<UpdateSubAccountLinuxUserInfoResponse> {
+    return this.request("UpdateSubAccountLinuxUserInfo", req, cb)
   }
 
   /**

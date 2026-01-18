@@ -188,6 +188,16 @@ it("rum.v20210622.StopProject", async function () {
     }
 })
 
+it("rum.v20210622.DescribeDataPvUrlStatisticsV2", async function () {
+    try {
+       const data = await client.DescribeDataPvUrlStatisticsV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeAppSingleCaseList", async function () {
     try {
        const data = await client.DescribeAppSingleCaseList({})

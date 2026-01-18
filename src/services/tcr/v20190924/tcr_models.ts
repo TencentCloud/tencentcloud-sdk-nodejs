@@ -317,6 +317,24 @@ export interface DescribeInstanceCustomizedDomainResponse {
 }
 
 /**
+ * TerminateGCJob返回参数结构体
+ */
+export interface TerminateGCJobResponse {
+  /**
+   * <p>操作结果</p>枚举值：<ul><li> success： 操作成功</li><li> error： 操作失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>操作结果详细信息</p>
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 触发器触发参数
  */
 export interface TriggerInvokePara {
@@ -1727,6 +1745,24 @@ export interface Permission {
 }
 
 /**
+ * ModifyInstanceStorage请求参数结构体
+ */
+export interface ModifyInstanceStorageRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  RegistryId: string
+  /**
+   * <p>目标存储资源地域</p>
+   */
+  TargetRegion: string
+  /**
+   * <p>目标存储资源名称</p>
+   */
+  TargetStorageName: string
+}
+
+/**
  * DescribeSecurityPolicies返回参数结构体
  */
 export interface DescribeSecurityPoliciesResponse {
@@ -2284,6 +2320,16 @@ export interface DescribeImageFilterPersonalRequest {
    * Tag名
    */
   Tag: string
+}
+
+/**
+ * TerminateGCJob请求参数结构体
+ */
+export interface TerminateGCJobRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  RegistryId: string
 }
 
 /**
@@ -4910,13 +4956,13 @@ export interface ServiceAccount {
 }
 
 /**
- * 用户配额返回值
+ * ModifyInstanceStorage返回参数结构体
  */
-export interface RespLimit {
+export interface ModifyInstanceStorageResponse {
   /**
-   * 配额信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LimitInfo: Array<Limit>
+  RequestId?: string
 }
 
 /**
@@ -5183,6 +5229,16 @@ export interface TcrInstanceToken {
    * 令牌过期时间戳
    */
   ExpiredAt: number
+}
+
+/**
+ * 用户配额返回值
+ */
+export interface RespLimit {
+  /**
+   * 配额信息
+   */
+  LimitInfo: Array<Limit>
 }
 
 /**

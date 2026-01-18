@@ -478,9 +478,9 @@ it("live.v20180801.DeleteLiveWatermarkRule", async function () {
     }
 })
 
-it("live.v20180801.DeleteLivePadTemplate", async function () {
+it("live.v20180801.DescribeDeliverBandwidthList", async function () {
     try {
-       const data = await client.DeleteLivePadTemplate({})
+       const data = await client.DescribeDeliverBandwidthList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,6 +1348,16 @@ it("live.v20180801.CreateLiveCallbackRule", async function () {
     }
 })
 
+it("live.v20180801.DescribeStreamPlayInfoList", async function () {
+    try {
+       const data = await client.DescribeStreamPlayInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveCallbackRules", async function () {
     try {
        const data = await client.DescribeLiveCallbackRules({})
@@ -1468,9 +1478,9 @@ it("live.v20180801.ModifyPullStreamStatus", async function () {
     }
 })
 
-it("live.v20180801.DescribeDeliverBandwidthList", async function () {
+it("live.v20180801.DeleteLivePadTemplate", async function () {
     try {
-       const data = await client.DescribeDeliverBandwidthList({})
+       const data = await client.DeleteLivePadTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2018,9 +2028,9 @@ it("live.v20180801.CreatePullStreamConfig", async function () {
     }
 })
 
-it("live.v20180801.DescribeStreamPlayInfoList", async function () {
+it("live.v20180801.CreateLiveCloudEffect", async function () {
     try {
-       const data = await client.DescribeStreamPlayInfoList({})
+       const data = await client.CreateLiveCloudEffect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

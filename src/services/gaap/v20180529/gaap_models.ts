@@ -252,11 +252,11 @@ export interface DescribeListenerStatisticsRequest {
  */
 export interface DescribeProxyAndStatisticsListenersResponse {
   /**
-   * 可以统计的通道信息
+   * <p>可以统计的通道信息</p>
    */
   ProxySet: Array<ProxySimpleInfo>
   /**
-   * 通道数量
+   * <p>通道数量</p>
    */
   TotalCount: number
   /**
@@ -475,7 +475,7 @@ export interface SetAuthenticationResponse {
  */
 export interface DescribeProxyGroupStatisticsResponse {
   /**
-   * 通道组统计数据
+   * <p>通道组统计数据</p>
    */
   StatisticsData: Array<MetricStatisticsInfo>
   /**
@@ -543,35 +543,35 @@ export interface BandwidthPriceGradient {
  */
 export interface DescribeHTTPListenersRequest {
   /**
-   * 通道ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
+   * <p>通道ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。</p>
    */
   ProxyId?: string
   /**
-   * 通道组ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
+   * <p>通道组ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。</p>
    */
   GroupId?: string
   /**
-   * 过滤条件，按照监听器ID进行精确查询。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
+   * <p>过滤条件，按照监听器ID进行精确查询。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。</p>
    */
   ListenerId?: string
   /**
-   * 过滤条件，按照监听器名称进行精确查询
+   * <p>过滤条件，按照监听器名称进行精确查询</p>
    */
   ListenerName?: string
   /**
-   * 过滤条件，按照监听器端口进行精确查询
+   * <p>过滤条件，按照监听器端口进行精确查询</p>
    */
   Port?: number
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 限制数量，默认为20个
+   * <p>限制数量，默认为20个</p>
    */
   Limit?: number
   /**
-   * 过滤条件，支持按照端口或监听器名称进行模糊查询，该参数不能与ListenerName和Port同时使用
+   * <p>过滤条件，支持按照端口或监听器名称进行模糊查询，该参数不能与ListenerName和Port同时使用</p>
    */
   SearchValue?: string
 }
@@ -679,26 +679,23 @@ export interface DescribeListenerRealServersRequest {
  */
 export interface DescribeProxyGroupStatisticsRequest {
   /**
-   * 通道组ID
+   * <p>通道组ID</p>
    */
   GroupId: string
   /**
-   * 起始时间
+   * <p>起始时间</p>
    */
   StartTime: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: string
   /**
-   * 统计指标名称列表，支持: 入带宽:InBandwidth, 出带宽:OutBandwidth, 并发:Concurrent, 入包量:InPackets, 出包量:OutPackets
+   * <p>统计指标名称列表，支持: 入带宽:InBandwidth, 出带宽:OutBandwidth, 并发:Concurrent, 入包量:InPackets, 出包量:OutPackets</p>
    */
   MetricNames: Array<string>
   /**
-   * 监控粒度，目前支持60，300，3600，86400，单位：秒。
-当时间范围不超过1天，支持最小粒度60秒；
-当时间范围不超过7天，支持最小粒度3600秒；
-当时间范围不超过30天，支持最小粒度86400秒。
+   * <p>监控粒度，目前支持60，300，3600，86400，单位：秒。当时间范围不超过1天，支持最小粒度60秒；当时间范围不超过7天，支持最小粒度3600秒；当时间范围不超过30天，支持最小粒度86400秒。</p>
    */
   Granularity: number
 }
@@ -777,7 +774,7 @@ export type DescribeCountryAreaMappingRequest = null
  */
 export interface CheckProxyCreateResponse {
   /**
-   * 查询能否创建给定配置的通道，1可以创建，0不可创建。
+   * <p>查询能否创建给定配置的通道，1可以创建，0不可创建。</p>
    */
   CheckFlag?: number
   /**
@@ -875,15 +872,15 @@ export interface DescribeRulesResponse {
  */
 export interface DescribeProxiesResponse {
   /**
-   * 通道个数。
+   * <p>通道个数。</p>
    */
   TotalCount?: number
   /**
-   * （旧参数，请切换到ProxySet）通道实例信息列表。
+   * <p>（旧参数，请切换到ProxySet）通道实例信息列表。</p>
    */
   InstanceSet?: Array<ProxyInfo>
   /**
-   * （新参数）通道实例信息列表。
+   * <p>（新参数）通道实例信息列表。</p>
    */
   ProxySet?: Array<ProxyInfo>
   /**
@@ -897,7 +894,7 @@ export interface DescribeProxiesResponse {
  */
 export interface CreateRuleResponse {
   /**
-   * 创建转发规则成功返回规则ID
+   * <p>创建转发规则成功返回规则ID</p>
    */
   RuleId?: string
   /**
@@ -955,7 +952,7 @@ export interface CreateGlobalDomainDnsResponse {
  */
 export interface CreateDomainErrorPageInfoResponse {
   /**
-   * 错误定制响应的配置ID
+   * <p>错误定制响应的配置ID</p>
    */
   ErrorPageId?: string
   /**
@@ -969,11 +966,11 @@ export interface CreateDomainErrorPageInfoResponse {
  */
 export interface BindListenerRealServersRequest {
   /**
-   * 监听器ID
+   * <p>监听器ID</p>
    */
   ListenerId: string
   /**
-   * 待绑定源站列表。如果该监听器的源站调度策略是加权轮询，需要填写源站权重 RealServerWeight, 不填或者其他调度类型默认源站权重为1。
+   * <p>待绑定源站列表。如果该监听器的源站调度策略是加权轮询，需要填写源站权重 RealServerWeight, 不填或者其他调度类型默认源站权重为1。</p>
    */
   RealServerBindSet?: Array<RealServerBindSetReq>
 }
@@ -983,30 +980,27 @@ export interface BindListenerRealServersRequest {
  */
 export interface ModifyProxyConfigurationRequest {
   /**
-   * （旧参数，请切换到ProxyId）通道的实例ID。
+   * <p>（旧参数，请切换到ProxyId）通道的实例ID。</p>
    */
   InstanceId?: string
   /**
-   * 需要调整到的目标带宽，单位：Mbps。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+   * <p>需要调整到的目标带宽，单位：Mbps。Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到</p>
    */
   Bandwidth?: number
   /**
-   * 需要调整到的目标并发值，单位：万。
-Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到
+   * <p>需要调整到的目标并发值，单位：万。Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAccessRegionsByDestRegion接口获取得到</p>
    */
   Concurrent?: number
   /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-更多详细信息请参阅：如何保证幂等性。
+   * <p>用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。更多详细信息请参阅：如何保证幂等性。</p>
    */
   ClientToken?: string
   /**
-   * （新参数）通道的实例ID。
+   * <p>（新参数）通道的实例ID。</p>
    */
   ProxyId?: string
   /**
-   * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+   * <p>计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）</p>
    */
   BillingType?: number
 }
@@ -1380,7 +1374,7 @@ UNBINDING，安全策略关闭中。
  */
 export interface CreateHTTPListenerResponse {
   /**
-   * 创建的监听器ID
+   * <p>创建的监听器ID</p>
    */
   ListenerId?: string
   /**
@@ -1404,35 +1398,35 @@ export interface DeleteGlobalDomainDnsResponse {
  */
 export interface CreateProxyGroupRequest {
   /**
-   * 通道组所属项目ID
+   * <p>通道组所属项目ID</p>
    */
   ProjectId: number
   /**
-   * 通道组别名
+   * <p>通道组别名</p>
    */
   GroupName: string
   /**
-   * 源站地域，参考接口 [https://cloud.tencent.com/document/api/608/36964] 返回参数RegionDetail中的RegionId
+   * <p>源站地域，参考接口 [https://cloud.tencent.com/document/api/608/36964] 返回参数RegionDetail中的RegionId</p>
    */
   RealServerRegion: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   TagSet?: Array<TagPair>
   /**
-   * 加速地域列表，包括加速地域名，及该地域对应的带宽和并发配置。
+   * <p>加速地域列表，包括加速地域名，及该地域对应的带宽和并发配置。</p>
    */
   AccessRegionSet?: Array<AccessConfiguration>
   /**
-   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   * <p>IP版本，可取值：IPv4、IPv6，默认值IPv4</p>
    */
   IPAddressVersion?: string
   /**
-   * 通道组套餐类型，可取值：Thunder、Accelerator，默认值Thunder
+   * <p>通道组套餐类型，可取值：Thunder、Accelerator，默认值Thunder</p>
    */
   PackageType?: string
   /**
-   * 该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道组默认支持Http3.0；当为IPv6，默认不支持Http3.0。
+   * <p>该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道组默认支持Http3.0；当为IPv6，默认不支持Http3.0。</p>
    */
   Http3Supported?: number
 }
@@ -1708,7 +1702,7 @@ export interface ModifyGlobalDomainAttributeResponse {
  */
 export interface DescribeProxyAndStatisticsListenersRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: number
 }
@@ -1810,57 +1804,39 @@ export interface DescribeDomainErrorPageInfoByIdsResponse {
  */
 export interface DescribeProxiesRequest {
   /**
-   * （旧参数，请切换到ProxyIds）按照一个或者多个实例ID查询。每次请求的实例的上限为100。参数不支持同时指定InstanceIds和Filters。
+   * <p>（旧参数，请切换到ProxyIds）按照一个或者多个实例ID查询。每次请求的实例的上限为100。参数不支持同时指定InstanceIds和Filters。</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 过滤条件。   
-每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定InstanceIds和Filters。 
-ProjectId - String - 是否必填：否 -（过滤条件）按照项目ID过滤。   
-AccessRegion - String - 是否必填：否 - （过滤条件）按照接入地域过滤。    
-RealServerRegion - String - 是否必填：否 - （过滤条件）按照源站地域过滤。
-GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过滤。
-IPAddressVersion - String - 是否必填：否 - （过滤条件）按照IP版本过滤。
-PackageType - String - 是否必填：否 - （过滤条件）按照通道套餐类型过滤。
+   * <p>过滤条件。 <br />每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定InstanceIds和Filters。 ProjectId - String - 是否必填：否 -（过滤条件）按照项目ID过滤。 <br />AccessRegion - String - 是否必填：否 - （过滤条件）按照接入地域过滤。  <br />RealServerRegion - String - 是否必填：否 - （过滤条件）按照源站地域过滤。GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过滤。IPAddressVersion - String - 是否必填：否 - （过滤条件）按照IP版本过滤。PackageType - String - 是否必填：否 - （过滤条件）按照通道套餐类型过滤。</p>
    */
   Filters?: Array<Filter>
   /**
-   * （新参数，替代InstanceIds）按照一个或者多个实例ID查询。每次请求的实例的上限为100。参数不支持同时指定InstanceIds和Filters。
+   * <p>（新参数，替代InstanceIds）按照一个或者多个实例ID查询。每次请求的实例的上限为100。参数不支持同时指定InstanceIds和Filters。</p>
    */
   ProxyIds?: Array<string>
   /**
-   * 标签列表，当存在该字段时，拉取对应标签下的资源列表。
-最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，通道会被拉取出来。
+   * <p>标签列表，当存在该字段时，拉取对应标签下的资源列表。最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，通道会被拉取出来。</p>
    */
   TagSet?: Array<TagPair>
   /**
-   * 当该字段为1时，仅拉取非通道组的通道，
-当该字段为0时，仅拉取通道组的通道，
-不存在该字段时，拉取所有通道，包括独立通道和通道组通道。
+   * <p>当该字段为1时，仅拉取非通道组的通道，当该字段为0时，仅拉取通道组的通道，不存在该字段时，拉取所有通道，包括独立通道和通道组通道。</p>
    */
   Independent?: number
   /**
-   * 输出通道列表的排列顺序。取值范围：
-asc：升序排列；
-desc：降序排列。
-默认为降序。
+   * <p>输出通道列表的排列顺序。取值范围：asc：升序排列；desc：降序排列。默认为降序。</p>
    */
   Order?: string
   /**
-   * 通道列表排序的依据字段。取值范围：
-create_time：依据通道的创建时间排序；
-proxy_id：依据通道的ID排序；
-bandwidth：依据通道带宽上限排序；
-concurrent_connections：依据通道并发排序；
-默认按通道创建时间排序。
+   * <p>通道列表排序的依据字段。取值范围：create_time：依据通道的创建时间排序；proxy_id：依据通道的ID排序；bandwidth：依据通道带宽上限排序；concurrent_connections：依据通道并发排序；默认按通道创建时间排序。</p>
    */
   OrderField?: string
 }
@@ -2205,26 +2181,19 @@ export type DescribeAccessRegionsRequest = null
  */
 export interface CreateCertificateRequest {
   /**
-   * 证书类型。其中：
-0，表示基础认证配置；
-1，表示客户端CA证书；
-2，服务器SSL证书；
-3，表示源站CA证书；
-4，表示通道SSL证书。
+   * <p>证书类型。其中：0，表示基础认证配置；1，表示客户端CA证书；2，服务器SSL证书；3，表示源站CA证书；4，表示通道SSL证书。</p>
    */
   CertificateType: number
   /**
-   * 证书内容。采用url编码。其中：
-当证书类型为基础认证配置时，该参数填写用户名/密码对。格式：“用户名：密码”，例如：root:FSGdT。其中密码使用htpasswd或者openssl，例如：openssl passwd -crypt 123456。
-当证书类型为CA/SSL证书时，该参数填写证书内容，格式为pem。
+   * <p>证书内容。采用url编码。其中：当证书类型为基础认证配置时，该参数填写用户名/密码对。格式：“用户名：密码”，例如：root:FSGdT。其中密码使用htpasswd或者openssl，例如：openssl passwd -crypt 123456。当证书类型为CA/SSL证书时，该参数填写证书内容，格式为pem。</p>
    */
   CertificateContent: string
   /**
-   * 证书名称
+   * <p>证书名称</p>
    */
   CertificateAlias?: string
   /**
-   * 密钥内容。采用url编码。仅当证书类型为SSL证书时，需要填写该参数。格式为pem。
+   * <p>密钥内容。采用url编码。仅当证书类型为SSL证书时，需要填写该参数。格式为pem。</p>
    */
   CertificateKey?: string
 }
@@ -2258,11 +2227,11 @@ export interface DescribeCustomHeaderRequest {
  */
 export interface DescribeProxyGroupListResponse {
   /**
-   * 通道组总数。
+   * <p>通道组总数。</p>
    */
   TotalCount?: number
   /**
-   * 通道组列表。
+   * <p>通道组列表。</p>
    */
   ProxyGroupList?: Array<ProxyGroupInfo>
   /**
@@ -2388,19 +2357,19 @@ export interface ModifyCertificateAttributesRequest {
  */
 export interface ModifyGlobalDomainDnsRequest {
   /**
-   * 解析记录ID
+   * <p>解析记录ID</p>
    */
   DnsRecordId: number
   /**
-   * 域名ID
+   * <p>域名ID</p>
    */
   DomainId: string
   /**
-   * 国家ID列表
+   * <p>国家ID列表</p>
    */
   NationCountryInnerCodes: Array<string>
   /**
-   * 通道ID列表
+   * <p>通道ID列表</p>
    */
   ProxyIdList: Array<string>
 }
@@ -2463,47 +2432,47 @@ export interface DescribeProxiesStatusRequest {
  */
 export interface ModifyTCPListenerAttributeRequest {
   /**
-   * 监听器ID
+   * <p>监听器ID</p>
    */
   ListenerId: string
   /**
-   * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+   * <p>通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。</p>
    */
   GroupId?: string
   /**
-   * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+   * <p>通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。</p>
    */
   ProxyId?: string
   /**
-   * 监听器名称
+   * <p>监听器名称</p>
    */
   ListenerName?: string
   /**
-   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。注意：lrtt需要开通白名单；RealServerType 为 DOMAIN 不支持wrr 和 lrtt。
+   * <p>监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。注意：lrtt需要开通白名单；RealServerType 为 DOMAIN 不支持wrr 和 lrtt。</p>
    */
   Scheduler?: string
   /**
-   * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+   * <p>源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。</p>
    */
   DelayLoop?: number
   /**
-   * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
+   * <p>源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。</p>
    */
   ConnectTimeout?: number
   /**
-   * 是否开启健康检查，1开启，0关闭。
+   * <p>是否开启健康检查，1开启，0关闭。</p>
    */
   HealthCheck?: number
   /**
-   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+   * <p>源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启</p>
    */
   FailoverSwitch?: number
   /**
-   * 健康阈值，表示连续检查成功多少次数后认定源站健康。范围为1到10
+   * <p>健康阈值，表示连续检查成功多少次数后认定源站健康。范围为1到10</p>
    */
   HealthyThreshold?: number
   /**
-   * 不健康阈值，表示连续检查失败次数后认定源站不健康。范围为1到10
+   * <p>不健康阈值，表示连续检查失败次数后认定源站不健康。范围为1到10</p>
    */
   UnhealthyThreshold?: number
 }
@@ -3097,52 +3066,51 @@ export interface CreateDomainRequest {
  */
 export interface CreateRuleRequest {
   /**
-   * 7层监听器ID
+   * <p>7层监听器ID</p>
    */
   ListenerId: string
   /**
-   * 转发规则的域名
+   * <p>转发规则的域名</p>
    */
   Domain: string
   /**
-   * 转发规则的路径
+   * <p>转发规则的路径</p>
    */
   Path: string
   /**
-   * 转发规则对应源站的类型，支持IP和DOMAIN类型。
+   * <p>转发规则对应源站的类型，支持IP和DOMAIN类型。</p>
    */
   RealServerType: string
   /**
-   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数。
+   * <p>监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数。</p>
    */
   Scheduler: string
   /**
-   * 规则是否开启健康检查，1开启，0关闭。
+   * <p>规则是否开启健康检查，1开启，0关闭。</p>
    */
   HealthCheck: number
   /**
-   * 源站健康检查相关参数
+   * <p>源站健康检查相关参数</p>
    */
   CheckParams?: RuleCheckParams
   /**
-   * 加速通道转发到源站的协议类型：支持HTTP或HTTPS。
-不传递该字段时表示使用对应监听器的ForwardProtocol。
+   * <p>加速通道转发到源站的协议类型：支持HTTP或HTTPS。不传递该字段时表示使用对应监听器的ForwardProtocol。</p>
    */
   ForwardProtocol?: string
   /**
-   * 回源Host。加速通道转发到源站的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
+   * <p>回源Host。加速通道转发到源站的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。</p>
    */
   ForwardHost?: string
   /**
-   * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。创建HTTP监听器转发规则时，SNI功能默认关闭。
+   * <p>服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。创建HTTP监听器转发规则时，SNI功能默认关闭。</p>
    */
   ServerNameIndicationSwitch?: string
   /**
-   * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+   * <p>服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。</p>
    */
   ServerNameIndication?: string
   /**
-   * HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。
+   * <p>HTTP强制跳转HTTPS。输入当前规则对应的域名与地址。</p>
    */
   ForcedRedirect?: string
 }
@@ -3353,19 +3321,19 @@ export interface ProxyGroupDetail {
  */
 export interface CreateHTTPListenerRequest {
   /**
-   * 监听器名称
+   * <p>监听器名称</p>
    */
   ListenerName: string
   /**
-   * 监听器端口，基于同种传输层协议（TCP 或 UDP）的监听器，端口不可重复
+   * <p>监听器端口，基于同种传输层协议（TCP 或 UDP）的监听器，端口不可重复</p>
    */
   Port: number
   /**
-   * 通道ID，与GroupId不能同时设置，对应为通道创建监听器
+   * <p>通道ID，与GroupId不能同时设置，对应为通道创建监听器</p>
    */
   ProxyId?: string
   /**
-   * 通道组ID，与ProxyId不能同时设置，对应为通道组创建监听器
+   * <p>通道组ID，与ProxyId不能同时设置，对应为通道组创建监听器</p>
    */
   GroupId?: string
 }
@@ -3417,7 +3385,7 @@ USD 美元
  */
 export interface AddRealServersResponse {
   /**
-   * 源站信息列表
+   * <p>源站信息列表</p>
    */
   RealServerSet?: Array<NewRealServer>
   /**
@@ -3842,11 +3810,11 @@ export interface NewRealServer {
  */
 export interface DescribeHTTPListenersResponse {
   /**
-   * 监听器数量
+   * <p>监听器数量</p>
    */
   TotalCount?: number
   /**
-   * HTTP监听器列表
+   * <p>HTTP监听器列表</p>
    */
   ListenerSet?: Array<HTTPListener>
   /**
@@ -4067,30 +4035,23 @@ export interface AccessRegionDetial {
  */
 export interface DescribeProxyGroupListRequest {
   /**
-   * 偏移量，默认值为0。
+   * <p>偏移量，默认值为0。</p>
    */
   Offset: number
   /**
-   * 返回数量，默认值为20，最大值为100。
+   * <p>返回数量，默认值为20，最大值为100。</p>
    */
   Limit: number
   /**
-   * 项目ID。取值范围：
--1，该用户下所有项目
-0，默认项目
-其他值，指定的项目
+   * <p>项目ID。取值范围：-1，该用户下所有项目0，默认项目其他值，指定的项目</p>
    */
   ProjectId: number
   /**
-   * 过滤条件。   
-每次请求的Filter.Values的上限为5。
-RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。
-PackageType - String - 是否必填：否 - （过滤条件）通道组类型，Thunder表示标准通道组，Accelerator表示银牌加速通道组。
+   * <p>过滤条件。 <br />每次请求的Filter.Values的上限为5。RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。PackageType - String - 是否必填：否 - （过滤条件）通道组类型，Thunder表示标准通道组，Accelerator表示银牌加速通道组。</p>
    */
   Filters?: Array<Filter>
   /**
-   * 标签列表，当存在该字段时，拉取对应标签下的资源列表。
-最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，该通道组会被拉取出来。
+   * <p>标签列表，当存在该字段时，拉取对应标签下的资源列表。最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，该通道组会被拉取出来。</p>
    */
   TagSet?: Array<TagPair>
 }
@@ -4203,7 +4164,7 @@ export interface TagPair {
  */
 export interface CreateProxyGroupResponse {
   /**
-   * 通道组ID
+   * <p>通道组ID</p>
    */
   GroupId?: string
   /**
@@ -4217,7 +4178,7 @@ export interface CreateProxyGroupResponse {
  */
 export interface CreateHTTPSListenerResponse {
   /**
-   * 创建的监听器ID
+   * <p>创建的监听器ID</p>
    */
   ListenerId?: string
   /**
@@ -4329,7 +4290,7 @@ export interface ModifyUDPListenerAttributeResponse {
  */
 export interface DescribeGroupAndStatisticsProxyRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: number
 }
@@ -4491,11 +4452,11 @@ export interface DescribeProxyDetailResponse {
  */
 export interface DescribeGroupAndStatisticsProxyResponse {
   /**
-   * 可以统计的通道组信息
+   * <p>可以统计的通道组信息</p>
    */
   GroupSet: Array<GroupStatisticsInfo>
   /**
-   * 通道组数量
+   * <p>通道组数量</p>
    */
   TotalCount: number
   /**
@@ -4754,7 +4715,7 @@ export interface DescribeTCPListenersRequest {
  */
 export interface CreateCertificateResponse {
   /**
-   * 证书ID
+   * <p>证书ID</p>
    */
   CertificateId?: string
   /**
@@ -4881,39 +4842,39 @@ export interface DescribeDomainErrorPageInfoByIdsRequest {
  */
 export interface CheckProxyCreateRequest {
   /**
-   * 通道的接入(加速)区域。取值可通过接口DescribeAccessRegionsByDestRegion获取到
+   * <p>通道的接入(加速)区域。取值可通过接口DescribeAccessRegionsByDestRegion获取到</p>
    */
   AccessRegion: string
   /**
-   * 通道的源站区域。取值可通过接口DescribeDestRegions获取到
+   * <p>通道的源站区域。取值可通过接口DescribeDestRegions获取到</p>
    */
   RealServerRegion: string
   /**
-   * 通道带宽上限，单位：Mbps。
+   * <p>通道带宽上限，单位：Mbps。</p>
    */
   Bandwidth: number
   /**
-   * 通道并发量上限，表示同时在线的连接数，单位：万。
+   * <p>通道并发量上限，表示同时在线的连接数，单位：万。</p>
    */
   Concurrent: number
   /**
-   * 如果在通道组下创建通道，需要填写通道组的ID
+   * <p>如果在通道组下创建通道，需要填写通道组的ID</p>
    */
   GroupId?: string
   /**
-   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   * <p>IP版本，可取值：IPv4、IPv6，默认值IPv4</p>
    */
   IPAddressVersion?: string
   /**
-   * 网络类型，可取值：normal、cn2，默认值normal
+   * <p>网络类型，可取值：normal、cn2，默认值normal</p>
    */
   NetworkType?: string
   /**
-   * 通道套餐类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+   * <p>通道套餐类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。</p>
    */
   PackageType?: string
   /**
-   * 该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道默认支持Http3.0；当为IPv6，默认不支持Http3.0。
+   * <p>该字段已废弃，当IPAddressVersion为IPv4时，所创建的通道默认支持Http3.0；当为IPv6，默认不支持Http3.0。</p>
    */
   Http3Supported?: number
 }
@@ -4937,19 +4898,19 @@ export interface DescribeRegionAndPriceRequest {
  */
 export interface AddRealServersRequest {
   /**
-   * 源站对应的项目ID
+   * <p>源站对应的项目ID</p>
    */
   ProjectId: number
   /**
-   * 源站对应的IP或域名
+   * <p>源站对应的IP或域名</p>
    */
   RealServerIP: Array<string>
   /**
-   * 源站名称
+   * <p>源站名称</p>
    */
   RealServerName: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   TagSet?: Array<TagPair>
 }
@@ -5014,50 +4975,43 @@ export interface CertificateAliasInfo {
  */
 export interface CreateHTTPSListenerRequest {
   /**
-   * 监听器名称
+   * <p>监听器名称</p>
    */
   ListenerName: string
   /**
-   * 监听器端口，基于同种传输层协议（TCP 或 UDP）的监听器，端口不可重复
+   * <p>监听器端口，基于同种传输层协议（TCP 或 UDP）的监听器，端口不可重复</p>
    */
   Port: number
   /**
-   * 服务器证书ID
+   * <p>服务器证书ID</p>
    */
   CertificateId: string
   /**
-   * 加速通道转发到源站的协议类型：HTTP | HTTPS
+   * <p>加速通道转发到源站的协议类型：HTTP | HTTPS</p>
    */
   ForwardProtocol: string
   /**
-   * 通道ID，与GroupId之间只能设置一个。表示创建通道的监听器。
+   * <p>通道ID，与GroupId之间只能设置一个。表示创建通道的监听器。</p>
    */
   ProxyId?: string
   /**
-   * 认证类型，其中：
-0，单向认证；
-1，双向认证。
-默认使用单向认证。
+   * <p>认证类型，其中：0，单向认证；1，双向认证。默认使用单向认证。</p>
    */
   AuthType?: number
   /**
-   * 客户端CA单证书ID，仅当双向认证时设置该参数或PolyClientCertificateIds参数
+   * <p>客户端CA单证书ID，仅当双向认证时设置该参数或PolyClientCertificateIds参数</p>
    */
   ClientCertificateId?: string
   /**
-   * 新的客户端多CA证书ID，仅当双向认证时设置该参数或设置ClientCertificateId参数
+   * <p>新的客户端多CA证书ID，仅当双向认证时设置该参数或设置ClientCertificateId参数</p>
    */
   PolyClientCertificateIds?: Array<string>
   /**
-   * 通道组ID，与ProxyId之间只能设置一个。表示创建通道组的监听器。
+   * <p>通道组ID，与ProxyId之间只能设置一个。表示创建通道组的监听器。</p>
    */
   GroupId?: string
   /**
-   * 支持Http3的开关，其中：
-0，表示不需要支持Http3接入；
-1，表示需要支持Http3接入。
-注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
-该功能的启停无法在监听器创建完毕后再修改。
+   * <p>支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。该功能的启停无法在监听器创建完毕后再修改。</p>
    */
   Http3Supported?: number
 }
@@ -5714,31 +5668,31 @@ export interface ModifyProxyConfigurationResponse {
  */
 export interface CreateDomainErrorPageInfoRequest {
   /**
-   * 监听器ID
+   * <p>监听器ID</p>
    */
   ListenerId: string
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 原始错误码
+   * <p>原始错误码</p>
    */
   ErrorNos: Array<number | bigint>
   /**
-   * 新的响应包体
+   * <p>新的响应包体</p>
    */
   Body: string
   /**
-   * 新错误码
+   * <p>新错误码</p>
    */
   NewErrorNo?: number
   /**
-   * 需要删除的响应头
+   * <p>需要删除的响应头</p>
    */
   ClearHeaders?: Array<string>
   /**
-   * 需要设置的响应头
+   * <p>需要设置的响应头</p>
    */
   SetHeaders?: Array<HttpHeaderParam>
 }

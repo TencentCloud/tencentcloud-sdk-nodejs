@@ -1207,25 +1207,13 @@ export interface DescribeBillingResourceGroupsResponse {
 }
 
 /**
- * 计费项询价结果
+ * DescribeTrainingTask请求参数结构体
  */
-export interface SpecPrice {
+export interface DescribeTrainingTaskRequest {
   /**
-   * 计费项名称
+   * 训练任务ID
    */
-  SpecName?: string
-  /**
-   * 原价，单位：分。最大值42亿，超过则返回0
-   */
-  TotalCost?: number
-  /**
-   * 优惠后的价格，单位：分
-   */
-  RealTotalCost?: number
-  /**
-   * 计费项数量
-   */
-  SpecCount?: number
+  Id: string
 }
 
 /**
@@ -1236,6 +1224,24 @@ export interface StartNotebookResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模型输入信息
+ */
+export interface ModelInputInfo {
+  /**
+   * input数据类型
+FIXED：固定
+RANGE：浮动
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelInputType: string
+  /**
+   * input数据尺寸
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelInputDimension: Array<string>
 }
 
 /**
@@ -3322,6 +3328,32 @@ export interface DescribeModelServiceGroupsRequest {
 }
 
 /**
+ * 子账号信息
+ */
+export interface SubAccountInfo {
+  /**
+   * 腾讯云主账号UIN
+   */
+  Uin?: string
+  /**
+   * 腾讯云子账号UIN
+   */
+  SubUin?: string
+  /**
+   * 子账号名称
+   */
+  SubUinName?: string
+  /**
+   * 子账号在Linux下的UID
+   */
+  LinuxUid?: number
+  /**
+   * 子账号在Linux下的GID
+   */
+  LinuxGid?: number
+}
+
+/**
  * 镜像描述信息
  */
 export interface ImageInfo {
@@ -4079,6 +4111,28 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMsg?: string
+}
+
+/**
+ * 计费项询价结果
+ */
+export interface SpecPrice {
+  /**
+   * 计费项名称
+   */
+  SpecName?: string
+  /**
+   * 原价，单位：分。最大值42亿，超过则返回0
+   */
+  TotalCost?: number
+  /**
+   * 优惠后的价格，单位：分
+   */
+  RealTotalCost?: number
+  /**
+   * 计费项数量
+   */
+  SpecCount?: number
 }
 
 /**
@@ -5472,6 +5526,16 @@ export interface IngressPrivateLinkInfo {
 }
 
 /**
+ * UpdateSubAccountLinuxUserInfo返回参数结构体
+ */
+export interface UpdateSubAccountLinuxUserInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 共享弹性网卡信息
  */
 export interface ServiceEIPInfo {
@@ -5773,6 +5837,16 @@ export interface DescribeExportRequest {
    * 日志下载任务的ID
    */
   ExportId: string
+}
+
+/**
+ * UpdateSubAccountLinuxUserInfo请求参数结构体
+ */
+export interface UpdateSubAccountLinuxUserInfoRequest {
+  /**
+   * 子账号信息列表
+   */
+  SubAccountList?: Array<SubAccountInfo>
 }
 
 /**
@@ -6136,14 +6210,9 @@ export interface DescribeBillingResourceGroupRequest {
 }
 
 /**
- * DescribeTrainingTask请求参数结构体
+ * DescribeSubAccountLinuxUserInfos请求参数结构体
  */
-export interface DescribeTrainingTaskRequest {
-  /**
-   * 训练任务ID
-   */
-  Id: string
-}
+export type DescribeSubAccountLinuxUserInfosRequest = null
 
 /**
  * ChatCompletion返回参数结构体
@@ -6228,21 +6297,17 @@ export interface DescribeTrainingModelVersionsResponse {
 }
 
 /**
- * 模型输入信息
+ * DescribeSubAccountLinuxUserInfos返回参数结构体
  */
-export interface ModelInputInfo {
+export interface DescribeSubAccountLinuxUserInfosResponse {
   /**
-   * input数据类型
-FIXED：固定
-RANGE：浮动
-注意：此字段可能返回 null，表示取不到有效值。
+   * 子账号信息列表
    */
-  ModelInputType: string
+  SubAccountList?: Array<SubAccountInfo>
   /**
-   * input数据尺寸
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ModelInputDimension: Array<string>
+  RequestId?: string
 }
 
 /**
