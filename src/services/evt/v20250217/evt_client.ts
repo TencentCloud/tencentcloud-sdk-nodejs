@@ -23,7 +23,9 @@ import {
   DeleteRoleUserRequest,
   UserAttribute,
   DeleteRoleUserResponse,
+  PutEventResponse,
   CreateRoleUserResponse,
+  PutEventRequest,
   CompleteApprovalResponse,
   PutMessageResponse,
   PutMessageRequest,
@@ -36,6 +38,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("evt.tencentcloudapi.com", "2025-02-17", clientConfig)
+  }
+
+  /**
+   * 推送事件数据
+   */
+  async PutEvent(
+    req: PutEventRequest,
+    cb?: (error: string, rep: PutEventResponse) => void
+  ): Promise<PutEventResponse> {
+    return this.request("PutEvent", req, cb)
   }
 
   /**

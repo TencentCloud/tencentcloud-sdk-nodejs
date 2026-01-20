@@ -450,322 +450,250 @@ export interface ModifyCertificateProjectResponse {
  */
 export interface Certificates {
   /**
-   * 用户 UIN。
+   * <p>用户 UIN。</p>
    */
   OwnerUin?: string
   /**
-   * 项目 ID。
+   * <p>项目 ID。</p>
    */
   ProjectId?: string
   /**
-   * 证书来源：
-trustasia：亚洲诚信，
-upload：用户上传。
-wosign：沃通
-sheca：上海CA
+   * <p>证书来源：trustasia：亚洲诚信，upload：用户上传。wosign：沃通sheca：上海CA</p>
    */
   From?: string
   /**
-   * 证书套餐类型：
-null：用户上传证书（没有套餐类型），
-2：TrustAsia TLS RSA CA， 
-3：SecureSite 增强型企业版（EV Pro）， 
-4：SecureSite 增强型（EV）， 
-5：SecureSite 企业型专业版（OV Pro），
-6：SecureSite 企业型（OV）， 
-7：SecureSite 企业型（OV）通配符， 
-8：Geotrust 增强型（EV）， 
-9：Geotrust 企业型（OV）， 
-10：Geotrust 企业型（OV）通配符， 
-11：TrustAsia 域名型多域名 SSL 证书， 
-12：TrustAsia 域名型（DV）通配符， 
-13：TrustAsia 企业型通配符（OV）SSL 证书（D3）， 
-14：TrustAsia 企业型（OV）SSL 证书（D3）， 
-15：TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 
-16：TrustAsia 增强型 （EV）SSL 证书（D3）， 
-17：TrustAsia 增强型多域名（EV）SSL 证书（D3）， 
-18：GlobalSign 企业型（OV）SSL 证书， 
-19：GlobalSign 企业型通配符 （OV）SSL 证书， 
-20：GlobalSign 增强型 （EV）SSL 证书， 
-21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 
-22：GlobalSign 企业型多域名（OV）SSL 证书， 
-23：GlobalSign 企业型通配符多域名（OV）SSL 证书，
-24：GlobalSign 增强型多域名（EV）SSL 证书，
-25：Wotrus 域名型证书，
-26：Wotrus 域名型多域名证书，
-27：Wotrus 域名型通配符证书，
-28：Wotrus 企业型证书，
-29：Wotrus 企业型多域名证书，
-30：Wotrus 企业型通配符证书，
-31：Wotrus 增强型证书，
-32：Wotrus 增强型多域名证书，
-33：WoTrus-国密域名型证书，
-34：WoTrus-国密域名型证书（多域名），
-35：WoTrus-国密域名型证书（通配符），
-37：WoTrus-国密企业型证书，
-38：WoTrus-国密企业型证书（多域名），
-39：WoTrus-国密企业型证书（通配符），
-40：WoTrus-国密增强型证书，
-41：WoTrus-国密增强型证书（多域名），
-42：TrustAsia-域名型证书（通配符多域名），
-43：DNSPod-企业型(OV)SSL证书
-44：DNSPod-企业型(OV)通配符SSL证书
-45：DNSPod-企业型(OV)多域名SSL证书
-46：DNSPod-增强型(EV)SSL证书
-47：DNSPod-增强型(EV)多域名SSL证书
-48：DNSPod-域名型(DV)SSL证书
-49：DNSPod-域名型(DV)通配符SSL证书
-50：DNSPod-域名型(DV)多域名SSL证书
-51：DNSPod（国密）-企业型(OV)SSL证书
-52：DNSPod（国密）-企业型(OV)通配符SSL证书
-53：DNSPod（国密）-企业型(OV)多域名SSL证书
-54：DNSPod（国密）-域名型(DV)SSL证书
-55：DNSPod（国密）-域名型(DV)通配符SSL证书
-56：DNSPod（国密）-域名型(DV)多域名SSL证书
-57：SecureSite 企业型专业版多域名(OV Pro)
-58：SecureSite 企业型多域名(OV)
-59：SecureSite 增强型专业版多域名(EV Pro)
-60：SecureSite 增强型多域名(EV)
-61：Geotrust 增强型多域名(EV)
-75：SecureSite 企业型(OV)
-76：SecureSite 企业型(OV)通配符
-77：SecureSite 增强型(EV)
-78：Geotrust 企业型(OV)
-79：Geotrust 企业型(OV)通配符
-80：Geotrust 增强型(EV)
-81：GlobalSign 企业型（OV）SSL证书
-82：GlobalSign 企业型通配符 （OV）SSL证书
-83：TrustAsia C1 DV Free
-85：GlobalSign 增强型 （EV）SSL证书
-88：GlobalSign 企业型通配符多域名 （OV）SSL证书
-89：GlobalSign 企业型多域名 （OV）SSL证书
-90：GlobalSign 增强型多域名（EV） SSL证书
-91：Geotrust 增强型多域名(EV)
-92：SecureSite 企业型专业版多域名(OV Pro)
-93：SecureSite 企业型多域名(OV)
-94：SecureSite 增强型专业版多域名(EV Pro)
-95：SecureSite 增强型多域名(EV)
-96：SecureSite 增强型专业版(EV Pro)
-97：SecureSite 企业型专业版(OV Pro)
-98：CFCA 企业型(OV)SSL证书
-99：CFCA 企业型多域名(OV)SSL证书
-100：CFCA 企业型通配符(OV)SSL证书
-101：CFCA 增强型(EV)SSL证书
+   * <p>证书套餐类型：null：用户上传证书（没有套餐类型），2：TrustAsia TLS RSA CA， 3：SecureSite 增强型企业版（EV Pro）， 4：SecureSite 增强型（EV）， 5：SecureSite 企业型专业版（OV Pro），6：SecureSite 企业型（OV）， 7：SecureSite 企业型（OV）通配符， 8：Geotrust 增强型（EV）， 9：Geotrust 企业型（OV）， 10：Geotrust 企业型（OV）通配符， 11：TrustAsia 域名型多域名 SSL 证书， 12：TrustAsia 域名型（DV）通配符， 13：TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14：TrustAsia 企业型（OV）SSL 证书（D3）， 15：TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16：TrustAsia 增强型 （EV）SSL 证书（D3）， 17：TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18：GlobalSign 企业型（OV）SSL 证书， 19：GlobalSign 企业型通配符 （OV）SSL 证书， 20：GlobalSign 增强型 （EV）SSL 证书， 21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22：GlobalSign 企业型多域名（OV）SSL 证书， 23：GlobalSign 企业型通配符多域名（OV）SSL 证书，24：GlobalSign 增强型多域名（EV）SSL 证书，25：Wotrus 域名型证书，26：Wotrus 域名型多域名证书，27：Wotrus 域名型通配符证书，28：Wotrus 企业型证书，29：Wotrus 企业型多域名证书，30：Wotrus 企业型通配符证书，31：Wotrus 增强型证书，32：Wotrus 增强型多域名证书，33：WoTrus-国密域名型证书，34：WoTrus-国密域名型证书（多域名），35：WoTrus-国密域名型证书（通配符），37：WoTrus-国密企业型证书，38：WoTrus-国密企业型证书（多域名），39：WoTrus-国密企业型证书（通配符），40：WoTrus-国密增强型证书，41：WoTrus-国密增强型证书（多域名），42：TrustAsia-域名型证书（通配符多域名），43：DNSPod-企业型(OV)SSL证书44：DNSPod-企业型(OV)通配符SSL证书45：DNSPod-企业型(OV)多域名SSL证书46：DNSPod-增强型(EV)SSL证书47：DNSPod-增强型(EV)多域名SSL证书48：DNSPod-域名型(DV)SSL证书49：DNSPod-域名型(DV)通配符SSL证书50：DNSPod-域名型(DV)多域名SSL证书51：DNSPod（国密）-企业型(OV)SSL证书52：DNSPod（国密）-企业型(OV)通配符SSL证书53：DNSPod（国密）-企业型(OV)多域名SSL证书54：DNSPod（国密）-域名型(DV)SSL证书55：DNSPod（国密）-域名型(DV)通配符SSL证书56：DNSPod（国密）-域名型(DV)多域名SSL证书57：SecureSite 企业型专业版多域名(OV Pro)58：SecureSite 企业型多域名(OV)59：SecureSite 增强型专业版多域名(EV Pro)60：SecureSite 增强型多域名(EV)61：Geotrust 增强型多域名(EV)75：SecureSite 企业型(OV)76：SecureSite 企业型(OV)通配符77：SecureSite 增强型(EV)78：Geotrust 企业型(OV)79：Geotrust 企业型(OV)通配符80：Geotrust 增强型(EV)81：GlobalSign 企业型（OV）SSL证书82：GlobalSign 企业型通配符 （OV）SSL证书83：TrustAsia C1 DV Free85：GlobalSign 增强型 （EV）SSL证书88：GlobalSign 企业型通配符多域名 （OV）SSL证书89：GlobalSign 企业型多域名 （OV）SSL证书90：GlobalSign 增强型多域名（EV） SSL证书91：Geotrust 增强型多域名(EV)92：SecureSite 企业型专业版多域名(OV Pro)93：SecureSite 企业型多域名(OV)94：SecureSite 增强型专业版多域名(EV Pro)95：SecureSite 增强型多域名(EV)96：SecureSite 增强型专业版(EV Pro)97：SecureSite 企业型专业版(OV Pro)98：CFCA 企业型(OV)SSL证书99：CFCA 企业型多域名(OV)SSL证书100：CFCA 企业型通配符(OV)SSL证书101：CFCA 增强型(EV)SSL证书</p>
    */
   PackageType?: string
   /**
-   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
+   * <p>证书类型：CA = 客户端证书，SVR = 服务器证书。</p>
    */
   CertificateType?: string
   /**
-   * 证书产品名称
+   * <p>证书产品名称</p>
    */
   ProductZhName?: string
   /**
-   * 主域名。
+   * <p>主域名。</p>
    */
   Domain?: string
   /**
-   * 备注名称。
+   * <p>备注名称。</p>
    */
   Alias?: string
   /**
-   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 自动添加DNS记录，5 = 企业证书，待提交资料，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 证书已退款。 15 = 证书迁移中
+   * <p>证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 自动添加DNS记录，5 = 企业证书，待提交资料，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 证书已退款。 15 = 证书迁移中</p>
    */
   Status?: number
   /**
-   * 证书扩展信息。
+   * <p>证书扩展信息。</p>
    */
   CertificateExtra?: CertificateExtra
   /**
-   * 漏洞扫描状态：INACTIVE = 未开启，ACTIVE = 已开启
+   * <p>漏洞扫描状态：INACTIVE = 未开启，ACTIVE = 已开启</p>
    */
   VulnerabilityStatus?: string
   /**
-   * 状态信息。
+   * <p>状态信息。</p>
    */
   StatusMsg?: string
   /**
-   * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，DNS_PROXY = DNS代理验证。FILE_PROXY = 文件代理验证
+   * <p>验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，DNS_PROXY = DNS代理验证。FILE_PROXY = 文件代理验证</p>
    */
   VerifyType?: string
   /**
-   * 证书生效时间。时区为GMT+8:00
+   * <p>证书生效时间。时区为GMT+8:00</p>
    */
   CertBeginTime?: string
   /**
-   * 证书过期时间。时区为GMT+8:00
+   * <p>证书过期时间。时区为GMT+8:00</p>
    */
   CertEndTime?: string
   /**
-   * 证书有效期，单位（月）。
+   * <p>证书有效期，单位（月）。</p>
    */
   ValidityPeriod?: string
   /**
-   * 创建时间。时区为GMT+8:00
+   * <p>创建时间。时区为GMT+8:00</p>
    */
   InsertTime?: string
   /**
-   * 证书 ID。
+   * <p>证书 ID。</p>
    */
   CertificateId?: string
   /**
-   * 证书包含的多个域名（包含主域名）。
+   * <p>证书包含的多个域名（包含主域名）。</p>
    */
   SubjectAltName?: Array<string>
   /**
-   * 证书类型名称。
+   * <p>证书类型名称。</p>
    */
   PackageTypeName?: string
   /**
-   * 状态名称。
+   * <p>状态名称。</p>
    */
   StatusName?: string
   /**
-   * 是否为 VIP 客户。
+   * <p>是否为 VIP 客户。</p>
    */
   IsVip?: boolean
   /**
-   * 是否为 DV 版证书。
+   * <p>是否为 DV 版证书。</p>
    */
   IsDv?: boolean
   /**
-   * 是否为泛域名证书。
+   * <p>是否为泛域名证书。</p>
    */
   IsWildcard?: boolean
   /**
-   * 是否启用了漏洞扫描功能。
+   * <p>是否启用了漏洞扫描功能。</p>
    */
   IsVulnerability?: boolean
   /**
-   * 是否可续费。
+   * <p>是否可续费。</p>
    */
   RenewAble?: boolean
   /**
-   * 项目信息。
+   * <p>项目信息。</p>
    */
   ProjectInfo?: ProjectInfo
   /**
-   * 关联的云资源，暂不可用
+   * <p>关联的云资源，暂不可用</p>
    */
   BoundResource?: Array<string>
   /**
-   * 是否可部署。
+   * <p>是否可部署。</p>
    */
   Deployable?: boolean
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tags>
   /**
-   * 是否已忽略到期通知
+   * <p>是否已忽略到期通知</p>
    */
   IsIgnore?: boolean
   /**
-   * 是否国密证书
+   * <p>是否国密证书</p>
    */
   IsSM?: boolean
   /**
-   * 证书算法
+   * <p>证书算法</p>
    */
   EncryptAlgorithm?: string
   /**
-   * 上传CA证书的加密算法
+   * <p>上传CA证书的加密算法</p>
    */
   CAEncryptAlgorithms?: Array<string>
   /**
-   * 上传CA证书的过期时间
+   * <p>上传CA证书的过期时间</p>
    */
   CAEndTimes?: Array<string>
   /**
-   * 上传CA证书的通用名称
+   * <p>上传CA证书的通用名称</p>
    */
   CACommonNames?: Array<string>
   /**
-   * 证书预审核信息
+   * <p>证书预审核信息</p>
    */
   PreAuditInfo?: PreAuditInfo
   /**
-   * 是否自动续费
+   * <p>是否自动续费</p>
    */
   AutoRenewFlag?: number
   /**
-   * 托管状态，0，托管中，5，资源替换中， 10， 托管完成， -1未托管
+   * <p>托管状态，0，托管中，5，资源替换中， 10， 托管完成， -1未托管 </p>
    */
   HostingStatus?: number
   /**
-   * 托管完成时间
+   * <p>托管完成时间</p>
    */
   HostingCompleteTime?: string
   /**
-   * 托管新证书ID
+   * <p>托管新证书ID</p>
    */
   HostingRenewCertId?: string
   /**
-   * 存在的续费证书ID
+   * <p>存在的续费证书ID</p>
    */
   HasRenewOrder?: string
   /**
-   * 重颁发证书原证书是否删除
+   * <p>重颁发证书原证书是否删除</p>
    */
   ReplaceOriCertIsDelete?: boolean
   /**
-   * 是否即将过期， 证书即将到期的30天内为即将过期
+   * <p>是否即将过期， 证书即将到期的30天内为即将过期</p>
    */
   IsExpiring?: boolean
   /**
-   * DV证书添加验证截止时间，时区为GMT+8:00
+   * <p>DV证书添加验证截止时间，时区为GMT+8:00</p>
    */
   DVAuthDeadline?: string
   /**
-   * 域名验证通过时间，时区为GMT+8:00
+   * <p>域名验证通过时间，时区为GMT+8:00</p>
    */
   ValidationPassedTime?: string
   /**
-   * 证书关联的多域名
+   * <p>证书关联的多域名</p>
    */
   CertSANs?: Array<string>
   /**
-   * 域名验证驳回信息
+   * <p>域名验证驳回信息</p>
    */
   AwaitingValidationMsg?: string
   /**
-   * 是否允许下载
+   * <p>是否允许下载</p>
    */
   AllowDownload?: boolean
   /**
-   * 证书域名是否全部在DNSPOD托管解析
+   * <p>证书域名是否全部在DNSPOD托管解析</p>
    */
   IsDNSPODResolve?: boolean
   /**
-   * 是否是权益点购买的证书
+   * <p>是否是权益点购买的证书</p>
    */
   IsPackage?: boolean
   /**
-   * 是否存在私钥密码
+   * <p>是否存在私钥密码</p>
    */
   KeyPasswordCustomFlag?: boolean
   /**
-   * 支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other
+   * <p>支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other</p>
    */
   SupportDownloadType?: SupportDownloadType
   /**
-   * 证书吊销完成时间，时区为GMT+8:00
+   * <p>证书吊销完成时间，时区为GMT+8:00</p>
    */
   CertRevokedTime?: string
   /**
-   * 托管资源类型列表
+   * <p>托管资源类型列表</p>
    */
   HostingResourceTypes?: Array<string>
   /**
-   * 托管配置信息
+   * <p>托管配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostingConfig?: HostingConfig
   /**
-   * 是否是上传托管续费证书
+   * <p>是否是上传托管续费证书</p>
    */
   IsHostingUploadRenewCert?: boolean
+  /**
+   * <p>订阅服务ID</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>订阅服务状态</p>枚举值：<ul><li> initing： 未激活</li><li> running： 生效中</li><li> expired： 已过期</li><li> refunded： 已退款</li><li> nearExpire： 即将到期</li></ul>
+   */
+  ServiceStatus?: string
+  /**
+   * <p>订阅服务开始时间</p>
+   */
+  CertServiceBeginTime?: string
+  /**
+   * <p>订阅服务结束时间</p>
+   */
+  CertServiceEndTime?: string
 }
 
 /**
@@ -3243,11 +3171,11 @@ export interface CreateCertificateRequest {
  */
 export interface DescribeCertificatesResponse {
   /**
-   * 总数量。
+   * <p>总数量。</p>
    */
   TotalCount?: number
   /**
-   * 列表。
+   * <p>列表。</p>
    */
   Certificates?: Array<Certificates>
   /**
@@ -3441,73 +3369,77 @@ export interface WafInstanceDetail {
  */
 export interface DescribeCertificatesRequest {
   /**
-   * 分页偏移量，从0开始。 默认为0
+   * <p>分页偏移量，从0开始。 默认为0</p>
    */
   Offset?: number
   /**
-   * 每页数量，默认10。最大值1000，如超过1000按1000处理
+   * <p>每页数量，默认10。最大值1000，如超过1000按1000处理</p>
    */
   Limit?: number
   /**
-   * 搜索关键词，模糊匹配证书 ID、备注名称、证书域名
+   * <p>搜索关键词，模糊匹配证书 ID、备注名称、证书域名</p>
    */
   SearchKey?: string
   /**
-   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
+   * <p>证书类型：CA = 客户端证书，SVR = 服务器证书。</p>
    */
   CertificateType?: string
   /**
-   * 项目 ID。
+   * <p>项目 ID。</p>
    */
   ProjectId?: number
   /**
-   * 默认按照证书申请时间降序； 若传排序则按到期时间排序：DESC = 证书到期时间降序， ASC = 证书到期时间升序。
+   * <p>默认按照证书申请时间降序； 若传排序则按到期时间排序：DESC = 证书到期时间降序， ASC = 证书到期时间升序。</p>
    */
   ExpirationSort?: string
   /**
-   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 已退款。 15 = 证书迁移中
+   * <p>证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 已退款。 15 = 证书迁移中</p>
    */
   CertificateStatus?: Array<number | bigint>
   /**
-   * 是否可部署，可选值：1 = 可部署，0 =  不可部署。
+   * <p>是否可部署，可选值：1 = 可部署，0 =  不可部署。</p>
    */
   Deployable?: number
   /**
-   * 是否筛选上传托管的 1筛选，0不筛选
+   * <p>是否筛选上传托管的 1筛选，0不筛选</p>
    */
   Upload?: number
   /**
-   * 是否筛选可续期证书 1筛选 0不筛选
+   * <p>是否筛选可续期证书 1筛选 0不筛选</p>
    */
   Renew?: number
   /**
-   * 筛选来源， upload：上传证书， buy：腾讯云证书， 不传默认全部
+   * <p>筛选来源， upload：上传证书， buy：腾讯云证书， 不传默认全部</p>
    */
   FilterSource?: string
   /**
-   * 是否筛选国密证书。1:筛选  0:不筛选
+   * <p>是否筛选国密证书。1:筛选  0:不筛选</p>
    */
   IsSM?: number
   /**
-   * 筛选证书是否即将过期，传1是筛选，0不筛选
+   * <p>筛选证书是否即将过期，传1是筛选，0不筛选</p>
    */
   FilterExpiring?: number
   /**
-   * 是否可托管，可选值：1 = 可托管，0 =  不可托管。
+   * <p>是否可托管，可选值：1 = 可托管，0 =  不可托管。</p>
    */
   Hostable?: number
   /**
-   * 筛选指定标签的证书
+   * <p>筛选指定标签的证书</p>
    */
   Tags?: Array<Tags>
   /**
-   * 是否筛选等待签发的证书，传1是筛选，0和null不筛选
+   * <p>是否筛选等待签发的证书，传1是筛选，0和null不筛选</p>
    */
   IsPendingIssue?: number
   /**
-   * 筛选指定证书ID的证书，只支持有权限的证书ID
+   * <p>筛选指定证书ID的证书，只支持有权限的证书ID</p>
    */
   CertIds?: Array<string>
+  /**
+   * <p>订阅服务ID</p>
+   */
+  ServiceId?: string
 }
 
 /**

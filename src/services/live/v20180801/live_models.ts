@@ -1255,9 +1255,9 @@ Oversea：则查询国外数据，
 }
 
 /**
- * DeleteCasterLayoutInfo返回参数结构体
+ * DeleteLiveTimeShiftRule返回参数结构体
  */
-export interface DeleteCasterLayoutInfoResponse {
+export interface DeleteLiveTimeShiftRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4470,14 +4470,9 @@ export interface InsertTaskTemporaryFilesResponse {
 }
 
 /**
- * DeleteLiveTimeShiftRule返回参数结构体
+ * DescribeLiveCloudEffectConfig请求参数结构体
  */
-export interface DeleteLiveTimeShiftRuleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeLiveCloudEffectConfigRequest = null
 
 /**
  * 云转推水印信息。
@@ -7664,6 +7659,28 @@ export interface PushDataInfo {
 }
 
 /**
+ * 直播审核删除关键词结果详情。
+ */
+export interface AuditKeywordDeleteDetail {
+  /**
+   * 关键词 Id。
+   */
+  KeywordId?: string
+  /**
+   * 关键词内容。
+   */
+  Content?: string
+  /**
+   * 是否删除成功。
+   */
+  Deleted?: boolean
+  /**
+   * 如果删除失败，错误信息。
+   */
+  Error?: string
+}
+
+/**
  * DescribeLiveSnapshotTemplate返回参数结构体
  */
 export interface DescribeLiveSnapshotTemplateResponse {
@@ -9682,6 +9699,20 @@ export interface DescribeCasterLayoutInfosRequest {
    * 导播台ID。
    */
   CasterId: number
+}
+
+/**
+ * DescribeLiveCloudEffectConfig返回参数结构体
+ */
+export interface DescribeLiveCloudEffectConfigResponse {
+  /**
+   * <p>模板生礼物的模板信息列表。</p>
+   */
+  EffectTemplateList?: Array<CloudEffectTemplateInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11746,25 +11777,29 @@ export interface AddDelayLiveStreamResponse {
 }
 
 /**
- * 直播审核删除关键词结果详情。
+ * 云端特效模板信息。
  */
-export interface AuditKeywordDeleteDetail {
+export interface CloudEffectTemplateInfo {
   /**
-   * 关键词 Id。
+   * <p>特效模板ID。</p>
    */
-  KeywordId?: string
+  TemplateId?: string
   /**
-   * 关键词内容。
+   * <p>特效模板名称。</p>
    */
-  Content?: string
+  TemplateName?: string
   /**
-   * 是否删除成功。
+   * <p>模板预览URL。</p>
    */
-  Deleted?: boolean
+  VideoUrl?: string
   /**
-   * 如果删除失败，错误信息。
+   * <p>模板封面图片URL。</p>
    */
-  Error?: string
+  CoverImageUrl?: string
+  /**
+   * <p>模板视频宽高比。</p>
+   */
+  VideoRatio?: string
 }
 
 /**
@@ -12048,6 +12083,16 @@ export interface ModifyLiveCallbackTemplateRequest {
    * 录制异常回调级别，可选择：error、warning、info。
    */
   RecordExceptionLevels?: Array<string>
+}
+
+/**
+ * DeleteCasterLayoutInfo返回参数结构体
+ */
+export interface DeleteCasterLayoutInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

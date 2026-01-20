@@ -72,7 +72,7 @@ import {
   ProIspPlaySumInfo,
   ModifyLiveTranscodeTemplateResponse,
   DescribeStreamDayPlayInfoListRequest,
-  DeleteCasterLayoutInfoResponse,
+  DeleteLiveTimeShiftRuleResponse,
   TimeShiftStreamInfo,
   DescribeLivePadRulesResponse,
   CreatePullStreamConfigRequest,
@@ -208,7 +208,7 @@ import {
   DeletePullStreamConfigResponse,
   ModifyLivePlayDomainRequest,
   InsertTaskTemporaryFilesResponse,
-  DeleteLiveTimeShiftRuleResponse,
+  DescribeLiveCloudEffectConfigRequest,
   PullPushWatermarkInfo,
   DescribeGroupProIspPlayInfoListRequest,
   CreateCasterPgmResponse,
@@ -339,6 +339,7 @@ import {
   DeleteCasterMarkPicInfoRequest,
   CreateCasterResponse,
   PushDataInfo,
+  AuditKeywordDeleteDetail,
   DescribeLiveSnapshotTemplateResponse,
   CreateLiveTimeShiftTemplateRequest,
   DescribeLiveDomainRefererResponse,
@@ -421,6 +422,7 @@ import {
   StopCasterPgmRequest,
   CreateLiveStreamMonitorResponse,
   DescribeCasterLayoutInfosRequest,
+  DescribeLiveCloudEffectConfigResponse,
   AddCasterMarkPicInfoResponse,
   AddCasterInputInfoRequest,
   ModifyLivePlayAuthKeyRequest,
@@ -509,7 +511,7 @@ import {
   HttpCodeInfo,
   DescribeLiveStreamPublishedListResponse,
   AddDelayLiveStreamResponse,
-  AuditKeywordDeleteDetail,
+  CloudEffectTemplateInfo,
   DescribeLivePadTemplatesRequest,
   EnableLiveDomainRequest,
   DescribeLiveTranscodeTotalInfoResponse,
@@ -521,6 +523,7 @@ import {
   BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
   ModifyLiveCallbackTemplateRequest,
+  DeleteCasterLayoutInfoResponse,
   SwitchCasterToEmergencyResponse,
   DescribeMonitorReportRequest,
   DescribeAllStreamPlayInfoListRequest,
@@ -1240,6 +1243,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveStreamMonitorResponse) => void
   ): Promise<DescribeLiveStreamMonitorResponse> {
     return this.request("DescribeLiveStreamMonitor", req, cb)
+  }
+
+  /**
+   * 调用该接口实现切换当前播放所使用的主备流。
+   */
+  async SwitchBackupStream(
+    req: SwitchBackupStreamRequest,
+    cb?: (error: string, rep: SwitchBackupStreamResponse) => void
+  ): Promise<SwitchBackupStreamResponse> {
+    return this.request("SwitchBackupStream", req, cb)
   }
 
   /**
@@ -2097,13 +2110,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 调用该接口实现切换当前播放所使用的主备流。
+   * 使用该接口查询云端特效配置信息。
    */
-  async SwitchBackupStream(
-    req: SwitchBackupStreamRequest,
-    cb?: (error: string, rep: SwitchBackupStreamResponse) => void
-  ): Promise<SwitchBackupStreamResponse> {
-    return this.request("SwitchBackupStream", req, cb)
+  async DescribeLiveCloudEffectConfig(
+    req?: DescribeLiveCloudEffectConfigRequest,
+    cb?: (error: string, rep: DescribeLiveCloudEffectConfigResponse) => void
+  ): Promise<DescribeLiveCloudEffectConfigResponse> {
+    return this.request("DescribeLiveCloudEffectConfig", req, cb)
   }
 
   /**

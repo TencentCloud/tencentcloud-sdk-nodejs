@@ -147,6 +147,24 @@ export interface DescribeLogHistogramRequest {
 }
 
 /**
+ * 投递类任务数据过滤统计信息
+ */
+export interface FilterStatistics {
+  /**
+   * <p>原始日志数</p>
+   */
+  OriginalCount?: number
+  /**
+   * <p>过滤后日志数</p>
+   */
+  FilteredCount?: number
+  /**
+   * <p>过滤后结果</p>
+   */
+  FilteredResult?: Array<string>
+}
+
+/**
  * DeleteShipper请求参数结构体
  */
 export interface DeleteShipperRequest {
@@ -4198,7 +4216,7 @@ export interface AlarmTargetInfo {
  */
 export interface CreateSplunkDeliverResponse {
   /**
-   * splunk投递任务id
+   * <p>splunk投递任务id</p>
    */
   TaskId?: string
   /**
@@ -4664,11 +4682,11 @@ export interface DeleteMachineGroupRequest {
  */
 export interface DescribeSplunkDeliversResponse {
   /**
-   * Splunk投递任务信息列表
+   * <p>Splunk投递任务信息列表</p>
    */
   Infos?: Array<SplunkDeliverInfo>
   /**
-   * 符合条件的任务总数。
+   * <p>符合条件的任务总数。</p>
    */
   Total?: number
   /**
@@ -5267,69 +5285,73 @@ export interface CreateConsumerGroupResponse {
  */
 export interface SplunkDeliverInfo {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   Name?: string
   /**
-   * 用户id
+   * <p>用户id</p>
    */
   Uin?: number
   /**
-   * 日志主题id
+   * <p>日志主题id</p>
    */
   TopicId?: string
   /**
-   * 任务状态；1.运行中；2:暂停；3：异常
+   * <p>任务状态；1.运行中；2:暂停；3：异常</p>
    */
   Status?: number
   /**
-   * 启用状态；0:禁用；1:启用
+   * <p>启用状态；0:禁用；1:启用</p>
    */
   Enable?: number
   /**
-   * 创建时间；单位：秒
+   * <p>创建时间；单位：秒</p>
    */
   CreateTime?: number
   /**
-   * 更新时间；单位：秒
+   * <p>更新时间；单位：秒</p>
    */
   UpdateTime?: number
   /**
-   * splunk投递任务-目标配置
+   * <p>splunk投递任务-目标配置</p>
    */
   NetInfo?: NetInfo
   /**
-   * splunk投递任务元信息
+   * <p>splunk投递任务元信息</p>
    */
   Metadata?: MetadataInfo
   /**
-   * 是否启用服务日志；1:关闭；2:开启
+   * <p>是否启用服务日志；1:关闭；2:开启</p>
    */
   HasServiceLog?: number
   /**
-   * 高级配置-数据来源；
+   * <p>高级配置-数据来源；</p>
    */
   Source?: string
   /**
-   * 高级配置-数据来源类型；
+   * <p>高级配置-数据来源类型；</p>
    */
   SourceType?: string
   /**
-   * 高级配置-Splunk写入的索引
+   * <p>高级配置-Splunk写入的索引</p>
    */
   Index?: string
   /**
-   * 高级配置-是否启用索引器；1-不开启；2-开启；
+   * <p>高级配置-是否启用索引器；1-不开启；2-开启；</p>
    */
   IndexAck?: number
   /**
-   * 高级配置-通道
+   * <p>高级配置-通道</p>
    */
   Channel?: string
+  /**
+   * <p>预过滤处理-对写入 Splunk 原始数据进行预过滤处理语句</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -5483,14 +5505,17 @@ export interface ModifyDashboardSubscribeResponse {
  */
 export interface DescribeSplunkPreviewRequest {
   /**
-   * 日志主题id。
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>日志主题id。- 通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</p>
    */
   TopicId: string
   /**
-   * splunk投递任务-元信息
+   * <p>splunk投递任务-元信息</p>
    */
   MetadataInfo: MetadataInfo
+  /**
+   * <p>splunk投递任务-投递 splunk过滤原始日志语句</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -5804,23 +5829,19 @@ export interface SearchLogErrors {
  */
 export interface DescribeSplunkDeliversRequest {
   /**
-   * 日志主题Id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>日志主题Id- 通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</p>
    */
   TopicId: string
   /**
-   * - taskId 按照【任务id】进行过滤。 类型：String 必选：否  
-- name 按照【任务名称】进行过滤。 类型：String 必选：否  
-- statusFlag 按照【状态】进行过滤。 类型：String 必选：否  
- 每次请求的Filters的上限为10，Filter.Values的上限为10。
+   * <ul><li>taskId 按照【任务id】进行过滤。 类型：String 必选：否  </li><li>name 按照【任务名称】进行过滤。 类型：String 必选：否  </li><li>statusFlag 按照【状态】进行过滤。 类型：String 必选：否<br /> 每次请求的Filters的上限为10，Filter.Values的上限为10。</li></ul>
    */
   Filters?: Array<Filter>
   /**
-   * 分页的偏移量，默认值为0。
+   * <p>分页的偏移量，默认值为0。</p>
    */
   Offset?: number
   /**
-   * 分页单页限制数目，默认值为20，最大值100。
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
    */
   Limit?: number
 }
@@ -8145,60 +8166,57 @@ export interface DescribeConfigMachineGroupsResponse {
  */
 export interface ModifySplunkDeliverRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
   /**
-   * 日志主题id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>日志主题id- 通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</p>
    */
   TopicId: string
   /**
-   * 投递任务名称
-name有以下限制：
-- 不能为空
-- 长度不大于64
-- 只能包含aA-zZ、下划线、-、0-9
+   * <p>投递任务名称name有以下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9</p>
    */
   Name?: string
   /**
-   * 投递任务启用状态；0:禁用；1:启用
+   * <p>投递任务启用状态；0:禁用；1:启用</p>
    */
   Enable?: number
   /**
-   * splunk投递任务-目标配置
+   * <p>splunk投递任务-目标配置</p>
    */
   NetInfo?: NetInfo
   /**
-   * splunk投递任务元信息
+   * <p>splunk投递任务元信息</p>
    */
   MetadataInfo?: MetadataInfo
   /**
-   * 是否启用服务日志；1:关闭；2:开启
+   * <p>是否启用服务日志；1:关闭；2:开启</p>
    */
   HasServiceLog?: number
   /**
-   * 高级配置-是否启用索引器;
-1-不开启；2-开启；默认为：1
+   * <p>高级配置-是否启用索引器;1-不开启；2-开启；默认为：1</p>
    */
   IndexAck?: number
   /**
-   * 高级配置-数据来源；不超过64个字符
+   * <p>高级配置-数据来源；不超过64个字符</p>
    */
   Source?: string
   /**
-   * 高级配置-数据来源类型；不超过64个字符
+   * <p>高级配置-数据来源类型；不超过64个字符</p>
    */
   SourceType?: string
   /**
-   * 高级配置-Splunk写入的索引；不超过64个字符
+   * <p>高级配置-Splunk写入的索引；不超过64个字符</p>
    */
   Index?: string
   /**
-   * 高级配置-通道。
-需满足限制：如果启用索引器，该值不能为空
+   * <p>高级配置-通道。需满足限制：如果启用索引器，该值不能为空</p>
    */
   Channel?: string
+  /**
+   * <p>预过滤处理-对写入 Splunk 原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -10172,52 +10190,49 @@ export interface DescribeCosRechargesResponse {
  */
 export interface CreateSplunkDeliverRequest {
   /**
-   * 日志主题id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>日志主题id- 通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</p>
    */
   TopicId: string
   /**
-   * splunk投递任务名称；
-name有如下限制：
-- 不能为空
-- 长度不大于64
-- 只能包含aA-zZ、下划线、-、0-9
+   * <p>splunk投递任务名称；name有如下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9</p>
    */
   Name: string
   /**
-   * Splunk投递任务-目标配置-网络信息
+   * <p>Splunk投递任务-目标配置-网络信息</p>
    */
   NetInfo: NetInfo
   /**
-   * Splunk投递任务元信息
+   * <p>Splunk投递任务元信息</p>
    */
   MetadataInfo: MetadataInfo
   /**
-   * 是否开启服务日志 1:关闭；2:开启 ;默认开启
+   * <p>是否开启服务日志 1:关闭；2:开启 ;默认开启</p>
    */
   HasServiceLog?: number
   /**
-   * 高级配置-是否启用索引器；1-不启用；2-启用；
-默认：1
+   * <p>高级配置-是否启用索引器；1-不启用；2-启用；默认：1</p>
    */
   IndexAck?: number
   /**
-   * 高级配置-数据来源；不超过64个字符
+   * <p>高级配置-数据来源；不超过64个字符</p>
    */
   Source?: string
   /**
-   * 高级配置-数据来源类型；不超过64个字符
+   * <p>高级配置-数据来源类型；不超过64个字符</p>
    */
   SourceType?: string
   /**
-   * 高级配置-Splunk写入的索引；不超过64个字符
+   * <p>高级配置-Splunk写入的索引；不超过64个字符</p>
    */
   Index?: string
   /**
-   * 高级配置-通道
-需满足限制：如果启用索引器，那么Channel必填
+   * <p>高级配置-通道需满足限制：如果启用索引器，那么Channel必填</p>
    */
   Channel?: string
+  /**
+   * <p>日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -13333,9 +13348,13 @@ export interface HostFileInfo {
  */
 export interface DescribeSplunkPreviewResponse {
   /**
-   * 预览结果
+   * <p>预览结果</p>
    */
   PreviewInfos?: Array<string>
+  /**
+   * <p>数据过滤结果</p>
+   */
+  FilterStats?: FilterStatistics
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

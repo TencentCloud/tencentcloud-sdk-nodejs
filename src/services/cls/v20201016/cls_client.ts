@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AlarmInfo,
   DescribeLogHistogramRequest,
+  FilterStatistics,
   DeleteShipperRequest,
   ScheduledSqlResouceInfo,
   DynamicIndex,

@@ -1478,6 +1478,10 @@ export interface DescribeCheckViewRisksResponse {
    */
   StandardNameList?: Array<StandardItem>
   /**
+   * 资产类型集合
+   */
+  AssetTypeList?: Array<AttributeOptionSet>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2256,7 +2260,7 @@ export interface DescribeAccessKeyUserListRequest {
 }
 
 /**
- * 资产视角风险项
+ * 资产视角风险信息
  */
 export interface AssetRiskItem {
   /**
@@ -2323,6 +2327,10 @@ export interface AssetRiskItem {
    * 等保合规
    */
   StandardTerms?: Array<StandardTerm>
+  /**
+   * 资产类型
+   */
+  AssetType?: string
 }
 
 /**
@@ -5539,6 +5547,10 @@ export interface DescribeAssetRiskListResponse {
    * 等保规范名称集合
    */
   StandardNameList?: Array<StandardItem>
+  /**
+   * 资产类型集合
+   */
+  AssetTypeList?: Array<AttributeOptionSet>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

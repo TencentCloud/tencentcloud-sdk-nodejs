@@ -18,6 +18,16 @@ const client = new tencentcloud.evt.v20250217.Client({
 })
 describe("evt.v20250217.test.js", function () {
 
+it("evt.v20250217.PutEvent", async function () {
+    try {
+       const data = await client.PutEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("evt.v20250217.DeleteRoleUser", async function () {
     try {
        const data = await client.DeleteRoleUser({})

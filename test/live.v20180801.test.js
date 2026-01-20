@@ -668,6 +668,16 @@ it("live.v20180801.DescribeLiveStreamMonitor", async function () {
     }
 })
 
+it("live.v20180801.SwitchBackupStream", async function () {
+    try {
+       const data = await client.SwitchBackupStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.SendLiveCloudEffect", async function () {
     try {
        const data = await client.SendLiveCloudEffect({})
@@ -1488,9 +1498,9 @@ it("live.v20180801.DeleteLivePadTemplate", async function () {
     }
 })
 
-it("live.v20180801.SwitchBackupStream", async function () {
+it("live.v20180801.DescribeLiveCloudEffectConfig", async function () {
     try {
-       const data = await client.SwitchBackupStream({})
+       const data = await client.DescribeLiveCloudEffectConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
