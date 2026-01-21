@@ -248,6 +248,16 @@ it("tione.v20211111.DeleteTrainingModel", async function () {
     }
 })
 
+it("tione.v20211111.ModifyServiceGroupWeights", async function () {
+    try {
+       const data = await client.ModifyServiceGroupWeights({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.CreateDataset", async function () {
     try {
        const data = await client.CreateDataset({})

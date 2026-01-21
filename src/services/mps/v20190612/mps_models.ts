@@ -2168,6 +2168,10 @@ export interface AddOnParameter {
    * 图片处理输出配置。
    */
   OutputConfig?: ImageProcessOutputConfig
+  /**
+   * 图片处理附加 prompt，只针对某些场景可用。
+   */
+  ExtPrompt?: Array<ImageProcessPrompt>
 }
 
 /**
@@ -7889,6 +7893,10 @@ export interface AiAnalysisTaskDubbingOutput {
    */
   SpeakerPath?: string
   /**
+   * 音色id
+   */
+  VoiceId?: string
+  /**
    * 译制视频存储位置。
    */
   OutputStorage?: TaskOutputStorage
@@ -9003,6 +9011,14 @@ GV。
 5. OS，可选[2.0]。
    */
   ModelVersion?: string
+  /**
+   * 指定场景生视频。
+注意：仅部分模型支持指定场景。
+1. Kling支持动作控制，motion_control。
+2. Mingmou支持横转竖，land2port。
+3. Vidu支持特效模板，template_effect。
+   */
+  SceneType?: string
   /**
    * 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。
    */
@@ -21995,6 +22011,16 @@ export interface ModifyLiveRecordTemplateRequest {
 }
 
 /**
+ * 图片处理相关提示词。
+ */
+export interface ImageProcessPrompt {
+  /**
+   * 图片处理相关的prompt。
+   */
+  Prompt?: string
+}
+
+/**
  * ModifySmartSubtitleTemplate请求参数结构体
  */
 export interface ModifySmartSubtitleTemplateRequest {
@@ -23079,6 +23105,14 @@ export interface ImageProcessOutputConfig {
    * 图片输出分辨率，取值：1K/2K/4K。
    */
   ImageSize?: string
+  /**
+   * 图片输出编码格式，可取值：PNG、JPG、WEBP、HEIF、AVIF。
+   */
+  Format?: string
+  /**
+   * 图片质量，对于某些输出格式可用，只有Format 有效的情况下生效，取值范围 0-100。
+   */
+  Quality?: number
 }
 
 /**
@@ -23423,9 +23457,19 @@ zu: 祖鲁语
   /**
    * 音频数据格式，默认为 pcm
 
-支持的格式：pcm (16k 采样率的单声道 16 位采样 pcm 数据)
+支持的格式：
+pcm (16000 采样率的单声道 16 位采样 pcm 数据)
+ogg-opus (16000 / 24000 / 48000 采样率的单声道 opus 编码的 ogg 数据)
    */
   AudioFormat?: string
+  /**
+   * 音频的采样率
+
+支持的采样率：
+pcm 16000
+ogg-opus 16000 / 24000 / 48000
+   */
+  SampleRate?: number
   /**
    * 扩展参数，默认不填，特殊需求使用
    */

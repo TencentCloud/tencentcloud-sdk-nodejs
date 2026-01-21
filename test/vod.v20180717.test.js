@@ -358,6 +358,16 @@ it("vod.v20180717.SetCLSPushTarget", async function () {
     }
 })
 
+it("vod.v20180717.ListFiles", async function () {
+    try {
+       const data = await client.ListFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})

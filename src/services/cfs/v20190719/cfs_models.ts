@@ -145,6 +145,10 @@ export interface CreateLifecycleDataTaskRequest {
    * 数据流动 ID ，该接口可以通过 DescribeDataFlow 查询
    */
   DataFlowId?: string
+  /**
+   * 	 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。  ture：覆盖  false：不覆盖（同时也不会释放热存数据）  为空时，默认为false
+   */
+  IsOverwrite?: boolean
 }
 
 /**
@@ -1505,6 +1509,28 @@ export interface LifecycleRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileMinSize?: string
+  /**
+   * 策略类型
+   */
+  PolicyType?: string
+  /**
+   * 阈值范围[10-90]
+   */
+  ExpireThreshold?: number
+  /**
+   * 阈值范围[10-90]
+   */
+  TargetThreshold?: number
+  /**
+   * 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。
+
+ture：覆盖
+
+false：不覆盖（同时也不会释放热存数据）
+
+为空时，默认为false
+   */
+  IsOverwrite?: boolean
 }
 
 /**
@@ -1753,6 +1779,15 @@ running：执行中，finished：已完成
    * 数据流动Id
    */
   DataFlowId?: string
+  /**
+   * 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。
+
+ture：覆盖
+
+false：不覆盖（同时也不会释放热存数据）
+为空时，默认为false
+   */
+  IsOverwrite?: boolean
 }
 
 /**
@@ -2832,6 +2867,10 @@ export interface PathInfo {
    * 目录绝对路径
    */
   Path: string
+  /**
+   * 数据流动Id
+   */
+  DataFlowId?: string
 }
 
 /**

@@ -28,6 +28,7 @@ import {
   NotebookSetItem,
   ModifyNotebookTagsRequest,
   SSHConfig,
+  ModifyServiceGroupWeightsResponse,
   Usage,
   AuthTokenBase,
   DeleteNotebookRequest,
@@ -39,6 +40,7 @@ import {
   Service,
   CrossTenantENIInfo,
   HyperParameter,
+  ModifyServiceGroupWeightsRequest,
   DescribeTrainingTasksRequest,
   RollingUpdate,
   VolumeMount,
@@ -141,6 +143,7 @@ import {
   CreateNotebookResponse,
   IntranetCallInfo,
   DescribeBillingSpecsPriceRequest,
+  WeightEntry,
   Instance,
   SpecPrice,
   CreateExportRequest,
@@ -481,6 +484,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DeleteTrainingModelResponse) => void
   ): Promise<DeleteTrainingModelResponse> {
     return this.request("DeleteTrainingModel", req, cb)
+  }
+
+  /**
+   * 更新推理服务组流量分配
+   */
+  async ModifyServiceGroupWeights(
+    req: ModifyServiceGroupWeightsRequest,
+    cb?: (error: string, rep: ModifyServiceGroupWeightsResponse) => void
+  ): Promise<ModifyServiceGroupWeightsResponse> {
+    return this.request("ModifyServiceGroupWeights", req, cb)
   }
 
   /**

@@ -173,6 +173,25 @@ Type可选值：OBJ，GLB
 }
 
 /**
+ * 多视角图片
+ */
+export interface ViewImage {
+  /**
+   * 视角类型。
+取值：back、left、right
+   */
+  ViewType?: string
+  /**
+   * 图片Url地址
+   */
+  ViewImageUrl?: string
+  /**
+   * 图片base64地址
+   */
+  ViewImageBase64?: string
+}
+
+/**
  * DescribeReduceFaceJob请求参数结构体
  */
 export interface DescribeReduceFaceJobRequest {
@@ -225,6 +244,62 @@ export interface File3D {
 }
 
 /**
+ * SubmitProfileTo3DJob请求参数结构体
+ */
+export interface SubmitProfileTo3DJobRequest {
+  /**
+   * 真人头像参考图 Base64 数据和参考图 Url。
+- Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
+- 图片限制：单边分辨率小于4096且大于500，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。
+   */
+  Profile?: Image
+  /**
+   * 生成人物模板，参考值：
+
+basketball: 动感球手；
+
+badminton: 羽扬中华；
+
+pingpong: 国球荣耀；
+
+gymnastics:勇攀巅峰；
+
+pilidance: 舞动青春；
+
+tennis: 网球甜心；
+
+athletics: 东方疾风；
+
+footballboykicking1:激情逐风；
+
+footballboykicking2: 绿茵之星；
+
+guitar:甜酷弦音；
+
+footballboy: 足球小将；
+
+skateboard: 滑跃青春；
+
+futuresoilder: 未来战士；
+
+explorer: 逐梦旷野；
+
+beardollgirl:可爱女孩；
+
+bibpantsboy:都市白领；
+
+womansitpose: 职业丽影；
+
+womanstandpose2: 悠闲时光；
+
+mysteriousprincess: 海洋公主；
+
+manstandpose2: 演讲之星；
+   */
+  Template?: string
+}
+
+/**
  * DescribeTextureTo3DJob返回参数结构体
  */
 export interface DescribeTextureTo3DJobResponse {
@@ -251,6 +326,16 @@ export interface DescribeTextureTo3DJobResponse {
 }
 
 /**
+ * DescribeProfileTo3DJob请求参数结构体
+ */
+export interface DescribeProfileTo3DJobRequest {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
+}
+
+/**
  * 3D文件
  */
 export interface InputFile3D {
@@ -265,22 +350,17 @@ export interface InputFile3D {
 }
 
 /**
- * 多视角图片
+ * SubmitProfileTo3DJob返回参数结构体
  */
-export interface ViewImage {
+export interface SubmitProfileTo3DJobResponse {
   /**
-   * 视角类型。
-取值：back、left、right
+   * 任务ID（有效期24小时）
    */
-  ViewType?: string
+  JobId?: string
   /**
-   * 图片Url地址
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ViewImageUrl?: string
-  /**
-   * 图片base64地址
-   */
-  ViewImageBase64?: string
+  RequestId?: string
 }
 
 /**
@@ -426,6 +506,32 @@ quadrilateral: 四边形面与三角形面混合生成。
    * 生成模型的格式，仅限制生成一种格式； 生成模型文件组默认返回obj、glb格式（开启时Geometry参数时，默认为glb格式）； 可选值：STL，USDZ，FBX；
    */
   ResultFormat?: string
+}
+
+/**
+ * DescribeProfileTo3DJob返回参数结构体
+ */
+export interface DescribeProfileTo3DJobResponse {
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  Status?: string
+  /**
+   * 错误码
+   */
+  ErrorCode?: string
+  /**
+   * 错误信息
+   */
+  ErrorMessage?: string
+  /**
+   * 生成的3D文件数组。
+   */
+  ResultFile3Ds?: Array<File3D>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

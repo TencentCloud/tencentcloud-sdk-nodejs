@@ -602,6 +602,21 @@ export interface SSHConfig {
 }
 
 /**
+ * ModifyServiceGroupWeights返回参数结构体
+ */
+export interface ModifyServiceGroupWeightsResponse {
+  /**
+   * 更新权重后的服务组信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceGroup?: ServiceGroup
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 大模型生成Token统计
  */
 export interface Usage {
@@ -998,6 +1013,20 @@ export interface HyperParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LoraScale?: string
+}
+
+/**
+ * ModifyServiceGroupWeights请求参数结构体
+ */
+export interface ModifyServiceGroupWeightsRequest {
+  /**
+   * 服务组id
+   */
+  ServiceGroupId: string
+  /**
+   * 权重设置
+   */
+  Weights: Array<WeightEntry>
 }
 
 /**
@@ -4024,6 +4053,20 @@ export interface DescribeBillingSpecsPriceRequest {
    * 询价参数，支持批量询价
    */
   SpecsParam: Array<SpecUnit>
+}
+
+/**
+ * 服务的权重
+ */
+export interface WeightEntry {
+  /**
+   * 服务id
+   */
+  ServiceId: string
+  /**
+   * 流量权重值，同 ServiceGroup 下 总和应为 100
+   */
+  Weight: number
 }
 
 /**

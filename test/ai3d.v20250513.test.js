@@ -58,6 +58,16 @@ it("ai3d.v20250513.SubmitHunyuanTo3DRapidJob", async function () {
     }
 })
 
+it("ai3d.v20250513.SubmitProfileTo3DJob", async function () {
+    try {
+       const data = await client.SubmitProfileTo3DJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ai3d.v20250513.SubmitHunyuanTo3DUVJob", async function () {
     try {
        const data = await client.SubmitHunyuanTo3DUVJob({})
@@ -111,6 +121,16 @@ it("ai3d.v20250513.QueryHunyuan3DPartJob", async function () {
 it("ai3d.v20250513.DescribeTextureTo3DJob", async function () {
     try {
        const data = await client.DescribeTextureTo3DJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ai3d.v20250513.DescribeProfileTo3DJob", async function () {
+    try {
+       const data = await client.DescribeProfileTo3DJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

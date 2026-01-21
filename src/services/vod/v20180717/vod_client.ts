@@ -277,6 +277,7 @@ import {
   CreateAigcCustomElementRequest,
   SplitMediaTaskSegmentInfo,
   AiReviewPornAsrTaskOutput,
+  FileContent,
   AigcImageTask,
   SimpleHlsClipResponse,
   AigcVideoTaskOutputFileInfo,
@@ -508,6 +509,7 @@ import {
   CreateDomainVerifyRecordResponse,
   ExtractCopyRightWatermarkResponse,
   MediaTranscodeInfo,
+  ListFilesRequest,
   ResolutionNameInfo,
   VerifyDomainRecordRequest,
   AiRecognitionTaskOcrWordsResultItem,
@@ -586,7 +588,7 @@ import {
   AiReviewProhibitedAsrTaskInput,
   DeleteCLSTopicRequest,
   ParseStreamingManifestResponse,
-  TerrorismOcrReviewTemplateInfo,
+  ListFilesResponse,
   CreateRoundPlayRequest,
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
@@ -787,6 +789,7 @@ import {
   ApplyUploadResponse,
   ReviewAudioVideoResponse,
   DeleteClassRequest,
+  TerrorismOcrReviewTemplateInfo,
   DescribeTranscodeTemplatesRequest,
   QualityEnhanceTaskOutput,
   ReviewTemplate,
@@ -1312,6 +1315,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetCLSPushTargetResponse) => void
   ): Promise<SetCLSPushTargetResponse> {
     return this.request("SetCLSPushTarget", req, cb)
+  }
+
+  /**
+     * 用于列出子应用下存储的文件条目。
+
+**此API只在“FileID+Path模式”下可用**
+     */
+  async ListFiles(
+    req: ListFilesRequest,
+    cb?: (error: string, rep: ListFilesResponse) => void
+  ): Promise<ListFilesResponse> {
+    return this.request("ListFiles", req, cb)
   }
 
   /**

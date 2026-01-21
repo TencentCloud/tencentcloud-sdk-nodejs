@@ -318,9 +318,9 @@ it("lcic.v20220817.BatchDeleteGroupMember", async function () {
     }
 })
 
-it("lcic.v20220817.GetRoomEvent", async function () {
+it("lcic.v20220817.CreateGroupLiveCodes", async function () {
     try {
-       const data = await client.GetRoomEvent({})
+       const data = await client.CreateGroupLiveCodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +438,9 @@ it("lcic.v20220817.DescribeRecordTask", async function () {
     }
 })
 
-it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
+it("lcic.v20220817.GetRoomEvent", async function () {
     try {
-       const data = await client.UnbindDocumentFromRoom({})
+       const data = await client.GetRoomEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +658,29 @@ it("lcic.v20220817.DeleteRoom", async function () {
     }
 })
 
+it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
+    try {
+       const data = await client.UnbindDocumentFromRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DeleteWhiteBoardSnapshot", async function () {
     try {
        const data = await client.DeleteWhiteBoardSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeGroupLiveCodes", async function () {
+    try {
+       const data = await client.DescribeGroupLiveCodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

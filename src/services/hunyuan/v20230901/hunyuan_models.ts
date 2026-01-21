@@ -225,6 +225,24 @@ export interface PromptTokensDetails {
 }
 
 /**
+ * 3D文件
+ */
+export interface File3D {
+  /**
+   * 3D文件的格式。取值范围：GIF, OBJ
+   */
+  Type?: string
+  /**
+   * 文件的Url（有效期24小时）
+   */
+  Url?: string
+  /**
+   * 预览图片Url
+   */
+  PreviewImageUrl?: string
+}
+
+/**
  * QueryHunyuanImageChatJob请求参数结构体
  */
 export interface QueryHunyuanImageChatJobRequest {
@@ -546,6 +564,29 @@ export interface GetThreadMessageListRequest {
    * 排序方式，按创建时间升序（asc）或降序（desc），默认为 desc
    */
   Order?: string
+}
+
+/**
+ * Submit3DSmartTopologyJob请求参数结构体
+ */
+export interface Submit3DSmartTopologyJobRequest {
+  /**
+   * 源3D文件模型链接，参考值：
+Type：glb，obj格式文件必选其一。
+Url：文件大小不超过200MB。
+3D模型要求：复杂模型和拓扑过的模型暂无法支持减面操作，建议输入未拓扑过的高模，比如混元3D生成的模型，适用度比较高的类别：硬表面、游戏角色、道具、日常生活用品等。
+   */
+  File3D: InputFile3D
+  /**
+   * 多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:
+triangle:三角形面。
+quadrilateral：四边形面。
+   */
+  PolygonType?: string
+  /**
+   * 减面后面数档位类型，可选值：high，medium, low。
+   */
+  FaceLevel?: string
 }
 
 /**
@@ -956,6 +997,20 @@ export interface ImageMessage {
 }
 
 /**
+ * 3D文件
+ */
+export interface InputFile3D {
+  /**
+   * 文件的Url（有效期24小时）
+   */
+  Url: string
+  /**
+   * 文件格式
+   */
+  Type: string
+}
+
+/**
  * SetPayMode请求参数结构体
  */
 export interface SetPayModeRequest {
@@ -1173,6 +1228,20 @@ export interface Replace {
 export type CreateThreadRequest = null
 
 /**
+ * Submit3DSmartTopologyJob返回参数结构体
+ */
+export interface Submit3DSmartTopologyJobResponse {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 会话内容
  */
 export interface Message {
@@ -1222,6 +1291,16 @@ export interface TranslationMessage {
    * 文本内容
    */
   Content?: string
+}
+
+/**
+ * Describe3DSmartTopologyJob请求参数结构体
+ */
+export interface Describe3DSmartTopologyJobRequest {
+  /**
+   * 任务ID。
+   */
+  JobId: string
 }
 
 /**
@@ -1860,6 +1939,32 @@ export interface History {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Seed?: number
+}
+
+/**
+ * Describe3DSmartTopologyJob返回参数结构体
+ */
+export interface Describe3DSmartTopologyJobResponse {
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 示例值：RUN。
+   */
+  Status?: string
+  /**
+   * 错误码。
+   */
+  ErrorCode?: string
+  /**
+   * 错误信息。
+   */
+  ErrorMessage?: string
+  /**
+   * 生成文件的URL地址，有效期1天。
+   */
+  ResultFile3Ds?: Array<File3D>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

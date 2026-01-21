@@ -169,6 +169,7 @@ import {
   DeleteIntegrationEmployeesRequest,
   FailedUpdateStaffData,
   GetTaskResultApiRequest,
+  Checklist,
   DynamicSignOption,
   FlowDetailInfo,
   CreatePersonAuthCertificateImageRequest,
@@ -223,6 +224,7 @@ import {
   WebUrlOption,
   DescribeOrganizationVerifyStatusResponse,
   DeleteExtendedServiceAuthInfosResponse,
+  DescribeEnterpriseContractReviewChecklistsResponse,
   AuthInfoDetail,
   ModifyApplicationCallbackInfoResponse,
   RiskIdentificationRoleInfo,
@@ -243,6 +245,7 @@ import {
   CallbackInfo,
   DescribeBatchOrganizationRegistrationUrlsRequest,
   TemplateInfo,
+  DescribeEnterpriseContractReviewChecklistsRequest,
   CreateDocumentResponse,
   CreateIntegrationUserRolesResponse,
   CreateEmbedWebUrlResponse,
@@ -2701,6 +2704,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: CreatePrepareFlowGroupResponse) => void
   ): Promise<CreatePrepareFlowGroupResponse> {
     return this.request("CreatePrepareFlowGroup", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeEnterpriseContractReviewChecklists）用于获取企业全部审查要点清单。
+   */
+  async DescribeEnterpriseContractReviewChecklists(
+    req: DescribeEnterpriseContractReviewChecklistsRequest,
+    cb?: (error: string, rep: DescribeEnterpriseContractReviewChecklistsResponse) => void
+  ): Promise<DescribeEnterpriseContractReviewChecklistsResponse> {
+    return this.request("DescribeEnterpriseContractReviewChecklists", req, cb)
   }
 
   /**

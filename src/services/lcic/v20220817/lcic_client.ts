@@ -32,6 +32,7 @@ import {
   BatchDeleteRecordRequest,
   ModifyAppResponse,
   UnblockKickedUserResponse,
+  CreateGroupLiveCodesRequest,
   BatchRegisterRequest,
   StartRecordRequest,
   DeleteRoomResponse,
@@ -39,7 +40,7 @@ import {
   CreateGroupWithMembersRequest,
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
-  GetRoomEventResponse,
+  CreateGroupLiveCodesResponse,
   MemberRecord,
   DeleteAppCustomContentRequest,
   SendRoomNotificationMessageResponse,
@@ -53,6 +54,7 @@ import {
   CreateGroupWithSubGroupRequest,
   RoomItem,
   ClassScoreItem,
+  DescribeRoomForbiddenUserRequest,
   DescribeRoomRequest,
   BatchDescribeDocumentRequest,
   RegisterUserRequest,
@@ -92,7 +94,7 @@ import {
   DescribeGroupMemberListResponse,
   SetMarqueeRequest,
   ForbidSendMsgRequest,
-  DescribeRoomForbiddenUserRequest,
+  DescribeGroupLiveCodesRequest,
   EventInfo,
   DescribeScoreListRequest,
   DescribeRecordStreamRequest,
@@ -120,12 +122,14 @@ import {
   TransferItem,
   DescribeUserDetailResponse,
   DescribeRoomResponse,
+  ImageMsgContent,
   DescribeRecordStreamResponse,
   DescribeCurrentMemberListRequest,
   SendRoomNotificationMessageRequest,
   DescribeSdkAppIdUsersResponse,
   EventDataInfo,
   DescribeAnswerListResponse,
+  DescribeGroupLiveCodesResponse,
   DescribeRoomStatisticsResponse,
   DeleteDocumentRequest,
   DescribeRecordTaskResponse,
@@ -145,7 +149,7 @@ import {
   LoginUserRequest,
   StopRecordRequest,
   SingleStreamInfo,
-  ImageMsgContent,
+  GetRoomEventResponse,
   AnswerStat,
   SendRoomNormalMessageResponse,
   DeleteSupervisorResponse,
@@ -509,13 +513,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取房间事件,仅在课堂结束1小时内有效。
+   * 创建分组直播参加码
    */
-  async GetRoomEvent(
-    req: GetRoomEventRequest,
-    cb?: (error: string, rep: GetRoomEventResponse) => void
-  ): Promise<GetRoomEventResponse> {
-    return this.request("GetRoomEvent", req, cb)
+  async CreateGroupLiveCodes(
+    req: CreateGroupLiveCodesRequest,
+    cb?: (error: string, rep: CreateGroupLiveCodesResponse) => void
+  ): Promise<CreateGroupLiveCodesResponse> {
+    return this.request("CreateGroupLiveCodes", req, cb)
   }
 
   /**
@@ -629,13 +633,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档从房间解绑
+   * 获取房间事件,仅在课堂结束1小时内有效。
    */
-  async UnbindDocumentFromRoom(
-    req: UnbindDocumentFromRoomRequest,
-    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
-  ): Promise<UnbindDocumentFromRoomResponse> {
-    return this.request("UnbindDocumentFromRoom", req, cb)
+  async GetRoomEvent(
+    req: GetRoomEventRequest,
+    cb?: (error: string, rep: GetRoomEventResponse) => void
+  ): Promise<GetRoomEventResponse> {
+    return this.request("GetRoomEvent", req, cb)
   }
 
   /**
@@ -872,6 +876,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 文档从房间解绑
+   */
+  async UnbindDocumentFromRoom(
+    req: UnbindDocumentFromRoomRequest,
+    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
+  ): Promise<UnbindDocumentFromRoomResponse> {
+    return this.request("UnbindDocumentFromRoom", req, cb)
+  }
+
+  /**
    * 删除白板板书截图
    */
   async DeleteWhiteBoardSnapshot(
@@ -879,6 +893,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWhiteBoardSnapshotResponse) => void
   ): Promise<DeleteWhiteBoardSnapshotResponse> {
     return this.request("DeleteWhiteBoardSnapshot", req, cb)
+  }
+
+  /**
+   * 获取分组直播参加码
+   */
+  async DescribeGroupLiveCodes(
+    req: DescribeGroupLiveCodesRequest,
+    cb?: (error: string, rep: DescribeGroupLiveCodesResponse) => void
+  ): Promise<DescribeGroupLiveCodesResponse> {
+    return this.request("DescribeGroupLiveCodes", req, cb)
   }
 
   /**

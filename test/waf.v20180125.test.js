@@ -878,6 +878,16 @@ it("waf.v20180125.DescribeAttackOverview", async function () {
     }
 })
 
+it("waf.v20180125.GetOrganizationRole", async function () {
+    try {
+       const data = await client.GetOrganizationRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyOwaspWhiteRule", async function () {
     try {
        const data = await client.ModifyOwaspWhiteRule({})

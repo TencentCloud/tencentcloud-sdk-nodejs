@@ -3438,6 +3438,16 @@ it("vpc.v20170312.MigrateNetworkInterface", async function () {
     }
 })
 
+it("vpc.v20170312.UpgradeNatGatewayProductVersion", async function () {
+    try {
+       const data = await client.UpgradeNatGatewayProductVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeHighPriorityRouteTables", async function () {
     try {
        const data = await client.DescribeHighPriorityRouteTables({})

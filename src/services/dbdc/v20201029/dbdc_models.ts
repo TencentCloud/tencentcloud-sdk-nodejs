@@ -178,6 +178,10 @@ export interface DescribeInstanceDetailResponse {
    */
   CpuType?: string
   /**
+   * 可用区列表
+   */
+  Zones?: Array<string>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -299,6 +303,10 @@ export interface DescribeInstanceDetail {
    * CPU类型：Intel/AMD,Hygon
    */
   CpuType?: string
+  /**
+   * 可用区列表
+   */
+  Zones?: Array<string>
 }
 
 /**
@@ -344,99 +352,103 @@ export interface HostDetail {
   /**
    * 主机Id
    */
-  HostId: string
+  HostId?: string
   /**
    * 主机名称
    */
-  HostName: string
+  HostName?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 主机状态
    */
-  Status: number
+  Status?: number
   /**
    * 分配DB实例状态,0:可分配,1:不可分配
    */
-  AssignStatus: number
+  AssignStatus?: number
   /**
    * 主机类型, 0:物理机, 1:cvm本地盘, 2:cvm云盘
    */
-  HostType: number
+  HostType?: number
   /**
    * DB实例数
    */
-  DbNum: number
+  DbNum?: number
   /**
    * 主机CPU(单位:核数)
    */
-  CpuSpec: number
+  CpuSpec?: number
   /**
    * 已分配CPU(单位:核数)
    */
-  CpuAssigned: number
+  CpuAssigned?: number
   /**
    * 可分配CPU(单位:核数)
    */
-  CpuAssignable: number
+  CpuAssignable?: number
   /**
    * 主机内存(单位:GB)
    */
-  MemorySpec: number
+  MemorySpec?: number
   /**
    * 已分配内存(单位:GB)
    */
-  MemoryAssigned: number
+  MemoryAssigned?: number
   /**
    * 可分配内存(单位:GB)
    */
-  MemoryAssignable: number
+  MemoryAssignable?: number
   /**
    * 主机磁盘(单位:GB)
    */
-  DiskSpec: number
+  DiskSpec?: number
   /**
    * 已分配磁盘(单位:GB)
    */
-  DiskAssigned: number
+  DiskAssigned?: number
   /**
    * 可分配磁盘(GB)
    */
-  DiskAssignable: number
+  DiskAssignable?: number
   /**
    * CPU分配比
    */
-  CpuRatio: number
+  CpuRatio?: number
   /**
    * 内存分配比
    */
-  MemoryRatio: number
+  MemoryRatio?: number
   /**
    * 磁盘分配比
    */
-  DiskRatio: number
+  DiskRatio?: number
   /**
    * 机型名称
    */
-  MachineName: string
+  MachineName?: string
   /**
    * 机型类别
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 计费标签
    */
-  PidTag: string
+  PidTag?: string
   /**
    * 计费ID
    */
-  Pid: number
+  Pid?: number
   /**
    * 独享集群实例Id
    */
-  InstanceId: string
+  InstanceId?: string
+  /**
+   * 可用区列表
+   */
+  Zones?: Array<string>
 }
 
 /**
@@ -556,87 +568,91 @@ export interface DBInstanceDetail {
   /**
    * DB实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * DB实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * DB实例状态,-1:已隔离, 0:创建中, 1:流程中, 2:运行中, 3:未初始化
    */
-  Status: number
+  Status?: number
   /**
    * DB实例状态描述,-1:已隔离, 0:创建中, 1:流程中, 2:运行中, 3:未初始化
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * DB实例版本
    */
-  DbVersion: string
+  DbVersion?: string
   /**
    * Vip信息
    */
-  Vip: string
+  Vip?: string
   /**
    * Vip使用的端口号
    */
-  Vport: number
+  Vport?: number
   /**
    * 字符串型的私有网络ID
    */
-  UniqueVpcId: string
+  UniqueVpcId?: string
   /**
    * 字符串型的私有网络子网ID
    */
-  UniqueSubnetId: string
+  UniqueSubnetId?: string
   /**
    * 是否为分布式版本,0:否,1:是
    */
-  Shard: number
+  Shard?: number
   /**
    * DB实例节点数
    */
-  NodeNum: number
+  NodeNum?: number
   /**
    * CPU规格(单位:核数)
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存规格(单位:GB)
    */
-  Memory: number
+  Memory?: number
   /**
    * 磁盘规格(单位:GB)
    */
-  Disk: number
+  Disk?: number
   /**
    * 分布式类型的实例的分片数
    */
-  ShardNum: number
+  ShardNum?: number
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * Db所在主机列表, 格式: m1,s1|m2,s2
    */
-  DbHosts: string
+  DbHosts?: string
   /**
    * 主机角色, 1:主, 2:从, 3:主+从
    */
-  HostRole: number
+  HostRole?: number
   /**
    * DB引擎，MySQL,Percona,MariaDB
    */
-  DbEngine: string
+  DbEngine?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
+  /**
+   * 可用区列表
+   */
+  Zones?: Array<string>
 }
 
 /**

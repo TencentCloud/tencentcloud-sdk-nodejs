@@ -26,17 +26,21 @@ import {
   QueryHunyuan3DPartJobResponse,
   QueryHunyuanTo3DRapidJobResponse,
   SubmitTextureTo3DJobRequest,
+  ViewImage,
   DescribeReduceFaceJobRequest,
   SubmitHunyuanTo3DRapidJobResponse,
   SubmitHunyuanTo3DUVJobRequest,
   File3D,
+  SubmitProfileTo3DJobRequest,
   DescribeTextureTo3DJobResponse,
+  DescribeProfileTo3DJobRequest,
   InputFile3D,
-  ViewImage,
+  SubmitProfileTo3DJobResponse,
   SubmitHunyuanTo3DRapidJobRequest,
   SubmitHunyuanTo3DUVJobResponse,
   SubmitHunyuan3DPartJobResponse,
   SubmitHunyuanTo3DProJobRequest,
+  DescribeProfileTo3DJobResponse,
   DescribeHunyuanTo3DUVJobResponse,
   SubmitReduceFaceJobRequest,
   DescribeTextureTo3DJobRequest,
@@ -104,6 +108,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async SubmitProfileTo3DJob(
+    req: SubmitProfileTo3DJobRequest,
+    cb?: (error: string, rep: SubmitProfileTo3DJobResponse) => void
+  ): Promise<SubmitProfileTo3DJobResponse> {
+    return this.request("SubmitProfileTo3DJob", req, cb)
+  }
+
+  /**
    * 输入模型后，可根据模型纹理进行UV展开，输出对应UV贴图。
    */
   async SubmitHunyuanTo3DUVJob(
@@ -164,6 +179,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTextureTo3DJobResponse) => void
   ): Promise<DescribeTextureTo3DJobResponse> {
     return this.request("DescribeTextureTo3DJob", req, cb)
+  }
+
+  /**
+     * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async DescribeProfileTo3DJob(
+    req: DescribeProfileTo3DJobRequest,
+    cb?: (error: string, rep: DescribeProfileTo3DJobResponse) => void
+  ): Promise<DescribeProfileTo3DJobResponse> {
+    return this.request("DescribeProfileTo3DJob", req, cb)
   }
 
   /**

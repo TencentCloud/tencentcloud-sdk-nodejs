@@ -1082,11 +1082,11 @@ export interface ModifyNatGatewayAttributeRequest {
    */
   NatGatewayId: string
   /**
-   * NAT网关的名称，形如：`test_nat`。
+   * NAT网关的名称，形如：`test_nat`，边界值：[1,60] 字符。
    */
   NatGatewayName?: string
   /**
-   * NAT网关最大外网出带宽(单位:Mbps)。
+   * NAT网关最大外网出带宽(单位:Mbps)，边界值：[0,50000]。
    */
   InternetMaxBandwidthOut?: number
   /**
@@ -1101,6 +1101,10 @@ export interface ModifyNatGatewayAttributeRequest {
    * NAT实例是否开启删除保护
    */
   DeletionProtectionEnabled?: boolean
+  /**
+   * 同一个内网地址通过NAT网关访问同一个目的IP时，是否使用固定的弹性公网IP。默认为true，使用固定IP；false代表使用随机IP。当前适用于标准型NAT网关。
+   */
+  PublicAddressAffinity?: boolean
 }
 
 /**
@@ -1286,6 +1290,29 @@ export interface IpField {
    * 注释字段
    */
   Comment?: boolean
+}
+
+/**
+ * UpgradeNatGatewayProductVersion请求参数结构体
+ */
+export interface UpgradeNatGatewayProductVersionRequest {
+  /**
+   * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+   */
+  VpcId: string
+  /**
+   * NAT网关的ID，形如：`nat-ig8xpno8`。
+   */
+  NatGatewayId: string
+  /**
+   * 是否热迁移。1表示冷迁移，0表示热迁移，默认值是0。
+   */
+  Force: number
+  /**
+   * 是否仅校验迁移可能性。true表示仅校验能否迁移，不做实际迁移。false表示正常迁移。默认值为false。
+仅校验模式，不报错表示校验迁移成功。
+   */
+  CheckOnlyMode?: boolean
 }
 
 /**
@@ -10546,6 +10573,16 @@ export interface CreateVpcEndPointServiceRequest {
    * 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。
    */
   IpAddressType?: string
+}
+
+/**
+ * UpgradeNatGatewayProductVersion返回参数结构体
+ */
+export interface UpgradeNatGatewayProductVersionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -78,6 +78,7 @@ import {
   CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest,
   NatDirectConnectGatewayRoute,
   IpField,
+  UpgradeNatGatewayProductVersionRequest,
   DescribeReserveIpAddressesRequest,
   AddBandwidthPackageResourcesRequest,
   ReplaceRoutePolicyEntriesRequest,
@@ -534,6 +535,7 @@ import {
   DescribeRoutesRequest,
   ModifyHighPriorityRouteTableAttributeRequest,
   CreateVpcEndPointServiceRequest,
+  UpgradeNatGatewayProductVersionResponse,
   DescribePrivateNatGatewaysRequest,
   Ipv6Address,
   DescribePrivateNatGatewayTranslationAclRulesResponse,
@@ -4795,6 +4797,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
   ): Promise<MigrateNetworkInterfaceResponse> {
     return this.request("MigrateNetworkInterface", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeNatGatewayProductVersion）用于升级NAT实例产品版本，将传统型NAT实例升级到标准型NAT。
+   */
+  async UpgradeNatGatewayProductVersion(
+    req: UpgradeNatGatewayProductVersionRequest,
+    cb?: (error: string, rep: UpgradeNatGatewayProductVersionResponse) => void
+  ): Promise<UpgradeNatGatewayProductVersionResponse> {
+    return this.request("UpgradeNatGatewayProductVersion", req, cb)
   }
 
   /**

@@ -819,7 +819,7 @@ export interface ScheduledSqlTaskInfo {
  */
 export interface CreateDlcDeliverResponse {
   /**
-   * 配置id
+   * <p>配置id</p>
    */
   TaskId?: string
   /**
@@ -1566,40 +1566,39 @@ export interface ModifyDataTransformRequest {
  */
 export interface CreateDlcDeliverRequest {
   /**
-   * 日志主题id。
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>日志主题id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
    */
   TopicId: string
   /**
-   * 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。
+   * <p>名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。</p>
    */
   Name: string
   /**
-   * 投递类型。0:批投递,1:实时投递
+   * <p>投递类型。0:批投递,1:实时投递</p>
    */
   DeliverType: number
   /**
-   * 投递时间范围的开始时间
+   * <p>投递时间范围的开始时间</p>
    */
   StartTime: number
   /**
-   * dlc配置信息
+   * <p>dlc配置信息</p>
    */
   DlcInfo: DlcInfo
   /**
-   * 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。
+   * <p>投递文件大小,单位MB。 DeliverType=0时必填，范围 5&lt;= MaxSize &lt;= 256。</p>
    */
   MaxSize?: number
   /**
-   * 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。
+   * <p>投递间隔，单位秒。 DeliverType=0时必填，范围 300&lt;= Interval &lt;=900。</p>
    */
   Interval?: number
   /**
-   * 投递时间范围的结束时间。 如果为空，则表示不限时。EndTime不为空时，需要大于StartTime。
+   * <p>投递时间范围的结束时间。 如果为空，则表示不限时。EndTime不为空时，需要大于StartTime。</p>
    */
   EndTime?: number
   /**
-   * 是否开启投递服务日志。1关闭，2开启。默认开启
+   * <p>是否开启投递服务日志。1关闭，2开启。默认开启</p>
    */
   HasServicesLog?: number
 }

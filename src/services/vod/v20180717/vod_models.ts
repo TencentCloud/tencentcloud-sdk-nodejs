@@ -5764,14 +5764,19 @@ export interface MediaImageSpriteInfo {
  */
 export interface EnhanceMediaQualityRequest {
   /**
-   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
-   */
-  FileId: string
-  /**
    * 音画质重生模板 ID。
 针对典型的使用场景，云点播提供了多个[预置模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
    */
   Definition: number
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   */
+  FileId?: string
+  /**
+   * 媒体的存储路径。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  MediaStoragePath?: string
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
@@ -6748,6 +6753,61 @@ export interface AiReviewPornAsrTaskOutput {
    * Asr 文字有涉及令人反感的信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   SegmentSetFileUrlExpireTime?: string
+}
+
+/**
+ * 云点播中存储的文件。
+ */
+export interface FileContent {
+  /**
+   * 对象键。
+   */
+  Key?: string
+  /**
+   * 对象最后修改时间，为 ISO8601格式，例如2019-05-24T10:56:40Z。
+   */
+  LastModified?: string
+  /**
+   * 对象的实体标签（Entity Tag），是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化。
+   */
+  ETag?: string
+  /**
+   * 对象大小，单位为Byte。
+   */
+  Size?: number
+  /**
+   * 枚举值请参见[存储类型](https://cloud.tencent.com/document/product/436/33417)文档，例如 STANDARD_IA，ARCHIVE。
+   */
+  StorageClass?: string
+  /**
+   * 此文件对应的媒体文件的唯一标识。
+   */
+  FileId?: string
+  /**
+   * 文件分类： <li>Video: 视频文件</li> <li>Audio: 音频文件</li> <li>Image: 图片文件</li> <li>Other: 其他文件</li>
+   */
+  Category?: string
+  /**
+   * 可选值有：
+ - OriginalFiles：原文件
+- TranscodeFiles：转码文件
+- AdaptiveDynamicStreamingFiles：转自适应码流文件
+- SubtitleFiles：字幕文件
+- SampleSnapshotFiles：采样截图文件
+- ImageSpriteFiles：雪碧图截图文件
+- SnapshotByTimeOffsetFiles：时间点截图文件
+
+   */
+  FileType?: string
+  /**
+   * 视频模板号，模板定义参见转码模板。
+   */
+  Definition?: number
+  /**
+   * 字幕ID。
+仅当FileType=SubtitleFiles时有值。
+   */
+  SubtitleID?: string
 }
 
 /**
@@ -7997,8 +8057,14 @@ export interface DescribeDrmDataKeyResponse {
 export interface ProcessMediaRequest {
   /**
    * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+FileId和MediaStoragePath必须提供其中一个。
    */
-  FileId: string
+  FileId?: string
+  /**
+   * 媒体的存储路径。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  MediaStoragePath?: string
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
@@ -12777,6 +12843,36 @@ export interface MediaTranscodeInfo {
 }
 
 /**
+ * ListFiles请求参数结构体
+ */
+export interface ListFilesRequest {
+  /**
+   * 点播[应用](/document/product/266/14574) ID。
+   */
+  SubAppId: number
+  /**
+   * 对象键匹配前缀，限定响应中只包含指定前缀的对象键。
+   */
+  Prefix?: string
+  /**
+   * 一个字符的分隔符，用于对对象键进行分组。所有对象键中从 prefix 或从头（如未指定 prefix）到首个 delimiter 之间相同的部分将作为 CommonPrefixes 下的一个 Prefix 节点。被分组的对象键不再出现在后续对象列表中。
+   */
+  Delimiter?: string
+  /**
+   * ys 	 单次返回最大的条目数量，默认值为100，最小为1，最大为100。
+   */
+  MaxKeys?: number
+  /**
+   * 起始对象键标记
+   */
+  Marker?: string
+  /**
+   * 文件类型。匹配集合中的任意元素： <li>Video: 视频文件</li> <li>Audio: 音频文件</li> <li>Image: 图片文件</li>
+   */
+  Categories?: Array<string>
+}
+
+/**
  * 播放器子流名字信息
  */
 export interface ResolutionNameInfo {
@@ -14117,6 +14213,10 @@ export interface ApplyUploadRequest {
    * 保留字段，特殊用途时使用。
    */
   ExtInfo?: string
+  /**
+   * 媒体存储路径，以/开头。
+   */
+  MediaStoragePath?: string
 }
 
 /**
@@ -14210,6 +14310,10 @@ export interface MediaBasicInfo {
    * 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
    */
   StorageRegion?: string
+  /**
+   * 媒体的存储路径。
+   */
+  StoragePath?: string
   /**
    * 媒体文件的标签信息。
    */
@@ -14313,6 +14417,10 @@ export interface PullUploadRequest {
    * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。
    */
   SourceContext?: string
+  /**
+   * 媒体存储路径，以/开头。
+   */
+  MediaStoragePath?: string
 }
 
 /**
@@ -14382,13 +14490,19 @@ export interface CreateQualityInspectTemplateRequest {
  */
 export interface ProcessMediaByProcedureRequest {
   /**
-   * 媒体文件 ID。
-   */
-  FileId: string
-  /**
    * [任务流](https://cloud.tencent.com/document/product/266/33475#.E4.BB.BB.E5.8A.A1.E6.B5.81)名称。
    */
   ProcedureName: string
+  /**
+   * 媒体文件 ID。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  FileId?: string
+  /**
+   * 媒体的存储路径。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  MediaStoragePath?: string
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
@@ -14840,23 +14954,29 @@ export interface ParseStreamingManifestResponse {
 }
 
 /**
- * 文本鉴别涉及令人不安全的信息的任务控制参数
+ * ListFiles返回参数结构体
  */
-export interface TerrorismOcrReviewTemplateInfo {
+export interface ListFilesResponse {
   /**
-   * 文本鉴别涉及令人不安全的信息的任务开关，可选值：
-<li>ON：开启文本鉴别涉及令人不安全的信息的任务；</li>
-<li>OFF：关闭文本鉴别涉及令人不安全的信息的任务。</li>
+   * 响应条目是否被截断。
    */
-  Switch: string
+  IsTruncated?: boolean
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 仅当响应条目有截断（IsTruncated 为 true）才会返回该节点，该节点的值为当前响应条目中的最后一个对象键，当需要继续请求后续条目时，将该节点的值作为下一次请求的 marker 参数传入。
    */
-  BlockConfidence?: number
+  NextMarker?: string
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 从 prefix 或从头（如未指定 prefix）到首个 delimiter 之间相同的部分，定义为 Common Prefix。仅当请求中指定了 delimiter 参数才有可能返回该节点。
    */
-  ReviewConfidence?: number
+  CommonPrefixes?: Array<string>
+  /**
+   * 对象条目。
+   */
+  Contents?: Array<FileContent>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -19475,6 +19595,21 @@ export interface SubAppIdInfo {
    * 子应用名称（该字段已不推荐使用，建议使用新的子应用名称字段 SubAppIdName）。
    */
   Name?: string
+  /**
+   * 此应用的模式，可选值为：
+- fileid：仅FileID模式
+- - fileid+path：FileID & Path模式
+留空时默认选择仅FileID模式
+   */
+  Mode?: string
+  /**
+   * 子应用已启用的存储地域。
+   */
+  StorageRegions?: Array<string>
+  /**
+   * 子应用绑定的tag。
+   */
+  Tags?: Array<ResourceTag>
 }
 
 /**
@@ -20190,6 +20325,26 @@ export interface DeleteClassRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * 文本鉴别涉及令人不安全的信息的任务控制参数
+ */
+export interface TerrorismOcrReviewTemplateInfo {
+  /**
+   * 文本鉴别涉及令人不安全的信息的任务开关，可选值：
+<li>ON：开启文本鉴别涉及令人不安全的信息的任务；</li>
+<li>OFF：关闭文本鉴别涉及令人不安全的信息的任务。</li>
+   */
+  Switch: string
+  /**
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   */
+  ReviewConfidence?: number
 }
 
 /**
@@ -21364,6 +21519,21 @@ export interface CreateSubAppIdRequest {
    * 应用类型， 取值有：<li>AllInOne：一体化；</li><li>Professional：专业版。</li>默认值为 AllInOne。
    */
   Type?: string
+  /**
+   * 此应用的模式，可选值为：
+- fileid：仅FileID模式
+- fileid+path：FileID & Path模式
+留空时默认选择仅FileID模式
+   */
+  Mode?: string
+  /**
+   * 存储地域
+   */
+  StorageRegion?: string
+  /**
+   * 此应用需要绑定的tag
+   */
+  Tags?: Array<ResourceTag>
 }
 
 /**
@@ -22652,14 +22822,20 @@ export interface SampleSnapshotTaskInput {
  */
 export interface ReviewImageRequest {
   /**
-   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。
-   */
-  FileId: string
-  /**
    * 图片审核模板 ID，取值范围：
 <li>10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。</li>
    */
   Definition: number
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  FileId?: string
+  /**
+   * 媒体的存储路径。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  MediaStoragePath?: string
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */

@@ -11975,6 +11975,10 @@ export interface VirtualNodeSpec {
    * 腾讯云标签
    */
   Tags?: Array<Tag>
+  /**
+   * 按量配额
+   */
+  Quota?: SuperNodeResource
 }
 
 /**

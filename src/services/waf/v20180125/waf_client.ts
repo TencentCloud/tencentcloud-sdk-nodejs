@@ -208,6 +208,7 @@ import {
   EnableRateLimitsV2Request,
   ModifyBotStatusRequest,
   ModifyHostFlowModeRequest,
+  GetOrganizationRoleResponse,
   DescribeLogHistogramResponse,
   CreateHostRequest,
   ModifyInstanceAttackLogPostRequest,
@@ -360,6 +361,7 @@ import {
   UserDomainInfo,
   DescribeAntiFakeRulesResponse,
   BotMonitorPkg,
+  GetOrganizationRoleRequest,
   DescribeTopicsRequest,
   BatchDomainResult,
   ApiNameOp,
@@ -1461,6 +1463,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAttackOverviewResponse) => void
   ): Promise<DescribeAttackOverviewResponse> {
     return this.request("DescribeAttackOverview", req, cb)
+  }
+
+  /**
+   * 获取集团账号角色
+   */
+  async GetOrganizationRole(
+    req?: GetOrganizationRoleRequest,
+    cb?: (error: string, rep: GetOrganizationRoleResponse) => void
+  ): Promise<GetOrganizationRoleResponse> {
+    return this.request("GetOrganizationRole", req, cb)
   }
 
   /**

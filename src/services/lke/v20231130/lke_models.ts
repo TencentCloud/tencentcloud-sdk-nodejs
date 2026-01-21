@@ -749,13 +749,19 @@ export interface Label {
 }
 
 /**
- * DeleteVar返回参数结构体
+ * 字符串KV信息
  */
-export interface DeleteVarResponse {
+export interface StrValue {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -920,6 +926,14 @@ export interface AgentToolInfo {
    * 工具高级设置
    */
   ToolAdvanceConfig?: ToolAdvanceConfig
+  /**
+   * 授权模式； 0-开发者授权；1-使用者授权
+   */
+  AuthMode?: number
+  /**
+   * 授权类型; 0-无鉴权；1-APIKey；2-CAM授权；3-Oauth2.0授权；
+   */
+  AuthType?: number
 }
 
 /**
@@ -4561,19 +4575,13 @@ export interface ModifyAppRequest {
 }
 
 /**
- * 字符串KV信息
+ * DeleteVar返回参数结构体
  */
-export interface StrValue {
+export interface DeleteVarResponse {
   /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
+  RequestId?: string
 }
 
 /**
@@ -5009,6 +5017,22 @@ LastRecordId 和MidRecordId都不填的时候，默认从最新的消息Id开始
 
    */
   MidRecordId?: string
+}
+
+/**
+ * 音频转录的文本内容
+ */
+export interface AudioTranscript {
+  /**
+   * 音频的发言者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Speaker?: string
+  /**
+   * 音频转录为文字后的内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Transcript?: string
 }
 
 /**
@@ -5503,6 +5527,11 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WidgetAction?: WidgetAction
+  /**
+   * 音频信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Audios?: Array<Audio>
 }
 
 /**
@@ -8463,6 +8492,11 @@ export interface ListReferShareKnowledgeResponse {
    */
   List?: Array<KnowledgeBaseInfo>
   /**
+   * 共享知识库数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10634,6 +10668,35 @@ export interface CheckAttributeLabelReferResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 音频信息
+ */
+export interface Audio {
+  /**
+   * 音频文件格式
+   */
+  Format?: string
+  /**
+   * 音频文件地址
+   */
+  AudioUrl?: string
+  /**
+   * 音频标题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
+  /**
+   * 音频文件在正文中的位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Position?: number
+  /**
+   * 音频转录后的文字列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioTranscripts?: Array<AudioTranscript>
 }
 
 /**

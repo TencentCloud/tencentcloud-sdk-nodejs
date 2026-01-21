@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ClusterOverview,
+  ModifyNodeAttributeResponse,
   NodeOverview,
   DescribeInitNodeScriptsRequest,
   AddNodesResponse,
@@ -58,6 +59,7 @@ import {
   DescribeNodesResponse,
   GooseFSOptionOverview,
   CFSOption,
+  ModifyNodeAttributeRequest,
   DeleteClusterStorageOptionRequest,
   RunMonitorServiceEnabled,
   ExpansionNodeConfigOverview,
@@ -306,6 +308,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 本接口用于修改节点属性
+   */
+  async ModifyNodeAttribute(
+    req: ModifyNodeAttributeRequest,
+    cb?: (error: string, rep: ModifyNodeAttributeResponse) => void
+  ): Promise<ModifyNodeAttributeResponse> {
+    return this.request("ModifyNodeAttribute", req, cb)
   }
 
   /**

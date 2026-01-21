@@ -805,6 +805,7 @@ import {
   TextTranslationResponse,
   ModifyStreamLinkSecurityGroupResponse,
   ModifyLiveRecordTemplateRequest,
+  ImageProcessPrompt,
   ModifySmartSubtitleTemplateRequest,
   AiAnalysisTaskInput,
   DeleteAnimatedGraphicsTemplateRequest,

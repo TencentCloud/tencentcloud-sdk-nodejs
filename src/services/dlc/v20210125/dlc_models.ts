@@ -366,7 +366,8 @@ export interface SmartOptimizerLifecyclePolicy {
    */
   Expiration?: number
   /**
-   * 是否删表
+   * 是否删表，该字段废弃已使用，用TableExpiration策略替代
+   * @deprecated
    */
   DropTable?: boolean
   /**
@@ -1428,17 +1429,17 @@ export interface SmartOptimizerPolicy {
    */
   Inherit?: string
   /**
-   * ResourceInfo
+   * 数据治理资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources?: Array<ResourceInfo>
   /**
-   * SmartOptimizerWrittenPolicy
+   * 数据重写策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Written?: SmartOptimizerWrittenPolicy
   /**
-   * SmartOptimizerLifecyclePolicy
+   * 数据过期策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Lifecycle?: SmartOptimizerLifecyclePolicy

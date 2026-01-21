@@ -8881,6 +8881,10 @@ export interface UpdateExporterIntegrationRequest {
    * 集群 ID，可不填
    */
   ClusterId?: string
+  /**
+   * 值为true时禁用集成
+   */
+  Disable?: boolean
 }
 
 /**

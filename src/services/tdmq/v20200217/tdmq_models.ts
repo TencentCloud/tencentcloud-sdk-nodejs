@@ -1997,10 +1997,6 @@ export interface CreateRocketMQVipInstanceRequest {
    */
   Spec: string
   /**
-   * 节点数量，最小2，最大20
-   */
-  NodeCount: number
-  /**
    * 单节点存储空间，GB为单位，最低200GB
    */
   StorageSize: number
@@ -2016,6 +2012,14 @@ export interface CreateRocketMQVipInstanceRequest {
    * 购买时长，月为单位
    */
   TimeSpan: number
+  /**
+   * 节点数量，创建专享集群时必填
+   */
+  NodeCount?: number
+  /**
+   * 通用集群规格标识，新购通用集群时必填，从 [DescribeRocketMQGeneralSKUs](https://cloud.tencent.com/document/api/1179/127066) 接口返回的 [GeneralSKU](https://cloud.tencent.com/document/api/1179/46089#GeneralSKU) 字段获取。
+   */
+  GeneralSkuCode?: string
   /**
    * 是否用于迁移上云，默认为false
    */
@@ -5388,6 +5392,15 @@ export interface RocketMQInstanceConfig {
    * 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5
    */
   SendReceiveRatio?: number
+  /**
+   * 收发 TPS 峰值上限
+   */
+  TpsLimit?: number
+  /**
+   * 通用集群规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GeneralSkuCode?: string
 }
 
 /**

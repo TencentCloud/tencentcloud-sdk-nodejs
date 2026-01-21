@@ -2753,6 +2753,12 @@ export interface AndroidInstance {
    * 机箱 ID
    */
   HostServerSerialNumber?: string
+  /**
+   * 服务状态。
+IDLE：未连接
+ESTABLISHED：连接中
+   */
+  ServiceStatus?: string
 }
 
 /**

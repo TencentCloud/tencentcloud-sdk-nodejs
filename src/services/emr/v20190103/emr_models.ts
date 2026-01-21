@@ -10147,6 +10147,10 @@ MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser M
    * 是否开通审计
    */
   NeedCdbAudit?: number
+  /**
+   * 安全组来源IP
+   */
+  SgIP?: string
 }
 
 /**
