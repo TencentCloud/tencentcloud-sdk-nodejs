@@ -333,6 +333,25 @@ export interface AllocationOverviewTotal {
 }
 
 /**
+ * CreateInstance返回参数结构体
+ */
+export interface CreateInstanceResponse {
+  /**
+   * 订单号
+   */
+  OrderId?: string
+  /**
+   * 实例列表，商品发货延迟可能返回空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceIdList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询返回预算完整信息
  */
 export interface BudgetExtend {
@@ -621,7 +640,7 @@ ownerUin=使用者账号
    */
   Dimensions: string
   /**
-   * 费用类型：cost-总费用，totalCost-原价费用
+   * 费用类型：cost-折后总费用，totalCost-原价费用
    */
   FeeType: string
   /**
@@ -4728,6 +4747,20 @@ export interface CostComponentSet {
 }
 
 /**
+ * RenewInstance返回参数结构体
+ */
+export interface RenewInstanceResponse {
+  /**
+   * 订单号列表
+   */
+  OrderIdList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 成本分析表头数据复杂类型
  */
 export interface AnalyseHeaderDetail {
@@ -5032,6 +5065,32 @@ export interface AnalyseTimeDetail {
    * 金额
    */
   Money?: string
+}
+
+/**
+ * RefundInstance请求参数结构体
+ */
+export interface RefundInstanceRequest {
+  /**
+   * ClientToken是一个由客户端生成的唯一的、区分大小写、不超过64个ASCII字符的字符串。例如，ClientToken=123e4567-e89b-12d3-a456-42665544****。
+   */
+  ClientToken: string
+  /**
+   * 产品一层code
+   */
+  ProductCode: string
+  /**
+   * 产品二层code
+   */
+  SubProductCode: string
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 地域code
+   */
+  RegionCode: string
 }
 
 /**
@@ -5745,6 +5804,60 @@ none - 平稳
 }
 
 /**
+ * CreateInstance请求参数结构体
+ */
+export interface CreateInstanceRequest {
+  /**
+   * ClientToken是一个由客户端生成的唯一的、区分大小写、不超过64个ASCII字符的字符串。例如，ClientToken=123e4567-e89b-12d3-a456-42665544****。
+   */
+  ClientToken: string
+  /**
+   * 产品一层code
+   */
+  ProductCode: string
+  /**
+   * 产品二层code
+   */
+  SubProductCode: string
+  /**
+   * 地域code
+   */
+  RegionCode: string
+  /**
+   * 可用区code
+   */
+  ZoneCode: string
+  /**
+   * 付费类型，取值：  PrePay：预付费
+   */
+  PayMode: string
+  /**
+   * 商品详情信息
+   */
+  Parameter: string
+  /**
+   * 商品数量，默认取值1
+   */
+  Quantity?: number
+  /**
+   * 项目id，默认取0
+   */
+  ProjectId?: number
+  /**
+   * 新购时长，取值上限：36，默认取值1
+   */
+  Period?: number
+  /**
+   * 新购时长单位，取值：m：按月购买，y：按年购买，默认取值m
+   */
+  PeriodUnit?: string
+  /**
+   * 自动续费标识，取值：NOTIFY_AND_MANUAL_RENEW：手动续费，NOTIFY_AND_AUTO_RENEW：自动续费，DISABLE_NOTIFY_AND_MANUAL_RENEW：到期不续，默认取值NOTIFY_AND_MANUAL_RENEW
+   */
+  RenewFlag?: string
+}
+
+/**
  * 分账账单趋势图
  */
 export interface AllocationStat {
@@ -6401,6 +6514,40 @@ QYWX 企业微信;
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverIds?: Array<number | bigint>
+}
+
+/**
+ * RenewInstance请求参数结构体
+ */
+export interface RenewInstanceRequest {
+  /**
+   * ClientToken是一个由客户端生成的唯一的、区分大小写、不超过64个ASCII字符的字符串。例如，ClientToken=123e4567-e89b-12d3-a456-42665544****。
+   */
+  ClientToken: string
+  /**
+   * 产品一层code
+   */
+  ProductCode: string
+  /**
+   * 产品二层code
+   */
+  SubProductCode: string
+  /**
+   * 地域code
+   */
+  RegionCode: string
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 手动续费时长，取值上限：36，默认取值1
+   */
+  Period?: number
+  /**
+   * 手动续费时长单位，取值：m：按月续费，y：按年续费，默认取值m
+   */
+  PeriodUnit?: string
 }
 
 /**
@@ -8317,6 +8464,20 @@ export interface DeleteAllocationUnitRequest {
    * 月份，不传默认当前月
    */
   Month?: string
+}
+
+/**
+ * RefundInstance返回参数结构体
+ */
+export interface RefundInstanceResponse {
+  /**
+   * 订单号列表
+   */
+  OrderIdList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

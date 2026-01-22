@@ -28,6 +28,16 @@ it("advisor.v20200721.DescribeTaskStrategyRisks", async function () {
     }
 })
 
+it("advisor.v20200721.CreateAdvisorAuthorization", async function () {
+    try {
+       const data = await client.CreateAdvisorAuthorization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("advisor.v20200721.DescribeStrategies", async function () {
     try {
        const data = await client.DescribeStrategies({})

@@ -32,6 +32,7 @@ import {
   CreateAllocationRuleResponse,
   BillTagInfo,
   AllocationOverviewTotal,
+  CreateInstanceResponse,
   BudgetExtend,
   BillTransactionInfo,
   ConditionBusiness,
@@ -143,6 +144,7 @@ import {
   BusinessSummaryTotal,
   DescribeAllocationBillConditionsResponse,
   CostComponentSet,
+  RenewInstanceResponse,
   AnalyseHeaderDetail,
   DescribeAllocationMonthOverviewRequest,
   JsonObject,
@@ -154,6 +156,7 @@ import {
   AnalyseOwnerUinDetail,
   Conditions,
   AnalyseTimeDetail,
+  RefundInstanceRequest,
   BillOwnerUin,
   AllocationRule,
   RegionSummaryOverviewItem,
@@ -167,6 +170,7 @@ import {
   DescribeAllocationUnitDetailRequest,
   DescribeBillSummaryForOrganizationRequest,
   AllocationSummaryByBusiness,
+  CreateInstanceRequest,
   AllocationStat,
   ModifyBudgetRequest,
   BillProject,
@@ -182,6 +186,7 @@ import {
   DescribeCostSummaryByRegionResponse,
   DescribeCostDetailRequest,
   BudgetSendInfoDto,
+  RenewInstanceRequest,
   DescribeBillSummaryForOrganizationResponse,
   BillOperateUin,
   DescribeTagListRequest,
@@ -242,6 +247,7 @@ import {
   DescribeDosageCosDetailByDateResponse,
   BillItem,
   DeleteAllocationUnitRequest,
+  RefundInstanceResponse,
   AllocationRuleExpression,
   BillProduct,
   DeleteAllocationUnitResponse,
@@ -634,13 +640,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询归集规则详情
+   * 查询分账目录树
    */
-  async DescribeGatherRuleDetail(
-    req: DescribeGatherRuleDetailRequest,
-    cb?: (error: string, rep: DescribeGatherRuleDetailResponse) => void
-  ): Promise<DescribeGatherRuleDetailResponse> {
-    return this.request("DescribeGatherRuleDetail", req, cb)
+  async DescribeAllocationTree(
+    req: DescribeAllocationTreeRequest,
+    cb?: (error: string, rep: DescribeAllocationTreeResponse) => void
+  ): Promise<DescribeAllocationTreeResponse> {
+    return this.request("DescribeAllocationTree", req, cb)
   }
 
   /**
@@ -654,13 +660,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询分账目录树
+   * 创建一个实例资源，会创建一个新购实例资源的订单，并通过腾讯云账户余额自动支付。调用该接口的账号需要授予finace:trade的权限，否则无法支付成功。目前已接入并支持购买的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
    */
-  async DescribeAllocationTree(
-    req: DescribeAllocationTreeRequest,
-    cb?: (error: string, rep: DescribeAllocationTreeResponse) => void
-  ): Promise<DescribeAllocationTreeResponse> {
-    return this.request("DescribeAllocationTree", req, cb)
+  async CreateInstance(
+    req: CreateInstanceRequest,
+    cb?: (error: string, rep: CreateInstanceResponse) => void
+  ): Promise<CreateInstanceResponse> {
+    return this.request("CreateInstance", req, cb)
   }
 
   /**
@@ -794,6 +800,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 续费一台实例，调用该接口续费服务器时，您需要确保您的腾讯云账户余额充足，否则会续费失败。调用该接口的账号需要授予finace:trade的权限，否则无法续费成功。目前已接入并支持续费的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
+   */
+  async RenewInstance(
+    req: RenewInstanceRequest,
+    cb?: (error: string, rep: RenewInstanceResponse) => void
+  ): Promise<RenewInstanceResponse> {
+    return this.request("RenewInstance", req, cb)
+  }
+
+  /**
    * 获取按标签汇总消耗详情
    */
   async DescribeCostSummaryByTag(
@@ -851,6 +867,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDealsByCondResponse) => void
   ): Promise<DescribeDealsByCondResponse> {
     return this.request("DescribeDealsByCond", req, cb)
+  }
+
+  /**
+   * 查询归集规则详情
+   */
+  async DescribeGatherRuleDetail(
+    req: DescribeGatherRuleDetailRequest,
+    cb?: (error: string, rep: DescribeGatherRuleDetailResponse) => void
+  ): Promise<DescribeGatherRuleDetailResponse> {
+    return this.request("DescribeGatherRuleDetail", req, cb)
+  }
+
+  /**
+   * 退订不再需要的实例，只退还实付金额的部分，已使用的代金券不退还，退还的实付金额默认退到腾讯云账户余额中。调用该接口的账号需要授予finace:RefundInstance的权限，否则无法支付成功。目前已接入并支持退订的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
+   */
+  async RefundInstance(
+    req: RefundInstanceRequest,
+    cb?: (error: string, rep: RefundInstanceResponse) => void
+  ): Promise<RefundInstanceResponse> {
+    return this.request("RefundInstance", req, cb)
   }
 
   /**

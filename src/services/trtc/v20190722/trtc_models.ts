@@ -4291,17 +4291,17 @@ export interface CreateCloudModerationRequest {
    */
   UserId: string
   /**
-   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
-   */
-  UserSig: string
-  /**
    * 云端审核控制参数。
    */
   ModerationParams: ModerationParams
   /**
-   * 云端审核文件上传到云存储的参数
+   * 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。
    */
-  ModerationStorageParams: ModerationStorageParams
+  UserSig: string
+  /**
+   * 云端审核文件上传到云存储的参数。
+   */
+  ModerationStorageParams?: ModerationStorageParams
   /**
    * TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1
    */

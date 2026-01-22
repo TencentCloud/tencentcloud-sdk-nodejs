@@ -378,9 +378,9 @@ it("billing.v20180709.DescribeAccountBalance", async function () {
     }
 })
 
-it("billing.v20180709.DescribeGatherRuleDetail", async function () {
+it("billing.v20180709.DescribeAllocationTree", async function () {
     try {
-       const data = await client.DescribeGatherRuleDetail({})
+       const data = await client.DescribeAllocationTree({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +398,9 @@ it("billing.v20180709.DescribeDosageDetailByDate", async function () {
     }
 })
 
-it("billing.v20180709.DescribeAllocationTree", async function () {
+it("billing.v20180709.CreateInstance", async function () {
     try {
-       const data = await client.DescribeAllocationTree({})
+       const data = await client.CreateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,6 +538,16 @@ it("billing.v20180709.DescribeBudget", async function () {
     }
 })
 
+it("billing.v20180709.RenewInstance", async function () {
+    try {
+       const data = await client.RenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeCostSummaryByTag", async function () {
     try {
        const data = await client.DescribeCostSummaryByTag({})
@@ -591,6 +601,26 @@ it("billing.v20180709.DeleteAllocationTag", async function () {
 it("billing.v20180709.DescribeDealsByCond", async function () {
     try {
        const data = await client.DescribeDealsByCond({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeGatherRuleDetail", async function () {
+    try {
+       const data = await client.DescribeGatherRuleDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.RefundInstance", async function () {
+    try {
+       const data = await client.RefundInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

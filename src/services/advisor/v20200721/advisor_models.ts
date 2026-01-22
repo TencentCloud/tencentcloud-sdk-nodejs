@@ -56,6 +56,47 @@ export interface DescribeTaskStrategyRisksRequest {
 }
 
 /**
+ * CreateAdvisorAuthorization返回参数结构体
+ */
+export interface CreateAdvisorAuthorizationResponse {
+  /**
+   * 返回信息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 风险实例字段描述
+ */
+export interface RiskFieldsDesc {
+  /**
+   * 字段ID
+   */
+  Field: string
+  /**
+   * 字段名称
+   */
+  FieldName: string
+  /**
+   * 字段类型, 
+string: 字符串类型，例如"aa"
+int: 整形，例如 111
+stringSlice : 字符串数组类型，例如["a", "b"]
+tags: 标签类型, 例如: [{"Key":"kkk","Value":"vvv"},{"Key":"kkk2","Value":"vvv2"}]
+   */
+  FieldType: string
+  /**
+   * 字段值对应字典
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldDict: Array<KeyValue>
+}
+
+/**
  * DescribeTaskStrategyRisks返回参数结构体
  */
 export interface DescribeTaskStrategyRisksResponse {
@@ -106,31 +147,9 @@ export interface KeyValue {
 }
 
 /**
- * 风险实例字段描述
+ * CreateAdvisorAuthorization请求参数结构体
  */
-export interface RiskFieldsDesc {
-  /**
-   * 字段ID
-   */
-  Field: string
-  /**
-   * 字段名称
-   */
-  FieldName: string
-  /**
-   * 字段类型, 
-string: 字符串类型，例如"aa"
-int: 整形，例如 111
-stringSlice : 字符串数组类型，例如["a", "b"]
-tags: 标签类型, 例如: [{"Key":"kkk","Value":"vvv"},{"Key":"kkk2","Value":"vvv2"}]
-   */
-  FieldType: string
-  /**
-   * 字段值对应字典
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FieldDict: Array<KeyValue>
-}
+export type CreateAdvisorAuthorizationRequest = null
 
 /**
  * 评估项信息

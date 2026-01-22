@@ -401,39 +401,31 @@ export interface DescribeDeliverBandwidthListResponse {
  */
 export interface DescribeLiveTranscodeDetailInfoRequest {
   /**
-   * 推流域名。
+   * <p>推流域名。</p>
    */
   PushDomain?: string
   /**
-   * 流名称。
+   * <p>流名称。</p>
    */
   StreamName?: string
   /**
-   * 查询时间，北京时间，
-格式：yyyymmdd。
-注意：支持查询近1个月内某天的详细数据，截止到昨天。
+   * <p>查询时间，北京时间，<br>格式：yyyymmdd。<br>注意：支持查询近1个月内某天的详细数据，截止到昨天。</p>
    */
   DayTime?: string
   /**
-   * 页数，默认1，
-不超过100页。
+   * <p>页数，默认1，<br>不超过100页。</p>
    */
   PageNum?: number
   /**
-   * 每页个数，默认20，
-范围：[10,1000]。
+   * <p>每页个数，默认20，<br>范围：[10,1000]。</p>
    */
   PageSize?: number
   /**
-   * 起始天时间，北京时间，
-格式：yyyymmdd。
-注意：支持查询近1个月内的详细数据。
+   * <p>起始天时间，北京时间，<br>格式：yyyymmdd。<br>注意：支持查询近1个月内的详细数据。</p>
    */
   StartDayTime?: string
   /**
-   * 结束天时间，北京时间，
-格式：yyyymmdd。
-注意：支持查询近1个月内的详细数据，截止到昨天，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。
+   * <p>结束天时间，北京时间，<br>格式：yyyymmdd。<br>注意：支持查询近1个月内的详细数据，截止到昨天，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。</p>
    */
   EndDayTime?: string
 }
@@ -3238,23 +3230,23 @@ export interface DescribeUploadStreamNumsResponse {
  */
 export interface DescribeLiveTranscodeDetailInfoResponse {
   /**
-   * 统计数据列表。
+   * <p>统计数据列表。</p>
    */
   DataInfoList?: Array<TranscodeDetailInfo>
   /**
-   * 页码。
+   * <p>页码。</p>
    */
   PageNum?: number
   /**
-   * 每页个数。
+   * <p>每页个数。</p>
    */
   PageSize?: number
   /**
-   * 总个数。
+   * <p>总个数。</p>
    */
   TotalNum?: number
   /**
-   * 总页数。
+   * <p>总页数。</p>
    */
   TotalPage?: number
   /**

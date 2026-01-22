@@ -20,9 +20,11 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeStrategiesResponse,
   DescribeTaskStrategyRisksRequest,
+  CreateAdvisorAuthorizationResponse,
+  RiskFieldsDesc,
   DescribeTaskStrategyRisksResponse,
   KeyValue,
-  RiskFieldsDesc,
+  CreateAdvisorAuthorizationRequest,
   Strategies,
   Conditions,
   DescribeStrategiesRequest,
@@ -45,6 +47,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskStrategyRisksResponse) => void
   ): Promise<DescribeTaskStrategyRisksResponse> {
     return this.request("DescribeTaskStrategyRisks", req, cb)
+  }
+
+  /**
+   * 开启智能顾问授权。会同步开启报告解读和云架构协作权限
+   */
+  async CreateAdvisorAuthorization(
+    req?: CreateAdvisorAuthorizationRequest,
+    cb?: (error: string, rep: CreateAdvisorAuthorizationResponse) => void
+  ): Promise<CreateAdvisorAuthorizationResponse> {
+    return this.request("CreateAdvisorAuthorization", req, cb)
   }
 
   /**

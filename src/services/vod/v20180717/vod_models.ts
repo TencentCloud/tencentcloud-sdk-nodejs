@@ -3831,7 +3831,13 @@ export interface ReviewAudioVideoRequest {
   /**
    * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
    */
-  FileId: string
+  FileId?: string
+  /**
+   * 媒体的存储路径。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。
+FileId和MediaStoragePath必须提供其中一个。
+   */
+  MediaStoragePath?: string
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
@@ -5774,6 +5780,7 @@ export interface EnhanceMediaQualityRequest {
   FileId?: string
   /**
    * 媒体的存储路径。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。
 FileId和MediaStoragePath必须提供其中一个。
    */
   MediaStoragePath?: string
@@ -8062,6 +8069,7 @@ FileId和MediaStoragePath必须提供其中一个。
   FileId?: string
   /**
    * 媒体的存储路径。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。
 FileId和MediaStoragePath必须提供其中一个。
    */
   MediaStoragePath?: string
@@ -14215,6 +14223,7 @@ export interface ApplyUploadRequest {
   ExtInfo?: string
   /**
    * 媒体存储路径，以/开头。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。
    */
   MediaStoragePath?: string
 }
@@ -14419,6 +14428,7 @@ export interface PullUploadRequest {
   SourceContext?: string
   /**
    * 媒体存储路径，以/开头。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。
    */
   MediaStoragePath?: string
 }
@@ -14500,6 +14510,7 @@ FileId和MediaStoragePath必须提供其中一个。
   FileId?: string
   /**
    * 媒体的存储路径。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。
 FileId和MediaStoragePath必须提供其中一个。
    */
   MediaStoragePath?: string
@@ -22833,6 +22844,7 @@ FileId和MediaStoragePath必须提供其中一个。
   FileId?: string
   /**
    * 媒体的存储路径。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。
 FileId和MediaStoragePath必须提供其中一个。
    */
   MediaStoragePath?: string

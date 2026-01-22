@@ -2766,6 +2766,7 @@ export interface AutoCalloutTaskInfo {
 2 已完成：任务中所有呼叫完成
 3结束中：任务到期，但仍有部分呼叫未结束
 4已结束：任务到期终止
+5已暂停：可恢复继续执行
    */
   State?: number
   /**
@@ -5384,7 +5385,7 @@ export interface DescribeAutoCalloutTaskResponse {
    */
   IvrId?: number
   /**
-   * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
+   * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止 5已暂停
    */
   State?: number
   /**

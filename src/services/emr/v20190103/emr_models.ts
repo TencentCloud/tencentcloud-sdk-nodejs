@@ -819,6 +819,10 @@ export interface LoadAutoScaleStrategy {
    * soft例如yarn
    */
   Soft?: string
+  /**
+   * 任务保护时间
+   */
+  GraceDownProtectTime?: number
 }
 
 /**
@@ -3592,6 +3596,10 @@ export interface TimeAutoScaleStrategy {
    * 优雅缩容业务pod标签，当node不存在上述pod或超过优雅缩容时间时，缩容节点
    */
   GraceDownLabel?: Array<TkeLabel>
+  /**
+   * 任务保护时间
+   */
+  GraceDownProtectTime?: number
 }
 
 /**

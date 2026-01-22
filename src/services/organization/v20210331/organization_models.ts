@@ -776,19 +776,19 @@ export interface MoveOrganizationNodeMembersResponse {
  */
 export interface AttachPolicyRequest {
   /**
-   * 绑定策略目标ID。成员Uin或部门ID
+   * <p>绑定策略目标ID。成员Uin或部门ID</p>
    */
   TargetId: number
   /**
-   * 目标类型。取值范围：NODE-部门、MEMBER-成员
+   * <p>目标类型。取值范围：NODE-部门、MEMBER-成员</p>
    */
   TargetType: string
   /**
-   * 策略ID。
+   * <p>策略Id。可以调用<a href="https://cloud.tencent.com/document/product/850/105311">ListPolicies</a>获取</p>
    */
   PolicyId: number
   /**
-   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   * <p>策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略</p>
    */
   Type?: string
 }
@@ -3487,19 +3487,19 @@ export interface UpdateRoleConfigurationRequest {
  */
 export interface DetachPolicyRequest {
   /**
-   * 解绑策略目标ID。成员Uin或部门ID
+   * <p>解绑策略目标ID。成员Uin或部门ID</p>
    */
   TargetId: number
   /**
-   * 目标类型。取值范围：NODE-部门、MEMBER-成员
+   * <p>目标类型。取值范围：NODE-部门、MEMBER-成员</p>
    */
   TargetType: string
   /**
-   * 策略ID。
+   * <p>策略Id。可以调用<a href="https://cloud.tencent.com/document/product/850/105311">ListPolicies</a>获取</p>
    */
   PolicyId: number
   /**
-   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   * <p>策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略</p>
    */
   Type?: string
 }
