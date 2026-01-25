@@ -190,7 +190,7 @@ import {
   DeleteMultiPathGatewayResponse,
   DescribeAvailablePlansResponse,
   RateLimitTemplate,
-  ModifyRealtimeLogDeliveryTaskResponse,
+  ConfigGroupWorkModeInfo,
   ContentCompressionParameters,
   AccelerationDomainCertificate,
   OriginRecord,
@@ -329,13 +329,14 @@ import {
   DescribeEnvironmentsResponse,
   CacheParameters,
   OriginAuthenticationRequestProperties,
-  TimingDataItem,
+  ModifyRealtimeLogDeliveryTaskResponse,
   RateLimitUserRule,
   DeployRecord,
   CreatePlanForZoneRequest,
   DeviceProfile,
   ConfirmMultiPathGatewayOriginACLResponse,
   CreateJustInTimeTranscodeTemplateRequest,
+  TimingDataItem,
   ModifyCustomErrorPageRequest,
   ModifyFunctionRuleResponse,
   DescribeL7AccRulesRequest,
@@ -410,6 +411,7 @@ import {
   AccelerateMainlandParameters,
   ModifyZoneStatusRequest,
   UpstreamURLRewriteParameters,
+  ModifyZoneWorkModeRequest,
   DescribeL4ProxyResponse,
   ModifyHostsCertificateRequest,
   ModifyOriginACLRequest,
@@ -655,6 +657,7 @@ import {
   ModifyMultiPathGatewaySecretKeyRequest,
   DnsRecord,
   OriginPrivateParameters,
+  ModifyZoneWorkModeResponse,
   HSTSParameters,
   DeleteSecurityAPIResourceResponse,
   BindZoneToPlanRequest,
@@ -2446,6 +2449,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: BindSharedCNAMEResponse) => void
   ): Promise<BindSharedCNAMEResponse> {
     return this.request("BindSharedCNAME", req, cb)
+  }
+
+  /**
+   * 本接口用于修改站点下各配置模块的工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。
+   */
+  async ModifyZoneWorkMode(
+    req: ModifyZoneWorkModeRequest,
+    cb?: (error: string, rep: ModifyZoneWorkModeResponse) => void
+  ): Promise<ModifyZoneWorkModeResponse> {
+    return this.request("ModifyZoneWorkMode", req, cb)
   }
 
   /**

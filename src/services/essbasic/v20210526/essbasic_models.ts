@@ -529,25 +529,15 @@ export interface FlowGroupUrlInfo {
  */
 export interface ChannelDescribeSignFaceVideoRequest {
   /**
-   * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+   * <p>合同流程ID，为32位字符串。<br>建议开发者妥善保存此流程ID，以便于顺利进行后续操作。<br>可登录腾讯电子签控制台，在 &quot;合同&quot;-&gt;&quot;合同中心&quot; 中查看某个合同的FlowId(在页面中展示为合同ID)。</p>
    */
   FlowId: string
   /**
-   * 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。
+   * <p>签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。</p>
    */
   SignId: string
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
 }
@@ -1959,15 +1949,15 @@ export interface OperateTemplateRequest {
  */
 export interface ChannelDescribeSignFaceVideoResponse {
   /**
-   * 核身视频结果。
+   * <p>核身视频结果。</p>
    */
   VideoData?: DetectInfoVideoData
   /**
-   * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+   * <p>意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。</p>
    */
   IntentionQuestionResult?: IntentionQuestionResult
   /**
-   * 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。
+   * <p>意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionActionResult?: IntentionActionResult

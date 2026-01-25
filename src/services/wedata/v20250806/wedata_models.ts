@@ -7559,7 +7559,7 @@ export interface ListCatalogRequest {
    */
   PageSize: number
   /**
-   * 父目录ID
+   * 父目录ID(此参数还未支持)
    */
   ParentCatalogId?: string
 }
@@ -8285,6 +8285,21 @@ export interface TableInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessMetadata?: BusinessMetadata
+  /**
+   * 数据目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: number
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceType?: string
 }
 
 /**
@@ -17188,6 +17203,16 @@ export interface DatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageSize?: number
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: number
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceType?: string
 }
 
 /**

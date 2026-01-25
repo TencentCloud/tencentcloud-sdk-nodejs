@@ -1037,6 +1037,10 @@ export interface CreateEnvironmentRequest {
    * 离线订阅过期自动清理时间开关
    */
   SubscriptionExpirationTimeEnable?: boolean
+  /**
+   * 命名空间标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1526,6 +1530,14 @@ export interface CreateTopicRequest {
    * Pulsar主题消息类型0: 混合消息1:普通消息2:延迟消息
    */
   PulsarTopicMessageType?: number
+  /**
+   * 主题标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * defaultPolicy/timingwheelPolicy不传默认是社区版本延迟消息策略
+   */
+  DelayMessagePolicy?: string
 }
 
 /**
@@ -6676,7 +6688,7 @@ export interface PulsarProClusterSpecInfo {
    */
   MaxNamespaces?: number
   /**
-   * 最大主题分区数
+   * 可以创建的最大主题数
    */
   MaxTopics?: number
   /**
@@ -6691,9 +6703,25 @@ export interface PulsarProClusterSpecInfo {
    */
   MaxPartitions?: number
   /**
-   * 商品最大延迟消息数量。0代表没有限制
+   * 最大延迟消息数量。0代表没有限制
    */
   MaxDelayedMessages?: number
+  /**
+   * 可以创建的最大主题分区数
+   */
+  MaxTopicsPartitioned?: number
+  /**
+   * 单broker最大链接数
+   */
+  BrokerMaxConnections?: number
+  /**
+   * 单IP最大链接数
+   */
+  BrokerMaxConnectionsPerIp?: number
+  /**
+   * 弹性存储集群最大存储规格；固定存储该值为0
+   */
+  MaximumElasticStorage?: number
 }
 
 /**
@@ -9431,6 +9459,14 @@ export interface Topic {
    * Pulsar主题消息类型0: 混合消息1:普通消息2:延迟消息
    */
   PulsarTopicMessageType?: number
+  /**
+   * 主题标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * defaultPolicy/timingwheelPolicy不传默认是社区版本延迟消息策略
+   */
+  DelayMessagePolicy?: string
 }
 
 /**
@@ -10102,6 +10138,10 @@ export interface Environment {
    * 离线订阅过期自动清理时间开关
    */
   SubscriptionExpirationTimeEnable?: boolean
+  /**
+   * 命名空间标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -10449,6 +10489,10 @@ export interface ModifyTopicRequest {
    * 消费者 Ack 超时时间，单位：秒，范围60-（3600*24
    */
   AckTimeOut?: number
+  /**
+   * defaultPolicy/timingwheelPolicy不传默认是社区版本延迟消息策略
+   */
+  DelayMessagePolicy?: string
 }
 
 /**

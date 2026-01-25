@@ -675,7 +675,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文件系统目录操作接口
+   * 文件系统目录操作接口。当前仅 Turbo 系列文件系统支持调用此接口进行目录操作，通用系列文件系统（含增强型）不支持调用。
    */
   async DoDirectoryOperation(
     req: DoDirectoryOperationRequest,

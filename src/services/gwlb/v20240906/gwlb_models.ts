@@ -101,15 +101,15 @@ export interface DescribeTargetGroupListRequest {
  */
 export interface ModifyGatewayLoadBalancerAttributeRequest {
   /**
-   * 网关负载均衡的唯一ID。可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/api/1782/111683) 接口获取。
+   * <p>网关负载均衡的唯一ID。可通过<a href="https://cloud.tencent.com/document/api/1782/111683">DescribeGatewayLoadBalancers</a> 接口获取。</p>
    */
   LoadBalancerId: string
   /**
-   * 网关负载均衡实例名称。可支持输入1-60个字符。
+   * <p>网关负载均衡实例名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
    */
   LoadBalancerName?: string
   /**
-   * 是否开启删除保护。
+   * <p>是否开启删除保护。</p>
    */
   DeleteProtect?: boolean
 }
@@ -528,7 +528,7 @@ export interface DescribeTargetGroupInstancesResponse {
  */
 export interface CreateTargetGroupRequest {
   /**
-   * <p>目标组名称，限定60个字符。</p>
+   * <p>目标组名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
    */
   TargetGroupName?: string
   /**
@@ -544,7 +544,7 @@ export interface CreateTargetGroupRequest {
    */
   TargetGroupInstances?: Array<TargetGroupInstance>
   /**
-   * <p>网关负载均衡目标组协议。- TENCENT_GENEVE ：GENEVE 标准协议- AWS_GENEVE：GENEVE 兼容协议</p>
+   * <p>网关负载均衡目标组协议。</p><ul><li>TENCENT_GENEVE ：GENEVE 标准协议</li><li>AWS_GENEVE：GENEVE 兼容协议</li></ul>
    */
   Protocol?: string
   /**
@@ -598,27 +598,27 @@ export interface CreateTargetGroupRequest {
  */
 export interface CreateGatewayLoadBalancerRequest {
   /**
-   * 网关负载均衡后端目标设备所属的私有网络 ID，如vpc-azd4dt1c，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)  接口获取。
+   * <p>网关负载均衡后端目标设备所属的私有网络 ID，如vpc-azd4dt1c，可以通过 <a href="https://cloud.tencent.com/document/product/215/15778">DescribeVpcs</a>  接口获取。</p>
    */
   VpcId: string
   /**
-   * 网关负载均衡后端目标设备所属的私有网络的子网ID。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。
+   * <p>网关负载均衡后端目标设备所属的私有网络的子网ID。可通过<a href="https://cloud.tencent.com/document/product/215/15784">DescribeSubnets</a>接口获取。</p>
    */
   SubnetId: string
   /**
-   * 网关负载均衡实例名称。可支持输入1-60个字符。不填写时默认自动生成。
+   * <p>网关负载均衡实例名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。不填写时默认自动生成。</p>
    */
   LoadBalancerName?: string
   /**
-   * 创建网关负载均衡的个数，默认值为 1。批量创建数量最大支持10个。
+   * <p>创建网关负载均衡的个数，默认值为 1。批量创建数量最大支持10个。</p>
    */
   Number?: number
   /**
-   * 购买网关负载均衡的同时，给负载均衡打上标签，最大支持20个标签键值对。
+   * <p>购买网关负载均衡的同时，给负载均衡打上标签，最大支持20个标签键值对。</p>
    */
   Tags?: Array<TagInfo>
   /**
-   * 网关负载均衡实例计费类型，当前只支持传POSTPAID_BY_HOUR（按量计费），默认是POSTPAID_BY_HOUR。
+   * <p>网关负载均衡实例计费类型，当前只支持传POSTPAID_BY_HOUR（按量计费），默认是POSTPAID_BY_HOUR。</p>
    */
   LBChargeType?: string
 }
@@ -756,12 +756,11 @@ export interface RegisterTargetGroupInstancesResponse {
  */
 export interface CreateGatewayLoadBalancerResponse {
   /**
-   * 由网关负载均衡实例唯一 ID 组成的数组。
-存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过[DescribeTaskStatus](https://cloud.tencent.com/document/api/1782/111700)接口查询创建的资源ID。
+   * <p>由网关负载均衡实例唯一 ID 组成的数组。<br>存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过<a href="https://cloud.tencent.com/document/api/1782/111700">DescribeTaskStatus</a>接口查询创建的资源ID。</p>
    */
   LoadBalancerIds?: Array<string>
   /**
-   * 订单号。
+   * <p>订单号。</p>
    */
   DealName?: string
   /**
@@ -905,43 +904,43 @@ export interface AssociationItem {
  */
 export interface ModifyTargetGroupAttributeRequest {
   /**
-   * 目标组的ID，可以通过[DescribeTargetGroups](https://cloud.tencent.com/document/product/214/40554)获取。
+   * <p>目标组的ID，可以通过<a href="https://cloud.tencent.com/document/product/214/40554">DescribeTargetGroups</a>获取。</p>
    */
   TargetGroupId: string
   /**
-   * 目标组的新名称。
+   * <p>目标组的新名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
    */
   TargetGroupName?: string
   /**
-   * 健康检查详情。
+   * <p>健康检查详情。</p>
    */
   HealthCheck?: TargetGroupHealthCheck
   /**
-   * 是否支持全死全活。
+   * <p>是否支持全死全活。</p>
    */
   AllDeadToAlive?: boolean
   /**
-   * TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。
+   * <p>TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。</p>
    */
   TcpIdleConnectTimeout?: number
   /**
-   * 其他协议连接空闲超时时间，可配置5s-180s，默认120s
+   * <p>其他协议连接空闲超时时间，可配置5s-180s，默认120s</p>
    */
   OthersIdleConnectTimeout?: number
   /**
-   * 重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。
+   * <p>重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。</p>
    */
   RescheduleUnbindRs?: boolean
   /**
-   * 解绑RS后开启重调度的时间，可配置0s-3600s，默认0s
+   * <p>解绑RS后开启重调度的时间，可配置0s-3600s，默认0s</p>
    */
   RescheduleUnbindRsStartTime?: number
   /**
-   * 重新调度功能内的后端服务健康探测异常开关，开关打开后后端服务健康检查异常会触发重新调度。
+   * <p>重新调度功能内的后端服务健康探测异常开关，开关打开后后端服务健康检查异常会触发重新调度。</p>
    */
   RescheduleUnhealthy?: boolean
   /**
-   * 后端服务健康探测异常后开启重调度的时间，可配置0s-3600s，默认0s
+   * <p>后端服务健康探测异常后开启重调度的时间，可配置0s-3600s，默认0s</p>
    */
   RescheduleUnhealthyStartTime?: number
 }

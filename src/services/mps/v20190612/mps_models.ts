@@ -12597,6 +12597,10 @@ export interface ProcessImageRequest {
    * 图片处理附加参数。
    */
   AddOnParameter?: AddOnParameter
+  /**
+   * 图片处理拓展参数。
+   */
+  StdExtInfo?: string
 }
 
 /**

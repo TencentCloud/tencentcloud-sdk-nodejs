@@ -3837,13 +3837,17 @@ export interface RateLimitTemplate {
 }
 
 /**
- * ModifyRealtimeLogDeliveryTask返回参数结构体
+ * 版本管理配置组工作模式信息。
  */
-export interface ModifyRealtimeLogDeliveryTaskResponse {
+export interface ConfigGroupWorkModeInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 配置组类型，可选项如下：<li>l7_acceleration: 七层加速配置组；</li><li>edge_functions: 边缘函数配置组。</li>
    */
-  RequestId?: string
+  ConfigGroupType: string
+  /**
+   * 工作模式，可选项如下：<li>immediate_effect: 即时生效模式；</li><li>version_control: 版本管理模式。</li>
+   */
+  WorkMode: string
 }
 
 /**
@@ -5726,6 +5730,10 @@ export interface Zone {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VanityNameServersIps?: Array<VanityNameServersIps>
+  /**
+   * 版本管理配置组工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。
+   */
+  WorkModeInfos?: Array<ConfigGroupWorkModeInfo>
 }
 
 /**
@@ -6059,8 +6067,7 @@ export interface DescribeZonesRequest {
    */
   Limit?: number
   /**
-   * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：
-<li>zone-name：按照站点名称进行过滤；</li><li>zone-type：按照站点类型进行过滤。可选项：<br>   full：NS 接入类型；<br>   partial：CNAME 接入类型；<br>   partialComposite：无域名接入类型；<br>   dnsPodAccess：DNSPod 托管接入类型；<br>   pages：Pages 类型。</li><li>zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；</li><li>status：按照站点状态进行过滤。可选项：<br>   active：NS 已切换；<br>   pending：NS 待切换；<br>   deleted：已删除。</li><li>tag-key：按照标签键进行过滤；</li><li>tag-value： 按照标签值进行过滤；</li><li>alias-zone-name： 按照同名站点标识进行过滤。</li>模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。
+   * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：<li>zone-name：按照站点名称进行过滤；</li><li>zone-type：按照站点类型进行过滤。可选项：<br>   full：NS 接入类型；<br>   partial：CNAME 接入类型；<br>   partialComposite：无域名接入类型；<br>   dnsPodAccess：DNSPod 托管接入类型；<br>   pages：Pages 接入类型。 </li><li>zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；</li><li>status：按照站点状态进行过滤。可选项：<br>   active：NS 已切换；<br>   pending：NS 待切换；<br>   deleted：已删除。</li><li>tag-key：按照标签键进行过滤；</li><li>tag-value： 按照标签值进行过滤；</li><li>alias-zone-name： 按照同名站点标识进行过滤。</li>模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。
    */
   Filters?: Array<AdvancedFilter>
   /**
@@ -7091,17 +7098,13 @@ export interface OriginAuthenticationRequestProperties {
 }
 
 /**
- * 统计曲线数据项
+ * ModifyRealtimeLogDeliveryTask返回参数结构体
  */
-export interface TimingDataItem {
+export interface ModifyRealtimeLogDeliveryTaskResponse {
   /**
-   * 返回数据对应时间点，采用 unix 秒级时间戳。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Timestamp?: number
-  /**
-   * 具体数值。
-   */
-  Value?: number
+  RequestId?: string
 }
 
 /**
@@ -7319,6 +7322,20 @@ export interface CreateJustInTimeTranscodeTemplateRequest {
    * 音频流配置参数，当 AudioStreamSwitch 为 on，该字段必填。
    */
   AudioTemplate?: AudioTemplateInfo
+}
+
+/**
+ * 统计曲线数据项
+ */
+export interface TimingDataItem {
+  /**
+   * 返回数据对应时间点，采用 unix 秒级时间戳。
+   */
+  Timestamp?: number
+  /**
+   * 具体数值。
+   */
+  Value?: number
 }
 
 /**
@@ -8906,6 +8923,20 @@ export interface UpstreamURLRewriteParameters {
    * 回源 URL 重写用于正则替换匹配完整路径的正则表达式。需要满足 Google RE2 规范，长度范围为 1～1024。当 Action 为 regexReplace 时，此字段必填，否则无需填写此字段。
    */
   Regex?: string
+}
+
+/**
+ * ModifyZoneWorkMode请求参数结构体
+ */
+export interface ModifyZoneWorkModeRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 版本管理配置组工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。
+   */
+  WorkModeInfos?: Array<ConfigGroupWorkModeInfo>
 }
 
 /**
@@ -14773,6 +14804,16 @@ export interface OriginPrivateParameters {
    * 存储桶地域。
    */
   Region?: string
+}
+
+/**
+ * ModifyZoneWorkMode返回参数结构体
+ */
+export interface ModifyZoneWorkModeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

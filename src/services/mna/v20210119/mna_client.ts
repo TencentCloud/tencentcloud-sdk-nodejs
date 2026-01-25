@@ -38,18 +38,19 @@ import {
   DeleteL3ConnRequest,
   GetVendorHardwareResponse,
   GetActiveDeviceCountResponse,
+  DestIpInfo,
   DeviceBaseInfo,
   AddGroupRequest,
   GetGroupListRequest,
   HardwareInfo,
   GetGroupDetailRequest,
-  GroupDeleteDeviceResponse,
   GroupAddDeviceRequest,
+  GroupDeleteDeviceResponse,
   GetStatisticDataResponse,
   GetPublicKeyRequest,
   GetFlowStatisticByGroupResponse,
   GetNetMonitorResponse,
-  GetFlowStatisticByRegionRequest,
+  GetFlowStatisticByNameResponse,
   ReportOrderResponse,
   GetFlowAlarmInfoRequest,
   GetVendorHardwareRequest,
@@ -61,13 +62,16 @@ import {
   GetL3ConnListResponse,
   GroupInfo,
   ModifyPackageRenewFlagResponse,
+  GetDestIPByNameResponse,
   VendorHardware,
   GetDeviceRequest,
   ActivateHardwareResponse,
   GetFlowStatisticByGroupRequest,
   GetDevicesResponse,
   AddL3ConnResponse,
+  GetDestIPByNameRequest,
   GetDevicesRequest,
+  GetStatisticDataByNameRequest,
   SetNotifyUrlRequest,
   GetDevicePayModeRequest,
   SlotNetInfo,
@@ -76,12 +80,14 @@ import {
   ActivateHardware,
   DownloadActiveDeviceCountResponse,
   GetHardwareListRequest,
+  GetFlowStatisticByNameRequest,
   GroupDeleteDeviceRequest,
   DeviceDetails,
   GetFlowStatisticByRegionResponse,
   ActiveDeviceList,
   GetMultiFlowStatisticRequest,
   GetFlowAlarmInfoResponse,
+  GetFlowStatisticByRegionRequest,
   OrderFlowPackageRequest,
   GetGroupDetailResponse,
   UpdateGroupResponse,
@@ -90,26 +96,31 @@ import {
   DownloadActiveDeviceCountRequest,
   GetHardwareListResponse,
   AddDeviceRequest,
+  GetNetMonitorByNameResponse,
   OrderPerLicenseRequest,
   UpdateGroupRequest,
   GetFlowStatisticResponse,
   UpdateHardwareRequest,
   GetNetMonitorRequest,
+  GetNetMonitorByNameRequest,
   GetGroupListResponse,
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
   L3ConnInfo,
   ActivateHardwareRequest,
+  GetMonitorDataByNameResponse,
   GroupAddDeviceResponse,
   GetStatisticDataRequest,
   UpdateDeviceRequest,
   DeleteGroupResponse,
   GetPublicKeyResponse,
+  GetStatisticDataByNameResponse,
   AddHardwareResponse,
   GetFlowStatisticRequest,
   AddDeviceResponse,
   GetDevicePayModeResponse,
   GetActiveDeviceCountRequest,
+  GetMonitorDataByNameRequest,
   UpdateL3ConnRequest,
   DevicePayModeInfo,
   MonitorData,
@@ -270,6 +281,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 统计单个设备访问目标IP地址信息
+   */
+  async GetDestIPByName(
+    req: GetDestIPByNameRequest,
+    cb?: (error: string, rep: GetDestIPByNameResponse) => void
+  ): Promise<GetDestIPByNameResponse> {
+    return this.request("GetDestIPByName", req, cb)
+  }
+
+  /**
    * 删除互通规则
    */
   async DeleteL3Conn(
@@ -370,6 +391,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指定设备Id，指定时间点数据流量使用情况
+   */
+  async GetFlowStatisticByName(
+    req: GetFlowStatisticByNameRequest,
+    cb?: (error: string, rep: GetFlowStatisticByNameResponse) => void
+  ): Promise<GetFlowStatisticByNameResponse> {
+    return this.request("GetFlowStatisticByName", req, cb)
+  }
+
+  /**
    * 获取厂商硬件设备列表
    */
   async GetVendorHardware(
@@ -380,6 +411,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取单设备的实时流量统计指标
+   */
+  async GetNetMonitorByName(
+    req: GetNetMonitorByNameRequest,
+    cb?: (error: string, rep: GetNetMonitorByNameResponse) => void
+  ): Promise<GetNetMonitorByNameResponse> {
+    return this.request("GetNetMonitorByName", req, cb)
+  }
+
+  /**
    * 新建互通规则
    */
   async AddL3Conn(
@@ -387,6 +428,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddL3ConnResponse) => void
   ): Promise<AddL3ConnResponse> {
     return this.request("AddL3Conn", req, cb)
+  }
+
+  /**
+   * 在用量统计页面下载流量数据
+   */
+  async GetStatisticDataByName(
+    req: GetStatisticDataByNameRequest,
+    cb?: (error: string, rep: GetStatisticDataByNameResponse) => void
+  ): Promise<GetStatisticDataByNameResponse> {
+    return this.request("GetStatisticDataByName", req, cb)
   }
 
   /**
@@ -457,6 +508,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetHardwareListResponse) => void
   ): Promise<GetHardwareListResponse> {
     return this.request("GetHardwareList", req, cb)
+  }
+
+  /**
+   * 获取单个设备所有监控指标的下载文件链接
+   */
+  async GetMonitorDataByName(
+    req: GetMonitorDataByNameRequest,
+    cb?: (error: string, rep: GetMonitorDataByNameResponse) => void
+  ): Promise<GetMonitorDataByNameResponse> {
+    return this.request("GetMonitorDataByName", req, cb)
   }
 
   /**

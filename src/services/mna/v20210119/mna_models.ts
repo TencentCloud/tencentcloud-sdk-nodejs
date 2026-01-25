@@ -383,6 +383,36 @@ export interface GetActiveDeviceCountResponse {
 }
 
 /**
+ * 目标IP信息
+ */
+export interface DestIpInfo {
+  /**
+   * 时间：s
+   */
+  Time: string
+  /**
+   * 网关IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayIp: string
+  /**
+   * 网关地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewaySite: string
+  /**
+   * 目标IP数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpCount: number
+  /**
+   * 目标IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpList: Array<string>
+}
+
+/**
  * 设备的基本信息
  */
 export interface DeviceBaseInfo {
@@ -568,20 +598,6 @@ export interface GetGroupDetailRequest {
 }
 
 /**
- * GroupDeleteDevice返回参数结构体
- */
-export interface GroupDeleteDeviceResponse {
-  /**
-   * 分组中的设备数量
-   */
-  DeviceNum?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * GroupAddDevice请求参数结构体
  */
 export interface GroupAddDeviceRequest {
@@ -593,6 +609,20 @@ export interface GroupAddDeviceRequest {
    * 待添加的设备列表
    */
   DeviceList: Array<string>
+}
+
+/**
+ * GroupDeleteDevice返回参数结构体
+ */
+export interface GroupDeleteDeviceResponse {
+  /**
+   * 分组中的设备数量
+   */
+  DeviceNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -663,33 +693,29 @@ AM=美洲
 }
 
 /**
- * GetFlowStatisticByRegion请求参数结构体
+ * GetFlowStatisticByName返回参数结构体
  */
-export interface GetFlowStatisticByRegionRequest {
+export interface GetFlowStatisticByNameResponse {
   /**
-   * 开始查找时间
+   * 流量详细信息
    */
-  BeginTime: number
+  NetDetails?: Array<NetDetails>
   /**
-   * 截止时间
+   * 查找时间段流量使用最大值（单位：byte）
    */
-  EndTime: number
+  MaxValue?: number
   /**
-   * 流量种类（1：上行流量，2：下行流量， 3: 上下行总和）
+   * 查找时间段流量使用平均值（单位：byte）
    */
-  Type: number
+  AvgValue?: number
   /**
-   * 时间粒度（1：按小时统计，2：按天统计）
+   * 查找时间段流量使用总量（单位：byte）
    */
-  TimeGranularity: number
+  TotalValue?: number
   /**
-   * 网关类型。0：公有云网关；1：自有网关。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GatewayType: number
-  /**
-   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
-   */
-  AccessRegion?: string
+  RequestId?: string
 }
 
 /**
@@ -841,6 +867,25 @@ export interface GroupInfo {
  * ModifyPackageRenewFlag返回参数结构体
  */
 export interface ModifyPackageRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetDestIPByName返回参数结构体
+ */
+export interface GetDestIPByNameResponse {
+  /**
+   * 目标IP信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DestIpInfo?: Array<DestIpInfo>
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲
+   */
+  AccessRegion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1002,6 +1047,28 @@ export interface AddL3ConnResponse {
 }
 
 /**
+ * GetDestIPByName请求参数结构体
+ */
+export interface GetDestIPByNameRequest {
+  /**
+   * 设备名
+   */
+  DeviceName: string
+  /**
+   * 开始时间
+   */
+  BeginTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
+}
+
+/**
  * GetDevices请求参数结构体
  */
 export interface GetDevicesRequest {
@@ -1024,6 +1091,50 @@ export interface GetDevicesRequest {
 2:三方设备
    */
   DeviceType?: number
+}
+
+/**
+ * GetStatisticDataByName请求参数结构体
+ */
+export interface GetStatisticDataByNameRequest {
+  /**
+   * 设备名。若不指定设备，可传"-1"
+   */
+  DeviceName: string
+  /**
+   * 统计开始时间，单位：s
+   */
+  BeginTime: number
+  /**
+   * 统计结束时间，单位：s
+   */
+  EndTime: number
+  /**
+   * 聚合粒度：
+1:按小时统计
+2:按天统计
+   */
+  TimeGranularity: number
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
+   */
+  AccessRegion?: string
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
+  /**
+   * 设备名列表，最多10个设备，下载多个设备流量时使用，此时DeviceName可传"-1"
+   */
+  DeviceList?: Array<string>
+  /**
+   * 设备分组ID，若不指定分组则不传，按分组下载数据时使用
+   */
+  GroupId?: string
+  /**
+   * 应用ID，若不指定应用不填，按应用下载数据时使用
+   */
+  MpApplicationId?: string
 }
 
 /**
@@ -1250,6 +1361,44 @@ export interface GetHardwareListRequest {
 }
 
 /**
+ * GetFlowStatisticByName请求参数结构体
+ */
+export interface GetFlowStatisticByNameRequest {
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 开始查找时间
+   */
+  BeginTime: number
+  /**
+   * 截止时间
+   */
+  EndTime: number
+  /**
+   * 流量种类（1：上行流量，2：下行流量，3：上下行总和）
+   */
+  Type: number
+  /**
+   * 时间粒度（1：按小时统计，2：按天统计）
+   */
+  TimeGranularity: number
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
+   */
+  AccessRegion?: string
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
+  /**
+   * 设备名列表，用于查询多设备流量，该字段启用时DeviceId可传"-1"
+   */
+  DeviceList?: Array<string>
+}
+
+/**
  * GroupDeleteDevice请求参数结构体
  */
 export interface GroupDeleteDeviceRequest {
@@ -1383,6 +1532,36 @@ export interface GetFlowAlarmInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetFlowStatisticByRegion请求参数结构体
+ */
+export interface GetFlowStatisticByRegionRequest {
+  /**
+   * 开始查找时间
+   */
+  BeginTime: number
+  /**
+   * 截止时间
+   */
+  EndTime: number
+  /**
+   * 流量种类（1：上行流量，2：下行流量， 3: 上下行总和）
+   */
+  Type: number
+  /**
+   * 时间粒度（1：按小时统计，2：按天统计）
+   */
+  TimeGranularity: number
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。
+   */
+  GatewayType: number
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
+   */
+  AccessRegion?: string
 }
 
 /**
@@ -1657,6 +1836,28 @@ false：不设置预置密钥。
 }
 
 /**
+ * GetNetMonitorByName返回参数结构体
+ */
+export interface GetNetMonitorByNameResponse {
+  /**
+   * 监控数据
+   */
+  MonitorData?: Array<MonitorData>
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM']
+MC=中国大陆
+AP=亚太
+EU=欧洲
+AM=美洲
+   */
+  AccessRegion?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OrderPerLicense请求参数结构体
  */
 export interface OrderPerLicenseRequest {
@@ -1769,6 +1970,32 @@ export interface GetNetMonitorRequest {
 }
 
 /**
+ * GetNetMonitorByName请求参数结构体
+ */
+export interface GetNetMonitorByNameRequest {
+  /**
+   * 设备名
+   */
+  DeviceName: string
+  /**
+   * 开始时间
+   */
+  BeginTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms）
+   */
+  Metrics: string
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
+}
+
+/**
  * GetGroupList返回参数结构体
  */
 export interface GetGroupListResponse {
@@ -1856,6 +2083,20 @@ export interface ActivateHardwareRequest {
    * 待激活的设备列表
    */
   Hardware: Array<ActivateHardware>
+}
+
+/**
+ * GetMonitorDataByName返回参数结构体
+ */
+export interface GetMonitorDataByNameResponse {
+  /**
+   * 文件下载链接
+   */
+  FilePath?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1956,6 +2197,20 @@ export interface GetPublicKeyResponse {
    * 非对称公钥
    */
   PublicKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetStatisticDataByName返回参数结构体
+ */
+export interface GetStatisticDataByNameResponse {
+  /**
+   * 文件地址url
+   */
+  FilePath?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2074,6 +2329,28 @@ export interface GetActiveDeviceCountRequest {
    * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
    */
   LicenseType?: number
+}
+
+/**
+ * GetMonitorDataByName请求参数结构体
+ */
+export interface GetMonitorDataByNameRequest {
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 开始时间
+   */
+  BeginTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
 }
 
 /**

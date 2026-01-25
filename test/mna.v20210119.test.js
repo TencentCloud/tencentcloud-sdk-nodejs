@@ -158,6 +158,16 @@ it("mna.v20210119.GetDevice", async function () {
     }
 })
 
+it("mna.v20210119.GetDestIPByName", async function () {
+    try {
+       const data = await client.GetDestIPByName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.DeleteL3Conn", async function () {
     try {
        const data = await client.DeleteL3Conn({})
@@ -258,6 +268,16 @@ it("mna.v20210119.UpdateL3Cidr", async function () {
     }
 })
 
+it("mna.v20210119.GetFlowStatisticByName", async function () {
+    try {
+       const data = await client.GetFlowStatisticByName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetVendorHardware", async function () {
     try {
        const data = await client.GetVendorHardware({})
@@ -268,9 +288,29 @@ it("mna.v20210119.GetVendorHardware", async function () {
     }
 })
 
+it("mna.v20210119.GetNetMonitorByName", async function () {
+    try {
+       const data = await client.GetNetMonitorByName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.AddL3Conn", async function () {
     try {
        const data = await client.AddL3Conn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetStatisticDataByName", async function () {
+    try {
+       const data = await client.GetStatisticDataByName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +381,16 @@ it("mna.v20210119.GetStatisticData", async function () {
 it("mna.v20210119.GetHardwareList", async function () {
     try {
        const data = await client.GetHardwareList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetMonitorDataByName", async function () {
+    try {
+       const data = await client.GetMonitorDataByName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

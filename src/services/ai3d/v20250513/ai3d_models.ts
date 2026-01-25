@@ -610,6 +610,10 @@ export interface SubmitHunyuan3DPartJobRequest {
    * 需进行组件生成的3D模型文件，仅支持FBX格式。
    */
   File?: InputFile3D
+  /**
+   * 组件生成模型版本，默认为1.0，可选项：1.0，1.5；
+   */
+  Model?: string
 }
 
 /**
