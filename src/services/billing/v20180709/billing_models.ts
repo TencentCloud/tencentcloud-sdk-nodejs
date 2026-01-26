@@ -3216,6 +3216,74 @@ export interface BillDays {
 }
 
 /**
+ * 资源实例信息
+ */
+export interface RenewInstance {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 产品编码
+   */
+  ProductCode?: string
+  /**
+   * 子产品编码
+   */
+  SubProductCode?: string
+  /**
+   * 地域编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionCode?: string
+  /**
+   * 实例状态：
+NORMAL 正常，
+ISOLATED 已隔离
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 续费标识：
+NOTIFY_AND_MANUAL_RENEW 手动续费，
+NOTIFY_AND_AUTO_RENEW 自动续费，
+DISABLE_NOTIFY_AND_MANUAL_RENEW 到期不续
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: string
+  /**
+   * 实例到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 实例别名：用户在控制台为实例设置的名称，如果未设置，则默认为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductName?: string
+  /**
+   * 项目名称：实例归属的项目，用户在控制台给实例自主分配项目，未分配则是默认项目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 自动续费周期长度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewPeriod?: number
+  /**
+   * 自动续费周期单位：y 年，m 月
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewPeriodUnit?: string
+}
+
+/**
  * DescribeAllocationRuleSummary返回参数结构体
  */
 export interface DescribeAllocationRuleSummaryResponse {
@@ -4096,6 +4164,36 @@ export interface DescribeCostSummaryByProjectRequest {
 }
 
 /**
+ * ModifyAllocationUnit请求参数结构体
+ */
+export interface ModifyAllocationUnitRequest {
+  /**
+   * 所修改分账单元ID
+   */
+  Id: number
+  /**
+   * 修改后分账单元名称
+   */
+  Name?: string
+  /**
+   * 修改后分账单元源组织名称
+   */
+  SourceName?: string
+  /**
+   * 修改后分账单元源组织ID
+   */
+  SourceId?: string
+  /**
+   * 分账单元备注说明
+   */
+  Remark?: string
+  /**
+   * 月份，不传默认当前月
+   */
+  Month?: string
+}
+
+/**
  * 明细账单关联单据信息
  */
 export interface BillDetailAssociatedOrder {
@@ -4541,6 +4639,45 @@ export interface TagDataInfo {
    * 设置分账标签时间，普通标签不返回
    */
   UpdateTime?: string
+}
+
+/**
+ * DescribeRenewInstances请求参数结构体
+ */
+export interface DescribeRenewInstancesRequest {
+  /**
+   * 每页的最大实例条数。 取值范围：1~100。
+   */
+  MaxResults: number
+  /**
+   * 查询返回结果下一页的令牌。首次调用 API 不需要NextToken。
+   */
+  NextToken?: string
+  /**
+   * 获取实例的排序方向。枚举值如下：
+false=正序（默认）
+true=倒序
+   */
+  Reverse?: boolean
+  /**
+   * 续费标识。多个值用英文逗号分隔。枚举值如下：
+NOTIFY_AND_MANUAL_RENEW：手动续费
+NOTIFY_AND_AUTO_RENEW：自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW：到期不续
+   */
+  RenewFlagList?: Array<string>
+  /**
+   * 实例ID。多个ID用英文逗号分隔，最多不超过100个。
+   */
+  InstanceIdList?: Array<string>
+  /**
+   * 到期时间段起，格式为yyyy-MM-dd HH:mm:ss。
+   */
+  ExpireTimeStart?: string
+  /**
+   * 到期时间段止，格式为yyyy-MM-dd HH:mm:ss。
+   */
+  ExpireTimeEnd?: string
 }
 
 /**
@@ -6185,21 +6322,22 @@ export interface DescribeBillResourceSummaryRequest {
 }
 
 /**
- * 由域名和使用明细组成的数据结构
+ * DescribeRenewInstances返回参数结构体
  */
-export interface DetailSet {
+export interface DescribeRenewInstancesResponse {
   /**
-   * 域名
+   * 实例汇总列表。
    */
-  Domain?: string
+  InstanceList?: Array<RenewInstance>
   /**
-   * 使用数据明细
+   * 查询返回结果下一页的令牌。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DetailPoints?: Array<DetailPoint>
+  NextToken?: string
   /**
-   * 实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceID?: string
+  RequestId?: string
 }
 
 /**
@@ -7193,33 +7331,21 @@ export interface CreateAllocationTagResponse {
 }
 
 /**
- * ModifyAllocationUnit请求参数结构体
+ * 由域名和使用明细组成的数据结构
  */
-export interface ModifyAllocationUnitRequest {
+export interface DetailSet {
   /**
-   * 所修改分账单元ID
+   * 域名
    */
-  Id: number
+  Domain?: string
   /**
-   * 修改后分账单元名称
+   * 使用数据明细
    */
-  Name?: string
+  DetailPoints?: Array<DetailPoint>
   /**
-   * 修改后分账单元源组织名称
+   * 实例ID
    */
-  SourceName?: string
-  /**
-   * 修改后分账单元源组织ID
-   */
-  SourceId?: string
-  /**
-   * 分账单元备注说明
-   */
-  Remark?: string
-  /**
-   * 月份，不传默认当前月
-   */
-  Month?: string
+  InstanceID?: string
 }
 
 /**

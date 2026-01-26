@@ -899,6 +899,14 @@ export interface ItemPrice {
    * 商品数量
    */
   Amount?: number
+  /**
+   * 原价
+   */
+  OriginPrice?: number
+  /**
+   * 折扣价
+   */
+  DiscountPrice?: number
 }
 
 /**

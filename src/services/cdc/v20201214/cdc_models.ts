@@ -409,7 +409,7 @@ export interface CreateSiteResponse {
  */
 export interface DescribeDedicatedSupportedZonesResponse {
   /**
-   * 支持的可用区列表
+   * <p>支持的可用区列表</p>
    */
   ZoneSet?: Array<RegionZoneInfo>
   /**
@@ -661,7 +661,7 @@ export interface CreateSiteRequest {
  */
 export interface DescribeDedicatedSupportedZonesRequest {
   /**
-   * 传入region列表
+   * <p>传入region列表</p>
    */
   Regions?: Array<number | bigint>
 }

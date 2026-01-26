@@ -1138,6 +1138,16 @@ it("wedata.v20250806.UpdateDataSource", async function () {
     }
 })
 
+it("wedata.v20250806.RevokePrivileges", async function () {
+    try {
+       const data = await client.RevokePrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.UpdateResourceGroup", async function () {
     try {
        const data = await client.UpdateResourceGroup({})
@@ -1698,6 +1708,16 @@ it("wedata.v20250806.CreateResourceGroup", async function () {
     }
 })
 
+it("wedata.v20250806.AuthorizePrivileges", async function () {
+    try {
+       const data = await client.AuthorizePrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.DeleteResourceFile", async function () {
     try {
        const data = await client.DeleteResourceFile({})
@@ -1751,6 +1771,16 @@ it("wedata.v20250806.DeleteSQLScript", async function () {
 it("wedata.v20250806.CreateTriggerWorkflow", async function () {
     try {
        const data = await client.CreateTriggerWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20250806.ListPermissions", async function () {
+    try {
+       const data = await client.ListPermissions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

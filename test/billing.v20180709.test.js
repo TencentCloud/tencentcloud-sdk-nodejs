@@ -18,6 +18,16 @@ const client = new tencentcloud.billing.v20180709.Client({
 })
 describe("billing.v20180709.test.js", function () {
 
+it("billing.v20180709.DescribeRenewInstances", async function () {
+    try {
+       const data = await client.DescribeRenewInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeBillDetailForOrganization", async function () {
     try {
        const data = await client.DescribeBillDetailForOrganization({})

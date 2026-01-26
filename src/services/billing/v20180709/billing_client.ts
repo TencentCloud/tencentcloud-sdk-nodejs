@@ -102,6 +102,7 @@ import {
   DescribeBillSummaryByTagRequest,
   AnalyseDetail,
   BillDays,
+  RenewInstance,
   DescribeAllocationRuleSummaryResponse,
   AnalyseAmountDetail,
   DescribeBillSummaryByProjectRequest,
@@ -128,6 +129,7 @@ import {
   GatherRuleSummary,
   PayDealsResponse,
   DescribeCostSummaryByProjectRequest,
+  ModifyAllocationUnitRequest,
   BillDetailAssociatedOrder,
   BillDetail,
   DescribeBillDetailResponse,
@@ -139,6 +141,7 @@ import {
   DescribeBillAdjustInfoRequest,
   DeleteAllocationRuleResponse,
   TagDataInfo,
+  DescribeRenewInstancesRequest,
   PayDealsRequest,
   SummaryTotal,
   BusinessSummaryTotal,
@@ -178,7 +181,7 @@ import {
   DescribeBillDetailForOrganizationRequest,
   DescribeVoucherUsageDetailsRequest,
   DescribeBillResourceSummaryRequest,
-  DetailSet,
+  DescribeRenewInstancesResponse,
   BillDetailComponent,
   ConditionRegion,
   AllocationAverageData,
@@ -212,7 +215,7 @@ import {
   DescribeAllocationRuleSummaryRequest,
   UinTempAmountModel,
   CreateAllocationTagResponse,
-  ModifyAllocationUnitRequest,
+  DetailSet,
   DescribeBillDownloadUrlResponse,
   ConsumptionResourceSummaryDataItem,
   ModifyGatherRuleResponse,
@@ -273,6 +276,18 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("billing.tencentcloudapi.com", "2018-07-09", clientConfig)
+  }
+
+  /**
+     * 注意事项：
+1、本接口支持查询已接入续费管理页的包年包月实例，包括运行中、已隔离（部分产品不支持）
+2、子用户使用该接口时，应具备QcloudFinanceRenewManageFullAccess权限策略。
+     */
+  async DescribeRenewInstances(
+    req: DescribeRenewInstancesRequest,
+    cb?: (error: string, rep: DescribeRenewInstancesResponse) => void
+  ): Promise<DescribeRenewInstancesResponse> {
+    return this.request("DescribeRenewInstances", req, cb)
   }
 
   /**

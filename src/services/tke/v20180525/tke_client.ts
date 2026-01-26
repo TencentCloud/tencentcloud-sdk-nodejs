@@ -229,6 +229,7 @@ import {
   DescribeOpenPolicyListRequest,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
+  EnableEksEventPersistenceRequest,
   DescribePrometheusAlertPolicyResponse,
   EnableVpcCniNetworkTypeResponse,
   DescribePrometheusAlertRuleResponse,
@@ -487,6 +488,7 @@ import {
   EdgeArgsFlag,
   CheckInstancesUpgradeAbleResponse,
   CreatePrometheusTempRequest,
+  EnableEksEventPersistenceResponse,
   CreatePrometheusDashboardRequest,
   DeleteClusterRouteTableResponse,
   DescribeAddonValuesResponse,
@@ -2196,6 +2198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterRouteResponse) => void
   ): Promise<CreateClusterRouteResponse> {
     return this.request("CreateClusterRoute", req, cb)
+  }
+
+  /**
+   * Eks集群开启事件持久化功能
+   */
+  async EnableEksEventPersistence(
+    req: EnableEksEventPersistenceRequest,
+    cb?: (error: string, rep: EnableEksEventPersistenceResponse) => void
+  ): Promise<EnableEksEventPersistenceResponse> {
+    return this.request("EnableEksEventPersistence", req, cb)
   }
 
   /**

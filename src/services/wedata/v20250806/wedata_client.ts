@@ -25,6 +25,7 @@ import {
   ListProcessLineageResponse,
   GetWorkflowFolderRequest,
   WorkflowInfo,
+  RevokePrivilegesRequest,
   ListTableResponse,
   CreateQualityRuleRequest,
   CreateDataSourceRequest,
@@ -142,7 +143,7 @@ import {
   UpdateWorkflowResult,
   DescribeDataSourceAuthorityResponse,
   AlarmRuleDetail,
-  StopOpsTasksAsyncRequest,
+  QualityProdSchedulerTask,
   GetTriggerTaskRunResponse,
   UpdateTaskPartiallyRequest,
   GetSQLScriptRequest,
@@ -160,7 +161,7 @@ import {
   ListQualityRulesResponse,
   ListTaskInstancesResponse,
   DataSourceResult,
-  CreateCodeFolderRequest,
+  GetResourcePrivilegeDetailRsp,
   CreateResourceGroupRequest,
   ListTableRequest,
   UpdateResourceGroupRequest,
@@ -169,6 +170,7 @@ import {
   ListOpsAlarmRulesRequest,
   ListTenantRolesRequest,
   UpdateTriggerTaskBrief,
+  SecurityFilter,
   GrantMemberProjectRoleResponse,
   QualityRuleTemplate,
   ExploreFileResource,
@@ -205,12 +207,14 @@ import {
   GetTriggerTaskRunRequest,
   QualityRuleGroupPage,
   SubmitTriggerTaskResponse,
+  AuthorizePrivilegesRequest,
   ListQualityRuleGroupExecResultsByPageResponse,
   CreateQualityRuleVO,
   GetSQLFolderRequest,
   TaskFolder,
   AlarmWayWebHook,
   CreateQualityRuleResponse,
+  Subject,
   GetResourceFileResponse,
   GetTaskCodeRequest,
   CreateSQLScriptResponse,
@@ -245,17 +249,21 @@ import {
   DeleteSQLFolderResponse,
   GetTaskVersionRequest,
   GetTableColumnsRequest,
+  UpdateSQLFolderResponse,
   ListAlarmMessagesRequest,
   ModifyQualityRuleGroupResultVO,
   ListDatabaseResponse,
   ListSQLScriptRunsResponse,
   GetProjectResponse,
   GetTaskInstanceLogRequest,
+  CreateCodeFolderRequest,
   QualityCompareRuleItem,
   CreateTaskFolderRequest,
+  ListPermissionsResponse,
   GetMyCodeMaxPermissionResponse,
   ListCatalogRequest,
   CodeStudioFolderResult,
+  PrivilegeInfo,
   DeleteTaskResult,
   ExploreFilePrivilegeItem,
   GetResourceFolderRequest,
@@ -281,7 +289,7 @@ import {
   OpsWorkflowDetail,
   CreateQualityRuleGroupRequest,
   TableInfo,
-  ListResourceFilesRequest,
+  GetTaskInstanceResponse,
   WorkflowSchedulerConfigurationInfo,
   CreateTriggerTaskRequest,
   CreateWorkflowPermissionsRequest,
@@ -314,6 +322,7 @@ import {
   DeleteProjectMemberRequest,
   TriggerTaskDependDto,
   DeleteCodePermissionsResponse,
+  AuthorizePrivilegesResponse,
   BatchOperationOpsDto,
   JobExecutionDto,
   CreateTaskFolderResponse,
@@ -356,6 +365,7 @@ import {
   ResourceFolderPage,
   ListDownstreamTasksResponse,
   ListQualityRuleTemplatesRequest,
+  AuthorizePrivilegesRsp,
   ListQualityRuleGroupExecResultPage,
   UpdateOpsTasksOwnerResponse,
   DescribeDataSourceAuthorityRequest,
@@ -364,7 +374,7 @@ import {
   ListTenantRolesResponse,
   PageRoles,
   UpdateTaskBrief,
-  GetTaskInstanceResponse,
+  ListResourceFilesRequest,
   TechnicalMetadata,
   UpdateOpsTasksOwnerRequest,
   UpdateDataSourceResponse,
@@ -372,6 +382,7 @@ import {
   DeleteCodeFolderResponse,
   TriggerWorkflowInfo,
   ModifyQualityRuleRequest,
+  SubjectInfo,
   UpdateResourceFileResult,
   UpdateResourceFileResponse,
   GetOpsAlarmRuleResponse,
@@ -390,6 +401,7 @@ import {
   OpsAsyncJobDetail,
   ListDownstreamOpsTasksResponse,
   GetProjectRequest,
+  ListPermissionsRequest,
   ListSQLScriptRunsRequest,
   CreateDataBackfillPlanRequest,
   UpdateTriggerWorkflowRequest,
@@ -422,6 +434,7 @@ import {
   ListUpstreamTasksRequest,
   ReconciliationStrategyInfo,
   AddCalcEnginesToProjectResponse,
+  RevokePrivilegesRsp,
   ModifyQualityRuleGroupRequest,
   EventListener,
   ModifyQualityRuleResponse,
@@ -439,7 +452,7 @@ import {
   CreateTriggerWorkflowResult,
   DeleteFolderResult,
   ListWorkflowsRequest,
-  UpdateSQLFolderResponse,
+  RevokePrivilegesResponse,
   CodeFileConfig,
   DeleteSQLScriptResponse,
   ListOpsTasksRequest,
@@ -541,6 +554,7 @@ import {
   CreateTriggerTaskConfiguration,
   CreateWorkflowPermissionsResponse,
   LineageNodeInfo,
+  ResourcePrivilegeDetail,
   QualityRuleGroupTableV2,
   CatalogInfo,
   ListUpstreamTasksResponse,
@@ -573,7 +587,9 @@ import {
   DeleteDataSourceResponse,
   InTaskParameter,
   ListResourceFoldersRequest,
+  AuthorizeResult,
   GetDataSourceResponse,
+  StopOpsTasksAsyncRequest,
   ListUpstreamTaskInstancesResponse,
   GetDataBackfillPlanResponse,
   KillTaskInstancesAsyncRequest,
@@ -594,7 +610,7 @@ import {
   UpdateWorkflowFolderResponse,
   DeleteDataSourceRequest,
   UpdateTaskBaseAttributePart,
-  QualityProdSchedulerTask,
+  PrivilegeResource,
   AlarmRuleData,
   UpdateCodeFileResponse,
   NotificationFatigue,
@@ -623,6 +639,7 @@ import {
   GetMyWorkflowMaxPermissionResponse,
   OrderField,
   DependencyTaskBrief,
+  Page,
   TriggerTaskConfiguration,
   UpdateCodeFolderRequest,
   ResourceFilePage,
@@ -1766,6 +1783,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Catalog模式下授权回收
+   */
+  async RevokePrivileges(
+    req: RevokePrivilegesRequest,
+    cb?: (error: string, rep: RevokePrivilegesResponse) => void
+  ): Promise<RevokePrivilegesResponse> {
+    return this.request("RevokePrivileges", req, cb)
+  }
+
+  /**
    * 该接口用于变配/续费资源
    */
   async UpdateResourceGroup(
@@ -2329,6 +2356,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Catalog模式下授权
+   */
+  async AuthorizePrivileges(
+    req: AuthorizePrivilegesRequest,
+    cb?: (error: string, rep: AuthorizePrivilegesResponse) => void
+  ): Promise<AuthorizePrivilegesResponse> {
+    return this.request("AuthorizePrivileges", req, cb)
+  }
+
+  /**
    * 资源管理-删除资源文件
    */
   async DeleteResourceFile(
@@ -2386,6 +2423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTriggerWorkflowResponse) => void
   ): Promise<CreateTriggerWorkflowResponse> {
     return this.request("CreateTriggerWorkflow", req, cb)
+  }
+
+  /**
+   * 获取可授权权限详情
+   */
+  async ListPermissions(
+    req: ListPermissionsRequest,
+    cb?: (error: string, rep: ListPermissionsResponse) => void
+  ): Promise<ListPermissionsResponse> {
+    return this.request("ListPermissions", req, cb)
   }
 
   /**

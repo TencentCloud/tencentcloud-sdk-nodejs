@@ -160,6 +160,26 @@ export interface WorkflowInfo {
 }
 
 /**
+ * RevokePrivileges请求参数结构体
+ */
+export interface RevokePrivilegesRequest {
+  /**
+   * 资源数组，数据来源于ListPermissions接口返回的Resource中的ResourceType和ResourceUri
+   */
+  Resources: Array<PrivilegeResource>
+  /**
+   * 授权回收主体数组，参数组装需要注意：
+1.SubjectType 和SubjectValues的取值参考ListPermissions接口中返回SubjectDetails中的SubjectType和SubjectValue
+2.批量回收时，Subjects数组长度需要与权限点Privileges长度一致，并且数据一一对应
+   */
+  Subjects: Array<Subject>
+  /**
+   * 权限点，Name来源于ListPermissions接口返回的PermissionDetails中的Name，例如：BROWSE 、GRANT_PRIVILEGES
+   */
+  Privileges: Array<PrivilegeInfo>
+}
+
+/**
  * ListTable返回参数结构体
  */
 export interface ListTableResponse {
@@ -4080,21 +4100,49 @@ export interface AlarmRuleDetail {
 }
 
 /**
- * StopOpsTasksAsync请求参数结构体
+ * 数据质量生产调度任务业务实体
  */
-export interface StopOpsTasksAsyncRequest {
+export interface QualityProdSchedulerTask {
   /**
-   * 所属项目Id
+   * 生产调度任务工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  WorkflowId: string
   /**
-   * 任务Id列表
+   * 生产调度任务Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskIds: Array<string>
+  TaskId: string
   /**
-   * 是否终止已生成实例，默认false
+   * 生产调度任务名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  KillInstance?: boolean
+  TaskName: string
+  /**
+   * 生产调度任务周期类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleType?: number
+  /**
+   * 生产任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: string
+  /**
+   * 时区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleTimeZone?: string
+  /**
+   * 负责人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeIdList?: Array<string>
+  /**
+   * 负责人name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeNameList?: Array<string>
 }
 
 /**
@@ -4872,21 +4920,17 @@ export interface DataSourceResult {
 }
 
 /**
- * CreateCodeFolder请求参数结构体
+ * GetResourcePrivilegeDetailRsp
  */
-export interface CreateCodeFolderRequest {
+export interface GetResourcePrivilegeDetailRsp {
   /**
-   * 项目ID
+   * 权限详情列表
    */
-  ProjectId: string
+  Details?: Array<ResourcePrivilegeDetail>
   /**
-   * 文件夹名称
+   * 总计
    */
-  FolderName: string
-  /**
-   * 父文件夹path，例如/aaa/bbb/ccc，路径头需带斜杠，根目录传/
-   */
-  ParentFolderPath: string
+  TotalCount?: number
 }
 
 /**
@@ -5134,6 +5178,21 @@ export interface UpdateTriggerTaskBrief {
    * 任务调度配置
    */
   TriggerTaskSchedulerConfiguration: TriggerTaskSchedulerConfiguration
+}
+
+/**
+ * 数据安全使用的filter
+ */
+export interface SecurityFilter {
+  /**
+   * key
+   */
+  Name?: string
+  /**
+   * values
+
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -6123,6 +6182,40 @@ export interface SubmitTriggerTaskResponse {
 }
 
 /**
+ * AuthorizePrivileges请求参数结构体
+ */
+export interface AuthorizePrivilegesRequest {
+  /**
+   * 资源数组
+ResourceType：来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的ResourceType，并改为首字母大写，例如METALAKE对应Metalake
+ResourceUri，取决于 ResourceType，Metalake时固定为default，其他类别采用catalog的三段式结构，例如
+- Metalake，固定为default
+- Catalog，取catalogName
+- Schema，取catalogName.SchemaName
+- Table,，取catalogName.SchemaName.TableName
+
+   */
+  Resources: Array<PrivilegeResource>
+  /**
+   * 授权主体数组，SubjectType及对应SubjectValue取值规则
+- User 用户
+    - 取自DescribeTenantUserList中的UserId
+- Project 项目
+    - 取自DescribeUserProjects中的ProjectId
+- Role 角色（项目级角色）
+    - 先调用DescribeUserProjects获取项目ID（ProjectId），再调用DescribeRoleList中的角色ID（RoleId），拼装为$ProjectId.$ProjectId. RoleId，例如"3085649716411588608.308335260274237440"
+- GlobalRole （平台级角色）
+    - AllAccountUsers 全部用户
+    - 其他ID，取自DescribeTenantRole中的RoleId
+   */
+  Subjects: Array<Subject>
+  /**
+   * 权限点，来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的各类Privileges中的NAME
+   */
+  Privileges: Array<PrivilegeInfo>
+}
+
+/**
  * ListQualityRuleGroupExecResultsByPage返回参数结构体
  */
 export interface ListQualityRuleGroupExecResultsByPageResponse {
@@ -6241,6 +6334,20 @@ export interface CreateQualityRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Subject主体信息，授权/回收主体
+ */
+export interface Subject {
+  /**
+   * 主体类型
+   */
+  SubjectType?: string
+  /**
+   * 主体列表
+   */
+  SubjectValues?: Array<string>
 }
 
 /**
@@ -7329,6 +7436,21 @@ export interface GetTableColumnsRequest {
 }
 
 /**
+ * UpdateSQLFolder返回参数结构体
+ */
+export interface UpdateSQLFolderResponse {
+  /**
+   * 成功true，失败false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: SQLContentActionResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListAlarmMessages请求参数结构体
  */
 export interface ListAlarmMessagesRequest {
@@ -7447,6 +7569,24 @@ export interface GetTaskInstanceLogRequest {
 }
 
 /**
+ * CreateCodeFolder请求参数结构体
+ */
+export interface CreateCodeFolderRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 文件夹名称
+   */
+  FolderName: string
+  /**
+   * 父文件夹path，例如/aaa/bbb/ccc，路径头需带斜杠，根目录传/
+   */
+  ParentFolderPath: string
+}
+
+/**
  * 比较条件
  */
 export interface QualityCompareRuleItem {
@@ -7533,6 +7673,21 @@ export interface CreateTaskFolderRequest {
 }
 
 /**
+ * ListPermissions返回参数结构体
+ */
+export interface ListPermissionsResponse {
+  /**
+   * 获取资源权限详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: GetResourcePrivilegeDetailRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetMyCodeMaxPermission返回参数结构体
  */
 export interface GetMyCodeMaxPermissionResponse {
@@ -7573,6 +7728,81 @@ export interface CodeStudioFolderResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
+}
+
+/**
+ * 权限信息
+ */
+export interface PrivilegeInfo {
+  /**
+   * 权限名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 权限展示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * 权限描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 是否为读取权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsRead?: boolean
+  /**
+   * 是否为管理权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsManage?: boolean
+  /**
+   * 是否拥有此权限，检查权限时使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Granted?: boolean
+  /**
+   * 继承自哪个资源，查询权限详情时使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InheritedObject?: PrivilegeResource
+  /**
+   * 否继承获得，查询权限详情时使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Inherited?: boolean
+  /**
+   * 是否为编辑权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEdit?: boolean
+  /**
+   * 是否元数据权限（前端展示）
+   */
+  IsMetaDataPermission?: boolean
+  /**
+   * CatalogID(废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogID?: string
+  /**
+   * catalog名称(废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
+  /**
+   * 空间ID(废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkSpaceID?: string
+  /**
+   * 空间名称(废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkSpaceName?: string
 }
 
 /**
@@ -8303,49 +8533,17 @@ export interface TableInfo {
 }
 
 /**
- * ListResourceFiles请求参数结构体
+ * GetTaskInstance返回参数结构体
  */
-export interface ListResourceFilesRequest {
+export interface GetTaskInstanceResponse {
   /**
-   * 项目ID
+   * 实例详情
    */
-  ProjectId: string
+  Data?: TaskInstanceDetail
   /**
-   * 数据页数，大于等于1。默认1
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageNumber?: number
-  /**
-   * 每页显示的数据条数，最小为10条，最大为200 条。默认10
-   */
-  PageSize?: number
-  /**
-   * 资源文件名称(模糊搜索关键词)
-   */
-  ResourceName?: string
-  /**
-   * 资源文件所属文件夹路径(如/a/b/c，查询c文件夹下的资源文件)
-   */
-  ParentFolderPath?: string
-  /**
-   * 创建人ID, 可通过DescribeCurrentUserInfo接口获取
-   */
-  CreateUserUin?: string
-  /**
-   * 更新时间范围,开始时间, 格式yyyy-MM-dd HH:mm:ss
-   */
-  ModifyTimeStart?: string
-  /**
-   * 更新时间范围,结束时间, 格式yyyy-MM-dd HH:mm:ss
-   */
-  ModifyTimeEnd?: string
-  /**
-   * 创建时间范围,开始时间, 格式yyyy-MM-dd HH:mm:ss
-   */
-  CreateTimeStart?: string
-  /**
-   * 创建时间范围,结束时间, 格式yyyy-MM-dd HH:mm:ss
-   */
-  CreateTimeEnd?: string
+  RequestId?: string
 }
 
 /**
@@ -9390,6 +9588,20 @@ export interface DeleteCodePermissionsResponse {
    * 权限回收结果
    */
   Data?: Array<CodePermissionsResultItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AuthorizePrivileges返回参数结构体
+ */
+export interface AuthorizePrivilegesResponse {
+  /**
+   * 结果
+   */
+  Data?: AuthorizePrivilegesRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10735,6 +10947,20 @@ UpdateTime - 按更新时间排序
 }
 
 /**
+ * openapi授权返回
+ */
+export interface AuthorizePrivilegesRsp {
+  /**
+   * 批量授权结果
+   */
+  OverallSuccess?: boolean
+  /**
+   * 授权详情列表
+   */
+  Results?: Array<AuthorizeResult>
+}
+
+/**
  * 规则组执行结果分页
  */
 export interface ListQualityRuleGroupExecResultPage {
@@ -10867,17 +11093,49 @@ export interface UpdateTaskBrief {
 }
 
 /**
- * GetTaskInstance返回参数结构体
+ * ListResourceFiles请求参数结构体
  */
-export interface GetTaskInstanceResponse {
+export interface ListResourceFilesRequest {
   /**
-   * 实例详情
+   * 项目ID
    */
-  Data?: TaskInstanceDetail
+  ProjectId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数据页数，大于等于1。默认1
    */
-  RequestId?: string
+  PageNumber?: number
+  /**
+   * 每页显示的数据条数，最小为10条，最大为200 条。默认10
+   */
+  PageSize?: number
+  /**
+   * 资源文件名称(模糊搜索关键词)
+   */
+  ResourceName?: string
+  /**
+   * 资源文件所属文件夹路径(如/a/b/c，查询c文件夹下的资源文件)
+   */
+  ParentFolderPath?: string
+  /**
+   * 创建人ID, 可通过DescribeCurrentUserInfo接口获取
+   */
+  CreateUserUin?: string
+  /**
+   * 更新时间范围,开始时间, 格式yyyy-MM-dd HH:mm:ss
+   */
+  ModifyTimeStart?: string
+  /**
+   * 更新时间范围,结束时间, 格式yyyy-MM-dd HH:mm:ss
+   */
+  ModifyTimeEnd?: string
+  /**
+   * 创建时间范围,开始时间, 格式yyyy-MM-dd HH:mm:ss
+   */
+  CreateTimeStart?: string
+  /**
+   * 创建时间范围,结束时间, 格式yyyy-MM-dd HH:mm:ss
+   */
+  CreateTimeEnd?: string
 }
 
 /**
@@ -11123,6 +11381,28 @@ export interface ModifyQualityRuleRequest {
    * 目标数据目录名称，主要用于dlc数据源
    */
   TargetCatalogName?: string
+}
+
+/**
+ * SubjectInfo
+ */
+export interface SubjectInfo {
+  /**
+   * 主体类型
+   */
+  SubjectType?: string
+  /**
+   * 主题类型展示名
+   */
+  SubjectTypeDisplayName?: string
+  /**
+   * 主体id
+   */
+  SubjectValue?: string
+  /**
+   * 主体名
+   */
+  SubjectValueDisplayName?: string
 }
 
 /**
@@ -11557,6 +11837,34 @@ export interface GetProjectRequest {
    * 项目id。一般使用项目Id来查询，与projectName必须存在一个。
    */
   ProjectId: string
+}
+
+/**
+ * ListPermissions请求参数结构体
+ */
+export interface ListPermissionsRequest {
+  /**
+   * 资源
+ResourceType：来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的ResourceType，并改为首字母大写，例如METALAKE对应Metalake
+ResourceUri，取决于 ResourceType，Metalake时固定为default，其他类别采用catalog的三段式结构，例如
+- Metalake，固定为default
+- Catalog，取catalogName
+- Schema，取catalogName.SchemaName
+- Table,，取catalogName.SchemaName.TableName
+   */
+  Resource?: PrivilegeResource
+  /**
+   * 过滤条件(此参数还未支持)
+   */
+  Filters?: Array<SecurityFilter>
+  /**
+   * 排序字段(此参数还未支持)
+   */
+  OrderFields?: Array<OrderField>
+  /**
+   * 页参数(此参数还未支持)
+   */
+  Page?: Page
 }
 
 /**
@@ -12388,6 +12696,20 @@ export interface AddCalcEnginesToProjectResponse {
 }
 
 /**
+ * openapi回收授权返回
+ */
+export interface RevokePrivilegesRsp {
+  /**
+   * 结果
+   */
+  OverallSuccess?: boolean
+  /**
+   * 详情列表
+   */
+  Results?: Array<AuthorizeResult>
+}
+
+/**
  * ModifyQualityRuleGroup请求参数结构体
  */
 export interface ModifyQualityRuleGroupRequest {
@@ -12780,14 +13102,13 @@ export interface ListWorkflowsRequest {
 }
 
 /**
- * UpdateSQLFolder返回参数结构体
+ * RevokePrivileges返回参数结构体
  */
-export interface UpdateSQLFolderResponse {
+export interface RevokePrivilegesResponse {
   /**
-   * 成功true，失败false
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回
    */
-  Data?: SQLContentActionResult
+  Data?: RevokePrivilegesRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15306,6 +15627,32 @@ export interface LineageNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Relation?: LineageRelation
+  /**
+   * 上游数量
+   */
+  DownStreamCount?: number
+  /**
+   * 下游数量
+   */
+  UpStreamCount?: number
+}
+
+/**
+ * ResourcePrivilegeDetail
+ */
+export interface ResourcePrivilegeDetail {
+  /**
+   * 资源
+   */
+  Resource?: PrivilegeResource
+  /**
+   * 主体
+   */
+  SubjectDetails?: Array<SubjectInfo>
+  /**
+   * 权限详情
+   */
+  PermissionDetails?: Array<PrivilegeInfo>
 }
 
 /**
@@ -16328,6 +16675,27 @@ export interface ListResourceFoldersRequest {
 }
 
 /**
+ * AuthorizeResult授权结果
+ */
+export interface AuthorizeResult {
+  /**
+   * 授权资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource?: PrivilegeResource
+  /**
+   * 结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
+  /**
+   * 原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
+}
+
+/**
  * GetDataSource返回参数结构体
  */
 export interface GetDataSourceResponse {
@@ -16340,6 +16708,24 @@ export interface GetDataSourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopOpsTasksAsync请求参数结构体
+ */
+export interface StopOpsTasksAsyncRequest {
+  /**
+   * 所属项目Id
+   */
+  ProjectId: string
+  /**
+   * 任务Id列表
+   */
+  TaskIds: Array<string>
+  /**
+   * 是否终止已生成实例，默认false
+   */
+  KillInstance?: boolean
 }
 
 /**
@@ -16950,49 +17336,19 @@ export interface UpdateTaskBaseAttributePart {
 }
 
 /**
- * 数据质量生产调度任务业务实体
+ * 权限资源模型
  */
-export interface QualityProdSchedulerTask {
+export interface PrivilegeResource {
   /**
-   * 生产调度任务工作流ID
+   * 资源类型 Catalog、Schema等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId: string
+  ResourceType?: string
   /**
-   * 生产调度任务Id
+   * 资源URI
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
-  /**
-   * 生产调度任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName: string
-  /**
-   * 生产调度任务周期类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleType?: number
-  /**
-   * 生产任务类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskType?: string
-  /**
-   * 时区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduleTimeZone?: string
-  /**
-   * 负责人id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InChargeIdList?: Array<string>
-  /**
-   * 负责人name
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InChargeNameList?: Array<string>
+  ResourceUri?: string
 }
 
 /**
@@ -18195,6 +18551,22 @@ export interface DependencyTaskBrief {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyStrategy?: DependencyStrategyTask
+}
+
+/**
+ * 页码参数
+ */
+export interface Page {
+  /**
+   * 页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
 }
 
 /**

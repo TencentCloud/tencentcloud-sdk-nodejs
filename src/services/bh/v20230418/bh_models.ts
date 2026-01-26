@@ -2284,6 +2284,26 @@ export interface DescribeChangePwdTaskResponse {
  */
 export interface SecuritySetting {
   /**
+   * 认证方式设置
+   */
+  AuthMode?: AuthModeSetting
+  /**
+   * 密码安全设置
+   */
+  Password?: PasswordSetting
+  /**
+   * 登录安全设置
+   */
+  Login?: LoginSetting
+  /**
+   * LDAP配置信息
+   */
+  LDAP?: LDAPSetting
+  /**
+   * OAuth配置信息
+   */
+  OAuth?: OAuthSetting
+  /**
    * 国密认证方式设置
    */
   AuthModeGM?: AuthModeSetting
@@ -2671,6 +2691,28 @@ export interface SearchAuditLogRequest {
    * 每页容量，默认为20，最大200
    */
   Limit?: number
+}
+
+/**
+ * 密码要求设置。
+ */
+export interface PasswordSetting {
+  /**
+   * 密码最小长度，8-20，默认8。
+   */
+  MinLength?: number
+  /**
+   * 密码复杂度，0不限制，1包含字母和数字，2至少包括大写字母、小写字母、数字、特殊符号，默认2。
+   */
+  Complexity?: number
+  /**
+   * 密码有效期，0不限制，30天，90天，180天。
+   */
+  ValidTerm?: number
+  /**
+   * 检查最近n次密码设置是否存在相同密码，2-10，默认5。
+   */
+  CheckHistory?: number
 }
 
 /**
@@ -3411,6 +3453,28 @@ export interface DescribeOperationTaskRequest {
    * 每页条目数，默认20
    */
   Limit?: number
+}
+
+/**
+ * 登录安全设置
+ */
+export interface LoginSetting {
+  /**
+   * 登录会话超时，10分钟，20分钟，30分钟，默认20分钟
+   */
+  TimeOut: number
+  /**
+   * 连续密码错误次数，超过锁定账号，3-5
+   */
+  LockThreshold: number
+  /**
+   * 账号锁定时长，10分钟，20分钟，30分钟
+   */
+  LockTime: number
+  /**
+   * 用户多少天不活跃，账号自动锁定
+   */
+  InactiveUserLock?: number
 }
 
 /**
@@ -4292,11 +4356,18 @@ export interface SearchFileBySidResponse {
  */
 export interface ModifyAuthModeSettingRequest {
   /**
-   * 双因子认证，0-不开启，1-OTP，2-短信，3-USB Key
+   * 双因子认证，0-不开启（暂停使用），1-OTP，2-短信，3-USB Key（只有ResourceType=1且AuthModeGM不传时有效，其他情况不能为3）    
+备注：AuthMode和AuthModeGM至少有一个有效传参
    */
-  AuthMode: number
+  AuthMode?: number
   /**
-   * 资源类型，0：普通 1：国密
+   * 国密双因子认证，0-不开启（暂停使用），1-OTP，2-短信，3-USB Key
+备注：AuthMode和AuthModeGM至少有一个有效传参，AuthModeGM优先级高于ResourceType
+   */
+  AuthModeGM?: number
+  /**
+   * 资源类型，0：普通（暂停使用，由AuthMode和AuthModeGM传参决定） 1：国密
+
    */
   ResourceType?: number
 }
@@ -4355,6 +4426,94 @@ export interface DescribeOperationEventRequest {
  * SetLDAPSyncFlag请求参数结构体
  */
 export type SetLDAPSyncFlagRequest = null
+
+/**
+ * LDAP配置信息
+ */
+export interface LDAPSetting {
+  /**
+   * 是否开启LDAP认证，false-不开启，true-开启
+   */
+  Enable?: boolean
+  /**
+   * 服务器地址
+   */
+  Ip?: string
+  /**
+   * 备用服务器地址
+   */
+  IpBackup?: string
+  /**
+   * 服务端口
+   */
+  Port?: number
+  /**
+   * 是否开启SSL，false-不开启，true-开启
+   */
+  EnableSSL?: boolean
+  /**
+   * Base DN
+   */
+  BaseDN?: string
+  /**
+   * 管理员账号
+   */
+  AdminAccount?: string
+  /**
+   * 用户属性
+   */
+  AttributeUser?: string
+  /**
+   * 用户名属性
+   */
+  AttributeUserName?: string
+  /**
+   * 自动同步，false-不开启，true-开启
+   */
+  AutoSync?: boolean
+  /**
+   * 覆盖用户信息，false-不开启，true-开启
+   */
+  Overwrite?: boolean
+  /**
+   * 同步周期，30～60000之间的整数
+   */
+  SyncPeriod?: number
+  /**
+   * 是否同步全部，false-不开启，true-开启
+   */
+  SyncAll?: boolean
+  /**
+   * 同步OU列表
+   */
+  SyncUnitSet?: Array<string>
+  /**
+   * 组织单元属性
+   */
+  AttributeUnit?: string
+  /**
+   * 用户姓名属性
+   */
+  AttributeRealName?: string
+  /**
+   * 手机号属性
+   */
+  AttributePhone?: string
+  /**
+   * 邮箱属性
+   */
+  AttributeEmail?: string
+  /**
+   * 请求LDAP服务的堡垒机实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 网络域Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainId?: string
+}
 
 /**
  * ModifyDevice返回参数结构体
@@ -4904,6 +5063,40 @@ export interface LoginEvent {
    * 操作结果，1-成功，2-失败
    */
   Result?: number
+}
+
+/**
+ * OAuth认证配置
+ */
+export interface OAuthSetting {
+  /**
+   * 是否开启OAuth认证
+   */
+  Enable?: boolean
+  /**
+   * OAuth认证方式。
+   */
+  AuthMethod?: string
+  /**
+   * OAuth认证客户端Id。
+   */
+  ClientId?: string
+  /**
+   * 获取OAuth认证授权码URL。
+   */
+  CodeUrl?: string
+  /**
+   * 获取OAuth令牌URL。
+   */
+  TokenUrl?: string
+  /**
+   * 获取OAuth用户信息URL。
+   */
+  UserInfoUrl?: string
+  /**
+   * 使用Okta认证时指定范围。
+   */
+  Scopes?: Array<string>
 }
 
 /**
@@ -6196,6 +6389,10 @@ export interface DescribeDeviceGroupMembersRequest {
    */
   Name?: string
   /**
+   * 主机绑定的堡垒机服务ID集合  未绑定的通过Filters进行传递
+   */
+  ResourceIdSet?: Array<string>
+  /**
    * 分页偏移位置，默认值为0
    */
   Offset?: number
@@ -6215,6 +6412,10 @@ export interface DescribeDeviceGroupMembersRequest {
    * 所属部门ID
    */
   DepartmentId?: string
+  /**
+   * 过滤条件,支持 BindingStatus｜VpcId ｜InstanceId ｜DeviceAccount ｜ManageDimension｜DomainId｜Ip｜Name
+   */
+  Filters?: Array<Filter>
   /**
    * 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系
    */
