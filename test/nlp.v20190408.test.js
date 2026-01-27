@@ -18,16 +18,6 @@ const client = new tencentcloud.nlp.v20190408.Client({
 })
 describe("nlp.v20190408.test.js", function () {
 
-it("nlp.v20190408.ClassifyContent", async function () {
-    try {
-       const data = await client.ClassifyContent({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("nlp.v20190408.SentenceCorrection", async function () {
     try {
        const data = await client.SentenceCorrection({})
@@ -38,19 +28,9 @@ it("nlp.v20190408.SentenceCorrection", async function () {
     }
 })
 
-it("nlp.v20190408.EvaluateSentenceSimilarity", async function () {
+it("nlp.v20190408.ParseWords", async function () {
     try {
-       const data = await client.EvaluateSentenceSimilarity({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("nlp.v20190408.ComposeCouplet", async function () {
-    try {
-       const data = await client.ComposeCouplet({})
+       const data = await client.ParseWords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,16 +41,6 @@ it("nlp.v20190408.ComposeCouplet", async function () {
 it("nlp.v20190408.AnalyzeSentiment", async function () {
     try {
        const data = await client.AnalyzeSentiment({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("nlp.v20190408.ParseWords", async function () {
-    try {
-       const data = await client.ParseWords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

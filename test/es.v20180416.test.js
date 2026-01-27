@@ -48,9 +48,9 @@ it("es.v20180416.RestoreClusterSnapshot", async function () {
     }
 })
 
-it("es.v20180416.GetRequestTargetNodeTypes", async function () {
+it("es.v20180416.CreateCollector", async function () {
     try {
-       const data = await client.GetRequestTargetNodeTypes({})
+       const data = await client.CreateCollector({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,9 @@ it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
     }
 })
 
-it("es.v20180416.GetIpTraceStatus", async function () {
+it("es.v20180416.UpdateJdk", async function () {
     try {
-       const data = await client.GetIpTraceStatus({})
+       const data = await client.UpdateJdk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("es.v20180416.DeleteServerlessInstance", async function () {
     }
 })
 
-it("es.v20180416.CreateServerlessSpaceV2", async function () {
+it("es.v20180416.DescribeDiagnose", async function () {
     try {
-       const data = await client.CreateServerlessSpaceV2({})
+       const data = await client.DescribeDiagnose({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +448,9 @@ it("es.v20180416.DescribeLogstashInstances", async function () {
     }
 })
 
-it("es.v20180416.DescribeServerlessInstances", async function () {
+it("es.v20180416.CreateServerlessSpaceV2", async function () {
     try {
-       const data = await client.DescribeServerlessInstances({})
+       const data = await client.CreateServerlessSpaceV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +498,9 @@ it("es.v20180416.QueryIpTraceLog", async function () {
     }
 })
 
-it("es.v20180416.DescribeDiagnose", async function () {
+it("es.v20180416.GetIpTraceStatus", async function () {
     try {
-       const data = await client.DescribeDiagnose({})
+       const data = await client.GetIpTraceStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +678,9 @@ it("es.v20180416.DescribeInstancePluginList", async function () {
     }
 })
 
-it("es.v20180416.UpdateJdk", async function () {
+it("es.v20180416.DescribeServerlessInstances", async function () {
     try {
-       const data = await client.UpdateJdk({})
+       const data = await client.DescribeServerlessInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +691,16 @@ it("es.v20180416.UpdateJdk", async function () {
 it("es.v20180416.DescribeIndexMeta", async function () {
     try {
        const data = await client.DescribeIndexMeta({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.GetRequestTargetNodeTypes", async function () {
+    try {
+       const data = await client.GetRequestTargetNodeTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

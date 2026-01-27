@@ -846,6 +846,20 @@ export interface DiagnoseInstanceRequest {
 }
 
 /**
+ * TKE命名空间
+ */
+export interface Namespaces {
+  /**
+   * 包含的命名空间的列表，单个命名空间支持小写字母、数字、连接符-、下划线_，最多支持63个字符
+   */
+  Include: Array<string>
+  /**
+   * 不包含的命名空间列表，单个命名空间支持小写字母、数字、连接符-、下划线_，最多支持63个字符
+   */
+  Exclude: Array<string>
+}
+
+/**
  * Logstash绑定的ES集群信息
  */
 export interface LogstashBindedES {
@@ -1580,6 +1594,52 @@ export interface LogDetail {
 }
 
 /**
+ * CreateCollector请求参数结构体
+ */
+export interface CreateCollectorRequest {
+  /**
+   * 采集器名称（1-50 个英文、汉字、数字、连接线-或下划线_）
+   */
+  CollectorName: string
+  /**
+   * 采集器版本（支持"6.8.15"、"7.10.2"）
+   */
+  CollectorVersion: string
+  /**
+   * 采集器类型（支持filebeat、metricbeat、heartbeat、auditbeat、packetbeat）
+   */
+  CollectorType: string
+  /**
+   * 采集器输出的ES实例信息
+   */
+  OutputInstance: CollectorOutputInstance
+  /**
+   * 采集器配置
+   */
+  CollectorConfigs?: Array<CollectorConfigInfo>
+  /**
+   * 采集器下发的CVM实例ID列表
+   */
+  CVMInstanceIds?: Array<string>
+  /**
+   * 采集目标类型，CVM或者TKE
+   */
+  TargetType?: string
+  /**
+   * 容器集群ID，采集目标为TKE时必填
+   */
+  ContainerClusterId?: string
+  /**
+   * 采集器配置，采集目标为TKE时必填
+   */
+  CollectorTargets?: Array<CollectorTarget>
+  /**
+   * 标签信息
+   */
+  TagList?: Array<TagInfo>
+}
+
+/**
  * DescribeAutoBackUpStrategy请求参数结构体
  */
 export interface DescribeAutoBackUpStrategyRequest {
@@ -1784,19 +1844,68 @@ export interface CreateServerlessSpaceV2Request {
 }
 
 /**
- * tke pod标签
+ * 容器日志采集配置
  */
-export interface DiSourceTkePodLabel {
+export interface CollectorTarget {
   /**
-   * 标签key
+   * 采集配置名称
+   */
+  TargetName: string
+  /**
+   * 命名空间列表，包括Include包含和Exclude不包含选项，两者都为空时等同于全部命名空间(包含当前所有的以及未来创建的)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key?: string
+  Namespaces?: Namespaces
   /**
-   * 标签value
+   * Pod标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value?: string
+  PodLabels?: Array<PodLabel>
+  /**
+   * 容器名称，支持小写字母、数字、连接符-、下划线_，最多支持63个字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerName?: string
+  /**
+   * ES索引名称前缀，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称的前缀，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexPrefix?: string
+  /**
+   * 日志内容过滤，以逗号分隔，支持大小写字母、数字、连接符-、下划线_以及逗号，最多支持50个字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogFilters?: string
+  /**
+   * 高级配置，可自定义采集规则，最多支持2048个字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigContent?: string
+  /**
+   * Ckafka实例的Topic
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaTopic?: string
+  /**
+   * ES索引名称，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexAlias?: string
+  /**
+   * /
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputType?: string
+  /**
+   * 日志采集host路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputPath?: string
+  /**
+   * inputs.tail_files
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputsTailFiles?: boolean
 }
 
 /**
@@ -2492,6 +2601,20 @@ export interface UpdateInstanceResponse {
 }
 
 /**
+ * CreateCollector返回参数结构体
+ */
+export interface CreateCollectorResponse {
+  /**
+   * 采集器ID
+   */
+  CollectorId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteIndex请求参数结构体
  */
 export interface DeleteIndexRequest {
@@ -3107,6 +3230,22 @@ export interface UpdateDictionariesRequest {
    * 是否强制重启集群。默认值false
    */
   ForceRestart?: boolean
+}
+
+/**
+ * tke pod标签
+ */
+export interface DiSourceTkePodLabel {
+  /**
+   * 标签key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 标签value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -4134,29 +4273,17 @@ RENEW_FLAG_DEFAULT：不自动续费
 }
 
 /**
- * 数据接入cvm实例信息
+ * 采集器配置项
  */
-export interface DiDataSourceCvmInstance {
+export interface CollectorConfigInfo {
   /**
-   * cvm实例id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 采集器的主配置文件名，如filebeat.yml，metricbeat.yml等
    */
-  InstanceId?: string
+  FileName: string
   /**
-   * vpc id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 采集器的主配置文件内容
    */
-  VpcId?: string
-  /**
-   * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId?: string
-  /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrMsg?: string
+  FileContent: string
 }
 
 /**
@@ -4527,6 +4654,20 @@ export interface ProcessDetail {
 }
 
 /**
+ * Pod标签
+ */
+export interface PodLabel {
+  /**
+   * 标签键，支持大小写字母、数字、以及-_./，最多支持63个字符
+   */
+  LabelKey: string
+  /**
+   * 标签值，支持大小写字母、数字、以及-_./，最多支持63个字符
+   */
+  LabelValue: string
+}
+
+/**
  * DescribeLogstashInstances请求参数结构体
  */
 export interface DescribeLogstashInstancesRequest {
@@ -4658,6 +4799,32 @@ export interface MetricDetail {
    * 指标详情值
    */
   Metrics: Array<Metric>
+}
+
+/**
+ * 数据接入cvm实例信息
+ */
+export interface DiDataSourceCvmInstance {
+  /**
+   * cvm实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -6493,6 +6660,72 @@ export interface KibanaPublicAcl {
    * kibana访问白名单
    */
   WhiteIpList?: Array<string>
+}
+
+/**
+ * 采集器输出的实例信息
+ */
+export interface CollectorOutputInstance {
+  /**
+   * 采集器输出的实例类型（支持elasticsearch、logstash）
+   */
+  Type: string
+  /**
+   * 采集器输出的实例ID
+   */
+  InstanceId: string
+  /**
+   * 采集器输出到的ES实例的用户名
+   */
+  ESUserName?: string
+  /**
+   * 采集器输出到的ES实例的密码
+   */
+  ESUserPasswd?: string
+  /**
+   * 采集器输出到ES实例时，是否开启监控（1为开启，0为不开启，默认为0）
+   */
+  EnableMonitoring?: number
+  /**
+   * 采集器输出到ES实例时，是否开启自动在kibana中生成Dashboard（1为开启，0为不开启，默认为0）
+   */
+  EnableDashboard?: number
+  /**
+   * Ckafka实例的vip
+   */
+  KafkaEndpoint?: string
+  /**
+   * Ckafka实例中的Topic
+   */
+  KafkaTopic?: string
+  /**
+   * Ckafka实例的版本号
+   */
+  KafkaVersion?: string
+  /**
+   * topic id
+   */
+  SesTopicId?: string
+  /**
+   * topic name
+   */
+  SesTopicName?: string
+  /**
+   * topic address
+   */
+  SesTopicAddress?: string
+  /**
+   * /
+   */
+  SesTopicUserName?: string
+  /**
+   * /
+   */
+  SesTopicPasswd?: string
+  /**
+   * /
+   */
+  LogstashListenPort?: number
 }
 
 /**

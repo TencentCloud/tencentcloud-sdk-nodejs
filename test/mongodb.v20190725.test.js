@@ -58,6 +58,16 @@ it("mongodb.v20190725.DescribeDBInstanceNodeProperty", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
+    try {
+       const data = await client.ModifyDBInstanceNetworkAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstanceParamTpl", async function () {
     try {
        const data = await client.DescribeDBInstanceParamTpl({})
@@ -161,6 +171,16 @@ it("mongodb.v20190725.DeleteLogDownloadTask", async function () {
 it("mongodb.v20190725.DeleteAuditLogFile", async function () {
     try {
        const data = await client.DeleteAuditLogFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.FlashBackDBInstance", async function () {
+    try {
+       const data = await client.FlashBackDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +368,9 @@ it("mongodb.v20190725.CreateBackupDownloadTask", async function () {
     }
 })
 
-it("mongodb.v20190725.FlashBackDBInstance", async function () {
+it("mongodb.v20190725.DescribeSRVConnectionDomain", async function () {
     try {
-       const data = await client.FlashBackDBInstance({})
+       const data = await client.DescribeSRVConnectionDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +438,16 @@ it("mongodb.v20190725.DescribeSlowLogs", async function () {
     }
 })
 
+it("mongodb.v20190725.UpgradeDBInstanceKernelVersion", async function () {
+    try {
+       const data = await client.UpgradeDBInstanceKernelVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeMongodbLogs", async function () {
     try {
        const data = await client.DescribeMongodbLogs({})
@@ -458,9 +488,9 @@ it("mongodb.v20190725.DescribeInstanceParams", async function () {
     }
 })
 
-it("mongodb.v20190725.UpgradeDBInstanceKernelVersion", async function () {
+it("mongodb.v20190725.DisableSRVConnectionUrl", async function () {
     try {
-       const data = await client.UpgradeDBInstanceKernelVersion({})
+       const data = await client.DisableSRVConnectionUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,6 +598,16 @@ it("mongodb.v20190725.DescribeAccountUsers", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifySRVConnectionUrl", async function () {
+    try {
+       const data = await client.ModifySRVConnectionUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.OpenAuditService", async function () {
     try {
        const data = await client.OpenAuditService({})
@@ -598,9 +638,9 @@ it("mongodb.v20190725.SetInstanceMaintenance", async function () {
     }
 })
 
-it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
+it("mongodb.v20190725.EnableSRVConnectionUrl", async function () {
     try {
-       const data = await client.ModifyDBInstanceNetworkAddress({})
+       const data = await client.EnableSRVConnectionUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

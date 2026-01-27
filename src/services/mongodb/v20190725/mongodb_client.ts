@@ -25,6 +25,7 @@ import {
   DescribeDBInstanceParamTplRequest,
   CreateBackupDBInstanceResponse,
   DBInstancePrice,
+  TerminateDBInstancesRequest,
   KillOpsRequest,
   DropDBInstanceParamTplResponse,
   DeleteLogDownloadTaskResponse,
@@ -34,6 +35,7 @@ import {
   DescribeCurrentOpResponse,
   SetDBInstanceDeletionProtectionRequest,
   InstanceMultiParam,
+  DescribeSRVConnectionDomainResponse,
   ModifyInstanceParamsResponse,
   SetInstanceMaintenanceResponse,
   DescribeInstanceSSLRequest,
@@ -41,6 +43,7 @@ import {
   DescribeBackupRulesResponse,
   SlowLogPattern,
   Task,
+  ModifySRVConnectionUrlResponse,
   AssignProjectResponse,
   AuditLogFilter,
   DescribeDBInstanceDealResponse,
@@ -48,7 +51,9 @@ import {
   OfflineIsolatedDBInstanceResponse,
   IsolateDBInstanceResponse,
   CreateDBInstanceParamTplRequest,
+  DisableSRVConnectionUrlResponse,
   DescribeSecurityGroupRequest,
+  RenameInstanceRequest,
   DescribeBackupRulesRequest,
   DescribeBackupDownloadTaskResponse,
   AddNodeList,
@@ -89,6 +94,7 @@ import {
   AuditInstance,
   InstanceIntegerParam,
   ModifyNetworkAddress,
+  EnableSRVConnectionUrlResponse,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
   CreateLogDownloadTaskRequest,
@@ -99,10 +105,11 @@ import {
   DescribeAccountUsersResponse,
   InquirePriceRenewDBInstancesRequest,
   DescribeBackupDownloadTaskRequest,
-  Operation,
+  ModifySRVConnectionUrlRequest,
   DescribeClientConnectionsResponse,
+  DisableSRVConnectionUrlRequest,
   ModifyDBInstanceParamTplResponse,
-  TerminateDBInstancesRequest,
+  DescribeSRVConnectionDomainRequest,
   DescribeDBBackupsResponse,
   ModifyDBInstanceSecurityGroupResponse,
   UserInfo,
@@ -140,7 +147,7 @@ import {
   ShardInfo,
   SetBackupRulesResponse,
   ModifyAuditServiceRequest,
-  RenameInstanceRequest,
+  EnableSRVConnectionUrlRequest,
   RenewDBInstancesResponse,
   InstanceEnumParam,
   FlashBackDBInstanceResponse,
@@ -177,6 +184,7 @@ import {
   OfflineIsolatedDBInstanceRequest,
   KMSInfoDetail,
   InquirePriceCreateDBInstancesRequest,
+  Operation,
   DescribeInstanceParamsResponse,
   DescribeDBInstanceParamTplResponse,
   ModifyDBInstanceSpecResponse,
@@ -246,6 +254,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceNodePropertyResponse) => void
   ): Promise<DescribeDBInstanceNodePropertyResponse> {
     return this.request("DescribeDBInstanceNodeProperty", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceNetworkAddress）用于修改云数据库实例的网络信息，支持基础网络切换为私有网络、私有网络切换私有网络。
+   */
+  async ModifyDBInstanceNetworkAddress(
+    req: ModifyDBInstanceNetworkAddressRequest,
+    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
+  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
+    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
   }
 
   /**
@@ -357,6 +375,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
   ): Promise<DeleteAuditLogFileResponse> {
     return this.request("DeleteAuditLogFile", req, cb)
+  }
+
+  /**
+   * 该接口用于发起按 Key 闪回任务，依据数据的闪回 Key（默认为 id）对数据进行极速回档，快速恢复业务。
+   **说明：按 Key 闪回于2023年09月11日正式进行公测，在此期间，该接口仅对公测用户开放。**
+   */
+  async FlashBackDBInstance(
+    req: FlashBackDBInstanceRequest,
+    cb?: (error: string, rep: FlashBackDBInstanceResponse) => void
+  ): Promise<FlashBackDBInstanceResponse> {
+    return this.request("FlashBackDBInstance", req, cb)
   }
 
   /**
@@ -543,14 +572,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于发起按 Key 闪回任务，依据数据的闪回 Key（默认为 id）对数据进行极速回档，快速恢复业务。
-   **说明：按 Key 闪回于2023年09月11日正式进行公测，在此期间，该接口仅对公测用户开放。**
+   * 本接口（DescribeSRVConnectionDomain）用于查询MongoDB数据库当前的域名信息。
    */
-  async FlashBackDBInstance(
-    req: FlashBackDBInstanceRequest,
-    cb?: (error: string, rep: FlashBackDBInstanceResponse) => void
-  ): Promise<FlashBackDBInstanceResponse> {
-    return this.request("FlashBackDBInstance", req, cb)
+  async DescribeSRVConnectionDomain(
+    req: DescribeSRVConnectionDomainRequest,
+    cb?: (error: string, rep: DescribeSRVConnectionDomainResponse) => void
+  ): Promise<DescribeSRVConnectionDomainResponse> {
+    return this.request("DescribeSRVConnectionDomain", req, cb)
   }
 
   /**
@@ -614,6 +642,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(UpgradeDBInstanceKernelVersion)用于升级数据库实例内核版本。
+   */
+  async UpgradeDBInstanceKernelVersion(
+    req: UpgradeDBInstanceKernelVersionRequest,
+    cb?: (error: string, rep: UpgradeDBInstanceKernelVersionResponse) => void
+  ): Promise<UpgradeDBInstanceKernelVersionResponse> {
+    return this.request("UpgradeDBInstanceKernelVersion", req, cb)
+  }
+
+  /**
    * 该接口（DescribeMongodbLogs）用于查询运行日志。
    */
   async DescribeMongodbLogs(
@@ -654,13 +692,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(UpgradeDBInstanceKernelVersion)用于升级数据库实例内核版本。
+   * 本接口（DisableSRVConnectionUrl）用于关闭MongoDB数据库的SRV访问地址。
    */
-  async UpgradeDBInstanceKernelVersion(
-    req: UpgradeDBInstanceKernelVersionRequest,
-    cb?: (error: string, rep: UpgradeDBInstanceKernelVersionResponse) => void
-  ): Promise<UpgradeDBInstanceKernelVersionResponse> {
-    return this.request("UpgradeDBInstanceKernelVersion", req, cb)
+  async DisableSRVConnectionUrl(
+    req: DisableSRVConnectionUrlRequest,
+    cb?: (error: string, rep: DisableSRVConnectionUrlResponse) => void
+  ): Promise<DisableSRVConnectionUrlResponse> {
+    return this.request("DisableSRVConnectionUrl", req, cb)
   }
 
   /**
@@ -764,6 +802,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DisableSRVConnectionUrl）用于修改MongoDB数据库的SRV访问地址的TTL时长。
+   */
+  async ModifySRVConnectionUrl(
+    req: ModifySRVConnectionUrlRequest,
+    cb?: (error: string, rep: ModifySRVConnectionUrlResponse) => void
+  ): Promise<ModifySRVConnectionUrlResponse> {
+    return this.request("ModifySRVConnectionUrl", req, cb)
+  }
+
+  /**
    * 本接口(OpenAuditService)用于开通云数据库实例的审计。
    */
   async OpenAuditService(
@@ -794,13 +842,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceNetworkAddress）用于修改云数据库实例的网络信息，支持基础网络切换为私有网络、私有网络切换私有网络。
+   * 本接口（EnableSRVConnectionUrl）用于开启MongoDB数据库的SRV访问地址。
    */
-  async ModifyDBInstanceNetworkAddress(
-    req: ModifyDBInstanceNetworkAddressRequest,
-    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
-  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
-    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
+  async EnableSRVConnectionUrl(
+    req: EnableSRVConnectionUrlRequest,
+    cb?: (error: string, rep: EnableSRVConnectionUrlResponse) => void
+  ): Promise<EnableSRVConnectionUrlResponse> {
+    return this.request("EnableSRVConnectionUrl", req, cb)
   }
 
   /**

@@ -287,6 +287,16 @@ export interface DBInstancePrice {
 }
 
 /**
+ * TerminateDBInstances请求参数结构体
+ */
+export interface TerminateDBInstancesRequest {
+  /**
+   * 指定预隔离实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制预隔离实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
  * KillOps请求参数结构体
  */
 export interface KillOpsRequest {
@@ -465,6 +475,20 @@ export interface InstanceMultiParam {
 }
 
 /**
+ * DescribeSRVConnectionDomain返回参数结构体
+ */
+export interface DescribeSRVConnectionDomainResponse {
+  /**
+   * 实例当前的srv域名信息。
+   */
+  Domain?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstanceParams返回参数结构体
  */
 export interface ModifyInstanceParamsResponse {
@@ -615,6 +639,20 @@ export interface Task {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
+}
+
+/**
+ * ModifySRVConnectionUrl返回参数结构体
+ */
+export interface ModifySRVConnectionUrlResponse {
+  /**
+   * 开启任务ID。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -798,6 +836,20 @@ export interface CreateDBInstanceParamTplRequest {
 }
 
 /**
+ * DisableSRVConnectionUrl返回参数结构体
+ */
+export interface DisableSRVConnectionUrlResponse {
+  /**
+   * 开启任务ID。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSecurityGroup请求参数结构体
  */
 export interface DescribeSecurityGroupRequest {
@@ -805,6 +857,20 @@ export interface DescribeSecurityGroupRequest {
    * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
+}
+
+/**
+ * RenameInstance请求参数结构体
+ */
+export interface RenameInstanceRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 自定义实例名称，要求为1～128 长度的任意字符。
+   */
+  NewName: string
 }
 
 /**
@@ -1998,6 +2064,20 @@ export interface ModifyNetworkAddress {
 }
 
 /**
+ * EnableSRVConnectionUrl返回参数结构体
+ */
+export interface EnableSRVConnectionUrlResponse {
+  /**
+   * 开启任务ID。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAsyncRequestInfo返回参数结构体
  */
 export interface DescribeAsyncRequestInfoResponse {
@@ -2270,21 +2350,17 @@ export interface DescribeBackupDownloadTaskRequest {
 }
 
 /**
- * 需要终止的操作。
+ * ModifySRVConnectionUrl请求参数结构体
  */
-export interface Operation {
+export interface ModifySRVConnectionUrlRequest {
   /**
-   * 操作所在的分片名称。请通过接口 [DescribeCurrentOp](https://cloud.tencent.com/document/product/240/48120) 查询分片名称。
+   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
-  ReplicaSetName: string
+  InstanceId: string
   /**
-   * 操作所在的节点名。请通过接口 [DescribeCurrentOp](https://cloud.tencent.com/document/product/240/48120) 查询节点名称。
+   * 自定义的实例的访问域名。
    */
-  NodeName: string
-  /**
-   * 操作序号。请通过接口 [DescribeCurrentOp](https://cloud.tencent.com/document/product/240/48120) 查询操作序号。
-   */
-  OpId: number
+  CustomDomain: string
 }
 
 /**
@@ -2306,6 +2382,16 @@ export interface DescribeClientConnectionsResponse {
 }
 
 /**
+ * DisableSRVConnectionUrl请求参数结构体
+ */
+export interface DisableSRVConnectionUrlRequest {
+  /**
+   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
  * ModifyDBInstanceParamTpl返回参数结构体
  */
 export interface ModifyDBInstanceParamTplResponse {
@@ -2316,11 +2402,11 @@ export interface ModifyDBInstanceParamTplResponse {
 }
 
 /**
- * TerminateDBInstances请求参数结构体
+ * DescribeSRVConnectionDomain请求参数结构体
  */
-export interface TerminateDBInstancesRequest {
+export interface DescribeSRVConnectionDomainRequest {
   /**
-   * 指定预隔离实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制预隔离实例 ID。
+   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
 }
@@ -3191,17 +3277,13 @@ export interface ModifyAuditServiceRequest {
 }
 
 /**
- * RenameInstance请求参数结构体
+ * EnableSRVConnectionUrl请求参数结构体
  */
-export interface RenameInstanceRequest {
+export interface EnableSRVConnectionUrlRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vnipr5。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
+   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
-  /**
-   * 自定义实例名称，要求为1～128 长度的任意字符。
-   */
-  NewName: string
 }
 
 /**
@@ -4216,6 +4298,24 @@ export interface InquirePriceCreateDBInstancesRequest {
    * 指 ConfigServer 磁盘大小，固定取值为 20，单位：GB，可不配置该参数。
    */
   ConfigServerVolume?: number
+}
+
+/**
+ * 需要终止的操作。
+ */
+export interface Operation {
+  /**
+   * 操作所在的分片名称。请通过接口 [DescribeCurrentOp](https://cloud.tencent.com/document/product/240/48120) 查询分片名称。
+   */
+  ReplicaSetName: string
+  /**
+   * 操作所在的节点名。请通过接口 [DescribeCurrentOp](https://cloud.tencent.com/document/product/240/48120) 查询节点名称。
+   */
+  NodeName: string
+  /**
+   * 操作序号。请通过接口 [DescribeCurrentOp](https://cloud.tencent.com/document/product/240/48120) 查询操作序号。
+   */
+  OpId: number
 }
 
 /**

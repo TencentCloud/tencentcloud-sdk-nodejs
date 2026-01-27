@@ -16,71 +16,6 @@
  */
 
 /**
- * 分类详细信息
- */
-export interface Category {
-  /**
-   * 分类id。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: number
-  /**
-   * 分类英文名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Label?: string
-  /**
-   * 分类中文名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 分类置信度。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Score?: number
-}
-
-/**
- * ComposeCouplet请求参数结构体
- */
-export interface ComposeCoupletRequest {
-  /**
-   * 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。
-   */
-  Text: string
-  /**
-   * 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。
-   */
-  TargetType?: number
-}
-
-/**
- * EvaluateSentenceSimilarity请求参数结构体
- */
-export interface EvaluateSentenceSimilarityRequest {
-  /**
-   * 待分析的句子对数组。句子对应不超过1对，仅支持中文文本，原句子与目标句子均应不超过500字符。
-   */
-  SentencePairList: Array<SentencePair>
-}
-
-/**
- * 待分析的句子对
- */
-export interface SentencePair {
-  /**
-   * 需要与目标句子计算相似度的源句子。（仅支持UTF-8格式，不超过500字符）
-   */
-  SourceText: string
-  /**
-   * 目标句子。（仅支持UTF-8格式，不超过500字符）
-
-   */
-  TargetText: string
-}
-
-/**
  * SentenceCorrection返回参数结构体
  */
 export interface SentenceCorrectionResponse {
@@ -96,17 +31,13 @@ export interface SentenceCorrectionResponse {
 }
 
 /**
- * ClassifyContent请求参数结构体
+ * ParseWords请求参数结构体
  */
-export interface ClassifyContentRequest {
+export interface ParseWordsRequest {
   /**
-   * 待分类的文章的标题（仅支持UTF-8格式，不超过100字符）。
+   * 待分析的文本（支持中英文文本，不超过500字符）
    */
-  Title: string
-  /**
-   * 待分类文章的内容, 每个元素对应一个段落。（仅支持UTF-8格式，文章内容长度总和不超过2000字符）
-   */
-  Content: Array<string>
+  Text: string
 }
 
 /**
@@ -133,43 +64,6 @@ export interface Entity {
    * 类型名字的自然语言表达。（中文或英文）
    */
   Name?: string
-}
-
-/**
- * EvaluateSentenceSimilarity返回参数结构体
- */
-export interface EvaluateSentenceSimilarityResponse {
-  /**
-   * 每个句子对的相似度分值。
-   */
-  ScoreList?: Array<number>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ClassifyContent返回参数结构体
- */
-export interface ClassifyContentResponse {
-  /**
-   * 一级分类。（请参见附录[三级分类体系表](https://cloud.tencent.com/document/product/271/94286)）
-   */
-  FirstClassification?: Category
-  /**
-   * 二级分类。（请参见附录[三级分类体系表](https://cloud.tencent.com/document/product/271/94286)）
-   */
-  SecondClassification?: Category
-  /**
-   * 三级分类。（请参见附录[三级分类体系表](https://cloud.tencent.com/document/product/271/94286)）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ThirdClassification?: Category
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -335,36 +229,4 @@ export interface CompoundParticiple {
    * 词性。
    */
   Pos?: string
-}
-
-/**
- * ParseWords请求参数结构体
- */
-export interface ParseWordsRequest {
-  /**
-   * 待分析的文本（支持中英文文本，不超过500字符）
-   */
-  Text: string
-}
-
-/**
- * ComposeCouplet返回参数结构体
- */
-export interface ComposeCoupletResponse {
-  /**
-   * 横批。
-   */
-  TopScroll?: string
-  /**
-   * 上联与下联。
-   */
-  Content?: Array<string>
-  /**
-   * 当对联随机生成时，展示随机生成原因。
-   */
-  RandomCause?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }

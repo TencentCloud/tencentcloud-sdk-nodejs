@@ -76,7 +76,7 @@ import {
   PoliticalOcrReviewTemplateInfo,
   CreateImageSpriteTemplateRequest,
   MediaSnapshotByTimePicInfoItem,
-  DescribeDailyMostPlayedStatRequest,
+  DeleteProcessImageAsyncTemplateResponse,
   UserDefineFaceReviewTemplateInfo,
   RefreshUrlCacheRequest,
   SceneAigcVideoTaskInputFileInfo,
@@ -110,10 +110,12 @@ import {
   DeletePersonSampleRequest,
   ProcedureReviewAudioVideoTaskInput,
   AiRecognitionTaskAsrWordsSegmentItem,
+  ModifyProcessImageAsyncTemplateRequest,
   TextWatermarkTemplateInput,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   QualityEvaluationConfigureInfoForUpdate,
   AiRecognitionTaskInput,
+  VideoConfigureInfoForUpdate,
   AudioTemplateInfo,
   ExecuteFunctionResponse,
   CoverConfigureInfo,
@@ -200,7 +202,7 @@ import {
   CoverBySnapshotTaskOutput,
   ModifyQualityInspectTemplateResponse,
   DescribeProcedureTemplatesRequest,
-  VideoConfigureInfoForUpdate,
+  ProcessImageAsyncRequest,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   ForbidMediaDistributionRequest,
   DescribeAIRecognitionTemplatesResponse,
@@ -247,6 +249,7 @@ import {
   ClassificationConfigureInfoForUpdate,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
   CreateWordSamplesRequest,
+  FrameTagConfigureInfo,
   BlurConfigureInfo,
   PoliticalAsrReviewTemplateInfoForUpdate,
   WechatMiniProgramPublishTaskInput,
@@ -254,6 +257,7 @@ import {
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
+  DescribeProcessImageAsyncTemplatesRequest,
   AigcImageOutputConfig,
   WatermarkConfigureInfoForUpdate,
   AiRecognitionTaskOcrWordsResult,
@@ -287,7 +291,9 @@ import {
   CreateComplexAdaptiveDynamicStreamingTaskRequest,
   AiRecognitionTaskAsrTranslateResult,
   DescribeFileAttributesResponse,
+  ProcessImageAsyncResponse,
   LicenseUsageDataItem,
+  ProcessImageAsyncTask,
   RebuildMediaTargetAudioStream,
   ConcatFileInfo2017,
   ContentReviewResult,
@@ -338,6 +344,7 @@ import {
   CoverBySnapshotTaskInput,
   SegmentConfigureInfoForUpdate,
   RebuildMediaTaskInput,
+  ModifyProcessImageAsyncTemplateResponse,
   UserDefineConfigureInfo,
   NoiseConfigureInfoForUpdate,
   LiveRecordInfo,
@@ -402,7 +409,7 @@ import {
   AiRecognitionTaskAsrWordsResultOutput,
   DescribeHeadTailTemplatesRequest,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
-  MediaProcessTaskTranscodeResult,
+  ImageSceneAigcEncodeConfig,
   BlurConfigureInfoForUpdate,
   ProcessMediaByUrlResponse,
   EditMediaVideoStream,
@@ -428,12 +435,13 @@ import {
   DescribeDailyPlayStatFileListRequest,
   DescribeSuperPlayerConfigsResponse,
   AsrWordsConfigureInfoForUpdate,
-  DescribeStorageDataRequest,
+  DescribeDailyMostPlayedStatRequest,
   LiveRealTimeClipMediaSegmentInfo,
   DeleteImageSpriteTemplateResponse,
   LowLightEnhanceInfo,
   DescribeContentReviewTemplatesResponse,
   TEHDConfig,
+  ProcessImageAsyncTaskInput,
   ImageReviewUsageDataItem,
   AnimatedGraphicsTemplate,
   ExtractCopyRightWatermarkRequest,
@@ -452,6 +460,7 @@ import {
   CreateWatermarkTemplateRequest,
   ComplexAdaptiveDynamicStreamingTaskInput,
   SortBy,
+  AdvancedSuperResolutionConfig,
   DescribeMPSTemplatesRequest,
   CreateSceneAigcImageTaskRequest,
   TerrorismConfigureInfoForUpdate,
@@ -492,6 +501,7 @@ import {
   ComplexAdaptiveDynamicStreamingTaskResult,
   ConfirmEventsRequest,
   CreateAIRecognitionTemplateResponse,
+  ProcessImageAsyncInput,
   ModifySubAppIdStatusRequest,
   CreateSubAppIdResponse,
   DeleteTranscodeTemplateRequest,
@@ -520,6 +530,7 @@ import {
   HeadTailTemplate,
   DescribeStorageDetailsResponse,
   PullEventsResponse,
+  MediaProcessTaskTranscodeResult,
   AiRecognitionTaskObjectResultInput,
   DescribeCdnLogsRequest,
   MediaProcessTaskInput,
@@ -556,6 +567,7 @@ import {
   ProcessMediaByMPSRequest,
   ScratchRepairInfo,
   FileDeleteResultItem,
+  ProcessImageAsyncOutput,
   SnapshotByTimeOffsetTaskInput,
   RefererAuthPolicy,
   ProcessMediaByMPSResponse,
@@ -581,7 +593,7 @@ import {
   TaskStatDataItem,
   PornOcrReviewTemplateInfo,
   AiReviewTaskPoliticalAsrResult,
-  DescribeFileAttributesTaskOutput,
+  CreateProcessImageAsyncTemplateResponse,
   TrtcRecordInfo,
   DescribeReviewDetailsRequest,
   PornConfigureInfoForUpdate,
@@ -590,6 +602,7 @@ import {
   ParseStreamingManifestResponse,
   ListFilesResponse,
   CreateRoundPlayRequest,
+  ImageEncodeConfig,
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
   DescribeMediaPlayStatDetailsRequest,
@@ -610,6 +623,7 @@ import {
   DeleteMPSTemplateResponse,
   QRCodeConfigureInfo,
   DescribeStorageRegionsRequest,
+  ProcessImageAsyncTemplateItem,
   CreateMPSTemplateResponse,
   WechatPublishTask,
   DescribeCDNStatDetailsRequest,
@@ -625,6 +639,7 @@ import {
   HandleCurrentPlaylistResponse,
   PushUrlCacheRequest,
   CreateAIAnalysisTemplateResponse,
+  DeleteProcessImageAsyncTemplateRequest,
   HeadTailConfigureInfo,
   EventContent,
   HighlightsConfigureInfoForUpdate,
@@ -647,6 +662,7 @@ import {
   AsrFullTextConfigureInfo,
   TerrorismImageResult,
   DeleteVodDomainRequest,
+  ImageEnhanceConfig,
   DescribeDrmKeyProviderInfoResponse,
   ExtractTraceWatermarkResponse,
   CreateAIRecognitionTemplateRequest,
@@ -706,6 +722,7 @@ import {
   RebuildMediaTaskOutput,
   EnhanceMediaQualityOutputConfig,
   AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
+  DescribeStorageDataRequest,
   DescribeTaskDetailResponse,
   MediaKeyFrameDescInfo,
   DeleteImageSpriteTemplateRequest,
@@ -713,6 +730,7 @@ import {
   CreateClassRequest,
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
+  ProcessImageAsyncOutputFileInfo,
   ModifyRoundPlayResponse,
   CreateProcedureTemplateResponse,
   DescribeCLSLogsetsResponse,
@@ -735,6 +753,7 @@ import {
   ModifyMPSTemplateResponse,
   AiRecognitionTaskFaceResultInput,
   RebuildMediaOutputConfig,
+  ProcessImageAsync,
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
   ImportMediaKnowledgeTask,
@@ -742,10 +761,10 @@ import {
   ReviewImageResponse,
   DescribeStorageRegionsResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
-  ProcedureTask,
+  CreateProcessImageAsyncTemplateRequest,
   CreateCLSLogsetRequest,
   ExtractTraceWatermarkRequest,
-  TaskSimpleInfo,
+  ProcedureTask,
   ReviewAudioVideoTask,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   DomainQUICConfig,
@@ -781,6 +800,7 @@ import {
   ExtractCopyRightWatermarkTaskInput,
   AsrTranslateConfigureInfo,
   DescribeSampleSnapshotTemplatesResponse,
+  TaskSimpleInfo,
   MediaContentReviewSegmentItem,
   AiContentReviewResult,
   CreateAigcImageTaskRequest,
@@ -791,6 +811,7 @@ import {
   DeleteClassRequest,
   TerrorismOcrReviewTemplateInfo,
   DescribeTranscodeTemplatesRequest,
+  ProcessImageAsyncOutputConfig,
   QualityEnhanceTaskOutput,
   ReviewTemplate,
   DescribeCurrentPlaylistRequest,
@@ -805,7 +826,7 @@ import {
   DescribeRoundPlaysResponse,
   ImageTransform,
   CreateAnimatedGraphicsTemplateRequest,
-  FrameTagConfigureInfo,
+  DescribeFileAttributesTaskOutput,
   RemoveWatermarkRequest,
   ExecuteFunctionRequest,
   RebuildMediaTask,
@@ -824,6 +845,7 @@ import {
   PornConfigureInfo,
   AiRecognitionTaskObjectSeqmentItem,
   SplitMediaResponse,
+  ImageDenoiseConfig,
   RestoreMediaRequest,
   PullEventsRequest,
   AiRecognitionTaskObjectResult,
@@ -853,6 +875,7 @@ import {
   AiRecognitionTaskFaceResultOutput,
   DeleteImageProcessingTemplateResponse,
   PornImgReviewTemplateInfoForUpdate,
+  DescribeProcessImageAsyncTemplatesResponse,
   CreateWatermarkTemplateResponse,
   PornImgReviewTemplateInfo,
   QualityInspectTemplateItem,
@@ -1075,13 +1098,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据音视频内容分析模板唯一标识，获取音视频内容分析模板详情列表。返回结果包含符合条件的所有用户自定义音视频内容分析模板及[系统预置音视频内容分析模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF)。
+   * 创建用户自定义图像异步处理模板，数量上限：50。暂时不支持 HLS 格式。
    */
-  async DescribeAIAnalysisTemplates(
-    req: DescribeAIAnalysisTemplatesRequest,
-    cb?: (error: string, rep: DescribeAIAnalysisTemplatesResponse) => void
-  ): Promise<DescribeAIAnalysisTemplatesResponse> {
-    return this.request("DescribeAIAnalysisTemplates", req, cb)
+  async CreateProcessImageAsyncTemplate(
+    req: CreateProcessImageAsyncTemplateRequest,
+    cb?: (error: string, rep: CreateProcessImageAsyncTemplateResponse) => void
+  ): Promise<CreateProcessImageAsyncTemplateResponse> {
+    return this.request("CreateProcessImageAsyncTemplate", req, cb)
   }
 
   /**
@@ -1399,6 +1422,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCDNUsageDataResponse) => void
   ): Promise<DescribeCDNUsageDataResponse> {
     return this.request("DescribeCDNUsageData", req, cb)
+  }
+
+  /**
+   * 该接口用于图片处理任务
+   */
+  async ProcessImageAsync(
+    req: ProcessImageAsyncRequest,
+    cb?: (error: string, rep: ProcessImageAsyncResponse) => void
+  ): Promise<ProcessImageAsyncResponse> {
+    return this.request("ProcessImageAsync", req, cb)
   }
 
   /**
@@ -1744,6 +1777,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改用户自定义图像异步处理模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     */
+  async ModifyProcessImageAsyncTemplate(
+    req: ModifyProcessImageAsyncTemplateRequest,
+    cb?: (error: string, rep: ModifyProcessImageAsyncTemplateResponse) => void
+  ): Promise<ModifyProcessImageAsyncTemplateResponse> {
+    return this.request("ModifyProcessImageAsyncTemplate", req, cb)
+  }
+
+  /**
      * 该接口用于修改点播域名的加速区域。
 1、域名部署状态为 Online 状态时才允许修改加速区域。
      */
@@ -1850,16 +1895,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 1. 预热指定的 URL 列表。
-2. URL 的域名必须已在云点播中注册。
-3. 单次请求最多指定20个 URL。
-4. 默认预热配额为每天10000个 URL。
-     */
-  async PushUrlCache(
-    req: PushUrlCacheRequest,
-    cb?: (error: string, rep: PushUrlCacheResponse) => void
-  ): Promise<PushUrlCacheResponse> {
-    return this.request("PushUrlCache", req, cb)
+   * 根据音视频内容分析模板唯一标识，获取音视频内容分析模板详情列表。返回结果包含符合条件的所有用户自定义音视频内容分析模板及[系统预置音视频内容分析模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF)。
+   */
+  async DescribeAIAnalysisTemplates(
+    req: DescribeAIAnalysisTemplatesRequest,
+    cb?: (error: string, rep: DescribeAIAnalysisTemplatesResponse) => void
+  ): Promise<DescribeAIAnalysisTemplatesResponse> {
+    return this.request("DescribeAIAnalysisTemplates", req, cb)
   }
 
   /**
@@ -2517,6 +2559,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据图像异步处理模板唯一标识，获取图像异步处理模板详情列表。返回结果包含符合条件的所有用户自定义图像异步处理模板。
+   */
+  async DescribeProcessImageAsyncTemplates(
+    req: DescribeProcessImageAsyncTemplatesRequest,
+    cb?: (error: string, rep: DescribeProcessImageAsyncTemplatesResponse) => void
+  ): Promise<DescribeProcessImageAsyncTemplatesResponse> {
+    return this.request("DescribeProcessImageAsyncTemplates", req, cb)
+  }
+
+  /**
    * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
    */
   async CreateWordSamples(
@@ -2548,6 +2600,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
   ): Promise<ModifySubAppIdInfoResponse> {
     return this.request("ModifySubAppIdInfo", req, cb)
+  }
+
+  /**
+     * 1. 预热指定的 URL 列表。
+2. URL 的域名必须已在云点播中注册。
+3. 单次请求最多指定20个 URL。
+4. 默认预热配额为每天10000个 URL。
+     */
+  async PushUrlCache(
+    req: PushUrlCacheRequest,
+    cb?: (error: string, rep: PushUrlCacheResponse) => void
+  ): Promise<PushUrlCacheResponse> {
+    return this.request("PushUrlCache", req, cb)
   }
 
   /**
@@ -2732,6 +2797,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSubAppIdsResponse) => void
   ): Promise<DescribeSubAppIdsResponse> {
     return this.request("DescribeSubAppIds", req, cb)
+  }
+
+  /**
+     * 删除用户自定义图像异步处理模板。
+
+注意：模板 ID 为 10000 以下的为系统预置模板，不允许删除。
+     */
+  async DeleteProcessImageAsyncTemplate(
+    req: DeleteProcessImageAsyncTemplateRequest,
+    cb?: (error: string, rep: DeleteProcessImageAsyncTemplateResponse) => void
+  ): Promise<DeleteProcessImageAsyncTemplateResponse> {
+    return this.request("DeleteProcessImageAsyncTemplate", req, cb)
   }
 
   /**

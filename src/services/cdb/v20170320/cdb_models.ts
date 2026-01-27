@@ -4219,7 +4219,7 @@ export interface DescribeInstanceUpgradeTypeRequest {
    */
   NodeDistribution?: NodeDistribution
   /**
-   * 集群版的节点拓扑配置。Nodeld信息可通过 [DescribeClusterInfo](https://cloud.tencent.com/document/api/236/105116) 接口获取。
+   * 云盘版的节点拓扑配置。Nodeld 信息可通过 [DescribeClusterInfo](https://cloud.tencent.com/document/api/236/105116) 接口获取。
    */
   ClusterTopology?: ClusterTopology
 }
@@ -10536,7 +10536,7 @@ export interface ModifyAccountPasswordRequest {
    */
   Accounts: Array<Account>
   /**
-   * 是否跳过校验密码复杂度
+   * 该字段已废弃。
    * @deprecated
    */
   SkipValidatePassword?: boolean

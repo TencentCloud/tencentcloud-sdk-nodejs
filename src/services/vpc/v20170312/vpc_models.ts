@@ -1919,7 +1919,7 @@ export interface ConnectionStateTimeouts {
   /**
    * TCP TIME_WAIT超时，指完全关闭的TCP连接在到期后保留在NAT映射中的秒数。取值范围为：10-600秒，默认为120秒。
    */
-  TcpTimeWaitTimeout?: number
+  TCPTimeWaitTimeout?: number
 }
 
 /**

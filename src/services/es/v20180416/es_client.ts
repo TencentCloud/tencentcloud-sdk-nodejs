@@ -48,6 +48,7 @@ import {
   UpdateServerlessSpaceRequest,
   MasterNodeInfo,
   DiagnoseInstanceRequest,
+  Namespaces,
   LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
   DeleteServerlessInstanceResponse,
@@ -76,6 +77,7 @@ import {
   CreateIndexResponse,
   DescribeServerlessSpaceUserResponse,
   LogDetail,
+  CreateCollectorRequest,
   DescribeAutoBackUpStrategyRequest,
   DescribeLogstashInstanceLogsRequest,
   DescribeIndexMetaResponse,
@@ -85,7 +87,7 @@ import {
   GetDiagnoseSettingsResponse,
   ModifyAutoBackUpStrategyRequest,
   CreateServerlessSpaceV2Request,
-  DiSourceTkePodLabel,
+  CollectorTarget,
   DeleteServerlessSpaceUserResponse,
   DiData,
   UpgradeLicenseResponse,
@@ -117,6 +119,7 @@ import {
   IpTraceConfig,
   Metric,
   UpdateInstanceResponse,
+  CreateCollectorResponse,
   DeleteIndexRequest,
   DescribeViewsRequest,
   ModifyAutoBackUpStrategyResponse,
@@ -140,6 +143,7 @@ import {
   DescribeAutoBackUpStrategyResponse,
   ServerlessIndexOptionsField,
   UpdateDictionariesRequest,
+  DiSourceTkePodLabel,
   OperationDuration,
   UpgradeLicenseRequest,
   DescribeIndexListRequest,
@@ -152,7 +156,7 @@ import {
   UpdateServerlessInstanceResponse,
   UpdateDictionariesResponse,
   InstanceInfo,
-  DiDataSourceCvmInstance,
+  CollectorConfigInfo,
   DeleteIndexResponse,
   DeleteServerlessSpaceUserRequest,
   RestartNodesResponse,
@@ -166,11 +170,13 @@ import {
   GetRequestTargetNodeTypesRequest,
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
+  PodLabel,
   DescribeLogstashInstancesRequest,
   CreateCosMigrateToServerlessInstanceRequest,
   GetIpTraceStatusResponse,
   DeleteInstanceRequest,
   MetricDetail,
+  DiDataSourceCvmInstance,
   UpgradeInstanceResponse,
   DeleteAutoBackUpStrategyResponse,
   DescribeIndexMetaRequest,
@@ -233,6 +239,7 @@ import {
   UpgradeInstanceRequest,
   DescribeViewsResponse,
   KibanaPublicAcl,
+  CollectorOutputInstance,
   CreateClusterSnapshotResponse,
   RestartLogstashInstanceResponse,
   ModifyAutoBackUpCommonInfoResponse,
@@ -279,13 +286,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取接收客户端请求的节点类型
+   * 用于创建Beats采集器
    */
-  async GetRequestTargetNodeTypes(
-    req: GetRequestTargetNodeTypesRequest,
-    cb?: (error: string, rep: GetRequestTargetNodeTypesResponse) => void
-  ): Promise<GetRequestTargetNodeTypesResponse> {
-    return this.request("GetRequestTargetNodeTypes", req, cb)
+  async CreateCollector(
+    req: CreateCollectorRequest,
+    cb?: (error: string, rep: CreateCollectorResponse) => void
+  ): Promise<CreateCollectorResponse> {
+    return this.request("CreateCollector", req, cb)
   }
 
   /**
@@ -349,13 +356,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询IP溯源状态
+   * 更新实例Jdk配置
    */
-  async GetIpTraceStatus(
-    req: GetIpTraceStatusRequest,
-    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
-  ): Promise<GetIpTraceStatusResponse> {
-    return this.request("GetIpTraceStatus", req, cb)
+  async UpdateJdk(
+    req: UpdateJdkRequest,
+    cb?: (error: string, rep: UpdateJdkResponse) => void
+  ): Promise<UpdateJdkResponse> {
+    return this.request("UpdateJdk", req, cb)
   }
 
   /**
@@ -541,13 +548,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Serverless索引空间
+   * 查询智能运维诊断结果报告
    */
-  async CreateServerlessSpaceV2(
-    req: CreateServerlessSpaceV2Request,
-    cb?: (error: string, rep: CreateServerlessSpaceV2Response) => void
-  ): Promise<CreateServerlessSpaceV2Response> {
-    return this.request("CreateServerlessSpaceV2", req, cb)
+  async DescribeDiagnose(
+    req: DescribeDiagnoseRequest,
+    cb?: (error: string, rep: DescribeDiagnoseResponse) => void
+  ): Promise<DescribeDiagnoseResponse> {
+    return this.request("DescribeDiagnose", req, cb)
   }
 
   /**
@@ -692,13 +699,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Serverless获取索引列表
+   * 创建Serverless索引空间
    */
-  async DescribeServerlessInstances(
-    req: DescribeServerlessInstancesRequest,
-    cb?: (error: string, rep: DescribeServerlessInstancesResponse) => void
-  ): Promise<DescribeServerlessInstancesResponse> {
-    return this.request("DescribeServerlessInstances", req, cb)
+  async CreateServerlessSpaceV2(
+    req: CreateServerlessSpaceV2Request,
+    cb?: (error: string, rep: CreateServerlessSpaceV2Response) => void
+  ): Promise<CreateServerlessSpaceV2Response> {
+    return this.request("CreateServerlessSpaceV2", req, cb)
   }
 
   /**
@@ -742,13 +749,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询智能运维诊断结果报告
+   * 查询IP溯源状态
    */
-  async DescribeDiagnose(
-    req: DescribeDiagnoseRequest,
-    cb?: (error: string, rep: DescribeDiagnoseResponse) => void
-  ): Promise<DescribeDiagnoseResponse> {
-    return this.request("DescribeDiagnose", req, cb)
+  async GetIpTraceStatus(
+    req: GetIpTraceStatusRequest,
+    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
+  ): Promise<GetIpTraceStatusResponse> {
+    return this.request("GetIpTraceStatus", req, cb)
   }
 
   /**
@@ -922,13 +929,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新实例Jdk配置
+   * Serverless获取索引列表
    */
-  async UpdateJdk(
-    req: UpdateJdkRequest,
-    cb?: (error: string, rep: UpdateJdkResponse) => void
-  ): Promise<UpdateJdkResponse> {
-    return this.request("UpdateJdk", req, cb)
+  async DescribeServerlessInstances(
+    req: DescribeServerlessInstancesRequest,
+    cb?: (error: string, rep: DescribeServerlessInstancesResponse) => void
+  ): Promise<DescribeServerlessInstancesResponse> {
+    return this.request("DescribeServerlessInstances", req, cb)
   }
 
   /**
@@ -939,6 +946,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexMetaResponse) => void
   ): Promise<DescribeIndexMetaResponse> {
     return this.request("DescribeIndexMeta", req, cb)
+  }
+
+  /**
+   * 获取接收客户端请求的节点类型
+   */
+  async GetRequestTargetNodeTypes(
+    req: GetRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: GetRequestTargetNodeTypesResponse) => void
+  ): Promise<GetRequestTargetNodeTypesResponse> {
+    return this.request("GetRequestTargetNodeTypes", req, cb)
   }
 
   /**

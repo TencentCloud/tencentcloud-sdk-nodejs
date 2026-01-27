@@ -298,6 +298,16 @@ it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeRedoLogs", async function () {
+    try {
+       const data = await client.DescribeRedoLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyClusterStorage", async function () {
     try {
        const data = await client.ModifyClusterStorage({})
@@ -1058,6 +1068,26 @@ it("cynosdb.v20190107.DescribeAuditLogs", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeSaveBackupClusters", async function () {
+    try {
+       const data = await client.DescribeSaveBackupClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DeleteClusterSaveBackup", async function () {
+    try {
+       const data = await client.DeleteClusterSaveBackup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.UnbindClusterResourcePackages", async function () {
     try {
        const data = await client.UnbindClusterResourcePackages({})
@@ -1071,6 +1101,16 @@ it("cynosdb.v20190107.UnbindClusterResourcePackages", async function () {
 it("cynosdb.v20190107.DescribeProxies", async function () {
     try {
        const data = await client.DescribeProxies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifySnapBackupCrossRegionConfig", async function () {
+    try {
+       const data = await client.ModifySnapBackupCrossRegionConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

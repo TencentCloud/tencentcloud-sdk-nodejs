@@ -1203,6 +1203,10 @@ export interface InstallAndroidInstancesAppWithURLRequest {
    * 安卓应用下载 URL
    */
   AndroidAppURL: string
+  /**
+   * 安卓应用MD5码值（32位小写十六进制字符串）
+   */
+  AndroidAppMD5?: string
 }
 
 /**

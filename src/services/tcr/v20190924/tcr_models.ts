@@ -36,17 +36,17 @@ export interface ManageImageLifecycleGlobalPersonalResponse {
 }
 
 /**
- * ManageExternalEndpoint请求参数结构体
+ * 过滤选择器
  */
-export interface ManageExternalEndpointRequest {
+export interface FilterSelector {
   /**
-   * 实例Id
+   * <p>过滤规则类型，在tag过滤中，可选值为matches（匹配），excludes(排除)，在仓库过滤中，可选值为repoMatches（仓库匹配），repoExcludes（仓库排除）</p>
    */
-  RegistryId: string
+  Decoration?: string
   /**
-   * 操作（Create/Delete）
+   * <p>过滤表达式</p>
    */
-  Operation: string
+  Pattern?: string
 }
 
 /**
@@ -179,27 +179,31 @@ export interface AccessVpc {
  */
 export interface ModifyTagRetentionRuleRequest {
   /**
-   * 主实例iD
+   * <p>主实例iD</p>
    */
   RegistryId: string
   /**
-   * 命名空间的Id，必须填写原有的命名空间id
+   * <p>命名空间的Id，必须填写原有的命名空间id</p>
    */
   NamespaceId: number
   /**
-   * 保留策略
-   */
-  RetentionRule: RetentionRule
-  /**
-   * 执行周期，必须填写为原来的设置
+   * <p>执行周期，必须填写为原来的设置</p>
    */
   CronSetting: string
   /**
-   * 规则Id
+   * <p>规则Id</p>
    */
   RetentionId: number
   /**
-   * 是否禁用规则
+   * <p>保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略</p>
+   */
+  RetentionRule?: RetentionRule
+  /**
+   * <p>高级保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略</p>
+   */
+  AdvancedRuleItems?: Array<RetentionRuleItem>
+  /**
+   * <p>是否禁用规则</p>
    */
   Disabled?: boolean
 }
@@ -261,13 +265,17 @@ export interface ReplicationPolicyInfo {
 }
 
 /**
- * ModifyRepository返回参数结构体
+ * ManageExternalEndpoint请求参数结构体
  */
-export interface ModifyRepositoryResponse {
+export interface ManageExternalEndpointRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例Id
    */
-  RequestId?: string
+  RegistryId: string
+  /**
+   * 操作（Create/Delete）
+   */
+  Operation: string
 }
 
 /**
@@ -1323,17 +1331,31 @@ export interface DeleteInstanceCustomizedDomainRequest {
 }
 
 /**
- * 云标签Tag
+ * 版本保留规则
  */
-export interface Tag {
+export interface RetentionRuleItem {
   /**
-   * 云标签的key
+   * <p>版本保留规则</p>
    */
-  Key: string
+  RetentionPolicy?: RetentionRule
   /**
-   * 云标签的值
+   * <p>标签过滤器</p>
    */
-  Value: string
+  TagFilter?: FilterSelector
+  /**
+   * <p>仓库过滤器</p>
+   */
+  RepositoryFilter?: FilterSelector
+}
+
+/**
+ * ModifyRepository返回参数结构体
+ */
+export interface ModifyRepositoryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1520,23 +1542,27 @@ export interface SearchUserRepositoryResp {
  */
 export interface CreateTagRetentionRuleRequest {
   /**
-   * 主实例iD
+   * <p>主实例iD</p>
    */
   RegistryId: string
   /**
-   * 命名空间的Id
+   * <p>命名空间的Id</p>
    */
   NamespaceId: number
   /**
-   * 保留策略
-   */
-  RetentionRule: RetentionRule
-  /**
-   * 执行周期，当前只能选择： manual;daily;weekly;monthly
+   * <p>执行周期，当前只能选择： manual;daily;weekly;monthly</p>
    */
   CronSetting: string
   /**
-   * 是否禁用规则，默认值为false
+   * <p>保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略</p>
+   */
+  RetentionRule?: RetentionRule
+  /**
+   * <p>高级版本保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略</p>
+   */
+  AdvancedRuleItems?: Array<RetentionRuleItem>
+  /**
+   * <p>是否禁用规则，默认值为false</p>
    */
   Disabled?: boolean
 }
@@ -1854,27 +1880,31 @@ export interface TcrImageInfo {
  */
 export interface RetentionPolicy {
   /**
-   * 版本保留策略Id
+   * <p>版本保留策略Id</p>
    */
   RetentionId?: number
   /**
-   * 命名空间的名称
+   * <p>命名空间的名称</p>
    */
   NamespaceName?: string
   /**
-   * 规则列表
+   * <p>规则列表</p>
    */
   RetentionRuleList?: Array<RetentionRule>
   /**
-   * 定期执行方式
+   * <p>高级保留规则列表</p>
+   */
+  AdvancedRuleItems?: Array<RetentionRuleItem>
+  /**
+   * <p>定期执行方式</p>
    */
   CronSetting?: string
   /**
-   * 是否启用规则
+   * <p>是否启用规则</p>
    */
   Disabled?: boolean
   /**
-   * 基于当前时间根据cronSetting后下一次任务要执行的时间，仅做参考使用
+   * <p>基于当前时间根据cronSetting后下一次任务要执行的时间，仅做参考使用</p>
    */
   NextExecutionTime?: string
 }
@@ -4395,11 +4425,11 @@ export interface DescribeExternalEndpointStatusResponse {
  */
 export interface DescribeTagRetentionRulesResponse {
   /**
-   * 版本保留策略列表
+   * <p>版本保留策略列表</p>
    */
   RetentionPolicyList?: Array<RetentionPolicy>
   /**
-   * 版本保留策略总数
+   * <p>版本保留策略总数</p>
    */
   TotalCount?: number
   /**
@@ -4868,6 +4898,20 @@ export interface DescribeGCJobsRequest {
 }
 
 /**
+ * 云标签Tag
+ */
+export interface Tag {
+  /**
+   * 云标签的key
+   */
+  Key: string
+  /**
+   * 云标签的值
+   */
+  Value: string
+}
+
+/**
  * DescribeTagRetentionExecution请求参数结构体
  */
 export interface DescribeTagRetentionExecutionRequest {
@@ -4904,19 +4948,19 @@ export interface CreateRepositoryResponse {
  */
 export interface DescribeTagRetentionRulesRequest {
   /**
-   * 主实例iD
+   * <p>主实例iD</p>
    */
   RegistryId: string
   /**
-   * 命名空间的名称
+   * <p>命名空间的名称</p>
    */
   NamespaceName?: string
   /**
-   * 分页PageSize
+   * <p>分页PageSize</p>
    */
   Limit?: number
   /**
-   * 分页Page
+   * <p>分页Page</p>
    */
   Offset?: number
 }
@@ -5256,17 +5300,21 @@ export interface ModifyUserPasswordPersonalRequest {
  */
 export interface DeleteRepositoryRequest {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   RegistryId: string
   /**
-   * 命名空间的名称
+   * <p>命名空间的名称</p>
    */
   NamespaceName: string
   /**
-   * 镜像仓库的名称
+   * <p>镜像仓库的名称</p>
    */
   RepositoryName: string
+  /**
+   * <p>默认值为true，表示无论仓库是否存在镜像都直接删除；false代表删除仓库前需检查是否存在镜像。</p>
+   */
+  ForceDelete?: boolean
 }
 
 /**

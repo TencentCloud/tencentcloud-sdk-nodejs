@@ -248,6 +248,16 @@ it("cbs.v20170312.CreateDisks", async function () {
     }
 })
 
+it("cbs.v20170312.CopyAutoSnapshotPolicyCrossAccount", async function () {
+    try {
+       const data = await client.CopyAutoSnapshotPolicyCrossAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.ModifyDiskAttributes", async function () {
     try {
        const data = await client.ModifyDiskAttributes({})

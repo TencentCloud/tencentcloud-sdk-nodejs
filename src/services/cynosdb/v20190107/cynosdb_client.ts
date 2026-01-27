@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DeleteClusterSaveBackupResponse,
   UpgradeProxyVersionResponse,
   DescribeInstanceCLSLogDeliveryResponse,
   ModifyMaintainPeriodConfigRequest,
@@ -54,6 +55,7 @@ import {
   SearchClusterDatabasesResponse,
   CreateParamTemplateRequest,
   DescribeBackupDownloadUserRestrictionRequest,
+  BackupRegionAndIds,
   DescribeClusterDetailRequest,
   ModifyResourcePackageNameRequest,
   UpgradeProxy,
@@ -72,6 +74,7 @@ import {
   ModifyBinlogSaveDaysRequest,
   ProxySpec,
   AddInstancesResponse,
+  DescribeSaveBackupClustersResponse,
   BackupLimitClusterRestriction,
   SlowQueriesItem,
   DescribeIntegrateTaskRequest,
@@ -96,6 +99,7 @@ import {
   SearchClusterTablesResponse,
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
+  SnapshotBackupConfig,
   DescribeChangedParamsAfterUpgradeResponse,
   ModifyServerlessStrategyResponse,
   ProxyGroupRwInfo,
@@ -117,6 +121,7 @@ import {
   DescribeResourcePackageDetailRequest,
   InstanceCLSDeliveryInfo,
   InquirePriceMultiSpecResponse,
+  DescribeRedoLogsRequest,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
@@ -139,6 +144,7 @@ import {
   ModifyAuditRuleTemplatesRequest,
   CreateClustersData,
   DescribeProxiesRequest,
+  ModifySnapBackupCrossRegionConfigRequest,
   ModifyParamItem,
   AssociateSecurityGroupsRequest,
   ParamTemplateListInfo,
@@ -154,6 +160,7 @@ import {
   GoodsSpec,
   DeleteParamTemplateRequest,
   RevokeAccountPrivilegesResponse,
+  DescribeRedoLogsResponse,
   ServerlessSpec,
   ModifyBackupDownloadRestrictionRequest,
   DescribeClusterDetailDatabasesResponse,
@@ -190,6 +197,7 @@ import {
   DescribeBackupConfigResponse,
   DescribeParamTemplatesResponse,
   ProxyConfig,
+  SaveBackupClusterInfo,
   Addr,
   DescribeProjectSecurityGroupsRequest,
   ServerlessZoneStockInfo,
@@ -213,6 +221,7 @@ import {
   GdnTaskInfo,
   DescribeBackupDownloadUserRestrictionResponse,
   SaleZone,
+  ModifySnapBackupCrossRegionConfigResponse,
   SwitchProxyVpcResponse,
   StartCLSDeliveryRequest,
   SlaveZoneAttrItem,
@@ -243,13 +252,13 @@ import {
   CreateProxyResponse,
   BizTaskModifyParamsData,
   RollBackClusterRequest,
-  Module,
+  DescribeAuditLogFilesRequest,
   OpenClusterTransparentEncryptResponse,
   ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
   RemoveClusterSlaveZoneRequest,
-  BizTaskInfo,
+  ModifyResourcePackagesDeductionPriorityRequest,
   DescribeRollbackTimeRangeRequest,
   InquirePriceRenewRequest,
   DescribeAccountPrivilegesResponse,
@@ -298,7 +307,7 @@ import {
   Ability,
   InstanceInitInfo,
   InquirePriceModifyRequest,
-  ModifyResourcePackagesDeductionPriorityRequest,
+  BizTaskInfo,
   RemoveClusterSlaveZoneResponse,
   RenewClustersRequest,
   OpenClusterReadOnlyInstanceGroupAccessResponse,
@@ -323,6 +332,7 @@ import {
   ProxyZone,
   CreateProxyRequest,
   DescribeResourcePackageSaleSpecResponse,
+  QuerySimpleFilter,
   DescribeResourcesByDealNameRequest,
   DescribeAuditInstanceListRequest,
   DescribeInstanceSlowQueriesResponse,
@@ -343,6 +353,7 @@ import {
   DescribeClusterDatabaseTablesResponse,
   ModifyAccountPrivilegesRequest,
   CreateBackupRequest,
+  RedoLogItem,
   CreateCLSDeliveryRequest,
   DescribeMaintainPeriodResponse,
   DescribeBackupListResponse,
@@ -370,6 +381,7 @@ import {
   DescribeInstanceSlowQueriesRequest,
   ModifyResourcePackageClustersResponse,
   InputAccount,
+  DescribeSaveBackupClustersRequest,
   ProxyConfigInfo,
   ModifyClusterNameRequest,
   InstanceAuditRule,
@@ -423,6 +435,7 @@ import {
   GrantAccountPrivilegesRequest,
   IsolateClusterResponse,
   RenewClustersResponse,
+  BackupConfigInfo,
   RollbackTableInfo,
   RollbackProcessInfo,
   ModifyVipVportResponse,
@@ -443,6 +456,7 @@ import {
   DescribeInstancesWithinSameClusterResponse,
   RollbackToNewClusterResponse,
   ResourcePackage,
+  DeleteClusterSaveBackupRequest,
   DescribeSlaveZonesRequest,
   BillingResourceInfo,
   ModifyProxyRwSplitResponse,
@@ -460,7 +474,7 @@ import {
   IsolateInstanceRequest,
   ModifyServerlessStrategyRequest,
   DescribeBinlogConfigResponse,
-  DescribeAuditLogFilesRequest,
+  Module,
   SaleRegion,
   DescribeSSLStatusRequest,
   ProxyVersionInfo,
@@ -775,6 +789,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void
   ): Promise<DescribeResourcesByDealNameResponse> {
     return this.request("DescribeResourcesByDealName", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeRedoLogs）用于查询redo日志列表。
+   */
+  async DescribeRedoLogs(
+    req: DescribeRedoLogsRequest,
+    cb?: (error: string, rep: DescribeRedoLogsResponse) => void
+  ): Promise<DescribeRedoLogsResponse> {
+    return this.request("DescribeRedoLogs", req, cb)
   }
 
   /**
@@ -1538,6 +1562,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeSaveBackupClusters）用于查询遗留备份集群信息。
+   */
+  async DescribeSaveBackupClusters(
+    req: DescribeSaveBackupClustersRequest,
+    cb?: (error: string, rep: DescribeSaveBackupClustersResponse) => void
+  ): Promise<DescribeSaveBackupClustersResponse> {
+    return this.request("DescribeSaveBackupClusters", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteClusterSaveBackup）用于为集群删除遗留备份
+   */
+  async DeleteClusterSaveBackup(
+    req: DeleteClusterSaveBackupRequest,
+    cb?: (error: string, rep: DeleteClusterSaveBackupResponse) => void
+  ): Promise<DeleteClusterSaveBackupResponse> {
+    return this.request("DeleteClusterSaveBackup", req, cb)
+  }
+
+  /**
    * 本接口（UnbindClusterResourcePackages）用于解除资源包与集群之间的绑定关系。
    */
   async UnbindClusterResourcePackages(
@@ -1555,6 +1599,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxiesResponse) => void
   ): Promise<DescribeProxiesResponse> {
     return this.request("DescribeProxies", req, cb)
+  }
+
+  /**
+   * 本接口（ModifySnapBackupCrossRegionConfig）用于修改指定集群的快照备份跨地域配置。
+   */
+  async ModifySnapBackupCrossRegionConfig(
+    req: ModifySnapBackupCrossRegionConfigRequest,
+    cb?: (error: string, rep: ModifySnapBackupCrossRegionConfigResponse) => void
+  ): Promise<ModifySnapBackupCrossRegionConfigResponse> {
+    return this.request("ModifySnapBackupCrossRegionConfig", req, cb)
   }
 
   /**

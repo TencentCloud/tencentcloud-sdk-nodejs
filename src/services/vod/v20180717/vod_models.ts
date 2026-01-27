@@ -1679,28 +1679,13 @@ export interface MediaSnapshotByTimePicInfoItem {
 }
 
 /**
- * DescribeDailyMostPlayedStat请求参数结构体
+ * DeleteProcessImageAsyncTemplate返回参数结构体
  */
-export interface DescribeDailyMostPlayedStatRequest {
+export interface DeleteProcessImageAsyncTemplateResponse {
   /**
-   * 查询日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。该参数仅日期部分有效。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Date: string
-  /**
-   * 域名。查询该域名播放 Top100 的媒体文件的统计数据。默认查询所有域名的播放统计数据。
-   */
-  DomainName?: string
-  /**
-   * Top 数据的统计指标，取值有：
-<li>Traffic：播放流量，按播放流量统计 Top100 的数据。</li>
-<li>PlayTimes：播放次数，按播放次数统计播放 Top100 的数据。</li>
-默认值为Traffic。
-   */
-  Metric?: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
+  RequestId?: string
 }
 
 /**
@@ -2535,6 +2520,32 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
 }
 
 /**
+ * ModifyProcessImageAsyncTemplate请求参数结构体
+ */
+export interface ModifyProcessImageAsyncTemplateRequest {
+  /**
+   * 图片异步处理模板唯一标识。
+   */
+  Definition: number
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 图片异步处理模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 图片异步处理模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 图片异步处理配置。
+   */
+  ProcessImageConfigure?: ProcessImageAsyncTask
+}
+
+/**
  * 文字水印模板
  */
 export interface TextWatermarkTemplateInput {
@@ -2610,6 +2621,45 @@ export interface AiRecognitionTaskInput {
    * 视频智能识别模板 ID 。
    */
   Definition: number
+}
+
+/**
+ * 即时转码视频模板更新配置。
+ */
+export interface VideoConfigureInfoForUpdate {
+  /**
+   * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+
+默认值：0。
+   */
+  Width?: number
+  /**
+   * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+
+默认值：0。
+   */
+  Height?: number
+  /**
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+
+默认值：open。
+   */
+  ResolutionAdaptive?: string
+  /**
+   * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
+当取值为 0，表示由云点播自动设置码率。
+   */
+  Bitrate?: number
 }
 
 /**
@@ -4754,42 +4804,41 @@ export interface DescribeProcedureTemplatesRequest {
 }
 
 /**
- * 即时转码视频模板更新配置。
+ * ProcessImageAsync请求参数结构体
  */
-export interface VideoConfigureInfoForUpdate {
+export interface ProcessImageAsyncRequest {
   /**
-   * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-
-默认值：0。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  Width?: number
+  SubAppId: number
   /**
-   * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-
-默认值：0。
+   * 需要进行图片处理的FileId。
    */
-  Height?: number
+  FileId: string
   /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-
-默认值：open。
+   * 图片处理参数。
    */
-  ResolutionAdaptive?: string
+  ImageTaskInput?: ProcessImageAsyncTaskInput
   /**
-   * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
-当取值为 0，表示由云点播自动设置码率。
+   * 图片处理任务的输出媒体文件配置。
    */
-  Bitrate?: number
+  OutputConfig?: ProcessImageAsyncOutputConfig
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -5980,6 +6029,22 @@ export interface CreateWordSamplesRequest {
 }
 
 /**
+ * 智能按帧标签任务控制参数
+ */
+export interface FrameTagConfigureInfo {
+  /**
+   * 智能按帧标签任务开关，可选值：
+<li>ON：开启智能按帧标签任务；</li>
+<li>OFF：关闭智能按帧标签任务。</li>
+   */
+  Switch: string
+  /**
+   * 截帧间隔，单位为秒，当不填时，默认截帧间隔为 1 秒，最小值为 0.5 秒。
+   */
+  ScreenshotInterval?: number
+}
+
+/**
  * 视频画面模糊检测的控制参数。
  */
 export interface BlurConfigureInfo {
@@ -6137,6 +6202,28 @@ export interface AiReviewTaskTerrorismOcrResult {
    * 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
    */
   Progress?: number
+}
+
+/**
+ * DescribeProcessImageAsyncTemplates请求参数结构体
+ */
+export interface DescribeProcessImageAsyncTemplatesRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 图片异步处理模板唯一标识过滤条件，数组长度最大值：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
 }
 
 /**
@@ -7094,6 +7181,20 @@ export interface DescribeFileAttributesResponse {
 }
 
 /**
+ * ProcessImageAsync返回参数结构体
+ */
+export interface ProcessImageAsyncResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * License 请求次数统计数据。
  */
 export interface LicenseUsageDataItem {
@@ -7105,6 +7206,22 @@ export interface LicenseUsageDataItem {
    * License 请求次数。
    */
   Count: number
+}
+
+/**
+ * 图片异步处理配置
+ */
+export interface ProcessImageAsyncTask {
+  /**
+   * 图片转码输出配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncodeConfig?: ImageEncodeConfig
+  /**
+   * 图片增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnhanceConfig?: ImageEnhanceConfig
 }
 
 /**
@@ -8539,6 +8656,16 @@ export interface RebuildMediaTaskInput {
    * 音画质重生输出目标参数。
    */
   TargetInfo?: RebuildMediaTargetInfo
+}
+
+/**
+ * ModifyProcessImageAsyncTemplate返回参数结构体
+ */
+export interface ModifyProcessImageAsyncTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10070,46 +10197,17 @@ export interface ModifyAdaptiveDynamicStreamingTemplateResponse {
 }
 
 /**
- * 转码任务结果类型
+ * 图片编码格式参数。
  */
-export interface MediaProcessTaskTranscodeResult {
+export interface ImageSceneAigcEncodeConfig {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 图片格式，取值范围：JPEG、PNG，缺省为原图格式。不支持动画。
    */
-  Status?: string
+  Format?: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。
    */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 转码任务的输入。
-   */
-  Input?: TranscodeTaskInput
-  /**
-   * 转码任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: MediaTranscodeItem
-  /**
-   * 转码进度，取值范围 [0-100] 。
-   */
-  Progress?: number
-  /**
-   * 转码任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  BeginProcessTime?: string
-  /**
-   * 转码任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  FinishTime?: string
+  Quality?: number
 }
 
 /**
@@ -10754,9 +10852,24 @@ export interface AsrWordsConfigureInfoForUpdate {
 }
 
 /**
- * DescribeStorageData请求参数结构体
+ * DescribeDailyMostPlayedStat请求参数结构体
  */
-export interface DescribeStorageDataRequest {
+export interface DescribeDailyMostPlayedStatRequest {
+  /**
+   * 查询日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。该参数仅日期部分有效。
+   */
+  Date: string
+  /**
+   * 域名。查询该域名播放 Top100 的媒体文件的统计数据。默认查询所有域名的播放统计数据。
+   */
+  DomainName?: string
+  /**
+   * Top 数据的统计指标，取值有：
+<li>Traffic：播放流量，按播放流量统计 Top100 的数据。</li>
+<li>PlayTimes：播放次数，按播放次数统计播放 Top100 的数据。</li>
+默认值为Traffic。
+   */
+  Metric?: string
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
@@ -10836,6 +10949,16 @@ export interface TEHDConfig {
 不填或填0表示由云点播自动设置码率上限。
    */
   MaxVideoBitrate?: number
+}
+
+/**
+ * 图片处理配置。
+ */
+export interface ProcessImageAsyncTaskInput {
+  /**
+   * 图片异步处理模板ID。
+   */
+  Definition: number
 }
 
 /**
@@ -11137,6 +11260,10 @@ export interface SceneAigcImageOutputConfig {
 仅生商品图场景有效，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9
    */
   AspectRatio?: string
+  /**
+   * 输出图片编码格式参数。**仅AI换衣场景有效。**
+   */
+  EncodeConfig?: ImageSceneAigcEncodeConfig
 }
 
 /**
@@ -11288,6 +11415,45 @@ export interface SortBy {
    * 排序方式，可选值：Asc（升序）、Desc（降序）
    */
   Order: string
+}
+
+/**
+ * 超分配置
+ */
+export interface AdvancedSuperResolutionConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 类型，可选值：
+<li>standard：通用超分</li>
+<li>super：高级超分。</li>
+默认值：standard。
+   */
+  Type?: string
+  /**
+   * 输出图片模式，默认percent。
+<li> aspect: 超分至指定宽高的较大矩形。</li>
+<li> fixed: 超分至固定宽高，强制缩放。</li>
+<li> percent: 超分倍率，可以为小数。</li>
+   */
+  Mode?: string
+  /**
+   * 超分倍率，可以为小数。
+   */
+  Percent?: number
+  /**
+   * 目标图片宽度，不能超过4096。
+   */
+  Width?: number
+  /**
+   * 目标图片高度，不能超过4096。
+   */
+  Height?: number
 }
 
 /**
@@ -12489,6 +12655,24 @@ export interface CreateAIRecognitionTemplateResponse {
 }
 
 /**
+ * 图片异步处理任务信息。
+ */
+export interface ProcessImageAsyncInput {
+  /**
+   * 图片处理的FileId。
+   */
+  FileId?: string
+  /**
+   * 图片处理参数。
+   */
+  ImageTaskInput?: ProcessImageAsyncTaskInput
+  /**
+   * 图片处理任务的输出媒体文件配置。
+   */
+  OutputConfig?: ProcessImageAsyncOutputConfig
+}
+
+/**
  * ModifySubAppIdStatus请求参数结构体
  */
 export interface ModifySubAppIdStatusRequest {
@@ -13078,6 +13262,49 @@ export interface PullEventsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 转码任务结果类型
+ */
+export interface MediaProcessTaskTranscodeResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 转码任务的输入。
+   */
+  Input?: TranscodeTaskInput
+  /**
+   * 转码任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: MediaTranscodeItem
+  /**
+   * 转码进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * 转码任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  BeginProcessTime?: string
+  /**
+   * 转码任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -14035,6 +14262,16 @@ export interface FileDeleteResultItem {
 }
 
 /**
+ * 图片异步处理任务的输出。
+ */
+export interface ProcessImageAsyncOutput {
+  /**
+   * 图片异步处理任务的输出文件信息。
+   */
+  FileInfo?: ProcessImageAsyncOutputFileInfo
+}
+
+/**
  * 对视频按指定时间点截图任务输入参数类型
  */
 export interface SnapshotByTimeOffsetTaskInput {
@@ -14855,17 +15092,17 @@ export interface AiReviewTaskPoliticalAsrResult {
 }
 
 /**
- * 获取文件属性任务输出
+ * CreateProcessImageAsyncTemplate返回参数结构体
  */
-export interface DescribeFileAttributesTaskOutput {
+export interface CreateProcessImageAsyncTemplateResponse {
   /**
-   * 媒体文件的 Md5 值。
+   * 图片异步处理模板唯一标识。
    */
-  Md5?: string
+  Definition?: number
   /**
-   * 媒体文件的 Sha1 值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Sha1?: string
+  RequestId?: string
 }
 
 /**
@@ -15030,6 +15267,20 @@ export interface CreateRoundPlayRequest {
    * 过期时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。过期后的播单将停止播放，“9999-12-31T23:59:59+08:00”表示不过期。默认值：9999-12-31T23:59:59+08:00。
    */
   ExpiredTime?: string
+}
+
+/**
+ * 图片编码格式参数
+ */
+export interface ImageEncodeConfig {
+  /**
+   * 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。
+   */
+  Format?: string
+  /**
+   * 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。
+   */
+  Quality?: number
 }
 
 /**
@@ -15538,6 +15789,40 @@ export interface DescribeStorageRegionsRequest {
 }
 
 /**
+ * 图片异步处理模板详情。
+ */
+export interface ProcessImageAsyncTemplateItem {
+  /**
+   * 图片异步处理模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 模板类型。
+   */
+  Type?: string
+  /**
+   * 图片异步处理模板名称。
+   */
+  Name?: string
+  /**
+   * 图片异步处理模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
+  /**
+   * 图片异步处理模板配置。
+   */
+  ProcessImageConfigure?: ProcessImageAsyncTask
+}
+
+/**
  * CreateMPSTemplate返回参数结构体
  */
 export interface CreateMPSTemplateResponse {
@@ -15921,6 +16206,20 @@ export interface CreateAIAnalysisTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteProcessImageAsyncTemplate请求参数结构体
+ */
+export interface DeleteProcessImageAsyncTemplateRequest {
+  /**
+   * 图片异步处理模板唯一标识。
+   */
+  Definition: number
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
 }
 
 /**
@@ -16591,6 +16890,52 @@ export interface DeleteVodDomainRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * 图片增强参数
+ */
+export interface ImageEnhanceConfig {
+  /**
+   * 超分配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuperResolution?: SuperResolutionInfo
+  /**
+   * 高级超分配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvancedSuperResolution?: AdvancedSuperResolutionConfig
+  /**
+   * 降噪配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Denoise?: ImageDenoiseConfig
+  /**
+   * 综合增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageQualityEnhance?: ImageQualityEnhanceInfo
+  /**
+   * 色彩增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColorEnhance?: ColorEnhanceInfo
+  /**
+   * 细节增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SharpEnhance?: SharpEnhanceInfo
+  /**
+   * 人脸增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FaceEnhance?: FaceEnhanceInfo
+  /**
+   * 低光照增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowLightEnhance?: LowLightEnhanceInfo
 }
 
 /**
@@ -18103,6 +18448,16 @@ export interface AiRecognitionTaskAsrFullTextResultOutputSubtitleItem {
 }
 
 /**
+ * DescribeStorageData请求参数结构体
+ */
+export interface DescribeStorageDataRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+}
+
+/**
  * DescribeTaskDetail返回参数结构体
  */
 export interface DescribeTaskDetailResponse {
@@ -18265,6 +18620,10 @@ export interface DescribeTaskDetailResponse {
    */
   SceneAigcVideoTask?: SceneAigcVideoTask
   /**
+   * 图像异步处理任务信息，仅当 TaskType 为 ProcessImageAsync，该字段有值。
+   */
+  ProcessImageAsyncTask?: ProcessImageAsync
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -18365,6 +18724,41 @@ export interface UserDefineFaceReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当音视频审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 图片异步处理任务的输出文件信息。
+ */
+export interface ProcessImageAsyncOutputFileInfo {
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。
+
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+  /**
+   * 文件类型，例如 mp4、flv 等。
+   */
+  FileType?: string
+  /**
+   * 媒体文件播放地址。
+   */
+  FileUrl?: string
+  /**
+   * 媒体文件 ID。当 StorageMode 为 Permanent 时有效。
+   */
+  FileId?: string
+  /**
+   * 输出视频的元信息。当 StorageMode 为 Permanent 时有效。
+   */
+  MetaData?: MediaMetaData
 }
 
 /**
@@ -18721,6 +19115,48 @@ export interface RebuildMediaOutputConfig {
 }
 
 /**
+ * 图片异步处理任务信息
+ */
+export interface ProcessImageAsync {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * 图片异步处理任务的输入信息。
+   */
+  Input?: ProcessImageAsyncInput
+  /**
+   * 图片异步处理任务的输出信息。
+   */
+  Output?: ProcessImageAsyncOutput
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+}
+
+/**
  * 涉及令人不适宜的信息
  */
 export interface AiReviewPoliticalTaskOutput {
@@ -18822,6 +19258,10 @@ export interface ChangeClothesConfig {
    * 输入需要更换的**衣物**图片列表。目前最大支持4张图片。
    */
   ClothesFileInfos?: Array<SceneAigcImageTaskInputFileInfo>
+  /**
+   * AI换衣的提示词。
+   */
+  Prompt?: string
 }
 
 /**
@@ -18907,6 +19347,73 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
 默认值：black 。
    */
   FillType?: string
+}
+
+/**
+ * CreateProcessImageAsyncTemplate请求参数结构体
+ */
+export interface CreateProcessImageAsyncTemplateRequest {
+  /**
+   * 图片异步处理任务配置。
+   */
+  ProcessImageConfigure: ProcessImageAsyncTask
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 图片异步处理模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 图片异步处理模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+}
+
+/**
+ * CreateCLSLogset请求参数结构体
+ */
+export interface CreateCLSLogsetRequest {
+  /**
+   * 日志集所属的地域，取值有： <li>ap-guangzhou：广州；</li> <li>ap-beijing：北京；</li> <li>ap-chengdu：成都；</li> <li>ap-chongqing：重庆；</li> <li>ap-nanjing：南京；</li> <li>ap-shanghai：上海；</li> <li>ap-singapore：新加坡。</li>
+   */
+  CLSRegion: string
+}
+
+/**
+ * ExtractTraceWatermark请求参数结构体
+ */
+export interface ExtractTraceWatermarkRequest {
+  /**
+   * 需要提取水印的媒体 URL。
+   */
+  Url: string
+  /**
+   * 媒体文件 ID。Url 对应的原始媒体文件 ID。
+<li><font color=red>注意</font>：此字段必填。</li>
+   */
+  FileId?: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 标识来源上下文，用于透传用户请求信息，在ExtractTraceWatermarkComplete回调和任务流状态变更回调将返回该字段值，最长 1000个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -19001,104 +19508,6 @@ export interface ProcedureTask {
 <li>TSC: 表示使用极速高清进行智能降码。</li>
    */
   OperationType?: string
-}
-
-/**
- * CreateCLSLogset请求参数结构体
- */
-export interface CreateCLSLogsetRequest {
-  /**
-   * 日志集所属的地域，取值有： <li>ap-guangzhou：广州；</li> <li>ap-beijing：北京；</li> <li>ap-chengdu：成都；</li> <li>ap-chongqing：重庆；</li> <li>ap-nanjing：南京；</li> <li>ap-shanghai：上海；</li> <li>ap-singapore：新加坡。</li>
-   */
-  CLSRegion: string
-}
-
-/**
- * ExtractTraceWatermark请求参数结构体
- */
-export interface ExtractTraceWatermarkRequest {
-  /**
-   * 需要提取水印的媒体 URL。
-   */
-  Url: string
-  /**
-   * 媒体文件 ID。Url 对应的原始媒体文件 ID。
-<li><font color=red>注意</font>：此字段必填。</li>
-   */
-  FileId?: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 标识来源上下文，用于透传用户请求信息，在ExtractTraceWatermarkComplete回调和任务流状态变更回调将返回该字段值，最长 1000个字符。
-   */
-  SessionContext?: string
-  /**
-   * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-   */
-  TasksPriority?: number
-  /**
-   * 保留字段，特殊用途时使用。
-   */
-  ExtInfo?: string
-}
-
-/**
- * 任务概要信息
- */
-export interface TaskSimpleInfo {
-  /**
-   * 任务 ID。
-   */
-  TaskId?: string
-  /**
-   * 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）、ABORTED（已终止）。
-   */
-  Status?: string
-  /**
-   * 视频 ID。
-   */
-  FileId?: string
-  /**
-   * 任务类型，取值：
-<li>Procedure：视频处理任务；</li>
-<li>EditMedia：视频编辑任务；</li>
-<li>ReduceMediaBitrate：降码率任务；</li>
-<li>WechatDistribute：微信发布任务；</li>
-<li>ReviewAudioVideo：音视频审核任务。</li>
-兼容 2017 版的任务类型：
-<li>Transcode：视频转码任务；</li>
-<li>SnapshotByTimeOffset：视频截图任务；</li>
-<li>Concat：视频拼接任务；</li>
-<li>Clip：视频剪辑任务；</li>
-<li>ImageSprites：截取雪碧图任务。</li>
-   */
-  TaskType?: string
-  /**
-   * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime?: string
-  /**
-   * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未开始，该字段为空。
-   */
-  BeginProcessTime?: string
-  /**
-   * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未完成，该字段为空。
-   */
-  FinishTime?: string
-  /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求。
-   */
-  SessionId?: string
-  /**
-   * 来源上下文，用于透传用户请求信息。
-   */
-  SessionContext?: string
 }
 
 /**
@@ -20041,6 +20450,59 @@ export interface DescribeSampleSnapshotTemplatesResponse {
 }
 
 /**
+ * 任务概要信息
+ */
+export interface TaskSimpleInfo {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）、ABORTED（已终止）。
+   */
+  Status?: string
+  /**
+   * 视频 ID。
+   */
+  FileId?: string
+  /**
+   * 任务类型，取值：
+<li>Procedure：视频处理任务；</li>
+<li>EditMedia：视频编辑任务；</li>
+<li>ReduceMediaBitrate：降码率任务；</li>
+<li>WechatDistribute：微信发布任务；</li>
+<li>ReviewAudioVideo：音视频审核任务。</li>
+兼容 2017 版的任务类型：
+<li>Transcode：视频转码任务；</li>
+<li>SnapshotByTimeOffset：视频截图任务；</li>
+<li>Concat：视频拼接任务；</li>
+<li>Clip：视频剪辑任务；</li>
+<li>ImageSprites：截取雪碧图任务。</li>
+   */
+  TaskType?: string
+  /**
+   * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未开始，该字段为空。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未完成，该字段为空。
+   */
+  FinishTime?: string
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息。
+   */
+  SessionContext?: string
+}
+
+/**
  * 音视频审核涉及令人反感的信息、涉及令人不安全的信息的嫌疑片段
  */
 export interface MediaContentReviewSegmentItem {
@@ -20409,6 +20871,25 @@ export interface DescribeTranscodeTemplatesRequest {
    * 增强场景配置，可选值： <li>common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。</li> <li>AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。</li> <li>short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。</li> <li>short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。</li> <li>game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。</li> <li>HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。</li> <li>LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。</li> <li>lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。</li>
    */
   EnhanceScenarioType?: string
+}
+
+/**
+ * 图片异步处理任务的输出媒体文件配置。
+ */
+export interface ProcessImageAsyncOutputConfig {
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
 }
 
 /**
@@ -20797,19 +21278,17 @@ export interface CreateAnimatedGraphicsTemplateRequest {
 }
 
 /**
- * 智能按帧标签任务控制参数
+ * 获取文件属性任务输出
  */
-export interface FrameTagConfigureInfo {
+export interface DescribeFileAttributesTaskOutput {
   /**
-   * 智能按帧标签任务开关，可选值：
-<li>ON：开启智能按帧标签任务；</li>
-<li>OFF：关闭智能按帧标签任务。</li>
+   * 媒体文件的 Md5 值。
    */
-  Switch: string
+  Md5?: string
   /**
-   * 截帧间隔，单位为秒，当不填时，默认截帧间隔为 1 秒，最小值为 0.5 秒。
+   * 媒体文件的 Sha1 值。
    */
-  ScreenshotInterval?: number
+  Sha1?: string
 }
 
 /**
@@ -21293,6 +21772,26 @@ export interface SplitMediaResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 图片降噪配置
+ */
+export interface ImageDenoiseConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 类型，可选值：
+<li>weak</li>
+<li>strong</li>
+默认值：weak。
+   */
+  Type?: string
 }
 
 /**
@@ -22222,6 +22721,24 @@ export interface PornImgReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * DescribeProcessImageAsyncTemplates返回参数结构体
+ */
+export interface DescribeProcessImageAsyncTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 图片异步处理模板详情列表。
+   */
+  ProcessImageAsyncTemplateSet?: Array<ProcessImageAsyncTemplateItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

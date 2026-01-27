@@ -68,12 +68,14 @@ import {
   DeleteDiskBackupsResponse,
   DeleteSnapshotsRequest,
   ModifyDisksRenewFlagResponse,
+  CopyAutoSnapshotPolicyCrossAccountResponse,
   DeleteAutoSnapshotPoliciesResponse,
   DescribeDisksResponse,
   Placement,
   DeleteSnapshotsResponse,
   ModifyDisksRenewFlagRequest,
   ModifySnapshotAttributeResponse,
+  CopyAutoSnapshotPolicyCrossAccountRequest,
   ModifyDiskAttributesRequest,
   GetSnapOverviewRequest,
   Image,
@@ -422,6 +424,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDisksResponse) => void
   ): Promise<CreateDisksResponse> {
     return this.request("CreateDisks", req, cb)
+  }
+
+  /**
+   * 针对白名单内用户实现自动快照策略的跨账号复制功能
+   */
+  async CopyAutoSnapshotPolicyCrossAccount(
+    req: CopyAutoSnapshotPolicyCrossAccountRequest,
+    cb?: (error: string, rep: CopyAutoSnapshotPolicyCrossAccountResponse) => void
+  ): Promise<CopyAutoSnapshotPolicyCrossAccountResponse> {
+    return this.request("CopyAutoSnapshotPolicyCrossAccount", req, cb)
   }
 
   /**

@@ -901,8 +901,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络更新Yaml网络策略并发布任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络更新Yaml网络策略并发布任务
+     */
   async UpdateAndPublishNetworkFirewallPolicyYamlDetail(
     req: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest,
     cb?: (error: string, rep: UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse) => void
@@ -1021,8 +1023,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络查询网络策略策略执行状态
-   */
+     * 功能已下线待三合一重构
+
+容器网络查询网络策略策略执行状态
+     */
   async DescribeNetworkFirewallPolicyStatus(
     req: DescribeNetworkFirewallPolicyStatusRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallPolicyStatusResponse) => void
@@ -1241,8 +1245,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络集群网络策略创建自动发现任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络集群网络策略创建自动发现任务
+     */
   async CreateNetworkFirewallPolicyDiscover(
     req: CreateNetworkFirewallPolicyDiscoverRequest,
     cb?: (error: string, rep: CreateNetworkFirewallPolicyDiscoverResponse) => void
@@ -1311,8 +1317,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略确认任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略确认任务
+     */
   async ConfirmNetworkFirewallPolicy(
     req: ConfirmNetworkFirewallPolicyRequest,
     cb?: (error: string, rep: ConfirmNetworkFirewallPolicyResponse) => void
@@ -1352,8 +1360,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略更新任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略更新任务
+     */
   async UpdateNetworkFirewallPolicyDetail(
     req: UpdateNetworkFirewallPolicyDetailRequest,
     cb?: (error: string, rep: UpdateNetworkFirewallPolicyDetailResponse) => void
@@ -1442,8 +1452,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络集群查看Yaml网络策略详情
-   */
+     * 功能已下线待三合一重构
+
+容器网络集群查看Yaml网络策略详情
+     */
   async DescribeNetworkFirewallPolicyYamlDetail(
     req: DescribeNetworkFirewallPolicyYamlDetailRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallPolicyYamlDetailResponse) => void
@@ -1452,8 +1464,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建检查Yaml网络策略任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建检查Yaml网络策略任务
+     */
   async CheckNetworkFirewallPolicyYaml(
     req: CheckNetworkFirewallPolicyYamlRequest,
     cb?: (error: string, rep: CheckNetworkFirewallPolicyYamlResponse) => void
@@ -1462,8 +1476,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络更新Yaml网络策略任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络更新Yaml网络策略任务
+     */
   async UpdateNetworkFirewallPolicyYamlDetail(
     req: UpdateNetworkFirewallPolicyYamlDetailRequest,
     cb?: (error: string, rep: UpdateNetworkFirewallPolicyYamlDetailResponse) => void
@@ -1472,8 +1488,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群网络空间列表
-   */
+     * 功能已下线待三合一重构
+
+查询集群网络空间列表
+     */
   async DescribeNetworkFirewallNamespaceList(
     req: DescribeNetworkFirewallNamespaceListRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallNamespaceListResponse) => void
@@ -1762,8 +1780,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络查询网络策略自动发现任务进度
-   */
+     * 功能已下线待三合一重构
+
+容器网络查询网络策略自动发现任务进度
+     */
   async DescribeNetworkFirewallPolicyDiscover(
     req: DescribeNetworkFirewallPolicyDiscoverRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallPolicyDiscoverResponse) => void
@@ -1852,8 +1872,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络集群下发刷新任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络集群下发刷新任务
+     */
   async CreateNetworkFirewallClusterRefresh(
     req?: CreateNetworkFirewallClusterRefreshRequest,
     cb?: (error: string, rep: CreateNetworkFirewallClusterRefreshResponse) => void
@@ -2023,8 +2045,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略更新并发布任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略更新并发布任务
+     */
   async UpdateAndPublishNetworkFirewallPolicyDetail(
     req: UpdateAndPublishNetworkFirewallPolicyDetailRequest,
     cb?: (error: string, rep: UpdateAndPublishNetworkFirewallPolicyDetailResponse) => void
@@ -2213,8 +2237,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建Yaml网络策略添加任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建Yaml网络策略添加任务
+     */
   async AddNetworkFirewallPolicyYamlDetail(
     req: AddNetworkFirewallPolicyYamlDetailRequest,
     cb?: (error: string, rep: AddNetworkFirewallPolicyYamlDetailResponse) => void
@@ -2383,8 +2409,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群网络策略列表
-   */
+     * 功能已下线待三合一重构
+
+查询集群网络策略列表
+     */
   async DescribeNetworkFirewallPolicyList(
     req: DescribeNetworkFirewallPolicyListRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallPolicyListResponse) => void
@@ -2524,8 +2552,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群策略列表
-   */
+     * 功能已下线待三合一重构
+
+查询集群策略列表
+     */
   async DescribeNetworkFirewallClusterList(
     req: DescribeNetworkFirewallClusterListRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallClusterListResponse) => void
@@ -2924,8 +2954,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群网络空间标签列表
-   */
+     * 功能已下线待三合一重构
+
+查询集群网络空间标签列表
+     */
   async DescribeNetworkFirewallNamespaceLabelList(
     req: DescribeNetworkFirewallNamespaceLabelListRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallNamespaceLabelListResponse) => void
@@ -2944,8 +2976,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络查询资产任务进度
-   */
+     * 功能已下线待三合一重构
+
+容器网络查询资产任务进度
+     */
   async DescribeNetworkFirewallClusterRefreshStatus(
     req: DescribeNetworkFirewallClusterRefreshStatusRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallClusterRefreshStatusResponse) => void
@@ -3074,8 +3108,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群策略审计列表
-   */
+     * 功能已下线待三合一重构
+
+查询集群策略审计列表
+     */
   async DescribeNetworkFirewallAuditRecord(
     req: DescribeNetworkFirewallAuditRecordRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallAuditRecordResponse) => void
@@ -3174,8 +3210,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络集群查看策略详情
-   */
+     * 功能已下线待三合一重构
+
+容器网络集群查看策略详情
+     */
   async DescribeNetworkFirewallPolicyDetail(
     req: DescribeNetworkFirewallPolicyDetailRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallPolicyDetailResponse) => void
@@ -3234,8 +3272,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略添加并发布任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略添加并发布任务
+     */
   async AddAndPublishNetworkFirewallPolicyDetail(
     req: AddAndPublishNetworkFirewallPolicyDetailRequest,
     cb?: (error: string, rep: AddAndPublishNetworkFirewallPolicyDetailResponse) => void
@@ -3274,8 +3314,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群网络pod标签
-   */
+     * 功能已下线待三合一重构
+
+查询集群网络pod标签
+     */
   async DescribeNetworkFirewallPodLabelsList(
     req: DescribeNetworkFirewallPodLabelsListRequest,
     cb?: (error: string, rep: DescribeNetworkFirewallPodLabelsListResponse) => void
@@ -3726,8 +3768,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建Yaml网络策略并发布任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建Yaml网络策略并发布任务
+     */
   async AddAndPublishNetworkFirewallPolicyYamlDetail(
     req: AddAndPublishNetworkFirewallPolicyYamlDetailRequest,
     cb?: (error: string, rep: AddAndPublishNetworkFirewallPolicyYamlDetailResponse) => void
@@ -3896,8 +3940,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略发布任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略发布任务
+     */
   async CreateNetworkFirewallPublish(
     req: CreateNetworkFirewallPublishRequest,
     cb?: (error: string, rep: CreateNetworkFirewallPublishResponse) => void
@@ -3906,8 +3952,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略撤销任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略撤销任务
+     */
   async CreateNetworkFirewallUndoPublish(
     req: CreateNetworkFirewallUndoPublishRequest,
     cb?: (error: string, rep: CreateNetworkFirewallUndoPublishResponse) => void
@@ -4026,8 +4074,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略删除任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略删除任务
+     */
   async DeleteNetworkFirewallPolicyDetail(
     req: DeleteNetworkFirewallPolicyDetailRequest,
     cb?: (error: string, rep: DeleteNetworkFirewallPolicyDetailResponse) => void
@@ -4056,8 +4106,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器网络创建网络策略添加任务
-   */
+     * 功能已下线待三合一重构
+
+容器网络创建网络策略添加任务
+     */
   async AddNetworkFirewallPolicyDetail(
     req: AddNetworkFirewallPolicyDetailRequest,
     cb?: (error: string, rep: AddNetworkFirewallPolicyDetailResponse) => void

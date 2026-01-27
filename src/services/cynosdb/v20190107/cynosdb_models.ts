@@ -16,6 +16,20 @@
  */
 
 /**
+ * DeleteClusterSaveBackup返回参数结构体
+ */
+export interface DeleteClusterSaveBackupResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpgradeProxyVersion返回参数结构体
  */
 export interface UpgradeProxyVersionResponse {
@@ -845,6 +859,20 @@ export interface DescribeBackupDownloadUserRestrictionRequest {
 }
 
 /**
+ * 备份文件所在地域及ID
+ */
+export interface BackupRegionAndIds {
+  /**
+   * 备份地域
+   */
+  BackupRegion?: string
+  /**
+   * 备份ID
+   */
+  BackupId?: number
+}
+
+/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -1495,6 +1523,24 @@ export interface AddInstancesResponse {
    * 大订单号
    */
   BigDealIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSaveBackupClusters返回参数结构体
+ */
+export interface DescribeSaveBackupClustersResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 遗留备份信息
+   */
+  SaveBackupClusterInfos?: Array<SaveBackupClusterInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2283,6 +2329,40 @@ export interface OpenAuditServiceResponse {
 }
 
 /**
+ * 快照备份设置
+ */
+export interface SnapshotBackupConfig {
+  /**
+   * 系统自动时间
+   */
+  BackupCustomAutoTime?: boolean
+  /**
+   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeBeg?: number
+  /**
+   * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeEnd?: number
+  /**
+   * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周日到周六的备份方式，full-全量备份，increment-增量备份
+   */
+  BackupWeekDays?: Array<string>
+  /**
+   * 间隔时间
+   */
+  BackupIntervalTime?: number
+  /**
+   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000
+   */
+  ReserveDuration?: number
+  /**
+   * 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
+   */
+  BackupTriggerStrategy?: string
+}
+
+/**
  * DescribeChangedParamsAfterUpgrade返回参数结构体
  */
 export interface DescribeChangedParamsAfterUpgradeResponse {
@@ -2985,6 +3065,36 @@ export interface InquirePriceMultiSpecResponse {
 }
 
 /**
+ * DescribeRedoLogs请求参数结构体
+ */
+export interface DescribeRedoLogsRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 每页条数
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * redolog文件名
+   */
+  FileNames?: Array<string>
+}
+
+/**
  * ModifyMaintainPeriodConfig返回参数结构体
  */
 export interface ModifyMaintainPeriodConfigResponse {
@@ -3496,6 +3606,24 @@ export interface DescribeProxiesRequest {
 }
 
 /**
+ * ModifySnapBackupCrossRegionConfig请求参数结构体
+ */
+export interface ModifySnapBackupCrossRegionConfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 是否开启跨地域快照备份ON/OFF
+   */
+  CrossRegionsEnable?: string
+  /**
+   * 快照备份所跨地域
+   */
+  CrossRegions?: Array<string>
+}
+
+/**
  * 修改的实例参数信息
  */
 export interface ModifyParamItem {
@@ -3757,6 +3885,24 @@ export interface DeleteParamTemplateRequest {
  * RevokeAccountPrivileges返回参数结构体
  */
 export interface RevokeAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRedoLogs返回参数结构体
+ */
+export interface DescribeRedoLogsResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * redo日志信息
+   */
+  RedoLogs?: Array<RedoLogItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4415,6 +4561,11 @@ export interface DescribeBackupConfigResponse {
    */
   LogicBackupConfig?: LogicBackupConfigInfo
   /**
+   * 二级快照备份配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SnapshotSecondaryBackupConfig?: BackupConfigInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4474,6 +4625,52 @@ export interface ProxyConfig {
    * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
    */
   ProxyZones?: Array<ProxyZone>
+}
+
+/**
+ * 遗留备份列表
+ */
+export interface SaveBackupClusterInfo {
+  /**
+   * 遗照备份id
+   */
+  BackupId?: number
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 备份时间
+   */
+  BackupTime?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * Db类型(NORMAL, SERVERLESS)
+   */
+  DbMode?: string
+  /**
+   * 集群状态
+   */
+  ClusterStatus?: string
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
 }
 
 /**
@@ -5152,6 +5349,20 @@ export interface SaleZone {
 }
 
 /**
+ * ModifySnapBackupCrossRegionConfig返回参数结构体
+ */
+export interface ModifySnapBackupCrossRegionConfigResponse {
+  /**
+   * 任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SwitchProxyVpc返回参数结构体
  */
 export interface SwitchProxyVpcResponse {
@@ -5396,6 +5607,10 @@ export interface IsolateClusterRequest {
    * 实例退还原因补充
    */
   IsolateReason?: string
+  /**
+   * 保留备份,true-保留（会产生费用）
+   */
+  SaveBackup?: boolean
 }
 
 /**
@@ -6083,17 +6298,25 @@ export interface RollBackClusterRequest {
 }
 
 /**
- * 系统支持的模块
+ * DescribeAuditLogFiles请求参数结构体
  */
-export interface Module {
+export interface DescribeAuditLogFilesRequest {
   /**
-   * 是否支持，可选值:yes,no
+   * 实例ID
    */
-  IsDisable: string
+  InstanceId: string
   /**
-   * 模块名
+   * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
    */
-  ModuleName: string
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
+  /**
+   * 审计日志文件名。
+   */
+  FileName?: string
 }
 
 /**
@@ -6147,6 +6370,10 @@ export interface ModifyBackupConfigRequest {
    * 是否删除自动逻辑备份
    */
   DeleteAutoLogicBackup?: boolean
+  /**
+   * 二级快照备份参数
+   */
+  SnapshotSecondaryBackupConfig?: SnapshotBackupConfig
 }
 
 /**
@@ -6192,168 +6419,21 @@ export interface RemoveClusterSlaveZoneRequest {
 }
 
 /**
- * 任务信息
+ * ModifyResourcePackagesDeductionPriority请求参数结构体
  */
-export interface BizTaskInfo {
+export interface ModifyResourcePackagesDeductionPriorityRequest {
   /**
-   * 任务id
+   * 需要修改优先级的资源包类型，CCU：计算资源包，DISK：存储资源包
    */
-  ID?: number
+  PackageType: string
   /**
-   * 用户appid
+   * 修改后的抵扣优先级对于哪个cynos资源生效
    */
-  AppId?: number
+  ClusterId: string
   /**
-   * 集群id
+   * 资源包抵扣优先级
    */
-  ClusterId?: string
-  /**
-   * 地域
-   */
-  Region?: string
-  /**
-   * 任务创建时间
-   */
-  CreateTime?: string
-  /**
-   * 延迟执行时间
-   */
-  DelayTime?: string
-  /**
-   * 任务失败信息
-   */
-  ErrMsg?: string
-  /**
-   * 异步任务流id
-   */
-  FlowId?: number
-  /**
-   * 任务输入信息
-   */
-  Input?: string
-  /**
-   * 实例组id
-   * @deprecated
-   */
-  InstanceGrpId?: string
-  /**
-   * 实例组id
-   */
-  InstanceGroupId?: string
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 任务操作对象id
-   */
-  ObjectId?: string
-  /**
-   * 任务操作对象类型
-   */
-  ObjectType?: string
-  /**
-   * 操作者uin
-   */
-  Operator?: string
-  /**
-   * 任务输出信息
-   */
-  Output?: string
-  /**
-   * 任务状态
-   */
-  Status?: string
-  /**
-   * 任务类型
-   */
-  TaskType?: string
-  /**
-   * 触发本任务的父任务ID
-   */
-  TriggerTaskId?: number
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 任务开始时间
-   */
-  StartTime?: string
-  /**
-   * 任务结束时间
-   */
-  EndTime?: string
-  /**
-   * 集群名称
-   */
-  ClusterName?: string
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-  /**
-   * 任务进度
-   */
-  Process?: number
-  /**
-   * 修改参数任务信息
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  ModifyParamsData?: Array<ModifyParamsData>
-  /**
-   * 创建集群任务信息
-   */
-  CreateClustersData?: CreateClustersData
-  /**
-   * 集群回档任务信息
-   */
-  RollbackData?: RollbackData
-  /**
-   * 实例变配任务信息
-   */
-  ModifyInstanceData?: ModifyInstanceData
-  /**
-   * 手动备份任务信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ManualBackupData?: ManualBackupData
-  /**
-   * 修改内核版本任务信息
-   */
-  ModifyDbVersionData?: ModifyDbVersionData
-  /**
-   * 集群可用区信息
-   */
-  ClusterSlaveData?: ClusterSlaveData
-  /**
-   * 转换集群日志
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SwitchClusterLogBin?: SwitchClusterLogBin
-  /**
-   * 修改实例参数数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyInstanceParamsData?: BizTaskModifyParamsData
-  /**
-   * 维护时间
-   */
-  TaskMaintainInfo?: TaskMaintainInfo
-  /**
-   * 实例日志投递信息
-
-   */
-  InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>
-  /**
-   * 任务进度信息
-   */
-  TaskProgressInfo?: TaskProgressInfo
-  /**
-   * 全球数据库网络任务
-   */
-  GdnTaskInfo?: GdnTaskInfo
+  DeductionPriorities: Array<PackagePriority>
 }
 
 /**
@@ -7351,21 +7431,168 @@ export interface InquirePriceModifyRequest {
 }
 
 /**
- * ModifyResourcePackagesDeductionPriority请求参数结构体
+ * 任务信息
  */
-export interface ModifyResourcePackagesDeductionPriorityRequest {
+export interface BizTaskInfo {
   /**
-   * 需要修改优先级的资源包类型，CCU：计算资源包，DISK：存储资源包
+   * 任务id
    */
-  PackageType: string
+  ID?: number
   /**
-   * 修改后的抵扣优先级对于哪个cynos资源生效
+   * 用户appid
    */
-  ClusterId: string
+  AppId?: number
   /**
-   * 资源包抵扣优先级
+   * 集群id
    */
-  DeductionPriorities: Array<PackagePriority>
+  ClusterId?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 延迟执行时间
+   */
+  DelayTime?: string
+  /**
+   * 任务失败信息
+   */
+  ErrMsg?: string
+  /**
+   * 异步任务流id
+   */
+  FlowId?: number
+  /**
+   * 任务输入信息
+   */
+  Input?: string
+  /**
+   * 实例组id
+   * @deprecated
+   */
+  InstanceGrpId?: string
+  /**
+   * 实例组id
+   */
+  InstanceGroupId?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 任务操作对象id
+   */
+  ObjectId?: string
+  /**
+   * 任务操作对象类型
+   */
+  ObjectType?: string
+  /**
+   * 操作者uin
+   */
+  Operator?: string
+  /**
+   * 任务输出信息
+   */
+  Output?: string
+  /**
+   * 任务状态
+   */
+  Status?: string
+  /**
+   * 任务类型
+   */
+  TaskType?: string
+  /**
+   * 触发本任务的父任务ID
+   */
+  TriggerTaskId?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 任务开始时间
+   */
+  StartTime?: string
+  /**
+   * 任务结束时间
+   */
+  EndTime?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 任务进度
+   */
+  Process?: number
+  /**
+   * 修改参数任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ModifyParamsData?: Array<ModifyParamsData>
+  /**
+   * 创建集群任务信息
+   */
+  CreateClustersData?: CreateClustersData
+  /**
+   * 集群回档任务信息
+   */
+  RollbackData?: RollbackData
+  /**
+   * 实例变配任务信息
+   */
+  ModifyInstanceData?: ModifyInstanceData
+  /**
+   * 手动备份任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ManualBackupData?: ManualBackupData
+  /**
+   * 修改内核版本任务信息
+   */
+  ModifyDbVersionData?: ModifyDbVersionData
+  /**
+   * 集群可用区信息
+   */
+  ClusterSlaveData?: ClusterSlaveData
+  /**
+   * 转换集群日志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchClusterLogBin?: SwitchClusterLogBin
+  /**
+   * 修改实例参数数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyInstanceParamsData?: BizTaskModifyParamsData
+  /**
+   * 维护时间
+   */
+  TaskMaintainInfo?: TaskMaintainInfo
+  /**
+   * 实例日志投递信息
+
+   */
+  InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>
+  /**
+   * 任务进度信息
+   */
+  TaskProgressInfo?: TaskProgressInfo
+  /**
+   * 全球数据库网络任务
+   */
+  GdnTaskInfo?: GdnTaskInfo
 }
 
 /**
@@ -7735,6 +7962,10 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
    */
   AutoArchive?: string
+  /**
+   * 是否从保存备份中恢复
+   */
+  FromSaveBackup?: boolean
 }
 
 /**
@@ -7939,6 +8170,24 @@ export interface DescribeResourcePackageSaleSpecResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模糊查询过滤器
+ */
+export interface QuerySimpleFilter {
+  /**
+   * 字段名称
+   */
+  Names?: Array<string>
+  /**
+   * 字段值
+   */
+  Values?: Array<string>
+  /**
+   * 模糊匹配，true-是，false否
+   */
+  ExactMatch?: boolean
 }
 
 /**
@@ -8538,6 +8787,44 @@ export interface CreateBackupRequest {
 }
 
 /**
+ * redo日志详情
+ */
+export interface RedoLogItem {
+  /**
+   * 文件名
+   */
+  FileName?: string
+  /**
+   * 文件大小
+   */
+  FileSize?: number
+  /**
+   * 备份时间
+   */
+  BackupTime?: string
+  /**
+   * redoLogId
+   */
+  RedoLogId?: number
+  /**
+   * 跨地域信息
+   */
+  RedoCrossRegions?: Array<BackupRegionAndIds>
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 完成时间
+   */
+  FinishTime?: string
+}
+
+/**
  * CreateCLSDelivery请求参数结构体
  */
 export interface CreateCLSDeliveryRequest {
@@ -9069,6 +9356,10 @@ pausing
    * 归档进度，百分比。
    */
   ArchiveProgress?: number
+  /**
+   * 是否开启透明加密
+   */
+  IsOpenTDE?: boolean
 }
 
 /**
@@ -9320,6 +9611,24 @@ export interface InputAccount {
    * 主机，默认‘%’
    */
   Host?: string
+}
+
+/**
+ * DescribeSaveBackupClusters请求参数结构体
+ */
+export interface DescribeSaveBackupClustersRequest {
+  /**
+   * 每页条数
+   */
+  Limit: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 检索条件
+   */
+  Filters?: Array<QuerySimpleFilter>
 }
 
 /**
@@ -10635,6 +10944,52 @@ export interface RenewClustersResponse {
 }
 
 /**
+ * 备份设置
+ */
+export interface BackupConfigInfo {
+  /**
+   * 系统自动时间
+   */
+  BackupCustomAutoTime?: boolean
+  /**
+   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeBeg?: number
+  /**
+   * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   */
+  BackupTimeEnd?: number
+  /**
+   * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周日到周六的备份方式，full-全量备份，increment-增量备份
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupWeekDays?: Array<string>
+  /**
+   * 间隔时间
+   */
+  BackupIntervalTime?: number
+  /**
+   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000
+   */
+  ReserveDuration?: number
+  /**
+   * 跨地域备份开启
+yes-开启
+no-关闭
+   */
+  CrossRegionsEnable?: string
+  /**
+   * 跨地域备份地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CrossRegions?: Array<string>
+  /**
+   * 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
+   */
+  BackupTriggerStrategy?: string
+}
+
+/**
  * 回档表信息
  */
 export interface RollbackTableInfo {
@@ -11114,6 +11469,20 @@ DISK：存储资源包
 }
 
 /**
+ * DeleteClusterSaveBackup请求参数结构体
+ */
+export interface DeleteClusterSaveBackupRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 保留备份文件ID，推荐使用
+   */
+  SaveBackupId?: number
+}
+
+/**
  * DescribeSlaveZones请求参数结构体
  */
 export interface DescribeSlaveZonesRequest {
@@ -11467,6 +11836,10 @@ export interface IsolateInstanceRequest {
    * 实例退还原因补充
    */
   IsolateReason?: string
+  /**
+   * 保留备份
+   */
+  SaveBackup?: boolean
 }
 
 /**
@@ -11548,25 +11921,17 @@ export interface DescribeBinlogConfigResponse {
 }
 
 /**
- * DescribeAuditLogFiles请求参数结构体
+ * 系统支持的模块
  */
-export interface DescribeAuditLogFilesRequest {
+export interface Module {
   /**
-   * 实例ID
+   * 是否支持，可选值:yes,no
    */
-  InstanceId: string
+  IsDisable: string
   /**
-   * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
+   * 模块名
    */
-  Limit?: number
-  /**
-   * 分页偏移量。
-   */
-  Offset?: number
-  /**
-   * 审计日志文件名。
-   */
-  FileName?: string
+  ModuleName: string
 }
 
 /**
