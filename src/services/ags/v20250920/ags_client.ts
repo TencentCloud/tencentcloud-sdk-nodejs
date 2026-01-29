@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  PauseSandboxInstanceResponse,
   CosStorageSource,
   StartSandboxInstanceRequest,
   SandboxInstance,
@@ -28,6 +29,7 @@ import {
   CreateSandboxToolRequest,
   HttpGetAction,
   DescribePreCacheImageTaskResponse,
+  ResumeSandboxInstanceRequest,
   DeleteAPIKeyResponse,
   APIKeyInfo,
   UpdateSandboxInstanceResponse,
@@ -46,6 +48,7 @@ import {
   CustomConfiguration,
   ImageStorageSource,
   AcquireSandboxInstanceTokenRequest,
+  PauseSandboxInstanceRequest,
   DescribeAPIKeyListResponse,
   CreatePreCacheImageTaskResponse,
   DescribeSandboxInstanceListRequest,
@@ -61,6 +64,7 @@ import {
   CreatePreCacheImageTaskRequest,
   Tag,
   UpdateSandboxToolRequest,
+  ResumeSandboxInstanceResponse,
   StorageMount,
   EnvVar,
   DescribeSandboxInstanceListResponse,
@@ -128,6 +132,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复沙箱实例
+   */
+  async ResumeSandboxInstance(
+    req: ResumeSandboxInstanceRequest,
+    cb?: (error: string, rep: ResumeSandboxInstanceResponse) => void
+  ): Promise<ResumeSandboxInstanceResponse> {
+    return this.request("ResumeSandboxInstance", req, cb)
+  }
+
+  /**
    * 查询沙箱工具列表
    */
   async DescribeSandboxToolList(
@@ -175,6 +189,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSandboxToolResponse) => void
   ): Promise<DeleteSandboxToolResponse> {
     return this.request("DeleteSandboxTool", req, cb)
+  }
+
+  /**
+   * 暂停沙箱实例
+   */
+  async PauseSandboxInstance(
+    req: PauseSandboxInstanceRequest,
+    cb?: (error: string, rep: PauseSandboxInstanceResponse) => void
+  ): Promise<PauseSandboxInstanceResponse> {
+    return this.request("PauseSandboxInstance", req, cb)
   }
 
   /**

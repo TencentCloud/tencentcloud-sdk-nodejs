@@ -478,16 +478,6 @@ it("iotexplorer.v20190423.DeleteLoRaGateway", async function () {
     }
 })
 
-it("iotexplorer.v20190423.CancelAssignTWeCallLicense", async function () {
-    try {
-       const data = await client.CancelAssignTWeCallLicense({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iotexplorer.v20190423.CreateStudioProduct", async function () {
     try {
        const data = await client.CreateStudioProduct({})
@@ -1211,6 +1201,16 @@ it("iotexplorer.v20190423.ModifyProject", async function () {
 it("iotexplorer.v20190423.BindProducts", async function () {
     try {
        const data = await client.BindProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateDeviceSDPAnswer", async function () {
+    try {
+       const data = await client.CreateDeviceSDPAnswer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

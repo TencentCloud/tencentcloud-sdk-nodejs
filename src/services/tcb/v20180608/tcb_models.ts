@@ -263,20 +263,6 @@ export interface DeleteCloudBaseRunServerVersionResponse {
 }
 
 /**
- * SearchClsLog返回参数结构体
- */
-export interface SearchClsLogResponse {
-  /**
-   * 日志内容结果
-   */
-  LogResults?: LogResObject
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyClsTopic返回参数结构体
  */
 export interface ModifyClsTopicResponse {
@@ -284,6 +270,24 @@ export interface ModifyClsTopicResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据库连接器实例信息
+ */
+export interface DbInstance {
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * MySQL 连接器实例 ID；`"default"` 或为空表示使用 TCB 环境的默认连接器
+   */
+  InstanceId?: string
+  /**
+   * 数据库名；为空时使用连接器配置的默认数据库名
+   */
+  Schema?: string
 }
 
 /**
@@ -499,28 +503,6 @@ export interface BanConfig {
    * 地域黑名单（国家英文名）
    */
   CountryBlackList?: Array<string>
-}
-
-/**
- * CLS日志结果
- */
-export interface LogResObject {
-  /**
-   * 获取更多检索结果的游标
-   */
-  Context?: string
-  /**
-   * 搜索结果是否已经全部返回
-   */
-  ListOver?: boolean
-  /**
-   * 日志内容信息
-   */
-  Results?: Array<LogObject>
-  /**
-   * 日志聚合结果
-   */
-  AnalysisRecords?: Array<string>
 }
 
 /**
@@ -1968,36 +1950,6 @@ export interface CreateCloudBaseRunResourceResponse {
 }
 
 /**
- * CLS日志单条信息
- */
-export interface LogObject {
-  /**
-   * 日志属于的 topic ID
-   */
-  TopicId?: string
-  /**
-   * 日志主题的名字
-   */
-  TopicName?: string
-  /**
-   * 日志时间
-   */
-  Timestamp?: string
-  /**
-   * 日志内容
-   */
-  Content?: string
-  /**
-   * 采集路径
-   */
-  FileName?: string
-  /**
-   * 日志来源设备
-   */
-  Source?: string
-}
-
-/**
  * DestroyStaticStore返回参数结构体
  */
 export interface DestroyStaticStoreResponse {
@@ -2671,6 +2623,28 @@ export interface CreateCloudBaseRunServerVersionRequest {
    * 自动扩缩容策略组
    */
   PolicyDetail?: Array<HpaPolicy>
+}
+
+/**
+ * RunSql请求参数结构体
+ */
+export interface RunSqlRequest {
+  /**
+   * 要执行的SQL语句
+   */
+  Sql: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 数据库连接器实例信息
+   */
+  DbInstance?: DbInstance
+  /**
+   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
+   */
+  ReadOnly?: boolean
 }
 
 /**
@@ -4278,6 +4252,28 @@ export interface AuthDomain {
 }
 
 /**
+ * RunSql返回参数结构体
+ */
+export interface RunSqlResponse {
+  /**
+   * 查询结果行，每个元素为 JSON 字符串
+   */
+  Items?: Array<string>
+  /**
+   * 列元数据信息，每个元素为 JSON 字符串，字段包含 `name/databaseType/nullable/length/precision/scale`
+   */
+  Infos?: Array<string>
+  /**
+   * 受影响的行数（INSERT/UPDATE/DELETE 等语句）
+   */
+  RowsAffected?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudBaseProjectLatestVersionList请求参数结构体
  */
 export interface DescribeCloudBaseProjectLatestVersionListRequest {
@@ -4670,44 +4666,6 @@ export interface DescribeCloudBaseBuildServiceRequest {
    * 文件后缀
    */
   Suffix?: string
-}
-
-/**
- * SearchClsLog请求参数结构体
- */
-export interface SearchClsLogRequest {
-  /**
-   * 环境唯一ID
-   */
-  EnvId: string
-  /**
-   * 查询起始时间条件
-   */
-  StartTime: string
-  /**
-   * 查询结束时间条件
-   */
-  EndTime: string
-  /**
-   * 查询语句，详情参考 https://cloud.tencent.com/document/product/614/47044
-   */
-  QueryString: string
-  /**
-   * 单次要返回的日志条数，单次返回的最大条数为100
-   */
-  Limit: number
-  /**
-   * 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围
-   */
-  Context?: string
-  /**
-   * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
-   */
-  Sort?: string
-  /**
-   * 是否使用Lucene语法，默认为false
-   */
-  UseLucene?: boolean
 }
 
 /**

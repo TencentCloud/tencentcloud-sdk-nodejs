@@ -26,8 +26,8 @@ import {
   PostPaidEnvDeductInfo,
   DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
-  SearchClsLogResponse,
   ModifyClsTopicResponse,
+  DbInstance,
   EditAuthConfigResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
@@ -38,7 +38,6 @@ import {
   DescribeSpecialCostItemsRequest,
   DescribeCloudBaseRunVersionRequest,
   BanConfig,
-  LogResObject,
   CloudRunServiceSimpleVersionSnapshot,
   DestroyStaticStoreRequest,
   ReplaceActivityRecordResponse,
@@ -96,7 +95,6 @@ import {
   DescribeBillingInfoRequest,
   HpaPolicy,
   CreateCloudBaseRunResourceResponse,
-  LogObject,
   DestroyStaticStoreResponse,
   BindEnvGatewayRequest,
   ModifyDatabaseACLResponse,
@@ -118,6 +116,7 @@ import {
   DescribeActivityRecordRequest,
   DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
+  RunSqlRequest,
   CbrRepoInfo,
   DescribeBaasPackageListResponse,
   ReplaceActivityRecordRequest,
@@ -177,6 +176,7 @@ import {
   ModifyGatewayVersionTrafficResponse,
   ActivityRecordItem,
   AuthDomain,
+  RunSqlResponse,
   DescribeCloudBaseProjectLatestVersionListRequest,
   FrequencyLimitConfig,
   DescribeHostingDomainTaskResponse,
@@ -185,7 +185,6 @@ import {
   DescribeCloudBaseRunVersionResponse,
   DescribeCloudBaseRunResourceForExtendRequest,
   DescribeCloudBaseBuildServiceRequest,
-  SearchClsLogRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
   DescribeUserActivityInfoRequest,
@@ -259,6 +258,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClsTopicResponse) => void
   ): Promise<ModifyClsTopicResponse> {
     return this.request("ModifyClsTopic", req, cb)
+  }
+
+  /**
+   * 执行SQL语句
+   */
+  async RunSql(
+    req: RunSqlRequest,
+    cb?: (error: string, rep: RunSqlResponse) => void
+  ): Promise<RunSqlResponse> {
+    return this.request("RunSql", req, cb)
   }
 
   /**
@@ -543,16 +552,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudBaseRunServerFlowConfResponse) => void
   ): Promise<ModifyCloudBaseRunServerFlowConfResponse> {
     return this.request("ModifyCloudBaseRunServerFlowConf", req, cb)
-  }
-
-  /**
-   * 搜索CLS日志，TCB角色密钥访问
-   */
-  async SearchClsLog(
-    req: SearchClsLogRequest,
-    cb?: (error: string, rep: SearchClsLogResponse) => void
-  ): Promise<SearchClsLogResponse> {
-    return this.request("SearchClsLog", req, cb)
   }
 
   /**

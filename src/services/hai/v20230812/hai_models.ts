@@ -547,6 +547,16 @@ export interface DescribeInstancesResponse {
 }
 
 /**
+ * UpdateServiceConfigs返回参数结构体
+ */
+export interface UpdateServiceConfigsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了操作系统所在块设备即系统盘的信息
  */
 export interface SystemDisk {
@@ -562,6 +572,20 @@ export interface SystemDisk {
    * 系统盘分区盘符
    */
   DiskName?: string
+}
+
+/**
+ * UpdateServiceConfigs请求参数结构体
+ */
+export interface UpdateServiceConfigsRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId: string
+  /**
+   * 期望副本数
+   */
+  TargetReplicas?: number
 }
 
 /**

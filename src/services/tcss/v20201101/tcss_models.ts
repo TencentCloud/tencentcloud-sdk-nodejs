@@ -2313,6 +2313,23 @@ CT_TKE_SERVERLESS:TKE Serverless集群;
    * cpu
    */
   CpuLimit?: number
+  /**
+   * 集群审计开关状态：
+已关闭Closed/关闭中Closing/关闭失败CloseFailed/已开启Opened/开启中Opening/开启失败OpenFailed
+   */
+  ClusterAuditStatus?: string
+  /**
+   * 接入状态:
+未接入: AccessedNone
+已防护: AccessedDefended
+未防护: AccessedInstalled
+部分防护: AccessedPartialDefence
+接入异常: AccessedException
+卸载异常: AccessedUninstallException
+接入中: AccessedInstalling
+卸载中: AccessedUninstalling
+   */
+  AccessedStatus?: string
 }
 
 /**

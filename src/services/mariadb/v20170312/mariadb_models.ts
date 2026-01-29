@@ -1777,257 +1777,257 @@ export interface ResetAccountPasswordResponse {
  */
 export interface DescribeDBInstanceDetailResponse {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   Status?: number
   /**
-   * 实例目前运行状态描述
+   * <p>实例目前运行状态描述</p>
    */
   StatusDesc?: string
   /**
-   * 内网 IP 地址
+   * <p>内网 IP 地址</p>
    */
   Vip?: string
   /**
-   * 内网端口
+   * <p>内网端口</p>
    */
   Vport?: number
   /**
-   * 是否临时实例，0为否，非0为是
+   * <p>是否临时实例，0为否，非0为是</p>
    */
   IsTmp?: number
   /**
-   * 节点数，2为一主一从，3为一主二从
+   * <p>节点数，2为一主一从，3为一主二从</p>
    */
   NodeCount?: number
   /**
-   * 实例所在地域名称，如 ap-shanghai
+   * <p>实例所在地域名称，如 ap-shanghai</p>
    */
   Region?: string
   /**
-   * 实例所在可用区名称，如 ap-shanghai-1
+   * <p>实例所在可用区名称，如 ap-shanghai-2</p>
    */
   Zone?: string
   /**
-   * 字符串型的私有网络Id
+   * <p>字符串型的私有网络Id</p>
    */
   VpcId?: string
   /**
-   * 字符串型的私有网络子网Id
+   * <p>字符串型的私有网络子网Id</p>
    */
   SubnetId?: string
   /**
-   * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
+   * <p>外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中</p>
    */
   WanStatus?: number
   /**
-   * 外网访问的域名，公网可解析
+   * <p>外网访问的域名，公网可解析</p>
    */
   WanDomain?: string
   /**
-   * 外网 IP 地址，公网可访问
+   * <p>外网 IP 地址，公网可访问</p>
    */
   WanVip?: string
   /**
-   * 外网端口
+   * <p>外网端口</p>
    */
   WanPort?: number
   /**
-   * 实例所属项目 Id
+   * <p>实例所属项目 Id</p>
    */
   ProjectId?: number
   /**
-   * TDSQL 版本信息
+   * <p>TDSQL 版本信息</p>
    */
   TdsqlVersion?: string
   /**
-   * 实例内存大小，单位 GB
+   * <p>实例内存大小，单位 GB</p>
    */
   Memory?: number
   /**
-   * 实例存储大小，单位 GB
+   * <p>实例存储大小，单位 GB</p>
    */
   Storage?: number
   /**
-   * 主可用区，如 ap-shanghai-1
+   * <p>主可用区，如 ap-shanghai-2</p>
    */
   MasterZone?: string
   /**
-   * 从可用区列表，如 [ap-shanghai-2]
+   * <p>从可用区列表，如 [ap-shanghai-2]</p>
    */
   SlaveZones?: Array<string>
   /**
-   * 自动续费标志：0 否，1 是
+   * <p>自动续费标志：0 否，1 是</p>
    */
   AutoRenewFlag?: number
   /**
-   * 独享集群Id，普通实例为空
+   * <p>独享集群Id，普通实例为空</p>
    */
   ExclusterId?: string
   /**
-   * 付费模式：prepaid 表示预付费
+   * <p>付费模式：prepaid 表示预付费</p>
    */
   PayMode?: string
   /**
-   * 实例创建时间，格式为 2006-01-02 15:04:05
+   * <p>实例创建时间，格式为 2006-01-02 15:04:05</p>
    */
   CreateTime?: string
   /**
-   * 实例是否支持审计
+   * <p>实例是否支持审计</p>
    */
   IsAuditSupported?: boolean
   /**
-   * 实例到期时间，格式为 2006-01-02 15:04:05
+   * <p>实例到期时间，格式为 2006-01-02 15:04:05</p>
    */
   PeriodEndTime?: string
   /**
-   * 机型信息
+   * <p>机型信息</p>
    */
   Machine?: string
   /**
-   * 存储空间使用率
+   * <p>存储空间使用率</p>
    */
   StorageUsage?: string
   /**
-   * 日志存储空间大小，单位 GB
+   * <p>日志存储空间大小，单位 GB</p>
    */
   LogStorage?: number
   /**
-   * 是否支持数据加密。1-支持；0-不支持
+   * <p>是否支持数据加密。1-支持；0-不支持</p>
    */
   IsEncryptSupported?: number
   /**
-   * 内网IPv6
+   * <p>内网IPv6</p>
    */
   Vip6?: string
   /**
-   * 实例Cpu核数
+   * <p>实例Cpu核数</p>
    */
   Cpu?: number
   /**
-   * 产品类型ID
+   * <p>产品类型ID</p>
    */
   Pid?: number
   /**
-   * 最大QPS
+   * <p>最大QPS</p>
    */
   Qps?: number
   /**
-   * 是否支持IPv6
+   * <p>是否支持IPv6</p>
    */
   Ipv6Flag?: number
   /**
-   * 外网IPv6地址，公网可访问
+   * <p>外网IPv6地址，公网可访问</p>
    */
   WanVipv6?: string
   /**
-   * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中
+   * <p>外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中</p>
    */
   WanStatusIpv6?: number
   /**
-   * 外网IPv6端口
+   * <p>外网IPv6端口</p>
    */
   WanPortIpv6?: number
   /**
-   * 数据库引擎
+   * <p>数据库引擎</p>
    */
   DbEngine?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   ResourceTags?: Array<ResourceTag>
   /**
-   * DCN标志，0-无，1-主实例，2-灾备实例
+   * <p>DCN标志，0-无，1-主实例，2-灾备实例</p>
    */
   DcnFlag?: number
   /**
-   * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   * <p>DCN状态，0-无，1-创建中，2-同步中，3-已断开</p>
    */
   DcnStatus?: number
   /**
-   * DCN灾备实例数
+   * <p>DCN灾备实例数</p>
    */
   DcnDstNum?: number
   /**
-   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   * <p>1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）</p>
    */
   InstanceType?: number
   /**
-   * 实例的各个DB节点信息
+   * <p>实例的各个DB节点信息</p>
    */
   NodesInfo?: Array<NodeInfo>
   /**
-   * 实例是否支持设置用户连接数限制，内核为10.1暂不支持。
+   * <p>实例是否支持设置用户连接数限制，内核为10.1暂不支持。</p>
    */
   IsMaxUserConnectionsSupported?: boolean
   /**
-   * 对外显示的数据库版本
+   * <p>对外显示的数据库版本</p>
    */
   DbVersionId?: string
   /**
-   * 加密状态, 0-未开启，1-已开启
+   * <p>加密状态, 0-未开启，1-已开启</p>
    */
   EncryptStatus?: number
   /**
-   * DCN的配置信息
+   * <p>DCN的配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplicaConfig?: DCNReplicaConfig
   /**
-   * DCN的运行状态
+   * <p>DCN的运行状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplicaStatus?: DCNReplicaStatus
   /**
-   * 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群
+   * <p>独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群</p>
    */
   ExclusterType?: number
   /**
-   * VPC就近访问
+   * <p>VPC就近访问</p>
    */
   RsAccessStrategy?: number
   /**
-   * 尚未回收的网络资源
+   * <p>尚未回收的网络资源</p>
    */
   ReservedNetResources?: Array<ReservedNetResource>
   /**
-   * 是否支持物理复制
+   * <p>是否支持物理复制</p>
    */
   IsPhysicalReplicationSupported?: boolean
   /**
-   * 是否支持强同步DCN
+   * <p>是否支持强同步DCN</p>
    */
   IsDcnStrongSyncSupported?: number
   /**
-   * 是否支持DCN切换
+   * <p>是否支持DCN切换</p>
    */
   IsDcnSwitchSupported?: number
   /**
-   * proxy版本号
+   * <p>proxy版本号</p>
    */
   ProxyVersion?: string
   /**
-   * Cpu类型，如：英特尔：Intel/AMD，海光：Hygon
+   * <p>Cpu类型，如：英特尔：Intel/AMD，海光：Hygon</p>
    */
   CpuType?: string
   /**
-   * 删除保护标记，1: 已开启删除保护，0: 未开启删除保护
+   * <p>删除保护标记，1: 已开启删除保护，0: 未开启删除保护</p>
    */
   ProtectedProperty?: number
   /**
-   * 流程Id，标志实例当前所处的异步任务
+   * <p>流程Id，标志实例当前所处的异步任务</p>
    */
   FlowId?: number
   /**
@@ -2246,7 +2246,7 @@ export interface DatabaseTable {
  */
 export interface DescribeDBInstanceDetailRequest {
   /**
-   * 实例Id形如：tdsql-ow728lmc。
+   * <p>实例Id形如：tdsql-ow728lmc。</p>
    */
   InstanceId: string
 }
@@ -3165,215 +3165,215 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface DBInstance {
   /**
-   * 实例 ID，唯一标识一个 TDSQL 实例
+   * <p>实例 ID，唯一标识一个 TDSQL 实例</p>
    */
   InstanceId?: string
   /**
-   * 实例名称，用户可修改
+   * <p>实例名称，用户可修改</p>
    */
   InstanceName?: string
   /**
-   * 实例所属应用 ID
+   * <p>实例所属应用 ID</p>
    */
   AppId?: number
   /**
-   * 实例所属项目 ID
+   * <p>实例所属项目 ID</p>
    */
   ProjectId?: number
   /**
-   * 实例所在地域名称，如 ap-shanghai
+   * <p>实例所在地域名称，如 ap-shanghai</p>
    */
   Region?: string
   /**
-   * 实例所在可用区名称，如 ap-shanghai-1
+   * <p>实例所在可用区名称，如 ap-shanghai-2</p>
    */
   Zone?: string
   /**
-   * 私有网络 ID，基础网络时为 0
+   * <p>私有网络 ID，基础网络时为 0</p>
    */
   VpcId?: number
   /**
-   * 子网 ID，基础网络时为 0
+   * <p>子网 ID，基础网络时为 0</p>
    */
   SubnetId?: number
   /**
-   * 实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，4 实例初始化中，5 实例删除中，6 实例重启中，7 数据迁移中
+   * <p>实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，4 实例初始化中，5 实例删除中，6 实例重启中，7 数据迁移中</p>
    */
   Status?: number
   /**
-   * 内网 IP 地址
+   * <p>内网 IP 地址</p>
    */
   Vip?: string
   /**
-   * 内网端口
+   * <p>内网端口</p>
    */
   Vport?: number
   /**
-   * 外网访问的域名，公网可解析
+   * <p>外网访问的域名，公网可解析</p>
    */
   WanDomain?: string
   /**
-   * 外网 IP 地址，公网可访问
+   * <p>外网 IP 地址，公网可访问</p>
    */
   WanVip?: string
   /**
-   * 外网端口
+   * <p>外网端口</p>
    */
   WanPort?: number
   /**
-   * 实例创建时间，格式为 2006-01-02 15:04:05
+   * <p>实例创建时间，格式为 2006-01-02 15:04:05</p>
    */
   CreateTime?: string
   /**
-   * 实例最后更新时间，格式为 2006-01-02 15:04:05
+   * <p>实例最后更新时间，格式为 2006-01-02 15:04:05</p>
    */
   UpdateTime?: string
   /**
-   * 自动续费标志：0 否，1 是
+   * <p>自动续费标志：0 否，1 是</p>
    */
   AutoRenewFlag?: number
   /**
-   * 实例到期时间，格式为 2006-01-02 15:04:05
+   * <p>实例到期时间，格式为 2006-01-02 15:04:05</p>
    */
   PeriodEndTime?: string
   /**
-   * 实例所属账号
+   * <p>实例所属账号</p>
    */
   Uin?: string
   /**
-   * TDSQL 版本信息
+   * <p>TDSQL 版本信息</p>
    */
   TdsqlVersion?: string
   /**
-   * 实例内存大小，单位 GB
+   * <p>实例内存大小，单位 GB</p>
    */
   Memory?: number
   /**
-   * 实例存储大小，单位 GB
+   * <p>实例存储大小，单位 GB</p>
    */
   Storage?: number
   /**
-   * 字符串型的私有网络ID
+   * <p>字符串型的私有网络ID</p>
    */
   UniqueVpcId?: string
   /**
-   * 字符串型的私有网络子网ID
+   * <p>字符串型的私有网络子网ID</p>
    */
   UniqueSubnetId?: string
   /**
-   * 原始实例ID（过时字段，请勿依赖该值）
+   * <p>原始实例ID（过时字段，请勿依赖该值）</p>
    */
   OriginSerialId?: string
   /**
-   * 节点数，2为一主一从，3为一主二从
+   * <p>节点数，2为一主一从，3为一主二从</p>
    */
   NodeCount?: number
   /**
-   * 是否临时实例，0为否，非0为是
+   * <p>是否临时实例，0为否，非0为是</p>
    */
   IsTmp?: number
   /**
-   * 独享集群ID，为空表示为普通实例
+   * <p>独享集群ID，为空表示为普通实例</p>
    */
   ExclusterId?: string
   /**
-   * 数字实例ID（过时字段，请勿依赖该值）
+   * <p>数字实例ID（过时字段，请勿依赖该值）</p>
    */
   Id?: number
   /**
-   * 产品类型 ID
+   * <p>产品类型 ID</p>
    */
   Pid?: number
   /**
-   * 最大 Qps 值
+   * <p>最大 Qps 值</p>
    */
   Qps?: number
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   Paymode?: string
   /**
-   * 实例处于异步任务时的异步任务流程ID
+   * <p>实例处于异步任务时的异步任务流程ID</p>
    */
   Locker?: number
   /**
-   * 实例目前运行状态描述
+   * <p>实例目前运行状态描述</p>
    */
   StatusDesc?: string
   /**
-   * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中
+   * <p>外网状态，0-未开通；1-已开通；2-关闭；3-开通中</p>
    */
   WanStatus?: number
   /**
-   * 该实例是否支持审计。1-支持；0-不支持
+   * <p>该实例是否支持审计。1-支持；0-不支持</p>
    */
   IsAuditSupported?: number
   /**
-   * 机器型号
+   * <p>机器型号</p>
    */
   Machine?: string
   /**
-   * 是否支持数据加密。1-支持；0-不支持
+   * <p>是否支持数据加密。1-支持；0-不支持</p>
    */
   IsEncryptSupported?: number
   /**
-   * 实例CPU核数
+   * <p>实例CPU核数</p>
    */
   Cpu?: number
   /**
-   * 实例IPv6标志
+   * <p>实例IPv6标志</p>
    */
   Ipv6Flag?: number
   /**
-   * 内网IPv6
+   * <p>内网IPv6</p>
    */
   Vipv6?: string
   /**
-   * 外网IPv6
+   * <p>外网IPv6</p>
    */
   WanVipv6?: string
   /**
-   * 外网IPv6端口
+   * <p>外网IPv6端口</p>
    */
   WanPortIpv6?: number
   /**
-   * 外网IPv6状态
+   * <p>外网IPv6状态</p>
    */
   WanStatusIpv6?: number
   /**
-   * 数据库引擎
+   * <p>数据库引擎</p>
    */
   DbEngine?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
   /**
-   * DCN标志，0-无，1-主实例，2-灾备实例
+   * <p>DCN标志，0-无，1-主实例，2-灾备实例</p>
    */
   DcnFlag?: number
   /**
-   * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   * <p>DCN状态，0-无，1-创建中，2-同步中，3-已断开</p>
    */
   DcnStatus?: number
   /**
-   * DCN灾备实例数
+   * <p>DCN灾备实例数</p>
    */
   DcnDstNum?: number
   /**
-   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   * <p>1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）</p>
    */
   InstanceType?: number
   /**
-   * 实例标签信息
+   * <p>实例标签信息</p>
    */
   ResourceTags?: Array<ResourceTag>
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersionId?: string
   /**
-   * 实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护
+   * <p>实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护</p>
    */
   ProtectedProperty?: number
 }

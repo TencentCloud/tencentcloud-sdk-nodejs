@@ -18,6 +18,16 @@ const client = new tencentcloud.hai.v20230812.Client({
 })
 describe("hai.v20230812.test.js", function () {
 
+it("hai.v20230812.UpdateServiceConfigs", async function () {
+    try {
+       const data = await client.UpdateServiceConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})

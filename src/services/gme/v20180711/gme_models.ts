@@ -68,19 +68,19 @@ export interface ModifyAppStatusRequest {
  */
 export interface ModifyRecordInfoRequest {
   /**
-   * 进行中的任务taskid（StartRecord接口返回）。
+   * <p>进行中的任务taskid（StartRecord接口返回）。</p>
    */
   TaskId: number
   /**
-   * 录制类型：1代表单流 2代表混流 3代表单流和混流。
+   * <p>录制类型：1代表单流 2代表混流 3代表单流和混流。</p>
    */
   RecordMode: number
   /**
-   * 应用ID。
+   * <p>应用ID。</p>
    */
   BizId: number
   /**
-   * 指定订阅流白名单或者黑名单。
+   * <p>指定订阅流白名单或者黑名单。</p>
    */
   SubscribeRecordUserIds?: SubscribeRecordUserIds
 }
@@ -386,19 +386,19 @@ export interface DescribeScanResultListRequest {
  */
 export interface StartRecordRequest {
   /**
-   * 应用ID。
+   * <p>应用ID。</p>
    */
   BizId: number
   /**
-   * 房间ID。
+   * <p>房间ID。</p>
    */
   RoomId: string
   /**
-   * 录制类型：1代表单流 2代表混流 3代表单流和混流。
+   * <p>录制类型：1代表单流 2代表混流 3代表单流和混流。</p>
    */
   RecordMode: number
   /**
-   * 指定订阅流白名单或者黑名单（不传默认订阅房间内所有音频流）。
+   * <p>指定订阅流白名单或者黑名单（不传默认订阅房间内所有音频流）。</p>
    */
   SubscribeRecordUserIds?: SubscribeRecordUserIds
 }
@@ -767,7 +767,7 @@ export interface AsrConf {
  */
 export interface StartRecordResponse {
   /**
-   * 任务taskid。
+   * <p>任务taskid。</p>
    */
   TaskId: number
   /**
@@ -863,15 +863,15 @@ export interface AmbientSound {
  */
 export interface DescribeRoomInfoRequest {
   /**
-   * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+   * <p>应用ID，登录<a href="https://console.cloud.tencent.com/gamegme">控制台 - 服务管理</a>创建应用得到的AppID</p>
    */
   SdkAppId: number
   /**
-   * 房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
+   * <p>房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）</p>
    */
   RoomIds?: Array<number | bigint>
   /**
-   * 字符串类型房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
+   * <p>字符串类型房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）</p>
    */
   StrRoomIds?: Array<string>
 }
@@ -993,7 +993,7 @@ export interface VoiceMessageConf {
  */
 export interface DescribeAppStatisticsResponse {
   /**
-   * 应用用量统计数据
+   * <p>应用用量统计数据</p>
    */
   Data?: DescribeAppStatisticsResp
   /**
@@ -1077,11 +1077,11 @@ export interface DeleteScanUserResponse {
  */
 export interface DescribeRoomInfoResponse {
   /**
-   * 操作结果, 0成功, 非0失败
+   * <p>操作结果, 0成功, 非0失败</p>
    */
   Result?: number
   /**
-   * 房间用户信息
+   * <p>房间用户信息</p>
    */
   RoomUsers?: Array<RoomUser>
   /**
@@ -1714,7 +1714,7 @@ export interface InOutTimeInfo {
  */
 export interface DeleteRoomMemberResponse {
   /**
-   * 剔除房间或成员的操作结果
+   * <p>剔除房间或成员的操作结果</p>
    */
   DeleteResult?: DeleteResult
   /**
@@ -1818,19 +1818,19 @@ export interface DescribeUserInAndOutTimeResponse {
  */
 export interface DescribeAppStatisticsRequest {
   /**
-   * GME应用ID
+   * <p>GME应用ID</p>
    */
   BizId: number
   /**
-   * 数据开始时间，东八区时间，格式: 年-月-日，如: 2018-07-13
+   * <p>数据开始时间，东八区时间，格式: 年-月-日，如: 2018-07-13</p>
    */
   StartDate: string
   /**
-   * 数据结束时间，东八区时间，格式: 年-月-日，如: 2018-07-13
+   * <p>数据结束时间，东八区时间，格式: 年-月-日，如: 2018-07-13</p>
    */
   EndDate: string
   /**
-   * 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter/SpeechToText
+   * <p>要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter/SpeechToText</p>
    */
   Services: Array<string>
 }
@@ -2063,23 +2063,23 @@ export interface Task {
  */
 export interface DeleteRoomMemberRequest {
   /**
-   * 要操作的房间id
+   * <p>要操作的房间id</p>
    */
   RoomId: string
   /**
-   * 剔除类型 1-删除房间 2-剔除用户
+   * <p>剔除类型 1-删除房间 2-剔除用户</p>
    */
   DeleteType: number
   /**
-   * 应用id
+   * <p>应用id</p>
    */
   BizId: number
   /**
-   * 要剔除的用户列表（整型）
+   * <p>要剔除的用户列表（整型）</p>
    */
   Uids?: Array<string>
   /**
-   * 要剔除的用户列表（字符串类型）
+   * <p>要剔除的用户列表（字符串类型）</p>
    */
   StrUids?: Array<string>
 }

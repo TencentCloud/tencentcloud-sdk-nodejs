@@ -1313,6 +1313,8 @@ pause
   InstanceAbility?: InstanceAbility
   /**
    * 实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   DeviceType?: string
   /**
@@ -1433,10 +1435,14 @@ export interface ModifyInstanceData {
   OldStorageLimit?: number
   /**
    * 变配前实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   OldDeviceType?: string
   /**
    * 变配后实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   DeviceType?: string
   /**
@@ -3866,7 +3872,9 @@ export interface GoodsSpec {
    */
   TimeUnit?: string
   /**
-   * 机器类型
+   * 实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   DeviceType?: string
 }
@@ -7392,6 +7400,8 @@ export interface InstanceInitInfo {
   MaxRoCpu?: number
   /**
    * 实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   DeviceType?: string
 }
@@ -9907,6 +9917,8 @@ export interface ClusterInstanceDetail {
   InstanceTasks?: Array<ObjectTask>
   /**
    * 实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   InstanceDeviceType?: string
   /**

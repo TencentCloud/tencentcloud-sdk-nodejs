@@ -108,7 +108,6 @@ import {
   ModifyProjectRequest,
   ModifySpacePropertyResponse,
   PauseTWeCallDeviceRequest,
-  DescribeTWeSeeConfigResponse,
   DescribeDeviceDataHistoryResponse,
   CreateTWeSeeRecognitionTaskWithFileResponse,
   DeviceUser,
@@ -199,7 +198,6 @@ import {
   LoRaGatewayLocation,
   ModifyTopicRuleResponse,
   DescribeBatchProductionRequest,
-  DirectBindDeviceInFamilyRequest,
   DescribeCloudStorageAIServiceTaskResponse,
   PublishRRPCMessageResponse,
   CloudStorageEvent,
@@ -234,6 +232,7 @@ import {
   BatchCreateTWeSeeRecognitionTaskRequest,
   ProjectEntryEx,
   PublishMessageResponse,
+  DescribeCloudStorageEventsResponse,
   SearchKeyword,
   DescribeTWeTalkProductConfigRequest,
   DisableTopicRuleRequest,
@@ -294,6 +293,7 @@ import {
   PauseTWeCallDeviceResponse,
   BatchProductionInfo,
   DeleteDeviceRequest,
+  CreateDeviceSDPAnswerRequest,
   GetProjectListResponse,
   ListFirmwaresResponse,
   ReleaseStudioProductResponse,
@@ -313,7 +313,7 @@ import {
   DescribeCsReportCountDataInfoResponse,
   DescribeFirmwareTaskDevicesResponse,
   ModifyCloudStorageAIServiceRequest,
-  GenerateSignedVideoURLRequest,
+  DescribeTWeSeeConfigResponse,
   GetStudioProductListRequest,
   DescribeFirmwareTaskResponse,
   DisableTopicRuleResponse,
@@ -404,7 +404,6 @@ import {
   ModifyStudioProductRequest,
   CreateBatchProductionRequest,
   ReleaseStudioProductRequest,
-  CancelAssignTWeCallLicenseRequest,
   DescribeCloudStoragePackageConsumeStatsResponse,
   ListEventHistoryRequest,
   WXIoTDeviceInfo,
@@ -470,8 +469,8 @@ import {
   CreateTopicRuleRequest,
   CreateTopicPolicyRequest,
   DescribeTWeSeeRecognitionTaskRequest,
-  CancelAssignTWeCallLicenseResponse,
-  DescribeCloudStorageEventsResponse,
+  DirectBindDeviceInFamilyRequest,
+  GenerateSignedVideoURLRequest,
   Filter,
   DescribeBindedProductsRequest,
   CreateFreeCloudStorageRequest,
@@ -495,6 +494,7 @@ import {
   GetTWeTalkAIBotListRequest,
   GetTopicRuleListRequest,
   ListOtaModulesRequest,
+  CreateDeviceSDPAnswerResponse,
   DeleteStudioProductRequest,
   DescribeP2PRouteRequest,
   GetDeviceSumStatisticsRequest,
@@ -984,18 +984,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLoRaGatewayResponse) => void
   ): Promise<DeleteLoRaGatewayResponse> {
     return this.request("DeleteLoRaGateway", req, cb)
-  }
-
-  /**
-     * 业务已下线
-
-取消分配
-     */
-  async CancelAssignTWeCallLicense(
-    req: CancelAssignTWeCallLicenseRequest,
-    cb?: (error: string, rep: CancelAssignTWeCallLicenseResponse) => void
-  ): Promise<CancelAssignTWeCallLicenseResponse> {
-    return this.request("CancelAssignTWeCallLicense", req, cb)
   }
 
   /**
@@ -1730,6 +1718,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindProductsResponse) => void
   ): Promise<BindProductsResponse> {
     return this.request("BindProducts", req, cb)
+  }
+
+  /**
+   * 创建设备SDP应答
+   */
+  async CreateDeviceSDPAnswer(
+    req: CreateDeviceSDPAnswerRequest,
+    cb?: (error: string, rep: CreateDeviceSDPAnswerResponse) => void
+  ): Promise<CreateDeviceSDPAnswerResponse> {
+    return this.request("CreateDeviceSDPAnswer", req, cb)
   }
 
   /**

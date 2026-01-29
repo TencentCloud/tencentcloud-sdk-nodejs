@@ -2492,15 +2492,15 @@ export interface DetectInfoText {
  */
 export interface ImageRecognitionResponse {
   /**
-   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * <p>相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）</p>
    */
   Sim?: number
   /**
-   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   * <p>业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分</p>
    */
   Result?: string
   /**
-   * 业务结果描述。
+   * <p>业务结果描述。</p>
    */
   Description?: string
   /**
@@ -3239,25 +3239,23 @@ export interface PhoneVerificationCTCCRequest {
  */
 export interface ImageRecognitionRequest {
   /**
-   * 身份证号
+   * <p>身份证号</p>
    */
   IdCard: string
   /**
-   * 姓名。中文请使用UTF-8编码。
+   * <p>姓名。中文请使用UTF-8编码。</p>
    */
   Name: string
   /**
-   * 用于人脸比对的照片，图片的Base64值；
-Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
-请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+   * <p>用于人脸比对的照片，图片的Base64值；<br>Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。<br>请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。</p>
    */
   ImageBase64: string
   /**
-   * 本接口不需要传递此参数。
+   * <p>本接口不需要传递此参数。</p>
    */
   Optional?: string
   /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * <p>敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。</p>
    */
   Encryption?: Encryption
 }

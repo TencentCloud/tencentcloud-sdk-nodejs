@@ -16,6 +16,16 @@
  */
 
 /**
+ * PauseSandboxInstance返回参数结构体
+ */
+export interface PauseSandboxInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 沙箱实例对象存储挂载配置
  */
 export interface CosStorageSource {
@@ -277,6 +287,16 @@ export interface DescribePreCacheImageTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ResumeSandboxInstance请求参数结构体
+ */
+export interface ResumeSandboxInstanceRequest {
+  /**
+   * 沙箱实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -616,6 +636,16 @@ export interface AcquireSandboxInstanceTokenRequest {
 }
 
 /**
+ * PauseSandboxInstance请求参数结构体
+ */
+export interface PauseSandboxInstanceRequest {
+  /**
+   * 沙箱实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeAPIKeyList返回参数结构体
  */
 export interface DescribeAPIKeyListResponse {
@@ -886,6 +916,16 @@ export interface UpdateSandboxToolRequest {
    * 沙箱工具自定义配置
    */
   CustomConfiguration?: CustomConfiguration
+}
+
+/**
+ * ResumeSandboxInstance返回参数结构体
+ */
+export interface ResumeSandboxInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

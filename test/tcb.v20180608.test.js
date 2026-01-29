@@ -58,6 +58,16 @@ it("tcb.v20180608.ModifyClsTopic", async function () {
     }
 })
 
+it("tcb.v20180608.RunSql", async function () {
+    try {
+       const data = await client.RunSql({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
@@ -331,16 +341,6 @@ it("tcb.v20180608.DescribeDatabaseACL", async function () {
 it("tcb.v20180608.ModifyCloudBaseRunServerFlowConf", async function () {
     try {
        const data = await client.ModifyCloudBaseRunServerFlowConf({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.SearchClsLog", async function () {
-    try {
-       const data = await client.SearchClsLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

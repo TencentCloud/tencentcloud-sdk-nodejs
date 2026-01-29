@@ -6201,6 +6201,10 @@ export interface ScheduleQualityControlTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: QualityControlData
+  /**
+   * 任务执行进度。
+   */
+  Progress?: number
 }
 
 /**
@@ -12182,6 +12186,10 @@ export interface CreateProcessImageTemplateRequest {
    * 图片处理模板描述信息，长度限制：256个字符。
    */
   Comment?: string
+  /**
+   * 图片处理模板拓展参数。
+   */
+  StdExtInfo?: string
 }
 
 /**

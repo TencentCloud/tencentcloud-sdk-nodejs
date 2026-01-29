@@ -865,11 +865,15 @@ export interface TimingDataRecord {
   /**
    * 查询维度值。
    */
-  TypeKey: string
+  TypeKey?: string
   /**
-   * 详细时序数据。
+   * <code>Integer</code> 类型的详细时序数据，查询指标值类型为 <code>Integer</code> 指标会由本字段返回对应时序数据。<br> **注意**：若查询指标未明确说明指标值类型，默认由本字段返回数据。
    */
-  TypeValue: Array<TimingTypeValue>
+  TypeValue?: Array<TimingTypeValue>
+  /**
+   * <code>Float</code> 类型的详细时序数据，查询指标值类型为 <code>Float</code> 指标会由本字段返回对应时序数据。
+   */
+  FloatTypeValue?: Array<FloatTimingTypeValue>
 }
 
 /**
@@ -1668,6 +1672,20 @@ export interface UpstreamRequestQueryString {
    * 指定参数值。仅当查询字符串模式 Action 为 includeCustom 或者 excludeCustom 时该参数生效，用于指定需要保留或者忽略的参数。最大支持 10 个参数。
    */
   Values?: Array<string>
+}
+
+/**
+ * 统计曲线数据项
+ */
+export interface FloatTimingDataItem {
+  /**
+   * 返回数据对应时间点，采用 unix 秒级时间戳。
+   */
+  Timestamp?: number
+  /**
+   * 具体数值。
+   */
+  Value?: number
 }
 
 /**
@@ -3312,6 +3330,32 @@ export interface BotManagedRule {
    * 拦截的规则ID。默认所有规则不配置拦截。
    */
   DropManagedIds?: Array<number | bigint>
+}
+
+/**
+ * 时序类型详细数据
+ */
+export interface FloatTimingTypeValue {
+  /**
+   * 数据和。
+   */
+  Sum?: number
+  /**
+   * 最大值。
+   */
+  Max?: number
+  /**
+   * 平均值。
+   */
+  Avg?: number
+  /**
+   * 指标名。
+   */
+  MetricName?: string
+  /**
+   * 详细数据。
+   */
+  Detail?: Array<FloatTimingDataItem>
 }
 
 /**
@@ -16474,39 +16518,42 @@ export interface DescribeTimingL4DataRequest {
   EndTime: string
   /**
    * 查询指标，取值有：
-<li>l4Flow_connections: 访问并发连接数；</li>
-<li>l4Flow_flux: 访问总流量；</li>
-<li>l4Flow_inFlux: 访问入流量；</li>
-<li>l4Flow_outFlux: 访问出流量；</li>
-<li>l4Flow_inBandwidth: 访问入向带宽峰值；</li>
-<li>l4Flow_outBandwidth: 访问出向带宽峰值。</li>
+<ul><li>**l4Flow_flux**: 访问总流量，单位：Byte，指标值类型：Integer；</li>
+<li>**l4Flow_inFlux**: 访问入流量，单位：Byte，指标值类型：Integer；</li>
+<li>**l4Flow_outFlux**: 访问出流量，单位：Byte，指标值类型：Integer；</li>
+<li>**l4Flow_inBandwidth**: 访问入向带宽峰值，单位：bps，指标值类型：Integer；</li>
+<li>**l4Flow_outBandwidth**: 访问出向带宽峰值，单位：bps，指标值类型：Integer；</li>
+<li>**l4Flow_connections**: 访问并发连接数，单位：个，指标值类型：Integer ；</li>
+<li>**l4Flow_newConnectionsRate**: 新建连接数速率，单位：个/秒，指标值类型： Float，保留两位小数。</li></ul>**注意**：<ul><li><code> Integer</code> 值类型的指标将从  <code>Data.N.TypeValue</code> 返回对应时序数据；</li>
+<li><code>Float</code> 值类型的指标将从 <code>Data.N.FloatTypeValue</code> 返回对应时序数据。</li></ul>
    */
   MetricNames: Array<string>
   /**
    * 站点ID，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
 最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
    */
-  ZoneIds?: Array<string>
+  ZoneIds: Array<string>
   /**
    * 四层实例列表, 不填表示选择全部实例。
    */
   ProxyIds?: Array<string>
   /**
    * 查询时间粒度，取值有：
-<li>min: 1分钟 ；</li>
-<li>5min: 5分钟 ；</li>
-<li>hour: 1小时 ；</li>
-<li>day: 1天 。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。
+<ul><li>**min**: 1分钟 ；</li>
+<li>**5min**: 5分钟 ；</li>
+<li>**hour**: 1小时 ；</li>
+<li>**day**: 1天 。</li></ul>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以 <code>min</code> 粒度查询，2天范围内以 <code>5min</code> 粒度查询，7天范围内以 <code>hour</code> 粒度查询，超过7天以 <code>day</code> 粒度查询。
    */
   Interval?: string
   /**
    * 过滤条件，详细的过滤条件Key值如下：
-<li>ruleId：按照转发规则 ID 进行过滤。</li>
-<li>proxyId：按照四层代理实例 ID 进行过滤。</li>
+<ul><li>**ruleId**：按照转发规则 ID 进行过滤。</li>
+<li>**proxyId**：按照四层代理实例 ID 进行过滤。</li></ul>
    */
   Filters?: Array<QueryCondition>
   /**
    * 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。
+   * @deprecated
    */
   Area?: string
 }
@@ -16520,7 +16567,8 @@ export interface DescribeTimingL4DataResponse {
    */
   TotalCount?: number
   /**
-   * 四层时序流量数据列表。
+   * <p>四层时序流量数据列表。<br>对于不同的查询指标，根据指标值类型的不同，会从不同的参数返回时序数据。<br>目前存在的值类型有以下两种：</p><ul><li><strong>Integer</strong>：<code>Integer</code> 值类型的指标将从 <code>Data.N.TypeValue</code> 返回对应时序数据。<br>对应的查询指标 <code>MetricName</code> 有：<ul><li><code>l4Flow_flux</code>：访问总流量；</li><li><code>l4Flow_inFlux</code>：访问入流量；</li><li><code>l4Flow_outFlux</code>：访问出流量；</li><li><code>l4Flow_inBandwidth</code>：访问入向带宽峰值；</li><li><code>l4Flow_outBandwidth</code>：访问出向带宽峰值；</li><li><code>l4Flow_connections</code>：访问并发连接数。</li></ul></li><li><strong>Float</strong>：<code>Float</code> 值类型的指标将从 <code>Data.N.FloatTypeValue</code> 返回对应时序数据。<br>对应的查询指标 <code>MetricName</code> 有：<ul><li><code>l4Flow_newConnectionsRate</code>：新建连接数速率。</li></ul></li>
+</ul><p>本接口暂不支持指定维度查询，默认按主账号汇总返回数据，即 <code>Data.N.TypeKey = AppId</code>，AppId 是腾讯云主账号唯一标识，N 恒等于 1。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<TimingDataRecord>

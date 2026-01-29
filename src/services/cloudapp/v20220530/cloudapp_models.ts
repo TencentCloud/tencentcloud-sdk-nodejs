@@ -184,6 +184,14 @@ export interface License {
    * <p>License 颁发地址</p>
    */
   IssueURL?: string
+  /**
+   * <p>商品供应商 UIN</p>
+   */
+  ProviderUin?: string
+  /**
+   * <p>License 创建来源 ID</p>
+   */
+  CreateSource?: string
 }
 
 /**

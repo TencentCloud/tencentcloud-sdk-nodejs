@@ -92,6 +92,7 @@ import {
   IdentifyZoneResponse,
   DescribeSecurityAPIServiceRequest,
   UpstreamRequestQueryString,
+  FloatTimingDataItem,
   DeleteJustInTimeTranscodeTemplatesRequest,
   ModifyLoadBalancerResponse,
   ModifyL4ProxyResponse,
@@ -158,6 +159,7 @@ import {
   DeleteCustomErrorPageRequest,
   CustomField,
   BotManagedRule,
+  FloatTimingTypeValue,
   BrowserImpersonationDetectionAction,
   CacheKeyHeader,
   DeleteZoneRequest,
@@ -1568,7 +1570,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口（DescribeTimingL4Data）用于查询四层时序流量数据列表。
+   * <p>本接口（<code>DescribeTimingL4Data</code>）用于查询四层时序数据列表。</p>
    */
   async DescribeTimingL4Data(
     req: DescribeTimingL4DataRequest,

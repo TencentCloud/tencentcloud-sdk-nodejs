@@ -68,6 +68,16 @@ it("ags.v20250920.DescribePreCacheImageTask", async function () {
     }
 })
 
+it("ags.v20250920.ResumeSandboxInstance", async function () {
+    try {
+       const data = await client.ResumeSandboxInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ags.v20250920.DescribeSandboxToolList", async function () {
     try {
        const data = await client.DescribeSandboxToolList({})
@@ -111,6 +121,16 @@ it("ags.v20250920.CreateAPIKey", async function () {
 it("ags.v20250920.DeleteSandboxTool", async function () {
     try {
        const data = await client.DeleteSandboxTool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ags.v20250920.PauseSandboxInstance", async function () {
+    try {
+       const data = await client.PauseSandboxInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

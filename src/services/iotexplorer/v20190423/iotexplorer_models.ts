@@ -1820,28 +1820,6 @@ export interface PauseTWeCallDeviceRequest {
 }
 
 /**
- * DescribeTWeSeeConfig返回参数结构体
- */
-export interface DescribeTWeSeeConfigResponse {
-  /**
-   * 是否开启视频摘要
-   */
-  EnableSummary?: boolean
-  /**
-   * 是否开启视频搜索
-   */
-  EnableSearch?: boolean
-  /**
-   * 配置参数
-   */
-  Config?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeDeviceDataHistory返回参数结构体
  */
 export interface DescribeDeviceDataHistoryResponse {
@@ -2672,6 +2650,7 @@ export interface TalkAIBotInfo {
   AgentConfig?: TalkAgentConfigInfo
   /**
    * 产品信息列表
+   * @deprecated
    */
   ProductList?: TalkProductInfo
   /**
@@ -2682,6 +2661,10 @@ export interface TalkAIBotInfo {
    * 更新时间
    */
   UpdateTime?: number
+  /**
+   * 已关联产品信息列表
+   */
+  BoundProducts?: Array<TalkProductInfo>
 }
 
 /**
@@ -3803,36 +3786,6 @@ export interface DescribeBatchProductionRequest {
 }
 
 /**
- * DirectBindDeviceInFamily请求参数结构体
- */
-export interface DirectBindDeviceInFamilyRequest {
-  /**
-   * 小程序appid
-   */
-  IotAppID: string
-  /**
-   * 用户ID
-   */
-  UserID: string
-  /**
-   * 家庭ID
-   */
-  FamilyId: string
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名
-   */
-  DeviceName: string
-  /**
-   * 房间ID
-   */
-  RoomId?: string
-}
-
-/**
  * DescribeCloudStorageAIServiceTask返回参数结构体
  */
 export interface DescribeCloudStorageAIServiceTaskResponse {
@@ -4299,7 +4252,7 @@ export interface TalkAgentConfigInfo {
    */
   NoiseFilterEnabled?: boolean
   /**
-   * 是否开启长记忆，默认开启
+   * 是否开启长记忆，默认关闭
    */
   LongTermMemoryEnabled?: boolean
   /**
@@ -4570,6 +4523,36 @@ export interface ProjectEntryEx {
  * PublishMessage返回参数结构体
  */
 export interface PublishMessageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudStorageEvents返回参数结构体
+ */
+export interface DescribeCloudStorageEventsResponse {
+  /**
+   * 云存事件列表
+   */
+  Events?: Array<CloudStorageEvent>
+  /**
+   * 请求上下文, 用作查询游标
+   */
+  Context?: string
+  /**
+   * 拉取结果是否已经结束
+   */
+  Listover?: boolean
+  /**
+   * 内部结果数量，并不等同于事件总数。
+   */
+  Total?: number
+  /**
+   * 视频播放URL
+   */
+  VideoURL?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5922,6 +5905,24 @@ export interface DeleteDeviceRequest {
 }
 
 /**
+ * CreateDeviceSDPAnswer请求参数结构体
+ */
+export interface CreateDeviceSDPAnswerRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * SDP提议
+   */
+  SDPOffer: string
+}
+
+/**
  * GetProjectList返回参数结构体
  */
 export interface GetProjectListResponse {
@@ -6348,21 +6349,25 @@ export interface ModifyCloudStorageAIServiceRequest {
 }
 
 /**
- * GenerateSignedVideoURL请求参数结构体
+ * DescribeTWeSeeConfig返回参数结构体
  */
-export interface GenerateSignedVideoURLRequest {
+export interface DescribeTWeSeeConfigResponse {
   /**
-   * 视频播放原始URL地址
+   * 是否开启视频摘要
    */
-  VideoURL: string
+  EnableSummary?: boolean
   /**
-   * 播放链接过期时间（时间戳，单位秒）
+   * 是否开启视频搜索
    */
-  ExpireTime: number
+  EnableSearch?: boolean
   /**
-   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+   * 配置参数
    */
-  ChannelId?: number
+  Config?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8553,16 +8558,6 @@ export interface ReleaseStudioProductRequest {
 }
 
 /**
- * CancelAssignTWeCallLicense请求参数结构体
- */
-export interface CancelAssignTWeCallLicenseRequest {
-  /**
-   * 订单号
-   */
-  PkgId: string
-}
-
-/**
  * DescribeCloudStoragePackageConsumeStats返回参数结构体
  */
 export interface DescribeCloudStoragePackageConsumeStatsResponse {
@@ -10107,43 +10102,51 @@ export interface DescribeTWeSeeRecognitionTaskRequest {
 }
 
 /**
- * CancelAssignTWeCallLicense返回参数结构体
+ * DirectBindDeviceInFamily请求参数结构体
  */
-export interface CancelAssignTWeCallLicenseResponse {
+export interface DirectBindDeviceInFamilyRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 小程序appid
    */
-  RequestId?: string
+  IotAppID: string
+  /**
+   * 用户ID
+   */
+  UserID: string
+  /**
+   * 家庭ID
+   */
+  FamilyId: string
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名
+   */
+  DeviceName: string
+  /**
+   * 房间ID
+   */
+  RoomId?: string
 }
 
 /**
- * DescribeCloudStorageEvents返回参数结构体
+ * GenerateSignedVideoURL请求参数结构体
  */
-export interface DescribeCloudStorageEventsResponse {
+export interface GenerateSignedVideoURLRequest {
   /**
-   * 云存事件列表
+   * 视频播放原始URL地址
    */
-  Events?: Array<CloudStorageEvent>
+  VideoURL: string
   /**
-   * 请求上下文, 用作查询游标
+   * 播放链接过期时间（时间戳，单位秒）
    */
-  Context?: string
+  ExpireTime: number
   /**
-   * 拉取结果是否已经结束
+   * 通道ID 非NVR设备不填 NVR设备必填 默认为无
    */
-  Listover?: boolean
-  /**
-   * 内部结果数量，并不等同于事件总数。
-   */
-  Total?: number
-  /**
-   * 视频播放URL
-   */
-  VideoURL?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ChannelId?: number
 }
 
 /**
@@ -10656,6 +10659,10 @@ export interface GetTWeTalkAIBotListRequest {
    */
   BotId?: string
   /**
+   * 智能体名称
+   */
+  Name?: string
+  /**
    * 产品ID
    */
   ProductId?: string
@@ -10707,6 +10714,20 @@ export interface ListOtaModulesRequest {
    * 搜索过滤条件
    */
   Filters?: Array<SearchKeyword>
+}
+
+/**
+ * CreateDeviceSDPAnswer返回参数结构体
+ */
+export interface CreateDeviceSDPAnswerResponse {
+  /**
+   * SDP应答
+   */
+  SDPAnswer?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

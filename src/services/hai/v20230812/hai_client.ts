@@ -42,7 +42,9 @@ import {
   ResetInstancesPasswordRequest,
   RunInstancesRequest,
   DescribeInstancesResponse,
+  UpdateServiceConfigsResponse,
   SystemDisk,
+  UpdateServiceConfigsRequest,
   RunInstancesResponse,
   DescribeInstancesRequest,
   Filter,
@@ -73,6 +75,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("hai.tencentcloudapi.com", "2023-08-12", clientConfig)
+  }
+
+  /**
+   * 本接口(UpdateServiceConfigs)用于更新服务配置
+   */
+  async UpdateServiceConfigs(
+    req: UpdateServiceConfigsRequest,
+    cb?: (error: string, rep: UpdateServiceConfigsResponse) => void
+  ): Promise<UpdateServiceConfigsResponse> {
+    return this.request("UpdateServiceConfigs", req, cb)
   }
 
   /**
